@@ -2351,6 +2351,337 @@ fn designated_delivery_envelope_seals_m8_publication_identity_tick_and_not_lates
 }
 
 #[test]
+fn exact_duplicate_cache_retry_is_idempotent_but_corrupted_duplicate_binding_fails_closed() {
+    let checked = designated_checked();
+    let program = fabric_program(designated_projection(&checked));
+    let mut fabric = boot(&checked, program, BackendProfile::St);
+
+    fabric
+        .dispatch_source_action(publish_designated_action())
+        .expect("publish succeeds");
+    let first = fabric
+        .dispatch_source_action(consume_designated_action())
+        .expect("first consume installs the designated cache");
+    let semantic_identity = first.semantic_consumption_identity().to_string();
+    let consumed_after_first = fabric
+        .m8_actual_trace()
+        .value_consumed_count(&semantic_identity, "C");
+
+    let exact_retry = fabric
+        .dispatch_source_action(consume_designated_action())
+        .expect("exact same semantic delivery retry is idempotent where policy permits");
+    assert_eq!(exact_retry.delivery_id(), first.delivery_id());
+    assert_eq!(exact_retry.typed_value(), first.typed_value());
+    assert_eq!(exact_retry.result_version(), first.result_version());
+    assert!(exact_retry.returned_from_designated_cache_after_authority_revalidation());
+    assert!(!exact_retry.performed_m8_semantic_consumption());
+    assert_eq!(
+        fabric
+            .m8_actual_trace()
+            .value_consumed_count(&semantic_identity, "C"),
+        consumed_after_first,
+        "exact duplicate retry must not perform a second M8 semantic consume"
+    );
+
+    let conflict = fabric
+        .submit_source_action(consume_designated_action())
+        .expect("conflicting duplicate starts as a real local cache-retry envelope");
+    let conflict_envelope = fabric
+        .locus_runtime("C")
+        .expect("C exists")
+        .incoming_mailbox()
+        .pending_envelopes()
+        .single();
+    assert_eq!(conflict_envelope.envelope_id(), conflict.envelope_id());
+    assert!(is_local_cache_retry(&conflict_envelope));
+
+    let before_conflict = fabric.semantic_snapshot();
+    let cache_before_conflict = fabric.designated_cache_snapshot();
+    let consumed_before_conflict = fabric
+        .m8_actual_trace()
+        .value_consumed_count(&semantic_identity, "C");
+    fabric
+        .dispatch_external_action(ExternalAction::fault_event(
+            FaultInjection::corrupt_local_cache_retry_binding_digest(
+                conflict_envelope.envelope_id(),
+            ),
+        ))
+        .expect("conflicting duplicate fault targets the exact local retry envelope");
+    let rejected = assert_sys4_diag(
+        fabric.step_locus("C"),
+        Sys4DiagnosticKind::CacheBindingDigestMismatch,
+    );
+
+    assert_eq!(
+        rejected.rejected_envelope_id(),
+        Some(conflict_envelope.envelope_id())
+    );
+    assert!(rejected.m8_non_consuming_validation_node_id().is_none());
+    assert!(!rejected.exposes_raw_payload());
+    assert!(fabric.semantic_snapshot().same_state(&before_conflict));
+    assert_eq!(fabric.designated_cache_snapshot(), cache_before_conflict);
+    assert_eq!(
+        fabric
+            .m8_actual_trace()
+            .value_consumed_count(&semantic_identity, "C"),
+        consumed_before_conflict
+    );
+    assert_eq!(
+        fabric
+            .locus_runtime("C")
+            .expect("C exists")
+            .incoming_mailbox()
+            .terminal_rejected_envelope(conflict_envelope.envelope_id())
+            .expect("corrupted duplicate retry is terminally quarantined")
+            .diagnostic_kind(),
+        Sys4DiagnosticKind::CacheBindingDigestMismatch
+    );
+}
+
+#[test]
+fn fixed_version_second_tick_delivery_split_frame_rejects_before_second_consume() {
+    let checked = designated_checked();
+    let program = fabric_program(designated_projection(&checked));
+    let mut fabric = boot(&checked, program, BackendProfile::St);
+
+    let first_submit = fabric
+        .submit_source_action(publish_designated_action_with_tick("tick:F:41"))
+        .expect("first publish creates E→S request");
+    fabric
+        .step_transport("E", "S", first_submit.envelope_id())
+        .expect("first input request transports to S");
+    let first_source_step = fabric.step_locus("S").expect("S emits first input receipt");
+    fabric
+        .step_transport("S", "E", first_source_step.reply_envelope_id())
+        .expect("first input receipt transports to E");
+    let first_evaluator_step = fabric.step_locus("E").expect("E emits first delivery");
+    let first_publication =
+        m8_owned_observation(&fabric, first_evaluator_step.m8_evaluation_node_id());
+    assert_eq!(
+        first_publication.kind(),
+        M8LocalTraceKind::DesignatedValuePublished
+    );
+    assert_eq!(first_publication.logical_tick_id(), "tick:F:41");
+    let first_publication_tick = first_publication.logical_tick_id().to_string();
+    let first_request_id = first_evaluator_step.request_id().to_string();
+    let first_delivery = fabric
+        .locus_runtime("E")
+        .expect("E exists")
+        .outgoing_mailbox()
+        .pending_envelopes()
+        .for_request(first_evaluator_step.request_id());
+    let first_delivery_publication_id = envelope_m8_publication_id(&first_delivery).to_string();
+    let first_delivery_tick = envelope_logical_tick_id(&first_delivery).to_string();
+    let first_delivery_binding_tick =
+        binding_logical_tick_id(first_delivery.immutable_delivery_binding()).to_string();
+    let first_delivery_binding_publication_id =
+        binding_m8_publication_id(first_delivery.immutable_delivery_binding()).to_string();
+    let first_delivery_digest = first_delivery.immutable_delivery_digest().to_string();
+    assert_eq!(
+        first_delivery_binding_publication_id,
+        first_delivery_publication_id
+    );
+    assert_eq!(first_delivery_tick, first_publication_tick);
+    assert_eq!(first_delivery_binding_tick, first_publication_tick);
+
+    let second_submit = fabric
+        .submit_source_action(publish_designated_action_with_tick("tick:F:42"))
+        .expect("second publish creates E→S request under fixed result_version");
+    fabric
+        .step_transport("E", "S", second_submit.envelope_id())
+        .expect("second input request transports to S");
+    let second_source_step = fabric
+        .step_locus("S")
+        .expect("S emits second input receipt");
+    fabric
+        .step_transport("S", "E", second_source_step.reply_envelope_id())
+        .expect("second input receipt transports to E");
+    let before_second_evaluation_sequence = m8_backend_latest_sequence(&fabric);
+    let second_evaluator_step = fabric
+        .step_locus("E")
+        .expect("E emits second delivery candidate");
+    assert_backend_designated_idempotent_observation(
+        &fabric,
+        second_evaluator_step.m8_evaluation_node_id(),
+        second_evaluator_step.consumed_envelope_id(),
+        "E.result",
+        "E",
+        "tick:F:42",
+        before_second_evaluation_sequence,
+    );
+    let first_publication_after_second =
+        m8_owned_observation(&fabric, first_evaluator_step.m8_evaluation_node_id());
+    assert_eq!(
+        first_publication_after_second.logical_tick_id(),
+        first_publication_tick,
+        "idempotent second evaluation must not rewrite the first M8 publication tick"
+    );
+    let e_outbox_after_second = fabric
+        .locus_runtime("E")
+        .expect("E exists")
+        .outgoing_mailbox()
+        .pending_envelopes();
+    assert_eq!(
+        e_outbox_after_second.len(),
+        2,
+        "A and B deliveries must remain independently queued until transport"
+    );
+    let first_delivery_after_second = e_outbox_after_second.for_request(&first_request_id);
+    assert_eq!(
+        envelope_m8_publication_id(&first_delivery_after_second),
+        first_delivery_publication_id,
+        "queued A delivery publication id must not be rewritten while B is generated"
+    );
+    assert_eq!(
+        binding_m8_publication_id(first_delivery_after_second.immutable_delivery_binding()),
+        first_delivery_binding_publication_id,
+        "queued A delivery binding id must not be rewritten while B is generated"
+    );
+    assert_eq!(
+        envelope_logical_tick_id(&first_delivery_after_second),
+        first_delivery_tick,
+        "queued A delivery tick must remain immutable while B is generated"
+    );
+    assert_eq!(
+        binding_logical_tick_id(first_delivery_after_second.immutable_delivery_binding()),
+        first_delivery_binding_tick,
+        "queued A delivery binding tick must remain immutable while B is generated"
+    );
+    assert_eq!(
+        first_delivery_after_second.immutable_delivery_digest(),
+        first_delivery_digest,
+        "queued A delivery digest must remain immutable while B is generated"
+    );
+
+    let second_delivery = e_outbox_after_second.for_request(second_evaluator_step.request_id());
+    assert_eq!(
+        envelope_m8_publication_id(&second_delivery),
+        first_delivery_publication_id,
+        "fixed-version idempotent evaluation reuses the accepted M8 publication identity"
+    );
+    assert_eq!(
+        binding_m8_publication_id(second_delivery.immutable_delivery_binding()),
+        first_delivery_publication_id,
+        "B sealed binding must refer to the same fixed-version M8 publication id as A"
+    );
+    assert_eq!(
+        second_delivery
+            .immutable_delivery_binding()
+            .result_version(),
+        first_delivery.immutable_delivery_binding().result_version(),
+        "finite profile keeps a fixed designated result_version"
+    );
+    assert_eq!(
+        binding_logical_tick_id(second_delivery.immutable_delivery_binding()),
+        "tick:F:42",
+        "B sealed binding records the second source tick, making the frame split against the fixed M8 publication"
+    );
+    assert_eq!(
+        second_delivery.immutable_delivery_digest(),
+        format!("{:?}", second_delivery.immutable_delivery_binding()),
+        "B immutable delivery digest must be derived from its exact sealed binding"
+    );
+    assert_ne!(
+        second_delivery.immutable_delivery_digest(),
+        first_delivery_digest,
+        "B digest must differ from captured A digest because the sealed binding tick differs"
+    );
+
+    fabric
+        .step_transport("E", "C", first_delivery_after_second.envelope_id())
+        .expect("A delivery crosses E→C after B has already been generated");
+    let first_consume = fabric
+        .step_locus("C")
+        .expect("A delivery consumes after B generation did not mutate it");
+    let first_receipt = first_consume
+        .receipt()
+        .expect("first consume returns receipt");
+    assert_eq!(
+        receipt_logical_tick_id(first_receipt),
+        envelope_logical_tick_id(&first_delivery_after_second)
+    );
+    assert_eq!(
+        second_delivery
+            .immutable_delivery_binding()
+            .result_version(),
+        first_receipt
+            .result_version()
+            .expect("first designated consume records result version"),
+        "B carrier remains tied to the same fixed result_version after A consume"
+    );
+    assert_eq!(
+        envelope_logical_tick_id(&second_delivery),
+        "tick:F:42",
+        "SYS-4 currently seals the second source tick into the generated delivery"
+    );
+    assert_ne!(
+        envelope_logical_tick_id(&second_delivery),
+        first_delivery_tick,
+        "the second generated carrier tick differs from the first delivery tick"
+    );
+    assert_ne!(
+        envelope_logical_tick_id(&second_delivery),
+        first_publication_tick,
+        "the second generated carrier tick differs from the M8 publication tick"
+    );
+    assert_eq!(
+        envelope_logical_tick_id(&first_delivery_after_second),
+        first_delivery_tick,
+        "A delivery remains immutable through B generation and A consume"
+    );
+    assert_eq!(
+        binding_logical_tick_id(first_delivery_after_second.immutable_delivery_binding()),
+        first_delivery_binding_tick,
+        "A delivery binding tick remains immutable through B generation and A consume"
+    );
+
+    let before_second = fabric.semantic_snapshot();
+    let cache_before_second = fabric.designated_cache_snapshot();
+    let consumed_before_second = fabric
+        .m8_actual_trace()
+        .value_consumed_count(first_delivery.semantic_identity(), "C");
+    let m8_trace_digest_before_second = fabric.m8_actual_trace().stable_digest();
+    fabric
+        .step_transport("E", "C", second_delivery.envelope_id())
+        .expect("second split-frame candidate crosses the generated E→C endpoint");
+    let rejected = assert_sys4_diag(
+        fabric.step_locus("C"),
+        delivery_publication_identity_mismatch_diag(),
+    );
+
+    assert_eq!(
+        rejected.rejected_envelope_id(),
+        Some(second_delivery.envelope_id())
+    );
+    assert!(rejected.m8_trace_node_id().is_none());
+    assert!(!rejected.exposes_raw_payload());
+    assert!(fabric.semantic_snapshot().same_state(&before_second));
+    assert_eq!(fabric.designated_cache_snapshot(), cache_before_second);
+    assert_eq!(
+        fabric.m8_actual_trace().stable_digest(),
+        m8_trace_digest_before_second,
+        "B split-frame rejection must not add rejected, non-consuming, or consuming M8 trace rows"
+    );
+    assert_eq!(
+        fabric
+            .m8_actual_trace()
+            .value_consumed_count(first_delivery.semantic_identity(), "C"),
+        consumed_before_second,
+        "split-frame candidate must not perform a second M8 consume"
+    );
+    assert_eq!(
+        fabric
+            .locus_runtime("C")
+            .expect("C exists")
+            .incoming_mailbox()
+            .terminal_rejected_envelope(second_delivery.envelope_id())
+            .expect("split-frame delivery is terminally quarantined")
+            .diagnostic_kind(),
+        delivery_publication_identity_mismatch_diag()
+    );
+}
+
+#[test]
 fn designated_delivery_mismatched_m8_publication_identity_rejects_before_consume() {
     let checked = designated_checked();
     let projection = designated_projection(&checked);
@@ -2420,6 +2751,163 @@ fn designated_delivery_mismatched_m8_publication_identity_rejects_before_consume
             .expect("mismatched identity carrier is quarantined")
             .diagnostic_kind(),
         delivery_publication_identity_mismatch_diag()
+    );
+}
+
+#[test]
+fn stale_publication_identity_fault_preserves_exact_carrier_before_reject() {
+    let checked = designated_checked();
+    let projection = designated_projection(&checked);
+    let delivery_edge = projection
+        .communication_plan()
+        .single_edge(
+            "E.result",
+            CommunicationEdgeKind::DesignatedResultDelivery,
+            "E",
+            "C",
+        )
+        .expect("projection has result delivery edge");
+    let program = fabric_program(projection);
+    let mut fabric = boot(&checked, program, BackendProfile::St);
+
+    stage_designated_publish_until_delivery_outbox(&mut fabric);
+    let delivery = fabric
+        .locus_runtime("E")
+        .expect("E exists")
+        .outgoing_mailbox()
+        .pending_envelopes()
+        .single();
+    let semantic_identity = delivery.semantic_identity().to_string();
+    let before = fabric.semantic_snapshot();
+    let cache_before = fabric.designated_cache_snapshot();
+    let consumed_before = fabric
+        .m8_actual_trace()
+        .value_consumed_count(&semantic_identity, "C");
+
+    let stale_publication_id = "m8-stale-publication-id";
+    fabric
+        .dispatch_external_action(ExternalAction::fault_event(
+            FaultInjection::corrupt_in_transit_envelope_m8_publication_id_for_edge(
+                delivery_edge.edge_ref(),
+                delivery.envelope_id(),
+                stale_publication_id,
+            ),
+        ))
+        .expect("stale-publication fault selector targets one checked delivery edge/envelope");
+    fabric
+        .step_transport("E", "C", delivery.envelope_id())
+        .expect("stale delivery transports to C for fail-closed target validation");
+    let stale_delivery = fabric
+        .locus_runtime("C")
+        .expect("C exists")
+        .incoming_mailbox()
+        .pending_envelopes()
+        .single();
+    assert_eq!(
+        envelope_m8_publication_id(&stale_delivery),
+        stale_publication_id,
+        "stale publication fault must mutate the actual generated carrier to the exact supplied stale identity, not a hardcoded sentinel"
+    );
+    let rejected = assert_sys4_diag(
+        fabric.step_locus("C"),
+        delivery_publication_identity_mismatch_diag(),
+    );
+
+    assert_eq!(
+        rejected.rejected_envelope_id(),
+        Some(delivery.envelope_id())
+    );
+    assert!(rejected.m8_trace_node_id().is_none());
+    assert!(!rejected.exposes_raw_payload());
+    assert!(fabric.semantic_snapshot().same_state(&before));
+    assert_eq!(fabric.designated_cache_snapshot(), cache_before);
+    assert_eq!(
+        fabric
+            .m8_actual_trace()
+            .value_consumed_count(&semantic_identity, "C"),
+        consumed_before
+    );
+    assert_eq!(
+        fabric
+            .locus_runtime("C")
+            .expect("C exists")
+            .incoming_mailbox()
+            .terminal_rejected_envelope(delivery.envelope_id())
+            .expect("stale delivery carrier is terminally quarantined")
+            .diagnostic_kind(),
+        delivery_publication_identity_mismatch_diag()
+    );
+}
+
+#[test]
+fn split_frame_policy_digest_fault_rejects_and_terminally_quarantines() {
+    let checked = designated_checked();
+    let projection = designated_projection(&checked);
+    let delivery_edge = projection
+        .communication_plan()
+        .single_edge(
+            "E.result",
+            CommunicationEdgeKind::DesignatedResultDelivery,
+            "E",
+            "C",
+        )
+        .expect("projection has result delivery edge");
+    let program = fabric_program(projection);
+    let mut fabric = boot(&checked, program, BackendProfile::St);
+
+    stage_designated_publish_until_delivery_outbox(&mut fabric);
+    let delivery = fabric
+        .locus_runtime("E")
+        .expect("E exists")
+        .outgoing_mailbox()
+        .pending_envelopes()
+        .single();
+    let semantic_identity = delivery.semantic_identity().to_string();
+    let before = fabric.semantic_snapshot();
+    let cache_before = fabric.designated_cache_snapshot();
+    let consumed_before = fabric
+        .m8_actual_trace()
+        .value_consumed_count(&semantic_identity, "C");
+
+    fabric
+        .dispatch_external_action(ExternalAction::fault_event(
+            FaultInjection::corrupt_in_transit_envelope_policy_for_edge(
+                delivery_edge.edge_ref(),
+                delivery.envelope_id(),
+            ),
+        ))
+        .expect("split-frame policy fault selector targets one checked delivery edge/envelope");
+    fabric
+        .step_transport("E", "C", delivery.envelope_id())
+        .expect("split-frame delivery transports to C for fail-closed target validation");
+    let rejected = assert_sys4_diag(
+        fabric.step_locus("C"),
+        Sys4DiagnosticKind::CarrierPolicyMismatch,
+    );
+
+    assert_eq!(
+        rejected.rejected_envelope_id(),
+        Some(delivery.envelope_id())
+    );
+    assert!(rejected.m8_trace_node_id().is_none());
+    assert!(!rejected.exposes_raw_payload());
+    assert!(fabric.semantic_snapshot().same_state(&before));
+    assert_eq!(fabric.designated_cache_snapshot(), cache_before);
+    assert_eq!(
+        fabric
+            .m8_actual_trace()
+            .value_consumed_count(&semantic_identity, "C"),
+        consumed_before
+    );
+    assert_eq!(
+        fabric
+            .locus_runtime("C")
+            .expect("C exists")
+            .incoming_mailbox()
+            .terminal_rejected_envelope(delivery.envelope_id())
+            .expect("split-frame carrier is terminally quarantined")
+            .diagnostic_kind(),
+        Sys4DiagnosticKind::CarrierPolicyMismatch
     );
 }
 
