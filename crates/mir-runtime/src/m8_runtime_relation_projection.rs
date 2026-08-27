@@ -645,6 +645,34 @@ impl M8RelationAuthorityUse {
     pub(crate) fn principal(&self) -> Option<&str> {
         self.principal.as_deref()
     }
+
+    /// Validate an already-issued relation use against the live, sealed M8
+    /// authority inventory.  This is a checker only: it neither creates a
+    /// capability nor treats a carrier route as authority.
+    pub(crate) fn validates_admitted_relation_use(
+        &self,
+        authority_state: &M8AuthorityState,
+        relation: &str,
+        owner_locus: &str,
+        transition: &str,
+    ) -> bool {
+        self.relation == relation
+            && self.owner_locus.as_deref() == Some(owner_locus)
+            && self.transition.as_deref() == Some(transition)
+            && self.principal.is_some()
+            && authority_state.validates_relation_use(M8RelationAuthorityLookup {
+                relation,
+                transition,
+                owner_locus,
+                principal: self.principal.as_deref().unwrap_or(""),
+                membership_ref: self.membership_ref.as_deref(),
+                capability_ref: self.capability_ref.as_deref(),
+                membership_epoch: self.membership_epoch.as_deref(),
+                binding_epoch: self.binding_epoch.as_deref(),
+                witness_ref: self.witness_ref.as_deref(),
+                witness_epoch: self.witness_epoch.as_deref(),
+            })
+    }
 }
 
 #[derive(Debug, Clone, PartialEq, Eq)]
@@ -858,6 +886,13 @@ pub enum M8RelationTraceKind {
     FallbackOptionFrozen,
     SameLineagePrimaryReturnIgnored,
     FreshRelationLineageReacquired,
+    /// The owner has prepared an immutable current-state publication.  Its
+    /// occurrence is later committed only after the generated consumer
+    /// endpoint admits the publication.
+    SemanticRelationPublished,
+    /// A consumer-local session imported an owner publication after its
+    /// generated endpoint and M9 target admission both validated it.
+    ConsumerRelationPublicationObserved,
 }
 
 #[derive(Debug, Clone, PartialEq, Eq)]
@@ -950,6 +985,126 @@ pub struct M8RelationProjection {
     absolute_value_stream: Vec<M8Point>,
 }
 
+/// Immutable semantic relation publication produced only by the relation
+/// owner.  It deliberately carries the selected semantic relation snapshot,
+/// not anchor samples, credentials, or presentation output.  A consumer may
+/// import it only through the exact relation plan it already admitted.
+#[derive(Debug, Clone, PartialEq, Eq)]
+pub(crate) struct M8PublishedRelationState {
+    program_identity: String,
+    relation: String,
+    owner_locus: String,
+    source_ref: SourceRef,
+    core_ref: String,
+    publication_occurrence: u64,
+    predecessor_occurrence: Option<u64>,
+    owner_publish_occurrence_id: Option<String>,
+    semantic: M8SemanticRelation,
+}
+
+impl M8PublishedRelationState {
+    pub(crate) fn relation(&self) -> &str {
+        &self.relation
+    }
+
+    pub(crate) fn owner_locus(&self) -> &str {
+        &self.owner_locus
+    }
+
+    pub(crate) fn source_ref(&self) -> &SourceRef {
+        &self.source_ref
+    }
+
+    pub(crate) fn core_ref(&self) -> &str {
+        &self.core_ref
+    }
+
+    pub(crate) const fn publication_occurrence(&self) -> u64 {
+        self.publication_occurrence
+    }
+
+    pub(crate) const fn predecessor_occurrence(&self) -> Option<u64> {
+        self.predecessor_occurrence
+    }
+
+    pub(crate) fn owner_publish_occurrence_id(&self) -> Option<&str> {
+        self.owner_publish_occurrence_id.as_deref()
+    }
+
+    pub(crate) fn with_owner_publish_occurrence_id(
+        mut self,
+        occurrence: impl Into<String>,
+    ) -> Self {
+        self.owner_publish_occurrence_id = Some(occurrence.into());
+        self
+    }
+
+    pub(crate) fn semantic(&self) -> &M8SemanticRelation {
+        &self.semantic
+    }
+}
+
+/// Consumer-local shadow imported from an immutable owner publication.  This
+/// is not a semantic owner replica: it exists solely to drive a consumer
+/// projection after the generated endpoint receives a valid publication.
+#[derive(Debug, Clone, PartialEq, Eq)]
+pub(crate) struct M8ObservedRelationShadow {
+    relation: String,
+    owner_locus: String,
+    consumer_locus: String,
+    source_ref: SourceRef,
+    core_ref: String,
+    publication_occurrence: u64,
+    consumer_observe_occurrence_id: Option<String>,
+    semantic: M8SemanticRelation,
+}
+
+impl M8ObservedRelationShadow {
+    pub(crate) fn relation(&self) -> &str {
+        &self.relation
+    }
+
+    pub(crate) fn owner_locus(&self) -> &str {
+        &self.owner_locus
+    }
+
+    pub(crate) fn consumer_locus(&self) -> &str {
+        &self.consumer_locus
+    }
+
+    pub(crate) fn source_ref(&self) -> &SourceRef {
+        &self.source_ref
+    }
+
+    pub(crate) fn core_ref(&self) -> &str {
+        &self.core_ref
+    }
+
+    pub(crate) const fn publication_occurrence(&self) -> u64 {
+        self.publication_occurrence
+    }
+
+    pub(crate) fn consumer_observe_occurrence_id(&self) -> Option<&str> {
+        self.consumer_observe_occurrence_id.as_deref()
+    }
+
+    pub(crate) fn with_consumer_observe_occurrence_id(
+        mut self,
+        occurrence: impl Into<String>,
+    ) -> Self {
+        self.consumer_observe_occurrence_id = Some(occurrence.into());
+        self
+    }
+
+    pub(crate) fn semantic(&self) -> &M8SemanticRelation {
+        &self.semantic
+    }
+
+    pub(crate) fn semantic_digest(&self) -> String {
+        relation_semantic_digest(&self.semantic)
+    }
+}
+
 impl M8RelationProjection {
     pub fn relation(&self) -> &str {
         &self.relation
@@ -1032,12 +1187,22 @@ impl M8RelationProjection {
 
 #[derive(Debug, Clone, PartialEq, Eq)]
 pub struct M8RelationProjectionRuntime {
+    program_identity: String,
     relation_plans: Vec<M8RelationExecutionPlan>,
     finite_fallback_chains: BTreeMap<String, M8FiniteFallbackChain>,
     presentation_policies: M8PresentationPolicies,
     pub(crate) semantic_snapshot: M8SemanticSnapshot,
     pub(crate) trace: M8RelationTrace,
     live_leases: M8LeaseInventory,
+    /// Owner-only monotone relation-publication sequence.  This is distinct
+    /// from the semantic binding epoch: it detects duplicate/stale endpoint
+    /// deliveries without changing the relation's meaning.
+    published_occurrences: BTreeMap<String, u64>,
+    /// Imported observer state is intentionally separate from
+    /// `semantic_snapshot`, which contains the admitted plan's boot-time
+    /// relation material.  Consumers must render this imported shadow, never
+    /// their local clone of the global semantic snapshot.
+    observed_shadows: BTreeMap<String, M8ObservedRelationShadow>,
 }
 
 impl M8RelationProjectionRuntime {
@@ -1052,12 +1217,15 @@ impl M8RelationProjectionRuntime {
             semantic_snapshot.insert_relation(initial_relation(plan));
         }
         Self {
+            program_identity: instance.program_identity().stable_key(),
             relation_plans,
             finite_fallback_chains: BTreeMap::new(),
             presentation_policies,
             semantic_snapshot,
             trace: M8RelationTrace::default(),
             live_leases,
+            published_occurrences: BTreeMap::new(),
+            observed_shadows: BTreeMap::new(),
         }
     }
 
@@ -1092,6 +1260,293 @@ impl M8RelationProjectionRuntime {
 
     pub(crate) fn live_lease_inventory(&self) -> M8LeaseInventory {
         self.live_leases.clone()
+    }
+
+    /// Publish the current owner semantic state.  Only the owner session may
+    /// call this; source/Core provenance is read from the admitted relation
+    /// plan and cannot be supplied by a caller.
+    pub(crate) fn publish_semantic_relation(
+        &mut self,
+        relation: &str,
+        owner_locus: &str,
+        authority: M8RelationAuthorityUse,
+    ) -> Result<M8PublishedRelationState, M8RelationDiagnostics> {
+        let plan = self.relation_plan_or_diagnostic(relation)?.clone();
+        let semantic = self.semantic_relation(relation).clone();
+        if semantic.owner_locus() != owner_locus || plan.core().owner_locus() != owner_locus {
+            return Err(M8RelationDiagnostics::one(
+                M8RelationDiagnosticKind::InvalidRelationTransition,
+                relation,
+                plan.source_ref().clone(),
+            ));
+        }
+        if !self.authority_matches(&plan, &semantic, &authority, "publish_relation") {
+            return Err(M8RelationDiagnostics::one(
+                M8RelationDiagnosticKind::MissingRelationAuthority,
+                relation,
+                plan.source_ref().clone(),
+            ));
+        }
+        if !self.has_live_lease(&plan, &semantic) {
+            return Err(M8RelationDiagnostics::one(
+                M8RelationDiagnosticKind::InvalidRelationTransition,
+                relation,
+                plan.source_ref().clone(),
+            ));
+        }
+        let next = match self.published_occurrences.get(relation).copied() {
+            Some(previous) => previous.checked_add(1).ok_or_else(|| {
+                M8RelationDiagnostics::one(
+                    M8RelationDiagnosticKind::InvalidRelationTransition,
+                    relation,
+                    plan.source_ref().clone(),
+                )
+            })?,
+            None => 0,
+        };
+        let predecessor = self.published_occurrences.get(relation).copied();
+        self.append_trace(M8RelationTraceKind::SemanticRelationPublished, &plan, None);
+        Ok(M8PublishedRelationState {
+            program_identity: self.program_identity.clone(),
+            relation: relation.to_string(),
+            owner_locus: owner_locus.to_string(),
+            source_ref: plan.source_ref().clone(),
+            core_ref: relation_core_ref(&plan),
+            publication_occurrence: next,
+            predecessor_occurrence: predecessor,
+            owner_publish_occurrence_id: None,
+            semantic,
+        })
+    }
+
+    /// Commit a publication sequence only after the generated consumer
+    /// endpoint imported the exact immutable state.  A route, inbox, or
+    /// target-admission failure therefore leaves the next occurrence
+    /// reusable for a retry rather than creating a permanent sequence gap.
+    pub(crate) fn commit_semantic_relation_publication(
+        &mut self,
+        publication: &M8PublishedRelationState,
+    ) -> Result<(), M8RelationDiagnostics> {
+        let relation = publication.relation();
+        let plan = self.relation_plan_or_diagnostic(relation)?.clone();
+        let current = self.semantic_relation(relation);
+        let expected = match self.published_occurrences.get(relation).copied() {
+            Some(previous) => previous.checked_add(1).ok_or_else(|| {
+                M8RelationDiagnostics::one(
+                    M8RelationDiagnosticKind::InvalidRelationTransition,
+                    relation,
+                    plan.source_ref().clone(),
+                )
+            })?,
+            None => 0,
+        };
+        let predecessor = self.published_occurrences.get(relation).copied();
+        if publication.program_identity != self.program_identity
+            || publication.owner_locus() != plan.core().owner_locus()
+            || publication.source_ref() != plan.source_ref()
+            || publication.core_ref() != relation_core_ref(&plan)
+            || publication.publication_occurrence() != expected
+            || publication.predecessor_occurrence() != predecessor
+            || publication.semantic() != current
+        {
+            return Err(M8RelationDiagnostics::one(
+                M8RelationDiagnosticKind::InvalidRelationTransition,
+                relation,
+                plan.source_ref().clone(),
+            ));
+        }
+        self.published_occurrences
+            .insert(relation.to_string(), expected);
+        Ok(())
+    }
+
+    /// Import an immutable relation publication at the consumer endpoint.
+    /// It rejects a foreign program/plan, provenance mismatch, duplicate,
+    /// stale, and out-of-order occurrence before replacing the local shadow.
+    pub(crate) fn import_semantic_relation_shadow(
+        &mut self,
+        consumer_locus: &str,
+        publication: M8PublishedRelationState,
+    ) -> Result<M8ObservedRelationShadow, M8RelationDiagnostics> {
+        let relation = publication.relation().to_string();
+        let plan = self.relation_plan_or_diagnostic(&relation)?.clone();
+        let expected_consumer = plan.core().consumer_projection_locus().unwrap_or("");
+        let provenance_matches = publication.program_identity == self.program_identity
+            && publication.owner_locus() == plan.core().owner_locus()
+            && publication.source_ref() == plan.source_ref()
+            && publication.core_ref() == relation_core_ref(&plan)
+            && publication.semantic().name == relation
+            && publication.semantic().owner_locus() == plan.core().owner_locus();
+        if consumer_locus != expected_consumer || !provenance_matches {
+            return Err(M8RelationDiagnostics::one(
+                M8RelationDiagnosticKind::InvalidRelationTransition,
+                &relation,
+                plan.source_ref().clone(),
+            ));
+        }
+        if let Some(previous) = self.observed_shadows.get(&relation) {
+            let expected = previous
+                .publication_occurrence()
+                .checked_add(1)
+                .ok_or_else(|| {
+                    M8RelationDiagnostics::one(
+                        M8RelationDiagnosticKind::InvalidRelationTransition,
+                        &relation,
+                        plan.source_ref().clone(),
+                    )
+                })?;
+            if publication.publication_occurrence() != expected
+                || publication.predecessor_occurrence() != Some(previous.publication_occurrence)
+            {
+                return Err(M8RelationDiagnostics::one(
+                    M8RelationDiagnosticKind::InvalidRelationTransition,
+                    &relation,
+                    plan.source_ref().clone(),
+                ));
+            }
+        } else if publication.publication_occurrence() != 0
+            || publication.predecessor_occurrence().is_some()
+        {
+            return Err(M8RelationDiagnostics::one(
+                M8RelationDiagnosticKind::InvalidRelationTransition,
+                &relation,
+                plan.source_ref().clone(),
+            ));
+        }
+        let shadow = M8ObservedRelationShadow {
+            relation: relation.clone(),
+            owner_locus: publication.owner_locus().to_string(),
+            consumer_locus: consumer_locus.to_string(),
+            source_ref: publication.source_ref().clone(),
+            core_ref: publication.core_ref().to_string(),
+            publication_occurrence: publication.publication_occurrence(),
+            consumer_observe_occurrence_id: None,
+            semantic: publication.semantic().clone(),
+        };
+        self.observed_shadows.insert(relation, shadow.clone());
+        self.append_trace(
+            M8RelationTraceKind::ConsumerRelationPublicationObserved,
+            &plan,
+            None,
+        );
+        Ok(shadow)
+    }
+
+    /// Replace the consumer-local raw M8 observe occurrence with the exact
+    /// fabric-qualified occurrence once SYS-4 has bound it to the generated
+    /// endpoint.  The update is constrained to the shadow just imported by
+    /// that M8 session; an arbitrary carrier cannot annotate another shadow.
+    pub(crate) fn qualify_observed_relation_shadow_occurrence(
+        &mut self,
+        shadow: &M8ObservedRelationShadow,
+        qualified_occurrence: &str,
+    ) -> Result<M8ObservedRelationShadow, M8RelationDiagnostics> {
+        let relation = shadow.relation();
+        let plan = self.relation_plan_or_diagnostic(relation)?.clone();
+        let stored = self.observed_shadows.get_mut(relation).ok_or_else(|| {
+            M8RelationDiagnostics::one(
+                M8RelationDiagnosticKind::InvalidRelationTransition,
+                relation,
+                plan.source_ref().clone(),
+            )
+        })?;
+        if stored.relation != shadow.relation
+            || stored.owner_locus != shadow.owner_locus
+            || stored.consumer_locus != shadow.consumer_locus
+            || stored.source_ref != shadow.source_ref
+            || stored.core_ref != shadow.core_ref
+            || stored.publication_occurrence != shadow.publication_occurrence
+            || stored.semantic != shadow.semantic
+            || (stored.consumer_observe_occurrence_id.is_some()
+                && stored.consumer_observe_occurrence_id != shadow.consumer_observe_occurrence_id)
+            || shadow.consumer_observe_occurrence_id.is_none()
+            || qualified_occurrence.is_empty()
+        {
+            return Err(M8RelationDiagnostics::one(
+                M8RelationDiagnosticKind::InvalidRelationTransition,
+                relation,
+                plan.source_ref().clone(),
+            ));
+        }
+        stored.consumer_observe_occurrence_id = Some(qualified_occurrence.to_string());
+        Ok(stored.clone())
+    }
+
+    pub(crate) fn observed_relation_shadow(
+        &self,
+        relation: &str,
+        consumer_locus: &str,
+    ) -> Option<&M8ObservedRelationShadow> {
+        self.observed_shadows
+            .get(relation)
+            .filter(|shadow| shadow.consumer_locus() == consumer_locus)
+    }
+
+    pub(crate) fn publication_state(
+        &self,
+    ) -> (
+        BTreeMap<String, u64>,
+        BTreeMap<String, M8ObservedRelationShadow>,
+    ) {
+        (
+            self.published_occurrences.clone(),
+            self.observed_shadows.clone(),
+        )
+    }
+
+    pub(crate) fn replace_publication_state(
+        &mut self,
+        published_occurrences: BTreeMap<String, u64>,
+        observed_shadows: BTreeMap<String, M8ObservedRelationShadow>,
+    ) {
+        self.published_occurrences = published_occurrences;
+        self.observed_shadows = observed_shadows;
+    }
+
+    /// Fresh reacquisition is allowed only after the primary binding has
+    /// been semantically invalidated to a fallback/frozen floor.
+    pub(crate) fn requires_fresh_reacquire(
+        &self,
+        relation: &str,
+    ) -> Result<bool, M8RelationDiagnostics> {
+        let plan = self.relation_plan_or_diagnostic(relation)?;
+        let semantic = self.semantic_relation(relation);
+        Ok(semantic.selected_floor() != M8RelationFloor::Live
+            && semantic.selected_anchor() != plan.core().primary().anchor())
+    }
+
+    /// Project only an imported consumer shadow.  The live owner semantic
+    /// snapshot is deliberately not consulted, so a consumer cannot render a
+    /// boot-time clone when the endpoint has not delivered the current owner
+    /// publication.  This path is used for the local presentation-gap case.
+    pub(crate) fn project_observed_relation_shadow(
+        &self,
+        relation: &str,
+        context: M8PresentationContext,
+    ) -> Result<M8RelationProjection, M8ProjectionDiagnostics> {
+        let plan = self.plan(relation).ok_or_else(|| {
+            M8ProjectionDiagnostics::one(
+                M8ProjectionDiagnosticKind::UnknownRelation,
+                SourceRef::new("<m8-relation>", 1, 1, 1, 1),
+            )
+        })?;
+        let shadow = self
+            .observed_relation_shadow(relation, &context.consumer_locus)
+            .ok_or_else(|| {
+                M8ProjectionDiagnostics::one(
+                    M8ProjectionDiagnosticKind::UnknownRelation,
+                    plan.source_ref().clone(),
+                )
+            })?;
+        if context.consumer_locus != plan.core().consumer_projection_locus().unwrap_or("")
+            || context.frontier() != Some(shadow.semantic().activation_frontier())
+        {
+            return Err(M8ProjectionDiagnostics::one(
+                M8ProjectionDiagnosticKind::SplitFramePresentationContext,
+                plan.source_ref().clone(),
+            ));
+        }
+        self.local_fallback_or_missing(plan, shadow.semantic(), context)
     }
 
     pub(crate) fn finite_fallback_chains(&self) -> BTreeMap<String, M8FiniteFallbackChain> {
@@ -1207,6 +1662,67 @@ impl M8RelationProjectionRuntime {
         relation_state.selected_option_epoch = live.epoch.clone();
         relation_state.active_lease_ref = live.lease_ref.clone();
         self.finite_fallback_chains.insert(relation, chain);
+        Ok(self.live_leases.clone())
+    }
+
+    /// Install the accepted finite local fallback chain entirely from the
+    /// admitted relation plan and its M9-derived bootstrap lease.  No SYS-5
+    /// schedule value supplies an anchor, epoch, lease, or capability here.
+    pub(crate) fn install_finite_local_bootstrap_chain(
+        &mut self,
+        relation: &str,
+    ) -> Result<M8LeaseInventory, M8RelationDiagnostics> {
+        let plan = self.relation_plan_or_diagnostic(relation)?.clone();
+        let bootstrap = plan.live_lease_ref().to_string();
+        let chain = M8FiniteFallbackChain::live_anchor_frozen(
+            relation,
+            M8FiniteFallbackOption::new(
+                plan.core().primary().anchor(),
+                bootstrap.clone(),
+                format!("{bootstrap}:primary-capability"),
+                plan.core().primary().epoch(),
+            ),
+            M8FiniteFallbackOption::new(
+                plan.core().fallback().anchor(),
+                format!("{bootstrap}:fallback-lease"),
+                format!("{bootstrap}:fallback-capability"),
+                plan.core().fallback().epoch(),
+            ),
+            M8FiniteFallbackOption::new(
+                plan.core().fallback().anchor(),
+                format!("{bootstrap}:frozen-lease"),
+                format!("{bootstrap}:frozen-capability"),
+                plan.core().fallback().epoch(),
+            ),
+        );
+        self.install_finite_fallback_chain(chain)
+    }
+
+    /// Add the already M9-sealed fresh lease required by a single
+    /// reacquisition.  The caller receives this `M8LeaseRecord` only from an
+    /// opaque M9 binding, so this method cannot issue a relation lease.
+    pub(crate) fn install_sealed_fresh_relation_lease(
+        &mut self,
+        relation: &str,
+        lease: M8LeaseRecord,
+    ) -> Result<M8LeaseInventory, M8RelationDiagnostics> {
+        let plan = self.relation_plan_or_diagnostic(relation)?.clone();
+        if lease.relation.as_deref() != Some(relation)
+            || lease.owner_locus.as_deref() != Some(plan.core().owner_locus())
+            || lease.binding_frontier.as_deref() != Some(plan.binding_frontier())
+            || lease.epoch.as_deref() != Some("binding_epoch:2")
+            || lease.anchor_epoch.as_deref() == Some(plan.core().primary().epoch())
+            || !lease.live
+        {
+            return Err(M8RelationDiagnostics::one(
+                M8RelationDiagnosticKind::InvalidRelationTransition,
+                relation,
+                plan.source_ref().clone(),
+            ));
+        }
+        self.live_leases
+            .records
+            .insert(lease.reference.clone(), lease);
         Ok(self.live_leases.clone())
     }
 
@@ -1335,6 +1851,15 @@ impl M8RelationProjectionRuntime {
         if !self.has_live_lease(&plan, &current) {
             return Err(M8RelationDiagnostics::one(
                 M8RelationDiagnosticKind::MissingLiveRelationLease,
+                relation,
+                plan.source_ref().clone(),
+            ));
+        }
+        if current.selected_floor() != M8RelationFloor::Live
+            || current.selected_anchor() != plan.core().primary().anchor()
+        {
+            return Err(M8RelationDiagnostics::one(
+                M8RelationDiagnosticKind::InvalidRelationTransition,
                 relation,
                 plan.source_ref().clone(),
             ));
@@ -1707,28 +2232,25 @@ impl M8RelationProjectionRuntime {
         authority: &M8RelationAuthorityUse,
         transition: &str,
     ) -> bool {
-        authority.relation == plan.name()
-            && authority.owner_locus.as_deref() == Some(plan.core().owner_locus())
-            && authority.transition.as_deref() == Some(transition)
-            && authority.principal.is_some()
-            && self
-                .semantic_snapshot
-                .authority_state()
-                .validates_relation_use(M8RelationAuthorityLookup {
-                    relation: plan.name(),
-                    transition,
-                    owner_locus: plan.core().owner_locus(),
-                    principal: authority.principal.as_deref().unwrap_or(""),
-                    membership_ref: authority.membership_ref.as_deref(),
-                    capability_ref: authority.capability_ref.as_deref(),
-                    membership_epoch: authority.membership_epoch.as_deref(),
-                    binding_epoch: authority.binding_epoch.as_deref(),
-                    witness_ref: authority.witness_ref.as_deref(),
-                    witness_epoch: authority.witness_epoch.as_deref(),
-                })
-            && ((transition == "invalidate_primary"
-                && authority.binding_epoch.as_deref() == Some(relation.binding_epoch()))
-                || transition == "reacquire_primary")
+        authority.validates_admitted_relation_use(
+            self.semantic_snapshot.authority_state(),
+            plan.name(),
+            plan.core().owner_locus(),
+            transition,
+        ) && match transition {
+            // Invalidation changes the current binding, so it must name
+            // the exact binding being invalidated.
+            "invalidate_primary" => {
+                authority.binding_epoch.as_deref() == Some(relation.binding_epoch())
+            }
+            // Fresh reacquisition separately proves that it changes to a
+            // new binding/lease below.  Publication makes no semantic
+            // transition: its independent, admitted M9 publish use is
+            // checked above and remains valid for the current relation
+            // lineage (including a freshly reacquired one).
+            "reacquire_primary" | "publish_relation" => true,
+            _ => false,
+        }
     }
 
     fn fresh_witness_matches(
@@ -1810,4 +2332,29 @@ fn transform_from_plan(
         Some((x, y)) => M8Transform2::translate(x, y),
         None => M8Transform2::identity(),
     }
+}
+
+fn relation_core_ref(plan: &M8RelationExecutionPlan) -> String {
+    let core = plan.core();
+    format!(
+        "m8-relation-core:{}:{}:{}:{}",
+        plan.name(),
+        core.owner_locus(),
+        core.primary().anchor(),
+        core.fallback().anchor(),
+    )
+}
+
+fn relation_semantic_digest(relation: &M8SemanticRelation) -> String {
+    format!(
+        "relation:{}:{}:{}:{}:{}:{}:{}:{}",
+        relation.name,
+        relation.owner_locus,
+        relation.selected_option_index,
+        relation.selected_floor.as_str(),
+        relation.selected_anchor,
+        relation.selected_option_epoch,
+        relation.binding_epoch,
+        relation.lineage.join(","),
+    )
 }

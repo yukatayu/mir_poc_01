@@ -80,6 +80,8 @@ mod sys3_projection_tests;
 mod sys4_dispatch_tests;
 #[cfg(test)]
 mod sys5_local_slice_tests;
+#[cfg(test)]
+mod sys5_relation_dispatch_tests;
 
 pub fn crate_name() -> &'static str {
     "mir_runtime"

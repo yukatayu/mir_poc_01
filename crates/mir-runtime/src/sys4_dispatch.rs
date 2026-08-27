@@ -30,12 +30,18 @@ use crate::{
         M8LocalTrace, M8LocalTraceKind, M8LocalTraceObservation,
     },
     m8_runtime_owner_queue::{M8OwnerRequest, M8ServeOutcome, M8StateKey},
+    m8_runtime_relation_projection::{
+        M8BindingInvalidation, M8LeaseRecord, M8ObservedRelationShadow, M8Point,
+        M8PresentationContext, M8PresentationFallback, M8PublishedRelationState,
+        M8RelationAuthorityUse, M8RelationProjection, M8RelationReacquire, M8RestrictionPolicy,
+    },
     m9_auth_verification::{
         M9AdmissionErrorKind, M9AuthorityGeneration, M9AuthorityInspection,
         M9AuthoritySuccessorPublisher, M9AuthorityTransitionKind, M9CacheValidationInspection,
         M9CheckedPatchAuthorityBinding, M9DesignatedSourceReleaseLineage, M9KernelAuthorityView,
-        M9RuntimeExecutionSeam, M9RuntimeValidationObservationSnapshot, M9SealedFailureInspection,
-        M9SealedGeneration, M9SealedTransitionInspection, M9SourceReleaseValidationInspection,
+        M9RelationPublicationAdmission, M9RuntimeExecutionSeam,
+        M9RuntimeValidationObservationSnapshot, M9SealedFailureInspection, M9SealedGeneration,
+        M9SealedTransitionInspection, M9SourceReleaseValidationInspection,
     },
     sys2_execution_backend::{
         Ow1ContextualM8Execution, Ow1ObserverDesignatedPublication, Ow1WorkerBackend,
@@ -48,6 +54,11 @@ use crate::{
         RuntimeAdmissionStatus, SourceRefView,
     },
 };
+
+/// One fully successful relation publication consumes four source-outbox,
+/// three transport, one target-dequeue, and one relation-serve occurrence.
+/// Capacity is preflighted before any owner or consumer M8 transition.
+const RELATION_DISPATCH_ENDPOINT_OCCURRENCES: u64 = 9;
 
 #[cfg(test)]
 use crate::m8_runtime_local_cut::M8LocalSessionObserver;
@@ -87,6 +98,10 @@ pub(crate) enum Sys4DiagnosticKind {
     UnknownRetargetLocus,
     BackendIneligible,
     M8ExecutionRejected,
+    /// A finite in-process identifier namespace cannot advance without
+    /// wrapping.  Fail closed before producing a duplicate carrier or trace
+    /// occurrence.
+    IdentifierExhausted,
     /// A live OW1 worker failed to provide a clone-only observer snapshot.
     /// This never rewrites the semantic result of an already committed M8
     /// operation and is distinct from a genuinely absent observation.
@@ -128,6 +143,7 @@ struct Sys4DiagnosticContext {
     m8_trace_node_id: Option<String>,
     rejected_envelope_id: Option<String>,
     rejected_request_id: Option<String>,
+    relation_publication_failure_disposition: Option<RelationPublicationFailureDisposition>,
     m9_failure_inspection: Option<Box<M9SealedFailureInspection>>,
     m8_non_consuming_validation_node_id: Option<String>,
     local_store_read_audit_id: Option<String>,
@@ -136,6 +152,15 @@ struct Sys4DiagnosticContext {
     cache_projection_mismatch: Option<Box<CacheProjectionMismatchInspection>>,
     backend_ineligibility_reason: Option<BackendIneligibilityReason>,
     observer_snapshot_failure: Option<Box<ObserverSnapshotFailure>>,
+}
+
+/// Observer-safe disposition of an uncommitted generated relation carrier.
+/// It distinguishes an explicit retry-safe discard from a carrier the
+/// transport has already terminalized; neither state grants authority.
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+pub(crate) enum RelationPublicationFailureDisposition {
+    DiscardedUndelivered,
+    AlreadyRemovedByTransport,
 }
 
 /// Observer-only availability state.  It deliberately contains neither a
@@ -273,6 +298,12 @@ impl Sys4DispatchDiagnostics {
 
     pub(crate) fn rejected_envelope_id(&self) -> Option<&str> {
         self.context.rejected_envelope_id.as_deref()
+    }
+
+    pub(crate) const fn relation_publication_failure_disposition(
+        &self,
+    ) -> Option<RelationPublicationFailureDisposition> {
+        self.context.relation_publication_failure_disposition
     }
 
     pub(crate) fn backend_ineligibility_reason(&self) -> Option<&BackendIneligibilityReason> {
@@ -952,28 +983,33 @@ impl SealedFabricAdmission {
                 ),
                 ProjectedOperationFragmentKind::RelationPublication => {
                     fragment.relation_checked_core().is_some_and(|_| {
-                        ["invalidate_primary", "reacquire_primary"]
-                            .into_iter()
-                            .all(|transition| {
-                                generation
-                                    .relation_authority_use(fragment.operation_id(), transition)
-                                    .is_some()
-                            })
+                        [
+                            "publish_relation",
+                            "invalidate_primary",
+                            "reacquire_primary",
+                        ]
+                        .into_iter()
+                        .all(|transition| {
+                            generation
+                                .relation_authority_use(fragment.operation_id(), transition)
+                                .is_some()
+                        })
                     })
                 }
                 ProjectedOperationFragmentKind::ConsumerLocalRelationProjection => fragment
                     .consumer_relation_projection()
                     .is_some_and(|descriptor| {
-                        ["invalidate_primary", "reacquire_primary"]
-                            .into_iter()
-                            .all(|transition| {
-                                generation
-                                    .relation_authority_use(
-                                        descriptor.source_relation(),
-                                        transition,
-                                    )
-                                    .is_some()
-                            })
+                        [
+                            "publish_relation",
+                            "invalidate_primary",
+                            "reacquire_primary",
+                        ]
+                        .into_iter()
+                        .all(|transition| {
+                            generation
+                                .relation_authority_use(descriptor.source_relation(), transition)
+                                .is_some()
+                        })
                     }),
                 _ => true,
             };
@@ -2384,6 +2420,13 @@ enum MailboxPayload {
         value: Option<i64>,
         publication: Box<M8PublishedDesignatedValue>,
     },
+    /// An immutable owner relation-state publication.  It is accepted only
+    /// on the generated `RelationProjectionPublication` endpoint and is
+    /// imported as a consumer shadow rather than as remote mutable state.
+    RelationPublication {
+        publication: Box<M8PublishedRelationState>,
+        target_admission: M9RelationPublicationAdmission,
+    },
     CacheRetry,
 }
 
@@ -2762,6 +2805,8 @@ impl ActualM8TraceNode {
             "RelationFallbackFrozen" => M8LocalTraceKind::RelationFallbackFrozen,
             "RelationPrimaryReturnIgnored" => M8LocalTraceKind::RelationPrimaryReturnIgnored,
             "RelationFreshLineageReacquired" => M8LocalTraceKind::RelationFreshLineageReacquired,
+            "RelationPublished" => M8LocalTraceKind::RelationPublished,
+            "RelationPublicationObserved" => M8LocalTraceKind::RelationPublicationObserved,
             "DesignatedAuthorityValidated" => M8LocalTraceKind::DesignatedAuthorityValidated,
             "DesignatedInputReceipt" | "DesignatedInputReceiptValidated" => {
                 M8LocalTraceKind::DesignatedInputReceiptValidated
@@ -3716,6 +3761,14 @@ pub(crate) struct Sys4LocalCut {
     completed_receipts: BTreeMap<String, FabricReceipt>,
     local_store_read_audits: BTreeMap<String, LocalStoreReadAudit>,
     cache: BTreeMap<String, CachedDelivery>,
+    /// Observer-safe digests of relation states delivered through generated
+    /// relation-publication endpoints.  The M8 cuts retain the semantic
+    /// source; this map is the local fabric's read-only devtools index.
+    relation_semantic_digests: BTreeMap<String, String>,
+    /// One-shot finite M9 bindings already consumed by an accepted fresh
+    /// relation reacquisition.  Retaining this set prevents restore from
+    /// reactivating a dormant binding a second time.
+    used_fresh_relation_bindings: BTreeSet<String>,
     consumption_state: DesignatedConsumptionState,
     evaluator_publication_bindings: EvaluatorPublicationBindingRegistry,
     imported_designated_publication_state: ImportedDesignatedPublicationState,
@@ -3876,8 +3929,22 @@ impl Sys4LocalCut {
     pub(crate) fn for_test_set_next_request_below_retained_max(&mut self, request_id: &str) {
         self.next_request = request_id
             .strip_prefix("sys4-request-")
+            .or_else(|| request_id.strip_prefix("sys5-relation-request:"))
             .and_then(|suffix| suffix.parse().ok())
             .unwrap_or_default();
+    }
+
+    /// Test-only corrupt-cut seam for the observer-safe relation digest index.
+    /// Restore must reject any nonempty value that is not re-derived from the
+    /// target M8 imported shadow.
+    #[cfg(test)]
+    pub(crate) fn for_test_set_relation_semantic_digest(
+        &mut self,
+        relation: &str,
+        digest: impl Into<String>,
+    ) {
+        self.relation_semantic_digests
+            .insert(relation.to_string(), digest.into());
     }
 
     #[cfg(test)]
@@ -3936,6 +4003,16 @@ fn validate_sys4_local_cut(
         return Err(cut_projection_mismatch());
     }
     let expected_loci: BTreeSet<_> = program.locus_names().into_iter().collect();
+    let relation_publications: BTreeSet<_> = program
+        .projection
+        .sys4_artifact_fragments()
+        .entries()
+        .iter()
+        .filter(|fragment| {
+            fragment.fragment_kind() == ProjectedOperationFragmentKind::RelationPublication
+        })
+        .map(|fragment| fragment.operation_id().to_string())
+        .collect();
     if cut.loci.keys().cloned().collect::<BTreeSet<_>>() != expected_loci
         || cut.m8_cuts.keys().cloned().collect::<BTreeSet<_>>() != expected_loci
         || cut
@@ -3945,6 +4022,38 @@ fn validate_sys4_local_cut(
             .collect::<BTreeSet<_>>()
             != expected_loci
     {
+        return Err(cut_projection_mismatch());
+    }
+    if cut
+        .relation_semantic_digests
+        .iter()
+        .any(|(relation, digest)| !relation_publications.contains(relation) || digest.is_empty())
+        || cut.used_fresh_relation_bindings.iter().any(|relation| {
+            !relation_publications.contains(relation)
+                || cut
+                    .authority_generation
+                    .fresh_relation_reacquire_binding(relation)
+                    .is_none()
+        })
+    {
+        return Err(cut_projection_mismatch());
+    }
+    let expected_relation_digests = program
+        .projection
+        .communication_plan()
+        .edges()
+        .iter()
+        .filter(|edge| edge.kind() == CommunicationEdgeKind::RelationProjectionPublication)
+        .filter_map(|edge| {
+            cut.m8_cuts
+                .get(edge.target_locus())
+                .and_then(|m8_cut| {
+                    m8_cut.relation_observed_shadow(edge.operation_id(), edge.target_locus())
+                })
+                .map(|shadow| (edge.operation_id().to_string(), shadow.semantic_digest()))
+        })
+        .collect::<BTreeMap<_, _>>();
+    if cut.relation_semantic_digests != expected_relation_digests {
         return Err(cut_projection_mismatch());
     }
     if !cut
@@ -4277,6 +4386,7 @@ fn cut_counters_are_fresh(cut: &Sys4LocalCut) -> bool {
     let mut observe_request = |identifier: &str| {
         if let Some(value) = identifier
             .strip_prefix("sys4-request-")
+            .or_else(|| identifier.strip_prefix("sys5-relation-request:"))
             .and_then(|suffix| suffix.parse::<u64>().ok())
         {
             max_request = Some(max_request.map_or(value, |current: u64| current.max(value)));
@@ -4890,6 +5000,193 @@ impl M8ExecutionBackend {
             Self::Ow1(worker) => worker
                 .read_owner_int_with_context(key, source_ref, context)
                 .map_err(map_worker_failure),
+        }
+    }
+
+    /// Relation lifecycle support is intentionally ST-only for the SYS-5
+    /// local profile.  The methods still target the independent per-locus M8
+    /// session; they never borrow or mutate a remote session directly.
+    fn install_relation_bootstrap(
+        &mut self,
+        owner_locus: &str,
+        relation: &str,
+    ) -> Result<(), Sys4DiagnosticKind> {
+        match self {
+            Self::St(sessions) => sessions
+                .get_mut(owner_locus)
+                .ok_or(Sys4DiagnosticKind::BackendIneligible)?
+                .install_finite_local_bootstrap_chain(relation)
+                .map_err(|_| Sys4DiagnosticKind::M8ExecutionRejected),
+            Self::Ow1(_) => Err(Sys4DiagnosticKind::BackendIneligible),
+        }
+    }
+
+    fn publish_relation(
+        &mut self,
+        owner_locus: &str,
+        relation: &str,
+        authority: M8RelationAuthorityUse,
+    ) -> Result<M8PublishedRelationState, Sys4DiagnosticKind> {
+        match self {
+            Self::St(sessions) => sessions
+                .get_mut(owner_locus)
+                .ok_or(Sys4DiagnosticKind::BackendIneligible)?
+                .publish_semantic_relation(relation, owner_locus, authority)
+                .map_err(|_| Sys4DiagnosticKind::M8ExecutionRejected),
+            Self::Ow1(_) => Err(Sys4DiagnosticKind::BackendIneligible),
+        }
+    }
+
+    fn commit_relation_publication(
+        &mut self,
+        owner_locus: &str,
+        publication: &M8PublishedRelationState,
+    ) -> Result<(), Sys4DiagnosticKind> {
+        match self {
+            Self::St(sessions) => sessions
+                .get_mut(owner_locus)
+                .ok_or(Sys4DiagnosticKind::BackendIneligible)?
+                .commit_semantic_relation_publication(publication)
+                .map_err(|_| Sys4DiagnosticKind::M8ExecutionRejected),
+            Self::Ow1(_) => Err(Sys4DiagnosticKind::BackendIneligible),
+        }
+    }
+
+    fn relation_requires_fresh_reacquire(
+        &mut self,
+        owner_locus: &str,
+        relation: &str,
+    ) -> Result<bool, Sys4DiagnosticKind> {
+        match self {
+            Self::St(sessions) => sessions
+                .get_mut(owner_locus)
+                .ok_or(Sys4DiagnosticKind::BackendIneligible)?
+                .relation_requires_fresh_reacquire(relation)
+                .map_err(|_| Sys4DiagnosticKind::M8ExecutionRejected),
+            Self::Ow1(_) => Err(Sys4DiagnosticKind::BackendIneligible),
+        }
+    }
+
+    fn invalidate_relation(
+        &mut self,
+        owner_locus: &str,
+        relation: &str,
+        authority: M8RelationAuthorityUse,
+    ) -> Result<(), Sys4DiagnosticKind> {
+        match self {
+            Self::St(sessions) => {
+                let anchor = sessions
+                    .get(owner_locus)
+                    .and_then(|runtime| runtime.relation_state(relation))
+                    .map(|state| state.selected_anchor().to_string())
+                    .ok_or(Sys4DiagnosticKind::M8ExecutionRejected)?;
+                sessions
+                    .get_mut(owner_locus)
+                    .ok_or(Sys4DiagnosticKind::BackendIneligible)?
+                    .invalidate_primary(
+                        relation,
+                        authority,
+                        M8BindingInvalidation::anchor_unavailable(anchor),
+                    )
+                    .map(|_| ())
+                    .map_err(|_| Sys4DiagnosticKind::M8ExecutionRejected)
+            }
+            Self::Ow1(_) => Err(Sys4DiagnosticKind::BackendIneligible),
+        }
+    }
+
+    fn install_fresh_relation_lease(
+        &mut self,
+        owner_locus: &str,
+        relation: &str,
+        lease: M8LeaseRecord,
+    ) -> Result<(), Sys4DiagnosticKind> {
+        match self {
+            Self::St(sessions) => sessions
+                .get_mut(owner_locus)
+                .ok_or(Sys4DiagnosticKind::BackendIneligible)?
+                .install_sealed_fresh_relation_lease(relation, lease)
+                .map_err(|_| Sys4DiagnosticKind::M8ExecutionRejected),
+            Self::Ow1(_) => Err(Sys4DiagnosticKind::BackendIneligible),
+        }
+    }
+
+    fn reacquire_relation(
+        &mut self,
+        owner_locus: &str,
+        relation: &str,
+        authority: M8RelationAuthorityUse,
+        reacquire: M8RelationReacquire,
+    ) -> Result<(), Sys4DiagnosticKind> {
+        match self {
+            Self::St(sessions) => sessions
+                .get_mut(owner_locus)
+                .ok_or(Sys4DiagnosticKind::BackendIneligible)?
+                .reacquire_primary(relation, authority, reacquire)
+                .map(|_| ())
+                .map_err(|_| Sys4DiagnosticKind::M8ExecutionRejected),
+            Self::Ow1(_) => Err(Sys4DiagnosticKind::BackendIneligible),
+        }
+    }
+
+    fn import_relation_shadow(
+        &mut self,
+        consumer_locus: &str,
+        publication: M8PublishedRelationState,
+    ) -> Result<M8ObservedRelationShadow, Sys4DiagnosticKind> {
+        match self {
+            Self::St(sessions) => sessions
+                .get_mut(consumer_locus)
+                .ok_or(Sys4DiagnosticKind::BackendIneligible)?
+                .import_semantic_relation_shadow(consumer_locus, publication)
+                .map_err(|_| Sys4DiagnosticKind::M8ExecutionRejected),
+            Self::Ow1(_) => Err(Sys4DiagnosticKind::BackendIneligible),
+        }
+    }
+
+    fn qualify_relation_shadow_observe_occurrence(
+        &mut self,
+        consumer_locus: &str,
+        shadow: &M8ObservedRelationShadow,
+        qualified_occurrence: &str,
+    ) -> Result<M8ObservedRelationShadow, Sys4DiagnosticKind> {
+        match self {
+            Self::St(sessions) => sessions
+                .get_mut(consumer_locus)
+                .ok_or(Sys4DiagnosticKind::BackendIneligible)?
+                .qualify_observed_relation_shadow_occurrence(shadow, qualified_occurrence)
+                .map_err(|_| Sys4DiagnosticKind::M8ExecutionRejected),
+            Self::Ow1(_) => Err(Sys4DiagnosticKind::BackendIneligible),
+        }
+    }
+
+    fn relation_shadow(
+        &self,
+        consumer_locus: &str,
+        relation: &str,
+    ) -> Result<Option<M8ObservedRelationShadow>, Sys4DiagnosticKind> {
+        match self {
+            Self::St(sessions) => Ok(sessions
+                .get(consumer_locus)
+                .ok_or(Sys4DiagnosticKind::BackendIneligible)?
+                .observed_relation_shadow(relation, consumer_locus)),
+            Self::Ow1(_) => Err(Sys4DiagnosticKind::BackendIneligible),
+        }
+    }
+
+    fn project_relation_shadow(
+        &self,
+        consumer_locus: &str,
+        relation: &str,
+        context: M8PresentationContext,
+    ) -> Result<M8RelationProjection, Sys4DiagnosticKind> {
+        match self {
+            Self::St(sessions) => sessions
+                .get(consumer_locus)
+                .ok_or(Sys4DiagnosticKind::BackendIneligible)?
+                .project_observed_relation_shadow(relation, context)
+                .map_err(|_| Sys4DiagnosticKind::M8ExecutionRejected),
+            Self::Ow1(_) => Err(Sys4DiagnosticKind::BackendIneligible),
         }
     }
 
@@ -6119,6 +6416,10 @@ pub(crate) struct LocalFabric {
     // later whole-fabric cut without consulting a latest M8 trace row.
     evaluator_publication_bindings: EvaluatorPublicationBindingRegistry,
     cache: BTreeMap<String, CachedDelivery>,
+    relation_semantic_digests: BTreeMap<String, String>,
+    /// A sealed M9 fresh-reacquire binding may activate one time in this
+    /// finite profile.  The schedule never holds the binding itself.
+    used_fresh_relation_bindings: BTreeSet<String>,
     next_request: u64,
     patch_generation: u64,
     patch_lifecycle: Sys4PatchLifecycleLog,
@@ -6138,7 +6439,494 @@ impl std::fmt::Debug for LocalFabric {
     }
 }
 
+/// Exact endpoint evidence for one generated relation publication.  It keeps
+/// the SYS-4 transport stages and the M8-imported consumer shadow together so
+/// SYS-5 devtools do not reconstruct causality by joining unrelated logs.
+#[derive(Debug, Clone, PartialEq, Eq)]
+pub(crate) struct Sys4RelationEndpointReceipt {
+    request_id: String,
+    owner_publish_occurrence_id: String,
+    request_enqueue_occurrence_id: String,
+    transport: TransportStep,
+    consumer_observe_occurrence_id: String,
+    consumer_serve_occurrence_id: String,
+    edge: CommunicationEdge,
+    shadow: M8ObservedRelationShadow,
+}
+
+impl Sys4RelationEndpointReceipt {
+    pub(crate) fn request_id(&self) -> &str {
+        &self.request_id
+    }
+
+    pub(crate) fn owner_publish_occurrence_id(&self) -> &str {
+        &self.owner_publish_occurrence_id
+    }
+
+    /// The actual generated request occurrence at the source outbox.  The
+    /// request identity remains distinct so a devtools view can show the
+    /// causal publish -> request-enqueue edge without treating an identifier
+    /// as an occurrence.
+    pub(crate) fn request_enqueue_occurrence_id(&self) -> &str {
+        &self.request_enqueue_occurrence_id
+    }
+
+    pub(crate) fn transport(&self) -> &TransportStep {
+        &self.transport
+    }
+
+    pub(crate) fn consumer_observe_occurrence_id(&self) -> &str {
+        &self.consumer_observe_occurrence_id
+    }
+
+    pub(crate) fn consumer_serve_occurrence_id(&self) -> &str {
+        &self.consumer_serve_occurrence_id
+    }
+
+    pub(crate) fn edge(&self) -> &CommunicationEdge {
+        &self.edge
+    }
+
+    pub(crate) fn shadow(&self) -> &M8ObservedRelationShadow {
+        &self.shadow
+    }
+}
+
 impl LocalFabric {
+    /// Dispatch the current M8 owner relation state through the exact
+    /// projection-derived relation-publication endpoint.
+    pub(crate) fn publish_relation_current(
+        &mut self,
+        relation: &str,
+    ) -> Sys4Result<Sys4RelationEndpointReceipt> {
+        let edge = self.relation_publication_edge(relation)?;
+        self.ensure_relation_dispatch_identifier_capacity()?;
+        let authority = self.relation_publication_authority(&edge)?;
+        let _target_admission = self.relation_publication_target_admission(&edge)?;
+        let publication = self
+            .backend
+            .publish_relation(edge.source_locus(), relation, authority)
+            .map_err(Sys4DispatchDiagnostics::one)?;
+        let publication = self.qualify_owner_relation_publication(&edge, publication)?;
+        self.dispatch_relation_publication(edge, publication)
+    }
+
+    /// The only local invalidation route consumes a live M9 relation use and
+    /// mutates the owner M8 session before a new immutable publication is
+    /// created.  It cannot be invoked with caller-supplied authority.
+    pub(crate) fn invalidate_relation_primary(
+        &mut self,
+        relation: &str,
+    ) -> Sys4Result<Sys4RelationEndpointReceipt> {
+        let edge = self.relation_publication_edge(relation)?;
+        self.ensure_relation_dispatch_identifier_capacity()?;
+        let publish_authority = self.relation_publication_authority(&edge)?;
+        let _target_admission = self.relation_publication_target_admission(&edge)?;
+        let authority = self
+            .authority_generation
+            .relation_authority_use(relation, "invalidate_primary")
+            .ok_or_else(|| Sys4DispatchDiagnostics::one(Sys4DiagnosticKind::M8ExecutionRejected))?;
+        self.backend
+            .invalidate_relation(edge.source_locus(), relation, authority)
+            .map_err(Sys4DispatchDiagnostics::one)?;
+        let publication = self
+            .backend
+            .publish_relation(edge.source_locus(), relation, publish_authority)
+            .map_err(Sys4DispatchDiagnostics::one)?;
+        let publication = self.qualify_owner_relation_publication(&edge, publication)?;
+        self.dispatch_relation_publication(edge, publication)
+    }
+
+    /// Activate exactly one dormant M9-sealed fresh binding, then re-acquire
+    /// the owner relation's primary anchor and publish the new lineage.
+    pub(crate) fn fresh_reacquire_relation_primary(
+        &mut self,
+        relation: &str,
+    ) -> Sys4Result<Sys4RelationEndpointReceipt> {
+        if self.used_fresh_relation_bindings.contains(relation) {
+            return Err(Sys4DispatchDiagnostics::one(
+                Sys4DiagnosticKind::M8ExecutionRejected,
+            ));
+        }
+        let edge = self.relation_publication_edge(relation)?;
+        if !self
+            .backend
+            .relation_requires_fresh_reacquire(edge.source_locus(), relation)
+            .map_err(Sys4DispatchDiagnostics::one)?
+        {
+            return Err(Sys4DispatchDiagnostics::one(
+                Sys4DiagnosticKind::M8ExecutionRejected,
+            ));
+        }
+        self.ensure_relation_dispatch_identifier_capacity()?;
+        let publish_authority = self.relation_publication_authority(&edge)?;
+        let _target_admission = self.relation_publication_target_admission(&edge)?;
+        let binding = self
+            .authority_generation
+            .fresh_relation_reacquire_binding(relation)
+            .ok_or_else(|| Sys4DispatchDiagnostics::one(Sys4DiagnosticKind::M8ExecutionRejected))?;
+        let (authority, reacquire, lease) = binding.m8_activation_material();
+        self.backend
+            .install_fresh_relation_lease(edge.source_locus(), relation, lease)
+            .map_err(Sys4DispatchDiagnostics::one)?;
+        self.backend
+            .reacquire_relation(edge.source_locus(), relation, authority, reacquire)
+            .map_err(Sys4DispatchDiagnostics::one)?;
+        self.used_fresh_relation_bindings
+            .insert(relation.to_string());
+        let publication = self
+            .backend
+            .publish_relation(edge.source_locus(), relation, publish_authority)
+            .map_err(Sys4DispatchDiagnostics::one)?;
+        let publication = self.qualify_owner_relation_publication(&edge, publication)?;
+        self.dispatch_relation_publication(edge, publication)
+    }
+
+    pub(crate) fn relation_imported_shadow(
+        &self,
+        relation: &str,
+        consumer_locus: &str,
+    ) -> Sys4Result<Option<M8ObservedRelationShadow>> {
+        self.backend
+            .relation_shadow(consumer_locus, relation)
+            .map_err(Sys4DispatchDiagnostics::one)
+    }
+
+    /// Execute the M8 consumer-local presentation fallback against the
+    /// imported shadow only.  It adds no endpoint carrier and cannot mutate
+    /// owner semantic relation state.
+    pub(crate) fn project_relation_presentation_gap(
+        &self,
+        relation: &str,
+    ) -> Sys4Result<M8RelationProjection> {
+        let edge = self.relation_publication_edge(relation)?;
+        let shadow = self
+            .backend
+            .relation_shadow(edge.target_locus(), relation)
+            .map_err(Sys4DispatchDiagnostics::one)?
+            .ok_or_else(|| Sys4DispatchDiagnostics::one(Sys4DiagnosticKind::M8ExecutionRejected))?;
+        let subject = self.relation_projection_subject(relation)?;
+        let context = M8PresentationContext::for_consumer(edge.target_locus())
+            .with_frontier(shadow.semantic().activation_frontier())
+            .with_presentation_fallback(
+                M8PresentationFallback::hold_last_local(subject, M8Point::new(0, 0))
+                    .with_policy(M8RestrictionPolicy::Restricted),
+            );
+        self.backend
+            .project_relation_shadow(edge.target_locus(), relation, context)
+            .map_err(Sys4DispatchDiagnostics::one)
+    }
+
+    pub(crate) fn relation_semantic_digest(&self, relation: &str) -> Option<&str> {
+        self.relation_semantic_digests
+            .get(relation)
+            .map(String::as_str)
+    }
+
+    pub(crate) fn endpoint_carrier_count_for_relation(&self, relation: &str) -> usize {
+        self.program
+            .projection
+            .communication_plan()
+            .edges()
+            .iter()
+            .filter(|edge| {
+                edge.operation_id() == relation
+                    && edge.kind() == CommunicationEdgeKind::RelationProjectionPublication
+            })
+            .map(|edge| {
+                self.loci.get(edge.source_locus()).map_or(0, |runtime| {
+                    runtime
+                        .outgoing_endpoint
+                        .records
+                        .iter()
+                        .filter(|record| record.edge_ref == edge.edge_ref())
+                        .count()
+                })
+            })
+            .sum()
+    }
+
+    pub(crate) fn total_endpoint_carrier_count(&self) -> usize {
+        self.loci
+            .values()
+            .map(|runtime| {
+                runtime.outgoing_endpoint.carrier_history_len()
+                    + runtime.incoming_endpoint.carrier_history_len()
+            })
+            .sum()
+    }
+
+    fn relation_publication_edge(&self, relation: &str) -> Sys4Result<CommunicationEdge> {
+        let fragments = self.program.projection.sys4_artifact_fragments();
+        let fragment = fragments
+            .entries()
+            .iter()
+            .find(|fragment| {
+                fragment.operation_id() == relation
+                    && fragment.fragment_kind()
+                        == ProjectedOperationFragmentKind::RelationPublication
+            })
+            .ok_or_else(|| Sys4DispatchDiagnostics::one(Sys4DiagnosticKind::RouteUnavailable))?;
+        let core = fragment.relation_checked_core().ok_or_else(|| {
+            Sys4DispatchDiagnostics::one(Sys4DiagnosticKind::ProgramProjectionMismatch)
+        })?;
+        let consumer = core
+            .consumer_projection_locus()
+            .ok_or_else(|| Sys4DispatchDiagnostics::one(Sys4DiagnosticKind::RouteUnavailable))?;
+        self.edge_for(
+            relation,
+            CommunicationEdgeKind::RelationProjectionPublication,
+            core.owner_locus(),
+            consumer,
+        )
+    }
+
+    fn relation_projection_subject(&self, relation: &str) -> Sys4Result<String> {
+        let fragments = self.program.projection.sys4_artifact_fragments();
+        fragments
+            .entries()
+            .iter()
+            .find(|fragment| {
+                fragment.operation_id() == relation
+                    && fragment.fragment_kind()
+                        == ProjectedOperationFragmentKind::RelationPublication
+            })
+            .and_then(|fragment| fragment.relation_checked_core())
+            .map(|core| core.subject().to_string())
+            .ok_or_else(|| Sys4DispatchDiagnostics::one(Sys4DiagnosticKind::RouteUnavailable))
+    }
+
+    fn relation_publication_authority(
+        &self,
+        edge: &CommunicationEdge,
+    ) -> Sys4Result<M8RelationAuthorityUse> {
+        self.authority_generation
+            .relation_authority_use(edge.operation_id(), "publish_relation")
+            .ok_or_else(|| Sys4DispatchDiagnostics::one(Sys4DiagnosticKind::M8ExecutionRejected))
+    }
+
+    /// Check all identifiers used by one relation publication before an M8
+    /// owner invalidation/reacquire/publication can mutate semantic state.
+    /// The ST profile has no interleaving point inside this dispatch path, so
+    /// this finite reservation is exact without introducing a separate
+    /// mutable reservation carrier.
+    fn ensure_relation_dispatch_identifier_capacity(&self) -> Sys4Result<()> {
+        self.next_request
+            .checked_add(1)
+            .and(
+                self.next_endpoint_occurrence
+                    .checked_add(RELATION_DISPATCH_ENDPOINT_OCCURRENCES),
+            )
+            .ok_or_else(|| Sys4DispatchDiagnostics::one(Sys4DiagnosticKind::IdentifierExhausted))
+            .map(|_| ())
+    }
+
+    fn relation_publication_target_admission(
+        &self,
+        edge: &CommunicationEdge,
+    ) -> Sys4Result<M9RelationPublicationAdmission> {
+        self.authority_generation
+            .admit_relation_publication_target(
+                edge.operation_id(),
+                edge.source_locus(),
+                edge.target_locus(),
+            )
+            .ok_or_else(|| Sys4DispatchDiagnostics::one(Sys4DiagnosticKind::M8ExecutionRejected))
+    }
+
+    /// Turn the owner M8-local publication occurrence into the fabric's
+    /// qualified occurrence namespace before it becomes a generated request
+    /// predecessor.  The source occurrence is still M8-owned; SYS-4 only
+    /// associates it with the source-derived endpoint.
+    fn qualify_owner_relation_publication(
+        &mut self,
+        edge: &CommunicationEdge,
+        publication: M8PublishedRelationState,
+    ) -> Sys4Result<M8PublishedRelationState> {
+        let raw = publication.owner_publish_occurrence_id().ok_or_else(|| {
+            Sys4DispatchDiagnostics::one(Sys4DiagnosticKind::CarrierProvenanceMismatch)
+        })?;
+        self.refresh_m8_local_runtime_trace(edge.source_locus());
+        let qualified = self.fabric_qualified_m8_node_for_locus(edge.source_locus(), raw);
+        Ok(publication.with_owner_publish_occurrence_id(qualified))
+    }
+
+    fn dispatch_relation_publication(
+        &mut self,
+        edge: CommunicationEdge,
+        publication: M8PublishedRelationState,
+    ) -> Sys4Result<Sys4RelationEndpointReceipt> {
+        if publication.relation() != edge.operation_id()
+            || publication.owner_locus() != edge.source_locus()
+            || SourceRefView::new(publication.source_ref()) != edge.source_ref()
+            || publication.owner_publish_occurrence_id().is_none()
+        {
+            return Err(Sys4DispatchDiagnostics::one(
+                Sys4DiagnosticKind::CarrierProvenanceMismatch,
+            ));
+        }
+        let target_admission = self.relation_publication_target_admission(&edge)?;
+        let owner_publish_occurrence = publication
+            .owner_publish_occurrence_id()
+            .expect("publication was checked for an owner occurrence")
+            .to_string();
+        let request_id = self.next_relation_request_id()?;
+        let envelope = self.enqueue_outbox(
+            &edge,
+            &request_id,
+            MailboxPayload::RelationPublication {
+                publication: Box::new(publication),
+                target_admission,
+            },
+            None,
+            None,
+            None,
+            None,
+            None,
+            None,
+            None,
+            vec![owner_publish_occurrence.clone()],
+        )?;
+        let request_enqueue_occurrence_id = envelope.mailbox_enqueue_occurrence_id.clone();
+        let transport = match self.step_transport(
+            edge.source_locus(),
+            edge.target_locus(),
+            envelope.envelope_id(),
+        ) {
+            Ok(transport) => transport,
+            Err(mut diagnostics) => {
+                // The owner publication has not committed its sequence yet.
+                // Remove this undelivered attempt so a later retry can use
+                // the same immutable semantic publication rather than leave
+                // a duplicate stale carrier in the source mailbox.
+                let discarded = self.discard_undelivered_relation_publication(
+                    edge.source_locus(),
+                    envelope.envelope_id(),
+                );
+                diagnostics.context.relation_publication_failure_disposition = Some(if discarded {
+                    RelationPublicationFailureDisposition::DiscardedUndelivered
+                } else {
+                    RelationPublicationFailureDisposition::AlreadyRemovedByTransport
+                });
+                return Err(diagnostics);
+            }
+        };
+        let (received, locus_dequeue) = self.dequeue_locus(edge.target_locus())?;
+        let (publication, target_admission) = match &received.payload {
+            MailboxPayload::RelationPublication {
+                publication,
+                target_admission,
+            } => ((**publication).clone(), target_admission.clone()),
+            _ => {
+                return Err(self.quarantine(
+                    edge.target_locus(),
+                    &received,
+                    Sys4DiagnosticKind::CarrierProvenanceMismatch,
+                    &request_id,
+                ));
+            }
+        };
+        if received.edge_kind != CommunicationEdgeKind::RelationProjectionPublication
+            || received.edge_ref != edge.edge_ref()
+            || received.source_ref != edge.source_ref()
+            || received.core_ref != edge.core_ref().map(ToOwned::to_owned)
+            || received.source_fragment_ref != *edge.source_fragment_ref()
+            || received.target_fragment_ref != *edge.target_fragment_ref()
+        {
+            return Err(self.quarantine(
+                edge.target_locus(),
+                &received,
+                Sys4DiagnosticKind::CarrierProvenanceMismatch,
+                &request_id,
+            ));
+        }
+        if target_admission.relation() != edge.operation_id()
+            || target_admission.owner_locus() != edge.source_locus()
+            || target_admission.consumer_locus() != edge.target_locus()
+            || !self
+                .authority_generation
+                .revalidate_relation_publication_target(&target_admission)
+        {
+            return Err(self.quarantine(
+                edge.target_locus(),
+                &received,
+                Sys4DiagnosticKind::M8ExecutionRejected,
+                &request_id,
+            ));
+        }
+        let publication_for_commit = publication.clone();
+        let shadow = self
+            .backend
+            .import_relation_shadow(edge.target_locus(), publication)
+            .map_err(|kind| self.quarantine(edge.target_locus(), &received, kind, &request_id))?;
+        if shadow.relation() != edge.operation_id()
+            || shadow.owner_locus() != edge.source_locus()
+            || shadow.consumer_locus() != edge.target_locus()
+            || SourceRefView::new(shadow.source_ref()) != edge.source_ref()
+            || shadow.core_ref().is_empty()
+        {
+            return Err(self.quarantine(
+                edge.target_locus(),
+                &received,
+                Sys4DiagnosticKind::CarrierProvenanceMismatch,
+                &request_id,
+            ));
+        }
+        self.refresh_m8_local_runtime_trace(edge.target_locus());
+        let raw_observe = shadow
+            .consumer_observe_occurrence_id()
+            .ok_or_else(|| Sys4DispatchDiagnostics::one(Sys4DiagnosticKind::M8ExecutionRejected))?;
+        let observe = self.fabric_qualified_m8_node_for_locus(edge.target_locus(), raw_observe);
+        let shadow = self
+            .backend
+            .qualify_relation_shadow_observe_occurrence(edge.target_locus(), &shadow, &observe)
+            .map_err(Sys4DispatchDiagnostics::one)?;
+        self.backend
+            .commit_relation_publication(edge.source_locus(), &publication_for_commit)
+            .map_err(Sys4DispatchDiagnostics::one)?;
+        self.causality
+            .record(observe.clone(), vec![locus_dequeue.clone()]);
+        let serve = format!(
+            "sys5-relation-serve:{:020}:{:020}",
+            self.next_endpoint_occurrence()?,
+            shadow.publication_occurrence(),
+        );
+        self.causality.record(serve.clone(), vec![observe.clone()]);
+        self.relation_semantic_digests
+            .insert(edge.operation_id().to_string(), shadow.semantic_digest());
+        Ok(Sys4RelationEndpointReceipt {
+            request_id,
+            owner_publish_occurrence_id: owner_publish_occurrence,
+            request_enqueue_occurrence_id,
+            transport,
+            consumer_observe_occurrence_id: observe,
+            consumer_serve_occurrence_id: serve,
+            edge,
+            shadow,
+        })
+    }
+
+    /// An endpoint failure before target enqueue leaves no committed relation
+    /// publication.  The exact envelope is only an unaccepted attempt, so
+    /// it must not survive beside the retry of the same sequence.
+    fn discard_undelivered_relation_publication(
+        &mut self,
+        source_locus: &str,
+        envelope_id: &str,
+    ) -> bool {
+        let Some(runtime) = self.loci.get_mut(source_locus) else {
+            return false;
+        };
+        let Some(position) = runtime.outgoing_mailbox.pending.iter().position(|entry| {
+            entry.envelope_id == envelope_id
+                && matches!(entry.payload, MailboxPayload::RelationPublication { .. })
+        }) else {
+            return false;
+        };
+        let _ = runtime.outgoing_mailbox.pending.remove(position);
+        true
+    }
+
     pub(crate) fn bootstrap(
         program: FabricProgram,
         admission: SealedFabricAdmission,
@@ -6197,7 +6985,7 @@ impl LocalFabric {
             seed = seed.with_designated_input_receipts(M8InputReceiptSet::new());
             M8LocalRuntime::from_admitted(admission.instance.clone(), seed)
         };
-        let backend = match backend_profile {
+        let mut backend = match backend_profile {
             BackendProfile::St => M8ExecutionBackend::St(
                 program
                     .locus_names()
@@ -6231,6 +7019,20 @@ impl LocalFabric {
                 M8ExecutionBackend::Ow1(Ow1WorkerBackend::spawn(owner, runtime))
             }
         };
+        // The finite local relation fallback chain is constructed inside the
+        // owner M8 session from its admitted plan and M9-derived bootstrap
+        // lease.  No schedule or SYS-5 caller provides chain material.
+        for fragment in program.projection.sys4_artifact_fragments().entries() {
+            if fragment.fragment_kind() != ProjectedOperationFragmentKind::RelationPublication {
+                continue;
+            }
+            let relation = fragment
+                .relation_checked_core()
+                .expect("relation publication fragment retains checked Core");
+            backend
+                .install_relation_bootstrap(relation.owner_locus(), fragment.operation_id())
+                .map_err(Sys4DispatchDiagnostics::one)?;
+        }
         let local_store_read_audits = program
             .locus_names()
             .into_iter()
@@ -6273,6 +7075,8 @@ impl LocalFabric {
             consumption_state: DesignatedConsumptionState::default(),
             evaluator_publication_bindings: EvaluatorPublicationBindingRegistry::default(),
             cache: BTreeMap::new(),
+            relation_semantic_digests: BTreeMap::new(),
+            used_fresh_relation_bindings: BTreeSet::new(),
             next_request: 0,
             patch_generation: 0,
             patch_lifecycle: Sys4PatchLifecycleLog::default(),
@@ -6616,6 +7420,8 @@ impl LocalFabric {
             consumption_state: self.consumption_state.clone(),
             evaluator_publication_bindings: self.evaluator_publication_bindings.clone(),
             cache: self.cache.clone(),
+            relation_semantic_digests: self.relation_semantic_digests.clone(),
+            used_fresh_relation_bindings: self.used_fresh_relation_bindings.clone(),
             next_request: self.next_request,
             patch_generation: self.patch_generation,
             patch_lifecycle: self.patch_lifecycle.clone(),
@@ -6728,6 +7534,8 @@ impl LocalFabric {
             completed_receipts: self.completed_receipts.clone(),
             local_store_read_audits: self.local_store_read_audits.clone(),
             cache: self.cache.clone(),
+            relation_semantic_digests: self.relation_semantic_digests.clone(),
+            used_fresh_relation_bindings: self.used_fresh_relation_bindings.clone(),
             consumption_state: self.consumption_state.clone(),
             evaluator_publication_bindings: self.evaluator_publication_bindings.clone(),
             imported_designated_publication_state,
@@ -6792,6 +7600,8 @@ impl LocalFabric {
         fabric.completed_receipts = cut.completed_receipts.clone();
         fabric.local_store_read_audits = cut.local_store_read_audits.clone();
         fabric.cache = cut.cache.clone();
+        fabric.relation_semantic_digests = cut.relation_semantic_digests.clone();
+        fabric.used_fresh_relation_bindings = cut.used_fresh_relation_bindings.clone();
         fabric.consumption_state = cut.consumption_state.clone();
         fabric.evaluator_publication_bindings = cut.evaluator_publication_bindings.clone();
         fabric.m8_trace = cut.m8_trace.clone();
@@ -7676,10 +8486,20 @@ impl LocalFabric {
             .ok_or_else(|| Sys4DispatchDiagnostics::one(Sys4DiagnosticKind::RouteUnavailable))
     }
 
-    fn next_request_id(&mut self) -> String {
+    fn next_request_id(&mut self) -> Sys4Result<String> {
+        self.next_request_id_with_prefix("sys4-request-")
+    }
+
+    fn next_relation_request_id(&mut self) -> Sys4Result<String> {
+        self.next_request_id_with_prefix("sys5-relation-request:")
+    }
+
+    fn next_request_id_with_prefix(&mut self, prefix: &str) -> Sys4Result<String> {
         let next = self.next_request;
-        self.next_request += 1;
-        format!("sys4-request-{next:020}")
+        self.next_request = next
+            .checked_add(1)
+            .ok_or_else(|| Sys4DispatchDiagnostics::one(Sys4DiagnosticKind::IdentifierExhausted))?;
+        Ok(format!("{prefix}{next:020}"))
     }
 }
 
@@ -7702,6 +8522,41 @@ impl LocalFabric {
 
     pub(crate) fn m8_authority_state_digest(&self, locus: &str) -> String {
         format!("{}:{}", self.authority_generation.generation_ref(), locus)
+    }
+
+    #[cfg(test)]
+    pub(crate) fn for_test_set_relation_identifier_counters(
+        &mut self,
+        next_request: u64,
+        next_endpoint_occurrence: u64,
+    ) {
+        self.next_request = next_request;
+        self.next_endpoint_occurrence = next_endpoint_occurrence;
+    }
+
+    #[cfg(test)]
+    pub(crate) fn for_test_clear_route_fault(&mut self, edge_ref: &str) {
+        self.route_faults.remove(edge_ref);
+    }
+
+    #[cfg(test)]
+    pub(crate) fn for_test_remove_relation_publish_authority(&mut self, relation: &str) {
+        self.authority_generation
+            .for_test_remove_relation_authority_use(relation, "publish_relation");
+    }
+
+    #[cfg(test)]
+    pub(crate) fn for_test_pending_relation_publication_count(&self, locus: &str) -> usize {
+        self.loci.get(locus).map_or(0, |runtime| {
+            runtime
+                .outgoing_mailbox
+                .pending
+                .iter()
+                .filter(|envelope| {
+                    matches!(envelope.payload, MailboxPayload::RelationPublication { .. })
+                })
+                .count()
+        })
     }
 
     pub(crate) fn local_store_read_audit(&self, locus: &str) -> &LocalStoreReadAudit {
@@ -7761,10 +8616,17 @@ impl LocalFabric {
         }
     }
 
-    fn next_mailbox_token(&mut self, label: &str) -> String {
+    fn next_endpoint_occurrence(&mut self) -> Sys4Result<u64> {
         let next = self.next_endpoint_occurrence;
-        self.next_endpoint_occurrence = self.next_endpoint_occurrence.saturating_add(1);
-        format!("sys4-{label}-{next:020}")
+        self.next_endpoint_occurrence = next
+            .checked_add(1)
+            .ok_or_else(|| Sys4DispatchDiagnostics::one(Sys4DiagnosticKind::IdentifierExhausted))?;
+        Ok(next)
+    }
+
+    fn next_mailbox_token(&mut self, label: &str) -> Sys4Result<String> {
+        let next = self.next_endpoint_occurrence()?;
+        Ok(format!("sys4-{label}-{next:020}"))
     }
 
     #[allow(clippy::too_many_arguments)]
@@ -7782,10 +8644,10 @@ impl LocalFabric {
         immutable_delivery_digest: Option<String>,
         predecessors: Vec<String>,
     ) -> Sys4Result<MailboxEnvelope> {
-        let envelope_id = self.next_mailbox_token("envelope");
-        let carrier_id = self.next_mailbox_token("carrier");
-        let mailbox_record_id = self.next_mailbox_token("outbox-record");
-        let occurrence = self.next_mailbox_token("outbox-enqueue");
+        let envelope_id = self.next_mailbox_token("envelope")?;
+        let carrier_id = self.next_mailbox_token("carrier")?;
+        let mailbox_record_id = self.next_mailbox_token("outbox-record")?;
+        let occurrence = self.next_mailbox_token("outbox-enqueue")?;
         self.causality.record(occurrence.clone(), predecessors);
         let m8_publication_id = immutable_delivery_binding
             .as_ref()
@@ -7851,16 +8713,16 @@ impl LocalFabric {
         immutable_delivery_binding: Option<SealedDeliveryBinding>,
         immutable_delivery_digest: Option<String>,
     ) -> Sys4Result<MailboxEnvelope> {
-        let envelope_id = self.next_mailbox_token("envelope");
-        let carrier_id = self.next_mailbox_token("carrier");
+        let envelope_id = self.next_mailbox_token("envelope")?;
+        let carrier_id = self.next_mailbox_token("carrier")?;
         // A cache retry is consumer-local execution, but it still retains the
         // exact E→C delivery edge and sealed publication binding that it
         // revalidates. Record that local ingress as an endpoint pair so a
         // whole-fabric cut never contains an unaccounted pending inbox.
-        let source_record_id = self.next_mailbox_token("cache-retry-source-record");
-        let source_dispatch_occurrence = self.next_mailbox_token("cache-retry-source-dispatch");
-        let mailbox_record_id = self.next_mailbox_token("inbox-record");
-        let occurrence = self.next_mailbox_token("inbox-enqueue");
+        let source_record_id = self.next_mailbox_token("cache-retry-source-record")?;
+        let source_dispatch_occurrence = self.next_mailbox_token("cache-retry-source-dispatch")?;
+        let mailbox_record_id = self.next_mailbox_token("inbox-record")?;
+        let occurrence = self.next_mailbox_token("inbox-enqueue")?;
         self.causality
             .record(source_dispatch_occurrence.clone(), Vec::new());
         self.causality
@@ -7960,7 +8822,7 @@ impl LocalFabric {
         &mut self,
         action: SourceAction,
     ) -> Sys4Result<FabricSubmission> {
-        let request_id = self.next_request_id();
+        let request_id = self.next_request_id()?;
         let (edge, payload, owner_lineage, release_lineage, semantic_identity) = match &action.kind
         {
             SourceActionKind::OwnerOperation(_) => {
@@ -8312,7 +9174,7 @@ impl LocalFabric {
         mut envelope: MailboxEnvelope,
     ) -> Sys4Result<TransportStep> {
         let old_record_id = envelope.mailbox_record_id.clone();
-        let dequeue_occurrence = self.next_mailbox_token("outbox-dequeue");
+        let dequeue_occurrence = self.next_mailbox_token("outbox-dequeue")?;
         self.causality.record(
             dequeue_occurrence.clone(),
             vec![envelope.mailbox_enqueue_occurrence_id.clone()],
@@ -8324,8 +9186,8 @@ impl LocalFabric {
             .outgoing_mailbox
             .pending
             .remove(index);
-        let target_record_id = self.next_mailbox_token("inbox-record");
-        let enqueue_occurrence = self.next_mailbox_token("inbox-enqueue");
+        let target_record_id = self.next_mailbox_token("inbox-record")?;
+        let enqueue_occurrence = self.next_mailbox_token("inbox-enqueue")?;
         self.causality
             .record(enqueue_occurrence.clone(), vec![dequeue_occurrence.clone()]);
         envelope.mailbox_record_id = target_record_id.clone();
@@ -8451,7 +9313,7 @@ impl LocalFabric {
             .pending
             .pop_front()
             .ok_or_else(|| Sys4DispatchDiagnostics::one(Sys4DiagnosticKind::UnavailableEnvelope))?;
-        let occurrence = self.next_mailbox_token("locus-dequeue");
+        let occurrence = self.next_mailbox_token("locus-dequeue")?;
         self.causality.record(
             occurrence.clone(),
             vec![envelope.mailbox_enqueue_occurrence_id.clone()],
@@ -9977,7 +10839,7 @@ impl LocalFabric {
                         .ok_or_else(|| {
                             Sys4DispatchDiagnostics::one(Sys4DiagnosticKind::UnavailableEnvelope)
                         })?;
-                    let fault_id = self.next_request_id();
+                    let fault_id = self.next_request_id()?;
                     self.trace.append_fault(&fault_id, &edge_ref);
                     return Ok(FabricReceipt {
                         request_id: fault_id.clone(),
@@ -10063,7 +10925,7 @@ impl LocalFabric {
                         replacement_visibility_label: fault.replacement_visibility_label.clone(),
                     });
                 }
-                let fault_id = self.next_request_id();
+                let fault_id = self.next_request_id()?;
                 self.trace.append_fault(&fault_id, &fault.edge_ref);
                 Ok(FabricReceipt {
                     request_id: fault_id.clone(),
@@ -10190,5 +11052,245 @@ fn projection_delivery_binding(
         m8_publication_id: observed.m8_publication_id.clone(),
         logical_tick_id: observed.logical_tick_id.clone(),
         logical_tick_frontier: observed.logical_tick_frontier.clone(),
+    }
+}
+
+#[cfg(test)]
+mod relation_dispatch_p1_tests {
+    use super::*;
+
+    use crate::sys5_local_slice::{
+        Sys5LocalAdmissionRequest, Sys5LocalRuntimeProfile, Sys5RelationBootstrapPolicy,
+        Sys5SourceInput, build_project,
+    };
+
+    const RELATION_FIXTURE_PATH: &str = "tests/inline/sys4_relation_dispatch_p1.mir";
+    const RELATION_FIXTURE_SOURCE: &str = r#"
+module Mirrorea.Sys4.RelationDispatchP1
+
+locus WorldAuthority
+locus ParticipantA
+locus ParticipantB
+locus ViewerC
+principal self
+principal target
+type Player
+type Bird
+
+state avatar[id: Player] at WorldAuthority {
+  hp: Int
+  atk: Int
+}
+
+state participant_input[id: Player] at ParticipantA {
+  focus: Int
+}
+
+Role[self] at ParticipantA {
+  when attack(target: Player) fails (StaleMembership, MissingCapability, MissingWitness, RouteUnavailable) {
+    at WorldAuthority {
+      avatar[target].hp = avatar[target].hp - avatar[self].atk
+    }
+  }
+}
+
+relation bird_follow at ParticipantB {
+  subject bird: Bird
+  primary participant_a_shoulder epoch membership_epoch transform translate(0, 0)
+  fallback participant_b_shoulder epoch local_epoch transform identity
+  bind frontier bird_follow_frontier
+  publish relation
+  project at ViewerC local
+}
+
+designated evaluate WorldAuthority on tick world_tick publish result = participant_input[self].focus + 1
+designated consume WorldAuthority.result at ViewerC
+
+with auth MembershipAuth
+
+verify finite_refinement
+"#;
+
+    fn boot_relation_fabric() -> (FabricProgram, SealedFabricAdmission, LocalFabric) {
+        let project = build_project(Sys5SourceInput::inline(
+            RELATION_FIXTURE_PATH,
+            RELATION_FIXTURE_SOURCE,
+        ))
+        .expect("bounded relation fixture is checked before projection");
+        let request = Sys5LocalAdmissionRequest::source_declared(
+            "self",
+            "WorldAuthority",
+            "epoch:sys4-relation-p1-world",
+            "incarnation:self:WorldAuthority:epoch:sys4-relation-p1-world",
+            Sys5LocalRuntimeProfile::St,
+        )
+        .with_source_declared_membership(
+            "self",
+            "ParticipantA",
+            "epoch:sys4-relation-p1-a",
+            "incarnation:self:ParticipantA:epoch:sys4-relation-p1-a",
+        )
+        .with_source_declared_membership(
+            "self",
+            "ParticipantB",
+            "epoch:sys4-relation-p1-b",
+            "incarnation:self:ParticipantB:epoch:sys4-relation-p1-b",
+        )
+        .with_source_declared_membership(
+            "self",
+            "ViewerC",
+            "epoch:sys4-relation-p1-c",
+            "incarnation:self:ViewerC:epoch:sys4-relation-p1-c",
+        )
+        .with_relation_bootstrap_policy(Sys5RelationBootstrapPolicy::FreshAtAdmission)
+        .with_auth_discharge("MembershipAuth")
+        .with_optional_verification_discharge("finite_refinement");
+        let prepared = project
+            .prepare_finite_admission(request)
+            .expect("sealed M9 admission remains source-bound");
+        let (program, admission) = prepared.into_parts_for_sys4();
+        let fabric = LocalFabric::bootstrap(program.clone(), admission.clone(), BackendProfile::St)
+            .expect("ST relation fabric boots from its generated program");
+        (program, admission, fabric)
+    }
+
+    fn assert_diagnostic<T: std::fmt::Debug>(
+        result: Sys4Result<T>,
+        expected: Sys4DiagnosticKind,
+    ) -> Sys4DispatchDiagnostics {
+        let diagnostic = result.expect_err("operation must fail closed");
+        assert_eq!(diagnostic.primary().kind(), expected);
+        assert_eq!(diagnostic.partial_fabric(), None);
+        diagnostic
+    }
+
+    #[test]
+    fn relation_route_failure_discards_pending_carrier_and_recovers_same_publication_sequence() {
+        let (_program, _admission, mut fabric) = boot_relation_fabric();
+        let edge = fabric
+            .relation_publication_edge("bird_follow")
+            .expect("generated relation edge exists");
+        fabric.route_faults.insert(edge.edge_ref().to_string());
+
+        let diagnostic = assert_diagnostic(
+            fabric.publish_relation_current("bird_follow"),
+            Sys4DiagnosticKind::RouteUnavailable,
+        );
+        assert_eq!(
+            diagnostic.relation_publication_failure_disposition(),
+            Some(RelationPublicationFailureDisposition::DiscardedUndelivered),
+            "the failed uncommitted attempt is explicitly retry-safe"
+        );
+        assert_eq!(
+            fabric.for_test_pending_relation_publication_count("ParticipantB"),
+            0,
+            "a retry must not coexist with a stale pending carrier"
+        );
+
+        fabric.for_test_clear_route_fault(edge.edge_ref());
+        let recovered = fabric
+            .publish_relation_current("bird_follow")
+            .expect("clearing the route fault permits the immutable retry");
+        assert_eq!(recovered.shadow().publication_occurrence(), 0);
+        assert_eq!(
+            fabric.for_test_pending_relation_publication_count("ParticipantB"),
+            0,
+            "the recovered carrier is consumed rather than duplicated"
+        );
+    }
+
+    #[test]
+    fn relation_publish_authority_and_identifier_preflight_fail_before_semantic_or_endpoint_mutation()
+     {
+        let (_program, _admission, mut fabric) = boot_relation_fabric();
+        fabric.for_test_remove_relation_publish_authority("bird_follow");
+        assert_diagnostic(
+            fabric.publish_relation_current("bird_follow"),
+            Sys4DiagnosticKind::M8ExecutionRejected,
+        );
+        assert_eq!(fabric.endpoint_carrier_count_for_relation("bird_follow"), 0);
+        assert_eq!(
+            fabric.for_test_pending_relation_publication_count("ParticipantB"),
+            0
+        );
+
+        let (_program, _admission, mut fabric) = boot_relation_fabric();
+        fabric.for_test_set_relation_identifier_counters(u64::MAX, 0);
+        assert_diagnostic(
+            fabric.publish_relation_current("bird_follow"),
+            Sys4DiagnosticKind::IdentifierExhausted,
+        );
+        assert_eq!(fabric.endpoint_carrier_count_for_relation("bird_follow"), 0);
+        assert_eq!(
+            fabric.for_test_pending_relation_publication_count("ParticipantB"),
+            0
+        );
+
+        fabric.for_test_set_relation_identifier_counters(0, 0);
+        let recovered = fabric
+            .publish_relation_current("bird_follow")
+            .expect("preflight failure neither commits nor advances relation publication");
+        assert_eq!(recovered.shadow().publication_occurrence(), 0);
+        assert!(recovered.request_id().ends_with("00000000000000000000"));
+    }
+
+    #[test]
+    fn relation_cut_rederives_digest_and_preserves_qualified_observe_provenance() {
+        let (program, admission, mut fabric) = boot_relation_fabric();
+        fabric
+            .publish_relation_current("bird_follow")
+            .expect("relation publication crosses the generated endpoint");
+        fabric
+            .invalidate_relation_primary("bird_follow")
+            .expect("invalidation publishes the fallback before fresh reacquire");
+        let receipt = fabric
+            .fresh_reacquire_relation_primary("bird_follow")
+            .expect("fresh sealed binding republishes the primary relation");
+        let live_shadow = fabric
+            .relation_imported_shadow("bird_follow", "ViewerC")
+            .expect("consumer M8 session is available")
+            .expect("publication installs its consumer shadow");
+        assert_eq!(
+            live_shadow.consumer_observe_occurrence_id(),
+            Some(receipt.consumer_observe_occurrence_id()),
+            "the stored shadow, not merely the returned receipt clone, keeps the qualified observe"
+        );
+        assert!(
+            live_shadow
+                .consumer_observe_occurrence_id()
+                .expect("imported shadow has an observe occurrence")
+                .starts_with("sys4-m8:ViewerC:"),
+            "stored observe occurrence must use the fabric namespace: {live_shadow:?}"
+        );
+
+        let cut = fabric
+            .save_local_cut("relation-p1-provenance")
+            .expect("relation state is cut-compatible");
+        let restored = LocalFabric::restore_local_cut(
+            program.clone(),
+            admission.clone(),
+            BackendProfile::St,
+            &cut,
+        )
+        .expect("untampered relation cut restores");
+        let restored_shadow = restored
+            .relation_imported_shadow("bird_follow", "ViewerC")
+            .expect("restored consumer session is available")
+            .expect("restored cut retains consumer shadow");
+        assert_eq!(
+            restored_shadow.consumer_observe_occurrence_id(),
+            Some(receipt.consumer_observe_occurrence_id())
+        );
+        assert_eq!(
+            restored.relation_semantic_digest("bird_follow"),
+            Some(live_shadow.semantic_digest().as_str())
+        );
+
+        let mut tampered = cut;
+        tampered.for_test_set_relation_semantic_digest("bird_follow", "tampered-nonempty-digest");
+        assert_diagnostic(
+            LocalFabric::restore_local_cut(program, admission, BackendProfile::St, &tampered),
+            Sys4DiagnosticKind::ProgramProjectionMismatch,
+        );
     }
 }

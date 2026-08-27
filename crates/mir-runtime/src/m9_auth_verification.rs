@@ -38,7 +38,9 @@ use crate::m8_runtime_designated_value::M8DesignatedAuthorityUse;
 use crate::m8_runtime_observer::M8ObserverAuthorityGrant;
 use crate::m8_runtime_owner_queue::M8AuthorityUse;
 use crate::m8_runtime_patch::M8PatchAuthorityUse;
-use crate::m8_runtime_relation_projection::M8RelationAuthorityUse;
+use crate::m8_runtime_relation_projection::{
+    M8LeaseRecord, M8RelationAuthorityUse, M8RelationReacquire,
+};
 
 const M9_AUTH_CONTRACT_PREFIX: &str = "membership-authority/";
 const M9_VERIFY_CONTRACT: &str = "finite-refinement/MembershipAuth";
@@ -934,6 +936,7 @@ pub(crate) struct M9RuntimeExecutionSeam {
     owner_uses: BTreeMap<(String, String, String), M8AuthorityUse>,
     patch_uses: BTreeMap<(String, String, String), M8PatchAuthorityUse>,
     relation_uses: BTreeMap<(String, String), M8RelationAuthorityUse>,
+    fresh_relation_reacquire_bindings: BTreeMap<String, M9FreshRelationReacquireBinding>,
     designated_evaluation_uses: BTreeMap<(String, String), M8DesignatedAuthorityUse>,
     designated_consumption_uses: BTreeMap<(String, String), M8DesignatedAuthorityUse>,
     observer_authorities: BTreeMap<String, M8ObserverAuthorityGrant>,
@@ -965,6 +968,7 @@ pub(crate) struct M9AuthorityGeneration {
     authority_state: M8AuthorityState,
     owner_uses: BTreeMap<(String, String, String), M8AuthorityUse>,
     relation_uses: BTreeMap<(String, String), M8RelationAuthorityUse>,
+    fresh_relation_reacquire_bindings: BTreeMap<String, M9FreshRelationReacquireBinding>,
     designated_evaluation_uses: BTreeMap<(String, String), M8DesignatedAuthorityUse>,
     designated_consumption_uses: BTreeMap<(String, String), M8DesignatedAuthorityUse>,
     kernel_owner_lineages: BTreeMap<(String, String, String), M9KernelOwnerLineage>,
@@ -979,6 +983,119 @@ pub(crate) struct M9AuthorityGeneration {
     designated_consumer_validation_occurrences: BTreeMap<(String, String, String), usize>,
     owner_operation_validation_occurrences: BTreeMap<(String, String, String), usize>,
     source_release_validation_occurrences: BTreeMap<(String, String, String), usize>,
+}
+
+/// One dormant, finite local relation binding authenticated by the M9
+/// admission that sealed the corresponding `reacquire_primary` capability.
+/// It has no public constructor and cannot cross a transport boundary.  SYS-4
+/// may consume it once to install a fresh M8 lease and transition an owner
+/// relation back to its primary floor.
+#[derive(Clone, PartialEq, Eq)]
+pub(crate) struct M9FreshRelationReacquireBinding {
+    relation: String,
+    owner_locus: String,
+    primary_anchor: String,
+    fresh_anchor_epoch: String,
+    binding_epoch: String,
+    binding_frontier: String,
+    fresh_lease_ref: String,
+    authority: M8RelationAuthorityUse,
+}
+
+/// Typed, authority-neutral target-admission record for one generated
+/// relation publication.  It is made by the live M9 generation and is
+/// revalidated at the consumer endpoint; transport metadata cannot replace
+/// or create it.
+#[derive(Debug, Clone, PartialEq, Eq)]
+pub(crate) struct M9RelationPublicationAdmission {
+    generation: u64,
+    generation_ref: String,
+    relation: String,
+    owner_locus: String,
+    consumer_locus: String,
+}
+
+impl M9RelationPublicationAdmission {
+    pub(crate) fn relation(&self) -> &str {
+        &self.relation
+    }
+
+    pub(crate) fn owner_locus(&self) -> &str {
+        &self.owner_locus
+    }
+
+    pub(crate) fn consumer_locus(&self) -> &str {
+        &self.consumer_locus
+    }
+}
+
+impl std::fmt::Debug for M9FreshRelationReacquireBinding {
+    fn fmt(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        formatter
+            .debug_struct("M9FreshRelationReacquireBinding")
+            .field("relation", &self.relation)
+            .field("owner_locus", &self.owner_locus)
+            .field("status", &"sealed-dormant")
+            .finish()
+    }
+}
+
+impl M9FreshRelationReacquireBinding {
+    fn from_validated_local_fact(
+        fact: &M9FiniteFreshAtAdmissionLifecycleFact,
+        authority: M8RelationAuthorityUse,
+    ) -> Option<Self> {
+        let fresh_witness = authority.witness_ref()?;
+        if authority.capability_ref().is_none() || fresh_witness.is_empty() {
+            return None;
+        }
+        let fresh_anchor_epoch = format!("{}:fresh", fact.primary_epoch);
+        let binding_epoch = "binding_epoch:2".to_string();
+        let fresh_lease_ref = m9_opaque_ref(&format!(
+            "finite-local-fresh-reacquire:{}:{}:{}:{}:{}:{}",
+            fact.relation,
+            fact.owner_locus,
+            fact.membership_epoch,
+            fact.membership_incarnation,
+            binding_epoch,
+            fresh_anchor_epoch,
+        ));
+        Some(Self {
+            relation: fact.relation.clone(),
+            owner_locus: fact.owner_locus.clone(),
+            primary_anchor: fact.primary_anchor.clone(),
+            fresh_anchor_epoch,
+            binding_epoch,
+            binding_frontier: fact.binding_frontier.clone(),
+            fresh_lease_ref,
+            authority,
+        })
+    }
+
+    /// Return M8 activation material only inside the sealed SYS-4 bridge.
+    /// The wrapper/schedule never receives the lease, witness, capability, or
+    /// binding epoch separately.
+    pub(crate) fn m8_activation_material(
+        &self,
+    ) -> (M8RelationAuthorityUse, M8RelationReacquire, M8LeaseRecord) {
+        let reacquire = M8RelationReacquire::new(&self.primary_anchor)
+            .with_anchor_epoch(&self.fresh_anchor_epoch)
+            .with_binding_epoch(&self.binding_epoch)
+            .with_fresh_witness(
+                self.authority
+                    .witness_ref()
+                    .expect("validated M9 fresh binding retains witness"),
+            )
+            .with_fresh_lease_ref(&self.fresh_lease_ref)
+            .with_frontier(&self.binding_frontier);
+        let lease = M8LeaseRecord::live(&self.fresh_lease_ref)
+            .for_relation(&self.relation)
+            .with_owner_locus(&self.owner_locus)
+            .with_binding_frontier(&self.binding_frontier)
+            .with_epoch(&self.binding_epoch)
+            .with_anchor_epoch(&self.fresh_anchor_epoch);
+        (self.authority.clone(), reacquire, lease)
+    }
 }
 
 /// Exact M9-owned observation state captured immediately before a successor
@@ -1935,6 +2052,43 @@ impl M9RuntimeExecutionSeam {
     /// gets only this opaque view and its translated M8 inventory.
     pub(crate) fn initial_authority_generation(&self) -> M9AuthorityGeneration {
         self.authority_generation.clone()
+    }
+
+    /// Attach bounded fresh-reacquire carriers only while the finite-local M9
+    /// admission still owns the validated lifecycle facts.  The resulting
+    /// carrier is sealed into both the initial generation and its successor
+    /// publisher; neither SYS-4 nor SYS-5 constructs it from strings.
+    fn install_finite_local_fresh_relation_reacquire_bindings(
+        &mut self,
+        facts: &BTreeMap<String, M9FiniteFreshAtAdmissionLifecycleFact>,
+    ) -> Result<(), M9AdmissionDiagnostics> {
+        let mut bindings = BTreeMap::new();
+        for (relation, fact) in facts {
+            let authority = self
+                .relation_uses
+                .get(&(relation.clone(), "reacquire_primary".to_string()))
+                .cloned()
+                .ok_or_else(|| {
+                    M9AdmissionDiagnostics::one(M9AdmissionErrorKind::InvalidCapabilityLineage)
+                })?;
+            let binding =
+                M9FreshRelationReacquireBinding::from_validated_local_fact(fact, authority)
+                    .ok_or_else(|| {
+                        M9AdmissionDiagnostics::one(M9AdmissionErrorKind::InvalidCapabilityLineage)
+                    })?;
+            if bindings.insert(relation.clone(), binding).is_some() {
+                return Err(M9AdmissionDiagnostics::one(
+                    M9AdmissionErrorKind::InvalidCapabilityLineage,
+                ));
+            }
+        }
+        self.fresh_relation_reacquire_bindings = bindings.clone();
+        self.authority_generation.fresh_relation_reacquire_bindings = bindings.clone();
+        let publisher = self.authority_successor.as_mut().ok_or_else(|| {
+            M9AdmissionDiagnostics::one(M9AdmissionErrorKind::InvalidCapabilityLineage)
+        })?;
+        publisher.current.fresh_relation_reacquire_bindings = bindings;
+        Ok(())
     }
 
     pub(crate) const fn has_complete_final_residual_discharge(&self) -> bool {
@@ -3143,6 +3297,7 @@ impl M9AuthorityGeneration {
             authority_state: M8AuthorityState::new(),
             owner_uses: BTreeMap::new(),
             relation_uses: BTreeMap::new(),
+            fresh_relation_reacquire_bindings: BTreeMap::new(),
             designated_evaluation_uses: BTreeMap::new(),
             designated_consumption_uses: BTreeMap::new(),
             kernel_owner_lineages: BTreeMap::new(),
@@ -3200,6 +3355,7 @@ impl M9AuthorityGeneration {
             && self.authority_state == other.authority_state
             && self.owner_uses == other.owner_uses
             && self.relation_uses == other.relation_uses
+            && self.fresh_relation_reacquire_bindings == other.fresh_relation_reacquire_bindings
             && self.designated_evaluation_uses == other.designated_evaluation_uses
             && self.designated_consumption_uses == other.designated_consumption_uses
             && self.kernel_owner_lineages == other.kernel_owner_lineages
@@ -3305,6 +3461,7 @@ impl M9AuthorityGeneration {
             && self.generation_ref == other.generation_ref
             && self.authority_state == other.authority_state
             && self.relation_uses == other.relation_uses
+            && self.fresh_relation_reacquire_bindings == other.fresh_relation_reacquire_bindings
             && self.preserves_tombstones_from(other)
             && other.preserves_tombstones_from(self)
     }
@@ -3603,6 +3760,7 @@ impl M9AuthorityGeneration {
         self.designated_evaluation_uses = previous.designated_evaluation_uses.clone();
         self.designated_consumption_uses = previous.designated_consumption_uses.clone();
         self.relation_uses = previous.relation_uses.clone();
+        self.fresh_relation_reacquire_bindings = previous.fresh_relation_reacquire_bindings.clone();
         self.revoked_designated_consumption_capabilities =
             previous.revoked_designated_consumption_capabilities.clone();
         self.kernel_designated_remote_input_lineages =
@@ -3693,6 +3851,74 @@ impl M9AuthorityGeneration {
             .cloned()
     }
 
+    /// Test-only missing/stale-authority seam.  Production callers cannot
+    /// mutate this sealed inventory; the relation runtime uses it to prove
+    /// a missing publish use fails before M8 or endpoint mutation.
+    #[cfg(test)]
+    #[allow(dead_code)]
+    pub(crate) fn for_test_remove_relation_authority_use(
+        &mut self,
+        relation: &str,
+        transition: &str,
+    ) {
+        self.relation_uses
+            .remove(&(relation.to_string(), transition.to_string()));
+    }
+
+    pub(crate) fn fresh_relation_reacquire_binding(
+        &self,
+        relation: &str,
+    ) -> Option<M9FreshRelationReacquireBinding> {
+        self.fresh_relation_reacquire_bindings
+            .get(relation)
+            .cloned()
+    }
+
+    /// Issue a target-side admission record from the current M9 generation.
+    /// The record is not authority: it only permits the target M8 session to
+    /// consider a source-derived publication whose owner publish use remains
+    /// live in this exact generation.
+    pub(crate) fn admit_relation_publication_target(
+        &self,
+        relation: &str,
+        owner_locus: &str,
+        consumer_locus: &str,
+    ) -> Option<M9RelationPublicationAdmission> {
+        let publish = self.relation_authority_use(relation, "publish_relation")?;
+        publish
+            .validates_admitted_relation_use(
+                &self.authority_state,
+                relation,
+                owner_locus,
+                "publish_relation",
+            )
+            .then(|| M9RelationPublicationAdmission {
+                generation: self.generation,
+                generation_ref: self.generation_ref.clone(),
+                relation: relation.to_string(),
+                owner_locus: owner_locus.to_string(),
+                consumer_locus: consumer_locus.to_string(),
+            })
+    }
+
+    /// Recheck an in-flight target-admission record at the consumer endpoint.
+    /// A changed or revoked generation rejects before the consumer M8 shadow
+    /// import; no endpoint can turn its route metadata into authority.
+    pub(crate) fn revalidate_relation_publication_target(
+        &self,
+        admission: &M9RelationPublicationAdmission,
+    ) -> bool {
+        admission.generation == self.generation
+            && admission.generation_ref == self.generation_ref
+            && self
+                .admit_relation_publication_target(
+                    admission.relation(),
+                    admission.owner_locus(),
+                    admission.consumer_locus(),
+                )
+                .is_some_and(|fresh| fresh == *admission)
+    }
+
     pub(crate) fn designated_consumption_authority_use(
         &self,
         consumer: &str,
@@ -3731,6 +3957,7 @@ impl M9AuthorityGeneration {
         self.owner_uses = previous.owner_uses.clone();
         self.kernel_owner_lineages = previous.kernel_owner_lineages.clone();
         self.relation_uses = previous.relation_uses.clone();
+        self.fresh_relation_reacquire_bindings = previous.fresh_relation_reacquire_bindings.clone();
         self.designated_evaluation_uses = previous.designated_evaluation_uses.clone();
         self.designated_consumption_uses = previous.designated_consumption_uses.clone();
         self.designated_consumption_uses
@@ -3782,6 +4009,7 @@ impl M9AuthorityGeneration {
         self.owner_uses = previous.owner_uses.clone();
         self.kernel_owner_lineages = previous.kernel_owner_lineages.clone();
         self.relation_uses = previous.relation_uses.clone();
+        self.fresh_relation_reacquire_bindings = previous.fresh_relation_reacquire_bindings.clone();
         self.designated_evaluation_uses = previous.designated_evaluation_uses.clone();
         self.designated_consumption_uses = previous.designated_consumption_uses.clone();
         self.revoked_owner_capabilities = previous.revoked_owner_capabilities.clone();
@@ -4338,7 +4566,11 @@ impl M9RuntimeExecutionSeam {
                     })?;
                 let membership =
                     finite_local_required_membership(&memberships, &anchor.principal, owner_locus)?;
-                for transition in ["invalidate_primary", "reacquire_primary"] {
+                for transition in [
+                    "publish_relation",
+                    "invalidate_primary",
+                    "reacquire_primary",
+                ] {
                     let _ = finite_local_capability_and_witness(
                         &mut authority,
                         &membership,
@@ -4457,17 +4689,20 @@ impl M9RuntimeExecutionSeam {
                 M9AdmissionErrorKind::MissingVerifyDischarge,
             ));
         }
-        m9.admit_runtime(
-            base,
-            authority,
-            M9FinalAdmissionEvidence::from_lineage(
-                &primary_membership,
-                &contract_capability,
-                &contract_witness,
-                discharge,
-            ),
-        )
-        .map(M9RuntimeAdmitted::into_m10_execution_seam)
+        let mut seam = m9
+            .admit_runtime(
+                base,
+                authority,
+                M9FinalAdmissionEvidence::from_lineage(
+                    &primary_membership,
+                    &contract_capability,
+                    &contract_witness,
+                    discharge,
+                ),
+            )
+            .map(M9RuntimeAdmitted::into_m10_execution_seam)?;
+        seam.install_finite_local_fresh_relation_reacquire_bindings(&relation_lifecycle_facts)?;
+        Ok(seam)
     }
 }
 
@@ -4516,6 +4751,8 @@ fn finite_local_required_membership(
 struct M9FiniteFreshAtAdmissionLifecycleFact {
     relation: String,
     owner_locus: String,
+    primary_anchor: String,
+    primary_epoch: String,
     membership_epoch: String,
     membership_incarnation: String,
     binding_frontier: String,
@@ -4569,6 +4806,8 @@ fn finite_local_fresh_at_admission_lifecycle_facts(
         let fact = M9FiniteFreshAtAdmissionLifecycleFact {
             relation: evaluation.name().to_string(),
             owner_locus: relation.owner_locus().to_string(),
+            primary_anchor: relation.primary().anchor().to_string(),
+            primary_epoch: relation.primary().epoch().to_string(),
             membership_epoch: membership.epoch.clone(),
             membership_incarnation: membership.incarnation.clone(),
             binding_frontier: binding_frontier.as_str().to_string(),
@@ -5072,6 +5311,7 @@ impl M9RuntimeAdmitted {
                     // semantic clock, so translate the admitted transition
                     // into the exact M8 epoch that it is allowed to serve.
                     let execution_binding_epoch = match transition.as_str() {
+                        "publish_relation" => "binding_epoch:1".to_string(),
                         "invalidate_primary" => "binding_epoch:1".to_string(),
                         "reacquire_primary" => "binding_epoch:2".to_string(),
                         other => format!("m9-transition:{other}:{}", capability.reference),
@@ -5263,6 +5503,7 @@ impl M9RuntimeAdmitted {
             authority_state: authority_state.clone(),
             owner_uses: owner_uses.clone(),
             relation_uses: relation_uses.clone(),
+            fresh_relation_reacquire_bindings: BTreeMap::new(),
             designated_evaluation_uses: designated_evaluation_uses.clone(),
             designated_consumption_uses: designated_consumption_uses.clone(),
             kernel_owner_lineages: kernel_owner_lineages.clone(),
@@ -5298,6 +5539,7 @@ impl M9RuntimeAdmitted {
             owner_uses,
             patch_uses,
             relation_uses,
+            fresh_relation_reacquire_bindings: BTreeMap::new(),
             designated_evaluation_uses,
             designated_consumption_uses,
             observer_authorities,
@@ -6862,6 +7104,7 @@ impl M9AuthorityRuntime {
                 continue;
             }
             let binding_epoch = match transition.as_str() {
+                "publish_relation" => "binding_epoch:1".to_string(),
                 "invalidate_primary" => "binding_epoch:1".to_string(),
                 "reacquire_primary" => "binding_epoch:2".to_string(),
                 other => format!("m9-transition:{other}:{}", capability.ref_id()),

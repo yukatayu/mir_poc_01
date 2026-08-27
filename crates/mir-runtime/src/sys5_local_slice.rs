@@ -33,8 +33,9 @@ use crate::{
         GlobalProjectionResult, ProjectedOperationFragmentKind, project_checked_core,
     },
     sys4_dispatch::{
-        FabricProgram, ObserverSafeM9SemanticRowSets, ObserverSafeM9Summary, SealedFabricAdmission,
-        Sys4InitialStateSeed,
+        FabricProgram, LocalFabric, ObserverSafeM9SemanticRowSets, ObserverSafeM9Summary,
+        RelationPublicationFailureDisposition, SealedFabricAdmission, Sys4DispatchDiagnostics,
+        Sys4InitialStateSeed, Sys4RelationEndpointReceipt,
     },
 };
 
@@ -44,6 +45,7 @@ const OBSERVER_SAFETY: &str = "observer-safe-no-raw-authority-capability-witness
 const CHECKED_PROGRAM_REF_DOMAIN: &[u8] = b"mirrorea/sys5/checked-program-ref/v1\0";
 const SEALED_INVENTORY_REF_DOMAIN: &[u8] = b"mirrorea/sys5/sealed-inventory-ref/v1\0";
 const DEBUG_PATH_REF_DOMAIN: &[u8] = b"mirrorea/sys5/debug-logical-path-ref/v1\0";
+const RELATION_OBSERVER_REF_DOMAIN: &[u8] = b"mirrorea/sys5/relation-observer-ref/v1\0";
 
 /// Ordinary source supplied directly to the provisional build/project facade.
 #[derive(Clone, PartialEq, Eq)]
@@ -677,6 +679,561 @@ impl Sys5PreparedAdmission {
     #[cfg_attr(not(test), allow(dead_code))]
     pub(crate) fn into_parts_for_sys4(self) -> (FabricProgram, SealedFabricAdmission) {
         (self.program, self.admission)
+    }
+
+    /// Start the ST-only local relation runtime from this exact sealed
+    /// admission.  This consumes the retained projection and M9/SYS-4
+    /// boundary; it cannot reparse source or accept an alternate route.
+    pub fn start_relation_dispatch_runtime(
+        self,
+    ) -> Result<Sys5RelationDispatchRuntime, Sys5RelationDispatchError> {
+        if self.summary.runtime_profile() != Sys5LocalRuntimeProfile::St {
+            return Err(Sys5RelationDispatchError::new(
+                Sys5RelationDispatchDiagnosticKind::BackendIneligible,
+            ));
+        }
+        let relation_ids = self
+            .inventory
+            .relation_lifecycle
+            .iter()
+            .map(|row| row.relation.clone())
+            .collect::<BTreeSet<_>>();
+        let checked_program_identity_ref = self.summary.checked_program_identity_ref().to_string();
+        let fabric = LocalFabric::bootstrap(self.program, self.admission, BackendProfile::St)
+            .map_err(|_| {
+                Sys5RelationDispatchError::new(
+                    Sys5RelationDispatchDiagnosticKind::FabricBootRejected,
+                )
+            })?;
+        Ok(Sys5RelationDispatchRuntime {
+            fabric,
+            relation_ids,
+            checked_program_identity_ref,
+        })
+    }
+}
+
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+pub enum Sys5RelationDispatchEventKind {
+    PublishCurrent,
+    InvalidatePrimary,
+    ViewerPresentationGap,
+    FreshReacquire,
+}
+
+/// A bounded schedule action for an already source-derived relation.
+#[derive(Debug, Clone, PartialEq, Eq)]
+pub struct Sys5RelationAction {
+    relation: String,
+    event_kind: Sys5RelationDispatchEventKind,
+}
+
+impl Sys5RelationAction {
+    pub fn publish_current(relation: impl Into<String>) -> Self {
+        Self {
+            relation: relation.into(),
+            event_kind: Sys5RelationDispatchEventKind::PublishCurrent,
+        }
+    }
+
+    pub fn invalidate_primary(relation: impl Into<String>) -> Self {
+        Self {
+            relation: relation.into(),
+            event_kind: Sys5RelationDispatchEventKind::InvalidatePrimary,
+        }
+    }
+
+    pub fn viewer_presentation_gap(relation: impl Into<String>) -> Self {
+        Self {
+            relation: relation.into(),
+            event_kind: Sys5RelationDispatchEventKind::ViewerPresentationGap,
+        }
+    }
+
+    pub fn fresh_reacquire(relation: impl Into<String>) -> Self {
+        Self {
+            relation: relation.into(),
+            event_kind: Sys5RelationDispatchEventKind::FreshReacquire,
+        }
+    }
+}
+
+/// Active ST fabric state for the bounded SYS-5 maintained-relation path.
+pub struct Sys5RelationDispatchRuntime {
+    fabric: LocalFabric,
+    relation_ids: BTreeSet<String>,
+    checked_program_identity_ref: String,
+}
+
+impl fmt::Debug for Sys5RelationDispatchRuntime {
+    fn fmt(&self, formatter: &mut fmt::Formatter<'_>) -> fmt::Result {
+        formatter
+            .debug_struct("Sys5RelationDispatchRuntime")
+            .field("relation_count", &self.relation_ids.len())
+            .field("status", &"source-derived-st-local")
+            .finish()
+    }
+}
+
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+pub enum Sys5RelationDispatchDiagnosticKind {
+    UnknownSourceRelation,
+    BackendIneligible,
+    FabricBootRejected,
+    RelationTransitionRejected,
+}
+
+/// Observer-safe status for a generated relation-publication attempt that
+/// failed before owner publication sequence commit.  It records whether the
+/// exact pending carrier was discarded for a retry; it is never authority or
+/// a transport-derived semantic fact.
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+pub enum Sys5RelationPublicationFailureDisposition {
+    DiscardedUndelivered,
+    AlreadyRemovedByTransport,
+}
+
+impl From<RelationPublicationFailureDisposition> for Sys5RelationPublicationFailureDisposition {
+    fn from(value: RelationPublicationFailureDisposition) -> Self {
+        match value {
+            RelationPublicationFailureDisposition::DiscardedUndelivered => {
+                Self::DiscardedUndelivered
+            }
+            RelationPublicationFailureDisposition::AlreadyRemovedByTransport => {
+                Self::AlreadyRemovedByTransport
+            }
+        }
+    }
+}
+
+#[derive(Debug, Clone, PartialEq, Eq)]
+pub struct Sys5RelationDispatchError {
+    kind: Sys5RelationDispatchDiagnosticKind,
+    publication_failure_disposition: Option<Sys5RelationPublicationFailureDisposition>,
+}
+
+impl Sys5RelationDispatchError {
+    fn new(kind: Sys5RelationDispatchDiagnosticKind) -> Self {
+        Self {
+            kind,
+            publication_failure_disposition: None,
+        }
+    }
+
+    fn from_sys4(diagnostics: Sys4DispatchDiagnostics) -> Self {
+        Self {
+            kind: Sys5RelationDispatchDiagnosticKind::RelationTransitionRejected,
+            publication_failure_disposition: diagnostics
+                .relation_publication_failure_disposition()
+                .map(Into::into),
+        }
+    }
+
+    pub const fn kind(&self) -> Sys5RelationDispatchDiagnosticKind {
+        self.kind
+    }
+
+    pub const fn rejected_before_generated_endpoint(&self) -> bool {
+        matches!(
+            self.kind,
+            Sys5RelationDispatchDiagnosticKind::UnknownSourceRelation
+        )
+    }
+
+    pub const fn rejected_before_m9_authority_use(&self) -> bool {
+        matches!(
+            self.kind,
+            Sys5RelationDispatchDiagnosticKind::UnknownSourceRelation
+        )
+    }
+
+    pub const fn rejected_before_m8_relation_transition(&self) -> bool {
+        matches!(
+            self.kind,
+            Sys5RelationDispatchDiagnosticKind::UnknownSourceRelation
+        )
+    }
+
+    pub const fn partial_relation_receipt(&self) -> Option<()> {
+        None
+    }
+
+    /// A typed, observer-safe terminal status for an uncommitted relation
+    /// publication.  The absence of this status means either no endpoint was
+    /// attempted or a different relation validation failed.
+    pub const fn publication_failure_disposition(
+        &self,
+    ) -> Option<Sys5RelationPublicationFailureDisposition> {
+        self.publication_failure_disposition
+    }
+}
+
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+pub enum Sys5RelationProjectionKind {
+    SemanticImportedShadow,
+    PresentationFallback,
+}
+
+#[derive(Debug, Clone, PartialEq, Eq)]
+pub struct Sys5RelationEndpointChain {
+    edge_kind: CommunicationEdgeKind,
+    source_locus: String,
+    target_locus: String,
+    source_ref: String,
+    owner_publish_occurrence_id: String,
+    request_occurrence_id: String,
+    request_enqueue_occurrence_id: String,
+    dispatch_occurrence_id: String,
+    receive_occurrence_id: String,
+    consumer_observe_occurrence_id: String,
+    serve_occurrence_id: String,
+    edge_ref: String,
+    source_fragment_ref: String,
+    target_fragment_ref: String,
+    core_ref: Option<String>,
+}
+
+impl Sys5RelationEndpointChain {
+    #[cfg_attr(not(test), allow(dead_code))]
+    pub(crate) const fn edge_kind(&self) -> CommunicationEdgeKind {
+        self.edge_kind
+    }
+    pub fn source_locus(&self) -> &str {
+        &self.source_locus
+    }
+    pub fn target_locus(&self) -> &str {
+        &self.target_locus
+    }
+    pub fn source_ref(&self) -> &str {
+        &self.source_ref
+    }
+    pub fn owner_publish_occurrence_id(&self) -> &str {
+        &self.owner_publish_occurrence_id
+    }
+    pub fn request_occurrence_id(&self) -> &str {
+        &self.request_occurrence_id
+    }
+
+    /// Actual source outbox occurrence for the generated request.  This is
+    /// distinct from `request_occurrence_id`, which is the source-derived
+    /// request identity shown to the external schedule.
+    pub fn request_enqueue_occurrence_id(&self) -> &str {
+        &self.request_enqueue_occurrence_id
+    }
+    pub fn dispatch_occurrence_id(&self) -> &str {
+        &self.dispatch_occurrence_id
+    }
+    pub fn receive_occurrence_id(&self) -> &str {
+        &self.receive_occurrence_id
+    }
+    pub fn consumer_observe_occurrence_id(&self) -> &str {
+        &self.consumer_observe_occurrence_id
+    }
+    pub fn serve_occurrence_id(&self) -> &str {
+        &self.serve_occurrence_id
+    }
+    pub fn edge_ref(&self) -> &str {
+        &self.edge_ref
+    }
+    pub fn source_fragment_ref(&self) -> &str {
+        &self.source_fragment_ref
+    }
+    pub fn target_fragment_ref(&self) -> &str {
+        &self.target_fragment_ref
+    }
+    pub fn core_ref(&self) -> Option<&str> {
+        self.core_ref.as_deref()
+    }
+}
+
+#[derive(Debug, Clone, PartialEq, Eq)]
+pub struct Sys5RelationObserverShadow {
+    relation: String,
+    owner_locus: String,
+    consumer_locus: String,
+    selected_anchor: String,
+    selected_floor: String,
+    lineage_ref: String,
+    semantic_digest: String,
+    semantic_epoch: String,
+}
+
+impl Sys5RelationObserverShadow {
+    pub fn relation(&self) -> &str {
+        &self.relation
+    }
+
+    pub fn owner_locus(&self) -> &str {
+        &self.owner_locus
+    }
+    pub fn consumer_locus(&self) -> &str {
+        &self.consumer_locus
+    }
+    pub fn selected_anchor(&self) -> &str {
+        &self.selected_anchor
+    }
+    pub fn selected_floor(&self) -> &str {
+        &self.selected_floor
+    }
+    pub fn lineage_ref(&self) -> &str {
+        &self.lineage_ref
+    }
+    pub fn semantic_digest(&self) -> &str {
+        &self.semantic_digest
+    }
+    pub fn semantic_epoch(&self) -> &str {
+        &self.semantic_epoch
+    }
+    pub const fn capability_and_witness_are_redacted(&self) -> bool {
+        true
+    }
+}
+
+#[derive(Debug, Clone, PartialEq, Eq)]
+pub struct Sys5RelationDispatchReceipt {
+    event_kind: Sys5RelationDispatchEventKind,
+    endpoint_chain: Option<Sys5RelationEndpointChain>,
+    shadow: Sys5RelationObserverShadow,
+    viewer_projection_kind: Sys5RelationProjectionKind,
+    checked_program_identity_ref: String,
+    observer_safe_report: String,
+}
+
+impl Sys5RelationDispatchReceipt {
+    pub const fn event_kind(&self) -> Sys5RelationDispatchEventKind {
+        self.event_kind
+    }
+
+    pub fn single_endpoint_chain(&self) -> &Sys5RelationEndpointChain {
+        self.endpoint_chain
+            .as_ref()
+            .expect("only generated relation dispatches have an endpoint chain")
+    }
+
+    pub fn observer_shadow(
+        &self,
+        consumer_locus: &str,
+        relation: &str,
+    ) -> Option<&Sys5RelationObserverShadow> {
+        (self.shadow.consumer_locus == consumer_locus && self.shadow.relation == relation)
+            .then_some(&self.shadow)
+    }
+
+    pub const fn viewer_projection_kind(&self) -> Sys5RelationProjectionKind {
+        self.viewer_projection_kind
+    }
+
+    pub fn checked_program_identity_ref(&self) -> &str {
+        &self.checked_program_identity_ref
+    }
+
+    pub fn observer_safe_report(&self) -> &str {
+        &self.observer_safe_report
+    }
+
+    fn compose_observer_safe_report(&self) -> String {
+        let mut rows = vec![
+            format!("checked-program-ref:{}", self.checked_program_identity_ref),
+            format!("relation-owner:{}", self.shadow.owner_locus),
+            format!("relation-consumer:{}", self.shadow.consumer_locus),
+            format!("relation-anchor:{}", self.shadow.selected_anchor),
+            format!("relation-floor:{}", self.shadow.selected_floor),
+            format!("relation-lineage-ref:{}", self.shadow.lineage_ref),
+            format!("relation-semantic-digest:{}", self.shadow.semantic_digest),
+        ];
+        if let Some(chain) = &self.endpoint_chain {
+            rows.extend([
+                format!("source-ref:{}", chain.source_ref),
+                format!("core-ref:{}", chain.core_ref.as_deref().unwrap_or("")),
+                format!("artifact-ref:{}", chain.source_fragment_ref),
+                format!("edge-ref:{}", chain.edge_ref),
+                format!("publish:{}", chain.owner_publish_occurrence_id),
+                format!("request:{}", chain.request_occurrence_id),
+                format!("request-enqueue:{}", chain.request_enqueue_occurrence_id),
+                format!("dispatch:{}", chain.dispatch_occurrence_id),
+                format!("receive:{}", chain.receive_occurrence_id),
+                format!("observe:{}", chain.consumer_observe_occurrence_id),
+                format!("serve:{}", chain.serve_occurrence_id),
+            ]);
+        }
+        rows.sort();
+        rows.join("\n")
+    }
+}
+
+impl Sys5RelationDispatchRuntime {
+    pub fn dispatch_relation(
+        &mut self,
+        action: Sys5RelationAction,
+    ) -> Result<Sys5RelationDispatchReceipt, Sys5RelationDispatchError> {
+        if !self.relation_ids.contains(&action.relation) {
+            return Err(Sys5RelationDispatchError::new(
+                Sys5RelationDispatchDiagnosticKind::UnknownSourceRelation,
+            ));
+        }
+        match action.event_kind {
+            Sys5RelationDispatchEventKind::PublishCurrent => self
+                .fabric
+                .publish_relation_current(&action.relation)
+                .map(|receipt| self.endpoint_receipt(action.event_kind, receipt))
+                .map_err(Sys5RelationDispatchError::from_sys4),
+            Sys5RelationDispatchEventKind::InvalidatePrimary => self
+                .fabric
+                .invalidate_relation_primary(&action.relation)
+                .map(|receipt| self.endpoint_receipt(action.event_kind, receipt))
+                .map_err(Sys5RelationDispatchError::from_sys4),
+            Sys5RelationDispatchEventKind::FreshReacquire => self
+                .fabric
+                .fresh_reacquire_relation_primary(&action.relation)
+                .map(|receipt| self.endpoint_receipt(action.event_kind, receipt))
+                .map_err(Sys5RelationDispatchError::from_sys4),
+            Sys5RelationDispatchEventKind::ViewerPresentationGap => {
+                self.presentation_gap_receipt(&action.relation)
+            }
+        }
+    }
+
+    pub fn relation_semantic_digest(&self, relation: &str) -> Option<String> {
+        self.fabric
+            .relation_semantic_digest(relation)
+            .map(ToOwned::to_owned)
+    }
+
+    pub fn endpoint_carrier_count_for_relation(&self, relation: &str) -> usize {
+        self.fabric.endpoint_carrier_count_for_relation(relation)
+    }
+
+    pub fn total_endpoint_carrier_count(&self) -> usize {
+        self.fabric.total_endpoint_carrier_count()
+    }
+
+    pub fn observer_safe_relation_state(&self) -> Vec<String> {
+        self.relation_ids
+            .iter()
+            .filter_map(|relation| {
+                self.fabric
+                    .relation_semantic_digest(relation)
+                    .map(|digest| format!("{relation}:{digest}"))
+            })
+            .collect()
+    }
+
+    fn endpoint_receipt(
+        &self,
+        event_kind: Sys5RelationDispatchEventKind,
+        receipt: Sys4RelationEndpointReceipt,
+    ) -> Sys5RelationDispatchReceipt {
+        let edge = receipt.edge();
+        let shadow = receipt.shadow();
+        let semantic = shadow.semantic();
+        let observer_shadow = Sys5RelationObserverShadow {
+            relation: shadow.relation().to_string(),
+            owner_locus: shadow.owner_locus().to_string(),
+            consumer_locus: shadow.consumer_locus().to_string(),
+            selected_anchor: semantic.selected_anchor().to_string(),
+            selected_floor: match semantic.selected_floor() {
+                crate::m8_runtime_owner_queue::M8RelationFloor::Live => "live-primary".to_string(),
+                crate::m8_runtime_owner_queue::M8RelationFloor::Anchor => {
+                    "fallback-anchor".to_string()
+                }
+                crate::m8_runtime_owner_queue::M8RelationFloor::Frozen => {
+                    "frozen-fallback".to_string()
+                }
+            },
+            lineage_ref: relation_observer_ref(&semantic.lineage().join("\n")),
+            semantic_digest: relation_observer_ref(&shadow.semantic_digest()),
+            semantic_epoch: semantic.binding_epoch().to_string(),
+        };
+        let chain = Sys5RelationEndpointChain {
+            edge_kind: edge.kind(),
+            source_locus: edge.source_locus().to_string(),
+            target_locus: edge.target_locus().to_string(),
+            source_ref: observer_source_ref(&edge.source_ref()),
+            owner_publish_occurrence_id: receipt.owner_publish_occurrence_id().to_string(),
+            request_occurrence_id: receipt.request_id().to_string(),
+            request_enqueue_occurrence_id: receipt.request_enqueue_occurrence_id().to_string(),
+            dispatch_occurrence_id: receipt
+                .transport()
+                .source_outbox_dequeue_occurrence_id()
+                .to_string(),
+            receive_occurrence_id: receipt
+                .transport()
+                .target_inbox_enqueue_occurrence_id()
+                .to_string(),
+            consumer_observe_occurrence_id: receipt.consumer_observe_occurrence_id().to_string(),
+            serve_occurrence_id: receipt.consumer_serve_occurrence_id().to_string(),
+            edge_ref: edge.edge_ref().to_string(),
+            source_fragment_ref: edge.source_fragment_ref().clone(),
+            target_fragment_ref: edge.target_fragment_ref().clone(),
+            core_ref: edge.core_ref().map(ToOwned::to_owned),
+        };
+        let mut receipt = Sys5RelationDispatchReceipt {
+            event_kind,
+            endpoint_chain: Some(chain),
+            shadow: observer_shadow,
+            viewer_projection_kind: Sys5RelationProjectionKind::SemanticImportedShadow,
+            checked_program_identity_ref: self.checked_program_identity_ref.clone(),
+            observer_safe_report: String::new(),
+        };
+        receipt.observer_safe_report = receipt.compose_observer_safe_report();
+        receipt
+    }
+
+    fn presentation_gap_receipt(
+        &self,
+        relation: &str,
+    ) -> Result<Sys5RelationDispatchReceipt, Sys5RelationDispatchError> {
+        let projection = self
+            .fabric
+            .project_relation_presentation_gap(relation)
+            .map_err(|_| {
+                Sys5RelationDispatchError::new(
+                    Sys5RelationDispatchDiagnosticKind::RelationTransitionRejected,
+                )
+            })?;
+        let shadow = self
+            .fabric
+            .relation_imported_shadow(relation, projection.consumer_locus())
+            .map_err(|_| {
+                Sys5RelationDispatchError::new(
+                    Sys5RelationDispatchDiagnosticKind::RelationTransitionRejected,
+                )
+            })?
+            .ok_or_else(|| {
+                Sys5RelationDispatchError::new(
+                    Sys5RelationDispatchDiagnosticKind::RelationTransitionRejected,
+                )
+            })?;
+        let semantic = shadow.semantic();
+        let mut receipt = Sys5RelationDispatchReceipt {
+            event_kind: Sys5RelationDispatchEventKind::ViewerPresentationGap,
+            endpoint_chain: None,
+            shadow: Sys5RelationObserverShadow {
+                relation: shadow.relation().to_string(),
+                owner_locus: shadow.owner_locus().to_string(),
+                consumer_locus: shadow.consumer_locus().to_string(),
+                selected_anchor: semantic.selected_anchor().to_string(),
+                selected_floor: match semantic.selected_floor() {
+                    crate::m8_runtime_owner_queue::M8RelationFloor::Live => {
+                        "live-primary".to_string()
+                    }
+                    crate::m8_runtime_owner_queue::M8RelationFloor::Anchor => {
+                        "fallback-anchor".to_string()
+                    }
+                    crate::m8_runtime_owner_queue::M8RelationFloor::Frozen => {
+                        "frozen-fallback".to_string()
+                    }
+                },
+                lineage_ref: relation_observer_ref(&semantic.lineage().join("\n")),
+                semantic_digest: relation_observer_ref(&shadow.semantic_digest()),
+                semantic_epoch: semantic.binding_epoch().to_string(),
+            },
+            viewer_projection_kind: Sys5RelationProjectionKind::PresentationFallback,
+            checked_program_identity_ref: self.checked_program_identity_ref.clone(),
+            observer_safe_report: String::new(),
+        };
+        receipt.observer_safe_report = receipt.compose_observer_safe_report();
+        Ok(receipt)
     }
 }
 
@@ -1817,6 +2374,29 @@ fn debug_path_ref(logical_source_path: &str) -> String {
     );
     hasher.update(logical_source_path.as_bytes());
     format!("sys5-debug-path-sha256-v1:{:x}", hasher.finalize())
+}
+
+fn relation_observer_ref(value: &str) -> String {
+    let mut hasher = Sha256::new();
+    hasher.update(RELATION_OBSERVER_REF_DOMAIN);
+    hasher.update(
+        u64::try_from(value.len())
+            .expect("relation observer reference input fits u64")
+            .to_le_bytes(),
+    );
+    hasher.update(value.as_bytes());
+    format!("sys5-relation-sha256-v1:{:x}", hasher.finalize())
+}
+
+fn observer_source_ref(source_ref: &SourceRef) -> String {
+    format!(
+        "{}:{}:{}-{}:{}",
+        source_ref.path,
+        source_ref.start_line,
+        source_ref.start_column,
+        source_ref.end_line,
+        source_ref.end_column,
+    )
 }
 
 fn summary_source_span(source_ref: &SourceRef) -> Sys5SourceSpan {

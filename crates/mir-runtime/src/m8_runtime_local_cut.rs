@@ -37,10 +37,10 @@ use crate::{
     },
     m8_runtime_relation_projection::{
         M8BindingInvalidation, M8FiniteFallbackChain, M8FiniteFallbackSelection,
-        M8PresentationContext, M8ProjectionDiagnostics, M8RelationAuthorityUse,
-        M8RelationDiagnosticKind, M8RelationDiagnostics, M8RelationProjection,
-        M8RelationProjectionRuntime, M8RelationProjectionSeed, M8RelationReacquire,
-        M8RelationTrace, M8RelationTraceKind,
+        M8ObservedRelationShadow, M8PresentationContext, M8ProjectionDiagnostics,
+        M8PublishedRelationState, M8RelationAuthorityUse, M8RelationDiagnosticKind,
+        M8RelationDiagnostics, M8RelationProjection, M8RelationProjectionRuntime,
+        M8RelationProjectionSeed, M8RelationReacquire, M8RelationTrace, M8RelationTraceKind,
     },
     m9_auth_verification::{M9M8EntityPresenceBridge, M9M8EntityPresenceStatus},
 };
@@ -172,6 +172,8 @@ pub enum M8LocalTraceKind {
     RelationFallbackFrozen,
     RelationPrimaryReturnIgnored,
     RelationFreshLineageReacquired,
+    RelationPublished,
+    RelationPublicationObserved,
     DesignatedAuthorityValidated,
     DesignatedInputReceiptValidated,
     DesignatedValuePublished,
@@ -1105,6 +1107,8 @@ pub struct M8LocalSavePayload {
     owner_execution: M8RuntimeExecution,
     relation_trace: M8RelationTrace,
     finite_fallback_chains: BTreeMap<String, M8FiniteFallbackChain>,
+    relation_published_occurrences: BTreeMap<String, u64>,
+    relation_observed_shadows: BTreeMap<String, M8ObservedRelationShadow>,
     designated: M8LocalDesignatedSaveState,
     lease_inventory: M8LeaseInventory,
     patch_lifecycle: M8LocalPatchLifecycle,
@@ -1219,6 +1223,8 @@ pub(crate) struct M8LocalSemanticPayload {
     shared_snapshot: M8SemanticSnapshot,
     owner_execution: M8RuntimeExecution,
     relation_trace: M8RelationTrace,
+    relation_published_occurrences: BTreeMap<String, u64>,
+    relation_observed_shadows: BTreeMap<String, M8ObservedRelationShadow>,
     designated: M8LocalDesignatedSaveState,
     lease_inventory: M8LeaseInventory,
 }
@@ -1230,6 +1236,8 @@ impl M8LocalSemanticPayload {
                 .owner_execution
                 .equivalent_without_plans(&other.owner_execution)
             && self.relation_trace == other.relation_trace
+            && self.relation_published_occurrences == other.relation_published_occurrences
+            && self.relation_observed_shadows == other.relation_observed_shadows
             && self.designated == other.designated
             && self.lease_inventory == other.lease_inventory
     }
@@ -1287,6 +1295,20 @@ impl M8LocalCut {
 
     pub fn relation_state(&self, relation: &str) -> Option<&M8SemanticRelation> {
         self.payload.shared_snapshot.relations.get(relation)
+    }
+
+    /// Consumer-local immutable relation shadows retained in this cut.  SYS-4
+    /// uses these only to verify that its observer-safe digest index remains
+    /// a derived view of the restored M8 state.
+    pub(crate) fn relation_observed_shadow(
+        &self,
+        relation: &str,
+        consumer_locus: &str,
+    ) -> Option<&M8ObservedRelationShadow> {
+        self.payload
+            .relation_observed_shadows
+            .get(relation)
+            .filter(|shadow| shadow.consumer_locus() == consumer_locus)
     }
 
     pub fn designated_receipt_state(&self) -> &M8ReceiptState {
@@ -1363,7 +1385,7 @@ impl M8LocalCut {
     /// leases that determine their admissible frontier.
     pub(crate) fn canonical_relation_projection(&self) -> String {
         format!(
-            "relations|{}\nleases|{}\nfallback_chain|{}",
+            "relations|{}\nleases|{}\nfallback_chain|{}\nrelation_publication|{}",
             self.payload.shared_snapshot.canonical_relation_projection(),
             self.payload.lease_inventory.canonical_projection(),
             self.payload
@@ -1372,6 +1394,10 @@ impl M8LocalCut {
                 .map(M8FiniteFallbackChain::canonical_projection)
                 .collect::<Vec<_>>()
                 .join("\n"),
+            canonical_relation_publication_state(
+                &self.payload.relation_published_occurrences,
+                &self.payload.relation_observed_shadows,
+            ),
         )
     }
 
@@ -1395,7 +1421,7 @@ impl M8LocalCut {
 
     pub(crate) fn canonical_semantic_projection(&self) -> String {
         format!(
-            "cut_id|{}\nprogram|{}\nsnapshot|{}\nleases|{}\nfallback_chain|{}\npatch_rows|{}\ncut_receipt_causality|{}",
+            "cut_id|{}\nprogram|{}\nsnapshot|{}\nleases|{}\nfallback_chain|{}\nrelation_publication|{}\npatch_rows|{}\ncut_receipt_causality|{}",
             self.cut_id,
             self.admission_provenance.program_identity().stable_key(),
             self.payload.shared_snapshot.canonical_projection(),
@@ -1406,6 +1432,10 @@ impl M8LocalCut {
                 .map(M8FiniteFallbackChain::canonical_projection)
                 .collect::<Vec<_>>()
                 .join("\n"),
+            canonical_relation_publication_state(
+                &self.payload.relation_published_occurrences,
+                &self.payload.relation_observed_shadows,
+            ),
             self.payload.patch_lifecycle.rows().join(","),
             self.cut_receipt_causality.canonical_projection(),
         )
@@ -1479,6 +1509,30 @@ impl M8LocalRestoreDiagnostics {
     }
 }
 
+fn canonical_relation_publication_state(
+    published_occurrences: &BTreeMap<String, u64>,
+    observed_shadows: &BTreeMap<String, M8ObservedRelationShadow>,
+) -> String {
+    let publications = published_occurrences
+        .iter()
+        .map(|(relation, occurrence)| format!("{relation}:{occurrence}"))
+        .collect::<Vec<_>>()
+        .join(",");
+    let shadows = observed_shadows
+        .iter()
+        .map(|(relation, shadow)| {
+            format!(
+                "{relation}:{}:{}:{}",
+                shadow.consumer_locus(),
+                shadow.publication_occurrence(),
+                shadow.semantic_digest(),
+            )
+        })
+        .collect::<Vec<_>>()
+        .join(",");
+    format!("published:{publications}|shadows:{shadows}")
+}
+
 #[derive(Debug, Clone, PartialEq, Eq)]
 pub struct M8LiveFloor {
     authority_inventory: M8AuthorityState,
@@ -1487,6 +1541,8 @@ pub struct M8LiveFloor {
     consumption_floor: M8ConsumptionState,
     version_floor: M8ResultVersionStore,
     relation_floor: BTreeMap<String, M8SemanticRelation>,
+    relation_published_occurrences: BTreeMap<String, u64>,
+    relation_observed_shadows: BTreeMap<String, M8ObservedRelationShadow>,
     stale_memberships: BTreeSet<String>,
     revoked_capabilities: BTreeSet<String>,
     stale_witnesses: BTreeSet<String>,
@@ -1506,6 +1562,8 @@ impl M8LiveFloor {
             consumption_floor: cut.designated_consumption_state().clone(),
             version_floor: cut.designated_version_store().clone(),
             relation_floor: cut.payload.shared_snapshot.relations.clone(),
+            relation_published_occurrences: cut.payload.relation_published_occurrences.clone(),
+            relation_observed_shadows: cut.payload.relation_observed_shadows.clone(),
             stale_memberships: BTreeSet::new(),
             revoked_capabilities: BTreeSet::new(),
             stale_witnesses: BTreeSet::new(),
@@ -1514,6 +1572,8 @@ impl M8LiveFloor {
     }
 
     pub fn from_runtime(runtime: &M8LocalRuntime) -> Self {
+        let (relation_published_occurrences, relation_observed_shadows) =
+            runtime.relation.publication_state();
         Self {
             authority_inventory: runtime.shared_snapshot.authority_state().clone(),
             entity_presence: runtime.shared_snapshot.entity_presence_registry().clone(),
@@ -1521,6 +1581,8 @@ impl M8LiveFloor {
             consumption_floor: runtime.designated.consumption_state.clone(),
             version_floor: runtime.designated.version_store.clone(),
             relation_floor: runtime.shared_snapshot.relations.clone(),
+            relation_published_occurrences,
+            relation_observed_shadows,
             stale_memberships: BTreeSet::new(),
             revoked_capabilities: BTreeSet::new(),
             stale_witnesses: BTreeSet::new(),
@@ -1549,6 +1611,8 @@ impl M8LiveFloor {
             consumption_floor: cut.designated_consumption_state().clone(),
             version_floor: cut.designated_version_store().clone(),
             relation_floor: cut.payload.shared_snapshot.relations.clone(),
+            relation_published_occurrences: cut.payload.relation_published_occurrences.clone(),
+            relation_observed_shadows: cut.payload.relation_observed_shadows.clone(),
             stale_memberships: BTreeSet::new(),
             revoked_capabilities: BTreeSet::new(),
             stale_witnesses: BTreeSet::new(),
@@ -1966,6 +2030,130 @@ impl M8LocalRuntime {
         self.lease_inventory = inventory.clone();
         self.relation.replace_live_leases(inventory);
         Ok(())
+    }
+
+    pub(crate) fn install_finite_local_bootstrap_chain(
+        &mut self,
+        relation: &str,
+    ) -> Result<(), M8RelationDiagnostics> {
+        let inventory = self.with_relation_snapshot(|runtime| {
+            runtime.install_finite_local_bootstrap_chain(relation)
+        })?;
+        self.lease_inventory = inventory.clone();
+        self.relation.replace_live_leases(inventory);
+        Ok(())
+    }
+
+    pub(crate) fn install_sealed_fresh_relation_lease(
+        &mut self,
+        relation: &str,
+        lease: M8LeaseRecord,
+    ) -> Result<(), M8RelationDiagnostics> {
+        let inventory = self.with_relation_snapshot(|runtime| {
+            runtime.install_sealed_fresh_relation_lease(relation, lease)
+        })?;
+        self.lease_inventory = inventory.clone();
+        self.relation.replace_live_leases(inventory);
+        Ok(())
+    }
+
+    /// Materialize an immutable relation publication from the owner session.
+    /// The M8 relation runtime reads the admitted relation plan and semantic
+    /// snapshot itself; callers supply only the owner locus selected by the
+    /// generated artifact.
+    pub(crate) fn publish_semantic_relation(
+        &mut self,
+        relation: &str,
+        owner_locus: &str,
+        authority: M8RelationAuthorityUse,
+    ) -> Result<M8PublishedRelationState, M8RelationDiagnostics> {
+        let trace_len = self.relation.trace().entries().len();
+        let publication = self.with_relation_snapshot(|runtime| {
+            runtime.publish_semantic_relation(relation, owner_locus, authority)
+        })?;
+        self.append_relation_trace_since(trace_len);
+        let observation = self
+            .trace
+            .borrow()
+            .latest_observation(M8LocalTraceKind::RelationPublished)
+            .expect("M8 semantic relation publication appends an owner occurrence");
+        Ok(publication.with_owner_publish_occurrence_id(observation.node_id().to_string()))
+    }
+
+    pub(crate) fn commit_semantic_relation_publication(
+        &mut self,
+        publication: &M8PublishedRelationState,
+    ) -> Result<(), M8RelationDiagnostics> {
+        self.with_relation_snapshot(|runtime| {
+            runtime.commit_semantic_relation_publication(publication)
+        })
+    }
+
+    /// Import an exact immutable owner publication into a consumer-local
+    /// shadow.  This never mutates the consumer's boot-time semantic clone.
+    pub(crate) fn import_semantic_relation_shadow(
+        &mut self,
+        consumer_locus: &str,
+        publication: M8PublishedRelationState,
+    ) -> Result<M8ObservedRelationShadow, M8RelationDiagnostics> {
+        let trace_len = self.relation.trace().entries().len();
+        let shadow = self.with_relation_snapshot(|runtime| {
+            runtime.import_semantic_relation_shadow(consumer_locus, publication)
+        })?;
+        self.append_relation_trace_since(trace_len);
+        let observation = self
+            .trace
+            .borrow()
+            .latest_observation(M8LocalTraceKind::RelationPublicationObserved)
+            .expect("M8 consumer relation import appends an observe occurrence");
+        let shadow = shadow.with_consumer_observe_occurrence_id(observation.node_id().to_string());
+        self.with_relation_snapshot(|runtime| {
+            runtime.qualify_observed_relation_shadow_occurrence(
+                &shadow,
+                shadow
+                    .consumer_observe_occurrence_id()
+                    .expect("M8 local import attaches its raw observe occurrence"),
+            )
+        })
+    }
+
+    /// Persist SYS-4's fabric-qualified observe occurrence in the exact
+    /// consumer shadow.  The raw M8-local occurrence was already installed
+    /// by import and is checked by the relation runtime before replacement.
+    pub(crate) fn qualify_observed_relation_shadow_occurrence(
+        &mut self,
+        shadow: &M8ObservedRelationShadow,
+        qualified_occurrence: &str,
+    ) -> Result<M8ObservedRelationShadow, M8RelationDiagnostics> {
+        self.with_relation_snapshot(|runtime| {
+            runtime.qualify_observed_relation_shadow_occurrence(shadow, qualified_occurrence)
+        })
+    }
+
+    pub(crate) fn observed_relation_shadow(
+        &self,
+        relation: &str,
+        consumer_locus: &str,
+    ) -> Option<M8ObservedRelationShadow> {
+        self.relation
+            .observed_relation_shadow(relation, consumer_locus)
+            .cloned()
+    }
+
+    pub(crate) fn project_observed_relation_shadow(
+        &self,
+        relation: &str,
+        context: M8PresentationContext,
+    ) -> Result<M8RelationProjection, M8ProjectionDiagnostics> {
+        self.relation
+            .project_observed_relation_shadow(relation, context)
+    }
+
+    pub(crate) fn relation_requires_fresh_reacquire(
+        &mut self,
+        relation: &str,
+    ) -> Result<bool, M8RelationDiagnostics> {
+        self.with_relation_snapshot(|runtime| runtime.requires_fresh_reacquire(relation))
     }
 
     pub fn note_primary_available_same_lineage(
@@ -2502,6 +2690,8 @@ impl M8LocalRuntime {
             &cut.payload.shared_snapshot.relations,
             &floor.relation_floor,
         ) || cut.payload.shared_snapshot.relations != floor.relation_floor
+            || cut.payload.relation_published_occurrences != floor.relation_published_occurrences
+            || cut.payload.relation_observed_shadows != floor.relation_observed_shadows
         {
             // Same-lineage finite fallback floors are monotone; only a fresh
             // M9 reacquire starts a new lineage at option zero.
@@ -2527,11 +2717,15 @@ impl M8LocalRuntime {
     }
 
     pub fn save_relevant_payload(&self) -> M8LocalSavePayload {
+        let (relation_published_occurrences, relation_observed_shadows) =
+            self.relation.publication_state();
         M8LocalSavePayload {
             shared_snapshot: self.shared_snapshot.clone(),
             owner_execution: self.owner.clone(),
             relation_trace: self.relation.trace().clone(),
             finite_fallback_chains: self.relation.finite_fallback_chains(),
+            relation_published_occurrences,
+            relation_observed_shadows,
             designated: M8LocalDesignatedSaveState {
                 receipt_state: self.designated.receipt_state.clone(),
                 result_store: self.designated.result_store.clone(),
@@ -2723,10 +2917,14 @@ impl M8LocalRuntime {
     }
 
     pub(crate) fn semantic_payload_without_patch_lifecycle(&self) -> M8LocalSemanticPayload {
+        let (relation_published_occurrences, relation_observed_shadows) =
+            self.relation.publication_state();
         M8LocalSemanticPayload {
             shared_snapshot: self.shared_snapshot.clone(),
             owner_execution: self.owner.clone(),
             relation_trace: self.relation.trace().clone(),
+            relation_published_occurrences,
+            relation_observed_shadows,
             designated: M8LocalDesignatedSaveState {
                 receipt_state: self.designated.receipt_state.clone(),
                 result_store: self.designated.result_store.clone(),
@@ -2865,6 +3063,12 @@ impl M8LocalRuntime {
                 M8RelationTraceKind::FreshRelationLineageReacquired => {
                     M8LocalTraceKind::RelationFreshLineageReacquired
                 }
+                M8RelationTraceKind::SemanticRelationPublished => {
+                    M8LocalTraceKind::RelationPublished
+                }
+                M8RelationTraceKind::ConsumerRelationPublicationObserved => {
+                    M8LocalTraceKind::RelationPublicationObserved
+                }
             };
             self.trace
                 .borrow_mut()
@@ -2934,6 +3138,10 @@ impl M8LocalRuntime {
         self.relation.trace = payload.relation_trace.clone();
         self.relation
             .replace_finite_fallback_chains(payload.finite_fallback_chains.clone());
+        self.relation.replace_publication_state(
+            payload.relation_published_occurrences.clone(),
+            payload.relation_observed_shadows.clone(),
+        );
         self.designated.receipt_state = payload.designated.receipt_state.clone();
         self.designated.result_store = payload.designated.result_store.clone();
         self.designated.version_store = payload.designated.version_store.clone();
