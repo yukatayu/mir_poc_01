@@ -18,21 +18,22 @@ use crate::{
     m9_auth_verification::M9RuntimeExecutionSeam,
     sys3_projection::{
         BackendEligibility, BackendProfile, CommunicationEdge, CommunicationEdgeKind,
-        DeclaredLogicalTopology, GlobalProjectionResult, RuntimeAdmissionStatus,
-        project_checked_core,
+        DeclaredLogicalTopology, GlobalProjectionResult, ProjectedOperationFragmentKind,
+        RuntimeAdmissionStatus, project_checked_core,
     },
     sys4_dispatch::{
-        CachedDelivery, EndpointCarrierRecord, ExternalAction, FabricProgram, FabricReceipt,
-        FabricRouteKey, FabricSemanticSnapshot, FabricTrace, FaultInjection, LocalFabric,
-        MailboxEnvelope, RuntimeStoreRead, RuntimeStoreWrite, RuntimeValue, SealedDeliveryBinding,
-        SealedFabricAdmission, SourceAction, Sys4DiagnosticKind, Sys4DispatchDiagnostics,
-        Sys4InitialStateSeed, Sys4TraceEntry, Sys4TraceKind,
+        CachedDelivery, CausalityGraph, EndpointCarrierRecord, ExternalAction, FabricProgram,
+        FabricReceipt, FabricRouteKey, FabricSemanticSnapshot, FabricTrace, FaultInjection,
+        LocalFabric, MailboxEnvelope, RuntimeStoreRead, RuntimeStoreWrite, RuntimeValue,
+        SealedDeliveryBinding, SealedFabricAdmission, SourceAction, Sys4DiagnosticKind,
+        Sys4DispatchDiagnostics, Sys4InitialStateSeed, Sys4TraceEntry, Sys4TraceKind,
     },
 };
 
 const SURFACE_FIXTURE_DIR: &str = "tests/fixtures/surface-v0";
 const OWNER_ENDPOINT_FIXTURE: &str = "sys4_ow1_endpoint_crossing.mir";
 const DESIGNATED_CONSUME_FIXTURE: &str = "sys4_designated_consume_with_auth.mir";
+const RELATION_ONLY_FIXTURE: &str = "maintained_bird_relation.mir";
 
 fn surface_fixture_path(name: &str) -> String {
     format!("{SURFACE_FIXTURE_DIR}/{name}")
@@ -83,12 +84,20 @@ fn designated_checked() -> CheckedSurfaceV0 {
     load_checked_fixture(DESIGNATED_CONSUME_FIXTURE)
 }
 
+fn relation_only_checked() -> CheckedSurfaceV0 {
+    load_checked_fixture(RELATION_ONLY_FIXTURE)
+}
+
 fn owner_endpoint_projection(checked: &CheckedSurfaceV0) -> GlobalProjectionResult {
     project_fixture(checked, ["A", "S"])
 }
 
 fn designated_projection(checked: &CheckedSurfaceV0) -> GlobalProjectionResult {
     project_fixture(checked, ["C", "E", "S"])
+}
+
+fn relation_only_projection(checked: &CheckedSurfaceV0) -> GlobalProjectionResult {
+    project_fixture(checked, ["C", "S"])
 }
 
 fn fabric_program(projection: GlobalProjectionResult) -> FabricProgram {
@@ -324,6 +333,32 @@ fn m8_backend_trace_count(
 fn m8_backend_latest_sequence(fabric: &LocalFabric) -> u64 {
     let trace: &M8LocalTrace = m8_local_runtime_trace(fabric);
     trace.latest_sequence().unwrap_or(0)
+}
+
+fn m8_trace_kind_count(fabric: &LocalFabric, kind: M8LocalTraceKind) -> usize {
+    let trace: &M8LocalTrace = m8_local_runtime_trace(fabric);
+    trace
+        .kinds()
+        .into_iter()
+        .filter(|candidate| *candidate == kind)
+        .count()
+}
+
+fn causality_reaches(causality: &CausalityGraph, later: &str, earlier: &str) -> bool {
+    let mut seen = BTreeSet::new();
+    let mut queue = VecDeque::from([later.to_string()]);
+    while let Some(current) = queue.pop_front() {
+        if !seen.insert(current.clone()) {
+            continue;
+        }
+        for predecessor in causality.predecessor_ids(&current) {
+            if predecessor == earlier {
+                return true;
+            }
+            queue.push_back(predecessor);
+        }
+    }
+    false
 }
 
 fn m8_backend_node_ids(
@@ -2250,6 +2285,245 @@ fn staged_designated_path_requires_source_release_receipt_before_evaluation_and_
             .m8_actual_trace()
             .value_consumed_count(delivery.semantic_identity(), "C"),
         1
+    );
+}
+
+#[test]
+fn ow1_designated_source_owner_read_is_m8_worker_owned_and_causally_acks_reply() {
+    let checked = designated_checked();
+    let projection = designated_projection(&checked);
+    let input_request_edge = projection
+        .communication_plan()
+        .single_edge(
+            "E.result",
+            CommunicationEdgeKind::DesignatedInputRequest,
+            "E",
+            "S",
+        )
+        .expect("projection has input request edge");
+    let input_receipt_edge = projection
+        .communication_plan()
+        .single_edge(
+            "E.result",
+            CommunicationEdgeKind::DesignatedInputReceipt,
+            "S",
+            "E",
+        )
+        .expect("projection has input receipt edge");
+    let program = fabric_program(projection);
+    let mut fabric = boot(&checked, program, BackendProfile::Ow1);
+
+    let submitted = fabric
+        .submit_source_action(publish_designated_action())
+        .expect("publish submission emits only the generated E→S input request");
+    let input_request = fabric
+        .locus_runtime("E")
+        .expect("E exists")
+        .outgoing_mailbox()
+        .pending_envelopes()
+        .single();
+    assert_eq!(input_request.envelope_id(), submitted.envelope_id());
+    assert_eq!(input_request.edge_ref(), input_request_edge.edge_ref());
+    assert_eq!(
+        input_request.carrier_contract(),
+        input_request_edge.carrier_contract()
+    );
+
+    fabric
+        .step_transport("E", "S", input_request.envelope_id())
+        .expect("transport moves exact generated input request to source owner S");
+    let semantic_before_s_step = fabric.semantic_snapshot();
+    let local_store_before_s_step = fabric
+        .locus_runtime("S")
+        .expect("S exists")
+        .local_store()
+        .clone();
+    let sequence_before_s_step = m8_backend_latest_sequence(&fabric);
+    let owner_read_count_before_s_step = m8_trace_kind_count(&fabric, M8LocalTraceKind::OwnerRead);
+    let owner_write_count_before_s_step =
+        m8_trace_kind_count(&fabric, M8LocalTraceKind::OwnerWrite);
+    let source_step = fabric
+        .step_locus("S")
+        .expect("S services source input after endpoint dequeue and M9 release validation");
+    let source_release = source_step.m9_validation().source_release_inspection();
+    let read_audit = source_step
+        .local_store_read_audit()
+        .expect("S reports the source-value read audit");
+    let trace: &M8LocalTrace = m8_local_runtime_trace(&fabric);
+    assert!(
+        fabric
+            .semantic_snapshot()
+            .same_state(&semantic_before_s_step),
+        "source-owner input service is a read-only path and must not mutate semantic state"
+    );
+    assert_eq!(
+        fabric.locus_runtime("S").expect("S exists").local_store(),
+        &local_store_before_s_step,
+        "source-owner input service must not mutate S local store while reading"
+    );
+    assert_eq!(
+        m8_trace_kind_count(&fabric, M8LocalTraceKind::OwnerWrite),
+        owner_write_count_before_s_step,
+        "source-owner input service must not report a write while servicing a read"
+    );
+    assert!(
+        trace
+            .latest_observation_for_occurrence(
+                M8LocalTraceKind::OwnerWrite,
+                read_audit.occurrence_id()
+            )
+            .is_none(),
+        "read audit occurrence must not resolve to an M8 OwnerWrite"
+    );
+    assert_eq!(
+        m8_trace_kind_count(&fabric, M8LocalTraceKind::OwnerRead),
+        owner_read_count_before_s_step + 1,
+        "source-owner input service must emit exactly one fresh M8 OwnerRead occurrence"
+    );
+    let owner_read = trace
+        .latest_observation_for_occurrence(M8LocalTraceKind::OwnerRead, read_audit.occurrence_id())
+        .expect("source-owner read audit occurrence must resolve to an M8-owned OwnerRead");
+    assert!(
+        owner_read.sequence() > sequence_before_s_step,
+        "OW1 source-owner service must advance the worker-owned M8 trace when reading S state"
+    );
+    assert_eq!(owner_read.kind(), M8LocalTraceKind::OwnerRead);
+    assert_eq!(owner_read.envelope_id(), input_request.envelope_id());
+    assert_eq!(owner_read.operation_id(), "E.result");
+    assert_eq!(owner_read.owner_locus(), "S");
+    assert_eq!(owner_read.edge_ref(), input_request.edge_ref());
+    assert_eq!(
+        owner_read.logical_tick_id(),
+        input_request.logical_tick_id()
+    );
+    assert_eq!(
+        owner_read.logical_tick_frontier(),
+        input_request.logical_tick_frontier()
+    );
+    assert!(
+        fabric
+            .causality()
+            .predecessor_ids(owner_read.node_id())
+            .contains(&source_release.occurrence_id().to_string()),
+        "M8 OwnerRead must be causally after M9 source-release validation"
+    );
+
+    let input_receipt = fabric
+        .locus_runtime("S")
+        .expect("S exists")
+        .outgoing_mailbox()
+        .pending_envelopes()
+        .single();
+    assert_eq!(input_receipt.edge_ref(), input_receipt_edge.edge_ref());
+    assert_eq!(
+        input_receipt.request_carrier_id(),
+        input_request.carrier_id()
+    );
+    assert_eq!(input_receipt.typed_value(), RuntimeValue::int(10));
+    let receipt_transport = fabric
+        .step_transport("S", "E", input_receipt.envelope_id())
+        .expect("transport moves the acknowledged S→E input receipt");
+    assert!(
+        causality_reaches(
+            fabric.causality(),
+            receipt_transport.source_outbox_dequeue_occurrence_id(),
+            owner_read.node_id(),
+        ),
+        "input receipt must be causally downstream of the M8-owned source-owner read"
+    );
+}
+
+#[test]
+fn relation_only_projection_derives_ow1_worker_locus_without_owner_rmw_or_designated_source() {
+    let checked = relation_only_checked();
+    let projection = relation_only_projection(&checked);
+    assert_eq!(
+        projection
+            .backend_requirements()
+            .eligibility(BackendProfile::Ow1),
+        BackendEligibility::Eligible,
+        "a relation-only owner locus is a valid OW1 worker derivation candidate"
+    );
+    let fragments = projection.sys4_artifact_fragments();
+    assert!(
+        fragments
+            .single(
+                "bird_follow",
+                ProjectedOperationFragmentKind::RelationPublication
+            )
+            .is_some(),
+        "relation-only program has an S-owned relation publication fragment"
+    );
+    assert!(
+        fragments
+            .single(
+                "bird_follow",
+                ProjectedOperationFragmentKind::ConsumerLocalRelationProjection
+            )
+            .is_some(),
+        "relation-only program has a C-local relation projection consumer fragment"
+    );
+    assert!(
+        fragments
+            .single(
+                "bird_follow",
+                ProjectedOperationFragmentKind::OwnerRmwExecution
+            )
+            .is_none()
+    );
+    assert!(
+        fragments
+            .single(
+                "bird_follow",
+                ProjectedOperationFragmentKind::DesignatedRemoteInputService
+            )
+            .is_none()
+    );
+    let relation_edge = projection
+        .communication_plan()
+        .single_edge(
+            "bird_follow",
+            CommunicationEdgeKind::RelationProjectionPublication,
+            "S",
+            "C",
+        )
+        .expect("relation-only projection derives S→C relation publication edge");
+    assert_eq!(relation_edge.source_locus(), "S");
+    assert_eq!(relation_edge.target_locus(), "C");
+
+    let program = fabric_program(projection);
+    assert_eq!(
+        program.backend_eligibility(BackendProfile::Ow1),
+        BackendEligibility::Eligible
+    );
+    let sys4 = read_runtime_src("sys4_dispatch.rs");
+    let bootstrap_body = extract_balanced_fn_body(&sys4, "pub(crate) fn bootstrap(")
+        .expect("LocalFabric::bootstrap body is available for narrow derivation scan");
+    let ow1_bootstrap_branch =
+        extract_balanced_block_after_marker(&bootstrap_body, "BackendProfile::Ow1 =>")
+            .expect("LocalFabric::bootstrap has an OW1 derivation branch");
+    let compact_ow1 = normalize_source_for_boundary_scan(&ow1_bootstrap_branch);
+    let compact_sys4 = normalize_source_for_boundary_scan(&sys4);
+    assert!(
+        !compact_sys4.contains("pubfnow1_worker_locus_candidates("),
+        "OW1 worker-locus derivation helper must be crate-private, not public API"
+    );
+    assert!(
+        compact_sys4.contains("pub(crate)fnow1_worker_locus_candidates("),
+        "M9 relation-only SYS-4 admission is not available yet, so this structural RED pins a crate-private pure helper for OW1 worker-locus derivation"
+    );
+    assert!(
+        compact_ow1.contains("ow1_worker_locus_candidates("),
+        "LocalFabric::bootstrap OW1 branch must use the factored worker-locus derivation helper"
+    );
+    let helper_body = extract_balanced_fn_body(&sys4, "pub(crate) fn ow1_worker_locus_candidates(")
+        .expect("OW1 relation-only derivation helper body is structurally inspectable");
+    let compact_helper = normalize_source_for_boundary_scan(&helper_body);
+    assert!(
+        compact_helper.contains(
+            "ifletSome(core)=fragment.relation_checked_core(){worker_loci.insert(core.owner_locus().to_string());}"
+        ),
+        "OW1 worker_loci derivation must exactly include relation_checked_core -> core.owner_locus().to_string() -> worker_loci.insert so relation-only projection derives S without owner-RMW/designated-source fragments"
     );
 }
 
