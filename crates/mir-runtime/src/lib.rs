@@ -78,6 +78,8 @@ mod sys3_projection_tests;
 #[cfg(test)]
 #[allow(clippy::bool_assert_comparison, clippy::too_many_arguments)]
 mod sys4_dispatch_tests;
+#[cfg(test)]
+mod sys5_local_slice_tests;
 
 pub fn crate_name() -> &'static str {
     "mir_runtime"

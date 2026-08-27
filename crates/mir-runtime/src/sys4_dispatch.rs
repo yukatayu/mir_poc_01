@@ -558,6 +558,24 @@ impl FabricProgram {
             .cloned()
     }
 
+    /// The dependency ordinal is part of the checked projection identity.  A
+    /// runtime admission must use that exact ordinal rather than collapsing
+    /// every designated source service onto dependency zero.
+    fn designated_remote_input_dependency_index(
+        &self,
+        fragment: &ProjectedOperationFragment,
+    ) -> Option<usize> {
+        let dependency = fragment.designated_remote_input_dependency()?;
+        let ordinal = fragment.checked_core_identity().dependency_ordinal()?;
+        let evaluator = self.designated_evaluator_fragment(fragment.operation_id())?;
+        evaluator
+            .designated_checked_core()?
+            .generated_remote_input_dependencies()
+            .get(ordinal)
+            .filter(|candidate| *candidate == dependency)
+            .map(|_| ordinal)
+    }
+
     fn projected_fingerprint(&self) -> BTreeSet<(FabricRouteKey, String)> {
         self.route_index
             .routes
@@ -633,9 +651,49 @@ impl Sys4InitialStateSeed {
 pub(crate) struct ObserverSafeM9Summary {
     checked_program_identity: CheckedProgramIdentity,
     complete_final: bool,
+    inventory_digest: String,
     owner_lineages: BTreeSet<(String, String, String, String)>,
+    relation_transitions: BTreeSet<(String, String)>,
     designated_evaluators: BTreeSet<(String, String)>,
+    designated_remote_input_lineages: BTreeSet<(String, String, String, usize, String)>,
     designated_consumers: BTreeSet<(String, String)>,
+}
+
+/// Canonical source-semantic rows retained by a sealed admission.  These rows
+/// contain only operation/locus/version identities already safe for observer
+/// tooling; they deliberately omit all membership, capability, witness, and
+/// provider references.
+#[derive(Debug, Clone, PartialEq, Eq)]
+pub(crate) struct ObserverSafeM9SemanticRowSets {
+    owner_lineages: BTreeSet<(String, String, String, String)>,
+    relation_transitions: BTreeSet<(String, String)>,
+    designated_evaluators: BTreeSet<(String, String)>,
+    designated_remote_input_lineages: BTreeSet<(String, String, String, usize, String)>,
+    designated_consumers: BTreeSet<(String, String)>,
+}
+
+impl ObserverSafeM9SemanticRowSets {
+    pub(crate) fn owner_lineages(&self) -> &BTreeSet<(String, String, String, String)> {
+        &self.owner_lineages
+    }
+
+    pub(crate) fn relation_transitions(&self) -> &BTreeSet<(String, String)> {
+        &self.relation_transitions
+    }
+
+    pub(crate) fn designated_evaluators(&self) -> &BTreeSet<(String, String)> {
+        &self.designated_evaluators
+    }
+
+    pub(crate) fn designated_remote_input_lineages(
+        &self,
+    ) -> &BTreeSet<(String, String, String, usize, String)> {
+        &self.designated_remote_input_lineages
+    }
+
+    pub(crate) fn designated_consumers(&self) -> &BTreeSet<(String, String)> {
+        &self.designated_consumers
+    }
 }
 
 impl ObserverSafeM9Summary {
@@ -649,6 +707,16 @@ impl ObserverSafeM9Summary {
 
     pub(crate) const fn residuals_discharged_for_static_program(&self) -> bool {
         self.complete_final
+    }
+
+    pub(crate) fn semantic_row_sets_clone(&self) -> ObserverSafeM9SemanticRowSets {
+        ObserverSafeM9SemanticRowSets {
+            owner_lineages: self.owner_lineages.clone(),
+            relation_transitions: self.relation_transitions.clone(),
+            designated_evaluators: self.designated_evaluators.clone(),
+            designated_remote_input_lineages: self.designated_remote_input_lineages.clone(),
+            designated_consumers: self.designated_consumers.clone(),
+        }
     }
 
     pub(crate) fn contains_owner_lineage(
@@ -866,17 +934,47 @@ impl SealedFabricAdmission {
                     let Some(core) = evaluator.designated_checked_core() else {
                         return false;
                     };
+                    let Some(dependency_index) =
+                        program.designated_remote_input_dependency_index(fragment)
+                    else {
+                        return false;
+                    };
                     generation
                         .kernel_designated_remote_input_lineage(
                             dependency.source_owner_locus(),
                             core.evaluator(),
                             core.result(),
-                            0,
+                            dependency_index,
                             core.trigger().frontier().unwrap_or_default(),
                         )
                         .is_some()
                 })(
                 ),
+                ProjectedOperationFragmentKind::RelationPublication => {
+                    fragment.relation_checked_core().is_some_and(|_| {
+                        ["invalidate_primary", "reacquire_primary"]
+                            .into_iter()
+                            .all(|transition| {
+                                generation
+                                    .relation_authority_use(fragment.operation_id(), transition)
+                                    .is_some()
+                            })
+                    })
+                }
+                ProjectedOperationFragmentKind::ConsumerLocalRelationProjection => fragment
+                    .consumer_relation_projection()
+                    .is_some_and(|descriptor| {
+                        ["invalidate_primary", "reacquire_primary"]
+                            .into_iter()
+                            .all(|transition| {
+                                generation
+                                    .relation_authority_use(
+                                        descriptor.source_relation(),
+                                        transition,
+                                    )
+                                    .is_some()
+                            })
+                    }),
                 _ => true,
             };
             if !complete {
@@ -887,7 +985,9 @@ impl SealedFabricAdmission {
         }
         validate_seed(program, &initial_state_seed)?;
         let mut owner_lineages = BTreeSet::new();
+        let mut relation_transitions = BTreeSet::new();
         let mut designated_evaluators = BTreeSet::new();
+        let mut designated_remote_input_lineages = BTreeSet::new();
         let mut designated_consumers = BTreeSet::new();
         for fragment in program.projection.sys4_artifact_fragments().entries() {
             match fragment.fragment_kind() {
@@ -945,9 +1045,37 @@ impl SealedFabricAdmission {
                         ));
                     }
                 }
+                ProjectedOperationFragmentKind::DesignatedRemoteInputService => {
+                    let dependency = fragment
+                        .designated_remote_input_dependency()
+                        .expect("complete designated remote input retains its dependency");
+                    let evaluator = program
+                        .designated_evaluator_fragment(fragment.operation_id())
+                        .expect("complete designated remote input retains evaluator");
+                    let core = evaluator
+                        .designated_checked_core()
+                        .expect("complete designated remote input retains checked Core");
+                    let dependency_index = program
+                        .designated_remote_input_dependency_index(fragment)
+                        .expect("complete designated remote input retains exact ordinal");
+                    designated_remote_input_lineages.insert((
+                        dependency.source_owner_locus().to_string(),
+                        core.evaluator().to_string(),
+                        core.result().to_string(),
+                        dependency_index,
+                        core.trigger().frontier().unwrap_or_default().to_string(),
+                    ));
+                }
+                ProjectedOperationFragmentKind::RelationPublication => {
+                    for transition in ["invalidate_primary", "reacquire_primary"] {
+                        relation_transitions
+                            .insert((fragment.operation_id().to_string(), transition.to_string()));
+                    }
+                }
                 _ => {}
             }
         }
+        let inventory_digest = generation.observer_safe_inventory_digest();
         let (instance, _authority_state, authority_generation, authority_successor) =
             seam.into_kernel_parts().ok_or_else(|| {
                 Sys4DispatchDiagnostics::one(Sys4DiagnosticKind::ProgramAdmissionMismatch)
@@ -958,8 +1086,11 @@ impl SealedFabricAdmission {
             summary: ObserverSafeM9Summary {
                 checked_program_identity: program.checked_program_identity().clone(),
                 complete_final: true,
+                inventory_digest,
                 owner_lineages,
+                relation_transitions,
                 designated_evaluators,
+                designated_remote_input_lineages,
                 designated_consumers,
             },
             instance,
@@ -972,6 +1103,14 @@ impl SealedFabricAdmission {
 
     pub(crate) fn observer_safe_m9_summary(&self) -> &ObserverSafeM9Summary {
         &self.summary
+    }
+
+    pub(crate) fn observer_safe_m9_summary_clone(&self) -> ObserverSafeM9Summary {
+        self.summary.clone()
+    }
+
+    pub(crate) fn observer_safe_m9_semantic_row_sets_clone(&self) -> ObserverSafeM9SemanticRowSets {
+        self.summary.semantic_row_sets_clone()
     }
 
     pub(crate) fn initial_state_seed(&self) -> &Sys4InitialStateSeed {
