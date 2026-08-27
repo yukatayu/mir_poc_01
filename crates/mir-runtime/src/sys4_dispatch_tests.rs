@@ -14,15 +14,19 @@ use mir_semantics::{
 };
 
 use crate::{
+    m8_runtime_local_cut::{M8LocalTrace, M8LocalTraceKind, M8LocalTraceObservation},
     m9_auth_verification::M9RuntimeExecutionSeam,
     sys3_projection::{
-        BackendEligibility, BackendProfile, CommunicationEdgeKind, DeclaredLogicalTopology,
-        GlobalProjectionResult, RuntimeAdmissionStatus, project_checked_core,
+        BackendEligibility, BackendProfile, CommunicationEdge, CommunicationEdgeKind,
+        DeclaredLogicalTopology, GlobalProjectionResult, RuntimeAdmissionStatus,
+        project_checked_core,
     },
     sys4_dispatch::{
-        ExternalAction, FabricProgram, FabricRouteKey, FaultInjection, LocalFabric,
-        RuntimeStoreRead, RuntimeStoreWrite, RuntimeValue, SealedFabricAdmission, SourceAction,
-        Sys4DiagnosticKind, Sys4DispatchDiagnostics, Sys4InitialStateSeed, Sys4TraceKind,
+        EndpointCarrierRecord, ExternalAction, FabricProgram, FabricReceipt, FabricRouteKey,
+        FaultInjection, LocalFabric, MailboxEnvelope, RuntimeStoreRead, RuntimeStoreWrite,
+        RuntimeValue, SealedDeliveryBinding, SealedFabricAdmission, SourceAction,
+        Sys4DiagnosticKind, Sys4DispatchDiagnostics, Sys4InitialStateSeed, Sys4TraceEntry,
+        Sys4TraceKind,
     },
 };
 
@@ -153,6 +157,217 @@ fn assert_sys4_diag<T: Debug>(
     diagnostics
 }
 
+fn missing_designated_tick_diag() -> Sys4DiagnosticKind {
+    Sys4DiagnosticKind::MissingDesignatedTick
+}
+
+fn delivery_publication_identity_mismatch_diag() -> Sys4DiagnosticKind {
+    Sys4DiagnosticKind::DeliveryPublicationIdentityMismatch
+}
+
+fn cache_binding_digest_mismatch_diag() -> Sys4DiagnosticKind {
+    Sys4DiagnosticKind::CacheBindingDigestMismatch
+}
+
+fn assert_envelope_tick(envelope: &MailboxEnvelope, tick: &str, frontier: &str) {
+    assert_eq!(envelope.designated_tick_id(), tick);
+    assert_eq!(envelope.designated_tick_frontier(), frontier);
+}
+
+fn envelope_m8_publication_id(envelope: &MailboxEnvelope) -> &str {
+    envelope.m8_publication_id()
+}
+
+fn envelope_logical_tick_id(envelope: &MailboxEnvelope) -> &str {
+    envelope.logical_tick_id()
+}
+
+fn envelope_logical_tick_frontier(envelope: &MailboxEnvelope) -> &str {
+    envelope.logical_tick_frontier()
+}
+
+fn binding_m8_publication_id(binding: &SealedDeliveryBinding) -> &str {
+    binding.m8_publication_id()
+}
+
+fn binding_logical_tick_id(binding: &SealedDeliveryBinding) -> &str {
+    binding.logical_tick_id()
+}
+
+fn binding_logical_tick_frontier(binding: &SealedDeliveryBinding) -> &str {
+    binding.logical_tick_frontier()
+}
+
+fn is_local_cache_retry(envelope: &MailboxEnvelope) -> bool {
+    envelope.is_local_cache_retry()
+}
+
+fn receipt_m8_publication_id(receipt: &FabricReceipt) -> &str {
+    receipt.m8_publication_id()
+}
+
+fn receipt_logical_tick_id(receipt: &FabricReceipt) -> &str {
+    receipt.logical_tick_id()
+}
+
+fn m8_local_runtime_trace(fabric: &LocalFabric) -> &M8LocalTrace {
+    let trace: &M8LocalTrace = fabric.m8_local_runtime_trace();
+    trace
+}
+
+fn assert_backend_publication_observation(
+    fabric: &LocalFabric,
+    node_id: &str,
+    tick: &str,
+    frontier: &str,
+) {
+    let trace: &M8LocalTrace = m8_local_runtime_trace(fabric);
+    let observation: M8LocalTraceObservation = trace
+        .observation(node_id)
+        .expect("node id must query an actual M8-owned backend publication observation");
+    assert_eq!(observation.node_id(), node_id);
+    assert_eq!(
+        observation.kind(),
+        M8LocalTraceKind::DesignatedValuePublished
+    );
+    assert_eq!(observation.logical_tick_id(), tick);
+    assert_eq!(observation.logical_tick_frontier(), frontier);
+}
+
+fn assert_backend_consume_observation(
+    fabric: &LocalFabric,
+    node_id: &str,
+    publication_id: &str,
+    tick: &str,
+) {
+    let trace: &M8LocalTrace = m8_local_runtime_trace(fabric);
+    let observation: M8LocalTraceObservation = trace
+        .observation(node_id)
+        .expect("node id must query an actual M8-owned backend consume observation");
+    assert_eq!(observation.node_id(), node_id);
+    assert_eq!(
+        observation.kind(),
+        M8LocalTraceKind::DesignatedValueConsumed
+    );
+    assert_eq!(observation.m8_publication_id(), publication_id);
+    assert_eq!(observation.logical_tick_id(), tick);
+}
+
+fn assert_backend_cache_validation_observation(
+    fabric: &LocalFabric,
+    node_id: &str,
+    semantic_identity: &str,
+    consumer: &str,
+    publication_id: &str,
+    tick: &str,
+    previous_sequence: u64,
+) {
+    let trace: &M8LocalTrace = m8_local_runtime_trace(fabric);
+    let observation: M8LocalTraceObservation = trace
+        .observation(node_id)
+        .expect("node id must query an actual M8-owned non-consuming cache validation occurrence");
+    assert_eq!(observation.node_id(), node_id);
+    assert_eq!(
+        observation.kind(),
+        M8LocalTraceKind::DesignatedCacheValidated
+    );
+    assert!(
+        observation.sequence() > previous_sequence,
+        "cache retry must emit a fresh M8 trace occurrence after prior M8 events"
+    );
+    assert_eq!(observation.semantic_identity(), semantic_identity);
+    assert_eq!(observation.consumer_locus(), consumer);
+    assert_eq!(observation.m8_publication_id(), publication_id);
+    assert_eq!(observation.logical_tick_id(), tick);
+}
+
+fn assert_backend_consumption_rejection_observation(
+    fabric: &LocalFabric,
+    node_id: &str,
+    envelope_id: &str,
+    semantic_identity: &str,
+    consumer: &str,
+    publication_id: &str,
+    tick: &str,
+    previous_sequence: u64,
+) {
+    let trace: &M8LocalTrace = m8_local_runtime_trace(fabric);
+    let observation: M8LocalTraceObservation = trace
+        .observation(node_id)
+        .expect("node id must query an actual M8-owned designated consumption rejection");
+    assert_eq!(observation.node_id(), node_id);
+    assert_eq!(
+        observation.kind(),
+        M8LocalTraceKind::DesignatedConsumptionRejected
+    );
+    assert!(
+        observation.sequence() > previous_sequence,
+        "backend failure must be a fresh M8 attempt after C dequeues the delivery"
+    );
+    assert_eq!(observation.envelope_id(), envelope_id);
+    assert_eq!(observation.semantic_identity(), semantic_identity);
+    assert_eq!(observation.consumer_locus(), consumer);
+    assert_eq!(observation.m8_publication_id(), publication_id);
+    assert_eq!(observation.logical_tick_id(), tick);
+}
+
+fn m8_backend_trace_count(
+    fabric: &LocalFabric,
+    kind: M8LocalTraceKind,
+    semantic_identity: &str,
+    consumer: &str,
+) -> usize {
+    let trace: &M8LocalTrace = m8_local_runtime_trace(fabric);
+    trace.count_designated(kind, semantic_identity, consumer)
+}
+
+fn m8_backend_latest_sequence(fabric: &LocalFabric) -> u64 {
+    let trace: &M8LocalTrace = m8_local_runtime_trace(fabric);
+    trace.latest_sequence().unwrap_or(0)
+}
+
+fn m8_backend_node_ids(
+    fabric: &LocalFabric,
+    kind: M8LocalTraceKind,
+    semantic_identity: &str,
+    consumer: &str,
+) -> Vec<String> {
+    let trace: &M8LocalTrace = m8_local_runtime_trace(fabric);
+    trace.node_ids_for_designated(kind, semantic_identity, consumer)
+}
+
+fn assert_endpoint_record_provenance(
+    record: &EndpointCarrierRecord,
+    edge: &CommunicationEdge,
+    carrier_id: &str,
+) {
+    assert_eq!(record.carrier_id(), carrier_id);
+    assert_eq!(record.edge_ref(), edge.edge_ref());
+    assert_eq!(record.source_ref(), edge.source_ref());
+    assert_eq!(record.core_ref(), edge.core_ref());
+    assert_eq!(record.source_fragment_ref(), edge.source_fragment_ref());
+    assert_eq!(record.target_fragment_ref(), edge.target_fragment_ref());
+}
+
+fn assert_trace_row_provenance(row: &Sys4TraceEntry, edge: &CommunicationEdge) {
+    assert_eq!(row.edge_ref(), edge.edge_ref());
+    assert_eq!(row.source_ref(), edge.source_ref());
+    assert_eq!(row.core_ref(), edge.core_ref());
+    assert_eq!(row.source_fragment_ref(), edge.source_fragment_ref());
+    assert_eq!(row.target_fragment_ref(), edge.target_fragment_ref());
+}
+
+fn m9_validation_occurrence_count(
+    fabric: &LocalFabric,
+    operation: &str,
+    consumer: &str,
+    semantic_identity: &str,
+) -> usize {
+    fabric
+        .current_m9_authority_inspection()
+        .validation_occurrence_count(operation, consumer, semantic_identity)
+}
+
 fn communication_edge_refs(projection: &GlobalProjectionResult) -> BTreeSet<String> {
     projection
         .communication_plan()
@@ -168,6 +383,10 @@ fn owner_attack_action(operation: &str) -> SourceAction {
 
 fn publish_designated_action() -> SourceAction {
     SourceAction::designated_tick("E.result").with_tick("F", "tick:F:1")
+}
+
+fn publish_designated_action_with_tick(tick: &str) -> SourceAction {
+    SourceAction::designated_tick("E.result").with_tick("F", tick)
 }
 
 fn consume_designated_action() -> SourceAction {
@@ -561,9 +780,12 @@ fn designated_result_delivery_endpoint_revalidates_cache_and_revocation_fails_cl
     let consumed_before_revoked_retry = fabric
         .m8_actual_trace()
         .value_consumed_count(semantic_identity, "C");
-    let m8_non_consuming_before_revoked_retry = fabric
-        .m8_actual_trace()
-        .non_consuming_designated_cache_validation_count(semantic_identity, "C");
+    let m8_non_consuming_before_revoked_retry = m8_backend_trace_count(
+        &fabric,
+        M8LocalTraceKind::DesignatedCacheValidated,
+        semantic_identity,
+        "C",
+    );
     let submitted = fabric
         .submit_source_action(consume_designated_action())
         .expect("retry request is admitted before C validates live M9 authority");
@@ -590,9 +812,12 @@ fn designated_result_delivery_endpoint_revalidates_cache_and_revocation_fails_cl
     );
     assert!(revoked.m8_non_consuming_validation_node_id().is_none());
     assert_eq!(
-        fabric
-            .m8_actual_trace()
-            .non_consuming_designated_cache_validation_count(semantic_identity, "C"),
+        m8_backend_trace_count(
+            &fabric,
+            M8LocalTraceKind::DesignatedCacheValidated,
+            semantic_identity,
+            "C",
+        ),
         m8_non_consuming_before_revoked_retry
     );
     assert!(revoked.primary().typed_success().is_none());
@@ -750,9 +975,12 @@ fn designated_cache_retry_revalidates_membership_witness_and_carrier_integrity()
     let consumed_before_membership = membership_retired
         .m8_actual_trace()
         .value_consumed_count(&membership_identity, "C");
-    let m8_non_consuming_before_membership = membership_retired
-        .m8_actual_trace()
-        .non_consuming_designated_cache_validation_count(&membership_identity, "C");
+    let m8_non_consuming_before_membership = m8_backend_trace_count(
+        &membership_retired,
+        M8LocalTraceKind::DesignatedCacheValidated,
+        &membership_identity,
+        "C",
+    );
     let submitted = membership_retired
         .submit_source_action(consume_designated_action())
         .expect("retry request is admitted before C validates live M9 authority");
@@ -782,9 +1010,12 @@ fn designated_cache_retry_revalidates_membership_witness_and_carrier_integrity()
     );
     assert!(membership.m8_non_consuming_validation_node_id().is_none());
     assert_eq!(
-        membership_retired
-            .m8_actual_trace()
-            .non_consuming_designated_cache_validation_count(&membership_identity, "C"),
+        m8_backend_trace_count(
+            &membership_retired,
+            M8LocalTraceKind::DesignatedCacheValidated,
+            &membership_identity,
+            "C",
+        ),
         m8_non_consuming_before_membership
     );
     assert!(membership.primary().typed_success().is_none());
@@ -857,9 +1088,12 @@ fn designated_cache_retry_revalidates_membership_witness_and_carrier_integrity()
     let consumed_before_witness = witness_retired
         .m8_actual_trace()
         .value_consumed_count(&witness_identity, "C");
-    let m8_non_consuming_before_witness = witness_retired
-        .m8_actual_trace()
-        .non_consuming_designated_cache_validation_count(&witness_identity, "C");
+    let m8_non_consuming_before_witness = m8_backend_trace_count(
+        &witness_retired,
+        M8LocalTraceKind::DesignatedCacheValidated,
+        &witness_identity,
+        "C",
+    );
     let submitted = witness_retired
         .submit_source_action(consume_designated_action())
         .expect("retry request is admitted before C validates live M9 authority");
@@ -886,9 +1120,12 @@ fn designated_cache_retry_revalidates_membership_witness_and_carrier_integrity()
     );
     assert!(witness.m8_non_consuming_validation_node_id().is_none());
     assert_eq!(
-        witness_retired
-            .m8_actual_trace()
-            .non_consuming_designated_cache_validation_count(&witness_identity, "C"),
+        m8_backend_trace_count(
+            &witness_retired,
+            M8LocalTraceKind::DesignatedCacheValidated,
+            &witness_identity,
+            "C",
+        ),
         m8_non_consuming_before_witness
     );
     assert!(witness.primary().typed_success().is_none());
@@ -1744,6 +1981,803 @@ fn staged_designated_path_requires_source_release_receipt_before_evaluation_and_
 }
 
 #[test]
+fn staged_designated_publish_preserves_nondefault_tick_frontier_through_receipt_and_m8() {
+    let checked = designated_checked();
+    let program = fabric_program(designated_projection(&checked));
+    let mut fabric = boot(&checked, program, BackendProfile::St);
+    let requested_tick = "tick:F:41";
+    let requested_frontier = "F";
+
+    let submitted = fabric
+        .submit_source_action(publish_designated_action_with_tick(requested_tick))
+        .expect("publish submission creates a generated E→S input request");
+    let input_request = fabric
+        .locus_runtime("E")
+        .expect("E exists")
+        .outgoing_mailbox()
+        .pending_envelopes()
+        .single();
+    assert_eq!(input_request.envelope_id(), submitted.envelope_id());
+    assert_envelope_tick(&input_request, requested_tick, requested_frontier);
+
+    fabric
+        .step_transport("E", "S", input_request.envelope_id())
+        .expect("input request transports to S");
+    let source_step = fabric
+        .step_locus("S")
+        .expect("S validates source release and emits receipt");
+    let input_receipt = fabric
+        .locus_runtime("S")
+        .expect("S exists")
+        .outgoing_mailbox()
+        .pending_envelopes()
+        .single();
+    assert_eq!(input_receipt.envelope_id(), source_step.reply_envelope_id());
+    assert_eq!(input_receipt.typed_value(), RuntimeValue::int(10));
+    assert_envelope_tick(&input_receipt, requested_tick, requested_frontier);
+
+    fabric
+        .step_transport("S", "E", input_receipt.envelope_id())
+        .expect("input receipt transports to E");
+    let evaluator_step = fabric
+        .step_locus("E")
+        .expect("E installs the receipt and evaluates through M8");
+    assert_backend_publication_observation(
+        &fabric,
+        evaluator_step.m8_evaluation_node_id(),
+        requested_tick,
+        requested_frontier,
+    );
+}
+
+#[test]
+fn designated_publish_without_explicit_tick_fails_before_outbox_m8_or_state() {
+    let checked = designated_checked();
+    let program = fabric_program(designated_projection(&checked));
+    let mut fabric = boot(&checked, program, BackendProfile::St);
+    let before = fabric.semantic_snapshot();
+    let m8_before = fabric.m8_actual_trace().stable_digest();
+
+    let diagnostics = assert_sys4_diag(
+        fabric.submit_source_action(SourceAction::designated_tick("E.result")),
+        missing_designated_tick_diag(),
+    );
+
+    assert!(diagnostics.rejected_envelope_id().is_none());
+    assert!(diagnostics.endpoint_dequeue_occurrence_id().is_none());
+    assert!(diagnostics.m8_trace_node_id().is_none());
+    assert!(
+        fabric
+            .locus_runtime("E")
+            .expect("E exists")
+            .outgoing_mailbox()
+            .pending_envelopes()
+            .is_empty(),
+        "missing tick must fail before an E outbox carrier is materialized"
+    );
+    assert_eq!(fabric.m8_actual_trace().stable_digest(), m8_before);
+    assert!(fabric.semantic_snapshot().same_state(&before));
+}
+
+#[test]
+fn designated_delivery_envelope_seals_m8_publication_identity_tick_and_not_latest_map() {
+    let checked = designated_checked();
+    let program = fabric_program(designated_projection(&checked));
+    let mut fabric = boot(&checked, program, BackendProfile::St);
+
+    let first_submit = fabric
+        .submit_source_action(publish_designated_action_with_tick("tick:F:41"))
+        .expect("first publish creates E→S request");
+    fabric
+        .step_transport("E", "S", first_submit.envelope_id())
+        .expect("first input request transports to S");
+    let first_source_step = fabric.step_locus("S").expect("S emits first input receipt");
+    fabric
+        .step_transport("S", "E", first_source_step.reply_envelope_id())
+        .expect("first input receipt transports to E");
+    let first_evaluator_step = fabric
+        .step_locus("E")
+        .expect("E publishes first result delivery");
+    let first_m8_delivery_id = first_evaluator_step
+        .receipt()
+        .expect("first evaluator step returns M8 publication receipt")
+        .delivery_id()
+        .to_string();
+    let first_m8_version = first_evaluator_step
+        .receipt()
+        .expect("first evaluator step returns M8 publication receipt")
+        .result_version()
+        .expect("designated publication has a result version");
+    let first_delivery = fabric
+        .locus_runtime("E")
+        .expect("E exists")
+        .outgoing_mailbox()
+        .pending_envelopes()
+        .single();
+    assert_eq!(
+        envelope_m8_publication_id(&first_delivery),
+        first_m8_delivery_id
+    );
+    assert_eq!(
+        binding_m8_publication_id(first_delivery.immutable_delivery_binding()),
+        first_m8_delivery_id
+    );
+    assert_eq!(envelope_logical_tick_id(&first_delivery), "tick:F:41");
+    assert_eq!(
+        binding_logical_tick_id(first_delivery.immutable_delivery_binding()),
+        "tick:F:41"
+    );
+    assert_eq!(envelope_logical_tick_frontier(&first_delivery), "F");
+    assert_eq!(
+        binding_logical_tick_frontier(first_delivery.immutable_delivery_binding()),
+        "F"
+    );
+
+    let second_submit = fabric
+        .submit_source_action(publish_designated_action_with_tick("tick:F:42"))
+        .expect("second publish creates another E→S request while first delivery stays pending");
+    fabric
+        .step_transport("E", "S", second_submit.envelope_id())
+        .expect("second input request transports to S without consuming first delivery");
+    let second_source_step = fabric
+        .step_locus("S")
+        .expect("S emits second input receipt");
+    fabric
+        .step_transport("S", "E", second_source_step.reply_envelope_id())
+        .expect("second input receipt transports to E");
+    let second_evaluator_step = fabric
+        .step_locus("E")
+        .expect("E publishes second result delivery");
+    let second_m8_delivery_id = second_evaluator_step
+        .receipt()
+        .expect("second evaluator step returns M8 publication receipt")
+        .delivery_id()
+        .to_string();
+    let second_m8_version = second_evaluator_step
+        .receipt()
+        .expect("second evaluator step returns M8 publication receipt")
+        .result_version()
+        .expect("designated publication has a result version");
+
+    assert_eq!(
+        fabric
+            .locus_runtime("E")
+            .expect("E exists")
+            .outgoing_mailbox()
+            .pending_envelopes()
+            .len(),
+        2,
+        "two generated delivery envelopes must remain independently live at E before C consumes either"
+    );
+    assert_eq!(
+        first_m8_version, second_m8_version,
+        "current finite Core profile fixes the designated result version; SYS-4 must therefore seal the M8 publication identity/tick on each envelope instead of using an operation-latest map"
+    );
+    assert!(
+        !second_m8_delivery_id.is_empty(),
+        "second publication identity is recorded even when the fixed finite profile reuses the same result version"
+    );
+
+    fabric
+        .step_transport("E", "C", first_delivery.envelope_id())
+        .expect("A delivery transports to C out of order after B publication exists");
+    let first_consume = fabric
+        .step_locus("C")
+        .expect("C consumes the exact first delivery envelope, not the operation-latest map");
+    let first_receipt = first_consume
+        .receipt()
+        .expect("first delivery consume returns receipt");
+    assert_eq!(
+        first_receipt.delivery_id(),
+        envelope_m8_publication_id(&first_delivery)
+    );
+    assert_eq!(
+        receipt_m8_publication_id(first_receipt),
+        envelope_m8_publication_id(&first_delivery)
+    );
+    assert_eq!(
+        receipt_logical_tick_id(first_receipt),
+        envelope_logical_tick_id(&first_delivery)
+    );
+    assert_backend_consume_observation(
+        &fabric,
+        first_consume.m8_consume_node_id(),
+        envelope_m8_publication_id(&first_delivery),
+        envelope_logical_tick_id(&first_delivery),
+    );
+
+    let cache_validation_count_before = m8_backend_trace_count(
+        &fabric,
+        M8LocalTraceKind::DesignatedCacheValidated,
+        first_receipt.semantic_consumption_identity(),
+        "C",
+    );
+    let prior_m8_sequence = m8_backend_latest_sequence(&fabric);
+    let initial_consumer_authority_nodes = m8_backend_node_ids(
+        &fabric,
+        M8LocalTraceKind::DesignatedConsumerAuthorityValidated,
+        first_receipt.semantic_consumption_identity(),
+        "C",
+    );
+    let retry = fabric
+        .dispatch_source_action(consume_designated_action())
+        .expect("retry validates cached first delivery even after B is latest");
+    assert_eq!(
+        receipt_m8_publication_id(&retry),
+        envelope_m8_publication_id(&first_delivery)
+    );
+    assert_eq!(
+        receipt_logical_tick_id(&retry),
+        envelope_logical_tick_id(&first_delivery)
+    );
+    let validation_node_id = retry
+        .m8_non_consuming_validation_node_id()
+        .expect("retry returns actual M8 non-consuming cache validation id");
+    assert_eq!(
+        m8_backend_trace_count(
+            &fabric,
+            M8LocalTraceKind::DesignatedCacheValidated,
+            first_receipt.semantic_consumption_identity(),
+            "C",
+        ),
+        cache_validation_count_before + 1,
+        "retry must add exactly one fresh M8 cache-validation trace occurrence"
+    );
+    assert!(
+        !initial_consumer_authority_nodes
+            .iter()
+            .any(|node| node == validation_node_id),
+        "cache retry validation must not reuse the initial consumer-authority validation node"
+    );
+    assert_backend_cache_validation_observation(
+        &fabric,
+        validation_node_id,
+        first_receipt.semantic_consumption_identity(),
+        "C",
+        envelope_m8_publication_id(&first_delivery),
+        envelope_logical_tick_id(&first_delivery),
+        prior_m8_sequence,
+    );
+}
+
+#[test]
+fn designated_delivery_mismatched_m8_publication_identity_rejects_before_consume() {
+    let checked = designated_checked();
+    let projection = designated_projection(&checked);
+    let delivery_edge = projection
+        .communication_plan()
+        .single_edge(
+            "E.result",
+            CommunicationEdgeKind::DesignatedResultDelivery,
+            "E",
+            "C",
+        )
+        .expect("projection has result delivery edge");
+    let program = fabric_program(projection);
+    let mut fabric = boot(&checked, program, BackendProfile::St);
+
+    stage_designated_publish_until_delivery_outbox(&mut fabric);
+    let delivery = fabric
+        .locus_runtime("E")
+        .expect("E exists")
+        .outgoing_mailbox()
+        .pending_envelopes()
+        .single();
+    let original_identity = delivery.semantic_identity().to_string();
+    let before = fabric.semantic_snapshot();
+    let cache_before = fabric.designated_cache_snapshot();
+    let consumed_before = fabric
+        .m8_actual_trace()
+        .value_consumed_count(&original_identity, "C");
+
+    fabric
+        .dispatch_external_action(ExternalAction::fault_event(
+            FaultInjection::corrupt_in_transit_envelope_m8_publication_id_for_edge(
+                delivery_edge.edge_ref(),
+                delivery.envelope_id(),
+                "m8-forged-publication-id",
+            ),
+        ))
+        .expect("fault selector targets one checked delivery edge/envelope");
+    fabric
+        .step_transport("E", "C", delivery.envelope_id())
+        .expect("corrupted delivery transports to C");
+    let rejected = assert_sys4_diag(
+        fabric.step_locus("C"),
+        delivery_publication_identity_mismatch_diag(),
+    );
+
+    assert_eq!(
+        rejected.rejected_envelope_id(),
+        Some(delivery.envelope_id())
+    );
+    assert!(rejected.m8_trace_node_id().is_none());
+    assert!(!rejected.exposes_raw_payload());
+    assert!(fabric.semantic_snapshot().same_state(&before));
+    assert_eq!(fabric.designated_cache_snapshot(), cache_before);
+    assert_eq!(
+        fabric
+            .m8_actual_trace()
+            .value_consumed_count(&original_identity, "C"),
+        consumed_before
+    );
+    assert_eq!(
+        fabric
+            .locus_runtime("C")
+            .expect("C exists")
+            .incoming_mailbox()
+            .terminal_rejected_envelope(delivery.envelope_id())
+            .expect("mismatched identity carrier is quarantined")
+            .diagnostic_kind(),
+        delivery_publication_identity_mismatch_diag()
+    );
+}
+
+#[test]
+fn m8_cache_retry_validation_node_id_is_actual_m8_trace_occurrence_not_sys4_token() {
+    let checked = designated_checked();
+    let program = fabric_program(designated_projection(&checked));
+    let mut fabric = boot(&checked, program, BackendProfile::St);
+
+    fabric
+        .dispatch_source_action(publish_designated_action())
+        .expect("publish succeeds");
+    let first = fabric
+        .dispatch_source_action(consume_designated_action())
+        .expect("first consume succeeds");
+    let semantic_identity = first.semantic_consumption_identity().to_string();
+    let cache_validation_count_before = m8_backend_trace_count(
+        &fabric,
+        M8LocalTraceKind::DesignatedCacheValidated,
+        &semantic_identity,
+        "C",
+    );
+    let prior_m8_sequence = m8_backend_latest_sequence(&fabric);
+    let initial_consumer_authority_nodes = m8_backend_node_ids(
+        &fabric,
+        M8LocalTraceKind::DesignatedConsumerAuthorityValidated,
+        &semantic_identity,
+        "C",
+    );
+    let retry = fabric
+        .dispatch_source_action(consume_designated_action())
+        .expect("retry returns cache after live authority revalidation");
+    let validation_node_id = retry
+        .m8_non_consuming_validation_node_id()
+        .expect("retry reports the M8 non-consuming cache validation occurrence");
+    assert_eq!(
+        m8_backend_trace_count(
+            &fabric,
+            M8LocalTraceKind::DesignatedCacheValidated,
+            &semantic_identity,
+            "C",
+        ),
+        cache_validation_count_before + 1,
+        "cache retry must append exactly one M8-owned cache-validation occurrence"
+    );
+    assert!(
+        !initial_consumer_authority_nodes
+            .iter()
+            .any(|node| node == validation_node_id),
+        "cache retry validation must not reuse the initial consumer-authority validation node"
+    );
+    assert_backend_cache_validation_observation(
+        &fabric,
+        validation_node_id,
+        &semantic_identity,
+        "C",
+        receipt_m8_publication_id(&retry),
+        receipt_logical_tick_id(&retry),
+        prior_m8_sequence,
+    );
+}
+
+#[test]
+fn cache_retry_faulted_binding_digest_rejects_before_m9_m8_or_payload() {
+    let checked = designated_checked();
+    let program = fabric_program(designated_projection(&checked));
+    let mut fabric = boot(&checked, program, BackendProfile::St);
+
+    fabric
+        .dispatch_source_action(publish_designated_action())
+        .expect("publish succeeds");
+    let first = fabric
+        .dispatch_source_action(consume_designated_action())
+        .expect("first consume succeeds");
+    let semantic_identity = first.semantic_consumption_identity().to_string();
+    let retry_submission = fabric
+        .submit_source_action(consume_designated_action())
+        .expect("retry creates a local CacheRetry envelope in C inbox");
+    let retry_envelope = fabric
+        .locus_runtime("C")
+        .expect("C exists")
+        .incoming_mailbox()
+        .pending_envelopes()
+        .single();
+    assert_eq!(retry_envelope.envelope_id(), retry_submission.envelope_id());
+    assert!(is_local_cache_retry(&retry_envelope));
+
+    let before = fabric.semantic_snapshot();
+    let cache_before = fabric.designated_cache_snapshot();
+    let m9_validation_before =
+        m9_validation_occurrence_count(&fabric, "E.result", "C", &semantic_identity);
+    let m8_nonconsume_before = m8_backend_trace_count(
+        &fabric,
+        M8LocalTraceKind::DesignatedCacheValidated,
+        &semantic_identity,
+        "C",
+    );
+    fabric
+        .dispatch_external_action(ExternalAction::fault_event(
+            FaultInjection::corrupt_local_cache_retry_binding_digest(retry_envelope.envelope_id()),
+        ))
+        .expect("local cache-retry fault selector is bound to the exact envelope id");
+
+    let rejected = assert_sys4_diag(fabric.step_locus("C"), cache_binding_digest_mismatch_diag());
+    assert_eq!(
+        rejected.rejected_envelope_id(),
+        Some(retry_envelope.envelope_id())
+    );
+    assert!(rejected.m9_failure_inspection().is_none());
+    assert!(rejected.m8_non_consuming_validation_node_id().is_none());
+    assert!(rejected.primary().typed_success().is_none());
+    assert!(!rejected.exposes_raw_payload());
+    assert!(fabric.semantic_snapshot().same_state(&before));
+    assert_eq!(fabric.designated_cache_snapshot(), cache_before);
+    assert_eq!(
+        m9_validation_occurrence_count(&fabric, "E.result", "C", &semantic_identity),
+        m9_validation_before,
+        "cache binding corruption must fail before live M9 validation"
+    );
+    assert_eq!(
+        m8_backend_trace_count(
+            &fabric,
+            M8LocalTraceKind::DesignatedCacheValidated,
+            &semantic_identity,
+            "C",
+        ),
+        m8_nonconsume_before,
+        "cache binding corruption must fail before M8 non-consuming validation"
+    );
+    assert_eq!(
+        fabric
+            .locus_runtime("C")
+            .expect("C exists")
+            .incoming_mailbox()
+            .terminal_rejected_envelope(retry_envelope.envelope_id())
+            .expect("faulted cache retry is quarantined")
+            .diagnostic_kind(),
+        cache_binding_digest_mismatch_diag()
+    );
+}
+
+#[test]
+fn post_dequeue_m8_consume_failure_quarantines_and_does_not_head_block_later_delivery() {
+    let checked = designated_checked();
+    let program = fabric_program(designated_projection(&checked));
+    let mut fabric = boot(&checked, program, BackendProfile::St);
+
+    stage_designated_publish_until_delivery_outbox(&mut fabric);
+    let first_delivery = fabric
+        .locus_runtime("E")
+        .expect("E exists")
+        .outgoing_mailbox()
+        .pending_envelopes()
+        .single();
+    let semantic_identity = first_delivery.semantic_identity().to_string();
+    let publication_id = envelope_m8_publication_id(&first_delivery).to_string();
+    let logical_tick = envelope_logical_tick_id(&first_delivery).to_string();
+    fabric
+        .step_transport("E", "C", first_delivery.envelope_id())
+        .expect("first delivery transports to C");
+    fabric
+        .m8_backend_test_support_mut()
+        .reject_next_designated_consume_after_validation(
+            first_delivery.envelope_id(),
+            &publication_id,
+            "C",
+        )
+        .expect("fault is armed inside actual M8 backend test support, not as a SYS-4 precheck");
+    let before_failure = fabric.semantic_snapshot();
+    let cache_before_failure = fabric.designated_cache_snapshot();
+    let m9_validation_before =
+        m9_validation_occurrence_count(&fabric, "E.result", "C", &semantic_identity);
+    let m8_success_before = m8_backend_trace_count(
+        &fabric,
+        M8LocalTraceKind::DesignatedValueConsumed,
+        &semantic_identity,
+        "C",
+    );
+    let m8_reject_before = m8_backend_trace_count(
+        &fabric,
+        M8LocalTraceKind::DesignatedConsumptionRejected,
+        &semantic_identity,
+        "C",
+    );
+    let prior_m8_sequence = m8_backend_latest_sequence(&fabric);
+
+    let rejected = assert_sys4_diag(
+        fabric.step_locus("C"),
+        Sys4DiagnosticKind::M8ExecutionRejected,
+    );
+    assert_eq!(
+        rejected.rejected_envelope_id(),
+        Some(first_delivery.envelope_id())
+    );
+    assert!(
+        rejected.endpoint_dequeue_occurrence_id().is_some(),
+        "failure is post-dequeue: C has already consumed the endpoint envelope before backend M8 rejects"
+    );
+    assert_eq!(
+        m9_validation_occurrence_count(&fabric, "E.result", "C", &semantic_identity),
+        m9_validation_before + 1,
+        "backend failure is armed after live M9 validation, so M9 validation evidence must advance"
+    );
+    assert_eq!(
+        m8_backend_trace_count(
+            &fabric,
+            M8LocalTraceKind::DesignatedValueConsumed,
+            &semantic_identity,
+            "C",
+        ),
+        m8_success_before,
+        "rejected backend consume attempt must not be counted as a successful value consumption"
+    );
+    assert_eq!(
+        m8_backend_trace_count(
+            &fabric,
+            M8LocalTraceKind::DesignatedConsumptionRejected,
+            &semantic_identity,
+            "C",
+        ),
+        m8_reject_before + 1,
+        "backend rejection must append exactly one M8-owned failure occurrence"
+    );
+    let backend_failure = rejected
+        .backend_m8_failure_inspection()
+        .expect("diagnostic must expose typed M8 backend failure evidence");
+    let backend_node_id = backend_failure.node_id();
+    assert_eq!(
+        rejected.m8_trace_node_id(),
+        Some(backend_node_id),
+        "diagnostic trace node must be the actual M8 backend rejection occurrence"
+    );
+    assert_eq!(
+        backend_failure.kind(),
+        M8LocalTraceKind::DesignatedConsumptionRejected
+    );
+    assert_eq!(backend_failure.envelope_id(), first_delivery.envelope_id());
+    assert_eq!(backend_failure.m8_publication_id(), publication_id);
+    assert_eq!(backend_failure.consumer_locus(), "C");
+    assert_backend_consumption_rejection_observation(
+        &fabric,
+        backend_node_id,
+        first_delivery.envelope_id(),
+        &semantic_identity,
+        "C",
+        &publication_id,
+        &logical_tick,
+        prior_m8_sequence,
+    );
+    assert!(rejected.primary().typed_success().is_none());
+    assert!(!rejected.exposes_raw_payload());
+    assert!(fabric.semantic_snapshot().same_state(&before_failure));
+    assert_eq!(fabric.designated_cache_snapshot(), cache_before_failure);
+    assert_eq!(
+        fabric
+            .locus_runtime("C")
+            .expect("C exists")
+            .incoming_mailbox()
+            .terminal_rejected_envelope(first_delivery.envelope_id())
+            .expect("post-dequeue M8 failure is terminally quarantined")
+            .diagnostic_kind(),
+        Sys4DiagnosticKind::M8ExecutionRejected
+    );
+
+    stage_designated_publish_until_delivery_outbox(&mut fabric);
+    let clean_delivery = fabric
+        .locus_runtime("E")
+        .expect("E exists")
+        .outgoing_mailbox()
+        .pending_envelopes()
+        .single();
+    fabric
+        .step_transport("E", "C", clean_delivery.envelope_id())
+        .expect("later clean delivery transports after prior quarantine");
+    let clean = fabric
+        .step_locus("C")
+        .expect("terminal quarantine must not head-block a later clean delivery");
+    assert_eq!(
+        clean
+            .receipt()
+            .expect("clean delivery returns receipt")
+            .typed_value(),
+        RuntimeValue::int(11)
+    );
+}
+
+#[test]
+fn initial_designated_delivery_auth_failures_remain_distinct_sealed_m9_causes() {
+    #[derive(Clone, Copy)]
+    enum InitialAuthCase {
+        Membership,
+        Capability,
+        Witness,
+    }
+
+    for auth_case in [
+        InitialAuthCase::Membership,
+        InitialAuthCase::Capability,
+        InitialAuthCase::Witness,
+    ] {
+        let checked = designated_checked();
+        let program = fabric_program(designated_projection(&checked));
+        let mut fabric = boot(&checked, program, BackendProfile::St);
+        stage_designated_publish_until_delivery_outbox(&mut fabric);
+        let delivery = fabric
+            .locus_runtime("E")
+            .expect("E exists")
+            .outgoing_mailbox()
+            .pending_envelopes()
+            .single();
+        let semantic_identity = delivery.semantic_identity().to_string();
+        let current_m9 = fabric.current_m9_authority_inspection();
+        let transition = match auth_case {
+            InitialAuthCase::Membership => fabric
+                .m9_authority_lifecycle_mut()
+                .retire_designated_consumer_membership("E.result", "C")
+                .expect("membership retirement is produced by M9 lifecycle"),
+            InitialAuthCase::Capability => fabric
+                .m9_authority_lifecycle_mut()
+                .revoke_designated_consumer_capability("E.result", "C")
+                .expect("capability revocation is produced by M9 lifecycle"),
+            InitialAuthCase::Witness => fabric
+                .m9_authority_lifecycle_mut()
+                .retire_designated_consumer_witness("E.result", "C")
+                .expect("witness retirement is produced by M9 lifecycle"),
+        };
+        let transition_view = transition.sealed_m9_inspection();
+        let expected_diag = match auth_case {
+            InitialAuthCase::Membership => Sys4DiagnosticKind::MissingConsumerMembership,
+            InitialAuthCase::Capability => Sys4DiagnosticKind::MissingConsumerCapability,
+            InitialAuthCase::Witness => Sys4DiagnosticKind::MissingConsumerWitness,
+        };
+        let expected_error = match auth_case {
+            InitialAuthCase::Membership => {
+                crate::m9_auth_verification::M9AdmissionErrorKind::InvalidMembershipLineage
+            }
+            InitialAuthCase::Capability | InitialAuthCase::Witness => {
+                crate::m9_auth_verification::M9AdmissionErrorKind::InvalidCapabilityLineage
+            }
+        };
+        let expected_transition = match auth_case {
+            InitialAuthCase::Membership => {
+                crate::m9_auth_verification::M9AuthorityTransitionKind::DesignatedConsumerMembershipRetired
+            }
+            InitialAuthCase::Capability => {
+                crate::m9_auth_verification::M9AuthorityTransitionKind::DesignatedConsumerCapabilityRevoked
+            }
+            InitialAuthCase::Witness => {
+                crate::m9_auth_verification::M9AuthorityTransitionKind::DesignatedConsumerWitnessRetired
+            }
+        };
+        assert_eq!(transition_view.transition_kind(), expected_transition);
+        assert_eq!(transition_view.prior_generation(), current_m9.generation());
+        let successor_generation = transition_view.successor_generation().clone();
+        let expected_lineage = transition_view.consumer_lineage().clone();
+        fabric
+            .apply_admitted_authority_lifecycle(transition)
+            .expect("fabric installs the M9 successor before first delivery consume");
+
+        fabric
+            .step_transport("E", "C", delivery.envelope_id())
+            .expect("delivery transports to C before C validates live consumer authority");
+        let before_reject = fabric.semantic_snapshot();
+        let m8_before = fabric.m8_actual_trace().stable_digest();
+        let rejected = assert_sys4_diag(fabric.step_locus("C"), expected_diag);
+        assert_eq!(
+            rejected.rejected_envelope_id(),
+            Some(delivery.envelope_id())
+        );
+        let failure = rejected
+            .m9_failure_inspection()
+            .expect("initial delivery rejection must expose sealed M9 failure evidence");
+        assert_eq!(failure.admission_error_kind(), expected_error);
+        assert_eq!(failure.installed_generation(), successor_generation);
+        assert_eq!(failure.consumer_lineage(), &expected_lineage);
+        assert_eq!(failure.semantic_identity(), &semantic_identity);
+        assert_eq!(failure.consumer_locus(), "C");
+        assert!(rejected.m8_trace_node_id().is_none());
+        assert!(rejected.primary().typed_success().is_none());
+        assert!(!rejected.exposes_raw_payload());
+        assert!(fabric.semantic_snapshot().same_state(&before_reject));
+        assert_eq!(fabric.m8_actual_trace().stable_digest(), m8_before);
+        assert_eq!(
+            fabric
+                .m8_actual_trace()
+                .value_consumed_count(&semantic_identity, "C"),
+            0
+        );
+    }
+}
+
+#[test]
+fn endpoint_records_and_trace_rows_expose_exact_envelope_provenance_not_booleans() {
+    let checked = owner_endpoint_checked();
+    let projection = owner_endpoint_projection(&checked);
+    let owner_request_edge = projection
+        .communication_plan()
+        .single_edge("attack", CommunicationEdgeKind::OwnerRequest, "A", "S")
+        .expect("projection has owner request edge");
+    let program = fabric_program(projection);
+    let mut fabric = boot(&checked, program, BackendProfile::St);
+
+    let submitted = fabric
+        .submit_source_action(owner_attack_action("attack"))
+        .expect("owner request submits a generated A outbox envelope");
+    let request_envelope = fabric
+        .locus_runtime("A")
+        .expect("A exists")
+        .outgoing_mailbox()
+        .pending_envelopes()
+        .single();
+    let transport = fabric
+        .step_transport("A", "S", request_envelope.envelope_id())
+        .expect("transport moves owner request through endpoints");
+
+    let source_history = fabric
+        .locus_runtime("A")
+        .expect("A exists")
+        .outgoing_endpoint()
+        .carrier_history_for_request(submitted.request_id());
+    let target_history = fabric
+        .locus_runtime("S")
+        .expect("S exists")
+        .incoming_endpoint()
+        .carrier_history_for_request(submitted.request_id());
+    assert_eq!(
+        source_history.carrier_history_len(),
+        1,
+        "source LocusRuntime outgoing endpoint must own the actual outbox dequeue carrier record, not leave endpoint evidence only in a global side list"
+    );
+    assert_eq!(
+        target_history.carrier_history_len(),
+        1,
+        "target LocusRuntime incoming endpoint must own the actual inbox enqueue carrier record"
+    );
+
+    let source_record = source_history.single(CommunicationEdgeKind::OwnerRequest, "A", "S");
+    let target_record = target_history.single(CommunicationEdgeKind::OwnerRequest, "A", "S");
+    assert_endpoint_record_provenance(
+        &source_record,
+        &owner_request_edge,
+        request_envelope.carrier_id(),
+    );
+    assert_endpoint_record_provenance(
+        &target_record,
+        &owner_request_edge,
+        request_envelope.carrier_id(),
+    );
+
+    let dispatch_row = fabric.trace().endpoint_row_for_carrier(
+        request_envelope.carrier_id(),
+        Sys4TraceKind::Dispatched,
+        transport.source_outbox_dequeue_record_id(),
+        "A",
+        "S",
+    );
+    let receive_row = fabric.trace().endpoint_row_for_carrier(
+        request_envelope.carrier_id(),
+        Sys4TraceKind::Received,
+        transport.target_inbox_enqueue_record_id(),
+        "A",
+        "S",
+    );
+    assert_trace_row_provenance(dispatch_row, &owner_request_edge);
+    assert_trace_row_provenance(receive_row, &owner_request_edge);
+}
+
+#[test]
 fn staged_designated_source_release_invalidation_rejects_before_s_read_or_receipt() {
     let checked = designated_checked();
     let projection = designated_projection(&checked);
@@ -2429,6 +3463,18 @@ fn sys4_dispatch_module_has_no_shortcut_dependencies_when_present() {
         "global_remote_store",
         "remote_store_shortcut",
         "HashMap<LocusTag, RemoteStore>",
+        "#![allow(",
+        "cfg(any())",
+        "retired_direct",
+        "retired_history",
+        "retired_seed",
+        "source_core_fragment_edge_provenance: bool",
+        "source_core_artifact_bound: bool",
+        "actual_m8_trace_observed: bool",
+        "has_source_core_fragment_edge_provenance",
+        "all_reads_and_writes_have_source_core_provenance",
+        "all_entries_have_source_core_fragment_and_edge_provenance",
+        "crossed_endpoint_boundary(&self, _source: &str, _target: &str)",
     ];
 
     for source in sources {
