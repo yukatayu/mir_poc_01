@@ -32,6 +32,14 @@ class MirroreaProjectOverviewHtmlTests(unittest.TestCase):
         cls.parser = OverviewParser()
         cls.parser.feed(cls.html)
 
+    def assert_contains_marker(self, haystack: str, marker: str, label: str) -> None:
+        if marker not in haystack:
+            self.fail(f"missing {label} marker: {marker!r}")
+
+    def assert_omits_marker(self, haystack: str, marker: str, label: str) -> None:
+        if marker in haystack:
+            self.fail(f"stale {label} marker is still present: {marker!r}")
+
     def test_is_a_self_contained_japanese_reader_view(self) -> None:
         self.assertIn('<html lang="ja">', self.html)
         self.assertNotRegex(self.html, r"<script[^>]+src=")
@@ -70,19 +78,26 @@ class MirroreaProjectOverviewHtmlTests(unittest.TestCase):
             "SYS-0 completed",
             "SYS-1 completed",
             "SYS-2 completed",
-            "SYS-0--SYS-3 completed",
-            "active goal は SYS-4",
-            "next goal は SYS-5",
-            "SYS-4 active",
-            "SYS-5 next",
+            "SYS-0--SYS-4 completed",
+            "active goal は SYS-5",
+            "next goal は SYS-6",
+            "SYS-4 completed",
+            "SYS-5 active",
+            "SYS-6 next",
             "closed / SYS-3",
-            "現在 / SYS-4",
-            "今 / SYS-4",
-            "次 / SYS-5",
+            "closed / SYS-4",
+            "現在 / SYS-5",
+            "今 / SYS-5",
+            "次 / SYS-6",
             "受理済みSYS-3 source/evidence cut",
             "3013e7fe075a7605a1ffe01e0b14f4a0856eaeb9",
+            "accepted SYS-4 cut",
+            "22196f93...",
             "partial regression history",
             "OBL-060 runtime-monitored (static finite only)",
+            "OBL-061",
+            "finite in-process dispatch",
+            "runtime-monitored",
             "OPEN-030 は I2 internal bounded contract として解決",
             "program activation は broad PHASE-I1 exit / I2 lifecycle acceptance ではない",
             "Plan 247 は closed",
@@ -93,7 +108,7 @@ class MirroreaProjectOverviewHtmlTests(unittest.TestCase):
             "083523518fdae0a111522f49b148c818ca0d5c21b4b7cc4f34dd476f10d172e7",
         )
         for fact in required_facts:
-            self.assertIn(fact, self.html)
+            self.assert_contains_marker(self.html, fact, "HTML lifecycle/acceptance")
 
     def test_separates_end_user_theory_evidence_and_future_claims(self) -> None:
         required_terms = (
@@ -113,7 +128,7 @@ class MirroreaProjectOverviewHtmlTests(unittest.TestCase):
             "presentation fallback",
         )
         for term in required_terms:
-            self.assertIn(term, self.html)
+            self.assert_contains_marker(self.html, term, "HTML evidence separation")
 
         for phase in ("T0", "T1", "T2", "I1", "I2", "I3", "I4", "I5", "I6"):
             self.assertRegex(self.html, rf">\s*{phase}(?:\s|<)")
@@ -144,14 +159,23 @@ class MirroreaProjectOverviewHtmlTests(unittest.TestCase):
             "active goal は SYS-3",
             "next goal は SYS-4",
             "SYS-3 active / reopened",
+            "SYS-4 reopened",
+            "active goal は SYS-4",
+            "SYS-4 active",
+            "next goal は SYS-5",
+            "SYS-5 next",
             "現在 / SYS-3",
             "今 / SYS-3",
             "SYS-4 next",
             "次 / SYS-4",
+            "現在 / SYS-4",
+            "今 / SYS-4",
+            "次 / SYS-5",
             "OBL-060 intentionally-deferred",
+            "OBL-061 intentionally-deferred",
         )
         for claim in stale_claims:
-            self.assertNotIn(claim, self.html)
+            self.assert_omits_marker(self.html, claim, "HTML current-state")
 
     def test_all_internal_fragments_and_local_links_resolve(self) -> None:
         known_ids = set(self.parser.ids)
@@ -187,28 +211,55 @@ class MirroreaProjectOverviewHtmlTests(unittest.TestCase):
     def test_linked_reader_entry_uses_the_current_proof_and_program_boundary(self) -> None:
         documentation = DOCUMENTATION_PATH.read_text(encoding="utf-8")
 
-        self.assertIn(
+        self.assert_contains_marker(
+            documentation,
             "General OBL-001..025 と OBL-027 は `intentionally-deferred`",
-            documentation,
+            "Documentation proof boundary",
         )
-        self.assertIn("OBL-026 は `lean-proved`", documentation)
-        self.assertIn("OBL-028 は `model-checked-bounded`", documentation)
-        self.assertIn("M0--M10 program は closed", documentation)
-        self.assertIn("active roadmap は Plan 249", documentation)
-        self.assertIn("SYS-0--SYS-3 completed", documentation)
-        self.assertIn("active goal は SYS-4", documentation)
-        self.assertIn("next goal は SYS-5", documentation)
-        self.assertIn("`ded622fe...`を", documentation)
-        self.assertIn("partial regression evidenceへ", documentation)
-        self.assertIn("corrected source/evidence cut `3013e7fe...`でclosed", documentation)
-        self.assertIn("SYS-3のOBL-060もstatic finite compiler/projector evidenceだけを", documentation)
-        self.assertIn(
+        self.assert_contains_marker(documentation, "OBL-026 は `lean-proved`", "Documentation proof boundary")
+        self.assert_contains_marker(
+            documentation, "OBL-028 は `model-checked-bounded`", "Documentation proof boundary"
+        )
+        self.assert_contains_marker(documentation, "M0--M10 program は closed", "Documentation program boundary")
+        self.assert_contains_marker(documentation, "active roadmap は Plan 249", "Documentation roadmap")
+        self.assert_contains_marker(documentation, "SYS-0--SYS-4 completed", "Documentation SYS status")
+        self.assert_contains_marker(documentation, "active goal は SYS-5", "Documentation SYS status")
+        self.assert_contains_marker(documentation, "next goal は SYS-6", "Documentation SYS status")
+        self.assert_contains_marker(documentation, "`ded622fe...`を", "Documentation SYS-3 history")
+        self.assert_contains_marker(documentation, "partial regression evidenceへ", "Documentation SYS-3 history")
+        self.assert_contains_marker(
+            documentation,
+            "corrected source/evidence cut `3013e7fe...`でclosed",
+            "Documentation SYS-3 history",
+        )
+        self.assert_contains_marker(
+            documentation,
+            "SYS-4 accepted cut `22196f93b0112b8fd2987ec078021c8865b71651`",
+            "Documentation SYS-4 boundary",
+        )
+        self.assert_contains_marker(
+            documentation,
+            "SYS-3のOBL-060もstatic finite compiler/projector evidenceだけを",
+            "Documentation SYS-3 proof boundary",
+        )
+        self.assert_contains_marker(documentation, "OBL-061", "Documentation SYS-4 proof boundary")
+        self.assert_contains_marker(
+            documentation, "finite in-process dispatch", "Documentation SYS-4 proof boundary"
+        )
+        self.assert_contains_marker(
+            documentation,
             "`runtime-monitored`とし、Lean/general proof又はruntime dispatch evidenceではありません",
-            documentation,
+            "Documentation SYS-3 proof boundary",
         )
-        self.assertNotIn("goal-first integration は `plan/246", documentation)
-        self.assertNotIn("S2-A が提示する次の判断", documentation)
-        self.assertNotIn("この主線の停止条件は、I1 を開始できる状態", documentation)
+        self.assert_omits_marker(documentation, "goal-first integration は `plan/246", "Documentation stale queue")
+        self.assert_omits_marker(documentation, "S2-A が提示する次の判断", "Documentation stale queue")
+        self.assert_omits_marker(
+            documentation, "この主線の停止条件は、I1 を開始できる状態", "Documentation stale queue"
+        )
+        self.assert_omits_marker(documentation, "active goal は SYS-4", "Documentation stale SYS status")
+        self.assert_omits_marker(documentation, "next goal は SYS-5", "Documentation stale SYS status")
+        self.assert_omits_marker(documentation, "SYS-4 active", "Documentation stale SYS status")
+        self.assert_omits_marker(documentation, "SYS-5 next", "Documentation stale SYS status")
 
 
 if __name__ == "__main__":

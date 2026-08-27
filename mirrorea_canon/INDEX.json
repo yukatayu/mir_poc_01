@@ -1,6 +1,6 @@
 {
  "canon_version": "0.1.0",
- "files": 179,
+ "files": 182,
  "entries": [
   {
    "id": "root/changelog",
@@ -12,7 +12,7 @@
    "summary": "canon 自体の版履歴と改定手続きの要約。",
    "open_items": [],
    "path": "CHANGELOG.md",
-   "bytes": 20803
+   "bytes": 22248
   },
   {
    "id": "root/design-constitution",
@@ -52,7 +52,7 @@
    "summary": "知識マップ 1 枚。全域の依存図、3 種の読み筋、ID 体系。",
    "open_items": [],
    "path": "MAP.md",
-   "bytes": 24954
+   "bytes": 25958
   },
   {
    "id": "root/north-star",
@@ -74,7 +74,7 @@
    "summary": "canon の入口。正本宣言、LAB(既存 repo)との関係、読み順、版。",
    "open_items": [],
    "path": "README.md",
-   "bytes": 3931
+   "bytes": 4007
   },
   {
    "id": "adr/ADR-0001",
@@ -489,6 +489,22 @@
    "bytes": 7831
   },
   {
+   "id": "adr/ADR-0030",
+   "status": "L1-fixed",
+   "maturity": "reviewed",
+   "depends_on": [
+    "adr/ADR-0026",
+    "adr/ADR-0027",
+    "adr/ADR-0028",
+    "adr/ADR-0029",
+    "meta/proposal-033"
+   ],
+   "summary": "SYS-4のgenerated-plan-only independent locus runtime、finite ST/OW1 dispatch、typed fault、ST cut/restore、designated-only checked patchを採用する。",
+   "open_items": [],
+   "path": "adr/ADR-0030.md",
+   "bytes": 5847
+  },
+  {
    "id": "adr/readme",
    "status": "L1-fixed",
    "maturity": "draft",
@@ -498,7 +514,7 @@
    "summary": "決定記録の一覧と読み方。LAB の決定台帳(specs/12)との関係。",
    "open_items": [],
    "path": "adr/README.md",
-   "bytes": 3645
+   "bytes": 3842
   },
   {
    "id": "arch/01-strata",
@@ -534,14 +550,16 @@
     "arch/02-boundary-contracts",
     "spec/04-core-ir",
     "spec/12-sys3-per-locus-projection",
-    "adr/ADR-0029"
+    "spec/13-sys4-in-process-generated-dispatch",
+    "adr/ADR-0029",
+    "adr/ADR-0030"
    ],
-   "summary": "toolchain各componentの責務と、accepted SYS-3 designated-consumeを含むchecked-Core-only internal projection compiler boundary。",
+   "summary": "toolchain各componentの責務、accepted SYS-3 internal projection compiler、SYS-4 generated-plan-only runtime boundary。",
    "open_items": [
     "OPEN-029"
    ],
    "path": "architecture/03-toolchain.md",
-   "bytes": 3781
+   "bytes": 5132
   },
   {
    "id": "arch/04-runtime-carriers",
@@ -556,15 +574,16 @@
     "theory/18-m9-auth-verification",
     "adr/ADR-0027",
     "adr/ADR-0028",
-    "adr/ADR-0029"
+    "adr/ADR-0029",
+    "adr/ADR-0030"
    ],
-   "summary": "broad runtime carrier catalogとSYS-1--3 internal lifecycle/execution/projection carrier requirements。public API/ABI/wireは未凍結。",
+   "summary": "broad runtime carrier catalogとSYS-1--4 internal lifecycle/execution/projection/dispatch carrier requirements。public API/ABI/wireは未凍結。",
    "open_items": [
     "OPEN-026",
     "OPEN-027"
    ],
    "path": "architecture/04-runtime-carriers.md",
-   "bytes": 10696
+   "bytes": 13863
   },
   {
    "id": "arch/05-satellites",
@@ -1183,6 +1202,27 @@
    "bytes": 13854
   },
   {
+   "id": "meta/proposal-033",
+   "status": "L1-fixed",
+   "maturity": "reviewed",
+   "depends_on": [
+    "root/north-star",
+    "root/design-constitution",
+    "adr/ADR-0026",
+    "adr/ADR-0027",
+    "adr/ADR-0028",
+    "adr/ADR-0029",
+    "arch/03-toolchain",
+    "arch/04-runtime-carriers",
+    "theory/13-evaluation-materialization",
+    "spec/12-sys3-per-locus-projection"
+   ],
+   "summary": "SYS-4のgenerated-plan-only in-process locus endpoints、finite ST/OW1 dispatch、typed failure、ST cut/restore、designated-only checked patchをcut 22196f93で有限受理する提案。",
+   "open_items": [],
+   "path": "meta/proposals/PROPOSAL-033-sys4-in-process-generated-dispatch.md",
+   "bytes": 9920
+  },
+  {
    "id": "meta/source-hierarchy",
    "status": "L0-frozen",
    "maturity": "draft",
@@ -1241,14 +1281,15 @@
     "adr/ADR-0027",
     "adr/ADR-0028",
     "adr/ADR-0029",
+    "adr/ADR-0030",
     "plan/04-t0-g0-semantic-assertion-profile"
    ],
-   "summary": "実装フェーズT0-T2/I1-I6。official lifecycleはT1、SYS-0--SYS-3はclose、SYS-4 activeでbroad I1/I2 acceptanceは未受理。",
+   "summary": "実装フェーズT0-T2/I1-I6。official lifecycleはT1、SYS-0--SYS-4はclose、SYS-5 activeでbroad I1/I2 acceptanceは未受理。",
    "open_items": [
     "OPEN-032"
    ],
    "path": "plan/01-phases.md",
-   "bytes": 9260
+   "bytes": 10093
   },
   {
    "id": "plan/02-operating-model",
@@ -1659,12 +1700,32 @@
     "arch/04-runtime-carriers",
     "theory/13-evaluation-materialization",
     "theory/14-maintained-relation-projection",
-    "adr/ADR-0029"
+    "adr/ADR-0029",
+    "adr/ADR-0030"
    ],
-   "summary": "cut 3013e7feで受理したSYS-3 bounded designated-consume source/Core edgeとfinite checked-Core projectionの入力、per-locus artifact、generated plan、diagnostic、non-execution境界。",
+   "summary": "cut 3013e7feで受理したSYS-3 bounded source/Core projectionと、SYS-4が実現したgenerated endpoint refinementへのstatic handoff。",
    "open_items": [],
    "path": "spec/12-sys3-per-locus-projection.md",
-   "bytes": 11305
+   "bytes": 12340
+  },
+  {
+   "id": "spec/13-sys4-in-process-generated-dispatch",
+   "status": "L1-fixed",
+   "maturity": "draft",
+   "depends_on": [
+    "spec/05-runtime-semantics",
+    "spec/09-m8-deterministic-runtime",
+    "spec/10-m9-auth-verification",
+    "spec/12-sys3-per-locus-projection",
+    "arch/03-toolchain",
+    "arch/04-runtime-carriers",
+    "theory/13-evaluation-materialization",
+    "adr/ADR-0030"
+   ],
+   "summary": "cut 22196f93で受理したSYS-4 generated-plan-only locus runtime、endpoint dispatch、typed faults、ST local cut、designated-only checked patchの有限仕様。",
+   "open_items": [],
+   "path": "spec/13-sys4-in-process-generated-dispatch.md",
+   "bytes": 9887
   },
   {
    "id": "spec/readme",
@@ -1679,12 +1740,13 @@
     "adr/ADR-0023",
     "adr/ADR-0024",
     "adr/ADR-0025",
-    "adr/ADR-0029"
+    "adr/ADR-0029",
+    "adr/ADR-0030"
    ],
    "summary": "Mir Report(仕様の蒸留)の読み方。theory との優先関係、章構成。",
    "open_items": [],
    "path": "spec/README.md",
-   "bytes": 1315
+   "bytes": 1411
   },
   {
    "id": "theory/00-overview",
@@ -1879,12 +1941,13 @@
     "theory/16-m7-checked-elaboration",
     "theory/17-m8-deterministic-runtime",
     "adr/ADR-0028",
-    "adr/ADR-0029"
+    "adr/ADR-0029",
+    "adr/ADR-0030"
    ],
    "summary": "定理 THM と義務 OBL の単一台帳。証明状態はここだけが語る。",
    "open_items": [],
    "path": "theory/11-metatheory-ledger.md",
-   "bytes": 25145
+   "bytes": 26680
   },
   {
    "id": "theory/12-literature",
@@ -1913,12 +1976,13 @@
     "adr/ADR-0018",
     "adr/ADR-0027",
     "adr/ADR-0028",
-    "adr/ADR-0029"
+    "adr/ADR-0029",
+    "adr/ADR-0030"
    ],
    "summary": "評価場所・clock・authority origin・materializationを分離し、owner RMW、explicit receipt、designated evaluator、SYS-1 lifecycleとSYS-2 bounded execution refinementを定義する有限calculus。",
    "open_items": [],
    "path": "theory/13-evaluation-materialization.md",
-   "bytes": 15279
+   "bytes": 18230
   },
   {
    "id": "theory/14-maintained-relation-projection",

@@ -1,6 +1,6 @@
 # Plan 249 — Mirrorea I2 Systems Foundation current roadmap
 
-最終更新: 2026-08-27 07:07 JST
+最終更新: 2026-08-27 21:06 JST
 
 ## 役割、authority、current control state
 
@@ -25,27 +25,32 @@ Canon、Gate、Phase、SCN、OBL、conformance、public compatibility を変更�
   process 内の independent locus runtimes で実 dispatch し、source から runtime
   occurrence まで typed devtools で追跡できる local toy fabric を完成させる。
 - completed goals: prior ADR-0015 **M0--M10** baseline, **SYS-0 baseline and
-  goal alignment**, **SYS-1 runtime kernel / internal carrier boundary**, and
-  **SYS-2 concurrency, memory, and effect-handler refinement**, and **SYS-3
-  per-locus projection and executable artifact generation**
+  goal alignment**, **SYS-1 runtime kernel / internal carrier boundary**,
+  **SYS-2 concurrency, memory, and effect-handler refinement**, **SYS-3
+  per-locus projection and executable artifact generation**, and **SYS-4
+  in-process generated dispatch runtime**
 - accepted SYS-1 source/evidence cut:
   `94e3707c7bc98d4a0764c51f13a12b1dae1968c6`
 - accepted SYS-2 source/evidence cut:
   `920d3fe050b8b909253f8511d9ad897272323ced`
 - accepted SYS-3 source/evidence cut:
   `3013e7fe075a7605a1ffe01e0b14f4a0856eaeb9`
+- accepted SYS-4 implementation/evidence cut:
+  `22196f93b0112b8fd2987ec078021c8865b71651`
+- accepted SYS-4 contract: PROPOSAL-033 / ADR-0030 /
+  `mirrorea_canon/spec/13-sys4-in-process-generated-dispatch.md`
 - superseded pre-correction SYS-3 candidate retained as partial regression evidence:
   `ded622fef91bab2cadc571ba944e5ee2c69a7b63`
-- active goal: **SYS-4 in-process generated dispatch runtime**
-- next goal: **SYS-5 minimal typed devtools and local virtual-space vertical slice**
-- current direct blocker: materialize the accepted SYS-3 artifacts as
-  independent in-process locus stores/queues/endpoints without source reparse,
-  handwritten communication, or direct cross-locus store mutation. SYS-4 must
-  implement the source/Core-bound carrier-side idempotent return or compatible
-  wrapper before legacy M8 is called exactly once, and add actual first/retry/
-  competing-consumer endpoint evidence. Static SYS-3 projection does not claim
-  that runtime behavior.
-- official lifecycle: theory **T1**。program activation and SYS-0--SYS-3
+- active goal: **SYS-5 minimal typed devtools and local virtual-space vertical slice**
+- next goal: **SYS-6 I2 assurance, conformance, and lifecycle closeout**
+- current direct blocker: compose the accepted SYS-4 internal runtime into one
+  source-driven four-locus headless toy without source reconstruction, manual
+  route selection, direct cross-locus state access, or manual joins across
+  evidence files. The slice must make owner RMW, designated publication and
+  consume, maintained relation/fallback, authority/failure, save/restore,
+  accepted/rejected patch, and optional verification visible in one typed,
+  observer-safe causal view and a small reproducible command set.
+- official lifecycle: theory **T1**。program activation and SYS-0--SYS-4
   completion do not accept broad PHASE-I1 exit, I2 lifecycle entry, or I2 exit.
 
 Plan 247 は closed M0--M10 execution record / R5 regression baseline のまま保持する。
@@ -84,7 +89,7 @@ Parent-goal stop evidence:
 
 Milestone addition or reordering requires evidence that the parent goal cannot
 close without it and an explanation in this roadmap. No such addition exists
-through SYS-3.
+through SYS-4.
 
 ```text
 SYS-0 Baseline and goal alignment
@@ -340,7 +345,7 @@ reconstruction and every accepted Core operation has complete visible
 placement/communication or a typed projection diagnostic. Defer general DAG
 theory and optimized codegen.
 
-### SYS-4 — In-process generated dispatch runtime (active)
+### SYS-4 — In-process generated dispatch runtime (completed)
 
 **Goal ID:** SYS-4
 
@@ -380,21 +385,53 @@ remote-store access, or schedule-created semantic facts; or a same-consumer
 retry invokes legacy M8 again/returns `AlreadyConsumed` instead of the retained
 decision, while a competing consumer is accepted.
 
-**Exit evidence:** LocusRuntime/local store/queues/endpoints/views/trace;
-actual endpoint crossing; ST/OW selected scenarios; request→dispatch→receive→
-serve/failure trace; source/Core/artifact/occurrence correspondence; route,
-membership, capability, witness, duplicate/stale receipt, target, split-frame,
-revocation, and patch-frontier failures; deterministic replay; local whole-
-fabric cut/save/restore and bounded patch; source/Core-bound carrier-side
-idempotent return or compatible wrapper with actual designated-consumer
-positive/retry/competing-consumer tests and exactly one accepted M8 consume;
-preserved M8/M10 duplicate-delivery regressions; independent review.
+**Exit evidence:** Accepted implementation/evidence cut
+`22196f93b0112b8fd2987ec078021c8865b71651` materializes the accepted SYS-3
+projection as crate-private `FabricProgram` / `LocalFabric` execution. Each
+logical locus has an owned local store, generated-plan-bound endpoint and
+mailbox state, projected artifact identity, and per-locus M8 observation; ST
+uses one independent M8 session per locus, while eligible OW1 uses its one
+worker-owned M8 runtime with typed observer-snapshot availability. The staged
+path is source action → generated outbox → transport step → target inbox
+→ locus dequeue/serve or typed failure; no source/AST, handwritten edge, or
+remote store handle enters the runtime.
+
+The selected finite evidence includes four-locus/two-owner ST owner isolation,
+eligible ST/OW1 semantic correspondence and deterministic replay, exact
+source/Core/fragment/edge/envelope/M8 occurrence lineage, source-owner-derived
+designated input, evaluator publication import into the named consumer locus,
+and a source/Core-bound cache retry that records exactly one accepted M8
+semantic consume. Corrupt/retargeted/stale carrier material, route,
+membership/capability/witness, receipt/publication identity, visibility/
+redaction/policy, split-frame, revocation, and backend failures fail closed.
+OW1 observer snapshot failure is typed and distinct from absence; recovery
+reveals the already-committed exact state without semantic replay or payload/
+authority leakage.
+
+The ST whole-fabric cut retains locus stores, endpoint/mailbox transfer pairs,
+completed receipts, designated publication/cache/consumption state, exact M8
+trace/causality, counters, M9 authority floor/tombstones, and patch lifecycle.
+Restore rejects missing/asymmetric endpoint history, duplicate inbox mapping,
+counter or authority rollback, and forged trace/frontier state. The bounded
+patch route accepts only a prechecked, projected, completely M9-admitted
+candidate at an exact quiescent program/projection/authority frontier; the
+accepted finite patch changes the designated expression while preserving
+topology, owner RMW, relation/fallback, non-designated Core, authority, and
+semantic state. Stale, nonquiescent, topology/owner-route, owner-expression,
+non-designated-Core, or M9-lineage mismatch changes lifecycle rows only.
+
+Focused validation passed SYS-4 99/99, `mir-runtime` library 179/179, and M10
+source/CLI/conformance 2/4/67, plus format, `mir-runtime` all-targets
+warnings-denied Clippy, and diff checks. Independent review accepted the
+bounded internal cut. Evidence is `runtime-monitored`; no Lean/general theorem
+changed. OW1 whole-fabric cut/restore and patch activation deliberately return
+typed `BackendIneligible` in this profile and are not claimed.
 
 **Stop condition:** Close when SYS-5 can compose a real four-locus scenario
 from generated artifacts and no selected success path bypasses locus
 endpoints, ownership, or typed admission.
 
-### SYS-5 — Minimal typed devtools and local virtual-space vertical slice (next)
+### SYS-5 — Minimal typed devtools and local virtual-space vertical slice (active)
 
 **Goal ID:** SYS-5
 
@@ -440,7 +477,7 @@ semantics reviews; M10 regression.
 command set, its causal line is visible in one viewer/report, its main
 falsifiers fail closed, and SYS-6 can consume its exact artifacts/evidence.
 
-### SYS-6 — I2 assurance, conformance, and lifecycle closeout
+### SYS-6 — I2 assurance, conformance, and lifecycle closeout (next)
 
 **Goal ID:** SYS-6
 
@@ -531,9 +568,12 @@ direction.
 
 ## SYS-0 meta-alignment matrix
 
-This is a decision aid for program scope, not a new semantic encyclopedia.
+This is the retained SYS-0 start-state decision aid for program scope, not a
+current-status table or a new semantic encyclopedia. SYS-3 and SYS-4 have since
+closed the finite generated-artifact and in-process dispatch gaps recorded
+here; current evidence and the SYS-5 blocker are maintained below.
 
-| Owner intent | Current Canon representation | Current implementation evidence | Current gap | This program consumer |
+| Owner intent | SYS-0 Canon representation | SYS-0 implementation evidence | SYS-0 gap | This program consumer |
 | --- | --- | --- | --- | --- |
 | meaning-derived communication | North Star, C3, BND-001/006 | finite source-to-Core/generated-edge M10 evidence | no general per-locus executable communication path | SYS-1 carrier; SYS-3/4 projection/dispatch |
 | per-locus code generation | S4 projection, `mir-project` responsibility | no accepted generator | global checked Core does not emit runnable locus artifacts | SYS-3, then SYS-4 |
@@ -719,24 +759,51 @@ serve as its independent reviewer.
   `runtime-monitored` for this static finite compiler/projector evidence only;
   no Lean/general theorem changed.
 
-### SYS-4 current direct blockers
+### SYS-4 accepted finite boundary
 
-1. Start every accepted `LocusProgram` with an independent locus-local store,
-   queues, carrier endpoint, authority view, relation/designated state, and
-   trace; do not rebuild semantics from source or use an unpartitioned shared
-   mutable map.
-2. Materialize only generated communication edges and bind actual request →
-   dispatch → receive → serve/reply/failure occurrences back to source,
-   Core, fragment, and edge identities.
-3. Execute the same selected artifacts under ST and eligible OW1 without
-   allowing worker/mailbox/route metadata to mint authority or semantic state.
-4. Implement a source/Core-bound carrier-side idempotent return or compatible
-   wrapper for designated consumption before invoking M8 exactly once; preserve
-   legacy M8/M10 duplicate-delivery behavior and test first, same-consumer
-   retry, and competing-consumer paths at actual endpoints.
-5. Add fail-closed route/membership/capability/witness/receipt/target/frame/
-   revocation/patch-frontier cases, deterministic replay, and a consistent
-   process-local whole-fabric cut/save/restore/patch path for SYS-5.
+1. The runtime starts checked SYS-3 artifacts without source reparse and sends
+   only generated communication through explicit locus endpoints. ST owns one
+   M8 session per logical locus; eligible OW1 preserves the same selected
+   semantic correspondence through its bounded worker profile.
+2. Actual request, transport, receive, serve/reply/failure, designated
+   publication/consume, owner mutation, and M8 rows retain exact source/Core/
+   fragment/edge/carrier provenance. Neither route nor observer metadata mints
+   authority or state.
+3. The designated-consumer wrapper binds retry to the exact source/Core
+   semantic-consumption identity and sealed publication/frontier/policy data.
+   The first acceptance reaches M8 once; an exact retry performs a
+   non-consuming validation and returns the retained value. Legacy direct M8/
+   M10 duplicate-delivery behavior remains unchanged outside this wrapper.
+4. ST whole-fabric cut/restore and one bounded designated-expression patch are
+   accepted. The cut is not durable or distributed. OW1 cut/patch is explicitly
+   typed `BackendIneligible`; arbitrary patch shape, patch DAG, migration, and
+   public compatibility are unclaimed.
+5. PROPOSAL-033 / ADR-0030 / Canon spec/13 accept source/evidence cut
+   `22196f93...`; SYS-4 evidence is
+   `runtime-monitored` only. It establishes neither public API/ABI/wire nor a
+   general dispatch, scheduler, memory, cut, patch, or noninterference theorem.
+
+### SYS-5 current direct blockers
+
+1. Compose `WorldAuthority`, `ParticipantA`, `ParticipantB`, and `ViewerC`
+   from one ordinary source or small source module set through the accepted
+   projector and SYS-4 endpoints; do not select plans by fixture name or invoke
+   internal semantic helpers as a thick fake E2E path.
+2. Exercise owner-side attack RMW, designated tick/frontier publication and
+   named consume, B-owned bird relation with A-primary/B-fallback, A leave,
+   semantic fallback, consumer-local presentation gap, and fresh reacquire on
+   the actual generated runtime path.
+3. Join source span → Core → locus artifact → generated edge → runtime
+   request/receive/serve or failure → state/relation/designated/save/patch
+   occurrence into one observer-safe typed view without raw credential,
+   capability, witness, or private payload leakage.
+4. Add the finite auth/policy attach/remove or revocation case, optional
+   verification residual/discharge example, ST save/restore and accepted/
+   rejected patch path, and representative negative interactions required by
+   the SYS-5 Goal Statement.
+5. Provide a small reproducible command set and walkthrough. SYS-4 crate-private
+   tests remain implementation evidence, not the SYS-5 user workflow or the
+   SYS-6 conformance profile.
 
 ## Risks, assumptions, and decision checkpoints
 
@@ -760,7 +827,7 @@ serve as its independent reviewer.
 | internal/public collapse | carrier field names treated as compatibility promise | explicit internal versioning/non-public labels; owner stop before freeze |
 | hidden authority/communication | schedule/transport/receipt creates grant/state/edge | typed provenance and no-mint/edge-completeness falsifiers |
 | topology invents designated consumer | evaluator result has no source/Core consume edge but projection targets a locus anyway | require explicit bounded `designated consume E.result at C`; reject missing/competing/undeclared source facts |
-| retry evidence laundering | legacy M8 same-delivery `AlreadyConsumed` rejection is reported as theory/13 idempotent-return evidence | SYS-3 records only static semantic identity/contract; SYS-4 adds carrier-side return/wrapper and actual positive/retry/conflict tests while preserving M10 baseline |
+| retry evidence laundering | legacy M8 same-delivery `AlreadyConsumed` rejection is reported as theory/13 idempotent-return evidence | accepted SYS-4 wrapper uses the source/Core semantic-consumption identity, one actual M8 consume, and exact retry validation; keep legacy M8/M10 behavior and the wrapper scope distinct |
 | Surface memory leakage | backend atomics become ordinary Mir vocabulary | map every low-level ordering to high-level edge; no Surface import |
 | relation overfitting | two anchors remain permanent Core restriction | finite DAG extension boundary plus one pressure case |
 | fake vertical slice | wrapper sequences internal helpers or expected JSON | generated artifacts/endpoints must be actual runtime inputs |
@@ -800,16 +867,16 @@ silently folded into the active Mir/Mirrorea kernel.
 
 ## Recommended next action
 
-SYS-3 is closed at accepted source/evidence cut `3013e7fe...`; SYS-4 is the
-sole active goal and SYS-5 is next. Build the smallest locus-runtime shell that
-owns a local store, queues, generated-carrier endpoint, authority/relation/
-designated view, and local trace for each accepted artifact. Run only the SYS-3
-plans, never reparse source or handwrite an edge, and bind the first actual
-request/dispatch/receive/serve-or-failure occurrences to the static
-correspondence. Implement and test the source/Core-bound carrier-side
-idempotent return/wrapper before claiming `ReturnExistingNoNewConsumption`
-runtime correspondence; call legacy M8 exactly once on the accepted semantic
-path and preserve accepted M8/M10 duplicate-delivery behavior. Close SYS-4 only
-after ST/OW1, fail-closed endpoint, deterministic replay, whole-fabric local
-cut/save/restore/patch, independent review, commit/push, and parity evidence
-make the SYS-5 four-locus toy a direct consumer.
+SYS-4 is closed at accepted implementation/evidence cut `22196f93...`; SYS-5
+is the sole active goal and SYS-6 is next. Build the smallest real four-locus
+headless toy on the accepted projector and endpoint runtime. Keep domain names
+in sample/library space, drive owner RMW, designated publication/consume,
+relation/fallback/reacquire, authority/failure, save/restore, patch, and
+optional verification through generated artifacts, then join their typed
+causal correspondence into one observer-safe view. Add a concise source →
+build/project → run/fault → inspect walkthrough and a small command set.
+Do not turn the crate-private SYS-4 API, internal carrier layout, test fixtures,
+or trace structs into a public compatibility promise. Close SYS-5 only when a
+new user can reproduce the toy without manual evidence joins, expected-result
+lookup, source reconstruction, or endpoint bypass and independent usability/
+semantics review finds no major counterexample.

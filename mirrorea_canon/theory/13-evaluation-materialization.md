@@ -2,7 +2,7 @@
 id: theory/13-evaluation-materialization
 status: L1-fixed
 maturity: reviewed
-depends_on: [theory/01-mircore-v0, theory/02-types-effects-failures, theory/03-elaboration, theory/05-authority, adr/ADR-0018, adr/ADR-0027, adr/ADR-0028, adr/ADR-0029]
+depends_on: [theory/01-mircore-v0, theory/02-types-effects-failures, theory/03-elaboration, theory/05-authority, adr/ADR-0018, adr/ADR-0027, adr/ADR-0028, adr/ADR-0029, adr/ADR-0030]
 summary: 評価場所・clock・authority origin・materializationを分離し、owner RMW、explicit receipt、designated evaluator、SYS-1 lifecycleとSYS-2 bounded execution refinementを定義する有限calculus。
 open_items: []
 ---
@@ -284,9 +284,62 @@ acknowledged its translated inventory. After this publication, an earlier-
 generation queued owner use rejects without mutation. A transition that
 linearized before publication is not undone; its later result carrier remains
 non-authority. The selected OW1 profile has one combined owner/source-owner
-locus and one worker-exclusive store. Multi-owner placement and actual
-generated dispatch remain SYS-3/4 work.
+locus and one worker-exclusive store. At the SYS-2 cut, multi-owner placement
+and actual generated dispatch remained SYS-3/4 work; ADR-0030 later realizes
+the selected finite process-local boundary described in section 9.
 
 OBL-058 and OBL-059 classify the exact finite model and executable evidence.
 They add no Lean theorem, general scheduler/memory/data-race result, fairness,
 or ordinary-Surface memory-order vocabulary.
+
+## 9. SYS-4 generated-endpoint refinement
+
+ADR-0030 realizes the SYS-3 generated plan as an actual process-local sequence
+without changing the semantic rule families above. For every admitted edge,
+the endpoint lifecycle adds physical locus boundaries while preserving the
+abstract order:
+
+```text
+request(r) ≺ send(r) ≺ receive(r) ≺ serve(r)
+serve(r) ≺ reply/publish(r) ≺ receive/receipt(r)
+
+remote-input receive(d) ≺ evaluate-at-designated(d)
+designated publish(e,v,F) ≺ consumer receive(e,v,F)
+consumer receive(e,v,F) ≺ consume(e,v,F,C)
+```
+
+`send` and `receive` are generated carrier occurrences, not ordinary Surface
+operations or new authority facts. Every carrier binds the same checked Core,
+source, artifact fragments, generated edge, effect/failure, visibility/
+redaction, frontier, and M9 lineage used by the semantic operation. Target-
+local service revalidates current authority before M8 mutation. Failure before
+the semantic step can add typed failure/quarantine evidence but no success,
+state mutation, authority, or consumption.
+
+For `[E-CONSUME]`, define one finite stable consumption key from the exact
+source/Core result, named consumer, accepted M8 publication, result frontier/
+version, and policy/visibility/redaction binding. The first accepted endpoint
+delivery performs the single semantic consumption. A retry with exactly that
+key returns the already decided typed value without a second semantic-
+consumption row or a second M8 consume. A key mismatch or competing consumer
+is a typed conflict. This is a semantic idempotent-return refinement, not
+network delivery exactly-once, transport retry, callback, or transaction.
+
+ST locus partitions and eligible OW1 execution must preserve the same selected
+result and the same abstract occurrence dependencies. Physical worker/mailbox
+order, endpoint identity, and runtime trace are evidence only. An observer-
+snapshot failure after a committed operation is typed observation failure: it
+cannot retract or replay the semantic operation, fabricate absence, expose raw
+authority/payload material, or supply stale evidence as current.
+
+The accepted ST local cut retains enough state to preserve pending generated
+carrier, receipt/consumption, exact publication, authority generation, causal
+order, and patch frontier across restore. The accepted designated-only patch
+activates only at a quiescent exact frontier after independent check,
+projection, M9 admission, and compatibility; rejection changes only patch
+lifecycle rows. OW1 cut/patch and general save/patch results are deferred.
+
+OBL-061 classifies this finite executable refinement as `runtime-monitored`
+only. It adds no Lean theorem, bounded model result, general trace refinement,
+general no-hidden-communication theorem, exactly-once theorem, cut theorem, or
+patch theorem.

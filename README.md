@@ -18,7 +18,7 @@ the closed authority/execution record for the accepted Mir Theory v0 / I1+
 M0--M10 finite reference baseline. The owner has now adopted ADR-0026 for the
 bounded Mirrorea I2 Systems Foundation SYS-0--SYS-7 program. Its sole current
 LAB roadmap is `plan/249-mirrorea-i2-systems-foundation-current-roadmap.md`.
-SYS-0--SYS-3 are completed and closed. ADR-0027 records the crate-private
+SYS-0--SYS-4 are completed and closed. ADR-0027 records the crate-private
 semantic runtime kernel and narrow I2-internal carrier at cut `94e3707c...`;
 ADR-0028 records deterministic ST, single-owner OW1, acknowledged M9
 generation visibility, and finite ordering evidence at cut `920d3fe0...`.
@@ -26,17 +26,22 @@ ADR-0029 records the accepted checked-Core-only per-locus projector at source/
 evidence cut `3013e7fe...`. Candidate cut `ded622fe...` remains partial
 regression history: close review found no ordinary source/M6/M7 evaluator-to-
 named-consumer E-CONSUME path, which the bounded non-final
-`designated consume E.result at C` correction now supplies. SYS-3 is closed,
-SYS-4 in-process generated dispatch is the sole active goal, and SYS-5 is next.
+`designated consume E.result at C` correction now supplies. SYS-4 accepted cut
+`22196f93b0112b8fd2987ec078021c8865b71651` runs the accepted generated
+artifacts through actual in-process locus endpoints and closes the bounded
+dispatch milestone: endpoint crossing, carrier-side idempotent return,
+fail-closed route/auth/receipt cases, typed observer snapshot failures,
+deterministic replay, ST whole-fabric cut/restore, and bounded
+designated-only patch are evidence-backed. SYS-5 minimal typed devtools and
+local toy vertical slice is now the sole active goal, and SYS-6 is next.
 OPEN-030 is resolved only
 for that internal contract; the full carrier freeze and OPEN-026/027 remain.
-The SYS-3 close and bounded source/Core correction claim neither final/public
-grammar/API/ABI/wire, multi-consumer semantics, broad PHASE-I1 exit, nor I2
-lifecycle acceptance; official theory remains T1.
-The SYS-3 retry row is only a source/Core-bound SYS-4 refinement requirement;
-legacy M8 `AlreadyConsumed` and the accepted M10 duplicate-delivery baseline
-remain unchanged, and actual idempotent-return endpoint evidence belongs to
-SYS-4. North Star changes, weakened
+The SYS-4 close claims neither final/public grammar/API/ABI/wire,
+multi-consumer semantics, broad PHASE-I1 exit, official I2 lifecycle
+acceptance, real transport, durable distributed persistence, browser/View
+product, nor OW1 cut/patch support beyond typed `BackendIneligible` residuals;
+official theory remains T1. Legacy M8 `AlreadyConsumed` and the accepted M10
+duplicate-delivery baseline remain unchanged. North Star changes, weakened
 safety/privacy guarantees, irreversible final public contracts, real transport
 selection/implementation in this program, and production deployment remain
 owner-reserved. Outside the program, ADR-0014 keeps research in the reversible

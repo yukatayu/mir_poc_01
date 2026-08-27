@@ -22,10 +22,15 @@ sole current LAB roadmapは
 SYS-1もsource cut `94e3707c...`でclosed、SYS-2もsource cut `920d3fe0...`で
 closed。SYS-3は初回candidate cut `ded622fe...`をE-CONSUME consumer path欠落により
 partial regression evidenceへ戻して一度reopenし、corrected source/evidence cut
-`3013e7fe...`でclosedした。active goalはSYS-4、next goalはSYS-5である。SYS-3のretry
-rowはstatic source/Core refinement contractだけを記録し、legacy M8
-`AlreadyConsumed`又はaccepted M10 duplicate-delivery behaviorをruntime correspondenceへ
-読み替えない。actual carrier-side idempotent return/wrapperとendpoint testsはSYS-4に属する。
+`3013e7fe...`でclosedした。SYS-4もaccepted implementation/evidence cut
+`22196f93...`でclosedし、generated-plan-only locus endpoint dispatch、selected
+ST/OW1 correspondence、source/Core-bound designated retry、ST whole-fabric local cut/
+restore、bounded checked patchをfinite internal profileとして受理した。active
+goalはSYS-5 typed devtools/toy vertical slice、next goalはSYS-6 assurance/
+conformance closeoutである。legacy M8 `AlreadyConsumed`又はaccepted M10
+duplicate-delivery behaviorは変更せず、SYS-4 wrapperのexact semantic-consumption
+identityと明確に分ける。SYS-4 contractの正本はPROPOSAL-033 / ADR-0030 /
+Canon spec/13である。
 Gate/Phase/OBL の正本は
 Canonのままなので、program activationをbroad I1/I2 lifecycle acceptanceへ
 読み替えない。
@@ -945,9 +950,11 @@ Canonのままなので、program activationをbroad I1/I2 lifecycle acceptance�
   v1/v2 remain historical artifacts.)
 - Mirrorea I2 Systems Foundation current roadmap:
   `plan/249-mirrorea-i2-systems-foundation-current-roadmap.md`
-  (ADR-0026 SYS-0--SYS-7 bounded program の sole current queue。SYS-0--SYS-2と
-  SYS-3 per-locus projection/artifact generationはcompleted / closed、SYS-4
-  in-process generated dispatchはactive、SYS-5 typed devtools/toy sliceはnext。
+  (ADR-0026 SYS-0--SYS-7 bounded program の sole current queue。SYS-0--SYS-4は
+  completed / closed、SYS-4 in-process generated dispatchのaccepted cutは
+  `22196f93...`（PROPOSAL-033 / ADR-0030 / Canon spec/13）、SYS-5 typed
+  devtools/toy sliceはactive、SYS-6 assurance/
+  conformance closeoutはnext。
   Plan 247/M10はclosed baselineのまま。)
 
 ## maintenance rule

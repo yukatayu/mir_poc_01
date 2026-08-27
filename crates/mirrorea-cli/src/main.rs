@@ -4503,7 +4503,7 @@ mod tests {
             report.docker_compose_file,
             "samples/product-alpha1/docker/docker-compose.product-alpha1.yml"
         );
-        assert_eq!(report.docker_compose_executed, true);
+        assert!(report.docker_compose_executed);
         assert_eq!(report.docker_world_terminal_outcome, "accepted");
         assert_eq!(report.docker_participant_terminal_outcome, "accepted");
     }

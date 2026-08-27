@@ -2,8 +2,8 @@
 id: arch/03-toolchain
 status: L2-working
 maturity: draft
-depends_on: [arch/02-boundary-contracts, spec/04-core-ir, spec/12-sys3-per-locus-projection, adr/ADR-0029]
-summary: toolchain各componentの責務と、accepted SYS-3 designated-consumeを含むchecked-Core-only internal projection compiler boundary。
+depends_on: [arch/02-boundary-contracts, spec/04-core-ir, spec/12-sys3-per-locus-projection, spec/13-sys4-in-process-generated-dispatch, adr/ADR-0029, adr/ADR-0030]
+summary: toolchain各componentの責務、accepted SYS-3 internal projection compiler、SYS-4 generated-plan-only runtime boundary。
 open_items: [OPEN-029]
 ---
 
@@ -58,5 +58,28 @@ endpoint tests; current M8/M10 duplicate-delivery behavior remains unchanged.
 この選択はinternal compiler boundaryであり、CLI spelling、`--format json` encoding、
 public artifact ABI、deployment mapping、runtime admission/dispatchを実装又はfreezeしない。
 SYS-4はこのartifactを実行して初めてruntime occurrenceを作れる。
+
+## SYS-4 selected internal execution boundary
+
+ADR-0030 / spec/13 は `mir-run` と future `mir-project`/`mir run-local` facade の下に、
+crate-privateなprocess-local direct-consumer seamを固定する。
+
+```text
+owned GlobalProjectionResult + complete sealed M9 admission
+  -> LocalFabric::bootstrap
+  -> locus-tagged runtimes + plan-derived endpoints
+  -> staged dispatch / typed failure / source-to-occurrence evidence
+```
+
+runtimeはSYS-3 artifactsとgenerated planをiterateし、source/ASTを再入力にせず、fixture名
+又はexpected resultからplanを選ばず、manual edgeやauthorityを受け取らない。STは複数の
+semantic locusごとに独立M8 sessionを持ち、eligible OW1は同じartifact/planを
+worker-exclusive M8 session上で実行する。external actionはsource-derived handler args、
+declared tick、bounded faultだけを与え、semantic target/Core/state/grantを与えない。
+
+SYS-4 cut/restoreとchecked patchもruntime-internal seamである。ST cutはwhole-fabric
+consistent stateを扱い、patch inputは既にchecked/projected/complete M9-admittedな
+designated-only candidateだけを受ける。OW1 cut/patch、CLI spelling、public artifact format、
+`--format json` encoding、deployment、wire/transportは未実装・未凍結である。
 
 OPEN-029: mir-lsp(エディタ統合)は I5 で検討。CLI 名は仮称であり、LAB の `mirrorea-alpha` 系列を改称して流用してよい。

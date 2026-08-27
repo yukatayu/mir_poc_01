@@ -2,8 +2,8 @@
 id: arch/04-runtime-carriers
 status: L2-working
 maturity: reviewed
-depends_on: [theory/04-ordering-and-cuts, theory/05-authority, theory/07-observation, theory/08-patch-hotplug, theory/13-evaluation-materialization, theory/18-m9-auth-verification, adr/ADR-0027, adr/ADR-0028, adr/ADR-0029]
-summary: broad runtime carrier catalogとSYS-1--3 internal lifecycle/execution/projection carrier requirements。public API/ABI/wireは未凍結。
+depends_on: [theory/04-ordering-and-cuts, theory/05-authority, theory/07-observation, theory/08-patch-hotplug, theory/13-evaluation-materialization, theory/18-m9-auth-verification, adr/ADR-0027, adr/ADR-0028, adr/ADR-0029, adr/ADR-0030]
+summary: broad runtime carrier catalogとSYS-1--4 internal lifecycle/execution/projection/dispatch carrier requirements。public API/ABI/wireは未凍結。
 open_items: [OPEN-026, OPEN-027]
 ---
 
@@ -200,6 +200,57 @@ SaveObject or restore algorithm.
 This generated plan does not serialize the broad catalog above and does not
 resolve OPEN-026/027. Field names, Rust layout, JSON, ABI, wire encoding,
 transport retries, and external delivery observation remain unfrozen.
+
+## SYS-4 selected carrier materialization boundary
+
+ADR-0030 materializes the preceding plan only inside one process. Every live
+endpoint is generated from one `CommunicationEdge`; no external schedule,
+fixture, topology supplement, or runtime fallback may add an endpoint. A staged
+envelope preserves the plan's exact checked-program, source/Core, source and
+target fragment, edge, route, effect/failure, visibility/redaction, frontier,
+and sealed authority-requirement binding. Send, transport, receive, dequeue,
+serve/evaluate/consume, reply/publication, receipt, and quarantine have distinct
+occurrence identities and causal edges.
+
+The carrier is never authority. Target-side service revalidates the current M9
+generation and the exact membership/capability/witness/producer/evaluator/
+consumer lineage required by the projected edge. Wrong route/target, stale or
+missing authority, duplicate/stale receipt/result, split frontier, missing
+payload, and provenance/policy/visibility/redaction mismatch fail typed without
+semantic mutation, authority creation, or fabricated M8 success.
+
+For the finite `DesignatedResultDelivery`, the cache key is the exact source/
+Core-bound semantic-consumption identity plus named consumer, publication,
+frontier/version, policy, visibility, redaction, and binding digest. The first
+accepted delivery reaches M8 consume once. An exact same-consumer retry returns
+the stored typed decision without another semantic consume. Any changed member
+is a conflict, not a retry. This remains distinct from transport exactly-once
+and from the accepted M10 direct duplicate-delivery rejection.
+
+Observer evidence carries typed label/redaction and reference-only provenance,
+not raw credential, capability, witness, private payload, or raw M8 identity.
+An OW1 observer-snapshot failure is typed and distinct from absent state. It
+cannot rewrite the already committed semantic outcome, serve stale evidence,
+or trigger replay.
+
+The accepted ST `Sys4LocalCut` retains per-locus M8 cuts, stores/traces,
+mailboxes and symmetric endpoint records, pending carriers/faults, receipts,
+cache/publication/consumption state, counters, causal dependencies, exact M9
+authority lifecycle/live floor, admitted-validation counters and observer-safe
+audit maps, and patch lifecycle/frontier. Restore validates this entire
+relationship before mutation. It is an internal local cut, not a durable or
+public carrier. OW1 cut remains `BackendIneligible`.
+
+`Sys4CheckedPatchCandidate` is an internal boundary from an already checked,
+projected, complete M9-admitted pipeline. It binds an exact base frontier and
+authority lineage and contains no raw source/AST/manual edge/grant. The finite
+profile admits only a quiescent ST designated-material delta while topology,
+schema, owner routes/RMW, relation and every non-designated fragment/edge/
+handler remain fixed. Rejection changes lifecycle evidence only; OW1 patch and
+general compatibility remain `BackendIneligible`/unselected.
+
+None of these selected Rust/logical names freezes a public field name, schema,
+artifact ABI, JSON representation, wire encoding, deployment or transport.
 
 ## Resolution and remaining L2 boundary
 

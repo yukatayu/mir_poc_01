@@ -20,7 +20,7 @@ open_items: []
 ## 最短の読み順
 
 - 全体像: `MAP.md` → `NORTH-STAR.md` → `DESIGN-CONSTITUTION.md` → `GLOSSARY.md`
-- 決定: `adr/README.md`(29 本の決定の一覧)
+- 決定: `adr/README.md`(30 本の決定の一覧)
 - 理論: `theory/00-overview.md` → `theory/01-mircore-v0.md` →
   `theory/13-evaluation-materialization.md` →
   `theory/14-maintained-relation-projection.md` →
@@ -40,7 +40,8 @@ open_items: []
   `spec/11-m10-i1plus-conformance.md` → `spec/06-conformance.md`
 - active Mirrorea I2 Systems Foundation: `adr/ADR-0026.md` →
   `adr/ADR-0027.md` → `adr/ADR-0028.md` → `adr/ADR-0029.md` →
-  `spec/12-sys3-per-locus-projection.md` → `plan/02-operating-model.md` →
+  `adr/ADR-0030.md` → `spec/12-sys3-per-locus-projection.md` →
+  `spec/13-sys4-in-process-generated-dispatch.md` → `plan/02-operating-model.md` →
   `LAB:plan/249-mirrorea-i2-systems-foundation-current-roadmap.md`
 - 何がいつ動くか: `plan/01-phases.md` → `plan/04-t0-g0-semantic-assertion-profile.md`
 

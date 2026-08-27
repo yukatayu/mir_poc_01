@@ -2,8 +2,8 @@
 id: spec/12-sys3-per-locus-projection
 status: L1-fixed
 maturity: draft
-depends_on: [spec/04-core-ir, spec/08-m7-checked-elaboration, arch/03-toolchain, arch/04-runtime-carriers, theory/13-evaluation-materialization, theory/14-maintained-relation-projection, adr/ADR-0029]
-summary: cut 3013e7feで受理したSYS-3 bounded designated-consume source/Core edgeとfinite checked-Core projectionの入力、per-locus artifact、generated plan、diagnostic、non-execution境界。
+depends_on: [spec/04-core-ir, spec/08-m7-checked-elaboration, arch/03-toolchain, arch/04-runtime-carriers, theory/13-evaluation-materialization, theory/14-maintained-relation-projection, adr/ADR-0029, adr/ADR-0030]
+summary: cut 3013e7feで受理したSYS-3 bounded source/Core projectionと、SYS-4が実現したgenerated endpoint refinementへのstatic handoff。
 open_items: []
 ---
 
@@ -195,3 +195,21 @@ claim a Lean proof, arbitrary projection determinism/completeness, general
 owner preservation, arbitrary relation-DAG semantics/coherence, runtime
 dispatch, actual endpoint/occurrence execution, public compatibility, real
 transport, multi-consumer semantics, or lifecycle acceptance.
+
+## SYS-4 realization note
+
+ADR-0030 / spec/13 accepts the direct runtime consumer of this static output at
+cut `22196f93b0112b8fd2987ec078021c8865b71651`. It iterates the owned
+`LocusProgram` values and `CommunicationPlan` only, instantiates locus-tagged
+endpoints, and binds actual send/receive/serve/publication/consume occurrences
+back to this specification's exact source/Core/fragment/edge correspondence.
+It does not reparse source, infer a consumer, or add a manual route.
+
+The realized designated endpoint satisfies this chapter's static
+`ReturnExistingNoNewConsumption` handoff: first accepted delivery reaches M8
+semantic consumption once; the exact same-consumer semantic-identity retry
+returns the retained typed decision before another M8 consume; any changed
+binding fails closed. OBL-061 records that runtime evidence separately from
+OBL-060. This note does not retroactively turn SYS-3 projection into dispatch,
+change legacy M8/M10 duplicate behavior, or claim public compatibility,
+transport, exactly-once, multi-consumer semantics, or a general theorem.

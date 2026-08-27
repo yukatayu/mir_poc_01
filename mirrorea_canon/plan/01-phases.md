@@ -2,8 +2,8 @@
 id: plan/01-phases
 status: L1-fixed
 maturity: draft
-depends_on: [plan/00-gates, plan/02-operating-model, spec/06-conformance, meta/source-hierarchy, adr/ADR-0013, adr/ADR-0014, adr/ADR-0015, adr/ADR-0017, adr/ADR-0026, adr/ADR-0027, adr/ADR-0028, adr/ADR-0029, plan/04-t0-g0-semantic-assertion-profile]
-summary: 実装フェーズT0-T2/I1-I6。official lifecycleはT1、SYS-0--SYS-3はclose、SYS-4 activeでbroad I1/I2 acceptanceは未受理。
+depends_on: [plan/00-gates, plan/02-operating-model, spec/06-conformance, meta/source-hierarchy, adr/ADR-0013, adr/ADR-0014, adr/ADR-0015, adr/ADR-0017, adr/ADR-0026, adr/ADR-0027, adr/ADR-0028, adr/ADR-0029, adr/ADR-0030, plan/04-t0-g0-semantic-assertion-profile]
+summary: 実装フェーズT0-T2/I1-I6。official lifecycleはT1、SYS-0--SYS-4はclose、SYS-5 activeでbroad I1/I2 acceptanceは未受理。
 open_items: [OPEN-032]
 ---
 
@@ -15,9 +15,9 @@ open_items: [OPEN-032]
 - theory lifecycle: **T1**（M2 semantic-assertion profile v3 の pass digest、G0-D3、
   G0 exit、T1 entry を ADR-0017 により受理済み）;
 - implementation evidence: **M10 I1+ deterministic reference profile accepted;
-  SYS-0--SYS-3 completed; Mirrorea I2 Systems Foundation bounded program active
-  at SYS-4, SYS-5 next**（ADR-0025 / ADR-0026 / ADR-0027 / ADR-0028 /
-  ADR-0029）。
+  SYS-0--SYS-4 completed; Mirrorea I2 Systems Foundation bounded program active
+  at SYS-5, SYS-6 next**（ADR-0025 / ADR-0026 / ADR-0027 / ADR-0028 /
+  ADR-0029 / ADR-0030）。
   architecture/04 の full L2 carrier freeze と OPEN-026/027 が残るため、広い PHASE-I1 exit、
   I2 entry、I2 exitはいずれも未受理。
 
@@ -87,7 +87,16 @@ testsはSYS-4 direct-consumer obligationである。production relation graphは
 two-anchor shapeだけを扱い、finite DAG extensionはsource-bound test-only pressure
 nonclaimである。OBL-060はstatic finite compiler/projector evidenceだけを
 `runtime-monitored`とし、Lean/general theorem、runtime admission/dispatch、public
-contractを主張しない。SYS-3はcompleted、sole active goalはSYS-4、next goalはSYS-5である。
+contractを主張しない。PROPOSAL-033 / ADR-0030 はSYS-4のgenerated-plan-only
+independent locus endpoints、actual staged dispatch、ST multi-owner/eligible OW1 selected
+correspondence、source/Core/artifact/edge/runtime occurrence attribution、one-M8-consume
+same-consumer idempotent return、typed fault/quarantine、observer-safe failure boundaryを
+source/evidence cut `22196f93b0112b8fd2987ec078021c8865b71651`で受理した。さらにST
+whole-fabric local cut/restoreとquiescent designated-only checked patchを有限受理したが、
+OW1 cut/patchは`BackendIneligible`、public CLI/API/ABI/wire/JSON、real transport、durable
+persistence、general theoremは非主張である。OBL-061はこのfinite runtime correspondence
+だけを`runtime-monitored`とし、Lean/model/general theorem statusを追加しない。SYS-4は
+completed、sole active goalはSYS-5、next goalはSYS-6である。
 
 これは実装programのauthorizationであり、official phase entry/exit recordではない。
 Broad PHASE-I1 exitはarchitecture/04 carrierのfull internal freeze criteriaとOPEN-026/027、I2 exitは

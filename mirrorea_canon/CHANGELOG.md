@@ -18,6 +18,23 @@ open_items: []
 
 ## 履歴
 
+- **2026-08-27** PROPOSAL-033 / ADR-0030 により、accepted cut
+  `22196f93b0112b8fd2987ec078021c8865b71651`のcrate-private SYS-4 in-process
+  fabricを受理した。SYS-3のowned per-locus artifacts、generated communication plan、
+  complete sealed M9 admissionだけからlocus runtime/endpointsを起動し、source再parse、
+  fixture-plan lookup、manual route、authority/result injectionなしにST multi-owner dispatchと
+  eligible OW1 selected correspondenceを実行する。bounded designated-result endpointはfirst
+  deliveryでexactly one M8 semantic consumeを行い、exact same-consumer retryをstored typed
+  decision/no-new-consumeとして返す。typed faults/quarantine、observer-safe redaction、OW1
+  snapshot failure/absence分離、ST whole-fabric local cut/restore、quiescent designated-only
+  checked patchを有限受理した。cut/restoreとpatchのOW1 pathは`BackendIneligible`、public
+  CLI/API/ABI/wire/JSON、real transport、durable persistence、general theoremは非主張である。
+  99 focused SYS-4 tests、179 runtime library tests、preserved M10 regression、format、
+  warnings-denied Clippy、diff validation、independent reviewを受理し、OBL-061をこのfinite
+  runtime correspondenceだけの`runtime-monitored`として追加した。theory T1、broad
+  PHASE-I1、official I2 entry/exitは不変。SYS-4はcompleted、SYS-5がsole active goal、
+  SYS-6がnextである。
+
 - **2026-08-27** PROPOSAL-032 / ADR-0029 により、exact checked-program identityへ
   boundされたlogical locus inventoryと`CheckedSurfaceV0`から、placement-specific typed
   Coreをownするper-locus fragments、generated communication/effect/observation/

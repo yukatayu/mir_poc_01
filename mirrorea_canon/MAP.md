@@ -15,7 +15,7 @@ open_items: []
 NORTH-STAR (軸)
    │
    ▼
-adr/ (決定 ADR-0001..0029) ◄──── GLOSSARY (概念 CON-###)
+adr/ (決定 ADR-0001..0030) ◄──── GLOSSARY (概念 CON-###)
    │
    ▼
 DESIGN-CONSTITUTION (v0/I1+ の横断判断)
@@ -46,8 +46,8 @@ plan/ (Gate 0-7 → Phase T0-T2, I1-I6)   meta/ (規約・正本関係・agent �
 ## 3 種の読み筋
 
 - **理論筋**(体系を理解・拡張する): NORTH-STAR → adr → DESIGN-CONSTITUTION → theory/00 → 01 → (関心の章) → 11 → scenarios。
-- **実装筋**(toolchain を作る): spec/02..12 → architecture/03..04 → scenarios → plan/01 の該当 Phase。
-- **運用筋**(進め方を知る): plan/00..04 → meta/agent-instructions → adr/ADR-0012 → adr/ADR-0014 → adr/ADR-0015 → adr/ADR-0026 → adr/ADR-0027 → adr/ADR-0028 → adr/ADR-0029。
+- **実装筋**(toolchain を作る): spec/02..13 → architecture/03..04 → scenarios → plan/01 の該当 Phase。
+- **運用筋**(進め方を知る): plan/00..04 → meta/agent-instructions → adr/ADR-0012 → adr/ADR-0014 → adr/ADR-0015 → adr/ADR-0026 → adr/ADR-0027 → adr/ADR-0028 → adr/ADR-0029 → adr/ADR-0030。
 
 Mir Theory v0 / I1+ Milestones 0--10 は ADR-0015--0025 と
 PROPOSAL-018--028 に従って完走した。accepted finite reference-profile の正本は
@@ -87,9 +87,21 @@ inventできない。retry contractはtheory/13
 relation graphはcurrent checked two-anchor shapeのみで、deeper/shared DAGは
 source-bound test-only extension pressure nonclaimである。OBL-060はstatic finite
 compiler/projector evidenceだけを`runtime-monitored`とし、Lean/general theorem、runtime
-admission/dispatch、public contractを主張しない。SYS-0--SYS-3はcompleted、sole active
-goalはSYS-4、next goalはSYS-5である。architecture/04はL2-workingのままで、OPEN-026/027とfull internal
-carrier freezeがbroad PHASE-I1 acceptanceを引き続きblockする。
+admission/dispatch、public contractを主張しない。
+
+PROPOSAL-033 / ADR-0030 は source/evidence cut
+`22196f93b0112b8fd2987ec078021c8865b71651`でSYS-4を受理した。SYS-3のowned
+per-locus artifactsとgenerated planだけからindependent locus endpointsを起動し、STで
+multi-owner dispatch、eligible OW1でselected correspondence、source/Core/artifact/edge/
+runtime occurrence traceを実行する。bounded E-CONSUME endpointはfirst deliveryでM8を
+exactly one semantic consumeし、exact same-consumer retryをstored decision/no-new-consume
+として返す。typed fault/quarantineとobserver failureはstate/authorityをmintせずfail-closedで
+ある。ST whole-fabric cut/restoreとquiescent designated-only checked patchを受理するが、
+OW1 cut/patchは`BackendIneligible`のまま、public CLI/API/ABI/wire、real transport、durable/
+general theoremは主張しない。OBL-061はfinite runtime correspondenceだけを
+`runtime-monitored`とする。SYS-0--SYS-4はcompleted、sole active goalはSYS-5、next goalは
+SYS-6である。architecture/04はL2-workingのままで、OPEN-026/027とfull internal carrier
+freezeがbroad PHASE-I1 acceptanceを引き続きblockする。theoryはT1、official I2 entry/exitは未受理である。
 
 ## ID 体系
 
