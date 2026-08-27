@@ -33,9 +33,9 @@ use crate::{
     m9_auth_verification::{
         M9AdmissionErrorKind, M9AuthorityGeneration, M9AuthorityInspection,
         M9AuthoritySuccessorPublisher, M9AuthorityTransitionKind, M9CacheValidationInspection,
-        M9DesignatedSourceReleaseLineage, M9KernelAuthorityView, M9RuntimeExecutionSeam,
-        M9SealedFailureInspection, M9SealedTransitionInspection,
-        M9SourceReleaseValidationInspection,
+        M9CheckedPatchAuthorityBinding, M9DesignatedSourceReleaseLineage, M9KernelAuthorityView,
+        M9RuntimeExecutionSeam, M9RuntimeValidationObservationSnapshot, M9SealedFailureInspection,
+        M9SealedGeneration, M9SealedTransitionInspection, M9SourceReleaseValidationInspection,
     },
     sys2_execution_backend::{
         Ow1ContextualM8Execution, Ow1ObserverDesignatedPublication, Ow1WorkerBackend,
@@ -704,6 +704,38 @@ struct M9AuthorityLiveFloorGuard<'a> {
 }
 
 impl M9AuthorityLiveFloorGuard<'_> {
+    fn current_generation(&self) -> M9AuthorityGeneration {
+        self.current.clone()
+    }
+
+    /// Runtime validation observations may advance independently of the
+    /// monotone authority generation.  They are synchronized only while the
+    /// shared floor still carries the exact same program/generation/authority
+    /// facts, so a publisher can never overwrite a competing successor with
+    /// an older observer snapshot.
+    fn matches_runtime_authority_facts(&self, live: &M9AuthorityGeneration) -> bool {
+        self.current
+            .has_same_runtime_authority_facts_ignoring_validation_observations(live)
+    }
+
+    /// Re-key the *same* shared live floor to M9's checked-program successor
+    /// only when M9 has established exact authority equivalence.  This is not
+    /// a new generation or a candidate-owned floor replacement: state,
+    /// lineages, and tombstones remain unchanged while later M9 transitions
+    /// become bound to the active patched program identity.
+    fn rebind_checked_patch_program(
+        &mut self,
+        active: &M9AuthorityGeneration,
+        rebased: &M9AuthorityGeneration,
+    ) -> bool {
+        self.current.matches_for_restore(active)
+            && rebased.is_checked_patch_rebase_equivalent_to(active)
+            && {
+                *self.current = rebased.clone();
+                true
+            }
+    }
+
     fn accepts_successor(
         &self,
         prior: &M9AuthorityGeneration,
@@ -731,6 +763,10 @@ impl M9AuthorityLiveFloor {
             .lock()
             .ok()
             .is_some_and(|current| current.matches_for_restore(generation))
+    }
+
+    fn identity_snapshot(&self) -> usize {
+        Arc::as_ptr(&self.current) as usize
     }
 
     /// Lock the floor only when it still names the exact sealed generation
@@ -1012,6 +1048,675 @@ fn validate_seed(program: &FabricProgram, seed: &Sys4InitialStateSeed) -> Sys4Re
         }
     }
     Ok(())
+}
+
+/// Bounded SYS-4 patch activation is intentionally a private, source-first
+/// hand-off.  The runtime receives this already checked/projected/M9-admitted
+/// carrier; it never receives source text, an AST, manual routes, or grants.
+#[derive(Clone)]
+pub(crate) struct Sys4CheckedPatchCandidate {
+    patch_id: String,
+    base_frontier: Sys4PatchFrontier,
+    patch_program: FabricProgram,
+    patch_admission: SealedFabricAdmission,
+    compatibility: Sys4PatchCompatibility,
+}
+
+impl std::fmt::Debug for Sys4CheckedPatchCandidate {
+    fn fmt(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        formatter
+            .debug_struct("Sys4CheckedPatchCandidate")
+            .field("patch_id", &self.patch_id)
+            .field("compatible", &self.compatibility.matches())
+            .finish_non_exhaustive()
+    }
+}
+
+impl Sys4CheckedPatchCandidate {
+    pub(crate) fn from_prechecked_projected_admitted(
+        patch_id: impl Into<String>,
+        base_program: &FabricProgram,
+        patch_program: FabricProgram,
+        patch_admission: SealedFabricAdmission,
+    ) -> Sys4Result<Self> {
+        let patch_id = patch_id.into();
+        if patch_id.is_empty()
+            || patch_admission.program_identity != *patch_program.checked_program_identity()
+            || patch_admission.program_fingerprint != patch_program.projected_fingerprint()
+            || !patch_admission.summary.complete_final
+        {
+            return Err(Sys4DispatchDiagnostics::one(
+                Sys4DiagnosticKind::ProgramAdmissionMismatch,
+            ));
+        }
+        let base_frontier = Sys4PatchFrontier::for_candidate_base(
+            base_program,
+            &patch_admission.authority_generation,
+        );
+        Ok(Self {
+            patch_id,
+            base_frontier,
+            compatibility: Sys4PatchCompatibility::between(base_program, &patch_program),
+            patch_program,
+            patch_admission,
+        })
+    }
+
+    fn patch_admission_is_complete(&self) -> bool {
+        self.patch_admission.summary.complete_final
+            && self.patch_admission.program_identity
+                == *self.patch_program.checked_program_identity()
+            && self.patch_admission.program_fingerprint
+                == self.patch_program.projected_fingerprint()
+            && self
+                .patch_admission
+                .authority_successor
+                .current_generation_for_restore()
+                .matches_for_restore(&self.patch_admission.authority_generation)
+    }
+
+    #[cfg(test)]
+    pub(crate) fn for_test_with_stale_activation_frontier(
+        mut self,
+        stale_frontier: impl Into<String>,
+    ) -> Self {
+        self.base_frontier.nonce = stale_frontier.into();
+        self
+    }
+}
+
+/// Private activation identity.  It binds a candidate to the exact projected
+/// program and M9 authority inventory currently installed in the fabric.
+/// It is not a save format, public API, or wire identity.
+#[derive(Clone, PartialEq, Eq)]
+pub(crate) struct Sys4PatchFrontier {
+    program_identity: CheckedProgramIdentity,
+    program_fingerprint: BTreeSet<(FabricRouteKey, String)>,
+    authority_binding: M9CheckedPatchAuthorityBinding,
+    activation_generation: u64,
+    nonce: String,
+}
+
+impl std::fmt::Debug for Sys4PatchFrontier {
+    fn fmt(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        formatter
+            .debug_struct("Sys4PatchFrontier")
+            .field("program_identity", &self.program_identity)
+            .field("authority_generation", &self.authority_binding.generation())
+            .field("activation_generation", &self.activation_generation)
+            .finish_non_exhaustive()
+    }
+}
+
+impl Sys4PatchFrontier {
+    fn for_candidate_base(
+        program: &FabricProgram,
+        authority_generation: &M9AuthorityGeneration,
+    ) -> Self {
+        Self {
+            program_identity: program.checked_program_identity().clone(),
+            program_fingerprint: program.projected_fingerprint(),
+            authority_binding: authority_generation.checked_patch_authority_binding(),
+            activation_generation: 0,
+            nonce: Self::nonce_for(program, authority_generation.generation(), 0),
+        }
+    }
+
+    fn for_active(
+        program: &FabricProgram,
+        authority_generation: &M9AuthorityGeneration,
+        activation_generation: u64,
+    ) -> Self {
+        Self {
+            program_identity: program.checked_program_identity().clone(),
+            program_fingerprint: program.projected_fingerprint(),
+            authority_binding: authority_generation.checked_patch_authority_binding(),
+            activation_generation,
+            nonce: Self::nonce_for(
+                program,
+                authority_generation.generation(),
+                activation_generation,
+            ),
+        }
+    }
+
+    fn nonce_for(
+        program: &FabricProgram,
+        authority_generation: u64,
+        activation_generation: u64,
+    ) -> String {
+        format!(
+            "sys4-patch-frontier:{}:{authority_generation}:{activation_generation}",
+            program.checked_program_identity().stable_key()
+        )
+    }
+
+    pub(crate) const fn is_exact_successor_of(&self, base: &Self) -> bool {
+        self.activation_generation == base.activation_generation.saturating_add(1)
+    }
+
+    fn has_same_program_projection_and_activation(&self, other: &Self) -> bool {
+        self.program_identity == other.program_identity
+            && self.program_fingerprint == other.program_fingerprint
+            && self.activation_generation == other.activation_generation
+    }
+
+    fn has_well_formed_nonce(&self) -> bool {
+        self.nonce
+            == format!(
+                "sys4-patch-frontier:{}:{}:{}",
+                self.program_identity.stable_key(),
+                self.authority_binding.generation(),
+                self.activation_generation,
+            )
+    }
+
+    fn authority_binding(&self) -> &M9CheckedPatchAuthorityBinding {
+        &self.authority_binding
+    }
+}
+
+#[derive(Debug, Clone, PartialEq, Eq)]
+struct Sys4PatchCompatibility {
+    mismatch: Option<Sys4PatchDiagnosticKind>,
+}
+
+impl Sys4PatchCompatibility {
+    fn between(base: &FabricProgram, patch: &FabricProgram) -> Self {
+        let base_shape = patch_compatibility_shape(base);
+        let patch_shape = patch_compatibility_shape(patch);
+        let mismatch = if !base_shape.has_same_topology_and_schema(&patch_shape) {
+            Some(Sys4PatchDiagnosticKind::TopologyOwnerRouteMismatch)
+        } else if base_shape.owner_rmw_fragments != patch_shape.owner_rmw_fragments {
+            Some(Sys4PatchDiagnosticKind::OwnerRmwExpressionChanged)
+        } else if base_shape.non_designated_fragments != patch_shape.non_designated_fragments
+            || base_shape.non_designated_edges != patch_shape.non_designated_edges
+            || base_shape.non_designated_effect_handlers
+                != patch_shape.non_designated_effect_handlers
+            || base_shape.relation_graph != patch_shape.relation_graph
+        {
+            Some(Sys4PatchDiagnosticKind::NonDesignatedCoreMaterialChanged)
+        } else {
+            None
+        };
+        Self { mismatch }
+    }
+
+    fn matches(&self) -> bool {
+        self.mismatch.is_none()
+    }
+
+    fn diagnostic(&self) -> Sys4PatchDiagnosticKind {
+        self.mismatch
+            .expect("checked patch compatibility diagnostic exists only for a mismatch")
+    }
+}
+
+type Sys4PatchStateSchemaFields = Vec<(String, String, Option<String>)>;
+type Sys4PatchStateSchemaShape = (String, String, String, String, Sys4PatchStateSchemaFields);
+
+#[derive(Debug, Clone, PartialEq, Eq)]
+struct Sys4PatchCompatibilityShape {
+    loci: BTreeSet<String>,
+    fragments: BTreeSet<(String, String, String, String, String, String)>,
+    edges: BTreeSet<(String, String, String, String)>,
+    state_schemas: BTreeSet<Sys4PatchStateSchemaShape>,
+    owner_rmw_fragments: Vec<String>,
+    non_designated_fragments: Vec<String>,
+    non_designated_edges: Vec<String>,
+    non_designated_effect_handlers: Vec<String>,
+    relation_graph: crate::sys3_projection::ProjectionRelationGraph,
+}
+
+impl Sys4PatchCompatibilityShape {
+    fn has_same_topology_and_schema(&self, other: &Self) -> bool {
+        self.loci == other.loci
+            && self.fragments == other.fragments
+            && self.edges == other.edges
+            && self.state_schemas == other.state_schemas
+    }
+}
+
+fn designated_patch_operation_ids(program: &FabricProgram) -> BTreeSet<String> {
+    program
+        .projection
+        .sys4_artifact_fragments()
+        .entries()
+        .iter()
+        .filter(|fragment| {
+            matches!(
+                fragment.fragment_kind(),
+                ProjectedOperationFragmentKind::DesignatedEvaluation
+                    | ProjectedOperationFragmentKind::DesignatedResultConsumer
+            )
+        })
+        .map(|fragment| fragment.operation_id().to_string())
+        .collect()
+}
+
+fn local_fragment_shape(fragment: &ProjectedOperationFragment) -> String {
+    let placement = if let Some(signature) = fragment.typed_input_signature() {
+        format!("owner-request:{signature:?}")
+    } else if let Some(core) = fragment.owner_rmw_checked_core() {
+        format!("owner-rmw:{core:?}")
+    } else if let Some(core) = fragment.relation_checked_core() {
+        format!("relation-checked-core:{core:?}")
+    } else if let Some(descriptor) = fragment.consumer_relation_projection() {
+        format!("consumer-relation-projection:{descriptor:?}")
+    } else if let Some(dependency) = fragment.designated_remote_input_dependency() {
+        format!("designated-remote-input:{dependency:?}")
+    } else if let Some(core) = fragment.designated_checked_core() {
+        format!("designated-evaluator:{core:?}")
+    } else if let Some(core) = fragment.designated_result_consumer_core() {
+        format!("designated-result-consumer:{core:?}")
+    } else {
+        "placement:none".to_string()
+    };
+    // Do not compare `checked_core_identity` wholesale: it contains the
+    // checked-program identity, which necessarily changes for an allowed
+    // designated expression patch. Everything below is the fragment's local
+    // Core, authority/failure/effect material, and source provenance.
+    format!(
+        "operation={};kind={:?};locus={};source_ref={:?};core_ref={};fragment_ref={};authority={:?};declared_failure={:?};generated_failure={:?};obligations={:?};runtime_seam={:?};state_schemas={:?};placement={placement}",
+        fragment.operation_id(),
+        fragment.fragment_kind(),
+        fragment.locus_tag().as_str(),
+        fragment.source_ref(),
+        fragment.core_ref().unwrap_or_default(),
+        fragment.fragment_ref(),
+        fragment.authority_requirements(),
+        fragment.declared_failure_names(),
+        fragment.generated_failure_names(),
+        fragment.semantic_obligations().rows(),
+        fragment.runtime_seam_requirements().rows(),
+        fragment.local_state_schemas(),
+    )
+}
+
+fn sorted_owner_rmw_fragment_shapes(program: &FabricProgram) -> Vec<String> {
+    let mut fragments = program
+        .projection
+        .sys4_artifact_fragments()
+        .entries()
+        .iter()
+        .filter(|fragment| fragment.owner_rmw_checked_core().is_some())
+        .map(local_fragment_shape)
+        .collect::<Vec<_>>();
+    fragments.sort();
+    fragments
+}
+
+fn sorted_non_designated_fragments(program: &FabricProgram) -> Vec<String> {
+    let designated_operations = designated_patch_operation_ids(program);
+    let mut fragments = program
+        .projection
+        .sys4_artifact_fragments()
+        .entries()
+        .iter()
+        .filter(|fragment| !designated_operations.contains(fragment.operation_id()))
+        .map(local_fragment_shape)
+        .collect::<Vec<_>>();
+    fragments.sort();
+    fragments
+}
+
+fn local_edge_shape(edge: &CommunicationEdge) -> String {
+    // As for fragments, checked-core identity is intentionally decomposed:
+    // its whole-program member changes for an allowed designated delta while
+    // the generated edge's local source/Core/contract content must not.
+    format!(
+        "operation={};kind={:?};source={};target={};source_ref={:?};core_ref={:?};edge_ref={};source_fragment_ref={};target_fragment_ref={};derived={};transfers_authority={};carrier_contract={:?}",
+        edge.operation_id(),
+        edge.kind(),
+        edge.source_locus(),
+        edge.target_locus(),
+        edge.source_ref(),
+        edge.core_ref(),
+        edge.edge_ref(),
+        edge.source_fragment_ref(),
+        edge.target_fragment_ref(),
+        edge.is_derived_from_checked_core(),
+        edge.transfers_authority(),
+        edge.carrier_contract(),
+    )
+}
+
+fn sorted_non_designated_edges(program: &FabricProgram) -> Vec<String> {
+    let designated_operations = designated_patch_operation_ids(program);
+    let mut edges = program
+        .projection
+        .communication_plan()
+        .edges()
+        .iter()
+        .filter(|edge| !designated_operations.contains(edge.operation_id()))
+        .map(local_edge_shape)
+        .collect::<Vec<_>>();
+    edges.sort();
+    edges
+}
+
+fn non_designated_effect_handlers(program: &FabricProgram) -> Vec<String> {
+    let designated_operations = designated_patch_operation_ids(program);
+    program
+        .projection
+        .effect_handler_plan()
+        .entries()
+        .iter()
+        .filter(|handler| !designated_operations.contains(handler.operation()))
+        .map(|handler| {
+            format!(
+                "operation={};kind={:?};locus={};source_ref={:?};core_ref={:?};handler_ref={};source_bound={};effect={:?};declared_failure={:?};generated_failure={:?}",
+                handler.operation(),
+                handler.kind(),
+                handler.locus(),
+                handler.source_ref(),
+                handler.core_ref(),
+                handler.handler_ref(),
+                handler.is_source_bound(),
+                handler.effect_row().kinds(),
+                handler.declared_failure_row().names(),
+                handler.generated_failure_row().names(),
+            )
+        })
+        .collect::<Vec<_>>()
+}
+
+fn patch_compatibility_shape(program: &FabricProgram) -> Sys4PatchCompatibilityShape {
+    // `non_designated_fragments` below invokes `local_fragment_shape`, which
+    // binds every relation_checked_core's primary/fallback lineage together
+    // with its local source_ref and core_ref.  Those local Core/provenance
+    // fields remain stable across a permitted designated-only expression
+    // delta, unlike the enclosing checked-program identity.
+    let fragments = program
+        .projection
+        .sys4_artifact_fragments()
+        .entries()
+        .iter()
+        .map(|fragment| {
+            let placement = if let Some(core) = fragment.owner_rmw_checked_core() {
+                format!(
+                    "owner:{}:{}",
+                    core.authority_origin_locus(),
+                    core.owner_locus()
+                )
+            } else if let Some(dependency) = fragment.designated_remote_input_dependency() {
+                format!(
+                    "designated-source:{}:{}",
+                    dependency.source_owner_locus(),
+                    dependency.designated_evaluator()
+                )
+            } else if let Some(core) = fragment.designated_checked_core() {
+                format!(
+                    "designated-evaluator:{}:{}",
+                    core.evaluator(),
+                    core.result()
+                )
+            } else if let Some(core) = fragment.designated_result_consumer_core() {
+                format!(
+                    "designated-consumer:{}:{}",
+                    core.evaluator(),
+                    core.consumer_locus()
+                )
+            } else if fragment.relation_checked_core().is_some() {
+                "RelationPublication".to_string()
+            } else if fragment.consumer_relation_projection().is_some() {
+                "ConsumerLocalRelationProjection".to_string()
+            } else {
+                "placement:none".to_string()
+            };
+            (
+                fragment.operation_id().to_string(),
+                format!("{:?}", fragment.fragment_kind()),
+                fragment.locus_tag().as_str().to_string(),
+                fragment.origin_locus().unwrap_or_default().to_string(),
+                fragment
+                    .target_owner_locus()
+                    .unwrap_or_default()
+                    .to_string(),
+                placement,
+            )
+        })
+        .collect();
+    let edges = program
+        .projection
+        .communication_plan()
+        .edges()
+        .iter()
+        .map(|edge| {
+            (
+                edge.operation_id().to_string(),
+                format!("{:?}", edge.kind()),
+                edge.source_locus().to_string(),
+                edge.target_locus().to_string(),
+            )
+        })
+        .collect();
+    let state_schemas = program
+        .projection
+        .sys4_artifact_fragments()
+        .entries()
+        .iter()
+        .flat_map(|fragment| fragment.local_state_schemas().iter())
+        .map(|schema| {
+            (
+                schema.owner_locus().to_string(),
+                schema.name().to_string(),
+                schema.index_name().to_string(),
+                schema.index_type().to_string(),
+                schema
+                    .fields()
+                    .iter()
+                    .map(|field| {
+                        (
+                            field.name().to_string(),
+                            field.type_name().to_string(),
+                            field.visibility_channel().map(ToOwned::to_owned),
+                        )
+                    })
+                    .collect(),
+            )
+        })
+        .collect();
+    Sys4PatchCompatibilityShape {
+        loci: program.locus_names().into_iter().collect(),
+        fragments,
+        edges,
+        state_schemas,
+        owner_rmw_fragments: sorted_owner_rmw_fragment_shapes(program),
+        non_designated_fragments: sorted_non_designated_fragments(program),
+        non_designated_edges: sorted_non_designated_edges(program),
+        non_designated_effect_handlers: non_designated_effect_handlers(program),
+        relation_graph: program.projection.relation_graph().clone(),
+    }
+}
+
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+pub(crate) enum Sys4PatchVerdict {
+    Accepted,
+    Rejected,
+}
+
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+pub(crate) enum Sys4PatchDiagnosticKind {
+    StaleFrontier,
+    NonQuiescentPendingCarrier,
+    TopologyOwnerRouteMismatch,
+    OwnerRmwExpressionChanged,
+    NonDesignatedCoreMaterialChanged,
+    M9AuthorityLineageMismatch,
+    IncompleteCandidateAdmission,
+    BackendIneligible,
+}
+
+#[derive(Debug, Clone, PartialEq, Eq)]
+pub(crate) struct Sys4PatchBoundaryInspection {
+    candidate_was_prechecked_projected_and_m9_admitted: bool,
+}
+
+impl Sys4PatchBoundaryInspection {
+    pub(crate) const fn candidate_was_prechecked_projected_and_m9_admitted(&self) -> bool {
+        self.candidate_was_prechecked_projected_and_m9_admitted
+    }
+
+    pub(crate) const fn runtime_received_only_checked_patch_candidate(&self) -> bool {
+        self.candidate_was_prechecked_projected_and_m9_admitted
+    }
+}
+
+#[derive(Debug, Clone, PartialEq, Eq)]
+pub(crate) struct Sys4PatchLifecycle {
+    verdict: Sys4PatchVerdict,
+    diagnostic: Option<Sys4PatchDiagnosticKind>,
+    source_first_checked_projection_and_m9_admission: bool,
+}
+
+impl Sys4PatchLifecycle {
+    pub(crate) const fn contains_source_first_checked_projection_and_m9_admission(&self) -> bool {
+        self.source_first_checked_projection_and_m9_admission
+    }
+
+    pub(crate) fn is_lifecycle_only_rejection(&self) -> bool {
+        self.verdict == Sys4PatchVerdict::Rejected && self.diagnostic.is_some()
+    }
+}
+
+#[derive(Debug, Clone, PartialEq, Eq)]
+pub(crate) struct Sys4PatchOutcome {
+    verdict: Sys4PatchVerdict,
+    primary_diagnostic_kind: Option<Sys4PatchDiagnosticKind>,
+    lifecycle: Sys4PatchLifecycle,
+    boundary_inspection: Sys4PatchBoundaryInspection,
+    base_frontier: Sys4PatchFrontier,
+    activation_frontier: Sys4PatchFrontier,
+    m9_authority_frontier_mismatch: Option<M9AuthorityFrontierMismatchInspection>,
+    m9_live_floor_recheck: Option<M9LiveFloorRecheckInspection>,
+}
+
+/// Observer-safe explanation of an exact M9 authority mismatch at the
+/// checked-patch boundary.  It carries sealed identifiers and digests only.
+#[derive(Debug, Clone, PartialEq, Eq)]
+pub(crate) struct M9AuthorityFrontierMismatchInspection {
+    active_generation: M9SealedGeneration,
+    candidate_generation: u64,
+    candidate_generation_ref: String,
+    active_authority_lineage_digest: String,
+    candidate_authority_lineage_digest: String,
+}
+
+impl M9AuthorityFrontierMismatchInspection {
+    pub(crate) fn same_numeric_generation(&self) -> bool {
+        self.active_generation.generation() == self.candidate_generation
+    }
+
+    pub(crate) fn active_generation(&self) -> M9SealedGeneration {
+        self.active_generation.clone()
+    }
+
+    pub(crate) fn active_generation_ref(&self) -> &str {
+        self.active_generation.generation_ref()
+    }
+
+    pub(crate) fn candidate_generation_ref(&self) -> &str {
+        &self.candidate_generation_ref
+    }
+
+    pub(crate) fn active_authority_lineage_digest(&self) -> &str {
+        &self.active_authority_lineage_digest
+    }
+
+    pub(crate) fn candidate_authority_lineage_digest(&self) -> &str {
+        &self.candidate_authority_lineage_digest
+    }
+
+    pub(crate) const fn compared_exact_m9_identity_and_lineage_not_numeric_generation_only(
+        &self,
+    ) -> bool {
+        true
+    }
+}
+
+/// Observer-safe record that patch activation rechecked the shared M9 live
+/// floor while holding the same floor guard used for the final swap.
+#[derive(Debug, Clone, PartialEq, Eq)]
+pub(crate) struct M9LiveFloorRecheckInspection {
+    current_generation: M9SealedGeneration,
+    shared_live_floor_identity: usize,
+}
+
+impl M9LiveFloorRecheckInspection {
+    pub(crate) fn current_generation(&self) -> M9SealedGeneration {
+        self.current_generation.clone()
+    }
+
+    pub(crate) const fn shared_live_floor_identity(&self) -> usize {
+        self.shared_live_floor_identity
+    }
+
+    pub(crate) const fn checked_exact_current_generation_and_lineage(&self) -> bool {
+        true
+    }
+}
+
+impl Sys4PatchOutcome {
+    pub(crate) const fn verdict(&self) -> Sys4PatchVerdict {
+        self.verdict
+    }
+
+    pub(crate) const fn primary_diagnostic_kind(&self) -> Option<Sys4PatchDiagnosticKind> {
+        self.primary_diagnostic_kind
+    }
+
+    pub(crate) fn lifecycle(&self) -> &Sys4PatchLifecycle {
+        &self.lifecycle
+    }
+
+    pub(crate) fn boundary_inspection(&self) -> &Sys4PatchBoundaryInspection {
+        &self.boundary_inspection
+    }
+
+    pub(crate) fn base_frontier(&self) -> &Sys4PatchFrontier {
+        &self.base_frontier
+    }
+
+    pub(crate) fn activation_frontier(&self) -> &Sys4PatchFrontier {
+        &self.activation_frontier
+    }
+
+    pub(crate) fn m9_authority_frontier_mismatch_inspection(
+        &self,
+    ) -> Option<&M9AuthorityFrontierMismatchInspection> {
+        self.m9_authority_frontier_mismatch.as_ref()
+    }
+
+    pub(crate) fn m9_live_floor_recheck_inspection(&self) -> Option<&M9LiveFloorRecheckInspection> {
+        self.m9_live_floor_recheck.as_ref()
+    }
+
+    pub(crate) const fn exposes_raw_source_or_authority_material(&self) -> bool {
+        false
+    }
+}
+
+#[derive(Debug, Clone, PartialEq, Eq)]
+enum Sys4PatchLifecycleRow {
+    Accepted,
+    Rejected(Sys4PatchDiagnosticKind),
+}
+
+#[derive(Debug, Clone, PartialEq, Eq, Default)]
+struct Sys4PatchLifecycleLog {
+    rows: Vec<Sys4PatchLifecycleRow>,
+}
+
+#[derive(Debug, Clone, PartialEq, Eq)]
+pub(crate) struct Sys4PatchLifecycleSnapshot {
+    rows: Vec<Sys4PatchLifecycleRow>,
+}
+
+impl Sys4PatchLifecycleSnapshot {
+    pub(crate) fn extends_only_with_lifecycle_rows_since(&self, prior: &Self) -> bool {
+        self.rows.starts_with(&prior.rows)
+    }
 }
 
 #[derive(Debug, Clone, PartialEq, Eq)]
@@ -2890,6 +3595,10 @@ pub(crate) struct Sys4LocalCut {
     causality: CausalityGraph,
     next_endpoint_occurrence: u64,
     next_request: u64,
+    patch_generation: u64,
+    patch_lifecycle: Sys4PatchLifecycleLog,
+    patch_lifecycle_snapshot: Sys4PatchLifecycleSnapshot,
+    active_patch_frontier: Sys4PatchFrontier,
 }
 
 impl std::fmt::Debug for Sys4LocalCut {
@@ -2909,6 +3618,35 @@ impl std::fmt::Debug for Sys4LocalCut {
 }
 
 impl Sys4LocalCut {
+    pub(crate) fn patch_lifecycle_snapshot(&self) -> &Sys4PatchLifecycleSnapshot {
+        &self.patch_lifecycle_snapshot
+    }
+
+    pub(crate) fn active_patch_frontier_snapshot(&self) -> &Sys4PatchFrontier {
+        &self.active_patch_frontier
+    }
+
+    fn patch_frontier_lifecycle_generation_is_consistent(&self) -> bool {
+        self.patch_lifecycle
+            .rows
+            .iter()
+            .filter(|row| matches!(row, Sys4PatchLifecycleRow::Accepted))
+            .count()
+            == self.patch_generation as usize
+            && self.patch_lifecycle_snapshot.rows == self.patch_lifecycle.rows
+            && self.active_patch_frontier.activation_generation == self.patch_generation
+    }
+
+    #[cfg(test)]
+    pub(crate) fn for_test_rewind_patch_generation_below_lifecycle_frontier(&mut self) {
+        self.patch_generation = self.patch_generation.saturating_sub(1);
+    }
+
+    #[cfg(test)]
+    pub(crate) fn patch_frontier_lifecycle_generation_is_inconsistent(&self) -> bool {
+        !self.patch_frontier_lifecycle_generation_is_consistent()
+    }
+
     pub(crate) fn imported_designated_publication_state(
         &self,
     ) -> &ImportedDesignatedPublicationState {
@@ -3070,11 +3808,9 @@ fn validate_sys4_local_cut(
     {
         return Err(cut_projection_mismatch());
     }
-    if cut.authority_generation.program_identity()
-        != program.checked_program_identity().stable_key()
-        || !cut
-            .authority_lifecycle
-            .matches_generation_for_restore(&cut.authority_generation)
+    if !cut
+        .authority_lifecycle
+        .matches_generation_for_restore(&cut.authority_generation)
         || !cut
             .authority_live_floor
             .matches_generation(&cut.authority_generation)
@@ -3086,6 +3822,13 @@ fn validate_sys4_local_cut(
         return Err(Sys4DispatchDiagnostics::one(
             Sys4DiagnosticKind::ProgramAdmissionMismatch,
         ));
+    }
+    let expected_patch_frontier =
+        Sys4PatchFrontier::for_active(program, &cut.authority_generation, cut.patch_generation);
+    if !cut.patch_frontier_lifecycle_generation_is_consistent()
+        || cut.active_patch_frontier != expected_patch_frontier
+    {
+        return Err(cut_projection_mismatch());
     }
 
     for (locus, locus_cut) in &cut.loci {
@@ -3488,6 +4231,27 @@ fn cut_m8_views_are_derived(cut: &Sys4LocalCut) -> bool {
         {
             return false;
         }
+        // A session without any M8 occurrence is still part of the whole
+        // fabric cut, but has no qualified-node projection to retain.  SYS4
+        // captures it without minting a synthetic M8 save occurrence.
+        if raw_observations.is_empty() {
+            if cut
+                .m8_qualified_trace_nodes
+                .get(session_id)
+                .is_some_and(|nodes| !nodes.is_empty())
+                || cut
+                    .m8_qualified_trace_dependencies
+                    .get(session_id)
+                    .is_some_and(|dependencies| !dependencies.is_empty())
+                || cut
+                    .m8_raw_node_loci
+                    .get(session_id)
+                    .is_some_and(|loci| !loci.is_empty())
+            {
+                return false;
+            }
+            continue;
+        }
         let Some(qualified_nodes) = cut.m8_qualified_trace_nodes.get(session_id) else {
             return false;
         };
@@ -3756,6 +4520,28 @@ impl FabricSemanticSnapshot {
     }
 }
 
+/// Observer-safe identity of the active checked runtime configuration.  It
+/// deliberately excludes local values and M9 credential material while still
+/// covering the program, generated artifacts, routes, and derived cache
+/// identity that a rejected patch must leave untouched.
+#[derive(Debug, Clone, PartialEq, Eq)]
+pub(crate) struct ActiveRuntimeIdentitySnapshot {
+    checked_program_identity: CheckedProgramIdentity,
+    projection_fingerprint: BTreeSet<(FabricRouteKey, String)>,
+    artifacts: BTreeMap<String, FabricArtifact>,
+    route_refs: BTreeSet<String>,
+    cache_bindings: BTreeSet<(String, String, String)>,
+    patch_generation: u64,
+}
+
+impl ActiveRuntimeIdentitySnapshot {
+    pub(crate) const fn includes_program_artifact_projection_route_and_cache_identity(
+        &self,
+    ) -> bool {
+        true
+    }
+}
+
 enum M8ExecutionBackend {
     /// Independent deterministic M8 sessions, one per admitted logical
     /// locus.  No ST operation may borrow another locus's semantic snapshot.
@@ -3806,6 +4592,50 @@ impl M8ExecutionBackend {
 
     fn is_ow1(&self) -> bool {
         matches!(self, Self::Ow1(_))
+    }
+
+    /// A checked SYS-4 patch is prepared against clone-only ST sessions.  OW1
+    /// has no worker snapshot/clone command yet, so it remains explicitly
+    /// ineligible rather than extracting worker-owned mutable M8 state.
+    fn clone_for_checked_patch(&self) -> Result<Self, Sys4DiagnosticKind> {
+        match self {
+            Self::St(sessions) => Ok(Self::St(
+                sessions
+                    .iter()
+                    .map(|(locus, runtime)| (locus.clone(), Box::new((**runtime).clone())))
+                    .collect(),
+            )),
+            Self::Ow1(_) => Err(Sys4DiagnosticKind::BackendIneligible),
+        }
+    }
+
+    fn install_checked_patch(
+        &mut self,
+        instance: M8RuntimeInstance,
+        authority_generation: &M9AuthorityGeneration,
+        patch_id: &str,
+    ) -> Result<(), Sys4DiagnosticKind> {
+        match self {
+            Self::St(sessions) => {
+                for runtime in sessions.values_mut() {
+                    runtime.install_admitted_sys4_checked_patch(instance.clone(), patch_id);
+                    runtime.refresh_m9_authority_state(authority_generation.authority_state());
+                }
+                Ok(())
+            }
+            Self::Ow1(_) => Err(Sys4DiagnosticKind::BackendIneligible),
+        }
+    }
+
+    fn has_pending_owner_requests(&self) -> bool {
+        match self {
+            Self::St(sessions) => sessions
+                .values()
+                .any(|runtime| runtime.has_pending_owner_requests()),
+            // OW1 checked patches fail closed before clone/preflight. Do not
+            // claim a worker-owned FIFO has been observed by the coordinator.
+            Self::Ow1(_) => true,
+        }
     }
 
     fn enqueue_and_serve(
@@ -3984,7 +4814,7 @@ impl M8ExecutionBackend {
                 .map(|(locus, runtime)| {
                     (
                         locus.clone(),
-                        runtime.save_local_cut(format!("{cut_id}:{locus}")),
+                        runtime.capture_for_sys4_local_cut(format!("{cut_id}:{locus}")),
                     )
                 })
                 .collect()),
@@ -4843,6 +5673,14 @@ impl M9AuthorityLifecycle {
             .matches_for_restore(generation)
     }
 
+    /// M9, not SYS-4, adopts exact runtime validation observations before a
+    /// successor operation.  The caller has already held the matching shared
+    /// authority-floor guard; a false result is a fail-closed identity or
+    /// lineage mismatch, never an invitation to reconstruct observations.
+    fn synchronize_from_live_generation(&mut self, live: &M9AuthorityGeneration) -> bool {
+        self.publisher.synchronize_runtime_observations_from(live)
+    }
+
     fn transition(
         &mut self,
         value_name: &str,
@@ -4856,6 +5694,10 @@ impl M9AuthorityLifecycle {
         >,
     ) -> Sys4Result<M9AuthorityTransition> {
         let prior = self.publisher.current_inspection();
+        let prior_publisher = self.publisher.clone();
+        let prior_runtime_validation_observations = self
+            .publisher
+            .current_runtime_validation_observation_snapshot();
         let lineage = prior
             .designated_consumer_lineage(value_name, consumer)
             .cloned()
@@ -4870,6 +5712,8 @@ impl M9AuthorityLifecycle {
         Ok(M9AuthorityTransition {
             generation,
             sealed_m9_inspection,
+            prior_runtime_validation_observations,
+            prior_publisher,
         })
     }
     pub(crate) fn revoke_designated_consumer_capability(
@@ -4916,6 +5760,10 @@ impl M9AuthorityLifecycle {
         lineage: &M9DesignatedSourceReleaseLineage,
     ) -> Sys4Result<M9AuthorityTransition> {
         let prior = self.publisher.current_inspection();
+        let prior_publisher = self.publisher.clone();
+        let prior_runtime_validation_observations = self
+            .publisher
+            .current_runtime_validation_observation_snapshot();
         let generation = self
             .publisher
             .revoke_designated_source_release(lineage)
@@ -4931,18 +5779,115 @@ impl M9AuthorityLifecycle {
         Ok(M9AuthorityTransition {
             generation,
             sealed_m9_inspection,
+            prior_runtime_validation_observations,
+            prior_publisher,
         })
+    }
+
+    /// Restore the M9 publisher only when this fabric owns the exact
+    /// uninstalled successor. A stale or foreign transition cannot roll back
+    /// a publisher that has since advanced.
+    fn rollback_uninstalled_transition(&mut self, transition: &M9AuthorityTransition) -> bool {
+        self.publisher.restore_uninstalled_successor(
+            transition.prior_publisher.clone(),
+            &transition.generation,
+        )
+    }
+}
+
+/// Borrowed authority-transition boundary. It keeps the shared M9 live-floor
+/// guard from the final M9-owned observation synchronization through exactly
+/// one successor publication request. The subsequent backend/fabric install
+/// remains in `apply_admitted_authority_lifecycle`, where the floor is
+/// rechecked before any semantic state changes.
+pub(crate) struct M9AuthorityLifecycleAccess<'a> {
+    lifecycle: &'a mut M9AuthorityLifecycle,
+    live_generation: &'a M9AuthorityGeneration,
+    floor_guard: Option<M9AuthorityLiveFloorGuard<'a>>,
+}
+
+impl M9AuthorityLifecycleAccess<'_> {
+    fn synchronize_before_successor(&mut self) -> Sys4Result<()> {
+        let Some(floor_guard) = self.floor_guard.as_ref() else {
+            return Err(Sys4DispatchDiagnostics::one(
+                Sys4DiagnosticKind::ProgramAdmissionMismatch,
+            ));
+        };
+        if !floor_guard.matches_runtime_authority_facts(self.live_generation)
+            || !self
+                .lifecycle
+                .synchronize_from_live_generation(self.live_generation)
+        {
+            return Err(Sys4DispatchDiagnostics::one(
+                Sys4DiagnosticKind::ProgramAdmissionMismatch,
+            ));
+        }
+        Ok(())
+    }
+
+    pub(crate) fn revoke_designated_consumer_capability(
+        &mut self,
+        value_name: &str,
+        consumer: &str,
+    ) -> Sys4Result<M9AuthorityTransition> {
+        self.synchronize_before_successor()?;
+        self.lifecycle
+            .revoke_designated_consumer_capability(value_name, consumer)
+    }
+
+    pub(crate) fn retire_designated_consumer_membership(
+        &mut self,
+        value_name: &str,
+        consumer: &str,
+    ) -> Sys4Result<M9AuthorityTransition> {
+        self.synchronize_before_successor()?;
+        self.lifecycle
+            .retire_designated_consumer_membership(value_name, consumer)
+    }
+
+    pub(crate) fn retire_designated_consumer_witness(
+        &mut self,
+        value_name: &str,
+        consumer: &str,
+    ) -> Sys4Result<M9AuthorityTransition> {
+        self.synchronize_before_successor()?;
+        self.lifecycle
+            .retire_designated_consumer_witness(value_name, consumer)
+    }
+
+    pub(crate) fn revoke_designated_source_release(
+        &mut self,
+        lineage: &M9DesignatedSourceReleaseLineage,
+    ) -> Sys4Result<M9AuthorityTransition> {
+        self.synchronize_before_successor()?;
+        self.lifecycle.revoke_designated_source_release(lineage)
     }
 }
 
 pub(crate) struct M9AuthorityTransition {
     generation: M9AuthorityGeneration,
     sealed_m9_inspection: M9SealedTransitionInspection,
+    prior_runtime_validation_observations: M9RuntimeValidationObservationSnapshot,
+    prior_publisher: M9AuthoritySuccessorPublisher,
 }
 
 impl M9AuthorityTransition {
     pub(crate) fn sealed_m9_inspection(&self) -> &M9SealedTransitionInspection {
         &self.sealed_m9_inspection
+    }
+
+    /// Observer-safe M9 evidence for the exact pre-transition validation
+    /// snapshot. It reveals neither counter keys nor authority material.
+    pub(crate) fn prior_runtime_validation_observation_digest(&self) -> &str {
+        self.prior_runtime_validation_observations.opaque_digest()
+    }
+
+    fn matches_live_runtime_validation_observations(
+        &self,
+        generation: &M9AuthorityGeneration,
+    ) -> bool {
+        self.prior_runtime_validation_observations
+            .matches_generation(generation)
     }
 }
 
@@ -5036,6 +5981,8 @@ pub(crate) struct LocalFabric {
     evaluator_publication_bindings: EvaluatorPublicationBindingRegistry,
     cache: BTreeMap<String, CachedDelivery>,
     next_request: u64,
+    patch_generation: u64,
+    patch_lifecycle: Sys4PatchLifecycleLog,
 }
 
 impl std::fmt::Debug for LocalFabric {
@@ -5188,6 +6135,8 @@ impl LocalFabric {
             evaluator_publication_bindings: EvaluatorPublicationBindingRegistry::default(),
             cache: BTreeMap::new(),
             next_request: 0,
+            patch_generation: 0,
+            patch_lifecycle: Sys4PatchLifecycleLog::default(),
         })
     }
 
@@ -5205,6 +6154,369 @@ impl LocalFabric {
                 .map(|(locus, runtime)| (locus.clone(), runtime.local_store.clone()))
                 .collect(),
         }
+    }
+
+    /// Activate an opaque candidate built by the checked-source → projection
+    /// → M9-admission pipeline. All checks and plan replacement run against
+    /// a clone-only candidate; rejected candidates mutate only lifecycle
+    /// evidence on this fabric.
+    pub(crate) fn activate_checked_patch(
+        &mut self,
+        candidate: Sys4CheckedPatchCandidate,
+    ) -> Sys4Result<Sys4PatchOutcome> {
+        let active_frontier = self.current_patch_frontier();
+        let boundary_inspection = Sys4PatchBoundaryInspection {
+            candidate_was_prechecked_projected_and_m9_admitted: true,
+        };
+        // Static compatibility is checked before authority binding so a
+        // topology/owner-route mismatch remains a topology diagnostic rather
+        // than being masked by an independently admitted candidate inventory.
+        if !candidate.compatibility.matches() {
+            return Ok(self.reject_checked_patch(
+                &candidate,
+                active_frontier,
+                candidate.compatibility.diagnostic(),
+                boundary_inspection,
+            ));
+        }
+        if !candidate
+            .base_frontier
+            .has_same_program_projection_and_activation(&active_frontier)
+            || !candidate.base_frontier.has_well_formed_nonce()
+        {
+            return Ok(self.reject_checked_patch(
+                &candidate,
+                active_frontier,
+                Sys4PatchDiagnosticKind::StaleFrontier,
+                boundary_inspection,
+            ));
+        }
+        // The active floor is shared between fabrics that began from the same
+        // admitted M9 seam.  Keep its guard through the clone/preflight/swap;
+        // a candidate may prove equivalence but can never replace that floor.
+        let live_floor = self.authority_live_floor.clone();
+        let Some(mut floor_guard) = live_floor.guard_matching(&self.authority_generation) else {
+            let recheck = M9LiveFloorRecheckInspection {
+                current_generation: self.current_m9_authority_inspection().generation(),
+                shared_live_floor_identity: live_floor.identity_snapshot(),
+            };
+            let mut outcome = self.reject_checked_patch(
+                &candidate,
+                active_frontier,
+                Sys4PatchDiagnosticKind::StaleFrontier,
+                boundary_inspection,
+            );
+            outcome.m9_live_floor_recheck = Some(recheck);
+            return Ok(outcome);
+        };
+        let floor_generation = floor_guard.current_generation();
+        let live_floor_recheck = M9LiveFloorRecheckInspection {
+            current_generation: floor_generation.sealed_inspection().generation(),
+            shared_live_floor_identity: live_floor.identity_snapshot(),
+        };
+        if !self
+            .authority_lifecycle
+            .matches_generation_for_restore(&self.authority_generation)
+            || !floor_generation.matches_for_restore(&self.authority_generation)
+        {
+            drop(floor_guard);
+            let mut outcome = self.reject_checked_patch(
+                &candidate,
+                active_frontier,
+                Sys4PatchDiagnosticKind::StaleFrontier,
+                boundary_inspection,
+            );
+            outcome.m9_live_floor_recheck = Some(live_floor_recheck);
+            return Ok(outcome);
+        }
+        if candidate.base_frontier.authority_binding().generation()
+            != active_frontier.authority_binding().generation()
+        {
+            drop(floor_guard);
+            let mut outcome = self.reject_checked_patch(
+                &candidate,
+                active_frontier,
+                Sys4PatchDiagnosticKind::StaleFrontier,
+                boundary_inspection,
+            );
+            outcome.m9_live_floor_recheck = Some(live_floor_recheck);
+            return Ok(outcome);
+        }
+        if candidate.base_frontier.authority_binding() != active_frontier.authority_binding() {
+            let mismatch = M9AuthorityFrontierMismatchInspection {
+                active_generation: self.current_m9_authority_inspection().generation(),
+                candidate_generation: candidate.base_frontier.authority_binding().generation(),
+                candidate_generation_ref: candidate
+                    .base_frontier
+                    .authority_binding()
+                    .generation_ref()
+                    .to_string(),
+                active_authority_lineage_digest: active_frontier
+                    .authority_binding()
+                    .lineage_digest()
+                    .to_string(),
+                candidate_authority_lineage_digest: candidate
+                    .base_frontier
+                    .authority_binding()
+                    .lineage_digest()
+                    .to_string(),
+            };
+            drop(floor_guard);
+            let mut outcome = self.reject_checked_patch(
+                &candidate,
+                active_frontier,
+                Sys4PatchDiagnosticKind::M9AuthorityLineageMismatch,
+                boundary_inspection,
+            );
+            outcome.m9_authority_frontier_mismatch = Some(mismatch);
+            return Ok(outcome);
+        }
+        if self.backend.is_ow1() {
+            drop(floor_guard);
+            return Ok(self.reject_checked_patch(
+                &candidate,
+                active_frontier,
+                Sys4PatchDiagnosticKind::BackendIneligible,
+                boundary_inspection,
+            ));
+        }
+        if !self.is_quiescent_for_checked_patch() {
+            drop(floor_guard);
+            return Ok(self.reject_checked_patch(
+                &candidate,
+                active_frontier,
+                Sys4PatchDiagnosticKind::NonQuiescentPendingCarrier,
+                boundary_inspection,
+            ));
+        }
+        if !candidate.patch_admission_is_complete() {
+            drop(floor_guard);
+            return Ok(self.reject_checked_patch(
+                &candidate,
+                active_frontier,
+                Sys4PatchDiagnosticKind::IncompleteCandidateAdmission,
+                boundary_inspection,
+            ));
+        }
+        // The candidate publisher is produced by normal M9 final admission
+        // for the checked patched program.  Retain it only after M9 confirms
+        // that its current authority inventory is an exact rebase of the
+        // active one; a raw candidate authority generation never replaces the
+        // fabric's state, lineages, tombstones, or shared floor.
+        let Some((rebased_authority_generation, rebased_authority_publisher)) = candidate
+            .patch_admission
+            .authority_successor
+            .for_checked_patch_rebase_of(&self.authority_generation)
+        else {
+            let mismatch = M9AuthorityFrontierMismatchInspection {
+                active_generation: self.current_m9_authority_inspection().generation(),
+                candidate_generation: candidate.patch_admission.authority_generation.generation(),
+                candidate_generation_ref: candidate
+                    .patch_admission
+                    .authority_generation
+                    .generation_ref()
+                    .to_string(),
+                active_authority_lineage_digest: self
+                    .authority_generation
+                    .checked_patch_authority_binding()
+                    .lineage_digest()
+                    .to_string(),
+                candidate_authority_lineage_digest: candidate
+                    .patch_admission
+                    .authority_generation
+                    .checked_patch_authority_binding()
+                    .lineage_digest()
+                    .to_string(),
+            };
+            drop(floor_guard);
+            let mut outcome = self.reject_checked_patch(
+                &candidate,
+                active_frontier,
+                Sys4PatchDiagnosticKind::M9AuthorityLineageMismatch,
+                boundary_inspection,
+            );
+            outcome.m9_authority_frontier_mismatch = Some(mismatch);
+            outcome.m9_live_floor_recheck = Some(live_floor_recheck);
+            return Ok(outcome);
+        };
+
+        let mut prepared = match self.clone_for_checked_patch() {
+            Ok(fabric) => fabric,
+            Err(_) => {
+                drop(floor_guard);
+                return Ok(self.reject_checked_patch(
+                    &candidate,
+                    active_frontier,
+                    Sys4PatchDiagnosticKind::BackendIneligible,
+                    boundary_inspection,
+                ));
+            }
+        };
+        if prepared
+            .install_checked_patch_candidate(&candidate, &rebased_authority_generation)
+            .is_err()
+        {
+            drop(floor_guard);
+            return Ok(self.reject_checked_patch(
+                &candidate,
+                active_frontier,
+                Sys4PatchDiagnosticKind::BackendIneligible,
+                boundary_inspection,
+            ));
+        }
+
+        // The backend install above was clone-only. Commit the M9-provided
+        // program rebase atomically through the pre-existing shared floor,
+        // then install that same sealed generation/publisher into the fabric.
+        // If this exact guard has advanced, neither the active fabric nor its
+        // authority lifecycle has changed.
+        if !floor_guard
+            .rebind_checked_patch_program(&self.authority_generation, &rebased_authority_generation)
+        {
+            drop(floor_guard);
+            let mut outcome = self.reject_checked_patch(
+                &candidate,
+                active_frontier,
+                Sys4PatchDiagnosticKind::StaleFrontier,
+                boundary_inspection,
+            );
+            outcome.m9_live_floor_recheck = Some(live_floor_recheck);
+            return Ok(outcome);
+        }
+        prepared.authority_generation = rebased_authority_generation;
+        prepared.authority_lifecycle = M9AuthorityLifecycle {
+            publisher: rebased_authority_publisher,
+        };
+
+        let activation_frontier = prepared.current_patch_frontier();
+        let lifecycle = Sys4PatchLifecycle {
+            verdict: Sys4PatchVerdict::Accepted,
+            diagnostic: None,
+            source_first_checked_projection_and_m9_admission: true,
+        };
+        *self = prepared;
+        drop(floor_guard);
+        Ok(Sys4PatchOutcome {
+            verdict: Sys4PatchVerdict::Accepted,
+            primary_diagnostic_kind: None,
+            lifecycle,
+            boundary_inspection,
+            base_frontier: candidate.base_frontier,
+            activation_frontier,
+            m9_authority_frontier_mismatch: None,
+            m9_live_floor_recheck: Some(live_floor_recheck),
+        })
+    }
+
+    fn current_patch_frontier(&self) -> Sys4PatchFrontier {
+        Sys4PatchFrontier::for_active(
+            &self.program,
+            &self.authority_generation,
+            self.patch_generation,
+        )
+    }
+
+    fn reject_checked_patch(
+        &mut self,
+        candidate: &Sys4CheckedPatchCandidate,
+        active_frontier: Sys4PatchFrontier,
+        diagnostic: Sys4PatchDiagnosticKind,
+        boundary_inspection: Sys4PatchBoundaryInspection,
+    ) -> Sys4PatchOutcome {
+        self.patch_lifecycle
+            .rows
+            .push(Sys4PatchLifecycleRow::Rejected(diagnostic));
+        Sys4PatchOutcome {
+            verdict: Sys4PatchVerdict::Rejected,
+            primary_diagnostic_kind: Some(diagnostic),
+            lifecycle: Sys4PatchLifecycle {
+                verdict: Sys4PatchVerdict::Rejected,
+                diagnostic: Some(diagnostic),
+                source_first_checked_projection_and_m9_admission: true,
+            },
+            boundary_inspection,
+            base_frontier: candidate.base_frontier.clone(),
+            activation_frontier: active_frontier,
+            m9_authority_frontier_mismatch: None,
+            m9_live_floor_recheck: None,
+        }
+    }
+
+    fn is_quiescent_for_checked_patch(&self) -> bool {
+        self.loci.values().all(|runtime| {
+            runtime.incoming_mailbox.pending.is_empty()
+                && runtime.outgoing_mailbox.pending.is_empty()
+        }) && !self.backend.has_pending_owner_requests()
+    }
+
+    fn clone_for_checked_patch(&self) -> Result<Self, Sys4DiagnosticKind> {
+        Ok(Self {
+            program: self.program.clone(),
+            loci: self.loci.clone(),
+            backend: self.backend.clone_for_checked_patch()?,
+            authority_generation: self.authority_generation.clone(),
+            authority_lifecycle: self.authority_lifecycle.clone(),
+            authority_live_floor: self.authority_live_floor.clone(),
+            trace: self.trace.clone(),
+            m8_trace: self.m8_trace.clone(),
+            actual_m8_trace: self.actual_m8_trace.clone(),
+            m8_local_runtime_trace: self.m8_local_runtime_trace.clone(),
+            m8_trace_offsets: self.m8_trace_offsets.clone(),
+            m8_qualified_trace_nodes: self.m8_qualified_trace_nodes.clone(),
+            m8_qualified_trace_dependencies: self.m8_qualified_trace_dependencies.clone(),
+            m8_raw_node_loci: self.m8_raw_node_loci.clone(),
+            m8_locus_trace_sequences: self.m8_locus_trace_sequences.clone(),
+            m8_locus_sessions: self.m8_locus_sessions.clone(),
+            observer_snapshot_failures: self.observer_snapshot_failures.clone(),
+            causality: self.causality.clone(),
+            next_endpoint_occurrence: self.next_endpoint_occurrence,
+            route_faults: self.route_faults.clone(),
+            in_transit_faults: self.in_transit_faults.clone(),
+            completed_receipts: self.completed_receipts.clone(),
+            local_store_read_audits: self.local_store_read_audits.clone(),
+            consumption_state: self.consumption_state.clone(),
+            evaluator_publication_bindings: self.evaluator_publication_bindings.clone(),
+            cache: self.cache.clone(),
+            next_request: self.next_request,
+            patch_generation: self.patch_generation,
+            patch_lifecycle: self.patch_lifecycle.clone(),
+        })
+    }
+
+    fn install_checked_patch_candidate(
+        &mut self,
+        candidate: &Sys4CheckedPatchCandidate,
+        rebased_authority_generation: &M9AuthorityGeneration,
+    ) -> Result<(), Sys4DiagnosticKind> {
+        self.backend.install_checked_patch(
+            candidate.patch_admission.instance.clone(),
+            rebased_authority_generation,
+            &candidate.patch_id,
+        )?;
+        for locus in self.program.locus_names() {
+            let runtime = self
+                .loci
+                .get_mut(&locus)
+                .ok_or(Sys4DiagnosticKind::ProgramProjectionMismatch)?;
+            runtime.program_identity = candidate.patch_program.checked_program_identity().clone();
+            runtime.artifact =
+                fabric_artifact_for(candidate.patch_program.projection.locus_program(&locus));
+        }
+        self.program = candidate.patch_program.clone();
+        // Cache and publication bindings are derived from the preceding
+        // evaluator plan. They cannot be carried across a fixed-version plan
+        // replacement. The active M9 authority state, lineages, tombstones,
+        // and shared live floor are retained.  Activation may separately
+        // re-key that same floor to M9's normally admitted publisher for the
+        // patched checked program, after exact equivalence validation.
+        self.cache.clear();
+        self.consumption_state = DesignatedConsumptionState::default();
+        self.evaluator_publication_bindings = EvaluatorPublicationBindingRegistry::default();
+        self.patch_generation = self.patch_generation.saturating_add(1);
+        self.patch_lifecycle
+            .rows
+            .push(Sys4PatchLifecycleRow::Accepted);
+        Ok(())
     }
 
     /// Save a bounded, process-local SYS-4 cut.  The per-locus M8 snapshots
@@ -5294,6 +6606,10 @@ impl LocalFabric {
             causality: self.causality.clone(),
             next_endpoint_occurrence: self.next_endpoint_occurrence,
             next_request: self.next_request,
+            patch_generation: self.patch_generation,
+            patch_lifecycle: self.patch_lifecycle.clone(),
+            patch_lifecycle_snapshot: self.patch_lifecycle_snapshot(),
+            active_patch_frontier: self.current_patch_frontier(),
         })
     }
 
@@ -5352,6 +6668,8 @@ impl LocalFabric {
         fabric.causality = cut.causality.clone();
         fabric.next_endpoint_occurrence = cut.next_endpoint_occurrence;
         fabric.next_request = cut.next_request;
+        fabric.patch_generation = cut.patch_generation;
+        fabric.patch_lifecycle = cut.patch_lifecycle.clone();
         Ok(fabric)
     }
 
@@ -6123,8 +7441,19 @@ impl LocalFabric {
     pub(crate) fn projected_artifact_identity(&self) -> &CheckedProgramIdentity {
         self.program.checked_program_identity()
     }
-    pub(crate) fn m9_authority_lifecycle_mut(&mut self) -> &mut M9AuthorityLifecycle {
-        &mut self.authority_lifecycle
+    pub(crate) fn m9_authority_lifecycle_mut(&mut self) -> M9AuthorityLifecycleAccess<'_> {
+        let Self {
+            authority_lifecycle,
+            authority_generation,
+            authority_live_floor,
+            ..
+        } = self;
+        let floor_guard = authority_live_floor.guard_matching(authority_generation);
+        M9AuthorityLifecycleAccess {
+            lifecycle: authority_lifecycle,
+            live_generation: authority_generation,
+            floor_guard,
+        }
     }
 
     pub(crate) fn apply_admitted_authority_lifecycle(
@@ -6137,8 +7466,13 @@ impl LocalFabric {
             || !transition
                 .generation
                 .preserves_tombstones_from(&self.authority_generation)
+            || !self
+                .authority_lifecycle
+                .matches_generation_for_restore(&transition.generation)
+            || !transition.matches_live_runtime_validation_observations(&self.authority_generation)
         {
-            return Err(Sys4DispatchDiagnostics::one(
+            return Err(self.reject_uninstalled_authority_transition(
+                &transition,
                 Sys4DiagnosticKind::ProgramAdmissionMismatch,
             ));
         }
@@ -6148,21 +7482,40 @@ impl LocalFabric {
         // authority inventory is refreshed.
         let live_floor = self.authority_live_floor.clone();
         let Some(mut floor_guard) = live_floor.guard_matching(&self.authority_generation) else {
-            return Err(Sys4DispatchDiagnostics::one(
+            return Err(self.reject_uninstalled_authority_transition(
+                &transition,
                 Sys4DiagnosticKind::ProgramAdmissionMismatch,
             ));
         };
         if !floor_guard.accepts_successor(&self.authority_generation, &transition.generation) {
-            return Err(Sys4DispatchDiagnostics::one(
+            drop(floor_guard);
+            return Err(self.reject_uninstalled_authority_transition(
+                &transition,
                 Sys4DiagnosticKind::ProgramAdmissionMismatch,
             ));
         }
-        self.backend
-            .refresh_authority(&transition.generation)
-            .map_err(Sys4DispatchDiagnostics::one)?;
+        if let Err(kind) = self.backend.refresh_authority(&transition.generation) {
+            drop(floor_guard);
+            return Err(self.reject_uninstalled_authority_transition(&transition, kind));
+        }
         floor_guard.commit_successor(&transition.generation);
         self.authority_generation = transition.generation;
         Ok(())
+    }
+
+    fn reject_uninstalled_authority_transition(
+        &mut self,
+        transition: &M9AuthorityTransition,
+        kind: Sys4DiagnosticKind,
+    ) -> Sys4DispatchDiagnostics {
+        // The publisher was advanced only to construct the sealed transition.
+        // If install cannot proceed, restore its M9-owned prior snapshot when
+        // this fabric still owns that exact uninstalled successor. A foreign
+        // transition cannot affect this fabric's lifecycle.
+        let _restored = self
+            .authority_lifecycle
+            .rollback_uninstalled_transition(transition);
+        Sys4DispatchDiagnostics::one(kind)
     }
 
     fn route_for(
@@ -6194,6 +7547,14 @@ impl LocalFabric {
 impl LocalFabric {
     pub(crate) fn current_m9_authority_inspection(&self) -> M9AuthorityInspection {
         self.authority_generation.sealed_inspection()
+    }
+
+    pub(crate) fn current_patch_frontier_snapshot(&self) -> Sys4PatchFrontier {
+        self.current_patch_frontier()
+    }
+
+    pub(crate) fn m9_authority_live_floor_identity_snapshot(&self) -> usize {
+        self.authority_live_floor.identity_snapshot()
     }
 
     pub(crate) fn in_transit_faults(&self) -> &InTransitFaults {
@@ -6228,6 +7589,37 @@ impl LocalFabric {
             .ok_or_else(|| {
                 Sys4DispatchDiagnostics::one(Sys4DiagnosticKind::ProgramProjectionMismatch)
             })
+    }
+
+    pub(crate) fn active_runtime_identity_snapshot(&self) -> ActiveRuntimeIdentitySnapshot {
+        ActiveRuntimeIdentitySnapshot {
+            checked_program_identity: self.program.checked_program_identity().clone(),
+            projection_fingerprint: self.program.projected_fingerprint(),
+            artifacts: self
+                .loci
+                .iter()
+                .map(|(locus, runtime)| (locus.clone(), runtime.artifact.clone()))
+                .collect(),
+            route_refs: self.program.route_index().edge_refs(),
+            cache_bindings: self
+                .cache
+                .values()
+                .map(|cached| {
+                    (
+                        cached.semantic_identity.clone(),
+                        cached.delivery_id.clone(),
+                        cached.sealed_delivery_binding_digest.clone(),
+                    )
+                })
+                .collect(),
+            patch_generation: self.patch_generation,
+        }
+    }
+
+    pub(crate) fn patch_lifecycle_snapshot(&self) -> Sys4PatchLifecycleSnapshot {
+        Sys4PatchLifecycleSnapshot {
+            rows: self.patch_lifecycle.rows.clone(),
+        }
     }
 
     fn next_mailbox_token(&mut self, label: &str) -> String {
@@ -6999,9 +8391,12 @@ impl LocalFabric {
                         &envelope.request_id,
                     ));
                 }
-                let (_, authority) = self
-                    .authority_generation
-                    .validate_owner_operation(&envelope.operation_id, locus, &envelope.request_id)
+                // Pure carrier/provenance checks must finish before M9
+                // records an admitted owner-operation validation occurrence.
+                // A forged lineage is not a successful validation merely
+                // because the projected operation itself is authority-bound.
+                self.authority_generation
+                    .owner_authority_for_operation(&envelope.operation_id, locus)
                     .ok_or_else(|| {
                         self.quarantine(
                             locus,
@@ -7029,6 +8424,17 @@ impl LocalFabric {
                         &envelope.request_id,
                     ));
                 }
+                let (_, authority) = self
+                    .authority_generation
+                    .validate_owner_operation(&envelope.operation_id, locus, &envelope.request_id)
+                    .ok_or_else(|| {
+                        self.quarantine(
+                            locus,
+                            &envelope,
+                            Sys4DiagnosticKind::M8ExecutionRejected,
+                            &envelope.request_id,
+                        )
+                    })?;
                 let mut request =
                     M8OwnerRequest::new(&envelope.operation_id).with_authority_use(authority);
                 for (name, value) in arguments {

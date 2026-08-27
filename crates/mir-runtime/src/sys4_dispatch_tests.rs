@@ -27,7 +27,8 @@ use crate::{
         FabricReceipt, FabricRouteKey, FabricSemanticSnapshot, FabricTrace, FaultInjection,
         LocalFabric, MailboxEnvelope, ObserverSnapshotChannel, RuntimeStoreRead, RuntimeStoreWrite,
         RuntimeValue, SealedDeliveryBinding, SealedFabricAdmission, SourceAction,
-        Sys4DiagnosticKind, Sys4DispatchDiagnostics, Sys4InitialStateSeed, Sys4LocalCut,
+        Sys4CheckedPatchCandidate, Sys4DiagnosticKind, Sys4DispatchDiagnostics,
+        Sys4InitialStateSeed, Sys4LocalCut, Sys4PatchDiagnosticKind, Sys4PatchVerdict,
         Sys4TraceEntry, Sys4TraceKind,
     },
 };
@@ -35,6 +36,9 @@ use crate::{
 const SURFACE_FIXTURE_DIR: &str = "tests/fixtures/surface-v0";
 const OWNER_ENDPOINT_FIXTURE: &str = "sys4_ow1_endpoint_crossing.mir";
 const DESIGNATED_CONSUME_FIXTURE: &str = "sys4_designated_consume_with_auth.mir";
+const DESIGNATED_CONSUME_PLUS_TWO_FIXTURE: &str = "sys4_designated_consume_with_auth_plus_two.mir";
+const COMBINED_OWNER_DESIGNATED_CHANGED_RMW_FIXTURE: &str =
+    "sys4_combined_owner_designated_owner_rmw_changed_with_auth.mir";
 const RELATION_ONLY_FIXTURE: &str = "maintained_bird_relation.mir";
 const FOUR_LOCUS_FIXTURE: &str = "sys4_two_owner_four_locus_with_auth.mir";
 
@@ -85,6 +89,51 @@ fn owner_endpoint_checked() -> CheckedSurfaceV0 {
 
 fn designated_checked() -> CheckedSurfaceV0 {
     load_checked_fixture(DESIGNATED_CONSUME_FIXTURE)
+}
+
+fn designated_plus_two_checked() -> CheckedSurfaceV0 {
+    load_checked_fixture(DESIGNATED_CONSUME_PLUS_TWO_FIXTURE)
+}
+
+fn combined_owner_designated_changed_rmw_checked() -> CheckedSurfaceV0 {
+    load_checked_fixture(COMBINED_OWNER_DESIGNATED_CHANGED_RMW_FIXTURE)
+}
+
+fn combined_owner_designated_plus_two_checked() -> CheckedSurfaceV0 {
+    checked_inline(
+        "tests/inline/sys4_combined_owner_designated_same_source_owner.mir",
+        r#"
+module Combat.Sys4.CombinedOwnerDesignatedSameSourceOwner
+
+locus A
+locus S
+locus E
+locus C
+principal self
+principal target
+type Player
+
+state player[id: Player] at S {
+  hp: Int
+  atk: Int
+}
+
+Role[self] at A {
+  when attack(target: Player) fails (StaleMembership, MissingCapability, MissingWitness, RouteUnavailable) {
+    at S {
+      player[target].hp = player[target].hp - player[self].atk
+    }
+  }
+}
+
+designated evaluate E on tick F publish result = player[self].atk + 2
+designated consume E.result at C
+
+with auth MembershipAuth
+
+verify finite_refinement
+"#,
+    )
 }
 
 fn relation_only_checked() -> CheckedSurfaceV0 {
@@ -199,6 +248,101 @@ fn sealed_admission(checked: &CheckedSurfaceV0, program: &FabricProgram) -> Seal
         initial_state_seed(checked.program_identity()),
     )
     .expect("complete M9 final seam plus explicit seed admits the static fabric")
+}
+
+fn source_first_plus_two_patch_candidate(
+    base_program: &FabricProgram,
+) -> Sys4CheckedPatchCandidate {
+    let patch_checked = designated_plus_two_checked();
+    let patch_projection = designated_projection(&patch_checked);
+    let patch_program = fabric_program(patch_projection);
+    let patch_admission = sealed_admission(&patch_checked, &patch_program);
+    Sys4CheckedPatchCandidate::from_prechecked_projected_admitted(
+        "patch:sys4-designated-plus-two",
+        base_program,
+        patch_program,
+        patch_admission,
+    )
+    .expect(
+        "bounded patch candidate is built outside SYS-4 runtime from checked source, strict SYS-3 projection, and complete M9 admission",
+    )
+}
+
+fn source_first_topology_mismatch_patch_candidate(
+    base_program: &FabricProgram,
+) -> Sys4CheckedPatchCandidate {
+    let mismatch_checked = owner_endpoint_checked();
+    let mismatch_projection = owner_endpoint_projection(&mismatch_checked);
+    let mismatch_program = fabric_program(mismatch_projection);
+    let mismatch_admission = sealed_admission(&mismatch_checked, &mismatch_program);
+    Sys4CheckedPatchCandidate::from_prechecked_projected_admitted(
+        "patch:sys4-owner-endpoint-topology-mismatch",
+        base_program,
+        mismatch_program,
+        mismatch_admission,
+    )
+    .expect("topology mismatch candidate is still prechecked/projected/M9-admitted before activation rejection")
+}
+
+fn source_first_plus_two_patch_candidate_with_divergent_m9_same_generation(
+    base_program: &FabricProgram,
+) -> Sys4CheckedPatchCandidate {
+    let patch_checked = designated_plus_two_checked();
+    let patch_projection = designated_projection(&patch_checked);
+    let patch_program = fabric_program(patch_projection);
+    let divergent_seam =
+        M9RuntimeExecutionSeam::test_real_admitted_sys4_fabric_seam_with_divergent_lineage_same_numeric_generation(
+            &patch_checked,
+            "sys4-patch-divergent-m9-lineage",
+        )
+        .expect("M9 test helper produces complete same-generation divergent authority material");
+    let patch_admission = SealedFabricAdmission::from_m9_execution_seam(
+        &patch_program,
+        divergent_seam,
+        initial_state_seed(patch_checked.program_identity()),
+    )
+    .expect("divergent same-generation seam is complete and source-bound before SYS-4 rejects it");
+    Sys4CheckedPatchCandidate::from_prechecked_projected_admitted(
+        "patch:sys4-designated-plus-two-divergent-m9",
+        base_program,
+        patch_program,
+        patch_admission,
+    )
+    .expect("candidate remains checked/projected/M9-admitted; rejection is the activation frontier binding")
+}
+
+fn source_first_changed_owner_rmw_patch_candidate(
+    base_program: &FabricProgram,
+) -> Sys4CheckedPatchCandidate {
+    let patch_checked = combined_owner_designated_changed_rmw_checked();
+    let patch_projection = combined_owner_designated_projection(&patch_checked);
+    let patch_program = fabric_program(patch_projection);
+    let patch_admission = sealed_admission(&patch_checked, &patch_program);
+    Sys4CheckedPatchCandidate::from_prechecked_projected_admitted(
+        "patch:sys4-combined-owner-rmw-expression-changed",
+        base_program,
+        patch_program,
+        patch_admission,
+    )
+    .expect(
+        "owner-RMW expression-change candidate is source-first checked, projected, and M9-admitted",
+    )
+}
+
+fn source_first_combined_designated_plus_two_patch_candidate(
+    base_program: &FabricProgram,
+) -> Sys4CheckedPatchCandidate {
+    let patch_checked = combined_owner_designated_plus_two_checked();
+    let patch_projection = combined_owner_designated_projection(&patch_checked);
+    let patch_program = fabric_program(patch_projection);
+    let patch_admission = sealed_admission(&patch_checked, &patch_program);
+    Sys4CheckedPatchCandidate::from_prechecked_projected_admitted(
+        "patch:sys4-combined-designated-plus-two",
+        base_program,
+        patch_program,
+        patch_admission,
+    )
+    .expect("same-shape combined owner/designated patch is checked, projected, and M9-admitted")
 }
 
 fn four_locus_initial_state_seed(identity: &CheckedProgramIdentity) -> Sys4InitialStateSeed {
@@ -8455,6 +8599,2209 @@ fn ow1_observer_safe_session_failure_is_typed_status_only_and_recovers_without_m
     );
     assert_no_observer_snapshot_failure(&fabric, ObserverSnapshotChannel::ObserverSafeSession);
     assert!(fabric.semantic_snapshot().same_state(&before));
+}
+
+#[test]
+fn checked_patch_exact_frontier_reprojects_designated_value_and_preserves_semantic_state() {
+    let checked = designated_checked();
+    let program = fabric_program(designated_projection(&checked));
+    let mut fabric = boot(&checked, program.clone(), BackendProfile::St);
+
+    let before_patch_publish = fabric
+        .dispatch_source_action(publish_designated_action_with_tick("tick:F:before-patch"))
+        .expect("baseline designated generated path publishes through current +1 program");
+    assert_eq!(
+        before_patch_publish.typed_value(),
+        RuntimeValue::int(11),
+        "baseline ordinary source uses player[self].atk + 1"
+    );
+    let before_patch_consume = fabric
+        .dispatch_source_action(consume_designated_action())
+        .expect("baseline consume observes current +1 publication");
+    assert_eq!(before_patch_consume.typed_value(), RuntimeValue::int(11));
+    let semantic_before_patch = fabric.semantic_snapshot();
+    let m8_before_patch = fabric
+        .m8_actual_trace()
+        .expect("M8 observer available")
+        .stable_digest();
+
+    let patch = source_first_plus_two_patch_candidate(&program);
+    let outcome = fabric
+        .activate_checked_patch(patch)
+        .expect("exact-frontier compatible checked patch activates");
+    assert_eq!(outcome.verdict(), Sys4PatchVerdict::Accepted);
+    assert!(
+        outcome
+            .lifecycle()
+            .contains_source_first_checked_projection_and_m9_admission(),
+        "accepted SYS-4 patch lifecycle must prove ordinary source was checked, strictly projected, and admitted by M9 before runtime activation"
+    );
+    assert!(
+        outcome
+            .activation_frontier()
+            .is_exact_successor_of(outcome.base_frontier()),
+        "accepted SYS-4 patch must bind to the exact live activation frontier"
+    );
+    assert!(
+        outcome
+            .boundary_inspection()
+            .runtime_received_only_checked_patch_candidate(),
+        "runtime patch boundary must receive a prechecked/projected/admitted candidate, not raw source, AST, manual edges, or grants"
+    );
+    assert!(
+        fabric
+            .semantic_snapshot()
+            .same_state(&semantic_before_patch),
+        "patch activation changes generated evaluation plan but preserves semantic owner state"
+    );
+    assert_eq!(
+        fabric
+            .m8_actual_trace()
+            .expect("M8 observer available")
+            .stable_digest(),
+        m8_before_patch,
+        "patch activation must not synthesize M8 runtime occurrences before a post-patch source action runs"
+    );
+
+    let after_patch_publish = fabric
+        .dispatch_source_action(publish_designated_action_with_tick("tick:F:after-patch"))
+        .expect("post-patch generated path publishes through +2 program");
+    assert_eq!(
+        after_patch_publish.typed_value(),
+        RuntimeValue::int(12),
+        "post-patch generated designated path must use player[self].atk + 2"
+    );
+    let after_patch_consume = fabric
+        .dispatch_source_action(consume_designated_action())
+        .expect("post-patch consume observes patched publication");
+    assert_eq!(
+        after_patch_consume.typed_value(),
+        RuntimeValue::int(12),
+        "post-patch consume must not reuse the stale +1 publication/cache"
+    );
+    assert!(
+        fabric
+            .semantic_snapshot()
+            .same_state(&semantic_before_patch),
+        "designated patch and consume must not mutate owner-local player state"
+    );
+}
+
+#[test]
+fn checked_patch_accepted_program_lifecycle_and_frontier_survive_sys4_local_cut_restore() {
+    let checked = designated_checked();
+    let program = fabric_program(designated_projection(&checked));
+    let mut fabric = boot(&checked, program.clone(), BackendProfile::St);
+
+    let accepted = fabric
+        .activate_checked_patch(source_first_plus_two_patch_candidate(&program))
+        .expect("exact-frontier compatible checked patch activates before cut");
+    assert_eq!(accepted.verdict(), Sys4PatchVerdict::Accepted);
+    let active_after_patch = fabric.active_runtime_identity_snapshot();
+    let lifecycle_after_patch = fabric.patch_lifecycle_snapshot();
+    let semantic_after_patch = fabric.semantic_snapshot();
+    let authority_after_patch = fabric.current_m9_authority_inspection().generation();
+    let frontier_after_patch = fabric.current_patch_frontier_snapshot();
+    assert_eq!(
+        &frontier_after_patch,
+        accepted.activation_frontier(),
+        "live patch frontier must expose the exact accepted activation frontier before cut"
+    );
+
+    let post_patch_publish = fabric
+        .dispatch_source_action(publish_designated_action_with_tick(
+            "tick:F:post-patch-before-cut",
+        ))
+        .expect("accepted +2 patch runs before cut");
+    assert_eq!(post_patch_publish.typed_value(), RuntimeValue::int(12));
+    let m8_before_cut = fabric
+        .m8_actual_trace()
+        .expect("M8 observer available")
+        .stable_digest();
+    let cut = save_sys4_local_cut(&mut fabric, "sys4-cut-after-accepted-plus-two-patch")
+        .expect("ST cut captures accepted patch lifecycle and active frontier");
+    assert_eq!(
+        cut.patch_lifecycle_snapshot(),
+        &lifecycle_after_patch,
+        "cut must persist the accepted patch lifecycle rows, not only current code/data state"
+    );
+    assert_eq!(
+        cut.active_patch_frontier_snapshot(),
+        accepted.activation_frontier(),
+        "cut must persist the active patch frontier derived from checked program/projection/M9 generation"
+    );
+
+    let patch_checked = designated_plus_two_checked();
+    let patch_program = fabric_program(designated_projection(&patch_checked));
+    let patch_admission = sealed_admission(&patch_checked, &patch_program);
+    let mut restored =
+        LocalFabric::restore_local_cut(patch_program, patch_admission, BackendProfile::St, &cut)
+            .expect("accepted patch cut restores with the patched source-first program/admission");
+    assert_eq!(
+        restored.active_runtime_identity_snapshot(),
+        active_after_patch,
+        "restored fabric must retain the accepted patched program/artifacts/routes/cache identity"
+    );
+    assert_eq!(
+        restored.patch_lifecycle_snapshot(),
+        lifecycle_after_patch,
+        "restored fabric must retain the accepted patch lifecycle"
+    );
+    assert_eq!(
+        restored.current_patch_frontier_snapshot(),
+        frontier_after_patch,
+        "restored fabric must retain the exact active patch frontier"
+    );
+    assert!(
+        restored
+            .semantic_snapshot()
+            .same_state(&semantic_after_patch),
+        "accepted patch cut/restore must not mutate owner semantic state"
+    );
+    assert_eq!(
+        restored.current_m9_authority_inspection().generation(),
+        authority_after_patch,
+        "accepted patch cut/restore must retain the active admitted M9 generation"
+    );
+    assert_eq!(
+        restored
+            .m8_actual_trace()
+            .expect("M8 observer available")
+            .stable_digest(),
+        m8_before_cut,
+        "restore must not synthesize extra M8 rows"
+    );
+
+    let restored_publish = restored
+        .dispatch_source_action(publish_designated_action_with_tick(
+            "tick:F:post-patch-after-restore",
+        ))
+        .expect("restored accepted +2 program remains executable");
+    assert_eq!(
+        restored_publish.typed_value(),
+        RuntimeValue::int(12),
+        "post-restore designated path must persist the accepted +2 program, not revert to +1"
+    );
+}
+
+#[test]
+fn checked_patch_rebases_m9_successor_publisher_and_preserves_revocation_tombstone_across_cut() {
+    let checked = designated_checked();
+    let base_program = fabric_program(designated_projection(&checked));
+    let mut fabric = boot(&checked, base_program.clone(), BackendProfile::St);
+    let live_floor_before_patch = fabric.m9_authority_live_floor_identity_snapshot();
+
+    let accepted = fabric
+        .activate_checked_patch(source_first_plus_two_patch_candidate(&base_program))
+        .expect("exact-frontier compatible checked patch activates before authority lifecycle");
+    assert_eq!(accepted.verdict(), Sys4PatchVerdict::Accepted);
+    assert_eq!(
+        fabric.m9_authority_live_floor_identity_snapshot(),
+        live_floor_before_patch,
+        "patch activation may rebase the M9 successor publisher, but must not replace the shared live authority floor"
+    );
+    let patch_checked = designated_plus_two_checked();
+    let patch_program = fabric_program(designated_projection(&patch_checked));
+    let patch_admission = sealed_admission(&patch_checked, &patch_program);
+    assert_eq!(
+        fabric.projected_artifact_identity(),
+        patch_program.checked_program_identity(),
+        "post-patch runtime must expose the patched checked program identity before successor lifecycle"
+    );
+
+    let publish = fabric
+        .dispatch_source_action(publish_designated_action_with_tick(
+            "tick:F:patched-before-revoke",
+        ))
+        .expect("accepted +2 patch publishes before revocation");
+    assert_eq!(publish.typed_value(), RuntimeValue::int(12));
+    let first = fabric
+        .dispatch_source_action(consume_designated_action())
+        .expect("C consumes the patched +2 delivery before revocation");
+    assert_eq!(first.typed_value(), RuntimeValue::int(12));
+    let semantic_identity = first.semantic_consumption_identity().to_string();
+    assert_eq!(
+        fabric
+            .m8_actual_trace()
+            .expect("M8 observer available")
+            .value_consumed_count(&semantic_identity, "C"),
+        1
+    );
+    let cache_before_revoke = fabric.designated_cache_snapshot();
+    assert!(
+        cache_before_revoke.contains_key(&semantic_identity),
+        "patched first consume must install a cache entry that later revocation makes stale"
+    );
+    let live_retry = fabric
+        .dispatch_source_action(consume_designated_action())
+        .expect("pre-revocation patched cache retry is still live");
+    assert_eq!(live_retry.typed_value(), RuntimeValue::int(12));
+    assert!(live_retry.returned_from_designated_cache_after_authority_revalidation());
+
+    let patched_m9 = fabric.current_m9_authority_inspection();
+    let patched_consumer_lineage = patched_m9
+        .designated_consumer_lineage("E.result", "C")
+        .expect("patched M9 authority contains C consumer lineage")
+        .clone();
+    let authority_digest_before_revoke = fabric.m8_authority_state_digest("C");
+    let revocation = fabric
+        .m9_authority_lifecycle_mut()
+        .revoke_designated_consumer_capability("E.result", "C")
+        .expect("post-patch revocation is produced by the normal M9 successor publisher");
+    let revocation_view = revocation.sealed_m9_inspection();
+    assert_eq!(
+        revocation_view.transition_kind(),
+        crate::m9_auth_verification::M9AuthorityTransitionKind::DesignatedConsumerCapabilityRevoked
+    );
+    assert_eq!(
+        revocation_view.prior_generation(),
+        patched_m9.generation(),
+        "post-patch successor publisher must be rebased to the active patched M9 generation"
+    );
+    assert_eq!(
+        revocation_view.consumer_lineage(),
+        &patched_consumer_lineage,
+        "SYS-4 must not mint or replace consumer lineage while rebasing the successor publisher"
+    );
+    assert!(revocation_view.successor_generation().is_m9_produced());
+    let successor_generation = revocation_view.successor_generation();
+    let expected_consumer_lineage = revocation_view.consumer_lineage().clone();
+    fabric
+        .apply_admitted_authority_lifecycle(revocation)
+        .expect(
+            "patched-program M9 successor applies without falling back to old-program authority",
+        );
+    assert_eq!(
+        fabric.current_m9_authority_inspection().generation(),
+        successor_generation
+    );
+    assert_eq!(
+        fabric.m9_authority_live_floor_identity_snapshot(),
+        live_floor_before_patch,
+        "successor apply must advance the existing live floor, not replace it"
+    );
+    assert_ne!(
+        fabric.m8_authority_state_digest("C"),
+        authority_digest_before_revoke,
+        "post-patch successor apply must refresh C-owned M8 authority state"
+    );
+    assert_eq!(
+        fabric.projected_artifact_identity(),
+        patch_program.checked_program_identity(),
+        "authority lifecycle apply must not revert or replace the patched program"
+    );
+
+    let before_revoked_retry_state = fabric.semantic_snapshot();
+    let before_revoked_retry_cache = fabric.designated_cache_snapshot();
+    let consumed_before_revoked_retry = fabric
+        .m8_actual_trace()
+        .expect("M8 observer available")
+        .value_consumed_count(&semantic_identity, "C");
+    let cache_validation_before_revoked_retry = m8_backend_trace_count(
+        &fabric,
+        M8LocalTraceKind::DesignatedCacheValidated,
+        &semantic_identity,
+        "C",
+    );
+    let revoked_retry = fabric
+        .submit_source_action(consume_designated_action())
+        .expect("revoked cache retry submits before C validates live M9 authority");
+    let revoked = assert_sys4_diag(
+        fabric.step_locus("C"),
+        Sys4DiagnosticKind::MissingConsumerCapability,
+    );
+    assert_eq!(
+        revoked.rejected_request_id(),
+        Some(revoked_retry.request_id())
+    );
+    let failure = revoked
+        .m9_failure_inspection()
+        .expect("revoked patched retry exposes sealed M9 failure inspection");
+    assert_eq!(
+        failure.admission_error_kind(),
+        crate::m9_auth_verification::M9AdmissionErrorKind::InvalidCapabilityLineage
+    );
+    assert_eq!(failure.installed_generation(), successor_generation);
+    assert_eq!(failure.consumer_lineage(), &expected_consumer_lineage);
+    assert_eq!(failure.request_id(), revoked_retry.request_id());
+    assert_eq!(failure.semantic_identity(), semantic_identity);
+    assert_eq!(failure.consumer_locus(), "C");
+    assert!(failure.rejected_before_m8_non_consuming_validation());
+    assert!(revoked.m8_non_consuming_validation_node_id().is_none());
+    assert!(revoked.primary().typed_success().is_none());
+    assert!(!revoked.exposes_raw_payload());
+    assert_eq!(
+        m8_backend_trace_count(
+            &fabric,
+            M8LocalTraceKind::DesignatedCacheValidated,
+            &semantic_identity,
+            "C",
+        ),
+        cache_validation_before_revoked_retry,
+        "revoked patched cache retry must fail in M9 before M8 non-consuming validation"
+    );
+    assert_eq!(
+        fabric
+            .m8_actual_trace()
+            .expect("M8 observer available")
+            .value_consumed_count(&semantic_identity, "C"),
+        consumed_before_revoked_retry,
+        "revoked patched cache retry must not consume the stale cached delivery again"
+    );
+    assert_eq!(
+        fabric.designated_cache_snapshot(),
+        before_revoked_retry_cache,
+        "revoked patched cache retry must not mutate cached payload/binding state"
+    );
+    assert!(
+        fabric
+            .semantic_snapshot()
+            .same_state(&before_revoked_retry_state),
+        "revoked patched cache retry must not mutate semantic owner state"
+    );
+
+    let cut = save_sys4_local_cut(
+        &mut fabric,
+        "sys4-cut-after-patched-program-consumer-capability-revoked",
+    )
+    .expect("ST cut captures patched program plus M9 revocation tombstone");
+    assert_eq!(
+        cut.active_patch_frontier_snapshot(),
+        &fabric.current_patch_frontier_snapshot(),
+        "post-revocation cut must retain the patched activation frontier"
+    );
+    let mut restored =
+        LocalFabric::restore_local_cut(patch_program, patch_admission, BackendProfile::St, &cut)
+            .expect("patched cut restores with successor tombstone intact");
+    assert_eq!(
+        restored.current_m9_authority_inspection().generation(),
+        successor_generation,
+        "restore must keep the post-patch M9 successor generation and revocation tombstone"
+    );
+    assert_eq!(
+        restored.m9_authority_live_floor_identity_snapshot(),
+        live_floor_before_patch,
+        "restore must reuse the same shared live floor instead of manufacturing authority"
+    );
+    assert_eq!(
+        restored.designated_cache_snapshot(),
+        before_revoked_retry_cache,
+        "restore may retain observer-safe stale cache metadata but must not resurrect its authority"
+    );
+
+    let restored_cache_validation_before = m8_backend_trace_count(
+        &restored,
+        M8LocalTraceKind::DesignatedCacheValidated,
+        &semantic_identity,
+        "C",
+    );
+    let restored_consumed_before = restored
+        .m8_actual_trace()
+        .expect("M8 observer available")
+        .value_consumed_count(&semantic_identity, "C");
+    let restored_state_before = restored.semantic_snapshot();
+    let restored_cache_before = restored.designated_cache_snapshot();
+    let restored_retry = restored
+        .submit_source_action(consume_designated_action())
+        .expect("restored stale cache retry submits before C validates restored M9 tombstone");
+    let restored_rejected = assert_sys4_diag(
+        restored.step_locus("C"),
+        Sys4DiagnosticKind::MissingConsumerCapability,
+    );
+    assert_eq!(
+        restored_rejected.rejected_request_id(),
+        Some(restored_retry.request_id())
+    );
+    let restored_failure = restored_rejected
+        .m9_failure_inspection()
+        .expect("restored stale retry exposes sealed M9 tombstone failure");
+    assert_eq!(
+        restored_failure.installed_generation(),
+        successor_generation
+    );
+    assert_eq!(
+        restored_failure.consumer_lineage(),
+        &expected_consumer_lineage
+    );
+    assert_eq!(restored_failure.request_id(), restored_retry.request_id());
+    assert_eq!(restored_failure.semantic_identity(), semantic_identity);
+    assert_eq!(restored_failure.consumer_locus(), "C");
+    assert!(restored_failure.rejected_before_m8_non_consuming_validation());
+    assert!(
+        restored_rejected
+            .m8_non_consuming_validation_node_id()
+            .is_none()
+    );
+    assert!(restored_rejected.primary().typed_success().is_none());
+    assert!(!restored_rejected.exposes_raw_payload());
+    assert_eq!(
+        m8_backend_trace_count(
+            &restored,
+            M8LocalTraceKind::DesignatedCacheValidated,
+            &semantic_identity,
+            "C",
+        ),
+        restored_cache_validation_before,
+        "restored stale cache retry must fail before M8 non-consuming validation"
+    );
+    assert_eq!(
+        restored
+            .m8_actual_trace()
+            .expect("M8 observer available")
+            .value_consumed_count(&semantic_identity, "C"),
+        restored_consumed_before,
+        "restored stale cache retry must not resurrect stale semantic consumption"
+    );
+    assert_eq!(restored.designated_cache_snapshot(), restored_cache_before);
+    assert!(
+        restored
+            .semantic_snapshot()
+            .same_state(&restored_state_before)
+    );
+}
+
+#[test]
+fn checked_patch_preserves_m9_validation_counters_through_successor_and_cut_restore() {
+    let checked = combined_owner_designated_checked();
+    let base_program = fabric_program(combined_owner_designated_projection(&checked));
+    let mut fabric = boot(&checked, base_program.clone(), BackendProfile::St);
+
+    let owner_submitted = fabric
+        .submit_source_action(owner_attack_action("attack"))
+        .expect("pre-patch owner operation submits through generated A→S route");
+    let owner_envelope = fabric
+        .locus_runtime("A")
+        .expect("A exists")
+        .outgoing_mailbox()
+        .pending_envelopes()
+        .single();
+    assert_eq!(owner_envelope.envelope_id(), owner_submitted.envelope_id());
+    fabric
+        .step_transport("A", "S", owner_envelope.envelope_id())
+        .expect("pre-patch owner request reaches S");
+    let owner_step = fabric
+        .step_locus("S")
+        .expect("S validates pre-patch owner authority and serves request");
+    assert_eq!(
+        owner_step.m9_validation().owner_lineage_ref(),
+        owner_envelope.m9_owner_lineage_ref(),
+        "owner validation observation must be bound to the generated carrier lineage"
+    );
+    assert_eq!(
+        fabric
+            .current_m9_authority_inspection()
+            .owner_operation_validation_count("attack", "S", owner_submitted.request_id()),
+        1,
+        "pre-patch M9 owner-operation validation counter must be nonzero before patch"
+    );
+    fabric
+        .step_transport("S", "A", owner_step.reply_envelope_id())
+        .expect("pre-patch owner reply reaches A");
+    let owner_receipt_step = fabric.step_locus("A").expect("A receives owner reply");
+    let owner_receipt = owner_receipt_step
+        .receipt()
+        .expect("owner reply receipt is available");
+    assert_eq!(owner_receipt.typed_value(), RuntimeValue::unit());
+    assert_eq!(
+        fabric.semantic_snapshot().int("S", "player", "self", "hp"),
+        Some(90),
+        "pre-patch owner operation mutates only S-owned state"
+    );
+
+    let source_submitted = fabric
+        .submit_source_action(publish_designated_action_with_tick(
+            "tick:F:pre-patch-validation-counters",
+        ))
+        .expect("pre-patch designated publish submits E→S source-release request");
+    let input_request = fabric
+        .locus_runtime("E")
+        .expect("E exists")
+        .outgoing_mailbox()
+        .pending_envelopes()
+        .single();
+    assert_eq!(input_request.envelope_id(), source_submitted.envelope_id());
+    fabric
+        .step_transport("E", "S", input_request.envelope_id())
+        .expect("pre-patch source-release request reaches S");
+    let source_step = fabric
+        .step_locus("S")
+        .expect("S validates source release and reads local state");
+    let source_release = source_step
+        .m9_validation()
+        .source_release_inspection()
+        .clone();
+    assert_eq!(
+        source_release.lineage(),
+        input_request.m9_source_release_lineage(),
+        "source-release validation observation must stay bound to generated carrier lineage"
+    );
+    assert_eq!(
+        fabric
+            .current_m9_authority_inspection()
+            .source_release_validation_count("E.result", "S", source_submitted.envelope_id()),
+        1,
+        "pre-patch M9 source-release validation counter must be nonzero before patch"
+    );
+    assert!(
+        fabric
+            .causality()
+            .contains_occurrence(source_release.occurrence_id()),
+        "source-release validation occurrence must be visible in SYS-4 causality before patch"
+    );
+    fabric
+        .step_transport("S", "E", source_step.reply_envelope_id())
+        .expect("pre-patch source input receipt reaches E");
+    fabric
+        .step_locus("E")
+        .expect("E evaluates pre-patch designated result");
+    let delivery = fabric
+        .locus_runtime("E")
+        .expect("E exists")
+        .outgoing_mailbox()
+        .pending_envelopes()
+        .single();
+    assert_eq!(delivery.typed_value(), RuntimeValue::int(11));
+    fabric
+        .step_transport("E", "C", delivery.envelope_id())
+        .expect("pre-patch delivery reaches C");
+    let consume_step = fabric
+        .step_locus("C")
+        .expect("C validates consumer authority and consumes pre-patch delivery");
+    let consumer_validation = consume_step
+        .m9_cache_validation()
+        .expect("first consume exposes M9 consumer validation inspection")
+        .clone();
+    let first_consume = consume_step
+        .receipt()
+        .expect("pre-patch consume receipt exists");
+    assert_eq!(first_consume.typed_value(), RuntimeValue::int(11));
+    let semantic_identity = first_consume.semantic_consumption_identity().to_string();
+    assert_eq!(consumer_validation.semantic_identity(), semantic_identity);
+    assert_eq!(consumer_validation.consumer_locus(), "C");
+    assert_eq!(
+        fabric
+            .current_m9_authority_inspection()
+            .validation_occurrence_count("E.result", "C", &semantic_identity),
+        1,
+        "pre-patch M9 designated-consumer validation counter must be nonzero before patch"
+    );
+    assert!(
+        fabric
+            .causality()
+            .contains_occurrence(consumer_validation.occurrence_id()),
+        "consumer validation occurrence must be visible in SYS-4 causality before patch"
+    );
+
+    let pre_patch_generation = fabric.current_m9_authority_inspection().generation();
+    let pre_patch_owner_lineage_ref = owner_step.m9_validation().owner_lineage_ref().to_string();
+    let pre_patch_source_release_occurrence = source_release.occurrence_id().to_string();
+    let pre_patch_consumer_validation_occurrence = consumer_validation.occurrence_id().to_string();
+    let assert_pre_patch_counters = |fabric: &LocalFabric, label: &str| {
+        let inspection = fabric.current_m9_authority_inspection();
+        assert_eq!(
+            inspection.owner_operation_validation_count(
+                "attack",
+                "S",
+                owner_submitted.request_id()
+            ),
+            1,
+            "{label}: pre-patch owner validation counter must be preserved exactly"
+        );
+        assert_eq!(
+            inspection.source_release_validation_count(
+                "E.result",
+                "S",
+                source_submitted.envelope_id()
+            ),
+            1,
+            "{label}: pre-patch source-release validation counter must be preserved exactly"
+        );
+        assert_eq!(
+            inspection.validation_occurrence_count("E.result", "C", &semantic_identity),
+            1,
+            "{label}: pre-patch designated-consumer validation counter must be preserved exactly"
+        );
+        assert!(
+            fabric
+                .causality()
+                .contains_occurrence(&pre_patch_source_release_occurrence),
+            "{label}: pre-patch source-release validation occurrence must remain in causality"
+        );
+        assert!(
+            fabric
+                .causality()
+                .contains_occurrence(&pre_patch_consumer_validation_occurrence),
+            "{label}: pre-patch consumer validation occurrence must remain in causality"
+        );
+    };
+    assert_pre_patch_counters(&fabric, "before patch");
+
+    let accepted = fabric
+        .activate_checked_patch(source_first_combined_designated_plus_two_patch_candidate(
+            &base_program,
+        ))
+        .expect("same-shape combined +2 patch activates");
+    assert_eq!(
+        accepted.verdict(),
+        Sys4PatchVerdict::Accepted,
+        "same-shape combined +2 patch must activate after pre-patch M9 counters exist; got diagnostic {:?}",
+        accepted.primary_diagnostic_kind()
+    );
+    let patch_checked = combined_owner_designated_plus_two_checked();
+    let patch_program = fabric_program(combined_owner_designated_projection(&patch_checked));
+    let patch_admission = sealed_admission(&patch_checked, &patch_program);
+    assert_eq!(
+        fabric.projected_artifact_identity(),
+        patch_program.checked_program_identity()
+    );
+    assert_pre_patch_counters(&fabric, "after checked patch rebase");
+    assert_eq!(
+        fabric
+            .current_m9_authority_inspection()
+            .generation()
+            .generation(),
+        pre_patch_generation.generation(),
+        "checked patch rebase preserves the numeric generation while rebinding source identity through M9-owned material"
+    );
+
+    let patched_owner_submitted = fabric
+        .submit_source_action(owner_attack_action("attack"))
+        .expect("post-patch owner operation submits through preserved generated A→S route");
+    let patched_owner_envelope = fabric
+        .locus_runtime("A")
+        .expect("A exists after patch")
+        .outgoing_mailbox()
+        .pending_envelopes()
+        .single();
+    assert_eq!(
+        patched_owner_envelope.envelope_id(),
+        patched_owner_submitted.envelope_id()
+    );
+    fabric
+        .step_transport("A", "S", patched_owner_envelope.envelope_id())
+        .expect("post-patch owner request reaches S");
+    let patched_owner_step = fabric
+        .step_locus("S")
+        .expect("S validates post-patch owner authority and serves request");
+    assert_eq!(
+        patched_owner_step.m9_validation().owner_lineage_ref(),
+        patched_owner_envelope.m9_owner_lineage_ref(),
+        "post-patch owner validation observation must stay bound to generated carrier lineage"
+    );
+    assert_eq!(
+        fabric
+            .current_m9_authority_inspection()
+            .owner_operation_validation_count("attack", "S", patched_owner_submitted.request_id()),
+        1,
+        "post-patch M9 owner-operation validation counter must be nonzero before successor"
+    );
+    fabric
+        .step_transport("S", "A", patched_owner_step.reply_envelope_id())
+        .expect("post-patch owner reply reaches A");
+    let patched_owner_receipt_step = fabric
+        .step_locus("A")
+        .expect("A receives post-patch owner reply");
+    assert_eq!(
+        patched_owner_receipt_step
+            .receipt()
+            .expect("post-patch owner reply receipt is available")
+            .typed_value(),
+        RuntimeValue::unit()
+    );
+    assert_eq!(
+        fabric.semantic_snapshot().int("S", "player", "self", "hp"),
+        Some(80),
+        "post-patch owner operation must still use the original owner RMW semantics"
+    );
+
+    let patched_source_submitted = fabric
+        .submit_source_action(publish_designated_action_with_tick(
+            "tick:F:post-patch-validation-counters",
+        ))
+        .expect("post-patch +2 source input submits E→S source-release request");
+    let patched_input_request = fabric
+        .locus_runtime("E")
+        .expect("E exists after patch")
+        .outgoing_mailbox()
+        .pending_envelopes()
+        .single();
+    assert_eq!(
+        patched_input_request.envelope_id(),
+        patched_source_submitted.envelope_id()
+    );
+    fabric
+        .step_transport("E", "S", patched_input_request.envelope_id())
+        .expect("post-patch source-release request reaches S");
+    let patched_source_step = fabric
+        .step_locus("S")
+        .expect("S validates post-patch source release and reads local state");
+    let patched_source_release = patched_source_step
+        .m9_validation()
+        .source_release_inspection()
+        .clone();
+    assert_eq!(
+        patched_source_release.lineage(),
+        patched_input_request.m9_source_release_lineage(),
+        "post-patch source-release validation observation must stay bound to generated carrier lineage"
+    );
+    assert_eq!(
+        fabric
+            .current_m9_authority_inspection()
+            .source_release_validation_count(
+                "E.result",
+                "S",
+                patched_source_submitted.envelope_id()
+            ),
+        1,
+        "post-patch M9 source-release validation counter must be nonzero before successor"
+    );
+    assert!(
+        fabric
+            .causality()
+            .contains_occurrence(patched_source_release.occurrence_id()),
+        "post-patch source-release validation occurrence must be visible before successor"
+    );
+    fabric
+        .step_transport("S", "E", patched_source_step.reply_envelope_id())
+        .expect("post-patch source input receipt reaches E");
+    fabric
+        .step_locus("E")
+        .expect("E evaluates post-patch designated result");
+    let patched_delivery = fabric
+        .locus_runtime("E")
+        .expect("E exists after patch")
+        .outgoing_mailbox()
+        .pending_envelopes()
+        .single();
+    assert_eq!(
+        patched_delivery.typed_value(),
+        RuntimeValue::int(12),
+        "accepted patch must install the +2 designated expression before revocation"
+    );
+    fabric
+        .step_transport("E", "C", patched_delivery.envelope_id())
+        .expect("post-patch +2 delivery reaches C");
+    let patched_consume_step = fabric
+        .step_locus("C")
+        .expect("C first consumes and caches the exact post-patch +2 delivery before revocation");
+    let patched_first_consume = patched_consume_step
+        .receipt()
+        .expect("post-patch consume receipt exists");
+    assert_eq!(
+        patched_first_consume.typed_value(),
+        RuntimeValue::int(12),
+        "post-patch consumer cache must be established from the +2 delivery, not the cleared +1 cache"
+    );
+    assert!(patched_first_consume.performed_m8_semantic_consumption());
+    let patched_semantic_identity = patched_first_consume
+        .semantic_consumption_identity()
+        .to_string();
+    let patched_consumer_validation = patched_consume_step
+        .m9_cache_validation()
+        .expect("patched first consume exposes M9 consumer validation inspection")
+        .clone();
+    assert_eq!(
+        patched_consumer_validation.semantic_identity(),
+        patched_semantic_identity
+    );
+    assert_eq!(patched_consumer_validation.consumer_locus(), "C");
+    assert_eq!(
+        fabric
+            .current_m9_authority_inspection()
+            .validation_occurrence_count("E.result", "C", &patched_semantic_identity),
+        1,
+        "patched +2 M9 designated-consumer validation counter must be nonzero before revocation"
+    );
+    assert!(
+        fabric
+            .causality()
+            .contains_occurrence(patched_consumer_validation.occurrence_id()),
+        "patched +2 consumer validation occurrence must be visible before revocation"
+    );
+    let patched_consumer_validation_occurrence =
+        patched_consumer_validation.occurrence_id().to_string();
+
+    let expected_owner_validation_counts = BTreeMap::from([
+        (
+            (
+                "attack".to_string(),
+                "S".to_string(),
+                owner_submitted.request_id().to_string(),
+            ),
+            1usize,
+        ),
+        (
+            (
+                "attack".to_string(),
+                "S".to_string(),
+                patched_owner_submitted.request_id().to_string(),
+            ),
+            1usize,
+        ),
+    ]);
+    let expected_source_release_validation_counts = BTreeMap::from([
+        (
+            (
+                "E.result".to_string(),
+                "S".to_string(),
+                source_submitted.envelope_id().to_string(),
+            ),
+            1usize,
+        ),
+        (
+            (
+                "E.result".to_string(),
+                "S".to_string(),
+                patched_source_submitted.envelope_id().to_string(),
+            ),
+            1usize,
+        ),
+    ]);
+    let expected_consumer_validation_counts = BTreeMap::from([
+        (
+            (
+                "E.result".to_string(),
+                "C".to_string(),
+                semantic_identity.clone(),
+            ),
+            1usize,
+        ),
+        (
+            (
+                "E.result".to_string(),
+                "C".to_string(),
+                patched_semantic_identity.clone(),
+            ),
+            1usize,
+        ),
+    ]);
+    let expected_validation_occurrences = BTreeSet::from([
+        pre_patch_source_release_occurrence.clone(),
+        pre_patch_consumer_validation_occurrence.clone(),
+        patched_source_release.occurrence_id().to_string(),
+        patched_consumer_validation_occurrence.clone(),
+    ]);
+    let assert_exact_m9_validation_snapshot = |fabric: &LocalFabric, label: &str| {
+        let inspection = fabric.current_m9_authority_inspection();
+        let observed_owner_counts = expected_owner_validation_counts
+            .keys()
+            .map(|(operation, owner, request_id)| {
+                (
+                    (operation.clone(), owner.clone(), request_id.clone()),
+                    inspection.owner_operation_validation_count(operation, owner, request_id),
+                )
+            })
+            .collect::<BTreeMap<_, _>>();
+        assert_eq!(
+            observed_owner_counts, expected_owner_validation_counts,
+            "{label}: exact owner-operation validation count map must survive"
+        );
+        let observed_source_counts = expected_source_release_validation_counts
+            .keys()
+            .map(|(result, source_locus, request_id)| {
+                (
+                    (result.clone(), source_locus.clone(), request_id.clone()),
+                    inspection.source_release_validation_count(result, source_locus, request_id),
+                )
+            })
+            .collect::<BTreeMap<_, _>>();
+        assert_eq!(
+            observed_source_counts, expected_source_release_validation_counts,
+            "{label}: exact source-release validation count map must survive"
+        );
+        let observed_consumer_counts = expected_consumer_validation_counts
+            .keys()
+            .map(|(operation, consumer, identity)| {
+                (
+                    (operation.clone(), consumer.clone(), identity.clone()),
+                    inspection.validation_occurrence_count(operation, consumer, identity),
+                )
+            })
+            .collect::<BTreeMap<_, _>>();
+        assert_eq!(
+            observed_consumer_counts, expected_consumer_validation_counts,
+            "{label}: exact designated-consumer validation count map must survive"
+        );
+        for occurrence in &expected_validation_occurrences {
+            assert!(
+                fabric.causality().contains_occurrence(occurrence),
+                "{label}: M9 validation occurrence {occurrence} must remain in causality"
+            );
+        }
+    };
+    assert_pre_patch_counters(&fabric, "after patched +2 publication/cache establishment");
+    assert_exact_m9_validation_snapshot(
+        &fabric,
+        "after patched owner/source-release/consumer validation establishment",
+    );
+
+    let patched_m9 = fabric.current_m9_authority_inspection();
+    let patched_consumer_lineage = patched_m9
+        .designated_consumer_lineage("E.result", "C")
+        .expect("patched M9 inspection retains designated consumer lineage")
+        .clone();
+    let revocation = fabric
+        .m9_authority_lifecycle_mut()
+        .revoke_designated_consumer_capability("E.result", "C")
+        .expect("successor is produced through the patched normal M9 lifecycle");
+    let revocation_view = revocation.sealed_m9_inspection();
+    assert_eq!(
+        revocation_view.prior_generation(),
+        patched_m9.generation(),
+        "successor publisher must start from the patched generation that preserved pre-patch counters"
+    );
+    assert_eq!(
+        revocation_view.consumer_lineage(),
+        &patched_consumer_lineage
+    );
+    let successor_generation = revocation_view.successor_generation();
+    fabric
+        .apply_admitted_authority_lifecycle(revocation)
+        .expect("successor applies against patched program");
+    assert_eq!(
+        fabric.current_m9_authority_inspection().generation(),
+        successor_generation
+    );
+    assert_exact_m9_validation_snapshot(
+        &fabric,
+        "immediately after patched successor before any retry can recreate validation counts",
+    );
+
+    let cut = save_sys4_local_cut(
+        &mut fabric,
+        "sys4-cut-after-patch-preserved-m9-validation-counters",
+    )
+    .expect("ST cut saves patched successor with preserved M9 validation counters");
+    let mut restored =
+        LocalFabric::restore_local_cut(patch_program, patch_admission, BackendProfile::St, &cut)
+            .expect("cut restores patched successor and preserved M9 validation counters");
+    assert_eq!(
+        restored.current_m9_authority_inspection().generation(),
+        successor_generation
+    );
+    assert_exact_m9_validation_snapshot(
+        &restored,
+        "after cut restore before any retry can recreate validation counts",
+    );
+
+    let rejected_retry = restored
+        .submit_source_action(consume_designated_action())
+        .expect("revoked consumer retry submits before M9 failure after restore");
+    let rejected = assert_sys4_diag(
+        restored.step_locus("C"),
+        Sys4DiagnosticKind::MissingConsumerCapability,
+    );
+    let failure = rejected
+        .m9_failure_inspection()
+        .expect("revoked retry exposes sealed M9 failure after restore");
+    assert_eq!(failure.installed_generation(), successor_generation);
+    assert_eq!(failure.request_id(), rejected_retry.request_id());
+    assert_eq!(failure.semantic_identity(), patched_semantic_identity);
+    assert!(failure.rejected_before_m8_non_consuming_validation());
+    assert_exact_m9_validation_snapshot(&restored, "after rejected stale retry");
+    assert!(
+        restored
+            .causality()
+            .contains_occurrence(&pre_patch_source_release_occurrence)
+    );
+    assert!(
+        restored
+            .causality()
+            .contains_occurrence(&pre_patch_consumer_validation_occurrence)
+    );
+    assert_eq!(
+        owner_step.m9_validation().owner_lineage_ref(),
+        pre_patch_owner_lineage_ref,
+        "owner validation lineage observation captured before patch remains the exact M9-owned lineage, not a SYS-4 remint"
+    );
+}
+
+#[test]
+fn stale_m9_transition_rejects_after_intervening_validations_and_fresh_successor_preserves_observations()
+ {
+    let checked = combined_owner_designated_checked();
+    let program = fabric_program(combined_owner_designated_projection(&checked));
+    let admission = sealed_admission(&checked, &program);
+    let mut fabric = LocalFabric::bootstrap(program.clone(), admission.clone(), BackendProfile::St)
+        .expect("complete M9 seam admits combined owner/designated fabric");
+
+    let source_submitted = fabric
+        .submit_source_action(publish_designated_action_with_tick(
+            "tick:F:stale-transition-race",
+        ))
+        .expect("source input carrier is created before stale transition");
+    let input_request = fabric
+        .locus_runtime("E")
+        .expect("E exists")
+        .outgoing_mailbox()
+        .pending_envelopes()
+        .single();
+    assert_eq!(input_request.envelope_id(), source_submitted.envelope_id());
+
+    let stale_transition = fabric
+        .m9_authority_lifecycle_mut()
+        .revoke_designated_source_release(input_request.m9_source_release_lineage())
+        .expect("stale transition is produced from the currently synced M9 publisher");
+    let stale_prior_observation_digest = stale_transition
+        .prior_runtime_validation_observation_digest()
+        .to_string();
+
+    let owner_submitted = fabric
+        .submit_source_action(owner_attack_action("attack"))
+        .expect("intervening owner operation submits under still-current active generation");
+    let owner_envelope = fabric
+        .locus_runtime("A")
+        .expect("A exists")
+        .outgoing_mailbox()
+        .pending_envelopes()
+        .single();
+    fabric
+        .step_transport("A", "S", owner_envelope.envelope_id())
+        .expect("intervening owner request reaches S");
+    let owner_step = fabric.step_locus("S").expect(
+        "S validates owner authority under active generation after stale transition creation",
+    );
+    assert_eq!(
+        owner_step.m9_validation().owner_lineage_ref(),
+        owner_envelope.m9_owner_lineage_ref()
+    );
+    fabric
+        .step_transport("S", "A", owner_step.reply_envelope_id())
+        .expect("intervening owner reply reaches A");
+    fabric
+        .step_locus("A")
+        .expect("A receives intervening owner reply");
+
+    fabric
+        .step_transport("E", "S", input_request.envelope_id())
+        .expect("intervening source-release request reaches S");
+    let source_step = fabric.step_locus("S").expect(
+        "S validates source-release authority under active generation after stale transition creation",
+    );
+    let source_release = source_step
+        .m9_validation()
+        .source_release_inspection()
+        .clone();
+    fabric
+        .step_transport("S", "E", source_step.reply_envelope_id())
+        .expect("source input receipt reaches E");
+    fabric
+        .step_locus("E")
+        .expect("E evaluates after intervening source validation");
+    let delivery = fabric
+        .locus_runtime("E")
+        .expect("E exists")
+        .outgoing_mailbox()
+        .pending_envelopes()
+        .single();
+    fabric
+        .step_transport("E", "C", delivery.envelope_id())
+        .expect("delivery reaches C");
+    let consume_step = fabric.step_locus("C").expect(
+        "C validates consumer authority under active generation after stale transition creation",
+    );
+    let consumer_validation = consume_step
+        .m9_cache_validation()
+        .expect("intervening consume exposes M9 validation")
+        .clone();
+    let consume_receipt = consume_step
+        .receipt()
+        .expect("intervening consume receipt exists");
+    let semantic_identity = consume_receipt.semantic_consumption_identity().to_string();
+
+    let expected_owner_validation_counts = BTreeMap::from([(
+        (
+            "attack".to_string(),
+            "S".to_string(),
+            owner_submitted.request_id().to_string(),
+        ),
+        1usize,
+    )]);
+    let expected_source_release_validation_counts = BTreeMap::from([(
+        (
+            "E.result".to_string(),
+            "S".to_string(),
+            source_submitted.envelope_id().to_string(),
+        ),
+        1usize,
+    )]);
+    let expected_consumer_validation_counts = BTreeMap::from([(
+        (
+            "E.result".to_string(),
+            "C".to_string(),
+            semantic_identity.clone(),
+        ),
+        1usize,
+    )]);
+    let expected_validation_occurrences = BTreeSet::from([
+        source_release.occurrence_id().to_string(),
+        consumer_validation.occurrence_id().to_string(),
+    ]);
+    let assert_validation_snapshot = |fabric: &LocalFabric, label: &str| {
+        let inspection = fabric.current_m9_authority_inspection();
+        let observed_owner_counts = expected_owner_validation_counts
+            .keys()
+            .map(|(operation, owner, request_id)| {
+                (
+                    (operation.clone(), owner.clone(), request_id.clone()),
+                    inspection.owner_operation_validation_count(operation, owner, request_id),
+                )
+            })
+            .collect::<BTreeMap<_, _>>();
+        assert_eq!(
+            observed_owner_counts, expected_owner_validation_counts,
+            "{label}: owner validation observation map must survive exactly"
+        );
+        let observed_source_counts = expected_source_release_validation_counts
+            .keys()
+            .map(|(result, source_locus, request_id)| {
+                (
+                    (result.clone(), source_locus.clone(), request_id.clone()),
+                    inspection.source_release_validation_count(result, source_locus, request_id),
+                )
+            })
+            .collect::<BTreeMap<_, _>>();
+        assert_eq!(
+            observed_source_counts, expected_source_release_validation_counts,
+            "{label}: source-release validation observation map must survive exactly"
+        );
+        let observed_consumer_counts = expected_consumer_validation_counts
+            .keys()
+            .map(|(operation, consumer, identity)| {
+                (
+                    (operation.clone(), consumer.clone(), identity.clone()),
+                    inspection.validation_occurrence_count(operation, consumer, identity),
+                )
+            })
+            .collect::<BTreeMap<_, _>>();
+        assert_eq!(
+            observed_consumer_counts, expected_consumer_validation_counts,
+            "{label}: consumer validation observation map must survive exactly"
+        );
+        for occurrence in &expected_validation_occurrences {
+            assert!(
+                fabric.causality().contains_occurrence(occurrence),
+                "{label}: M9 validation occurrence {occurrence} must remain in causality"
+            );
+        }
+    };
+    assert_validation_snapshot(&fabric, "before applying stale transition");
+
+    let semantic_after_intervening_validations = fabric.semantic_snapshot();
+    let cache_after_intervening_validations = fabric.designated_cache_snapshot();
+    let m8_after_intervening_validations = fabric
+        .m8_actual_trace()
+        .expect("M8 observer available")
+        .stable_digest();
+    let active_generation_after_intervening_validations =
+        fabric.current_m9_authority_inspection().generation();
+    let c_authority_after_intervening_validations = fabric.m8_authority_state_digest("C");
+    assert_sys4_diag(
+        fabric.apply_admitted_authority_lifecycle(stale_transition),
+        Sys4DiagnosticKind::ProgramAdmissionMismatch,
+    );
+    assert_eq!(
+        fabric.current_m9_authority_inspection().generation(),
+        active_generation_after_intervening_validations,
+        "stale transition rejection must not install its generation"
+    );
+    assert!(
+        fabric
+            .semantic_snapshot()
+            .same_state(&semantic_after_intervening_validations)
+    );
+    assert_eq!(
+        fabric.designated_cache_snapshot(),
+        cache_after_intervening_validations
+    );
+    assert_eq!(
+        fabric
+            .m8_actual_trace()
+            .expect("M8 observer available")
+            .stable_digest(),
+        m8_after_intervening_validations
+    );
+    assert_eq!(
+        fabric.m8_authority_state_digest("C"),
+        c_authority_after_intervening_validations
+    );
+    assert_validation_snapshot(
+        &fabric,
+        "after stale transition rejection before a fresh successor can recreate observations",
+    );
+
+    let fresh_transition = fabric
+        .m9_authority_lifecycle_mut()
+        .revoke_designated_consumer_capability("E.result", "C")
+        .expect("fresh successor is produced after M9 publisher syncs from live observations");
+    assert_ne!(
+        fresh_transition.prior_runtime_validation_observation_digest(),
+        stale_prior_observation_digest,
+        "fresh successor must be based on the post-validation observation snapshot, not the stale transition snapshot"
+    );
+    let fresh_view = fresh_transition.sealed_m9_inspection();
+    assert_eq!(
+        fresh_view.prior_generation(),
+        active_generation_after_intervening_validations
+    );
+    let successor_generation = fresh_view.successor_generation().clone();
+    let expected_consumer_lineage = fresh_view.consumer_lineage().clone();
+    fabric
+        .apply_admitted_authority_lifecycle(fresh_transition)
+        .expect("fresh synced successor applies after stale transition rejection");
+    assert_eq!(
+        fabric.current_m9_authority_inspection().generation(),
+        successor_generation
+    );
+    assert_validation_snapshot(&fabric, "after fresh synced successor");
+
+    let cut = save_sys4_local_cut(&mut fabric, "sys4-cut-after-stale-transition-race")
+        .expect("ST cut captures fresh successor and validation observations");
+    let mut restored = LocalFabric::restore_local_cut(program, admission, BackendProfile::St, &cut)
+        .expect("restore retains fresh successor, observations, and tombstone");
+    assert_eq!(
+        restored.current_m9_authority_inspection().generation(),
+        successor_generation
+    );
+    assert_validation_snapshot(&restored, "after stale-transition race cut restore");
+
+    let rejected_retry = restored
+        .submit_source_action(consume_designated_action())
+        .expect("restored revoked cache retry submits before M9 failure");
+    let rejected = assert_sys4_diag(
+        restored.step_locus("C"),
+        Sys4DiagnosticKind::MissingConsumerCapability,
+    );
+    let failure = rejected
+        .m9_failure_inspection()
+        .expect("restored revoked retry exposes sealed M9 failure");
+    assert_eq!(failure.installed_generation(), successor_generation);
+    assert_eq!(failure.consumer_lineage(), &expected_consumer_lineage);
+    assert_eq!(failure.request_id(), rejected_retry.request_id());
+    assert_eq!(failure.semantic_identity(), semantic_identity);
+    assert!(failure.rejected_before_m8_non_consuming_validation());
+    assert_validation_snapshot(&restored, "after restored stale retry");
+}
+
+#[test]
+fn stale_owner_lineage_carrier_rejects_before_m9_owner_counter_m8_or_state_mutation() {
+    let checked = combined_owner_designated_checked();
+    let program = fabric_program(combined_owner_designated_projection(&checked));
+    let mut fabric = boot(&checked, program, BackendProfile::St);
+
+    let submitted = fabric
+        .submit_source_action(owner_attack_action("attack"))
+        .expect("owner request carrier is generated from checked source");
+    let request_envelope = fabric
+        .locus_runtime("A")
+        .expect("A exists")
+        .outgoing_mailbox()
+        .pending_envelopes()
+        .single();
+    assert_eq!(request_envelope.envelope_id(), submitted.envelope_id());
+    assert!(
+        !request_envelope.m9_owner_lineage_ref().is_empty(),
+        "generated owner carrier must carry a sealed M9 owner lineage before it can become stale"
+    );
+    fabric
+        .step_transport("A", "S", request_envelope.envelope_id())
+        .expect("owner request reaches S before its lineage is made stale");
+
+    let unrelated_transition = fabric
+        .m9_authority_lifecycle_mut()
+        .revoke_designated_consumer_capability("E.result", "C")
+        .expect("unrelated M9 successor is produced through normal lifecycle");
+    fabric
+        .apply_admitted_authority_lifecycle(unrelated_transition)
+        .expect("unrelated M9 successor applies and changes live generation ref");
+
+    let before_reject_state = fabric.semantic_snapshot();
+    let before_reject_m8 = fabric
+        .m8_actual_trace()
+        .expect("M8 observer available")
+        .stable_digest();
+    let before_reject_count = fabric
+        .current_m9_authority_inspection()
+        .owner_operation_validation_count("attack", "S", submitted.request_id());
+    assert_eq!(before_reject_count, 0);
+    let rejected = assert_sys4_diag(
+        fabric.step_locus("S"),
+        Sys4DiagnosticKind::M8ExecutionRejected,
+    );
+    assert_eq!(
+        rejected.rejected_envelope_id(),
+        Some(request_envelope.envelope_id())
+    );
+    assert_eq!(rejected.rejected_request_id(), Some(submitted.request_id()));
+    assert!(
+        rejected.m8_trace_node_id().is_none(),
+        "stale owner lineage carrier must be rejected before any M8 owner request/serve node is emitted"
+    );
+    assert_eq!(
+        fabric
+            .current_m9_authority_inspection()
+            .owner_operation_validation_count("attack", "S", submitted.request_id()),
+        before_reject_count,
+        "stale owner lineage carrier must reject before M9 records a successful owner validation"
+    );
+    assert_eq!(
+        fabric
+            .m8_actual_trace()
+            .expect("M8 observer available")
+            .stable_digest(),
+        before_reject_m8
+    );
+    assert!(fabric.semantic_snapshot().same_state(&before_reject_state));
+    let terminal = fabric
+        .locus_runtime("S")
+        .expect("S exists")
+        .incoming_mailbox()
+        .terminal_rejected_envelope(request_envelope.envelope_id())
+        .expect("stale owner carrier is terminally quarantined");
+    assert_eq!(
+        terminal.diagnostic_kind(),
+        Sys4DiagnosticKind::M8ExecutionRejected
+    );
+    assert!(terminal.observer_safe_audit().is_observer_safe());
+}
+
+#[test]
+fn sys4_local_cut_restore_rejects_forged_patch_generation_lifecycle_or_frontier_after_activation() {
+    let checked = designated_checked();
+    let program = fabric_program(designated_projection(&checked));
+    let mut fabric = boot(&checked, program.clone(), BackendProfile::St);
+
+    let accepted = fabric
+        .activate_checked_patch(source_first_plus_two_patch_candidate(&program))
+        .expect("exact-frontier compatible checked patch activates before cut tamper");
+    assert_eq!(accepted.verdict(), Sys4PatchVerdict::Accepted);
+    let live_after_patch = fabric.active_runtime_identity_snapshot();
+    let lifecycle_after_patch = fabric.patch_lifecycle_snapshot();
+    let semantic_after_patch = fabric.semantic_snapshot();
+    let authority_after_patch = fabric.current_m9_authority_inspection().generation();
+    let m8_after_patch = fabric
+        .m8_actual_trace()
+        .expect("M8 observer available")
+        .stable_digest();
+    let patch_checked = designated_plus_two_checked();
+    let patch_program = fabric_program(designated_projection(&patch_checked));
+    let patch_admission = sealed_admission(&patch_checked, &patch_program);
+
+    let mut forged =
+        save_sys4_local_cut(&mut fabric, "sys4-cut-forged-patch-frontier-after-accept")
+            .expect("ST cut captures accepted patch state before patch frontier tamper");
+    forged.for_test_rewind_patch_generation_below_lifecycle_frontier();
+    assert!(
+        forged.patch_frontier_lifecycle_generation_is_inconsistent(),
+        "negative cut must actually forge patch generation/lifecycle/frontier consistency"
+    );
+    assert_sys4_diag(
+        LocalFabric::restore_local_cut(
+            patch_program.clone(),
+            patch_admission.clone(),
+            BackendProfile::St,
+            &forged,
+        ),
+        Sys4DiagnosticKind::ProgramProjectionMismatch,
+    );
+    assert_eq!(
+        fabric.active_runtime_identity_snapshot(),
+        live_after_patch,
+        "failed restore of a forged accepted-patch cut must not mutate the existing live fabric"
+    );
+    assert_eq!(
+        fabric.patch_lifecycle_snapshot(),
+        lifecycle_after_patch,
+        "failed restore must not mutate live patch lifecycle rows"
+    );
+    assert!(
+        fabric.semantic_snapshot().same_state(&semantic_after_patch),
+        "failed restore must not mutate live semantic state"
+    );
+    assert_eq!(
+        fabric.current_m9_authority_inspection().generation(),
+        authority_after_patch,
+        "failed restore must not mutate live M9 authority generation"
+    );
+    assert_eq!(
+        fabric
+            .m8_actual_trace()
+            .expect("M8 observer available")
+            .stable_digest(),
+        m8_after_patch,
+        "failed restore must not mutate live M8 trace"
+    );
+}
+
+#[test]
+fn checked_patch_stale_frontier_rejects_lifecycle_only_without_semantic_or_authority_mutation() {
+    let checked = designated_checked();
+    let program = fabric_program(designated_projection(&checked));
+    let mut fabric = boot(&checked, program.clone(), BackendProfile::St);
+
+    let stale = source_first_plus_two_patch_candidate(&program)
+        .for_test_with_stale_activation_frontier("frontier:stale-before-current");
+    let active_before = fabric.active_runtime_identity_snapshot();
+    assert!(
+        active_before.includes_program_artifact_projection_route_and_cache_identity(),
+        "rejection snapshot must cover active program, artifact, projection, route, and cache identities"
+    );
+    let cache_before = fabric.designated_cache_snapshot();
+    let lifecycle_before = fabric.patch_lifecycle_snapshot();
+    let semantic_before = fabric.semantic_snapshot();
+    let authority_before = fabric.current_m9_authority_inspection().generation();
+    let m8_before = fabric
+        .m8_actual_trace()
+        .expect("M8 observer available")
+        .stable_digest();
+
+    let outcome = fabric
+        .activate_checked_patch(stale)
+        .expect("stale checked patch returns a typed lifecycle rejection outcome");
+    assert_eq!(outcome.verdict(), Sys4PatchVerdict::Rejected);
+    assert_eq!(
+        outcome.primary_diagnostic_kind(),
+        Some(Sys4PatchDiagnosticKind::StaleFrontier)
+    );
+    assert!(
+        outcome.lifecycle().is_lifecycle_only_rejection(),
+        "stale frontier rejection may record patch lifecycle diagnostics but must not run semantic dispatch"
+    );
+    assert!(
+        fabric
+            .patch_lifecycle_snapshot()
+            .extends_only_with_lifecycle_rows_since(&lifecycle_before),
+        "rejected stale patch must mutate lifecycle rows only"
+    );
+    assert!(!outcome.exposes_raw_source_or_authority_material());
+    assert_eq!(
+        fabric.active_runtime_identity_snapshot(),
+        active_before,
+        "stale rejection must not install the candidate program/projection/artifacts/routes/cache"
+    );
+    assert_eq!(fabric.designated_cache_snapshot(), cache_before);
+    assert!(fabric.semantic_snapshot().same_state(&semantic_before));
+    assert_eq!(
+        fabric.current_m9_authority_inspection().generation(),
+        authority_before
+    );
+    assert_eq!(
+        fabric
+            .m8_actual_trace()
+            .expect("M8 observer available")
+            .stable_digest(),
+        m8_before
+    );
+
+    let after_reject_publish = fabric
+        .dispatch_source_action(publish_designated_action_with_tick(
+            "tick:F:after-stale-reject",
+        ))
+        .expect("old program remains executable after stale patch rejection");
+    assert_eq!(
+        after_reject_publish.typed_value(),
+        RuntimeValue::int(11),
+        "stale rejection must leave the original +1 generated path active"
+    );
+}
+
+#[test]
+fn checked_patch_temporal_stale_candidate_rejects_after_another_f0_candidate_advances_frontier() {
+    let checked = designated_checked();
+    let program = fabric_program(designated_projection(&checked));
+    let mut fabric = boot(&checked, program.clone(), BackendProfile::St);
+
+    let first_f0_candidate = source_first_plus_two_patch_candidate(&program);
+    let second_f0_candidate = source_first_plus_two_patch_candidate(&program);
+    let accepted = fabric
+        .activate_checked_patch(first_f0_candidate)
+        .expect("first F0 candidate activates and advances the live frontier");
+    assert_eq!(accepted.verdict(), Sys4PatchVerdict::Accepted);
+    let active_after_first = fabric.active_runtime_identity_snapshot();
+    let cache_after_first = fabric.designated_cache_snapshot();
+    let lifecycle_after_first = fabric.patch_lifecycle_snapshot();
+    let semantic_after_first = fabric.semantic_snapshot();
+    let authority_after_first = fabric.current_m9_authority_inspection().generation();
+    let m8_after_first = fabric
+        .m8_actual_trace()
+        .expect("M8 observer available")
+        .stable_digest();
+
+    let stale = fabric
+        .activate_checked_patch(second_f0_candidate)
+        .expect("second independently valid F0 candidate is now temporally stale");
+    assert_eq!(stale.verdict(), Sys4PatchVerdict::Rejected);
+    assert_eq!(
+        stale.primary_diagnostic_kind(),
+        Some(Sys4PatchDiagnosticKind::StaleFrontier)
+    );
+    assert!(
+        stale.lifecycle().is_lifecycle_only_rejection(),
+        "temporal stale rejection must not install the second candidate or run semantic dispatch"
+    );
+    assert!(
+        fabric
+            .patch_lifecycle_snapshot()
+            .extends_only_with_lifecycle_rows_since(&lifecycle_after_first),
+        "temporal stale rejection must mutate lifecycle rows only"
+    );
+    assert_eq!(
+        fabric.active_runtime_identity_snapshot(),
+        active_after_first,
+        "temporal stale rejection must retain the already accepted active candidate"
+    );
+    assert_eq!(fabric.designated_cache_snapshot(), cache_after_first);
+    assert!(fabric.semantic_snapshot().same_state(&semantic_after_first));
+    assert_eq!(
+        fabric.current_m9_authority_inspection().generation(),
+        authority_after_first
+    );
+    assert_eq!(
+        fabric
+            .m8_actual_trace()
+            .expect("M8 observer available")
+            .stable_digest(),
+        m8_after_first
+    );
+
+    let after_reject_publish = fabric
+        .dispatch_source_action(publish_designated_action_with_tick(
+            "tick:F:after-temporal-stale",
+        ))
+        .expect("already accepted +2 program remains executable after temporal stale rejection");
+    assert_eq!(
+        after_reject_publish.typed_value(),
+        RuntimeValue::int(12),
+        "temporal stale rejection must retain the first accepted +2 generated path"
+    );
+}
+
+#[test]
+fn checked_patch_divergent_m9_material_at_same_numeric_generation_rejects_exact_lineage_binding() {
+    let checked = designated_checked();
+    let program = fabric_program(designated_projection(&checked));
+    let mut fabric = boot(&checked, program.clone(), BackendProfile::St);
+
+    let active_before = fabric.active_runtime_identity_snapshot();
+    let cache_before = fabric.designated_cache_snapshot();
+    let lifecycle_before = fabric.patch_lifecycle_snapshot();
+    let semantic_before = fabric.semantic_snapshot();
+    let authority_before = fabric.current_m9_authority_inspection();
+    let live_floor_before = fabric.m9_authority_live_floor_identity_snapshot();
+    let m8_before = fabric
+        .m8_actual_trace()
+        .expect("M8 observer available")
+        .stable_digest();
+    let divergent =
+        source_first_plus_two_patch_candidate_with_divergent_m9_same_generation(&program);
+
+    let outcome = fabric
+        .activate_checked_patch(divergent)
+        .expect("same-generation divergent M9 material returns typed lifecycle rejection");
+    assert_eq!(outcome.verdict(), Sys4PatchVerdict::Rejected);
+    assert_eq!(
+        outcome.primary_diagnostic_kind(),
+        Some(Sys4PatchDiagnosticKind::M9AuthorityLineageMismatch)
+    );
+    let mismatch = outcome
+        .m9_authority_frontier_mismatch_inspection()
+        .expect("rejection exposes exact M9 authority identity/lineage comparison");
+    assert!(
+        mismatch.same_numeric_generation(),
+        "negative must prove u64 generation alone is insufficient"
+    );
+    assert_eq!(
+        mismatch.active_generation(),
+        authority_before.generation(),
+        "active generation in diagnostic is the exact installed M9 generation"
+    );
+    assert_ne!(
+        mismatch.active_generation_ref(),
+        mismatch.candidate_generation_ref(),
+        "same-number candidate with different M9 generation ref must reject"
+    );
+    assert_ne!(
+        mismatch.active_authority_lineage_digest(),
+        mismatch.candidate_authority_lineage_digest(),
+        "same-number candidate with different M9 authority lineage material must reject"
+    );
+    assert!(
+        mismatch.compared_exact_m9_identity_and_lineage_not_numeric_generation_only(),
+        "SYS-4 activation must bind base frontier to exact M9 identity/lineage, not only a numeric generation"
+    );
+    assert!(
+        fabric
+            .patch_lifecycle_snapshot()
+            .extends_only_with_lifecycle_rows_since(&lifecycle_before),
+        "divergent M9 rejection mutates lifecycle rows only"
+    );
+    assert_eq!(fabric.active_runtime_identity_snapshot(), active_before);
+    assert_eq!(fabric.designated_cache_snapshot(), cache_before);
+    assert!(fabric.semantic_snapshot().same_state(&semantic_before));
+    assert_eq!(
+        fabric.current_m9_authority_inspection().generation(),
+        authority_before.generation()
+    );
+    assert_eq!(
+        fabric.m9_authority_live_floor_identity_snapshot(),
+        live_floor_before,
+        "failed patch must not switch the shared authority live-floor binding"
+    );
+    assert_eq!(
+        fabric
+            .m8_actual_trace()
+            .expect("M8 observer available")
+            .stable_digest(),
+        m8_before
+    );
+
+    let after_reject_publish = fabric
+        .dispatch_source_action(publish_designated_action_with_tick(
+            "tick:F:after-divergent-m9-reject",
+        ))
+        .expect("old program remains executable after divergent M9 rejection");
+    assert_eq!(
+        after_reject_publish.typed_value(),
+        RuntimeValue::int(11),
+        "divergent M9 rejection must leave the original +1 generated path active"
+    );
+}
+
+#[test]
+fn checked_patch_rechecks_shared_m9_live_floor_after_candidate_creation() {
+    let checked = designated_checked();
+    let program = fabric_program(designated_projection(&checked));
+    let mut fabric = boot(&checked, program.clone(), BackendProfile::St);
+
+    let candidate = source_first_plus_two_patch_candidate(&program);
+    let live_floor_before = fabric.m9_authority_live_floor_identity_snapshot();
+    let transition = fabric
+        .m9_authority_lifecycle_mut()
+        .revoke_designated_consumer_capability("E.result", "C")
+        .expect("M9 lifecycle advances after candidate creation");
+    let successor_generation = transition.sealed_m9_inspection().successor_generation();
+    fabric
+        .apply_admitted_authority_lifecycle(transition)
+        .expect("admitted M9 successor installs through normal live-floor path");
+    let active_before_activation = fabric.active_runtime_identity_snapshot();
+    let cache_before_activation = fabric.designated_cache_snapshot();
+    let lifecycle_before_activation = fabric.patch_lifecycle_snapshot();
+    let semantic_before_activation = fabric.semantic_snapshot();
+    let m8_before_activation = fabric
+        .m8_actual_trace()
+        .expect("M8 observer available")
+        .stable_digest();
+
+    let outcome = fabric
+        .activate_checked_patch(candidate)
+        .expect("candidate created before live-floor advance returns typed rejection");
+    assert_eq!(outcome.verdict(), Sys4PatchVerdict::Rejected);
+    assert_eq!(
+        outcome.primary_diagnostic_kind(),
+        Some(Sys4PatchDiagnosticKind::StaleFrontier)
+    );
+    let recheck = outcome
+        .m9_live_floor_recheck_inspection()
+        .expect("stale rejection exposes activation-time M9 live-floor recheck");
+    assert_eq!(
+        recheck.current_generation(),
+        successor_generation,
+        "activation must compare against the exact current M9 generation after the lifecycle transition"
+    );
+    assert_eq!(
+        recheck.shared_live_floor_identity(),
+        live_floor_before,
+        "activation must keep the original shared live-floor identity instead of re-keying from the stale candidate"
+    );
+    assert!(
+        recheck.checked_exact_current_generation_and_lineage(),
+        "activation must recheck generation ref/lineage through M9-owned evidence, not the candidate's stale numeric frontier"
+    );
+    assert!(
+        fabric
+            .patch_lifecycle_snapshot()
+            .extends_only_with_lifecycle_rows_since(&lifecycle_before_activation),
+        "authority TOCTOU rejection mutates lifecycle rows only"
+    );
+    assert_eq!(
+        fabric.active_runtime_identity_snapshot(),
+        active_before_activation,
+        "authority TOCTOU rejection must not install the stale candidate"
+    );
+    assert_eq!(fabric.designated_cache_snapshot(), cache_before_activation);
+    assert!(
+        fabric
+            .semantic_snapshot()
+            .same_state(&semantic_before_activation)
+    );
+    assert_eq!(
+        fabric.current_m9_authority_inspection().generation(),
+        successor_generation
+    );
+    assert_eq!(
+        fabric.m9_authority_live_floor_identity_snapshot(),
+        live_floor_before
+    );
+    assert_eq!(
+        fabric
+            .m8_actual_trace()
+            .expect("M8 observer available")
+            .stable_digest(),
+        m8_before_activation
+    );
+
+    let after_reject_publish = fabric
+        .dispatch_source_action(publish_designated_action_with_tick(
+            "tick:F:after-live-floor-reject",
+        ))
+        .expect("old program remains executable after live-floor stale rejection");
+    assert_eq!(
+        after_reject_publish.typed_value(),
+        RuntimeValue::int(11),
+        "live-floor stale rejection must leave the original +1 generated path active"
+    );
+}
+
+#[test]
+fn checked_patch_nonquiescent_pending_carrier_rejects_without_mutating_fabric() {
+    let checked = designated_checked();
+    let program = fabric_program(designated_projection(&checked));
+    let mut fabric = boot(&checked, program.clone(), BackendProfile::St);
+
+    let submitted = fabric
+        .submit_source_action(publish_designated_action_with_tick(
+            "tick:F:pending-before-patch",
+        ))
+        .expect("publish source action stages an E->S generated carrier");
+    let pending_before = fabric
+        .locus_runtime("E")
+        .expect("E exists")
+        .outgoing_mailbox()
+        .pending_envelopes()
+        .single();
+    assert_eq!(pending_before.envelope_id(), submitted.envelope_id());
+    let active_before = fabric.active_runtime_identity_snapshot();
+    assert!(
+        active_before.includes_program_artifact_projection_route_and_cache_identity(),
+        "rejection snapshot must cover active program, artifact, projection, route, and cache identities"
+    );
+    let cache_before = fabric.designated_cache_snapshot();
+    let lifecycle_before = fabric.patch_lifecycle_snapshot();
+    let semantic_before = fabric.semantic_snapshot();
+    let authority_before = fabric.current_m9_authority_inspection().generation();
+    let m8_before = fabric
+        .m8_actual_trace()
+        .expect("M8 observer available")
+        .stable_digest();
+
+    let outcome = fabric
+        .activate_checked_patch(source_first_plus_two_patch_candidate(&program))
+        .expect("nonquiescent fabric returns a typed patch lifecycle rejection");
+    assert_eq!(outcome.verdict(), Sys4PatchVerdict::Rejected);
+    assert_eq!(
+        outcome.primary_diagnostic_kind(),
+        Some(Sys4PatchDiagnosticKind::NonQuiescentPendingCarrier)
+    );
+    assert!(
+        outcome.lifecycle().is_lifecycle_only_rejection(),
+        "pending-carrier patch rejection must not interpret or mutate semantic runtime state"
+    );
+    assert!(
+        fabric
+            .patch_lifecycle_snapshot()
+            .extends_only_with_lifecycle_rows_since(&lifecycle_before),
+        "nonquiescent rejection must mutate lifecycle rows only"
+    );
+    assert_eq!(
+        fabric.active_runtime_identity_snapshot(),
+        active_before,
+        "nonquiescent rejection must not install the candidate program/projection/artifacts/routes/cache"
+    );
+    assert_eq!(fabric.designated_cache_snapshot(), cache_before);
+    assert!(fabric.semantic_snapshot().same_state(&semantic_before));
+    assert_eq!(
+        fabric.current_m9_authority_inspection().generation(),
+        authority_before
+    );
+    assert_eq!(
+        fabric
+            .m8_actual_trace()
+            .expect("M8 observer available")
+            .stable_digest(),
+        m8_before
+    );
+    assert_eq!(
+        fabric
+            .locus_runtime("E")
+            .expect("E exists")
+            .outgoing_mailbox()
+            .pending_envelopes()
+            .single()
+            .envelope_id(),
+        pending_before.envelope_id(),
+        "failed patch must leave the pending generated carrier intact for later dispatch/quarantine"
+    );
+
+    fabric
+        .step_transport("E", "S", pending_before.envelope_id())
+        .expect("retained pre-patch input request still transports under old route");
+    fabric
+        .step_locus("S")
+        .expect("S serves retained pre-patch input request under old plan");
+    let input_receipt = fabric
+        .locus_runtime("S")
+        .expect("S exists")
+        .outgoing_mailbox()
+        .pending_envelopes()
+        .single();
+    assert_eq!(input_receipt.typed_value(), RuntimeValue::int(10));
+    fabric
+        .step_transport("S", "E", input_receipt.envelope_id())
+        .expect("retained input receipt returns to E under old route");
+    fabric
+        .step_locus("E")
+        .expect("E evaluates retained request under old +1 program");
+    let delivery = fabric
+        .locus_runtime("E")
+        .expect("E exists")
+        .outgoing_mailbox()
+        .pending_envelopes()
+        .single();
+    assert_eq!(
+        delivery.typed_value(),
+        RuntimeValue::int(11),
+        "retained pre-patch carrier must complete through the original +1 generated path"
+    );
+}
+
+#[test]
+fn checked_patch_fresh_idle_ow1_rejects_backend_ineligible_not_nonquiescent_without_mutation() {
+    let checked = designated_checked();
+    let projection = designated_projection(&checked);
+    let program = fabric_program(projection);
+    assert_eq!(
+        program.backend_eligibility(BackendProfile::Ow1),
+        BackendEligibility::Eligible,
+        "fresh-idle OW1 patch rejection must test backend clone/cut support, not projection ineligibility"
+    );
+    let admission = sealed_admission(&checked, &program);
+    let mut fabric = boot_with_admission(program.clone(), admission, BackendProfile::Ow1);
+    for locus in ["C", "E", "S"] {
+        let runtime = fabric.locus_runtime(locus).expect("locus exists");
+        assert!(
+            runtime.incoming_mailbox().pending_envelopes().is_empty()
+                && runtime.outgoing_mailbox().pending_envelopes().is_empty(),
+            "fresh-idle OW1 negative starts quiescent at {locus}"
+        );
+    }
+    let active_before = fabric.active_runtime_identity_snapshot();
+    let cache_before = fabric.designated_cache_snapshot();
+    let lifecycle_before = fabric.patch_lifecycle_snapshot();
+    let semantic_before = fabric.semantic_snapshot();
+    let authority_before = fabric.current_m9_authority_inspection().generation();
+    let m8_before = fabric
+        .m8_actual_trace()
+        .expect("M8 observer available")
+        .stable_digest();
+
+    let outcome = fabric
+        .activate_checked_patch(source_first_plus_two_patch_candidate(&program))
+        .expect("idle OW1 checked patch returns a typed lifecycle rejection");
+    assert_eq!(outcome.verdict(), Sys4PatchVerdict::Rejected);
+    assert_eq!(
+        outcome.primary_diagnostic_kind(),
+        Some(Sys4PatchDiagnosticKind::BackendIneligible),
+        "fresh-idle OW1 patch cannot be diagnosed as nonquiescent; the direct blocker is unsupported worker clone/cut"
+    );
+    assert_ne!(
+        outcome.primary_diagnostic_kind(),
+        Some(Sys4PatchDiagnosticKind::NonQuiescentPendingCarrier)
+    );
+    assert!(
+        outcome.lifecycle().is_lifecycle_only_rejection(),
+        "OW1 backend-ineligible patch rejection must not run semantic dispatch"
+    );
+    assert!(
+        fabric
+            .patch_lifecycle_snapshot()
+            .extends_only_with_lifecycle_rows_since(&lifecycle_before),
+        "OW1 backend-ineligible patch rejection mutates lifecycle rows only"
+    );
+    assert_eq!(
+        fabric.active_runtime_identity_snapshot(),
+        active_before,
+        "OW1 backend-ineligible patch rejection must not install the candidate"
+    );
+    assert_eq!(fabric.designated_cache_snapshot(), cache_before);
+    assert!(fabric.semantic_snapshot().same_state(&semantic_before));
+    assert_eq!(
+        fabric.current_m9_authority_inspection().generation(),
+        authority_before
+    );
+    assert_eq!(
+        fabric
+            .m8_actual_trace()
+            .expect("M8 observer available")
+            .stable_digest(),
+        m8_before
+    );
+}
+
+#[test]
+fn checked_patch_topology_or_owner_route_mismatch_rejects_before_activation() {
+    let checked = designated_checked();
+    let program = fabric_program(designated_projection(&checked));
+    let mut fabric = boot(&checked, program.clone(), BackendProfile::St);
+    let active_before = fabric.active_runtime_identity_snapshot();
+    assert!(
+        active_before.includes_program_artifact_projection_route_and_cache_identity(),
+        "rejection snapshot must cover active program, artifact, projection, route, and cache identities"
+    );
+    let cache_before = fabric.designated_cache_snapshot();
+    let lifecycle_before = fabric.patch_lifecycle_snapshot();
+    let semantic_before = fabric.semantic_snapshot();
+    let authority_before = fabric.current_m9_authority_inspection().generation();
+    let m8_before = fabric
+        .m8_actual_trace()
+        .expect("M8 observer available")
+        .stable_digest();
+
+    let outcome = fabric
+        .activate_checked_patch(source_first_topology_mismatch_patch_candidate(&program))
+        .expect("topology/owner-route mismatch returns a typed patch rejection outcome");
+    assert_eq!(outcome.verdict(), Sys4PatchVerdict::Rejected);
+    assert_eq!(
+        outcome.primary_diagnostic_kind(),
+        Some(Sys4PatchDiagnosticKind::TopologyOwnerRouteMismatch)
+    );
+    assert!(
+        outcome.lifecycle().is_lifecycle_only_rejection(),
+        "topology/owner-route mismatch must fail before activation and before any generated dispatch"
+    );
+    assert!(
+        fabric
+            .patch_lifecycle_snapshot()
+            .extends_only_with_lifecycle_rows_since(&lifecycle_before),
+        "topology mismatch rejection must mutate lifecycle rows only"
+    );
+    assert!(
+        outcome
+            .boundary_inspection()
+            .candidate_was_prechecked_projected_and_m9_admitted(),
+        "negative case must still be built by the normal source-first candidate path, not by forged runtime fields"
+    );
+    assert_eq!(
+        fabric.active_runtime_identity_snapshot(),
+        active_before,
+        "topology mismatch rejection must not install the candidate program/projection/artifacts/routes/cache"
+    );
+    assert_eq!(fabric.designated_cache_snapshot(), cache_before);
+    assert!(fabric.semantic_snapshot().same_state(&semantic_before));
+    assert_eq!(
+        fabric.current_m9_authority_inspection().generation(),
+        authority_before
+    );
+    assert_eq!(
+        fabric
+            .m8_actual_trace()
+            .expect("M8 observer available")
+            .stable_digest(),
+        m8_before
+    );
+
+    let after_reject_publish = fabric
+        .dispatch_source_action(publish_designated_action_with_tick(
+            "tick:F:after-topology-reject",
+        ))
+        .expect("old program remains executable after topology mismatch rejection");
+    assert_eq!(
+        after_reject_publish.typed_value(),
+        RuntimeValue::int(11),
+        "topology mismatch rejection must leave the original +1 generated path active"
+    );
+}
+
+#[test]
+fn checked_patch_same_shape_changed_owner_rmw_expression_rejects_and_keeps_old_semantics() {
+    let checked = combined_owner_designated_checked();
+    let program = fabric_program(combined_owner_designated_projection(&checked));
+    let mut fabric = boot(&checked, program.clone(), BackendProfile::St);
+
+    let active_before = fabric.active_runtime_identity_snapshot();
+    let cache_before = fabric.designated_cache_snapshot();
+    let lifecycle_before = fabric.patch_lifecycle_snapshot();
+    let semantic_before = fabric.semantic_snapshot();
+    let authority_before = fabric.current_m9_authority_inspection().generation();
+    let m8_before = fabric
+        .m8_actual_trace()
+        .expect("M8 observer available")
+        .stable_digest();
+
+    let outcome = fabric
+        .activate_checked_patch(source_first_changed_owner_rmw_patch_candidate(&program))
+        .expect("same-shape owner-RMW expression change returns typed patch rejection");
+    assert_eq!(outcome.verdict(), Sys4PatchVerdict::Rejected);
+    assert_eq!(
+        outcome.primary_diagnostic_kind(),
+        Some(Sys4PatchDiagnosticKind::OwnerRmwExpressionChanged)
+    );
+    assert!(
+        outcome.lifecycle().is_lifecycle_only_rejection(),
+        "owner RMW expression mismatch must fail before activation and before generated dispatch"
+    );
+    assert!(
+        fabric
+            .patch_lifecycle_snapshot()
+            .extends_only_with_lifecycle_rows_since(&lifecycle_before),
+        "owner-RMW expression rejection mutates lifecycle rows only"
+    );
+    assert_eq!(
+        fabric.active_runtime_identity_snapshot(),
+        active_before,
+        "same-shape owner RMW expression rejection must not install the candidate"
+    );
+    assert_eq!(fabric.designated_cache_snapshot(), cache_before);
+    assert!(fabric.semantic_snapshot().same_state(&semantic_before));
+    assert_eq!(
+        fabric.current_m9_authority_inspection().generation(),
+        authority_before
+    );
+    assert_eq!(
+        fabric
+            .m8_actual_trace()
+            .expect("M8 observer available")
+            .stable_digest(),
+        m8_before
+    );
+
+    let owner = fabric
+        .dispatch_source_action(owner_attack_action("attack"))
+        .expect("old owner operation remains executable after rejected RMW-expression patch");
+    assert_eq!(owner.typed_value(), RuntimeValue::unit());
+    assert_eq!(
+        fabric.semantic_snapshot().int("S", "player", "self", "hp"),
+        Some(90),
+        "old owner RMW semantics must remain hp - atk; changed hp - atk + 1 candidate must not install"
+    );
+    let designated = fabric
+        .dispatch_source_action(publish_designated_action_with_tick(
+            "tick:F:after-rmw-expression-reject",
+        ))
+        .expect("old designated plan remains executable after rejected owner RMW patch");
+    assert_eq!(
+        designated.typed_value(),
+        RuntimeValue::int(11),
+        "changed owner RMW candidate must not disturb old designated +1 plan"
+    );
+}
+
+#[test]
+fn sys4_patch_compatibility_shape_binds_relation_and_fallback_core_identity() {
+    let checked = relation_only_checked();
+    let projection = relation_only_projection(&checked);
+    assert!(
+        projection
+            .sys4_artifact_fragments()
+            .entries()
+            .iter()
+            .any(|fragment| fragment.relation_checked_core().is_some()),
+        "relation fixture must provide a real checked relation Core fragment for this patch guard"
+    );
+    assert!(
+        projection
+            .sys4_artifact_fragments()
+            .entries()
+            .iter()
+            .any(|fragment| {
+                fragment.fragment_kind() == ProjectedOperationFragmentKind::RelationPublication
+            }),
+        "relation fixture must include the owner-side relation publication fragment"
+    );
+    assert!(
+        projection
+            .communication_plan()
+            .edges()
+            .iter()
+            .any(|edge| edge.kind() == CommunicationEdgeKind::RelationProjectionPublication),
+        "relation fixture must include a generated relation publication edge"
+    );
+
+    let sys4 = read_runtime_src("sys4_dispatch.rs");
+    let body = extract_balanced_fn_body(&sys4, "fn patch_compatibility_shape(")
+        .expect("patch compatibility shape body is structurally inspectable");
+    let compact_body = normalize_source_for_boundary_scan(&body);
+    let mut missing = Vec::new();
+    for required in [
+        "relation_checked_core",
+        "RelationPublication",
+        "ConsumerLocalRelationProjection",
+        "fallback",
+        "primary",
+        "source_ref",
+        "core_ref",
+    ] {
+        if !compact_body.contains(required) {
+            missing.push(required);
+        }
+    }
+    assert!(
+        missing.is_empty(),
+        "SYS-4 checked patch compatibility must bind relation/fallback checked Core identity, relation fragment kinds, and source/Core provenance; missing in patch_compatibility_shape: {}",
+        missing.join(", ")
+    );
+}
+
+#[test]
+fn sys4_patch_activation_boundary_accepts_only_checked_candidate_not_raw_source_or_manual_edges() {
+    let sys4 = read_runtime_src("sys4_dispatch.rs");
+    let compact = normalize_source_for_boundary_scan(&sys4);
+    let Some(body) = extract_balanced_fn_body(&sys4, "fn activate_checked_patch(")
+        .or_else(|| extract_balanced_fn_body(&sys4, "pub(crate) fn activate_checked_patch("))
+    else {
+        panic!(
+            "SYS-4 runtime must expose a crate-private checked-patch activation boundary before SYS-5 save/patch can consume it"
+        );
+    };
+    let compact_body = normalize_source_for_boundary_scan(&body);
+
+    assert!(
+        compact.contains("Sys4CheckedPatchCandidate"),
+        "activation boundary must use an opaque checked/projected/M9-admitted patch candidate type"
+    );
+    for banned_signature in [
+        "activate_checked_patch(&mutself,source:",
+        "activate_checked_patch(&mutself,raw_source:",
+        "activate_checked_patch(&mutself,ast:",
+        "activate_checked_patch(&mutself,fixture:",
+        "activate_checked_patch(&mutself,edge:",
+        "activate_checked_patch(&mutself,grant:",
+        "activate_checked_patch(&mutself,seam:",
+        "activate_checked_patch(&mutself,projection:",
+    ] {
+        assert!(
+            !compact.contains(banned_signature),
+            "runtime activation must not accept raw source/AST/manual edge/grant/projection/M9 seam input directly: found {banned_signature}"
+        );
+    }
+    for banned_body in [
+        "check_and_elaborate_surface_v0",
+        "parse_surface_v0",
+        "FixtureSource::new",
+        "project_checked_core",
+        "M9RuntimeExecutionSeam::",
+        "route_index.routes.insert",
+        "route_index.insert",
+        "ProjectedOperationFragment",
+        "with_int(",
+        "grant_authority",
+        "manual_edge",
+        "manual_route",
+    ] {
+        assert!(
+            !compact_body.contains(banned_body),
+            "runtime activation body must not parse/project/admit/mint edges/grants/state; candidate construction happens outside runtime: found {banned_body}"
+        );
+    }
 }
 
 #[test]

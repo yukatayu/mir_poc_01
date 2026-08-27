@@ -824,6 +824,65 @@ pub(crate) struct M9AuthorityGeneration {
     source_release_validation_occurrences: BTreeMap<(String, String, String), usize>,
 }
 
+/// Exact M9-owned observation state captured immediately before a successor
+/// transition is published. Its maps stay private; SYS-4 may only ask whether
+/// the current generation is still the same state. This prevents a transition
+/// made before an intervening admitted validation from overwriting that later
+/// observation at installation time.
+#[derive(Clone, PartialEq, Eq)]
+pub(crate) struct M9RuntimeValidationObservationSnapshot {
+    designated_consumer_validation_occurrences: BTreeMap<(String, String, String), usize>,
+    owner_operation_validation_occurrences: BTreeMap<(String, String, String), usize>,
+    source_release_validation_occurrences: BTreeMap<(String, String, String), usize>,
+    opaque_digest: String,
+}
+
+impl std::fmt::Debug for M9RuntimeValidationObservationSnapshot {
+    fn fmt(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        formatter
+            .debug_struct("M9RuntimeValidationObservationSnapshot")
+            .field("opaque_digest", &self.opaque_digest)
+            .finish()
+    }
+}
+
+impl M9RuntimeValidationObservationSnapshot {
+    pub(crate) fn matches_generation(&self, generation: &M9AuthorityGeneration) -> bool {
+        self == &generation.runtime_validation_observation_snapshot()
+    }
+
+    pub(crate) fn opaque_digest(&self) -> &str {
+        &self.opaque_digest
+    }
+}
+
+/// Opaque equality material for the bounded SYS-4 checked-patch boundary.
+///
+/// A numeric M9 generation is not a sufficient patch frontier: independently
+/// admitted inventories can both begin at generation zero.  This carrier keeps
+/// the comparison inside M9 and exposes only a sealed digest, never the
+/// membership, capability, or witness records from which it was derived.
+#[derive(Debug, Clone, PartialEq, Eq)]
+pub(crate) struct M9CheckedPatchAuthorityBinding {
+    generation: u64,
+    generation_ref: String,
+    lineage_digest: String,
+}
+
+impl M9CheckedPatchAuthorityBinding {
+    pub(crate) const fn generation(&self) -> u64 {
+        self.generation
+    }
+
+    pub(crate) fn generation_ref(&self) -> &str {
+        &self.generation_ref
+    }
+
+    pub(crate) fn lineage_digest(&self) -> &str {
+        &self.lineage_digest
+    }
+}
+
 /// Observer-safe identity for one M9-issued designated-result consumer
 /// lineage.  It deliberately exposes no credential or witness payload.
 #[derive(Debug, Clone, PartialEq, Eq)]
@@ -858,6 +917,14 @@ pub(crate) struct M9SealedGeneration {
 impl M9SealedGeneration {
     pub(crate) const fn is_m9_produced(&self) -> bool {
         self.m9_produced
+    }
+
+    pub(crate) const fn generation(&self) -> u64 {
+        self.generation
+    }
+
+    pub(crate) fn generation_ref(&self) -> &str {
+        &self.generation_ref
     }
 }
 
@@ -1128,7 +1195,7 @@ pub(crate) type M9M10ExecutionSeam = M9RuntimeExecutionSeam;
 /// M9-sealed owner lineage exposed only to the internal SYS-1 kernel.  This
 /// is an authenticated execution fact, not a credential constructor or wire
 /// carrier.  The M10 facade may still consume its legacy M8 bridge separately.
-#[derive(Clone)]
+#[derive(Clone, PartialEq, Eq)]
 pub(crate) struct M9KernelOwnerLineage {
     principal: String,
     owner_locus: String,
@@ -1178,7 +1245,7 @@ impl M9KernelOwnerLineage {
 /// M9-sealed producer authority for exactly one checked designated remote
 /// input dependency.  The sealed scope, not evaluator authority or carrier
 /// metadata, fixes the release tuple and its producer-side lineage.
-#[derive(Clone)]
+#[derive(Clone, PartialEq, Eq)]
 pub(crate) struct M9KernelDesignatedRemoteInputLineage {
     principal: String,
     producer_locus: String,
@@ -1501,6 +1568,7 @@ impl M9RuntimeExecutionSeam {
                 result,
                 0,
                 true,
+                None,
             );
         }
 
@@ -1516,6 +1584,48 @@ impl M9RuntimeExecutionSeam {
             owner.name(),
             owner.actor_authority_origin(),
             owner_locus,
+        )
+    }
+
+    /// Exercise the normal final M9 admission path with a distinct admitted
+    /// lineage while retaining the same numeric initial generation.  This is
+    /// deliberately test-only and is used to prove that SYS-4 does not bind a
+    /// checked patch on the generation counter alone.
+    #[cfg(test)]
+    pub(crate) fn test_real_admitted_sys4_fabric_seam_with_divergent_lineage_same_numeric_generation(
+        checked: &CheckedSurfaceV0,
+        lineage_variant: &str,
+    ) -> Result<Self, String> {
+        if lineage_variant.is_empty() {
+            return Err("kernel test divergent M9 lineage variant is empty".to_string());
+        }
+        let designated = checked
+            .evaluations()
+            .iter()
+            .find(|evaluation| evaluation.designated_core().is_some())
+            .ok_or_else(|| {
+                "kernel test divergent M9 lineage requires designated source".to_string()
+            })?;
+        if checked
+            .evaluations()
+            .iter()
+            .any(|evaluation| evaluation.owner_rmw_core().is_some())
+        {
+            return Err(
+                "kernel test divergent M9 lineage currently supports the designated-only SYS-4 fixture"
+                    .to_string(),
+            );
+        }
+        let result = designated
+            .result_name()
+            .ok_or_else(|| "SYS-4 designated evaluation lacks checked result name".to_string())?;
+        Self::test_real_admitted_designated_seam_for_kernel(
+            checked,
+            designated.name(),
+            result,
+            0,
+            true,
+            Some(lineage_variant),
         )
     }
 
@@ -1946,6 +2056,7 @@ impl M9RuntimeExecutionSeam {
             result,
             dependency_index,
             true,
+            None,
         )
     }
 
@@ -2046,7 +2157,9 @@ impl M9RuntimeExecutionSeam {
                 "kernel test designated result lacks a remote input dependency".to_string(),
             );
         }
-        Self::test_real_admitted_designated_seam_for_kernel(checked, evaluator, result, 0, false)
+        Self::test_real_admitted_designated_seam_for_kernel(
+            checked, evaluator, result, 0, false, None,
+        )
     }
 
     #[cfg(test)]
@@ -2056,6 +2169,7 @@ impl M9RuntimeExecutionSeam {
         result: &str,
         dependency_index: usize,
         issue_remote_input_release: bool,
+        lineage_variant: Option<&str>,
     ) -> Result<Self, String> {
         let dependency = checked
             .designated_result(evaluator, result)
@@ -2100,14 +2214,17 @@ impl M9RuntimeExecutionSeam {
             .iter()
             .find(|residual| residual.kind() == ResidualObligationKind::AuthDeferred)
             .ok_or_else(|| "kernel test source lacks AuthDeferred".to_string())?;
-        let epoch = "epoch1";
+        let lineage_suffix = lineage_variant
+            .map(|variant| format!(":{variant}"))
+            .unwrap_or_default();
+        let epoch = format!("epoch1{lineage_suffix}");
         let incarnation = format!("incarnation:{principal}:{source_owner}:{epoch}");
         let mut authority = base.authority_runtime();
         let attestation = authority
             .issue_membership_attestation(
                 principal,
                 source_owner,
-                epoch,
+                &epoch,
                 incarnation.clone(),
                 auth_residual.name(),
                 auth_residual.source_ref().clone(),
@@ -2120,7 +2237,7 @@ impl M9RuntimeExecutionSeam {
             })?;
         let membership = authority
             .authenticate_membership(
-                M9MembershipRequest::new(principal, source_owner, epoch)
+                M9MembershipRequest::new(principal, source_owner, &epoch)
                     .with_incarnation(incarnation)
                     .with_auth_residual(auth_residual.name(), auth_residual.source_ref().clone())
                     .with_issued_provider_attestation(attestation),
@@ -2163,14 +2280,14 @@ impl M9RuntimeExecutionSeam {
             })?;
         // The evaluator is a semantic locus in its own right.  Its
         // membership cannot be borrowed from the source-owner release path.
-        let evaluator_epoch = "epoch-evaluator-1";
+        let evaluator_epoch = format!("epoch-evaluator-1{lineage_suffix}");
         let evaluator_incarnation =
             format!("incarnation:{principal}:{evaluator}:{evaluator_epoch}");
         let evaluator_attestation = authority
             .issue_membership_attestation(
                 principal,
                 evaluator,
-                evaluator_epoch,
+                &evaluator_epoch,
                 evaluator_incarnation.clone(),
                 auth_residual.name(),
                 auth_residual.source_ref().clone(),
@@ -2183,7 +2300,7 @@ impl M9RuntimeExecutionSeam {
             })?;
         let evaluator_membership = authority
             .authenticate_membership(
-                M9MembershipRequest::new(principal, evaluator, evaluator_epoch)
+                M9MembershipRequest::new(principal, evaluator, &evaluator_epoch)
                     .with_incarnation(evaluator_incarnation)
                     .with_auth_residual(auth_residual.name(), auth_residual.source_ref().clone())
                     .with_issued_provider_attestation(evaluator_attestation),
@@ -2291,14 +2408,14 @@ impl M9RuntimeExecutionSeam {
                 .designated_result_consumer_core()
                 .expect("selected designated consumer retains Core");
             let consumer_locus = consumer_core.consumer_locus();
-            let consumer_epoch = "epoch-consumer-1";
+            let consumer_epoch = format!("epoch-consumer-1{lineage_suffix}");
             let consumer_incarnation =
                 format!("incarnation:{principal}:{consumer_locus}:{consumer_epoch}");
             let consumer_attestation = authority
                 .issue_membership_attestation(
                     principal,
                     consumer_locus,
-                    consumer_epoch,
+                    &consumer_epoch,
                     consumer_incarnation.clone(),
                     auth_residual.name(),
                     auth_residual.source_ref().clone(),
@@ -2311,7 +2428,7 @@ impl M9RuntimeExecutionSeam {
                 })?;
             let consumer_membership = authority
                 .authenticate_membership(
-                    M9MembershipRequest::new(principal, consumer_locus, consumer_epoch)
+                    M9MembershipRequest::new(principal, consumer_locus, &consumer_epoch)
                         .with_incarnation(consumer_incarnation)
                         .with_auth_residual(
                             auth_residual.name(),
@@ -2627,6 +2744,122 @@ impl M9AuthorityGeneration {
         &self.generation_ref
     }
 
+    /// Return the M9-owned equality material used to bind a SYS-4 checked
+    /// patch candidate to the active authority inventory.  The program
+    /// identity is deliberately not part of this comparison: a checked patch
+    /// necessarily has a successor source identity, while its authority
+    /// inventory must still be equivalent to the active one.
+    pub(crate) fn checked_patch_authority_binding(&self) -> M9CheckedPatchAuthorityBinding {
+        M9CheckedPatchAuthorityBinding {
+            generation: self.generation,
+            generation_ref: self.generation_ref.clone(),
+            lineage_digest: self.checked_patch_authority_lineage_digest(),
+        }
+    }
+
+    /// M9's internal check for a checked-program rebase.  A SYS-4 patch may
+    /// change the checked source identity while retaining the exact admitted
+    /// authority inventory.  The successor publisher for the patched source
+    /// is usable only when all authority-bearing material is unchanged; M8
+    /// and SYS-4 cannot construct this relation themselves.
+    ///
+    /// Validation-occurrence counters are checked-patch observer history.
+    /// They are intentionally excluded from the candidate-equivalence
+    /// predicate because a fresh normal M9 admission has not replayed them;
+    /// `for_checked_patch_rebase_of` below carries the active counters into
+    /// the M9-produced rebased generation before SYS-4 can install it.
+    pub(crate) fn is_checked_patch_rebase_equivalent_to(&self, other: &Self) -> bool {
+        self.generation == other.generation
+            && self.generation_ref == other.generation_ref
+            && self.authority_state == other.authority_state
+            && self.owner_uses == other.owner_uses
+            && self.designated_evaluation_uses == other.designated_evaluation_uses
+            && self.designated_consumption_uses == other.designated_consumption_uses
+            && self.kernel_owner_lineages == other.kernel_owner_lineages
+            && self.revoked_owner_capabilities == other.revoked_owner_capabilities
+            && self.revoked_designated_consumption_capabilities
+                == other.revoked_designated_consumption_capabilities
+            && self.kernel_designated_remote_input_lineages
+                == other.kernel_designated_remote_input_lineages
+            && self.designated_consumer_failures == other.designated_consumer_failures
+            && self.designated_consumer_witness_retirements
+                == other.designated_consumer_witness_retirements
+            && self.designated_source_release_failures == other.designated_source_release_failures
+            && self.checked_patch_authority_binding() == other.checked_patch_authority_binding()
+    }
+
+    /// Exact M9 authority equality for synchronizing runtime observations.
+    /// Validation occurrence maps are intentionally excluded: they are the
+    /// mutable M9 audit observations admitted during execution, which the M9
+    /// successor publisher must adopt before creating its next successor.
+    /// Program identity remains strict here; this is not the checked-patch
+    /// rebase relation.
+    pub(crate) fn has_same_runtime_authority_facts_ignoring_validation_observations(
+        &self,
+        other: &Self,
+    ) -> bool {
+        self.program_identity == other.program_identity
+            && self.is_checked_patch_rebase_equivalent_to(other)
+    }
+
+    fn checked_patch_authority_lineage_digest(&self) -> String {
+        // `Debug` for the kernel lineages intentionally redacts their
+        // contents, so enumerate the sealed fields explicitly before hashing.
+        // The resulting value remains M9-opaque outside this module.
+        let owner_lineages = self
+            .kernel_owner_lineages
+            .iter()
+            .map(|(key, lineage)| {
+                format!(
+                    "{key:?}:{}:{}:{}:{}:{}:{}:{}",
+                    lineage.principal(),
+                    lineage.owner_locus(),
+                    lineage.membership_ref(),
+                    lineage.membership_epoch(),
+                    lineage.membership_incarnation(),
+                    lineage.capability_ref(),
+                    lineage.witness_ref(),
+                )
+            })
+            .collect::<Vec<_>>();
+        let remote_input_lineages = self
+            .kernel_designated_remote_input_lineages
+            .iter()
+            .map(|(key, lineage)| {
+                format!(
+                    "{key:?}:{}:{}:{}:{}:{}:{}:{}:{}:{}:{}:{}:{}:{}",
+                    lineage.principal(),
+                    lineage.producer_locus(),
+                    lineage.evaluator(),
+                    lineage.result(),
+                    lineage.dependency_index(),
+                    lineage.input_frontier(),
+                    lineage.release_label(),
+                    lineage.visibility(),
+                    lineage.membership_ref(),
+                    lineage.membership_epoch(),
+                    lineage.membership_incarnation(),
+                    lineage.capability_ref(),
+                    lineage.witness_ref(),
+                )
+            })
+            .collect::<Vec<_>>();
+        m9_opaque_ref(&format!(
+            "{:?}|{:?}|{:?}|{:?}|{:?}|{:?}|{:?}|{:?}|{:?}|{:?}|{:?}",
+            self.authority_state,
+            self.owner_uses,
+            self.designated_evaluation_uses,
+            self.designated_consumption_uses,
+            owner_lineages,
+            self.revoked_owner_capabilities,
+            self.revoked_designated_consumption_capabilities,
+            remote_input_lineages,
+            self.designated_consumer_failures,
+            self.designated_consumer_witness_retirements,
+            self.designated_source_release_failures,
+        ))
+    }
+
     /// Exact internal restore identity for a sealed M9 generation.  SYS-4
     /// uses this only to bind a process-local cut to the M9-owned successor
     /// lifecycle; it exposes neither credentials nor an authority minting
@@ -2710,6 +2943,31 @@ impl M9AuthorityGeneration {
         }
     }
 
+    /// Capture the complete M9 validation-observation state without exposing
+    /// its keys to SYS-4.  The opaque digest is diagnostic evidence; equality
+    /// remains exact over the private maps.
+    pub(crate) fn runtime_validation_observation_snapshot(
+        &self,
+    ) -> M9RuntimeValidationObservationSnapshot {
+        let designated_consumer_validation_occurrences =
+            self.designated_consumer_validation_occurrences.clone();
+        let owner_operation_validation_occurrences =
+            self.owner_operation_validation_occurrences.clone();
+        let source_release_validation_occurrences =
+            self.source_release_validation_occurrences.clone();
+        M9RuntimeValidationObservationSnapshot {
+            opaque_digest: m9_opaque_ref(&format!(
+                "{:?}|{:?}|{:?}",
+                designated_consumer_validation_occurrences,
+                owner_operation_validation_occurrences,
+                source_release_validation_occurrences,
+            )),
+            designated_consumer_validation_occurrences,
+            owner_operation_validation_occurrences,
+            source_release_validation_occurrences,
+        }
+    }
+
     pub(crate) fn validate_designated_consumer(
         &mut self,
         value_name: &str,
@@ -2717,14 +2975,6 @@ impl M9AuthorityGeneration {
         request_id: &str,
         semantic_identity: &str,
     ) -> Result<M9CacheValidationInspection, M9SealedFailureInspection> {
-        *self
-            .designated_consumer_validation_occurrences
-            .entry((
-                value_name.to_string(),
-                consumer.to_string(),
-                semantic_identity.to_string(),
-            ))
-            .or_default() += 1;
         let inspection = self.sealed_inspection();
         let lineage = inspection
             .designated_consumer_lineage(value_name, consumer)
@@ -2759,6 +3009,17 @@ impl M9AuthorityGeneration {
                 consumer_locus: consumer.to_string(),
             });
         }
+        // This counter names an admitted validation occurrence. A rejected
+        // request has its own sealed failure inspection but no successful M9
+        // occurrence to carry through a later successor or cut.
+        *self
+            .designated_consumer_validation_occurrences
+            .entry((
+                value_name.to_string(),
+                consumer.to_string(),
+                semantic_identity.to_string(),
+            ))
+            .or_default() += 1;
         Ok(M9CacheValidationInspection {
             generation: inspection.generation,
             consumer_lineage: lineage,
@@ -2782,14 +3043,6 @@ impl M9AuthorityGeneration {
         expected: &M9DesignatedSourceReleaseLineage,
         request_id: &str,
     ) -> Option<M9SourceReleaseValidationInspection> {
-        *self
-            .source_release_validation_occurrences
-            .entry((
-                operation_id.to_string(),
-                source_locus.to_string(),
-                request_id.to_string(),
-            ))
-            .or_default() += 1;
         let inspection = self.sealed_inspection();
         let key = (
             evaluator.to_string(),
@@ -2802,6 +3055,14 @@ impl M9AuthorityGeneration {
         if &lineage != expected || self.designated_source_release_failures.contains_key(&key) {
             return None;
         }
+        *self
+            .source_release_validation_occurrences
+            .entry((
+                operation_id.to_string(),
+                source_locus.to_string(),
+                request_id.to_string(),
+            ))
+            .or_default() += 1;
         Some(M9SourceReleaseValidationInspection {
             generation: inspection.generation,
             lineage,
@@ -2960,6 +3221,7 @@ impl M9AuthorityGeneration {
         owner_locus: &str,
         request_id: &str,
     ) -> Option<(String, M8AuthorityUse)> {
+        let authority = self.owner_authority_for_operation(operation, owner_locus)?;
         *self
             .owner_operation_validation_occurrences
             .entry((
@@ -2968,7 +3230,7 @@ impl M9AuthorityGeneration {
                 request_id.to_string(),
             ))
             .or_default() += 1;
-        self.owner_authority_for_operation(operation, owner_locus)
+        Some(authority)
     }
 
     pub(crate) fn designated_evaluation_authority_use(
@@ -3102,6 +3364,78 @@ impl M9AuthoritySuccessorPublisher {
 
     pub(crate) fn current_inspection(&self) -> M9AuthorityInspection {
         self.current.sealed_inspection()
+    }
+
+    pub(crate) fn current_runtime_validation_observation_snapshot(
+        &self,
+    ) -> M9RuntimeValidationObservationSnapshot {
+        self.current.runtime_validation_observation_snapshot()
+    }
+
+    /// Synchronize only M9-owned runtime validation observations from the
+    /// exact live generation before publishing a successor. SYS-4 supplies
+    /// the opaque live generation but neither reads nor copies its counters:
+    /// M9 verifies every authority-bearing fact, then retains the sealed
+    /// generation as the publisher's current state.
+    pub(crate) fn synchronize_runtime_observations_from(
+        &mut self,
+        live: &M9AuthorityGeneration,
+    ) -> bool {
+        if !self
+            .current
+            .has_same_runtime_authority_facts_ignoring_validation_observations(live)
+        {
+            return false;
+        }
+        self.current = live.clone();
+        true
+    }
+
+    /// Discard an uninstalled successor using the M9-owned publisher snapshot
+    /// that existed immediately before its publication. This is intentionally
+    /// fail-closed: a publisher that no longer names the expected successor
+    /// is never overwritten by a stale rollback.
+    pub(crate) fn restore_uninstalled_successor(
+        &mut self,
+        prior: Self,
+        expected_uninstalled_successor: &M9AuthorityGeneration,
+    ) -> bool {
+        if !self
+            .current
+            .matches_for_restore(expected_uninstalled_successor)
+        {
+            return false;
+        }
+        *self = prior;
+        true
+    }
+
+    /// Retain this normal M9 publisher for a checked program successor only
+    /// when its current sealed generation is an exact authority rebase of the
+    /// active generation.  This gives SYS-4 a publisher bound to the patched
+    /// checked source without granting SYS-4 a way to mint, translate, or
+    /// replace authority facts.
+    pub(crate) fn for_checked_patch_rebase_of(
+        &self,
+        active: &M9AuthorityGeneration,
+    ) -> Option<(M9AuthorityGeneration, Self)> {
+        self.current
+            .is_checked_patch_rebase_equivalent_to(active)
+            .then(|| {
+                let mut rebased = self.clone();
+                // The candidate publisher is normally admitted for the
+                // checked successor source and starts with no runtime audit
+                // occurrences. Preserve the live fabric's M9-owned audit
+                // counters inside M9 itself, rather than letting SYS-4 copy
+                // or reconstruct opaque observations across the rebase.
+                rebased.current.designated_consumer_validation_occurrences =
+                    active.designated_consumer_validation_occurrences.clone();
+                rebased.current.owner_operation_validation_occurrences =
+                    active.owner_operation_validation_occurrences.clone();
+                rebased.current.source_release_validation_occurrences =
+                    active.source_release_validation_occurrences.clone();
+                (rebased.current.clone(), rebased)
+            })
     }
 
     pub(crate) fn revoke_owner_capability(
@@ -3967,7 +4301,7 @@ impl M9RuntimeAdmitted {
                 | M9CapabilityScope::ContractUpdate { .. } => {}
             }
         }
-        let authority_generation = M9AuthorityGeneration {
+        let mut authority_generation = M9AuthorityGeneration {
             program_identity: base.program_identity.stable_key(),
             generation: 0,
             generation_ref: "m9-authority-generation:00000000000000000000".to_string(),
@@ -3987,6 +4321,11 @@ impl M9RuntimeAdmitted {
             owner_operation_validation_occurrences: BTreeMap::new(),
             source_release_validation_occurrences: BTreeMap::new(),
         };
+        authority_generation.generation_ref = format!(
+            "m9-authority-generation:{:020}:{}",
+            authority_generation.generation,
+            authority_generation.checked_patch_authority_lineage_digest()
+        );
         let authority_successor = M9AuthoritySuccessorPublisher {
             base: base.clone(),
             evidence,

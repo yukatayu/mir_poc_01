@@ -1867,6 +1867,22 @@ pub(super) struct EffectHandlerInput {
 }
 
 impl EffectHandlerPlanEntry {
+    pub(crate) fn operation(&self) -> &str {
+        &self.operation
+    }
+
+    pub(crate) const fn kind(&self) -> EffectHandlerKind {
+        self.kind
+    }
+
+    pub(crate) fn locus(&self) -> &str {
+        &self.locus
+    }
+
+    pub(crate) fn handler_ref(&self) -> &str {
+        &self.handler_ref
+    }
+
     pub(crate) const fn is_source_bound(&self) -> bool {
         self.source_bound
     }

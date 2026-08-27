@@ -2418,20 +2418,34 @@ impl M8LocalRuntime {
     }
 
     pub fn save_local_cut(&self, cut_id: impl Into<String>) -> M8LocalCut {
-        let cut_id = cut_id.into();
+        self.capture_local_cut(cut_id.into(), true)
+    }
+
+    /// Captures the M8 state that participates in a SYS-4 whole-fabric cut
+    /// without minting an M8-local `LocalCutSaved` occurrence.  The fabric
+    /// cut is the semantic save occurrence in this path; recording an
+    /// additional per-session M8 save node would make a restored fabric trace
+    /// differ from the pre-cut trace it is required to resume.
+    pub(crate) fn capture_for_sys4_local_cut(&self, cut_id: impl Into<String>) -> M8LocalCut {
+        self.capture_local_cut(cut_id.into(), false)
+    }
+
+    fn capture_local_cut(&self, cut_id: String, record_local_cut_event: bool) -> M8LocalCut {
         let save_sequence = self.trace.borrow().len();
         let cut_receipt_causality = M8CutReceiptCausality::for_cut(
             &cut_id,
             save_sequence,
             self.admitted.program_identity().root_source_ref().clone(),
         );
-        self.trace.borrow_mut().append(
-            M8LocalTraceKind::LocalCutSaved,
-            self.admitted.program_identity().root_source_ref().clone(),
-            None,
-            None,
-            false,
-        );
+        if record_local_cut_event {
+            self.trace.borrow_mut().append(
+                M8LocalTraceKind::LocalCutSaved,
+                self.admitted.program_identity().root_source_ref().clone(),
+                None,
+                None,
+                false,
+            );
+        }
         M8LocalCut {
             cut_id,
             admission_provenance: M8LocalAdmissionProvenance::from_instance(&self.admitted),
@@ -2652,6 +2666,27 @@ impl M8LocalRuntime {
         self.with_relation_snapshot(|relation| relation.replace_admitted_plans(&instance));
         self.with_designated_snapshot(|designated| {
             designated.replace_admitted_plans(&instance, input_receipts)
+        });
+        self.admitted = instance;
+        self.record_patch_activation(patch_id);
+    }
+
+    /// SYS-4's bounded checked-patch path replaces only plan-derived
+    /// designated material.  It retains this session's owner semantic state,
+    /// authority inventory, relation state, and prior trace while clearing
+    /// results/receipts/cache state that would otherwise bind a new
+    /// fixed-version plan to an old publication.
+    pub(crate) fn install_admitted_sys4_checked_patch(
+        &mut self,
+        instance: M8RuntimeInstance,
+        patch_id: &str,
+    ) {
+        // SYS-4 bounded patching changes only the admitted designated plan.
+        // Owner and maintained-relation plans remain in their existing M8
+        // snapshots; SYS-4 separately rejects any candidate that would alter
+        // their checked Core, authority, failure, or edge-contract material.
+        self.with_designated_snapshot(|designated| {
+            designated.replace_admitted_plans_for_checked_patch(&instance)
         });
         self.admitted = instance;
         self.record_patch_activation(patch_id);

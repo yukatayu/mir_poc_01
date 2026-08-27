@@ -1056,6 +1056,23 @@ impl M8DesignatedRuntime {
         }
     }
 
+    /// Replace an admitted designated plan at the checked SYS-4 patch
+    /// boundary.  Owner semantic state and authority live elsewhere in the
+    /// local runtime; the result/cache/receipt state below is derived from the
+    /// preceding evaluator plan and must not make a fixed-version publication
+    /// idempotent under a newly admitted expression.
+    pub(crate) fn replace_admitted_plans_for_checked_patch(
+        &mut self,
+        instance: &M8RuntimeInstance,
+    ) {
+        self.plans = instance.designated_execution_plans().to_vec();
+        self.receipt_state = M8ReceiptState::default();
+        self.result_store = M8DesignatedResultStore::default();
+        self.version_store = M8ResultVersionStore::default();
+        self.consumption_state = M8ConsumptionState::default();
+        self.presentation_interpolations.clear();
+    }
+
     pub fn authority_state(&self) -> &M8AuthorityState {
         self.semantic_snapshot.authority_state()
     }
