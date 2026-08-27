@@ -1482,8 +1482,15 @@ fn four_locus_st_admission_requires_test_visible_m8_partition_evidence_per_locus
     assert_eq!(
         s_partition
             .m8_trace_occurrence_count_for_operation("attack_s", M8LocalTraceKind::OwnerRead),
-        2,
-        "attack_s RMW must read hp and atk only from S's M8 partition"
+        1,
+        "attack_s RMW records one actual OwnerRead occurrence with a two-key read-set"
+    );
+    let s_read = s_partition
+        .single_m8_trace_occurrence_for_operation("attack_s", M8LocalTraceKind::OwnerRead);
+    assert_eq!(
+        s_read.observer_safe_read_key_refs(),
+        vec!["player[self].hp", "player[self].atk"],
+        "attack_s OwnerRead evidence must expose the exact observer-safe two-key read-set without raw payloads"
     );
     assert_eq!(
         s_partition
@@ -1505,8 +1512,15 @@ fn four_locus_st_admission_requires_test_visible_m8_partition_evidence_per_locus
     assert_eq!(
         t_partition
             .m8_trace_occurrence_count_for_operation("attack_t", M8LocalTraceKind::OwnerRead),
-        2,
-        "attack_t RMW must read hp and atk only from T's M8 partition"
+        1,
+        "attack_t RMW records one actual OwnerRead occurrence with a two-key read-set"
+    );
+    let t_read = t_partition
+        .single_m8_trace_occurrence_for_operation("attack_t", M8LocalTraceKind::OwnerRead);
+    assert_eq!(
+        t_read.observer_safe_read_key_refs(),
+        vec!["shield[self].hp", "shield[self].atk"],
+        "attack_t OwnerRead evidence must expose the exact observer-safe two-key read-set without raw payloads"
     );
     assert_eq!(
         t_partition
