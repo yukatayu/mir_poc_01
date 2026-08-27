@@ -3998,6 +3998,161 @@ fn cache_retry_projection_mismatch_rejects_before_m9_m8_or_payload_without_cache
 }
 
 #[test]
+fn release_m8_context_path_must_not_drop_or_cfg_gate_carrier_provenance() {
+    let sys4 = read_runtime_src("sys4_dispatch.rs");
+    let m8 = read_runtime_src("m8_runtime_local_cut.rs");
+    let compact_sys4 = normalize_source_for_boundary_scan(&sys4);
+    let compact_m8 = normalize_source_for_boundary_scan(&m8);
+
+    let mut violations: Vec<String> = Vec::new();
+    if compact_sys4.contains("let_=&context;") {
+        violations.push(
+            "release SYS-4→M8 paths discard carrier/source/Core/edge context with `let _ = &context;`"
+                .to_string(),
+        );
+    }
+    if compact_sys4.contains("drop(context);") {
+        violations.push(
+            "release SYS-4→M8 paths must not silence carrier/source/Core/edge context with `drop(context)`"
+                .to_string(),
+        );
+    }
+
+    for (signature_marker, label) in [
+        (
+            "fn enqueue_and_serve(",
+            "M8ExecutionBackend::enqueue_and_serve",
+        ),
+        (
+            "fn evaluate_designated(",
+            "M8ExecutionBackend::evaluate_designated",
+        ),
+        (
+            "fn consume_designated(",
+            "M8ExecutionBackend::consume_designated",
+        ),
+    ] {
+        let Some(body) = extract_balanced_fn_body(&sys4, signature_marker) else {
+            violations.push(format!(
+                "{label} body must exist for release-path boundary scan"
+            ));
+            continue;
+        };
+        let compact_body = normalize_source_for_boundary_scan(&body);
+        if body.contains("#[cfg(test)]") || body.contains("#[cfg(not(test))]") {
+            violations.push(format!(
+                "{label} must not route context-bearing M8 execution through cfg(test)/cfg(not(test)) branches"
+            ));
+        }
+        if compact_body.contains("let_=&context;") {
+            violations.push(format!(
+                "{label} must not discard carrier/source/Core/edge context with `let _ = &context;`"
+            ));
+        }
+        if compact_body.contains("drop(context);") {
+            violations.push(format!(
+                "{label} must not silence carrier/source/Core/edge context with `drop(context)`"
+            ));
+        }
+        if compact_body.contains(".latest_observation(")
+            || compact_body.contains(".latest_observation_any(")
+            || compact_body.contains("latest_trace_node_id(")
+        {
+            violations.push(format!(
+                "{label} must propagate the observation returned by its M8 context entrypoint instead of recovering a latest trace row"
+            ));
+        }
+    }
+
+    for (request_type, backend_method, label) in [
+        ("M8OwnerRequest", "enqueue_and_serve", "owner execution"),
+        (
+            "M8DesignatedEvaluationRequest",
+            "evaluate_designated",
+            "designated evaluation",
+        ),
+        (
+            "M8ConsumeRequest",
+            "consume_designated",
+            "designated consumption",
+        ),
+    ] {
+        let Some(entrypoint) = find_unconditional_m8_observed_context_entrypoint(&m8, request_type)
+        else {
+            violations.push(format!(
+                "M8 must expose an unconditional {label} function accepting {request_type} plus M8LocalDesignatedTraceContext and returning M8LocalTraceObservation"
+            ));
+            continue;
+        };
+        let backend_body = extract_balanced_fn_body(&sys4, &format!("fn {backend_method}("))
+            .expect("scoped backend method exists");
+        if !body_calls_context_entrypoint(&backend_body, &entrypoint) {
+            violations.push(format!(
+                "M8ExecutionBackend::{backend_method} must pass context to the selected M8-owned observation entrypoint {entrypoint}"
+            ));
+        }
+    }
+
+    assert!(
+        violations.is_empty(),
+        "release M8 carrier provenance context must be carried by non-test M8-owned owner/evaluator APIs:\n{}",
+        violations.join("\n")
+    );
+    assert!(
+        compact_m8.contains("M8LocalDesignatedTraceContext"),
+        "M8 remains the owner of the carrier provenance context type used for runtime trace rows"
+    );
+}
+
+#[test]
+fn post_dequeue_m8_outcome_ids_must_be_exact_not_latest_trace_lookup() {
+    let sys4 = read_runtime_src("sys4_dispatch.rs");
+    let compact_sys4 = normalize_source_for_boundary_scan(&sys4);
+
+    let mut violations = Vec::new();
+    if compact_sys4.contains("latest_trace_node_id(") {
+        violations.push(
+            "post-dequeue SYS-4 handling must not recover M8 node IDs through latest_trace_node_id after an envelope has been dequeued".to_string(),
+        );
+    }
+    let banned_latest_recovery = [
+        ".latest_observation(M8LocalTraceKind::OwnerOperationRejected)",
+        ".latest_observation(M8LocalTraceKind::DesignatedConsumptionRejected)",
+        ".latest_observation(M8LocalTraceKind::DesignatedEvaluationRejected)",
+    ];
+    for needle in banned_latest_recovery {
+        if compact_sys4.contains(needle) {
+            violations.push(format!(
+                "post-dequeue SYS-4 handling must use exact M8-owned typed outcome node IDs, not recover '{needle}' by latest-trace lookup after the envelope has been dequeued"
+            ));
+        }
+    }
+
+    assert!(
+        violations.is_empty(),
+        "post-dequeue SYS-4 must use exact M8-owned outcome observations instead of lookup recovery:\n{}",
+        violations.join("\n")
+    );
+}
+
+#[test]
+fn m8_runtime_local_cut_must_not_depend_on_sys4_dispatch_module() {
+    let m8 = read_runtime_src("m8_runtime_local_cut.rs");
+    let banned = [
+        "crate::sys4_dispatch",
+        "super::sys4_dispatch",
+        "sys4_dispatch::",
+    ];
+
+    for needle in banned {
+        assert!(
+            !m8.contains(needle),
+            "M8 runtime module must not depend on SYS-4 dispatch types or compatibility shims: found {needle}"
+        );
+    }
+}
+
+#[test]
 fn sys4_dispatch_module_has_no_shortcut_dependencies_when_present() {
     let sources = collect_sys4_dispatch_sources();
     if sources.is_empty() {
@@ -4068,4 +4223,152 @@ fn collect_sys4_dispatch_sources() -> Vec<PathBuf> {
         }
     }
     sources
+}
+
+fn read_runtime_src(name: &str) -> String {
+    let path = Path::new(env!("CARGO_MANIFEST_DIR")).join("src").join(name);
+    fs::read_to_string(&path).unwrap_or_else(|error| {
+        panic!(
+            "runtime source file must be readable for structural SYS-4 RED {}: {error}",
+            path.display()
+        )
+    })
+}
+
+fn normalize_source_for_boundary_scan(source: &str) -> String {
+    source.chars().filter(|ch| !ch.is_whitespace()).collect()
+}
+
+fn extract_balanced_fn_body(source: &str, signature_marker: &str) -> Option<String> {
+    let signature_start = source.find(signature_marker)?;
+    let open_brace = signature_start + source[signature_start..].find('{')?;
+    let mut depth = 0usize;
+    for (relative_index, ch) in source[open_brace..].char_indices() {
+        match ch {
+            '{' => depth += 1,
+            '}' => {
+                depth = depth.checked_sub(1)?;
+                if depth == 0 {
+                    let close_brace = open_brace + relative_index;
+                    return Some(source[open_brace..=close_brace].to_string());
+                }
+            }
+            _ => {}
+        }
+    }
+    None
+}
+
+fn find_unconditional_m8_observed_context_entrypoint(
+    source: &str,
+    request_type: &str,
+) -> Option<String> {
+    let mut search_from = 0usize;
+    while let Some(relative_fn) = source[search_from..].find("fn ") {
+        let fn_start = search_from + relative_fn;
+        let Some(open_relative) = source[fn_start..].find('{') else {
+            return None;
+        };
+        let signature = &source[fn_start..fn_start + open_relative];
+        if signature.contains(request_type)
+            && signature.contains("M8LocalDesignatedTraceContext")
+            && signature.contains("M8LocalTraceObservation")
+            && !has_attached_test_cfg_gate(source, fn_start)
+            && function_body_uses_context(source, fn_start)
+        {
+            let name_start = fn_start + "fn ".len();
+            let name_end = source[name_start..]
+                .find('(')
+                .map(|offset| name_start + offset)?;
+            return Some(source[name_start..name_end].trim().to_string());
+        }
+        search_from = fn_start + "fn ".len();
+    }
+    None
+}
+
+fn body_calls_context_entrypoint(body: &str, entrypoint: &str) -> bool {
+    let compact = normalize_source_for_boundary_scan(body);
+    let marker = format!(".{entrypoint}(");
+    let Some(call_start) = compact.find(&marker) else {
+        return false;
+    };
+    let open = call_start + marker.len() - 1;
+    let mut depth = 0usize;
+    for (relative, character) in compact[open..].char_indices() {
+        match character {
+            '(' => depth += 1,
+            ')' => {
+                let Some(next_depth) = depth.checked_sub(1) else {
+                    return false;
+                };
+                depth = next_depth;
+                if depth == 0 {
+                    return contains_identifier(&compact[open..=open + relative], "context");
+                }
+            }
+            _ => {}
+        }
+    }
+    false
+}
+
+fn contains_identifier(source: &str, identifier: &str) -> bool {
+    source.match_indices(identifier).any(|(start, _)| {
+        let before = source[..start].chars().next_back();
+        let after = source[start + identifier.len()..].chars().next();
+        !before.is_some_and(|character| character.is_ascii_alphanumeric() || character == '_')
+            && !after.is_some_and(|character| character.is_ascii_alphanumeric() || character == '_')
+    })
+}
+
+fn has_attached_test_cfg_gate(source: &str, item_start: usize) -> bool {
+    for line in source[..item_start].lines().rev() {
+        let trimmed = line.trim();
+        if trimmed.is_empty() {
+            continue;
+        }
+        if trimmed.starts_with("#[") {
+            if trimmed.contains("cfg(test)") || trimmed.contains("cfg(not(test))") {
+                return true;
+            }
+            continue;
+        }
+        break;
+    }
+    false
+}
+
+fn function_body_uses_context(source: &str, fn_start: usize) -> bool {
+    let Some(open_relative) = source[fn_start..].find('{') else {
+        return false;
+    };
+    let open_brace = fn_start + open_relative;
+    let Some(body) = extract_balanced_body_from_open_brace(source, open_brace) else {
+        return false;
+    };
+    let compact_body = normalize_source_for_boundary_scan(&body);
+    compact_body.contains("context")
+        && !compact_body.contains("#[cfg(test)]")
+        && !compact_body.contains("#[cfg(not(test))]")
+        && !compact_body.contains("let_=&context;")
+        && !compact_body.contains("drop(context);")
+}
+
+fn extract_balanced_body_from_open_brace(source: &str, open_brace: usize) -> Option<String> {
+    let mut depth = 0usize;
+    for (relative_index, ch) in source[open_brace..].char_indices() {
+        match ch {
+            '{' => depth += 1,
+            '}' => {
+                depth = depth.checked_sub(1)?;
+                if depth == 0 {
+                    let close_brace = open_brace + relative_index;
+                    return Some(source[open_brace..=close_brace].to_string());
+                }
+            }
+            _ => {}
+        }
+    }
+    None
 }
