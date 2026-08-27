@@ -1,5 +1,5 @@
 use std::{
-    collections::{BTreeSet, VecDeque},
+    collections::{BTreeMap, BTreeSet, VecDeque},
     fmt::Debug,
     fs,
     path::{Path, PathBuf},
@@ -22,11 +22,11 @@ use crate::{
         project_checked_core,
     },
     sys4_dispatch::{
-        EndpointCarrierRecord, ExternalAction, FabricProgram, FabricReceipt, FabricRouteKey,
-        FaultInjection, LocalFabric, MailboxEnvelope, RuntimeStoreRead, RuntimeStoreWrite,
-        RuntimeValue, SealedDeliveryBinding, SealedFabricAdmission, SourceAction,
-        Sys4DiagnosticKind, Sys4DispatchDiagnostics, Sys4InitialStateSeed, Sys4TraceEntry,
-        Sys4TraceKind,
+        CachedDelivery, EndpointCarrierRecord, ExternalAction, FabricProgram, FabricReceipt,
+        FabricRouteKey, FabricSemanticSnapshot, FabricTrace, FaultInjection, LocalFabric,
+        MailboxEnvelope, RuntimeStoreRead, RuntimeStoreWrite, RuntimeValue, SealedDeliveryBinding,
+        SealedFabricAdmission, SourceAction, Sys4DiagnosticKind, Sys4DispatchDiagnostics,
+        Sys4InitialStateSeed, Sys4TraceEntry, Sys4TraceKind,
     },
 };
 
@@ -485,6 +485,169 @@ fn publish_designated_action_with_tick(tick: &str) -> SourceAction {
 
 fn consume_designated_action() -> SourceAction {
     SourceAction::consume_designated_result("E.result")
+}
+
+fn designated_replay_log() -> Vec<SourceAction> {
+    let log = vec![
+        publish_designated_action(),
+        consume_designated_action(),
+        consume_designated_action(),
+    ];
+    assert_eq!(
+        log.iter()
+            .map(SourceAction::operation_id)
+            .collect::<Vec<_>>(),
+        vec!["E.result", "E.result", "E.result"]
+    );
+    for action in &log {
+        assert!(action.origin_locus_override().is_none());
+        assert!(action.authority_principal_override().is_none());
+        assert!(action.target_locus_override().is_none());
+        assert!(!action.can_carry_checked_core_identity());
+        assert!(!action.can_carry_authority_grant());
+        assert!(!action.can_carry_state_delta());
+        assert!(!action.can_carry_expected_result());
+    }
+    log
+}
+
+#[derive(Debug, Clone, PartialEq, Eq)]
+struct DesignatedReplayResult {
+    receipts: Vec<FabricReceipt>,
+    semantic_snapshot: FabricSemanticSnapshot,
+    trace: FabricTrace,
+    m8_actual_digest: String,
+    m8_backend_trace: M8LocalTrace,
+    m8_backend_latest_sequence: u64,
+    cache: BTreeMap<String, CachedDelivery>,
+    publication: Option<String>,
+    artifact_identity: CheckedProgramIdentity,
+}
+
+fn run_designated_replay(
+    profile: BackendProfile,
+    program: &FabricProgram,
+    admission: &SealedFabricAdmission,
+    log: &[SourceAction],
+) -> DesignatedReplayResult {
+    let mut fabric = boot_with_admission(program.clone(), admission.clone(), profile);
+    let receipts = log
+        .iter()
+        .cloned()
+        .map(|action| {
+            fabric
+                .dispatch_source_action(action)
+                .expect("replay action dispatches through generated SYS-4 fabric")
+        })
+        .collect::<Vec<_>>();
+    assert_eq!(receipts.len(), 3);
+    assert!(receipts.iter().all(FabricReceipt::is_observer_safe));
+    assert_eq!(receipts[0].operation_id(), "E.result");
+    assert_eq!(receipts[0].typed_value(), RuntimeValue::int(11));
+    assert_eq!(receipts[0].m8_publication_id(), receipts[0].delivery_id());
+    assert_eq!(receipts[1].operation_id(), "E.result");
+    assert_eq!(receipts[1].typed_value(), RuntimeValue::int(11));
+    assert_eq!(receipts[1].result_version(), Some(ResultVersion::new(1)));
+    assert!(receipts[1].performed_m8_semantic_consumption());
+    assert!(!receipts[1].returned_from_designated_cache_after_authority_revalidation());
+    assert_eq!(receipts[1].m8_publication_id(), receipts[0].delivery_id());
+    assert_eq!(receipts[2].operation_id(), "E.result");
+    assert_eq!(receipts[2].typed_value(), receipts[1].typed_value());
+    assert_eq!(receipts[2].result_version(), receipts[1].result_version());
+    assert_eq!(receipts[2].delivery_id(), receipts[1].delivery_id());
+    assert!(receipts[2].returned_from_designated_cache_after_authority_revalidation());
+    assert!(!receipts[2].performed_m8_semantic_consumption());
+    assert_eq!(
+        receipts[2].m8_publication_id(),
+        receipts[1].m8_publication_id()
+    );
+    assert_eq!(receipts[2].logical_tick_id(), receipts[1].logical_tick_id());
+
+    let semantic_identity = receipts[1].semantic_consumption_identity().to_string();
+    assert_eq!(
+        receipts[2].semantic_consumption_identity(),
+        semantic_identity
+    );
+    assert_eq!(
+        fabric
+            .m8_actual_trace()
+            .value_consumed_count(&semantic_identity, "C"),
+        1,
+        "replay performs exactly one semantic M8 consume"
+    );
+    assert_eq!(
+        fabric
+            .m8_actual_trace()
+            .designated_evaluation_count("E.result"),
+        1,
+        "replay performs exactly one designated evaluation"
+    );
+    assert_eq!(
+        m8_backend_trace_count(
+            &fabric,
+            M8LocalTraceKind::DesignatedValueConsumed,
+            &semantic_identity,
+            "C",
+        ),
+        1,
+        "M8 backend records exactly one semantic consume"
+    );
+    assert_eq!(
+        m8_backend_trace_count(
+            &fabric,
+            M8LocalTraceKind::DesignatedCacheValidated,
+            &semantic_identity,
+            "C",
+        ),
+        1,
+        "exact retry records exactly one non-consuming M8 cache validation"
+    );
+    assert!(
+        fabric
+            .m8_designated_publication_snapshot("E.result")
+            .is_some(),
+        "replay leaves a concrete M8 publication binding state"
+    );
+    let cache = fabric.designated_cache_snapshot();
+    let cache_entry = cache
+        .get(&semantic_identity)
+        .expect("replay installs one designated cache entry");
+    assert_eq!(
+        cache_entry.sealed_delivery_binding().m8_publication_id(),
+        receipts[1].m8_publication_id()
+    );
+    assert_eq!(
+        cache_entry.sealed_delivery_binding().logical_tick_id(),
+        receipts[1].logical_tick_id()
+    );
+    assert_eq!(
+        cache_entry.sealed_delivery_binding_digest(),
+        format!("{:?}", cache_entry.sealed_delivery_binding())
+    );
+    assert!(
+        fabric
+            .trace()
+            .for_designated_delivery("E.result", receipts[1].delivery_id())
+            .all_entries_observer_safe()
+    );
+    assert!(
+        fabric
+            .trace()
+            .for_designated_delivery("E.result", receipts[2].delivery_id())
+            .all_entries_observer_safe()
+    );
+
+    DesignatedReplayResult {
+        receipts,
+        semantic_snapshot: fabric.semantic_snapshot(),
+        trace: fabric.trace().clone(),
+        m8_actual_digest: fabric.m8_actual_trace().stable_digest(),
+        m8_backend_trace: fabric.m8_local_runtime_trace().clone(),
+        m8_backend_latest_sequence: m8_backend_latest_sequence(&fabric),
+        cache,
+        publication: fabric.m8_designated_publication_snapshot("E.result"),
+        artifact_identity: fabric.projected_artifact_identity().clone(),
+    }
 }
 
 fn stage_designated_publish_until_delivery_outbox(fabric: &mut LocalFabric) {
@@ -4190,6 +4353,65 @@ fn st_and_ow1_dispatch_same_projected_program_with_same_semantic_correspondence(
     assert_eq!(
         st.projected_artifact_identity(),
         ow1.projected_artifact_identity()
+    );
+}
+
+#[test]
+fn designated_generated_dispatch_replay_is_deterministic_and_st_ow1_correspondent() {
+    let checked = designated_checked();
+    let program = fabric_program(designated_projection(&checked));
+    let admission = sealed_admission(&checked, &program);
+    let log = designated_replay_log();
+
+    let st_first = run_designated_replay(BackendProfile::St, &program, &admission, &log);
+    let st_second = run_designated_replay(BackendProfile::St, &program, &admission, &log);
+    assert_eq!(
+        st_first, st_second,
+        "ST replay of the same source-action log must be deterministic across independent boots"
+    );
+
+    let ow1_first = run_designated_replay(BackendProfile::Ow1, &program, &admission, &log);
+    let ow1_second = run_designated_replay(BackendProfile::Ow1, &program, &admission, &log);
+    assert_eq!(
+        ow1_first, ow1_second,
+        "OW1 replay of the same source-action log must be deterministic across independent boots"
+    );
+
+    assert_eq!(
+        st_first.semantic_snapshot, ow1_first.semantic_snapshot,
+        "ST and OW1 designated replay must agree on semantic state"
+    );
+    assert_eq!(
+        st_first.trace, ow1_first.trace,
+        "ST and OW1 designated replay must agree on full observer-safe source→Core→artifact→trace correspondence"
+    );
+    assert_eq!(
+        st_first.receipts, ow1_first.receipts,
+        "ST and OW1 designated replay must return exact same receipts"
+    );
+    assert_eq!(
+        st_first.m8_actual_digest, ow1_first.m8_actual_digest,
+        "ST and OW1 designated replay must expose the same M8 semantic evidence"
+    );
+    assert_eq!(
+        st_first.m8_backend_trace, ow1_first.m8_backend_trace,
+        "ST and OW1 designated replay must expose the same M8-owned backend trace"
+    );
+    assert_eq!(
+        st_first.m8_backend_latest_sequence, ow1_first.m8_backend_latest_sequence,
+        "ST and OW1 designated replay must expose the same M8 backend sequence"
+    );
+    assert_eq!(
+        st_first.cache, ow1_first.cache,
+        "ST and OW1 designated replay must agree on cache binding state"
+    );
+    assert_eq!(
+        st_first.publication, ow1_first.publication,
+        "ST and OW1 designated replay must agree on publication binding state"
+    );
+    assert_eq!(
+        st_first.artifact_identity, ow1_first.artifact_identity,
+        "ST and OW1 designated replay must execute the same projected artifacts"
     );
 }
 
