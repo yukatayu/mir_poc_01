@@ -17,9 +17,9 @@ use crate::{
     m8_runtime_local_cut::{M8LocalTrace, M8LocalTraceKind, M8LocalTraceObservation},
     m9_auth_verification::M9RuntimeExecutionSeam,
     sys3_projection::{
-        BackendEligibility, BackendProfile, CommunicationEdge, CommunicationEdgeKind,
-        DeclaredLogicalTopology, GlobalProjectionResult, ProjectedOperationFragmentKind,
-        RuntimeAdmissionStatus, project_checked_core,
+        BackendEligibility, BackendIneligibilityReason, BackendProfile, CommunicationEdge,
+        CommunicationEdgeKind, DeclaredLogicalTopology, GlobalProjectionResult,
+        ProjectedOperationFragmentKind, RuntimeAdmissionStatus, project_checked_core,
     },
     sys4_dispatch::{
         CachedDelivery, CausalityGraph, EndpointCarrierRecord, ExternalAction, FabricProgram,
@@ -1136,6 +1136,42 @@ state player[id: Player] at T {
 }
 
 #[test]
+fn four_locus_two_owner_projection_and_bootstrap_reject_ow1_with_exact_reason() {
+    let checked = four_locus_checked();
+    let projection = four_locus_projection(&checked);
+    let expected_reason =
+        BackendIneligibilityReason::MultipleCombinedOwnerSourceOwnerLoci { count: 2 };
+    assert_eq!(
+        projection
+            .backend_requirements()
+            .eligibility(BackendProfile::Ow1),
+        BackendEligibility::Ineligible {
+            reason: expected_reason.clone(),
+        },
+        "four-locus two-owner/source-owner projection must not advertise OW1 eligibility"
+    );
+
+    let program = fabric_program(projection);
+    assert_eq!(
+        program.backend_eligibility(BackendProfile::Ow1),
+        BackendEligibility::Ineligible {
+            reason: expected_reason.clone(),
+        },
+        "FabricProgram must preserve SYS-3's exact OW1 ineligibility reason"
+    );
+    let admission = sealed_four_locus_admission(&checked, &program);
+    let diagnostics = assert_sys4_diag(
+        LocalFabric::bootstrap(program, admission, BackendProfile::Ow1),
+        Sys4DiagnosticKind::BackendIneligible,
+    );
+    assert_eq!(
+        diagnostics.backend_ineligibility_reason(),
+        Some(&expected_reason),
+        "bootstrap rejection must expose the same typed SYS-3 reason instead of a generic BackendIneligible"
+    );
+}
+
+#[test]
 fn four_locus_st_attack_s_and_attack_t_mutate_only_their_authoritative_owner_state() {
     let checked = four_locus_checked();
     let projection = four_locus_projection(&checked);
@@ -1326,6 +1362,33 @@ fn four_locus_st_admission_requires_test_visible_m8_partition_evidence_per_locus
             .is_empty(),
         "V is admitted as a viewer locus but owns no authoritative state in this fixture"
     );
+    for locus in ["A", "S", "T", "V"] {
+        let partition = boot_evidence
+            .partition(locus)
+            .unwrap_or_else(|| panic!("{locus} partition exists"));
+        assert!(
+            partition.state_inventory().is_derived_from_m8_session(),
+            "{locus} state inventory must be derived from the real M8 local session, not copied from LocusLocalStore"
+        );
+        assert!(
+            partition
+                .publication_inventory()
+                .is_derived_from_m8_session(),
+            "{locus} publication inventory must be derived from the real M8 local session"
+        );
+        assert_eq!(
+            partition.state_inventory().key_refs(),
+            partition.authoritative_state_key_refs(),
+            "{locus} partition state-key evidence must match the observer-safe M8 session inventory"
+        );
+        assert!(
+            partition
+                .publication_inventory()
+                .published_value_refs()
+                .is_empty(),
+            "four-locus owner-only fixture has no designated publications at boot"
+        );
+    }
 
     staged_four_locus_owner_attack(&mut fabric, &projection, "attack_s", "S", "player", 100, 10);
     let after_s = fabric.m8_partition_evidence();
@@ -1385,6 +1448,83 @@ fn four_locus_st_admission_requires_test_visible_m8_partition_evidence_per_locus
             .expect("S partition exists")
             .state_digest(),
         "S partition digest must not change after T-owned mutation"
+    );
+
+    let s_partition = after_t.partition("S").expect("S partition exists");
+    let t_partition = after_t.partition("T").expect("T partition exists");
+    let a_partition = after_t.partition("A").expect("A partition exists");
+    let v_partition = after_t.partition("V").expect("V partition exists");
+    assert!(
+        a_partition
+            .m8_trace_occurrences_for_operation("attack_s")
+            .is_empty()
+            && a_partition
+                .m8_trace_occurrences_for_operation("attack_t")
+                .is_empty(),
+        "A invocation locus must not receive owner M8 operation occurrences"
+    );
+    assert!(
+        v_partition
+            .m8_trace_occurrences_for_operation("attack_s")
+            .is_empty()
+            && v_partition
+                .m8_trace_occurrences_for_operation("attack_t")
+                .is_empty(),
+        "V viewer locus must not receive owner M8 operation occurrences"
+    );
+
+    assert_eq!(
+        s_partition
+            .m8_trace_occurrence_count_for_operation("attack_s", M8LocalTraceKind::OwnerEnqueued),
+        1,
+        "attack_s request must be enqueued only in S's M8 partition"
+    );
+    assert_eq!(
+        s_partition
+            .m8_trace_occurrence_count_for_operation("attack_s", M8LocalTraceKind::OwnerRead),
+        2,
+        "attack_s RMW must read hp and atk only from S's M8 partition"
+    );
+    assert_eq!(
+        s_partition
+            .m8_trace_occurrence_count_for_operation("attack_s", M8LocalTraceKind::OwnerWrite),
+        1,
+        "attack_s RMW must write only S's M8 partition"
+    );
+    assert!(
+        !t_partition.has_m8_trace_occurrences_for_operation("attack_s"),
+        "attack_s must not appear in T's M8 partition"
+    );
+
+    assert_eq!(
+        t_partition
+            .m8_trace_occurrence_count_for_operation("attack_t", M8LocalTraceKind::OwnerEnqueued),
+        1,
+        "attack_t request must be enqueued only in T's M8 partition"
+    );
+    assert_eq!(
+        t_partition
+            .m8_trace_occurrence_count_for_operation("attack_t", M8LocalTraceKind::OwnerRead),
+        2,
+        "attack_t RMW must read hp and atk only from T's M8 partition"
+    );
+    assert_eq!(
+        t_partition
+            .m8_trace_occurrence_count_for_operation("attack_t", M8LocalTraceKind::OwnerWrite),
+        1,
+        "attack_t RMW must write only T's M8 partition"
+    );
+    assert!(
+        !s_partition.has_m8_trace_occurrences_for_operation("attack_t"),
+        "attack_t must not appear in S's M8 partition"
+    );
+    assert!(
+        after_t.all_m8_trace_occurrence_ids_are_unique(),
+        "fabric-qualified M8 occurrence IDs from all partitions must be globally unique"
+    );
+    assert!(
+        after_t.all_m8_trace_occurrences_resolve_in(fabric.m8_actual_trace(), fabric.causality()),
+        "every partition occurrence must resolve by exact fabric-qualified ID/kind in ActualM8Trace and CausalityGraph"
     );
 
     let sys4 = read_runtime_src("sys4_dispatch.rs");
@@ -2846,6 +2986,181 @@ fn staged_designated_path_requires_source_release_receipt_before_evaluation_and_
 }
 
 #[test]
+fn designated_st_delivery_imports_e_publication_into_c_partition_before_single_consume() {
+    let checked = designated_checked();
+    let projection = designated_projection(&checked);
+    let delivery_edge = projection
+        .communication_plan()
+        .single_edge(
+            "E.result",
+            CommunicationEdgeKind::DesignatedResultDelivery,
+            "E",
+            "C",
+        )
+        .expect("projection has result delivery edge");
+    let program = fabric_program(projection);
+    let mut fabric = boot(&checked, program, BackendProfile::St);
+
+    stage_designated_publish_until_delivery_outbox(&mut fabric);
+    let delivery = fabric
+        .locus_runtime("E")
+        .expect("E exists")
+        .outgoing_mailbox()
+        .pending_envelopes()
+        .single();
+    assert_eq!(delivery.edge_ref(), delivery_edge.edge_ref());
+    assert_eq!(
+        delivery.carrier_contract(),
+        delivery_edge.carrier_contract()
+    );
+    assert_eq!(
+        binding_m8_publication_id(delivery.immutable_delivery_binding()),
+        delivery.m8_publication_id(),
+        "generated delivery carrier must seal the exact M8 publication identity produced at E"
+    );
+
+    let before_c = fabric.m8_partition_evidence();
+    let e_publication = before_c
+        .partition("E")
+        .expect("E partition exists")
+        .publication_inventory()
+        .publication(delivery.m8_publication_id())
+        .expect("E partition exposes the actual M8 publication carried by the delivery");
+    assert_eq!(
+        e_publication.m8_publication_id(),
+        delivery.m8_publication_id()
+    );
+    assert_eq!(e_publication.node_id(), delivery.m8_evaluation_node_id());
+    assert_eq!(
+        e_publication.kind(),
+        M8LocalTraceKind::DesignatedValuePublished
+    );
+    assert!(
+        !before_c
+            .partition("C")
+            .expect("C partition exists")
+            .publication_inventory()
+            .contains_publication_id(delivery.m8_publication_id()),
+        "C must not have the evaluator publication before C dequeues the E→C delivery"
+    );
+    assert!(
+        before_c
+            .partition("C")
+            .expect("C partition exists")
+            .m8_trace_occurrences_by_kind(M8LocalTraceKind::DesignatedValuePublished)
+            .is_empty(),
+        "consumer C must not evaluate the designated expression locally"
+    );
+
+    fabric
+        .step_transport("E", "C", delivery.envelope_id())
+        .expect("delivery crosses E→C endpoint");
+    let consumer_step = fabric
+        .step_locus("C")
+        .expect("C imports the E publication, then consumes exactly once");
+    let c_dequeue = consumer_step.locus_dequeue_occurrence_id().to_string();
+    let consume_node = consumer_step.m8_consume_node_id().to_string();
+    let after_c = fabric.m8_partition_evidence();
+    let c_partition = after_c.partition("C").expect("C partition exists");
+    assert!(
+        c_partition
+            .publication_inventory()
+            .contains_publication_id(delivery.m8_publication_id()),
+        "C publication inventory must show import of the exact E publication before consume"
+    );
+    let imports =
+        c_partition.m8_trace_occurrences_by_kind(M8LocalTraceKind::DesignatedPublicationImported);
+    assert_eq!(
+        imports.len(),
+        1,
+        "C must record one explicit M8-owned import before semantic consumption"
+    );
+    let imported = imports.single();
+    assert_eq!(imported.fabric_qualified_id(), imported.node_id());
+    assert_eq!(imported.m8_publication_id(), delivery.m8_publication_id());
+    assert_eq!(imported.envelope_id(), delivery.envelope_id());
+    assert_eq!(imported.operation_id(), "E.result");
+    assert_eq!(imported.edge_ref(), delivery.edge_ref());
+    assert_eq!(imported.evaluator_locus(), "E");
+    assert_eq!(imported.consumer_locus(), "C");
+    assert_eq!(
+        fabric
+            .m8_actual_trace()
+            .node(imported.fabric_qualified_id())
+            .kind(),
+        M8LocalTraceKind::DesignatedPublicationImported,
+        "ActualM8Trace must resolve C's import node as an M8-owned import occurrence"
+    );
+    assert!(
+        fabric
+            .causality()
+            .predecessor_ids(imported.fabric_qualified_id())
+            .contains(&delivery.m8_evaluation_node_id().to_string()),
+        "C import must be causally after the exact E publication carried by the delivery"
+    );
+    assert!(
+        fabric
+            .causality()
+            .predecessor_ids(imported.fabric_qualified_id())
+            .contains(&c_dequeue),
+        "C import must be causally after C dequeues the delivery carrier"
+    );
+    let consumes =
+        c_partition.m8_trace_occurrences_by_kind(M8LocalTraceKind::DesignatedValueConsumed);
+    assert_eq!(consumes.len(), 1);
+    let consume = consumes.single();
+    assert_eq!(consume.fabric_qualified_id(), consume_node);
+    assert_eq!(consume.m8_publication_id(), delivery.m8_publication_id());
+    assert!(
+        fabric
+            .causality()
+            .predecessor_ids(consume.fabric_qualified_id())
+            .contains(&imported.fabric_qualified_id().to_string()),
+        "C consume must be causally after the explicit C import"
+    );
+    assert!(
+        c_partition
+            .m8_trace_occurrences_by_kind(M8LocalTraceKind::DesignatedValuePublished)
+            .is_empty(),
+        "C must not re-evaluate/publish the evaluator expression"
+    );
+    assert!(
+        c_partition
+            .m8_trace_occurrences_by_kind(M8LocalTraceKind::DesignatedEvaluationIdempotent)
+            .is_empty(),
+        "C must not synthesize an evaluator idempotence occurrence"
+    );
+
+    let retry = fabric
+        .dispatch_source_action(consume_designated_action())
+        .expect("exact duplicate/cache retry succeeds by revalidation");
+    assert!(retry.returned_from_designated_cache_after_authority_revalidation());
+    let after_retry = fabric.m8_partition_evidence();
+    let c_after_retry = after_retry.partition("C").expect("C partition exists");
+    assert_eq!(
+        c_after_retry
+            .m8_trace_occurrences_by_kind(M8LocalTraceKind::DesignatedPublicationImported)
+            .len(),
+        1,
+        "exact retry must not import the same publication again"
+    );
+    assert_eq!(
+        c_after_retry
+            .m8_trace_occurrences_by_kind(M8LocalTraceKind::DesignatedValueConsumed)
+            .len(),
+        1,
+        "exact retry must not perform a second M8 semantic consume"
+    );
+    assert_eq!(
+        c_after_retry
+            .m8_trace_occurrences_by_kind(M8LocalTraceKind::DesignatedCacheValidated)
+            .len(),
+        1,
+        "exact retry records one non-consuming M8 cache validation"
+    );
+}
+
+#[test]
 fn ow1_designated_source_owner_read_is_m8_worker_owned_and_causally_acks_reply() {
     let checked = designated_checked();
     let projection = designated_projection(&checked);
@@ -3907,6 +4222,17 @@ fn designated_delivery_mismatched_m8_publication_identity_rejects_before_consume
     let original_identity = delivery.semantic_identity().to_string();
     let before = fabric.semantic_snapshot();
     let cache_before = fabric.designated_cache_snapshot();
+    let partition_before = fabric.m8_partition_evidence();
+    let c_imports_before = partition_before
+        .partition("C")
+        .expect("C partition exists")
+        .m8_trace_occurrences_by_kind(M8LocalTraceKind::DesignatedPublicationImported)
+        .len();
+    let c_consumes_before = partition_before
+        .partition("C")
+        .expect("C partition exists")
+        .m8_trace_occurrences_by_kind(M8LocalTraceKind::DesignatedValueConsumed)
+        .len();
     let consumed_before = fabric
         .m8_actual_trace()
         .value_consumed_count(&original_identity, "C");
@@ -3936,6 +4262,36 @@ fn designated_delivery_mismatched_m8_publication_identity_rejects_before_consume
     assert!(!rejected.exposes_raw_payload());
     assert!(fabric.semantic_snapshot().same_state(&before));
     assert_eq!(fabric.designated_cache_snapshot(), cache_before);
+    let partition_after = fabric.m8_partition_evidence();
+    assert_eq!(
+        partition_after
+            .partition("C")
+            .expect("C partition exists")
+            .publication_inventory(),
+        partition_before
+            .partition("C")
+            .expect("C partition exists")
+            .publication_inventory(),
+        "publication-identity corruption must not import or mutate C's M8 publication inventory"
+    );
+    assert_eq!(
+        partition_after
+            .partition("C")
+            .expect("C partition exists")
+            .m8_trace_occurrences_by_kind(M8LocalTraceKind::DesignatedPublicationImported)
+            .len(),
+        c_imports_before,
+        "rejected corrupt delivery must not create a C import occurrence"
+    );
+    assert_eq!(
+        partition_after
+            .partition("C")
+            .expect("C partition exists")
+            .m8_trace_occurrences_by_kind(M8LocalTraceKind::DesignatedValueConsumed)
+            .len(),
+        c_consumes_before,
+        "rejected corrupt delivery must not create a C consume occurrence"
+    );
     assert_eq!(
         fabric
             .m8_actual_trace()
