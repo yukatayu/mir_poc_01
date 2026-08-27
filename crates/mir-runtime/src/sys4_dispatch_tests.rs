@@ -7722,6 +7722,158 @@ fn cache_retry_projection_mismatch_rejects_before_m9_m8_or_payload_without_cache
 }
 
 #[test]
+fn ow1_observer_snapshot_publication_absent_then_recovered_without_fabricating_state() {
+    let checked = designated_checked();
+    let program = fabric_program(designated_projection(&checked));
+    let mut fabric = boot(&checked, program, BackendProfile::Ow1);
+
+    assert_eq!(
+        fabric.m8_designated_publication_snapshot("E.result"),
+        None,
+        "genuine absent publication is represented as None before any accepted evaluator publish"
+    );
+
+    stage_designated_publish_until_delivery_outbox(&mut fabric);
+    let recovered = fabric
+        .m8_designated_publication_snapshot("E.result")
+        .expect("after accepted publish, observer snapshot recovers the worker-owned publication");
+    assert!(
+        recovered.contains("E.result"),
+        "publication snapshot comes from the worker-owned M8 publication record, not expected JSON"
+    );
+    assert_eq!(
+        fabric
+            .m8_actual_trace()
+            .designated_evaluation_count("E.result"),
+        1,
+        "recovering a publication snapshot must not fabricate or replay evaluator work"
+    );
+}
+
+#[test]
+fn ow1_observer_snapshot_failures_require_typed_once_injection_and_observer_diagnostic() {
+    let sys2 = read_runtime_src("sys2_execution_backend.rs");
+    let sys4 = read_runtime_src("sys4_dispatch.rs");
+    let compact_sys2 = normalize_source_for_boundary_scan(&sys2);
+    let compact_sys4 = normalize_source_for_boundary_scan(&sys4);
+
+    let mut violations = Vec::new();
+    for expected in [
+        "FailNextLocalTraceSnapshotOnce",
+        "FailNextDesignatedPublicationSnapshotOnce",
+        "FailNextObserverSafeSessionOnce",
+        "fail_next_local_trace_snapshot_once",
+        "fail_next_designated_publication_snapshot_once",
+        "fail_next_observer_safe_session_once",
+    ] {
+        if !compact_sys2.contains(expected) && !compact_sys4.contains(expected) {
+            violations.push(format!(
+                "OW1 backend test support must expose narrow one-shot observer snapshot failure hook `{expected}`"
+            ));
+        }
+    }
+    if !compact_sys2.contains("ObserverSnapshotUnavailable")
+        && !compact_sys2.contains("ObserverUnavailable")
+    {
+        violations.push(
+            "OW1 worker failure must carry a typed observer-unavailable cause instead of relying on disconnect/panic or None".to_string(),
+        );
+    }
+    if !compact_sys4.contains("ObserverSnapshotUnavailable")
+        && !compact_sys4.contains("ObserverUnavailable")
+    {
+        violations.push(
+            "SYS-4 diagnostics must expose observer-unavailable separately from genuine absent publication/result".to_string(),
+        );
+    }
+    if !compact_sys4.contains("observer_snapshot_failure")
+        && !compact_sys4.contains("ObserverSnapshotFailure")
+        && !compact_sys4.contains("observer_snapshot_diagnostic")
+    {
+        violations.push(
+            "post-commit observer snapshot failures must be recorded as observer diagnostics/warnings, not converted into semantic operation failure or hidden stale state".to_string(),
+        );
+    }
+
+    assert!(
+        violations.is_empty(),
+        "OW1 observer snapshot failure contract is incomplete:\n{}",
+        violations.join("\n")
+    );
+}
+
+#[test]
+fn ow1_observer_snapshot_paths_must_not_collapse_worker_failure_to_option_or_stale_cache() {
+    let sys4 = read_runtime_src("sys4_dispatch.rs");
+    let compact_sys4 = normalize_source_for_boundary_scan(&sys4);
+
+    let mut violations = Vec::new();
+    for (marker, label, banned_option_signature) in [
+        (
+            "fn local_trace_snapshot(",
+            "M8ExecutionBackend::local_trace_snapshot",
+            "fnlocal_trace_snapshot(&self,locus:&str)->Option<",
+        ),
+        (
+            "fn designated_publication_snapshot(",
+            "M8ExecutionBackend::designated_publication_snapshot",
+            "fndesignated_publication_snapshot(&self,value_name:&str)->Option<",
+        ),
+        (
+            "fn observer_safe_session(",
+            "M8ExecutionBackend::observer_safe_session",
+            "fnobserver_safe_session(&self,locus:&str)->Option<",
+        ),
+    ] {
+        let Some(body) = extract_balanced_fn_body(&sys4, marker) else {
+            violations.push(format!(
+                "{label} body must exist for observer-failure boundary scan"
+            ));
+            continue;
+        };
+        let compact_body = normalize_source_for_boundary_scan(&body);
+        if compact_sys4.contains(banned_option_signature) {
+            violations.push(format!(
+                "{label} must return a typed Result<Option<_>, observer-unavailable>, not Option<_>"
+            ));
+        }
+        if compact_body.contains(".ok()") {
+            violations.push(format!(
+                "{label} must not collapse OW1 worker observer failure into None with .ok()"
+            ));
+        }
+        if compact_body.contains("map(|trace|") || compact_body.contains("flatten()") {
+            violations.push(format!(
+                "{label} must preserve the worker Result boundary so failure is distinguishable from absence"
+            ));
+        }
+    }
+
+    let refresh_body = extract_balanced_fn_body(&sys4, "fn refresh_m8_local_runtime_trace(")
+        .expect("refresh_m8_local_runtime_trace body exists");
+    let compact_refresh = normalize_source_for_boundary_scan(&refresh_body);
+    if compact_refresh.contains(
+        "letSome((session_id,trace))=self.backend.local_trace_snapshot(locus)else{return;}",
+    ) || compact_refresh.contains("else{return;}")
+    {
+        violations.push(
+            "refresh_m8_local_runtime_trace must not silently keep serving a stale cached trace when an OW1 observer snapshot fails".to_string(),
+        );
+    }
+    if compact_sys4.contains("m8_designated_publication_snapshot(&self,value_name:&str)->Option<") {
+        violations.push(
+            "LocalFabric designated publication observer API must distinguish worker observer failure from genuine absence".to_string(),
+        );
+    }
+
+    assert!(
+        violations.is_empty(),
+        "OW1 observer snapshot paths collapse typed failure into absence or stale cached observer state:\n{}",
+        violations.join("\n")
+    );
+}
+
+#[test]
 fn release_m8_context_path_must_not_drop_or_cfg_gate_carrier_provenance() {
     let sys4 = read_runtime_src("sys4_dispatch.rs");
     let m8 = read_runtime_src("m8_runtime_local_cut.rs");
