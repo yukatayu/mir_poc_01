@@ -37,7 +37,10 @@ use crate::{
         M9SealedFailureInspection, M9SealedTransitionInspection,
         M9SourceReleaseValidationInspection,
     },
-    sys2_execution_backend::{Ow1ContextualM8Execution, Ow1WorkerBackend, Ow1WorkerFailure},
+    sys2_execution_backend::{
+        Ow1ContextualM8Execution, Ow1ObserverDesignatedPublication, Ow1WorkerBackend,
+        Ow1WorkerFailure,
+    },
     sys3_projection::{
         BackendEligibility, BackendIneligibilityReason, BackendProfile, CarrierContract,
         CommunicationEdge, CommunicationEdgeKind, GlobalProjectionResult, LocusProgram,
@@ -84,6 +87,10 @@ pub(crate) enum Sys4DiagnosticKind {
     UnknownRetargetLocus,
     BackendIneligible,
     M8ExecutionRejected,
+    /// A live OW1 worker failed to provide a clone-only observer snapshot.
+    /// This never rewrites the semantic result of an already committed M8
+    /// operation and is distinct from a genuinely absent observation.
+    ObserverSnapshotUnavailable,
 }
 
 #[derive(Debug, Clone, PartialEq, Eq)]
@@ -128,7 +135,41 @@ struct Sys4DiagnosticContext {
     retarget_fault: Option<Box<RetargetFaultInspection>>,
     cache_projection_mismatch: Option<Box<CacheProjectionMismatchInspection>>,
     backend_ineligibility_reason: Option<BackendIneligibilityReason>,
+    observer_snapshot_failure: Option<Box<ObserverSnapshotFailure>>,
 }
+
+/// Observer-only availability state.  It deliberately contains neither a
+/// payload nor M9 authority material, and is not a transport failure.
+#[derive(Debug, Clone, Copy, PartialEq, Eq, PartialOrd, Ord)]
+pub(crate) enum ObserverSnapshotChannel {
+    LocalTrace,
+    DesignatedPublication,
+    #[cfg(test)]
+    ObserverSafeSession,
+}
+
+#[derive(Debug, Clone, PartialEq, Eq)]
+pub(crate) struct ObserverSnapshotFailure {
+    session_id: String,
+    channel: ObserverSnapshotChannel,
+    diagnostic: Sys4DiagnosticKind,
+}
+
+impl ObserverSnapshotFailure {
+    pub(crate) fn session_id(&self) -> &str {
+        &self.session_id
+    }
+
+    pub(crate) const fn channel(&self) -> ObserverSnapshotChannel {
+        self.channel
+    }
+
+    pub(crate) const fn diagnostic(&self) -> Sys4DiagnosticKind {
+        self.diagnostic
+    }
+}
+
+const DESIGNATED_PUBLICATION_OBSERVER_SESSION: &str = "observer:designated-publication";
 
 /// Observer-safe evidence that a retarget policy was applied to one exact
 /// projected carrier.  It carries locus names only, never payload or grants.
@@ -1832,6 +1873,13 @@ impl CausalityGraph {
         }
     }
 
+    /// Install the complete predecessor set for one occurrence.  Snapshot
+    /// recovery uses replacement rather than `record`'s monotone union so a
+    /// provisional worker trace cannot retain stale M8 edges.
+    fn replace(&mut self, occurrence_id: impl Into<String>, predecessors: Vec<String>) {
+        self.predecessors.insert(occurrence_id.into(), predecessors);
+    }
+
     pub(crate) fn contains_occurrence(&self, occurrence_id: &str) -> bool {
         self.predecessors.contains_key(occurrence_id)
     }
@@ -2009,6 +2057,38 @@ impl ActualM8Trace {
             node_id,
             kind: kind.into(),
             request_id,
+            semantic_identity,
+            consumer_locus,
+            predecessors,
+        });
+    }
+
+    /// Reconcile a row learned from a complete M8 session snapshot.  Existing
+    /// endpoint/request annotations remain authoritative, while the M8
+    /// predecessor projection is replaced exactly by the recovered causal
+    /// set.
+    fn reconcile_snapshot_node(
+        &mut self,
+        node_id: String,
+        kind: String,
+        semantic_identity: Option<String>,
+        consumer_locus: Option<String>,
+        predecessors: Vec<String>,
+    ) {
+        if let Some(existing) = self.nodes.iter_mut().find(|node| node.node_id == node_id) {
+            existing.predecessors = predecessors;
+            if existing.semantic_identity.is_none() {
+                existing.semantic_identity = semantic_identity;
+            }
+            if existing.consumer_locus.is_none() {
+                existing.consumer_locus = consumer_locus;
+            }
+            return;
+        }
+        self.nodes.push(ActualM8TraceNode {
+            node_id,
+            kind,
+            request_id: None,
             semantic_identity,
             consumer_locus,
             predecessors,
@@ -2805,6 +2885,8 @@ pub(crate) struct Sys4LocalCut {
     m8_raw_node_loci: BTreeMap<String, BTreeMap<String, String>>,
     m8_locus_trace_sequences: BTreeMap<String, u64>,
     m8_locus_sessions: BTreeMap<String, String>,
+    observer_snapshot_failures:
+        BTreeMap<(String, ObserverSnapshotChannel), ObserverSnapshotFailure>,
     causality: CausalityGraph,
     next_endpoint_occurrence: u64,
     next_request: u64,
@@ -3877,15 +3959,18 @@ impl M8ExecutionBackend {
         }
     }
 
-    fn local_trace_snapshot(&self, locus: &str) -> Option<(String, M8LocalTrace)> {
+    fn local_trace_snapshot(
+        &self,
+        locus: &str,
+    ) -> Result<Option<(String, M8LocalTrace)>, Sys4DiagnosticKind> {
         match self {
-            Self::St(sessions) => sessions
+            Self::St(sessions) => Ok(sessions
                 .get(locus)
-                .map(|runtime| (locus.to_string(), runtime.trace())),
-            Self::Ow1(worker) => worker
-                .local_trace_snapshot()
-                .ok()
-                .map(|trace| ("ow1".to_string(), trace)),
+                .map(|runtime| (locus.to_string(), runtime.trace()))),
+            Self::Ow1(worker) => match worker.local_trace_snapshot() {
+                Ok(trace) => Ok(Some(("ow1".to_string(), trace))),
+                Err(failure) => Err(map_worker_failure(failure)),
+            },
         }
     }
 
@@ -3943,19 +4028,22 @@ impl M8ExecutionBackend {
         }
     }
 
-    fn designated_publication_snapshot(&self, value_name: &str) -> Option<String> {
+    fn designated_publication_snapshot(
+        &self,
+        value_name: &str,
+    ) -> Result<Option<Ow1ObserverDesignatedPublication>, Sys4DiagnosticKind> {
         match self {
-            Self::St(sessions) => sessions.values().find_map(|runtime| {
+            Self::St(sessions) => Ok(sessions.values().find_map(|runtime| {
                 runtime
                     .designated_result_store()
                     .published_values(value_name)
                     .first()
-                    .map(|value| format!("{value:?}"))
-            }),
-            Self::Ow1(worker) => worker
-                .designated_publication_snapshot(value_name)
-                .ok()
-                .flatten(),
+                    .map(|value| Ow1ObserverDesignatedPublication::from_published(value))
+            })),
+            Self::Ow1(worker) => match worker.designated_publication_snapshot(value_name) {
+                Ok(publication) => Ok(publication),
+                Err(failure) => Err(map_worker_failure(failure)),
+            },
         }
     }
 
@@ -4020,19 +4108,55 @@ impl M8ExecutionBackend {
     }
 
     #[cfg(test)]
-    fn observer_safe_session(&self, locus: &str) -> Option<M8LocalSessionObserver> {
+    fn observer_safe_session(
+        &self,
+        locus: &str,
+    ) -> Result<Option<M8LocalSessionObserver>, Sys4DiagnosticKind> {
         match self {
-            Self::St(sessions) => sessions
+            Self::St(sessions) => Ok(sessions
                 .get(locus)
-                .map(|runtime| runtime.observer_safe_session()),
+                .map(|runtime| runtime.observer_safe_session())),
             // OW1 has exactly one worker-owned M8 session.  Its redacted
             // observer snapshot remains available only at that semantic
             // worker locus; other fabric loci never acquire a surrogate
             // partition from the physical worker.
             Self::Ow1(worker) if worker.evidence().target_owner().as_str() == locus => {
-                worker.observer_safe_session().ok()
+                match worker.observer_safe_session() {
+                    Ok(observer) => Ok(Some(observer)),
+                    Err(failure) => Err(map_worker_failure(failure)),
+                }
             }
-            Self::Ow1(_) => None,
+            Self::Ow1(_) => Ok(None),
+        }
+    }
+
+    #[cfg(test)]
+    fn fail_next_local_trace_snapshot_once(&mut self) -> Result<(), Sys4DiagnosticKind> {
+        match self {
+            Self::St(_) => Err(Sys4DiagnosticKind::BackendIneligible),
+            Self::Ow1(worker) => worker
+                .fail_next_local_trace_snapshot_once()
+                .map_err(map_worker_failure),
+        }
+    }
+
+    #[cfg(test)]
+    fn fail_next_designated_publication_snapshot_once(&mut self) -> Result<(), Sys4DiagnosticKind> {
+        match self {
+            Self::St(_) => Err(Sys4DiagnosticKind::BackendIneligible),
+            Self::Ow1(worker) => worker
+                .fail_next_designated_publication_snapshot_once()
+                .map_err(map_worker_failure),
+        }
+    }
+
+    #[cfg(test)]
+    fn fail_next_observer_safe_session_once(&mut self) -> Result<(), Sys4DiagnosticKind> {
+        match self {
+            Self::St(_) => Err(Sys4DiagnosticKind::BackendIneligible),
+            Self::Ow1(worker) => worker
+                .fail_next_observer_safe_session_once()
+                .map_err(map_worker_failure),
         }
     }
 
@@ -4165,6 +4289,24 @@ pub(crate) struct M8BackendTestSupport<'a> {
 
 #[cfg(test)]
 impl M8BackendTestSupport<'_> {
+    pub(crate) fn fail_next_local_trace_snapshot_once(&mut self) -> Sys4Result<()> {
+        self.backend
+            .fail_next_local_trace_snapshot_once()
+            .map_err(Sys4DispatchDiagnostics::one)
+    }
+
+    pub(crate) fn fail_next_designated_publication_snapshot_once(&mut self) -> Sys4Result<()> {
+        self.backend
+            .fail_next_designated_publication_snapshot_once()
+            .map_err(Sys4DispatchDiagnostics::one)
+    }
+
+    pub(crate) fn fail_next_observer_safe_session_once(&mut self) -> Sys4Result<()> {
+        self.backend
+            .fail_next_observer_safe_session_once()
+            .map_err(Sys4DispatchDiagnostics::one)
+    }
+
     pub(crate) fn reject_next_designated_consume_after_validation(
         &mut self,
         envelope_id: &str,
@@ -4635,6 +4777,9 @@ impl M8RuntimeOccurrences {
 
 fn map_worker_failure(failure: Ow1WorkerFailure) -> Sys4DiagnosticKind {
     match failure {
+        Ow1WorkerFailure::ObserverSnapshotUnavailable => {
+            Sys4DiagnosticKind::ObserverSnapshotUnavailable
+        }
         Ow1WorkerFailure::Designated(diagnostics) => {
             let _ = diagnostics.primary();
             Sys4DiagnosticKind::M8ExecutionRejected
@@ -4874,6 +5019,8 @@ pub(crate) struct LocalFabric {
     m8_raw_node_loci: BTreeMap<String, BTreeMap<String, String>>,
     m8_locus_trace_sequences: BTreeMap<String, u64>,
     m8_locus_sessions: BTreeMap<String, String>,
+    observer_snapshot_failures:
+        BTreeMap<(String, ObserverSnapshotChannel), ObserverSnapshotFailure>,
     causality: CausalityGraph,
     next_endpoint_occurrence: u64,
     route_faults: BTreeSet<String>,
@@ -5030,6 +5177,7 @@ impl LocalFabric {
             m8_raw_node_loci: BTreeMap::new(),
             m8_locus_trace_sequences: BTreeMap::new(),
             m8_locus_sessions: BTreeMap::new(),
+            observer_snapshot_failures: BTreeMap::new(),
             causality: CausalityGraph::default(),
             next_endpoint_occurrence: 0,
             route_faults: BTreeSet::new(),
@@ -5142,6 +5290,7 @@ impl LocalFabric {
             m8_raw_node_loci: self.m8_raw_node_loci.clone(),
             m8_locus_trace_sequences: self.m8_locus_trace_sequences.clone(),
             m8_locus_sessions: self.m8_locus_sessions.clone(),
+            observer_snapshot_failures: self.observer_snapshot_failures.clone(),
             causality: self.causality.clone(),
             next_endpoint_occurrence: self.next_endpoint_occurrence,
             next_request: self.next_request,
@@ -5199,6 +5348,7 @@ impl LocalFabric {
         fabric.m8_raw_node_loci = cut.m8_raw_node_loci.clone();
         fabric.m8_locus_trace_sequences = cut.m8_locus_trace_sequences.clone();
         fabric.m8_locus_sessions = cut.m8_locus_sessions.clone();
+        fabric.observer_snapshot_failures = cut.observer_snapshot_failures.clone();
         fabric.causality = cut.causality.clone();
         fabric.next_endpoint_occurrence = cut.next_endpoint_occurrence;
         fabric.next_request = cut.next_request;
@@ -5226,12 +5376,14 @@ impl LocalFabric {
     pub(crate) fn trace(&self) -> &FabricTrace {
         &self.trace
     }
-    pub(crate) fn m8_local_trace(&self) -> &FabricM8Trace {
-        &self.m8_trace
+    pub(crate) fn m8_local_trace(&self) -> Sys4Result<&FabricM8Trace> {
+        self.require_current_m8_trace_observer()?;
+        Ok(&self.m8_trace)
     }
 
-    pub(crate) fn m8_actual_trace(&self) -> &ActualM8Trace {
-        &self.actual_m8_trace
+    pub(crate) fn m8_actual_trace(&self) -> Sys4Result<&ActualM8Trace> {
+        self.require_current_m8_trace_observer()?;
+        Ok(&self.actual_m8_trace)
     }
 
     #[cfg(test)]
@@ -5241,93 +5393,258 @@ impl LocalFabric {
         }
     }
 
-    pub(crate) fn m8_local_runtime_trace(&self) -> &M8LocalTrace {
-        &self.m8_local_runtime_trace
+    /// Typed observer status. A failed worker snapshot does not invalidate an
+    /// already committed semantic operation, but it does make aggregate
+    /// devtools evidence fail closed until a fresh snapshot is incorporated.
+    pub(crate) fn observer_snapshot_failures(&self) -> Vec<ObserverSnapshotFailure> {
+        self.observer_snapshot_failures.values().cloned().collect()
     }
 
-    /// Test-only partition evidence is assembled exclusively from the M8
-    /// sessions, rather than from SYS-4's observer projection.  This makes a
-    /// multi-owner ST admission mechanically distinguishable from a facade
-    /// layered over a single shared M8 runtime.
+    pub(crate) fn m8_local_runtime_trace(&self) -> Sys4Result<&M8LocalTrace> {
+        if let Some(failure) = self
+            .observer_snapshot_failures
+            .values()
+            .find(|failure| failure.channel() == ObserverSnapshotChannel::LocalTrace)
+        {
+            return Err(self.observer_snapshot_diagnostic(failure));
+        }
+        Ok(&self.m8_local_runtime_trace)
+    }
+
+    /// Request a fresh trace snapshot for one semantic locus.  This is the
+    /// only recovery path that clears its local-trace unavailable status.
+    pub(crate) fn recover_m8_local_trace_observer(&mut self, locus: &str) -> Sys4Result<()> {
+        if !self.is_bound_m8_observer_locus(locus) {
+            return Err(Sys4DispatchDiagnostics::one(
+                Sys4DiagnosticKind::WrongTargetLocus,
+            ));
+        }
+        self.refresh_m8_local_runtime_trace(locus);
+        let session_id = self.observer_session_id(locus);
+        if let Some(failure) = self
+            .observer_snapshot_failures
+            .get(&(session_id, ObserverSnapshotChannel::LocalTrace))
+        {
+            return Err(self.observer_snapshot_diagnostic(failure));
+        }
+        Ok(())
+    }
+
+    /// Typed observer-safe session probe.  This is intentionally separate
+    /// from semantic dispatch: a failed redacted-session read reports only
+    /// observer unavailability and cannot replay or roll back M8 work.
     #[cfg(test)]
-    pub(crate) fn m8_partition_evidence(&self) -> M8RuntimePartitionEvidence {
-        let partitions = self
-            .program
-            .locus_names()
+    pub(crate) fn try_m8_partition_evidence(&mut self) -> Sys4Result<M8RuntimePartitionEvidence> {
+        // A worker snapshot failure invalidates every aggregate view derived
+        // from that worker trace.  Do not join a fresh session observer to
+        // stale qualified/actual rows; recovery rebuilds the full session
+        // projection before this view becomes available again.
+        self.require_current_m8_trace_observer()?;
+        let mut observer_sessions = Vec::new();
+        for locus in self.program.locus_names() {
+            let session_id = self.observer_session_id(&locus);
+            match self.backend.observer_safe_session(&locus) {
+                Ok(Some(observer)) => {
+                    self.clear_observer_snapshot_failure(
+                        &session_id,
+                        ObserverSnapshotChannel::ObserverSafeSession,
+                    );
+                    observer_sessions.push((locus, observer));
+                }
+                Ok(None) => {}
+                Err(diagnostic) => {
+                    let failure = ObserverSnapshotFailure {
+                        session_id: session_id.clone(),
+                        channel: ObserverSnapshotChannel::ObserverSafeSession,
+                        diagnostic,
+                    };
+                    self.observer_snapshot_failures.insert(
+                        (session_id, ObserverSnapshotChannel::ObserverSafeSession),
+                        failure.clone(),
+                    );
+                    return Err(self.observer_snapshot_diagnostic(&failure));
+                }
+            }
+        }
+        let partitions = observer_sessions
             .into_iter()
-            .filter_map(|locus| {
-                self.backend.observer_safe_session(&locus).map(|observer| {
-                    let session_id = self
-                        .m8_locus_sessions
-                        .get(&locus)
-                        .cloned()
-                        .unwrap_or_else(|| locus.clone());
-                    let fabric_node_ids = self
-                        .m8_qualified_trace_nodes
-                        .get(&session_id)
-                        .cloned()
-                        .unwrap_or_default();
-                    let request_ids = self
-                        .actual_m8_trace
-                        .nodes
-                        .iter()
-                        .filter_map(|node| {
-                            node.request_id
-                                .as_ref()
-                                .map(|request_id| (node.node_id.clone(), request_id.clone()))
-                        })
-                        .collect();
-                    let dependencies = self
-                        .m8_qualified_trace_dependencies
-                        .get(&session_id)
-                        .cloned()
-                        .unwrap_or_default()
-                        .into_iter()
-                        .filter_map(|(raw, predecessors)| {
-                            fabric_node_ids
-                                .get(&raw)
-                                .cloned()
-                                .map(|node| (node, predecessors))
-                        })
-                        .collect();
-                    (
-                        locus.clone(),
-                        M8RuntimePartition::from_m8_session(
-                            &locus,
-                            observer,
-                            &fabric_node_ids,
-                            &request_ids,
-                            &dependencies,
-                        ),
-                    )
-                })
+            .map(|(locus, observer)| {
+                let session_id = self
+                    .m8_locus_sessions
+                    .get(&locus)
+                    .cloned()
+                    .unwrap_or_else(|| locus.clone());
+                let fabric_node_ids = self
+                    .m8_qualified_trace_nodes
+                    .get(&session_id)
+                    .cloned()
+                    .unwrap_or_default();
+                let request_ids = self
+                    .actual_m8_trace
+                    .nodes
+                    .iter()
+                    .filter_map(|node| {
+                        node.request_id
+                            .as_ref()
+                            .map(|request_id| (node.node_id.clone(), request_id.clone()))
+                    })
+                    .collect();
+                let dependencies = self
+                    .m8_qualified_trace_dependencies
+                    .get(&session_id)
+                    .cloned()
+                    .unwrap_or_default()
+                    .into_iter()
+                    .filter_map(|(raw, predecessors)| {
+                        fabric_node_ids
+                            .get(&raw)
+                            .cloned()
+                            .map(|node| (node, predecessors))
+                    })
+                    .collect();
+                (
+                    locus.clone(),
+                    M8RuntimePartition::from_m8_session(
+                        &locus,
+                        observer,
+                        &fabric_node_ids,
+                        &request_ids,
+                        &dependencies,
+                    ),
+                )
             })
             .collect();
-        M8RuntimePartitionEvidence { partitions }
+        Ok(M8RuntimePartitionEvidence { partitions })
+    }
+
+    fn observer_session_id(&self, locus: &str) -> String {
+        if self.backend.is_ow1() {
+            "ow1".to_string()
+        } else {
+            locus.to_string()
+        }
+    }
+
+    fn require_current_m8_trace_observer(&self) -> Sys4Result<()> {
+        if let Some(failure) = self
+            .observer_snapshot_failures
+            .values()
+            .find(|failure| failure.channel() == ObserverSnapshotChannel::LocalTrace)
+        {
+            return Err(self.observer_snapshot_diagnostic(failure));
+        }
+        Ok(())
+    }
+
+    /// A recovery operation names a semantic session owner, not merely a
+    /// locus whose work happened to run on an OW1 worker.  The latter would
+    /// let callers re-key the one worker session through an arbitrary E/C
+    /// locus after an observer failure.
+    fn is_bound_m8_observer_locus(&self, locus: &str) -> bool {
+        match &self.backend {
+            M8ExecutionBackend::St(sessions) => sessions.contains_key(locus),
+            M8ExecutionBackend::Ow1(worker) => worker.evidence().target_owner().as_str() == locus,
+        }
+    }
+
+    fn record_observer_snapshot_failure(
+        &mut self,
+        session_id: String,
+        channel: ObserverSnapshotChannel,
+        diagnostic: Sys4DiagnosticKind,
+    ) {
+        let failure = ObserverSnapshotFailure {
+            session_id: session_id.clone(),
+            channel,
+            diagnostic,
+        };
+        self.observer_snapshot_failures
+            .insert((session_id, channel), failure);
+    }
+
+    fn clear_observer_snapshot_failure(
+        &mut self,
+        session_id: &str,
+        channel: ObserverSnapshotChannel,
+    ) {
+        self.observer_snapshot_failures
+            .remove(&(session_id.to_string(), channel));
+    }
+
+    fn observer_snapshot_diagnostic(
+        &self,
+        failure: &ObserverSnapshotFailure,
+    ) -> Sys4DispatchDiagnostics {
+        let mut diagnostics = Sys4DispatchDiagnostics::one(failure.diagnostic());
+        diagnostics.context.observer_snapshot_failure = Some(Box::new(failure.clone()));
+        diagnostics
     }
 
     fn refresh_m8_local_runtime_trace(&mut self, locus: &str) {
-        let Some((session_id, trace)) = self.backend.local_trace_snapshot(locus) else {
-            return;
+        let observer_session_id = self.observer_session_id(locus);
+        let (session_id, trace) = match self.backend.local_trace_snapshot(locus) {
+            Ok(Some(snapshot)) => snapshot,
+            // A caller asked for a locus with no session. This is a genuine
+            // absence, not an unavailable OW1 observer, and cannot clear a
+            // prior worker-snapshot failure.
+            Ok(None) => return,
+            Err(diagnostic) => {
+                self.record_observer_snapshot_failure(
+                    observer_session_id,
+                    ObserverSnapshotChannel::LocalTrace,
+                    diagnostic,
+                );
+                return;
+            }
         };
-        let start = self
-            .m8_trace_offsets
-            .get(&session_id)
-            .copied()
-            .unwrap_or_default();
         let observations = trace.observations();
-        let missing_raw_node_ids: Vec<_> = observations
-            .iter()
-            .skip(start)
-            .filter(|observation| {
-                !self
-                    .m8_qualified_trace_nodes
-                    .get(&session_id)
-                    .is_some_and(|known| known.contains_key(observation.node_id()))
-            })
-            .map(|observation| observation.node_id().to_string())
-            .collect();
-        for raw_node_id in missing_raw_node_ids {
+        if observations.is_empty() {
+            self.m8_locus_sessions
+                .insert(locus.to_string(), session_id.clone());
+            self.m8_trace_offsets.insert(session_id, 0);
+            self.clear_observer_snapshot_failure(
+                &observer_session_id,
+                ObserverSnapshotChannel::LocalTrace,
+            );
+            return;
+        }
+        let recovering = self.observer_snapshot_failures.contains_key(&(
+            observer_session_id.clone(),
+            ObserverSnapshotChannel::LocalTrace,
+        ));
+        // A successful worker response is an exact session snapshot.  Always
+        // reconcile all of its rows, not only a delta: a prior unavailable
+        // snapshot may have left provisional qualified identities and endpoint
+        // associations that must be replaced before any aggregate observer
+        // view is made available again.
+        let mut missing = Vec::new();
+        let mut semantic_loci = BTreeMap::new();
+        let prior_raw_node_loci = self
+            .m8_raw_node_loci
+            .get(&session_id)
+            .cloned()
+            .unwrap_or_default();
+        for observation in &observations {
+            let semantic_locus = prior_raw_node_loci
+                .get(observation.node_id())
+                .cloned()
+                .unwrap_or_else(|| {
+                    if self.backend.is_ow1() {
+                        Self::semantic_locus_for_m8_observation(locus, observation)
+                    } else {
+                        locus.to_string()
+                    }
+                });
+            if !self
+                .m8_qualified_trace_nodes
+                .get(&session_id)
+                .is_some_and(|known| known.contains_key(observation.node_id()))
+            {
+                missing.push(observation.node_id().to_string());
+            }
+            semantic_loci.insert(observation.node_id().to_string(), semantic_locus);
+        }
+        for raw_node_id in missing {
             let sequence = self
                 .m8_locus_trace_sequences
                 .entry(locus.to_string())
@@ -5341,94 +5658,155 @@ impl LocalFabric {
         }
         self.m8_locus_sessions
             .insert(locus.to_string(), session_id.clone());
-        {
-            let raw_node_loci = self.m8_raw_node_loci.entry(session_id.clone()).or_default();
-            for observation in observations.iter().skip(start) {
-                raw_node_loci
-                    .entry(observation.node_id().to_string())
-                    .or_insert_with(|| {
-                        if self.backend.is_ow1() {
-                            Self::semantic_locus_for_m8_observation(locus, observation)
-                        } else {
-                            locus.to_string()
-                        }
-                    });
-            }
-        }
-        let new_dependency_projection: BTreeMap<_, _> = {
-            let raw_node_loci = self
-                .m8_raw_node_loci
-                .get(&session_id)
-                .expect("refreshed M8 session retains each raw node's semantic locus");
-            let known_nodes = self
-                .m8_qualified_trace_nodes
-                .get(&session_id)
-                .expect("refreshed M8 session retains fabric node registry");
-            observations
-                .iter()
-                .skip(start)
-                .map(|observation| {
-                    let semantic_locus = raw_node_loci
-                        .get(observation.node_id())
-                        .expect("new M8 row has a semantic locus");
-                    let dependencies = observation
-                        .predecessor_ids()
-                        .iter()
-                        .filter(|raw| raw_node_loci.get(*raw) == Some(semantic_locus))
-                        .filter_map(|raw| known_nodes.get(raw).cloned())
-                        .collect();
-                    (observation.node_id().to_string(), dependencies)
-                })
-                .collect()
+        self.m8_raw_node_loci
+            .insert(session_id.clone(), semantic_loci);
+
+        let Some(known_nodes) = self.m8_qualified_trace_nodes.get(&session_id).cloned() else {
+            self.record_observer_snapshot_failure(
+                observer_session_id,
+                ObserverSnapshotChannel::LocalTrace,
+                Sys4DiagnosticKind::ObserverSnapshotUnavailable,
+            );
+            return;
         };
-        self.m8_qualified_trace_dependencies
-            .entry(session_id.clone())
-            .or_default()
-            .extend(new_dependency_projection);
-        let known_nodes = self
-            .m8_qualified_trace_nodes
-            .get(&session_id)
-            .expect("refreshed M8 session retains fabric node registry");
-        let dependency_projection = self
+        let Some(raw_node_loci) = self.m8_raw_node_loci.get(&session_id).cloned() else {
+            self.record_observer_snapshot_failure(
+                observer_session_id,
+                ObserverSnapshotChannel::LocalTrace,
+                Sys4DiagnosticKind::ObserverSnapshotUnavailable,
+            );
+            return;
+        };
+        let dependency_projection: BTreeMap<_, _> = observations
+            .iter()
+            .map(|observation| {
+                let dependencies = raw_node_loci
+                    .get(observation.node_id())
+                    .map(|semantic_locus| {
+                        observation
+                            .predecessor_ids()
+                            .iter()
+                            .filter(|raw| raw_node_loci.get(*raw) == Some(semantic_locus))
+                            .filter_map(|raw| known_nodes.get(raw).cloned())
+                            .collect()
+                    })
+                    .unwrap_or_default();
+                (observation.node_id().to_string(), dependencies)
+            })
+            .collect();
+        if dependency_projection.len() != observations.len()
+            || observations
+                .iter()
+                .any(|observation| !known_nodes.contains_key(observation.node_id()))
+        {
+            self.record_observer_snapshot_failure(
+                observer_session_id,
+                ObserverSnapshotChannel::LocalTrace,
+                Sys4DiagnosticKind::ObserverSnapshotUnavailable,
+            );
+            return;
+        }
+        let prior_dependency_projection = self
             .m8_qualified_trace_dependencies
             .get(&session_id)
-            .expect("refreshed M8 session retains dependency projection");
-        self.m8_local_runtime_trace.append_fabric_qualified_delta(
-            &trace,
-            start,
-            known_nodes,
-            dependency_projection,
-        );
-        for observation in observations.into_iter().skip(start) {
-            let qualified = self.fabric_qualified_m8_observation(&session_id, &observation);
-            let node_id = qualified.node_id().to_string();
-            if !self.causality.contains_occurrence(&node_id) {
-                self.causality
-                    .record(node_id.clone(), qualified.predecessor_ids().to_vec());
+            .cloned()
+            .unwrap_or_default();
+        self.m8_qualified_trace_dependencies
+            .insert(session_id.clone(), dependency_projection.clone());
+        self.m8_local_runtime_trace
+            .reconcile_fabric_qualified_session(&trace, &known_nodes, &dependency_projection);
+
+        let owner_request_nodes: BTreeMap<_, _> = observations
+            .iter()
+            .filter(|observation| observation.kind() == M8LocalTraceKind::OwnerEnqueued)
+            .filter_map(|observation| {
+                observation.occurrence_id.clone().and_then(|occurrence| {
+                    known_nodes
+                        .get(observation.node_id())
+                        .cloned()
+                        .map(|node_id| (occurrence, node_id))
+                })
+            })
+            .collect();
+        for observation in observations {
+            let Some(node_id) = known_nodes.get(observation.node_id()).cloned() else {
+                self.record_observer_snapshot_failure(
+                    observer_session_id,
+                    ObserverSnapshotChannel::LocalTrace,
+                    Sys4DiagnosticKind::ObserverSnapshotUnavailable,
+                );
+                return;
+            };
+            let recovered_owner_request = recovering
+                .then(|| {
+                    (observation.kind() == M8LocalTraceKind::OwnerWrite)
+                        .then(|| {
+                            observation
+                                .occurrence_id
+                                .as_ref()
+                                .and_then(|occurrence| owner_request_nodes.get(occurrence).cloned())
+                        })
+                        .flatten()
+                })
+                .flatten();
+            let external_predecessors: Vec<_> = self
+                .causality
+                .predecessor_ids(&node_id)
+                .into_iter()
+                // Replace only M8's own prior projected edges. Explicit
+                // generated endpoint edges may name a qualified M8 node in
+                // the same physical OW1 session (E publication → C import),
+                // and are semantic SYS-4 causality rather than worker FIFO.
+                .filter(|predecessor| {
+                    !prior_dependency_projection
+                        .get(observation.node_id())
+                        .is_some_and(|prior| prior.contains(predecessor))
+                })
+                .filter(|predecessor| {
+                    recovered_owner_request
+                        .as_ref()
+                        .is_none_or(|request| predecessor != request)
+                })
+                .collect();
+            let mut predecessors = dependency_projection
+                .get(observation.node_id())
+                .cloned()
+                .unwrap_or_default();
+            for predecessor in external_predecessors {
+                if !predecessors.contains(&predecessor) {
+                    predecessors.push(predecessor);
+                }
             }
-            // Published designated values are identified by their declared
-            // Core operation.  The context semantic identity instead names
-            // the later consumer cache key, so it must not overwrite the
-            // evaluator-side publication identity in the actual M8 trace.
-            let semantic_identity = match qualified.kind() {
+            self.causality
+                .replace(node_id.clone(), predecessors.clone());
+            let semantic_identity = match observation.kind() {
                 M8LocalTraceKind::DesignatedValuePublished
                 | M8LocalTraceKind::DesignatedEvaluationIdempotent => {
-                    Some(qualified.operation_id().to_string())
+                    Some(observation.operation_id().to_string())
                 }
-                _ => (!qualified.semantic_identity().is_empty())
-                    .then(|| qualified.semantic_identity().to_string()),
+                _ => (!observation.semantic_identity().is_empty())
+                    .then(|| observation.semantic_identity().to_string()),
             };
-            self.actual_m8_trace.append(
+            self.actual_m8_trace.reconcile_snapshot_node(
                 node_id,
-                format!("{:?}", qualified.kind()),
-                None,
+                format!("{:?}", observation.kind()),
                 semantic_identity,
-                (!qualified.consumer_locus().is_empty())
-                    .then(|| qualified.consumer_locus().to_string()),
-                qualified.predecessor_ids().to_vec(),
+                (!observation.consumer_locus().is_empty())
+                    .then(|| observation.consumer_locus().to_string()),
+                predecessors,
             );
         }
-        self.m8_trace_offsets.insert(session_id, trace.len());
+        if recovering {
+            self.reconcile_m8_consumption_trace();
+        }
+        self.m8_trace_offsets
+            .insert(session_id.clone(), trace.len());
+        // Clear only after the exact worker/session trace snapshot was
+        // received and incorporated into the aggregate observer projection.
+        self.clear_observer_snapshot_failure(
+            &observer_session_id,
+            ObserverSnapshotChannel::LocalTrace,
+        );
     }
 
     /// A sole OW1 worker can execute M8 rows for more than one semantic
@@ -5441,6 +5819,13 @@ impl LocalFabric {
         observation: &M8LocalTraceObservation,
     ) -> String {
         match observation.kind() {
+            M8LocalTraceKind::DesignatedAuthorityValidated => {
+                if !observation.evaluator_locus().is_empty() {
+                    observation.evaluator_locus().to_string()
+                } else {
+                    default_locus.to_string()
+                }
+            }
             M8LocalTraceKind::DesignatedPublicationImported
             | M8LocalTraceKind::DesignatedConsumerAuthorityValidated
             | M8LocalTraceKind::DesignatedValueConsumed
@@ -5507,11 +5892,90 @@ impl LocalFabric {
         observation.fabric_rekeyed(node_id, dependencies)
     }
 
+    /// Register an M8 node returned directly by a typed backend outcome when
+    /// a later clone-only trace snapshot is unavailable.  The node identity
+    /// remains M8-owned; this only assigns the usual fabric qualification so
+    /// the already-committed semantic operation can finish without replay.
+    /// A later successful snapshot replaces the provisional dependency view
+    /// with the complete worker trace before aggregate observation is served.
+    fn ensure_fabric_qualified_m8_node_for_locus(&mut self, locus: &str, raw_node_id: &str) {
+        let session_id = self.observer_session_id(locus);
+        self.m8_locus_sessions
+            .entry(locus.to_string())
+            .or_insert_with(|| session_id.clone());
+        if self
+            .m8_qualified_trace_nodes
+            .get(&session_id)
+            .is_some_and(|nodes| nodes.contains_key(raw_node_id))
+        {
+            return;
+        }
+        let sequence = self
+            .m8_locus_trace_sequences
+            .entry(locus.to_string())
+            .or_default();
+        let qualified = format!("sys4-m8:{locus}:m8-fabric-trace-{sequence:020}");
+        *sequence += 1;
+        self.m8_qualified_trace_nodes
+            .entry(session_id.clone())
+            .or_default()
+            .insert(raw_node_id.to_string(), qualified);
+        self.m8_raw_node_loci
+            .entry(session_id.clone())
+            .or_default()
+            .insert(raw_node_id.to_string(), locus.to_string());
+        self.m8_qualified_trace_dependencies
+            .entry(session_id)
+            .or_default()
+            .entry(raw_node_id.to_string())
+            .or_default();
+    }
+
+    fn ensure_fabric_qualified_m8_observation_for_locus(
+        &mut self,
+        locus: &str,
+        observation: &M8LocalTraceObservation,
+    ) {
+        self.ensure_fabric_qualified_m8_node_for_locus(locus, observation.node_id());
+        let session_id = self.observer_session_id(locus);
+        let semantic_locus = if self.backend.is_ow1() {
+            Self::semantic_locus_for_m8_observation(locus, observation)
+        } else {
+            locus.to_string()
+        };
+        self.m8_raw_node_loci
+            .entry(session_id.clone())
+            .or_default()
+            .insert(observation.node_id().to_string(), semantic_locus.clone());
+        let predecessors = observation
+            .predecessor_ids()
+            .iter()
+            .filter(|raw| {
+                self.m8_raw_node_loci
+                    .get(&session_id)
+                    .and_then(|loci| loci.get(*raw))
+                    == Some(&semantic_locus)
+            })
+            .filter_map(|raw| {
+                self.m8_qualified_trace_nodes
+                    .get(&session_id)
+                    .and_then(|nodes| nodes.get(raw))
+                    .cloned()
+            })
+            .collect();
+        self.m8_qualified_trace_dependencies
+            .entry(session_id)
+            .or_default()
+            .entry(observation.node_id().to_string())
+            .or_insert(predecessors);
+    }
+
     fn fabric_qualified_m8_observation_for_locus(
-        &self,
+        &mut self,
         locus: &str,
         observation: &M8LocalTraceObservation,
     ) -> M8LocalTraceObservation {
+        self.ensure_fabric_qualified_m8_observation_for_locus(locus, observation);
         let session_id = self
             .m8_locus_sessions
             .get(locus)
@@ -5548,7 +6012,8 @@ impl LocalFabric {
         }
     }
 
-    fn fabric_qualified_m8_node_for_locus(&self, locus: &str, raw_node_id: &str) -> String {
+    fn fabric_qualified_m8_node_for_locus(&mut self, locus: &str, raw_node_id: &str) -> String {
+        self.ensure_fabric_qualified_m8_node_for_locus(locus, raw_node_id);
         let session_id = self
             .m8_locus_sessions
             .get(locus)
@@ -5565,7 +6030,7 @@ impl LocalFabric {
     /// fabric-qualified occurrence, never a second raw-id view of the same
     /// M8-owned event.
     fn fabric_qualified_m8_failure_for_locus(
-        &self,
+        &mut self,
         locus: &str,
         failure: M8BackendFailure,
     ) -> M8BackendFailure {
@@ -5575,6 +6040,24 @@ impl LocalFabric {
                 Box::new(self.fabric_qualified_m8_observation_for_locus(locus, &observation))
             }),
         }
+    }
+
+    fn reconcile_m8_consumption_trace(&mut self) {
+        let mut counts = BTreeMap::new();
+        for observation in self.m8_local_runtime_trace.observations() {
+            if observation.kind() == M8LocalTraceKind::DesignatedValueConsumed
+                && !observation.semantic_identity().is_empty()
+                && !observation.consumer_locus().is_empty()
+            {
+                *counts
+                    .entry((
+                        observation.semantic_identity().to_string(),
+                        observation.consumer_locus().to_string(),
+                    ))
+                    .or_default() += 1;
+            }
+        }
+        self.m8_trace.consumption_counts = counts;
     }
 
     pub(crate) fn causality(&self) -> &CausalityGraph {
@@ -5598,9 +6081,42 @@ impl LocalFabric {
         self.cache.clone()
     }
 
-    pub(crate) fn m8_designated_publication_snapshot(&self, value_name: &str) -> Option<String> {
-        self.backend.designated_publication_snapshot(value_name)
+    /// Typed worker-backed designated-publication observer. `Ok(None)` is a
+    /// genuine absence; `Err(ObserverSnapshotUnavailable)` means no observer
+    /// result is available and must never be silently read as absence.
+    pub(crate) fn try_m8_designated_publication_snapshot(
+        &mut self,
+        value_name: &str,
+    ) -> Sys4Result<Option<Ow1ObserverDesignatedPublication>> {
+        match self.backend.designated_publication_snapshot(value_name) {
+            Ok(publication) => {
+                debug_assert!(publication.as_ref().is_none_or(|publication| {
+                    publication.is_observer_safe() && publication.value_name() == value_name
+                }));
+                self.clear_observer_snapshot_failure(
+                    DESIGNATED_PUBLICATION_OBSERVER_SESSION,
+                    ObserverSnapshotChannel::DesignatedPublication,
+                );
+                Ok(publication)
+            }
+            Err(diagnostic) => {
+                let failure = ObserverSnapshotFailure {
+                    session_id: DESIGNATED_PUBLICATION_OBSERVER_SESSION.to_string(),
+                    channel: ObserverSnapshotChannel::DesignatedPublication,
+                    diagnostic,
+                };
+                self.observer_snapshot_failures.insert(
+                    (
+                        DESIGNATED_PUBLICATION_OBSERVER_SESSION.to_string(),
+                        ObserverSnapshotChannel::DesignatedPublication,
+                    ),
+                    failure.clone(),
+                );
+                Err(self.observer_snapshot_diagnostic(&failure))
+            }
+        }
     }
+
     pub(crate) fn designated_consumption_state(&self) -> &DesignatedConsumptionState {
         &self.consumption_state
     }
@@ -6568,6 +7084,10 @@ impl LocalFabric {
                 let serve_node_id = serve_observation.node_id().to_string();
                 self.causality
                     .record(request_node_id.clone(), vec![dequeue_occurrence.clone()]);
+                // The generated owner request → serve relation is explicit
+                // fabric causality in addition to M8's owner-local read
+                // chain. A later full recovery keeps it for ordinary live
+                // execution, while replacing stale worker-only edges.
                 self.causality
                     .record(serve_node_id.clone(), vec![request_node_id.clone()]);
                 self.actual_m8_trace.append(
@@ -7055,17 +7575,17 @@ impl LocalFabric {
                     input_frontier: delivery_edge
                         .carrier_contract()
                         .input_frontier()
-                        .map(|value| format!("{value:?}")),
+                        .map(|value| format!("{:?}", value)),
                     result_frontier: delivery_edge
                         .carrier_contract()
                         .result_frontier()
-                        .map(|value| format!("{value:?}")),
+                        .map(|value| format!("{:?}", value)),
                     result_version: delivery_edge.carrier_contract().result_version(),
                     consumer_locus: consumer_core.consumer_locus().to_string(),
                     policy_stamp: delivery_edge
                         .carrier_contract()
                         .policy_stamp()
-                        .map(|value| format!("{value:?}")),
+                        .map(|value| format!("{:?}", value)),
                     visibility_policy: delivery_edge.carrier_contract().visibility_policy().clone(),
                     redaction_policy: format!(
                         "{:?}",
@@ -8105,17 +8625,17 @@ fn projection_delivery_binding(
         input_frontier: edge
             .carrier_contract()
             .input_frontier()
-            .map(|value| format!("{value:?}")),
+            .map(|value| format!("{:?}", value)),
         result_frontier: edge
             .carrier_contract()
             .result_frontier()
-            .map(|value| format!("{value:?}")),
+            .map(|value| format!("{:?}", value)),
         result_version: edge.carrier_contract().result_version(),
         consumer_locus: edge.target_locus().to_string(),
         policy_stamp: edge
             .carrier_contract()
             .policy_stamp()
-            .map(|value| format!("{value:?}")),
+            .map(|value| format!("{:?}", value)),
         visibility_policy: edge.carrier_contract().visibility_policy().clone(),
         redaction_policy: format!("{:?}", edge.carrier_contract().visibility_policy()),
         m8_visibility_label: observed.m8_visibility_label.clone(),

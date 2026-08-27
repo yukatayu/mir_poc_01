@@ -16,6 +16,7 @@ use mir_semantics::{
 use crate::{
     m8_runtime_local_cut::{M8LocalTrace, M8LocalTraceKind, M8LocalTraceObservation},
     m9_auth_verification::M9RuntimeExecutionSeam,
+    sys2_execution_backend::Ow1ObserverDesignatedPublication,
     sys3_projection::{
         BackendEligibility, BackendIneligibilityReason, BackendProfile, CommunicationEdge,
         CommunicationEdgeKind, DeclaredLogicalTopology, GlobalProjectionResult,
@@ -24,9 +25,10 @@ use crate::{
     sys4_dispatch::{
         CachedDelivery, CausalityGraph, EndpointCarrierRecord, ExternalAction, FabricProgram,
         FabricReceipt, FabricRouteKey, FabricSemanticSnapshot, FabricTrace, FaultInjection,
-        LocalFabric, MailboxEnvelope, RuntimeStoreRead, RuntimeStoreWrite, RuntimeValue,
-        SealedDeliveryBinding, SealedFabricAdmission, SourceAction, Sys4DiagnosticKind,
-        Sys4DispatchDiagnostics, Sys4InitialStateSeed, Sys4LocalCut, Sys4TraceEntry, Sys4TraceKind,
+        LocalFabric, MailboxEnvelope, ObserverSnapshotChannel, RuntimeStoreRead, RuntimeStoreWrite,
+        RuntimeValue, SealedDeliveryBinding, SealedFabricAdmission, SourceAction,
+        Sys4DiagnosticKind, Sys4DispatchDiagnostics, Sys4InitialStateSeed, Sys4LocalCut,
+        Sys4TraceEntry, Sys4TraceKind,
     },
 };
 
@@ -310,7 +312,7 @@ fn receipt_logical_tick_id(receipt: &FabricReceipt) -> &str {
 }
 
 fn m8_local_runtime_trace(fabric: &LocalFabric) -> &M8LocalTrace {
-    let trace: &M8LocalTrace = fabric.m8_local_runtime_trace();
+    let trace: &M8LocalTrace = fabric.m8_local_runtime_trace().expect("observer trace");
     trace
 }
 
@@ -423,6 +425,46 @@ fn m8_backend_trace_count(
 fn m8_backend_latest_sequence(fabric: &LocalFabric) -> u64 {
     let trace: &M8LocalTrace = m8_local_runtime_trace(fabric);
     trace.latest_sequence().unwrap_or(0)
+}
+
+fn assert_observer_snapshot_failure(
+    fabric: &LocalFabric,
+    channel: ObserverSnapshotChannel,
+    session_id: &str,
+) {
+    let failures = fabric.observer_snapshot_failures();
+    let failure = failures
+        .iter()
+        .find(|failure| failure.channel() == channel)
+        .unwrap_or_else(|| panic!("expected observer snapshot failure for {channel:?}"));
+    assert_eq!(failure.session_id(), session_id);
+    assert_eq!(
+        failure.diagnostic(),
+        Sys4DiagnosticKind::ObserverSnapshotUnavailable
+    );
+}
+
+fn assert_no_observer_snapshot_failure(fabric: &LocalFabric, channel: ObserverSnapshotChannel) {
+    assert!(
+        fabric
+            .observer_snapshot_failures()
+            .iter()
+            .all(|failure| failure.channel() != channel),
+        "observer snapshot failure for {channel:?} must be cleared after recovery"
+    );
+}
+
+fn assert_observer_text_redacts_sensitive_fragments(
+    label: &str,
+    text: &str,
+    forbidden_fragments: &[&str],
+) {
+    for fragment in forbidden_fragments {
+        assert!(
+            !text.contains(fragment),
+            "{label} must be an observer-safe redacted projection and must not expose sensitive fragment `{fragment}` in `{text}`"
+        );
+    }
 }
 
 fn m8_trace_kind_count(fabric: &LocalFabric, kind: M8LocalTraceKind) -> usize {
@@ -646,6 +688,7 @@ fn staged_four_locus_owner_attack(
     assert_eq!(
         fabric
             .m8_actual_trace()
+            .expect("M8 observer available")
             .owner_request_node_count(operation, owner),
         0,
         "submit must not synchronously invoke M8"
@@ -672,6 +715,7 @@ fn staged_four_locus_owner_attack(
     assert_eq!(
         fabric
             .m8_actual_trace()
+            .expect("M8 observer available")
             .owner_request_node_count(operation, owner),
         0,
         "transport alone must not synchronously invoke M8"
@@ -794,6 +838,7 @@ fn staged_four_locus_owner_attack(
     assert_eq!(
         fabric
             .m8_actual_trace()
+            .expect("M8 observer available")
             .owner_request_node_count(operation, owner),
         1,
         "{operation} must emit exactly one actual M8 owner request node at {owner}"
@@ -850,7 +895,7 @@ struct DesignatedReplayResult {
     m8_backend_trace: M8LocalTrace,
     m8_backend_latest_sequence: u64,
     cache: BTreeMap<String, CachedDelivery>,
-    publication: Option<String>,
+    publication: Option<Ow1ObserverDesignatedPublication>,
     artifact_identity: CheckedProgramIdentity,
 }
 
@@ -901,6 +946,7 @@ fn run_designated_replay(
     assert_eq!(
         fabric
             .m8_actual_trace()
+            .expect("M8 observer available")
             .value_consumed_count(&semantic_identity, "C"),
         1,
         "replay performs exactly one semantic M8 consume"
@@ -908,6 +954,7 @@ fn run_designated_replay(
     assert_eq!(
         fabric
             .m8_actual_trace()
+            .expect("M8 observer available")
             .designated_evaluation_count("E.result"),
         1,
         "replay performs exactly one designated evaluation"
@@ -932,11 +979,14 @@ fn run_designated_replay(
         1,
         "exact retry records exactly one non-consuming M8 cache validation"
     );
+    let publication = fabric
+        .try_m8_designated_publication_snapshot("E.result")
+        .expect("replay publication observer query must not fail")
+        .expect("replay leaves a concrete M8 publication binding state");
+    assert_eq!(publication.value_name(), "E.result");
     assert!(
-        fabric
-            .m8_designated_publication_snapshot("E.result")
-            .is_some(),
-        "replay leaves a concrete M8 publication binding state"
+        publication.is_observer_safe(),
+        "replay publication observer state must be a typed redacted projection"
     );
     let cache = fabric.designated_cache_snapshot();
     let cache_entry = cache
@@ -971,16 +1021,29 @@ fn run_designated_replay(
         receipts,
         semantic_snapshot: fabric.semantic_snapshot(),
         trace: fabric.trace().clone(),
-        m8_actual_digest: fabric.m8_actual_trace().stable_digest(),
-        m8_backend_trace: fabric.m8_local_runtime_trace().clone(),
+        m8_actual_digest: fabric
+            .m8_actual_trace()
+            .expect("M8 observer available")
+            .stable_digest(),
+        m8_backend_trace: fabric
+            .m8_local_runtime_trace()
+            .expect("observer trace")
+            .clone(),
         m8_backend_latest_sequence: m8_backend_latest_sequence(&fabric),
         cache,
-        publication: fabric.m8_designated_publication_snapshot("E.result"),
+        publication: Some(publication),
         artifact_identity: fabric.projected_artifact_identity().clone(),
     }
 }
 
 fn stage_designated_publish_until_delivery_outbox(fabric: &mut LocalFabric) {
+    stage_designated_publish_until_delivery_outbox_with_source_value(fabric, 10)
+}
+
+fn stage_designated_publish_until_delivery_outbox_with_source_value(
+    fabric: &mut LocalFabric,
+    expected_source_value: i64,
+) {
     let submitted = fabric
         .submit_source_action(publish_designated_action())
         .expect("publish request is staged as E outbox input-request envelope");
@@ -1003,7 +1066,10 @@ fn stage_designated_publish_until_delivery_outbox(fabric: &mut LocalFabric) {
         .outgoing_mailbox()
         .pending_envelopes()
         .single();
-    assert_eq!(input_receipt.typed_value(), RuntimeValue::int(10));
+    assert_eq!(
+        input_receipt.typed_value(),
+        RuntimeValue::int(expected_source_value)
+    );
     fabric
         .step_transport("S", "E", input_receipt.envelope_id())
         .expect("transport moves the exact input receipt to E");
@@ -1315,12 +1381,14 @@ fn four_locus_st_attack_s_and_attack_t_mutate_only_their_authoritative_owner_sta
     assert_eq!(
         fabric
             .m8_actual_trace()
+            .expect("M8 observer available")
             .owner_request_node_count("attack_s", "S"),
         1
     );
     assert_eq!(
         fabric
             .m8_actual_trace()
+            .expect("M8 observer available")
             .owner_request_node_count("attack_s", "T"),
         0,
         "attack_s M8 occurrence must not be attributed to T"
@@ -1328,12 +1396,14 @@ fn four_locus_st_attack_s_and_attack_t_mutate_only_their_authoritative_owner_sta
     assert_eq!(
         fabric
             .m8_actual_trace()
+            .expect("M8 observer available")
             .owner_request_node_count("attack_t", "T"),
         1
     );
     assert_eq!(
         fabric
             .m8_actual_trace()
+            .expect("M8 observer available")
             .owner_request_node_count("attack_t", "S"),
         0,
         "attack_t M8 occurrence must not be attributed to S"
@@ -1349,7 +1419,9 @@ fn four_locus_st_admission_requires_test_visible_m8_partition_evidence_per_locus
     let admission = sealed_four_locus_admission(&checked, &program);
     let mut fabric = boot_with_admission(program, admission, BackendProfile::St);
 
-    let boot_evidence = fabric.m8_partition_evidence();
+    let boot_evidence = fabric
+        .try_m8_partition_evidence()
+        .expect("observer snapshot");
     assert!(
         boot_evidence.is_observer_safe(),
         "partition evidence is a devtools/test view and must not expose raw authority material"
@@ -1448,7 +1520,9 @@ fn four_locus_st_admission_requires_test_visible_m8_partition_evidence_per_locus
     }
 
     staged_four_locus_owner_attack(&mut fabric, &projection, "attack_s", "S", "player", 100, 10);
-    let after_s = fabric.m8_partition_evidence();
+    let after_s = fabric
+        .try_m8_partition_evidence()
+        .expect("observer snapshot");
     assert_eq!(
         after_s.changed_partitions_since(&boot_evidence),
         vec!["S"],
@@ -1478,7 +1552,9 @@ fn four_locus_st_admission_requires_test_visible_m8_partition_evidence_per_locus
     );
 
     staged_four_locus_owner_attack(&mut fabric, &projection, "attack_t", "T", "shield", 200, 7);
-    let after_t = fabric.m8_partition_evidence();
+    let after_t = fabric
+        .try_m8_partition_evidence()
+        .expect("observer snapshot");
     assert_eq!(
         after_t.changed_partitions_since(&after_s),
         vec!["T"],
@@ -1594,7 +1670,10 @@ fn four_locus_st_admission_requires_test_visible_m8_partition_evidence_per_locus
         "fabric-qualified M8 occurrence IDs from all partitions must be globally unique"
     );
     assert!(
-        after_t.all_m8_trace_occurrences_resolve_in(fabric.m8_actual_trace(), fabric.causality()),
+        after_t.all_m8_trace_occurrences_resolve_in(
+            fabric.m8_actual_trace().expect("M8 observer available"),
+            fabric.causality()
+        ),
         "every partition occurrence must resolve by exact fabric-qualified ID/kind in ActualM8Trace and CausalityGraph"
     );
 
@@ -1621,7 +1700,7 @@ fn sequential_st_owner_ops_retain_prior_write_dependency_but_ow1_physical_cross_
     let first = st
         .dispatch_source_action(owner_attack_action("attack"))
         .expect("first same-owner operation dispatches");
-    let after_first = st.m8_partition_evidence();
+    let after_first = st.try_m8_partition_evidence().expect("observer snapshot");
     let first_write = after_first
         .partition("S")
         .expect("S partition exists")
@@ -1631,7 +1710,7 @@ fn sequential_st_owner_ops_retain_prior_write_dependency_but_ow1_physical_cross_
     let second = st
         .dispatch_source_action(owner_attack_action("attack"))
         .expect("second same-owner operation dispatches");
-    let after_second = st.m8_partition_evidence();
+    let after_second = st.try_m8_partition_evidence().expect("observer snapshot");
     let second_write = after_second
         .partition("S")
         .expect("S partition exists")
@@ -1753,7 +1832,9 @@ fn same_operation_owner_reads_expose_per_occurrence_read_sets_not_union() {
     let target_receipt = fabric
         .dispatch_source_action(owner_attack_action_with_target("attack", "target"))
         .expect("target owner attack dispatches with same operation identity");
-    let evidence = fabric.m8_partition_evidence();
+    let evidence = fabric
+        .try_m8_partition_evidence()
+        .expect("observer snapshot");
     let partition = evidence.partition("S").expect("S partition exists");
     let self_read = partition.single_m8_trace_occurrence_for_request(
         self_receipt.request_id(),
@@ -1793,8 +1874,10 @@ fn observer_safe_partition_evidence_redacts_seeded_literal_payload_values() {
         seed,
     )
     .expect("distinctive literal seed admits the four-locus fixture");
-    let fabric = boot_with_admission(program, admission, BackendProfile::St);
-    let evidence = fabric.m8_partition_evidence();
+    let mut fabric = boot_with_admission(program, admission, BackendProfile::St);
+    let evidence = fabric
+        .try_m8_partition_evidence()
+        .expect("observer snapshot");
     assert!(evidence.is_observer_safe());
 
     let debug_export = format!("{evidence:?}");
@@ -1951,6 +2034,7 @@ fn designated_result_delivery_endpoint_revalidates_cache_and_revocation_fails_cl
     assert_eq!(
         fabric
             .m8_local_trace()
+            .expect("M8 observer available")
             .value_consumed_count(semantic_identity, "C"),
         1
     );
@@ -1979,7 +2063,10 @@ fn designated_result_delivery_endpoint_revalidates_cache_and_revocation_fails_cl
         1
     );
 
-    let m8_before_retry = fabric.m8_local_trace().clone();
+    let m8_before_retry = fabric
+        .m8_local_trace()
+        .expect("M8 observer available")
+        .clone();
     let live_retry = fabric
         .dispatch_source_action(consume_designated_action())
         .expect("same consumer/result/frontier/version/policy retry revalidates and returns cache");
@@ -1990,12 +2077,14 @@ fn designated_result_delivery_endpoint_revalidates_cache_and_revocation_fails_cl
     assert_eq!(
         fabric
             .m8_local_trace()
+            .expect("M8 observer available")
             .value_consumed_count(semantic_identity, "C"),
         1
     );
     assert_eq!(
         fabric
             .m8_local_trace()
+            .expect("M8 observer available")
             .new_entries_since(&m8_before_retry)
             .value_consumed_count(semantic_identity, "C"),
         0
@@ -2043,6 +2132,7 @@ fn designated_result_delivery_endpoint_revalidates_cache_and_revocation_fails_cl
     let cache_before_revoked_retry = fabric.designated_cache_snapshot();
     let consumed_before_revoked_retry = fabric
         .m8_actual_trace()
+        .expect("M8 observer available")
         .value_consumed_count(semantic_identity, "C");
     let m8_non_consuming_before_revoked_retry = m8_backend_trace_count(
         &fabric,
@@ -2094,6 +2184,7 @@ fn designated_result_delivery_endpoint_revalidates_cache_and_revocation_fails_cl
     assert_eq!(
         fabric
             .m8_actual_trace()
+            .expect("M8 observer available")
             .value_consumed_count(semantic_identity, "C"),
         consumed_before_revoked_retry
     );
@@ -2165,6 +2256,7 @@ fn designated_cache_retry_revalidates_membership_witness_and_carrier_integrity()
     assert_eq!(retry_validation.consumer_locus(), "C");
     let m8_validation = fabric
         .m8_actual_trace()
+        .expect("M8 observer available")
         .non_consuming_designated_cache_validation(
             live_retry
                 .m8_non_consuming_validation_node_id()
@@ -2183,6 +2275,7 @@ fn designated_cache_retry_revalidates_membership_witness_and_carrier_integrity()
     assert_eq!(
         fabric
             .m8_local_trace()
+            .expect("M8 observer available")
             .value_consumed_count(&semantic_identity, "C"),
         1
     );
@@ -2238,6 +2331,7 @@ fn designated_cache_retry_revalidates_membership_witness_and_carrier_integrity()
     let cache_before_membership = membership_retired.designated_cache_snapshot();
     let consumed_before_membership = membership_retired
         .m8_actual_trace()
+        .expect("M8 observer available")
         .value_consumed_count(&membership_identity, "C");
     let m8_non_consuming_before_membership = m8_backend_trace_count(
         &membership_retired,
@@ -2296,6 +2390,7 @@ fn designated_cache_retry_revalidates_membership_witness_and_carrier_integrity()
     assert_eq!(
         membership_retired
             .m8_actual_trace()
+            .expect("M8 observer available")
             .value_consumed_count(&membership_identity, "C"),
         consumed_before_membership
     );
@@ -2351,6 +2446,7 @@ fn designated_cache_retry_revalidates_membership_witness_and_carrier_integrity()
     let cache_before_witness = witness_retired.designated_cache_snapshot();
     let consumed_before_witness = witness_retired
         .m8_actual_trace()
+        .expect("M8 observer available")
         .value_consumed_count(&witness_identity, "C");
     let m8_non_consuming_before_witness = m8_backend_trace_count(
         &witness_retired,
@@ -2406,6 +2502,7 @@ fn designated_cache_retry_revalidates_membership_witness_and_carrier_integrity()
     assert_eq!(
         witness_retired
             .m8_actual_trace()
+            .expect("M8 observer available")
             .value_consumed_count(&witness_identity, "C"),
         consumed_before_witness
     );
@@ -2431,28 +2528,33 @@ fn m8_designated_consumption_trace_is_semantic_identity_and_consumer_specific() 
     assert_eq!(
         fabric
             .m8_actual_trace()
+            .expect("M8 observer available")
             .value_consumed_count(semantic_identity, "C"),
         1
     );
     assert_eq!(
         fabric
             .m8_actual_trace()
+            .expect("M8 observer available")
             .value_consumed_count("wrong-semantic-identity", "C"),
         0
     );
     assert_eq!(
         fabric
             .m8_actual_trace()
+            .expect("M8 observer available")
             .value_consumed_count(semantic_identity, "WrongConsumer"),
         0
     );
     let consume_node = fabric
         .m8_actual_trace()
+        .expect("M8 observer available")
         .designated_consume_node_id(semantic_identity, "C")
         .expect("actual M8 consume node is keyed by semantic identity and consumer");
     assert_eq!(
         fabric
             .m8_actual_trace()
+            .expect("M8 observer available")
             .node(&consume_node)
             .semantic_identity(),
         semantic_identity
@@ -2460,6 +2562,7 @@ fn m8_designated_consumption_trace_is_semantic_identity_and_consumer_specific() 
     assert_eq!(
         fabric
             .m8_actual_trace()
+            .expect("M8 observer available")
             .node(&consume_node)
             .consumer_locus(),
         "C"
@@ -2558,6 +2661,7 @@ fn staged_owner_mailbox_dispatch_requires_transport_and_locus_steps_before_m8() 
     assert_eq!(
         fabric
             .m8_actual_trace()
+            .expect("M8 observer available")
             .owner_request_node_count("attack", "S"),
         0,
         "submit must not synchronously enqueue M8 owner work"
@@ -2649,6 +2753,7 @@ fn staged_owner_mailbox_dispatch_requires_transport_and_locus_steps_before_m8() 
     assert_eq!(
         fabric
             .m8_actual_trace()
+            .expect("M8 observer available")
             .owner_request_node_count("attack", "S"),
         0,
         "transport must not synchronously invoke M8"
@@ -2908,6 +3013,7 @@ fn staged_designated_path_requires_source_release_receipt_before_evaluation_and_
     assert_eq!(
         fabric
             .m8_actual_trace()
+            .expect("M8 observer available")
             .designated_evaluation_count("E.result"),
         0,
         "submit must not directly read S or evaluate at E"
@@ -2981,6 +3087,7 @@ fn staged_designated_path_requires_source_release_receipt_before_evaluation_and_
     assert_eq!(
         fabric
             .m8_actual_trace()
+            .expect("M8 observer available")
             .designated_evaluation_count("E.result"),
         0,
         "source owner read must not evaluate E before receipt transport"
@@ -3128,6 +3235,7 @@ fn staged_designated_path_requires_source_release_receipt_before_evaluation_and_
     assert_eq!(
         fabric
             .m8_actual_trace()
+            .expect("M8 observer available")
             .value_consumed_count(delivery.semantic_identity(), "C"),
         0,
         "delivery transport alone must not consume M8 designated value"
@@ -3168,6 +3276,7 @@ fn staged_designated_path_requires_source_release_receipt_before_evaluation_and_
     assert_eq!(
         fabric
             .m8_actual_trace()
+            .expect("M8 observer available")
             .value_consumed_count(delivery.semantic_identity(), "C"),
         1
     );
@@ -3234,6 +3343,7 @@ fn staged_designated_path_requires_source_release_receipt_before_evaluation_and_
     assert_eq!(retry_m9_validation.consumer_locus(), "C");
     let retry_m8_validation = fabric
         .m8_actual_trace()
+        .expect("M8 observer available")
         .non_consuming_designated_cache_validation(
             retry_step
                 .m8_non_consuming_validation_node_id()
@@ -3255,6 +3365,7 @@ fn staged_designated_path_requires_source_release_receipt_before_evaluation_and_
     assert_eq!(
         fabric
             .m8_actual_trace()
+            .expect("M8 observer available")
             .value_consumed_count(delivery.semantic_identity(), "C"),
         1
     );
@@ -3294,7 +3405,9 @@ fn designated_st_delivery_imports_e_publication_into_c_partition_before_single_c
         "generated delivery carrier must seal the exact M8 publication identity produced at E"
     );
 
-    let before_c = fabric.m8_partition_evidence();
+    let before_c = fabric
+        .try_m8_partition_evidence()
+        .expect("observer snapshot");
     let e_publication = before_c
         .partition("E")
         .expect("E partition exists")
@@ -3335,7 +3448,9 @@ fn designated_st_delivery_imports_e_publication_into_c_partition_before_single_c
         .expect("C imports the E publication, then consumes exactly once");
     let c_dequeue = consumer_step.locus_dequeue_occurrence_id().to_string();
     let consume_node = consumer_step.m8_consume_node_id().to_string();
-    let after_c = fabric.m8_partition_evidence();
+    let after_c = fabric
+        .try_m8_partition_evidence()
+        .expect("observer snapshot");
     let c_partition = after_c.partition("C").expect("C partition exists");
     assert!(
         c_partition
@@ -3361,6 +3476,7 @@ fn designated_st_delivery_imports_e_publication_into_c_partition_before_single_c
     assert_eq!(
         fabric
             .m8_actual_trace()
+            .expect("M8 observer available")
             .node(imported.fabric_qualified_id())
             .kind(),
         M8LocalTraceKind::DesignatedPublicationImported,
@@ -3410,7 +3526,9 @@ fn designated_st_delivery_imports_e_publication_into_c_partition_before_single_c
         .dispatch_source_action(consume_designated_action())
         .expect("exact duplicate/cache retry succeeds by revalidation");
     assert!(retry.returned_from_designated_cache_after_authority_revalidation());
-    let after_retry = fabric.m8_partition_evidence();
+    let after_retry = fabric
+        .try_m8_partition_evidence()
+        .expect("observer snapshot");
     let c_after_retry = after_retry.partition("C").expect("C partition exists");
     assert_eq!(
         c_after_retry
@@ -3464,7 +3582,9 @@ fn imported_designated_publication_and_receipt_survive_sys4_local_cut_restore() 
         receipt_m8_publication_id(&receipt),
         delivery.m8_publication_id()
     );
-    let before_cut_evidence = fabric.m8_partition_evidence();
+    let before_cut_evidence = fabric
+        .try_m8_partition_evidence()
+        .expect("observer snapshot");
     let c_before_cut = before_cut_evidence
         .partition("C")
         .expect("C partition exists");
@@ -3508,7 +3628,9 @@ fn imported_designated_publication_and_receipt_survive_sys4_local_cut_restore() 
 
     let mut restored = LocalFabric::restore_local_cut(program, admission, BackendProfile::St, &cut)
         .expect("local cut restores through the same source-first program/admission path");
-    let restored_evidence = restored.m8_partition_evidence();
+    let restored_evidence = restored
+        .try_m8_partition_evidence()
+        .expect("observer snapshot");
     let c_restored = restored_evidence
         .partition("C")
         .expect("C partition exists after restore");
@@ -3533,7 +3655,8 @@ fn imported_designated_publication_and_receipt_survive_sys4_local_cut_restore() 
         receipt_m8_publication_id(&receipt)
     );
     let c_after_retry = restored
-        .m8_partition_evidence()
+        .try_m8_partition_evidence()
+        .expect("observer snapshot")
         .partition("C")
         .expect("C partition exists after retry")
         .clone();
@@ -3700,6 +3823,7 @@ fn sys4_local_cut_restores_pending_owner_request_endpoint_mailbox_and_continues_
     assert_eq!(
         restored_inbox
             .m8_actual_trace()
+            .expect("M8 observer available")
             .owner_request_node_count("attack", "S"),
         1,
         "restored owner request must not be served twice"
@@ -3752,6 +3876,7 @@ fn sys4_local_cut_restores_inflight_designated_delivery_and_consumes_once() {
     assert_eq!(
         restored
             .m8_actual_trace()
+            .expect("M8 observer available")
             .value_consumed_count(delivery.semantic_identity(), "C"),
         1,
         "restored designated delivery must not consume twice"
@@ -3818,6 +3943,7 @@ fn sys4_local_cut_preserves_m9_successor_tombstone_for_revoked_cache_retry() {
     let before_retry_cache = restored.designated_cache_snapshot();
     let before_retry_consumed = restored
         .m8_actual_trace()
+        .expect("M8 observer available")
         .value_consumed_count(&semantic_identity, "C");
     let before_retry_m8_cache_validations = m8_backend_trace_count(
         &restored,
@@ -3854,6 +3980,7 @@ fn sys4_local_cut_preserves_m9_successor_tombstone_for_revoked_cache_retry() {
     assert_eq!(
         restored
             .m8_actual_trace()
+            .expect("M8 observer available")
             .value_consumed_count(&semantic_identity, "C"),
         before_retry_consumed
     );
@@ -3932,7 +4059,9 @@ fn sys4_local_cut_restores_owner_read_observer_safe_read_key_evidence_exactly() 
         .local_store_read_audit()
         .expect("source read exposes read audit")
         .stable_digest();
-    let before_cut_evidence = fabric.m8_partition_evidence();
+    let before_cut_evidence = fabric
+        .try_m8_partition_evidence()
+        .expect("observer snapshot");
     let before_read = before_cut_evidence
         .partition("S")
         .expect("S partition exists before cut")
@@ -3947,14 +4076,16 @@ fn sys4_local_cut_restores_owner_read_observer_safe_read_key_evidence_exactly() 
 
     let cut = save_sys4_local_cut(&mut fabric, "sys4-cut-owner-read-key-evidence")
         .expect("ST cut with source-owner read evidence succeeds");
-    let restored = LocalFabric::restore_local_cut(program, admission, BackendProfile::St, &cut)
+    let mut restored = LocalFabric::restore_local_cut(program, admission, BackendProfile::St, &cut)
         .expect("source-owner read evidence restores");
     assert_eq!(
         restored.local_store_read_audit("S").stable_digest(),
         read_audit_digest,
         "restore must preserve the exact per-occurrence local read audit"
     );
-    let after_cut_evidence = restored.m8_partition_evidence();
+    let after_cut_evidence = restored
+        .try_m8_partition_evidence()
+        .expect("observer snapshot");
     let after_read = after_cut_evidence
         .partition("S")
         .expect("S partition exists after restore")
@@ -3979,14 +4110,23 @@ fn sys4_local_cut_ow1_returns_typed_backend_ineligible_without_panic_or_mutation
     let program = fabric_program(projection);
     let mut fabric = boot(&checked, program, BackendProfile::Ow1);
     let before = fabric.semantic_snapshot();
-    let before_trace = fabric.m8_actual_trace().stable_digest();
+    let before_trace = fabric
+        .m8_actual_trace()
+        .expect("M8 observer available")
+        .stable_digest();
 
     let _diagnostics = assert_sys4_diag(
         save_sys4_local_cut(&mut fabric, "sys4-cut-ow1-typed-reject"),
         Sys4DiagnosticKind::BackendIneligible,
     );
     assert!(fabric.semantic_snapshot().same_state(&before));
-    assert_eq!(fabric.m8_actual_trace().stable_digest(), before_trace);
+    assert_eq!(
+        fabric
+            .m8_actual_trace()
+            .expect("M8 observer available")
+            .stable_digest(),
+        before_trace
+    );
 }
 
 #[test]
@@ -4144,7 +4284,10 @@ fn sys4_local_cut_restore_rejects_authority_floor_advance_between_preflight_and_
 
     let live_generation_before_race = live.current_m9_authority_inspection().generation();
     let live_semantic_before_race = live.semantic_snapshot();
-    let live_m8_before_race = live.m8_actual_trace().stable_digest();
+    let live_m8_before_race = live
+        .m8_actual_trace()
+        .expect("M8 observer available")
+        .stable_digest();
     let transition = live
         .m9_authority_lifecycle_mut()
         .revoke_designated_consumer_capability("E.result", "C")
@@ -4176,7 +4319,9 @@ fn sys4_local_cut_restore_rejects_authority_floor_advance_between_preflight_and_
         "a restore losing the authority-floor race must not mutate live semantic state"
     );
     assert_eq!(
-        live.m8_actual_trace().stable_digest(),
+        live.m8_actual_trace()
+            .expect("M8 observer available")
+            .stable_digest(),
         live_m8_before_race,
         "a restore losing the authority-floor race must not mutate the live backend/M8 trace"
     );
@@ -4212,6 +4357,7 @@ fn sys4_local_cut_restore_rejects_duplicate_pending_inbox_receive_mapping() {
     assert_eq!(
         fabric
             .m8_actual_trace()
+            .expect("M8 observer available")
             .owner_request_node_count("attack", "S"),
         0,
         "pre-restore duplicate cut is taken before S can serve the request"
@@ -4349,7 +4495,9 @@ fn sys4_local_cut_restore_rejects_missing_derived_m8_trace_or_causality_row() {
     let receipt = fabric
         .dispatch_source_action(owner_attack_action("attack"))
         .expect("owner request serves before trace tamper cut");
-    let evidence = fabric.m8_partition_evidence();
+    let evidence = fabric
+        .try_m8_partition_evidence()
+        .expect("observer snapshot");
     let owner_write = evidence
         .partition("S")
         .expect("S partition exists")
@@ -4358,6 +4506,7 @@ fn sys4_local_cut_restore_rejects_missing_derived_m8_trace_or_causality_row() {
     assert_eq!(
         fabric
             .m8_actual_trace()
+            .expect("M8 observer available")
             .node(owner_write.fabric_qualified_id())
             .kind(),
         M8LocalTraceKind::OwnerWrite
@@ -4404,7 +4553,9 @@ fn sys4_local_cut_restore_rejects_actual_m8_predecessor_not_in_causality_or_raw_
     let second = fabric
         .dispatch_source_action(owner_attack_action("attack"))
         .expect("second owner request provides an unrelated existing M8 occurrence");
-    let evidence = fabric.m8_partition_evidence();
+    let evidence = fabric
+        .try_m8_partition_evidence()
+        .expect("observer snapshot");
     let s_partition = evidence.partition("S").expect("S partition exists");
     let first_write = s_partition
         .single_m8_trace_occurrence_for_request(first.request_id(), M8LocalTraceKind::OwnerWrite)
@@ -4732,7 +4883,10 @@ fn designated_publish_without_explicit_tick_fails_before_outbox_m8_or_state() {
     let program = fabric_program(designated_projection(&checked));
     let mut fabric = boot(&checked, program, BackendProfile::St);
     let before = fabric.semantic_snapshot();
-    let m8_before = fabric.m8_actual_trace().stable_digest();
+    let m8_before = fabric
+        .m8_actual_trace()
+        .expect("M8 observer available")
+        .stable_digest();
 
     let diagnostics = assert_sys4_diag(
         fabric.submit_source_action(SourceAction::designated_tick("E.result")),
@@ -4751,7 +4905,13 @@ fn designated_publish_without_explicit_tick_fails_before_outbox_m8_or_state() {
             .is_empty(),
         "missing tick must fail before an E outbox carrier is materialized"
     );
-    assert_eq!(fabric.m8_actual_trace().stable_digest(), m8_before);
+    assert_eq!(
+        fabric
+            .m8_actual_trace()
+            .expect("M8 observer available")
+            .stable_digest(),
+        m8_before
+    );
     assert!(fabric.semantic_snapshot().same_state(&before));
 }
 
@@ -4951,6 +5111,7 @@ fn exact_duplicate_cache_retry_is_idempotent_but_corrupted_duplicate_binding_fai
     let semantic_identity = first.semantic_consumption_identity().to_string();
     let consumed_after_first = fabric
         .m8_actual_trace()
+        .expect("M8 observer available")
         .value_consumed_count(&semantic_identity, "C");
 
     let exact_retry = fabric
@@ -4964,6 +5125,7 @@ fn exact_duplicate_cache_retry_is_idempotent_but_corrupted_duplicate_binding_fai
     assert_eq!(
         fabric
             .m8_actual_trace()
+            .expect("M8 observer available")
             .value_consumed_count(&semantic_identity, "C"),
         consumed_after_first,
         "exact duplicate retry must not perform a second M8 semantic consume"
@@ -4985,6 +5147,7 @@ fn exact_duplicate_cache_retry_is_idempotent_but_corrupted_duplicate_binding_fai
     let cache_before_conflict = fabric.designated_cache_snapshot();
     let consumed_before_conflict = fabric
         .m8_actual_trace()
+        .expect("M8 observer available")
         .value_consumed_count(&semantic_identity, "C");
     fabric
         .dispatch_external_action(ExternalAction::fault_event(
@@ -5009,6 +5172,7 @@ fn exact_duplicate_cache_retry_is_idempotent_but_corrupted_duplicate_binding_fai
     assert_eq!(
         fabric
             .m8_actual_trace()
+            .expect("M8 observer available")
             .value_consumed_count(&semantic_identity, "C"),
         consumed_before_conflict
     );
@@ -5225,8 +5389,12 @@ fn fixed_version_second_tick_delivery_split_frame_rejects_before_second_consume(
     let cache_before_second = fabric.designated_cache_snapshot();
     let consumed_before_second = fabric
         .m8_actual_trace()
+        .expect("M8 observer available")
         .value_consumed_count(first_delivery.semantic_identity(), "C");
-    let m8_trace_digest_before_second = fabric.m8_actual_trace().stable_digest();
+    let m8_trace_digest_before_second = fabric
+        .m8_actual_trace()
+        .expect("M8 observer available")
+        .stable_digest();
     fabric
         .step_transport("E", "C", second_delivery.envelope_id())
         .expect("second split-frame candidate crosses the generated E→C endpoint");
@@ -5246,13 +5414,17 @@ fn fixed_version_second_tick_delivery_split_frame_rejects_before_second_consume(
     assert!(fabric.semantic_snapshot().same_state(&before_second));
     assert_eq!(fabric.designated_cache_snapshot(), cache_before_second);
     assert_eq!(
-        fabric.m8_actual_trace().stable_digest(),
+        fabric
+            .m8_actual_trace()
+            .expect("M8 observer available")
+            .stable_digest(),
         m8_trace_digest_before_second,
         "B split-frame rejection must not add rejected, non-consuming, or consuming M8 trace rows"
     );
     assert_eq!(
         fabric
             .m8_actual_trace()
+            .expect("M8 observer available")
             .value_consumed_count(first_delivery.semantic_identity(), "C"),
         consumed_before_second,
         "split-frame candidate must not perform a second M8 consume"
@@ -5414,10 +5586,14 @@ fn b_before_a_fixed_version_split_frame_rejects_with_empty_consumer_cache() {
         "C",
         second_delivery.semantic_identity(),
     );
-    let m8_digest_before_b = fabric.m8_actual_trace().stable_digest();
+    let m8_digest_before_b = fabric
+        .m8_actual_trace()
+        .expect("M8 observer available")
+        .stable_digest();
     let m8_backend_sequence_before_b = m8_backend_latest_sequence(&fabric);
     let consumed_before_b = fabric
         .m8_actual_trace()
+        .expect("M8 observer available")
         .value_consumed_count(second_delivery.semantic_identity(), "C");
 
     let b_step = fabric.step_locus("C");
@@ -5446,7 +5622,10 @@ fn b_before_a_fixed_version_split_frame_rejects_with_empty_consumer_cache() {
         "B split-frame rejection must happen before M9 consumer validation"
     );
     assert_eq!(
-        fabric.m8_actual_trace().stable_digest(),
+        fabric
+            .m8_actual_trace()
+            .expect("M8 observer available")
+            .stable_digest(),
         m8_digest_before_b,
         "B split-frame rejection must happen before any M8 rejected/non-consuming/consume trace"
     );
@@ -5458,6 +5637,7 @@ fn b_before_a_fixed_version_split_frame_rejects_with_empty_consumer_cache() {
     assert_eq!(
         fabric
             .m8_actual_trace()
+            .expect("M8 observer available")
             .value_consumed_count(second_delivery.semantic_identity(), "C"),
         consumed_before_b
     );
@@ -5499,7 +5679,9 @@ fn designated_delivery_mismatched_m8_publication_identity_rejects_before_consume
     let original_identity = delivery.semantic_identity().to_string();
     let before = fabric.semantic_snapshot();
     let cache_before = fabric.designated_cache_snapshot();
-    let partition_before = fabric.m8_partition_evidence();
+    let partition_before = fabric
+        .try_m8_partition_evidence()
+        .expect("observer snapshot");
     let c_imports_before = partition_before
         .partition("C")
         .expect("C partition exists")
@@ -5512,6 +5694,7 @@ fn designated_delivery_mismatched_m8_publication_identity_rejects_before_consume
         .len();
     let consumed_before = fabric
         .m8_actual_trace()
+        .expect("M8 observer available")
         .value_consumed_count(&original_identity, "C");
 
     fabric
@@ -5539,7 +5722,9 @@ fn designated_delivery_mismatched_m8_publication_identity_rejects_before_consume
     assert!(!rejected.exposes_raw_payload());
     assert!(fabric.semantic_snapshot().same_state(&before));
     assert_eq!(fabric.designated_cache_snapshot(), cache_before);
-    let partition_after = fabric.m8_partition_evidence();
+    let partition_after = fabric
+        .try_m8_partition_evidence()
+        .expect("observer snapshot");
     assert_eq!(
         partition_after
             .partition("C")
@@ -5572,6 +5757,7 @@ fn designated_delivery_mismatched_m8_publication_identity_rejects_before_consume
     assert_eq!(
         fabric
             .m8_actual_trace()
+            .expect("M8 observer available")
             .value_consumed_count(&original_identity, "C"),
         consumed_before
     );
@@ -5625,11 +5811,15 @@ fn forged_designated_carrier_provenance_visibility_or_redaction_quarantines_befo
         let before = fabric.semantic_snapshot();
         let cache_before = fabric.designated_cache_snapshot();
         let c_partition_before = fabric
-            .m8_partition_evidence()
+            .try_m8_partition_evidence()
+            .expect("observer snapshot")
             .partition("C")
             .expect("C partition exists")
             .clone();
-        let m8_digest_before = fabric.m8_actual_trace().stable_digest();
+        let m8_digest_before = fabric
+            .m8_actual_trace()
+            .expect("M8 observer available")
+            .stable_digest();
         let expected = match case {
             ForgeryCase::SourceRef => {
                 fabric
@@ -5681,12 +5871,16 @@ fn forged_designated_carrier_provenance_visibility_or_redaction_quarantines_befo
         assert!(fabric.semantic_snapshot().same_state(&before));
         assert_eq!(fabric.designated_cache_snapshot(), cache_before);
         assert_eq!(
-            fabric.m8_actual_trace().stable_digest(),
+            fabric
+                .m8_actual_trace()
+                .expect("M8 observer available")
+                .stable_digest(),
             m8_digest_before,
             "carrier forgery must be rejected before C import or consume mutates M8 trace"
         );
         let c_partition_after = fabric
-            .m8_partition_evidence()
+            .try_m8_partition_evidence()
+            .expect("observer snapshot")
             .partition("C")
             .expect("C partition exists")
             .clone();
@@ -5716,6 +5910,7 @@ fn forged_designated_carrier_provenance_visibility_or_redaction_quarantines_befo
         assert_eq!(
             fabric
                 .m8_actual_trace()
+                .expect("M8 observer available")
                 .value_consumed_count(&semantic_identity, "C"),
             0
         );
@@ -5760,6 +5955,7 @@ fn stale_publication_identity_fault_preserves_exact_carrier_before_reject() {
     let cache_before = fabric.designated_cache_snapshot();
     let consumed_before = fabric
         .m8_actual_trace()
+        .expect("M8 observer available")
         .value_consumed_count(&semantic_identity, "C");
 
     let stale_publication_id = "m8-stale-publication-id";
@@ -5802,6 +5998,7 @@ fn stale_publication_identity_fault_preserves_exact_carrier_before_reject() {
     assert_eq!(
         fabric
             .m8_actual_trace()
+            .expect("M8 observer available")
             .value_consumed_count(&semantic_identity, "C"),
         consumed_before
     );
@@ -5845,6 +6042,7 @@ fn split_frame_policy_digest_fault_rejects_and_terminally_quarantines() {
     let cache_before = fabric.designated_cache_snapshot();
     let consumed_before = fabric
         .m8_actual_trace()
+        .expect("M8 observer available")
         .value_consumed_count(&semantic_identity, "C");
 
     fabric
@@ -5874,6 +6072,7 @@ fn split_frame_policy_digest_fault_rejects_and_terminally_quarantines() {
     assert_eq!(
         fabric
             .m8_actual_trace()
+            .expect("M8 observer available")
             .value_consumed_count(&semantic_identity, "C"),
         consumed_before
     );
@@ -6249,7 +6448,10 @@ fn initial_designated_delivery_auth_failures_remain_distinct_sealed_m9_causes() 
             .step_transport("E", "C", delivery.envelope_id())
             .expect("delivery transports to C before C validates live consumer authority");
         let before_reject = fabric.semantic_snapshot();
-        let m8_before = fabric.m8_actual_trace().stable_digest();
+        let m8_before = fabric
+            .m8_actual_trace()
+            .expect("M8 observer available")
+            .stable_digest();
         let rejected = assert_sys4_diag(fabric.step_locus("C"), expected_diag);
         assert_eq!(
             rejected.rejected_envelope_id(),
@@ -6267,10 +6469,17 @@ fn initial_designated_delivery_auth_failures_remain_distinct_sealed_m9_causes() 
         assert!(rejected.primary().typed_success().is_none());
         assert!(!rejected.exposes_raw_payload());
         assert!(fabric.semantic_snapshot().same_state(&before_reject));
-        assert_eq!(fabric.m8_actual_trace().stable_digest(), m8_before);
         assert_eq!(
             fabric
                 .m8_actual_trace()
+                .expect("M8 observer available")
+                .stable_digest(),
+            m8_before
+        );
+        assert_eq!(
+            fabric
+                .m8_actual_trace()
+                .expect("M8 observer available")
                 .value_consumed_count(&semantic_identity, "C"),
             0
         );
@@ -6428,7 +6637,10 @@ fn staged_designated_source_release_invalidation_rejects_before_s_read_or_receip
         .outgoing_mailbox()
         .pending_envelopes()
         .len();
-    let m8_before = fabric.m8_actual_trace().stable_digest();
+    let m8_before = fabric
+        .m8_actual_trace()
+        .expect("M8 observer available")
+        .stable_digest();
     let cache_before = fabric.designated_cache_snapshot();
     let rejected = assert_sys4_diag(
         fabric.step_locus("S"),
@@ -6455,7 +6667,13 @@ fn staged_designated_source_release_invalidation_rejects_before_s_read_or_receip
         s_outbox_before,
         "S must not enqueue a DesignatedInputReceipt after source-release invalidation"
     );
-    assert_eq!(fabric.m8_actual_trace().stable_digest(), m8_before);
+    assert_eq!(
+        fabric
+            .m8_actual_trace()
+            .expect("M8 observer available")
+            .stable_digest(),
+        m8_before
+    );
     assert_eq!(fabric.designated_cache_snapshot(), cache_before);
 }
 
@@ -6591,10 +6809,14 @@ fn staged_designated_delivery_payload_fault_rejects_at_c_before_consume_cache_mu
     );
     let semantic_identity = delivery.semantic_identity().to_string();
     let before_fault = fabric.semantic_snapshot();
-    let m8_before = fabric.m8_actual_trace().stable_digest();
+    let m8_before = fabric
+        .m8_actual_trace()
+        .expect("M8 observer available")
+        .stable_digest();
     let cache_before = fabric.designated_cache_snapshot();
     let publication_before = fabric
-        .m8_designated_publication_snapshot("E.result")
+        .try_m8_designated_publication_snapshot("E.result")
+        .expect("publication observer query succeeds before carrier fault")
         .expect("M8 publication exists before carrier fault");
 
     assert_sys4_diag(
@@ -6681,15 +6903,23 @@ fn staged_designated_delivery_payload_fault_rejects_at_c_before_consume_cache_mu
     assert!(fabric.semantic_snapshot().same_state(&before_fault));
     assert_eq!(
         fabric
-            .m8_designated_publication_snapshot("E.result")
+            .try_m8_designated_publication_snapshot("E.result")
+            .expect("publication observer query succeeds after carrier fault")
             .expect("M8 publication remains intact after carrier fault"),
         publication_before
     );
-    assert_eq!(fabric.m8_actual_trace().stable_digest(), m8_before);
+    assert_eq!(
+        fabric
+            .m8_actual_trace()
+            .expect("M8 observer available")
+            .stable_digest(),
+        m8_before
+    );
     assert_eq!(fabric.designated_cache_snapshot(), cache_before);
     assert_eq!(
         fabric
             .m8_actual_trace()
+            .expect("M8 observer available")
             .value_consumed_count(&semantic_identity, "C"),
         0
     );
@@ -6760,7 +6990,10 @@ fn staged_designated_delivery_policy_fault_rejects_at_c_before_consume_cache_mut
     assert_eq!(delivery.edge_ref(), delivery_edge.edge_ref());
     let semantic_identity = delivery.semantic_identity().to_string();
     let before_fault = fabric.semantic_snapshot();
-    let m8_before = fabric.m8_actual_trace().stable_digest();
+    let m8_before = fabric
+        .m8_actual_trace()
+        .expect("M8 observer available")
+        .stable_digest();
     let cache_before = fabric.designated_cache_snapshot();
 
     fabric
@@ -6812,11 +7045,18 @@ fn staged_designated_delivery_policy_fault_rejects_at_c_before_consume_cache_mut
     );
     assert!(quarantine.observer_safe_audit().is_observer_safe());
     assert!(fabric.semantic_snapshot().same_state(&before_fault));
-    assert_eq!(fabric.m8_actual_trace().stable_digest(), m8_before);
+    assert_eq!(
+        fabric
+            .m8_actual_trace()
+            .expect("M8 observer available")
+            .stable_digest(),
+        m8_before
+    );
     assert_eq!(fabric.designated_cache_snapshot(), cache_before);
     assert_eq!(
         fabric
             .m8_actual_trace()
+            .expect("M8 observer available")
             .value_consumed_count(&semantic_identity, "C"),
         0
     );
@@ -6866,7 +7106,10 @@ fn staged_designated_delivery_redaction_fault_rejects_at_c_before_consume_cache_
     assert_eq!(delivery.edge_ref(), delivery_edge.edge_ref());
     let semantic_identity = delivery.semantic_identity().to_string();
     let before_fault = fabric.semantic_snapshot();
-    let m8_before = fabric.m8_actual_trace().stable_digest();
+    let m8_before = fabric
+        .m8_actual_trace()
+        .expect("M8 observer available")
+        .stable_digest();
     let cache_before = fabric.designated_cache_snapshot();
 
     fabric
@@ -6918,11 +7161,18 @@ fn staged_designated_delivery_redaction_fault_rejects_at_c_before_consume_cache_
     );
     assert!(quarantine.observer_safe_audit().is_observer_safe());
     assert!(fabric.semantic_snapshot().same_state(&before_fault));
-    assert_eq!(fabric.m8_actual_trace().stable_digest(), m8_before);
+    assert_eq!(
+        fabric
+            .m8_actual_trace()
+            .expect("M8 observer available")
+            .stable_digest(),
+        m8_before
+    );
     assert_eq!(fabric.designated_cache_snapshot(), cache_before);
     assert_eq!(
         fabric
             .m8_actual_trace()
+            .expect("M8 observer available")
             .value_consumed_count(&semantic_identity, "C"),
         0
     );
@@ -7098,6 +7348,7 @@ fn ow1_owner_dispatch_refreshes_exact_m8_context_observations_after_dequeue() {
     assert_eq!(
         fabric
             .m8_actual_trace()
+            .expect("M8 observer available")
             .owner_request_node_count("attack", "S"),
         1,
         "fabric devtools surface must contain the OW1 owner request node"
@@ -7463,7 +7714,9 @@ fn post_dequeue_designated_evaluator_backend_rejection_quarantines_without_publi
 
     let before = fabric.semantic_snapshot();
     let cache_before = fabric.designated_cache_snapshot();
-    let publication_before = fabric.m8_designated_publication_snapshot("E.result");
+    let publication_before = fabric
+        .try_m8_designated_publication_snapshot("E.result")
+        .expect("publication observer query succeeds before evaluator failure");
     let prior_m8_sequence = m8_backend_latest_sequence(&fabric);
     let source_release_validation_before_e_failure = fabric
         .current_m9_authority_inspection()
@@ -7509,7 +7762,9 @@ fn post_dequeue_designated_evaluator_backend_rejection_quarantines_without_publi
     assert!(fabric.semantic_snapshot().same_state(&before));
     assert_eq!(fabric.designated_cache_snapshot(), cache_before);
     assert_eq!(
-        fabric.m8_designated_publication_snapshot("E.result"),
+        fabric
+            .try_m8_designated_publication_snapshot("E.result")
+            .expect("publication observer query succeeds after evaluator failure"),
         publication_before,
         "failed evaluator backend attempt must not publish a value"
     );
@@ -7728,26 +7983,478 @@ fn ow1_observer_snapshot_publication_absent_then_recovered_without_fabricating_s
     let mut fabric = boot(&checked, program, BackendProfile::Ow1);
 
     assert_eq!(
-        fabric.m8_designated_publication_snapshot("E.result"),
+        fabric
+            .try_m8_designated_publication_snapshot("E.result")
+            .expect("initial publication observer query succeeds"),
         None,
         "genuine absent publication is represented as None before any accepted evaluator publish"
     );
 
     stage_designated_publish_until_delivery_outbox(&mut fabric);
     let recovered = fabric
-        .m8_designated_publication_snapshot("E.result")
+        .try_m8_designated_publication_snapshot("E.result")
+        .expect("publication observer query succeeds after accepted publish")
         .expect("after accepted publish, observer snapshot recovers the worker-owned publication");
+    assert_eq!(recovered.value_name(), "E.result");
     assert!(
-        recovered.contains("E.result"),
-        "publication snapshot comes from the worker-owned M8 publication record, not expected JSON"
+        recovered.is_observer_safe(),
+        "publication snapshot comes from a typed worker-owned observer projection, not expected JSON"
     );
     assert_eq!(
         fabric
             .m8_actual_trace()
+            .expect("M8 observer available")
             .designated_evaluation_count("E.result"),
         1,
         "recovering a publication snapshot must not fabricate or replay evaluator work"
     );
+}
+
+#[test]
+fn ow1_designated_publication_observer_redacts_payload_and_authority_refs() {
+    let checked = designated_checked();
+    let program = fabric_program(designated_projection(&checked));
+    let distinctive_input = 8_675_309;
+    let distinctive_result = distinctive_input + 1;
+    let seed = Sys4InitialStateSeed::for_checked_program(checked.program_identity().clone())
+        .with_int("S", "player", "self", "hp", 99_999_001)
+        .with_int("S", "player", "self", "atk", distinctive_input);
+    let admission =
+        SealedFabricAdmission::from_m9_execution_seam(&program, m9_fabric_seam(&checked), seed)
+            .expect("complete M9 seam admits designated fabric with distinctive seed");
+    let mut fabric = LocalFabric::bootstrap(program, admission, BackendProfile::Ow1)
+        .expect("OW1 designated fabric boots from source-first admission");
+
+    stage_designated_publish_until_delivery_outbox_with_source_value(
+        &mut fabric,
+        distinctive_input,
+    );
+    let publication_observer = fabric
+        .try_m8_designated_publication_snapshot("E.result")
+        .expect("successful publication observer query is available")
+        .expect("designated publish creates one publication observer projection");
+    assert_eq!(publication_observer.value_name(), "E.result");
+    assert!(
+        publication_observer.is_observer_safe(),
+        "redacted projection may retain typed source-derived publication identity"
+    );
+    let publication_observer_debug = format!("{publication_observer:?}");
+    assert_observer_text_redacts_sensitive_fragments(
+        "designated publication observer",
+        &publication_observer_debug,
+        &[
+            &distinctive_input.to_string(),
+            &distinctive_result.to_string(),
+            "int_value",
+            "cap:",
+            "witness:",
+            "member:",
+            "membership_ref",
+            "capability_ref",
+            "witness_ref",
+            "M8DesignatedAuthorityUse",
+            "authority:",
+            "m8_authority",
+        ],
+    );
+}
+
+#[test]
+fn ow1_local_trace_failure_gates_all_m8_derived_observer_views_until_coherent_recovery() {
+    let checked = owner_endpoint_checked();
+    let program = fabric_program(owner_endpoint_projection(&checked));
+    let mut fabric = boot(&checked, program, BackendProfile::Ow1);
+
+    fabric
+        .recover_m8_local_trace_observer("S")
+        .expect("baseline local trace observer is available at OW1 owner locus");
+    let baseline_trace_len = fabric
+        .m8_local_runtime_trace()
+        .expect("baseline local trace query succeeds")
+        .len();
+    let submitted = fabric
+        .submit_source_action(owner_attack_action("attack"))
+        .expect("owner action submits before observer failure");
+    let request = fabric
+        .locus_runtime("A")
+        .expect("A exists")
+        .outgoing_mailbox()
+        .pending_envelopes()
+        .single();
+    fabric
+        .step_transport("A", "S", request.envelope_id())
+        .expect("request crosses A→S before observer failure");
+    fabric
+        .m8_backend_test_support_mut()
+        .fail_next_local_trace_snapshot_once()
+        .expect("OW1 backend supports a one-shot local-trace observer failure");
+
+    let s_step = fabric
+        .step_locus("S")
+        .expect("semantic owner operation commits despite observer failure");
+    assert_eq!(s_step.request_id(), submitted.request_id());
+    assert_observer_snapshot_failure(&fabric, ObserverSnapshotChannel::LocalTrace, "ow1");
+    let unavailable_trace = assert_sys4_diag(
+        fabric.m8_local_runtime_trace().map(|_| ()),
+        Sys4DiagnosticKind::ObserverSnapshotUnavailable,
+    );
+    assert!(!unavailable_trace.exposes_raw_payload());
+    let unavailable_fabric_m8_trace = assert_sys4_diag(
+        fabric.m8_local_trace().map(|_| ()),
+        Sys4DiagnosticKind::ObserverSnapshotUnavailable,
+    );
+    assert!(!unavailable_fabric_m8_trace.exposes_raw_payload());
+    let unavailable_actual_m8_trace = assert_sys4_diag(
+        fabric.m8_actual_trace().map(|_| ()),
+        Sys4DiagnosticKind::ObserverSnapshotUnavailable,
+    );
+    assert!(!unavailable_actual_m8_trace.exposes_raw_payload());
+    let unavailable_partition = assert_sys4_diag(
+        fabric.try_m8_partition_evidence().map(|_| ()),
+        Sys4DiagnosticKind::ObserverSnapshotUnavailable,
+    );
+    assert!(!unavailable_partition.exposes_raw_payload());
+
+    fabric
+        .recover_m8_local_trace_observer("S")
+        .expect("correct OW1 owner locus recovery refreshes the failed trace observer");
+    assert_no_observer_snapshot_failure(&fabric, ObserverSnapshotChannel::LocalTrace);
+    let recovered_trace = fabric
+        .m8_local_runtime_trace()
+        .expect("recovered trace observer is available");
+    assert!(
+        recovered_trace.len() > baseline_trace_len,
+        "recovery must expose the committed M8 rows rather than a stale pre-failure trace"
+    );
+    let recovered_serve = recovered_trace
+        .observation(s_step.m8_serve_node_id())
+        .expect("recovered trace contains the exact committed M8 owner serve row");
+    assert_eq!(recovered_serve.kind(), M8LocalTraceKind::OwnerWrite);
+    assert_eq!(recovered_serve.envelope_id(), request.envelope_id());
+    assert_eq!(recovered_serve.operation_id(), "attack");
+    assert_eq!(recovered_serve.owner_locus(), "S");
+    let actual_serve = fabric
+        .m8_actual_trace()
+        .expect("M8 observer available")
+        .node(s_step.m8_serve_node_id());
+    assert_eq!(actual_serve.kind(), M8LocalTraceKind::OwnerWrite);
+    assert_eq!(actual_serve.node_id(), s_step.m8_serve_node_id());
+    assert_eq!(
+        BTreeSet::<_>::from_iter(recovered_serve.predecessor_ids().iter().cloned()),
+        BTreeSet::<_>::from_iter(
+            fabric
+                .causality()
+                .predecessor_ids(s_step.m8_serve_node_id())
+                .into_iter()
+        ),
+        "recovered local trace predecessor set must match the fabric causality predecessor set exactly"
+    );
+    let partition_evidence = fabric
+        .try_m8_partition_evidence()
+        .expect("partition evidence recovers only after coherent LocalTrace recovery");
+    let partition_serve = partition_evidence
+        .partition("S")
+        .expect("S partition exists after recovery")
+        .single_m8_trace_occurrence_for_request(
+            submitted.request_id(),
+            M8LocalTraceKind::OwnerWrite,
+        );
+    assert_eq!(
+        partition_serve.fabric_qualified_id(),
+        s_step.m8_serve_node_id()
+    );
+    assert!(
+        partition_evidence.all_m8_trace_occurrences_resolve_in(
+            fabric.m8_actual_trace().expect("M8 observer available"),
+            fabric.causality()
+        ),
+        "recovered partition evidence must resolve back to the same actual M8 trace and SYS-4 causality graph"
+    );
+}
+
+#[test]
+fn ow1_local_trace_recovery_wrong_locus_rejects_without_rekeying_or_provenance_mutation() {
+    let checked = owner_endpoint_checked();
+    let program = fabric_program(owner_endpoint_projection(&checked));
+    let mut fabric = boot(&checked, program, BackendProfile::Ow1);
+    let receipt = fabric
+        .dispatch_source_action(owner_attack_action("attack"))
+        .expect("OW1 owner operation commits before observer recovery misuse");
+    fabric
+        .recover_m8_local_trace_observer("S")
+        .expect("correct owner-locus observer recovery establishes baseline trace state");
+    let trace_before = fabric
+        .m8_local_runtime_trace()
+        .expect("baseline trace observer is available")
+        .clone();
+    let actual_before = fabric
+        .m8_actual_trace()
+        .expect("M8 observer available")
+        .stable_digest();
+    let partition_before = fabric
+        .try_m8_partition_evidence()
+        .expect("baseline partition observer is available");
+    let partition_ids_before = partition_before.all_m8_trace_occurrence_ids();
+
+    let wrong_locus = assert_sys4_diag(
+        fabric.recover_m8_local_trace_observer("A"),
+        Sys4DiagnosticKind::WrongTargetLocus,
+    );
+    assert!(!wrong_locus.exposes_raw_payload());
+    assert_eq!(
+        fabric
+            .m8_local_runtime_trace()
+            .expect("wrong-locus rejection must not poison the existing observer trace"),
+        &trace_before,
+        "wrong-locus recovery must not re-key OW1 worker trace rows under A"
+    );
+    assert_eq!(
+        fabric
+            .m8_actual_trace()
+            .expect("M8 observer available")
+            .stable_digest(),
+        actual_before,
+        "wrong-locus recovery must not mutate actual M8 trace provenance"
+    );
+    let partition_after = fabric
+        .try_m8_partition_evidence()
+        .expect("wrong-locus rejection must not poison partition observer state");
+    assert_eq!(
+        partition_after.all_m8_trace_occurrence_ids(),
+        partition_ids_before,
+        "wrong-locus recovery must not add or re-key partition trace occurrences"
+    );
+    assert!(
+        partition_after.partition("A").is_none(),
+        "OW1 worker-owned M8 trace must not be exposed as an A partition"
+    );
+    assert_eq!(
+        fabric
+            .m8_actual_trace()
+            .expect("M8 observer available")
+            .owner_request_node_count("attack", "S"),
+        1,
+        "wrong-locus recovery must not replay the committed owner operation"
+    );
+    assert_eq!(receipt.typed_value(), RuntimeValue::unit());
+}
+
+#[test]
+fn ow1_local_trace_snapshot_failure_after_owner_commit_is_observer_only_and_recovers() {
+    let checked = owner_endpoint_checked();
+    let program = fabric_program(owner_endpoint_projection(&checked));
+    let mut fabric = boot(&checked, program, BackendProfile::Ow1);
+
+    fabric
+        .recover_m8_local_trace_observer("S")
+        .expect("empty OW1 local trace observer baseline is available");
+    let prior_observer_len = fabric
+        .m8_local_runtime_trace()
+        .expect("baseline observer trace is available")
+        .len();
+    let authority_generation_before = fabric.current_m9_authority_inspection().generation();
+    let before = fabric.semantic_snapshot();
+
+    let submitted = fabric
+        .submit_source_action(owner_attack_action("attack"))
+        .expect("OW1 owner request submits before observer failure injection");
+    let request = fabric
+        .locus_runtime("A")
+        .expect("A exists")
+        .outgoing_mailbox()
+        .pending_envelopes()
+        .single();
+    fabric
+        .step_transport("A", "S", request.envelope_id())
+        .expect("owner request reaches S before observer failure injection");
+    fabric
+        .m8_backend_test_support_mut()
+        .fail_next_local_trace_snapshot_once()
+        .expect("OW1 backend supports a one-shot local-trace observer failure");
+
+    let s_step = fabric.step_locus("S").expect(
+        "observer snapshot failure after M8 commit must not convert the semantic owner operation to Err",
+    );
+    assert_eq!(
+        fabric.semantic_snapshot().int("S", "player", "self", "hp"),
+        Some(90)
+    );
+    assert_eq!(
+        fabric.semantic_snapshot().changed_loci_since(&before),
+        vec!["S".to_string()],
+        "only the owner locus state changes, once, despite observer failure"
+    );
+    assert_eq!(
+        fabric.current_m9_authority_inspection().generation(),
+        authority_generation_before,
+        "observer failure must not mutate M9 authority generation"
+    );
+    assert_observer_snapshot_failure(&fabric, ObserverSnapshotChannel::LocalTrace, "ow1");
+    let observer_error = assert_sys4_diag(
+        fabric.m8_local_runtime_trace().map(|_| ()),
+        Sys4DiagnosticKind::ObserverSnapshotUnavailable,
+    );
+    assert!(!observer_error.exposes_raw_payload());
+
+    fabric
+        .recover_m8_local_trace_observer("S")
+        .expect("next OW1 local-trace observer query recovers after one-shot failure");
+    assert_no_observer_snapshot_failure(&fabric, ObserverSnapshotChannel::LocalTrace);
+    let recovered_trace = fabric
+        .m8_local_runtime_trace()
+        .expect("recovered observer trace is available");
+    assert!(
+        recovered_trace.len() > prior_observer_len,
+        "recovery must incorporate the committed M8 owner rows rather than keep stale prior trace"
+    );
+    let serve = recovered_trace
+        .observation(s_step.m8_serve_node_id())
+        .expect("recovered trace contains the exact latest owner serve/write row");
+    assert_eq!(serve.kind(), M8LocalTraceKind::OwnerWrite);
+    assert_eq!(serve.envelope_id(), request.envelope_id());
+    assert_eq!(serve.operation_id(), "attack");
+    assert_eq!(serve.owner_locus(), "S");
+
+    let reply = fabric
+        .locus_runtime("S")
+        .expect("S exists")
+        .outgoing_mailbox()
+        .pending_envelopes()
+        .single();
+    fabric
+        .step_transport("S", "A", reply.envelope_id())
+        .expect("reply transports after observer recovery");
+    let receipt_step = fabric
+        .step_locus("A")
+        .expect("origin receives semantic success after observer-only failure");
+    let receipt = receipt_step
+        .receipt()
+        .expect("owner reply remains a semantic success receipt");
+    assert_eq!(receipt.request_id(), submitted.request_id());
+    assert_eq!(
+        fabric.semantic_snapshot().int("S", "player", "self", "hp"),
+        Some(90),
+        "recovery and receipt delivery must not retry or double-apply the owner mutation"
+    );
+    assert_eq!(
+        fabric
+            .m8_actual_trace()
+            .expect("M8 observer available")
+            .owner_request_node_count("attack", "S"),
+        1,
+        "recovery must expose exactly one committed M8 owner request, not replay the operation"
+    );
+}
+
+#[test]
+fn ow1_designated_publication_snapshot_failure_is_typed_not_absent_and_recovers_exact_value() {
+    let checked = designated_checked();
+    let program = fabric_program(designated_projection(&checked));
+    let mut absent = boot(&checked, program.clone(), BackendProfile::Ow1);
+    assert_eq!(
+        absent
+            .try_m8_designated_publication_snapshot("E.result")
+            .expect("absent publication query succeeds"),
+        None,
+        "Ok(None) means genuinely absent publication"
+    );
+
+    let mut fabric = boot(&checked, program, BackendProfile::Ow1);
+    stage_designated_publish_until_delivery_outbox(&mut fabric);
+    let publication_before = fabric
+        .try_m8_designated_publication_snapshot("E.result")
+        .expect("publication observer query succeeds after publish")
+        .expect("accepted publish creates a worker-owned publication");
+    let eval_count_before = fabric
+        .m8_actual_trace()
+        .expect("M8 observer available")
+        .designated_evaluation_count("E.result");
+    let m8_sequence_before = m8_backend_latest_sequence(&fabric);
+    fabric
+        .m8_backend_test_support_mut()
+        .fail_next_designated_publication_snapshot_once()
+        .expect("OW1 backend supports one-shot designated publication snapshot failure");
+
+    let unavailable = assert_sys4_diag(
+        fabric.try_m8_designated_publication_snapshot("E.result"),
+        Sys4DiagnosticKind::ObserverSnapshotUnavailable,
+    );
+    assert!(!unavailable.exposes_raw_payload());
+    assert_observer_snapshot_failure(
+        &fabric,
+        ObserverSnapshotChannel::DesignatedPublication,
+        "observer:designated-publication",
+    );
+    assert_eq!(
+        fabric
+            .m8_actual_trace()
+            .expect("M8 observer available")
+            .designated_evaluation_count("E.result"),
+        eval_count_before,
+        "failed observer query must not replay designated evaluation"
+    );
+    assert_eq!(
+        m8_backend_latest_sequence(&fabric),
+        m8_sequence_before,
+        "failed observer query must not append M8 trace rows"
+    );
+
+    let recovered = fabric
+        .try_m8_designated_publication_snapshot("E.result")
+        .expect("one-shot publication observer failure recovers on next query")
+        .expect("publication is still present after observer recovery");
+    assert_eq!(
+        recovered, publication_before,
+        "recovery returns the exact worker-owned publication snapshot, not a synthesized replacement"
+    );
+    assert_no_observer_snapshot_failure(&fabric, ObserverSnapshotChannel::DesignatedPublication);
+    assert_eq!(
+        fabric
+            .m8_actual_trace()
+            .expect("M8 observer available")
+            .designated_evaluation_count("E.result"),
+        eval_count_before
+    );
+}
+
+#[test]
+fn ow1_observer_safe_session_failure_is_typed_status_only_and_recovers_without_mutation() {
+    let checked = owner_endpoint_checked();
+    let program = fabric_program(owner_endpoint_projection(&checked));
+    let mut fabric = boot(&checked, program, BackendProfile::Ow1);
+    let before = fabric.semantic_snapshot();
+    let authority_generation_before = fabric.current_m9_authority_inspection().generation();
+
+    fabric
+        .m8_backend_test_support_mut()
+        .fail_next_observer_safe_session_once()
+        .expect("OW1 backend supports one-shot observer-safe session failure");
+    let unavailable = assert_sys4_diag(
+        fabric.try_m8_partition_evidence(),
+        Sys4DiagnosticKind::ObserverSnapshotUnavailable,
+    );
+    assert!(!unavailable.exposes_raw_payload());
+    assert_observer_snapshot_failure(&fabric, ObserverSnapshotChannel::ObserverSafeSession, "ow1");
+    assert!(
+        fabric.semantic_snapshot().same_state(&before),
+        "observer-safe session failure must not mutate semantic state"
+    );
+    assert_eq!(
+        fabric.current_m9_authority_inspection().generation(),
+        authority_generation_before,
+        "observer-safe session failure must not mutate authority"
+    );
+
+    let evidence = fabric
+        .try_m8_partition_evidence()
+        .expect("observer-safe session snapshot recovers on next query");
+    assert!(evidence.is_observer_safe());
+    assert!(
+        evidence.partition("S").is_some(),
+        "recovered OW1 observer-safe session belongs to the worker owner locus"
+    );
+    assert_no_observer_snapshot_failure(&fabric, ObserverSnapshotChannel::ObserverSafeSession);
+    assert!(fabric.semantic_snapshot().same_state(&before));
 }
 
 #[test]
@@ -7804,10 +8511,88 @@ fn ow1_observer_snapshot_failures_require_typed_once_injection_and_observer_diag
 
 #[test]
 fn ow1_observer_snapshot_paths_must_not_collapse_worker_failure_to_option_or_stale_cache() {
+    let sys2 = read_runtime_src("sys2_execution_backend.rs");
     let sys4 = read_runtime_src("sys4_dispatch.rs");
+    let compact_sys2 = normalize_source_for_boundary_scan(&sys2);
     let compact_sys4 = normalize_source_for_boundary_scan(&sys4);
 
     let mut violations = Vec::new();
+    if compact_sys2.contains("format!(\"{value:?}\")")
+        || compact_sys4.contains("format!(\"{value:?}\")")
+    {
+        violations.push(
+            "designated publication observer snapshots must use a typed redacted projection, not Debug-format the raw M8PublishedDesignatedValue with payload/authority refs".to_string(),
+        );
+    }
+    if compact_sys4.contains("fnm8_partition_evidence(") {
+        violations.push(
+            "LocalFabric must not retain a compatibility m8_partition_evidence alias; callers must use try_m8_partition_evidence so worker observer failures remain typed".to_string(),
+        );
+    }
+    if compact_sys4.contains("m8_local_runtime_trace_for_observer") {
+        violations.push(
+            "LocalFabric must not retain m8_local_runtime_trace_for_observer; m8_local_runtime_trace itself must be the typed observer boundary".to_string(),
+        );
+    }
+    if compact_sys4.contains("fnm8_local_runtime_trace(&self)->&M8LocalTrace") {
+        violations.push(
+            "LocalFabric::m8_local_runtime_trace must not return a bare trace reference that can serve stale cached observer state after worker failure".to_string(),
+        );
+    }
+    for (signature, label) in [
+        (
+            "fnm8_local_trace(&self)->&FabricM8Trace",
+            "LocalFabric::m8_local_trace",
+        ),
+        (
+            "fnm8_actual_trace(&self)->&ActualM8Trace",
+            "LocalFabric::m8_actual_trace",
+        ),
+    ] {
+        if compact_sys4.contains(signature) {
+            violations.push(format!(
+                "{label} is an M8-derived observer view and must return typed observer-unavailable after a LocalTrace worker snapshot failure, not a bare stale reference"
+            ));
+        }
+    }
+    let local_trace_observer_body =
+        extract_balanced_fn_body(&sys4, "pub(crate) fn m8_local_runtime_trace(")
+            .or_else(|| extract_balanced_fn_body(&sys4, "fn m8_local_runtime_trace("))
+            .expect("m8_local_runtime_trace body exists");
+    let compact_local_trace_observer =
+        normalize_source_for_boundary_scan(&local_trace_observer_body);
+    if !compact_local_trace_observer.contains("ObserverSnapshotChannel::LocalTrace")
+        || !compact_local_trace_observer.contains("returnErr(")
+    {
+        violations.push(
+            "LocalFabric::m8_local_runtime_trace must check LocalTrace observer failure state and return a typed Err before exposing cached trace state".to_string(),
+        );
+    }
+    let partition_evidence_body =
+        extract_balanced_fn_body(&sys4, "pub(crate) fn try_m8_partition_evidence(")
+            .or_else(|| extract_balanced_fn_body(&sys4, "fn try_m8_partition_evidence("))
+            .expect("try_m8_partition_evidence body exists");
+    let compact_partition_evidence = normalize_source_for_boundary_scan(&partition_evidence_body);
+    for banned in [
+        ".ok()",
+        "Err(_)=>Ok(None)",
+        "Err(_)=>None",
+        "Err(_)=>returnOk(",
+        "Err(_)=>returnNone",
+    ] {
+        if compact_partition_evidence.contains(banned) {
+            violations.push(format!(
+                "try_m8_partition_evidence must not collapse observer_safe_session worker Err into a missing partition with `{banned}`"
+            ));
+        }
+    }
+    if !compact_partition_evidence.contains("ObserverSnapshotChannel::ObserverSafeSession")
+        || !compact_partition_evidence.contains("returnErr(")
+    {
+        violations.push(
+            "try_m8_partition_evidence must record ObserverSafeSession failure and return a typed Err instead of reporting a missing partition".to_string(),
+        );
+    }
     for (marker, label, banned_option_signature) in [
         (
             "fn local_trace_snapshot(",
@@ -7860,9 +8645,12 @@ fn ow1_observer_snapshot_paths_must_not_collapse_worker_failure_to_option_or_sta
             "refresh_m8_local_runtime_trace must not silently keep serving a stale cached trace when an OW1 observer snapshot fails".to_string(),
         );
     }
-    if compact_sys4.contains("m8_designated_publication_snapshot(&self,value_name:&str)->Option<") {
+    if compact_sys4.contains("fnm8_designated_publication_snapshot(&self,value_name:&str)->Option<")
+        || compact_sys4
+            .contains("fnm8_designated_publication_snapshot(&mutself,value_name:&str)->Option<")
+    {
         violations.push(
-            "LocalFabric designated publication observer API must distinguish worker observer failure from genuine absence".to_string(),
+            "LocalFabric must not retain an Option-returning designated publication observer compatibility helper; callers must use the typed try_m8_designated_publication_snapshot API".to_string(),
         );
     }
 

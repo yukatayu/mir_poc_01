@@ -711,39 +711,60 @@ impl M8LocalTrace {
         }
     }
 
-    /// Append the newly observed part of one local session as an observer
-    /// fabric view.  Raw M8 identities are left in the source session; only
-    /// the aggregate receives locus-qualified node/occurrence identities.
-    /// `known_nodes` and `dependency_projection` are computed by SYS-4 from
-    /// actual session rows.  The latter preserves same-semantic-locus M8
-    /// dependencies across refreshes while excluding only physical OW1 worker
-    /// chaining across semantic loci.
-    pub(crate) fn append_fabric_qualified_delta(
+    /// Reconcile the observer aggregate for one actual M8 session against a
+    /// complete fresh worker snapshot.  This replaces, rather than unions,
+    /// each qualified row's projected predecessor set.  It is used after an
+    /// observer outage, when SYS-4 may have retained provisional identities
+    /// for a committed semantic operation but must not expose a partial
+    /// aggregate trace.
+    pub(crate) fn reconcile_fabric_qualified_session(
         &mut self,
         source: &Self,
-        start: usize,
         known_nodes: &BTreeMap<String, String>,
         dependency_projection: &BTreeMap<String, Vec<String>>,
     ) {
-        for source_entry in source.entries.iter().skip(start) {
-            let raw_node_id = source_entry.node_id.clone();
+        let session_node_ids: BTreeSet<_> = known_nodes.values().cloned().collect();
+        let source_node_ids: BTreeSet<_> = source
+            .entries
+            .iter()
+            .map(|entry| {
+                known_nodes
+                    .get(&entry.node_id)
+                    .cloned()
+                    .expect("SYS-4 registered each actual M8 node before reconciliation")
+            })
+            .collect();
+        self.entries.retain(|entry| {
+            !session_node_ids.contains(&entry.node_id) || source_node_ids.contains(&entry.node_id)
+        });
+        for source_entry in &source.entries {
+            let raw_node_id = &source_entry.node_id;
             let qualified_node_id = known_nodes
-                .get(&raw_node_id)
+                .get(raw_node_id)
                 .cloned()
-                .expect("SYS-4 registered each actual M8 node before projection");
+                .expect("SYS-4 registered each actual M8 node before reconciliation");
             let mut entry = source_entry.clone();
-            entry.node_index = self.next_node_index;
-            self.next_node_index += 1;
             entry.node_id = qualified_node_id.clone();
             entry.dependencies = dependency_projection
-                .get(&raw_node_id)
+                .get(raw_node_id)
                 .cloned()
                 .map(BTreeSet::from_iter)
                 .expect("SYS-4 projected exact dependencies for each actual M8 node");
             if entry.occurrence_id.as_deref() == Some(raw_node_id.as_str()) {
-                entry.occurrence_id = Some(qualified_node_id);
+                entry.occurrence_id = Some(qualified_node_id.clone());
             }
-            self.entries.push(entry);
+            if let Some(existing) = self
+                .entries
+                .iter_mut()
+                .find(|existing| existing.node_id == qualified_node_id)
+            {
+                entry.node_index = existing.node_index;
+                *existing = entry;
+            } else {
+                entry.node_index = self.next_node_index;
+                self.next_node_index += 1;
+                self.entries.push(entry);
+            }
         }
     }
 

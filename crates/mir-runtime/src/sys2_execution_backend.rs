@@ -13,6 +13,7 @@ use std::{
 use mir_semantics::shared_model::SourceRef;
 
 use crate::{
+    m8_runtime_admission::{EvidenceRedaction, EvidenceSecurityLabel},
     m8_runtime_authority::M8AuthorityState,
     m8_runtime_designated_value::{
         M8ConsumeRequest, M8ConsumedDesignatedValue, M8DesignatedDiagnostics,
@@ -36,6 +37,45 @@ use crate::m8_runtime_local_cut::M8LocalSessionObserver;
 pub(crate) enum ExecutionProfile {
     St,
     Ow1,
+}
+
+/// Typed, observer-safe projection of one M8 designated publication.
+///
+/// The owning M8 session retains the result payload and all authority,
+/// membership, capability, and witness evidence.  SYS-2 exposes only the
+/// checked publication identity, version, source provenance, and the
+/// visibility/redaction policy that permits this observer view.
+#[derive(Debug, Clone, PartialEq, Eq)]
+pub(crate) struct Ow1ObserverDesignatedPublication {
+    value_id: String,
+    value_name: String,
+    evaluator: String,
+    result_version: mir_semantics::shared_model::ResultVersion,
+    source_ref: SourceRef,
+    visibility_label: EvidenceSecurityLabel,
+    redaction: EvidenceRedaction,
+}
+
+impl Ow1ObserverDesignatedPublication {
+    pub(crate) fn from_published(value: &M8PublishedDesignatedValue) -> Self {
+        Self {
+            value_id: value.value_id().to_string(),
+            value_name: value.value_name().to_string(),
+            evaluator: value.evaluator().to_string(),
+            result_version: value.result_version(),
+            source_ref: value.source_ref().clone(),
+            visibility_label: value.visibility_label().clone(),
+            redaction: value.redaction().clone(),
+        }
+    }
+
+    pub(crate) fn value_name(&self) -> &str {
+        &self.value_name
+    }
+
+    pub(crate) const fn is_observer_safe(&self) -> bool {
+        true
+    }
 }
 
 #[derive(Debug, Clone, PartialEq, Eq)]
@@ -101,6 +141,10 @@ impl Ow1WorkerEvidence {
 pub(crate) enum Ow1WorkerFailure {
     Disconnected,
     WorkerPanicked,
+    /// The worker is live, but it could not provide a clone-only observer
+    /// snapshot.  This is deliberately distinct from transport/liveness and
+    /// from an actually absent publication.
+    ObserverSnapshotUnavailable,
     Enqueue(M8EnqueueDiagnostics),
     Serve(M8ServeDiagnostics),
     Designated(M8DesignatedDiagnostics),
@@ -254,7 +298,7 @@ enum Ow1Command {
     },
     DesignatedPublicationSnapshot {
         value_name: String,
-        reply: SyncSender<Option<String>>,
+        reply: SyncSender<Result<Option<Ow1ObserverDesignatedPublication>, Ow1WorkerFailure>>,
     },
     ReadOwnerIntWithContext {
         key: M8StateKey,
@@ -274,11 +318,25 @@ enum Ow1Command {
         reply: SyncSender<M8LocalRuntime>,
     },
     TraceSnapshot {
-        reply: SyncSender<M8LocalTrace>,
+        reply: SyncSender<Result<M8LocalTrace, Ow1WorkerFailure>>,
     },
     #[cfg(test)]
     ObserverSessionSnapshot {
-        reply: SyncSender<M8LocalSessionObserver>,
+        reply: SyncSender<Result<M8LocalSessionObserver, Ow1WorkerFailure>>,
+    },
+    /// Narrow test-only fault arms for clone-only observer commands.  They
+    /// never affect M8 execution, authority, or owned semantic state.
+    #[cfg(test)]
+    FailNextLocalTraceSnapshotOnce {
+        reply: SyncSender<()>,
+    },
+    #[cfg(test)]
+    FailNextDesignatedPublicationSnapshotOnce {
+        reply: SyncSender<()>,
+    },
+    #[cfg(test)]
+    FailNextObserverSafeSessionOnce {
+        reply: SyncSender<()>,
     },
     #[cfg(test)]
     ArmOwnerOperationRejection {
@@ -486,13 +544,15 @@ impl Ow1WorkerBackend {
     pub(crate) fn designated_publication_snapshot(
         &self,
         value_name: &str,
-    ) -> Result<Option<String>, Ow1WorkerFailure> {
+    ) -> Result<Option<Ow1ObserverDesignatedPublication>, Ow1WorkerFailure> {
         let (reply, receiver) = mpsc::sync_channel(0);
         self.send(Ow1Command::DesignatedPublicationSnapshot {
             value_name: value_name.to_string(),
             reply,
         })?;
-        receiver.recv().map_err(|_| Ow1WorkerFailure::Disconnected)
+        receiver
+            .recv()
+            .map_err(|_| Ow1WorkerFailure::Disconnected)?
     }
 
     /// Read a designated source-owner value only in the worker-owned M8
@@ -548,7 +608,9 @@ impl Ow1WorkerBackend {
     pub(crate) fn local_trace_snapshot(&self) -> Result<M8LocalTrace, Ow1WorkerFailure> {
         let (reply, receiver) = mpsc::sync_channel(0);
         self.send(Ow1Command::TraceSnapshot { reply })?;
-        receiver.recv().map_err(|_| Ow1WorkerFailure::Disconnected)
+        receiver
+            .recv()
+            .map_err(|_| Ow1WorkerFailure::Disconnected)?
     }
 
     /// Test-only redacted observer view of the sole worker-owned M8 session.
@@ -558,6 +620,34 @@ impl Ow1WorkerBackend {
     pub(crate) fn observer_safe_session(&self) -> Result<M8LocalSessionObserver, Ow1WorkerFailure> {
         let (reply, receiver) = mpsc::sync_channel(0);
         self.send(Ow1Command::ObserverSessionSnapshot { reply })?;
+        receiver
+            .recv()
+            .map_err(|_| Ow1WorkerFailure::Disconnected)?
+    }
+
+    /// Cause exactly the next clone-only local-trace observation to fail.
+    /// This test seam resides in the worker so a coordinator cannot fake an
+    /// observer failure or mutate semantic M8 state while doing so.
+    #[cfg(test)]
+    pub(crate) fn fail_next_local_trace_snapshot_once(&self) -> Result<(), Ow1WorkerFailure> {
+        let (reply, receiver) = mpsc::sync_channel(0);
+        self.send(Ow1Command::FailNextLocalTraceSnapshotOnce { reply })?;
+        receiver.recv().map_err(|_| Ow1WorkerFailure::Disconnected)
+    }
+
+    #[cfg(test)]
+    pub(crate) fn fail_next_designated_publication_snapshot_once(
+        &self,
+    ) -> Result<(), Ow1WorkerFailure> {
+        let (reply, receiver) = mpsc::sync_channel(0);
+        self.send(Ow1Command::FailNextDesignatedPublicationSnapshotOnce { reply })?;
+        receiver.recv().map_err(|_| Ow1WorkerFailure::Disconnected)
+    }
+
+    #[cfg(test)]
+    pub(crate) fn fail_next_observer_safe_session_once(&self) -> Result<(), Ow1WorkerFailure> {
+        let (reply, receiver) = mpsc::sync_channel(0);
+        self.send(Ow1Command::FailNextObserverSafeSessionOnce { reply })?;
         receiver.recv().map_err(|_| Ow1WorkerFailure::Disconnected)
     }
 
@@ -614,6 +704,14 @@ fn run_worker(receiver: Receiver<Ow1Command>, mut runtime: M8LocalRuntime) {
     // deliberately worker-owned: the coordinator may validate carriers but
     // cannot choose a later M8 request to execute.
     let mut pending_m8_requests = VecDeque::new();
+    // Observer-failure injection is intentionally worker-local.  It cannot
+    // affect M8 execution, authority, or semantic state.
+    #[cfg(test)]
+    let mut fail_next_local_trace_snapshot_once = false;
+    #[cfg(test)]
+    let mut fail_next_designated_publication_snapshot_once = false;
+    #[cfg(test)]
+    let mut fail_next_observer_safe_session_once = false;
     while let Ok(command) = receiver.recv() {
         match command {
             Ow1Command::Enqueue { request, reply } => {
@@ -743,12 +841,17 @@ fn run_worker(receiver: Receiver<Ow1Command>, mut runtime: M8LocalRuntime) {
                 let _ = reply.send(runtime.has_designated_publication_id(&value_name, &value_id));
             }
             Ow1Command::DesignatedPublicationSnapshot { value_name, reply } => {
+                #[cfg(test)]
+                if std::mem::take(&mut fail_next_designated_publication_snapshot_once) {
+                    let _ = reply.send(Err(Ow1WorkerFailure::ObserverSnapshotUnavailable));
+                    continue;
+                }
                 let publication = runtime
                     .designated_result_store()
                     .published_values(&value_name)
                     .first()
-                    .map(|value| format!("{value:?}"));
-                let _ = reply.send(publication);
+                    .map(|value| Ow1ObserverDesignatedPublication::from_published(value));
+                let _ = reply.send(Ok(publication));
             }
             Ow1Command::ReadOwnerIntWithContext {
                 key,
@@ -773,11 +876,35 @@ fn run_worker(receiver: Receiver<Ow1Command>, mut runtime: M8LocalRuntime) {
                 let _ = reply.send(runtime.clone());
             }
             Ow1Command::TraceSnapshot { reply } => {
-                let _ = reply.send(runtime.trace());
+                #[cfg(test)]
+                if std::mem::take(&mut fail_next_local_trace_snapshot_once) {
+                    let _ = reply.send(Err(Ow1WorkerFailure::ObserverSnapshotUnavailable));
+                    continue;
+                }
+                let _ = reply.send(Ok(runtime.trace()));
             }
             #[cfg(test)]
             Ow1Command::ObserverSessionSnapshot { reply } => {
-                let _ = reply.send(runtime.observer_safe_session());
+                if std::mem::take(&mut fail_next_observer_safe_session_once) {
+                    let _ = reply.send(Err(Ow1WorkerFailure::ObserverSnapshotUnavailable));
+                    continue;
+                }
+                let _ = reply.send(Ok(runtime.observer_safe_session()));
+            }
+            #[cfg(test)]
+            Ow1Command::FailNextLocalTraceSnapshotOnce { reply } => {
+                fail_next_local_trace_snapshot_once = true;
+                let _ = reply.send(());
+            }
+            #[cfg(test)]
+            Ow1Command::FailNextDesignatedPublicationSnapshotOnce { reply } => {
+                fail_next_designated_publication_snapshot_once = true;
+                let _ = reply.send(());
+            }
+            #[cfg(test)]
+            Ow1Command::FailNextObserverSafeSessionOnce { reply } => {
+                fail_next_observer_safe_session_once = true;
+                let _ = reply.send(());
             }
             #[cfg(test)]
             Ow1Command::ArmOwnerOperationRejection { context, reply } => {
