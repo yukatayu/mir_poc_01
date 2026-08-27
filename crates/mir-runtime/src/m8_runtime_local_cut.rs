@@ -899,8 +899,8 @@ impl M8LocalTrace {
         source_ref: SourceRef,
         context: M8LocalDesignatedTraceContext,
         failure: Option<M8LocalFailure>,
-    ) -> String {
-        self.append_fact(
+    ) -> M8LocalTraceObservation {
+        let observation = self.append_fact(
             kind,
             source_ref,
             None,
@@ -910,12 +910,33 @@ impl M8LocalTrace {
             failure,
             None,
         );
-        let entry = self
-            .entries
-            .last_mut()
-            .expect("M8 designated observation appends one local trace entry");
-        entry.designated = Some(context);
-        entry.node_id.clone()
+        self.attach_designated_context(&observation.node_id, context)
+            .expect("M8 designated observation remains present")
+    }
+
+    /// Append the read-only source-owner observation with an occurrence ID
+    /// that is exactly the M8-owned node ID.  SYS-4 can therefore retain the
+    /// returned node as a local-read audit without minting a parallel
+    /// coordinator occurrence.
+    fn append_contextual_owner_read(
+        &mut self,
+        source_ref: SourceRef,
+        context: M8LocalDesignatedTraceContext,
+    ) -> M8LocalTraceObservation {
+        let occurrence_id = format!("m8-local-trace-{:020}", self.next_node_index);
+        let observation = self.append_fact(
+            M8LocalTraceKind::OwnerRead,
+            source_ref,
+            Some(occurrence_id.clone()),
+            None,
+            false,
+            M8LocalAuthorityRefs::default(),
+            None,
+            None,
+        );
+        debug_assert_eq!(observation.node_id, occurrence_id);
+        self.attach_designated_context(&observation.node_id, context)
+            .expect("M8 contextual owner read remains present")
     }
 }
 
@@ -1529,6 +1550,25 @@ impl M8LocalRuntime {
         }
     }
 
+    /// Read an admitted owner/source value after its generated carrier has
+    /// been dequeued and the caller has validated the sealed M9 source
+    /// release.  This never invokes the owner queue or mutates the semantic
+    /// snapshot; it records exactly one M8-owned `OwnerRead` observation for
+    /// a present value and carries the exact carrier context into that row.
+    pub(crate) fn read_owner_int_with_context(
+        &mut self,
+        key: M8StateKey,
+        source_ref: SourceRef,
+        context: M8LocalDesignatedTraceContext,
+    ) -> Option<(i64, M8LocalTraceObservation)> {
+        let value = self.shared_snapshot.int(&key)?;
+        let observation = self
+            .trace
+            .borrow_mut()
+            .append_contextual_owner_read(source_ref, context);
+        Some((value, observation))
+    }
+
     pub fn serve_next_owner(
         &mut self,
         owner_locus: &str,
@@ -1951,12 +1991,17 @@ impl M8LocalRuntime {
         speculative.semantic_snapshot = self.shared_snapshot.clone();
         speculative.consumption_state = M8ConsumptionState::default();
         speculative.consume_published_value(request)?;
-        Ok(self.trace.borrow_mut().append_designated(
-            M8LocalTraceKind::DesignatedCacheValidated,
-            self.admitted.program_identity().root_source_ref().clone(),
-            context,
-            None,
-        ))
+        Ok(self
+            .trace
+            .borrow_mut()
+            .append_designated(
+                M8LocalTraceKind::DesignatedCacheValidated,
+                self.admitted.program_identity().root_source_ref().clone(),
+                context,
+                None,
+            )
+            .node_id()
+            .to_string())
     }
 
     fn attach_context_to_rows(

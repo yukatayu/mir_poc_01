@@ -10,8 +10,14 @@ use std::{
     thread::{self, JoinHandle},
 };
 
+use mir_semantics::shared_model::SourceRef;
+
 use crate::{
     m8_runtime_authority::M8AuthorityState,
+    m8_runtime_designated_value::{
+        M8ConsumeRequest, M8ConsumedDesignatedValue, M8DesignatedDiagnostics,
+        M8DesignatedEvaluationRequest, M8InputReceiptSet, M8PublishedDesignatedValue,
+    },
     m8_runtime_local_cut::{
         M8LocalDesignatedTraceContext, M8LocalRuntime, M8LocalTrace, M8LocalTraceKind,
         M8LocalTraceObservation,
@@ -94,11 +100,32 @@ pub(crate) enum Ow1WorkerFailure {
     WorkerPanicked,
     Enqueue(M8EnqueueDiagnostics),
     Serve(M8ServeDiagnostics),
+    Designated(M8DesignatedDiagnostics),
     /// The coordinator attempted to attribute a kernel request to a worker
     /// FIFO entry other than the actual M8 head.  Do not serve in this case:
     /// any mutation would be misattributed.
     FifoIdentityMismatch,
 }
+
+/// Exact M8-owned contextual result of a designated evaluator command.
+/// The outer result represents worker transport/liveness; the inner result
+/// represents the M8 semantic outcome and retains its own trace occurrence.
+pub(crate) type Ow1ContextualDesignatedEvaluation = Result<
+    (
+        M8PublishedDesignatedValue,
+        M8LocalTraceObservation,
+        M8LocalTraceObservation,
+    ),
+    Box<M8LocalTraceObservation>,
+>;
+
+/// Exact M8-owned contextual result of a designated consumer command.
+pub(crate) type Ow1ContextualDesignatedConsumption =
+    Result<(M8ConsumedDesignatedValue, M8LocalTraceObservation), Box<M8LocalTraceObservation>>;
+
+/// Exact M8-owned source-owner read result.  A missing value remains an
+/// acknowledged absence; worker transport failure is represented separately.
+pub(crate) type Ow1ContextualOwnerRead = Option<(i64, M8LocalTraceObservation)>;
 
 /// Immutable worker acknowledgement of one actual M8 owner transition.
 ///
@@ -188,6 +215,40 @@ enum Ow1Command {
         request: M8OwnerRequest,
         context: Box<M8LocalDesignatedTraceContext>,
         reply: SyncSender<Result<Ow1ContextualM8Execution, Ow1WorkerFailure>>,
+    },
+    ReplaceDesignatedInputReceipts {
+        receipts: M8InputReceiptSet,
+        reply: SyncSender<()>,
+    },
+    EvaluateDesignatedWithContext {
+        request: M8DesignatedEvaluationRequest,
+        context: Box<M8LocalDesignatedTraceContext>,
+        reply: SyncSender<Result<Ow1ContextualDesignatedEvaluation, Ow1WorkerFailure>>,
+    },
+    ConsumeDesignatedWithContext {
+        request: M8ConsumeRequest,
+        context: Box<M8LocalDesignatedTraceContext>,
+        reply: SyncSender<Result<Ow1ContextualDesignatedConsumption, Ow1WorkerFailure>>,
+    },
+    ValidateDesignatedNonConsuming {
+        request: M8ConsumeRequest,
+        context: Box<M8LocalDesignatedTraceContext>,
+        reply: SyncSender<Result<String, Ow1WorkerFailure>>,
+    },
+    HasDesignatedPublicationId {
+        value_name: String,
+        value_id: String,
+        reply: SyncSender<bool>,
+    },
+    DesignatedPublicationSnapshot {
+        value_name: String,
+        reply: SyncSender<Option<String>>,
+    },
+    ReadOwnerIntWithContext {
+        key: M8StateKey,
+        source_ref: SourceRef,
+        context: Box<M8LocalDesignatedTraceContext>,
+        reply: SyncSender<Result<Ow1ContextualOwnerRead, Ow1WorkerFailure>>,
     },
     ReadOwnerInt {
         key: M8StateKey,
@@ -289,6 +350,113 @@ impl Ow1WorkerBackend {
         self.send(Ow1Command::ExecuteOwnerWithContext {
             owner_locus: owner_locus.to_string(),
             request,
+            context: Box::new(context),
+            reply,
+        })?;
+        receiver
+            .recv()
+            .map_err(|_| Ow1WorkerFailure::Disconnected)?
+    }
+
+    /// Install a generated source-owner receipt in the sole worker-owned M8
+    /// runtime.  The acknowledgement is issued only after that replacement is
+    /// visible to a later evaluator command on the same worker mailbox.
+    pub(crate) fn replace_designated_input_receipts(
+        &self,
+        receipts: M8InputReceiptSet,
+    ) -> Result<(), Ow1WorkerFailure> {
+        let (reply, receiver) = mpsc::sync_channel(0);
+        self.send(Ow1Command::ReplaceDesignatedInputReceipts { receipts, reply })?;
+        receiver.recv().map_err(|_| Ow1WorkerFailure::Disconnected)
+    }
+
+    pub(crate) fn evaluate_designated_with_context(
+        &self,
+        request: M8DesignatedEvaluationRequest,
+        context: M8LocalDesignatedTraceContext,
+    ) -> Result<Ow1ContextualDesignatedEvaluation, Ow1WorkerFailure> {
+        let (reply, receiver) = mpsc::sync_channel(0);
+        self.send(Ow1Command::EvaluateDesignatedWithContext {
+            request,
+            context: Box::new(context),
+            reply,
+        })?;
+        receiver
+            .recv()
+            .map_err(|_| Ow1WorkerFailure::Disconnected)?
+    }
+
+    pub(crate) fn consume_designated_with_context(
+        &self,
+        request: M8ConsumeRequest,
+        context: M8LocalDesignatedTraceContext,
+    ) -> Result<Ow1ContextualDesignatedConsumption, Ow1WorkerFailure> {
+        let (reply, receiver) = mpsc::sync_channel(0);
+        self.send(Ow1Command::ConsumeDesignatedWithContext {
+            request,
+            context: Box::new(context),
+            reply,
+        })?;
+        receiver
+            .recv()
+            .map_err(|_| Ow1WorkerFailure::Disconnected)?
+    }
+
+    pub(crate) fn validate_designated_non_consuming(
+        &self,
+        request: M8ConsumeRequest,
+        context: M8LocalDesignatedTraceContext,
+    ) -> Result<String, Ow1WorkerFailure> {
+        let (reply, receiver) = mpsc::sync_channel(0);
+        self.send(Ow1Command::ValidateDesignatedNonConsuming {
+            request,
+            context: Box::new(context),
+            reply,
+        })?;
+        receiver
+            .recv()
+            .map_err(|_| Ow1WorkerFailure::Disconnected)?
+    }
+
+    pub(crate) fn has_designated_publication_id(
+        &self,
+        value_name: &str,
+        value_id: &str,
+    ) -> Result<bool, Ow1WorkerFailure> {
+        let (reply, receiver) = mpsc::sync_channel(0);
+        self.send(Ow1Command::HasDesignatedPublicationId {
+            value_name: value_name.to_string(),
+            value_id: value_id.to_string(),
+            reply,
+        })?;
+        receiver.recv().map_err(|_| Ow1WorkerFailure::Disconnected)
+    }
+
+    pub(crate) fn designated_publication_snapshot(
+        &self,
+        value_name: &str,
+    ) -> Result<Option<String>, Ow1WorkerFailure> {
+        let (reply, receiver) = mpsc::sync_channel(0);
+        self.send(Ow1Command::DesignatedPublicationSnapshot {
+            value_name: value_name.to_string(),
+            reply,
+        })?;
+        receiver.recv().map_err(|_| Ow1WorkerFailure::Disconnected)
+    }
+
+    /// Read a designated source-owner value only in the worker-owned M8
+    /// runtime, returning the exact M8 `OwnerRead` observation that it
+    /// allocated for the dequeued carrier context.
+    pub(crate) fn read_owner_int_with_context(
+        &self,
+        key: M8StateKey,
+        source_ref: SourceRef,
+        context: M8LocalDesignatedTraceContext,
+    ) -> Result<Ow1ContextualOwnerRead, Ow1WorkerFailure> {
+        let (reply, receiver) = mpsc::sync_channel(0);
+        self.send(Ow1Command::ReadOwnerIntWithContext {
+            key,
+            source_ref,
             context: Box::new(context),
             reply,
         })?;
@@ -462,6 +630,60 @@ fn run_worker(receiver: Receiver<Ow1Command>, mut runtime: M8LocalRuntime) {
                         Err(observation) => Ow1ContextualM8Execution::Rejected { observation },
                     };
                 let _ = reply.send(Ok(result));
+            }
+            Ow1Command::ReplaceDesignatedInputReceipts { receipts, reply } => {
+                runtime.replace_designated_input_receipts(receipts);
+                let _ = reply.send(());
+            }
+            Ow1Command::EvaluateDesignatedWithContext {
+                request,
+                context,
+                reply,
+            } => {
+                let outcome = runtime.evaluate_designated_with_context(request, *context);
+                let _ = reply.send(Ok(outcome));
+            }
+            Ow1Command::ConsumeDesignatedWithContext {
+                request,
+                context,
+                reply,
+            } => {
+                let outcome = runtime.consume_published_value_with_context(request, *context);
+                let _ = reply.send(Ok(outcome));
+            }
+            Ow1Command::ValidateDesignatedNonConsuming {
+                request,
+                context,
+                reply,
+            } => {
+                let outcome = runtime
+                    .validate_published_value_non_consuming(request, *context)
+                    .map_err(Ow1WorkerFailure::Designated);
+                let _ = reply.send(outcome);
+            }
+            Ow1Command::HasDesignatedPublicationId {
+                value_name,
+                value_id,
+                reply,
+            } => {
+                let _ = reply.send(runtime.has_designated_publication_id(&value_name, &value_id));
+            }
+            Ow1Command::DesignatedPublicationSnapshot { value_name, reply } => {
+                let publication = runtime
+                    .designated_result_store()
+                    .published_values(&value_name)
+                    .first()
+                    .map(|value| format!("{value:?}"));
+                let _ = reply.send(publication);
+            }
+            Ow1Command::ReadOwnerIntWithContext {
+                key,
+                source_ref,
+                context,
+                reply,
+            } => {
+                let outcome = runtime.read_owner_int_with_context(key, source_ref, *context);
+                let _ = reply.send(Ok(outcome));
             }
             Ow1Command::ReadOwnerInt { key, reply } => {
                 let _ = reply.send(runtime.owner_state().int(&key));

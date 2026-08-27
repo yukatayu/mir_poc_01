@@ -12,8 +12,7 @@ use std::collections::{BTreeMap, BTreeSet, VecDeque};
 
 use mir_semantics::{
     evaluation_materialization::{InputFrontier, ObservationPolicy, PolicyStamp},
-    shared_model::ResultFrontier,
-    shared_model::ResultVersion,
+    shared_model::{ResultFrontier, ResultVersion, SourceRef},
     surface_v0_pipeline::{CheckedProgramIdentity, TypedStateRead},
 };
 
@@ -2692,9 +2691,17 @@ impl M8ExecutionBackend {
                     }
                 })
                 .map_err(M8BackendFailure::observed),
-            Self::Ow1(_) => Err(M8BackendFailure::unobserved(
-                Sys4DiagnosticKind::BackendIneligible,
-            )),
+            Self::Ow1(worker) => worker
+                .evaluate_designated_with_context(request, context)
+                .map_err(|failure| M8BackendFailure::unobserved(map_worker_failure(failure)))?
+                .map(|(published, input_observation, evaluation_observation)| {
+                    M8DesignatedEvaluation {
+                        published,
+                        input_observation,
+                        evaluation_observation,
+                    }
+                })
+                .map_err(M8BackendFailure::observed),
         }
     }
 
@@ -2713,16 +2720,40 @@ impl M8ExecutionBackend {
             Self::St(runtime) => runtime
                 .consume_published_value_with_context(request, context)
                 .map_err(M8BackendFailure::observed),
-            Self::Ow1(_) => Err(M8BackendFailure::unobserved(
-                Sys4DiagnosticKind::BackendIneligible,
-            )),
+            Self::Ow1(worker) => worker
+                .consume_designated_with_context(request, context)
+                .map_err(|failure| M8BackendFailure::unobserved(map_worker_failure(failure)))?
+                .map_err(M8BackendFailure::observed),
         }
     }
 
-    fn has_designated_publication_id(&self, value_name: &str, value_id: &str) -> bool {
+    /// Read a source-owner value in the backend-owned M8 runtime. The
+    /// returned observation is allocated by M8 for the exact dequeued carrier
+    /// context; SYS-4 only places it in the fabric causality graph.
+    fn read_owner_int_with_context(
+        &mut self,
+        key: M8StateKey,
+        source_ref: SourceRef,
+        context: M8LocalDesignatedTraceContext,
+    ) -> Result<Option<(i64, M8LocalTraceObservation)>, Sys4DiagnosticKind> {
         match self {
-            Self::St(runtime) => runtime.has_designated_publication_id(value_name, value_id),
-            Self::Ow1(_) => false,
+            Self::St(runtime) => Ok(runtime.read_owner_int_with_context(key, source_ref, context)),
+            Self::Ow1(worker) => worker
+                .read_owner_int_with_context(key, source_ref, context)
+                .map_err(map_worker_failure),
+        }
+    }
+
+    fn has_designated_publication_id(
+        &self,
+        value_name: &str,
+        value_id: &str,
+    ) -> Result<bool, Sys4DiagnosticKind> {
+        match self {
+            Self::St(runtime) => Ok(runtime.has_designated_publication_id(value_name, value_id)),
+            Self::Ow1(worker) => worker
+                .has_designated_publication_id(value_name, value_id)
+                .map_err(map_worker_failure),
         }
     }
 
@@ -2735,7 +2766,9 @@ impl M8ExecutionBackend {
             Self::St(runtime) => runtime
                 .validate_published_value_non_consuming(request, context)
                 .map_err(|_| Sys4DiagnosticKind::M8ExecutionRejected),
-            Self::Ow1(_) => Err(Sys4DiagnosticKind::BackendIneligible),
+            Self::Ow1(worker) => worker
+                .validate_designated_non_consuming(request, context)
+                .map_err(map_worker_failure),
         }
     }
 
@@ -2753,14 +2786,25 @@ impl M8ExecutionBackend {
                 .published_values(value_name)
                 .first()
                 .map(|value| format!("{value:?}")),
-            Self::Ow1(_) => None,
+            Self::Ow1(worker) => worker
+                .designated_publication_snapshot(value_name)
+                .ok()
+                .flatten(),
         }
     }
 
-    fn replace_designated_input_receipts(&mut self, receipts: M8InputReceiptSet) {
+    fn replace_designated_input_receipts(
+        &mut self,
+        receipts: M8InputReceiptSet,
+    ) -> Result<(), Sys4DiagnosticKind> {
         match self {
-            Self::St(runtime) => runtime.replace_designated_input_receipts(receipts),
-            Self::Ow1(_) => {}
+            Self::St(runtime) => {
+                runtime.replace_designated_input_receipts(receipts);
+                Ok(())
+            }
+            Self::Ow1(worker) => worker
+                .replace_designated_input_receipts(receipts)
+                .map_err(map_worker_failure),
         }
     }
 
@@ -2918,8 +2962,18 @@ impl M8BackendTestSupport<'_> {
     }
 }
 
-fn map_worker_failure(_failure: Ow1WorkerFailure) -> Sys4DiagnosticKind {
-    Sys4DiagnosticKind::M8ExecutionRejected
+fn map_worker_failure(failure: Ow1WorkerFailure) -> Sys4DiagnosticKind {
+    match failure {
+        Ow1WorkerFailure::Designated(diagnostics) => {
+            let _ = diagnostics.primary();
+            Sys4DiagnosticKind::M8ExecutionRejected
+        }
+        Ow1WorkerFailure::Disconnected
+        | Ow1WorkerFailure::WorkerPanicked
+        | Ow1WorkerFailure::Enqueue(_)
+        | Ow1WorkerFailure::Serve(_)
+        | Ow1WorkerFailure::FifoIdentityMismatch => Sys4DiagnosticKind::M8ExecutionRejected,
+    }
 }
 
 #[derive(Debug, Clone, PartialEq, Eq)]
@@ -3098,6 +3152,26 @@ impl EvaluatorPublicationBindingRegistry {
     }
 }
 
+/// The bounded OW1 profile requires exactly one logical worker locus.  This
+/// pure projection-only derivation covers every currently admitted semantic
+/// owner role; bootstrap remains fail-closed when the resulting set is empty
+/// or contains more than one locus.
+pub(crate) fn ow1_worker_locus_candidates(projection: &GlobalProjectionResult) -> BTreeSet<String> {
+    let mut worker_loci = BTreeSet::new();
+    for fragment in projection.sys4_artifact_fragments().entries() {
+        if let Some(core) = fragment.owner_rmw_checked_core() {
+            worker_loci.insert(core.owner_locus().to_string());
+        }
+        if let Some(dependency) = fragment.designated_remote_input_dependency() {
+            worker_loci.insert(dependency.source_owner_locus().to_string());
+        }
+        if let Some(core) = fragment.relation_checked_core() {
+            worker_loci.insert(core.owner_locus().to_string());
+        }
+    }
+    worker_loci
+}
+
 pub(crate) struct LocalFabric {
     program: FabricProgram,
     loci: BTreeMap<String, LocusRuntime>,
@@ -3197,17 +3271,21 @@ impl LocalFabric {
         let backend = match backend_profile {
             BackendProfile::St => M8ExecutionBackend::St(Box::new(runtime)),
             BackendProfile::Ow1 => {
-                let owner = program
-                    .projection
-                    .sys4_artifact_fragments()
-                    .entries()
-                    .iter()
-                    .find(|fragment| {
-                        fragment.fragment_kind()
-                            == ProjectedOperationFragmentKind::OwnerRmwExecution
+                // SYS-3 has already admitted OW1 only when one logical locus
+                // combines semantic owner and designated source-owner duties.
+                // Recover that unique locus from either generated owner-RMW or
+                // generated designated-source fragments; do not require a
+                // synthetic owner RMW in an otherwise designated-only fabric.
+                let worker_loci = ow1_worker_locus_candidates(&program.projection);
+                let owner = (worker_loci.len() == 1)
+                    .then(|| {
+                        crate::semantic_runtime_kernel::LocusRef::new(
+                            worker_loci
+                                .into_iter()
+                                .next()
+                                .expect("one validated OW1 worker locus"),
+                        )
                     })
-                    .and_then(|fragment| fragment.owner_rmw_checked_core())
-                    .map(|core| crate::semantic_runtime_kernel::LocusRef::new(core.owner_locus()))
                     .ok_or_else(|| {
                         Sys4DispatchDiagnostics::one(Sys4DiagnosticKind::BackendIneligible)
                     })?;
@@ -4402,33 +4480,62 @@ impl LocalFabric {
                     vec![dequeue_occurrence.clone()],
                 );
                 let read = dependency.typed_state_read();
-                let index = read.index().unwrap_or_default();
-                let field = read.field().unwrap_or_default();
-                let source_value = self
-                    .loci
-                    .get(locus)
-                    .and_then(|runtime| runtime.local_store.int(read.namespace(), index, field))
-                    .ok_or_else(|| {
-                        self.quarantine(
+                let source_key = m8_key_for_read(read, &BTreeMap::new());
+                let read_context = M8LocalDesignatedTraceContext::new(
+                    envelope.envelope_id(),
+                    envelope.semantic_identity(),
+                    "",
+                    "",
+                    tick,
+                    frontier,
+                )
+                .with_operation_id(&envelope.operation_id)
+                .with_owner_locus(locus)
+                .with_evaluator_locus(core.evaluator())
+                .with_edge_ref(&envelope.edge_ref);
+                let (source_value, read_observation) = match self
+                    .backend
+                    .read_owner_int_with_context(
+                        source_key.clone(),
+                        read.source_ref().clone(),
+                        read_context,
+                    ) {
+                    Ok(Some(read)) => read,
+                    Ok(None) => {
+                        return Err(self.quarantine(
                             locus,
                             &envelope,
                             Sys4DiagnosticKind::MissingTypedDesignatedValue,
                             &envelope.request_id,
-                        )
-                    })?;
+                        ));
+                    }
+                    Err(kind) => {
+                        self.refresh_m8_local_runtime_trace();
+                        return Err(self.quarantine(locus, &envelope, kind, &envelope.request_id));
+                    }
+                };
+                self.refresh_m8_local_runtime_trace();
                 let audit = LocalStoreReadAudit {
-                    occurrence_id: self.next_mailbox_token("local-read"),
+                    occurrence_id: read_observation.node_id().to_string(),
                     reads: vec![RuntimeStoreRead::int(
                         locus,
                         read.namespace(),
-                        index,
-                        field,
+                        source_key.index(),
+                        source_key.field(),
                         source_value,
                     )],
                 };
                 self.causality.record(
                     audit.occurrence_id.clone(),
                     vec![release.occurrence_id().to_string()],
+                );
+                self.actual_m8_trace.append(
+                    read_observation.node_id().to_string(),
+                    "OwnerRead",
+                    Some(envelope.request_id.clone()),
+                    Some(envelope.operation_id.clone()),
+                    Some(locus.to_string()),
+                    self.causality.predecessor_ids(read_observation.node_id()),
                 );
                 self.local_store_read_audits
                     .insert(locus.to_string(), audit.clone());
@@ -4523,7 +4630,9 @@ impl LocalFabric {
                         )
                         .with_int_value(value),
                 );
-                self.backend.replace_designated_input_receipts(receipts);
+                if let Err(kind) = self.backend.replace_designated_input_receipts(receipts) {
+                    return Err(self.quarantine(locus, &envelope, kind, &envelope.request_id));
+                }
                 let authority = self
                     .authority_generation
                     .designated_evaluation_authority_use(core.evaluator(), core.result())
@@ -4823,10 +4932,24 @@ impl LocalFabric {
             || envelope.logical_tick_id() != binding.logical_tick_id()
             || envelope.logical_tick_frontier() != binding.logical_tick_frontier()
             || cached_publication_tick_split
-            || !self
-                .backend
-                .has_designated_publication_id(&envelope.operation_id, envelope.m8_publication_id())
         {
+            return Err(self.quarantine(
+                locus,
+                envelope,
+                Sys4DiagnosticKind::DeliveryPublicationIdentityMismatch,
+                &envelope.request_id,
+            ));
+        }
+        let publication_exists = match self
+            .backend
+            .has_designated_publication_id(&envelope.operation_id, envelope.m8_publication_id())
+        {
+            Ok(exists) => exists,
+            Err(kind) => {
+                return Err(self.quarantine(locus, envelope, kind, &envelope.request_id));
+            }
+        };
+        if !publication_exists {
             return Err(self.quarantine(
                 locus,
                 envelope,
