@@ -91,7 +91,7 @@ pub(crate) struct LocusTag {
 pub(crate) struct SourceRefView(SourceRef);
 
 impl SourceRefView {
-    fn new(source_ref: &SourceRef) -> Self {
+    pub(crate) fn new(source_ref: &SourceRef) -> Self {
         Self(source_ref.clone())
     }
 }
@@ -421,6 +421,7 @@ pub(super) enum PlacementSpecificCore {
     },
     DesignatedSource {
         dependency: DesignatedRemoteInputDependency,
+        local_state_schemas: Vec<CheckedIndexedStateSchema>,
     },
     DesignatedEvaluator {
         core: DesignatedCheckedCore,
@@ -513,6 +514,10 @@ impl ProjectedOperationFragment {
             PlacementSpecificCore::OwnerRmw {
                 local_state_schemas,
                 ..
+            }
+            | PlacementSpecificCore::DesignatedSource {
+                local_state_schemas,
+                ..
             } => local_state_schemas,
             _ => &[],
         }
@@ -522,7 +527,7 @@ impl ProjectedOperationFragment {
         &self,
     ) -> Option<&DesignatedRemoteInputDependency> {
         match &self.placement {
-            PlacementSpecificCore::DesignatedSource { dependency } => Some(dependency),
+            PlacementSpecificCore::DesignatedSource { dependency, .. } => Some(dependency),
             _ => None,
         }
     }
@@ -773,6 +778,10 @@ impl ProjectedOperationFragments {
             .iter()
             .find(|entry| entry.operation_id == operation && entry.kind == kind)
     }
+
+    pub(crate) fn entries(&self) -> &[ProjectedOperationFragment] {
+        &self.entries
+    }
 }
 
 #[derive(Debug, Clone, PartialEq, Eq, Default)]
@@ -878,6 +887,10 @@ impl LocusProgram {
 
     pub(crate) fn operations(&self) -> &ProjectedOperationFragments {
         &self.operations
+    }
+
+    pub(crate) fn operation_fragments(&self) -> &[ProjectedOperationFragment] {
+        self.operations.entries()
     }
 
     pub(crate) fn locus_tag(&self) -> &LocusTag {
@@ -1501,6 +1514,22 @@ pub(crate) struct CommunicationEdge {
 }
 
 impl CommunicationEdge {
+    pub(crate) fn operation_id(&self) -> &str {
+        &self.operation
+    }
+
+    pub(crate) const fn kind(&self) -> CommunicationEdgeKind {
+        self.kind
+    }
+
+    pub(crate) fn source_locus(&self) -> &str {
+        &self.source_locus
+    }
+
+    pub(crate) fn target_locus(&self) -> &str {
+        &self.target_locus
+    }
+
     pub(crate) fn core_ref(&self) -> Option<&str> {
         self.core_ref.as_deref()
     }
@@ -1640,13 +1669,16 @@ impl CommunicationPlan {
         kind: CommunicationEdgeKind,
         source: &str,
         target: &str,
-    ) -> Option<&CommunicationEdge> {
-        self.edges.iter().find(|edge| {
-            edge.operation == operation
-                && edge.kind == kind
-                && edge.source_locus == source
-                && edge.target_locus == target
-        })
+    ) -> Option<CommunicationEdge> {
+        self.edges
+            .iter()
+            .find(|edge| {
+                edge.operation == operation
+                    && edge.kind == kind
+                    && edge.source_locus == source
+                    && edge.target_locus == target
+            })
+            .cloned()
     }
 
     pub(crate) fn count_edges(

@@ -11,14 +11,16 @@ mod validate;
 
 pub(crate) use lowering::project_checked_core;
 pub(crate) use model::{
-    BackendEligibility, BackendIneligibilityReason, BackendProfile, CarrierFrontierKind,
-    CarrierLifecycleKind, CarrierOccurrenceSlotKind, CarrierProvenanceKind, CheckedCoreIdentity,
-    CommunicationEdgeKind, DeclaredLogicalTopology, EffectHandlerKind, GlobalProjectionResult,
-    LocusOperationKind, LocusTag, PersistenceResponsibilityKind, ProjectedOperationFragmentKind,
-    ProjectedRelationAnchor, ProjectionDiagnosticKind, ProjectionDiagnostics,
-    ProjectionRelationGraph, RelationAnchorRole, RelationGraphClaim, RelationGraphEdgeSeed,
-    RelationGraphEdgeTag, RuntimeAdmissionStatus, RuntimeOccurrenceBinding, RuntimeOccurrenceKind,
-    RuntimeSeamRequirementKind, SeamAuthorityKind, StaticConflictPolicyKind,
+    BackendEligibility, BackendIneligibilityReason, BackendProfile, CarrierContract,
+    CarrierFrontierKind, CarrierLifecycleKind, CarrierOccurrenceSlotKind, CarrierProvenanceKind,
+    CheckedCoreIdentity, CommunicationEdge, CommunicationEdgeKind, CommunicationPlan,
+    DeclaredLogicalTopology, EffectHandlerKind, GlobalProjectionResult, LocusOperationKind,
+    LocusProgram, LocusTag, PersistenceResponsibilityKind, ProjectedOperationFragment,
+    ProjectedOperationFragmentKind, ProjectedRelationAnchor, ProjectionDiagnosticKind,
+    ProjectionDiagnostics, ProjectionRelationGraph, ReferenceOnlyRedactionPolicy,
+    RelationAnchorRole, RelationGraphClaim, RelationGraphEdgeSeed, RelationGraphEdgeTag,
+    RuntimeAdmissionStatus, RuntimeOccurrenceBinding, RuntimeOccurrenceKind,
+    RuntimeSeamRequirementKind, SeamAuthorityKind, SourceRefView, StaticConflictPolicyKind,
     StaticConflictResolution, StaticProjectionReadiness,
 };
 pub(crate) use validate::verify_projection;

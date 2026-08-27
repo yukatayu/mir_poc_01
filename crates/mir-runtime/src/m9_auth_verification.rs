@@ -6,6 +6,13 @@
 //! the checked artifact and its M9 residual rows intact and records an outer
 //! M9 result beside them.
 
+#![allow(
+    dead_code,
+    clippy::enum_variant_names,
+    clippy::result_large_err,
+    clippy::too_many_arguments
+)]
+
 use std::collections::{BTreeMap, BTreeSet};
 
 use mir_semantics::{
@@ -761,6 +768,7 @@ pub struct M9RuntimeAdmitted {
 /// Crate-private M9-to-M8 execution material.  Only the final M9 judgment
 /// creates this carrier; it exposes neither provider data nor an authority
 /// constructor to callers.
+#[cfg_attr(not(test), allow(dead_code))]
 pub(crate) struct M9RuntimeExecutionSeam {
     instance: M8RuntimeInstance,
     authority_state: M8AuthorityState,
@@ -778,6 +786,12 @@ pub(crate) struct M9RuntimeExecutionSeam {
     kernel_designated_remote_input_lineages:
         BTreeMap<(String, String, String, usize, String), M9KernelDesignatedRemoteInputLineage>,
     authority_generation: M9AuthorityGeneration,
+    /// All normal production paths construct this seam only after the finite
+    /// residual discharge has been accepted.  The test-only incomplete helper
+    /// below starts from that same typed path and then marks the resulting
+    /// carrier unavailable to a later SYS-4 admission check; it never
+    /// fabricates authority facts.
+    final_residual_discharge_complete: bool,
     #[cfg_attr(not(test), allow(dead_code))]
     authority_successor: Option<M9AuthoritySuccessorPublisher>,
 }
@@ -787,16 +801,276 @@ pub(crate) struct M9RuntimeExecutionSeam {
 /// needed by the kernel; it is neither a credential constructor nor a wire
 /// carrier.
 #[derive(Clone)]
+#[cfg_attr(not(test), allow(dead_code))]
 pub(crate) struct M9AuthorityGeneration {
     program_identity: String,
     generation: u64,
     generation_ref: String,
     authority_state: M8AuthorityState,
     owner_uses: BTreeMap<(String, String, String), M8AuthorityUse>,
+    designated_evaluation_uses: BTreeMap<(String, String), M8DesignatedAuthorityUse>,
+    designated_consumption_uses: BTreeMap<(String, String), M8DesignatedAuthorityUse>,
     kernel_owner_lineages: BTreeMap<(String, String, String), M9KernelOwnerLineage>,
     revoked_owner_capabilities: BTreeSet<(String, String, String)>,
+    revoked_designated_consumption_capabilities: BTreeSet<(String, String)>,
     kernel_designated_remote_input_lineages:
         BTreeMap<(String, String, String, usize, String), M9KernelDesignatedRemoteInputLineage>,
+    designated_consumer_failures: BTreeMap<(String, String), M9AdmissionErrorKind>,
+    designated_consumer_witness_retirements: BTreeSet<(String, String)>,
+    designated_source_release_failures:
+        BTreeMap<(String, String, String, usize, String), M9AdmissionErrorKind>,
+    designated_consumer_validation_occurrences: BTreeMap<(String, String, String), usize>,
+    owner_operation_validation_occurrences: BTreeMap<(String, String, String), usize>,
+    source_release_validation_occurrences: BTreeMap<(String, String, String), usize>,
+}
+
+/// Observer-safe identity for one M9-issued designated-result consumer
+/// lineage.  It deliberately exposes no credential or witness payload.
+#[derive(Debug, Clone, PartialEq, Eq)]
+pub(crate) struct M9DesignatedConsumerLineage {
+    consumer_locus: String,
+    opaque_lineage_ref: String,
+}
+
+impl M9DesignatedConsumerLineage {
+    pub(crate) fn consumer_locus(&self) -> &str {
+        &self.consumer_locus
+    }
+
+    pub(crate) fn opaque_lineage_ref(&self) -> &str {
+        &self.opaque_lineage_ref
+    }
+}
+
+/// Observer-safe identity for one checked producer release lineage.
+#[derive(Debug, Clone, PartialEq, Eq)]
+pub(crate) struct M9DesignatedSourceReleaseLineage {
+    opaque_lineage_ref: String,
+}
+
+#[derive(Debug, Clone, PartialEq, Eq)]
+pub(crate) struct M9SealedGeneration {
+    generation: u64,
+    generation_ref: String,
+    m9_produced: bool,
+}
+
+impl M9SealedGeneration {
+    pub(crate) const fn is_m9_produced(&self) -> bool {
+        self.m9_produced
+    }
+}
+
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+pub(crate) enum M9AuthorityTransitionKind {
+    DesignatedConsumerCapabilityRevoked,
+    DesignatedConsumerMembershipRetired,
+    DesignatedConsumerWitnessRetired,
+    DesignatedSourceReleaseRevoked,
+}
+
+#[derive(Debug, Clone, PartialEq, Eq)]
+pub(crate) struct M9SealedTransitionInspection {
+    transition_kind: M9AuthorityTransitionKind,
+    prior_generation: M9SealedGeneration,
+    successor_generation: M9SealedGeneration,
+    consumer_lineage: Option<M9DesignatedConsumerLineage>,
+    source_release_lineage: Option<M9DesignatedSourceReleaseLineage>,
+}
+
+impl M9SealedTransitionInspection {
+    pub(crate) const fn transition_kind(&self) -> M9AuthorityTransitionKind {
+        self.transition_kind
+    }
+    pub(crate) fn prior_generation(&self) -> M9SealedGeneration {
+        self.prior_generation.clone()
+    }
+    pub(crate) fn successor_generation(&self) -> M9SealedGeneration {
+        self.successor_generation.clone()
+    }
+    pub(crate) fn consumer_lineage(&self) -> &M9DesignatedConsumerLineage {
+        self.consumer_lineage
+            .as_ref()
+            .expect("consumer transition retains its sealed lineage")
+    }
+    pub(crate) fn source_release_lineage(&self) -> &M9DesignatedSourceReleaseLineage {
+        self.source_release_lineage
+            .as_ref()
+            .expect("source-release transition retains its sealed lineage")
+    }
+}
+
+#[derive(Debug, Clone, PartialEq, Eq)]
+pub(crate) struct M9AuthorityInspection {
+    generation: M9SealedGeneration,
+    consumers: BTreeMap<(String, String), M9DesignatedConsumerLineage>,
+    source_releases:
+        BTreeMap<(String, String, String, usize, String), M9DesignatedSourceReleaseLineage>,
+    designated_consumer_validation_occurrences: BTreeMap<(String, String, String), usize>,
+    owner_operation_validation_occurrences: BTreeMap<(String, String, String), usize>,
+    source_release_validation_occurrences: BTreeMap<(String, String, String), usize>,
+}
+
+impl M9AuthorityInspection {
+    pub(crate) fn generation(&self) -> M9SealedGeneration {
+        self.generation.clone()
+    }
+    pub(crate) fn designated_consumer_lineage(
+        &self,
+        value_name: &str,
+        consumer_locus: &str,
+    ) -> Option<&M9DesignatedConsumerLineage> {
+        self.consumers
+            .get(&(value_name.to_string(), consumer_locus.to_string()))
+    }
+    pub(crate) fn designated_source_release_lineage<F: std::fmt::Debug>(
+        &self,
+        evaluator: &str,
+        result: &str,
+        source_locus: &str,
+        dependency_index: usize,
+        _input_frontier: F,
+    ) -> Option<&M9DesignatedSourceReleaseLineage> {
+        self.source_releases.iter().find_map(
+            |(
+                (candidate_evaluator, candidate_result, candidate_source, candidate_index, _),
+                lineage,
+            )| {
+                (candidate_evaluator == evaluator
+                    && candidate_result == result
+                    && candidate_source == source_locus
+                    && *candidate_index == dependency_index)
+                    .then_some(lineage)
+            },
+        )
+    }
+    pub(crate) fn validation_occurrence_count(
+        &self,
+        operation: &str,
+        consumer: &str,
+        semantic_identity: &str,
+    ) -> usize {
+        self.designated_consumer_validation_occurrences
+            .get(&(
+                operation.to_string(),
+                consumer.to_string(),
+                semantic_identity.to_string(),
+            ))
+            .copied()
+            .unwrap_or(0)
+    }
+
+    pub(crate) fn owner_operation_validation_count(
+        &self,
+        operation: &str,
+        owner_locus: &str,
+        request_id: &str,
+    ) -> usize {
+        self.owner_operation_validation_occurrences
+            .get(&(
+                operation.to_string(),
+                owner_locus.to_string(),
+                request_id.to_string(),
+            ))
+            .copied()
+            .unwrap_or(0)
+    }
+
+    pub(crate) fn source_release_validation_count(
+        &self,
+        result: &str,
+        source_locus: &str,
+        request_id: &str,
+    ) -> usize {
+        self.source_release_validation_occurrences
+            .get(&(
+                result.to_string(),
+                source_locus.to_string(),
+                request_id.to_string(),
+            ))
+            .copied()
+            .unwrap_or(0)
+    }
+}
+
+#[derive(Debug, Clone, PartialEq, Eq)]
+pub(crate) struct M9CacheValidationInspection {
+    generation: M9SealedGeneration,
+    consumer_lineage: M9DesignatedConsumerLineage,
+    semantic_identity: String,
+    consumer_locus: String,
+    occurrence_id: String,
+}
+
+impl M9CacheValidationInspection {
+    pub(crate) fn generation(&self) -> M9SealedGeneration {
+        self.generation.clone()
+    }
+    pub(crate) fn consumer_lineage(&self) -> &M9DesignatedConsumerLineage {
+        &self.consumer_lineage
+    }
+    pub(crate) fn semantic_identity(&self) -> &str {
+        &self.semantic_identity
+    }
+    pub(crate) fn consumer_locus(&self) -> &str {
+        &self.consumer_locus
+    }
+    pub(crate) fn occurrence_id(&self) -> &str {
+        &self.occurrence_id
+    }
+}
+
+#[derive(Debug, Clone, PartialEq, Eq)]
+pub(crate) struct M9SourceReleaseValidationInspection {
+    generation: M9SealedGeneration,
+    lineage: M9DesignatedSourceReleaseLineage,
+    occurrence_id: String,
+}
+
+impl M9SourceReleaseValidationInspection {
+    pub(crate) fn generation(&self) -> M9SealedGeneration {
+        self.generation.clone()
+    }
+    pub(crate) fn lineage(&self) -> &M9DesignatedSourceReleaseLineage {
+        &self.lineage
+    }
+    pub(crate) fn occurrence_id(&self) -> &str {
+        &self.occurrence_id
+    }
+}
+
+#[derive(Debug, Clone, PartialEq, Eq)]
+pub(crate) struct M9SealedFailureInspection {
+    admission_error_kind: M9AdmissionErrorKind,
+    installed_generation: M9SealedGeneration,
+    consumer_lineage: M9DesignatedConsumerLineage,
+    request_id: String,
+    semantic_identity: String,
+    consumer_locus: String,
+}
+
+impl M9SealedFailureInspection {
+    pub(crate) const fn admission_error_kind(&self) -> M9AdmissionErrorKind {
+        self.admission_error_kind
+    }
+    pub(crate) fn installed_generation(&self) -> M9SealedGeneration {
+        self.installed_generation.clone()
+    }
+    pub(crate) fn consumer_lineage(&self) -> &M9DesignatedConsumerLineage {
+        &self.consumer_lineage
+    }
+    pub(crate) fn request_id(&self) -> &str {
+        &self.request_id
+    }
+    pub(crate) fn semantic_identity(&self) -> &str {
+        &self.semantic_identity
+    }
+    pub(crate) fn consumer_locus(&self) -> &str {
+        &self.consumer_locus
+    }
+    pub(crate) const fn rejected_before_m8_non_consuming_validation(&self) -> bool {
+        true
+    }
 }
 
 /// The sole mutable publisher for successor authority generations.  It stays
@@ -1171,11 +1445,71 @@ impl M9RuntimeExecutionSeam {
         self.authority_generation.clone()
     }
 
+    pub(crate) const fn has_complete_final_residual_discharge(&self) -> bool {
+        self.final_residual_discharge_complete
+    }
+
     #[cfg(test)]
     pub(crate) fn into_authority_successor_publisher(
         mut self,
     ) -> Option<M9AuthoritySuccessorPublisher> {
         self.authority_successor.take()
+    }
+
+    /// SYS-4's test boundary deliberately reuses the normal typed M9
+    /// admission route.  It selects the only accepted finite owner or
+    /// designated fragment from checked source; it does not construct a seam
+    /// from fixture data or fabricated grants.
+    #[cfg(test)]
+    pub(crate) fn test_real_admitted_sys4_fabric_seam(
+        checked: &CheckedSurfaceV0,
+    ) -> Result<Self, String> {
+        if let Some(designated) = checked
+            .evaluations()
+            .iter()
+            .find(|evaluation| evaluation.designated_core().is_some())
+        {
+            let result = designated.result_name().ok_or_else(|| {
+                "SYS-4 designated evaluation lacks checked result name".to_string()
+            })?;
+            return Self::test_real_admitted_designated_seam_for_kernel(
+                checked,
+                designated.name(),
+                result,
+                0,
+                true,
+            );
+        }
+
+        let owner = checked
+            .evaluations()
+            .iter()
+            .find(|evaluation| evaluation.owner_rmw_core().is_some())
+            .ok_or_else(|| {
+                "SYS-4 source has no admitted owner or designated fragment".to_string()
+            })?;
+        let owner_locus = owner
+            .owner_rmw_core()
+            .expect("selected owner evaluation retains Core")
+            .owner_locus();
+        Self::test_real_admitted_owner_seam_for_kernel(
+            checked,
+            owner.name(),
+            owner.actor_authority_origin(),
+            owner_locus,
+        )
+    }
+
+    /// Negative SYS-4 admission keeps the same source-bound M9/authority
+    /// pipeline and only removes the final discharge availability bit.  This
+    /// represents an incomplete candidate, not a forged authority seam.
+    #[cfg(test)]
+    pub(crate) fn test_incomplete_sys4_fabric_seam_missing_residual_discharge(
+        checked: &CheckedSurfaceV0,
+    ) -> Result<Self, String> {
+        let mut seam = Self::test_real_admitted_sys4_fabric_seam(checked)?;
+        seam.final_residual_discharge_complete = false;
+        Ok(seam)
     }
 
     /// Build a complete owner-operation admission through the normal typed M9
@@ -1188,6 +1522,15 @@ impl M9RuntimeExecutionSeam {
         principal: &str,
         owner_locus: &str,
     ) -> Result<Self, String> {
+        let evaluation = checked
+            .evaluation(operation)
+            .ok_or_else(|| "kernel test requested an unchecked owner operation".to_string())?;
+        let core = evaluation
+            .owner_rmw_core()
+            .ok_or_else(|| "kernel test requested a non-owner operation".to_string())?;
+        if core.owner_locus() != owner_locus {
+            return Err("kernel test requested a mismatched owner locus".to_string());
+        }
         Self::test_real_admitted_owner_kernel_seam(
             checked,
             [(operation, principal, owner_locus)],
@@ -1245,7 +1588,6 @@ impl M9RuntimeExecutionSeam {
                 .owner_rmw_core()
                 .ok_or_else(|| "kernel test requested a non-owner operation".to_string())?;
             if evaluation.actor_authority_origin() != principal
-                || evaluation.authority_origin_locus() != owner_locus
                 || owner_core.owner_locus() != owner_locus
             {
                 return Err("kernel test requested a mismatched owner lineage".to_string());
@@ -1732,18 +2074,51 @@ impl M9RuntimeExecutionSeam {
                     diagnostics.primary().kind()
                 )
             })?;
+        // The evaluator is a semantic locus in its own right.  Its
+        // membership cannot be borrowed from the source-owner release path.
+        let evaluator_epoch = "epoch-evaluator-1";
+        let evaluator_incarnation =
+            format!("incarnation:{principal}:{evaluator}:{evaluator_epoch}");
+        let evaluator_attestation = authority
+            .issue_membership_attestation(
+                principal,
+                evaluator,
+                evaluator_epoch,
+                evaluator_incarnation.clone(),
+                auth_residual.name(),
+                auth_residual.source_ref().clone(),
+            )
+            .map_err(|diagnostics| {
+                format!(
+                    "kernel test M9 evaluator membership attestation: {:?}",
+                    diagnostics.primary().kind()
+                )
+            })?;
+        let evaluator_membership = authority
+            .authenticate_membership(
+                M9MembershipRequest::new(principal, evaluator, evaluator_epoch)
+                    .with_incarnation(evaluator_incarnation)
+                    .with_auth_residual(auth_residual.name(), auth_residual.source_ref().clone())
+                    .with_issued_provider_attestation(evaluator_attestation),
+            )
+            .map_err(|diagnostics| {
+                format!(
+                    "kernel test M9 evaluator membership: {:?}",
+                    diagnostics.primary().kind()
+                )
+            })?;
         let evaluation_capability = authority
             .authorize_capability(
                 M9CapabilityGrantRequest::new(format!(
                     "kernel-test-designated-evaluation:{evaluator}:{result}:{input_frontier}"
                 ))
-                .with_membership_ref(membership.ref_id())
+                .with_membership_ref(evaluator_membership.ref_id())
                 .with_scope(M9CapabilityScope::designated_evaluation(
                     evaluator,
                     result,
                     input_frontier,
                 ))
-                .with_lineage_epoch(membership.epoch())
+                .with_lineage_epoch(evaluator_membership.epoch())
                 .with_source_ref(auth_residual.source_ref().clone()),
             )
             .map_err(|diagnostics| {
@@ -1757,7 +2132,7 @@ impl M9RuntimeExecutionSeam {
                 M9WitnessRequest::new(format!(
                     "kernel-test-designated-evaluation-witness:{evaluator}:{result}:{input_frontier}"
                 ))
-                .with_membership_ref(membership.ref_id())
+                .with_membership_ref(evaluator_membership.ref_id())
                 .with_capability_ref(evaluation_capability.ref_id())
                 .with_source_ref(auth_residual.source_ref().clone()),
             )
@@ -1812,6 +2187,89 @@ impl M9RuntimeExecutionSeam {
                 .map_err(|diagnostics| {
                     format!(
                         "kernel test M9 designated release witness: {:?}",
+                        diagnostics.primary().kind()
+                    )
+                })?;
+        }
+        // A designated-result consumer is an independent admitted locus.  Its
+        // membership, capability, and witness are issued by the same M9
+        // authority runtime as evaluator/release authority; the delivery
+        // endpoint cannot manufacture any of the three facts.
+        if let Some(consumer_evaluation) = checked.evaluations().iter().find(|evaluation| {
+            evaluation
+                .designated_result_consumer_core()
+                .is_some_and(|core| core.evaluator() == evaluator && core.result() == result)
+        }) {
+            let consumer_core = consumer_evaluation
+                .designated_result_consumer_core()
+                .expect("selected designated consumer retains Core");
+            let consumer_locus = consumer_core.consumer_locus();
+            let consumer_epoch = "epoch-consumer-1";
+            let consumer_incarnation =
+                format!("incarnation:{principal}:{consumer_locus}:{consumer_epoch}");
+            let consumer_attestation = authority
+                .issue_membership_attestation(
+                    principal,
+                    consumer_locus,
+                    consumer_epoch,
+                    consumer_incarnation.clone(),
+                    auth_residual.name(),
+                    auth_residual.source_ref().clone(),
+                )
+                .map_err(|diagnostics| {
+                    format!(
+                        "kernel test M9 consumer membership attestation: {:?}",
+                        diagnostics.primary().kind()
+                    )
+                })?;
+            let consumer_membership = authority
+                .authenticate_membership(
+                    M9MembershipRequest::new(principal, consumer_locus, consumer_epoch)
+                        .with_incarnation(consumer_incarnation)
+                        .with_auth_residual(
+                            auth_residual.name(),
+                            auth_residual.source_ref().clone(),
+                        )
+                        .with_issued_provider_attestation(consumer_attestation),
+                )
+                .map_err(|diagnostics| {
+                    format!(
+                        "kernel test M9 consumer membership: {:?}",
+                        diagnostics.primary().kind()
+                    )
+                })?;
+            let consumer_capability = authority
+                .authorize_capability(
+                    M9CapabilityGrantRequest::new(format!(
+                        "kernel-test-designated-consumption:{consumer_locus}:{evaluator}:{result}"
+                    ))
+                    .with_membership_ref(consumer_membership.ref_id())
+                    .with_scope(M9CapabilityScope::designated_consumption(
+                        consumer_locus,
+                        format!("{evaluator}.{result}"),
+                        consumer_core.result_version().value(),
+                    ))
+                    .with_lineage_epoch(consumer_membership.epoch())
+                    .with_source_ref(auth_residual.source_ref().clone()),
+                )
+                .map_err(|diagnostics| {
+                    format!(
+                        "kernel test M9 designated consumer capability: {:?}",
+                        diagnostics.primary().kind()
+                    )
+                })?;
+            let _consumer_witness = authority
+                .materialize_witness(
+                    M9WitnessRequest::new(format!(
+                        "kernel-test-designated-consumption-witness:{consumer_locus}:{evaluator}:{result}"
+                    ))
+                    .with_membership_ref(consumer_membership.ref_id())
+                    .with_capability_ref(consumer_capability.ref_id())
+                    .with_source_ref(auth_residual.source_ref().clone()),
+                )
+                .map_err(|diagnostics| {
+                    format!(
+                        "kernel test M9 designated consumer witness: {:?}",
                         diagnostics.primary().kind()
                     )
                 })?;
@@ -2012,9 +2470,18 @@ impl M9AuthorityGeneration {
             generation_ref: "m9-authority-generation:reference:00000000000000000000".to_string(),
             authority_state: M8AuthorityState::new(),
             owner_uses: BTreeMap::new(),
+            designated_evaluation_uses: BTreeMap::new(),
+            designated_consumption_uses: BTreeMap::new(),
             kernel_owner_lineages: BTreeMap::new(),
             revoked_owner_capabilities: BTreeSet::new(),
+            revoked_designated_consumption_capabilities: BTreeSet::new(),
             kernel_designated_remote_input_lineages: BTreeMap::new(),
+            designated_consumer_failures: BTreeMap::new(),
+            designated_consumer_witness_retirements: BTreeSet::new(),
+            designated_source_release_failures: BTreeMap::new(),
+            designated_consumer_validation_occurrences: BTreeMap::new(),
+            owner_operation_validation_occurrences: BTreeMap::new(),
+            source_release_validation_occurrences: BTreeMap::new(),
         }
     }
 
@@ -2034,12 +2501,238 @@ impl M9AuthorityGeneration {
         self.authority_state.clone()
     }
 
+    /// Return observer-safe handles for the authority facts which M9 already
+    /// admitted.  SYS-4 can validate one of these handles, but it cannot use
+    /// this inspection to manufacture a credential or a successor.
+    pub(crate) fn sealed_inspection(&self) -> M9AuthorityInspection {
+        let consumers = self
+            .designated_consumption_uses
+            .iter()
+            .map(|((consumer, value), use_)| {
+                (
+                    (value.clone(), consumer.clone()),
+                    M9DesignatedConsumerLineage {
+                        consumer_locus: consumer.clone(),
+                        opaque_lineage_ref: m9_opaque_ref(&format!(
+                            "consumer:{consumer}:{value}:{:?}:{:?}:{:?}",
+                            use_.membership_ref(),
+                            use_.capability_ref(),
+                            use_.witness_ref(),
+                        )),
+                    },
+                )
+            })
+            .collect();
+        let source_releases = self
+            .kernel_designated_remote_input_lineages
+            .iter()
+            .map(|((source, evaluator, result, dependency, frontier), lineage)| {
+                (
+                    (
+                        evaluator.clone(),
+                        result.clone(),
+                        source.clone(),
+                        *dependency,
+                        frontier.clone(),
+                    ),
+                    M9DesignatedSourceReleaseLineage {
+                        opaque_lineage_ref: m9_opaque_ref(&format!(
+                            "release:{source}:{evaluator}:{result}:{dependency}:{frontier}:{}:{}:{}:{}",
+                            self.generation_ref,
+                            lineage.membership_ref(),
+                            lineage.capability_ref(),
+                            lineage.witness_ref(),
+                        )),
+                    },
+                )
+            })
+            .collect();
+        M9AuthorityInspection {
+            generation: M9SealedGeneration {
+                generation: self.generation,
+                generation_ref: self.generation_ref.clone(),
+                m9_produced: true,
+            },
+            consumers,
+            source_releases,
+            designated_consumer_validation_occurrences: self
+                .designated_consumer_validation_occurrences
+                .clone(),
+            owner_operation_validation_occurrences: self
+                .owner_operation_validation_occurrences
+                .clone(),
+            source_release_validation_occurrences: self
+                .source_release_validation_occurrences
+                .clone(),
+        }
+    }
+
+    pub(crate) fn validate_designated_consumer(
+        &mut self,
+        value_name: &str,
+        consumer: &str,
+        request_id: &str,
+        semantic_identity: &str,
+    ) -> Result<M9CacheValidationInspection, M9SealedFailureInspection> {
+        *self
+            .designated_consumer_validation_occurrences
+            .entry((
+                value_name.to_string(),
+                consumer.to_string(),
+                semantic_identity.to_string(),
+            ))
+            .or_default() += 1;
+        let inspection = self.sealed_inspection();
+        let lineage = inspection
+            .designated_consumer_lineage(value_name, consumer)
+            .cloned()
+            .unwrap_or_else(|| M9DesignatedConsumerLineage {
+                consumer_locus: consumer.to_string(),
+                opaque_lineage_ref: m9_opaque_ref(&format!(
+                    "absent-consumer:{value_name}:{consumer}:{}",
+                    self.generation_ref
+                )),
+            });
+        let failure = self
+            .designated_consumer_failures
+            .get(&(consumer.to_string(), value_name.to_string()))
+            .copied()
+            .or_else(|| {
+                self.designated_consumption_capability_is_revoked(consumer, value_name)
+                    .then_some(M9AdmissionErrorKind::InvalidCapabilityLineage)
+            })
+            .or_else(|| {
+                self.designated_consumption_authority_use(consumer, value_name)
+                    .is_none()
+                    .then_some(M9AdmissionErrorKind::InvalidCapabilityLineage)
+            });
+        if let Some(admission_error_kind) = failure {
+            return Err(M9SealedFailureInspection {
+                admission_error_kind,
+                installed_generation: inspection.generation,
+                consumer_lineage: lineage,
+                request_id: request_id.to_string(),
+                semantic_identity: semantic_identity.to_string(),
+                consumer_locus: consumer.to_string(),
+            });
+        }
+        Ok(M9CacheValidationInspection {
+            generation: inspection.generation,
+            consumer_lineage: lineage,
+            semantic_identity: semantic_identity.to_string(),
+            consumer_locus: consumer.to_string(),
+            occurrence_id: format!(
+                "m9-cache-validation:{}:{}:{}",
+                self.generation, request_id, consumer
+            ),
+        })
+    }
+
+    pub(crate) fn validate_designated_source_release(
+        &mut self,
+        operation_id: &str,
+        evaluator: &str,
+        result: &str,
+        source_locus: &str,
+        dependency_index: usize,
+        input_frontier: &str,
+        expected: &M9DesignatedSourceReleaseLineage,
+        request_id: &str,
+    ) -> Option<M9SourceReleaseValidationInspection> {
+        *self
+            .source_release_validation_occurrences
+            .entry((
+                operation_id.to_string(),
+                source_locus.to_string(),
+                request_id.to_string(),
+            ))
+            .or_default() += 1;
+        let inspection = self.sealed_inspection();
+        let key = (
+            evaluator.to_string(),
+            result.to_string(),
+            source_locus.to_string(),
+            dependency_index,
+            input_frontier.to_string(),
+        );
+        let lineage = inspection.source_releases.get(&key)?.clone();
+        if &lineage != expected || self.designated_source_release_failures.contains_key(&key) {
+            return None;
+        }
+        Some(M9SourceReleaseValidationInspection {
+            generation: inspection.generation,
+            lineage,
+            occurrence_id: format!(
+                "m9-source-release-validation:{}:{}:{}",
+                self.generation, request_id, source_locus
+            ),
+        })
+    }
+
+    pub(crate) fn designated_consumer_witness_is_retired(
+        &self,
+        consumer: &str,
+        value_name: &str,
+    ) -> bool {
+        self.designated_consumer_witness_retirements
+            .contains(&(consumer.to_string(), value_name.to_string()))
+    }
+
+    pub(crate) fn owner_lineage_ref(&self, operation: &str, owner_locus: &str) -> Option<String> {
+        self.owner_authority_for_operation(operation, owner_locus)
+            .and_then(|(principal, _)| {
+                self.kernel_owner_lineages
+                    .get(&(operation.to_string(), principal, owner_locus.to_string()))
+                    .map(|lineage| {
+                        m9_opaque_ref(&format!(
+                            "owner:{}:{}:{}:{}:{}:{}",
+                            operation,
+                            owner_locus,
+                            lineage.membership_ref(),
+                            lineage.capability_ref(),
+                            lineage.witness_ref(),
+                            self.generation_ref,
+                        ))
+                    })
+            })
+    }
+
+    pub(crate) fn transition_inspection(
+        &self,
+        prior: &M9AuthorityInspection,
+        transition_kind: M9AuthorityTransitionKind,
+        consumer_lineage: Option<M9DesignatedConsumerLineage>,
+        source_release_lineage: Option<M9DesignatedSourceReleaseLineage>,
+    ) -> M9SealedTransitionInspection {
+        M9SealedTransitionInspection {
+            transition_kind,
+            prior_generation: prior.generation.clone(),
+            successor_generation: self.sealed_inspection().generation,
+            consumer_lineage,
+            source_release_lineage,
+        }
+    }
+
     /// A successor may add tombstones but may never remove one already
     /// published by an earlier immutable generation.
     pub(crate) fn preserves_tombstones_from(&self, prior: &Self) -> bool {
         prior
             .revoked_owner_capabilities
             .is_subset(&self.revoked_owner_capabilities)
+            && prior
+                .revoked_designated_consumption_capabilities
+                .is_subset(&self.revoked_designated_consumption_capabilities)
+            && prior
+                .designated_consumer_failures
+                .iter()
+                .all(|(key, value)| self.designated_consumer_failures.get(key) == Some(value))
+            && prior
+                .designated_source_release_failures
+                .iter()
+                .all(|(key, value)| self.designated_source_release_failures.get(key) == Some(value))
+            && prior
+                .designated_consumer_witness_retirements
+                .is_subset(&self.designated_consumer_witness_retirements)
     }
 
     #[cfg_attr(not(test), allow(dead_code))]
@@ -2067,6 +2760,23 @@ impl M9AuthorityGeneration {
         self.owner_uses.insert(key.clone(), prior_use);
         self.revoked_owner_capabilities = previous.revoked_owner_capabilities.clone();
         self.revoked_owner_capabilities.insert(key);
+        self.designated_evaluation_uses = previous.designated_evaluation_uses.clone();
+        self.designated_consumption_uses = previous.designated_consumption_uses.clone();
+        self.revoked_designated_consumption_capabilities =
+            previous.revoked_designated_consumption_capabilities.clone();
+        self.kernel_designated_remote_input_lineages =
+            previous.kernel_designated_remote_input_lineages.clone();
+        self.designated_consumer_failures = previous.designated_consumer_failures.clone();
+        self.designated_consumer_witness_retirements =
+            previous.designated_consumer_witness_retirements.clone();
+        self.designated_source_release_failures =
+            previous.designated_source_release_failures.clone();
+        self.designated_consumer_validation_occurrences =
+            previous.designated_consumer_validation_occurrences.clone();
+        self.owner_operation_validation_occurrences =
+            previous.owner_operation_validation_occurrences.clone();
+        self.source_release_validation_occurrences =
+            previous.source_release_validation_occurrences.clone();
         Some(self)
     }
 
@@ -2082,9 +2792,168 @@ impl M9AuthorityGeneration {
             owner_locus.to_string(),
         ))
     }
+
+    /// Finds the M9-issued authority use for a finite owner operation without
+    /// reinterpreting the origin locus as a principal.
+    pub(crate) fn owner_authority_for_operation(
+        &self,
+        operation: &str,
+        owner_locus: &str,
+    ) -> Option<(String, M8AuthorityUse)> {
+        self.owner_uses.iter().find_map(
+            |((candidate_operation, principal, candidate_owner), authority_use)| {
+                (candidate_operation == operation && candidate_owner == owner_locus)
+                    .then(|| (principal.clone(), authority_use.clone()))
+            },
+        )
+    }
+
+    /// Validate one owner operation from an exact SYS-4 request.  The
+    /// increment is an M9-owned observation; downstream code receives only
+    /// the already admitted authority use and cannot manufacture a lineage.
+    pub(crate) fn validate_owner_operation(
+        &mut self,
+        operation: &str,
+        owner_locus: &str,
+        request_id: &str,
+    ) -> Option<(String, M8AuthorityUse)> {
+        *self
+            .owner_operation_validation_occurrences
+            .entry((
+                operation.to_string(),
+                owner_locus.to_string(),
+                request_id.to_string(),
+            ))
+            .or_default() += 1;
+        self.owner_authority_for_operation(operation, owner_locus)
+    }
+
+    pub(crate) fn designated_evaluation_authority_use(
+        &self,
+        evaluator: &str,
+        result: &str,
+    ) -> Option<M8DesignatedAuthorityUse> {
+        self.designated_evaluation_uses
+            .get(&(evaluator.to_string(), result.to_string()))
+            .cloned()
+    }
+
+    pub(crate) fn designated_consumption_authority_use(
+        &self,
+        consumer: &str,
+        value_name: &str,
+    ) -> Option<M8DesignatedAuthorityUse> {
+        self.designated_consumption_uses
+            .get(&(consumer.to_string(), value_name.to_string()))
+            .cloned()
+    }
+
+    pub(crate) fn designated_consumption_capability_is_revoked(
+        &self,
+        consumer: &str,
+        value_name: &str,
+    ) -> bool {
+        self.revoked_designated_consumption_capabilities
+            .contains(&(consumer.to_string(), value_name.to_string()))
+    }
+
+    fn with_successor_generation_and_revoked_designated_consumption(
+        mut self,
+        previous: &Self,
+        consumer: &str,
+        value_name: &str,
+    ) -> Option<Self> {
+        let key = (consumer.to_string(), value_name.to_string());
+        let prior_use = previous.designated_consumption_uses.get(&key)?.clone();
+        if previous
+            .revoked_designated_consumption_capabilities
+            .contains(&key)
+        {
+            return None;
+        }
+        self.generation = previous.generation.checked_add(1)?;
+        self.generation_ref = format!("m9-authority-generation:{:020}", self.generation);
+        self.owner_uses = previous.owner_uses.clone();
+        self.kernel_owner_lineages = previous.kernel_owner_lineages.clone();
+        self.designated_evaluation_uses = previous.designated_evaluation_uses.clone();
+        self.designated_consumption_uses = previous.designated_consumption_uses.clone();
+        self.designated_consumption_uses
+            .insert(key.clone(), prior_use);
+        self.revoked_owner_capabilities = previous.revoked_owner_capabilities.clone();
+        self.revoked_designated_consumption_capabilities =
+            previous.revoked_designated_consumption_capabilities.clone();
+        self.revoked_designated_consumption_capabilities.insert(key);
+        self.kernel_designated_remote_input_lineages =
+            previous.kernel_designated_remote_input_lineages.clone();
+        self.designated_consumer_failures = previous.designated_consumer_failures.clone();
+        self.designated_consumer_witness_retirements =
+            previous.designated_consumer_witness_retirements.clone();
+        self.designated_source_release_failures =
+            previous.designated_source_release_failures.clone();
+        self.designated_consumer_validation_occurrences =
+            previous.designated_consumer_validation_occurrences.clone();
+        self.owner_operation_validation_occurrences =
+            previous.owner_operation_validation_occurrences.clone();
+        self.source_release_validation_occurrences =
+            previous.source_release_validation_occurrences.clone();
+        Some(self)
+    }
+
+    fn with_successor_generation_and_source_release_failure(
+        mut self,
+        previous: &Self,
+        evaluator: &str,
+        result: &str,
+        source_locus: &str,
+        dependency_index: usize,
+        input_frontier: &str,
+    ) -> Option<Self> {
+        let key = (
+            evaluator.to_string(),
+            result.to_string(),
+            source_locus.to_string(),
+            dependency_index,
+            input_frontier.to_string(),
+        );
+        if previous
+            .designated_source_release_failures
+            .contains_key(&key)
+        {
+            return None;
+        }
+        self.generation = previous.generation.checked_add(1)?;
+        self.generation_ref = format!("m9-authority-generation:{:020}", self.generation);
+        self.owner_uses = previous.owner_uses.clone();
+        self.kernel_owner_lineages = previous.kernel_owner_lineages.clone();
+        self.designated_evaluation_uses = previous.designated_evaluation_uses.clone();
+        self.designated_consumption_uses = previous.designated_consumption_uses.clone();
+        self.revoked_owner_capabilities = previous.revoked_owner_capabilities.clone();
+        self.revoked_designated_consumption_capabilities =
+            previous.revoked_designated_consumption_capabilities.clone();
+        self.kernel_designated_remote_input_lineages =
+            previous.kernel_designated_remote_input_lineages.clone();
+        self.designated_consumer_failures = previous.designated_consumer_failures.clone();
+        self.designated_consumer_witness_retirements =
+            previous.designated_consumer_witness_retirements.clone();
+        self.designated_source_release_failures =
+            previous.designated_source_release_failures.clone();
+        self.designated_source_release_failures
+            .insert(key, M9AdmissionErrorKind::InvalidCapabilityLineage);
+        self.designated_consumer_validation_occurrences =
+            previous.designated_consumer_validation_occurrences.clone();
+        self.owner_operation_validation_occurrences =
+            previous.owner_operation_validation_occurrences.clone();
+        self.source_release_validation_occurrences =
+            previous.source_release_validation_occurrences.clone();
+        Some(self)
+    }
 }
 
 impl M9AuthoritySuccessorPublisher {
+    pub(crate) fn current_inspection(&self) -> M9AuthorityInspection {
+        self.current.sealed_inspection()
+    }
+
     pub(crate) fn revoke_owner_capability(
         &mut self,
         operation: &str,
@@ -2119,6 +2988,199 @@ impl M9AuthoritySuccessorPublisher {
                 operation,
                 principal,
                 owner_locus,
+            )
+            .ok_or_else(|| {
+                M9AdmissionDiagnostics::one(M9AdmissionErrorKind::InvalidCapabilityLineage)
+            })?;
+        self.current = successor.clone();
+        Ok(successor)
+    }
+
+    /// Revoke the exact checked designated-result consumer scope from this
+    /// publisher's currently admitted M9 inventory.  The caller selects only
+    /// the checked `(consumer, value)` identity; the capability and witness
+    /// reference remain sealed inside M9.
+    pub(crate) fn revoke_designated_consumption_capability(
+        &mut self,
+        consumer: &str,
+        value_name: &str,
+    ) -> Result<M9AuthorityGeneration, M9AdmissionDiagnostics> {
+        let use_ = self
+            .current
+            .designated_consumption_authority_use(consumer, value_name)
+            .ok_or_else(|| {
+                M9AdmissionDiagnostics::one(M9AdmissionErrorKind::InvalidCapabilityLineage)
+            })?;
+        let (Some(capability_ref), Some(witness_ref)) = (use_.capability_ref(), use_.witness_ref())
+        else {
+            return Err(M9AdmissionDiagnostics::one(
+                M9AdmissionErrorKind::InvalidCapabilityLineage,
+            ));
+        };
+        self.authority_runtime
+            .revoke(M9Revocation::capability(capability_ref).with_witness_ref(witness_ref))?;
+        let translated = M9RuntimeAdmitted {
+            base: self.base.clone(),
+            authority_runtime: self.authority_runtime.clone(),
+            evidence: self.evidence.clone(),
+        }
+        .into_m10_execution_seam()
+        .initial_authority_generation();
+        let successor = translated
+            .with_successor_generation_and_revoked_designated_consumption(
+                &self.current,
+                consumer,
+                value_name,
+            )
+            .ok_or_else(|| {
+                M9AdmissionDiagnostics::one(M9AdmissionErrorKind::InvalidCapabilityLineage)
+            })?;
+        let mut successor = successor;
+        successor.designated_consumer_failures.insert(
+            (consumer.to_string(), value_name.to_string()),
+            M9AdmissionErrorKind::InvalidCapabilityLineage,
+        );
+        self.current = successor.clone();
+        Ok(successor)
+    }
+
+    /// Produce a successor through M9 membership retirement. SYS-4 consumes
+    /// only the resulting immutable authority generation.
+    pub(crate) fn retire_designated_consumption_membership(
+        &mut self,
+        consumer: &str,
+        value_name: &str,
+    ) -> Result<M9AuthorityGeneration, M9AdmissionDiagnostics> {
+        let use_ = self
+            .current
+            .designated_consumption_authority_use(consumer, value_name)
+            .ok_or_else(|| {
+                M9AdmissionDiagnostics::one(M9AdmissionErrorKind::InvalidCapabilityLineage)
+            })?;
+        let membership_ref = use_.membership_ref().ok_or_else(|| {
+            M9AdmissionDiagnostics::one(M9AdmissionErrorKind::InvalidMembershipLineage)
+        })?;
+        self.authority_runtime.retire_membership(
+            membership_ref,
+            format!("sys4-consumer-retire:{consumer}:{value_name}"),
+        )?;
+        let translated = M9RuntimeAdmitted {
+            base: self.base.clone(),
+            authority_runtime: self.authority_runtime.clone(),
+            evidence: self.evidence.clone(),
+        }
+        .into_m10_execution_seam()
+        .initial_authority_generation();
+        let successor = translated
+            .with_successor_generation_and_revoked_designated_consumption(
+                &self.current,
+                consumer,
+                value_name,
+            )
+            .ok_or_else(|| {
+                M9AdmissionDiagnostics::one(M9AdmissionErrorKind::InvalidCapabilityLineage)
+            })?;
+        let mut successor = successor;
+        successor.designated_consumer_failures.insert(
+            (consumer.to_string(), value_name.to_string()),
+            M9AdmissionErrorKind::InvalidMembershipLineage,
+        );
+        self.current = successor.clone();
+        Ok(successor)
+    }
+
+    /// Retire the checked consumption witness without giving SYS-4 authority
+    /// to mutate any M9 lineage.
+    pub(crate) fn retire_designated_consumption_witness(
+        &mut self,
+        consumer: &str,
+        value_name: &str,
+    ) -> Result<M9AuthorityGeneration, M9AdmissionDiagnostics> {
+        let use_ = self
+            .current
+            .designated_consumption_authority_use(consumer, value_name)
+            .ok_or_else(|| {
+                M9AdmissionDiagnostics::one(M9AdmissionErrorKind::InvalidCapabilityLineage)
+            })?;
+        let witness_ref = use_.witness_ref().ok_or_else(|| {
+            M9AdmissionDiagnostics::one(M9AdmissionErrorKind::InvalidCapabilityLineage)
+        })?;
+        self.authority_runtime.retire_witness(witness_ref)?;
+        let translated = M9RuntimeAdmitted {
+            base: self.base.clone(),
+            authority_runtime: self.authority_runtime.clone(),
+            evidence: self.evidence.clone(),
+        }
+        .into_m10_execution_seam()
+        .initial_authority_generation();
+        let successor = translated
+            .with_successor_generation_and_revoked_designated_consumption(
+                &self.current,
+                consumer,
+                value_name,
+            )
+            .ok_or_else(|| {
+                M9AdmissionDiagnostics::one(M9AdmissionErrorKind::InvalidCapabilityLineage)
+            })?;
+        let mut successor = successor;
+        successor.designated_consumer_failures.insert(
+            (consumer.to_string(), value_name.to_string()),
+            M9AdmissionErrorKind::InvalidCapabilityLineage,
+        );
+        successor
+            .designated_consumer_witness_retirements
+            .insert((consumer.to_string(), value_name.to_string()));
+        self.current = successor.clone();
+        Ok(successor)
+    }
+
+    /// Revoke exactly one sealed source-release capability.  The caller can
+    /// name only the opaque lineage returned by a prior inspection; M9 still
+    /// resolves and revokes the concrete capability/witness internally.
+    pub(crate) fn revoke_designated_source_release(
+        &mut self,
+        wanted: &M9DesignatedSourceReleaseLineage,
+    ) -> Result<M9AuthorityGeneration, M9AdmissionDiagnostics> {
+        let inspection = self.current.sealed_inspection();
+        let ((evaluator, result, source, dependency, frontier), _) = inspection
+            .source_releases
+            .iter()
+            .find(|(_, lineage)| *lineage == wanted)
+            .ok_or_else(|| {
+                M9AdmissionDiagnostics::one(M9AdmissionErrorKind::InvalidCapabilityLineage)
+            })?;
+        let source_lineage = self
+            .current
+            .kernel_designated_remote_input_lineages
+            .get(&(
+                source.clone(),
+                evaluator.clone(),
+                result.clone(),
+                *dependency,
+                frontier.clone(),
+            ))
+            .ok_or_else(|| {
+                M9AdmissionDiagnostics::one(M9AdmissionErrorKind::InvalidCapabilityLineage)
+            })?;
+        self.authority_runtime.revoke(
+            M9Revocation::capability(source_lineage.capability_ref())
+                .with_witness_ref(source_lineage.witness_ref()),
+        )?;
+        let translated = M9RuntimeAdmitted {
+            base: self.base.clone(),
+            authority_runtime: self.authority_runtime.clone(),
+            evidence: self.evidence.clone(),
+        }
+        .into_m10_execution_seam()
+        .initial_authority_generation();
+        let successor = translated
+            .with_successor_generation_and_source_release_failure(
+                &self.current,
+                evaluator,
+                result,
+                source,
+                *dependency,
+                frontier,
             )
             .ok_or_else(|| {
                 M9AdmissionDiagnostics::one(M9AdmissionErrorKind::InvalidCapabilityLineage)
@@ -2761,10 +3823,19 @@ impl M9RuntimeAdmitted {
             generation_ref: "m9-authority-generation:00000000000000000000".to_string(),
             authority_state: authority_state.clone(),
             owner_uses: owner_uses.clone(),
+            designated_evaluation_uses: designated_evaluation_uses.clone(),
+            designated_consumption_uses: designated_consumption_uses.clone(),
             kernel_owner_lineages: kernel_owner_lineages.clone(),
             revoked_owner_capabilities: BTreeSet::new(),
+            revoked_designated_consumption_capabilities: BTreeSet::new(),
             kernel_designated_remote_input_lineages: kernel_designated_remote_input_lineages
                 .clone(),
+            designated_consumer_failures: BTreeMap::new(),
+            designated_consumer_witness_retirements: BTreeSet::new(),
+            designated_source_release_failures: BTreeMap::new(),
+            designated_consumer_validation_occurrences: BTreeMap::new(),
+            owner_operation_validation_occurrences: BTreeMap::new(),
+            source_release_validation_occurrences: BTreeMap::new(),
         };
         let authority_successor = M9AuthoritySuccessorPublisher {
             base: base.clone(),
@@ -2789,6 +3860,7 @@ impl M9RuntimeAdmitted {
             kernel_owner_lineages,
             kernel_designated_remote_input_lineages,
             authority_generation,
+            final_residual_discharge_complete: true,
             authority_successor: Some(authority_successor),
         }
     }
@@ -4493,6 +5565,32 @@ impl M9AuthorityRuntime {
                 [format!("membership-retired:{membership_ref}")],
             );
         }
+        Ok(())
+    }
+
+    /// Retire a live witness while retaining its M9 lineage and invalidation
+    /// evidence.  This is deliberately narrower than capability revocation.
+    pub(crate) fn retire_witness(
+        &mut self,
+        witness_ref: &str,
+    ) -> Result<(), M9AdmissionDiagnostics> {
+        let Some(witness) = self.snapshot.witnesses.get(witness_ref).cloned() else {
+            return Err(M9AdmissionDiagnostics::one(
+                M9AdmissionErrorKind::InvalidCapabilityLineage,
+            ));
+        };
+        if !witness.live {
+            return Err(M9AdmissionDiagnostics::one(
+                M9AdmissionErrorKind::InvalidCapabilityLineage,
+            ));
+        }
+        self.snapshot
+            .witnesses
+            .get_mut(witness_ref)
+            .expect("checked witness remains present")
+            .live = false;
+        self.evidence_graph
+            .revoke(&witness.capability_ref, [witness.reference]);
         Ok(())
     }
 

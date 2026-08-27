@@ -56,6 +56,8 @@ pub(crate) mod sys2_bounded_model;
 #[cfg_attr(not(test), allow(dead_code))]
 pub(crate) mod sys2_execution_backend;
 pub(crate) mod sys3_projection;
+#[cfg_attr(not(test), allow(dead_code))]
+pub(crate) mod sys4_dispatch;
 
 #[cfg(test)]
 mod sys1_runtime_kernel_tests;
@@ -66,6 +68,7 @@ mod sys2_execution_backend_tests;
 #[cfg(test)]
 mod sys3_projection_tests;
 #[cfg(test)]
+#[allow(clippy::bool_assert_comparison, clippy::too_many_arguments)]
 mod sys4_dispatch_tests;
 
 pub fn crate_name() -> &'static str {

@@ -562,6 +562,12 @@ fn project_designated(
             "{}:{dependency_ordinal}",
             artifact_ref(source_owner, &operation, "designated-source-read")
         );
+        let local_state_schemas = checked
+            .static_environment()
+            .indexed_state_schema(dependency.typed_state_read().namespace())
+            .into_iter()
+            .cloned()
+            .collect();
         result
             .locus_program_mut(source_owner)
             .add_fragment(ProjectedOperationFragment {
@@ -578,6 +584,7 @@ fn project_designated(
                 generated_failure_row: evaluation.generated_failure_row().clone(),
                 placement: PlacementSpecificCore::DesignatedSource {
                     dependency: dependency.clone(),
+                    local_state_schemas,
                 },
                 locus_tag: LocusTag::checked(source_owner),
                 fragment_ref: source_artifact_ref.clone(),

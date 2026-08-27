@@ -25,8 +25,8 @@ use crate::{
         M8ConsumeRequest, M8ConsumedDesignatedValue, M8ConsumptionState, M8DesignatedAuthorityUse,
         M8DesignatedDiagnosticKind, M8DesignatedDiagnostics, M8DesignatedEvaluationRequest,
         M8DesignatedResultStore, M8DesignatedRuntime, M8DesignatedSeed, M8DesignatedTrace,
-        M8DesignatedTraceKind, M8InputReceiptSet, M8PresentationInterpolation, M8ReceiptState,
-        M8ResultVersionStore,
+        M8DesignatedTraceKind, M8InputReceiptSet, M8PresentationInterpolation,
+        M8PublishedDesignatedValue, M8ReceiptState, M8ResultVersionStore,
     },
     m8_runtime_owner_queue::{
         M8AuthorityUse, M8EnqueueDiagnosticKind, M8EnqueueDiagnostics, M8EntityPresenceRegistry,
@@ -43,6 +43,9 @@ use crate::{
     },
     m9_auth_verification::{M9M8EntityPresenceBridge, M9M8EntityPresenceStatus},
 };
+
+#[cfg(test)]
+use crate::m8_runtime_designated_value::M8DesignatedTick;
 
 pub use crate::m8_runtime_relation_projection::{M8LeaseInventory, M8LeaseRecord};
 
@@ -171,12 +174,18 @@ pub enum M8LocalTraceKind {
     DesignatedAuthorityValidated,
     DesignatedInputReceiptValidated,
     DesignatedValuePublished,
+    DesignatedEvaluationIdempotent,
     DesignatedConsumerAuthorityValidated,
     DesignatedValueConsumed,
+    /// A non-consuming, live-authority validation of a previously consumed
+    /// designated delivery.  This is an M8-owned occurrence: SYS-4 may ask
+    /// M8 to perform it, but cannot fabricate its node id or trace row.
+    DesignatedCacheValidated,
     PatchStateInitialized,
     LocalCutSaved,
     RestoreRejected,
     OwnerEnqueueRejected,
+    OwnerOperationRejected,
     OwnerServeRejected,
     RelationTransitionRejected,
     DesignatedEvaluationRejected,
@@ -414,14 +423,150 @@ struct M8LocalTraceEntry {
     authority: M8LocalAuthorityRefs,
     failure: Option<M8LocalFailure>,
     fresh_witness_ref: Option<String>,
+    designated: Option<M8LocalDesignatedTraceContext>,
 }
 
 #[derive(Debug, Clone, PartialEq, Eq)]
 pub(crate) struct M8LocalTraceObservation {
     pub(crate) node_id: String,
+    kind: M8LocalTraceKind,
+    sequence: u64,
     pub(crate) dependencies: Vec<String>,
     pub(crate) source_ref: SourceRef,
     pub(crate) occurrence_id: Option<String>,
+    designated: Option<M8LocalDesignatedTraceContext>,
+}
+
+/// Opaque carrier identity facts which M8 retains alongside a designated
+/// observation.  They are supplied only after SYS-4 has dequeued a checked
+/// carrier; node allocation remains wholly owned by M8LocalTrace.
+#[derive(Debug, Clone, PartialEq, Eq)]
+pub(crate) struct M8LocalDesignatedTraceContext {
+    envelope_id: String,
+    semantic_identity: String,
+    consumer_locus: String,
+    operation_id: String,
+    owner_locus: String,
+    evaluator_locus: String,
+    edge_ref: String,
+    m8_publication_id: String,
+    logical_tick_id: String,
+    logical_tick_frontier: String,
+}
+
+#[cfg_attr(not(test), allow(dead_code))]
+impl M8LocalDesignatedTraceContext {
+    pub(crate) fn new(
+        envelope_id: impl Into<String>,
+        semantic_identity: impl Into<String>,
+        consumer_locus: impl Into<String>,
+        m8_publication_id: impl Into<String>,
+        logical_tick_id: impl Into<String>,
+        logical_tick_frontier: impl Into<String>,
+    ) -> Self {
+        Self {
+            envelope_id: envelope_id.into(),
+            semantic_identity: semantic_identity.into(),
+            consumer_locus: consumer_locus.into(),
+            operation_id: String::new(),
+            owner_locus: String::new(),
+            evaluator_locus: String::new(),
+            edge_ref: String::new(),
+            m8_publication_id: m8_publication_id.into(),
+            logical_tick_id: logical_tick_id.into(),
+            logical_tick_frontier: logical_tick_frontier.into(),
+        }
+    }
+
+    pub(crate) fn with_operation_id(mut self, operation_id: impl Into<String>) -> Self {
+        self.operation_id = operation_id.into();
+        self
+    }
+
+    pub(crate) fn with_owner_locus(mut self, owner_locus: impl Into<String>) -> Self {
+        self.owner_locus = owner_locus.into();
+        self
+    }
+
+    pub(crate) fn with_evaluator_locus(mut self, evaluator_locus: impl Into<String>) -> Self {
+        self.evaluator_locus = evaluator_locus.into();
+        self
+    }
+
+    pub(crate) fn with_edge_ref(mut self, edge_ref: impl Into<String>) -> Self {
+        self.edge_ref = edge_ref.into();
+        self
+    }
+}
+
+#[cfg_attr(not(test), allow(dead_code))]
+impl M8LocalTraceObservation {
+    pub(crate) fn node_id(&self) -> &str {
+        &self.node_id
+    }
+    pub(crate) const fn kind(&self) -> M8LocalTraceKind {
+        self.kind
+    }
+    pub(crate) const fn sequence(&self) -> u64 {
+        // Trace node IDs remain zero-based for stable historical references;
+        // the observer-facing sequence is one-based so absence (0) cannot be
+        // confused with the first concrete M8 occurrence.
+        self.sequence.saturating_add(1)
+    }
+    pub(crate) fn semantic_identity(&self) -> &str {
+        self.designated
+            .as_ref()
+            .map_or("", |value| &value.semantic_identity)
+    }
+    pub(crate) fn consumer_locus(&self) -> &str {
+        self.designated
+            .as_ref()
+            .map_or("", |value| &value.consumer_locus)
+    }
+    pub(crate) fn m8_publication_id(&self) -> &str {
+        self.designated
+            .as_ref()
+            .map_or("", |value| &value.m8_publication_id)
+    }
+    pub(crate) fn logical_tick_id(&self) -> &str {
+        self.designated
+            .as_ref()
+            .map_or("", |value| &value.logical_tick_id)
+    }
+    pub(crate) fn logical_tick_frontier(&self) -> &str {
+        self.designated
+            .as_ref()
+            .map_or("", |value| &value.logical_tick_frontier)
+    }
+    pub(crate) fn envelope_id(&self) -> &str {
+        self.designated
+            .as_ref()
+            .map_or("", |value| &value.envelope_id)
+    }
+    pub(crate) fn operation_id(&self) -> &str {
+        self.designated
+            .as_ref()
+            .map_or("", |value| &value.operation_id)
+    }
+    pub(crate) fn owner_locus(&self) -> &str {
+        self.designated
+            .as_ref()
+            .map_or("", |value| &value.owner_locus)
+    }
+    pub(crate) fn evaluator_locus(&self) -> &str {
+        self.designated
+            .as_ref()
+            .map_or("", |value| &value.evaluator_locus)
+    }
+    pub(crate) fn edge_ref(&self) -> &str {
+        self.designated.as_ref().map_or("", |value| &value.edge_ref)
+    }
+    pub(crate) fn designated_context_digest(&self) -> String {
+        format!("{:?}", self.designated)
+    }
+    pub(crate) fn predecessor_ids(&self) -> &[String] {
+        &self.dependencies
+    }
 }
 
 /// Sealed M9-to-M8 entity-presence synchronization evidence. It carries only
@@ -613,7 +758,7 @@ impl M8LocalTrace {
         authority: M8LocalAuthorityRefs,
         failure: Option<M8LocalFailure>,
         fresh_witness_ref: Option<String>,
-    ) {
+    ) -> M8LocalTraceObservation {
         let node_index = self.next_node_index;
         self.next_node_index += 1;
         let node_id = format!("m8-local-trace-{node_index:020}");
@@ -634,7 +779,13 @@ impl M8LocalTrace {
             authority,
             failure,
             fresh_witness_ref,
+            designated: None,
         });
+        Self::observation_for_entry(
+            self.entries
+                .last()
+                .expect("appended M8 trace entry remains present"),
+        )
     }
 
     pub(crate) fn latest_observation(
@@ -645,12 +796,7 @@ impl M8LocalTrace {
             .iter()
             .rev()
             .find(|entry| entry.kind == kind)
-            .map(|entry| M8LocalTraceObservation {
-                node_id: entry.node_id.clone(),
-                dependencies: entry.dependencies.iter().cloned().collect(),
-                source_ref: entry.source_ref.clone(),
-                occurrence_id: entry.occurrence_id.clone(),
-            })
+            .map(Self::observation_for_entry)
     }
 
     pub(crate) fn latest_observation_for_occurrence(
@@ -664,12 +810,112 @@ impl M8LocalTrace {
             .find(|entry| {
                 entry.kind == kind && entry.occurrence_id.as_deref() == Some(occurrence_id)
             })
-            .map(|entry| M8LocalTraceObservation {
-                node_id: entry.node_id.clone(),
-                dependencies: entry.dependencies.iter().cloned().collect(),
-                source_ref: entry.source_ref.clone(),
-                occurrence_id: entry.occurrence_id.clone(),
+            .map(Self::observation_for_entry)
+    }
+
+    #[cfg_attr(not(test), allow(dead_code))]
+    pub(crate) fn observation(&self, node_id: &str) -> Option<M8LocalTraceObservation> {
+        self.entries
+            .iter()
+            .find(|entry| entry.node_id == node_id)
+            .map(Self::observation_for_entry)
+    }
+
+    #[cfg_attr(not(test), allow(dead_code))]
+    pub(crate) fn count_designated(
+        &self,
+        kind: M8LocalTraceKind,
+        semantic_identity: &str,
+        consumer_locus: &str,
+    ) -> usize {
+        self.entries
+            .iter()
+            .filter(|entry| {
+                entry.kind == kind
+                    && entry.designated.as_ref().is_some_and(|context| {
+                        context.semantic_identity == semantic_identity
+                            && context.consumer_locus == consumer_locus
+                    })
             })
+            .count()
+    }
+
+    #[cfg_attr(not(test), allow(dead_code))]
+    pub(crate) fn latest_sequence(&self) -> Option<u64> {
+        self.entries
+            .last()
+            .map(|entry| entry.node_index.saturating_add(1))
+    }
+
+    #[cfg_attr(not(test), allow(dead_code))]
+    pub(crate) fn node_ids_for_designated(
+        &self,
+        kind: M8LocalTraceKind,
+        semantic_identity: &str,
+        consumer_locus: &str,
+    ) -> Vec<String> {
+        self.entries
+            .iter()
+            .filter(|entry| {
+                entry.kind == kind
+                    && entry.designated.as_ref().is_some_and(|context| {
+                        context.semantic_identity == semantic_identity
+                            && context.consumer_locus == consumer_locus
+                    })
+            })
+            .map(|entry| entry.node_id.clone())
+            .collect()
+    }
+
+    fn observation_for_entry(entry: &M8LocalTraceEntry) -> M8LocalTraceObservation {
+        M8LocalTraceObservation {
+            node_id: entry.node_id.clone(),
+            kind: entry.kind,
+            sequence: entry.node_index,
+            dependencies: entry.dependencies.iter().cloned().collect(),
+            source_ref: entry.source_ref.clone(),
+            occurrence_id: entry.occurrence_id.clone(),
+            designated: entry.designated.clone(),
+        }
+    }
+
+    fn attach_designated_context(
+        &mut self,
+        node_id: &str,
+        context: M8LocalDesignatedTraceContext,
+    ) -> Option<M8LocalTraceObservation> {
+        let entry = self
+            .entries
+            .iter_mut()
+            .find(|entry| entry.node_id == node_id)?;
+        entry.designated = Some(context);
+        Some(Self::observation_for_entry(entry))
+    }
+
+    #[cfg_attr(not(test), allow(dead_code))]
+    fn append_designated(
+        &mut self,
+        kind: M8LocalTraceKind,
+        source_ref: SourceRef,
+        context: M8LocalDesignatedTraceContext,
+        failure: Option<M8LocalFailure>,
+    ) -> String {
+        self.append_fact(
+            kind,
+            source_ref,
+            None,
+            None,
+            false,
+            M8LocalAuthorityRefs::default(),
+            failure,
+            None,
+        );
+        let entry = self
+            .entries
+            .last_mut()
+            .expect("M8 designated observation appends one local trace entry");
+        entry.designated = Some(context);
+        entry.node_id.clone()
     }
 }
 
@@ -1166,6 +1412,12 @@ pub struct M8LocalRuntime {
     patch_lifecycle: M8LocalPatchLifecycle,
     entity_presence_external_controls: Vec<M8EntityPresenceExternalControl>,
     trace: RefCell<M8LocalTrace>,
+    #[cfg(test)]
+    designated_consume_test_rejection: Option<M8LocalDesignatedTraceContext>,
+    #[cfg(test)]
+    owner_operation_test_rejection: Option<M8LocalDesignatedTraceContext>,
+    #[cfg(test)]
+    designated_evaluation_test_rejection: Option<M8LocalDesignatedTraceContext>,
 }
 
 impl M8LocalRuntime {
@@ -1208,6 +1460,12 @@ impl M8LocalRuntime {
             patch_lifecycle: M8LocalPatchLifecycle::default(),
             entity_presence_external_controls: Vec::new(),
             trace: RefCell::new(M8LocalTrace::default()),
+            #[cfg(test)]
+            designated_consume_test_rejection: None,
+            #[cfg(test)]
+            owner_operation_test_rejection: None,
+            #[cfg(test)]
+            designated_evaluation_test_rejection: None,
         }
     }
 
@@ -1219,6 +1477,56 @@ impl M8LocalRuntime {
         let outcome = self.with_owner_snapshot(|owner| owner.try_enqueue(request));
         self.append_owner_trace_since(trace_len);
         outcome
+    }
+
+    /// Execute an owner request that has already crossed a checked endpoint.
+    /// M8 allocates and returns the exact local trace rows carrying the
+    /// supplied carrier context; callers never recover them by a global
+    /// latest-row lookup.
+    pub(crate) fn execute_owner_with_context(
+        &mut self,
+        owner_locus: &str,
+        request: M8OwnerRequest,
+        context: M8LocalDesignatedTraceContext,
+    ) -> Result<
+        (
+            M8ServeOutcome,
+            M8LocalTraceObservation,
+            M8LocalTraceObservation,
+        ),
+        Box<M8LocalTraceObservation>,
+    > {
+        let request = self.request_for_owner_context(request, &context);
+        let enqueue_start = self.owner.trace().entries().len();
+        let enqueue = self.with_owner_snapshot(|owner| owner.try_enqueue(request));
+        let enqueue_trace_rows = self.append_owner_trace_since(enqueue_start);
+        let enqueue_rows = self.attach_context_to_rows(enqueue_trace_rows, context.clone());
+        if enqueue.is_err() {
+            return Err(Box::new(owner_context_row(
+                &enqueue_rows,
+                M8LocalTraceKind::OwnerOperationRejected,
+            )));
+        }
+        let enqueue_observation = owner_context_row(&enqueue_rows, M8LocalTraceKind::OwnerEnqueued);
+        let serve_start = self.owner.trace().entries().len();
+        let served = self.with_owner_snapshot(|owner| owner.serve_next_owner(owner_locus));
+        let serve_trace_rows = self.append_owner_trace_since(serve_start);
+        let serve_rows = self.attach_context_to_rows(serve_trace_rows, context);
+        let serve_observation = serve_rows
+            .iter()
+            .rev()
+            .find(|row| {
+                matches!(
+                    row.kind(),
+                    M8LocalTraceKind::OwnerWrite | M8LocalTraceKind::OwnerServeRejected
+                )
+            })
+            .cloned()
+            .unwrap_or_else(|| owner_context_row(&serve_rows, M8LocalTraceKind::OwnerWrite));
+        match served {
+            Ok(outcome) => Ok((outcome, enqueue_observation, serve_observation)),
+            Err(_) => Err(Box::new(serve_observation)),
+        }
     }
 
     pub fn serve_next_owner(
@@ -1544,6 +1852,55 @@ impl M8LocalRuntime {
         outcome
     }
 
+    /// Evaluate a designated result after a checked input receipt has been
+    /// dequeued.  Both the input-validation and evaluation rows are M8-owned
+    /// and retain the same exact carrier context.
+    pub(crate) fn evaluate_designated_with_context(
+        &mut self,
+        request: M8DesignatedEvaluationRequest,
+        context: M8LocalDesignatedTraceContext,
+    ) -> Result<
+        (
+            M8PublishedDesignatedValue,
+            M8LocalTraceObservation,
+            M8LocalTraceObservation,
+        ),
+        Box<M8LocalTraceObservation>,
+    > {
+        let request = self.request_for_designated_evaluation_context(request, &context);
+        let start = self.designated.trace().kinds().len();
+        let outcome = self.with_designated_snapshot(|runtime| runtime.evaluate_designated(request));
+        let trace_rows = self.append_designated_trace_since(start);
+        let rows = self.attach_context_to_rows(trace_rows, context);
+        match outcome {
+            Ok(value) => {
+                let input = designated_context_row(
+                    &rows,
+                    M8LocalTraceKind::DesignatedInputReceiptValidated,
+                );
+                let evaluation = rows
+                    .iter()
+                    .rev()
+                    .find(|row| {
+                        matches!(
+                            row.kind(),
+                            M8LocalTraceKind::DesignatedValuePublished
+                                | M8LocalTraceKind::DesignatedEvaluationIdempotent
+                        )
+                    })
+                    .cloned()
+                    .unwrap_or_else(|| {
+                        designated_context_row(&rows, M8LocalTraceKind::DesignatedValuePublished)
+                    });
+                Ok((value, input, evaluation))
+            }
+            Err(_) => Err(Box::new(designated_context_row(
+                &rows,
+                M8LocalTraceKind::DesignatedEvaluationRejected,
+            ))),
+        }
+    }
+
     pub fn consume_published_value(
         &mut self,
         request: M8ConsumeRequest,
@@ -1553,6 +1910,162 @@ impl M8LocalRuntime {
             self.with_designated_snapshot(|runtime| runtime.consume_published_value(request));
         self.append_designated_trace_since(trace_len);
         outcome
+    }
+
+    /// Consume an already dequeued, checked delivery while retaining the
+    /// carrier identity on the exact M8-owned consumption or rejection row.
+    pub(crate) fn consume_published_value_with_context(
+        &mut self,
+        request: M8ConsumeRequest,
+        context: M8LocalDesignatedTraceContext,
+    ) -> Result<(M8ConsumedDesignatedValue, M8LocalTraceObservation), Box<M8LocalTraceObservation>>
+    {
+        let request = self.request_for_designated_consumption_context(request, &context);
+        let start = self.designated.trace().kinds().len();
+        let outcome =
+            self.with_designated_snapshot(|runtime| runtime.consume_published_value(request));
+        let trace_rows = self.append_designated_trace_since(start);
+        let rows = self.attach_context_to_rows(trace_rows, context);
+        match outcome {
+            Ok(value) => Ok((
+                value,
+                designated_context_row(&rows, M8LocalTraceKind::DesignatedValueConsumed),
+            )),
+            Err(_) => Err(Box::new(designated_context_row(
+                &rows,
+                M8LocalTraceKind::DesignatedConsumptionRejected,
+            ))),
+        }
+    }
+
+    /// Run the admitted designated-consumption validation on an isolated
+    /// snapshot.  This validates the live M8 authority and publication shape
+    /// without recording another semantic consumption in the runtime state.
+    #[cfg_attr(not(test), allow(dead_code))]
+    pub(crate) fn validate_published_value_non_consuming(
+        &mut self,
+        request: M8ConsumeRequest,
+        context: M8LocalDesignatedTraceContext,
+    ) -> Result<String, M8DesignatedDiagnostics> {
+        let mut speculative = self.designated.clone();
+        speculative.semantic_snapshot = self.shared_snapshot.clone();
+        speculative.consumption_state = M8ConsumptionState::default();
+        speculative.consume_published_value(request)?;
+        Ok(self.trace.borrow_mut().append_designated(
+            M8LocalTraceKind::DesignatedCacheValidated,
+            self.admitted.program_identity().root_source_ref().clone(),
+            context,
+            None,
+        ))
+    }
+
+    fn attach_context_to_rows(
+        &self,
+        rows: Vec<M8LocalTraceObservation>,
+        context: M8LocalDesignatedTraceContext,
+    ) -> Vec<M8LocalTraceObservation> {
+        let mut trace = self.trace.borrow_mut();
+        rows.into_iter()
+            .map(|row| {
+                trace
+                    .attach_designated_context(row.node_id(), context.clone())
+                    .expect("M8 contextual trace row remains present")
+            })
+            .collect()
+    }
+
+    fn request_for_owner_context(
+        &mut self,
+        request: M8OwnerRequest,
+        _context: &M8LocalDesignatedTraceContext,
+    ) -> M8OwnerRequest {
+        #[cfg(test)]
+        if self
+            .owner_operation_test_rejection
+            .as_ref()
+            .is_some_and(|armed| {
+                armed.envelope_id == _context.envelope_id
+                    && armed.operation_id == _context.operation_id
+                    && armed.owner_locus == _context.owner_locus
+            })
+        {
+            self.owner_operation_test_rejection = None;
+            let authority = request
+                .authority_use()
+                .cloned()
+                .expect("contextual owner request retains M9 authority use");
+            return M8OwnerRequest::new("__m8-local-test-rejected-owner-operation__")
+                .with_authority_use(authority);
+        }
+        request
+    }
+
+    fn request_for_designated_evaluation_context(
+        &mut self,
+        request: M8DesignatedEvaluationRequest,
+        _context: &M8LocalDesignatedTraceContext,
+    ) -> M8DesignatedEvaluationRequest {
+        #[cfg(test)]
+        if self
+            .designated_evaluation_test_rejection
+            .as_ref()
+            .is_some_and(|armed| {
+                armed.envelope_id == _context.envelope_id
+                    && armed.operation_id == _context.operation_id
+                    && armed.evaluator_locus == _context.evaluator_locus
+                    && armed.logical_tick_id == _context.logical_tick_id
+            })
+        {
+            self.designated_evaluation_test_rejection = None;
+            return M8DesignatedEvaluationRequest::for_value(_context.operation_id.clone())
+                .with_tick(
+                    M8DesignatedTick::new("m8-local-test-rejected-tick")
+                        .with_input_frontier("m8-local-test-wrong-frontier"),
+                );
+        }
+        request
+    }
+
+    fn request_for_designated_consumption_context(
+        &mut self,
+        request: M8ConsumeRequest,
+        _context: &M8LocalDesignatedTraceContext,
+    ) -> M8ConsumeRequest {
+        #[cfg(test)]
+        if self
+            .designated_consume_test_rejection
+            .as_ref()
+            .is_some_and(|armed| {
+                armed.envelope_id == _context.envelope_id
+                    && armed.m8_publication_id == _context.m8_publication_id
+                    && armed.consumer_locus == _context.consumer_locus
+            })
+        {
+            self.designated_consume_test_rejection = None;
+            return request.with_consumer("__m8-local-test-rejected-consumer__");
+        }
+        request
+    }
+
+    #[cfg(test)]
+    pub(crate) fn arm_designated_consume_rejection(
+        &mut self,
+        context: M8LocalDesignatedTraceContext,
+    ) {
+        self.designated_consume_test_rejection = Some(context);
+    }
+
+    #[cfg(test)]
+    pub(crate) fn arm_owner_operation_rejection(&mut self, context: M8LocalDesignatedTraceContext) {
+        self.owner_operation_test_rejection = Some(context);
+    }
+
+    #[cfg(test)]
+    pub(crate) fn arm_designated_evaluation_rejection(
+        &mut self,
+        context: M8LocalDesignatedTraceContext,
+    ) {
+        self.designated_evaluation_test_rejection = Some(context);
     }
 
     pub fn attach_presentation_interpolation(
@@ -1769,6 +2282,15 @@ impl M8LocalRuntime {
         &self.designated.result_store
     }
 
+    #[cfg_attr(not(test), allow(dead_code))]
+    pub(crate) fn has_designated_publication_id(&self, value_name: &str, value_id: &str) -> bool {
+        self.designated
+            .result_store
+            .published_values(value_name)
+            .iter()
+            .any(|value| value.value_id() == value_id)
+    }
+
     pub(crate) fn active_program_identity(&self) -> &CheckedProgramIdentity {
         self.admitted.program_identity()
     }
@@ -1794,6 +2316,17 @@ impl M8LocalRuntime {
         });
         self.admitted = instance;
         self.record_patch_activation(patch_id);
+    }
+
+    /// SYS-4 installs a source-owner receipt only after that receipt has
+    /// crossed the generated endpoint boundary.  This replaces the finite
+    /// receipt inventory without changing the admitted program or authority.
+    #[cfg_attr(not(test), allow(dead_code))]
+    pub(crate) fn replace_designated_input_receipts(&mut self, input_receipts: M8InputReceiptSet) {
+        let admitted = self.admitted.clone();
+        self.with_designated_snapshot(|designated| {
+            designated.replace_admitted_plans(&admitted, Some(input_receipts))
+        });
     }
 
     pub(crate) fn install_admitted_from_cut(&mut self, cut: &M8LocalCut) {
@@ -1887,8 +2420,9 @@ impl M8LocalRuntime {
         result
     }
 
-    fn append_owner_trace_since(&mut self, start: usize) {
+    fn append_owner_trace_since(&mut self, start: usize) -> Vec<M8LocalTraceObservation> {
         let entries = self.owner.trace().entries()[start..].to_vec();
+        let mut observations = Vec::new();
         for entry in entries {
             let kind = match entry.kind() {
                 M8QueueTraceKind::Enqueued => Some(M8LocalTraceKind::OwnerEnqueued),
@@ -1898,7 +2432,7 @@ impl M8LocalRuntime {
                 M8QueueTraceKind::OwnerRead => Some(M8LocalTraceKind::OwnerRead),
                 M8QueueTraceKind::OwnerWrite => Some(M8LocalTraceKind::OwnerWrite),
                 M8QueueTraceKind::TypedEnqueueRejected => {
-                    Some(M8LocalTraceKind::OwnerEnqueueRejected)
+                    Some(M8LocalTraceKind::OwnerOperationRejected)
                 }
                 M8QueueTraceKind::DeclaredFailure => Some(M8LocalTraceKind::OwnerServeRejected),
             };
@@ -1913,7 +2447,7 @@ impl M8LocalRuntime {
                             ))
                         })
                     });
-                self.trace.borrow_mut().append_fact(
+                let observation = self.trace.borrow_mut().append_fact(
                     kind,
                     entry.source_ref().clone(),
                     entry.request_occurrence_id().map(ToOwned::to_owned),
@@ -1923,8 +2457,10 @@ impl M8LocalRuntime {
                     failure,
                     None,
                 );
+                observations.push(observation);
             }
         }
+        observations
     }
 
     fn append_relation_trace_since(&mut self, start: usize) {
@@ -1953,8 +2489,9 @@ impl M8LocalRuntime {
         }
     }
 
-    fn append_designated_trace_since(&mut self, start: usize) {
+    fn append_designated_trace_since(&mut self, start: usize) -> Vec<M8LocalTraceObservation> {
         let entries = self.designated.trace().observations();
+        let mut observations = Vec::new();
         for entry in entries.into_iter().skip(start) {
             let kind = match entry.kind {
                 M8DesignatedTraceKind::AuthorityValidated => {
@@ -1972,7 +2509,9 @@ impl M8LocalRuntime {
                 M8DesignatedTraceKind::ValueConsumed => {
                     Some(M8LocalTraceKind::DesignatedValueConsumed)
                 }
-                M8DesignatedTraceKind::EvaluationIdempotent => None,
+                M8DesignatedTraceKind::EvaluationIdempotent => {
+                    Some(M8LocalTraceKind::DesignatedEvaluationIdempotent)
+                }
                 M8DesignatedTraceKind::EvaluationFailed => {
                     Some(M8LocalTraceKind::DesignatedEvaluationRejected)
                 }
@@ -1990,7 +2529,7 @@ impl M8LocalRuntime {
                     }
                     _ => None,
                 };
-                self.trace.borrow_mut().append_fact(
+                let observation = self.trace.borrow_mut().append_fact(
                     kind,
                     entry.source_ref,
                     entry.occurrence_id,
@@ -2000,8 +2539,10 @@ impl M8LocalRuntime {
                     failure,
                     None,
                 );
+                observations.push(observation);
             }
         }
+        observations
     }
 
     fn restore_payload(&mut self, payload: &M8LocalSavePayload) {
@@ -2023,6 +2564,28 @@ impl M8LocalRuntime {
         self.patch_lifecycle = payload.patch_lifecycle.clone();
         self.entity_presence_external_controls = payload.entity_presence_external_controls.clone();
     }
+}
+
+fn owner_context_row(
+    rows: &[M8LocalTraceObservation],
+    kind: M8LocalTraceKind,
+) -> M8LocalTraceObservation {
+    rows.iter()
+        .rev()
+        .find(|row| row.kind() == kind)
+        .cloned()
+        .expect("M8 owner execution emitted its required contextual trace row")
+}
+
+fn designated_context_row(
+    rows: &[M8LocalTraceObservation],
+    kind: M8LocalTraceKind,
+) -> M8LocalTraceObservation {
+    rows.iter()
+        .rev()
+        .find(|row| row.kind() == kind)
+        .cloned()
+        .expect("M8 designated execution emitted its required contextual trace row")
 }
 
 fn relation_option_floor_regresses_same_lineage(

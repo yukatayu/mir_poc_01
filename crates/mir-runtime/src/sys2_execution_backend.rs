@@ -12,7 +12,10 @@ use std::{
 
 use crate::{
     m8_runtime_authority::M8AuthorityState,
-    m8_runtime_local_cut::{M8LocalRuntime, M8LocalTraceKind, M8LocalTraceObservation},
+    m8_runtime_local_cut::{
+        M8LocalDesignatedTraceContext, M8LocalRuntime, M8LocalTrace, M8LocalTraceKind,
+        M8LocalTraceObservation,
+    },
     m8_runtime_owner_queue::{
         M8EnqueueDiagnostics, M8Occurrence, M8OwnerRequest, M8ServeDiagnostics, M8ServeOutcome,
         M8StateKey,
@@ -112,6 +115,42 @@ pub(crate) struct Ow1M8ExecutionReceipt {
     worker_token: String,
 }
 
+/// The result of the contextual owner command used after SYS-4 has dequeued
+/// an exact generated carrier.  Unlike the legacy enqueue/serve pair, this
+/// command carries its immutable carrier provenance directly into M8 and
+/// returns the rows allocated by that worker-owned runtime.
+#[derive(Debug, Clone, PartialEq, Eq)]
+pub(crate) enum Ow1ContextualM8Execution {
+    Served(Box<Ow1ContextualM8ExecutionReceipt>),
+    Rejected {
+        observation: Box<M8LocalTraceObservation>,
+    },
+}
+
+/// Immutable acknowledgement of a contextual M8 owner execution.  The
+/// request and serve observations are both allocated by the OW1 worker; the
+/// coordinator only connects them to its already-dequeued carrier occurrence.
+#[derive(Debug, Clone, PartialEq, Eq)]
+pub(crate) struct Ow1ContextualM8ExecutionReceipt {
+    outcome: M8ServeOutcome,
+    request_observation: M8LocalTraceObservation,
+    serve_observation: M8LocalTraceObservation,
+}
+
+impl Ow1ContextualM8ExecutionReceipt {
+    pub(crate) fn outcome(&self) -> &M8ServeOutcome {
+        &self.outcome
+    }
+
+    pub(crate) fn request_observation(&self) -> &M8LocalTraceObservation {
+        &self.request_observation
+    }
+
+    pub(crate) fn serve_observation(&self) -> &M8LocalTraceObservation {
+        &self.serve_observation
+    }
+}
+
 impl Ow1M8ExecutionReceipt {
     pub(crate) fn request_occurrence(&self) -> &M8Occurrence {
         &self.request_occurrence
@@ -144,6 +183,12 @@ enum Ow1Command {
         expected_request_occurrence: M8Occurrence,
         reply: SyncSender<Result<Ow1M8ExecutionReceipt, Ow1WorkerFailure>>,
     },
+    ExecuteOwnerWithContext {
+        owner_locus: String,
+        request: M8OwnerRequest,
+        context: Box<M8LocalDesignatedTraceContext>,
+        reply: SyncSender<Result<Ow1ContextualM8Execution, Ow1WorkerFailure>>,
+    },
     ReadOwnerInt {
         key: M8StateKey,
         reply: SyncSender<Option<i64>>,
@@ -154,6 +199,14 @@ enum Ow1Command {
     },
     Snapshot {
         reply: SyncSender<M8LocalRuntime>,
+    },
+    TraceSnapshot {
+        reply: SyncSender<M8LocalTrace>,
+    },
+    #[cfg(test)]
+    ArmOwnerOperationRejection {
+        context: M8LocalDesignatedTraceContext,
+        reply: SyncSender<()>,
     },
     ShutdownExtract {
         reply: SyncSender<M8LocalRuntime>,
@@ -223,6 +276,27 @@ impl Ow1WorkerBackend {
             .map_err(|_| Ow1WorkerFailure::Disconnected)?
     }
 
+    /// Execute the contextual owner operation entirely inside the worker.
+    /// The caller has already performed endpoint dequeue and M9 admission; it
+    /// cannot choose M8 rows or reconstruct carrier provenance afterward.
+    pub(crate) fn execute_owner_with_context(
+        &self,
+        owner_locus: &str,
+        request: M8OwnerRequest,
+        context: M8LocalDesignatedTraceContext,
+    ) -> Result<Ow1ContextualM8Execution, Ow1WorkerFailure> {
+        let (reply, receiver) = mpsc::sync_channel(0);
+        self.send(Ow1Command::ExecuteOwnerWithContext {
+            owner_locus: owner_locus.to_string(),
+            request,
+            context: Box::new(context),
+            reply,
+        })?;
+        receiver
+            .recv()
+            .map_err(|_| Ow1WorkerFailure::Disconnected)?
+    }
+
     pub(crate) fn read_owner_int(&self, key: M8StateKey) -> Result<Option<i64>, Ow1WorkerFailure> {
         let (reply, receiver) = mpsc::sync_channel(0);
         self.send(Ow1Command::ReadOwnerInt { key, reply })?;
@@ -246,6 +320,25 @@ impl Ow1WorkerBackend {
     pub(crate) fn snapshot(&self) -> Result<M8LocalRuntime, Ow1WorkerFailure> {
         let (reply, receiver) = mpsc::sync_channel(0);
         self.send(Ow1Command::Snapshot { reply })?;
+        receiver.recv().map_err(|_| Ow1WorkerFailure::Disconnected)
+    }
+
+    /// Obtain the worker-owned local trace for observer/devtools projection.
+    /// This is a clone-only snapshot; the coordinator never receives mutable
+    /// M8 state through this API.
+    pub(crate) fn local_trace_snapshot(&self) -> Result<M8LocalTrace, Ow1WorkerFailure> {
+        let (reply, receiver) = mpsc::sync_channel(0);
+        self.send(Ow1Command::TraceSnapshot { reply })?;
+        receiver.recv().map_err(|_| Ow1WorkerFailure::Disconnected)
+    }
+
+    #[cfg(test)]
+    pub(crate) fn arm_owner_operation_rejection(
+        &self,
+        context: M8LocalDesignatedTraceContext,
+    ) -> Result<(), Ow1WorkerFailure> {
+        let (reply, receiver) = mpsc::sync_channel(0);
+        self.send(Ow1Command::ArmOwnerOperationRejection { context, reply })?;
         receiver.recv().map_err(|_| Ow1WorkerFailure::Disconnected)
     }
 
@@ -341,6 +434,35 @@ fn run_worker(receiver: Receiver<Ow1Command>, mut runtime: M8LocalRuntime) {
                 });
                 let _ = reply.send(receipt);
             }
+            Ow1Command::ExecuteOwnerWithContext {
+                owner_locus,
+                request,
+                context,
+                reply,
+            } => {
+                // Contextual SYS-4 execution cannot bypass or interleave with
+                // a legacy M8 FIFO head.  This check and the following M8
+                // invocation share the worker turn, so no coordinator-side
+                // race can attach B's carrier context to A's pending state.
+                if !pending_m8_requests.is_empty() {
+                    let _ = reply.send(Err(Ow1WorkerFailure::FifoIdentityMismatch));
+                    continue;
+                }
+                let result =
+                    match runtime.execute_owner_with_context(&owner_locus, request, *context) {
+                        Ok((outcome, request_observation, serve_observation)) => {
+                            Ow1ContextualM8Execution::Served(Box::new(
+                                Ow1ContextualM8ExecutionReceipt {
+                                    outcome,
+                                    request_observation,
+                                    serve_observation,
+                                },
+                            ))
+                        }
+                        Err(observation) => Ow1ContextualM8Execution::Rejected { observation },
+                    };
+                let _ = reply.send(Ok(result));
+            }
             Ow1Command::ReadOwnerInt { key, reply } => {
                 let _ = reply.send(runtime.owner_state().int(&key));
             }
@@ -353,6 +475,14 @@ fn run_worker(receiver: Receiver<Ow1Command>, mut runtime: M8LocalRuntime) {
             }
             Ow1Command::Snapshot { reply } => {
                 let _ = reply.send(runtime.clone());
+            }
+            Ow1Command::TraceSnapshot { reply } => {
+                let _ = reply.send(runtime.trace());
+            }
+            #[cfg(test)]
+            Ow1Command::ArmOwnerOperationRejection { context, reply } => {
+                runtime.arm_owner_operation_rejection(context);
+                let _ = reply.send(());
             }
             Ow1Command::ShutdownExtract { reply } => {
                 let _ = reply.send(runtime);
