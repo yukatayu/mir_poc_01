@@ -336,6 +336,83 @@ fn m8_backend_node_ids(
     trace.node_ids_for_designated(kind, semantic_identity, consumer)
 }
 
+fn m8_owned_observation(fabric: &LocalFabric, node_id: &str) -> M8LocalTraceObservation {
+    let trace: &M8LocalTrace = m8_local_runtime_trace(fabric);
+    trace
+        .observation(node_id)
+        .expect("node id must resolve in M8-owned local runtime trace")
+}
+
+fn assert_backend_owner_operation_rejection_observation(
+    fabric: &LocalFabric,
+    node_id: &str,
+    envelope_id: &str,
+    operation: &str,
+    owner_locus: &str,
+    previous_sequence: u64,
+) {
+    let observation = m8_owned_observation(fabric, node_id);
+    assert_eq!(observation.node_id(), node_id);
+    assert_eq!(observation.kind(), M8LocalTraceKind::OwnerOperationRejected);
+    assert!(
+        observation.sequence() > previous_sequence,
+        "owner backend failure must be a fresh M8 trace occurrence after dequeue"
+    );
+    assert_eq!(observation.envelope_id(), envelope_id);
+    assert_eq!(observation.operation_id(), operation);
+    assert_eq!(observation.owner_locus(), owner_locus);
+}
+
+fn assert_backend_designated_evaluation_rejection_observation(
+    fabric: &LocalFabric,
+    node_id: &str,
+    envelope_id: &str,
+    operation: &str,
+    evaluator_locus: &str,
+    tick: &str,
+    previous_sequence: u64,
+) {
+    let observation = m8_owned_observation(fabric, node_id);
+    assert_eq!(observation.node_id(), node_id);
+    assert_eq!(
+        observation.kind(),
+        M8LocalTraceKind::DesignatedEvaluationRejected
+    );
+    assert!(
+        observation.sequence() > previous_sequence,
+        "designated evaluation backend failure must be a fresh M8 trace occurrence after input receipt"
+    );
+    assert_eq!(observation.envelope_id(), envelope_id);
+    assert_eq!(observation.operation_id(), operation);
+    assert_eq!(observation.evaluator_locus(), evaluator_locus);
+    assert_eq!(observation.logical_tick_id(), tick);
+}
+
+fn assert_backend_designated_idempotent_observation(
+    fabric: &LocalFabric,
+    node_id: &str,
+    envelope_id: &str,
+    operation: &str,
+    evaluator_locus: &str,
+    tick: &str,
+    previous_sequence: u64,
+) {
+    let observation = m8_owned_observation(fabric, node_id);
+    assert_eq!(observation.node_id(), node_id);
+    assert_eq!(
+        observation.kind(),
+        M8LocalTraceKind::DesignatedEvaluationIdempotent
+    );
+    assert!(
+        observation.sequence() > previous_sequence,
+        "idempotent fixed-version evaluation must still emit its own M8 occurrence"
+    );
+    assert_eq!(observation.envelope_id(), envelope_id);
+    assert_eq!(observation.operation_id(), operation);
+    assert_eq!(observation.evaluator_locus(), evaluator_locus);
+    assert_eq!(observation.logical_tick_id(), tick);
+}
+
 fn assert_endpoint_record_provenance(
     record: &EndpointCarrierRecord,
     edge: &CommunicationEdge,
@@ -3445,6 +3522,482 @@ fn external_action_carries_only_source_operation_args_tick_or_fault_event() {
 }
 
 #[test]
+fn retarget_fault_attempted_target_is_checked_and_audited_not_inert() {
+    let checked = owner_endpoint_checked();
+    let projection = owner_endpoint_projection(&checked);
+    let owner_request_edge = projection
+        .communication_plan()
+        .single_edge("attack", CommunicationEdgeKind::OwnerRequest, "A", "S")
+        .expect("projection has owner request edge");
+    let program = fabric_program(projection);
+    let mut fabric = boot(&checked, program, BackendProfile::St);
+
+    let first = fabric
+        .submit_source_action(owner_attack_action("attack"))
+        .expect("first request carrier is submitted to A outbox");
+    let second = fabric
+        .submit_source_action(owner_attack_action("attack"))
+        .expect("second same-edge request carrier is submitted to A outbox");
+
+    let invalid = assert_sys4_diag(
+        fabric.dispatch_external_action(ExternalAction::fault_event(
+            FaultInjection::retarget_in_transit_envelope_for_edge(
+                owner_request_edge.edge_ref(),
+                first.envelope_id(),
+                "MissingLocus",
+            ),
+        )),
+        Sys4DiagnosticKind::UnknownRetargetLocus,
+    );
+    let invalid_retarget = invalid
+        .retarget_fault_inspection()
+        .expect("invalid retarget must expose typed attempted-target evidence");
+    assert_eq!(invalid_retarget.edge_ref(), owner_request_edge.edge_ref());
+    assert_eq!(invalid_retarget.envelope_id(), first.envelope_id());
+    assert_eq!(invalid_retarget.attempted_target_locus(), "MissingLocus");
+    assert!(invalid_retarget.rejected_at_fault_admission());
+    assert!(invalid_retarget.target_enqueue_occurrence_id().is_none());
+
+    fabric
+        .dispatch_external_action(ExternalAction::fault_event(
+            FaultInjection::retarget_in_transit_envelope_for_edge(
+                owner_request_edge.edge_ref(),
+                first.envelope_id(),
+                "A",
+            ),
+        ))
+        .expect("valid but semantically wrong target is recorded against exact envelope");
+
+    fabric
+        .step_transport("A", "S", second.envelope_id())
+        .expect("same-edge sibling remains unaffected by exact-envelope retarget");
+    fabric
+        .step_locus("S")
+        .expect("unaffected sibling owner request still serves");
+    let before_reject = fabric.semantic_snapshot();
+    let valid_wrong_target = assert_sys4_diag(
+        fabric.step_transport("A", "S", first.envelope_id()),
+        Sys4DiagnosticKind::WrongTargetLocus,
+    );
+    let valid_retarget = valid_wrong_target
+        .retarget_fault_inspection()
+        .expect("wrong-target step failure must retain attempted-target evidence");
+    assert_eq!(valid_retarget.edge_ref(), owner_request_edge.edge_ref());
+    assert_eq!(valid_retarget.envelope_id(), first.envelope_id());
+    assert_eq!(valid_retarget.attempted_target_locus(), "A");
+    assert!(!valid_retarget.rejected_at_fault_admission());
+    assert_ne!(
+        invalid_retarget.evidence_id(),
+        valid_retarget.evidence_id(),
+        "distinct attempted targets must produce distinct typed evidence"
+    );
+    assert!(
+        valid_wrong_target
+            .endpoint_dequeue_occurrence_id()
+            .is_none()
+    );
+    assert!(valid_retarget.target_enqueue_occurrence_id().is_none());
+    assert!(fabric.semantic_snapshot().same_state(&before_reject));
+}
+
+#[test]
+fn post_dequeue_owner_backend_rejection_quarantines_without_state_mutation_or_head_block() {
+    let checked = owner_endpoint_checked();
+    let program = fabric_program(owner_endpoint_projection(&checked));
+    let mut fabric = boot(&checked, program, BackendProfile::St);
+
+    let submitted = fabric
+        .submit_source_action(owner_attack_action("attack"))
+        .expect("owner request is staged");
+    let envelope = fabric
+        .locus_runtime("A")
+        .expect("A exists")
+        .outgoing_mailbox()
+        .pending_envelopes()
+        .single();
+    fabric
+        .step_transport("A", "S", envelope.envelope_id())
+        .expect("owner request reaches S inbox");
+    fabric
+        .m8_backend_test_support_mut()
+        .reject_next_owner_operation_after_dequeue(envelope.envelope_id(), "attack", "S")
+        .expect("owner failure is armed inside actual M8 backend test support");
+
+    let before = fabric.semantic_snapshot();
+    let prior_m8_sequence = m8_backend_latest_sequence(&fabric);
+    let owner_validation_before = fabric
+        .current_m9_authority_inspection()
+        .owner_operation_validation_count("attack", "S", submitted.request_id());
+    let rejected = assert_sys4_diag(
+        fabric.step_locus("S"),
+        Sys4DiagnosticKind::M8ExecutionRejected,
+    );
+    assert_eq!(
+        rejected.rejected_envelope_id(),
+        Some(envelope.envelope_id())
+    );
+    let owner_dequeue_occurrence = rejected
+        .endpoint_dequeue_occurrence_id()
+        .expect("owner backend rejection is post-dequeue at S");
+    assert_eq!(
+        fabric
+            .current_m9_authority_inspection()
+            .owner_operation_validation_count("attack", "S", submitted.request_id()),
+        owner_validation_before + 1,
+        "owner backend rejection must occur after live authority validation"
+    );
+    let backend_failure = rejected
+        .backend_m8_failure_inspection()
+        .expect("diagnostic must expose typed M8 owner failure evidence");
+    assert_eq!(rejected.m8_trace_node_id(), Some(backend_failure.node_id()));
+    assert_backend_owner_operation_rejection_observation(
+        &fabric,
+        backend_failure.node_id(),
+        envelope.envelope_id(),
+        "attack",
+        "S",
+        prior_m8_sequence,
+    );
+    assert!(
+        fabric
+            .causality()
+            .predecessor_ids(backend_failure.node_id())
+            .contains(&owner_dequeue_occurrence.to_string()),
+        "M8 owner rejection node must causally depend on the S locus dequeue occurrence"
+    );
+    assert!(fabric.semantic_snapshot().same_state(&before));
+    assert_eq!(
+        fabric
+            .locus_runtime("S")
+            .expect("S exists")
+            .incoming_mailbox()
+            .terminal_rejected_envelope(envelope.envelope_id())
+            .expect("owner rejection is terminally quarantined")
+            .diagnostic_kind(),
+        Sys4DiagnosticKind::M8ExecutionRejected
+    );
+
+    let clean = fabric
+        .submit_source_action(owner_attack_action("attack"))
+        .expect("later clean owner request is admitted");
+    fabric
+        .step_transport("A", "S", clean.envelope_id())
+        .expect("later clean owner request transports");
+    fabric
+        .step_locus("S")
+        .expect("later clean owner request is not head-blocked");
+    assert_eq!(
+        fabric.semantic_snapshot().int("S", "player", "self", "hp"),
+        Some(90)
+    );
+}
+
+#[test]
+fn post_dequeue_designated_evaluator_backend_rejection_quarantines_without_publication() {
+    let checked = designated_checked();
+    let program = fabric_program(designated_projection(&checked));
+    let mut fabric = boot(&checked, program, BackendProfile::St);
+
+    let submitted = fabric
+        .submit_source_action(publish_designated_action_with_tick("tick:F:evaluator-red"))
+        .expect("designated publish request is staged");
+    fabric
+        .step_transport("E", "S", submitted.envelope_id())
+        .expect("input request reaches S");
+    let source_release_validation_before_s = fabric
+        .current_m9_authority_inspection()
+        .source_release_validation_count("E.result", "S", submitted.envelope_id());
+    let source_step = fabric
+        .step_locus("S")
+        .expect("S emits input receipt before evaluator failure");
+    let source_release_validation_after_s = fabric
+        .current_m9_authority_inspection()
+        .source_release_validation_count("E.result", "S", submitted.envelope_id());
+    assert_eq!(
+        source_release_validation_after_s,
+        source_release_validation_before_s + 1,
+        "the original E→S input request is source-release validated exactly once at S"
+    );
+    fabric
+        .step_transport("S", "E", source_step.reply_envelope_id())
+        .expect("input receipt reaches E");
+    let input_receipt = fabric
+        .locus_runtime("E")
+        .expect("E exists")
+        .incoming_mailbox()
+        .pending_envelopes()
+        .single();
+    fabric
+        .m8_backend_test_support_mut()
+        .reject_next_designated_evaluation_after_input_receipt(
+            input_receipt.envelope_id(),
+            "E.result",
+            "E",
+            "tick:F:evaluator-red",
+        )
+        .expect("evaluation failure is armed inside actual M8 backend test support");
+
+    let before = fabric.semantic_snapshot();
+    let cache_before = fabric.designated_cache_snapshot();
+    let publication_before = fabric.m8_designated_publication_snapshot("E.result");
+    let prior_m8_sequence = m8_backend_latest_sequence(&fabric);
+    let source_release_validation_before_e_failure = fabric
+        .current_m9_authority_inspection()
+        .source_release_validation_count("E.result", "S", submitted.envelope_id());
+    let rejected = assert_sys4_diag(
+        fabric.step_locus("E"),
+        Sys4DiagnosticKind::M8ExecutionRejected,
+    );
+    assert_eq!(
+        rejected.rejected_envelope_id(),
+        Some(input_receipt.envelope_id())
+    );
+    assert_eq!(
+        fabric
+            .current_m9_authority_inspection()
+            .source_release_validation_count("E.result", "S", submitted.envelope_id()),
+        source_release_validation_before_e_failure,
+        "E-side evaluator backend rejection must not perform a second source-release validation"
+    );
+    let evaluator_dequeue_occurrence = rejected
+        .endpoint_dequeue_occurrence_id()
+        .expect("designated evaluator backend rejection is post-dequeue at E");
+    let backend_failure = rejected
+        .backend_m8_failure_inspection()
+        .expect("diagnostic must expose typed M8 evaluation failure evidence");
+    assert_eq!(rejected.m8_trace_node_id(), Some(backend_failure.node_id()));
+    assert_backend_designated_evaluation_rejection_observation(
+        &fabric,
+        backend_failure.node_id(),
+        input_receipt.envelope_id(),
+        "E.result",
+        "E",
+        "tick:F:evaluator-red",
+        prior_m8_sequence,
+    );
+    assert!(
+        fabric
+            .causality()
+            .predecessor_ids(backend_failure.node_id())
+            .contains(&evaluator_dequeue_occurrence.to_string()),
+        "M8 evaluation rejection node must causally depend on the E receipt locus-dequeue occurrence"
+    );
+    assert!(fabric.semantic_snapshot().same_state(&before));
+    assert_eq!(fabric.designated_cache_snapshot(), cache_before);
+    assert_eq!(
+        fabric.m8_designated_publication_snapshot("E.result"),
+        publication_before,
+        "failed evaluator backend attempt must not publish a value"
+    );
+    assert!(
+        fabric
+            .locus_runtime("E")
+            .expect("E exists")
+            .outgoing_mailbox()
+            .pending_envelopes()
+            .is_empty(),
+        "failed evaluator backend attempt must not enqueue a result delivery"
+    );
+    assert_eq!(
+        fabric
+            .locus_runtime("E")
+            .expect("E exists")
+            .incoming_mailbox()
+            .terminal_rejected_envelope(input_receipt.envelope_id())
+            .expect("evaluator rejection is terminally quarantined")
+            .diagnostic_kind(),
+        Sys4DiagnosticKind::M8ExecutionRejected
+    );
+
+    stage_designated_publish_until_delivery_outbox(&mut fabric);
+    assert_eq!(
+        fabric
+            .locus_runtime("E")
+            .expect("E exists")
+            .outgoing_mailbox()
+            .pending_envelopes()
+            .len(),
+        1,
+        "later clean evaluator request is not head-blocked by quarantined input receipt"
+    );
+}
+
+#[test]
+fn fixed_version_second_evaluation_has_distinct_m8_idempotent_occurrence_without_rewriting_a() {
+    let checked = designated_checked();
+    let program = fabric_program(designated_projection(&checked));
+    let mut fabric = boot(&checked, program, BackendProfile::St);
+
+    let first_submit = fabric
+        .submit_source_action(publish_designated_action_with_tick("tick:F:41"))
+        .expect("A publish creates E->S request");
+    fabric
+        .step_transport("E", "S", first_submit.envelope_id())
+        .expect("A request transports");
+    let first_source = fabric.step_locus("S").expect("S emits A input receipt");
+    fabric
+        .step_transport("S", "E", first_source.reply_envelope_id())
+        .expect("A input receipt transports");
+    let first_eval = fabric.step_locus("E").expect("E publishes A");
+    let first_node_id = first_eval.m8_evaluation_node_id();
+    let first_observation = m8_owned_observation(&fabric, first_node_id);
+    assert_eq!(
+        first_observation.kind(),
+        M8LocalTraceKind::DesignatedValuePublished
+    );
+    let first_context = first_observation.designated_context_digest().to_string();
+    let first_predecessors = first_observation.predecessor_ids().to_vec();
+    let prior_m8_sequence = m8_backend_latest_sequence(&fabric);
+
+    let second_submit = fabric
+        .submit_source_action(publish_designated_action_with_tick("tick:F:42"))
+        .expect("B publish creates E->S request while A delivery remains pending");
+    fabric
+        .step_transport("E", "S", second_submit.envelope_id())
+        .expect("B request transports");
+    let second_source = fabric.step_locus("S").expect("S emits B input receipt");
+    fabric
+        .step_transport("S", "E", second_source.reply_envelope_id())
+        .expect("B input receipt transports");
+    let second_eval = fabric
+        .step_locus("E")
+        .expect("E observes fixed-version idempotent B evaluation and emits B delivery");
+    let idempotent_node_id = second_eval.m8_evaluation_node_id();
+    assert_ne!(
+        idempotent_node_id, first_node_id,
+        "fixed-version idempotent B evaluation must not reuse A's M8 publication node"
+    );
+    assert_backend_designated_idempotent_observation(
+        &fabric,
+        idempotent_node_id,
+        second_eval.consumed_envelope_id(),
+        "E.result",
+        "E",
+        "tick:F:42",
+        prior_m8_sequence,
+    );
+
+    let first_after = m8_owned_observation(&fabric, first_node_id);
+    assert_eq!(first_after.designated_context_digest(), first_context);
+    assert_eq!(first_after.predecessor_ids(), first_predecessors);
+    let second_delivery = fabric
+        .locus_runtime("E")
+        .expect("E exists")
+        .outgoing_mailbox()
+        .pending_envelopes()
+        .for_request(second_eval.request_id());
+    assert_eq!(
+        second_delivery.m8_evaluation_node_id(),
+        idempotent_node_id,
+        "B delivery must depend on B's idempotent M8 occurrence, not A's publication node"
+    );
+    assert_eq!(second_delivery.logical_tick_id(), "tick:F:42");
+    assert_eq!(second_delivery.edge_ref(), first_after.edge_ref());
+}
+
+#[test]
+fn cache_retry_projection_mismatch_rejects_before_m9_m8_or_payload_without_cache_mutation() {
+    let checked = designated_checked();
+    let projection = designated_projection(&checked);
+    let delivery_edge = projection
+        .communication_plan()
+        .single_edge(
+            "E.result",
+            CommunicationEdgeKind::DesignatedResultDelivery,
+            "E",
+            "C",
+        )
+        .expect("projection has delivery edge");
+    let program = fabric_program(projection);
+    let mut fabric = boot(&checked, program, BackendProfile::St);
+
+    fabric
+        .dispatch_source_action(publish_designated_action())
+        .expect("publish succeeds");
+    let first = fabric
+        .dispatch_source_action(consume_designated_action())
+        .expect("first consume installs cache");
+    let semantic_identity = first.semantic_consumption_identity().to_string();
+    let retry_submission = fabric
+        .submit_source_action(consume_designated_action())
+        .expect("retry creates a local cache-retry envelope");
+    let retry_envelope = fabric
+        .locus_runtime("C")
+        .expect("C exists")
+        .incoming_mailbox()
+        .pending_envelopes()
+        .single();
+    assert_eq!(retry_envelope.envelope_id(), retry_submission.envelope_id());
+    assert!(is_local_cache_retry(&retry_envelope));
+
+    let before = fabric.semantic_snapshot();
+    let cache_before = fabric.designated_cache_snapshot();
+    let m9_before = m9_validation_occurrence_count(&fabric, "E.result", "C", &semantic_identity);
+    let m8_before = m8_backend_trace_count(
+        &fabric,
+        M8LocalTraceKind::DesignatedCacheValidated,
+        &semantic_identity,
+        "C",
+    );
+    fabric
+        .dispatch_external_action(ExternalAction::fault_event(
+            FaultInjection::rewrite_local_cache_retry_projection_binding_for_edge(
+                retry_envelope.envelope_id(),
+                delivery_edge.edge_ref(),
+                "forged-core-ref",
+                "forged-policy-stamp",
+                "forged-redaction",
+            ),
+        ))
+        .expect("cache retry projection-mismatch fault is bound to exact local envelope");
+
+    let rejected = assert_sys4_diag(
+        fabric.step_locus("C"),
+        Sys4DiagnosticKind::CacheProjectionMismatch,
+    );
+    assert_eq!(
+        rejected.rejected_envelope_id(),
+        Some(retry_envelope.envelope_id())
+    );
+    let mismatch = rejected
+        .cache_projection_mismatch_inspection()
+        .expect("diagnostic exposes projection-derived mismatch evidence");
+    assert_eq!(mismatch.envelope_id(), retry_envelope.envelope_id());
+    assert_eq!(mismatch.expected_edge_ref(), delivery_edge.edge_ref());
+    assert_eq!(mismatch.expected_source_ref(), delivery_edge.source_ref());
+    assert_eq!(mismatch.expected_core_ref(), delivery_edge.core_ref());
+    assert_ne!(mismatch.carrier_core_ref(), mismatch.expected_core_ref());
+    assert!(mismatch.rejected_before_m9_validation());
+    assert!(mismatch.rejected_before_m8_validation());
+    assert!(!rejected.exposes_raw_payload());
+    assert_eq!(
+        m9_validation_occurrence_count(&fabric, "E.result", "C", &semantic_identity),
+        m9_before
+    );
+    assert_eq!(
+        m8_backend_trace_count(
+            &fabric,
+            M8LocalTraceKind::DesignatedCacheValidated,
+            &semantic_identity,
+            "C",
+        ),
+        m8_before
+    );
+    assert!(fabric.semantic_snapshot().same_state(&before));
+    assert_eq!(fabric.designated_cache_snapshot(), cache_before);
+    assert_eq!(
+        fabric
+            .locus_runtime("C")
+            .expect("C exists")
+            .incoming_mailbox()
+            .terminal_rejected_envelope(retry_envelope.envelope_id())
+            .expect("projection-mismatched retry is terminally quarantined")
+            .diagnostic_kind(),
+        Sys4DiagnosticKind::CacheProjectionMismatch
+    );
+}
+
+#[test]
 fn sys4_dispatch_module_has_no_shortcut_dependencies_when_present() {
     let sources = collect_sys4_dispatch_sources();
     if sources.is_empty() {
@@ -3464,6 +4017,7 @@ fn sys4_dispatch_module_has_no_shortcut_dependencies_when_present() {
         "remote_store_shortcut",
         "HashMap<LocusTag, RemoteStore>",
         "#![allow(",
+        "#[allow(dead_code)]",
         "cfg(any())",
         "retired_direct",
         "retired_history",
