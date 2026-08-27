@@ -3,6 +3,10 @@ use std::{collections::BTreeMap, path::PathBuf};
 use mir_ast::surface_v0::FixtureSource;
 use mir_semantics::surface_v0_pipeline::{CheckedSurfaceV0, check_and_elaborate_surface_v0};
 
+use crate::m8_runtime_local_cut::{
+    M8LocalDesignatedTraceContext, M8LocalRuntime, M8LocalRuntimeSeed,
+};
+use crate::m8_runtime_owner_queue::M8OwnerRequest;
 use crate::m9_auth_verification::M9RuntimeExecutionSeam;
 use crate::semantic_runtime_kernel::{
     FailureKind, InputFrontier, KernelDiagnosticKind, KernelReceipt, KernelSeed, KernelStateKey,
@@ -10,7 +14,7 @@ use crate::semantic_runtime_kernel::{
     RemoteInputResult, RequestIdentity, SealedM9RuntimeAdmission, SemanticRuntimeKernel,
     SemanticValue, VisibilityClass,
 };
-use crate::sys2_execution_backend::ExecutionProfile;
+use crate::sys2_execution_backend::{ExecutionProfile, Ow1WorkerBackend, Ow1WorkerFailure};
 
 const SURFACE_FIXTURE_DIR: &str = "tests/fixtures/surface-v0";
 const DESIGNATED_FIXTURE: &str = "canonical_attack_bundle.mir";
@@ -157,6 +161,43 @@ fn owner_kernel(profile: ExecutionProfile) -> (CheckedSurfaceV0, SemanticRuntime
     )
     .expect("selected execution profile admits the source-derived owner kernel");
     (checked, kernel)
+}
+
+fn admitted_worker_runtime_and_request() -> (M8LocalRuntime, M8OwnerRequest) {
+    let checked = load_checked_fixture(DESIGNATED_FIXTURE);
+    let seam = M9RuntimeExecutionSeam::test_real_admitted_owner_seam_for_kernel(
+        &checked,
+        OWNER_OPERATION,
+        PRINCIPAL,
+        OWNER_LOCUS,
+    )
+    .expect("SYS-2 OW1 worker test uses a production-style M9 owner seam");
+    let authority = seam
+        .owner_authority_use(OWNER_OPERATION, PRINCIPAL, OWNER_LOCUS)
+        .expect("M9 seam carries the actual M8 owner authority use");
+    let (instance, authority_state) = seam.into_parts();
+    let runtime = M8LocalRuntime::from_admitted(
+        instance,
+        M8LocalRuntimeSeed::new()
+            .with_authority_state(authority_state)
+            .with_owner_int(hp_key(), 100)
+            .with_owner_int(atk_key(), 10),
+    );
+    let request = M8OwnerRequest::new(OWNER_OPERATION)
+        .with_argument("target", TARGET_ID)
+        .with_authority_use(authority);
+    (runtime, request)
+}
+
+fn owner_context_for_test(
+    envelope_id: &str,
+    semantic_identity: &str,
+    edge_ref: &str,
+) -> M8LocalDesignatedTraceContext {
+    M8LocalDesignatedTraceContext::new(envelope_id, semantic_identity, "", "", "", "")
+        .with_operation_id(OWNER_OPERATION)
+        .with_owner_locus(OWNER_LOCUS)
+        .with_edge_ref(edge_ref)
 }
 
 fn owner_and_remote_kernel(profile: ExecutionProfile) -> (CheckedSurfaceV0, SemanticRuntimeKernel) {
@@ -886,6 +927,74 @@ fn ordering_evidence_records_lifecycle_linearization_reads_from_and_generation_e
                 &queued_after_g0,
                 served.serve_occurrence(),
             )
+    );
+}
+
+#[test]
+fn ow1_worker_rejects_contextual_owner_execute_while_legacy_fifo_head_is_pending() {
+    let (runtime, admitted_request) = admitted_worker_runtime_and_request();
+    let worker = Ow1WorkerBackend::spawn(owner_locus(), runtime);
+
+    let pending_a = worker
+        .enqueue(admitted_request.clone())
+        .expect("legacy enqueue A leaves an actual M8 occurrence pending");
+    assert_eq!(
+        worker
+            .snapshot()
+            .expect("worker snapshot after A enqueue")
+            .pending_owner_fifo(OWNER_LOCUS),
+        vec![pending_a.id().to_string()],
+        "A must be the worker-owned M8 FIFO head before contextual B is attempted"
+    );
+
+    let context_b =
+        owner_context_for_test("sys2-mixed-envelope-b", "sys2-mixed-context-b", "edge:B");
+    let result = worker.execute_owner_with_context(OWNER_LOCUS, admitted_request, context_b);
+    let snapshot_after = worker
+        .snapshot()
+        .expect("worker remains alive after mixed-command rejection");
+    let trace_after = worker
+        .local_trace_snapshot()
+        .expect("worker trace remains observable after mixed-command rejection");
+    let hp_after = worker
+        .read_owner_int(hp_key())
+        .expect("worker-owned M8 state remains readable after rejection");
+
+    let mut violations = Vec::new();
+    if !matches!(result, Err(Ow1WorkerFailure::FifoIdentityMismatch)) {
+        violations.push(format!(
+            "contextual B execute must fail closed with FifoIdentityMismatch while legacy A is FIFO head; got {result:?}"
+        ));
+    }
+    if hp_after != Some(100) {
+        violations.push(format!(
+            "contextual B execute must not mutate owner state while A is pending; hp after attempt was {hp_after:?}"
+        ));
+    }
+    let pending_after = snapshot_after.pending_owner_fifo(OWNER_LOCUS);
+    if pending_after != vec![pending_a.id().to_string()] {
+        violations.push(format!(
+            "legacy A must remain the sole M8 FIFO head and contextual B must not be queued; pending after attempt was {pending_after:?}"
+        ));
+    }
+    for kind in [
+        crate::m8_runtime_local_cut::M8LocalTraceKind::OwnerEnqueued,
+        crate::m8_runtime_local_cut::M8LocalTraceKind::OwnerRead,
+        crate::m8_runtime_local_cut::M8LocalTraceKind::OwnerWrite,
+        crate::m8_runtime_local_cut::M8LocalTraceKind::OwnerOperationRejected,
+    ] {
+        let count = trace_after.count_designated(kind, "sys2-mixed-context-b", "");
+        if count != 0 {
+            violations.push(format!(
+                "contextual B must not attach B context to any M8 {kind:?} trace row while A is pending; found {count}"
+            ));
+        }
+    }
+
+    assert!(
+        violations.is_empty(),
+        "OW1 worker mixed legacy/contextual FIFO boundary failed:\n{}",
+        violations.join("\n")
     );
 }
 
