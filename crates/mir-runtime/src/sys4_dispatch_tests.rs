@@ -9,7 +9,7 @@ use mir_ast::surface_v0::FixtureSource;
 use mir_semantics::{
     shared_model::ResultVersion,
     surface_v0_pipeline::{
-        CheckedProgramIdentity, CheckedSurfaceV0, check_and_elaborate_surface_v0,
+        CheckedProgramIdentity, CheckedSurfaceV0, M7DiagnosticKind, check_and_elaborate_surface_v0,
     },
 };
 
@@ -34,6 +34,7 @@ const SURFACE_FIXTURE_DIR: &str = "tests/fixtures/surface-v0";
 const OWNER_ENDPOINT_FIXTURE: &str = "sys4_ow1_endpoint_crossing.mir";
 const DESIGNATED_CONSUME_FIXTURE: &str = "sys4_designated_consume_with_auth.mir";
 const RELATION_ONLY_FIXTURE: &str = "maintained_bird_relation.mir";
+const FOUR_LOCUS_FIXTURE: &str = "sys4_two_owner_four_locus_with_auth.mir";
 
 fn surface_fixture_path(name: &str) -> String {
     format!("{SURFACE_FIXTURE_DIR}/{name}")
@@ -88,6 +89,10 @@ fn relation_only_checked() -> CheckedSurfaceV0 {
     load_checked_fixture(RELATION_ONLY_FIXTURE)
 }
 
+fn four_locus_checked() -> CheckedSurfaceV0 {
+    load_checked_fixture(FOUR_LOCUS_FIXTURE)
+}
+
 fn owner_endpoint_projection(checked: &CheckedSurfaceV0) -> GlobalProjectionResult {
     project_fixture(checked, ["A", "S"])
 }
@@ -98,6 +103,10 @@ fn designated_projection(checked: &CheckedSurfaceV0) -> GlobalProjectionResult {
 
 fn relation_only_projection(checked: &CheckedSurfaceV0) -> GlobalProjectionResult {
     project_fixture(checked, ["C", "S"])
+}
+
+fn four_locus_projection(checked: &CheckedSurfaceV0) -> GlobalProjectionResult {
+    project_fixture(checked, ["A", "S", "T", "V"])
 }
 
 fn fabric_program(projection: GlobalProjectionResult) -> FabricProgram {
@@ -122,6 +131,14 @@ fn m9_fabric_seam(checked: &CheckedSurfaceV0) -> M9RuntimeExecutionSeam {
         .expect("SYS-4 test seam is produced by the normal M9 pipeline")
 }
 
+fn m9_four_locus_multi_owner_seam(checked: &CheckedSurfaceV0) -> M9RuntimeExecutionSeam {
+    M9RuntimeExecutionSeam::test_real_admitted_multi_owner_seam_for_kernel(
+        checked,
+        [("attack_s", "self", "S"), ("attack_t", "self", "T")],
+    )
+    .expect("four-locus SYS-4 test uses real M9 multi-owner admission")
+}
+
 fn incomplete_m9_fabric_seam(checked: &CheckedSurfaceV0) -> M9RuntimeExecutionSeam {
     M9RuntimeExecutionSeam::test_incomplete_sys4_fabric_seam_missing_residual_discharge(checked)
         .expect("test helper returns an opaque incomplete M9 seam for negative SYS-4 admission")
@@ -134,6 +151,26 @@ fn sealed_admission(checked: &CheckedSurfaceV0, program: &FabricProgram) -> Seal
         initial_state_seed(checked.program_identity()),
     )
     .expect("complete M9 final seam plus explicit seed admits the static fabric")
+}
+
+fn four_locus_initial_state_seed(identity: &CheckedProgramIdentity) -> Sys4InitialStateSeed {
+    Sys4InitialStateSeed::for_checked_program(identity.clone())
+        .with_int("S", "player", "self", "hp", 100)
+        .with_int("S", "player", "self", "atk", 10)
+        .with_int("T", "shield", "self", "hp", 200)
+        .with_int("T", "shield", "self", "atk", 7)
+}
+
+fn sealed_four_locus_admission(
+    checked: &CheckedSurfaceV0,
+    program: &FabricProgram,
+) -> SealedFabricAdmission {
+    SealedFabricAdmission::from_m9_execution_seam(
+        program,
+        m9_four_locus_multi_owner_seam(checked),
+        four_locus_initial_state_seed(checked.program_identity()),
+    )
+    .expect("complete real M9 multi-owner seam plus explicit seed admits four-locus fabric")
 }
 
 fn boot(
@@ -510,6 +547,207 @@ fn owner_attack_action(operation: &str) -> SourceAction {
     SourceAction::owner_operation(operation).with_argument("target", "self")
 }
 
+fn staged_four_locus_owner_attack(
+    fabric: &mut LocalFabric,
+    projection: &GlobalProjectionResult,
+    operation: &str,
+    owner: &str,
+    state: &str,
+    starting_hp: i64,
+    atk: i64,
+) -> FabricReceipt {
+    let owner_request_edge = projection
+        .communication_plan()
+        .single_edge(operation, CommunicationEdgeKind::OwnerRequest, "A", owner)
+        .unwrap_or_else(|| panic!("{operation} has generated A→{owner} owner request edge"));
+    let owner_reply_edge = projection
+        .communication_plan()
+        .single_edge(
+            operation,
+            CommunicationEdgeKind::OwnerReplyReceipt,
+            owner,
+            "A",
+        )
+        .unwrap_or_else(|| panic!("{operation} has generated {owner}→A owner reply edge"));
+
+    let submitted = fabric
+        .submit_source_action(owner_attack_action(operation))
+        .unwrap_or_else(|_| panic!("{operation} source action submits a generated owner request"));
+    let request_envelope = fabric
+        .locus_runtime("A")
+        .expect("A exists")
+        .outgoing_mailbox()
+        .pending_envelopes()
+        .single();
+    assert_eq!(request_envelope.envelope_id(), submitted.envelope_id());
+    assert_eq!(request_envelope.edge_ref(), owner_request_edge.edge_ref());
+    assert_eq!(
+        request_envelope.carrier_contract(),
+        owner_request_edge.carrier_contract()
+    );
+    assert_eq!(
+        request_envelope.source_ref(),
+        owner_request_edge.source_ref()
+    );
+    assert_eq!(request_envelope.core_ref(), owner_request_edge.core_ref());
+    assert_eq!(
+        fabric
+            .m8_actual_trace()
+            .owner_request_node_count(operation, owner),
+        0,
+        "submit must not synchronously invoke M8"
+    );
+
+    let request_transport = fabric
+        .step_transport("A", owner, request_envelope.envelope_id())
+        .unwrap_or_else(|_| panic!("{operation} request crosses A→{owner} endpoint"));
+    assert_eq!(
+        request_transport.source_outbox_dequeue_record_id(),
+        request_envelope.mailbox_record_id()
+    );
+    assert_eq!(
+        fabric
+            .causality()
+            .predecessor_ids(request_transport.target_inbox_enqueue_occurrence_id()),
+        vec![
+            request_transport
+                .source_outbox_dequeue_occurrence_id()
+                .to_string()
+        ],
+        "transport must record outbox dequeue -> target inbox enqueue"
+    );
+    assert_eq!(
+        fabric
+            .m8_actual_trace()
+            .owner_request_node_count(operation, owner),
+        0,
+        "transport alone must not synchronously invoke M8"
+    );
+
+    let owner_step = fabric
+        .step_locus(owner)
+        .unwrap_or_else(|_| panic!("{owner} validates and serves {operation}"));
+    assert_eq!(
+        owner_step.consumed_envelope_id(),
+        request_envelope.envelope_id()
+    );
+    assert_eq!(
+        owner_step.locus_dequeue_record_id(),
+        request_transport.target_inbox_enqueue_record_id()
+    );
+    assert!(
+        fabric
+            .causality()
+            .predecessor_ids(owner_step.m8_request_node_id())
+            .contains(&owner_step.locus_dequeue_occurrence_id().to_string()),
+        "M8 owner request must be causally after exact target-locus dequeue"
+    );
+    assert!(
+        fabric
+            .causality()
+            .predecessor_ids(owner_step.m8_serve_node_id())
+            .contains(&owner_step.m8_request_node_id().to_string()),
+        "M8 owner serve/write must be causally after M8 request/enqueue"
+    );
+    assert_owner_m8_context_observation(
+        fabric,
+        owner_step.m8_request_node_id(),
+        &request_envelope,
+        operation,
+        owner,
+        M8LocalTraceKind::OwnerEnqueued,
+    );
+    assert_owner_m8_context_observation(
+        fabric,
+        owner_step.m8_serve_node_id(),
+        &request_envelope,
+        operation,
+        owner,
+        M8LocalTraceKind::OwnerWrite,
+    );
+
+    let reply_envelope = fabric
+        .locus_runtime(owner)
+        .expect("owner locus exists")
+        .outgoing_mailbox()
+        .pending_envelopes()
+        .single();
+    assert_eq!(reply_envelope.envelope_id(), owner_step.reply_envelope_id());
+    assert_eq!(reply_envelope.edge_ref(), owner_reply_edge.edge_ref());
+    assert_eq!(
+        reply_envelope.carrier_contract(),
+        owner_reply_edge.carrier_contract()
+    );
+    assert_eq!(
+        reply_envelope.request_carrier_id(),
+        request_envelope.carrier_id()
+    );
+    let reply_transport = fabric
+        .step_transport(owner, "A", reply_envelope.envelope_id())
+        .unwrap_or_else(|_| panic!("{operation} reply crosses {owner}→A endpoint"));
+    assert!(
+        causality_reaches(
+            fabric.causality(),
+            reply_transport.source_outbox_dequeue_occurrence_id(),
+            owner_step.m8_serve_node_id(),
+        ),
+        "reply dispatch must be causally downstream of exact M8 owner write"
+    );
+    let receipt_step = fabric
+        .step_locus("A")
+        .unwrap_or_else(|_| panic!("A receives {operation} owner reply"));
+    assert_eq!(
+        receipt_step.locus_dequeue_record_id(),
+        reply_transport.target_inbox_enqueue_record_id()
+    );
+    assert_eq!(
+        fabric
+            .causality()
+            .predecessor_ids(receipt_step.locus_dequeue_occurrence_id()),
+        vec![
+            reply_transport
+                .target_inbox_enqueue_occurrence_id()
+                .to_string()
+        ],
+        "A receipt must be causally after exact reply inbox enqueue"
+    );
+    let receipt = receipt_step
+        .receipt()
+        .cloned()
+        .expect("A locus step receives an owner reply receipt");
+    assert_eq!(receipt.operation_id(), operation);
+    assert_eq!(receipt.origin_locus(), "A");
+    assert_eq!(receipt.target_locus(), owner);
+    let rmw = receipt
+        .owner_rmw_report()
+        .expect("owner RMW report remains attached to reply receipt");
+    assert_eq!(
+        rmw.m8_reads(),
+        vec![
+            RuntimeStoreRead::int(owner, state, "self", "hp", starting_hp),
+            RuntimeStoreRead::int(owner, state, "self", "atk", atk),
+        ]
+    );
+    assert_eq!(
+        rmw.m8_writes(),
+        vec![RuntimeStoreWrite::int(
+            owner,
+            state,
+            "self",
+            "hp",
+            starting_hp - atk
+        )]
+    );
+    assert_eq!(
+        fabric
+            .m8_actual_trace()
+            .owner_request_node_count(operation, owner),
+        1,
+        "{operation} must emit exactly one actual M8 owner request node at {owner}"
+    );
+    receipt
+}
+
 fn publish_designated_action() -> SourceAction {
     SourceAction::designated_tick("E.result").with_tick("F", "tick:F:1")
 }
@@ -842,6 +1080,325 @@ fn bootstrap_rejects_foreign_seed_schema_owner_index_and_field() {
             expected,
         );
     }
+}
+
+#[test]
+fn seed_rejects_valid_player_state_at_known_non_owner_a() {
+    let checked = four_locus_checked();
+    let program = fabric_program(four_locus_projection(&checked));
+    let seed = four_locus_initial_state_seed(checked.program_identity())
+        .with_int("A", "player", "self", "hp", 100);
+
+    assert_sys4_diag(
+        SealedFabricAdmission::from_m9_execution_seam(
+            &program,
+            m9_four_locus_multi_owner_seam(&checked),
+            seed,
+        ),
+        Sys4DiagnosticKind::ForeignSeedState,
+    );
+}
+
+#[test]
+fn duplicate_state_player_at_distinct_s_t_owners_rejects_m7_duplicate_declaration() {
+    let source = r#"
+module Combat.Sys4.DuplicateStatePlayerST
+
+locus A
+locus S
+locus T
+principal self
+type Player
+
+state player[id: Player] at S {
+  hp: Int
+}
+
+state player[id: Player] at T {
+  hp: Int
+}
+"#;
+
+    let diagnostics = check_and_elaborate_surface_v0(FixtureSource::new(
+        "tests/inline/sys4_duplicate_state_player_s_t.mir",
+        source,
+    ))
+    .expect_err("duplicate state player declarations across owners must fail in M7");
+    assert_eq!(diagnostics.entries().len(), 1);
+    assert_eq!(
+        diagnostics.primary().kind(),
+        M7DiagnosticKind::DuplicateDeclaration
+    );
+    assert!(
+        !diagnostics.has_executable_core(),
+        "M7 duplicate declarations must not leave executable Core"
+    );
+}
+
+#[test]
+fn four_locus_st_attack_s_and_attack_t_mutate_only_their_authoritative_owner_state() {
+    let checked = four_locus_checked();
+    let projection = four_locus_projection(&checked);
+    let program = fabric_program(projection.clone());
+    let admission = sealed_four_locus_admission(&checked, &program);
+    let mut fabric = boot_with_admission(program, admission, BackendProfile::St);
+
+    assert_eq!(fabric.locus_names(), vec!["A", "S", "T", "V"]);
+    let before = fabric.semantic_snapshot();
+    assert_eq!(before.int("S", "player", "self", "hp"), Some(100));
+    assert_eq!(before.int("S", "player", "self", "atk"), Some(10));
+    assert_eq!(before.int("T", "shield", "self", "hp"), Some(200));
+    assert_eq!(before.int("T", "shield", "self", "atk"), Some(7));
+
+    let receipt_s = staged_four_locus_owner_attack(
+        &mut fabric,
+        &projection,
+        "attack_s",
+        "S",
+        "player",
+        100,
+        10,
+    );
+    assert_eq!(receipt_s.typed_value(), RuntimeValue::unit());
+    assert_eq!(
+        fabric.semantic_snapshot().int("S", "player", "self", "hp"),
+        Some(90)
+    );
+    assert_eq!(
+        fabric.semantic_snapshot().int("S", "player", "self", "atk"),
+        Some(10)
+    );
+    assert_eq!(
+        fabric.semantic_snapshot().int("T", "shield", "self", "hp"),
+        Some(200),
+        "attack_s must not move S values into T or mutate T"
+    );
+    assert_eq!(
+        fabric.semantic_snapshot().int("T", "shield", "self", "atk"),
+        Some(7)
+    );
+    assert_eq!(
+        fabric.semantic_snapshot().changed_loci_since(&before),
+        vec!["S"],
+        "after attack_s only S authoritative local store may change"
+    );
+
+    let before_t = fabric.semantic_snapshot();
+    let receipt_t =
+        staged_four_locus_owner_attack(&mut fabric, &projection, "attack_t", "T", "shield", 200, 7);
+    assert_eq!(receipt_t.typed_value(), RuntimeValue::unit());
+    assert_eq!(
+        fabric.semantic_snapshot().int("T", "shield", "self", "hp"),
+        Some(193)
+    );
+    assert_eq!(
+        fabric.semantic_snapshot().int("T", "shield", "self", "atk"),
+        Some(7)
+    );
+    assert_eq!(
+        fabric.semantic_snapshot().int("S", "player", "self", "hp"),
+        Some(90),
+        "attack_t must not move T values into S or mutate S after attack_s"
+    );
+    assert_eq!(
+        fabric.semantic_snapshot().int("S", "player", "self", "atk"),
+        Some(10)
+    );
+    assert_eq!(
+        fabric.semantic_snapshot().changed_loci_since(&before_t),
+        vec!["T"],
+        "after attack_t only T authoritative local store may change"
+    );
+    assert!(
+        fabric
+            .semantic_snapshot()
+            .locus_unchanged_since("A", &before)
+    );
+    assert!(
+        fabric
+            .semantic_snapshot()
+            .locus_unchanged_since("V", &before)
+    );
+    assert_eq!(
+        fabric
+            .m8_actual_trace()
+            .owner_request_node_count("attack_s", "S"),
+        1
+    );
+    assert_eq!(
+        fabric
+            .m8_actual_trace()
+            .owner_request_node_count("attack_s", "T"),
+        0,
+        "attack_s M8 occurrence must not be attributed to T"
+    );
+    assert_eq!(
+        fabric
+            .m8_actual_trace()
+            .owner_request_node_count("attack_t", "T"),
+        1
+    );
+    assert_eq!(
+        fabric
+            .m8_actual_trace()
+            .owner_request_node_count("attack_t", "S"),
+        0,
+        "attack_t M8 occurrence must not be attributed to S"
+    );
+}
+
+#[test]
+fn four_locus_st_admission_requires_test_visible_m8_partition_evidence_per_locus() {
+    let checked = four_locus_checked();
+    let projection = four_locus_projection(&checked);
+    let program = fabric_program(projection.clone());
+    assert_eq!(program.locus_names(), vec!["A", "S", "T", "V"]);
+    let admission = sealed_four_locus_admission(&checked, &program);
+    let mut fabric = boot_with_admission(program, admission, BackendProfile::St);
+
+    let boot_evidence = fabric.m8_partition_evidence();
+    assert!(
+        boot_evidence.is_observer_safe(),
+        "partition evidence is a devtools/test view and must not expose raw authority material"
+    );
+    assert_eq!(boot_evidence.locus_names(), vec!["A", "S", "T", "V"]);
+
+    let session_ids: BTreeSet<_> = ["A", "S", "T", "V"]
+        .into_iter()
+        .map(|locus| {
+            boot_evidence
+                .partition(locus)
+                .unwrap_or_else(|| panic!("{locus} has boot partition evidence"))
+                .session_id()
+                .to_string()
+        })
+        .collect();
+    assert_eq!(
+        session_ids.len(),
+        4,
+        "each admitted locus must have a distinct M8 semantic runtime/session identity"
+    );
+    let partition_ids: BTreeSet<_> = ["A", "S", "T", "V"]
+        .into_iter()
+        .map(|locus| {
+            boot_evidence
+                .partition(locus)
+                .unwrap_or_else(|| panic!("{locus} has boot partition evidence"))
+                .partition_id()
+                .to_string()
+        })
+        .collect();
+    assert_eq!(
+        partition_ids.len(),
+        4,
+        "each admitted locus must have a distinct M8 state partition identity"
+    );
+
+    assert_eq!(
+        boot_evidence
+            .partition("S")
+            .expect("S partition exists")
+            .authoritative_state_key_refs(),
+        vec!["player[self].atk", "player[self].hp"],
+        "S partition must contain only S-owned player seed keys"
+    );
+    assert_eq!(
+        boot_evidence
+            .partition("T")
+            .expect("T partition exists")
+            .authoritative_state_key_refs(),
+        vec!["shield[self].atk", "shield[self].hp"],
+        "T partition must contain only T-owned shield seed keys"
+    );
+    assert!(
+        boot_evidence
+            .partition("A")
+            .expect("A partition exists")
+            .authoritative_state_key_refs()
+            .is_empty(),
+        "A is admitted as an invocation locus but owns no authoritative state in this fixture"
+    );
+    assert!(
+        boot_evidence
+            .partition("V")
+            .expect("V partition exists")
+            .authoritative_state_key_refs()
+            .is_empty(),
+        "V is admitted as a viewer locus but owns no authoritative state in this fixture"
+    );
+
+    staged_four_locus_owner_attack(&mut fabric, &projection, "attack_s", "S", "player", 100, 10);
+    let after_s = fabric.m8_partition_evidence();
+    assert_eq!(
+        after_s.changed_partitions_since(&boot_evidence),
+        vec!["S"],
+        "attack_s may change only the S M8 partition evidence"
+    );
+    assert_ne!(
+        after_s
+            .partition("S")
+            .expect("S partition exists")
+            .state_digest(),
+        boot_evidence
+            .partition("S")
+            .expect("S partition exists")
+            .state_digest(),
+        "S partition digest must change after S-owned mutation"
+    );
+    assert_eq!(
+        after_s
+            .partition("T")
+            .expect("T partition exists")
+            .state_digest(),
+        boot_evidence
+            .partition("T")
+            .expect("T partition exists")
+            .state_digest(),
+        "T partition digest must not change after S-owned mutation"
+    );
+
+    staged_four_locus_owner_attack(&mut fabric, &projection, "attack_t", "T", "shield", 200, 7);
+    let after_t = fabric.m8_partition_evidence();
+    assert_eq!(
+        after_t.changed_partitions_since(&after_s),
+        vec!["T"],
+        "attack_t may change only the T M8 partition evidence"
+    );
+    assert_ne!(
+        after_t
+            .partition("T")
+            .expect("T partition exists")
+            .state_digest(),
+        after_s
+            .partition("T")
+            .expect("T partition exists")
+            .state_digest(),
+        "T partition digest must change after T-owned mutation"
+    );
+    assert_eq!(
+        after_t
+            .partition("S")
+            .expect("S partition exists")
+            .state_digest(),
+        after_s
+            .partition("S")
+            .expect("S partition exists")
+            .state_digest(),
+        "S partition digest must not change after T-owned mutation"
+    );
+
+    let sys4 = read_runtime_src("sys4_dispatch.rs");
+    let compact_sys4 = normalize_source_for_boundary_scan(&sys4);
+    assert!(
+        compact_sys4.contains("M8RuntimePartitionEvidence")
+            || compact_sys4.contains("m8_runtime_partition_evidence")
+            || compact_sys4.contains("m8_partition_evidence"),
+        "SYS-4 two-owner ST admission must expose observer-safe test-visible evidence that every admitted locus has its own M8 semantic runtime/session partition"
+    );
+    assert!(
+        !compact_sys4.contains("St(Box<M8LocalRuntime>)"),
+        "a single unpartitioned ST M8LocalRuntime cannot be the SYS-4 runtime shape for a four-locus two-owner fabric"
+    );
 }
 
 #[test]
