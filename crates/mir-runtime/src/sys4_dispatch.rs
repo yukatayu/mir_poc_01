@@ -997,6 +997,7 @@ pub(crate) struct FaultInjection {
     replacement_core_ref: Option<String>,
     replacement_policy_stamp: Option<String>,
     replacement_redaction_policy: Option<String>,
+    replacement_m8_publication_id: Option<String>,
     kind: FaultInjectionKind,
 }
 
@@ -1021,6 +1022,7 @@ impl FaultInjection {
             replacement_core_ref: None,
             replacement_policy_stamp: None,
             replacement_redaction_policy: None,
+            replacement_m8_publication_id: None,
             kind: FaultInjectionKind::RouteUnavailable,
         }
     }
@@ -1041,6 +1043,7 @@ impl FaultInjection {
             replacement_core_ref: None,
             replacement_policy_stamp: None,
             replacement_redaction_policy: None,
+            replacement_m8_publication_id: None,
             kind: FaultInjectionKind::Retarget,
         }
     }
@@ -1056,6 +1059,7 @@ impl FaultInjection {
             replacement_core_ref: None,
             replacement_policy_stamp: None,
             replacement_redaction_policy: None,
+            replacement_m8_publication_id: None,
             kind: FaultInjectionKind::StripIntPayload,
         }
     }
@@ -1071,6 +1075,7 @@ impl FaultInjection {
             replacement_core_ref: None,
             replacement_policy_stamp: None,
             replacement_redaction_policy: None,
+            replacement_m8_publication_id: None,
             kind: FaultInjectionKind::CorruptPolicyStamp,
         }
     }
@@ -1086,6 +1091,7 @@ impl FaultInjection {
             replacement_core_ref: None,
             replacement_policy_stamp: None,
             replacement_redaction_policy: None,
+            replacement_m8_publication_id: None,
             kind: FaultInjectionKind::CorruptVisibilityRedaction,
         }
     }
@@ -1093,7 +1099,7 @@ impl FaultInjection {
     pub(crate) fn corrupt_in_transit_envelope_m8_publication_id_for_edge(
         edge_ref: impl Into<String>,
         envelope_id: impl Into<String>,
-        _forged_publication_id: impl Into<String>,
+        forged_publication_id: impl Into<String>,
     ) -> Self {
         Self {
             edge_ref: edge_ref.into(),
@@ -1102,6 +1108,7 @@ impl FaultInjection {
             replacement_core_ref: None,
             replacement_policy_stamp: None,
             replacement_redaction_policy: None,
+            replacement_m8_publication_id: Some(forged_publication_id.into()),
             kind: FaultInjectionKind::CorruptM8PublicationId,
         }
     }
@@ -1114,6 +1121,7 @@ impl FaultInjection {
             replacement_core_ref: None,
             replacement_policy_stamp: None,
             replacement_redaction_policy: None,
+            replacement_m8_publication_id: None,
             kind: FaultInjectionKind::CorruptCacheBindingDigest,
         }
     }
@@ -1132,6 +1140,7 @@ impl FaultInjection {
             replacement_core_ref: Some(core_ref.into()),
             replacement_policy_stamp: Some(policy_stamp.into()),
             replacement_redaction_policy: Some(redaction_policy.into()),
+            replacement_m8_publication_id: None,
             kind: FaultInjectionKind::RewriteCacheRetryProjectionBinding,
         }
     }
@@ -1143,6 +1152,7 @@ struct InTransitFault {
     envelope_id: Option<String>,
     kind: FaultInjectionKind,
     target_locus: Option<String>,
+    replacement_m8_publication_id: Option<String>,
 }
 
 #[derive(Debug, Clone, PartialEq, Eq, Default)]
@@ -3059,6 +3069,35 @@ impl M9AuthorityTransition {
     }
 }
 
+/// Immutable delivery bindings retained when E evaluates a designated value.
+/// The first successful evaluator binding for an operation/publication pair is
+/// the only binding that pair may have in this finite fabric.  A fixed-version
+/// idempotent evaluation may emit another occurrence, but it cannot rewrite
+/// the publication's already-established tick/frontier.
+#[derive(Debug, Clone, PartialEq, Eq, Default)]
+struct EvaluatorPublicationBindingRegistry {
+    entries: BTreeMap<(String, String), SealedDeliveryBinding>,
+}
+
+impl EvaluatorPublicationBindingRegistry {
+    fn retain(&mut self, operation_id: &str, publication_id: &str, binding: SealedDeliveryBinding) {
+        self.entries
+            .entry((operation_id.to_string(), publication_id.to_string()))
+            .or_insert(binding);
+    }
+
+    fn matches(
+        &self,
+        operation_id: &str,
+        publication_id: &str,
+        binding: &SealedDeliveryBinding,
+    ) -> bool {
+        self.entries
+            .get(&(operation_id.to_string(), publication_id.to_string()))
+            == Some(binding)
+    }
+}
+
 pub(crate) struct LocalFabric {
     program: FabricProgram,
     loci: BTreeMap<String, LocusRuntime>,
@@ -3076,6 +3115,12 @@ pub(crate) struct LocalFabric {
     completed_receipts: BTreeMap<String, FabricReceipt>,
     local_store_read_audits: BTreeMap<String, LocalStoreReadAudit>,
     consumption_state: DesignatedConsumptionState,
+    // Evaluator-established, immutable publication facts.  This fabric state
+    // is intentionally separate from C's consumption cache so a reordered
+    // delivery cannot become valid merely because C has not seen its sibling
+    // carrier yet.  Its owned, cloneable representation is suitable for a
+    // later whole-fabric cut without consulting a latest M8 trace row.
+    evaluator_publication_bindings: EvaluatorPublicationBindingRegistry,
     cache: BTreeMap<String, CachedDelivery>,
     next_request: u64,
 }
@@ -3201,6 +3246,7 @@ impl LocalFabric {
             completed_receipts: BTreeMap::new(),
             local_store_read_audits,
             consumption_state: DesignatedConsumptionState::default(),
+            evaluator_publication_bindings: EvaluatorPublicationBindingRegistry::default(),
             cache: BTreeMap::new(),
             next_request: 0,
         })
@@ -3830,7 +3876,7 @@ impl LocalFabric {
                     }
                 }
                 FaultInjectionKind::CorruptM8PublicationId => {
-                    moved.m8_publication_id = Some("sys4-corrupted-publication".to_string());
+                    moved.m8_publication_id = fault.replacement_m8_publication_id;
                 }
                 FaultInjectionKind::CorruptCacheBindingDigest => {
                     moved.immutable_delivery_digest =
@@ -4624,10 +4670,15 @@ impl LocalFabric {
                     None,
                     None,
                     Some(semantic_identity.clone()),
-                    Some(binding),
+                    Some(binding.clone()),
                     Some(digest),
                     vec![evaluation_node.clone()],
                 )?;
+                self.evaluator_publication_bindings.retain(
+                    &envelope.operation_id,
+                    published.value_id(),
+                    binding,
+                );
                 delivery.m8_evaluation_node_id = Some(evaluation_node.clone());
                 if let Some(runtime) = self.loci.get_mut(locus)
                     && let Some(queued) = runtime
@@ -4700,6 +4751,18 @@ impl LocalFabric {
                         &envelope.request_id,
                     ));
                 }
+                if !self.evaluator_publication_bindings.matches(
+                    &envelope.operation_id,
+                    envelope.m8_publication_id(),
+                    &binding,
+                ) {
+                    return Err(self.quarantine(
+                        locus,
+                        &envelope,
+                        Sys4DiagnosticKind::DeliveryPublicationIdentityMismatch,
+                        &envelope.request_id,
+                    ));
+                }
                 let value = value.ok_or_else(|| {
                     self.quarantine(
                         locus,
@@ -4738,10 +4801,28 @@ impl LocalFabric {
         cache_retry: bool,
     ) -> Sys4Result<LocusStep> {
         let semantic_identity = envelope.semantic_identity().to_string();
+        // A fixed result version can legitimately make a second evaluator
+        // occurrence idempotent, but it cannot make a new tick/frontier a
+        // second interpretation of the already-consumed publication.  Compare
+        // against the retained immutable carrier binding rather than any
+        // operation-global/latest M8 lookup: this is a C-side frame-integrity
+        // check and must run before M9 or M8 consumption.
+        let cached_publication_tick_split =
+            self.cache.get(&semantic_identity).is_some_and(|cached| {
+                cached.delivery_id == envelope.m8_publication_id()
+                    && cached.sealed_delivery_binding.m8_publication_id()
+                        == binding.m8_publication_id()
+                    && cached.result_version == binding.result_version()
+                    && (cached.sealed_delivery_binding.logical_tick_id()
+                        != binding.logical_tick_id()
+                        || cached.sealed_delivery_binding.logical_tick_frontier()
+                            != binding.logical_tick_frontier())
+            });
         if envelope.m8_publication_id().is_empty()
             || envelope.m8_publication_id() != binding.m8_publication_id()
             || envelope.logical_tick_id() != binding.logical_tick_id()
             || envelope.logical_tick_frontier() != binding.logical_tick_frontier()
+            || cached_publication_tick_split
             || !self
                 .backend
                 .has_designated_publication_id(&envelope.operation_id, envelope.m8_publication_id())
@@ -5316,6 +5397,7 @@ impl LocalFabric {
                         envelope_id: fault.envelope_id.clone(),
                         kind: fault.kind,
                         target_locus: fault.target_locus.clone(),
+                        replacement_m8_publication_id: fault.replacement_m8_publication_id.clone(),
                     });
                 }
                 let fault_id = self.next_request_id();
