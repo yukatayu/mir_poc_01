@@ -2644,10 +2644,12 @@ fn fixed_version_second_tick_delivery_split_frame_rejects_before_second_consume(
     fabric
         .step_transport("E", "C", second_delivery.envelope_id())
         .expect("second split-frame candidate crosses the generated E→C endpoint");
-    let rejected = assert_sys4_diag(
-        fabric.step_locus("C"),
-        delivery_publication_identity_mismatch_diag(),
+    let b_step = fabric.step_locus("C");
+    assert!(
+        b_step.is_err(),
+        "B split-frame was accepted by C before A; expected fail-closed DeliveryPublicationIdentityMismatch"
     );
+    let rejected = assert_sys4_diag(b_step, delivery_publication_identity_mismatch_diag());
 
     assert_eq!(
         rejected.rejected_envelope_id(),
@@ -2676,6 +2678,210 @@ fn fixed_version_second_tick_delivery_split_frame_rejects_before_second_consume(
             .incoming_mailbox()
             .terminal_rejected_envelope(second_delivery.envelope_id())
             .expect("split-frame delivery is terminally quarantined")
+            .diagnostic_kind(),
+        delivery_publication_identity_mismatch_diag()
+    );
+}
+
+#[test]
+fn b_before_a_fixed_version_split_frame_rejects_with_empty_consumer_cache() {
+    let checked = designated_checked();
+    let program = fabric_program(designated_projection(&checked));
+    let mut fabric = boot(&checked, program, BackendProfile::St);
+
+    let first_submit = fabric
+        .submit_source_action(publish_designated_action_with_tick("tick:F:41"))
+        .expect("A publish creates E→S request");
+    fabric
+        .step_transport("E", "S", first_submit.envelope_id())
+        .expect("A input request transports to S");
+    let first_source_step = fabric.step_locus("S").expect("S emits A input receipt");
+    fabric
+        .step_transport("S", "E", first_source_step.reply_envelope_id())
+        .expect("A input receipt transports to E");
+    let first_evaluator_step = fabric.step_locus("E").expect("E emits A delivery");
+    let first_publication =
+        m8_owned_observation(&fabric, first_evaluator_step.m8_evaluation_node_id());
+    assert_eq!(
+        first_publication.kind(),
+        M8LocalTraceKind::DesignatedValuePublished
+    );
+    assert_eq!(first_publication.logical_tick_id(), "tick:F:41");
+    let first_request_id = first_evaluator_step.request_id().to_string();
+    let first_delivery = fabric
+        .locus_runtime("E")
+        .expect("E exists")
+        .outgoing_mailbox()
+        .pending_envelopes()
+        .for_request(&first_request_id);
+    let first_publication_id = envelope_m8_publication_id(&first_delivery).to_string();
+    let first_tick = envelope_logical_tick_id(&first_delivery).to_string();
+    let first_binding_tick =
+        binding_logical_tick_id(first_delivery.immutable_delivery_binding()).to_string();
+    let first_digest = first_delivery.immutable_delivery_digest().to_string();
+    assert_eq!(first_tick, "tick:F:41");
+    assert_eq!(first_binding_tick, "tick:F:41");
+
+    let second_submit = fabric
+        .submit_source_action(publish_designated_action_with_tick("tick:F:42"))
+        .expect("B publish creates E→S request while A stays queued");
+    fabric
+        .step_transport("E", "S", second_submit.envelope_id())
+        .expect("B input request transports to S while A stays queued");
+    let second_source_step = fabric.step_locus("S").expect("S emits B input receipt");
+    fabric
+        .step_transport("S", "E", second_source_step.reply_envelope_id())
+        .expect("B input receipt transports to E");
+    let before_b_evaluation_sequence = m8_backend_latest_sequence(&fabric);
+    let second_evaluator_step = fabric
+        .step_locus("E")
+        .expect("E emits B split-frame candidate");
+    assert_backend_designated_idempotent_observation(
+        &fabric,
+        second_evaluator_step.m8_evaluation_node_id(),
+        second_evaluator_step.consumed_envelope_id(),
+        "E.result",
+        "E",
+        "tick:F:42",
+        before_b_evaluation_sequence,
+    );
+
+    let e_outbox = fabric
+        .locus_runtime("E")
+        .expect("E exists")
+        .outgoing_mailbox()
+        .pending_envelopes();
+    assert_eq!(e_outbox.len(), 2);
+    let first_still_queued = e_outbox.for_request(&first_request_id);
+    assert_eq!(
+        envelope_m8_publication_id(&first_still_queued),
+        first_publication_id
+    );
+    assert_eq!(
+        binding_m8_publication_id(first_still_queued.immutable_delivery_binding()),
+        first_publication_id
+    );
+    assert_eq!(envelope_logical_tick_id(&first_still_queued), first_tick);
+    assert_eq!(
+        binding_logical_tick_id(first_still_queued.immutable_delivery_binding()),
+        first_binding_tick
+    );
+    assert_eq!(first_still_queued.immutable_delivery_digest(), first_digest);
+
+    let second_delivery = e_outbox.for_request(second_evaluator_step.request_id());
+    assert_eq!(
+        envelope_m8_publication_id(&second_delivery),
+        first_publication_id,
+        "B reuses the fixed-version M8 publication id"
+    );
+    assert_eq!(
+        binding_m8_publication_id(second_delivery.immutable_delivery_binding()),
+        first_publication_id,
+        "B sealed binding reuses the fixed-version M8 publication id"
+    );
+    assert_eq!(
+        envelope_logical_tick_id(&second_delivery),
+        "tick:F:42",
+        "B generated carrier records the new source tick"
+    );
+    assert_eq!(
+        binding_logical_tick_id(second_delivery.immutable_delivery_binding()),
+        "tick:F:42",
+        "B sealed binding records the new source tick"
+    );
+    assert_eq!(
+        second_delivery.immutable_delivery_digest(),
+        format!("{:?}", second_delivery.immutable_delivery_binding()),
+        "B digest is coherent with the exact sealed binding"
+    );
+    assert_ne!(
+        second_delivery.immutable_delivery_digest(),
+        first_digest,
+        "B digest differs from A because B seals a different tick"
+    );
+    assert!(
+        fabric
+            .designated_cache_entry(second_delivery.semantic_identity())
+            .is_none(),
+        "C cache is intentionally empty because B is processed before A"
+    );
+
+    fabric
+        .step_transport("E", "C", second_delivery.envelope_id())
+        .expect("B crosses E→C before A");
+    assert_eq!(
+        fabric
+            .locus_runtime("E")
+            .expect("E exists")
+            .outgoing_mailbox()
+            .pending_envelopes()
+            .single()
+            .envelope_id(),
+        first_still_queued.envelope_id(),
+        "A remains queued at E while B is processed first"
+    );
+    let before_b = fabric.semantic_snapshot();
+    let cache_before_b = fabric.designated_cache_snapshot();
+    let m9_before_b = m9_validation_occurrence_count(
+        &fabric,
+        "E.result",
+        "C",
+        second_delivery.semantic_identity(),
+    );
+    let m8_digest_before_b = fabric.m8_actual_trace().stable_digest();
+    let m8_backend_sequence_before_b = m8_backend_latest_sequence(&fabric);
+    let consumed_before_b = fabric
+        .m8_actual_trace()
+        .value_consumed_count(second_delivery.semantic_identity(), "C");
+
+    let b_step = fabric.step_locus("C");
+    assert!(
+        b_step.is_err(),
+        "B split-frame was accepted by C before A; expected fail-closed DeliveryPublicationIdentityMismatch"
+    );
+    let rejected = assert_sys4_diag(b_step, delivery_publication_identity_mismatch_diag());
+    assert_eq!(
+        rejected.rejected_envelope_id(),
+        Some(second_delivery.envelope_id())
+    );
+    assert!(rejected.m8_trace_node_id().is_none());
+    assert!(rejected.m8_non_consuming_validation_node_id().is_none());
+    assert!(!rejected.exposes_raw_payload());
+    assert!(fabric.semantic_snapshot().same_state(&before_b));
+    assert_eq!(fabric.designated_cache_snapshot(), cache_before_b);
+    assert_eq!(
+        m9_validation_occurrence_count(
+            &fabric,
+            "E.result",
+            "C",
+            second_delivery.semantic_identity()
+        ),
+        m9_before_b,
+        "B split-frame rejection must happen before M9 consumer validation"
+    );
+    assert_eq!(
+        fabric.m8_actual_trace().stable_digest(),
+        m8_digest_before_b,
+        "B split-frame rejection must happen before any M8 rejected/non-consuming/consume trace"
+    );
+    assert_eq!(
+        m8_backend_latest_sequence(&fabric),
+        m8_backend_sequence_before_b,
+        "B split-frame rejection must not append to the M8LocalTrace backend"
+    );
+    assert_eq!(
+        fabric
+            .m8_actual_trace()
+            .value_consumed_count(second_delivery.semantic_identity(), "C"),
+        consumed_before_b
+    );
+    assert_eq!(
+        fabric
+            .locus_runtime("C")
+            .expect("C exists")
+            .incoming_mailbox()
+            .terminal_rejected_envelope(second_delivery.envelope_id())
+            .expect("B split-frame delivery is terminally quarantined")
             .diagnostic_kind(),
         delivery_publication_identity_mismatch_diag()
     );
