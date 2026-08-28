@@ -1,0 +1,17 @@
+module Mirrorea.Sys5.AnchorLocusBoundary
+
+locus WorldAuthority
+locus ParticipantA
+locus ParticipantB
+locus ViewerC
+principal self
+type Bird
+
+relation bird_follow at ParticipantB {
+  subject bird: Bird
+  primary participant_a_shoulder at ParticipantA epoch membership_epoch transform translate(0, 0)
+  fallback participant_b_shoulder at ParticipantB epoch local_epoch transform identity
+  bind frontier bird_follow_frontier
+  publish relation
+  project at ViewerC local
+}

@@ -66,6 +66,13 @@ pub(crate) mod sys4_dispatch;
 /// public ABI, nor wire-format promise.
 #[doc(hidden)]
 pub mod sys5_local_slice;
+/// Provisional SYS-5 local workflow over prechecked/projected artifacts.
+///
+/// This is an internal profile facade, not a public API, ABI, or wire
+/// contract.  It intentionally accepts only already checked/projected source
+/// and sealed admission candidates.
+#[doc(hidden)]
+pub mod sys5_local_workflow;
 
 #[cfg(test)]
 mod sys1_runtime_kernel_tests;
@@ -82,6 +89,8 @@ mod sys4_dispatch_tests;
 mod sys5_local_cut_patch_tests;
 #[cfg(test)]
 mod sys5_local_slice_tests;
+#[cfg(test)]
+mod sys5_local_workflow_tests;
 #[cfg(test)]
 mod sys5_relation_dispatch_tests;
 #[cfg(test)]

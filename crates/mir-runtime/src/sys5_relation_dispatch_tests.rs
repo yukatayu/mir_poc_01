@@ -57,8 +57,8 @@ Role[self] at ParticipantA {
 
 relation bird_follow at ParticipantB {
   subject bird: Bird
-  primary participant_a_shoulder epoch membership_epoch transform translate(0, 0)
-  fallback participant_b_shoulder epoch local_epoch transform identity
+  primary participant_a_shoulder at ParticipantA epoch membership_epoch transform translate(0, 0)
+  fallback participant_b_shoulder at ParticipantB epoch local_epoch transform identity
   bind frontier bird_follow_frontier
   publish relation
   project at ViewerC local
@@ -802,6 +802,238 @@ fn relation_route_failure_during_fresh_reacquire_is_failure_atomic_and_retries_o
 }
 
 #[test]
+fn participant_leave_route_fault_is_failure_atomic_and_same_leave_succeeds_after_clear() {
+    let (program, admission, _checked_program_ref) = sys4_relation_fabric_parts();
+    let edge_ref = relation_publication_edge_ref();
+    let mut fabric = LocalFabric::bootstrap(program, admission, BackendProfile::St)
+        .expect("complete source-derived admission boots SYS-4 relation fabric");
+
+    let initial = fabric
+        .publish_relation_current("bird_follow")
+        .expect("initial relation publication reaches ViewerC before failed leave");
+    assert_eq!(
+        initial.shadow().semantic().selected_anchor(),
+        "participant_a_shoulder"
+    );
+
+    let expected_retry_request =
+        install_route_fault_and_next_relation_request_suffix(&mut fabric, &edge_ref);
+    let before_failure =
+        LifecycleRouteFailureAtomicSnapshot::capture(&mut fabric, "participant-leave-route-fault");
+    let failed = assert_sys4_diag(
+        fabric.participant_leave_relation_primary("bird_follow"),
+        Sys4DiagnosticKind::RouteUnavailable,
+    );
+    assert_eq!(
+        failed.relation_publication_failure_disposition(),
+        Some(RelationPublicationFailureDisposition::DiscardedUndelivered),
+        "failed participant leave publication must discard the unaccepted relation carrier"
+    );
+    before_failure.assert_unchanged(
+        &mut fabric,
+        "route fault during participant leave must roll back M9 lifecycle, relation state, and endpoints",
+    );
+
+    fabric.for_test_clear_route_fault(&edge_ref);
+    let retry = fabric
+        .participant_leave_relation_primary("bird_follow")
+        .expect("clearing the route fault lets the same external leave request succeed");
+    assert_eq!(
+        sys4_external_lifecycle_request_suffix(retry.lifecycle_request_identity()),
+        expected_retry_request,
+        "failed participant leave must not burn the external lifecycle request identity"
+    );
+    assert_eq!(
+        retry
+            .relation_endpoint()
+            .shadow()
+            .semantic()
+            .selected_anchor(),
+        "participant_b_shoulder",
+        "successful retry must publish the fallback relation after M9 retirement"
+    );
+    assert!(
+        fabric.observer_causally_reaches(
+            retry.relation_endpoint().owner_publish_occurrence_id(),
+            retry.m9_retire_occurrence_id(),
+        ),
+        "M9 retirement occurrence must causally precede relation fallback publication"
+    );
+    assert_ne!(
+        fabric
+            .current_m9_authority_inspection()
+            .generation()
+            .generation_ref(),
+        before_failure.m9_generation_ref,
+        "successful retry must install the M9 retirement successor only after the fault is cleared"
+    );
+}
+
+#[test]
+fn fresh_reacquire_route_fault_after_leave_is_failure_atomic_and_same_fresh_succeeds_after_clear() {
+    let (program, admission, _checked_program_ref) = sys4_relation_fabric_parts();
+    let edge_ref = relation_publication_edge_ref();
+    let mut fabric = LocalFabric::bootstrap(program, admission, BackendProfile::St)
+        .expect("complete source-derived admission boots SYS-4 relation fabric");
+
+    fabric
+        .publish_relation_current("bird_follow")
+        .expect("initial relation publication reaches ViewerC before leave");
+    let leave = fabric
+        .participant_leave_relation_primary("bird_follow")
+        .expect("successful leave establishes invalidated fallback before failed fresh reacquire");
+    assert_eq!(
+        leave
+            .relation_endpoint()
+            .shadow()
+            .semantic()
+            .selected_anchor(),
+        "participant_b_shoulder"
+    );
+    assert!(!fabric.relation_fresh_binding_is_consumed("bird_follow"));
+
+    let expected_retry_request =
+        install_route_fault_and_next_relation_request_suffix(&mut fabric, &edge_ref);
+    let before_failure =
+        LifecycleRouteFailureAtomicSnapshot::capture(&mut fabric, "fresh-reacquire-route-fault");
+    let failed = assert_sys4_diag(
+        fabric.fresh_reacquire_relation_primary("bird_follow"),
+        Sys4DiagnosticKind::RouteUnavailable,
+    );
+    assert_eq!(
+        failed.relation_publication_failure_disposition(),
+        Some(RelationPublicationFailureDisposition::DiscardedUndelivered),
+        "failed fresh reacquire publication must discard the unaccepted relation carrier"
+    );
+    before_failure.assert_unchanged(
+        &mut fabric,
+        "route fault during source-declared fresh reacquire must roll back M9 lifecycle, fresh binding, relation state, and endpoints",
+    );
+
+    fabric.for_test_clear_route_fault(&edge_ref);
+    let retry = fabric
+        .fresh_reacquire_relation_primary("bird_follow")
+        .expect("clearing the route fault lets the same external fresh reacquire request succeed");
+    let fresh = retry
+        .fresh_reacquire()
+        .expect("fresh retry must expose M9 fresh membership evidence");
+    assert_eq!(
+        sys4_external_lifecycle_request_suffix(fresh.lifecycle_request_identity()),
+        expected_retry_request,
+        "failed fresh reacquire must not burn the external lifecycle request identity"
+    );
+    assert_eq!(
+        fresh.prior_membership_ref(),
+        leave.successor_tombstone_ref(),
+        "fresh retry must bind to the exact tombstone produced by the successful leave"
+    );
+    assert_eq!(
+        fresh.prior_membership_epoch_ref(),
+        leave.membership_epoch_after_ref(),
+        "fresh retry must bind to the exact retired membership epoch produced by the successful leave"
+    );
+    assert!(
+        fabric.observer_causally_reaches(
+            retry.owner_publish_occurrence_id(),
+            fresh.m9_reacquire_occurrence_id(),
+        ),
+        "M9 fresh-membership occurrence must causally precede relation primary publication"
+    );
+    assert_eq!(
+        retry.shadow().semantic().selected_anchor(),
+        "participant_a_shoulder",
+        "successful retry must republish the primary relation"
+    );
+    assert!(fabric.relation_fresh_binding_is_consumed("bird_follow"));
+}
+
+#[test]
+fn equal_generation_relation_candidate_rejects_if_sibling_advances_shared_m9_floor() {
+    let (program, admission, _checked_program_ref) = sys4_relation_fabric_parts();
+    let mut fabric = LocalFabric::bootstrap(program.clone(), admission.clone(), BackendProfile::St)
+        .expect("first fabric boots from the sealed source-derived admission");
+    let mut sibling = LocalFabric::bootstrap(program, admission, BackendProfile::St)
+        .expect("sibling shares the same sealed M9 live floor");
+
+    fabric
+        .publish_relation_current("bird_follow")
+        .expect("first fabric imports the initial primary relation");
+    sibling
+        .publish_relation_current("bird_follow")
+        .expect("sibling imports the initial primary relation before its leave");
+
+    let before_m8_trace = fabric
+        .m8_actual_trace()
+        .expect("M8 observer is available before staging the equal-generation candidate")
+        .stable_digest();
+    let before_relation_digest = fabric
+        .relation_semantic_digest("bird_follow")
+        .map(str::to_string);
+    let before_shadow = fabric
+        .relation_imported_shadow("bird_follow", "ViewerC")
+        .expect("first fabric observes its primary relation before candidate staging");
+    let before_total_endpoints = fabric.total_endpoint_carrier_count();
+    let before_relation_endpoints = fabric.endpoint_carrier_count_for_relation("bird_follow");
+    let before_generation = fabric.current_m9_authority_inspection().generation();
+
+    let candidate = fabric
+        .for_test_stage_relation_invalidation_candidate("bird_follow")
+        .expect("actual generated relation fallback stages on an isolated candidate");
+    let sibling_leave = sibling
+        .participant_leave_relation_primary("bird_follow")
+        .expect("sibling's source-bound leave advances the shared M9 successor");
+    assert_eq!(
+        sibling_leave
+            .relation_endpoint()
+            .shadow()
+            .semantic()
+            .selected_anchor(),
+        "participant_b_shoulder"
+    );
+
+    assert_sys4_diag(
+        fabric.for_test_commit_staged_relation_candidate(candidate),
+        Sys4DiagnosticKind::ProgramAdmissionMismatch,
+    );
+    assert_eq!(
+        fabric
+            .m8_actual_trace()
+            .expect("M8 observer is available after stale candidate rejection")
+            .stable_digest(),
+        before_m8_trace,
+        "stale equal-generation candidate must not install an M8 fallback into the first fabric"
+    );
+    assert_eq!(
+        fabric
+            .relation_semantic_digest("bird_follow")
+            .map(str::to_string),
+        before_relation_digest,
+        "stale equal-generation candidate must not change relation semantic state"
+    );
+    assert_eq!(
+        fabric
+            .relation_imported_shadow("bird_follow", "ViewerC")
+            .expect("first fabric retains its pre-candidate relation shadow"),
+        before_shadow,
+        "stale equal-generation candidate must not install a stale endpoint observation"
+    );
+    assert_eq!(
+        fabric.total_endpoint_carrier_count(),
+        before_total_endpoints
+    );
+    assert_eq!(
+        fabric.endpoint_carrier_count_for_relation("bird_follow"),
+        before_relation_endpoints,
+        "stale equal-generation candidate must not append an endpoint carrier"
+    );
+    assert_eq!(
+        fabric.current_m9_authority_inspection().generation(),
+        before_generation,
+        "rejected first-fabric candidate must retain its own pre-sibling authority generation"
+    );
+}
+
+#[test]
 fn relation_identifier_exhaustion_rejects_before_m8_mailbox_or_state_mutation() {
     assert_relation_identifier_exhaustion_is_preflight(u64::MAX, 0, "request counter exhaustion");
     assert_relation_identifier_exhaustion_is_preflight(
@@ -1195,6 +1427,122 @@ impl RelationFailureAtomicSnapshot {
     }
 }
 
+#[derive(Debug, Clone, PartialEq, Eq)]
+struct LifecycleRouteFailureAtomicSnapshot {
+    cut_id: String,
+    private_restore_integrity_digest: String,
+    m8_actual_trace_digest: String,
+    relation_digest: Option<String>,
+    imported_shadow: Option<M8ObservedRelationShadow>,
+    total_endpoint_carrier_count: usize,
+    relation_endpoint_carrier_count: usize,
+    pending_relation_publications: usize,
+    m9_generation: u64,
+    m9_generation_ref: String,
+    m9_produced: bool,
+    fresh_binding_consumed: bool,
+}
+
+impl LifecycleRouteFailureAtomicSnapshot {
+    fn capture(fabric: &mut LocalFabric, cut_id: &str) -> Self {
+        let generation = fabric.current_m9_authority_inspection().generation();
+        Self {
+            cut_id: format!("sys5-p0-lifecycle-route-failure-{cut_id}"),
+            private_restore_integrity_digest: fabric
+                .save_local_cut(format!("sys5-p0-lifecycle-route-failure-{cut_id}"))
+                .expect("ST cut captures lifecycle route-failure atomicity probe")
+                .private_restore_integrity_digest()
+                .to_string(),
+            m8_actual_trace_digest: fabric
+                .m8_actual_trace()
+                .expect("M8 observer is available before lifecycle route failure")
+                .stable_digest(),
+            relation_digest: fabric
+                .relation_semantic_digest("bird_follow")
+                .map(str::to_string),
+            imported_shadow: fabric
+                .relation_imported_shadow("bird_follow", "ViewerC")
+                .expect("relation shadow lookup is typed before lifecycle route failure"),
+            total_endpoint_carrier_count: fabric.total_endpoint_carrier_count(),
+            relation_endpoint_carrier_count: fabric
+                .endpoint_carrier_count_for_relation("bird_follow"),
+            pending_relation_publications: fabric
+                .for_test_pending_relation_publication_count("ParticipantB"),
+            m9_generation: generation.generation(),
+            m9_generation_ref: generation.generation_ref().to_string(),
+            m9_produced: generation.is_m9_produced(),
+            fresh_binding_consumed: fabric.relation_fresh_binding_is_consumed("bird_follow"),
+        }
+    }
+
+    fn assert_unchanged(&self, fabric: &mut LocalFabric, label: &str) {
+        let generation = fabric.current_m9_authority_inspection().generation();
+        assert_eq!(
+            fabric
+                .save_local_cut(self.cut_id.as_str())
+                .expect("ST cut captures post-failure lifecycle atomicity probe")
+                .private_restore_integrity_digest(),
+            self.private_restore_integrity_digest.as_str(),
+            "{label}: private cut digest must not change after failed lifecycle dispatch"
+        );
+        assert_eq!(
+            fabric
+                .m8_actual_trace()
+                .expect("M8 observer is available after lifecycle route failure")
+                .stable_digest(),
+            self.m8_actual_trace_digest,
+            "{label}: owner M8 relation state/trace must not change when lifecycle dispatch returns Err"
+        );
+        assert_eq!(
+            fabric
+                .relation_semantic_digest("bird_follow")
+                .map(str::to_string),
+            self.relation_digest,
+            "{label}: relation devtools digest must not advance on failed lifecycle dispatch"
+        );
+        assert_eq!(
+            fabric
+                .relation_imported_shadow("bird_follow", "ViewerC")
+                .expect("relation shadow lookup is typed after lifecycle route failure"),
+            self.imported_shadow,
+            "{label}: consumer shadow and semantic lease lineage must not change"
+        );
+        assert_eq!(
+            fabric.total_endpoint_carrier_count(),
+            self.total_endpoint_carrier_count,
+            "{label}: endpoint carrier history must not change on failed lifecycle dispatch"
+        );
+        assert_eq!(
+            fabric.endpoint_carrier_count_for_relation("bird_follow"),
+            self.relation_endpoint_carrier_count,
+            "{label}: relation endpoint history must not change on failed lifecycle dispatch"
+        );
+        assert_eq!(
+            fabric.for_test_pending_relation_publication_count("ParticipantB"),
+            self.pending_relation_publications,
+            "{label}: failed lifecycle dispatch must not strand pending relation publications"
+        );
+        assert_eq!(
+            (
+                generation.generation(),
+                generation.generation_ref(),
+                generation.is_m9_produced(),
+            ),
+            (
+                self.m9_generation,
+                self.m9_generation_ref.as_str(),
+                self.m9_produced,
+            ),
+            "{label}: M9 authority generation must not change on failed lifecycle dispatch"
+        );
+        assert_eq!(
+            fabric.relation_fresh_binding_is_consumed("bird_follow"),
+            self.fresh_binding_consumed,
+            "{label}: failed lifecycle dispatch must not consume or revive the fresh binding"
+        );
+    }
+}
+
 fn assert_relation_identifier_exhaustion_is_preflight(
     next_request: u64,
     next_endpoint_occurrence: u64,
@@ -1303,6 +1651,15 @@ fn sys4_request_suffix(identifier: &str) -> u64 {
         .strip_prefix("sys4-request-")
         .and_then(|suffix| suffix.parse::<u64>().ok())
         .unwrap_or_else(|| panic!("SYS-4 request id has expected prefix: {identifier}"))
+}
+
+fn sys4_external_lifecycle_request_suffix(identifier: &str) -> u64 {
+    identifier
+        .strip_prefix("sys4-external-lifecycle-request-")
+        .and_then(|suffix| suffix.parse::<u64>().ok())
+        .unwrap_or_else(|| {
+            panic!("SYS-4 external lifecycle request id has expected prefix: {identifier}")
+        })
 }
 
 fn sys4_occurrence_suffix(identifier: &str) -> u64 {

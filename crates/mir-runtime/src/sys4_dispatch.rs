@@ -859,6 +859,14 @@ impl M9AuthorityLiveFloor {
         }
     }
 
+    /// A staged local transition needs an isolated floor.  Its candidate may
+    /// advance M9 while proving generated endpoint delivery, but that advance
+    /// must not become visible to sibling/live fabrics before the whole
+    /// transition commits through the canonical floor.
+    fn detached_candidate(generation: M9AuthorityGeneration) -> Self {
+        Self::new(generation)
+    }
+
     fn matches_generation(&self, generation: &M9AuthorityGeneration) -> bool {
         self.current
             .lock()
@@ -6607,6 +6615,61 @@ impl M9AuthorityLifecycle {
         })
     }
 
+    /// Retire a relation's source-declared primary membership only through
+    /// the M9 publisher.  The caller supplies the relation plus its explicit
+    /// checked anchor locus; M9 derives the principal and resolves the live
+    /// membership/capability/witness lineage internally.
+    fn retire_source_declared_primary_anchor(
+        &mut self,
+        relation: &str,
+        checked_primary_locus: &str,
+    ) -> Sys4Result<M9AuthorityTransition> {
+        let prior = self.publisher.current_inspection();
+        let prior_publisher = self.publisher.clone();
+        let prior_runtime_validation_observations = self
+            .publisher
+            .current_runtime_validation_observation_snapshot();
+        let (generation, retirement) = self
+            .publisher
+            .retire_source_declared_primary_anchor(relation, checked_primary_locus)
+            .map_err(|_| Sys4DispatchDiagnostics::one(Sys4DiagnosticKind::M8ExecutionRejected))?;
+        let sealed_m9_inspection =
+            generation.membership_retirement_transition_inspection(&prior, retirement);
+        Ok(M9AuthorityTransition {
+            generation,
+            sealed_m9_inspection,
+            prior_runtime_validation_observations,
+            prior_publisher,
+        })
+    }
+
+    /// Re-admit only the checked primary anchor selected by M9's finite
+    /// template.  The relation name is source-derived at the caller; no
+    /// principal, locus, epoch, membership, capability, or witness crosses
+    /// this SYS-4 boundary.
+    fn reacquire_source_declared_primary_anchor(
+        &mut self,
+        relation: &str,
+    ) -> Sys4Result<M9AuthorityTransition> {
+        let prior = self.publisher.current_inspection();
+        let prior_publisher = self.publisher.clone();
+        let prior_runtime_validation_observations = self
+            .publisher
+            .current_runtime_validation_observation_snapshot();
+        let (generation, reacquire) = self
+            .publisher
+            .reacquire_source_declared_primary_anchor(relation)
+            .map_err(|_| Sys4DispatchDiagnostics::one(Sys4DiagnosticKind::M8ExecutionRejected))?;
+        let sealed_m9_inspection =
+            generation.membership_reacquire_transition_inspection(&prior, reacquire);
+        Ok(M9AuthorityTransition {
+            generation,
+            sealed_m9_inspection,
+            prior_runtime_validation_observations,
+            prior_publisher,
+        })
+    }
+
     /// Restore the M9 publisher only when this fabric owns the exact
     /// uninstalled successor. A stale or foreign transition cannot roll back
     /// a publisher that has since advanced.
@@ -6685,6 +6748,25 @@ impl M9AuthorityLifecycleAccess<'_> {
         self.synchronize_before_successor()?;
         self.lifecycle.revoke_designated_source_release(lineage)
     }
+
+    fn retire_source_declared_primary_anchor(
+        &mut self,
+        relation: &str,
+        checked_primary_locus: &str,
+    ) -> Sys4Result<M9AuthorityTransition> {
+        self.synchronize_before_successor()?;
+        self.lifecycle
+            .retire_source_declared_primary_anchor(relation, checked_primary_locus)
+    }
+
+    fn reacquire_source_declared_primary_anchor(
+        &mut self,
+        relation: &str,
+    ) -> Sys4Result<M9AuthorityTransition> {
+        self.synchronize_before_successor()?;
+        self.lifecycle
+            .reacquire_source_declared_primary_anchor(relation)
+    }
 }
 
 pub(crate) struct M9AuthorityTransition {
@@ -6724,10 +6806,25 @@ impl M9AuthorityTransition {
             M9AuthorityTransitionKind::DesignatedSourceReleaseRevoked => {
                 return None;
             }
+            M9AuthorityTransitionKind::SourceDeclaredMembershipRetired => {
+                "source-declared-membership-retired"
+            }
+            M9AuthorityTransitionKind::SourceDeclaredPrimaryAnchorReacquired => {
+                "source-declared-primary-anchor-reacquired"
+            }
+        };
+        let sealed_lineage_ref = match inspection.transition_kind() {
+            M9AuthorityTransitionKind::SourceDeclaredMembershipRetired => {
+                inspection.membership_retirement().successor_tombstone_ref()
+            }
+            M9AuthorityTransitionKind::SourceDeclaredPrimaryAnchorReacquired => {
+                inspection.membership_reacquire().fresh_membership_ref()
+            }
+            M9AuthorityTransitionKind::DesignatedSourceReleaseRevoked => unreachable!(),
+            _ => inspection.consumer_lineage().opaque_lineage_ref(),
         };
         Some(format!(
-            "m9-admitted-transition:{kind}:{}",
-            inspection.consumer_lineage().opaque_lineage_ref()
+            "m9-admitted-transition:{kind}:{sealed_lineage_ref}"
         ))
     }
 
@@ -6874,6 +6971,223 @@ pub(crate) struct Sys4RelationEndpointReceipt {
     consumer_serve_occurrence_id: String,
     edge: CommunicationEdge,
     shadow: M8ObservedRelationShadow,
+    fresh_reacquire: Option<Sys4FreshReacquireEvidence>,
+}
+
+/// Observer-safe evidence for a source-derived fresh primary reacquire.  It
+/// records the lifecycle causality and opaque M9 successor lineages but never
+/// exposes a credential, capability, witness, or membership payload.
+#[derive(Debug, Clone, PartialEq, Eq)]
+pub(crate) struct Sys4FreshReacquireEvidence {
+    source_derived: bool,
+    lifecycle_request_identity: String,
+    lifecycle_enqueue_occurrence_id: String,
+    m9_reacquire_occurrence_id: String,
+    lifecycle_receipt_occurrence_id: String,
+    checked_primary_anchor_ref: String,
+    prior_membership_ref: String,
+    prior_membership_epoch_ref: String,
+    prior_incarnation_ref: String,
+    retired_membership_ref: String,
+    retired_membership_epoch_ref: String,
+    retired_incarnation_ref: String,
+    fresh_membership_ref: String,
+    fresh_membership_epoch_ref: String,
+    fresh_incarnation_ref: String,
+    capability_lineage_ref: String,
+    witness_lineage_ref: String,
+    prior_generation_ref: String,
+    successor_generation_ref: String,
+    m9_transition_ref: String,
+}
+
+impl Sys4FreshReacquireEvidence {
+    pub(crate) const fn source_derived(&self) -> bool {
+        self.source_derived
+    }
+
+    pub(crate) fn lifecycle_request_identity(&self) -> &str {
+        &self.lifecycle_request_identity
+    }
+
+    pub(crate) fn lifecycle_enqueue_occurrence_id(&self) -> &str {
+        &self.lifecycle_enqueue_occurrence_id
+    }
+
+    pub(crate) fn m9_reacquire_occurrence_id(&self) -> &str {
+        &self.m9_reacquire_occurrence_id
+    }
+
+    pub(crate) fn lifecycle_receipt_occurrence_id(&self) -> &str {
+        &self.lifecycle_receipt_occurrence_id
+    }
+
+    pub(crate) fn checked_primary_anchor_ref(&self) -> &str {
+        &self.checked_primary_anchor_ref
+    }
+
+    pub(crate) fn prior_membership_ref(&self) -> &str {
+        &self.prior_membership_ref
+    }
+
+    pub(crate) fn prior_membership_epoch_ref(&self) -> &str {
+        &self.prior_membership_epoch_ref
+    }
+
+    pub(crate) fn prior_incarnation_ref(&self) -> &str {
+        &self.prior_incarnation_ref
+    }
+
+    pub(crate) fn retired_membership_ref(&self) -> &str {
+        &self.retired_membership_ref
+    }
+
+    pub(crate) fn retired_membership_epoch_ref(&self) -> &str {
+        &self.retired_membership_epoch_ref
+    }
+
+    pub(crate) fn retired_incarnation_ref(&self) -> &str {
+        &self.retired_incarnation_ref
+    }
+
+    pub(crate) fn fresh_membership_ref(&self) -> &str {
+        &self.fresh_membership_ref
+    }
+
+    pub(crate) fn fresh_membership_epoch_ref(&self) -> &str {
+        &self.fresh_membership_epoch_ref
+    }
+
+    pub(crate) fn fresh_incarnation_ref(&self) -> &str {
+        &self.fresh_incarnation_ref
+    }
+
+    pub(crate) fn capability_lineage_ref(&self) -> &str {
+        &self.capability_lineage_ref
+    }
+
+    pub(crate) fn witness_lineage_ref(&self) -> &str {
+        &self.witness_lineage_ref
+    }
+
+    pub(crate) fn prior_generation_ref(&self) -> &str {
+        &self.prior_generation_ref
+    }
+
+    pub(crate) fn successor_generation_ref(&self) -> &str {
+        &self.successor_generation_ref
+    }
+
+    pub(crate) fn m9_transition_ref(&self) -> &str {
+        &self.m9_transition_ref
+    }
+}
+
+/// Observer-safe result of the finite source-derived participant leave path.
+/// The M9 membership transition is deliberately separate from the B-owned
+/// relation operation: the receipt proves their causal order without exposing
+/// membership, capability, witness, or payload values.
+#[derive(Debug, Clone, PartialEq, Eq)]
+pub(crate) struct Sys4ParticipantLeaveReceipt {
+    relation: String,
+    participant_locus: String,
+    lifecycle_request_identity: String,
+    lifecycle_enqueue_occurrence_id: String,
+    m9_retire_occurrence_id: String,
+    lifecycle_receipt_occurrence_id: String,
+    checked_membership_identity_ref: String,
+    prior_membership_ref: String,
+    successor_tombstone_ref: String,
+    membership_epoch_before_ref: String,
+    membership_epoch_after_ref: String,
+    incarnation_before_ref: String,
+    incarnation_after_ref: String,
+    capability_lineage_ref: String,
+    witness_lineage_ref: String,
+    prior_generation_ref: String,
+    successor_generation_ref: String,
+    m9_transition_ref: String,
+    relation_endpoint: Sys4RelationEndpointReceipt,
+}
+
+impl Sys4ParticipantLeaveReceipt {
+    pub(crate) fn relation(&self) -> &str {
+        &self.relation
+    }
+
+    pub(crate) fn participant_locus(&self) -> &str {
+        &self.participant_locus
+    }
+
+    /// The identity of an admitted external lifecycle request.  This is not
+    /// a Core operation identity or a transport carrier identity.
+    pub(crate) fn lifecycle_request_identity(&self) -> &str {
+        &self.lifecycle_request_identity
+    }
+
+    pub(crate) fn lifecycle_enqueue_occurrence_id(&self) -> &str {
+        &self.lifecycle_enqueue_occurrence_id
+    }
+
+    pub(crate) fn m9_retire_occurrence_id(&self) -> &str {
+        &self.m9_retire_occurrence_id
+    }
+
+    pub(crate) fn lifecycle_receipt_occurrence_id(&self) -> &str {
+        &self.lifecycle_receipt_occurrence_id
+    }
+
+    pub(crate) fn checked_membership_identity_ref(&self) -> &str {
+        &self.checked_membership_identity_ref
+    }
+
+    pub(crate) fn prior_membership_ref(&self) -> &str {
+        &self.prior_membership_ref
+    }
+
+    pub(crate) fn successor_tombstone_ref(&self) -> &str {
+        &self.successor_tombstone_ref
+    }
+
+    pub(crate) fn membership_epoch_before_ref(&self) -> &str {
+        &self.membership_epoch_before_ref
+    }
+
+    pub(crate) fn membership_epoch_after_ref(&self) -> &str {
+        &self.membership_epoch_after_ref
+    }
+
+    pub(crate) fn incarnation_before_ref(&self) -> &str {
+        &self.incarnation_before_ref
+    }
+
+    pub(crate) fn incarnation_after_ref(&self) -> &str {
+        &self.incarnation_after_ref
+    }
+
+    pub(crate) fn capability_lineage_ref(&self) -> &str {
+        &self.capability_lineage_ref
+    }
+
+    pub(crate) fn witness_lineage_ref(&self) -> &str {
+        &self.witness_lineage_ref
+    }
+
+    pub(crate) fn prior_generation_ref(&self) -> &str {
+        &self.prior_generation_ref
+    }
+
+    pub(crate) fn successor_generation_ref(&self) -> &str {
+        &self.successor_generation_ref
+    }
+
+    pub(crate) fn m9_transition_ref(&self) -> &str {
+        &self.m9_transition_ref
+    }
+
+    pub(crate) fn relation_endpoint(&self) -> &Sys4RelationEndpointReceipt {
+        &self.relation_endpoint
+    }
 }
 
 impl Sys4RelationEndpointReceipt {
@@ -6883,6 +7197,10 @@ impl Sys4RelationEndpointReceipt {
 
     pub(crate) fn owner_publish_occurrence_id(&self) -> &str {
         &self.owner_publish_occurrence_id
+    }
+
+    pub(crate) fn fresh_reacquire(&self) -> Option<&Sys4FreshReacquireEvidence> {
+        self.fresh_reacquire.as_ref()
     }
 
     /// The actual generated request occurrence at the source outbox.  The
@@ -7010,6 +7328,104 @@ impl LocalFabric {
         self.run_relation_transition_atomically(relation, Self::invalidate_relation_primary_staged)
     }
 
+    /// Retire the membership at a relation's explicitly checked primary
+    /// anchor, then have the relation owner degrade and publish the fallback.
+    /// The schedule names only the checked relation: the participant locus,
+    /// principal, M9 lineage, authority successor, and generated relation
+    /// endpoint are all derived internally.  The bounded ST transition is
+    /// failure-atomic; duplicate/stale membership, missing explicit anchor,
+    /// and endpoint failure leave the live fabric unchanged.
+    pub(crate) fn participant_leave_relation_primary(
+        &mut self,
+        relation: &str,
+    ) -> Sys4Result<Sys4ParticipantLeaveReceipt> {
+        if self.backend.profile() != BackendProfile::St {
+            return Err(Sys4DispatchDiagnostics::one(
+                Sys4DiagnosticKind::BackendIneligible,
+            ));
+        }
+        self.run_participant_leave_transition_atomically(
+            relation,
+            Self::participant_leave_relation_primary_staged,
+        )
+    }
+
+    fn participant_leave_relation_primary_staged(
+        &mut self,
+        relation: &str,
+    ) -> Sys4Result<Sys4ParticipantLeaveReceipt> {
+        let participant_locus = self.explicit_primary_anchor_locus(relation)?;
+        self.ensure_participant_leave_identifier_capacity()?;
+
+        let lifecycle_request_identity =
+            self.next_request_id_with_prefix("sys4-external-lifecycle-request-")?;
+        let lifecycle_enqueue_occurrence_id =
+            self.next_mailbox_token("participant-leave-enqueue")?;
+        self.causality
+            .record(lifecycle_enqueue_occurrence_id.clone(), Vec::new());
+        let transition = self
+            .m9_authority_lifecycle_mut()
+            .retire_source_declared_primary_anchor(relation, &participant_locus)?;
+        let inspection = transition.sealed_m9_inspection();
+        let retirement = inspection.membership_retirement().clone();
+        let prior_generation_ref = inspection.prior_generation().generation_ref().to_string();
+        let successor_generation_ref = inspection
+            .successor_generation()
+            .generation_ref()
+            .to_string();
+        let m9_transition_ref = transition.observer_transition_ref().ok_or_else(|| {
+            Sys4DispatchDiagnostics::one(Sys4DiagnosticKind::ProgramAdmissionMismatch)
+        })?;
+        let m9_retire_occurrence_id = self.next_mailbox_token("participant-leave-retire")?;
+        self.causality.record(
+            m9_retire_occurrence_id.clone(),
+            vec![lifecycle_enqueue_occurrence_id.clone()],
+        );
+        self.apply_admitted_authority_lifecycle(transition)?;
+        let relation_endpoint = self.invalidate_relation_primary_staged(relation)?;
+        self.causality.record(
+            relation_endpoint.owner_publish_occurrence_id().to_string(),
+            vec![m9_retire_occurrence_id.clone()],
+        );
+        if !self.causality.reaches(
+            relation_endpoint.owner_publish_occurrence_id(),
+            &m9_retire_occurrence_id,
+        ) {
+            return Err(Sys4DispatchDiagnostics::one(
+                Sys4DiagnosticKind::ProgramAdmissionMismatch,
+            ));
+        }
+        let lifecycle_receipt_occurrence_id =
+            self.next_mailbox_token("participant-leave-receipt")?;
+        self.causality.record(
+            lifecycle_receipt_occurrence_id.clone(),
+            vec![relation_endpoint.consumer_serve_occurrence_id().to_string()],
+        );
+        Ok(Sys4ParticipantLeaveReceipt {
+            relation: relation.to_string(),
+            participant_locus,
+            lifecycle_request_identity,
+            lifecycle_enqueue_occurrence_id,
+            m9_retire_occurrence_id,
+            lifecycle_receipt_occurrence_id,
+            checked_membership_identity_ref: retirement
+                .checked_membership_identity_ref()
+                .to_string(),
+            prior_membership_ref: retirement.prior_membership_ref().to_string(),
+            successor_tombstone_ref: retirement.successor_tombstone_ref().to_string(),
+            membership_epoch_before_ref: retirement.membership_epoch_before_ref().to_string(),
+            membership_epoch_after_ref: retirement.membership_epoch_after_ref().to_string(),
+            incarnation_before_ref: retirement.incarnation_before_ref().to_string(),
+            incarnation_after_ref: retirement.incarnation_after_ref().to_string(),
+            capability_lineage_ref: retirement.capability_lineage_ref().to_string(),
+            witness_lineage_ref: retirement.witness_lineage_ref().to_string(),
+            prior_generation_ref,
+            successor_generation_ref,
+            m9_transition_ref,
+            relation_endpoint,
+        })
+    }
+
     /// Execute the owner-side invalidation on a cloneable ST candidate.  The
     /// generated relation endpoint is part of the same semantic transition:
     /// if its dispatch fails, no owner mutation, M8 occurrence, local carrier,
@@ -7049,9 +7465,12 @@ impl LocalFabric {
         )
     }
 
-    /// Activate a fresh relation binding only in a candidate ST fabric.  The
-    /// binding is consumed when, and only when, its derived publication has
-    /// crossed the generated endpoint successfully.
+    /// Activate a fresh relation binding only in a candidate ST fabric.  If a
+    /// source-declared primary was retired, the absent binding is restored
+    /// only by a new M9-issued primary membership/incarnation and its sealed
+    /// checked scope inventory; ordinary legacy bindings retain their M10
+    /// behavior.  The binding is consumed when, and only when, its derived
+    /// publication has crossed the generated endpoint successfully.
     fn fresh_reacquire_relation_primary_staged(
         &mut self,
         relation: &str,
@@ -7071,7 +7490,50 @@ impl LocalFabric {
                 Sys4DiagnosticKind::M8ExecutionRejected,
             ));
         }
-        self.ensure_relation_dispatch_identifier_capacity()?;
+        let mut fresh_reacquire = None;
+        if self
+            .authority_generation
+            .fresh_relation_reacquire_binding(relation)
+            .is_none()
+        {
+            self.ensure_fresh_anchor_reacquire_identifier_capacity()?;
+            let lifecycle_request_identity =
+                self.next_request_id_with_prefix("sys4-external-lifecycle-request-")?;
+            let lifecycle_enqueue_occurrence_id =
+                self.next_mailbox_token("primary-reacquire-enqueue")?;
+            self.causality
+                .record(lifecycle_enqueue_occurrence_id.clone(), Vec::new());
+            let transition = self
+                .m9_authority_lifecycle_mut()
+                .reacquire_source_declared_primary_anchor(relation)?;
+            let inspection = transition.sealed_m9_inspection();
+            let reacquire_lineage = inspection.membership_reacquire().clone();
+            let prior_generation_ref = inspection.prior_generation().generation_ref().to_string();
+            let successor_generation_ref = inspection
+                .successor_generation()
+                .generation_ref()
+                .to_string();
+            let m9_transition_ref = transition.observer_transition_ref().ok_or_else(|| {
+                Sys4DispatchDiagnostics::one(Sys4DiagnosticKind::ProgramAdmissionMismatch)
+            })?;
+            let m9_reacquire_occurrence_id = self.next_mailbox_token("primary-reacquire-m9")?;
+            self.causality.record(
+                m9_reacquire_occurrence_id.clone(),
+                vec![lifecycle_enqueue_occurrence_id.clone()],
+            );
+            self.apply_admitted_authority_lifecycle(transition)?;
+            fresh_reacquire = Some((
+                lifecycle_request_identity,
+                lifecycle_enqueue_occurrence_id,
+                m9_reacquire_occurrence_id,
+                reacquire_lineage,
+                prior_generation_ref,
+                successor_generation_ref,
+                m9_transition_ref,
+            ));
+        } else {
+            self.ensure_relation_dispatch_identifier_capacity()?;
+        }
         let publish_authority = self.relation_publication_authority(&edge)?;
         let _target_admission = self.relation_publication_target_admission(&edge)?;
         let binding = self
@@ -7092,7 +7554,67 @@ impl LocalFabric {
             .publish_relation(edge.source_locus(), relation, publish_authority)
             .map_err(Sys4DispatchDiagnostics::one)?;
         let publication = self.qualify_owner_relation_publication(&edge, publication)?;
-        self.dispatch_relation_publication(edge, publication)
+        let mut receipt = self.dispatch_relation_publication(edge, publication)?;
+        if let Some((
+            lifecycle_request_identity,
+            lifecycle_enqueue_occurrence_id,
+            m9_reacquire_occurrence_id,
+            reacquire_lineage,
+            prior_generation_ref,
+            successor_generation_ref,
+            m9_transition_ref,
+        )) = fresh_reacquire
+        {
+            self.causality.record(
+                receipt.owner_publish_occurrence_id().to_string(),
+                vec![m9_reacquire_occurrence_id.clone()],
+            );
+            if !self.causality.reaches(
+                receipt.owner_publish_occurrence_id(),
+                &m9_reacquire_occurrence_id,
+            ) {
+                return Err(Sys4DispatchDiagnostics::one(
+                    Sys4DiagnosticKind::ProgramAdmissionMismatch,
+                ));
+            }
+            let lifecycle_receipt_occurrence_id =
+                self.next_mailbox_token("primary-reacquire-receipt")?;
+            self.causality.record(
+                lifecycle_receipt_occurrence_id.clone(),
+                vec![receipt.consumer_serve_occurrence_id().to_string()],
+            );
+            receipt.fresh_reacquire = Some(Sys4FreshReacquireEvidence {
+                source_derived: true,
+                lifecycle_request_identity,
+                lifecycle_enqueue_occurrence_id,
+                m9_reacquire_occurrence_id,
+                lifecycle_receipt_occurrence_id,
+                checked_primary_anchor_ref: reacquire_lineage
+                    .checked_primary_anchor_ref()
+                    .to_string(),
+                prior_membership_ref: reacquire_lineage.prior_membership_ref().to_string(),
+                prior_membership_epoch_ref: reacquire_lineage
+                    .prior_membership_epoch_ref()
+                    .to_string(),
+                prior_incarnation_ref: reacquire_lineage.prior_incarnation_ref().to_string(),
+                retired_membership_ref: reacquire_lineage.retired_membership_ref().to_string(),
+                retired_membership_epoch_ref: reacquire_lineage
+                    .retired_membership_epoch_ref()
+                    .to_string(),
+                retired_incarnation_ref: reacquire_lineage.retired_incarnation_ref().to_string(),
+                fresh_membership_ref: reacquire_lineage.fresh_membership_ref().to_string(),
+                fresh_membership_epoch_ref: reacquire_lineage
+                    .fresh_membership_epoch_ref()
+                    .to_string(),
+                fresh_incarnation_ref: reacquire_lineage.fresh_incarnation_ref().to_string(),
+                capability_lineage_ref: reacquire_lineage.capability_lineage_ref().to_string(),
+                witness_lineage_ref: reacquire_lineage.witness_lineage_ref().to_string(),
+                prior_generation_ref,
+                successor_generation_ref,
+                m9_transition_ref,
+            });
+        }
+        Ok(receipt)
     }
 
     /// Relation invalidation and fresh-reacquire are one semantic operation
@@ -7116,8 +7638,65 @@ impl LocalFabric {
             .clone_for_checked_patch()
             .map_err(Sys4DispatchDiagnostics::one)?;
         let receipt = transition(&mut candidate, relation)?;
-        *self = candidate;
+        self.commit_staged_authority_candidate(candidate)?;
         Ok(receipt)
+    }
+
+    /// The membership retirement must be in the same cloneable ST candidate
+    /// as the relation owner's invalidation/publication.  M9 advances only
+    /// inside that candidate; if routing or publication fails, dropping it
+    /// also drops the uninstalled successor publisher and leaves the live
+    /// membership lineage untouched.
+    fn run_participant_leave_transition_atomically(
+        &mut self,
+        relation: &str,
+        transition: fn(&mut Self, &str) -> Sys4Result<Sys4ParticipantLeaveReceipt>,
+    ) -> Sys4Result<Sys4ParticipantLeaveReceipt> {
+        let mut candidate = self
+            .clone_for_checked_patch()
+            .map_err(Sys4DispatchDiagnostics::one)?;
+        let receipt = transition(&mut candidate, relation)?;
+        self.commit_staged_authority_candidate(candidate)?;
+        Ok(receipt)
+    }
+
+    /// Complete the second phase of a staged relation/lifecycle operation.
+    /// Candidate execution uses a private floor; only after generated
+    /// dispatch has succeeded do we validate and advance the canonical floor
+    /// shared by live fabrics, then install that same floor into the winning
+    /// candidate.  Any error leaves `self` untouched.
+    fn commit_staged_authority_candidate(&mut self, mut candidate: Self) -> Sys4Result<()> {
+        let live_floor = self.authority_live_floor.clone();
+        // The candidate may preserve this fabric's numeric generation (for
+        // example, an M8-only relation fallback).  It still cannot install
+        // after a sibling sharing this floor has advanced M9 while the
+        // candidate endpoint work was in flight. Hold the exact matching
+        // guard through either install path.
+        let Some(mut floor_guard) = live_floor.guard_matching(&self.authority_generation) else {
+            return Err(Sys4DispatchDiagnostics::one(
+                Sys4DiagnosticKind::ProgramAdmissionMismatch,
+            ));
+        };
+        if candidate
+            .authority_generation
+            .matches_for_restore(&self.authority_generation)
+        {
+            candidate.authority_live_floor = live_floor.clone();
+            *self = candidate;
+            return Ok(());
+        }
+
+        if !floor_guard
+            .accepts_successor(&self.authority_generation, &candidate.authority_generation)
+        {
+            return Err(Sys4DispatchDiagnostics::one(
+                Sys4DiagnosticKind::ProgramAdmissionMismatch,
+            ));
+        }
+        floor_guard.commit_successor(&candidate.authority_generation);
+        candidate.authority_live_floor = live_floor.clone();
+        *self = candidate;
+        Ok(())
     }
 
     pub(crate) fn relation_imported_shadow(
@@ -7241,6 +7820,32 @@ impl LocalFabric {
             .ok_or_else(|| Sys4DispatchDiagnostics::one(Sys4DiagnosticKind::RouteUnavailable))
     }
 
+    /// A participant leave is admitted only where checked Core carries an
+    /// explicit primary-anchor locus.  Legacy anchors without a locus cannot
+    /// be inferred from names or topology, and therefore fail closed.
+    fn explicit_primary_anchor_locus(&self, relation: &str) -> Sys4Result<String> {
+        let fragments = self.program.projection.sys4_artifact_fragments();
+        let core = fragments
+            .entries()
+            .iter()
+            .find(|fragment| {
+                fragment.operation_id() == relation
+                    && fragment.fragment_kind()
+                        == ProjectedOperationFragmentKind::RelationPublication
+            })
+            .and_then(|fragment| fragment.relation_checked_core())
+            .ok_or_else(|| Sys4DispatchDiagnostics::one(Sys4DiagnosticKind::RouteUnavailable))?;
+        let locus = core.primary().anchor_locus().ok_or_else(|| {
+            Sys4DispatchDiagnostics::one(Sys4DiagnosticKind::ProgramProjectionMismatch)
+        })?;
+        if locus.is_empty() || !self.loci.contains_key(locus) {
+            return Err(Sys4DispatchDiagnostics::one(
+                Sys4DiagnosticKind::ProgramProjectionMismatch,
+            ));
+        }
+        Ok(locus.to_string())
+    }
+
     fn relation_publication_authority(
         &self,
         edge: &CommunicationEdge,
@@ -7261,6 +7866,34 @@ impl LocalFabric {
             .and(
                 self.next_endpoint_occurrence
                     .checked_add(RELATION_DISPATCH_ENDPOINT_OCCURRENCES),
+            )
+            .ok_or_else(|| Sys4DispatchDiagnostics::one(Sys4DiagnosticKind::IdentifierExhausted))
+            .map(|_| ())
+    }
+
+    /// Reserve the leave occurrence plus its one generated relation
+    /// publication before M9 can retire the member in the ST candidate.
+    fn ensure_participant_leave_identifier_capacity(&self) -> Sys4Result<()> {
+        self.next_request
+            .checked_add(2)
+            .and(
+                self.next_endpoint_occurrence
+                    .checked_add(RELATION_DISPATCH_ENDPOINT_OCCURRENCES + 3),
+            )
+            .ok_or_else(|| Sys4DispatchDiagnostics::one(Sys4DiagnosticKind::IdentifierExhausted))
+            .map(|_| ())
+    }
+
+    /// A source-declared primary reacquire adds one external lifecycle
+    /// identity and three retained lifecycle occurrences to its generated
+    /// relation publication.  Reserve the complete ST transition before M9
+    /// issues the fresh membership so exhaustion remains failure-atomic.
+    fn ensure_fresh_anchor_reacquire_identifier_capacity(&self) -> Sys4Result<()> {
+        self.next_request
+            .checked_add(2)
+            .and(
+                self.next_endpoint_occurrence
+                    .checked_add(RELATION_DISPATCH_ENDPOINT_OCCURRENCES + 3),
             )
             .ok_or_else(|| Sys4DispatchDiagnostics::one(Sys4DiagnosticKind::IdentifierExhausted))
             .map(|_| ())
@@ -7443,6 +8076,7 @@ impl LocalFabric {
             consumer_serve_occurrence_id: serve,
             edge,
             shadow,
+            fresh_reacquire: None,
         };
         if !self.observer_exact_relation_endpoint_receipt(&receipt) {
             return Err(Sys4DispatchDiagnostics::one(
@@ -7890,6 +8524,11 @@ impl LocalFabric {
         prepared.authority_lifecycle = M9AuthorityLifecycle {
             publisher: rebased_authority_publisher,
         };
+        // `clone_for_checked_patch` intentionally detached this candidate's
+        // floor.  The canonical floor has now been rebased under its guard,
+        // so the installed fabric must rejoin that canonical identity rather
+        // than retaining a private candidate floor.
+        prepared.authority_live_floor = self.authority_live_floor.clone();
 
         let activation_frontier = prepared.current_patch_frontier();
         let lifecycle = Sys4PatchLifecycle {
@@ -7959,7 +8598,12 @@ impl LocalFabric {
             backend: self.backend.clone_for_checked_patch()?,
             authority_generation: self.authority_generation.clone(),
             authority_lifecycle: self.authority_lifecycle.clone(),
-            authority_live_floor: self.authority_live_floor.clone(),
+            // Candidate execution must not share the canonical live floor:
+            // an M9 successor is committed there only after all generated
+            // routing/publication stages have succeeded.
+            authority_live_floor: M9AuthorityLiveFloor::detached_candidate(
+                self.authority_generation.clone(),
+            ),
             trace: self.trace.clone(),
             m8_trace: self.m8_trace.clone(),
             actual_m8_trace: self.actual_m8_trace.clone(),
@@ -9250,6 +9894,34 @@ impl LocalFabric {
     #[cfg(test)]
     pub(crate) fn for_test_clear_route_fault(&mut self, edge_ref: &str) {
         self.route_faults.remove(edge_ref);
+    }
+
+    /// Test-only seam for the two-phase candidate commit boundary. It runs
+    /// the real source-derived M8 fallback and generated endpoint work on an
+    /// isolated candidate, but deliberately withholds the canonical-floor
+    /// commit so a competing sibling transition can be placed deterministically
+    /// between the two phases.
+    #[cfg(test)]
+    pub(crate) fn for_test_stage_relation_invalidation_candidate(
+        &self,
+        relation: &str,
+    ) -> Sys4Result<Self> {
+        let mut candidate = self
+            .clone_for_checked_patch()
+            .map_err(Sys4DispatchDiagnostics::one)?;
+        candidate.invalidate_relation_primary_staged(relation)?;
+        Ok(candidate)
+    }
+
+    /// Test-only completion for a candidate built by
+    /// `for_test_stage_relation_invalidation_candidate`. It exposes no
+    /// authority input and shares the production two-phase commit check.
+    #[cfg(test)]
+    pub(crate) fn for_test_commit_staged_relation_candidate(
+        &mut self,
+        candidate: Self,
+    ) -> Sys4Result<()> {
+        self.commit_staged_authority_candidate(candidate)
     }
 
     #[cfg(test)]

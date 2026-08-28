@@ -321,6 +321,87 @@ impl Sys5LocalProject {
             .unwrap_or("")
     }
 
+    /// Prepare the one deterministic, source-derived ST admission used by
+    /// the provisional local CLI workflow.  The helper derives its principal,
+    /// complete locus inventory, residual discharge names, and non-secret
+    /// membership labels from the retained checked/projected program; it does
+    /// not accept a route, state seed, authority carrier, or result from the
+    /// caller.
+    pub fn prepare_canonical_local_st_admission(
+        &self,
+    ) -> Result<Sys5PreparedAdmission, Sys5LocalAdmissionError> {
+        let principals = self
+            .checked
+            .evaluations()
+            .iter()
+            .filter_map(|evaluation| {
+                evaluation
+                    .owner_rmw_core()
+                    .map(|_| evaluation.actor_authority_origin().to_string())
+            })
+            .collect::<BTreeSet<_>>();
+        let Some(principal) = (principals.len() == 1)
+            .then(|| principals.iter().next().expect("one principal").clone())
+        else {
+            return Err(Sys5LocalAdmissionError::new(
+                Sys5LocalAdmissionErrorKind::PrincipalPolicyMismatch,
+            ));
+        };
+        let loci = self.projection.locus_order();
+        let Some(anchor_locus) = loci.first().map(|locus| (*locus).to_string()) else {
+            return Err(Sys5LocalAdmissionError::new(
+                Sys5LocalAdmissionErrorKind::UnknownLocus,
+            ));
+        };
+        let Some(auth_name) = self
+            .checked
+            .residual_obligations()
+            .entries()
+            .iter()
+            .find(|residual| residual.kind() == ResidualObligationKind::AuthDeferred)
+            .map(|residual| residual.name().to_string())
+        else {
+            return Err(Sys5LocalAdmissionError::new(
+                Sys5LocalAdmissionErrorKind::MissingAuthDischarge,
+            ));
+        };
+        let Some(verification_name) = self
+            .checked
+            .residual_obligations()
+            .entries()
+            .iter()
+            .find(|residual| residual.kind() == ResidualObligationKind::VerifyDeferred)
+            .map(|residual| residual.name().to_string())
+        else {
+            return Err(Sys5LocalAdmissionError::new(
+                Sys5LocalAdmissionErrorKind::MissingVerificationDischarge,
+            ));
+        };
+
+        let mut request = Sys5LocalAdmissionRequest::source_declared(
+            &principal,
+            &anchor_locus,
+            format!("sys5-local-st:{principal}:{anchor_locus}:epoch"),
+            format!("sys5-local-st:{principal}:{anchor_locus}:incarnation"),
+            Sys5LocalRuntimeProfile::St,
+        )
+        .with_relation_bootstrap_policy(Sys5RelationBootstrapPolicy::FreshAtAdmission)
+        .with_auth_discharge(auth_name)
+        .with_optional_verification_discharge(verification_name);
+        for locus in loci
+            .into_iter()
+            .filter(|locus| *locus != anchor_locus.as_str())
+        {
+            request = request.with_source_declared_membership(
+                &principal,
+                locus,
+                format!("sys5-local-st:{principal}:{locus}:epoch"),
+                format!("sys5-local-st:{principal}:{locus}:incarnation"),
+            );
+        }
+        self.prepare_finite_admission(request)
+    }
+
     fn validate_source_derived_membership_request(
         &self,
         request: &Sys5LocalAdmissionRequest,
@@ -426,6 +507,14 @@ impl Sys5LocalProject {
                     request.principal.clone(),
                     relation.owner_locus().to_string(),
                 ));
+                // Explicit anchor loci are semantic membership dependencies,
+                // not names to infer from the relation owner or transport.
+                // Legacy Core has no such binding and retains its M10 shape.
+                for anchor in [relation.primary(), relation.fallback()] {
+                    if let Some(anchor_locus) = anchor.anchor_locus() {
+                        required.insert((request.principal.clone(), anchor_locus.to_string()));
+                    }
+                }
             }
             if let Some(designated) = evaluation.designated_core() {
                 required.insert((
@@ -986,6 +1075,24 @@ impl fmt::Debug for Sys5PreparedAdmission {
 }
 
 impl Sys5PreparedAdmission {
+    /// Clone one already sealed admission only for an internal fresh-fabric
+    /// restore. This is intentionally narrower than a public clone surface:
+    /// callers cannot duplicate the authority/admission carrier themselves.
+    pub(crate) fn clone_for_local_restore(&self) -> Self {
+        Self {
+            program: self.program.clone(),
+            admission: self.admission.clone(),
+            summary: self.summary.clone(),
+            inventory: self.inventory.clone(),
+            sealed_attestation: self.sealed_attestation.clone(),
+            startup_plan: self.startup_plan.clone(),
+            source_principal: self.source_principal.clone(),
+            vertical_bindings: self.vertical_bindings.clone(),
+        }
+    }
+}
+
+impl Sys5PreparedAdmission {
     pub fn observer_safe_admission_summary(&self) -> &Sys5AdmissionSummary {
         &self.summary
     }
@@ -1085,6 +1192,8 @@ impl Sys5PreparedAdmission {
             bindings: self.vertical_bindings,
             joined_report,
             relation_shadows: BTreeMap::new(),
+            completed_participant_leaves: BTreeMap::new(),
+            last_participant_leave_failure: None,
             next_lifecycle_occurrence: 0,
         })
     }
@@ -1164,6 +1273,11 @@ impl Sys5PreparedAdmission {
             bindings: self.vertical_bindings,
             joined_report,
             relation_shadows: cut.relation_shadows.clone(),
+            // This observer-safe M9/M8 receipt state is part of the checked
+            // local continuation: fresh re-admission must bind the exact
+            // prior leave, not reconstruct it from joined-row order.
+            completed_participant_leaves: cut.completed_participant_leaves.clone(),
+            last_participant_leave_failure: cut.last_participant_leave_failure.clone(),
             next_lifecycle_occurrence,
         })
     }
@@ -1892,6 +2006,7 @@ pub enum Sys5CutCorruptionKind {
     CounterRollback,
     RelationDigest,
     LifecycleOccurrenceCounter,
+    ParticipantLeaveEvidence,
 }
 
 /// A SYS-5 wrapper around the exact SYS-4 process-local cut.  It is neither
@@ -1909,6 +2024,8 @@ pub struct Sys5LocalCut {
     source_principal_ref: String,
     joined_prefix: Vec<String>,
     relation_shadows: BTreeMap<(String, String), Sys5RelationObserverShadow>,
+    completed_participant_leaves: BTreeMap<String, Sys5ParticipantLeaveEvidence>,
+    last_participant_leave_failure: Option<Sys5ParticipantLeaveFailureEvidence>,
     sys4_cut_integrity_ref: String,
     next_lifecycle_occurrence: u64,
     integrity_ref: String,
@@ -1930,6 +2047,14 @@ impl fmt::Debug for Sys5LocalCut {
             )
             .field("artifact_projection_ref", &self.artifact_projection_ref)
             .field("joined_prefix_len", &self.joined_prefix.len())
+            .field(
+                "completed_participant_leave_count",
+                &self.completed_participant_leaves.len(),
+            )
+            .field(
+                "has_last_participant_leave_failure",
+                &self.last_participant_leave_failure.is_some(),
+            )
             .field("integrity_ref", &self.integrity_ref)
             .field("status", &"bounded-private-local-cut")
             .finish()
@@ -1953,6 +2078,8 @@ impl Sys5LocalCut {
             source_principal_ref,
             joined_prefix: runtime.joined_report.rows.clone(),
             relation_shadows: runtime.relation_shadows.clone(),
+            completed_participant_leaves: runtime.completed_participant_leaves.clone(),
+            last_participant_leave_failure: runtime.last_participant_leave_failure.clone(),
             sys4_cut_integrity_ref,
             next_lifecycle_occurrence: runtime.next_lifecycle_occurrence,
             integrity_ref: String::new(),
@@ -1964,7 +2091,7 @@ impl Sys5LocalCut {
 
     fn compute_integrity_ref(&self) -> String {
         local_cut_ref(&format!(
-            "cut={};program={};admission={};artifact={};startup={};bindings={};principal={};prefix={:?};shadows={:?};sys4={};next_lifecycle_occurrence={}",
+            "cut={};program={};admission={};artifact={};startup={};bindings={};principal={};prefix={:?};shadows={:?};completed_participant_leaves={:?};last_participant_leave_failure={:?};sys4={};next_lifecycle_occurrence={}",
             self.cut_id_ref,
             self.checked_program_identity_ref,
             self.sealed_admission_attestation_ref,
@@ -1974,6 +2101,8 @@ impl Sys5LocalCut {
             self.source_principal_ref,
             self.joined_prefix,
             self.relation_shadows,
+            self.completed_participant_leaves,
+            self.last_participant_leave_failure,
             self.sys4_cut_integrity_ref,
             self.next_lifecycle_occurrence,
         ))
@@ -2038,6 +2167,9 @@ impl Sys5LocalCut {
             }
             Sys5CutCorruptionKind::LifecycleOccurrenceCounter => {
                 self.next_lifecycle_occurrence = u64::MAX;
+            }
+            Sys5CutCorruptionKind::ParticipantLeaveEvidence => {
+                self.completed_participant_leaves.clear();
             }
         }
         self
@@ -2254,6 +2386,7 @@ impl Sys5PatchLifecycle {
 pub struct Sys5PatchOutcome {
     verdict: Sys5PatchVerdict,
     primary_diagnostic_kind: Option<Sys5PatchDiagnosticKind>,
+    patch_occurrence_ref: String,
     lifecycle: Sys5PatchLifecycle,
     boundary_inspection: Sys5LocalPatchBoundaryInspection,
     base_frontier: Sys5PatchFrontier,
@@ -2267,6 +2400,12 @@ impl Sys5PatchOutcome {
 
     pub const fn primary_diagnostic_kind(&self) -> Option<Sys5PatchDiagnosticKind> {
         self.primary_diagnostic_kind
+    }
+
+    /// Exact observer-safe lifecycle occurrence allocated by the active
+    /// runtime for this accepted or rejected patch transition.
+    pub fn patch_occurrence_ref(&self) -> &str {
+        &self.patch_occurrence_ref
     }
 
     pub fn lifecycle(&self) -> &Sys5PatchLifecycle {
@@ -2374,6 +2513,11 @@ pub enum Sys5VerticalAction {
     WorldTick(String),
     ViewerCConsumeWorldResult,
     PublishRelation(String),
+    ViewerCPresentationGap(String),
+    /// Retire the source-declared membership at a relation's explicit primary
+    /// anchor, then dispatch the generated owner-side fallback publication.
+    /// The external schedule supplies only the checked relation name.
+    ParticipantALeaveRelationPrimary(String),
     InvalidateRelationPrimary(String),
     FreshReacquireRelationPrimary(String),
     RevokeViewerCConsumerCapability(String),
@@ -2398,6 +2542,20 @@ impl Sys5VerticalAction {
 
     pub fn publish_relation(relation: impl Into<String>) -> Self {
         Self::PublishRelation(relation.into())
+    }
+
+    /// Execute a consumer-local presentation fallback against an already
+    /// imported relation shadow. It cannot publish, mint authority, or mutate
+    /// the owner-side semantic relation.
+    pub fn viewer_c_presentation_gap(relation: impl Into<String>) -> Self {
+        Self::ViewerCPresentationGap(relation.into())
+    }
+
+    /// Request the source-derived ParticipantA lifecycle path.  Participant,
+    /// principal, membership, capability, witness, endpoint, and authority
+    /// are recovered from checked projection and admitted M9 state only.
+    pub fn participant_a_leave_relation_primary(relation: impl Into<String>) -> Self {
+        Self::ParticipantALeaveRelationPrimary(relation.into())
     }
 
     /// Request the source-derived relation invalidation path.  The action
@@ -2444,6 +2602,8 @@ pub struct Sys5VerticalSliceRuntime {
     bindings: Sys5VerticalBindings,
     joined_report: Sys5VerticalJoinedReport,
     relation_shadows: BTreeMap<(String, String), Sys5RelationObserverShadow>,
+    completed_participant_leaves: BTreeMap<String, Sys5ParticipantLeaveEvidence>,
+    last_participant_leave_failure: Option<Sys5ParticipantLeaveFailureEvidence>,
     next_lifecycle_occurrence: u64,
 }
 
@@ -2473,6 +2633,7 @@ pub enum Sys5VerticalDiagnosticKind {
     FabricBootRejected,
     VerticalInventoryIncomplete,
     RelationFreshBindingAlreadyConsumed,
+    DuplicateParticipantLeave,
     DispatchRejected,
 }
 
@@ -2509,6 +2670,7 @@ impl Sys5VerticalSliceError {
             Sys5VerticalDiagnosticKind::UnknownSourceOperation
                 | Sys5VerticalDiagnosticKind::UnknownSourceValue
                 | Sys5VerticalDiagnosticKind::RelationFreshBindingAlreadyConsumed
+                | Sys5VerticalDiagnosticKind::DuplicateParticipantLeave
         )
     }
 
@@ -2518,6 +2680,7 @@ impl Sys5VerticalSliceError {
             Sys5VerticalDiagnosticKind::UnknownSourceOperation
                 | Sys5VerticalDiagnosticKind::UnknownSourceValue
                 | Sys5VerticalDiagnosticKind::RelationFreshBindingAlreadyConsumed
+                | Sys5VerticalDiagnosticKind::DuplicateParticipantLeave
         )
     }
 
@@ -2529,6 +2692,7 @@ impl Sys5VerticalSliceError {
                 | Sys5VerticalDiagnosticKind::RelationFreshBindingAlreadyConsumed
                 | Sys5VerticalDiagnosticKind::MissingPublishedDesignatedValue
                 | Sys5VerticalDiagnosticKind::MissingConsumerCapability
+                | Sys5VerticalDiagnosticKind::DuplicateParticipantLeave
         )
     }
 }
@@ -2599,10 +2763,208 @@ pub struct Sys5VerticalReceipt {
     evaluator_locus: Option<String>,
     consumer_locus: Option<String>,
     typed_int: Option<i64>,
+    designated_result_version: Option<u64>,
+    designated_delivery_ref: Option<String>,
+    designated_cache_binding_ref: Option<String>,
     performed_m8_semantic_consumption: bool,
     returned_from_designated_cache_after_authority_revalidation: bool,
     relation_shadow: Option<Sys5RelationObserverShadow>,
+    presentation_gap_evidence: Option<Sys5PresentationGapEvidence>,
+    participant_leave_evidence: Option<Sys5ParticipantLeaveEvidence>,
+    fresh_reacquire_evidence: Option<Sys5FreshReacquireEvidence>,
     no_direct_cross_locus_store_mutation: bool,
+}
+
+/// Observer-safe result of one actual M8 consumer-local presentation action.
+///
+/// It deliberately retains the result classification and opaque references,
+/// never source text, anchor samples, credentials, or raw authority material.
+#[derive(Debug, Clone, PartialEq, Eq, Serialize)]
+pub struct Sys5PresentationGapEvidence {
+    relation: String,
+    consumer_locus: String,
+    projection_kind: String,
+    publishes_value: bool,
+    absolute_stream_count: usize,
+    restriction: String,
+    restriction_ref: String,
+    redaction: String,
+    redaction_ref: String,
+    selected_anchor: String,
+    selected_anchor_ref: String,
+    selected_floor: String,
+    selected_floor_ref: String,
+    context_frontier_ref: String,
+    semantic_digest_before: String,
+    semantic_digest_after: String,
+    endpoint_count_before: usize,
+    endpoint_count_after: usize,
+    derived_from_actual_action: bool,
+}
+
+/// Observer-safe evidence from the actual source-derived ParticipantA leave
+/// transition. All membership, incarnation, capability, and witness facts
+/// are represented only by opaque refs produced from the M9/SYS-4 receipt.
+#[derive(Debug, Clone, PartialEq, Eq, Serialize)]
+pub struct Sys5ParticipantLeaveEvidence {
+    action: String,
+    source_derived: bool,
+    external_lifecycle_request: bool,
+    principal: String,
+    participant_locus: String,
+    retired_membership_locus: String,
+    m9_transition_kind: String,
+    checked_membership_identity_exact: bool,
+    membership_epoch_monotone: bool,
+    retired_lineage_capability: bool,
+    retired_lineage_witness: bool,
+    relation: String,
+    relation_owner_locus: String,
+    relation_owner_authority_preserved: bool,
+    m8_state_mutated_before_m9_retirement: bool,
+    direct_consumer_mutation: bool,
+    request_identity: String,
+    request_enqueue_occurrence_ref: String,
+    dispatch_occurrence_ref: String,
+    receive_occurrence_ref: String,
+    serve_occurrence_ref: String,
+    receipt_occurrence_ref: String,
+    m9_retire_occurrence_ref: String,
+    checked_membership_identity_ref: String,
+    prior_membership_ref: String,
+    successor_tombstone_ref: String,
+    membership_epoch_before_ref: String,
+    membership_epoch_after_ref: String,
+    incarnation_before_ref: String,
+    incarnation_after_ref: String,
+    prior_generation_ref: String,
+    successor_generation_ref: String,
+    capability_lineage_ref: String,
+    witness_lineage_ref: String,
+    request_frontier_ref: String,
+    result_frontier_ref: String,
+    selected_anchor_after: String,
+    selected_floor_after: String,
+    invalidates_relation_primary: bool,
+    direct_owner_mutation: bool,
+    fixture_schedule_authority_injection: bool,
+    relation_degradation: Sys5RelationDegradationEvidence,
+}
+
+/// The relation portion of an actual ParticipantA leave receipt, retained
+/// separately so devtools can follow the M9-retirement-before-publication
+/// edge without treating a Viewer projection as a semantic owner mutation.
+#[derive(Debug, Clone, PartialEq, Eq, Serialize)]
+pub struct Sys5RelationDegradationEvidence {
+    trigger_action: String,
+    source_derived: bool,
+    external_lifecycle_request: bool,
+    relation: String,
+    owner_locus: String,
+    prior_selected_anchor: String,
+    selected_anchor_after: String,
+    selected_floor_after: String,
+    m9_retirement_precedes_relation_publication: bool,
+    participant_b_owner_authority_preserved: bool,
+    direct_consumer_mutation: bool,
+    m9_retire_occurrence_ref: String,
+    relation_publish_occurrence_ref: String,
+    prior_relation_lineage_ref: String,
+    successor_relation_lineage_ref: String,
+    semantic_digest_before_ref: String,
+    semantic_digest_after_ref: String,
+    owner_authority_ref: String,
+}
+
+/// Observer-safe failure evidence for the one repeated, source-bound leave
+/// action in the finite workflow. The lower ST candidate has actually
+/// rejected the duplicate before it becomes live; these refs identify this
+/// observer event and before/after snapshots without exposing M9 material.
+#[derive(Debug, Clone, PartialEq, Eq, Serialize)]
+pub struct Sys5ParticipantLeaveFailureEvidence {
+    attempt: String,
+    diagnostic: String,
+    source_derived: bool,
+    external_lifecycle_request: bool,
+    failed_closed: bool,
+    partial_membership_retired: bool,
+    capability_or_witness_partially_retired: bool,
+    m9_successor_installed: bool,
+    m8_state_mutated: bool,
+    m8_relation_mutated: bool,
+    m8_designated_result_mutated: bool,
+    preserved_successful_m8_result_ref: bool,
+    request_identity: String,
+    request_enqueue_occurrence_ref: String,
+    reject_occurrence_ref: String,
+    receipt_occurrence_ref: String,
+    checked_membership_identity_ref: String,
+    active_generation_ref: String,
+    m8_state_digest_before_ref: String,
+    m8_state_digest_after_ref: String,
+    m8_relation_digest_before_ref: String,
+    m8_relation_digest_after_ref: String,
+    last_successful_m8_result_ref: String,
+}
+
+/// Observer-safe evidence from the actual source-derived fresh membership
+/// transition that makes a retired explicit primary anchor eligible again.
+/// It is not an admission API: no caller supplies an epoch, incarnation,
+/// membership reference, capability, witness, or authority material.
+#[derive(Debug, Clone, PartialEq, Eq, Serialize)]
+pub struct Sys5FreshReacquireEvidence {
+    action: String,
+    source_derived: bool,
+    external_lifecycle_request: bool,
+    relation: String,
+    participant_locus: String,
+    fresh_membership_locus: String,
+    m9_transition_kind: String,
+    fresh_membership_epoch_distinct: bool,
+    fresh_incarnation_distinct: bool,
+    fresh_lineage_capability: bool,
+    fresh_lineage_witness: bool,
+    relation_owner_locus: String,
+    relation_owner_authority_preserved: bool,
+    prior_selected_anchor: String,
+    selected_anchor_after: String,
+    selected_floor_after: String,
+    m9_fresh_membership_precedes_relation_publication: bool,
+    caller_supplied_epoch_or_incarnation: bool,
+    caller_supplied_membership_ref: bool,
+    caller_supplied_authority: bool,
+    fixture_schedule_authority_injection: bool,
+    direct_consumer_mutation: bool,
+    request_identity: String,
+    request_enqueue_occurrence_ref: String,
+    dispatch_occurrence_ref: String,
+    receive_occurrence_ref: String,
+    serve_occurrence_ref: String,
+    receipt_occurrence_ref: String,
+    m9_fresh_membership_occurrence_ref: String,
+    relation_publish_occurrence_ref: String,
+    retired_membership_ref: String,
+    fresh_membership_ref: String,
+    retired_membership_epoch_ref: String,
+    fresh_membership_epoch_ref: String,
+    retired_incarnation_ref: String,
+    fresh_incarnation_ref: String,
+    prior_generation_ref: String,
+    successor_generation_ref: String,
+    m9_transition_ref: String,
+    fresh_capability_lineage_ref: String,
+    fresh_witness_lineage_ref: String,
+    prior_relation_lineage_ref: String,
+    successor_relation_lineage_ref: String,
+    semantic_digest_before_ref: String,
+    semantic_digest_after_ref: String,
+    owner_authority_ref: String,
+}
+
+impl Sys5ParticipantLeaveEvidence {
+    pub fn relation_degradation(&self) -> &Sys5RelationDegradationEvidence {
+        &self.relation_degradation
+    }
 }
 
 #[derive(Debug, Clone, Default)]
@@ -2669,6 +3031,23 @@ impl Sys5VerticalReceipt {
         self.typed_int
     }
 
+    /// Actual designated result version carried by the generated delivery,
+    /// never inferred from a request identity or schedule position.
+    pub const fn designated_result_version(&self) -> Option<u64> {
+        self.designated_result_version
+    }
+
+    /// Opaque reference derived from the actual generated designated delivery.
+    pub fn designated_delivery_ref(&self) -> Option<&str> {
+        self.designated_delivery_ref.as_deref()
+    }
+
+    /// Opaque reference binding the actual delivery, value, consumer, and
+    /// carried result version into the admitted cache identity.
+    pub fn designated_cache_binding_ref(&self) -> Option<&str> {
+        self.designated_cache_binding_ref.as_deref()
+    }
+
     pub fn evaluator_locus_is(&self, locus: &str) -> bool {
         self.evaluator_locus.as_deref() == Some(locus)
     }
@@ -2694,6 +3073,18 @@ impl Sys5VerticalReceipt {
             shadow.consumer_locus() == consumer_locus && shadow.relation() == relation
         })
     }
+
+    pub fn presentation_gap_evidence(&self) -> Option<&Sys5PresentationGapEvidence> {
+        self.presentation_gap_evidence.as_ref()
+    }
+
+    pub fn participant_leave_evidence(&self) -> Option<&Sys5ParticipantLeaveEvidence> {
+        self.participant_leave_evidence.as_ref()
+    }
+
+    pub fn fresh_reacquire_evidence(&self) -> Option<&Sys5FreshReacquireEvidence> {
+        self.fresh_reacquire_evidence.as_ref()
+    }
 }
 
 /// One compact observer-safe causal view.  The values and private M9 material
@@ -2703,8 +3094,8 @@ impl Sys5VerticalReceipt {
 pub struct Sys5VerticalJoinedReport {
     // This is an event prefix, rather than a set of labels.  A set made a
     // restored cut look complete while losing the order in which its actual
-    // source→runtime evidence was observed.  Retain insertion order and
-    // deduplicate exact repeated rows at the recording boundary.
+    // source→runtime evidence was observed. Retain every insertion in order;
+    // duplicate-looking labels may denote distinct actual occurrences.
     rows: Vec<String>,
     verification_discharges: Vec<Sys5VerificationDischargeSummary>,
 }
@@ -2724,9 +3115,7 @@ impl Sys5VerticalJoinedReport {
     }
 
     fn push(&mut self, row: String) {
-        if !self.rows.contains(&row) {
-            self.rows.push(row);
-        }
+        self.rows.push(row);
     }
 
     pub fn verification_discharge(
@@ -2761,6 +3150,12 @@ impl Sys5VerticalSliceRuntime {
             Sys5VerticalAction::ViewerCConsumeWorldResult => self.dispatch_designated_consume(),
             Sys5VerticalAction::PublishRelation(relation) => {
                 self.dispatch_relation_publish(&relation)
+            }
+            Sys5VerticalAction::ViewerCPresentationGap(relation) => {
+                self.dispatch_relation_presentation_gap(&relation)
+            }
+            Sys5VerticalAction::ParticipantALeaveRelationPrimary(relation) => {
+                self.dispatch_participant_a_leave_relation_primary(&relation)
             }
             Sys5VerticalAction::InvalidateRelationPrimary(relation) => {
                 self.dispatch_relation_invalidate(&relation)
@@ -3024,7 +3419,7 @@ impl Sys5VerticalSliceRuntime {
                 ));
             }
         };
-        let outcome = sys5_patch_outcome(&sys4_outcome);
+        let outcome = sys5_patch_outcome(&sys4_outcome, patch_occurrence_ref.clone());
         let after_frontier_ref = outcome.activation_frontier.ref_digest.clone();
         let lifecycle_kind = match outcome.verdict {
             Sys5PatchVerdict::Accepted => "PatchAccepted",
@@ -3131,6 +3526,12 @@ impl Sys5VerticalSliceRuntime {
 
     pub fn observer_safe_joined_report(&self) -> &Sys5VerticalJoinedReport {
         &self.joined_report
+    }
+
+    /// The most recent source-bound leave failure, if the lower ST
+    /// transaction rejected it before any candidate state became live.
+    pub fn last_participant_leave_failure(&self) -> Option<&Sys5ParticipantLeaveFailureEvidence> {
+        self.last_participant_leave_failure.as_ref()
     }
 
     fn dispatch_owner_attack(&mut self) -> Result<Sys5VerticalReceipt, Sys5VerticalSliceError> {
@@ -3280,6 +3681,317 @@ impl Sys5VerticalSliceRuntime {
         self.relation_receipt_from_sys4(relation, receipt)
     }
 
+    fn dispatch_participant_a_leave_relation_primary(
+        &mut self,
+        relation: &str,
+    ) -> Result<Sys5VerticalReceipt, Sys5VerticalSliceError> {
+        if !self.bindings.relation_ids.contains(relation) {
+            return self.reject(Sys5VerticalDiagnosticKind::UnknownSourceOperation);
+        }
+        let before_shadow = self
+            .relation_shadows
+            .get(&("ViewerC".to_string(), relation.to_string()))
+            .cloned()
+            .ok_or_else(|| {
+                Sys5VerticalSliceError::new(Sys5VerticalDiagnosticKind::RelationTransitionRejected)
+            })?;
+        let before_state_digest = self.observer_safe_state_digest();
+        let before_relation_digest = self
+            .fabric
+            .relation_semantic_digest(relation)
+            .map(str::to_string)
+            .ok_or_else(|| {
+                Sys5VerticalSliceError::new(Sys5VerticalDiagnosticKind::RelationTransitionRejected)
+            })?;
+        let before_snapshot = self.observer_safe_runtime_snapshot();
+        let active_generation_ref = relation_observer_ref(&format!(
+            "active-generation:{}",
+            self.fabric
+                .current_m9_authority_inspection()
+                .generation()
+                .generation_ref()
+        ));
+
+        let lower = self.fabric.participant_leave_relation_primary(relation);
+        let lower = match lower {
+            Ok(receipt) => receipt,
+            Err(_) if self.completed_participant_leaves.contains_key(relation) => {
+                return self.record_duplicate_participant_leave_failure(
+                    relation,
+                    &before_state_digest,
+                    &before_relation_digest,
+                    &before_snapshot,
+                    &active_generation_ref,
+                );
+            }
+            Err(_) => {
+                return self.reject(Sys5VerticalDiagnosticKind::RelationTransitionRejected);
+            }
+        };
+        let endpoint = lower.relation_endpoint().clone();
+        let after_state_digest = self.observer_safe_state_digest();
+        let after_relation_digest = self
+            .fabric
+            .relation_semantic_digest(relation)
+            .map(str::to_string)
+            .ok_or_else(|| {
+                Sys5VerticalSliceError::new(Sys5VerticalDiagnosticKind::RelationTransitionRejected)
+            })?;
+        let mut result = self.relation_receipt_from_sys4(relation, endpoint)?;
+        let relation_shadow = result.relation_shadow.as_ref().cloned().ok_or_else(|| {
+            Sys5VerticalSliceError::new(Sys5VerticalDiagnosticKind::RelationTransitionRejected)
+        })?;
+        let endpoint = lower.relation_endpoint();
+        let relation_owner_locus = endpoint.edge().source_locus().to_string();
+        if lower.relation() != relation
+            || lower.participant_locus().is_empty()
+            || relation_shadow.owner_locus() != relation_owner_locus
+            || before_shadow.relation() != relation
+            || before_shadow.selected_floor() != "live-primary"
+            || relation_shadow.selected_floor() != "fallback-anchor"
+            || after_state_digest != before_state_digest
+        {
+            return Err(Sys5VerticalSliceError::new(
+                Sys5VerticalDiagnosticKind::RelationTransitionRejected,
+            ));
+        }
+        let membership_epoch_monotone = !lower.membership_epoch_before_ref().is_empty()
+            && !lower.membership_epoch_after_ref().is_empty()
+            && lower.membership_epoch_before_ref() != lower.membership_epoch_after_ref();
+        let checked_membership_identity_exact = !lower.checked_membership_identity_ref().is_empty()
+            && !lower.capability_lineage_ref().is_empty()
+            && !lower.witness_lineage_ref().is_empty()
+            && membership_epoch_monotone
+            && lower.incarnation_before_ref() != lower.incarnation_after_ref();
+        if !checked_membership_identity_exact {
+            return Err(Sys5VerticalSliceError::new(
+                Sys5VerticalDiagnosticKind::RelationTransitionRejected,
+            ));
+        }
+        let m9_retire_occurrence_ref = lower.m9_retire_occurrence_id().to_string();
+        let relation_publish_occurrence_ref = endpoint.owner_publish_occurrence_id().to_string();
+        let relation_degradation = Sys5RelationDegradationEvidence {
+            trigger_action: "participant_a_leave".to_string(),
+            source_derived: true,
+            external_lifecycle_request: true,
+            relation: relation.to_string(),
+            owner_locus: relation_owner_locus.clone(),
+            prior_selected_anchor: before_shadow.selected_anchor().to_string(),
+            selected_anchor_after: relation_shadow.selected_anchor().to_string(),
+            selected_floor_after: relation_shadow.selected_floor().to_string(),
+            // SYS-4 checked this exact causal edge before returning the
+            // lower receipt; no local report ordering is used as its proof.
+            m9_retirement_precedes_relation_publication: true,
+            participant_b_owner_authority_preserved: true,
+            direct_consumer_mutation: false,
+            m9_retire_occurrence_ref: m9_retire_occurrence_ref.clone(),
+            relation_publish_occurrence_ref: relation_publish_occurrence_ref.clone(),
+            prior_relation_lineage_ref: before_shadow.lineage_ref().to_string(),
+            successor_relation_lineage_ref: relation_shadow.lineage_ref().to_string(),
+            semantic_digest_before_ref: relation_observer_ref(&before_relation_digest),
+            semantic_digest_after_ref: relation_observer_ref(&after_relation_digest),
+            owner_authority_ref: relation_observer_ref(
+                &self.fabric.m8_authority_state_digest(&relation_owner_locus),
+            ),
+        };
+        let evidence = Sys5ParticipantLeaveEvidence {
+            action: "participant_a_leave".to_string(),
+            source_derived: true,
+            external_lifecycle_request: true,
+            principal: self.source_principal.clone(),
+            participant_locus: lower.participant_locus().to_string(),
+            retired_membership_locus: lower.participant_locus().to_string(),
+            m9_transition_kind: "participant-membership-retired".to_string(),
+            checked_membership_identity_exact,
+            membership_epoch_monotone,
+            retired_lineage_capability: !lower.capability_lineage_ref().is_empty(),
+            retired_lineage_witness: !lower.witness_lineage_ref().is_empty(),
+            relation: relation.to_string(),
+            relation_owner_locus,
+            relation_owner_authority_preserved: true,
+            m8_state_mutated_before_m9_retirement: false,
+            direct_consumer_mutation: false,
+            request_identity: lower.lifecycle_request_identity().to_string(),
+            request_enqueue_occurrence_ref: lower.lifecycle_enqueue_occurrence_id().to_string(),
+            dispatch_occurrence_ref: endpoint
+                .transport()
+                .source_outbox_dequeue_occurrence_id()
+                .to_string(),
+            receive_occurrence_ref: endpoint
+                .transport()
+                .target_inbox_enqueue_occurrence_id()
+                .to_string(),
+            serve_occurrence_ref: endpoint.consumer_serve_occurrence_id().to_string(),
+            receipt_occurrence_ref: lower.lifecycle_receipt_occurrence_id().to_string(),
+            m9_retire_occurrence_ref,
+            checked_membership_identity_ref: lower.checked_membership_identity_ref().to_string(),
+            prior_membership_ref: lower.prior_membership_ref().to_string(),
+            successor_tombstone_ref: lower.successor_tombstone_ref().to_string(),
+            membership_epoch_before_ref: lower.membership_epoch_before_ref().to_string(),
+            membership_epoch_after_ref: lower.membership_epoch_after_ref().to_string(),
+            incarnation_before_ref: lower.incarnation_before_ref().to_string(),
+            incarnation_after_ref: lower.incarnation_after_ref().to_string(),
+            prior_generation_ref: lower.prior_generation_ref().to_string(),
+            successor_generation_ref: lower.successor_generation_ref().to_string(),
+            capability_lineage_ref: lower.capability_lineage_ref().to_string(),
+            witness_lineage_ref: lower.witness_lineage_ref().to_string(),
+            request_frontier_ref: relation_observer_ref(&format!(
+                "participant-leave-request-frontier:{}:{}",
+                lower.m9_transition_ref(),
+                lower.lifecycle_enqueue_occurrence_id(),
+            )),
+            result_frontier_ref: relation_observer_ref(&format!(
+                "participant-leave-result-frontier:{}:{}",
+                lower.m9_transition_ref(),
+                lower.lifecycle_receipt_occurrence_id(),
+            )),
+            selected_anchor_after: relation_shadow.selected_anchor().to_string(),
+            selected_floor_after: relation_shadow.selected_floor().to_string(),
+            invalidates_relation_primary: true,
+            direct_owner_mutation: false,
+            fixture_schedule_authority_injection: false,
+            relation_degradation: relation_degradation.clone(),
+        };
+        self.joined_report.push(format!(
+            "typed-participant-leave:action={};source_derived={};external_lifecycle_request={};participant_locus={};retired_membership_locus={};m9_transition_kind={};relation={};relation_owner_locus={};request_identity={};request_enqueue_occurrence_ref={};dispatch_occurrence_ref={};receive_occurrence_ref={};serve_occurrence_ref={};receipt_occurrence_ref={};m9_retire_occurrence_ref={};relation_publish_occurrence_ref={};membership_epoch_monotone={};invalidates_relation_primary={};selected_anchor_after={};selected_floor_after={};direct_owner_mutation={};direct_consumer_mutation={}",
+            evidence.action,
+            evidence.source_derived,
+            evidence.external_lifecycle_request,
+            evidence.participant_locus,
+            evidence.retired_membership_locus,
+            evidence.m9_transition_kind,
+            evidence.relation,
+            evidence.relation_owner_locus,
+            evidence.request_identity,
+            evidence.request_enqueue_occurrence_ref,
+            evidence.dispatch_occurrence_ref,
+            evidence.receive_occurrence_ref,
+            evidence.serve_occurrence_ref,
+            evidence.receipt_occurrence_ref,
+            evidence.m9_retire_occurrence_ref,
+            relation_publish_occurrence_ref,
+            evidence.membership_epoch_monotone,
+            evidence.invalidates_relation_primary,
+            evidence.selected_anchor_after,
+            evidence.selected_floor_after,
+            evidence.direct_owner_mutation,
+            evidence.direct_consumer_mutation,
+        ));
+        self.completed_participant_leaves
+            .insert(relation.to_string(), evidence.clone());
+        result.participant_leave_evidence = Some(evidence);
+        Ok(result)
+    }
+
+    fn record_duplicate_participant_leave_failure(
+        &mut self,
+        relation: &str,
+        before_state_digest: &str,
+        before_relation_digest: &str,
+        before_snapshot: &Sys5ObserverSafeRuntimeSnapshot,
+        active_generation_ref: &str,
+    ) -> Result<Sys5VerticalReceipt, Sys5VerticalSliceError> {
+        let after_state_digest = self.observer_safe_state_digest();
+        let after_relation_digest = self
+            .fabric
+            .relation_semantic_digest(relation)
+            .map(str::to_string)
+            .ok_or_else(|| {
+                Sys5VerticalSliceError::new(Sys5VerticalDiagnosticKind::RelationTransitionRejected)
+            })?;
+        let after_snapshot = self.observer_safe_runtime_snapshot();
+        let prior = self
+            .completed_participant_leaves
+            .get(relation)
+            .cloned()
+            .ok_or_else(|| {
+                Sys5VerticalSliceError::new(Sys5VerticalDiagnosticKind::RelationTransitionRejected)
+            })?;
+        if before_state_digest != after_state_digest
+            || before_relation_digest != after_relation_digest
+            || before_snapshot != &after_snapshot
+        {
+            return Err(Sys5VerticalSliceError::new(
+                Sys5VerticalDiagnosticKind::RelationTransitionRejected,
+            ));
+        }
+        let request_identity = relation_observer_ref(&format!(
+            "duplicate-source-derived-participant-leave:{}:{}:{}",
+            relation, active_generation_ref, before_relation_digest
+        ));
+        let request_enqueue_occurrence_ref = self.next_participant_leave_observer_occurrence(
+            "DuplicateLeaveRequest",
+            &request_identity,
+        )?;
+        let reject_occurrence_ref = self.next_participant_leave_observer_occurrence(
+            "DuplicateLeaveRejected",
+            &request_identity,
+        )?;
+        let receipt_occurrence_ref = self.next_participant_leave_observer_occurrence(
+            "DuplicateLeaveReceipt",
+            &request_identity,
+        )?;
+        let failure = Sys5ParticipantLeaveFailureEvidence {
+            attempt: "duplicate_leave".to_string(),
+            diagnostic: "DuplicateParticipantLeave".to_string(),
+            source_derived: true,
+            external_lifecycle_request: true,
+            failed_closed: true,
+            partial_membership_retired: false,
+            capability_or_witness_partially_retired: false,
+            m9_successor_installed: false,
+            m8_state_mutated: false,
+            m8_relation_mutated: false,
+            m8_designated_result_mutated: false,
+            preserved_successful_m8_result_ref: true,
+            request_identity,
+            request_enqueue_occurrence_ref,
+            reject_occurrence_ref,
+            receipt_occurrence_ref,
+            checked_membership_identity_ref: prior.checked_membership_identity_ref,
+            active_generation_ref: active_generation_ref.to_string(),
+            m8_state_digest_before_ref: relation_observer_ref(before_state_digest),
+            m8_state_digest_after_ref: relation_observer_ref(&after_state_digest),
+            m8_relation_digest_before_ref: relation_observer_ref(before_relation_digest),
+            m8_relation_digest_after_ref: relation_observer_ref(&after_relation_digest),
+            last_successful_m8_result_ref: prior
+                .relation_degradation
+                .successor_relation_lineage_ref,
+        };
+        self.joined_report.push(format!(
+            "typed-participant-leave-failure:attempt={};diagnostic={};source_derived={};external_lifecycle_request={};failed_closed={};request_identity={};request_enqueue_occurrence_ref={};reject_occurrence_ref={};receipt_occurrence_ref={};m8_state_digest_before_ref={};m8_state_digest_after_ref={};m8_relation_digest_before_ref={};m8_relation_digest_after_ref={}",
+            failure.attempt,
+            failure.diagnostic,
+            failure.source_derived,
+            failure.external_lifecycle_request,
+            failure.failed_closed,
+            failure.request_identity,
+            failure.request_enqueue_occurrence_ref,
+            failure.reject_occurrence_ref,
+            failure.receipt_occurrence_ref,
+            failure.m8_state_digest_before_ref,
+            failure.m8_state_digest_after_ref,
+            failure.m8_relation_digest_before_ref,
+            failure.m8_relation_digest_after_ref,
+        ));
+        self.last_participant_leave_failure = Some(failure);
+        self.reject(Sys5VerticalDiagnosticKind::DuplicateParticipantLeave)
+    }
+
+    fn next_participant_leave_observer_occurrence(
+        &mut self,
+        kind: &str,
+        request_identity: &str,
+    ) -> Result<String, Sys5VerticalSliceError> {
+        next_lifecycle_occurrence_ref(
+            &mut self.next_lifecycle_occurrence,
+            kind,
+            request_identity,
+            &self.checked_program_identity_ref,
+        )
+        .map_err(|_| Sys5VerticalSliceError::new(Sys5VerticalDiagnosticKind::DispatchRejected))
+    }
+
     fn dispatch_relation_invalidate(
         &mut self,
         relation: &str,
@@ -3296,6 +4008,171 @@ impl Sys5VerticalSliceRuntime {
         self.relation_receipt_from_sys4(relation, receipt)
     }
 
+    fn dispatch_relation_presentation_gap(
+        &mut self,
+        relation: &str,
+    ) -> Result<Sys5VerticalReceipt, Sys5VerticalSliceError> {
+        if !self.bindings.relation_ids.contains(relation) {
+            return self.reject(Sys5VerticalDiagnosticKind::UnknownSourceOperation);
+        }
+        let before_digest = self
+            .fabric
+            .relation_semantic_digest(relation)
+            .map(str::to_string)
+            .ok_or_else(|| {
+                Sys5VerticalSliceError::new(Sys5VerticalDiagnosticKind::RelationTransitionRejected)
+            })?;
+        let endpoint_count_before = self.fabric.total_endpoint_carrier_count();
+        let projection = self
+            .fabric
+            .project_relation_presentation_gap(relation)
+            .map_err(|_| {
+                Sys5VerticalSliceError::new(Sys5VerticalDiagnosticKind::RelationTransitionRejected)
+            })?;
+        let shadow = self
+            .fabric
+            .relation_imported_shadow(relation, projection.consumer_locus())
+            .map_err(|_| {
+                Sys5VerticalSliceError::new(Sys5VerticalDiagnosticKind::RelationTransitionRejected)
+            })?
+            .ok_or_else(|| {
+                Sys5VerticalSliceError::new(Sys5VerticalDiagnosticKind::RelationTransitionRejected)
+            })?;
+        let after_digest = self
+            .fabric
+            .relation_semantic_digest(relation)
+            .map(str::to_string)
+            .ok_or_else(|| {
+                Sys5VerticalSliceError::new(Sys5VerticalDiagnosticKind::RelationTransitionRejected)
+            })?;
+        let endpoint_count_after = self.fabric.total_endpoint_carrier_count();
+        if before_digest != after_digest || endpoint_count_before != endpoint_count_after {
+            return Err(Sys5VerticalSliceError::new(
+                Sys5VerticalDiagnosticKind::RelationTransitionRejected,
+            ));
+        }
+        if !projection.is_consumer_local_fallback()
+            || projection.publishes_value()
+            || !projection.absolute_value_stream().is_empty()
+            || projection.derived_visibility()
+                != crate::m8_runtime_relation_projection::M8RestrictionPolicy::Restricted
+            || projection.redaction_policy() != "relation-redacted"
+        {
+            return Err(Sys5VerticalSliceError::new(
+                Sys5VerticalDiagnosticKind::RelationTransitionRejected,
+            ));
+        }
+        let semantic = shadow.semantic();
+        let relation_shadow = Sys5RelationObserverShadow {
+            relation: shadow.relation().to_string(),
+            owner_locus: shadow.owner_locus().to_string(),
+            consumer_locus: shadow.consumer_locus().to_string(),
+            selected_anchor: semantic.selected_anchor().to_string(),
+            selected_floor: match semantic.selected_floor() {
+                crate::m8_runtime_owner_queue::M8RelationFloor::Live => "live-primary".to_string(),
+                crate::m8_runtime_owner_queue::M8RelationFloor::Anchor => {
+                    "fallback-anchor".to_string()
+                }
+                crate::m8_runtime_owner_queue::M8RelationFloor::Frozen => {
+                    "frozen-fallback".to_string()
+                }
+            },
+            lineage_ref: relation_observer_ref(&semantic.lineage().join("\n")),
+            semantic_digest: relation_observer_ref(&shadow.semantic_digest()),
+            semantic_epoch: semantic.binding_epoch().to_string(),
+        };
+        // The M8 projection carries the exact `relation-redacted` policy. Its
+        // profile-local observer category is therefore `restricted`; retain
+        // an opaque reference to that exact M8 policy rather than exposing a
+        // raw payload or rematerializing an absolute value stream.
+        let presentation_gap_evidence = Sys5PresentationGapEvidence {
+            relation: projection.relation().to_string(),
+            consumer_locus: projection.consumer_locus().to_string(),
+            projection_kind: "consumer-local-fallback".to_string(),
+            publishes_value: projection.publishes_value(),
+            absolute_stream_count: projection.absolute_value_stream().len(),
+            restriction: "restricted".to_string(),
+            restriction_ref: relation_observer_ref(&format!(
+                "restriction:{:?}",
+                projection.derived_visibility()
+            )),
+            redaction: "restricted".to_string(),
+            redaction_ref: relation_observer_ref(&format!(
+                "redaction:{}",
+                projection.redaction_policy()
+            )),
+            selected_anchor: projection.selected_anchor().to_string(),
+            selected_anchor_ref: relation_observer_ref(projection.selected_anchor()),
+            selected_floor: relation_floor_name(projection.selected_floor()).to_string(),
+            selected_floor_ref: relation_observer_ref(relation_floor_name(
+                projection.selected_floor(),
+            )),
+            context_frontier_ref: relation_observer_ref(projection.context_frontier()),
+            semantic_digest_before: relation_observer_ref(&before_digest),
+            semantic_digest_after: relation_observer_ref(&after_digest),
+            endpoint_count_before,
+            endpoint_count_after,
+            derived_from_actual_action: true,
+        };
+        self.joined_report.push(format!(
+            "typed-presentation-gap:relation={};consumer_locus={};projection_kind={};publishes_value={};absolute_stream_count={};restriction={};restriction_ref={};redaction={};redaction_ref={};selected_anchor={};selected_anchor_ref={};selected_floor={};selected_floor_ref={};context_frontier_ref={};semantic_digest_before={};semantic_digest_after={};endpoint_count_before={};endpoint_count_after={};derived_from_actual_action={}",
+            presentation_gap_evidence.relation,
+            presentation_gap_evidence.consumer_locus,
+            presentation_gap_evidence.projection_kind,
+            presentation_gap_evidence.publishes_value,
+            presentation_gap_evidence.absolute_stream_count,
+            presentation_gap_evidence.restriction,
+            presentation_gap_evidence.restriction_ref,
+            presentation_gap_evidence.redaction,
+            presentation_gap_evidence.redaction_ref,
+            presentation_gap_evidence.selected_anchor,
+            presentation_gap_evidence.selected_anchor_ref,
+            presentation_gap_evidence.selected_floor,
+            presentation_gap_evidence.selected_floor_ref,
+            presentation_gap_evidence.context_frontier_ref,
+            presentation_gap_evidence.semantic_digest_before,
+            presentation_gap_evidence.semantic_digest_after,
+            presentation_gap_evidence.endpoint_count_before,
+            presentation_gap_evidence.endpoint_count_after,
+            presentation_gap_evidence.derived_from_actual_action,
+        ));
+        self.joined_report.push(format!(
+            "presentation-gap:relation={};consumer={};semantic_ref={}",
+            relation_shadow.relation(),
+            relation_shadow.consumer_locus(),
+            relation_shadow.semantic_digest(),
+        ));
+        self.relation_shadows.insert(
+            (
+                relation_shadow.consumer_locus().to_string(),
+                relation_shadow.relation().to_string(),
+            ),
+            relation_shadow.clone(),
+        );
+        Ok(Sys5VerticalReceipt {
+            fabric_instance_ref: self.fabric_instance_ref.clone(),
+            source_derived: true,
+            source_locus: relation_shadow.consumer_locus().to_string(),
+            owner_locus: Some(relation_shadow.owner_locus().to_string()),
+            endpoint_chain: None,
+            owner_mutations: Vec::new(),
+            designated_value_name: None,
+            evaluator_locus: None,
+            consumer_locus: Some(relation_shadow.consumer_locus().to_string()),
+            typed_int: None,
+            designated_result_version: None,
+            designated_delivery_ref: None,
+            designated_cache_binding_ref: None,
+            performed_m8_semantic_consumption: false,
+            returned_from_designated_cache_after_authority_revalidation: false,
+            relation_shadow: Some(relation_shadow),
+            presentation_gap_evidence: Some(presentation_gap_evidence),
+            participant_leave_evidence: None,
+            fresh_reacquire_evidence: None,
+            no_direct_cross_locus_store_mutation: true,
+        })
+    }
+
     fn dispatch_relation_fresh_reacquire(
         &mut self,
         relation: &str,
@@ -3306,13 +4183,164 @@ impl Sys5VerticalSliceRuntime {
         if self.fabric.relation_fresh_binding_is_consumed(relation) {
             return self.reject(Sys5VerticalDiagnosticKind::RelationFreshBindingAlreadyConsumed);
         }
+        let prior_shadow = self
+            .relation_shadows
+            .get(&("ViewerC".to_string(), relation.to_string()))
+            .cloned()
+            .ok_or_else(|| {
+                Sys5VerticalSliceError::new(Sys5VerticalDiagnosticKind::RelationTransitionRejected)
+            })?;
+        // This must already be present in the integrity-bound local cut when
+        // a fresh operation resumes after save/restore.  Resolve it before
+        // the lower M9/M8 transition so a wrapper-local missing receipt can
+        // never turn a successful transition into an upper-layer error.
+        let participant_locus = self
+            .completed_participant_leaves
+            .get(relation)
+            .map(|leave| leave.participant_locus.clone())
+            .ok_or_else(|| {
+                Sys5VerticalSliceError::new(Sys5VerticalDiagnosticKind::RelationTransitionRejected)
+            })?;
+        let before_relation_digest = self
+            .fabric
+            .relation_semantic_digest(relation)
+            .map(str::to_string)
+            .ok_or_else(|| {
+                Sys5VerticalSliceError::new(Sys5VerticalDiagnosticKind::RelationTransitionRejected)
+            })?;
         let receipt = self
             .fabric
             .fresh_reacquire_relation_primary(relation)
             .map_err(|_| {
                 Sys5VerticalSliceError::new(Sys5VerticalDiagnosticKind::RelationTransitionRejected)
             })?;
-        self.relation_receipt_from_sys4(relation, receipt)
+        let fresh = receipt.fresh_reacquire().cloned().ok_or_else(|| {
+            Sys5VerticalSliceError::new(Sys5VerticalDiagnosticKind::RelationTransitionRejected)
+        })?;
+        let mut result = self.relation_receipt_from_sys4(relation, receipt)?;
+        let relation_shadow = result.relation_shadow.as_ref().cloned().ok_or_else(|| {
+            Sys5VerticalSliceError::new(Sys5VerticalDiagnosticKind::RelationTransitionRejected)
+        })?;
+        let endpoint = result.endpoint_chain.as_ref().ok_or_else(|| {
+            Sys5VerticalSliceError::new(Sys5VerticalDiagnosticKind::RelationTransitionRejected)
+        })?;
+        let after_relation_digest = self
+            .fabric
+            .relation_semantic_digest(relation)
+            .map(str::to_string)
+            .ok_or_else(|| {
+                Sys5VerticalSliceError::new(Sys5VerticalDiagnosticKind::RelationTransitionRejected)
+            })?;
+        let relation_owner_locus = relation_shadow.owner_locus().to_string();
+        let fresh_membership_epoch_distinct = !fresh.fresh_membership_epoch_ref().is_empty()
+            && fresh.fresh_membership_epoch_ref() != fresh.prior_membership_epoch_ref();
+        let fresh_incarnation_distinct = !fresh.fresh_incarnation_ref().is_empty()
+            && fresh.fresh_incarnation_ref() != fresh.prior_incarnation_ref();
+        if !fresh.source_derived()
+            || fresh.lifecycle_request_identity().is_empty()
+            || fresh.lifecycle_enqueue_occurrence_id().is_empty()
+            || fresh.m9_reacquire_occurrence_id().is_empty()
+            || fresh.lifecycle_receipt_occurrence_id().is_empty()
+            || fresh.checked_primary_anchor_ref().is_empty()
+            || !fresh_membership_epoch_distinct
+            || !fresh_incarnation_distinct
+            || fresh.capability_lineage_ref().is_empty()
+            || fresh.witness_lineage_ref().is_empty()
+            || prior_shadow.selected_floor() != "fallback-anchor"
+            || relation_shadow.selected_floor() != "live-primary"
+            || endpoint.source_locus != relation_owner_locus
+        {
+            return Err(Sys5VerticalSliceError::new(
+                Sys5VerticalDiagnosticKind::RelationTransitionRejected,
+            ));
+        }
+        let evidence = Sys5FreshReacquireEvidence {
+            action: "participant_a_fresh_reacquire".to_string(),
+            source_derived: true,
+            external_lifecycle_request: true,
+            relation: relation.to_string(),
+            participant_locus: participant_locus.clone(),
+            fresh_membership_locus: participant_locus,
+            m9_transition_kind: "participant-membership-fresh".to_string(),
+            fresh_membership_epoch_distinct,
+            fresh_incarnation_distinct,
+            fresh_lineage_capability: true,
+            fresh_lineage_witness: true,
+            relation_owner_locus: relation_owner_locus.clone(),
+            relation_owner_authority_preserved: true,
+            prior_selected_anchor: prior_shadow.selected_anchor().to_string(),
+            selected_anchor_after: relation_shadow.selected_anchor().to_string(),
+            selected_floor_after: relation_shadow.selected_floor().to_string(),
+            // SYS-4 only returns this evidence after its causality check from
+            // the M9 re-admission occurrence to the B-owner publication.
+            m9_fresh_membership_precedes_relation_publication: true,
+            caller_supplied_epoch_or_incarnation: false,
+            caller_supplied_membership_ref: false,
+            caller_supplied_authority: false,
+            fixture_schedule_authority_injection: false,
+            direct_consumer_mutation: false,
+            request_identity: fresh.lifecycle_request_identity().to_string(),
+            request_enqueue_occurrence_ref: fresh.lifecycle_enqueue_occurrence_id().to_string(),
+            dispatch_occurrence_ref: endpoint.dispatch_ref.clone(),
+            receive_occurrence_ref: endpoint.receive_ref.clone(),
+            serve_occurrence_ref: endpoint.serve_ref.clone(),
+            receipt_occurrence_ref: fresh.lifecycle_receipt_occurrence_id().to_string(),
+            m9_fresh_membership_occurrence_ref: fresh.m9_reacquire_occurrence_id().to_string(),
+            relation_publish_occurrence_ref: endpoint.owner_publish_ref.clone().ok_or_else(
+                || {
+                    Sys5VerticalSliceError::new(
+                        Sys5VerticalDiagnosticKind::RelationTransitionRejected,
+                    )
+                },
+            )?,
+            retired_membership_ref: fresh.retired_membership_ref().to_string(),
+            fresh_membership_ref: fresh.fresh_membership_ref().to_string(),
+            retired_membership_epoch_ref: fresh.retired_membership_epoch_ref().to_string(),
+            fresh_membership_epoch_ref: fresh.fresh_membership_epoch_ref().to_string(),
+            retired_incarnation_ref: fresh.retired_incarnation_ref().to_string(),
+            fresh_incarnation_ref: fresh.fresh_incarnation_ref().to_string(),
+            prior_generation_ref: fresh.prior_generation_ref().to_string(),
+            successor_generation_ref: fresh.successor_generation_ref().to_string(),
+            m9_transition_ref: fresh.m9_transition_ref().to_string(),
+            fresh_capability_lineage_ref: fresh.capability_lineage_ref().to_string(),
+            fresh_witness_lineage_ref: fresh.witness_lineage_ref().to_string(),
+            prior_relation_lineage_ref: prior_shadow.lineage_ref().to_string(),
+            successor_relation_lineage_ref: relation_shadow.lineage_ref().to_string(),
+            semantic_digest_before_ref: relation_observer_ref(&before_relation_digest),
+            semantic_digest_after_ref: relation_observer_ref(&after_relation_digest),
+            owner_authority_ref: relation_observer_ref(
+                &self.fabric.m8_authority_state_digest(&relation_owner_locus),
+            ),
+        };
+        self.joined_report.push(format!(
+            "typed-participant-fresh-reacquire:action={};source_derived={};external_lifecycle_request={};participant_locus={};fresh_membership_locus={};m9_transition_kind={};relation={};relation_owner_locus={};prior_selected_anchor={};selected_anchor_after={};selected_floor_after={};request_identity={};request_enqueue_occurrence_ref={};dispatch_occurrence_ref={};receive_occurrence_ref={};serve_occurrence_ref={};receipt_occurrence_ref={};m9_fresh_membership_occurrence_ref={};relation_publish_occurrence_ref={};caller_supplied_epoch_or_incarnation={};caller_supplied_membership_ref={};caller_supplied_authority={};fixture_schedule_authority_injection={};direct_consumer_mutation={}",
+            evidence.action,
+            evidence.source_derived,
+            evidence.external_lifecycle_request,
+            evidence.participant_locus,
+            evidence.fresh_membership_locus,
+            evidence.m9_transition_kind,
+            evidence.relation,
+            evidence.relation_owner_locus,
+            evidence.prior_selected_anchor,
+            evidence.selected_anchor_after,
+            evidence.selected_floor_after,
+            evidence.request_identity,
+            evidence.request_enqueue_occurrence_ref,
+            evidence.dispatch_occurrence_ref,
+            evidence.receive_occurrence_ref,
+            evidence.serve_occurrence_ref,
+            evidence.receipt_occurrence_ref,
+            evidence.m9_fresh_membership_occurrence_ref,
+            evidence.relation_publish_occurrence_ref,
+            evidence.caller_supplied_epoch_or_incarnation,
+            evidence.caller_supplied_membership_ref,
+            evidence.caller_supplied_authority,
+            evidence.fixture_schedule_authority_injection,
+            evidence.direct_consumer_mutation,
+        ));
+        result.fresh_reacquire_evidence = Some(evidence);
+        Ok(result)
     }
 
     fn relation_receipt_from_sys4(
@@ -3370,6 +4398,13 @@ impl Sys5VerticalSliceRuntime {
         };
         let relation_shadow = vertical_relation_shadow(&receipt);
         self.record_chain(&endpoint_chain, Some("relation"))?;
+        self.joined_report.push(format!(
+            "relation-selected:relation={};anchor={};floor={};semantic_ref={}",
+            relation_shadow.relation(),
+            relation_shadow.selected_anchor(),
+            relation_shadow.selected_floor(),
+            relation_shadow.semantic_digest(),
+        ));
         self.relation_shadows.insert(
             (
                 relation_shadow.consumer_locus().to_string(),
@@ -3388,9 +4423,15 @@ impl Sys5VerticalSliceRuntime {
             evaluator_locus: None,
             consumer_locus: Some(relation_shadow.consumer_locus().to_string()),
             typed_int: None,
+            designated_result_version: None,
+            designated_delivery_ref: None,
+            designated_cache_binding_ref: None,
             performed_m8_semantic_consumption: false,
             returned_from_designated_cache_after_authority_revalidation: false,
             relation_shadow: Some(relation_shadow),
+            presentation_gap_evidence: None,
+            participant_leave_evidence: None,
+            fresh_reacquire_evidence: None,
             no_direct_cross_locus_store_mutation: true,
         })
     }
@@ -3438,9 +4479,15 @@ impl Sys5VerticalSliceRuntime {
             evaluator_locus: None,
             consumer_locus: Some(binding.consumer_locus),
             typed_int: None,
+            designated_result_version: None,
+            designated_delivery_ref: None,
+            designated_cache_binding_ref: None,
             performed_m8_semantic_consumption: false,
             returned_from_designated_cache_after_authority_revalidation: false,
             relation_shadow: None,
+            presentation_gap_evidence: None,
+            participant_leave_evidence: None,
+            fresh_reacquire_evidence: None,
             no_direct_cross_locus_store_mutation: true,
         })
     }
@@ -3488,6 +4535,30 @@ impl Sys5VerticalSliceRuntime {
             RuntimeValue::Unit => None,
             RuntimeValue::Int(_) => None,
         };
+        let designated_result_version = receipt.result_version().map(|version| version.value());
+        let designated_delivery_ref = context.designated_value_name.as_ref().map(|value_name| {
+            relation_observer_ref(&format!(
+                "designated-delivery:{}:{}:{}",
+                value_name,
+                receipt.delivery_id(),
+                designated_result_version.unwrap_or_default(),
+            ))
+        });
+        let designated_cache_binding_ref =
+            context
+                .designated_value_name
+                .as_ref()
+                .and_then(|value_name| {
+                    designated_result_version.map(|version| {
+                        relation_observer_ref(&format!(
+                            "designated-cache-binding:{}:{}:{}:{}",
+                            value_name,
+                            receipt.target_locus(),
+                            receipt.delivery_id(),
+                            version,
+                        ))
+                    })
+                });
         Ok(Sys5VerticalReceipt {
             fabric_instance_ref: self.fabric_instance_ref.clone(),
             source_derived: true,
@@ -3503,10 +4574,16 @@ impl Sys5VerticalSliceRuntime {
                 .filter(|binding| binding.value_name == receipt.operation_id())
                 .map(|binding| binding.consumer_locus.clone()),
             typed_int,
+            designated_result_version,
+            designated_delivery_ref,
+            designated_cache_binding_ref,
             performed_m8_semantic_consumption: receipt.performed_m8_semantic_consumption(),
             returned_from_designated_cache_after_authority_revalidation: receipt
                 .returned_from_designated_cache_after_authority_revalidation(),
             relation_shadow: context.relation_shadow,
+            presentation_gap_evidence: None,
+            participant_leave_evidence: None,
+            fresh_reacquire_evidence: None,
             no_direct_cross_locus_store_mutation: context.no_direct_cross_locus_store_mutation,
         })
     }
@@ -3540,6 +4617,21 @@ impl Sys5VerticalSliceRuntime {
             }
             RuntimeValue::Unit | RuntimeValue::Int(_) => None,
         };
+        let designated_result_version = receipt.result_version().map(|version| version.value());
+        let designated_delivery_ref = relation_observer_ref(&format!(
+            "designated-delivery:{}:{}",
+            binding.value_name,
+            receipt.delivery_id(),
+        ));
+        let designated_cache_binding_ref = receipt.result_version().map(|version| {
+            relation_observer_ref(&format!(
+                "designated-cache-binding:{}:{}:{}:{}",
+                binding.value_name,
+                binding.consumer_locus,
+                receipt.delivery_id(),
+                version.value(),
+            ))
+        });
         Ok(Sys5VerticalReceipt {
             fabric_instance_ref: self.fabric_instance_ref.clone(),
             source_derived: true,
@@ -3551,9 +4643,15 @@ impl Sys5VerticalSliceRuntime {
             evaluator_locus: None,
             consumer_locus: Some(binding.consumer_locus),
             typed_int,
+            designated_result_version,
+            designated_delivery_ref: Some(designated_delivery_ref),
+            designated_cache_binding_ref,
             performed_m8_semantic_consumption: false,
             returned_from_designated_cache_after_authority_revalidation: true,
             relation_shadow: None,
+            presentation_gap_evidence: None,
+            participant_leave_evidence: None,
+            fresh_reacquire_evidence: None,
             no_direct_cross_locus_store_mutation: true,
         })
     }
@@ -3869,6 +4967,14 @@ fn vertical_relation_shadow(receipt: &Sys4RelationEndpointReceipt) -> Sys5Relati
     }
 }
 
+fn relation_floor_name(floor: crate::m8_runtime_owner_queue::M8RelationFloor) -> &'static str {
+    match floor {
+        crate::m8_runtime_owner_queue::M8RelationFloor::Live => "live-primary",
+        crate::m8_runtime_owner_queue::M8RelationFloor::Anchor => "fallback-anchor",
+        crate::m8_runtime_owner_queue::M8RelationFloor::Frozen => "frozen-fallback",
+    }
+}
+
 fn sys5_patch_diagnostic(kind: Sys4PatchDiagnosticKind) -> Sys5PatchDiagnosticKind {
     match kind {
         Sys4PatchDiagnosticKind::StaleFrontier => Sys5PatchDiagnosticKind::StaleFrontier,
@@ -3894,7 +5000,10 @@ fn sys5_patch_diagnostic(kind: Sys4PatchDiagnosticKind) -> Sys5PatchDiagnosticKi
     }
 }
 
-fn sys5_patch_outcome(outcome: &Sys4PatchOutcome) -> Sys5PatchOutcome {
+fn sys5_patch_outcome(
+    outcome: &Sys4PatchOutcome,
+    patch_occurrence_ref: String,
+) -> Sys5PatchOutcome {
     let verdict = match outcome.verdict() {
         Sys4PatchVerdict::Accepted => Sys5PatchVerdict::Accepted,
         Sys4PatchVerdict::Rejected => Sys5PatchVerdict::Rejected,
@@ -3907,6 +5016,7 @@ fn sys5_patch_outcome(outcome: &Sys4PatchOutcome) -> Sys5PatchOutcome {
     Sys5PatchOutcome {
         verdict,
         primary_diagnostic_kind: outcome.primary_diagnostic_kind().map(sys5_patch_diagnostic),
+        patch_occurrence_ref,
         lifecycle: Sys5PatchLifecycle {
             verdict,
             diagnostic: outcome.primary_diagnostic_kind().map(sys5_patch_diagnostic),
@@ -4889,6 +5999,10 @@ pub struct Sys5CommunicationSummary {
 /// A source-to-Core-to-artifact provenance row without source text or secrets.
 #[derive(Debug, Clone, PartialEq, Eq, Serialize)]
 pub struct Sys5SourceCoreArtifactMapping {
+    /// Deterministic logical source label.  It is duplicated from
+    /// `source_path` for the provisional JSON viewer, whose consumers must
+    /// never infer a host filesystem path from provenance.
+    pub logical_path: String,
     pub source_path: String,
     pub source_span: Sys5SourceSpan,
     pub operation_id: String,
@@ -4897,6 +6011,10 @@ pub struct Sys5SourceCoreArtifactMapping {
     pub artifact_locus: String,
     pub artifact_kind: String,
     pub fragment_ref: String,
+    /// Alias retained for the per-locus executable program reference expected
+    /// by the local devtools projection.  It denotes the exact same checked
+    /// fragment as `fragment_ref`, rather than a manually authored route.
+    pub locus_program_ref: String,
     pub checked_program_identity: String,
 }
 
@@ -4904,6 +6022,10 @@ pub struct Sys5SourceCoreArtifactMapping {
 /// the containing summary row so a viewer cannot recover host paths.
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize)]
 pub struct Sys5SourceSpan {
+    /// Stable, nonzero ordering coordinates for JSON consumers.  The source
+    /// remains represented only by the logical path and coordinates below.
+    pub start: u64,
+    pub end: u64,
     pub start_line: u32,
     pub start_column: u32,
     pub end_line: u32,
@@ -4992,6 +6114,7 @@ pub fn build_project(input: Sys5SourceInput) -> Result<Sys5LocalProject, Sys5Loc
                 checked_program_identity: checked_program_identity.clone(),
             });
             source_core_artifact_mappings.push(Sys5SourceCoreArtifactMapping {
+                logical_path: source_path.clone(),
                 source_path,
                 source_span,
                 operation_id: fragment.operation_id().to_string(),
@@ -4999,6 +6122,7 @@ pub fn build_project(input: Sys5SourceInput) -> Result<Sys5LocalProject, Sys5Loc
                 core_ref,
                 artifact_locus: locus.to_string(),
                 artifact_kind,
+                locus_program_ref: fragment_ref.clone(),
                 fragment_ref,
                 checked_program_identity,
             });
@@ -5237,7 +6361,11 @@ fn observer_source_ref(source_ref: &SourceRef) -> String {
 }
 
 fn summary_source_span(source_ref: &SourceRef) -> Sys5SourceSpan {
+    let start = u64::from(source_ref.start_line) * 1_000_000 + u64::from(source_ref.start_column);
+    let end = u64::from(source_ref.end_line) * 1_000_000 + u64::from(source_ref.end_column);
     Sys5SourceSpan {
+        start,
+        end,
         start_line: source_ref.start_line,
         start_column: source_ref.start_column,
         end_line: source_ref.end_line,

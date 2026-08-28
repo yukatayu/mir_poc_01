@@ -1002,6 +1002,83 @@ pub(crate) struct M9FreshRelationReacquireBinding {
     binding_frontier: String,
     fresh_lease_ref: String,
     authority: M8RelationAuthorityUse,
+    /// A source-declared primary anchor may require a new membership lineage
+    /// before this otherwise B-owned relation authority is allowed to select
+    /// it again.  The lineages stay opaque to SYS-4 and are absent for the
+    /// accepted legacy profile, whose anchors have no declared locus.
+    fresh_anchor_reacquire: Option<M9FreshAnchorReacquireLineage>,
+}
+
+/// Observer-safe evidence that the M9 publisher admitted a fresh lifetime for
+/// one explicitly located primary anchor.  This records a source-bound
+/// successor only; it contains no usable membership, capability, or witness.
+#[derive(Debug, Clone, PartialEq, Eq)]
+pub(crate) struct M9FreshAnchorReacquireLineage {
+    checked_primary_anchor_ref: String,
+    prior_membership_ref: String,
+    prior_membership_epoch_ref: String,
+    prior_incarnation_ref: String,
+    /// Exact opaque tombstone created by the preceding source-bound
+    /// retirement.  It is retained by M9 instead of reconstructed by a
+    /// downstream schedule or report join.
+    retired_membership_ref: String,
+    retired_membership_epoch_ref: String,
+    retired_incarnation_ref: String,
+    fresh_membership_ref: String,
+    fresh_membership_epoch_ref: String,
+    fresh_incarnation_ref: String,
+    capability_lineage_ref: String,
+    witness_lineage_ref: String,
+}
+
+impl M9FreshAnchorReacquireLineage {
+    pub(crate) fn checked_primary_anchor_ref(&self) -> &str {
+        &self.checked_primary_anchor_ref
+    }
+
+    pub(crate) fn prior_membership_ref(&self) -> &str {
+        &self.prior_membership_ref
+    }
+
+    pub(crate) fn prior_membership_epoch_ref(&self) -> &str {
+        &self.prior_membership_epoch_ref
+    }
+
+    pub(crate) fn prior_incarnation_ref(&self) -> &str {
+        &self.prior_incarnation_ref
+    }
+
+    pub(crate) fn retired_membership_ref(&self) -> &str {
+        &self.retired_membership_ref
+    }
+
+    pub(crate) fn retired_membership_epoch_ref(&self) -> &str {
+        &self.retired_membership_epoch_ref
+    }
+
+    pub(crate) fn retired_incarnation_ref(&self) -> &str {
+        &self.retired_incarnation_ref
+    }
+
+    pub(crate) fn fresh_membership_ref(&self) -> &str {
+        &self.fresh_membership_ref
+    }
+
+    pub(crate) fn fresh_membership_epoch_ref(&self) -> &str {
+        &self.fresh_membership_epoch_ref
+    }
+
+    pub(crate) fn fresh_incarnation_ref(&self) -> &str {
+        &self.fresh_incarnation_ref
+    }
+
+    pub(crate) fn capability_lineage_ref(&self) -> &str {
+        &self.capability_lineage_ref
+    }
+
+    pub(crate) fn witness_lineage_ref(&self) -> &str {
+        &self.witness_lineage_ref
+    }
 }
 
 /// Typed, authority-neutral target-admission record for one generated
@@ -1057,8 +1134,8 @@ impl M9FreshRelationReacquireBinding {
             "finite-local-fresh-reacquire:{}:{}:{}:{}:{}:{}",
             fact.relation,
             fact.owner_locus,
-            fact.membership_epoch,
-            fact.membership_incarnation,
+            fact.owner_membership_epoch,
+            fact.owner_membership_incarnation,
             binding_epoch,
             fresh_anchor_epoch,
         ));
@@ -1071,7 +1148,47 @@ impl M9FreshRelationReacquireBinding {
             binding_frontier: fact.binding_frontier.clone(),
             fresh_lease_ref,
             authority,
+            fresh_anchor_reacquire: None,
         })
+    }
+
+    fn from_fresh_anchor_reacquire(
+        template: &M9FreshAnchorReacquireTemplate,
+        authority: M8RelationAuthorityUse,
+        lineage: M9FreshAnchorReacquireLineage,
+        binding_generation: u64,
+        fresh_membership_epoch: &str,
+    ) -> Option<Self> {
+        let fresh_witness = authority.witness_ref()?;
+        if authority.capability_ref().is_none() || fresh_witness.is_empty() {
+            return None;
+        }
+        let fresh_anchor_epoch = format!("{fresh_membership_epoch}:primary");
+        let binding_epoch = format!("binding_epoch:{binding_generation}");
+        let fresh_lease_ref = m9_opaque_ref(&format!(
+            "finite-local-fresh-reacquire:{}:{}:{}:{}:{}:{}",
+            template.relation,
+            template.owner_locus,
+            lineage.fresh_membership_epoch_ref,
+            lineage.fresh_incarnation_ref,
+            binding_epoch,
+            fresh_anchor_epoch,
+        ));
+        Some(Self {
+            relation: template.relation.clone(),
+            owner_locus: template.owner_locus.clone(),
+            primary_anchor: template.primary_anchor.clone(),
+            fresh_anchor_epoch,
+            binding_epoch,
+            binding_frontier: template.binding_frontier.clone(),
+            fresh_lease_ref,
+            authority,
+            fresh_anchor_reacquire: Some(lineage),
+        })
+    }
+
+    pub(crate) fn fresh_anchor_reacquire(&self) -> Option<&M9FreshAnchorReacquireLineage> {
+        self.fresh_anchor_reacquire.as_ref()
     }
 
     /// Return M8 activation material only inside the sealed SYS-4 bridge.
@@ -1183,6 +1300,62 @@ pub(crate) struct M9DesignatedSourceReleaseLineage {
     opaque_lineage_ref: String,
 }
 
+/// Observer-safe identity of one membership retirement selected inside the
+/// admitted M9 inventory.  It deliberately carries neither a membership
+/// record nor any capability/witness reference: SYS-4 may associate the
+/// source-derived transition with its runtime occurrence, but cannot replay
+/// or manufacture the retired lineage.
+#[derive(Debug, Clone, PartialEq, Eq)]
+pub(crate) struct M9RetiredMembershipLineage {
+    checked_membership_identity_ref: String,
+    prior_membership_ref: String,
+    successor_tombstone_ref: String,
+    membership_epoch_before_ref: String,
+    membership_epoch_after_ref: String,
+    incarnation_before_ref: String,
+    incarnation_after_ref: String,
+    capability_lineage_ref: String,
+    witness_lineage_ref: String,
+}
+
+impl M9RetiredMembershipLineage {
+    pub(crate) fn checked_membership_identity_ref(&self) -> &str {
+        &self.checked_membership_identity_ref
+    }
+
+    pub(crate) fn prior_membership_ref(&self) -> &str {
+        &self.prior_membership_ref
+    }
+
+    pub(crate) fn successor_tombstone_ref(&self) -> &str {
+        &self.successor_tombstone_ref
+    }
+
+    pub(crate) fn membership_epoch_before_ref(&self) -> &str {
+        &self.membership_epoch_before_ref
+    }
+
+    pub(crate) fn membership_epoch_after_ref(&self) -> &str {
+        &self.membership_epoch_after_ref
+    }
+
+    pub(crate) fn incarnation_before_ref(&self) -> &str {
+        &self.incarnation_before_ref
+    }
+
+    pub(crate) fn incarnation_after_ref(&self) -> &str {
+        &self.incarnation_after_ref
+    }
+
+    pub(crate) fn capability_lineage_ref(&self) -> &str {
+        &self.capability_lineage_ref
+    }
+
+    pub(crate) fn witness_lineage_ref(&self) -> &str {
+        &self.witness_lineage_ref
+    }
+}
+
 #[derive(Debug, Clone, PartialEq, Eq)]
 pub(crate) struct M9SealedGeneration {
     generation: u64,
@@ -1210,6 +1383,8 @@ pub(crate) enum M9AuthorityTransitionKind {
     DesignatedConsumerMembershipRetired,
     DesignatedConsumerWitnessRetired,
     DesignatedSourceReleaseRevoked,
+    SourceDeclaredMembershipRetired,
+    SourceDeclaredPrimaryAnchorReacquired,
 }
 
 #[derive(Debug, Clone, PartialEq, Eq)]
@@ -1219,6 +1394,8 @@ pub(crate) struct M9SealedTransitionInspection {
     successor_generation: M9SealedGeneration,
     consumer_lineage: Option<M9DesignatedConsumerLineage>,
     source_release_lineage: Option<M9DesignatedSourceReleaseLineage>,
+    membership_retirement: Option<M9RetiredMembershipLineage>,
+    membership_reacquire: Option<M9FreshAnchorReacquireLineage>,
 }
 
 impl M9SealedTransitionInspection {
@@ -1240,6 +1417,16 @@ impl M9SealedTransitionInspection {
         self.source_release_lineage
             .as_ref()
             .expect("source-release transition retains its sealed lineage")
+    }
+    pub(crate) fn membership_retirement(&self) -> &M9RetiredMembershipLineage {
+        self.membership_retirement
+            .as_ref()
+            .expect("membership-retirement transition retains its sealed lineage")
+    }
+    pub(crate) fn membership_reacquire(&self) -> &M9FreshAnchorReacquireLineage {
+        self.membership_reacquire
+            .as_ref()
+            .expect("primary-anchor reacquire retains its sealed lineage")
     }
 }
 
@@ -1426,6 +1613,10 @@ pub(crate) struct M9AuthoritySuccessorPublisher {
     evidence: M9FinalAdmissionEvidence,
     authority_runtime: M9AuthorityRuntime,
     current: M9AuthorityGeneration,
+    /// One finite template per explicitly located primary anchor.  It is
+    /// sealed at source-bound admission and is the only route that can mint a
+    /// successor membership for a fresh primary reacquire.
+    fresh_anchor_reacquire_templates: BTreeMap<String, M9FreshAnchorReacquireTemplate>,
 }
 
 impl std::fmt::Debug for M9AuthorityGeneration {
@@ -2045,6 +2236,11 @@ fn finite_local_required_memberships(
         }
         if let Some(relation) = evaluation.relation_core() {
             required.insert((anchor.principal.clone(), relation.owner_locus().to_string()));
+            for relation_anchor in [relation.primary(), relation.fallback()] {
+                if let Some(anchor_locus) = relation_anchor.anchor_locus() {
+                    required.insert((anchor.principal.clone(), anchor_locus.to_string()));
+                }
+            }
         }
         if let Some(designated) = evaluation.designated_core() {
             required.insert((anchor.principal.clone(), designated.evaluator().to_string()));
@@ -2082,6 +2278,7 @@ impl M9RuntimeExecutionSeam {
         facts: &BTreeMap<String, M9FiniteFreshAtAdmissionLifecycleFact>,
     ) -> Result<(), M9AdmissionDiagnostics> {
         let mut bindings = BTreeMap::new();
+        let mut templates = BTreeMap::new();
         for (relation, fact) in facts {
             let authority = self
                 .relation_uses
@@ -2100,6 +2297,21 @@ impl M9RuntimeExecutionSeam {
                     M9AdmissionErrorKind::InvalidCapabilityLineage,
                 ));
             }
+            if let Some(template) = M9FreshAnchorReacquireTemplate::from_validated_local_fact(
+                fact,
+                &self
+                    .authority_successor
+                    .as_ref()
+                    .ok_or_else(|| {
+                        M9AdmissionDiagnostics::one(M9AdmissionErrorKind::InvalidCapabilityLineage)
+                    })?
+                    .authority_runtime,
+            ) && templates.insert(relation.clone(), template).is_some()
+            {
+                return Err(M9AdmissionDiagnostics::one(
+                    M9AdmissionErrorKind::InvalidCapabilityLineage,
+                ));
+            }
         }
         self.fresh_relation_reacquire_bindings = bindings.clone();
         self.authority_generation.fresh_relation_reacquire_bindings = bindings.clone();
@@ -2107,6 +2319,7 @@ impl M9RuntimeExecutionSeam {
             M9AdmissionDiagnostics::one(M9AdmissionErrorKind::InvalidCapabilityLineage)
         })?;
         publisher.current.fresh_relation_reacquire_bindings = bindings;
+        publisher.fresh_anchor_reacquire_templates = templates;
         Ok(())
     }
 
@@ -3519,7 +3732,7 @@ impl M9AuthorityGeneration {
             .iter()
             .map(|(relation, binding)| {
                 format!(
-                    "{relation}:{}:{}:{}:{}:{}:{}:{:?}",
+                    "{relation}:{}:{}:{}:{}:{}:{}:{:?}:{:?}",
                     binding.owner_locus,
                     binding.primary_anchor,
                     binding.fresh_anchor_epoch,
@@ -3527,6 +3740,7 @@ impl M9AuthorityGeneration {
                     binding.binding_frontier,
                     binding.fresh_lease_ref,
                     binding.authority,
+                    binding.fresh_anchor_reacquire,
                 )
             })
             .collect::<Vec<_>>();
@@ -3812,6 +4026,48 @@ impl M9AuthorityGeneration {
             successor_generation: self.sealed_inspection().generation,
             consumer_lineage,
             source_release_lineage,
+            membership_retirement: None,
+            membership_reacquire: None,
+        }
+    }
+
+    /// The source-declared membership has already been selected and retired
+    /// inside M9.  Construct only the observer-safe inspection that SYS-4
+    /// needs to tie the sealed successor to a source-derived runtime
+    /// occurrence; it cannot recover a membership/capability/witness value
+    /// from this record.
+    pub(crate) fn membership_retirement_transition_inspection(
+        &self,
+        prior: &M9AuthorityInspection,
+        retirement: M9RetiredMembershipLineage,
+    ) -> M9SealedTransitionInspection {
+        M9SealedTransitionInspection {
+            transition_kind: M9AuthorityTransitionKind::SourceDeclaredMembershipRetired,
+            prior_generation: prior.generation.clone(),
+            successor_generation: self.sealed_inspection().generation,
+            consumer_lineage: None,
+            source_release_lineage: None,
+            membership_retirement: Some(retirement),
+            membership_reacquire: None,
+        }
+    }
+
+    /// M9 alone has selected the checked primary template, issued a fresh
+    /// member lifetime, and translated its new scoped inventory.  SYS-4 only
+    /// receives this observer-safe evidence while installing the successor.
+    pub(crate) fn membership_reacquire_transition_inspection(
+        &self,
+        prior: &M9AuthorityInspection,
+        reacquire: M9FreshAnchorReacquireLineage,
+    ) -> M9SealedTransitionInspection {
+        M9SealedTransitionInspection {
+            transition_kind: M9AuthorityTransitionKind::SourceDeclaredPrimaryAnchorReacquired,
+            prior_generation: prior.generation.clone(),
+            successor_generation: self.sealed_inspection().generation,
+            consumer_lineage: None,
+            source_release_lineage: None,
+            membership_retirement: None,
+            membership_reacquire: Some(reacquire),
         }
     }
 
@@ -3881,6 +4137,83 @@ impl M9AuthorityGeneration {
             previous.owner_operation_validation_occurrences.clone();
         self.source_release_validation_occurrences =
             previous.source_release_validation_occurrences.clone();
+        Some(self)
+    }
+
+    /// Advance from the fresh M9 translation after one source-declared
+    /// membership has been retired.  The fresh translation is authoritative
+    /// for which M8 uses remain live; predecessor-only validation/tombstone
+    /// observations are retained monotonically so retirement cannot erase an
+    /// already sealed failure or revocation.
+    fn with_successor_generation_after_retired_membership(
+        mut self,
+        previous: &Self,
+    ) -> Option<Self> {
+        if self.program_identity != previous.program_identity {
+            return None;
+        }
+        self.generation = previous.generation.checked_add(1)?;
+        self.revoked_owner_capabilities = previous.revoked_owner_capabilities.clone();
+        self.revoked_designated_consumption_capabilities =
+            previous.revoked_designated_consumption_capabilities.clone();
+        self.designated_consumer_failures = previous.designated_consumer_failures.clone();
+        self.designated_consumer_witness_retirements =
+            previous.designated_consumer_witness_retirements.clone();
+        self.designated_source_release_failures =
+            previous.designated_source_release_failures.clone();
+        self.designated_consumer_validation_occurrences =
+            previous.designated_consumer_validation_occurrences.clone();
+        self.owner_operation_validation_occurrences =
+            previous.owner_operation_validation_occurrences.clone();
+        self.source_release_validation_occurrences =
+            previous.source_release_validation_occurrences.clone();
+        self.generation_ref = format!(
+            "m9-authority-generation:{:020}:{}",
+            self.generation,
+            self.checked_patch_authority_lineage_digest()
+        );
+        Some(self)
+    }
+
+    /// Advance from a freshly translated M9 inventory after M9 has admitted a
+    /// new lifetime for one checked primary anchor.  The caller supplies the
+    /// already sealed binding; this function neither issues authority nor
+    /// chooses a source locus.
+    fn with_successor_generation_after_fresh_anchor_reacquire(
+        mut self,
+        previous: &Self,
+        binding: M9FreshRelationReacquireBinding,
+    ) -> Option<Self> {
+        if self.program_identity != previous.program_identity
+            || self
+                .relation_authority_use(&binding.relation, "reacquire_primary")
+                .is_none()
+        {
+            return None;
+        }
+        self.generation = previous.generation.checked_add(1)?;
+        self.revoked_owner_capabilities = previous.revoked_owner_capabilities.clone();
+        self.revoked_designated_consumption_capabilities =
+            previous.revoked_designated_consumption_capabilities.clone();
+        self.designated_consumer_failures = previous.designated_consumer_failures.clone();
+        self.designated_consumer_witness_retirements =
+            previous.designated_consumer_witness_retirements.clone();
+        self.designated_source_release_failures =
+            previous.designated_source_release_failures.clone();
+        self.designated_consumer_validation_occurrences =
+            previous.designated_consumer_validation_occurrences.clone();
+        self.owner_operation_validation_occurrences =
+            previous.owner_operation_validation_occurrences.clone();
+        self.source_release_validation_occurrences =
+            previous.source_release_validation_occurrences.clone();
+        self.fresh_relation_reacquire_bindings = previous.fresh_relation_reacquire_bindings.clone();
+        self.fresh_relation_reacquire_bindings
+            .insert(binding.relation.clone(), binding);
+        self.generation_ref = format!(
+            "m9-authority-generation:{:020}:{}",
+            self.generation,
+            self.checked_patch_authority_lineage_digest()
+        );
         Some(self)
     }
 
@@ -4159,6 +4492,11 @@ impl M9AuthoritySuccessorPublisher {
                 format!("{:?}", self.evidence),
                 self.authority_runtime.private_restore_integrity_digest(),
                 self.current.private_restore_integrity_digest(),
+                // The template is sealed at admission and controls a later
+                // source-bound re-admission.  It therefore belongs to the
+                // process-local continuation seal even though no observer
+                // can inspect or invoke it.
+                format!("{:?}", self.fresh_anchor_reacquire_templates),
             ],
         )
     }
@@ -4372,6 +4710,280 @@ impl M9AuthoritySuccessorPublisher {
         );
         self.current = successor.clone();
         Ok(successor)
+    }
+
+    /// Retire the exact primary-anchor membership sealed for `relation`.
+    ///
+    /// SYS-4 supplies the checked primary locus only to bind this operation
+    /// back to its projected Core fragment.  The relation template supplies
+    /// the principal, and M9 resolves the active membership plus all of its
+    /// capability/witness lineage internally.  A relation/locus mismatch
+    /// fails before any mutable M9 transition.
+    pub(crate) fn retire_source_declared_primary_anchor(
+        &mut self,
+        relation: &str,
+        checked_primary_locus: &str,
+    ) -> Result<(M9AuthorityGeneration, M9RetiredMembershipLineage), M9AdmissionDiagnostics> {
+        let (primary_principal, primary_locus) = self
+            .fresh_anchor_reacquire_templates
+            .get(relation)
+            .map(|template| {
+                (
+                    template.primary_principal.clone(),
+                    template.primary_locus.clone(),
+                )
+            })
+            .ok_or_else(|| {
+                M9AdmissionDiagnostics::one(M9AdmissionErrorKind::InvalidMembershipLineage)
+            })?;
+        if primary_locus != checked_primary_locus {
+            return Err(M9AdmissionDiagnostics::one(
+                M9AdmissionErrorKind::InvalidMembershipLineage,
+            ));
+        }
+        let (successor, retirement) =
+            self.retire_source_declared_membership(&primary_principal, &primary_locus)?;
+        let template = self
+            .fresh_anchor_reacquire_templates
+            .get_mut(relation)
+            .expect("checked relation template remains present after M9 retirement");
+        template.retired_membership_ref = Some(retirement.successor_tombstone_ref().to_string());
+        template.retired_membership_epoch_ref =
+            Some(retirement.membership_epoch_after_ref().to_string());
+        template.retired_incarnation_ref = Some(retirement.incarnation_after_ref().to_string());
+        Ok((successor, retirement))
+    }
+
+    /// Produce one immutable M9 successor by retiring an exact active
+    /// source-declared membership selected by M9-internal principal and
+    /// locus. The concrete membership, capability, and witness references
+    /// remain inside `M9AuthorityRuntime`; callers receive only a sealed
+    /// successor and observer-safe retirement lineage.
+    fn retire_source_declared_membership(
+        &mut self,
+        principal: &str,
+        locus: &str,
+    ) -> Result<(M9AuthorityGeneration, M9RetiredMembershipLineage), M9AdmissionDiagnostics> {
+        let retirement = self.authority_runtime.retire_source_declared_membership(
+            principal,
+            locus,
+            format!("sys4-source-declared-membership-retire:{principal}:{locus}"),
+        )?;
+        let translated = M9RuntimeAdmitted {
+            base: self.base.clone(),
+            authority_runtime: self.authority_runtime.clone(),
+            evidence: self.evidence.clone(),
+        }
+        .into_m10_execution_seam()
+        .initial_authority_generation();
+        let successor = translated
+            .with_successor_generation_after_retired_membership(&self.current)
+            .ok_or_else(|| {
+                M9AdmissionDiagnostics::one(M9AdmissionErrorKind::InvalidMembershipLineage)
+            })?;
+        let retired_primary_relations = self
+            .fresh_anchor_reacquire_templates
+            .iter()
+            .filter_map(|(relation, template)| {
+                (template.primary_principal == principal && template.primary_locus == locus)
+                    .then_some(relation.clone())
+            })
+            .collect::<BTreeSet<_>>();
+        let mut successor = successor;
+        successor
+            .fresh_relation_reacquire_bindings
+            .retain(|relation, _| !retired_primary_relations.contains(relation));
+        successor.generation_ref = format!(
+            "m9-authority-generation:{:020}:{}",
+            successor.generation,
+            successor.checked_patch_authority_lineage_digest()
+        );
+        self.current = successor.clone();
+        Ok((successor, retirement))
+    }
+
+    /// Re-admit the exact primary anchor selected by the finite checked
+    /// template for `relation`.  No principal, locus, epoch, membership,
+    /// capability, or witness is accepted from SYS-4.  Every prior capability
+    /// scope attached to that anchor membership is re-issued from the sealed
+    /// checked inventory so later designated input release remains valid.
+    pub(crate) fn reacquire_source_declared_primary_anchor(
+        &mut self,
+        relation: &str,
+    ) -> Result<(M9AuthorityGeneration, M9FreshAnchorReacquireLineage), M9AdmissionDiagnostics>
+    {
+        let template = self
+            .fresh_anchor_reacquire_templates
+            .get(relation)
+            .cloned()
+            .ok_or_else(|| {
+                M9AdmissionDiagnostics::one(M9AdmissionErrorKind::InvalidMembershipLineage)
+            })?;
+        let (
+            Some(retired_membership_ref),
+            Some(retired_membership_epoch_ref),
+            Some(retired_incarnation_ref),
+        ) = (
+            template.retired_membership_ref.as_deref(),
+            template.retired_membership_epoch_ref.as_deref(),
+            template.retired_incarnation_ref.as_deref(),
+        )
+        else {
+            return Err(M9AdmissionDiagnostics::one(
+                M9AdmissionErrorKind::InvalidMembershipLineage,
+            ));
+        };
+        if self
+            .authority_runtime
+            .snapshot
+            .current_memberships
+            .contains_key(&(
+                template.primary_principal.clone(),
+                template.primary_locus.clone(),
+            ))
+        {
+            return Err(M9AdmissionDiagnostics::one(
+                M9AdmissionErrorKind::InvalidMembershipLineage,
+            ));
+        }
+        let (auth_residual_name, auth_residual_source_ref) = self
+            .base
+            .outer_admission
+            .residual_bindings
+            .0
+            .iter()
+            .find_map(|binding| {
+                (binding.kind == ResidualObligationKind::AuthDeferred)
+                    .then_some((binding.name.clone(), binding.source_ref.clone()))
+            })
+            .and_then(|(name, source_ref)| source_ref.map(|source_ref| (name, source_ref)))
+            .ok_or_else(|| {
+                M9AdmissionDiagnostics::one(M9AdmissionErrorKind::InvalidMembershipLineage)
+            })?;
+        let next_generation = self.current.generation.checked_add(1).ok_or_else(|| {
+            M9AdmissionDiagnostics::one(M9AdmissionErrorKind::InvalidMembershipLineage)
+        })?;
+        let fresh_epoch = format!(
+            "{}:reacquire:{next_generation}",
+            template.prior_membership_epoch
+        );
+        let fresh_incarnation = format!(
+            "{}:reacquire:{next_generation}",
+            template.prior_membership_incarnation
+        );
+        let attestation = self.authority_runtime.issue_membership_attestation(
+            &template.primary_principal,
+            &template.primary_locus,
+            &fresh_epoch,
+            &fresh_incarnation,
+            &auth_residual_name,
+            auth_residual_source_ref.clone(),
+        )?;
+        let membership = self.authority_runtime.authenticate_membership(
+            M9MembershipRequest::new(
+                &template.primary_principal,
+                &template.primary_locus,
+                &fresh_epoch,
+            )
+            .with_incarnation(&fresh_incarnation)
+            .with_auth_residual(&auth_residual_name, auth_residual_source_ref.clone())
+            .with_issued_provider_attestation(attestation),
+        )?;
+        let mut capability_refs = Vec::new();
+        let mut witness_refs = Vec::new();
+        for (index, capability_template) in template.capability_templates.iter().enumerate() {
+            let capability = self.authority_runtime.authorize_capability(
+                M9CapabilityGrantRequest::new(format!(
+                    "finite-local-fresh-anchor-regrant:{}:{}:{next_generation}:{index}",
+                    template.relation, template.primary_locus
+                ))
+                .with_membership_ref(membership.ref_id())
+                .with_scope(capability_template.scope.clone())
+                .with_lineage_epoch(membership.epoch())
+                .with_source_ref(capability_template.source_ref.clone()),
+            )?;
+            let witness = self.authority_runtime.materialize_witness(
+                M9WitnessRequest::new(format!(
+                    "finite-local-fresh-anchor-witness:{}:{}:{next_generation}:{index}",
+                    template.relation, template.primary_locus
+                ))
+                .with_membership_ref(membership.ref_id())
+                .with_capability_ref(capability.ref_id())
+                .with_source_ref(capability_template.source_ref.clone()),
+            )?;
+            capability_refs.push(capability.ref_id().to_string());
+            witness_refs.push(witness.ref_id().to_string());
+        }
+        if capability_refs.is_empty() || witness_refs.len() != capability_refs.len() {
+            return Err(M9AdmissionDiagnostics::one(
+                M9AdmissionErrorKind::InvalidCapabilityLineage,
+            ));
+        }
+        let lineage = M9FreshAnchorReacquireLineage {
+            checked_primary_anchor_ref: m9_opaque_ref(&format!(
+                "checked-primary-anchor:{}:{}:{:?}",
+                template.relation, template.primary_locus, template.primary_anchor_source_ref
+            )),
+            // The lifetime immediately preceding re-admission is the exact
+            // tombstoned retirement, not the original active template.  The
+            // values therefore join directly to the leave receipt without a
+            // workflow-side lookup or reconstruction.
+            prior_membership_ref: retired_membership_ref.to_string(),
+            prior_membership_epoch_ref: retired_membership_epoch_ref.to_string(),
+            prior_incarnation_ref: retired_incarnation_ref.to_string(),
+            retired_membership_ref: retired_membership_ref.to_string(),
+            retired_membership_epoch_ref: retired_membership_epoch_ref.to_string(),
+            retired_incarnation_ref: retired_incarnation_ref.to_string(),
+            fresh_membership_ref: m9_opaque_ref(&format!(
+                "primary-anchor-fresh-membership:{}",
+                membership.ref_id()
+            )),
+            fresh_membership_epoch_ref: m9_opaque_ref(&format!(
+                "primary-anchor-fresh-epoch:{}",
+                membership.epoch()
+            )),
+            fresh_incarnation_ref: m9_opaque_ref(&format!(
+                "primary-anchor-fresh-incarnation:{}",
+                membership.incarnation()
+            )),
+            capability_lineage_ref: m9_opaque_ref(&format!(
+                "primary-anchor-fresh-capabilities:{}",
+                capability_refs.join("|")
+            )),
+            witness_lineage_ref: m9_opaque_ref(&format!(
+                "primary-anchor-fresh-witnesses:{}",
+                witness_refs.join("|")
+            )),
+        };
+        let translated = M9RuntimeAdmitted {
+            base: self.base.clone(),
+            authority_runtime: self.authority_runtime.clone(),
+            evidence: self.evidence.clone(),
+        }
+        .into_m10_execution_seam()
+        .initial_authority_generation();
+        let relation_authority = translated
+            .relation_authority_use(relation, "reacquire_primary")
+            .ok_or_else(|| {
+                M9AdmissionDiagnostics::one(M9AdmissionErrorKind::InvalidCapabilityLineage)
+            })?;
+        let binding = M9FreshRelationReacquireBinding::from_fresh_anchor_reacquire(
+            &template,
+            relation_authority,
+            lineage.clone(),
+            next_generation,
+            membership.epoch(),
+        )
+        .ok_or_else(|| {
+            M9AdmissionDiagnostics::one(M9AdmissionErrorKind::InvalidCapabilityLineage)
+        })?;
+        let successor = translated
+            .with_successor_generation_after_fresh_anchor_reacquire(&self.current, binding)
+            .ok_or_else(|| {
+                M9AdmissionDiagnostics::one(M9AdmissionErrorKind::InvalidCapabilityLineage)
+            })?;
+        self.current = successor.clone();
+        Ok((successor, lineage))
     }
 
     /// Retire the checked consumption witness without giving SYS-4 authority
@@ -4874,9 +5486,127 @@ struct M9FiniteFreshAtAdmissionLifecycleFact {
     owner_locus: String,
     primary_anchor: String,
     primary_epoch: String,
-    membership_epoch: String,
-    membership_incarnation: String,
+    owner_membership_epoch: String,
+    owner_membership_incarnation: String,
+    primary_principal: Option<String>,
+    primary_locus: Option<String>,
+    primary_membership_epoch: Option<String>,
+    primary_membership_incarnation: Option<String>,
+    primary_anchor_source_ref: Option<SourceRef>,
     binding_frontier: String,
+}
+
+/// A bounded re-admission template retained only by the M9 successor
+/// publisher.  Its capability scopes are copied from the already admitted,
+/// checked inventory for the exact initial primary membership; SYS-4 cannot
+/// extend the inventory or choose a different primary locus.
+#[derive(Debug, Clone, PartialEq, Eq)]
+struct M9FreshAnchorReacquireTemplate {
+    relation: String,
+    owner_locus: String,
+    primary_anchor: String,
+    primary_principal: String,
+    primary_locus: String,
+    prior_membership_ref: String,
+    prior_membership_epoch: String,
+    prior_membership_incarnation: String,
+    primary_anchor_source_ref: SourceRef,
+    binding_frontier: String,
+    capability_templates: Vec<M9FreshAnchorCapabilityTemplate>,
+    /// Filled only by the actual source-bound retirement.  These opaque refs
+    /// let the subsequent one-shot re-admission carry the exact retired
+    /// lineage; no caller provides or derives them.
+    retired_membership_ref: Option<String>,
+    retired_membership_epoch_ref: Option<String>,
+    retired_incarnation_ref: Option<String>,
+}
+
+#[derive(Debug, Clone, PartialEq, Eq)]
+struct M9FreshAnchorCapabilityTemplate {
+    scope: M9CapabilityScope,
+    source_ref: SourceRef,
+}
+
+impl M9FreshAnchorReacquireTemplate {
+    fn from_validated_local_fact(
+        fact: &M9FiniteFreshAtAdmissionLifecycleFact,
+        authority: &M9AuthorityRuntime,
+    ) -> Option<Self> {
+        let (
+            Some(primary_principal),
+            Some(primary_locus),
+            Some(primary_membership_epoch),
+            Some(primary_membership_incarnation),
+            Some(primary_anchor_source_ref),
+        ) = (
+            fact.primary_principal.as_ref(),
+            fact.primary_locus.as_ref(),
+            fact.primary_membership_epoch.as_ref(),
+            fact.primary_membership_incarnation.as_ref(),
+            fact.primary_anchor_source_ref.as_ref(),
+        )
+        else {
+            return None;
+        };
+        let prior_membership_ref =
+            format!("membership:{primary_principal}:{primary_locus}:{primary_membership_epoch}");
+        let membership = authority.snapshot.memberships.get(&prior_membership_ref)?;
+        if !membership.active
+            || membership.principal != *primary_principal
+            || membership.locus != *primary_locus
+            || membership.epoch != *primary_membership_epoch
+            || membership.incarnation != *primary_membership_incarnation
+        {
+            return None;
+        }
+        let capability_templates = authority
+            .snapshot
+            .capabilities
+            .values()
+            .filter(|capability| {
+                capability.active
+                    && capability.membership_ref == prior_membership_ref
+                    && capability.source_ref.is_some()
+            })
+            .map(|capability| M9FreshAnchorCapabilityTemplate {
+                scope: capability.scope.clone(),
+                source_ref: capability
+                    .source_ref
+                    .clone()
+                    .expect("filtered M9 capability retains source reference"),
+            })
+            .collect::<Vec<_>>();
+        let mut capability_templates = capability_templates;
+        // This anchor-presence scope is deliberately distinct from the
+        // B-owned relation transition authority.  It is what lets M9 prove
+        // that the freshly re-admitted A lifetime exists without allowing an
+        // A-side capability to overwrite B's owner operation in M8.
+        capability_templates.push(M9FreshAnchorCapabilityTemplate {
+            scope: M9CapabilityScope::primary_anchor_presence(
+                &fact.relation,
+                primary_locus,
+                &fact.owner_locus,
+                &fact.binding_frontier,
+            ),
+            source_ref: membership.auth_residual_source_ref.clone()?,
+        });
+        Some(Self {
+            relation: fact.relation.clone(),
+            owner_locus: fact.owner_locus.clone(),
+            primary_anchor: fact.primary_anchor.clone(),
+            primary_principal: primary_principal.clone(),
+            primary_locus: primary_locus.clone(),
+            prior_membership_ref,
+            prior_membership_epoch: primary_membership_epoch.clone(),
+            prior_membership_incarnation: primary_membership_incarnation.clone(),
+            primary_anchor_source_ref: primary_anchor_source_ref.clone(),
+            binding_frontier: fact.binding_frontier.clone(),
+            capability_templates,
+            retired_membership_ref: None,
+            retired_membership_epoch_ref: None,
+            retired_incarnation_ref: None,
+        })
+    }
 }
 
 impl M9FiniteFreshAtAdmissionLifecycleFact {
@@ -4885,8 +5615,8 @@ impl M9FiniteFreshAtAdmissionLifecycleFact {
             "finite-local-bounded-bootstrap:{}:{}:{}:{}:{}",
             self.relation,
             self.owner_locus,
-            self.membership_epoch,
-            self.membership_incarnation,
+            self.owner_membership_epoch,
+            self.owner_membership_incarnation,
             self.binding_frontier,
         ))
     }
@@ -4924,13 +5654,48 @@ fn finite_local_fresh_at_admission_lifecycle_facts(
                 M9AdmissionErrorKind::InvalidMembershipLineage,
             ));
         };
+        let (
+            primary_principal,
+            primary_locus,
+            primary_membership_epoch,
+            primary_membership_incarnation,
+            primary_anchor_source_ref,
+        ) = match relation.primary().anchor_locus() {
+            Some(primary_locus) => {
+                let primary_membership = memberships
+                    .get(&(admission_principal.to_string(), primary_locus.to_string()))
+                    .ok_or_else(|| {
+                        M9AdmissionDiagnostics::one(M9AdmissionErrorKind::InvalidMembershipLineage)
+                    })?;
+                let primary_anchor_source_ref = relation
+                    .primary()
+                    .anchor_locus_source_ref()
+                    .cloned()
+                    .ok_or_else(|| {
+                        M9AdmissionDiagnostics::one(M9AdmissionErrorKind::InvalidMembershipLineage)
+                    })?;
+                (
+                    Some(admission_principal.to_string()),
+                    Some(primary_locus.to_string()),
+                    Some(primary_membership.epoch.clone()),
+                    Some(primary_membership.incarnation.clone()),
+                    Some(primary_anchor_source_ref),
+                )
+            }
+            None => (None, None, None, None, None),
+        };
         let fact = M9FiniteFreshAtAdmissionLifecycleFact {
             relation: evaluation.name().to_string(),
             owner_locus: relation.owner_locus().to_string(),
             primary_anchor: relation.primary().anchor().to_string(),
             primary_epoch: relation.primary().epoch().to_string(),
-            membership_epoch: membership.epoch.clone(),
-            membership_incarnation: membership.incarnation.clone(),
+            owner_membership_epoch: membership.epoch.clone(),
+            owner_membership_incarnation: membership.incarnation.clone(),
+            primary_principal,
+            primary_locus,
+            primary_membership_epoch,
+            primary_membership_incarnation,
+            primary_anchor_source_ref,
             binding_frontier: binding_frontier.as_str().to_string(),
         };
         if !relation_bootstraps.contains(evaluation.name())
@@ -5614,7 +6379,8 @@ impl M9RuntimeAdmitted {
                     );
                 }
                 M9CapabilityScope::OwnerEvaluation { .. }
-                | M9CapabilityScope::ContractUpdate { .. } => {}
+                | M9CapabilityScope::ContractUpdate { .. }
+                | M9CapabilityScope::PrimaryAnchorPresence { .. } => {}
             }
         }
         let mut authority_generation = M9AuthorityGeneration {
@@ -5649,6 +6415,7 @@ impl M9RuntimeAdmitted {
             evidence,
             authority_runtime: authority_runtime.clone(),
             current: authority_generation.clone(),
+            fresh_anchor_reacquire_templates: BTreeMap::new(),
         };
         let instance = materialize_m9_resolved_base(base.into_embedded_m8_base());
         M9M10ExecutionSeam {
@@ -6333,6 +7100,14 @@ pub enum M9CapabilityScope {
         owner_locus: String,
         binding_frontier: String,
     },
+    /// Internal M9-only proof that an explicitly checked relation anchor has
+    /// a live source-declared membership. It creates no M8 owner authority.
+    PrimaryAnchorPresence {
+        relation: String,
+        primary_locus: String,
+        owner_locus: String,
+        binding_frontier: String,
+    },
     DesignatedEvaluation {
         evaluator: String,
         result: String,
@@ -6409,6 +7184,20 @@ impl M9CapabilityScope {
         Self::RelationTransition {
             relation: relation.into(),
             transition: transition.into(),
+            owner_locus: owner_locus.into(),
+            binding_frontier: binding_frontier.into(),
+        }
+    }
+
+    pub(crate) fn primary_anchor_presence(
+        relation: impl Into<String>,
+        primary_locus: impl Into<String>,
+        owner_locus: impl Into<String>,
+        binding_frontier: impl Into<String>,
+    ) -> Self {
+        Self::PrimaryAnchorPresence {
+            relation: relation.into(),
+            primary_locus: primary_locus.into(),
             owner_locus: owner_locus.into(),
             binding_frontier: binding_frontier.into(),
         }
@@ -7393,6 +8182,99 @@ impl M9AuthorityRuntime {
         Ok(())
     }
 
+    /// Retire exactly one currently admitted source-declared
+    /// `(principal,locus)` membership.  The lookup of the concrete membership
+    /// reference, and the retirement of every capability/witness in that
+    /// lineage, stay inside M9.  This is intentionally not a general
+    /// membership API and never accepts an authority-bearing reference from
+    /// SYS-4 or an external schedule.
+    pub(crate) fn retire_source_declared_membership(
+        &mut self,
+        principal: &str,
+        locus: &str,
+        audit_frontier: impl Into<String>,
+    ) -> Result<M9RetiredMembershipLineage, M9AdmissionDiagnostics> {
+        let membership_ref = self
+            .snapshot
+            .current_memberships
+            .get(&(principal.to_string(), locus.to_string()))
+            .cloned()
+            .ok_or_else(|| {
+                M9AdmissionDiagnostics::one(M9AdmissionErrorKind::InvalidMembershipLineage)
+            })?;
+        let membership = self
+            .snapshot
+            .memberships
+            .get(&membership_ref)
+            .cloned()
+            .ok_or_else(|| {
+                M9AdmissionDiagnostics::one(M9AdmissionErrorKind::InvalidMembershipLineage)
+            })?;
+        if !membership.active || membership.principal != principal || membership.locus != locus {
+            return Err(M9AdmissionDiagnostics::one(
+                M9AdmissionErrorKind::InvalidMembershipLineage,
+            ));
+        }
+        let capability_lineage = self
+            .snapshot
+            .capabilities
+            .values()
+            .filter(|capability| capability.membership_ref == membership_ref && capability.active)
+            .map(|capability| capability.reference.as_str())
+            .collect::<Vec<_>>()
+            .join("|");
+        let witness_lineage = self
+            .snapshot
+            .witnesses
+            .values()
+            .filter(|witness| witness.membership_ref == membership_ref && witness.live)
+            .map(|witness| witness.reference.as_str())
+            .collect::<Vec<_>>()
+            .join("|");
+        let audit_frontier = audit_frontier.into();
+        let checked_membership_identity_ref = m9_opaque_ref(&format!(
+            "source-declared-membership-identity:{principal}:{locus}:{membership_ref}"
+        ));
+        let prior_membership_ref = m9_opaque_ref(&format!(
+            "source-declared-membership-active:{principal}:{locus}:{membership_ref}"
+        ));
+        self.retire_membership(&membership_ref, audit_frontier.clone())?;
+        if self.snapshot.retired_memberships.get(&membership_ref) != Some(&audit_frontier) {
+            return Err(M9AdmissionDiagnostics::one(
+                M9AdmissionErrorKind::InvalidMembershipLineage,
+            ));
+        }
+        Ok(M9RetiredMembershipLineage {
+            checked_membership_identity_ref,
+            prior_membership_ref,
+            successor_tombstone_ref: m9_opaque_ref(&format!(
+                "source-declared-membership-retired:{principal}:{locus}:{membership_ref}:{audit_frontier}"
+            )),
+            membership_epoch_before_ref: m9_opaque_ref(&format!(
+                "source-declared-membership-epoch-before:{membership_ref}:{}",
+                membership.epoch
+            )),
+            membership_epoch_after_ref: m9_opaque_ref(&format!(
+                "source-declared-membership-epoch-after-retirement:{membership_ref}:{}",
+                membership.epoch
+            )),
+            incarnation_before_ref: m9_opaque_ref(&format!(
+                "source-declared-membership-incarnation-before:{membership_ref}:{}",
+                membership.incarnation
+            )),
+            incarnation_after_ref: m9_opaque_ref(&format!(
+                "source-declared-membership-incarnation-after-retirement:{membership_ref}:{}",
+                membership.incarnation
+            )),
+            capability_lineage_ref: m9_opaque_ref(&format!(
+                "source-declared-membership-retired-capabilities:{membership_ref}:{capability_lineage}"
+            )),
+            witness_lineage_ref: m9_opaque_ref(&format!(
+                "source-declared-membership-retired-witnesses:{membership_ref}:{witness_lineage}"
+            )),
+        })
+    }
+
     /// Retire a live witness while retaining its M9 lineage and invalidation
     /// evidence.  This is deliberately narrower than capability revocation.
     pub(crate) fn retire_witness(
@@ -7879,6 +8761,19 @@ impl M9AuthorityRuntime {
                 owner_locus,
                 binding_frontier,
             ),
+            M9CapabilityScope::PrimaryAnchorPresence {
+                relation,
+                primary_locus,
+                owner_locus,
+                binding_frontier,
+            } => {
+                membership.locus == *primary_locus
+                    && outer.source_artifact.contains_relation_scope(
+                        relation,
+                        owner_locus,
+                        binding_frontier,
+                    )
+            }
             M9CapabilityScope::DesignatedEvaluation {
                 evaluator,
                 result,
@@ -8166,6 +9061,14 @@ fn canonical_m9_capability_scope(scope: &M9CapabilityScope) -> String {
         } => {
             format!("relation_transition:{relation}:{transition}:{owner_locus}:{binding_frontier}")
         }
+        M9CapabilityScope::PrimaryAnchorPresence {
+            relation,
+            primary_locus,
+            owner_locus,
+            binding_frontier,
+        } => format!(
+            "primary_anchor_presence:{relation}:{primary_locus}:{owner_locus}:{binding_frontier}"
+        ),
         M9CapabilityScope::DesignatedEvaluation {
             evaluator,
             result,
@@ -8415,6 +9318,7 @@ impl M9ContractAuthorityUse {
             M9CapabilityScope::OwnerEvaluation { .. }
             | M9CapabilityScope::Observation { .. }
             | M9CapabilityScope::RelationTransition { .. }
+            | M9CapabilityScope::PrimaryAnchorPresence { .. }
             | M9CapabilityScope::DesignatedEvaluation { .. }
             | M9CapabilityScope::DesignatedRemoteInputRelease { .. }
             | M9CapabilityScope::DesignatedConsumption { .. } => None,
@@ -8764,6 +9668,7 @@ impl M9ObserverRequest {
             M9CapabilityScope::OwnerEvaluation { .. }
             | M9CapabilityScope::ContractUpdate { .. }
             | M9CapabilityScope::RelationTransition { .. }
+            | M9CapabilityScope::PrimaryAnchorPresence { .. }
             | M9CapabilityScope::DesignatedEvaluation { .. }
             | M9CapabilityScope::DesignatedRemoteInputRelease { .. }
             | M9CapabilityScope::DesignatedConsumption { .. } => String::new(),

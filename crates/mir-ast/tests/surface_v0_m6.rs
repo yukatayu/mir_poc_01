@@ -6,6 +6,7 @@ use mir_ast::surface_v0::{
 };
 
 const FIXTURE_DIR: &str = "tests/fixtures/surface-v0";
+const SYS5_ANCHOR_LOCUS_FIXTURE: &str = "sys5_relation_anchor_locus_boundary.mir";
 
 fn fixture_path(name: &str) -> String {
     format!("{FIXTURE_DIR}/{name}")
@@ -291,6 +292,48 @@ fn parser_retains_bounded_assignment_designated_exprs_and_relation_transforms_wi
     assert_eq!(
         relation.fallback().transform_span().byte_range(),
         byte_range(&source, "identity")
+    );
+}
+
+#[test]
+fn parser_retains_provisional_internal_relation_anchor_loci_and_spans() {
+    let (path, source) = load_fixture(SYS5_ANCHOR_LOCUS_FIXTURE);
+    let ast = parse_surface_v0(FixtureSource::new(path.clone(), source.clone()))
+        .expect("provisional internal relation anchor-locus source parses");
+
+    let relation = ast.relation("bird_follow").expect("maintained relation");
+    assert_eq!(relation.owner_locus(), "ParticipantB");
+    assert_eq!(relation.primary().anchor(), "participant_a_shoulder");
+    assert_eq!(relation.primary().anchor_locus(), Some("ParticipantA"));
+    assert_eq!(
+        relation
+            .primary()
+            .anchor_locus_span()
+            .expect("primary anchor locus has a span")
+            .byte_range(),
+        byte_range_after(&source, "primary participant_a_shoulder at", "ParticipantA")
+    );
+    assert_eq!(relation.fallback().anchor(), "participant_b_shoulder");
+    assert_eq!(relation.fallback().anchor_locus(), Some("ParticipantB"));
+    assert_eq!(
+        relation
+            .fallback()
+            .anchor_locus_span()
+            .expect("fallback anchor locus has a span")
+            .byte_range(),
+        byte_range_after(
+            &source,
+            "fallback participant_b_shoulder at",
+            "ParticipantB"
+        )
+    );
+    assert!(
+        relation.primary().span().is_child_of(relation.span()),
+        "explicit anchor locus remains part of the relation source span"
+    );
+    assert!(
+        relation.fallback().span().is_child_of(relation.span()),
+        "explicit fallback locus remains part of the relation source span"
     );
 }
 

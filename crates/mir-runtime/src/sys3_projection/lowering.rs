@@ -95,6 +95,11 @@ fn required_loci(checked: &CheckedSurfaceV0) -> BTreeSet<String> {
             CheckedEvaluationKind::PublishRelation => {
                 let core = evaluation.relation_core().expect("checked relation Core");
                 loci.insert(core.owner_locus().to_string());
+                for anchor in [core.primary(), core.fallback()] {
+                    if let Some(locus) = anchor.anchor_locus() {
+                        loci.insert(locus.to_string());
+                    }
+                }
                 if let Some(consumer) = core.consumer_projection_locus() {
                     loci.insert(consumer.to_string());
                 }
@@ -468,6 +473,8 @@ fn projected_anchor(
 ) -> ProjectedRelationAnchor {
     ProjectedRelationAnchor {
         anchor: anchor.anchor().to_string(),
+        anchor_locus: anchor.anchor_locus().map(str::to_string),
+        anchor_locus_source_ref: anchor.anchor_locus_source_ref().cloned(),
         epoch: anchor.epoch().to_string(),
         transform: anchor.transform().clone(),
         source_ref: source_ref.clone(),

@@ -51,6 +51,17 @@ fn byte_range(source: &str, needle: &str) -> Range<usize> {
     start..start + needle.len()
 }
 
+fn byte_range_after(source: &str, anchor: &str, needle: &str) -> Range<usize> {
+    let anchor_start = source
+        .find(anchor)
+        .unwrap_or_else(|| panic!("fixture contains anchor {anchor:?}"));
+    let relative_start = source[anchor_start..]
+        .find(needle)
+        .unwrap_or_else(|| panic!("fixture contains {needle:?} after {anchor:?}"));
+    let start = anchor_start + relative_start;
+    start..start + needle.len()
+}
+
 fn byte_range_nth(source: &str, needle: &str, occurrence: usize) -> Range<usize> {
     let mut search_from = 0;
     for _ in 0..occurrence {
@@ -577,6 +588,11 @@ fn relation_checked_core_retains_m8_consumable_relation_shape() {
 
     let primary = relation_core.primary();
     assert_eq!(primary.anchor(), "perch_anchor");
+    assert_eq!(
+        format!("{primary:?}"),
+        "RelationAnchorCore { anchor: \"perch_anchor\", epoch: \"primary_epoch\", transform: RelationTransformCore { kind: \"translate\", translation: Some((3, -2)) } }",
+        "legacy relation anchors retain their pre-SYS-5 structural identity encoding"
+    );
     assert_eq!(primary.epoch(), "primary_epoch");
     assert_eq!(primary.transform().kind(), "translate");
     assert_eq!(primary.transform().translation(), Some((3, -2)));
@@ -586,6 +602,72 @@ fn relation_checked_core_retains_m8_consumable_relation_shape() {
     assert_eq!(fallback.epoch(), "fallback_epoch");
     assert_eq!(fallback.transform().kind(), "identity");
     assert_eq!(fallback.transform().translation(), Some((0, 0)));
+}
+
+#[test]
+fn relation_checked_core_retains_provisional_internal_anchor_locus_and_source_refs() {
+    let (path, source) = load_fixture("sys5_relation_anchor_locus_boundary.mir");
+    let checked = check_and_elaborate_surface_v0(FixtureSource::new(path.clone(), source.clone()))
+        .expect("explicit relation anchor loci check and elaborate");
+
+    let relation = checked
+        .relation("bird_follow")
+        .expect("maintained relation evaluation");
+    let relation_core = relation.relation_core().expect("relation checked Core");
+    assert_eq!(relation_core.owner_locus(), "ParticipantB");
+    assert_eq!(relation_core.primary().anchor(), "participant_a_shoulder");
+    assert_eq!(relation_core.primary().anchor_locus(), Some("ParticipantA"));
+    assert_eq!(
+        relation_core.primary().anchor_locus_source_ref(),
+        Some(&expected_source_ref_for_range(
+            &path,
+            &source,
+            byte_range_after(&source, "primary participant_a_shoulder at", "ParticipantA"),
+        ))
+    );
+    assert_eq!(relation_core.fallback().anchor(), "participant_b_shoulder");
+    assert_eq!(
+        relation_core.fallback().anchor_locus(),
+        Some("ParticipantB")
+    );
+    assert_eq!(
+        relation_core.fallback().anchor_locus_source_ref(),
+        Some(&expected_source_ref_for_range(
+            &path,
+            &source,
+            byte_range_after(
+                &source,
+                "fallback participant_b_shoulder at",
+                "ParticipantB"
+            ),
+        ))
+    );
+    assert_ne!(
+        relation_core.primary().anchor_locus(),
+        Some(relation_core.owner_locus()),
+        "primary existence membership may be bound to ParticipantA while transition authority stays at ParticipantB"
+    );
+}
+
+#[test]
+fn checker_rejects_unknown_explicit_relation_anchor_locus_fail_closed() {
+    let (path, source) = load_fixture("sys5_relation_anchor_locus_boundary.mir");
+    let source = source.replace(
+        "primary participant_a_shoulder at ParticipantA epoch",
+        "primary participant_a_shoulder at MissingParticipant epoch",
+    );
+
+    let diagnostics =
+        check_and_elaborate_surface_v0(FixtureSource::new(path.clone(), source.clone()))
+            .expect_err("undeclared explicit relation anchor locus must fail closed");
+
+    assert_single_diagnostic(
+        &diagnostics,
+        M7DiagnosticKind::UndefinedRelationAnchorLocus,
+        &path,
+        &source,
+        "MissingParticipant",
+    );
 }
 
 #[test]

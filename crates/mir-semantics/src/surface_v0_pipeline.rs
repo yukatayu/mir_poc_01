@@ -120,6 +120,7 @@ pub enum M7DiagnosticKind {
     UndefinedStateIndexType,
     UndefinedStateFieldType,
     UndefinedRelationSubjectType,
+    UndefinedRelationAnchorLocus,
     UndefinedOwnerLocus,
     UndefinedConsumerLocus,
     UndefinedSelfPrincipal,
@@ -944,17 +945,45 @@ impl RelationTransformCore {
     }
 }
 
-#[derive(Debug, Clone, PartialEq, Eq)]
+#[derive(Clone, PartialEq, Eq)]
 pub struct RelationAnchorCore {
     anchor: String,
+    anchor_locus: Option<String>,
+    anchor_locus_source_ref: Option<SourceRef>,
     epoch: String,
     transform: RelationTransformCore,
+}
+
+impl std::fmt::Debug for RelationAnchorCore {
+    fn fmt(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        // Keep the pre-SYS-5 field sequence unchanged when the optional
+        // internal boundary is absent.  M10's accepted checked-Core identity
+        // includes this Debug representation; a legacy source must therefore
+        // retain its prior identity rather than receive an implicit upgrade.
+        let mut debug = formatter.debug_struct("RelationAnchorCore");
+        debug
+            .field("anchor", &self.anchor)
+            .field("epoch", &self.epoch)
+            .field("transform", &self.transform);
+        if let Some(locus) = &self.anchor_locus {
+            debug.field("anchor_locus", locus);
+        }
+        if let Some(source_ref) = &self.anchor_locus_source_ref {
+            debug.field("anchor_locus_source_ref", source_ref);
+        }
+        debug.finish()
+    }
 }
 
 impl RelationAnchorCore {
     fn from_surface(anchor: &mir_ast::surface_v0::RelationAnchor) -> Self {
         Self {
             anchor: anchor.anchor().to_string(),
+            anchor_locus: anchor.anchor_locus().map(str::to_string),
+            anchor_locus_source_ref: anchor
+                .anchor_locus_span()
+                .map(PipelineSourceSpan::from_surface)
+                .map(|span| span.source_ref()),
             epoch: anchor.epoch().to_string(),
             transform: RelationTransformCore::from_surface(anchor.transform()),
         }
@@ -962,6 +991,18 @@ impl RelationAnchorCore {
 
     pub fn anchor(&self) -> &str {
         &self.anchor
+    }
+
+    /// Internal optional locus binding retained from ordinary source.
+    ///
+    /// Absence represents the accepted legacy profile and is intentionally
+    /// not inferred from a relation owner, provider, or transport endpoint.
+    pub fn anchor_locus(&self) -> Option<&str> {
+        self.anchor_locus.as_deref()
+    }
+
+    pub fn anchor_locus_source_ref(&self) -> Option<&SourceRef> {
+        self.anchor_locus_source_ref.as_ref()
     }
 
     pub fn epoch(&self) -> &str {
@@ -2993,6 +3034,20 @@ fn declaration_consistency_diagnostic(ast: &SurfaceV0File) -> Option<SurfaceV0Pi
                 M7DiagnosticKind::UndefinedRelationSubjectType,
                 PipelineSourceSpan::from_surface(relation.subject_type_span()),
             ));
+        }
+        for anchor in [relation.primary(), relation.fallback()] {
+            if let Some(locus) = anchor.anchor_locus()
+                && !known_locus(locus)
+            {
+                return Some(SurfaceV0PipelineDiagnostics::one(
+                    M7DiagnosticKind::UndefinedRelationAnchorLocus,
+                    PipelineSourceSpan::from_surface(
+                        anchor
+                            .anchor_locus_span()
+                            .expect("explicit relation anchor locus has a span"),
+                    ),
+                ));
+            }
         }
         if let Some(locus) = relation.consumer_projection_locus()
             && !known_locus(locus)

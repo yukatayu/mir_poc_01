@@ -45,6 +45,7 @@ const FOUR_LOCUS_FIXTURE: &str = "sys3_projection_four_locus.mir";
 const SINGLE_OWNER_FIXTURE: &str = "m7_owner_only_no_residuals.mir";
 const CANONICAL_FIXTURE: &str = "canonical_attack_bundle.mir";
 const RELATION_ONLY_FIXTURE: &str = "maintained_bird_relation.mir";
+const SYS5_ANCHOR_LOCUS_FIXTURE: &str = "sys5_relation_anchor_locus_boundary.mir";
 const EXTENSION_PRESSURE_FIXTURE: &str = "sys3_projection_relation_extension_pressure.mir";
 const ORDERED_EXPR_FIXTURE: &str = "m7_ordered_expression_tree.mir";
 const DESIGNATED_CONSUME_FIXTURE: &str = "designated_result_consume_three_locus.mir";
@@ -178,6 +179,11 @@ fn assert_projected_anchor_matches_checked(
     checked: &RelationAnchorCore,
 ) {
     assert_eq!(projected.anchor(), checked.anchor());
+    assert_eq!(projected.anchor_locus(), checked.anchor_locus());
+    assert_eq!(
+        projected.anchor_locus_source_ref(),
+        checked.anchor_locus_source_ref()
+    );
     assert_eq!(projected.epoch(), checked.epoch());
     assert_eq!(projected.transform().kind(), checked.transform().kind());
     assert_eq!(
@@ -187,6 +193,10 @@ fn assert_projected_anchor_matches_checked(
     assert!(
         projected.source_ref().path.ends_with(CANONICAL_FIXTURE)
             || projected.source_ref().path.ends_with(RELATION_ONLY_FIXTURE)
+            || projected
+                .source_ref()
+                .path
+                .ends_with(SYS5_ANCHOR_LOCUS_FIXTURE)
             || projected
                 .source_ref()
                 .path
@@ -834,6 +844,68 @@ fn relation_graph_preserves_checked_core_shape_and_residual_refs() {
             ResidualObligationKind::FallbackValidity,
             "bird_follow",
         ))
+    );
+}
+
+#[test]
+fn relation_anchor_loci_are_preserved_from_checked_core_into_projection() {
+    let checked = load_checked_fixture(SYS5_ANCHOR_LOCUS_FIXTURE);
+    let result: GlobalProjectionResult = project_checked_core(
+        &checked,
+        &topology(
+            checked.program_identity(),
+            ["WorldAuthority", "ParticipantA", "ParticipantB", "ViewerC"],
+        ),
+    )
+    .expect("explicit relation anchor loci project structurally");
+
+    let relation_eval = checked_relation(&checked, "bird_follow");
+    let relation_core = relation_eval
+        .relation_core()
+        .expect("checked relation Core retained");
+    let relation = result
+        .relation_graph()
+        .relation("bird_follow")
+        .expect("relation graph keeps explicit anchor-locus relation");
+
+    assert_eq!(relation.owner_locus(), "ParticipantB");
+    assert_eq!(
+        relation.primary_anchor().anchor_locus(),
+        Some("ParticipantA")
+    );
+    assert_eq!(
+        relation.fallback_anchor().anchor_locus(),
+        Some("ParticipantB")
+    );
+    assert_eq!(
+        relation.primary_anchor().anchor_locus(),
+        relation_core.primary().anchor_locus()
+    );
+    assert_eq!(
+        relation.fallback_anchor().anchor_locus(),
+        relation_core.fallback().anchor_locus()
+    );
+    assert_eq!(
+        relation.primary_anchor().anchor_locus_source_ref(),
+        relation_core.primary().anchor_locus_source_ref()
+    );
+    assert_eq!(
+        relation.fallback_anchor().anchor_locus_source_ref(),
+        relation_core.fallback().anchor_locus_source_ref()
+    );
+    assert_ne!(
+        relation.primary_anchor().anchor_locus(),
+        Some(relation.owner_locus()),
+        "projection must not infer the primary existence locus from the relation owner"
+    );
+    assert!(
+        result.communication_plan().has_edge(
+            "bird_follow",
+            CommunicationEdgeKind::RelationProjectionPublication,
+            "ParticipantB",
+            "ViewerC",
+        ),
+        "relation publication still dispatches from semantic owner to consumer"
     );
 }
 

@@ -66,8 +66,8 @@ Role[self] at WorldAuthority {
 
 relation bird_follow at ParticipantB {
   subject bird: Bird
-  primary participant_a_shoulder epoch membership_epoch transform translate(0, 0)
-  fallback participant_b_shoulder epoch local_epoch transform identity
+  primary participant_a_shoulder at ParticipantA epoch membership_epoch transform translate(0, 0)
+  fallback participant_b_shoulder at ParticipantB epoch local_epoch transform identity
   bind frontier bird_follow_frontier
   publish relation
   project at ViewerC local
@@ -204,10 +204,10 @@ fn vertical_cut_restore_preserves_joined_prefix_and_semantic_state() {
         .dispatch(Sys5VerticalAction::publish_relation("bird_follow"))
         .expect("relation publish imports the primary shadow");
     runtime
-        .dispatch(Sys5VerticalAction::invalidate_relation_primary(
+        .dispatch(Sys5VerticalAction::participant_a_leave_relation_primary(
             "bird_follow",
         ))
-        .expect("A leave invalidates the primary through relation endpoint");
+        .expect("source-bound ParticipantA leave retires M9 before relation fallback");
     let fresh = runtime
         .dispatch(Sys5VerticalAction::fresh_reacquire_relation_primary(
             "bird_follow",
@@ -319,6 +319,7 @@ fn vertical_cut_restore_preserves_joined_prefix_and_semantic_state() {
         Sys5CutCorruptionKind::ArtifactProjectionIdentity,
         Sys5CutCorruptionKind::CounterRollback,
         Sys5CutCorruptionKind::RelationDigest,
+        Sys5CutCorruptionKind::ParticipantLeaveEvidence,
     ] {
         let corrupted = cut.clone().for_test_corrupt(corruption);
         let err = prepared_source(SYS5_CUT_PATCH_SOURCE)
@@ -328,6 +329,61 @@ fn vertical_cut_restore_preserves_joined_prefix_and_semantic_state() {
         assert!(err.rejected_before_partial_runtime());
         assert!(err.partial_runtime().is_none());
     }
+}
+
+#[test]
+fn local_cut_after_participant_leave_restores_lifecycle_evidence_for_fresh_reacquire() {
+    let mut runtime = vertical_runtime(SYS5_CUT_PATCH_SOURCE);
+    runtime
+        .dispatch(Sys5VerticalAction::publish_relation("bird_follow"))
+        .expect("primary relation publication reaches ViewerC before ParticipantA leaves");
+    let leave = runtime
+        .dispatch(Sys5VerticalAction::participant_a_leave_relation_primary(
+            "bird_follow",
+        ))
+        .expect("source-bound ParticipantA leave retires M9 and publishes the fallback");
+    assert!(
+        leave.participant_leave_evidence().is_some(),
+        "the pre-cut runtime must retain actual observer-safe leave evidence"
+    );
+    assert_eq!(
+        runtime
+            .observer_relation_shadow("ViewerC", "bird_follow")
+            .expect("fallback relation shadow exists after ParticipantA leave")
+            .selected_floor(),
+        "fallback-anchor"
+    );
+
+    let cut = runtime
+        .save_local_cut("sys5-cut-after-participant-a-leave")
+        .expect("post-leave runtime saves a complete local cut");
+    let corrupt = cut
+        .clone()
+        .for_test_corrupt(Sys5CutCorruptionKind::ParticipantLeaveEvidence);
+    let corruption = prepared_source(SYS5_CUT_PATCH_SOURCE)
+        .restore_vertical_slice_runtime(&corrupt)
+        .expect_err("cut with altered leave evidence rejects before a partial restore");
+    assert_eq!(corruption.kind(), Sys5LocalCutPatchErrorKind::CutRejected);
+    assert!(corruption.rejected_before_partial_runtime());
+    assert!(corruption.partial_runtime().is_none());
+
+    let mut restored = prepared_source(SYS5_CUT_PATCH_SOURCE)
+        .restore_vertical_slice_runtime(&cut)
+        .expect("exact cut restores the M9 leave lineage and observer evidence");
+    let fresh = restored
+        .dispatch(Sys5VerticalAction::fresh_reacquire_relation_primary(
+            "bird_follow",
+        ))
+        .expect("fresh source-bound re-admission succeeds after restored ParticipantA leave");
+    assert!(
+        fresh.fresh_reacquire_evidence().is_some(),
+        "fresh receipt must retain actual M9 re-admission evidence"
+    );
+    let shadow = restored
+        .observer_relation_shadow("ViewerC", "bird_follow")
+        .expect("fresh primary relation shadow reaches ViewerC after restore");
+    assert_eq!(shadow.selected_anchor(), "participant_a_shoulder");
+    assert_eq!(shadow.selected_floor(), "live-primary");
 }
 
 #[test]

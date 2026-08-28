@@ -1011,6 +1011,8 @@ pub enum RelationTransform {
 #[derive(Debug, Clone, PartialEq, Eq)]
 pub struct RelationAnchor {
     anchor: String,
+    anchor_locus: Option<String>,
+    anchor_locus_span: Option<SurfaceV0Span>,
     epoch: String,
     transform: RelationTransform,
     transform_span: SurfaceV0Span,
@@ -1020,6 +1022,18 @@ pub struct RelationAnchor {
 impl RelationAnchor {
     pub fn anchor(&self) -> &str {
         &self.anchor
+    }
+
+    /// Optional internal locus binding for this relation anchor.
+    ///
+    /// Legacy accepted source does not carry this field; the checker must not
+    /// infer it from the relation owner or any transport concern.
+    pub fn anchor_locus(&self) -> Option<&str> {
+        self.anchor_locus.as_deref()
+    }
+
+    pub fn anchor_locus_span(&self) -> Option<&SurfaceV0Span> {
+        self.anchor_locus_span.as_ref()
     }
 
     pub fn epoch(&self) -> &str {
@@ -1686,6 +1700,12 @@ impl Parser {
     ) -> Result<RelationAnchor, ParseDiagnostics> {
         let start = self.expect(expected)?.span;
         let (anchor, _) = self.identifier()?;
+        let (anchor_locus, anchor_locus_span) = if self.consume("at") {
+            let (locus, span) = self.identifier()?;
+            (Some(locus), Some(span))
+        } else {
+            (None, None)
+        };
         self.expect("epoch")?;
         let (epoch, _) = self.identifier()?;
         self.expect("transform")?;
@@ -1693,6 +1713,8 @@ impl Parser {
         let end = transform_span.clone();
         Ok(RelationAnchor {
             anchor,
+            anchor_locus,
+            anchor_locus_span,
             epoch,
             transform,
             transform_span,

@@ -1,0 +1,71 @@
+module Mirrorea.Sys5.LocalToy
+
+locus WorldAuthority
+locus ParticipantA
+locus ParticipantB
+locus ViewerC
+principal self
+principal target
+type Player
+type Bird
+
+state avatar[id: Player] at WorldAuthority {
+  hp: Int
+  atk: Int
+  visible observer_safe fields (hp)
+}
+
+state participant_input[id: Player] at ParticipantA {
+  focus: Int
+  visible observer_safe fields (focus)
+}
+
+state bird_pose[id: Bird] at ParticipantB {
+  x: Int
+  y: Int
+  visible observer_safe fields (x, y)
+}
+
+Role[self] at ParticipantA {
+  when init_avatar_hp() fails (StaleMembership, MissingCapability, MissingWitness, VisibilityDenied, RouteUnavailable) {
+    at WorldAuthority {
+      avatar[self].hp = 21
+    }
+  }
+
+  when init_avatar_atk() fails (StaleMembership, MissingCapability, MissingWitness, VisibilityDenied, RouteUnavailable) {
+    at WorldAuthority {
+      avatar[self].atk = 5
+    }
+  }
+
+  when attack(target: Player) fails (StaleMembership, MissingCapability, MissingWitness, VisibilityDenied, RouteUnavailable) {
+    at WorldAuthority {
+      avatar[target].hp = avatar[target].hp - avatar[self].atk
+    }
+  }
+}
+
+Role[self] at WorldAuthority {
+  when init_focus() fails (StaleMembership, MissingCapability, MissingWitness, VisibilityDenied, RouteUnavailable) {
+    at ParticipantA {
+      participant_input[self].focus = 10
+    }
+  }
+}
+
+relation bird_follow at ParticipantB {
+  subject bird: Bird
+  primary participant_a_shoulder at ParticipantA epoch membership_epoch transform translate(0, 0)
+  fallback participant_b_shoulder at ParticipantB epoch local_epoch transform identity
+  bind frontier bird_follow_frontier
+  publish relation
+  project at ViewerC local
+}
+
+designated evaluate WorldAuthority on tick world_tick publish result = participant_input[self].focus + 2
+designated consume WorldAuthority.result at ViewerC
+
+with auth MembershipAuth
+
+verify finite_refinement

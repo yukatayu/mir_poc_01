@@ -2001,6 +2001,8 @@ impl EffectHandlerPlan {
 #[derive(Debug, Clone, PartialEq, Eq)]
 pub(crate) struct ProjectedRelationAnchor {
     pub(super) anchor: String,
+    pub(super) anchor_locus: Option<String>,
+    pub(super) anchor_locus_source_ref: Option<SourceRef>,
     pub(super) epoch: String,
     pub(super) transform: RelationTransformCore,
     pub(super) source_ref: SourceRef,
@@ -2009,6 +2011,14 @@ pub(crate) struct ProjectedRelationAnchor {
 impl ProjectedRelationAnchor {
     pub(crate) fn anchor(&self) -> &str {
         &self.anchor
+    }
+
+    pub(crate) fn anchor_locus(&self) -> Option<&str> {
+        self.anchor_locus.as_deref()
+    }
+
+    pub(crate) fn anchor_locus_source_ref(&self) -> Option<&SourceRef> {
+        self.anchor_locus_source_ref.as_ref()
     }
 
     pub(crate) fn epoch(&self) -> &str {
