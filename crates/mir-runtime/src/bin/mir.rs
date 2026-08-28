@@ -13,6 +13,7 @@ use mir_runtime::{
     sys5_local_workflow::{
         Sys5LocalWorkflowInput, Sys5LocalWorkflowPatchProject, run_local_workflow_from_project,
     },
+    sys6_i2_conformance::{I2ConformanceInput, run_i2_conformance},
 };
 use serde_json::{Value, json};
 
@@ -31,6 +32,9 @@ fn run() -> Result<(), String> {
     if matches!(command_name, "project-loci" | "run-local" | "inspect") {
         return run_sys5_command(command_name, &args[1..]);
     }
+    if command_name == "conform-i2" {
+        return run_sys6_command(&args[1..]);
+    }
     let command = command_from_name(command_name)?;
     let command = populate_command(command, &args[1..])?;
     let mut system = M10ReferenceSystem::deterministic_profile("m10-reference-profile");
@@ -41,6 +45,78 @@ fn run() -> Result<(), String> {
             .map_err(|error| format!("unable to serialize M10 report: {error}"))?
     );
     Ok(())
+}
+
+fn run_sys6_command(args: &[String]) -> Result<(), String> {
+    match sys6_command_value(args) {
+        Ok(value) => {
+            println!(
+                "{}",
+                serde_json::to_string_pretty(&value)
+                    .map_err(|error| format!("unable to serialize SYS-6 report: {error}"))?
+            );
+            if value.get("status").and_then(Value::as_str) == Some("rejected") {
+                Err("SYS-6 conform-i2 rejected: i2_profile_rejected".to_string())
+            } else {
+                Ok(())
+            }
+        }
+        Err(error) => {
+            let value = json!({
+                "status": "error",
+                "command": "conform-i2",
+                "diagnostic_code": error,
+                "source_authority": "ordinary_mir_source",
+                "public_api_or_wire_contract": false,
+                "final_public_api_frozen": false,
+                "public_wire_frozen": false,
+            });
+            println!(
+                "{}",
+                serde_json::to_string_pretty(&value).map_err(|serialization| format!(
+                    "unable to serialize SYS-6 error: {serialization}"
+                ))?
+            );
+            Err(format!("SYS-6 conform-i2 rejected: {error}"))
+        }
+    }
+}
+
+fn sys6_command_value(args: &[String]) -> Result<Value, &'static str> {
+    let Some(source_path) = args.first().filter(|value| !value.starts_with("--")) else {
+        return Err("i2_missing_source_path");
+    };
+    let mut input = I2ConformanceInput::source_path(std::path::PathBuf::from(source_path));
+    let mut selected_ow1_source = false;
+    let mut format_json = false;
+    let mut index = 1;
+    while index < args.len() {
+        let flag = args[index].as_str();
+        let Some(value) = args.get(index + 1) else {
+            return Err("i2_unexpected_arguments");
+        };
+        if value.starts_with("--") {
+            return Err("i2_unexpected_arguments");
+        }
+        match flag {
+            "--patch" => input = input.with_patch_path(std::path::PathBuf::from(value)),
+            "--selected-ow1-source" if !selected_ow1_source => {
+                input = input.with_selected_ow1_source_path(std::path::PathBuf::from(value));
+                selected_ow1_source = true;
+            }
+            "--format" if value == "json" && !format_json => format_json = true,
+            _ => return Err("i2_unexpected_arguments"),
+        }
+        index += 2;
+    }
+    if !format_json || !selected_ow1_source {
+        return Err("i2_unexpected_arguments");
+    }
+    let report = run_i2_conformance(input).map_err(|error| error.diagnostic_code())?;
+    // SYS-6 owns a single fail-closed observer serializer. Never serialize
+    // the raw report here: source-controlled identifiers can occur in any
+    // selected-source-derived observer field.
+    Ok(report.observer_safe_value())
 }
 
 fn run_sys5_command(command: &str, args: &[String]) -> Result<(), String> {
@@ -284,5 +360,5 @@ fn populate_command(
 }
 
 fn usage() -> String {
-    "usage: mir parse|check|elab|elaborate|run|trace|project|save|load|patch|conform [source.mir] [--candidate source.mir] [--corpus DIR] [--schedule typed.json] [--patch-intent typed.json] [--carriers typed.json] [--predicates profile.json] | mir project-loci|run-local|inspect source.mir [--patch source.mir] --format json".to_string()
+    "usage: mir parse|check|elab|elaborate|run|trace|project|save|load|patch|conform [source.mir] [--candidate source.mir] [--corpus DIR] [--schedule typed.json] [--patch-intent typed.json] [--carriers typed.json] [--predicates profile.json] | mir project-loci|run-local|inspect source.mir [--patch source.mir] --format json | mir conform-i2 source.mir --selected-ow1-source source.mir --patch source.mir --patch source.mir --format json".to_string()
 }

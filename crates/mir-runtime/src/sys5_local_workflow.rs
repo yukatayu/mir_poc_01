@@ -221,6 +221,32 @@ pub struct Sys5WorkflowSourceSpanDetail {
     end_column: u32,
 }
 
+impl Sys5WorkflowSourceSpanDetail {
+    pub const fn start(&self) -> u64 {
+        self.start
+    }
+
+    pub const fn end(&self) -> u64 {
+        self.end
+    }
+
+    pub const fn start_line(&self) -> u32 {
+        self.start_line
+    }
+
+    pub const fn start_column(&self) -> u32 {
+        self.start_column
+    }
+
+    pub const fn end_line(&self) -> u32 {
+        self.end_line
+    }
+
+    pub const fn end_column(&self) -> u32 {
+        self.end_column
+    }
+}
+
 /// Structured fields parsed from one actual `typed-segment:*` observer row.
 /// This is an interpretation of the exact retained row, never a new route or
 /// a synthesized runtime occurrence.
@@ -247,6 +273,56 @@ pub struct Sys5WorkflowCausalDetail {
     #[serde(skip_serializing_if = "Option::is_none")]
     observe_occurrence_ref: Option<String>,
     serve_occurrence_ref: String,
+}
+
+impl Sys5WorkflowCausalDetail {
+    pub fn source_span(&self) -> &Sys5WorkflowSourceSpanDetail {
+        &self.source_span
+    }
+
+    pub fn core_ref(&self) -> &str {
+        &self.core_ref
+    }
+
+    pub fn request_fragment_ref(&self) -> &str {
+        &self.request_fragment_ref
+    }
+
+    pub fn serve_fragment_ref(&self) -> &str {
+        &self.serve_fragment_ref
+    }
+
+    pub fn edge_ref(&self) -> &str {
+        &self.edge_ref
+    }
+
+    pub fn request_identity(&self) -> &str {
+        &self.request_identity
+    }
+
+    pub fn request_enqueue_occurrence_ref(&self) -> Option<&str> {
+        self.request_enqueue_occurrence_ref.as_deref()
+    }
+
+    pub fn owner_publish_occurrence_ref(&self) -> Option<&str> {
+        self.owner_publish_occurrence_ref.as_deref()
+    }
+
+    pub fn dispatch_occurrence_ref(&self) -> Option<&str> {
+        self.dispatch_occurrence_ref.as_deref()
+    }
+
+    pub fn receive_occurrence_ref(&self) -> Option<&str> {
+        self.receive_occurrence_ref.as_deref()
+    }
+
+    pub fn observe_occurrence_ref(&self) -> Option<&str> {
+        self.observe_occurrence_ref.as_deref()
+    }
+
+    pub fn serve_occurrence_ref(&self) -> &str {
+        &self.serve_occurrence_ref
+    }
 }
 
 /// Observer-safe final relation state selected by the actual local fabric.
@@ -295,8 +371,26 @@ struct Sys5WorkflowCacheAlias {
 pub struct Sys5WorkflowLifecycleRefs {
     kind: String,
     occurrence_ref: String,
+    before_core_ref: String,
+    after_core_ref: String,
+    before_artifact_ref: String,
+    after_artifact_ref: String,
     before_frontier_ref: String,
     after_frontier_ref: String,
+}
+
+impl Sys5WorkflowLifecycleRefs {
+    pub(crate) fn kind(&self) -> &str {
+        &self.kind
+    }
+
+    pub(crate) fn occurrence_ref(&self) -> &str {
+        &self.occurrence_ref
+    }
+
+    pub(crate) fn after_artifact_ref(&self) -> &str {
+        &self.after_artifact_ref
+    }
 }
 
 /// A snapshot of the admitted local runtime after the workflow schedule.
@@ -311,6 +405,151 @@ pub struct Sys5WorkflowRuntimeSummary {
     relation: Sys5WorkflowRelationAlias,
     designated: Sys5WorkflowDesignatedAlias,
     cache: Sys5WorkflowCacheAlias,
+}
+
+/// Typed source-bound execution inventory for the finite workflow.  It keeps
+/// the producer boundary, sealed admission identity, actual runtime causal
+/// segments, and an executed unknown-action admission rejection together so
+/// SYS-6 need not trust self-reported "no fixture" booleans.
+#[derive(Debug, Clone, PartialEq, Eq, Serialize)]
+pub struct Sys5SourceBoundExecutionInventory {
+    input_boundary: String,
+    checked_program_identity_ref: String,
+    sealed_admission_attestation_ref: String,
+    source_core_artifact_mapping_count: usize,
+    generated_edge_count: usize,
+    actual_causal_segments: Vec<Sys5WorkflowCausalDetail>,
+    unknown_source_action_admission: Sys5UnknownSourceActionAdmission,
+}
+
+/// Observer-safe compact form exported to the I2 verifier.  Detailed causal
+/// segments remain in the workflow inventory and are checked there; this
+/// summary carries the producer-boundary and actual admission-control join
+/// into the final report without duplicating source-controlled identifiers.
+#[derive(Debug, Clone, PartialEq, Eq, Serialize)]
+pub(crate) struct Sys5SourceBoundExecutionSummary {
+    input_boundary: String,
+    sealed_admission_attestation_ref: String,
+    actual_causal_segment_count: usize,
+    unknown_source_action_admission: Sys5UnknownSourceActionAdmission,
+}
+
+/// Actual fail-closed result from the generated source-action admission
+/// boundary.  All references are opaque observer-safe identities.
+#[derive(Debug, Clone, PartialEq, Eq, Serialize)]
+pub struct Sys5UnknownSourceActionAdmission {
+    candidate_action_ref: String,
+    diagnostic: String,
+    rejected_before_dispatch: bool,
+    semantic_state_before_ref: String,
+    semantic_state_after_ref: String,
+}
+
+impl Sys5SourceBoundExecutionInventory {
+    pub(crate) fn input_boundary(&self) -> &str {
+        &self.input_boundary
+    }
+
+    pub(crate) fn checked_program_identity_ref(&self) -> &str {
+        &self.checked_program_identity_ref
+    }
+
+    pub(crate) fn sealed_admission_attestation_ref(&self) -> &str {
+        &self.sealed_admission_attestation_ref
+    }
+
+    pub(crate) fn actual_causal_segments(&self) -> &[Sys5WorkflowCausalDetail] {
+        &self.actual_causal_segments
+    }
+
+    pub(crate) fn unknown_source_action_admission(&self) -> &Sys5UnknownSourceActionAdmission {
+        &self.unknown_source_action_admission
+    }
+
+    pub(crate) fn i2_observer_safe_summary(&self) -> Sys5SourceBoundExecutionSummary {
+        Sys5SourceBoundExecutionSummary {
+            input_boundary: self.input_boundary.clone(),
+            sealed_admission_attestation_ref: self.sealed_admission_attestation_ref.clone(),
+            actual_causal_segment_count: self.actual_causal_segments.len(),
+            unknown_source_action_admission: self.unknown_source_action_admission.clone(),
+        }
+    }
+}
+
+impl Sys5UnknownSourceActionAdmission {
+    pub(crate) fn candidate_action_ref(&self) -> &str {
+        &self.candidate_action_ref
+    }
+
+    pub(crate) fn diagnostic(&self) -> &str {
+        &self.diagnostic
+    }
+
+    pub(crate) const fn rejected_before_dispatch(&self) -> bool {
+        self.rejected_before_dispatch
+    }
+
+    pub(crate) fn semantic_state_before_ref(&self) -> &str {
+        &self.semantic_state_before_ref
+    }
+
+    pub(crate) fn semantic_state_after_ref(&self) -> &str {
+        &self.semantic_state_after_ref
+    }
+}
+
+impl Sys5SourceBoundExecutionSummary {
+    /// A marker-bearing report candidate used only to exercise SYS-6's
+    /// observer renderer. It is not workflow evidence and cannot admit an
+    /// action or construct a route.
+    pub(crate) fn observer_policy_control(marker: String) -> Self {
+        Self {
+            input_boundary: "observer-policy-control".to_string(),
+            sealed_admission_attestation_ref: marker.clone(),
+            actual_causal_segment_count: 0,
+            unknown_source_action_admission: Sys5UnknownSourceActionAdmission {
+                candidate_action_ref: marker.clone(),
+                diagnostic: "RouteUnavailable".to_string(),
+                rejected_before_dispatch: true,
+                semantic_state_before_ref: marker.clone(),
+                semantic_state_after_ref: marker,
+            },
+        }
+    }
+
+    pub(crate) fn redact_observer_sensitive_identifiers(&mut self) {
+        redact_source_bound_observer_string(&mut self.input_boundary);
+        redact_source_bound_observer_string(&mut self.sealed_admission_attestation_ref);
+        redact_source_bound_observer_string(
+            &mut self.unknown_source_action_admission.candidate_action_ref,
+        );
+        redact_source_bound_observer_string(&mut self.unknown_source_action_admission.diagnostic);
+        redact_source_bound_observer_string(
+            &mut self
+                .unknown_source_action_admission
+                .semantic_state_before_ref,
+        );
+        redact_source_bound_observer_string(
+            &mut self
+                .unknown_source_action_admission
+                .semantic_state_after_ref,
+        );
+    }
+}
+
+fn redact_source_bound_observer_string(value: &mut String) {
+    let lower = value.to_ascii_lowercase();
+    if [
+        "credential",
+        "capability_secret",
+        "witness_secret",
+        "token=",
+    ]
+    .iter()
+    .any(|needle| lower.contains(needle))
+    {
+        *value = "[redacted-observer-sensitive-identifier]".to_string();
+    }
 }
 
 /// Deterministic observer-safe result of one actual `LocalFabric` workflow.
@@ -333,6 +572,7 @@ pub struct Sys5LocalWorkflowReport {
     locus_programs: Vec<Sys5ArtifactSummary>,
     generated_communication: Vec<Sys5CommunicationSummary>,
     runtime_summary: Sys5WorkflowRuntimeSummary,
+    source_bound_execution: Sys5SourceBoundExecutionInventory,
     loci: Vec<String>,
     actual_steps: Vec<Sys5LocalWorkflowStep>,
     patch_verdicts: Vec<Sys5WorkflowPatchVerdict>,
@@ -455,12 +695,188 @@ impl Sys5LocalWorkflowReport {
         &self.patch_verdicts
     }
 
+    /// Typed projection evidence retained from the checked Core and SYS-3
+    /// projector. Consumers use these fields directly rather than reparsing
+    /// this report's JSON representation.
+    pub fn source_core_artifact_mappings(&self) -> &[Sys5SourceCoreArtifactMapping] {
+        &self.source_core_artifact_mappings
+    }
+
+    pub fn locus_programs(&self) -> &[Sys5ArtifactSummary] {
+        &self.locus_programs
+    }
+
+    pub fn generated_communication(&self) -> &[Sys5CommunicationSummary] {
+        &self.generated_communication
+    }
+
+    /// The actual source/Core/artifact-bound runtime inventory retained by
+    /// this workflow. It is the SYS-6 source-first evidence boundary.
+    pub fn source_bound_execution(&self) -> &Sys5SourceBoundExecutionInventory {
+        &self.source_bound_execution
+    }
+
     pub fn typed_failures(&self) -> &[Sys5WorkflowTypedFailure] {
         &self.typed_failures
     }
 
     pub fn joined_rows(&self) -> &[Sys5WorkflowJoinedRow] {
         &self.joined_rows
+    }
+
+    /// Narrow typed invariant summaries consumed by SYS-6. They inspect the
+    /// actual SYS-5 receipts retained above; no JSON report is reparsed and
+    /// no source/schedule input is introduced at this boundary.
+    pub(crate) fn has_relation_fallback_invariants_for_i2(&self) -> bool {
+        self.participant_leave_results
+            .iter()
+            .any(Sys5ParticipantLeaveEvidence::satisfies_i2_relation_leave)
+            && self
+                .fresh_reacquire_results
+                .iter()
+                .any(Sys5FreshReacquireEvidence::satisfies_i2_fresh_relation_reacquire)
+    }
+
+    pub(crate) fn has_presentation_gap_invariants_for_i2(&self) -> bool {
+        self.presentation_gap_results
+            .iter()
+            .any(Sys5PresentationGapEvidence::satisfies_i2_semantic_presentation_separation)
+    }
+
+    pub(crate) fn has_designated_result_invariants_for_i2(&self) -> bool {
+        self.runtime_summary.designated_values.iter().all(|value| {
+            value.result_version > 0
+                && !value.cache_ref.is_empty()
+                && !value.version_ref.is_empty()
+                && !value.delivery_ref.is_empty()
+                && !value.cache_binding_ref.is_empty()
+        }) && !self.runtime_summary.designated_values.is_empty()
+            && self.runtime_summary.designated.version > 0
+            && !self.runtime_summary.designated.result_ref.is_empty()
+            && !self.runtime_summary.cache.version_ref.is_empty()
+    }
+
+    pub(crate) fn has_local_cut_invariants_for_i2(&self) -> bool {
+        self.runtime_summary
+            .save_lifecycle_refs
+            .iter()
+            .all(|entry| {
+                !entry.kind.is_empty()
+                    && !entry.occurrence_ref.is_empty()
+                    && !entry.before_frontier_ref.is_empty()
+                    && !entry.after_frontier_ref.is_empty()
+            })
+            && !self.runtime_summary.save_lifecycle_refs.is_empty()
+    }
+
+    pub(crate) fn save_lifecycle_refs_for_i2(&self) -> &[Sys5WorkflowLifecycleRefs] {
+        &self.runtime_summary.save_lifecycle_refs
+    }
+
+    pub(crate) fn patch_lifecycle_refs_for_i2(&self) -> &[Sys5WorkflowLifecycleRefs] {
+        &self.runtime_summary.patch_lifecycle_refs
+    }
+
+    pub(crate) fn has_patch_lifecycle_invariants_for_i2(&self) -> bool {
+        self.patch_verdicts
+            .iter()
+            .any(|verdict| verdict.verdict == "accepted")
+            && self
+                .patch_verdicts
+                .iter()
+                .any(|verdict| verdict.verdict == "rejected")
+            && self.patch_provenance.iter().all(|provenance| {
+                !provenance.checked_program_identity_ref.is_empty()
+                    && !provenance.patch_ref.is_empty()
+                    && !provenance.patch_occurrence_ref.is_empty()
+            })
+            && !self.runtime_summary.patch_lifecycle_refs.is_empty()
+    }
+
+    pub(crate) fn has_duplicate_leave_fail_closed_for_i2(&self) -> bool {
+        self.participant_leave_failures
+            .iter()
+            .any(Sys5ParticipantLeaveFailureEvidence::satisfies_i2_duplicate_leave_fail_closed)
+    }
+
+    /// Verify the typed execution inventory without reparsing serialized JSON
+    /// or trusting a "fixture lookup was not used" declaration. Every actual
+    /// causal segment must join a checked Core ref, projected fragment pair,
+    /// generated communication edge, and nonempty runtime occurrences. The
+    /// producer input is exclusively a checked project plus sealed admission;
+    /// an unknown ordinary action was actually rejected before dispatch.
+    pub(crate) fn has_source_bound_execution_for_i2(&self) -> bool {
+        let inventory = &self.source_bound_execution;
+        if inventory.input_boundary != "checked_project_and_sealed_admission"
+            || inventory.checked_program_identity_ref != self.checked_program_identity_ref
+            || inventory.sealed_admission_attestation_ref.is_empty()
+            || inventory.source_core_artifact_mapping_count
+                != self.source_core_artifact_mappings.len()
+            || inventory.generated_edge_count != self.generated_communication.len()
+            || inventory.actual_causal_segments.is_empty()
+            || !inventory
+                .unknown_source_action_admission
+                .rejected_before_dispatch
+            || inventory.unknown_source_action_admission.diagnostic != "UnknownSourceAction"
+            || inventory
+                .unknown_source_action_admission
+                .candidate_action_ref
+                .is_empty()
+            || inventory
+                .unknown_source_action_admission
+                .semantic_state_before_ref
+                .is_empty()
+            || inventory
+                .unknown_source_action_admission
+                .semantic_state_before_ref
+                != inventory
+                    .unknown_source_action_admission
+                    .semantic_state_after_ref
+        {
+            return false;
+        }
+
+        let core_refs = self
+            .source_core_artifact_mappings
+            .iter()
+            .map(|mapping| mapping.core_ref.as_str())
+            .chain(
+                self.generated_communication
+                    .iter()
+                    .filter_map(|edge| edge.core_ref.as_deref()),
+            )
+            .collect::<BTreeSet<_>>();
+        let fragment_refs = self
+            .locus_programs
+            .iter()
+            .map(|artifact| artifact.fragment_ref.as_str())
+            .collect::<BTreeSet<_>>();
+        let edge_refs = self
+            .generated_communication
+            .iter()
+            .map(|edge| edge.edge_ref.as_str())
+            .collect::<BTreeSet<_>>();
+        inventory.actual_causal_segments.iter().all(|segment| {
+            !segment.core_ref().is_empty()
+                && core_refs.contains(segment.core_ref())
+                && !segment.request_fragment_ref().is_empty()
+                && fragment_refs.contains(segment.request_fragment_ref())
+                && !segment.serve_fragment_ref().is_empty()
+                && fragment_refs.contains(segment.serve_fragment_ref())
+                && !segment.edge_ref().is_empty()
+                && edge_refs.contains(segment.edge_ref())
+                && !segment.request_identity().is_empty()
+                && segment
+                    .request_enqueue_occurrence_ref()
+                    .is_some_and(|value| !value.is_empty())
+                && segment
+                    .dispatch_occurrence_ref()
+                    .is_some_and(|value| !value.is_empty())
+                && segment
+                    .receive_occurrence_ref()
+                    .is_some_and(|value| !value.is_empty())
+                && !segment.serve_occurrence_ref().is_empty()
+        })
     }
 }
 
@@ -484,6 +900,7 @@ pub fn run_local_workflow_from_project(
     let mut runtime = admission
         .start_vertical_slice_runtime()
         .map_err(Sys5LocalWorkflowError::from_vertical)?;
+    let unknown_source_action_admission = runtime.reject_unknown_source_action_for_i2();
     let mut actual_steps = vec![Sys5LocalWorkflowStep::Startup];
 
     runtime
@@ -668,6 +1085,13 @@ pub fn run_local_workflow_from_project(
     let runtime_summary =
         runtime_summary_from_actual(&runtime, &relation, &value_name, &final_publish)?;
     let joined_rows = joined_rows_from_actual(&semantic, &runtime, &typed_failures, &post_cut_rows);
+    let source_bound_execution = source_bound_execution_from_actual(
+        &semantic,
+        &checked_program_identity_ref,
+        runtime.sealed_admission_attestation_ref(),
+        &joined_rows,
+        unknown_source_action_admission,
+    );
     Ok(Sys5LocalWorkflowReport {
         runtime_profile: "ST".to_string(),
         local_fabric_instance_count: runtime.local_fabric_instance_count(),
@@ -684,6 +1108,7 @@ pub fn run_local_workflow_from_project(
         locus_programs: semantic.artifacts.clone(),
         generated_communication: semantic.generated_communication.clone(),
         runtime_summary,
+        source_bound_execution,
         loci,
         actual_steps,
         patch_verdicts,
@@ -778,6 +1203,41 @@ fn canonical_designated_value(
     (values.len() == 1)
         .then(|| values.into_iter().next().expect("one designated value"))
         .ok_or(Sys5LocalWorkflowError::MissingCanonicalDesignatedValue)
+}
+
+fn source_bound_execution_from_actual(
+    semantic: &crate::sys5_local_slice::Sys5SemanticSummary,
+    checked_program_identity_ref: &str,
+    sealed_admission_attestation_ref: &str,
+    joined_rows: &[Sys5WorkflowJoinedRow],
+    unknown_source_action_admission: crate::sys5_local_slice::Sys5SourceActionAdmissionControl,
+) -> Sys5SourceBoundExecutionInventory {
+    let actual_causal_segments = joined_rows
+        .iter()
+        .filter_map(Sys5WorkflowJoinedRow::detail)
+        .cloned()
+        .collect::<Vec<_>>();
+    Sys5SourceBoundExecutionInventory {
+        input_boundary: "checked_project_and_sealed_admission".to_string(),
+        checked_program_identity_ref: checked_program_identity_ref.to_string(),
+        sealed_admission_attestation_ref: sealed_admission_attestation_ref.to_string(),
+        source_core_artifact_mapping_count: semantic.source_core_artifact_mappings.len(),
+        generated_edge_count: semantic.generated_communication.len(),
+        actual_causal_segments,
+        unknown_source_action_admission: Sys5UnknownSourceActionAdmission {
+            candidate_action_ref: unknown_source_action_admission
+                .candidate_action_ref()
+                .to_string(),
+            diagnostic: unknown_source_action_admission.diagnostic().to_string(),
+            rejected_before_dispatch: unknown_source_action_admission.rejected_before_dispatch(),
+            semantic_state_before_ref: unknown_source_action_admission
+                .semantic_state_before_ref()
+                .to_string(),
+            semantic_state_after_ref: unknown_source_action_admission
+                .semantic_state_after_ref()
+                .to_string(),
+        },
+    }
 }
 
 fn joined_rows_from_actual(
@@ -1029,6 +1489,10 @@ fn parse_lifecycle_refs(row: &str) -> Option<Sys5WorkflowLifecycleRefs> {
     Some(Sys5WorkflowLifecycleRefs {
         kind: kind.to_string(),
         occurrence_ref,
+        before_core_ref: fields.get("before_core_ref")?.to_string(),
+        after_core_ref: fields.get("after_core_ref")?.to_string(),
+        before_artifact_ref: fields.get("before_artifact_ref")?.to_string(),
+        after_artifact_ref: fields.get("after_artifact_ref")?.to_string(),
         before_frontier_ref: fields.get("before_activation_frontier")?.to_string(),
         after_frontier_ref: fields.get("after_activation_frontier")?.to_string(),
     })

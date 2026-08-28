@@ -1775,6 +1775,17 @@ impl CommunicationPlan {
 
     #[cfg(test)]
     pub(crate) fn for_test_remove(&mut self, operation: &str, kind: CommunicationEdgeKind) {
+        self.remove_edge_for_conformance_candidate(operation, kind);
+    }
+
+    /// Internal candidate-only mutation used by the bounded conformance
+    /// self-check. It applies to an owned clone and never to an admitted
+    /// communication plan.
+    pub(crate) fn remove_edge_for_conformance_candidate(
+        &mut self,
+        operation: &str,
+        kind: CommunicationEdgeKind,
+    ) {
         if let Some(index) = self
             .edges
             .iter()
@@ -1784,8 +1795,9 @@ impl CommunicationPlan {
         }
     }
 
-    #[cfg(test)]
-    pub(crate) fn for_test_insert_non_derived(
+    /// Internal candidate-only mutation used by the bounded conformance
+    /// self-check. It is intentionally unavailable to Surface/runtime input.
+    pub(crate) fn insert_non_derived_edge_for_conformance_candidate(
         &mut self,
         id: &str,
         kind: CommunicationEdgeKind,
@@ -3458,6 +3470,21 @@ impl GlobalProjectionResult {
         self.communication_plan.for_test_remove(operation, kind);
     }
 
+    /// Construct an isolated malformed candidate for a bounded conformance
+    /// control. The live projection is never mutated or admitted; callers
+    /// must submit the returned candidate to `verify_projection`.
+    pub(crate) fn conformance_candidate_without_edge(
+        &self,
+        operation: &str,
+        kind: CommunicationEdgeKind,
+    ) -> Self {
+        let mut candidate = self.clone();
+        candidate
+            .communication_plan
+            .remove_edge_for_conformance_candidate(operation, kind);
+        candidate
+    }
+
     #[cfg(test)]
     pub(crate) fn for_test_insert_non_derived_edge(
         &mut self,
@@ -3468,7 +3495,24 @@ impl GlobalProjectionResult {
         operation: &str,
     ) {
         self.communication_plan
-            .for_test_insert_non_derived(id, kind, source, target, operation);
+            .insert_non_derived_edge_for_conformance_candidate(id, kind, source, target, operation);
+    }
+
+    /// Construct an isolated candidate with a non-derived edge for the
+    /// finite conformance verifier. This has no route/admission side effect.
+    pub(crate) fn conformance_candidate_with_extra_edge(
+        &self,
+        id: &str,
+        kind: CommunicationEdgeKind,
+        source: &str,
+        target: &str,
+        operation: &str,
+    ) -> Self {
+        let mut candidate = self.clone();
+        candidate
+            .communication_plan
+            .insert_non_derived_edge_for_conformance_candidate(id, kind, source, target, operation);
+        candidate
     }
 
     #[cfg(test)]

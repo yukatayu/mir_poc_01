@@ -1,0 +1,48 @@
+module Mirrorea.I2.Conformance.Ow1Selected
+
+locus A
+locus S
+locus E
+locus C
+principal self
+principal target
+type Player
+
+state player[id: Player] at S {
+  hp: Int
+  atk: Int
+  focus: Int
+}
+
+Role[self] at A {
+  when init_player_hp() fails (StaleMembership, MissingCapability, MissingWitness, RouteUnavailable) {
+    at S {
+      player[self].hp = 21
+    }
+  }
+
+  when init_player_atk() fails (StaleMembership, MissingCapability, MissingWitness, RouteUnavailable) {
+    at S {
+      player[self].atk = 5
+    }
+  }
+
+  when init_player_focus() fails (StaleMembership, MissingCapability, MissingWitness, RouteUnavailable) {
+    at S {
+      player[self].focus = 10
+    }
+  }
+
+  when attack(target: Player) fails (StaleMembership, MissingCapability, MissingWitness, RouteUnavailable) {
+    at S {
+      player[target].hp = player[target].hp - player[self].atk
+    }
+  }
+}
+
+designated evaluate E on tick F publish result = player[self].focus + 1
+designated consume E.result at C
+
+with auth MembershipAuth
+
+verify finite_refinement

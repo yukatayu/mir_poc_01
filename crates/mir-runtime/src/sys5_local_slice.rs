@@ -16,7 +16,8 @@ use mir_ast::surface_v0::FixtureSource;
 use mir_semantics::{
     shared_model::SourceRef,
     surface_v0_pipeline::{
-        CheckedSurfaceV0, ResidualObligationKind, check_and_elaborate_surface_v0,
+        CheckedEvaluationKind, CheckedSurfaceV0, ResidualObligationKind,
+        check_and_elaborate_surface_v0,
     },
 };
 use serde::Serialize;
@@ -31,10 +32,11 @@ use crate::{
         GlobalProjectionResult, ProjectedOperationFragmentKind, project_checked_core,
     },
     sys4_dispatch::{
-        FabricProgram, LocalFabric, ObserverSafeM9SemanticRowSets, ObserverSafeM9Summary,
-        RelationPublicationFailureDisposition, RuntimeValue, SealedFabricAdmission, SourceAction,
-        Sys4CheckedPatchCandidate, Sys4DispatchDiagnostics, Sys4InitialStateSeed, Sys4LocalCut,
-        Sys4PatchDiagnosticKind, Sys4PatchOutcome, Sys4PatchVerdict, Sys4RelationEndpointReceipt,
+        ExternalAction, FabricProgram, LocalFabric, ObserverSafeM9SemanticRowSets,
+        ObserverSafeM9Summary, RelationPublicationFailureDisposition, RuntimeValue,
+        SealedFabricAdmission, SourceAction, Sys4CheckedPatchCandidate, Sys4DispatchDiagnostics,
+        Sys4InitialStateSeed, Sys4LocalCut, Sys4PatchDiagnosticKind, Sys4PatchOutcome,
+        Sys4PatchVerdict, Sys4RelationEndpointReceipt,
     },
 };
 
@@ -112,6 +114,7 @@ impl Error for Sys5LocalSliceError {}
 #[derive(Clone, PartialEq, Eq)]
 pub struct Sys5LocalProject {
     checked: CheckedSurfaceV0,
+    topology: DeclaredLogicalTopology,
     projection: GlobalProjectionResult,
     semantic_summary: Sys5SemanticSummary,
     observer_safe_view: Sys5ObserverSafeView,
@@ -148,6 +151,204 @@ impl Sys5LocalProject {
     /// slice, never by this projection summary alone.
     pub fn observer_safe_view(&self) -> &Sys5ObserverSafeView {
         &self.observer_safe_view
+    }
+
+    /// Crate-private read-only projection evidence for the SYS-6 verifier.
+    /// It is retained from the original checked source and has no source
+    /// reparse, route-builder, or admitting effect.
+    pub(crate) fn projected_result_for_i2_evidence(&self) -> &GlobalProjectionResult {
+        &self.projection
+    }
+
+    /// Validate a bounded conformance candidate against the retained checked
+    /// Core and declared topology.  This is a pure SYS-3 verifier call: it
+    /// neither admits the candidate nor exposes a route, store, authority,
+    /// capability, witness, or source text.
+    pub(crate) fn validates_i2_projection_candidate(
+        &self,
+        candidate: &GlobalProjectionResult,
+    ) -> bool {
+        crate::sys3_projection::verify_projection(&self.checked, &self.topology, candidate).is_ok()
+    }
+
+    /// Independently check the finite fragment and communication families
+    /// required by the retained checked Core.  Unlike
+    /// [`Self::validates_i2_projection_candidate`], this does not rerun the
+    /// SYS-3 projector and compare two projection results.  It derives the
+    /// required operation placements and edge families directly from checked
+    /// Core evaluations, then compares that requirement inventory with the
+    /// supplied candidate.  SYS-6 uses it as a second line for completeness
+    /// and non-derived-edge controls.
+    pub(crate) fn i2_candidate_covers_checked_core_requirements(
+        &self,
+        candidate: &GlobalProjectionResult,
+    ) -> bool {
+        if candidate.checked_program_identity() != self.checked.program_identity()
+            || candidate.locus_order().into_iter().collect::<BTreeSet<_>>()
+                != self.topology.loci().iter().map(String::as_str).collect()
+        {
+            return false;
+        }
+
+        let mut required_fragments = BTreeSet::new();
+        let mut required_edges = BTreeSet::new();
+        for evaluation in self.checked.evaluations() {
+            match evaluation.kind() {
+                CheckedEvaluationKind::OwnerRmw => {
+                    let core = evaluation.owner_rmw_core().expect("checked owner Core");
+                    let operation = evaluation.name();
+                    let owner = core.owner_locus();
+                    let origin = core.authority_origin_locus();
+                    required_fragments.insert(I2CoreFragmentRequirement::new(
+                        owner,
+                        operation,
+                        ProjectedOperationFragmentKind::OwnerRmwExecution,
+                    ));
+                    if origin != owner {
+                        required_fragments.insert(I2CoreFragmentRequirement::new(
+                            origin,
+                            operation,
+                            ProjectedOperationFragmentKind::OwnerRequestInvocation,
+                        ));
+                        required_edges.insert(I2CoreEdgeRequirement::new(
+                            CommunicationEdgeKind::OwnerRequest,
+                            origin,
+                            owner,
+                            operation,
+                        ));
+                        required_edges.insert(I2CoreEdgeRequirement::new(
+                            CommunicationEdgeKind::OwnerReplyReceipt,
+                            owner,
+                            origin,
+                            operation,
+                        ));
+                    }
+                }
+                CheckedEvaluationKind::PublishRelation => {
+                    let core = evaluation.relation_core().expect("checked relation Core");
+                    let operation = evaluation.name();
+                    let owner = core.owner_locus();
+                    required_fragments.insert(I2CoreFragmentRequirement::new(
+                        owner,
+                        operation,
+                        ProjectedOperationFragmentKind::RelationPublication,
+                    ));
+                    if let Some(consumer) = core.consumer_projection_locus() {
+                        required_fragments.insert(I2CoreFragmentRequirement::new(
+                            consumer,
+                            operation,
+                            ProjectedOperationFragmentKind::ConsumerLocalRelationProjection,
+                        ));
+                        if owner != consumer {
+                            required_edges.insert(I2CoreEdgeRequirement::new(
+                                CommunicationEdgeKind::RelationProjectionPublication,
+                                owner,
+                                consumer,
+                                operation,
+                            ));
+                        }
+                    }
+                }
+                CheckedEvaluationKind::DesignatedPublishValue => {
+                    let core = evaluation
+                        .designated_core()
+                        .expect("checked designated Core");
+                    let operation = format!("{}.{}", core.evaluator(), core.result());
+                    let evaluator = core.evaluator();
+                    required_fragments.insert(I2CoreFragmentRequirement::new(
+                        evaluator,
+                        &operation,
+                        ProjectedOperationFragmentKind::DesignatedEvaluation,
+                    ));
+                    for source in core.generated_remote_input_dependencies() {
+                        let source_owner = source.source_owner_locus();
+                        required_fragments.insert(I2CoreFragmentRequirement::new(
+                            source_owner,
+                            &operation,
+                            ProjectedOperationFragmentKind::DesignatedRemoteInputService,
+                        ));
+                        if evaluator != source_owner {
+                            required_edges.insert(I2CoreEdgeRequirement::new(
+                                CommunicationEdgeKind::DesignatedInputRequest,
+                                evaluator,
+                                source_owner,
+                                &operation,
+                            ));
+                            required_edges.insert(I2CoreEdgeRequirement::new(
+                                CommunicationEdgeKind::DesignatedInputReceipt,
+                                source_owner,
+                                evaluator,
+                                &operation,
+                            ));
+                        }
+                    }
+                }
+                CheckedEvaluationKind::DesignatedResultConsume => {
+                    let core = evaluation
+                        .designated_result_consumer_core()
+                        .expect("checked designated result consumer Core");
+                    let operation = format!("{}.{}", core.evaluator(), core.result());
+                    required_fragments.insert(I2CoreFragmentRequirement::new(
+                        core.consumer_locus(),
+                        &operation,
+                        ProjectedOperationFragmentKind::DesignatedResultConsumer,
+                    ));
+                    required_edges.insert(I2CoreEdgeRequirement::new(
+                        CommunicationEdgeKind::DesignatedResultDelivery,
+                        core.evaluator(),
+                        core.consumer_locus(),
+                        &operation,
+                    ));
+                }
+                CheckedEvaluationKind::ConsumerLocalProjection => {}
+            }
+        }
+
+        let candidate_fragments = candidate
+            .locus_order()
+            .into_iter()
+            .flat_map(|locus| {
+                candidate
+                    .locus_program(locus)
+                    .expect("candidate retains every declared locus")
+                    .operation_fragments()
+                    .iter()
+                    .map(move |fragment| {
+                        I2CoreFragmentRequirement::new(
+                            locus,
+                            fragment.operation_id(),
+                            fragment.fragment_kind(),
+                        )
+                    })
+            })
+            .collect::<BTreeSet<_>>();
+        let candidate_edges = candidate
+            .communication_plan()
+            .edges()
+            .iter()
+            .filter(|edge| edge.is_derived_from_checked_core() && edge.core_ref().is_some())
+            .map(|edge| {
+                I2CoreEdgeRequirement::new(
+                    edge.kind(),
+                    edge.source_locus(),
+                    edge.target_locus(),
+                    edge.operation_id(),
+                )
+            })
+            .collect::<BTreeSet<_>>();
+
+        candidate_fragments == required_fragments
+            && candidate_edges == required_edges
+            && candidate.communication_plan().edges().len() == candidate_edges.len()
+    }
+
+    /// Test-only access to an already checked/projected clone for conformance
+    /// falsifiers. The clone begins at the real SYS-3 result; no test can
+    /// construct Core, topology, authority, or a communication plan from
+    /// scratch through this hook.
+    #[cfg(test)]
+    pub(crate) fn clone_projection_for_i2_test(&self) -> GlobalProjectionResult {
+        self.projection.clone()
     }
 
     /// Prepare the finite source-derived M9 inventory required by SYS-4.
@@ -321,14 +522,18 @@ impl Sys5LocalProject {
             .unwrap_or("")
     }
 
-    /// Prepare the one deterministic, source-derived ST admission used by
-    /// the provisional local CLI workflow.  The helper derives its principal,
-    /// complete locus inventory, residual discharge names, and non-secret
-    /// membership labels from the retained checked/projected program; it does
-    /// not accept a route, state seed, authority carrier, or result from the
-    /// caller.
-    pub fn prepare_canonical_local_st_admission(
+    /// Prepare one deterministic, source-derived admission for the selected
+    /// internal backend profile. The helper derives its principal, complete
+    /// locus inventory, residual discharge names, and non-secret membership
+    /// labels from the retained checked/projected program; it does not accept
+    /// a route, state seed, authority carrier, or result from the caller.
+    ///
+    /// SYS-6 uses the `Ow1` form only for its separately declared selected
+    /// one-owner-worker source. This constructor is not an OW1 claim for the
+    /// four-locus SYS-5 workflow, whose lifecycle/cut path remains ST-only.
+    pub fn prepare_canonical_local_admission(
         &self,
+        runtime_profile: Sys5LocalRuntimeProfile,
     ) -> Result<Sys5PreparedAdmission, Sys5LocalAdmissionError> {
         let principals = self
             .checked
@@ -378,12 +583,16 @@ impl Sys5LocalProject {
             ));
         };
 
+        let profile_label = match runtime_profile {
+            Sys5LocalRuntimeProfile::St => "st",
+            Sys5LocalRuntimeProfile::Ow1 => "ow1",
+        };
         let mut request = Sys5LocalAdmissionRequest::source_declared(
             &principal,
             &anchor_locus,
-            format!("sys5-local-st:{principal}:{anchor_locus}:epoch"),
-            format!("sys5-local-st:{principal}:{anchor_locus}:incarnation"),
-            Sys5LocalRuntimeProfile::St,
+            format!("sys5-local-{profile_label}:{principal}:{anchor_locus}:epoch"),
+            format!("sys5-local-{profile_label}:{principal}:{anchor_locus}:incarnation"),
+            runtime_profile,
         )
         .with_relation_bootstrap_policy(Sys5RelationBootstrapPolicy::FreshAtAdmission)
         .with_auth_discharge(auth_name)
@@ -395,11 +604,21 @@ impl Sys5LocalProject {
             request = request.with_source_declared_membership(
                 &principal,
                 locus,
-                format!("sys5-local-st:{principal}:{locus}:epoch"),
-                format!("sys5-local-st:{principal}:{locus}:incarnation"),
+                format!("sys5-local-{profile_label}:{principal}:{locus}:epoch"),
+                format!("sys5-local-{profile_label}:{principal}:{locus}:incarnation"),
             );
         }
         self.prepare_finite_admission(request)
+    }
+
+    /// Prepare the deterministic ST admission used by the SYS-5 local
+    /// workflow. This remains a convenience specialization of the same
+    /// source-derived admission construction used by the selected SYS-6 OW1
+    /// check.
+    pub fn prepare_canonical_local_st_admission(
+        &self,
+    ) -> Result<Sys5PreparedAdmission, Sys5LocalAdmissionError> {
+        self.prepare_canonical_local_admission(Sys5LocalRuntimeProfile::St)
     }
 
     fn validate_source_derived_membership_request(
@@ -542,6 +761,58 @@ impl Sys5LocalProject {
             ));
         }
         Ok(())
+    }
+}
+
+/// A projection fragment requirement derived directly from a checked Core
+/// evaluation.  It is intentionally private: it is validation state, not a
+/// public artifact format or a second projection IR.
+#[derive(Debug, Clone, PartialEq, Eq, PartialOrd, Ord)]
+struct I2CoreFragmentRequirement {
+    locus: String,
+    operation: String,
+    kind: ProjectedOperationFragmentKind,
+}
+
+impl I2CoreFragmentRequirement {
+    fn new(
+        locus: impl Into<String>,
+        operation: impl Into<String>,
+        kind: ProjectedOperationFragmentKind,
+    ) -> Self {
+        Self {
+            locus: locus.into(),
+            operation: operation.into(),
+            kind,
+        }
+    }
+}
+
+/// A generated communication family required by a checked Core evaluation.
+/// This is independently derived before candidate projection validation, so a
+/// missing or extra candidate edge cannot be accepted merely by comparing the
+/// candidate with itself.
+#[derive(Debug, Clone, PartialEq, Eq, PartialOrd, Ord)]
+struct I2CoreEdgeRequirement {
+    kind: CommunicationEdgeKind,
+    source_locus: String,
+    target_locus: String,
+    operation: String,
+}
+
+impl I2CoreEdgeRequirement {
+    fn new(
+        kind: CommunicationEdgeKind,
+        source_locus: impl Into<String>,
+        target_locus: impl Into<String>,
+        operation: impl Into<String>,
+    ) -> Self {
+        Self {
+            kind,
+            source_locus: source_locus.into(),
+            target_locus: target_locus.into(),
+            operation: operation.into(),
+        }
     }
 }
 
@@ -1105,6 +1376,25 @@ impl Sys5PreparedAdmission {
     /// It is an observation-only completeness attestation, never authority.
     pub fn sealed_inventory_attestation(&self) -> &Sys5SealedInventoryAttestation {
         &self.sealed_attestation
+    }
+
+    /// The checked literal owner operations that initialize every cell needed
+    /// by this finite source fragment.  This is an observation of the sealed
+    /// source/Core startup plan, not an initial-state injection seam.  The
+    /// caller must still dispatch every returned operation through the
+    /// generated runtime endpoint.
+    pub(crate) fn source_derived_startup_operations_for_i2(&self) -> Option<Vec<String>> {
+        if !self.startup_plan.is_complete() || self.startup_plan.initializers.is_empty() {
+            return None;
+        }
+        let operations = self
+            .startup_plan
+            .initializers
+            .iter()
+            .map(|initializer| initializer.operation_id.clone())
+            .collect::<Vec<_>>();
+        let distinct = operations.iter().collect::<BTreeSet<_>>();
+        (distinct.len() == operations.len()).then_some(operations)
     }
 
     #[cfg_attr(not(test), allow(dead_code))]
@@ -2607,6 +2897,41 @@ pub struct Sys5VerticalSliceRuntime {
     next_lifecycle_occurrence: u64,
 }
 
+/// Typed result of an attempted unknown ordinary action at the sealed
+/// SYS-4 admission boundary.  This is not a fixture lookup: the candidate is
+/// a real `SourceAction`, and the fabric validates it against generated route
+/// inventory without dispatching or mutating state.
+#[derive(Debug, Clone, PartialEq, Eq)]
+pub(crate) struct Sys5SourceActionAdmissionControl {
+    candidate_action_ref: String,
+    diagnostic: String,
+    rejected_before_dispatch: bool,
+    semantic_state_before_ref: String,
+    semantic_state_after_ref: String,
+}
+
+impl Sys5SourceActionAdmissionControl {
+    pub(crate) fn candidate_action_ref(&self) -> &str {
+        &self.candidate_action_ref
+    }
+
+    pub(crate) fn diagnostic(&self) -> &str {
+        &self.diagnostic
+    }
+
+    pub(crate) const fn rejected_before_dispatch(&self) -> bool {
+        self.rejected_before_dispatch
+    }
+
+    pub(crate) fn semantic_state_before_ref(&self) -> &str {
+        &self.semantic_state_before_ref
+    }
+
+    pub(crate) fn semantic_state_after_ref(&self) -> &str {
+        &self.semantic_state_after_ref
+    }
+}
+
 impl fmt::Debug for Sys5VerticalSliceRuntime {
     fn fmt(&self, formatter: &mut fmt::Formatter<'_>) -> fmt::Result {
         formatter
@@ -2961,9 +3286,76 @@ pub struct Sys5FreshReacquireEvidence {
     owner_authority_ref: String,
 }
 
+impl Sys5ParticipantLeaveFailureEvidence {
+    pub(crate) fn satisfies_i2_duplicate_leave_fail_closed(&self) -> bool {
+        self.source_derived
+            && self.external_lifecycle_request
+            && self.failed_closed
+            && !self.partial_membership_retired
+            && !self.capability_or_witness_partially_retired
+            && !self.m9_successor_installed
+            && !self.m8_state_mutated
+            && !self.m8_relation_mutated
+            && !self.m8_designated_result_mutated
+            && self.preserved_successful_m8_result_ref
+            && self.m8_state_digest_before_ref == self.m8_state_digest_after_ref
+            && self.m8_relation_digest_before_ref == self.m8_relation_digest_after_ref
+    }
+}
+
+impl Sys5PresentationGapEvidence {
+    pub(crate) fn satisfies_i2_semantic_presentation_separation(&self) -> bool {
+        self.derived_from_actual_action
+            && !self.publishes_value
+            && self.absolute_stream_count == 0
+            && self.semantic_digest_before == self.semantic_digest_after
+            && self.endpoint_count_before == self.endpoint_count_after
+            && !self.restriction_ref.is_empty()
+            && !self.redaction_ref.is_empty()
+    }
+}
+
+impl Sys5RelationDegradationEvidence {
+    pub(crate) fn satisfies_i2_relation_degradation(&self) -> bool {
+        self.source_derived
+            && self.external_lifecycle_request
+            && self.m9_retirement_precedes_relation_publication
+            && self.participant_b_owner_authority_preserved
+            && !self.direct_consumer_mutation
+            && !self.semantic_digest_before_ref.is_empty()
+            && !self.semantic_digest_after_ref.is_empty()
+    }
+}
+
+impl Sys5FreshReacquireEvidence {
+    pub(crate) fn satisfies_i2_fresh_relation_reacquire(&self) -> bool {
+        self.source_derived
+            && self.fresh_membership_epoch_distinct
+            && self.fresh_incarnation_distinct
+            && self.relation_owner_authority_preserved
+            && self.m9_fresh_membership_precedes_relation_publication
+            && !self.direct_consumer_mutation
+            && !self.caller_supplied_epoch_or_incarnation
+            && !self.caller_supplied_membership_ref
+            && !self.caller_supplied_authority
+    }
+}
+
 impl Sys5ParticipantLeaveEvidence {
     pub fn relation_degradation(&self) -> &Sys5RelationDegradationEvidence {
         &self.relation_degradation
+    }
+
+    pub(crate) fn satisfies_i2_relation_leave(&self) -> bool {
+        self.source_derived
+            && self.external_lifecycle_request
+            && self.checked_membership_identity_exact
+            && self.membership_epoch_monotone
+            && self.relation_owner_authority_preserved
+            && !self.direct_consumer_mutation
+            && self
+                .relation_degradation
+                .satisfies_i2_relation_degradation()
     }
 }
 
@@ -3183,6 +3575,33 @@ impl Sys5VerticalSliceRuntime {
 
     pub const fn local_fabric_instance_count(&self) -> usize {
         1
+    }
+
+    /// Exercise the actual source-action admission boundary with an operation
+    /// absent from this checked projection.  It must be rejected before
+    /// dispatch and preserve the complete active semantic snapshot.  This
+    /// gives SYS-6 a production control for the fact that schedule actions
+    /// cannot introduce a fixture name, expected result, manual route, or
+    /// source-free operation.
+    pub(crate) fn reject_unknown_source_action_for_i2(&self) -> Sys5SourceActionAdmissionControl {
+        let candidate = ExternalAction::source_operation(SourceAction::owner_operation(
+            "i2-undeclared-source-action",
+        ));
+        let before = self.fabric.semantic_snapshot();
+        let result = self.fabric.validate_external_action(&candidate);
+        let after = self.fabric.semantic_snapshot();
+        let diagnostic = result
+            .as_ref()
+            .err()
+            .map(|diagnostic| format!("{:?}", diagnostic.primary().kind()))
+            .unwrap_or_else(|| "UnexpectedSourceActionAdmission".to_string());
+        Sys5SourceActionAdmissionControl {
+            candidate_action_ref: relation_observer_ref("i2-undeclared-source-action"),
+            rejected_before_dispatch: diagnostic == "UnknownSourceAction" && before == after,
+            diagnostic,
+            semantic_state_before_ref: relation_observer_ref(&format!("{before:?}")),
+            semantic_state_after_ref: relation_observer_ref(&format!("{after:?}")),
+        }
     }
 
     pub fn checked_program_identity_ref(&self) -> &str {
@@ -6225,6 +6644,7 @@ pub fn build_project(input: Sys5SourceInput) -> Result<Sys5LocalProject, Sys5Loc
 
     Ok(Sys5LocalProject {
         checked,
+        topology,
         projection,
         semantic_summary: summary,
         observer_safe_view,

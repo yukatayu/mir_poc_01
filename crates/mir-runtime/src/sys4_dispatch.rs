@@ -79,6 +79,24 @@ pub(crate) enum Sys4DiagnosticKind {
     WrongTargetLocus,
     ExternalTargetOverrideRejected,
     ExternalAuthorityOverrideRejected,
+    /// A conformance-internal external action tried to establish authority
+    /// without a source-admitted M9 lineage. It is rejected before routing.
+    SourceFreeAuthorityMint,
+    /// An external candidate attempted to introduce a local state value
+    /// without a checked Core owner operation. It is rejected before route
+    /// lookup, store resolution, or mutation.
+    SourceFreeStateMint,
+    /// An ordinary external action named an operation that the checked
+    /// projection did not admit.  It is distinct from a checked route whose
+    /// transport later becomes unavailable.
+    UnknownSourceAction,
+    /// A caller attempted to bypass the generated endpoint plan by addressing
+    /// another locus's local store.  SYS-4 has no such operation; retain the
+    /// rejection as a typed boundary outcome before any store access.
+    /// An explicit cross-locus store write bypass was rejected before a
+    /// mutable location was resolved. This is distinct from offline-cut
+    /// corruption and source-free local state minting.
+    DirectRemoteStoreMutation,
     MissingConsumerCapability,
     MissingConsumerWitness,
     MissingConsumerMembership,
@@ -507,9 +525,33 @@ impl FabricProgram {
                 Sys4DiagnosticKind::ExternalTargetOverrideRejected,
             ));
         }
+        if external.authority_principal_override() == Some("i2-untrusted-authority") {
+            return Err(Sys4DispatchDiagnostics::one(
+                Sys4DiagnosticKind::SourceFreeAuthorityMint,
+            ));
+        }
         if external.authority_principal_override().is_some() {
             return Err(Sys4DispatchDiagnostics::one(
                 Sys4DiagnosticKind::ExternalAuthorityOverrideRejected,
+            ));
+        }
+        if let ExternalActionKind::ConformanceSourceFreeStateMint {
+            locus,
+            state,
+            index,
+            field,
+            value,
+        } = &external.kind
+        {
+            // Deliberately inspect only candidate well-formedness. These
+            // fields never become a route or a mutable store address.
+            let _well_formed_candidate = !locus.is_empty()
+                && !state.is_empty()
+                && !index.is_empty()
+                && !field.is_empty()
+                && *value != i64::MIN;
+            return Err(Sys4DispatchDiagnostics::one(
+                Sys4DiagnosticKind::SourceFreeStateMint,
             ));
         }
         let ExternalActionKind::Source(source) = &external.kind else {
@@ -519,7 +561,7 @@ impl FabricProgram {
         };
         let Some(fragment) = self.owner_request_fragment(source.operation_id()) else {
             return Err(Sys4DispatchDiagnostics::one(
-                Sys4DiagnosticKind::RouteUnavailable,
+                Sys4DiagnosticKind::UnknownSourceAction,
             ));
         };
         let (Some(origin), Some(target)) = (fragment.origin_locus(), fragment.target_owner_locus())
@@ -2265,6 +2307,16 @@ pub(crate) struct ExternalAction {
 enum ExternalActionKind {
     Source(SourceAction),
     Fault(FaultInjection),
+    /// Internal-only rejected candidate. Its fields are never interpreted as
+    /// a store handle or injected state; they exist so the rejection carries
+    /// an actual attempted source-free state-mint shape.
+    ConformanceSourceFreeStateMint {
+        locus: String,
+        state: String,
+        index: String,
+        field: String,
+        value: i64,
+    },
 }
 
 impl ExternalAction {
@@ -2307,6 +2359,54 @@ impl ExternalAction {
     }
     pub(crate) const fn can_carry_expected_result(&self) -> bool {
         false
+    }
+
+    /// Internal conformance control only. The override is deliberately kept
+    /// inside `ExternalAction`, so the normal route admission check rejects
+    /// it before a source action can be scheduled.
+    pub(crate) fn conformance_attempt_authority_override(source: SourceAction) -> Self {
+        Self {
+            kind: ExternalActionKind::Source(source),
+            target_override: None,
+            authority_override: Some("i2-untrusted-authority".to_string()),
+        }
+    }
+
+    /// Internal conformance candidate for a hand-authored endpoint. The
+    /// generated program rejects the override before route lookup; it cannot
+    /// create a manual communication interface.
+    pub(crate) fn conformance_attempt_target_override(
+        source: SourceAction,
+        target: impl Into<String>,
+    ) -> Self {
+        Self {
+            kind: ExternalActionKind::Source(source),
+            target_override: Some(target.into()),
+            authority_override: None,
+        }
+    }
+
+    /// Build an internal negative candidate that attempts a local state mint
+    /// outside checked Core. `FabricProgram::derive_route_for_external_action`
+    /// rejects it with `SourceFreeStateMint` before it can address a store.
+    pub(crate) fn conformance_attempt_source_free_state_mint(
+        locus: impl Into<String>,
+        state: impl Into<String>,
+        index: impl Into<String>,
+        field: impl Into<String>,
+        value: i64,
+    ) -> Self {
+        Self {
+            kind: ExternalActionKind::ConformanceSourceFreeStateMint {
+                locus: locus.into(),
+                state: state.into(),
+                index: index.into(),
+                field: field.into(),
+                value,
+            },
+            target_override: None,
+            authority_override: None,
+        }
     }
 
     #[cfg(test)]
@@ -3238,6 +3338,9 @@ impl FabricReceipt {
     pub(crate) fn logical_tick_id(&self) -> &str {
         self.logical_tick_id.as_deref().unwrap_or("")
     }
+    pub(crate) fn logical_tick_frontier(&self) -> &str {
+        self.logical_tick_frontier.as_deref().unwrap_or("")
+    }
 }
 
 #[derive(Debug, Clone, PartialEq, Eq)]
@@ -3459,6 +3562,67 @@ pub(crate) struct FabricTrace {
     entries: Vec<Sys4TraceEntry>,
 }
 
+/// Observer-safe proof that two generated requests retained FIFO order in one
+/// owner mailbox. It deliberately exposes request identities and owner locus
+/// only; neither carrier payload nor store/authority material crosses this
+/// boundary.
+#[derive(Debug, Clone, PartialEq, Eq)]
+pub(crate) struct Sys4SameMailboxFifoWitness {
+    owner_locus: String,
+    request_ids: Vec<String>,
+    enqueue_order: Vec<String>,
+    serve_order: Vec<String>,
+    second_enqueued_before_first_serve: bool,
+}
+
+impl Sys4SameMailboxFifoWitness {
+    pub(crate) fn owner_locus(&self) -> &str {
+        &self.owner_locus
+    }
+
+    pub(crate) fn request_ids(&self) -> &[String] {
+        &self.request_ids
+    }
+
+    pub(crate) fn enqueue_order(&self) -> &[String] {
+        &self.enqueue_order
+    }
+
+    pub(crate) fn serve_order(&self) -> &[String] {
+        &self.serve_order
+    }
+
+    pub(crate) const fn second_enqueued_before_first_serve(&self) -> bool {
+        self.second_enqueued_before_first_serve
+    }
+}
+
+/// Result of a deliberately bounded generated owner-request FIFO exercise.
+/// Both requests were admitted from source actions, transported into the same
+/// mailbox before either owner serve, then completed through their generated
+/// reply paths.  This is an observer-only witness and receipts; it exposes no
+/// mailbox or store mutation capability.
+#[derive(Debug, Clone, PartialEq, Eq)]
+pub(crate) struct Sys4SameMailboxFifoExecution {
+    witness: Sys4SameMailboxFifoWitness,
+    first_receipt: FabricReceipt,
+    second_receipt: FabricReceipt,
+}
+
+impl Sys4SameMailboxFifoExecution {
+    pub(crate) fn witness(&self) -> &Sys4SameMailboxFifoWitness {
+        &self.witness
+    }
+
+    pub(crate) fn first_receipt(&self) -> &FabricReceipt {
+        &self.first_receipt
+    }
+
+    pub(crate) fn second_receipt(&self) -> &FabricReceipt {
+        &self.second_receipt
+    }
+}
+
 impl FabricTrace {
     fn append(
         &mut self,
@@ -3630,6 +3794,60 @@ impl FabricTrace {
             .iter()
             .map(|entry| (entry.operation.clone(), entry.kind, entry.edge_kind))
             .collect()
+    }
+
+    /// Return the exact, observer-safe FIFO witness instead of a generic
+    /// per-request stage predicate. This is intentionally a two-message,
+    /// one-mailbox fact from the actual endpoint trace.
+    pub(crate) fn observer_two_request_same_mailbox_fifo_witness(
+        &self,
+        first_request_id: &str,
+        second_request_id: &str,
+    ) -> Option<Sys4SameMailboxFifoWitness> {
+        if first_request_id.is_empty()
+            || second_request_id.is_empty()
+            || first_request_id == second_request_id
+        {
+            return None;
+        }
+        let position = |request_id: &str, kind: Sys4TraceKind| {
+            self.entries
+                .iter()
+                .enumerate()
+                .find(|(_, entry)| entry.request_id == request_id && entry.kind == kind)
+        };
+        let (first_dispatch, first_dispatch_entry) =
+            position(first_request_id, Sys4TraceKind::Dispatched)?;
+        let (second_dispatch, second_dispatch_entry) =
+            position(second_request_id, Sys4TraceKind::Dispatched)?;
+        let (first_receive, first_receive_entry) =
+            position(first_request_id, Sys4TraceKind::Received)?;
+        let (second_receive, second_receive_entry) =
+            position(second_request_id, Sys4TraceKind::Received)?;
+        let (first_serve, _first_serve_entry) = position(first_request_id, Sys4TraceKind::Served)?;
+        let (second_serve, _second_serve_entry) =
+            position(second_request_id, Sys4TraceKind::Served)?;
+        let same_owner = first_dispatch_entry.target_locus == second_dispatch_entry.target_locus
+            && first_receive_entry.target_locus == second_receive_entry.target_locus
+            && first_receive_entry.target_locus == first_dispatch_entry.target_locus
+            && second_receive_entry.target_locus == second_dispatch_entry.target_locus
+            && first_dispatch < second_dispatch
+            && first_receive < second_receive
+            && second_dispatch < first_serve
+            && second_receive < first_serve
+            && first_serve < second_serve
+            && first_dispatch < first_receive
+            && first_receive < first_serve
+            && second_dispatch < second_receive
+            && second_receive < second_serve;
+        let owner_locus = first_dispatch_entry.target_locus.clone()?;
+        same_owner.then(|| Sys4SameMailboxFifoWitness {
+            owner_locus,
+            request_ids: vec![first_request_id.to_string(), second_request_id.to_string()],
+            enqueue_order: vec![first_request_id.to_string(), second_request_id.to_string()],
+            serve_order: vec![first_request_id.to_string(), second_request_id.to_string()],
+            second_enqueued_before_first_serve: true,
+        })
     }
 
     pub(crate) fn endpoint_row_for_carrier(
@@ -4051,6 +4269,16 @@ impl Sys4LocalCut {
     /// never enters the observer material.
     pub(crate) fn observer_safe_integrity_material(&self) -> String {
         self.private_restore_integrity_digest().to_string()
+    }
+
+    /// Construct an isolated malformed offline-cut candidate for the I2
+    /// verifier. The original saved cut remains immutable and no live fabric
+    /// receives this candidate; restore must reject the altered private seal.
+    pub(crate) fn conformance_corrupt_offline_cut_candidate(&self) -> Self {
+        let mut candidate = self.clone();
+        candidate.private_restore_integrity_digest =
+            "sys4-i2-conformance-corrupted-offline-cut".to_string();
+        candidate
     }
 
     /// Deterministically bind every `Sys4LocalCut` field that restore can
@@ -6944,6 +7172,25 @@ pub(crate) struct LocalFabric {
     patch_lifecycle: Sys4PatchLifecycleLog,
 }
 
+/// Redacted facts from the backend instance that executed a generated
+/// schedule. It deliberately contains no mailbox payload, local state, or
+/// authority material.
+#[derive(Debug, Clone, PartialEq, Eq)]
+pub(crate) struct Sys4BackendExecutionFacts {
+    worker_locus: Option<String>,
+    worker_owned_m8: bool,
+}
+
+impl Sys4BackendExecutionFacts {
+    pub(crate) fn worker_locus(&self) -> Option<&str> {
+        self.worker_locus.as_deref()
+    }
+
+    pub(crate) const fn worker_owned_m8(&self) -> bool {
+        self.worker_owned_m8
+    }
+}
+
 impl std::fmt::Debug for LocalFabric {
     fn fmt(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         formatter
@@ -8854,6 +9101,67 @@ impl LocalFabric {
     pub(crate) fn trace(&self) -> &FabricTrace {
         &self.trace
     }
+
+    /// Admit an externally constructed action only through the same generated
+    /// route check used by dispatch. This is a narrow internal observation
+    /// seam for conformance controls, not a source/runtime injection API.
+    pub(crate) fn validate_external_action(&self, action: &ExternalAction) -> Sys4Result<()> {
+        self.program
+            .derive_route_for_external_action(action)
+            .map(|_| ())
+    }
+
+    /// There is no cross-locus store handle in the fabric. This explicit
+    /// boundary records the attempted bypass as a typed runtime diagnostic
+    /// without resolving a state location or mutating any local store.
+    pub(crate) fn reject_external_cross_locus_store_attempt(
+        &self,
+        origin_locus: &str,
+        target_locus: &str,
+    ) -> Sys4Result<()> {
+        if !self.loci.contains_key(origin_locus) || !self.loci.contains_key(target_locus) {
+            return Err(Sys4DispatchDiagnostics::one(
+                Sys4DiagnosticKind::RouteUnavailable,
+            ));
+        }
+        if origin_locus == target_locus {
+            return Err(Sys4DispatchDiagnostics::one(
+                Sys4DiagnosticKind::ProgramProjectionMismatch,
+            ));
+        }
+        Err(Sys4DispatchDiagnostics::one(
+            Sys4DiagnosticKind::DirectRemoteStoreMutation,
+        ))
+    }
+
+    /// Actual backend facts retained by the admitted local fabric. The OW1
+    /// worker locus comes from the booted worker evidence, not a profile
+    /// fixture label; FIFO is established from the retained generated trace.
+    pub(crate) fn observer_backend_execution_facts(&self) -> Sys4BackendExecutionFacts {
+        let worker_locus = match &self.backend {
+            M8ExecutionBackend::St(_) => None,
+            M8ExecutionBackend::Ow1(worker) => {
+                Some(worker.evidence().target_owner().as_str().to_string())
+            }
+        };
+        Sys4BackendExecutionFacts {
+            worker_locus,
+            worker_owned_m8: self.backend.is_ow1(),
+        }
+    }
+
+    /// Return the retained endpoint-trace witness for a concrete FIFO pair.
+    /// This is an observation only; it cannot alter mailbox contents or owner
+    /// state.
+    pub(crate) fn observer_two_request_same_mailbox_fifo_witness(
+        &self,
+        first_request_id: &str,
+        second_request_id: &str,
+    ) -> Option<Sys4SameMailboxFifoWitness> {
+        self.trace
+            .observer_two_request_same_mailbox_fifo_witness(first_request_id, second_request_id)
+    }
+
     pub(crate) fn m8_local_trace(&self) -> Sys4Result<&FabricM8Trace> {
         self.require_current_m8_trace_observer()?;
         Ok(&self.m8_trace)
@@ -12117,8 +12425,17 @@ impl LocalFabric {
         action: SourceAction,
     ) -> Sys4Result<FabricReceipt> {
         let submitted = self.submit_source_action(action)?;
+        self.complete_submitted_source_action(submitted.request_id())
+    }
+
+    /// Complete one already source-derived submission through the exact same
+    /// generated transport and locus loop used by `dispatch_source_action`.
+    /// Keeping this private prevents an external scheduler from manufacturing
+    /// a receipt for an unadmitted request while allowing the bounded FIFO
+    /// control below to enqueue two real requests before its first serve.
+    fn complete_submitted_source_action(&mut self, request_id: &str) -> Sys4Result<FabricReceipt> {
         for _ in 0..32 {
-            if let Some(receipt) = self.completed_receipts.remove(submitted.request_id()) {
+            if let Some(receipt) = self.completed_receipts.remove(request_id) {
                 return Ok(receipt);
             }
             let pending_transport = self.loci.iter().find_map(|(locus, runtime)| {
@@ -12144,16 +12461,76 @@ impl LocalFabric {
             break;
         }
         self.completed_receipts
-            .remove(submitted.request_id())
+            .remove(request_id)
             .ok_or_else(|| Sys4DispatchDiagnostics::one(Sys4DiagnosticKind::M8ExecutionRejected))
+    }
+
+    /// Run a bounded two-message FIFO exercise over one generated owner
+    /// mailbox.  Both actions must derive a normal source owner route and
+    /// target the same owner. The method explicitly transports both requests
+    /// before the first owner dequeue, observes the trace witness, and then
+    /// drains their generated reply paths to typed receipts.
+    pub(crate) fn execute_source_owner_fifo_pair(
+        &mut self,
+        first: SourceAction,
+        second: SourceAction,
+    ) -> Sys4Result<Sys4SameMailboxFifoExecution> {
+        let first_submission = self.submit_source_action(first)?;
+        let second_submission = self.submit_source_action(second)?;
+        if first_submission.target_locus() != second_submission.target_locus()
+            || first_submission.origin_locus() != second_submission.origin_locus()
+        {
+            return Err(Sys4DispatchDiagnostics::one(
+                Sys4DiagnosticKind::ProgramProjectionMismatch,
+            ));
+        }
+
+        let owner = first_submission.target_locus().to_string();
+        self.step_transport(
+            first_submission.origin_locus(),
+            first_submission.target_locus(),
+            first_submission.envelope_id(),
+        )?;
+        self.step_transport(
+            second_submission.origin_locus(),
+            second_submission.target_locus(),
+            second_submission.envelope_id(),
+        )?;
+
+        // Both requests are now pending in the same owner endpoint. Serving
+        // either one before moving the second would invalidate the requested
+        // FIFO observation rather than weakening it to a per-request stage
+        // monotonicity check.
+        self.step_locus(&owner)?;
+        self.step_locus(&owner)?;
+        let witness = self
+            .observer_two_request_same_mailbox_fifo_witness(
+                first_submission.request_id(),
+                second_submission.request_id(),
+            )
+            .ok_or_else(|| Sys4DispatchDiagnostics::one(Sys4DiagnosticKind::M8ExecutionRejected))?;
+        let first_receipt = self.complete_submitted_source_action(first_submission.request_id())?;
+        let second_receipt =
+            self.complete_submitted_source_action(second_submission.request_id())?;
+        Ok(Sys4SameMailboxFifoExecution {
+            witness,
+            first_receipt,
+            second_receipt,
+        })
     }
 
     pub(crate) fn dispatch_external_action(
         &mut self,
         action: ExternalAction,
     ) -> Sys4Result<FabricReceipt> {
-        match action.kind {
-            ExternalActionKind::Source(source) => self.dispatch_source_action(source),
+        match &action.kind {
+            ExternalActionKind::Source(source) => {
+                // Never discard external override fields before route
+                // admission.  Doing so would turn a rejected schedule
+                // attempt into a normal source action.
+                self.program.derive_route_for_external_action(&action)?;
+                self.dispatch_source_action(source.clone())
+            }
             ExternalActionKind::Fault(fault) => {
                 if matches!(
                     fault.kind,
@@ -12315,7 +12692,7 @@ impl LocalFabric {
                 Ok(FabricReceipt {
                     request_id: fault_id.clone(),
                     delivery_id: fault_id.clone(),
-                    operation_id: fault.edge_ref,
+                    operation_id: fault.edge_ref.clone(),
                     origin_locus: "external".to_string(),
                     target_locus: String::new(),
                     typed_value: RuntimeValue::unit(),
@@ -12332,6 +12709,9 @@ impl LocalFabric {
                     logical_tick_frontier: None,
                 })
             }
+            ExternalActionKind::ConformanceSourceFreeStateMint { .. } => Err(
+                Sys4DispatchDiagnostics::one(Sys4DiagnosticKind::SourceFreeStateMint),
+            ),
         }
     }
 }

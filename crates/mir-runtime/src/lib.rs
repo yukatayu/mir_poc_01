@@ -73,6 +73,12 @@ pub mod sys5_local_slice;
 /// and sealed admission candidates.
 #[doc(hidden)]
 pub mod sys5_local_workflow;
+/// Provisional finite SYS-6 I2 conformance producer and verifier.
+///
+/// This is an internal profile facade. Its Rust names and JSON report are not
+/// a public API, ABI, or wire compatibility promise.
+#[doc(hidden)]
+pub mod sys6_i2_conformance;
 
 #[cfg(test)]
 mod sys1_runtime_kernel_tests;
@@ -95,6 +101,8 @@ mod sys5_local_workflow_tests;
 mod sys5_relation_dispatch_tests;
 #[cfg(test)]
 mod sys5_vertical_slice_tests;
+#[cfg(test)]
+mod sys6_i2_conformance_tests;
 
 pub fn crate_name() -> &'static str {
     "mir_runtime"
