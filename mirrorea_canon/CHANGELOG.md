@@ -18,6 +18,25 @@ open_items: []
 
 ## 履歴
 
+- **2026-08-28** PROPOSAL-034 / ADR-0031 により、accepted cut
+  `53a21e64b5a17e24b522f720db10b6e539c058e0`のSYS-5 four-locus local toy
+  fabricとtyped devtoolsを受理した。provisional explicit relation-anchor locusを
+  AST/M6/M7/Core/projection/source mapに保存し、source-bound ParticipantA leaveはexact
+  M9 membership/capability/witness lineageをretireしてからParticipantB-owned relationを
+  fallbackへ公開する。fresh reacquireはexact tombstoneからdistinct epoch/
+  incarnationとfresh lineageを発行し、ownerがprimaryを再公開する。selected ST
+  lifecycleはfailure-atomic candidateで、post-leave cut/restoreもexact retired lineageを保存する。
+  `project-loci` / `run-local` / `inspect`はowner RMW、designated value、relation/fallback/
+  presentation gap/fresh reacquire、auth failure、save/restore、accepted/rejected patch、optional
+  verificationをactual generated endpoints上で実行し、source/Core/artifact/edge/runtime
+  occurrenceをobserver-safeな単一のjoined reportに示す。AST 10/10、M7 27/27、SYS-3
+  28/28、workflow 8/8、relation 17/17、cut/patch 12/12、CLI 3/3、M9 lifecycle
+  4/4、full `mir-runtime` all-targets、M10 2/4/67、format/Clippy/diff/manual redaction
+  check、独立semantics/usability/security/authority reviewを受理した。OBL-062はこの
+  finite evidenceのみ`runtime-monitored`。theory T1、broad PHASE-I1、official I2
+  entry/exit、public CLI/API/ABI/wire/JSONは不変。SYS-5はcompleted、SYS-6がsole
+  active goal、SYS-7がnextである。
+
 - **2026-08-27** PROPOSAL-033 / ADR-0030 により、accepted cut
   `22196f93b0112b8fd2987ec078021c8865b71651`のcrate-private SYS-4 in-process
   fabricを受理した。SYS-3のowned per-locus artifacts、generated communication plan、

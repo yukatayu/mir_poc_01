@@ -2,8 +2,8 @@
 id: spec/03-static-semantics
 status: L1-fixed
 maturity: draft
-depends_on: [spec/02-surface-grammar, theory/03-elaboration, theory/10-diagnostics, theory/13-evaluation-materialization, theory/14-maintained-relation-projection, theory/15-shared-formal-model, adr/ADR-0021, adr/ADR-0025]
-summary: 実装済み M6 source form の M5 Core / typed CoreTemplate / typed Diagnostic classification と source-span obligation。
+depends_on: [spec/02-surface-grammar, theory/03-elaboration, theory/10-diagnostics, theory/13-evaluation-materialization, theory/14-maintained-relation-projection, theory/15-shared-formal-model, adr/ADR-0021, adr/ADR-0025, adr/ADR-0031]
+summary: 実装済み M6 source form、provisional explicit relation-anchor locusの M5 Core / typed CoreTemplate / typed Diagnostic classification と source-span obligation。
 open_items: []
 ---
 
@@ -31,6 +31,8 @@ runtime occurrence, nor presentation input.
 | local RHS dependency of that assignment | source-to-Core map entry | same assignment span records `OwnerRmw`, `OwnerLocalRead`, and `OwnerLocalWrite`; local dependency is at `L_owner`, not `L_actor`, and is not a receipt edge |
 | RHS state dependency owned at another locus | `CrossOwnerOperandRequiresReceipt` diagnostic | offending RHS reference span; no hidden request, receipt, release, snapshot, capability, or witness |
 | `relation ... publish relation [project at C local]` | maintained-relation template | M5 relation bind/publication/projection boundary, typed binding frontier, `publish-relation`, optional consumer-local projection site, no result frontier |
+| relation anchor `A at L` | retained explicit existence-locus input | declared locus and exact anchor-locus span; relation owner/consumer locus remain distinct; no authority, membership, or route inference |
+| relation anchor with undeclared explicit locus | M7 `UndefinedRelationAnchorLocus` diagnostic | offending anchor-locus span; no executable checked Core or topology fallback |
 | `relation ... publish value Name` | `RelationMustPublishRelationCarrier` diagnostic | publication-clause span; no absolute-value relation carrier |
 | `relation Name mutate Field` in an owner action | `ConsumerRelationMutationDenied` diagnostic | mutation span; no semantic relation mutation |
 | `designated evaluate E on tick F publish result = Expr` | designated-result template | `publish-value`, typed result frontier/version, no relation frontier |
@@ -71,6 +73,11 @@ runtime occurrence, nor presentation input.
    fields are private. Only a write to a listed field may create the typed
    observer-publish effect and its `VisibilityDenied` failure entry; attempted
    observer publication of a private field rejects without semantic mutation.
+9. An explicit relation-anchor locus resolves against the declared locus
+   inventory and is retained separately from relation owner and consumer. An
+   omitted locus remains absent; classification/checking does not infer it from
+   owner, consumer, topology, or deployment. The source-bound SYS-5
+   leave/fresh path is available only when the primary anchor locus is explicit.
 
 ## Rejections and non-effects
 

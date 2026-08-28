@@ -2,8 +2,8 @@
 id: spec/08-m7-checked-elaboration
 status: L1-fixed
 maturity: draft
-depends_on: [spec/03-static-semantics, spec/04-core-ir, theory/16-m7-checked-elaboration, adr/ADR-0022, adr/ADR-0025, adr/ADR-0029]
-summary: M6 sourceを唯一の入力とするM7 finite check/elaboration API、designated consume Core、生成義務、residual、非実行境界。
+depends_on: [spec/03-static-semantics, spec/04-core-ir, theory/16-m7-checked-elaboration, adr/ADR-0022, adr/ADR-0025, adr/ADR-0029, adr/ADR-0031]
+summary: M6 sourceを唯一の入力とするM7 finite check/elaboration API、designated consume Core、provisional relation anchor locus、生成義務、residual、非実行境界。
 open_items: []
 ---
 
@@ -66,6 +66,7 @@ JSON, ABI, wire, or diagnostic-catalog names.
 | M6-accepted expression outside finite ordered-tree profile | `UnsupportedExpression` at full expression span | no executable Core |
 | `+` or `-` with a non-`Int` operand | `ArithmeticRequiresInt` at operator span | no executable Core |
 | finite expression/type/locus consistency gap | `TypeMismatch`, `UndefinedStateIndexType`, `UndefinedStateFieldType`, `UndefinedRelationSubjectType`, `UndefinedOwnerLocus`, `UndefinedConsumerLocus`, `UndefinedSelfPrincipal`, or `UndefinedRoleEvaluationLocus` | no executable Core |
+| explicit relation anchor names an undeclared locus | `UndefinedRelationAnchorLocus` at the anchor-locus span | no executable Core, inferred replacement locus, membership, or route |
 | duplicate field/event/relation/designated/deferred | `DuplicateStateField` or corresponding `Duplicate…` at the second occurrence | no executable Core |
 | relation publication | `PublishRelation`, optional `ConsumerLocalProjection`, `Visibility` + `RelationLifetime` + `FallbackValidity` residuals | no value publication or consumer mutation |
 | designated result | `DesignatedPublishValue` + `ValueVisibilityRedaction` residual | no binding-frontier conversion |
@@ -120,7 +121,10 @@ target, an M8-consumable ordered typed expression tree (including operand and
 operator spans and `Int` arithmetic), bounded summaries, and same-owner reads
 with request-to-owner/local-read/owner-write effects. The
 relation projection preserves owner/subject/type/binding frontier/primary and
-fallback transforms/consumer locus with a relation-publication effect. The
+fallback transforms, optional explicit primary/fallback anchor loci and exact
+anchor source refs, and consumer locus with a relation-publication effect. An
+omitted anchor locus stays absent; M7 does not infer it from relation owner,
+consumer, topology, or deployment. The
 designated projection preserves evaluator, tick/input/result frontier/version,
 an ordered typed expression tree, a deterministic `EvaluationPolicy`,
 conservative `ObservationPolicy`, immutable `PolicyStamp`, and an M7-specific generated request-plus-receipt-use

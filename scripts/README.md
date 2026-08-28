@@ -23,6 +23,15 @@
 - `clean_near_end_samples.py`
 - `current_l2_guided_samples.py`
   compatibility wrapper for `list` / `smoke-all` / `closeout` over `clean_near_end_samples.py`
+- provisional SYS-5 `mir` CLI local-toy commands live in
+  `crates/mir-runtime/src/bin/mir.rs`
+  - `cargo run -q -p mir-runtime --bin mir -- project-loci samples/clean-near-end/mirrorea-i2-local-toy/main.mir --format json`
+  - `cargo run -q -p mir-runtime --bin mir -- run-local samples/clean-near-end/mirrorea-i2-local-toy/main.mir --patch samples/clean-near-end/mirrorea-i2-local-toy/patches/designated-plus-two.mir --patch samples/clean-near-end/mirrorea-i2-local-toy/patches/owner-rmw-change.mir --format json`
+  - `cargo run -q -p mir-runtime --bin mir -- inspect samples/clean-near-end/mirrorea-i2-local-toy/main.mir --patch samples/clean-near-end/mirrorea-i2-local-toy/patches/designated-plus-two.mir --patch samples/clean-near-end/mirrorea-i2-local-toy/patches/owner-rmw-change.mir --format json`
+  - accepted SYS-5 cut `53a21e64...` uses these commands for four-locus
+    source-derived projection, generated in-process dispatch, and one joined
+    observer-safe devtools report. The command names and JSON shape are
+    internal/provisional and do not freeze public API/ABI/wire.
 - `practical_alpha_error_display.py`
   shared practical helper display utility that redacts repo-owned absolute path
   prefixes from failure surfaces while preserving external/temp absolute paths

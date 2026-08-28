@@ -2,8 +2,8 @@
 id: arch/03-toolchain
 status: L2-working
 maturity: draft
-depends_on: [arch/02-boundary-contracts, spec/04-core-ir, spec/12-sys3-per-locus-projection, spec/13-sys4-in-process-generated-dispatch, adr/ADR-0029, adr/ADR-0030]
-summary: toolchain各componentの責務、accepted SYS-3 internal projection compiler、SYS-4 generated-plan-only runtime boundary。
+depends_on: [arch/02-boundary-contracts, spec/04-core-ir, spec/12-sys3-per-locus-projection, spec/13-sys4-in-process-generated-dispatch, spec/14-sys5-local-toy-devtools, adr/ADR-0029, adr/ADR-0030, adr/ADR-0031]
+summary: toolchain各componentの責務、accepted SYS-3 projection、SYS-4 runtime、SYS-5 local workflow/joined devtools boundary。
 open_items: [OPEN-029]
 ---
 
@@ -81,5 +81,27 @@ SYS-4 cut/restoreとchecked patchもruntime-internal seamである。ST cutはwh
 consistent stateを扱い、patch inputは既にchecked/projected/complete M9-admittedな
 designated-only candidateだけを受ける。OW1 cut/patch、CLI spelling、public artifact format、
 `--format json` encoding、deployment、wire/transportは未実装・未凍結である。
+
+## SYS-5 selected local workflow and devtools boundary
+
+ADR-0031 / spec/14 accepts provisional `mir project-loci`, `mir run-local`, and
+`mir inspect` facades over one source-first finite path. `project-loci` exposes
+the checked four-locus artifact/communication summary. `run-local` and
+`inspect` execute one already checked/projected/admitted `LocalFabric` workflow
+and return a deterministic observer-safe joined report. The runtime does not
+reparse source or derive semantics from the command, logical path, fixture
+name, expected JSON, or renderer.
+
+The joined devtools boundary consumes existing typed source/Core/fragment/edge/
+occurrence/lifecycle facts. It may correlate exact identities and label the
+save/restore fork, but cannot invent an edge, occurrence, authority, state, or
+result. It exposes exact patch occurrence/provenance and source-bound M9
+leave/fresh evidence only through observer-safe typed references. Raw source,
+credential, capability/witness, private payload/state, and raw M8/M9 identity
+are not devtools output.
+
+These CLI names and JSON fields are finite LAB-facing direct-consumer seams,
+not the final/public toolchain or compatibility contract. Browser/View/LSP,
+public artifacts, and external transport remain later work.
 
 OPEN-029: mir-lsp(エディタ統合)は I5 で検討。CLI 名は仮称であり、LAB の `mirrorea-alpha` 系列を改称して流用してよい。

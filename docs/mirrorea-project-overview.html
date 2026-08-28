@@ -240,7 +240,7 @@
   <a class="skip-link" href="#main">本文へ移動</a>
   <header class="hero">
     <div class="container">
-      <p class="eyebrow">Canon-first project reader view / 2026-08-27 JST</p>
+      <p class="eyebrow">Canon-first project reader view / 2026-08-28 JST</p>
       <h1>Mir / Mirrorea<br>全体像・現在地・ロードマップ</h1>
       <p class="lead">一枚の普通の Mir source から、計算場所・通信・権限・失敗・観測・保存・進化を意味に基づいて導出し、最終的には複数の計算機をまたぐ仮想空間を安全に動かす計画です。このページは、その長期 North Star、すでに閉じた有限 reference system、今後の実装段階、理論上の未完了、owner が判断する地点を一つの読み筋に統合します。</p>
       <p class="source-cut">このページは非規範の LAB reader view です。規範正本は <a href="../mirrorea_canon/README.md">mirrorea_canon/</a>。SYS-0 program start revision は clean な <code>49e6845ada990a1c9d9944896a5ff1754994a1b3</code>（当時 <code>HEAD == origin/main</code>）。受理済み M10 reference profile の immutable source cut は <code>23f5a8130334bf0c8516d51e9dcea38b92f50db1</code>。受理済みSYS-3 source/evidence cutは <code>3013e7fe075a7605a1ffe01e0b14f4a0856eaeb9</code>。初回candidate <code>ded622fef91bab2cadc571ba944e5ee2c69a7b63</code> はE-CONSUME反例後のpartial regression historyです。</p>
@@ -254,7 +254,7 @@
       </div>
       <div class="headline-status">
         <h2>最初に結論</h2>
-        <p><strong>North Star に沿うsystems vertical sliceを、意味欠落を残さず閉じています。</strong> owner は ADR-0026 で systems path を選び、active roadmap は Plan 249 です。現在は <b>SYS-0--SYS-4 completed</b>、<b>active goal は SYS-5</b>、<b>next goal は SYS-6</b>。accepted SYS-4 cut <code>22196f93...</code> はgenerated artifactsのactual in-process endpoint dispatchを閉じ、実 socket・ブラウザ・耐久分散・一般公開は後段です。</p>
+        <p><strong>North Star に沿うsystems vertical sliceを、意味欠落を残さず前進させています。</strong> owner は ADR-0026 で systems path を選び、active roadmap は Plan 249 です。現在は <b>SYS-0--SYS-5 completed</b>、<b>active goal は SYS-6</b>、<b>next goal は SYS-7</b>。accepted SYS-5 cut <code>53a21e64...</code> はone ordinary sourceからfour-locus local toy fabric、generated dispatch、joined typed devtoolsを実行可能にし、実 socket・ブラウザ・耐久分散・一般公開は後段です。</p>
         <div class="status-grid">
           <div class="status-card"><strong>理論 lifecycle</strong><span><b>official lifecycle は T1</b>。T0/G0 は閉じたが、T1 の広い exit と T2 の一般証明骨格は未達。</span></div>
           <div class="status-card"><strong>bounded program</strong><span><b>M0–M10 は完走・閉鎖</b>。ADR-0015 / Plan 247 は closed。ADR-0026 / Plan 249 の SYS-0--SYS-7 program は active。</span></div>
@@ -333,7 +333,7 @@
     <section id="now">
       <div class="container">
         <p class="eyebrow">02 / Current position</p>
-        <h2>現在地は「T1」「有限 I1+ 受理」「SYS-5 active」の三座標で読む</h2>
+        <h2>現在地は「T1」「有限 I1+ 受理」「SYS-6 active」の三座標で読む</h2>
         <p class="section-intro"><b>M0–M10</b> は閉じた ADR-0015 program、<b>SYS-0--SYS-7</b> は active ADR-0026 program、<b>T0–T2 / I1–I6</b> は長期 lifecycle です。bounded program の進行を official lifecycle exit と読み替えないことが現在地を理解する最重要点です。</p>
 
         <figure aria-labelledby="current-caption">
@@ -348,14 +348,14 @@
             <div class="axis-label">lifecycle / program</div>
             <div class="axis-track" aria-label="bounded program activation and lifecycle acceptance are separate"><span class="axis-step edge">broad I1 exit 未受理</span><span class="axis-arrow">∥</span><span class="axis-step here">ADR-0026 program active</span><span class="axis-arrow">→</span><span class="axis-step later">I2 lifecycle acceptance は evidence 待ち</span></div>
             <div class="axis-label">権限 / queue</div>
-            <div class="axis-track"><span class="axis-step done">ADR-0015 / Plan 247 closed</span><span class="axis-arrow">→</span><span class="axis-step done">SYS-0--SYS-4 completed</span><span class="axis-arrow">→</span><span class="axis-step here">SYS-5 active</span><span class="axis-arrow">→</span><span class="axis-step later">SYS-6 next</span></div>
+            <div class="axis-track"><span class="axis-step done">ADR-0015 / Plan 247 closed</span><span class="axis-arrow">→</span><span class="axis-step done">SYS-0--SYS-5 completed</span><span class="axis-arrow">→</span><span class="axis-step here">SYS-6 active</span><span class="axis-arrow">→</span><span class="axis-step later">SYS-7 next</span></div>
           </div>
-          <figcaption id="current-caption">有限 reference profile の acceptance は本物ですが、general theorem、public contract、real transport、production への自動昇格ではありません。Plan 247 は closed record / regression baseline、active roadmap は Plan 249 です。SYS-0--SYS-4 は accepted evidence を伴って完了し、SYS-5がactive、SYS-6がnextです。</figcaption>
+          <figcaption id="current-caption">有限 reference profile の acceptance は本物ですが、general theorem、public contract、real transport、production への自動昇格ではありません。Plan 247 は closed record / regression baseline、active roadmap は Plan 249 です。SYS-0--SYS-5 は accepted evidence を伴って完了し、SYS-6がactive、SYS-7がnextです。</figcaption>
         </figure>
 
         <div class="three-col">
           <article class="card"><h3>確定したもの</h3><p>v0/I1+ の有限意味、Surface → Core → runtime → projection の同一 source 経路、SCN-01..10 の静的・実行 correspondence、有限 Lean/model/runtime evidence。</p></article>
-          <article class="card orange"><h3>選択済みの現在</h3><p>SYS-4 は checked Core由来のowned per-locus artifactを独立locus endpointとして実dispatchし、typed observer、ST cut/restore、bounded designated-only patchまで閉じました。現在は SYS-5 で、その実traceをtoy/devtoolsへ接続します。</p></article>
+          <article class="card orange"><h3>選択済みの現在</h3><p>SYS-5 は checked Core由来のfour-locus local toy fabricを `mir project-loci` / `mir run-local` / `mir inspect` で実行し、typed observer、save/restore、bounded patch、relation fallback/reacquireをjoined causal viewへ接続しました。現在は SYS-6 で、その evidence を I2 assurance profile へ整理します。</p></article>
           <article class="card red"><h3>owner-reserved の後段</h3><p>public carrier freeze、実 transport、production/publication、North Star や保証の変更は Plan 249 の自律範囲に含めません。</p></article>
         </div>
       </div>
@@ -406,7 +406,7 @@
           <li class="arrow" aria-hidden="true">→</li>
           <li class="flow-node"><strong>project / observe</strong><span>designated value または local relation evaluation</span></li>
         </ol>
-        <p class="note"><code>mir parse/check/elab/run/trace/project/save/load/patch/conform</code> は現在の M10 provisional facade として存在します。ただし、名前・JSON carrier・field は final public API/ABI/wire ではありません。</p>
+        <p class="note"><code>mir parse/check/elab/run/trace/project/save/load/patch/conform</code> は M10 provisional facade として存在します。SYS-5 では同じ provisional family に <code>mir project-loci</code> / <code>mir run-local</code> / <code>mir inspect</code> が加わり、<a href="../samples/clean-near-end/mirrorea-i2-local-toy/README.md">local toy source</a> を one-source four-locus workflow として実行できます。ただし、名前・JSON carrier・field は final public API/ABI/wire ではありません。</p>
       </div>
     </section>
 
@@ -414,7 +414,7 @@
       <div class="container">
         <p class="eyebrow">04 / Timeline and phases</p>
         <h2>閉じた時系列と、これからの Phase を同じ時間軸に置く</h2>
-        <p class="section-intro">2026-08-03〜05 に閉じた M0–M10 は、Mir Theory v0 / I1+ の有限基準線を作る短期 program でした。2026-08-26 に ADR-0026 / Plan 249 が systems foundation を開き、ADR-0027 が SYS-1 の narrow internal kernel/carrierを、2026-08-27のADR-0028がSYS-2 ST/OW1 refinementを、ADR-0029がSYS-3 checked-Core per-locus projectionを閉じました。SYS-4 cut <code>22196f93...</code> は in-process generated dispatch を閉じ、SYS-5 が active です。T2 / I2–I6 は別の長期 lifecycle であり、program milestone 名だけでは動きません。</p>
+        <p class="section-intro">2026-08-03〜05 に閉じた M0–M10 は、Mir Theory v0 / I1+ の有限基準線を作る短期 program でした。2026-08-26 に ADR-0026 / Plan 249 が systems foundation を開き、ADR-0027 が SYS-1 の narrow internal kernel/carrierを、2026-08-27のADR-0028がSYS-2 ST/OW1 refinementを、ADR-0029がSYS-3 checked-Core per-locus projectionを閉じました。SYS-4 cut <code>22196f93...</code> は in-process generated dispatch を閉じ、SYS-5 cut <code>53a21e64...</code> は four-locus local toy と joined typed devtools を閉じました。SYS-6 が active です。T2 / I2–I6 は別の長期 lifecycle であり、program milestone 名だけでは動きません。</p>
 
         <figure aria-labelledby="timeline-caption">
           <div class="timeline">
@@ -428,8 +428,9 @@
             <div class="time">2026-08-26 / closed</div><div class="event"><strong>ADR-0027 / SYS-1 runtime kernel / internal carrier</strong><span>source cut <code>94e3707c...</code> で ordinary source/generic owner path をkernelへ分離し、OPEN-030をI2-internalに限って固定した。</span></div>
             <div class="time">2026-08-27 / closed</div><div class="event"><strong>ADR-0028 / SYS-2 ST/OW1 refinement</strong><span>cut <code>920d3fe0...</code>でactual M8 ordering、M9 ack-before-publish、bounded modelを閉じた。</span></div>
             <div class="time">2026-08-27 / closed</div><div class="event"><strong>ADR-0029 / SYS-3 per-locus projection</strong><span>candidate cut <code>ded622fe...</code>をE-CONSUME反例でreopen後、corrected cut <code>3013e7fe...</code>でbounded source/Core projectionを受理。</span></div>
-            <div class="time">現在</div><div class="event"><strong>SYS-5 typed devtools / toy world</strong><span>SYS-4 actual dispatchをfour-locus headless scenarioとjoined causal viewへ接続する。</span></div>
-            <div class="time">次</div><div class="event"><strong>SYS-6 I2 assurance / lifecycle closeout</strong><span>SYS-5 toy/devtools evidenceをfinite I2 profileとevidence classesへ接続する。</span></div>
+            <div class="time">2026-08-28 / closed</div><div class="event"><strong>SYS-5 typed devtools / toy world</strong><span>cut <code>53a21e64...</code>でordinary source、four-locus generated dispatch、local save/restore、patch lifecycle、relation fallback/reacquire、observer-safe joined viewを受理。</span></div>
+            <div class="time">現在</div><div class="event"><strong>SYS-6 I2 assurance / lifecycle closeout</strong><span>SYS-5 toy/devtools evidenceをfinite I2 profileとevidence classesへ接続する。</span></div>
+            <div class="time">次</div><div class="event"><strong>SYS-7 I3 entry contract only</strong><span>I2 close後のreal transport program entry contractだけを作り、I3実装は開始しない。</span></div>
             <div class="time">中長期</div><div class="event"><strong>I3 → I4 → I5 → I6</strong><span>実 transport、durable world/live patch、browser View demo、分散永続/federation。</span></div>
           </div>
           <figcaption id="timeline-caption">将来日は決まっていません。順序は依存関係を示し、納期を約束するものではありません。current-frontier discipline により、次の semantic milestone は一つだけ選びます。</figcaption>
@@ -444,7 +445,7 @@
               <tr class="now-row"><th><strong>T1</strong><br>計算体系</th><td><span class="cell-status now">現在</span><br>有限 v0 cut は受理、広い exit は未達</td><td>研究用の bounded source/runtime に触れられるが、public language product ではない。</td><td>Surface/Core/Config/Step/WF、evaluation、relation、fallback、authority、observation、cut/patch の有限体系。</td><td>G1 exit と G2/G3 statement 群。general proof skeleton は T2 の別 gate。ADR-0026 program は lifecycle acceptance と別に進む。</td></tr>
               <tr><th><strong>T2</strong><br>骨格証明</th><td><span class="cell-status">将来</span></td><td>直接の製品機能より、実装の一般化に対する信頼が増える。</td><td>OBL-020/021/002 を中心に general preservation / determinism / soundness の proof skeleton。</td><td>exact Core/source correspondence と statement scope を owner-directed program で選ぶ。</td></tr>
               <tr class="accepted-row"><th><strong>I1</strong><br>参照実装</th><td><span class="cell-status partial">有限 I1+ 受理</span><br>広い exit は未受理</td><td>bounded <code>.mir</code> を single process で parse/check/run し、trace・save/load・patch・projection を調べられる。</td><td>SCN-01..10 finite C-static/C-runtime、designated / relation pressure slices、source/Core/trace correspondence。</td><td><code>architecture/04</code> full carrier freeze と <code>OPEN-026/027</code>。OPEN-030 narrow internal解決だけでは別のbroad exit acceptanceにならない。</td></tr>
-              <tr><th><strong>I2</strong><br>process内 multi-locus</th><td><span class="cell-status partial">bounded program active</span><br>official entry/exit 未受理</td><td>目標は一人用の local toy world。複数 locus の処理が実際に dispatch され、最小 devtools で見える。</td><td>generated communication を source-derived boundary から実 dispatch。authority/failure/projection preservation。</td><td>ADR-0026--0029 / Plan 249。SYS-0--SYS-4 completed、SYS-5 active、SYS-6 next。SYS-4 dispatch evidence だけでは lifecycle を動かさない。</td></tr>
+              <tr><th><strong>I2</strong><br>process内 multi-locus</th><td><span class="cell-status partial">bounded program active</span><br>official entry/exit 未受理</td><td>一人用の local toy world を ordinary source から実行し、複数 locus の処理と最小 devtools を見られる。</td><td>generated communication を source-derived boundary から実 dispatch。authority/failure/projection preservation。</td><td>ADR-0026--0029 plus <a href="../mirrorea_canon/meta/proposals/PROPOSAL-034-sys5-local-toy-devtools.md">PROPOSAL-034</a> / <a href="../mirrorea_canon/adr/ADR-0031.md">ADR-0031</a> / <a href="../mirrorea_canon/spec/14-sys5-local-toy-devtools.md">spec 14</a> / OBL-062 / Plan 249。SYS-0--SYS-5 completed、SYS-6 active、SYS-7 next。SYS-5 workflow evidence だけでは lifecycle を動かさない。</td></tr>
               <tr><th><strong>I3</strong><br>実 transport</th><td><span class="cell-status">将来</span></td><td>2 OS process と実 socket で、LAN 上の二人用すごろく world が動く。</td><td>BND-005 を守り、transport を auth/authority にしない C-distributed profile。</td><td>I2 exit 時に transport を ADR で選ぶ（<code>OPEN-032</code>）。WAN/security strength は別。</td></tr>
               <tr><th><strong>I4</strong><br>永続と patch</th><td><span class="cell-status">将来</span></td><td>world を落として再開し、実 session 中に checked patch を適用できる。</td><td>local durable cut、no-stale-resurrection、live activation cut、patch DAG。</td><td>finite local save/patch から durable implementation への widening。distributed durability はまだ外。</td></tr>
               <tr><th><strong>I5</strong><br>projection と View</th><td><span class="cell-status">将来</span></td><td>browser client と viewer/devtools を備えた、人に見せられる仮想空間 demo α。</td><td>View FFI、pose契約、consumer-local presentation、typed observation/provider boundary。</td><td><code>mir-lsp</code>、View/provider scope、public surface の reversible な設計。final ABI はまだ凍結しない。</td></tr>
@@ -575,7 +576,7 @@
       <div class="container">
         <p class="eyebrow">07 / Barriers and gates</p>
         <h2>障壁は一つではない。現在の direct blocker と、後段の研究課題を分ける</h2>
-        <p class="section-intro">systems route と direct consumer は ADR-0026 / Plan 249 で選択済みです。SYS-1 の kernel/internal carrier は ADR-0027、SYS-2のST/OW1 orderingとlive M9 generationはADR-0028、SYS-3のchecked-Core per-locus projectionはADR-0029で閉じました。SYS-4 cut <code>22196f93...</code> はgenerated artifactsをindependent locus endpointで実行するdispatch evidenceを閉じ、現在の障壁はそれをfour-locus toyとminimal typed devtoolsへ接続するSYS-5です。transport、durability、View、operations は後段です。</p>
+        <p class="section-intro">systems route と direct consumer は ADR-0026 / Plan 249 で選択済みです。SYS-1 の kernel/internal carrier は ADR-0027、SYS-2のST/OW1 orderingとlive M9 generationはADR-0028、SYS-3のchecked-Core per-locus projectionはADR-0029で閉じました。SYS-4 cut <code>22196f93...</code> はgenerated artifactsをindependent locus endpointで実行するdispatch evidenceを閉じ、SYS-5 cut <code>53a21e64...</code> はそれをfour-locus toyとminimal typed devtoolsへ接続しました。現在の障壁はSYS-6で、この evidence をI2 assurance/lifecycle closeoutへ整理することです。transport、durability、View、operations は後段です。</p>
 
         <div class="table-scroll" tabindex="0" aria-label="障壁と影響するフェーズ">
           <table>
@@ -587,8 +588,9 @@
               <tr><th>closed / SYS-2</th><td>ST/OW1 refinement</td><td>actual M8 linearization/reads-from、M9 ack-before-publish、十edge finite model。</td><td>27/27 focused tests、OBL-058/059、四review lane ACCEPT。</td><td><span class="cell-status done">closed</span></td></tr>
               <tr class="decision-row"><th>closed / SYS-3</th><td>per-locus projection</td><td>bounded designated-consume source/Core edgeからnamed consumer artifact/deliveryを生成した。</td><td>cut <code>3013e7fe...</code>、OBL-060 static-only runtime-monitored。</td><td><span class="cell-status done">closed</span></td></tr>
               <tr class="decision-row"><th>closed / SYS-4</th><td>generated dispatch</td><td>complete SYS-3 artifactsをindependent locus endpointとして実行した。</td><td>endpoint crossing、no source reparse/direct remote store、ST/OW1 selected correspondence、retry wrapper、replay、ST cut/restore、bounded patch。</td><td><span class="cell-status done">closed</span></td></tr>
-              <tr class="decision-row"><th>現在 / SYS-5</th><td>typed devtools / toy world</td><td>actual dispatchをfour-locus headless scenarioとjoined causal viewで示す。</td><td>accepted SYS-4 runtime trace。</td><td><span class="cell-status now">program</span></td></tr>
-              <tr class="decision-row"><th>次 / SYS-6</th><td>I2 assurance / lifecycle closeout</td><td>finite I2 profileとevidence classesを整理する。</td><td>accepted SYS-5 toy/devtools evidence。</td><td><span class="cell-status later">next</span></td></tr>
+              <tr class="decision-row"><th>closed / SYS-5</th><td>typed devtools / toy world</td><td>actual dispatchをfour-locus headless scenarioとjoined causal viewで示した。</td><td>cut <code>53a21e64...</code>、<a href="../mirrorea_canon/meta/proposals/PROPOSAL-034-sys5-local-toy-devtools.md">PROPOSAL-034</a> / <a href="../mirrorea_canon/adr/ADR-0031.md">ADR-0031</a> / <a href="../mirrorea_canon/spec/14-sys5-local-toy-devtools.md">spec 14</a> / OBL-062。</td><td><span class="cell-status done">closed</span></td></tr>
+              <tr class="decision-row"><th>現在 / SYS-6</th><td>I2 assurance / lifecycle closeout</td><td>finite I2 profileとevidence classesを整理する。</td><td>accepted SYS-5 toy/devtools evidence。</td><td><span class="cell-status now">program</span></td></tr>
+              <tr class="decision-row"><th>次 / SYS-7</th><td>I3 entry contract only</td><td>real transport entry contract を作る。I3実装はしない。</td><td>accepted SYS-6 closeout evidence。</td><td><span class="cell-status later">next</span></td></tr>
               <tr><th>T1 → T2</th><td>general metatheory</td><td>finite model と general Core/source theorem の exact correspondence。</td><td>OBL-020 → 021 → 001/002 の statement、Lean skeleton、implementation target identity。</td><td>owner-directed theory program + evidence</td></tr>
               <tr><th>I2 exit</th><td>generated dispatch</td><td>ordinary source 由来 edge の実 dispatch と typed devtools。fixture-name dispatch は不可。</td><td>deterministic process-internal multi-locus positive/negative/replay profile。</td><td>program acceptance</td></tr>
               <tr><th>I3 entry</th><td>real transport</td><td>2 process delivery、failure semantics、transport choice。</td><td>C-distributed SCN-01/02/03/06、BND-005、fault cases。transport は ADR で選定。</td><td>owner / ADR</td></tr>
@@ -625,13 +627,13 @@
       <div class="container">
         <p class="eyebrow">08 / Decision points</p>
         <h2>現在の決定: systems path を一つの active milestone で進める</h2>
-        <p class="section-intro">owner は ADR-0026 で Mirrorea I2 Systems Foundation を選択済みです。Plan 249 が SYS-0--SYS-7 の唯一の roadmap を保持し、SYS-0--SYS-4 completed、active goal は SYS-5、next goal は SYS-6 です。general theory、real transport、public contract、production はこの program の current frontier ではありません。</p>
+        <p class="section-intro">owner は ADR-0026 で Mirrorea I2 Systems Foundation を選択済みです。Plan 249 が SYS-0--SYS-7 の唯一の roadmap を保持し、SYS-0--SYS-5 completed、active goal は SYS-6、next goal は SYS-7 です。general theory、real transport、public contract、production はこの program の current frontier ではありません。</p>
 
         <div class="decision-tree">
           <article class="decision-path">
             <h3>Active systems route</h3>
             <p><b>目的:</b> 一つの ordinary source から per-locus artifacts と generated communication を作り、process 内で実 dispatch して typed devtools まで接続する。</p>
-            <div class="mini-flow"><span>SYS-0 completed</span><b>→</b><span>SYS-1 completed: carrier</span><b>→</b><span>SYS-2 completed: ST/OW1</span><b>→</b><span>SYS-3 completed: projection</span><b>→</b><span>SYS-4 completed: dispatch</span><b>→</b><span>SYS-5 active: devtools</span><b>→</b><span>SYS-6 next: acceptance</span></div>
+            <div class="mini-flow"><span>SYS-0 completed</span><b>→</b><span>SYS-1 completed: carrier</span><b>→</b><span>SYS-2 completed: ST/OW1</span><b>→</b><span>SYS-3 completed: projection</span><b>→</b><span>SYS-4 completed: dispatch</span><b>→</b><span>SYS-5 completed: devtools/toy</span><b>→</b><span>SYS-6 active: acceptance</span><b>→</b><span>SYS-7 next: I3 contract</span></div>
             <p><b>必須確認:</b> public ABI/wire を凍結しないこと、M10 source/Core/trace correspondence と safety invariant を保持すること。</p>
           </article>
           <article class="decision-path research">
@@ -657,8 +659,9 @@
               <tr><th>closed / SYS-2</th><td>ST/OW1 backend が保存する高水準 ordering edge、M9 generation visibility、finite refinement profile。</td><td>lock-free runtime、general memory model、Surface memory-order syntax。</td><td>cut <code>920d3fe0...</code>とreplayable edge-removal counterexampleを保持。</td></tr>
               <tr class="decision-row"><th>closed / SYS-3</th><td><code>designated consume E.result at C</code>からconsumer artifact、generated delivery、static semantic-consumption identityを導いた。</td><td>actual idempotent-return endpoint、final grammar、multi-consumer、runtime dispatch、public ABI。</td><td>cut <code>3013e7fe...</code>とstatic-only OBL-060でclose。legacy M8/M10はruntime evidenceに読み替えない。</td></tr>
               <tr class="decision-row"><th>closed / SYS-4</th><td>complete generated artifactsをprocess内locus endpointで実dispatchし、carrier-side idempotent return/wrapperを実体化した。</td><td>socket/WAN、public wire、production、legacy M8/M10の意味変更。</td><td>cut <code>22196f93...</code>で endpoint crossing、no-direct-store、positive/retry/competing-consumer test、exactly one accepted M8 consume、ST/OW1 selected runs、replay、ST cut/restore、bounded patchを閉じた。</td></tr>
-              <tr class="decision-row"><th>今 / SYS-5</th><td>four-locus toyとjoined typed devtoolsでsourceからruntime occurrenceまで追う。</td><td>browser renderer、production View。</td><td>accepted SYS-4 actual dispatchをdirect consumerにする。</td></tr>
-              <tr class="decision-row"><th>次 / SYS-6</th><td>finite I2 conformance/assurance and lifecycle closeout。</td><td>general theorem、public ABI/wire、real transport。</td><td>accepted SYS-5 toy/devtools evidenceをdirect consumerにする。</td></tr>
+              <tr class="decision-row"><th>closed / SYS-5</th><td>four-locus toyとjoined typed devtoolsでsourceからruntime occurrenceまで追えるようにした。</td><td>browser renderer、production View。</td><td>accepted SYS-4 actual dispatchをdirect consumerにし、cut <code>53a21e64...</code>で閉じた。</td></tr>
+              <tr class="decision-row"><th>今 / SYS-6</th><td>finite I2 conformance/assurance and lifecycle closeout。</td><td>general theorem、public ABI/wire、real transport。</td><td>accepted SYS-5 toy/devtools evidenceをdirect consumerにする。</td></tr>
+              <tr class="decision-row"><th>次 / SYS-7</th><td>I3 entry contract only。</td><td>I3実装、real transport選定、public wire freeze。</td><td>accepted SYS-6 closeout evidenceをdirect consumerにする。</td></tr>
               <tr><th>I2 exit 時</th><td>I3 transport family と C-distributed acceptance。</td><td>federation、global scale。</td><td>2 process fault test と BND-005 security review を伴う ADR。</td></tr>
               <tr><th>I4/I5 entry</th><td>durable format compatibility、View/provider/public surface の公開範囲。</td><td>複数 engine の最終対応、一般公開 service。</td><td>migration/rejection tests と information-flow review。不可逆 freeze は owner reserved。</td></tr>
               <tr><th>I6 / publication</th><td>identity、operations、retention、deployment、external publication。</td><td>要件がない段階の先行最適化。</td><td>実データ/秘密/保証を含む別の production decision。</td></tr>
@@ -725,6 +728,7 @@ MirTheoryV0M8DeterministicRuntime.lean</code></pre>
               <tr><th>SYS-2 runtime monitor</th><td>選択されたST/OW1 fragmentのactual M8 orderingとM9 ack-before-publish。</td><td>multi-owner OW、一般data-race/refinement theorem、generated dispatch。</td><td>OBL-059 / <a href="../mirrorea_canon/adr/ADR-0028.md">ADR-0028</a></td></tr>
               <tr><th>SYS-3 projection obligation</th><td><code>3013e7fe...</code>はowner/relation/designated-input/result-consumerのcomplete finite static projection evidence。exactly-one source-named consumer、topology non-invention、static retry identityを保持。</td><td>actual idempotent return、current M8 correspondence、endpoint dispatch、production relation DAG、general theorem。</td><td>OBL-060 runtime-monitored (static finite only) / <a href="../mirrorea_canon/adr/ADR-0029.md">ADR-0029</a></td></tr>
               <tr><th>SYS-4 dispatch runtime</th><td><code>22196f93...</code>はgenerated artifactsをin-process locus endpointsで実行し、request→dispatch→receive→serve/reply/failure、typed observer snapshot failure、deterministic replay、ST cut/restore、bounded designated-only patchを保持。</td><td>public CLI/wire、real transport、durable distributed persistence、browser/View product、official I2 lifecycle、OW1 cut/patch beyond typed <code>BackendIneligible</code> residual。</td><td>OBL-061 runtime-monitored (finite in-process dispatch only) / <a href="../plan/249-mirrorea-i2-systems-foundation-current-roadmap.md">Plan 249</a> / <a href="../samples_progress.md">samples dashboard</a></td></tr>
+              <tr><th>SYS-5 local toy/devtools</th><td><code>53a21e64...</code>はone ordinary sourceからfour-locus projection、generated in-process dispatch、joined typed devtools、save/restore、accepted/rejected patch、relation fallback/reacquire、typed auth failureを保持。</td><td>public API/wire、real transport、multi-process、durable distributed save/load、browser/View product、official I2 lifecycle、general theorem。</td><td>OBL-062 runtime-monitored / <a href="../mirrorea_canon/adr/ADR-0031.md">ADR-0031</a> / <a href="../mirrorea_canon/spec/14-sys5-local-toy-devtools.md">spec 14</a> / <a href="../samples/clean-near-end/mirrorea-i2-local-toy/README.md">SYS-5 sample</a> / <a href="hands_on/mirrorea_i2_local_toy_01.md">walkthrough</a></td></tr>
               <tr><th>historical LAB suites</th><td>既存 parser/runtime/transport/view/provider の再利用可能な限定素材。</td><td>Canon phase exit、M10 と同じ semantics、final API。</td><td><a href="../samples_progress.md">samples dashboard</a></td></tr>
             </tbody>
           </table>
@@ -741,9 +745,11 @@ MirTheoryV0M8DeterministicRuntime.lean</code></pre>
         <div class="read-next">
           <a href="../mirrorea_canon/MAP.md"><strong>1. Canon map</strong><span>規範全体の依存図、理論・spec・scenario・plan の読み筋。</span></a>
           <a href="project-status.md"><strong>2. Current status</strong><span>現在地、停止線、owner 判断を短く確認。</span></a>
-          <a href="../plan/249-mirrorea-i2-systems-foundation-current-roadmap.md"><strong>3. Active Plan 249</strong><span>SYS-0--SYS-4 completed、SYS-5 active、SYS-6 next、goal/evidence/stop conditions。</span></a>
+          <a href="../plan/249-mirrorea-i2-systems-foundation-current-roadmap.md"><strong>3. Active Plan 249</strong><span>SYS-0--SYS-5 completed、SYS-6 active、SYS-7 next、goal/evidence/stop conditions。</span></a>
           <a href="../plan/247-mir-theory-v0-i1plus-current-roadmap.md"><strong>4. Closed M0–M10 record</strong><span>各 milestone の目的、acceptance、non-claims、close evidence。</span></a>
-          <a href="../samples_progress.md"><strong>5. Runnable evidence</strong><span>各 sample lane の command、evidence class、blocker。</span></a>
+          <a href="../samples/clean-near-end/mirrorea-i2-local-toy/README.md"><strong>5. SYS-5 local toy</strong><span>ordinary source、patches、project-loci / run-local / inspect の最短 workflow。</span></a>
+          <a href="hands_on/mirrorea_i2_local_toy_01.md"><strong>6. Walkthrough</strong><span>source、build/project、local runtime、inspect view の読み方。</span></a>
+          <a href="../samples_progress.md"><strong>7. Runnable evidence</strong><span>各 sample lane の command、evidence class、blocker。</span></a>
         </div>
 
         <div class="table-scroll" tabindex="0" aria-label="主要主張と一次根拠">
@@ -754,7 +760,7 @@ MirTheoryV0M8DeterministicRuntime.lean</code></pre>
               <tr><th>North Star と設計優先順位</th><td>Canon L0/L1</td><td><a href="../mirrorea_canon/NORTH-STAR.md">NORTH-STAR</a> / <a href="../mirrorea_canon/DESIGN-CONSTITUTION.md">DESIGN-CONSTITUTION</a></td></tr>
               <tr><th>official lifecycle は T1</th><td>Canon L1</td><td><a href="../mirrorea_canon/plan/01-phases.md">plan/01-phases</a></td></tr>
               <tr><th>M0–M10 closed / finite I1+ accepted</th><td>Canon L1 + accepted LAB evidence</td><td><a href="../mirrorea_canon/adr/ADR-0025.md">ADR-0025</a> / <a href="reports/2591-mir-theory-v0-i1plus-milestone-10-conformance-closeout.md">Report 2591</a></td></tr>
-              <tr><th>ADR-0026 active / SYS-0--SYS-4 completed / SYS-5 active / SYS-6 next</th><td>Canon L0/L1 + current LAB control</td><td><a href="../mirrorea_canon/adr/ADR-0026.md">ADR-0026</a> / <a href="../mirrorea_canon/adr/ADR-0027.md">ADR-0027</a> / <a href="../mirrorea_canon/adr/ADR-0028.md">ADR-0028</a> / <a href="../mirrorea_canon/adr/ADR-0029.md">ADR-0029</a> / <a href="../plan/249-mirrorea-i2-systems-foundation-current-roadmap.md">Plan 249</a> / <a href="reports/2595-mirrorea-i2-systems-foundation-sys3-per-locus-projection.md">Report 2595</a></td></tr>
+              <tr><th>ADR-0026 active / SYS-0--SYS-5 completed / SYS-6 active / SYS-7 next</th><td>Canon L0/L1 + current LAB control</td><td><a href="../mirrorea_canon/adr/ADR-0026.md">ADR-0026</a> / <a href="../mirrorea_canon/adr/ADR-0027.md">ADR-0027</a> / <a href="../mirrorea_canon/adr/ADR-0028.md">ADR-0028</a> / <a href="../mirrorea_canon/adr/ADR-0029.md">ADR-0029</a> / <a href="../mirrorea_canon/meta/proposals/PROPOSAL-034-sys5-local-toy-devtools.md">PROPOSAL-034</a> / <a href="../mirrorea_canon/adr/ADR-0031.md">ADR-0031</a> / <a href="../mirrorea_canon/spec/14-sys5-local-toy-devtools.md">spec 14</a> / OBL-062 / <a href="../plan/249-mirrorea-i2-systems-foundation-current-roadmap.md">Plan 249</a> / <a href="reports/2595-mirrorea-i2-systems-foundation-sys3-per-locus-projection.md">Report 2595</a> / <a href="reports/2597-mirrorea-i2-systems-foundation-sys5-minimal-typed-devtools-local-toy.md">Report 2597</a></td></tr>
               <tr><th>proof status</th><td>Canon single ledger</td><td><a href="../mirrorea_canon/theory/11-metatheory-ledger.md">theory/11-metatheory-ledger</a></td></tr>
               <tr><th>OPEN-030 narrow internal resolution / broad carrier residual</th><td>Canon L1 decision + L2-working architecture</td><td><a href="../mirrorea_canon/adr/ADR-0027.md">ADR-0027</a> / <a href="../mirrorea_canon/architecture/04-runtime-carriers.md">architecture/04-runtime-carriers</a></td></tr>
               <tr><th>active roadmap は Plan 249</th><td>derived LAB snapshot</td><td><a href="../progress.md">progress</a> / <a href="../tasks.md">tasks</a> / <a href="project-status.md">project-status</a></td></tr>
@@ -794,7 +800,7 @@ MirTheoryV0M8DeterministicRuntime.lean</code></pre>
 
   <footer>
     <div class="container">
-      <p>2026-08-27 時点の LAB reader view。ADR-0026--0029 / Plan 249 / SYS-0--SYS-4 completed / SYS-5 active / SYS-6 next を反映し、program進行 / finite acceptance / broad phase exit / public product completion を分離しています。</p>
+      <p>2026-08-28 時点の LAB reader view。ADR-0026--0029 plus PROPOSAL-034 / ADR-0031 / spec 14 / OBL-062 / Plan 249 / SYS-0--SYS-5 completed / SYS-6 active / SYS-7 next を反映し、program進行 / finite acceptance / broad phase exit / public product completion を分離しています。</p>
     </div>
   </footer>
 </body>

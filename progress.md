@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-08-27 21:06 JST
+最終更新: 2026-08-28 14:09 JST
 
 **Canon notice:** `mirrorea_canon/` is normative. Everything outside
 `mirrorea_canon/` is LAB; canon wins. This file is a concise LAB snapshot and
@@ -44,30 +44,29 @@ The active program covers the in-process systems-foundation segment only.
 
 | Axis | Current status | Startability |
 | --- | --- | --- |
-| Logical specification | Accepted finite M10 semantics and bounded SYS-1--SYS-4 contracts now reach source-derived artifacts, generated-plan-only locus endpoints, selected ST/eligible-OW1 execution, one-consume designated retry, typed failures, ST whole-fabric cut/restore, and one bounded checked patch. Theory remains T1; broad I1/I2 acceptance is unclaimed | **着手可能** for SYS-5 integration |
-| User-facing specification | One ordinary source remains semantic authority. Final grammar, API, ABI, artifact encoding, and wire remain unfrozen. The accepted SYS-4 runtime is crate-private evidence; no four-locus user command, walkthrough, or joined causal viewer exists yet | **着手可能** for SYS-5; public surface remains **後段依存** |
-| Implementation / operation | Accepted SYS-4 cut `22196f93...` runs checked artifacts through explicit locus-local endpoints, preserves exact provenance, and passes focused 99/99, runtime 179/179, and M10 2/4/67. OW1 cut/patch is typed `BackendIneligible`; no SYS-5 toy/devtools workflow or SYS-6 conformance profile is claimed | **着手可能** for SYS-5; SYS-6 is next |
+| Logical specification | Accepted finite M10 semantics and bounded SYS-1--SYS-5 contracts now reach source-derived artifacts, generated-plan-only locus endpoints, selected ST/eligible-OW1 execution, a four-locus headless toy, source-derived leave/fallback/fresh reacquire, and observer-safe source-to-occurrence causality. Theory remains T1; broad I1/I2 acceptance is unclaimed | **着手可能** for SYS-6 assurance |
+| User-facing specification | One ordinary source remains semantic authority. The provisional internal `project-loci`, `run-local`, and `inspect` commands plus a short walkthrough expose the bounded local toy and joined causal view. Final grammar, API, ABI, artifact encoding, devtools schema, and wire remain unfrozen | **着手可能** for SYS-6; public surface remains **後段依存** |
+| Implementation / operation | Accepted SYS-5 cut `53a21e64...` runs the four-locus workflow through actual generated endpoints and preserves redaction, fallback separation, clone-prepared ST failure atomicity, exact post-leave cut/reacquire lineage, patch, revocation, and verification evidence. Focused 10/27/28/8/17/12/3/4, `mir-runtime --all-targets`, M10 2/4/67, and three reviews passed. No finite SYS-6 conformance profile exists yet | **着手可能** for SYS-6; SYS-7 is next |
 
 Normative sources: `mirrorea_canon/adr/ADR-0026.md` through
-`mirrorea_canon/adr/ADR-0030.md`,
+`mirrorea_canon/adr/ADR-0031.md`,
 `mirrorea_canon/spec/12-sys3-per-locus-projection.md`,
 `mirrorea_canon/spec/13-sys4-in-process-generated-dispatch.md`,
+`mirrorea_canon/spec/14-sys5-local-toy-devtools.md`,
 `mirrorea_canon/architecture/04-runtime-carriers.md`,
 `mirrorea_canon/plan/01-phases.md`, and
 `mirrorea_canon/theory/11-metatheory-ledger.md`. LAB execution source:
 `plan/249-mirrorea-i2-systems-foundation-current-roadmap.md`.
 
-Current direct blocker: SYS-5 must compose `WorldAuthority`, `ParticipantA`,
-`ParticipantB`, and `ViewerC` from ordinary source through the accepted
-projector and SYS-4 endpoints. The actual runtime path must exercise owner RMW,
-designated publication/consume, maintained relation with semantic fallback,
-consumer-local presentation gap, fresh reacquire, authority/revocation,
-optional verification, ST save/restore, accepted/rejected patch, and typed
-negative cases. One observer-safe view must join source→Core→artifact→edge→
-runtime/state/relation/save/patch causality, and a small reproducible command
-set/walkthrough must expose it without fixture dispatch, source
-reconstruction, expected-result lookup, endpoint bypass, secret leakage, or
-manual evidence joins. SYS-5 is active; SYS-6 is next.
+Current direct blocker: SYS-6 must produce one finite source-first I2 profile
+and provisional `conform-i2` report over the accepted SYS-3--SYS-5 cuts. It
+must independently test projection determinism, artifact owner preservation,
+generated-communication completeness, actual ST/selected-OW correspondence,
+no hidden/direct remote store or authority/state minting, failure containment,
+relation/fallback/designated coherence, save/patch no-stale/no-mutation, and
+observer safety. Each result needs exact source/implementation identity,
+replay command, evidence class, residual, and non-claim. SYS-6 is active;
+SYS-7 is next.
 
 ## milestone map
 
@@ -79,9 +78,9 @@ manual evidence joins. SYS-5 is active; SYS-6 is next.
 | SYS-2 | ST/OW1 concurrency, live M9 generation, bounded ordering refinement | **completed / closed**; cut `920d3fe0...`, Report 2594 | SYS-3/4 |
 | SYS-3 | per-locus artifacts and generated plans | **completed / closed**; cut `3013e7fe...`, OBL-060 static-only runtime-monitored, Report 2595 | SYS-4 |
 | SYS-4 | in-process generated dispatch | **completed / closed**; cut `22196f93...`, bounded runtime-monitored evidence | SYS-5 |
-| SYS-5 | typed devtools + four-locus toy world | **active** | SYS-6 |
-| SYS-6 | finite I2 assurance/lifecycle closeout | **next**, after SYS-5 | SYS-7 |
-| SYS-7 | inactive I3 goal/entry contract only | pending/terminal | future owner program only |
+| SYS-5 | typed devtools + four-locus toy world | **completed / closed**; cut `53a21e64...`, OBL-062 bounded runtime-monitored, Report 2597 | SYS-6 |
+| SYS-6 | finite I2 assurance/lifecycle closeout | **active** | SYS-7 |
+| SYS-7 | inactive I3 goal/entry contract only | **next / terminal** | future owner program only |
 
 ## line snapshots
 
@@ -92,17 +91,20 @@ product contract.
 
 ### Operational Suite line
 
-Historical bounded operational roots remain evidence. SYS-4 added a
-crate-private runtime/test seam, not a new runnable sample path, user command,
-or public debug surface. SYS-5 must update the active sample dashboard when its
-actual toy command and joined typed view exist.
+Historical bounded operational roots remain evidence. SYS-5 adds the active
+headless sample root `samples/clean-near-end/mirrorea-i2-local-toy/` and the
+provisional internal `project-loci`, `run-local`, and `inspect` workflow. It is
+a bounded reproducible LAB workflow, not a public product/debug ABI. SYS-6 now
+consumes its exact artifacts and trace rather than replacing them with an
+expected-result fixture.
 
 ### Mir Language line
 
 M6/M7 ordinary source → checked Core remains the finite source path. SYS-3
-adds exactly one bounded non-final internal Surface-v0 clause,
-`designated consume E.result at C`, so projection can derive a consumer path
-without topology inference. This does not freeze final/public grammar.
+adds the bounded non-final internal `designated consume E.result at C` clause;
+SYS-5 adds optional explicit relation anchor loci for the accepted toy so leave
+and reacquire bind to checked locus identity. Neither change freezes final/
+public grammar.
 
 ### PoseGraph line
 
@@ -112,19 +114,19 @@ headless sample behavior, not a View/renderer product.
 ### Projection/Backend line
 
 The accepted SYS-3 cut provides crate-private, owned placement-specific
-fragments and generated communication/effect/observation/persistence/source-
-map plans. SYS-4 executes only those plans through explicit locus-local
-endpoints, with selected ST/eligible-OW1 semantic correspondence and exact
-source/Core/artifact/carrier/runtime lineage. ST owns the whole-fabric
-cut/restore and bounded patch profile; OW1 cut/patch remains typed
-`BackendIneligible`.
+fragments and generated plans. SYS-4 executes only those plans through explicit
+locus-local endpoints. SYS-5 composes the same projector/runtime into the
+four-locus user workflow and observer-safe joined trace without direct remote
+store access or handwritten communication. ST owns the whole-fabric cut/
+restore and bounded patch profile; OW1 cut/patch remains typed
+`BackendIneligible`, and SYS-6 must classify selected ST/OW evidence exactly.
 
 ### Engine/Provider line
 
-Providers remain typed adapters and non-owners. SYS-4 materializes the selected
-source-bound owner/designated service and result lifecycle without a generic
-provider registry or transport-created authority. SYS-5 consumes that internal
-runtime but must not turn it into a public provider/wire contract.
+Providers remain typed adapters and non-owners. SYS-5 consumes the source-bound
+owner/designated service and result lifecycle and exposes only reference-safe
+observer evidence; it does not add a generic provider registry or transport-
+created authority. SYS-6 must preserve that boundary in conformance rows.
 
 ## validation floor
 
@@ -135,18 +137,20 @@ runtime but must not turn it into a public provider/wire contract.
 | bounded model | exact bound/completeness, replayable edge-removal counterexamples, evidence classification |
 | projection | deterministic artifact/edge tests, explicit designated consume consumer/delivery, owned Core/provenance, malformed/extra/missing/owner-moving/leaking/competing negatives |
 | dispatch | no-source-reparse/no-direct-store/no-handwritten-edge tests, ST/OW1 endpoint traces, replay/cut/patch |
+| local toy/devtools | four-locus source/project/run/inspect, source-derived leave/fallback/fresh reacquire, joined provenance/redaction, save/restore, accepted/rejected patch, revocation/verification, M10 regression |
+| I2 conformance | source-first row inventory, positive/falsifier controls, exact evidence classes/cuts/replay commands/non-claims, independent assurance/lifecycle review |
 | proof | `lean --trust=0` and placeholder/axiom scan only when a Lean claim changes |
 | milestone close | independent review, one report, commit/push, clean worktree, remote parity |
 
 ## non-claims
 
 No broad PHASE-I1 exit, official I2 entry/exit, C-distributed/socket/WAN,
-public grammar/API/ABI/wire, public carrier freeze, durable distributed
-persistence, production/publication, final browser/View renderer, general OBL
-discharge, arbitrary DAG/scheduler/memory/data-race theorem, production nested
-relation graph, multi-owner OW, OW1 whole-fabric cut/patch, arbitrary patch
-shape, lock-free runtime, joined SYS-5 user workflow, SYS-6 conformance, or I3
-implementation is claimed.
+public grammar/API/ABI/wire/devtools schema, public carrier freeze, durable
+distributed persistence, production/publication, final browser/View renderer,
+general OBL discharge, arbitrary DAG/scheduler/memory/data-race theorem,
+production nested relation graph, multi-owner OW, OW1 whole-fabric cut/patch,
+arbitrary patch shape, lifecycle-patch commutation, lock-free runtime, SYS-6
+conformance acceptance, or I3 implementation is claimed.
 
 ## user decision items vs research-discovery items
 
@@ -157,7 +161,8 @@ implementation is claimed.
 | Self-driven | SYS-2 ST/OW1 concurrency/refinement | completed at `920d3fe0...`; OBL-058/059, Report 2594 |
 | Self-driven | SYS-3 projection/artifact generation | completed at `3013e7fe...`; OBL-060 static-only runtime-monitored, Report 2595 |
 | Self-driven | SYS-4 generated in-process dispatch | completed at `22196f93...`; actual endpoints, selected ST/OW1, retry wrapper, replay, ST cut/patch |
-| Self-driven | SYS-5 typed devtools/four-locus toy | active; joined observer-safe causal view and reproducible local workflow |
+| Self-driven | SYS-5 typed devtools/four-locus toy | completed at `53a21e64...`; OBL-062 bounded runtime-monitored, Report 2597 |
+| Self-driven | SYS-6 finite I2 assurance/conformance | active; exact row inventory, falsifiers, evidence classes, lifecycle/non-claims |
 | Research discovery | exact designated consumer projection/runtime refinement | closed finite source/Core and SYS-4 endpoint contract; preserve wrapper/legacy M8 distinction |
 | Research discovery | exact broad-I1 carrier-freeze residual | OPEN-026/027 + full carrier freeze retained; no criteria weakening |
 | Owner decision | public API/ABI/wire freeze | reserved; not a current blocker |
@@ -167,34 +172,46 @@ implementation is claimed.
 
 | Macro | Focus | Current position | Weight | Self-drive |
 | --- | --- | --- | --- | --- |
-| 0 | governance/repository memory | ADR-0026/Plan 249 active; Plan 247 and SYS-0--SYS-4 closed; SYS-5 active | medium | SYS status sync is self-driven |
-| 1 | semantics/shared model | accepted finite semantics + internal lifecycle/backend + source-derived projection/dispatch | heavy | SYS-5 integration active; no new semantic frontier |
+| 0 | governance/repository memory | ADR-0026/Plan 249 active; Plan 247 and SYS-0--SYS-5 closed; SYS-6 active | medium | SYS status sync is self-driven |
+| 1 | semantics/shared model | accepted finite semantics + internal lifecycle/backend + source-derived projection/dispatch/local toy | heavy | SYS-6 assurance active; no new semantic frontier |
 | 2 | parser-free evidence | historical only; must not become new architecture | medium | maintenance only |
-| 3 | source/checker/runtime | M10 source baseline plus kernel/backend/projector and generated endpoint dispatch closed | heavy | SYS-5 user workflow active |
-| 4 | executable samples | no joined I2 toy command/view yet | medium | SYS-5 active |
-| 5 | theorem/model-check | OBL-058 bounded; OBL-059/060 and SYS-4 finite runtime evidence runtime-monitored | heavy | SYS-5 evidence now; SYS-6 assurance next |
-| 6 | distributed fabric | finite generated artifacts cross actual in-process locus endpoints | heavy | SYS-5 integration active; real transport deferred |
-| 7 | toolchain/backend | ST/eligible-OW1 endpoint runtime ready; user command/devtools absent | heavy | SYS-5 active |
-| 8 | applications | four-locus toy is active sample/library consumer | heavy | SYS-5 active; no Core promotion |
+| 3 | source/checker/runtime | M10 source baseline plus kernel/backend/projector, endpoint dispatch, and local workflow closed | heavy | SYS-6 conformance active |
+| 4 | executable samples | four-locus headless toy command/view accepted at `53a21e64...` | medium | regression/assurance; public product later |
+| 5 | theorem/model-check | OBL-058 bounded; OBL-059--062 finite runtime evidence runtime-monitored | heavy | SYS-6 evidence classification active |
+| 6 | distributed fabric | finite generated artifacts cross actual in-process locus endpoints and drive local toy | heavy | SYS-6 assurance active; real transport deferred |
+| 7 | toolchain/backend | ST/eligible-OW1 runtime plus provisional project/run/inspect commands | heavy | SYS-6 `conform-i2` active |
+| 8 | applications | four-locus toy is accepted sample/library consumer | heavy | SYS-6 assures; no Core promotion |
 
 ## feature maturity rows
 
 | Feature | Evidence status | Remaining gate | Startability |
 | --- | --- | --- | --- |
-| multi-node/fabric | logical multi-locus + finite generated artifacts cross actual in-process endpoints | four-locus joined user workflow and SYS-6 assurance | **着手可能** SYS-5 |
-| robustness via contracts/theorem/model-check | exact finite M3--M10, OBL-058/059/060, and SYS-4 runtime evidence | joined negative cases and SYS-6 assurance | **着手可能** SYS-5 |
-| dynamic attach/detach/DAG evolution | ST whole-fabric cut/restore + bounded checked patch + test-only DAG pressure | toy accepted/rejected patch and later general evolution | **着手可能** SYS-5 |
-| `atomic_cut` / higher-level ordering / memory order | high-level edges + deterministic ST + bounded OW1/model and endpoint mapping | SYS-5 causal view; general memory remains deferred | **着手可能** SYS-5 |
-| executable sample corpus | existing roots/M10 commands unchanged; SYS-4 is crate-private evidence | generated four-locus toy command/view | **着手可能** SYS-5 |
-| Mir core/runtime kernel | kernel + ST/eligible-OW1 + checked projector + internal endpoint dispatch | joined local toy workflow | **着手可能** SYS-5 |
-| Mirrorea projection/fabric | finite artifacts/plans actually execute across independent locus endpoints | typed devtools/toy integration | **着手可能** SYS-5 |
-| typed-effect handler seam | source-bound owner/designated service/result plans execute through endpoints | toy auth/effect/verification view | **着手可能** SYS-5 |
+| multi-node/fabric | generated artifacts cross actual in-process endpoints and drive the accepted four-locus toy | finite I2 conformance and lifecycle closeout | **着手可能** SYS-6 |
+| robustness via contracts/theorem/model-check | exact finite M3--M10, OBL-058--062, SYS-4 runtime, and SYS-5 negative paths | one classified I2 assurance profile | **着手可能** SYS-6 |
+| dynamic attach/detach/DAG evolution | source-derived leave/fresh reacquire, ST cut/restore, accepted/rejected patch, test-only DAG pressure | conformance rows; later general evolution | **着手可能** SYS-6 |
+| `atomic_cut` / higher-level ordering / memory order | high-level edges + deterministic ST + bounded OW1/model/endpoint mapping + causal view | selected visibility/correspondence rows; general memory deferred | **着手可能** SYS-6 |
+| executable sample corpus | active four-locus toy root plus provisional project/run/inspect workflow | `conform-i2`; public/product surface later | **着手可能** SYS-6 |
+| Mir core/runtime kernel | kernel + ST/eligible-OW1 + checked projector + endpoint dispatch + local toy | finite assurance profile | **着手可能** SYS-6 |
+| Mirrorea projection/fabric | finite artifacts/plans execute across independent locus endpoints with joined trace | completeness/correspondence assurance | **着手可能** SYS-6 |
+| typed-effect handler seam | source-bound owner/designated service/result plans plus revocation/verification view | containment/no-mint assurance | **着手可能** SYS-6 |
 | PrismCascade | separate performance kernel | no I2 integration required | deferred |
 | View/browser/renderer | BND-007 horizon/historical LAB | final product/API work | deferred beyond SYS-5 headless view |
-| upper applications | LAB consumers | no domain Core promotion | deferred |
+| upper applications | accepted headless toy plus historical LAB consumers | no domain Core promotion; product later | SYS-6 assurance only |
 
 ## recent log
 
+- 2026-08-28 14:09 JST: SYS-5 implementation/evidence cut `53a21e64...`
+  closed the bounded ordinary-source four-locus toy and typed devtools slice.
+  Project/run/inspect execute actual generated endpoints and expose owner RMW,
+  designated consume, leave/fallback/presentation-gap/fresh-reacquire,
+  save/restore, accepted/rejected patch, revocation, verification, and one
+  observer-safe joined causal report. Focused 10/27/28/8/17/12/3/4,
+  `mir-runtime --all-targets` (245 library tests plus all integration targets),
+  M10 2/4/67, format, warnings-denied Clippy, diff/manual redaction checks, and
+  three final reviews passed. OBL-062 is bounded `runtime-monitored`; theory
+  stays T1 and broad PHASE-I1/I2 lifecycle remains unaccepted. Fresh full
+  workspace tests/Clippy, Canon index 185, hierarchy 799/799, and HTML 8/8
+  also passed at closeout. SYS-6 is active and SYS-7 next.
 - 2026-08-27 21:06 JST: SYS-4 implementation/evidence cut `22196f93...`
   closed the finite generated-plan-only in-process dispatch profile with
   selected ST/eligible-OW1 correspondence, exact source-to-occurrence lineage,

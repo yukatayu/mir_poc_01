@@ -15,7 +15,7 @@ open_items: []
 NORTH-STAR (軸)
    │
    ▼
-adr/ (決定 ADR-0001..0030) ◄──── GLOSSARY (概念 CON-###)
+adr/ (決定 ADR-0001..0031) ◄──── GLOSSARY (概念 CON-###)
    │
    ▼
 DESIGN-CONSTITUTION (v0/I1+ の横断判断)
@@ -46,8 +46,8 @@ plan/ (Gate 0-7 → Phase T0-T2, I1-I6)   meta/ (規約・正本関係・agent �
 ## 3 種の読み筋
 
 - **理論筋**(体系を理解・拡張する): NORTH-STAR → adr → DESIGN-CONSTITUTION → theory/00 → 01 → (関心の章) → 11 → scenarios。
-- **実装筋**(toolchain を作る): spec/02..13 → architecture/03..04 → scenarios → plan/01 の該当 Phase。
-- **運用筋**(進め方を知る): plan/00..04 → meta/agent-instructions → adr/ADR-0012 → adr/ADR-0014 → adr/ADR-0015 → adr/ADR-0026 → adr/ADR-0027 → adr/ADR-0028 → adr/ADR-0029 → adr/ADR-0030。
+- **実装筋**(toolchain を作る): spec/02..14 → architecture/03..04 → scenarios → plan/01 の該当 Phase。
+- **運用筋**(進め方を知る): plan/00..04 → meta/agent-instructions → adr/ADR-0012 → adr/ADR-0014 → adr/ADR-0015 → adr/ADR-0026 → adr/ADR-0027 → adr/ADR-0028 → adr/ADR-0029 → adr/ADR-0030 → adr/ADR-0031。
 
 Mir Theory v0 / I1+ Milestones 0--10 は ADR-0015--0025 と
 PROPOSAL-018--028 に従って完走した。accepted finite reference-profile の正本は
@@ -99,9 +99,22 @@ exactly one semantic consumeし、exact same-consumer retryをstored decision/no
 ある。ST whole-fabric cut/restoreとquiescent designated-only checked patchを受理するが、
 OW1 cut/patchは`BackendIneligible`のまま、public CLI/API/ABI/wire、real transport、durable/
 general theoremは主張しない。OBL-061はfinite runtime correspondenceだけを
-`runtime-monitored`とする。SYS-0--SYS-4はcompleted、sole active goalはSYS-5、next goalは
-SYS-6である。architecture/04はL2-workingのままで、OPEN-026/027とfull internal carrier
+`runtime-monitored`とする。ADR-0030 acceptance時点ではSYS-0--SYS-4がcompleted、
+SYS-5がnextだった。architecture/04はL2-workingのままで、OPEN-026/027とfull internal carrier
 freezeがbroad PHASE-I1 acceptanceを引き続きblockする。theoryはT1、official I2 entry/exitは未受理である。
+
+PROPOSAL-034 / ADR-0031 は source/evidence cut
+`53a21e64b5a17e24b522f720db10b6e539c058e0`でSYS-5を受理した。provisional
+explicit relation-anchor locusをAST/M6/M7/Core/projectionに保存し、四locus local toy
+fabricでowner RMW、designated publication/consume、A-primary/B-fallback relationを
+actual generated dispatchする。source-bound ParticipantA leaveはexact M9 lineageを退役後に
+ParticipantB ownerがfallbackを公開し、fresh reacquireはそのexact tombstoneから別epoch/
+incarnation/capability/witness lineageを発行する。selected ST transitionはfailure-atomic
+candidate、post-leave cutはretired lineageを保存する。observer-safe joined reportはsource/
+Core/artifact/edge/occurrence/state/relation/designated/save/patch/failureを一つの因果線で示す。
+OBL-062はこのfinite executable/devtools evidenceだけを`runtime-monitored`とする。
+SYS-0--SYS-5はcompleted、sole active goalはSYS-6、nextはSYS-7である。theory T1、
+broad PHASE-I1、official I2 entry/exit、public contractは不変である。
 
 ## ID 体系
 

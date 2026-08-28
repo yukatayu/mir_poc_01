@@ -2,8 +2,8 @@
 id: spec/04-core-ir
 status: L2-working
 maturity: draft
-depends_on: [theory/01-mircore-v0, theory/03-elaboration, theory/13-evaluation-materialization, theory/14-maintained-relation-projection, theory/15-shared-formal-model, adr/ADR-0021, adr/ADR-0025, adr/ADR-0029]
-summary: M6 CoreTemplate と将来の Core IR 交換形。生成辺・義務・span の形、Core companion 記法の附録。
+depends_on: [theory/01-mircore-v0, theory/03-elaboration, theory/13-evaluation-materialization, theory/14-maintained-relation-projection, theory/15-shared-formal-model, adr/ADR-0021, adr/ADR-0025, adr/ADR-0029, adr/ADR-0031]
+summary: M6 CoreTemplate と将来の Core IR 交換形。生成辺・義務・span・provisional relation anchor locus の形、Core companion 記法の附録。
 open_items: [OPEN-026]
 ---
 
@@ -22,6 +22,8 @@ m5_core                   present only for accepted ownerRmw
 result_frontier/version   designated-result fields only
 designated_consumer       explicit evaluator/result ref + one named consumer
 binding_frontier          maintained-relation field only
+relation_anchor_loci      optional explicit primary/fallback existence loci,
+                          each with its exact source span
 owner_publication_kind    PublishRelation for maintained relation
 published_relation_carrier true only for accepted maintained relation
 consumer_projection_site  optional consumer-local relation projection
@@ -76,6 +78,13 @@ actual idempotent return is outside this Core. `with auth` and `verify` emit
 successful non-executable typed deferred templates; the former only supplies a
 required-authority name. Neither settles M9 semantics. Every listed node
 preserves the canonical source span.
+
+The SYS-5 provisional relation refinement retains an explicit primary or
+fallback anchor locus as part of the corresponding Core anchor, with its exact
+source reference. It remains distinct from relation owner and consumer locus.
+An omitted locus remains absent and cannot be filled by topology/projector/
+runtime inference. This internal field supports source-bound lifecycle
+placement; it is not a final Core exchange field or public ABI.
 
 This template is not M5 Core, a final AST, JSON, ABI, wire record, runtime
 instruction, or public contract. The designated-consume template is exactly a

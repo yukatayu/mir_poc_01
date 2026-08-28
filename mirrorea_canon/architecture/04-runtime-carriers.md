@@ -2,8 +2,8 @@
 id: arch/04-runtime-carriers
 status: L2-working
 maturity: reviewed
-depends_on: [theory/04-ordering-and-cuts, theory/05-authority, theory/07-observation, theory/08-patch-hotplug, theory/13-evaluation-materialization, theory/18-m9-auth-verification, adr/ADR-0027, adr/ADR-0028, adr/ADR-0029, adr/ADR-0030]
-summary: broad runtime carrier catalogとSYS-1--4 internal lifecycle/execution/projection/dispatch carrier requirements。public API/ABI/wireは未凍結。
+depends_on: [theory/04-ordering-and-cuts, theory/05-authority, theory/07-observation, theory/08-patch-hotplug, theory/13-evaluation-materialization, theory/18-m9-auth-verification, adr/ADR-0027, adr/ADR-0028, adr/ADR-0029, adr/ADR-0030, adr/ADR-0031]
+summary: broad runtime carrier catalogとSYS-1--5 internal lifecycle/execution/projection/dispatch/devtools carrier requirements。public API/ABI/wireは未凍結。
 open_items: [OPEN-026, OPEN-027]
 ---
 
@@ -252,11 +252,45 @@ general compatibility remain `BackendIneligible`/unselected.
 None of these selected Rust/logical names freezes a public field name, schema,
 artifact ABI, JSON representation, wire encoding, deployment or transport.
 
+## SYS-5 selected lifecycle and joined-observation boundary
+
+ADR-0031 adds one narrower ST lifecycle pressure path. A relation primary
+anchor may retain an explicit checked locus. The external action names only
+the checked relation; the runtime derives the primary participant and sealed
+M9 lineage. The resulting internal leave/fresh carriers retain distinct
+request/enqueue, M9 transition, generated relation dispatch/receive/serve, and
+receipt occurrences together with source/Core/relation/anchor provenance.
+They accept no caller-supplied membership, epoch, incarnation, grant, witness,
+authority, target, or route.
+
+Successful leave first installs the exact monotone M9 retirement/tombstone and
+then lets the independent relation owner publish fallback. Fresh reacquire
+must cite that exact tombstone and successor epoch, create a distinct epoch/
+incarnation and fresh capability/witness lineages, and then publish primary.
+Duplicate/stale/missing-anchor/route/capacity/endpoint failure is
+failure-atomic in the selected clone-prepared ST candidate. No partial M9 or M8
+state becomes live. The same relationship is retained across an exact
+post-leave local cut/restore; corrupt relationship evidence rejects before
+mutation.
+
+The joined observer carrier correlates exact source span, Core, fragments,
+edge, request identity, distinct runtime occurrences, owner/relation/
+designated outcomes, failures, and cut/patch lifecycle. It labels the active
+prefix, discarded post-cut branch, and restored branch. Correlation fields are
+evidence, not authority. Raw source text, credentials, capability/witness
+material, private state/payload, and raw M8/M9 identity remain outside the
+observer-safe partition.
+
+These are internal finite SYS-5 carriers only. They neither serialize the
+broad catalog nor freeze public CLI/JSON/API/ABI/wire fields, and do not select
+OW1 lifecycle/cut, durable persistence, browser/View, or real transport.
+
 ## Resolution and remaining L2 boundary
 
 OPEN-030 is resolved for the preceding I2-internal lifecycle only. ADR-0028
 closes its selected ST/OW1 ordering and live M9-generation visibility residual,
 but not its public encoding, real transport mapping, retry policy, or
-compatibility. This file stays L2-working because OPEN-026 field-name/IR
+compatibility. ADR-0031 adds finite ST lifecycle/devtools evidence without
+freezing those external contracts. This file stays L2-working because OPEN-026 field-name/IR
 exchange, OPEN-027 external delivery observability, and the broader carrier
 catalog/full internal freeze remain unresolved.

@@ -2,8 +2,8 @@
 id: plan/01-phases
 status: L1-fixed
 maturity: draft
-depends_on: [plan/00-gates, plan/02-operating-model, spec/06-conformance, meta/source-hierarchy, adr/ADR-0013, adr/ADR-0014, adr/ADR-0015, adr/ADR-0017, adr/ADR-0026, adr/ADR-0027, adr/ADR-0028, adr/ADR-0029, adr/ADR-0030, plan/04-t0-g0-semantic-assertion-profile]
-summary: 実装フェーズT0-T2/I1-I6。official lifecycleはT1、SYS-0--SYS-4はclose、SYS-5 activeでbroad I1/I2 acceptanceは未受理。
+depends_on: [plan/00-gates, plan/02-operating-model, spec/06-conformance, meta/source-hierarchy, adr/ADR-0013, adr/ADR-0014, adr/ADR-0015, adr/ADR-0017, adr/ADR-0026, adr/ADR-0027, adr/ADR-0028, adr/ADR-0029, adr/ADR-0030, adr/ADR-0031, plan/04-t0-g0-semantic-assertion-profile]
+summary: 実装フェーズT0-T2/I1-I6。official lifecycleはT1、SYS-0--SYS-5はclose、SYS-6 activeでbroad I1/I2 acceptanceは未受理。
 open_items: [OPEN-032]
 ---
 
@@ -15,9 +15,9 @@ open_items: [OPEN-032]
 - theory lifecycle: **T1**（M2 semantic-assertion profile v3 の pass digest、G0-D3、
   G0 exit、T1 entry を ADR-0017 により受理済み）;
 - implementation evidence: **M10 I1+ deterministic reference profile accepted;
-  SYS-0--SYS-4 completed; Mirrorea I2 Systems Foundation bounded program active
-  at SYS-5, SYS-6 next**（ADR-0025 / ADR-0026 / ADR-0027 / ADR-0028 /
-  ADR-0029 / ADR-0030）。
+  SYS-0--SYS-5 completed; Mirrorea I2 Systems Foundation bounded program active
+  at SYS-6, SYS-7 next**（ADR-0025 / ADR-0026 / ADR-0027 / ADR-0028 /
+  ADR-0029 / ADR-0030 / ADR-0031）。
   architecture/04 の full L2 carrier freeze と OPEN-026/027 が残るため、広い PHASE-I1 exit、
   I2 entry、I2 exitはいずれも未受理。
 
@@ -95,8 +95,22 @@ source/evidence cut `22196f93b0112b8fd2987ec078021c8865b71651`で受理した。
 whole-fabric local cut/restoreとquiescent designated-only checked patchを有限受理したが、
 OW1 cut/patchは`BackendIneligible`、public CLI/API/ABI/wire/JSON、real transport、durable
 persistence、general theoremは非主張である。OBL-061はこのfinite runtime correspondence
-だけを`runtime-monitored`とし、Lean/model/general theorem statusを追加しない。SYS-4は
-completed、sole active goalはSYS-5、next goalはSYS-6である。
+だけを`runtime-monitored`とし、Lean/model/general theorem statusを追加しない。ADR-0030
+acceptance時点ではSYS-4がcompleted、SYS-5がnextだった。
+
+PROPOSAL-034 / ADR-0031 はprovisional explicit relation-anchor locusをAST/M6/M7/
+Core/projectionに保存し、四locus local toyでowner RMW、designated publish/consume、
+A-primary/B-fallback relation、ViewerC local projectionをactual generated endpoint上で実行する
+SYS-5をsource/evidence cut `53a21e64b5a17e24b522f720db10b6e539c058e0`で受理した。
+source-bound ParticipantA leaveはexact M9 membership/capability/witness lineageを退役した後に
+ParticipantB ownerがfallbackを公開し、fresh reacquireはそのexact tombstoneにjoinした
+distinct epoch/incarnationとfresh lineageを発行する。selected ST lifecycleは
+failure-atomic candidate、post-leave cut/restoreはexact retired lineageを保存する。
+observer-safe joined reportはsource/Core/artifact/edge/occurrenceからstate/relation/designated/
+save/patch/failureまでを一つの因果線で示す。OBL-062はこのfinite
+executable/devtools correspondenceだけを`runtime-monitored`とする。public CLI/API/ABI/
+wire/JSON、browser/View、real transport、durable persistence、general theoremは非主張である。
+SYS-5はcompleted、sole active goalはSYS-6、nextはSYS-7である。
 
 これは実装programのauthorizationであり、official phase entry/exit recordではない。
 Broad PHASE-I1 exitはarchitecture/04 carrierのfull internal freeze criteriaとOPEN-026/027、I2 exitは

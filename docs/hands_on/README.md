@@ -41,6 +41,7 @@
 | `full_system_v1_roadmap_01.md` | source-first Full System V1 roadmap、planned commands、stop lines、次 package `P-MIR-01` を読む入口 |
 | `surface_mir_alpha_01.md` | Surface Mir alpha の canonical `S { ... }` place-scope syntax、`.mir` source authority、P-SURF-06 までの evidence floor、P-SURF package sequence を読む入口 |
 | `source_patch_hotplug_01.md` | Surface source patch hot-plug を direct eval ではなく parse/typecheck/elaborate/admit/activation_cut pipeline として確認する入口 |
+| `mirrorea_i2_local_toy_01.md` | SYS-5 local toy fabric を一つの ordinary `.mir` source から project-loci / run-local / inspect で追う入口 |
 
 ## 既存の長い入門文書
 

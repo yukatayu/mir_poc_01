@@ -1,6 +1,6 @@
 {
  "canon_version": "0.1.0",
- "files": 182,
+ "files": 185,
  "entries": [
   {
    "id": "root/changelog",
@@ -12,7 +12,7 @@
    "summary": "canon 自体の版履歴と改定手続きの要約。",
    "open_items": [],
    "path": "CHANGELOG.md",
-   "bytes": 22248
+   "bytes": 23819
   },
   {
    "id": "root/design-constitution",
@@ -52,7 +52,7 @@
    "summary": "知識マップ 1 枚。全域の依存図、3 種の読み筋、ID 体系。",
    "open_items": [],
    "path": "MAP.md",
-   "bytes": 25958
+   "bytes": 27047
   },
   {
    "id": "root/north-star",
@@ -74,7 +74,7 @@
    "summary": "canon の入口。正本宣言、LAB(既存 repo)との関係、読み順、版。",
    "open_items": [],
    "path": "README.md",
-   "bytes": 4007
+   "bytes": 4074
   },
   {
    "id": "adr/ADR-0001",
@@ -505,6 +505,21 @@
    "bytes": 5847
   },
   {
+   "id": "adr/ADR-0031",
+   "status": "L1-fixed",
+   "maturity": "reviewed",
+   "depends_on": [
+    "adr/ADR-0026",
+    "adr/ADR-0029",
+    "adr/ADR-0030",
+    "meta/proposal-034"
+   ],
+   "summary": "SYS-5の四locus local toy fabric、source-bound leave/fresh lineage、failure-atomic ST candidate、observer-safe joined devtoolsを採用する。",
+   "open_items": [],
+   "path": "adr/ADR-0031.md",
+   "bytes": 4886
+  },
+  {
    "id": "adr/readme",
    "status": "L1-fixed",
    "maturity": "draft",
@@ -514,7 +529,7 @@
    "summary": "決定記録の一覧と読み方。LAB の決定台帳(specs/12)との関係。",
    "open_items": [],
    "path": "adr/README.md",
-   "bytes": 3842
+   "bytes": 4028
   },
   {
    "id": "arch/01-strata",
@@ -551,15 +566,17 @@
     "spec/04-core-ir",
     "spec/12-sys3-per-locus-projection",
     "spec/13-sys4-in-process-generated-dispatch",
+    "spec/14-sys5-local-toy-devtools",
     "adr/ADR-0029",
-    "adr/ADR-0030"
+    "adr/ADR-0030",
+    "adr/ADR-0031"
    ],
-   "summary": "toolchain各componentの責務、accepted SYS-3 internal projection compiler、SYS-4 generated-plan-only runtime boundary。",
+   "summary": "toolchain各componentの責務、accepted SYS-3 projection、SYS-4 runtime、SYS-5 local workflow/joined devtools boundary。",
    "open_items": [
     "OPEN-029"
    ],
    "path": "architecture/03-toolchain.md",
-   "bytes": 5132
+   "bytes": 6438
   },
   {
    "id": "arch/04-runtime-carriers",
@@ -575,15 +592,16 @@
     "adr/ADR-0027",
     "adr/ADR-0028",
     "adr/ADR-0029",
-    "adr/ADR-0030"
+    "adr/ADR-0030",
+    "adr/ADR-0031"
    ],
-   "summary": "broad runtime carrier catalogとSYS-1--4 internal lifecycle/execution/projection/dispatch carrier requirements。public API/ABI/wireは未凍結。",
+   "summary": "broad runtime carrier catalogとSYS-1--5 internal lifecycle/execution/projection/dispatch/devtools carrier requirements。public API/ABI/wireは未凍結。",
    "open_items": [
     "OPEN-026",
     "OPEN-027"
    ],
    "path": "architecture/04-runtime-carriers.md",
-   "bytes": 13863
+   "bytes": 15917
   },
   {
    "id": "arch/05-satellites",
@@ -1223,6 +1241,28 @@
    "bytes": 9920
   },
   {
+   "id": "meta/proposal-034",
+   "status": "L1-fixed",
+   "maturity": "reviewed",
+   "depends_on": [
+    "root/north-star",
+    "root/design-constitution",
+    "adr/ADR-0026",
+    "adr/ADR-0029",
+    "adr/ADR-0030",
+    "arch/03-toolchain",
+    "arch/04-runtime-carriers",
+    "theory/05-authority",
+    "theory/14-maintained-relation-projection",
+    "spec/12-sys3-per-locus-projection",
+    "spec/13-sys4-in-process-generated-dispatch"
+   ],
+   "summary": "SYS-5の四locus local toy fabric、source-bound leave/fresh lifecycle、observer-safe joined devtoolsをcut 53a21e64で有限受理する提案。",
+   "open_items": [],
+   "path": "meta/proposals/PROPOSAL-034-sys5-local-toy-devtools.md",
+   "bytes": 9635
+  },
+  {
    "id": "meta/source-hierarchy",
    "status": "L0-frozen",
    "maturity": "draft",
@@ -1282,14 +1322,15 @@
     "adr/ADR-0028",
     "adr/ADR-0029",
     "adr/ADR-0030",
+    "adr/ADR-0031",
     "plan/04-t0-g0-semantic-assertion-profile"
    ],
-   "summary": "実装フェーズT0-T2/I1-I6。official lifecycleはT1、SYS-0--SYS-4はclose、SYS-5 activeでbroad I1/I2 acceptanceは未受理。",
+   "summary": "実装フェーズT0-T2/I1-I6。official lifecycleはT1、SYS-0--SYS-5はclose、SYS-6 activeでbroad I1/I2 acceptanceは未受理。",
    "open_items": [
     "OPEN-032"
    ],
    "path": "plan/01-phases.md",
-   "bytes": 10093
+   "bytes": 11312
   },
   {
    "id": "plan/02-operating-model",
@@ -1528,14 +1569,15 @@
     "adr/ADR-0021",
     "adr/ADR-0025",
     "adr/ADR-0029",
+    "adr/ADR-0031",
     "theory/13-evaluation-materialization",
     "theory/14-maintained-relation-projection",
     "theory/15-shared-formal-model"
    ],
-   "summary": "実装済み M6 parser / fixture とSYS-3のbounded designated-consume clauseを含むordinary Surface reference grammar。",
+   "summary": "実装済み M6 parser / fixture とSYS-3 designated-consume、SYS-5 provisional explicit relation-anchor locusを含むordinary Surface reference grammar。",
    "open_items": [],
    "path": "spec/02-surface-grammar.md",
-   "bytes": 7688
+   "bytes": 8286
   },
   {
    "id": "spec/03-static-semantics",
@@ -1549,12 +1591,13 @@
     "theory/14-maintained-relation-projection",
     "theory/15-shared-formal-model",
     "adr/ADR-0021",
-    "adr/ADR-0025"
+    "adr/ADR-0025",
+    "adr/ADR-0031"
    ],
-   "summary": "実装済み M6 source form の M5 Core / typed CoreTemplate / typed Diagnostic classification と source-span obligation。",
+   "summary": "実装済み M6 source form、provisional explicit relation-anchor locusの M5 Core / typed CoreTemplate / typed Diagnostic classification と source-span obligation。",
    "open_items": [],
    "path": "spec/03-static-semantics.md",
-   "bytes": 7747
+   "bytes": 8570
   },
   {
    "id": "spec/04-core-ir",
@@ -1568,14 +1611,15 @@
     "theory/15-shared-formal-model",
     "adr/ADR-0021",
     "adr/ADR-0025",
-    "adr/ADR-0029"
+    "adr/ADR-0029",
+    "adr/ADR-0031"
    ],
-   "summary": "M6 CoreTemplate と将来の Core IR 交換形。生成辺・義務・span の形、Core companion 記法の附録。",
+   "summary": "M6 CoreTemplate と将来の Core IR 交換形。生成辺・義務・span・provisional relation anchor locus の形、Core companion 記法の附録。",
    "open_items": [
     "OPEN-026"
    ],
    "path": "spec/04-core-ir.md",
-   "bytes": 9116
+   "bytes": 9743
   },
   {
    "id": "spec/05-runtime-semantics",
@@ -1635,12 +1679,13 @@
     "theory/16-m7-checked-elaboration",
     "adr/ADR-0022",
     "adr/ADR-0025",
-    "adr/ADR-0029"
+    "adr/ADR-0029",
+    "adr/ADR-0031"
    ],
-   "summary": "M6 sourceを唯一の入力とするM7 finite check/elaboration API、designated consume Core、生成義務、residual、非実行境界。",
+   "summary": "M6 sourceを唯一の入力とするM7 finite check/elaboration API、designated consume Core、provisional relation anchor locus、生成義務、residual、非実行境界。",
    "open_items": [],
    "path": "spec/08-m7-checked-elaboration.md",
-   "bytes": 11332
+   "bytes": 11763
   },
   {
    "id": "spec/09-m8-deterministic-runtime",
@@ -1728,6 +1773,24 @@
    "bytes": 9887
   },
   {
+   "id": "spec/14-sys5-local-toy-devtools",
+   "status": "L1-fixed",
+   "maturity": "reviewed",
+   "depends_on": [
+    "spec/02-surface-grammar",
+    "spec/03-static-semantics",
+    "spec/04-core-ir",
+    "spec/08-m7-checked-elaboration",
+    "spec/12-sys3-per-locus-projection",
+    "spec/13-sys4-in-process-generated-dispatch",
+    "adr/ADR-0031"
+   ],
+   "summary": "SYS-5 finite four-locus local workflow、source-bound leave/fresh lifecycle、failure-atomic ST boundary、observer-safe joined devtools contract。",
+   "open_items": [],
+   "path": "spec/14-sys5-local-toy-devtools.md",
+   "bytes": 8937
+  },
+  {
    "id": "spec/readme",
    "status": "L1-fixed",
    "maturity": "draft",
@@ -1741,12 +1804,13 @@
     "adr/ADR-0024",
     "adr/ADR-0025",
     "adr/ADR-0029",
-    "adr/ADR-0030"
+    "adr/ADR-0030",
+    "adr/ADR-0031"
    ],
    "summary": "Mir Report(仕様の蒸留)の読み方。theory との優先関係、章構成。",
    "open_items": [],
    "path": "spec/README.md",
-   "bytes": 1411
+   "bytes": 1510
   },
   {
    "id": "theory/00-overview",
@@ -1942,12 +2006,13 @@
     "theory/17-m8-deterministic-runtime",
     "adr/ADR-0028",
     "adr/ADR-0029",
-    "adr/ADR-0030"
+    "adr/ADR-0030",
+    "adr/ADR-0031"
    ],
    "summary": "定理 THM と義務 OBL の単一台帳。証明状態はここだけが語る。",
    "open_items": [],
    "path": "theory/11-metatheory-ledger.md",
-   "bytes": 26680
+   "bytes": 28461
   },
   {
    "id": "theory/12-literature",

@@ -23,6 +23,10 @@ suite and older vocabulary where needed; it is not the normative canon.
 - `model-check/`
 - `modal/`
 - `sugoroku-world/`
+- `mirrorea-i2-local-toy/`
+  accepted SYS-5 four-locus local toy workflow root. It keeps
+  `WorldAuthority`, participants, viewer, player, and bird as sample/library
+  vocabulary, not Core primitives.
 
 ## built-in と user-defined の境界
 
@@ -52,3 +56,24 @@ python3 scripts/sugoroku_world_samples.py run 05_late_join_history_visible --deb
 python3 scripts/sugoroku_world_samples.py model-check
 python3 scripts/sugoroku_world_samples.py closeout --format json
 ```
+
+Mirrorea I2 local toy fabric は provisional `mir` CLI で実行します。
+
+```bash
+cargo run -q -p mir-runtime --bin mir -- project-loci \
+  samples/clean-near-end/mirrorea-i2-local-toy/main.mir \
+  --format json
+cargo run -q -p mir-runtime --bin mir -- run-local \
+  samples/clean-near-end/mirrorea-i2-local-toy/main.mir \
+  --patch samples/clean-near-end/mirrorea-i2-local-toy/patches/designated-plus-two.mir \
+  --patch samples/clean-near-end/mirrorea-i2-local-toy/patches/owner-rmw-change.mir \
+  --format json
+cargo run -q -p mir-runtime --bin mir -- inspect \
+  samples/clean-near-end/mirrorea-i2-local-toy/main.mir \
+  --patch samples/clean-near-end/mirrorea-i2-local-toy/patches/designated-plus-two.mir \
+  --patch samples/clean-near-end/mirrorea-i2-local-toy/patches/owner-rmw-change.mir \
+  --format json
+```
+
+This is SYS-5 LAB evidence only. The CLI spelling and JSON field names are
+internal/provisional; they do not freeze a public API, ABI, grammar, or wire.

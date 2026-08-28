@@ -25,12 +25,17 @@ partial regression evidenceへ戻して一度reopenし、corrected source/eviden
 `3013e7fe...`でclosedした。SYS-4もaccepted implementation/evidence cut
 `22196f93...`でclosedし、generated-plan-only locus endpoint dispatch、selected
 ST/OW1 correspondence、source/Core-bound designated retry、ST whole-fabric local cut/
-restore、bounded checked patchをfinite internal profileとして受理した。active
-goalはSYS-5 typed devtools/toy vertical slice、next goalはSYS-6 assurance/
-conformance closeoutである。legacy M8 `AlreadyConsumed`又はaccepted M10
+restore、bounded checked patchをfinite internal profileとして受理した。SYS-5は
+implementation/evidence cut `53a21e64...`でclosedし、ordinary sourceからの
+four-locus headless toy、actual generated dispatch、leave/fallback/fresh reacquire、
+observer-safe joined causal view、local save/restore、accepted/rejected patch、
+revocation/verificationの有限workflowを受理した。active goalはSYS-6
+assurance/conformance closeout、next goalはSYS-7 I3 entry contract onlyである。
+legacy M8 `AlreadyConsumed`又はaccepted M10
 duplicate-delivery behaviorは変更せず、SYS-4 wrapperのexact semantic-consumption
 identityと明確に分ける。SYS-4 contractの正本はPROPOSAL-033 / ADR-0030 /
-Canon spec/13である。
+Canon spec/13、SYS-5 contractの正本はPROPOSAL-034 / ADR-0031 / Canon
+spec/14である。
 Gate/Phase/OBL の正本は
 Canonのままなので、program activationをbroad I1/I2 lifecycle acceptanceへ
 読み替えない。
@@ -950,11 +955,10 @@ Canonのままなので、program activationをbroad I1/I2 lifecycle acceptance�
   v1/v2 remain historical artifacts.)
 - Mirrorea I2 Systems Foundation current roadmap:
   `plan/249-mirrorea-i2-systems-foundation-current-roadmap.md`
-  (ADR-0026 SYS-0--SYS-7 bounded program の sole current queue。SYS-0--SYS-4は
-  completed / closed、SYS-4 in-process generated dispatchのaccepted cutは
-  `22196f93...`（PROPOSAL-033 / ADR-0030 / Canon spec/13）、SYS-5 typed
-  devtools/toy sliceはactive、SYS-6 assurance/
-  conformance closeoutはnext。
+  (ADR-0026 SYS-0--SYS-7 bounded program の sole current queue。SYS-0--SYS-5は
+  completed / closed、SYS-5 minimal typed devtools/local toyのaccepted cutは
+  `53a21e64...`（PROPOSAL-034 / ADR-0031 / Canon spec/14）、SYS-6 finite
+  I2 assurance/conformance closeoutはactive、SYS-7 I3 entry contract onlyはnext。
   Plan 247/M10はclosed baselineのまま。)
 
 ## maintenance rule

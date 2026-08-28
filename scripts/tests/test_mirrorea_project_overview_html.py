@@ -78,25 +78,29 @@ class MirroreaProjectOverviewHtmlTests(unittest.TestCase):
             "SYS-0 completed",
             "SYS-1 completed",
             "SYS-2 completed",
-            "SYS-0--SYS-4 completed",
-            "active goal は SYS-5",
-            "next goal は SYS-6",
-            "SYS-4 completed",
-            "SYS-5 active",
-            "SYS-6 next",
+            "SYS-0--SYS-5 completed",
+            "active goal は SYS-6",
+            "next goal は SYS-7",
+            "SYS-5 completed",
+            "SYS-6 active",
+            "SYS-7 next",
             "closed / SYS-3",
             "closed / SYS-4",
-            "現在 / SYS-5",
-            "今 / SYS-5",
-            "次 / SYS-6",
+            "closed / SYS-5",
+            "現在 / SYS-6",
+            "今 / SYS-6",
+            "次 / SYS-7",
             "受理済みSYS-3 source/evidence cut",
             "3013e7fe075a7605a1ffe01e0b14f4a0856eaeb9",
-            "accepted SYS-4 cut",
+            "SYS-4 cut",
             "22196f93...",
             "partial regression history",
             "OBL-060 runtime-monitored (static finite only)",
             "OBL-061",
             "finite in-process dispatch",
+            "accepted SYS-5 cut",
+            "53a21e64...",
+            "OBL-062 runtime-monitored",
             "runtime-monitored",
             "OPEN-030 は I2 internal bounded contract として解決",
             "program activation は broad PHASE-I1 exit / I2 lifecycle acceptance ではない",
@@ -164,6 +168,10 @@ class MirroreaProjectOverviewHtmlTests(unittest.TestCase):
             "SYS-4 active",
             "next goal は SYS-5",
             "SYS-5 next",
+            "active goal は SYS-5",
+            "SYS-5 active",
+            "next goal は SYS-6",
+            "SYS-6 next",
             "現在 / SYS-3",
             "今 / SYS-3",
             "SYS-4 next",
@@ -171,6 +179,9 @@ class MirroreaProjectOverviewHtmlTests(unittest.TestCase):
             "現在 / SYS-4",
             "今 / SYS-4",
             "次 / SYS-5",
+            "現在 / SYS-5",
+            "今 / SYS-5",
+            "次 / SYS-6",
             "OBL-060 intentionally-deferred",
             "OBL-061 intentionally-deferred",
         )
@@ -222,9 +233,9 @@ class MirroreaProjectOverviewHtmlTests(unittest.TestCase):
         )
         self.assert_contains_marker(documentation, "M0--M10 program は closed", "Documentation program boundary")
         self.assert_contains_marker(documentation, "active roadmap は Plan 249", "Documentation roadmap")
-        self.assert_contains_marker(documentation, "SYS-0--SYS-4 completed", "Documentation SYS status")
-        self.assert_contains_marker(documentation, "active goal は SYS-5", "Documentation SYS status")
-        self.assert_contains_marker(documentation, "next goal は SYS-6", "Documentation SYS status")
+        self.assert_contains_marker(documentation, "SYS-0--SYS-5 completed", "Documentation SYS status")
+        self.assert_contains_marker(documentation, "active goal は SYS-6", "Documentation SYS status")
+        self.assert_contains_marker(documentation, "next goal は SYS-7", "Documentation SYS status")
         self.assert_contains_marker(documentation, "`ded622fe...`を", "Documentation SYS-3 history")
         self.assert_contains_marker(documentation, "partial regression evidenceへ", "Documentation SYS-3 history")
         self.assert_contains_marker(
@@ -246,6 +257,8 @@ class MirroreaProjectOverviewHtmlTests(unittest.TestCase):
         self.assert_contains_marker(
             documentation, "finite in-process dispatch", "Documentation SYS-4 proof boundary"
         )
+        self.assert_contains_marker(documentation, "OBL-062", "Documentation SYS-5 proof boundary")
+        self.assert_contains_marker(documentation, "53a21e64", "Documentation SYS-5 boundary")
         self.assert_contains_marker(
             documentation,
             "`runtime-monitored`とし、Lean/general proof又はruntime dispatch evidenceではありません",
@@ -260,6 +273,10 @@ class MirroreaProjectOverviewHtmlTests(unittest.TestCase):
         self.assert_omits_marker(documentation, "next goal は SYS-5", "Documentation stale SYS status")
         self.assert_omits_marker(documentation, "SYS-4 active", "Documentation stale SYS status")
         self.assert_omits_marker(documentation, "SYS-5 next", "Documentation stale SYS status")
+        self.assert_omits_marker(documentation, "active goal は SYS-5", "Documentation stale SYS status")
+        self.assert_omits_marker(documentation, "SYS-5 active", "Documentation stale SYS status")
+        self.assert_omits_marker(documentation, "next goal は SYS-6", "Documentation stale SYS status")
+        self.assert_omits_marker(documentation, "SYS-6 next", "Documentation stale SYS status")
 
 
 if __name__ == "__main__":

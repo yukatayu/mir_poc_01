@@ -6,6 +6,10 @@
 
 - `clean-near-end/`
   active LAB clean executable suite
+  - `mirrorea-i2-local-toy/` is the accepted SYS-5 four-locus local toy
+    workflow root. It uses one ordinary `.mir` source plus two source patches
+    and is exercised through `mir project-loci`, `mir run-local`, and
+    `mir inspect`. It is not a final grammar/API/wire/product surface.
 - `current-l2/`
   base current-L2 source corpus
 - `lean/`
@@ -104,6 +108,9 @@
 ## reading rules
 
 - active executable sample として読むのは、まず `clean-near-end/`
+- SYS-5 local toy workflow evidence is
+  `clean-near-end/mirrorea-i2-local-toy/`; it is source-first I2 LAB evidence,
+  not Core promotion of `World` / `Bird` vocabulary and not a public API.
 - `current-l2/` は active clean suite を支える base source corpus
 - `lean/lab-statements/` は LAB-only statement-shape draft であり、proof
   discharge や canon OBL status として読まない

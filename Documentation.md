@@ -15,7 +15,7 @@ Foundation roadmap は `plan/249-mirrorea-i2-systems-foundation-current-roadmap.
 
 下の `plan/` 索引は時系列の LAB repository memory です。索引にある候補や過去の
 「次」は current queue を意味しません。active roadmap は Plan 249 だけであり、
-SYS-0--SYS-4 completed、active goal はSYS-5、next goal はSYS-6です。Plan 247と
+SYS-0--SYS-5 completed、active goal はSYS-6、next goal はSYS-7です。Plan 247と
 older plansはhistorical memoryです。現在の停止線は
 `docs/project-status.md`、`progress.md`、`tasks.md` で確認します。
 
@@ -33,7 +33,7 @@ deterministic reference profile acceptance であり、broad PHASE-I1 exit、I2 
 final public grammar/diagnostic ABI/wire/carrier freeze、socket、production、general theorem、
 public product completion は主張しない。2026-08-26のowner directionはADR-0026により
 SYS-0--SYS-7のMirrorea I2 Systems Foundation bounded programを開始した。現在は
-**SYS-0--SYS-4 completed**、**SYS-5 active**、**SYS-6 next**。ADR-0027の
+**SYS-0--SYS-5 completed**、**SYS-6 active**、**SYS-7 next**。ADR-0027の
 crate-private kernel/internal carrier cutと、ADR-0028のST/OW1 bounded refinement cut
 `920d3fe0...`を受けている。ADR-0029のprojectionは初回cut `ded622fe...`を
 E-CONSUME evaluator→named-consumer path欠落によりpartial regression evidenceへ
@@ -42,8 +42,14 @@ SYS-4 accepted cut `22196f93b0112b8fd2987ec078021c8865b71651`は、accepted
 generated artifactsをprocess内の独立locus endpointで実dispatchし、typed carrier
 receipt/idempotent-return/failure、typed observer snapshot failure、deterministic
 replay、ST whole-fabric cut/restore、bounded designated-only patchをactual evidence
-として閉じた。**active goal は SYS-5** minimal typed devtools / local toy vertical
-slice、**next goal は SYS-6** I2 assurance / lifecycle closeoutである。
+として閉じた。PROPOSAL-034 / ADR-0031 / Canon spec 14 / OBL-062 は SYS-5 local
+toy fabric and minimal typed devtools を受理し、cut
+`53a21e64b5a17e24b522f720db10b6e539c058e0` は
+`samples/clean-near-end/mirrorea-i2-local-toy/main.mir` から four-locus projection、
+generated in-process dispatch、joined observer-safe causal view、local save/restore、
+accepted designated-only patch、rejected owner-RMW patch、leave/fallback/fresh
+reacquire、typed auth failure を実行できることを示した。**active goal は SYS-6**
+I2 assurance / lifecycle closeout、**next goal は SYS-7** I3 entry contract onlyである。
 これはprogram authorizationであってbroad I1/I2 lifecycle acceptanceではない。M2 は
 `mirrorea_canon/plan/04-t0-g0-semantic-assertion-profile.md` と ADR-0017 に、revision
 `644ec1cdfa7d69600af3463ab60a6b7d745913c8` から再生成した v3 `pass` digest を記録し、
@@ -181,8 +187,8 @@ Mir、Mirrorea、PrismCascade、Typed-Effect Wiring Platform は関連します�
   regression baseline です。active roadmapはPlan 249だけです。
 - ADR-0026 は accepted finite semantics を per-locus artifact/generated communication/
   in-process dispatch/typed devtoolsへ進めるSYS-0--SYS-7をowner-authorized bounded
-  programとして開始しました。SYS-0--SYS-4はcompleted / closed、active goalはSYS-5、
-  next goalはSYS-6です。ADR-0027はOPEN-030をI2 internal bounded contractとしてだけ
+  programとして開始しました。SYS-0--SYS-5はcompleted / closed、active goalはSYS-6、
+  next goalはSYS-7です。ADR-0027はOPEN-030をI2 internal bounded contractとしてだけ
   解決し、ADR-0028はそのST/OW1 orderingとlive M9 generation residualをfinite scopeで
   閉じた。ADR-0029はchecked Coreからowned per-locus fragmentsとgenerated plansを
   deterministicに作るfinite internal projectionを選択した。consumer path反例で一度
@@ -192,8 +198,11 @@ Mir、Mirrorea、PrismCascade、Typed-Effect Wiring Platform は関連します�
   `22196f93...`ではactual endpoint dispatch、carrier-side idempotent return、
   fail-closed endpoint negatives、typed observer snapshot failures、deterministic
   replay、ST whole-fabric cut/restore、bounded designated-only patchを閉じた。ただし
-  OW1 cut/patchはtyped `BackendIneligible` residualであり、OPEN-026/027とfull carrier
-  freezeは残ります。
+  OW1 cut/patchはtyped `BackendIneligible` residualである。PROPOSAL-034 / ADR-0031 /
+  Canon spec 14 / OBL-062 は cut `53a21e64...` の SYS-5 workflowを受理し、
+  `mir project-loci` / `mir run-local` / `mir inspect` で one source -> four locus
+  artifacts -> generated communication -> runtime occurrence -> joined typed devtools
+  を確認できるようにした。OPEN-026/027とfull carrier freezeは残ります。
   program外はADR-0014のbounded L3 routeであり、L2 promotionは引き続きfail-closedです。
 - reader-facing な統合図は `docs/mirrorea-project-overview.html`、短い現在地は
   `docs/project-status.md`、proof status は Canon ledger、runnable LAB evidence は
@@ -207,7 +216,7 @@ Mir、Mirrorea、PrismCascade、Typed-Effect Wiring Platform は関連します�
 | T1 | 計算体系・G1-G3 statement | official lifecycle remains here; ADR-0026 program activation does not claim broad PHASE-I1/I2 acceptance |
 | T2 | OBL-020/021/002 skeleton・G5 statement | not reopened; general T2 obligations unchanged, while SYS-2/3 add bounded OBL-058/059/060 only |
 | I1 | 単一 process reference implementation | finite deterministic reference profile accepted by M10 R5, but broad PHASE-I1 exit / public contract are not claimed |
-| I2 | process 内 multi-place | ADR-0026 bounded implementation program closed SYS-0--SYS-4; SYS-5 is active and SYS-6 is next, while official I2 lifecycle entry/exit remains unaccepted |
+| I2 | process 内 multi-place | ADR-0026 bounded implementation program closed SYS-0--SYS-5; SYS-6 is active and SYS-7 is next, while official I2 lifecycle entry/exit remains unaccepted |
 | I3 | 実 socket transport | I2 後。最初の real LAN phase |
 | I4-I6 | 永続/patch、View、分散永続/federation | 後段 |
 
@@ -220,26 +229,29 @@ fresh evidence、independent review、明示acceptance recordが揃うまで未�
 
 ## Planning / status snapshot
 
-- done: SYS-0--SYS-4 are completed inside ADR-0026 / Plan 249. The latest
-  accepted implementation/evidence cut is SYS-4
-  `22196f93b0112b8fd2987ec078021c8865b71651`.
-- in-progress: SYS-5 minimal typed devtools and local virtual-space vertical
-  slice is the active goal. Its direct input is the accepted SYS-4 dispatch
-  trace/artifact/runtime evidence.
-- blocked: no owner decision currently blocks SYS-5. Broad PHASE-I1 exit,
+- done: SYS-0--SYS-5 are completed inside ADR-0026 / Plan 249. The latest
+  accepted implementation/evidence cut for the runnable user-facing workflow is
+  SYS-5 `53a21e64b5a17e24b522f720db10b6e539c058e0`.
+- in-progress: SYS-6 I2 assurance / lifecycle closeout is the active goal. Its
+  direct input is the accepted SYS-5 local toy/devtools evidence.
+- blocked: no owner decision currently blocks SYS-6. Broad PHASE-I1 exit,
   official I2 lifecycle acceptance, final public API/ABI/wire/carrier freeze,
   real transport, production, and browser/View product remain intentionally
-  outside the accepted SYS-4 claim.
-- decisions taken: SYS-4 closes only the bounded internal dispatch runtime:
-  generated endpoint crossing, carrier-side idempotent return, typed endpoint
-  failures, typed observer snapshot failure/recovery, deterministic replay, ST
-  whole-fabric cut/restore, and bounded designated-only patch.
+  outside the accepted SYS-5 claim.
+- decisions taken: SYS-5 closes only the bounded local toy/devtools workflow:
+  four-locus source-derived projection, generated in-process dispatch, joined
+  observer-safe causal rows, local save/restore, one accepted designated-only
+  patch, one rejected owner-RMW patch, relation fallback/reacquire, and typed
+  auth failure.
 - open risks: OW1 cut/patch remains a typed `BackendIneligible` residual;
-  runtime/devtools evidence is not a general scheduler, memory-model, relation
-  DAG, public transport, or lifecycle theorem.
-- verification status: SYS-4 evidence is read from Plan 249 and accepted cut
-  `22196f93...`. This reader/status update itself runs only documentation and
-  HTML-oriented checks; it does not rerun the full SYS-4/M10/workspace suites.
+  SYS-5 CLI/JSON/grammar are internal/provisional, and the evidence is not a
+  general scheduler, memory-model, relation DAG, public transport, or lifecycle
+  theorem.
+- verification status: SYS-5 evidence is read from the accepted implementation
+  cut `53a21e64...` and report 2597 identifier provided by the parent package.
+  This reader/status update reruns the SYS-5 CLI smoke commands and
+  documentation/HTML-oriented checks only; it does not rerun the full
+  SYS-5/M10/workspace suites.
 
 ## Historical plan index（Plan 249以外はrepository memory、current queueではない）
 

@@ -2,8 +2,8 @@
 id: spec/02-surface-grammar
 status: L1-fixed
 maturity: draft
-depends_on: [spec/01-lexical-and-modules, adr/ADR-0021, adr/ADR-0025, adr/ADR-0029, theory/13-evaluation-materialization, theory/14-maintained-relation-projection, theory/15-shared-formal-model]
-summary: 実装済み M6 parser / fixture とSYS-3のbounded designated-consume clauseを含むordinary Surface reference grammar。
+depends_on: [spec/01-lexical-and-modules, adr/ADR-0021, adr/ADR-0025, adr/ADR-0029, adr/ADR-0031, theory/13-evaluation-materialization, theory/14-maintained-relation-projection, theory/15-shared-formal-model]
+summary: 実装済み M6 parser / fixture とSYS-3 designated-consume、SYS-5 provisional explicit relation-anchor locusを含むordinary Surface reference grammar。
 open_items: []
 ---
 
@@ -47,8 +47,10 @@ RelationDecl    ::= "relation" RelationName "at" LocusName "{"
                   "bind" "frontier" BindingFrontierName
                   "publish" ("relation" | "value" Ident)
                   [ "project" "at" LocusName "local" ] "}"
-PrimaryAnchor   ::= "primary" AnchorName "epoch" EpochName "transform" Transform
-FallbackAnchor  ::= "fallback" AnchorName "epoch" EpochName "transform" Transform
+PrimaryAnchor   ::= "primary" AnchorName [ "at" LocusName ]
+                  "epoch" EpochName "transform" Transform
+FallbackAnchor  ::= "fallback" AnchorName [ "at" LocusName ]
+                  "epoch" EpochName "transform" Transform
 Transform       ::= "identity"
                   | "translate" "(" SignedInt "," SignedInt ")"
 SignedInt       ::= [ "-" ] IntLiteral
@@ -121,6 +123,13 @@ relation.  M6 adds no separate declaration production for either.
 - A maintained relation owns an explicit relation/binding frontier and may
   describe a consumer-local projection site.  It publishes a relation carrier,
   not an early materialized absolute value.
+- A maintained relation anchor may name its existence locus with provisional
+  internal `at L`. The explicit locus is distinct from relation owner and
+  consumer projection locus. It is retained exactly for M7/projection/runtime;
+  an undeclared explicit locus rejects. The earlier form without `at` remains
+  accepted with no inferred anchor locus. SYS-5 leave/fresh requires an
+  explicit primary anchor locus. This is not final/public grammar or a
+  compatibility promise.
 - A `StateDecl` may list a source-bound observer-safe subset with
   `visible observer_safe fields (...)` after its field declarations. At most
   one such clause is syntactically present. Unlisted fields are private by
