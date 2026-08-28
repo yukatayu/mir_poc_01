@@ -15,7 +15,7 @@ open_items: []
 NORTH-STAR (軸)
    │
    ▼
-adr/ (決定 ADR-0001..0032) ◄──── GLOSSARY (概念 CON-###)
+adr/ (決定 ADR-0001..0033) ◄──── GLOSSARY (概念 CON-###)
    │
    ▼
 DESIGN-CONSTITUTION (v0/I1+ の横断判断)
@@ -40,14 +40,14 @@ spec/ (Mir Report: 文法・静的意味・Core IR・runtime・適合・診断)
 scenarios/ (SCN-01..10 = 凍結基準; SCN-11+ = milestone pressure scenario)
    │
    ▼
-plan/ (Gate 0-7 → Phase T0-T2, I1-I6)   meta/ (規約・正本関係・agent 規約)
+plan/ (Gate 0-7 → Phase T0-T2, I1-I6; inactive I3 entry contract)   meta/ (規約・正本関係・agent 規約)
 ```
 
 ## 3 種の読み筋
 
 - **理論筋**(体系を理解・拡張する): NORTH-STAR → adr → DESIGN-CONSTITUTION → theory/00 → 01 → (関心の章) → 11 → scenarios。
-- **実装筋**(toolchain を作る): spec/02..15 → architecture/03..04 → scenarios → plan/01 の該当 Phase。
-- **運用筋**(進め方を知る): plan/00..04 → meta/agent-instructions → adr/ADR-0012 → adr/ADR-0014 → adr/ADR-0015 → adr/ADR-0026 → adr/ADR-0027 → adr/ADR-0028 → adr/ADR-0029 → adr/ADR-0030 → adr/ADR-0031 → adr/ADR-0032。
+- **実装筋**(toolchain を作る): spec/02..15 → architecture/03..04 → scenarios → plan/01 の該当 Phase → plan/05 future I3 entry boundary。
+- **運用筋**(進め方を知る): plan/00..05 → meta/agent-instructions → adr/ADR-0012 → adr/ADR-0014 → adr/ADR-0015 → adr/ADR-0026 → adr/ADR-0027 → adr/ADR-0028 → adr/ADR-0029 → adr/ADR-0030 → adr/ADR-0031 → adr/ADR-0032 → adr/ADR-0033。
 
 Mir Theory v0 / I1+ Milestones 0--10 は ADR-0015--0025 と
 PROPOSAL-018--028 に従って完走した。accepted finite reference-profile の正本は
@@ -57,9 +57,10 @@ Plan 247 は close record / repository memory であって、次の current queu
 下の historical working records 一覧も queue ではない。
 
 2026-08-26 の owner direction は PROPOSAL-029 / ADR-0026 により Mirrorea I2
-Systems Foundation SYS-0--SYS-7 を active bounded program として開始した。sole
-current LAB roadmap は Plan 249 である。このprogram activationはbroad PHASE-I1
-exit又はI2 lifecycle acceptanceではなく、theory lifecycleはT1である。
+Systems Foundation SYS-0--SYS-7 bounded programを開始した。Plan 249がその実行
+roadmapだった。このprogram activation自体はbroad PHASE-I1 exit又はI2 lifecycle
+acceptanceではなく、theory lifecycleはT1である。ADR-0033によりprogramとPlan 249は
+現在closedである。
 
 PROPOSAL-030 / ADR-0027 は source cut
 `94e3707c7bc98d4a0764c51f13a12b1dae1968c6` で SYS-1 をcloseした。OPEN-030は
@@ -127,8 +128,21 @@ provenanceへ結ぶ。21 rowsは`runtime-monitored`、no-source-free-authority r
 `model-checked-bounded`、aggregate OBL-063は`runtime-monitored`である。ADR-0032は
 pre-existing criteriaを弱めずofficial I2 entry後exitを受理した。theory T1とbroad
 PHASE-I1は不変で、architecture/04 OPEN-026/027/full carrier freezeは残る。SYS-6は
-completed、SYS-7がsole active goal、I3はinactiveである。OPEN-032のtransport選定は
+ADR-0032 acceptance時点ではcompleted、SYS-7がsole active goal、I3はinactiveだった。
+OPEN-032のtransport選定は
 I2 exitではなくfuture owner-authorized I3 decisionまで未決である。
+
+PROPOSAL-036 / ADR-0033 / plan/05はSYS-7のinactive I3 entry contractを受理した。
+future goalはaccepted I2 artifacts/generated communicationを2つ以上のOS processへ
+写し、authority、typed failure、source/Core provenance、redaction、abstract orderingを
+保つC-distributed profileを閉じることである。candidate A TLS-over-TCP framed reliable
+streamとcandidate B QUIC reliable streamはともに**UNSELECTED**で、QUIC datagramは
+admit/evaluateしない。transport/session/certificateはauthorityでなく、internal carrierと
+future public wireは分離し、failure matrix、explicit retry/non-exactly-once、network-order
+refinement、SCN-01/02/03/06 future gatesをentry条件とする。SYS-7とADR-0026 programは
+closed、Plan 249はclosed record、I3はinactive、OPEN-032はunresolvedである。現在active
+bounded program / roadmap / semantic milestone / goalはなく、future I3 workにはnew owner
+directionが必要である。
 
 ## ID 体系
 

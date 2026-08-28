@@ -2,8 +2,8 @@
 id: plan/01-phases
 status: L1-fixed
 maturity: draft
-depends_on: [plan/00-gates, plan/02-operating-model, spec/06-conformance, meta/source-hierarchy, adr/ADR-0013, adr/ADR-0014, adr/ADR-0015, adr/ADR-0017, adr/ADR-0026, adr/ADR-0027, adr/ADR-0028, adr/ADR-0029, adr/ADR-0030, adr/ADR-0031, adr/ADR-0032, plan/04-t0-g0-semantic-assertion-profile]
-summary: 実装フェーズT0-T2/I1-I6。theory T1とbroad I1 residualを保ち、SYS-6 closeでofficial I2 entry/exitを受理、SYS-7 active。
+depends_on: [plan/00-gates, plan/02-operating-model, plan/05-i3-entry-contract, spec/06-conformance, meta/source-hierarchy, adr/ADR-0013, adr/ADR-0014, adr/ADR-0015, adr/ADR-0017, adr/ADR-0026, adr/ADR-0027, adr/ADR-0028, adr/ADR-0029, adr/ADR-0030, adr/ADR-0031, adr/ADR-0032, adr/ADR-0033, plan/04-t0-g0-semantic-assertion-profile]
+summary: 実装フェーズT0-T2/I1-I6。theory T1、broad I1 residual、official I2 exit、inactive I3 entry contract、closed ADR-0026 programを分離する。
 open_items: [OPEN-032]
 ---
 
@@ -15,12 +15,12 @@ open_items: [OPEN-032]
 - theory lifecycle: **T1**（M2 semantic-assertion profile v3 の pass digest、G0-D3、
   G0 exit、T1 entry を ADR-0017 により受理済み）;
 - implementation evidence: **M10 I1+ deterministic reference profile accepted;
-  official I2 entry then I2 exit accepted; SYS-0--SYS-6 completed; Mirrorea I2
-  Systems Foundation bounded program active at SYS-7 only**（ADR-0025 /
+  official I2 entry then I2 exit accepted; SYS-0--SYS-7 completed; Mirrorea I2
+  Systems Foundation bounded program closed; no active roadmap/goal**（ADR-0025 /
   ADR-0026 / ADR-0027 / ADR-0028 / ADR-0029 / ADR-0030 / ADR-0031 /
-  ADR-0032）。architecture/04 の full L2 carrier freeze と OPEN-026/027 が
+  ADR-0032 / ADR-0033）。architecture/04 の full L2 carrier freeze と OPEN-026/027 が
   残るため、広い PHASE-I1 exitは未受理。Theory lifecycleはT1のままであり、I3は
-  inactiveである。
+  inactive、OPEN-032はunresolvedである。
 
 ## 理論フェーズ
 
@@ -114,8 +114,8 @@ observer-safe joined reportはsource/Core/artifact/edge/occurrenceからstate/re
 save/patch/failureまでを一つの因果線で示す。OBL-062はこのfinite
 executable/devtools correspondenceだけを`runtime-monitored`とする。public CLI/API/ABI/
 wire/JSON、browser/View、real transport、durable persistence、general theoremは非主張である。
-SYS-5はcompletedし、SYS-6は後述のfinite I2 conformanceでcompletedした。sole active
-goalはSYS-7である。
+SYS-5はcompletedし、SYS-6は後述のfinite I2 conformanceでcompletedした。ADR-0032
+acceptance時点ではSYS-7だけがactiveだったが、後述のADR-0033でcompletedした。
 
 Program activation自体はofficial phase entry/exit recordではなかった。Broad
 PHASE-I1 exitはarchitecture/04 carrierのfull internal freeze criteriaとOPEN-026/027を
@@ -155,7 +155,19 @@ official I2 entry accepted
 `conform-i2` outputのlifecycle bitsがfalseで`I2 lifecycle exit`をnon-claimとすることは
 矛盾しない。runtime/verifierはphaseをself-activateできず、official stateはこのplanと
 ADR-0032だけが決める。Theory T1、broad PHASE-I1、public contract、I3 activationは
-動かない。SYS-6はcompleted、SYS-7はsole active milestone、I3はinactiveである。
+動かない。SYS-6はcompletedし、SYS-7は下のinactive entry contract closeでcompleted
+した。I3はinactiveである。
+
+## Mirrorea I3 inactive entry contract
+
+PROPOSAL-036 / ADR-0033はplan/05のinactive I3 entry contractだけを受理した。二つの
+reliable-stream候補はともに**UNSELECTED**で、transport/session/certificateはauthority
+でない。failure/order、C-distributed gate、public-wire等の正本は
+`plan/05-i3-entry-contract`である。
+
+SYS-7とADR-0026 programはclosed、Plan 249はclosed recordである。現在active bounded
+program / roadmap / goalはない。official I2 exitを維持し、I3はinactive、OPEN-032は
+unresolvedである。transport selection又はI3開始にはnew owner directionが必要である。
 
 ## T0/G0 phase-governance profile
 
@@ -200,6 +212,7 @@ Each phase exits only through its canonically defined profile result and the
 authorized acceptance record. T0 uses v3 above. SCN C-static/C-runtime/
 C-distributed JSON follows `spec/06-conformance` and the `mir-conform`
 contract. **Phase を跨ぐ最適化の先取りは禁止**（BND-006 の意味保存を先に）。
-OPEN-032: I3 の transport 選定は未決である。I2 exit条件ではなく、SYS-7がinactive
-entry contractを記録した後のfuture owner-authorized I3 program / entry decisionで、
-最大二候補を比較して初めてADR対象にできる。SYS-7とADR-0032はtransportを選ばない。
+OPEN-032: I3のtransport選定は未決である。I2 exit条件ではなく、recorded plan/05
+entry contractをconsumeするfuture owner-authorized I3 program / entry decisionで、
+候補A/Bを同じC-distributed failure/order gatesにより比較して初めてADR対象にできる。
+ADR-0033はtransportを選ばず、I3をactivateしない。

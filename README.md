@@ -15,51 +15,37 @@ notes. If LAB text conflicts with canon, canon wins; cite legacy `specs/` /
 
 `mirrorea_canon/` remains the sole normative source. ADR-0015 and Plan 247 are
 the closed authority/execution record for the accepted Mir Theory v0 / I1+
-M0--M10 finite reference baseline. The owner has now adopted ADR-0026 for the
-bounded Mirrorea I2 Systems Foundation SYS-0--SYS-7 program. Its sole current
-LAB roadmap is `plan/249-mirrorea-i2-systems-foundation-current-roadmap.md`.
-SYS-0--SYS-6 are completed and closed. ADR-0027 records the crate-private
-semantic runtime kernel and narrow I2-internal carrier at cut `94e3707c...`;
-ADR-0028 records deterministic ST, single-owner OW1, acknowledged M9
-generation visibility, and finite ordering evidence at cut `920d3fe0...`.
-ADR-0029 records the accepted checked-Core-only per-locus projector at source/
-evidence cut `3013e7fe...`. Candidate cut `ded622fe...` remains partial
-regression history: close review found no ordinary source/M6/M7 evaluator-to-
-named-consumer E-CONSUME path, which the bounded non-final
-`designated consume E.result at C` correction now supplies. SYS-4 accepted cut
-`22196f93b0112b8fd2987ec078021c8865b71651` runs the accepted generated
-artifacts through actual in-process locus endpoints and closes the bounded
-dispatch milestone: endpoint crossing, carrier-side idempotent return,
-fail-closed route/auth/receipt cases, typed observer snapshot failures,
-deterministic replay, ST whole-fabric cut/restore, and bounded
-designated-only patch are evidence-backed. PROPOSAL-034 / ADR-0031 / Canon
-spec 14 record the accepted SYS-5 local toy fabric and minimal typed devtools
-cut `53a21e64b5a17e24b522f720db10b6e539c058e0`: one ordinary source under
-`samples/clean-near-end/mirrorea-i2-local-toy/main.mir` now projects four loci,
-runs generated in-process dispatch through `mir project-loci`, `mir run-local`,
-and `mir inspect`, emits a joined observer-safe causal view, and exercises one
-accepted designated-only patch plus one rejected owner-RMW patch. PROPOSAL-035 /
-ADR-0032 / Canon spec 15 record SYS-6 cut
-`5429712de89a7e41c46cfd7fb4a39c4a492864c4`: the downstream-only
-`conform-i2` producer/verifier accepts 22/22 source-first rows with executed
-positive/falsifier evidence, actual provenance, selected ST/OW1 correspondence,
-typed rejection, and observer-safe output. ADR-0032 accepted official I2 entry
-then exit. SYS-7 inactive I3 entry-contract work is now the sole active goal.
-OPEN-030 is resolved only
-for that internal contract; the full carrier freeze and OPEN-026/027 remain.
-The SYS-4--SYS-6 close claims neither final/public grammar/API/ABI/wire,
-multi-consumer semantics, broad PHASE-I1 exit, real transport, I3 activation,
-durable distributed persistence, browser/View
-product, nor OW1 cut/patch support beyond typed `BackendIneligible` residuals;
-official theory remains T1. Legacy M8 `AlreadyConsumed` and the accepted M10
-duplicate-delivery baseline remain unchanged. North Star changes, weakened
-safety/privacy guarantees, irreversible final public contracts, real transport
-selection/implementation in this program, and production deployment remain
-owner-reserved. Outside the program, ADR-0014 keeps research in the reversible
-L3 `working/WRK-####` route and L2 remains fail-closed until an
-owner-authenticated trust anchor exists. Candidates, countermodels,
-experiments, and history remain LAB. The concise control view is
-`docs/project-status.md`.
+M0--M10 finite reference baseline. ADR-0026 and Plan 249 likewise record the
+now-closed Mirrorea I2 Systems Foundation SYS-0--SYS-7 program. There is no
+active bounded program, current roadmap, or active goal.
+
+Accepted I2 implementation evidence progresses through the crate-private
+kernel/carrier (`94e3707c...`), ST/OW1 refinement (`920d3fe0...`), checked-Core
+projection (`3013e7fe...`), in-process generated dispatch (`22196f93...`), and
+the four-locus toy/devtools workflow (`53a21e64...`). PROPOSAL-035 / ADR-0032 /
+Canon spec 15 accept SYS-6 implementation/evidence cut
+`5429712de89a7e41c46cfd7fb4a39c4a492864c4`; Canon/status integration cut
+`bcb0f767edbb3e9e581c3b4c7f2a49e077f44067` records the exact 22-row
+source-first `conform-i2` profile and official I2 entry followed by I2 exit.
+
+PROPOSAL-036 / ADR-0033 / Canon plan 05 close SYS-7 by recording only an
+inactive, transport-neutral I3 entry contract. Candidate A, a TLS-over-TCP
+framed reliable-stream adapter, and Candidate B, a QUIC reliable-stream
+adapter, are both **UNSELECTED**; QUIC datagrams are not admitted or evaluated.
+No protocol version, codec, public wire, library, certificate representation,
+port, retry policy, or deployment topology is selected. Transport, connection,
+session, certificate, and route metadata are not authority. OPEN-032 remains
+unresolved, and I3 implementation or activation requires fresh owner direction
+and a new roadmap.
+
+Theory remains T1 and broad PHASE-I1 remains unaccepted because OPEN-026/027
+and the full carrier freeze remain. The closed program claims no final/public
+grammar, CLI, API, ABI, wire or devtools schema; real sockets/multi-process/WAN;
+durable distributed persistence; browser/View product; production deployment;
+general theorem; exactly-once; or public product completion. With no active
+bounded program, current autonomous research follows ADR-0014's reversible L3
+`working/WRK-####` route and L2 remains fail-closed pending an owner-authenticated
+trust anchor. The concise control view is `docs/project-status.md`.
 
 ## SYS-5 local toy workflow
 

@@ -18,6 +18,20 @@ open_items: []
 
 ## 履歴
 
+- **2026-08-28** PROPOSAL-036 / ADR-0033 / plan/05によりSYS-7 inactive I3
+  entry contractを受理した。future goalはaccepted I2 per-locus artifactsとgenerated
+  communicationを2つ以上のOS processへ写し、authority、typed failure、source/Core
+  provenance、redaction、Mir abstract orderingを保つfinite C-distributed profileを閉じる
+  ことである。候補A TLS-over-TCP framed reliable-stream adapterと候補B QUIC reliable-
+  stream adapterはともにUNSELECTEDで、QUIC datagramはadmit/evaluateしない。version、
+  codec、wire、library、certificate format、port、deploymentは未選定。transport/session/
+  certificateはauthorityでなく、internal carrierとfuture public wireを分離し、complete
+  failure matrix、explicit retry/no exactly-once、network-order refinement、SCN-01/02/03/06
+  future C-distributed gatesを要求する。SYS-7とADR-0026 programをcloseし、Plan 249を
+  closed recordとした。現在active program/roadmap/goalはない。theory T1、broad I1
+  residual、official I2 exitは不変で、I3 inactive、OPEN-032 unresolved。future I3 workは
+  new owner directionを必要とする。runtime/test/Lean/model/OBL/SCNは変更しない。
+
 - **2026-08-28** PROPOSAL-035 / ADR-0032 / spec/15 により、accepted cut
   `5429712de89a7e41c46cfd7fb4a39c4a492864c4`のSYS-6 source-first finite I2
   conformance profileを受理した。actual SYS-2--SYS-5 producer evidenceとfixed

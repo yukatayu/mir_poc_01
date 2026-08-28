@@ -58,14 +58,14 @@ source hierarchy; do not treat an external chat as normative state.
      A frozen L2 record is retained and followed by a successor, not demoted in
      place. Neither is an L0/L1 decision, implementation contract,
      or proof/ledger change.
-   - The owner-approved Mir Theory v0 / I1+ Milestones 0--10 program is closed;
-     ADR-0015 and Plan 247 remain its immutable authority/history baseline.
-     The active successor is the ADR-0026 Mirrorea I2 Systems Foundation
-     SYS-0--SYS-7 bounded program. Follow its sole current roadmap,
-     `plan/249-mirrorea-i2-systems-foundation-current-roadmap.md`, and apply
-     bounded Canon, proof-ledger, implementation, test, and status changes only
-     when the active SYS milestone acceptance criteria and independent evidence
-     support them.
+   - The owner-approved Mir Theory v0 / I1+ Milestones 0--10 program and the
+     Mirrorea I2 Systems Foundation SYS-0--SYS-7 program are both closed.
+     ADR-0015 / Plan 247 and ADR-0026 / Plan 249 remain their immutable
+     authority/history baselines; neither grants successor authority or remains
+     a current queue. ADR-0033 and canon plan/05 preserve an inactive,
+     transport-neutral I3 entry contract, but I3 is not authorized or active.
+     There is currently no active bounded program, roadmap, or goal. Until new
+     owner direction designates one, follow ADR-0014's ordinary research route.
 
 3. **Respect decision levels**
    - `L0` = foundational / changing it affects the whole system.
@@ -100,11 +100,11 @@ source hierarchy; do not treat an external chat as normative state.
      standing predicate; L2 promotion is currently fail-closed and, after an
      owner-authenticated trust anchor exists, additionally needs final-cut
      review.
-     The ADR-0015 M0--M10 program is closed and grants no successor authority.
-     The new owner direction is recorded separately by ADR-0026 and governs
-     only SYS-0--SYS-7. Outside that active bounded program, work follows
-     ADR-0014 as applicable; escalate changes to L0/L1, core/external contracts,
-     SCN/Gate/Phase, any `theory/11` state, or a new moratorium-protected lane.
+     The ADR-0015 M0--M10 and ADR-0026 SYS-0--SYS-7 programs are closed and
+     grant no successor authority. ADR-0033 records only an inactive I3 entry
+     contract. Current work follows ADR-0014 as applicable; escalate changes to
+     L0/L1, core/external contracts, SCN/Gate/Phase, any `theory/11` state, or a
+     new moratorium-protected lane.
 
 ## Strong project-specific constraints
 
@@ -186,8 +186,8 @@ Every report should contain, in this order:
   designated current roadmap. A closed program may have neither; its last
   roadmap remains a closed record/regression baseline until owner direction
   designates a successor. Older `plan/` files remain repository memory, not an
-  active queue. The active roadmap is Plan 249; Plan 247 is the closed M0--M10
-  baseline.
+  active queue. Plan 247 and Plan 249 are closed baselines. There is currently
+  no active roadmap or semantic milestone.
 - Do not read `docs/reports/` in bulk. Read only reports directly referenced by
   current Canon, roadmap, or status.
 - Open a new `WRK-####` only when it has a named direct consumer, reduces the
@@ -200,7 +200,7 @@ Every report should contain, in this order:
 
 ## Editing policy
 
-- `mirrorea_canon/` contains normative documents. Edit canon only through the canon process: proposal, owner decision, required ADR / changelog / index update. ADR-0015 records the closed Mir Theory v0 / I1+ M0--M10 authority and grants no successor authority. ADR-0026 separately records the active Mirrorea I2 Systems Foundation SYS-0--SYS-7 owner direction and permits evidence-gated milestone updates without repeated owner confirmation inside that bounded scope. Work outside it follows ADR-0014 as applicable; ADR-0014 permits agent-maintained L3 work only in `working/WRK-####`, and L2 promotion remains fail-closed pending an owner-authenticated trust anchor.
+- `mirrorea_canon/` contains normative documents. Edit canon only through the canon process: proposal, owner decision, required ADR / changelog / index update. ADR-0015 and ADR-0026 record closed bounded programs and grant no successor authority. ADR-0033 records an inactive I3 entry contract, not authority to implement it. With no active bounded program, work follows ADR-0014 as applicable; ADR-0014 permits agent-maintained L3 work only in `working/WRK-####`, and L2 promotion remains fail-closed pending an owner-authenticated trust anchor.
 - Legacy LAB `specs/` remain historical evidence and implementation memory. Edit carefully, and do not treat them as canonical unless the claim is mirrored into `mirrorea_canon/`.
 - If you change a normative statement, add an explicit note to the report.
 - `Documentation.md` should stay concise and current.

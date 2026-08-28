@@ -45,3 +45,4 @@ open_items: []
 | ADR-0030 | generated-plan-only independent locus runtime、finite ST/OW1 dispatch、typed fault、ST cut/restore、designated-only checked patchをcut `22196f93...`で採用、SYS-4 close | L1 |
 | ADR-0031 | 四locus local toy fabric、source-bound leave/fresh lineage、failure-atomic ST candidate、observer-safe joined devtoolsをcut `53a21e64...`で採用、SYS-5 close | L1 |
 | ADR-0032 | source-first finite I2 conformanceをcut `5429712d...`で採用、broad I1を残してofficial I2 entry後exit、SYS-6 close | L1 |
+| ADR-0033 | transport-neutral inactive I3 entry contractを採用し、候補未選定・I3 inactiveのままSYS-7 / ADR-0026 program close | L1 |

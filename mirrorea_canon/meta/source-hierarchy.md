@@ -2,8 +2,8 @@
 id: meta/source-hierarchy
 status: L0-frozen
 maturity: draft
-depends_on: [adr/ADR-0012, adr/ADR-0014, adr/ADR-0015, adr/ADR-0026]
-summary: canon > LAB の正本関係、closed ADR-0015、active ADR-0026、program外ADR-0014 routeの境界。
+depends_on: [adr/ADR-0012, adr/ADR-0014, adr/ADR-0015, adr/ADR-0026, adr/ADR-0033]
+summary: canon > LAB、closed ADR-0015/0026 programs、inactive I3 contract、current ADR-0014 routeの境界。
 open_items: []
 ---
 
@@ -19,7 +19,7 @@ open_items: []
 2. LAB README / AGENTS.md の冒頭に同旨の 3 行を追記(既存本文は改変しない — evidence の凍結保存)。
 3. `mir_hilight.html` の KEYWORDS から `world` を除去、または「歴史的表示」と注記。
 4. clean-near-end 系サンプルに「旧語彙(world 等)を含む歴史的 suite」の注記 1 行。
-5. LAB への新規追加は implementation、test、proof/evidence、roadmap/report 等の非規範成果物とする。active ADR-0026 program で必要な新 lane/helper/schema/CI surface は current milestone の direct consumer と falsifier を持ち、Canon consequence と独立 review を伴う場合だけ追加できる。program 外の ADR-0014 research artifact は既存の許可済み lane に限る。
+5. LAB への新規追加は implementation、test、proof/evidence、roadmap/report 等の非規範成果物とする。現在active bounded programはない。new owner directionまではADR-0014 research artifactを既存の許可済みlaneに限り、standing direct-consumer/falsifier条件を守る。
 
 ## 移行規則
 
@@ -33,15 +33,16 @@ ADR-0015 / PROPOSAL-018 の M0--M10 bounded program は閉じている。Plan 24
 M10 cuts は immutable history / regression baseline であり、successor work の権限又は
 current queue ではない。
 
-ADR-0026 / PROPOSAL-029 の SYS-0--SYS-7 bounded program が active であり、sole current
-LAB roadmap は Plan 249 である。`root/design-constitution` は North Star/ADR の下で
-後続 Canon を拘束する current decision filter であり、LAB roadmap/report はそれを
-再解釈しない。`.mir` source、Rust、Lean、tests、generated traces は normative Canon
-rules の implementation/evidence であり、存在だけで規範、proof、Gate、Phase、又は
-lifecycle acceptance を変更しない。規範変更は proposal/ADR/changelog/index、実証は
-milestone report と proof ledger に追跡する。
+ADR-0026 / PROPOSAL-029 の SYS-0--SYS-7 bounded program はADR-0033によりclosedで、
+Plan 249はclosed execution recordである。ADR-0033 / plan/05のI3 entry contractは
+inactiveであり、current queueではない。現在active bounded program / roadmap / goalは
+ない。`root/design-constitution` は North Star/ADR の下で後続 Canon を拘束する current
+decision filterであり、LAB roadmap/reportはそれを再解釈しない。`.mir` source、Rust、
+Lean、tests、generated tracesはnormative Canon rulesのimplementation/evidenceであり、
+存在だけで規範、proof、Gate、Phase、又はlifecycle acceptanceを変更しない。規範変更は
+proposal/ADR/changelog/index、実証はmilestone reportとproof ledgerに追跡する。
 
-active ADR-0026 program 外の ADR-0014 delegated route でも canon > LAB は変わらない。LAB は candidate /
+現在の ADR-0014 delegated routeでも canon > LAB は変わらない。LAB は candidate /
 alternative / countermodel / command evidence / review / supersession history を保持
 する。canon の agent-maintained state は `working/WRK-####` だけであり、standing
 eligibility predicate と frozen final-cut review に従う。現行の

@@ -1,6 +1,6 @@
 {
  "canon_version": "0.1.0",
- "files": 188,
+ "files": 191,
  "entries": [
   {
    "id": "root/changelog",
@@ -12,7 +12,7 @@
    "summary": "canon 自体の版履歴と改定手続きの要約。",
    "open_items": [],
    "path": "CHANGELOG.md",
-   "bytes": 25059
+   "bytes": 26288
   },
   {
    "id": "root/design-constitution",
@@ -52,7 +52,7 @@
    "summary": "知識マップ 1 枚。全域の依存図、3 種の読み筋、ID 体系。",
    "open_items": [],
    "path": "MAP.md",
-   "bytes": 28119
+   "bytes": 29255
   },
   {
    "id": "root/north-star",
@@ -74,7 +74,7 @@
    "summary": "canon の入口。正本宣言、LAB(既存 repo)との関係、読み順、版。",
    "open_items": [],
    "path": "README.md",
-   "bytes": 4137
+   "bytes": 4210
   },
   {
    "id": "adr/ADR-0001",
@@ -538,6 +538,22 @@
    "bytes": 4664
   },
   {
+   "id": "adr/ADR-0033",
+   "status": "L1-fixed",
+   "maturity": "reviewed",
+   "depends_on": [
+    "adr/ADR-0026",
+    "adr/ADR-0032",
+    "meta/proposal-036"
+   ],
+   "summary": "SYS-7 inactive I3 entry contractを採用し、transport未選定・I3 inactiveのままADR-0026 programを閉じる。",
+   "open_items": [
+    "OPEN-032"
+   ],
+   "path": "adr/ADR-0033.md",
+   "bytes": 4300
+  },
+  {
    "id": "adr/readme",
    "status": "L1-fixed",
    "maturity": "draft",
@@ -547,7 +563,7 @@
    "summary": "決定記録の一覧と読み方。LAB の決定台帳(specs/12)との関係。",
    "open_items": [],
    "path": "adr/README.md",
-   "bytes": 4173
+   "bytes": 4321
   },
   {
    "id": "arch/01-strata",
@@ -712,12 +728,13 @@
     "adr/ADR-0014",
     "adr/ADR-0015",
     "adr/ADR-0026",
+    "adr/ADR-0033",
     "plan/02-operating-model"
    ],
-   "summary": "agent の読込、active I2 Systems Foundation bounded autonomy、closed Mir v0/I1+、通常L3 research、review/owner escalation境界。",
+   "summary": "agent の読込、closed ADR-0015/0026 programs、inactive I3 contract、通常L3 research、review/owner escalation境界。",
    "open_items": [],
    "path": "meta/agent-instructions.md",
-   "bytes": 4842
+   "bytes": 4351
   },
   {
    "id": "meta/proposal-001",
@@ -1309,6 +1326,28 @@
    "bytes": 8609
   },
   {
+   "id": "meta/proposal-036",
+   "status": "L1-fixed",
+   "maturity": "reviewed",
+   "depends_on": [
+    "root/north-star",
+    "root/design-constitution",
+    "adr/ADR-0026",
+    "adr/ADR-0032",
+    "arch/04-runtime-carriers",
+    "theory/04-ordering-and-cuts",
+    "theory/05-authority",
+    "theory/07-observation",
+    "spec/06-conformance"
+   ],
+   "summary": "SYS-7のtransport-neutral inactive I3 entry contractを採用し、transport未選定のままADR-0026 programを閉じる提案。",
+   "open_items": [
+    "OPEN-032"
+   ],
+   "path": "meta/proposals/PROPOSAL-036-sys7-i3-entry-contract.md",
+   "bytes": 8260
+  },
+  {
    "id": "meta/source-hierarchy",
    "status": "L0-frozen",
    "maturity": "draft",
@@ -1316,12 +1355,13 @@
     "adr/ADR-0012",
     "adr/ADR-0014",
     "adr/ADR-0015",
-    "adr/ADR-0026"
+    "adr/ADR-0026",
+    "adr/ADR-0033"
    ],
-   "summary": "canon > LAB の正本関係、closed ADR-0015、active ADR-0026、program外ADR-0014 routeの境界。",
+   "summary": "canon > LAB、closed ADR-0015/0026 programs、inactive I3 contract、current ADR-0014 routeの境界。",
    "open_items": [],
    "path": "meta/source-hierarchy.md",
-   "bytes": 3642
+   "bytes": 3666
   },
   {
    "id": "meta/style-guide",
@@ -1330,12 +1370,14 @@
    "depends_on": [
     "root/readme",
     "adr/ADR-0014",
-    "adr/ADR-0015"
+    "adr/ADR-0015",
+    "adr/ADR-0026",
+    "adr/ADR-0033"
    ],
-   "summary": "執筆規約。front matter schema、ID、claim、bounded program と通常 route の改定手続き。",
+   "summary": "執筆規約。front matter schema、ID、claim、closed bounded program と通常 route の改定手続き。",
    "open_items": [],
    "path": "meta/style-guide.md",
-   "bytes": 4267
+   "bytes": 4107
   },
   {
    "id": "plan/00-gates",
@@ -1357,6 +1399,7 @@
    "depends_on": [
     "plan/00-gates",
     "plan/02-operating-model",
+    "plan/05-i3-entry-contract",
     "spec/06-conformance",
     "meta/source-hierarchy",
     "adr/ADR-0013",
@@ -1370,14 +1413,15 @@
     "adr/ADR-0030",
     "adr/ADR-0031",
     "adr/ADR-0032",
+    "adr/ADR-0033",
     "plan/04-t0-g0-semantic-assertion-profile"
    ],
-   "summary": "実装フェーズT0-T2/I1-I6。theory T1とbroad I1 residualを保ち、SYS-6 closeでofficial I2 entry/exitを受理、SYS-7 active。",
+   "summary": "実装フェーズT0-T2/I1-I6。theory T1、broad I1 residual、official I2 exit、inactive I3 entry contract、closed ADR-0026 programを分離する。",
    "open_items": [
     "OPEN-032"
    ],
    "path": "plan/01-phases.md",
-   "bytes": 14046
+   "bytes": 14941
   },
   {
    "id": "plan/02-operating-model",
@@ -1387,12 +1431,13 @@
     "adr/ADR-0012",
     "adr/ADR-0014",
     "adr/ADR-0015",
-    "adr/ADR-0026"
+    "adr/ADR-0026",
+    "adr/ADR-0033"
    ],
-   "summary": "active I2 Systems Foundation、closed Mir v0/I1+、通常L3 researchを分離し、goal statement、単一frontier/roadmap、direct-consumer/report/WRK/candidate/review/evidence規律を定める。",
+   "summary": "closed bounded programs、inactive I3 entry contract、通常L3 researchを分離し、goal/frontier/roadmap/report/review/evidence規律を定める。",
    "open_items": [],
    "path": "plan/02-operating-model.md",
-   "bytes": 8675
+   "bytes": 8810
   },
   {
    "id": "plan/03-risks",
@@ -1421,6 +1466,30 @@
    "bytes": 4943
   },
   {
+   "id": "plan/05-i3-entry-contract",
+   "status": "L1-fixed",
+   "maturity": "reviewed",
+   "depends_on": [
+    "adr/ADR-0033",
+    "arch/04-runtime-carriers",
+    "theory/04-ordering-and-cuts",
+    "theory/05-authority",
+    "theory/07-observation",
+    "theory/08-patch-hotplug",
+    "spec/06-conformance",
+    "scenarios/SCN-01",
+    "scenarios/SCN-02",
+    "scenarios/SCN-03",
+    "scenarios/SCN-06"
+   ],
+   "summary": "inactive I3 goal、transport-neutral adapter、failure/order refinement、future C-distributed entry gates。",
+   "open_items": [
+    "OPEN-032"
+   ],
+   "path": "plan/05-i3-entry-contract.md",
+   "bytes": 11620
+  },
+  {
    "id": "plan/readme",
    "status": "L1-fixed",
    "maturity": "draft",
@@ -1429,12 +1498,13 @@
     "adr/ADR-0014",
     "adr/ADR-0015",
     "adr/ADR-0026",
+    "adr/ADR-0033",
     "plan/02-operating-model"
    ],
-   "summary": "Gate/Phase二軸、closed ADR-0015、active ADR-0026、program外ADR-0014の計画読解。",
+   "summary": "Gate/Phase二軸、closed ADR-0015/0026 programs、inactive I3 entry contract、通常ADR-0014 routeの計画読解。",
    "open_items": [],
    "path": "plan/README.md",
-   "bytes": 1302
+   "bytes": 1492
   },
   {
    "id": "scenarios/readme",

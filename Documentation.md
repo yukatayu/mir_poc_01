@@ -8,15 +8,15 @@ notes. If LAB text conflicts with canon, canon wins.
 ## この文書の役割
 
 この文書はリポジトリを読み始めるための短い案内です。規範判断は
-`mirrorea_canon/`、現在地は `docs/project-status.md`、active Mirrorea I2 Systems
-Foundation roadmap は `plan/249-mirrorea-i2-systems-foundation-current-roadmap.md`、
+`mirrorea_canon/`、現在地は `docs/project-status.md`、closed Mirrorea I2 Systems
+Foundation record は `plan/249-mirrorea-i2-systems-foundation-current-roadmap.md`、
 閉じた M0--M10 record は `plan/247-mir-theory-v0-i1plus-current-roadmap.md`、task ごとの
 不変な証跡は `docs/reports/` にあります。
 
 下の `plan/` 索引は時系列の LAB repository memory です。索引にある候補や過去の
-「次」は current queue を意味しません。active roadmap は Plan 249 だけであり、
-SYS-0--SYS-6 completed、active goal はSYS-7だけです。Plan 247と
-older plansはhistorical memoryです。現在の停止線は
+「次」は current queue を意味しません。Plan 247とPlan 249はclosed execution
+recordsであり、現在はactive roadmap / goalがありません。older plansもhistorical
+memoryです。現在の停止線は
 `docs/project-status.md`、`progress.md`、`tasks.md` で確認します。
 
 M0 Bootstrap、M1 Constitution、M2 semantic-assertion T0/G0 closeout、M3
@@ -32,8 +32,8 @@ reviewer ACCEPT no P0/P1/P2 である。これは frozen SCN-01..10 の有限 I1
 deterministic reference profile acceptance であり、broad PHASE-I1 exit、I2 activation、
 final public grammar/diagnostic ABI/wire/carrier freeze、socket、production、general theorem、
 public product completion は主張しない。2026-08-26のowner directionはADR-0026により
-SYS-0--SYS-7のMirrorea I2 Systems Foundation bounded programを開始した。現在は
-**SYS-0--SYS-6 completed**、**SYS-7 active**。ADR-0027の
+SYS-0--SYS-7のMirrorea I2 Systems Foundation bounded programを開始した。このprogramは
+**SYS-0--SYS-7 completed / closed**。ADR-0027の
 crate-private kernel/internal carrier cutと、ADR-0028のST/OW1 bounded refinement cut
 `920d3fe0...`を受けている。ADR-0029のprojectionは初回cut `ded622fe...`を
 E-CONSUME evaluator→named-consumer path欠落によりpartial regression evidenceへ
@@ -52,8 +52,12 @@ reacquire、typed auth failure を実行できることを示した。PROPOSAL-0
 Canon spec 15 / OBL-063 はSYS-6 cut `5429712d...`のdownstream-only
 `conform-i2` producer/verifierを受理し、exact 22 rows、executed positive/falsifier、
 actual provenance、selected ST/OW1、typed rejection、observer-safe outputを閉じた。
-ADR-0032はofficial I2 entry後exitを受理した。theory T1とbroad PHASE-I1は不変で、
-**active goal はSYS-7** inactive I3 entry contract only、I3はinactiveである。M2 は
+ADR-0032はofficial I2 entry後exitを受理した。accepted implementation/evidence cutは
+`5429712d...`、Canon/status integration cutは`bcb0f767...`である。PROPOSAL-036 /
+ADR-0033 / Canon plan 05はSYS-7を閉じ、TLS-over-TCP framed reliable streamとQUIC
+reliable streamをともにUNSELECTEDとしたtransport-neutralなinactive I3 entry contract
+だけを記録した。QUIC datagramは未admit・未評価で、OPEN-032は未解決である。theory T1
+とbroad PHASE-I1は不変、I3はinactive、active roadmap / goalはない。M2 は
 `mirrorea_canon/plan/04-t0-g0-semantic-assertion-profile.md` と ADR-0017 に、revision
 `644ec1cdfa7d69600af3463ab60a6b7d745913c8` から再生成した v3 `pass` digest を記録し、
 G0-D3、G0 exit、T1 entry を順に受理した。official lifecycle は `T1` のままであり、
@@ -67,7 +71,7 @@ proof ledger は M10 で変更していない。
 | T0/G0 v3 acceptance | `mirrorea_canon/plan/04-t0-g0-semantic-assertion-profile.md`, `mirrorea_canon/adr/ADR-0017.md`, `plan/248-t0-g0-semantic-assertion-v3-evaluation.json` |
 | Gate / Phase | `mirrorea_canon/plan/00-gates.md`, `mirrorea_canon/plan/01-phases.md` |
 | 現在地と owner 判断 | `docs/project-status.md` |
-| active I2 Systems Foundation roadmap | `plan/249-mirrorea-i2-systems-foundation-current-roadmap.md` |
+| closed I2 Systems Foundation execution record | `plan/249-mirrorea-i2-systems-foundation-current-roadmap.md` |
 | 閉じた M0--M10 execution record | `plan/247-mir-theory-v0-i1plus-current-roadmap.md` |
 | 旧 goal-first semantic integration（historical LAB evidence） | `plan/246-goal-first-semantic-integration-and-i1-entry.md` |
 | T0 から T2 の依存 | `plan/196-t0-t2-implementation-entry-roadmap.md` |
@@ -186,12 +190,12 @@ Mir、Mirrorea、PrismCascade、Typed-Effect Wiring Platform は関連します�
   memory です。現在の queue ではありません。旧 C1/C2 candidate family は M3--M10 の
   accepted finite rulesへ置き換わる current decision sourceではなく、反例・設計履歴として
   読みます。
-- Plan 247 は名前に `current-roadmap` を含みますが、現在は closed execution record / R5
-  regression baseline です。active roadmapはPlan 249だけです。
+- Plan 247 と Plan 249 は名前に `current-roadmap` を含みますが、現在はいずれも
+  closed execution record / regression baseline です。active roadmap はありません。
 - ADR-0026 は accepted finite semantics を per-locus artifact/generated communication/
   in-process dispatch/typed devtoolsへ進めるSYS-0--SYS-7をowner-authorized bounded
-  programとして開始しました。SYS-0--SYS-6はcompleted / closed、active goalはSYS-7
-  だけです。ADR-0027はOPEN-030をI2 internal bounded contractとしてだけ
+  programとして開始し、SYS-0--SYS-7 completed / closedで終了しました。ADR-0027は
+  OPEN-030をI2 internal bounded contractとしてだけ
   解決し、ADR-0028はそのST/OW1 orderingとlive M9 generation residualをfinite scopeで
   閉じた。ADR-0029はchecked Coreからowned per-locus fragmentsとgenerated plansを
   deterministicに作るfinite internal projectionを選択した。consumer path反例で一度
@@ -207,8 +211,10 @@ Mir、Mirrorea、PrismCascade、Typed-Effect Wiring Platform は関連します�
   artifacts -> generated communication -> runtime occurrence -> joined typed devtools
   を確認できるようにした。PROPOSAL-035 / ADR-0032 / Canon spec 15 / OBL-063は
   cut `5429712d...`の22-row finite `conform-i2` profileを受理し、official I2 entry後
-  exitを適用した。OPEN-026/027とfull carrier freezeは残り、broad PHASE-I1は未受理です。
-  program外はADR-0014のbounded L3 routeであり、L2 promotionは引き続きfail-closedです。
+  exitを適用した。PROPOSAL-036 / ADR-0033 / Canon plan 05 は transport-neutralな
+  inactive I3 entry contractを記録し、SYS-7とprogramをclosedした。OPEN-026/027とfull
+  carrier freezeは残り、broad PHASE-I1は未受理です。active programがない現在は
+  ADR-0014のbounded L3 routeであり、L2 promotionは引き続きfail-closedです。
 - reader-facing な統合図は `docs/mirrorea-project-overview.html`、短い現在地は
   `docs/project-status.md`、proof status は Canon ledger、runnable LAB evidence は
   `samples_progress.md` を使います。
@@ -221,8 +227,8 @@ Mir、Mirrorea、PrismCascade、Typed-Effect Wiring Platform は関連します�
 | T1 | 計算体系・G1-G3 statement | official theory lifecycle remains here; bounded I2 exit does not move Theory or broad PHASE-I1 |
 | T2 | OBL-020/021/002 skeleton・G5 statement | not reopened; general T2 obligations unchanged, while SYS-2/3 add bounded OBL-058/059/060 only |
 | I1 | 単一 process reference implementation | finite deterministic reference profile accepted by M10 R5, but broad PHASE-I1 exit / public contract are not claimed |
-| I2 | process 内 multi-place | ADR-0032 accepted official entry then exit from SYS-3--SYS-6 evidence; SYS-7 is active, I3 inactive |
-| I3 | 実 socket transport | I2 後。最初の real LAN phase |
+| I2 | process 内 multi-place | ADR-0032 accepted official entry then exit from SYS-3--SYS-6 evidence; ADR-0033 closed SYS-7/program |
+| I3 | 実 socket transport | inactive entry contract only; both transport candidates unselected, OPEN-032 unresolved |
 | I4-I6 | 永続/patch、View、分散永続/federation | 後段 |
 
 M10 の finite acceptance は broad I1 exit や I2 entry の代用ではありません。ADR-0026 /
@@ -235,14 +241,14 @@ recordが揃ったためofficial I2 entry後exitを受理しました。broad PH
 
 ## Planning / status snapshot
 
-- done: SYS-0--SYS-6 are completed inside ADR-0026 / Plan 249. The latest
-  accepted implementation/evidence cut is SYS-6 `5429712d...`; official I2
-  entry then exit is accepted.
-- in-progress: SYS-7 inactive I3 entry contract only is the sole active goal.
-- blocked: no owner decision currently blocks SYS-7. Broad PHASE-I1 exit,
-  final public API/ABI/wire/carrier freeze, real transport selection/
-  implementation, I3 activation, production, and browser/View product remain
-  intentionally outside the current program claim.
+- done: SYS-0--SYS-7 and the ADR-0026 / Plan 249 program are closed. Accepted
+  SYS-6 implementation/evidence cut is `5429712d...`, Canon/status integration
+  cut is `bcb0f767...`, and official I2 entry then exit is accepted.
+- in-progress: none. There is no active bounded program, roadmap, or goal.
+- blocked/deferred: I3 remains inactive and OPEN-032 unresolved. Real transport
+  selection/implementation requires new owner direction. Broad PHASE-I1 exit,
+  final public API/ABI/wire/carrier freeze, production, and browser/View product
+  remain outside the accepted claim.
 - decisions taken: SYS-5 closes only the bounded local toy/devtools workflow:
   four-locus source-derived projection, generated in-process dispatch, joined
   observer-safe causal rows, local save/restore, one accepted designated-only
@@ -251,6 +257,9 @@ recordが揃ったためofficial I2 entry後exitを受理しました。broad PH
 - decisions taken: SYS-6 accepts a downstream-only exact 22-row source-first
   profile and applies official I2 entry then exit through ADR-0032; the command
   itself remains non-authorizing.
+- decisions taken: SYS-7 accepts only an inactive entry contract with two
+  unselected reliable-stream candidates, transport as non-authority, complete
+  future failure/order requirements, and SCN-01/02/03/06 C-distributed gates.
 - open risks: OW1 cut/patch remains a typed `BackendIneligible` residual;
   SYS-5/SYS-6 CLI/JSON/grammar are internal/provisional, the four-locus toy is
   not whole-workflow OW1, and the evidence is not a general scheduler,
@@ -259,7 +268,7 @@ recordが揃ったためofficial I2 entry後exitを受理しました。broad PH
   2598, focused 25+8 / 28 / 28 / 104 / 62 / M10 67+4, full workspace,
   format/Clippy/diff, and final independent ACCEPT.
 
-## Historical plan index（Plan 249以外はrepository memory、current queueではない）
+## Historical plan index（Plan 249を含めrepository memory、current queueではない）
 
 以下の `plan/` はすべて設計経緯を保持する repository memory です。再開対象や現在の
 実行順ではありません。現行の停止線と判断待ちは `docs/project-status.md`、

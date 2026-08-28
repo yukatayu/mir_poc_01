@@ -16,9 +16,9 @@
 ## 先に読む順序
 
 ADR-0015 の Mir Theory v0 / I1+ M0--M10 execution とPlan 247はclosed LAB
-record / regression baselineである。2026-08-26のowner directionを記録したADR-0026の
-sole current LAB roadmapは
-`plan/249-mirrorea-i2-systems-foundation-current-roadmap.md`である。SYS-0はclosed、
+record / regression baselineである。2026-08-26のowner directionを記録したADR-0026
+のSYS-0--SYS-7 programとPlan 249もclosed LAB recordであり、現在はactive program /
+current roadmap / active goalがない。SYS-0はclosed、
 SYS-1もsource cut `94e3707c...`でclosed、SYS-2もsource cut `920d3fe0...`で
 closed。SYS-3は初回candidate cut `ded622fe...`をE-CONSUME consumer path欠落により
 partial regression evidenceへ戻して一度reopenし、corrected source/evidence cut
@@ -31,8 +31,10 @@ four-locus headless toy、actual generated dispatch、leave/fallback/fresh reacq
 observer-safe joined causal view、local save/restore、accepted/rejected patch、
 revocation/verificationの有限workflowを受理した。SYS-6はcut `5429712d...`の
 source-first exact 22-row `conform-i2` profileを受理し、ADR-0032はofficial I2
-entry後exitを適用した。active goalはSYS-7 I3 entry contract onlyであり、I3は
-inactive、OPEN-032 transport selectionはfuture owner-authorized decisionまで未決である。
+entry後exitを適用した。SYS-7はPROPOSAL-036 / ADR-0033 / Canon plan/05として
+transport-neutralなinactive I3 entry contractだけを記録してclosedした。I3は
+inactive、OPEN-032 transport selectionはfuture owner-authorized decisionまで未決であり、
+開始には新しいowner directionとcurrent roadmapが必要である。
 legacy M8 `AlreadyConsumed`又はaccepted M10
 duplicate-delivery behaviorは変更せず、SYS-4 wrapperのexact semantic-consumption
 identityと明確に分ける。SYS-4 contractの正本はPROPOSAL-033 / ADR-0030 /
@@ -955,13 +957,14 @@ Canonのままなので、program activationをbroad I1/I2 lifecycle acceptance�
   `plan/248-t0-g0-semantic-assertion-v3-evaluation.json`
   (M2 LAB evidence; reproduced `pass` digest accepted by Canon ADR-0017 while
   v1/v2 remain historical artifacts.)
-- Mirrorea I2 Systems Foundation current roadmap:
+- Mirrorea I2 Systems Foundation closed execution roadmap:
   `plan/249-mirrorea-i2-systems-foundation-current-roadmap.md`
-  (ADR-0026 SYS-0--SYS-7 bounded program の sole current queue。SYS-0--SYS-6は
-  completed / closed、SYS-6 finite I2 assurance/conformanceのaccepted cutは
-  `5429712d...`（PROPOSAL-035 / ADR-0032 / Canon spec/15 / OBL-063）、SYS-7 I3
-  entry contract onlyがsole active goal。I3はinactive。
-  Plan 247/M10はclosed baselineのまま。)
+  (ADR-0026 SYS-0--SYS-7 bounded program のclosed record。SYS-6 finite I2
+  assurance/conformanceのaccepted implementation cutは`5429712d...`、Canon/status
+  integration cutは`bcb0f767...`（PROPOSAL-035 / ADR-0032 / Canon spec/15 /
+  OBL-063）。SYS-7はPROPOSAL-036 / ADR-0033 / Canon plan/05のinactive I3 entry
+  contractを記録してclosedした。Plan 247/M10もclosed baselineのままで、active
+  roadmap / goalはない。)
 
 ## maintenance rule
 

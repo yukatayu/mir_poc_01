@@ -1,20 +1,19 @@
 # progress
 
-最終更新: 2026-08-28 18:58 JST
+最終更新: 2026-08-28 20:06 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
 `mirrorea_canon/` is LAB: evidence, history, implementation, and operational
-notes. If LAB text conflicts with canon, canon wins. This is a concise LAB
-snapshot and creates no Canon, Gate, Phase, proof, or compatibility decision.
+notes. If LAB text conflicts with canon, canon wins. This concise LAB snapshot
+creates no Canon, Gate, Phase, proof, lifecycle, or compatibility decision.
 
 ## document role
 
-Current lifecycle and semantics come from Canon. Plan 249 is the sole current
-execution roadmap, Plan 247 is the closed M0--M10 record, and milestone reports
-hold detailed evidence. This file mirrors workflow readiness, remaining gates,
-and whether work is self-driven, research-discovered, owner-reserved, or
-dependent on a later program.
+Plan 247 and Plan 249 are closed execution records. There is no active bounded
+program, current roadmap, semantic milestone, or active goal. Reports retain
+detailed evidence. Current autonomous research follows ADR-0014 until fresh
+owner direction designates a successor.
 
 ## project axis
 
@@ -29,40 +28,42 @@ separable. World, Avatar, Bird, and Viewer remain sample/library vocabulary.
 ## final ideal
 
 ```text
-ordinary Mir source
--> checking / elaboration
--> ownership / authority / dependency / effect / failure / lifetime
--> per-locus executable artifacts + generated communication
--> process / network execution
--> typed trace / diagnostics / devtools
--> save / load / checked patch / hot-plug
--> View / provider / browser / renderer
--> persistent virtual-space system
+ordinary source -> checked Core -> ownership/effect/failure/lifetime
+-> per-locus artifacts + generated communication
+-> process/network execution -> typed devtools -> save/patch/hot-plug
+-> View/browser/renderer -> persistent virtual-space system
 ```
 
-The accepted I2 boundary reaches actual in-process generated dispatch and typed
-observation. Real transport and the later product layers remain outside it.
+The accepted boundary reaches in-process generated dispatch and finite typed
+assurance. Real multi-process transport and product layers remain later.
 
 ## current milestone position
 
 | Axis | Current status | Startability |
 |---|---|---|
-| Logical specification | Ordinary source -> checked Core -> per-locus artifacts -> generated communication -> actual in-process dispatch -> 22-row finite assurance is accepted. Theory stays T1 and broad PHASE-I1 stays unaccepted | **着手可能** only for SYS-7 contract work; general theory is **後段依存** |
-| User-facing specification | Provisional `project-loci`, `run-local`, `inspect`, and `conform-i2` expose the bounded workflow. Final grammar, CLI, JSON, API, ABI, artifact, devtools, and wire are unfrozen | runnable regression is **着手可能**; public surface is **要仕様確認/後段依存** |
-| Implementation / operation | SYS-6 cut `5429712d...` has 22/22 accepted finite rows and official I2 entry then exit. SYS-7 is the sole active goal and starts no transport | **着手可能** for SYS-7 entry contract only |
+| Logical specification | finite source -> Core -> artifact -> communication -> in-process trace/conformance accepted; Theory T1 and broad PHASE-I1 unaccepted | maintenance **着手可能**; general widening **後段依存** |
+| User-facing specification | provisional project/run/inspect/conform workflow exists; public grammar/CLI/JSON/API/ABI/wire/devtools unfrozen | regression **着手可能**; public contract **要仕様確認** |
+| Implementation / operation | SYS-6 cut `5429712d...`, integration cut `bcb0f767...`, official I2 entry then exit; SYS-7/program closed | I3 **後段依存** on owner direction |
 
 ```text
 Theory: T1
 Broad PHASE-I1: unaccepted (OPEN-026/027 + full carrier freeze)
 Official I2: entry accepted -> exit accepted (ADR-0032)
-ADR-0026 program: SYS-0--SYS-6 completed, SYS-7 active
+ADR-0026 program: SYS-0--SYS-7 closed (ADR-0033)
+Active roadmap / goal: none
 I3: inactive; OPEN-032 unresolved
 ```
 
-The `conform-i2` report-local lifecycle bits remain false because runtime
-evidence cannot self-authorize Canon. ADR-0032 owns the current lifecycle.
+The inactive plan/05 boundary retains Candidate A TLS-over-TCP framed reliable
+stream and Candidate B QUIC reliable stream, both **UNSELECTED**. QUIC
+datagrams are not admitted/evaluated. No version, codec, wire, library,
+certificate representation, port, retry, topology, implementation, or public
+compatibility decision exists. Transport/session/certificate/route identity
+is not authority; internal carrier and public wire remain separate. Future
+SCN-01/02/03/06 C-distributed evidence must cover the full typed network
+failure/order matrix without hidden retry or exactly-once.
 
-Sources: `mirrorea_canon/adr/ADR-0032.md`,
+Sources: `mirrorea_canon/adr/ADR-0033.md`,
 `mirrorea_canon/plan/01-phases.md`, and
 `plan/249-mirrorea-i2-systems-foundation-current-roadmap.md`.
 
@@ -70,137 +71,128 @@ Sources: `mirrorea_canon/adr/ADR-0032.md`,
 
 | Milestone | Capability | Position / evidence |
 |---|---|---|
-| M0--M10 | finite Mir Theory v0 + deterministic I1+ profile | closed; ADR-0025 / Report 2591 |
+| M0--M10 | finite Mir Theory v0 + deterministic I1+ | closed `23f5a813...`; ADR-0025 |
 | SYS-0 | authority and one goal/control path | closed; Report 2592 |
-| SYS-1 | kernel/conformance separation + internal carrier | closed at `94e3707c...`; Report 2593 |
-| SYS-2 | ST/OW1 + bounded ordering/model | closed at `920d3fe...`; OBL-058/059 |
-| SYS-3 | per-locus artifacts + generated plans | closed at `3013e7fe...`; OBL-060 |
-| SYS-4 | in-process generated dispatch | closed at `22196f93...`; OBL-061 |
-| SYS-5 | four-locus toy + joined devtools | closed at `53a21e64...`; OBL-062 |
-| SYS-6 | finite I2 conformance/lifecycle | closed at `5429712d...`; OBL-063 / ADR-0032 |
-| SYS-7 | inactive I3 goal/entry contract only | **active / terminal**; future owner program is direct consumer |
+| SYS-1 | kernel/conformance separation + carrier | closed `94e3707c...` |
+| SYS-2 | ST/OW1 + bounded ordering/model | closed `920d3fe...`; OBL-058/059 |
+| SYS-3 | per-locus artifacts + generated plans | closed `3013e7fe...`; OBL-060 |
+| SYS-4 | in-process generated dispatch | closed `22196f93...`; OBL-061 |
+| SYS-5 | four-locus toy + joined devtools | closed `53a21e64...`; OBL-062 |
+| SYS-6 | finite I2 conformance/lifecycle | closed `5429712d...`; OBL-063 / ADR-0032 |
+| SYS-7 | inactive I3 entry contract only | closed; ADR-0033 / Canon plan/05 |
 
 ## line snapshots
 
 ### Product Alpha line
 
-Historical Product Alpha and Full System V1 materials remain LAB consumers and
-examples. They are not the current semantic queue and are not public/product
-completion evidence for the accepted I2 systems foundation.
+Historical Product Alpha and Full System V1 remain LAB consumers, not the
+semantic queue or public-product completion evidence.
 
 ### Operational Suite line
 
-The canonical four-locus toy plus `project-loci`, `run-local`, `inspect`, and
-`conform-i2` form the current bounded reproducible workflow. The 22-row profile
-consumes actual SYS-2--SYS-5 evidence and executed falsifiers; it is not an
-expected-JSON facade or stable public tool contract.
+The four-locus toy plus provisional `project-loci`, `run-local`, `inspect`, and
+`conform-i2` form a bounded reproducible I2 workflow. They are not stable public
+interfaces and no network sample was added by SYS-7.
 
 ### Mir Language line
 
-Ordinary `.mir` source and checked Core remain semantic authority. The bounded
-designated-consumer and explicit relation-anchor clauses serve direct finite
-consumers and do not freeze the final grammar. Runtime reports, carriers,
-workers, transports, and paths cannot mint Core or authority.
+Ordinary `.mir` source and checked Core remain semantic authority. Bounded
+designated-consumer and relation-anchor clauses do not freeze final grammar.
+Carriers, reports, workers, transports, and schedules cannot mint Core,
+authority, state, or expected results.
 
 ### PoseGraph line
 
-The accepted relation fragment preserves explicit A-primary/B-fallback lineage,
-consumer-local late projection, presentation-gap nonmutation, leave/fresh
-incarnation boundaries, and a test-only extension pressure seam. Arbitrary DAG
-theorems and production graph generalization remain deferred.
+The accepted relation fragment preserves explicit A-primary/B-fallback
+lineage, consumer-local late projection, presentation-gap nonmutation, and
+leave/fresh incarnation. Arbitrary DAG theory remains deferred.
 
 ### Projection/Backend line
 
-Checked Core deterministically creates owned locus fragments and generated
-communication/effect/observation/persistence plans. SYS-4 executes those plans
-through explicit endpoints. ST is the whole-toy reference; selected OW1 uses a
-separate exactly-one-worker ordinary source. Arbitrary fairness, memory model,
-and data-race theorems remain deferred.
+Checked Core creates owned locus artifacts and generated plans; SYS-4 executes
+them across explicit endpoints. ST is the reference and selected OW1 is a
+separate exactly-one-worker source. Network refinement is inactive.
 
 ### Engine/Provider line
 
-The joined devtools and conformance outputs expose typed reference-only causal
-evidence with redaction. Provider, worker, transport, report, and receipt
-identity remain non-authority. PrismCascade, browser/View/renderer, and broader
-provider products remain separable later consumers.
+Observer-safe internal outputs are evidence surfaces, not public devtools.
+Transport authentication and providers remain non-authority. PrismCascade,
+browser/View/renderer, and upper applications remain separable.
 
 ## validation floor
 
 | Changed layer | Required evidence family |
 |---|---|
-| Canon/docs | regenerated/current INDEX, hierarchy/docs/HTML tests, `make docs`, `git diff --check` |
-| SYS-6 | library 25 + CLI 8; exact row/control/provenance/redaction checks |
-| preserved systems path | SYS-2 28, SYS-3 28, SYS-4 104, SYS-5 62 |
+| Canon/docs | regenerated INDEX, hierarchy/docs/HTML tests, `make docs`, diff check |
+| accepted SYS-6 | library 25 + CLI 8 |
+| preserved systems | SYS-2 28, SYS-3 28, SYS-4 104, SYS-5 62 |
 | M10 baseline | conformance 67 + CLI 4 |
-| workspace | all-target tests, format, warnings-denied Clippy |
-| lifecycle | independent review of broad I1 residual, I2 entry/exit, and I3 inactivity |
+| implementation close | workspace, format, warnings-denied Clippy |
+| lifecycle close | independent I2/broad-I1/I3/no-roadmap review |
 
-No unrun validation is counted as pass. Helper, report, or runtime monitor is
-not promoted into a general theorem or public-product completion claim.
+SYS-7 changes Canon/docs/status only. No production source, runtime test,
+Lean, model, OBL, SCN, or sample behavior change is claimed.
 
 ## non-claims
 
-No broad PHASE-I1 exit, Theory T2, C-distributed/socket/WAN, real transport
+No broad PHASE-I1 exit, Theory T2, socket/multi-process/WAN runtime, transport
 selection, I3 activation, public grammar/CLI/API/ABI/wire/JSON/devtools schema,
 durable distributed persistence, production/publication, browser/View product,
-four-locus whole-workflow OW1, arbitrary relation DAG/scheduler/fairness/memory/
-data-race theorem, general OBL discharge, exactly-once, lock-free runtime, or
-public product completion is claimed.
+whole-toy OW1, arbitrary relation DAG/scheduler/fairness/memory/data-race
+theorem, exactly-once, lock-free runtime, or public completion is claimed.
 
 ## user decision items vs research-discovery items
 
 | Class | Item | Current state |
 |---|---|---|
-| Self-driven | SYS-7 inactive I3 entry contract | active / terminal; no code or transport selection |
-| Research discovery | at-most-two candidate transports, failure matrix, ordering mappings, C-distributed gates | record constraints only inside SYS-7 |
-| Owner decision | OPEN-032 transport selection and I3 activation | future owner-authorized program |
-| Owner decision | public API/ABI/wire freeze, production/publication | reserved; not a SYS-7 blocker |
-| Later dependency | broad I1 carrier freeze and general theory | independent residuals; do not weaken criteria |
+| Maintenance | accepted M10/I2 regressions and docs consistency | **着手可能** |
+| Research route | reversible L3 work with direct consumer | ADR-0014 only; no active queue |
+| Research discovery | candidate comparison, network failures/order, C-distributed gates | future I3 program only |
+| Owner decision | activate I3 / create successor roadmap | required before implementation |
+| Owner decision | OPEN-032 transport choice | unresolved; comparative evidence required |
+| Owner decision | public freeze or production | reserved |
+| Later dependency | broad I1 carrier freeze/general theory | separate residual; no weaker criteria |
 
 ## macro phase map
 
 | Macro | Focus | Current position | Weight | Self-drive |
 |---|---|---|---|---|
-| 0 | governance/repository memory | ADR-0032 accepted; SYS-7 active | medium | contract/status only |
-| 1 | semantics/shared model | finite semantics through I2 assurance | heavy | maintenance |
-| 2 | parser-free evidence | historical only | medium | maintenance |
-| 3 | source/checker/runtime | source-first in-process I2 boundary | heavy | I3 contract only |
-| 4 | executable samples | toy + conform command reproducible | medium | regression |
-| 5 | theorem/model bridge | OBL-058 bounded; OBL-059--063 runtime | heavy | classification maintenance |
-| 6 | generated/distributed fabric | in-process accepted; network absent | heavy | entry contract only |
-| 7 | toolchain/backend | provisional project/run/inspect/conform | heavy | no public freeze |
-| 8 | applications | local toy is sample/library consumer | heavy | no Core promotion |
+| 0 | governance/repository memory | program closed; no queue | medium | maintenance |
+| 1 | semantics/shared model | finite semantics through I2 | heavy | ADR-0014 research only |
+| 2 | parser-free evidence | historical | medium | maintenance |
+| 3 | source/checker/runtime | in-process I2 accepted | heavy | no I3 authority |
+| 4 | executable samples | toy + conform reproducible | medium | regression |
+| 5 | theorem/model bridge | OBL-058 bounded; 059--063 runtime | heavy | class maintenance |
+| 6 | generated/distributed fabric | in-process accepted; network inactive | heavy | owner direction |
+| 7 | toolchain/backend | provisional commands | heavy | no freeze |
+| 8 | applications | toy is library/sample | heavy | no Core promotion |
 
 ## feature maturity rows
 
 | Feature/subsystem | Evidence status | Remaining gate | Startability |
 |---|---|---|---|
-| Mir core/runtime kernel | source/check/project/dispatch assured for finite I2 | broader/general/public widening | maintenance |
-| Mirrorea multi-locus fabric | generated artifacts cross in-process endpoints; official I2 exit | real multi-process transport | **後段依存** on future owner program |
-| contracts/model robustness | typed falsifiers + bounded/runtime classifications | network faults/general proof | SYS-7 contract only |
-| attach/detach/DAG evolution | leave/fresh, local cut, bounded patch | durable/general evolution | **後段依存** |
-| `atomic_cut` / ordering | high-level edges, ST, selected OW1, bounded model | network mapping/general memory | contract wording only |
-| executable samples | four-locus toy + `conform-i2` | public/product workflow | runnable regression |
-| Typed-Effect seam | typed owner/designated request/result + no-mint checks | broader providers/network | **後段依存** |
-| PrismCascade | separate performance kernel | no I2 integration required | deferred |
-| View/browser/renderer | historical boundary only | product/API program | deferred |
+| Mir core/runtime | finite source/check/project/dispatch assured | general/public widening | maintenance |
+| Mirrorea fabric | generated in-process endpoints; official I2 exit | multi-process transport | **要owner direction** |
+| contracts/model | typed falsifiers + bounded/runtime classes | network/general proof | **後段依存** |
+| attach/detach/DAG | leave/fresh, local cut, bounded patch | durable/general evolution | **後段依存** |
+| `atomic_cut` / ordering | high-level edges, ST/OW1, bounded model | network/general memory | **後段依存** |
+| samples | four-locus toy + conform | public workflow | regression possible |
+| Typed-Effect | typed request/result + no-mint | broader network/providers | **後段依存** |
+| PrismCascade | separate performance kernel | no I2 integration | deferred |
+| View/browser | historical boundary | product/API program | deferred |
 | upper applications | toy + historical consumers | no domain Core promotion | product-specific |
 
 ## recent log
 
-- 2026-08-28 18:58 JST: SYS-6 cut `5429712d...` closed the exact 22-row
-  source-first finite I2 profile. SYS-6 25+8, SYS-2/3/4/5 28/28/104/62, M10
-  67+4, workspace, format/Clippy/diff, and final independent ACCEPT support
-  ADR-0032 official I2 entry then exit. Theory T1 and broad PHASE-I1 remain;
-  SYS-7 is sole active and I3/OPEN-032 transport choice remain inactive/open.
-- 2026-08-28 14:09 JST: SYS-5 cut `53a21e64...` closed the four-locus toy and
-  joined typed devtools boundary (Report 2597 / OBL-062).
-- 2026-08-27 21:06 JST: SYS-4 cut `22196f93...` closed generated-plan-only
-  in-process dispatch, selected ST/OW1 evidence, ST cut, and bounded patch.
-- 2026-08-27 07:07 JST: corrected SYS-3 cut `3013e7fe...` closed the source-
-  derived designated-consumer projection after the earlier candidate reopen.
-- 2026-08-27 01:09 JST: SYS-2 cut `920d3fe...` closed selected ST/OW1 and
-  bounded ordering evidence.
-- 2026-08-26 23:09 JST: SYS-1 cut `94e3707c...` closed the internal runtime
-  kernel and carrier boundary.
-- 2026-08-05 15:53 JST: M10 cut `23f5a813...` accepted the finite I1+ baseline.
+- 2026-08-28 20:06 JST: SYS-7 recorded PROPOSAL-036 / ADR-0033 / Canon
+  plan/05, left both candidates unselected and OPEN-032 unresolved, closed the
+  ADR-0026 program, and left no active roadmap/goal; Report 2599 records review
+  and validation.
+- 2026-08-28 18:58 JST: SYS-6 cut `5429712d...` closed the exact 22-row I2
+  profile and ADR-0032 accepted official I2 entry then exit.
+- 2026-08-28 14:09 JST: SYS-5 cut `53a21e64...` closed toy/devtools.
+- 2026-08-27 21:06 JST: SYS-4 cut `22196f93...` closed generated dispatch.
+- 2026-08-27 07:07 JST: corrected SYS-3 cut `3013e7fe...` closed projection.
+- 2026-08-27 01:09 JST: SYS-2 cut `920d3fe...` closed ST/OW1 evidence.
+- 2026-08-26 23:09 JST: SYS-1 cut `94e3707c...` closed kernel/carrier.
+- 2026-08-05 15:53 JST: M10 cut `23f5a813...` accepted finite I1+ baseline.

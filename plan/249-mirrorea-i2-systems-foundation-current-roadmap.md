@@ -1,6 +1,6 @@
-# Plan 249 — Mirrorea I2 Systems Foundation current roadmap
+# Plan 249 — Mirrorea I2 Systems Foundation closed execution roadmap
 
-最終更新: 2026-08-28 18:40 JST
+最終更新: 2026-08-28 20:06 JST
 
 ## 役割、authority、current control state
 
@@ -10,7 +10,7 @@
 Mirrorea I2 Systems Foundation
 ```
 
-の **sole current LAB execution roadmap** である。規範正本は
+の **closed LAB execution record** である。規範正本は
 `mirrorea_canon/`、公式 Gate / Phase は
 `mirrorea_canon/plan/01-phases.md`、proof status は
 `mirrorea_canon/theory/11-metatheory-ledger.md` だけが決める。この LAB roadmap
@@ -30,7 +30,7 @@ Canon、Gate、Phase、SCN、OBL、conformance、public compatibility を変更�
   per-locus projection and executable artifact generation**, **SYS-4
   in-process generated dispatch runtime**, **SYS-5 minimal typed devtools
   and local virtual-space vertical slice**, and **SYS-6 I2 assurance,
-  conformance, and lifecycle closeout**
+  conformance, and lifecycle closeout**, and **SYS-7 I3 entry contract only**
 - accepted SYS-1 source/evidence cut:
   `94e3707c7bc98d4a0764c51f13a12b1dae1968c6`
 - accepted SYS-2 source/evidence cut:
@@ -47,24 +47,27 @@ Canon、Gate、Phase、SCN、OBL、conformance、public compatibility を変更�
   `mirrorea_canon/spec/14-sys5-local-toy-devtools.md`
 - accepted SYS-6 implementation/evidence cut:
   `5429712de89a7e41c46cfd7fb4a39c4a492864c4`
+- accepted SYS-6 Canon/status integration cut:
+  `bcb0f767edbb3e9e581c3b4c7f2a49e077f44067`
 - accepted SYS-6 contract: PROPOSAL-035 / ADR-0032 /
   `mirrorea_canon/spec/15-sys6-i2-conformance.md`
+- accepted SYS-7 contract: PROPOSAL-036 / ADR-0033 /
+  `mirrorea_canon/plan/05-i3-entry-contract.md`
 - superseded pre-correction SYS-3 candidate retained as partial regression evidence:
   `ded622fef91bab2cadc571ba944e5ee2c69a7b63`
-- active goal: **SYS-7 I3 entry contract only**
-- next goal: **none inside this program**; a future owner-authorized I3 program
-  is the direct consumer after SYS-7 closes.
-- current direct blocker: record one inactive I3 goal/entry contract over the
-  accepted I2 boundary, with at most two candidate transports, transport as
-  non-authority, internal/public carrier separation, failure/order matrix,
-  C-distributed scenarios, and explicit no-selection/no-implementation/no-
-  activation boundaries.
+- active goal: **none**
+- next goal: **none**; a future I3 program is only an inactive direct-consumer
+  contract and requires new owner direction plus a new current roadmap.
+- current direct blocker: **none inside this closed program**. OPEN-032 remains
+  unresolved for a future owner-authorized I3 transport comparison.
 - official lifecycle: theory **T1**; broad PHASE-I1 remains unaccepted because
   OPEN-026/027 and full carrier freeze remain. ADR-0032 accepted official I2
-  entry then I2 exit from fresh SYS-6 evidence. I3 remains inactive.
+  entry then I2 exit from fresh SYS-6 evidence. ADR-0033 closed SYS-7 and the
+  ADR-0026 program. I3 remains inactive.
 
 Plan 247 は closed M0--M10 execution record / R5 regression baseline のまま保持する。
-Plan 249 以外の numbered plan、WRK、historical report は parallel queue ではない。
+Plan 249 も closed execution record であり、current queue ではない。現在は active
+roadmap / goal がない。numbered plan、WRK、historical report は parallel queue ではない。
 
 ## Program parent goal acceptance
 
@@ -97,9 +100,9 @@ Parent-goal stop evidence:
 
 ## Fixed execution order
 
-Milestone addition or reordering requires evidence that the parent goal cannot
-close without it and an explanation in this roadmap. No such addition exists
-through SYS-6.
+Milestone addition or reordering required evidence that the parent goal could
+not close without it and an explanation in this roadmap. No such addition was
+made through SYS-7.
 
 ```text
 SYS-0 Baseline and goal alignment
@@ -556,7 +559,7 @@ dependency on conformance, M10 regression, or a fresh counterexample to the
 pre-existing I2 criteria. Broad I1 remains unaccepted; no criterion was
 weakened.
 
-### SYS-7 — I3 entry contract only (active)
+### SYS-7 — I3 entry contract only (completed)
 
 **Goal ID:** SYS-7
 
@@ -587,24 +590,25 @@ production security claim, public ABI/wire freeze, I3 lifecycle entry.
 authority, omits duplicate/reorder/disconnect failures, or requires selecting
 a final wire/transport before a future program begins.
 
-**Exit evidence:** One goal sentence; candidate limit of two; internal/public
-carrier split; failure matrix; disconnect/reconnect and duplicate/reorder
-requirements; concurrency/network-order refinement; C-distributed scenarios;
-explicit non-production/non-freeze boundary; status sync and independent
-review.
+**Exit evidence:** PROPOSAL-036 / ADR-0033 / Canon plan/05 record one inactive
+goal, exactly two unselected reliable-stream candidates, internal/public
+carrier separation, the full failure matrix, disconnect/reconnect and
+duplicate/reorder requirements, network-order refinement, and future
+SCN-01/02/03/06 C-distributed gates. The contract makes no transport/version/
+codec/wire/library/port choice and starts no I3 implementation or lifecycle.
+Status is synchronized and independent pre-edit planning review returned
+ACCEPT; final closeout review is recorded in Report 2599.
 
-**Stop condition:** Close and stop the program when the entry contract is
-reviewed and recorded as inactive. Do not implement I3 without new owner
-direction.
+**Stop condition:** Satisfied. SYS-7 and the ADR-0026 program are closed. Do
+not implement I3 or resolve OPEN-032 without new owner direction.
 
 ## SYS-0 meta-alignment matrix
 
 This is the retained SYS-0 start-state decision aid for program scope, not a
-current-status table or a new semantic encyclopedia. SYS-3--SYS-6 have since
-closed the finite generated-artifact, in-process dispatch, local causal-toy,
-and I2 conformance gaps recorded here. SYS-7 is the sole active milestone and
-records only an inactive I3 entry contract; it starts no transport
-implementation.
+current-status table or a new semantic encyclopedia. SYS-3--SYS-6 closed the
+finite generated-artifact, in-process dispatch, local causal-toy, and I2
+conformance gaps recorded here. SYS-7 then recorded the inactive I3 entry
+contract without starting transport implementation. The program is closed.
 
 | Owner intent | SYS-0 Canon representation | SYS-0 implementation evidence | SYS-0 gap | This program consumer |
 | --- | --- | --- | --- | --- |
@@ -644,7 +648,7 @@ The parent/orchestrator owns integration, commit, push, and remote parity.
 Production source has one writer by default. The author of a change does not
 serve as its independent reviewer.
 
-## Current acceptance evidence and blockers
+## Accepted evidence and closed-program boundary
 
 ### SYS-0 accepted close evidence
 
@@ -883,18 +887,19 @@ regression, or a SYS-6 direct consumer unable to use the rows conservatively.
 5. ADR-0032 accepted official I2 entry then exit from the actual evidence.
    Theory T1 and broad PHASE-I1 remain unchanged; I3 is inactive.
 
-### SYS-7 current direct blockers
+### SYS-7 accepted inactive entry contract
 
-1. State one inactive future I3 program goal for mapping accepted I2 artifacts
-   and communication plans over two or more OS processes.
-2. Admit at most two candidate transports without selecting either, and keep
-   transport/session/connection identity non-authoritative.
-3. Separate internal carrier requirements from any future public wire; record
-   disconnect/reconnect, duplicate/reorder, failure containment, provenance,
-   concurrency/network-order refinement, and C-distributed scenario gates.
-4. Record no production, no public freeze, no I3 lifecycle activation, and no
-   transport implementation. OPEN-032 remains unresolved for a future
-   owner-authorized I3 decision.
+1. The future goal maps accepted I2 artifacts and communication plans over at
+   least two operating-system processes, but it is inactive.
+2. Candidate A (TLS-over-TCP framed reliable-stream adapter) and Candidate B
+   (QUIC reliable-stream adapter) are both **UNSELECTED**. QUIC datagrams are
+   not admitted or evaluated.
+3. Transport/session/certificate identity is non-authoritative. The internal
+   carrier and any future public wire remain separate. The complete typed
+   failure matrix and network-order refinement are prerequisites.
+4. Future C-distributed gates use SCN-01/02/03/06. No production, public
+   freeze, I3 lifecycle activation, or transport implementation occurred.
+   OPEN-032 remains unresolved for a future owner-authorized decision.
 
 ## Risks, assumptions, and decision checkpoints
 
@@ -928,6 +933,7 @@ regression, or a SYS-6 direct consumer unable to use the rows conservatively.
 | conformance self-certification | profile passes by trusting expected JSON, release identity, or implementation-selected omissions | derive row inventory from accepted Core/plan operations; independent negative controls and reviewer |
 | evidence laundering | bounded model called proof or helper called product | exact five-class evidence labels and non-claims |
 | report/WRK growth | metadata work opens new record | one milestone report; direct-consumer admission rule |
+| premature transport commitment | one untested stack, wire, codec, version, or library is treated as selected | keep both reliable-stream candidates UNSELECTED; require future owner direction and comparative C-distributed evidence |
 
 ### Owner-reserved stop line
 
@@ -944,7 +950,8 @@ conditions.
 
 ## Deferred scope / non-effects
 
-- real sockets, multi-process/WAN, QUIC/WebTransport selection;
+- real sockets, multi-process/WAN, and selection between TLS-over-TCP framed
+  reliable stream and QUIC reliable stream;
 - public grammar/API/ABI/wire and compatibility freeze;
 - production deployment/publication and final package marketplace;
 - durable distributed save/load, consensus, exactly-once, hidden distributed
@@ -957,16 +964,12 @@ conditions.
 
 Historical Product Alpha, Full System V1, PrismCascade, Typed-Effect Wiring,
 and upper applications remain separable LAB evidence/consumers. They are not
-silently folded into the active Mir/Mirrorea kernel.
+silently folded into the accepted Mir/Mirrorea kernel.
 
 ## Recommended next action
 
-SYS-6 is closed at accepted implementation/evidence cut `5429712d...`;
-official I2 entry then exit is accepted while theory T1 and broad PHASE-I1
-remain unchanged. SYS-7 is the sole active goal. Record only the inactive I3
-goal and entry contract: at most two candidate transports, transport as
-non-authority, internal/public carrier separation, disconnect/reconnect/
-duplicate/reorder failure matrix, network-order refinement, C-distributed
-scenario requirements, and explicit no-selection/no-implementation/no-public-
-freeze/no-production/no-I3-activation boundaries. Do not start transport code
-or resolve OPEN-032 inside SYS-7.
+Stop this closed program. There is no active roadmap or goal. Preserve the
+accepted I2 cuts and the inactive ADR-0033 / Canon plan/05 entry boundary.
+Starting I3, selecting either transport candidate, or resolving OPEN-032
+requires new owner direction, a new bounded program, and a new current
+roadmap; no transport code or public wire work begins from Plan 249.
