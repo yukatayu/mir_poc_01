@@ -29,8 +29,10 @@ restore、bounded checked patchをfinite internal profileとして受理した�
 implementation/evidence cut `53a21e64...`でclosedし、ordinary sourceからの
 four-locus headless toy、actual generated dispatch、leave/fallback/fresh reacquire、
 observer-safe joined causal view、local save/restore、accepted/rejected patch、
-revocation/verificationの有限workflowを受理した。active goalはSYS-6
-assurance/conformance closeout、next goalはSYS-7 I3 entry contract onlyである。
+revocation/verificationの有限workflowを受理した。SYS-6はcut `5429712d...`の
+source-first exact 22-row `conform-i2` profileを受理し、ADR-0032はofficial I2
+entry後exitを適用した。active goalはSYS-7 I3 entry contract onlyであり、I3は
+inactive、OPEN-032 transport selectionはfuture owner-authorized decisionまで未決である。
 legacy M8 `AlreadyConsumed`又はaccepted M10
 duplicate-delivery behaviorは変更せず、SYS-4 wrapperのexact semantic-consumption
 identityと明確に分ける。SYS-4 contractの正本はPROPOSAL-033 / ADR-0030 /
@@ -955,10 +957,10 @@ Canonのままなので、program activationをbroad I1/I2 lifecycle acceptance�
   v1/v2 remain historical artifacts.)
 - Mirrorea I2 Systems Foundation current roadmap:
   `plan/249-mirrorea-i2-systems-foundation-current-roadmap.md`
-  (ADR-0026 SYS-0--SYS-7 bounded program の sole current queue。SYS-0--SYS-5は
-  completed / closed、SYS-5 minimal typed devtools/local toyのaccepted cutは
-  `53a21e64...`（PROPOSAL-034 / ADR-0031 / Canon spec/14）、SYS-6 finite
-  I2 assurance/conformance closeoutはactive、SYS-7 I3 entry contract onlyはnext。
+  (ADR-0026 SYS-0--SYS-7 bounded program の sole current queue。SYS-0--SYS-6は
+  completed / closed、SYS-6 finite I2 assurance/conformanceのaccepted cutは
+  `5429712d...`（PROPOSAL-035 / ADR-0032 / Canon spec/15 / OBL-063）、SYS-7 I3
+  entry contract onlyがsole active goal。I3はinactive。
   Plan 247/M10はclosed baselineのまま。)
 
 ## maintenance rule

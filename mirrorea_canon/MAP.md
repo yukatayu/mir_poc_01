@@ -15,7 +15,7 @@ open_items: []
 NORTH-STAR (軸)
    │
    ▼
-adr/ (決定 ADR-0001..0031) ◄──── GLOSSARY (概念 CON-###)
+adr/ (決定 ADR-0001..0032) ◄──── GLOSSARY (概念 CON-###)
    │
    ▼
 DESIGN-CONSTITUTION (v0/I1+ の横断判断)
@@ -46,8 +46,8 @@ plan/ (Gate 0-7 → Phase T0-T2, I1-I6)   meta/ (規約・正本関係・agent �
 ## 3 種の読み筋
 
 - **理論筋**(体系を理解・拡張する): NORTH-STAR → adr → DESIGN-CONSTITUTION → theory/00 → 01 → (関心の章) → 11 → scenarios。
-- **実装筋**(toolchain を作る): spec/02..14 → architecture/03..04 → scenarios → plan/01 の該当 Phase。
-- **運用筋**(進め方を知る): plan/00..04 → meta/agent-instructions → adr/ADR-0012 → adr/ADR-0014 → adr/ADR-0015 → adr/ADR-0026 → adr/ADR-0027 → adr/ADR-0028 → adr/ADR-0029 → adr/ADR-0030 → adr/ADR-0031。
+- **実装筋**(toolchain を作る): spec/02..15 → architecture/03..04 → scenarios → plan/01 の該当 Phase。
+- **運用筋**(進め方を知る): plan/00..04 → meta/agent-instructions → adr/ADR-0012 → adr/ADR-0014 → adr/ADR-0015 → adr/ADR-0026 → adr/ADR-0027 → adr/ADR-0028 → adr/ADR-0029 → adr/ADR-0030 → adr/ADR-0031 → adr/ADR-0032。
 
 Mir Theory v0 / I1+ Milestones 0--10 は ADR-0015--0025 と
 PROPOSAL-018--028 に従って完走した。accepted finite reference-profile の正本は
@@ -113,8 +113,22 @@ incarnation/capability/witness lineageを発行する。selected ST transition�
 candidate、post-leave cutはretired lineageを保存する。observer-safe joined reportはsource/
 Core/artifact/edge/occurrence/state/relation/designated/save/patch/failureを一つの因果線で示す。
 OBL-062はこのfinite executable/devtools evidenceだけを`runtime-monitored`とする。
-SYS-0--SYS-5はcompleted、sole active goalはSYS-6、nextはSYS-7である。theory T1、
-broad PHASE-I1、official I2 entry/exit、public contractは不変である。
+ADR-0031 acceptance時点ではSYS-0--SYS-5がcompleted、sole active goalはSYS-6、
+nextはSYS-7であり、theory T1、broad PHASE-I1、official I2 entry/exit、public
+contractは不変だった。
+
+PROPOSAL-035 / ADR-0032 / spec/15 は implementation/evidence cut
+`5429712de89a7e41c46cfd7fb4a39c4a492864c4`でSYS-6を受理した。actual
+SYS-2--SYS-5 producer evidenceをfixed 22-row verifierが検査し、ordinary source、
+checked Core/artifacts、generated communication、actual endpoint dispatch、selected
+ST/OW1、no hidden/direct remote store/source-free mint、relation/fallback/designated、
+save/patch、observer-safe devtoolsをexecuted positive/falsifier evidenceとactual
+provenanceへ結ぶ。21 rowsは`runtime-monitored`、no-source-free-authority rowは
+`model-checked-bounded`、aggregate OBL-063は`runtime-monitored`である。ADR-0032は
+pre-existing criteriaを弱めずofficial I2 entry後exitを受理した。theory T1とbroad
+PHASE-I1は不変で、architecture/04 OPEN-026/027/full carrier freezeは残る。SYS-6は
+completed、SYS-7がsole active goal、I3はinactiveである。OPEN-032のtransport選定は
+I2 exitではなくfuture owner-authorized I3 decisionまで未決である。
 
 ## ID 体系
 

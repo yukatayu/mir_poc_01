@@ -2,8 +2,8 @@
 id: arch/03-toolchain
 status: L2-working
 maturity: draft
-depends_on: [arch/02-boundary-contracts, spec/04-core-ir, spec/12-sys3-per-locus-projection, spec/13-sys4-in-process-generated-dispatch, spec/14-sys5-local-toy-devtools, adr/ADR-0029, adr/ADR-0030, adr/ADR-0031]
-summary: toolchain各componentの責務、accepted SYS-3 projection、SYS-4 runtime、SYS-5 local workflow/joined devtools boundary。
+depends_on: [arch/02-boundary-contracts, spec/04-core-ir, spec/12-sys3-per-locus-projection, spec/13-sys4-in-process-generated-dispatch, spec/14-sys5-local-toy-devtools, spec/15-sys6-i2-conformance, adr/ADR-0029, adr/ADR-0030, adr/ADR-0031, adr/ADR-0032]
+summary: toolchain各componentの責務、accepted SYS-3--SYS-5 runtime pathとSYS-6 finite I2 conformance boundary。
 open_items: [OPEN-029]
 ---
 
@@ -20,6 +20,7 @@ open_items: [OPEN-029]
 | mir-devtools | occurrence rows → panels/export | redaction 破り、H 非由来行 | viewer/telemetry 線 |
 | mir-prove | Obligations → Lean project 骨格+状態同期 | 証明の代筆主張 | lean/ 基盤 |
 | mir-conform | SCN suite 実行 → 合否(spec/06) | expectation の暗黙緩和 | scripts/ 検証群 |
+| mir-conform-i2 | accepted SYS-2--SYS-5 producer evidence → finite I2 row verdict(spec/15) | runtime意味の制御、row omission、lifecycle self-activation | SYS-6 `conform-i2` |
 
 共通則: 各 tool は自分の Diagnostic family(spec/07)だけを発行し、下流の失敗を握り潰さない。全 tool は `--format json` で carrier(arch/04)を吐けること。
 
@@ -103,5 +104,29 @@ are not devtools output.
 These CLI names and JSON fields are finite LAB-facing direct-consumer seams,
 not the final/public toolchain or compatibility contract. Browser/View/LSP,
 public artifacts, and external transport remain later work.
+
+## SYS-6 selected assurance boundary
+
+ADR-0032 / spec/15 accepts provisional `mir conform-i2` as a downstream-only
+finite assurance facade:
+
+```text
+ordinary primary source + selected-OW1 source + checked patches
+  -> actual SYS-2--SYS-5 producer operations
+  -> typed evidence inventories
+  -> fixed 22-row verifier
+  -> observer-safe accepted or rejected report
+```
+
+The verifier does not parse, project, admit, schedule, or execute and cannot
+add an edge, Core fact, authority, state, occurrence, or lifecycle transition.
+The lower kernel/projector/runtime/workflow layers do not import SYS-6. M10
+release/profile orchestration remains a separate regression boundary and does
+not supply I2 semantic identity.
+
+The command's lifecycle fields are a non-authorizing control surface. Current
+official lifecycle is decided by plan/01 and ADR-0032, not by command output.
+The name, arguments, report schema, row identifiers, and identity encoding are
+internal/provisional and freeze no public toolchain contract.
 
 OPEN-029: mir-lsp(エディタ統合)は I5 で検討。CLI 名は仮称であり、LAB の `mirrorea-alpha` 系列を改称して流用してよい。

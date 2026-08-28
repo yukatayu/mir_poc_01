@@ -1,8 +1,9 @@
 # Mirrorea I2 local toy walkthrough
 
-This walkthrough follows the accepted SYS-5 local toy fabric at implementation
-cut `53a21e64b5a17e24b522f720db10b6e539c058e0`. It is LAB guidance; Canon
-remains under `mirrorea_canon/`.
+This walkthrough follows the accepted SYS-5 local toy fabric at cut
+`53a21e64b5a17e24b522f720db10b6e539c058e0` and its accepted SYS-6 finite I2
+assurance at cut `5429712de89a7e41c46cfd7fb4a39c4a492864c4`. It is LAB guidance;
+Canon remains under `mirrorea_canon/`.
 
 ## 1. Read the source
 
@@ -77,9 +78,32 @@ joining several files.
 The observer-safe report does not expose raw credentials, capability secrets,
 or witness payloads.
 
+## 5. Run finite I2 conformance
+
+```bash
+cargo run -q -p mir-runtime --bin mir -- conform-i2 \
+  samples/clean-near-end/mirrorea-i2-local-toy/main.mir \
+  --selected-ow1-source samples/clean-near-end/mirrorea-i2-conformance/ow1-selected-owner-designated.mir \
+  --patch samples/clean-near-end/mirrorea-i2-local-toy/patches/designated-plus-two.mir \
+  --patch samples/clean-near-end/mirrorea-i2-local-toy/patches/owner-rmw-change.mir \
+  --format json
+```
+
+The canonical invocation returns `status = accepted` with exactly 22 passing
+rows. Each row is bound to executed positive/falsifier evidence and an actual
+property-specific provenance anchor. The profile includes the four-locus ST
+workflow and a separate ordinary source for exactly-one-worker OW1
+correspondence. It does not claim that the complete toy is OW1-eligible.
+
+The report's lifecycle bits remain false by design. `conform-i2` is an
+evidence producer/verifier, not lifecycle authority. ADR-0032 is the Canon
+record that accepted official I2 entry then exit after the full evidence and
+independent review passed.
+
 ## Non-claims
 
 The current CLI spelling and JSON field layout are provisional. This
 walkthrough does not freeze a public API, public ABI, wire format, final
-grammar, real socket transport, multi-process runtime, browser renderer,
-production deployment, or official I2 lifecycle exit.
+grammar, select real socket transport, implement multi-process runtime,
+activate I3, provide a browser renderer, or claim production deployment,
+broad PHASE-I1 exit, four-locus whole-workflow OW1, or a general theorem.

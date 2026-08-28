@@ -18,7 +18,7 @@ the closed authority/execution record for the accepted Mir Theory v0 / I1+
 M0--M10 finite reference baseline. The owner has now adopted ADR-0026 for the
 bounded Mirrorea I2 Systems Foundation SYS-0--SYS-7 program. Its sole current
 LAB roadmap is `plan/249-mirrorea-i2-systems-foundation-current-roadmap.md`.
-SYS-0--SYS-5 are completed and closed. ADR-0027 records the crate-private
+SYS-0--SYS-6 are completed and closed. ADR-0027 records the crate-private
 semantic runtime kernel and narrow I2-internal carrier at cut `94e3707c...`;
 ADR-0028 records deterministic ST, single-owner OW1, acknowledged M9
 generation visibility, and finite ordering evidence at cut `920d3fe0...`.
@@ -38,13 +38,18 @@ cut `53a21e64b5a17e24b522f720db10b6e539c058e0`: one ordinary source under
 `samples/clean-near-end/mirrorea-i2-local-toy/main.mir` now projects four loci,
 runs generated in-process dispatch through `mir project-loci`, `mir run-local`,
 and `mir inspect`, emits a joined observer-safe causal view, and exercises one
-accepted designated-only patch plus one rejected owner-RMW patch. SYS-6 I2
-assurance / lifecycle closeout is now the sole active goal, and SYS-7 is next.
+accepted designated-only patch plus one rejected owner-RMW patch. PROPOSAL-035 /
+ADR-0032 / Canon spec 15 record SYS-6 cut
+`5429712de89a7e41c46cfd7fb4a39c4a492864c4`: the downstream-only
+`conform-i2` producer/verifier accepts 22/22 source-first rows with executed
+positive/falsifier evidence, actual provenance, selected ST/OW1 correspondence,
+typed rejection, and observer-safe output. ADR-0032 accepted official I2 entry
+then exit. SYS-7 inactive I3 entry-contract work is now the sole active goal.
 OPEN-030 is resolved only
 for that internal contract; the full carrier freeze and OPEN-026/027 remain.
-The SYS-4/SYS-5 close claims neither final/public grammar/API/ABI/wire,
-multi-consumer semantics, broad PHASE-I1 exit, official I2 lifecycle
-acceptance, real transport, durable distributed persistence, browser/View
+The SYS-4--SYS-6 close claims neither final/public grammar/API/ABI/wire,
+multi-consumer semantics, broad PHASE-I1 exit, real transport, I3 activation,
+durable distributed persistence, browser/View
 product, nor OW1 cut/patch support beyond typed `BackendIneligible` residuals;
 official theory remains T1. Legacy M8 `AlreadyConsumed` and the accepted M10
 duplicate-delivery baseline remain unchanged. North Star changes, weakened
@@ -84,6 +89,23 @@ Expected high-level evidence: four loci, source-derived communication,
 generated in-process dispatch, joined observer-safe causal rows, local
 save/restore, accepted designated-only patch, rejected owner-RMW patch,
 relation fallback/reacquire, and typed auth failure.
+
+Run the finite I2 assurance profile with a separate selected-OW1 ordinary
+source:
+
+```bash
+cargo run -q -p mir-runtime --bin mir -- conform-i2 \
+  samples/clean-near-end/mirrorea-i2-local-toy/main.mir \
+  --selected-ow1-source samples/clean-near-end/mirrorea-i2-conformance/ow1-selected-owner-designated.mir \
+  --patch samples/clean-near-end/mirrorea-i2-local-toy/patches/designated-plus-two.mir \
+  --patch samples/clean-near-end/mirrorea-i2-local-toy/patches/owner-rmw-change.mir \
+  --format json
+```
+
+The canonical inputs produce exactly 22 passing bounded rows. This command is
+provisional and non-authorizing: its lifecycle bits remain false by design,
+while ADR-0032 is the Canon record that accepted official I2 entry then exit.
+Theory remains T1, broad PHASE-I1 remains open, and I3 is inactive.
 
 - **Mir**
   因果、effect、ownership、lifetime、contract、安全な進化を扱う意味論コア

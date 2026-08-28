@@ -27,6 +27,9 @@ suite and older vocabulary where needed; it is not the normative canon.
   accepted SYS-5 four-locus local toy workflow root. It keeps
   `WorldAuthority`, participants, viewer, player, and bird as sample/library
   vocabulary, not Core primitives.
+- `mirrorea-i2-conformance/`
+  accepted SYS-6 selected-OW1 ordinary-source input. It supports the finite
+  `conform-i2` profile and is not a generated artifact or public wire sample.
 
 ## built-in と user-defined の境界
 
@@ -73,7 +76,15 @@ cargo run -q -p mir-runtime --bin mir -- inspect \
   --patch samples/clean-near-end/mirrorea-i2-local-toy/patches/designated-plus-two.mir \
   --patch samples/clean-near-end/mirrorea-i2-local-toy/patches/owner-rmw-change.mir \
   --format json
+cargo run -q -p mir-runtime --bin mir -- conform-i2 \
+  samples/clean-near-end/mirrorea-i2-local-toy/main.mir \
+  --selected-ow1-source samples/clean-near-end/mirrorea-i2-conformance/ow1-selected-owner-designated.mir \
+  --patch samples/clean-near-end/mirrorea-i2-local-toy/patches/designated-plus-two.mir \
+  --patch samples/clean-near-end/mirrorea-i2-local-toy/patches/owner-rmw-change.mir \
+  --format json
 ```
 
-This is SYS-5 LAB evidence only. The CLI spelling and JSON field names are
-internal/provisional; they do not freeze a public API, ABI, grammar, or wire.
+These are bounded SYS-5/SYS-6 LAB workflows. The CLI spelling and JSON field
+names are internal/provisional; they do not freeze a public API, ABI, grammar,
+or wire. ADR-0032, not command output, records official I2 entry then exit;
+broad PHASE-I1 and I3 remain unaccepted/inactive respectively.

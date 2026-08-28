@@ -10,6 +10,10 @@
     workflow root. It uses one ordinary `.mir` source plus two source patches
     and is exercised through `mir project-loci`, `mir run-local`, and
     `mir inspect`. It is not a final grammar/API/wire/product surface.
+  - `mirrorea-i2-conformance/` is the accepted SYS-6 selected-OW1 ordinary
+    source input. Together with the local toy and patches, provisional
+    `mir conform-i2` produces the exact finite 22-row assurance report. It is
+    source input, not generated output or a public contract.
 - `current-l2/`
   base current-L2 source corpus
 - `lean/`
@@ -111,6 +115,10 @@
 - SYS-5 local toy workflow evidence is
   `clean-near-end/mirrorea-i2-local-toy/`; it is source-first I2 LAB evidence,
   not Core promotion of `World` / `Bird` vocabulary and not a public API.
+- SYS-6 finite assurance input is
+  `clean-near-end/mirrorea-i2-conformance/`; its selected OW1 source does not
+  claim that the full four-locus toy is OW1-eligible. ADR-0032, not the command
+  output, records official I2 entry then exit.
 - `current-l2/` は active clean suite を支える base source corpus
 - `lean/lab-statements/` は LAB-only statement-shape draft であり、proof
   discharge や canon OBL status として読まない
@@ -168,6 +176,7 @@
 ## current commands
 
 ```bash
+cargo run -q -p mir-runtime --bin mir -- conform-i2 samples/clean-near-end/mirrorea-i2-local-toy/main.mir --selected-ow1-source samples/clean-near-end/mirrorea-i2-conformance/ow1-selected-owner-designated.mir --patch samples/clean-near-end/mirrorea-i2-local-toy/patches/designated-plus-two.mir --patch samples/clean-near-end/mirrorea-i2-local-toy/patches/owner-rmw-change.mir --format json
 python3 scripts/current_l2_guided_samples.py smoke-all --format json
 python3 scripts/clean_near_end_samples.py smoke-all --format json
 python3 scripts/sugoroku_world_samples.py check-all

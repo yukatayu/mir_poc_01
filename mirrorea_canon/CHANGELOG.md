@@ -18,6 +18,21 @@ open_items: []
 
 ## 履歴
 
+- **2026-08-28** PROPOSAL-035 / ADR-0032 / spec/15 により、accepted cut
+  `5429712de89a7e41c46cfd7fb4a39c4a492864c4`のSYS-6 source-first finite I2
+  conformance profileを受理した。actual SYS-2--SYS-5 producer evidenceとfixed
+  22-row verifierを分離し、content-bound I2 identity、executed positive/falsifier、
+  property-specific provenance、typed rejection、observer-safe serializationを要求する。
+  21 rowsは`runtime-monitored`、no-source-free-authority rowは既存OBL-058を参照する
+  `model-checked-bounded`、aggregate OBL-063は`runtime-monitored`である。SYS-6
+  25/25 + CLI 8/8、SYS-2 28/28、SYS-3 28/28、SYS-4 104/104、SYS-5 62/62、
+  M10 67/67 + CLI 4/4、workspace、format/Clippy/diff、final independent ACCEPTを
+  受理した。ADR-0025 entry contractとpre-existing I2 exit criteriaが満たされたため、
+  official I2 entry後exitを適用した。theory T1、broad PHASE-I1、OPEN-026/027/full
+  carrier freeze、public contract、real transport、productionは不変。SYS-6はcompleted、
+  SYS-7がsole active goal、I3はinactive。OPEN-032はfuture owner-authorized I3
+  decisionまで未決であり、I2 exit時transport選定というstale triggerを削除した。
+
 - **2026-08-28** PROPOSAL-034 / ADR-0031 により、accepted cut
   `53a21e64b5a17e24b522f720db10b6e539c058e0`のSYS-5 four-locus local toy
   fabricとtyped devtoolsを受理した。provisional explicit relation-anchor locusを

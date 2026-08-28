@@ -2,8 +2,8 @@
 id: plan/01-phases
 status: L1-fixed
 maturity: draft
-depends_on: [plan/00-gates, plan/02-operating-model, spec/06-conformance, meta/source-hierarchy, adr/ADR-0013, adr/ADR-0014, adr/ADR-0015, adr/ADR-0017, adr/ADR-0026, adr/ADR-0027, adr/ADR-0028, adr/ADR-0029, adr/ADR-0030, adr/ADR-0031, plan/04-t0-g0-semantic-assertion-profile]
-summary: 実装フェーズT0-T2/I1-I6。official lifecycleはT1、SYS-0--SYS-5はclose、SYS-6 activeでbroad I1/I2 acceptanceは未受理。
+depends_on: [plan/00-gates, plan/02-operating-model, spec/06-conformance, meta/source-hierarchy, adr/ADR-0013, adr/ADR-0014, adr/ADR-0015, adr/ADR-0017, adr/ADR-0026, adr/ADR-0027, adr/ADR-0028, adr/ADR-0029, adr/ADR-0030, adr/ADR-0031, adr/ADR-0032, plan/04-t0-g0-semantic-assertion-profile]
+summary: 実装フェーズT0-T2/I1-I6。theory T1とbroad I1 residualを保ち、SYS-6 closeでofficial I2 entry/exitを受理、SYS-7 active。
 open_items: [OPEN-032]
 ---
 
@@ -15,11 +15,12 @@ open_items: [OPEN-032]
 - theory lifecycle: **T1**（M2 semantic-assertion profile v3 の pass digest、G0-D3、
   G0 exit、T1 entry を ADR-0017 により受理済み）;
 - implementation evidence: **M10 I1+ deterministic reference profile accepted;
-  SYS-0--SYS-5 completed; Mirrorea I2 Systems Foundation bounded program active
-  at SYS-6, SYS-7 next**（ADR-0025 / ADR-0026 / ADR-0027 / ADR-0028 /
-  ADR-0029 / ADR-0030 / ADR-0031）。
-  architecture/04 の full L2 carrier freeze と OPEN-026/027 が残るため、広い PHASE-I1 exit、
-  I2 entry、I2 exitはいずれも未受理。
+  official I2 entry then I2 exit accepted; SYS-0--SYS-6 completed; Mirrorea I2
+  Systems Foundation bounded program active at SYS-7 only**（ADR-0025 /
+  ADR-0026 / ADR-0027 / ADR-0028 / ADR-0029 / ADR-0030 / ADR-0031 /
+  ADR-0032）。architecture/04 の full L2 carrier freeze と OPEN-026/027 が
+  残るため、広い PHASE-I1 exitは未受理。Theory lifecycleはT1のままであり、I3は
+  inactiveである。
 
 ## 理論フェーズ
 
@@ -27,7 +28,9 @@ Theory lifecycle T1 自体は production implementation を受理しない。通
 使い捨て spike と ADR-0014 に従う scoped research artifact / bounded validationだけで
 ある。ただしADR-0026は、accepted semanticsをper-locus生成・in-process dispatchへ進める
 SYS-0--SYS-7に限り、separateなbounded implementation programを明示的に許可する。
-program実装 evidenceはofficial Theory/I1/I2 lifecycle acceptanceの代用ではない。
+program実装 evidenceは単独ではofficial Theory/I1/I2 lifecycle acceptanceの代用では
+ない。ADR-0032はfresh SYS-6 evidenceとindependent reviewを明示的に評価したauthorized
+acceptance recordとして、bounded official I2 entry後exitだけを適用した。
 
 | Phase | ゴール(exit) | 動くもの / 実用性 |
 |---|---|---|
@@ -59,7 +62,8 @@ waiverなしで `ConformanceAccepted` となった。
 これは owner-approved M0--M10 program の実行可能 reference-profile close である。
 architecture/04 の L2 carrier freeze / OPEN-030 を解決せずに、spec/06 の広い
 PHASE-I1 exit、public grammar/API/ABI/wire、C-distributed、I2 activationを主張しない。
-I2 entry は ADR-0025 の entry contractと新しい owner-directed current roadmapを必要とする。
+I2 entry は ADR-0025 の entry contractとnew owner-directed current roadmapを必要とした。
+その後の充足とacceptanceは下のADR-0032 recordが決める。
 
 ## Mirrorea I2 Systems Foundation program activation
 
@@ -110,13 +114,48 @@ observer-safe joined reportはsource/Core/artifact/edge/occurrenceからstate/re
 save/patch/failureまでを一つの因果線で示す。OBL-062はこのfinite
 executable/devtools correspondenceだけを`runtime-monitored`とする。public CLI/API/ABI/
 wire/JSON、browser/View、real transport、durable persistence、general theoremは非主張である。
-SYS-5はcompleted、sole active goalはSYS-6、nextはSYS-7である。
+SYS-5はcompletedし、SYS-6は後述のfinite I2 conformanceでcompletedした。sole active
+goalはSYS-7である。
 
-これは実装programのauthorizationであり、official phase entry/exit recordではない。
-Broad PHASE-I1 exitはarchitecture/04 carrierのfull internal freeze criteriaとOPEN-026/027、I2 exitは
-process内multi-locus generated dispatchとminimal panelのactual criteriaを満たし、fresh
-evidence・independent review・明示acceptance recordが揃った場合だけ適用する。public
-API/ABI/wire freezeはどちらの条件にも暗黙追加しない。
+Program activation自体はofficial phase entry/exit recordではなかった。Broad
+PHASE-I1 exitはarchitecture/04 carrierのfull internal freeze criteriaとOPEN-026/027を
+引き続き満たさない。I2はprocess内multi-locus generated dispatchとminimal panelの
+actual criteriaを満たし、fresh SYS-6 evidence・independent review・ADR-0032の明示
+acceptance recordが揃ったため、I2 entry後exitを受理した。public API/ABI/wire freezeは
+どちらの条件にも暗黙追加していない。
+
+## Mirrorea I2 lifecycle acceptance
+
+PROPOSAL-035 / ADR-0032 / spec/15はaccepted implementation/evidence cut
+`5429712de89a7e41c46cfd7fb4a39c4a492864c4`のsource-first finite I2 profileを受理した。
+producerはactual SYS-2 bounded modelとSYS-3--SYS-5 checked projection、generated
+dispatch、local workflowを実行し、verifierはtyped evidence inventoriesだけを読む。
+exact 22 rowsはordinary source authority、checked Core/artifacts、generated communication、
+actual endpoint dispatch、selected ST/OW1 correspondence、owner data-race freedom、no hidden/
+direct remote store/source-free mint、typed failure、relation/fallback/designated、save/patch、
+observer-safe devtools、projection determinism、lifecycle non-overclaimを検査する。
+
+各rowはexecuted positive/falsifier evidenceとproperty-specific actual provenanceを必要とし、
+missing/unexecuted evidence、wrong diagnostic、missing anchor、row omissionはfail-closedである。
+21 rowsは`runtime-monitored`、no-source-free-authority rowは既存OBL-058を参照する
+`model-checked-bounded`。aggregate OBL-063は`runtime-monitored`であり、Lean/general
+theoremではない。SYS-6 25/25 + CLI 8/8、SYS-2 28/28、SYS-3 28/28、SYS-4 104/104、
+SYS-5 62/62、M10 67/67 + CLI 4/4、workspace、format、warnings-denied Clippy、diff、
+independent ACCEPTが受理証拠である。
+
+ADR-0025のI2 entry contractはADR-0026のowner-directed roadmap、ADR-0027のnarrow
+internal carrier、SYS-3--SYS-5のactual systems capability、SYS-6のfresh assuranceにより
+満たされた。よってADR-0032は次をこの順で適用した。
+
+```text
+official I2 entry accepted
+  -> official I2 exit accepted
+```
+
+`conform-i2` outputのlifecycle bitsがfalseで`I2 lifecycle exit`をnon-claimとすることは
+矛盾しない。runtime/verifierはphaseをself-activateできず、official stateはこのplanと
+ADR-0032だけが決める。Theory T1、broad PHASE-I1、public contract、I3 activationは
+動かない。SYS-6はcompleted、SYS-7はsole active milestone、I3はinactiveである。
 
 ## T0/G0 phase-governance profile
 
@@ -161,5 +200,6 @@ Each phase exits only through its canonically defined profile result and the
 authorized acceptance record. T0 uses v3 above. SCN C-static/C-runtime/
 C-distributed JSON follows `spec/06-conformance` and the `mir-conform`
 contract. **Phase を跨ぐ最適化の先取りは禁止**（BND-006 の意味保存を先に）。
-OPEN-032: I3 の transport 選定（候補: QUIC/WebTransport 系）は I2 exit 時に ADR
-で決定する。
+OPEN-032: I3 の transport 選定は未決である。I2 exit条件ではなく、SYS-7がinactive
+entry contractを記録した後のfuture owner-authorized I3 program / entry decisionで、
+最大二候補を比較して初めてADR対象にできる。SYS-7とADR-0032はtransportを選ばない。

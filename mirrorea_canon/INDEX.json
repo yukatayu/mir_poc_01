@@ -1,6 +1,6 @@
 {
  "canon_version": "0.1.0",
- "files": 185,
+ "files": 188,
  "entries": [
   {
    "id": "root/changelog",
@@ -12,7 +12,7 @@
    "summary": "canon 自体の版履歴と改定手続きの要約。",
    "open_items": [],
    "path": "CHANGELOG.md",
-   "bytes": 23819
+   "bytes": 25059
   },
   {
    "id": "root/design-constitution",
@@ -52,7 +52,7 @@
    "summary": "知識マップ 1 枚。全域の依存図、3 種の読み筋、ID 体系。",
    "open_items": [],
    "path": "MAP.md",
-   "bytes": 27047
+   "bytes": 28119
   },
   {
    "id": "root/north-star",
@@ -74,7 +74,7 @@
    "summary": "canon の入口。正本宣言、LAB(既存 repo)との関係、読み順、版。",
    "open_items": [],
    "path": "README.md",
-   "bytes": 4074
+   "bytes": 4137
   },
   {
    "id": "adr/ADR-0001",
@@ -520,6 +520,24 @@
    "bytes": 4886
   },
   {
+   "id": "adr/ADR-0032",
+   "status": "L1-fixed",
+   "maturity": "reviewed",
+   "depends_on": [
+    "adr/ADR-0025",
+    "adr/ADR-0026",
+    "adr/ADR-0028",
+    "adr/ADR-0029",
+    "adr/ADR-0030",
+    "adr/ADR-0031",
+    "meta/proposal-035"
+   ],
+   "summary": "SYS-6 finite I2 conformanceをcut 5429712dで採用し、broad I1を残してofficial I2 entry後exitを受理する。",
+   "open_items": [],
+   "path": "adr/ADR-0032.md",
+   "bytes": 4664
+  },
+  {
    "id": "adr/readme",
    "status": "L1-fixed",
    "maturity": "draft",
@@ -529,7 +547,7 @@
    "summary": "決定記録の一覧と読み方。LAB の決定台帳(specs/12)との関係。",
    "open_items": [],
    "path": "adr/README.md",
-   "bytes": 4028
+   "bytes": 4173
   },
   {
    "id": "arch/01-strata",
@@ -567,16 +585,18 @@
     "spec/12-sys3-per-locus-projection",
     "spec/13-sys4-in-process-generated-dispatch",
     "spec/14-sys5-local-toy-devtools",
+    "spec/15-sys6-i2-conformance",
     "adr/ADR-0029",
     "adr/ADR-0030",
-    "adr/ADR-0031"
+    "adr/ADR-0031",
+    "adr/ADR-0032"
    ],
-   "summary": "toolchain各componentの責務、accepted SYS-3 projection、SYS-4 runtime、SYS-5 local workflow/joined devtools boundary。",
+   "summary": "toolchain各componentの責務、accepted SYS-3--SYS-5 runtime pathとSYS-6 finite I2 conformance boundary。",
    "open_items": [
     "OPEN-029"
    ],
    "path": "architecture/03-toolchain.md",
-   "bytes": 6438
+   "bytes": 7661
   },
   {
    "id": "arch/04-runtime-carriers",
@@ -593,15 +613,17 @@
     "adr/ADR-0028",
     "adr/ADR-0029",
     "adr/ADR-0030",
-    "adr/ADR-0031"
+    "adr/ADR-0031",
+    "adr/ADR-0032",
+    "spec/15-sys6-i2-conformance"
    ],
-   "summary": "broad runtime carrier catalogとSYS-1--5 internal lifecycle/execution/projection/dispatch/devtools carrier requirements。public API/ABI/wireは未凍結。",
+   "summary": "broad runtime carrier catalogとSYS-1--6 internal lifecycle/execution/projection/dispatch/devtools/assurance requirements。public API/ABI/wireは未凍結。",
    "open_items": [
     "OPEN-026",
     "OPEN-027"
    ],
    "path": "architecture/04-runtime-carriers.md",
-   "bytes": 15917
+   "bytes": 17376
   },
   {
    "id": "arch/05-satellites",
@@ -1263,6 +1285,30 @@
    "bytes": 9635
   },
   {
+   "id": "meta/proposal-035",
+   "status": "L1-fixed",
+   "maturity": "reviewed",
+   "depends_on": [
+    "root/north-star",
+    "root/design-constitution",
+    "adr/ADR-0026",
+    "adr/ADR-0028",
+    "adr/ADR-0029",
+    "adr/ADR-0030",
+    "adr/ADR-0031",
+    "arch/03-toolchain",
+    "arch/04-runtime-carriers",
+    "theory/11-metatheory-ledger",
+    "spec/12-sys3-per-locus-projection",
+    "spec/13-sys4-in-process-generated-dispatch",
+    "spec/14-sys5-local-toy-devtools"
+   ],
+   "summary": "SYS-6のsource-first finite I2 conformance profileをcut 5429712dで受理し、broad I1を残したままofficial I2 entry/exitを適用する提案。",
+   "open_items": [],
+   "path": "meta/proposals/PROPOSAL-035-sys6-i2-conformance.md",
+   "bytes": 8609
+  },
+  {
    "id": "meta/source-hierarchy",
    "status": "L0-frozen",
    "maturity": "draft",
@@ -1323,14 +1369,15 @@
     "adr/ADR-0029",
     "adr/ADR-0030",
     "adr/ADR-0031",
+    "adr/ADR-0032",
     "plan/04-t0-g0-semantic-assertion-profile"
    ],
-   "summary": "実装フェーズT0-T2/I1-I6。official lifecycleはT1、SYS-0--SYS-5はclose、SYS-6 activeでbroad I1/I2 acceptanceは未受理。",
+   "summary": "実装フェーズT0-T2/I1-I6。theory T1とbroad I1 residualを保ち、SYS-6 closeでofficial I2 entry/exitを受理、SYS-7 active。",
    "open_items": [
     "OPEN-032"
    ],
    "path": "plan/01-phases.md",
-   "bytes": 11312
+   "bytes": 14046
   },
   {
    "id": "plan/02-operating-model",
@@ -1791,6 +1838,22 @@
    "bytes": 8937
   },
   {
+   "id": "spec/15-sys6-i2-conformance",
+   "status": "L1-fixed",
+   "maturity": "reviewed",
+   "depends_on": [
+    "spec/11-m10-i1plus-conformance",
+    "spec/12-sys3-per-locus-projection",
+    "spec/13-sys4-in-process-generated-dispatch",
+    "spec/14-sys5-local-toy-devtools",
+    "adr/ADR-0032"
+   ],
+   "summary": "SYS-6 finite source-first I2 producer/verifier、22-row inventory、typed rejection、observer-safe report、lifecycle evidence boundary。",
+   "open_items": [],
+   "path": "spec/15-sys6-i2-conformance.md",
+   "bytes": 9517
+  },
+  {
    "id": "spec/readme",
    "status": "L1-fixed",
    "maturity": "draft",
@@ -1805,12 +1868,13 @@
     "adr/ADR-0025",
     "adr/ADR-0029",
     "adr/ADR-0030",
-    "adr/ADR-0031"
+    "adr/ADR-0031",
+    "adr/ADR-0032"
    ],
    "summary": "Mir Report(仕様の蒸留)の読み方。theory との優先関係、章構成。",
    "open_items": [],
    "path": "spec/README.md",
-   "bytes": 1510
+   "bytes": 1599
   },
   {
    "id": "theory/00-overview",
@@ -2007,12 +2071,13 @@
     "adr/ADR-0028",
     "adr/ADR-0029",
     "adr/ADR-0030",
-    "adr/ADR-0031"
+    "adr/ADR-0031",
+    "adr/ADR-0032"
    ],
    "summary": "定理 THM と義務 OBL の単一台帳。証明状態はここだけが語る。",
    "open_items": [],
    "path": "theory/11-metatheory-ledger.md",
-   "bytes": 28461
+   "bytes": 30457
   },
   {
    "id": "theory/12-literature",

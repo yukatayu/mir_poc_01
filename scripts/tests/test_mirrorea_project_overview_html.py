@@ -76,20 +76,20 @@ class MirroreaProjectOverviewHtmlTests(unittest.TestCase):
             "ADR-0026",
             "active roadmap は Plan 249",
             "SYS-0 completed",
-            "SYS-1 completed",
-            "SYS-2 completed",
-            "SYS-0--SYS-5 completed",
-            "active goal は SYS-6",
-            "next goal は SYS-7",
-            "SYS-5 completed",
-            "SYS-6 active",
-            "SYS-7 next",
+            "ADR-0027 / SYS-1 runtime kernel / internal carrier",
+            "ADR-0028 / SYS-2 ST/OW1 refinement",
+            "SYS-0--SYS-6 completed",
+            "active goal は SYS-7 only",
+            "official I2 entry→exit は受理済み",
+            "official I2 entry後exitを受理",
+            "SYS-7 active",
+            "I3はinactive",
             "closed / SYS-3",
             "closed / SYS-4",
             "closed / SYS-5",
-            "現在 / SYS-6",
-            "今 / SYS-6",
-            "次 / SYS-7",
+            "closed / SYS-6",
+            "現在 / SYS-7",
+            "SYS-6 I2 assurance / lifecycle closeout",
             "受理済みSYS-3 source/evidence cut",
             "3013e7fe075a7605a1ffe01e0b14f4a0856eaeb9",
             "SYS-4 cut",
@@ -98,12 +98,17 @@ class MirroreaProjectOverviewHtmlTests(unittest.TestCase):
             "OBL-060 runtime-monitored (static finite only)",
             "OBL-061",
             "finite in-process dispatch",
-            "accepted SYS-5 cut",
+            "SYS-5 cut",
             "53a21e64...",
             "OBL-062 runtime-monitored",
+            "OBL-063 runtime-monitored",
+            "5429712d...",
+            "PROPOSAL-035",
+            "ADR-0032",
             "runtime-monitored",
-            "OPEN-030 は I2 internal bounded contract として解決",
-            "program activation は broad PHASE-I1 exit / I2 lifecycle acceptance ではない",
+            "OPEN-030をI2-internalに限って固定した",
+            "official I2 exit acceptance は本物ですが",
+            "Theory T2、broad I1、general theorem、public contract、real transport、production への自動昇格ではありません",
             "Plan 247 は closed",
             "OPEN-030",
             "26/26",
@@ -170,8 +175,13 @@ class MirroreaProjectOverviewHtmlTests(unittest.TestCase):
             "SYS-5 next",
             "active goal は SYS-5",
             "SYS-5 active",
+            "SYS-0--SYS-5 completed",
+            "active goal は SYS-6",
             "next goal は SYS-6",
             "SYS-6 next",
+            "SYS-6 active",
+            "SYS-7 next",
+            "next goal は SYS-7",
             "現在 / SYS-3",
             "今 / SYS-3",
             "SYS-4 next",
@@ -233,9 +243,10 @@ class MirroreaProjectOverviewHtmlTests(unittest.TestCase):
         )
         self.assert_contains_marker(documentation, "M0--M10 program は closed", "Documentation program boundary")
         self.assert_contains_marker(documentation, "active roadmap は Plan 249", "Documentation roadmap")
-        self.assert_contains_marker(documentation, "SYS-0--SYS-5 completed", "Documentation SYS status")
-        self.assert_contains_marker(documentation, "active goal は SYS-6", "Documentation SYS status")
-        self.assert_contains_marker(documentation, "next goal は SYS-7", "Documentation SYS status")
+        self.assert_contains_marker(documentation, "SYS-0--SYS-6 completed", "Documentation SYS status")
+        self.assert_contains_marker(documentation, "SYS-7 active", "Documentation SYS status")
+        self.assert_contains_marker(documentation, "active goal はSYS-7", "Documentation SYS status")
+        self.assert_contains_marker(documentation, "I3はinactive", "Documentation SYS status")
         self.assert_contains_marker(documentation, "`ded622fe...`を", "Documentation SYS-3 history")
         self.assert_contains_marker(documentation, "partial regression evidenceへ", "Documentation SYS-3 history")
         self.assert_contains_marker(
@@ -259,6 +270,10 @@ class MirroreaProjectOverviewHtmlTests(unittest.TestCase):
         )
         self.assert_contains_marker(documentation, "OBL-062", "Documentation SYS-5 proof boundary")
         self.assert_contains_marker(documentation, "53a21e64", "Documentation SYS-5 boundary")
+        self.assert_contains_marker(documentation, "PROPOSAL-035 / ADR-0032 / Canon spec 15 / OBL-063", "Documentation SYS-6 boundary")
+        self.assert_contains_marker(documentation, "cut `5429712d...`の22-row finite `conform-i2` profileを受理", "Documentation SYS-6 boundary")
+        self.assert_contains_marker(documentation, "official I2 entry後", "Documentation I2 lifecycle")
+        self.assert_contains_marker(documentation, "exitを適用した", "Documentation I2 lifecycle")
         self.assert_contains_marker(
             documentation,
             "`runtime-monitored`とし、Lean/general proof又はruntime dispatch evidenceではありません",
@@ -275,8 +290,12 @@ class MirroreaProjectOverviewHtmlTests(unittest.TestCase):
         self.assert_omits_marker(documentation, "SYS-5 next", "Documentation stale SYS status")
         self.assert_omits_marker(documentation, "active goal は SYS-5", "Documentation stale SYS status")
         self.assert_omits_marker(documentation, "SYS-5 active", "Documentation stale SYS status")
+        self.assert_omits_marker(documentation, "SYS-0--SYS-5 completed", "Documentation stale SYS status")
+        self.assert_omits_marker(documentation, "active goal は SYS-6", "Documentation stale SYS status")
+        self.assert_omits_marker(documentation, "active goal はSYS-6", "Documentation stale SYS status")
         self.assert_omits_marker(documentation, "next goal は SYS-6", "Documentation stale SYS status")
         self.assert_omits_marker(documentation, "SYS-6 next", "Documentation stale SYS status")
+        self.assert_omits_marker(documentation, "next goal は SYS-7", "Documentation stale SYS status")
 
 
 if __name__ == "__main__":

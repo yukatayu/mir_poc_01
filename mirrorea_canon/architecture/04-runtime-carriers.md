@@ -2,8 +2,8 @@
 id: arch/04-runtime-carriers
 status: L2-working
 maturity: reviewed
-depends_on: [theory/04-ordering-and-cuts, theory/05-authority, theory/07-observation, theory/08-patch-hotplug, theory/13-evaluation-materialization, theory/18-m9-auth-verification, adr/ADR-0027, adr/ADR-0028, adr/ADR-0029, adr/ADR-0030, adr/ADR-0031]
-summary: broad runtime carrier catalogとSYS-1--5 internal lifecycle/execution/projection/dispatch/devtools carrier requirements。public API/ABI/wireは未凍結。
+depends_on: [theory/04-ordering-and-cuts, theory/05-authority, theory/07-observation, theory/08-patch-hotplug, theory/13-evaluation-materialization, theory/18-m9-auth-verification, adr/ADR-0027, adr/ADR-0028, adr/ADR-0029, adr/ADR-0030, adr/ADR-0031, adr/ADR-0032, spec/15-sys6-i2-conformance]
+summary: broad runtime carrier catalogとSYS-1--6 internal lifecycle/execution/projection/dispatch/devtools/assurance requirements。public API/ABI/wireは未凍結。
 open_items: [OPEN-026, OPEN-027]
 ---
 
@@ -285,12 +285,36 @@ These are internal finite SYS-5 carriers only. They neither serialize the
 broad catalog nor freeze public CLI/JSON/API/ABI/wire fields, and do not select
 OW1 lifecycle/cut, durable persistence, browser/View, or real transport.
 
+## SYS-6 selected conformance evidence carrier
+
+ADR-0032 / spec/15 adds a downstream evidence carrier, not another semantic
+runtime envelope. The producer reads actual checked/projected/runtime/model
+objects and records inventories of checked-program, Core, artifact, generated
+edge, request, occurrence, lifecycle/model anchor, and executed control
+references. Each conformance row joins those existing facts and carries its
+bounded scope, evidence class, positive/falsifier references, controls, and
+property-specific provenance anchor.
+
+The verifier cannot supply or amend any inventory member. Missing or failed
+evidence, a wrong diagnostic, a missing anchor, or a row mismatch rejects. The
+observer serializer redacts immediately before materialization and exposes no
+host path, source text, raw credential/capability/witness, private value, or raw
+M8/M9 identity. The I2 manifest is content-bound reproducibility metadata, not
+authority, runtime identity, public schema, or the M10 release identity.
+
+Lifecycle bits in this carrier are typed non-authorizing candidates. They
+prove that the producer/verifier cannot self-activate I2/I3 or transport;
+ADR-0032 and plan/01 separately record the accepted I2 lifecycle state.
+
 ## Resolution and remaining L2 boundary
 
 OPEN-030 is resolved for the preceding I2-internal lifecycle only. ADR-0028
 closes its selected ST/OW1 ordering and live M9-generation visibility residual,
 but not its public encoding, real transport mapping, retry policy, or
-compatibility. ADR-0031 adds finite ST lifecycle/devtools evidence without
-freezing those external contracts. This file stays L2-working because OPEN-026 field-name/IR
-exchange, OPEN-027 external delivery observability, and the broader carrier
-catalog/full internal freeze remain unresolved.
+compatibility. ADR-0031 adds finite ST lifecycle/devtools evidence and ADR-0032
+adds downstream I2 conformance evidence without freezing those external
+contracts. This file stays L2-working because OPEN-026 field-name/IR exchange,
+OPEN-027 external delivery observability, and the broader carrier catalog/full
+internal freeze remain unresolved. Therefore broad PHASE-I1 remains
+unaccepted even though ADR-0032 separately accepts the bounded official I2
+entry and exit criteria.
