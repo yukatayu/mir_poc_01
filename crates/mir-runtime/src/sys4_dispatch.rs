@@ -2770,6 +2770,32 @@ impl CausalityGraph {
     pub(crate) fn contains_occurrence(&self, occurrence_id: &str) -> bool {
         self.predecessors.contains_key(occurrence_id)
     }
+
+    /// Exact finite reachability used by the observer-safe SYS-5 join.  This
+    /// walks only retained occurrence dependencies and never invents a
+    /// relationship from operation identity or queue position.
+    pub(crate) fn reaches(&self, descendant: &str, ancestor: &str) -> bool {
+        let mut pending = self.predecessor_ids(descendant);
+        let mut seen = BTreeSet::new();
+        while let Some(current) = pending.pop() {
+            if current == ancestor {
+                return true;
+            }
+            if seen.insert(current.clone()) {
+                pending.extend(self.predecessor_ids(&current));
+            }
+        }
+        false
+    }
+
+    /// Return one retained direct predecessor only when the graph records
+    /// exactly one.  Observer joins use this to retain a real mailbox enqueue
+    /// occurrence rather than substituting a request identity or queue
+    /// position.
+    pub(crate) fn sole_predecessor(&self, occurrence_id: &str) -> Option<&str> {
+        let predecessors = self.predecessors.get(occurrence_id)?;
+        (predecessors.len() == 1).then(|| predecessors[0].as_str())
+    }
 }
 
 #[derive(Debug, Clone, PartialEq, Eq)]
@@ -2861,6 +2887,23 @@ impl ActualM8Trace {
                     && node.semantic_identity.as_deref() == Some(value_name)
             })
             .count()
+    }
+
+    /// Return one concrete M8 occurrence only when request and trace kind
+    /// identify it uniquely.  Observer joins fail closed on missing or
+    /// ambiguous correspondence rather than selecting a first same-operation
+    /// row.
+    pub(crate) fn observer_exact_node_ref_for_request_kind(
+        &self,
+        request_id: &str,
+        kind: M8LocalTraceKind,
+    ) -> Option<&str> {
+        let mut matches = self
+            .nodes
+            .iter()
+            .filter(|node| node.request_id.as_deref() == Some(request_id) && node.kind() == kind);
+        let node = matches.next()?;
+        matches.next().is_none().then_some(node.node_id.as_str())
     }
 
     pub(crate) fn non_consuming_designated_cache_validation(
@@ -3010,6 +3053,21 @@ impl RuntimeStoreRead {
             value,
         }
     }
+
+    pub(crate) fn matches_int(
+        &self,
+        locus: &str,
+        state: &str,
+        index: &str,
+        field: &str,
+        value: i64,
+    ) -> bool {
+        self.locus == locus
+            && self.state == state
+            && self.index == index
+            && self.field == field
+            && self.value == value
+    }
 }
 
 #[derive(Debug, Clone, PartialEq, Eq)]
@@ -3024,6 +3082,17 @@ impl RuntimeStoreWrite {
         value: i64,
     ) -> Self {
         Self(RuntimeStoreRead::int(locus, state, index, field, value))
+    }
+
+    pub(crate) fn matches_int(
+        &self,
+        locus: &str,
+        state: &str,
+        index: &str,
+        field: &str,
+        value: i64,
+    ) -> bool {
+        self.0.matches_int(locus, state, index, field, value)
     }
 }
 
@@ -3044,6 +3113,18 @@ impl OwnerRmwReport {
     }
     pub(crate) fn has_checked_source_core_provenance(&self) -> bool {
         !self.source_ref.is_empty() && !self.core_ref.is_empty()
+    }
+    pub(crate) fn has_exact_int_write(
+        &self,
+        locus: &str,
+        state: &str,
+        index: &str,
+        field: &str,
+        value: i64,
+    ) -> bool {
+        self.writes
+            .iter()
+            .any(|write| write.matches_int(locus, state, index, field, value))
     }
 }
 
@@ -3584,6 +3665,84 @@ pub(crate) struct FabricTraceView {
     entries: Vec<Sys4TraceEntry>,
 }
 
+/// A redacted, concrete endpoint occurrence retained by SYS-4.  It contains
+/// only checked provenance and occurrence identifiers; carrier payloads,
+/// local store values, and M9 material are deliberately absent.
+#[derive(Debug, Clone, PartialEq, Eq)]
+pub(crate) struct Sys4ObserverTraceSegment {
+    occurrence_ref: String,
+    source_ref: SourceRefView,
+    core_ref: String,
+    source_fragment_ref: String,
+    target_fragment_ref: String,
+    edge_ref: String,
+}
+
+impl Sys4ObserverTraceSegment {
+    pub(crate) fn occurrence_ref(&self) -> &str {
+        &self.occurrence_ref
+    }
+    pub(crate) fn source_ref(&self) -> &SourceRefView {
+        &self.source_ref
+    }
+    pub(crate) fn core_ref(&self) -> &str {
+        &self.core_ref
+    }
+    pub(crate) fn source_fragment_ref(&self) -> &str {
+        &self.source_fragment_ref
+    }
+    pub(crate) fn target_fragment_ref(&self) -> &str {
+        &self.target_fragment_ref
+    }
+    pub(crate) fn edge_ref(&self) -> &str {
+        &self.edge_ref
+    }
+}
+
+/// A request-scoped pair of exact generated endpoint rows.  Its occurrence
+/// identifiers are all retained runtime occurrences; the request identity is
+/// deliberately not an occurrence.  Construction checks the complete checked
+/// provenance copied through dispatch and receive, so a consumer cannot join
+/// a source row to an unrelated target row by operation name alone.
+#[derive(Debug, Clone, PartialEq, Eq)]
+pub(crate) struct Sys4ObserverEndpointOccurrences {
+    request_enqueue_occurrence_id: String,
+    dispatch_occurrence_id: String,
+    receive_occurrence_id: String,
+    source_ref: SourceRefView,
+    core_ref: String,
+    source_fragment_ref: String,
+    target_fragment_ref: String,
+    edge_ref: String,
+}
+
+impl Sys4ObserverEndpointOccurrences {
+    pub(crate) fn request_enqueue_occurrence_id(&self) -> &str {
+        &self.request_enqueue_occurrence_id
+    }
+    pub(crate) fn dispatch_occurrence_id(&self) -> &str {
+        &self.dispatch_occurrence_id
+    }
+    pub(crate) fn receive_occurrence_id(&self) -> &str {
+        &self.receive_occurrence_id
+    }
+    pub(crate) fn source_ref(&self) -> &SourceRefView {
+        &self.source_ref
+    }
+    pub(crate) fn core_ref(&self) -> &str {
+        &self.core_ref
+    }
+    pub(crate) fn source_fragment_ref(&self) -> &str {
+        &self.source_fragment_ref
+    }
+    pub(crate) fn target_fragment_ref(&self) -> &str {
+        &self.target_fragment_ref
+    }
+    pub(crate) fn edge_ref(&self) -> &str {
+        &self.edge_ref
+    }
+}
+
 impl FabricTraceView {
     pub(crate) fn kinds(&self) -> Vec<Sys4TraceKind> {
         self.entries.iter().map(|entry| entry.kind).collect()
@@ -3610,6 +3769,40 @@ impl FabricTraceView {
 
     pub(crate) const fn target_locus_override(&self) -> Option<&str> {
         None
+    }
+}
+
+impl FabricTrace {
+    /// Find a single exact endpoint row.  All selection keys are caller
+    /// independent facts from one completed request; missing provenance and
+    /// ambiguity are represented by `None` so higher layers must fail closed.
+    fn observer_exact_endpoint_segment(
+        &self,
+        request_id: &str,
+        kind: Sys4TraceKind,
+        edge_kind: CommunicationEdgeKind,
+        source_locus: &str,
+        target_locus: &str,
+    ) -> Option<Sys4ObserverTraceSegment> {
+        let mut matches = self.entries.iter().filter(|entry| {
+            entry.request_id == request_id
+                && entry.kind == kind
+                && entry.edge_kind == Some(edge_kind)
+                && entry.source_locus.as_deref() == Some(source_locus)
+                && entry.target_locus.as_deref() == Some(target_locus)
+        });
+        let entry = matches.next()?;
+        if matches.next().is_some() {
+            return None;
+        }
+        Some(Sys4ObserverTraceSegment {
+            occurrence_ref: entry.endpoint_occurrence_id.clone()?,
+            source_ref: entry.source_ref.clone()?,
+            core_ref: entry.core_ref.clone()?,
+            source_fragment_ref: entry.source_fragment_ref.clone()?,
+            target_fragment_ref: entry.target_fragment_ref.clone()?,
+            edge_ref: entry.edge_ref.clone()?,
+        })
     }
 }
 
@@ -6318,6 +6511,41 @@ impl M9AuthorityTransition {
         self.prior_runtime_validation_observations.opaque_digest()
     }
 
+    /// Observer-safe identity for the exact admitted M9 transition.  This is
+    /// deliberately an M9 lifecycle reference, not a source/Core operation
+    /// reference: the sealed consumer lineage is already M9-owned opaque
+    /// material and does not disclose a credential or witness payload.
+    pub(crate) fn observer_transition_ref(&self) -> Option<String> {
+        let inspection = self.sealed_m9_inspection();
+        let kind = match inspection.transition_kind() {
+            M9AuthorityTransitionKind::DesignatedConsumerCapabilityRevoked => {
+                "designated-consumer-capability-revoked"
+            }
+            M9AuthorityTransitionKind::DesignatedConsumerMembershipRetired => {
+                "designated-consumer-membership-retired"
+            }
+            M9AuthorityTransitionKind::DesignatedConsumerWitnessRetired => {
+                "designated-consumer-witness-retired"
+            }
+            M9AuthorityTransitionKind::DesignatedSourceReleaseRevoked => {
+                return None;
+            }
+        };
+        Some(format!(
+            "m9-admitted-transition:{kind}:{}",
+            inspection.consumer_lineage().opaque_lineage_ref()
+        ))
+    }
+
+    /// The successor M9 generation is sealed authority evidence and is kept
+    /// separate from a source/Core provenance claim.
+    pub(crate) fn observer_successor_generation_ref(&self) -> String {
+        self.sealed_m9_inspection()
+            .successor_generation()
+            .generation_ref()
+            .to_string()
+    }
+
     fn matches_live_runtime_validation_observations(
         &self,
         generation: &M9AuthorityGeneration,
@@ -6493,6 +6721,73 @@ impl Sys4RelationEndpointReceipt {
 }
 
 impl LocalFabric {
+    /// Validate the full retained occurrence chain of one generated relation
+    /// publication.  This is an observer-safe check over the receipt already
+    /// produced by SYS-4; it neither re-evaluates the relation nor joins logs
+    /// by operation name.  Every stage must remain a distinct actual
+    /// occurrence and preserve the one checked endpoint provenance.
+    pub(crate) fn observer_exact_relation_endpoint_receipt(
+        &self,
+        receipt: &Sys4RelationEndpointReceipt,
+    ) -> bool {
+        let edge = receipt.edge();
+        let Some(endpoint) = self.observer_exact_endpoint_occurrences(
+            receipt.request_id(),
+            Sys4TraceKind::Dispatched,
+            Sys4TraceKind::Received,
+            CommunicationEdgeKind::RelationProjectionPublication,
+            edge.source_locus(),
+            edge.target_locus(),
+        ) else {
+            return false;
+        };
+        let occurrences = [
+            receipt.owner_publish_occurrence_id(),
+            receipt.request_enqueue_occurrence_id(),
+            endpoint.dispatch_occurrence_id(),
+            endpoint.receive_occurrence_id(),
+            receipt.consumer_observe_occurrence_id(),
+            receipt.consumer_serve_occurrence_id(),
+        ];
+        if receipt.request_id().is_empty()
+            || occurrences.iter().any(|occurrence| occurrence.is_empty())
+            || occurrences
+                .iter()
+                .any(|occurrence| *occurrence == receipt.request_id())
+            || receipt.request_enqueue_occurrence_id() != endpoint.request_enqueue_occurrence_id()
+            || receipt.transport().source_outbox_dequeue_occurrence_id()
+                != endpoint.dispatch_occurrence_id()
+            || receipt.transport().target_inbox_enqueue_occurrence_id()
+                != endpoint.receive_occurrence_id()
+            || endpoint.core_ref().is_empty()
+            || endpoint.source_fragment_ref().is_empty()
+            || endpoint.target_fragment_ref().is_empty()
+            || endpoint.edge_ref() != edge.edge_ref()
+            || endpoint.core_ref() != edge.core_ref().unwrap_or("")
+            || endpoint.source_fragment_ref() != edge.source_fragment_ref()
+            || endpoint.target_fragment_ref() != edge.target_fragment_ref()
+            || endpoint.source_ref() != &edge.source_ref()
+        {
+            return false;
+        }
+        self.causality.reaches(
+            receipt.request_enqueue_occurrence_id(),
+            receipt.owner_publish_occurrence_id(),
+        ) && self.causality.reaches(
+            endpoint.dispatch_occurrence_id(),
+            receipt.request_enqueue_occurrence_id(),
+        ) && self.causality.reaches(
+            endpoint.receive_occurrence_id(),
+            endpoint.dispatch_occurrence_id(),
+        ) && self.causality.reaches(
+            receipt.consumer_observe_occurrence_id(),
+            endpoint.receive_occurrence_id(),
+        ) && self.causality.reaches(
+            receipt.consumer_serve_occurrence_id(),
+            receipt.consumer_observe_occurrence_id(),
+        )
+    }
+
     /// Dispatch the current M8 owner relation state through the exact
     /// projection-derived relation-publication endpoint.
     pub(crate) fn publish_relation_current(
@@ -6518,6 +6813,17 @@ impl LocalFabric {
         &mut self,
         relation: &str,
     ) -> Sys4Result<Sys4RelationEndpointReceipt> {
+        self.run_relation_transition_atomically(relation, Self::invalidate_relation_primary_staged)
+    }
+
+    /// Execute the owner-side invalidation on a cloneable ST candidate.  The
+    /// generated relation endpoint is part of the same semantic transition:
+    /// if its dispatch fails, no owner mutation, M8 occurrence, local carrier,
+    /// or one-shot binding may become observable in the live fabric.
+    fn invalidate_relation_primary_staged(
+        &mut self,
+        relation: &str,
+    ) -> Sys4Result<Sys4RelationEndpointReceipt> {
         let edge = self.relation_publication_edge(relation)?;
         self.ensure_relation_dispatch_identifier_capacity()?;
         let publish_authority = self.relation_publication_authority(&edge)?;
@@ -6540,6 +6846,19 @@ impl LocalFabric {
     /// Activate exactly one dormant M9-sealed fresh binding, then re-acquire
     /// the owner relation's primary anchor and publish the new lineage.
     pub(crate) fn fresh_reacquire_relation_primary(
+        &mut self,
+        relation: &str,
+    ) -> Sys4Result<Sys4RelationEndpointReceipt> {
+        self.run_relation_transition_atomically(
+            relation,
+            Self::fresh_reacquire_relation_primary_staged,
+        )
+    }
+
+    /// Activate a fresh relation binding only in a candidate ST fabric.  The
+    /// binding is consumed when, and only when, its derived publication has
+    /// crossed the generated endpoint successfully.
+    fn fresh_reacquire_relation_primary_staged(
         &mut self,
         relation: &str,
     ) -> Sys4Result<Sys4RelationEndpointReceipt> {
@@ -6580,6 +6899,31 @@ impl LocalFabric {
             .map_err(Sys4DispatchDiagnostics::one)?;
         let publication = self.qualify_owner_relation_publication(&edge, publication)?;
         self.dispatch_relation_publication(edge, publication)
+    }
+
+    /// Relation invalidation and fresh-reacquire are one semantic operation
+    /// together with their required generated publication.  ST owns all of
+    /// the affected M8 state locally, so stage that whole operation on a
+    /// cloned candidate and publish the candidate only after endpoint
+    /// dispatch succeeds.  In OW1 relation operations are not admitted by
+    /// this finite backend; its transition returns before any M8 mutation, so
+    /// retaining the direct path preserves that fail-closed behavior without
+    /// pretending a worker snapshot exists.
+    fn run_relation_transition_atomically(
+        &mut self,
+        relation: &str,
+        transition: fn(&mut Self, &str) -> Sys4Result<Sys4RelationEndpointReceipt>,
+    ) -> Sys4Result<Sys4RelationEndpointReceipt> {
+        if self.backend.profile() != BackendProfile::St {
+            return transition(self, relation);
+        }
+
+        let mut candidate = self
+            .clone_for_checked_patch()
+            .map_err(Sys4DispatchDiagnostics::one)?;
+        let receipt = transition(&mut candidate, relation)?;
+        *self = candidate;
+        Ok(receipt)
     }
 
     pub(crate) fn relation_imported_shadow(
@@ -6881,20 +7225,15 @@ impl LocalFabric {
             .backend
             .qualify_relation_shadow_observe_occurrence(edge.target_locus(), &shadow, &observe)
             .map_err(Sys4DispatchDiagnostics::one)?;
-        self.backend
-            .commit_relation_publication(edge.source_locus(), &publication_for_commit)
-            .map_err(Sys4DispatchDiagnostics::one)?;
         self.causality
             .record(observe.clone(), vec![locus_dequeue.clone()]);
-        let serve = format!(
-            "sys5-relation-serve:{:020}:{:020}",
-            self.next_endpoint_occurrence()?,
-            shadow.publication_occurrence(),
-        );
+        // This endpoint completion is a retained SYS-4 occurrence.  Do not
+        // manufacture a SYS-5 label from a request or publication identity:
+        // the observer chain must continue from the M8 consumer observation
+        // through a real local-fabric serve occurrence.
+        let serve = self.next_mailbox_token("relation-serve")?;
         self.causality.record(serve.clone(), vec![observe.clone()]);
-        self.relation_semantic_digests
-            .insert(edge.operation_id().to_string(), shadow.semantic_digest());
-        Ok(Sys4RelationEndpointReceipt {
+        let receipt = Sys4RelationEndpointReceipt {
             request_id,
             owner_publish_occurrence_id: owner_publish_occurrence,
             request_enqueue_occurrence_id,
@@ -6903,7 +7242,20 @@ impl LocalFabric {
             consumer_serve_occurrence_id: serve,
             edge,
             shadow,
-        })
+        };
+        if !self.observer_exact_relation_endpoint_receipt(&receipt) {
+            return Err(Sys4DispatchDiagnostics::one(
+                Sys4DiagnosticKind::CarrierProvenanceMismatch,
+            ));
+        }
+        self.backend
+            .commit_relation_publication(receipt.edge().source_locus(), &publication_for_commit)
+            .map_err(Sys4DispatchDiagnostics::one)?;
+        self.relation_semantic_digests.insert(
+            receipt.edge().operation_id().to_string(),
+            receipt.shadow().semantic_digest(),
+        );
+        Ok(receipt)
     }
 
     /// An endpoint failure before target enqueue leaves no committed relation
@@ -7653,6 +8005,116 @@ impl LocalFabric {
         Ok(&self.actual_m8_trace)
     }
 
+    /// Narrow observer-only lookup for one projection-derived endpoint row.
+    /// No schedule input can change its selection key: callers must supply
+    /// facts already returned by the completed generated dispatch.
+    pub(crate) fn observer_exact_endpoint_segment(
+        &self,
+        request_id: &str,
+        kind: Sys4TraceKind,
+        edge_kind: CommunicationEdgeKind,
+        source_locus: &str,
+        target_locus: &str,
+    ) -> Option<Sys4ObserverTraceSegment> {
+        self.trace.observer_exact_endpoint_segment(
+            request_id,
+            kind,
+            edge_kind,
+            source_locus,
+            target_locus,
+        )
+    }
+
+    /// Return the exact generated dispatch/receive pair for one completed
+    /// request.  This is intentionally narrow: callers must already know the
+    /// request identity, trace kinds, edge kind, and both endpoint loci from
+    /// the generated dispatch they are observing.  Missing, duplicate, or
+    /// provenance-mismatched rows fail closed as `None`.
+    #[allow(clippy::too_many_arguments)]
+    pub(crate) fn observer_exact_endpoint_occurrences(
+        &self,
+        request_id: &str,
+        dispatch_kind: Sys4TraceKind,
+        receive_kind: Sys4TraceKind,
+        edge_kind: CommunicationEdgeKind,
+        source_locus: &str,
+        target_locus: &str,
+    ) -> Option<Sys4ObserverEndpointOccurrences> {
+        let dispatched = self.observer_exact_endpoint_segment(
+            request_id,
+            dispatch_kind,
+            edge_kind,
+            source_locus,
+            target_locus,
+        )?;
+        let received = self.observer_exact_endpoint_segment(
+            request_id,
+            receive_kind,
+            edge_kind,
+            source_locus,
+            target_locus,
+        )?;
+        if dispatched.source_ref() != received.source_ref()
+            || dispatched.core_ref() != received.core_ref()
+            || dispatched.source_fragment_ref() != received.source_fragment_ref()
+            || dispatched.target_fragment_ref() != received.target_fragment_ref()
+            || dispatched.edge_ref() != received.edge_ref()
+            || dispatched.source_ref().path.is_empty()
+            || dispatched.core_ref().is_empty()
+            || dispatched.source_fragment_ref().is_empty()
+            || dispatched.target_fragment_ref().is_empty()
+            || dispatched.edge_ref().is_empty()
+        {
+            return None;
+        }
+        let request_enqueue_occurrence_id = self
+            .causality
+            .sole_predecessor(dispatched.occurrence_ref())?;
+        if request_enqueue_occurrence_id.is_empty()
+            || dispatched.occurrence_ref().is_empty()
+            || received.occurrence_ref().is_empty()
+            || !self
+                .causality
+                .reaches(dispatched.occurrence_ref(), request_enqueue_occurrence_id)
+            || !self
+                .causality
+                .reaches(received.occurrence_ref(), dispatched.occurrence_ref())
+        {
+            return None;
+        }
+        Some(Sys4ObserverEndpointOccurrences {
+            request_enqueue_occurrence_id: request_enqueue_occurrence_id.to_string(),
+            dispatch_occurrence_id: dispatched.occurrence_ref().to_string(),
+            receive_occurrence_id: received.occurrence_ref().to_string(),
+            source_ref: dispatched.source_ref().clone(),
+            core_ref: dispatched.core_ref().to_string(),
+            source_fragment_ref: dispatched.source_fragment_ref().to_string(),
+            target_fragment_ref: dispatched.target_fragment_ref().to_string(),
+            edge_ref: dispatched.edge_ref().to_string(),
+        })
+    }
+
+    /// Exact M8 occurrence for a completed request.  Ambiguity is rejected
+    /// rather than hidden behind a first-match observer projection.
+    pub(crate) fn observer_exact_m8_occurrence(
+        &self,
+        request_id: &str,
+        kind: M8LocalTraceKind,
+    ) -> Option<&str> {
+        self.m8_actual_trace()
+            .ok()
+            .and_then(|trace| trace.observer_exact_node_ref_for_request_kind(request_id, kind))
+    }
+
+    pub(crate) fn observer_causally_reaches(
+        &self,
+        descendant_occurrence: &str,
+        ancestor_occurrence: &str,
+    ) -> bool {
+        self.causality
+            .reaches(descendant_occurrence, ancestor_occurrence)
+    }
+
     #[cfg(test)]
     pub(crate) fn m8_backend_test_support_mut(&mut self) -> M8BackendTestSupport<'_> {
         M8BackendTestSupport {
@@ -8348,6 +8810,20 @@ impl LocalFabric {
         self.cache.clone()
     }
 
+    /// Observer-safe cache cardinality for one checked designated operation
+    /// and consumer.  It returns neither a cached value nor a delivery
+    /// binding, so callers can use it only as a mutation-free status fact.
+    pub(crate) fn designated_cache_entry_count_for_value(
+        &self,
+        value_name: &str,
+        consumer: &str,
+    ) -> usize {
+        self.cache
+            .values()
+            .filter(|entry| entry.operation == value_name && entry.consumer_locus == consumer)
+            .count()
+    }
+
     /// Typed worker-backed designated-publication observer. `Ok(None)` is a
     /// genuine absence; `Err(ObserverSnapshotUnavailable)` means no observer
     /// result is available and must never be silently read as absence.
@@ -8386,6 +8862,28 @@ impl LocalFabric {
 
     pub(crate) fn designated_consumption_state(&self) -> &DesignatedConsumptionState {
         &self.consumption_state
+    }
+
+    /// Observer-safe aggregate for one projected designated value at one
+    /// consumer locus.  The semantic-state key remains the sealed internal
+    /// identity; this accessor merely joins it to the already cached checked
+    /// operation name and exposes no delivery payload or M9 material.
+    pub(crate) fn designated_semantic_consumption_count_for_value(
+        &self,
+        value_name: &str,
+        consumer: &str,
+    ) -> usize {
+        self.consumption_state
+            .counts
+            .iter()
+            .filter(|((semantic_identity, locus), _)| {
+                locus == consumer
+                    && self.cache.get(semantic_identity).is_some_and(|entry| {
+                        entry.operation == value_name && entry.consumer_locus == consumer
+                    })
+            })
+            .map(|(_, count)| *count)
+            .sum()
     }
     pub(crate) fn projected_artifact_identity(&self) -> &CheckedProgramIdentity {
         self.program.checked_program_identity()

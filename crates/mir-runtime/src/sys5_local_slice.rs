@@ -1,12 +1,10 @@
-//! Provisional SYS-5 local-slice build/project facade.
+//! Experimental SYS-5 local-slice build/project and local-runtime facade.
 //!
 //! The facade accepts an ordinary Surface v0 source, checks it once, derives
 //! the exact declared logical-locus inventory, and summarizes the resulting
-//! SYS-3 projection.  It deliberately does not start SYS-4 dispatch, grant
-//! authority, or turn deferred auth/verification obligations into admissions.
-//! A separate CLI may consume this module through Rust visibility during the
-//! current profile, but that is not a compatibility, public ABI, or wire-format
-//! commitment.
+//! SYS-3 projection.  A prepared finite admission can subsequently start the
+//! bounded ST local runtime.  It is deliberately experimental: this module is
+//! neither a public compatibility, ABI, nor wire-format commitment.
 
 use std::{
     collections::{BTreeMap, BTreeSet},
@@ -34,8 +32,8 @@ use crate::{
     },
     sys4_dispatch::{
         FabricProgram, LocalFabric, ObserverSafeM9SemanticRowSets, ObserverSafeM9Summary,
-        RelationPublicationFailureDisposition, SealedFabricAdmission, Sys4DispatchDiagnostics,
-        Sys4InitialStateSeed, Sys4RelationEndpointReceipt,
+        RelationPublicationFailureDisposition, RuntimeValue, SealedFabricAdmission, SourceAction,
+        Sys4DispatchDiagnostics, Sys4InitialStateSeed, Sys4RelationEndpointReceipt,
     },
 };
 
@@ -104,7 +102,9 @@ impl fmt::Display for Sys5LocalSliceError {
 
 impl Error for Sys5LocalSliceError {}
 
-/// A non-executing checked-and-projected local slice.
+/// An experimental, non-public checked/projected local slice.  It can start
+/// the bounded in-process runtime through `Sys5PreparedAdmission`; this type
+/// itself retains only checked/projected state, not a live fabric.
 #[derive(Clone, PartialEq, Eq)]
 pub struct Sys5LocalProject {
     checked: CheckedSurfaceV0,
@@ -139,7 +139,9 @@ impl Sys5LocalProject {
         &self.semantic_summary
     }
 
-    /// A serializable, observer-safe causal index for this non-executing build.
+    /// A serializable, observer-safe causal index for this checked/projected
+    /// build. Runtime occurrence joins are exposed only by an admitted live
+    /// slice, never by this projection summary alone.
     pub fn observer_safe_view(&self) -> &Sys5ObserverSafeView {
         &self.observer_safe_view
     }
@@ -206,6 +208,10 @@ impl Sys5LocalProject {
                 Sys5LocalAdmissionErrorKind::BackendIneligible,
             ));
         }
+        // The finite runtime always starts from an empty SYS-4 seed.  Literal
+        // source/Core owner writes are classified below and executed through
+        // the admitted generated endpoint only after the fabric exists.
+        let startup_plan = self.vertical_startup_plan(&request.principal);
 
         let mut m9_facts = vec![M9FiniteLocalAdmissionFact::anchor_membership(
             &request.principal,
@@ -259,15 +265,17 @@ impl Sys5LocalProject {
         .map_err(|_| Sys5LocalAdmissionError::new(Sys5LocalAdmissionErrorKind::M9Rejected))?;
         let seam = M9RuntimeExecutionSeam::admit_validated_finite_local_candidate(candidate)
             .map_err(|_| Sys5LocalAdmissionError::new(Sys5LocalAdmissionErrorKind::M9Rejected))?;
-        let seed =
+        let empty_seed =
             Sys4InitialStateSeed::for_checked_program(self.checked.program_identity().clone());
-        let admission = SealedFabricAdmission::from_m9_execution_seam(&program, seam, seed)
+        let admission = SealedFabricAdmission::from_m9_execution_seam(&program, seam, empty_seed)
             .map_err(|_| {
-                Sys5LocalAdmissionError::new(
-                    Sys5LocalAdmissionErrorKind::IncompleteSourceDerivedInventory,
-                )
-            })?;
+            Sys5LocalAdmissionError::new(
+                Sys5LocalAdmissionErrorKind::IncompleteSourceDerivedInventory,
+            )
+        })?;
         let inventory = Sys5AdmissionInventory::from_checked(&self.checked);
+        let vertical_bindings =
+            Sys5VerticalBindings::from_checked(&self.checked, &request.principal);
         let sealed_summary = admission.observer_safe_m9_summary_clone();
         let sealed_rows = admission.observer_safe_m9_semantic_row_sets_clone();
         let mut sealed_attestation =
@@ -293,6 +301,9 @@ impl Sys5LocalProject {
             summary,
             inventory,
             sealed_attestation,
+            startup_plan,
+            source_principal: request.principal,
+            vertical_bindings,
         })
     }
 
@@ -441,6 +452,188 @@ impl Sys5LocalProject {
     }
 }
 
+/// One checked owner cell in the intentionally small local vertical profile.
+/// The coordinate is derived from Core and the single admitted principal; it
+/// is never accepted from an external schedule action.
+#[derive(Debug, Clone, PartialEq, Eq, PartialOrd, Ord)]
+struct Sys5VerticalCell {
+    locus: String,
+    state: String,
+    index: String,
+    field: String,
+}
+
+impl Sys5VerticalCell {
+    fn from_fixed_read(
+        read: &mir_semantics::surface_v0_pipeline::TypedStateRead,
+        principal: &str,
+    ) -> Self {
+        Self {
+            locus: read.owner_locus().to_string(),
+            state: read.namespace().to_string(),
+            index: read.index().unwrap_or(principal).to_string(),
+            field: read.field().unwrap_or_default().to_string(),
+        }
+    }
+
+    fn from_owner_action_read(
+        read: &mir_semantics::surface_v0_pipeline::TypedStateRead,
+        principal: &str,
+    ) -> Self {
+        let mut cell = Self::from_fixed_read(read, principal);
+        // The small external action has no target input.  Its only admitted
+        // owner-operation parameter is bound to the one principal named by
+        // the sealed admission.  This follows the checked target shape, not
+        // a fixture operation name or a caller-provided state coordinate.
+        if read.index().is_some_and(|index| index != principal) {
+            cell.index = principal.to_string();
+        }
+        cell
+    }
+}
+
+#[derive(Debug, Clone, PartialEq, Eq)]
+struct Sys5StartupInitializer {
+    operation_id: String,
+    source_locus: String,
+    owner_locus: String,
+    cell: Sys5VerticalCell,
+    literal: i64,
+}
+
+#[derive(Debug, Clone, PartialEq, Eq, Default)]
+struct Sys5VerticalStartupPlan {
+    initializers: Vec<Sys5StartupInitializer>,
+    required_cells: BTreeSet<Sys5VerticalCell>,
+    observer_safe_cells: BTreeSet<Sys5VerticalCell>,
+    observer_visible_designated_values: BTreeSet<String>,
+}
+
+impl Sys5VerticalStartupPlan {
+    fn is_complete(&self) -> bool {
+        self.required_cells.len() == self.initializers.len()
+            && self.required_cells.iter().all(|required| {
+                self.initializers
+                    .iter()
+                    .filter(|initializer| &initializer.cell == required)
+                    .count()
+                    == 1
+            })
+    }
+
+    fn observer_safe_contains(&self, locus: &str, state: &str, index: &str, field: &str) -> bool {
+        self.observer_safe_cells.contains(&Sys5VerticalCell {
+            locus: locus.to_string(),
+            state: state.to_string(),
+            index: index.to_string(),
+            field: field.to_string(),
+        })
+    }
+
+    fn observer_visible_designated_value(&self, value_name: &str) -> bool {
+        self.observer_visible_designated_values.contains(value_name)
+    }
+}
+
+impl Sys5LocalProject {
+    /// Classify the finite initial owner writes required by the checked
+    /// vertical fragment.  A candidate must be an integer literal write; the
+    /// plan then requires an exact, unambiguous initializer for every cell
+    /// touched by the accepted owner/designated fragment.
+    /// Names are not used as selectors; ambiguity is retained for the start
+    /// boundary to fail closed.
+    fn vertical_startup_plan(&self, source_principal: &str) -> Sys5VerticalStartupPlan {
+        let mut required_cells = BTreeSet::new();
+        let mut observer_safe_cells = BTreeSet::new();
+        let mut literal_candidates = Vec::new();
+        let mut observer_visible_designated_values = BTreeSet::new();
+
+        for evaluation in self.checked.evaluations() {
+            if let Some(owner) = evaluation.owner_rmw_core() {
+                let literal = owner
+                    .expression()
+                    .tree()
+                    .int_literal()
+                    .map(|value| value.value());
+                if literal.is_none() {
+                    for read in std::iter::once(owner.target()).chain(owner.same_owner_reads()) {
+                        if read.value_type() == "Int" {
+                            let cell =
+                                Sys5VerticalCell::from_owner_action_read(read, source_principal);
+                            if self.vertical_cell_is_observer_safe(&cell) {
+                                observer_safe_cells.insert(cell.clone());
+                            }
+                            required_cells.insert(cell);
+                        }
+                    }
+                } else if let Some(value) = literal {
+                    let cell = Sys5VerticalCell::from_fixed_read(owner.target(), source_principal);
+                    // A literal owner write has no hidden input edge.  It is
+                    // therefore the only source/Core-derived way this finite
+                    // profile creates a local cell from its empty fabric.
+                    required_cells.insert(cell.clone());
+                    literal_candidates.push(Sys5StartupInitializer {
+                        operation_id: evaluation.name().to_string(),
+                        source_locus: owner.authority_origin_locus().to_string(),
+                        owner_locus: owner.owner_locus().to_string(),
+                        cell,
+                        literal: value,
+                    });
+                }
+            }
+            if let Some(designated) = evaluation.designated_core() {
+                let value_name = format!("{}.{}", designated.evaluator(), designated.result());
+                let mut all_inputs_observer_safe = true;
+                for read in designated.expression().state_reads() {
+                    if read.value_type() == "Int" {
+                        let cell = Sys5VerticalCell::from_fixed_read(read, source_principal);
+                        all_inputs_observer_safe &= self.vertical_cell_is_observer_safe(&cell);
+                        if self.vertical_cell_is_observer_safe(&cell) {
+                            observer_safe_cells.insert(cell.clone());
+                        }
+                        required_cells.insert(cell);
+                    } else {
+                        all_inputs_observer_safe = false;
+                    }
+                }
+                // The checked Core retains a declared observation policy.  A
+                // result is viewer-visible only when that policy exists and
+                // every field that feeds the expression is observer-safe.
+                if all_inputs_observer_safe && !designated.observation_policy().name.is_empty() {
+                    observer_visible_designated_values.insert(value_name);
+                }
+            }
+        }
+
+        let mut initializers = literal_candidates
+            .into_iter()
+            .filter(|candidate| required_cells.contains(&candidate.cell))
+            .collect::<Vec<_>>();
+        initializers.sort_by(|left, right| left.operation_id.cmp(&right.operation_id));
+        Sys5VerticalStartupPlan {
+            initializers,
+            required_cells,
+            observer_safe_cells,
+            observer_visible_designated_values,
+        }
+    }
+
+    fn vertical_cell_is_observer_safe(&self, cell: &Sys5VerticalCell) -> bool {
+        self.checked
+            .static_environment()
+            .indexed_state_schema(&cell.state)
+            .is_some_and(|schema| {
+                schema.owner_locus() == cell.locus
+                    && schema
+                        .fields()
+                        .iter()
+                        .find(|field| field.name() == cell.field)
+                        .and_then(|field| field.visibility_channel())
+                        == Some("observer_safe")
+            })
+    }
+}
+
 /// Chosen backend profile for the finite local SYS-5 admission.  This is an
 /// internal profile choice, not a public deployment or wire selection.
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize)]
@@ -523,6 +716,130 @@ impl Sys5LocalAdmissionRequest {
     pub fn with_optional_verification_discharge(mut self, name: impl Into<String>) -> Self {
         self.verification_discharge = Some(name.into());
         self
+    }
+}
+
+#[derive(Debug, Clone, PartialEq, Eq)]
+struct Sys5VerticalOwnerBinding {
+    operation_id: String,
+    source_locus: String,
+    owner_locus: String,
+    declared_target_parameter: String,
+    coordinate_binding_is_closed: bool,
+}
+
+#[derive(Debug, Clone, PartialEq, Eq)]
+struct Sys5VerticalDesignatedBinding {
+    value_name: String,
+    evaluator_locus: String,
+    consumer_locus: String,
+    trigger_frontier: String,
+    input_source_locus: Option<String>,
+}
+
+#[derive(Debug, Clone, PartialEq, Eq, Default)]
+struct Sys5VerticalBindings {
+    owner_operations: Vec<Sys5VerticalOwnerBinding>,
+    designated_values: Vec<Sys5VerticalDesignatedBinding>,
+    relation_ids: BTreeSet<String>,
+}
+
+impl Sys5VerticalBindings {
+    fn from_checked(checked: &CheckedSurfaceV0, source_principal: &str) -> Self {
+        let mut owner_operations = Vec::new();
+        let mut designated_evaluators = BTreeMap::new();
+        let mut designated_consumers = BTreeMap::new();
+        let mut relation_ids = BTreeSet::new();
+        for evaluation in checked.evaluations() {
+            if let Some(owner) = evaluation.owner_rmw_core() {
+                // Literal owner writes are source/Core startup work.  The
+                // external vertical action binds only the unique remaining
+                // RMW whose target is a declared parameter.
+                if owner.expression().tree().int_literal().is_none() {
+                    let declared_target_parameter = owner
+                        .target()
+                        .index()
+                        .unwrap_or(source_principal)
+                        .to_string();
+                    owner_operations.push(Sys5VerticalOwnerBinding {
+                        operation_id: evaluation.name().to_string(),
+                        source_locus: owner.authority_origin_locus().to_string(),
+                        owner_locus: owner.owner_locus().to_string(),
+                        coordinate_binding_is_closed: std::iter::once(owner.target())
+                            .chain(owner.same_owner_reads())
+                            .all(|read| {
+                                read.index().is_none_or(|index| {
+                                    index == source_principal || index == declared_target_parameter
+                                })
+                            }),
+                        declared_target_parameter,
+                    });
+                }
+            }
+            if let Some(designated) = evaluation.designated_core() {
+                let value_name = format!("{}.{}", designated.evaluator(), designated.result());
+                let dependencies = designated.generated_remote_input_dependencies();
+                designated_evaluators.insert(
+                    value_name,
+                    (
+                        designated.evaluator().to_string(),
+                        designated
+                            .trigger()
+                            .frontier()
+                            .unwrap_or_default()
+                            .to_string(),
+                        (dependencies.len() == 1)
+                            .then(|| dependencies[0].source_owner_locus().to_string()),
+                    ),
+                );
+            }
+            if let Some(consumer) = evaluation.designated_result_consumer_core() {
+                designated_consumers.insert(
+                    format!("{}.{}", consumer.evaluator(), consumer.result()),
+                    consumer.consumer_locus().to_string(),
+                );
+            }
+            if evaluation.relation_core().is_some() {
+                relation_ids.insert(evaluation.name().to_string());
+            }
+        }
+        owner_operations.sort_by(|left, right| left.operation_id.cmp(&right.operation_id));
+        let designated_values = designated_evaluators
+            .into_iter()
+            .filter_map(
+                |(value_name, (evaluator_locus, trigger_frontier, input_source_locus))| {
+                    designated_consumers
+                        .remove(&value_name)
+                        .map(|consumer_locus| Sys5VerticalDesignatedBinding {
+                            value_name,
+                            evaluator_locus,
+                            consumer_locus,
+                            trigger_frontier,
+                            input_source_locus,
+                        })
+                },
+            )
+            .collect();
+        Self {
+            owner_operations,
+            designated_values,
+            relation_ids,
+        }
+    }
+
+    fn canonical_owner(&self) -> Option<&Sys5VerticalOwnerBinding> {
+        (self.owner_operations.len() == 1 && self.owner_operations[0].coordinate_binding_is_closed)
+            .then(|| &self.owner_operations[0])
+    }
+
+    fn canonical_designated(&self) -> Option<&Sys5VerticalDesignatedBinding> {
+        (self.designated_values.len() == 1).then(|| &self.designated_values[0])
+    }
+
+    fn is_canonical_vertical_path(&self) -> bool {
+        self.canonical_owner().is_some()
+            && self.canonical_designated().is_some()
+            && !self.relation_ids.is_empty()
     }
 }
 
@@ -622,6 +939,9 @@ pub struct Sys5PreparedAdmission {
     summary: Sys5AdmissionSummary,
     inventory: Sys5AdmissionInventory,
     sealed_attestation: Sys5SealedInventoryAttestation,
+    startup_plan: Sys5VerticalStartupPlan,
+    source_principal: String,
+    vertical_bindings: Sys5VerticalBindings,
 }
 
 impl fmt::Debug for Sys5PreparedAdmission {
@@ -711,6 +1031,175 @@ impl Sys5PreparedAdmission {
             checked_program_identity_ref,
         })
     }
+
+    /// Start the bounded SYS-5 vertical slice on one admitted ST
+    /// `LocalFabric`.  The caller cannot attach a second projection, M9 seam,
+    /// route, or initial-state seed after this boundary.
+    pub fn start_vertical_slice_runtime(
+        self,
+    ) -> Result<Sys5VerticalSliceRuntime, Sys5VerticalSliceError> {
+        if self.summary.runtime_profile() != Sys5LocalRuntimeProfile::St {
+            return Err(Sys5VerticalSliceError::new(
+                Sys5VerticalDiagnosticKind::BackendIneligible,
+            ));
+        }
+        if !self.startup_plan.is_complete() || !self.vertical_bindings.is_canonical_vertical_path()
+        {
+            return Err(Sys5VerticalSliceError::new(
+                Sys5VerticalDiagnosticKind::VerticalInventoryIncomplete,
+            ));
+        }
+        let checked_program_identity_ref = self.summary.checked_program_identity_ref().to_string();
+        let mut fabric = LocalFabric::bootstrap(self.program, self.admission, BackendProfile::St)
+            .map_err(|_| {
+            Sys5VerticalSliceError::new(Sys5VerticalDiagnosticKind::FabricBootRejected)
+        })?;
+        let verification_discharges = self.summary.verification_discharges.clone();
+        let mut joined_report = Sys5VerticalJoinedReport::new(verification_discharges);
+        joined_report.push("auth:sealed-m9-source-derived".to_string());
+        joined_report.push(format!(
+            "checked-program-ref:{checked_program_identity_ref}"
+        ));
+        dispatch_vertical_startup_initializers(
+            &mut fabric,
+            &self.startup_plan,
+            &mut joined_report,
+        )?;
+        Ok(Sys5VerticalSliceRuntime {
+            fabric,
+            fabric_instance_ref: relation_observer_ref(&checked_program_identity_ref),
+            checked_program_identity_ref,
+            startup_plan: self.startup_plan,
+            source_principal: self.source_principal,
+            bindings: self.vertical_bindings,
+            joined_report,
+        })
+    }
+}
+
+/// Execute the checked literal initializers after admission, through the same
+/// local fabric that later owns the vertical actions.  The empty seed is
+/// observed before every write; a missing, duplicate, mismatched, or
+/// non-generated operation rejects startup without fabricating a receipt.
+fn dispatch_vertical_startup_initializers(
+    fabric: &mut LocalFabric,
+    plan: &Sys5VerticalStartupPlan,
+    joined_report: &mut Sys5VerticalJoinedReport,
+) -> Result<(), Sys5VerticalSliceError> {
+    if !plan.is_complete() || plan.initializers.len() != 3 {
+        return Err(Sys5VerticalSliceError::new(
+            Sys5VerticalDiagnosticKind::VerticalInventoryIncomplete,
+        ));
+    }
+    let mut seen_cells = BTreeSet::new();
+    for initializer in &plan.initializers {
+        if !seen_cells.insert(initializer.cell.clone())
+            || fabric
+                .semantic_snapshot()
+                .int(
+                    &initializer.cell.locus,
+                    &initializer.cell.state,
+                    &initializer.cell.index,
+                    &initializer.cell.field,
+                )
+                .is_some()
+        {
+            return Err(Sys5VerticalSliceError::new(
+                Sys5VerticalDiagnosticKind::VerticalInventoryIncomplete,
+            ));
+        }
+        let receipt = fabric
+            .dispatch_source_action(SourceAction::owner_operation(&initializer.operation_id))
+            .map_err(Sys5VerticalSliceError::from_dispatch)?;
+        if receipt.operation_id() != initializer.operation_id
+            || receipt.origin_locus() != initializer.source_locus
+            || receipt.target_locus() != initializer.owner_locus
+            || !receipt.owner_rmw_report().is_some_and(|report| {
+                report.has_checked_source_core_provenance()
+                    && report.has_exact_int_write(
+                        &initializer.owner_locus,
+                        &initializer.cell.state,
+                        &initializer.cell.index,
+                        &initializer.cell.field,
+                        initializer.literal,
+                    )
+            })
+            || fabric.semantic_snapshot().int(
+                &initializer.cell.locus,
+                &initializer.cell.state,
+                &initializer.cell.index,
+                &initializer.cell.field,
+            ) != Some(initializer.literal)
+        {
+            return Err(Sys5VerticalSliceError::new(
+                Sys5VerticalDiagnosticKind::VerticalInventoryIncomplete,
+            ));
+        }
+        let endpoint_occurrences = fabric
+            .observer_exact_endpoint_occurrences(
+                receipt.request_id(),
+                crate::sys4_dispatch::Sys4TraceKind::Dispatched,
+                crate::sys4_dispatch::Sys4TraceKind::Received,
+                CommunicationEdgeKind::OwnerRequest,
+                &initializer.source_locus,
+                &initializer.owner_locus,
+            )
+            .ok_or_else(|| {
+                Sys5VerticalSliceError::new(Sys5VerticalDiagnosticKind::VerticalInventoryIncomplete)
+            })?;
+        let serve = fabric
+            .observer_exact_m8_occurrence(
+                receipt.request_id(),
+                crate::m8_runtime_local_cut::M8LocalTraceKind::OwnerWrite,
+            )
+            .ok_or_else(|| {
+                Sys5VerticalSliceError::new(Sys5VerticalDiagnosticKind::VerticalInventoryIncomplete)
+            })?;
+        if !fabric.observer_causally_reaches(serve, endpoint_occurrences.receive_occurrence_id()) {
+            return Err(Sys5VerticalSliceError::new(
+                Sys5VerticalDiagnosticKind::VerticalInventoryIncomplete,
+            ));
+        }
+        let (logical_path, source_span) =
+            observer_logical_source_span(endpoint_occurrences.source_ref()).ok_or_else(|| {
+                Sys5VerticalSliceError::new(Sys5VerticalDiagnosticKind::VerticalInventoryIncomplete)
+            })?;
+        let value = if plan.observer_safe_contains(
+            &initializer.cell.locus,
+            &initializer.cell.state,
+            &initializer.cell.index,
+            &initializer.cell.field,
+        ) {
+            initializer.literal.to_string()
+        } else {
+            "[private]".to_string()
+        };
+        joined_report.push(format!(
+            "startup-receipt:{}:{}->{}:{}[{}].{}:Created(None->{value})",
+            initializer.operation_id,
+            initializer.source_locus,
+            initializer.owner_locus,
+            initializer.cell.state,
+            initializer.cell.index,
+            initializer.cell.field,
+        ));
+        joined_report.push(format!(
+            "startup-occurrence:{}:{}",
+            initializer.operation_id, serve,
+        ));
+        joined_report.push(format!(
+            "typed-segment:owner-request:provenance_kind=OrdinarySourceCore;logical_path={logical_path};source_span={source_span};core_ref={};source_fragment_ref={};target_fragment_ref={};edge_ref={};request_identity={};request_enqueue_occurrence_id={};dispatch_occurrence_id={};receive_occurrence_id={};serve_occurrence_id={serve};causal_path=request_enqueue_occurrence_id->dispatch_occurrence_id->receive_occurrence_id->serve_occurrence_id",
+            endpoint_occurrences.core_ref(),
+            endpoint_occurrences.source_fragment_ref(),
+            endpoint_occurrences.target_fragment_ref(),
+            endpoint_occurrences.edge_ref(),
+            receipt.request_id(),
+            endpoint_occurrences.request_enqueue_occurrence_id(),
+            endpoint_occurrences.dispatch_occurrence_id(),
+            endpoint_occurrences.receive_occurrence_id(),
+        ));
+    }
+    Ok(())
 }
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
@@ -880,8 +1369,10 @@ pub struct Sys5RelationEndpointChain {
     source_locus: String,
     target_locus: String,
     source_ref: String,
+    logical_path: String,
+    source_span: String,
     owner_publish_occurrence_id: String,
-    request_occurrence_id: String,
+    request_identity: String,
     request_enqueue_occurrence_id: String,
     dispatch_occurrence_id: String,
     receive_occurrence_id: String,
@@ -910,12 +1401,14 @@ impl Sys5RelationEndpointChain {
     pub fn owner_publish_occurrence_id(&self) -> &str {
         &self.owner_publish_occurrence_id
     }
-    pub fn request_occurrence_id(&self) -> &str {
-        &self.request_occurrence_id
+    /// The generated request's source-derived identity.  This deliberately
+    /// remains distinct from the concrete endpoint occurrences below.
+    pub fn request_identity(&self) -> &str {
+        &self.request_identity
     }
 
     /// Actual source outbox occurrence for the generated request.  This is
-    /// distinct from `request_occurrence_id`, which is the source-derived
+    /// distinct from `request_identity`, which is the source-derived
     /// request identity shown to the external schedule.
     pub fn request_enqueue_occurrence_id(&self) -> &str {
         &self.request_enqueue_occurrence_id
@@ -1048,12 +1541,28 @@ impl Sys5RelationDispatchReceipt {
                 format!("artifact-ref:{}", chain.source_fragment_ref),
                 format!("edge-ref:{}", chain.edge_ref),
                 format!("publish:{}", chain.owner_publish_occurrence_id),
-                format!("request:{}", chain.request_occurrence_id),
+                format!("request:{}", chain.request_identity),
                 format!("request-enqueue:{}", chain.request_enqueue_occurrence_id),
                 format!("dispatch:{}", chain.dispatch_occurrence_id),
                 format!("receive:{}", chain.receive_occurrence_id),
                 format!("observe:{}", chain.consumer_observe_occurrence_id),
                 format!("serve:{}", chain.serve_occurrence_id),
+                format!(
+                    "typed-segment:relation-projection-publication:provenance_kind=OrdinarySourceCore;logical_path={};source_span={};core_ref={};source_fragment_ref={};target_fragment_ref={};edge_ref={};request_identity={};owner_publish_occurrence_id={};request_enqueue_occurrence_id={};dispatch_occurrence_id={};receive_occurrence_id={};consumer_observe_occurrence_id={};serve_occurrence_id={};causal_path=owner_publish_occurrence_id->request_enqueue_occurrence_id->dispatch_occurrence_id->receive_occurrence_id->consumer_observe_occurrence_id->serve_occurrence_id",
+                    chain.logical_path,
+                    chain.source_span,
+                    chain.core_ref.as_deref().unwrap_or(""),
+                    chain.source_fragment_ref,
+                    chain.target_fragment_ref,
+                    chain.edge_ref,
+                    chain.request_identity,
+                    chain.owner_publish_occurrence_id,
+                    chain.request_enqueue_occurrence_id,
+                    chain.dispatch_occurrence_id,
+                    chain.receive_occurrence_id,
+                    chain.consumer_observe_occurrence_id,
+                    chain.serve_occurrence_id,
+                ),
             ]);
         }
         rows.sort();
@@ -1075,18 +1584,18 @@ impl Sys5RelationDispatchRuntime {
             Sys5RelationDispatchEventKind::PublishCurrent => self
                 .fabric
                 .publish_relation_current(&action.relation)
-                .map(|receipt| self.endpoint_receipt(action.event_kind, receipt))
-                .map_err(Sys5RelationDispatchError::from_sys4),
+                .map_err(Sys5RelationDispatchError::from_sys4)
+                .and_then(|receipt| self.endpoint_receipt(action.event_kind, receipt)),
             Sys5RelationDispatchEventKind::InvalidatePrimary => self
                 .fabric
                 .invalidate_relation_primary(&action.relation)
-                .map(|receipt| self.endpoint_receipt(action.event_kind, receipt))
-                .map_err(Sys5RelationDispatchError::from_sys4),
+                .map_err(Sys5RelationDispatchError::from_sys4)
+                .and_then(|receipt| self.endpoint_receipt(action.event_kind, receipt)),
             Sys5RelationDispatchEventKind::FreshReacquire => self
                 .fabric
                 .fresh_reacquire_relation_primary(&action.relation)
-                .map(|receipt| self.endpoint_receipt(action.event_kind, receipt))
-                .map_err(Sys5RelationDispatchError::from_sys4),
+                .map_err(Sys5RelationDispatchError::from_sys4)
+                .and_then(|receipt| self.endpoint_receipt(action.event_kind, receipt)),
             Sys5RelationDispatchEventKind::ViewerPresentationGap => {
                 self.presentation_gap_receipt(&action.relation)
             }
@@ -1122,8 +1631,22 @@ impl Sys5RelationDispatchRuntime {
         &self,
         event_kind: Sys5RelationDispatchEventKind,
         receipt: Sys4RelationEndpointReceipt,
-    ) -> Sys5RelationDispatchReceipt {
+    ) -> Result<Sys5RelationDispatchReceipt, Sys5RelationDispatchError> {
+        if !self
+            .fabric
+            .observer_exact_relation_endpoint_receipt(&receipt)
+        {
+            return Err(Sys5RelationDispatchError::new(
+                Sys5RelationDispatchDiagnosticKind::RelationTransitionRejected,
+            ));
+        }
         let edge = receipt.edge();
+        let (logical_path, source_span) = observer_logical_source_span(&edge.source_ref())
+            .ok_or_else(|| {
+                Sys5RelationDispatchError::new(
+                    Sys5RelationDispatchDiagnosticKind::RelationTransitionRejected,
+                )
+            })?;
         let shadow = receipt.shadow();
         let semantic = shadow.semantic();
         let observer_shadow = Sys5RelationObserverShadow {
@@ -1149,8 +1672,10 @@ impl Sys5RelationDispatchRuntime {
             source_locus: edge.source_locus().to_string(),
             target_locus: edge.target_locus().to_string(),
             source_ref: observer_source_ref(&edge.source_ref()),
+            logical_path,
+            source_span,
             owner_publish_occurrence_id: receipt.owner_publish_occurrence_id().to_string(),
-            request_occurrence_id: receipt.request_id().to_string(),
+            request_identity: receipt.request_id().to_string(),
             request_enqueue_occurrence_id: receipt.request_enqueue_occurrence_id().to_string(),
             dispatch_occurrence_id: receipt
                 .transport()
@@ -1176,7 +1701,7 @@ impl Sys5RelationDispatchRuntime {
             observer_safe_report: String::new(),
         };
         receipt.observer_safe_report = receipt.compose_observer_safe_report();
-        receipt
+        Ok(receipt)
     }
 
     fn presentation_gap_receipt(
@@ -1237,6 +1762,1153 @@ impl Sys5RelationDispatchRuntime {
     }
 }
 
+/// Small external schedule surface for the finite SYS-5 vertical slice.
+/// Every variant resolves through the retained checked source inventory.
+#[derive(Debug, Clone, PartialEq, Eq)]
+pub enum Sys5VerticalAction {
+    ParticipantAAttackDeclaredTarget,
+    WorldTick(String),
+    ViewerCConsumeWorldResult,
+    PublishRelation(String),
+    RevokeViewerCConsumerCapability(String),
+    #[cfg(test)]
+    ForTestUnknownSourceOperation(String),
+    #[cfg(test)]
+    ForTestUnknownDesignatedValue(String),
+}
+
+impl Sys5VerticalAction {
+    pub const fn participant_a_attack_declared_target() -> Self {
+        Self::ParticipantAAttackDeclaredTarget
+    }
+
+    pub fn world_tick(tick: impl Into<String>) -> Self {
+        Self::WorldTick(tick.into())
+    }
+
+    pub const fn viewer_c_consume_world_result() -> Self {
+        Self::ViewerCConsumeWorldResult
+    }
+
+    pub fn publish_relation(relation: impl Into<String>) -> Self {
+        Self::PublishRelation(relation.into())
+    }
+
+    pub fn revoke_viewer_c_consumer_capability(value_name: impl Into<String>) -> Self {
+        Self::RevokeViewerCConsumerCapability(value_name.into())
+    }
+
+    #[cfg(test)]
+    pub fn for_test_unknown_source_operation(operation: impl Into<String>) -> Self {
+        Self::ForTestUnknownSourceOperation(operation.into())
+    }
+
+    #[cfg(test)]
+    pub fn for_test_unknown_designated_value(value_name: impl Into<String>) -> Self {
+        Self::ForTestUnknownDesignatedValue(value_name.into())
+    }
+}
+
+/// One live finite vertical slice.  It owns exactly one admitted
+/// `LocalFabric`; relation, owner, designated, and lifecycle actions all use
+/// that same in-process dispatch state.
+pub struct Sys5VerticalSliceRuntime {
+    fabric: LocalFabric,
+    fabric_instance_ref: String,
+    checked_program_identity_ref: String,
+    startup_plan: Sys5VerticalStartupPlan,
+    source_principal: String,
+    bindings: Sys5VerticalBindings,
+    joined_report: Sys5VerticalJoinedReport,
+}
+
+impl fmt::Debug for Sys5VerticalSliceRuntime {
+    fn fmt(&self, formatter: &mut fmt::Formatter<'_>) -> fmt::Result {
+        formatter
+            .debug_struct("Sys5VerticalSliceRuntime")
+            .field("fabric_instance_ref", &self.fabric_instance_ref)
+            .field(
+                "checked_program_identity_ref",
+                &self.checked_program_identity_ref,
+            )
+            .field("locus_count", &self.fabric.locus_names().len())
+            .field("status", &"experimental-source-derived-st-local")
+            .finish()
+    }
+}
+
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+pub enum Sys5VerticalDiagnosticKind {
+    UnknownSourceOperation,
+    UnknownSourceValue,
+    MissingPublishedDesignatedValue,
+    MissingConsumerCapability,
+    RelationTransitionRejected,
+    BackendIneligible,
+    FabricBootRejected,
+    VerticalInventoryIncomplete,
+    DispatchRejected,
+}
+
+#[derive(Debug, Clone, PartialEq, Eq)]
+pub struct Sys5VerticalSliceError {
+    kind: Sys5VerticalDiagnosticKind,
+}
+
+impl Sys5VerticalSliceError {
+    fn new(kind: Sys5VerticalDiagnosticKind) -> Self {
+        Self { kind }
+    }
+
+    fn from_dispatch(diagnostics: Sys4DispatchDiagnostics) -> Self {
+        let kind = match diagnostics.primary().kind() {
+            crate::sys4_dispatch::Sys4DiagnosticKind::MissingPublishedResult => {
+                Sys5VerticalDiagnosticKind::MissingPublishedDesignatedValue
+            }
+            crate::sys4_dispatch::Sys4DiagnosticKind::MissingConsumerCapability => {
+                Sys5VerticalDiagnosticKind::MissingConsumerCapability
+            }
+            _ => Sys5VerticalDiagnosticKind::DispatchRejected,
+        };
+        Self::new(kind)
+    }
+
+    pub const fn kind(&self) -> Sys5VerticalDiagnosticKind {
+        self.kind
+    }
+
+    pub const fn rejected_before_generated_endpoint(&self) -> bool {
+        matches!(
+            self.kind,
+            Sys5VerticalDiagnosticKind::UnknownSourceOperation
+                | Sys5VerticalDiagnosticKind::UnknownSourceValue
+        )
+    }
+
+    pub const fn rejected_before_m9_authority_use(&self) -> bool {
+        matches!(
+            self.kind,
+            Sys5VerticalDiagnosticKind::UnknownSourceOperation
+                | Sys5VerticalDiagnosticKind::UnknownSourceValue
+        )
+    }
+
+    pub const fn rejected_before_m8_cache_or_state_mutation(&self) -> bool {
+        matches!(
+            self.kind,
+            Sys5VerticalDiagnosticKind::UnknownSourceOperation
+                | Sys5VerticalDiagnosticKind::UnknownSourceValue
+                | Sys5VerticalDiagnosticKind::MissingPublishedDesignatedValue
+                | Sys5VerticalDiagnosticKind::MissingConsumerCapability
+        )
+    }
+}
+
+#[derive(Debug, Clone, PartialEq, Eq)]
+pub struct Sys5VerticalEndpointChain {
+    source_locus: String,
+    target_locus: String,
+    edge_kind: CommunicationEdgeKind,
+    logical_path: String,
+    source_span: String,
+    source_ref: String,
+    core_ref: String,
+    artifact_ref: String,
+    source_fragment_ref: String,
+    target_fragment_ref: String,
+    edge_ref: String,
+    request_ref: String,
+    owner_publish_ref: Option<String>,
+    request_enqueue_ref: String,
+    dispatch_ref: String,
+    receive_ref: String,
+    consumer_observe_ref: Option<String>,
+    serve_ref: String,
+}
+
+impl Sys5VerticalEndpointChain {
+    pub fn source_locus(&self) -> &str {
+        &self.source_locus
+    }
+
+    pub fn target_locus(&self) -> &str {
+        &self.target_locus
+    }
+}
+
+#[derive(Debug, Clone, PartialEq, Eq)]
+pub struct Sys5VerticalOwnerMutation {
+    locus: String,
+    state: String,
+    index: String,
+    field: String,
+    old_value: i64,
+    new_value: i64,
+}
+
+impl Sys5VerticalOwnerMutation {
+    pub const fn old_new_int(&self) -> (i64, i64) {
+        (self.old_value, self.new_value)
+    }
+}
+
+#[derive(Debug, Clone, PartialEq, Eq)]
+pub struct Sys5VerticalReceipt {
+    fabric_instance_ref: String,
+    source_derived: bool,
+    source_locus: String,
+    owner_locus: Option<String>,
+    endpoint_chain: Option<Sys5VerticalEndpointChain>,
+    owner_mutations: Vec<Sys5VerticalOwnerMutation>,
+    designated_value_name: Option<String>,
+    evaluator_locus: Option<String>,
+    consumer_locus: Option<String>,
+    typed_int: Option<i64>,
+    performed_m8_semantic_consumption: bool,
+    returned_from_designated_cache_after_authority_revalidation: bool,
+    relation_shadow: Option<Sys5RelationObserverShadow>,
+    no_direct_cross_locus_store_mutation: bool,
+}
+
+#[derive(Debug, Clone, Default)]
+struct Sys5FabricReceiptContext {
+    owner_locus: Option<String>,
+    designated_value_name: Option<String>,
+    evaluator_locus: Option<String>,
+    owner_mutations: Vec<Sys5VerticalOwnerMutation>,
+    no_direct_cross_locus_store_mutation: bool,
+    relation_shadow: Option<Sys5RelationObserverShadow>,
+    endpoint_edge_kind: Option<CommunicationEdgeKind>,
+    m8_trace_kind: Option<crate::m8_runtime_local_cut::M8LocalTraceKind>,
+    endpoint_source_locus: Option<String>,
+    endpoint_target_locus: Option<String>,
+}
+
+impl Sys5VerticalReceipt {
+    pub fn fabric_instance_ref(&self) -> &str {
+        &self.fabric_instance_ref
+    }
+
+    pub const fn is_source_derived(&self) -> bool {
+        self.source_derived
+    }
+
+    pub fn source_locus(&self) -> &str {
+        &self.source_locus
+    }
+
+    pub fn owner_locus(&self) -> Option<&str> {
+        self.owner_locus.as_deref()
+    }
+
+    pub fn generated_endpoint_chain(&self) -> &Sys5VerticalEndpointChain {
+        self.endpoint_chain
+            .as_ref()
+            .expect("generated source action retains one endpoint chain")
+    }
+
+    pub fn owner_mutation(
+        &self,
+        locus: &str,
+        state: &str,
+        index: &str,
+        field: &str,
+    ) -> Option<&Sys5VerticalOwnerMutation> {
+        self.owner_mutations.iter().find(|mutation| {
+            mutation.locus == locus
+                && mutation.state == state
+                && mutation.index == index
+                && mutation.field == field
+        })
+    }
+
+    pub const fn no_direct_cross_locus_store_mutation(&self) -> bool {
+        self.no_direct_cross_locus_store_mutation
+    }
+
+    pub fn designated_value_name(&self) -> Option<&str> {
+        self.designated_value_name.as_deref()
+    }
+
+    pub fn typed_int(&self) -> Option<i64> {
+        self.typed_int
+    }
+
+    pub fn evaluator_locus_is(&self, locus: &str) -> bool {
+        self.evaluator_locus.as_deref() == Some(locus)
+    }
+
+    pub fn consumer_locus(&self) -> Option<&str> {
+        self.consumer_locus.as_deref()
+    }
+
+    pub const fn performed_m8_semantic_consumption(&self) -> bool {
+        self.performed_m8_semantic_consumption
+    }
+
+    pub const fn returned_from_designated_cache_after_authority_revalidation(&self) -> bool {
+        self.returned_from_designated_cache_after_authority_revalidation
+    }
+
+    pub fn observer_relation_shadow(
+        &self,
+        consumer_locus: &str,
+        relation: &str,
+    ) -> Option<&Sys5RelationObserverShadow> {
+        self.relation_shadow.as_ref().filter(|shadow| {
+            shadow.consumer_locus() == consumer_locus && shadow.relation() == relation
+        })
+    }
+}
+
+/// One compact observer-safe causal view.  The values and private M9 material
+/// remain in the runtime; this report carries only typed references and
+/// status rows needed to join source through local occurrences.
+#[derive(Debug, Clone, PartialEq, Eq)]
+pub struct Sys5VerticalJoinedReport {
+    rows: BTreeSet<String>,
+    verification_discharges: Vec<Sys5VerificationDischargeSummary>,
+}
+
+impl Sys5VerticalJoinedReport {
+    fn new(verification_discharges: Vec<Sys5VerificationDischargeSummary>) -> Self {
+        let mut rows = BTreeSet::new();
+        for discharge in &verification_discharges {
+            if discharge.is_discharged() {
+                rows.insert(format!("verification:{}:discharged", discharge.verifier));
+            }
+        }
+        Self {
+            rows,
+            verification_discharges,
+        }
+    }
+
+    fn push(&mut self, row: String) {
+        self.rows.insert(row);
+    }
+
+    pub fn verification_discharge(
+        &self,
+        verifier: &str,
+    ) -> Option<&Sys5VerificationDischargeSummary> {
+        self.verification_discharges
+            .iter()
+            .find(|discharge| discharge.verifier == verifier)
+    }
+
+    pub fn render_compact(&self) -> String {
+        self.rows.iter().cloned().collect::<Vec<_>>().join("\n")
+    }
+}
+
+impl Sys5VerticalSliceRuntime {
+    pub fn dispatch(
+        &mut self,
+        action: Sys5VerticalAction,
+    ) -> Result<Sys5VerticalReceipt, Sys5VerticalSliceError> {
+        match action {
+            Sys5VerticalAction::ParticipantAAttackDeclaredTarget => self.dispatch_owner_attack(),
+            Sys5VerticalAction::WorldTick(tick) => self.dispatch_world_tick(tick),
+            Sys5VerticalAction::ViewerCConsumeWorldResult => self.dispatch_designated_consume(),
+            Sys5VerticalAction::PublishRelation(relation) => {
+                self.dispatch_relation_publish(&relation)
+            }
+            Sys5VerticalAction::RevokeViewerCConsumerCapability(value_name) => {
+                self.dispatch_consumer_capability_revoke(&value_name)
+            }
+            #[cfg(test)]
+            Sys5VerticalAction::ForTestUnknownSourceOperation(_) => {
+                self.reject(Sys5VerticalDiagnosticKind::UnknownSourceOperation)
+            }
+            #[cfg(test)]
+            Sys5VerticalAction::ForTestUnknownDesignatedValue(_) => {
+                self.reject(Sys5VerticalDiagnosticKind::UnknownSourceValue)
+            }
+        }
+    }
+
+    pub fn local_fabric_instance_ref(&self) -> &str {
+        &self.fabric_instance_ref
+    }
+
+    pub const fn local_fabric_instance_count(&self) -> usize {
+        1
+    }
+
+    pub fn observer_safe_int(
+        &self,
+        locus: &str,
+        state: &str,
+        index: &str,
+        field: &str,
+    ) -> Option<i64> {
+        self.startup_plan
+            .observer_safe_contains(locus, state, index, field)
+            .then(|| {
+                self.fabric
+                    .semantic_snapshot()
+                    .int(locus, state, index, field)
+            })
+            .flatten()
+    }
+
+    pub fn observer_safe_state_digest(&self) -> String {
+        let snapshot = self.fabric.semantic_snapshot();
+        let facts = self
+            .startup_plan
+            .observer_safe_cells
+            .iter()
+            .map(|cell| {
+                format!(
+                    "{}:{}:{}:{}:{:?}",
+                    cell.locus,
+                    cell.state,
+                    cell.index,
+                    cell.field,
+                    snapshot.int(&cell.locus, &cell.state, &cell.index, &cell.field),
+                )
+            })
+            .collect::<Vec<_>>();
+        relation_observer_ref(&facts.join("\n"))
+    }
+
+    pub fn viewer_has_designated_evaluator(&self, locus: &str, value_name: &str) -> bool {
+        self.fabric.locus_runtime(locus).is_some_and(|runtime| {
+            runtime
+                .artifact()
+                .has_designated_evaluation_expression(value_name)
+        })
+    }
+
+    pub fn designated_evaluation_count(&self, value_name: &str) -> usize {
+        self.fabric
+            .m8_actual_trace()
+            .map(|trace| trace.designated_evaluation_count(value_name))
+            .unwrap_or_default()
+    }
+
+    pub fn designated_semantic_consumption_count(&self, value_name: &str, consumer: &str) -> usize {
+        self.fabric
+            .designated_semantic_consumption_count_for_value(value_name, consumer)
+    }
+
+    pub fn designated_cache_digest(&self, value_name: &str, consumer: &str) -> String {
+        let entries = self
+            .fabric
+            .designated_cache_entry_count_for_value(value_name, consumer);
+        relation_observer_ref(&format!("cache:{value_name}:{consumer}:{entries}"))
+    }
+
+    pub fn observer_safe_joined_report(&self) -> &Sys5VerticalJoinedReport {
+        &self.joined_report
+    }
+
+    fn dispatch_owner_attack(&mut self) -> Result<Sys5VerticalReceipt, Sys5VerticalSliceError> {
+        let binding = self.bindings.canonical_owner().cloned().ok_or_else(|| {
+            Sys5VerticalSliceError::new(Sys5VerticalDiagnosticKind::UnknownSourceOperation)
+        })?;
+        let before = self.fabric.semantic_snapshot();
+        let receipt = self
+            .fabric
+            .dispatch_source_action(
+                SourceAction::owner_operation(&binding.operation_id)
+                    .with_argument(binding.declared_target_parameter, &self.source_principal),
+            )
+            .map_err(Sys5VerticalSliceError::from_dispatch)?;
+        debug_assert_eq!(receipt.origin_locus(), binding.source_locus);
+        debug_assert_eq!(receipt.target_locus(), binding.owner_locus);
+        let after = self.fabric.semantic_snapshot();
+        let owner_mutations = self.owner_mutations_since(&before, &after, &binding.owner_locus);
+        let no_direct_cross_locus_store_mutation = after
+            .changed_loci_since(&before)
+            .iter()
+            .all(|locus| locus == &binding.owner_locus);
+        let result = self.receipt_from_fabric(
+            receipt,
+            Sys5FabricReceiptContext {
+                owner_locus: Some(binding.owner_locus.clone()),
+                owner_mutations,
+                no_direct_cross_locus_store_mutation,
+                endpoint_edge_kind: Some(CommunicationEdgeKind::OwnerRequest),
+                m8_trace_kind: Some(crate::m8_runtime_local_cut::M8LocalTraceKind::OwnerWrite),
+                endpoint_source_locus: Some(binding.source_locus.clone()),
+                endpoint_target_locus: Some(binding.owner_locus.clone()),
+                ..Sys5FabricReceiptContext::default()
+            },
+        )?;
+        Ok(result)
+    }
+
+    fn dispatch_world_tick(
+        &mut self,
+        tick: String,
+    ) -> Result<Sys5VerticalReceipt, Sys5VerticalSliceError> {
+        let binding = self
+            .bindings
+            .canonical_designated()
+            .cloned()
+            .ok_or_else(|| {
+                Sys5VerticalSliceError::new(Sys5VerticalDiagnosticKind::UnknownSourceValue)
+            })?;
+        if !self
+            .startup_plan
+            .observer_visible_designated_value(&binding.value_name)
+        {
+            return self.reject(Sys5VerticalDiagnosticKind::UnknownSourceValue);
+        }
+        // The vertical observer contract has one generated remote input
+        // segment.  A same-owner/private expression is not substituted into
+        // that path; reject before dispatch rather than expose its raw value.
+        let input_source_locus = binding.input_source_locus.clone().ok_or_else(|| {
+            Sys5VerticalSliceError::new(Sys5VerticalDiagnosticKind::UnknownSourceValue)
+        })?;
+        let receipt = self
+            .fabric
+            .dispatch_source_action(
+                SourceAction::designated_tick(&binding.value_name)
+                    .with_tick(&binding.trigger_frontier, tick),
+            )
+            .map_err(Sys5VerticalSliceError::from_dispatch)?;
+        let result = self.receipt_from_fabric(
+            receipt.clone(),
+            Sys5FabricReceiptContext {
+                designated_value_name: Some(binding.value_name.clone()),
+                evaluator_locus: Some(binding.evaluator_locus.clone()),
+                no_direct_cross_locus_store_mutation: true,
+                endpoint_edge_kind: Some(CommunicationEdgeKind::DesignatedInputRequest),
+                m8_trace_kind: Some(
+                    crate::m8_runtime_local_cut::M8LocalTraceKind::DesignatedValuePublished,
+                ),
+                endpoint_source_locus: Some(binding.evaluator_locus.clone()),
+                endpoint_target_locus: Some(input_source_locus),
+                ..Sys5FabricReceiptContext::default()
+            },
+        )?;
+        Ok(result)
+    }
+
+    fn dispatch_designated_consume(
+        &mut self,
+    ) -> Result<Sys5VerticalReceipt, Sys5VerticalSliceError> {
+        let binding = self
+            .bindings
+            .canonical_designated()
+            .cloned()
+            .ok_or_else(|| {
+                Sys5VerticalSliceError::new(Sys5VerticalDiagnosticKind::UnknownSourceValue)
+            })?;
+        let receipt = match self
+            .fabric
+            .dispatch_source_action(SourceAction::consume_designated_result(&binding.value_name))
+        {
+            Ok(receipt) => receipt,
+            Err(diagnostics) => {
+                let error = Sys5VerticalSliceError::from_dispatch(diagnostics);
+                self.joined_report
+                    .push(format!("failure:{:?}", error.kind()));
+                return Err(error);
+            }
+        };
+        let returned_from_cache =
+            receipt.returned_from_designated_cache_after_authority_revalidation();
+        if returned_from_cache {
+            return self.cache_retry_receipt(receipt, binding);
+        }
+        let result = self.receipt_from_fabric(
+            receipt.clone(),
+            Sys5FabricReceiptContext {
+                designated_value_name: Some(binding.value_name.clone()),
+                no_direct_cross_locus_store_mutation: true,
+                endpoint_edge_kind: Some(CommunicationEdgeKind::DesignatedResultDelivery),
+                m8_trace_kind: Some(if returned_from_cache {
+                    crate::m8_runtime_local_cut::M8LocalTraceKind::DesignatedCacheValidated
+                } else {
+                    crate::m8_runtime_local_cut::M8LocalTraceKind::DesignatedValueConsumed
+                }),
+                endpoint_source_locus: Some(binding.evaluator_locus.clone()),
+                endpoint_target_locus: Some(binding.consumer_locus.clone()),
+                ..Sys5FabricReceiptContext::default()
+            },
+        )?;
+        self.record_designated_causal_segments(&receipt, &binding)?;
+        Ok(result)
+    }
+
+    fn dispatch_relation_publish(
+        &mut self,
+        relation: &str,
+    ) -> Result<Sys5VerticalReceipt, Sys5VerticalSliceError> {
+        if !self.bindings.relation_ids.contains(relation) {
+            return self.reject(Sys5VerticalDiagnosticKind::UnknownSourceOperation);
+        }
+        let receipt = self
+            .fabric
+            .publish_relation_current(relation)
+            .map_err(|_| {
+                Sys5VerticalSliceError::new(Sys5VerticalDiagnosticKind::RelationTransitionRejected)
+            })?;
+        if !self
+            .fabric
+            .observer_exact_relation_endpoint_receipt(&receipt)
+        {
+            return Err(Sys5VerticalSliceError::new(
+                Sys5VerticalDiagnosticKind::RelationTransitionRejected,
+            ));
+        }
+        let (logical_path, source_span) =
+            observer_logical_source_span(&receipt.edge().source_ref()).ok_or_else(|| {
+                Sys5VerticalSliceError::new(Sys5VerticalDiagnosticKind::RelationTransitionRejected)
+            })?;
+        let endpoint_chain = Sys5VerticalEndpointChain {
+            source_locus: receipt.edge().source_locus().to_string(),
+            target_locus: receipt.edge().target_locus().to_string(),
+            edge_kind: receipt.edge().kind(),
+            logical_path,
+            source_span,
+            source_ref: relation_observer_ref(&format!(
+                "{}:{}:{}:{}:{}",
+                receipt.edge().source_ref().path,
+                receipt.edge().source_ref().start_line,
+                receipt.edge().source_ref().start_column,
+                receipt.edge().source_ref().end_line,
+                receipt.edge().source_ref().end_column,
+            )),
+            core_ref: receipt.edge().core_ref().unwrap_or_default().to_string(),
+            artifact_ref: receipt.edge().source_fragment_ref().clone(),
+            source_fragment_ref: receipt.edge().source_fragment_ref().clone(),
+            target_fragment_ref: receipt.edge().target_fragment_ref().clone(),
+            edge_ref: receipt.edge().edge_ref().to_string(),
+            request_ref: receipt.request_id().to_string(),
+            owner_publish_ref: Some(receipt.owner_publish_occurrence_id().to_string()),
+            request_enqueue_ref: receipt.request_enqueue_occurrence_id().to_string(),
+            dispatch_ref: receipt
+                .transport()
+                .source_outbox_dequeue_occurrence_id()
+                .to_string(),
+            receive_ref: receipt
+                .transport()
+                .target_inbox_enqueue_occurrence_id()
+                .to_string(),
+            consumer_observe_ref: Some(receipt.consumer_observe_occurrence_id().to_string()),
+            serve_ref: receipt.consumer_serve_occurrence_id().to_string(),
+        };
+        let relation_shadow = vertical_relation_shadow(&receipt);
+        self.record_chain(&endpoint_chain, Some("relation"))?;
+        Ok(Sys5VerticalReceipt {
+            fabric_instance_ref: self.fabric_instance_ref.clone(),
+            source_derived: true,
+            source_locus: endpoint_chain.source_locus.clone(),
+            owner_locus: Some(relation_shadow.owner_locus().to_string()),
+            endpoint_chain: Some(endpoint_chain),
+            owner_mutations: Vec::new(),
+            designated_value_name: None,
+            evaluator_locus: None,
+            consumer_locus: Some(relation_shadow.consumer_locus().to_string()),
+            typed_int: None,
+            performed_m8_semantic_consumption: false,
+            returned_from_designated_cache_after_authority_revalidation: false,
+            relation_shadow: Some(relation_shadow),
+            no_direct_cross_locus_store_mutation: true,
+        })
+    }
+
+    fn dispatch_consumer_capability_revoke(
+        &mut self,
+        value_name: &str,
+    ) -> Result<Sys5VerticalReceipt, Sys5VerticalSliceError> {
+        let binding = self
+            .bindings
+            .canonical_designated()
+            .cloned()
+            .filter(|binding| binding.value_name == value_name)
+            .ok_or_else(|| {
+                Sys5VerticalSliceError::new(Sys5VerticalDiagnosticKind::UnknownSourceValue)
+            })?;
+        let transition = self
+            .fabric
+            .m9_authority_lifecycle_mut()
+            .revoke_designated_consumer_capability(&binding.value_name, &binding.consumer_locus)
+            .map_err(Sys5VerticalSliceError::from_dispatch)?;
+        let m9_transition_ref = transition.observer_transition_ref().ok_or_else(|| {
+            Sys5VerticalSliceError::new(Sys5VerticalDiagnosticKind::DispatchRejected)
+        })?;
+        let m9_generation_ref = transition.observer_successor_generation_ref();
+        self.fabric
+            .apply_admitted_authority_lifecycle(transition)
+            .map_err(Sys5VerticalSliceError::from_dispatch)?;
+        self.joined_report
+            .push("auth:consumer-capability-revoked".to_string());
+        self.joined_report.push(format!(
+            "typed-lifecycle-segment:consumer-capability-revocation:provenance_kind=M9AdmittedLifecycle;lifecycle_kind=consumer-capability-revocation;value_name={};consumer_locus={};m9_transition_ref={};m9_generation_ref={}",
+            binding.value_name, binding.consumer_locus, m9_transition_ref, m9_generation_ref
+        ));
+        Ok(Sys5VerticalReceipt {
+            fabric_instance_ref: self.fabric_instance_ref.clone(),
+            // Revocation enters through the admitted M9 lifecycle seam. It
+            // has no ordinary Surface/Core evaluator or generated endpoint.
+            source_derived: false,
+            source_locus: "M9AdmittedLifecycle".to_string(),
+            owner_locus: None,
+            endpoint_chain: None,
+            owner_mutations: Vec::new(),
+            designated_value_name: Some(binding.value_name),
+            evaluator_locus: None,
+            consumer_locus: Some(binding.consumer_locus),
+            typed_int: None,
+            performed_m8_semantic_consumption: false,
+            returned_from_designated_cache_after_authority_revalidation: false,
+            relation_shadow: None,
+            no_direct_cross_locus_store_mutation: true,
+        })
+    }
+
+    fn receipt_from_fabric(
+        &mut self,
+        receipt: crate::sys4_dispatch::FabricReceipt,
+        context: Sys5FabricReceiptContext,
+    ) -> Result<Sys5VerticalReceipt, Sys5VerticalSliceError> {
+        let endpoint_chain = self.endpoint_chain_from_fabric_receipt(
+            &receipt,
+            context.endpoint_edge_kind.ok_or_else(|| {
+                Sys5VerticalSliceError::new(Sys5VerticalDiagnosticKind::DispatchRejected)
+            })?,
+            context.m8_trace_kind.ok_or_else(|| {
+                Sys5VerticalSliceError::new(Sys5VerticalDiagnosticKind::DispatchRejected)
+            })?,
+            context.endpoint_source_locus.as_deref().ok_or_else(|| {
+                Sys5VerticalSliceError::new(Sys5VerticalDiagnosticKind::DispatchRejected)
+            })?,
+            context.endpoint_target_locus.as_deref().ok_or_else(|| {
+                Sys5VerticalSliceError::new(Sys5VerticalDiagnosticKind::DispatchRejected)
+            })?,
+        )?;
+        self.record_chain(&endpoint_chain, context.designated_value_name.as_deref())?;
+        if !context.owner_mutations.is_empty() {
+            self.joined_report
+                .push("owner-mutation:owner-local-rmw".to_string());
+        }
+        if let Some(value_name) = &context.designated_value_name {
+            self.joined_report.push(format!("designated:{value_name}"));
+        }
+        let typed_int = match receipt.typed_value() {
+            RuntimeValue::Int(value)
+                if context
+                    .designated_value_name
+                    .as_deref()
+                    .is_none_or(|value_name| {
+                        self.startup_plan
+                            .observer_visible_designated_value(value_name)
+                    }) =>
+            {
+                Some(value)
+            }
+            RuntimeValue::Unit => None,
+            RuntimeValue::Int(_) => None,
+        };
+        Ok(Sys5VerticalReceipt {
+            fabric_instance_ref: self.fabric_instance_ref.clone(),
+            source_derived: true,
+            source_locus: receipt.origin_locus().to_string(),
+            owner_locus: context.owner_locus,
+            endpoint_chain: Some(endpoint_chain),
+            owner_mutations: context.owner_mutations,
+            designated_value_name: context.designated_value_name,
+            evaluator_locus: context.evaluator_locus,
+            consumer_locus: self
+                .bindings
+                .canonical_designated()
+                .filter(|binding| binding.value_name == receipt.operation_id())
+                .map(|binding| binding.consumer_locus.clone()),
+            typed_int,
+            performed_m8_semantic_consumption: receipt.performed_m8_semantic_consumption(),
+            returned_from_designated_cache_after_authority_revalidation: receipt
+                .returned_from_designated_cache_after_authority_revalidation(),
+            relation_shadow: context.relation_shadow,
+            no_direct_cross_locus_store_mutation: context.no_direct_cross_locus_store_mutation,
+        })
+    }
+
+    /// A retry is consumer-local validation of an already delivered sealed
+    /// result.  It has no newly dispatched endpoint; pretending otherwise
+    /// would fabricate a route occurrence.  We retain only the exact M8
+    /// cache-validation occurrence and the redacted result surface.
+    fn cache_retry_receipt(
+        &mut self,
+        receipt: crate::sys4_dispatch::FabricReceipt,
+        binding: Sys5VerticalDesignatedBinding,
+    ) -> Result<Sys5VerticalReceipt, Sys5VerticalSliceError> {
+        let node = self
+            .fabric
+            .observer_exact_m8_occurrence(
+                receipt.request_id(),
+                crate::m8_runtime_local_cut::M8LocalTraceKind::DesignatedCacheValidated,
+            )
+            .ok_or_else(|| {
+                Sys5VerticalSliceError::new(Sys5VerticalDiagnosticKind::DispatchRejected)
+            })?;
+        self.joined_report.push(format!("cache-validation:{node}"));
+        let typed_int = match receipt.typed_value() {
+            RuntimeValue::Int(value)
+                if self
+                    .startup_plan
+                    .observer_visible_designated_value(&binding.value_name) =>
+            {
+                Some(value)
+            }
+            RuntimeValue::Unit | RuntimeValue::Int(_) => None,
+        };
+        Ok(Sys5VerticalReceipt {
+            fabric_instance_ref: self.fabric_instance_ref.clone(),
+            source_derived: true,
+            source_locus: binding.evaluator_locus,
+            owner_locus: None,
+            endpoint_chain: None,
+            owner_mutations: Vec::new(),
+            designated_value_name: Some(binding.value_name),
+            evaluator_locus: None,
+            consumer_locus: Some(binding.consumer_locus),
+            typed_int,
+            performed_m8_semantic_consumption: false,
+            returned_from_designated_cache_after_authority_revalidation: true,
+            relation_shadow: None,
+            no_direct_cross_locus_store_mutation: true,
+        })
+    }
+
+    /// The designated path has three generated endpoint segments.  Build the
+    /// observer report only from their exact retained rows, and require the
+    /// corresponding causal edges; no source operation hash or request-ID
+    /// substitution is accepted as a stand-in.
+    fn record_designated_causal_segments(
+        &mut self,
+        receipt: &crate::sys4_dispatch::FabricReceipt,
+        binding: &Sys5VerticalDesignatedBinding,
+    ) -> Result<(), Sys5VerticalSliceError> {
+        let input_source = binding.input_source_locus.as_deref().ok_or_else(|| {
+            Sys5VerticalSliceError::new(Sys5VerticalDiagnosticKind::DispatchRejected)
+        })?;
+        let input_request = self
+            .fabric
+            .observer_exact_endpoint_segment(
+                receipt.request_id(),
+                crate::sys4_dispatch::Sys4TraceKind::Dispatched,
+                CommunicationEdgeKind::DesignatedInputRequest,
+                &binding.evaluator_locus,
+                input_source,
+            )
+            .ok_or_else(|| {
+                Sys5VerticalSliceError::new(Sys5VerticalDiagnosticKind::DispatchRejected)
+            })?;
+        let input_receipt = self
+            .fabric
+            .observer_exact_endpoint_segment(
+                receipt.request_id(),
+                crate::sys4_dispatch::Sys4TraceKind::Dispatched,
+                CommunicationEdgeKind::DesignatedInputReceipt,
+                input_source,
+                &binding.evaluator_locus,
+            )
+            .ok_or_else(|| {
+                Sys5VerticalSliceError::new(Sys5VerticalDiagnosticKind::DispatchRejected)
+            })?;
+        let result_delivery = self
+            .fabric
+            .observer_exact_endpoint_segment(
+                receipt.request_id(),
+                crate::sys4_dispatch::Sys4TraceKind::DesignatedResultDispatched,
+                CommunicationEdgeKind::DesignatedResultDelivery,
+                &binding.evaluator_locus,
+                &binding.consumer_locus,
+            )
+            .ok_or_else(|| {
+                Sys5VerticalSliceError::new(Sys5VerticalDiagnosticKind::DispatchRejected)
+            })?;
+        if !self.fabric.observer_causally_reaches(
+            input_receipt.occurrence_ref(),
+            input_request.occurrence_ref(),
+        ) || !self.fabric.observer_causally_reaches(
+            result_delivery.occurrence_ref(),
+            input_receipt.occurrence_ref(),
+        ) {
+            return Err(Sys5VerticalSliceError::new(
+                Sys5VerticalDiagnosticKind::DispatchRejected,
+            ));
+        }
+        self.joined_report.push(format!(
+            "segment:designated-input-request:{}->{}:{}",
+            binding.evaluator_locus,
+            input_source,
+            input_request.occurrence_ref(),
+        ));
+        self.joined_report.push(format!(
+            "segment:designated-input-receipt:{}->{}:{}",
+            input_source,
+            binding.evaluator_locus,
+            input_receipt.occurrence_ref(),
+        ));
+        self.joined_report.push(format!(
+            "segment:designated-result-delivery:{}->{}:{}",
+            binding.evaluator_locus,
+            binding.consumer_locus,
+            result_delivery.occurrence_ref(),
+        ));
+        self.joined_report
+            .push("causality:designated-input-request->designated-input-receipt".to_string());
+        self.joined_report
+            .push("causality:designated-input-receipt->designated-result-delivery".to_string());
+        self.joined_report
+            .push("causality:designated-result-delivery->viewer-consume".to_string());
+        Ok(())
+    }
+
+    fn endpoint_chain_from_fabric_receipt(
+        &self,
+        receipt: &crate::sys4_dispatch::FabricReceipt,
+        edge_kind: CommunicationEdgeKind,
+        serve_kind: crate::m8_runtime_local_cut::M8LocalTraceKind,
+        endpoint_source_locus: &str,
+        endpoint_target_locus: &str,
+    ) -> Result<Sys5VerticalEndpointChain, Sys5VerticalSliceError> {
+        let (dispatch_kind, receive_kind) = match edge_kind {
+            CommunicationEdgeKind::DesignatedResultDelivery => (
+                crate::sys4_dispatch::Sys4TraceKind::DesignatedResultDispatched,
+                crate::sys4_dispatch::Sys4TraceKind::DesignatedResultReceived,
+            ),
+            _ => (
+                crate::sys4_dispatch::Sys4TraceKind::Dispatched,
+                crate::sys4_dispatch::Sys4TraceKind::Received,
+            ),
+        };
+        let endpoint_occurrences = self
+            .fabric
+            .observer_exact_endpoint_occurrences(
+                receipt.request_id(),
+                dispatch_kind,
+                receive_kind,
+                edge_kind,
+                endpoint_source_locus,
+                endpoint_target_locus,
+            )
+            .ok_or_else(|| {
+                Sys5VerticalSliceError::new(Sys5VerticalDiagnosticKind::DispatchRejected)
+            })?;
+        let serve_ref = self
+            .fabric
+            .observer_exact_m8_occurrence(receipt.request_id(), serve_kind)
+            .ok_or_else(|| {
+                Sys5VerticalSliceError::new(Sys5VerticalDiagnosticKind::DispatchRejected)
+            })?;
+        if !self
+            .fabric
+            .observer_causally_reaches(serve_ref, endpoint_occurrences.receive_occurrence_id())
+        {
+            return Err(Sys5VerticalSliceError::new(
+                Sys5VerticalDiagnosticKind::DispatchRejected,
+            ));
+        }
+        if receipt.request_id().is_empty()
+            || receipt.request_id() == endpoint_occurrences.request_enqueue_occurrence_id()
+            || receipt.request_id() == endpoint_occurrences.dispatch_occurrence_id()
+            || receipt.request_id() == endpoint_occurrences.receive_occurrence_id()
+            || receipt.request_id() == serve_ref
+        {
+            return Err(Sys5VerticalSliceError::new(
+                Sys5VerticalDiagnosticKind::DispatchRejected,
+            ));
+        }
+        let (logical_path, source_span) =
+            observer_logical_source_span(endpoint_occurrences.source_ref()).ok_or_else(|| {
+                Sys5VerticalSliceError::new(Sys5VerticalDiagnosticKind::DispatchRejected)
+            })?;
+        Ok(Sys5VerticalEndpointChain {
+            source_locus: endpoint_source_locus.to_string(),
+            target_locus: endpoint_target_locus.to_string(),
+            edge_kind,
+            logical_path,
+            source_span,
+            source_ref: relation_observer_ref(&format!(
+                "{}:{}:{}:{}:{}",
+                endpoint_occurrences.source_ref().path,
+                endpoint_occurrences.source_ref().start_line,
+                endpoint_occurrences.source_ref().start_column,
+                endpoint_occurrences.source_ref().end_line,
+                endpoint_occurrences.source_ref().end_column,
+            )),
+            core_ref: endpoint_occurrences.core_ref().to_string(),
+            artifact_ref: endpoint_occurrences.source_fragment_ref().to_string(),
+            source_fragment_ref: endpoint_occurrences.source_fragment_ref().to_string(),
+            target_fragment_ref: endpoint_occurrences.target_fragment_ref().to_string(),
+            edge_ref: endpoint_occurrences.edge_ref().to_string(),
+            request_ref: receipt.request_id().to_string(),
+            owner_publish_ref: None,
+            request_enqueue_ref: endpoint_occurrences
+                .request_enqueue_occurrence_id()
+                .to_string(),
+            dispatch_ref: endpoint_occurrences.dispatch_occurrence_id().to_string(),
+            receive_ref: endpoint_occurrences.receive_occurrence_id().to_string(),
+            consumer_observe_ref: None,
+            serve_ref: serve_ref.to_string(),
+        })
+    }
+
+    fn owner_mutations_since(
+        &self,
+        before: &crate::sys4_dispatch::FabricSemanticSnapshot,
+        after: &crate::sys4_dispatch::FabricSemanticSnapshot,
+        owner_locus: &str,
+    ) -> Vec<Sys5VerticalOwnerMutation> {
+        self.startup_plan
+            .observer_safe_cells
+            .iter()
+            .filter(|shape| shape.locus == owner_locus)
+            .filter_map(|shape| {
+                let old_value =
+                    before.int(&shape.locus, &shape.state, &shape.index, &shape.field)?;
+                let new_value =
+                    after.int(&shape.locus, &shape.state, &shape.index, &shape.field)?;
+                (old_value != new_value).then(|| Sys5VerticalOwnerMutation {
+                    locus: shape.locus.clone(),
+                    state: shape.state.clone(),
+                    index: shape.index.clone(),
+                    field: shape.field.clone(),
+                    old_value,
+                    new_value,
+                })
+            })
+            .collect()
+    }
+
+    fn record_chain(
+        &mut self,
+        chain: &Sys5VerticalEndpointChain,
+        designated: Option<&str>,
+    ) -> Result<(), Sys5VerticalSliceError> {
+        self.joined_report
+            .push(format!("source-ref:{}", chain.source_ref));
+        self.joined_report
+            .push(format!("core-ref:{}", chain.core_ref));
+        self.joined_report
+            .push(format!("artifact-ref:{}", chain.artifact_ref));
+        self.joined_report
+            .push(format!("edge-ref:{}", chain.edge_ref));
+        self.joined_report
+            .push(format!("request:{}", chain.request_ref));
+        self.joined_report
+            .push(format!("request-enqueue:{}", chain.request_enqueue_ref));
+        self.joined_report
+            .push(format!("dispatch:{}", chain.dispatch_ref));
+        self.joined_report
+            .push(format!("receive:{}", chain.receive_ref));
+        self.joined_report
+            .push(format!("serve:{}", chain.serve_ref));
+        if chain.edge_kind == CommunicationEdgeKind::RelationProjectionPublication {
+            let (Some(owner_publish_ref), Some(consumer_observe_ref)) = (
+                chain.owner_publish_ref.as_deref(),
+                chain.consumer_observe_ref.as_deref(),
+            ) else {
+                return Err(Sys5VerticalSliceError::new(
+                    Sys5VerticalDiagnosticKind::RelationTransitionRejected,
+                ));
+            };
+            self.joined_report.push(format!(
+                "typed-segment:relation-projection-publication:provenance_kind=OrdinarySourceCore;logical_path={};source_span={};core_ref={};source_fragment_ref={};target_fragment_ref={};edge_ref={};request_identity={};owner_publish_occurrence_id={};request_enqueue_occurrence_id={};dispatch_occurrence_id={};receive_occurrence_id={};consumer_observe_occurrence_id={};serve_occurrence_id={};causal_path=owner_publish_occurrence_id->request_enqueue_occurrence_id->dispatch_occurrence_id->receive_occurrence_id->consumer_observe_occurrence_id->serve_occurrence_id",
+                chain.logical_path,
+                chain.source_span,
+                chain.core_ref,
+                chain.source_fragment_ref,
+                chain.target_fragment_ref,
+                chain.edge_ref,
+                chain.request_ref,
+                owner_publish_ref,
+                chain.request_enqueue_ref,
+                chain.dispatch_ref,
+                chain.receive_ref,
+                consumer_observe_ref,
+                chain.serve_ref,
+            ));
+        } else if let Some(segment_kind) = vertical_typed_segment_kind(chain.edge_kind) {
+            self.joined_report.push(format!(
+                "typed-segment:{segment_kind}:provenance_kind=OrdinarySourceCore;logical_path={};source_span={};core_ref={};source_fragment_ref={};target_fragment_ref={};edge_ref={};request_identity={};request_enqueue_occurrence_id={};dispatch_occurrence_id={};receive_occurrence_id={};serve_occurrence_id={};causal_path=request_enqueue_occurrence_id->dispatch_occurrence_id->receive_occurrence_id->serve_occurrence_id",
+                chain.logical_path,
+                chain.source_span,
+                chain.core_ref,
+                chain.source_fragment_ref,
+                chain.target_fragment_ref,
+                chain.edge_ref,
+                chain.request_ref,
+                chain.request_enqueue_ref,
+                chain.dispatch_ref,
+                chain.receive_ref,
+                chain.serve_ref,
+            ));
+        }
+        if let Some(value_name) = designated {
+            self.joined_report.push(format!("designated:{value_name}"));
+        }
+        Ok(())
+    }
+
+    fn reject<T>(&mut self, kind: Sys5VerticalDiagnosticKind) -> Result<T, Sys5VerticalSliceError> {
+        self.joined_report.push(format!("failure:{kind:?}"));
+        Err(Sys5VerticalSliceError::new(kind))
+    }
+}
+
+fn vertical_relation_shadow(receipt: &Sys4RelationEndpointReceipt) -> Sys5RelationObserverShadow {
+    let shadow = receipt.shadow();
+    let semantic = shadow.semantic();
+    Sys5RelationObserverShadow {
+        relation: shadow.relation().to_string(),
+        owner_locus: shadow.owner_locus().to_string(),
+        consumer_locus: shadow.consumer_locus().to_string(),
+        selected_anchor: semantic.selected_anchor().to_string(),
+        selected_floor: match semantic.selected_floor() {
+            crate::m8_runtime_owner_queue::M8RelationFloor::Live => "live-primary".to_string(),
+            crate::m8_runtime_owner_queue::M8RelationFloor::Anchor => "fallback-anchor".to_string(),
+            crate::m8_runtime_owner_queue::M8RelationFloor::Frozen => "frozen-fallback".to_string(),
+        },
+        lineage_ref: relation_observer_ref(&semantic.lineage().join("\n")),
+        semantic_digest: relation_observer_ref(&shadow.semantic_digest()),
+        semantic_epoch: semantic.binding_epoch().to_string(),
+    }
+}
+
+/// Render only a checked logical source location.  The source checker already
+/// rejects absolute, traversal, and host-native paths; repeat that narrow
+/// check at the observer boundary so a corrupt retained trace fails closed
+/// instead of leaking a host path or source text through devtools.
+fn observer_logical_source_span(
+    source_ref: &crate::sys3_projection::SourceRefView,
+) -> Option<(String, String)> {
+    let path = &source_ref.path;
+    if !is_allowed_logical_source_path(path) {
+        return None;
+    }
+    Some((
+        path.clone(),
+        format!(
+            "{}:{}-{}:{}",
+            source_ref.start_line,
+            source_ref.start_column,
+            source_ref.end_line,
+            source_ref.end_column
+        ),
+    ))
+}
+
+fn vertical_typed_segment_kind(kind: CommunicationEdgeKind) -> Option<&'static str> {
+    match kind {
+        CommunicationEdgeKind::OwnerRequest => Some("owner-request"),
+        CommunicationEdgeKind::DesignatedInputRequest => Some("designated-input-request"),
+        CommunicationEdgeKind::DesignatedInputReceipt => Some("designated-input-receipt"),
+        CommunicationEdgeKind::DesignatedResultDelivery => Some("designated-result-delivery"),
+        CommunicationEdgeKind::OwnerReplyReceipt
+        | CommunicationEdgeKind::RelationProjectionPublication
+        | CommunicationEdgeKind::AbsoluteValueStream => None,
+    }
+}
+
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub enum Sys5LocalAdmissionErrorKind {
     UnknownPrincipal,
@@ -1291,6 +2963,17 @@ impl Sys5LocalAdmissionError {
     }
 
     pub const fn partial_admission(&self) -> Option<()> {
+        None
+    }
+
+    /// Every admission error is reported before a `LocalFabric` exists.
+    /// This permits callers to distinguish an input rejection from a runtime
+    /// failure without gaining a partial fabric handle.
+    pub const fn rejected_before_live_runtime(&self) -> bool {
+        true
+    }
+
+    pub const fn partial_runtime(&self) -> Option<()> {
         None
     }
 }
@@ -2335,18 +4018,25 @@ pub fn build_project(input: Sys5SourceInput) -> Result<Sys5LocalProject, Sys5Loc
 }
 
 fn normalize_logical_source_path(path: &str) -> Result<String, Sys5LocalSliceError> {
-    if path.trim().is_empty()
-        || path.starts_with('/')
-        || path.starts_with('\\')
-        || path.contains(':')
-        || path.contains('\\')
-        || path
-            .split('/')
-            .any(|component| component.is_empty() || matches!(component, "." | ".."))
-    {
+    if !is_allowed_logical_source_path(path) {
         return Err(Sys5LocalSliceError::InvalidLogicalSourcePath);
     }
     Ok(path.to_string())
+}
+
+/// Logical source paths appear as unescaped values in compact typed observer
+/// segments.  Admit only a deliberately small ASCII filename alphabet so
+/// separators, control characters, whitespace, host paths, and Unicode
+/// confusables cannot alter a later `key=value;...` row.
+fn is_allowed_logical_source_path(path: &str) -> bool {
+    !path.is_empty()
+        && !path.starts_with('/')
+        && path
+            .bytes()
+            .all(|byte| byte.is_ascii_alphanumeric() || matches!(byte, b'/' | b'.' | b'_' | b'-'))
+        && path
+            .split('/')
+            .all(|component| !component.is_empty() && !matches!(component, "." | ".."))
 }
 
 /// Returns a domain-separated SHA-256 reference for the exact checked-program

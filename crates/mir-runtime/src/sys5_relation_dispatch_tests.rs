@@ -1,6 +1,7 @@
 use std::{fmt::Debug, path::PathBuf};
 
 use crate::{
+    m8_runtime_relation_projection::M8ObservedRelationShadow,
     sys3_projection::{BackendProfile, CommunicationEdgeKind},
     sys4_dispatch::{
         ExternalAction, FabricProgram, FaultInjection, LocalFabric,
@@ -10,7 +11,8 @@ use crate::{
     sys5_local_slice::{
         Sys5LocalAdmissionRequest, Sys5LocalRuntimeProfile, Sys5RelationAction,
         Sys5RelationBootstrapPolicy, Sys5RelationDispatchDiagnosticKind,
-        Sys5RelationDispatchEventKind, Sys5RelationProjectionKind, Sys5SourceInput, build_project,
+        Sys5RelationDispatchEventKind, Sys5RelationEndpointChain, Sys5RelationProjectionKind,
+        Sys5SourceInput, build_project,
     },
 };
 
@@ -145,7 +147,7 @@ fn fresh_reacquire_requires_prior_invalidation_and_preserves_one_shot_binding() 
         .dispatch_relation(Sys5RelationAction::invalidate_primary("bird_follow"))
         .expect("valid invalidation after rejected fresh reacquire still works");
     assert_eq!(
-        sys5_relation_request_suffix(invalidated.single_endpoint_chain().request_occurrence_id()),
+        sys5_relation_request_suffix(invalidated.single_endpoint_chain().request_identity()),
         0,
         "rejected fresh reacquire must not burn the first generated relation request id"
     );
@@ -161,7 +163,7 @@ fn fresh_reacquire_requires_prior_invalidation_and_preserves_one_shot_binding() 
         .dispatch_relation(Sys5RelationAction::fresh_reacquire("bird_follow"))
         .expect("fresh reacquire succeeds exactly once after invalidation");
     assert_eq!(
-        sys5_relation_request_suffix(reacquired.single_endpoint_chain().request_occurrence_id()),
+        sys5_relation_request_suffix(reacquired.single_endpoint_chain().request_identity()),
         1,
         "accepted fresh reacquire must use the next generated relation request id"
     );
@@ -186,7 +188,7 @@ fn fresh_reacquire_requires_prior_invalidation_and_preserves_one_shot_binding() 
         .dispatch_relation(Sys5RelationAction::publish_current("bird_follow"))
         .expect("ordinary publication still recovers after duplicate fresh rejection");
     assert_eq!(
-        sys5_relation_request_suffix(next_publish.single_endpoint_chain().request_occurrence_id()),
+        sys5_relation_request_suffix(next_publish.single_endpoint_chain().request_identity()),
         2,
         "duplicate fresh rejection must not burn a generated relation request id"
     );
@@ -223,7 +225,12 @@ fn canonical_relation_dispatch_runs_through_generated_endpoint_and_preserves_pre
     assert_eq!(initial_edge.target_locus(), "ViewerC");
     assert!(
         initial_edge
-            .request_occurrence_id()
+            .owner_publish_occurrence_id()
+            .starts_with("sys4-m8:ParticipantB:m8-fabric-trace-")
+    );
+    assert!(
+        initial_edge
+            .request_identity()
             .starts_with("sys5-relation-request:")
     );
     assert!(
@@ -243,13 +250,20 @@ fn canonical_relation_dispatch_runs_through_generated_endpoint_and_preserves_pre
     );
     assert!(
         initial_edge
-            .serve_occurrence_id()
-            .starts_with("sys5-relation-serve:")
+            .consumer_observe_occurrence_id()
+            .starts_with("sys4-m8:ViewerC:m8-fabric-trace-")
     );
+    assert!(
+        initial_edge
+            .serve_occurrence_id()
+            .starts_with("sys4-relation-serve-")
+    );
+    assert_relation_endpoint_chain_uses_actual_occurrences(initial_edge);
     assert!(!initial_edge.edge_ref().is_empty());
     assert!(!initial_edge.source_fragment_ref().is_empty());
     assert!(!initial_edge.target_fragment_ref().is_empty());
     assert!(initial_edge.core_ref().is_some());
+    assert_relation_report_preserves_endpoint_chain(initial.observer_safe_report(), initial_edge);
     assert_eq!(
         initial.checked_program_identity_ref(),
         project.checked_program_identity_ref()
@@ -348,7 +362,10 @@ fn canonical_relation_dispatch_runs_through_generated_endpoint_and_preserves_pre
         initial_shadow.semantic_epoch()
     );
 
+    let reacquired_edge = reacquired.single_endpoint_chain();
     let observer = reacquired.observer_safe_report();
+    assert_relation_endpoint_chain_uses_actual_occurrences(reacquired_edge);
+    assert_relation_report_preserves_endpoint_chain(observer, reacquired_edge);
     assert!(observer.contains("source-ref:"));
     assert!(observer.contains("core-ref:"));
     assert!(observer.contains("artifact-ref:"));
@@ -629,6 +646,162 @@ fn relation_route_failure_discards_undelivered_carrier_and_retry_reuses_publicat
 }
 
 #[test]
+fn relation_route_failure_during_invalidate_primary_is_failure_atomic_and_retries_without_gap() {
+    let (program, admission, _checked_program_ref) = sys4_relation_fabric_parts();
+    let edge_ref = relation_publication_edge_ref();
+    let mut fabric = LocalFabric::bootstrap(program, admission, BackendProfile::St)
+        .expect("complete source-derived admission boots SYS-4 relation fabric");
+
+    let initial = fabric
+        .publish_relation_current("bird_follow")
+        .expect("initial relation publication reaches ViewerC before failed invalidation");
+    assert_eq!(initial.shadow().publication_occurrence(), 0);
+
+    let expected_retry_request =
+        install_route_fault_and_next_relation_request_suffix(&mut fabric, &edge_ref);
+    let expected_retry_enqueue = sys4_occurrence_suffix(initial.consumer_serve_occurrence_id()) + 4;
+    let before_failure = RelationFailureAtomicSnapshot::capture(&fabric);
+    let failed = assert_sys4_diag(
+        fabric.invalidate_relation_primary("bird_follow"),
+        Sys4DiagnosticKind::RouteUnavailable,
+    );
+    assert_eq!(
+        failed.relation_publication_failure_disposition(),
+        Some(RelationPublicationFailureDisposition::DiscardedUndelivered),
+        "failed invalidation publication must discard the unaccepted carrier explicitly"
+    );
+    before_failure.assert_unchanged(
+        &fabric,
+        "route failure during invalidate_primary must be failure-atomic",
+    );
+
+    fabric.for_test_clear_route_fault(&edge_ref);
+    let retry = fabric
+        .invalidate_relation_primary("bird_follow")
+        .expect("clearing the route fault lets the same invalidation transition publish once");
+    assert_eq!(
+        sys5_relation_request_suffix(retry.request_id()),
+        expected_retry_request,
+        "failed invalidation must not burn a relation request identity"
+    );
+    assert_eq!(
+        sys4_occurrence_suffix(retry.request_enqueue_occurrence_id()),
+        expected_retry_enqueue,
+        "failed invalidation must not burn endpoint occurrence counters"
+    );
+    assert_eq!(
+        retry.shadow().publication_occurrence(),
+        initial.shadow().publication_occurrence() + 1,
+        "retry must publish the next contiguous relation occurrence"
+    );
+    assert_eq!(
+        retry.shadow().semantic().selected_anchor(),
+        "participant_b_shoulder"
+    );
+    assert_ne!(
+        retry.shadow().semantic().active_lease_ref(),
+        initial.shadow().semantic().active_lease_ref(),
+        "accepted retry must advance to the fallback lease exactly once"
+    );
+    assert_eq!(
+        fabric.endpoint_carrier_count_for_relation("bird_follow"),
+        before_failure.relation_endpoint_carrier_count + 1,
+        "retry must add exactly one generated relation endpoint after the failed attempt"
+    );
+
+    let before_duplicate_endpoint_count = fabric.endpoint_carrier_count_for_relation("bird_follow");
+    assert_sys4_diag(
+        fabric.invalidate_relation_primary("bird_follow"),
+        Sys4DiagnosticKind::M8ExecutionRejected,
+    );
+    assert_eq!(
+        fabric.endpoint_carrier_count_for_relation("bird_follow"),
+        before_duplicate_endpoint_count,
+        "a second invalidation must not create a duplicate relation publication endpoint"
+    );
+}
+
+#[test]
+fn relation_route_failure_during_fresh_reacquire_is_failure_atomic_and_retries_once() {
+    let (program, admission, _checked_program_ref) = sys4_relation_fabric_parts();
+    let edge_ref = relation_publication_edge_ref();
+    let mut fabric = LocalFabric::bootstrap(program, admission, BackendProfile::St)
+        .expect("complete source-derived admission boots SYS-4 relation fabric");
+
+    fabric
+        .publish_relation_current("bird_follow")
+        .expect("initial relation publication reaches ViewerC before fallback");
+    let fallback = fabric
+        .invalidate_relation_primary("bird_follow")
+        .expect("fallback publication establishes a valid fresh-reacquire frontier");
+    assert_eq!(fallback.shadow().publication_occurrence(), 1);
+
+    let expected_retry_request =
+        install_route_fault_and_next_relation_request_suffix(&mut fabric, &edge_ref);
+    let expected_retry_enqueue =
+        sys4_occurrence_suffix(fallback.consumer_serve_occurrence_id()) + 4;
+    let before_failure = RelationFailureAtomicSnapshot::capture(&fabric);
+    let failed = assert_sys4_diag(
+        fabric.fresh_reacquire_relation_primary("bird_follow"),
+        Sys4DiagnosticKind::RouteUnavailable,
+    );
+    assert_eq!(
+        failed.relation_publication_failure_disposition(),
+        Some(RelationPublicationFailureDisposition::DiscardedUndelivered),
+        "failed fresh reacquire publication must discard the unaccepted carrier explicitly"
+    );
+    before_failure.assert_unchanged(
+        &fabric,
+        "route failure during fresh_reacquire must be failure-atomic",
+    );
+
+    fabric.for_test_clear_route_fault(&edge_ref);
+    let retry = fabric
+        .fresh_reacquire_relation_primary("bird_follow")
+        .expect("clearing the route fault leaves the sealed fresh binding usable exactly once");
+    assert_eq!(
+        sys5_relation_request_suffix(retry.request_id()),
+        expected_retry_request,
+        "failed fresh reacquire must not burn a relation request identity"
+    );
+    assert_eq!(
+        sys4_occurrence_suffix(retry.request_enqueue_occurrence_id()),
+        expected_retry_enqueue,
+        "failed fresh reacquire must not burn endpoint occurrence counters"
+    );
+    assert_eq!(
+        retry.shadow().publication_occurrence(),
+        fallback.shadow().publication_occurrence() + 1,
+        "fresh retry must publish the next contiguous relation occurrence"
+    );
+    assert_eq!(
+        retry.shadow().semantic().selected_anchor(),
+        "participant_a_shoulder"
+    );
+    assert_ne!(
+        retry.shadow().semantic().active_lease_ref(),
+        fallback.shadow().semantic().active_lease_ref(),
+        "accepted fresh retry must install the fresh lease exactly once"
+    );
+    assert_eq!(
+        fabric.endpoint_carrier_count_for_relation("bird_follow"),
+        before_failure.relation_endpoint_carrier_count + 1,
+        "fresh retry must add exactly one generated relation endpoint after the failed attempt"
+    );
+
+    let before_duplicate_endpoint_count = fabric.endpoint_carrier_count_for_relation("bird_follow");
+    assert_sys4_diag(
+        fabric.fresh_reacquire_relation_primary("bird_follow"),
+        Sys4DiagnosticKind::M8ExecutionRejected,
+    );
+    assert_eq!(
+        fabric.endpoint_carrier_count_for_relation("bird_follow"),
+        before_duplicate_endpoint_count,
+        "the fresh binding must not be reusable after the one accepted retry"
+    );
+}
+
+#[test]
 fn relation_identifier_exhaustion_rejects_before_m8_mailbox_or_state_mutation() {
     assert_relation_identifier_exhaustion_is_preflight(u64::MAX, 0, "request counter exhaustion");
     assert_relation_identifier_exhaustion_is_preflight(
@@ -788,10 +961,36 @@ fn unknown_relation_action_fails_before_endpoint_or_semantic_mutation() {
         .dispatch_relation(Sys5RelationAction::publish_current("bird_follow"))
         .expect("valid relation publication recovers after unknown relation rejection");
     assert_eq!(
-        sys5_relation_request_suffix(next.single_endpoint_chain().request_occurrence_id()),
+        sys5_relation_request_suffix(next.single_endpoint_chain().request_identity()),
         0,
         "unknown relation rejection must not burn the first generated relation request id"
     );
+}
+
+#[test]
+fn relation_endpoint_chain_api_names_request_identity_separately_from_occurrences() {
+    let sys5_source = include_str!("sys5_local_slice.rs");
+    assert!(
+        sys5_source.contains("pub fn request_identity(&self) -> &str"),
+        "Sys5RelationEndpointChain must expose the source-derived request as request_identity"
+    );
+    assert!(
+        !sys5_source.contains("pub fn request_occurrence_id(&self) -> &str"),
+        "request identity must not keep the misleading public occurrence accessor name"
+    );
+    for actual_accessor in [
+        "pub fn owner_publish_occurrence_id(&self) -> &str",
+        "pub fn request_enqueue_occurrence_id(&self) -> &str",
+        "pub fn dispatch_occurrence_id(&self) -> &str",
+        "pub fn receive_occurrence_id(&self) -> &str",
+        "pub fn consumer_observe_occurrence_id(&self) -> &str",
+        "pub fn serve_occurrence_id(&self) -> &str",
+    ] {
+        assert!(
+            sys5_source.contains(actual_accessor),
+            "actual occurrence accessor must remain separate: {actual_accessor}"
+        );
+    }
 }
 
 #[test]
@@ -889,6 +1088,111 @@ fn relation_publication_edge_ref() -> String {
         })
         .map(|edge| edge.edge_ref.clone())
         .expect("SYS-5 projection exposes the relation publication edge ref")
+}
+
+fn install_route_fault_and_next_relation_request_suffix(
+    fabric: &mut LocalFabric,
+    edge_ref: &str,
+) -> u64 {
+    let fault = fabric
+        .dispatch_external_action(ExternalAction::fault_event(
+            FaultInjection::route_unavailable_for_edge(edge_ref.to_string()),
+        ))
+        .expect("external route fault is registered against the source-derived relation edge");
+    sys4_request_suffix(fault.request_id()) + 1
+}
+
+#[derive(Debug, Clone, PartialEq, Eq)]
+struct RelationFailureAtomicSnapshot {
+    m8_actual_trace_digest: String,
+    relation_digest: Option<String>,
+    imported_shadow: Option<M8ObservedRelationShadow>,
+    total_endpoint_carrier_count: usize,
+    relation_endpoint_carrier_count: usize,
+    pending_relation_publications: usize,
+    m9_generation: u64,
+    m9_generation_ref: String,
+    m9_produced: bool,
+}
+
+impl RelationFailureAtomicSnapshot {
+    fn capture(fabric: &LocalFabric) -> Self {
+        let generation = fabric.current_m9_authority_inspection().generation();
+        Self {
+            m8_actual_trace_digest: fabric
+                .m8_actual_trace()
+                .expect("M8 observer is available before relation route failure")
+                .stable_digest(),
+            relation_digest: fabric
+                .relation_semantic_digest("bird_follow")
+                .map(str::to_string),
+            imported_shadow: fabric
+                .relation_imported_shadow("bird_follow", "ViewerC")
+                .expect("relation shadow lookup is typed before relation route failure"),
+            total_endpoint_carrier_count: fabric.total_endpoint_carrier_count(),
+            relation_endpoint_carrier_count: fabric
+                .endpoint_carrier_count_for_relation("bird_follow"),
+            pending_relation_publications: fabric
+                .for_test_pending_relation_publication_count("ParticipantB"),
+            m9_generation: generation.generation(),
+            m9_generation_ref: generation.generation_ref().to_string(),
+            m9_produced: generation.is_m9_produced(),
+        }
+    }
+
+    fn assert_unchanged(&self, fabric: &LocalFabric, label: &str) {
+        let generation = fabric.current_m9_authority_inspection().generation();
+        assert_eq!(
+            fabric
+                .m8_actual_trace()
+                .expect("M8 observer is available after relation route failure")
+                .stable_digest(),
+            self.m8_actual_trace_digest,
+            "{label}: owner M8 relation state/trace must not change when dispatch returns Err"
+        );
+        assert_eq!(
+            fabric
+                .relation_semantic_digest("bird_follow")
+                .map(str::to_string),
+            self.relation_digest,
+            "{label}: relation devtools digest must not advance on failed dispatch"
+        );
+        assert_eq!(
+            fabric
+                .relation_imported_shadow("bird_follow", "ViewerC")
+                .expect("relation shadow lookup is typed after relation route failure"),
+            self.imported_shadow,
+            "{label}: consumer shadow and its semantic lease lineage must not change"
+        );
+        assert_eq!(
+            fabric.total_endpoint_carrier_count(),
+            self.total_endpoint_carrier_count,
+            "{label}: endpoint carrier history must not change on failed dispatch"
+        );
+        assert_eq!(
+            fabric.endpoint_carrier_count_for_relation("bird_follow"),
+            self.relation_endpoint_carrier_count,
+            "{label}: relation endpoint history must not change on failed dispatch"
+        );
+        assert_eq!(
+            fabric.for_test_pending_relation_publication_count("ParticipantB"),
+            self.pending_relation_publications,
+            "{label}: failed dispatch must not strand pending relation publications"
+        );
+        assert_eq!(
+            (
+                generation.generation(),
+                generation.generation_ref(),
+                generation.is_m9_produced(),
+            ),
+            (
+                self.m9_generation,
+                self.m9_generation_ref.as_str(),
+                self.m9_produced,
+            ),
+            "{label}: M9 generation must not change on failed relation dispatch"
+        );
+    }
 }
 
 fn assert_relation_identifier_exhaustion_is_preflight(
@@ -992,6 +1296,118 @@ fn sys5_relation_request_suffix(identifier: &str) -> u64 {
         .strip_prefix("sys5-relation-request:")
         .and_then(|suffix| suffix.parse::<u64>().ok())
         .unwrap_or_else(|| panic!("relation request id has expected SYS-5 prefix: {identifier}"))
+}
+
+fn sys4_request_suffix(identifier: &str) -> u64 {
+    identifier
+        .strip_prefix("sys4-request-")
+        .and_then(|suffix| suffix.parse::<u64>().ok())
+        .unwrap_or_else(|| panic!("SYS-4 request id has expected prefix: {identifier}"))
+}
+
+fn sys4_occurrence_suffix(identifier: &str) -> u64 {
+    identifier
+        .rsplit_once('-')
+        .and_then(|(_, suffix)| suffix.parse::<u64>().ok())
+        .unwrap_or_else(|| panic!("SYS-4 occurrence id has numeric suffix: {identifier}"))
+}
+
+fn assert_relation_endpoint_chain_uses_actual_occurrences(chain: &Sys5RelationEndpointChain) {
+    let request_identity = chain.request_identity();
+    assert!(
+        request_identity.starts_with("sys5-relation-request:"),
+        "relation request identity must retain the source-derived SYS-5 namespace"
+    );
+
+    let owner_prefix = format!("sys4-m8:{}:m8-fabric-trace-", chain.source_locus());
+    assert!(
+        chain
+            .owner_publish_occurrence_id()
+            .starts_with(&owner_prefix),
+        "owner publication must expose the actual fabric-qualified M8 occurrence"
+    );
+    let observe_prefix = format!("sys4-m8:{}:m8-fabric-trace-", chain.target_locus());
+    assert!(
+        chain
+            .consumer_observe_occurrence_id()
+            .starts_with(&observe_prefix),
+        "consumer observation must expose the actual fabric-qualified M8 occurrence"
+    );
+    assert!(
+        chain
+            .serve_occurrence_id()
+            .starts_with("sys4-relation-serve-"),
+        "relation serve must expose the retained SYS-4 fabric occurrence"
+    );
+
+    let actual_occurrences = [
+        ("owner publish", chain.owner_publish_occurrence_id()),
+        ("request enqueue", chain.request_enqueue_occurrence_id()),
+        ("dispatch", chain.dispatch_occurrence_id()),
+        ("receive", chain.receive_occurrence_id()),
+        ("observe", chain.consumer_observe_occurrence_id()),
+        ("serve", chain.serve_occurrence_id()),
+    ];
+    for (label, occurrence_id) in actual_occurrences {
+        assert!(
+            !occurrence_id.is_empty(),
+            "{label} occurrence must be retained"
+        );
+        assert_ne!(
+            occurrence_id, request_identity,
+            "{label} occurrence must not be the source-derived request identity"
+        );
+    }
+    for (left_index, (left_label, left)) in actual_occurrences.iter().enumerate() {
+        for (right_label, right) in actual_occurrences.iter().skip(left_index + 1) {
+            assert_ne!(
+                left, right,
+                "{left_label} and {right_label} must remain separate occurrences"
+            );
+        }
+    }
+}
+
+fn assert_relation_report_preserves_endpoint_chain(
+    report: &str,
+    chain: &Sys5RelationEndpointChain,
+) {
+    let expected_fragments = [
+        format!("publish:{}", chain.owner_publish_occurrence_id()),
+        format!("request:{}", chain.request_identity()),
+        format!("request-enqueue:{}", chain.request_enqueue_occurrence_id()),
+        format!("dispatch:{}", chain.dispatch_occurrence_id()),
+        format!("receive:{}", chain.receive_occurrence_id()),
+        format!("observe:{}", chain.consumer_observe_occurrence_id()),
+        format!("serve:{}", chain.serve_occurrence_id()),
+        format!("request_identity={}", chain.request_identity()),
+        format!(
+            "owner_publish_occurrence_id={}",
+            chain.owner_publish_occurrence_id()
+        ),
+        format!(
+            "request_enqueue_occurrence_id={}",
+            chain.request_enqueue_occurrence_id()
+        ),
+        format!("dispatch_occurrence_id={}", chain.dispatch_occurrence_id()),
+        format!("receive_occurrence_id={}", chain.receive_occurrence_id()),
+        format!(
+            "consumer_observe_occurrence_id={}",
+            chain.consumer_observe_occurrence_id()
+        ),
+        format!("serve_occurrence_id={}", chain.serve_occurrence_id()),
+        format!("source_fragment_ref={}", chain.source_fragment_ref()),
+        format!("target_fragment_ref={}", chain.target_fragment_ref()),
+        format!("edge_ref={}", chain.edge_ref()),
+        format!("core_ref={}", chain.core_ref().unwrap_or("")),
+        "causal_path=owner_publish_occurrence_id->request_enqueue_occurrence_id->dispatch_occurrence_id->receive_occurrence_id->consumer_observe_occurrence_id->serve_occurrence_id".to_string(),
+    ];
+    for fragment in expected_fragments {
+        assert!(
+            report.contains(&fragment),
+            "observer-safe report missing relation endpoint fragment `{fragment}`"
+        );
+    }
 }
 
 fn assert_contains_all(text: &str, expected_fragments: &[&str]) {

@@ -82,6 +82,8 @@ mod sys4_dispatch_tests;
 mod sys5_local_slice_tests;
 #[cfg(test)]
 mod sys5_relation_dispatch_tests;
+#[cfg(test)]
+mod sys5_vertical_slice_tests;
 
 pub fn crate_name() -> &'static str {
     "mir_runtime"
