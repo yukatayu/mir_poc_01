@@ -15,6 +15,8 @@
 
 use std::collections::{BTreeMap, BTreeSet};
 
+use sha2::{Digest, Sha256};
+
 use mir_semantics::{
     m9_finite_refinement::{
         M9ContractCandidate, M9FiniteContractDelta, M9FiniteRefinementChecker,
@@ -1747,6 +1749,23 @@ fn m9_opaque_ref(input: &str) -> String {
     format!("m9-sealed:{hash:016x}")
 }
 
+/// Hash exact private M9 continuation material without making its contents an
+/// observer/API value. Components are length-delimited so distinct field
+/// partitions cannot collide through formatting boundaries.
+fn m9_private_restore_digest(domain: &[u8], components: &[String]) -> String {
+    let mut hasher = Sha256::new();
+    hasher.update(domain);
+    for component in components {
+        hasher.update(
+            u64::try_from(component.len())
+                .expect("M9 private restore integrity component length fits u64")
+                .to_le_bytes(),
+        );
+        hasher.update(component.as_bytes());
+    }
+    format!("m9-private-restore-sha256-v1:{:x}", hasher.finalize())
+}
+
 impl M9M10AuthorityBridge {
     pub(crate) fn authority_state(&self) -> M8AuthorityState {
         self.authority_state.clone()
@@ -3451,6 +3470,92 @@ impl M9AuthorityGeneration {
         self.checked_patch_authority_lineage_digest()
     }
 
+    /// Opaque, crate-private equality material for an exact process-local
+    /// restore. This is broader than a checked-patch binding: it also covers
+    /// dormant fresh bindings and runtime validation counters that a restored
+    /// M9 publisher will continue to use. Raw authority facts are consumed
+    /// only by this local hash and never cross an observer or transport edge.
+    pub(crate) fn private_restore_integrity_digest(&self) -> String {
+        let owner_lineages = self
+            .kernel_owner_lineages
+            .iter()
+            .map(|(key, lineage)| {
+                format!(
+                    "{key:?}:{}:{}:{}:{}:{}:{}:{}",
+                    lineage.principal(),
+                    lineage.owner_locus(),
+                    lineage.membership_ref(),
+                    lineage.membership_epoch(),
+                    lineage.membership_incarnation(),
+                    lineage.capability_ref(),
+                    lineage.witness_ref(),
+                )
+            })
+            .collect::<Vec<_>>();
+        let remote_input_lineages = self
+            .kernel_designated_remote_input_lineages
+            .iter()
+            .map(|(key, lineage)| {
+                format!(
+                    "{key:?}:{}:{}:{}:{}:{}:{}:{}:{}:{}:{}:{}:{}:{}",
+                    lineage.principal(),
+                    lineage.producer_locus(),
+                    lineage.evaluator(),
+                    lineage.result(),
+                    lineage.dependency_index(),
+                    lineage.input_frontier(),
+                    lineage.release_label(),
+                    lineage.visibility(),
+                    lineage.membership_ref(),
+                    lineage.membership_epoch(),
+                    lineage.membership_incarnation(),
+                    lineage.capability_ref(),
+                    lineage.witness_ref(),
+                )
+            })
+            .collect::<Vec<_>>();
+        let fresh_relation_bindings = self
+            .fresh_relation_reacquire_bindings
+            .iter()
+            .map(|(relation, binding)| {
+                format!(
+                    "{relation}:{}:{}:{}:{}:{}:{}:{:?}",
+                    binding.owner_locus,
+                    binding.primary_anchor,
+                    binding.fresh_anchor_epoch,
+                    binding.binding_epoch,
+                    binding.binding_frontier,
+                    binding.fresh_lease_ref,
+                    binding.authority,
+                )
+            })
+            .collect::<Vec<_>>();
+        m9_private_restore_digest(
+            b"mirrorea/m9/authority-generation-restore-integrity/v1\0",
+            &[
+                self.program_identity.clone(),
+                self.generation.to_string(),
+                self.generation_ref.clone(),
+                format!("{:?}", self.authority_state),
+                format!("{:?}", self.owner_uses),
+                format!("{:?}", self.relation_uses),
+                format!("{fresh_relation_bindings:?}"),
+                format!("{:?}", self.designated_evaluation_uses),
+                format!("{:?}", self.designated_consumption_uses),
+                format!("{owner_lineages:?}"),
+                format!("{:?}", self.revoked_owner_capabilities),
+                format!("{:?}", self.revoked_designated_consumption_capabilities),
+                format!("{remote_input_lineages:?}"),
+                format!("{:?}", self.designated_consumer_failures),
+                format!("{:?}", self.designated_consumer_witness_retirements),
+                format!("{:?}", self.designated_source_release_failures),
+                format!("{:?}", self.designated_consumer_validation_occurrences),
+                format!("{:?}", self.owner_operation_validation_occurrences),
+                format!("{:?}", self.source_release_validation_occurrences),
+            ],
+        )
+    }
+
     /// Exact internal restore identity for a sealed M9 generation.  SYS-4
     /// uses this only to bind a process-local cut to the M9-owned successor
     /// lifecycle; it exposes neither credentials nor an authority minting
@@ -4040,6 +4145,22 @@ impl M9AuthoritySuccessorPublisher {
     /// authority after restore.
     pub(crate) fn current_generation_for_restore(&self) -> M9AuthorityGeneration {
         self.current.clone()
+    }
+
+    /// Private continuation state for a SYS-4 local-cut seal. It covers the
+    /// publisher, not only its currently exposed generation, because later M9
+    /// transitions depend on the retained admitted base, evidence graph, and
+    /// authority-runtime counters as well.
+    pub(crate) fn private_restore_integrity_digest(&self) -> String {
+        m9_private_restore_digest(
+            b"mirrorea/m9/authority-publisher-restore-integrity/v1\0",
+            &[
+                format!("{:?}", self.base),
+                format!("{:?}", self.evidence),
+                self.authority_runtime.private_restore_integrity_digest(),
+                self.current.private_restore_integrity_digest(),
+            ],
+        )
     }
 
     pub(crate) fn current_inspection(&self) -> M9AuthorityInspection {
@@ -6686,6 +6807,22 @@ impl M9AuthorityRuntime {
 
     pub(crate) fn authority_snapshot(&self) -> M9AuthoritySnapshot {
         self.snapshot.clone()
+    }
+
+    /// Private continuation state for the M9 successor publisher. This is not
+    /// an observer projection and never exposes its membership, capability,
+    /// witness, or proof values.
+    fn private_restore_integrity_digest(&self) -> String {
+        m9_private_restore_digest(
+            b"mirrorea/m9/authority-runtime-restore-integrity/v1\0",
+            &[
+                format!("{:?}", self.outer_admission),
+                format!("{:?}", self.snapshot),
+                format!("{:?}", self.evidence_graph),
+                self.next_authority_cut.to_string(),
+                format!("{:?}", self.restored_authority_cuts),
+            ],
+        )
     }
 
     pub(crate) fn authority_fact_inventory(&self) -> M9AuthorityFactInventory {

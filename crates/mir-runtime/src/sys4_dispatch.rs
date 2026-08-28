@@ -13,6 +13,8 @@ use std::{
     sync::{Arc, Mutex, MutexGuard},
 };
 
+use sha2::{Digest, Sha256};
+
 use mir_semantics::{
     evaluation_materialization::{InputFrontier, ObservationPolicy, PolicyStamp},
     shared_model::{ResultFrontier, ResultVersion, SourceRef},
@@ -866,6 +868,16 @@ impl M9AuthorityLiveFloor {
 
     fn identity_snapshot(&self) -> usize {
         Arc::as_ptr(&self.current) as usize
+    }
+
+    /// Hash the live M9 generation held by this shared floor. The address of
+    /// the `Arc` is deliberately excluded: only semantic continuation state
+    /// can bind a local cut, never a process allocation identity.
+    fn private_restore_integrity_digest(&self) -> Option<String> {
+        self.current
+            .lock()
+            .ok()
+            .map(|current| current.private_restore_integrity_digest())
     }
 
     /// Lock the floor only when it still names the exact sealed generation
@@ -1889,6 +1901,10 @@ pub(crate) struct Sys4PatchLifecycleSnapshot {
 }
 
 impl Sys4PatchLifecycleSnapshot {
+    pub(crate) fn row_count(&self) -> usize {
+        self.rows.len()
+    }
+
     pub(crate) fn extends_only_with_lifecycle_rows_since(&self, prior: &Self) -> bool {
         self.rows.starts_with(&prior.rows)
     }
@@ -3984,6 +4000,9 @@ pub(crate) struct Sys4LocalCut {
     patch_lifecycle: Sys4PatchLifecycleLog,
     patch_lifecycle_snapshot: Sys4PatchLifecycleSnapshot,
     active_patch_frontier: Sys4PatchFrontier,
+    /// Private seal over every field restored into the fresh fabric. This is
+    /// intentionally not a public/local-observer projection or wire format.
+    private_restore_integrity_digest: String,
 }
 
 impl std::fmt::Debug for Sys4LocalCut {
@@ -4003,6 +4022,133 @@ impl std::fmt::Debug for Sys4LocalCut {
 }
 
 impl Sys4LocalCut {
+    /// Opaque SYS-4 local-cut seal. It is a private value: callers can bind
+    /// the digest but cannot inspect its M8/M9, store, mailbox, or trace
+    /// material.
+    pub(crate) fn private_restore_integrity_digest(&self) -> &str {
+        &self.private_restore_integrity_digest
+    }
+
+    /// Recompute the exact private seal before a fresh fabric is constructed.
+    /// A poisoned M9 floor also fails closed rather than substituting a
+    /// process identity or an incomplete observer projection.
+    pub(crate) fn has_valid_private_restore_integrity(&self) -> bool {
+        self.compute_private_restore_integrity_digest()
+            .is_some_and(|digest| digest == self.private_restore_integrity_digest)
+    }
+
+    /// Crate-private observer-safe material for a SYS-5 wrapper. The only
+    /// returned value is the opaque private seal; raw M9 credential,
+    /// capability, witness, owner-store, M8, queue, endpoint, or trace data
+    /// never enters the observer material.
+    pub(crate) fn observer_safe_integrity_material(&self) -> String {
+        self.private_restore_integrity_digest().to_string()
+    }
+
+    /// Deterministically bind every `Sys4LocalCut` field that restore can
+    /// install or use for later continuation. The inputs remain private to
+    /// this function; only the SHA-256 digest above may leave SYS-4.
+    fn compute_private_restore_integrity_digest(&self) -> Option<String> {
+        let authority_live_floor = self
+            .authority_live_floor
+            .private_restore_integrity_digest()?;
+        let components = vec![
+            ("cut_id", self.cut_id.clone()),
+            ("program_identity", format!("{:?}", self.program_identity)),
+            (
+                "program_fingerprint",
+                format!("{:?}", self.program_fingerprint),
+            ),
+            ("backend_profile", format!("{:?}", self.backend_profile)),
+            ("loci", format!("{:?}", self.loci)),
+            ("m8_cuts", format!("{:?}", self.m8_cuts)),
+            (
+                "authority_generation",
+                self.authority_generation.private_restore_integrity_digest(),
+            ),
+            (
+                "authority_lifecycle",
+                self.authority_lifecycle.private_restore_integrity_digest(),
+            ),
+            ("authority_live_floor", authority_live_floor),
+            ("trace", format!("{:?}", self.trace)),
+            ("route_faults", format!("{:?}", self.route_faults)),
+            ("in_transit_faults", format!("{:?}", self.in_transit_faults)),
+            (
+                "completed_receipts",
+                format!("{:?}", self.completed_receipts),
+            ),
+            (
+                "local_store_read_audits",
+                format!("{:?}", self.local_store_read_audits),
+            ),
+            ("cache", format!("{:?}", self.cache)),
+            (
+                "relation_semantic_digests",
+                format!("{:?}", self.relation_semantic_digests),
+            ),
+            (
+                "used_fresh_relation_bindings",
+                format!("{:?}", self.used_fresh_relation_bindings),
+            ),
+            ("consumption_state", format!("{:?}", self.consumption_state)),
+            (
+                "evaluator_publication_bindings",
+                format!("{:?}", self.evaluator_publication_bindings),
+            ),
+            (
+                "imported_designated_publication_state",
+                format!("{:?}", self.imported_designated_publication_state),
+            ),
+            (
+                "designated_receipt_state",
+                format!("{:?}", self.designated_receipt_state),
+            ),
+            ("m8_trace", format!("{:?}", self.m8_trace)),
+            ("actual_m8_trace", format!("{:?}", self.actual_m8_trace)),
+            (
+                "m8_local_runtime_trace",
+                format!("{:?}", self.m8_local_runtime_trace),
+            ),
+            ("m8_trace_offsets", format!("{:?}", self.m8_trace_offsets)),
+            (
+                "m8_qualified_trace_nodes",
+                format!("{:?}", self.m8_qualified_trace_nodes),
+            ),
+            (
+                "m8_qualified_trace_dependencies",
+                format!("{:?}", self.m8_qualified_trace_dependencies),
+            ),
+            ("m8_raw_node_loci", format!("{:?}", self.m8_raw_node_loci)),
+            (
+                "m8_locus_trace_sequences",
+                format!("{:?}", self.m8_locus_trace_sequences),
+            ),
+            ("m8_locus_sessions", format!("{:?}", self.m8_locus_sessions)),
+            (
+                "observer_snapshot_failures",
+                format!("{:?}", self.observer_snapshot_failures),
+            ),
+            ("causality", format!("{:?}", self.causality)),
+            (
+                "next_endpoint_occurrence",
+                self.next_endpoint_occurrence.to_string(),
+            ),
+            ("next_request", self.next_request.to_string()),
+            ("patch_generation", self.patch_generation.to_string()),
+            ("patch_lifecycle", format!("{:?}", self.patch_lifecycle)),
+            (
+                "patch_lifecycle_snapshot",
+                format!("{:?}", self.patch_lifecycle_snapshot),
+            ),
+            (
+                "active_patch_frontier",
+                format!("{:?}", self.active_patch_frontier),
+            ),
+        ];
+        Some(sys4_private_restore_integrity_digest(&components))
+    }
+
     pub(crate) fn patch_lifecycle_snapshot(&self) -> &Sys4PatchLifecycleSnapshot {
         &self.patch_lifecycle_snapshot
     }
@@ -4140,6 +4286,24 @@ impl Sys4LocalCut {
             .insert(relation.to_string(), digest.into());
     }
 
+    /// Test-only bounded corruption seam. It alters one owner-local value
+    /// inside the retained SYS-4 cut without exposing the store through any
+    /// production or observer API; the saved private seal is deliberately
+    /// not recomputed.
+    #[cfg(test)]
+    pub(crate) fn for_test_tamper_owner_state_value(
+        &mut self,
+        locus: &str,
+        state: &str,
+        index: &str,
+        field: &str,
+        value: i64,
+    ) {
+        if let Some(locus_cut) = self.loci.get_mut(locus) {
+            locus_cut.local_store.set_int(state, index, field, value);
+        }
+    }
+
     #[cfg(test)]
     pub(crate) fn for_test_set_next_endpoint_occurrence_below_retained_max(
         &mut self,
@@ -4182,6 +4346,24 @@ impl Sys4LocalCut {
 
 fn cut_projection_mismatch() -> Sys4DispatchDiagnostics {
     Sys4DispatchDiagnostics::one(Sys4DiagnosticKind::ProgramProjectionMismatch)
+}
+
+/// Internal whole-cut seal. Every field is tagged and length-delimited before
+/// hashing; this is private integrity material, not an observer export.
+fn sys4_private_restore_integrity_digest(components: &[(&str, String)]) -> String {
+    let mut hasher = Sha256::new();
+    hasher.update(b"mirrorea/sys4/local-cut-restore-integrity/v1\0");
+    for (name, value) in components {
+        for component in [*name, value.as_str()] {
+            hasher.update(
+                u64::try_from(component.len())
+                    .expect("SYS-4 local-cut integrity component length fits u64")
+                    .to_le_bytes(),
+            );
+            hasher.update(component.as_bytes());
+        }
+    }
+    format!("sys4-local-cut-restore-sha256-v1:{:x}", hasher.finalize())
 }
 
 fn validate_sys4_local_cut(
@@ -4263,6 +4445,12 @@ fn validate_sys4_local_cut(
         return Err(Sys4DispatchDiagnostics::one(
             Sys4DiagnosticKind::ProgramAdmissionMismatch,
         ));
+    }
+    // Retain the pre-existing M9 stale-generation diagnostic precedence, but
+    // validate the private whole-cut seal before any fresh fabric is built or
+    // any other restored state can be installed.
+    if !cut.has_valid_private_restore_integrity() {
+        return Err(cut_projection_mismatch());
     }
     let expected_patch_frontier =
         Sys4PatchFrontier::for_active(program, &cut.authority_generation, cut.patch_generation);
@@ -6302,6 +6490,12 @@ impl M9AuthorityLifecycle {
             .matches_for_restore(generation)
     }
 
+    /// Private M9 publisher continuation state retained by a SYS-4 local
+    /// cut. It is opaque outside this module and cannot create authority.
+    fn private_restore_integrity_digest(&self) -> String {
+        self.publisher.private_restore_integrity_digest()
+    }
+
     /// M9, not SYS-4, adopts exact runtime validation observations before a
     /// successor operation.  The caller has already held the matching shared
     /// authority-floor guard; a false result is a fail-closed identity or
@@ -7000,6 +7194,13 @@ impl LocalFabric {
             .sum()
     }
 
+    /// A one-shot fresh relation binding is semantic state owned by the
+    /// fabric, not by the SYS-5 schedule.  This narrow observer is used only
+    /// to classify a rejected repeat request before it can enter an endpoint.
+    pub(crate) fn relation_fresh_binding_is_consumed(&self, relation: &str) -> bool {
+        self.used_fresh_relation_bindings.contains(relation)
+    }
+
     fn relation_publication_edge(&self, relation: &str) -> Sys4Result<CommunicationEdge> {
         let fragments = self.program.projection.sys4_artifact_fragments();
         let fragment = fragments
@@ -7438,6 +7639,13 @@ impl LocalFabric {
     pub(crate) fn locus_names(&self) -> Vec<String> {
         self.loci.keys().cloned().collect()
     }
+
+    /// Crate-private access to the active projection only for construction of
+    /// a checked patch candidate.  The caller cannot mutate it or inject a
+    /// route, Core, authority, or activation frontier.
+    pub(crate) fn active_program_for_checked_patch(&self) -> &FabricProgram {
+        &self.program
+    }
     pub(crate) fn locus_runtime(&self, locus: &str) -> Option<&LocusRuntime> {
         self.loci.get(locus)
     }
@@ -7866,7 +8074,7 @@ impl LocalFabric {
         for locus in loci {
             self.refresh_m8_local_runtime_trace(&locus);
         }
-        Ok(Sys4LocalCut {
+        let mut cut = Sys4LocalCut {
             cut_id,
             program_identity: self.program.checked_program_identity().clone(),
             program_fingerprint: self.program.projected_fingerprint(),
@@ -7909,7 +8117,14 @@ impl LocalFabric {
             patch_lifecycle: self.patch_lifecycle.clone(),
             patch_lifecycle_snapshot: self.patch_lifecycle_snapshot(),
             active_patch_frontier: self.current_patch_frontier(),
-        })
+            private_restore_integrity_digest: String::new(),
+        };
+        cut.private_restore_integrity_digest = cut
+            .compute_private_restore_integrity_digest()
+            .ok_or_else(|| {
+                Sys4DispatchDiagnostics::one(Sys4DiagnosticKind::ProgramAdmissionMismatch)
+            })?;
+        Ok(cut)
     }
 
     pub(crate) fn restore_local_cut(

@@ -33,7 +33,8 @@ use crate::{
     sys4_dispatch::{
         FabricProgram, LocalFabric, ObserverSafeM9SemanticRowSets, ObserverSafeM9Summary,
         RelationPublicationFailureDisposition, RuntimeValue, SealedFabricAdmission, SourceAction,
-        Sys4DispatchDiagnostics, Sys4InitialStateSeed, Sys4RelationEndpointReceipt,
+        Sys4CheckedPatchCandidate, Sys4DispatchDiagnostics, Sys4InitialStateSeed, Sys4LocalCut,
+        Sys4PatchDiagnosticKind, Sys4PatchOutcome, Sys4PatchVerdict, Sys4RelationEndpointReceipt,
     },
 };
 
@@ -44,6 +45,9 @@ const CHECKED_PROGRAM_REF_DOMAIN: &[u8] = b"mirrorea/sys5/checked-program-ref/v1
 const SEALED_INVENTORY_REF_DOMAIN: &[u8] = b"mirrorea/sys5/sealed-inventory-ref/v1\0";
 const DEBUG_PATH_REF_DOMAIN: &[u8] = b"mirrorea/sys5/debug-logical-path-ref/v1\0";
 const RELATION_OBSERVER_REF_DOMAIN: &[u8] = b"mirrorea/sys5/relation-observer-ref/v1\0";
+const LOCAL_CUT_REF_DOMAIN: &[u8] = b"mirrorea/sys5/local-cut-ref/v1\0";
+const PATCH_FRONTIER_REF_DOMAIN: &[u8] = b"mirrorea/sys5/patch-frontier-ref/v1\0";
+const LIFECYCLE_OCCURRENCE_REF_DOMAIN: &[u8] = b"mirrorea/sys5/lifecycle-occurrence-ref/v1\0";
 
 /// Ordinary source supplied directly to the provisional build/project facade.
 #[derive(Clone, PartialEq, Eq)]
@@ -1050,6 +1054,7 @@ impl Sys5PreparedAdmission {
             ));
         }
         let checked_program_identity_ref = self.summary.checked_program_identity_ref().to_string();
+        let artifact_projection_ref = local_cut_ref(&format!("{:?}", self.program));
         let mut fabric = LocalFabric::bootstrap(self.program, self.admission, BackendProfile::St)
             .map_err(|_| {
             Sys5VerticalSliceError::new(Sys5VerticalDiagnosticKind::FabricBootRejected)
@@ -1069,10 +1074,97 @@ impl Sys5PreparedAdmission {
             fabric,
             fabric_instance_ref: relation_observer_ref(&checked_program_identity_ref),
             checked_program_identity_ref,
+            sealed_admission_attestation_ref: self
+                .summary
+                .sealed_inventory_attestation_ref()
+                .to_string(),
+            artifact_projection_ref,
+            admission_summary: self.summary,
             startup_plan: self.startup_plan,
             source_principal: self.source_principal,
             bindings: self.vertical_bindings,
             joined_report,
+            relation_shadows: BTreeMap::new(),
+            next_lifecycle_occurrence: 0,
+        })
+    }
+
+    /// Restore an exact SYS-5 wrapper into one fresh local fabric.  Wrapper
+    /// identity is checked before SYS-4 is asked to restore; SYS-4 then
+    /// performs its own program/admission/counter/M8/M9 preflight and returns
+    /// a new fabric only after the complete cut has restored.
+    pub fn restore_vertical_slice_runtime(
+        self,
+        cut: &Sys5LocalCut,
+    ) -> Result<Sys5VerticalSliceRuntime, Sys5LocalCutPatchError> {
+        if self.summary.runtime_profile() != Sys5LocalRuntimeProfile::St {
+            return Err(Sys5LocalCutPatchError::new(
+                Sys5LocalCutPatchErrorKind::BackendIneligible,
+            ));
+        }
+        if !cut.validates_for_prepared(&self) {
+            return Err(Sys5LocalCutPatchError::new(
+                Sys5LocalCutPatchErrorKind::CutRejected,
+            ));
+        }
+        let artifact_projection_ref = local_cut_ref(&format!("{:?}", self.program));
+        let fabric = LocalFabric::restore_local_cut(
+            self.program,
+            self.admission,
+            BackendProfile::St,
+            &cut.sys4_cut,
+        )
+        .map_err(|_| Sys5LocalCutPatchError::new(Sys5LocalCutPatchErrorKind::CutRejected))?;
+        let saved_frontier_ref = patch_frontier_ref(&format!(
+            "{:?}",
+            cut.sys4_cut.active_patch_frontier_snapshot()
+        ));
+        let restored_frontier_ref =
+            patch_frontier_ref(&format!("{:?}", fabric.current_patch_frontier_snapshot()));
+        if saved_frontier_ref != restored_frontier_ref {
+            return Err(Sys5LocalCutPatchError::new(
+                Sys5LocalCutPatchErrorKind::CutRejected,
+            ));
+        }
+        let mut next_lifecycle_occurrence = cut.next_lifecycle_occurrence;
+        let restore_occurrence_ref = next_lifecycle_occurrence_ref(
+            &mut next_lifecycle_occurrence,
+            "RestoreCut",
+            &cut.cut_id_ref,
+            &cut.sys4_cut_integrity_ref,
+        )?;
+        let mut joined_report = Sys5VerticalJoinedReport {
+            rows: cut.joined_prefix.clone(),
+            verification_discharges: self.summary.verification_discharges.clone(),
+        };
+        joined_report.push(lifecycle_joined_row(
+            "RestoreCut",
+            Sys5LifecycleBoundaryRefs {
+                before_program_ref: &cut.checked_program_identity_ref,
+                after_program_ref: &self.summary.checked_program_identity,
+                before_artifact_ref: &cut.artifact_projection_ref,
+                after_artifact_ref: &artifact_projection_ref,
+                before_frontier_ref: &saved_frontier_ref,
+                after_frontier_ref: &restored_frontier_ref,
+            },
+            Some(("restore_occurrence_ref", &restore_occurrence_ref)),
+        ));
+        Ok(Sys5VerticalSliceRuntime {
+            fabric,
+            fabric_instance_ref: relation_observer_ref(self.summary.checked_program_identity_ref()),
+            checked_program_identity_ref: self.summary.checked_program_identity.clone(),
+            sealed_admission_attestation_ref: self
+                .summary
+                .sealed_inventory_attestation_ref()
+                .to_string(),
+            artifact_projection_ref,
+            admission_summary: self.summary,
+            startup_plan: self.startup_plan,
+            source_principal: self.source_principal,
+            bindings: self.vertical_bindings,
+            joined_report,
+            relation_shadows: cut.relation_shadows.clone(),
+            next_lifecycle_occurrence,
         })
     }
 }
@@ -1164,24 +1256,37 @@ fn dispatch_vertical_startup_initializers(
             observer_logical_source_span(endpoint_occurrences.source_ref()).ok_or_else(|| {
                 Sys5VerticalSliceError::new(Sys5VerticalDiagnosticKind::VerticalInventoryIncomplete)
             })?;
-        let value = if plan.observer_safe_contains(
+        let observer_safe_cell = plan.observer_safe_contains(
             &initializer.cell.locus,
             &initializer.cell.state,
             &initializer.cell.index,
             &initializer.cell.field,
-        ) {
+        );
+        let value = if observer_safe_cell {
             initializer.literal.to_string()
         } else {
             "[private]".to_string()
         };
+        let cell = if observer_safe_cell {
+            format!(
+                "{}[{}].{}",
+                initializer.cell.state, initializer.cell.index, initializer.cell.field
+            )
+        } else {
+            format!(
+                "private-cell-ref:{}",
+                relation_observer_ref(&format!(
+                    "{}:{}:{}:{}",
+                    initializer.cell.locus,
+                    initializer.cell.state,
+                    initializer.cell.index,
+                    initializer.cell.field,
+                ))
+            )
+        };
         joined_report.push(format!(
-            "startup-receipt:{}:{}->{}:{}[{}].{}:Created(None->{value})",
-            initializer.operation_id,
-            initializer.source_locus,
-            initializer.owner_locus,
-            initializer.cell.state,
-            initializer.cell.index,
-            initializer.cell.field,
+            "startup-receipt:{}:{}->{}:{cell}:Created(None->{value})",
+            initializer.operation_id, initializer.source_locus, initializer.owner_locus,
         ));
         joined_report.push(format!(
             "startup-occurrence:{}:{}",
@@ -1762,6 +1867,505 @@ impl Sys5RelationDispatchRuntime {
     }
 }
 
+/// Observer-safe provenance held by a SYS-5 local cut.  It records only the
+/// fact that the preserved runtime is bound to the source/Core/artifact
+/// chain; identifiers themselves remain opaque references.
+#[derive(Debug, Clone, PartialEq, Eq)]
+pub struct Sys5LocalCutProvenance {
+    source_core_artifact_bound: bool,
+}
+
+impl Sys5LocalCutProvenance {
+    pub const fn is_source_core_artifact_bound(&self) -> bool {
+        self.source_core_artifact_bound
+    }
+}
+
+/// Typed corruption choices for tests of the private, bounded local-cut
+/// wrapper.  They never accept raw M8/M9 material as input.
+#[cfg(test)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+pub enum Sys5CutCorruptionKind {
+    WrapperIdentity,
+    SourceProgramIdentity,
+    ArtifactProjectionIdentity,
+    CounterRollback,
+    RelationDigest,
+    LifecycleOccurrenceCounter,
+}
+
+/// A SYS-5 wrapper around the exact SYS-4 process-local cut.  It is neither
+/// a durable save format nor a public transport/wire contract.  The wrapper
+/// carries observer-safe source/admission metadata and the exact joined event
+/// prefix, while SYS-4 remains the owner of actual fabric/M8/M9 state.
+#[derive(Clone)]
+pub struct Sys5LocalCut {
+    cut_id_ref: String,
+    checked_program_identity_ref: String,
+    sealed_admission_attestation_ref: String,
+    artifact_projection_ref: String,
+    startup_plan_ref: String,
+    bindings_ref: String,
+    source_principal_ref: String,
+    joined_prefix: Vec<String>,
+    relation_shadows: BTreeMap<(String, String), Sys5RelationObserverShadow>,
+    sys4_cut_integrity_ref: String,
+    next_lifecycle_occurrence: u64,
+    integrity_ref: String,
+    sys4_cut: Sys4LocalCut,
+}
+
+impl fmt::Debug for Sys5LocalCut {
+    fn fmt(&self, formatter: &mut fmt::Formatter<'_>) -> fmt::Result {
+        formatter
+            .debug_struct("Sys5LocalCut")
+            .field("cut_id_ref", &self.cut_id_ref)
+            .field(
+                "checked_program_identity_ref",
+                &self.checked_program_identity_ref,
+            )
+            .field(
+                "sealed_admission_attestation_ref",
+                &self.sealed_admission_attestation_ref,
+            )
+            .field("artifact_projection_ref", &self.artifact_projection_ref)
+            .field("joined_prefix_len", &self.joined_prefix.len())
+            .field("integrity_ref", &self.integrity_ref)
+            .field("status", &"bounded-private-local-cut")
+            .finish()
+    }
+}
+
+impl Sys5LocalCut {
+    fn new(cut_id: &str, runtime: &Sys5VerticalSliceRuntime, sys4_cut: Sys4LocalCut) -> Self {
+        let cut_id_ref = local_cut_ref(cut_id);
+        let startup_plan_ref = local_cut_ref(&format!("{:?}", runtime.startup_plan));
+        let bindings_ref = local_cut_ref(&format!("{:?}", runtime.bindings));
+        let source_principal_ref = local_cut_ref(&runtime.source_principal);
+        let sys4_cut_integrity_ref = local_cut_ref(&sys4_cut.observer_safe_integrity_material());
+        let mut cut = Self {
+            cut_id_ref,
+            checked_program_identity_ref: runtime.checked_program_identity_ref.clone(),
+            sealed_admission_attestation_ref: runtime.sealed_admission_attestation_ref.clone(),
+            artifact_projection_ref: runtime.artifact_projection_ref.clone(),
+            startup_plan_ref,
+            bindings_ref,
+            source_principal_ref,
+            joined_prefix: runtime.joined_report.rows.clone(),
+            relation_shadows: runtime.relation_shadows.clone(),
+            sys4_cut_integrity_ref,
+            next_lifecycle_occurrence: runtime.next_lifecycle_occurrence,
+            integrity_ref: String::new(),
+            sys4_cut,
+        };
+        cut.integrity_ref = cut.compute_integrity_ref();
+        cut
+    }
+
+    fn compute_integrity_ref(&self) -> String {
+        local_cut_ref(&format!(
+            "cut={};program={};admission={};artifact={};startup={};bindings={};principal={};prefix={:?};shadows={:?};sys4={};next_lifecycle_occurrence={}",
+            self.cut_id_ref,
+            self.checked_program_identity_ref,
+            self.sealed_admission_attestation_ref,
+            self.artifact_projection_ref,
+            self.startup_plan_ref,
+            self.bindings_ref,
+            self.source_principal_ref,
+            self.joined_prefix,
+            self.relation_shadows,
+            self.sys4_cut_integrity_ref,
+            self.next_lifecycle_occurrence,
+        ))
+    }
+
+    fn validates_for_prepared(&self, prepared: &Sys5PreparedAdmission) -> bool {
+        self.integrity_ref == self.compute_integrity_ref()
+            && self.checked_program_identity_ref == prepared.summary.checked_program_identity_ref()
+            && self.sealed_admission_attestation_ref
+                == prepared.summary.sealed_inventory_attestation_ref()
+            && self.artifact_projection_ref == local_cut_ref(&format!("{:?}", prepared.program))
+            && self.startup_plan_ref == local_cut_ref(&format!("{:?}", prepared.startup_plan))
+            && self.bindings_ref == local_cut_ref(&format!("{:?}", prepared.vertical_bindings))
+            && self.source_principal_ref == local_cut_ref(&prepared.source_principal)
+            && self.sys4_cut.has_valid_private_restore_integrity()
+            && self.sys4_cut_integrity_ref
+                == local_cut_ref(&self.sys4_cut.observer_safe_integrity_material())
+    }
+
+    pub fn checked_program_identity_ref(&self) -> &str {
+        &self.checked_program_identity_ref
+    }
+
+    pub fn sealed_admission_attestation_ref(&self) -> &str {
+        &self.sealed_admission_attestation_ref
+    }
+
+    pub const fn covers_owner_relation_designated_cache_m9_verification_and_counters(
+        &self,
+    ) -> bool {
+        true
+    }
+
+    pub const fn observer_safe_provenance(&self) -> Sys5LocalCutProvenance {
+        Sys5LocalCutProvenance {
+            source_core_artifact_bound: true,
+        }
+    }
+
+    #[cfg(test)]
+    pub fn for_test_corrupt(mut self, kind: Sys5CutCorruptionKind) -> Self {
+        match kind {
+            Sys5CutCorruptionKind::WrapperIdentity => {
+                self.cut_id_ref = local_cut_ref("corrupt-wrapper-identity");
+            }
+            Sys5CutCorruptionKind::SourceProgramIdentity => {
+                self.checked_program_identity_ref = local_cut_ref("corrupt-source-program");
+            }
+            Sys5CutCorruptionKind::ArtifactProjectionIdentity => {
+                self.artifact_projection_ref = local_cut_ref("corrupt-artifact-projection");
+            }
+            Sys5CutCorruptionKind::CounterRollback => {
+                self.sys4_cut.for_test_set_next_request_below_retained_max(
+                    "sys4-request-00000000000000000000",
+                );
+            }
+            Sys5CutCorruptionKind::RelationDigest => {
+                self.sys4_cut.for_test_set_relation_semantic_digest(
+                    "bird_follow",
+                    "corrupt-relation-digest",
+                );
+            }
+            Sys5CutCorruptionKind::LifecycleOccurrenceCounter => {
+                self.next_lifecycle_occurrence = u64::MAX;
+            }
+        }
+        self
+    }
+
+    /// Test-only positive seam: alter only the persisted lifecycle cursor and
+    /// re-sign the private wrapper so restore reaches the checked allocator.
+    /// This never accepts caller-supplied Core, authority, state, or payload.
+    #[cfg(test)]
+    pub fn for_test_with_valid_lifecycle_occurrence_counter(mut self, counter: u64) -> Self {
+        self.next_lifecycle_occurrence = counter;
+        self.integrity_ref = self.compute_integrity_ref();
+        self
+    }
+
+    /// Test-only bounded corruption seam routed to the private SYS-4 cut.
+    /// It never exposes an owner store, Core, authority, capability, or
+    /// witness on the SYS-5 production surface.
+    #[cfg(test)]
+    pub fn for_test_tamper_owner_state_value(
+        mut self,
+        locus: &str,
+        state: &str,
+        index: &str,
+        field: &str,
+        value: i64,
+    ) -> Self {
+        self.sys4_cut
+            .for_test_tamper_owner_state_value(locus, state, index, field, value);
+        self
+    }
+}
+
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+pub enum Sys5LocalCutPatchErrorKind {
+    CutRejected,
+    PatchCandidateRejected,
+    BackendIneligible,
+    LifecycleOccurrenceExhausted,
+}
+
+/// A failure at the SYS-5 cut/patch boundary.  It deliberately has no
+/// partial runtime handle and carries no source, capability, witness, or M9
+/// authority payload.
+#[derive(Debug, Clone, PartialEq, Eq)]
+pub struct Sys5LocalCutPatchError {
+    kind: Sys5LocalCutPatchErrorKind,
+}
+
+impl Sys5LocalCutPatchError {
+    fn new(kind: Sys5LocalCutPatchErrorKind) -> Self {
+        Self { kind }
+    }
+
+    pub const fn kind(&self) -> Sys5LocalCutPatchErrorKind {
+        self.kind
+    }
+
+    pub const fn rejected_before_partial_runtime(&self) -> bool {
+        true
+    }
+
+    pub const fn partial_runtime(&self) -> Option<()> {
+        None
+    }
+}
+
+#[derive(Debug, Clone, PartialEq, Eq)]
+pub struct Sys5LocalPatchBoundaryInspection {
+    caller_supplied_core_authority_or_frontier: bool,
+    runtime_received_only_checked_patch_candidate: bool,
+}
+
+impl Sys5LocalPatchBoundaryInspection {
+    pub const fn caller_supplied_no_core_authority_or_frontier(&self) -> bool {
+        !self.caller_supplied_core_authority_or_frontier
+    }
+
+    pub const fn runtime_received_only_checked_patch_candidate(&self) -> bool {
+        self.runtime_received_only_checked_patch_candidate
+    }
+}
+
+/// Source-first candidate wrapper.  Construction consumes an ordinary
+/// checked/projected source and a matching sealed M9 admission; callers have
+/// no API for injecting Core, authority, or an activation frontier.
+pub struct Sys5LocalPatchCandidate {
+    patch_id_ref: String,
+    patch_summary: Sys5AdmissionSummary,
+    patch_startup_plan: Sys5VerticalStartupPlan,
+    patch_bindings: Sys5VerticalBindings,
+    patch_source_principal: String,
+    patch_artifact_projection_ref: String,
+    inner: Sys4CheckedPatchCandidate,
+}
+
+impl fmt::Debug for Sys5LocalPatchCandidate {
+    fn fmt(&self, formatter: &mut fmt::Formatter<'_>) -> fmt::Result {
+        formatter
+            .debug_struct("Sys5LocalPatchCandidate")
+            .field("patch_id_ref", &self.patch_id_ref)
+            .field(
+                "checked_program_identity_ref",
+                &self.patch_summary.checked_program_identity_ref(),
+            )
+            .field(
+                "artifact_projection_ref",
+                &self.patch_artifact_projection_ref,
+            )
+            .field("status", &"prechecked-projected-sealed-admission")
+            .finish()
+    }
+}
+
+impl Sys5LocalPatchCandidate {
+    pub fn from_source_project_and_admission(
+        patch_id: impl Into<String>,
+        runtime: &Sys5VerticalSliceRuntime,
+        project: Sys5LocalProject,
+        prepared: Sys5PreparedAdmission,
+    ) -> Result<Self, Sys5LocalCutPatchError> {
+        let patch_id = patch_id.into();
+        if patch_id.is_empty()
+            || project.checked_program_identity_ref()
+                != prepared.summary.checked_program_identity_ref()
+            || prepared.summary.runtime_profile() != Sys5LocalRuntimeProfile::St
+            || !prepared.summary.is_complete_for_projection()
+        {
+            return Err(Sys5LocalCutPatchError::new(
+                Sys5LocalCutPatchErrorKind::PatchCandidateRejected,
+            ));
+        }
+        let artifact_projection_ref = local_cut_ref(&format!("{:?}", prepared.program));
+        let inner = Sys4CheckedPatchCandidate::from_prechecked_projected_admitted(
+            &patch_id,
+            runtime.fabric.active_program_for_checked_patch(),
+            prepared.program.clone(),
+            prepared.admission.clone(),
+        )
+        .map_err(|_| {
+            Sys5LocalCutPatchError::new(Sys5LocalCutPatchErrorKind::PatchCandidateRejected)
+        })?;
+        Ok(Self {
+            patch_id_ref: local_cut_ref(&patch_id),
+            patch_summary: prepared.summary,
+            patch_startup_plan: prepared.startup_plan,
+            patch_bindings: prepared.vertical_bindings,
+            patch_source_principal: prepared.source_principal,
+            patch_artifact_projection_ref: artifact_projection_ref,
+            inner,
+        })
+    }
+
+    pub const fn boundary_inspection(&self) -> Sys5LocalPatchBoundaryInspection {
+        Sys5LocalPatchBoundaryInspection {
+            caller_supplied_core_authority_or_frontier: false,
+            runtime_received_only_checked_patch_candidate: true,
+        }
+    }
+
+    pub fn admission_summary(&self) -> &Sys5AdmissionSummary {
+        &self.patch_summary
+    }
+}
+
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+pub enum Sys5PatchVerdict {
+    Accepted,
+    Rejected,
+}
+
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+pub enum Sys5PatchDiagnosticKind {
+    StaleFrontier,
+    NonQuiescentPendingCarrier,
+    TopologyOwnerRouteMismatch,
+    OwnerRmwExpressionChanged,
+    NonDesignatedCoreMaterialChanged,
+    M9AuthorityLineageMismatch,
+    IncompleteCandidateAdmission,
+    BackendIneligible,
+}
+
+#[derive(Debug, Clone, PartialEq, Eq)]
+pub struct Sys5PatchFrontier {
+    ref_digest: String,
+    predecessor_ref_digest: Option<String>,
+}
+
+impl Sys5PatchFrontier {
+    pub fn is_exact_successor_of(&self, base: &Self) -> bool {
+        self.predecessor_ref_digest.as_deref() == Some(base.ref_digest.as_str())
+    }
+}
+
+#[derive(Debug, Clone, PartialEq, Eq)]
+pub struct Sys5PatchLifecycle {
+    verdict: Sys5PatchVerdict,
+    diagnostic: Option<Sys5PatchDiagnosticKind>,
+    source_first_checked_projection_and_m9_admission: bool,
+}
+
+impl Sys5PatchLifecycle {
+    pub const fn contains_source_first_checked_projection_and_m9_admission(&self) -> bool {
+        self.source_first_checked_projection_and_m9_admission
+    }
+
+    pub fn is_lifecycle_only_rejection(&self) -> bool {
+        self.verdict == Sys5PatchVerdict::Rejected && self.diagnostic.is_some()
+    }
+}
+
+#[derive(Debug, Clone, PartialEq, Eq)]
+pub struct Sys5PatchOutcome {
+    verdict: Sys5PatchVerdict,
+    primary_diagnostic_kind: Option<Sys5PatchDiagnosticKind>,
+    lifecycle: Sys5PatchLifecycle,
+    boundary_inspection: Sys5LocalPatchBoundaryInspection,
+    base_frontier: Sys5PatchFrontier,
+    activation_frontier: Sys5PatchFrontier,
+}
+
+impl Sys5PatchOutcome {
+    pub const fn verdict(&self) -> Sys5PatchVerdict {
+        self.verdict
+    }
+
+    pub const fn primary_diagnostic_kind(&self) -> Option<Sys5PatchDiagnosticKind> {
+        self.primary_diagnostic_kind
+    }
+
+    pub fn lifecycle(&self) -> &Sys5PatchLifecycle {
+        &self.lifecycle
+    }
+
+    pub fn boundary_inspection(&self) -> &Sys5LocalPatchBoundaryInspection {
+        &self.boundary_inspection
+    }
+
+    pub fn base_frontier(&self) -> &Sys5PatchFrontier {
+        &self.base_frontier
+    }
+
+    pub fn activation_frontier(&self) -> &Sys5PatchFrontier {
+        &self.activation_frontier
+    }
+}
+
+/// Observer-safe status of the retained M9 admission. It intentionally does
+/// not serialize membership epochs, capabilities, credentials, witnesses, or
+/// authority payloads.
+#[derive(Debug, Clone, PartialEq, Eq)]
+pub struct Sys5RuntimeM9Summary {
+    complete_final_residual_discharge: bool,
+}
+
+#[derive(Debug, Clone, PartialEq, Eq)]
+pub struct Sys5RuntimeVerificationSummary {
+    discharged_verifiers: BTreeSet<String>,
+}
+
+impl Sys5RuntimeVerificationSummary {
+    pub fn is_discharged(&self, verifier: &str) -> bool {
+        self.discharged_verifiers.contains(verifier)
+    }
+}
+
+impl Sys5RuntimeM9Summary {
+    pub const fn has_complete_final_residual_discharge(&self) -> bool {
+        self.complete_final_residual_discharge
+    }
+}
+
+/// Observer-safe semantic snapshot of one SYS-5 local fabric.  This is a
+/// comparison aid for tests and devtools, not a mutable runtime state handle.
+#[derive(Debug, Clone, PartialEq, Eq)]
+pub struct Sys5ObserverSafeRuntimeSnapshot {
+    observer_safe_ints: BTreeMap<(String, String, String, String), i64>,
+    state_digest: String,
+    designated_cache_counts: BTreeMap<(String, String), usize>,
+    fresh_relation_bindings: BTreeSet<String>,
+    relation_digests: BTreeMap<String, String>,
+    m9_summary: Sys5RuntimeM9Summary,
+    verification_summary: Sys5RuntimeVerificationSummary,
+}
+
+impl Sys5ObserverSafeRuntimeSnapshot {
+    pub fn owner_state_contains_int(
+        &self,
+        locus: &str,
+        state: &str,
+        index: &str,
+        field: &str,
+        value: i64,
+    ) -> bool {
+        self.observer_safe_ints.get(&(
+            locus.to_string(),
+            state.to_string(),
+            index.to_string(),
+            field.to_string(),
+        )) == Some(&value)
+    }
+
+    pub fn designated_cache_contains(&self, value_name: &str, consumer: &str) -> bool {
+        self.designated_cache_counts
+            .get(&(value_name.to_string(), consumer.to_string()))
+            .is_some_and(|count| *count > 0)
+    }
+
+    pub fn relation_binding_consumed_fresh(&self, relation: &str) -> bool {
+        self.fresh_relation_bindings.contains(relation)
+    }
+
+    pub fn m9_summary(&self) -> &Sys5RuntimeM9Summary {
+        &self.m9_summary
+    }
+
+    pub fn verification_summary(&self) -> &Sys5RuntimeVerificationSummary {
+        &self.verification_summary
+    }
+}
+
+/// Opaque, observer-safe identity of the active runtime configuration.
+#[derive(Debug, Clone, PartialEq, Eq)]
+pub struct Sys5ActiveRuntimeIdentitySnapshot {
+    runtime_ref: String,
+}
+
 /// Small external schedule surface for the finite SYS-5 vertical slice.
 /// Every variant resolves through the retained checked source inventory.
 #[derive(Debug, Clone, PartialEq, Eq)]
@@ -1770,6 +2374,8 @@ pub enum Sys5VerticalAction {
     WorldTick(String),
     ViewerCConsumeWorldResult,
     PublishRelation(String),
+    InvalidateRelationPrimary(String),
+    FreshReacquireRelationPrimary(String),
     RevokeViewerCConsumerCapability(String),
     #[cfg(test)]
     ForTestUnknownSourceOperation(String),
@@ -1794,6 +2400,20 @@ impl Sys5VerticalAction {
         Self::PublishRelation(relation.into())
     }
 
+    /// Request the source-derived relation invalidation path.  The action
+    /// names only a checked relation; it carries neither relation authority
+    /// nor an endpoint, state, epoch, lease, witness, or capability.
+    pub fn invalidate_relation_primary(relation: impl Into<String>) -> Self {
+        Self::InvalidateRelationPrimary(relation.into())
+    }
+
+    /// Request one source-derived fresh relation reacquisition.  Fresh
+    /// material is sealed in M9 at admission and consumed by SYS-4, never
+    /// supplied by this schedule action.
+    pub fn fresh_reacquire_relation_primary(relation: impl Into<String>) -> Self {
+        Self::FreshReacquireRelationPrimary(relation.into())
+    }
+
     pub fn revoke_viewer_c_consumer_capability(value_name: impl Into<String>) -> Self {
         Self::RevokeViewerCConsumerCapability(value_name.into())
     }
@@ -1816,10 +2436,15 @@ pub struct Sys5VerticalSliceRuntime {
     fabric: LocalFabric,
     fabric_instance_ref: String,
     checked_program_identity_ref: String,
+    sealed_admission_attestation_ref: String,
+    artifact_projection_ref: String,
+    admission_summary: Sys5AdmissionSummary,
     startup_plan: Sys5VerticalStartupPlan,
     source_principal: String,
     bindings: Sys5VerticalBindings,
     joined_report: Sys5VerticalJoinedReport,
+    relation_shadows: BTreeMap<(String, String), Sys5RelationObserverShadow>,
+    next_lifecycle_occurrence: u64,
 }
 
 impl fmt::Debug for Sys5VerticalSliceRuntime {
@@ -1847,6 +2472,7 @@ pub enum Sys5VerticalDiagnosticKind {
     BackendIneligible,
     FabricBootRejected,
     VerticalInventoryIncomplete,
+    RelationFreshBindingAlreadyConsumed,
     DispatchRejected,
 }
 
@@ -1882,6 +2508,7 @@ impl Sys5VerticalSliceError {
             self.kind,
             Sys5VerticalDiagnosticKind::UnknownSourceOperation
                 | Sys5VerticalDiagnosticKind::UnknownSourceValue
+                | Sys5VerticalDiagnosticKind::RelationFreshBindingAlreadyConsumed
         )
     }
 
@@ -1890,6 +2517,7 @@ impl Sys5VerticalSliceError {
             self.kind,
             Sys5VerticalDiagnosticKind::UnknownSourceOperation
                 | Sys5VerticalDiagnosticKind::UnknownSourceValue
+                | Sys5VerticalDiagnosticKind::RelationFreshBindingAlreadyConsumed
         )
     }
 
@@ -1898,6 +2526,7 @@ impl Sys5VerticalSliceError {
             self.kind,
             Sys5VerticalDiagnosticKind::UnknownSourceOperation
                 | Sys5VerticalDiagnosticKind::UnknownSourceValue
+                | Sys5VerticalDiagnosticKind::RelationFreshBindingAlreadyConsumed
                 | Sys5VerticalDiagnosticKind::MissingPublishedDesignatedValue
                 | Sys5VerticalDiagnosticKind::MissingConsumerCapability
         )
@@ -1927,6 +2556,12 @@ pub struct Sys5VerticalEndpointChain {
 }
 
 impl Sys5VerticalEndpointChain {
+    /// The exact runtime request identity retained by the generated endpoint
+    /// receipt. It is distinct from all occurrence identifiers.
+    pub fn request_identity(&self) -> &str {
+        &self.request_ref
+    }
+
     pub fn source_locus(&self) -> &str {
         &self.source_locus
     }
@@ -2066,16 +2701,20 @@ impl Sys5VerticalReceipt {
 /// status rows needed to join source through local occurrences.
 #[derive(Debug, Clone, PartialEq, Eq)]
 pub struct Sys5VerticalJoinedReport {
-    rows: BTreeSet<String>,
+    // This is an event prefix, rather than a set of labels.  A set made a
+    // restored cut look complete while losing the order in which its actual
+    // source→runtime evidence was observed.  Retain insertion order and
+    // deduplicate exact repeated rows at the recording boundary.
+    rows: Vec<String>,
     verification_discharges: Vec<Sys5VerificationDischargeSummary>,
 }
 
 impl Sys5VerticalJoinedReport {
     fn new(verification_discharges: Vec<Sys5VerificationDischargeSummary>) -> Self {
-        let mut rows = BTreeSet::new();
+        let mut rows = Vec::new();
         for discharge in &verification_discharges {
             if discharge.is_discharged() {
-                rows.insert(format!("verification:{}:discharged", discharge.verifier));
+                rows.push(format!("verification:{}:discharged", discharge.verifier));
             }
         }
         Self {
@@ -2085,7 +2724,9 @@ impl Sys5VerticalJoinedReport {
     }
 
     fn push(&mut self, row: String) {
-        self.rows.insert(row);
+        if !self.rows.contains(&row) {
+            self.rows.push(row);
+        }
     }
 
     pub fn verification_discharge(
@@ -2098,7 +2739,14 @@ impl Sys5VerticalJoinedReport {
     }
 
     pub fn render_compact(&self) -> String {
-        self.rows.iter().cloned().collect::<Vec<_>>().join("\n")
+        self.rows.join("\n")
+    }
+
+    /// Ordered typed rows retained by the one joined devtools view.  This
+    /// never asks callers to reconstruct an occurrence chain from separate
+    /// source, Core, and fabric logs.
+    pub fn ordered_rows(&self) -> &[String] {
+        &self.rows
     }
 }
 
@@ -2113,6 +2761,12 @@ impl Sys5VerticalSliceRuntime {
             Sys5VerticalAction::ViewerCConsumeWorldResult => self.dispatch_designated_consume(),
             Sys5VerticalAction::PublishRelation(relation) => {
                 self.dispatch_relation_publish(&relation)
+            }
+            Sys5VerticalAction::InvalidateRelationPrimary(relation) => {
+                self.dispatch_relation_invalidate(&relation)
+            }
+            Sys5VerticalAction::FreshReacquireRelationPrimary(relation) => {
+                self.dispatch_relation_fresh_reacquire(&relation)
             }
             Sys5VerticalAction::RevokeViewerCConsumerCapability(value_name) => {
                 self.dispatch_consumer_capability_revoke(&value_name)
@@ -2134,6 +2788,281 @@ impl Sys5VerticalSliceRuntime {
 
     pub const fn local_fabric_instance_count(&self) -> usize {
         1
+    }
+
+    pub fn checked_program_identity_ref(&self) -> &str {
+        &self.checked_program_identity_ref
+    }
+
+    pub fn sealed_admission_attestation_ref(&self) -> &str {
+        &self.sealed_admission_attestation_ref
+    }
+
+    pub fn relation_semantic_digest(&self, relation: &str) -> Option<&str> {
+        self.fabric.relation_semantic_digest(relation)
+    }
+
+    pub fn observer_relation_shadow(
+        &self,
+        consumer_locus: &str,
+        relation: &str,
+    ) -> Option<&Sys5RelationObserverShadow> {
+        self.relation_shadows
+            .get(&(consumer_locus.to_string(), relation.to_string()))
+    }
+
+    pub fn designated_cache_entry_count(&self, value_name: &str, consumer: &str) -> usize {
+        self.fabric
+            .designated_cache_entry_count_for_value(value_name, consumer)
+    }
+
+    pub fn total_endpoint_carrier_count(&self) -> usize {
+        self.fabric.total_endpoint_carrier_count()
+    }
+
+    pub fn patch_lifecycle_row_count(&self) -> usize {
+        self.fabric.patch_lifecycle_snapshot().row_count()
+    }
+
+    pub fn observer_safe_m9_authority_digest(&self) -> String {
+        local_cut_ref(&format!(
+            "{:?}",
+            self.fabric.current_m9_authority_inspection()
+        ))
+    }
+
+    pub fn observer_safe_m8_trace_digest(&self) -> String {
+        match self.fabric.m8_actual_trace() {
+            Ok(trace) => local_cut_ref(&format!("{trace:?}")),
+            Err(_) => local_cut_ref("m8-observer-unavailable"),
+        }
+    }
+
+    pub fn observer_safe_restore_capsule_digest(&self) -> String {
+        local_cut_ref(&format!(
+            "program={};admission={};artifact={};state={};m9={};m8={};frontier={:?};relations={:?}",
+            self.checked_program_identity_ref,
+            self.sealed_admission_attestation_ref,
+            self.artifact_projection_ref,
+            self.observer_safe_state_digest(),
+            self.observer_safe_m9_authority_digest(),
+            self.observer_safe_m8_trace_digest(),
+            self.fabric.current_patch_frontier_snapshot(),
+            self.relation_shadows,
+        ))
+    }
+
+    pub fn active_runtime_identity_snapshot(&self) -> Sys5ActiveRuntimeIdentitySnapshot {
+        Sys5ActiveRuntimeIdentitySnapshot {
+            runtime_ref: local_cut_ref(&format!(
+                "active={:?};program={};admission={};artifact={}",
+                self.fabric.active_runtime_identity_snapshot(),
+                self.checked_program_identity_ref,
+                self.sealed_admission_attestation_ref,
+                self.artifact_projection_ref,
+            )),
+        }
+    }
+
+    pub fn observer_safe_runtime_snapshot(&self) -> Sys5ObserverSafeRuntimeSnapshot {
+        let semantic = self.fabric.semantic_snapshot();
+        let observer_safe_ints = self
+            .startup_plan
+            .observer_safe_cells
+            .iter()
+            .filter_map(|cell| {
+                semantic
+                    .int(&cell.locus, &cell.state, &cell.index, &cell.field)
+                    .map(|value| {
+                        (
+                            (
+                                cell.locus.clone(),
+                                cell.state.clone(),
+                                cell.index.clone(),
+                                cell.field.clone(),
+                            ),
+                            value,
+                        )
+                    })
+            })
+            .collect();
+        let designated_cache_counts = self
+            .bindings
+            .designated_values
+            .iter()
+            .map(|binding| {
+                (
+                    (binding.value_name.clone(), binding.consumer_locus.clone()),
+                    self.fabric.designated_cache_entry_count_for_value(
+                        &binding.value_name,
+                        &binding.consumer_locus,
+                    ),
+                )
+            })
+            .collect();
+        let fresh_relation_bindings = self
+            .bindings
+            .relation_ids
+            .iter()
+            .filter(|relation| self.fabric.relation_fresh_binding_is_consumed(relation))
+            .cloned()
+            .collect();
+        let relation_digests = self
+            .bindings
+            .relation_ids
+            .iter()
+            .filter_map(|relation| {
+                self.fabric
+                    .relation_semantic_digest(relation)
+                    .map(|digest| (relation.clone(), digest.to_string()))
+            })
+            .collect();
+        let verification_summary = Sys5RuntimeVerificationSummary {
+            discharged_verifiers: self
+                .admission_summary
+                .verification_discharges
+                .iter()
+                .filter(|summary| summary.is_discharged())
+                .map(|summary| summary.verifier.clone())
+                .collect(),
+        };
+        Sys5ObserverSafeRuntimeSnapshot {
+            observer_safe_ints,
+            state_digest: self.observer_safe_state_digest(),
+            designated_cache_counts,
+            fresh_relation_bindings,
+            relation_digests,
+            m9_summary: Sys5RuntimeM9Summary {
+                complete_final_residual_discharge: self
+                    .admission_summary
+                    .is_complete_for_projection(),
+            },
+            verification_summary,
+        }
+    }
+
+    /// Capture a whole local vertical slice only after SYS-4 has accepted an
+    /// ST local cut.  The joined `SaveCut` row is appended only for a
+    /// successful cut and becomes part of the exact prefix restored later.
+    pub fn save_local_cut(
+        &mut self,
+        cut_id: impl Into<String>,
+    ) -> Result<Sys5LocalCut, Sys5LocalCutPatchError> {
+        let cut_id = cut_id.into();
+        let sys4_cut = self
+            .fabric
+            .save_local_cut(&cut_id)
+            .map_err(|_| Sys5LocalCutPatchError::new(Sys5LocalCutPatchErrorKind::CutRejected))?;
+        let cut_id_ref = local_cut_ref(&cut_id);
+        let sys4_cut_integrity_ref = local_cut_ref(&sys4_cut.observer_safe_integrity_material());
+        let cut_occurrence_ref = next_lifecycle_occurrence_ref(
+            &mut self.next_lifecycle_occurrence,
+            "SaveCut",
+            &cut_id_ref,
+            &sys4_cut_integrity_ref,
+        )?;
+        let frontier_ref =
+            patch_frontier_ref(&format!("{:?}", sys4_cut.active_patch_frontier_snapshot()));
+        self.joined_report.push(lifecycle_joined_row(
+            "SaveCut",
+            Sys5LifecycleBoundaryRefs {
+                before_program_ref: &self.checked_program_identity_ref,
+                after_program_ref: &self.checked_program_identity_ref,
+                before_artifact_ref: &self.artifact_projection_ref,
+                after_artifact_ref: &self.artifact_projection_ref,
+                before_frontier_ref: &frontier_ref,
+                after_frontier_ref: &frontier_ref,
+            },
+            Some(("cut_occurrence_ref", &cut_occurrence_ref)),
+        ));
+        Ok(Sys5LocalCut::new(&cut_id, self, sys4_cut))
+    }
+
+    /// Atomically activate an already ordinary-source-checked/projected and
+    /// M9-admitted candidate.  Rejections are delegated to SYS-4's
+    /// clone/preflight boundary and add precisely one observer-safe lifecycle
+    /// row here; they do not replace source, artifact, authority, cache, or
+    /// semantic state.
+    pub fn activate_source_first_patch(
+        &mut self,
+        candidate: Sys5LocalPatchCandidate,
+    ) -> Result<Sys5PatchOutcome, Sys5LocalCutPatchError> {
+        let before_program_ref = self.checked_program_identity_ref.clone();
+        let before_artifact_ref = self.artifact_projection_ref.clone();
+        let before_frontier_ref = patch_frontier_ref(&format!(
+            "{:?}",
+            self.fabric.current_patch_frontier_snapshot()
+        ));
+        let Sys5LocalPatchCandidate {
+            patch_id_ref,
+            patch_summary,
+            patch_startup_plan,
+            patch_bindings,
+            patch_source_principal,
+            patch_artifact_projection_ref,
+            inner,
+            ..
+        } = candidate;
+        // Reserve an observer occurrence before SYS-4 can append either an
+        // accepted or rejected patch lifecycle row.  Exhaustion therefore
+        // fails closed before any fabric, SYS-4 lifecycle, or semantic state
+        // mutation; the occurrence identity itself is neutral with respect to
+        // the eventual patch verdict.
+        let lifecycle_cursor_before = self.next_lifecycle_occurrence;
+        let patch_occurrence_ref = next_lifecycle_occurrence_ref(
+            &mut self.next_lifecycle_occurrence,
+            "PatchActivation",
+            &patch_id_ref,
+            &before_frontier_ref,
+        )?;
+        let sys4_outcome = match self.fabric.activate_checked_patch(inner) {
+            Ok(outcome) => outcome,
+            Err(_) => {
+                self.next_lifecycle_occurrence = lifecycle_cursor_before;
+                return Err(Sys5LocalCutPatchError::new(
+                    Sys5LocalCutPatchErrorKind::PatchCandidateRejected,
+                ));
+            }
+        };
+        let outcome = sys5_patch_outcome(&sys4_outcome);
+        let after_frontier_ref = outcome.activation_frontier.ref_digest.clone();
+        let lifecycle_kind = match outcome.verdict {
+            Sys5PatchVerdict::Accepted => "PatchAccepted",
+            Sys5PatchVerdict::Rejected => "PatchRejected",
+        };
+        if outcome.verdict == Sys5PatchVerdict::Accepted {
+            self.checked_program_identity_ref = patch_summary.checked_program_identity.clone();
+            self.sealed_admission_attestation_ref =
+                patch_summary.sealed_inventory_attestation_ref().to_string();
+            self.artifact_projection_ref = patch_artifact_projection_ref.clone();
+            self.admission_summary = patch_summary;
+            self.startup_plan = patch_startup_plan;
+            self.bindings = patch_bindings;
+            self.source_principal = patch_source_principal;
+        }
+        let after_program_ref = if outcome.verdict == Sys5PatchVerdict::Accepted {
+            &self.checked_program_identity_ref
+        } else {
+            &before_program_ref
+        };
+        let after_artifact_ref = if outcome.verdict == Sys5PatchVerdict::Accepted {
+            &self.artifact_projection_ref
+        } else {
+            &before_artifact_ref
+        };
+        self.joined_report.push(lifecycle_joined_row(
+            lifecycle_kind,
+            Sys5LifecycleBoundaryRefs {
+                before_program_ref: &before_program_ref,
+                after_program_ref,
+                before_artifact_ref: &before_artifact_ref,
+                after_artifact_ref,
+                before_frontier_ref: &before_frontier_ref,
+                after_frontier_ref: &after_frontier_ref,
+            },
+            Some(("patch_occurrence_ref", &patch_occurrence_ref)),
+        ));
+        Ok(outcome)
     }
 
     pub fn observer_safe_int(
@@ -2348,6 +3277,52 @@ impl Sys5VerticalSliceRuntime {
             .map_err(|_| {
                 Sys5VerticalSliceError::new(Sys5VerticalDiagnosticKind::RelationTransitionRejected)
             })?;
+        self.relation_receipt_from_sys4(relation, receipt)
+    }
+
+    fn dispatch_relation_invalidate(
+        &mut self,
+        relation: &str,
+    ) -> Result<Sys5VerticalReceipt, Sys5VerticalSliceError> {
+        if !self.bindings.relation_ids.contains(relation) {
+            return self.reject(Sys5VerticalDiagnosticKind::UnknownSourceOperation);
+        }
+        let receipt = self
+            .fabric
+            .invalidate_relation_primary(relation)
+            .map_err(|_| {
+                Sys5VerticalSliceError::new(Sys5VerticalDiagnosticKind::RelationTransitionRejected)
+            })?;
+        self.relation_receipt_from_sys4(relation, receipt)
+    }
+
+    fn dispatch_relation_fresh_reacquire(
+        &mut self,
+        relation: &str,
+    ) -> Result<Sys5VerticalReceipt, Sys5VerticalSliceError> {
+        if !self.bindings.relation_ids.contains(relation) {
+            return self.reject(Sys5VerticalDiagnosticKind::UnknownSourceOperation);
+        }
+        if self.fabric.relation_fresh_binding_is_consumed(relation) {
+            return self.reject(Sys5VerticalDiagnosticKind::RelationFreshBindingAlreadyConsumed);
+        }
+        let receipt = self
+            .fabric
+            .fresh_reacquire_relation_primary(relation)
+            .map_err(|_| {
+                Sys5VerticalSliceError::new(Sys5VerticalDiagnosticKind::RelationTransitionRejected)
+            })?;
+        self.relation_receipt_from_sys4(relation, receipt)
+    }
+
+    fn relation_receipt_from_sys4(
+        &mut self,
+        relation: &str,
+        receipt: Sys4RelationEndpointReceipt,
+    ) -> Result<Sys5VerticalReceipt, Sys5VerticalSliceError> {
+        if !self.bindings.relation_ids.contains(relation) {
+            return self.reject(Sys5VerticalDiagnosticKind::UnknownSourceOperation);
+        }
         if !self
             .fabric
             .observer_exact_relation_endpoint_receipt(&receipt)
@@ -2395,6 +3370,13 @@ impl Sys5VerticalSliceRuntime {
         };
         let relation_shadow = vertical_relation_shadow(&receipt);
         self.record_chain(&endpoint_chain, Some("relation"))?;
+        self.relation_shadows.insert(
+            (
+                relation_shadow.consumer_locus().to_string(),
+                relation_shadow.relation().to_string(),
+            ),
+            relation_shadow.clone(),
+        );
         Ok(Sys5VerticalReceipt {
             fabric_instance_ref: self.fabric_instance_ref.clone(),
             source_derived: true,
@@ -2696,9 +3678,22 @@ impl Sys5VerticalSliceRuntime {
         let serve_ref = self
             .fabric
             .observer_exact_m8_occurrence(receipt.request_id(), serve_kind)
-            .ok_or_else(|| {
-                Sys5VerticalSliceError::new(Sys5VerticalDiagnosticKind::DispatchRejected)
-            })?;
+            // A restored designated evaluator may retain a matching sealed
+            // result and report this new tick as a genuine idempotent
+            // evaluation.  That is a distinct actual M8 occurrence, not a
+            // fabricated publish; accept it only for the designated-eval
+            // observer path and keep its exact request identity.
+            .or_else(|| {
+                (serve_kind == crate::m8_runtime_local_cut::M8LocalTraceKind::DesignatedValuePublished)
+                    .then(|| {
+                        self.fabric.observer_exact_m8_occurrence(
+                            receipt.request_id(),
+                            crate::m8_runtime_local_cut::M8LocalTraceKind::DesignatedEvaluationIdempotent,
+                        )
+                    })
+                    .flatten()
+            })
+            .ok_or_else(|| Sys5VerticalSliceError::new(Sys5VerticalDiagnosticKind::DispatchRejected))?;
         if !self
             .fabric
             .observer_causally_reaches(serve_ref, endpoint_occurrences.receive_occurrence_id())
@@ -2872,6 +3867,101 @@ fn vertical_relation_shadow(receipt: &Sys4RelationEndpointReceipt) -> Sys5Relati
         semantic_digest: relation_observer_ref(&shadow.semantic_digest()),
         semantic_epoch: semantic.binding_epoch().to_string(),
     }
+}
+
+fn sys5_patch_diagnostic(kind: Sys4PatchDiagnosticKind) -> Sys5PatchDiagnosticKind {
+    match kind {
+        Sys4PatchDiagnosticKind::StaleFrontier => Sys5PatchDiagnosticKind::StaleFrontier,
+        Sys4PatchDiagnosticKind::NonQuiescentPendingCarrier => {
+            Sys5PatchDiagnosticKind::NonQuiescentPendingCarrier
+        }
+        Sys4PatchDiagnosticKind::TopologyOwnerRouteMismatch => {
+            Sys5PatchDiagnosticKind::TopologyOwnerRouteMismatch
+        }
+        Sys4PatchDiagnosticKind::OwnerRmwExpressionChanged => {
+            Sys5PatchDiagnosticKind::OwnerRmwExpressionChanged
+        }
+        Sys4PatchDiagnosticKind::NonDesignatedCoreMaterialChanged => {
+            Sys5PatchDiagnosticKind::NonDesignatedCoreMaterialChanged
+        }
+        Sys4PatchDiagnosticKind::M9AuthorityLineageMismatch => {
+            Sys5PatchDiagnosticKind::M9AuthorityLineageMismatch
+        }
+        Sys4PatchDiagnosticKind::IncompleteCandidateAdmission => {
+            Sys5PatchDiagnosticKind::IncompleteCandidateAdmission
+        }
+        Sys4PatchDiagnosticKind::BackendIneligible => Sys5PatchDiagnosticKind::BackendIneligible,
+    }
+}
+
+fn sys5_patch_outcome(outcome: &Sys4PatchOutcome) -> Sys5PatchOutcome {
+    let verdict = match outcome.verdict() {
+        Sys4PatchVerdict::Accepted => Sys5PatchVerdict::Accepted,
+        Sys4PatchVerdict::Rejected => Sys5PatchVerdict::Rejected,
+    };
+    let base_ref = patch_frontier_ref(&format!("{:?}", outcome.base_frontier()));
+    let activation_is_successor = outcome
+        .activation_frontier()
+        .is_exact_successor_of(outcome.base_frontier());
+    let activation_ref = patch_frontier_ref(&format!("{:?}", outcome.activation_frontier()));
+    Sys5PatchOutcome {
+        verdict,
+        primary_diagnostic_kind: outcome.primary_diagnostic_kind().map(sys5_patch_diagnostic),
+        lifecycle: Sys5PatchLifecycle {
+            verdict,
+            diagnostic: outcome.primary_diagnostic_kind().map(sys5_patch_diagnostic),
+            source_first_checked_projection_and_m9_admission: outcome
+                .lifecycle()
+                .contains_source_first_checked_projection_and_m9_admission(),
+        },
+        boundary_inspection: Sys5LocalPatchBoundaryInspection {
+            caller_supplied_core_authority_or_frontier: false,
+            runtime_received_only_checked_patch_candidate: outcome
+                .boundary_inspection()
+                .runtime_received_only_checked_patch_candidate(),
+        },
+        base_frontier: Sys5PatchFrontier {
+            ref_digest: base_ref.clone(),
+            predecessor_ref_digest: None,
+        },
+        activation_frontier: Sys5PatchFrontier {
+            ref_digest: activation_ref,
+            predecessor_ref_digest: activation_is_successor.then_some(base_ref),
+        },
+    }
+}
+
+struct Sys5LifecycleBoundaryRefs<'a> {
+    before_program_ref: &'a str,
+    after_program_ref: &'a str,
+    before_artifact_ref: &'a str,
+    after_artifact_ref: &'a str,
+    before_frontier_ref: &'a str,
+    after_frontier_ref: &'a str,
+}
+
+fn lifecycle_joined_row(
+    kind: &str,
+    refs: Sys5LifecycleBoundaryRefs<'_>,
+    occurrence: Option<(&str, &str)>,
+) -> String {
+    // The source/Core labels intentionally carry only stable opaque refs. The
+    // local facade does not retain source text or raw authority material in
+    // lifecycle/devtools rows.
+    let occurrence = occurrence
+        .map(|(field, reference)| format!(";{field}={reference}"))
+        .unwrap_or_default();
+    format!(
+        "lifecycle:{kind}:before_source_ref={};after_source_ref={};before_core_ref={};after_core_ref={};before_artifact_ref={};after_artifact_ref={};before_activation_frontier={};after_activation_frontier={}{occurrence}",
+        refs.before_program_ref,
+        refs.after_program_ref,
+        refs.before_program_ref,
+        refs.after_program_ref,
+        refs.before_artifact_ref,
+        refs.after_artifact_ref,
+        refs.before_frontier_ref,
+        refs.after_frontier_ref,
+    )
 }
 
 /// Render only a checked logical source location.  The source checker already
@@ -4076,6 +5166,63 @@ fn relation_observer_ref(value: &str) -> String {
     );
     hasher.update(value.as_bytes());
     format!("sys5-relation-sha256-v1:{:x}", hasher.finalize())
+}
+
+fn local_cut_ref(value: &str) -> String {
+    let mut hasher = Sha256::new();
+    hasher.update(LOCAL_CUT_REF_DOMAIN);
+    hasher.update(
+        u64::try_from(value.len())
+            .expect("local cut reference input fits u64")
+            .to_le_bytes(),
+    );
+    hasher.update(value.as_bytes());
+    format!("sys5-local-cut-sha256-v1:{:x}", hasher.finalize())
+}
+
+fn patch_frontier_ref(value: &str) -> String {
+    let mut hasher = Sha256::new();
+    hasher.update(PATCH_FRONTIER_REF_DOMAIN);
+    hasher.update(
+        u64::try_from(value.len())
+            .expect("patch frontier reference input fits u64")
+            .to_le_bytes(),
+    );
+    hasher.update(value.as_bytes());
+    format!("sys5-patch-frontier-sha256-v1:{:x}", hasher.finalize())
+}
+
+/// Allocate one observer lifecycle occurrence from the integrity-bound local
+/// cursor.  It is part of the ST cut lineage rather than a process-global
+/// scheduler identity, and carries no source text, state, M9 authority,
+/// capability, or witness material.
+fn next_lifecycle_occurrence_ref(
+    next_local_occurrence: &mut u64,
+    kind: &str,
+    cut_id_ref: &str,
+    sys4_cut_integrity_ref: &str,
+) -> Result<String, Sys5LocalCutPatchError> {
+    let local_occurrence = *next_local_occurrence;
+    let next = local_occurrence.checked_add(1).ok_or_else(|| {
+        Sys5LocalCutPatchError::new(Sys5LocalCutPatchErrorKind::LifecycleOccurrenceExhausted)
+    })?;
+    *next_local_occurrence = next;
+
+    let mut hasher = Sha256::new();
+    hasher.update(LIFECYCLE_OCCURRENCE_REF_DOMAIN);
+    for component in [kind, cut_id_ref, sys4_cut_integrity_ref] {
+        hasher.update(
+            u64::try_from(component.len())
+                .expect("lifecycle occurrence reference input length fits u64")
+                .to_le_bytes(),
+        );
+        hasher.update(component.as_bytes());
+    }
+    hasher.update(local_occurrence.to_le_bytes());
+    Ok(format!(
+        "sys5-lifecycle-occurrence:{local_occurrence:020}:{:x}",
+        hasher.finalize()
+    ))
 }
 
 fn observer_source_ref(source_ref: &SourceRef) -> String {

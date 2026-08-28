@@ -79,6 +79,8 @@ mod sys3_projection_tests;
 #[allow(clippy::bool_assert_comparison, clippy::too_many_arguments)]
 mod sys4_dispatch_tests;
 #[cfg(test)]
+mod sys5_local_cut_patch_tests;
+#[cfg(test)]
 mod sys5_local_slice_tests;
 #[cfg(test)]
 mod sys5_relation_dispatch_tests;

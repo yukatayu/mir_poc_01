@@ -377,6 +377,19 @@ fn parse_segment_fields(row: &str) -> BTreeMap<&str, &str> {
     fields
 }
 
+fn single_report_row(report: &str, prefix: &str) -> String {
+    let rows = report
+        .lines()
+        .filter(|line| line.starts_with(prefix))
+        .collect::<Vec<_>>();
+    assert_eq!(
+        rows.len(),
+        1,
+        "report must carry exactly one row with prefix `{prefix}`; report was:\n{report}"
+    );
+    rows[0].to_string()
+}
+
 fn assert_exact_segment_fields(fields: &BTreeMap<&str, &str>, expected_keys: &[&str]) {
     let actual = fields.keys().copied().collect::<Vec<_>>();
     let mut expected = expected_keys.to_vec();
@@ -596,16 +609,40 @@ fn startup_dispatches_three_literal_initializers_from_empty_seed_with_created_no
         &report,
         &[
             "startup-receipt:init_avatar_hp:ParticipantA->WorldAuthority:avatar[self].hp:Created(None->21)",
-            "startup-receipt:init_avatar_atk:ParticipantA->WorldAuthority:avatar[self].atk:Created(None->[private])",
             "startup-receipt:init_focus:WorldAuthority->ParticipantA:participant_input[self].focus:Created(None->10)",
             "startup-occurrence:init_avatar_hp:",
             "startup-occurrence:init_avatar_atk:",
             "startup-occurrence:init_focus:",
         ],
     );
+    let private_atk_startup = single_report_row(
+        &report,
+        "startup-receipt:init_avatar_atk:ParticipantA->WorldAuthority:",
+    );
+    assert!(
+        private_atk_startup.contains(":private-cell-ref:sys5-relation-sha256-v1:"),
+        "private startup cell identity must be an opaque private-cell-ref marker: {private_atk_startup}"
+    );
+    assert!(
+        private_atk_startup.ends_with(":Created(None->[private])"),
+        "private startup value remains redacted while retaining Created(None->[private]): {private_atk_startup}"
+    );
+    assert_contains_none(&private_atk_startup, &["avatar[self].atk"]);
+    let repeat_report = vertical_runtime(SYS5_VERTICAL_SOURCE)
+        .observer_safe_joined_report()
+        .render_compact();
+    assert_eq!(
+        private_atk_startup,
+        single_report_row(
+            &repeat_report,
+            "startup-receipt:init_avatar_atk:ParticipantA->WorldAuthority:"
+        ),
+        "opaque private-cell-ref must be stable for the same source/runtime startup"
+    );
     assert_contains_none(
         &report,
         &[
+            "avatar[self].atk",
             "old=0",
             "0->21",
             "0->5",
