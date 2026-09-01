@@ -3,7 +3,7 @@ description = "Read-only codebase mapper."
 config_file = "../agents/code_mapper.toml"
 
 [agents.docs_researcher]
-description = "Read-only external documentation verifier."
+description = "Read-only primary-source, paper, and external documentation researcher."
 config_file = "../agents/docs_researcher.toml"
 
 [agents.eval_runner]

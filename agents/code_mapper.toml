@@ -1,7 +1,7 @@
 name = "code_mapper"
 description = "Maps relevant files, symbols, invariants, and dependency boundaries before edits."
 model = "gpt-5.6-terra"
-model_reasoning_effort = "medium"
+model_reasoning_effort = "high"
 sandbox_mode = "read-only"
 approval_policy = "untrusted"
 

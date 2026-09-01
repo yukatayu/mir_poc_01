@@ -339,6 +339,32 @@ Every report should contain, in this order:
 
 ## review と task close の運用
 
+### Parent / sub-agent orchestration
+
+- parent / main session は、current user objective（及び owner-authorized active
+  goal）、Canon alignment、cross-layer integration、assignment boundary、milestone
+  acceptance、final evidence を所有する。active goal がないときに新しい roadmap を
+  捏造せず、sub-agent の局所成果を統合・受理する責任を手放さない。
+- simple、low-risk、single-step 又は短い read-only task は、委譲コストが作業量と同程度
+  なら parent が処理する。role が存在するという理由だけで sub-agent を起動しない。
+- substantial で bounded、かつ独立に検証できる作業は専門 role へ委譲する。
+  code mapping は `code_mapper`、non-test production source の実装と bounded debug fix
+  は `implementer`、test は `test_author`、command execution と failure capture は
+  `eval_runner`、routine evidence / status synchronization は `status_reporter`、
+  repository-wide sequencing / dependency / evidence gate / roadmap / decision queue は
+  `planner`、独立した semantic / correctness review は `reviewer` を基本とする。
+- theory / normative analysis と cross-system trade-off の統合責任は parent が保持し、
+  `planner`、`reviewer`、Oracle を advisory input として使う。decision は Canon の
+  decision level / owner authority に従い、最終的な統合・受理判断は parent が repo
+  evidence と照合して行う。
+- 各委譲には bounded context packet として、pinned revision / dirty state、objective /
+  non-goals、Canon / source references、preserved invariants、exact ownership、acceptance /
+  validation、expected return を渡す。並列化は本当に独立した作業だけに使い、write
+  ownership を重複させない。
+- Oracle は repository 又は会話の暗黙文脈を持たない。consult ごとに relevant pinned
+  facts、alternatives / falsifier、exact question を明示し、parent が回答を repo evidence
+  と照合する。
+
 - task はできるだけ内部で閉じる。中途で user に何度も返さない。
 - user が連続 milestone の自走を依頼している場合は、milestone close ごとに brief intermediate report を返し、次を短く明示すること。
 - milestone close ごとに `progress.md`、`tasks.md`、current milestone report を同期すること。micro-package ごとの新 report は作らない。
