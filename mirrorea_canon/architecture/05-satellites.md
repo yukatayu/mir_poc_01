@@ -9,7 +9,7 @@ open_items: [OPEN-031]
 
 # 05 — 衛星系
 
-**PrismCascade**(media kernel)は独立カーネルとして開発する(LAB D-006 継承)。最適化中心(effect-only graph 正規化、事前 planning、メモリ所有、CPU/GPU スケジューリング、offline/live 区別)が Mir と異なるため、runtime 統合はしない。統合点は狭く: Meta 層 effect provider(TTS・推論・asset)、remote 実行委譲、trace 連結用共有 ID、Prism graph 周辺の協調編集。Mir 側からは BND-007 の provider として現れる。
+**PrismCascade**(media kernel)は独立カーネルとして開発する(LAB D-006 継承)。最適化中心(effect-only graph 正規化、事前 planning、メモリ所有、CPU/GPU スケジューリング、offline/live 区別)が Mir と異なるため、runtime 統合はしない。統合点は狭く: Meta 層 effect provider(TTS・推論・asset)、remote 実行委譲、trace 連結用共有 ID、Prism graph 周辺の協調編集。Mir 側ではobserver-safe presentationに接続する場合はBND-012、typed effect providerとして接続する場合はBND-014を使う。どちらでもsemantic owner又はauthority sourceにはならない。
 
 **Typed-Effect Wiring Platform** は「外部 effect を可視・型付き・契約対応・再配線可能にする」隣接層。Mir の言語意味論ではなく、adapter 境界(ADR-0011)の運用面の一般化である。canon v1 では概念位置のみ固定し、仕様化は S5 応用が要求した時点で開始する。
 

@@ -18,7 +18,7 @@ the closed authority/execution record for the accepted Mir Theory v0 / I1+
 M0--M10 finite reference baseline. ADR-0026 and Plan 249 likewise record the
 now-closed Mirrorea I2 Systems Foundation SYS-0--SYS-7 program. PROPOSAL-037 /
 ADR-0034 authorize the bounded Mirrorea I3 Distributed Foundation program;
-Plan 250 is its sole current roadmap; ALIGN-0 and ALIGN-1 are completed and ALIGN-2 is the sole active goal.
+Plan 250 is its sole current roadmap; ALIGN-0, ALIGN-1, and ALIGN-2 are completed and I3-0 is the sole active goal.
 
 ALIGN-1 accepted the Canon three-axis map in
 `mirrorea_canon/architecture/06-project-product-layers.md`: semantic strata
@@ -26,8 +26,10 @@ ALIGN-1 accepted the Canon three-axis map in
 `T0`--`T2` / `I1`--`I6` are independent, many-to-many coordinates. PL-4 is a
 responsibility-only Shared-Space/World-Web horizon; PL-6 remains a separate
 Reversed Library project, and PrismCascade plus Typed-Effect remain satellites.
-ALIGN-2 is now active for Browser/Host/package/View/provider responsibility
-contracts; those trust-tier and FFI/resource details are not yet accepted.
+ALIGN-2 is completed for Browser/Host/package/View/provider responsibility
+contracts; the detailed trust-tier and FFI/resource boundary is recorded in
+`mirrorea_canon/architecture/07-browser-host-trust-boundaries.md` without a
+public API or ABI freeze.
 
 Accepted I2 implementation evidence progresses through the crate-private
 kernel/carrier (`94e3707c...`), ST/OW1 refinement (`920d3fe0...`), checked-Core

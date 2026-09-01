@@ -2,8 +2,8 @@
 id: meta/agent-instructions
 status: L0-frozen
 maturity: draft
-depends_on: [adr/ADR-0012, adr/ADR-0014, adr/ADR-0015, adr/ADR-0026, adr/ADR-0033, adr/ADR-0034, adr/ADR-0035, arch/06-project-product-layers, plan/02-operating-model]
-summary: agent の読込、active ADR-0034 program/ADR-0035三軸map、program外L3 research、review境界。
+depends_on: [adr/ADR-0012, adr/ADR-0014, adr/ADR-0015, adr/ADR-0026, adr/ADR-0033, adr/ADR-0034, adr/ADR-0035, adr/ADR-0036, arch/06-project-product-layers, arch/07-browser-host-trust-boundaries, plan/02-operating-model]
+summary: agent の読込、active ADR-0034 program、ADR-0035三軸map、ADR-0036 trust boundary、program外L3 research、review境界。
 open_items: []
 ---
 
@@ -20,8 +20,9 @@ open_items: []
 - ADR-0015 / Plan 247とADR-0026 / Plan 249のbounded programsはいずれもclosedである。
   accepted cutsはregression baselineであり、successor authority又はcurrent queueではない。
   PROPOSAL-037 / ADR-0034はADR-0033 / plan/05をconsumeするactive bounded programを
-  authorizeし、Plan 250をsole roadmapとする。ADR-0035はALIGN-1 three-axis mapを
-  受理した。ALIGN-0/1はcompleted、ALIGN-2がactive goalである。program activation
+  authorizeし、Plan 250をsole roadmapとする。ADR-0035はALIGN-1 three-axis map、
+  ADR-0036はALIGN-2 Browser/Host trust boundaryを受理した。ALIGN-0/1/2はcompleted、
+  I3-0がactive goalである。program activation
   自体はofficial I3 entry/exit、transport selection、又はpublic contract freezeではない。
 - ADR-0014 の standing route に従う L2/L3 working theory: `working/WRK-####` に
   read-only canon anchors、pinned authority cut、result class、non-effects、alternative /

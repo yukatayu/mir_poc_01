@@ -65,7 +65,7 @@ source hierarchy; do not treat an external chat as normative state.
      a current queue. PROPOSAL-037 / ADR-0034 consume ADR-0033 and canon
      plan/05 for the active Mirrorea I3 Distributed Foundation bounded program.
      Plan 250 is the sole current roadmap; PROPOSAL-038 / ADR-0035 close
-     ALIGN-1, and ALIGN-2 is the sole active goal. Program
+     ALIGN-1, ALIGN-2 is completed, and I3-0 is the sole active goal. Program
      activation is not official I3 lifecycle entry; both transport candidates
      remain unselected. Outside program scope, follow ADR-0014's route.
 
@@ -189,7 +189,7 @@ Every report should contain, in this order:
   roadmap remains a closed record/regression baseline until owner direction
   designates a successor. Older `plan/` files remain repository memory, not an
   active queue. Plan 247 and Plan 249 are closed baselines. Plan 250 is the
-  current roadmap and ALIGN-2 is the sole active milestone after ALIGN-1 close.
+  current roadmap and I3-0 is the sole active milestone after ALIGN-2 close.
 - Do not read `docs/reports/` in bulk. Read only reports directly referenced by
   current Canon, roadmap, or status.
 - Open a new `WRK-####` only when it has a named direct consumer, reduces the

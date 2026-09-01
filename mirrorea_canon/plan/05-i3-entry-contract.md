@@ -2,7 +2,7 @@
 id: plan/05-i3-entry-contract
 status: L1-fixed
 maturity: reviewed
-depends_on: [adr/ADR-0033, adr/ADR-0034, adr/ADR-0035, arch/04-runtime-carriers, arch/06-project-product-layers, theory/04-ordering-and-cuts, theory/05-authority, theory/07-observation, theory/08-patch-hotplug, spec/06-conformance, scenarios/SCN-01, scenarios/SCN-02, scenarios/SCN-03, scenarios/SCN-06]
+depends_on: [adr/ADR-0033, adr/ADR-0034, adr/ADR-0035, adr/ADR-0036, arch/04-runtime-carriers, arch/06-project-product-layers, arch/07-browser-host-trust-boundaries, arch/08-browser-host-security-invariants, theory/04-ordering-and-cuts, theory/05-authority, theory/07-observation, theory/08-patch-hotplug, spec/06-conformance, scenarios/SCN-01, scenarios/SCN-02, scenarios/SCN-03, scenarios/SCN-06]
 summary: ADR-0034 programがconsumeするI3 goal、transport-neutral adapter、failure/order refinement、C-distributed gates。
 open_items: [OPEN-032]
 ---
@@ -21,8 +21,13 @@ ADR-0034 now consumes it for the active bounded program, whose parent goal is:
 > profile.
 
 Program activation is not official I3 lifecycle entry or exit. LAB Plan 250 is
-the sole current roadmap; ALIGN-0/1 are completed and ALIGN-2 is active. The two transport candidates
+the sole current roadmap; ALIGN-0/1/2 are completed and I3-0 is active. The two transport candidates
 remain unselected and OPEN-032 remains unresolved.
+
+I3 transport/runtime must preserve `arch/07-browser-host-trust-boundaries` and
+`arch/08-browser-host-security-invariants`:
+transport/session/certificate cannot replace semantic grant, network logs cannot
+weaken redaction, and I3 does not implement or freeze inactive I5 package/View/FFI.
 
 ## Accepted input boundary
 

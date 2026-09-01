@@ -2,8 +2,8 @@
 id: meta/source-hierarchy
 status: L0-frozen
 maturity: draft
-depends_on: [adr/ADR-0012, adr/ADR-0014, adr/ADR-0015, adr/ADR-0026, adr/ADR-0033, adr/ADR-0034, adr/ADR-0035]
-summary: canon > LAB、active ADR-0034 program/ADR-0035三軸map、program外ADR-0014 routeの境界。
+depends_on: [adr/ADR-0012, adr/ADR-0014, adr/ADR-0015, adr/ADR-0026, adr/ADR-0033, adr/ADR-0034, adr/ADR-0035, adr/ADR-0036]
+summary: canon > LAB、active ADR-0034 program、ADR-0035三軸map、ADR-0036 trust boundary、program外ADR-0014 routeの境界。
 open_items: []
 ---
 
@@ -35,8 +35,9 @@ current queue ではない。
 
 ADR-0026 / PROPOSAL-029 の SYS-0--SYS-7 bounded program はADR-0033によりclosedで、
 Plan 249はclosed execution recordである。PROPOSAL-037 / ADR-0034はplan/05をconsumeし、
-Plan 250をsole current roadmapとする。ADR-0035はALIGN-1 three-axis mapを受理し、
-ALIGN-0/1はcompleted、ALIGN-2がactive goalである。`root/design-constitution` は North Star/ADR の下で後続 Canon を拘束する current
+Plan 250をsole current roadmapとする。ADR-0035はALIGN-1 three-axis map、ADR-0036は
+ALIGN-2 Browser/Host trust boundaryを受理し、ALIGN-0/1/2はcompleted、I3-0がactive
+goalである。`root/design-constitution` は North Star/ADR の下で後続 Canon を拘束する current
 decision filterであり、LAB roadmap/reportはそれを再解釈しない。`.mir` source、Rust、
 Lean、tests、generated tracesはnormative Canon rulesのimplementation/evidenceであり、
 存在だけで規範、proof、Gate、Phase、又はlifecycle acceptanceを変更しない。規範変更は

@@ -1,6 +1,6 @@
 # Plan 250 — Mirrorea I3 Distributed Foundation current execution roadmap
 
-最終更新: 2026-09-01 20:53 JST
+最終更新: 2026-09-01 23:03 JST
 
 ## 役割、authority、current control state
 
@@ -41,9 +41,9 @@ roadmap/status pointer の一致を検証する。
 - accepted ALIGN-1 architecture decision: PROPOSAL-038 / ADR-0035
   (the milestone integration commit cannot embed its own future hash)
 - sole current roadmap: **Plan 250**
-- completed goals: **ALIGN-0, ALIGN-1**
-- sole active goal: **ALIGN-2**
-- next goal after accepted ALIGN-2 close: **I3-0**
+- completed goals: **ALIGN-0, ALIGN-1, ALIGN-2**
+- sole active goal: **I3-0**
+- next goal after accepted I3-0 close: **I3-1**
 - all other milestones: **ordered, inactive, and dependency-gated**
 - Plan 247: closed M0--M10 execution record / regression baseline
 - Plan 249: closed SYS-0--SYS-7 execution record / accepted I2 baseline
@@ -245,8 +245,8 @@ and are exactly one per milestone:
 | --- | --- | --- |
 | ALIGN-0 | `docs/reports/2600-mirrorea-i3-distributed-foundation-align0-baseline-goal-alignment.md` | completed |
 | ALIGN-1 | `docs/reports/2601-mirrorea-i3-distributed-foundation-align1-layer-map.md` | completed |
-| ALIGN-2 | `docs/reports/2602-mirrorea-i3-distributed-foundation-align2-trust-boundaries.md` | active report |
-| I3-0 | `docs/reports/2603-mirrorea-i3-distributed-foundation-i3-0-transport-selection.md` | inactive |
+| ALIGN-2 | `docs/reports/2602-mirrorea-i3-distributed-foundation-align2-trust-boundaries.md` | completed |
+| I3-0 | `docs/reports/2603-mirrorea-i3-distributed-foundation-i3-0-transport-selection.md` | active report |
 | I3-1 | `docs/reports/2604-mirrorea-i3-distributed-foundation-i3-1-adapter-encoding.md` | inactive |
 | I3-2 | `docs/reports/2605-mirrorea-i3-distributed-foundation-i3-2-two-process-runtime.md` | inactive |
 | I3-3 | `docs/reports/2606-mirrorea-i3-distributed-foundation-i3-3-failure-ordering.md` | inactive |
@@ -488,7 +488,7 @@ the owner direction, domain/provider/app collapse, or any irreversible public
 surface. Reopen for a cross-axis ambiguity that permits two different owners or
 lifecycle readings for the same responsibility.
 
-## ALIGN-2 milestone contract — active
+## ALIGN-2 milestone contract — completed
 
 **Goal:** Define non-freezing trust contracts and resource/sandbox boundaries
 for packages, Browser/Host participation, View/renderer separation, typed
@@ -531,6 +531,12 @@ typed effect, policy/capability/resource admission, typed result/failure, and
 provenance. Privileged native plugins retain process/crash isolation,
 revocation, publisher/provenance, and resource/data-access responsibility.
 
+The shared security record also separates semantic decision, policy,
+validation, enforcement, evidence and consumer roles; binds content/request,
+instance/incarnation, target, policy/grant epoch, authority lineage, frontier,
+freshness and scope; and requires use-time revalidation, queued/in-flight revoke,
+typed ambiguous effects, metadata redaction and pre-limit resource accounting.
+
 The resource/sandbox checklist explicitly covers CPU/time budget, memory
 budget, storage namespace/quota, effect/network rate, device access, infinite
 loop/allocation abuse, observation abuse, and termination. ALIGN-2 chooses no
@@ -563,7 +569,7 @@ required; do not manufacture a source edit.
 unavoidable raw-secret exposure, or required public freeze. Reopen if an I3-0
 candidate cannot satisfy the tier/contract model without transport-as-authority.
 
-## I3-0 milestone contract — inactive until ALIGN-2 closes
+## I3-0 milestone contract — active
 
 **Goal:** Compare exactly the two retained reliable-stream candidates under one
 common semantic/failure/order test harness and select at most one through an
@@ -1099,10 +1105,8 @@ integration, or Typed-Effect platform collapse.
 
 ## Recommended next action
 
-Execute ALIGN-2 only: define the non-freezing Browser/Host/package/View/provider
-trust tiers, admission and typed reverse/effect paths, resource/sandbox
-responsibilities, and the BND-007 presentation-local-computation clarification
-against the accepted ADR-0035 three-axis map. Choose no package format, sandbox
-technology, public FFI/API/ABI or engine plugin ABI. Validate and independently
-review Report 2602, commit/push with parity, then advance exactly to I3-0. Do
-not begin transport canaries before ALIGN-2 closes.
+Execute I3-0 only: build the same bounded two-process canary for TLS-over-TCP
+framed reliable stream and QUIC reliable stream, compare them by the fixed
+criteria, and select at most one through a non-public ADR. Preserve ADR-0036
+trust/non-authority rules, keep both candidates UNSELECTED until evidence and
+review close, exclude QUIC datagrams, and do not begin I3-1 adapter work early.

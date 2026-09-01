@@ -47,8 +47,8 @@ realization S0--S7、architecture/06のPL-0--PL-6、plan/01のphaseとは別軸�
 | CON-030 | Patch | source 単位の進化。eval ではなく pipeline を通る | S0-S2 | L0 |
 | CON-031 | Activation cut | patch 有効化の明示的境界。admission 時の frontier に束縛 | S2 | L1 |
 | CON-032 | Projection | 検証済みの一枚の意味から per-locus 成果物と通信境界を導出 | S4 | L1 |
-| CON-033 | Provider | 描画・乱数等の外部供給者。semantic owner ではない | S4/S6 | L0 |
-| CON-034 | View | FFI へ切り出される表示側。ロジックは持たない | S6 | L1 |
+| CON-033 | Provider | typed effect/result境界を通る外部供給者。semantic owner又はauthority mintではない。raw native integrationは別trust tier | S4/S6 | L0 |
+| CON-034 | View | observer-safe projectionをpresentation-localに計算・表示する側。authoritative domain semantics、direct store、redaction弱化を持たない | S6 | L1 |
 | CON-035 | Devtools observation | 型付き・redaction 単調・retention 明示の観測面 | S2/S3 | L1 |
 | CON-036 | Diagnostic | 差し戻しの一級成果物。規則インスタンス+span+修理提案 | S3 | L1 |
 | CON-037 | Obligation (OBL) | checker が discharge しない義務の明示 carrier | S3 | L1 |

@@ -1,6 +1,6 @@
 # Project status
 
-最終更新: 2026-09-01 22:30 JST
+最終更新: 2026-09-01 23:03 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -27,12 +27,13 @@ closed M0--M10 finite reference baseline
 -> [x] SYS-7 inactive I3 entry contract only / program closed
 -> [x] ALIGN-0 bounded-program activation / meta-drift alignment (completed)
 -> [x] ALIGN-1 project/product layer constitution (completed)
--> [ ] ALIGN-2 Browser/Host/package/View/provider boundary contracts (sole active goal)
+-> [x] ALIGN-2 Browser/Host/package/View/provider boundary contracts (completed)
+-> [ ] I3-0 transport candidate evidence and selection (sole active goal)
 ```
 
 Plan 247とPlan 249はclosed recordsである。PROPOSAL-037 / ADR-0034により
 Mirrorea I3 Distributed Foundation bounded programがactiveで、Plan 250がsole
-current roadmap、ALIGN-0とALIGN-1がcompleted、ALIGN-2がsole active goalである。
+ current roadmap、ALIGN-0 / ALIGN-1 / ALIGN-2 completed、I3-0 sole active goalである。
 
 ## 現在地
 
@@ -42,7 +43,7 @@ current roadmap、ALIGN-0とALIGN-1がcompleted、ALIGN-2がsole active goalで�
 | broad PHASE-I1 | **unaccepted**; OPEN-026/027とfull carrier freezeが残る | `mirrorea_canon/architecture/04-runtime-carriers.md` |
 | bounded I2 lifecycle | **official entry accepted, then official exit accepted** | `mirrorea_canon/adr/ADR-0032.md` |
 | ADR-0026 program | **SYS-0--SYS-7 closed** | `mirrorea_canon/adr/ADR-0033.md` |
-| active roadmap / goal | **Plan 250 / ALIGN-2 active** | `plan/250-mirrorea-i3-distributed-foundation-current-roadmap.md` |
+| active roadmap / goal | **Plan 250 / I3-0 sole active goal** | `plan/250-mirrorea-i3-distributed-foundation-current-roadmap.md` |
 | I3 / OPEN-032 | **bounded program active; lifecycle entry not official / unresolved** | `mirrorea_canon/adr/ADR-0034.md` |
 | public/product | final grammar/CLI/API/ABI/wireもproductionも未受理 | `mirrorea_canon/adr/ADR-0033.md` |
 
@@ -58,13 +59,17 @@ version、codec、wire、library、certificate representation、port、retry、d
 
 ## 現在の停止線
 
-ALIGN-0はdocs/status alignment and activation boundary、ALIGN-1はproject/product three-axis constitutionとしてcompleted。ALIGN-2がsole active goalである。固定順序はALIGN-0..2 → I3-0..6 → NEXT-0である。
+ALIGN-0 / ALIGN-1 / ALIGN-2 completed、I3-1 next/not active。ALIGN-2 は Browser/Host/package/View/provider の責任境界を Canon 化し、BND-010..BND-016、trust tier T0–T4（Theory T0–T2 とは別）、package admission と semantic grant の分離、raw FFI 禁止、redaction と resource/termination 責任を明示した。固定順序はALIGN-0..2 → I3-0..6 → NEXT-0である。
 ALIGN-1ではsemantic strata S0--S6、project/product PL-0--PL-6、lifecycle T0--T2 / I1--I6を独立したmany-to-many座標としてCanon化した。PL-4は責任境界のみ、PL-6は別application、satellitesは別系統である。
 ALIGN-0 acceptanceはI3 lifecycle entry、transport選定、production/public freezeを
 含まない。これらは各後段gate又はowner-reserved boundaryへ残る。
 Current authority and milestone gates are
 `mirrorea_canon/adr/ADR-0034.md` and
 `plan/250-mirrorea-i3-distributed-foundation-current-roadmap.md`.
+
+Detailed edge contracts: [`mirrorea_canon/architecture/07-browser-host-trust-boundaries.md`](../mirrorea_canon/architecture/07-browser-host-trust-boundaries.md).
+Cross-edge binding/freshness/revocation/redaction/resource rules: [`mirrorea_canon/architecture/08-browser-host-security-invariants.md`](../mirrorea_canon/architecture/08-browser-host-security-invariants.md).
+View は authoritative domain semantics を所有せず、presentation-local computation のみを許可する。View からの入力は typed command/effect request とし direct store を禁止する。I3-0 は transport 選定の research decision で、両候補は UNSELECTED、OPEN-032 は未解決、official I3 lifecycle は未entryである。I5 implementation は inactive。
 
 The active bounded I3 programはinternal carrierとpublic wireを分離し、route/handshake/framing/
 disconnect/reconnect/ambiguous delivery/duplicate/reorder/stale authority/backpressure/
@@ -102,6 +107,8 @@ Authority boundaryは`mirrorea_canon/meta/agent-instructions.md`と
 | SYS-6 acceptance | `mirrorea_canon/adr/ADR-0032.md`, `mirrorea_canon/spec/15-sys6-i2-conformance.md` |
 | inactive I3 contract | `mirrorea_canon/adr/ADR-0033.md`, `mirrorea_canon/plan/05-i3-entry-contract.md` |
 | active bounded I3 program | `mirrorea_canon/adr/ADR-0034.md`, `plan/250-mirrorea-i3-distributed-foundation-current-roadmap.md` |
+| Browser/Host trust edges | `mirrorea_canon/architecture/07-browser-host-trust-boundaries.md` |
+| cross-edge security invariants | `mirrorea_canon/architecture/08-browser-host-security-invariants.md` |
 | proof/evidence class | `mirrorea_canon/theory/11-metatheory-ledger.md` |
 | closed I2 roadmap | `plan/249-mirrorea-i2-systems-foundation-current-roadmap.md` |
 | SYS-6 close evidence | `docs/reports/2598-mirrorea-i2-systems-foundation-sys6-i2-conformance-closeout.md` |

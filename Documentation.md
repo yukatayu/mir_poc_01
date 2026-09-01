@@ -17,9 +17,21 @@ I3 roadmap は `plan/250-mirrorea-i3-distributed-foundation-current-roadmap.md`�
 下の `plan/` 索引は時系列の LAB repository memory です。索引にある候補や過去の
 「次」は current queue を意味しません。Plan 247とPlan 249はclosed execution
 recordsである。PROPOSAL-037 / ADR-0034によりI3 bounded programがactive、Plan 250が
-sole current roadmap、ALIGN-0とALIGN-1がcompleted、ALIGN-2がsole active goalである。older plansもhistorical
+sole current roadmap、ALIGN-0, ALIGN-1, and ALIGN-2 completed; I3-0 sole active goal. older plansもhistorical
 memoryです。現在の停止線は
 `docs/project-status.md`、`progress.md`、`tasks.md` で確認します。
+
+ALIGN-2 の受理済み境界は
+[`architecture/07-browser-host-trust-boundaries.md`](mirrorea_canon/architecture/07-browser-host-trust-boundaries.md)
+と共通security record
+[`architecture/08-browser-host-security-invariants.md`](mirrorea_canon/architecture/08-browser-host-security-invariants.md)
+にあります。trust tier T0–T4 は Theory T0–T2 とは別の責任分類です。T1 checked
+untrusted Mir package は package admission を通過しても semantic grant を自動的に
+得ず、raw FFI や direct store を持ちません。Runtime/Projection→View は
+observer-safe projection を渡し、View は authoritative domain semantics を所有せず
+presentation-local computation のみを行います。入力・effect・provider の reverse path
+は typed で、redaction、revocation、termination、resource limits を含みます。I3-0 では
+transport 候補をまだ選択せず、公式 I3 lifecycle も未entryです。
 
 M0 Bootstrap、M1 Constitution、M2 semantic-assertion T0/G0 closeout、M3
 evaluation/materialization calculus、M4 maintained relation / late projection、M5 shared
@@ -252,7 +264,7 @@ recordが揃ったためofficial I2 entry後exitを受理しました。broad PH
   SYS-6 implementation/evidence cut is `5429712d...`, Canon/status integration
   cut is `bcb0f767...`, and official I2 entry then exit is accepted.
 - in-progress: PROPOSAL-037 / ADR-0034 bounded I3 program; Plan 250 sole roadmap;
-  ALIGN-0 and ALIGN-1 completed, ALIGN-2 sole active goal.
+  ALIGN-0--2 completed, I3-0 sole active goal.
 - decisions taken: ALIGN-1 accepted the independent three-axis project/product
   map; PL-4 remains responsibility-only, PL-6 remains separate, and satellites
   remain outside the numbered product layers.

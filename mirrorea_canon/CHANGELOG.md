@@ -18,6 +18,21 @@ open_items: []
 
 ## 履歴
 
+- **2026-09-01** PROPOSAL-039 / ADR-0036 / architecture/07によりALIGN-2の
+  Browser/Host trust boundaryを受理した。BND-007をRuntime/Projection→Viewとして
+  authoritative domain semantics禁止とpresentation-local computation許可に明確化し、
+  BND-010--016でpackage admission、Browser→fabric、View→renderer、typed input、typed
+  effect/provider、privileged raw FFI、resource/sandboxを分離した。trust tier T0--T4は
+  Theory T0--T2とは別であり、package admission、signature、process/session/provider/
+  rendererはsemantic grant又はauthorityでない。T1 packageにraw FFIはなく、resource/
+  observation enforcementはfail-closedである。cross-edgeではcontent/instance/epoch/
+  freshness binding、role分離、use-time revalidation、queued/in-flight revocation、
+  ambiguous effect、metadata redaction、pre-limit accounting、T3 TCB consequenceを要求する。
+  具体package/origin/signature、sandbox、
+  engine/FFI/API/ABI/wire/storage/public/productをfreezeせず、実装はinactive I5に残した。
+  runtime/sample/theory/proof/OBL/official lifecycle/transport selectionは変更せず、
+  ALIGN-0/1/2をclosed、I3-0をsole active、I3-1をnext/not activeとした。
+
 - **2026-09-01** PROPOSAL-038 / ADR-0035 / architecture/06によりALIGN-1の
   three-axis architectureを受理した。current semantic strataをS0 Surface--S6 Host、
   project/product responsibilityをPL-0--PL-6、lifecycleをT0--T2 / I1--I6として

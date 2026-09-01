@@ -9,6 +9,7 @@ REPO_ROOT = Path(__file__).resolve().parents[2]
 HTML_PATH = REPO_ROOT / "docs" / "mirrorea-project-overview.html"
 DOCUMENTATION_PATH = REPO_ROOT / "Documentation.md"
 CANON_MAP_PATH = REPO_ROOT / "mirrorea_canon" / "MAP.md"
+CANON_ROOT_PATH = REPO_ROOT / "CANON.md"
 
 
 class OverviewParser(HTMLParser):
@@ -85,10 +86,10 @@ class MirroreaProjectOverviewHtmlTests(unittest.TestCase):
             "ADR-0033 / SYS-7 I3 entry contract only",
             "PROPOSAL-037 / ADR-0034",
             "Mirrorea I3 Distributed Foundation bounded program",
-            "Plan 250 / ALIGN-2が現在地",
+            "Plan 250 / I3-0が現在地",
             "Plan 250がsole current roadmap",
-            "Mirrorea I3 Distributed Foundation / ALIGN-2 sole active goal",
-            "ALIGN-0 / ALIGN-1 completed、I3-0 next/not active",
+            "Mirrorea I3 Distributed Foundation / I3-0 sole active goal",
+            "ALIGN-0 / ALIGN-1 / ALIGN-2 completed、I3-1 next/not active",
             "I3 program active / lifecycle未entry",
             "official I3 lifecycle entryとproductionは主張しません",
             "closed / SYS-3",
@@ -189,6 +190,41 @@ class MirroreaProjectOverviewHtmlTests(unittest.TestCase):
             "obsolete semantic-strata split",
         )
 
+    def test_exposes_align2_browser_host_contracts_without_claiming_i3_entry(self) -> None:
+        required_terms = (
+            "trust tier T0–T4",
+            "Theory T0–T2 とは別",
+            "BND-007",
+            "Runtime/Projection→View",
+            "presentation-local computation",
+            "authoritative domain semantics",
+            "direct store",
+            "redaction",
+            "BND-010",
+            "BND-011",
+            "BND-012",
+            "BND-013",
+            "BND-014",
+            "BND-015",
+            "BND-016",
+            "raw FFI",
+            "T1 checked untrusted Mir package",
+            "package admission",
+            "semantic grant",
+            "I3-0 sole active",
+            "UNSELECTED",
+            "OPEN-032",
+            "official I3 lifecycle entryは未受理",
+        )
+        for term in required_terms:
+            self.assert_contains_marker(self.html, term, "HTML ALIGN-2 Browser/Host boundary")
+
+        self.assertIn(
+            "../mirrorea_canon/architecture/07-browser-host-trust-boundaries.md",
+            self.parser.hrefs,
+            "HTML reader must link the normative ALIGN-2 boundary contract",
+        )
+
     def test_removes_obsolete_pre_m0_current_state_claims(self) -> None:
         stale_claims = (
             "公式経路は T0 に留まる",
@@ -245,6 +281,9 @@ class MirroreaProjectOverviewHtmlTests(unittest.TestCase):
             "ALIGN-0 completed、ALIGN-2 next/not active",
             "ALIGN-1 activation-only",
             "ALIGN-0 completed / ALIGN-1 active",
+            "Plan 250 / ALIGN-2が現在地",
+            "Mirrorea I3 Distributed Foundation / ALIGN-2 sole active goal",
+            "ALIGN-0 / ALIGN-1 completed、I3-0 next/not active",
             "現在 / SYS-7",
             "次 / SYS-7",
             "現在 / SYS-3",
@@ -312,7 +351,7 @@ class MirroreaProjectOverviewHtmlTests(unittest.TestCase):
         self.assert_contains_marker(documentation, "Plan 250 sole roadmap", "Documentation I3 program status")
         self.assert_contains_marker(
             documentation,
-            "ALIGN-0 and ALIGN-1 completed, ALIGN-2 sole active goal.",
+            "ALIGN-0, ALIGN-1, and ALIGN-2 completed; I3-0 sole active goal.",
             "Documentation I3 program status",
         )
         self.assert_contains_marker(
@@ -391,9 +430,16 @@ class MirroreaProjectOverviewHtmlTests(unittest.TestCase):
     def test_canon_map_uses_the_current_align_frontier(self) -> None:
         canon_map = CANON_MAP_PATH.read_text(encoding="utf-8")
 
-        self.assert_contains_marker(canon_map, "ALIGN-0/1はclosed", "Canon MAP ALIGN close state")
-        self.assert_contains_marker(canon_map, "ALIGN-2がsole active goal", "Canon MAP active goal")
+        self.assert_contains_marker(canon_map, "ALIGN-0/1/2はclosed", "Canon MAP ALIGN close state")
+        self.assert_contains_marker(canon_map, "I3-0がsole active goal", "Canon MAP active goal")
         self.assert_omits_marker(canon_map, "ALIGN-1がactiveである", "Canon MAP stale ALIGN-1 state")
+
+    def test_root_canon_uses_the_current_i3_frontier(self) -> None:
+        canon_root = CANON_ROOT_PATH.read_text(encoding="utf-8")
+
+        self.assert_contains_marker(canon_root, "I3-0 is sole active goal", "root CANON active goal")
+        self.assert_contains_marker(canon_root, "I3-1 is next/not active", "root CANON next goal")
+        self.assertNotRegex(canon_root, r"I3-0\s+is next/not active")
 
 
 if __name__ == "__main__":

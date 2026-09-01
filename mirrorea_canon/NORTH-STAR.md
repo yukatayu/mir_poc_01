@@ -37,7 +37,7 @@ open_items: []
   verifier は Judgment / Obligation から Evidence / Diagnostic /
   ResidualObligation へ出る別の線であり、観測は型付き information effect である
   (theory/02, 05, 07)。
-- プログラムは「ブラウザ的なもの」で参加し、View は FFI へ切り出し、ロジックは Mir 内に置く(architecture/05, BND-007)。
+- プログラムは「ブラウザ的なもの」で参加する。authoritative domain semanticsとsemantic mutationはMir内に置き、View/providerはobserver-safe projection上のpresentation-local computationのみを担う。入力と外界effectはtyped boundaryでMirへ戻す(architecture/07, BND-007/013/014)。
 
 ## 非軸(やらないこと)
 

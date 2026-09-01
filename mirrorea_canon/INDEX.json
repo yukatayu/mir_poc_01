@@ -1,6 +1,6 @@
 {
  "canon_version": "0.1.0",
- "files": 196,
+ "files": 200,
  "entries": [
   {
    "id": "root/changelog",
@@ -12,7 +12,7 @@
    "summary": "canon 自体の版履歴と改定手続きの要約。",
    "open_items": [],
    "path": "CHANGELOG.md",
-   "bytes": 28298
+   "bytes": 29548
   },
   {
    "id": "root/design-constitution",
@@ -40,7 +40,7 @@
     "OPEN-001"
    ],
    "path": "GLOSSARY.md",
-   "bytes": 5681
+   "bytes": 5843
   },
   {
    "id": "root/map",
@@ -52,7 +52,7 @@
    "summary": "知識マップ 1 枚。全域の依存図、3 種の読み筋、ID 体系。",
    "open_items": [],
    "path": "MAP.md",
-   "bytes": 29587
+   "bytes": 29714
   },
   {
    "id": "root/north-star",
@@ -64,7 +64,7 @@
    "summary": "軸・非軸の 1 枚。プロジェクトの起点、五動詞の軸、地平、世界観の要約。",
    "open_items": [],
    "path": "NORTH-STAR.md",
-   "bytes": 3521
+   "bytes": 3687
   },
   {
    "id": "root/readme",
@@ -74,7 +74,7 @@
    "summary": "canon の入口。正本宣言、LAB(既存 repo)との関係、読み順、版。",
    "open_items": [],
    "path": "README.md",
-   "bytes": 4806
+   "bytes": 5084
   },
   {
    "id": "adr/ADR-0001",
@@ -587,6 +587,23 @@
    "bytes": 3051
   },
   {
+   "id": "adr/ADR-0036",
+   "status": "L1-fixed",
+   "maturity": "reviewed",
+   "depends_on": [
+    "adr/ADR-0034",
+    "adr/ADR-0035",
+    "meta/proposal-039",
+    "arch/02-boundary-contracts",
+    "arch/07-browser-host-trust-boundaries",
+    "arch/08-browser-host-security-invariants"
+   ],
+   "summary": "Browser/Host package admissionとsemantic grantを分離し、View/input/provider/raw FFI/resourceの非凍結trust boundaryを採用する。",
+   "open_items": [],
+   "path": "adr/ADR-0036.md",
+   "bytes": 3490
+  },
+  {
    "id": "adr/readme",
    "status": "L1-fixed",
    "maturity": "draft",
@@ -596,7 +613,7 @@
    "summary": "決定記録の一覧と読み方。LAB の決定台帳(specs/12)との関係。",
    "open_items": [],
    "path": "adr/README.md",
-   "bytes": 4629
+   "bytes": 4793
   },
   {
    "id": "arch/01-strata",
@@ -619,10 +636,10 @@
     "arch/01-strata",
     "theory/03-elaboration"
    ],
-   "summary": "層間契約 BND-001..009。各境界の不変条件と、越えてよい情報・越えてはならない情報。",
+   "summary": "層間契約 BND-001..016。各境界の不変条件と、越えてよい情報・越えてはならない情報。",
    "open_items": [],
    "path": "architecture/02-boundary-contracts.md",
-   "bytes": 2415
+   "bytes": 4519
   },
   {
    "id": "arch/03-toolchain",
@@ -686,7 +703,7 @@
     "OPEN-031"
    ],
    "path": "architecture/05-satellites.md",
-   "bytes": 1491
+   "bytes": 1647
   },
   {
    "id": "arch/06-project-product-layers",
@@ -705,7 +722,45 @@
    "summary": "semantic strata・project/product responsibility layers・lifecycle phasesを分離する三軸mapとPL-0--PL-6の責任境界。",
    "open_items": [],
    "path": "architecture/06-project-product-layers.md",
-   "bytes": 9470
+   "bytes": 9499
+  },
+  {
+   "id": "arch/07-browser-host-trust-boundaries",
+   "status": "L1-fixed",
+   "maturity": "reviewed",
+   "depends_on": [
+    "root/north-star",
+    "root/design-constitution",
+    "arch/02-boundary-contracts",
+    "arch/06-project-product-layers",
+    "theory/05-authority",
+    "theory/07-observation",
+    "theory/13-evaluation-materialization",
+    "adr/ADR-0036"
+   ],
+   "summary": "Browser/Host package admission、View/input、typed provider、privileged raw FFI、resource/sandboxの非凍結trust boundary。",
+   "open_items": [],
+   "path": "architecture/07-browser-host-trust-boundaries.md",
+   "bytes": 14980
+  },
+  {
+   "id": "arch/08-browser-host-security-invariants",
+   "status": "L1-fixed",
+   "maturity": "reviewed",
+   "depends_on": [
+    "root/design-constitution",
+    "arch/02-boundary-contracts",
+    "arch/07-browser-host-trust-boundaries",
+    "theory/04-ordering-and-cuts",
+    "theory/05-authority",
+    "theory/07-observation",
+    "theory/09-two-layer-time",
+    "adr/ADR-0036"
+   ],
+   "summary": "Browser/Host trust edgeに共通するbinding、freshness、role分離、revocation、redaction、resource/TCB invariant。",
+   "open_items": [],
+   "path": "architecture/08-browser-host-security-invariants.md",
+   "bytes": 9630
   },
   {
    "id": "arch/readme",
@@ -714,10 +769,10 @@
    "depends_on": [
     "theory/00-overview"
    ],
-   "summary": "semantic strata、PL責任層、層間契約、toolchain、carrier、衛星系の読み方。",
+   "summary": "semantic strata、PL責任層、層間契約、toolchain、carrier、衛星系、Browser/Host trust boundaryの読み方。",
    "open_items": [],
    "path": "architecture/README.md",
-   "bytes": 777
+   "bytes": 909
   },
   {
    "id": "mm/01-programmer-view",
@@ -783,13 +838,15 @@
     "adr/ADR-0033",
     "adr/ADR-0034",
     "adr/ADR-0035",
+    "adr/ADR-0036",
     "arch/06-project-product-layers",
+    "arch/07-browser-host-trust-boundaries",
     "plan/02-operating-model"
    ],
-   "summary": "agent の読込、active ADR-0034 program/ADR-0035三軸map、program外L3 research、review境界。",
+   "summary": "agent の読込、active ADR-0034 program、ADR-0035三軸map、ADR-0036 trust boundary、program外L3 research、review境界。",
    "open_items": [],
    "path": "meta/agent-instructions.md",
-   "bytes": 4568
+   "bytes": 4700
   },
   {
    "id": "meta/proposal-001",
@@ -1437,6 +1494,25 @@
    "bytes": 3702
   },
   {
+   "id": "meta/proposal-039",
+   "status": "L1-fixed",
+   "maturity": "reviewed",
+   "depends_on": [
+    "meta/proposal-037",
+    "adr/ADR-0034",
+    "adr/ADR-0035",
+    "arch/02-boundary-contracts",
+    "arch/06-project-product-layers",
+    "theory/05-authority",
+    "theory/07-observation",
+    "theory/13-evaluation-materialization"
+   ],
+   "summary": "ALIGN-2でBrowser/Host package、View/input、provider/raw FFI、resource sandboxの非凍結trust boundaryを採用する提案。",
+   "open_items": [],
+   "path": "meta/proposals/PROPOSAL-039-align2-browser-host-trust-boundaries.md",
+   "bytes": 3906
+  },
+  {
    "id": "meta/source-hierarchy",
    "status": "L0-frozen",
    "maturity": "draft",
@@ -1447,12 +1523,13 @@
     "adr/ADR-0026",
     "adr/ADR-0033",
     "adr/ADR-0034",
-    "adr/ADR-0035"
+    "adr/ADR-0035",
+    "adr/ADR-0036"
    ],
-   "summary": "canon > LAB、active ADR-0034 program/ADR-0035三軸map、program外ADR-0014 routeの境界。",
+   "summary": "canon > LAB、active ADR-0034 program、ADR-0035三軸map、ADR-0036 trust boundary、program外ADR-0014 routeの境界。",
    "open_items": [],
    "path": "meta/source-hierarchy.md",
-   "bytes": 3715
+   "bytes": 3805
   },
   {
    "id": "meta/style-guide",
@@ -1508,14 +1585,15 @@
     "adr/ADR-0033",
     "adr/ADR-0034",
     "adr/ADR-0035",
+    "adr/ADR-0036",
     "plan/04-t0-g0-semantic-assertion-profile"
    ],
-   "summary": "lifecycle T0-T2/I1-I6をS/PL軸から分離し、T1・I2 exit・ALIGN-2・I3未entryを記録する。",
+   "summary": "lifecycle T/IとS/PLを分離し、T1・I2 exit・I3-0 activeを記録する。",
    "open_items": [
     "OPEN-032"
    ],
    "path": "plan/01-phases.md",
-   "bytes": 15000
+   "bytes": 14999
   },
   {
    "id": "plan/02-operating-model",
@@ -1528,12 +1606,13 @@
     "adr/ADR-0026",
     "adr/ADR-0033",
     "adr/ADR-0034",
-    "adr/ADR-0035"
+    "adr/ADR-0035",
+    "adr/ADR-0036"
    ],
-   "summary": "active ADR-0034 program/ADR-0035三軸map、program外L3 research、goal/frontier/review規律。",
+   "summary": "active ADR-0034 program/ADR-0035三軸map/ADR-0036 trust boundary、program外L3 research、goal/frontier/review規律。",
    "open_items": [],
    "path": "plan/02-operating-model.md",
-   "bytes": 8890
+   "bytes": 8927
   },
   {
    "id": "plan/03-risks",
@@ -1569,8 +1648,11 @@
     "adr/ADR-0033",
     "adr/ADR-0034",
     "adr/ADR-0035",
+    "adr/ADR-0036",
     "arch/04-runtime-carriers",
     "arch/06-project-product-layers",
+    "arch/07-browser-host-trust-boundaries",
+    "arch/08-browser-host-security-invariants",
     "theory/04-ordering-and-cuts",
     "theory/05-authority",
     "theory/07-observation",
@@ -1586,7 +1668,7 @@
     "OPEN-032"
    ],
    "path": "plan/05-i3-entry-contract.md",
-   "bytes": 12008
+   "bytes": 12391
   },
   {
    "id": "plan/readme",
@@ -1600,12 +1682,13 @@
     "adr/ADR-0033",
     "adr/ADR-0034",
     "adr/ADR-0035",
+    "adr/ADR-0036",
     "plan/02-operating-model"
    ],
-   "summary": "Gate/Phase、active ADR-0034 program/ADR-0035三軸map、program外ADR-0014 routeの計画読解。",
+   "summary": "Gate/Phase、active ADR-0034 program、ADR-0035三軸map、ADR-0036 trust boundary、program外ADR-0014 routeの計画読解。",
    "open_items": [],
    "path": "plan/README.md",
-   "bytes": 1518
+   "bytes": 1623
   },
   {
    "id": "scenarios/readme",

@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-09-01 22:30 JST
+最終更新: 2026-09-01 23:03 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -12,8 +12,8 @@ creates no Canon, Gate, Phase, proof, lifecycle, or compatibility decision.
 
 Plan 247 and Plan 249 are closed execution records. PROPOSAL-037 / ADR-0034
 authorize the active bounded Mirrorea I3 Distributed Foundation program;
-Plan 250 is the sole current roadmap. ALIGN-0 and ALIGN-1 are completed; ALIGN-2
-is the sole active goal. Reports retain detailed evidence.
+Plan 250 is the sole current roadmap. ALIGN-0, ALIGN-1, and ALIGN-2 completed;
+I3-0 sole active goal. Reports retain detailed evidence.
 
 ## project axis
 
@@ -53,15 +53,15 @@ assurance. Real multi-process transport and product layers remain later.
 |---|---|---|
 | Logical specification | finite source -> Core -> artifact -> communication -> in-process trace/conformance accepted; Theory T1 and broad PHASE-I1 unaccepted | maintenance **着手可能**; general widening **後段依存** |
 | User-facing specification | provisional project/run/inspect/conform workflow exists; public grammar/CLI/JSON/API/ABI/wire/devtools unfrozen | regression **着手可能**; public contract **要仕様確認** |
-| Implementation / operation | I2 exit preserved; ALIGN-1 project/product constitution closed; ALIGN-2 active | ALIGN-2 **着手可能**; lifecycle entry not official |
+| Implementation / operation | I2 exit preserved; ALIGN-1/2 constitution and boundary contracts closed; I3-0 active | I3-0 **着手可能**; lifecycle entry not official |
 
 ```text
 Theory: T1
 Broad PHASE-I1: unaccepted (OPEN-026/027 + full carrier freeze)
 Official I2: entry accepted -> exit accepted (ADR-0032)
 ADR-0026 program: SYS-0--SYS-7 closed (ADR-0033)
-Active roadmap / goal: Plan 250 / ALIGN-2 sole active goal
-Sequence: ALIGN-0 completed → ALIGN-1 completed → ALIGN-2 active → I3-0..6 → NEXT-0
+Active roadmap / goal: Plan 250 / I3-0 sole active goal
+Sequence: ALIGN-0 completed → ALIGN-1 completed → ALIGN-2 completed → I3-0 active → I3-1..6 → NEXT-0
 I3 bounded program active; lifecycle entry not official; OPEN-032 unresolved
 ```
 
@@ -92,7 +92,8 @@ Sources: `mirrorea_canon/adr/ADR-0034.md`, `mirrorea_canon/plan/05-i3-entry-cont
 | SYS-6 | finite I2 conformance/lifecycle | closed `5429712d...`; OBL-063 / ADR-0032 |
 | ALIGN-0 | status/roadmap activation alignment | completed; Plan 250 |
 | ALIGN-1 | project/product layer constitution | closed; three-axis map accepted |
-| ALIGN-2 | Browser/Host/package/View/provider boundary contracts | sole active goal; no detailed contract accepted yet |
+| ALIGN-2 | Browser/Host/package/View/provider boundary contracts | completed; BND-007, BND-010..BND-016 and trust boundaries accepted |
+| I3-0 | transport candidate evidence and selection | sole active goal; both candidates UNSELECTED, OPEN-032 unresolved |
 | SYS-7 | inactive I3 entry contract only | closed; ADR-0033 / Canon plan/05 |
 
 ## line snapshots
@@ -126,7 +127,7 @@ leave/fresh incarnation. Arbitrary DAG theory remains deferred.
 Checked Core creates owned locus artifacts and generated plans; SYS-4 executes
 them across explicit endpoints. ST is the reference and selected OW1 is a
 separate exactly-one-worker source. Network refinement is authorized for the
-fixed later I3 milestones but is not implemented at current ALIGN-2.
+fixed I3 milestones but is not yet implemented at current I3-0.
 
 ### Engine/Provider line
 
@@ -145,8 +146,7 @@ browser/View/renderer, and upper applications remain separable.
 | implementation close | workspace, format, warnings-denied Clippy |
 | lifecycle close | independent I2/broad-I1/I3/no-roadmap review |
 
-ALIGN-0 changed Canon/docs/status only and is closed. ALIGN-1 changed Canon/docs/status only and is closed; ALIGN-2 is now active with no
-production source, runtime, Lean, model, OBL, SCN, or sample behavior delta yet.
+ALIGN-0 changed Canon/docs/status only and is closed. ALIGN-1 changed Canon/docs/status only and is closed. ALIGN-2 closed the Browser/Host/package/View/provider responsibility boundary: trust tier T0–T4 (Theory T0–T2 とは別), package admission and semantic grant remain separate, T1 has no raw FFI or direct store, and View permits presentation-local computation without authoritative domain semantics. I3-0 is now active with no transport selected.
 
 ## non-claims
 
@@ -161,7 +161,7 @@ theorem, exactly-once, lock-free runtime, or public completion is claimed.
 | Class | Item | Current state |
 |---|---|---|
 | Maintenance | accepted M10/I2 regressions and docs consistency | **着手可能** |
-| Active package | ALIGN-2 Browser/Host/package/View/provider contracts | **着手中**; ALIGN-1 constitution closed |
+| Active package | I3-0 transport comparison/selection | **着手中**; ALIGN-2 contracts closed |
 | Research discovery | candidate comparison, network failures/order, C-distributed gates | fixed I3-0/I3-3/I3-4 consumers |
 | Delegated decision | OPEN-032 transport choice | I3-0 equal canaries + ADR required |
 | Owner decision | public freeze or production | reserved |
@@ -171,7 +171,7 @@ theorem, exactly-once, lock-free runtime, or public completion is claimed.
 
 | Macro | Focus | Current position | Weight | Self-drive |
 |---|---|---|---|---|
-| 0 | governance/repository memory | ALIGN-0/ALIGN-1 completed; ALIGN-2 active | medium | ALIGN-2 boundary |
+| 0 | governance/repository memory | ALIGN-0--2 completed; I3-0 active | medium | transport selection evidence |
 | 1 | semantics/shared model | finite semantics through I2 | heavy | ADR-0014 research only |
 | 2 | parser-free evidence | historical | medium | maintenance |
 | 3 | source/checker/runtime | in-process I2 accepted | heavy | after ALIGN-1/2, I3-1/2 |
@@ -198,6 +198,11 @@ theorem, exactly-once, lock-free runtime, or public completion is claimed.
 
 ## recent log
 
+- 2026-09-01 23:03 JST: ALIGN-2 Browser/Host/package/View/provider boundaries
+  were accepted; BND-007 and BND-010..BND-016, trust tiers, typed reverse paths,
+  raw FFI separation, redaction, and resource termination responsibilities were
+  synchronized. I3-0 became the sole active goal; both transports remain
+  UNSELECTED and OPEN-032 unresolved.
 - 2026-09-01 22:22 JST: ALIGN-1 project/product three-axis map was accepted;
   PL-4 remained responsibility-only, PL-6 stayed separate, and ALIGN-2 became
   the sole active goal.
