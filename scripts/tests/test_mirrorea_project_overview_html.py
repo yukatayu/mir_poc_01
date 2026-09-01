@@ -8,6 +8,7 @@ from urllib.parse import unquote, urlsplit
 REPO_ROOT = Path(__file__).resolve().parents[2]
 HTML_PATH = REPO_ROOT / "docs" / "mirrorea-project-overview.html"
 DOCUMENTATION_PATH = REPO_ROOT / "Documentation.md"
+CANON_MAP_PATH = REPO_ROOT / "mirrorea_canon" / "MAP.md"
 
 
 class OverviewParser(HTMLParser):
@@ -84,10 +85,10 @@ class MirroreaProjectOverviewHtmlTests(unittest.TestCase):
             "ADR-0033 / SYS-7 I3 entry contract only",
             "PROPOSAL-037 / ADR-0034",
             "Mirrorea I3 Distributed Foundation bounded program",
-            "Plan 250 / ALIGN-1が現在地（activation only）",
+            "Plan 250 / ALIGN-2が現在地",
             "Plan 250がsole current roadmap",
-            "Mirrorea I3 Distributed Foundation / ALIGN-1 sole active goal",
-            "ALIGN-0 completed、ALIGN-2 next/not active",
+            "Mirrorea I3 Distributed Foundation / ALIGN-2 sole active goal",
+            "ALIGN-0 / ALIGN-1 completed、I3-0 next/not active",
             "I3 program active / lifecycle未entry",
             "official I3 lifecycle entryとproductionは主張しません",
             "closed / SYS-3",
@@ -155,6 +156,39 @@ class MirroreaProjectOverviewHtmlTests(unittest.TestCase):
         for phase in ("T0", "T1", "T2", "I1", "I2", "I3", "I4", "I5", "I6"):
             self.assertRegex(self.html, rf">\s*{phase}(?:\s|<)")
 
+    def test_requires_the_independent_three_axis_project_product_map(self) -> None:
+        required_terms = (
+            "独立した三軸",
+            "semantic strata（S0–S6）",
+            "project/product layers（PL-0–PL-6）",
+            "lifecycle / implementation phases（T0–T2 / I1–I6）",
+            "多対多",
+            "PL-0 Host / physical substrate",
+            "PL-1 Mir language and semantic kernel",
+            "PL-2 Mirrorea distributed fabric",
+            "PL-3 Mir Browser / Host safe participant runtime",
+            "PL-4 Shared-Space / World-Web platform",
+            "責任境界のみ",
+            "PL-5 Domain Kits and applications",
+            "PL-6 Reversed Library / knowledge-world project",
+            "Reversed LibraryはMirroreaのcompletion条件へ混ぜない",
+            "PrismCascadeとTyped-Effect Wiring Platformはsatelliteとして保持",
+        )
+        for term in required_terms:
+            self.assert_contains_marker(self.html, term, "HTML three-axis project/product map")
+
+        self.assertIn(
+            "../mirrorea_canon/architecture/06-project-product-layers.md",
+            self.parser.hrefs,
+            "HTML reader must link the normative project/product layer map",
+        )
+        self.assertNotRegex(self.html, r">\s*S7(?:\s|<)")
+        self.assert_omits_marker(
+            self.html,
+            "S0–S5 は意味層、S6 は host realization の境界です。",
+            "obsolete semantic-strata split",
+        )
+
     def test_removes_obsolete_pre_m0_current_state_claims(self) -> None:
         stale_claims = (
             "公式経路は T0 に留まる",
@@ -206,6 +240,11 @@ class MirroreaProjectOverviewHtmlTests(unittest.TestCase):
             "Plan 250 / ALIGN-0がactiveで",
             "Plan 250 / ALIGN-0 active</span>",
             "ALIGN-1はnext/not active",
+            "Plan 250 / ALIGN-1が現在地（activation only）",
+            "Mirrorea I3 Distributed Foundation / ALIGN-1 sole active goal",
+            "ALIGN-0 completed、ALIGN-2 next/not active",
+            "ALIGN-1 activation-only",
+            "ALIGN-0 completed / ALIGN-1 active",
             "現在 / SYS-7",
             "次 / SYS-7",
             "現在 / SYS-3",
@@ -273,7 +312,7 @@ class MirroreaProjectOverviewHtmlTests(unittest.TestCase):
         self.assert_contains_marker(documentation, "Plan 250 sole roadmap", "Documentation I3 program status")
         self.assert_contains_marker(
             documentation,
-            "ALIGN-0 completed, ALIGN-1 sole active goal, ALIGN-2 next (not active).",
+            "ALIGN-0 and ALIGN-1 completed, ALIGN-2 sole active goal.",
             "Documentation I3 program status",
         )
         self.assert_contains_marker(
@@ -291,6 +330,11 @@ class MirroreaProjectOverviewHtmlTests(unittest.TestCase):
             "ALIGN-0がactive/closingである",
             "Documentation stale ALIGN-0 state",
         )
+        self.assert_omits_marker(
+            documentation,
+            "ALIGN-0 completed, ALIGN-1 sole active goal, ALIGN-2 next (not active).",
+            "Documentation stale ALIGN-1 state",
+        )
         self.assert_contains_marker(documentation, "`ded622fe...`を", "Documentation SYS-3 history")
         self.assert_contains_marker(documentation, "partial regression evidenceへ", "Documentation SYS-3 history")
         self.assert_contains_marker(
@@ -298,6 +342,7 @@ class MirroreaProjectOverviewHtmlTests(unittest.TestCase):
             "corrected source/evidence cut `3013e7fe...`でclosed",
             "Documentation SYS-3 history",
         )
+
         self.assert_contains_marker(
             documentation,
             "SYS-4 accepted cut `22196f93b0112b8fd2987ec078021c8865b71651`",
@@ -342,6 +387,13 @@ class MirroreaProjectOverviewHtmlTests(unittest.TestCase):
         self.assert_omits_marker(documentation, "next goal は SYS-7", "Documentation stale SYS status")
         self.assert_omits_marker(documentation, "SYS-7 active", "Documentation stale SYS status")
         self.assert_omits_marker(documentation, "active goal はSYS-7", "Documentation stale SYS status")
+
+    def test_canon_map_uses_the_current_align_frontier(self) -> None:
+        canon_map = CANON_MAP_PATH.read_text(encoding="utf-8")
+
+        self.assert_contains_marker(canon_map, "ALIGN-0/1はclosed", "Canon MAP ALIGN close state")
+        self.assert_contains_marker(canon_map, "ALIGN-2がsole active goal", "Canon MAP active goal")
+        self.assert_omits_marker(canon_map, "ALIGN-1がactiveである", "Canon MAP stale ALIGN-1 state")
 
 
 if __name__ == "__main__":

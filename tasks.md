@@ -1,6 +1,6 @@
 # Current Task Map (LAB)
 
-最終更新: 2026-09-01 22:05 JST
+最終更新: 2026-09-01 22:30 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -17,8 +17,8 @@ milestone or Canon L2 promotion.
 
 ## current promoted package
 
-**ALIGN-1 (sole active goal; activation only).** PROPOSAL-037 / ADR-0034 authorize the bounded
-Mirrorea I3 Distributed Foundation program. ALIGN-0 is completed; ALIGN-2 is next and not active;
+**ALIGN-2 (sole active goal).** PROPOSAL-037 / ADR-0034 authorize the bounded
+Mirrorea I3 Distributed Foundation program. ALIGN-0 and ALIGN-1 are completed; ALIGN-2 is active;
 fixed sequence: ALIGN-0..2 → I3-0..6 → NEXT-0. Official I3 lifecycle entry is
 not claimed.
 
@@ -33,7 +33,7 @@ evaluated. The bounded I3 program is active, while lifecycle entry and OPEN-032
 remain unresolved. Both candidates remain UNSELECTED; QUIC datagrams are
 excluded.
 
-Direct consumer: the active Plan 250 ALIGN-1 goal; no ALIGN-1 work/evidence has started.
+Direct consumer: the active Plan 250 ALIGN-2 goal; ALIGN-1 architecture/status evidence is closed.
 
 Primary falsifier: a change selects transport before equal I3-0 executable
 canaries and its ADR, treats transport metadata as authority, hides
@@ -46,19 +46,19 @@ Sources: `mirrorea_canon/adr/ADR-0034.md`,
 
 ## ordered self-driven packages
 
-Only ALIGN-1 is active (activation only). Later packages become active one at a time after the
+Only ALIGN-2 is active. Later packages become active one at a time after the
 preceding report, validation, review, commit/push, and remote parity close:
 
 | Order | Package | Capability / evidence | Current state / rough estimate |
 |---|---|---|---|
 | 1 | ALIGN-0 | authority, sole roadmap, baseline, meta-drift control | completed; Macro 0 front, short |
-| 2 | ALIGN-1 | three-axis architecture and Browser/Host/View/provider trust boundaries | sole active goal (activation only); Macro 0 middle, medium |
-| 3 | ALIGN-2 | execution/evidence boundary | next; not active |
-| 3 | I3-0 | equal transport canaries and one selected adapter ADR | later; Macro 6 front, heavy |
-| 4 | I3-1 / I3-2 | checked private encoding, adapter, and real multi-process runtime | later; Macro 6 middle, heavy |
-| 5 | I3-3 / I3-4 | full finite fault/order matrix and C-distributed scenarios | later; Macro 5/6 middle, heavy |
-| 6 | I3-5 / I3-6 | joined network workflow and finite conformance/lifecycle close | later; Macro 6/7 close, heavy |
-| 7 | NEXT-0 | two separate inactive I4/I5 entry contracts only | reserve path, short |
+| 2 | ALIGN-1 | three-axis architecture and project/product responsibility map | completed; Macro 0 middle, medium |
+| 3 | ALIGN-2 | Browser/Host/package/View/provider responsibility contracts | sole active goal; Macro 1 front, medium |
+| 4 | I3-0 | equal transport canaries and one selected adapter ADR | later; Macro 6 front, heavy |
+| 5 | I3-1 / I3-2 | checked private encoding, adapter, and real multi-process runtime | later; Macro 6 middle, heavy |
+| 6 | I3-3 / I3-4 | full finite fault/order matrix and C-distributed scenarios | later; Macro 5/6 middle, heavy |
+| 7 | I3-5 / I3-6 | joined network workflow and finite conformance/lifecycle close | later; Macro 6/7 close, heavy |
+| 8 | NEXT-0 | two separate inactive I4/I5 entry contracts only | reserve path, short |
 
 Plan 250 authorizes socket/process implementation and transport selection only
 at their fixed milestone gates. It does not authorize public wire freeze,
@@ -68,10 +68,10 @@ production deployment, or official I3 entry before I3-6 acceptance.
 
 | Macro | Current state | Startability |
 |---|---|---|
-| 0 governance/repository memory | ALIGN-0 completed; ALIGN-1 activation-only | active; short |
+| 0 governance/repository memory | ALIGN-0 and ALIGN-1 completed; ALIGN-2 active | active; medium |
 | 1 semantic kernel | finite kernel/backend/projection/runtime accepted | maintenance / ADR-0014 L3 |
 | 2 parser-free history | retained; not current architecture | maintenance |
-| 3 source/checker/runtime | source-first I2 boundary accepted | ALIGN-1/2 first; I3-1/2 later |
+| 3 source/checker/runtime | source-first I2 boundary accepted | ALIGN-2 first; I3-1/2 later |
 | 4 executable samples | four-locus toy + conform reproducible | regression only |
 | 5 theorem/model bridge | OBL-058 bounded; 059--063 runtime | class maintenance |
 | 6 generated/distributed fabric | in-process accepted; network absent | fixed I3-0..6 sequence authorized |
@@ -98,7 +98,7 @@ unoptimized performance, and incomplete I3+ do not activate a task.
 
 ## research discovery items
 
-These are fixed later milestones, not parallel queues while ALIGN-1 is active:
+These are fixed later milestones, not parallel queues while ALIGN-2 is active:
 
 | Question | Direct consumer | Evidence required | Boundary |
 |---|---|---|---|
@@ -127,7 +127,7 @@ WRKs do not become a queue automatically.
 - Reopen SYS-7 wording only for authority collapse, a missing required network
   failure/order case, premature selection/freeze, or unusable direct-consumer
   contract.
-- Do not create another roadmap or activate ALIGN-2 before ALIGN-1 closes under
+- Do not create another roadmap or activate I3-0 before ALIGN-2 closes under
   the fixed sequence and owner boundaries.
 
 ## non-promoted references
@@ -135,5 +135,5 @@ WRKs do not become a queue automatically.
 Historical plans, reports, WRKs, Product Alpha, Full System V1, Surface Mir,
 parser-free helpers, View/provider samples, and candidate transports are
 repository memory or future consumers, not parallel active queues. ALIGN-0
-activation does not authorize OPEN-032 selection; both candidates remain
+ALIGN-1 closure does not authorize OPEN-032 selection; both candidates remain
 UNSELECTED.

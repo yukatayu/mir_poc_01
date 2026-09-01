@@ -34,19 +34,19 @@ repo-local な **大局整理の軸** を固定する。
 | `Macro 7` | toolchain / backend / developer surface / public operational interface |
 | `Macro 8` | domain / application realization |
 
-### Axis B — Feature maturity stages
+### Axis B — Feature maturity stages (`FM-0`--`FM-6`)
 
 各 feature family は、必要に応じて次の maturity stage で表す。
 
 | Stage | 意味 |
 |---|---|
-| `S0` | 要求探索前。何を解くかをまだ絞っている段階 |
-| `S1` | 理論骨格。用語・境界・主要論点は見え始めたが、まだ骨格だけ |
-| `S2` | 論理学 / 計算機科学 / invariant の整理段階 |
-| `S3` | current spec / boundary convergence。docs-first で current cut が見えている |
-| `S4` | narrow implementation。helper-local / non-production を含む最小 actualization がある |
-| `S5` | executable / validation ratchet。test / smoke / regression が通る経路がある |
-| `S6` | sample / human docs integration。FAQ / README / progress / examples と同期されている |
+| `FM-0` | 要求探索前。何を解くかをまだ絞っている段階 |
+| `FM-1` | 理論骨格。用語・境界・主要論点は見え始めたが、まだ骨格だけ |
+| `FM-2` | 論理学 / 計算機科学 / invariant の整理段階 |
+| `FM-3` | current spec / boundary convergence。docs-first で current cut が見えている |
+| `FM-4` | narrow implementation。helper-local / non-production を含む最小 actualization がある |
+| `FM-5` | executable / validation ratchet。test / smoke / regression が通る経路がある |
+| `FM-6` | sample / human docs integration。FAQ / README / progress / examples と同期されている |
 
 ## Snapshot writing rules
 

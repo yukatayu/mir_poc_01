@@ -2,8 +2,8 @@
 id: plan/02-operating-model
 status: L1-fixed
 maturity: reviewed
-depends_on: [adr/ADR-0012, adr/ADR-0014, adr/ADR-0015, adr/ADR-0026, adr/ADR-0033, adr/ADR-0034]
-summary: closed programs、active ADR-0034 program、program外L3 researchを分離し、goal/frontier/roadmap/report/review/evidence規律を定める。
+depends_on: [adr/ADR-0012, adr/ADR-0014, adr/ADR-0015, adr/ADR-0026, adr/ADR-0033, adr/ADR-0034, adr/ADR-0035]
+summary: active ADR-0034 program/ADR-0035三軸map、program外L3 research、goal/frontier/review規律。
 open_items: []
 ---
 
@@ -15,7 +15,7 @@ Four profiles are deliberately separate.
 
 1. **Mirrorea I3 Distributed Foundation** follows ADR-0034 and
    PROPOSAL-037. Its fixed sequence is ALIGN-0--2, I3-0--6, NEXT-0; Plan 250
-   is its sole current roadmap, ALIGN-0 is completed, and ALIGN-1 is the active frontier.
+   is its sole current roadmap. ALIGN-0/1 are completed and ALIGN-2 is the active frontier.
 2. **Mirrorea I2 Systems Foundation SYS-0--SYS-7** followed ADR-0026 and
    PROPOSAL-029. It is closed by ADR-0033; its accepted cuts and Plan 249 are
    immutable history/regression baseline and grant no I3 or successor authority.

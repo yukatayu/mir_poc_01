@@ -9,7 +9,9 @@ open_items: [OPEN-001]
 
 # Glossary — 概念台帳
 
-層は architecture/01 の S0(Surface)〜S7 を指す。状態は canon の状態語彙。
+semantic stratumはarchitecture/01のS0(Surface)〜S6(Host)を指す。旧LABの
+realization S0--S7、architecture/06のPL-0--PL-6、plan/01のphaseとは別軸である。
+状態はcanonの状態語彙。
 
 | ID | 用語 | 定義 | 層 | 状態 |
 |---|---|---|---|---|
@@ -50,7 +52,7 @@ open_items: [OPEN-001]
 | CON-035 | Devtools observation | 型付き・redaction 単調・retention 明示の観測面 | S2/S3 | L1 |
 | CON-036 | Diagnostic | 差し戻しの一級成果物。規則インスタンス+span+修理提案 | S3 | L1 |
 | CON-037 | Obligation (OBL) | checker が discharge しない義務の明示 carrier | S3 | L1 |
-| CON-038 | Stratum | S0 Surface / S1 Core / S2 Trace / S3 Verify / S4 Projection / S5 Domain(+S6 Host, S7 App) | 横断 | L1 |
+| CON-038 | Stratum | S0 Surface / S1 Core / S2 Trace / S3 Verify / S4 Projection / S5 Domain / S6 Host。PL又はphaseを兼ねない | 横断 | L1 |
 | CON-039 | Canon / LAB | 本正本 / 旧 repo(evidence 置き場) | meta | L0 |
 | CON-040 | Two-layer time | 離散検証遷移と高頻度ストリームの二層時間。frontier で接続 | S1/S2 | L2 |
 

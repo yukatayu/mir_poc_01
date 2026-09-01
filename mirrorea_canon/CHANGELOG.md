@@ -18,6 +18,16 @@ open_items: []
 
 ## 履歴
 
+- **2026-09-01** PROPOSAL-038 / ADR-0035 / architecture/06によりALIGN-1の
+  three-axis architectureを受理した。current semantic strataをS0 Surface--S6 Host、
+  project/product responsibilityをPL-0--PL-6、lifecycleをT0--T2 / I1--I6として
+  独立したmany-to-many座標に固定し、旧LAB realization S0--S7とfeature maturityの
+  S再利用をcurrent semantic axisから除いた。PL-4はShared-Space/World-Webの
+  responsibility-only horizon、PL-6はReversed Libraryのseparate application/project、
+  PrismCascade / Typed-Effect Wiring Platformはsatelliteのままである。runtime、sample、
+  theory/proof/OBL、official lifecycle、OPEN-032、transport/public/product/productionは
+  変更せず、ALIGN-1をclosed、ALIGN-2をsole active goal、I3-0をnext/not activeとした。
+
 - **2026-09-01** PROPOSAL-037 / ADR-0034 により Mirrorea I3 Distributed
   Foundation bounded programを開始した。accepted I2 cutsをregression baselineに、
   LAB Plan 250をsole current roadmap、ALIGN-0をactive goalとする。fixed sequenceは
@@ -29,8 +39,8 @@ open_items: []
   observer-safe gate evidenceを担い、I3-5は既存factだけをjoinする。program activationは
   official I3 entry/exitではない。theory T1、broad PHASE-I1、official I2 exit、public /
   production non-claimsを維持し、両候補とOPEN-032は未決のままである。ALIGN-0は
-  accepted I2 regressionとmeta-drift reviewを経たcut `2f198105...`でclosedし、ALIGN-1を
-  sole active goalへ進めた。
+  accepted I2 regressionとmeta-drift reviewを経たcut `2f198105...`でclosedした。
+  後続ALIGN-1 acceptanceはPROPOSAL-038 / ADR-0035に記録する。
 
 - **2026-08-28** PROPOSAL-036 / ADR-0033 / plan/05によりSYS-7 inactive I3
   entry contractを受理した。future goalはaccepted I2 per-locus artifactsとgenerated

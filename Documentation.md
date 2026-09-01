@@ -17,7 +17,7 @@ I3 roadmap は `plan/250-mirrorea-i3-distributed-foundation-current-roadmap.md`�
 下の `plan/` 索引は時系列の LAB repository memory です。索引にある候補や過去の
 「次」は current queue を意味しません。Plan 247とPlan 249はclosed execution
 recordsである。PROPOSAL-037 / ADR-0034によりI3 bounded programがactive、Plan 250が
-sole current roadmap、ALIGN-0 completed、ALIGN-1がsole active goalである。older plansもhistorical
+sole current roadmap、ALIGN-0とALIGN-1がcompleted、ALIGN-2がsole active goalである。older plansもhistorical
 memoryです。現在の停止線は
 `docs/project-status.md`、`progress.md`、`tasks.md` で確認します。
 
@@ -60,7 +60,10 @@ ADR-0033 / Canon plan 05はSYS-7を閉じ、TLS-over-TCP framed reliable stream�
 reliable streamをともにUNSELECTEDとしたtransport-neutralなinactive I3 entry contract
 だけを記録した。PROPOSAL-037 / ADR-0034は公式I3 lifecycle entryを主張せずbounded
 programを開始した。QUIC datagramは除外、OPEN-032は未解決、両候補はUNSELECTEDである。
-ALIGN-0..2 → I3-0..6 → NEXT-0を固定順序とする。theory T1とbroad PHASE-I1は不変。M2 は
+ALIGN-1では `mirrorea_canon/architecture/06-project-product-layers.md` の三軸 map（semantic
+strata S0--S6、project/product PL-0--PL-6、lifecycle T0--T2 / I1--I6）を独立した
+many-to-many座標として固定した。PL-4は責任境界のみ、PL-6は別application、PrismCascade/
+Typed-Effectはsatelliteのままである。ALIGN-0..2 → I3-0..6 → NEXT-0を固定順序とする。theory T1とbroad PHASE-I1は不変。M2 は
 `mirrorea_canon/plan/04-t0-g0-semantic-assertion-profile.md` と ADR-0017 に、revision
 `644ec1cdfa7d69600af3463ab60a6b7d745913c8` から再生成した v3 `pass` digest を記録し、
 G0-D3、G0 exit、T1 entry を順に受理した。official lifecycle は `T1` のままであり、
@@ -249,7 +252,10 @@ recordが揃ったためofficial I2 entry後exitを受理しました。broad PH
   SYS-6 implementation/evidence cut is `5429712d...`, Canon/status integration
   cut is `bcb0f767...`, and official I2 entry then exit is accepted.
 - in-progress: PROPOSAL-037 / ADR-0034 bounded I3 program; Plan 250 sole roadmap;
-  ALIGN-0 completed, ALIGN-1 sole active goal, ALIGN-2 next (not active).
+  ALIGN-0 and ALIGN-1 completed, ALIGN-2 sole active goal.
+- decisions taken: ALIGN-1 accepted the independent three-axis project/product
+  map; PL-4 remains responsibility-only, PL-6 remains separate, and satellites
+  remain outside the numbered product layers.
 - blocked/deferred: I3 lifecycle entry and OPEN-032 resolution remain unresolved;
   both reliable-stream candidates are UNSELECTED and QUIC datagrams excluded. Broad PHASE-I1 exit,
   final public API/ABI/wire/carrier freeze, production, and browser/View product

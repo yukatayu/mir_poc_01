@@ -3,12 +3,16 @@ id: arch/readme
 status: L1-fixed
 maturity: draft
 depends_on: [theory/00-overview]
-summary: 階層区分・層間契約・toolchain 責務・carrier 正本・衛星系の読み方。
+summary: semantic strata、PL責任層、層間契約、toolchain、carrier、衛星系の読み方。
 open_items: []
 ---
 
 # architecture/ — 階層と契約
 
-01 層の統一図(グローバル層 × 実現層 × 理論層) → 02 層間契約 BND-001..009 → 03 toolchain の責務 → 04 runtime carrier 正本 → 05 衛星系(PrismCascade / TEWP)。
+01 semantic strata S0--S6 → 02 層間契約 BND-001..009 → 03 toolchain の責務 →
+04 runtime carrier 正本 → 05 衛星系(PrismCascade / TEWP) → 06 separate
+project/product responsibility layers PL-0--PL-6 と三軸map。
 
-ここから推論してはいけないこと: 契約や carrier の存在は実装の存在を意味しない。carrier のフィールド名は L2(凍結は PHASE-I1 出口)。
+ここから推論してはいけないこと: semantic S番号、project/product PL番号、lifecycle
+phase番号は同一軸でも一対一対応でもない。契約や carrier の存在は実装の存在を
+意味しない。carrier のフィールド名は L2(凍結は PHASE-I1 出口)。

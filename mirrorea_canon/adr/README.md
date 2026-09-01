@@ -47,3 +47,4 @@ open_items: []
 | ADR-0032 | source-first finite I2 conformanceをcut `5429712d...`で採用、broad I1を残してofficial I2 entry後exit、SYS-6 close | L1 |
 | ADR-0033 | transport-neutral inactive I3 entry contractを採用し、候補未選定・I3 inactiveのままSYS-7 / ADR-0026 program close | L1 |
 | ADR-0034 | project/product layer整合、Browser/Host境界、finite C-distributed I3を固定順で進めるowner-delegated bounded programを採用 | 運用 L0 |
+| ADR-0035 | semantic S0--S6、project/product PL-0--PL-6、lifecycle T/Iを独立したmany-to-many軸として採用しALIGN-1 close | L1 |

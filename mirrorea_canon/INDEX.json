@@ -1,6 +1,6 @@
 {
  "canon_version": "0.1.0",
- "files": 193,
+ "files": 196,
  "entries": [
   {
    "id": "root/changelog",
@@ -12,7 +12,7 @@
    "summary": "canon 自体の版履歴と改定手続きの要約。",
    "open_items": [],
    "path": "CHANGELOG.md",
-   "bytes": 27450
+   "bytes": 28298
   },
   {
    "id": "root/design-constitution",
@@ -40,7 +40,7 @@
     "OPEN-001"
    ],
    "path": "GLOSSARY.md",
-   "bytes": 5543
+   "bytes": 5681
   },
   {
    "id": "root/map",
@@ -52,7 +52,7 @@
    "summary": "知識マップ 1 枚。全域の依存図、3 種の読み筋、ID 体系。",
    "open_items": [],
    "path": "MAP.md",
-   "bytes": 29495
+   "bytes": 29587
   },
   {
    "id": "root/north-star",
@@ -74,7 +74,7 @@
    "summary": "canon の入口。正本宣言、LAB(既存 repo)との関係、読み順、版。",
    "open_items": [],
    "path": "README.md",
-   "bytes": 4553
+   "bytes": 4806
   },
   {
    "id": "adr/ADR-0001",
@@ -571,6 +571,22 @@
    "bytes": 5309
   },
   {
+   "id": "adr/ADR-0035",
+   "status": "L1-fixed",
+   "maturity": "reviewed",
+   "depends_on": [
+    "adr/ADR-0034",
+    "meta/proposal-038",
+    "arch/01-strata",
+    "arch/06-project-product-layers",
+    "plan/01-phases"
+   ],
+   "summary": "semantic S0--S6、project/product PL-0--PL-6、lifecycle T/Iを別軸として採用し、ALIGN-1を閉じる。",
+   "open_items": [],
+   "path": "adr/ADR-0035.md",
+   "bytes": 3051
+  },
+  {
    "id": "adr/readme",
    "status": "L1-fixed",
    "maturity": "draft",
@@ -580,7 +596,7 @@
    "summary": "決定記録の一覧と読み方。LAB の決定台帳(specs/12)との関係。",
    "open_items": [],
    "path": "adr/README.md",
-   "bytes": 4487
+   "bytes": 4629
   },
   {
    "id": "arch/01-strata",
@@ -590,10 +606,10 @@
     "arch/readme",
     "root/glossary"
    ],
-   "summary": "LAB の L0-L5 と S0-S7 と theory の S0-S5 を一枚に統一した層モデル。",
+   "summary": "current semantic S0--S6とlegacy LAB layer labelsを区別する意味層モデル。",
    "open_items": [],
    "path": "architecture/01-strata.md",
-   "bytes": 1602
+   "bytes": 2164
   },
   {
    "id": "arch/02-boundary-contracts",
@@ -673,16 +689,35 @@
    "bytes": 1491
   },
   {
+   "id": "arch/06-project-product-layers",
+   "status": "L1-fixed",
+   "maturity": "reviewed",
+   "depends_on": [
+    "root/north-star",
+    "root/design-constitution",
+    "arch/01-strata",
+    "arch/02-boundary-contracts",
+    "arch/05-satellites",
+    "adr/ADR-0034",
+    "adr/ADR-0035",
+    "plan/01-phases"
+   ],
+   "summary": "semantic strata・project/product responsibility layers・lifecycle phasesを分離する三軸mapとPL-0--PL-6の責任境界。",
+   "open_items": [],
+   "path": "architecture/06-project-product-layers.md",
+   "bytes": 9470
+  },
+  {
    "id": "arch/readme",
    "status": "L1-fixed",
    "maturity": "draft",
    "depends_on": [
     "theory/00-overview"
    ],
-   "summary": "階層区分・層間契約・toolchain 責務・carrier 正本・衛星系の読み方。",
+   "summary": "semantic strata、PL責任層、層間契約、toolchain、carrier、衛星系の読み方。",
    "open_items": [],
    "path": "architecture/README.md",
-   "bytes": 619
+   "bytes": 777
   },
   {
    "id": "mm/01-programmer-view",
@@ -747,12 +782,14 @@
     "adr/ADR-0026",
     "adr/ADR-0033",
     "adr/ADR-0034",
+    "adr/ADR-0035",
+    "arch/06-project-product-layers",
     "plan/02-operating-model"
    ],
-   "summary": "agent の読込、closed programs、active ADR-0034 program、program外L3 research、review/owner escalation境界。",
+   "summary": "agent の読込、active ADR-0034 program/ADR-0035三軸map、program外L3 research、review境界。",
    "open_items": [],
    "path": "meta/agent-instructions.md",
-   "bytes": 4483
+   "bytes": 4568
   },
   {
    "id": "meta/proposal-001",
@@ -1383,6 +1420,23 @@
    "bytes": 8153
   },
   {
+   "id": "meta/proposal-038",
+   "status": "L1-fixed",
+   "maturity": "reviewed",
+   "depends_on": [
+    "root/north-star",
+    "root/design-constitution",
+    "meta/proposal-037",
+    "adr/ADR-0034",
+    "arch/01-strata",
+    "plan/01-phases"
+   ],
+   "summary": "ALIGN-1でsemantic strata・PL責任層・lifecycle phaseを分離し、PL-0--PL-6の三軸mapを採用する提案。",
+   "open_items": [],
+   "path": "meta/proposals/PROPOSAL-038-align1-project-product-layer-map.md",
+   "bytes": 3702
+  },
+  {
    "id": "meta/source-hierarchy",
    "status": "L0-frozen",
    "maturity": "draft",
@@ -1392,12 +1446,13 @@
     "adr/ADR-0015",
     "adr/ADR-0026",
     "adr/ADR-0033",
-    "adr/ADR-0034"
+    "adr/ADR-0034",
+    "adr/ADR-0035"
    ],
-   "summary": "canon > LAB、closed programs、active ADR-0034 program、program外ADR-0014 routeの境界。",
+   "summary": "canon > LAB、active ADR-0034 program/ADR-0035三軸map、program外ADR-0014 routeの境界。",
    "open_items": [],
    "path": "meta/source-hierarchy.md",
-   "bytes": 3650
+   "bytes": 3715
   },
   {
    "id": "meta/style-guide",
@@ -1452,14 +1507,15 @@
     "adr/ADR-0032",
     "adr/ADR-0033",
     "adr/ADR-0034",
+    "adr/ADR-0035",
     "plan/04-t0-g0-semantic-assertion-profile"
    ],
-   "summary": "実装フェーズT0-T2/I1-I6。theory T1、broad I1 residual、official I2 exit、active ADR-0034 programとI3 lifecycle未entryを分離する。",
+   "summary": "lifecycle T0-T2/I1-I6をS/PL軸から分離し、T1・I2 exit・ALIGN-2・I3未entryを記録する。",
    "open_items": [
     "OPEN-032"
    ],
    "path": "plan/01-phases.md",
-   "bytes": 14978
+   "bytes": 15000
   },
   {
    "id": "plan/02-operating-model",
@@ -1471,12 +1527,13 @@
     "adr/ADR-0015",
     "adr/ADR-0026",
     "adr/ADR-0033",
-    "adr/ADR-0034"
+    "adr/ADR-0034",
+    "adr/ADR-0035"
    ],
-   "summary": "closed programs、active ADR-0034 program、program外L3 researchを分離し、goal/frontier/roadmap/report/review/evidence規律を定める。",
+   "summary": "active ADR-0034 program/ADR-0035三軸map、program外L3 research、goal/frontier/review規律。",
    "open_items": [],
    "path": "plan/02-operating-model.md",
-   "bytes": 8922
+   "bytes": 8890
   },
   {
    "id": "plan/03-risks",
@@ -1511,7 +1568,9 @@
    "depends_on": [
     "adr/ADR-0033",
     "adr/ADR-0034",
+    "adr/ADR-0035",
     "arch/04-runtime-carriers",
+    "arch/06-project-product-layers",
     "theory/04-ordering-and-cuts",
     "theory/05-authority",
     "theory/07-observation",
@@ -1527,7 +1586,7 @@
     "OPEN-032"
    ],
    "path": "plan/05-i3-entry-contract.md",
-   "bytes": 11959
+   "bytes": 12008
   },
   {
    "id": "plan/readme",
@@ -1540,12 +1599,13 @@
     "adr/ADR-0026",
     "adr/ADR-0033",
     "adr/ADR-0034",
+    "adr/ADR-0035",
     "plan/02-operating-model"
    ],
-   "summary": "Gate/Phase二軸、closed programs、active ADR-0034 program、program外ADR-0014 routeの計画読解。",
+   "summary": "Gate/Phase、active ADR-0034 program/ADR-0035三軸map、program外ADR-0014 routeの計画読解。",
    "open_items": [],
    "path": "plan/README.md",
-   "bytes": 1442
+   "bytes": 1518
   },
   {
    "id": "scenarios/readme",
@@ -1996,10 +2056,10 @@
     "adr/ADR-0002",
     "root/glossary"
    ],
-   "summary": "意味層 S0-S5、4 本のグラフ族、理論全体の分業と依存の見取り図。",
+   "summary": "formal theoryが扱う意味層S0-S5、S6 Host境界、4 graph族と理論分業の見取り図。",
    "open_items": [],
    "path": "theory/00-overview.md",
-   "bytes": 3185
+   "bytes": 3477
   },
   {
    "id": "theory/01-mircore-v0",

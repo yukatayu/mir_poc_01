@@ -38,10 +38,12 @@ roadmap/status pointer の一致を検証する。
   `bcb0f767edbb3e9e581c3b4c7f2a49e077f44067`
 - accepted ALIGN-0 integration cut:
   `2f19810500b07d4b924b8201545dc2dc397c5f54`
+- accepted ALIGN-1 architecture decision: PROPOSAL-038 / ADR-0035
+  (the milestone integration commit cannot embed its own future hash)
 - sole current roadmap: **Plan 250**
-- completed goal: **ALIGN-0**
-- sole active goal: **ALIGN-1**
-- next goal after accepted ALIGN-1 close: **ALIGN-2**
+- completed goals: **ALIGN-0, ALIGN-1**
+- sole active goal: **ALIGN-2**
+- next goal after accepted ALIGN-2 close: **I3-0**
 - all other milestones: **ordered, inactive, and dependency-gated**
 - Plan 247: closed M0--M10 execution record / regression baseline
 - Plan 249: closed SYS-0--SYS-7 execution record / accepted I2 baseline
@@ -242,8 +244,8 @@ and are exactly one per milestone:
 | Milestone | Report path | Status at program start |
 | --- | --- | --- |
 | ALIGN-0 | `docs/reports/2600-mirrorea-i3-distributed-foundation-align0-baseline-goal-alignment.md` | completed |
-| ALIGN-1 | `docs/reports/2601-mirrorea-i3-distributed-foundation-align1-layer-map.md` | active report |
-| ALIGN-2 | `docs/reports/2602-mirrorea-i3-distributed-foundation-align2-trust-boundaries.md` | inactive |
+| ALIGN-1 | `docs/reports/2601-mirrorea-i3-distributed-foundation-align1-layer-map.md` | completed |
+| ALIGN-2 | `docs/reports/2602-mirrorea-i3-distributed-foundation-align2-trust-boundaries.md` | active report |
 | I3-0 | `docs/reports/2603-mirrorea-i3-distributed-foundation-i3-0-transport-selection.md` | inactive |
 | I3-1 | `docs/reports/2604-mirrorea-i3-distributed-foundation-i3-1-adapter-encoding.md` | inactive |
 | I3-2 | `docs/reports/2605-mirrorea-i3-distributed-foundation-i3-2-two-process-runtime.md` | inactive |
@@ -428,7 +430,7 @@ semantics, authority, or evidence without the current milestone gates.
 | no public View/devtools contract | SYS-5 JSON is provisional observer-safe evidence; presentation-local computation is allowed but authoritative domain semantics remains in Mir | ALIGN-2/I3-5; inactive I5 |
 | no Shared-Space/product platform semantics | record PL position, lower requirements, upper promises, non-primitives, and deferred questions only | ALIGN-1; inactive future owner program |
 
-## ALIGN-1 milestone contract — active
+## ALIGN-1 milestone contract — completed
 
 **Goal:** Record one canonical three-axis map that keeps semantic strata,
 project/product responsibility layers, and lifecycle phases distinct.
@@ -486,7 +488,7 @@ the owner direction, domain/provider/app collapse, or any irreversible public
 surface. Reopen for a cross-axis ambiguity that permits two different owners or
 lifecycle readings for the same responsibility.
 
-## ALIGN-2 milestone contract — inactive until ALIGN-1 closes
+## ALIGN-2 milestone contract — active
 
 **Goal:** Define non-freezing trust contracts and resource/sandbox boundaries
 for packages, Browser/Host participation, View/renderer separation, typed
@@ -1097,10 +1099,10 @@ integration, or Typed-Effect platform collapse.
 
 ## Recommended next action
 
-Execute ALIGN-1 only: add the separate Canon project/product-layer document,
-reconcile the existing semantic-strata numbering without changing settled
-semantics, record responsibility/input/output/prohibition/maturity for PL-0--6,
-keep PL-4 responsibility-only and PL-6 separate, validate no production/runtime
-behavior delta, obtain independent architecture review, write Report 2601,
-commit/push with parity, then advance exactly to ALIGN-2. Do not begin ALIGN-2
-or transport comparison before ALIGN-1 closes.
+Execute ALIGN-2 only: define the non-freezing Browser/Host/package/View/provider
+trust tiers, admission and typed reverse/effect paths, resource/sandbox
+responsibilities, and the BND-007 presentation-local-computation clarification
+against the accepted ADR-0035 three-axis map. Choose no package format, sandbox
+technology, public FFI/API/ABI or engine plugin ABI. Validate and independently
+review Report 2602, commit/push with parity, then advance exactly to I3-0. Do
+not begin transport canaries before ALIGN-2 closes.

@@ -3,7 +3,7 @@ id: theory/00-overview
 status: L1-fixed
 maturity: draft
 depends_on: [adr/ADR-0001, adr/ADR-0002, root/glossary]
-summary: 意味層 S0-S5、4 本のグラフ族、理論全体の分業と依存の見取り図。
+summary: formal theoryが扱う意味層S0-S5、S6 Host境界、4 graph族と理論分業の見取り図。
 open_items: []
 ---
 
@@ -20,7 +20,11 @@ open_items: []
 | S4 Projection | per-locus artifacts, generated communication boundaries, provider/view seam | treating projection as final ABI/codegen |
 | S5 Domain / library | World, Room, Avatar, Portal, game logic | smuggling sample vocabulary into core |
 
-(S6 Host, S7 Application appear in architecture/01 as realization strata; theory only needs S0–S5.)
+The current semantic axis additionally includes `S6 Host` as the
+non-authoritative realization boundary (`arch/01-strata`). These formal theory
+chapters need only S0–S5; that scope does not make S6 optional or make legacy
+`S7 Application` a current semantic stratum. Applications remain S5 domain
+semantics and separate PL-5/PL-6 responsibilities (`arch/06-project-product-layers`).
 
 The project axis in one line of theory: **S0 stays ordinary; S1–S4 make every hidden consequence explicit and diagnosable.** Reads are dependencies; writes are occurrences (ADR-0002).
 

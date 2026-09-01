@@ -1,6 +1,6 @@
 # Project status
 
-最終更新: 2026-09-01 22:05 JST
+最終更新: 2026-09-01 22:30 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -26,13 +26,13 @@ closed M0--M10 finite reference baseline
 -> [x] SYS-6 finite I2 assurance / lifecycle closeout
 -> [x] SYS-7 inactive I3 entry contract only / program closed
 -> [x] ALIGN-0 bounded-program activation / meta-drift alignment (completed)
--> [ ] ALIGN-1 project/product layer constitution (sole active goal)
--> [ ] ALIGN-2 execution/evidence boundary (next, not active)
+-> [x] ALIGN-1 project/product layer constitution (completed)
+-> [ ] ALIGN-2 Browser/Host/package/View/provider boundary contracts (sole active goal)
 ```
 
 Plan 247とPlan 249はclosed recordsである。PROPOSAL-037 / ADR-0034により
 Mirrorea I3 Distributed Foundation bounded programがactiveで、Plan 250がsole
-current roadmap、ALIGN-0がcompleted、ALIGN-1がsole active goalである。
+current roadmap、ALIGN-0とALIGN-1がcompleted、ALIGN-2がsole active goalである。
 
 ## 現在地
 
@@ -42,7 +42,7 @@ current roadmap、ALIGN-0がcompleted、ALIGN-1がsole active goalである。
 | broad PHASE-I1 | **unaccepted**; OPEN-026/027とfull carrier freezeが残る | `mirrorea_canon/architecture/04-runtime-carriers.md` |
 | bounded I2 lifecycle | **official entry accepted, then official exit accepted** | `mirrorea_canon/adr/ADR-0032.md` |
 | ADR-0026 program | **SYS-0--SYS-7 closed** | `mirrorea_canon/adr/ADR-0033.md` |
-| active roadmap / goal | **Plan 250 / ALIGN-1 active** | `plan/250-mirrorea-i3-distributed-foundation-current-roadmap.md` |
+| active roadmap / goal | **Plan 250 / ALIGN-2 active** | `plan/250-mirrorea-i3-distributed-foundation-current-roadmap.md` |
 | I3 / OPEN-032 | **bounded program active; lifecycle entry not official / unresolved** | `mirrorea_canon/adr/ADR-0034.md` |
 | public/product | final grammar/CLI/API/ABI/wireもproductionも未受理 | `mirrorea_canon/adr/ADR-0033.md` |
 
@@ -58,7 +58,8 @@ version、codec、wire、library、certificate representation、port、retry、d
 
 ## 現在の停止線
 
-ALIGN-0はdocs/status alignment and activation boundaryとしてcompleted。ALIGN-1がsole active goal、ALIGN-2がnext/not activeである。固定順序はALIGN-0..2 → I3-0..6 → NEXT-0である。
+ALIGN-0はdocs/status alignment and activation boundary、ALIGN-1はproject/product three-axis constitutionとしてcompleted。ALIGN-2がsole active goalである。固定順序はALIGN-0..2 → I3-0..6 → NEXT-0である。
+ALIGN-1ではsemantic strata S0--S6、project/product PL-0--PL-6、lifecycle T0--T2 / I1--I6を独立したmany-to-many座標としてCanon化した。PL-4は責任境界のみ、PL-6は別application、satellitesは別系統である。
 ALIGN-0 acceptanceはI3 lifecycle entry、transport選定、production/public freezeを
 含まない。これらは各後段gate又はowner-reserved boundaryへ残る。
 Current authority and milestone gates are
