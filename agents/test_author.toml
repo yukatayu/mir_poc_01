@@ -1,6 +1,6 @@
 name = "test_author"
 description = "Writes or updates litmus tests, conformance tests, and test-only support files."
-model = "gpt-5.5"
+model = "gpt-5.6-terra"
 model_reasoning_effort = "xhigh"
 sandbox_mode = "workspace-write"
 approval_policy = "on-request"
