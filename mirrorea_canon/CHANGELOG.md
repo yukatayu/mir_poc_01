@@ -28,7 +28,9 @@ open_items: []
   exactly-once、public freezeは禁止。I3-3はplan/05 failure matrix全行、I3-4はminimum
   observer-safe gate evidenceを担い、I3-5は既存factだけをjoinする。program activationは
   official I3 entry/exitではない。theory T1、broad PHASE-I1、official I2 exit、public /
-  production non-claimsを維持し、両候補とOPEN-032は未決のままである。
+  production non-claimsを維持し、両候補とOPEN-032は未決のままである。ALIGN-0は
+  accepted I2 regressionとmeta-drift reviewを経たcut `2f198105...`でclosedし、ALIGN-1を
+  sole active goalへ進めた。
 
 - **2026-08-28** PROPOSAL-036 / ADR-0033 / plan/05によりSYS-7 inactive I3
   entry contractを受理した。future goalはaccepted I2 per-locus artifactsとgenerated

@@ -35,7 +35,7 @@ current queue ではない。
 
 ADR-0026 / PROPOSAL-029 の SYS-0--SYS-7 bounded program はADR-0033によりclosedで、
 Plan 249はclosed execution recordである。PROPOSAL-037 / ADR-0034はplan/05をconsumeし、
-Plan 250をsole current roadmap、ALIGN-0をactive goalとする。`root/design-constitution` は North Star/ADR の下で後続 Canon を拘束する current
+Plan 250をsole current roadmapとする。ALIGN-0はcompleted、ALIGN-1がactive goalである。`root/design-constitution` は North Star/ADR の下で後続 Canon を拘束する current
 decision filterであり、LAB roadmap/reportはそれを再解釈しない。`.mir` source、Rust、
 Lean、tests、generated tracesはnormative Canon rulesのimplementation/evidenceであり、
 存在だけで規範、proof、Gate、Phase、又はlifecycle acceptanceを変更しない。規範変更は

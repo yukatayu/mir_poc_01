@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-09-01 21:06 JST
+最終更新: 2026-09-01 22:05 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -12,8 +12,8 @@ creates no Canon, Gate, Phase, proof, lifecycle, or compatibility decision.
 
 Plan 247 and Plan 249 are closed execution records. PROPOSAL-037 / ADR-0034
 authorize the active bounded Mirrorea I3 Distributed Foundation program;
-Plan 250 is the sole current roadmap and ALIGN-0 is active/closing. ALIGN-1 is
-next and not active. Reports retain detailed evidence.
+Plan 250 is the sole current roadmap. ALIGN-0 is completed; ALIGN-1 is the sole
+active goal and ALIGN-2 is next/not active. Reports retain detailed evidence.
 
 ## project axis
 
@@ -43,15 +43,15 @@ assurance. Real multi-process transport and product layers remain later.
 |---|---|---|
 | Logical specification | finite source -> Core -> artifact -> communication -> in-process trace/conformance accepted; Theory T1 and broad PHASE-I1 unaccepted | maintenance **着手可能**; general widening **後段依存** |
 | User-facing specification | provisional project/run/inspect/conform workflow exists; public grammar/CLI/JSON/API/ABI/wire/devtools unfrozen | regression **着手可能**; public contract **要仕様確認** |
-| Implementation / operation | I2 exit preserved; bounded I3 activation docs in progress under Plan 250 / ALIGN-0 | ALIGN-1 **後段**; lifecycle entry not official |
+| Implementation / operation | I2 exit preserved; ALIGN-0 activation/alignment closed; Plan 250 / ALIGN-1 active | ALIGN-1 **着手可能**; lifecycle entry not official |
 
 ```text
 Theory: T1
 Broad PHASE-I1: unaccepted (OPEN-026/027 + full carrier freeze)
 Official I2: entry accepted -> exit accepted (ADR-0032)
 ADR-0026 program: SYS-0--SYS-7 closed (ADR-0033)
-Active roadmap / goal: Plan 250 / ALIGN-0 active/closing
-Sequence: ALIGN-0..2 → I3-0..6 → NEXT-0; ALIGN-1 next, not active
+Active roadmap / goal: Plan 250 / ALIGN-1 sole active goal
+Sequence: ALIGN-0 completed → ALIGN-1 active → ALIGN-2 next/not active → I3-0..6 → NEXT-0
 I3 bounded program active; lifecycle entry not official; OPEN-032 unresolved
 ```
 
@@ -80,8 +80,9 @@ Sources: `mirrorea_canon/adr/ADR-0034.md`, `mirrorea_canon/plan/05-i3-entry-cont
 | SYS-4 | in-process generated dispatch | closed `22196f93...`; OBL-061 |
 | SYS-5 | four-locus toy + joined devtools | closed `53a21e64...`; OBL-062 |
 | SYS-6 | finite I2 conformance/lifecycle | closed `5429712d...`; OBL-063 / ADR-0032 |
-| ALIGN-0 | status/roadmap activation alignment | active/closing; Plan 250 |
-| ALIGN-1 | next status/architecture checkpoint | next; not active |
+| ALIGN-0 | status/roadmap activation alignment | completed; Plan 250 |
+| ALIGN-1 | next status/architecture checkpoint | sole active goal; activation only |
+| ALIGN-2 | execution/evidence boundary | next; not active |
 | SYS-7 | inactive I3 entry contract only | closed; ADR-0033 / Canon plan/05 |
 
 ## line snapshots
@@ -115,7 +116,7 @@ leave/fresh incarnation. Arbitrary DAG theory remains deferred.
 Checked Core creates owned locus artifacts and generated plans; SYS-4 executes
 them across explicit endpoints. ST is the reference and selected OW1 is a
 separate exactly-one-worker source. Network refinement is authorized for the
-fixed later I3 milestones but is not implemented at ALIGN-0.
+fixed later I3 milestones but is not implemented at current ALIGN-1.
 
 ### Engine/Provider line
 
@@ -134,8 +135,8 @@ browser/View/renderer, and upper applications remain separable.
 | implementation close | workspace, format, warnings-denied Clippy |
 | lifecycle close | independent I2/broad-I1/I3/no-roadmap review |
 
-ALIGN-0 changes Canon/docs/status only. No production source, runtime test,
-Lean, model, OBL, SCN, or sample behavior change is claimed.
+ALIGN-0 changed Canon/docs/status only and is closed. ALIGN-1 is active with no
+production source, runtime, Lean, model, OBL, SCN, or sample behavior delta yet.
 
 ## non-claims
 
@@ -150,7 +151,7 @@ theorem, exactly-once, lock-free runtime, or public completion is claimed.
 | Class | Item | Current state |
 |---|---|---|
 | Maintenance | accepted M10/I2 regressions and docs consistency | **着手可能** |
-| Active package | ALIGN-0 Canon/LAB alignment | **着手中**; ALIGN-1 next/not active |
+| Active package | ALIGN-1 activation-only constitution | **着手中**; no work/evidence started |
 | Research discovery | candidate comparison, network failures/order, C-distributed gates | fixed I3-0/I3-3/I3-4 consumers |
 | Delegated decision | OPEN-032 transport choice | I3-0 equal canaries + ADR required |
 | Owner decision | public freeze or production | reserved |
@@ -160,7 +161,7 @@ theorem, exactly-once, lock-free runtime, or public completion is claimed.
 
 | Macro | Focus | Current position | Weight | Self-drive |
 |---|---|---|---|---|
-| 0 | governance/repository memory | ALIGN-0 active/closing | medium | active, then ALIGN-1/2 |
+| 0 | governance/repository memory | ALIGN-0 completed; ALIGN-1 active-only | medium | ALIGN-1 activation |
 | 1 | semantics/shared model | finite semantics through I2 | heavy | ADR-0014 research only |
 | 2 | parser-free evidence | historical | medium | maintenance |
 | 3 | source/checker/runtime | in-process I2 accepted | heavy | after ALIGN-1/2, I3-1/2 |
@@ -187,10 +188,12 @@ theorem, exactly-once, lock-free runtime, or public completion is claimed.
 
 ## recent log
 
+- 2026-09-01 22:05 JST: ALIGN-0 activation cut `2f198105...` passed focused
+  I2/M10 and docs/config validation, independent review, push/parity; ALIGN-0
+  completed and ALIGN-1 became the sole active activation-only goal.
 - 2026-09-01 21:06 JST: PROPOSAL-037 / ADR-0034 and Plan 250 activation state
-  synchronized into LAB snapshots; ALIGN-0 active/closing, ALIGN-1 next, both
-  transport candidates UNSELECTED, OPEN-032 unresolved; docs-only validation
-  pending final parent acceptance.
+  synchronized into LAB snapshots with ALIGN-0 active/closing; transport
+  candidates remained UNSELECTED and OPEN-032 unresolved.
 - 2026-08-28 18:58 JST: SYS-6 cut `5429712d...` closed the exact 22-row I2
   profile and ADR-0032 accepted official I2 entry then exit.
 - 2026-08-28 14:09 JST: SYS-5 cut `53a21e64...` closed toy/devtools.

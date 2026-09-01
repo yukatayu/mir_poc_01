@@ -17,7 +17,7 @@ I3 roadmap は `plan/250-mirrorea-i3-distributed-foundation-current-roadmap.md`�
 下の `plan/` 索引は時系列の LAB repository memory です。索引にある候補や過去の
 「次」は current queue を意味しません。Plan 247とPlan 249はclosed execution
 recordsである。PROPOSAL-037 / ADR-0034によりI3 bounded programがactive、Plan 250が
-sole current roadmap、ALIGN-0がactive/closingである。older plansもhistorical
+sole current roadmap、ALIGN-0 completed、ALIGN-1がsole active goalである。older plansもhistorical
 memoryです。現在の停止線は
 `docs/project-status.md`、`progress.md`、`tasks.md` で確認します。
 
@@ -249,7 +249,7 @@ recordが揃ったためofficial I2 entry後exitを受理しました。broad PH
   SYS-6 implementation/evidence cut is `5429712d...`, Canon/status integration
   cut is `bcb0f767...`, and official I2 entry then exit is accepted.
 - in-progress: PROPOSAL-037 / ADR-0034 bounded I3 program; Plan 250 sole roadmap;
-  ALIGN-0 active/closing, ALIGN-1 next (not active).
+  ALIGN-0 completed, ALIGN-1 sole active goal, ALIGN-2 next (not active).
 - blocked/deferred: I3 lifecycle entry and OPEN-032 resolution remain unresolved;
   both reliable-stream candidates are UNSELECTED and QUIC datagrams excluded. Broad PHASE-I1 exit,
   final public API/ABI/wire/carrier freeze, production, and browser/View product

@@ -20,7 +20,7 @@ open_items: []
 - ADR-0015 / Plan 247とADR-0026 / Plan 249のbounded programsはいずれもclosedである。
   accepted cutsはregression baselineであり、successor authority又はcurrent queueではない。
   PROPOSAL-037 / ADR-0034はADR-0033 / plan/05をconsumeするactive bounded programを
-  authorizeし、Plan 250をsole roadmap、ALIGN-0をactive goalとする。program activation
+  authorizeし、Plan 250をsole roadmapとする。ALIGN-0はcompleted、ALIGN-1がactive goalである。program activation
   自体はofficial I3 entry/exit、transport selection、又はpublic contract freezeではない。
 - ADR-0014 の standing route に従う L2/L3 working theory: `working/WRK-####` に
   read-only canon anchors、pinned authority cut、result class、non-effects、alternative /

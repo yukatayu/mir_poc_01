@@ -19,7 +19,7 @@ ADR-0015 の Mir Theory v0 / I1+ M0--M10 execution とPlan 247はclosed LAB
 record / regression baselineである。2026-08-26のowner directionを記録したADR-0026
 のSYS-0--SYS-7 programとPlan 249もclosed LAB recordである。PROPOSAL-037 /
 ADR-0034により bounded I3 programがactive、Plan 250がsole current roadmap、
-ALIGN-0がactive/closingである。SYS-0はclosed、
+ALIGN-0がcompleted、ALIGN-1がsole active goalである。ALIGN-2はnext/not active。SYS-0はclosed、
 SYS-1もsource cut `94e3707c...`でclosed、SYS-2もsource cut `920d3fe0...`で
 closed。SYS-3は初回candidate cut `ded622fe...`をE-CONSUME consumer path欠落により
 partial regression evidenceへ戻して一度reopenし、corrected source/evidence cut
@@ -35,7 +35,7 @@ source-first exact 22-row `conform-i2` profileを受理し、ADR-0032はofficial
 entry後exitを適用した。SYS-7はPROPOSAL-036 / ADR-0033 / Canon plan/05として
 transport-neutralなinactive I3 entry contractだけを記録してclosedした。I3は
 inactive entry contractから bounded I3 programへ移行した。OPEN-032 transport selectionは
-未決、両候補UNSELECTED、ALIGN-1はnext/not activeである。固定順序は
+未決、両候補UNSELECTED、ALIGN-0 completed、ALIGN-1 active、ALIGN-2 next/not activeである。固定順序は
 ALIGN-0..2 → I3-0..6 → NEXT-0である。
 legacy M8 `AlreadyConsumed`又はaccepted M10
 duplicate-delivery behaviorは変更せず、SYS-4 wrapperのexact semantic-consumption
@@ -969,8 +969,8 @@ Canonのままなので、program activationをbroad I1/I2 lifecycle acceptance�
   close時点にはactive roadmap / goalがなかった。現在のcontrolは次のPlan 250。)
 - Mirrorea I3 Distributed Foundation current roadmap:
   `plan/250-mirrorea-i3-distributed-foundation-current-roadmap.md`
-  (PROPOSAL-037 / ADR-0034のactive bounded program。ALIGN-0 active/closing、
-  ALIGN-1 next/not active。official I3 lifecycle entry、transport選定、public
+  (PROPOSAL-037 / ADR-0034のactive bounded program。ALIGN-0 completed、
+  ALIGN-1 sole active goal、ALIGN-2 next/not active。official I3 lifecycle entry、transport選定、public
   freeze、productionは主張しない。)
 
 ## maintenance rule

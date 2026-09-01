@@ -36,9 +36,12 @@ roadmap/status pointer の一致を検証する。
   `5429712de89a7e41c46cfd7fb4a39c4a492864c4`
 - accepted I2 Canon/status integration cut:
   `bcb0f767edbb3e9e581c3b4c7f2a49e077f44067`
+- accepted ALIGN-0 integration cut:
+  `2f19810500b07d4b924b8201545dc2dc397c5f54`
 - sole current roadmap: **Plan 250**
-- sole active goal: **ALIGN-0**
-- next goal after accepted ALIGN-0 close: **ALIGN-1**
+- completed goal: **ALIGN-0**
+- sole active goal: **ALIGN-1**
+- next goal after accepted ALIGN-1 close: **ALIGN-2**
 - all other milestones: **ordered, inactive, and dependency-gated**
 - Plan 247: closed M0--M10 execution record / regression baseline
 - Plan 249: closed SYS-0--SYS-7 execution record / accepted I2 baseline
@@ -238,8 +241,8 @@ and are exactly one per milestone:
 
 | Milestone | Report path | Status at program start |
 | --- | --- | --- |
-| ALIGN-0 | `docs/reports/2600-mirrorea-i3-distributed-foundation-align0-baseline-goal-alignment.md` | active report |
-| ALIGN-1 | `docs/reports/2601-mirrorea-i3-distributed-foundation-align1-layer-map.md` | inactive |
+| ALIGN-0 | `docs/reports/2600-mirrorea-i3-distributed-foundation-align0-baseline-goal-alignment.md` | completed |
+| ALIGN-1 | `docs/reports/2601-mirrorea-i3-distributed-foundation-align1-layer-map.md` | active report |
 | ALIGN-2 | `docs/reports/2602-mirrorea-i3-distributed-foundation-align2-trust-boundaries.md` | inactive |
 | I3-0 | `docs/reports/2603-mirrorea-i3-distributed-foundation-i3-0-transport-selection.md` | inactive |
 | I3-1 | `docs/reports/2604-mirrorea-i3-distributed-foundation-i3-1-adapter-encoding.md` | inactive |
@@ -278,7 +281,7 @@ Before heavy builds or generated artifacts, run the repository resource audit
 required by AGENTS.md and use the configured external workdir when applicable.
 No cleanup deletes repository source or an unconfirmed directory.
 
-## ALIGN-0 detailed Goal Statement — active
+## ALIGN-0 detailed Goal Statement — completed
 
 **Goal ID:** ALIGN-0
 
@@ -425,7 +428,7 @@ semantics, authority, or evidence without the current milestone gates.
 | no public View/devtools contract | SYS-5 JSON is provisional observer-safe evidence; presentation-local computation is allowed but authoritative domain semantics remains in Mir | ALIGN-2/I3-5; inactive I5 |
 | no Shared-Space/product platform semantics | record PL position, lower requirements, upper promises, non-primitives, and deferred questions only | ALIGN-1; inactive future owner program |
 
-## ALIGN-1 milestone contract — inactive until ALIGN-0 closes
+## ALIGN-1 milestone contract — active
 
 **Goal:** Record one canonical three-axis map that keeps semantic strata,
 project/product responsibility layers, and lifecycle phases distinct.
@@ -1094,9 +1097,10 @@ integration, or Typed-Effect platform collapse.
 
 ## Recommended next action
 
-Complete ALIGN-0 only: accept PROPOSAL-037 / ADR-0034, establish Plan 250 as the
-unique current roadmap, synchronize current pointers and the meta-drift matrix,
-run the fresh I2/M10 and documentation regression floor, obtain independent
-close review, write Report 2600, commit/push the ALIGN-0 integration, verify
-remote parity, and then advance the sole active goal to ALIGN-1. Do not begin
-ALIGN-1 edits or any transport selection/implementation before that close.
+Execute ALIGN-1 only: add the separate Canon project/product-layer document,
+reconcile the existing semantic-strata numbering without changing settled
+semantics, record responsibility/input/output/prohibition/maturity for PL-0--6,
+keep PL-4 responsibility-only and PL-6 separate, validate no production/runtime
+behavior delta, obtain independent architecture review, write Report 2601,
+commit/push with parity, then advance exactly to ALIGN-2. Do not begin ALIGN-2
+or transport comparison before ALIGN-1 closes.

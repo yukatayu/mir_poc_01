@@ -27,7 +27,7 @@ the canon process: proposal, owner decision, ADR or file update where required,
 - ADR-0033 / PROPOSAL-036 and canon plan/05 record the transport-neutral I3
   entry contract. PROPOSAL-037 / ADR-0034 consume it for the active Mirrorea
   I3 Distributed Foundation bounded program. Plan 250 is the sole current
-  roadmap and ALIGN-0 is active; both transport candidates and OPEN-032 remain
+  roadmap; ALIGN-0 is completed and ALIGN-1 is active. Both transport candidates and OPEN-032 remain
   unresolved, and official I3 lifecycle entry is not implied.
 - Outside ADR-0034's fixed scope, ADR-0014 permits only reversible L3
   pre-registration in `mirrorea_canon/working/`; L2 remains fail-closed pending

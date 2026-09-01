@@ -18,7 +18,7 @@ the closed authority/execution record for the accepted Mir Theory v0 / I1+
 M0--M10 finite reference baseline. ADR-0026 and Plan 249 likewise record the
 now-closed Mirrorea I2 Systems Foundation SYS-0--SYS-7 program. PROPOSAL-037 /
 ADR-0034 authorize the bounded Mirrorea I3 Distributed Foundation program;
-Plan 250 is its sole current roadmap and ALIGN-0 is active/closing.
+Plan 250 is its sole current roadmap; ALIGN-0 is completed and ALIGN-1 is the sole active goal.
 
 Accepted I2 implementation evidence progresses through the crate-private
 kernel/carrier (`94e3707c...`), ST/OW1 refinement (`920d3fe0...`), checked-Core

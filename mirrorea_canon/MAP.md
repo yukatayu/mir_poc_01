@@ -142,7 +142,7 @@ future public wireは分離し、failure matrix、explicit retry/non-exactly-onc
 refinement、SCN-01/02/03/06 future gatesをentry条件とする。SYS-7とADR-0026 programは
 closed、Plan 249はclosed recordとして保持する。2026-09-01のowner directionを
 PROPOSAL-037 / ADR-0034がmirrorし、Mirrorea I3 Distributed Foundation bounded
-program、LAB Plan 250、ALIGN-0をactiveにした。これはofficial I3 lifecycle entryではなく、
+programとLAB Plan 250を開始した。ALIGN-0はcut `2f198105...`でclosed、ALIGN-1がactiveである。これはofficial I3 lifecycle entryではなく、
 両transport候補はUNSELECTED、OPEN-032はunresolved、theory T1とbroad I1 residualは不変である。
 
 ## ID 体系

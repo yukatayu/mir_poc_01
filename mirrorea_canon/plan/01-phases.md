@@ -15,8 +15,8 @@ open_items: [OPEN-032]
 - theory lifecycle: **T1**（M2 semantic-assertion profile v3 の pass digest、G0-D3、
   G0 exit、T1 entry を ADR-0017 により受理済み）;
 - implementation evidence: **M10 accepted; official I2 entry then exit accepted;
-  SYS-0--SYS-7 / ADR-0026 program closed; ADR-0034 I3 bounded program active at
-  ALIGN-0 with Plan 250**。architecture/04 の full L2 carrier freeze と OPEN-026/027 が
+  SYS-0--SYS-7 / ADR-0026 program closed; ADR-0034 / Plan 250 active at ALIGN-1
+  after ALIGN-0 close**。architecture/04 の full L2 carrier freeze と OPEN-026/027 が
   残るため broad PHASE-I1 exitは未受理。Official I3 lifecycleは未entry、両候補は
   UNSELECTED、OPEN-032はunresolvedである。
 
@@ -163,8 +163,8 @@ reliable-stream候補はともに**UNSELECTED**で、transport/session/certifica
 でない。failure/order、C-distributed gate、public-wire等の正本は
 `plan/05-i3-entry-contract`である。
 
-PROPOSAL-037 / ADR-0034はこのcontractをconsumeし、Plan 250をsole roadmap、ALIGN-0を
-active goalとする。これはofficial I3 entry/exitではない。official I2 exitを維持し、
+PROPOSAL-037 / ADR-0034はこのcontractをconsumeし、Plan 250をsole roadmapとする。
+ALIGN-0 completed、ALIGN-1 activeである。これはofficial I3 entry/exitではない。official I2 exitを維持し、
 I3 lifecycleは未entry、OPEN-032はunresolvedである。selectionはI3-0の両候補同条件
 2-process canaryとseparate ADRを必要とする。
 

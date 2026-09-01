@@ -1,6 +1,6 @@
 # Current Task Map (LAB)
 
-最終更新: 2026-09-01 21:06 JST
+最終更新: 2026-09-01 22:05 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -17,8 +17,8 @@ milestone or Canon L2 promotion.
 
 ## current promoted package
 
-**ALIGN-0 (active/closing).** PROPOSAL-037 / ADR-0034 authorize the bounded
-Mirrorea I3 Distributed Foundation program. ALIGN-1 is next and not active;
+**ALIGN-1 (sole active goal; activation only).** PROPOSAL-037 / ADR-0034 authorize the bounded
+Mirrorea I3 Distributed Foundation program. ALIGN-0 is completed; ALIGN-2 is next and not active;
 fixed sequence: ALIGN-0..2 → I3-0..6 → NEXT-0. Official I3 lifecycle entry is
 not claimed.
 
@@ -33,7 +33,7 @@ evaluated. The bounded I3 program is active, while lifecycle entry and OPEN-032
 remain unresolved. Both candidates remain UNSELECTED; QUIC datagrams are
 excluded.
 
-Direct consumer: the active Plan 250 ALIGN-0..2 / I3-0..6 / NEXT-0 bounded sequence.
+Direct consumer: the active Plan 250 ALIGN-1 goal; no ALIGN-1 work/evidence has started.
 
 Primary falsifier: a change selects transport before equal I3-0 executable
 canaries and its ADR, treats transport metadata as authority, hides
@@ -46,13 +46,14 @@ Sources: `mirrorea_canon/adr/ADR-0034.md`,
 
 ## ordered self-driven packages
 
-Only ALIGN-0 is active. Later packages become active one at a time after the
+Only ALIGN-1 is active (activation only). Later packages become active one at a time after the
 preceding report, validation, review, commit/push, and remote parity close:
 
 | Order | Package | Capability / evidence | Current state / rough estimate |
 |---|---|---|---|
-| 1 | ALIGN-0 | authority, sole roadmap, baseline, meta-drift control | active/closing; Macro 0 front, short |
-| 2 | ALIGN-1 / ALIGN-2 | three-axis architecture and Browser/Host/View/provider trust boundaries | next; Macro 0 middle, medium |
+| 1 | ALIGN-0 | authority, sole roadmap, baseline, meta-drift control | completed; Macro 0 front, short |
+| 2 | ALIGN-1 | three-axis architecture and Browser/Host/View/provider trust boundaries | sole active goal (activation only); Macro 0 middle, medium |
+| 3 | ALIGN-2 | execution/evidence boundary | next; not active |
 | 3 | I3-0 | equal transport canaries and one selected adapter ADR | later; Macro 6 front, heavy |
 | 4 | I3-1 / I3-2 | checked private encoding, adapter, and real multi-process runtime | later; Macro 6 middle, heavy |
 | 5 | I3-3 / I3-4 | full finite fault/order matrix and C-distributed scenarios | later; Macro 5/6 middle, heavy |
@@ -67,7 +68,7 @@ production deployment, or official I3 entry before I3-6 acceptance.
 
 | Macro | Current state | Startability |
 |---|---|---|
-| 0 governance/repository memory | ALIGN-0 activation/status synchronization | active; short |
+| 0 governance/repository memory | ALIGN-0 completed; ALIGN-1 activation-only | active; short |
 | 1 semantic kernel | finite kernel/backend/projection/runtime accepted | maintenance / ADR-0014 L3 |
 | 2 parser-free history | retained; not current architecture | maintenance |
 | 3 source/checker/runtime | source-first I2 boundary accepted | ALIGN-1/2 first; I3-1/2 later |
@@ -97,7 +98,7 @@ unoptimized performance, and incomplete I3+ do not activate a task.
 
 ## research discovery items
 
-These are fixed later milestones, not parallel queues while ALIGN-0 is active:
+These are fixed later milestones, not parallel queues while ALIGN-1 is active:
 
 | Question | Direct consumer | Evidence required | Boundary |
 |---|---|---|---|
@@ -126,8 +127,8 @@ WRKs do not become a queue automatically.
 - Reopen SYS-7 wording only for authority collapse, a missing required network
   failure/order case, premature selection/freeze, or unusable direct-consumer
   contract.
-- Do not create another roadmap or activate ALIGN-1 before the fixed sequence
-  and owner boundaries permit it.
+- Do not create another roadmap or activate ALIGN-2 before ALIGN-1 closes under
+  the fixed sequence and owner boundaries.
 
 ## non-promoted references
 

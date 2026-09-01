@@ -84,9 +84,11 @@ class MirroreaProjectOverviewHtmlTests(unittest.TestCase):
             "ADR-0033 / SYS-7 I3 entry contract only",
             "PROPOSAL-037 / ADR-0034",
             "Mirrorea I3 Distributed Foundation bounded program",
-            "Plan 250 / ALIGN-0 active/closing",
+            "Plan 250 / ALIGN-1が現在地（activation only）",
             "Plan 250がsole current roadmap",
-            "ALIGN-1はnext/not active",
+            "Mirrorea I3 Distributed Foundation / ALIGN-1 sole active goal",
+            "ALIGN-0 completed、ALIGN-2 next/not active",
+            "I3 program active / lifecycle未entry",
             "official I3 lifecycle entryとproductionは主張しません",
             "closed / SYS-3",
             "closed / SYS-4",
@@ -200,6 +202,10 @@ class MirroreaProjectOverviewHtmlTests(unittest.TestCase):
             "active goal は SYS-7 only",
             "SYS-7 sole active",
             "Active Plan 249",
+            "Plan 250 / ALIGN-0 active/closing",
+            "Plan 250 / ALIGN-0がactiveで",
+            "Plan 250 / ALIGN-0 active</span>",
+            "ALIGN-1はnext/not active",
             "現在 / SYS-7",
             "次 / SYS-7",
             "現在 / SYS-3",
@@ -267,7 +273,7 @@ class MirroreaProjectOverviewHtmlTests(unittest.TestCase):
         self.assert_contains_marker(documentation, "Plan 250 sole roadmap", "Documentation I3 program status")
         self.assert_contains_marker(
             documentation,
-            "ALIGN-0 active/closing, ALIGN-1 next (not active).",
+            "ALIGN-0 completed, ALIGN-1 sole active goal, ALIGN-2 next (not active).",
             "Documentation I3 program status",
         )
         self.assert_contains_marker(
@@ -280,6 +286,11 @@ class MirroreaProjectOverviewHtmlTests(unittest.TestCase):
         self.assert_contains_marker(documentation, "OPEN-032は未解決", "Documentation I3 open item")
         self.assert_omits_marker(documentation, "active roadmap はありません", "Documentation current roadmap")
         self.assert_omits_marker(documentation, "active programがない現在", "Documentation current program")
+        self.assert_omits_marker(
+            documentation,
+            "ALIGN-0がactive/closingである",
+            "Documentation stale ALIGN-0 state",
+        )
         self.assert_contains_marker(documentation, "`ded622fe...`を", "Documentation SYS-3 history")
         self.assert_contains_marker(documentation, "partial regression evidenceへ", "Documentation SYS-3 history")
         self.assert_contains_marker(

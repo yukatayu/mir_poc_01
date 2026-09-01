@@ -126,19 +126,19 @@ Continue autonomously with ALIGN-1: add the separate Canon project/product-layer
 
 ## Documentation.md update status
 
-更新済み: current bounded program, active ALIGN-0 state, and official-I3-inactive distinction are synchronized.
+更新済み: current bounded program, ALIGN-0 completed / ALIGN-1 sole active goal, and official-I3-lifecycle-not-entered distinction are synchronized.
 
 ## docs/project-status.md update status
 
-更新済み: the same current frontier and non-claims are synchronized.
+更新済み: ALIGN-0 completed, ALIGN-1 sole active goal, ALIGN-2 next/not active, and the same non-claims are synchronized.
 
 ## progress.md update status
 
-更新済み: the current LAB snapshot includes the three independent axes, active goal/readiness, feature evidence status, and timestamped close work log.
+更新済み: the current LAB snapshot includes the three independent axes, ALIGN-1 activation/readiness, feature evidence status, and timestamped ALIGN-0 close log.
 
 ## tasks.md update status
 
-更新済み: the current task map records the fixed autonomous milestone chain, delegated transport question, owner-reserved stop conditions, current promoted line, and rough phase position.
+更新済み: the current task map records ALIGN-1 as the sole active activation-only package, ALIGN-2 as next, the fixed autonomous chain, delegated transport question, owner-reserved stop conditions, and rough phase position.
 
 ## samples_progress.md update status
 
@@ -158,7 +158,7 @@ Full workspace and exhaustive SYS-2--SYS-5 suites, Rust format/Clippy, Lean proo
 
 ## Commit / push status
 
-Final validation and independent close review are complete. The candidate remains uncommitted at this report snapshot because an integration commit cannot embed its own future hash. The parent must commit with `--no-gpg-sign`, push to `origin/main`, verify parity, then update this section and advance the sole active goal before declaring ALIGN-0 closed.
+Final validation and independent close review completed before the activation integration. Commit `2f19810500b07d4b924b8201545dc2dc397c5f54` (`docs(i3): start distributed foundation program`) was created with `--no-gpg-sign`, pushed to `origin/main`, and verified as `HEAD == main == origin/main`. The subsequent ALIGN-0-completed / ALIGN-1-active pointer commit cannot embed its own future hash; its push/parity is verified by the parent immediately after commit and reported at the milestone checkpoint.
 
 ## Sub-agent session close status
 

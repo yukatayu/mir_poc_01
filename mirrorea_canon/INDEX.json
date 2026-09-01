@@ -12,7 +12,7 @@
    "summary": "canon 自体の版履歴と改定手続きの要約。",
    "open_items": [],
    "path": "CHANGELOG.md",
-   "bytes": 27310
+   "bytes": 27450
   },
   {
    "id": "root/design-constitution",
@@ -52,7 +52,7 @@
    "summary": "知識マップ 1 枚。全域の依存図、3 種の読み筋、ID 体系。",
    "open_items": [],
    "path": "MAP.md",
-   "bytes": 29441
+   "bytes": 29495
   },
   {
    "id": "root/north-star",
@@ -74,7 +74,7 @@
    "summary": "canon の入口。正本宣言、LAB(既存 repo)との関係、読み順、版。",
    "open_items": [],
    "path": "README.md",
-   "bytes": 4519
+   "bytes": 4553
   },
   {
    "id": "adr/ADR-0001",
@@ -752,7 +752,7 @@
    "summary": "agent の読込、closed programs、active ADR-0034 program、program外L3 research、review/owner escalation境界。",
    "open_items": [],
    "path": "meta/agent-instructions.md",
-   "bytes": 4452
+   "bytes": 4483
   },
   {
    "id": "meta/proposal-001",
@@ -1397,7 +1397,7 @@
    "summary": "canon > LAB、closed programs、active ADR-0034 program、program外ADR-0014 routeの境界。",
    "open_items": [],
    "path": "meta/source-hierarchy.md",
-   "bytes": 3619
+   "bytes": 3650
   },
   {
    "id": "meta/style-guide",
@@ -1459,7 +1459,7 @@
     "OPEN-032"
    ],
    "path": "plan/01-phases.md",
-   "bytes": 14958
+   "bytes": 14978
   },
   {
    "id": "plan/02-operating-model",
@@ -1476,7 +1476,7 @@
    "summary": "closed programs、active ADR-0034 program、program外L3 researchを分離し、goal/frontier/roadmap/report/review/evidence規律を定める。",
    "open_items": [],
    "path": "plan/02-operating-model.md",
-   "bytes": 8899
+   "bytes": 8922
   },
   {
    "id": "plan/03-risks",
@@ -1527,7 +1527,7 @@
     "OPEN-032"
    ],
    "path": "plan/05-i3-entry-contract.md",
-   "bytes": 11937
+   "bytes": 11959
   },
   {
    "id": "plan/readme",
@@ -1545,7 +1545,7 @@
    "summary": "Gate/Phase二軸、closed programs、active ADR-0034 program、program外ADR-0014 routeの計画読解。",
    "open_items": [],
    "path": "plan/README.md",
-   "bytes": 1406
+   "bytes": 1442
   },
   {
    "id": "scenarios/readme",

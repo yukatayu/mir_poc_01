@@ -21,7 +21,7 @@ ADR-0034 now consumes it for the active bounded program, whose parent goal is:
 > profile.
 
 Program activation is not official I3 lifecycle entry or exit. LAB Plan 250 is
-the sole current roadmap and ALIGN-0 is active. The two transport candidates
+the sole current roadmap; ALIGN-0 is completed and ALIGN-1 is active. The two transport candidates
 remain unselected and OPEN-032 remains unresolved.
 
 ## Accepted input boundary
