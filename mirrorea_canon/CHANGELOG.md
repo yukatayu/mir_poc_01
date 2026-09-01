@@ -18,6 +18,18 @@ open_items: []
 
 ## 履歴
 
+- **2026-09-01** PROPOSAL-037 / ADR-0034 により Mirrorea I3 Distributed
+  Foundation bounded programを開始した。accepted I2 cutsをregression baselineに、
+  LAB Plan 250をsole current roadmap、ALIGN-0をactive goalとする。fixed sequenceは
+  ALIGN-0--2、I3-0--6、NEXT-0。semantic strata / project-product layers / lifecycle
+  phasesを分離し、Browser/Host/package/View/provider境界を具体APIなしに固定した後、
+  TLS-over-TCP framed reliable streamとQUIC reliable streamを同じ2-process executable
+  canaryで比較する。paper-only selection、QUIC datagram、transport authority、hidden retry /
+  exactly-once、public freezeは禁止。I3-3はplan/05 failure matrix全行、I3-4はminimum
+  observer-safe gate evidenceを担い、I3-5は既存factだけをjoinする。program activationは
+  official I3 entry/exitではない。theory T1、broad PHASE-I1、official I2 exit、public /
+  production non-claimsを維持し、両候補とOPEN-032は未決のままである。
+
 - **2026-08-28** PROPOSAL-036 / ADR-0033 / plan/05によりSYS-7 inactive I3
   entry contractを受理した。future goalはaccepted I2 per-locus artifactsとgenerated
   communicationを2つ以上のOS processへ写し、authority、typed failure、source/Core

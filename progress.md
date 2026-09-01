@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-08-28 20:06 JST
+最終更新: 2026-09-01 21:06 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -10,10 +10,10 @@ creates no Canon, Gate, Phase, proof, lifecycle, or compatibility decision.
 
 ## document role
 
-Plan 247 and Plan 249 are closed execution records. There is no active bounded
-program, current roadmap, semantic milestone, or active goal. Reports retain
-detailed evidence. Current autonomous research follows ADR-0014 until fresh
-owner direction designates a successor.
+Plan 247 and Plan 249 are closed execution records. PROPOSAL-037 / ADR-0034
+authorize the active bounded Mirrorea I3 Distributed Foundation program;
+Plan 250 is the sole current roadmap and ALIGN-0 is active/closing. ALIGN-1 is
+next and not active. Reports retain detailed evidence.
 
 ## project axis
 
@@ -43,29 +43,30 @@ assurance. Real multi-process transport and product layers remain later.
 |---|---|---|
 | Logical specification | finite source -> Core -> artifact -> communication -> in-process trace/conformance accepted; Theory T1 and broad PHASE-I1 unaccepted | maintenance **着手可能**; general widening **後段依存** |
 | User-facing specification | provisional project/run/inspect/conform workflow exists; public grammar/CLI/JSON/API/ABI/wire/devtools unfrozen | regression **着手可能**; public contract **要仕様確認** |
-| Implementation / operation | SYS-6 cut `5429712d...`, integration cut `bcb0f767...`, official I2 entry then exit; SYS-7/program closed | I3 **後段依存** on owner direction |
+| Implementation / operation | I2 exit preserved; bounded I3 activation docs in progress under Plan 250 / ALIGN-0 | ALIGN-1 **後段**; lifecycle entry not official |
 
 ```text
 Theory: T1
 Broad PHASE-I1: unaccepted (OPEN-026/027 + full carrier freeze)
 Official I2: entry accepted -> exit accepted (ADR-0032)
 ADR-0026 program: SYS-0--SYS-7 closed (ADR-0033)
-Active roadmap / goal: none
-I3: inactive; OPEN-032 unresolved
+Active roadmap / goal: Plan 250 / ALIGN-0 active/closing
+Sequence: ALIGN-0..2 → I3-0..6 → NEXT-0; ALIGN-1 next, not active
+I3 bounded program active; lifecycle entry not official; OPEN-032 unresolved
 ```
 
-The inactive plan/05 boundary retains Candidate A TLS-over-TCP framed reliable
+The plan/05 boundary retains Candidate A TLS-over-TCP framed reliable
 stream and Candidate B QUIC reliable stream, both **UNSELECTED**. QUIC
-datagrams are not admitted/evaluated. No version, codec, wire, library,
+datagrams are excluded. No version, codec, wire, library,
 certificate representation, port, retry, topology, implementation, or public
 compatibility decision exists. Transport/session/certificate/route identity
 is not authority; internal carrier and public wire remain separate. Future
 SCN-01/02/03/06 C-distributed evidence must cover the full typed network
 failure/order matrix without hidden retry or exactly-once.
 
-Sources: `mirrorea_canon/adr/ADR-0033.md`,
+Sources: `mirrorea_canon/adr/ADR-0034.md`, `mirrorea_canon/plan/05-i3-entry-contract.md`,
 `mirrorea_canon/plan/01-phases.md`, and
-`plan/249-mirrorea-i2-systems-foundation-current-roadmap.md`.
+`plan/250-mirrorea-i3-distributed-foundation-current-roadmap.md`.
 
 ## milestone map
 
@@ -79,6 +80,8 @@ Sources: `mirrorea_canon/adr/ADR-0033.md`,
 | SYS-4 | in-process generated dispatch | closed `22196f93...`; OBL-061 |
 | SYS-5 | four-locus toy + joined devtools | closed `53a21e64...`; OBL-062 |
 | SYS-6 | finite I2 conformance/lifecycle | closed `5429712d...`; OBL-063 / ADR-0032 |
+| ALIGN-0 | status/roadmap activation alignment | active/closing; Plan 250 |
+| ALIGN-1 | next status/architecture checkpoint | next; not active |
 | SYS-7 | inactive I3 entry contract only | closed; ADR-0033 / Canon plan/05 |
 
 ## line snapshots
@@ -111,7 +114,8 @@ leave/fresh incarnation. Arbitrary DAG theory remains deferred.
 
 Checked Core creates owned locus artifacts and generated plans; SYS-4 executes
 them across explicit endpoints. ST is the reference and selected OW1 is a
-separate exactly-one-worker source. Network refinement is inactive.
+separate exactly-one-worker source. Network refinement is authorized for the
+fixed later I3 milestones but is not implemented at ALIGN-0.
 
 ### Engine/Provider line
 
@@ -130,13 +134,13 @@ browser/View/renderer, and upper applications remain separable.
 | implementation close | workspace, format, warnings-denied Clippy |
 | lifecycle close | independent I2/broad-I1/I3/no-roadmap review |
 
-SYS-7 changes Canon/docs/status only. No production source, runtime test,
+ALIGN-0 changes Canon/docs/status only. No production source, runtime test,
 Lean, model, OBL, SCN, or sample behavior change is claimed.
 
 ## non-claims
 
 No broad PHASE-I1 exit, Theory T2, socket/multi-process/WAN runtime, transport
-selection, I3 activation, public grammar/CLI/API/ABI/wire/JSON/devtools schema,
+selection, official I3 lifecycle entry, public grammar/CLI/API/ABI/wire/JSON/devtools schema,
 durable distributed persistence, production/publication, browser/View product,
 whole-toy OW1, arbitrary relation DAG/scheduler/fairness/memory/data-race
 theorem, exactly-once, lock-free runtime, or public completion is claimed.
@@ -146,10 +150,9 @@ theorem, exactly-once, lock-free runtime, or public completion is claimed.
 | Class | Item | Current state |
 |---|---|---|
 | Maintenance | accepted M10/I2 regressions and docs consistency | **着手可能** |
-| Research route | reversible L3 work with direct consumer | ADR-0014 only; no active queue |
-| Research discovery | candidate comparison, network failures/order, C-distributed gates | future I3 program only |
-| Owner decision | activate I3 / create successor roadmap | required before implementation |
-| Owner decision | OPEN-032 transport choice | unresolved; comparative evidence required |
+| Active package | ALIGN-0 Canon/LAB alignment | **着手中**; ALIGN-1 next/not active |
+| Research discovery | candidate comparison, network failures/order, C-distributed gates | fixed I3-0/I3-3/I3-4 consumers |
+| Delegated decision | OPEN-032 transport choice | I3-0 equal canaries + ADR required |
 | Owner decision | public freeze or production | reserved |
 | Later dependency | broad I1 carrier freeze/general theory | separate residual; no weaker criteria |
 
@@ -157,13 +160,13 @@ theorem, exactly-once, lock-free runtime, or public completion is claimed.
 
 | Macro | Focus | Current position | Weight | Self-drive |
 |---|---|---|---|---|
-| 0 | governance/repository memory | program closed; no queue | medium | maintenance |
+| 0 | governance/repository memory | ALIGN-0 active/closing | medium | active, then ALIGN-1/2 |
 | 1 | semantics/shared model | finite semantics through I2 | heavy | ADR-0014 research only |
 | 2 | parser-free evidence | historical | medium | maintenance |
-| 3 | source/checker/runtime | in-process I2 accepted | heavy | no I3 authority |
+| 3 | source/checker/runtime | in-process I2 accepted | heavy | after ALIGN-1/2, I3-1/2 |
 | 4 | executable samples | toy + conform reproducible | medium | regression |
 | 5 | theorem/model bridge | OBL-058 bounded; 059--063 runtime | heavy | class maintenance |
-| 6 | generated/distributed fabric | in-process accepted; network inactive | heavy | owner direction |
+| 6 | generated/distributed fabric | in-process accepted; network absent | heavy | fixed I3-0..6 sequence |
 | 7 | toolchain/backend | provisional commands | heavy | no freeze |
 | 8 | applications | toy is library/sample | heavy | no Core promotion |
 
@@ -172,7 +175,7 @@ theorem, exactly-once, lock-free runtime, or public completion is claimed.
 | Feature/subsystem | Evidence status | Remaining gate | Startability |
 |---|---|---|---|
 | Mir core/runtime | finite source/check/project/dispatch assured | general/public widening | maintenance |
-| Mirrorea fabric | generated in-process endpoints; official I2 exit | multi-process transport | **要owner direction** |
+| Mirrorea fabric | generated in-process endpoints; official I2 exit | multi-process transport | **後段依存** on ALIGN-1/2 and I3-0 |
 | contracts/model | typed falsifiers + bounded/runtime classes | network/general proof | **後段依存** |
 | attach/detach/DAG | leave/fresh, local cut, bounded patch | durable/general evolution | **後段依存** |
 | `atomic_cut` / ordering | high-level edges, ST/OW1, bounded model | network/general memory | **後段依存** |
@@ -184,10 +187,10 @@ theorem, exactly-once, lock-free runtime, or public completion is claimed.
 
 ## recent log
 
-- 2026-08-28 20:06 JST: SYS-7 recorded PROPOSAL-036 / ADR-0033 / Canon
-  plan/05, left both candidates unselected and OPEN-032 unresolved, closed the
-  ADR-0026 program, and left no active roadmap/goal; Report 2599 records review
-  and validation.
+- 2026-09-01 21:06 JST: PROPOSAL-037 / ADR-0034 and Plan 250 activation state
+  synchronized into LAB snapshots; ALIGN-0 active/closing, ALIGN-1 next, both
+  transport candidates UNSELECTED, OPEN-032 unresolved; docs-only validation
+  pending final parent acceptance.
 - 2026-08-28 18:58 JST: SYS-6 cut `5429712d...` closed the exact 22-row I2
   profile and ADR-0032 accepted official I2 entry then exit.
 - 2026-08-28 14:09 JST: SYS-5 cut `53a21e64...` closed toy/devtools.

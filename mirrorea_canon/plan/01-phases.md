@@ -2,8 +2,8 @@
 id: plan/01-phases
 status: L1-fixed
 maturity: draft
-depends_on: [plan/00-gates, plan/02-operating-model, plan/05-i3-entry-contract, spec/06-conformance, meta/source-hierarchy, adr/ADR-0013, adr/ADR-0014, adr/ADR-0015, adr/ADR-0017, adr/ADR-0026, adr/ADR-0027, adr/ADR-0028, adr/ADR-0029, adr/ADR-0030, adr/ADR-0031, adr/ADR-0032, adr/ADR-0033, plan/04-t0-g0-semantic-assertion-profile]
-summary: 実装フェーズT0-T2/I1-I6。theory T1、broad I1 residual、official I2 exit、inactive I3 entry contract、closed ADR-0026 programを分離する。
+depends_on: [plan/00-gates, plan/02-operating-model, plan/05-i3-entry-contract, spec/06-conformance, meta/source-hierarchy, adr/ADR-0013, adr/ADR-0014, adr/ADR-0015, adr/ADR-0017, adr/ADR-0026, adr/ADR-0027, adr/ADR-0028, adr/ADR-0029, adr/ADR-0030, adr/ADR-0031, adr/ADR-0032, adr/ADR-0033, adr/ADR-0034, plan/04-t0-g0-semantic-assertion-profile]
+summary: 実装フェーズT0-T2/I1-I6。theory T1、broad I1 residual、official I2 exit、active ADR-0034 programとI3 lifecycle未entryを分離する。
 open_items: [OPEN-032]
 ---
 
@@ -14,13 +14,11 @@ open_items: [OPEN-032]
 
 - theory lifecycle: **T1**（M2 semantic-assertion profile v3 の pass digest、G0-D3、
   G0 exit、T1 entry を ADR-0017 により受理済み）;
-- implementation evidence: **M10 I1+ deterministic reference profile accepted;
-  official I2 entry then I2 exit accepted; SYS-0--SYS-7 completed; Mirrorea I2
-  Systems Foundation bounded program closed; no active roadmap/goal**（ADR-0025 /
-  ADR-0026 / ADR-0027 / ADR-0028 / ADR-0029 / ADR-0030 / ADR-0031 /
-  ADR-0032 / ADR-0033）。architecture/04 の full L2 carrier freeze と OPEN-026/027 が
-  残るため、広い PHASE-I1 exitは未受理。Theory lifecycleはT1のままであり、I3は
-  inactive、OPEN-032はunresolvedである。
+- implementation evidence: **M10 accepted; official I2 entry then exit accepted;
+  SYS-0--SYS-7 / ADR-0026 program closed; ADR-0034 I3 bounded program active at
+  ALIGN-0 with Plan 250**。architecture/04 の full L2 carrier freeze と OPEN-026/027 が
+  残るため broad PHASE-I1 exitは未受理。Official I3 lifecycleは未entry、両候補は
+  UNSELECTED、OPEN-032はunresolvedである。
 
 ## 理論フェーズ
 
@@ -156,18 +154,19 @@ official I2 entry accepted
 矛盾しない。runtime/verifierはphaseをself-activateできず、official stateはこのplanと
 ADR-0032だけが決める。Theory T1、broad PHASE-I1、public contract、I3 activationは
 動かない。SYS-6はcompletedし、SYS-7は下のinactive entry contract closeでcompleted
-した。I3はinactiveである。
+した。ADR-0033 close時点ではI3 program/lifecycleともinactiveだった。
 
-## Mirrorea I3 inactive entry contract
+## Mirrorea I3 active bounded program / lifecycle not entered
 
 PROPOSAL-036 / ADR-0033はplan/05のinactive I3 entry contractだけを受理した。二つの
 reliable-stream候補はともに**UNSELECTED**で、transport/session/certificateはauthority
 でない。failure/order、C-distributed gate、public-wire等の正本は
 `plan/05-i3-entry-contract`である。
 
-SYS-7とADR-0026 programはclosed、Plan 249はclosed recordである。現在active bounded
-program / roadmap / goalはない。official I2 exitを維持し、I3はinactive、OPEN-032は
-unresolvedである。transport selection又はI3開始にはnew owner directionが必要である。
+PROPOSAL-037 / ADR-0034はこのcontractをconsumeし、Plan 250をsole roadmap、ALIGN-0を
+active goalとする。これはofficial I3 entry/exitではない。official I2 exitを維持し、
+I3 lifecycleは未entry、OPEN-032はunresolvedである。selectionはI3-0の両候補同条件
+2-process canaryとseparate ADRを必要とする。
 
 ## T0/G0 phase-governance profile
 
@@ -213,6 +212,6 @@ authorized acceptance record. T0 uses v3 above. SCN C-static/C-runtime/
 C-distributed JSON follows `spec/06-conformance` and the `mir-conform`
 contract. **Phase を跨ぐ最適化の先取りは禁止**（BND-006 の意味保存を先に）。
 OPEN-032: I3のtransport選定は未決である。I2 exit条件ではなく、recorded plan/05
-entry contractをconsumeするfuture owner-authorized I3 program / entry decisionで、
-候補A/Bを同じC-distributed failure/order gatesにより比較して初めてADR対象にできる。
-ADR-0033はtransportを選ばず、I3をactivateしない。
+entry contractをconsumeするcurrent ADR-0034 programのI3-0 delegated decisionで、
+候補A/Bを同じexecutable two-process failure/order gatesにより比較して初めてADR対象に
+できる。ADR-0033自体はtransportを選ばず、official I3 lifecycleをactivateしない。

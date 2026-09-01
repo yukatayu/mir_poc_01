@@ -9,13 +9,15 @@ notes. If LAB text conflicts with canon, canon wins.
 
 この文書はリポジトリを読み始めるための短い案内です。規範判断は
 `mirrorea_canon/`、現在地は `docs/project-status.md`、closed Mirrorea I2 Systems
-Foundation record は `plan/249-mirrorea-i2-systems-foundation-current-roadmap.md`、
+Foundation record は `plan/249-mirrorea-i2-systems-foundation-current-roadmap.md`、active
+I3 roadmap は `plan/250-mirrorea-i3-distributed-foundation-current-roadmap.md`、
 閉じた M0--M10 record は `plan/247-mir-theory-v0-i1plus-current-roadmap.md`、task ごとの
 不変な証跡は `docs/reports/` にあります。
 
 下の `plan/` 索引は時系列の LAB repository memory です。索引にある候補や過去の
 「次」は current queue を意味しません。Plan 247とPlan 249はclosed execution
-recordsであり、現在はactive roadmap / goalがありません。older plansもhistorical
+recordsである。PROPOSAL-037 / ADR-0034によりI3 bounded programがactive、Plan 250が
+sole current roadmap、ALIGN-0がactive/closingである。older plansもhistorical
 memoryです。現在の停止線は
 `docs/project-status.md`、`progress.md`、`tasks.md` で確認します。
 
@@ -56,8 +58,9 @@ ADR-0032はofficial I2 entry後exitを受理した。accepted implementation/evi
 `5429712d...`、Canon/status integration cutは`bcb0f767...`である。PROPOSAL-036 /
 ADR-0033 / Canon plan 05はSYS-7を閉じ、TLS-over-TCP framed reliable streamとQUIC
 reliable streamをともにUNSELECTEDとしたtransport-neutralなinactive I3 entry contract
-だけを記録した。QUIC datagramは未admit・未評価で、OPEN-032は未解決である。theory T1
-とbroad PHASE-I1は不変、I3はinactive、active roadmap / goalはない。M2 は
+だけを記録した。PROPOSAL-037 / ADR-0034は公式I3 lifecycle entryを主張せずbounded
+programを開始した。QUIC datagramは除外、OPEN-032は未解決、両候補はUNSELECTEDである。
+ALIGN-0..2 → I3-0..6 → NEXT-0を固定順序とする。theory T1とbroad PHASE-I1は不変。M2 は
 `mirrorea_canon/plan/04-t0-g0-semantic-assertion-profile.md` と ADR-0017 に、revision
 `644ec1cdfa7d69600af3463ab60a6b7d745913c8` から再生成した v3 `pass` digest を記録し、
 G0-D3、G0 exit、T1 entry を順に受理した。official lifecycle は `T1` のままであり、
@@ -191,7 +194,7 @@ Mir、Mirrorea、PrismCascade、Typed-Effect Wiring Platform は関連します�
   accepted finite rulesへ置き換わる current decision sourceではなく、反例・設計履歴として
   読みます。
 - Plan 247 と Plan 249 は名前に `current-roadmap` を含みますが、現在はいずれも
-  closed execution record / regression baseline です。active roadmap はありません。
+  closed execution record / regression baseline です。Plan 250だけがactive roadmapです。
 - ADR-0026 は accepted finite semantics を per-locus artifact/generated communication/
   in-process dispatch/typed devtoolsへ進めるSYS-0--SYS-7をowner-authorized bounded
   programとして開始し、SYS-0--SYS-7 completed / closedで終了しました。ADR-0027は
@@ -213,8 +216,9 @@ Mir、Mirrorea、PrismCascade、Typed-Effect Wiring Platform は関連します�
   cut `5429712d...`の22-row finite `conform-i2` profileを受理し、official I2 entry後
   exitを適用した。PROPOSAL-036 / ADR-0033 / Canon plan 05 は transport-neutralな
   inactive I3 entry contractを記録し、SYS-7とprogramをclosedした。OPEN-026/027とfull
-  carrier freezeは残り、broad PHASE-I1は未受理です。active programがない現在は
-  ADR-0014のbounded L3 routeであり、L2 promotionは引き続きfail-closedです。
+  carrier freezeは残り、broad PHASE-I1は未受理です。現在はPROPOSAL-037 / ADR-0034の
+  bounded programとPlan 250がactiveで、program外だけがADR-0014のbounded L3 route、
+  L2 promotionは引き続きfail-closedです。
 - reader-facing な統合図は `docs/mirrorea-project-overview.html`、短い現在地は
   `docs/project-status.md`、proof status は Canon ledger、runnable LAB evidence は
   `samples_progress.md` を使います。
@@ -228,7 +232,7 @@ Mir、Mirrorea、PrismCascade、Typed-Effect Wiring Platform は関連します�
 | T2 | OBL-020/021/002 skeleton・G5 statement | not reopened; general T2 obligations unchanged, while SYS-2/3 add bounded OBL-058/059/060 only |
 | I1 | 単一 process reference implementation | finite deterministic reference profile accepted by M10 R5, but broad PHASE-I1 exit / public contract are not claimed |
 | I2 | process 内 multi-place | ADR-0032 accepted official entry then exit from SYS-3--SYS-6 evidence; ADR-0033 closed SYS-7/program |
-| I3 | 実 socket transport | inactive entry contract only; both transport candidates unselected, OPEN-032 unresolved |
+| I3 | 実 socket transport | bounded program active; lifecycle entry not official; both candidates unselected, OPEN-032 unresolved |
 | I4-I6 | 永続/patch、View、分散永続/federation | 後段 |
 
 M10 の finite acceptance は broad I1 exit や I2 entry の代用ではありません。ADR-0026 /
@@ -244,9 +248,10 @@ recordが揃ったためofficial I2 entry後exitを受理しました。broad PH
 - done: SYS-0--SYS-7 and the ADR-0026 / Plan 249 program are closed. Accepted
   SYS-6 implementation/evidence cut is `5429712d...`, Canon/status integration
   cut is `bcb0f767...`, and official I2 entry then exit is accepted.
-- in-progress: none. There is no active bounded program, roadmap, or goal.
-- blocked/deferred: I3 remains inactive and OPEN-032 unresolved. Real transport
-  selection/implementation requires new owner direction. Broad PHASE-I1 exit,
+- in-progress: PROPOSAL-037 / ADR-0034 bounded I3 program; Plan 250 sole roadmap;
+  ALIGN-0 active/closing, ALIGN-1 next (not active).
+- blocked/deferred: I3 lifecycle entry and OPEN-032 resolution remain unresolved;
+  both reliable-stream candidates are UNSELECTED and QUIC datagrams excluded. Broad PHASE-I1 exit,
   final public API/ABI/wire/carrier freeze, production, and browser/View product
   remain outside the accepted claim.
 - decisions taken: SYS-5 closes only the bounded local toy/devtools workflow:

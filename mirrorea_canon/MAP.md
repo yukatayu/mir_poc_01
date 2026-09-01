@@ -15,7 +15,7 @@ open_items: []
 NORTH-STAR (軸)
    │
    ▼
-adr/ (決定 ADR-0001..0033) ◄──── GLOSSARY (概念 CON-###)
+adr/ (決定 ADR-0001..0034) ◄──── GLOSSARY (概念 CON-###)
    │
    ▼
 DESIGN-CONSTITUTION (v0/I1+ の横断判断)
@@ -40,14 +40,14 @@ spec/ (Mir Report: 文法・静的意味・Core IR・runtime・適合・診断)
 scenarios/ (SCN-01..10 = 凍結基準; SCN-11+ = milestone pressure scenario)
    │
    ▼
-plan/ (Gate 0-7 → Phase T0-T2, I1-I6; inactive I3 entry contract)   meta/ (規約・正本関係・agent 規約)
+plan/ (Gate 0-7 → Phase T0-T2, I1-I6; ADR-0034 consumes I3 entry contract)   meta/ (規約・正本関係・agent 規約)
 ```
 
 ## 3 種の読み筋
 
 - **理論筋**(体系を理解・拡張する): NORTH-STAR → adr → DESIGN-CONSTITUTION → theory/00 → 01 → (関心の章) → 11 → scenarios。
 - **実装筋**(toolchain を作る): spec/02..15 → architecture/03..04 → scenarios → plan/01 の該当 Phase → plan/05 future I3 entry boundary。
-- **運用筋**(進め方を知る): plan/00..05 → meta/agent-instructions → adr/ADR-0012 → adr/ADR-0014 → adr/ADR-0015 → adr/ADR-0026 → adr/ADR-0027 → adr/ADR-0028 → adr/ADR-0029 → adr/ADR-0030 → adr/ADR-0031 → adr/ADR-0032 → adr/ADR-0033。
+- **運用筋**(進め方を知る): plan/00..05 → meta/agent-instructions → adr/ADR-0012 → adr/ADR-0014 → adr/ADR-0015 → adr/ADR-0026 → adr/ADR-0027 → adr/ADR-0028 → adr/ADR-0029 → adr/ADR-0030 → adr/ADR-0031 → adr/ADR-0032 → adr/ADR-0033 → adr/ADR-0034。
 
 Mir Theory v0 / I1+ Milestones 0--10 は ADR-0015--0025 と
 PROPOSAL-018--028 に従って完走した。accepted finite reference-profile の正本は
@@ -140,9 +140,10 @@ streamとcandidate B QUIC reliable streamはともに**UNSELECTED**で、QUIC da
 admit/evaluateしない。transport/session/certificateはauthorityでなく、internal carrierと
 future public wireは分離し、failure matrix、explicit retry/non-exactly-once、network-order
 refinement、SCN-01/02/03/06 future gatesをentry条件とする。SYS-7とADR-0026 programは
-closed、Plan 249はclosed record、I3はinactive、OPEN-032はunresolvedである。現在active
-bounded program / roadmap / semantic milestone / goalはなく、future I3 workにはnew owner
-directionが必要である。
+closed、Plan 249はclosed recordとして保持する。2026-09-01のowner directionを
+PROPOSAL-037 / ADR-0034がmirrorし、Mirrorea I3 Distributed Foundation bounded
+program、LAB Plan 250、ALIGN-0をactiveにした。これはofficial I3 lifecycle entryではなく、
+両transport候補はUNSELECTED、OPEN-032はunresolved、theory T1とbroad I1 residualは不変である。
 
 ## ID 体系
 

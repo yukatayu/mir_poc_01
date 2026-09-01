@@ -683,6 +683,7 @@ REQUIRED = [
     "plan/246-goal-first-semantic-integration-and-i1-entry.md",
     "plan/247-mir-theory-v0-i1plus-current-roadmap.md",
     "plan/249-mirrorea-i2-systems-foundation-current-roadmap.md",
+    "plan/250-mirrorea-i3-distributed-foundation-current-roadmap.md",
     "specs/00-document-map.md",
     "specs/01-charter-and-decision-levels.md",
     "specs/02-system-overview.md",

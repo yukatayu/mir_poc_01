@@ -2,8 +2,8 @@
 id: meta/source-hierarchy
 status: L0-frozen
 maturity: draft
-depends_on: [adr/ADR-0012, adr/ADR-0014, adr/ADR-0015, adr/ADR-0026, adr/ADR-0033]
-summary: canon > LAB、closed ADR-0015/0026 programs、inactive I3 contract、current ADR-0014 routeの境界。
+depends_on: [adr/ADR-0012, adr/ADR-0014, adr/ADR-0015, adr/ADR-0026, adr/ADR-0033, adr/ADR-0034]
+summary: canon > LAB、closed programs、active ADR-0034 program、program外ADR-0014 routeの境界。
 open_items: []
 ---
 
@@ -19,7 +19,7 @@ open_items: []
 2. LAB README / AGENTS.md の冒頭に同旨の 3 行を追記(既存本文は改変しない — evidence の凍結保存)。
 3. `mir_hilight.html` の KEYWORDS から `world` を除去、または「歴史的表示」と注記。
 4. clean-near-end 系サンプルに「旧語彙(world 等)を含む歴史的 suite」の注記 1 行。
-5. LAB への新規追加は implementation、test、proof/evidence、roadmap/report 等の非規範成果物とする。現在active bounded programはない。new owner directionまではADR-0014 research artifactを既存の許可済みlaneに限り、standing direct-consumer/falsifier条件を守る。
+5. LAB への新規追加は implementation、test、proof/evidence、roadmap/report 等の非規範成果物とする。active ADR-0034 program内はPlan 250のfixed milestone/direct-consumer/evidence条件、program外はADR-0014のstanding direct-consumer/falsifier条件を守る。
 
 ## 移行規則
 
@@ -34,9 +34,8 @@ M10 cuts は immutable history / regression baseline であり、successor work 
 current queue ではない。
 
 ADR-0026 / PROPOSAL-029 の SYS-0--SYS-7 bounded program はADR-0033によりclosedで、
-Plan 249はclosed execution recordである。ADR-0033 / plan/05のI3 entry contractは
-inactiveであり、current queueではない。現在active bounded program / roadmap / goalは
-ない。`root/design-constitution` は North Star/ADR の下で後続 Canon を拘束する current
+Plan 249はclosed execution recordである。PROPOSAL-037 / ADR-0034はplan/05をconsumeし、
+Plan 250をsole current roadmap、ALIGN-0をactive goalとする。`root/design-constitution` は North Star/ADR の下で後続 Canon を拘束する current
 decision filterであり、LAB roadmap/reportはそれを再解釈しない。`.mir` source、Rust、
 Lean、tests、generated tracesはnormative Canon rulesのimplementation/evidenceであり、
 存在だけで規範、proof、Gate、Phase、又はlifecycle acceptanceを変更しない。規範変更は

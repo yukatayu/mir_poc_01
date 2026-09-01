@@ -62,10 +62,11 @@ source hierarchy; do not treat an external chat as normative state.
      Mirrorea I2 Systems Foundation SYS-0--SYS-7 program are both closed.
      ADR-0015 / Plan 247 and ADR-0026 / Plan 249 remain their immutable
      authority/history baselines; neither grants successor authority or remains
-     a current queue. ADR-0033 and canon plan/05 preserve an inactive,
-     transport-neutral I3 entry contract, but I3 is not authorized or active.
-     There is currently no active bounded program, roadmap, or goal. Until new
-     owner direction designates one, follow ADR-0014's ordinary research route.
+     a current queue. PROPOSAL-037 / ADR-0034 consume ADR-0033 and canon
+     plan/05 for the active Mirrorea I3 Distributed Foundation bounded program.
+     Plan 250 is the sole current roadmap and ALIGN-0 is active. Program
+     activation is not official I3 lifecycle entry; both transport candidates
+     remain unselected. Outside program scope, follow ADR-0014's route.
 
 3. **Respect decision levels**
    - `L0` = foundational / changing it affects the whole system.
@@ -101,8 +102,8 @@ source hierarchy; do not treat an external chat as normative state.
      owner-authenticated trust anchor exists, additionally needs final-cut
      review.
      The ADR-0015 M0--M10 and ADR-0026 SYS-0--SYS-7 programs are closed and
-     grant no successor authority. ADR-0033 records only an inactive I3 entry
-     contract. Current work follows ADR-0014 as applicable; escalate changes to
+     grant no successor authority. PROPOSAL-037 / ADR-0034 supply the current
+     bounded successor authority; work outside it follows ADR-0014. Escalate changes to
      L0/L1, core/external contracts, SCN/Gate/Phase, any `theory/11` state, or a
      new moratorium-protected lane.
 
@@ -186,8 +187,8 @@ Every report should contain, in this order:
   designated current roadmap. A closed program may have neither; its last
   roadmap remains a closed record/regression baseline until owner direction
   designates a successor. Older `plan/` files remain repository memory, not an
-  active queue. Plan 247 and Plan 249 are closed baselines. There is currently
-  no active roadmap or semantic milestone.
+  active queue. Plan 247 and Plan 249 are closed baselines. Plan 250 is the
+  current roadmap and ALIGN-0 is the sole active milestone.
 - Do not read `docs/reports/` in bulk. Read only reports directly referenced by
   current Canon, roadmap, or status.
 - Open a new `WRK-####` only when it has a named direct consumer, reduces the
@@ -200,7 +201,7 @@ Every report should contain, in this order:
 
 ## Editing policy
 
-- `mirrorea_canon/` contains normative documents. Edit canon only through the canon process: proposal, owner decision, required ADR / changelog / index update. ADR-0015 and ADR-0026 record closed bounded programs and grant no successor authority. ADR-0033 records an inactive I3 entry contract, not authority to implement it. With no active bounded program, work follows ADR-0014 as applicable; ADR-0014 permits agent-maintained L3 work only in `working/WRK-####`, and L2 promotion remains fail-closed pending an owner-authenticated trust anchor.
+- `mirrorea_canon/` contains normative documents. Edit canon only through the canon process: proposal, owner decision, required ADR / changelog / index update. ADR-0015 and ADR-0026 record closed bounded programs and grant no successor authority. PROPOSAL-037 / ADR-0034 authorize only the fixed Plan 250 program. Outside it, ADR-0014 permits agent-maintained L3 work only in `working/WRK-####`, and L2 promotion remains fail-closed pending an owner-authenticated trust anchor.
 - Legacy LAB `specs/` remain historical evidence and implementation memory. Edit carefully, and do not treat them as canonical unless the claim is mirrored into `mirrorea_canon/`.
 - If you change a normative statement, add an explicit note to the report.
 - `Documentation.md` should stay concise and current.

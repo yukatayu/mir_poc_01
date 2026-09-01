@@ -2,8 +2,8 @@
 id: meta/agent-instructions
 status: L0-frozen
 maturity: draft
-depends_on: [adr/ADR-0012, adr/ADR-0014, adr/ADR-0015, adr/ADR-0026, adr/ADR-0033, plan/02-operating-model]
-summary: agent の読込、closed ADR-0015/0026 programs、inactive I3 contract、通常L3 research、review/owner escalation境界。
+depends_on: [adr/ADR-0012, adr/ADR-0014, adr/ADR-0015, adr/ADR-0026, adr/ADR-0033, adr/ADR-0034, plan/02-operating-model]
+summary: agent の読込、closed programs、active ADR-0034 program、program外L3 research、review/owner escalation境界。
 open_items: []
 ---
 
@@ -19,9 +19,9 @@ open_items: []
 - 決定済み事項の帰結の機械的展開: サンプル再表現、SCN 整合検証、INDEX 再生成、対比表更新、Lean への写経、反例探索、誤字・参照切れの修正(規範文の意味を変えない範囲)。
 - ADR-0015 / Plan 247とADR-0026 / Plan 249のbounded programsはいずれもclosedである。
   accepted cutsはregression baselineであり、successor authority又はcurrent queueではない。
-  ADR-0033 / plan/05のI3 entry contractはinactiveで、transport selection、I3
-  implementation又はnew roadmapをauthorizeしない。現在active bounded program /
-  semantic milestone / roadmap / goalはない。
+  PROPOSAL-037 / ADR-0034はADR-0033 / plan/05をconsumeするactive bounded programを
+  authorizeし、Plan 250をsole roadmap、ALIGN-0をactive goalとする。program activation
+  自体はofficial I3 entry/exit、transport selection、又はpublic contract freezeではない。
 - ADR-0014 の standing route に従う L2/L3 working theory: `working/WRK-####` に
   read-only canon anchors、pinned authority cut、result class、non-effects、alternative /
   falsifier、rollback を先に記録し、existing LAB lane で candidate を比較・検証する。
@@ -44,13 +44,12 @@ open_items: []
   owner escalation とする。
 - 未実行 validation の pass 扱い、LAB 文書の規範扱い、bounded evidence の general
   proof 扱い、hidden communication/authority/effect/failure、fake E2E を禁止する。
-- new owner directionがbounded programを開始するまではADR-0014のreserved boundaryと
-  L3-only routeを守る。
+- ADR-0034 program外ではADR-0014のreserved boundaryとL3-only routeを守る。
 
 ## 衝突時の挙動
 
 Closed ADR-0026 programのCanonと矛盾しても、同programを再開権限として使わない。
-現行はprogram外routeであり、L0/L1、reserved boundary、authority cut、又はsettled
+現行programのscope外では、L0/L1、reserved boundary、authority cut、又はsettled
 invariantに矛盾するcandidateは **作業を止めて `escalated` bundleを報告する**。
 同じ owner の直接指示が canon 改定を求める場合は、その指示を proposal / ADR /
 CHANGELOG / INDEX の通常手続きへ反映してから standing rule にする。delegated route
@@ -60,5 +59,6 @@ replacement が必要なら review をやり直す。
 ## 産物の置き場
 
 owner-reserved 提案 → `meta/proposals/`。candidate・実験・ログ・生成コード → LAB。
-Closed bounded-program resultはCanonとmilestone reportに保持する。現在のdelegated
-Canon writeはADR-0014に従う`working/WRK-####`だけで、根拠とhistoryをLABに残す。
+Closed bounded-program resultはCanonとmilestone reportに保持する。ADR-0034 program内
+のdelegated Canon writeはPlan 250のcurrent milestoneに限り、program外はADR-0014に
+従う`working/WRK-####`だけとし、根拠とhistoryをLABに残す。

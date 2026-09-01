@@ -2,17 +2,17 @@
 id: plan/05-i3-entry-contract
 status: L1-fixed
 maturity: reviewed
-depends_on: [adr/ADR-0033, arch/04-runtime-carriers, theory/04-ordering-and-cuts, theory/05-authority, theory/07-observation, theory/08-patch-hotplug, spec/06-conformance, scenarios/SCN-01, scenarios/SCN-02, scenarios/SCN-03, scenarios/SCN-06]
-summary: inactive I3 goal、transport-neutral adapter、failure/order refinement、future C-distributed entry gates。
+depends_on: [adr/ADR-0033, adr/ADR-0034, arch/04-runtime-carriers, theory/04-ordering-and-cuts, theory/05-authority, theory/07-observation, theory/08-patch-hotplug, spec/06-conformance, scenarios/SCN-01, scenarios/SCN-02, scenarios/SCN-03, scenarios/SCN-06]
+summary: ADR-0034 programがconsumeするI3 goal、transport-neutral adapter、failure/order refinement、C-distributed gates。
 open_items: [OPEN-032]
 ---
 
-# 05 — Inactive I3 entry contract
+# 05 — I3 entry contract
 
 ## Status and future goal
 
-This contract is an accepted **inactive entry boundary**, not an active phase
-or implementation plan. A future owner-authorized program may pursue:
+ADR-0033 accepted this contract as an inactive entry boundary. PROPOSAL-037 /
+ADR-0034 now consumes it for the active bounded program, whose parent goal is:
 
 > Execute accepted I2 per-locus artifacts and generated communication across
 > at least two operating-system processes using a real transport while
@@ -20,12 +20,13 @@ or implementation plan. A future owner-authorized program may pursue:
 > redaction, and Mir abstract ordering, and close a finite C-distributed
 > profile.
 
-ADR-0033 closes SYS-7 and the ADR-0026 program after recording this contract.
-No current roadmap or goal activates it.
+Program activation is not official I3 lifecycle entry or exit. LAB Plan 250 is
+the sole current roadmap and ALIGN-0 is active. The two transport candidates
+remain unselected and OPEN-032 remains unresolved.
 
 ## Accepted input boundary
 
-The future program starts from the accepted I2 boundary, not from source-free
+The active ADR-0034 program starts from the accepted I2 boundary, not from source-free
 message schemas:
 
 ```text
@@ -172,10 +173,10 @@ operation linearization, reads-from/coherence where needed, and a bounded
 scheduler assumption. Arbitrary fairness, WAN liveness, hardware memory, and
 lock-free refinement remain deferred.
 
-## Future C-distributed gates
+## I3 C-distributed gates
 
-Frozen ordinary-source scenarios remain unchanged. A future I3 program must
-add C-distributed execution evidence for:
+Frozen ordinary-source scenarios remain unchanged. The active ADR-0034 program
+must add C-distributed execution evidence for:
 
 | Gate | Positive path | Representative falsifier |
 |---|---|---|
@@ -201,7 +202,7 @@ C-distributed execution.
 
 ## Entry, stop, and activation rules
 
-A future I3 program may start only after new owner direction names:
+An I3 program may start only after owner direction names:
 
 - its bounded parent goal and sole current roadmap;
 - the retained or revised at-most-two candidate set;
@@ -210,8 +211,10 @@ A future I3 program may start only after new owner direction names:
 - public-wire non-freeze or separately authorized freeze boundary; and
 - owner-reserved production/security/deployment stop line.
 
-Until then there is no active program, roadmap, goal, selected transport,
-implementation, or I3 lifecycle entry. OPEN-032 remains unresolved.
+PROPOSAL-037 / ADR-0034 satisfy these program-activation inputs and designate
+Plan 250. They do not select transport or apply official I3 entry/exit. Those
+lifecycle transitions remain explicit I3-6 acceptance actions after actual
+evidence and independent review. OPEN-032 remains unresolved.
 
 ## Non-claims
 
@@ -219,5 +222,6 @@ This contract does not select/implement TLS-over-TCP or QUIC, admit/evaluate
 QUIC datagrams, choose version/codec/wire/library/certificate/port/deployment,
 freeze public compatibility, claim exactly-once or hidden retry, implement
 multi-process runtime, prove general network ordering/fairness/security/
-durability, accept broad PHASE-I1, change theory T1 or OBL status, activate I3,
-deploy production, or complete the public Mirrorea product.
+durability, accept broad PHASE-I1, change theory T1 or OBL status, apply
+official I3 lifecycle entry/exit without I3-6 acceptance, deploy production,
+or complete the public Mirrorea product.

@@ -2,8 +2,8 @@
 id: plan/02-operating-model
 status: L1-fixed
 maturity: reviewed
-depends_on: [adr/ADR-0012, adr/ADR-0014, adr/ADR-0015, adr/ADR-0026, adr/ADR-0033]
-summary: closed bounded programs、inactive I3 entry contract、通常L3 researchを分離し、goal/frontier/roadmap/report/review/evidence規律を定める。
+depends_on: [adr/ADR-0012, adr/ADR-0014, adr/ADR-0015, adr/ADR-0026, adr/ADR-0033, adr/ADR-0034]
+summary: closed programs、active ADR-0034 program、program外L3 researchを分離し、goal/frontier/roadmap/report/review/evidence規律を定める。
 open_items: []
 ---
 
@@ -11,21 +11,23 @@ open_items: []
 
 ## Authority profiles
 
-Three profiles are deliberately separate.
+Four profiles are deliberately separate.
 
-1. **Mirrorea I2 Systems Foundation SYS-0--SYS-7** followed ADR-0026 and
+1. **Mirrorea I3 Distributed Foundation** follows ADR-0034 and
+   PROPOSAL-037. Its fixed sequence is ALIGN-0--2, I3-0--6, NEXT-0; Plan 250
+   is its sole current roadmap and ALIGN-0 is the active frontier.
+2. **Mirrorea I2 Systems Foundation SYS-0--SYS-7** followed ADR-0026 and
    PROPOSAL-029. It is closed by ADR-0033; its accepted cuts and Plan 249 are
    immutable history/regression baseline and grant no I3 or successor authority.
-2. **Mir v0/I1+ M0--M10** followed ADR-0015 and PROPOSAL-018. It is closed;
+3. **Mir v0/I1+ M0--M10** followed ADR-0015 and PROPOSAL-018. It is closed;
    its accepted cuts and Plan 247 remain immutable history/regression baseline
    and grant no successor authority.
-3. **Current research outside an active bounded program** follows ADR-0014. Its Canon write surface
+4. **Research outside the active bounded program** follows ADR-0014. Its Canon write surface
    remains a reversible `working/WRK-####` L3 record; L2 promotion remains
    fail-closed while the owner-authenticated trust anchor is absent.
 
-ADR-0033 / plan/05 records an inactive future I3 entry contract. It is neither
-an active program nor a current roadmap. At present no bounded program,
-semantic milestone, roadmap, or goal is active.
+ADR-0033 / plan/05 remains the accepted I3 entry boundary consumed by
+PROPOSAL-037 / ADR-0034. Program activation is not official I3 entry or exit.
 
 Neither profile changes `canon > LAB`. An agent's filesystem write capability
 is not semantic authority.
@@ -66,10 +68,9 @@ One LAB document is designated the **current execution roadmap**. It contains:
 - current owner boundary; and
 - deferred scope.
 
-ADR-0026 used `LAB:plan/249-mirrorea-i2-systems-foundation-current-roadmap.md`.
-ADR-0033 closes it. Plan 249, Plan 247, and older numbered plans are not current
-queues. No current execution roadmap exists until new owner direction creates
-one.
+ADR-0034 designates
+`LAB:plan/250-mirrorea-i3-distributed-foundation-current-roadmap.md`. Plan 249,
+Plan 247, and older numbered plans are not current queues.
 
 `progress.md`, `tasks.md`, `docs/project-status.md`, and `Documentation.md` are
 derived snapshots. Older numbered plans remain repository memory and are not a
@@ -206,8 +207,8 @@ and source data; do not force-push or rewrite history.
 
 ## Stop condition
 
-ADR-0026 is closed; its old continuation rule no longer authorizes work. Until
-new owner direction starts another bounded program, use ADR-0014's standing
-L3, escalation, and fail-closed rules. Official T1, deferred general
+ADR-0026 is closed; its old continuation rule no longer authorizes work.
+ADR-0034 now authorizes only the fixed Plan 250 program. Outside that scope,
+use ADR-0014's standing L3, escalation, and fail-closed rules. Official T1, deferred general
 obligations, open public contracts, incomplete later phases, or unoptimized
 performance do not by themselves create an active goal.

@@ -24,10 +24,11 @@ the canon process: proposal, owner decision, ADR or file update where required,
 - ADR-0026 / PROPOSAL-029 and LAB Plan 249 record the closed Mirrorea I2
   Systems Foundation SYS-0--SYS-7 program. Its accepted cuts are immutable
   history/regression baseline and grant no successor authority.
-- ADR-0033 / PROPOSAL-036 and canon plan/05 record an inactive,
-  transport-neutral I3 entry contract. The transport candidates and OPEN-032
-  remain unresolved; I3 is not authorized or active.
-- There is currently no active bounded program, roadmap, or goal. Until new
-  owner direction designates one, ADR-0014 permits only reversible L3
+- ADR-0033 / PROPOSAL-036 and canon plan/05 record the transport-neutral I3
+  entry contract. PROPOSAL-037 / ADR-0034 consume it for the active Mirrorea
+  I3 Distributed Foundation bounded program. Plan 250 is the sole current
+  roadmap and ALIGN-0 is active; both transport candidates and OPEN-032 remain
+  unresolved, and official I3 lifecycle entry is not implied.
+- Outside ADR-0034's fixed scope, ADR-0014 permits only reversible L3
   pre-registration in `mirrorea_canon/working/`; L2 remains fail-closed pending
   an owner-authenticated trust anchor.

@@ -1,6 +1,6 @@
 # Project status
 
-最終更新: 2026-08-28 20:06 JST
+最終更新: 2026-09-01 21:08 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -25,10 +25,13 @@ closed M0--M10 finite reference baseline
 -> [x] SYS-5 four-locus toy + typed devtools
 -> [x] SYS-6 finite I2 assurance / lifecycle closeout
 -> [x] SYS-7 inactive I3 entry contract only / program closed
--> [ ] future I3 program (inactive; new owner direction required)
+-> [ ] ALIGN-0 bounded-program activation / meta-drift alignment (active/closing)
+-> [ ] ALIGN-1 project/product layer constitution (next, not active)
 ```
 
-Plan 247とPlan 249はclosed recordsである。current execution roadmap / active goalはない。
+Plan 247とPlan 249はclosed recordsである。PROPOSAL-037 / ADR-0034により
+Mirrorea I3 Distributed Foundation bounded programがactiveで、Plan 250がsole
+current roadmap、ALIGN-0がactive/closing milestoneである。
 
 ## 現在地
 
@@ -38,8 +41,8 @@ Plan 247とPlan 249はclosed recordsである。current execution roadmap / acti
 | broad PHASE-I1 | **unaccepted**; OPEN-026/027とfull carrier freezeが残る | `mirrorea_canon/architecture/04-runtime-carriers.md` |
 | bounded I2 lifecycle | **official entry accepted, then official exit accepted** | `mirrorea_canon/adr/ADR-0032.md` |
 | ADR-0026 program | **SYS-0--SYS-7 closed** | `mirrorea_canon/adr/ADR-0033.md` |
-| active roadmap / goal | **none** | `plan/249-mirrorea-i2-systems-foundation-current-roadmap.md` |
-| I3 / OPEN-032 | **inactive / unresolved** | `mirrorea_canon/plan/05-i3-entry-contract.md` |
+| active roadmap / goal | **Plan 250 / ALIGN-0 active/closing** | `plan/250-mirrorea-i3-distributed-foundation-current-roadmap.md` |
+| I3 / OPEN-032 | **bounded program active; lifecycle entry not official / unresolved** | `mirrorea_canon/adr/ADR-0034.md` |
 | public/product | final grammar/CLI/API/ABI/wireもproductionも未受理 | `mirrorea_canon/adr/ADR-0033.md` |
 
 Accepted SYS-6 implementation/evidence cutは
@@ -54,17 +57,20 @@ version、codec、wire、library、certificate representation、port、retry、d
 
 ## 現在の停止線
 
-Closed ADR-0026 programはここで停止する。I3 implementation、候補選定、OPEN-032
-resolution、新current roadmapは新しいowner directionなしに開始しない。この停止線は
-`mirrorea_canon/adr/ADR-0033.md`と
-`mirrorea_canon/plan/05-i3-entry-contract.md`に由来する。
+ALIGN-0はdocs/status alignment and activation boundaryを閉じつつある。次はALIGN-1
+であり、まだactiveではない。固定順序はALIGN-0..2 → I3-0..6 → NEXT-0である。
+ALIGN-0 acceptanceはI3 lifecycle entry、transport選定、production/public freezeを
+含まない。これらは各後段gate又はowner-reserved boundaryへ残る。
+Current authority and milestone gates are
+`mirrorea_canon/adr/ADR-0034.md` and
+`plan/250-mirrorea-i3-distributed-foundation-current-roadmap.md`.
 
-Future I3はinternal carrierとpublic wireを分離し、route/handshake/framing/
+The active bounded I3 programはinternal carrierとpublic wireを分離し、route/handshake/framing/
 disconnect/reconnect/ambiguous delivery/duplicate/reorder/stale authority/backpressure/
 timeout/provider/redaction/patch/cut failureをtypedに扱い、network occurrencesをMir
 orderingへrefineしなければならない。hidden retry、exactly-once、hidden transactionは不可。
 
-Future C-distributed entryはordinary-source SCN-01/02/03/06のpositive/falsifier、
+I3-4/I3-6のC-distributed evidenceはordinary-source SCN-01/02/03/06のpositive/falsifier、
 source/Core/artifact/carrier/network/runtime correspondence、observer-safe diagnostics、
 evidence classification、independent reviewを必要とする。I2 evidenceだけでは満たさない。
 
@@ -74,10 +80,9 @@ drift、observer leak、lower-layer conformance dependency、M10 regressionの�
 
 ## オーナーの確認・判断待ち
 
-現在進行中の確認依頼はない。次の開始にはowner decisionが必要である。
+OPEN-032はI3-0の同条件実行証拠とADRにより、本指令の委任範囲で自律選択する。
+次のbounded sequence外の変更だけがowner decisionを必要とする。
 
-- I3 bounded program activationとnew roadmap;
-- OPEN-032のCandidate A / B transport選定;
 - public API/ABI/wire/grammar/CLI compatibility freeze;
 - production deployment、external publication、paid resource;
 - North Star、authority/privacy/redaction/no-stale guaranteeの変更;
@@ -85,7 +90,7 @@ drift、observer leak、lower-layer conformance dependency、M10 regressionの�
 - Constitutionでも解けないirreversible semantic tie。
 
 Authority boundaryは`mirrorea_canon/meta/agent-instructions.md`と
-`mirrorea_canon/adr/ADR-0033.md`を参照する。これらは未完了SYS-7 taskではない。
+`mirrorea_canon/adr/ADR-0034.md`を参照する。これらは未完了SYS-7 taskではない。
 
 ## 根拠と詳細
 
@@ -95,6 +100,7 @@ Authority boundaryは`mirrorea_canon/meta/agent-instructions.md`と
 | lifecycle | `mirrorea_canon/plan/01-phases.md` |
 | SYS-6 acceptance | `mirrorea_canon/adr/ADR-0032.md`, `mirrorea_canon/spec/15-sys6-i2-conformance.md` |
 | inactive I3 contract | `mirrorea_canon/adr/ADR-0033.md`, `mirrorea_canon/plan/05-i3-entry-contract.md` |
+| active bounded I3 program | `mirrorea_canon/adr/ADR-0034.md`, `plan/250-mirrorea-i3-distributed-foundation-current-roadmap.md` |
 | proof/evidence class | `mirrorea_canon/theory/11-metatheory-ledger.md` |
 | closed I2 roadmap | `plan/249-mirrorea-i2-systems-foundation-current-roadmap.md` |
 | SYS-6 close evidence | `docs/reports/2598-mirrorea-i2-systems-foundation-sys6-i2-conformance-closeout.md` |

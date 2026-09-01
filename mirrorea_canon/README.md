@@ -15,12 +15,12 @@ open_items: []
 
 1. 本 canon は、憲章と決定(`adr/`)、形式理論(`theory/`)、言語・システム仕様(`spec/`)、適合性シナリオ(`scenarios/`)、メンタルモデル(`mental-model/`)、階層と契約(`architecture/`)、計画と運用(`plan/`)、執筆・運用規約(`meta/`)、可逆な作業仮説(`working/`)の正本を含む。
 2. 既存リポジトリ `mir_poc_01`(以下 **LAB**)は、本 canon の導入をもって**実験場・evidence 置き場**に位置づけが変わる。canon と LAB の記述が衝突する場合、常に canon が勝つ。手続きは `meta/source-hierarchy.md` に従う。
-3. canon の改定は `meta/style-guide.md` の改定手続き(提案 → owner decision → ADR / CHANGELOG 追記)で行う。ADR-0015 と ADR-0026 の owner-approved bounded programs はいずれも closed であり、Plan 247 / 249 は再開権限又は current queue ではない。現在active bounded program / roadmap / goalはない。新owner directionまでは ADR-0014 の standing L3 route を用い、L2 promotion は owner-authenticated trust anchor 未構成のため fail-closed である(`meta/agent-instructions.md`)。
+3. canon の改定は `meta/style-guide.md` の改定手続き(提案 → owner decision → ADR / CHANGELOG 追記)で行う。ADR-0015 と ADR-0026 の owner-approved bounded programs は closed であり、Plan 247 / 249 は再開権限又は current queue ではない。PROPOSAL-037 / ADR-0034 は Mirrorea I3 Distributed Foundation bounded program を開始し、LAB Plan 250 を sole current roadmap、ALIGN-0 を active goal とする。program 外は ADR-0014 の standing L3 route、L2 promotion は owner-authenticated trust anchor 未構成のため fail-closed である(`meta/agent-instructions.md`)。
 
 ## 最短の読み順
 
 - 全体像: `MAP.md` → `NORTH-STAR.md` → `DESIGN-CONSTITUTION.md` → `GLOSSARY.md`
-- 決定: `adr/README.md`(33 本の決定の一覧)
+- 決定: `adr/README.md`(34 本の決定の一覧)
 - 理論: `theory/00-overview.md` → `theory/01-mircore-v0.md` →
   `theory/13-evaluation-materialization.md` →
   `theory/14-maintained-relation-projection.md` →
@@ -48,6 +48,9 @@ open_items: []
   `spec/15-sys6-i2-conformance.md` → `plan/05-i3-entry-contract.md` →
   `plan/02-operating-model.md` →
   `LAB:plan/249-mirrorea-i2-systems-foundation-current-roadmap.md` (closed)
+- active I3 bounded program: `meta/proposals/PROPOSAL-037-mirrorea-i3-distributed-foundation.md` →
+  `adr/ADR-0034.md` → `plan/05-i3-entry-contract.md` →
+  `LAB:plan/250-mirrorea-i3-distributed-foundation-current-roadmap.md`
 - 何がいつ動くか: `plan/01-phases.md` → `plan/04-t0-g0-semantic-assertion-profile.md`
 
 各ディレクトリの `README.md` が、そのディレクトリの 1 頁要約・読み順・「ここから推論してはいけないこと」を持つ。全ファイルは YAML front matter(id / status / maturity / depends_on / summary / open_items)を持ち、`INDEX.json` が機械可読索引である。
