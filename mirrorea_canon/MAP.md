@@ -15,7 +15,7 @@ open_items: []
 NORTH-STAR (軸)
    │
    ▼
-adr/ (決定 ADR-0001..0036) ◄──── GLOSSARY (概念 CON-###)
+adr/ (決定 ADR-0001..0037) ◄──── GLOSSARY (概念 CON-###)
    │
    ▼
 DESIGN-CONSTITUTION (v0/I1+ の横断判断)
@@ -47,7 +47,7 @@ plan/ (Gate 0-7 → Phase T0-T2, I1-I6; ADR-0034 consumes I3 entry contract)   m
 
 - **理論筋**(体系を理解・拡張する): NORTH-STAR → adr → DESIGN-CONSTITUTION → theory/00 → 01 → (関心の章) → 11 → scenarios。
 - **実装筋**(toolchain を作る): spec/02..15 → architecture/03..04 → scenarios → plan/01 の該当 Phase → plan/05 future I3 entry boundary。
-- **運用筋**(進め方を知る): plan/00..05 → meta/agent-instructions → adr/ADR-0012 → adr/ADR-0014 → adr/ADR-0015 → adr/ADR-0026 → adr/ADR-0027 → adr/ADR-0028 → adr/ADR-0029 → adr/ADR-0030 → adr/ADR-0031 → adr/ADR-0032 → adr/ADR-0033 → adr/ADR-0034 → adr/ADR-0035 → adr/ADR-0036。
+- **運用筋**(進め方を知る): plan/00..05 → meta/agent-instructions → adr/ADR-0012 → adr/ADR-0014 → adr/ADR-0015 → adr/ADR-0026 → adr/ADR-0027 → adr/ADR-0028 → adr/ADR-0029 → adr/ADR-0030 → adr/ADR-0031 → adr/ADR-0032 → adr/ADR-0033 → adr/ADR-0034 → adr/ADR-0035 → adr/ADR-0036 → adr/ADR-0037。
 
 Mir Theory v0 / I1+ Milestones 0--10 は ADR-0015--0025 と
 PROPOSAL-018--028 に従って完走した。accepted finite reference-profile の正本は
@@ -144,8 +144,15 @@ closed、Plan 249はclosed recordとして保持する。2026-09-01のowner dire
 PROPOSAL-037 / ADR-0034がmirrorし、Mirrorea I3 Distributed Foundation bounded
 programとLAB Plan 250を開始した。PROPOSAL-038 / ADR-0035はALIGN-1 three-axis map、
 PROPOSAL-039 / ADR-0036はALIGN-2 Browser/Host trust boundaryを受理した。
-ALIGN-0/1/2はclosed、I3-0がsole active goal、I3-1がnext/not activeである。これはofficial I3 lifecycle entryではなく、
-両transport候補はUNSELECTED、OPEN-032はunresolved、theory T1とbroad I1 residualは不変である。
+PROPOSAL-040 / ADR-0037は同一のprivate source/Core-bound nine-case actual-process
+canaryでcriteria 1--7がtieし、criterion 8 implementation/library maturityとcriterion 9
+cross-platform maintainabilityにauditable/tested winnerがないことを確認した。最初の
+material differenceであるcriterion 10 future browser relevanceによりQUIC reliable
+streamをprivate selected adapterとした。TLS-over-TCP framed reliable streamはrejected/
+deferred replacement baseline、QUIC datagramはexcludedのままである。ALIGN-0/1/2とI3-0はclosed、I3-1が
+sole active、I3-2がnext/inactiveである。OPEN-032はこのbounded programだけresolvedした。
+これはpublic wire/API freeze又はofficial I3 lifecycle entryではなく、theory T1とbroad
+I1 residualは不変である。
 
 ## ID 体系
 

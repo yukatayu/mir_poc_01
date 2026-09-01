@@ -2,9 +2,9 @@
 id: plan/05-i3-entry-contract
 status: L1-fixed
 maturity: reviewed
-depends_on: [adr/ADR-0033, adr/ADR-0034, adr/ADR-0035, adr/ADR-0036, arch/04-runtime-carriers, arch/06-project-product-layers, arch/07-browser-host-trust-boundaries, arch/08-browser-host-security-invariants, theory/04-ordering-and-cuts, theory/05-authority, theory/07-observation, theory/08-patch-hotplug, spec/06-conformance, scenarios/SCN-01, scenarios/SCN-02, scenarios/SCN-03, scenarios/SCN-06]
-summary: ADR-0034 programがconsumeするI3 goal、transport-neutral adapter、failure/order refinement、C-distributed gates。
-open_items: [OPEN-032]
+depends_on: [adr/ADR-0033, adr/ADR-0034, adr/ADR-0035, adr/ADR-0036, adr/ADR-0037, arch/04-runtime-carriers, arch/06-project-product-layers, arch/07-browser-host-trust-boundaries, arch/08-browser-host-security-invariants, theory/04-ordering-and-cuts, theory/05-authority, theory/07-observation, theory/08-patch-hotplug, spec/06-conformance, scenarios/SCN-01, scenarios/SCN-02, scenarios/SCN-03, scenarios/SCN-06]
+summary: ADR-0034 programがconsumeするI3 goal、ADR-0037 selected private adapter、transport-neutral mapping、failure/order refinement、C-distributed gates。
+open_items: []
 ---
 
 # 05 — I3 entry contract
@@ -21,8 +21,10 @@ ADR-0034 now consumes it for the active bounded program, whose parent goal is:
 > profile.
 
 Program activation is not official I3 lifecycle entry or exit. LAB Plan 250 is
-the sole current roadmap; ALIGN-0/1/2 are completed and I3-0 is active. The two transport candidates
-remain unselected and OPEN-032 remains unresolved.
+the sole current roadmap; ALIGN-0/1/2 and I3-0 are completed and I3-1 is the
+sole active goal. PROPOSAL-040 / ADR-0037 select QUIC reliable stream as the
+private I3 adapter after equal actual-process canaries. OPEN-032
+is resolved only for this bounded program. Official I3 remains unentered.
 
 I3 transport/runtime must preserve `arch/07-browser-host-trust-boundaries` and
 `arch/08-browser-host-security-invariants`:
@@ -47,20 +49,26 @@ Deployment may map a logical locus to a process/host. It may not invent
 communication edges, owner operations, capabilities, witnesses, effect rows,
 failures, state, expected results, or semantic occurrences.
 
-## Candidate inventory
+## Selected adapter and retained comparison
 
 Only the following future evaluation candidates are admitted:
 
 | ID | Candidate | Required shape | Current status |
 |---|---|---|---|
-| A | TLS-over-TCP framed reliable-stream adapter | explicit framing above a reliable byte stream; partial read/write and head-of-line consequences remain visible | **UNSELECTED** |
-| B | QUIC reliable-stream adapter | reliable streams only; cross-stream/reconnect ordering remains explicit | **UNSELECTED** |
+| A | TLS-over-TCP framed reliable-stream adapter | explicit framing above a reliable byte stream; partial read/write and head-of-line consequences remain visible | **REJECTED/DEFERRED comparison and replacement baseline** |
+| B | QUIC reliable-stream adapter | reliable streams only; cross-stream/reconnect ordering remains explicit | **SELECTED for this private bounded I3 program by ADR-0037** |
 
-QUIC datagrams are not admitted or evaluated. The contract does not choose a
-protocol version, codec, framing/wire fields, implementation library,
-certificate format, port, process topology, connection pooling, retry policy,
-or deployment environment. Future comparison uses the same failure/order/
-authority gates for A and B. OPEN-032 remains unresolved.
+QUIC datagrams are not admitted or evaluated. The equal nine-case I3-0 canary
+tied on semantic/safety criteria 1--7. Criterion 8 implementation/library
+maturity had no auditable winner, and criterion 9 had no tested winner beyond
+Linux x86_64 localhost. Criterion 10 future browser relevance was therefore the
+first material difference and selected Candidate B. Candidate A's smaller
+implementation is lower-ranked simplicity/performance evidence, not maturity.
+This does not choose a public protocol version,
+codec, framing/wire fields, certificate format, port, process topology,
+connection pooling, retry policy, deployment environment, supported-platform
+set, or production security claim. Candidate A remains a conservative
+replacement baseline, not a second active queue.
 
 ## Authority and identity invariants
 
@@ -88,12 +96,13 @@ semantic request, renew a revoked grant, or resurrect an old incarnation.
 
 ## Internal carrier and public wire
 
-The accepted I2 internal carrier is typed and non-public. A future public wire
-is a separate representation with a checked mapping:
+The accepted I2 internal carrier is typed and non-public. Active I3-1 implements
+a private provisional mapping; a future public wire remains a separate
+representation and decision:
 
 ```text
 internal semantic carrier
-  -> future versioned encoding (unresolved)
+  -> private provisional versioned encoding (I3-1)
   -> transport adapter bytes/streams
   -> checked decoding/admission
   -> internal semantic carrier
@@ -101,9 +110,10 @@ internal semantic carrier
 
 Encoding/decoding may not add or omit semantic meaning, collapse request /
 serve / result / receipt, hide failure/effect/visibility, or weaken redaction.
-Public versioning, compatibility, schema evolution, limits, codec, and wire
+I3-1 selects only private version/limits/codec details needed by its finite
+consumer. Public versioning, compatibility, schema evolution, and wire
 diagnostic spelling require separate decisions. No public freeze follows from
-this entry contract.
+this entry contract or ADR-0037.
 
 ## Required failure matrix
 
@@ -217,16 +227,18 @@ An I3 program may start only after owner direction names:
 - owner-reserved production/security/deployment stop line.
 
 PROPOSAL-037 / ADR-0034 satisfy these program-activation inputs and designate
-Plan 250. They do not select transport or apply official I3 entry/exit. Those
-lifecycle transitions remain explicit I3-6 acceptance actions after actual
-evidence and independent review. OPEN-032 remains unresolved.
+Plan 250. PROPOSAL-040 / ADR-0037 resolve the private bounded transport choice
+and close I3-0; they do not apply official I3 entry/exit. Those lifecycle
+transitions remain explicit I3-6 acceptance actions after actual evidence and
+independent review.
 
 ## Non-claims
 
-This contract does not select/implement TLS-over-TCP or QUIC, admit/evaluate
-QUIC datagrams, choose version/codec/wire/library/certificate/port/deployment,
-freeze public compatibility, claim exactly-once or hidden retry, implement
-multi-process runtime, prove general network ordering/fairness/security/
-durability, accept broad PHASE-I1, change theory T1 or OBL status, apply
-official I3 lifecycle entry/exit without I3-6 acceptance, deploy production,
-or complete the public Mirrorea product.
+This contract and ADR-0037 select only QUIC reliable stream as
+the private bounded-program adapter. They do not admit/evaluate QUIC datagrams,
+freeze a public version/codec/wire/API/certificate/port/deployment or supported-
+platform contract, claim exactly-once or hidden retry, complete I3-1, implement
+the I3-2 owner runtime, prove general network ordering/fairness/security/
+durability, accept broad PHASE-I1, change theory T1 or OBL status, apply official
+I3 lifecycle entry/exit without I3-6 acceptance, deploy production, or complete
+the public Mirrorea product.

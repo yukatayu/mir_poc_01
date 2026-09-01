@@ -18,7 +18,8 @@ the closed authority/execution record for the accepted Mir Theory v0 / I1+
 M0--M10 finite reference baseline. ADR-0026 and Plan 249 likewise record the
 now-closed Mirrorea I2 Systems Foundation SYS-0--SYS-7 program. PROPOSAL-037 /
 ADR-0034 authorize the bounded Mirrorea I3 Distributed Foundation program;
-Plan 250 is its sole current roadmap; ALIGN-0, ALIGN-1, and ALIGN-2 are completed and I3-0 is the sole active goal.
+Plan 250 is its sole current roadmap; ALIGN-0, ALIGN-1, ALIGN-2, and I3-0 are
+completed and I3-1 is the sole active goal.
 
 ALIGN-1 accepted the Canon three-axis map in
 `mirrorea_canon/architecture/06-project-product-layers.md`: semantic strata
@@ -42,13 +43,16 @@ source-first `conform-i2` profile and official I2 entry followed by I2 exit.
 
 PROPOSAL-036 / ADR-0033 / Canon plan 05 close SYS-7 by recording only an
 inactive, transport-neutral I3 entry contract. PROPOSAL-037 / ADR-0034 activate
-the bounded I3 program without official I3 lifecycle entry. Candidate A, a TLS-over-TCP
-framed reliable-stream adapter, and Candidate B, a QUIC reliable-stream
-adapter, are both **UNSELECTED**; QUIC datagrams are not admitted or evaluated.
-No protocol version, codec, public wire, library, certificate representation,
-port, retry policy, or deployment topology is selected. Transport, connection,
-session, certificate, and route metadata are not authority. OPEN-032 remains
-unresolved and both candidates remain UNSELECTED; QUIC datagrams are excluded.
+the bounded I3 program without official I3 lifecycle entry. PROPOSAL-040 /
+ADR-0037 select Candidate B, QUIC reliable stream, as the private
+I3 adapter after both candidates passed the same source/Core-
+bound actual-process canary and tied on criteria 1--7. Criteria 8 and 9 produced no auditable winner;
+criterion 10 future browser relevance made the first material difference. TLS-over-TCP remains a
+rejected/deferred replacement baseline; QUIC datagrams are not admitted or
+evaluated. No public protocol version, codec, wire, certificate representation,
+API/ABI, deployment, production security or platform set is selected. Transport,
+connection, session, certificate and route metadata are not authority. OPEN-032
+is resolved only for this bounded program.
 ALIGN-0..2 then I3-0..6 and NEXT-0 are the fixed bounded sequence. Official I3
 lifecycle entry is not yet accepted but remains an I3-6 acceptance action;
 public freeze and production claims remain outside this program.

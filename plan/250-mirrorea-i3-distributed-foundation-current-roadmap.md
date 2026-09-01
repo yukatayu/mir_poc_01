@@ -1,6 +1,6 @@
 # Plan 250 — Mirrorea I3 Distributed Foundation current execution roadmap
 
-最終更新: 2026-09-01 23:03 JST
+最終更新: 2026-09-02 02:52 JST
 
 ## 役割、authority、current control state
 
@@ -40,18 +40,21 @@ roadmap/status pointer の一致を検証する。
   `2f19810500b07d4b924b8201545dc2dc397c5f54`
 - accepted ALIGN-1 architecture decision: PROPOSAL-038 / ADR-0035
   (the milestone integration commit cannot embed its own future hash)
+- accepted ALIGN-2 trust-boundary decision: PROPOSAL-039 / ADR-0036
+- accepted I3-0 private transport selection: PROPOSAL-040 / ADR-0037
+  (the milestone integration commit cannot embed its own future hash)
 - sole current roadmap: **Plan 250**
-- completed goals: **ALIGN-0, ALIGN-1, ALIGN-2**
-- sole active goal: **I3-0**
-- next goal after accepted I3-0 close: **I3-1**
+- completed goals: **ALIGN-0, ALIGN-1, ALIGN-2, I3-0**
+- sole active goal: **I3-1**
+- next goal after accepted I3-1 close: **I3-2**
 - all other milestones: **ordered, inactive, and dependency-gated**
 - Plan 247: closed M0--M10 execution record / regression baseline
 - Plan 249: closed SYS-0--SYS-7 execution record / accepted I2 baseline
 - official lifecycle at program start: theory **T1**; broad PHASE-I1
   **unaccepted**; official I2 entry and exit **accepted**; official I3
   **inactive**
-- OPEN-032: **UNRESOLVED until I3-0 comparative evidence and an authorized
-  selection ADR**
+- OPEN-032: **RESOLVED for this bounded program only by PROPOSAL-040 /
+  ADR-0037; no public/production/platform selection follows**
 
 Program authorization and official lifecycle acceptance are distinct. Work in
 the fixed program may proceed after ALIGN-0 authority/alignment close, but
@@ -246,8 +249,8 @@ and are exactly one per milestone:
 | ALIGN-0 | `docs/reports/2600-mirrorea-i3-distributed-foundation-align0-baseline-goal-alignment.md` | completed |
 | ALIGN-1 | `docs/reports/2601-mirrorea-i3-distributed-foundation-align1-layer-map.md` | completed |
 | ALIGN-2 | `docs/reports/2602-mirrorea-i3-distributed-foundation-align2-trust-boundaries.md` | completed |
-| I3-0 | `docs/reports/2603-mirrorea-i3-distributed-foundation-i3-0-transport-selection.md` | active report |
-| I3-1 | `docs/reports/2604-mirrorea-i3-distributed-foundation-i3-1-adapter-encoding.md` | inactive |
+| I3-0 | `docs/reports/2603-mirrorea-i3-distributed-foundation-i3-0-transport-selection.md` | completed |
+| I3-1 | `docs/reports/2604-mirrorea-i3-distributed-foundation-i3-1-adapter-encoding.md` | active report |
 | I3-2 | `docs/reports/2605-mirrorea-i3-distributed-foundation-i3-2-two-process-runtime.md` | inactive |
 | I3-3 | `docs/reports/2606-mirrorea-i3-distributed-foundation-i3-3-failure-ordering.md` | inactive |
 | I3-4 | `docs/reports/2607-mirrorea-i3-distributed-foundation-i3-4-c-distributed-scenarios.md` | inactive |
@@ -569,7 +572,7 @@ required; do not manufacture a source edit.
 unavoidable raw-secret exposure, or required public freeze. Reopen if an I3-0
 candidate cannot satisfy the tier/contract model without transport-as-authority.
 
-## I3-0 milestone contract — active
+## I3-0 milestone contract — completed
 
 **Goal:** Compare exactly the two retained reliable-stream candidates under one
 common semantic/failure/order test harness and select at most one through an
@@ -577,92 +580,158 @@ authorized ADR without freezing a public wire.
 
 **Entry:** ALIGN-2 accepted, Report 2602, pushed parity, current goal I3-0;
 Candidate A TLS-over-TCP framed reliable stream and Candidate B QUIC reliable
-stream remain UNSELECTED; QUIC datagrams remain excluded.
+stream were UNSELECTED; QUIC datagrams were excluded.
 
-**Comparison rule:** Apply the Design Constitution lexicographically: meaning
-preservation; authority/privacy/safety; ordinary Surface unchanged; explicit
-communication/failure/effect; small orthogonal Core; determinism and
-inspectability; finite decidability; modular proof/model/runtime evidence;
-conservative extensibility; implementation simplicity; and performance. Under
-those criteria, compare deterministic CI behavior, fail-closed framing/stream
-fault behavior, library maintenance/security fit, supported-platform evidence,
-future Browser/Host feasibility, resource use, and performance. A lower-ranked
-advantage cannot compensate for a higher-ranked semantic or safety failure.
+**Comparison rule and accepted result:** Both candidates ran the same private,
+source/Core-bound nine-case receiver-child canary in actual distinct local OS
+processes. The receiver child performed decode, exact retained-contract
+revalidation, bounded cache lookup and handler linearization; the coordinator
+did not fabricate those outcomes. The fixed rows were connect without semantic
+admission, fragmented round trip, truncated frame, oversized frame, disconnect
+before admission, disconnect after admission before result, duplicate across
+reconnect, tampered retained-contract fingerprint and observer-safe evidence.
 
-The exact supported OS/CI and browser-feasibility evidence matrix is decided
-and recorded in I3-0 before selection. Missing coverage is an explicit residual,
-not an assumed pass.
+The I3-0 finite criteria, derived from the Design Constitution and applied in
+the owner-fixed order, closed as follows:
+
+| Order | Criterion | Equal evidence / material difference | Disposition |
+| ---: | --- | --- | --- |
+| 1 | internal semantic carrier transported losslessly | same retained owner-request facts and equal normalized rows | tie in bounded canary |
+| 2 | failure matrix remains explicit | same typed common rows; no fabricated semantic result | tie; full plan/05 matrix remains I3-3 |
+| 3 | deterministic local CI/fault injection | same fixed nine cases and child-event validation | tie |
+| 4 | partial/truncated/oversized fail closed | same no-admission falsifier floor | tie |
+| 5 | reconnect/duplicate/reorder stays explicit | duplicate has two receives/revalidations, one handler and stored decision; ambiguity remains typed/bounded | tie |
+| 6 | no hidden retry / no exactly-once | no automatic resend or global delivery claim | tie |
+| 7 | transport is not authority | retained contract, not session/certificate/stream, controls admission | tie |
+| 8 | implementation/library maturity | both use the same Rustls trust stack and current maintained async libraries; LOC/configuration surface is simplicity, not maturity | no auditable winner; tie |
+| 9 | cross-platform maintainability | only Linux x86_64 localhost tested | no tested winner; tie |
+| 10 | future browser relevance | QUIC has the stronger future path | **first material difference; Candidate B wins** |
+| 11 | performance | warm TLS 0.22 s / 44,052 KiB max RSS; QUIC 1.08 s / 43,944 KiB; TLS is 584 LOC versus QUIC 732 | lower-ranked performance/C12 simplicity evidence; cannot override criterion 10 |
+
+PROPOSAL-040 / ADR-0037 therefore select Candidate B, QUIC reliable stream, for
+the private bounded I3 adapter. Candidate A remains a
+rejected/deferred comparison and replacement baseline, not a second active
+implementation queue. QUIC datagrams remain excluded. No public wire, codec,
+version, certificate representation, API/ABI, deployment, production security
+or supported-platform set is selected.
 
 **Direct consumer:** I3-1 implements a transport-neutral adapter and private
-provisional encoding against the selected candidate while retaining a
-conservative replacement seam.
+provisional encoding against Candidate B while retaining a conservative
+replacement seam.
 
 **Primary falsifier:** Candidate-specific metadata changes semantic identity or
 authority; the common fault/order harness is not behaviorally comparable; a
-candidate cannot fail closed deterministically; a selection relies only on
+candidate cannot fail closed deterministically; selection relies only on
 performance/convenience; or both candidates fail a mandatory plan/05 gate.
 
-**Exit and validation:** Both A and B run an equal private source/Core-bound
-carrier canary across at least two actual OS processes under reproducible
-same-gate positive/falsifier experiments; dependency/security/license and
-supported-platform evidence; deterministic CI and resource/performance
-measurements classified below semantic safety; explicit alternative rejection
-rationale and replacement boundary; independent semantic/security/portability
-review; authorized transport-selection ADR resolving OPEN-032 only for this
-bounded program; Report 2603; one I3-0 integration commit/push/parity; advance
-exactly to I3-1. No candidate is selected by this roadmap text.
+**Exit and validation:** Both candidates ran equal private source/Core-bound
+canaries across actual child processes, with common positive/falsifier rows,
+resource measurements below semantic safety, explicit alternative disposition,
+independent final ACCEPT with P0/P1 zero, PROPOSAL-040 / ADR-0037 resolving
+OPEN-032 only for this bounded program, and Report 2603. The parent owns the
+I3-0 integration commit/push/parity transition to I3-1.
 
-**Stop/reopen:** Mandatory stop if both candidates fail the contract or if they
-are tied on an irreversible, externally observable, non-migratable semantic
-choice that the Constitution cannot order. Reopen for a selected-candidate
-security/semantic counterexample or loss of the required supported-platform
-floor before I3-1 acceptance.
+**Stop/reopen:** Reopen for a selected-candidate security/semantic
+counterexample, a loss of the equal canary floor, or evidence that Candidate B
+cannot conservatively satisfy I3-1. An irreversible public/non-migratable tie or
+both candidates failing would trigger the owner stop rule; neither occurred.
 
-## I3-1 milestone contract — inactive until I3-0 closes
+## I3-1 milestone contract — sole active goal
 
-**Goal:** Implement a private, provisional, transport-neutral adapter/encoding
-boundary that round-trips the accepted internal semantic carrier and fails
-closed on version, size, framing, provenance, and decoding faults.
+**Goal ID:** I3-1
 
-**Entry:** I3-0 selection ADR accepted, Report 2603 complete, pushed parity,
-current goal I3-1, and the unselected alternative retained as comparison and
-replacement evidence rather than a second implementation queue.
+**Goal sentence:** By the end of this milestone, the accepted internal semantic
+carrier passes through one checked transport-neutral, private provisional
+encode/decode/admission boundary over the selected QUIC reliable stream without
+losing meaning or admitting incomplete/untrusted bytes.
+
+**Layer advanced:** Semantic stratum S4 Projection; project/product layer PL-2
+Mirrorea distributed fabric; lifecycle implementation phase I3. S0/S1 meaning,
+S2 trace, S3 verification and S5/S6 consumer boundaries remain preserved.
+
+**North Star link:** Advances correct communication, verification and
+observation by making the meaning-to-bytes-to-meaning boundary explicit,
+checked, replaceable and fail-closed. Transport remains an implementation,
+never the design source or authority.
+
+**User-visible outcome:** A retained carrier can be losslessly encoded, sent
+through the selected adapter boundary, decoded and admitted, while malformed,
+incomplete, oversized, unknown-version or tampered input produces a typed
+failure and no partial semantic request.
+
+**Semantic invariants:** Source/Core/artifact provenance survives; effect,
+failure, visibility and redaction remain explicit; request, serve, result and
+receipt do not collapse; transport/process/session/certificate is not
+authority; admission constructs no partial semantic request; logs expose only
+observer-safe references and typed reasons.
+
+**Direct consumer:** I3-2 starts actual locus processes and sends only generated
+communication through this accepted adapter boundary.
+
+**Non-goals:** Public wire/version/codec/API/ABI freeze; actual process/locus
+deployment or owner runtime; retry, reconnect or order semantics beyond carrying
+their required fields; complete I3-3 fault behavior; production security,
+deployment or supported-platform claim.
+
+**Primary falsifier:** Tampered, malformed, partial, oversized or unsupported-
+version bytes become an admitted semantic carrier, or any round trip loses,
+aliases, invents or defaults a required semantic field.
+
+**Exit evidence:** Exact field-level round-trip/property tests, selected-adapter
+tests, malformed/truncated/oversized/version/provenance/redaction negative tests,
+fuzz/property evidence for private decode, preserved I2/M10 regressions and an
+independent codec/security/semantic review with P0/P1 zero.
+
+**Stop condition:** Stop I3-1 when I3-2 can consume the accepted adapter without
+reconstructing or inventing semantic fields and independent review has no P0/P1.
+Stop earlier only if lossless mapping requires a public freeze, semantic change
+or guarantee weakening; reopen for the named falsifier or selected-adapter
+regression.
+
+**Entry:** I3-0 selection ADR accepted, Report 2603 complete, current goal I3-1,
+and Candidate A retained as comparison/replacement evidence rather than a
+second implementation queue. The parent completes the transition commit/push/
+parity before starting I3-1 source work.
 
 **Required boundary:** Internal carrier -> private versioned encoding ->
 adapter bytes/reliable stream -> checked decoding/admission -> internal carrier.
-Round-trip evidence covers the applicable source/Core/program/artifact/edge,
+Round-trip evidence covers applicable source/Core/program/artifact/edge,
 request and occurrence identities, owner/origin/target, membership epoch and
 incarnation, capability/witness references, effect/failure rows, visibility and
 redaction, frontier/version/publication/consumption lineage, and declared
 limits. Logs expose observer-safe references and typed reasons, never raw
 credentials, capability/witness material, private payload/state, or host paths.
-Request, serve, result, and receipt remain distinct semantic messages/states;
-encoding may not collapse them. The private version policy states separately
-how unknown versions and unknown fields reject, ignore, or preserve data; no
-policy may default required semantic meaning.
+Request, serve, result, and receipt remain distinct. The private version policy
+states separately how unknown versions and unknown fields reject, ignore, or
+preserve data; no policy may default required semantic meaning.
 
-**Direct consumer:** I3-2 uses only this adapter boundary to place accepted
-generated endpoints in distinct OS processes.
+**Detailed validation:** Exact semantic-field round-trip and mutation corpus;
+canonical/deterministic private encoding where required for identity; partial
+read/write, malformed, truncated, oversized, unknown-version, resource-limit,
+provenance, redaction and secret-scan negatives; selected-candidate adapter
+tests; property/fuzz decode tests over round-trip, truncation, malformed length,
+oversize and unknown fields/versions; preserved I2/M10 regression; independent
+codec/security/semantics review; Report 2604; accepted source/evidence and
+integration commits pushed with parity; advance exactly to I3-2.
 
-**Primary falsifier:** Encode/decode adds, drops, aliases, or defaults semantic
-meaning; unknown version, malformed/truncated/oversized frame, duplicate field,
-or limit violation reaches admission; logs leak protected values; or a private
-field/layout becomes a public compatibility promise.
+**Carried I3-0 P2 residuals/non-claims:** These are direct hardening consumers,
+not I3-0 blockers or already-passing I3-1 evidence.
 
-**Exit and validation:** Exact semantic-field round-trip and mutation corpus;
-canonical/deterministic private encoding evidence where required for identity;
-partial read/write, malformed, truncated, oversized, unknown-version,
-resource-limit, provenance, redaction, and secret-scan negatives; selected-
-candidate adapter tests; property/fuzz decode tests over round-trip,
-truncation, malformed length, oversize, and unknown fields/versions; preserved
-I2/M10 regression; independent codec/
-security/semantics review; Report 2604; accepted source/evidence and integration
-commits pushed with parity; advance exactly to I3-2.
+| ID | Residual / exact non-claim | I3-1 acceptance use |
+| --- | --- | --- |
+| P2-1 | generated credential/private-key `Vec<u8>` is not zeroized | zeroize or bound/document lifetime before stronger secret-handling claim |
+| P2-2 | cleanup has no second bounded deadline after kill plus wait/join; cleanup wording is canary-local | add bounded reaper behavior and keep claims scoped |
+| P2-3 | macOS, Windows, browser and production are untested; evidence is Linux x86_64 localhost only | retain platform non-claim; test only a named direct-consumer matrix |
+| P2-4 | no mutual TLS/client auth or live membership/capability/witness admission; cache reuse lacks a separately named no-mint assertion | keep transport authentication non-authoritative and add explicit no-mint/revalidation checks |
+| P2-5 | TLS disconnect-after-admission ambiguity evidence has limited ordering strength | retain typed bounded ambiguity; leave complete semantics to I3-3 |
+| P2-6 | request cache is fixed-capacity 8, in-memory, no-eviction and not actual owner runtime/durability/exactly-once | preserve canary-only claim and replace through the I3-2 owner-runtime seam |
+| P2-7 | private decoder still needs duplicate-JSON-key rejection and wrong-marker classification separate from unknown version; clean `finish_event()` terminality is already covered by I3-0 regression | add the remaining exact fail-closed decoder negatives before acceptance and preserve the terminality regression |
+| P2-8 | request-hash domain `v2` and textual `v1` label are misaligned; facade is owner-request-only and relation/designated fields are not yet mirrored | align identity label and document/extend exact carrier coverage before reuse |
 
-**Stop/reopen:** Stop if lossless mapping requires a public freeze or carrier
-meaning change outside the program. Reopen for ambiguous decoding, allocation
-before limit checks, semantic defaulting, secret leakage, or replacement-seam
-failure.
+**Stop/reopen detail:** Stop if lossless mapping requires a public freeze or
+carrier meaning change outside the program. Reopen for ambiguous decoding,
+allocation before limit checks, semantic defaulting, secret leakage or
+replacement-seam failure.
 
 ## I3-2 milestone contract — inactive until I3-1 closes
 
@@ -1021,8 +1090,8 @@ acceptance, and stop decisions.
 | --- | --- | --- | --- |
 | Three-axis map acceptance | Canon process under owner direction | ALIGN-1 evidence | owner-fixed target; not an API/product freeze |
 | Trust tiers/contracts | Canon process under owner direction | ALIGN-2 evidence | owner-fixed target; concrete APIs/layouts intentionally deferred |
-| OPEN-032 transport selection | I3-0 authorized ADR | same-gate A/B comparative evidence | both UNSELECTED; datagrams excluded |
-| Supported OS/CI/browser-feasibility matrix | I3-0 selection record | reproducible candidate probes | exact tested matrix recorded before selection; unsupported claims remain explicit |
+| OPEN-032 transport selection | I3-0 authorized ADR | same-gate A/B comparative evidence | resolved for this bounded program by PROPOSAL-040 / ADR-0037: private QUIC reliable stream selected; TLS/TCP deferred baseline; datagrams excluded |
+| Supported OS/CI/browser-feasibility matrix | I3-0 selection record | reproducible candidate probes | Linux x86_64 localhost only; macOS/Windows/browser/production explicitly untested |
 | Private encoding/version/limits | I3-1 internal contract | carrier round-trip/fault evidence | internal and provisional; public wire remains separate |
 | Retry/ambiguous delivery policy | operation-specific I3-3 contract | actual failure injection | explicit only; no global exactly-once |
 | Exact I3 conformance row count | I3-6 pre-implementation contract | accepted I3-5 producer inventory | enumerated before verifier evidence; no implementation-selected omission |
@@ -1036,8 +1105,10 @@ acceptance, and stop decisions.
 
 - Accepted I2 artifacts/carriers and SYS-2--SYS-6 evidence are regression inputs,
   not a public wire or network architecture.
-- At least one retained reliable-stream candidate may satisfy plan/05, but this
-  is a hypothesis tested by I3-0, not a selection.
+- Both retained reliable-stream candidates satisfied the equal bounded I3-0
+  canary; ADR-0037 selected QUIC at criterion 10, the first material difference
+  after criteria 8--9 also tied, while
+  full plan/05 failure/runtime criteria remain later milestones.
 - ST remains the deterministic semantic reference; network/process execution
   refines it only for the accepted finite profile.
 - Local multi-process execution is sufficient for finite C-distributed evidence;
@@ -1057,6 +1128,7 @@ acceptance, and stop decisions.
 | stale resurrection | reconnect accepts retired membership/capability/witness/result | revalidation and late-old-session negatives before mutation |
 | fake distribution | one-process helper or handwritten edge passes | OS-process evidence, generated-plan-only route, process cleanup and provenance checks |
 | encoding confusion/resource abuse | malformed/version/size input allocates or admits | limits before allocation/admission, fixed negative corpus, fail closed |
+| I3-0 canary overclaim | fixed cache/owner-request probe is called actual owner runtime, durable or exactly-once | preserve P2 residual table; I3-1/2 replace only through direct-consumer evidence |
 | observer leak | logs/view export secrets, private state, or host paths | reference-only typed projection, secret scans, independent security review |
 | evidence laundering | runtime/model result called proof or helper called product | ledger-only proof status and exact five-class labels |
 | layer collapse | product/provider/browser/domain vocabulary enters Core | ALIGN-1/2 maps, ownership table, mandatory stop |
@@ -1095,8 +1167,9 @@ themselves stop conditions.
 ## Program-wide non-effects
 
 This roadmap does not itself change Canon semantics, proof/OBL status,
-production source, tests, samples, lifecycle, public compatibility, transport
-selection, or external state. The bounded program does not authorize QUIC
+production source, tests, samples, lifecycle, public compatibility, or
+external state. Transport selection authority is PROPOSAL-040 / ADR-0037, not
+this LAB file. The bounded program does not authorize QUIC
 datagrams, WAN/production deployment, public release, durable distributed
 save/load, live distributed patch, consensus, hidden distributed transaction,
 global exactly-once, general scheduler/fairness/security/noninterference proof,
@@ -1105,8 +1178,9 @@ integration, or Typed-Effect platform collapse.
 
 ## Recommended next action
 
-Execute I3-0 only: build the same bounded two-process canary for TLS-over-TCP
-framed reliable stream and QUIC reliable stream, compare them by the fixed
-criteria, and select at most one through a non-public ADR. Preserve ADR-0036
-trust/non-authority rules, keep both candidates UNSELECTED until evidence and
-review close, exclude QUIC datagrams, and do not begin I3-1 adapter work early.
+Execute I3-1 only: turn the retained owner-request facade into the checked,
+transport-neutral private provisional encode/decode/admission boundary consumed
+by I3-2, target the ADR-0037 selected QUIC reliable-stream adapter, close the eight carried
+P2 residual groups, and preserve the TLS/TCP implementation only
+as replacement evidence. Add no process deployment/runtime semantics, public
+wire promise, hidden retry/exactly-once or production/platform claim.

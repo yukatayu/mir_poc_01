@@ -1,6 +1,6 @@
 {
  "canon_version": "0.1.0",
- "files": 200,
+ "files": 202,
  "entries": [
   {
    "id": "root/changelog",
@@ -12,7 +12,7 @@
    "summary": "canon 自体の版履歴と改定手続きの要約。",
    "open_items": [],
    "path": "CHANGELOG.md",
-   "bytes": 29548
+   "bytes": 30689
   },
   {
    "id": "root/design-constitution",
@@ -52,7 +52,7 @@
    "summary": "知識マップ 1 枚。全域の依存図、3 種の読み筋、ID 体系。",
    "open_items": [],
    "path": "MAP.md",
-   "bytes": 29714
+   "bytes": 30292
   },
   {
    "id": "root/north-star",
@@ -74,7 +74,7 @@
    "summary": "canon の入口。正本宣言、LAB(既存 repo)との関係、読み順、版。",
    "open_items": [],
    "path": "README.md",
-   "bytes": 5084
+   "bytes": 5257
   },
   {
    "id": "adr/ADR-0001",
@@ -604,6 +604,22 @@
    "bytes": 3490
   },
   {
+   "id": "adr/ADR-0037",
+   "status": "L1-fixed",
+   "maturity": "reviewed",
+   "depends_on": [
+    "adr/ADR-0034",
+    "adr/ADR-0036",
+    "meta/proposal-040",
+    "plan/05-i3-entry-contract",
+    "arch/04-runtime-carriers"
+   ],
+   "summary": "I3 private selected adapterをQUIC reliable streamとし、I3-0を閉じI3-1をactiveにする。",
+   "open_items": [],
+   "path": "adr/ADR-0037.md",
+   "bytes": 4151
+  },
+  {
    "id": "adr/readme",
    "status": "L1-fixed",
    "maturity": "draft",
@@ -613,7 +629,7 @@
    "summary": "決定記録の一覧と読み方。LAB の決定台帳(specs/12)との関係。",
    "open_items": [],
    "path": "adr/README.md",
-   "bytes": 4793
+   "bytes": 4931
   },
   {
    "id": "arch/01-strata",
@@ -839,14 +855,15 @@
     "adr/ADR-0034",
     "adr/ADR-0035",
     "adr/ADR-0036",
+    "adr/ADR-0037",
     "arch/06-project-product-layers",
     "arch/07-browser-host-trust-boundaries",
     "plan/02-operating-model"
    ],
-   "summary": "agent の読込、active ADR-0034 program、ADR-0035三軸map、ADR-0036 trust boundary、program外L3 research、review境界。",
+   "summary": "agent の読込、active ADR-0034 program、ADR-0035三軸map、ADR-0036 trust boundary、ADR-0037 private transport selection、program外L3 research、review境界。",
    "open_items": [],
    "path": "meta/agent-instructions.md",
-   "bytes": 4700
+   "bytes": 4818
   },
   {
    "id": "meta/proposal-001",
@@ -1513,6 +1530,22 @@
    "bytes": 3906
   },
   {
+   "id": "meta/proposal-040",
+   "status": "L1-fixed",
+   "maturity": "reviewed",
+   "depends_on": [
+    "meta/proposal-037",
+    "adr/ADR-0034",
+    "adr/ADR-0036",
+    "plan/05-i3-entry-contract",
+    "arch/04-runtime-carriers"
+   ],
+   "summary": "I3-0の同条件実process canaryと固定criteriaに基づき、private selected adapterをQUIC reliable streamとする提案。",
+   "open_items": [],
+   "path": "meta/proposals/PROPOSAL-040-i3-0-transport-selection.md",
+   "bytes": 5228
+  },
+  {
    "id": "meta/source-hierarchy",
    "status": "L0-frozen",
    "maturity": "draft",
@@ -1524,12 +1557,13 @@
     "adr/ADR-0033",
     "adr/ADR-0034",
     "adr/ADR-0035",
-    "adr/ADR-0036"
+    "adr/ADR-0036",
+    "adr/ADR-0037"
    ],
-   "summary": "canon > LAB、active ADR-0034 program、ADR-0035三軸map、ADR-0036 trust boundary、program外ADR-0014 routeの境界。",
+   "summary": "canon > LAB、active ADR-0034 program、ADR-0035三軸map、ADR-0036 trust boundary、ADR-0037 private transport selection、program外ADR-0014 routeの境界。",
    "open_items": [],
    "path": "meta/source-hierarchy.md",
-   "bytes": 3805
+   "bytes": 4028
   },
   {
    "id": "meta/style-guide",
@@ -1588,12 +1622,10 @@
     "adr/ADR-0036",
     "plan/04-t0-g0-semantic-assertion-profile"
    ],
-   "summary": "lifecycle T/IとS/PLを分離し、T1・I2 exit・I3-0 activeを記録する。",
-   "open_items": [
-    "OPEN-032"
-   ],
+   "summary": "lifecycle T/IとS/PLを分離し、T1・I2 exit・I3-0 close・I3-1 activeを記録する。",
+   "open_items": [],
    "path": "plan/01-phases.md",
-   "bytes": 14999
+   "bytes": 15190
   },
   {
    "id": "plan/02-operating-model",
@@ -1607,12 +1639,13 @@
     "adr/ADR-0033",
     "adr/ADR-0034",
     "adr/ADR-0035",
-    "adr/ADR-0036"
+    "adr/ADR-0036",
+    "adr/ADR-0037"
    ],
    "summary": "active ADR-0034 program/ADR-0035三軸map/ADR-0036 trust boundary、program外L3 research、goal/frontier/review規律。",
    "open_items": [],
    "path": "plan/02-operating-model.md",
-   "bytes": 8927
+   "bytes": 8997
   },
   {
    "id": "plan/03-risks",
@@ -1649,6 +1682,7 @@
     "adr/ADR-0034",
     "adr/ADR-0035",
     "adr/ADR-0036",
+    "adr/ADR-0037",
     "arch/04-runtime-carriers",
     "arch/06-project-product-layers",
     "arch/07-browser-host-trust-boundaries",
@@ -1663,12 +1697,10 @@
     "scenarios/SCN-03",
     "scenarios/SCN-06"
    ],
-   "summary": "ADR-0034 programがconsumeするI3 goal、transport-neutral adapter、failure/order refinement、C-distributed gates。",
-   "open_items": [
-    "OPEN-032"
-   ],
+   "summary": "ADR-0034 programがconsumeするI3 goal、ADR-0037 selected private adapter、transport-neutral mapping、failure/order refinement、C-distributed gates。",
+   "open_items": [],
    "path": "plan/05-i3-entry-contract.md",
-   "bytes": 12391
+   "bytes": 13354
   },
   {
    "id": "plan/readme",
@@ -1683,12 +1715,13 @@
     "adr/ADR-0034",
     "adr/ADR-0035",
     "adr/ADR-0036",
+    "adr/ADR-0037",
     "plan/02-operating-model"
    ],
-   "summary": "Gate/Phase、active ADR-0034 program、ADR-0035三軸map、ADR-0036 trust boundary、program外ADR-0014 routeの計画読解。",
+   "summary": "Gate/Phase、active ADR-0034 program、ADR-0035三軸map、ADR-0036 trust boundary、ADR-0037 private transport selection、program外ADR-0014 routeの計画読解。",
    "open_items": [],
    "path": "plan/README.md",
-   "bytes": 1623
+   "bytes": 1807
   },
   {
    "id": "scenarios/readme",

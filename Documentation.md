@@ -17,7 +17,7 @@ I3 roadmap は `plan/250-mirrorea-i3-distributed-foundation-current-roadmap.md`�
 下の `plan/` 索引は時系列の LAB repository memory です。索引にある候補や過去の
 「次」は current queue を意味しません。Plan 247とPlan 249はclosed execution
 recordsである。PROPOSAL-037 / ADR-0034によりI3 bounded programがactive、Plan 250が
-sole current roadmap、ALIGN-0, ALIGN-1, and ALIGN-2 completed; I3-0 sole active goal. older plansもhistorical
+sole current roadmap、ALIGN-0, ALIGN-1, ALIGN-2, and I3-0 completed; I3-1 sole active goal. older plansもhistorical
 memoryです。現在の停止線は
 `docs/project-status.md`、`progress.md`、`tasks.md` で確認します。
 
@@ -30,8 +30,11 @@ untrusted Mir package は package admission を通過しても semantic grant �
 得ず、raw FFI や direct store を持ちません。Runtime/Projection→View は
 observer-safe projection を渡し、View は authoritative domain semantics を所有せず
 presentation-local computation のみを行います。入力・effect・provider の reverse path
-は typed で、redaction、revocation、termination、resource limits を含みます。I3-0 では
-transport 候補をまだ選択せず、公式 I3 lifecycle も未entryです。
+は typed で、redaction、revocation、termination、resource limits を含みます。
+PROPOSAL-040 / ADR-0037はI3-0の同条件actual-process canaryからprivate QUIC
+reliable streamを選択しました。criteria 8/9に勝者はなく、criterion 10 future browser
+relevanceが最初の差分です。これはpublic wire/codec/API/platform freeze又は
+公式I3 lifecycle entryではありません。
 
 M0 Bootstrap、M1 Constitution、M2 semantic-assertion T0/G0 closeout、M3
 evaluation/materialization calculus、M4 maintained relation / late projection、M5 shared
@@ -71,7 +74,10 @@ ADR-0032はofficial I2 entry後exitを受理した。accepted implementation/evi
 ADR-0033 / Canon plan 05はSYS-7を閉じ、TLS-over-TCP framed reliable streamとQUIC
 reliable streamをともにUNSELECTEDとしたtransport-neutralなinactive I3 entry contract
 だけを記録した。PROPOSAL-037 / ADR-0034は公式I3 lifecycle entryを主張せずbounded
-programを開始した。QUIC datagramは除外、OPEN-032は未解決、両候補はUNSELECTEDである。
+programを開始した。PROPOSAL-040 / ADR-0037はcriteria 1--7のequal canary後、criteria
+8/9に勝者がなく、criterion 10 future browser relevanceが最初のmaterial differenceとなったため
+private QUIC reliable streamを選択した。TLS/TCPはdeferred replacement baseline、QUIC datagramは除外、
+OPEN-032はこのbounded programだけresolvedである。
 ALIGN-1では `mirrorea_canon/architecture/06-project-product-layers.md` の三軸 map（semantic
 strata S0--S6、project/product PL-0--PL-6、lifecycle T0--T2 / I1--I6）を独立した
 many-to-many座標として固定した。PL-4は責任境界のみ、PL-6は別application、PrismCascade/
@@ -247,7 +253,7 @@ Mir、Mirrorea、PrismCascade、Typed-Effect Wiring Platform は関連します�
 | T2 | OBL-020/021/002 skeleton・G5 statement | not reopened; general T2 obligations unchanged, while SYS-2/3 add bounded OBL-058/059/060 only |
 | I1 | 単一 process reference implementation | finite deterministic reference profile accepted by M10 R5, but broad PHASE-I1 exit / public contract are not claimed |
 | I2 | process 内 multi-place | ADR-0032 accepted official entry then exit from SYS-3--SYS-6 evidence; ADR-0033 closed SYS-7/program |
-| I3 | 実 socket transport | bounded program active; lifecycle entry not official; both candidates unselected, OPEN-032 unresolved |
+| I3 | 実 socket transport | bounded program active; lifecycle entry not official; I3-0 private QUIC reliable-stream selection complete, I3-1 active |
 | I4-I6 | 永続/patch、View、分散永続/federation | 後段 |
 
 M10 の finite acceptance は broad I1 exit や I2 entry の代用ではありません。ADR-0026 /
@@ -264,12 +270,14 @@ recordが揃ったためofficial I2 entry後exitを受理しました。broad PH
   SYS-6 implementation/evidence cut is `5429712d...`, Canon/status integration
   cut is `bcb0f767...`, and official I2 entry then exit is accepted.
 - in-progress: PROPOSAL-037 / ADR-0034 bounded I3 program; Plan 250 sole roadmap;
-  ALIGN-0--2 completed, I3-0 sole active goal.
+  ALIGN-0--2 and I3-0 completed, I3-1 sole active goal.
 - decisions taken: ALIGN-1 accepted the independent three-axis project/product
   map; PL-4 remains responsibility-only, PL-6 remains separate, and satellites
   remain outside the numbered product layers.
-- blocked/deferred: I3 lifecycle entry and OPEN-032 resolution remain unresolved;
-  both reliable-stream candidates are UNSELECTED and QUIC datagrams excluded. Broad PHASE-I1 exit,
+- decisions taken: PROPOSAL-040 / ADR-0037 resolve OPEN-032 only for this bounded
+  program and select private QUIC reliable stream; TLS/TCP is a deferred
+  replacement baseline and QUIC datagrams remain excluded.
+- blocked/deferred: I3 lifecycle entry remains unentered. Broad PHASE-I1 exit,
   final public API/ABI/wire/carrier freeze, production, and browser/View product
   remain outside the accepted claim.
 - decisions taken: SYS-5 closes only the bounded local toy/devtools workflow:

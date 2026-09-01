@@ -86,11 +86,10 @@ class MirroreaProjectOverviewHtmlTests(unittest.TestCase):
             "ADR-0033 / SYS-7 I3 entry contract only",
             "PROPOSAL-037 / ADR-0034",
             "Mirrorea I3 Distributed Foundation bounded program",
-            "Plan 250 / I3-0が現在地",
             "Plan 250がsole current roadmap",
-            "Mirrorea I3 Distributed Foundation / I3-0 sole active goal",
-            "ALIGN-0 / ALIGN-1 / ALIGN-2 completed、I3-1 next/not active",
-            "I3 program active / lifecycle未entry",
+            "Mirrorea I3 Distributed Foundation / I3-1 sole active goal",
+            "ALIGN-0 / ALIGN-1 / ALIGN-2 / I3-0 completed、I3-2 next/not active",
+            "official I3 lifecycle entryは未受理",
             "official I3 lifecycle entryとproductionは主張しません",
             "closed / SYS-3",
             "closed / SYS-4",
@@ -115,15 +114,20 @@ class MirroreaProjectOverviewHtmlTests(unittest.TestCase):
             "ADR-0032",
             "PROPOSAL-036",
             "ADR-0033",
-            "TLS-over-TCP framed reliable stream",
-            "QUIC reliable stream",
-            "UNSELECTED",
-            "OPEN-032",
+            "PROPOSAL-040",
+            "ADR-0037",
+            "QUIC reliable streamをprivate provisional adapterとして選択",
+            "TLS-over-TCP framed reliable streamはdeferred baseline",
+            "private provisional",
+            "deferred baseline",
+            "QUIC datagram",
+            "QUIC datagramは除外",
+            "OPEN-032はこのbounded programに限り解決済み",
             "final public API/ABI/wire ではありません",
             "runtime-monitored",
             "OPEN-030をI2-internalに限って固定した",
             "official I2 exit acceptance は本物ですが",
-            "Theory T2、broad I1、general theorem、public contract、real transport、production への自動昇格ではありません",
+            "Theory T2、broad I1、general theorem、public contract、production への自動昇格ではありません",
             "Plan 247とPlan 249はclosed baselines",
             "OPEN-030",
             "26/26",
@@ -211,9 +215,11 @@ class MirroreaProjectOverviewHtmlTests(unittest.TestCase):
             "T1 checked untrusted Mir package",
             "package admission",
             "semantic grant",
-            "I3-0 sole active",
-            "UNSELECTED",
-            "OPEN-032",
+            "I3-1 sole active goal",
+            "ADR-0037",
+            "QUIC reliable streamをprivate provisional adapterに選択",
+            "TLS-over-TCP framed reliable streamはdeferred baseline",
+            "OPEN-032はこのbounded programに限り解決済み",
             "official I3 lifecycle entryは未受理",
         )
         for term in required_terms:
@@ -284,6 +290,12 @@ class MirroreaProjectOverviewHtmlTests(unittest.TestCase):
             "Plan 250 / ALIGN-2が現在地",
             "Mirrorea I3 Distributed Foundation / ALIGN-2 sole active goal",
             "ALIGN-0 / ALIGN-1 completed、I3-0 next/not active",
+            "Plan 250 / I3-0が現在地",
+            "Mirrorea I3 Distributed Foundation / I3-0 sole active goal",
+            "ALIGN-0 / ALIGN-1 / ALIGN-2 completed、I3-1 next/not active",
+            "Plan 250 / I3-0 active",
+            "I3-0はtransport比較段階で両候補UNSELECTED、official lifecycle未entryです。",
+            "TLS-over-TCP framed reliable streamをprivate provisional adapterに選択",
             "現在 / SYS-7",
             "次 / SYS-7",
             "現在 / SYS-3",
@@ -351,17 +363,27 @@ class MirroreaProjectOverviewHtmlTests(unittest.TestCase):
         self.assert_contains_marker(documentation, "Plan 250 sole roadmap", "Documentation I3 program status")
         self.assert_contains_marker(
             documentation,
-            "ALIGN-0, ALIGN-1, and ALIGN-2 completed; I3-0 sole active goal.",
+            "ALIGN-0, ALIGN-1, ALIGN-2, and I3-0 completed; I3-1 sole active goal.",
             "Documentation I3 program status",
         )
         self.assert_contains_marker(
-            documentation,
-            "bounded program active; lifecycle entry not official; both candidates unselected, OPEN-032 unresolved",
-            "Documentation I3 lifecycle boundary",
+            documentation, "PROPOSAL-040 / ADR-0037", "Documentation I3 selection boundary"
         )
         self.assert_contains_marker(documentation, "PROPOSAL-036 / ADR-0033 / Canon plan 05", "Documentation SYS-7 boundary")
-        self.assert_contains_marker(documentation, "ともにUNSELECTED", "Documentation I3 candidate boundary")
-        self.assert_contains_marker(documentation, "OPEN-032は未解決", "Documentation I3 open item")
+        self.assert_contains_marker(
+            documentation, "ともにUNSELECTED", "Documentation historical SYS-7 candidate boundary"
+        )
+        self.assert_contains_marker(documentation, "private QUIC reliable stream", "Documentation I3 selected adapter")
+        self.assert_contains_marker(
+            documentation, "TLS/TCPはdeferred replacement baseline", "Documentation I3 deferred candidate"
+        )
+        self.assertRegex(
+            documentation,
+            r"criteria 8/9に勝者はなく、criterion 10 future browser\s+relevance",
+            "Documentation I3 selected-criterion boundary",
+        )
+        self.assert_contains_marker(documentation, "QUIC datagramは除外", "Documentation I3 datagram exclusion")
+        self.assert_contains_marker(documentation, "OPEN-032はこのbounded programだけresolved", "Documentation I3 scoped resolution")
         self.assert_omits_marker(documentation, "active roadmap はありません", "Documentation current roadmap")
         self.assert_omits_marker(documentation, "active programがない現在", "Documentation current program")
         self.assert_omits_marker(
@@ -373,6 +395,21 @@ class MirroreaProjectOverviewHtmlTests(unittest.TestCase):
             documentation,
             "ALIGN-0 completed, ALIGN-1 sole active goal, ALIGN-2 next (not active).",
             "Documentation stale ALIGN-1 state",
+        )
+        self.assert_omits_marker(
+            documentation,
+            "ALIGN-0, ALIGN-1, and ALIGN-2 completed; I3-0 sole active goal.",
+            "Documentation stale I3-0 state",
+        )
+        self.assert_omits_marker(
+            documentation,
+            "both candidates unselected, OPEN-032 unresolved",
+            "Documentation stale I3-0 selection state",
+        )
+        self.assert_omits_marker(
+            documentation,
+            "private TLS-over-TCP",
+            "Documentation stale TLS selected adapter",
         )
         self.assert_contains_marker(documentation, "`ded622fe...`を", "Documentation SYS-3 history")
         self.assert_contains_marker(documentation, "partial regression evidenceへ", "Documentation SYS-3 history")
@@ -430,16 +467,35 @@ class MirroreaProjectOverviewHtmlTests(unittest.TestCase):
     def test_canon_map_uses_the_current_align_frontier(self) -> None:
         canon_map = CANON_MAP_PATH.read_text(encoding="utf-8")
 
-        self.assert_contains_marker(canon_map, "ALIGN-0/1/2はclosed", "Canon MAP ALIGN close state")
-        self.assert_contains_marker(canon_map, "I3-0がsole active goal", "Canon MAP active goal")
+        self.assert_contains_marker(canon_map, "ALIGN-0/1/2とI3-0はclosed", "Canon MAP I3-0 close state")
+        self.assertRegex(
+            canon_map,
+            r"I3-1が\s+sole active、I3-2がnext/inactive",
+            "Canon MAP must retain I3-1/I3-2 status across prose line wrapping",
+        )
+        self.assert_contains_marker(
+            canon_map, "criterion 10 future browser relevanceによりQUIC reliable", "Canon MAP QUIC selection"
+        )
+        self.assert_contains_marker(
+            canon_map, "TLS-over-TCP framed reliable streamはrejected/", "Canon MAP TLS deferral"
+        )
         self.assert_omits_marker(canon_map, "ALIGN-1がactiveである", "Canon MAP stale ALIGN-1 state")
+        self.assert_omits_marker(canon_map, "I3-0がsole active goal", "Canon MAP stale I3-0 state")
 
     def test_root_canon_uses_the_current_i3_frontier(self) -> None:
         canon_root = CANON_ROOT_PATH.read_text(encoding="utf-8")
 
-        self.assert_contains_marker(canon_root, "I3-0 is sole active goal", "root CANON active goal")
-        self.assert_contains_marker(canon_root, "I3-1 is next/not active", "root CANON next goal")
-        self.assertNotRegex(canon_root, r"I3-0\s+is next/not active")
+        self.assert_contains_marker(canon_root, "I3-1 is the sole active goal", "root CANON active goal")
+        self.assert_contains_marker(canon_root, "I3-2 is next/not active", "root CANON next goal")
+        self.assert_contains_marker(
+            canon_root, "select QUIC reliable stream as the", "root CANON QUIC selection"
+        )
+        self.assertNotIn(
+            "QUIC reliable stream remains the deferred comparison baseline",
+            canon_root,
+            "root CANON must not both select and defer QUIC",
+        )
+        self.assertNotRegex(canon_root, r"I3-0\s+is (?:the )?sole active goal")
 
 
 if __name__ == "__main__":

@@ -19,7 +19,7 @@ ADR-0015 の Mir Theory v0 / I1+ M0--M10 execution とPlan 247はclosed LAB
 record / regression baselineである。2026-08-26のowner directionを記録したADR-0026
 のSYS-0--SYS-7 programとPlan 249もclosed LAB recordである。PROPOSAL-037 /
 ADR-0034により bounded I3 programがactive、Plan 250がsole current roadmap、
-ALIGN-0--2がcompleted、I3-0がsole active goalである。SYS-0はclosed、
+ALIGN-0--2とI3-0がcompleted、I3-1がsole active goalである。SYS-0はclosed、
 SYS-1もsource cut `94e3707c...`でclosed、SYS-2もsource cut `920d3fe0...`で
 closed。SYS-3は初回candidate cut `ded622fe...`をE-CONSUME consumer path欠落により
 partial regression evidenceへ戻して一度reopenし、corrected source/evidence cut
@@ -34,8 +34,10 @@ revocation/verificationの有限workflowを受理した。SYS-6はcut `5429712d.
 source-first exact 22-row `conform-i2` profileを受理し、ADR-0032はofficial I2
 entry後exitを適用した。SYS-7はPROPOSAL-036 / ADR-0033 / Canon plan/05として
 transport-neutralなinactive I3 entry contractだけを記録してclosedした。I3は
-inactive entry contractから bounded I3 programへ移行した。OPEN-032 transport selectionは
-未決、両候補UNSELECTED、ALIGN-0--2 completed、I3-0 activeである。固定順序は
+inactive entry contractから bounded I3 programへ移行した。PROPOSAL-040 / ADR-0037は
+同条件actual-process canary後、private QUIC reliable streamを選択し、
+TLS-over-TCP framed reliable streamをdeferred replacement baselineとした。OPEN-032はこのprogramだけ
+resolved、ALIGN-0--2とI3-0 completed、I3-1 activeである。固定順序は
 ALIGN-0..2 → I3-0..6 → NEXT-0である。
 legacy M8 `AlreadyConsumed`又はaccepted M10
 duplicate-delivery behaviorは変更せず、SYS-4 wrapperのexact semantic-consumption
@@ -975,8 +977,9 @@ semantic strata S0--S6、project/product PL-0--PL-6、lifecycle T0--T2 / I1--I6�
 - Mirrorea I3 Distributed Foundation current roadmap:
   `plan/250-mirrorea-i3-distributed-foundation-current-roadmap.md`
   (PROPOSAL-037 / ADR-0034のactive bounded program。ALIGN-0 / ALIGN-1 /
-  ALIGN-2 completed、I3-0 sole active goal。I3-1 next/not active。official I3 lifecycle entry、transport選定、public
-  freeze、productionは主張しない。)
+  ALIGN-2 / I3-0 completed、I3-1 sole active goal。I3-2 next/inactive。
+  PROPOSAL-040 / ADR-0037のprivate QUIC selection以外のofficial I3 lifecycle
+  entry、public wire/API/platform freeze、productionは主張しない。)
 
 ## maintenance rule
 

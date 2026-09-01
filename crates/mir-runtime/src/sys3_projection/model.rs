@@ -5,13 +5,14 @@ use mir_semantics::{
     shared_model::{BindingActivationFrontier, SourceRef},
     shared_model::{ResultFrontier, ResultVersion},
     surface_v0_pipeline::{
-        CheckedEvaluation, CheckedEvaluationSignature, CheckedIndexedStateSchema,
-        CheckedProgramIdentity, DesignatedCheckedCore, DesignatedRemoteInputDependency,
-        DesignatedResultConsumerCore, EffectKind, FailureRow, GeneratedObligationKind,
-        OwnerRmwCheckedCore, RelationCheckedCore, RelationTransformCore, ResidualObligationKind,
-        StaticRetryContractKind, TypedStateRead,
+        CheckedEvaluation, CheckedEvaluationKind, CheckedEvaluationSignature,
+        CheckedIndexedStateSchema, CheckedProgramIdentity, DesignatedCheckedCore,
+        DesignatedRemoteInputDependency, DesignatedResultConsumerCore, EffectKind, FailureRow,
+        GeneratedObligationKind, OwnerRmwCheckedCore, RelationCheckedCore, RelationTransformCore,
+        ResidualObligationKind, StaticRetryContractKind, TypedStateRead,
     },
 };
+use sha2::{Digest, Sha256};
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, PartialOrd, Ord)]
 pub(crate) enum ProjectionDiagnosticKind {
@@ -1091,6 +1092,9 @@ pub(crate) struct CarrierContract {
     designated_result_details: Option<DesignatedResultCarrierDetails>,
 }
 
+const I3_PROBE_OWNER_REQUEST_COMPONENT_DOMAIN: &[u8] =
+    b"mirrorea/sys3/i3-probe-owner-request-component/v1\0";
+
 impl CarrierContract {
     pub(crate) fn edge_kind(&self) -> CommunicationEdgeKind {
         self.edge_kind
@@ -1236,6 +1240,146 @@ impl CarrierContract {
 
     pub(crate) const fn mints_authority_without_source(&self) -> bool {
         false
+    }
+
+    /// Returns a private digest component for the exact retained owner-request
+    /// contract. The exhaustive destructuring is intentional: adding a
+    /// `CarrierContract` field must make this I3-0 canary stop compiling until
+    /// its meaning is classified. It accepts neither other carrier families
+    /// nor owner requests with designated/frontier result state.
+    pub(crate) fn i3_probe_owner_request_fingerprint_component(&self) -> Option<[u8; 32]> {
+        let CarrierContract {
+            edge_kind,
+            lifecycle_kind,
+            operation_identity_template,
+            request_identity_template,
+            source_ref,
+            core_ref,
+            origin_principal_template,
+            origin_locus_template,
+            target_owner_locus_template,
+            declared_failure_row,
+            effect_row,
+            authority_requirements,
+            occurrence_slots,
+            frontiers,
+            linked_request_identity,
+            typed_outcome,
+            evaluator_receipt_consumption,
+            designated_dependency,
+            visibility_policy,
+            provenance,
+            designated_result_details,
+        } = self;
+
+        if *edge_kind != CommunicationEdgeKind::OwnerRequest
+            || *lifecycle_kind != CarrierLifecycleKind::OwnerRequest
+            || !frontiers.is_empty()
+            || designated_dependency.is_some()
+            || designated_result_details.is_some()
+            || !visibility_policy.is_reference_only()
+            || !matches!(provenance, CarrierContractProvenance::CheckedCoreBound)
+        {
+            return None;
+        }
+        let core_ref = core_ref.as_deref()?;
+        let origin_principal_template = origin_principal_template.as_deref()?;
+        let origin_locus_template = origin_locus_template.as_deref()?;
+        let target_owner_locus_template = target_owner_locus_template.as_deref()?;
+
+        let mut hasher = Sha256::new();
+        hasher.update(I3_PROBE_OWNER_REQUEST_COMPONENT_DOMAIN);
+        i3_owner_request_component_text(
+            &mut hasher,
+            b"edge-kind",
+            i3_owner_request_component_edge_kind(*edge_kind),
+        );
+        i3_owner_request_component_text(
+            &mut hasher,
+            b"lifecycle-kind",
+            i3_owner_request_component_lifecycle_kind(*lifecycle_kind),
+        );
+        i3_owner_request_component_text(
+            &mut hasher,
+            b"operation-identity-template",
+            operation_identity_template.operation_id(),
+        );
+        i3_owner_request_component_text(
+            &mut hasher,
+            b"request-identity-operation-template",
+            &request_identity_template.operation_id,
+        );
+        i3_owner_request_component_source_ref(
+            &mut hasher,
+            b"request-identity-source-ref",
+            &request_identity_template.source_ref,
+        );
+        i3_owner_request_component_bool(
+            &mut hasher,
+            b"request-identity-template-present",
+            request_identity_template.has_slot(),
+        );
+        i3_owner_request_component_source_ref(&mut hasher, b"carrier-source-ref", source_ref);
+        i3_owner_request_component_text(&mut hasher, b"core-ref", core_ref);
+        i3_owner_request_component_text(
+            &mut hasher,
+            b"origin-principal-template",
+            origin_principal_template,
+        );
+        i3_owner_request_component_text(
+            &mut hasher,
+            b"origin-locus-template",
+            origin_locus_template,
+        );
+        i3_owner_request_component_text(
+            &mut hasher,
+            b"target-owner-locus-template",
+            target_owner_locus_template,
+        );
+        i3_owner_request_component_texts(
+            &mut hasher,
+            b"declared-failure-row",
+            &declared_failure_row.names(),
+        );
+        i3_owner_request_component_effects(&mut hasher, &effect_row.kinds);
+        i3_owner_request_component_authority(&mut hasher, authority_requirements);
+        i3_owner_request_component_occurrences(&mut hasher, occurrence_slots);
+        i3_owner_request_component_bool(&mut hasher, b"frontiers-empty", frontiers.is_empty());
+        i3_owner_request_component_bool(
+            &mut hasher,
+            b"linked-request-identity",
+            *linked_request_identity,
+        );
+        i3_owner_request_component_bool(&mut hasher, b"typed-outcome", *typed_outcome);
+        i3_owner_request_component_bool(
+            &mut hasher,
+            b"receipt-consumption",
+            *evaluator_receipt_consumption,
+        );
+        i3_owner_request_component_bool(
+            &mut hasher,
+            b"designated-dependency-absent",
+            designated_dependency.is_none(),
+        );
+        i3_owner_request_component_bool(
+            &mut hasher,
+            b"designated-result-details-absent",
+            designated_result_details.is_none(),
+        );
+        i3_owner_request_component_bool(
+            &mut hasher,
+            b"reference-only-redaction",
+            visibility_policy.is_reference_only(),
+        );
+        i3_owner_request_component_text(
+            &mut hasher,
+            b"provenance",
+            i3_owner_request_component_provenance(*provenance),
+        );
+        i3_owner_request_component_bool(&mut hasher, b"transfers-authority", false);
+        i3_owner_request_component_bool(&mut hasher, b"mints-authority-without-source", false);
+
+        Some(hasher.finalize().into())
     }
 
     pub(super) fn owner_request(evaluation: &CheckedEvaluation) -> Self {
@@ -1474,6 +1618,318 @@ impl CarrierContract {
             designated_result_details: None,
         }
     }
+}
+
+fn i3_owner_request_component_text(hasher: &mut Sha256, tag: &[u8], value: &str) {
+    i3_owner_request_component_field(hasher, tag, value.as_bytes());
+}
+
+fn i3_owner_request_component_bool(hasher: &mut Sha256, tag: &[u8], value: bool) {
+    i3_owner_request_component_field(hasher, tag, &[u8::from(value)]);
+}
+
+fn i3_owner_request_component_u64(hasher: &mut Sha256, tag: &[u8], value: u64) {
+    i3_owner_request_component_field(hasher, tag, &value.to_be_bytes());
+}
+
+fn i3_owner_request_component_texts(hasher: &mut Sha256, tag: &[u8], values: &[String]) {
+    i3_owner_request_component_u64(
+        hasher,
+        tag,
+        u64::try_from(values.len()).expect("finite I3 owner-request row count fits u64"),
+    );
+    for (index, value) in values.iter().enumerate() {
+        i3_owner_request_component_u64(
+            hasher,
+            b"row-index",
+            u64::try_from(index).expect("finite I3 owner-request row index fits u64"),
+        );
+        i3_owner_request_component_text(hasher, b"row-value", value);
+    }
+}
+
+fn i3_owner_request_component_source_ref(hasher: &mut Sha256, tag: &[u8], source_ref: &SourceRef) {
+    i3_owner_request_component_field(hasher, b"source-ref-tag", tag);
+    i3_owner_request_component_text(hasher, b"source-ref-path", &source_ref.path);
+    i3_owner_request_component_u64(
+        hasher,
+        b"source-ref-start-line",
+        u64::from(source_ref.start_line),
+    );
+    i3_owner_request_component_u64(
+        hasher,
+        b"source-ref-start-column",
+        u64::from(source_ref.start_column),
+    );
+    i3_owner_request_component_u64(
+        hasher,
+        b"source-ref-end-line",
+        u64::from(source_ref.end_line),
+    );
+    i3_owner_request_component_u64(
+        hasher,
+        b"source-ref-end-column",
+        u64::from(source_ref.end_column),
+    );
+}
+
+fn i3_owner_request_component_effects(hasher: &mut Sha256, kinds: &[EffectKind]) {
+    i3_owner_request_component_u64(
+        hasher,
+        b"effect-row-count",
+        u64::try_from(kinds.len()).expect("finite I3 effect row count fits u64"),
+    );
+    for (index, kind) in kinds.iter().copied().enumerate() {
+        i3_owner_request_component_u64(
+            hasher,
+            b"effect-row-index",
+            u64::try_from(index).expect("finite I3 effect row index fits u64"),
+        );
+        i3_owner_request_component_text(
+            hasher,
+            b"effect-kind",
+            i3_owner_request_component_effect_kind(kind),
+        );
+    }
+}
+
+fn i3_owner_request_component_authority(
+    hasher: &mut Sha256,
+    authority_requirements: &AuthorityRequirements,
+) {
+    let AuthorityRequirements { requirements } = authority_requirements;
+    let RuntimeSeamRequirements { rows } = requirements;
+    i3_owner_request_component_u64(
+        hasher,
+        b"authority-row-count",
+        u64::try_from(rows.len()).expect("finite I3 authority row count fits u64"),
+    );
+    for (index, (requirement, obligation, provenance, authority)) in rows.iter().enumerate() {
+        i3_owner_request_component_u64(
+            hasher,
+            b"authority-row-index",
+            u64::try_from(index).expect("finite I3 authority row index fits u64"),
+        );
+        i3_owner_request_component_text(
+            hasher,
+            b"authority-requirement-kind",
+            i3_owner_request_component_requirement_kind(*requirement),
+        );
+        i3_owner_request_component_generated_obligation(hasher, obligation.as_ref());
+        i3_owner_request_component_text(
+            hasher,
+            b"authority-provenance",
+            i3_owner_request_component_provenance_kind(*provenance),
+        );
+        match authority {
+            Some(authority) => {
+                i3_owner_request_component_bool(hasher, b"authority-present", true);
+                i3_owner_request_component_text(
+                    hasher,
+                    b"authority-kind",
+                    i3_owner_request_component_seam_authority_kind(*authority),
+                );
+            }
+            None => i3_owner_request_component_bool(hasher, b"authority-present", false),
+        }
+    }
+}
+
+fn i3_owner_request_component_generated_obligation(
+    hasher: &mut Sha256,
+    obligation: Option<&GeneratedObligationKind>,
+) {
+    let Some(obligation) = obligation else {
+        i3_owner_request_component_bool(hasher, b"generated-obligation-present", false);
+        return;
+    };
+    i3_owner_request_component_bool(hasher, b"generated-obligation-present", true);
+    match obligation {
+        GeneratedObligationKind::Failure(name) => {
+            i3_owner_request_component_text(hasher, b"generated-obligation-kind", "Failure");
+            i3_owner_request_component_text(hasher, b"generated-obligation-failure", name);
+        }
+        GeneratedObligationKind::Capability => {
+            i3_owner_request_component_text(hasher, b"generated-obligation-kind", "Capability");
+        }
+        GeneratedObligationKind::Witness => {
+            i3_owner_request_component_text(hasher, b"generated-obligation-kind", "Witness");
+        }
+        GeneratedObligationKind::Authority => {
+            i3_owner_request_component_text(hasher, b"generated-obligation-kind", "Authority");
+        }
+        GeneratedObligationKind::AdmittedEvaluatorAuthority => {
+            i3_owner_request_component_text(
+                hasher,
+                b"generated-obligation-kind",
+                "AdmittedEvaluatorAuthority",
+            );
+        }
+        GeneratedObligationKind::DesignatedResultConsumerAuthority => {
+            i3_owner_request_component_text(
+                hasher,
+                b"generated-obligation-kind",
+                "DesignatedResultConsumerAuthority",
+            );
+        }
+        GeneratedObligationKind::Evaluation(kind) => {
+            i3_owner_request_component_text(hasher, b"generated-obligation-kind", "Evaluation");
+            i3_owner_request_component_text(
+                hasher,
+                b"generated-obligation-evaluation-kind",
+                i3_owner_request_component_evaluation_kind(*kind),
+            );
+        }
+    }
+}
+
+fn i3_owner_request_component_occurrences(
+    hasher: &mut Sha256,
+    occurrence_slots: &[CarrierOccurrenceSlotKind],
+) {
+    i3_owner_request_component_u64(
+        hasher,
+        b"occurrence-slot-count",
+        u64::try_from(occurrence_slots.len()).expect("finite I3 occurrence count fits u64"),
+    );
+    for (index, slot) in occurrence_slots.iter().copied().enumerate() {
+        i3_owner_request_component_u64(
+            hasher,
+            b"occurrence-slot-index",
+            u64::try_from(index).expect("finite I3 occurrence index fits u64"),
+        );
+        i3_owner_request_component_text(
+            hasher,
+            b"occurrence-slot-kind",
+            i3_owner_request_component_occurrence_slot(slot),
+        );
+    }
+}
+
+fn i3_owner_request_component_edge_kind(kind: CommunicationEdgeKind) -> &'static str {
+    match kind {
+        CommunicationEdgeKind::OwnerRequest => "OwnerRequest",
+        CommunicationEdgeKind::OwnerReplyReceipt => "OwnerReplyReceipt",
+        CommunicationEdgeKind::RelationProjectionPublication => "RelationProjectionPublication",
+        CommunicationEdgeKind::DesignatedInputRequest => "DesignatedInputRequest",
+        CommunicationEdgeKind::DesignatedInputReceipt => "DesignatedInputReceipt",
+        CommunicationEdgeKind::DesignatedResultDelivery => "DesignatedResultDelivery",
+        CommunicationEdgeKind::AbsoluteValueStream => "AbsoluteValueStream",
+    }
+}
+
+fn i3_owner_request_component_lifecycle_kind(kind: CarrierLifecycleKind) -> &'static str {
+    match kind {
+        CarrierLifecycleKind::OwnerRequest => "OwnerRequest",
+        CarrierLifecycleKind::OwnerReplyReceipt => "OwnerReplyReceipt",
+        CarrierLifecycleKind::DesignatedInputRequest => "DesignatedInputRequest",
+        CarrierLifecycleKind::DesignatedInputReceipt => "DesignatedInputReceipt",
+        CarrierLifecycleKind::RelationProjectionPublication => "RelationProjectionPublication",
+        CarrierLifecycleKind::DesignatedResultDelivery => "DesignatedResultDelivery",
+    }
+}
+
+fn i3_owner_request_component_effect_kind(kind: EffectKind) -> &'static str {
+    match kind {
+        EffectKind::OwnerRequest => "OwnerRequest",
+        EffectKind::OwnerLocalRead => "OwnerLocalRead",
+        EffectKind::OwnerWrite => "OwnerWrite",
+        EffectKind::ActorReadReply => "ActorReadReply",
+        EffectKind::ObserverPublish => "ObserverPublish",
+        EffectKind::RelationPublish => "RelationPublish",
+        EffectKind::DesignatedRemoteRequest => "DesignatedRemoteRequest",
+        EffectKind::DesignatedReceiptUse => "DesignatedReceiptUse",
+        EffectKind::DesignatedValuePublish => "DesignatedValuePublish",
+        EffectKind::DesignatedResultDelivery => "DesignatedResultDelivery",
+        EffectKind::DesignatedResultConsume => "DesignatedResultConsume",
+    }
+}
+
+fn i3_owner_request_component_requirement_kind(kind: RuntimeSeamRequirementKind) -> &'static str {
+    match kind {
+        RuntimeSeamRequirementKind::MembershipEpochIncarnation => "MembershipEpochIncarnation",
+        RuntimeSeamRequirementKind::LiveCapabilityRef => "LiveCapabilityRef",
+        RuntimeSeamRequirementKind::LiveWitnessRef => "LiveWitnessRef",
+        RuntimeSeamRequirementKind::ProducerReleaseCapabilitySlot => {
+            "ProducerReleaseCapabilitySlot"
+        }
+        RuntimeSeamRequirementKind::ProducerReleaseWitnessSlot => "ProducerReleaseWitnessSlot",
+        RuntimeSeamRequirementKind::EvaluatorDecisionAuthoritySlot => {
+            "EvaluatorDecisionAuthoritySlot"
+        }
+        RuntimeSeamRequirementKind::ConsumerMembershipEpochIncarnation => {
+            "ConsumerMembershipEpochIncarnation"
+        }
+        RuntimeSeamRequirementKind::ConsumerCapabilityRef => "ConsumerCapabilityRef",
+        RuntimeSeamRequirementKind::ConsumerWitnessRef => "ConsumerWitnessRef",
+    }
+}
+
+fn i3_owner_request_component_provenance_kind(kind: CarrierProvenanceKind) -> &'static str {
+    match kind {
+        CarrierProvenanceKind::RequiredFromSealedRuntimeSeam => "RequiredFromSealedRuntimeSeam",
+    }
+}
+
+fn i3_owner_request_component_provenance(kind: CarrierContractProvenance) -> &'static str {
+    match kind {
+        CarrierContractProvenance::CheckedCoreBound => "CheckedCoreBound",
+    }
+}
+
+fn i3_owner_request_component_seam_authority_kind(kind: SeamAuthorityKind) -> &'static str {
+    match kind {
+        SeamAuthorityKind::MembershipEpochIncarnation => "MembershipEpochIncarnation",
+        SeamAuthorityKind::OwnerCapabilityRef => "OwnerCapabilityRef",
+        SeamAuthorityKind::OwnerWitnessRef => "OwnerWitnessRef",
+        SeamAuthorityKind::ProducerReleaseCapability => "ProducerReleaseCapability",
+        SeamAuthorityKind::ProducerReleaseWitness => "ProducerReleaseWitness",
+        SeamAuthorityKind::EvaluatorDecisionAuthority => "EvaluatorDecisionAuthority",
+        SeamAuthorityKind::DesignatedResultConsumerMembership => {
+            "DesignatedResultConsumerMembership"
+        }
+        SeamAuthorityKind::DesignatedResultConsumerCapability => {
+            "DesignatedResultConsumerCapability"
+        }
+        SeamAuthorityKind::DesignatedResultConsumerWitness => "DesignatedResultConsumerWitness",
+    }
+}
+
+fn i3_owner_request_component_evaluation_kind(kind: CheckedEvaluationKind) -> &'static str {
+    match kind {
+        CheckedEvaluationKind::OwnerRmw => "OwnerRmw",
+        CheckedEvaluationKind::DesignatedPublishValue => "DesignatedPublishValue",
+        CheckedEvaluationKind::PublishRelation => "PublishRelation",
+        CheckedEvaluationKind::ConsumerLocalProjection => "ConsumerLocalProjection",
+        CheckedEvaluationKind::DesignatedResultConsume => "DesignatedResultConsume",
+    }
+}
+
+fn i3_owner_request_component_occurrence_slot(kind: CarrierOccurrenceSlotKind) -> &'static str {
+    match kind {
+        CarrierOccurrenceSlotKind::Request => "Request",
+        CarrierOccurrenceSlotKind::Serve => "Serve",
+        CarrierOccurrenceSlotKind::Reply => "Reply",
+        CarrierOccurrenceSlotKind::Receive => "Receive",
+        CarrierOccurrenceSlotKind::Publish => "Publish",
+        CarrierOccurrenceSlotKind::Observe => "Observe",
+        CarrierOccurrenceSlotKind::Consume => "Consume",
+    }
+}
+
+fn i3_owner_request_component_field(hasher: &mut Sha256, tag: &[u8], bytes: &[u8]) {
+    hasher.update(
+        u64::try_from(tag.len())
+            .expect("finite I3 owner-request component tag length fits u64")
+            .to_be_bytes(),
+    );
+    hasher.update(tag);
+    hasher.update(
+        u64::try_from(bytes.len())
+            .expect("finite I3 owner-request component field length fits u64")
+            .to_be_bytes(),
+    );
+    hasher.update(bytes);
 }
 
 fn effect_row_for(evaluation: &CheckedEvaluation) -> ProjectedEffectRow {

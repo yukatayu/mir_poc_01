@@ -1,0 +1,26 @@
+[package]
+name = "mirrorea-i3-probe"
+version = "0.1.0"
+edition = "2024"
+publish = false
+
+[lib]
+path = "src/lib.rs"
+
+[[bin]]
+name = "mirrorea-i3-probe"
+path = "src/bin/mirrorea-i3-probe.rs"
+
+[dependencies]
+mir-runtime = { path = "../mir-runtime" }
+quinn = { version = "=0.11.11", default-features = false, features = ["runtime-tokio", "rustls-ring"] }
+rcgen = { version = "=0.14.10", default-features = false, features = ["crypto", "ring"] }
+rustls = { version = "=0.23.43", default-features = false, features = ["std", "ring"] }
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+sha2 = "0.10"
+tokio = { version = "=1.53.1", default-features = false, features = ["rt-multi-thread", "macros", "net", "io-util", "sync", "time"] }
+tokio-rustls = { version = "=0.26.4", default-features = false, features = ["ring"] }
+
+[lints]
+workspace = true

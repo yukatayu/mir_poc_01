@@ -18,6 +18,20 @@ open_items: []
 
 ## 履歴
 
+- **2026-09-02** PROPOSAL-040 / ADR-0037により、同一private
+  source/Core-bound nine-case receiver-child canaryをactual TLS-over-TCPとQUIC
+  reliable streamで実行したI3-0を受理した。両候補はcriteria 1--7でtieし、criterion 8
+  implementation/library maturityとcriterion 9 cross-platform maintainabilityには
+  auditable/tested winnerがなかった。最初のmaterial differenceであるcriterion 10
+  future browser relevanceによりCandidate B QUIC reliable streamをprivate selected
+  adapterとした。Candidate A TLS-over-TCP framed reliable streamはrejected/deferred
+  comparison/replacement baseline、QUIC datagramはexcludedのままである。Aの584 LOCと
+  より短いcanaryはlower-ranked performance/C12 simplicity evidenceでありselectionを
+  上書きしない。OPEN-032はこのbounded programだけresolvedした。
+  public wire/codec/version/certificate/API/ABI/deployment/production/platformをfreezeせず、
+  official I3 lifecycleは未entry、theory T1とbroad PHASE-I1は不変である。ALIGN-0/1/2と
+  I3-0をclosed、I3-1をsole active、I3-2をnext/inactiveとした。
+
 - **2026-09-01** PROPOSAL-039 / ADR-0036 / architecture/07によりALIGN-2の
   Browser/Host trust boundaryを受理した。BND-007をRuntime/Projection→Viewとして
   authoritative domain semantics禁止とpresentation-local computation許可に明確化し、

@@ -16,7 +16,7 @@ use mir_ast::surface_v0::FixtureSource;
 use mir_semantics::{
     shared_model::SourceRef,
     surface_v0_pipeline::{
-        CheckedEvaluationKind, CheckedSurfaceV0, ResidualObligationKind,
+        CheckedEvaluationKind, CheckedSurfaceV0, EffectKind, ResidualObligationKind,
         check_and_elaborate_surface_v0,
     },
 };
@@ -28,8 +28,10 @@ use crate::{
         M9FiniteLocalAdmissionCandidate, M9FiniteLocalAdmissionFact, M9RuntimeExecutionSeam,
     },
     sys3_projection::{
-        BackendEligibility, BackendProfile, CommunicationEdgeKind, DeclaredLogicalTopology,
-        GlobalProjectionResult, ProjectedOperationFragmentKind, project_checked_core,
+        BackendEligibility, BackendProfile, CarrierContract, CarrierFrontierKind,
+        CarrierLifecycleKind, CarrierOccurrenceSlotKind, CommunicationEdgeKind,
+        DeclaredLogicalTopology, GlobalProjectionResult, ProjectedOperationFragmentKind,
+        SeamAuthorityKind, project_checked_core,
     },
     sys4_dispatch::{
         ExternalAction, FabricProgram, LocalFabric, ObserverSafeM9SemanticRowSets,
@@ -50,6 +52,10 @@ const RELATION_OBSERVER_REF_DOMAIN: &[u8] = b"mirrorea/sys5/relation-observer-re
 const LOCAL_CUT_REF_DOMAIN: &[u8] = b"mirrorea/sys5/local-cut-ref/v1\0";
 const PATCH_FRONTIER_REF_DOMAIN: &[u8] = b"mirrorea/sys5/patch-frontier-ref/v1\0";
 const LIFECYCLE_OCCURRENCE_REF_DOMAIN: &[u8] = b"mirrorea/sys5/lifecycle-occurrence-ref/v1\0";
+const I3_PROBE_OWNER_PRINCIPAL_REF_DOMAIN: &[u8] =
+    b"mirrorea/sys5/i3-probe-owner-principal-ref/v1\0";
+const I3_PROBE_FULL_CONTRACT_FINGERPRINT_DOMAIN: &[u8] =
+    b"mirrorea/sys5/i3-probe-carrier-contract/v1\0";
 
 /// Ordinary source supplied directly to the provisional build/project facade.
 #[derive(Clone, PartialEq, Eq)]
@@ -108,6 +114,347 @@ impl fmt::Display for Sys5LocalSliceError {
 
 impl Error for Sys5LocalSliceError {}
 
+/// Why a doc-hidden I3 probe could not obtain exactly one retained carrier
+/// contract.  This is projection evidence only: it is not a runtime admission
+/// or transport error vocabulary.
+#[doc(hidden)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+pub enum Sys5I3ProbeFacadeErrorKind {
+    /// No generated edge retained by the checked projection has the requested
+    /// opaque edge reference.
+    UnknownEdgeRef,
+    /// The retained projection is internally inconsistent because an opaque
+    /// edge reference selected more than one generated edge.
+    NonUniqueEdgeRef,
+    /// The edge and its retained `CarrierContract` disagree about immutable
+    /// checked-Core provenance.
+    CarrierContractMismatch,
+    /// This I3-0 canary exposes only exact retained owner-request contracts.
+    NotOwnerRequest,
+}
+
+/// A reference-only failure returned by the doc-hidden I3 probe façade.
+#[doc(hidden)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+pub struct Sys5I3ProbeFacadeError {
+    kind: Sys5I3ProbeFacadeErrorKind,
+}
+
+impl Sys5I3ProbeFacadeError {
+    fn new(kind: Sys5I3ProbeFacadeErrorKind) -> Self {
+        Self { kind }
+    }
+
+    /// Classifies the lookup failure without exposing source, route, payload,
+    /// authority, capability, witness, mailbox, or transport material.
+    pub const fn kind(&self) -> Sys5I3ProbeFacadeErrorKind {
+        self.kind
+    }
+}
+
+impl fmt::Display for Sys5I3ProbeFacadeError {
+    fn fmt(&self, formatter: &mut fmt::Formatter<'_>) -> fmt::Result {
+        formatter.write_str(match self.kind {
+            Sys5I3ProbeFacadeErrorKind::UnknownEdgeRef => {
+                "unknown retained generated edge reference"
+            }
+            Sys5I3ProbeFacadeErrorKind::NonUniqueEdgeRef => {
+                "non-unique retained generated edge reference"
+            }
+            Sys5I3ProbeFacadeErrorKind::CarrierContractMismatch => {
+                "retained generated edge and carrier contract provenance mismatch"
+            }
+            Sys5I3ProbeFacadeErrorKind::NotOwnerRequest => {
+                "I3 probe façade accepts retained owner-request contracts only"
+            }
+        })
+    }
+}
+
+impl Error for Sys5I3ProbeFacadeError {}
+
+/// The only redaction policy exposed by the doc-hidden I3 probe façade.
+#[doc(hidden)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+pub enum Sys5I3ProbeRedaction {
+    /// The snapshot contains only checked/source/projection references and
+    /// finite category names.  It never contains source text, payloads, or
+    /// authority-bearing values.
+    ReferenceOnly,
+}
+
+/// Reference-only authority requirements retained by one generated carrier.
+/// Categories are names, not membership/capability/witness values or lineage.
+#[doc(hidden)]
+#[derive(Debug, Clone, PartialEq, Eq)]
+pub struct Sys5I3ProbeAuthorityRequirements {
+    category_names: Vec<String>,
+    requires_membership_epoch_and_incarnation: bool,
+    requires_capability_and_witness_refs: bool,
+}
+
+impl Sys5I3ProbeAuthorityRequirements {
+    /// Finite, stable category names retained by the selected contract.
+    pub fn category_names(&self) -> &[String] {
+        &self.category_names
+    }
+
+    /// Whether the carrier requires a membership epoch/incarnation category.
+    pub const fn requires_membership_epoch_and_incarnation(&self) -> bool {
+        self.requires_membership_epoch_and_incarnation
+    }
+
+    /// Whether the carrier requires both a capability-reference category and
+    /// a witness-reference category.
+    pub const fn requires_capability_and_witness_refs(&self) -> bool {
+        self.requires_capability_and_witness_refs
+    }
+}
+
+/// Reference-only facts unique to the retained owner-request canary.  This is
+/// not a generic relation or designated-carrier façade.
+#[doc(hidden)]
+#[derive(Debug, Clone, PartialEq, Eq)]
+pub struct Sys5I3ProbeOwnerRequestFacts {
+    request_template_present: bool,
+    request_template_slot_names: Vec<String>,
+    origin_principal_ref: String,
+    origin_locus_template: String,
+    target_owner_locus_template: String,
+    frontier_requirement_names: Vec<String>,
+    has_no_frontier_contract: bool,
+    requires_receipt_consumption_state: bool,
+    designated_dependency_present: bool,
+    designated_result_details_present: bool,
+}
+
+impl Sys5I3ProbeOwnerRequestFacts {
+    /// Whether the retained request identity template has its semantic slot.
+    pub const fn request_template_present(&self) -> bool {
+        self.request_template_present
+    }
+
+    /// Retained semantic slot names; they do not identify network occurrences.
+    pub fn request_template_slot_names(&self) -> &[String] {
+        &self.request_template_slot_names
+    }
+
+    /// Opaque digest of the retained origin-principal template, never its raw
+    /// value or an authority-bearing credential.
+    pub fn origin_principal_ref(&self) -> &str {
+        &self.origin_principal_ref
+    }
+
+    /// Retained owner-request origin locus template.
+    pub fn origin_locus_template(&self) -> &str {
+        &self.origin_locus_template
+    }
+
+    /// Retained owner-request target-owner locus template.
+    pub fn target_owner_locus_template(&self) -> &str {
+        &self.target_owner_locus_template
+    }
+
+    /// Retained frontier-category names. Owner requests have no frontier.
+    pub fn frontier_requirement_names(&self) -> &[String] {
+        &self.frontier_requirement_names
+    }
+
+    /// Whether the exact retained contract has no frontier requirement.
+    pub const fn has_no_frontier_contract(&self) -> bool {
+        self.has_no_frontier_contract
+    }
+
+    /// Whether the retained carrier requires any frontier category.
+    pub const fn requires_any_frontier(&self) -> bool {
+        !self.has_no_frontier_contract
+    }
+
+    /// Whether receipt consumption is part of this carrier contract.
+    pub const fn requires_receipt_consumption_state(&self) -> bool {
+        self.requires_receipt_consumption_state
+    }
+
+    /// Whether a designated remote-input dependency is retained.
+    pub const fn designated_dependency_present(&self) -> bool {
+        self.designated_dependency_present
+    }
+
+    /// Whether designated-result details are retained.
+    pub const fn designated_result_details_present(&self) -> bool {
+        self.designated_result_details_present
+    }
+}
+
+/// An immutable observer-safe snapshot of one exact retained generated
+/// `CarrierContract`.  It is doc-hidden I3-0 probe evidence, not a public
+/// wire, API, package, or runtime-admission contract.
+#[doc(hidden)]
+#[derive(Debug, Clone, PartialEq, Eq)]
+pub struct Sys5I3ProbeCarrierContract {
+    checked_program_ref: String,
+    operation_id: String,
+    edge_kind: String,
+    lifecycle_kind: String,
+    source_locus: String,
+    target_locus: String,
+    logical_source_path: String,
+    source_span: Sys5SourceSpan,
+    source_ref: String,
+    core_ref: String,
+    source_artifact_ref: String,
+    target_artifact_ref: String,
+    edge_ref: String,
+    declared_failure_names: Vec<String>,
+    effect_kind_names: Vec<String>,
+    required_occurrence_slot_names: Vec<String>,
+    linked_request_identity: bool,
+    typed_outcome: bool,
+    authority_requirements: Sys5I3ProbeAuthorityRequirements,
+    redaction: Sys5I3ProbeRedaction,
+    checked_core_bound: bool,
+    transfers_authority: bool,
+    mints_authority_without_source: bool,
+    owner_request: Sys5I3ProbeOwnerRequestFacts,
+    full_retained_contract_fingerprint: String,
+}
+
+impl Sys5I3ProbeCarrierContract {
+    /// Opaque reference to the exact retained checked program.
+    pub fn checked_program_ref(&self) -> &str {
+        &self.checked_program_ref
+    }
+
+    /// Operation name retained by the checked carrier identity template.
+    pub fn operation_id(&self) -> &str {
+        &self.operation_id
+    }
+
+    /// Explicit generated communication-edge kind name.
+    pub fn edge_kind(&self) -> &str {
+        &self.edge_kind
+    }
+
+    /// Explicit carrier lifecycle kind name.
+    pub fn lifecycle_kind(&self) -> &str {
+        &self.lifecycle_kind
+    }
+
+    /// Source locus derived by the retained generated edge.
+    pub fn source_locus(&self) -> &str {
+        &self.source_locus
+    }
+
+    /// Target locus derived by the retained generated edge.
+    pub fn target_locus(&self) -> &str {
+        &self.target_locus
+    }
+
+    /// Logical source path; it is never a resolved host path.
+    pub fn logical_source_path(&self) -> &str {
+        &self.logical_source_path
+    }
+
+    /// Source coordinates retained without source text.
+    pub const fn source_span(&self) -> Sys5SourceSpan {
+        self.source_span
+    }
+
+    /// Logical source reference with coordinates and no source text.
+    pub fn source_ref(&self) -> &str {
+        &self.source_ref
+    }
+
+    /// Checked-Core reference retained by both edge and carrier.
+    pub fn core_ref(&self) -> &str {
+        &self.core_ref
+    }
+
+    /// Exact generated source artifact/fragment reference.
+    pub fn source_artifact_ref(&self) -> &str {
+        &self.source_artifact_ref
+    }
+
+    /// Exact generated target artifact/fragment reference.
+    pub fn target_artifact_ref(&self) -> &str {
+        &self.target_artifact_ref
+    }
+
+    /// Opaque reference of the exact retained generated edge.
+    pub fn edge_ref(&self) -> &str {
+        &self.edge_ref
+    }
+
+    /// Declared typed-failure names retained by the checked carrier.
+    pub fn declared_failure_names(&self) -> &[String] {
+        &self.declared_failure_names
+    }
+
+    /// `EffectKind` names retained by the checked carrier effect row.
+    pub fn effect_kind_names(&self) -> &[String] {
+        &self.effect_kind_names
+    }
+
+    /// Required semantic occurrence-slot names retained by the carrier.
+    pub fn required_occurrence_slot_names(&self) -> &[String] {
+        &self.required_occurrence_slot_names
+    }
+
+    /// Whether the carrier requires a linked semantic request identity.
+    pub const fn requires_linked_request_identity(&self) -> bool {
+        self.linked_request_identity
+    }
+
+    /// Whether the carrier requires a typed success-or-declared-failure
+    /// outcome.
+    pub const fn requires_typed_outcome(&self) -> bool {
+        self.typed_outcome
+    }
+
+    /// Reference-only authority categories; never values or lineage.
+    pub fn authority_requirements(&self) -> &Sys5I3ProbeAuthorityRequirements {
+        &self.authority_requirements
+    }
+
+    /// The observer redaction policy for this snapshot.
+    pub const fn redaction(&self) -> Sys5I3ProbeRedaction {
+        self.redaction
+    }
+
+    /// Whether the retained carrier proves checked-Core provenance.
+    pub const fn checked_core_bound(&self) -> bool {
+        self.checked_core_bound
+    }
+
+    /// Generated I2 carriers never transfer authority.
+    pub const fn transfers_authority(&self) -> bool {
+        self.transfers_authority
+    }
+
+    /// Whether the retained carrier mints authority without checked source.
+    pub const fn mints_authority_without_source(&self) -> bool {
+        self.mints_authority_without_source
+    }
+
+    /// Domain-separated SHA-256 reference over all semantically applicable
+    /// retained owner-request contract fields. This is internal I3-0 evidence,
+    /// never a public wire or compatibility digest grammar.
+    pub fn full_retained_contract_fingerprint(&self) -> &str {
+        &self.full_retained_contract_fingerprint
+    }
+
+    /// Owner-request-only facts for this owner-request canary. No other
+    /// carrier kind or lifecycle can construct this façade snapshot.
+    pub fn owner_request_facts(&self) -> Option<&Sys5I3ProbeOwnerRequestFacts> {
+        Some(&self.owner_request)
+    }
+
+    /// This façade makes no public wire/API compatibility promise.
+    pub const fn public_api_or_wire_contract(&self) -> bool {
+        false
+    }
+}
+
 /// An experimental, non-public checked/projected local slice.  It can start
 /// the bounded in-process runtime through `Sys5PreparedAdmission`; this type
 /// itself retains only checked/projected state, not a live fabric.
@@ -144,6 +491,162 @@ impl Sys5LocalProject {
     /// state, credential, capability, or witness payload.
     pub fn semantic_summary(&self) -> &Sys5SemanticSummary {
         &self.semantic_summary
+    }
+
+    /// Returns a reference-only snapshot of exactly one generated I2 carrier
+    /// selected by its retained opaque edge reference.  This doc-hidden I3-0
+    /// evidence hook reads the original projection only: it does not reparse
+    /// source, prepare admission, construct routing, accept authority, or
+    /// expose payload/runtime state.
+    #[doc(hidden)]
+    pub fn i3_probe_carrier_contract(
+        &self,
+        edge_ref: &str,
+    ) -> Result<Sys5I3ProbeCarrierContract, Sys5I3ProbeFacadeError> {
+        let mut selected = self
+            .projection
+            .communication_plan()
+            .edges()
+            .iter()
+            .filter(|candidate| candidate.edge_ref() == edge_ref);
+        let edge = selected.next().ok_or_else(|| {
+            Sys5I3ProbeFacadeError::new(Sys5I3ProbeFacadeErrorKind::UnknownEdgeRef)
+        })?;
+        if selected.next().is_some() {
+            return Err(Sys5I3ProbeFacadeError::new(
+                Sys5I3ProbeFacadeErrorKind::NonUniqueEdgeRef,
+            ));
+        }
+
+        let carrier = edge.carrier_contract();
+        if edge.kind() != CommunicationEdgeKind::OwnerRequest
+            || carrier.edge_kind() != CommunicationEdgeKind::OwnerRequest
+            || carrier.lifecycle_kind() != CarrierLifecycleKind::OwnerRequest
+        {
+            return Err(Sys5I3ProbeFacadeError::new(
+                Sys5I3ProbeFacadeErrorKind::NotOwnerRequest,
+            ));
+        }
+
+        let Some(origin_principal_template) = carrier.origin_principal_template() else {
+            return Err(Sys5I3ProbeFacadeError::new(
+                Sys5I3ProbeFacadeErrorKind::CarrierContractMismatch,
+            ));
+        };
+        let Some(origin_locus_template) = carrier.origin_locus_template() else {
+            return Err(Sys5I3ProbeFacadeError::new(
+                Sys5I3ProbeFacadeErrorKind::CarrierContractMismatch,
+            ));
+        };
+        let Some(target_owner_locus_template) = carrier.target_owner_locus_template() else {
+            return Err(Sys5I3ProbeFacadeError::new(
+                Sys5I3ProbeFacadeErrorKind::CarrierContractMismatch,
+            ));
+        };
+        let Some(core_ref) = edge.core_ref() else {
+            return Err(Sys5I3ProbeFacadeError::new(
+                Sys5I3ProbeFacadeErrorKind::CarrierContractMismatch,
+            ));
+        };
+        let checked_program_stable_key = edge
+            .checked_core_identity()
+            .checked_program_identity()
+            .stable_key();
+        let expected_checked_program_ref =
+            checked_program_identity_ref(&checked_program_stable_key);
+        if carrier.operation_identity_template().operation_id() != edge.operation_id()
+            || carrier.core_ref() != Some(core_ref)
+            || expected_checked_program_ref != self.checked_program_identity_ref()
+            || !carrier.visibility_policy().is_reference_only_redacted()
+            || carrier.transfers_authority() != edge.transfers_authority()
+            || origin_locus_template != edge.source_locus()
+            || target_owner_locus_template != edge.target_locus()
+        {
+            return Err(Sys5I3ProbeFacadeError::new(
+                Sys5I3ProbeFacadeErrorKind::CarrierContractMismatch,
+            ));
+        }
+        let owner_request_component = carrier
+            .i3_probe_owner_request_fingerprint_component()
+            .ok_or_else(|| {
+                Sys5I3ProbeFacadeError::new(Sys5I3ProbeFacadeErrorKind::CarrierContractMismatch)
+            })?;
+
+        let source_ref = carrier.source_ref();
+        let request_template_slot_names = carrier
+            .required_occurrence_slots()
+            .iter()
+            .copied()
+            .map(carrier_occurrence_slot_name)
+            .map(str::to_string)
+            .collect::<Vec<_>>();
+        let frontier_requirement_names = [CarrierFrontierKind::Input, CarrierFrontierKind::Result]
+            .into_iter()
+            .filter(|frontier| carrier.requires_frontier(*frontier))
+            .map(carrier_frontier_kind_name)
+            .map(str::to_string)
+            .collect::<Vec<_>>();
+        let designated_result_details_present = [
+            carrier.result_version().is_some(),
+            carrier.input_frontier().is_some(),
+            carrier.result_frontier().is_some(),
+            carrier.observation_policy().is_some(),
+            carrier.policy_stamp().is_some(),
+            carrier.static_retry_contract().is_some(),
+        ]
+        .into_iter()
+        .any(|present| present);
+        let owner_request = Sys5I3ProbeOwnerRequestFacts {
+            request_template_present: carrier.request_identity_template().has_slot(),
+            request_template_slot_names: request_template_slot_names.clone(),
+            origin_principal_ref: i3_probe_owner_principal_ref(origin_principal_template),
+            origin_locus_template: origin_locus_template.to_string(),
+            target_owner_locus_template: target_owner_locus_template.to_string(),
+            frontier_requirement_names,
+            has_no_frontier_contract: carrier.has_no_frontier_contract(),
+            requires_receipt_consumption_state: carrier.requires_receipt_consumption_state(),
+            designated_dependency_present: carrier.designated_remote_input_dependency().is_some(),
+            designated_result_details_present,
+        };
+        let mut snapshot = Sys5I3ProbeCarrierContract {
+            checked_program_ref: expected_checked_program_ref,
+            operation_id: carrier
+                .operation_identity_template()
+                .operation_id()
+                .to_string(),
+            edge_kind: edge_kind_name(edge.kind()).to_string(),
+            lifecycle_kind: carrier_lifecycle_kind_name(carrier.lifecycle_kind()).to_string(),
+            source_locus: origin_locus_template.to_string(),
+            target_locus: target_owner_locus_template.to_string(),
+            logical_source_path: source_ref.path.clone(),
+            source_span: summary_source_span(source_ref),
+            source_ref: observer_source_ref(source_ref),
+            core_ref: core_ref.to_string(),
+            source_artifact_ref: edge.source_fragment_ref().clone(),
+            target_artifact_ref: edge.target_fragment_ref().clone(),
+            edge_ref: edge.edge_ref().to_string(),
+            declared_failure_names: carrier.declared_failure_row().names(),
+            effect_kind_names: carrier
+                .effect_row()
+                .kinds()
+                .into_iter()
+                .map(effect_kind_name)
+                .map(str::to_string)
+                .collect(),
+            required_occurrence_slot_names: request_template_slot_names,
+            linked_request_identity: carrier.requires_linked_request_identity(),
+            typed_outcome: carrier.requires_typed_success_or_declared_failure_outcome(),
+            authority_requirements: i3_probe_authority_requirements(carrier),
+            redaction: Sys5I3ProbeRedaction::ReferenceOnly,
+            checked_core_bound: carrier.provenance().is_checked_core_bound(),
+            transfers_authority: carrier.transfers_authority(),
+            mints_authority_without_source: carrier.mints_authority_without_source(),
+            owner_request,
+            full_retained_contract_fingerprint: String::new(),
+        };
+        snapshot.full_retained_contract_fingerprint =
+            i3_probe_full_retained_contract_fingerprint(&snapshot, &owner_request_component);
+        Ok(snapshot)
     }
 
     /// A serializable, observer-safe causal index for this checked/projected
@@ -6830,6 +7333,234 @@ fn edge_kind_name(kind: CommunicationEdgeKind) -> &'static str {
         CommunicationEdgeKind::DesignatedInputReceipt => "designated-input-receipt",
         CommunicationEdgeKind::DesignatedResultDelivery => "designated-result-delivery",
         CommunicationEdgeKind::AbsoluteValueStream => "absolute-value-stream",
+    }
+}
+
+fn carrier_lifecycle_kind_name(kind: CarrierLifecycleKind) -> &'static str {
+    match kind {
+        CarrierLifecycleKind::OwnerRequest => "owner-request",
+        CarrierLifecycleKind::OwnerReplyReceipt => "owner-reply-receipt",
+        CarrierLifecycleKind::DesignatedInputRequest => "designated-input-request",
+        CarrierLifecycleKind::DesignatedInputReceipt => "designated-input-receipt",
+        CarrierLifecycleKind::RelationProjectionPublication => "relation-projection-publication",
+        CarrierLifecycleKind::DesignatedResultDelivery => "designated-result-delivery",
+    }
+}
+
+fn carrier_occurrence_slot_name(kind: CarrierOccurrenceSlotKind) -> &'static str {
+    match kind {
+        CarrierOccurrenceSlotKind::Request => "Request",
+        CarrierOccurrenceSlotKind::Serve => "Serve",
+        CarrierOccurrenceSlotKind::Reply => "Reply",
+        CarrierOccurrenceSlotKind::Receive => "Receive",
+        CarrierOccurrenceSlotKind::Publish => "Publish",
+        CarrierOccurrenceSlotKind::Observe => "Observe",
+        CarrierOccurrenceSlotKind::Consume => "Consume",
+    }
+}
+
+fn carrier_frontier_kind_name(kind: CarrierFrontierKind) -> &'static str {
+    match kind {
+        CarrierFrontierKind::Input => "Input",
+        CarrierFrontierKind::Result => "Result",
+    }
+}
+
+fn i3_probe_owner_principal_ref(origin_principal_template: &str) -> String {
+    let mut hasher = Sha256::new();
+    hasher.update(I3_PROBE_OWNER_PRINCIPAL_REF_DOMAIN);
+    i3_probe_digest_field(
+        &mut hasher,
+        b"origin-principal-template",
+        origin_principal_template.as_bytes(),
+    );
+    format!(
+        "sys5-i3-probe-owner-principal-sha256-v1:{:x}",
+        hasher.finalize()
+    )
+}
+
+/// Combines the projection-owned owner-request component with the generated
+/// edge/artifact/program identity retained by SYS-5. The component itself
+/// keeps raw carrier values, including the principal template, inside SYS-3.
+fn i3_probe_full_retained_contract_fingerprint(
+    snapshot: &Sys5I3ProbeCarrierContract,
+    owner_request_component: &[u8; 32],
+) -> String {
+    let mut hasher = Sha256::new();
+    hasher.update(I3_PROBE_FULL_CONTRACT_FINGERPRINT_DOMAIN);
+
+    i3_probe_digest_field(
+        &mut hasher,
+        b"owner-request-carrier-component",
+        owner_request_component,
+    );
+    i3_probe_digest_text(&mut hasher, b"generated-edge-kind", &snapshot.edge_kind);
+    i3_probe_digest_text(
+        &mut hasher,
+        b"generated-edge-operation",
+        &snapshot.operation_id,
+    );
+    i3_probe_digest_text(
+        &mut hasher,
+        b"generated-source-locus",
+        &snapshot.source_locus,
+    );
+    i3_probe_digest_text(
+        &mut hasher,
+        b"generated-target-locus",
+        &snapshot.target_locus,
+    );
+    i3_probe_digest_text(
+        &mut hasher,
+        b"logical-source-path",
+        &snapshot.logical_source_path,
+    );
+    i3_probe_digest_text(&mut hasher, b"source-reference", &snapshot.source_ref);
+    i3_probe_digest_u64(
+        &mut hasher,
+        b"source-span-start",
+        snapshot.source_span.start,
+    );
+    i3_probe_digest_u64(&mut hasher, b"source-span-end", snapshot.source_span.end);
+    i3_probe_digest_u64(
+        &mut hasher,
+        b"source-span-start-line",
+        u64::from(snapshot.source_span.start_line),
+    );
+    i3_probe_digest_u64(
+        &mut hasher,
+        b"source-span-start-column",
+        u64::from(snapshot.source_span.start_column),
+    );
+    i3_probe_digest_u64(
+        &mut hasher,
+        b"source-span-end-line",
+        u64::from(snapshot.source_span.end_line),
+    );
+    i3_probe_digest_u64(
+        &mut hasher,
+        b"source-span-end-column",
+        u64::from(snapshot.source_span.end_column),
+    );
+    i3_probe_digest_text(&mut hasher, b"generated-core-reference", &snapshot.core_ref);
+    i3_probe_digest_text(
+        &mut hasher,
+        b"checked-program-reference",
+        &snapshot.checked_program_ref,
+    );
+    i3_probe_digest_text(
+        &mut hasher,
+        b"source-artifact-reference",
+        &snapshot.source_artifact_ref,
+    );
+    i3_probe_digest_text(
+        &mut hasher,
+        b"target-artifact-reference",
+        &snapshot.target_artifact_ref,
+    );
+    i3_probe_digest_text(&mut hasher, b"edge-reference", &snapshot.edge_ref);
+
+    format!(
+        "sys5-i3-probe-carrier-contract-sha256-v1:{:x}",
+        hasher.finalize()
+    )
+}
+
+fn i3_probe_digest_text(hasher: &mut Sha256, tag: &[u8], value: &str) {
+    i3_probe_digest_field(hasher, tag, value.as_bytes());
+}
+
+fn i3_probe_digest_u64(hasher: &mut Sha256, tag: &[u8], value: u64) {
+    i3_probe_digest_field(hasher, tag, &value.to_be_bytes());
+}
+
+fn i3_probe_digest_field(hasher: &mut Sha256, tag: &[u8], bytes: &[u8]) {
+    hasher.update(
+        u64::try_from(tag.len())
+            .expect("finite owner-request field tag length fits u64")
+            .to_be_bytes(),
+    );
+    hasher.update(tag);
+    hasher.update(
+        u64::try_from(bytes.len())
+            .expect("finite owner-request field length fits u64")
+            .to_be_bytes(),
+    );
+    hasher.update(bytes);
+}
+
+fn effect_kind_name(kind: EffectKind) -> &'static str {
+    match kind {
+        EffectKind::OwnerRequest => "OwnerRequest",
+        EffectKind::OwnerLocalRead => "OwnerLocalRead",
+        EffectKind::OwnerWrite => "OwnerWrite",
+        EffectKind::ActorReadReply => "ActorReadReply",
+        EffectKind::ObserverPublish => "ObserverPublish",
+        EffectKind::RelationPublish => "RelationPublish",
+        EffectKind::DesignatedRemoteRequest => "DesignatedRemoteRequest",
+        EffectKind::DesignatedReceiptUse => "DesignatedReceiptUse",
+        EffectKind::DesignatedValuePublish => "DesignatedValuePublish",
+        EffectKind::DesignatedResultDelivery => "DesignatedResultDelivery",
+        EffectKind::DesignatedResultConsume => "DesignatedResultConsume",
+    }
+}
+
+fn i3_probe_authority_requirements(carrier: &CarrierContract) -> Sys5I3ProbeAuthorityRequirements {
+    let mut category_names = Vec::new();
+    for category in carrier
+        .authority_requirements()
+        .runtime_seam_requirements()
+        .rows()
+        .iter()
+        .filter_map(|row| row.3)
+        .map(seam_authority_category_name)
+    {
+        if !category_names.iter().any(|existing| existing == category) {
+            category_names.push(category.to_string());
+        }
+    }
+    let requires_membership_epoch_and_incarnation = category_names.iter().any(|category| {
+        matches!(
+            category.as_str(),
+            "MembershipEpochIncarnation" | "DesignatedResultConsumerMembership"
+        )
+    });
+    let requires_capability_and_witness_refs = category_names.iter().any(|category| {
+        matches!(
+            category.as_str(),
+            "OwnerCapabilityRef"
+                | "ProducerReleaseCapability"
+                | "DesignatedResultConsumerCapability"
+        )
+    }) && category_names.iter().any(|category| {
+        matches!(
+            category.as_str(),
+            "OwnerWitnessRef" | "ProducerReleaseWitness" | "DesignatedResultConsumerWitness"
+        )
+    });
+    Sys5I3ProbeAuthorityRequirements {
+        category_names,
+        requires_membership_epoch_and_incarnation,
+        requires_capability_and_witness_refs,
+    }
+}
+
+fn seam_authority_category_name(kind: SeamAuthorityKind) -> &'static str {
+    match kind {
+        SeamAuthorityKind::MembershipEpochIncarnation => "MembershipEpochIncarnation",
+        SeamAuthorityKind::OwnerCapabilityRef => "OwnerCapabilityRef",
+        SeamAuthorityKind::OwnerWitnessRef => "OwnerWitnessRef",
+        SeamAuthorityKind::ProducerReleaseCapability => "ProducerReleaseCapability",
+        SeamAuthorityKind::ProducerReleaseWitness => "ProducerReleaseWitness",
+        SeamAuthorityKind::EvaluatorDecisionAuthority => "EvaluatorDecisionAuthority",
+        SeamAuthorityKind::DesignatedResultConsumerMembership => {
+            "DesignatedResultConsumerMembership"
+        }
+        SeamAuthorityKind::DesignatedResultConsumerCapability => {
+            "DesignatedResultConsumerCapability"
+        }
+        SeamAuthorityKind::DesignatedResultConsumerWitness => "DesignatedResultConsumerWitness",
     }
 }
 

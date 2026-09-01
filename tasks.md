@@ -1,6 +1,6 @@
 # Current Task Map (LAB)
 
-最終更新: 2026-09-01 23:03 JST
+最終更新: 2026-09-02 02:52 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -17,124 +17,136 @@ milestone or Canon L2 promotion.
 
 ## current promoted package
 
-**I3-0 (sole active goal).** PROPOSAL-037 / ADR-0034 authorize the bounded
-Mirrorea I3 Distributed Foundation program. ALIGN-0, ALIGN-1, and ALIGN-2 are completed; I3-0 is active;
-fixed sequence: ALIGN-0..2 → I3-0..6 → NEXT-0. Official I3 lifecycle entry is
-not claimed.
+**I3-1 (sole active goal).** PROPOSAL-037 / ADR-0034 authorize the bounded
+Mirrorea I3 Distributed Foundation program. ALIGN-0, ALIGN-1, ALIGN-2 and I3-0
+are completed. The fixed sequence remains ALIGN-0..2 → I3-0..6 → NEXT-0.
+Official I3 lifecycle entry is not claimed.
 
-Accepted SYS-6 implementation/evidence cut is `5429712d...`; Canon/status
-integration cut is `bcb0f767...`. ADR-0032 accepted official I2 entry then
-exit. Theory remains T1 and broad PHASE-I1 remains unaccepted.
+PROPOSAL-040 / ADR-0037 resolve OPEN-032 only for this bounded program and
+select QUIC reliable stream as the private adapter. Both TLS/TCP
+and QUIC reliable stream passed the same source/Core-bound nine-case actual-
+process canary and tied on criteria 1--7; criteria 8 and 9 had no auditable
+winner; criterion 10 future browser relevance
+was the first material difference. TLS-over-TCP is retained as a rejected/deferred
+comparison and replacement baseline. QUIC
+datagrams remain excluded.
 
-PROPOSAL-036 / ADR-0033 / Canon plan/05 close SYS-7 with an inactive I3 entry
-contract. Candidate A TLS-over-TCP framed reliable stream and Candidate B QUIC
-reliable stream are both **UNSELECTED**; QUIC datagrams are not admitted or
-evaluated. The bounded I3 program is active, while lifecycle entry and OPEN-032
-remain unresolved. Both candidates remain UNSELECTED; QUIC datagrams are
-excluded.
+I3-1 must implement a checked transport-neutral, private provisional
+encode/decode/admission boundary from the accepted internal carrier to the
+selected QUIC reliable stream. It must preserve source/Core/artifact provenance, effect/failure/
+visibility/redaction and request/serve/result/receipt separation, reject partial/
+malformed/oversized/version/tampered input before semantic admission, and never
+treat transport/session/certificate as authority.
 
-Direct consumer: active I3-0 transport comparison; accepted ALIGN-2 constrains it.
+Direct consumer: I3-2 actual locus-process runtime and generated communication.
 
-Primary falsifier: a change selects transport before equal I3-0 executable
-canaries and its ADR, treats transport metadata as authority, hides
-retry/exactly-once, freezes the internal carrier as public wire, or claims
-official I3 entry before I3-6 acceptance.
+Primary falsifier: an untrusted or incomplete byte sequence becomes a semantic
+carrier, a required field is lost/defaulted/invented, protected data is logged,
+or the private format is presented as public compatibility.
 
-Sources: `mirrorea_canon/adr/ADR-0034.md`,
+Sources: `mirrorea_canon/adr/ADR-0037.md`,
 `mirrorea_canon/plan/05-i3-entry-contract.md`, and
 `plan/250-mirrorea-i3-distributed-foundation-current-roadmap.md`.
 
 ## ordered self-driven packages
 
-Only I3-0 is active. Later packages become active one at a time after the
-preceding report, validation, review, commit/push, and remote parity close:
+Only I3-1 is active. Later packages become active one at a time after the
+preceding report, validation, review, commit/push and remote parity close:
 
 | Order | Package | Capability / evidence | Current state / rough estimate |
 |---|---|---|---|
-| 1 | ALIGN-0 | authority, sole roadmap, baseline, meta-drift control | completed; Macro 0 front, short |
-| 2 | ALIGN-1 | three-axis architecture and project/product responsibility map | completed; Macro 0 middle, medium |
-| 3 | ALIGN-2 | Browser/Host/package/View/provider responsibility contracts | completed; Macro 1 front, medium |
-| 4 | I3-0 | equal transport canaries and one selected adapter ADR | sole active goal; Macro 6 front, heavy |
-| 5 | I3-1 / I3-2 | checked private encoding, adapter, and real multi-process runtime | later; Macro 6 middle, heavy |
-| 6 | I3-3 / I3-4 | full finite fault/order matrix and C-distributed scenarios | later; Macro 5/6 middle, heavy |
-| 7 | I3-5 / I3-6 | joined network workflow and finite conformance/lifecycle close | later; Macro 6/7 close, heavy |
-| 8 | NEXT-0 | two separate inactive I4/I5 entry contracts only | reserve path, short |
+| 1 | ALIGN-0 | authority, sole roadmap, baseline, meta-drift control | completed; Macro 0 front |
+| 2 | ALIGN-1 | three-axis architecture and responsibility map | completed; Macro 0 middle |
+| 3 | ALIGN-2 | Browser/Host/package/View/provider contracts | completed; Macro 1 front |
+| 4 | I3-0 | equal transport canaries and selected private adapter | completed; Macro 6 front |
+| 5 | I3-1 | checked private encoding/adapter/admission | sole active goal; Macro 6 middle, heavy |
+| 6 | I3-2 | generated-artifact two-or-more-process owner runtime | next/inactive; Macro 6 middle, heavy |
+| 7 | I3-3 / I3-4 | full finite fault/order matrix and C-distributed scenarios | later; Macro 5/6 middle, heavy |
+| 8 | I3-5 / I3-6 | joined workflow and finite conformance/lifecycle close | later; Macro 6/7 close, heavy |
+| 9 | NEXT-0 | two separate inactive I4/I5 entry contracts only | reserve path, short |
 
-Plan 250 authorizes socket/process implementation and transport selection only
-at their fixed milestone gates. It does not authorize public wire freeze,
-production deployment, or official I3 entry before I3-6 acceptance.
+## I3-1 self-driven work packages
+
+These are dependency-ordered parts of one active milestone, not separate goals:
+
+| Order | Work package | Acceptance evidence | Ownership boundary |
+|---:|---|---|---|
+| 1 | exact carrier inventory and private mapping | exhaustive field table; request/serve/result/receipt remain distinct | production implementer; no process runtime |
+| 2 | limits/version/decoder hardening | partial, malformed, oversize, duplicate-key, marker and version negatives | test author separate from production writer |
+| 3 | selected QUIC adapter integration | lossless round trip and transport non-authority checks | selected adapter only; TLS/TCP remains baseline |
+| 4 | P2 security/lifecycle hardening | credential lifetime/zeroization, bounded reaper, no-mint-before-cache-reuse | security review; no production claim |
+| 5 | identity and observer-safety cleanup | request-hash label alignment, owner-request scope, secret/redaction scan | no relation/designated overclaim |
+| 6 | regression and independent close review | focused/property/fuzz, I2/M10 floor, P0/P1 zero | parent integrates Report 2604 and advances I3-2 |
 
 ## self-driven macro phase reading
 
 | Macro | Current state | Startability |
 |---|---|---|
-| 0 governance/repository memory | ALIGN-0 / ALIGN-1 / ALIGN-2 completed; I3-0 active | active; medium |
+| 0 governance/repository memory | ALIGN-0--2 and I3-0 completed; I3-1 active | maintenance |
 | 1 semantic kernel | finite kernel/backend/projection/runtime accepted | maintenance / ADR-0014 L3 |
 | 2 parser-free history | retained; not current architecture | maintenance |
-| 3 source/checker/runtime | source-first I2 boundary accepted; ALIGN-2 boundary contracts closed | I3-0 first; I3-1/2 later |
+| 3 source/checker/runtime | source-first I2 boundary accepted | I3-1 active; I3-2 later |
 | 4 executable samples | four-locus toy + conform reproducible | regression only |
 | 5 theorem/model bridge | OBL-058 bounded; 059--063 runtime | class maintenance |
-| 6 generated/distributed fabric | in-process accepted; network absent | fixed I3-0..6 sequence authorized |
+| 6 generated/distributed fabric | transport selected; checked mapping absent | I3-1 active |
 | 7 toolchain/backend | provisional commands | no public freeze |
 | 8 upper application | toy remains sample/library consumer | no Core promotion |
 
 ## user decision gates
 
-OPEN-032 is delegated to I3-0 comparative evidence and ADR; this is a research
-decision, not a user blocker. The remaining
-rows are owner-reserved stop boundaries rather than current blockers.
+OPEN-032 is no longer a user blocker for this program. The remaining rows are
+owner-reserved stop boundaries, not current missing specifications:
 
 | Overview | Impact | Major options | Current recommendation |
 |---|---|---|---|
-| OPEN-032 transport selection | adapter architecture | Candidate A / Candidate B | retain both UNSELECTED pending evidence |
-| public API/ABI/wire freeze | compatibility | provisional / freeze | keep provisional and separate |
+| public API/ABI/wire freeze | compatibility | provisional / freeze | keep private and provisional |
 | production/publication/resources | external risk | local evidence / deploy | remain local |
 | North Star or safety/privacy change | whole semantics | preserve / weaken | preserve; owner decision bundle |
 | domain vocabulary as Core | Core architecture | sample/library / promote | keep sample/library |
-| hidden multi-owner transaction | authority/atomicity | explicit / hidden | preserve explicit operations |
+| hidden multi-owner transaction/retry | authority/atomicity | explicit / hidden | preserve explicit operations |
 | irreversible semantic tie | migration | Constitution / owner | stop if non-migratable |
 
 Theory T1, broad-I1 residuals, missing public ABI, deferred general OBLs,
-unoptimized performance, and incomplete I3+ do not activate a task.
+unoptimized performance, untested production/browser platforms and incomplete
+I3+ are not by themselves stop conditions.
 
 ## research discovery items
 
-These are fixed milestones, not parallel queues while I3-0 is active:
+These are fixed direct consumers, not parallel queues:
 
 | Question | Direct consumer | Evidence required | Boundary |
 |---|---|---|---|
-| Candidate A vs B | I3-0 | equal two-process executable canaries | both UNSELECTED until ADR |
-| internal/private/public representation | I3-1 | checked carrier mapping/redaction | private provisional encoding; no public freeze |
+| internal/private/public representation | I3-1 | exhaustive checked carrier mapping/redaction | private provisional only; no public freeze |
+| decoder/limit policy | I3-1 | property/fuzz plus typed falsifiers | no partial request or pre-limit allocation |
+| actual process runtime | I3-2 | generated-plan-only owner dispatch | no source reparse/manual route/shared store |
 | network failure matrix | I3-3 | typed positive/falsifier executions | no hidden retry/exactly-once |
 | network ordering | I3-3 | request/serve, revoke/use, publish/observe, patch/cut mapping | stream order insufficient |
-| C-distributed gates | I3-4 / I3-6 | ordinary-source SCN-01/02/03/06, correspondence, review | I2 alone insufficient |
+| C-distributed gates | I3-4 / I3-6 | SCN-01/02/03/06 source-first correspondence | I2 and I3-0 canaries alone insufficient |
 
-Open a WRK only with a named direct consumer, current blocker reduction,
-alternative/falsifier, acceptance use, and adoption/discard rule. Historical
-WRKs do not become a queue automatically.
+Historical WRKs do not become a queue automatically. Open a WRK only with a
+named direct consumer, blocker reduction, alternative/falsifier, acceptance use
+and adoption/discard rule.
 
 ## maintenance tasks
 
-- Preserve Canon > LAB and both closed roadmap baselines.
-- Preserve M10 cut `23f5a813...`; never reuse it as I2/I3 identity.
-- Preserve accepted SYS-1--SYS-6 cuts and exact evidence classes.
-- Keep `conform-i2` downstream evidence, not lifecycle authority.
-- Keep Theory T1, broad PHASE-I1 residual, official I2 exit, active bounded I3
-  program, inactive official I3 lifecycle, and OPEN-032 unresolved as
-  independent axes.
-- Keep transport/session/certificate/route identity non-authoritative.
-- Keep internal carrier/public wire separate; no hidden retry/exactly-once.
-- Reopen SYS-6 only for a PROPOSAL-035/ADR-0032 falsifier or M10 regression.
-- Reopen SYS-7 wording only for authority collapse, a missing required network
-  failure/order case, premature selection/freeze, or unusable direct-consumer
-  contract.
-- Do not create another roadmap or activate I3-1 before I3-0 closes under the
-  fixed sequence and owner boundaries.
+- Preserve Canon > LAB and closed Plan 247/249 baselines.
+- Preserve M10 cut `23f5a813...` and accepted SYS-1--SYS-6 cuts/evidence classes.
+- Keep `conform-i2` downstream evidence, never lifecycle authority.
+- Keep Theory T1, broad PHASE-I1 unaccepted, official I2 exit, active bounded I3,
+  official I3 unentered and bounded OPEN-032 resolution as independent axes.
+- Keep transport/process/session/certificate/route identity non-authoritative.
+- Keep internal carrier, private provisional encoding and future public wire
+  distinct; no hidden retry/exactly-once.
+- Treat the I3-0 fixed-capacity in-memory cache as canary evidence only, not
+  actual owner runtime, durability or exactly-once.
+- Reopen I3-0 only for its equal-canary/selection/security falsifier.
+- Do not activate I3-2 or create another roadmap before I3-1 closes under the
+  fixed sequence.
 
 ## non-promoted references
 
 Historical plans, reports, WRKs, Product Alpha, Full System V1, Surface Mir,
-parser-free helpers, View/provider samples, and candidate transports are
-repository memory or future consumers, not parallel active queues. ALIGN-0
-ALIGN-1/ALIGN-2 closure does not itself select OPEN-032; both candidates
-remain UNSELECTED. I3-1 is next/not active until I3-0 closes.
+parser-free helpers, View/provider samples and the deferred TLS/TCP candidate are
+repository memory or future consumers, not parallel active queues. I3-0 probe
+execution is evidence-only and does not itself constitute I3-1 adapter
+acceptance, I3-2 owner runtime, workflow/product completion or official I3 entry.

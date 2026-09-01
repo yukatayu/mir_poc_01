@@ -49,3 +49,4 @@ open_items: []
 | ADR-0034 | project/product layer整合、Browser/Host境界、finite C-distributed I3を固定順で進めるowner-delegated bounded programを採用 | 運用 L0 |
 | ADR-0035 | semantic S0--S6、project/product PL-0--PL-6、lifecycle T/Iを独立したmany-to-many軸として採用しALIGN-1 close | L1 |
 | ADR-0036 | package admissionとsemantic grantを分離し、Browser/Host/View/provider/raw FFI/resourceの非凍結trust boundaryを採用しALIGN-2 close | L1 |
+| ADR-0037 | 同条件actual-process canaryと固定criteria後にprivate QUIC reliable streamを選択しI3-0 close、I3-1 active | L1 |
