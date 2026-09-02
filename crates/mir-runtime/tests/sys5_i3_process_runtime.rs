@@ -9,12 +9,15 @@ use mir_runtime::{
     sys5_i3_process_runtime::{
         Sys5I3Deployment, Sys5I3DeploymentSlot, Sys5I3PrivateProcessCodec,
         Sys5I3PrivateProcessCodecErrorKind, Sys5I3ProcessArtifact, Sys5I3ProcessCohort,
-        Sys5I3ProcessImage, Sys5I3ProcessImageTamper, Sys5I3ProcessRuntime,
-        Sys5I3ProcessRuntimeErrorKind, Sys5I3RetainedEdgeContract,
+        Sys5I3ProcessImage, Sys5I3ProcessRuntime, Sys5I3ProcessRuntimeErrorKind,
+        Sys5I3RetainedEdgeContract,
     },
     sys5_local_slice::{Sys5LocalProject, Sys5LocalSliceError, Sys5SourceInput, build_project},
 };
 use serde_json::Value;
+
+#[cfg(feature = "i3-process-test-seams")]
+use mir_runtime::sys5_i3_process_runtime::Sys5I3ProcessImageTamper;
 
 const CANONICAL_SOURCE_PATH: &str = "samples/clean-near-end/mirrorea-i2-local-toy/main.mir";
 const CANONICAL_SOURCE: &str =
@@ -30,25 +33,39 @@ const PRIVATE_PROCESS_IMAGE_ROOT: &str = "/image";
 const PRIVATE_PROCESS_MESSAGE_ROOT: &str = "/message";
 const PRIVATE_PROCESS_VERSION_PATH: &str = "/version";
 const PRIVATE_PROCESS_IMAGE_EDGE_OBJECT_PATH: &str = "/image/required_edge_contracts/0";
+#[cfg(feature = "i3-process-test-seams")]
 const PRIVATE_PROCESS_MESSAGE_COHORT_PATH: &str = "/message/cohort_provenance_ref";
+#[cfg(feature = "i3-process-test-seams")]
 const PRIVATE_PROCESS_MESSAGE_KIND_PATH: &str = "/message/kind";
+#[cfg(feature = "i3-process-test-seams")]
 const PRIVATE_PROCESS_MESSAGE_REQUEST_IDENTITY_PATH: &str =
     "/message/semantic_request_identity_ref";
+#[cfg(feature = "i3-process-test-seams")]
 const PRIVATE_PROCESS_MESSAGE_LINKED_REQUEST_IDENTITY_PATH: &str =
     "/message/linked_request_identity_ref";
+#[cfg(feature = "i3-process-test-seams")]
 const PRIVATE_PROCESS_MESSAGE_EDGE_PATH: &str = "/message/carrier/edge_ref";
+#[cfg(feature = "i3-process-test-seams")]
 const PRIVATE_PROCESS_MESSAGE_TARGET_PATH: &str = "/message/carrier/target_locus";
+#[cfg(feature = "i3-process-test-seams")]
 const PRIVATE_PROCESS_MESSAGE_SOURCE_PATH: &str = "/message/carrier/source_locus";
+#[cfg(feature = "i3-process-test-seams")]
 const PRIVATE_PROCESS_MESSAGE_OPERATION_PATH: &str = "/message/carrier/operation_id";
+#[cfg(feature = "i3-process-test-seams")]
 const PRIVATE_PROCESS_MESSAGE_CARRIER_PROVENANCE_PATH: &str = "/message/carrier/core_ref";
+#[cfg(feature = "i3-process-test-seams")]
 const PRIVATE_PROCESS_MESSAGE_REQUEST_CARRIER_ID_PATH: &str = "/message/carrier/request_carrier_id";
+#[cfg(feature = "i3-process-test-seams")]
 const PRIVATE_PROCESS_MESSAGE_M9_OWNER_LINEAGE_PATH: &str = "/message/carrier/m9_owner_lineage_ref";
+#[cfg(feature = "i3-process-test-seams")]
 const PRIVATE_PROCESS_MESSAGE_REPLY_RECEIPT_REQUEST_ID_PATH: &str =
     "/message/carrier/payload/fields/receipt/request_id";
 const PRIVATE_PROCESS_IMAGE_ASSIGNED_LOCI_PATH: &str = "/image/assigned_loci";
 const PRIVATE_PROCESS_IMAGE_SEMANTIC_ROWS_PATH: &str =
     "/image/child_seed/required_local_authority_closure/rows";
 const PRIVATE_PROCESS_MESSAGE_PAYLOAD_PATH: &str = "/message/carrier/payload";
+const PRIVATE_PROCESS_PROJECTION_VERSION_PATH: &str = "/projection/version";
+const PRIVATE_PROCESS_ADMISSION_VERSION_PATH: &str = "/admission/version";
 const CI_SAFE_UNIQUE_IMAGE_COLLECTION_ITEMS: usize = 128;
 const OWNER_ONLY_SOURCE: &str = r#"
 module Mirrorea.Sys5.I3OwnerOnly
@@ -176,6 +193,7 @@ fn canonical_image_for_slot(slot: &str) -> Sys5I3ProcessImage {
     take_process_image(&mut cohort, slot)
 }
 
+#[cfg(feature = "i3-process-test-seams")]
 fn image_for_source_and_slot(source_text: &str, slot: &str) -> Sys5I3ProcessImage {
     let project = build_once(source_text);
     let deployment = two_nonempty_slots(&project);
@@ -216,6 +234,7 @@ fn private_process_json_frame(value: &Value) -> Vec<u8> {
     frame
 }
 
+#[cfg(feature = "i3-process-test-seams")]
 fn mutate_private_process_string_field(
     frame: &[u8],
     expected_root: &str,
@@ -233,6 +252,7 @@ fn mutate_private_process_string_field(
     private_process_json_frame(&value)
 }
 
+#[cfg(feature = "i3-process-test-seams")]
 fn replace_private_process_string_field(
     frame: &[u8],
     expected_root: &str,
@@ -251,6 +271,7 @@ fn replace_private_process_string_field(
     private_process_json_frame(&value)
 }
 
+#[cfg(feature = "i3-process-test-seams")]
 fn replace_private_process_optional_string_field(
     frame: &[u8],
     expected_root: &str,
@@ -355,6 +376,28 @@ fn replace_private_process_version(frame: &[u8], expected_root: &str) -> Vec<u8>
     });
     *field = Value::from(u64::MAX);
     private_process_json_frame(&value)
+}
+
+fn replace_private_process_nested_version(
+    frame: &[u8],
+    expected_root: &str,
+    pointer: &str,
+) -> Vec<u8> {
+    let mut value = private_process_json(frame, expected_root);
+    let field = value.pointer_mut(pointer).unwrap_or_else(|| {
+        panic!("private process codec must expose required nested schema version {pointer}")
+    });
+    assert!(
+        field.is_number(),
+        "private process codec nested schema version {pointer} must be numeric"
+    );
+    *field = Value::from(u64::MAX);
+    private_process_json_frame(&value)
+}
+
+fn private_process_declared_over_bound_frame(limit: usize) -> Vec<u8> {
+    let declared = u32::try_from(limit).expect("finite private codec bounds fit its u32 framing");
+    declared.to_be_bytes().to_vec()
 }
 
 fn remove_private_process_object_member(
@@ -518,6 +561,122 @@ fn decode_and_start_private_image(
         .expect("matching coordinator-held binding starts the assigned child runtime")
 }
 
+/// Default-feature codec fixture. It exercises only source -> image ->
+/// binding -> runtime -> generated outbound request, not the raw decoded
+/// ingress regression seam.
+fn encoded_generated_owner_request() -> (Sys5I3PrivateProcessCodec, Vec<u8>) {
+    let project = build_once(CANONICAL_SOURCE);
+    let deployment = two_nonempty_slots(&project);
+    let codec = Sys5I3PrivateProcessCodec::private_provisional_v1();
+    let mut cohort = single_coordinator_cohort(&project, &deployment);
+    let mut requester = decode_and_start_private_image(&codec, &mut cohort, REQUESTER_SLOT);
+    let request = requester
+        .emit_generated_owner_request("init_avatar_hp")
+        .expect("the source-derived requester emits its generated owner request");
+    let bytes = codec
+        .encode_outbound_message(request)
+        .expect("the generated request encodes through the private codec");
+    (codec, bytes)
+}
+
+/// Restore two images strictly from their private bytes and coordinator-held
+/// bindings.  This helper deliberately accepts a prebuilt checked project:
+/// once image bytes exist, restore never receives source text or reparses it.
+fn restore_runtime_pair_from_private_images(
+    project: &Sys5LocalProject,
+    deployment: &Sys5I3Deployment,
+) -> (Sys5I3ProcessRuntime, Sys5I3ProcessRuntime) {
+    let codec = Sys5I3PrivateProcessCodec::private_provisional_v1();
+    let mut cohort = single_coordinator_cohort(project, deployment);
+    let requester_binding = cohort
+        .parent_held_expected_start_binding(REQUESTER_SLOT)
+        .expect("the coordinator retains requester start binding separately from the image");
+    let owner_binding = cohort
+        .parent_held_expected_start_binding(OWNER_SLOT)
+        .expect("the coordinator retains owner start binding separately from the image");
+    let requester_bytes = codec
+        .encode_image(take_process_image(&mut cohort, REQUESTER_SLOT))
+        .expect("the requester image encodes to private bounded bytes");
+    let owner_bytes = codec
+        .encode_image(take_process_image(&mut cohort, OWNER_SLOT))
+        .expect("the owner image encodes to private bounded bytes");
+    let requester = codec
+        .validate_and_start_image(
+            codec
+                .decode_untrusted_image(&requester_bytes)
+                .expect("private requester bytes decode only to an untrusted candidate"),
+            requester_binding,
+        )
+        .expect("only the separate requester binding restores its runtime");
+    let owner = codec
+        .validate_and_start_image(
+            codec
+                .decode_untrusted_image(&owner_bytes)
+                .expect("private owner bytes decode only to an untrusted candidate"),
+            owner_binding,
+        )
+        .expect("only the separate owner binding restores its runtime");
+    (requester, owner)
+}
+
+fn start_runtime_pair_directly(
+    project: &Sys5LocalProject,
+    deployment: &Sys5I3Deployment,
+) -> (Sys5I3ProcessRuntime, Sys5I3ProcessRuntime) {
+    let mut cohort = single_coordinator_cohort(project, deployment);
+    let requester = Sys5I3ProcessRuntime::start(take_process_image(&mut cohort, REQUESTER_SLOT))
+        .expect("the source-derived requester image starts directly in the baseline path");
+    let owner = Sys5I3ProcessRuntime::start(take_process_image(&mut cohort, OWNER_SLOT))
+        .expect("the source-derived owner image starts directly in the baseline path");
+    (requester, owner)
+}
+
+#[derive(Debug, PartialEq, Eq)]
+struct OwnerRequestBehavior {
+    owner_hp: i64,
+    owner_served_count: usize,
+    owner_write_count: usize,
+    requester_receipt_count: usize,
+    requester_write_count: usize,
+    receipt_is_local_only: bool,
+}
+
+fn execute_init_avatar_hp(
+    requester: &mut Sys5I3ProcessRuntime,
+    owner: &mut Sys5I3ProcessRuntime,
+) -> OwnerRequestBehavior {
+    let request = requester
+        .emit_generated_owner_request("init_avatar_hp")
+        .expect("the checked source image derives its owner request");
+    let reply = owner
+        .accept_inbound(request)
+        .expect("the owner admits the source-derived request")
+        .expect("owner execution yields exactly one typed reply");
+    let receipt = requester
+        .accept_inbound(reply)
+        .expect("the requester admits the owner reply")
+        .expect("reply admission creates the requester-local receipt");
+    OwnerRequestBehavior {
+        owner_hp: owner
+            .authoritative_i64_state("avatar", "self", "hp")
+            .expect("the source-derived owner action writes avatar hp"),
+        owner_served_count: owner
+            .observer_safe_runtime_summary()
+            .served_owner_request_count(),
+        owner_write_count: owner
+            .observer_safe_runtime_summary()
+            .actual_owner_write_count(),
+        requester_receipt_count: requester
+            .observer_safe_runtime_summary()
+            .accepted_inbound_receipt_count(),
+        requester_write_count: requester
+            .observer_safe_runtime_summary()
+            .actual_owner_write_count(),
+        receipt_is_local_only: receipt.has_no_transportable_carrier(),
+    }
+}
+
+#[cfg(feature = "i3-process-test-seams")]
 struct PendingPrivateReplyFixture {
     codec: Sys5I3PrivateProcessCodec,
     requester: Sys5I3ProcessRuntime,
@@ -529,6 +688,7 @@ struct PendingPrivateReplyFixture {
 /// source-derived request is still locally pending.  Each reply falsifier
 /// receives a fresh fixture so no rejected candidate can be hidden by a
 /// previous receipt transition.
+#[cfg(feature = "i3-process-test-seams")]
 fn pending_private_reply_fixture() -> PendingPrivateReplyFixture {
     let project = build_once(CANONICAL_SOURCE);
     let deployment = two_nonempty_slots(&project);
@@ -562,6 +722,7 @@ fn pending_private_reply_fixture() -> PendingPrivateReplyFixture {
     }
 }
 
+#[cfg(feature = "i3-process-test-seams")]
 fn assert_rejected_private_reply_preserves_requester_pending_state(
     fixture: &mut PendingPrivateReplyFixture,
     candidate_bytes: &[u8],
@@ -623,6 +784,7 @@ fn assert_rejected_private_reply_preserves_requester_pending_state(
     );
 }
 
+#[cfg(feature = "i3-process-test-seams")]
 fn admit_exact_private_reply(fixture: &mut PendingPrivateReplyFixture) -> String {
     let receipt = fixture
         .requester
@@ -646,6 +808,7 @@ fn admit_exact_private_reply(fixture: &mut PendingPrivateReplyFixture) -> String
         .to_string()
 }
 
+#[cfg(feature = "i3-process-test-seams")]
 struct PendingPrivateRequestFixture {
     codec: Sys5I3PrivateProcessCodec,
     owner: Sys5I3ProcessRuntime,
@@ -653,6 +816,7 @@ struct PendingPrivateRequestFixture {
     request_bytes: Vec<u8>,
 }
 
+#[cfg(feature = "i3-process-test-seams")]
 fn pending_private_request_fixture() -> PendingPrivateRequestFixture {
     let project = build_once(CANONICAL_SOURCE);
     let deployment = two_nonempty_slots(&project);
@@ -675,6 +839,7 @@ fn pending_private_request_fixture() -> PendingPrivateRequestFixture {
     }
 }
 
+#[cfg(feature = "i3-process-test-seams")]
 fn assert_rejected_private_request_preserves_owner_state_and_occurrences(
     fixture: &mut PendingPrivateRequestFixture,
     candidate_bytes: &[u8],
@@ -1079,6 +1244,7 @@ fn g0_deployment_rejects_missing_extra_and_duplicate_locus_assignments_before_im
 }
 
 #[test]
+#[cfg(feature = "i3-process-test-seams")]
 fn g0_process_image_tamper_consumes_the_only_image_and_rejects_before_start() {
     let project = build_once(CANONICAL_SOURCE);
     let deployment = two_nonempty_slots(&project);
@@ -1210,6 +1376,7 @@ fn g0_process_image_tamper_consumes_the_only_image_and_rejects_before_start() {
 }
 
 #[test]
+#[cfg(feature = "i3-process-test-seams")]
 fn g0_process_image_rejects_changed_cohort_substitution_and_duplicate_rows_even_after_local_integrity_recompute()
  {
     let changed_source =
@@ -1370,6 +1537,67 @@ fn g0_owner_only_designated_free_source_has_a_symmetric_empty_closure_and_runs_b
             .authoritative_i64_state("avatar", "self", "hp")
             .expect("owner-only source preserves its source-derived owner state"),
         21
+    );
+}
+
+#[test]
+fn g2_private_image_restore_preserves_owner_only_designated_free_profile_behavior() {
+    let direct_project = build_once(OWNER_ONLY_SOURCE);
+    let direct_deployment = owner_only_two_slot_deployment(&direct_project);
+    let (mut direct_requester, mut direct_owner) =
+        start_runtime_pair_directly(&direct_project, &direct_deployment);
+    let direct_behavior = execute_init_avatar_hp(&mut direct_requester, &mut direct_owner);
+
+    let restored_project = build_once(OWNER_ONLY_SOURCE);
+    let restored_deployment = owner_only_two_slot_deployment(&restored_project);
+    let (mut restored_requester, mut restored_owner) =
+        restore_runtime_pair_from_private_images(&restored_project, &restored_deployment);
+    let restored_behavior = execute_init_avatar_hp(&mut restored_requester, &mut restored_owner);
+
+    assert_eq!(
+        restored_behavior, direct_behavior,
+        "private image encode/decode plus separate binding must preserve the designated-free owner profile without source reparse during restore"
+    );
+    assert_eq!(
+        restored_behavior,
+        OwnerRequestBehavior {
+            owner_hp: 21,
+            owner_served_count: 1,
+            owner_write_count: 1,
+            requester_receipt_count: 1,
+            requester_write_count: 0,
+            receipt_is_local_only: true,
+        },
+        "the restored designated-free profile remains one remote owner transition and one requester-local receipt"
+    );
+}
+
+#[test]
+fn g2_private_image_restore_preserves_two_distinct_designated_dependency_profile_behavior() {
+    let source = two_dependency_same_operation_source();
+    let direct_project = build_once(&source);
+    let direct_deployment = evaluator_isolated_two_slot_deployment(&direct_project);
+    let (mut direct_requester, mut direct_owner) =
+        start_runtime_pair_directly(&direct_project, &direct_deployment);
+    let direct_behavior = execute_init_avatar_hp(&mut direct_requester, &mut direct_owner);
+
+    let restored_project = build_once(&source);
+    let restored_deployment = evaluator_isolated_two_slot_deployment(&restored_project);
+    let (mut restored_requester, mut restored_owner) =
+        restore_runtime_pair_from_private_images(&restored_project, &restored_deployment);
+    let restored_behavior = execute_init_avatar_hp(&mut restored_requester, &mut restored_owner);
+
+    assert_eq!(
+        restored_behavior, direct_behavior,
+        "private restore must preserve the profile whose one designated operation retains two distinct request/receipt dependencies"
+    );
+    assert_eq!(
+        restored_behavior.owner_hp, 21,
+        "the restored image executes the same source-derived remote owner action without conflating designated dependency pairs"
+    );
+    assert_eq!(
+        restored_behavior.requester_receipt_count, 1,
+        "the restored profile still completes the owner reply at the requester rather than generating a third carrier"
     );
 }
 
@@ -1585,8 +1813,14 @@ fn semantic_request_and_store_identity_for_source(source_text: &str) -> (String,
     assert!(request_basis.includes_checked_program_ref());
     assert!(request_basis.includes_projection_ref());
     assert!(request_basis.includes_cohort_ref());
-    assert!(request_basis.includes_logical_origin_ref());
-    assert!(request_basis.includes_ordinal());
+    assert!(
+        !request_basis.includes_logical_origin_ref(),
+        "semantic-request v3 binds kernel-generated request/carrier occurrence facts, not the process-local logical-origin ref"
+    );
+    assert!(
+        !request_basis.includes_ordinal(),
+        "semantic-request v3 binds its request/carrier occurrence pair, not the process-local store ordinal"
+    );
     assert!(!request_basis.includes_process_id());
     assert!(!request_basis.includes_network_identity());
 
@@ -1684,8 +1918,14 @@ fn g1_same_source_cohorts_have_distinct_activation_and_logical_occurrences_witho
         assert!(basis.includes_checked_program_ref());
         assert!(basis.includes_projection_ref());
         assert!(basis.includes_cohort_ref());
-        assert!(basis.includes_logical_origin_ref());
-        assert!(basis.includes_ordinal());
+        assert!(
+            !basis.includes_logical_origin_ref(),
+            "v3 request identity must not be described as process-local logical-origin based"
+        );
+        assert!(
+            !basis.includes_ordinal(),
+            "v3 request identity must not be described as process-local store ordinal based"
+        );
         assert!(!basis.includes_process_id());
         assert!(!basis.includes_network_identity());
     }
@@ -1771,7 +2011,10 @@ fn g2_private_image_codec_bounds_untrusted_decode_and_requires_parent_held_start
     assert_candidate_a_child_runtime(&runtime);
 
     let malformed = codec
-        .decode_untrusted_image(b"not a private process image")
+        // A bounded, complete frame whose one-byte body is invalid JSON.
+        // Do not use arbitrary ASCII here: its first four bytes are a length
+        // prefix and may correctly classify as declared Oversized.
+        .decode_untrusted_image(b"\0\0\0\x01{")
         .expect_err("malformed image bytes must fail closed before admission");
     assert_eq!(
         malformed.kind(),
@@ -1816,6 +2059,107 @@ fn g2_private_image_codec_bounds_untrusted_decode_and_requires_parent_held_start
 }
 
 #[test]
+fn g2_private_codec_classifies_declared_image_body_over_finite_bound_as_oversized() {
+    let codec = Sys5I3PrivateProcessCodec::private_provisional_v1();
+
+    // A declared body length beyond the finite private bound is capacity
+    // failure, not a syntactic error or an incomplete semantic candidate.
+    // The bytes carry no body: this specifically exercises the declared-size
+    // branch before allocation or JSON parsing.
+    assert_eq!(
+        codec
+            .decode_untrusted_image(&private_process_declared_over_bound_frame(
+                codec.limits().max_image_bytes(),
+            ))
+            .expect_err("declared image body beyond the finite bound must fail closed")
+            .kind(),
+        Sys5I3PrivateProcessCodecErrorKind::Oversized
+    );
+}
+
+#[test]
+fn g2_private_codec_classifies_declared_message_body_over_finite_bound_as_oversized() {
+    let codec = Sys5I3PrivateProcessCodec::private_provisional_v1();
+    assert_eq!(
+        codec
+            .decode_untrusted_message(&private_process_declared_over_bound_frame(
+                codec.limits().max_message_bytes(),
+            ))
+            .expect_err("declared message body beyond the finite bound must fail closed")
+            .kind(),
+        Sys5I3PrivateProcessCodecErrorKind::Oversized
+    );
+}
+
+#[test]
+fn g2_private_codec_classifies_versions_and_message_framing_before_candidate_admission() {
+    let codec = Sys5I3PrivateProcessCodec::private_provisional_v1();
+
+    let image_bytes = codec
+        .encode_image(canonical_image_for_slot(REQUESTER_SLOT))
+        .expect("one source-derived image encodes for private codec classification");
+    for nested_version_path in [
+        PRIVATE_PROCESS_PROJECTION_VERSION_PATH,
+        PRIVATE_PROCESS_ADMISSION_VERSION_PATH,
+    ] {
+        let nested_unknown = replace_private_process_nested_version(
+            &image_bytes,
+            PRIVATE_PROCESS_IMAGE_ROOT,
+            nested_version_path,
+        );
+        assert_eq!(
+            codec
+                .decode_untrusted_image(&nested_unknown)
+                .expect_err(
+                    "a nested projection/admission schema mismatch must reject before image candidate release",
+                )
+                .kind(),
+            // The outer private codec exposes one opaque malformed-candidate
+            // class for nested schema failures.  This is deliberately not a
+            // public compatibility claim; only the outer version gets the
+            // explicit UnknownVersion class.
+            Sys5I3PrivateProcessCodecErrorKind::Malformed,
+            "nested version path {nested_version_path} follows the private nested-schema policy"
+        );
+    }
+
+    let (request_codec, request_bytes) = encoded_generated_owner_request();
+    let unknown_message_version =
+        replace_private_process_version(&request_bytes, PRIVATE_PROCESS_MESSAGE_ROOT);
+    assert_eq!(
+        request_codec
+            .decode_untrusted_message(&unknown_message_version)
+            .expect_err("unknown outer message version must remain explicit")
+            .kind(),
+        Sys5I3PrivateProcessCodecErrorKind::UnknownVersion
+    );
+    assert_eq!(
+        request_codec
+            .decode_untrusted_message(&request_bytes[..request_bytes.len() - 1])
+            .expect_err("truncated message frames remain distinct from malformed frames")
+            .kind(),
+        Sys5I3PrivateProcessCodecErrorKind::Incomplete
+    );
+    let mut extra_byte_message = request_bytes.clone();
+    extra_byte_message.push(0);
+    assert_eq!(
+        request_codec
+            .decode_untrusted_message(&extra_byte_message)
+            .expect_err("a complete frame with trailing byte remains malformed, not incomplete")
+            .kind(),
+        Sys5I3PrivateProcessCodecErrorKind::Malformed
+    );
+    assert_eq!(
+        request_codec
+            .decode_untrusted_message(&vec![0_u8; codec.limits().max_message_bytes() + 1])
+            .expect_err("actual oversized message bytes remain capacity failures")
+            .kind(),
+        Sys5I3PrivateProcessCodecErrorKind::Oversized
+    );
+}
+
+#[test]
+#[cfg(feature = "i3-process-test-seams")]
 fn g2_private_message_codec_keeps_request_reply_receipt_distinct_and_revalidates_at_receiver() {
     let project = build_once(CANONICAL_SOURCE);
     let deployment = two_nonempty_slots(&project);
@@ -1942,6 +2286,7 @@ fn g2_private_message_codec_keeps_request_reply_receipt_distinct_and_revalidates
 }
 
 #[test]
+#[cfg(feature = "i3-process-test-seams")]
 fn g2_private_request_outer_semantic_identity_must_match_the_exact_source_carrier_before_owner_mutation()
  {
     let mut fixture = pending_private_request_fixture();
@@ -1969,6 +2314,7 @@ fn g2_private_request_outer_semantic_identity_must_match_the_exact_source_carrie
 }
 
 #[test]
+#[cfg(feature = "i3-process-test-seams")]
 fn g2_private_request_linked_identity_must_match_the_exact_source_carrier_contract() {
     let mut fixture = pending_private_request_fixture();
     let forged = replace_private_process_optional_string_field(
@@ -1995,6 +2341,7 @@ fn g2_private_request_linked_identity_must_match_the_exact_source_carrier_contra
 }
 
 #[test]
+#[cfg(feature = "i3-process-test-seams")]
 fn g2_private_message_outer_kind_must_match_the_exact_carrier_before_owner_or_requester_mutation() {
     let project = build_once(CANONICAL_SOURCE);
     let deployment = two_nonempty_slots(&project);
@@ -2153,6 +2500,7 @@ fn g2_private_message_outer_kind_must_match_the_exact_carrier_before_owner_or_re
 }
 
 #[test]
+#[cfg(feature = "i3-process-test-seams")]
 fn g2_private_reply_outer_kind_must_match_the_exact_reply_carrier_before_receipt_mutation() {
     let mut fixture = pending_private_reply_fixture();
     let request_identity = fixture.request_identity.clone();
@@ -2171,6 +2519,7 @@ fn g2_private_reply_outer_kind_must_match_the_exact_reply_carrier_before_receipt
 }
 
 #[test]
+#[cfg(feature = "i3-process-test-seams")]
 fn g2_private_reply_requires_exact_locally_pending_request_linkage_and_rejects_replay() {
     let project = build_once(CANONICAL_SOURCE);
     let deployment = two_nonempty_slots(&project);
@@ -2323,6 +2672,7 @@ fn g2_private_reply_requires_exact_locally_pending_request_linkage_and_rejects_r
 }
 
 #[test]
+#[cfg(feature = "i3-process-test-seams")]
 fn g2_private_reply_with_unknown_semantic_request_identity_rejects_without_consuming_pending() {
     let mut fixture = pending_private_reply_fixture();
     let request_identity = fixture.request_identity.clone();
@@ -2341,6 +2691,7 @@ fn g2_private_reply_with_unknown_semantic_request_identity_rejects_without_consu
 }
 
 #[test]
+#[cfg(feature = "i3-process-test-seams")]
 fn g2_private_reply_outer_semantic_identity_must_not_bind_a_different_pending_request() {
     let mut fixture = pending_private_reply_fixture();
     let first_identity = fixture.request_identity.clone();
@@ -2377,6 +2728,7 @@ fn g2_private_reply_outer_semantic_identity_must_not_bind_a_different_pending_re
 }
 
 #[test]
+#[cfg(feature = "i3-process-test-seams")]
 fn g2_private_reply_linked_request_identity_must_match_the_pending_request() {
     let mut fixture = pending_private_reply_fixture();
     let request_identity = fixture.request_identity.clone();
@@ -2395,6 +2747,7 @@ fn g2_private_reply_linked_request_identity_must_match_the_pending_request() {
 }
 
 #[test]
+#[cfg(feature = "i3-process-test-seams")]
 fn g2_private_reply_original_request_carrier_must_match_the_pending_request() {
     let mut fixture = pending_private_reply_fixture();
     let request_identity = fixture.request_identity.clone();
@@ -2413,6 +2766,7 @@ fn g2_private_reply_original_request_carrier_must_match_the_pending_request() {
 }
 
 #[test]
+#[cfg(feature = "i3-process-test-seams")]
 fn g2_private_reply_owner_lineage_must_not_be_forged_at_the_requester_boundary() {
     let mut fixture = pending_private_reply_fixture();
     let request_identity = fixture.request_identity.clone();
@@ -2431,6 +2785,7 @@ fn g2_private_reply_owner_lineage_must_not_be_forged_at_the_requester_boundary()
 }
 
 #[test]
+#[cfg(feature = "i3-process-test-seams")]
 fn g2_private_reply_source_derived_core_provenance_must_match_the_receiver_image() {
     let mut fixture = pending_private_reply_fixture();
     let request_identity = fixture.request_identity.clone();
@@ -2449,6 +2804,7 @@ fn g2_private_reply_source_derived_core_provenance_must_match_the_receiver_image
 }
 
 #[test]
+#[cfg(feature = "i3-process-test-seams")]
 fn g2_private_reply_edge_loci_and_operation_must_match_the_receiver_image_before_receipt() {
     for (pointer, label) in [
         (PRIVATE_PROCESS_MESSAGE_EDGE_PATH, "edge"),
@@ -2474,6 +2830,7 @@ fn g2_private_reply_edge_loci_and_operation_must_match_the_receiver_image_before
 }
 
 #[test]
+#[cfg(feature = "i3-process-test-seams")]
 fn g2_private_reply_receipt_request_identity_must_match_the_pending_request() {
     let mut fixture = pending_private_reply_fixture();
     let request_identity = fixture.request_identity.clone();
@@ -2492,6 +2849,7 @@ fn g2_private_reply_receipt_request_identity_must_match_the_pending_request() {
 }
 
 #[test]
+#[cfg(feature = "i3-process-test-seams")]
 fn g2_private_reply_replay_after_exact_local_receipt_rejects_without_replacing_occurrence() {
     let mut fixture = pending_private_reply_fixture();
     let request_identity = fixture.request_identity.clone();
@@ -2648,16 +3006,15 @@ fn assert_private_image_duplicate_collection_rejected(pointer: &str, label: &str
 
 #[test]
 fn g2_private_message_decoder_rejects_unknown_nested_tagged_payload_field_before_admission() {
-    let fixture = pending_private_reply_fixture();
+    let (codec, request_bytes) = encoded_generated_owner_request();
     let tagged_unknown_field = append_private_process_unknown_object_member(
-        &fixture.reply_bytes,
+        &request_bytes,
         PRIVATE_PROCESS_MESSAGE_ROOT,
         PRIVATE_PROCESS_MESSAGE_PAYLOAD_PATH,
         "untrusted_tagged_payload_field",
     );
     assert_eq!(
-        fixture
-            .codec
+        codec
             .decode_untrusted_message(&tagged_unknown_field)
             .expect_err(
                 "unknown nested tagged-payload fields must reject before receiver admission",
@@ -2800,6 +3157,7 @@ fn g1_cross_cohort_request_and_reply_are_rejected_without_state_or_receipt_minti
 }
 
 #[test]
+#[cfg(feature = "i3-process-test-seams")]
 fn g1_rejected_outbound_extraction_preserves_the_pending_generated_carrier_without_mutation() {
     let project = build_once(CANONICAL_SOURCE);
     let deployment = two_nonempty_slots(&project);

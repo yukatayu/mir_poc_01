@@ -12,7 +12,8 @@ name = "mirrorea-i3-probe"
 path = "src/bin/mirrorea-i3-probe.rs"
 
 [dependencies]
-mir-runtime = { path = "../mir-runtime" }
+libc = "0.2"
+mir-runtime = { path = "../mir-runtime", features = ["i3-private-quic"] }
 quinn = { version = "=0.11.11", default-features = false, features = ["runtime-tokio", "rustls-ring"] }
 rcgen = { version = "=0.14.10", default-features = false, features = ["crypto", "ring"] }
 rustls = { version = "=0.23.43", default-features = false, features = ["std", "ring"] }

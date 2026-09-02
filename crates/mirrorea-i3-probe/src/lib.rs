@@ -12,6 +12,7 @@ promise.
 
 mod candidates;
 mod framing;
+mod i3_process_localnet;
 mod model;
 mod observer;
 mod process_harness;
@@ -23,6 +24,14 @@ mod static_adapter_framing;
 pub use framing::{
     FrameDecodeErrorKind, FrameDecodeEvent, FrameDecoder, FrameDecoderStateError, FrameEncodeError,
     MAX_PRIVATE_FRAME_BYTES, WireCompatibility, encode_frame, private_wire_contract,
+};
+pub use i3_process_localnet::{
+    I3LocalnetAdapterRejectionKind, I3LocalnetChildSlot, I3LocalnetChildTerminalEvent,
+    I3LocalnetChildTerminalOutcome, I3LocalnetControlDelivery, I3LocalnetDeliveryPhase,
+    I3LocalnetFailureStage, I3LocalnetFalsifier, I3LocalnetImageDelivery,
+    I3LocalnetLifecycleRejectionCause, I3LocalnetObserverSafeDeliveryRecord,
+    I3LocalnetRejectionAudit, I3LocalnetRunError, I3LocalnetRunErrorKind, I3ProcessLocalnetRequest,
+    I3ProcessLocalnetRun, run_i3_process_localnet,
 };
 pub use model::{
     RequestIdentity, SemanticAdmissionError, SemanticAdmissionErrorKind, SemanticCarrier,
@@ -71,6 +80,9 @@ pub use static_adapter_framing::{
 #[doc(hidden)]
 pub fn run_private_child_process(args: impl IntoIterator<Item = String>) -> bool {
     let args = args.into_iter().collect::<Vec<_>>();
+    if let Some(result) = i3_process_localnet::run_private_localnet_child_from_args(args.clone()) {
+        return result;
+    }
     if let Some(result) = process_harness::run_private_supervisor_fault_from_args(args.clone()) {
         return result;
     }

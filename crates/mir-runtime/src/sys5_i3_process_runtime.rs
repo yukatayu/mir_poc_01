@@ -250,6 +250,33 @@ impl Sys5I3RetainedEdgeContract {
         &self.edge_ref
     }
 
+    /// Observer-safe generated-contract lineage retained in the sealed image.
+    /// These references are not a route, payload, authority, or public wire
+    /// schema.
+    pub fn operation_id(&self) -> &str {
+        &self.operation_id
+    }
+
+    pub fn kind(&self) -> &str {
+        &self.kind
+    }
+
+    pub fn core_ref(&self) -> &str {
+        &self.core_ref
+    }
+
+    pub fn source_artifact_ref(&self) -> &str {
+        &self.source_artifact_ref
+    }
+
+    pub fn target_artifact_ref(&self) -> &str {
+        &self.target_artifact_ref
+    }
+
+    pub fn parent_checked_program_ref(&self) -> &str {
+        &self.parent_checked_program_ref
+    }
+
     pub const fn is_reference_only(&self) -> bool {
         true
     }
@@ -591,6 +618,162 @@ pub struct Sys5I3ExpectedStartBinding {
     cohort_provenance_ref: String,
     image_integrity_ref: String,
     private_snapshot_binding_ref: String,
+}
+
+/// One supervisor-issued control record for the finite two-child localnet
+/// profile.  It deliberately travels on a distinct trusted control channel:
+/// an image byte stream is never sufficient to start a process or to bind a
+/// transport peer.  This is private/provisional evidence, not a package,
+/// process, wire, or certificate ABI.
+#[doc(hidden)]
+pub struct Sys5I3TrustedLocalnetControl {
+    expected_start_binding: Sys5I3ExpectedStartBinding,
+    run_ref: String,
+    local_slot_name: String,
+    peer_slot_name: String,
+    local_spki_ref: String,
+    peer_spki_ref: String,
+    peer_image_integrity_ref: String,
+    peer_checked_program_ref: String,
+    peer_projection_ref: String,
+    peer_cohort_provenance_ref: String,
+}
+
+impl std::fmt::Debug for Sys5I3TrustedLocalnetControl {
+    fn fmt(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        formatter
+            .debug_struct("Sys5I3TrustedLocalnetControl")
+            .field("local_slot_name", &self.local_slot_name)
+            .field("peer_slot_name", &self.peer_slot_name)
+            .finish_non_exhaustive()
+    }
+}
+
+/// The non-semantic, mutually-authenticated transport preface.  It binds a
+/// QUIC peer to the exact finite run/image cohort before any decoded carrier
+/// is allowed to reach a semantic admission boundary.  Transport identity is
+/// delivery evidence only; it never grants M8/M9 authority.
+#[doc(hidden)]
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[serde(deny_unknown_fields)]
+pub struct Sys5I3LocalnetPeerPreface {
+    run_ref: String,
+    local_slot_name: String,
+    peer_slot_name: String,
+    local_spki_ref: String,
+    image_integrity_ref: String,
+    checked_program_ref: String,
+    projection_ref: String,
+    cohort_provenance_ref: String,
+}
+
+impl Sys5I3LocalnetPeerPreface {
+    pub fn run_ref(&self) -> &str {
+        &self.run_ref
+    }
+
+    pub fn local_slot_name(&self) -> &str {
+        &self.local_slot_name
+    }
+
+    pub fn peer_slot_name(&self) -> &str {
+        &self.peer_slot_name
+    }
+
+    pub fn local_spki_ref(&self) -> &str {
+        &self.local_spki_ref
+    }
+}
+
+/// Typed, observer-safe failure for a trusted localnet control or peer
+/// binding.  No raw image, certificate, key, capability, witness, or source
+/// text is rendered from this boundary.
+#[doc(hidden)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+pub enum Sys5I3LocalnetControlErrorKind {
+    MalformedControl,
+    StartBindingRejected,
+    PeerBindingRejected,
+}
+
+#[doc(hidden)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+pub struct Sys5I3LocalnetControlError {
+    kind: Sys5I3LocalnetControlErrorKind,
+}
+
+impl Sys5I3LocalnetControlError {
+    fn new(kind: Sys5I3LocalnetControlErrorKind) -> Self {
+        Self { kind }
+    }
+
+    pub const fn kind(&self) -> Sys5I3LocalnetControlErrorKind {
+        self.kind
+    }
+}
+
+impl Sys5I3TrustedLocalnetControl {
+    pub fn local_slot_name(&self) -> &str {
+        &self.local_slot_name
+    }
+
+    pub fn peer_slot_name(&self) -> &str {
+        &self.peer_slot_name
+    }
+
+    /// Exact delivery pin for the mutually authenticated peer.  This is
+    /// evidence-only transport configuration; it neither is nor derives a
+    /// semantic authority, membership, capability, or witness.
+    pub fn expected_peer_spki_ref(&self) -> &str {
+        &self.peer_spki_ref
+    }
+
+    #[cfg_attr(not(feature = "i3-private-quic"), allow(dead_code))]
+    pub(crate) fn run_ref(&self) -> &str {
+        &self.run_ref
+    }
+
+    pub fn localnet_preface(&self) -> Sys5I3LocalnetPeerPreface {
+        Sys5I3LocalnetPeerPreface {
+            run_ref: self.run_ref.clone(),
+            local_slot_name: self.local_slot_name.clone(),
+            peer_slot_name: self.peer_slot_name.clone(),
+            local_spki_ref: self.local_spki_ref.clone(),
+            image_integrity_ref: self.expected_start_binding.image_integrity_ref.clone(),
+            checked_program_ref: self
+                .expected_start_binding
+                .parent_checked_program_ref
+                .clone(),
+            projection_ref: self.expected_start_binding.projection_ref.clone(),
+            cohort_provenance_ref: self.expected_start_binding.cohort_provenance_ref.clone(),
+        }
+    }
+
+    /// Checks the preface component of the delivery-origin binding.  This is
+    /// intentionally crate-private: a claimed preface alone is forgeable and
+    /// cannot mint an ingress capability.  The private QUIC adapter combines
+    /// this check with an inspected live mTLS connection and its owned bidi
+    /// stream before it invokes decoded semantic admission.
+    #[cfg_attr(not(feature = "i3-private-quic"), allow(dead_code))]
+    pub(crate) fn validate_peer_preface(
+        &self,
+        received: &Sys5I3LocalnetPeerPreface,
+    ) -> Result<(), Sys5I3LocalnetControlError> {
+        if received.run_ref != self.run_ref
+            || received.local_slot_name != self.peer_slot_name
+            || received.peer_slot_name != self.local_slot_name
+            || received.local_spki_ref != self.peer_spki_ref
+            || received.image_integrity_ref != self.peer_image_integrity_ref
+            || received.checked_program_ref != self.peer_checked_program_ref
+            || received.projection_ref != self.peer_projection_ref
+            || received.cohort_provenance_ref != self.peer_cohort_provenance_ref
+        {
+            return Err(Sys5I3LocalnetControlError::new(
+                Sys5I3LocalnetControlErrorKind::PeerBindingRejected,
+            ));
+        }
+        Ok(())
+    }
 }
 
 impl Sys5I3ExpectedStartBinding {
@@ -1423,7 +1606,7 @@ pub struct Sys5I3ProcessMessage {
     // cohort occurrence which sealed its process images; it is neither an
     // authority fact nor a substitute for M9 validation.
     cohort_provenance_ref: String,
-    identity_basis: Sys5I3ObserverSafeIdentityBasis,
+    identity_basis: Sys5I3ObserverSafeSemanticRequestIdentityBasis,
 }
 
 impl Sys5I3ProcessMessage {
@@ -1447,7 +1630,9 @@ impl Sys5I3ProcessMessage {
         matches!(self.kind, Sys5I3ProcessMessageKind::Receipt) && self.carrier.is_none()
     }
 
-    pub const fn observer_safe_identity_basis(&self) -> Sys5I3ObserverSafeIdentityBasis {
+    pub const fn observer_safe_identity_basis(
+        &self,
+    ) -> Sys5I3ObserverSafeSemanticRequestIdentityBasis {
         self.identity_basis
     }
 }
@@ -1524,6 +1709,87 @@ struct PrivateProcessMessageSnapshot {
     linked_request_identity_ref: Option<String>,
     cohort_provenance_ref: String,
 }
+
+/// JSON DTO for a coordinator-retained start binding.  This remains inside
+/// the private trusted-control codec; it is intentionally separate from the
+/// tainted image DTO and cannot be recovered by image decoding alone.
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[serde(deny_unknown_fields)]
+struct PrivateExpectedStartBindingSnapshot {
+    slot_name: String,
+    assigned_loci: Vec<String>,
+    parent_checked_program_ref: String,
+    projection_ref: String,
+    m9_generation_ref: String,
+    cohort_provenance_ref: String,
+    image_integrity_ref: String,
+    private_snapshot_binding_ref: String,
+}
+
+impl From<&Sys5I3ExpectedStartBinding> for PrivateExpectedStartBindingSnapshot {
+    fn from(binding: &Sys5I3ExpectedStartBinding) -> Self {
+        Self {
+            slot_name: binding.slot_name.clone(),
+            assigned_loci: binding.assigned_loci.iter().cloned().collect(),
+            parent_checked_program_ref: binding.parent_checked_program_ref.clone(),
+            projection_ref: binding.projection_ref.clone(),
+            m9_generation_ref: binding.m9_generation_ref.clone(),
+            cohort_provenance_ref: binding.cohort_provenance_ref.clone(),
+            image_integrity_ref: binding.image_integrity_ref.clone(),
+            private_snapshot_binding_ref: binding.private_snapshot_binding_ref.clone(),
+        }
+    }
+}
+
+impl TryFrom<PrivateExpectedStartBindingSnapshot> for Sys5I3ExpectedStartBinding {
+    type Error = ();
+
+    fn try_from(snapshot: PrivateExpectedStartBindingSnapshot) -> Result<Self, Self::Error> {
+        if snapshot.slot_name.is_empty()
+            || snapshot.assigned_loci.is_empty()
+            || snapshot.parent_checked_program_ref.is_empty()
+            || snapshot.projection_ref.is_empty()
+            || snapshot.m9_generation_ref.is_empty()
+            || snapshot.cohort_provenance_ref.is_empty()
+            || snapshot.image_integrity_ref.is_empty()
+            || snapshot.private_snapshot_binding_ref.is_empty()
+        {
+            return Err(());
+        }
+        let assigned_loci = snapshot.assigned_loci.into_iter().collect::<BTreeSet<_>>();
+        if assigned_loci.is_empty() {
+            return Err(());
+        }
+        Ok(Self {
+            slot_name: snapshot.slot_name,
+            assigned_loci,
+            parent_checked_program_ref: snapshot.parent_checked_program_ref,
+            projection_ref: snapshot.projection_ref,
+            m9_generation_ref: snapshot.m9_generation_ref,
+            cohort_provenance_ref: snapshot.cohort_provenance_ref,
+            image_integrity_ref: snapshot.image_integrity_ref,
+            private_snapshot_binding_ref: snapshot.private_snapshot_binding_ref,
+        })
+    }
+}
+
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[serde(deny_unknown_fields)]
+struct PrivateTrustedLocalnetControlSnapshot {
+    version: u64,
+    expected_start_binding: PrivateExpectedStartBindingSnapshot,
+    run_ref: String,
+    local_slot_name: String,
+    peer_slot_name: String,
+    local_spki_ref: String,
+    peer_spki_ref: String,
+    peer_image_integrity_ref: String,
+    peer_checked_program_ref: String,
+    peer_projection_ref: String,
+    peer_cohort_provenance_ref: String,
+}
+
+const PRIVATE_TRUSTED_LOCALNET_CONTROL_VERSION: u64 = 1;
 
 /// Parse one untrusted JSON value without normalizing duplicate object keys.
 /// `serde_json::Value` otherwise accepts duplicate members with last-write
@@ -1644,7 +1910,7 @@ impl<'de> Visitor<'de> for StrictJsonValueVisitor {
     }
 }
 
-fn strict_json_value(bytes: &[u8]) -> Result<serde_json::Value, ()> {
+pub(crate) fn strict_json_value(bytes: &[u8]) -> Result<serde_json::Value, ()> {
     let mut deserializer = serde_json::Deserializer::from_slice(bytes);
     let value = StrictJsonValue::deserialize(&mut deserializer).map_err(|_| ())?;
     deserializer.end().map_err(|_| ())?;
@@ -1774,17 +2040,21 @@ impl std::fmt::Debug for Sys5I3UntrustedProcessMessage {
 }
 
 #[doc(hidden)]
-#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+#[derive(Debug, Clone, PartialEq, Eq)]
 pub struct Sys5I3UntrustedProcessMessageManifest {
     is_request: bool,
     is_reply: bool,
+    semantic_request_identity_ref: String,
+    linked_request_identity_ref: Option<String>,
 }
 
 impl Sys5I3UntrustedProcessMessage {
-    pub const fn observer_safe_manifest(&self) -> Sys5I3UntrustedProcessMessageManifest {
+    pub fn observer_safe_manifest(&self) -> Sys5I3UntrustedProcessMessageManifest {
         Sys5I3UntrustedProcessMessageManifest {
             is_request: matches!(self.message.kind, PrivateProcessMessageKind::Request),
             is_reply: matches!(self.message.kind, PrivateProcessMessageKind::Reply),
+            semantic_request_identity_ref: self.message.semantic_request_identity_ref.clone(),
+            linked_request_identity_ref: self.message.linked_request_identity_ref.clone(),
         }
     }
 }
@@ -1796,6 +2066,14 @@ impl Sys5I3UntrustedProcessMessageManifest {
 
     pub const fn is_reply(&self) -> bool {
         self.is_reply
+    }
+
+    pub fn semantic_request_identity_ref(&self) -> &str {
+        &self.semantic_request_identity_ref
+    }
+
+    pub fn linked_request_identity_ref(&self) -> Option<&str> {
+        self.linked_request_identity_ref.as_deref()
     }
 }
 
@@ -1809,6 +2087,177 @@ impl Sys5I3PrivateProcessCodec {
 
     pub const fn private_provisional_v1() -> Self {
         Self
+    }
+
+    /// Turns two coordinator-held bindings into exactly two dedicated trusted
+    /// controls.  The pair consumes both bindings, so the caller cannot reuse
+    /// an image bootstrap after handing it to a child.  `run_ref` and SPKI
+    /// references are delivery commitments only; M9 remains inside the sealed
+    /// restricted admission restored from the checked image.
+    pub fn split_trusted_localnet_controls(
+        &self,
+        run_ref: impl Into<String>,
+        first: Sys5I3ExpectedStartBinding,
+        first_spki_ref: impl Into<String>,
+        second: Sys5I3ExpectedStartBinding,
+        second_spki_ref: impl Into<String>,
+    ) -> Result<
+        (Sys5I3TrustedLocalnetControl, Sys5I3TrustedLocalnetControl),
+        Sys5I3LocalnetControlError,
+    > {
+        let run_ref = run_ref.into();
+        let first_spki_ref = first_spki_ref.into();
+        let second_spki_ref = second_spki_ref.into();
+        if run_ref.is_empty()
+            || first_spki_ref.is_empty()
+            || second_spki_ref.is_empty()
+            || first.slot_name.is_empty()
+            || second.slot_name.is_empty()
+            || first.slot_name == second.slot_name
+        {
+            return Err(Sys5I3LocalnetControlError::new(
+                Sys5I3LocalnetControlErrorKind::MalformedControl,
+            ));
+        }
+        let first_control = Sys5I3TrustedLocalnetControl {
+            run_ref: run_ref.clone(),
+            local_slot_name: first.slot_name.clone(),
+            peer_slot_name: second.slot_name.clone(),
+            local_spki_ref: first_spki_ref.clone(),
+            peer_spki_ref: second_spki_ref.clone(),
+            peer_image_integrity_ref: second.image_integrity_ref.clone(),
+            peer_checked_program_ref: second.parent_checked_program_ref.clone(),
+            peer_projection_ref: second.projection_ref.clone(),
+            peer_cohort_provenance_ref: second.cohort_provenance_ref.clone(),
+            expected_start_binding: first,
+        };
+        let second_control = Sys5I3TrustedLocalnetControl {
+            run_ref,
+            local_slot_name: second.slot_name.clone(),
+            peer_slot_name: first_control.local_slot_name.clone(),
+            local_spki_ref: second_spki_ref,
+            peer_spki_ref: first_spki_ref,
+            peer_image_integrity_ref: first_control
+                .expected_start_binding
+                .image_integrity_ref
+                .clone(),
+            peer_checked_program_ref: first_control
+                .expected_start_binding
+                .parent_checked_program_ref
+                .clone(),
+            peer_projection_ref: first_control.expected_start_binding.projection_ref.clone(),
+            peer_cohort_provenance_ref: first_control
+                .expected_start_binding
+                .cohort_provenance_ref
+                .clone(),
+            expected_start_binding: second,
+        };
+        Ok((first_control, second_control))
+    }
+
+    /// Serializes a coordinator-issued trusted control for its dedicated
+    /// inherited control descriptor.  This private frame must never be
+    /// multiplexed with, substituted for, or accepted from the tainted image
+    /// byte descriptor.
+    pub fn encode_trusted_localnet_control(
+        &self,
+        control: Sys5I3TrustedLocalnetControl,
+    ) -> Result<Vec<u8>, Sys5I3PrivateProcessCodecError> {
+        let snapshot = PrivateTrustedLocalnetControlSnapshot {
+            version: PRIVATE_TRUSTED_LOCALNET_CONTROL_VERSION,
+            expected_start_binding: (&control.expected_start_binding).into(),
+            run_ref: control.run_ref,
+            local_slot_name: control.local_slot_name,
+            peer_slot_name: control.peer_slot_name,
+            local_spki_ref: control.local_spki_ref,
+            peer_spki_ref: control.peer_spki_ref,
+            peer_image_integrity_ref: control.peer_image_integrity_ref,
+            peer_checked_program_ref: control.peer_checked_program_ref,
+            peer_projection_ref: control.peer_projection_ref,
+            peer_cohort_provenance_ref: control.peer_cohort_provenance_ref,
+        };
+        let body = serde_json::to_vec(&snapshot).map_err(|_| {
+            Sys5I3PrivateProcessCodecError::new(Sys5I3PrivateProcessCodecErrorKind::Malformed)
+        })?;
+        self.frame_body(body, Self::MAX_MESSAGE_BYTES)
+    }
+
+    /// Decodes only the private trusted-control record.  Successful decode is
+    /// not process start: `validate_and_start_image_with_localnet_control`
+    /// must still compare the separately received tainted image.
+    pub fn decode_trusted_localnet_control(
+        &self,
+        bytes: &[u8],
+    ) -> Result<Sys5I3TrustedLocalnetControl, Sys5I3PrivateProcessCodecError> {
+        let body = self.unframe_body(bytes, Self::MAX_MESSAGE_BYTES)?;
+        let value = strict_json_value(body).map_err(|_| {
+            Sys5I3PrivateProcessCodecError::new(Sys5I3PrivateProcessCodecErrorKind::Malformed)
+        })?;
+        let snapshot: PrivateTrustedLocalnetControlSnapshot = serde_json::from_value(value)
+            .map_err(|_| {
+                Sys5I3PrivateProcessCodecError::new(Sys5I3PrivateProcessCodecErrorKind::Malformed)
+            })?;
+        if snapshot.version != PRIVATE_TRUSTED_LOCALNET_CONTROL_VERSION
+            || snapshot.run_ref.is_empty()
+            || snapshot.local_slot_name.is_empty()
+            || snapshot.peer_slot_name.is_empty()
+            || snapshot.local_slot_name == snapshot.peer_slot_name
+            || snapshot.local_spki_ref.is_empty()
+            || snapshot.peer_spki_ref.is_empty()
+            || snapshot.peer_image_integrity_ref.is_empty()
+            || snapshot.peer_checked_program_ref.is_empty()
+            || snapshot.peer_projection_ref.is_empty()
+            || snapshot.peer_cohort_provenance_ref.is_empty()
+        {
+            return Err(Sys5I3PrivateProcessCodecError::new(
+                Sys5I3PrivateProcessCodecErrorKind::Malformed,
+            ));
+        }
+        let expected_start_binding: Sys5I3ExpectedStartBinding =
+            snapshot.expected_start_binding.try_into().map_err(|_| {
+                Sys5I3PrivateProcessCodecError::new(Sys5I3PrivateProcessCodecErrorKind::Malformed)
+            })?;
+        if expected_start_binding.slot_name != snapshot.local_slot_name {
+            return Err(Sys5I3PrivateProcessCodecError::new(
+                Sys5I3PrivateProcessCodecErrorKind::Malformed,
+            ));
+        }
+        Ok(Sys5I3TrustedLocalnetControl {
+            expected_start_binding,
+            run_ref: snapshot.run_ref,
+            local_slot_name: snapshot.local_slot_name,
+            peer_slot_name: snapshot.peer_slot_name,
+            local_spki_ref: snapshot.local_spki_ref,
+            peer_spki_ref: snapshot.peer_spki_ref,
+            peer_image_integrity_ref: snapshot.peer_image_integrity_ref,
+            peer_checked_program_ref: snapshot.peer_checked_program_ref,
+            peer_projection_ref: snapshot.peer_projection_ref,
+            peer_cohort_provenance_ref: snapshot.peer_cohort_provenance_ref,
+        })
+    }
+
+    /// The child-only promotion path: decoded image bytes and a separately
+    /// delivered control must agree before a local fabric can start.  It also
+    /// returns the sole gate able to turn a completed, peer-bound delivery
+    /// into semantic carrier admission.
+    pub fn validate_and_start_image_with_localnet_control(
+        &self,
+        image: Sys5I3UntrustedProcessImage,
+        control: Sys5I3TrustedLocalnetControl,
+    ) -> Result<(Sys5I3ProcessRuntime, Sys5I3TrustedLocalnetControl), Sys5I3LocalnetControlError>
+    {
+        control
+            .expected_start_binding
+            .validate_image(&image.image)
+            .map_err(|_| {
+                Sys5I3LocalnetControlError::new(
+                    Sys5I3LocalnetControlErrorKind::StartBindingRejected,
+                )
+            })?;
+        let runtime = Sys5I3ProcessRuntime::start(image.image).map_err(|_| {
+            Sys5I3LocalnetControlError::new(Sys5I3LocalnetControlErrorKind::StartBindingRejected)
+        })?;
+        Ok((runtime, control))
     }
 
     pub const fn limits(&self) -> Sys5I3PrivateProcessCodecLimits {
@@ -1959,7 +2408,7 @@ impl Sys5I3PrivateProcessCodec {
         let available = bytes.len() - 4;
         if declared > limit.saturating_sub(4) {
             return Err(Sys5I3PrivateProcessCodecError::new(
-                Sys5I3PrivateProcessCodecErrorKind::Malformed,
+                Sys5I3PrivateProcessCodecErrorKind::Oversized,
             ));
         }
         if available < declared {
@@ -2050,6 +2499,45 @@ impl Sys5I3ObserverSafeIdentityBasis {
     }
 }
 
+/// Semantic request identity has a narrower basis than the process-local
+/// store identity.  In particular, a v3 request is derived from the checked
+/// carrier/request occurrence, not from the local store's logical origin or
+/// ordinal.  Keeping the two observer claims separate prevents a runtime
+/// bookkeeping reference from being reported as semantic provenance.
+#[doc(hidden)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+pub struct Sys5I3ObserverSafeSemanticRequestIdentityBasis;
+
+impl Sys5I3ObserverSafeSemanticRequestIdentityBasis {
+    pub const fn includes_checked_program_ref(&self) -> bool {
+        true
+    }
+
+    pub const fn includes_projection_ref(&self) -> bool {
+        true
+    }
+
+    pub const fn includes_cohort_ref(&self) -> bool {
+        true
+    }
+
+    pub const fn includes_logical_origin_ref(&self) -> bool {
+        false
+    }
+
+    pub const fn includes_ordinal(&self) -> bool {
+        false
+    }
+
+    pub const fn includes_process_id(&self) -> bool {
+        false
+    }
+
+    pub const fn includes_network_identity(&self) -> bool {
+        false
+    }
+}
+
 /// Observer-safe pending-carrier facts for the pre-transport runtime.
 #[doc(hidden)]
 #[derive(Debug, Clone, PartialEq, Eq)]
@@ -2090,6 +2578,18 @@ pub struct Sys5I3ObserverSafeSemanticOccurrences {
 }
 
 impl Sys5I3ObserverSafeSemanticOccurrences {
+    pub fn owner_serve_linearization_count(&self) -> usize {
+        self.owner_serve_linearizations.len()
+    }
+
+    pub fn actual_owner_write_count(&self) -> usize {
+        self.actual_owner_writes.len()
+    }
+
+    pub fn requester_local_receipt_count(&self) -> usize {
+        self.requester_local_receipts.len()
+    }
+
     pub fn owner_serve_linearization_occurrence_ref(
         &self,
         request_identity_ref: &str,
@@ -2140,6 +2640,18 @@ impl Sys5I3ObserverSafeRuntimeSummary {
 /// Started process-local runtime.  It owns only selected loci and an
 /// independent local fabric/store; it has no access to another image's
 /// stores, artifacts, publisher, or full projection.
+#[cfg_attr(
+    not(feature = "i3-process-test-seams"),
+    doc = r#"
+```compile_fail
+use mir_runtime::sys5_i3_process_runtime::Sys5I3ProcessRuntime;
+
+// Normal safe Rust cannot invoke decoded semantic admission without the
+// adapter-owned live QUIC connection and bidi stream.
+let _ = Sys5I3ProcessRuntime::admit_decoded_process_message;
+```
+"#
+)]
 #[doc(hidden)]
 pub struct Sys5I3ProcessRuntime {
     assigned_loci: BTreeSet<String>,
@@ -2157,6 +2669,7 @@ pub struct Sys5I3ProcessRuntime {
     // only receiver-owned, source-derived route/provenance facts; it is not
     // a transport session, credential, or mutable remote-store handle.
     pending_outbound_owner_requests: BTreeMap<String, Sys4I3PendingOwnerRequestBinding>,
+    #[cfg(feature = "i3-process-test-seams")]
     reject_next_outbound_extraction: bool,
 }
 
@@ -2179,6 +2692,10 @@ impl std::fmt::Debug for Sys5I3ProcessRuntime {
 }
 
 impl Sys5I3ProcessRuntime {
+    /// Starts a trusted, already-typed G1 process image held by the local
+    /// coordinator.  This is not a decoded-child bootstrap path: delivered
+    /// image bytes must use `validate_and_start_image_with_localnet_control`,
+    /// which binds the untrusted image to its separately retained control.
     pub fn start(image: Sys5I3ProcessImage) -> Result<Self, Sys5I3ProcessRuntimeError> {
         image.validate_before_start()?;
         let parent_checked_program_ref = image.child_seed.parent_checked_program_ref.clone();
@@ -2223,6 +2740,7 @@ impl Sys5I3ProcessRuntime {
             accepted_inbound_receipt_count: 0,
             semantic_occurrences: Sys5I3ObserverSafeSemanticOccurrences::default(),
             pending_outbound_owner_requests: BTreeMap::new(),
+            #[cfg(feature = "i3-process-test-seams")]
             reject_next_outbound_extraction: false,
         })
     }
@@ -2259,6 +2777,15 @@ impl Sys5I3ProcessRuntime {
         }
     }
 
+    /// Count only requester-local pending owner requests.  This is an
+    /// observer-safe state summary for finite delivery-failure diagnostics;
+    /// it exposes neither a remote store nor request payload/binding.
+    pub fn observer_safe_pending_owner_request_count(&self) -> usize {
+        self.pending_outbound_owner_requests.len()
+    }
+
+    #[cfg(feature = "i3-process-test-seams")]
+    #[doc(hidden)]
     pub fn test_only_reject_next_outbound_extraction(&mut self) {
         self.reject_next_outbound_extraction = true;
     }
@@ -2282,6 +2809,7 @@ impl Sys5I3ProcessRuntime {
                     Sys5I3ProcessRuntimeErrorKind::NoGeneratedOwnerRequest,
                 )
             })?;
+        #[cfg(feature = "i3-process-test-seams")]
         if self.reject_next_outbound_extraction {
             self.reject_next_outbound_extraction = false;
             return Err(Sys5I3ProcessRuntimeError::new(
@@ -2329,7 +2857,7 @@ impl Sys5I3ProcessRuntime {
             semantic_request_identity_ref: request_identity_ref,
             linked_request_identity_ref: None,
             cohort_provenance_ref: self.cohort_ref.clone(),
-            identity_basis: self.identity_basis,
+            identity_basis: Sys5I3ObserverSafeSemanticRequestIdentityBasis,
         })
     }
 
@@ -2455,7 +2983,7 @@ impl Sys5I3ProcessRuntime {
                     semantic_request_identity_ref: message.semantic_request_identity_ref.clone(),
                     linked_request_identity_ref: Some(message.semantic_request_identity_ref),
                     cohort_provenance_ref: self.cohort_ref.clone(),
-                    identity_basis: self.identity_basis,
+                    identity_basis: Sys5I3ObserverSafeSemanticRequestIdentityBasis,
                 }))
             }
             Sys5I3ProcessMessageKind::Reply => {
@@ -2538,7 +3066,7 @@ impl Sys5I3ProcessRuntime {
                     semantic_request_identity_ref: message.semantic_request_identity_ref.clone(),
                     linked_request_identity_ref: Some(message.semantic_request_identity_ref),
                     cohort_provenance_ref: self.cohort_ref.clone(),
-                    identity_basis: self.identity_basis,
+                    identity_basis: Sys5I3ObserverSafeSemanticRequestIdentityBasis,
                 }))
             }
             Sys5I3ProcessMessageKind::Receipt => {
@@ -2553,11 +3081,15 @@ impl Sys5I3ProcessRuntime {
         }
     }
 
-    /// Receiver-owned admission for a private decoded request/reply.  It
-    /// validates cohort provenance before touching SYS-4, then binds every
-    /// static carrier field and the owner-request M9 lineage to this local
-    /// sealed image before any mailbox/store mutation can occur.
-    pub fn admit_untrusted_message(
+    /// Receiver-owned admission core.  It is crate-private so only the
+    /// feature-gated private QUIC adapter, after owning and inspecting a live
+    /// connection and its bidi stream, can use it in a normal build.  The
+    /// explicitly enabled codec regression seam below is the sole exception.
+    /// It validates cohort provenance before touching SYS-4, then binds every
+    /// static carrier field and owner-request M9 lineage to this local sealed
+    /// image before mailbox/store mutation.
+    #[cfg_attr(not(feature = "i3-private-quic"), allow(dead_code))]
+    pub(crate) fn admit_decoded_process_message(
         &mut self,
         candidate: Sys5I3UntrustedProcessMessage,
     ) -> Result<Option<Sys5I3ProcessMessage>, Sys5I3ProcessRuntimeError> {
@@ -2591,8 +3123,21 @@ impl Sys5I3ProcessRuntime {
             semantic_request_identity_ref: message.semantic_request_identity_ref,
             linked_request_identity_ref: message.linked_request_identity_ref,
             cohort_provenance_ref: message.cohort_provenance_ref,
-            identity_basis: self.identity_basis,
+            identity_basis: Sys5I3ObserverSafeSemanticRequestIdentityBasis,
         })
+    }
+
+    /// Test-only direct decoded ingress retained for the G2a/G2b codec
+    /// falsifiers.  It is absent from the normal production build and cannot
+    /// be linked by the child executable.  Localnet child code must use
+    /// the private QUIC adapter instead.
+    #[cfg(feature = "i3-process-test-seams")]
+    #[doc(hidden)]
+    pub fn admit_untrusted_message(
+        &mut self,
+        candidate: Sys5I3UntrustedProcessMessage,
+    ) -> Result<Option<Sys5I3ProcessMessage>, Sys5I3ProcessRuntimeError> {
+        self.admit_decoded_process_message(candidate)
     }
 
     pub fn attempt_owner_serve(

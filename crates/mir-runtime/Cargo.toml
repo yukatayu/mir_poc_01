@@ -7,6 +7,15 @@ publish = false
 [lib]
 path = "src/lib.rs"
 
+[features]
+# Enables only the legacy G2a/G2b integration-test decoded-ingress seam.
+# Normal builds, including the I3 child executable, deliberately omit it.
+i3-process-test-seams = []
+# Private, finite I3-2 QUIC delivery adapter.  This is deliberately separate
+# from the transport-neutral process carrier/runtime and is not a public wire
+# or browser transport commitment.
+i3-private-quic = ["dep:quinn", "dep:rustls", "dep:tokio", "dep:x509-parser"]
+
 [dependencies]
 mir-ast = { path = "../mir-ast" }
 mir-semantics = { path = "../mir-semantics" }
@@ -14,3 +23,7 @@ mirrorea-core = { path = "../mirrorea-core" }
 serde = { version = "1", features = ["derive"] }
 serde_json = "1"
 sha2 = "0.10"
+quinn = { version = "=0.11.11", default-features = false, features = ["runtime-tokio", "rustls-ring"], optional = true }
+rustls = { version = "=0.23.43", default-features = false, features = ["std", "ring"], optional = true }
+tokio = { version = "=1.53.1", default-features = false, features = ["io-util"], optional = true }
+x509-parser = { version = "=0.18.1", default-features = false, optional = true }

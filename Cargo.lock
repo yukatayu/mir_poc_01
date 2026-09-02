@@ -333,9 +333,13 @@ dependencies = [
  "mir-ast",
  "mir-semantics",
  "mirrorea-core",
+ "quinn",
+ "rustls",
  "serde",
  "serde_json",
  "sha2",
+ "tokio",
+ "x509-parser",
 ]
 
 [[package]]
@@ -372,6 +376,7 @@ dependencies = [
 name = "mirrorea-i3-probe"
 version = "0.1.0"
 dependencies = [
+ "libc",
  "mir-runtime",
  "quinn",
  "rcgen",

@@ -60,6 +60,11 @@ pub(crate) mod sys3_i3_private_snapshot;
 pub(crate) mod sys3_projection;
 #[cfg_attr(not(test), allow(dead_code))]
 pub(crate) mod sys4_dispatch;
+/// Private I3-2 QUIC ingress.  It owns an inspected mTLS connection and its
+/// one bidi stream before a decoded carrier can reach the local runtime.
+#[cfg(feature = "i3-private-quic")]
+#[doc(hidden)]
+pub mod sys5_i3_private_quic;
 #[doc(hidden)]
 pub mod sys5_i3_process_runtime;
 /// Provisional, non-executing SYS-5 build/project facade.
