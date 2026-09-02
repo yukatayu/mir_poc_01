@@ -18,8 +18,9 @@
 ADR-0015 の Mir Theory v0 / I1+ M0--M10 execution とPlan 247はclosed LAB
 record / regression baselineである。2026-08-26のowner directionを記録したADR-0026
 のSYS-0--SYS-7 programとPlan 249もclosed LAB recordである。PROPOSAL-037 /
-ADR-0034により bounded I3 programがactive、Plan 250がsole current roadmap、
-ALIGN-0--2とI3-0/I3-1がcompleted、I3-2がsole active goalである。SYS-0はclosed、
+ADR-0034により bounded I3 programが継続中、Plan 250がsole current roadmap、
+ALIGN-0--2とI3-0/I3-1/I3-2がcompletedである。I3-2 close後はowner pause中で
+semantic milestoneはなく、I3-3は明示的resumeまでinactiveである。SYS-0はclosed、
 SYS-1もsource cut `94e3707c...`でclosed、SYS-2もsource cut `920d3fe0...`で
 closed。SYS-3は初回candidate cut `ded622fe...`をE-CONSUME consumer path欠落により
 partial regression evidenceへ戻して一度reopenし、corrected source/evidence cut
@@ -37,7 +38,7 @@ transport-neutralなinactive I3 entry contractだけを記録してclosedした�
 inactive entry contractから bounded I3 programへ移行した。PROPOSAL-040 / ADR-0037は
 同条件actual-process canary後、private QUIC reliable streamを選択し、
 TLS-over-TCP framed reliable streamをdeferred replacement baselineとした。OPEN-032はこのprogramだけ
-resolved、ALIGN-0--2とI3-0/I3-1 completed、I3-2 activeである。固定順序は
+resolved、ALIGN-0--2とI3-0/I3-1/I3-2 completed。I3-2 close後はowner pause中でsemantic milestoneはなく、I3-3はexplicit resumeまでinactiveである。固定順序は
 ALIGN-0..2 → I3-0..6 → NEXT-0である。
 legacy M8 `AlreadyConsumed`又はaccepted M10
 duplicate-delivery behaviorは変更せず、SYS-4 wrapperのexact semantic-consumption
@@ -977,9 +978,11 @@ semantic strata S0--S6、project/product PL-0--PL-6、lifecycle T0--T2 / I1--I6�
 - Mirrorea I3 Distributed Foundation current roadmap:
   `plan/250-mirrorea-i3-distributed-foundation-current-roadmap.md`
   (PROPOSAL-037 / ADR-0034のactive bounded program。ALIGN-0 / ALIGN-1 /
-  ALIGN-2 / I3-0 / I3-1 completed、I3-2 sole active goal。
+  ALIGN-2 / I3-0 / I3-1 / I3-2 completed。I3-2 close後はowner pause中でsemantic
+  milestoneなし、I3-3は明示的resumeまでinactive。
   PROPOSAL-040 / ADR-0037がprivate QUIC selection、PROPOSAL-041 / ADR-0038が
-  private adapter/encoding acceptanceとI3-2 activationを記録する。official I3 lifecycle
+  private adapter/encoding acceptanceとI3-2 activationを記録する。I3-2 closeはPROPOSAL-042 /
+  ADR-0039とReport 2605に記録する。official I3 lifecycle
   entry、public wire/API/platform freeze、productionは主張しない。)
 
 ## maintenance rule

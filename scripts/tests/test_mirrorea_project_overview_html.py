@@ -80,15 +80,15 @@ class MirroreaProjectOverviewHtmlTests(unittest.TestCase):
             "SYS-0 completed",
             "ADR-0027 / SYS-1 runtime kernel / internal carrier",
             "ADR-0028 / SYS-2 ST/OW1 refinement",
-            "SYS-0--SYS-7 programを閉じました",
+            "SYS-0--SYS-7までclosedです",
             "official I2 entry→exit は受理済み",
             "official I2 entry後exitを受理",
             "ADR-0033 / SYS-7 I3 entry contract only",
             "PROPOSAL-037 / ADR-0034",
             "Mirrorea I3 Distributed Foundation bounded program",
             "Plan 250がsole current roadmap",
-            "Mirrorea I3 Distributed Foundation / I3-2 sole active goal",
-            "ALIGN-0 / ALIGN-1 / ALIGN-2 / I3-0 / I3-1 completed、I3-2 active",
+            "Mirrorea I3 Distributed Foundation / I3-2 accepted, owner-paused",
+            "ALIGN-0 / ALIGN-1 / ALIGN-2 / I3-0 / I3-1 / I3-2 completed、no active semantic milestone",
             "official I3 lifecycle entryは未受理",
             "official I3 lifecycle entryとproductionは主張しません",
             "closed / SYS-3",
@@ -215,7 +215,7 @@ class MirroreaProjectOverviewHtmlTests(unittest.TestCase):
             "T1 checked untrusted Mir package",
             "package admission",
             "semantic grant",
-            "I3-2 sole active goal",
+            "I3-2 accepted, owner-paused",
             "ADR-0037",
             "QUIC reliable streamをprivate provisional adapterに選択",
             "TLS-over-TCP framed reliable streamはdeferred baseline",
@@ -292,7 +292,7 @@ class MirroreaProjectOverviewHtmlTests(unittest.TestCase):
             "ALIGN-0 / ALIGN-1 completed、I3-0 next/not active",
             "Plan 250 / I3-0が現在地",
             "Mirrorea I3 Distributed Foundation / I3-0 sole active goal",
-            "ALIGN-0 / ALIGN-1 / ALIGN-2 completed、I3-2 active",
+            "ALIGN-0 / ALIGN-1 / ALIGN-2 completed、I3-2 accepted",
             "Plan 250 / I3-0 active",
             "I3-0はtransport比較段階で両候補UNSELECTED、official lifecycle未entryです。",
             "TLS-over-TCP framed reliable streamをprivate provisional adapterに選択",
@@ -363,7 +363,7 @@ class MirroreaProjectOverviewHtmlTests(unittest.TestCase):
         self.assert_contains_marker(documentation, "Plan 250 sole roadmap", "Documentation I3 program status")
         self.assert_contains_marker(
             documentation,
-            "ALIGN-0, ALIGN-1, ALIGN-2, I3-0 and I3-1 completed; I3-2 sole active goal.",
+            "ALIGN-0--2, I3-0/I3-1 and I3-2 completed; no active semantic milestone.",
             "Documentation I3 program status",
         )
         self.assert_contains_marker(
@@ -470,10 +470,10 @@ class MirroreaProjectOverviewHtmlTests(unittest.TestCase):
     def test_canon_map_uses_the_current_align_frontier(self) -> None:
         canon_map = CANON_MAP_PATH.read_text(encoding="utf-8")
 
-        self.assert_contains_marker(canon_map, "PROPOSAL-041 / ADR-0038でI3-1はcompleted、I3-2がsole active", "Canon MAP I3-1 close state")
+        self.assert_contains_marker(canon_map, "PROPOSAL-041 / ADR-0038でI3-1、PROPOSAL-042 / ADR-0039でI3-2をcompleted", "Canon MAP I3-2 close state")
         self.assertRegex(
             canon_map,
-            r"I3-1.*completed、I3-2がsole active",
+            r"I3-1[\s\S]*I3-2.*completed",
             "Canon MAP must retain I3-1/I3-2 status across prose line wrapping",
         )
         self.assert_contains_marker(
@@ -488,7 +488,7 @@ class MirroreaProjectOverviewHtmlTests(unittest.TestCase):
     def test_root_canon_uses_the_current_i3_frontier(self) -> None:
         canon_root = CANON_ROOT_PATH.read_text(encoding="utf-8")
 
-        self.assert_contains_marker(canon_root, "I3-1 is closed by ADR-0038; I3-2 is the sole active goal", "root CANON active goal")
+        self.assert_contains_marker(canon_root, "two-process runtime is closed by ADR-0039", "root CANON I3-2 close state")
         self.assert_contains_marker(
             canon_root, "select QUIC reliable stream as the", "root CANON QUIC selection"
         )

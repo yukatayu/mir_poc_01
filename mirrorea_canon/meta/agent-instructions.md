@@ -2,8 +2,8 @@
 id: meta/agent-instructions
 status: L0-frozen
 maturity: draft
-depends_on: [adr/ADR-0012, adr/ADR-0014, adr/ADR-0015, adr/ADR-0026, adr/ADR-0033, adr/ADR-0034, adr/ADR-0035, adr/ADR-0036, adr/ADR-0037, adr/ADR-0038, meta/proposal-041, arch/06-project-product-layers, arch/07-browser-host-trust-boundaries, plan/02-operating-model]
-summary: agent の読込、active ADR-0034 program、ADR-0035三軸map、ADR-0036 trust boundary、ADR-0037/0038 private adapter、program外L3 research、review境界。
+depends_on: [adr/ADR-0012, adr/ADR-0014, adr/ADR-0015, adr/ADR-0026, adr/ADR-0033, adr/ADR-0034, adr/ADR-0035, adr/ADR-0036, adr/ADR-0037, adr/ADR-0038, adr/ADR-0039, meta/proposal-042, arch/06-project-product-layers, arch/07-browser-host-trust-boundaries, plan/02-operating-model]
+summary: agent の読込、owner-paused ADR-0034 program、三軸/trust/private adapter/two-process acceptance、program外L3 research、review境界。
 open_items: []
 ---
 
@@ -19,11 +19,10 @@ open_items: []
 - 決定済み事項の帰結の機械的展開: サンプル再表現、SCN 整合検証、INDEX 再生成、対比表更新、Lean への写経、反例探索、誤字・参照切れの修正(規範文の意味を変えない範囲)。
 - ADR-0015 / Plan 247とADR-0026 / Plan 249のbounded programsはいずれもclosedである。
   accepted cutsはregression baselineであり、successor authority又はcurrent queueではない。
-  PROPOSAL-037 / ADR-0034はADR-0033 / plan/05をconsumeするactive bounded programを
+  PROPOSAL-037 / ADR-0034はADR-0033 / plan/05をconsumeするauthorized bounded programを
   authorizeし、Plan 250をsole roadmapとする。ADR-0035はALIGN-1 three-axis map、
   ADR-0036はALIGN-2 Browser/Host trust boundary、ADR-0037はI3-0 private
-  QUIC reliable-stream adapter selectionを受理した。PROPOSAL-041 / ADR-0038でI3-1 private adapter/encodingを受理し、ALIGN-0/1/2とI3-0/I3-1はcompleted、I3-2が
-  active goalである。program activation又はI3-0 close
+  QUIC reliable-stream adapter selectionを受理した。PROPOSAL-041 / ADR-0038でI3-1 private adapter/encoding、PROPOSAL-042 / ADR-0039でI3-2 two-process runtimeを受理し、ALIGN-0/1/2とI3-0/I3-1/I3-2はcompletedである。program executionはowner pause中でactive semantic milestoneはなく、I3-3はexplicit resumeまでinactiveである。program activation又はI3-0 close
   自体はofficial I3 entry/exit又はpublic contract freezeではない。
 - ADR-0014 の standing route に従う L2/L3 working theory: `working/WRK-####` に
   read-only canon anchors、pinned authority cut、result class、non-effects、alternative /

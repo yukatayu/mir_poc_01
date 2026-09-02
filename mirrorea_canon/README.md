@@ -15,12 +15,12 @@ open_items: []
 
 1. 本 canon は、憲章と決定(`adr/`)、形式理論(`theory/`)、言語・システム仕様(`spec/`)、適合性シナリオ(`scenarios/`)、メンタルモデル(`mental-model/`)、階層と契約(`architecture/`)、計画と運用(`plan/`)、執筆・運用規約(`meta/`)、可逆な作業仮説(`working/`)の正本を含む。
 2. 既存リポジトリ `mir_poc_01`(以下 **LAB**)は、本 canon の導入をもって**実験場・evidence 置き場**に位置づけが変わる。canon と LAB の記述が衝突する場合、常に canon が勝つ。手続きは `meta/source-hierarchy.md` に従う。
-3. canon の改定は `meta/style-guide.md` の改定手続き(提案 → owner decision → ADR / CHANGELOG 追記)で行う。ADR-0015 と ADR-0026 の owner-approved bounded programs は closed であり、Plan 247 / 249 は再開権限又は current queue ではない。PROPOSAL-037 / ADR-0034 は Mirrorea I3 Distributed Foundation bounded program を開始し、LAB Plan 250 を sole current roadmap とする。PROPOSAL-038 / ADR-0035はALIGN-1、PROPOSAL-039 / ADR-0036はALIGN-2、PROPOSAL-040 / ADR-0037はI3-0を受理した。PROPOSAL-041 / ADR-0038はI3-1 private adapter/encodingを受理し、I3-2をsole active goalとする。official I3 lifecycleは未entryである。program 外は ADR-0014 の standing L3 route、L2 promotion は owner-authenticated trust anchor 未構成のため fail-closed である(`meta/agent-instructions.md`)。
+3. canon の改定は `meta/style-guide.md` の改定手続き(提案 → owner decision → ADR / CHANGELOG 追記)で行う。ADR-0015 と ADR-0026 の owner-approved bounded programs は closed であり、Plan 247 / 249 は再開権限又は current queue ではない。PROPOSAL-037 / ADR-0034 は Mirrorea I3 Distributed Foundation bounded program を開始し、LAB Plan 250 を sole current roadmap とする。PROPOSAL-038 / ADR-0035はALIGN-1、PROPOSAL-039 / ADR-0036はALIGN-2、PROPOSAL-040 / ADR-0037はI3-0、PROPOSAL-041 / ADR-0038はI3-1、PROPOSAL-042 / ADR-0039はI3-2を受理した。program executionはowner pause中でactive semantic milestoneはなく、I3-3はexplicit resumeまでinactiveである。official I3 lifecycleは未entryである。program 外は ADR-0014 の standing L3 route、L2 promotion は owner-authenticated trust anchor 未構成のため fail-closed である(`meta/agent-instructions.md`)。
 
 ## 最短の読み順
 
 - 全体像: `MAP.md` → `NORTH-STAR.md` → `DESIGN-CONSTITUTION.md` → `GLOSSARY.md`
-- 決定: `adr/README.md`(38 本の決定の一覧)
+- 決定: `adr/README.md`(39 本の決定の一覧)
 - 理論: `theory/00-overview.md` → `theory/01-mircore-v0.md` →
   `theory/13-evaluation-materialization.md` →
   `theory/14-maintained-relation-projection.md` →
@@ -53,7 +53,8 @@ open_items: []
   `adr/ADR-0035.md` → `meta/proposals/PROPOSAL-039-align2-browser-host-trust-boundaries.md` →
   `adr/ADR-0036.md` → `meta/proposals/PROPOSAL-040-i3-0-transport-selection.md` →
   `adr/ADR-0037.md` → `meta/proposals/PROPOSAL-041-mirrorea-i3-1-private-adapter-encoding.md` → `adr/ADR-0038.md` →
-  `architecture/09-i3-private-adapter.md` → `architecture/01-strata.md` →
+  `architecture/09-i3-private-adapter.md` → `meta/proposals/PROPOSAL-042-mirrorea-i3-2-multi-process-runtime.md` →
+  `adr/ADR-0039.md` → `architecture/10-i3-multi-process-runtime.md` → `architecture/01-strata.md` →
   `architecture/06-project-product-layers.md` → `architecture/07-browser-host-trust-boundaries.md` →
   `architecture/08-browser-host-security-invariants.md` →
   `plan/05-i3-entry-contract.md` →

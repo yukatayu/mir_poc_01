@@ -2,8 +2,8 @@
 id: meta/style-guide
 status: L1-fixed
 maturity: draft
-depends_on: [root/readme, adr/ADR-0014, adr/ADR-0015, adr/ADR-0026, adr/ADR-0033, adr/ADR-0034]
-summary: 執筆規約。front matter schema、ID、claim、closed bounded program と通常 route の改定手続き。
+depends_on: [root/readme, adr/ADR-0014, adr/ADR-0015, adr/ADR-0026, adr/ADR-0033, adr/ADR-0034, adr/ADR-0039]
+summary: 執筆規約。front matter schema、ID、claim、closed/owner-paused bounded program と通常 route の改定手続き。
 open_items: []
 ---
 
@@ -41,8 +41,9 @@ MAP.md の表が正本。新 ID は台帳(GLOSSARY / theory/11 / plan/03 / spec/
 
 ADR-0015 の Mir Theory v0 / I1+ program と ADR-0026 の Mirrorea I2 Systems
 Foundation program は closed record であり、いずれも successor authority を与えない。
-ADR-0033 の I3 entry contractはPROPOSAL-037 / ADR-0034のactive bounded programが
-consumeする。program外でADR-0014 の route によりL2/L3 working theoryを更新するとき、update surface は
+ADR-0033 の I3 entry contractはPROPOSAL-037 / ADR-0034のauthorized bounded programが
+consumeする。ADR-0039によるowner pause中はactive semantic milestoneを置かず、explicit
+resumeまでI3-3をinactiveに保つ。program外でADR-0014 の route によりL2/L3 working theoryを更新するとき、update surface は
 `working/WRK-####` に限る。候補、代替、command output、artifact source、history は
 LAB に置く。file-level L2/L3 status は agent authority の grant ではない。
 

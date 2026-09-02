@@ -2,8 +2,8 @@
 id: plan/02-operating-model
 status: L1-fixed
 maturity: reviewed
-depends_on: [adr/ADR-0012, adr/ADR-0014, adr/ADR-0015, adr/ADR-0026, adr/ADR-0033, adr/ADR-0034, adr/ADR-0035, adr/ADR-0036, adr/ADR-0037, adr/ADR-0038, meta/proposal-041]
-summary: active ADR-0034 program/ADR-0035三軸map/ADR-0036 trust boundary/ADR-0037--0038 private adapter、program外L3 research、goal/frontier/review規律。
+depends_on: [adr/ADR-0012, adr/ADR-0014, adr/ADR-0015, adr/ADR-0026, adr/ADR-0033, adr/ADR-0034, adr/ADR-0035, adr/ADR-0036, adr/ADR-0037, adr/ADR-0038, adr/ADR-0039, meta/proposal-042]
+summary: owner-paused ADR-0034 program、三軸/trust/private adapter/two-process acceptance、program外L3 research、goal/frontier/review規律。
 open_items: []
 ---
 
@@ -15,8 +15,9 @@ Four profiles are deliberately separate.
 
 1. **Mirrorea I3 Distributed Foundation** follows ADR-0034 and
    PROPOSAL-037. Its fixed sequence is ALIGN-0--2, I3-0--6, NEXT-0; Plan 250
-   is its sole current roadmap. ALIGN-0/1/2, I3-0 and I3-1 are completed, I3-2 is the
-   sole active frontier under ADR-0038.
+   is its sole current roadmap. ALIGN-0/1/2 and I3-0/1/2 are completed under
+   ADR-0039. Execution is owner-paused, no semantic milestone is active and
+   I3-3 remains inactive until explicit resume.
 2. **Mirrorea I2 Systems Foundation SYS-0--SYS-7** followed ADR-0026 and
    PROPOSAL-029. It is closed by ADR-0033; its accepted cuts and Plan 249 are
    immutable history/regression baseline and grant no I3 or successor authority.
@@ -72,6 +73,13 @@ One LAB document is designated the **current execution roadmap**. It contains:
 ADR-0034 designates
 `LAB:plan/250-mirrorea-i3-distributed-foundation-current-roadmap.md`. Plan 249,
 Plan 247, and older numbered plans are not current queues.
+
+An explicit owner pause after an accepted milestone is the sole exception to
+the one-active-frontier rule: the authorized program and its one roadmap remain
+current, but no semantic milestone is active and the fixed next milestone stays
+inactive until explicit resume. The pause is not `blocked`, `stale`, program
+close or official lifecycle transition. ADR-0039 applies this exception after
+I3-2 with I3-3 next/inactive.
 
 `progress.md`, `tasks.md`, `docs/project-status.md`, and `Documentation.md` are
 derived snapshots. Older numbered plans remain repository memory and are not a

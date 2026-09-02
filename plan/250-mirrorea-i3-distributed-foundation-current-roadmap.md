@@ -1,6 +1,6 @@
 # Plan 250 — Mirrorea I3 Distributed Foundation current execution roadmap
 
-最終更新: 2026-09-02 10:36 JST
+最終更新: 2026-09-02 20:00 JST
 
 ## 役割、authority、current control state
 
@@ -45,9 +45,9 @@ roadmap/status pointer の一致を検証する。
 - accepted I3-1 private adapter/encoding: PROPOSAL-041 / ADR-0038, cut `d75fa2e7...`
   (the milestone integration commit cannot embed its own future hash)
 - sole current roadmap: **Plan 250**
-- completed goals: **ALIGN-0, ALIGN-1, ALIGN-2, I3-0, I3-1**
-- sole active goal: **I3-2**
-- next goal after accepted I3-2 close: **I3-3**
+- completed goals: **ALIGN-0, ALIGN-1, ALIGN-2, I3-0, I3-1, I3-2**
+- execution state: **owner-paused after I3-2; no active semantic milestone**
+- next goal after explicit resume: **I3-3 (inactive until resume)**
 - all other milestones: **ordered, inactive, and dependency-gated**
 - Plan 247: closed M0--M10 execution record / regression baseline
 - Plan 249: closed SYS-0--SYS-7 execution record / accepted I2 baseline
@@ -206,7 +206,7 @@ ALIGN-0 Baseline, parent goal, authority, and regression-floor alignment
   -> NEXT-0 Inactive I4/I5 entry contracts and program close
 ```
 
-The control transition is fail-closed:
+The control transition is fail-closed, with an explicit owner-pause exception:
 
 ```text
 active milestone accepted
@@ -214,6 +214,10 @@ active milestone accepted
   -> required validation and independent review pass
   -> accepted evidence/integration commit is pushed and remote parity checked
   -> roadmap/status pointers advance to exactly one next active milestone
+
+After an accepted milestone, an explicit owner pause retains Plan 250 as the
+current roadmap but leaves no active semantic milestone; the next milestone
+remains inactive until an explicit resume and a fresh cut/parity recheck.
 ```
 
 No next milestone implementation begins before this transition. Planning,
@@ -252,7 +256,7 @@ and are exactly one per milestone:
 | ALIGN-2 | `docs/reports/2602-mirrorea-i3-distributed-foundation-align2-trust-boundaries.md` | completed |
 | I3-0 | `docs/reports/2603-mirrorea-i3-distributed-foundation-i3-0-transport-selection.md` | completed |
 | I3-1 | `docs/reports/2604-mirrorea-i3-distributed-foundation-i3-1-adapter-encoding.md` | completed; ADR-0038 |
-| I3-2 | `docs/reports/2605-mirrorea-i3-distributed-foundation-i3-2-two-process-runtime.md` | active |
+| I3-2 | `docs/reports/2605-mirrorea-i3-distributed-foundation-i3-2-two-process-runtime.md` | completed/accepted; owner-paused |
 | I3-3 | `docs/reports/2606-mirrorea-i3-distributed-foundation-i3-3-failure-ordering.md` | inactive |
 | I3-4 | `docs/reports/2607-mirrorea-i3-distributed-foundation-i3-4-c-distributed-scenarios.md` | inactive |
 | I3-5 | `docs/reports/2608-mirrorea-i3-distributed-foundation-i3-5-devtools-workflow.md` | inactive |
@@ -748,7 +752,7 @@ carrier meaning change outside the program. Reopen for ambiguous decoding,
 allocation before limit checks, semantic defaulting, secret leakage or
 replacement-seam failure.
 
-## I3-2 milestone contract — sole active goal
+## I3-2 milestone contract — completed/accepted; owner-paused after close
 
 **Goal ID:** I3-2
 
@@ -788,13 +792,17 @@ accepted adapter; remote owner serve/result/receipt; correspondence and clean
 shutdown; representative falsifiers; typed fault evidence; independent review;
 Report 2605 and remote parity.
 
+**Close result:** Positive/falsifier evidence passed with no P0/P1 at source/evidence cut
+`19c5b386613d6adb1f0b934e6ced81acb327d245`; Report 2605 records the exact bounded
+scope and non-claims. Execution is now owner-paused; this is neither blocked nor stale.
+
 **Stop condition:** Close when positive/falsifier evidence passes with no P0/P1
 and I3-3 can consume the runtime seam. Reopen for source-free routing,
 authority violation, stale resurrection, hidden retry, direct store,
 provenance/redaction loss or unbounded orphan resources.
 
 **Entry:** I3-1 adapter/encoding accepted, Report 2604, pushed parity, current
-goal I3-2, and no unresolved I3-1 semantic/security finding.
+goal I3-2, and no unresolved I3-1 semantic/security finding. Satisfied at close.
 
 **Required execution:** The launcher starts clean independent processes from
 checked per-locus artifacts, maps each declared logical locus to an endpoint,
@@ -818,14 +826,14 @@ hidden shared state, unsafe cleanup, or production/deployment requirement.
 Reopen for a reproducible route/owner/provenance mismatch or process boundary
 that the I3-3 fault harness cannot control deterministically.
 
-## I3-3 milestone contract — inactive until I3-2 closes
+## I3-3 milestone contract — next; inactive until explicit owner/user resume
 
 **Goal:** Close the required network failure, explicit retry/ambiguity, and Mir
 ordering-refinement boundary on the actual multi-process runtime without stale
 resurrection or exactly-once overclaim.
 
 **Entry:** I3-2 multi-process route accepted, Report 2605, pushed parity,
-current goal I3-3, and fault injection controls cannot supply semantic facts.
+explicit owner/user resume, current goal I3-3, and fault injection controls cannot supply semantic facts.
 
 **Required failure matrix:** Every row needs a positive/control path, a typed
 negative outcome, no forbidden semantic mutation, exact request/provenance
@@ -1223,8 +1231,9 @@ integration, or Typed-Effect platform collapse.
 
 ## Recommended next action
 
-Execute I3-2 only: use generated artifacts and the accepted adapter to launch
-two or more OS processes, perform remote owner service/result, and preserve
-source/Core/artifact correspondence. Add no manual route, direct cross-process
-store, authority mint, public wire promise, hidden retry/exactly-once or
-production/platform claim.
+Hold execution at the owner pause after accepted I3-2. On explicit resume,
+recheck source/evidence cut and remote parity, then activate I3-3 only: consume
+the accepted runtime for typed network failure, retry/ambiguity, reconnect and
+ordering evidence. Add no manual route, direct cross-process store, authority
+mint, public wire promise, hidden retry/exactly-once or production/platform
+claim.

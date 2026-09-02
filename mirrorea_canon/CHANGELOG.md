@@ -18,6 +18,18 @@ open_items: []
 
 ## 履歴
 
+- **2026-09-02** PROPOSAL-042 / ADR-0039 / architecture/10でI3-2を
+  source/evidence cut `19c5b386...`としてclosedした。ordinary sourceをsupervisorで
+  一度build/check/admitし、derived imageだけを二つのactual `exec` childへ配置、private
+  QUIC reliable bidi streamでremote owner serve/write、generated reply、requester-local
+  receiptを実行した。live mTLS exact-SPKI/prefaceはdelivery evidenceでありM9 authorityを
+  代替しない。4 actual delivery recordをsource/Core/artifact/edge/carrier/request/network/
+  runtimeへjoinし、natural zero-exit、bounded child lifecycleとlate observationを含む
+  falsifierを受理した。assuranceはfinite `runtime-monitored`のみ。programはauthorized/
+  currentのままowner pause、active semantic milestoneなし、I3-3はexplicit resumeまで
+  inactiveである。official I3 lifecycle、retry/reconnect/order/failure matrix、SCN、public/
+  production、durability/browser、general proofは未受理である。
+
 - **2026-09-02** PROPOSAL-041 / ADR-0038でI3-1をclosedした。source/Core由来
   の6 carrier family / 12 edge、strict private adapter/encoding、bounded
   localhost QUIC reliable bidi seamを受理し、I3-2をsole active goalとした。

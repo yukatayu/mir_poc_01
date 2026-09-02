@@ -2,8 +2,8 @@
 id: plan/05-i3-entry-contract
 status: L1-fixed
 maturity: reviewed
-depends_on: [adr/ADR-0033, adr/ADR-0034, adr/ADR-0035, adr/ADR-0036, adr/ADR-0037, adr/ADR-0038, meta/proposal-041, arch/04-runtime-carriers, arch/09-i3-private-adapter, arch/06-project-product-layers, arch/07-browser-host-trust-boundaries, arch/08-browser-host-security-invariants, theory/04-ordering-and-cuts, theory/05-authority, theory/07-observation, theory/08-patch-hotplug, spec/06-conformance, scenarios/SCN-01, scenarios/SCN-02, scenarios/SCN-03, scenarios/SCN-06]
-summary: ADR-0034 programがconsumeするI3 goal、ADR-0037 selected transport、ADR-0038 accepted private mapping、failure/order refinement、C-distributed gates。
+depends_on: [adr/ADR-0033, adr/ADR-0034, adr/ADR-0035, adr/ADR-0036, adr/ADR-0037, adr/ADR-0038, adr/ADR-0039, meta/proposal-042, arch/04-runtime-carriers, arch/09-i3-private-adapter, arch/10-i3-multi-process-runtime, arch/06-project-product-layers, arch/07-browser-host-trust-boundaries, arch/08-browser-host-security-invariants, theory/04-ordering-and-cuts, theory/05-authority, theory/07-observation, theory/08-patch-hotplug, spec/06-conformance, scenarios/SCN-01, scenarios/SCN-02, scenarios/SCN-03, scenarios/SCN-06]
+summary: ADR-0034 programがconsumeするI3 goal、accepted transport/private mapping/two-process runtime、future failure/order refinementとC-distributed gates。
 open_items: []
 ---
 
@@ -12,7 +12,7 @@ open_items: []
 ## Status and future goal
 
 ADR-0033 accepted this contract as an inactive entry boundary. PROPOSAL-037 /
-ADR-0034 now consumes it for the active bounded program, whose parent goal is:
+ADR-0034 now consumes it for the authorized bounded program, whose parent goal is:
 
 > Execute accepted I2 per-locus artifacts and generated communication across
 > at least two operating-system processes using a real transport while
@@ -21,12 +21,14 @@ ADR-0034 now consumes it for the active bounded program, whose parent goal is:
 > profile.
 
 Program activation is not official I3 lifecycle entry or exit. LAB Plan 250 is
-the sole current roadmap; ALIGN-0/1/2, I3-0 and I3-1 are completed and I3-2 is the
-sole active goal. PROPOSAL-040 / ADR-0037 select QUIC reliable stream as the
+the sole current roadmap; ALIGN-0/1/2 and I3-0/1/2 are completed. PROPOSAL-042 /
+ADR-0039 accept the bounded two-process runtime and owner-pause program
+execution: no semantic milestone is active and I3-3 remains inactive until
+explicit resume. PROPOSAL-040 / ADR-0037 select QUIC reliable stream as the
 private I3 adapter after equal actual-process canaries. OPEN-032
 is resolved only for this bounded program. Official I3 remains unentered.
-PROPOSAL-041 / ADR-0038 accept the bounded I3-1 private mapping and make I3-2
-the sole active goal; they do not accept official I3 lifecycle entry.
+PROPOSAL-041 / ADR-0038 accept the bounded I3-1 private mapping. Neither that
+acceptance nor ADR-0039 accepts official I3 lifecycle entry.
 
 I3 transport/runtime must preserve `arch/07-browser-host-trust-boundaries` and
 `arch/08-browser-host-security-invariants`:
@@ -35,7 +37,7 @@ weaken redaction, and I3 does not implement or freeze inactive I5 package/View/F
 
 ## Accepted input boundary
 
-The active ADR-0034 program starts from the accepted I2 boundary, not from source-free
+The authorized ADR-0034 program starts from the accepted I2 boundary, not from source-free
 message schemas:
 
 ```text
@@ -192,7 +194,7 @@ lock-free refinement remain deferred.
 
 ## I3 C-distributed gates
 
-Frozen ordinary-source scenarios remain unchanged. The active ADR-0034 program
+Frozen ordinary-source scenarios remain unchanged. The owner-paused ADR-0034 program
 must add C-distributed execution evidence for:
 
 | Gate | Positive path | Representative falsifier |
@@ -236,11 +238,11 @@ independent review.
 
 ## Non-claims
 
-This contract, ADR-0037 and ADR-0038 select only QUIC reliable stream and the
-bounded private mapping for this program. They do not admit/evaluate QUIC datagrams,
+This contract and ADR-0037--0039 accept only the selected QUIC reliable stream,
+bounded private mapping and finite two-process runtime for this program. They do not admit/evaluate QUIC datagrams,
 freeze a public version/codec/wire/API/certificate/port/deployment or supported-
-platform contract, claim exactly-once or hidden retry, complete I3-2, implement
-the I3-2 owner runtime, prove general network ordering/fairness/security/
+platform contract, claim exactly-once or hidden retry, complete I3-3 failure/
+ordering semantics, prove general network ordering/fairness/security/
 durability, accept broad PHASE-I1, change theory T1 or OBL status, apply official
 I3 lifecycle entry/exit without I3-6 acceptance, deploy production, or complete
 the public Mirrorea product.

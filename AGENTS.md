@@ -65,7 +65,9 @@ source hierarchy; do not treat an external chat as normative state.
      a current queue. PROPOSAL-037 / ADR-0034 consume ADR-0033 and canon
      plan/05 for the active Mirrorea I3 Distributed Foundation bounded program.
      Plan 250 is the sole current roadmap; PROPOSAL-038 / ADR-0035 close
-     ALIGN-1, ALIGN-2 and I3-0 are completed, and I3-1 is closed by ADR-0038; I3-2 is the sole active goal. Program
+     ALIGN-1, ALIGN-2 and I3-0 are completed, I3-1 is closed by ADR-0038, and
+     I3-2 is closed by ADR-0039. Program execution is owner-paused, no semantic
+     milestone is active, and I3-3 remains inactive until explicit resume. Program
      activation is not official I3 lifecycle entry; ADR-0037 selects private
      QUIC reliable stream, retains TLS/TCP as deferred baseline, and excludes
      QUIC datagrams. Outside program scope, follow ADR-0014's route.
@@ -185,12 +187,16 @@ Every report should contain, in this order:
 
 ## Current-frontier discipline
 
-- While a program is active, keep exactly one active semantic milestone and one
-  designated current roadmap. A closed program may have neither; its last
+- While a program is executing, keep exactly one active semantic milestone and one
+  designated current roadmap. An explicit owner pause after an accepted milestone
+  may retain the authorized current roadmap with no active semantic milestone;
+  the fixed next milestone remains inactive until explicit resume. This is not
+  blocked, stale, or program close. A closed program may have neither; its last
   roadmap remains a closed record/regression baseline until owner direction
   designates a successor. Older `plan/` files remain repository memory, not an
   active queue. Plan 247 and Plan 249 are closed baselines. Plan 250 is the
-  current roadmap and I3-2 is the sole active milestone after I3-1 close.
+  current roadmap; I3-2 is accepted and execution is owner-paused before inactive
+  I3-3 under ADR-0039.
 - Do not read `docs/reports/` in bulk. Read only reports directly referenced by
   current Canon, roadmap, or status.
 - Open a new `WRK-####` only when it has a named direct consumer, reduces the

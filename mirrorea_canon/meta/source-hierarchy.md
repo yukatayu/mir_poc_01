@@ -2,8 +2,8 @@
 id: meta/source-hierarchy
 status: L0-frozen
 maturity: draft
-depends_on: [adr/ADR-0012, adr/ADR-0014, adr/ADR-0015, adr/ADR-0026, adr/ADR-0033, adr/ADR-0034, adr/ADR-0035, adr/ADR-0036, adr/ADR-0037, adr/ADR-0038, meta/proposal-041]
-summary: canon > LAB、active ADR-0034 program、ADR-0035三軸map、ADR-0036 trust boundary、ADR-0037/0038 private adapter、program外ADR-0014 routeの境界。
+depends_on: [adr/ADR-0012, adr/ADR-0014, adr/ADR-0015, adr/ADR-0026, adr/ADR-0033, adr/ADR-0034, adr/ADR-0035, adr/ADR-0036, adr/ADR-0037, adr/ADR-0038, adr/ADR-0039, meta/proposal-042]
+summary: canon > LAB、owner-paused ADR-0034 program、accepted three-axis/trust/private adapter/two-process runtime、program外ADR-0014 routeの境界。
 open_items: []
 ---
 
@@ -19,7 +19,7 @@ open_items: []
 2. LAB README / AGENTS.md の冒頭に同旨の 3 行を追記(既存本文は改変しない — evidence の凍結保存)。
 3. `mir_hilight.html` の KEYWORDS から `world` を除去、または「歴史的表示」と注記。
 4. clean-near-end 系サンプルに「旧語彙(world 等)を含む歴史的 suite」の注記 1 行。
-5. LAB への新規追加は implementation、test、proof/evidence、roadmap/report 等の非規範成果物とする。active ADR-0034 program内はPlan 250のfixed milestone/direct-consumer/evidence条件、program外はADR-0014のstanding direct-consumer/falsifier条件を守る。
+5. LAB への新規追加は implementation、test、proof/evidence、roadmap/report 等の非規範成果物とする。authorized ADR-0034 program内はPlan 250のfixed milestone/direct-consumer/evidence条件を守り、owner pause中は次milestoneをactive化しない。program外はADR-0014のstanding direct-consumer/falsifier条件を守る。
 
 ## 移行規則
 
@@ -37,7 +37,7 @@ ADR-0026 / PROPOSAL-029 の SYS-0--SYS-7 bounded program はADR-0033によりclo
 Plan 249はclosed execution recordである。PROPOSAL-037 / ADR-0034はplan/05をconsumeし、
 Plan 250をsole current roadmapとする。ADR-0035はALIGN-1 three-axis map、ADR-0036は
 ALIGN-2 Browser/Host trust boundary、ADR-0037はI3-0 private QUIC reliable-stream adapter
-selectionを受理し、PROPOSAL-041 / ADR-0038でI3-1 private adapter/encodingを受理した。ALIGN-0/1/2とI3-0/I3-1はcompleted、I3-2がactive goalである。
+selectionを受理し、PROPOSAL-041 / ADR-0038でI3-1 private adapter/encoding、PROPOSAL-042 / ADR-0039でI3-2 two-process runtimeを受理した。ALIGN-0/1/2とI3-0/I3-1/I3-2はcompleted。program executionはowner pause中でactive semantic milestoneはなく、I3-3はexplicit resumeまでinactiveである。
 OPEN-032はこのbounded programだけresolvedし、official I3 lifecycleは未entryである。
 `root/design-constitution` は North Star/ADR の下で後続 Canon を拘束する current
 decision filterであり、LAB roadmap/reportはそれを再解釈しない。`.mir` source、Rust、

@@ -2,8 +2,8 @@
 id: plan/01-phases
 status: L1-fixed
 maturity: draft
-depends_on: [plan/00-gates, plan/02-operating-model, plan/05-i3-entry-contract, spec/06-conformance, meta/source-hierarchy, adr/ADR-0013, adr/ADR-0014, adr/ADR-0015, adr/ADR-0017, adr/ADR-0026, adr/ADR-0027, adr/ADR-0028, adr/ADR-0029, adr/ADR-0030, adr/ADR-0031, adr/ADR-0032, adr/ADR-0033, adr/ADR-0034, adr/ADR-0035, adr/ADR-0036, adr/ADR-0037, adr/ADR-0038, meta/proposal-041, plan/04-t0-g0-semantic-assertion-profile]
-summary: lifecycle T/IとS/PLを分離し、T1・I2 exit・I3-0/I3-1 close・I3-2 activeを記録する。
+depends_on: [plan/00-gates, plan/02-operating-model, plan/05-i3-entry-contract, spec/06-conformance, meta/source-hierarchy, adr/ADR-0013, adr/ADR-0014, adr/ADR-0015, adr/ADR-0017, adr/ADR-0026, adr/ADR-0027, adr/ADR-0028, adr/ADR-0029, adr/ADR-0030, adr/ADR-0031, adr/ADR-0032, adr/ADR-0033, adr/ADR-0034, adr/ADR-0035, adr/ADR-0036, adr/ADR-0037, adr/ADR-0038, adr/ADR-0039, meta/proposal-042, plan/04-t0-g0-semantic-assertion-profile]
+summary: lifecycle T/IとS/PLを分離し、T1・I2 exit・I3-0/1/2 close・owner-paused executionを記録する。
 open_items: []
 ---
 
@@ -15,11 +15,12 @@ open_items: []
 - theory lifecycle: **T1**（M2 semantic-assertion profile v3 の pass digest、G0-D3、
   G0 exit、T1 entry を ADR-0017 により受理済み）;
 - implementation evidence: **M10 accepted; official I2 entry then exit accepted;
-  SYS-0--SYS-7 / ADR-0026 program closed; ADR-0034 / Plan 250 active at I3-2
-  after ALIGN-0--2 and I3-0/I3-1 close**。architecture/04 の full L2 carrier freeze と
+  SYS-0--SYS-7 / ADR-0026 program closed; ADR-0034 / Plan 250 authorized/current,
+  ALIGN-0--2 and I3-0/1/2 closed, execution owner-paused with no active semantic
+  milestone and I3-3 next/inactive**。architecture/04 の full L2 carrier freeze と
   OPEN-026/027が残るため broad PHASE-I1 exitは未受理。Official I3 lifecycleは未entry、
   ADR-0037はprivate QUIC reliable-stream adapterを選択し、PROPOSAL-041 /
-  ADR-0038はI3-1をcloseしI3-2をsole active goalとした。OPEN-032はこのbounded
+  ADR-0038はI3-1、PROPOSAL-042 / ADR-0039はI3-2をcloseした。OPEN-032はこのbounded
   programに限り解決済みである。
 
 ## 理論フェーズ
@@ -158,7 +159,7 @@ ADR-0032だけが決める。Theory T1、broad PHASE-I1、public contract、I3 a
 動かない。SYS-6はcompletedし、SYS-7は下のinactive entry contract closeでcompleted
 した。ADR-0033 close時点ではI3 program/lifecycleともinactiveだった。
 
-## Mirrorea I3 active bounded program / lifecycle not entered
+## Mirrorea I3 owner-paused bounded program / lifecycle not entered
 
 PROPOSAL-036 / ADR-0033はplan/05のinactive I3 entry contractだけを受理し、その時点
 では二つのreliable-stream候補はともに**UNSELECTED**だった。現在もtransport/session/
@@ -168,7 +169,8 @@ certificateはauthorityでない。failure/order、C-distributed gate、public-w
 PROPOSAL-037 / ADR-0034はこのcontractをconsumeし、Plan 250をsole roadmapとする。
 ADR-0035/0036はALIGN-1/2をcloseした。PROPOSAL-040 / ADR-0037は同条件2-process
 canaryと固定criteriaを受理し、private QUIC reliable streamを選択した。ALIGN-0--2と
-I3-0/I3-1 completed、I3-2 sole activeである。これはofficial I3
+I3-0/I3-1/I3-2 completed、program executionはowner pause中でactive semantic
+milestoneはなく、I3-3はexplicit resumeまでinactiveである。これはofficial I3
 entry/exitではない。I2 exitを維持し、I3 lifecycleは未entry、OPEN-032はこのbounded
 programに限り解決済みである。
 
