@@ -137,7 +137,11 @@ pass, and no disposable directory was removed without owner confirmation.
 
 ## Commit / push status
 
-Source/evidence cut `19c5b386613d6adb1f0b934e6ced81acb327d245` is pushed with remote parity. The documentation integration hash is intentionally resolved by the immediate pointer-only closeout commit; this report does not self-reference it.
+Source/evidence cut `19c5b386613d6adb1f0b934e6ced81acb327d245` and
+Canon/status integration cut `ab038f277d3cfd5ae1db2ad3e1fbc0147dfe0180`
+were pushed. The immediate pointer-only closeout commit records the integration
+hash and intentionally does not self-reference its own future hash. Final remote
+parity is checked after that pointer commit.
 
 ## Sub-agent session close status
 

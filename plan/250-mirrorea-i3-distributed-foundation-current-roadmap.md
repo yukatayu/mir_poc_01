@@ -44,6 +44,8 @@ roadmap/status pointer の一致を検証する。
 - accepted I3-0 private transport selection: PROPOSAL-040 / ADR-0037
 - accepted I3-1 private adapter/encoding: PROPOSAL-041 / ADR-0038, cut `d75fa2e7...`
   (the milestone integration commit cannot embed its own future hash)
+- accepted I3-2 two-process source/evidence cut: `19c5b386613d6adb1f0b934e6ced81acb327d245`
+- accepted I3-2 Canon/status integration cut: `ab038f277d3cfd5ae1db2ad3e1fbc0147dfe0180`
 - sole current roadmap: **Plan 250**
 - completed goals: **ALIGN-0, ALIGN-1, ALIGN-2, I3-0, I3-1, I3-2**
 - execution state: **owner-paused after I3-2; no active semantic milestone**
