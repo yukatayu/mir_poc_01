@@ -40,8 +40,8 @@ use crate::{
     m9_auth_verification::{
         M9AdmissionErrorKind, M9AuthorityGeneration, M9AuthorityInspection,
         M9AuthoritySuccessorPublisher, M9AuthorityTransitionKind, M9CacheValidationInspection,
-        M9CheckedPatchAuthorityBinding, M9DesignatedSourceReleaseLineage, M9KernelAuthorityView,
-        M9RelationPublicationAdmission, M9RuntimeExecutionSeam,
+        M9CheckedPatchAuthorityBinding, M9DesignatedSourceReleaseLineage, M9ExecutionRestriction,
+        M9KernelAuthorityView, M9RelationPublicationAdmission, M9RuntimeExecutionSeam,
         M9RuntimeValidationObservationSnapshot, M9SealedFailureInspection, M9SealedGeneration,
         M9SealedTransitionInspection, M9SourceReleaseValidationInspection,
     },
@@ -484,6 +484,97 @@ impl FabricProgram {
         })
     }
 
+    /// Seal a process-local program from the already checked global
+    /// projection.  It has no route, Core, or locus supplied by deployment:
+    /// the caller can only select an existing locus subset.
+    pub(crate) fn restricted_to_loci(&self, assigned_loci: &BTreeSet<String>) -> Sys4Result<Self> {
+        if assigned_loci.is_empty()
+            || !assigned_loci
+                .iter()
+                .all(|locus| self.projection.locus_program(locus).is_some())
+        {
+            return Err(Sys4DispatchDiagnostics::one(
+                Sys4DiagnosticKind::ProgramProjectionMismatch,
+            ));
+        }
+        Self::from_projection(self.projection.restricted_to_loci(assigned_loci))
+    }
+
+    /// Revalidate the reference-only designated request/receipt descriptors
+    /// retained by one sealed process image.  This has no authority side
+    /// effect; it only proves the child cannot use an invented M9 tuple.
+    pub(crate) fn validate_i3_process_designated_requirements(&self) -> Sys4Result<()> {
+        m9_execution_restriction_for_program(self).map(|_| ())
+    }
+
+    /// Source-free, normalized inventory used only to check that a process
+    /// image has retained exactly its sealed local projection rows.  The
+    /// coordinator never supplies these rows; both values originate from the
+    /// same restricted checked projection that will execute in the child.
+    pub(crate) fn i3_process_normalized_inventory_refs(
+        &self,
+    ) -> (BTreeSet<String>, BTreeSet<String>) {
+        let artifacts = self
+            .projection
+            .sys4_artifact_fragments()
+            .entries()
+            .iter()
+            .map(|fragment| {
+                format!(
+                    "artifact|{}|{}|{}|{}|{}",
+                    fragment.locus_tag().as_str(),
+                    fragment.operation_id(),
+                    i3_fragment_kind_name(fragment.fragment_kind()),
+                    fragment.core_ref().unwrap_or(""),
+                    fragment.fragment_ref(),
+                )
+            })
+            .collect();
+        let edges = self
+            .projection
+            .communication_plan()
+            .edges()
+            .iter()
+            .map(|edge| {
+                format!(
+                    "edge|{}|{}|{}|{}|{}|{}|{}|{}",
+                    edge.source_locus(),
+                    edge.target_locus(),
+                    edge.operation_id(),
+                    i3_edge_kind_name(edge.kind()),
+                    edge.edge_ref(),
+                    edge.core_ref().unwrap_or(""),
+                    edge.source_fragment_ref(),
+                    edge.target_fragment_ref(),
+                )
+            })
+            .collect();
+        (artifacts, edges)
+    }
+
+    pub(crate) fn i3_process_designated_remote_input_inventory(
+        &self,
+    ) -> Sys4Result<Sys4I3DesignatedRemoteInputInventory> {
+        Ok(Sys4I3DesignatedRemoteInputInventory {
+            requirements: designated_remote_input_requirements_for_program(self)?,
+        })
+    }
+
+    /// Detached I3-2 falsifier seam.  It mutates only a cloned process image
+    /// through SYS-5's explicit test tamper API, never an admitted projection.
+    pub(crate) fn remove_i3_process_designated_requirement_for_test(&mut self) -> bool {
+        self.projection
+            .communication_plan_mut()
+            .remove_designated_remote_input_requirement_for_i3_process_test()
+    }
+
+    /// Detached I3-2 falsifier seam for request/receipt disagreement.
+    pub(crate) fn mismatch_i3_process_designated_requirement_for_test(&mut self) -> bool {
+        self.projection
+            .communication_plan_mut()
+            .mismatch_designated_remote_input_requirement_for_i3_process_test()
+    }
+
     pub(crate) const fn runtime_admission_status(&self) -> RuntimeAdmissionStatus {
         self.projection.runtime_admission_status()
     }
@@ -681,6 +772,70 @@ impl FabricProgram {
     }
 }
 
+fn i3_fragment_kind_name(kind: ProjectedOperationFragmentKind) -> &'static str {
+    match kind {
+        ProjectedOperationFragmentKind::OwnerRequestInvocation => "owner-request-invocation",
+        ProjectedOperationFragmentKind::OwnerRmwExecution => "owner-rmw-evaluation",
+        ProjectedOperationFragmentKind::RelationPublication => "relation-publication",
+        ProjectedOperationFragmentKind::ConsumerLocalRelationProjection => {
+            "consumer-local-relation-projection"
+        }
+        ProjectedOperationFragmentKind::DesignatedRemoteInputService => {
+            "designated-remote-input-service"
+        }
+        ProjectedOperationFragmentKind::DesignatedEvaluation => "designated-evaluation",
+        ProjectedOperationFragmentKind::DesignatedResultConsumer => "designated-result-consumer",
+    }
+}
+
+fn i3_edge_kind_name(kind: CommunicationEdgeKind) -> &'static str {
+    match kind {
+        CommunicationEdgeKind::OwnerRequest => "owner-request",
+        CommunicationEdgeKind::OwnerReplyReceipt => "owner-reply-receipt",
+        CommunicationEdgeKind::RelationProjectionPublication => "relation-projection-publication",
+        CommunicationEdgeKind::DesignatedInputRequest => "designated-input-request",
+        CommunicationEdgeKind::DesignatedInputReceipt => "designated-input-receipt",
+        CommunicationEdgeKind::DesignatedResultDelivery => "designated-result-delivery",
+        CommunicationEdgeKind::AbsoluteValueStream => "absolute-value-stream",
+    }
+}
+
+/// An observer-safe summary source for a child designated-input closure.  It
+/// deliberately retains only checked edge-pair identities inside SYS-4; SYS-5
+/// exports counts and an opaque digest, never the dependency tuples.
+#[derive(Debug, Clone, PartialEq, Eq)]
+pub(crate) struct Sys4I3DesignatedRemoteInputInventory {
+    requirements: BTreeSet<I3DesignatedRemoteInputKey>,
+}
+
+impl Sys4I3DesignatedRemoteInputInventory {
+    pub(crate) fn request_receipt_pair_count(&self) -> usize {
+        self.requirements.len()
+    }
+
+    pub(crate) fn distinct_operation_count(&self) -> usize {
+        self.requirements
+            .iter()
+            .map(|requirement| requirement.operation_id.as_str())
+            .collect::<BTreeSet<_>>()
+            .len()
+    }
+
+    pub(crate) fn pairs_are_distinguished_beyond_operation(&self) -> bool {
+        self.requirements.len() > 1 && self.distinct_operation_count() < self.requirements.len()
+    }
+
+    pub(crate) fn opaque_digest_ref(&self) -> String {
+        let mut hasher = Sha256::new();
+        hasher.update(b"mirrorea/sys4/i3/designated-input-edge-pairs/v1\\0");
+        hasher.update(format!("{:?}", self.requirements));
+        format!(
+            "sys4-i3-designated-input-edge-pairs-sha256-v1:{:x}",
+            hasher.finalize()
+        )
+    }
+}
+
 #[derive(Debug, Clone, PartialEq, Eq)]
 pub(crate) struct Sys4InitialStateSeed {
     checked_program_identity: CheckedProgramIdentity,
@@ -719,6 +874,18 @@ impl Sys4InitialStateSeed {
                 field.to_string(),
             ))
             .copied()
+    }
+
+    fn restricted_to_loci(&self, assigned_loci: &BTreeSet<String>) -> Self {
+        Self {
+            checked_program_identity: self.checked_program_identity.clone(),
+            ints: self
+                .ints
+                .iter()
+                .filter(|((locus, _, _, _), _)| assigned_loci.contains(locus))
+                .map(|(key, value)| (key.clone(), *value))
+                .collect(),
+        }
     }
 }
 
@@ -772,6 +939,20 @@ impl ObserverSafeM9SemanticRowSets {
 }
 
 impl ObserverSafeM9Summary {
+    fn remove_one_owner_lineage_for_i3_process_test(&mut self) -> bool {
+        let Some(row) = self.owner_lineages.iter().next().cloned() else {
+            return false;
+        };
+        self.owner_lineages.remove(&row)
+    }
+
+    fn remove_one_designated_remote_input_lineage_for_i3_process_test(&mut self) -> bool {
+        let Some(row) = self.designated_remote_input_lineages.iter().next().cloned() else {
+            return false;
+        };
+        self.designated_remote_input_lineages.remove(&row)
+    }
+
     pub(crate) fn checked_program_identity(&self) -> &CheckedProgramIdentity {
         &self.checked_program_identity
     }
@@ -951,7 +1132,7 @@ pub(crate) struct SealedFabricAdmission {
     summary: ObserverSafeM9Summary,
     instance: M8RuntimeInstance,
     authority_generation: M9AuthorityGeneration,
-    authority_successor: M9AuthoritySuccessorPublisher,
+    authority_successor: Option<M9AuthoritySuccessorPublisher>,
     authority_live_floor: M9AuthorityLiveFloor,
     initial_state_seed: Sys4InitialStateSeed,
 }
@@ -1161,7 +1342,14 @@ impl SealedFabricAdmission {
                         core.evaluator().to_string(),
                         core.result().to_string(),
                         dependency_index,
-                        core.trigger().frontier().unwrap_or_default().to_string(),
+                        core.trigger()
+                            .frontier()
+                            .ok_or_else(|| {
+                                Sys4DispatchDiagnostics::one(
+                                    Sys4DiagnosticKind::ProgramProjectionMismatch,
+                                )
+                            })?
+                            .to_string(),
                     ));
                 }
                 ProjectedOperationFragmentKind::RelationPublication => {
@@ -1194,7 +1382,7 @@ impl SealedFabricAdmission {
             instance,
             authority_live_floor: M9AuthorityLiveFloor::new(authority_generation.clone()),
             authority_generation,
-            authority_successor,
+            authority_successor: Some(authority_successor),
             initial_state_seed,
         })
     }
@@ -1213,6 +1401,313 @@ impl SealedFabricAdmission {
 
     pub(crate) fn initial_state_seed(&self) -> &Sys4InitialStateSeed {
         &self.initial_state_seed
+    }
+
+    pub(crate) fn m9_generation_ref(&self) -> &str {
+        self.authority_generation.generation_ref()
+    }
+
+    /// Derive a child-process admission from one already sealed full
+    /// admission.  The result contains only the M8 plans, M9 validation
+    /// closure, and state cells required by the process-local program.  In
+    /// particular it deliberately carries no M9 successor publisher.
+    pub(crate) fn restricted_to_process_program(
+        &self,
+        program: &FabricProgram,
+    ) -> Sys4Result<Self> {
+        if self.program_identity != *program.checked_program_identity()
+            || program.locus_names().is_empty()
+        {
+            return Err(Sys4DispatchDiagnostics::one(
+                Sys4DiagnosticKind::ProgramAdmissionMismatch,
+            ));
+        }
+        // Each process program retains every generated edge incident to its
+        // assigned loci.  A designated-source service derives its M9 key
+        // only from the typed reference-only request/receipt descriptors on
+        // those edges; it never reconstructs a key from an operation string
+        // or materialized runtime frontier.
+        let restriction = m9_execution_restriction_for_program(program)?;
+        self.authority_generation
+            .validate_execution_restriction_exact(&restriction)
+            .map_err(|_| {
+                Sys4DispatchDiagnostics::one(Sys4DiagnosticKind::ProgramAdmissionMismatch)
+            })?;
+        let authority_generation = self
+            .authority_generation
+            .restricted_for_execution(&restriction);
+        let summary = restricted_m9_summary(&self.summary, &restriction);
+        Ok(Self {
+            program_identity: program.checked_program_identity().clone(),
+            program_fingerprint: program.projected_fingerprint(),
+            summary,
+            instance: self
+                .instance
+                .restricted_to_loci(&program.locus_names().into_iter().collect()),
+            authority_generation,
+            authority_successor: None,
+            authority_live_floor: M9AuthorityLiveFloor::new(
+                self.authority_generation
+                    .restricted_for_execution(&restriction),
+            ),
+            initial_state_seed: self
+                .initial_state_seed
+                .restricted_to_loci(&program.locus_names().into_iter().collect()),
+        })
+    }
+
+    /// Detached I3-2 falsifier only.  It removes a fact from a child seed
+    /// after parent admission; it cannot issue, restore, or alter parent
+    /// authority material.
+    pub(crate) fn remove_actual_restricted_owner_binding_for_i3_process_test(&mut self) -> bool {
+        let summary_removed = self.summary.remove_one_owner_lineage_for_i3_process_test();
+        let generation_removed = self
+            .authority_generation
+            .remove_one_owner_binding_for_i3_process_test();
+        summary_removed || generation_removed
+    }
+
+    /// Detached I3-2 falsifier for an actual source-release lineage.
+    pub(crate) fn remove_actual_designated_remote_input_lineage_for_i3_process_test(
+        &mut self,
+    ) -> bool {
+        let summary_removed = self
+            .summary
+            .remove_one_designated_remote_input_lineage_for_i3_process_test();
+        let generation_removed = self
+            .authority_generation
+            .remove_one_designated_remote_input_lineage_for_i3_process_test();
+        summary_removed || generation_removed
+    }
+}
+
+fn m9_execution_restriction_for_program(
+    program: &FabricProgram,
+) -> Sys4Result<M9ExecutionRestriction> {
+    let mut restriction = M9ExecutionRestriction::default();
+    // A remote designated-input requirement is not reconstructed from an
+    // operation name or a materialized frontier.  The checked projector
+    // wrote the same typed descriptor on the request and receipt edges; pair
+    // those exact descriptors first, then retain that closure on both the
+    // evaluator and producer process images.
+    let remote_input_requirements = designated_remote_input_requirements_for_program(program)?;
+    for requirement in &remote_input_requirements {
+        restriction.require_designated_remote_input(
+            &requirement.producer_locus,
+            &requirement.evaluator,
+            &requirement.result,
+            requirement.dependency_ordinal,
+            &requirement.trigger_frontier,
+        );
+    }
+    for fragment in program.projection.sys4_artifact_fragments().entries() {
+        match fragment.fragment_kind() {
+            ProjectedOperationFragmentKind::OwnerRequestInvocation => {
+                let owner_locus = fragment.target_owner_locus().ok_or_else(|| {
+                    Sys4DispatchDiagnostics::one(Sys4DiagnosticKind::ProgramProjectionMismatch)
+                })?;
+                restriction.require_owner_operation(fragment.operation_id(), owner_locus);
+            }
+            ProjectedOperationFragmentKind::OwnerRmwExecution => {
+                let core = fragment.owner_rmw_checked_core().ok_or_else(|| {
+                    Sys4DispatchDiagnostics::one(Sys4DiagnosticKind::ProgramProjectionMismatch)
+                })?;
+                restriction.require_owner_operation(fragment.operation_id(), core.owner_locus());
+            }
+            ProjectedOperationFragmentKind::RelationPublication => {
+                for transition in [
+                    "publish_relation",
+                    "invalidate_primary",
+                    "reacquire_primary",
+                ] {
+                    restriction.require_relation_transition(fragment.operation_id(), transition);
+                }
+            }
+            ProjectedOperationFragmentKind::ConsumerLocalRelationProjection => {
+                let descriptor = fragment.consumer_relation_projection().ok_or_else(|| {
+                    Sys4DispatchDiagnostics::one(Sys4DiagnosticKind::ProgramProjectionMismatch)
+                })?;
+                for transition in [
+                    "publish_relation",
+                    "invalidate_primary",
+                    "reacquire_primary",
+                ] {
+                    restriction
+                        .require_relation_transition(descriptor.source_relation(), transition);
+                }
+            }
+            ProjectedOperationFragmentKind::DesignatedEvaluation => {
+                let core = fragment.designated_checked_core().ok_or_else(|| {
+                    Sys4DispatchDiagnostics::one(Sys4DiagnosticKind::ProgramProjectionMismatch)
+                })?;
+                restriction.require_designated_evaluator(
+                    fragment.operation_id(),
+                    core.evaluator(),
+                    core.result(),
+                );
+            }
+            ProjectedOperationFragmentKind::DesignatedResultConsumer => {
+                let core = fragment.designated_result_consumer_core().ok_or_else(|| {
+                    Sys4DispatchDiagnostics::one(Sys4DiagnosticKind::ProgramProjectionMismatch)
+                })?;
+                restriction.require_designated_consumer(
+                    core.consumer_locus(),
+                    &format!("{}.{}", core.evaluator(), core.result()),
+                );
+            }
+            // The paired edge inventory above, rather than an operation-ID
+            // lookup from this local fragment, is the authority source for
+            // designated remote input.  This preserves two dependencies of
+            // one operation and retains the identical closure at either end.
+            ProjectedOperationFragmentKind::DesignatedRemoteInputService => {}
+        }
+    }
+    Ok(restriction)
+}
+
+#[derive(Debug, Clone, PartialEq, Eq, PartialOrd, Ord)]
+struct I3DesignatedRemoteInputKey {
+    operation_id: String,
+    producer_locus: String,
+    evaluator: String,
+    result: String,
+    dependency_ordinal: usize,
+    trigger_frontier: String,
+}
+
+/// Derive the typed designated-input closure from paired checked edge
+/// descriptors.  A key carries more than an operation ID, so two source
+/// dependencies of one designated operation cannot collapse.
+fn designated_remote_input_requirements_for_program(
+    program: &FabricProgram,
+) -> Sys4Result<BTreeSet<I3DesignatedRemoteInputKey>> {
+    let mut requests = BTreeMap::<I3DesignatedRemoteInputKey, usize>::new();
+    let mut receipts = BTreeMap::<I3DesignatedRemoteInputKey, usize>::new();
+    for edge in program
+        .projection
+        .communication_plan()
+        .edges()
+        .iter()
+        .filter(|edge| {
+            matches!(
+                edge.kind(),
+                CommunicationEdgeKind::DesignatedInputRequest
+                    | CommunicationEdgeKind::DesignatedInputReceipt
+            )
+        })
+    {
+        let requirement = edge.designated_remote_input_requirement().ok_or_else(|| {
+            Sys4DispatchDiagnostics::one(Sys4DiagnosticKind::ProgramProjectionMismatch)
+        })?;
+        if !requirement.is_reference_only() {
+            return Err(Sys4DispatchDiagnostics::one(
+                Sys4DiagnosticKind::ProgramProjectionMismatch,
+            ));
+        }
+        let direction_matches = match edge.kind() {
+            CommunicationEdgeKind::DesignatedInputRequest => {
+                edge.source_locus() == requirement.evaluator()
+                    && edge.target_locus() == requirement.producer_locus()
+            }
+            CommunicationEdgeKind::DesignatedInputReceipt => {
+                edge.source_locus() == requirement.producer_locus()
+                    && edge.target_locus() == requirement.evaluator()
+            }
+            _ => false,
+        };
+        if !direction_matches {
+            return Err(Sys4DispatchDiagnostics::one(
+                Sys4DiagnosticKind::ProgramProjectionMismatch,
+            ));
+        }
+        let key = I3DesignatedRemoteInputKey {
+            operation_id: edge.operation_id().to_string(),
+            producer_locus: requirement.producer_locus().to_string(),
+            evaluator: requirement.evaluator().to_string(),
+            result: requirement.result().to_string(),
+            dependency_ordinal: requirement.dependency_ordinal(),
+            trigger_frontier: requirement.trigger_frontier().to_string(),
+        };
+        match edge.kind() {
+            CommunicationEdgeKind::DesignatedInputRequest => *requests.entry(key).or_default() += 1,
+            CommunicationEdgeKind::DesignatedInputReceipt => *receipts.entry(key).or_default() += 1,
+            _ => unreachable!("designated edge filter fixes the kind"),
+        }
+    }
+    if requests.len() != receipts.len()
+        || requests.keys().ne(receipts.keys())
+        || requests.values().any(|count| *count != 1)
+        || receipts.values().any(|count| *count != 1)
+    {
+        return Err(Sys4DispatchDiagnostics::one(
+            Sys4DiagnosticKind::ProgramProjectionMismatch,
+        ));
+    }
+    Ok(requests.into_keys().collect())
+}
+
+fn restricted_m9_summary(
+    summary: &ObserverSafeM9Summary,
+    restriction: &M9ExecutionRestriction,
+) -> ObserverSafeM9Summary {
+    let owner_lineages = summary
+        .owner_lineages
+        .iter()
+        .filter(|(operation, _, _, owner)| restriction.retains_owner_operation(operation, owner))
+        .cloned()
+        .collect::<BTreeSet<_>>();
+    let relation_transitions = summary
+        .relation_transitions
+        .iter()
+        .filter(|(relation, transition)| {
+            restriction.retains_relation_transition(relation, transition)
+        })
+        .cloned()
+        .collect::<BTreeSet<_>>();
+    let designated_evaluators = summary
+        .designated_evaluators
+        .iter()
+        .filter(|(value_name, evaluator)| {
+            restriction.retains_designated_evaluator_summary_row(value_name, evaluator)
+        })
+        .cloned()
+        .collect::<BTreeSet<_>>();
+    let designated_remote_input_lineages = summary
+        .designated_remote_input_lineages
+        .iter()
+        .filter(|(producer, evaluator, result, dependency, frontier)| {
+            restriction.retains_designated_remote_input(
+                producer,
+                evaluator,
+                result,
+                *dependency,
+                frontier,
+            )
+        })
+        .cloned()
+        .collect::<BTreeSet<_>>();
+    let designated_consumers = summary
+        .designated_consumers
+        .iter()
+        .filter(|(value_name, consumer)| {
+            restriction.retains_designated_consumer(consumer, value_name)
+        })
+        .cloned()
+        .collect::<BTreeSet<_>>();
+    let mut hasher = Sha256::new();
+    hasher.update(b"mirrorea/sys4/process-authority-summary/v1\\0");
+    hasher.update(format!(
+        "{owner_lineages:?}{relation_transitions:?}{designated_evaluators:?}{designated_remote_input_lineages:?}{designated_consumers:?}"
+    ));
+    ObserverSafeM9Summary {
+        checked_program_identity: summary.checked_program_identity.clone(),
+        complete_final: summary.complete_final,
+        inventory_digest: format!("sys4-process-m9-summary-sha256-v1:{:x}", hasher.finalize()),
+        owner_lineages,
+        relation_transitions,
+        designated_evaluators,
+        designated_remote_input_lineages,
+        designated_consumers,
     }
 }
 
@@ -1348,8 +1843,12 @@ impl Sys4CheckedPatchCandidate {
             && self
                 .patch_admission
                 .authority_successor
-                .current_generation_for_restore()
-                .matches_for_restore(&self.patch_admission.authority_generation)
+                .as_ref()
+                .is_some_and(|publisher| {
+                    publisher
+                        .current_generation_for_restore()
+                        .matches_for_restore(&self.patch_admission.authority_generation)
+                })
     }
 
     #[cfg(test)]
@@ -2768,6 +3267,43 @@ impl MailboxEnvelope {
             } => RuntimeValue::int(value),
             _ => RuntimeValue::unit(),
         }
+    }
+}
+
+/// Private by-value handoff for the pre-socket I3 process seam.  It retains
+/// one exact generated mailbox carrier and has no transport/session binding.
+/// The envelope remains opaque to SYS-5 so no caller can forge its authority
+/// lineage, Core provenance, route, or payload.
+#[derive(Debug, Clone)]
+pub(crate) struct Sys4ProcessCarrier {
+    envelope: MailboxEnvelope,
+}
+
+impl Sys4ProcessCarrier {
+    pub(crate) fn target_locus(&self) -> &str {
+        &self.envelope.target_locus
+    }
+
+    pub(crate) fn edge_kind(&self) -> CommunicationEdgeKind {
+        self.envelope.edge_kind
+    }
+}
+
+/// Narrow observer-safe outbox view used by the I3-2 failed-extraction
+/// falsifier.  It exposes neither carrier payload nor authority material.
+#[derive(Debug, Clone, PartialEq, Eq, Default)]
+pub(crate) struct Sys4ProcessOutboxSummary {
+    pending_carrier_count: usize,
+    generated_owner_operations: BTreeSet<String>,
+}
+
+impl Sys4ProcessOutboxSummary {
+    pub(crate) const fn pending_carrier_count(&self) -> usize {
+        self.pending_carrier_count
+    }
+
+    pub(crate) fn generated_owner_operations_for_sys5(&self) -> BTreeSet<String> {
+        self.generated_owner_operations.clone()
     }
 }
 
@@ -6716,20 +7252,28 @@ impl CachedDelivery {
 
 #[derive(Clone)]
 pub(crate) struct M9AuthorityLifecycle {
-    publisher: M9AuthoritySuccessorPublisher,
+    /// Process images retain no successor publisher.  A `None` lifecycle is
+    /// therefore deliberately non-issuing and every successor path fails
+    /// closed instead of reconstructing authority.
+    publisher: Option<M9AuthoritySuccessorPublisher>,
 }
 
 impl M9AuthorityLifecycle {
     fn matches_generation_for_restore(&self, generation: &M9AuthorityGeneration) -> bool {
-        self.publisher
-            .current_generation_for_restore()
-            .matches_for_restore(generation)
+        self.publisher.as_ref().is_some_and(|publisher| {
+            publisher
+                .current_generation_for_restore()
+                .matches_for_restore(generation)
+        })
     }
 
     /// Private M9 publisher continuation state retained by a SYS-4 local
     /// cut. It is opaque outside this module and cannot create authority.
     fn private_restore_integrity_digest(&self) -> String {
-        self.publisher.private_restore_integrity_digest()
+        self.publisher.as_ref().map_or_else(
+            || "m9-authority-lifecycle:publisher-absent".to_string(),
+            M9AuthoritySuccessorPublisher::private_restore_integrity_digest,
+        )
     }
 
     /// M9, not SYS-4, adopts exact runtime validation observations before a
@@ -6737,7 +7281,9 @@ impl M9AuthorityLifecycle {
     /// authority-floor guard; a false result is a fail-closed identity or
     /// lineage mismatch, never an invitation to reconstruct observations.
     fn synchronize_from_live_generation(&mut self, live: &M9AuthorityGeneration) -> bool {
-        self.publisher.synchronize_runtime_observations_from(live)
+        self.publisher
+            .as_mut()
+            .is_some_and(|publisher| publisher.synchronize_runtime_observations_from(live))
     }
 
     fn transition(
@@ -6752,18 +7298,22 @@ impl M9AuthorityLifecycle {
             crate::m9_auth_verification::M9AdmissionDiagnostics,
         >,
     ) -> Sys4Result<M9AuthorityTransition> {
-        let prior = self.publisher.current_inspection();
-        let prior_publisher = self.publisher.clone();
-        let prior_runtime_validation_observations = self
-            .publisher
-            .current_runtime_validation_observation_snapshot();
+        let Some(publisher) = self.publisher.as_mut() else {
+            return Err(Sys4DispatchDiagnostics::one(
+                Sys4DiagnosticKind::ProgramAdmissionMismatch,
+            ));
+        };
+        let prior = publisher.current_inspection();
+        let prior_publisher = publisher.clone();
+        let prior_runtime_validation_observations =
+            publisher.current_runtime_validation_observation_snapshot();
         let lineage = prior
             .designated_consumer_lineage(value_name, consumer)
             .cloned()
             .ok_or_else(|| {
                 Sys4DispatchDiagnostics::one(Sys4DiagnosticKind::MissingConsumerCapability)
             })?;
-        let generation = operation(&mut self.publisher).map_err(|_| {
+        let generation = operation(publisher).map_err(|_| {
             Sys4DispatchDiagnostics::one(Sys4DiagnosticKind::MissingConsumerCapability)
         })?;
         let sealed_m9_inspection =
@@ -6818,13 +7368,16 @@ impl M9AuthorityLifecycle {
         &mut self,
         lineage: &M9DesignatedSourceReleaseLineage,
     ) -> Sys4Result<M9AuthorityTransition> {
-        let prior = self.publisher.current_inspection();
-        let prior_publisher = self.publisher.clone();
-        let prior_runtime_validation_observations = self
-            .publisher
-            .current_runtime_validation_observation_snapshot();
-        let generation = self
-            .publisher
+        let Some(publisher) = self.publisher.as_mut() else {
+            return Err(Sys4DispatchDiagnostics::one(
+                Sys4DiagnosticKind::ProgramAdmissionMismatch,
+            ));
+        };
+        let prior = publisher.current_inspection();
+        let prior_publisher = publisher.clone();
+        let prior_runtime_validation_observations =
+            publisher.current_runtime_validation_observation_snapshot();
+        let generation = publisher
             .revoke_designated_source_release(lineage)
             .map_err(|_| {
                 Sys4DispatchDiagnostics::one(Sys4DiagnosticKind::MissingSourceReleaseAuthority)
@@ -6852,13 +7405,16 @@ impl M9AuthorityLifecycle {
         relation: &str,
         checked_primary_locus: &str,
     ) -> Sys4Result<M9AuthorityTransition> {
-        let prior = self.publisher.current_inspection();
-        let prior_publisher = self.publisher.clone();
-        let prior_runtime_validation_observations = self
-            .publisher
-            .current_runtime_validation_observation_snapshot();
-        let (generation, retirement) = self
-            .publisher
+        let Some(publisher) = self.publisher.as_mut() else {
+            return Err(Sys4DispatchDiagnostics::one(
+                Sys4DiagnosticKind::ProgramAdmissionMismatch,
+            ));
+        };
+        let prior = publisher.current_inspection();
+        let prior_publisher = publisher.clone();
+        let prior_runtime_validation_observations =
+            publisher.current_runtime_validation_observation_snapshot();
+        let (generation, retirement) = publisher
             .retire_source_declared_primary_anchor(relation, checked_primary_locus)
             .map_err(|_| Sys4DispatchDiagnostics::one(Sys4DiagnosticKind::M8ExecutionRejected))?;
         let sealed_m9_inspection =
@@ -6879,13 +7435,16 @@ impl M9AuthorityLifecycle {
         &mut self,
         relation: &str,
     ) -> Sys4Result<M9AuthorityTransition> {
-        let prior = self.publisher.current_inspection();
-        let prior_publisher = self.publisher.clone();
-        let prior_runtime_validation_observations = self
-            .publisher
-            .current_runtime_validation_observation_snapshot();
-        let (generation, reacquire) = self
-            .publisher
+        let Some(publisher) = self.publisher.as_mut() else {
+            return Err(Sys4DispatchDiagnostics::one(
+                Sys4DiagnosticKind::ProgramAdmissionMismatch,
+            ));
+        };
+        let prior = publisher.current_inspection();
+        let prior_publisher = publisher.clone();
+        let prior_runtime_validation_observations =
+            publisher.current_runtime_validation_observation_snapshot();
+        let (generation, reacquire) = publisher
             .reacquire_source_declared_primary_anchor(relation)
             .map_err(|_| Sys4DispatchDiagnostics::one(Sys4DiagnosticKind::M8ExecutionRejected))?;
         let sealed_m9_inspection =
@@ -6902,10 +7461,12 @@ impl M9AuthorityLifecycle {
     /// uninstalled successor. A stale or foreign transition cannot roll back
     /// a publisher that has since advanced.
     fn rollback_uninstalled_transition(&mut self, transition: &M9AuthorityTransition) -> bool {
-        self.publisher.restore_uninstalled_successor(
-            transition.prior_publisher.clone(),
-            &transition.generation,
-        )
+        self.publisher.as_mut().is_some_and(|publisher| {
+            publisher.restore_uninstalled_successor(
+                transition.prior_publisher.clone(),
+                &transition.generation,
+            )
+        })
     }
 }
 
@@ -8540,6 +9101,103 @@ impl LocalFabric {
         }
     }
 
+    /// Remove one generated carrier from its assigned local outbox for a
+    /// by-value process handoff.  This is intentionally below transport: it
+    /// neither binds a connection nor creates a retry/receipt policy.
+    pub(crate) fn take_outbound_process_carrier(
+        &mut self,
+        source_locus: &str,
+        envelope_id: &str,
+    ) -> Sys4Result<Sys4ProcessCarrier> {
+        // Validate the still-pending envelope before removing it.  A rejected
+        // process handoff must leave the generated carrier available for the
+        // caller's explicit later failure/retry policy.
+        self.validate_outbound_process_carrier(source_locus, envelope_id)?;
+        let runtime = self
+            .loci
+            .get_mut(source_locus)
+            .ok_or_else(|| Sys4DispatchDiagnostics::one(Sys4DiagnosticKind::WrongTargetLocus))?;
+        let position = runtime
+            .outgoing_mailbox
+            .pending
+            .iter()
+            .position(|envelope| envelope.envelope_id == envelope_id)
+            .ok_or_else(|| Sys4DispatchDiagnostics::one(Sys4DiagnosticKind::UnavailableEnvelope))?;
+        let envelope = runtime
+            .outgoing_mailbox
+            .pending
+            .remove(position)
+            .expect("located outbound process carrier remains present");
+        Ok(Sys4ProcessCarrier { envelope })
+    }
+
+    pub(crate) fn validate_outbound_process_carrier(
+        &self,
+        source_locus: &str,
+        envelope_id: &str,
+    ) -> Sys4Result<()> {
+        let runtime = self
+            .loci
+            .get(source_locus)
+            .ok_or_else(|| Sys4DispatchDiagnostics::one(Sys4DiagnosticKind::WrongTargetLocus))?;
+        let envelope = runtime
+            .outgoing_mailbox
+            .pending
+            .iter()
+            .find(|envelope| envelope.envelope_id == envelope_id)
+            .ok_or_else(|| Sys4DispatchDiagnostics::one(Sys4DiagnosticKind::UnavailableEnvelope))?;
+        if envelope.source_locus != source_locus
+            || !envelope_matches_projected_edge(&self.program, envelope)
+        {
+            return Err(Sys4DispatchDiagnostics::one(
+                Sys4DiagnosticKind::CarrierProvenanceMismatch,
+            ));
+        }
+        Ok(())
+    }
+
+    pub(crate) fn i3_process_outbox_summary(&self) -> Sys4ProcessOutboxSummary {
+        let entries = self
+            .loci
+            .values()
+            .flat_map(|runtime| runtime.outgoing_mailbox.pending.iter());
+        let mut summary = Sys4ProcessOutboxSummary::default();
+        for envelope in entries {
+            summary.pending_carrier_count += 1;
+            if envelope.edge_kind == CommunicationEdgeKind::OwnerRequest {
+                summary
+                    .generated_owner_operations
+                    .insert(envelope.operation_id.clone());
+            }
+        }
+        summary
+    }
+
+    /// Admit a generated by-value carrier at the selected process-local
+    /// target.  The receiver resolves the exact incident edge from its own
+    /// assigned projection before the carrier enters its inbox; sender,
+    /// deployment, and future transport metadata cannot select an owner.
+    pub(crate) fn accept_inbound_process_carrier(
+        &mut self,
+        carrier: Sys4ProcessCarrier,
+    ) -> Sys4Result<LocusStep> {
+        let target_locus = carrier.envelope.target_locus.clone();
+        if !self.loci.contains_key(&target_locus)
+            || !envelope_matches_projected_edge(&self.program, &carrier.envelope)
+        {
+            return Err(Sys4DispatchDiagnostics::one(
+                Sys4DiagnosticKind::CarrierProvenanceMismatch,
+            ));
+        }
+        self.loci
+            .get_mut(&target_locus)
+            .expect("checked local target exists")
+            .incoming_mailbox
+            .pending
+            .push_back(carrier.envelope);
+        self.step_locus(&target_locus)
+    }
+
     /// Activate an opaque candidate built by the checked-source → projection
     /// → M9-admission pipeline. All checks and plan replacement run against
     /// a clone-only candidate; rejected candidates mutate only lifecycle
@@ -8690,7 +9348,10 @@ impl LocalFabric {
         let Some((rebased_authority_generation, rebased_authority_publisher)) = candidate
             .patch_admission
             .authority_successor
-            .for_checked_patch_rebase_of(&self.authority_generation)
+            .as_ref()
+            .and_then(|publisher| {
+                publisher.for_checked_patch_rebase_of(&self.authority_generation)
+            })
         else {
             let mismatch = M9AuthorityFrontierMismatchInspection {
                 active_generation: self.current_m9_authority_inspection().generation(),
@@ -8769,7 +9430,7 @@ impl LocalFabric {
         }
         prepared.authority_generation = rebased_authority_generation;
         prepared.authority_lifecycle = M9AuthorityLifecycle {
-            publisher: rebased_authority_publisher,
+            publisher: Some(rebased_authority_publisher),
         };
         // `clone_for_checked_patch` intentionally detached this candidate's
         // floor.  The canonical floor has now been rebased under its guard,

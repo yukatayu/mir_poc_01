@@ -2256,6 +2256,61 @@ fn all_occurrences() -> [CarrierOccurrenceSlotKind; 4] {
     ]
 }
 
+#[derive(Debug, Clone, PartialEq, Eq, PartialOrd, Ord)]
+/// One source-derived designated-input identity carried by both halves of a
+/// generated request/receipt pair.  It is reference-only: no state payload,
+/// authority material, source text, or materialized `InputFrontier` travels
+/// with the descriptor.
+pub(crate) struct ProjectedDesignatedRemoteInputRequirement {
+    producer_locus: String,
+    evaluator: String,
+    result: String,
+    dependency_ordinal: usize,
+    trigger_frontier: String,
+}
+
+impl ProjectedDesignatedRemoteInputRequirement {
+    pub(super) fn new(
+        producer_locus: impl Into<String>,
+        evaluator: impl Into<String>,
+        result: impl Into<String>,
+        dependency_ordinal: usize,
+        trigger_frontier: impl Into<String>,
+    ) -> Self {
+        Self {
+            producer_locus: producer_locus.into(),
+            evaluator: evaluator.into(),
+            result: result.into(),
+            dependency_ordinal,
+            trigger_frontier: trigger_frontier.into(),
+        }
+    }
+
+    pub(crate) fn producer_locus(&self) -> &str {
+        &self.producer_locus
+    }
+
+    pub(crate) fn evaluator(&self) -> &str {
+        &self.evaluator
+    }
+
+    pub(crate) fn result(&self) -> &str {
+        &self.result
+    }
+
+    pub(crate) const fn dependency_ordinal(&self) -> usize {
+        self.dependency_ordinal
+    }
+
+    pub(crate) fn trigger_frontier(&self) -> &str {
+        &self.trigger_frontier
+    }
+
+    pub(crate) const fn is_reference_only(&self) -> bool {
+        true
+    }
+}
+
 #[derive(Debug, Clone, PartialEq, Eq)]
 pub(crate) struct CommunicationEdge {
     operation: String,
@@ -2271,6 +2326,7 @@ pub(crate) struct CommunicationEdge {
     target_fragment_ref: String,
     checked_core_identity: CheckedCoreIdentity,
     carrier_contract: CarrierContract,
+    designated_remote_input_requirement: Option<ProjectedDesignatedRemoteInputRequirement>,
 }
 
 impl CommunicationEdge {
@@ -2325,6 +2381,12 @@ impl CommunicationEdge {
     pub(crate) fn checked_core_identity(&self) -> &CheckedCoreIdentity {
         &self.checked_core_identity
     }
+
+    pub(crate) fn designated_remote_input_requirement(
+        &self,
+    ) -> Option<&ProjectedDesignatedRemoteInputRequirement> {
+        self.designated_remote_input_requirement.as_ref()
+    }
 }
 
 #[derive(Debug, Clone, PartialEq, Eq, Default)]
@@ -2343,6 +2405,8 @@ pub(super) struct CommunicationEdgeInput {
     pub(super) checked_core_identity: CheckedCoreIdentity,
     pub(super) source_fragment_ref: String,
     pub(super) target_fragment_ref: String,
+    pub(super) designated_remote_input_requirement:
+        Option<ProjectedDesignatedRemoteInputRequirement>,
 }
 
 pub(crate) struct CommunicationEdges<'a> {
@@ -2492,6 +2556,7 @@ impl CommunicationPlan {
         let checked_core_identity = input.checked_core_identity;
         let source_fragment_ref = input.source_fragment_ref;
         let target_fragment_ref = input.target_fragment_ref;
+        let designated_remote_input_requirement = input.designated_remote_input_requirement;
         let ordinal = checked_core_identity.dependency_ordinal();
         self.edges.push(CommunicationEdge {
             edge_ref: format!(
@@ -2509,6 +2574,7 @@ impl CommunicationPlan {
             checked_core_identity,
             source_fragment_ref,
             target_fragment_ref,
+            designated_remote_input_requirement,
         });
     }
 
@@ -2531,6 +2597,55 @@ impl CommunicationPlan {
                     &right.edge_ref,
                 ))
         });
+    }
+
+    /// I3-2 process-image falsifier only.  It creates a detached malformed
+    /// candidate by removing the typed requirement from one designated edge;
+    /// it is unavailable to source projection and cannot add a requirement.
+    pub(crate) fn remove_designated_remote_input_requirement_for_i3_process_test(
+        &mut self,
+    ) -> bool {
+        let Some(edge) = self.edges.iter_mut().find(|edge| {
+            matches!(
+                edge.kind,
+                CommunicationEdgeKind::DesignatedInputRequest
+                    | CommunicationEdgeKind::DesignatedInputReceipt
+            )
+        }) else {
+            return false;
+        };
+        edge.designated_remote_input_requirement = None;
+        true
+    }
+
+    /// I3-2 process-image falsifier only.  It leaves the generated route
+    /// intact but makes one request/receipt descriptor disagree, so admission
+    /// must reject rather than reconstruct a semantic tuple.
+    pub(crate) fn mismatch_designated_remote_input_requirement_for_i3_process_test(
+        &mut self,
+    ) -> bool {
+        let Some(request) = self.edges.iter().find(|edge| {
+            edge.kind == CommunicationEdgeKind::DesignatedInputRequest
+                && edge.designated_remote_input_requirement.is_some()
+        }) else {
+            return false;
+        };
+        let operation = request.operation.clone();
+        let requirement = request
+            .designated_remote_input_requirement
+            .as_ref()
+            .expect("filtered designated request retains requirement")
+            .clone();
+        let Some(receipt) = self.edges.iter_mut().find(|edge| {
+            edge.operation == operation
+                && edge.kind == CommunicationEdgeKind::DesignatedInputReceipt
+        }) else {
+            return false;
+        };
+        let mut mismatched = requirement;
+        mismatched.trigger_frontier = format!("{}:i3-test-mismatch", mismatched.trigger_frontier);
+        receipt.designated_remote_input_requirement = Some(mismatched);
+        true
     }
 
     #[cfg(test)]
@@ -2587,6 +2702,7 @@ impl CommunicationPlan {
             checked_core_identity,
             source_fragment_ref,
             target_fragment_ref,
+            designated_remote_input_requirement: None,
         });
         self.sort();
     }
@@ -4121,6 +4237,145 @@ impl GlobalProjectionResult {
 
     pub(crate) fn static_conflict_policy(&self) -> &StaticConflictPolicy {
         &self.static_conflict_policy
+    }
+
+    /// Derive a sealed process-local projection view from the checked global
+    /// projection.  Only executable fragments for assigned loci and generated
+    /// edges incident to those loci remain.  The original projection identity
+    /// is retained as provenance rather than recomputing a smaller topology.
+    pub(crate) fn restricted_to_loci(&self, assigned_loci: &BTreeSet<String>) -> Self {
+        let locus_programs = self
+            .locus_programs
+            .iter()
+            .filter(|(locus, _)| assigned_loci.contains(*locus))
+            .map(|(locus, program)| (locus.clone(), program.clone()))
+            .collect::<BTreeMap<_, _>>();
+        let retained_fragment_refs = locus_programs
+            .values()
+            .flat_map(|program| program.operations.entries.iter())
+            .map(|fragment| fragment.fragment_ref.clone())
+            .collect::<BTreeSet<_>>();
+        let communication_plan = CommunicationPlan {
+            edges: self
+                .communication_plan
+                .edges
+                .iter()
+                .filter(|edge| {
+                    assigned_loci.contains(&edge.source_locus)
+                        || assigned_loci.contains(&edge.target_locus)
+                })
+                .cloned()
+                .collect(),
+        };
+        let retained_edge_refs = communication_plan
+            .edges
+            .iter()
+            .map(|edge| edge.edge_ref.clone())
+            .collect::<BTreeSet<_>>();
+        let effect_handler_plan = EffectHandlerPlan {
+            handlers: self
+                .effect_handler_plan
+                .handlers
+                .iter()
+                .filter(|handler| assigned_loci.contains(&handler.locus))
+                .cloned()
+                .collect(),
+        };
+        let mut relation_graph = self.relation_graph.clone();
+        relation_graph.relations.retain(|_, relation| {
+            assigned_loci.contains(&relation.owner_locus)
+                || relation
+                    .consumer_locus
+                    .as_ref()
+                    .is_some_and(|consumer| assigned_loci.contains(consumer))
+        });
+        relation_graph.typed_dependency_edges.retain(|edge| {
+            relation_graph.relations.contains_key(&edge.from.relation)
+                && relation_graph.relations.contains_key(&edge.to.relation)
+        });
+        let retained_relations = relation_graph
+            .relations
+            .keys()
+            .cloned()
+            .collect::<BTreeSet<_>>();
+        let mut persistence_plan = self.persistence_plan.clone();
+        persistence_plan
+            .by_locus
+            .retain(|locus, _| assigned_loci.contains(locus));
+        persistence_plan
+            .by_relation
+            .retain(|relation, _| retained_relations.contains(relation));
+        // Designated persistence is installed only by a local evaluator or
+        // consumer fragment; retaining it without that artifact would turn a
+        // process image into a partial global plan.
+        let retained_designated_names = locus_programs
+            .values()
+            .flat_map(|program| program.operations.entries.iter())
+            .filter_map(|fragment| {
+                fragment
+                    .designated_checked_core()
+                    .map(|core| format!("{}.{}", core.evaluator(), core.result()))
+            })
+            .collect::<BTreeSet<_>>();
+        persistence_plan
+            .by_designated
+            .retain(|name, _| retained_designated_names.contains(name));
+        persistence_plan.global.clear();
+        let observation_plan = ObservationPlan {
+            rows: self
+                .observation_plan
+                .rows
+                .iter()
+                .filter(|row| {
+                    retained_fragment_refs.contains(&row.fragment_ref)
+                        || row
+                            .edge_ref
+                            .as_ref()
+                            .is_some_and(|edge_ref| retained_edge_refs.contains(edge_ref))
+                })
+                .cloned()
+                .collect(),
+        };
+        let projected_source_map = ProjectedSourceMap {
+            entries: self
+                .projected_source_map
+                .entries
+                .iter()
+                .filter(|(entry_ref, entry)| {
+                    retained_fragment_refs.contains(*entry_ref)
+                        || entry
+                            .edge_ref
+                            .as_ref()
+                            .is_some_and(|edge_ref| retained_edge_refs.contains(edge_ref))
+                })
+                .map(|(entry_ref, entry)| (entry_ref.clone(), entry.clone()))
+                .collect(),
+        };
+        let static_conflict_policy = StaticConflictPolicy {
+            designated_result_consumers: self
+                .static_conflict_policy
+                .designated_result_consumers
+                .iter()
+                .filter(|(_, policy)| assigned_loci.contains(&policy.accepted_consumer_locus))
+                .map(|(operation, policy)| (operation.clone(), policy.clone()))
+                .collect(),
+        };
+
+        Self {
+            checked_program_identity: self.checked_program_identity.clone(),
+            projection_identity: self.projection_identity.clone(),
+            locus_programs,
+            communication_plan,
+            effect_handler_plan,
+            relation_graph,
+            observation_plan,
+            persistence_plan,
+            projected_source_map,
+            static_readiness: self.static_readiness,
+            runtime_admission_status: self.runtime_admission_status,
+            backend_requirements: self.backend_requirements.clone(),
+            static_conflict_policy,
+        }
     }
 
     pub(crate) fn new(

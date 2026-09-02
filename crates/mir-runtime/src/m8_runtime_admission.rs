@@ -5,6 +5,8 @@
 //! matched by typed evidence.  Deferred authorization and verification remain
 //! explicitly outside this boundary and are reported to M9.
 
+use std::collections::BTreeSet;
+
 use mir_semantics::{
     evaluation_materialization::{EvaluationPolicy, InputFrontier, ObservationPolicy, PolicyStamp},
     shared_model::{ResultFrontier, SourceRef},
@@ -1041,6 +1043,88 @@ impl M8RuntimeInstance {
 
     pub(crate) fn relation_execution_plans(&self) -> &[M8RelationExecutionPlan] {
         &self.relation_execution_plans
+    }
+
+    /// Restrict this already-admitted, source-free execution inventory to
+    /// plans evaluated at the assigned loci.  This filter retains the parent
+    /// checked-program identity and never performs a second M8 admission.
+    pub(crate) fn restricted_to_loci(&self, assigned_loci: &BTreeSet<String>) -> Self {
+        let owner_execution_plans = self
+            .owner_execution_plans
+            .iter()
+            .filter(|plan| assigned_loci.contains(plan.owner_locus()))
+            .cloned()
+            .collect::<Vec<_>>();
+        let designated_execution_plans = self
+            .designated_execution_plans
+            .iter()
+            .filter(|plan| assigned_loci.contains(plan.core().evaluator()))
+            .cloned()
+            .collect::<Vec<_>>();
+        let relation_execution_plans = self
+            .relation_execution_plans
+            .iter()
+            .filter(|plan| assigned_loci.contains(plan.core().owner_locus()))
+            .cloned()
+            .collect::<Vec<_>>();
+        let designated_values = self
+            .designated_values
+            .iter()
+            .filter(|value| {
+                designated_execution_plans
+                    .iter()
+                    .any(|plan| plan.name() == value.name())
+            })
+            .cloned()
+            .collect::<Vec<_>>();
+        let retained_source_refs = owner_execution_plans
+            .iter()
+            .map(M8OwnerExecutionPlan::source_ref)
+            .chain(
+                designated_execution_plans
+                    .iter()
+                    .map(M8DesignatedExecutionPlan::source_ref),
+            )
+            .chain(
+                relation_execution_plans
+                    .iter()
+                    .map(M8RelationExecutionPlan::source_ref),
+            )
+            .collect::<Vec<_>>();
+        let has_retained_source_ref =
+            |source_ref: &SourceRef| retained_source_refs.contains(&source_ref);
+        let admission_evidence = self
+            .admission_evidence
+            .entries
+            .iter()
+            .filter(|evidence| has_retained_source_ref(evidence.source_ref()))
+            .cloned()
+            .collect::<Vec<_>>();
+
+        Self {
+            program_identity: self.program_identity.clone(),
+            runtime_alias: self.runtime_alias.clone(),
+            ordered_lowering: OrderedRuntimeLowering {
+                entries: self
+                    .ordered_lowering
+                    .entries
+                    .iter()
+                    .filter(|entry| has_retained_source_ref(entry.source_ref()))
+                    .cloned()
+                    .collect(),
+            },
+            admission: M8RuntimeAdmission {
+                program_identity: self.admission.program_identity.clone(),
+                evidence: admission_evidence.clone(),
+            },
+            admission_evidence: M8AdmissionEvidenceRow {
+                entries: admission_evidence,
+            },
+            designated_values,
+            designated_execution_plans,
+            owner_execution_plans,
+            relation_execution_plans,
+        }
     }
 
     pub fn relation_plan(&self, name: &str) -> Option<&M8RelationExecutionPlan> {

@@ -3,7 +3,7 @@
 //! M8 validates references to these finite records but never creates a grant,
 //! refreshes a witness, or acts as an authentication provider.
 
-use std::collections::BTreeMap;
+use std::collections::{BTreeMap, BTreeSet};
 
 use mir_semantics::shared_model::ResultVersion;
 
@@ -531,6 +531,38 @@ impl M8AuthorityState {
 
     pub fn contains_witness(&self, reference: &str) -> bool {
         self.witness_records.contains_key(reference)
+    }
+
+    /// Restrict already-admitted authority records to the exact references
+    /// consumed by a sealed downstream execution image.  This is a pure
+    /// filter: it never issues, refreshes, or rewrites a membership,
+    /// capability, or witness record.
+    pub(crate) fn restricted_to_references(
+        &self,
+        membership_refs: &BTreeSet<String>,
+        capability_refs: &BTreeSet<String>,
+        witness_refs: &BTreeSet<String>,
+    ) -> Self {
+        Self {
+            memberships: self
+                .memberships
+                .iter()
+                .filter(|(reference, _)| membership_refs.contains(*reference))
+                .map(|(reference, record)| (reference.clone(), record.clone()))
+                .collect(),
+            capability_grants: self
+                .capability_grants
+                .iter()
+                .filter(|(reference, _)| capability_refs.contains(*reference))
+                .map(|(reference, grant)| (reference.clone(), grant.clone()))
+                .collect(),
+            witness_records: self
+                .witness_records
+                .iter()
+                .filter(|(reference, _)| witness_refs.contains(*reference))
+                .map(|(reference, record)| (reference.clone(), record.clone()))
+                .collect(),
+        }
     }
 }
 

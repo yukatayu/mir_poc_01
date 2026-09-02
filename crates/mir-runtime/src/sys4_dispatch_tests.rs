@@ -786,6 +786,64 @@ fn owner_attack_action(operation: &str) -> SourceAction {
     SourceAction::owner_operation(operation).with_argument("target", "self")
 }
 
+#[test]
+fn i3_outbound_process_carrier_wrong_expected_provenance_preserves_the_exact_pending_envelope() {
+    let checked = owner_endpoint_checked();
+    let projection = owner_endpoint_projection(&checked);
+    let program = fabric_program(projection);
+    let mut fabric = boot(&checked, program, BackendProfile::St);
+
+    let submitted = fabric
+        .submit_source_action(owner_attack_action("attack"))
+        .expect("source action produces the generated owner-request envelope in A's outbox");
+    let pending = fabric
+        .locus_runtime("A")
+        .expect("A exists")
+        .outgoing_mailbox()
+        .pending_envelopes()
+        .single();
+    assert_eq!(pending.envelope_id(), submitted.envelope_id());
+    let before = fabric.i3_process_outbox_summary();
+    assert_eq!(before.pending_carrier_count(), 1);
+    assert_eq!(
+        before.generated_owner_operations_for_sys5(),
+        BTreeSet::from(["attack".to_string()])
+    );
+
+    assert_sys4_diag(
+        fabric.take_outbound_process_carrier("S", pending.envelope_id()),
+        Sys4DiagnosticKind::UnavailableEnvelope,
+    );
+    let after_rejection = fabric.i3_process_outbox_summary();
+    assert_eq!(
+        after_rejection.pending_carrier_count(),
+        1,
+        "a wrong expected source/provenance call must not dequeue the pending envelope"
+    );
+    assert_eq!(
+        fabric
+            .locus_runtime("A")
+            .expect("A remains available after rejection")
+            .outgoing_mailbox()
+            .pending_envelopes()
+            .single()
+            .envelope_id(),
+        pending.envelope_id(),
+        "the exact envelope id must remain available for the later correct extraction"
+    );
+
+    let carrier = fabric
+        .take_outbound_process_carrier("A", pending.envelope_id())
+        .expect("the exact still-pending envelope extracts with its actual provenance");
+    assert_eq!(carrier.target_locus(), "S");
+    assert_eq!(carrier.edge_kind(), CommunicationEdgeKind::OwnerRequest);
+    assert_eq!(
+        fabric.i3_process_outbox_summary().pending_carrier_count(),
+        0,
+        "only the correct extraction consumes the exact pending envelope"
+    );
+}
+
 fn staged_four_locus_owner_attack(
     fabric: &mut LocalFabric,
     projection: &GlobalProjectionResult,

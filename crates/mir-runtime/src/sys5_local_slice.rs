@@ -1409,6 +1409,20 @@ impl Sys5LocalProject {
         &self.semantic_summary
     }
 
+    /// Opaque parent-projection provenance for the private I3 process-image
+    /// builder.  The result is a reference only: it carries neither source
+    /// text nor the global projection itself.
+    pub(crate) fn i3_parent_projection_ref(&self) -> String {
+        let mut hasher = Sha256::new();
+        hasher.update(b"mirrorea/sys5/i3-parent-projection/v1\\0");
+        hasher.update(format!("{:?}", self.projection.projection_identity()));
+        hasher.update(format!("{:?}", self.projection.communication_plan()));
+        format!(
+            "sys5-i3-parent-projection-sha256-v1:{:x}",
+            hasher.finalize()
+        )
+    }
+
     /// Returns a reference-only snapshot of exactly one generated I2 carrier
     /// selected by its retained opaque edge reference.  This doc-hidden I3-0
     /// evidence hook reads the original projection only: it does not reparse

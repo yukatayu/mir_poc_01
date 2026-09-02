@@ -12,8 +12,9 @@ use super::model::{
     AuthorityRequirements, BackendRequirements, CarrierContract, CheckedCoreIdentity,
     CommunicationEdgeInput, CommunicationEdgeKind, ConsumerRelationProjectionDescriptor,
     DeclaredLogicalTopology, EffectHandlerInput, EffectHandlerKind, GlobalProjectionResult,
-    LocusTag, PlacementSpecificCore, ProjectedOperationFragment, ProjectedOperationFragmentKind,
-    ProjectedRelation, ProjectedRelationAnchor, ProjectionDiagnosticKind, ProjectionDiagnostics,
+    LocusTag, PlacementSpecificCore, ProjectedDesignatedRemoteInputRequirement,
+    ProjectedOperationFragment, ProjectedOperationFragmentKind, ProjectedRelation,
+    ProjectedRelationAnchor, ProjectionDiagnosticKind, ProjectionDiagnostics,
     RuntimeAdmissionStatus, RuntimeSeamRequirements, SemanticObligations,
 };
 
@@ -40,7 +41,7 @@ pub(crate) fn project_checked_core(
                 project_relation(&mut result, checked, evaluation)
             }
             CheckedEvaluationKind::DesignatedPublishValue => {
-                project_designated(&mut result, checked, evaluation)
+                project_designated(&mut result, checked, evaluation)?
             }
             CheckedEvaluationKind::DesignatedResultConsume => {
                 project_designated_result_consumer(&mut result, checked, evaluation)
@@ -322,6 +323,7 @@ fn project_owner(
                 ),
                 source_fragment_ref: origin_artifact_ref.clone(),
                 target_fragment_ref: owner_artifact_ref.clone(),
+                designated_remote_input_requirement: None,
             });
         result
             .communication_plan_mut()
@@ -343,6 +345,7 @@ fn project_owner(
                 ),
                 source_fragment_ref: owner_artifact_ref.clone(),
                 target_fragment_ref: origin_artifact_ref.clone(),
+                designated_remote_input_requirement: None,
             });
     }
 }
@@ -450,6 +453,7 @@ fn project_relation(
                     ),
                     source_fragment_ref: owner_artifact_ref.clone(),
                     target_fragment_ref: consumer_artifact_ref.clone(),
+                    designated_remote_input_requirement: None,
                 });
         }
     }
@@ -498,7 +502,7 @@ fn project_designated(
     result: &mut GlobalProjectionResult,
     checked: &CheckedSurfaceV0,
     evaluation: &CheckedEvaluation,
-) {
+) -> Result<(), ProjectionDiagnostics> {
     let core = evaluation
         .designated_core()
         .expect("designated checked Core");
@@ -563,6 +567,19 @@ fn project_designated(
         .iter()
         .enumerate()
     {
+        let trigger_frontier = core.trigger().frontier().ok_or_else(|| {
+            ProjectionDiagnostics::one(
+                ProjectionDiagnosticKind::StructuralMismatch,
+                "designated remote input requires a checked trigger frontier",
+            )
+        })?;
+        let remote_input_requirement = ProjectedDesignatedRemoteInputRequirement::new(
+            dependency.source_owner_locus(),
+            core.evaluator(),
+            core.result(),
+            dependency_ordinal,
+            trigger_frontier,
+        );
         let source_owner = dependency.source_owner_locus();
         let source_ref = dependency.typed_state_read().source_ref();
         let source_artifact_ref = format!(
@@ -660,6 +677,7 @@ fn project_designated(
                     ),
                     source_fragment_ref: evaluator_artifact_ref.clone(),
                     target_fragment_ref: source_artifact_ref.clone(),
+                    designated_remote_input_requirement: Some(remote_input_requirement.clone()),
                 });
             result
                 .communication_plan_mut()
@@ -686,10 +704,12 @@ fn project_designated(
                     ),
                     source_fragment_ref: source_artifact_ref.clone(),
                     target_fragment_ref: evaluator_artifact_ref.clone(),
+                    designated_remote_input_requirement: Some(remote_input_requirement),
                 });
         }
     }
     result.persistence_plan_mut().add_designated(operation);
+    Ok(())
 }
 
 fn project_designated_result_consumer(
@@ -766,6 +786,7 @@ fn project_designated_result_consumer(
             ),
             source_fragment_ref: evaluator_fragment_ref,
             target_fragment_ref: consumer_fragment_ref,
+            designated_remote_input_requirement: None,
         });
     result
         .static_conflict_policy_mut()

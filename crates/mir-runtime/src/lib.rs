@@ -58,6 +58,8 @@ pub(crate) mod sys2_execution_backend;
 pub(crate) mod sys3_projection;
 #[cfg_attr(not(test), allow(dead_code))]
 pub(crate) mod sys4_dispatch;
+#[doc(hidden)]
+pub mod sys5_i3_process_runtime;
 /// Provisional, non-executing SYS-5 build/project facade.
 ///
 /// This exposes observer-safe summaries derived from the checked Core and the

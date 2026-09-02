@@ -961,6 +961,108 @@ pub(crate) struct M9RuntimeExecutionSeam {
 /// M9 boundary and carries the exact translated inventory and audit lineages
 /// needed by the kernel; it is neither a credential constructor nor a wire
 /// carrier.
+#[derive(Debug, Clone, Default)]
+pub(crate) struct M9ExecutionRestriction {
+    owner_operations: BTreeSet<(String, String)>,
+    relation_transitions: BTreeSet<(String, String)>,
+    designated_evaluators: BTreeSet<(String, String)>,
+    designated_evaluator_summary_rows: BTreeSet<(String, String)>,
+    designated_consumers: BTreeSet<(String, String)>,
+    designated_remote_inputs: BTreeSet<(String, String, String, usize, String)>,
+}
+
+impl M9ExecutionRestriction {
+    pub(crate) fn require_owner_operation(&mut self, operation: &str, owner_locus: &str) {
+        self.owner_operations
+            .insert((operation.to_string(), owner_locus.to_string()));
+    }
+
+    pub(crate) fn require_relation_transition(&mut self, relation: &str, transition: &str) {
+        self.relation_transitions
+            .insert((relation.to_string(), transition.to_string()));
+    }
+
+    pub(crate) fn require_designated_evaluator(
+        &mut self,
+        value_name: &str,
+        evaluator: &str,
+        result: &str,
+    ) {
+        self.designated_evaluators
+            .insert((evaluator.to_string(), result.to_string()));
+        self.designated_evaluator_summary_rows
+            .insert((value_name.to_string(), evaluator.to_string()));
+    }
+
+    pub(crate) fn require_designated_consumer(&mut self, consumer: &str, value_name: &str) {
+        self.designated_consumers
+            .insert((consumer.to_string(), value_name.to_string()));
+    }
+
+    pub(crate) fn require_designated_remote_input(
+        &mut self,
+        producer: &str,
+        evaluator: &str,
+        result: &str,
+        dependency_index: usize,
+        input_frontier: &str,
+    ) {
+        self.designated_remote_inputs.insert((
+            producer.to_string(),
+            evaluator.to_string(),
+            result.to_string(),
+            dependency_index,
+            input_frontier.to_string(),
+        ));
+    }
+
+    pub(crate) fn retains_owner_operation(&self, operation: &str, owner_locus: &str) -> bool {
+        self.owner_operations
+            .contains(&(operation.to_string(), owner_locus.to_string()))
+    }
+
+    pub(crate) fn retains_relation_transition(&self, relation: &str, transition: &str) -> bool {
+        self.relation_transitions
+            .contains(&(relation.to_string(), transition.to_string()))
+    }
+
+    pub(crate) fn retains_designated_evaluator(&self, evaluator: &str, result: &str) -> bool {
+        self.designated_evaluators
+            .contains(&(evaluator.to_string(), result.to_string()))
+    }
+
+    pub(crate) fn retains_designated_evaluator_summary_row(
+        &self,
+        value_name: &str,
+        evaluator: &str,
+    ) -> bool {
+        self.designated_evaluator_summary_rows
+            .contains(&(value_name.to_string(), evaluator.to_string()))
+    }
+
+    pub(crate) fn retains_designated_consumer(&self, consumer: &str, value_name: &str) -> bool {
+        self.designated_consumers
+            .contains(&(consumer.to_string(), value_name.to_string()))
+    }
+
+    pub(crate) fn retains_designated_remote_input(
+        &self,
+        producer: &str,
+        evaluator: &str,
+        result: &str,
+        dependency_index: usize,
+        input_frontier: &str,
+    ) -> bool {
+        self.designated_remote_inputs.contains(&(
+            producer.to_string(),
+            evaluator.to_string(),
+            result.to_string(),
+            dependency_index,
+            input_frontier.to_string(),
+        ))
+    }
+}
+
 #[derive(Clone)]
 #[cfg_attr(not(test), allow(dead_code))]
 pub(crate) struct M9AuthorityGeneration {
@@ -3518,6 +3620,90 @@ fn test_kernel_issue_membership(
 }
 
 impl M9AuthorityGeneration {
+    /// Validate that a SYS-4 process restriction names only exact, already
+    /// admitted authority rows and that each required static row has one
+    /// parent binding.  This is intentionally prior to filtering: a child
+    /// must not treat an omitted parent lineage as an empty local closure.
+    pub(crate) fn validate_execution_restriction_exact(
+        &self,
+        restriction: &M9ExecutionRestriction,
+    ) -> Result<(), ()> {
+        for (operation, owner_locus) in &restriction.owner_operations {
+            let uses = self
+                .owner_uses
+                .keys()
+                .filter(|(candidate, _, owner)| candidate == operation && owner == owner_locus)
+                .count();
+            let lineages = self
+                .kernel_owner_lineages
+                .keys()
+                .filter(|(candidate, _, owner)| candidate == operation && owner == owner_locus)
+                .count();
+            if uses != 1 || lineages != 1 {
+                return Err(());
+            }
+        }
+        if !restriction
+            .relation_transitions
+            .iter()
+            .all(|key| self.relation_uses.contains_key(key))
+        {
+            return Err(());
+        }
+        for (relation, transition) in &restriction.relation_transitions {
+            if transition == "reacquire_primary"
+                && !self
+                    .fresh_relation_reacquire_bindings
+                    .contains_key(relation)
+            {
+                return Err(());
+            }
+        }
+        if !restriction
+            .designated_evaluators
+            .iter()
+            .all(|key| self.designated_evaluation_uses.contains_key(key))
+            || !restriction
+                .designated_consumers
+                .iter()
+                .all(|key| self.designated_consumption_uses.contains_key(key))
+            || !restriction.designated_remote_inputs.iter().all(|key| {
+                self.kernel_designated_remote_input_lineages
+                    .contains_key(key)
+            })
+        {
+            return Err(());
+        }
+        Ok(())
+    }
+
+    /// I3-2 detached falsifier: remove an actual already-restricted owner
+    /// binding.  It cannot manufacture authority or touch a parent cohort.
+    pub(crate) fn remove_one_owner_binding_for_i3_process_test(&mut self) -> bool {
+        let Some(key) = self.owner_uses.keys().next().cloned() else {
+            return false;
+        };
+        self.owner_uses.remove(&key);
+        self.kernel_owner_lineages.remove(&key).is_some()
+    }
+
+    /// I3-2 detached falsifier: remove one actual source-release lineage.
+    pub(crate) fn remove_one_designated_remote_input_lineage_for_i3_process_test(
+        &mut self,
+    ) -> bool {
+        let Some(key) = self
+            .kernel_designated_remote_input_lineages
+            .keys()
+            .next()
+            .cloned()
+        else {
+            return false;
+        };
+        self.kernel_designated_remote_input_lineages
+            .remove(&key)
+            .is_some()
+    }
+
     /// A kernel-reference profile has no M8 authority inventory.  It exists
     /// only for deterministic crate tests that do not enter an admitted M9
     /// execution seam.
@@ -3541,6 +3727,194 @@ impl M9AuthorityGeneration {
             designated_source_release_failures: BTreeMap::new(),
             designated_consumer_validation_occurrences: BTreeMap::new(),
             owner_operation_validation_occurrences: BTreeMap::new(),
+            source_release_validation_occurrences: BTreeMap::new(),
+        }
+    }
+
+    /// Keep exactly the already-admitted authority material referenced by one
+    /// sealed process execution plan.  The selection is source/Core-derived
+    /// by SYS-4 from retained artifacts and incident edges; this function is
+    /// only a monotone filter over one M9 generation.  It never admits a new
+    /// authority fact, advances a generation, or drops a selected tombstone.
+    pub(crate) fn restricted_for_execution(&self, restriction: &M9ExecutionRestriction) -> Self {
+        let owner_uses = self
+            .owner_uses
+            .iter()
+            .filter(|((operation, _, owner_locus), _)| {
+                restriction
+                    .owner_operations
+                    .contains(&(operation.clone(), owner_locus.clone()))
+            })
+            .map(|(key, authority)| (key.clone(), authority.clone()))
+            .collect::<BTreeMap<_, _>>();
+        let relation_uses = self
+            .relation_uses
+            .iter()
+            .filter(|(key, _)| restriction.relation_transitions.contains(*key))
+            .map(|(key, authority)| (key.clone(), authority.clone()))
+            .collect::<BTreeMap<_, _>>();
+        let fresh_relation_reacquire_bindings = self
+            .fresh_relation_reacquire_bindings
+            .iter()
+            .filter(|(relation, _)| {
+                restriction
+                    .relation_transitions
+                    .iter()
+                    .any(|(candidate, transition)| {
+                        candidate == *relation && transition == "reacquire_primary"
+                    })
+            })
+            .map(|(relation, binding)| (relation.clone(), binding.clone()))
+            .collect::<BTreeMap<_, _>>();
+        let designated_evaluation_uses = self
+            .designated_evaluation_uses
+            .iter()
+            .filter(|(key, _)| restriction.designated_evaluators.contains(*key))
+            .map(|(key, authority)| (key.clone(), authority.clone()))
+            .collect::<BTreeMap<_, _>>();
+        let designated_consumption_uses = self
+            .designated_consumption_uses
+            .iter()
+            .filter(|(key, _)| restriction.designated_consumers.contains(*key))
+            .map(|(key, authority)| (key.clone(), authority.clone()))
+            .collect::<BTreeMap<_, _>>();
+        let kernel_owner_lineages = self
+            .kernel_owner_lineages
+            .iter()
+            .filter(|((operation, _, owner_locus), _)| {
+                restriction
+                    .owner_operations
+                    .contains(&(operation.clone(), owner_locus.clone()))
+            })
+            .map(|(key, lineage)| (key.clone(), lineage.clone()))
+            .collect::<BTreeMap<_, _>>();
+        let kernel_designated_remote_input_lineages = self
+            .kernel_designated_remote_input_lineages
+            .iter()
+            .filter(|(key, _)| restriction.designated_remote_inputs.contains(*key))
+            .map(|(key, lineage)| (key.clone(), lineage.clone()))
+            .collect::<BTreeMap<_, _>>();
+
+        let mut membership_refs = BTreeSet::new();
+        let mut capability_refs = BTreeSet::new();
+        let mut witness_refs = BTreeSet::new();
+        macro_rules! retain_authority_refs {
+            ($authority:expr) => {
+                if let Some(reference) = $authority.membership_ref() {
+                    membership_refs.insert(reference.to_string());
+                }
+                if let Some(reference) = $authority.capability_ref() {
+                    capability_refs.insert(reference.to_string());
+                }
+                if let Some(reference) = $authority.witness_ref() {
+                    witness_refs.insert(reference.to_string());
+                }
+            };
+        }
+        for authority in owner_uses.values() {
+            retain_authority_refs!(authority);
+        }
+        for authority in relation_uses.values() {
+            retain_authority_refs!(authority);
+        }
+        for binding in fresh_relation_reacquire_bindings.values() {
+            retain_authority_refs!(&binding.authority);
+        }
+        for authority in designated_evaluation_uses.values() {
+            retain_authority_refs!(authority);
+        }
+        for authority in designated_consumption_uses.values() {
+            retain_authority_refs!(authority);
+        }
+        for lineage in kernel_owner_lineages.values() {
+            membership_refs.insert(lineage.membership_ref().to_string());
+            capability_refs.insert(lineage.capability_ref().to_string());
+            witness_refs.insert(lineage.witness_ref().to_string());
+        }
+        for lineage in kernel_designated_remote_input_lineages.values() {
+            membership_refs.insert(lineage.membership_ref().to_string());
+            capability_refs.insert(lineage.capability_ref().to_string());
+            witness_refs.insert(lineage.witness_ref().to_string());
+        }
+
+        Self {
+            program_identity: self.program_identity.clone(),
+            generation: self.generation,
+            generation_ref: self.generation_ref.clone(),
+            authority_state: self.authority_state.restricted_to_references(
+                &membership_refs,
+                &capability_refs,
+                &witness_refs,
+            ),
+            owner_uses,
+            relation_uses,
+            fresh_relation_reacquire_bindings,
+            designated_evaluation_uses,
+            designated_consumption_uses,
+            kernel_owner_lineages,
+            revoked_owner_capabilities: self
+                .revoked_owner_capabilities
+                .iter()
+                .filter(|(operation, _, owner_locus)| {
+                    restriction
+                        .owner_operations
+                        .contains(&(operation.clone(), owner_locus.clone()))
+                })
+                .cloned()
+                .collect(),
+            revoked_designated_consumption_capabilities: self
+                .revoked_designated_consumption_capabilities
+                .iter()
+                .filter(|key| restriction.designated_consumers.contains(*key))
+                .cloned()
+                .collect(),
+            kernel_designated_remote_input_lineages,
+            designated_consumer_failures: self
+                .designated_consumer_failures
+                .iter()
+                .filter(|(key, _)| restriction.designated_consumers.contains(*key))
+                .map(|(key, failure)| (key.clone(), *failure))
+                .collect(),
+            designated_consumer_witness_retirements: self
+                .designated_consumer_witness_retirements
+                .iter()
+                .filter(|key| restriction.designated_consumers.contains(*key))
+                .cloned()
+                .collect(),
+            designated_source_release_failures: self
+                .designated_source_release_failures
+                .iter()
+                .filter(|((evaluator, result, producer, dependency, frontier), _)| {
+                    restriction.designated_remote_inputs.contains(&(
+                        producer.clone(),
+                        evaluator.clone(),
+                        result.clone(),
+                        *dependency,
+                        frontier.clone(),
+                    ))
+                })
+                .map(|(key, failure)| (key.clone(), *failure))
+                .collect(),
+            designated_consumer_validation_occurrences: self
+                .designated_consumer_validation_occurrences
+                .iter()
+                .filter(|((value, consumer, _), _)| {
+                    restriction
+                        .designated_consumers
+                        .contains(&(consumer.clone(), value.clone()))
+                })
+                .map(|(key, count)| (key.clone(), *count))
+                .collect(),
+            owner_operation_validation_occurrences: self
+                .owner_operation_validation_occurrences
+                .iter()
+                .filter(|((operation, owner_locus, _), _)| {
+                    restriction
+                        .owner_operations
+                        .contains(&(operation.clone(), owner_locus.clone()))
+                })
+                .map(|(key, count)| (key.clone(), *count))
+                .collect(),
             source_release_validation_occurrences: BTreeMap::new(),
         }
     }
