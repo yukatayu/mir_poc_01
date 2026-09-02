@@ -7,6 +7,12 @@
 
 use std::collections::BTreeSet;
 
+use serde::{Deserialize, Serialize};
+
+use mir_semantics::surface_v0_pipeline::private_snapshot::{
+    SnapshotCheckedProgramIdentity, SnapshotDesignatedCheckedCore, SnapshotRelationCheckedCore,
+    SnapshotSourceRef, SnapshotTypedExpression, SnapshotTypedStateRead,
+};
 use mir_semantics::{
     evaluation_materialization::{EvaluationPolicy, InputFrontier, ObservationPolicy, PolicyStamp},
     shared_model::{ResultFrontier, SourceRef},
@@ -1131,6 +1137,639 @@ impl M8RuntimeInstance {
         self.relation_execution_plans
             .iter()
             .find(|plan| plan.name() == name)
+    }
+
+    /// Export an already-admitted M8 execution image for the private I3
+    /// process bootstrap.  This copies the restricted, source-free execution
+    /// facts only; it neither invokes M8 admission nor exposes a public
+    /// serialization contract.
+    pub(crate) fn i3_private_snapshot(&self) -> M8I3PrivateSnapshot {
+        M8I3PrivateSnapshot::from_instance(self)
+    }
+
+    /// Restore an exact, already-admitted M8 execution image.  This is a
+    /// structural reconstruction of the sealed restricted facts, not a
+    /// source check, lowering, or M8 admission path.
+    pub(crate) fn from_i3_private_snapshot(
+        snapshot: M8I3PrivateSnapshot,
+    ) -> Result<Self, M8I3PrivateSnapshotError> {
+        snapshot.into_instance()
+    }
+}
+
+/// Fail-closed rejection of a private M8 execution snapshot.  The public
+/// runtime API never receives this carrier or its schema.
+#[derive(Debug, Clone, PartialEq, Eq)]
+pub(crate) enum M8I3PrivateSnapshotError {
+    SemanticSnapshot,
+    StructuralMismatch,
+}
+
+/// Versioned DTO for an already restricted M8 instance.  It deliberately
+/// retains no `CheckedSurfaceV0`, source text, or admission capability.
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[serde(deny_unknown_fields)]
+pub(crate) struct M8I3PrivateSnapshot {
+    version: u32,
+    program_identity: SnapshotCheckedProgramIdentity,
+    runtime_alias: String,
+    ordered_lowering: Vec<PrivateRuntimeLoweringEntrySnapshot>,
+    admission: PrivateM8RuntimeAdmissionSnapshot,
+    designated_execution_plans: Vec<PrivateM8DesignatedExecutionPlanSnapshot>,
+    owner_execution_plans: Vec<PrivateM8OwnerExecutionPlanSnapshot>,
+    relation_execution_plans: Vec<PrivateM8RelationExecutionPlanSnapshot>,
+}
+
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[serde(rename_all = "snake_case")]
+enum PrivateRuntimeLoweringKindSnapshot {
+    OwnerRequest,
+    OwnerLocalRead,
+    OwnerWrite,
+    ObserverPublish,
+    DesignatedDecision,
+    DesignatedResultConsume,
+    RelationPublish,
+    ConsumerLocalProjection,
+    DeferredPolicy,
+}
+
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[serde(deny_unknown_fields)]
+struct PrivateRuntimeLoweringEntrySnapshot {
+    ordinal: usize,
+    kind: PrivateRuntimeLoweringKindSnapshot,
+    source_ref: SnapshotSourceRef,
+    core_ref: String,
+}
+
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[serde(rename_all = "snake_case")]
+enum PrivateM8SecurityClassSnapshot {
+    Public,
+    Restricted,
+    Private,
+}
+
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[serde(deny_unknown_fields)]
+struct PrivateEvidenceSecurityLabelSnapshot {
+    value: String,
+    security_class: PrivateM8SecurityClassSnapshot,
+}
+
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[serde(deny_unknown_fields)]
+struct PrivateM8RuntimeAdmissionSnapshot {
+    program_identity: SnapshotCheckedProgramIdentity,
+    evidence: Vec<PrivateM8AdmissionEvidenceSnapshot>,
+}
+
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[serde(tag = "kind", rename_all = "snake_case", deny_unknown_fields)]
+enum PrivateM8AdmissionEvidenceSnapshot {
+    RelationVisibility {
+        relation: String,
+        label: PrivateEvidenceSecurityLabelSnapshot,
+        redaction: String,
+        source_ref: SnapshotSourceRef,
+    },
+    RelationLifetime {
+        relation: String,
+        live_lease: String,
+        binding_frontier: String,
+        source_ref: SnapshotSourceRef,
+    },
+    RelationFallbackValidity {
+        relation: String,
+        primary_epoch: String,
+        fallback_epoch: String,
+        source_ref: SnapshotSourceRef,
+    },
+    ValueVisibilityRedaction {
+        value: String,
+        label: PrivateEvidenceSecurityLabelSnapshot,
+        redaction: String,
+        source_ref: SnapshotSourceRef,
+    },
+    AuthDeferred {
+        name: String,
+        authority_label: String,
+        source_ref: SnapshotSourceRef,
+    },
+    VerifyDeferred {
+        name: String,
+        theorem: String,
+        witness_schema: String,
+        source_ref: SnapshotSourceRef,
+    },
+}
+
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[serde(deny_unknown_fields)]
+struct PrivateM8DesignatedExecutionPlanSnapshot {
+    name: String,
+    source_ref: SnapshotSourceRef,
+    core: SnapshotDesignatedCheckedCore,
+    visibility_label: PrivateEvidenceSecurityLabelSnapshot,
+    redaction: String,
+}
+
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[serde(deny_unknown_fields)]
+struct PrivateM8OwnerExecutionPlanSnapshot {
+    evaluation: String,
+    actor: String,
+    owner_locus: String,
+    source_ref: SnapshotSourceRef,
+    target: SnapshotTypedStateRead,
+    expression: SnapshotTypedExpression,
+}
+
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[serde(deny_unknown_fields)]
+struct PrivateM8RelationExecutionPlanSnapshot {
+    name: String,
+    source_ref: SnapshotSourceRef,
+    core: SnapshotRelationCheckedCore,
+    visibility_label: PrivateEvidenceSecurityLabelSnapshot,
+    redaction: String,
+    live_lease_ref: String,
+    binding_frontier: String,
+    primary_epoch: String,
+    fallback_epoch: String,
+}
+
+impl M8I3PrivateSnapshot {
+    const VERSION: u32 = 1;
+
+    fn from_instance(instance: &M8RuntimeInstance) -> Self {
+        Self {
+            version: Self::VERSION,
+            program_identity: SnapshotCheckedProgramIdentity::from_checked(
+                &instance.program_identity,
+            ),
+            runtime_alias: instance.runtime_alias.clone(),
+            ordered_lowering: instance
+                .ordered_lowering
+                .entries
+                .iter()
+                .map(PrivateRuntimeLoweringEntrySnapshot::from_entry)
+                .collect(),
+            admission: PrivateM8RuntimeAdmissionSnapshot::from_admission(&instance.admission),
+            designated_execution_plans: instance
+                .designated_execution_plans
+                .iter()
+                .map(PrivateM8DesignatedExecutionPlanSnapshot::from_plan)
+                .collect(),
+            owner_execution_plans: instance
+                .owner_execution_plans
+                .iter()
+                .map(PrivateM8OwnerExecutionPlanSnapshot::from_plan)
+                .collect(),
+            relation_execution_plans: instance
+                .relation_execution_plans
+                .iter()
+                .map(PrivateM8RelationExecutionPlanSnapshot::from_plan)
+                .collect(),
+        }
+    }
+
+    fn into_instance(self) -> Result<M8RuntimeInstance, M8I3PrivateSnapshotError> {
+        if self.version != Self::VERSION {
+            return Err(M8I3PrivateSnapshotError::StructuralMismatch);
+        }
+        let program_identity = self
+            .program_identity
+            .into_checked()
+            .map_err(|_| M8I3PrivateSnapshotError::SemanticSnapshot)?;
+        let admission = self.admission.into_admission()?;
+        if admission.program_identity != program_identity {
+            return Err(M8I3PrivateSnapshotError::StructuralMismatch);
+        }
+        let designated_execution_plans = self
+            .designated_execution_plans
+            .into_iter()
+            .map(PrivateM8DesignatedExecutionPlanSnapshot::into_plan)
+            .collect::<Result<Vec<_>, _>>()?;
+        let owner_execution_plans = self
+            .owner_execution_plans
+            .into_iter()
+            .map(PrivateM8OwnerExecutionPlanSnapshot::into_plan)
+            .collect::<Result<Vec<_>, _>>()?;
+        let relation_execution_plans = self
+            .relation_execution_plans
+            .into_iter()
+            .map(PrivateM8RelationExecutionPlanSnapshot::into_plan)
+            .collect::<Result<Vec<_>, _>>()?;
+
+        let designated_values = designated_execution_plans
+            .iter()
+            .map(|plan| M8AdmittedDesignatedValue {
+                name: plan.name.clone(),
+                result_frontier: plan.core.result_frontier().clone(),
+                input_frontier: plan.core.input_frontier().clone(),
+                evaluation_policy: plan.core.evaluation_policy().clone(),
+                observation_policy: plan.core.observation_policy().clone(),
+                policy_stamp: plan.core.policy_stamp().clone(),
+                visibility_label: plan.visibility_label.clone(),
+                redaction: plan.redaction.clone(),
+            })
+            .collect();
+        let admission_evidence = M8AdmissionEvidenceRow {
+            entries: admission.evidence.clone(),
+        };
+        Ok(M8RuntimeInstance {
+            program_identity,
+            runtime_alias: self.runtime_alias,
+            ordered_lowering: OrderedRuntimeLowering {
+                entries: self
+                    .ordered_lowering
+                    .into_iter()
+                    .map(PrivateRuntimeLoweringEntrySnapshot::into_entry)
+                    .collect::<Result<Vec<_>, _>>()?,
+            },
+            admission,
+            admission_evidence,
+            designated_values,
+            designated_execution_plans,
+            owner_execution_plans,
+            relation_execution_plans,
+        })
+    }
+}
+
+impl PrivateRuntimeLoweringEntrySnapshot {
+    fn from_entry(entry: &RuntimeLoweringEntry) -> Self {
+        Self {
+            ordinal: entry.ordinal,
+            kind: match entry.kind {
+                RuntimeLoweringKind::OwnerRequest => {
+                    PrivateRuntimeLoweringKindSnapshot::OwnerRequest
+                }
+                RuntimeLoweringKind::OwnerLocalRead => {
+                    PrivateRuntimeLoweringKindSnapshot::OwnerLocalRead
+                }
+                RuntimeLoweringKind::OwnerWrite => PrivateRuntimeLoweringKindSnapshot::OwnerWrite,
+                RuntimeLoweringKind::ObserverPublish => {
+                    PrivateRuntimeLoweringKindSnapshot::ObserverPublish
+                }
+                RuntimeLoweringKind::DesignatedDecision => {
+                    PrivateRuntimeLoweringKindSnapshot::DesignatedDecision
+                }
+                RuntimeLoweringKind::DesignatedResultConsume => {
+                    PrivateRuntimeLoweringKindSnapshot::DesignatedResultConsume
+                }
+                RuntimeLoweringKind::RelationPublish => {
+                    PrivateRuntimeLoweringKindSnapshot::RelationPublish
+                }
+                RuntimeLoweringKind::ConsumerLocalProjection => {
+                    PrivateRuntimeLoweringKindSnapshot::ConsumerLocalProjection
+                }
+                RuntimeLoweringKind::DeferredPolicy => {
+                    PrivateRuntimeLoweringKindSnapshot::DeferredPolicy
+                }
+            },
+            source_ref: SnapshotSourceRef::from_checked(&entry.source_ref),
+            core_ref: entry.core_ref.clone(),
+        }
+    }
+
+    fn into_entry(self) -> Result<RuntimeLoweringEntry, M8I3PrivateSnapshotError> {
+        Ok(RuntimeLoweringEntry {
+            ordinal: self.ordinal,
+            kind: match self.kind {
+                PrivateRuntimeLoweringKindSnapshot::OwnerRequest => {
+                    RuntimeLoweringKind::OwnerRequest
+                }
+                PrivateRuntimeLoweringKindSnapshot::OwnerLocalRead => {
+                    RuntimeLoweringKind::OwnerLocalRead
+                }
+                PrivateRuntimeLoweringKindSnapshot::OwnerWrite => RuntimeLoweringKind::OwnerWrite,
+                PrivateRuntimeLoweringKindSnapshot::ObserverPublish => {
+                    RuntimeLoweringKind::ObserverPublish
+                }
+                PrivateRuntimeLoweringKindSnapshot::DesignatedDecision => {
+                    RuntimeLoweringKind::DesignatedDecision
+                }
+                PrivateRuntimeLoweringKindSnapshot::DesignatedResultConsume => {
+                    RuntimeLoweringKind::DesignatedResultConsume
+                }
+                PrivateRuntimeLoweringKindSnapshot::RelationPublish => {
+                    RuntimeLoweringKind::RelationPublish
+                }
+                PrivateRuntimeLoweringKindSnapshot::ConsumerLocalProjection => {
+                    RuntimeLoweringKind::ConsumerLocalProjection
+                }
+                PrivateRuntimeLoweringKindSnapshot::DeferredPolicy => {
+                    RuntimeLoweringKind::DeferredPolicy
+                }
+            },
+            source_ref: self
+                .source_ref
+                .into_checked()
+                .map_err(|_| M8I3PrivateSnapshotError::SemanticSnapshot)?,
+            core_ref: self.core_ref,
+        })
+    }
+}
+
+impl PrivateEvidenceSecurityLabelSnapshot {
+    fn from_label(label: &EvidenceSecurityLabel) -> Self {
+        Self {
+            value: label.value.clone(),
+            security_class: match label.security_class {
+                M8SecurityClass::Public => PrivateM8SecurityClassSnapshot::Public,
+                M8SecurityClass::Restricted => PrivateM8SecurityClassSnapshot::Restricted,
+                M8SecurityClass::Private => PrivateM8SecurityClassSnapshot::Private,
+            },
+        }
+    }
+
+    fn into_label(self) -> EvidenceSecurityLabel {
+        EvidenceSecurityLabel::new(self.value).with_class(match self.security_class {
+            PrivateM8SecurityClassSnapshot::Public => M8SecurityClass::Public,
+            PrivateM8SecurityClassSnapshot::Restricted => M8SecurityClass::Restricted,
+            PrivateM8SecurityClassSnapshot::Private => M8SecurityClass::Private,
+        })
+    }
+}
+
+impl PrivateM8RuntimeAdmissionSnapshot {
+    fn from_admission(admission: &M8RuntimeAdmission) -> Self {
+        Self {
+            program_identity: SnapshotCheckedProgramIdentity::from_checked(
+                &admission.program_identity,
+            ),
+            evidence: admission
+                .evidence
+                .iter()
+                .map(PrivateM8AdmissionEvidenceSnapshot::from_evidence)
+                .collect(),
+        }
+    }
+
+    fn into_admission(self) -> Result<M8RuntimeAdmission, M8I3PrivateSnapshotError> {
+        Ok(M8RuntimeAdmission {
+            program_identity: self
+                .program_identity
+                .into_checked()
+                .map_err(|_| M8I3PrivateSnapshotError::SemanticSnapshot)?,
+            evidence: self
+                .evidence
+                .into_iter()
+                .map(PrivateM8AdmissionEvidenceSnapshot::into_evidence)
+                .collect::<Result<Vec<_>, _>>()?,
+        })
+    }
+}
+
+impl PrivateM8AdmissionEvidenceSnapshot {
+    fn from_evidence(evidence: &M8AdmissionEvidence) -> Self {
+        match evidence {
+            M8AdmissionEvidence::RelationVisibility {
+                relation,
+                label,
+                redaction,
+                source_ref,
+            } => Self::RelationVisibility {
+                relation: relation.clone(),
+                label: PrivateEvidenceSecurityLabelSnapshot::from_label(label),
+                redaction: redaction.0.clone(),
+                source_ref: SnapshotSourceRef::from_checked(source_ref),
+            },
+            M8AdmissionEvidence::RelationLifetime {
+                relation,
+                live_lease,
+                binding_frontier,
+                source_ref,
+            } => Self::RelationLifetime {
+                relation: relation.clone(),
+                live_lease: live_lease.clone(),
+                binding_frontier: binding_frontier.clone(),
+                source_ref: SnapshotSourceRef::from_checked(source_ref),
+            },
+            M8AdmissionEvidence::RelationFallbackValidity {
+                relation,
+                primary_epoch,
+                fallback_epoch,
+                source_ref,
+            } => Self::RelationFallbackValidity {
+                relation: relation.clone(),
+                primary_epoch: primary_epoch.clone(),
+                fallback_epoch: fallback_epoch.clone(),
+                source_ref: SnapshotSourceRef::from_checked(source_ref),
+            },
+            M8AdmissionEvidence::ValueVisibilityRedaction {
+                value,
+                label,
+                redaction,
+                source_ref,
+            } => Self::ValueVisibilityRedaction {
+                value: value.clone(),
+                label: PrivateEvidenceSecurityLabelSnapshot::from_label(label),
+                redaction: redaction.0.clone(),
+                source_ref: SnapshotSourceRef::from_checked(source_ref),
+            },
+            M8AdmissionEvidence::AuthDeferred {
+                name,
+                authority_label,
+                source_ref,
+            } => Self::AuthDeferred {
+                name: name.clone(),
+                authority_label: authority_label.clone(),
+                source_ref: SnapshotSourceRef::from_checked(source_ref),
+            },
+            M8AdmissionEvidence::VerifyDeferred {
+                name,
+                theorem,
+                witness_schema,
+                source_ref,
+            } => Self::VerifyDeferred {
+                name: name.clone(),
+                theorem: theorem.clone(),
+                witness_schema: witness_schema.clone(),
+                source_ref: SnapshotSourceRef::from_checked(source_ref),
+            },
+        }
+    }
+
+    fn into_evidence(self) -> Result<M8AdmissionEvidence, M8I3PrivateSnapshotError> {
+        let source = |source_ref: SnapshotSourceRef| {
+            source_ref
+                .into_checked()
+                .map_err(|_| M8I3PrivateSnapshotError::SemanticSnapshot)
+        };
+        match self {
+            Self::RelationVisibility {
+                relation,
+                label,
+                redaction,
+                source_ref,
+            } => Ok(M8AdmissionEvidence::RelationVisibility {
+                relation,
+                label: label.into_label(),
+                redaction: EvidenceRedaction(redaction),
+                source_ref: source(source_ref)?,
+            }),
+            Self::RelationLifetime {
+                relation,
+                live_lease,
+                binding_frontier,
+                source_ref,
+            } => Ok(M8AdmissionEvidence::RelationLifetime {
+                relation,
+                live_lease,
+                binding_frontier,
+                source_ref: source(source_ref)?,
+            }),
+            Self::RelationFallbackValidity {
+                relation,
+                primary_epoch,
+                fallback_epoch,
+                source_ref,
+            } => Ok(M8AdmissionEvidence::RelationFallbackValidity {
+                relation,
+                primary_epoch,
+                fallback_epoch,
+                source_ref: source(source_ref)?,
+            }),
+            Self::ValueVisibilityRedaction {
+                value,
+                label,
+                redaction,
+                source_ref,
+            } => Ok(M8AdmissionEvidence::ValueVisibilityRedaction {
+                value,
+                label: label.into_label(),
+                redaction: EvidenceRedaction(redaction),
+                source_ref: source(source_ref)?,
+            }),
+            Self::AuthDeferred {
+                name,
+                authority_label,
+                source_ref,
+            } => Ok(M8AdmissionEvidence::AuthDeferred {
+                name,
+                authority_label,
+                source_ref: source(source_ref)?,
+            }),
+            Self::VerifyDeferred {
+                name,
+                theorem,
+                witness_schema,
+                source_ref,
+            } => Ok(M8AdmissionEvidence::VerifyDeferred {
+                name,
+                theorem,
+                witness_schema,
+                source_ref: source(source_ref)?,
+            }),
+        }
+    }
+}
+
+impl PrivateM8DesignatedExecutionPlanSnapshot {
+    fn from_plan(plan: &M8DesignatedExecutionPlan) -> Self {
+        Self {
+            name: plan.name.clone(),
+            source_ref: SnapshotSourceRef::from_checked(&plan.source_ref),
+            core: SnapshotDesignatedCheckedCore::from_checked(&plan.core),
+            visibility_label: PrivateEvidenceSecurityLabelSnapshot::from_label(
+                &plan.visibility_label,
+            ),
+            redaction: plan.redaction.0.clone(),
+        }
+    }
+
+    fn into_plan(self) -> Result<M8DesignatedExecutionPlan, M8I3PrivateSnapshotError> {
+        Ok(M8DesignatedExecutionPlan {
+            name: self.name,
+            source_ref: self
+                .source_ref
+                .into_checked()
+                .map_err(|_| M8I3PrivateSnapshotError::SemanticSnapshot)?,
+            core: self
+                .core
+                .into_checked()
+                .map_err(|_| M8I3PrivateSnapshotError::SemanticSnapshot)?,
+            visibility_label: self.visibility_label.into_label(),
+            redaction: EvidenceRedaction(self.redaction),
+        })
+    }
+}
+
+impl PrivateM8OwnerExecutionPlanSnapshot {
+    fn from_plan(plan: &M8OwnerExecutionPlan) -> Self {
+        Self {
+            evaluation: plan.evaluation.clone(),
+            actor: plan.actor.clone(),
+            owner_locus: plan.owner_locus.clone(),
+            source_ref: SnapshotSourceRef::from_checked(&plan.source_ref),
+            target: SnapshotTypedStateRead::from_checked(&plan.target),
+            expression: SnapshotTypedExpression::from_checked(&plan.expression),
+        }
+    }
+
+    fn into_plan(self) -> Result<M8OwnerExecutionPlan, M8I3PrivateSnapshotError> {
+        Ok(M8OwnerExecutionPlan {
+            evaluation: self.evaluation,
+            actor: self.actor,
+            owner_locus: self.owner_locus,
+            source_ref: self
+                .source_ref
+                .into_checked()
+                .map_err(|_| M8I3PrivateSnapshotError::SemanticSnapshot)?,
+            target: self
+                .target
+                .into_checked()
+                .map_err(|_| M8I3PrivateSnapshotError::SemanticSnapshot)?,
+            expression: self
+                .expression
+                .into_checked()
+                .map_err(|_| M8I3PrivateSnapshotError::SemanticSnapshot)?,
+        })
+    }
+}
+
+impl PrivateM8RelationExecutionPlanSnapshot {
+    fn from_plan(plan: &M8RelationExecutionPlan) -> Self {
+        Self {
+            name: plan.name.clone(),
+            source_ref: SnapshotSourceRef::from_checked(&plan.source_ref),
+            core: SnapshotRelationCheckedCore::from_checked(&plan.core),
+            visibility_label: PrivateEvidenceSecurityLabelSnapshot::from_label(
+                &plan.visibility_label,
+            ),
+            redaction: plan.redaction.0.clone(),
+            live_lease_ref: plan.live_lease_ref.clone(),
+            binding_frontier: plan.binding_frontier.clone(),
+            primary_epoch: plan.primary_epoch.clone(),
+            fallback_epoch: plan.fallback_epoch.clone(),
+        }
+    }
+
+    fn into_plan(self) -> Result<M8RelationExecutionPlan, M8I3PrivateSnapshotError> {
+        let plan = M8RelationExecutionPlan {
+            name: self.name,
+            source_ref: self
+                .source_ref
+                .into_checked()
+                .map_err(|_| M8I3PrivateSnapshotError::SemanticSnapshot)?,
+            core: self
+                .core
+                .into_checked()
+                .map_err(|_| M8I3PrivateSnapshotError::SemanticSnapshot)?,
+            visibility_label: self.visibility_label.into_label(),
+            redaction: EvidenceRedaction(self.redaction),
+            live_lease_ref: self.live_lease_ref,
+            binding_frontier: self.binding_frontier,
+            primary_epoch: self.primary_epoch,
+            fallback_epoch: self.fallback_epoch,
+        };
+        plan.has_exact_admission_evidence()
+            .then_some(plan)
+            .ok_or(M8I3PrivateSnapshotError::StructuralMismatch)
     }
 }
 

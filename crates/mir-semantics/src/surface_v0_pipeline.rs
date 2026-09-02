@@ -4,6 +4,9 @@
 //! Its checked Core records are static evidence for the next layer; they are
 //! intentionally not a runtime interpreter or an M5 command surrogate.
 
+#[doc(hidden)]
+pub mod private_snapshot;
+
 use std::collections::BTreeMap;
 
 use mir_ast::surface_v0::{

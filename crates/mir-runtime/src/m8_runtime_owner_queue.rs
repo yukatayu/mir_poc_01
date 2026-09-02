@@ -12,6 +12,7 @@ use mir_semantics::{
         CheckedBinaryOperator, CheckedExpressionTree, SurfaceV0PipelineDiagnostics,
     },
 };
+use serde::{Deserialize, Serialize};
 
 use crate::{
     m8_runtime_admission::{M8OwnerExecutionPlan, M8RuntimeInstance},
@@ -62,6 +63,17 @@ pub struct M8AuthorityUse {
     witness_ref: Option<String>,
 }
 
+/// Exact private snapshot of an already-issued owner authority use.  This
+/// carries no issuer and is only consumed by the I3 sealed-admission restore.
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[serde(deny_unknown_fields)]
+pub(crate) struct M8I3PrivateAuthorityUseSnapshot {
+    principal: String,
+    membership_ref: Option<String>,
+    capability_ref: Option<String>,
+    witness_ref: Option<String>,
+}
+
 impl M8AuthorityUse {
     pub fn for_principal(principal: impl Into<String>) -> Self {
         Self {
@@ -101,6 +113,24 @@ impl M8AuthorityUse {
 
     pub fn witness_ref(&self) -> Option<&str> {
         self.witness_ref.as_deref()
+    }
+
+    pub(crate) fn i3_private_snapshot(&self) -> M8I3PrivateAuthorityUseSnapshot {
+        M8I3PrivateAuthorityUseSnapshot {
+            principal: self.principal.clone(),
+            membership_ref: self.membership_ref.clone(),
+            capability_ref: self.capability_ref.clone(),
+            witness_ref: self.witness_ref.clone(),
+        }
+    }
+
+    pub(crate) fn from_i3_private_snapshot(snapshot: M8I3PrivateAuthorityUseSnapshot) -> Self {
+        Self {
+            principal: snapshot.principal,
+            membership_ref: snapshot.membership_ref,
+            capability_ref: snapshot.capability_ref,
+            witness_ref: snapshot.witness_ref,
+        }
     }
 }
 

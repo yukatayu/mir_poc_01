@@ -11,6 +11,7 @@ use mir_semantics::{
     shared_model::{ResultFrontier, ResultVersion, SourceRef},
     surface_v0_pipeline::{CheckedBinaryOperator, CheckedExpressionTree, TypedStateRead},
 };
+use serde::{Deserialize, Serialize};
 
 use crate::{
     m8_runtime_admission::{
@@ -229,6 +230,30 @@ pub struct M8DesignatedAuthorityUse {
     witness_ref: Option<String>,
 }
 
+/// Exact private snapshot of a sealed designated authority use.  It retains
+/// only already-issued references and cannot construct a new grant.
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[serde(deny_unknown_fields)]
+pub(crate) struct M8I3PrivateDesignatedAuthorityUseSnapshot {
+    site: PrivateM8DesignatedAuthoritySiteSnapshot,
+    principal: Option<String>,
+    membership_ref: Option<String>,
+    capability_ref: Option<String>,
+    witness_ref: Option<String>,
+}
+
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[serde(
+    tag = "kind",
+    content = "locus",
+    rename_all = "snake_case",
+    deny_unknown_fields
+)]
+enum PrivateM8DesignatedAuthoritySiteSnapshot {
+    Evaluator(String),
+    Consumer(String),
+}
+
 impl M8DesignatedAuthorityUse {
     pub fn for_evaluator(evaluator: impl Into<String>) -> Self {
         Self {
@@ -297,6 +322,42 @@ impl M8DesignatedAuthorityUse {
         match &self.site {
             M8DesignatedAuthoritySite::Evaluator(_) => None,
             M8DesignatedAuthoritySite::Consumer(consumer) => Some(consumer),
+        }
+    }
+
+    pub(crate) fn i3_private_snapshot(&self) -> M8I3PrivateDesignatedAuthorityUseSnapshot {
+        M8I3PrivateDesignatedAuthorityUseSnapshot {
+            site: match &self.site {
+                M8DesignatedAuthoritySite::Evaluator(value) => {
+                    PrivateM8DesignatedAuthoritySiteSnapshot::Evaluator(value.clone())
+                }
+                M8DesignatedAuthoritySite::Consumer(value) => {
+                    PrivateM8DesignatedAuthoritySiteSnapshot::Consumer(value.clone())
+                }
+            },
+            principal: self.principal.clone(),
+            membership_ref: self.membership_ref.clone(),
+            capability_ref: self.capability_ref.clone(),
+            witness_ref: self.witness_ref.clone(),
+        }
+    }
+
+    pub(crate) fn from_i3_private_snapshot(
+        snapshot: M8I3PrivateDesignatedAuthorityUseSnapshot,
+    ) -> Self {
+        Self {
+            site: match snapshot.site {
+                PrivateM8DesignatedAuthoritySiteSnapshot::Evaluator(value) => {
+                    M8DesignatedAuthoritySite::Evaluator(value)
+                }
+                PrivateM8DesignatedAuthoritySiteSnapshot::Consumer(value) => {
+                    M8DesignatedAuthoritySite::Consumer(value)
+                }
+            },
+            principal: snapshot.principal,
+            membership_ref: snapshot.membership_ref,
+            capability_ref: snapshot.capability_ref,
+            witness_ref: snapshot.witness_ref,
         }
     }
 }

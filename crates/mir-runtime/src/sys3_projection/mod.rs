@@ -6,10 +6,11 @@
 //! deployment, or admit a result into a runtime.
 
 mod lowering;
-mod model;
+pub(crate) mod model;
 mod validate;
 
 pub(crate) use lowering::project_checked_core;
+#[allow(unused_imports)]
 pub(crate) use model::{
     BackendEligibility, BackendIneligibilityReason, BackendProfile, CarrierContract,
     CarrierFrontierKind, CarrierLifecycleKind, CarrierOccurrenceSlotKind, CarrierProvenanceKind,

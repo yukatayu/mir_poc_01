@@ -8,7 +8,14 @@
 use std::collections::{BTreeMap, BTreeSet};
 use std::sync::atomic::{AtomicU64, Ordering};
 
+use serde::{
+    Deserialize, Serialize,
+    de::{self, Error as _, MapAccess, SeqAccess, Visitor},
+};
 use sha2::{Digest, Sha256};
+
+#[path = "sys5_i3_process_snapshot.rs"]
+mod process_snapshot;
 
 // A logical activation occurrence is local runtime evidence, not a process
 // identifier, endpoint, session, or transport attempt.  It prevents two
@@ -20,7 +27,8 @@ use crate::{
     sys3_projection::{BackendProfile, CommunicationEdgeKind},
     sys4_dispatch::{
         FabricProgram, LocalFabric, ObserverSafeM9SemanticRowSets, SealedFabricAdmission,
-        SourceAction, Sys4ProcessCarrier,
+        SourceAction, Sys4I3PendingOwnerRequestBinding, Sys4I3PrivateProcessCarrierSnapshot,
+        Sys4ProcessCarrier,
     },
     sys5_local_slice::Sys5LocalProject,
 };
@@ -516,6 +524,7 @@ struct Sys5I3PrivateRuntimeSeed {
     projection_ref: String,
     m9_generation_ref: String,
     cohort_occurrence_ref: String,
+    private_snapshot_binding_ref: String,
 }
 
 /// An immutable process image.  Its private runtime seed is already reduced
@@ -567,6 +576,84 @@ pub struct Sys5I3ProcessCohortSummary {
     cohort_occurrence_ref: String,
 }
 
+/// A coordinator-retained, observer-safe expectation for exactly one child
+/// bootstrap.  It contains no executable program, authority generation,
+/// issuer, publisher, store, or source text.  The private child snapshot is
+/// therefore never self-authorizing merely because it decodes successfully.
+#[doc(hidden)]
+#[derive(Debug, PartialEq, Eq)]
+pub struct Sys5I3ExpectedStartBinding {
+    slot_name: String,
+    assigned_loci: BTreeSet<String>,
+    parent_checked_program_ref: String,
+    projection_ref: String,
+    m9_generation_ref: String,
+    cohort_provenance_ref: String,
+    image_integrity_ref: String,
+    private_snapshot_binding_ref: String,
+}
+
+impl Sys5I3ExpectedStartBinding {
+    fn for_image(image: &Sys5I3ProcessImage) -> Self {
+        Self {
+            slot_name: image.slot_name.clone(),
+            assigned_loci: image.assigned_loci.clone(),
+            parent_checked_program_ref: image.child_seed.parent_checked_program_ref.clone(),
+            projection_ref: image.child_seed.projection_ref.clone(),
+            m9_generation_ref: image.child_seed.m9_generation_ref.clone(),
+            cohort_provenance_ref: image
+                .child_seed
+                .required_local_authority_closure
+                .opaque_cohort_ref()
+                .to_string(),
+            image_integrity_ref: image.private_integrity_ref.clone(),
+            private_snapshot_binding_ref: image
+                .private_runtime_seed
+                .private_snapshot_binding_ref
+                .clone(),
+        }
+    }
+
+    fn validate_image(&self, image: &Sys5I3ProcessImage) -> Result<(), Sys5I3ProcessRuntimeError> {
+        if self.cohort_provenance_ref
+            != image
+                .child_seed
+                .required_local_authority_closure
+                .opaque_cohort_ref()
+        {
+            return Err(Sys5I3ProcessRuntimeError::new(
+                Sys5I3ProcessRuntimeErrorKind::CohortProvenanceMismatch,
+            ));
+        }
+        if self.parent_checked_program_ref != image.child_seed.parent_checked_program_ref {
+            return Err(Sys5I3ProcessRuntimeError::new(
+                Sys5I3ProcessRuntimeErrorKind::CohortParentProgramMismatch,
+            ));
+        }
+        if self.projection_ref != image.child_seed.projection_ref {
+            return Err(Sys5I3ProcessRuntimeError::new(
+                Sys5I3ProcessRuntimeErrorKind::CohortProjectionMismatch,
+            ));
+        }
+        if self.m9_generation_ref != image.child_seed.m9_generation_ref {
+            return Err(Sys5I3ProcessRuntimeError::new(
+                Sys5I3ProcessRuntimeErrorKind::CohortM9GenerationMismatch,
+            ));
+        }
+        if self.slot_name != image.slot_name
+            || self.assigned_loci != image.assigned_loci
+            || self.image_integrity_ref != image.private_integrity_ref
+            || self.private_snapshot_binding_ref
+                != image.private_runtime_seed.private_snapshot_binding_ref
+        {
+            return Err(Sys5I3ProcessRuntimeError::new(
+                Sys5I3ProcessRuntimeErrorKind::ImageIntegrityMismatch,
+            ));
+        }
+        Ok(())
+    }
+}
+
 impl Sys5I3ProcessCohortSummary {
     pub const fn full_admission_count(&self) -> usize {
         self.full_admission_count
@@ -599,6 +686,7 @@ impl Sys5I3ProcessCohortSummary {
 #[doc(hidden)]
 pub struct Sys5I3ProcessCohort {
     images: BTreeMap<String, Option<Sys5I3ProcessImage>>,
+    expected_start_bindings: BTreeMap<String, Option<Sys5I3ExpectedStartBinding>>,
     summary: Sys5I3ProcessCohortSummary,
 }
 
@@ -640,6 +728,7 @@ impl Sys5I3ProcessCohort {
             })?;
         let (coordinator_program, coordinator_admission) = prepared.into_parts_for_sys4();
         let mut images = BTreeMap::new();
+        let mut expected_start_bindings = BTreeMap::new();
         for slot in &deployment.slots {
             let image = Sys5I3ProcessImage::from_coordinator_parts(
                 project,
@@ -649,7 +738,16 @@ impl Sys5I3ProcessCohort {
                 &coordinator_admission,
                 &cohort_occurrence_ref,
             )?;
+            let expected_start_binding = Sys5I3ExpectedStartBinding::for_image(&image);
             if images.insert(slot.slot_name.clone(), Some(image)).is_some() {
+                return Err(Sys5I3ProcessRuntimeError::new(
+                    Sys5I3ProcessRuntimeErrorKind::DuplicateDeploymentSlot,
+                ));
+            }
+            if expected_start_bindings
+                .insert(slot.slot_name.clone(), Some(expected_start_binding))
+                .is_some()
+            {
                 return Err(Sys5I3ProcessRuntimeError::new(
                     Sys5I3ProcessRuntimeErrorKind::DuplicateDeploymentSlot,
                 ));
@@ -658,6 +756,7 @@ impl Sys5I3ProcessCohort {
 
         Ok(Self {
             images,
+            expected_start_bindings,
             summary: Sys5I3ProcessCohortSummary {
                 full_admission_count: 1,
                 authority_generation_count: 1,
@@ -671,6 +770,25 @@ impl Sys5I3ProcessCohort {
 
     pub fn observer_safe_summary(&self) -> Sys5I3ProcessCohortSummary {
         self.summary.clone()
+    }
+
+    /// Retain the supervisor-controlled expectation before the child image
+    /// is released.  It is deliberately derived from the already sealed
+    /// image and contains only binding/provenance facts, never an authority
+    /// seed or replacement admission path.
+    pub fn parent_held_expected_start_binding(
+        &mut self,
+        slot_name: &str,
+    ) -> Result<Sys5I3ExpectedStartBinding, Sys5I3ProcessRuntimeError> {
+        let binding = self
+            .expected_start_bindings
+            .get_mut(slot_name)
+            .ok_or_else(|| {
+                Sys5I3ProcessRuntimeError::new(Sys5I3ProcessRuntimeErrorKind::UnknownDeploymentSlot)
+            })?;
+        binding.take().ok_or_else(|| {
+            Sys5I3ProcessRuntimeError::new(Sys5I3ProcessRuntimeErrorKind::ProcessImageAlreadyTaken)
+        })
     }
 
     /// Consume the one sealed image for a deployment slot.  Neither a cohort
@@ -730,18 +848,25 @@ impl Sys5I3ProcessImage {
             .filter(|edge| {
                 assigned_loci.contains(&edge.from_locus) || assigned_loci.contains(&edge.to_locus)
             })
-            .map(|edge| Sys5I3RetainedEdgeContract {
-                source_locus: edge.from_locus.clone(),
-                target_locus: edge.to_locus.clone(),
-                edge_ref: edge.edge_ref.clone(),
-                operation_id: edge.operation_id.clone(),
-                kind: edge.kind.clone(),
-                core_ref: edge.core_ref.clone().unwrap_or_default(),
-                source_artifact_ref: edge.source_fragment_ref.clone(),
-                target_artifact_ref: edge.target_fragment_ref.clone(),
-                parent_checked_program_ref: edge.checked_program_identity.clone(),
+            .map(|edge| {
+                let core_ref = edge.core_ref.clone().ok_or_else(|| {
+                    Sys5I3ProcessRuntimeError::new(
+                        Sys5I3ProcessRuntimeErrorKind::ProgramProjectionMismatch,
+                    )
+                })?;
+                Ok(Sys5I3RetainedEdgeContract {
+                    source_locus: edge.from_locus.clone(),
+                    target_locus: edge.to_locus.clone(),
+                    edge_ref: edge.edge_ref.clone(),
+                    operation_id: edge.operation_id.clone(),
+                    kind: edge.kind.clone(),
+                    core_ref,
+                    source_artifact_ref: edge.source_fragment_ref.clone(),
+                    target_artifact_ref: edge.target_fragment_ref.clone(),
+                    parent_checked_program_ref: edge.checked_program_identity.clone(),
+                })
             })
-            .collect::<Vec<_>>();
+            .collect::<Result<Vec<_>, Sys5I3ProcessRuntimeError>>()?;
 
         // The full program/admission belong solely to the coordinator.  A
         // child receives the layer-owned subset produced from them, never a
@@ -763,6 +888,10 @@ impl Sys5I3ProcessImage {
         let parent_checked_program_ref = deployment.parent_checked_program_ref.clone();
         let projection_ref = deployment.parent_projection_ref.clone();
         let m9_generation_ref = admission.m9_generation_ref().to_string();
+        let private_snapshot_binding_ref = private_runtime_seed_binding_ref(&program, &admission)
+            .map_err(|_| {
+            Sys5I3ProcessRuntimeError::new(Sys5I3ProcessRuntimeErrorKind::RuntimeBootstrapRejected)
+        })?;
         let designated_inventory = program
             .i3_process_designated_remote_input_inventory()
             .map_err(|_| {
@@ -801,6 +930,7 @@ impl Sys5I3ProcessImage {
             projection_ref,
             m9_generation_ref,
             cohort_occurrence_ref: cohort_occurrence_ref.to_string(),
+            private_snapshot_binding_ref,
         };
         let mut image = Self {
             slot_name: slot.slot_name.clone(),
@@ -1252,6 +1382,27 @@ fn observer_safe_semantic_rows_digest(rows: &ObserverSafeM9SemanticRowSets) -> S
     )
 }
 
+/// Bind both independently restored private roots.  The sealed admission
+/// commitment covers M8/M9/state facts; the projection commitment covers the
+/// complete restricted executable structure rather than merely its route
+/// fingerprint.  No source text, transport identity, or new authority enters
+/// this value.
+fn private_runtime_seed_binding_ref(
+    program: &FabricProgram,
+    admission: &SealedFabricAdmission,
+) -> Result<String, ()> {
+    let projection_binding = program.i3_private_projection_binding_ref()?;
+    let admission_binding = admission.i3_private_snapshot_binding_ref();
+    let mut hasher = Sha256::new();
+    hasher.update(b"mirrorea/sys5/i3/private-runtime-seed-binding/v1\0");
+    hasher.update(projection_binding);
+    hasher.update(admission_binding);
+    Ok(format!(
+        "sys5-i3-private-runtime-seed-binding-sha256-v1:{:x}",
+        hasher.finalize()
+    ))
+}
+
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 enum Sys5I3ProcessMessageKind {
     Request,
@@ -1298,6 +1449,573 @@ impl Sys5I3ProcessMessage {
 
     pub const fn observer_safe_identity_basis(&self) -> Sys5I3ObserverSafeIdentityBasis {
         self.identity_basis
+    }
+}
+
+/// Declared bounded limits for the private G2 codec.  They are an internal
+/// fail-closed resource boundary, not a public wire-format commitment.
+#[doc(hidden)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+pub struct Sys5I3PrivateProcessCodecLimits {
+    max_image_bytes: usize,
+    max_message_bytes: usize,
+}
+
+impl Sys5I3PrivateProcessCodecLimits {
+    pub const fn max_image_bytes(&self) -> usize {
+        self.max_image_bytes
+    }
+
+    pub const fn max_message_bytes(&self) -> usize {
+        self.max_message_bytes
+    }
+}
+
+/// Typed rejection classes for the private I3-2 codec.  These names and the
+/// JSON representation are provisional implementation detail only.
+#[doc(hidden)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+pub enum Sys5I3PrivateProcessCodecErrorKind {
+    Malformed,
+    Incomplete,
+    Oversized,
+    UnknownVersion,
+    MissingRequiredCoreProvenance,
+    ReceiptIsLocalOnly,
+}
+
+#[doc(hidden)]
+#[derive(Debug, Clone, PartialEq, Eq)]
+pub struct Sys5I3PrivateProcessCodecError {
+    kind: Sys5I3PrivateProcessCodecErrorKind,
+}
+
+impl Sys5I3PrivateProcessCodecError {
+    fn new(kind: Sys5I3PrivateProcessCodecErrorKind) -> Self {
+        Self { kind }
+    }
+
+    pub const fn kind(&self) -> Sys5I3PrivateProcessCodecErrorKind {
+        self.kind
+    }
+}
+
+/// A length-prefixed, private codec for the one-shot I3 child image and the
+/// generated owner request/reply carrier.  It accepts only exact restricted
+/// snapshots; decode returns untrusted candidates that cannot start a child
+/// or enter a mailbox without a receiver-owned validation boundary.
+#[doc(hidden)]
+#[derive(Debug, Clone, Copy, Default)]
+pub struct Sys5I3PrivateProcessCodec;
+
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[serde(deny_unknown_fields)]
+struct PrivateProcessMessageEnvelope {
+    version: u64,
+    message: PrivateProcessMessageSnapshot,
+}
+
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[serde(deny_unknown_fields)]
+struct PrivateProcessMessageSnapshot {
+    kind: PrivateProcessMessageKind,
+    carrier: Sys4I3PrivateProcessCarrierSnapshot,
+    semantic_request_identity_ref: String,
+    linked_request_identity_ref: Option<String>,
+    cohort_provenance_ref: String,
+}
+
+/// Parse one untrusted JSON value without normalizing duplicate object keys.
+/// `serde_json::Value` otherwise accepts duplicate members with last-write
+/// wins semantics, which would erase the malformed input before the strict
+/// private DTO boundary can reject it.
+struct StrictJsonValue(serde_json::Value);
+
+impl<'de> Deserialize<'de> for StrictJsonValue {
+    fn deserialize<D>(deserializer: D) -> Result<Self, D::Error>
+    where
+        D: serde::Deserializer<'de>,
+    {
+        deserializer.deserialize_any(StrictJsonValueVisitor)
+    }
+}
+
+struct StrictJsonValueVisitor;
+
+impl<'de> Visitor<'de> for StrictJsonValueVisitor {
+    type Value = StrictJsonValue;
+
+    fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        formatter.write_str("strict JSON without duplicate object members")
+    }
+
+    fn visit_bool<E>(self, value: bool) -> Result<Self::Value, E>
+    where
+        E: de::Error,
+    {
+        Ok(StrictJsonValue(serde_json::Value::Bool(value)))
+    }
+
+    fn visit_i64<E>(self, value: i64) -> Result<Self::Value, E>
+    where
+        E: de::Error,
+    {
+        Ok(StrictJsonValue(serde_json::Value::Number(value.into())))
+    }
+
+    fn visit_u64<E>(self, value: u64) -> Result<Self::Value, E>
+    where
+        E: de::Error,
+    {
+        Ok(StrictJsonValue(serde_json::Value::Number(value.into())))
+    }
+
+    fn visit_f64<E>(self, value: f64) -> Result<Self::Value, E>
+    where
+        E: de::Error,
+    {
+        serde_json::Number::from_f64(value)
+            .map(serde_json::Value::Number)
+            .map(StrictJsonValue)
+            .ok_or_else(|| E::custom("JSON number must be finite"))
+    }
+
+    fn visit_str<E>(self, value: &str) -> Result<Self::Value, E>
+    where
+        E: de::Error,
+    {
+        Ok(StrictJsonValue(serde_json::Value::String(
+            value.to_string(),
+        )))
+    }
+
+    fn visit_string<E>(self, value: String) -> Result<Self::Value, E>
+    where
+        E: de::Error,
+    {
+        Ok(StrictJsonValue(serde_json::Value::String(value)))
+    }
+
+    fn visit_none<E>(self) -> Result<Self::Value, E>
+    where
+        E: de::Error,
+    {
+        Ok(StrictJsonValue(serde_json::Value::Null))
+    }
+
+    fn visit_unit<E>(self) -> Result<Self::Value, E>
+    where
+        E: de::Error,
+    {
+        Ok(StrictJsonValue(serde_json::Value::Null))
+    }
+
+    fn visit_some<D>(self, deserializer: D) -> Result<Self::Value, D::Error>
+    where
+        D: serde::Deserializer<'de>,
+    {
+        StrictJsonValue::deserialize(deserializer)
+    }
+
+    fn visit_seq<A>(self, mut sequence: A) -> Result<Self::Value, A::Error>
+    where
+        A: SeqAccess<'de>,
+    {
+        let mut values = Vec::new();
+        while let Some(value) = sequence.next_element::<StrictJsonValue>()? {
+            values.push(value.0);
+        }
+        Ok(StrictJsonValue(serde_json::Value::Array(values)))
+    }
+
+    fn visit_map<A>(self, mut map: A) -> Result<Self::Value, A::Error>
+    where
+        A: MapAccess<'de>,
+    {
+        let mut values = serde_json::Map::new();
+        while let Some(key) = map.next_key::<String>()? {
+            if values.contains_key(&key) {
+                return Err(A::Error::custom("duplicate JSON object member"));
+            }
+            let value = map.next_value::<StrictJsonValue>()?;
+            values.insert(key, value.0);
+        }
+        Ok(StrictJsonValue(serde_json::Value::Object(values)))
+    }
+}
+
+fn strict_json_value(bytes: &[u8]) -> Result<serde_json::Value, ()> {
+    let mut deserializer = serde_json::Deserializer::from_slice(bytes);
+    let value = StrictJsonValue::deserialize(&mut deserializer).map_err(|_| ())?;
+    deserializer.end().map_err(|_| ())?;
+    Ok(value.0)
+}
+
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize, Deserialize)]
+#[serde(rename_all = "snake_case")]
+enum PrivateProcessMessageKind {
+    Request,
+    Reply,
+}
+
+/// Codec-decoded image that has no direct runtime constructor.  Its only
+/// promotion path is `validate_and_start_image`, which requires the T0
+/// coordinator's separately retained expected binding.
+#[doc(hidden)]
+pub struct Sys5I3UntrustedProcessImage {
+    image: Sys5I3ProcessImage,
+}
+
+impl std::fmt::Debug for Sys5I3UntrustedProcessImage {
+    fn fmt(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        formatter
+            .debug_struct("Sys5I3UntrustedProcessImage")
+            .field("assigned_loci", &self.image.assigned_loci)
+            .field(
+                "executable_artifact_count",
+                &self.image.executable_artifacts.len(),
+            )
+            .field(
+                "incident_edge_contract_count",
+                &self.image.required_edge_contracts.len(),
+            )
+            .finish_non_exhaustive()
+    }
+}
+
+/// Observer-safe facts from a decoded image.  It deliberately omits the
+/// executable projection/admission values and every raw M8/M9 datum.
+#[doc(hidden)]
+#[derive(Debug, Clone, PartialEq, Eq)]
+pub struct Sys5I3UntrustedProcessImageManifest {
+    assigned_loci: Vec<String>,
+    has_assigned_artifacts_only: bool,
+    parent_checked_program_ref: String,
+    projection_ref: String,
+    m9_generation_ref: String,
+    cohort_provenance_ref: String,
+}
+
+impl Sys5I3UntrustedProcessImage {
+    pub fn observer_safe_manifest(&self) -> Sys5I3UntrustedProcessImageManifest {
+        Sys5I3UntrustedProcessImageManifest {
+            assigned_loci: self.image.assigned_loci(),
+            has_assigned_artifacts_only: self
+                .image
+                .executable_artifacts
+                .iter()
+                .all(|artifact| self.image.assigned_loci.contains(&artifact.locus)),
+            parent_checked_program_ref: self.image.child_seed.parent_checked_program_ref.clone(),
+            projection_ref: self.image.child_seed.projection_ref.clone(),
+            m9_generation_ref: self.image.child_seed.m9_generation_ref.clone(),
+            cohort_provenance_ref: self
+                .image
+                .child_seed
+                .required_local_authority_closure
+                .opaque_cohort_ref()
+                .to_string(),
+        }
+    }
+}
+
+impl Sys5I3UntrustedProcessImageManifest {
+    pub fn assigned_loci(&self) -> Vec<String> {
+        self.assigned_loci.clone()
+    }
+
+    pub const fn has_assigned_artifacts_only(&self) -> bool {
+        self.has_assigned_artifacts_only
+    }
+
+    pub fn parent_checked_program_ref(&self) -> &str {
+        &self.parent_checked_program_ref
+    }
+
+    pub fn projection_ref(&self) -> &str {
+        &self.projection_ref
+    }
+
+    pub fn m9_generation_ref(&self) -> &str {
+        &self.m9_generation_ref
+    }
+
+    pub fn cohort_provenance_ref(&self) -> &str {
+        &self.cohort_provenance_ref
+    }
+
+    pub const fn carries_source_text(&self) -> bool {
+        false
+    }
+
+    pub const fn carries_host_path(&self) -> bool {
+        false
+    }
+
+    pub const fn carries_expected_result(&self) -> bool {
+        false
+    }
+}
+
+/// Codec-decoded carrier candidate.  It contains private bytes-derived facts
+/// only and cannot call `accept_inbound` until the target runtime resolves
+/// them against its local image.
+#[doc(hidden)]
+pub struct Sys5I3UntrustedProcessMessage {
+    message: PrivateProcessMessageSnapshot,
+}
+
+impl std::fmt::Debug for Sys5I3UntrustedProcessMessage {
+    fn fmt(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        formatter
+            .debug_struct("Sys5I3UntrustedProcessMessage")
+            .field("kind", &self.message.kind)
+            .finish_non_exhaustive()
+    }
+}
+
+#[doc(hidden)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+pub struct Sys5I3UntrustedProcessMessageManifest {
+    is_request: bool,
+    is_reply: bool,
+}
+
+impl Sys5I3UntrustedProcessMessage {
+    pub const fn observer_safe_manifest(&self) -> Sys5I3UntrustedProcessMessageManifest {
+        Sys5I3UntrustedProcessMessageManifest {
+            is_request: matches!(self.message.kind, PrivateProcessMessageKind::Request),
+            is_reply: matches!(self.message.kind, PrivateProcessMessageKind::Reply),
+        }
+    }
+}
+
+impl Sys5I3UntrustedProcessMessageManifest {
+    pub const fn is_request(&self) -> bool {
+        self.is_request
+    }
+
+    pub const fn is_reply(&self) -> bool {
+        self.is_reply
+    }
+}
+
+impl Sys5I3PrivateProcessCodec {
+    // The exact restricted M8/M9 closure is intentionally carried rather
+    // than recomputed in the child.  Keep a finite private bound large enough
+    // for the accepted four-locus profile while still rejecting allocation
+    // growth before JSON decoding.
+    const MAX_IMAGE_BYTES: usize = 8 << 20;
+    const MAX_MESSAGE_BYTES: usize = 1 << 16;
+
+    pub const fn private_provisional_v1() -> Self {
+        Self
+    }
+
+    pub const fn limits(&self) -> Sys5I3PrivateProcessCodecLimits {
+        Sys5I3PrivateProcessCodecLimits {
+            max_image_bytes: Self::MAX_IMAGE_BYTES,
+            max_message_bytes: Self::MAX_MESSAGE_BYTES,
+        }
+    }
+
+    /// Consume the only startable image.  The returned bytes are untrusted
+    /// delivery material; no image value remains available to start directly.
+    pub fn encode_image(
+        &self,
+        image: Sys5I3ProcessImage,
+    ) -> Result<Vec<u8>, Sys5I3PrivateProcessCodecError> {
+        let snapshot =
+            process_snapshot::PrivateProcessImageSnapshot::from_image(image).map_err(|_| {
+                Sys5I3PrivateProcessCodecError::new(Sys5I3PrivateProcessCodecErrorKind::Malformed)
+            })?;
+        let body = serde_json::to_vec(&snapshot).map_err(|_| {
+            Sys5I3PrivateProcessCodecError::new(Sys5I3PrivateProcessCodecErrorKind::Malformed)
+        })?;
+        self.frame_body(body, Self::MAX_IMAGE_BYTES)
+    }
+
+    pub fn decode_untrusted_image(
+        &self,
+        bytes: &[u8],
+    ) -> Result<Sys5I3UntrustedProcessImage, Sys5I3PrivateProcessCodecError> {
+        let body = self.unframe_body(bytes, Self::MAX_IMAGE_BYTES)?;
+        let value = strict_json_value(body).map_err(|_| {
+            Sys5I3PrivateProcessCodecError::new(Sys5I3PrivateProcessCodecErrorKind::Malformed)
+        })?;
+        self.validate_image_json_shape(&value)?;
+        let snapshot: process_snapshot::PrivateProcessImageSnapshot = serde_json::from_value(value)
+            .map_err(|_| {
+                Sys5I3PrivateProcessCodecError::new(Sys5I3PrivateProcessCodecErrorKind::Malformed)
+            })?;
+        let image = snapshot.into_untrusted_image().map_err(|_| {
+            Sys5I3PrivateProcessCodecError::new(Sys5I3PrivateProcessCodecErrorKind::Malformed)
+        })?;
+        Ok(Sys5I3UntrustedProcessImage { image })
+    }
+
+    pub fn validate_and_start_image(
+        &self,
+        candidate: Sys5I3UntrustedProcessImage,
+        expected: Sys5I3ExpectedStartBinding,
+    ) -> Result<Sys5I3ProcessRuntime, Sys5I3ProcessRuntimeError> {
+        expected.validate_image(&candidate.image)?;
+        Sys5I3ProcessRuntime::start(candidate.image)
+    }
+
+    pub fn encode_outbound_message(
+        &self,
+        message: Sys5I3ProcessMessage,
+    ) -> Result<Vec<u8>, Sys5I3PrivateProcessCodecError> {
+        let kind = match message.kind {
+            Sys5I3ProcessMessageKind::Request => PrivateProcessMessageKind::Request,
+            Sys5I3ProcessMessageKind::Reply => PrivateProcessMessageKind::Reply,
+            Sys5I3ProcessMessageKind::Receipt => {
+                return Err(Sys5I3PrivateProcessCodecError::new(
+                    Sys5I3PrivateProcessCodecErrorKind::ReceiptIsLocalOnly,
+                ));
+            }
+        };
+        let carrier = message.carrier.as_ref().ok_or_else(|| {
+            Sys5I3PrivateProcessCodecError::new(Sys5I3PrivateProcessCodecErrorKind::Malformed)
+        })?;
+        let carrier = carrier.i3_private_process_snapshot().map_err(|_| {
+            Sys5I3PrivateProcessCodecError::new(Sys5I3PrivateProcessCodecErrorKind::Malformed)
+        })?;
+        let envelope = PrivateProcessMessageEnvelope {
+            version: process_snapshot::PRIVATE_PROCESS_SNAPSHOT_VERSION,
+            message: PrivateProcessMessageSnapshot {
+                kind,
+                carrier,
+                semantic_request_identity_ref: message.semantic_request_identity_ref,
+                linked_request_identity_ref: message.linked_request_identity_ref,
+                cohort_provenance_ref: message.cohort_provenance_ref,
+            },
+        };
+        let body = serde_json::to_vec(&envelope).map_err(|_| {
+            Sys5I3PrivateProcessCodecError::new(Sys5I3PrivateProcessCodecErrorKind::Malformed)
+        })?;
+        self.frame_body(body, Self::MAX_MESSAGE_BYTES)
+    }
+
+    pub fn decode_untrusted_message(
+        &self,
+        bytes: &[u8],
+    ) -> Result<Sys5I3UntrustedProcessMessage, Sys5I3PrivateProcessCodecError> {
+        let body = self.unframe_body(bytes, Self::MAX_MESSAGE_BYTES)?;
+        let value = strict_json_value(body).map_err(|_| {
+            Sys5I3PrivateProcessCodecError::new(Sys5I3PrivateProcessCodecErrorKind::Malformed)
+        })?;
+        self.validate_version(&value)?;
+        let envelope: PrivateProcessMessageEnvelope =
+            serde_json::from_value(value).map_err(|_| {
+                Sys5I3PrivateProcessCodecError::new(Sys5I3PrivateProcessCodecErrorKind::Malformed)
+            })?;
+        if envelope.message.semantic_request_identity_ref.is_empty()
+            || envelope.message.cohort_provenance_ref.is_empty()
+        {
+            return Err(Sys5I3PrivateProcessCodecError::new(
+                Sys5I3PrivateProcessCodecErrorKind::Malformed,
+            ));
+        }
+        Ok(Sys5I3UntrustedProcessMessage {
+            message: envelope.message,
+        })
+    }
+
+    fn frame_body(
+        &self,
+        body: Vec<u8>,
+        limit: usize,
+    ) -> Result<Vec<u8>, Sys5I3PrivateProcessCodecError> {
+        let total = body.len().checked_add(4).ok_or_else(|| {
+            Sys5I3PrivateProcessCodecError::new(Sys5I3PrivateProcessCodecErrorKind::Oversized)
+        })?;
+        if total > limit || body.len() > u32::MAX as usize {
+            return Err(Sys5I3PrivateProcessCodecError::new(
+                Sys5I3PrivateProcessCodecErrorKind::Oversized,
+            ));
+        }
+        let mut framed = (body.len() as u32).to_be_bytes().to_vec();
+        framed.extend(body);
+        Ok(framed)
+    }
+
+    fn unframe_body<'a>(
+        &self,
+        bytes: &'a [u8],
+        limit: usize,
+    ) -> Result<&'a [u8], Sys5I3PrivateProcessCodecError> {
+        if bytes.len() > limit {
+            return Err(Sys5I3PrivateProcessCodecError::new(
+                Sys5I3PrivateProcessCodecErrorKind::Oversized,
+            ));
+        }
+        if bytes.len() < 4 {
+            return Err(Sys5I3PrivateProcessCodecError::new(
+                Sys5I3PrivateProcessCodecErrorKind::Incomplete,
+            ));
+        }
+        let declared = u32::from_be_bytes(bytes[..4].try_into().expect("fixed prefix")) as usize;
+        let available = bytes.len() - 4;
+        if declared > limit.saturating_sub(4) {
+            return Err(Sys5I3PrivateProcessCodecError::new(
+                Sys5I3PrivateProcessCodecErrorKind::Malformed,
+            ));
+        }
+        if available < declared {
+            return Err(Sys5I3PrivateProcessCodecError::new(
+                Sys5I3PrivateProcessCodecErrorKind::Incomplete,
+            ));
+        }
+        if available != declared {
+            return Err(Sys5I3PrivateProcessCodecError::new(
+                Sys5I3PrivateProcessCodecErrorKind::Malformed,
+            ));
+        }
+        Ok(&bytes[4..])
+    }
+
+    fn validate_version(
+        &self,
+        value: &serde_json::Value,
+    ) -> Result<(), Sys5I3PrivateProcessCodecError> {
+        let version = value
+            .get("version")
+            .and_then(serde_json::Value::as_u64)
+            .ok_or_else(|| {
+                Sys5I3PrivateProcessCodecError::new(Sys5I3PrivateProcessCodecErrorKind::Malformed)
+            })?;
+        if version != process_snapshot::PRIVATE_PROCESS_SNAPSHOT_VERSION {
+            return Err(Sys5I3PrivateProcessCodecError::new(
+                Sys5I3PrivateProcessCodecErrorKind::UnknownVersion,
+            ));
+        }
+        Ok(())
+    }
+
+    fn validate_image_json_shape(
+        &self,
+        value: &serde_json::Value,
+    ) -> Result<(), Sys5I3PrivateProcessCodecError> {
+        self.validate_version(value)?;
+        let Some(edges) = value
+            .pointer("/image/required_edge_contracts")
+            .and_then(serde_json::Value::as_array)
+        else {
+            return Err(Sys5I3PrivateProcessCodecError::new(
+                Sys5I3PrivateProcessCodecErrorKind::Malformed,
+            ));
+        };
+        if edges.iter().any(|edge| {
+            edge.get("core_ref")
+                .and_then(serde_json::Value::as_str)
+                .is_none_or(str::is_empty)
+        }) {
+            return Err(Sys5I3PrivateProcessCodecError::new(
+                Sys5I3PrivateProcessCodecErrorKind::MissingRequiredCoreProvenance,
+            ));
+        }
+        Ok(())
     }
 }
 
@@ -1360,6 +2078,43 @@ pub struct Sys5I3ObserverSafeRuntimeSummary {
     accepted_inbound_receipt_count: usize,
 }
 
+/// Exact, observer-safe semantic occurrence references retained by the
+/// process runtime.  These are recorded from accepted SYS-4 steps; they are
+/// deliberately not inferred from the aggregate counters above.
+#[doc(hidden)]
+#[derive(Debug, Clone, PartialEq, Eq, Default)]
+pub struct Sys5I3ObserverSafeSemanticOccurrences {
+    owner_serve_linearizations: BTreeMap<String, String>,
+    actual_owner_writes: BTreeMap<String, String>,
+    requester_local_receipts: BTreeMap<String, String>,
+}
+
+impl Sys5I3ObserverSafeSemanticOccurrences {
+    pub fn owner_serve_linearization_occurrence_ref(
+        &self,
+        request_identity_ref: &str,
+    ) -> Option<&str> {
+        self.owner_serve_linearizations
+            .get(request_identity_ref)
+            .map(String::as_str)
+    }
+
+    pub fn actual_owner_write_occurrence_ref(&self, request_identity_ref: &str) -> Option<&str> {
+        self.actual_owner_writes
+            .get(request_identity_ref)
+            .map(String::as_str)
+    }
+
+    pub fn requester_local_receipt_occurrence_ref(
+        &self,
+        request_identity_ref: &str,
+    ) -> Option<&str> {
+        self.requester_local_receipts
+            .get(request_identity_ref)
+            .map(String::as_str)
+    }
+}
+
 impl Sys5I3ObserverSafeRuntimeSummary {
     pub const fn carries_authority_publisher_or_issuer(&self) -> bool {
         false
@@ -1393,12 +2148,15 @@ pub struct Sys5I3ProcessRuntime {
     parent_checked_program_ref: String,
     projection_ref: String,
     cohort_ref: String,
-    logical_origin_ref: String,
-    next_logical_ordinal: usize,
     fabric: LocalFabric,
     local_authoritative_mutation_count: usize,
     served_owner_request_count: usize,
     accepted_inbound_receipt_count: usize,
+    semantic_occurrences: Sys5I3ObserverSafeSemanticOccurrences,
+    // A requester-local claim for one emitted owner request.  It contains
+    // only receiver-owned, source-derived route/provenance facts; it is not
+    // a transport session, credential, or mutable remote-store handle.
+    pending_outbound_owner_requests: BTreeMap<String, Sys4I3PendingOwnerRequestBinding>,
     reject_next_outbound_extraction: bool,
 }
 
@@ -1459,12 +2217,12 @@ impl Sys5I3ProcessRuntime {
             parent_checked_program_ref,
             projection_ref,
             cohort_ref,
-            logical_origin_ref,
-            next_logical_ordinal: 1,
             fabric,
             local_authoritative_mutation_count: 0,
             served_owner_request_count: 0,
             accepted_inbound_receipt_count: 0,
+            semantic_occurrences: Sys5I3ObserverSafeSemanticOccurrences::default(),
+            pending_outbound_owner_requests: BTreeMap::new(),
             reject_next_outbound_extraction: false,
         })
     }
@@ -1487,6 +2245,10 @@ impl Sys5I3ProcessRuntime {
 
     pub const fn observer_safe_store_identity_basis(&self) -> Sys5I3ObserverSafeIdentityBasis {
         self.identity_basis
+    }
+
+    pub fn observer_safe_semantic_occurrences(&self) -> Sys5I3ObserverSafeSemanticOccurrences {
+        self.semantic_occurrences.clone()
     }
 
     pub fn observer_safe_outbox_summary(&self) -> Sys5I3ObserverSafeOutboxSummary {
@@ -1539,11 +2301,32 @@ impl Sys5I3ProcessRuntime {
                 Sys5I3ProcessRuntimeErrorKind::NoGeneratedOwnerRequest,
             ));
         }
+        let pending = self
+            .fabric
+            .i3_pending_owner_request_binding(&carrier)
+            .map_err(|_| {
+                Sys5I3ProcessRuntimeError::new(
+                    Sys5I3ProcessRuntimeErrorKind::NoGeneratedOwnerRequest,
+                )
+            })?;
+        let request_identity_ref = pending.semantic_request_identity_ref(
+            &self.parent_checked_program_ref,
+            &self.projection_ref,
+            &self.cohort_ref,
+        );
+        if self
+            .pending_outbound_owner_requests
+            .insert(request_identity_ref.clone(), pending)
+            .is_some()
+        {
+            return Err(Sys5I3ProcessRuntimeError::new(
+                Sys5I3ProcessRuntimeErrorKind::CarrierAdmissionRejected,
+            ));
+        }
         Ok(Sys5I3ProcessMessage {
             kind: Sys5I3ProcessMessageKind::Request,
             carrier: Some(carrier),
-            semantic_request_identity_ref: self
-                .semantic_request_identity_ref(submission.request_id()),
+            semantic_request_identity_ref: request_identity_ref,
             linked_request_identity_ref: None,
             cohort_provenance_ref: self.cohort_ref.clone(),
             identity_basis: self.identity_basis,
@@ -1569,6 +2352,31 @@ impl Sys5I3ProcessRuntime {
                         Sys5I3ProcessRuntimeErrorKind::CarrierAdmissionRejected,
                     )
                 })?;
+                if carrier.edge_kind() != CommunicationEdgeKind::OwnerRequest {
+                    return Err(Sys5I3ProcessRuntimeError::new(
+                        Sys5I3ProcessRuntimeErrorKind::CarrierAdmissionRejected,
+                    ));
+                }
+                let expected_request_identity_ref = self
+                    .fabric
+                    .i3_pending_owner_request_binding(&carrier)
+                    .map_err(|_| {
+                        Sys5I3ProcessRuntimeError::new(
+                            Sys5I3ProcessRuntimeErrorKind::CarrierAdmissionRejected,
+                        )
+                    })?
+                    .semantic_request_identity_ref(
+                        &self.parent_checked_program_ref,
+                        &self.projection_ref,
+                        &self.cohort_ref,
+                    );
+                if message.semantic_request_identity_ref != expected_request_identity_ref
+                    || message.linked_request_identity_ref.is_some()
+                {
+                    return Err(Sys5I3ProcessRuntimeError::new(
+                        Sys5I3ProcessRuntimeErrorKind::CarrierAdmissionRejected,
+                    ));
+                }
                 if !self.assigned_loci.contains(carrier.target_locus()) {
                     return Err(Sys5I3ProcessRuntimeError::new(
                         Sys5I3ProcessRuntimeErrorKind::NonOwnerServe,
@@ -1610,7 +2418,19 @@ impl Sys5I3ProcessRuntime {
                         Sys5I3ProcessRuntimeErrorKind::CarrierAdmissionRejected,
                     ));
                 }
-                if !step.m8_serve_node_id().is_empty() {
+                let request_identity_ref = message.semantic_request_identity_ref.clone();
+                let serve_occurrence = observer_safe_process_occurrence_ref(
+                    "owner-serve-linearization",
+                    &request_identity_ref,
+                    step.m8_serve_node_id(),
+                    step.consumed_envelope_id(),
+                );
+                self.semantic_occurrences
+                    .owner_serve_linearizations
+                    .insert(request_identity_ref.clone(), serve_occurrence);
+                if let Some(actual_owner_write_occurrence_id) =
+                    step.actual_owner_write_occurrence_id()
+                {
                     self.local_authoritative_mutation_count = self
                         .local_authoritative_mutation_count
                         .checked_add(1)
@@ -1619,6 +2439,15 @@ impl Sys5I3ProcessRuntime {
                                 Sys5I3ProcessRuntimeErrorKind::CarrierAdmissionRejected,
                             )
                         })?;
+                    let write_occurrence = observer_safe_process_occurrence_ref(
+                        "owner-actual-write",
+                        &request_identity_ref,
+                        actual_owner_write_occurrence_id,
+                        step.locus_dequeue_occurrence_id(),
+                    );
+                    self.semantic_occurrences
+                        .actual_owner_writes
+                        .insert(request_identity_ref, write_occurrence);
                 }
                 Ok(Some(Sys5I3ProcessMessage {
                     kind: Sys5I3ProcessMessageKind::Reply,
@@ -1635,6 +2464,35 @@ impl Sys5I3ProcessRuntime {
                         Sys5I3ProcessRuntimeErrorKind::CarrierAdmissionRejected,
                     )
                 })?;
+                if carrier.edge_kind() != CommunicationEdgeKind::OwnerReplyReceipt {
+                    return Err(Sys5I3ProcessRuntimeError::new(
+                        Sys5I3ProcessRuntimeErrorKind::CarrierAdmissionRejected,
+                    ));
+                }
+                let request_identity_ref = message.semantic_request_identity_ref.clone();
+                if message.linked_request_identity_ref.as_deref()
+                    != Some(request_identity_ref.as_str())
+                {
+                    return Err(Sys5I3ProcessRuntimeError::new(
+                        Sys5I3ProcessRuntimeErrorKind::CarrierAdmissionRejected,
+                    ));
+                }
+                let pending = self
+                    .pending_outbound_owner_requests
+                    .get(&request_identity_ref)
+                    .cloned()
+                    .ok_or_else(|| {
+                        Sys5I3ProcessRuntimeError::new(
+                            Sys5I3ProcessRuntimeErrorKind::CarrierAdmissionRejected,
+                        )
+                    })?;
+                self.fabric
+                    .validate_i3_pending_owner_reply(&pending, &carrier)
+                    .map_err(|_| {
+                        Sys5I3ProcessRuntimeError::new(
+                            Sys5I3ProcessRuntimeErrorKind::CarrierAdmissionRejected,
+                        )
+                    })?;
                 if !self.assigned_loci.contains(carrier.target_locus()) {
                     return Err(Sys5I3ProcessRuntimeError::new(
                         Sys5I3ProcessRuntimeErrorKind::CarrierAdmissionRejected,
@@ -1653,6 +2511,27 @@ impl Sys5I3ProcessRuntime {
                         Sys5I3ProcessRuntimeErrorKind::CarrierAdmissionRejected,
                     ));
                 }
+                let receipt_occurrence = observer_safe_process_occurrence_ref(
+                    "requester-local-receipt",
+                    &request_identity_ref,
+                    step.consumed_envelope_id(),
+                    step.locus_dequeue_occurrence_id(),
+                );
+                self.semantic_occurrences
+                    .requester_local_receipts
+                    .insert(request_identity_ref.clone(), receipt_occurrence);
+                self.accepted_inbound_receipt_count = self
+                    .accepted_inbound_receipt_count
+                    .checked_add(1)
+                    .ok_or_else(|| {
+                        Sys5I3ProcessRuntimeError::new(
+                            Sys5I3ProcessRuntimeErrorKind::CarrierAdmissionRejected,
+                        )
+                    })?;
+                // A reply is consumed only after the receiver-owned SYS-4
+                // admission completed and produced its local receipt.
+                self.pending_outbound_owner_requests
+                    .remove(&request_identity_ref);
                 Ok(Some(Sys5I3ProcessMessage {
                     kind: Sys5I3ProcessMessageKind::Receipt,
                     carrier: None,
@@ -1672,6 +2551,48 @@ impl Sys5I3ProcessRuntime {
                 ))
             }
         }
+    }
+
+    /// Receiver-owned admission for a private decoded request/reply.  It
+    /// validates cohort provenance before touching SYS-4, then binds every
+    /// static carrier field and the owner-request M9 lineage to this local
+    /// sealed image before any mailbox/store mutation can occur.
+    pub fn admit_untrusted_message(
+        &mut self,
+        candidate: Sys5I3UntrustedProcessMessage,
+    ) -> Result<Option<Sys5I3ProcessMessage>, Sys5I3ProcessRuntimeError> {
+        let message = candidate.message;
+        if message.cohort_provenance_ref != self.cohort_ref {
+            return Err(Sys5I3ProcessRuntimeError::new(
+                Sys5I3ProcessRuntimeErrorKind::CohortProvenanceMismatch,
+            ));
+        }
+        let (kind, expected_edge_kind) = match message.kind {
+            PrivateProcessMessageKind::Request => (
+                Sys5I3ProcessMessageKind::Request,
+                CommunicationEdgeKind::OwnerRequest,
+            ),
+            PrivateProcessMessageKind::Reply => (
+                Sys5I3ProcessMessageKind::Reply,
+                CommunicationEdgeKind::OwnerReplyReceipt,
+            ),
+        };
+        let carrier = self
+            .fabric
+            .bind_i3_untrusted_process_carrier(message.carrier, expected_edge_kind)
+            .map_err(|_| {
+                Sys5I3ProcessRuntimeError::new(
+                    Sys5I3ProcessRuntimeErrorKind::CarrierAdmissionRejected,
+                )
+            })?;
+        self.accept_inbound(Sys5I3ProcessMessage {
+            kind,
+            carrier: Some(carrier),
+            semantic_request_identity_ref: message.semantic_request_identity_ref,
+            linked_request_identity_ref: message.linked_request_identity_ref,
+            cohort_provenance_ref: message.cohort_provenance_ref,
+            identity_basis: self.identity_basis,
+        })
     }
 
     pub fn attempt_owner_serve(
@@ -1714,6 +2635,24 @@ impl Sys5I3ProcessRuntime {
     }
 }
 
+fn observer_safe_process_occurrence_ref(
+    kind: &str,
+    request_identity_ref: &str,
+    source_occurrence_ref: &str,
+    admission_occurrence_ref: &str,
+) -> String {
+    let mut hasher = Sha256::new();
+    hasher.update(b"mirrorea/sys5/i3/process-semantic-occurrence/v1\\0");
+    hasher.update(kind);
+    hasher.update(request_identity_ref);
+    hasher.update(source_occurrence_ref);
+    hasher.update(admission_occurrence_ref);
+    format!(
+        "sys5-i3-process-semantic-occurrence-sha256-v1:{:x}",
+        hasher.finalize()
+    )
+}
+
 fn logical_origin_ref(
     slot_name: &str,
     assigned_loci: &BTreeSet<String>,
@@ -1746,22 +2685,4 @@ fn process_store_identity_ref(
     hasher.update(logical_origin_ref);
     hasher.update(ordinal.to_le_bytes());
     format!("sys5-i3-local-store-sha256-v2:{:x}", hasher.finalize())
-}
-
-impl Sys5I3ProcessRuntime {
-    fn semantic_request_identity_ref(&mut self, request_id: &str) -> String {
-        let ordinal = self.next_logical_ordinal;
-        self.next_logical_ordinal = self.next_logical_ordinal.checked_add(1).expect(
-            "bounded I3-2 logical request ordinal must not overflow before typed runtime shutdown",
-        );
-        let mut hasher = Sha256::new();
-        hasher.update(b"mirrorea/sys5/i3/semantic-request/v2\\0");
-        hasher.update(&self.parent_checked_program_ref);
-        hasher.update(&self.projection_ref);
-        hasher.update(&self.cohort_ref);
-        hasher.update(&self.logical_origin_ref);
-        hasher.update(ordinal.to_le_bytes());
-        hasher.update(request_id);
-        format!("sys5-i3-semantic-request-sha256-v2:{:x}", hasher.finalize())
-    }
 }

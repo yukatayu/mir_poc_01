@@ -7,6 +7,7 @@
 use std::collections::BTreeMap;
 
 use mir_semantics::shared_model::SourceRef;
+use serde::{Deserialize, Serialize};
 
 use crate::{
     m8_runtime_admission::{M8RelationExecutionPlan, M8RuntimeInstance, M8SecurityClass},
@@ -569,6 +570,23 @@ pub struct M8RelationAuthorityUse {
     witness_epoch: Option<String>,
 }
 
+/// Exact private snapshot of a sealed relation authority use.  It has no
+/// route, issuer, or capability minting path.
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[serde(deny_unknown_fields)]
+pub(crate) struct M8I3PrivateRelationAuthorityUseSnapshot {
+    relation: String,
+    owner_locus: Option<String>,
+    transition: Option<String>,
+    principal: Option<String>,
+    membership_ref: Option<String>,
+    capability_ref: Option<String>,
+    membership_epoch: Option<String>,
+    binding_epoch: Option<String>,
+    witness_ref: Option<String>,
+    witness_epoch: Option<String>,
+}
+
 impl M8RelationAuthorityUse {
     pub fn for_relation(relation: impl Into<String>) -> Self {
         Self {
@@ -644,6 +662,38 @@ impl M8RelationAuthorityUse {
 
     pub(crate) fn principal(&self) -> Option<&str> {
         self.principal.as_deref()
+    }
+
+    pub(crate) fn i3_private_snapshot(&self) -> M8I3PrivateRelationAuthorityUseSnapshot {
+        M8I3PrivateRelationAuthorityUseSnapshot {
+            relation: self.relation.clone(),
+            owner_locus: self.owner_locus.clone(),
+            transition: self.transition.clone(),
+            principal: self.principal.clone(),
+            membership_ref: self.membership_ref.clone(),
+            capability_ref: self.capability_ref.clone(),
+            membership_epoch: self.membership_epoch.clone(),
+            binding_epoch: self.binding_epoch.clone(),
+            witness_ref: self.witness_ref.clone(),
+            witness_epoch: self.witness_epoch.clone(),
+        }
+    }
+
+    pub(crate) fn from_i3_private_snapshot(
+        snapshot: M8I3PrivateRelationAuthorityUseSnapshot,
+    ) -> Self {
+        Self {
+            relation: snapshot.relation,
+            owner_locus: snapshot.owner_locus,
+            transition: snapshot.transition,
+            principal: snapshot.principal,
+            membership_ref: snapshot.membership_ref,
+            capability_ref: snapshot.capability_ref,
+            membership_epoch: snapshot.membership_epoch,
+            binding_epoch: snapshot.binding_epoch,
+            witness_ref: snapshot.witness_ref,
+            witness_epoch: snapshot.witness_epoch,
+        }
     }
 
     /// Validate an already-issued relation use against the live, sealed M8

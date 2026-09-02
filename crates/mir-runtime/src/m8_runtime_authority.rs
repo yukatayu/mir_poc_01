@@ -6,6 +6,7 @@
 use std::collections::{BTreeMap, BTreeSet};
 
 use mir_semantics::shared_model::ResultVersion;
+use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, PartialEq, Eq)]
 pub struct M8MembershipRecord {
@@ -250,6 +251,75 @@ pub struct M8AuthorityState {
     memberships: BTreeMap<String, M8MembershipRecord>,
     capability_grants: BTreeMap<String, M8CapabilityGrant>,
     witness_records: BTreeMap<String, M8WitnessRecord>,
+}
+
+/// Strict private process-image snapshot of already-admitted M8 authority
+/// records.  It has no issuer, refresh, or transport-facing constructor.
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[serde(deny_unknown_fields)]
+pub(crate) struct M8I3PrivateAuthorityStateSnapshot {
+    memberships: Vec<PrivateMembershipRecordSnapshot>,
+    capability_grants: Vec<PrivateCapabilityGrantSnapshot>,
+    witness_records: Vec<PrivateWitnessRecordSnapshot>,
+}
+
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[serde(deny_unknown_fields)]
+struct PrivateMembershipRecordSnapshot {
+    reference: String,
+    principal: Option<String>,
+    locus: Option<String>,
+    epoch: Option<String>,
+}
+
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[serde(tag = "kind", rename_all = "snake_case", deny_unknown_fields)]
+enum PrivateCapabilityScopeSnapshot {
+    OwnerEvaluation {
+        evaluation: String,
+    },
+    RelationTransition {
+        relation: String,
+        transition: String,
+    },
+    DesignatedEvaluation {
+        evaluator: String,
+        result: String,
+    },
+    DesignatedConsumption {
+        consumer: String,
+        value_name: String,
+    },
+    PatchActivation {
+        program_identity: String,
+    },
+}
+
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[serde(deny_unknown_fields)]
+struct PrivateCapabilityGrantSnapshot {
+    reference: String,
+    active: bool,
+    scope: Option<PrivateCapabilityScopeSnapshot>,
+    owner_locus: Option<String>,
+    principal: Option<String>,
+    membership_ref: Option<String>,
+    epoch: Option<String>,
+    binding_epoch: Option<String>,
+    evaluator_locus: Option<String>,
+    consumer_locus: Option<String>,
+    input_frontier: Option<String>,
+    result_version: Option<u64>,
+}
+
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[serde(deny_unknown_fields)]
+struct PrivateWitnessRecordSnapshot {
+    reference: String,
+    live: bool,
+    capability_ref: Option<String>,
+    membership_ref: Option<String>,
+    epoch: Option<String>,
 }
 
 impl M8AuthorityState {
@@ -562,6 +632,213 @@ impl M8AuthorityState {
                 .filter(|(reference, _)| witness_refs.contains(*reference))
                 .map(|(reference, record)| (reference.clone(), record.clone()))
                 .collect(),
+        }
+    }
+
+    /// Copy an exact restricted authority inventory into the private I3 image
+    /// schema.  This does not widen the selection or produce authority.
+    pub(crate) fn i3_private_snapshot(&self) -> M8I3PrivateAuthorityStateSnapshot {
+        M8I3PrivateAuthorityStateSnapshot {
+            memberships: self
+                .memberships
+                .values()
+                .map(PrivateMembershipRecordSnapshot::from_record)
+                .collect(),
+            capability_grants: self
+                .capability_grants
+                .values()
+                .map(PrivateCapabilityGrantSnapshot::from_grant)
+                .collect(),
+            witness_records: self
+                .witness_records
+                .values()
+                .map(PrivateWitnessRecordSnapshot::from_record)
+                .collect(),
+        }
+    }
+
+    /// Restore only the already-selected records contained in a private I3
+    /// process image.  Duplicate references fail closed before a runtime can
+    /// validate or consume an authority use.
+    pub(crate) fn from_i3_private_snapshot(
+        snapshot: M8I3PrivateAuthorityStateSnapshot,
+    ) -> Result<Self, ()> {
+        let mut memberships = BTreeMap::new();
+        for snapshot in snapshot.memberships {
+            let record = snapshot.into_record();
+            if memberships
+                .insert(record.reference.clone(), record)
+                .is_some()
+            {
+                return Err(());
+            }
+        }
+        let mut capability_grants = BTreeMap::new();
+        for snapshot in snapshot.capability_grants {
+            let grant = snapshot.into_grant();
+            if capability_grants
+                .insert(grant.reference.clone(), grant)
+                .is_some()
+            {
+                return Err(());
+            }
+        }
+        let mut witness_records = BTreeMap::new();
+        for snapshot in snapshot.witness_records {
+            let record = snapshot.into_record();
+            if witness_records
+                .insert(record.reference.clone(), record)
+                .is_some()
+            {
+                return Err(());
+            }
+        }
+        Ok(Self {
+            memberships,
+            capability_grants,
+            witness_records,
+        })
+    }
+}
+
+impl PrivateMembershipRecordSnapshot {
+    fn from_record(record: &M8MembershipRecord) -> Self {
+        Self {
+            reference: record.reference.clone(),
+            principal: record.principal.clone(),
+            locus: record.locus.clone(),
+            epoch: record.epoch.clone(),
+        }
+    }
+
+    fn into_record(self) -> M8MembershipRecord {
+        M8MembershipRecord {
+            reference: self.reference,
+            principal: self.principal,
+            locus: self.locus,
+            epoch: self.epoch,
+        }
+    }
+}
+
+impl PrivateCapabilityGrantSnapshot {
+    fn from_grant(grant: &M8CapabilityGrant) -> Self {
+        Self {
+            reference: grant.reference.clone(),
+            active: grant.active,
+            scope: grant
+                .scope
+                .as_ref()
+                .map(PrivateCapabilityScopeSnapshot::from_scope),
+            owner_locus: grant.owner_locus.clone(),
+            principal: grant.principal.clone(),
+            membership_ref: grant.membership_ref.clone(),
+            epoch: grant.epoch.clone(),
+            binding_epoch: grant.binding_epoch.clone(),
+            evaluator_locus: grant.evaluator_locus.clone(),
+            consumer_locus: grant.consumer_locus.clone(),
+            input_frontier: grant.input_frontier.clone(),
+            result_version: grant.result_version.map(ResultVersion::value),
+        }
+    }
+
+    fn into_grant(self) -> M8CapabilityGrant {
+        M8CapabilityGrant {
+            reference: self.reference,
+            active: self.active,
+            scope: self.scope.map(PrivateCapabilityScopeSnapshot::into_scope),
+            owner_locus: self.owner_locus,
+            principal: self.principal,
+            membership_ref: self.membership_ref,
+            epoch: self.epoch,
+            binding_epoch: self.binding_epoch,
+            evaluator_locus: self.evaluator_locus,
+            consumer_locus: self.consumer_locus,
+            input_frontier: self.input_frontier,
+            result_version: self.result_version.map(ResultVersion::new),
+        }
+    }
+}
+
+impl PrivateCapabilityScopeSnapshot {
+    fn from_scope(scope: &M8CapabilityScope) -> Self {
+        match scope {
+            M8CapabilityScope::OwnerEvaluation { evaluation } => Self::OwnerEvaluation {
+                evaluation: evaluation.clone(),
+            },
+            M8CapabilityScope::RelationTransition {
+                relation,
+                transition,
+            } => Self::RelationTransition {
+                relation: relation.clone(),
+                transition: transition.clone(),
+            },
+            M8CapabilityScope::DesignatedEvaluation { evaluator, result } => {
+                Self::DesignatedEvaluation {
+                    evaluator: evaluator.clone(),
+                    result: result.clone(),
+                }
+            }
+            M8CapabilityScope::DesignatedConsumption {
+                consumer,
+                value_name,
+            } => Self::DesignatedConsumption {
+                consumer: consumer.clone(),
+                value_name: value_name.clone(),
+            },
+            M8CapabilityScope::PatchActivation { program_identity } => Self::PatchActivation {
+                program_identity: program_identity.clone(),
+            },
+        }
+    }
+
+    fn into_scope(self) -> M8CapabilityScope {
+        match self {
+            Self::OwnerEvaluation { evaluation } => {
+                M8CapabilityScope::OwnerEvaluation { evaluation }
+            }
+            Self::RelationTransition {
+                relation,
+                transition,
+            } => M8CapabilityScope::RelationTransition {
+                relation,
+                transition,
+            },
+            Self::DesignatedEvaluation { evaluator, result } => {
+                M8CapabilityScope::DesignatedEvaluation { evaluator, result }
+            }
+            Self::DesignatedConsumption {
+                consumer,
+                value_name,
+            } => M8CapabilityScope::DesignatedConsumption {
+                consumer,
+                value_name,
+            },
+            Self::PatchActivation { program_identity } => {
+                M8CapabilityScope::PatchActivation { program_identity }
+            }
+        }
+    }
+}
+
+impl PrivateWitnessRecordSnapshot {
+    fn from_record(record: &M8WitnessRecord) -> Self {
+        Self {
+            reference: record.reference.clone(),
+            live: record.live,
+            capability_ref: record.capability_ref.clone(),
+            membership_ref: record.membership_ref.clone(),
+            epoch: record.epoch.clone(),
+        }
+    }
+
+    fn into_record(self) -> M8WitnessRecord {
+        M8WitnessRecord {
+            reference: self.reference,
+            live: self.live,
+            capability_ref: self.capability_ref,
+            membership_ref: self.membership_ref,
+            epoch: self.epoch,
         }
     }
 }

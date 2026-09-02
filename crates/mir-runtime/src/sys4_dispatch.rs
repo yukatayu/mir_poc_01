@@ -13,8 +13,10 @@ use std::{
     sync::{Arc, Mutex, MutexGuard},
 };
 
+use serde::{Deserialize, Serialize};
 use sha2::{Digest, Sha256};
 
+use mir_semantics::surface_v0_pipeline::private_snapshot::SnapshotCheckedProgramIdentity;
 use mir_semantics::{
     evaluation_materialization::{InputFrontier, ObservationPolicy, PolicyStamp},
     shared_model::{ResultFrontier, ResultVersion, SourceRef},
@@ -22,7 +24,9 @@ use mir_semantics::{
 };
 
 use crate::{
-    m8_runtime_admission::{EvidenceSecurityLabel, M8RuntimeInstance, M8SecurityClass},
+    m8_runtime_admission::{
+        EvidenceSecurityLabel, M8I3PrivateSnapshot, M8RuntimeInstance, M8SecurityClass,
+    },
     m8_runtime_designated_value::{
         M8ConsumeRequest, M8DesignatedEvaluationRequest, M8DesignatedTick, M8InputReceipt,
         M8InputReceiptSet, M8PublishedDesignatedValue,
@@ -41,7 +45,8 @@ use crate::{
         M9AdmissionErrorKind, M9AuthorityGeneration, M9AuthorityInspection,
         M9AuthoritySuccessorPublisher, M9AuthorityTransitionKind, M9CacheValidationInspection,
         M9CheckedPatchAuthorityBinding, M9DesignatedSourceReleaseLineage, M9ExecutionRestriction,
-        M9KernelAuthorityView, M9RelationPublicationAdmission, M9RuntimeExecutionSeam,
+        M9I3PrivateAuthorityGenerationSnapshot, M9KernelAuthorityView,
+        M9RelationPublicationAdmission, M9RuntimeExecutionSeam,
         M9RuntimeValidationObservationSnapshot, M9SealedFailureInspection, M9SealedGeneration,
         M9SealedTransitionInspection, M9SourceReleaseValidationInspection,
     },
@@ -482,6 +487,44 @@ impl FabricProgram {
             projection,
             route_index: FabricRouteIndex { routes },
         })
+    }
+
+    /// Export the exact already restricted projection for the private I3
+    /// child bootstrap.  This is structural serialization only; it never
+    /// reruns lowering or selects a locus subset.
+    pub(crate) fn i3_private_projection_snapshot(
+        &self,
+    ) -> Result<crate::sys3_i3_private_snapshot::I3PrivateProjectionSnapshot, ()> {
+        self.projection.to_i3_private_snapshot().map_err(|_| ())
+    }
+
+    /// Opaque commitment to every field of the already restricted projection
+    /// snapshot.  The I3 coordinator retains this inside its expected-start
+    /// binding so a candidate with the same route fingerprint but changed
+    /// executable projection detail cannot be accepted from bytes alone.
+    pub(crate) fn i3_private_projection_binding_ref(&self) -> Result<String, ()> {
+        let snapshot = self.i3_private_projection_snapshot()?;
+        let encoded = serde_json::to_vec(&snapshot).map_err(|_| ())?;
+        let mut hasher = Sha256::new();
+        hasher.update(b"mirrorea/sys4/i3/private-projection-binding/v1\0");
+        hasher.update(encoded);
+        Ok(format!(
+            "sys4-i3-private-projection-binding-sha256-v1:{:x}",
+            hasher.finalize()
+        ))
+    }
+
+    /// Rebuild derived route-index state from an exact decoded restricted
+    /// projection.  The projection constructor validates its own structural
+    /// references; this method does not parse/check/project/admit anything.
+    pub(crate) fn from_i3_private_projection_snapshot(
+        snapshot: crate::sys3_i3_private_snapshot::I3PrivateProjectionSnapshot,
+    ) -> Sys4Result<Self> {
+        let projection =
+            GlobalProjectionResult::from_i3_private_snapshot(snapshot).map_err(|_| {
+                Sys4DispatchDiagnostics::one(Sys4DiagnosticKind::ProgramProjectionMismatch)
+            })?;
+        Self::from_projection(projection)
     }
 
     /// Seal a process-local program from the already checked global
@@ -1137,6 +1180,87 @@ pub(crate) struct SealedFabricAdmission {
     initial_state_seed: Sys4InitialStateSeed,
 }
 
+/// Strict private DTO for a process-restricted sealed admission.  It excludes
+/// M9's successor publisher and live `Arc` floor; the latter is rebuilt from
+/// the exact imported generation after structural validation.
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[serde(deny_unknown_fields)]
+pub(crate) struct Sys4I3PrivateSealedAdmissionSnapshot {
+    version: u32,
+    program_identity: SnapshotCheckedProgramIdentity,
+    program_fingerprint: Vec<PrivateFabricRouteSnapshot>,
+    summary: PrivateObserverSafeM9SummarySnapshot,
+    instance: M8I3PrivateSnapshot,
+    authority_generation: M9I3PrivateAuthorityGenerationSnapshot,
+    initial_state_seed: PrivateSys4InitialStateSeedSnapshot,
+}
+
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[serde(deny_unknown_fields)]
+struct PrivateFabricRouteSnapshot {
+    operation: String,
+    kind: u8,
+    source_locus: String,
+    target_locus: String,
+    edge_ref: String,
+}
+
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[serde(deny_unknown_fields)]
+struct PrivateObserverSafeM9SummarySnapshot {
+    checked_program_identity: SnapshotCheckedProgramIdentity,
+    complete_final: bool,
+    inventory_digest: String,
+    owner_lineages: Vec<PrivateOwnerSummaryRow>,
+    relation_transitions: Vec<PrivatePairSummaryRow>,
+    designated_evaluators: Vec<PrivatePairSummaryRow>,
+    designated_remote_input_lineages: Vec<PrivateRemoteInputSummaryRow>,
+    designated_consumers: Vec<PrivatePairSummaryRow>,
+}
+
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[serde(deny_unknown_fields)]
+struct PrivateOwnerSummaryRow {
+    operation: String,
+    principal: String,
+    origin: String,
+    owner: String,
+}
+
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[serde(deny_unknown_fields)]
+struct PrivatePairSummaryRow {
+    left: String,
+    right: String,
+}
+
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[serde(deny_unknown_fields)]
+struct PrivateRemoteInputSummaryRow {
+    producer: String,
+    evaluator: String,
+    result: String,
+    dependency_ordinal: usize,
+    trigger_frontier: String,
+}
+
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[serde(deny_unknown_fields)]
+struct PrivateSys4InitialStateSeedSnapshot {
+    checked_program_identity: SnapshotCheckedProgramIdentity,
+    ints: Vec<PrivateSys4InitialIntSnapshot>,
+}
+
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[serde(deny_unknown_fields)]
+struct PrivateSys4InitialIntSnapshot {
+    locus: String,
+    state: String,
+    index: String,
+    field: String,
+    value: i64,
+}
+
 impl std::fmt::Debug for SealedFabricAdmission {
     fn fmt(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         formatter
@@ -1407,6 +1531,42 @@ impl SealedFabricAdmission {
         self.authority_generation.generation_ref()
     }
 
+    /// Opaque commitment to the exact already-restricted admission facts.
+    /// It is retained by the I3 coordinator as part of its expected child
+    /// binding; the child can recompute it after restore but cannot make a
+    /// different M8/M9/seed inventory match the coordinator's value.
+    pub(crate) fn i3_private_snapshot_binding_ref(&self) -> String {
+        let mut hasher = Sha256::new();
+        hasher.update(b"mirrorea/sys4/i3/private-admission-binding/v1\0");
+        hasher.update(self.program_identity.stable_key());
+        hasher.update(format!("{:?}", self.program_fingerprint));
+        hasher.update(format!("{:?}", self.summary));
+        hasher.update(format!("{:?}", self.instance));
+        hasher.update(self.authority_generation.private_restore_integrity_digest());
+        hasher.update(format!("{:?}", self.initial_state_seed));
+        format!(
+            "sys4-i3-private-admission-binding-sha256-v1:{:x}",
+            hasher.finalize()
+        )
+    }
+
+    /// Export a previously restricted sealed admission.  The returned DTO has
+    /// no successor publisher or live mutex state, so it cannot continue an
+    /// authority lifecycle outside the restored local runtime.
+    pub(crate) fn i3_private_snapshot(&self) -> Sys4I3PrivateSealedAdmissionSnapshot {
+        Sys4I3PrivateSealedAdmissionSnapshot::from_admission(self)
+    }
+
+    /// Restore a process-restricted sealed admission against the independently
+    /// reconstructed restricted program.  No parse, projection, M8 admission,
+    /// M9 generation, publisher, or route selection occurs here.
+    pub(crate) fn from_i3_private_snapshot(
+        snapshot: Sys4I3PrivateSealedAdmissionSnapshot,
+        program: &FabricProgram,
+    ) -> Sys4Result<Self> {
+        snapshot.into_admission(program)
+    }
+
     /// Derive a child-process admission from one already sealed full
     /// admission.  The result contains only the M8 plans, M9 validation
     /// closure, and state cells required by the process-local program.  In
@@ -1479,6 +1639,341 @@ impl SealedFabricAdmission {
             .remove_one_designated_remote_input_lineage_for_i3_process_test();
         summary_removed || generation_removed
     }
+}
+
+impl Sys4I3PrivateSealedAdmissionSnapshot {
+    const VERSION: u32 = 1;
+
+    fn from_admission(admission: &SealedFabricAdmission) -> Self {
+        Self {
+            version: Self::VERSION,
+            program_identity: SnapshotCheckedProgramIdentity::from_checked(
+                &admission.program_identity,
+            ),
+            program_fingerprint: admission
+                .program_fingerprint
+                .iter()
+                .map(PrivateFabricRouteSnapshot::from_route)
+                .collect(),
+            summary: PrivateObserverSafeM9SummarySnapshot::from_summary(&admission.summary),
+            instance: admission.instance.i3_private_snapshot(),
+            authority_generation: admission.authority_generation.i3_private_snapshot(),
+            initial_state_seed: PrivateSys4InitialStateSeedSnapshot::from_seed(
+                &admission.initial_state_seed,
+            ),
+        }
+    }
+
+    fn into_admission(self, program: &FabricProgram) -> Sys4Result<SealedFabricAdmission> {
+        if self.version != Self::VERSION {
+            return Err(Sys4DispatchDiagnostics::one(
+                Sys4DiagnosticKind::ProgramAdmissionMismatch,
+            ));
+        }
+        let program_identity = self.program_identity.into_checked().map_err(|_| {
+            Sys4DispatchDiagnostics::one(Sys4DiagnosticKind::ProgramAdmissionMismatch)
+        })?;
+        if program_identity != *program.checked_program_identity() {
+            return Err(Sys4DispatchDiagnostics::one(
+                Sys4DiagnosticKind::ProgramAdmissionMismatch,
+            ));
+        }
+        let mut program_fingerprint = BTreeSet::new();
+        for route in self.program_fingerprint {
+            let (key, edge_ref) = route.into_route().ok_or_else(|| {
+                Sys4DispatchDiagnostics::one(Sys4DiagnosticKind::ProgramAdmissionMismatch)
+            })?;
+            if !program_fingerprint.insert((key, edge_ref)) {
+                return Err(Sys4DispatchDiagnostics::one(
+                    Sys4DiagnosticKind::ProgramAdmissionMismatch,
+                ));
+            }
+        }
+        if program_fingerprint != program.projected_fingerprint() {
+            return Err(Sys4DispatchDiagnostics::one(
+                Sys4DiagnosticKind::ProgramProjectionMismatch,
+            ));
+        }
+        let summary = self.summary.into_summary().map_err(|_| {
+            Sys4DispatchDiagnostics::one(Sys4DiagnosticKind::ProgramAdmissionMismatch)
+        })?;
+        let instance =
+            M8RuntimeInstance::from_i3_private_snapshot(self.instance).map_err(|_| {
+                Sys4DispatchDiagnostics::one(Sys4DiagnosticKind::ProgramAdmissionMismatch)
+            })?;
+        let authority_generation = M9AuthorityGeneration::from_i3_private_snapshot(
+            self.authority_generation,
+        )
+        .map_err(|_| Sys4DispatchDiagnostics::one(Sys4DiagnosticKind::ProgramAdmissionMismatch))?;
+        let initial_state_seed = self.initial_state_seed.into_seed().map_err(|_| {
+            Sys4DispatchDiagnostics::one(Sys4DiagnosticKind::ProgramAdmissionMismatch)
+        })?;
+        if instance.program_identity() != program.checked_program_identity()
+            || initial_state_seed.checked_program_identity != *program.checked_program_identity()
+            || authority_generation.program_identity()
+                != program.checked_program_identity().stable_key()
+            || summary.checked_program_identity != *program.checked_program_identity()
+            || !summary.complete_final
+        {
+            return Err(Sys4DispatchDiagnostics::one(
+                Sys4DiagnosticKind::ProgramAdmissionMismatch,
+            ));
+        }
+        validate_seed(program, &initial_state_seed)?;
+        let restriction = m9_execution_restriction_for_program(program)?;
+        authority_generation
+            .validate_execution_restriction_exact(&restriction)
+            .map_err(|_| {
+                Sys4DispatchDiagnostics::one(Sys4DiagnosticKind::IncompleteM9AuthorityInventory)
+            })?;
+        if !summary_matches_i3_restriction(&summary, &restriction) {
+            return Err(Sys4DispatchDiagnostics::one(
+                Sys4DiagnosticKind::IncompleteM9AuthorityInventory,
+            ));
+        }
+        Ok(SealedFabricAdmission {
+            program_identity,
+            program_fingerprint,
+            summary,
+            instance,
+            authority_live_floor: M9AuthorityLiveFloor::new(authority_generation.clone()),
+            authority_generation,
+            authority_successor: None,
+            initial_state_seed,
+        })
+    }
+}
+
+impl PrivateFabricRouteSnapshot {
+    fn from_route((key, edge_ref): &(FabricRouteKey, String)) -> Self {
+        Self {
+            operation: key.operation.clone(),
+            kind: i3_snapshot_edge_kind_tag(key.kind),
+            source_locus: key.source_locus.clone(),
+            target_locus: key.target_locus.clone(),
+            edge_ref: edge_ref.clone(),
+        }
+    }
+
+    fn into_route(self) -> Option<(FabricRouteKey, String)> {
+        Some((
+            FabricRouteKey {
+                operation: self.operation,
+                kind: i3_snapshot_edge_kind_from_tag(self.kind)?,
+                source_locus: self.source_locus,
+                target_locus: self.target_locus,
+            },
+            self.edge_ref,
+        ))
+    }
+}
+
+impl PrivateObserverSafeM9SummarySnapshot {
+    fn from_summary(summary: &ObserverSafeM9Summary) -> Self {
+        Self {
+            checked_program_identity: SnapshotCheckedProgramIdentity::from_checked(
+                &summary.checked_program_identity,
+            ),
+            complete_final: summary.complete_final,
+            inventory_digest: summary.inventory_digest.clone(),
+            owner_lineages: summary
+                .owner_lineages
+                .iter()
+                .map(
+                    |(operation, principal, origin, owner)| PrivateOwnerSummaryRow {
+                        operation: operation.clone(),
+                        principal: principal.clone(),
+                        origin: origin.clone(),
+                        owner: owner.clone(),
+                    },
+                )
+                .collect(),
+            relation_transitions: summary
+                .relation_transitions
+                .iter()
+                .map(|(left, right)| PrivatePairSummaryRow {
+                    left: left.clone(),
+                    right: right.clone(),
+                })
+                .collect(),
+            designated_evaluators: summary
+                .designated_evaluators
+                .iter()
+                .map(|(left, right)| PrivatePairSummaryRow {
+                    left: left.clone(),
+                    right: right.clone(),
+                })
+                .collect(),
+            designated_remote_input_lineages: summary
+                .designated_remote_input_lineages
+                .iter()
+                .map(
+                    |(producer, evaluator, result, dependency_ordinal, trigger_frontier)| {
+                        PrivateRemoteInputSummaryRow {
+                            producer: producer.clone(),
+                            evaluator: evaluator.clone(),
+                            result: result.clone(),
+                            dependency_ordinal: *dependency_ordinal,
+                            trigger_frontier: trigger_frontier.clone(),
+                        }
+                    },
+                )
+                .collect(),
+            designated_consumers: summary
+                .designated_consumers
+                .iter()
+                .map(|(left, right)| PrivatePairSummaryRow {
+                    left: left.clone(),
+                    right: right.clone(),
+                })
+                .collect(),
+        }
+    }
+
+    fn into_summary(self) -> Result<ObserverSafeM9Summary, ()> {
+        let checked_program_identity = self
+            .checked_program_identity
+            .into_checked()
+            .map_err(|_| ())?;
+        let mut owner_lineages = BTreeSet::new();
+        for row in self.owner_lineages {
+            if !owner_lineages.insert((row.operation, row.principal, row.origin, row.owner)) {
+                return Err(());
+            }
+        }
+        let pairs = |rows: Vec<PrivatePairSummaryRow>| -> Result<BTreeSet<(String, String)>, ()> {
+            let mut out = BTreeSet::new();
+            for row in rows {
+                if !out.insert((row.left, row.right)) {
+                    return Err(());
+                }
+            }
+            Ok(out)
+        };
+        let mut designated_remote_input_lineages = BTreeSet::new();
+        for row in self.designated_remote_input_lineages {
+            if !designated_remote_input_lineages.insert((
+                row.producer,
+                row.evaluator,
+                row.result,
+                row.dependency_ordinal,
+                row.trigger_frontier,
+            )) {
+                return Err(());
+            }
+        }
+        Ok(ObserverSafeM9Summary {
+            checked_program_identity,
+            complete_final: self.complete_final,
+            inventory_digest: self.inventory_digest,
+            owner_lineages,
+            relation_transitions: pairs(self.relation_transitions)?,
+            designated_evaluators: pairs(self.designated_evaluators)?,
+            designated_remote_input_lineages,
+            designated_consumers: pairs(self.designated_consumers)?,
+        })
+    }
+}
+
+impl PrivateSys4InitialStateSeedSnapshot {
+    fn from_seed(seed: &Sys4InitialStateSeed) -> Self {
+        Self {
+            checked_program_identity: SnapshotCheckedProgramIdentity::from_checked(
+                &seed.checked_program_identity,
+            ),
+            ints: seed
+                .ints
+                .iter()
+                .map(
+                    |((locus, state, index, field), value)| PrivateSys4InitialIntSnapshot {
+                        locus: locus.clone(),
+                        state: state.clone(),
+                        index: index.clone(),
+                        field: field.clone(),
+                        value: *value,
+                    },
+                )
+                .collect(),
+        }
+    }
+
+    fn into_seed(self) -> Result<Sys4InitialStateSeed, ()> {
+        let checked_program_identity = self
+            .checked_program_identity
+            .into_checked()
+            .map_err(|_| ())?;
+        let mut ints = BTreeMap::new();
+        for row in self.ints {
+            if ints
+                .insert((row.locus, row.state, row.index, row.field), row.value)
+                .is_some()
+            {
+                return Err(());
+            }
+        }
+        Ok(Sys4InitialStateSeed {
+            checked_program_identity,
+            ints,
+        })
+    }
+}
+
+fn summary_matches_i3_restriction(
+    summary: &ObserverSafeM9Summary,
+    restriction: &M9ExecutionRestriction,
+) -> bool {
+    summary
+        .owner_lineages
+        .iter()
+        .all(|(operation, _, _, owner)| restriction.retains_owner_operation(operation, owner))
+        && summary
+            .relation_transitions
+            .iter()
+            .all(|(relation, transition)| {
+                restriction.retains_relation_transition(relation, transition)
+            })
+        && summary
+            .designated_evaluators
+            .iter()
+            .all(|(value, evaluator)| {
+                restriction.retains_designated_evaluator_summary_row(value, evaluator)
+            })
+        && summary.designated_remote_input_lineages.iter().all(
+            |(producer, evaluator, result, ordinal, frontier)| {
+                restriction.retains_designated_remote_input(
+                    producer, evaluator, result, *ordinal, frontier,
+                )
+            },
+        )
+        && summary
+            .designated_consumers
+            .iter()
+            .all(|(value, consumer)| restriction.retains_designated_consumer(consumer, value))
+}
+
+fn i3_snapshot_edge_kind_tag(kind: CommunicationEdgeKind) -> u8 {
+    match kind {
+        CommunicationEdgeKind::OwnerRequest => 0,
+        CommunicationEdgeKind::OwnerReplyReceipt => 1,
+        CommunicationEdgeKind::RelationProjectionPublication => 2,
+        CommunicationEdgeKind::DesignatedInputRequest => 3,
+        CommunicationEdgeKind::DesignatedInputReceipt => 4,
+        CommunicationEdgeKind::DesignatedResultDelivery => 5,
+        CommunicationEdgeKind::AbsoluteValueStream => 6,
+    }
+}
+
+fn i3_snapshot_edge_kind_from_tag(tag: u8) -> Option<CommunicationEdgeKind> {
+    Some(match tag {
+        0 => CommunicationEdgeKind::OwnerRequest,
+        1 => CommunicationEdgeKind::OwnerReplyReceipt,
+        2 => CommunicationEdgeKind::RelationProjectionPublication,
+        3 => CommunicationEdgeKind::DesignatedInputRequest,
+        4 => CommunicationEdgeKind::DesignatedInputReceipt,
+        5 => CommunicationEdgeKind::DesignatedResultDelivery,
+        6 => CommunicationEdgeKind::AbsoluteValueStream,
+        _ => return None,
+    })
 }
 
 fn m9_execution_restriction_for_program(
@@ -3287,6 +3782,379 @@ impl Sys4ProcessCarrier {
     pub(crate) fn edge_kind(&self) -> CommunicationEdgeKind {
         self.envelope.edge_kind
     }
+
+    /// Export the bounded owner request/reply portion of a generated carrier
+    /// for the private I3-2 codec.  This is deliberately a value snapshot,
+    /// not a capability to rebuild a route or an authority use outside the
+    /// receiving fabric.
+    pub(crate) fn i3_private_process_snapshot(
+        &self,
+    ) -> Sys4Result<Sys4I3PrivateProcessCarrierSnapshot> {
+        Sys4I3PrivateProcessCarrierSnapshot::from_envelope(&self.envelope)
+    }
+}
+
+/// Receiver-owned facts captured when a requester emits one generated owner
+/// request.  This is deliberately opaque outside SYS-4: SYS-5 may retain it
+/// by semantic request identity, but can neither mint a route nor choose an
+/// owner/M9 lineage from an untrusted reply.
+#[derive(Debug, Clone, PartialEq, Eq)]
+pub(crate) struct Sys4I3PendingOwnerRequestBinding {
+    request_id: String,
+    request_carrier_id: String,
+    operation_id: String,
+    request_edge_ref: String,
+    reply_edge_ref: String,
+    requester_locus: String,
+    owner_locus: String,
+    core_ref: String,
+    owner_lineage_ref: String,
+}
+
+impl Sys4I3PendingOwnerRequestBinding {
+    /// Bind one SYS-5 observer request identity to the exact source-derived
+    /// request/reply contract which both endpoints can independently obtain
+    /// from their already sealed SYS-4/M9 state.  The request/carrier IDs are
+    /// kernel-generated occurrence identifiers; no transport identity or
+    /// caller-provided outer field participates in this binding.
+    pub(crate) fn semantic_request_identity_ref(
+        &self,
+        parent_checked_program_ref: &str,
+        projection_ref: &str,
+        cohort_ref: &str,
+    ) -> String {
+        let mut hasher = Sha256::new();
+        hasher.update(b"mirrorea/sys5/i3/semantic-request/v3\\0");
+        hasher.update(parent_checked_program_ref);
+        hasher.update(projection_ref);
+        hasher.update(cohort_ref);
+        hasher.update(&self.request_id);
+        hasher.update(&self.request_carrier_id);
+        hasher.update(&self.operation_id);
+        hasher.update(&self.request_edge_ref);
+        hasher.update(&self.reply_edge_ref);
+        hasher.update(&self.requester_locus);
+        hasher.update(&self.owner_locus);
+        hasher.update(&self.core_ref);
+        hasher.update(&self.owner_lineage_ref);
+        format!("sys5-i3-semantic-request-sha256-v3:{:x}", hasher.finalize())
+    }
+}
+
+/// Strict, private data carried by the G2 pre-transport codec.  The fields
+/// are intentionally not an external carrier API: a decoded value remains
+/// untrusted until `LocalFabric::bind_i3_untrusted_process_carrier` checks it
+/// against the receiver's already sealed projection and M9 generation.
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[serde(deny_unknown_fields)]
+pub(crate) struct Sys4I3PrivateProcessCarrierSnapshot {
+    envelope_id: String,
+    carrier_id: String,
+    request_id: String,
+    operation_id: String,
+    edge_kind: u8,
+    edge_ref: String,
+    source_locus: String,
+    target_locus: String,
+    core_ref: String,
+    source_ref_path: String,
+    source_ref_start_line: u32,
+    source_ref_start_column: u32,
+    source_ref_end_line: u32,
+    source_ref_end_column: u32,
+    source_fragment_ref: String,
+    target_fragment_ref: String,
+    mailbox_record_id: String,
+    mailbox_enqueue_occurrence_id: String,
+    request_carrier_id: Option<String>,
+    input_receipt_carrier_id: Option<String>,
+    m9_owner_lineage_ref: Option<String>,
+    payload: Sys4I3PrivateProcessCarrierPayloadSnapshot,
+}
+
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[serde(tag = "kind", content = "fields", deny_unknown_fields)]
+enum Sys4I3PrivateProcessCarrierPayloadSnapshot {
+    OwnerRequest {
+        arguments: BTreeMap<String, String>,
+    },
+    OwnerReply {
+        receipt: Box<Sys4I3PrivateFabricReceiptSnapshot>,
+    },
+}
+
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[serde(deny_unknown_fields)]
+struct Sys4I3PrivateFabricReceiptSnapshot {
+    request_id: String,
+    delivery_id: String,
+    operation_id: String,
+    origin_locus: String,
+    target_locus: String,
+    typed_value: Sys4I3PrivateRuntimeValueSnapshot,
+    result_version: Option<u64>,
+    owner_rmw: Option<Sys4I3PrivateOwnerRmwReportSnapshot>,
+    performed_m8_consumption: bool,
+    returned_from_cache: bool,
+    semantic_consumption_identity: Option<String>,
+    fault_id: Option<String>,
+    m8_non_consuming_validation_node_id: Option<String>,
+    m8_publication_id: Option<String>,
+    logical_tick_id: Option<String>,
+    logical_tick_frontier: Option<String>,
+}
+
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[serde(tag = "kind", content = "value", deny_unknown_fields)]
+enum Sys4I3PrivateRuntimeValueSnapshot {
+    Int(i64),
+    Unit,
+}
+
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[serde(deny_unknown_fields)]
+struct Sys4I3PrivateOwnerRmwReportSnapshot {
+    reads: Vec<Sys4I3PrivateRuntimeStoreReadSnapshot>,
+    writes: Vec<Sys4I3PrivateRuntimeStoreReadSnapshot>,
+    source_ref: String,
+    core_ref: String,
+}
+
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[serde(deny_unknown_fields)]
+struct Sys4I3PrivateRuntimeStoreReadSnapshot {
+    locus: String,
+    state: String,
+    index: String,
+    field: String,
+    value: i64,
+}
+
+impl Sys4I3PrivateProcessCarrierSnapshot {
+    fn from_envelope(envelope: &MailboxEnvelope) -> Sys4Result<Self> {
+        let payload = match &envelope.payload {
+            MailboxPayload::OwnerRequest { arguments } => {
+                Sys4I3PrivateProcessCarrierPayloadSnapshot::OwnerRequest {
+                    arguments: arguments.clone(),
+                }
+            }
+            MailboxPayload::OwnerReply { receipt } => {
+                Sys4I3PrivateProcessCarrierPayloadSnapshot::OwnerReply {
+                    receipt: Box::new(Sys4I3PrivateFabricReceiptSnapshot::from_receipt(receipt)?),
+                }
+            }
+            _ => {
+                return Err(Sys4DispatchDiagnostics::one(
+                    Sys4DiagnosticKind::CarrierProvenanceMismatch,
+                ));
+            }
+        };
+        let Some(core_ref) = envelope.core_ref.clone() else {
+            return Err(Sys4DispatchDiagnostics::one(
+                Sys4DiagnosticKind::CarrierProvenanceMismatch,
+            ));
+        };
+        let source_ref = envelope.source_ref();
+        if envelope.envelope_id.is_empty()
+            || envelope.carrier_id.is_empty()
+            || envelope.request_id.is_empty()
+            || envelope.operation_id.is_empty()
+            || envelope.edge_ref.is_empty()
+            || envelope.source_locus.is_empty()
+            || envelope.target_locus.is_empty()
+            || core_ref.is_empty()
+            || envelope.source_fragment_ref.is_empty()
+            || envelope.target_fragment_ref.is_empty()
+            || envelope.mailbox_record_id.is_empty()
+            || envelope.mailbox_enqueue_occurrence_id.is_empty()
+        {
+            return Err(Sys4DispatchDiagnostics::one(
+                Sys4DiagnosticKind::CarrierProvenanceMismatch,
+            ));
+        }
+        Ok(Self {
+            envelope_id: envelope.envelope_id.clone(),
+            carrier_id: envelope.carrier_id.clone(),
+            request_id: envelope.request_id.clone(),
+            operation_id: envelope.operation_id.clone(),
+            edge_kind: i3_private_edge_kind_code(envelope.edge_kind)?,
+            edge_ref: envelope.edge_ref.clone(),
+            source_locus: envelope.source_locus.clone(),
+            target_locus: envelope.target_locus.clone(),
+            core_ref,
+            source_ref_path: source_ref.path.clone(),
+            source_ref_start_line: source_ref.start_line,
+            source_ref_start_column: source_ref.start_column,
+            source_ref_end_line: source_ref.end_line,
+            source_ref_end_column: source_ref.end_column,
+            source_fragment_ref: envelope.source_fragment_ref.clone(),
+            target_fragment_ref: envelope.target_fragment_ref.clone(),
+            mailbox_record_id: envelope.mailbox_record_id.clone(),
+            mailbox_enqueue_occurrence_id: envelope.mailbox_enqueue_occurrence_id.clone(),
+            request_carrier_id: envelope.request_carrier_id.clone(),
+            input_receipt_carrier_id: envelope.input_receipt_carrier_id.clone(),
+            m9_owner_lineage_ref: envelope.m9_owner_lineage_ref.clone(),
+            payload,
+        })
+    }
+
+    fn validate_required_fields(&self) -> Sys4Result<()> {
+        let required = [
+            &self.envelope_id,
+            &self.carrier_id,
+            &self.request_id,
+            &self.operation_id,
+            &self.edge_ref,
+            &self.source_locus,
+            &self.target_locus,
+            &self.core_ref,
+            &self.source_ref_path,
+            &self.source_fragment_ref,
+            &self.target_fragment_ref,
+            &self.mailbox_record_id,
+            &self.mailbox_enqueue_occurrence_id,
+        ];
+        if required.iter().any(|value| value.is_empty()) {
+            return Err(Sys4DispatchDiagnostics::one(
+                Sys4DiagnosticKind::CarrierProvenanceMismatch,
+            ));
+        }
+        Ok(())
+    }
+}
+
+impl Sys4I3PrivateFabricReceiptSnapshot {
+    fn from_receipt(receipt: &FabricReceipt) -> Sys4Result<Self> {
+        // The finite I3 owner reply profile does not carry designated cache
+        // validation.  Refuse a larger semantic profile rather than silently
+        // omit a field that a future transport codec would need to preserve.
+        if receipt.m9_cache_validation.is_some() {
+            return Err(Sys4DispatchDiagnostics::one(
+                Sys4DiagnosticKind::CarrierProvenanceMismatch,
+            ));
+        }
+        Ok(Self {
+            request_id: receipt.request_id.clone(),
+            delivery_id: receipt.delivery_id.clone(),
+            operation_id: receipt.operation_id.clone(),
+            origin_locus: receipt.origin_locus.clone(),
+            target_locus: receipt.target_locus.clone(),
+            typed_value: Sys4I3PrivateRuntimeValueSnapshot::from_value(&receipt.typed_value),
+            result_version: receipt.result_version.map(ResultVersion::value),
+            owner_rmw: receipt
+                .owner_rmw
+                .as_ref()
+                .map(Sys4I3PrivateOwnerRmwReportSnapshot::from_report),
+            performed_m8_consumption: receipt.performed_m8_consumption,
+            returned_from_cache: receipt.returned_from_cache,
+            semantic_consumption_identity: receipt.semantic_consumption_identity.clone(),
+            fault_id: receipt.fault_id.clone(),
+            m8_non_consuming_validation_node_id: receipt
+                .m8_non_consuming_validation_node_id
+                .clone(),
+            m8_publication_id: receipt.m8_publication_id.clone(),
+            logical_tick_id: receipt.logical_tick_id.clone(),
+            logical_tick_frontier: receipt.logical_tick_frontier.clone(),
+        })
+    }
+
+    fn into_receipt(self) -> FabricReceipt {
+        FabricReceipt {
+            request_id: self.request_id,
+            delivery_id: self.delivery_id,
+            operation_id: self.operation_id,
+            origin_locus: self.origin_locus,
+            target_locus: self.target_locus,
+            typed_value: self.typed_value.into_value(),
+            result_version: self.result_version.map(ResultVersion::new),
+            owner_rmw: self
+                .owner_rmw
+                .map(Sys4I3PrivateOwnerRmwReportSnapshot::into_report),
+            performed_m8_consumption: self.performed_m8_consumption,
+            returned_from_cache: self.returned_from_cache,
+            semantic_consumption_identity: self.semantic_consumption_identity,
+            fault_id: self.fault_id,
+            m9_cache_validation: None,
+            m8_non_consuming_validation_node_id: self.m8_non_consuming_validation_node_id,
+            m8_publication_id: self.m8_publication_id,
+            logical_tick_id: self.logical_tick_id,
+            logical_tick_frontier: self.logical_tick_frontier,
+        }
+    }
+}
+
+impl Sys4I3PrivateRuntimeValueSnapshot {
+    fn from_value(value: &RuntimeValue) -> Self {
+        match value {
+            RuntimeValue::Int(value) => Self::Int(*value),
+            RuntimeValue::Unit => Self::Unit,
+        }
+    }
+
+    fn into_value(self) -> RuntimeValue {
+        match self {
+            Self::Int(value) => RuntimeValue::Int(value),
+            Self::Unit => RuntimeValue::Unit,
+        }
+    }
+}
+
+impl Sys4I3PrivateOwnerRmwReportSnapshot {
+    fn from_report(report: &OwnerRmwReport) -> Self {
+        Self {
+            reads: report
+                .reads
+                .iter()
+                .map(Sys4I3PrivateRuntimeStoreReadSnapshot::from_read)
+                .collect(),
+            writes: report
+                .writes
+                .iter()
+                .map(|write| Sys4I3PrivateRuntimeStoreReadSnapshot::from_read(&write.0))
+                .collect(),
+            source_ref: report.source_ref.clone(),
+            core_ref: report.core_ref.clone(),
+        }
+    }
+
+    fn into_report(self) -> OwnerRmwReport {
+        OwnerRmwReport {
+            reads: self
+                .reads
+                .into_iter()
+                .map(Sys4I3PrivateRuntimeStoreReadSnapshot::into_read)
+                .collect(),
+            writes: self
+                .writes
+                .into_iter()
+                .map(|write| RuntimeStoreWrite(write.into_read()))
+                .collect(),
+            source_ref: self.source_ref,
+            core_ref: self.core_ref,
+        }
+    }
+}
+
+impl Sys4I3PrivateRuntimeStoreReadSnapshot {
+    fn from_read(read: &RuntimeStoreRead) -> Self {
+        Self {
+            locus: read.locus.clone(),
+            state: read.state.clone(),
+            index: read.index.clone(),
+            field: read.field.clone(),
+            value: read.value,
+        }
+    }
+
+    fn into_read(self) -> RuntimeStoreRead {
+        RuntimeStoreRead {
+            locus: self.locus,
+            state: self.state,
+            index: self.index,
+            field: self.field,
+            value: self.value,
+        }
+    }
 }
 
 /// Narrow observer-safe outbox view used by the I3-2 failed-extraction
@@ -3989,6 +4857,10 @@ pub(crate) struct LocusStep {
     m9_validation: LocusM9Validation,
     m8_request_node_id: Option<String>,
     m8_serve_node_id: Option<String>,
+    // Present only when the accepted owner execution actually wrote at least
+    // one source-derived local state cell.  A successful serve alone is not
+    // an owner-write observation.
+    actual_owner_write_occurrence_id: Option<String>,
     m8_input_receipt_node_id: Option<String>,
     m8_evaluation_node_id: Option<String>,
     m8_non_consuming_validation_node_id: Option<String>,
@@ -4018,6 +4890,9 @@ impl LocusStep {
     }
     pub(crate) fn m8_serve_node_id(&self) -> &str {
         self.m8_serve_node_id.as_deref().unwrap_or("")
+    }
+    pub(crate) fn actual_owner_write_occurrence_id(&self) -> Option<&str> {
+        self.actual_owner_write_occurrence_id.as_deref()
     }
     pub(crate) fn m8_input_receipt_node_id(&self) -> &str {
         self.m8_input_receipt_node_id.as_deref().unwrap_or("")
@@ -5343,6 +6218,33 @@ fn envelope_matches_projected_edge(program: &FabricProgram, envelope: &MailboxEn
         && !envelope.carrier_id.is_empty()
         && !envelope.mailbox_record_id.is_empty()
         && !envelope.mailbox_enqueue_occurrence_id.is_empty()
+}
+
+fn i3_private_edge_kind_code(kind: CommunicationEdgeKind) -> Sys4Result<u8> {
+    Ok(match kind {
+        CommunicationEdgeKind::OwnerRequest => 1,
+        CommunicationEdgeKind::OwnerReplyReceipt => 2,
+        CommunicationEdgeKind::RelationProjectionPublication => 3,
+        CommunicationEdgeKind::DesignatedInputRequest => 4,
+        CommunicationEdgeKind::DesignatedInputReceipt => 5,
+        CommunicationEdgeKind::DesignatedResultDelivery => 6,
+        CommunicationEdgeKind::AbsoluteValueStream => 7,
+    })
+}
+
+fn i3_private_edge_kind_from_code(code: u8) -> Sys4Result<CommunicationEdgeKind> {
+    match code {
+        1 => Ok(CommunicationEdgeKind::OwnerRequest),
+        2 => Ok(CommunicationEdgeKind::OwnerReplyReceipt),
+        3 => Ok(CommunicationEdgeKind::RelationProjectionPublication),
+        4 => Ok(CommunicationEdgeKind::DesignatedInputRequest),
+        5 => Ok(CommunicationEdgeKind::DesignatedInputReceipt),
+        6 => Ok(CommunicationEdgeKind::DesignatedResultDelivery),
+        7 => Ok(CommunicationEdgeKind::AbsoluteValueStream),
+        _ => Err(Sys4DispatchDiagnostics::one(
+            Sys4DiagnosticKind::CarrierProvenanceMismatch,
+        )),
+    }
 }
 
 fn endpoint_record_matches_projected_edge(
@@ -9173,6 +10075,289 @@ impl LocalFabric {
         summary
     }
 
+    /// Capture the exact locally generated request facts needed to admit one
+    /// later owner reply.  The generated request has already been selected by
+    /// checked source and local projection; this method only retains the
+    /// existing incident route and receiver-verifiable M9 lineage.
+    pub(crate) fn i3_pending_owner_request_binding(
+        &self,
+        carrier: &Sys4ProcessCarrier,
+    ) -> Sys4Result<Sys4I3PendingOwnerRequestBinding> {
+        let envelope = &carrier.envelope;
+        if envelope.edge_kind != CommunicationEdgeKind::OwnerRequest
+            || envelope.request_id.is_empty()
+            || envelope.carrier_id.is_empty()
+            || envelope.operation_id.is_empty()
+            || envelope.edge_ref.is_empty()
+            || envelope.source_locus.is_empty()
+            || envelope.target_locus.is_empty()
+        {
+            return Err(Sys4DispatchDiagnostics::one(
+                Sys4DiagnosticKind::CarrierProvenanceMismatch,
+            ));
+        }
+        let core_ref = envelope.core_ref.clone().ok_or_else(|| {
+            Sys4DispatchDiagnostics::one(Sys4DiagnosticKind::CarrierProvenanceMismatch)
+        })?;
+        let owner_lineage_ref = self
+            .authority_generation
+            .owner_lineage_ref(&envelope.operation_id, &envelope.target_locus)
+            .ok_or_else(|| {
+                Sys4DispatchDiagnostics::one(Sys4DiagnosticKind::CarrierProvenanceMismatch)
+            })?;
+        if envelope.m9_owner_lineage_ref.as_deref() != Some(owner_lineage_ref.as_str()) {
+            return Err(Sys4DispatchDiagnostics::one(
+                Sys4DiagnosticKind::CarrierProvenanceMismatch,
+            ));
+        }
+        let reply_edge = self.edge_for(
+            &envelope.operation_id,
+            CommunicationEdgeKind::OwnerReplyReceipt,
+            &envelope.target_locus,
+            &envelope.source_locus,
+        )?;
+        if reply_edge.core_ref() != Some(core_ref.as_str()) {
+            return Err(Sys4DispatchDiagnostics::one(
+                Sys4DiagnosticKind::CarrierProvenanceMismatch,
+            ));
+        }
+        Ok(Sys4I3PendingOwnerRequestBinding {
+            request_id: envelope.request_id.clone(),
+            request_carrier_id: envelope.carrier_id.clone(),
+            operation_id: envelope.operation_id.clone(),
+            request_edge_ref: envelope.edge_ref.clone(),
+            reply_edge_ref: reply_edge.edge_ref().to_string(),
+            requester_locus: envelope.source_locus.clone(),
+            owner_locus: envelope.target_locus.clone(),
+            core_ref,
+            owner_lineage_ref,
+        })
+    }
+
+    /// Check an already locally bound reply against the requester's exact
+    /// outstanding source-derived request.  It is pure validation: caller
+    /// performs no mailbox/store transition until this succeeds.
+    pub(crate) fn validate_i3_pending_owner_reply(
+        &self,
+        pending: &Sys4I3PendingOwnerRequestBinding,
+        carrier: &Sys4ProcessCarrier,
+    ) -> Sys4Result<()> {
+        let envelope = &carrier.envelope;
+        let current_lineage = self
+            .authority_generation
+            .owner_lineage_ref(&pending.operation_id, &pending.owner_locus)
+            .ok_or_else(|| {
+                Sys4DispatchDiagnostics::one(Sys4DiagnosticKind::CarrierProvenanceMismatch)
+            })?;
+        if current_lineage != pending.owner_lineage_ref
+            || envelope.edge_kind != CommunicationEdgeKind::OwnerReplyReceipt
+            || envelope.request_id != pending.request_id
+            || envelope.operation_id != pending.operation_id
+            || envelope.edge_ref != pending.reply_edge_ref
+            || envelope.source_locus != pending.owner_locus
+            || envelope.target_locus != pending.requester_locus
+            || envelope.core_ref.as_deref() != Some(pending.core_ref.as_str())
+            || envelope.request_carrier_id.as_deref() != Some(pending.request_carrier_id.as_str())
+            || envelope.m9_owner_lineage_ref.as_deref() != Some(pending.owner_lineage_ref.as_str())
+        {
+            return Err(Sys4DispatchDiagnostics::one(
+                Sys4DiagnosticKind::CarrierProvenanceMismatch,
+            ));
+        }
+        let request_edge = projected_edge_for_ref(&self.program, &pending.request_edge_ref)
+            .ok_or_else(|| {
+                Sys4DispatchDiagnostics::one(Sys4DiagnosticKind::CarrierProvenanceMismatch)
+            })?;
+        let reply_edge = self.edge_for(
+            &pending.operation_id,
+            CommunicationEdgeKind::OwnerReplyReceipt,
+            &pending.owner_locus,
+            &pending.requester_locus,
+        )?;
+        if request_edge.kind() != CommunicationEdgeKind::OwnerRequest
+            || request_edge.operation_id() != pending.operation_id
+            || request_edge.source_locus() != pending.requester_locus
+            || request_edge.target_locus() != pending.owner_locus
+            || request_edge.core_ref() != Some(pending.core_ref.as_str())
+            || reply_edge.edge_ref() != pending.reply_edge_ref
+            || reply_edge.core_ref() != Some(pending.core_ref.as_str())
+        {
+            return Err(Sys4DispatchDiagnostics::one(
+                Sys4DiagnosticKind::CarrierProvenanceMismatch,
+            ));
+        }
+        match &envelope.payload {
+            MailboxPayload::OwnerReply { receipt }
+                if receipt.request_id == pending.request_id
+                    && receipt.delivery_id == pending.request_carrier_id
+                    && receipt.operation_id == pending.operation_id
+                    && receipt.origin_locus == pending.requester_locus
+                    && receipt.target_locus == pending.owner_locus
+                    && receipt
+                        .owner_rmw
+                        .as_ref()
+                        .is_some_and(|report| report.core_ref == pending.core_ref) =>
+            {
+                Ok(())
+            }
+            _ => Err(Sys4DispatchDiagnostics::one(
+                Sys4DiagnosticKind::CarrierProvenanceMismatch,
+            )),
+        }
+    }
+
+    /// Bind a codec-decoded owner request/reply to this runtime's already
+    /// sealed, process-restricted projection.  The candidate's route,
+    /// contract, source/Core facts, and M9 lineage are all checked against
+    /// local facts before an envelope exists.  This is deliberately not a
+    /// decoder-to-mailbox shortcut: no untrusted value can select a route or
+    /// mint authority merely by naming one in private JSON.
+    pub(crate) fn bind_i3_untrusted_process_carrier(
+        &self,
+        candidate: Sys4I3PrivateProcessCarrierSnapshot,
+        expected_kind: CommunicationEdgeKind,
+    ) -> Sys4Result<Sys4ProcessCarrier> {
+        candidate.validate_required_fields()?;
+        let kind = i3_private_edge_kind_from_code(candidate.edge_kind)?;
+        if kind != expected_kind {
+            return Err(Sys4DispatchDiagnostics::one(
+                Sys4DiagnosticKind::CarrierProvenanceMismatch,
+            ));
+        }
+        let edge = projected_edge_for_ref(&self.program, &candidate.edge_ref).ok_or_else(|| {
+            Sys4DispatchDiagnostics::one(Sys4DiagnosticKind::CarrierProvenanceMismatch)
+        })?;
+        let source_ref = edge.source_ref();
+        if kind != edge.kind()
+            || candidate.operation_id != edge.operation_id()
+            || candidate.source_locus != edge.source_locus()
+            || candidate.target_locus != edge.target_locus()
+            || candidate.core_ref != edge.core_ref().unwrap_or("")
+            || candidate.source_ref_path != source_ref.path
+            || candidate.source_ref_start_line != source_ref.start_line
+            || candidate.source_ref_start_column != source_ref.start_column
+            || candidate.source_ref_end_line != source_ref.end_line
+            || candidate.source_ref_end_column != source_ref.end_column
+            || candidate.source_fragment_ref != *edge.source_fragment_ref()
+            || candidate.target_fragment_ref != *edge.target_fragment_ref()
+            || self
+                .program
+                .route_index
+                .route(&FabricRouteKey::from_edge(edge))
+                .is_none_or(|route| route.edge_ref != candidate.edge_ref)
+        {
+            return Err(Sys4DispatchDiagnostics::one(
+                Sys4DiagnosticKind::CarrierProvenanceMismatch,
+            ));
+        }
+
+        let payload = match (kind, candidate.payload) {
+            (
+                CommunicationEdgeKind::OwnerRequest,
+                Sys4I3PrivateProcessCarrierPayloadSnapshot::OwnerRequest { arguments },
+            ) => {
+                if candidate.request_carrier_id.is_some()
+                    || candidate.input_receipt_carrier_id.is_some()
+                {
+                    return Err(Sys4DispatchDiagnostics::one(
+                        Sys4DiagnosticKind::CarrierProvenanceMismatch,
+                    ));
+                }
+                let expected_lineage = self
+                    .authority_generation
+                    .owner_lineage_ref(edge.operation_id(), edge.target_locus())
+                    .ok_or_else(|| {
+                        Sys4DispatchDiagnostics::one(Sys4DiagnosticKind::CarrierProvenanceMismatch)
+                    })?;
+                if candidate.m9_owner_lineage_ref.as_deref() != Some(expected_lineage.as_str()) {
+                    return Err(Sys4DispatchDiagnostics::one(
+                        Sys4DiagnosticKind::CarrierProvenanceMismatch,
+                    ));
+                }
+                MailboxPayload::OwnerRequest { arguments }
+            }
+            (
+                CommunicationEdgeKind::OwnerReplyReceipt,
+                Sys4I3PrivateProcessCarrierPayloadSnapshot::OwnerReply { receipt },
+            ) => {
+                if candidate.input_receipt_carrier_id.is_some()
+                    || candidate
+                        .request_carrier_id
+                        .as_deref()
+                        .is_none_or(str::is_empty)
+                {
+                    return Err(Sys4DispatchDiagnostics::one(
+                        Sys4DiagnosticKind::CarrierProvenanceMismatch,
+                    ));
+                }
+                let expected_lineage = self
+                    .authority_generation
+                    .owner_lineage_ref(edge.operation_id(), edge.source_locus())
+                    .ok_or_else(|| {
+                        Sys4DispatchDiagnostics::one(Sys4DiagnosticKind::CarrierProvenanceMismatch)
+                    })?;
+                if candidate.m9_owner_lineage_ref.as_deref() != Some(expected_lineage.as_str()) {
+                    return Err(Sys4DispatchDiagnostics::one(
+                        Sys4DiagnosticKind::CarrierProvenanceMismatch,
+                    ));
+                }
+                if receipt.request_id != candidate.request_id
+                    || receipt.operation_id != candidate.operation_id
+                    || receipt.origin_locus != candidate.target_locus
+                    || receipt.target_locus != candidate.source_locus
+                    || receipt
+                        .owner_rmw
+                        .as_ref()
+                        .is_none_or(|report| report.core_ref != candidate.core_ref)
+                {
+                    return Err(Sys4DispatchDiagnostics::one(
+                        Sys4DiagnosticKind::CarrierProvenanceMismatch,
+                    ));
+                }
+                MailboxPayload::OwnerReply {
+                    receipt: Box::new((*receipt).into_receipt()),
+                }
+            }
+            _ => {
+                return Err(Sys4DispatchDiagnostics::one(
+                    Sys4DiagnosticKind::CarrierProvenanceMismatch,
+                ));
+            }
+        };
+
+        Ok(Sys4ProcessCarrier {
+            envelope: MailboxEnvelope {
+                envelope_id: candidate.envelope_id,
+                carrier_id: candidate.carrier_id,
+                request_id: candidate.request_id,
+                operation_id: candidate.operation_id,
+                edge_kind: kind,
+                edge_ref: edge.edge_ref().to_string(),
+                source_locus: edge.source_locus().to_string(),
+                target_locus: edge.target_locus().to_string(),
+                carrier_contract: edge.carrier_contract().clone(),
+                source_ref,
+                core_ref: edge.core_ref().map(ToOwned::to_owned),
+                source_fragment_ref: edge.source_fragment_ref().clone(),
+                target_fragment_ref: edge.target_fragment_ref().clone(),
+                mailbox_record_id: candidate.mailbox_record_id,
+                mailbox_enqueue_occurrence_id: candidate.mailbox_enqueue_occurrence_id,
+                request_carrier_id: candidate.request_carrier_id,
+                input_receipt_carrier_id: candidate.input_receipt_carrier_id,
+                m9_owner_lineage_ref: candidate.m9_owner_lineage_ref,
+                m9_source_release_lineage: None,
+                semantic_identity: None,
+                immutable_delivery_binding: None,
+                immutable_delivery_digest: None,
+                m8_publication_id: None,
+                m8_evaluation_node_id: None,
+                logical_tick_id: None,
+                logical_tick_frontier: None,
+                payload,
+            },
+        })
+    }
+
     /// Admit a generated by-value carrier at the selected process-local
     /// target.  The receiver resolves the exact incident edge from its own
     /// assigned projection before the carrier enters its inbox; sender,
@@ -11711,6 +12896,7 @@ impl LocalFabric {
             m9_validation,
             m8_request_node_id: None,
             m8_serve_node_id: None,
+            actual_owner_write_occurrence_id: None,
             m8_input_receipt_node_id: None,
             m8_evaluation_node_id: None,
             m8_non_consuming_validation_node_id: None,
@@ -11916,6 +13102,8 @@ impl LocalFabric {
                         value,
                     ));
                 }
+                let actual_owner_write_occurrence_id = (!writes.is_empty())
+                    .then(|| format!("sys4-owner-write:{}:{}", envelope.request_id, serve_node_id));
                 self.trace.append(
                     &envelope.request_id,
                     None,
@@ -11930,13 +13118,15 @@ impl LocalFabric {
                     Sys4TraceKind::M8OwnerRead,
                     Some(envelope.edge_kind),
                 );
-                self.trace.append(
-                    &envelope.request_id,
-                    None,
-                    &envelope.operation_id,
-                    Sys4TraceKind::M8OwnerWrite,
-                    Some(envelope.edge_kind),
-                );
+                if !writes.is_empty() {
+                    self.trace.append(
+                        &envelope.request_id,
+                        None,
+                        &envelope.operation_id,
+                        Sys4TraceKind::M8OwnerWrite,
+                        Some(envelope.edge_kind),
+                    );
+                }
                 let receipt = FabricReceipt {
                     request_id: envelope.request_id.clone(),
                     delivery_id: envelope.carrier_id.clone(),
@@ -11975,7 +13165,7 @@ impl LocalFabric {
                     },
                     Some(envelope.carrier_id.clone()),
                     None,
-                    None,
+                    Some(lineage.clone()),
                     None,
                     None,
                     None,
@@ -11990,6 +13180,7 @@ impl LocalFabric {
                 );
                 step.m8_request_node_id = Some(request_node_id);
                 step.m8_serve_node_id = Some(serve_node_id);
+                step.actual_owner_write_occurrence_id = actual_owner_write_occurrence_id;
                 step.reply_envelope_id = Some(reply.envelope_id);
                 Ok(step)
             }
@@ -12867,6 +14058,7 @@ impl LocalFabric {
             },
             m8_request_node_id: Some(node),
             m8_serve_node_id: None,
+            actual_owner_write_occurrence_id: None,
             m8_input_receipt_node_id: None,
             m8_evaluation_node_id: None,
             m8_non_consuming_validation_node_id: None,
@@ -13068,6 +14260,7 @@ impl LocalFabric {
             },
             m8_request_node_id: None,
             m8_serve_node_id: None,
+            actual_owner_write_occurrence_id: None,
             m8_input_receipt_node_id: None,
             m8_evaluation_node_id: None,
             m8_non_consuming_validation_node_id: Some(node),

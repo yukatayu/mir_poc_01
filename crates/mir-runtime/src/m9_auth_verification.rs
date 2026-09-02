@@ -15,6 +15,7 @@
 
 use std::collections::{BTreeMap, BTreeSet};
 
+use serde::{Deserialize, Serialize};
 use sha2::{Digest, Sha256};
 
 use mir_semantics::{
@@ -33,13 +34,17 @@ use crate::m8_runtime_admission::{
     M8AdmissionDiagnosticKind, M8AdmissionEvidence, M8DeferredM9Base, M8RuntimeAdmission,
     M8RuntimeInstance, materialize_m9_resolved_base, prepare_deferred_m9_base,
 };
+use crate::m8_runtime_authority::M8I3PrivateAuthorityStateSnapshot;
 use crate::m8_runtime_authority::{
     M8AuthorityState, M8CapabilityGrant, M8MembershipRecord, M8WitnessRecord,
 };
 use crate::m8_runtime_designated_value::M8DesignatedAuthorityUse;
+use crate::m8_runtime_designated_value::M8I3PrivateDesignatedAuthorityUseSnapshot;
 use crate::m8_runtime_observer::M8ObserverAuthorityGrant;
 use crate::m8_runtime_owner_queue::M8AuthorityUse;
+use crate::m8_runtime_owner_queue::M8I3PrivateAuthorityUseSnapshot;
 use crate::m8_runtime_patch::M8PatchAuthorityUse;
+use crate::m8_runtime_relation_projection::M8I3PrivateRelationAuthorityUseSnapshot;
 use crate::m8_runtime_relation_projection::{
     M8LeaseRecord, M8RelationAuthorityUse, M8RelationReacquire,
 };
@@ -1087,6 +1092,551 @@ pub(crate) struct M9AuthorityGeneration {
     designated_consumer_validation_occurrences: BTreeMap<(String, String, String), usize>,
     owner_operation_validation_occurrences: BTreeMap<(String, String, String), usize>,
     source_release_validation_occurrences: BTreeMap<(String, String, String), usize>,
+}
+
+/// Exact, private serialization shape for a previously M9-admitted and
+/// already process-restricted authority generation.  The import route below
+/// only rebuilds values; it is not an M9 admission, issuer, publisher, or
+/// authority successor path.
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[serde(deny_unknown_fields)]
+pub(crate) struct M9I3PrivateAuthorityGenerationSnapshot {
+    version: u32,
+    program_identity: String,
+    generation: u64,
+    generation_ref: String,
+    authority_state: M8I3PrivateAuthorityStateSnapshot,
+    owner_uses: Vec<PrivateM9OwnerUseSnapshot>,
+    relation_uses: Vec<PrivateM9RelationUseSnapshot>,
+    fresh_relation_reacquire_bindings: Vec<PrivateM9FreshRelationBindingSnapshot>,
+    designated_evaluation_uses: Vec<PrivateM9DesignatedUseSnapshot>,
+    designated_consumption_uses: Vec<PrivateM9DesignatedUseSnapshot>,
+    kernel_owner_lineages: Vec<PrivateM9KernelOwnerLineageSnapshot>,
+    revoked_owner_capabilities: Vec<PrivateM9OwnerKeySnapshot>,
+    revoked_designated_consumption_capabilities: Vec<PrivateM9DesignatedKeySnapshot>,
+    kernel_designated_remote_input_lineages: Vec<PrivateM9RemoteInputLineageSnapshot>,
+    designated_consumer_failures: Vec<PrivateM9DesignatedFailureSnapshot>,
+    designated_consumer_witness_retirements: Vec<PrivateM9DesignatedKeySnapshot>,
+    designated_source_release_failures: Vec<PrivateM9RemoteInputFailureSnapshot>,
+    designated_consumer_validation_occurrences: Vec<PrivateM9OccurrenceCounterSnapshot>,
+    owner_operation_validation_occurrences: Vec<PrivateM9OwnerOccurrenceCounterSnapshot>,
+    source_release_validation_occurrences: Vec<PrivateM9OccurrenceCounterSnapshot>,
+    integrity_ref: String,
+}
+
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[serde(deny_unknown_fields)]
+struct PrivateM9OwnerKeySnapshot {
+    operation: String,
+    principal: String,
+    owner_locus: String,
+}
+
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[serde(deny_unknown_fields)]
+struct PrivateM9DesignatedKeySnapshot {
+    locus: String,
+    value: String,
+}
+
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[serde(deny_unknown_fields)]
+struct PrivateM9OwnerUseSnapshot {
+    key: PrivateM9OwnerKeySnapshot,
+    authority_use: M8I3PrivateAuthorityUseSnapshot,
+}
+
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[serde(deny_unknown_fields)]
+struct PrivateM9RelationUseSnapshot {
+    relation: String,
+    transition: String,
+    authority_use: M8I3PrivateRelationAuthorityUseSnapshot,
+}
+
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[serde(deny_unknown_fields)]
+struct PrivateM9DesignatedUseSnapshot {
+    locus: String,
+    value: String,
+    authority_use: M8I3PrivateDesignatedAuthorityUseSnapshot,
+}
+
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[serde(deny_unknown_fields)]
+struct PrivateM9KernelOwnerLineageSnapshot {
+    key: PrivateM9OwnerKeySnapshot,
+    principal: String,
+    owner_locus: String,
+    membership_ref: String,
+    membership_epoch: String,
+    membership_incarnation: String,
+    capability_ref: String,
+    witness_ref: String,
+}
+
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[serde(deny_unknown_fields)]
+struct PrivateM9RemoteInputKeySnapshot {
+    producer_locus: String,
+    evaluator: String,
+    result: String,
+    dependency_index: usize,
+    input_frontier: String,
+}
+
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[serde(deny_unknown_fields)]
+struct PrivateM9RemoteInputLineageSnapshot {
+    key: PrivateM9RemoteInputKeySnapshot,
+    principal: String,
+    producer_locus: String,
+    evaluator: String,
+    result: String,
+    dependency_index: usize,
+    input_frontier: String,
+    release_label: String,
+    visibility: String,
+    membership_ref: String,
+    membership_epoch: String,
+    membership_incarnation: String,
+    capability_ref: String,
+    witness_ref: String,
+}
+
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[serde(deny_unknown_fields)]
+struct PrivateM9FreshAnchorReacquireLineageSnapshot {
+    checked_primary_anchor_ref: String,
+    prior_membership_ref: String,
+    prior_membership_epoch_ref: String,
+    prior_incarnation_ref: String,
+    retired_membership_ref: String,
+    retired_membership_epoch_ref: String,
+    retired_incarnation_ref: String,
+    fresh_membership_ref: String,
+    fresh_membership_epoch_ref: String,
+    fresh_incarnation_ref: String,
+    capability_lineage_ref: String,
+    witness_lineage_ref: String,
+}
+
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[serde(deny_unknown_fields)]
+struct PrivateM9FreshRelationBindingSnapshot {
+    relation: String,
+    owner_locus: String,
+    primary_anchor: String,
+    fresh_anchor_epoch: String,
+    binding_epoch: String,
+    binding_frontier: String,
+    fresh_lease_ref: String,
+    authority: M8I3PrivateRelationAuthorityUseSnapshot,
+    fresh_anchor_reacquire: Option<PrivateM9FreshAnchorReacquireLineageSnapshot>,
+}
+
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[serde(deny_unknown_fields)]
+struct PrivateM9DesignatedFailureSnapshot {
+    locus: String,
+    value: String,
+    kind: u8,
+}
+
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[serde(deny_unknown_fields)]
+struct PrivateM9RemoteInputFailureSnapshot {
+    key: PrivateM9RemoteInputKeySnapshot,
+    kind: u8,
+}
+
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[serde(deny_unknown_fields)]
+struct PrivateM9OccurrenceCounterSnapshot {
+    locus: String,
+    value: String,
+    occurrence: String,
+    count: usize,
+}
+
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[serde(deny_unknown_fields)]
+struct PrivateM9OwnerOccurrenceCounterSnapshot {
+    operation: String,
+    owner_locus: String,
+    occurrence: String,
+    count: usize,
+}
+
+impl M9I3PrivateAuthorityGenerationSnapshot {
+    const VERSION: u32 = 1;
+
+    fn into_generation(self) -> Result<M9AuthorityGeneration, ()> {
+        if self.version != Self::VERSION
+            || self.program_identity.is_empty()
+            || self.generation_ref.is_empty()
+        {
+            return Err(());
+        }
+        let authority_state = M8AuthorityState::from_i3_private_snapshot(self.authority_state)?;
+        let mut owner_uses = BTreeMap::new();
+        for entry in self.owner_uses {
+            let key = (
+                entry.key.operation,
+                entry.key.principal.clone(),
+                entry.key.owner_locus,
+            );
+            let authority_use = M8AuthorityUse::from_i3_private_snapshot(entry.authority_use);
+            if authority_use.principal() != key.1 || owner_uses.insert(key, authority_use).is_some()
+            {
+                return Err(());
+            }
+        }
+        let mut relation_uses = BTreeMap::new();
+        for entry in self.relation_uses {
+            let key = (entry.relation, entry.transition);
+            if relation_uses
+                .insert(
+                    key,
+                    M8RelationAuthorityUse::from_i3_private_snapshot(entry.authority_use),
+                )
+                .is_some()
+            {
+                return Err(());
+            }
+        }
+        let mut fresh_relation_reacquire_bindings = BTreeMap::new();
+        for entry in self.fresh_relation_reacquire_bindings {
+            let binding = entry.into_binding()?;
+            if fresh_relation_reacquire_bindings
+                .insert(binding.relation.clone(), binding)
+                .is_some()
+            {
+                return Err(());
+            }
+        }
+        let mut designated_evaluation_uses = BTreeMap::new();
+        for entry in self.designated_evaluation_uses {
+            let key = (entry.locus, entry.value);
+            if designated_evaluation_uses
+                .insert(
+                    key,
+                    M8DesignatedAuthorityUse::from_i3_private_snapshot(entry.authority_use),
+                )
+                .is_some()
+            {
+                return Err(());
+            }
+        }
+        let mut designated_consumption_uses = BTreeMap::new();
+        for entry in self.designated_consumption_uses {
+            let key = (entry.locus, entry.value);
+            if designated_consumption_uses
+                .insert(
+                    key,
+                    M8DesignatedAuthorityUse::from_i3_private_snapshot(entry.authority_use),
+                )
+                .is_some()
+            {
+                return Err(());
+            }
+        }
+        let mut kernel_owner_lineages = BTreeMap::new();
+        for entry in self.kernel_owner_lineages {
+            let key = (
+                entry.key.operation,
+                entry.key.principal.clone(),
+                entry.key.owner_locus.clone(),
+            );
+            if entry.principal != key.1 || entry.owner_locus != key.2 {
+                return Err(());
+            }
+            let lineage = M9KernelOwnerLineage {
+                principal: entry.principal,
+                owner_locus: entry.owner_locus,
+                membership_ref: entry.membership_ref,
+                membership_epoch: entry.membership_epoch,
+                membership_incarnation: entry.membership_incarnation,
+                capability_ref: entry.capability_ref,
+                witness_ref: entry.witness_ref,
+            };
+            if kernel_owner_lineages.insert(key, lineage).is_some() {
+                return Err(());
+            }
+        }
+        let mut revoked_owner_capabilities = BTreeSet::new();
+        for entry in self.revoked_owner_capabilities {
+            if !revoked_owner_capabilities.insert((
+                entry.operation,
+                entry.principal,
+                entry.owner_locus,
+            )) {
+                return Err(());
+            }
+        }
+        let mut revoked_designated_consumption_capabilities = BTreeSet::new();
+        for entry in self.revoked_designated_consumption_capabilities {
+            if !revoked_designated_consumption_capabilities.insert((entry.locus, entry.value)) {
+                return Err(());
+            }
+        }
+        let mut kernel_designated_remote_input_lineages = BTreeMap::new();
+        for entry in self.kernel_designated_remote_input_lineages {
+            let key = (
+                entry.key.producer_locus.clone(),
+                entry.key.evaluator.clone(),
+                entry.key.result.clone(),
+                entry.key.dependency_index,
+                entry.key.input_frontier.clone(),
+            );
+            if entry.producer_locus != key.0
+                || entry.evaluator != key.1
+                || entry.result != key.2
+                || entry.dependency_index != key.3
+                || entry.input_frontier != key.4
+            {
+                return Err(());
+            }
+            let lineage = M9KernelDesignatedRemoteInputLineage {
+                principal: entry.principal,
+                producer_locus: entry.producer_locus,
+                evaluator: entry.evaluator,
+                result: entry.result,
+                dependency_index: entry.dependency_index,
+                input_frontier: entry.input_frontier,
+                release_label: entry.release_label,
+                visibility: entry.visibility,
+                membership_ref: entry.membership_ref,
+                membership_epoch: entry.membership_epoch,
+                membership_incarnation: entry.membership_incarnation,
+                capability_ref: entry.capability_ref,
+                witness_ref: entry.witness_ref,
+            };
+            if kernel_designated_remote_input_lineages
+                .insert(key, lineage)
+                .is_some()
+            {
+                return Err(());
+            }
+        }
+        let mut designated_consumer_failures = BTreeMap::new();
+        for entry in self.designated_consumer_failures {
+            let key = (entry.locus, entry.value);
+            if designated_consumer_failures
+                .insert(key, m9_i3_error_from_tag(entry.kind)?)
+                .is_some()
+            {
+                return Err(());
+            }
+        }
+        let mut designated_consumer_witness_retirements = BTreeSet::new();
+        for entry in self.designated_consumer_witness_retirements {
+            if !designated_consumer_witness_retirements.insert((entry.locus, entry.value)) {
+                return Err(());
+            }
+        }
+        let mut designated_source_release_failures = BTreeMap::new();
+        for entry in self.designated_source_release_failures {
+            let key = (
+                entry.key.evaluator,
+                entry.key.result,
+                entry.key.producer_locus,
+                entry.key.dependency_index,
+                entry.key.input_frontier,
+            );
+            if designated_source_release_failures
+                .insert(key, m9_i3_error_from_tag(entry.kind)?)
+                .is_some()
+            {
+                return Err(());
+            }
+        }
+        let mut designated_consumer_validation_occurrences = BTreeMap::new();
+        for entry in self.designated_consumer_validation_occurrences {
+            if designated_consumer_validation_occurrences
+                .insert((entry.value, entry.locus, entry.occurrence), entry.count)
+                .is_some()
+            {
+                return Err(());
+            }
+        }
+        let mut owner_operation_validation_occurrences = BTreeMap::new();
+        for entry in self.owner_operation_validation_occurrences {
+            if owner_operation_validation_occurrences
+                .insert(
+                    (entry.operation, entry.owner_locus, entry.occurrence),
+                    entry.count,
+                )
+                .is_some()
+            {
+                return Err(());
+            }
+        }
+        let mut source_release_validation_occurrences = BTreeMap::new();
+        for entry in self.source_release_validation_occurrences {
+            if source_release_validation_occurrences
+                .insert((entry.value, entry.locus, entry.occurrence), entry.count)
+                .is_some()
+            {
+                return Err(());
+            }
+        }
+        let generation = M9AuthorityGeneration {
+            program_identity: self.program_identity,
+            generation: self.generation,
+            generation_ref: self.generation_ref,
+            authority_state,
+            owner_uses,
+            relation_uses,
+            fresh_relation_reacquire_bindings,
+            designated_evaluation_uses,
+            designated_consumption_uses,
+            kernel_owner_lineages,
+            revoked_owner_capabilities,
+            revoked_designated_consumption_capabilities,
+            kernel_designated_remote_input_lineages,
+            designated_consumer_failures,
+            designated_consumer_witness_retirements,
+            designated_source_release_failures,
+            designated_consumer_validation_occurrences,
+            owner_operation_validation_occurrences,
+            source_release_validation_occurrences,
+        };
+        (generation.private_restore_integrity_digest() == self.integrity_ref)
+            .then_some(generation)
+            .ok_or(())
+    }
+}
+
+impl PrivateM9FreshRelationBindingSnapshot {
+    fn from_binding(binding: &M9FreshRelationReacquireBinding) -> Self {
+        Self {
+            relation: binding.relation.clone(),
+            owner_locus: binding.owner_locus.clone(),
+            primary_anchor: binding.primary_anchor.clone(),
+            fresh_anchor_epoch: binding.fresh_anchor_epoch.clone(),
+            binding_epoch: binding.binding_epoch.clone(),
+            binding_frontier: binding.binding_frontier.clone(),
+            fresh_lease_ref: binding.fresh_lease_ref.clone(),
+            authority: binding.authority.i3_private_snapshot(),
+            fresh_anchor_reacquire: binding.fresh_anchor_reacquire.as_ref().map(|lineage| {
+                PrivateM9FreshAnchorReacquireLineageSnapshot {
+                    checked_primary_anchor_ref: lineage.checked_primary_anchor_ref.clone(),
+                    prior_membership_ref: lineage.prior_membership_ref.clone(),
+                    prior_membership_epoch_ref: lineage.prior_membership_epoch_ref.clone(),
+                    prior_incarnation_ref: lineage.prior_incarnation_ref.clone(),
+                    retired_membership_ref: lineage.retired_membership_ref.clone(),
+                    retired_membership_epoch_ref: lineage.retired_membership_epoch_ref.clone(),
+                    retired_incarnation_ref: lineage.retired_incarnation_ref.clone(),
+                    fresh_membership_ref: lineage.fresh_membership_ref.clone(),
+                    fresh_membership_epoch_ref: lineage.fresh_membership_epoch_ref.clone(),
+                    fresh_incarnation_ref: lineage.fresh_incarnation_ref.clone(),
+                    capability_lineage_ref: lineage.capability_lineage_ref.clone(),
+                    witness_lineage_ref: lineage.witness_lineage_ref.clone(),
+                }
+            }),
+        }
+    }
+
+    fn into_binding(self) -> Result<M9FreshRelationReacquireBinding, ()> {
+        if self.relation.is_empty()
+            || self.owner_locus.is_empty()
+            || self.primary_anchor.is_empty()
+            || self.fresh_anchor_epoch.is_empty()
+            || self.binding_epoch.is_empty()
+            || self.binding_frontier.is_empty()
+            || self.fresh_lease_ref.is_empty()
+        {
+            return Err(());
+        }
+        Ok(M9FreshRelationReacquireBinding {
+            relation: self.relation,
+            owner_locus: self.owner_locus,
+            primary_anchor: self.primary_anchor,
+            fresh_anchor_epoch: self.fresh_anchor_epoch,
+            binding_epoch: self.binding_epoch,
+            binding_frontier: self.binding_frontier,
+            fresh_lease_ref: self.fresh_lease_ref,
+            authority: M8RelationAuthorityUse::from_i3_private_snapshot(self.authority),
+            fresh_anchor_reacquire: self.fresh_anchor_reacquire.map(|lineage| {
+                M9FreshAnchorReacquireLineage {
+                    checked_primary_anchor_ref: lineage.checked_primary_anchor_ref,
+                    prior_membership_ref: lineage.prior_membership_ref,
+                    prior_membership_epoch_ref: lineage.prior_membership_epoch_ref,
+                    prior_incarnation_ref: lineage.prior_incarnation_ref,
+                    retired_membership_ref: lineage.retired_membership_ref,
+                    retired_membership_epoch_ref: lineage.retired_membership_epoch_ref,
+                    retired_incarnation_ref: lineage.retired_incarnation_ref,
+                    fresh_membership_ref: lineage.fresh_membership_ref,
+                    fresh_membership_epoch_ref: lineage.fresh_membership_epoch_ref,
+                    fresh_incarnation_ref: lineage.fresh_incarnation_ref,
+                    capability_lineage_ref: lineage.capability_lineage_ref,
+                    witness_lineage_ref: lineage.witness_lineage_ref,
+                }
+            }),
+        })
+    }
+}
+
+fn m9_i3_error_tag(kind: M9AdmissionErrorKind) -> u8 {
+    match kind {
+        M9AdmissionErrorKind::ProgramIdentityMismatch => 0,
+        M9AdmissionErrorKind::SourceArtifactMismatch => 1,
+        M9AdmissionErrorKind::MissingResidualBinding => 2,
+        M9AdmissionErrorKind::UnexpectedResidualBinding => 3,
+        M9AdmissionErrorKind::DuplicateResidualBinding => 4,
+        M9AdmissionErrorKind::ConflictingResidualBinding => 5,
+        M9AdmissionErrorKind::ResidualKindMismatch => 6,
+        M9AdmissionErrorKind::SourceRefMismatch => 7,
+        M9AdmissionErrorKind::M8BaseEvidenceMissing => 8,
+        M9AdmissionErrorKind::M8BaseEvidenceMismatch => 9,
+        M9AdmissionErrorKind::ProviderOrTransportIsNotAuthority => 10,
+        M9AdmissionErrorKind::InvalidMembershipLineage => 11,
+        M9AdmissionErrorKind::UnadmittedAuthProvider => 12,
+        M9AdmissionErrorKind::InvalidCapabilityLineage => 13,
+        M9AdmissionErrorKind::CapabilityPolicyRejected => 14,
+        M9AdmissionErrorKind::DuplicateMembershipReference => 15,
+        M9AdmissionErrorKind::ConflictingMembershipReference => 16,
+        M9AdmissionErrorKind::DuplicateCapabilityReference => 17,
+        M9AdmissionErrorKind::ConflictingCapabilityReference => 18,
+        M9AdmissionErrorKind::DuplicateWitnessReference => 19,
+        M9AdmissionErrorKind::ConflictingWitnessReference => 20,
+        M9AdmissionErrorKind::InvalidAuthorityCut => 21,
+        M9AdmissionErrorKind::ReplayedAuthorityCut => 22,
+        M9AdmissionErrorKind::CompactionBeforeAuditCut => 23,
+        M9AdmissionErrorKind::MissingVerifyDischarge => 24,
+    }
+}
+
+fn m9_i3_error_from_tag(tag: u8) -> Result<M9AdmissionErrorKind, ()> {
+    Ok(match tag {
+        0 => M9AdmissionErrorKind::ProgramIdentityMismatch,
+        1 => M9AdmissionErrorKind::SourceArtifactMismatch,
+        2 => M9AdmissionErrorKind::MissingResidualBinding,
+        3 => M9AdmissionErrorKind::UnexpectedResidualBinding,
+        4 => M9AdmissionErrorKind::DuplicateResidualBinding,
+        5 => M9AdmissionErrorKind::ConflictingResidualBinding,
+        6 => M9AdmissionErrorKind::ResidualKindMismatch,
+        7 => M9AdmissionErrorKind::SourceRefMismatch,
+        8 => M9AdmissionErrorKind::M8BaseEvidenceMissing,
+        9 => M9AdmissionErrorKind::M8BaseEvidenceMismatch,
+        10 => M9AdmissionErrorKind::ProviderOrTransportIsNotAuthority,
+        11 => M9AdmissionErrorKind::InvalidMembershipLineage,
+        12 => M9AdmissionErrorKind::UnadmittedAuthProvider,
+        13 => M9AdmissionErrorKind::InvalidCapabilityLineage,
+        14 => M9AdmissionErrorKind::CapabilityPolicyRejected,
+        15 => M9AdmissionErrorKind::DuplicateMembershipReference,
+        16 => M9AdmissionErrorKind::ConflictingMembershipReference,
+        17 => M9AdmissionErrorKind::DuplicateCapabilityReference,
+        18 => M9AdmissionErrorKind::ConflictingCapabilityReference,
+        19 => M9AdmissionErrorKind::DuplicateWitnessReference,
+        20 => M9AdmissionErrorKind::ConflictingWitnessReference,
+        21 => M9AdmissionErrorKind::InvalidAuthorityCut,
+        22 => M9AdmissionErrorKind::ReplayedAuthorityCut,
+        23 => M9AdmissionErrorKind::CompactionBeforeAuditCut,
+        24 => M9AdmissionErrorKind::MissingVerifyDischarge,
+        _ => return Err(()),
+    })
 }
 
 /// One dormant, finite local relation binding authenticated by the M9
@@ -3620,6 +4170,229 @@ fn test_kernel_issue_membership(
 }
 
 impl M9AuthorityGeneration {
+    /// Export a sealed, already-restricted M9 generation for the private I3
+    /// process image.  This carries the exact selected records and histories;
+    /// it never includes a publisher or creates a successor.
+    pub(crate) fn i3_private_snapshot(&self) -> M9I3PrivateAuthorityGenerationSnapshot {
+        M9I3PrivateAuthorityGenerationSnapshot {
+            version: M9I3PrivateAuthorityGenerationSnapshot::VERSION,
+            program_identity: self.program_identity.clone(),
+            generation: self.generation,
+            generation_ref: self.generation_ref.clone(),
+            authority_state: self.authority_state.i3_private_snapshot(),
+            owner_uses: self
+                .owner_uses
+                .iter()
+                .map(|((operation, principal, owner_locus), authority_use)| {
+                    PrivateM9OwnerUseSnapshot {
+                        key: PrivateM9OwnerKeySnapshot {
+                            operation: operation.clone(),
+                            principal: principal.clone(),
+                            owner_locus: owner_locus.clone(),
+                        },
+                        authority_use: authority_use.i3_private_snapshot(),
+                    }
+                })
+                .collect(),
+            relation_uses: self
+                .relation_uses
+                .iter()
+                .map(
+                    |((relation, transition), authority_use)| PrivateM9RelationUseSnapshot {
+                        relation: relation.clone(),
+                        transition: transition.clone(),
+                        authority_use: authority_use.i3_private_snapshot(),
+                    },
+                )
+                .collect(),
+            fresh_relation_reacquire_bindings: self
+                .fresh_relation_reacquire_bindings
+                .values()
+                .map(PrivateM9FreshRelationBindingSnapshot::from_binding)
+                .collect(),
+            designated_evaluation_uses: self
+                .designated_evaluation_uses
+                .iter()
+                .map(
+                    |((evaluator, value), authority_use)| PrivateM9DesignatedUseSnapshot {
+                        locus: evaluator.clone(),
+                        value: value.clone(),
+                        authority_use: authority_use.i3_private_snapshot(),
+                    },
+                )
+                .collect(),
+            designated_consumption_uses: self
+                .designated_consumption_uses
+                .iter()
+                .map(
+                    |((consumer, value), authority_use)| PrivateM9DesignatedUseSnapshot {
+                        locus: consumer.clone(),
+                        value: value.clone(),
+                        authority_use: authority_use.i3_private_snapshot(),
+                    },
+                )
+                .collect(),
+            kernel_owner_lineages: self
+                .kernel_owner_lineages
+                .iter()
+                .map(|((operation, principal, owner_locus), lineage)| {
+                    PrivateM9KernelOwnerLineageSnapshot {
+                        key: PrivateM9OwnerKeySnapshot {
+                            operation: operation.clone(),
+                            principal: principal.clone(),
+                            owner_locus: owner_locus.clone(),
+                        },
+                        principal: lineage.principal.clone(),
+                        owner_locus: lineage.owner_locus.clone(),
+                        membership_ref: lineage.membership_ref.clone(),
+                        membership_epoch: lineage.membership_epoch.clone(),
+                        membership_incarnation: lineage.membership_incarnation.clone(),
+                        capability_ref: lineage.capability_ref.clone(),
+                        witness_ref: lineage.witness_ref.clone(),
+                    }
+                })
+                .collect(),
+            revoked_owner_capabilities: self
+                .revoked_owner_capabilities
+                .iter()
+                .map(
+                    |(operation, principal, owner_locus)| PrivateM9OwnerKeySnapshot {
+                        operation: operation.clone(),
+                        principal: principal.clone(),
+                        owner_locus: owner_locus.clone(),
+                    },
+                )
+                .collect(),
+            revoked_designated_consumption_capabilities: self
+                .revoked_designated_consumption_capabilities
+                .iter()
+                .map(|(locus, value)| PrivateM9DesignatedKeySnapshot {
+                    locus: locus.clone(),
+                    value: value.clone(),
+                })
+                .collect(),
+            kernel_designated_remote_input_lineages: self
+                .kernel_designated_remote_input_lineages
+                .iter()
+                .map(
+                    |(
+                        (producer_locus, evaluator, result, dependency_index, input_frontier),
+                        lineage,
+                    )| {
+                        PrivateM9RemoteInputLineageSnapshot {
+                            key: PrivateM9RemoteInputKeySnapshot {
+                                producer_locus: producer_locus.clone(),
+                                evaluator: evaluator.clone(),
+                                result: result.clone(),
+                                dependency_index: *dependency_index,
+                                input_frontier: input_frontier.clone(),
+                            },
+                            principal: lineage.principal.clone(),
+                            producer_locus: lineage.producer_locus.clone(),
+                            evaluator: lineage.evaluator.clone(),
+                            result: lineage.result.clone(),
+                            dependency_index: lineage.dependency_index,
+                            input_frontier: lineage.input_frontier.clone(),
+                            release_label: lineage.release_label.clone(),
+                            visibility: lineage.visibility.clone(),
+                            membership_ref: lineage.membership_ref.clone(),
+                            membership_epoch: lineage.membership_epoch.clone(),
+                            membership_incarnation: lineage.membership_incarnation.clone(),
+                            capability_ref: lineage.capability_ref.clone(),
+                            witness_ref: lineage.witness_ref.clone(),
+                        }
+                    },
+                )
+                .collect(),
+            designated_consumer_failures: self
+                .designated_consumer_failures
+                .iter()
+                .map(
+                    |((locus, value), kind)| PrivateM9DesignatedFailureSnapshot {
+                        locus: locus.clone(),
+                        value: value.clone(),
+                        kind: m9_i3_error_tag(*kind),
+                    },
+                )
+                .collect(),
+            designated_consumer_witness_retirements: self
+                .designated_consumer_witness_retirements
+                .iter()
+                .map(|(locus, value)| PrivateM9DesignatedKeySnapshot {
+                    locus: locus.clone(),
+                    value: value.clone(),
+                })
+                .collect(),
+            designated_source_release_failures: self
+                .designated_source_release_failures
+                .iter()
+                .map(
+                    |(
+                        (evaluator, result, producer_locus, dependency_index, input_frontier),
+                        kind,
+                    )| {
+                        PrivateM9RemoteInputFailureSnapshot {
+                            key: PrivateM9RemoteInputKeySnapshot {
+                                producer_locus: producer_locus.clone(),
+                                evaluator: evaluator.clone(),
+                                result: result.clone(),
+                                dependency_index: *dependency_index,
+                                input_frontier: input_frontier.clone(),
+                            },
+                            kind: m9_i3_error_tag(*kind),
+                        }
+                    },
+                )
+                .collect(),
+            designated_consumer_validation_occurrences: self
+                .designated_consumer_validation_occurrences
+                .iter()
+                .map(
+                    |((value, locus, occurrence), count)| PrivateM9OccurrenceCounterSnapshot {
+                        locus: locus.clone(),
+                        value: value.clone(),
+                        occurrence: occurrence.clone(),
+                        count: *count,
+                    },
+                )
+                .collect(),
+            owner_operation_validation_occurrences: self
+                .owner_operation_validation_occurrences
+                .iter()
+                .map(|((operation, owner_locus, occurrence), count)| {
+                    PrivateM9OwnerOccurrenceCounterSnapshot {
+                        operation: operation.clone(),
+                        owner_locus: owner_locus.clone(),
+                        occurrence: occurrence.clone(),
+                        count: *count,
+                    }
+                })
+                .collect(),
+            source_release_validation_occurrences: self
+                .source_release_validation_occurrences
+                .iter()
+                .map(
+                    |((value, locus, occurrence), count)| PrivateM9OccurrenceCounterSnapshot {
+                        locus: locus.clone(),
+                        value: value.clone(),
+                        occurrence: occurrence.clone(),
+                        count: *count,
+                    },
+                )
+                .collect(),
+            integrity_ref: self.private_restore_integrity_digest(),
+        }
+    }
+
+    /// Restore exactly the already-admitted authority generation carried by
+    /// the private image.  The caller must still bind this value to its
+    /// independently retained image commitment before starting a runtime.
+    pub(crate) fn from_i3_private_snapshot(
+        snapshot: M9I3PrivateAuthorityGenerationSnapshot,
+    ) -> Result<Self, ()> {
+        snapshot.into_generation()
+    }
+
     /// Validate that a SYS-4 process restriction names only exact, already
     /// admitted authority rows and that each required static row has one
     /// parent binding.  This is intentionally prior to filtering: a child

@@ -7,18 +7,49 @@ use std::collections::BTreeSet;
 
 use mir_runtime::{
     sys5_i3_process_runtime::{
-        Sys5I3Deployment, Sys5I3DeploymentSlot, Sys5I3ProcessArtifact, Sys5I3ProcessCohort,
+        Sys5I3Deployment, Sys5I3DeploymentSlot, Sys5I3PrivateProcessCodec,
+        Sys5I3PrivateProcessCodecErrorKind, Sys5I3ProcessArtifact, Sys5I3ProcessCohort,
         Sys5I3ProcessImage, Sys5I3ProcessImageTamper, Sys5I3ProcessRuntime,
         Sys5I3ProcessRuntimeErrorKind, Sys5I3RetainedEdgeContract,
     },
     sys5_local_slice::{Sys5LocalProject, Sys5LocalSliceError, Sys5SourceInput, build_project},
 };
+use serde_json::Value;
 
 const CANONICAL_SOURCE_PATH: &str = "samples/clean-near-end/mirrorea-i2-local-toy/main.mir";
 const CANONICAL_SOURCE: &str =
     include_str!("../../../samples/clean-near-end/mirrorea-i2-local-toy/main.mir");
 const REQUESTER_SLOT: &str = "process-a";
 const OWNER_SLOT: &str = "process-b";
+const PRIVATE_PROCESS_CODEC_PREFIX_BYTES: usize = 4;
+// These pointers intentionally state the provisional private codec schema the
+// implementation must provide.  They are test-owned expectations, not a
+// public wire/API commitment; a schema change must update this test together
+// with the codec rather than adding a production tamper constructor.
+const PRIVATE_PROCESS_IMAGE_ROOT: &str = "/image";
+const PRIVATE_PROCESS_MESSAGE_ROOT: &str = "/message";
+const PRIVATE_PROCESS_VERSION_PATH: &str = "/version";
+const PRIVATE_PROCESS_IMAGE_EDGE_OBJECT_PATH: &str = "/image/required_edge_contracts/0";
+const PRIVATE_PROCESS_MESSAGE_COHORT_PATH: &str = "/message/cohort_provenance_ref";
+const PRIVATE_PROCESS_MESSAGE_KIND_PATH: &str = "/message/kind";
+const PRIVATE_PROCESS_MESSAGE_REQUEST_IDENTITY_PATH: &str =
+    "/message/semantic_request_identity_ref";
+const PRIVATE_PROCESS_MESSAGE_LINKED_REQUEST_IDENTITY_PATH: &str =
+    "/message/linked_request_identity_ref";
+const PRIVATE_PROCESS_MESSAGE_EDGE_PATH: &str = "/message/carrier/edge_ref";
+const PRIVATE_PROCESS_MESSAGE_TARGET_PATH: &str = "/message/carrier/target_locus";
+const PRIVATE_PROCESS_MESSAGE_SOURCE_PATH: &str = "/message/carrier/source_locus";
+const PRIVATE_PROCESS_MESSAGE_OPERATION_PATH: &str = "/message/carrier/operation_id";
+const PRIVATE_PROCESS_MESSAGE_CARRIER_PROVENANCE_PATH: &str = "/message/carrier/core_ref";
+const PRIVATE_PROCESS_MESSAGE_REQUEST_CARRIER_ID_PATH: &str = "/message/carrier/request_carrier_id";
+const PRIVATE_PROCESS_MESSAGE_M9_OWNER_LINEAGE_PATH: &str = "/message/carrier/m9_owner_lineage_ref";
+const PRIVATE_PROCESS_MESSAGE_REPLY_RECEIPT_REQUEST_ID_PATH: &str =
+    "/message/carrier/payload/fields/receipt/request_id";
+const PRIVATE_PROCESS_IMAGE_ASSIGNED_LOCI_PATH: &str = "/image/assigned_loci";
+const PRIVATE_PROCESS_IMAGE_SEMANTIC_ROWS_PATH: &str =
+    "/image/child_seed/required_local_authority_closure/rows";
+const PRIVATE_PROCESS_MESSAGE_PAYLOAD_PATH: &str = "/message/carrier/payload";
+const CI_SAFE_UNIQUE_IMAGE_COLLECTION_ITEMS: usize = 128;
 const OWNER_ONLY_SOURCE: &str = r#"
 module Mirrorea.Sys5.I3OwnerOnly
 
@@ -150,6 +181,553 @@ fn image_for_source_and_slot(source_text: &str, slot: &str) -> Sys5I3ProcessImag
     let deployment = two_nonempty_slots(&project);
     let mut cohort = single_coordinator_cohort(&project, &deployment);
     take_process_image(&mut cohort, slot)
+}
+
+fn private_process_json(frame: &[u8], expected_root: &str) -> Value {
+    assert!(
+        frame.len() >= PRIVATE_PROCESS_CODEC_PREFIX_BYTES,
+        "private process codec frames begin with a fixed four-byte length prefix"
+    );
+    let declared = u32::from_be_bytes(
+        frame[..PRIVATE_PROCESS_CODEC_PREFIX_BYTES]
+            .try_into()
+            .expect("private codec prefix has exactly four bytes"),
+    );
+    assert_eq!(
+        declared as usize,
+        frame.len() - PRIVATE_PROCESS_CODEC_PREFIX_BYTES,
+        "private process codec frame must declare the exact JSON body length"
+    );
+    let value: Value = serde_json::from_slice(&frame[PRIVATE_PROCESS_CODEC_PREFIX_BYTES..])
+        .expect("canonical private codec body must be JSON for test-only byte mutation");
+    assert!(
+        value.pointer(expected_root).is_some(),
+        "private codec must retain the test-owned expected envelope root"
+    );
+    value
+}
+
+fn private_process_json_frame(value: &Value) -> Vec<u8> {
+    let body =
+        serde_json::to_vec(value).expect("test-mutated private process envelope remains JSON");
+    let length = u32::try_from(body.len()).expect("test JSON body fits the private u32 prefix");
+    let mut frame = length.to_be_bytes().to_vec();
+    frame.extend_from_slice(&body);
+    frame
+}
+
+fn mutate_private_process_string_field(
+    frame: &[u8],
+    expected_root: &str,
+    pointer: &str,
+    mutation_label: &str,
+) -> Vec<u8> {
+    let mut value = private_process_json(frame, expected_root);
+    let field = value.pointer_mut(pointer).unwrap_or_else(|| {
+        panic!("private process codec must expose required test schema field {pointer}")
+    });
+    let original = field.as_str().unwrap_or_else(|| {
+        panic!("private process codec test schema field {pointer} must be a string")
+    });
+    *field = Value::String(format!("{original}-{mutation_label}"));
+    private_process_json_frame(&value)
+}
+
+fn replace_private_process_string_field(
+    frame: &[u8],
+    expected_root: &str,
+    pointer: &str,
+    replacement: &str,
+) -> Vec<u8> {
+    let mut value = private_process_json(frame, expected_root);
+    let field = value.pointer_mut(pointer).unwrap_or_else(|| {
+        panic!("private process codec must expose required test schema field {pointer}")
+    });
+    assert!(
+        field.is_string(),
+        "private process codec test schema field {pointer} must be a string"
+    );
+    *field = Value::String(replacement.to_string());
+    private_process_json_frame(&value)
+}
+
+fn replace_private_process_optional_string_field(
+    frame: &[u8],
+    expected_root: &str,
+    pointer: &str,
+    replacement: &str,
+) -> Vec<u8> {
+    let mut value = private_process_json(frame, expected_root);
+    let field = value.pointer_mut(pointer).unwrap_or_else(|| {
+        panic!("private process codec must expose required test schema field {pointer}")
+    });
+    assert!(
+        field.is_null() || field.is_string(),
+        "private process codec test schema field {pointer} must be an optional string"
+    );
+    *field = Value::String(replacement.to_string());
+    private_process_json_frame(&value)
+}
+
+fn duplicate_private_process_array_element(
+    frame: &[u8],
+    expected_root: &str,
+    pointer: &str,
+) -> Vec<u8> {
+    let mut value = private_process_json(frame, expected_root);
+    let array = value
+        .pointer_mut(pointer)
+        .and_then(Value::as_array_mut)
+        .unwrap_or_else(|| {
+            panic!("private process codec must expose required test schema array {pointer}")
+        });
+    let element = array.first().cloned().unwrap_or_else(|| {
+        panic!("private process codec test schema array {pointer} must be nonempty")
+    });
+    array.push(element);
+    private_process_json_frame(&value)
+}
+
+fn append_private_process_unknown_object_member(
+    frame: &[u8],
+    expected_root: &str,
+    pointer: &str,
+    member: &str,
+) -> Vec<u8> {
+    let mut value = private_process_json(frame, expected_root);
+    let object = value
+        .pointer_mut(pointer)
+        .and_then(Value::as_object_mut)
+        .unwrap_or_else(|| {
+            panic!("private process codec must expose required test schema object {pointer}")
+        });
+    assert!(
+        object
+            .insert(
+                member.to_string(),
+                Value::String("untrusted-extra".to_string())
+            )
+            .is_none(),
+        "private process codec test schema member {member} must not already exist"
+    );
+    private_process_json_frame(&value)
+}
+
+/// Build a CI-safe *unique* untrusted image collection without a wall-clock
+/// assertion.  The decoder's byte limit bounds input size; exact source image
+/// identity remains the later parent-held start-binding check.  This cannot
+/// prove a complexity class black-box, but prevents an implementation from
+/// treating every large adversarial collection as a duplicate by default.
+fn append_ci_safe_unique_image_inventory(frame: &[u8]) -> Vec<u8> {
+    let mut value = private_process_json(frame, PRIVATE_PROCESS_IMAGE_ROOT);
+    let assigned_loci = value
+        .pointer_mut(PRIVATE_PROCESS_IMAGE_ASSIGNED_LOCI_PATH)
+        .and_then(Value::as_array_mut)
+        .expect("private process image schema retains its assigned-loci collection");
+    for ordinal in 0..CI_SAFE_UNIQUE_IMAGE_COLLECTION_ITEMS {
+        assigned_loci.push(Value::String(format!("UntrustedUniqueLocus{ordinal:03}")));
+    }
+
+    let semantic_rows = value
+        .pointer_mut(PRIVATE_PROCESS_IMAGE_SEMANTIC_ROWS_PATH)
+        .and_then(Value::as_array_mut)
+        .expect("private process image schema retains its semantic-row collection");
+    let prototype = semantic_rows.first().cloned().expect(
+        "the canonical source-derived image has one semantic row usable as a unique-row schema witness",
+    );
+    for ordinal in 0..CI_SAFE_UNIQUE_IMAGE_COLLECTION_ITEMS {
+        let mut row = prototype.clone();
+        let locus = row
+            .pointer_mut("/fields/locus")
+            .expect("the canonical first semantic-row witness is an artifact row with a locus");
+        *locus = Value::String(format!("UntrustedUniqueLocus{ordinal:03}"));
+        semantic_rows.push(row);
+    }
+    private_process_json_frame(&value)
+}
+
+fn replace_private_process_version(frame: &[u8], expected_root: &str) -> Vec<u8> {
+    let mut value = private_process_json(frame, expected_root);
+    let field = value.pointer_mut(PRIVATE_PROCESS_VERSION_PATH).unwrap_or_else(|| {
+        panic!(
+            "private process codec must expose required test schema field {PRIVATE_PROCESS_VERSION_PATH}"
+        )
+    });
+    *field = Value::from(u64::MAX);
+    private_process_json_frame(&value)
+}
+
+fn remove_private_process_object_member(
+    frame: &[u8],
+    expected_root: &str,
+    object_pointer: &str,
+    member: &str,
+) -> Vec<u8> {
+    let mut value = private_process_json(frame, expected_root);
+    let object = value
+        .pointer_mut(object_pointer)
+        .and_then(Value::as_object_mut)
+        .unwrap_or_else(|| {
+            panic!("private process codec must expose object test schema field {object_pointer}")
+        });
+    assert!(
+        object.remove(member).is_some(),
+        "private process codec must retain required test schema member {member}"
+    );
+    private_process_json_frame(&value)
+}
+
+fn json_member(name: &str, value: &Value) -> String {
+    format!(
+        "{}:{}",
+        serde_json::to_string(name).expect("test field name serializes"),
+        serde_json::to_string(value).expect("test field value serializes")
+    )
+}
+
+fn private_process_object_with_duplicate_member(
+    object: &serde_json::Map<String, Value>,
+    duplicate_member: Option<&str>,
+    nested_object_replacement: Option<(&str, &str)>,
+) -> String {
+    let mut members = Vec::new();
+    for (name, value) in object {
+        let rendered = nested_object_replacement
+            .filter(|(replacement_name, _)| name == replacement_name)
+            .map(|(_, replacement)| {
+                format!(
+                    "{}:{replacement}",
+                    serde_json::to_string(name).expect("test nested field name serializes")
+                )
+            })
+            .unwrap_or_else(|| json_member(name, value));
+        members.push(rendered.clone());
+        if duplicate_member == Some(name.as_str()) {
+            members.push(rendered);
+        }
+    }
+    if let Some(duplicate_member) = duplicate_member {
+        assert!(
+            object.contains_key(duplicate_member),
+            "private process codec must retain required test schema member {duplicate_member}"
+        );
+    }
+    format!("{{{}}}", members.join(","))
+}
+
+fn private_process_frame_with_duplicate_member(
+    frame: &[u8],
+    duplicate_level: &str,
+    duplicate_member: &str,
+) -> Vec<u8> {
+    let value = private_process_json(frame, PRIVATE_PROCESS_MESSAGE_ROOT);
+    let envelope = value
+        .as_object()
+        .expect("private process envelope is a JSON object");
+    let version = envelope
+        .get("version")
+        .expect("private process envelope has version");
+    let message = envelope
+        .get("message")
+        .and_then(Value::as_object)
+        .expect("private process envelope has message object");
+    let message_body = match duplicate_level {
+        "envelope" => private_process_object_with_duplicate_member(message, None, None),
+        "message" => {
+            private_process_object_with_duplicate_member(message, Some(duplicate_member), None)
+        }
+        "carrier" => {
+            let carrier = message
+                .get("carrier")
+                .and_then(Value::as_object)
+                .expect("private process message has carrier object");
+            let carrier_body =
+                private_process_object_with_duplicate_member(carrier, Some(duplicate_member), None);
+            private_process_object_with_duplicate_member(
+                message,
+                None,
+                Some(("carrier", carrier_body.as_str())),
+            )
+        }
+        "payload" => {
+            let carrier = message
+                .get("carrier")
+                .and_then(Value::as_object)
+                .expect("private process message has carrier object");
+            let payload = carrier
+                .get("payload")
+                .and_then(Value::as_object)
+                .expect("private process carrier has tagged payload object");
+            let payload_body =
+                private_process_object_with_duplicate_member(payload, Some(duplicate_member), None);
+            let carrier_body = private_process_object_with_duplicate_member(
+                carrier,
+                None,
+                Some(("payload", payload_body.as_str())),
+            );
+            private_process_object_with_duplicate_member(
+                message,
+                None,
+                Some(("carrier", carrier_body.as_str())),
+            )
+        }
+        other => panic!("unknown private duplicate test level {other}"),
+    };
+    let body = match (duplicate_level, duplicate_member) {
+        ("envelope", "version") => format!(
+            "{{{},{},\"message\":{message_body}}}",
+            json_member("version", version),
+            json_member("version", version),
+        ),
+        ("envelope", "message") => format!(
+            "{{\"version\":{},\"message\":{message_body},\"message\":{message_body}}}",
+            serde_json::to_string(version).expect("version serializes"),
+        ),
+        ("message", _) | ("carrier", _) | ("payload", _) => format!(
+            "{{\"version\":{},\"message\":{message_body}}}",
+            serde_json::to_string(version).expect("version serializes"),
+        ),
+        (_, member) => panic!("unknown private duplicate member {member}"),
+    };
+    let length = u32::try_from(body.len()).expect("raw duplicate JSON fits private u32 prefix");
+    let mut framed = length.to_be_bytes().to_vec();
+    framed.extend_from_slice(body.as_bytes());
+    framed
+}
+
+/// Only the matching coordinator-held binding may promote private bytes into a
+/// runtime.  The decoded value remains untrusted until this receiver-owned
+/// boundary; it has no direct `Sys5I3ProcessRuntime` constructor.
+fn decode_and_start_private_image(
+    codec: &Sys5I3PrivateProcessCodec,
+    cohort: &mut Sys5I3ProcessCohort,
+    slot: &str,
+) -> Sys5I3ProcessRuntime {
+    let expected_start_binding = cohort
+        .parent_held_expected_start_binding(slot)
+        .expect("coordinator retains an opaque start binding for its one child image");
+    let image = take_process_image(cohort, slot);
+    let image_bytes = codec
+        .encode_image(image)
+        .expect("checked image encodes through the private codec");
+    let decoded = codec
+        .decode_untrusted_image(&image_bytes)
+        .expect("checked private image bytes decode to an untrusted candidate");
+    codec
+        .validate_and_start_image(decoded, expected_start_binding)
+        .expect("matching coordinator-held binding starts the assigned child runtime")
+}
+
+struct PendingPrivateReplyFixture {
+    codec: Sys5I3PrivateProcessCodec,
+    requester: Sys5I3ProcessRuntime,
+    request_identity: String,
+    reply_bytes: Vec<u8>,
+}
+
+/// Produce a valid owner reply while retaining the requester whose exact
+/// source-derived request is still locally pending.  Each reply falsifier
+/// receives a fresh fixture so no rejected candidate can be hidden by a
+/// previous receipt transition.
+fn pending_private_reply_fixture() -> PendingPrivateReplyFixture {
+    let project = build_once(CANONICAL_SOURCE);
+    let deployment = two_nonempty_slots(&project);
+    let codec = Sys5I3PrivateProcessCodec::private_provisional_v1();
+    let mut cohort = single_coordinator_cohort(&project, &deployment);
+    let mut requester = decode_and_start_private_image(&codec, &mut cohort, REQUESTER_SLOT);
+    let mut owner = decode_and_start_private_image(&codec, &mut cohort, OWNER_SLOT);
+    let request = requester
+        .emit_generated_owner_request("init_avatar_hp")
+        .expect("source-derived requester operation emits one generated request");
+    let request_identity = request.semantic_request_identity_ref().to_string();
+    let request_bytes = codec
+        .encode_outbound_message(request)
+        .expect("the generated request encodes through the private codec");
+    let reply = owner
+        .admit_untrusted_message(
+            codec
+                .decode_untrusted_message(&request_bytes)
+                .expect("the exact request bytes decode only as an untrusted candidate"),
+        )
+        .expect("owner accepts the source-derived pending request")
+        .expect("owner serve returns one source-derived reply");
+    let reply_bytes = codec
+        .encode_outbound_message(reply)
+        .expect("the generated owner reply encodes through the private codec");
+    PendingPrivateReplyFixture {
+        codec,
+        requester,
+        request_identity,
+        reply_bytes,
+    }
+}
+
+fn assert_rejected_private_reply_preserves_requester_pending_state(
+    fixture: &mut PendingPrivateReplyFixture,
+    candidate_bytes: &[u8],
+    expected_request_identity: &str,
+) {
+    let summary_before = fixture.requester.observer_safe_runtime_summary();
+    let outbox_before = fixture.requester.observer_safe_outbox_summary();
+    let receipt_before = fixture
+        .requester
+        .observer_safe_semantic_occurrences()
+        .requester_local_receipt_occurrence_ref(expected_request_identity)
+        .map(str::to_string);
+    assert_eq!(
+        fixture
+            .requester
+            .authoritative_i64_state("avatar", "self", "hp")
+            .expect_err("the requester never owns WorldAuthority state")
+            .kind(),
+        Sys5I3ProcessRuntimeErrorKind::MissingAuthoritativeState
+    );
+    assert_eq!(
+        fixture
+            .requester
+            .admit_untrusted_message(
+                fixture
+                    .codec
+                    .decode_untrusted_message(candidate_bytes)
+                    .expect("the byte-mutated reply remains only an untrusted candidate"),
+            )
+            .expect_err("a forged reply must reject before receipt/state/outbox mutation")
+            .kind(),
+        Sys5I3ProcessRuntimeErrorKind::CarrierAdmissionRejected
+    );
+    assert_eq!(
+        fixture.requester.observer_safe_runtime_summary(),
+        summary_before,
+        "rejected reply bytes must preserve requester served/write/receipt counters"
+    );
+    assert_eq!(
+        fixture.requester.observer_safe_outbox_summary(),
+        outbox_before,
+        "rejected reply bytes must preserve the requester outbox"
+    );
+    assert_eq!(
+        fixture
+            .requester
+            .observer_safe_semantic_occurrences()
+            .requester_local_receipt_occurrence_ref(expected_request_identity),
+        receipt_before.as_deref(),
+        "rejected reply bytes must not mint or replace a requester-local receipt occurrence"
+    );
+    assert_eq!(
+        fixture
+            .requester
+            .authoritative_i64_state("avatar", "self", "hp")
+            .expect_err("a rejected reply must not install owner state in the requester")
+            .kind(),
+        Sys5I3ProcessRuntimeErrorKind::MissingAuthoritativeState
+    );
+}
+
+fn admit_exact_private_reply(fixture: &mut PendingPrivateReplyFixture) -> String {
+    let receipt = fixture
+        .requester
+        .admit_untrusted_message(
+            fixture
+                .codec
+                .decode_untrusted_message(&fixture.reply_bytes)
+                .expect("the exact reply remains an untrusted candidate until admission"),
+        )
+        .expect("the exact locally pending reply is admitted")
+        .expect("the exact locally pending reply produces a local receipt");
+    assert_eq!(
+        receipt.linked_request_identity_ref(),
+        Some(fixture.request_identity.as_str())
+    );
+    fixture
+        .requester
+        .observer_safe_semantic_occurrences()
+        .requester_local_receipt_occurrence_ref(&fixture.request_identity)
+        .expect("the accepted exact reply installs one receipt occurrence")
+        .to_string()
+}
+
+struct PendingPrivateRequestFixture {
+    codec: Sys5I3PrivateProcessCodec,
+    owner: Sys5I3ProcessRuntime,
+    request_identity: String,
+    request_bytes: Vec<u8>,
+}
+
+fn pending_private_request_fixture() -> PendingPrivateRequestFixture {
+    let project = build_once(CANONICAL_SOURCE);
+    let deployment = two_nonempty_slots(&project);
+    let codec = Sys5I3PrivateProcessCodec::private_provisional_v1();
+    let mut cohort = single_coordinator_cohort(&project, &deployment);
+    let mut requester = decode_and_start_private_image(&codec, &mut cohort, REQUESTER_SLOT);
+    let owner = decode_and_start_private_image(&codec, &mut cohort, OWNER_SLOT);
+    let request = requester
+        .emit_generated_owner_request("init_avatar_hp")
+        .expect("source-derived requester operation emits one generated request");
+    let request_identity = request.semantic_request_identity_ref().to_string();
+    let request_bytes = codec
+        .encode_outbound_message(request)
+        .expect("the generated request encodes through the private codec");
+    PendingPrivateRequestFixture {
+        codec,
+        owner,
+        request_identity,
+        request_bytes,
+    }
+}
+
+fn assert_rejected_private_request_preserves_owner_state_and_occurrences(
+    fixture: &mut PendingPrivateRequestFixture,
+    candidate_bytes: &[u8],
+) {
+    let summary_before = fixture.owner.observer_safe_runtime_summary();
+    let outbox_before = fixture.owner.observer_safe_outbox_summary();
+    let occurrences_before = fixture.owner.observer_safe_semantic_occurrences();
+    assert_eq!(
+        fixture
+            .owner
+            .authoritative_i64_state("avatar", "self", "hp")
+            .expect_err("the owner has no source-derived hp before a rejected request")
+            .kind(),
+        Sys5I3ProcessRuntimeErrorKind::MissingAuthoritativeState
+    );
+    assert_eq!(
+        fixture
+            .owner
+            .admit_untrusted_message(
+                fixture
+                    .codec
+                    .decode_untrusted_message(candidate_bytes)
+                    .expect("the byte-mutated request remains only an untrusted candidate"),
+            )
+            .expect_err(
+                "a forged request lineage must reject before owner serve/write/outbox mutation"
+            )
+            .kind(),
+        Sys5I3ProcessRuntimeErrorKind::CarrierAdmissionRejected
+    );
+    assert_eq!(
+        fixture.owner.observer_safe_runtime_summary(),
+        summary_before,
+        "rejected request bytes must preserve owner serve/write/receipt counters"
+    );
+    assert_eq!(
+        fixture.owner.observer_safe_outbox_summary(),
+        outbox_before,
+        "rejected request bytes must not mint an owner reply carrier"
+    );
+    assert_eq!(
+        fixture.owner.observer_safe_semantic_occurrences(),
+        occurrences_before,
+        "rejected request bytes must not mint owner serve/write occurrences"
+    );
+    assert_eq!(
+        fixture
+            .owner
+            .authoritative_i64_state("avatar", "self", "hp")
+            .expect_err("a rejected request must not materialize owner state")
+            .kind(),
+        Sys5I3ProcessRuntimeErrorKind::MissingAuthoritativeState
+    );
 }
 
 fn assert_checked_image_contract(image: &Sys5I3ProcessImage) {
@@ -927,6 +1505,55 @@ fn g1_two_independent_runtimes_complete_remote_owner_request_reply_and_receipt_f
 }
 
 #[test]
+fn g1_owner_serve_write_and_requester_receipt_have_distinct_exact_occurrence_evidence() {
+    let project = build_once(CANONICAL_SOURCE);
+    let deployment = two_nonempty_slots(&project);
+    let mut cohort = single_coordinator_cohort(&project, &deployment);
+    let requester_image = take_process_image(&mut cohort, REQUESTER_SLOT);
+    let owner_image = take_process_image(&mut cohort, OWNER_SLOT);
+    let mut requester =
+        Sys5I3ProcessRuntime::start(requester_image).expect("requester process image starts");
+    let mut owner = Sys5I3ProcessRuntime::start(owner_image).expect("owner process image starts");
+
+    let request = requester
+        .emit_generated_owner_request("init_avatar_hp")
+        .expect("source-derived request emits");
+    let request_identity = request.semantic_request_identity_ref().to_string();
+    let reply = owner
+        .accept_inbound(request)
+        .expect("owner admits generated request")
+        .expect("owner produces generated reply");
+
+    let owner_occurrences = owner.observer_safe_semantic_occurrences();
+    let serve_occurrence = owner_occurrences
+        .owner_serve_linearization_occurrence_ref(&request_identity)
+        .expect("the admitted request has one observer-safe owner serve linearization occurrence");
+    let write_occurrence = owner_occurrences
+        .actual_owner_write_occurrence_ref(&request_identity)
+        .expect("the source-derived write has one observer-safe owner-write occurrence");
+    assert_ne!(
+        serve_occurrence, write_occurrence,
+        "owner request admission/serve linearization and actual state write are distinct semantic occurrences"
+    );
+
+    let receipt = requester
+        .accept_inbound(reply)
+        .expect("requester admits generated reply")
+        .expect("requester completes its local receipt");
+    assert_eq!(
+        receipt.linked_request_identity_ref(),
+        Some(request_identity.as_str())
+    );
+    assert!(
+        requester
+            .observer_safe_semantic_occurrences()
+            .requester_local_receipt_occurrence_ref(&request_identity)
+            .is_some(),
+        "requester receipt completion needs exact observer-safe occurrence evidence, not inference from a counter"
+    );
+}
+
+#[test]
 fn g1_source_literal_variation_changes_owner_result_without_a_hard_coded_process_image_result() {
     let variant_source =
         CANONICAL_SOURCE.replacen("avatar[self].hp = 21", "avatar[self].hp = 34", 1);
@@ -1072,6 +1699,972 @@ fn g1_same_source_cohorts_have_distinct_activation_and_logical_occurrences_witho
         assert!(!basis.includes_process_id());
         assert!(!basis.includes_network_identity());
     }
+}
+
+#[test]
+fn g2_private_image_codec_bounds_untrusted_decode_and_requires_parent_held_start_binding() {
+    let project = build_once(CANONICAL_SOURCE);
+    let deployment = two_nonempty_slots(&project);
+    let codec = Sys5I3PrivateProcessCodec::private_provisional_v1();
+
+    let mut cohort = single_coordinator_cohort(&project, &deployment);
+    let expected_start_binding = cohort
+        .parent_held_expected_start_binding(REQUESTER_SLOT)
+        .expect("the coordinator retains one opaque expected binding before releasing an image");
+    let image = take_process_image(&mut cohort, REQUESTER_SLOT);
+    let expected_assigned_loci = image.assigned_loci();
+    let expected_seed = image.observer_safe_child_seed();
+    let expected_parent_ref = expected_seed.parent_checked_program_ref().to_string();
+    let expected_projection_ref = expected_seed.projection_ref().to_string();
+    let expected_m9_generation_ref = expected_seed.m9_generation_ref().to_string();
+    let expected_cohort_ref = expected_seed
+        .required_local_authority_closure()
+        .opaque_cohort_ref()
+        .to_string();
+
+    // Encoding consumes the only image.  The bytes are now untrusted input;
+    // neither this test nor a child can start the original image directly.
+    let image_bytes = codec
+        .encode_image(image)
+        .expect("one checked child image encodes through the private bounded codec");
+    assert!(
+        image_bytes.len() <= codec.limits().max_image_bytes(),
+        "private image encoding must enforce its declared bounded payload limit"
+    );
+
+    let decoded = codec
+        .decode_untrusted_image(&image_bytes)
+        .expect("the exact private image bytes decode only to an untrusted candidate");
+    let manifest = decoded.observer_safe_manifest();
+    assert_eq!(manifest.assigned_loci(), expected_assigned_loci);
+    assert!(
+        manifest.has_assigned_artifacts_only(),
+        "decoded image manifest must retain executable artifacts only for its assigned loci"
+    );
+    assert_eq!(manifest.parent_checked_program_ref(), expected_parent_ref);
+    assert_eq!(manifest.projection_ref(), expected_projection_ref);
+    assert_eq!(manifest.m9_generation_ref(), expected_m9_generation_ref);
+    assert_eq!(manifest.cohort_provenance_ref(), expected_cohort_ref);
+    assert!(!manifest.carries_source_text());
+    assert!(!manifest.carries_host_path());
+    assert!(!manifest.carries_expected_result());
+
+    let mut wrong_cohort = single_coordinator_cohort(&project, &deployment);
+    let wrong_parent_binding = wrong_cohort
+        .parent_held_expected_start_binding(REQUESTER_SLOT)
+        .expect("a different coordinator owns a distinct expected cohort binding");
+    assert_eq!(
+        codec
+            .validate_and_start_image(
+                codec
+                    .decode_untrusted_image(&image_bytes)
+                    .expect("same bounded bytes may be decoded again only as untrusted input"),
+                wrong_parent_binding,
+            )
+            .expect_err("a parent-held expected binding from another cohort must reject before runtime start")
+            .kind(),
+        Sys5I3ProcessRuntimeErrorKind::CohortProvenanceMismatch
+    );
+    let runtime = codec
+        .validate_and_start_image(decoded, expected_start_binding)
+        .expect("only the matching parent-held binding may convert decoded bytes into a started runtime");
+    assert_candidate_a_child_runtime(&runtime);
+
+    let malformed = codec
+        .decode_untrusted_image(b"not a private process image")
+        .expect_err("malformed image bytes must fail closed before admission");
+    assert_eq!(
+        malformed.kind(),
+        Sys5I3PrivateProcessCodecErrorKind::Malformed
+    );
+    let truncated = codec
+        .decode_untrusted_image(&image_bytes[..image_bytes.len() - 1])
+        .expect_err("an incomplete image frame must never produce a partial child image");
+    assert_eq!(
+        truncated.kind(),
+        Sys5I3PrivateProcessCodecErrorKind::Incomplete
+    );
+    let oversized = vec![0_u8; codec.limits().max_image_bytes() + 1];
+    let oversized = codec.decode_untrusted_image(&oversized).expect_err(
+        "an oversized image frame must reject before child admission or allocation growth",
+    );
+    assert_eq!(
+        oversized.kind(),
+        Sys5I3PrivateProcessCodecErrorKind::Oversized
+    );
+    let unknown_version = replace_private_process_version(&image_bytes, PRIVATE_PROCESS_IMAGE_ROOT);
+    assert_eq!(
+        codec
+            .decode_untrusted_image(&unknown_version)
+            .expect_err("unknown private codec version must fail closed")
+            .kind(),
+        Sys5I3PrivateProcessCodecErrorKind::UnknownVersion
+    );
+    let missing_edge_core = remove_private_process_object_member(
+        &image_bytes,
+        PRIVATE_PROCESS_IMAGE_ROOT,
+        PRIVATE_PROCESS_IMAGE_EDGE_OBJECT_PATH,
+        "core_ref",
+    );
+    assert_eq!(
+        codec
+            .decode_untrusted_image(&missing_edge_core)
+            .expect_err("a missing incident-edge Core reference must not default to an empty provenance value")
+            .kind(),
+        Sys5I3PrivateProcessCodecErrorKind::MissingRequiredCoreProvenance
+    );
+}
+
+#[test]
+fn g2_private_message_codec_keeps_request_reply_receipt_distinct_and_revalidates_at_receiver() {
+    let project = build_once(CANONICAL_SOURCE);
+    let deployment = two_nonempty_slots(&project);
+    let codec = Sys5I3PrivateProcessCodec::private_provisional_v1();
+    let mut cohort = single_coordinator_cohort(&project, &deployment);
+    let mut requester = decode_and_start_private_image(&codec, &mut cohort, REQUESTER_SLOT);
+    let mut owner = decode_and_start_private_image(&codec, &mut cohort, OWNER_SLOT);
+
+    let request_bytes = codec
+        .encode_outbound_message(
+            requester
+                .emit_generated_owner_request("init_avatar_hp")
+                .expect("source-derived requester operation emits one generated request"),
+        )
+        .expect("a trusted outbound request encodes through the private codec");
+    assert!(
+        request_bytes.len() <= codec.limits().max_message_bytes(),
+        "private carrier encoding must enforce the declared message bound"
+    );
+    assert!(
+        codec
+            .decode_untrusted_message(&request_bytes)
+            .expect("exact request bytes decode only as an untrusted message candidate")
+            .observer_safe_manifest()
+            .is_request(),
+        "request bytes must not collapse into a reply or receipt before receiver admission"
+    );
+
+    let owner_summary_before = owner.observer_safe_runtime_summary();
+    let owner_outbox_before = owner.observer_safe_outbox_summary();
+    for (pointer, mutation_label) in [
+        (PRIVATE_PROCESS_MESSAGE_COHORT_PATH, "cohort"),
+        (PRIVATE_PROCESS_MESSAGE_EDGE_PATH, "edge"),
+        (PRIVATE_PROCESS_MESSAGE_TARGET_PATH, "target"),
+        (
+            PRIVATE_PROCESS_MESSAGE_CARRIER_PROVENANCE_PATH,
+            "carrier-provenance",
+        ),
+    ] {
+        let tampered_bytes = mutate_private_process_string_field(
+            &request_bytes,
+            PRIVATE_PROCESS_MESSAGE_ROOT,
+            pointer,
+            mutation_label,
+        );
+        let decoded = codec
+            .decode_untrusted_message(&tampered_bytes)
+            .expect("tampered bytes remain syntactically decodable only as untrusted input");
+        let error = owner.admit_untrusted_message(decoded).expect_err(
+            "wrong cohort, edge, target, or provenance must reject before owner execution",
+        );
+        assert!(
+            matches!(
+                error.kind(),
+                Sys5I3ProcessRuntimeErrorKind::CohortProvenanceMismatch
+                    | Sys5I3ProcessRuntimeErrorKind::CarrierAdmissionRejected
+            ),
+            "each receiver-owned carrier admission failure remains typed"
+        );
+        assert_eq!(
+            owner
+                .observer_safe_runtime_summary()
+                .served_owner_request_count(),
+            owner_summary_before.served_owner_request_count(),
+            "rejected untrusted bytes must not produce owner serve linearization"
+        );
+        assert_eq!(
+            owner
+                .observer_safe_runtime_summary()
+                .actual_owner_write_count(),
+            owner_summary_before.actual_owner_write_count(),
+            "rejected untrusted bytes must not produce an owner write"
+        );
+        assert_eq!(
+            owner
+                .observer_safe_runtime_summary()
+                .accepted_inbound_receipt_count(),
+            owner_summary_before.accepted_inbound_receipt_count(),
+            "rejected untrusted bytes must not mint or accept a receipt"
+        );
+        assert_eq!(
+            owner.observer_safe_outbox_summary().pending_carrier_count(),
+            owner_outbox_before.pending_carrier_count(),
+            "rejected untrusted bytes must not mint an outbound reply carrier"
+        );
+    }
+
+    let reply = owner
+        .admit_untrusted_message(
+            codec
+                .decode_untrusted_message(&request_bytes)
+                .expect("normal request bytes remain untrusted until owner admission"),
+        )
+        .expect("receiver-owned admission accepts the exact generated request")
+        .expect("owner serve returns one generated reply");
+    let reply_bytes = codec
+        .encode_outbound_message(reply)
+        .expect("trusted generated reply encodes through the same private codec");
+    assert!(
+        codec
+            .decode_untrusted_message(&reply_bytes)
+            .expect("exact reply bytes decode only as an untrusted candidate")
+            .observer_safe_manifest()
+            .is_reply(),
+        "reply bytes must not collapse into the original request or a local receipt"
+    );
+    let receipt = requester
+        .admit_untrusted_message(
+            codec
+                .decode_untrusted_message(&reply_bytes)
+                .expect("normal reply bytes remain untrusted until requester admission"),
+        )
+        .expect("requester-owned admission accepts the exact generated reply")
+        .expect("reply consumption produces one requester-local receipt");
+    assert!(receipt.is_observer_safe_typed_result_or_receipt());
+    assert!(receipt.has_no_transportable_carrier());
+    assert_eq!(
+        codec
+            .encode_outbound_message(receipt)
+            .expect_err("a requester-local receipt must not become a third transport carrier")
+            .kind(),
+        Sys5I3PrivateProcessCodecErrorKind::ReceiptIsLocalOnly
+    );
+}
+
+#[test]
+fn g2_private_request_outer_semantic_identity_must_match_the_exact_source_carrier_before_owner_mutation()
+ {
+    let mut fixture = pending_private_request_fixture();
+    let forged = replace_private_process_string_field(
+        &fixture.request_bytes,
+        PRIVATE_PROCESS_MESSAGE_ROOT,
+        PRIVATE_PROCESS_MESSAGE_REQUEST_IDENTITY_PATH,
+        &format!("{}-forged-outer-semantic-id", fixture.request_identity),
+    );
+    assert_rejected_private_request_preserves_owner_state_and_occurrences(&mut fixture, &forged);
+    let exact_request = fixture.request_bytes.clone();
+    assert!(
+        fixture
+            .owner
+            .admit_untrusted_message(
+                fixture
+                    .codec
+                    .decode_untrusted_message(&exact_request)
+                    .expect("the exact original request remains an untrusted candidate"),
+            )
+            .expect("the original source-derived request remains admissible after rejection")
+            .is_some(),
+        "a rejected outer identity candidate must not consume the exact source-derived request"
+    );
+}
+
+#[test]
+fn g2_private_request_linked_identity_must_match_the_exact_source_carrier_contract() {
+    let mut fixture = pending_private_request_fixture();
+    let forged = replace_private_process_optional_string_field(
+        &fixture.request_bytes,
+        PRIVATE_PROCESS_MESSAGE_ROOT,
+        PRIVATE_PROCESS_MESSAGE_LINKED_REQUEST_IDENTITY_PATH,
+        "forged-request-linked-identity",
+    );
+    assert_rejected_private_request_preserves_owner_state_and_occurrences(&mut fixture, &forged);
+    let exact_request = fixture.request_bytes.clone();
+    assert!(
+        fixture
+            .owner
+            .admit_untrusted_message(
+                fixture
+                    .codec
+                    .decode_untrusted_message(&exact_request)
+                    .expect("the exact original request remains an untrusted candidate"),
+            )
+            .expect("the original source-derived request remains admissible after rejection")
+            .is_some(),
+        "a rejected linked identity candidate must not consume the exact source-derived request"
+    );
+}
+
+#[test]
+fn g2_private_message_outer_kind_must_match_the_exact_carrier_before_owner_or_requester_mutation() {
+    let project = build_once(CANONICAL_SOURCE);
+    let deployment = two_nonempty_slots(&project);
+    let codec = Sys5I3PrivateProcessCodec::private_provisional_v1();
+    let mut cohort = single_coordinator_cohort(&project, &deployment);
+    let mut requester = decode_and_start_private_image(&codec, &mut cohort, REQUESTER_SLOT);
+    let mut owner = decode_and_start_private_image(&codec, &mut cohort, OWNER_SLOT);
+
+    let owner_summary_before = owner.observer_safe_runtime_summary();
+    let owner_outbox_before = owner.observer_safe_outbox_summary();
+    assert_eq!(
+        owner
+            .authoritative_i64_state("avatar", "self", "hp")
+            .expect_err(
+                "owner has no source-derived avatar state before a rejected type-confused request"
+            )
+            .kind(),
+        Sys5I3ProcessRuntimeErrorKind::MissingAuthoritativeState
+    );
+    let owner_request_bytes = codec
+        .encode_outbound_message(
+            requester
+                .emit_generated_owner_request("init_avatar_hp")
+                .expect("requester emits an exact generated OwnerRequest"),
+        )
+        .expect("OwnerRequest encodes privately");
+    let owner_request_as_reply = replace_private_process_string_field(
+        &owner_request_bytes,
+        PRIVATE_PROCESS_MESSAGE_ROOT,
+        PRIVATE_PROCESS_MESSAGE_KIND_PATH,
+        "reply",
+    );
+    assert_eq!(
+        owner
+            .admit_untrusted_message(
+                codec
+                    .decode_untrusted_message(&owner_request_as_reply)
+                    .expect("outer-kind-mutated frame remains syntactically untrusted JSON"),
+            )
+            .expect_err("an OwnerRequest carrier labelled Reply must reject before owner serve")
+            .kind(),
+        Sys5I3ProcessRuntimeErrorKind::CarrierAdmissionRejected
+    );
+    assert_eq!(
+        owner
+            .authoritative_i64_state("avatar", "self", "hp")
+            .expect_err("type confusion must not create owner state")
+            .kind(),
+        Sys5I3ProcessRuntimeErrorKind::MissingAuthoritativeState
+    );
+    assert_eq!(
+        owner
+            .observer_safe_runtime_summary()
+            .served_owner_request_count(),
+        owner_summary_before.served_owner_request_count()
+    );
+    assert_eq!(
+        owner
+            .observer_safe_runtime_summary()
+            .actual_owner_write_count(),
+        owner_summary_before.actual_owner_write_count()
+    );
+    assert_eq!(
+        owner.observer_safe_outbox_summary().pending_carrier_count(),
+        owner_outbox_before.pending_carrier_count(),
+        "a type-confused request must not mint an owner reply"
+    );
+
+    // Establish a normal reply, then retag the outer message as Request while
+    // retaining the OwnerReplyReceipt carrier.  The requester must reject
+    // before a receipt/serve/outbox transition.
+    let request_identity = requester
+        .emit_generated_owner_request("init_avatar_hp")
+        .expect("requester emits a second source-derived request")
+        .semantic_request_identity_ref()
+        .to_string();
+    // Re-emit only to obtain bytes; the first request's identity is not used
+    // as a receipt claim because no reply has been admitted for it.
+    let reply_source_request = requester
+        .emit_generated_owner_request("init_avatar_hp")
+        .expect("requester emits the request whose reply will be retagged");
+    let reply = owner
+        .admit_untrusted_message(
+            codec
+                .decode_untrusted_message(
+                    &codec
+                        .encode_outbound_message(reply_source_request)
+                        .expect("normal request encodes"),
+                )
+                .expect("normal request decodes untrusted"),
+        )
+        .expect("owner admits the normal generated request")
+        .expect("owner produces normal generated reply");
+    let reply_as_request = replace_private_process_string_field(
+        &codec
+            .encode_outbound_message(reply)
+            .expect("normal reply encodes"),
+        PRIVATE_PROCESS_MESSAGE_ROOT,
+        PRIVATE_PROCESS_MESSAGE_KIND_PATH,
+        "request",
+    );
+    let requester_summary_before = requester.observer_safe_runtime_summary();
+    let requester_outbox_before = requester.observer_safe_outbox_summary();
+    assert_eq!(
+        requester
+            .authoritative_i64_state("avatar", "self", "hp")
+            .expect_err("requester has no owner state before a retagged reply")
+            .kind(),
+        Sys5I3ProcessRuntimeErrorKind::MissingAuthoritativeState
+    );
+    assert_eq!(
+        requester
+            .admit_untrusted_message(
+                codec
+                    .decode_untrusted_message(&reply_as_request)
+                    .expect("outer-kind-mutated reply remains syntactically untrusted JSON"),
+            )
+            .expect_err(
+                "an OwnerReplyReceipt carrier labelled Request must reject before requester receipt"
+            )
+            .kind(),
+        Sys5I3ProcessRuntimeErrorKind::CarrierAdmissionRejected
+    );
+    assert_eq!(
+        requester
+            .observer_safe_runtime_summary()
+            .served_owner_request_count(),
+        requester_summary_before.served_owner_request_count()
+    );
+    assert_eq!(
+        requester
+            .observer_safe_runtime_summary()
+            .actual_owner_write_count(),
+        requester_summary_before.actual_owner_write_count()
+    );
+    assert_eq!(
+        requester
+            .authoritative_i64_state("avatar", "self", "hp")
+            .expect_err("retagged reply must not install owner state in requester")
+            .kind(),
+        Sys5I3ProcessRuntimeErrorKind::MissingAuthoritativeState
+    );
+    assert!(
+        requester
+            .observer_safe_semantic_occurrences()
+            .requester_local_receipt_occurrence_ref(&request_identity)
+            .is_none(),
+        "retagged reply must not install a requester receipt for any unrelated pending identity"
+    );
+    assert_eq!(
+        requester
+            .observer_safe_outbox_summary()
+            .pending_carrier_count(),
+        requester_outbox_before.pending_carrier_count()
+    );
+}
+
+#[test]
+fn g2_private_reply_outer_kind_must_match_the_exact_reply_carrier_before_receipt_mutation() {
+    let mut fixture = pending_private_reply_fixture();
+    let request_identity = fixture.request_identity.clone();
+    let retagged = replace_private_process_string_field(
+        &fixture.reply_bytes,
+        PRIVATE_PROCESS_MESSAGE_ROOT,
+        PRIVATE_PROCESS_MESSAGE_KIND_PATH,
+        "request",
+    );
+    assert_rejected_private_reply_preserves_requester_pending_state(
+        &mut fixture,
+        &retagged,
+        &request_identity,
+    );
+    let _ = admit_exact_private_reply(&mut fixture);
+}
+
+#[test]
+fn g2_private_reply_requires_exact_locally_pending_request_linkage_and_rejects_replay() {
+    let project = build_once(CANONICAL_SOURCE);
+    let deployment = two_nonempty_slots(&project);
+    let codec = Sys5I3PrivateProcessCodec::private_provisional_v1();
+    let mut cohort = single_coordinator_cohort(&project, &deployment);
+    let mut requester = decode_and_start_private_image(&codec, &mut cohort, REQUESTER_SLOT);
+    let mut owner = decode_and_start_private_image(&codec, &mut cohort, OWNER_SLOT);
+
+    let source_request = requester
+        .emit_generated_owner_request("init_avatar_hp")
+        .expect("requester emits the one locally pending generated request");
+    let request_identity = source_request.semantic_request_identity_ref().to_string();
+    let reply = owner
+        .admit_untrusted_message(
+            codec
+                .decode_untrusted_message(
+                    &codec
+                        .encode_outbound_message(source_request)
+                        .expect("pending request encodes"),
+                )
+                .expect("pending request decodes as untrusted input"),
+        )
+        .expect("owner admits the exact pending request")
+        .expect("owner produces one exact reply");
+    let reply_bytes = codec
+        .encode_outbound_message(reply)
+        .expect("exact reply encodes privately");
+
+    let requester_summary_before = requester.observer_safe_runtime_summary();
+    let requester_outbox_before = requester.observer_safe_outbox_summary();
+    // This codec-only boundary proves structural carrier, pending-request, and
+    // M9 lineage integrity.  An arbitrary owner result value cannot be
+    // validated here without re-executing owner semantics (forbidden) or an
+    // authenticated peer binding; that G2c QUIC-adapter falsifier is kept out
+    // of this pre-transport fixture.  Transport identity remains nonauthority.
+    let forged_replies = [
+        replace_private_process_string_field(
+            &reply_bytes,
+            PRIVATE_PROCESS_MESSAGE_ROOT,
+            PRIVATE_PROCESS_MESSAGE_REQUEST_IDENTITY_PATH,
+            "forged-unknown-semantic-request",
+        ),
+        replace_private_process_string_field(
+            &reply_bytes,
+            PRIVATE_PROCESS_MESSAGE_ROOT,
+            PRIVATE_PROCESS_MESSAGE_LINKED_REQUEST_IDENTITY_PATH,
+            "forged-linked-request",
+        ),
+        replace_private_process_string_field(
+            &reply_bytes,
+            PRIVATE_PROCESS_MESSAGE_ROOT,
+            PRIVATE_PROCESS_MESSAGE_REQUEST_CARRIER_ID_PATH,
+            "forged-request-carrier",
+        ),
+        replace_private_process_optional_string_field(
+            &reply_bytes,
+            PRIVATE_PROCESS_MESSAGE_ROOT,
+            PRIVATE_PROCESS_MESSAGE_M9_OWNER_LINEAGE_PATH,
+            "forged-owner-lineage",
+        ),
+        replace_private_process_string_field(
+            &reply_bytes,
+            PRIVATE_PROCESS_MESSAGE_ROOT,
+            PRIVATE_PROCESS_MESSAGE_CARRIER_PROVENANCE_PATH,
+            "forged-core-provenance",
+        ),
+        replace_private_process_string_field(
+            &reply_bytes,
+            PRIVATE_PROCESS_MESSAGE_ROOT,
+            PRIVATE_PROCESS_MESSAGE_REPLY_RECEIPT_REQUEST_ID_PATH,
+            "forged-receipt-request",
+        ),
+    ];
+    for forged_reply in forged_replies {
+        assert_eq!(
+            requester
+                .admit_untrusted_message(
+                    codec
+                        .decode_untrusted_message(&forged_reply)
+                        .expect("forged reply remains syntactically untrusted JSON"),
+                )
+                .expect_err(
+                    "unknown or forged reply lineage must reject before a requester receipt is installed",
+                )
+                .kind(),
+            Sys5I3ProcessRuntimeErrorKind::CarrierAdmissionRejected
+        );
+        assert_eq!(
+            requester
+                .observer_safe_runtime_summary()
+                .actual_owner_write_count(),
+            requester_summary_before.actual_owner_write_count()
+        );
+        assert_eq!(
+            requester
+                .observer_safe_runtime_summary()
+                .accepted_inbound_receipt_count(),
+            requester_summary_before.accepted_inbound_receipt_count()
+        );
+        assert!(
+            requester
+                .observer_safe_semantic_occurrences()
+                .requester_local_receipt_occurrence_ref(&request_identity)
+                .is_none(),
+            "forged reply must not install a receipt occurrence for the exact locally pending request"
+        );
+        assert_eq!(
+            requester
+                .observer_safe_outbox_summary()
+                .pending_carrier_count(),
+            requester_outbox_before.pending_carrier_count()
+        );
+    }
+
+    let receipt = requester
+        .admit_untrusted_message(
+            codec
+                .decode_untrusted_message(&reply_bytes)
+                .expect("untampered reply remains untrusted until requester admission"),
+        )
+        .expect("the exact locally pending reply is admitted")
+        .expect("the exact locally pending reply produces a receipt");
+    assert_eq!(
+        receipt.linked_request_identity_ref(),
+        Some(request_identity.as_str())
+    );
+    let receipt_occurrence = requester
+        .observer_safe_semantic_occurrences()
+        .requester_local_receipt_occurrence_ref(&request_identity)
+        .expect("accepted exact reply installs one receipt occurrence")
+        .to_string();
+    assert_eq!(
+        requester
+            .admit_untrusted_message(
+                codec
+                    .decode_untrusted_message(&reply_bytes)
+                    .expect("replayed bytes remain syntactically untrusted JSON"),
+            )
+            .expect_err("replayed reply has no remaining locally pending request")
+            .kind(),
+        Sys5I3ProcessRuntimeErrorKind::CarrierAdmissionRejected
+    );
+    assert_eq!(
+        requester
+            .observer_safe_semantic_occurrences()
+            .requester_local_receipt_occurrence_ref(&request_identity),
+        Some(receipt_occurrence.as_str()),
+        "replayed reply must not replace or mint a second receipt occurrence"
+    );
+}
+
+#[test]
+fn g2_private_reply_with_unknown_semantic_request_identity_rejects_without_consuming_pending() {
+    let mut fixture = pending_private_reply_fixture();
+    let request_identity = fixture.request_identity.clone();
+    let forged = replace_private_process_string_field(
+        &fixture.reply_bytes,
+        PRIVATE_PROCESS_MESSAGE_ROOT,
+        PRIVATE_PROCESS_MESSAGE_REQUEST_IDENTITY_PATH,
+        "forged-unknown-semantic-request",
+    );
+    assert_rejected_private_reply_preserves_requester_pending_state(
+        &mut fixture,
+        &forged,
+        &request_identity,
+    );
+    let _ = admit_exact_private_reply(&mut fixture);
+}
+
+#[test]
+fn g2_private_reply_outer_semantic_identity_must_not_bind_a_different_pending_request() {
+    let mut fixture = pending_private_reply_fixture();
+    let first_identity = fixture.request_identity.clone();
+    let second_identity = fixture
+        .requester
+        .emit_generated_owner_request("init_avatar_hp")
+        .expect("the same requester may have a second independently pending generated request")
+        .semantic_request_identity_ref()
+        .to_string();
+    assert_ne!(
+        first_identity, second_identity,
+        "distinct source-derived requests must retain distinct semantic identities"
+    );
+    let forged = replace_private_process_string_field(
+        &fixture.reply_bytes,
+        PRIVATE_PROCESS_MESSAGE_ROOT,
+        PRIVATE_PROCESS_MESSAGE_REQUEST_IDENTITY_PATH,
+        &second_identity,
+    );
+    assert_rejected_private_reply_preserves_requester_pending_state(
+        &mut fixture,
+        &forged,
+        &first_identity,
+    );
+    assert!(
+        fixture
+            .requester
+            .observer_safe_semantic_occurrences()
+            .requester_local_receipt_occurrence_ref(&second_identity)
+            .is_none(),
+        "a reply carrier for the first request must not install a receipt for another pending request"
+    );
+    let _ = admit_exact_private_reply(&mut fixture);
+}
+
+#[test]
+fn g2_private_reply_linked_request_identity_must_match_the_pending_request() {
+    let mut fixture = pending_private_reply_fixture();
+    let request_identity = fixture.request_identity.clone();
+    let forged = replace_private_process_string_field(
+        &fixture.reply_bytes,
+        PRIVATE_PROCESS_MESSAGE_ROOT,
+        PRIVATE_PROCESS_MESSAGE_LINKED_REQUEST_IDENTITY_PATH,
+        "forged-linked-request",
+    );
+    assert_rejected_private_reply_preserves_requester_pending_state(
+        &mut fixture,
+        &forged,
+        &request_identity,
+    );
+    let _ = admit_exact_private_reply(&mut fixture);
+}
+
+#[test]
+fn g2_private_reply_original_request_carrier_must_match_the_pending_request() {
+    let mut fixture = pending_private_reply_fixture();
+    let request_identity = fixture.request_identity.clone();
+    let forged = replace_private_process_string_field(
+        &fixture.reply_bytes,
+        PRIVATE_PROCESS_MESSAGE_ROOT,
+        PRIVATE_PROCESS_MESSAGE_REQUEST_CARRIER_ID_PATH,
+        "forged-request-carrier",
+    );
+    assert_rejected_private_reply_preserves_requester_pending_state(
+        &mut fixture,
+        &forged,
+        &request_identity,
+    );
+    let _ = admit_exact_private_reply(&mut fixture);
+}
+
+#[test]
+fn g2_private_reply_owner_lineage_must_not_be_forged_at_the_requester_boundary() {
+    let mut fixture = pending_private_reply_fixture();
+    let request_identity = fixture.request_identity.clone();
+    let forged = replace_private_process_optional_string_field(
+        &fixture.reply_bytes,
+        PRIVATE_PROCESS_MESSAGE_ROOT,
+        PRIVATE_PROCESS_MESSAGE_M9_OWNER_LINEAGE_PATH,
+        "forged-owner-lineage",
+    );
+    assert_rejected_private_reply_preserves_requester_pending_state(
+        &mut fixture,
+        &forged,
+        &request_identity,
+    );
+    let _ = admit_exact_private_reply(&mut fixture);
+}
+
+#[test]
+fn g2_private_reply_source_derived_core_provenance_must_match_the_receiver_image() {
+    let mut fixture = pending_private_reply_fixture();
+    let request_identity = fixture.request_identity.clone();
+    let forged = mutate_private_process_string_field(
+        &fixture.reply_bytes,
+        PRIVATE_PROCESS_MESSAGE_ROOT,
+        PRIVATE_PROCESS_MESSAGE_CARRIER_PROVENANCE_PATH,
+        "forged-core-provenance",
+    );
+    assert_rejected_private_reply_preserves_requester_pending_state(
+        &mut fixture,
+        &forged,
+        &request_identity,
+    );
+    let _ = admit_exact_private_reply(&mut fixture);
+}
+
+#[test]
+fn g2_private_reply_edge_loci_and_operation_must_match_the_receiver_image_before_receipt() {
+    for (pointer, label) in [
+        (PRIVATE_PROCESS_MESSAGE_EDGE_PATH, "edge"),
+        (PRIVATE_PROCESS_MESSAGE_SOURCE_PATH, "source locus"),
+        (PRIVATE_PROCESS_MESSAGE_TARGET_PATH, "target locus"),
+        (PRIVATE_PROCESS_MESSAGE_OPERATION_PATH, "operation"),
+    ] {
+        let mut fixture = pending_private_reply_fixture();
+        let request_identity = fixture.request_identity.clone();
+        let forged = mutate_private_process_string_field(
+            &fixture.reply_bytes,
+            PRIVATE_PROCESS_MESSAGE_ROOT,
+            pointer,
+            &format!("forged-reply-{label}"),
+        );
+        assert_rejected_private_reply_preserves_requester_pending_state(
+            &mut fixture,
+            &forged,
+            &request_identity,
+        );
+        let _ = admit_exact_private_reply(&mut fixture);
+    }
+}
+
+#[test]
+fn g2_private_reply_receipt_request_identity_must_match_the_pending_request() {
+    let mut fixture = pending_private_reply_fixture();
+    let request_identity = fixture.request_identity.clone();
+    let forged = replace_private_process_string_field(
+        &fixture.reply_bytes,
+        PRIVATE_PROCESS_MESSAGE_ROOT,
+        PRIVATE_PROCESS_MESSAGE_REPLY_RECEIPT_REQUEST_ID_PATH,
+        "forged-receipt-request",
+    );
+    assert_rejected_private_reply_preserves_requester_pending_state(
+        &mut fixture,
+        &forged,
+        &request_identity,
+    );
+    let _ = admit_exact_private_reply(&mut fixture);
+}
+
+#[test]
+fn g2_private_reply_replay_after_exact_local_receipt_rejects_without_replacing_occurrence() {
+    let mut fixture = pending_private_reply_fixture();
+    let request_identity = fixture.request_identity.clone();
+    let receipt_occurrence = admit_exact_private_reply(&mut fixture);
+    let replayed_bytes = fixture.reply_bytes.clone();
+    assert_rejected_private_reply_preserves_requester_pending_state(
+        &mut fixture,
+        &replayed_bytes,
+        &request_identity,
+    );
+    assert_eq!(
+        fixture
+            .requester
+            .observer_safe_semantic_occurrences()
+            .requester_local_receipt_occurrence_ref(&request_identity),
+        Some(receipt_occurrence.as_str()),
+        "a replay must preserve the exact first requester-local receipt occurrence"
+    );
+}
+
+#[test]
+fn g2_private_message_decoder_rejects_raw_json_duplicate_members_without_last_wins() {
+    assert_private_message_duplicate_member_rejected("envelope", "version");
+}
+
+fn assert_private_message_duplicate_member_rejected(level: &str, member: &str) {
+    let project = build_once(CANONICAL_SOURCE);
+    let deployment = two_nonempty_slots(&project);
+    let codec = Sys5I3PrivateProcessCodec::private_provisional_v1();
+    let mut cohort = single_coordinator_cohort(&project, &deployment);
+    let mut requester = decode_and_start_private_image(&codec, &mut cohort, REQUESTER_SLOT);
+    let request_bytes = codec
+        .encode_outbound_message(
+            requester
+                .emit_generated_owner_request("init_avatar_hp")
+                .expect("source-derived request emits"),
+        )
+        .expect("source-derived request encodes");
+    let duplicate = private_process_frame_with_duplicate_member(&request_bytes, level, member);
+    assert_eq!(
+        codec
+            .decode_untrusted_message(&duplicate)
+            .expect_err(
+                "duplicate private JSON members must reject before serde value decoding can choose a last value",
+            )
+            .kind(),
+        Sys5I3PrivateProcessCodecErrorKind::Malformed,
+        "duplicate {level}.{member} must fail closed"
+    );
+}
+
+#[test]
+fn g2_private_message_decoder_rejects_raw_duplicate_envelope_message() {
+    assert_private_message_duplicate_member_rejected("envelope", "message");
+}
+
+#[test]
+fn g2_private_message_decoder_rejects_raw_duplicate_message_kind() {
+    assert_private_message_duplicate_member_rejected("message", "kind");
+}
+
+#[test]
+fn g2_private_message_decoder_rejects_raw_duplicate_message_cohort_ref() {
+    assert_private_message_duplicate_member_rejected("message", "cohort_provenance_ref");
+}
+
+#[test]
+fn g2_private_message_decoder_rejects_raw_duplicate_carrier_core_ref() {
+    assert_private_message_duplicate_member_rejected("carrier", "core_ref");
+}
+
+#[test]
+fn g2_private_message_decoder_rejects_raw_duplicate_carrier_edge_ref() {
+    assert_private_message_duplicate_member_rejected("carrier", "edge_ref");
+}
+
+#[test]
+fn g2_private_message_decoder_rejects_raw_duplicate_tagged_payload_kind() {
+    assert_private_message_duplicate_member_rejected("payload", "kind");
+}
+
+#[test]
+fn g2_private_image_decoder_rejects_duplicate_assigned_locus_before_candidate_creation() {
+    assert_private_image_duplicate_collection_rejected(
+        PRIVATE_PROCESS_IMAGE_ASSIGNED_LOCI_PATH,
+        "assigned locus",
+    );
+}
+
+#[test]
+fn g2_private_image_decoder_rejects_duplicate_semantic_row_before_candidate_creation() {
+    assert_private_image_duplicate_collection_rejected(
+        PRIVATE_PROCESS_IMAGE_SEMANTIC_ROWS_PATH,
+        "semantic authority row",
+    );
+}
+
+#[test]
+fn g2_private_image_decoder_accepts_ci_bounded_unique_collections_only_as_untrusted_candidates() {
+    let project = build_once(CANONICAL_SOURCE);
+    let deployment = two_nonempty_slots(&project);
+    let codec = Sys5I3PrivateProcessCodec::private_provisional_v1();
+    let mut cohort = single_coordinator_cohort(&project, &deployment);
+    let expected_start_binding = cohort
+        .parent_held_expected_start_binding(REQUESTER_SLOT)
+        .expect("the coordinator retains the exact requester image binding");
+    let image = take_process_image(&mut cohort, REQUESTER_SLOT);
+    let original = codec
+        .encode_image(image)
+        .expect("the source-derived one-shot image encodes");
+    let unique = append_ci_safe_unique_image_inventory(&original);
+    assert!(
+        unique.len() <= codec.limits().max_image_bytes(),
+        "the CI-safe adversarial inventory must remain inside the private image byte bound"
+    );
+    let candidate = codec
+        .decode_untrusted_image(&unique)
+        .expect("a bounded unique collection must not be rejected merely as a duplicate");
+    assert_eq!(
+        candidate.observer_safe_manifest().assigned_loci().len(),
+        2 + CI_SAFE_UNIQUE_IMAGE_COLLECTION_ITEMS,
+        "the untrusted decoder must preserve the bounded unique collection rather than collapse it"
+    );
+    assert_eq!(
+        codec
+            .validate_and_start_image(candidate, expected_start_binding)
+            .expect_err(
+                "a large unique untrusted inventory still cannot bypass the parent-held exact image binding",
+            )
+            .kind(),
+        Sys5I3ProcessRuntimeErrorKind::ImageIntegrityMismatch,
+        "collection scalability does not turn a decoded candidate into a startable image"
+    );
+}
+
+fn assert_private_image_duplicate_collection_rejected(pointer: &str, label: &str) {
+    let codec = Sys5I3PrivateProcessCodec::private_provisional_v1();
+    let bytes = codec
+        .encode_image(canonical_image_for_slot(REQUESTER_SLOT))
+        .expect("an exact one-shot child image encodes for collection duplicate mutation");
+    let duplicate =
+        duplicate_private_process_array_element(&bytes, PRIVATE_PROCESS_IMAGE_ROOT, pointer);
+    assert_eq!(
+        codec
+            .decode_untrusted_image(&duplicate)
+            .expect_err(
+                "duplicate private image collections must reject before an untrusted candidate or child start exists",
+            )
+            .kind(),
+        Sys5I3PrivateProcessCodecErrorKind::Malformed,
+        "duplicate {label} must not be silently normalized by a set/vector decoder"
+    );
+}
+
+#[test]
+fn g2_private_message_decoder_rejects_unknown_nested_tagged_payload_field_before_admission() {
+    let fixture = pending_private_reply_fixture();
+    let tagged_unknown_field = append_private_process_unknown_object_member(
+        &fixture.reply_bytes,
+        PRIVATE_PROCESS_MESSAGE_ROOT,
+        PRIVATE_PROCESS_MESSAGE_PAYLOAD_PATH,
+        "untrusted_tagged_payload_field",
+    );
+    assert_eq!(
+        fixture
+            .codec
+            .decode_untrusted_message(&tagged_unknown_field)
+            .expect_err(
+                "unknown nested tagged-payload fields must reject before receiver admission",
+            )
+            .kind(),
+        Sys5I3PrivateProcessCodecErrorKind::Malformed
+    );
 }
 
 #[test]

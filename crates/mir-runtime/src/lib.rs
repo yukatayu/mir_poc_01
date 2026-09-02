@@ -55,6 +55,8 @@ pub mod surface_source_patch_hotplug;
 pub(crate) mod sys2_bounded_model;
 #[cfg_attr(not(test), allow(dead_code))]
 pub(crate) mod sys2_execution_backend;
+#[doc(hidden)]
+pub(crate) mod sys3_i3_private_snapshot;
 pub(crate) mod sys3_projection;
 #[cfg_attr(not(test), allow(dead_code))]
 pub(crate) mod sys4_dispatch;

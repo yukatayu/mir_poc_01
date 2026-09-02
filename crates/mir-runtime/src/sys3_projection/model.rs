@@ -85,7 +85,7 @@ pub(crate) struct DeclaredLogicalTopology {
 
 #[derive(Debug, Clone, PartialEq, Eq, PartialOrd, Ord)]
 pub(crate) struct LocusTag {
-    name: String,
+    pub(crate) name: String,
 }
 
 #[derive(Debug, Clone)]
@@ -136,13 +136,13 @@ impl LocusTag {
 
 #[derive(Debug, Clone, PartialEq, Eq)]
 pub(crate) struct CheckedCoreIdentity {
-    checked_program_identity: CheckedProgramIdentity,
-    operation_id: String,
-    fragment_kind: Option<ProjectedOperationFragmentKind>,
-    edge_kind: Option<CommunicationEdgeKind>,
-    source_ref: SourceRef,
-    dependency_ordinal: Option<usize>,
-    designated_dependency: Option<DesignatedRemoteInputDependency>,
+    pub(crate) checked_program_identity: CheckedProgramIdentity,
+    pub(crate) operation_id: String,
+    pub(crate) fragment_kind: Option<ProjectedOperationFragmentKind>,
+    pub(crate) edge_kind: Option<CommunicationEdgeKind>,
+    pub(crate) source_ref: SourceRef,
+    pub(crate) dependency_ordinal: Option<usize>,
+    pub(crate) designated_dependency: Option<DesignatedRemoteInputDependency>,
 }
 
 impl CheckedCoreIdentity {
@@ -243,9 +243,9 @@ impl DeclaredLogicalTopology {
 
 #[derive(Debug, Clone, PartialEq, Eq)]
 pub(crate) struct ProjectionIdentity {
-    checked_program_identity: CheckedProgramIdentity,
-    topology_loci: BTreeSet<String>,
-    profile: &'static str,
+    pub(crate) checked_program_identity: CheckedProgramIdentity,
+    pub(crate) topology_loci: BTreeSet<String>,
+    pub(crate) profile: &'static str,
 }
 
 impl ProjectionIdentity {
@@ -288,7 +288,7 @@ pub(crate) enum ProjectedOperationFragmentKind {
 
 #[derive(Debug, Clone, PartialEq, Eq, Default)]
 pub(crate) struct AuthorityRequirements {
-    requirements: RuntimeSeamRequirements,
+    pub(crate) requirements: RuntimeSeamRequirements,
 }
 
 impl AuthorityRequirements {
@@ -391,10 +391,10 @@ impl AuthorityRequirements {
 
 #[derive(Debug, Clone, PartialEq, Eq)]
 pub(crate) struct ConsumerRelationProjectionDescriptor {
-    pub(super) source_relation: String,
-    pub(super) owner_locus: String,
-    pub(super) consumer_locus: String,
-    pub(super) source_ref: SourceRef,
+    pub(crate) source_relation: String,
+    pub(crate) owner_locus: String,
+    pub(crate) consumer_locus: String,
+    pub(crate) source_ref: SourceRef,
 }
 
 impl ConsumerRelationProjectionDescriptor {
@@ -404,7 +404,7 @@ impl ConsumerRelationProjectionDescriptor {
 }
 
 #[derive(Debug, Clone, PartialEq, Eq)]
-pub(super) enum PlacementSpecificCore {
+pub(crate) enum PlacementSpecificCore {
     OwnerRequest {
         signature: CheckedEvaluationSignature,
         origin_locus: String,
@@ -434,21 +434,21 @@ pub(super) enum PlacementSpecificCore {
 
 #[derive(Debug, Clone, PartialEq, Eq)]
 pub(crate) struct ProjectedOperationFragment {
-    pub(super) operation_id: String,
-    pub(super) kind: ProjectedOperationFragmentKind,
-    pub(super) source_ref: SourceRef,
-    pub(super) core_ref: String,
-    pub(super) artifact_ref: String,
-    pub(super) authority_requirements: AuthorityRequirements,
-    pub(super) declared_failure_row: FailureRow,
-    pub(super) generated_failure_row: FailureRow,
-    pub(super) placement: PlacementSpecificCore,
-    pub(super) locus_tag: LocusTag,
-    pub(super) fragment_ref: String,
-    pub(super) checked_core_identity: CheckedCoreIdentity,
-    pub(super) semantic_obligations: SemanticObligations,
-    pub(super) runtime_seam_requirements: RuntimeSeamRequirements,
-    pub(super) designated_result_consumer_expression_leakage: bool,
+    pub(crate) operation_id: String,
+    pub(crate) kind: ProjectedOperationFragmentKind,
+    pub(crate) source_ref: SourceRef,
+    pub(crate) core_ref: String,
+    pub(crate) artifact_ref: String,
+    pub(crate) authority_requirements: AuthorityRequirements,
+    pub(crate) declared_failure_row: FailureRow,
+    pub(crate) generated_failure_row: FailureRow,
+    pub(crate) placement: PlacementSpecificCore,
+    pub(crate) locus_tag: LocusTag,
+    pub(crate) fragment_ref: String,
+    pub(crate) checked_core_identity: CheckedCoreIdentity,
+    pub(crate) semantic_obligations: SemanticObligations,
+    pub(crate) runtime_seam_requirements: RuntimeSeamRequirements,
+    pub(crate) designated_result_consumer_expression_leakage: bool,
 }
 
 impl ProjectedOperationFragment {
@@ -620,7 +620,7 @@ impl ProjectedOperationFragment {
 
 #[derive(Debug, Clone, PartialEq, Eq, Default)]
 pub(crate) struct SemanticObligations {
-    rows: Vec<(GeneratedObligationKind, SourceRef)>,
+    pub(crate) rows: Vec<(GeneratedObligationKind, SourceRef)>,
 }
 
 impl SemanticObligations {
@@ -674,7 +674,7 @@ pub(crate) type RuntimeSeamRequirementRow = (
 
 #[derive(Debug, Clone, PartialEq, Eq, Default)]
 pub(crate) struct RuntimeSeamRequirements {
-    rows: Vec<RuntimeSeamRequirementRow>,
+    pub(crate) rows: Vec<RuntimeSeamRequirementRow>,
 }
 
 impl RuntimeSeamRequirements {
@@ -763,7 +763,7 @@ impl RuntimeSeamRequirements {
 
 #[derive(Debug, Clone, PartialEq, Eq, Default)]
 pub(crate) struct ProjectedOperationFragments {
-    entries: Vec<ProjectedOperationFragment>,
+    pub(crate) entries: Vec<ProjectedOperationFragment>,
 }
 
 impl ProjectedOperationFragments {
@@ -821,8 +821,8 @@ impl Sys4ArtifactFragments {
 
 #[derive(Debug, Clone, PartialEq, Eq, Default)]
 pub(crate) struct ProjectedCheckedFragments {
-    owner_operations: Vec<String>,
-    local_state_schemas: Vec<CheckedIndexedStateSchema>,
+    pub(crate) owner_operations: Vec<String>,
+    pub(crate) local_state_schemas: Vec<CheckedIndexedStateSchema>,
 }
 
 impl ProjectedCheckedFragments {
@@ -833,12 +833,12 @@ impl ProjectedCheckedFragments {
 
 #[derive(Debug, Clone, PartialEq, Eq)]
 pub(crate) struct LocusProgram {
-    locus: String,
-    locus_tag: LocusTag,
-    operations: ProjectedOperationFragments,
-    checked_fragments: ProjectedCheckedFragments,
-    declared_failures: BTreeMap<String, FailureRow>,
-    generated_failures: BTreeMap<String, FailureRow>,
+    pub(crate) locus: String,
+    pub(crate) locus_tag: LocusTag,
+    pub(crate) operations: ProjectedOperationFragments,
+    pub(crate) checked_fragments: ProjectedCheckedFragments,
+    pub(crate) declared_failures: BTreeMap<String, FailureRow>,
+    pub(crate) generated_failures: BTreeMap<String, FailureRow>,
 }
 
 impl LocusProgram {
@@ -1012,7 +1012,7 @@ pub(crate) enum CarrierProvenanceKind {
 
 #[derive(Debug, Clone, PartialEq, Eq)]
 pub(crate) struct OperationIdentityTemplate {
-    operation_id: String,
+    pub(crate) operation_id: String,
 }
 
 impl OperationIdentityTemplate {
@@ -1023,8 +1023,8 @@ impl OperationIdentityTemplate {
 
 #[derive(Debug, Clone, PartialEq, Eq)]
 pub(crate) struct RequestIdentityTemplate {
-    operation_id: String,
-    source_ref: SourceRef,
+    pub(crate) operation_id: String,
+    pub(crate) source_ref: SourceRef,
 }
 
 impl RequestIdentityTemplate {
@@ -1058,13 +1058,13 @@ impl CarrierContractProvenance {
 }
 
 #[derive(Debug, Clone, PartialEq, Eq)]
-struct DesignatedResultCarrierDetails {
-    result_version: ResultVersion,
-    input_frontier: InputFrontier,
-    result_frontier: ResultFrontier,
-    observation_policy: ObservationPolicy,
-    policy_stamp: PolicyStamp,
-    retry_contract: StaticRetryContractKind,
+pub(crate) struct DesignatedResultCarrierDetails {
+    pub(crate) result_version: ResultVersion,
+    pub(crate) input_frontier: InputFrontier,
+    pub(crate) result_frontier: ResultFrontier,
+    pub(crate) observation_policy: ObservationPolicy,
+    pub(crate) policy_stamp: PolicyStamp,
+    pub(crate) retry_contract: StaticRetryContractKind,
 }
 
 /// Private, static I3 adapter facts copied from one checked I2 carrier.  This
@@ -1136,27 +1136,27 @@ pub(crate) enum I3AdapterCarrierStaticVariant {
 
 #[derive(Debug, Clone, PartialEq, Eq)]
 pub(crate) struct CarrierContract {
-    edge_kind: CommunicationEdgeKind,
-    lifecycle_kind: CarrierLifecycleKind,
-    operation_identity_template: OperationIdentityTemplate,
-    request_identity_template: RequestIdentityTemplate,
-    source_ref: SourceRef,
-    core_ref: Option<String>,
-    origin_principal_template: Option<String>,
-    origin_locus_template: Option<String>,
-    target_owner_locus_template: Option<String>,
-    declared_failure_row: FailureRow,
-    effect_row: ProjectedEffectRow,
-    authority_requirements: AuthorityRequirements,
-    occurrence_slots: Vec<CarrierOccurrenceSlotKind>,
-    frontiers: BTreeSet<CarrierFrontierKind>,
-    linked_request_identity: bool,
-    typed_outcome: bool,
-    evaluator_receipt_consumption: bool,
-    designated_dependency: Option<DesignatedRemoteInputDependency>,
-    visibility_policy: ReferenceOnlyRedactionPolicy,
-    provenance: CarrierContractProvenance,
-    designated_result_details: Option<DesignatedResultCarrierDetails>,
+    pub(crate) edge_kind: CommunicationEdgeKind,
+    pub(crate) lifecycle_kind: CarrierLifecycleKind,
+    pub(crate) operation_identity_template: OperationIdentityTemplate,
+    pub(crate) request_identity_template: RequestIdentityTemplate,
+    pub(crate) source_ref: SourceRef,
+    pub(crate) core_ref: Option<String>,
+    pub(crate) origin_principal_template: Option<String>,
+    pub(crate) origin_locus_template: Option<String>,
+    pub(crate) target_owner_locus_template: Option<String>,
+    pub(crate) declared_failure_row: FailureRow,
+    pub(crate) effect_row: ProjectedEffectRow,
+    pub(crate) authority_requirements: AuthorityRequirements,
+    pub(crate) occurrence_slots: Vec<CarrierOccurrenceSlotKind>,
+    pub(crate) frontiers: BTreeSet<CarrierFrontierKind>,
+    pub(crate) linked_request_identity: bool,
+    pub(crate) typed_outcome: bool,
+    pub(crate) evaluator_receipt_consumption: bool,
+    pub(crate) designated_dependency: Option<DesignatedRemoteInputDependency>,
+    pub(crate) visibility_policy: ReferenceOnlyRedactionPolicy,
+    pub(crate) provenance: CarrierContractProvenance,
+    pub(crate) designated_result_details: Option<DesignatedResultCarrierDetails>,
 }
 
 const I3_PROBE_OWNER_REQUEST_COMPONENT_DOMAIN: &[u8] =
@@ -2262,11 +2262,11 @@ fn all_occurrences() -> [CarrierOccurrenceSlotKind; 4] {
 /// authority material, source text, or materialized `InputFrontier` travels
 /// with the descriptor.
 pub(crate) struct ProjectedDesignatedRemoteInputRequirement {
-    producer_locus: String,
-    evaluator: String,
-    result: String,
-    dependency_ordinal: usize,
-    trigger_frontier: String,
+    pub(crate) producer_locus: String,
+    pub(crate) evaluator: String,
+    pub(crate) result: String,
+    pub(crate) dependency_ordinal: usize,
+    pub(crate) trigger_frontier: String,
 }
 
 impl ProjectedDesignatedRemoteInputRequirement {
@@ -2313,20 +2313,21 @@ impl ProjectedDesignatedRemoteInputRequirement {
 
 #[derive(Debug, Clone, PartialEq, Eq)]
 pub(crate) struct CommunicationEdge {
-    operation: String,
-    kind: CommunicationEdgeKind,
-    source_locus: String,
-    target_locus: String,
-    core_ref: Option<String>,
-    source_ref: SourceRef,
-    derived_from_checked_core: bool,
-    transfers_authority: bool,
-    edge_ref: String,
-    source_fragment_ref: String,
-    target_fragment_ref: String,
-    checked_core_identity: CheckedCoreIdentity,
-    carrier_contract: CarrierContract,
-    designated_remote_input_requirement: Option<ProjectedDesignatedRemoteInputRequirement>,
+    pub(crate) operation: String,
+    pub(crate) kind: CommunicationEdgeKind,
+    pub(crate) source_locus: String,
+    pub(crate) target_locus: String,
+    pub(crate) core_ref: Option<String>,
+    pub(crate) source_ref: SourceRef,
+    pub(crate) derived_from_checked_core: bool,
+    pub(crate) transfers_authority: bool,
+    pub(crate) edge_ref: String,
+    pub(crate) source_fragment_ref: String,
+    pub(crate) target_fragment_ref: String,
+    pub(crate) checked_core_identity: CheckedCoreIdentity,
+    pub(crate) carrier_contract: CarrierContract,
+    pub(crate) designated_remote_input_requirement:
+        Option<ProjectedDesignatedRemoteInputRequirement>,
 }
 
 impl CommunicationEdge {
@@ -2391,7 +2392,7 @@ impl CommunicationEdge {
 
 #[derive(Debug, Clone, PartialEq, Eq, Default)]
 pub(crate) struct CommunicationPlan {
-    edges: Vec<CommunicationEdge>,
+    pub(crate) edges: Vec<CommunicationEdge>,
 }
 
 pub(super) struct CommunicationEdgeInput {
@@ -2717,7 +2718,7 @@ pub(crate) enum EffectHandlerKind {
 
 #[derive(Debug, Clone, PartialEq, Eq)]
 pub(crate) struct ProjectedEffectRow {
-    kinds: Vec<EffectKind>,
+    pub(crate) kinds: Vec<EffectKind>,
 }
 
 impl ProjectedEffectRow {
@@ -2728,17 +2729,17 @@ impl ProjectedEffectRow {
 
 #[derive(Debug, Clone, PartialEq, Eq)]
 pub(crate) struct EffectHandlerPlanEntry {
-    operation: String,
-    kind: EffectHandlerKind,
-    locus: String,
-    source_ref: SourceRef,
-    core_ref: Option<String>,
-    effect_row: ProjectedEffectRow,
-    declared_failure_row: FailureRow,
-    generated_failure_row: FailureRow,
-    source_bound: bool,
-    handler_ref: String,
-    checked_core_identity: CheckedCoreIdentity,
+    pub(crate) operation: String,
+    pub(crate) kind: EffectHandlerKind,
+    pub(crate) locus: String,
+    pub(crate) source_ref: SourceRef,
+    pub(crate) core_ref: Option<String>,
+    pub(crate) effect_row: ProjectedEffectRow,
+    pub(crate) declared_failure_row: FailureRow,
+    pub(crate) generated_failure_row: FailureRow,
+    pub(crate) source_bound: bool,
+    pub(crate) handler_ref: String,
+    pub(crate) checked_core_identity: CheckedCoreIdentity,
 }
 
 #[derive(Debug, Clone, PartialEq, Eq)]
@@ -2798,7 +2799,7 @@ impl EffectHandlerPlanEntry {
 
 #[derive(Debug, Clone, PartialEq, Eq, Default)]
 pub(crate) struct EffectHandlerPlan {
-    handlers: Vec<EffectHandlerPlanEntry>,
+    pub(crate) handlers: Vec<EffectHandlerPlanEntry>,
 }
 
 impl EffectHandlerPlan {
@@ -2888,12 +2889,12 @@ impl EffectHandlerPlan {
 
 #[derive(Debug, Clone, PartialEq, Eq)]
 pub(crate) struct ProjectedRelationAnchor {
-    pub(super) anchor: String,
-    pub(super) anchor_locus: Option<String>,
-    pub(super) anchor_locus_source_ref: Option<SourceRef>,
-    pub(super) epoch: String,
-    pub(super) transform: RelationTransformCore,
-    pub(super) source_ref: SourceRef,
+    pub(crate) anchor: String,
+    pub(crate) anchor_locus: Option<String>,
+    pub(crate) anchor_locus_source_ref: Option<SourceRef>,
+    pub(crate) epoch: String,
+    pub(crate) transform: RelationTransformCore,
+    pub(crate) source_ref: SourceRef,
 }
 
 impl ProjectedRelationAnchor {
@@ -2930,15 +2931,15 @@ pub(crate) enum RelationAnchorRole {
 
 #[derive(Debug, Clone, PartialEq, Eq)]
 pub(crate) struct ProjectedRelation {
-    pub(super) name: String,
-    pub(super) owner_locus: String,
-    pub(super) subject: String,
-    pub(super) subject_type: String,
-    pub(super) primary_anchor: ProjectedRelationAnchor,
-    pub(super) fallback_anchor: ProjectedRelationAnchor,
-    pub(super) binding_frontier: BindingActivationFrontier,
-    pub(super) consumer_locus: Option<String>,
-    pub(super) residual_source_refs: Vec<(ResidualObligationKind, SourceRef)>,
+    pub(crate) name: String,
+    pub(crate) owner_locus: String,
+    pub(crate) subject: String,
+    pub(crate) subject_type: String,
+    pub(crate) primary_anchor: ProjectedRelationAnchor,
+    pub(crate) fallback_anchor: ProjectedRelationAnchor,
+    pub(crate) binding_frontier: BindingActivationFrontier,
+    pub(crate) consumer_locus: Option<String>,
+    pub(crate) residual_source_refs: Vec<(ResidualObligationKind, SourceRef)>,
 }
 
 impl ProjectedRelation {
@@ -3008,10 +3009,10 @@ impl RelationGraphEdgeProvenance {
 }
 
 #[derive(Debug, Clone, PartialEq, Eq, PartialOrd, Ord)]
-struct RelationGraphNode {
-    relation: String,
-    role: RelationAnchorRole,
-    source_ref: SourceRef,
+pub(crate) struct RelationGraphNode {
+    pub(crate) relation: String,
+    pub(crate) role: RelationAnchorRole,
+    pub(crate) source_ref: SourceRef,
 }
 
 impl RelationGraphNode {
@@ -3031,9 +3032,9 @@ impl RelationGraphNode {
 
 #[derive(Debug, Clone, PartialEq, Eq)]
 pub(crate) struct RelationGraphEdgeSeed {
-    from: RelationGraphNode,
-    to: RelationGraphNode,
-    tag: RelationGraphEdgeTag,
+    pub(crate) from: RelationGraphNode,
+    pub(crate) to: RelationGraphNode,
+    pub(crate) tag: RelationGraphEdgeTag,
 }
 
 impl RelationGraphEdgeSeed {
@@ -3087,10 +3088,10 @@ fn relation_anchor_node(
 
 #[derive(Debug, Clone, PartialEq, Eq)]
 pub(crate) struct ProjectionRelationGraph {
-    claim: RelationGraphClaim,
-    relations: BTreeMap<String, ProjectedRelation>,
-    typed_dependency_edges: Vec<RelationGraphEdgeSeed>,
-    test_only_extension_boundary: bool,
+    pub(crate) claim: RelationGraphClaim,
+    pub(crate) relations: BTreeMap<String, ProjectedRelation>,
+    pub(crate) typed_dependency_edges: Vec<RelationGraphEdgeSeed>,
+    pub(crate) test_only_extension_boundary: bool,
 }
 
 impl Default for ProjectionRelationGraph {
@@ -3380,10 +3381,10 @@ pub(crate) enum PersistenceResponsibilityKind {
 
 #[derive(Debug, Clone, PartialEq, Eq, Default)]
 pub(crate) struct PersistencePlan {
-    by_locus: BTreeMap<String, Vec<PersistenceResponsibilityKind>>,
-    by_relation: BTreeMap<String, Vec<PersistenceResponsibilityKind>>,
-    by_designated: BTreeMap<String, Vec<PersistenceResponsibilityKind>>,
-    global: Vec<PersistenceResponsibilityKind>,
+    pub(crate) by_locus: BTreeMap<String, Vec<PersistenceResponsibilityKind>>,
+    pub(crate) by_relation: BTreeMap<String, Vec<PersistenceResponsibilityKind>>,
+    pub(crate) by_designated: BTreeMap<String, Vec<PersistenceResponsibilityKind>>,
+    pub(crate) global: Vec<PersistenceResponsibilityKind>,
 }
 
 impl PersistencePlan {
@@ -3542,20 +3543,20 @@ pub(crate) enum RuntimeOccurrenceBinding {
 
 #[derive(Debug, Clone, PartialEq, Eq)]
 pub(crate) struct ObservationRow {
-    source_ref: SourceRef,
-    core_ref: String,
-    fragment_ref: String,
-    redaction: &'static str,
-    observation_row_ref: String,
-    edge_identity: Option<(String, CommunicationEdgeKind, String, String)>,
-    edge_ref: Option<String>,
-    operation_id: String,
-    occurrence: RuntimeOccurrenceBinding,
+    pub(crate) source_ref: SourceRef,
+    pub(crate) core_ref: String,
+    pub(crate) fragment_ref: String,
+    pub(crate) redaction: &'static str,
+    pub(crate) observation_row_ref: String,
+    pub(crate) edge_identity: Option<(String, CommunicationEdgeKind, String, String)>,
+    pub(crate) edge_ref: Option<String>,
+    pub(crate) operation_id: String,
+    pub(crate) occurrence: RuntimeOccurrenceBinding,
 }
 
 #[derive(Debug, Clone, PartialEq, Eq, Default)]
 pub(crate) struct ObservationPlan {
-    rows: Vec<ObservationRow>,
+    pub(crate) rows: Vec<ObservationRow>,
 }
 
 impl ObservationPlan {
@@ -3802,19 +3803,19 @@ impl ObservationRow {
 
 #[derive(Debug, Clone, PartialEq, Eq, Default)]
 pub(crate) struct ProjectedSourceMap {
-    entries: BTreeMap<String, CorrespondenceEntry>,
+    pub(crate) entries: BTreeMap<String, CorrespondenceEntry>,
 }
 
 #[derive(Debug, Clone, PartialEq, Eq)]
 pub(crate) struct CorrespondenceEntry {
-    source_ref: SourceRef,
-    core_ref: Option<String>,
-    artifact_ref: Option<String>,
-    edge_ref: Option<String>,
-    plan_ref: Option<String>,
-    source_fragment_ref: Option<String>,
-    target_fragment_ref: Option<String>,
-    checked_core_identity: CheckedCoreIdentity,
+    pub(crate) source_ref: SourceRef,
+    pub(crate) core_ref: Option<String>,
+    pub(crate) artifact_ref: Option<String>,
+    pub(crate) edge_ref: Option<String>,
+    pub(crate) plan_ref: Option<String>,
+    pub(crate) source_fragment_ref: Option<String>,
+    pub(crate) target_fragment_ref: Option<String>,
+    pub(crate) checked_core_identity: CheckedCoreIdentity,
 }
 
 impl CorrespondenceEntry {
@@ -4041,7 +4042,7 @@ pub(crate) enum BackendEligibility {
 
 #[derive(Debug, Clone, PartialEq, Eq)]
 pub(crate) struct BackendRequirements {
-    ow1: BackendEligibility,
+    pub(crate) ow1: BackendEligibility,
 }
 
 impl BackendRequirements {
@@ -4075,19 +4076,19 @@ impl BackendRequirements {
 
 #[derive(Debug, Clone, PartialEq, Eq)]
 pub(crate) struct GlobalProjectionResult {
-    checked_program_identity: CheckedProgramIdentity,
-    projection_identity: ProjectionIdentity,
-    locus_programs: BTreeMap<String, LocusProgram>,
-    communication_plan: CommunicationPlan,
-    effect_handler_plan: EffectHandlerPlan,
-    relation_graph: ProjectionRelationGraph,
-    observation_plan: ObservationPlan,
-    persistence_plan: PersistencePlan,
-    projected_source_map: ProjectedSourceMap,
-    static_readiness: StaticProjectionReadiness,
-    runtime_admission_status: RuntimeAdmissionStatus,
-    backend_requirements: BackendRequirements,
-    static_conflict_policy: StaticConflictPolicy,
+    pub(crate) checked_program_identity: CheckedProgramIdentity,
+    pub(crate) projection_identity: ProjectionIdentity,
+    pub(crate) locus_programs: BTreeMap<String, LocusProgram>,
+    pub(crate) communication_plan: CommunicationPlan,
+    pub(crate) effect_handler_plan: EffectHandlerPlan,
+    pub(crate) relation_graph: ProjectionRelationGraph,
+    pub(crate) observation_plan: ObservationPlan,
+    pub(crate) persistence_plan: PersistencePlan,
+    pub(crate) projected_source_map: ProjectedSourceMap,
+    pub(crate) static_readiness: StaticProjectionReadiness,
+    pub(crate) runtime_admission_status: RuntimeAdmissionStatus,
+    pub(crate) backend_requirements: BackendRequirements,
+    pub(crate) static_conflict_policy: StaticConflictPolicy,
 }
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
@@ -4102,9 +4103,9 @@ pub(crate) enum StaticConflictResolution {
 
 #[derive(Debug, Clone, PartialEq, Eq)]
 pub(crate) struct DesignatedResultConsumerConflictPolicy {
-    kind: StaticConflictPolicyKind,
-    accepted_consumer_locus: String,
-    on_competing_consumer: StaticConflictResolution,
+    pub(crate) kind: StaticConflictPolicyKind,
+    pub(crate) accepted_consumer_locus: String,
+    pub(crate) on_competing_consumer: StaticConflictResolution,
 }
 
 impl DesignatedResultConsumerConflictPolicy {
@@ -4121,7 +4122,8 @@ impl DesignatedResultConsumerConflictPolicy {
 
 #[derive(Debug, Clone, PartialEq, Eq, Default)]
 pub(crate) struct StaticConflictPolicy {
-    designated_result_consumers: BTreeMap<String, DesignatedResultConsumerConflictPolicy>,
+    pub(crate) designated_result_consumers:
+        BTreeMap<String, DesignatedResultConsumerConflictPolicy>,
 }
 
 impl StaticConflictPolicy {
