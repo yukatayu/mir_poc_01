@@ -1115,6 +1115,127 @@ impl DesignatedInputReceiptUse {
     }
 }
 
+/// A complete, static copy of one checked typed state read.  This helper is
+/// intentionally generic: it exposes no I3/runtime concept and retains no
+/// source lexeme or caller-provided payload.
+#[doc(hidden)]
+#[derive(Debug, Clone, PartialEq, Eq)]
+pub struct StaticProjectionTypedStateReadFacts {
+    namespace: String,
+    index: Option<String>,
+    field: Option<String>,
+    owner_locus: String,
+    value_type: String,
+    source_ref: SourceRef,
+}
+
+impl StaticProjectionTypedStateReadFacts {
+    pub fn namespace(&self) -> &str {
+        &self.namespace
+    }
+
+    pub fn index(&self) -> Option<&str> {
+        self.index.as_deref()
+    }
+
+    pub fn field(&self) -> Option<&str> {
+        self.field.as_deref()
+    }
+
+    pub fn owner_locus(&self) -> &str {
+        &self.owner_locus
+    }
+
+    pub fn value_type(&self) -> &str {
+        &self.value_type
+    }
+
+    pub fn source_ref(&self) -> SourceRef {
+        self.source_ref.clone()
+    }
+}
+
+/// A nominally distinct static copy of a designated input request.
+#[doc(hidden)]
+#[derive(Debug, Clone, PartialEq, Eq)]
+pub struct StaticProjectionDesignatedInputRequestFacts {
+    source_owner_locus: String,
+    typed_state_read: StaticProjectionTypedStateReadFacts,
+}
+
+impl StaticProjectionDesignatedInputRequestFacts {
+    pub fn source_owner_locus(&self) -> &str {
+        &self.source_owner_locus
+    }
+
+    pub fn typed_state_read(&self) -> &StaticProjectionTypedStateReadFacts {
+        &self.typed_state_read
+    }
+}
+
+/// A nominally distinct static copy of a designated input receipt use.
+#[doc(hidden)]
+#[derive(Debug, Clone, PartialEq, Eq)]
+pub struct StaticProjectionDesignatedInputReceiptUseFacts {
+    source_owner_locus: String,
+    typed_state_read: StaticProjectionTypedStateReadFacts,
+}
+
+impl StaticProjectionDesignatedInputReceiptUseFacts {
+    pub fn source_owner_locus(&self) -> &str {
+        &self.source_owner_locus
+    }
+
+    pub fn typed_state_read(&self) -> &StaticProjectionTypedStateReadFacts {
+        &self.typed_state_read
+    }
+}
+
+/// Complete static facts for a checked designated remote input dependency.
+/// This is a source-structure projection, not a runtime request, receipt, or
+/// authority grant.
+#[doc(hidden)]
+#[derive(Debug, Clone, PartialEq, Eq)]
+pub struct StaticProjectionFacts {
+    designated_evaluator: String,
+    requester_site: EvaluationSite,
+    authority_origin: AuthorityOrigin,
+    source_owner_locus: String,
+    typed_state_read: StaticProjectionTypedStateReadFacts,
+    request: StaticProjectionDesignatedInputRequestFacts,
+    receipt_use: StaticProjectionDesignatedInputReceiptUseFacts,
+}
+
+impl StaticProjectionFacts {
+    pub fn designated_evaluator(&self) -> &str {
+        &self.designated_evaluator
+    }
+
+    pub fn requester_site(&self) -> &EvaluationSite {
+        &self.requester_site
+    }
+
+    pub fn authority_origin(&self) -> &AuthorityOrigin {
+        &self.authority_origin
+    }
+
+    pub fn source_owner_locus(&self) -> &str {
+        &self.source_owner_locus
+    }
+
+    pub fn typed_state_read(&self) -> &StaticProjectionTypedStateReadFacts {
+        &self.typed_state_read
+    }
+
+    pub fn request(&self) -> &StaticProjectionDesignatedInputRequestFacts {
+        &self.request
+    }
+
+    pub fn receipt_use(&self) -> &StaticProjectionDesignatedInputReceiptUseFacts {
+        &self.receipt_use
+    }
+}
+
 #[derive(Debug, Clone, PartialEq, Eq)]
 pub struct DesignatedRemoteInputDependency {
     designated_evaluator: String,
@@ -1153,6 +1274,70 @@ impl DesignatedRemoteInputDependency {
 
     pub fn receipt_use(&self) -> &DesignatedInputReceiptUse {
         &self.receipt_use
+    }
+
+    /// Retains every checked source component of this dependency in nominal
+    /// static facts. The exhaustive destructuring makes adding a private
+    /// source field require an explicit classification at this boundary.
+    #[doc(hidden)]
+    pub fn static_projection_facts(&self) -> StaticProjectionFacts {
+        let DesignatedRemoteInputDependency {
+            designated_evaluator,
+            requester_site,
+            authority_origin,
+            source_owner_locus,
+            typed_state_read,
+            request,
+            receipt_use,
+        } = self;
+        let DesignatedInputRequest {
+            source_owner_locus: request_source_owner_locus,
+            typed_state_read: request_typed_state_read,
+        } = request;
+        let DesignatedInputReceiptUse {
+            source_owner_locus: receipt_use_source_owner_locus,
+            typed_state_read: receipt_use_typed_state_read,
+        } = receipt_use;
+        StaticProjectionFacts {
+            designated_evaluator: designated_evaluator.clone(),
+            requester_site: requester_site.clone(),
+            authority_origin: authority_origin.clone(),
+            source_owner_locus: source_owner_locus.clone(),
+            typed_state_read: static_projection_typed_state_read_facts(typed_state_read),
+            request: StaticProjectionDesignatedInputRequestFacts {
+                source_owner_locus: request_source_owner_locus.clone(),
+                typed_state_read: static_projection_typed_state_read_facts(
+                    request_typed_state_read,
+                ),
+            },
+            receipt_use: StaticProjectionDesignatedInputReceiptUseFacts {
+                source_owner_locus: receipt_use_source_owner_locus.clone(),
+                typed_state_read: static_projection_typed_state_read_facts(
+                    receipt_use_typed_state_read,
+                ),
+            },
+        }
+    }
+}
+
+fn static_projection_typed_state_read_facts(
+    read: &TypedStateRead,
+) -> StaticProjectionTypedStateReadFacts {
+    let TypedStateRead {
+        namespace,
+        index,
+        field,
+        owner_locus,
+        value_type,
+        span,
+    } = read;
+    StaticProjectionTypedStateReadFacts {
+        namespace: namespace.clone(),
+        index: index.clone(),
+        field: field.clone(),
+        owner_locus: owner_locus.clone(),
+        value_type: value_type.clone(),
+        source_ref: span.source_ref(),
     }
 }
 
@@ -3403,4 +3588,199 @@ fn line_column(source: &str, byte_offset: usize) -> (u32, u32) {
         }
     }
     (line, column)
+}
+
+#[cfg(test)]
+mod static_projection_facts_red_tests {
+    use std::any::TypeId;
+
+    use super::*;
+
+    const ACTIVE_I2_SOURCE: &str =
+        include_str!("../../../samples/clean-near-end/mirrorea-i2-local-toy/main.mir");
+
+    fn assert_static_typed_read_facts_match_source(
+        facts: &StaticProjectionTypedStateReadFacts,
+        source: &TypedStateRead,
+    ) {
+        assert_eq!(facts.namespace(), source.namespace());
+        assert_eq!(facts.index(), source.index());
+        assert_eq!(facts.field(), source.field());
+        assert_eq!(facts.owner_locus(), source.owner_locus());
+        assert_eq!(facts.value_type(), source.value_type());
+        assert_eq!(facts.source_ref(), source.source_ref());
+    }
+
+    #[test]
+    fn designated_dependency_static_projection_facts_are_complete_and_distinct() {
+        let checked = check_and_elaborate_surface_v0(FixtureSource::new(
+            "samples/clean-near-end/mirrorea-i2-local-toy/main.mir",
+            ACTIVE_I2_SOURCE,
+        ))
+        .expect("the ordinary active source must retain its designated dependency");
+        let dependency = checked
+            .evaluations()
+            .iter()
+            .find_map(CheckedEvaluation::designated_core)
+            .expect("the active source retains one designated evaluation")
+            .generated_remote_input_dependencies()
+            .first()
+            .expect("the designated evaluation retains one remote input dependency");
+
+        let facts = dependency.static_projection_facts();
+        assert_eq!(
+            facts.designated_evaluator(),
+            dependency.designated_evaluator()
+        );
+        assert_eq!(facts.requester_site(), dependency.requester_site());
+        assert_eq!(facts.authority_origin(), dependency.authority_origin());
+        assert_eq!(facts.source_owner_locus(), dependency.source_owner_locus());
+
+        assert_static_typed_read_facts_match_source(
+            facts.typed_state_read(),
+            dependency.typed_state_read(),
+        );
+
+        assert_eq!(
+            facts.request().source_owner_locus(),
+            dependency.request().source_owner_locus()
+        );
+        assert_static_typed_read_facts_match_source(
+            facts.request().typed_state_read(),
+            dependency.request().typed_state_read(),
+        );
+        assert_eq!(
+            facts.receipt_use().source_owner_locus(),
+            dependency.receipt_use().source_owner_locus()
+        );
+        assert_static_typed_read_facts_match_source(
+            facts.receipt_use().typed_state_read(),
+            dependency.receipt_use().typed_state_read(),
+        );
+        assert_eq!(
+            facts.request().typed_state_read(),
+            facts.typed_state_read(),
+            "the request retains the exact dependency typed read"
+        );
+        assert_eq!(
+            facts.receipt_use().typed_state_read(),
+            facts.typed_state_read(),
+            "the receipt use retains the exact dependency typed read"
+        );
+        assert_ne!(
+            TypeId::of::<StaticProjectionDesignatedInputRequestFacts>(),
+            TypeId::of::<StaticProjectionDesignatedInputReceiptUseFacts>(),
+            "request and receipt use must stay distinct nested static facts"
+        );
+
+        let DesignatedRemoteInputDependency {
+            designated_evaluator: source_designated_evaluator,
+            requester_site: source_requester_site,
+            authority_origin: source_authority_origin,
+            source_owner_locus: source_source_owner_locus,
+            typed_state_read: source_typed_state_read,
+            request: source_request,
+            receipt_use: source_receipt_use,
+        } = dependency.clone();
+        let DesignatedInputRequest {
+            source_owner_locus: source_request_owner_locus,
+            typed_state_read: source_request_typed_state_read,
+        } = source_request;
+        let DesignatedInputReceiptUse {
+            source_owner_locus: source_receipt_use_owner_locus,
+            typed_state_read: source_receipt_use_typed_state_read,
+        } = source_receipt_use;
+        let TypedStateRead {
+            namespace: source_namespace,
+            index: source_index,
+            field: source_field,
+            owner_locus: source_owner_locus,
+            value_type: source_value_type,
+            span: source_span,
+        } = source_typed_state_read;
+        let TypedStateRead {
+            namespace: source_request_namespace,
+            index: source_request_index,
+            field: source_request_field,
+            owner_locus: source_request_owner_locus_for_read,
+            value_type: source_request_value_type,
+            span: source_request_span,
+        } = source_request_typed_state_read;
+        let TypedStateRead {
+            namespace: source_receipt_use_namespace,
+            index: source_receipt_use_index,
+            field: source_receipt_use_field,
+            owner_locus: source_receipt_use_owner_locus_for_read,
+            value_type: source_receipt_use_value_type,
+            span: source_receipt_use_span,
+        } = source_receipt_use_typed_state_read;
+        let _ = (
+            source_designated_evaluator,
+            source_requester_site,
+            source_authority_origin,
+            source_source_owner_locus,
+            source_request_owner_locus,
+            source_receipt_use_owner_locus,
+            source_namespace,
+            source_index,
+            source_field,
+            source_owner_locus,
+            source_value_type,
+            source_span,
+            source_request_namespace,
+            source_request_index,
+            source_request_field,
+            source_request_owner_locus_for_read,
+            source_request_value_type,
+            source_request_span,
+            source_receipt_use_namespace,
+            source_receipt_use_index,
+            source_receipt_use_field,
+            source_receipt_use_owner_locus_for_read,
+            source_receipt_use_value_type,
+            source_receipt_use_span,
+        );
+
+        let StaticProjectionFacts {
+            designated_evaluator,
+            requester_site,
+            authority_origin,
+            source_owner_locus,
+            typed_state_read,
+            request,
+            receipt_use,
+        } = facts;
+        let StaticProjectionTypedStateReadFacts {
+            namespace,
+            index,
+            field,
+            owner_locus,
+            value_type,
+            source_ref,
+        } = typed_state_read;
+        let StaticProjectionDesignatedInputRequestFacts {
+            source_owner_locus: request_source_owner_locus,
+            typed_state_read: request_typed_state_read,
+        } = request;
+        let StaticProjectionDesignatedInputReceiptUseFacts {
+            source_owner_locus: receipt_use_source_owner_locus,
+            typed_state_read: receipt_use_typed_state_read,
+        } = receipt_use;
+        let _ = (
+            designated_evaluator,
+            requester_site,
+            authority_origin,
+            source_owner_locus,
+            namespace,
+            index,
+            field,
+            owner_locus,
+            value_type,
+            source_ref,
+            request_source_owner_locus,
+            request_typed_state_read,
+            receipt_use_source_owner_locus,
+            receipt_use_typed_state_read,
+        );
+    }
 }

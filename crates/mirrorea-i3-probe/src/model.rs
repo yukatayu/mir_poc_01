@@ -2,7 +2,11 @@
 
 use std::{error::Error, fmt};
 
-use mir_runtime::sys5_local_slice::Sys5I3ProbeCarrierContract;
+use mir_runtime::sys5_local_slice::{
+    Sys5I3AdapterAuthorityRequirementRow, Sys5I3AdapterCarrierContract,
+    Sys5I3AdapterCarrierVariantFacts, Sys5I3AdapterWireSnapshot, Sys5I3ProbeCarrierContract,
+    Sys5I3ProbeRedaction, Sys5SourceSpan,
+};
 use serde::{Deserialize, Serialize};
 use sha2::{Digest, Sha256};
 
@@ -100,14 +104,14 @@ impl RequestIdentity {
         );
         hasher.update(seed.0.as_bytes());
         Self {
-            value: format!("i3-0-semantic-request-sha256-v1:{:x}", hasher.finalize()),
+            value: format!("i3-0-semantic-request-sha256-v2:{:x}", hasher.finalize()),
             retained_contract_fingerprint: contract.full_retained_contract_fingerprint.clone(),
         }
     }
 
     fn has_private_shape(&self) -> bool {
         self.value
-            .strip_prefix("i3-0-semantic-request-sha256-v1:")
+            .strip_prefix("i3-0-semantic-request-sha256-v2:")
             .is_some_and(|digest| {
                 digest.len() == 64 && digest.bytes().all(|byte| byte.is_ascii_hexdigit())
             })
@@ -606,18 +610,277 @@ impl SourceBoundEdge {
     }
 }
 
-/// The finite source-derived edge set for a private I3-0 probe.
+/// A non-serializable, source-derived static adapter handoff.  It has no
+/// runtime request binding or semantic admission operation.
+#[derive(Clone, Debug, Eq, PartialEq)]
+pub struct SourceBoundAdapterEdge {
+    contract: Sys5I3AdapterCarrierContract,
+    retained_static_contract: Sys5I3AdapterWireSnapshot,
+}
+
+impl SourceBoundAdapterEdge {
+    pub(crate) fn from_sys5_adapter(contract: Sys5I3AdapterCarrierContract) -> Self {
+        let retained_static_contract = contract.i3_adapter_wire_snapshot();
+        Self {
+            contract,
+            retained_static_contract,
+        }
+    }
+
+    pub fn program_ref(&self) -> &str {
+        self.contract.checked_program_ref()
+    }
+
+    pub fn operation(&self) -> &str {
+        self.contract.operation_id()
+    }
+
+    pub fn edge_kind(&self) -> &str {
+        self.contract.edge_kind()
+    }
+
+    pub fn lifecycle_kind(&self) -> &str {
+        self.contract.lifecycle_kind()
+    }
+
+    pub fn source_locus(&self) -> &str {
+        self.contract.source_locus()
+    }
+
+    pub fn target_locus(&self) -> &str {
+        self.contract.target_locus()
+    }
+
+    pub fn logical_source_path(&self) -> &str {
+        self.contract.logical_source_path()
+    }
+
+    pub const fn source_span(&self) -> Sys5SourceSpan {
+        self.contract.source_span()
+    }
+
+    pub fn source_ref(&self) -> &str {
+        self.contract.source_ref()
+    }
+
+    pub fn core_ref(&self) -> &str {
+        self.contract.core_ref()
+    }
+
+    pub fn source_artifact_ref(&self) -> &str {
+        self.contract.source_artifact_ref()
+    }
+
+    pub fn target_artifact_ref(&self) -> &str {
+        self.contract.target_artifact_ref()
+    }
+
+    pub fn edge_ref(&self) -> &str {
+        self.contract.edge_ref()
+    }
+
+    pub fn declared_failure_names(&self) -> &[String] {
+        self.contract.declared_failure_names()
+    }
+
+    pub fn effect_kind_names(&self) -> &[String] {
+        self.contract.effect_kind_names()
+    }
+
+    pub fn required_occurrence_slot_names(&self) -> &[String] {
+        self.contract.required_occurrence_slot_names()
+    }
+
+    pub const fn requires_linked_request_identity(&self) -> bool {
+        self.contract.requires_linked_request_identity()
+    }
+
+    pub const fn requires_typed_outcome(&self) -> bool {
+        self.contract.requires_typed_outcome()
+    }
+
+    pub const fn requires_receipt_consumption_state(&self) -> bool {
+        self.contract.requires_receipt_consumption_state()
+    }
+
+    pub fn authority_category_names(&self) -> &[String] {
+        self.contract.authority_requirements().category_names()
+    }
+
+    pub fn authority_requirement_rows(&self) -> &[Sys5I3AdapterAuthorityRequirementRow] {
+        self.contract.authority_requirements().rows()
+    }
+
+    pub fn requires_membership_epoch_and_incarnation(&self) -> bool {
+        self.contract
+            .authority_requirements()
+            .requires_membership_epoch_and_incarnation()
+    }
+
+    pub fn requires_capability_and_witness_refs(&self) -> bool {
+        self.contract
+            .authority_requirements()
+            .requires_capability_and_witness_refs()
+    }
+
+    pub const fn redaction(&self) -> Sys5I3ProbeRedaction {
+        self.contract.redaction()
+    }
+
+    pub const fn checked_core_bound(&self) -> bool {
+        self.contract.checked_core_bound()
+    }
+
+    pub const fn transfers_authority(&self) -> bool {
+        self.contract.transfers_authority()
+    }
+
+    pub const fn mints_authority_without_source(&self) -> bool {
+        self.contract.mints_authority_without_source()
+    }
+
+    pub const fn public_api_or_wire_contract(&self) -> bool {
+        self.contract.public_api_or_wire_contract()
+    }
+
+    pub fn retained_contract_fingerprint(&self) -> &str {
+        self.contract.full_retained_contract_fingerprint()
+    }
+
+    pub fn variant_facts(&self) -> &Sys5I3AdapterCarrierVariantFacts {
+        self.contract.variant_facts()
+    }
+
+    /// The complete, source-owned private static snapshot retained separately
+    /// from decoded bytes.  It cannot bind a request or authorize runtime
+    /// work; it is only the I3-1 static adapter admission comparison target.
+    #[doc(hidden)]
+    pub fn retained_static_contract(&self) -> &Sys5I3AdapterWireSnapshot {
+        &self.retained_static_contract
+    }
+
+    /// The source-owned exhaustive static fingerprint field inventory.  This
+    /// is observer-safe structure evidence, not a runtime message schema.
+    #[doc(hidden)]
+    pub fn retained_static_contract_fingerprint_field_names(&self) -> &[String] {
+        self.retained_static_contract
+            .full_retained_contract_fingerprint_field_names()
+    }
+
+    /// Admits only a byte-decoded snapshot that exactly matches this edge's
+    /// independently retained source-derived static contract.  The return is
+    /// still only a static source-bound handoff: no bind, send, retry, or
+    /// runtime occurrence is created here.
+    #[doc(hidden)]
+    pub fn admit_untrusted_static_adapter_candidate(
+        &self,
+        candidate: UntrustedDecodedStaticAdapterCarrier,
+    ) -> Result<Self, StaticAdapterAdmissionError> {
+        if candidate.retained_static_contract != self.retained_static_contract
+            || candidate.retained_static_contract_fingerprint_field_names
+                != self
+                    .retained_static_contract
+                    .full_retained_contract_fingerprint_field_names()
+        {
+            return Err(StaticAdapterAdmissionError::new(
+                StaticAdapterAdmissionErrorKind::RetainedStaticContractMismatch,
+            ));
+        }
+        Ok(self.clone())
+    }
+}
+
+/// A decoded static adapter carrier remains untrusted until it is compared
+/// with the independently retained snapshot of one source-bound edge.
+#[doc(hidden)]
+#[derive(Clone, Debug, Eq, PartialEq)]
+pub struct UntrustedDecodedStaticAdapterCarrier {
+    pub(crate) retained_static_contract: Sys5I3AdapterWireSnapshot,
+    pub(crate) retained_static_contract_fingerprint_field_names: Vec<String>,
+}
+
+impl UntrustedDecodedStaticAdapterCarrier {
+    pub(crate) fn from_wire_snapshot(retained_static_contract: Sys5I3AdapterWireSnapshot) -> Self {
+        let retained_static_contract_fingerprint_field_names = retained_static_contract
+            .full_retained_contract_fingerprint_field_names()
+            .to_vec();
+        Self {
+            retained_static_contract,
+            retained_static_contract_fingerprint_field_names,
+        }
+    }
+
+    /// The complete decoded opaque snapshot.  It is not a source of runtime
+    /// authority and must still pass source-bound static admission.
+    pub fn retained_static_contract(&self) -> &Sys5I3AdapterWireSnapshot {
+        &self.retained_static_contract
+    }
+
+    /// The decoded snapshot's exact source-owned fingerprint field inventory.
+    pub fn retained_static_contract_fingerprint_field_names(&self) -> &[String] {
+        &self.retained_static_contract_fingerprint_field_names
+    }
+
+    /// An untrusted decoded reference usable only to select a separately
+    /// retained candidate before complete static snapshot equality admission.
+    #[doc(hidden)]
+    pub fn retained_edge_ref(&self) -> &str {
+        self.retained_static_contract.edge_ref()
+    }
+}
+
+/// The only static-adapter admission rejection.  It deliberately does not
+/// reveal raw decoded values, credentials, payloads, or source text.
+#[doc(hidden)]
+#[derive(Clone, Copy, Debug, Deserialize, Eq, PartialEq, Serialize)]
+pub enum StaticAdapterAdmissionErrorKind {
+    RetainedStaticContractMismatch,
+}
+
+/// Typed fail-closed static-adapter admission rejection.
+#[doc(hidden)]
+#[derive(Clone, Copy, Debug, Eq, PartialEq)]
+pub struct StaticAdapterAdmissionError {
+    kind: StaticAdapterAdmissionErrorKind,
+}
+
+impl StaticAdapterAdmissionError {
+    pub(crate) const fn new(kind: StaticAdapterAdmissionErrorKind) -> Self {
+        Self { kind }
+    }
+
+    pub const fn kind(&self) -> StaticAdapterAdmissionErrorKind {
+        self.kind
+    }
+}
+
+impl fmt::Display for StaticAdapterAdmissionError {
+    fn fmt(&self, formatter: &mut fmt::Formatter<'_>) -> fmt::Result {
+        formatter.write_str("private static adapter admission rejected")
+    }
+}
+
+impl Error for StaticAdapterAdmissionError {}
+
+/// The finite source-derived edge set for a private I3-0 probe and the
+/// separate I3-1 static adapter inventory.
 #[derive(Clone, Debug, Eq, PartialEq)]
 pub struct SourceBoundProbe {
     program_ref: String,
     owner_request_edges: Vec<SourceBoundEdge>,
+    adapter_carrier_edges: Vec<SourceBoundAdapterEdge>,
 }
 
 impl SourceBoundProbe {
-    pub(crate) fn new(program_ref: String, owner_request_edges: Vec<SourceBoundEdge>) -> Self {
+    pub(crate) fn new(
+        program_ref: String,
+        owner_request_edges: Vec<SourceBoundEdge>,
+        adapter_carrier_edges: Vec<SourceBoundAdapterEdge>,
+    ) -> Self {
         Self {
             program_ref,
             owner_request_edges,
+            adapter_carrier_edges,
         }
     }
 
@@ -631,5 +894,12 @@ impl SourceBoundProbe {
         self.owner_request_edges
             .iter()
             .find(|edge| edge.operation() == operation)
+    }
+
+    /// Every exact source-derived carrier accepted by the closed I3-1 static
+    /// algebra. This is inventory evidence only; it creates no semantic
+    /// request, runtime occurrence, process, route, or transport session.
+    pub fn adapter_carrier_edges(&self) -> &[SourceBoundAdapterEdge] {
+        &self.adapter_carrier_edges
     }
 }

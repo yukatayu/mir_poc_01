@@ -13,7 +13,7 @@ use quinn::{
 };
 use rustls::{
     ClientConfig, RootCertStore, ServerConfig,
-    pki_types::{CertificateDer, PrivateKeyDer, PrivatePkcs8KeyDer},
+    pki_types::{CertificateDer, PrivateKeyDer},
 };
 
 use crate::{
@@ -190,9 +190,9 @@ fn install_ring_provider() -> Result<(), CandidateExecutionError> {
 }
 
 async fn run_server(
-    control: ChildProcessControl,
+    mut control: ChildProcessControl,
 ) -> Result<ChildProcessEvent, CandidateExecutionError> {
-    let endpoint = Endpoint::server(server_config(&control)?, loopback_unspecified())
+    let endpoint = Endpoint::server(server_config(&mut control)?, loopback_unspecified())
         .map_err(|_| transport_failure())?;
     emit_ready(
         endpoint
@@ -636,18 +636,15 @@ fn oversized_client_prefix() -> Result<Vec<u8>, CandidateExecutionError> {
 }
 
 fn server_config(
-    control: &ChildProcessControl,
+    control: &mut ChildProcessControl,
 ) -> Result<quinn::ServerConfig, CandidateExecutionError> {
+    let certificate = CertificateDer::from(control.certificate_der().to_vec());
     let private_key = control
-        .server_private_key_der()
-        .ok_or_else(transport_failure)?
-        .to_vec();
+        .take_transport_private_key()
+        .ok_or_else(transport_failure)?;
     let mut crypto = ServerConfig::builder()
         .with_no_client_auth()
-        .with_single_cert(
-            vec![CertificateDer::from(control.certificate_der().to_vec())],
-            PrivateKeyDer::Pkcs8(PrivatePkcs8KeyDer::from(private_key)),
-        )
+        .with_single_cert(vec![certificate], PrivateKeyDer::Pkcs8(private_key))
         .map_err(|_| transport_failure())?;
     crypto.alpn_protocols = vec![PROBE_ALPN.to_vec()];
     let mut configuration = quinn::ServerConfig::with_crypto(Arc::new(

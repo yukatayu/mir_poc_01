@@ -16,11 +16,13 @@ use mir_ast::surface_v0::FixtureSource;
 use mir_semantics::{
     shared_model::SourceRef,
     surface_v0_pipeline::{
-        CheckedEvaluationKind, CheckedSurfaceV0, EffectKind, ResidualObligationKind,
-        check_and_elaborate_surface_v0,
+        CheckedEvaluationKind, CheckedSurfaceV0, EffectKind, GeneratedObligationKind,
+        ResidualObligationKind, StaticProjectionDesignatedInputReceiptUseFacts,
+        StaticProjectionDesignatedInputRequestFacts, StaticProjectionFacts,
+        StaticProjectionTypedStateReadFacts, check_and_elaborate_surface_v0,
     },
 };
-use serde::Serialize;
+use serde::{Deserialize, Serialize};
 use sha2::{Digest, Sha256};
 
 use crate::{
@@ -28,9 +30,11 @@ use crate::{
         M9FiniteLocalAdmissionCandidate, M9FiniteLocalAdmissionFact, M9RuntimeExecutionSeam,
     },
     sys3_projection::{
-        BackendEligibility, BackendProfile, CarrierContract, CarrierFrontierKind,
-        CarrierLifecycleKind, CarrierOccurrenceSlotKind, CommunicationEdgeKind,
-        DeclaredLogicalTopology, GlobalProjectionResult, ProjectedOperationFragmentKind,
+        BackendEligibility, BackendProfile, CarrierFrontierKind, CarrierLifecycleKind,
+        CarrierOccurrenceSlotKind, CarrierProvenanceKind, CommunicationEdgeKind,
+        DeclaredLogicalTopology, GlobalProjectionResult,
+        I3AdapterCarrierStaticAuthorityRequirementRow, I3AdapterCarrierStaticFacts,
+        I3AdapterCarrierStaticVariant, ProjectedOperationFragmentKind, RuntimeSeamRequirementKind,
         SeamAuthorityKind, project_checked_core,
     },
     sys4_dispatch::{
@@ -56,6 +60,31 @@ const I3_PROBE_OWNER_PRINCIPAL_REF_DOMAIN: &[u8] =
     b"mirrorea/sys5/i3-probe-owner-principal-ref/v1\0";
 const I3_PROBE_FULL_CONTRACT_FINGERPRINT_DOMAIN: &[u8] =
     b"mirrorea/sys5/i3-probe-carrier-contract/v1\0";
+const I3_ADAPTER_OWNER_PRINCIPAL_REF_DOMAIN: &[u8] =
+    b"mirrorea/sys5/i3-adapter-owner-principal-ref/v1\0";
+const I3_ADAPTER_DESIGNATED_READ_REF_DOMAIN: &[u8] =
+    b"mirrorea/sys5/i3-adapter-designated-read-ref/v1\0";
+const I3_ADAPTER_REQUESTER_SITE_REF_DOMAIN: &[u8] =
+    b"mirrorea/sys5/i3-adapter-designated-requester-site-ref/v1\0";
+const I3_ADAPTER_AUTHORITY_ORIGIN_REF_DOMAIN: &[u8] =
+    b"mirrorea/sys5/i3-adapter-designated-authority-origin-ref/v1\0";
+const I3_ADAPTER_DESIGNATED_REQUEST_REF_DOMAIN: &[u8] =
+    b"mirrorea/sys5/i3-adapter-designated-request-ref/v1\0";
+const I3_ADAPTER_DESIGNATED_RECEIPT_USE_REF_DOMAIN: &[u8] =
+    b"mirrorea/sys5/i3-adapter-designated-receipt-use-ref/v1\0";
+const I3_ADAPTER_RESULT_VERSION_REF_DOMAIN: &[u8] =
+    b"mirrorea/sys5/i3-adapter-result-version-ref/v1\0";
+const I3_ADAPTER_INPUT_FRONTIER_REF_DOMAIN: &[u8] =
+    b"mirrorea/sys5/i3-adapter-input-frontier-ref/v1\0";
+const I3_ADAPTER_RESULT_FRONTIER_REF_DOMAIN: &[u8] =
+    b"mirrorea/sys5/i3-adapter-result-frontier-ref/v1\0";
+const I3_ADAPTER_OBSERVATION_POLICY_REF_DOMAIN: &[u8] =
+    b"mirrorea/sys5/i3-adapter-observation-policy-ref/v1\0";
+const I3_ADAPTER_POLICY_STAMP_REF_DOMAIN: &[u8] = b"mirrorea/sys5/i3-adapter-policy-stamp-ref/v1\0";
+const I3_ADAPTER_FIELD_INVENTORY_REF_DOMAIN: &[u8] =
+    b"mirrorea/sys5/i3-adapter-field-inventory-ref/v1\0";
+const I3_ADAPTER_FULL_CONTRACT_FINGERPRINT_DOMAIN: &[u8] =
+    b"mirrorea/sys5/i3-adapter-carrier-contract/v1\0";
 
 /// Ordinary source supplied directly to the provisional build/project facade.
 #[derive(Clone, PartialEq, Eq)]
@@ -131,6 +160,10 @@ pub enum Sys5I3ProbeFacadeErrorKind {
     CarrierContractMismatch,
     /// This I3-0 canary exposes only exact retained owner-request contracts.
     NotOwnerRequest,
+    /// The selected generated edge is outside the closed I3-1 static carrier
+    /// algebra.  In particular, `AbsoluteValueStream` cannot produce a
+    /// snapshot through a default or compatibility path.
+    NotAcceptedCarrierFamily,
 }
 
 /// A reference-only failure returned by the doc-hidden I3 probe façade.
@@ -166,6 +199,9 @@ impl fmt::Display for Sys5I3ProbeFacadeError {
             }
             Sys5I3ProbeFacadeErrorKind::NotOwnerRequest => {
                 "I3 probe façade accepts retained owner-request contracts only"
+            }
+            Sys5I3ProbeFacadeErrorKind::NotAcceptedCarrierFamily => {
+                "generated carrier family is outside the closed I3 adapter algebra"
             }
         })
     }
@@ -206,6 +242,112 @@ impl Sys5I3ProbeAuthorityRequirements {
 
     /// Whether the carrier requires both a capability-reference category and
     /// a witness-reference category.
+    pub const fn requires_capability_and_witness_refs(&self) -> bool {
+        self.requires_capability_and_witness_refs
+    }
+}
+
+/// One ordered, reference-only runtime-seam authority requirement row retained
+/// by the static I3 adapter facade.
+#[doc(hidden)]
+#[derive(Debug, Clone, PartialEq, Eq)]
+pub struct Sys5I3AdapterAuthorityRequirementRow {
+    requirement_kind_name: String,
+    generated_obligation_present: bool,
+    generated_obligation_kind_name: Option<String>,
+    generated_obligation_detail_name: Option<String>,
+    provenance_name: String,
+    authority_category_name: Option<String>,
+}
+
+impl Sys5I3AdapterAuthorityRequirementRow {
+    pub fn requirement_kind_name(&self) -> &str {
+        &self.requirement_kind_name
+    }
+
+    pub const fn generated_obligation_present(&self) -> bool {
+        self.generated_obligation_present
+    }
+
+    pub fn generated_obligation_kind_name(&self) -> Option<&str> {
+        self.generated_obligation_kind_name.as_deref()
+    }
+
+    pub fn generated_obligation_detail_name(&self) -> Option<&str> {
+        self.generated_obligation_detail_name.as_deref()
+    }
+
+    pub fn provenance_name(&self) -> &str {
+        &self.provenance_name
+    }
+
+    pub fn authority_category_name(&self) -> Option<&str> {
+        self.authority_category_name.as_deref()
+    }
+}
+
+/// Exact ordered authority requirements retained by the static I3 adapter
+/// facade. Category names and booleans are derived convenience views over the
+/// complete row sequence.
+#[doc(hidden)]
+#[derive(Debug, Clone, PartialEq, Eq)]
+pub struct Sys5I3AdapterAuthorityRequirements {
+    rows: Vec<Sys5I3AdapterAuthorityRequirementRow>,
+    category_names: Vec<String>,
+    requires_membership_epoch_and_incarnation: bool,
+    requires_capability_and_witness_refs: bool,
+}
+
+impl Sys5I3AdapterAuthorityRequirements {
+    fn from_rows(rows: Vec<Sys5I3AdapterAuthorityRequirementRow>) -> Self {
+        let mut category_names = Vec::new();
+        for category in rows
+            .iter()
+            .filter_map(|row| row.authority_category_name.as_deref())
+        {
+            if !category_names.iter().any(|existing| existing == category) {
+                category_names.push(category.to_string());
+            }
+        }
+        let requires_membership_epoch_and_incarnation = category_names.iter().any(|category| {
+            matches!(
+                category.as_str(),
+                "MembershipEpochIncarnation" | "DesignatedResultConsumerMembership"
+            )
+        });
+        let requires_capability_and_witness_refs = category_names.iter().any(|category| {
+            matches!(
+                category.as_str(),
+                "OwnerCapabilityRef"
+                    | "ProducerReleaseCapability"
+                    | "DesignatedResultConsumerCapability"
+            )
+        }) && category_names.iter().any(|category| {
+            matches!(
+                category.as_str(),
+                "OwnerWitnessRef" | "ProducerReleaseWitness" | "DesignatedResultConsumerWitness"
+            )
+        });
+        Self {
+            rows,
+            category_names,
+            requires_membership_epoch_and_incarnation,
+            requires_capability_and_witness_refs,
+        }
+    }
+
+    pub fn rows(&self) -> &[Sys5I3AdapterAuthorityRequirementRow] {
+        &self.rows
+    }
+
+    pub fn category_names(&self) -> &[String] {
+        &self.category_names
+    }
+
+    pub const fn requires_membership_epoch_and_incarnation(&self) -> bool {
+        self.requires_membership_epoch_and_incarnation
+    }
+
     pub const fn requires_capability_and_witness_refs(&self) -> bool {
         self.requires_capability_and_witness_refs
     }
@@ -455,6 +597,780 @@ impl Sys5I3ProbeCarrierContract {
     }
 }
 
+/// Reference-only facts that are meaningful only for an owner request or its
+/// receipt.  The principal is a one-way private reference, never a principal
+/// value, credential, capability, or witness.
+#[doc(hidden)]
+#[derive(Debug, Clone, PartialEq, Eq)]
+pub struct Sys5I3AdapterOwnerFacts {
+    origin_principal_ref: String,
+    origin_locus_template: String,
+    target_owner_locus_template: String,
+}
+
+impl Sys5I3AdapterOwnerFacts {
+    pub fn origin_principal_ref(&self) -> &str {
+        &self.origin_principal_ref
+    }
+
+    pub fn origin_locus_template(&self) -> &str {
+        &self.origin_locus_template
+    }
+
+    pub fn target_owner_locus_template(&self) -> &str {
+        &self.target_owner_locus_template
+    }
+}
+
+/// Reference-only facts that are meaningful only for a designated input
+/// request or receipt.  The typed state read is represented only by an opaque
+/// digest reference.
+#[doc(hidden)]
+#[derive(Debug, Clone, PartialEq, Eq)]
+pub struct Sys5I3AdapterDesignatedInputFacts {
+    dependency_ordinal: usize,
+    typed_state_read_ref: String,
+    requester_site_ref: String,
+    authority_origin_ref: String,
+    request_ref: String,
+    receipt_use_ref: String,
+    designated_evaluator_locus: String,
+    source_owner_locus: String,
+    frontier_requirement_names: Vec<String>,
+}
+
+impl Sys5I3AdapterDesignatedInputFacts {
+    pub const fn dependency_ordinal(&self) -> usize {
+        self.dependency_ordinal
+    }
+
+    pub fn typed_state_read_ref(&self) -> &str {
+        &self.typed_state_read_ref
+    }
+
+    pub fn requester_site_ref(&self) -> &str {
+        &self.requester_site_ref
+    }
+
+    pub fn authority_origin_ref(&self) -> &str {
+        &self.authority_origin_ref
+    }
+
+    pub fn request_ref(&self) -> &str {
+        &self.request_ref
+    }
+
+    pub fn receipt_use_ref(&self) -> &str {
+        &self.receipt_use_ref
+    }
+
+    pub fn designated_evaluator_locus(&self) -> &str {
+        &self.designated_evaluator_locus
+    }
+
+    pub fn source_owner_locus(&self) -> &str {
+        &self.source_owner_locus
+    }
+
+    pub fn frontier_requirement_names(&self) -> &[String] {
+        &self.frontier_requirement_names
+    }
+}
+
+/// Reference-only facts retained for a relation publication carrier.
+#[doc(hidden)]
+#[derive(Debug, Clone, PartialEq, Eq)]
+pub struct Sys5I3AdapterRelationPublicationFacts {
+    relation_name: String,
+    publication_locus: String,
+    consumer_locus: String,
+}
+
+impl Sys5I3AdapterRelationPublicationFacts {
+    pub fn relation_name(&self) -> &str {
+        &self.relation_name
+    }
+
+    pub fn publication_locus(&self) -> &str {
+        &self.publication_locus
+    }
+
+    pub fn consumer_locus(&self) -> &str {
+        &self.consumer_locus
+    }
+}
+
+/// Reference-only facts retained for a designated result delivery carrier.
+/// Result/frontier/policy values remain one-way references; this is not a
+/// payload or a runtime result occurrence.
+#[doc(hidden)]
+#[derive(Debug, Clone, PartialEq, Eq)]
+pub struct Sys5I3AdapterDesignatedResultFacts {
+    evaluator_locus: String,
+    consumer_locus: String,
+    result_version_ref: String,
+    input_frontier_ref: String,
+    result_frontier_ref: String,
+    observation_policy_ref: String,
+    policy_stamp_ref: String,
+    static_retry_contract_name: String,
+}
+
+impl Sys5I3AdapterDesignatedResultFacts {
+    pub fn evaluator_locus(&self) -> &str {
+        &self.evaluator_locus
+    }
+
+    pub fn consumer_locus(&self) -> &str {
+        &self.consumer_locus
+    }
+
+    pub fn result_version_ref(&self) -> &str {
+        &self.result_version_ref
+    }
+
+    pub fn input_frontier_ref(&self) -> &str {
+        &self.input_frontier_ref
+    }
+
+    pub fn result_frontier_ref(&self) -> &str {
+        &self.result_frontier_ref
+    }
+
+    pub fn observation_policy_ref(&self) -> &str {
+        &self.observation_policy_ref
+    }
+
+    pub fn policy_stamp_ref(&self) -> &str {
+        &self.policy_stamp_ref
+    }
+
+    pub fn static_retry_contract_name(&self) -> &str {
+        &self.static_retry_contract_name
+    }
+}
+
+/// The exact closed static I3 adapter sum type.  There is no wildcard,
+/// extension field, or nullable data slot shared by unrelated families.
+#[doc(hidden)]
+#[derive(Debug, Clone, PartialEq, Eq)]
+pub enum Sys5I3AdapterCarrierVariantFacts {
+    OwnerRequest(Sys5I3AdapterOwnerFacts),
+    OwnerReplyReceipt(Sys5I3AdapterOwnerFacts),
+    DesignatedInputRequest(Sys5I3AdapterDesignatedInputFacts),
+    DesignatedInputReceipt(Sys5I3AdapterDesignatedInputFacts),
+    RelationProjectionPublication(Sys5I3AdapterRelationPublicationFacts),
+    DesignatedResultDelivery(Sys5I3AdapterDesignatedResultFacts),
+}
+
+/// A closed, private/provisional byte-transport snapshot of one static I3
+/// adapter carrier.  It is owned here because this module owns every retained
+/// field of `Sys5I3AdapterCarrierContract`; downstream code may compare or
+/// serialize this snapshot, but cannot reconstruct it from partial facts.
+///
+/// This is deliberately not a runtime carrier, request, payload, session, or
+/// public wire contract.
+#[doc(hidden)]
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[serde(deny_unknown_fields)]
+pub struct Sys5I3AdapterWireSnapshot {
+    checked_program_ref: String,
+    operation_id: String,
+    edge_kind: String,
+    lifecycle_kind: String,
+    source_locus: String,
+    target_locus: String,
+    logical_source_path: String,
+    source_span: Sys5I3AdapterWireSourceSpan,
+    source_ref: String,
+    core_ref: String,
+    source_artifact_ref: String,
+    target_artifact_ref: String,
+    edge_ref: String,
+    declared_failure_names: Vec<String>,
+    effect_kind_names: Vec<String>,
+    required_occurrence_slot_names: Vec<String>,
+    #[serde(rename = "requires_linked_request")]
+    linked_request_identity: bool,
+    typed_outcome: bool,
+    receipt_consumption: bool,
+    authority: Sys5I3AdapterWireAuthorityRequirements,
+    redaction: Sys5I3AdapterWireRedaction,
+    checked_core_bound: bool,
+    transfers_authority: bool,
+    mints_authority_without_source: bool,
+    public_api_or_wire_contract: bool,
+    variant: Sys5I3AdapterWireVariant,
+    full_retained_contract_fingerprint: String,
+    full_retained_contract_fingerprint_field_names: Vec<String>,
+}
+
+impl Sys5I3AdapterWireSnapshot {
+    /// The decoded reference is an untrusted static lookup hint only.  The
+    /// I3-1 adapter still compares the entire retained snapshot at the
+    /// receiver-owned source-bound admission boundary.
+    #[doc(hidden)]
+    pub fn edge_ref(&self) -> &str {
+        &self.edge_ref
+    }
+
+    /// The retained exhaustive static fingerprint inventory.  It is consumed
+    /// only as an opaque equality/fail-closed evidence list by the private
+    /// adapter codec.
+    #[doc(hidden)]
+    pub fn full_retained_contract_fingerprint_field_names(&self) -> &[String] {
+        &self.full_retained_contract_fingerprint_field_names
+    }
+}
+
+#[doc(hidden)]
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[serde(deny_unknown_fields)]
+struct Sys5I3AdapterWireSourceSpan {
+    start: u64,
+    end: u64,
+    start_line: u32,
+    start_column: u32,
+    end_line: u32,
+    end_column: u32,
+}
+
+#[doc(hidden)]
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[serde(deny_unknown_fields)]
+struct Sys5I3AdapterWireAuthorityRequirements {
+    authority_requirement_rows: Vec<Sys5I3AdapterWireAuthorityRequirementRow>,
+    authority_category_names: Vec<String>,
+    requires_membership_epoch_and_incarnation: bool,
+    requires_capability_and_witness_refs: bool,
+}
+
+#[doc(hidden)]
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[serde(deny_unknown_fields)]
+struct Sys5I3AdapterWireAuthorityRequirementRow {
+    requirement_kind_name: String,
+    generated_obligation: Sys5I3AdapterWireGeneratedObligation,
+    provenance_name: String,
+    authority_category: Sys5I3AdapterWireOptionalText,
+}
+
+#[doc(hidden)]
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[serde(tag = "state", content = "details", deny_unknown_fields)]
+enum Sys5I3AdapterWireGeneratedObligation {
+    Absent,
+    Present {
+        kind_name: String,
+        detail_name: Sys5I3AdapterWireOptionalText,
+    },
+}
+
+#[doc(hidden)]
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[serde(tag = "state", content = "text", deny_unknown_fields)]
+enum Sys5I3AdapterWireOptionalText {
+    Absent,
+    Present(String),
+}
+
+#[doc(hidden)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize, Deserialize)]
+enum Sys5I3AdapterWireRedaction {
+    ReferenceOnly,
+}
+
+#[doc(hidden)]
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[serde(tag = "family", content = "facts", deny_unknown_fields)]
+enum Sys5I3AdapterWireVariant {
+    OwnerRequest(Sys5I3AdapterWireOwnerFacts),
+    OwnerReplyReceipt(Sys5I3AdapterWireOwnerFacts),
+    DesignatedInputRequest(Sys5I3AdapterWireDesignatedInputFacts),
+    DesignatedInputReceipt(Sys5I3AdapterWireDesignatedInputFacts),
+    RelationProjectionPublication(Sys5I3AdapterWireRelationPublicationFacts),
+    DesignatedResultDelivery(Sys5I3AdapterWireDesignatedResultFacts),
+}
+
+#[doc(hidden)]
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[serde(deny_unknown_fields)]
+struct Sys5I3AdapterWireOwnerFacts {
+    origin_principal_ref: String,
+    origin_locus_template: String,
+    target_owner_locus_template: String,
+}
+
+#[doc(hidden)]
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[serde(deny_unknown_fields)]
+struct Sys5I3AdapterWireDesignatedInputFacts {
+    dependency_ordinal: u64,
+    typed_state_read_ref: String,
+    requester_site_ref: String,
+    authority_origin_ref: String,
+    request_ref: String,
+    receipt_use_ref: String,
+    designated_evaluator_locus: String,
+    source_owner_locus: String,
+    frontier_requirement_names: Vec<String>,
+}
+
+#[doc(hidden)]
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[serde(deny_unknown_fields)]
+struct Sys5I3AdapterWireRelationPublicationFacts {
+    relation_name: String,
+    publication_locus: String,
+    consumer_locus: String,
+}
+
+#[doc(hidden)]
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[serde(deny_unknown_fields)]
+struct Sys5I3AdapterWireDesignatedResultFacts {
+    evaluator_locus: String,
+    consumer_locus: String,
+    result_version_ref: String,
+    input_frontier_ref: String,
+    result_frontier_ref: String,
+    observation_policy_ref: String,
+    policy_stamp_ref: String,
+    static_delivery_contract: Sys5I3AdapterWireStaticDeliveryContract,
+}
+
+/// Closed static semantic delivery behavior.  This value describes the
+/// accepted carrier's result-consumption rule only; it does not authorize or
+/// perform a transport retry, create an occurrence, or retain a token/cache.
+#[doc(hidden)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize, Deserialize)]
+enum Sys5I3AdapterWireStaticDeliveryContract {
+    ReturnExistingNoNewConsumption,
+}
+
+/// An immutable reference-only snapshot of exactly one generated checked I2
+/// carrier in the closed I3-1 adapter algebra.  It is private/provisional
+/// implementation evidence, never a public wire, package, API, or runtime
+/// admission contract.
+#[doc(hidden)]
+#[derive(Debug, Clone, PartialEq, Eq)]
+pub struct Sys5I3AdapterCarrierContract {
+    checked_program_ref: String,
+    operation_id: String,
+    edge_kind: String,
+    lifecycle_kind: String,
+    source_locus: String,
+    target_locus: String,
+    logical_source_path: String,
+    source_span: Sys5SourceSpan,
+    source_ref: String,
+    core_ref: String,
+    source_artifact_ref: String,
+    target_artifact_ref: String,
+    edge_ref: String,
+    declared_failure_names: Vec<String>,
+    effect_kind_names: Vec<String>,
+    required_occurrence_slot_names: Vec<String>,
+    linked_request_identity: bool,
+    typed_outcome: bool,
+    receipt_consumption: bool,
+    authority_requirements: Sys5I3AdapterAuthorityRequirements,
+    redaction: Sys5I3ProbeRedaction,
+    checked_core_bound: bool,
+    transfers_authority: bool,
+    mints_authority_without_source: bool,
+    variant_facts: Sys5I3AdapterCarrierVariantFacts,
+    full_retained_contract_fingerprint: String,
+    full_retained_contract_fingerprint_field_names: Vec<String>,
+}
+
+impl Sys5I3AdapterCarrierContract {
+    pub fn checked_program_ref(&self) -> &str {
+        &self.checked_program_ref
+    }
+
+    pub fn operation_id(&self) -> &str {
+        &self.operation_id
+    }
+
+    pub fn edge_kind(&self) -> &str {
+        &self.edge_kind
+    }
+
+    pub fn lifecycle_kind(&self) -> &str {
+        &self.lifecycle_kind
+    }
+
+    pub fn source_locus(&self) -> &str {
+        &self.source_locus
+    }
+
+    pub fn target_locus(&self) -> &str {
+        &self.target_locus
+    }
+
+    pub fn logical_source_path(&self) -> &str {
+        &self.logical_source_path
+    }
+
+    pub const fn source_span(&self) -> Sys5SourceSpan {
+        self.source_span
+    }
+
+    pub fn source_ref(&self) -> &str {
+        &self.source_ref
+    }
+
+    pub fn core_ref(&self) -> &str {
+        &self.core_ref
+    }
+
+    pub fn source_artifact_ref(&self) -> &str {
+        &self.source_artifact_ref
+    }
+
+    pub fn target_artifact_ref(&self) -> &str {
+        &self.target_artifact_ref
+    }
+
+    pub fn edge_ref(&self) -> &str {
+        &self.edge_ref
+    }
+
+    pub fn declared_failure_names(&self) -> &[String] {
+        &self.declared_failure_names
+    }
+
+    pub fn effect_kind_names(&self) -> &[String] {
+        &self.effect_kind_names
+    }
+
+    pub fn required_occurrence_slot_names(&self) -> &[String] {
+        &self.required_occurrence_slot_names
+    }
+
+    pub const fn requires_linked_request_identity(&self) -> bool {
+        self.linked_request_identity
+    }
+
+    pub const fn requires_typed_outcome(&self) -> bool {
+        self.typed_outcome
+    }
+
+    pub const fn requires_receipt_consumption_state(&self) -> bool {
+        self.receipt_consumption
+    }
+
+    pub fn authority_requirements(&self) -> &Sys5I3AdapterAuthorityRequirements {
+        &self.authority_requirements
+    }
+
+    pub const fn redaction(&self) -> Sys5I3ProbeRedaction {
+        self.redaction
+    }
+
+    pub const fn checked_core_bound(&self) -> bool {
+        self.checked_core_bound
+    }
+
+    pub const fn transfers_authority(&self) -> bool {
+        self.transfers_authority
+    }
+
+    pub const fn mints_authority_without_source(&self) -> bool {
+        self.mints_authority_without_source
+    }
+
+    pub fn variant_facts(&self) -> &Sys5I3AdapterCarrierVariantFacts {
+        &self.variant_facts
+    }
+
+    pub fn full_retained_contract_fingerprint(&self) -> &str {
+        &self.full_retained_contract_fingerprint
+    }
+
+    pub fn full_retained_contract_fingerprint_field_names(&self) -> &[String] {
+        &self.full_retained_contract_fingerprint_field_names
+    }
+
+    pub const fn public_api_or_wire_contract(&self) -> bool {
+        false
+    }
+
+    /// Produces the only byte-transport DTO for this private static adapter
+    /// contract.  Every retained field is destructured here at its owner;
+    /// future fields or variants therefore require an explicit wire decision.
+    #[doc(hidden)]
+    pub fn i3_adapter_wire_snapshot(&self) -> Sys5I3AdapterWireSnapshot {
+        let Self {
+            checked_program_ref,
+            operation_id,
+            edge_kind,
+            lifecycle_kind,
+            source_locus,
+            target_locus,
+            logical_source_path,
+            source_span,
+            source_ref,
+            core_ref,
+            source_artifact_ref,
+            target_artifact_ref,
+            edge_ref,
+            declared_failure_names,
+            effect_kind_names,
+            required_occurrence_slot_names,
+            linked_request_identity,
+            typed_outcome,
+            receipt_consumption,
+            authority_requirements,
+            redaction,
+            checked_core_bound,
+            transfers_authority,
+            mints_authority_without_source,
+            variant_facts,
+            full_retained_contract_fingerprint,
+            full_retained_contract_fingerprint_field_names,
+        } = self;
+        let Sys5SourceSpan {
+            start,
+            end,
+            start_line,
+            start_column,
+            end_line,
+            end_column,
+        } = source_span;
+        let Sys5I3AdapterAuthorityRequirements {
+            rows,
+            category_names,
+            requires_membership_epoch_and_incarnation,
+            requires_capability_and_witness_refs,
+        } = authority_requirements;
+        let authority_requirement_rows = rows
+            .iter()
+            .map(
+                |Sys5I3AdapterAuthorityRequirementRow {
+                     requirement_kind_name,
+                     generated_obligation_present,
+                     generated_obligation_kind_name,
+                     generated_obligation_detail_name,
+                     provenance_name,
+                     authority_category_name,
+                 }| {
+                    let generated_obligation = match (
+                        generated_obligation_present,
+                        generated_obligation_kind_name,
+                        generated_obligation_detail_name,
+                    ) {
+                        (false, None, None) => Sys5I3AdapterWireGeneratedObligation::Absent,
+                        (true, Some(kind_name), detail_name) => {
+                            Sys5I3AdapterWireGeneratedObligation::Present {
+                                kind_name: kind_name.clone(),
+                                detail_name: i3_adapter_wire_optional_text(detail_name),
+                            }
+                        }
+                        _ => panic!("static adapter authority row is internally inconsistent"),
+                    };
+                    Sys5I3AdapterWireAuthorityRequirementRow {
+                        requirement_kind_name: requirement_kind_name.clone(),
+                        generated_obligation,
+                        provenance_name: provenance_name.clone(),
+                        authority_category: i3_adapter_wire_optional_text(authority_category_name),
+                    }
+                },
+            )
+            .collect();
+        Sys5I3AdapterWireSnapshot {
+            checked_program_ref: checked_program_ref.clone(),
+            operation_id: operation_id.clone(),
+            edge_kind: edge_kind.clone(),
+            lifecycle_kind: lifecycle_kind.clone(),
+            source_locus: source_locus.clone(),
+            target_locus: target_locus.clone(),
+            logical_source_path: logical_source_path.clone(),
+            source_span: Sys5I3AdapterWireSourceSpan {
+                start: *start,
+                end: *end,
+                start_line: *start_line,
+                start_column: *start_column,
+                end_line: *end_line,
+                end_column: *end_column,
+            },
+            source_ref: source_ref.clone(),
+            core_ref: core_ref.clone(),
+            source_artifact_ref: source_artifact_ref.clone(),
+            target_artifact_ref: target_artifact_ref.clone(),
+            edge_ref: edge_ref.clone(),
+            declared_failure_names: declared_failure_names.clone(),
+            effect_kind_names: effect_kind_names.clone(),
+            required_occurrence_slot_names: required_occurrence_slot_names.clone(),
+            linked_request_identity: *linked_request_identity,
+            typed_outcome: *typed_outcome,
+            receipt_consumption: *receipt_consumption,
+            authority: Sys5I3AdapterWireAuthorityRequirements {
+                authority_requirement_rows,
+                authority_category_names: category_names.clone(),
+                requires_membership_epoch_and_incarnation:
+                    *requires_membership_epoch_and_incarnation,
+                requires_capability_and_witness_refs: *requires_capability_and_witness_refs,
+            },
+            redaction: match redaction {
+                Sys5I3ProbeRedaction::ReferenceOnly => Sys5I3AdapterWireRedaction::ReferenceOnly,
+            },
+            checked_core_bound: *checked_core_bound,
+            transfers_authority: *transfers_authority,
+            mints_authority_without_source: *mints_authority_without_source,
+            public_api_or_wire_contract: false,
+            variant: i3_adapter_wire_variant(variant_facts),
+            full_retained_contract_fingerprint: full_retained_contract_fingerprint.clone(),
+            // The inventory's exact order and multiplicity are retained, but
+            // its labels are one-way refs so static byte evidence cannot make
+            // incidental runtime vocabulary look like a runtime feature.
+            full_retained_contract_fingerprint_field_names:
+                full_retained_contract_fingerprint_field_names
+                    .iter()
+                    .map(|field_name| i3_adapter_wire_field_inventory_ref(field_name))
+                    .collect(),
+        }
+    }
+}
+
+fn i3_adapter_wire_optional_text(value: &Option<String>) -> Sys5I3AdapterWireOptionalText {
+    match value {
+        None => Sys5I3AdapterWireOptionalText::Absent,
+        Some(text) => Sys5I3AdapterWireOptionalText::Present(text.clone()),
+    }
+}
+
+fn i3_adapter_wire_variant(facts: &Sys5I3AdapterCarrierVariantFacts) -> Sys5I3AdapterWireVariant {
+    match facts {
+        Sys5I3AdapterCarrierVariantFacts::OwnerRequest(facts) => {
+            let Sys5I3AdapterOwnerFacts {
+                origin_principal_ref,
+                origin_locus_template,
+                target_owner_locus_template,
+            } = facts;
+            Sys5I3AdapterWireVariant::OwnerRequest(Sys5I3AdapterWireOwnerFacts {
+                origin_principal_ref: origin_principal_ref.clone(),
+                origin_locus_template: origin_locus_template.clone(),
+                target_owner_locus_template: target_owner_locus_template.clone(),
+            })
+        }
+        Sys5I3AdapterCarrierVariantFacts::OwnerReplyReceipt(facts) => {
+            let Sys5I3AdapterOwnerFacts {
+                origin_principal_ref,
+                origin_locus_template,
+                target_owner_locus_template,
+            } = facts;
+            Sys5I3AdapterWireVariant::OwnerReplyReceipt(Sys5I3AdapterWireOwnerFacts {
+                origin_principal_ref: origin_principal_ref.clone(),
+                origin_locus_template: origin_locus_template.clone(),
+                target_owner_locus_template: target_owner_locus_template.clone(),
+            })
+        }
+        Sys5I3AdapterCarrierVariantFacts::DesignatedInputRequest(facts) => {
+            Sys5I3AdapterWireVariant::DesignatedInputRequest(
+                i3_adapter_wire_designated_input_facts(facts),
+            )
+        }
+        Sys5I3AdapterCarrierVariantFacts::DesignatedInputReceipt(facts) => {
+            Sys5I3AdapterWireVariant::DesignatedInputReceipt(
+                i3_adapter_wire_designated_input_facts(facts),
+            )
+        }
+        Sys5I3AdapterCarrierVariantFacts::RelationProjectionPublication(facts) => {
+            let Sys5I3AdapterRelationPublicationFacts {
+                relation_name,
+                publication_locus,
+                consumer_locus,
+            } = facts;
+            Sys5I3AdapterWireVariant::RelationProjectionPublication(
+                Sys5I3AdapterWireRelationPublicationFacts {
+                    relation_name: relation_name.clone(),
+                    publication_locus: publication_locus.clone(),
+                    consumer_locus: consumer_locus.clone(),
+                },
+            )
+        }
+        Sys5I3AdapterCarrierVariantFacts::DesignatedResultDelivery(facts) => {
+            let Sys5I3AdapterDesignatedResultFacts {
+                evaluator_locus,
+                consumer_locus,
+                result_version_ref,
+                input_frontier_ref,
+                result_frontier_ref,
+                observation_policy_ref,
+                policy_stamp_ref,
+                static_retry_contract_name,
+            } = facts;
+            Sys5I3AdapterWireVariant::DesignatedResultDelivery(
+                Sys5I3AdapterWireDesignatedResultFacts {
+                    evaluator_locus: evaluator_locus.clone(),
+                    consumer_locus: consumer_locus.clone(),
+                    result_version_ref: result_version_ref.clone(),
+                    input_frontier_ref: input_frontier_ref.clone(),
+                    result_frontier_ref: result_frontier_ref.clone(),
+                    observation_policy_ref: observation_policy_ref.clone(),
+                    policy_stamp_ref: policy_stamp_ref.clone(),
+                    static_delivery_contract: i3_adapter_wire_static_delivery_contract(
+                        static_retry_contract_name,
+                    ),
+                },
+            )
+        }
+    }
+}
+
+fn i3_adapter_wire_static_delivery_contract(
+    contract_name: &str,
+) -> Sys5I3AdapterWireStaticDeliveryContract {
+    match contract_name {
+        "ReturnExistingNoNewConsumption" => {
+            Sys5I3AdapterWireStaticDeliveryContract::ReturnExistingNoNewConsumption
+        }
+        _ => panic!("closed static delivery contract is not recognized by the private wire"),
+    }
+}
+
+fn i3_adapter_wire_field_inventory_ref(field_name: &str) -> String {
+    let mut hasher = Sha256::new();
+    hasher.update(I3_ADAPTER_FIELD_INVENTORY_REF_DOMAIN);
+    hasher.update(
+        u64::try_from(field_name.len())
+            .expect("finite static field inventory label length fits u64")
+            .to_be_bytes(),
+    );
+    hasher.update(field_name.as_bytes());
+    format!("i3-adapter-field-slot-sha256-v1:{:x}", hasher.finalize())
+}
+
+fn i3_adapter_wire_designated_input_facts(
+    facts: &Sys5I3AdapterDesignatedInputFacts,
+) -> Sys5I3AdapterWireDesignatedInputFacts {
+    let Sys5I3AdapterDesignatedInputFacts {
+        dependency_ordinal,
+        typed_state_read_ref,
+        requester_site_ref,
+        authority_origin_ref,
+        request_ref,
+        receipt_use_ref,
+        designated_evaluator_locus,
+        source_owner_locus,
+        frontier_requirement_names,
+    } = facts;
+    Sys5I3AdapterWireDesignatedInputFacts {
+        dependency_ordinal: u64::try_from(*dependency_ordinal)
+            .expect("finite static dependency ordinal fits the private u64 wire field"),
+        typed_state_read_ref: typed_state_read_ref.clone(),
+        requester_site_ref: requester_site_ref.clone(),
+        authority_origin_ref: authority_origin_ref.clone(),
+        request_ref: request_ref.clone(),
+        receipt_use_ref: receipt_use_ref.clone(),
+        designated_evaluator_locus: designated_evaluator_locus.clone(),
+        source_owner_locus: source_owner_locus.clone(),
+        frontier_requirement_names: frontier_requirement_names.clone(),
+    }
+}
+
 /// An experimental, non-public checked/projected local slice.  It can start
 /// the bounded in-process runtime through `Sys5PreparedAdmission`; this type
 /// itself retains only checked/projected state, not a live fabric.
@@ -571,6 +1487,12 @@ impl Sys5LocalProject {
             .ok_or_else(|| {
                 Sys5I3ProbeFacadeError::new(Sys5I3ProbeFacadeErrorKind::CarrierContractMismatch)
             })?;
+        let i3_adapter_authority_requirement_rows = carrier
+            .i3_adapter_static_facts()
+            .ok_or_else(|| {
+                Sys5I3ProbeFacadeError::new(Sys5I3ProbeFacadeErrorKind::CarrierContractMismatch)
+            })?
+            .authority_requirement_rows;
 
         let source_ref = carrier.source_ref();
         let request_template_slot_names = carrier
@@ -636,7 +1558,9 @@ impl Sys5LocalProject {
             required_occurrence_slot_names: request_template_slot_names,
             linked_request_identity: carrier.requires_linked_request_identity(),
             typed_outcome: carrier.requires_typed_success_or_declared_failure_outcome(),
-            authority_requirements: i3_probe_authority_requirements(carrier),
+            authority_requirements: i3_probe_authority_requirements(
+                &i3_adapter_authority_requirement_rows,
+            ),
             redaction: Sys5I3ProbeRedaction::ReferenceOnly,
             checked_core_bound: carrier.provenance().is_checked_core_bound(),
             transfers_authority: carrier.transfers_authority(),
@@ -646,6 +1570,162 @@ impl Sys5LocalProject {
         };
         snapshot.full_retained_contract_fingerprint =
             i3_probe_full_retained_contract_fingerprint(&snapshot, &owner_request_component);
+        Ok(snapshot)
+    }
+
+    /// The exact closed generated-carrier family inventory accepted by the
+    /// private I3-1 adapter.  This is neither a public extension point nor a
+    /// claim that the six finite I2 families are a general carrier theorem.
+    #[doc(hidden)]
+    pub const fn i3_adapter_accepted_family_kind_names(&self) -> [&'static str; 6] {
+        [
+            "owner-request",
+            "owner-reply-receipt",
+            "designated-input-request",
+            "designated-input-receipt",
+            "relation-projection-publication",
+            "designated-result-delivery",
+        ]
+    }
+
+    /// Returns the exact source-bound static I3-1 adapter snapshot for one
+    /// retained generated edge.  This does not reparse source, construct a
+    /// route, bind a request, admit authority, create a runtime occurrence, or
+    /// expose a payload/result/cache/session/certificate value.
+    #[doc(hidden)]
+    pub fn i3_adapter_carrier_contract(
+        &self,
+        edge_ref: &str,
+    ) -> Result<Sys5I3AdapterCarrierContract, Sys5I3ProbeFacadeError> {
+        let mut selected = self
+            .projection
+            .communication_plan()
+            .edges()
+            .iter()
+            .filter(|candidate| candidate.edge_ref() == edge_ref);
+        let edge = selected.next().ok_or_else(|| {
+            Sys5I3ProbeFacadeError::new(Sys5I3ProbeFacadeErrorKind::UnknownEdgeRef)
+        })?;
+        if selected.next().is_some() {
+            return Err(Sys5I3ProbeFacadeError::new(
+                Sys5I3ProbeFacadeErrorKind::NonUniqueEdgeRef,
+            ));
+        }
+        let family = i3_adapter_carrier_family_for_edge_kind(edge.kind())?;
+        if !edge.is_derived_from_checked_core() || edge.transfers_authority() {
+            return Err(Sys5I3ProbeFacadeError::new(
+                Sys5I3ProbeFacadeErrorKind::CarrierContractMismatch,
+            ));
+        }
+
+        let facts = edge
+            .carrier_contract()
+            .i3_adapter_static_facts()
+            .ok_or_else(|| {
+                Sys5I3ProbeFacadeError::new(Sys5I3ProbeFacadeErrorKind::CarrierContractMismatch)
+            })?;
+        let I3AdapterCarrierStaticFacts {
+            edge_kind,
+            lifecycle_kind,
+            operation_id,
+            source_ref,
+            core_ref,
+            origin_locus_template,
+            target_owner_locus_template,
+            declared_failure_row,
+            effect_row,
+            authority_requirement_rows,
+            occurrence_slots,
+            frontiers,
+            linked_request_identity,
+            typed_outcome,
+            evaluator_receipt_consumption,
+            reference_only_redaction,
+            checked_core_bound,
+            transfers_authority,
+            mints_authority_without_source,
+            variant,
+        } = facts;
+
+        let Some(edge_core_ref) = edge.core_ref() else {
+            return Err(Sys5I3ProbeFacadeError::new(
+                Sys5I3ProbeFacadeErrorKind::CarrierContractMismatch,
+            ));
+        };
+        let expected_checked_program_ref = checked_program_identity_ref(
+            &edge
+                .checked_core_identity()
+                .checked_program_identity()
+                .stable_key(),
+        );
+        if edge_kind != edge.kind()
+            || lifecycle_kind != i3_adapter_expected_lifecycle_kind(family)
+            || operation_id != edge.operation_id()
+            || core_ref.as_deref() != Some(edge_core_ref)
+            || edge.source_ref() != source_ref
+            || expected_checked_program_ref != self.checked_program_identity_ref()
+            || !reference_only_redaction
+            || !checked_core_bound
+            || transfers_authority
+            || mints_authority_without_source
+        {
+            return Err(Sys5I3ProbeFacadeError::new(
+                Sys5I3ProbeFacadeErrorKind::CarrierContractMismatch,
+            ));
+        }
+
+        let variant_facts = i3_adapter_variant_facts(I3AdapterVariantProjectionInput {
+            family,
+            variant,
+            dependency_ordinal: edge.checked_core_identity().dependency_ordinal(),
+            frontiers: &frontiers,
+            origin_locus_template: origin_locus_template.as_deref(),
+            target_owner_locus_template: target_owner_locus_template.as_deref(),
+            edge_source_locus: edge.source_locus(),
+            edge_target_locus: edge.target_locus(),
+            operation_id: &operation_id,
+        })?;
+        let mut snapshot = Sys5I3AdapterCarrierContract {
+            checked_program_ref: expected_checked_program_ref,
+            operation_id,
+            edge_kind: edge_kind_name(edge_kind).to_string(),
+            lifecycle_kind: carrier_lifecycle_kind_name(lifecycle_kind).to_string(),
+            source_locus: edge.source_locus().to_string(),
+            target_locus: edge.target_locus().to_string(),
+            logical_source_path: source_ref.path.clone(),
+            source_span: summary_source_span(&source_ref),
+            source_ref: observer_source_ref(&source_ref),
+            core_ref: edge_core_ref.to_string(),
+            source_artifact_ref: edge.source_fragment_ref().clone(),
+            target_artifact_ref: edge.target_fragment_ref().clone(),
+            edge_ref: edge.edge_ref().to_string(),
+            declared_failure_names: declared_failure_row.names(),
+            effect_kind_names: effect_row
+                .kinds()
+                .into_iter()
+                .map(effect_kind_name)
+                .map(str::to_string)
+                .collect(),
+            required_occurrence_slot_names: occurrence_slots
+                .into_iter()
+                .map(carrier_occurrence_slot_name)
+                .map(str::to_string)
+                .collect(),
+            linked_request_identity,
+            typed_outcome,
+            receipt_consumption: evaluator_receipt_consumption,
+            authority_requirements: i3_adapter_authority_requirements(&authority_requirement_rows),
+            redaction: Sys5I3ProbeRedaction::ReferenceOnly,
+            checked_core_bound,
+            transfers_authority,
+            mints_authority_without_source,
+            variant_facts,
+            full_retained_contract_fingerprint: String::new(),
+            full_retained_contract_fingerprint_field_names: Vec::new(),
+        };
+        let visitor = i3_adapter_full_retained_contract_fingerprint_visitor(&snapshot);
+        snapshot.full_retained_contract_fingerprint_field_names = visitor.field_names().to_vec();
+        snapshot.full_retained_contract_fingerprint = visitor.finish();
         Ok(snapshot)
     }
 
@@ -7380,6 +8460,912 @@ fn i3_probe_owner_principal_ref(origin_principal_template: &str) -> String {
     )
 }
 
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+enum I3AdapterCarrierFamily {
+    OwnerRequest,
+    OwnerReplyReceipt,
+    DesignatedInputRequest,
+    DesignatedInputReceipt,
+    RelationProjectionPublication,
+    DesignatedResultDelivery,
+}
+
+fn i3_adapter_carrier_family_for_edge_kind(
+    kind: CommunicationEdgeKind,
+) -> Result<I3AdapterCarrierFamily, Sys5I3ProbeFacadeError> {
+    match kind {
+        CommunicationEdgeKind::OwnerRequest => Ok(I3AdapterCarrierFamily::OwnerRequest),
+        CommunicationEdgeKind::OwnerReplyReceipt => Ok(I3AdapterCarrierFamily::OwnerReplyReceipt),
+        CommunicationEdgeKind::DesignatedInputRequest => {
+            Ok(I3AdapterCarrierFamily::DesignatedInputRequest)
+        }
+        CommunicationEdgeKind::DesignatedInputReceipt => {
+            Ok(I3AdapterCarrierFamily::DesignatedInputReceipt)
+        }
+        CommunicationEdgeKind::RelationProjectionPublication => {
+            Ok(I3AdapterCarrierFamily::RelationProjectionPublication)
+        }
+        CommunicationEdgeKind::DesignatedResultDelivery => {
+            Ok(I3AdapterCarrierFamily::DesignatedResultDelivery)
+        }
+        CommunicationEdgeKind::AbsoluteValueStream => Err(Sys5I3ProbeFacadeError::new(
+            Sys5I3ProbeFacadeErrorKind::NotAcceptedCarrierFamily,
+        )),
+    }
+}
+
+fn i3_adapter_expected_lifecycle_kind(family: I3AdapterCarrierFamily) -> CarrierLifecycleKind {
+    match family {
+        I3AdapterCarrierFamily::OwnerRequest => CarrierLifecycleKind::OwnerRequest,
+        I3AdapterCarrierFamily::OwnerReplyReceipt => CarrierLifecycleKind::OwnerReplyReceipt,
+        I3AdapterCarrierFamily::DesignatedInputRequest => {
+            CarrierLifecycleKind::DesignatedInputRequest
+        }
+        I3AdapterCarrierFamily::DesignatedInputReceipt => {
+            CarrierLifecycleKind::DesignatedInputReceipt
+        }
+        I3AdapterCarrierFamily::RelationProjectionPublication => {
+            CarrierLifecycleKind::RelationProjectionPublication
+        }
+        I3AdapterCarrierFamily::DesignatedResultDelivery => {
+            CarrierLifecycleKind::DesignatedResultDelivery
+        }
+    }
+}
+
+struct I3AdapterVariantProjectionInput<'a> {
+    family: I3AdapterCarrierFamily,
+    variant: I3AdapterCarrierStaticVariant,
+    dependency_ordinal: Option<usize>,
+    frontiers: &'a BTreeSet<CarrierFrontierKind>,
+    origin_locus_template: Option<&'a str>,
+    target_owner_locus_template: Option<&'a str>,
+    edge_source_locus: &'a str,
+    edge_target_locus: &'a str,
+    operation_id: &'a str,
+}
+
+fn i3_adapter_variant_facts(
+    input: I3AdapterVariantProjectionInput<'_>,
+) -> Result<Sys5I3AdapterCarrierVariantFacts, Sys5I3ProbeFacadeError> {
+    let I3AdapterVariantProjectionInput {
+        family,
+        variant,
+        dependency_ordinal,
+        frontiers,
+        origin_locus_template,
+        target_owner_locus_template,
+        edge_source_locus,
+        edge_target_locus,
+        operation_id,
+    } = input;
+    let mismatch =
+        || Sys5I3ProbeFacadeError::new(Sys5I3ProbeFacadeErrorKind::CarrierContractMismatch);
+    match family {
+        I3AdapterCarrierFamily::OwnerRequest => {
+            let I3AdapterCarrierStaticVariant::OwnerRequest {
+                origin_principal_template,
+            } = variant
+            else {
+                return Err(mismatch());
+            };
+            let (Some(origin_locus_template), Some(target_owner_locus_template)) =
+                (origin_locus_template, target_owner_locus_template)
+            else {
+                return Err(mismatch());
+            };
+            if !frontiers.is_empty()
+                || origin_locus_template != edge_source_locus
+                || target_owner_locus_template != edge_target_locus
+            {
+                return Err(mismatch());
+            }
+            Ok(Sys5I3AdapterCarrierVariantFacts::OwnerRequest(
+                Sys5I3AdapterOwnerFacts {
+                    origin_principal_ref: i3_adapter_owner_principal_ref(
+                        &origin_principal_template,
+                    ),
+                    origin_locus_template: origin_locus_template.to_string(),
+                    target_owner_locus_template: target_owner_locus_template.to_string(),
+                },
+            ))
+        }
+        I3AdapterCarrierFamily::OwnerReplyReceipt => {
+            let I3AdapterCarrierStaticVariant::OwnerReplyReceipt {
+                origin_principal_template,
+            } = variant
+            else {
+                return Err(mismatch());
+            };
+            let (Some(origin_locus_template), Some(target_owner_locus_template)) =
+                (origin_locus_template, target_owner_locus_template)
+            else {
+                return Err(mismatch());
+            };
+            if !frontiers.is_empty()
+                || origin_locus_template != edge_target_locus
+                || target_owner_locus_template != edge_source_locus
+            {
+                return Err(mismatch());
+            }
+            Ok(Sys5I3AdapterCarrierVariantFacts::OwnerReplyReceipt(
+                Sys5I3AdapterOwnerFacts {
+                    origin_principal_ref: i3_adapter_owner_principal_ref(
+                        &origin_principal_template,
+                    ),
+                    origin_locus_template: origin_locus_template.to_string(),
+                    target_owner_locus_template: target_owner_locus_template.to_string(),
+                },
+            ))
+        }
+        I3AdapterCarrierFamily::DesignatedInputRequest => {
+            let I3AdapterCarrierStaticVariant::DesignatedInputRequest { dependency } = variant
+            else {
+                return Err(mismatch());
+            };
+            if frontiers != &BTreeSet::from([CarrierFrontierKind::Input])
+                || origin_locus_template != Some(edge_source_locus)
+                || target_owner_locus_template != Some(edge_target_locus)
+            {
+                return Err(mismatch());
+            }
+            let ordinal = dependency_ordinal.ok_or_else(mismatch)?;
+            if dependency.designated_evaluator() != edge_source_locus
+                || dependency.source_owner_locus() != edge_target_locus
+            {
+                return Err(mismatch());
+            }
+            Ok(Sys5I3AdapterCarrierVariantFacts::DesignatedInputRequest(
+                i3_adapter_designated_input_facts(&dependency, ordinal, frontiers)?,
+            ))
+        }
+        I3AdapterCarrierFamily::DesignatedInputReceipt => {
+            let I3AdapterCarrierStaticVariant::DesignatedInputReceipt { dependency } = variant
+            else {
+                return Err(mismatch());
+            };
+            if frontiers != &BTreeSet::from([CarrierFrontierKind::Result])
+                || origin_locus_template != Some(edge_target_locus)
+                || target_owner_locus_template != Some(edge_source_locus)
+            {
+                return Err(mismatch());
+            }
+            let ordinal = dependency_ordinal.ok_or_else(mismatch)?;
+            if dependency.designated_evaluator() != edge_target_locus
+                || dependency.source_owner_locus() != edge_source_locus
+            {
+                return Err(mismatch());
+            }
+            Ok(Sys5I3AdapterCarrierVariantFacts::DesignatedInputReceipt(
+                i3_adapter_designated_input_facts(&dependency, ordinal, frontiers)?,
+            ))
+        }
+        I3AdapterCarrierFamily::RelationProjectionPublication => {
+            let I3AdapterCarrierStaticVariant::RelationProjectionPublication = variant else {
+                return Err(mismatch());
+            };
+            if !frontiers.is_empty()
+                || origin_locus_template != Some(edge_source_locus)
+                || target_owner_locus_template != Some(edge_target_locus)
+            {
+                return Err(mismatch());
+            }
+            Ok(
+                Sys5I3AdapterCarrierVariantFacts::RelationProjectionPublication(
+                    Sys5I3AdapterRelationPublicationFacts {
+                        relation_name: operation_id.to_string(),
+                        publication_locus: edge_source_locus.to_string(),
+                        consumer_locus: edge_target_locus.to_string(),
+                    },
+                ),
+            )
+        }
+        I3AdapterCarrierFamily::DesignatedResultDelivery => {
+            let I3AdapterCarrierStaticVariant::DesignatedResultDelivery {
+                result_version,
+                input_frontier,
+                result_frontier,
+                observation_policy,
+                policy_stamp,
+                retry_contract,
+            } = variant
+            else {
+                return Err(mismatch());
+            };
+            if frontiers
+                != &BTreeSet::from([CarrierFrontierKind::Input, CarrierFrontierKind::Result])
+                || origin_locus_template != Some(edge_source_locus)
+                || target_owner_locus_template != Some(edge_target_locus)
+            {
+                return Err(mismatch());
+            }
+            Ok(Sys5I3AdapterCarrierVariantFacts::DesignatedResultDelivery(
+                Sys5I3AdapterDesignatedResultFacts {
+                    evaluator_locus: edge_source_locus.to_string(),
+                    consumer_locus: edge_target_locus.to_string(),
+                    result_version_ref: i3_adapter_result_version_ref(result_version),
+                    input_frontier_ref: i3_adapter_input_frontier_ref(&input_frontier),
+                    result_frontier_ref: i3_adapter_result_frontier_ref(&result_frontier),
+                    observation_policy_ref: i3_adapter_observation_policy_ref(&observation_policy),
+                    policy_stamp_ref: i3_adapter_policy_stamp_ref(&policy_stamp),
+                    static_retry_contract_name: i3_adapter_static_retry_contract_name(
+                        retry_contract,
+                    )
+                    .to_string(),
+                },
+            ))
+        }
+    }
+}
+
+fn i3_adapter_designated_input_facts(
+    dependency: &StaticProjectionFacts,
+    dependency_ordinal: usize,
+    frontiers: &BTreeSet<CarrierFrontierKind>,
+) -> Result<Sys5I3AdapterDesignatedInputFacts, Sys5I3ProbeFacadeError> {
+    if !i3_adapter_validates_designated_dependency(dependency) {
+        return Err(Sys5I3ProbeFacadeError::new(
+            Sys5I3ProbeFacadeErrorKind::CarrierContractMismatch,
+        ));
+    }
+    Ok(Sys5I3AdapterDesignatedInputFacts {
+        dependency_ordinal,
+        typed_state_read_ref: i3_adapter_typed_state_read_ref(dependency.typed_state_read()),
+        requester_site_ref: i3_adapter_requester_site_ref(dependency.requester_site()),
+        authority_origin_ref: i3_adapter_authority_origin_ref(dependency.authority_origin()),
+        request_ref: i3_adapter_designated_request_ref(dependency.request()),
+        receipt_use_ref: i3_adapter_designated_receipt_use_ref(dependency.receipt_use()),
+        designated_evaluator_locus: dependency.designated_evaluator().to_string(),
+        source_owner_locus: dependency.source_owner_locus().to_string(),
+        frontier_requirement_names: i3_adapter_frontier_names(frontiers),
+    })
+}
+
+fn i3_adapter_validates_designated_dependency(dependency: &StaticProjectionFacts) -> bool {
+    if dependency.request().source_owner_locus() != dependency.source_owner_locus()
+        || dependency.receipt_use().source_owner_locus() != dependency.source_owner_locus()
+        || dependency.request().typed_state_read() != dependency.typed_state_read()
+        || dependency.receipt_use().typed_state_read() != dependency.typed_state_read()
+    {
+        return false;
+    }
+    i3_adapter_requester_site_matches_evaluator(
+        dependency.requester_site(),
+        dependency.designated_evaluator(),
+    ) && i3_adapter_authority_origin_matches_evaluator(
+        dependency.authority_origin(),
+        dependency.designated_evaluator(),
+    )
+}
+
+fn i3_adapter_requester_site_matches_evaluator(
+    site: &mir_semantics::evaluation_materialization::EvaluationSite,
+    designated_evaluator: &str,
+) -> bool {
+    match site {
+        mir_semantics::evaluation_materialization::EvaluationSite::Owner(_) => false,
+        mir_semantics::evaluation_materialization::EvaluationSite::Locus(_) => false,
+        mir_semantics::evaluation_materialization::EvaluationSite::DesignatedEvaluator(locus) => {
+            locus.as_str() == designated_evaluator
+        }
+        mir_semantics::evaluation_materialization::EvaluationSite::Consumer(_) => false,
+        mir_semantics::evaluation_materialization::EvaluationSite::Provider(_) => false,
+    }
+}
+
+fn i3_adapter_authority_origin_matches_evaluator(
+    origin: &mir_semantics::evaluation_materialization::AuthorityOrigin,
+    designated_evaluator: &str,
+) -> bool {
+    match origin {
+        mir_semantics::evaluation_materialization::AuthorityOrigin::Caller(_) => false,
+        mir_semantics::evaluation_materialization::AuthorityOrigin::OwnerTransition(_) => false,
+        mir_semantics::evaluation_materialization::AuthorityOrigin::AdmittedEvaluator(locus) => {
+            locus.as_str() == designated_evaluator
+        }
+        mir_semantics::evaluation_materialization::AuthorityOrigin::AdmittedProvider(_) => false,
+    }
+}
+
+fn i3_adapter_frontier_names(frontiers: &BTreeSet<CarrierFrontierKind>) -> Vec<String> {
+    frontiers
+        .iter()
+        .copied()
+        .map(carrier_frontier_kind_name)
+        .map(str::to_string)
+        .collect()
+}
+
+fn i3_adapter_owner_principal_ref(origin_principal_template: &str) -> String {
+    i3_adapter_opaque_reference(
+        I3_ADAPTER_OWNER_PRINCIPAL_REF_DOMAIN,
+        "sys5-i3-adapter-owner-principal-sha256-v1:",
+        [(
+            "origin-principal-template",
+            origin_principal_template.as_bytes(),
+        )],
+    )
+}
+
+fn i3_adapter_typed_state_read_ref(read: &StaticProjectionTypedStateReadFacts) -> String {
+    let mut hasher = Sha256::new();
+    hasher.update(I3_ADAPTER_DESIGNATED_READ_REF_DOMAIN);
+    i3_adapter_digest_typed_state_read(&mut hasher, read);
+    format!(
+        "sys5-i3-adapter-designated-read-sha256-v1:{:x}",
+        hasher.finalize()
+    )
+}
+
+fn i3_adapter_requester_site_ref(
+    site: &mir_semantics::evaluation_materialization::EvaluationSite,
+) -> String {
+    let (kind, value) = match site {
+        mir_semantics::evaluation_materialization::EvaluationSite::Owner(locus) => {
+            ("Owner", locus.as_str())
+        }
+        mir_semantics::evaluation_materialization::EvaluationSite::Locus(locus) => {
+            ("Locus", locus.as_str())
+        }
+        mir_semantics::evaluation_materialization::EvaluationSite::DesignatedEvaluator(locus) => {
+            ("DesignatedEvaluator", locus.as_str())
+        }
+        mir_semantics::evaluation_materialization::EvaluationSite::Consumer(principal) => {
+            ("Consumer", principal.as_str())
+        }
+        mir_semantics::evaluation_materialization::EvaluationSite::Provider(provider) => {
+            ("Provider", provider.as_str())
+        }
+    };
+    i3_adapter_opaque_reference(
+        I3_ADAPTER_REQUESTER_SITE_REF_DOMAIN,
+        "sys5-i3-adapter-designated-requester-site-sha256-v1:",
+        [
+            ("site-kind", kind.as_bytes()),
+            ("site-value", value.as_bytes()),
+        ],
+    )
+}
+
+fn i3_adapter_authority_origin_ref(
+    origin: &mir_semantics::evaluation_materialization::AuthorityOrigin,
+) -> String {
+    let (kind, value) = match origin {
+        mir_semantics::evaluation_materialization::AuthorityOrigin::Caller(principal) => {
+            ("Caller", principal.as_str())
+        }
+        mir_semantics::evaluation_materialization::AuthorityOrigin::OwnerTransition(locus) => {
+            ("OwnerTransition", locus.as_str())
+        }
+        mir_semantics::evaluation_materialization::AuthorityOrigin::AdmittedEvaluator(locus) => {
+            ("AdmittedEvaluator", locus.as_str())
+        }
+        mir_semantics::evaluation_materialization::AuthorityOrigin::AdmittedProvider(provider) => {
+            ("AdmittedProvider", provider.as_str())
+        }
+    };
+    i3_adapter_opaque_reference(
+        I3_ADAPTER_AUTHORITY_ORIGIN_REF_DOMAIN,
+        "sys5-i3-adapter-designated-authority-origin-sha256-v1:",
+        [
+            ("authority-origin-kind", kind.as_bytes()),
+            ("authority-origin-value", value.as_bytes()),
+        ],
+    )
+}
+
+fn i3_adapter_designated_request_ref(
+    request: &StaticProjectionDesignatedInputRequestFacts,
+) -> String {
+    let mut hasher = Sha256::new();
+    hasher.update(I3_ADAPTER_DESIGNATED_REQUEST_REF_DOMAIN);
+    i3_adapter_digest_text(
+        &mut hasher,
+        b"request-source-owner-locus",
+        request.source_owner_locus(),
+    );
+    i3_adapter_digest_typed_state_read(&mut hasher, request.typed_state_read());
+    format!(
+        "sys5-i3-adapter-designated-request-sha256-v1:{:x}",
+        hasher.finalize()
+    )
+}
+
+fn i3_adapter_designated_receipt_use_ref(
+    receipt_use: &StaticProjectionDesignatedInputReceiptUseFacts,
+) -> String {
+    let mut hasher = Sha256::new();
+    hasher.update(I3_ADAPTER_DESIGNATED_RECEIPT_USE_REF_DOMAIN);
+    i3_adapter_digest_text(
+        &mut hasher,
+        b"receipt-use-source-owner-locus",
+        receipt_use.source_owner_locus(),
+    );
+    i3_adapter_digest_typed_state_read(&mut hasher, receipt_use.typed_state_read());
+    format!(
+        "sys5-i3-adapter-designated-receipt-use-sha256-v1:{:x}",
+        hasher.finalize()
+    )
+}
+
+fn i3_adapter_digest_typed_state_read(
+    hasher: &mut Sha256,
+    read: &StaticProjectionTypedStateReadFacts,
+) {
+    i3_adapter_digest_text(hasher, b"typed-state-read-namespace", read.namespace());
+    match read.index() {
+        Some(index) => {
+            i3_adapter_digest_field(hasher, b"typed-state-read-index-present", &[1]);
+            i3_adapter_digest_text(hasher, b"typed-state-read-index", index);
+        }
+        None => i3_adapter_digest_field(hasher, b"typed-state-read-index-present", &[0]),
+    }
+    match read.field() {
+        Some(field) => {
+            i3_adapter_digest_field(hasher, b"typed-state-read-field-present", &[1]);
+            i3_adapter_digest_text(hasher, b"typed-state-read-field", field);
+        }
+        None => i3_adapter_digest_field(hasher, b"typed-state-read-field-present", &[0]),
+    }
+    i3_adapter_digest_text(hasher, b"typed-state-read-owner-locus", read.owner_locus());
+    i3_adapter_digest_text(hasher, b"typed-state-read-value-type", read.value_type());
+    let source_ref = read.source_ref();
+    i3_adapter_digest_text(hasher, b"typed-state-read-source-path", &source_ref.path);
+    i3_adapter_digest_u64(
+        hasher,
+        b"typed-state-read-source-start-line",
+        u64::from(source_ref.start_line),
+    );
+    i3_adapter_digest_u64(
+        hasher,
+        b"typed-state-read-source-start-column",
+        u64::from(source_ref.start_column),
+    );
+    i3_adapter_digest_u64(
+        hasher,
+        b"typed-state-read-source-end-line",
+        u64::from(source_ref.end_line),
+    );
+    i3_adapter_digest_u64(
+        hasher,
+        b"typed-state-read-source-end-column",
+        u64::from(source_ref.end_column),
+    );
+}
+
+fn i3_adapter_result_version_ref(
+    result_version: mir_semantics::shared_model::ResultVersion,
+) -> String {
+    i3_adapter_opaque_reference(
+        I3_ADAPTER_RESULT_VERSION_REF_DOMAIN,
+        "sys5-i3-adapter-result-version-sha256-v1:",
+        [("result-version", &result_version.value().to_be_bytes())],
+    )
+}
+
+fn i3_adapter_input_frontier_ref(
+    input_frontier: &mir_semantics::evaluation_materialization::InputFrontier,
+) -> String {
+    let mut hasher = Sha256::new();
+    hasher.update(I3_ADAPTER_INPUT_FRONTIER_REF_DOMAIN);
+    i3_adapter_digest_u64(
+        &mut hasher,
+        b"producer-count",
+        u64::try_from(input_frontier.as_slice().len())
+            .expect("finite I3 adapter input frontier count fits u64"),
+    );
+    for occurrence in input_frontier.as_slice() {
+        i3_adapter_digest_text(&mut hasher, b"producer", occurrence.as_str());
+    }
+    format!(
+        "sys5-i3-adapter-input-frontier-sha256-v1:{:x}",
+        hasher.finalize()
+    )
+}
+
+fn i3_adapter_result_frontier_ref(
+    result_frontier: &mir_semantics::shared_model::ResultFrontier,
+) -> String {
+    let mut hasher = Sha256::new();
+    hasher.update(I3_ADAPTER_RESULT_FRONTIER_REF_DOMAIN);
+    i3_adapter_digest_u64(
+        &mut hasher,
+        b"result-count",
+        u64::try_from(result_frontier.as_slice().len())
+            .expect("finite I3 adapter result frontier count fits u64"),
+    );
+    for result in result_frontier.as_slice() {
+        i3_adapter_digest_text(&mut hasher, b"result", result.as_str());
+    }
+    format!(
+        "sys5-i3-adapter-result-frontier-sha256-v1:{:x}",
+        hasher.finalize()
+    )
+}
+
+fn i3_adapter_observation_policy_ref(
+    observation_policy: &mir_semantics::evaluation_materialization::ObservationPolicy,
+) -> String {
+    i3_adapter_opaque_reference(
+        I3_ADAPTER_OBSERVATION_POLICY_REF_DOMAIN,
+        "sys5-i3-adapter-observation-policy-sha256-v1:",
+        [(
+            "observation-policy-name",
+            observation_policy.name.as_bytes(),
+        )],
+    )
+}
+
+fn i3_adapter_policy_stamp_ref(
+    policy_stamp: &mir_semantics::evaluation_materialization::PolicyStamp,
+) -> String {
+    i3_adapter_opaque_reference(
+        I3_ADAPTER_POLICY_STAMP_REF_DOMAIN,
+        "sys5-i3-adapter-policy-stamp-sha256-v1:",
+        [
+            (
+                "evaluation-policy-name",
+                policy_stamp.evaluation_policy.name.as_bytes(),
+            ),
+            (
+                "evaluation-policy-deterministic",
+                &[u8::from(policy_stamp.evaluation_policy.deterministic)],
+            ),
+            (
+                "observation-policy-name",
+                policy_stamp.observation_policy.name.as_bytes(),
+            ),
+        ],
+    )
+}
+
+fn i3_adapter_static_retry_contract_name(
+    retry_contract: mir_semantics::surface_v0_pipeline::StaticRetryContractKind,
+) -> &'static str {
+    match retry_contract {
+        mir_semantics::surface_v0_pipeline::StaticRetryContractKind::ReturnExistingNoNewConsumption => {
+            "ReturnExistingNoNewConsumption"
+        }
+    }
+}
+
+fn i3_adapter_opaque_reference<const N: usize>(
+    domain: &[u8],
+    prefix: &str,
+    fields: [(&str, &[u8]); N],
+) -> String {
+    let mut hasher = Sha256::new();
+    hasher.update(domain);
+    for (name, value) in fields {
+        i3_adapter_digest_field(&mut hasher, name.as_bytes(), value);
+    }
+    format!("{prefix}{:x}", hasher.finalize())
+}
+
+fn i3_adapter_digest_text(hasher: &mut Sha256, tag: &[u8], value: &str) {
+    i3_adapter_digest_field(hasher, tag, value.as_bytes());
+}
+
+fn i3_adapter_digest_u64(hasher: &mut Sha256, tag: &[u8], value: u64) {
+    i3_adapter_digest_field(hasher, tag, &value.to_be_bytes());
+}
+
+fn i3_adapter_digest_field(hasher: &mut Sha256, tag: &[u8], bytes: &[u8]) {
+    hasher.update(
+        u64::try_from(tag.len())
+            .expect("finite I3 adapter field tag length fits u64")
+            .to_be_bytes(),
+    );
+    hasher.update(tag);
+    hasher.update(
+        u64::try_from(bytes.len())
+            .expect("finite I3 adapter field length fits u64")
+            .to_be_bytes(),
+    );
+    hasher.update(bytes);
+}
+
+fn i3_adapter_append_text_frame(bytes: &mut Vec<u8>, value: &str) {
+    bytes.extend(
+        u64::try_from(value.len())
+            .expect("finite I3 adapter fingerprint text length fits u64")
+            .to_be_bytes(),
+    );
+    bytes.extend(value.as_bytes());
+}
+
+fn i3_adapter_append_optional_text_frame(bytes: &mut Vec<u8>, value: Option<&str>) {
+    match value {
+        Some(value) => {
+            bytes.push(1);
+            i3_adapter_append_text_frame(bytes, value);
+        }
+        None => bytes.push(0),
+    }
+}
+
+struct I3AdapterFullRetainedContractFingerprintVisitor {
+    fields: Vec<(String, Vec<u8>)>,
+}
+
+impl I3AdapterFullRetainedContractFingerprintVisitor {
+    fn field_names(&self) -> Vec<String> {
+        self.fields.iter().map(|(name, _)| name.clone()).collect()
+    }
+
+    fn finish(&self) -> String {
+        let mut hasher = Sha256::new();
+        hasher.update(I3_ADAPTER_FULL_CONTRACT_FINGERPRINT_DOMAIN);
+        for (name, value) in &self.fields {
+            i3_adapter_digest_field(&mut hasher, name.as_bytes(), value);
+        }
+        format!(
+            "sys5-i3-adapter-carrier-contract-sha256-v1:{:x}",
+            hasher.finalize()
+        )
+    }
+
+    fn push_text(&mut self, name: &str, value: &str) {
+        self.fields
+            .push((name.to_string(), value.as_bytes().to_vec()));
+    }
+
+    fn push_bool(&mut self, name: &str, value: bool) {
+        self.fields.push((name.to_string(), vec![u8::from(value)]));
+    }
+
+    fn push_texts(&mut self, name: &str, values: &[String]) {
+        let mut bytes = Vec::new();
+        bytes.extend(
+            u64::try_from(values.len())
+                .expect("finite I3 adapter fingerprint row count fits u64")
+                .to_be_bytes(),
+        );
+        for value in values {
+            bytes.extend(
+                u64::try_from(value.len())
+                    .expect("finite I3 adapter fingerprint text length fits u64")
+                    .to_be_bytes(),
+            );
+            bytes.extend(value.as_bytes());
+        }
+        self.fields.push((name.to_string(), bytes));
+    }
+
+    fn push_authority_requirement_rows(
+        &mut self,
+        name: &str,
+        rows: &[Sys5I3AdapterAuthorityRequirementRow],
+    ) {
+        let mut bytes = Vec::new();
+        bytes.extend(
+            u64::try_from(rows.len())
+                .expect("finite I3 adapter authority row count fits u64")
+                .to_be_bytes(),
+        );
+        for row in rows {
+            let Sys5I3AdapterAuthorityRequirementRow {
+                requirement_kind_name,
+                generated_obligation_present,
+                generated_obligation_kind_name,
+                generated_obligation_detail_name,
+                provenance_name,
+                authority_category_name,
+            } = row;
+            i3_adapter_append_text_frame(&mut bytes, requirement_kind_name);
+            bytes.push(u8::from(*generated_obligation_present));
+            i3_adapter_append_optional_text_frame(
+                &mut bytes,
+                generated_obligation_kind_name.as_deref(),
+            );
+            i3_adapter_append_optional_text_frame(
+                &mut bytes,
+                generated_obligation_detail_name.as_deref(),
+            );
+            i3_adapter_append_text_frame(&mut bytes, provenance_name);
+            i3_adapter_append_optional_text_frame(&mut bytes, authority_category_name.as_deref());
+        }
+        self.fields.push((name.to_string(), bytes));
+    }
+}
+
+fn i3_adapter_visit_owner_facts(
+    visitor: &mut I3AdapterFullRetainedContractFingerprintVisitor,
+    facts: &Sys5I3AdapterOwnerFacts,
+) {
+    let Sys5I3AdapterOwnerFacts {
+        origin_principal_ref,
+        origin_locus_template,
+        target_owner_locus_template,
+    } = facts;
+    visitor.push_text("origin-principal-ref", origin_principal_ref);
+    visitor.push_text("origin-locus-template", origin_locus_template);
+    visitor.push_text("target-owner-locus-template", target_owner_locus_template);
+}
+
+fn i3_adapter_visit_designated_input_facts(
+    visitor: &mut I3AdapterFullRetainedContractFingerprintVisitor,
+    facts: &Sys5I3AdapterDesignatedInputFacts,
+) {
+    let Sys5I3AdapterDesignatedInputFacts {
+        dependency_ordinal,
+        typed_state_read_ref,
+        requester_site_ref,
+        authority_origin_ref,
+        request_ref,
+        receipt_use_ref,
+        designated_evaluator_locus,
+        source_owner_locus,
+        frontier_requirement_names,
+    } = facts;
+    visitor.push_text("dependency-ordinal", &dependency_ordinal.to_string());
+    visitor.push_text("typed-state-read-ref", typed_state_read_ref);
+    visitor.push_text("requester-site-ref", requester_site_ref);
+    visitor.push_text("authority-origin-ref", authority_origin_ref);
+    visitor.push_text("request-ref", request_ref);
+    visitor.push_text("receipt-use-ref", receipt_use_ref);
+    visitor.push_text("designated-evaluator-locus", designated_evaluator_locus);
+    visitor.push_text("source-owner-locus", source_owner_locus);
+    visitor.push_texts("frontier-requirement-names", frontier_requirement_names);
+}
+
+fn i3_adapter_full_retained_contract_fingerprint_visitor(
+    contract: &Sys5I3AdapterCarrierContract,
+) -> I3AdapterFullRetainedContractFingerprintVisitor {
+    let Sys5I3AdapterCarrierContract {
+        checked_program_ref,
+        operation_id,
+        edge_kind,
+        lifecycle_kind,
+        source_locus,
+        target_locus,
+        logical_source_path,
+        source_span,
+        source_ref,
+        core_ref,
+        source_artifact_ref,
+        target_artifact_ref,
+        edge_ref,
+        declared_failure_names,
+        effect_kind_names,
+        required_occurrence_slot_names,
+        linked_request_identity,
+        typed_outcome,
+        receipt_consumption,
+        authority_requirements,
+        redaction,
+        checked_core_bound,
+        transfers_authority,
+        mints_authority_without_source,
+        variant_facts,
+        full_retained_contract_fingerprint: _,
+        full_retained_contract_fingerprint_field_names: _,
+    } = contract;
+    let Sys5I3AdapterAuthorityRequirements {
+        rows,
+        category_names,
+        requires_membership_epoch_and_incarnation,
+        requires_capability_and_witness_refs,
+    } = authority_requirements;
+    let mut visitor = I3AdapterFullRetainedContractFingerprintVisitor { fields: Vec::new() };
+    visitor.push_text(
+        "variant-discriminant",
+        i3_adapter_variant_discriminant(variant_facts),
+    );
+    visitor.push_text("checked-program-ref", checked_program_ref);
+    visitor.push_text("operation-id", operation_id);
+    visitor.push_text("edge-kind", edge_kind);
+    visitor.push_text("lifecycle-kind", lifecycle_kind);
+    visitor.push_text("source-locus", source_locus);
+    visitor.push_text("target-locus", target_locus);
+    visitor.push_text("logical-source-path", logical_source_path);
+    visitor.push_text("source-span", &i3_adapter_source_span_text(*source_span));
+    visitor.push_text("source-ref", source_ref);
+    visitor.push_text("core-ref", core_ref);
+    visitor.push_text("source-artifact-ref", source_artifact_ref);
+    visitor.push_text("target-artifact-ref", target_artifact_ref);
+    visitor.push_text("edge-ref", edge_ref);
+    visitor.push_texts("declared-failure-names", declared_failure_names);
+    visitor.push_texts("effect-kind-names", effect_kind_names);
+    visitor.push_texts(
+        "required-occurrence-slot-names",
+        required_occurrence_slot_names,
+    );
+    visitor.push_bool("requires-linked-request-identity", *linked_request_identity);
+    visitor.push_bool("requires-typed-outcome", *typed_outcome);
+    visitor.push_bool("requires-receipt-consumption-state", *receipt_consumption);
+    visitor.push_texts("authority-category-names", category_names);
+    visitor.push_authority_requirement_rows("authority-requirement-rows", rows);
+    visitor.push_bool(
+        "requires-membership-epoch-and-incarnation",
+        *requires_membership_epoch_and_incarnation,
+    );
+    visitor.push_bool(
+        "requires-capability-and-witness-refs",
+        *requires_capability_and_witness_refs,
+    );
+    visitor.push_text(
+        "redaction",
+        match redaction {
+            Sys5I3ProbeRedaction::ReferenceOnly => "ReferenceOnly",
+        },
+    );
+    visitor.push_bool("checked-core-bound", *checked_core_bound);
+    visitor.push_bool("transfers-authority", *transfers_authority);
+    visitor.push_bool(
+        "mints-authority-without-source",
+        *mints_authority_without_source,
+    );
+    visitor.push_bool("public-api-or-wire-contract", false);
+    match variant_facts {
+        Sys5I3AdapterCarrierVariantFacts::OwnerRequest(facts) => {
+            i3_adapter_visit_owner_facts(&mut visitor, facts);
+        }
+        Sys5I3AdapterCarrierVariantFacts::OwnerReplyReceipt(facts) => {
+            i3_adapter_visit_owner_facts(&mut visitor, facts);
+        }
+        Sys5I3AdapterCarrierVariantFacts::DesignatedInputRequest(facts) => {
+            i3_adapter_visit_designated_input_facts(&mut visitor, facts);
+        }
+        Sys5I3AdapterCarrierVariantFacts::DesignatedInputReceipt(facts) => {
+            i3_adapter_visit_designated_input_facts(&mut visitor, facts);
+        }
+        Sys5I3AdapterCarrierVariantFacts::RelationProjectionPublication(facts) => {
+            let Sys5I3AdapterRelationPublicationFacts {
+                relation_name,
+                publication_locus,
+                consumer_locus,
+            } = facts;
+            visitor.push_text("relation-name", relation_name);
+            visitor.push_text("publication-locus", publication_locus);
+            visitor.push_text("consumer-locus", consumer_locus);
+        }
+        Sys5I3AdapterCarrierVariantFacts::DesignatedResultDelivery(facts) => {
+            let Sys5I3AdapterDesignatedResultFacts {
+                evaluator_locus,
+                consumer_locus,
+                result_version_ref,
+                input_frontier_ref,
+                result_frontier_ref,
+                observation_policy_ref,
+                policy_stamp_ref,
+                static_retry_contract_name,
+            } = facts;
+            visitor.push_text("evaluator-locus", evaluator_locus);
+            visitor.push_text("consumer-locus", consumer_locus);
+            visitor.push_text("result-version-ref", result_version_ref);
+            visitor.push_text("input-frontier-ref", input_frontier_ref);
+            visitor.push_text("result-frontier-ref", result_frontier_ref);
+            visitor.push_text("observation-policy-ref", observation_policy_ref);
+            visitor.push_text("policy-stamp-ref", policy_stamp_ref);
+            visitor.push_text("static-retry-contract", static_retry_contract_name);
+        }
+    }
+    visitor
+}
+
+fn i3_adapter_variant_discriminant(facts: &Sys5I3AdapterCarrierVariantFacts) -> &'static str {
+    match facts {
+        Sys5I3AdapterCarrierVariantFacts::OwnerRequest(_) => "owner-request",
+        Sys5I3AdapterCarrierVariantFacts::OwnerReplyReceipt(_) => "owner-reply-receipt",
+        Sys5I3AdapterCarrierVariantFacts::DesignatedInputRequest(_) => "designated-input-request",
+        Sys5I3AdapterCarrierVariantFacts::DesignatedInputReceipt(_) => "designated-input-receipt",
+        Sys5I3AdapterCarrierVariantFacts::RelationProjectionPublication(_) => {
+            "relation-projection-publication"
+        }
+        Sys5I3AdapterCarrierVariantFacts::DesignatedResultDelivery(_) => {
+            "designated-result-delivery"
+        }
+    }
+}
+
+fn i3_adapter_source_span_text(span: Sys5SourceSpan) -> String {
+    format!(
+        "{}:{}:{}:{}:{}:{}",
+        span.start, span.end, span.start_line, span.start_column, span.end_line, span.end_column,
+    )
+}
+
 /// Combines the projection-owned owner-request component with the generated
 /// edge/artifact/program identity retained by SYS-5. The component itself
 /// keeps raw carrier values, including the principal template, inside SYS-3.
@@ -7506,43 +9492,114 @@ fn effect_kind_name(kind: EffectKind) -> &'static str {
     }
 }
 
-fn i3_probe_authority_requirements(carrier: &CarrierContract) -> Sys5I3ProbeAuthorityRequirements {
-    let mut category_names = Vec::new();
-    for category in carrier
-        .authority_requirements()
-        .runtime_seam_requirements()
-        .rows()
-        .iter()
-        .filter_map(|row| row.3)
-        .map(seam_authority_category_name)
-    {
-        if !category_names.iter().any(|existing| existing == category) {
-            category_names.push(category.to_string());
-        }
-    }
-    let requires_membership_epoch_and_incarnation = category_names.iter().any(|category| {
-        matches!(
-            category.as_str(),
-            "MembershipEpochIncarnation" | "DesignatedResultConsumerMembership"
-        )
-    });
-    let requires_capability_and_witness_refs = category_names.iter().any(|category| {
-        matches!(
-            category.as_str(),
-            "OwnerCapabilityRef"
-                | "ProducerReleaseCapability"
-                | "DesignatedResultConsumerCapability"
-        )
-    }) && category_names.iter().any(|category| {
-        matches!(
-            category.as_str(),
-            "OwnerWitnessRef" | "ProducerReleaseWitness" | "DesignatedResultConsumerWitness"
-        )
-    });
+fn i3_probe_authority_requirements(
+    authority_requirement_rows: &[I3AdapterCarrierStaticAuthorityRequirementRow],
+) -> Sys5I3ProbeAuthorityRequirements {
+    let adapter_requirements = i3_adapter_authority_requirements(authority_requirement_rows);
     Sys5I3ProbeAuthorityRequirements {
-        category_names,
-        requires_membership_epoch_and_incarnation,
-        requires_capability_and_witness_refs,
+        category_names: adapter_requirements.category_names.clone(),
+        requires_membership_epoch_and_incarnation: adapter_requirements
+            .requires_membership_epoch_and_incarnation,
+        requires_capability_and_witness_refs: adapter_requirements
+            .requires_capability_and_witness_refs,
+    }
+}
+
+fn i3_adapter_authority_requirements(
+    authority_requirement_rows: &[I3AdapterCarrierStaticAuthorityRequirementRow],
+) -> Sys5I3AdapterAuthorityRequirements {
+    let rows = authority_requirement_rows
+        .iter()
+        .map(
+            |I3AdapterCarrierStaticAuthorityRequirementRow {
+                 requirement_kind,
+                 generated_obligation,
+                 provenance,
+                 authority_category,
+             }| {
+                let (
+                    generated_obligation_present,
+                    generated_obligation_kind_name,
+                    generated_obligation_detail_name,
+                ) = i3_adapter_generated_obligation_parts(generated_obligation.as_ref());
+                Sys5I3AdapterAuthorityRequirementRow {
+                    requirement_kind_name: i3_adapter_runtime_seam_requirement_kind_name(
+                        *requirement_kind,
+                    )
+                    .to_string(),
+                    generated_obligation_present,
+                    generated_obligation_kind_name: generated_obligation_kind_name
+                        .map(str::to_string),
+                    generated_obligation_detail_name: generated_obligation_detail_name
+                        .map(str::to_string),
+                    provenance_name: i3_adapter_carrier_provenance_kind_name(*provenance)
+                        .to_string(),
+                    authority_category_name: authority_category
+                        .map(seam_authority_category_name)
+                        .map(str::to_string),
+                }
+            },
+        )
+        .collect();
+    Sys5I3AdapterAuthorityRequirements::from_rows(rows)
+}
+
+fn i3_adapter_runtime_seam_requirement_kind_name(kind: RuntimeSeamRequirementKind) -> &'static str {
+    match kind {
+        RuntimeSeamRequirementKind::MembershipEpochIncarnation => "MembershipEpochIncarnation",
+        RuntimeSeamRequirementKind::LiveCapabilityRef => "LiveCapabilityRef",
+        RuntimeSeamRequirementKind::LiveWitnessRef => "LiveWitnessRef",
+        RuntimeSeamRequirementKind::ProducerReleaseCapabilitySlot => {
+            "ProducerReleaseCapabilitySlot"
+        }
+        RuntimeSeamRequirementKind::ProducerReleaseWitnessSlot => "ProducerReleaseWitnessSlot",
+        RuntimeSeamRequirementKind::EvaluatorDecisionAuthoritySlot => {
+            "EvaluatorDecisionAuthoritySlot"
+        }
+        RuntimeSeamRequirementKind::ConsumerMembershipEpochIncarnation => {
+            "ConsumerMembershipEpochIncarnation"
+        }
+        RuntimeSeamRequirementKind::ConsumerCapabilityRef => "ConsumerCapabilityRef",
+        RuntimeSeamRequirementKind::ConsumerWitnessRef => "ConsumerWitnessRef",
+    }
+}
+
+fn i3_adapter_generated_obligation_parts(
+    obligation: Option<&GeneratedObligationKind>,
+) -> (bool, Option<&'static str>, Option<&str>) {
+    match obligation {
+        None => (false, None, None),
+        Some(GeneratedObligationKind::Failure(name)) => (true, Some("Failure"), Some(name)),
+        Some(GeneratedObligationKind::Capability) => (true, Some("Capability"), None),
+        Some(GeneratedObligationKind::Witness) => (true, Some("Witness"), None),
+        Some(GeneratedObligationKind::Authority) => (true, Some("Authority"), None),
+        Some(GeneratedObligationKind::AdmittedEvaluatorAuthority) => {
+            (true, Some("AdmittedEvaluatorAuthority"), None)
+        }
+        Some(GeneratedObligationKind::DesignatedResultConsumerAuthority) => {
+            (true, Some("DesignatedResultConsumerAuthority"), None)
+        }
+        Some(GeneratedObligationKind::Evaluation(kind)) => (
+            true,
+            Some("Evaluation"),
+            Some(i3_adapter_checked_evaluation_kind_name(*kind)),
+        ),
+    }
+}
+
+fn i3_adapter_checked_evaluation_kind_name(kind: CheckedEvaluationKind) -> &'static str {
+    match kind {
+        CheckedEvaluationKind::OwnerRmw => "OwnerRmw",
+        CheckedEvaluationKind::DesignatedPublishValue => "DesignatedPublishValue",
+        CheckedEvaluationKind::PublishRelation => "PublishRelation",
+        CheckedEvaluationKind::ConsumerLocalProjection => "ConsumerLocalProjection",
+        CheckedEvaluationKind::DesignatedResultConsume => "DesignatedResultConsume",
+    }
+}
+
+fn i3_adapter_carrier_provenance_kind_name(kind: CarrierProvenanceKind) -> &'static str {
+    match kind {
+        CarrierProvenanceKind::RequiredFromSealedRuntimeSeam => "RequiredFromSealedRuntimeSeam",
     }
 }
 
@@ -7595,4 +9652,477 @@ fn observer_safe_view(summary: &Sys5SemanticSummary) -> Sys5ObserverSafeView {
     semantic_fragments.sort();
     semantic_fragments.dedup();
     Sys5ObserverSafeView { semantic_fragments }
+}
+
+#[cfg(test)]
+mod i3_adapter_carrier_contract_red_tests {
+    use super::*;
+    use crate::sys3_projection::{
+        CarrierContract, CarrierProvenanceKind, I3AdapterCarrierStaticAuthorityRequirementRow,
+        RuntimeSeamRequirementKind, SeamAuthorityKind,
+    };
+    use mir_semantics::surface_v0_pipeline::{CheckedEvaluationKind, GeneratedObligationKind};
+
+    const ACTIVE_I2_SOURCE: &str =
+        include_str!("../../../samples/clean-near-end/mirrorea-i2-local-toy/main.mir");
+
+    fn runtime_seam_requirement_kind_name(kind: RuntimeSeamRequirementKind) -> &'static str {
+        match kind {
+            RuntimeSeamRequirementKind::MembershipEpochIncarnation => "MembershipEpochIncarnation",
+            RuntimeSeamRequirementKind::LiveCapabilityRef => "LiveCapabilityRef",
+            RuntimeSeamRequirementKind::LiveWitnessRef => "LiveWitnessRef",
+            RuntimeSeamRequirementKind::ProducerReleaseCapabilitySlot => {
+                "ProducerReleaseCapabilitySlot"
+            }
+            RuntimeSeamRequirementKind::ProducerReleaseWitnessSlot => "ProducerReleaseWitnessSlot",
+            RuntimeSeamRequirementKind::EvaluatorDecisionAuthoritySlot => {
+                "EvaluatorDecisionAuthoritySlot"
+            }
+            RuntimeSeamRequirementKind::ConsumerMembershipEpochIncarnation => {
+                "ConsumerMembershipEpochIncarnation"
+            }
+            RuntimeSeamRequirementKind::ConsumerCapabilityRef => "ConsumerCapabilityRef",
+            RuntimeSeamRequirementKind::ConsumerWitnessRef => "ConsumerWitnessRef",
+        }
+    }
+
+    fn carrier_provenance_kind_name(kind: CarrierProvenanceKind) -> &'static str {
+        match kind {
+            CarrierProvenanceKind::RequiredFromSealedRuntimeSeam => "RequiredFromSealedRuntimeSeam",
+        }
+    }
+
+    fn seam_authority_kind_name(kind: SeamAuthorityKind) -> &'static str {
+        match kind {
+            SeamAuthorityKind::MembershipEpochIncarnation => "MembershipEpochIncarnation",
+            SeamAuthorityKind::OwnerCapabilityRef => "OwnerCapabilityRef",
+            SeamAuthorityKind::OwnerWitnessRef => "OwnerWitnessRef",
+            SeamAuthorityKind::ProducerReleaseCapability => "ProducerReleaseCapability",
+            SeamAuthorityKind::ProducerReleaseWitness => "ProducerReleaseWitness",
+            SeamAuthorityKind::EvaluatorDecisionAuthority => "EvaluatorDecisionAuthority",
+            SeamAuthorityKind::DesignatedResultConsumerMembership => {
+                "DesignatedResultConsumerMembership"
+            }
+            SeamAuthorityKind::DesignatedResultConsumerCapability => {
+                "DesignatedResultConsumerCapability"
+            }
+            SeamAuthorityKind::DesignatedResultConsumerWitness => "DesignatedResultConsumerWitness",
+        }
+    }
+
+    fn checked_evaluation_kind_name(kind: CheckedEvaluationKind) -> &'static str {
+        match kind {
+            CheckedEvaluationKind::OwnerRmw => "OwnerRmw",
+            CheckedEvaluationKind::DesignatedPublishValue => "DesignatedPublishValue",
+            CheckedEvaluationKind::PublishRelation => "PublishRelation",
+            CheckedEvaluationKind::ConsumerLocalProjection => "ConsumerLocalProjection",
+            CheckedEvaluationKind::DesignatedResultConsume => "DesignatedResultConsume",
+        }
+    }
+
+    fn generated_obligation_parts(
+        obligation: Option<&GeneratedObligationKind>,
+    ) -> (bool, Option<&str>, Option<&str>) {
+        match obligation {
+            None => (false, None, None),
+            Some(GeneratedObligationKind::Failure(name)) => (true, Some("Failure"), Some(name)),
+            Some(GeneratedObligationKind::Capability) => (true, Some("Capability"), None),
+            Some(GeneratedObligationKind::Witness) => (true, Some("Witness"), None),
+            Some(GeneratedObligationKind::Authority) => (true, Some("Authority"), None),
+            Some(GeneratedObligationKind::AdmittedEvaluatorAuthority) => {
+                (true, Some("AdmittedEvaluatorAuthority"), None)
+            }
+            Some(GeneratedObligationKind::DesignatedResultConsumerAuthority) => {
+                (true, Some("DesignatedResultConsumerAuthority"), None)
+            }
+            Some(GeneratedObligationKind::Evaluation(kind)) => (
+                true,
+                Some("Evaluation"),
+                Some(checked_evaluation_kind_name(*kind)),
+            ),
+        }
+    }
+
+    fn assert_adapter_authority_rows_match_carrier(
+        contract: &Sys5I3AdapterCarrierContract,
+        carrier: &CarrierContract,
+    ) {
+        let actual = contract.authority_requirements().rows();
+        let expected = carrier
+            .authority_requirements()
+            .runtime_seam_requirements()
+            .rows();
+        assert_eq!(actual.len(), expected.len());
+        for (actual, (requirement, obligation, provenance, authority)) in
+            actual.iter().zip(expected)
+        {
+            let (present, kind, detail) = generated_obligation_parts(obligation.as_ref());
+            assert_eq!(
+                actual.requirement_kind_name(),
+                runtime_seam_requirement_kind_name(*requirement)
+            );
+            assert_eq!(actual.generated_obligation_present(), present);
+            assert_eq!(actual.generated_obligation_kind_name(), kind);
+            assert_eq!(actual.generated_obligation_detail_name(), detail);
+            assert_eq!(
+                actual.provenance_name(),
+                carrier_provenance_kind_name(*provenance)
+            );
+            assert_eq!(
+                actual.authority_category_name(),
+                authority
+                    .as_ref()
+                    .map(|authority| seam_authority_kind_name(*authority))
+            );
+        }
+    }
+
+    fn assert_static_authority_rows_match_carrier(carrier: &CarrierContract) {
+        let static_facts = carrier
+            .i3_adapter_static_facts()
+            .expect("every accepted carrier must retain finite static projection facts");
+        let I3AdapterCarrierStaticFacts {
+            edge_kind,
+            lifecycle_kind,
+            operation_id,
+            source_ref,
+            core_ref,
+            origin_locus_template,
+            target_owner_locus_template,
+            declared_failure_row,
+            effect_row,
+            authority_requirement_rows,
+            occurrence_slots,
+            frontiers,
+            linked_request_identity,
+            typed_outcome,
+            evaluator_receipt_consumption,
+            reference_only_redaction,
+            checked_core_bound,
+            transfers_authority,
+            mints_authority_without_source,
+            variant,
+        } = static_facts;
+        let _ = (
+            edge_kind,
+            lifecycle_kind,
+            operation_id,
+            source_ref,
+            core_ref,
+            origin_locus_template,
+            target_owner_locus_template,
+            declared_failure_row,
+            effect_row,
+            occurrence_slots,
+            frontiers,
+            linked_request_identity,
+            typed_outcome,
+            evaluator_receipt_consumption,
+            reference_only_redaction,
+            checked_core_bound,
+            transfers_authority,
+            mints_authority_without_source,
+            variant,
+        );
+
+        // Production review guard: the source conversion must destructure
+        // `AuthorityRequirements` and `RuntimeSeamRequirements` before it
+        // constructs these exact ordered static rows.
+        let actual: &[I3AdapterCarrierStaticAuthorityRequirementRow] = &authority_requirement_rows;
+        let expected = carrier
+            .authority_requirements()
+            .runtime_seam_requirements()
+            .rows();
+        assert_eq!(actual.len(), expected.len());
+        for (actual, (requirement_kind, generated_obligation, provenance, authority_category)) in
+            actual.iter().zip(expected)
+        {
+            let I3AdapterCarrierStaticAuthorityRequirementRow {
+                requirement_kind: actual_requirement_kind,
+                generated_obligation: actual_generated_obligation,
+                provenance: actual_provenance,
+                authority_category: actual_authority_category,
+            } = actual;
+            let actual_generated_obligation: &Option<GeneratedObligationKind> =
+                actual_generated_obligation;
+            assert_eq!(*actual_requirement_kind, *requirement_kind);
+            assert_eq!(actual_generated_obligation, generated_obligation);
+            assert_eq!(*actual_provenance, *provenance);
+            assert_eq!(*actual_authority_category, *authority_category);
+        }
+    }
+
+    fn assert_designated_input_facts_match_dependency(
+        contract: &Sys5I3AdapterCarrierContract,
+        carrier: &CarrierContract,
+    ) {
+        let Some(dependency) = carrier.designated_remote_input_dependency() else {
+            return;
+        };
+        assert_eq!(
+            dependency.request().source_owner_locus(),
+            dependency.source_owner_locus()
+        );
+        assert_eq!(
+            dependency.receipt_use().source_owner_locus(),
+            dependency.source_owner_locus()
+        );
+        assert_eq!(
+            dependency.request().typed_state_read(),
+            dependency.typed_state_read()
+        );
+        assert_eq!(
+            dependency.receipt_use().typed_state_read(),
+            dependency.typed_state_read()
+        );
+        let static_dependency = dependency.static_projection_facts();
+        let facts = match contract.variant_facts() {
+            Sys5I3AdapterCarrierVariantFacts::DesignatedInputRequest(facts)
+            | Sys5I3AdapterCarrierVariantFacts::DesignatedInputReceipt(facts) => facts,
+            unexpected => {
+                panic!("designated dependency must retain an input variant, got {unexpected:?}")
+            }
+        };
+        assert_eq!(
+            facts.typed_state_read_ref(),
+            i3_adapter_typed_state_read_ref(static_dependency.typed_state_read())
+        );
+        assert_eq!(
+            facts.requester_site_ref(),
+            i3_adapter_requester_site_ref(static_dependency.requester_site())
+        );
+        assert_eq!(
+            facts.authority_origin_ref(),
+            i3_adapter_authority_origin_ref(static_dependency.authority_origin())
+        );
+        assert_eq!(
+            facts.request_ref(),
+            i3_adapter_designated_request_ref(static_dependency.request())
+        );
+        assert_eq!(
+            facts.receipt_use_ref(),
+            i3_adapter_designated_receipt_use_ref(static_dependency.receipt_use())
+        );
+    }
+
+    fn assert_exhaustive_adapter_variant_facts(facts: &Sys5I3AdapterCarrierVariantFacts) {
+        match facts {
+            Sys5I3AdapterCarrierVariantFacts::OwnerRequest(facts)
+            | Sys5I3AdapterCarrierVariantFacts::OwnerReplyReceipt(facts) => {
+                let Sys5I3AdapterOwnerFacts {
+                    origin_principal_ref,
+                    origin_locus_template,
+                    target_owner_locus_template,
+                } = facts;
+                let _ = (
+                    origin_principal_ref,
+                    origin_locus_template,
+                    target_owner_locus_template,
+                );
+            }
+            Sys5I3AdapterCarrierVariantFacts::DesignatedInputRequest(facts)
+            | Sys5I3AdapterCarrierVariantFacts::DesignatedInputReceipt(facts) => {
+                let Sys5I3AdapterDesignatedInputFacts {
+                    dependency_ordinal,
+                    typed_state_read_ref,
+                    requester_site_ref,
+                    authority_origin_ref,
+                    request_ref,
+                    receipt_use_ref,
+                    designated_evaluator_locus,
+                    source_owner_locus,
+                    frontier_requirement_names,
+                } = facts;
+                let _ = (
+                    dependency_ordinal,
+                    typed_state_read_ref,
+                    requester_site_ref,
+                    authority_origin_ref,
+                    request_ref,
+                    receipt_use_ref,
+                    designated_evaluator_locus,
+                    source_owner_locus,
+                    frontier_requirement_names,
+                );
+            }
+            Sys5I3AdapterCarrierVariantFacts::RelationProjectionPublication(facts) => {
+                let Sys5I3AdapterRelationPublicationFacts {
+                    relation_name,
+                    publication_locus,
+                    consumer_locus,
+                } = facts;
+                let _ = (relation_name, publication_locus, consumer_locus);
+            }
+            Sys5I3AdapterCarrierVariantFacts::DesignatedResultDelivery(facts) => {
+                let Sys5I3AdapterDesignatedResultFacts {
+                    evaluator_locus,
+                    consumer_locus,
+                    result_version_ref,
+                    input_frontier_ref,
+                    result_frontier_ref,
+                    observation_policy_ref,
+                    policy_stamp_ref,
+                    static_retry_contract_name,
+                } = facts;
+                let _ = (
+                    evaluator_locus,
+                    consumer_locus,
+                    result_version_ref,
+                    input_frontier_ref,
+                    result_frontier_ref,
+                    observation_policy_ref,
+                    policy_stamp_ref,
+                    static_retry_contract_name,
+                );
+            }
+        }
+    }
+
+    fn assert_exhaustive_adapter_contract_fields(contract: &Sys5I3AdapterCarrierContract) {
+        let Sys5I3AdapterCarrierContract {
+            checked_program_ref,
+            operation_id,
+            edge_kind,
+            lifecycle_kind,
+            source_locus,
+            target_locus,
+            logical_source_path,
+            source_span,
+            source_ref,
+            core_ref,
+            source_artifact_ref,
+            target_artifact_ref,
+            edge_ref,
+            declared_failure_names,
+            effect_kind_names,
+            required_occurrence_slot_names,
+            linked_request_identity,
+            typed_outcome,
+            receipt_consumption,
+            authority_requirements,
+            redaction,
+            checked_core_bound,
+            transfers_authority,
+            mints_authority_without_source,
+            variant_facts,
+            full_retained_contract_fingerprint,
+            full_retained_contract_fingerprint_field_names,
+        } = contract;
+        let _ = (
+            checked_program_ref,
+            operation_id,
+            edge_kind,
+            lifecycle_kind,
+            source_locus,
+            target_locus,
+            logical_source_path,
+            source_span,
+            source_ref,
+            core_ref,
+            source_artifact_ref,
+            target_artifact_ref,
+            edge_ref,
+            declared_failure_names,
+            effect_kind_names,
+            required_occurrence_slot_names,
+            linked_request_identity,
+            typed_outcome,
+            receipt_consumption,
+            authority_requirements,
+            redaction,
+            checked_core_bound,
+            transfers_authority,
+            mints_authority_without_source,
+            full_retained_contract_fingerprint,
+            full_retained_contract_fingerprint_field_names,
+        );
+        assert_exhaustive_adapter_variant_facts(variant_facts);
+    }
+
+    #[test]
+    fn i3_adapter_mapper_rejects_absolute_value_stream_without_constructing_a_snapshot() {
+        // Review guard: the production mapper must keep its conversion match
+        // explicit and exhaustive; a wildcard must not admit this seventh kind.
+        let error: Sys5I3ProbeFacadeError = match i3_adapter_carrier_family_for_edge_kind(
+            CommunicationEdgeKind::AbsoluteValueStream,
+        ) {
+            Err(error) => error,
+            Ok(_) => panic!("AbsoluteValueStream must not construct an adapter snapshot"),
+        };
+
+        assert_eq!(
+            error.kind(),
+            Sys5I3ProbeFacadeErrorKind::NotAcceptedCarrierFamily
+        );
+    }
+
+    #[test]
+    fn i3_adapter_fingerprint_and_inventory_share_one_exhaustive_typed_visitor() {
+        let project = build_project(Sys5SourceInput::inline(
+            "samples/clean-near-end/mirrorea-i2-local-toy/main.mir",
+            ACTIVE_I2_SOURCE,
+        ))
+        .expect("the ordinary active source must check and project");
+
+        let generated_edges = &project.semantic_summary().generated_communication;
+        assert_eq!(generated_edges.len(), 12);
+        for edge in generated_edges {
+            let contract = project
+                .i3_adapter_carrier_contract(&edge.edge_ref)
+                .expect("every accepted active generated edge has an adapter contract");
+            let carrier = project
+                .projection
+                .communication_plan()
+                .edges()
+                .iter()
+                .find(|candidate| candidate.edge_ref() == edge.edge_ref)
+                .expect("every summary edge retains its exact projection carrier")
+                .carrier_contract();
+            assert_eq!(
+                contract.declared_failure_names(),
+                carrier.declared_failure_row().names()
+            );
+            assert_eq!(
+                contract.effect_kind_names(),
+                carrier
+                    .effect_row()
+                    .kinds()
+                    .into_iter()
+                    .map(effect_kind_name)
+                    .map(str::to_string)
+                    .collect::<Vec<_>>()
+            );
+            assert_adapter_authority_rows_match_carrier(&contract, carrier);
+            assert_static_authority_rows_match_carrier(carrier);
+            assert_designated_input_facts_match_dependency(&contract, carrier);
+            assert_exhaustive_adapter_contract_fields(&contract);
+            let visitor = i3_adapter_full_retained_contract_fingerprint_visitor(&contract);
+            assert_eq!(
+                visitor.field_names(),
+                contract.full_retained_contract_fingerprint_field_names()
+            );
+            assert_eq!(
+                visitor.finish(),
+                contract.full_retained_contract_fingerprint()
+            );
+            assert_eq!(
+                visitor.fields.len(),
+                contract
+                    .full_retained_contract_fingerprint_field_names()
+                    .len(),
+                "every visitor field has one named fingerprint inventory entry"
+            );
+            for field_index in 0..visitor.fields.len() {
+                let mut perturbed = I3AdapterFullRetainedContractFingerprintVisitor {
+                    fields: visitor.fields.clone(),
+                };
+                perturbed.fields[field_index].1.push(0xff);
+                assert_ne!(
+                    perturbed.finish(),
+                    visitor.finish(),
+                    "mutating exactly one emitted value must change the full contract digest"
+                );
+            }
+        }
+    }
 }

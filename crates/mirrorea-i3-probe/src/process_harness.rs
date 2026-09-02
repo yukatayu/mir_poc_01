@@ -21,6 +21,7 @@ use std::{
 use rcgen::generate_simple_self_signed;
 use serde::{Deserialize, Serialize};
 use sha2::{Digest, Sha256};
+use zeroize::Zeroizing;
 
 use crate::{
     ClientChildProbeReplyReceipt, FrameDecodeErrorKind, FrameDecodeEvent, FrameDecoder,
@@ -34,6 +35,9 @@ use crate::{
 };
 
 const TRANSPORT_CAPTURE_REF_DOMAIN: &[u8] = b"mirrorea/i3-0/transport-capture/v1\0";
+const PRIVATE_REAPER_DEADLINE: Duration = Duration::from_millis(100);
+const PRIVATE_REAPER_POLL_INTERVAL: Duration = Duration::from_millis(1);
+const PRIVATE_REAPER_REF_DOMAIN: &[u8] = b"mirrorea/i3-1/private-reaper/v1\0";
 
 /// The fixed, ordered I3-0 comparison inventory. It is intentionally private
 /// probe evidence, not a public transport API or conformance wire.
@@ -183,6 +187,8 @@ pub struct ProcessLifecycle {
     cleanup_policy_declared: bool,
     kill_attempted: bool,
     wait_completed: bool,
+    io_threads_completed_before_reaper_deadline: bool,
+    cleanup_residual: bool,
 }
 
 impl ProcessLifecycle {
@@ -200,6 +206,8 @@ impl ProcessLifecycle {
             cleanup_policy_declared: false,
             kill_attempted: false,
             wait_completed: false,
+            io_threads_completed_before_reaper_deadline: false,
+            cleanup_residual: false,
         }
     }
 
@@ -220,6 +228,9 @@ impl ProcessLifecycle {
         self.cleanup_policy_declared &= other.cleanup_policy_declared;
         self.kill_attempted |= other.kill_attempted;
         self.wait_completed &= other.wait_completed;
+        self.io_threads_completed_before_reaper_deadline &=
+            other.io_threads_completed_before_reaper_deadline;
+        self.cleanup_residual |= other.cleanup_residual;
     }
 
     /// Confirms that each participating server/client pair were separate child
@@ -254,6 +265,16 @@ impl ProcessLifecycle {
     /// Whether every tracked child had been reaped at case completion.
     pub const fn orphan_cleanup_complete(&self) -> bool {
         self.orphan_cleanup_complete
+    }
+
+    /// Strong normal-run cleanup evidence: every child is reaped, every
+    /// tracked I/O thread has signalled completion before the private reaper
+    /// deadline, and cleanup recorded no residual.  `orphan_cleanup_complete`
+    /// alone remains only a factual child-reap observation.
+    pub const fn cleanup_complete(&self) -> bool {
+        self.orphan_cleanup_complete
+            && self.io_threads_completed_before_reaper_deadline
+            && !self.cleanup_residual
     }
 
     /// How ephemeral server credentials reached children.
@@ -689,21 +710,38 @@ pub enum SupervisorTestFault {
     EmitNonLoopbackReady,
     FailPostSpawnSetup,
     ExpireDeadline,
+    DelayIoCompletionPastReaperDeadline,
 }
 
 /// Observer-safe disposition of a forced common-supervisor fault.
 #[doc(hidden)]
-#[derive(Clone, Copy, Debug, Eq, PartialEq)]
+#[derive(Clone, Copy, Debug, Deserialize, Eq, PartialEq, Serialize)]
 pub enum SupervisorFaultDisposition {
     NonLoopbackReadyRejected,
     PostSpawnSetupFailure,
     DeadlineExpired,
+    ReaperDeadlineExceeded,
+}
+
+/// The one independently observable reaper dimension used by this finite
+/// supervisor falsifier.  It is not a runtime process status API.
+#[doc(hidden)]
+#[derive(Clone, Copy, Debug, Deserialize, Eq, PartialEq, Serialize)]
+pub enum SupervisorCleanupBreachDimension {
+    IoThreadCompletion,
+}
+
+/// Typed residual after the distinct private reaper deadline expires.
+#[doc(hidden)]
+#[derive(Clone, Copy, Debug, Deserialize, Eq, PartialEq, Serialize)]
+pub enum SupervisorCleanupFailureKind {
+    ReaperDeadlineExceeded,
 }
 
 /// Bounded supervisor fault evidence. It names no endpoint, credential,
 /// source, payload, or child PID.
 #[doc(hidden)]
-#[derive(Clone, Copy, Debug, Eq, PartialEq)]
+#[derive(Clone, Debug, Deserialize, Eq, PartialEq, Serialize)]
 pub struct SupervisorFaultProbeOutcome {
     fault: SupervisorTestFault,
     disposition: SupervisorFaultDisposition,
@@ -712,6 +750,15 @@ pub struct SupervisorFaultProbeOutcome {
     kill_attempted: bool,
     wait_completed: bool,
     no_orphan_remains: bool,
+    reaper_deadline_enforced: bool,
+    children_reaped_before_reaper_deadline: bool,
+    io_threads_completed_before_reaper_deadline: bool,
+    reaper_deadline_millis: u64,
+    main_deadline_millis: u64,
+    cleanup_elapsed_millis: u64,
+    reaper_deadline_ref: String,
+    breached_cleanup_dimension: Option<SupervisorCleanupBreachDimension>,
+    cleanup_failure: Option<SupervisorCleanupFailureKind>,
 }
 
 impl SupervisorFaultProbeOutcome {
@@ -741,6 +788,50 @@ impl SupervisorFaultProbeOutcome {
 
     pub const fn no_orphan_remains(&self) -> bool {
         self.no_orphan_remains
+    }
+
+    pub const fn reaper_deadline_enforced(&self) -> bool {
+        self.reaper_deadline_enforced
+    }
+
+    pub const fn children_reaped_before_reaper_deadline(&self) -> bool {
+        self.children_reaped_before_reaper_deadline
+    }
+
+    pub const fn io_threads_completed_before_reaper_deadline(&self) -> bool {
+        self.io_threads_completed_before_reaper_deadline
+    }
+
+    pub const fn reaper_deadline_duration(&self) -> Duration {
+        Duration::from_millis(self.reaper_deadline_millis)
+    }
+
+    pub const fn main_deadline_duration(&self) -> Duration {
+        Duration::from_millis(self.main_deadline_millis)
+    }
+
+    pub const fn cleanup_elapsed(&self) -> Duration {
+        Duration::from_millis(self.cleanup_elapsed_millis)
+    }
+
+    pub fn reaper_deadline_ref(&self) -> &str {
+        &self.reaper_deadline_ref
+    }
+
+    pub const fn breached_cleanup_dimension(&self) -> Option<SupervisorCleanupBreachDimension> {
+        self.breached_cleanup_dimension
+    }
+
+    pub const fn cleanup_failure(&self) -> Option<SupervisorCleanupFailureKind> {
+        self.cleanup_failure
+    }
+
+    /// This stronger claim is derived only from the recorded factual child
+    /// reap, I/O completion, and absence of a cleanup residual.
+    pub const fn no_orphan_claim(&self) -> bool {
+        self.children_reaped_before_reaper_deadline
+            && self.io_threads_completed_before_reaper_deadline
+            && self.cleanup_failure.is_none()
     }
 }
 
@@ -942,7 +1033,7 @@ fn normalize_observation(
         || !lifecycle.server_and_client_are_distinct_children()
         || !lifecycle.deadline_enforced()
         || !lifecycle.cleanup_policy_declared()
-        || !lifecycle.orphan_cleanup_complete()
+        || !lifecycle.cleanup_complete()
     {
         return Err(CandidateRunError::new(
             CandidateRunErrorKind::CandidateEvidenceMismatch,
@@ -1017,7 +1108,7 @@ fn normalize_observation(
         retry_initiated: false,
         transport_metadata_used_as_authority: false,
         observer_safe: true,
-        cleanup_complete: lifecycle.orphan_cleanup_complete(),
+        cleanup_complete: lifecycle.cleanup_complete(),
         target_contract_authority_revalidation_count,
         receiver_child_canary_events: canary_events.to_vec(),
         client_child_probe_reply_receipts: reply_receipts.to_vec(),
@@ -1461,8 +1552,19 @@ impl ChildProcessControl {
         self.credential.certificate_der()
     }
 
-    pub(crate) fn server_private_key_der(&self) -> Option<&[u8]> {
-        self.credential.server_private_key_der()
+    /// Consumes the probe-owned server key for the immediate rustls handoff.
+    /// The scoped ownership claim ends at that boundary and explicitly
+    /// excludes rcgen, rustls, Quinn, allocator, and operating-system copies.
+    pub(crate) fn take_transport_private_key(
+        &mut self,
+    ) -> Option<rustls::pki_types::PrivatePkcs8KeyDer<'static>> {
+        let credential = std::mem::replace(
+            &mut self.credential,
+            ChildCredential::ClientTrustRoot {
+                certificate_der: Vec::new(),
+            },
+        );
+        credential.into_transport_private_key()
     }
 }
 
@@ -1472,7 +1574,7 @@ impl ChildProcessControl {
 enum ChildCredential {
     Server {
         certificate_der: Vec<u8>,
-        private_key_der: Vec<u8>,
+        private_key_der: Zeroizing<Vec<u8>>,
     },
     ClientTrustRoot {
         certificate_der: Vec<u8>,
@@ -1490,11 +1592,17 @@ impl ChildCredential {
         }
     }
 
-    fn server_private_key_der(&self) -> Option<&[u8]> {
+    /// Consumes the probe-owned zeroizing owner at the rustls handoff.  The
+    /// rustls constructor currently requires a `to_vec()` temporary; that
+    /// temporary is not claimed zeroized.  This scope explicitly excludes
+    /// rcgen, rustls, Quinn, allocator, and OS-internal copies.
+    fn into_transport_private_key(self) -> Option<rustls::pki_types::PrivatePkcs8KeyDer<'static>> {
         match self {
             Self::Server {
                 private_key_der, ..
-            } => Some(private_key_der),
+            } => Some(rustls::pki_types::PrivatePkcs8KeyDer::from(
+                private_key_der.to_vec(),
+            )),
             Self::ClientTrustRoot { .. } => None,
         }
     }
@@ -1502,7 +1610,7 @@ impl ChildCredential {
 
 struct EphemeralCredentials {
     certificate_der: Vec<u8>,
-    private_key_der: Vec<u8>,
+    private_key_der: Zeroizing<Vec<u8>>,
 }
 
 impl EphemeralCredentials {
@@ -1511,7 +1619,7 @@ impl EphemeralCredentials {
             generate_simple_self_signed(vec!["localhost".to_string()]).map_err(|_| ())?;
         Ok(Self {
             certificate_der: generated.cert.der().to_vec(),
-            private_key_der: generated.signing_key.serialize_der(),
+            private_key_der: Zeroizing::new(generated.signing_key.serialize_der()),
         })
     }
 
@@ -1540,6 +1648,8 @@ pub(crate) struct ChildProcessHarness {
     credentials: EphemeralCredentials,
     children: Vec<TrackedChild>,
     lifecycle: ProcessLifecycle,
+    last_cleanup: CleanupEvidence,
+    cleanup_started: bool,
 }
 
 #[allow(dead_code)]
@@ -1562,6 +1672,8 @@ impl ChildProcessHarness {
             credentials: EphemeralCredentials::generate()?,
             children: Vec::new(),
             lifecycle,
+            last_cleanup: CleanupEvidence::default(),
+            cleanup_started: false,
         })
     }
 
@@ -1584,6 +1696,8 @@ impl ChildProcessHarness {
                 .map_err(|_| CandidateChildError::Lifecycle)?,
             children: Vec::new(),
             lifecycle,
+            last_cleanup: CleanupEvidence::default(),
+            cleanup_started: false,
         })
     }
 
@@ -1625,6 +1739,8 @@ impl ChildProcessHarness {
             executable,
             control,
             fault == SupervisorTestFault::FailPostSpawnSetup,
+            (fault == SupervisorTestFault::DelayIoCompletionPastReaperDeadline)
+                .then_some(PRIVATE_REAPER_DEADLINE + Duration::from_millis(25)),
         )
     }
 
@@ -1700,7 +1816,7 @@ impl ChildProcessHarness {
             credential: self.credentials.for_role(role),
             supervisor_fault: None,
         };
-        self.spawn_control(executable, control, false)
+        self.spawn_control(executable, control, false, None)
     }
 
     fn spawn_control(
@@ -1708,9 +1824,10 @@ impl ChildProcessHarness {
         executable: PathBuf,
         control: ChildProcessControl,
         force_post_spawn_setup_failure: bool,
+        event_reader_completion_delay: Option<Duration>,
     ) -> Result<ChildProcessHandle, CandidateChildError> {
         let role = control.role;
-        let encoded = serde_json::to_vec(&control).map_err(|_| CandidateChildError::Protocol)?;
+        let encoded = serialize_private_child_control_for_stdin(&control)?;
         let child = Command::new(executable)
             .env_clear()
             .arg(match role {
@@ -1735,6 +1852,9 @@ impl ChildProcessHarness {
             event_reader: None,
             stderr_reader: None,
             control_writer: None,
+            event_reader_done: None,
+            stderr_reader_done: None,
+            control_writer_done: None,
             reaped: false,
         });
         let handle = ChildProcessHandle(self.children.len() - 1);
@@ -1759,12 +1879,15 @@ impl ChildProcessHarness {
                 return Err(CandidateChildError::Lifecycle);
             }
         };
-        let (events, event_reader) = spawn_event_reader(stdout);
-        let stderr_reader = spawn_discard_reader(stderr);
+        let (events, event_reader, event_reader_done) =
+            spawn_event_reader(stdout, event_reader_completion_delay);
+        let (stderr_reader, stderr_reader_done) = spawn_discard_reader(stderr);
         if let Some(child) = self.children.get_mut(handle.0) {
             child.events = Some(events);
             child.event_reader = Some(event_reader);
             child.stderr_reader = Some(stderr_reader);
+            child.event_reader_done = Some(event_reader_done);
+            child.stderr_reader_done = Some(stderr_reader_done);
         }
         if let Err(error) = self.deliver_private_control(handle, stdin, encoded) {
             let _ = self.cleanup();
@@ -1777,26 +1900,39 @@ impl ChildProcessHarness {
         &mut self,
         handle: ChildProcessHandle,
         mut stdin: std::process::ChildStdin,
-        encoded: Vec<u8>,
+        encoded: Zeroizing<Vec<u8>>,
     ) -> Result<(), CandidateChildError> {
         let remaining = self.remaining()?;
         let (sender, receiver) = mpsc::channel();
+        let (completion_sender, completion_receiver) = mpsc::channel();
         let writer = thread::spawn(move || {
-            let result = stdin.write_all(&encoded).and_then(|_| stdin.flush());
+            let result = stdin
+                .write_all(encoded.as_slice())
+                .and_then(|_| stdin.flush());
             let _ = sender.send(result.map_err(|_| ()));
+            let _ = completion_sender.send(());
         });
         let child = self
             .children
             .get_mut(handle.0)
             .ok_or(CandidateChildError::Lifecycle)?;
         child.control_writer = Some(writer);
+        child.control_writer_done = Some(completion_receiver);
         match receiver.recv_timeout(remaining) {
-            Ok(Ok(())) => child
-                .control_writer
-                .take()
+            Ok(Ok(())) => match child
+                .control_writer_done
+                .as_ref()
                 .ok_or(CandidateChildError::Lifecycle)?
-                .join()
-                .map_err(|_| CandidateChildError::Lifecycle),
+                .recv_timeout(remaining)
+            {
+                Ok(()) => child
+                    .control_writer
+                    .take()
+                    .ok_or(CandidateChildError::Lifecycle)?
+                    .join()
+                    .map_err(|_| CandidateChildError::Lifecycle),
+                Err(_) => Err(CandidateChildError::Deadline),
+            },
             Ok(Err(())) | Err(mpsc::RecvTimeoutError::Disconnected) => {
                 Err(CandidateChildError::Lifecycle)
             }
@@ -1805,57 +1941,64 @@ impl ChildProcessHarness {
     }
 
     fn cleanup(&mut self) -> ProcessLifecycle {
-        let mut every_child_reaped = !self.children.is_empty();
-        let mut every_wait_completed = !self.children.is_empty();
+        if self.cleanup_started {
+            return self.lifecycle.clone();
+        }
+        self.cleanup_started = true;
+        let started = Instant::now();
+        let deadline = started + PRIVATE_REAPER_DEADLINE;
         for child in &mut self.children {
             if child.reaped {
                 continue;
             }
             match child.child.try_wait() {
-                Ok(Some(_)) => {}
+                Ok(Some(_)) => child.reaped = true,
                 Ok(None) => {
                     self.lifecycle.kill_attempted = true;
                     if child.child.kill().is_err() {
-                        every_child_reaped = false;
+                        continue;
                     }
                 }
-                Err(_) => every_child_reaped = false,
-            }
-            if child.child.wait().is_err() {
-                every_child_reaped = false;
-                every_wait_completed = false;
-            } else {
-                child.reaped = true;
-            }
-            if let Some(reader) = child.event_reader.take()
-                && reader.join().is_err()
-            {
-                every_child_reaped = false;
-            }
-            if let Some(reader) = child.stderr_reader.take()
-                && reader.join().is_err()
-            {
-                every_child_reaped = false;
-            }
-            if let Some(writer) = child.control_writer.take()
-                && writer.join().is_err()
-            {
-                every_child_reaped = false;
+                Err(_) => continue,
             }
         }
-        self.lifecycle.cleanup_policy_declared = !self.children.is_empty();
-        self.lifecycle.kill_wait_cleanup_enforced =
-            self.lifecycle.cleanup_policy_declared && every_wait_completed;
-        self.lifecycle.wait_completed = every_wait_completed;
-        self.lifecycle.orphan_cleanup_complete =
-            every_child_reaped && self.children.iter().all(|child| child.reaped);
-        self.lifecycle.clone()
+        loop {
+            for child in &mut self.children {
+                if !child.reaped && child.child.try_wait().is_ok_and(|status| status.is_some()) {
+                    child.reaped = true;
+                }
+                child.collect_completed_io_threads();
+            }
+            let children_reaped =
+                !self.children.is_empty() && self.children.iter().all(|child| child.reaped);
+            let io_complete = !self.children.is_empty()
+                && self.children.iter().all(TrackedChild::io_threads_completed);
+            if children_reaped && io_complete || Instant::now() >= deadline {
+                self.last_cleanup = CleanupEvidence {
+                    reaper_deadline_enforced: true,
+                    children_reaped_before_reaper_deadline: children_reaped,
+                    io_threads_completed_before_reaper_deadline: io_complete,
+                    cleanup_elapsed: started.elapsed(),
+                };
+                self.lifecycle.cleanup_policy_declared = !self.children.is_empty();
+                self.lifecycle.kill_wait_cleanup_enforced =
+                    self.lifecycle.cleanup_policy_declared && children_reaped;
+                self.lifecycle.wait_completed = children_reaped;
+                self.lifecycle.orphan_cleanup_complete = children_reaped;
+                self.lifecycle.io_threads_completed_before_reaper_deadline = io_complete;
+                self.lifecycle.cleanup_residual = !children_reaped || !io_complete;
+                return self.lifecycle.clone();
+            }
+            thread::sleep(PRIVATE_REAPER_POLL_INTERVAL);
+        }
     }
 }
 
 impl Drop for ChildProcessHarness {
     fn drop(&mut self) {
-        let _ = self.cleanup();
+        if !self.cleanup_started {
+            let _ = self.cleanup();
+        }
     }
 }
 
@@ -1872,16 +2015,22 @@ pub fn run_supervisor_fault_probe(
         SupervisorTestFault::EmitNonLoopbackReady | SupervisorTestFault::FailPostSpawnSetup => {
             Duration::from_secs(2)
         }
+        SupervisorTestFault::DelayIoCompletionPastReaperDeadline => Duration::from_secs(2),
     };
     let mut harness = ChildProcessHarness::new_supervisor_probe(candidate, deadline)
         .map_err(|_| CandidateRunError::new(CandidateRunErrorKind::CredentialSetupFailed))?;
     let result = harness.spawn_supervisor_fault_probe(fault);
     let deadline_elapsed_before_cleanup = match (fault, result) {
         (SupervisorTestFault::EmitNonLoopbackReady, Ok(handle)) => {
-            matches!(
+            if !matches!(
                 harness.next_event(handle),
                 Err(CandidateChildError::Protocol)
-            )
+            ) {
+                return Err(CandidateRunError::new(
+                    CandidateRunErrorKind::ChildProcessFailed,
+                ));
+            }
+            false
         }
         (SupervisorTestFault::FailPostSpawnSetup, Err(CandidateChildError::Lifecycle)) => false,
         (SupervisorTestFault::ExpireDeadline, Ok(handle)) => {
@@ -1890,6 +2039,7 @@ pub fn run_supervisor_fault_probe(
                 Err(CandidateChildError::Deadline)
             )
         }
+        (SupervisorTestFault::DelayIoCompletionPastReaperDeadline, Ok(_handle)) => false,
         _ => {
             return Err(CandidateRunError::new(
                 CandidateRunErrorKind::ChildProcessFailed,
@@ -1898,6 +2048,7 @@ pub fn run_supervisor_fault_probe(
     };
     let actual_child_spawned = !harness.children.is_empty();
     let lifecycle = harness.cleanup();
+    let cleanup = harness.last_cleanup;
     if !actual_child_spawned
         || !lifecycle.kill_attempted
         || !lifecycle.wait_completed
@@ -1915,7 +2066,21 @@ pub fn run_supervisor_fault_probe(
             SupervisorFaultDisposition::PostSpawnSetupFailure
         }
         SupervisorTestFault::ExpireDeadline => SupervisorFaultDisposition::DeadlineExpired,
+        SupervisorTestFault::DelayIoCompletionPastReaperDeadline => {
+            if !cleanup.children_reaped_before_reaper_deadline
+                || cleanup.io_threads_completed_before_reaper_deadline
+            {
+                return Err(CandidateRunError::new(
+                    CandidateRunErrorKind::ChildProcessFailed,
+                ));
+            }
+            SupervisorFaultDisposition::ReaperDeadlineExceeded
+        }
     };
+    let cleanup_failure = (fault == SupervisorTestFault::DelayIoCompletionPastReaperDeadline)
+        .then_some(SupervisorCleanupFailureKind::ReaperDeadlineExceeded);
+    let breached_cleanup_dimension =
+        cleanup_failure.map(|_| SupervisorCleanupBreachDimension::IoThreadCompletion);
     Ok(SupervisorFaultProbeOutcome {
         fault,
         disposition,
@@ -1924,7 +2089,30 @@ pub fn run_supervisor_fault_probe(
         kill_attempted: lifecycle.kill_attempted,
         wait_completed: lifecycle.wait_completed,
         no_orphan_remains: lifecycle.orphan_cleanup_complete,
+        reaper_deadline_enforced: cleanup.reaper_deadline_enforced,
+        children_reaped_before_reaper_deadline: cleanup.children_reaped_before_reaper_deadline,
+        io_threads_completed_before_reaper_deadline: cleanup
+            .io_threads_completed_before_reaper_deadline,
+        reaper_deadline_millis: u64::try_from(PRIVATE_REAPER_DEADLINE.as_millis())
+            .expect("fixed reaper deadline fits u64"),
+        main_deadline_millis: u64::try_from(deadline.as_millis())
+            .expect("fixed supervisor deadline fits u64"),
+        cleanup_elapsed_millis: u64::try_from(cleanup.cleanup_elapsed.as_millis())
+            .expect("bounded cleanup elapsed fits u64"),
+        reaper_deadline_ref: private_reaper_deadline_reference(),
+        breached_cleanup_dimension,
+        cleanup_failure,
     })
+}
+
+fn private_reaper_deadline_reference() -> String {
+    let mut hasher = Sha256::new();
+    hasher.update(PRIVATE_REAPER_REF_DOMAIN);
+    hasher.update(PRIVATE_REAPER_DEADLINE.as_millis().to_le_bytes());
+    format!(
+        "mirrorea-i3-private-reaper-sha256-v1:{:x}",
+        hasher.finalize()
+    )
 }
 
 struct TrackedChild {
@@ -1933,13 +2121,52 @@ struct TrackedChild {
     event_reader: Option<JoinHandle<()>>,
     stderr_reader: Option<JoinHandle<()>>,
     control_writer: Option<JoinHandle<()>>,
+    event_reader_done: Option<Receiver<()>>,
+    stderr_reader_done: Option<Receiver<()>>,
+    control_writer_done: Option<Receiver<()>>,
     reaped: bool,
+}
+
+impl TrackedChild {
+    fn collect_completed_io_threads(&mut self) {
+        collect_completed_thread(&mut self.event_reader, &mut self.event_reader_done);
+        collect_completed_thread(&mut self.stderr_reader, &mut self.stderr_reader_done);
+        collect_completed_thread(&mut self.control_writer, &mut self.control_writer_done);
+    }
+
+    fn io_threads_completed(&self) -> bool {
+        self.event_reader.is_none() && self.stderr_reader.is_none() && self.control_writer.is_none()
+    }
+}
+
+fn collect_completed_thread(
+    handle: &mut Option<JoinHandle<()>>,
+    completed: &mut Option<Receiver<()>>,
+) {
+    let completion_observed = completed
+        .as_ref()
+        .is_some_and(|receiver| receiver.try_recv().is_ok());
+    if !completion_observed {
+        return;
+    }
+    // Completion is observed before join, so this join cannot become an
+    // unbounded cleanup wait.
+    if let Some(thread) = handle.take() {
+        let _ = thread.join();
+    }
+    let _ = completed.take();
 }
 
 fn spawn_event_reader(
     stdout: ChildStdout,
-) -> (Receiver<Result<ChildProcessEvent, ()>>, JoinHandle<()>) {
+    completion_delay: Option<Duration>,
+) -> (
+    Receiver<Result<ChildProcessEvent, ()>>,
+    JoinHandle<()>,
+    Receiver<()>,
+) {
     let (sender, receiver) = mpsc::channel();
+    let (completion_sender, completion_receiver) = mpsc::channel();
     let reader = thread::spawn(move || {
         let mut reader = BufReader::new(stdout);
         let mut line = String::new();
@@ -1959,15 +2186,41 @@ fn spawn_event_reader(
                 }
             }
         }
+        if let Some(delay) = completion_delay {
+            thread::sleep(delay);
+        }
+        let _ = completion_sender.send(());
     });
-    (receiver, reader)
+    (receiver, reader, completion_receiver)
 }
 
-fn spawn_discard_reader(mut stderr: ChildStderr) -> JoinHandle<()> {
-    thread::spawn(move || {
+fn spawn_discard_reader(mut stderr: ChildStderr) -> (JoinHandle<()>, Receiver<()>) {
+    let (completion_sender, completion_receiver) = mpsc::channel();
+    let reader = thread::spawn(move || {
         let mut buffer = [0_u8; 4096];
         while stderr.read(&mut buffer).is_ok_and(|read| read != 0) {}
-    })
+        let _ = completion_sender.send(());
+    });
+    (reader, completion_receiver)
+}
+
+#[derive(Clone, Copy, Debug)]
+struct CleanupEvidence {
+    reaper_deadline_enforced: bool,
+    children_reaped_before_reaper_deadline: bool,
+    io_threads_completed_before_reaper_deadline: bool,
+    cleanup_elapsed: Duration,
+}
+
+impl Default for CleanupEvidence {
+    fn default() -> Self {
+        Self {
+            reaper_deadline_enforced: false,
+            children_reaped_before_reaper_deadline: false,
+            io_threads_completed_before_reaper_deadline: false,
+            cleanup_elapsed: Duration::ZERO,
+        }
+    }
 }
 
 fn probe_binary_path() -> Option<PathBuf> {
@@ -2049,13 +2302,8 @@ pub(crate) enum CandidateChildError {
 /// writer replaces its stub, this returns a typed unavailable error and emits
 /// no control/data log.
 pub(crate) fn run_child_role_from_stdio(role: ChildRole) -> Result<(), CandidateChildError> {
-    let mut input = Vec::new();
-    io::stdin()
-        .take(512 * 1024)
-        .read_to_end(&mut input)
-        .map_err(|_| CandidateChildError::Protocol)?;
-    let control = serde_json::from_slice::<ChildProcessControl>(&input)
-        .map_err(|_| CandidateChildError::Protocol)?;
+    let input = read_private_child_control_stdin_bytes(&mut io::stdin())?;
+    let control = decode_private_child_control_from_stdin_bytes(input)?;
     if control.role != role {
         return Err(CandidateChildError::Protocol);
     }
@@ -2075,6 +2323,41 @@ pub(crate) fn run_child_role_from_stdio(role: ChildRole) -> Result<(), Candidate
     io::stdout()
         .write_all(b"\n")
         .map_err(|_| CandidateChildError::Protocol)
+}
+
+/// The only parent-side serialization path for child private control.  The
+/// resulting probe-owned buffer zeroizes on drop after the writer consumes it.
+fn serialize_private_child_control_for_stdin(
+    control: &ChildProcessControl,
+) -> Result<Zeroizing<Vec<u8>>, CandidateChildError> {
+    serde_json::to_vec(control)
+        .map(Zeroizing::new)
+        .map_err(|_| CandidateChildError::Protocol)
+}
+
+/// The only child-side stdin ownership path.  It bounds the read before
+/// decoding and stores raw control bytes in a zeroizing owner immediately.
+fn read_private_child_control_stdin_bytes(
+    reader: &mut impl Read,
+) -> Result<Zeroizing<Vec<u8>>, CandidateChildError> {
+    const MAX_PRIVATE_CHILD_CONTROL_BYTES: u64 = 512 * 1024;
+    let mut limited = reader.take(MAX_PRIVATE_CHILD_CONTROL_BYTES + 1);
+    let mut input = Zeroizing::new(Vec::new());
+    limited
+        .read_to_end(&mut input)
+        .map_err(|_| CandidateChildError::Protocol)?;
+    if input.len()
+        > usize::try_from(MAX_PRIVATE_CHILD_CONTROL_BYTES).expect("fixed limit fits usize")
+    {
+        return Err(CandidateChildError::Protocol);
+    }
+    Ok(input)
+}
+
+fn decode_private_child_control_from_stdin_bytes(
+    input: Zeroizing<Vec<u8>>,
+) -> Result<ChildProcessControl, CandidateChildError> {
+    serde_json::from_slice(&input).map_err(|_| CandidateChildError::Protocol)
 }
 
 fn run_supervisor_fault_child(control: ChildProcessControl) -> Result<(), CandidateChildError> {
@@ -2102,6 +2385,13 @@ fn run_supervisor_fault_child(control: ChildProcessControl) -> Result<(), Candid
             Ok(())
         }
         SupervisorTestFault::FailPostSpawnSetup => Err(CandidateChildError::Protocol),
+        SupervisorTestFault::DelayIoCompletionPastReaperDeadline => {
+            // The parent kills this real child during cleanup.  Its stdout
+            // reader owns the explicit completion latch/delay; this child
+            // itself emits no semantic or transport event.
+            thread::sleep(Duration::from_secs(60));
+            Ok(())
+        }
     }
 }
 
@@ -2113,5 +2403,162 @@ pub(crate) fn child_role_from_args(args: impl IntoIterator<Item = String>) -> Op
         [value] if value == "--i3-0-child-role=server" => Some(ChildRole::Server),
         [value] if value == "--i3-0-child-role=client" => Some(ChildRole::Client),
         _ => None,
+    }
+}
+
+pub(crate) fn run_private_supervisor_fault_from_args(
+    args: impl IntoIterator<Item = String>,
+) -> Option<bool> {
+    let values = args.into_iter().collect::<Vec<_>>();
+    let fault = match values.as_slice() {
+        [value] if value == "--i3-private-supervisor-fault=emit-non-loopback-ready" => {
+            SupervisorTestFault::EmitNonLoopbackReady
+        }
+        [value] if value == "--i3-private-supervisor-fault=fail-post-spawn-setup" => {
+            SupervisorTestFault::FailPostSpawnSetup
+        }
+        [value] if value == "--i3-private-supervisor-fault=expire-main-deadline" => {
+            SupervisorTestFault::ExpireDeadline
+        }
+        [value] if value == "--i3-private-supervisor-fault=delay-io-past-reaper-deadline" => {
+            SupervisorTestFault::DelayIoCompletionPastReaperDeadline
+        }
+        _ => return None,
+    };
+    let result =
+        run_supervisor_fault_probe(TransportCandidate::QuicReliableBidirectionalStream, fault);
+    let Ok(outcome) = result else {
+        return Some(false);
+    };
+    let mut output = io::stdout();
+    let wrote =
+        serde_json::to_writer(&mut output, &outcome).is_ok() && output.write_all(b"\n").is_ok();
+    Some(wrote)
+}
+
+#[cfg(test)]
+mod zeroizing_owner_red_tests {
+    use super::*;
+    use std::io::Cursor;
+
+    use zeroize::Zeroizing;
+
+    fn assert_probe_owned_zeroizing_bytes(value: &Zeroizing<Vec<u8>>) {
+        // This is deliberately only a scoped ownership claim. `Zeroizing`
+        // owns these probe copies and zeroizes them on drop; it says nothing
+        // about rcgen/rustls/allocator/OS-internal copies. Certificates are
+        // bounded-lifetime public material, not private keys.
+        assert!(
+            !value.is_empty(),
+            "the test fixture must contain private key bytes"
+        );
+    }
+
+    #[test]
+    fn common_tls_quic_conversion_keeps_probe_owned_key_and_private_pipe_buffers_zeroizing() {
+        let credentials = EphemeralCredentials::generate()
+            .expect("the private test fixture must generate ephemeral credentials");
+        let EphemeralCredentials {
+            certificate_der,
+            private_key_der,
+        } = credentials;
+        assert_probe_owned_zeroizing_bytes(&private_key_der);
+
+        let credential = ChildCredential::Server {
+            certificate_der,
+            private_key_der,
+        };
+        let ChildCredential::Server {
+            certificate_der: _,
+            private_key_der,
+        } = credential
+        else {
+            panic!("the server fixture must retain the private key owner")
+        };
+        assert_probe_owned_zeroizing_bytes(&private_key_der);
+
+        let transport_credentials = EphemeralCredentials::generate()
+            .expect("the private test fixture must generate transport credentials");
+        let transport_private_key: rustls::pki_types::PrivatePkcs8KeyDer<'static> = transport_credentials
+            .for_role(ChildRole::Server)
+            .into_transport_private_key()
+            .expect("the common TLS/QUIC conversion must consume the probe-owned zeroizing server-key owner at the rustls/QUIC boundary");
+        // Scope: this compile-pins the boundary's rustls private-key type
+        // after the probe-owned `Zeroizing<Vec<u8>>` has been consumed. It
+        // deliberately makes no claim about rustls, Quinn, rcgen, allocator,
+        // or OS-internal copies (including any library-owned allocation used
+        // to construct this private-key representation).
+        drop(transport_private_key);
+
+        let control_credentials = EphemeralCredentials::generate()
+            .expect("the private test fixture must generate independent control credentials");
+        let control = ChildProcessControl {
+            candidate: TransportCandidate::TlsOverTcpFramedReliableStream,
+            case: CandidateCase::ConnectWithoutSemanticAdmission,
+            role: ChildRole::Server,
+            frame: Vec::new(),
+            endpoint: None,
+            target_admission_edge: None,
+            credential: control_credentials.for_role(ChildRole::Server),
+            supervisor_fault: None,
+        };
+        let ChildProcessControl {
+            candidate,
+            case,
+            role,
+            frame,
+            endpoint,
+            target_admission_edge,
+            credential,
+            supervisor_fault,
+        } = control;
+        let control = ChildProcessControl {
+            candidate,
+            case,
+            role,
+            frame,
+            endpoint,
+            target_admission_edge,
+            credential,
+            supervisor_fault,
+        };
+        let sender_private_pipe = serialize_private_child_control_for_stdin(&control)
+            .expect("the actual spawn/write path must serialize private child control first");
+        assert_probe_owned_zeroizing_bytes(&sender_private_pipe);
+
+        let mut child_stdin = Cursor::new(sender_private_pipe.as_slice());
+        let child_private_pipe = read_private_child_control_stdin_bytes(&mut child_stdin)
+            .expect("the actual child-read path must take ownership of a zeroizing stdin buffer");
+        assert_probe_owned_zeroizing_bytes(&child_private_pipe);
+        let decoded = decode_private_child_control_from_stdin_bytes(child_private_pipe)
+            .expect("the actual child-read path must decode only after its zeroizing owner exists");
+        let ChildProcessControl {
+            candidate,
+            case,
+            role,
+            frame,
+            endpoint,
+            target_admission_edge,
+            credential,
+            supervisor_fault,
+        } = decoded;
+        assert_eq!(
+            candidate,
+            TransportCandidate::TlsOverTcpFramedReliableStream
+        );
+        assert_eq!(case, CandidateCase::ConnectWithoutSemanticAdmission);
+        assert_eq!(role, ChildRole::Server);
+        assert!(frame.is_empty());
+        assert!(endpoint.is_none());
+        assert!(target_admission_edge.is_none());
+        assert!(supervisor_fault.is_none());
+        let ChildCredential::Server {
+            certificate_der: _,
+            private_key_der,
+        } = credential
+        else {
+            panic!("decoded server control retains a zeroizing private-key owner")
+        };
+        assert_probe_owned_zeroizing_bytes(&private_key_der);
     }
 }

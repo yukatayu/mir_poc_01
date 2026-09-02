@@ -9,7 +9,7 @@ use mir_semantics::{
         CheckedIndexedStateSchema, CheckedProgramIdentity, DesignatedCheckedCore,
         DesignatedRemoteInputDependency, DesignatedResultConsumerCore, EffectKind, FailureRow,
         GeneratedObligationKind, OwnerRmwCheckedCore, RelationCheckedCore, RelationTransformCore,
-        ResidualObligationKind, StaticRetryContractKind, TypedStateRead,
+        ResidualObligationKind, StaticProjectionFacts, StaticRetryContractKind, TypedStateRead,
     },
 };
 use sha2::{Digest, Sha256};
@@ -1067,6 +1067,73 @@ struct DesignatedResultCarrierDetails {
     retry_contract: StaticRetryContractKind,
 }
 
+/// Private, static I3 adapter facts copied from one checked I2 carrier.  This
+/// deliberately contains no runtime occurrence, payload, route, session, or
+/// authority-bearing value.  SYS-5 turns the few sensitive semantic template
+/// values into observer-safe references before exposing its own façade.
+#[derive(Debug, Clone, PartialEq, Eq)]
+pub(crate) struct I3AdapterCarrierStaticFacts {
+    pub(crate) edge_kind: CommunicationEdgeKind,
+    pub(crate) lifecycle_kind: CarrierLifecycleKind,
+    pub(crate) operation_id: String,
+    pub(crate) source_ref: SourceRef,
+    pub(crate) core_ref: Option<String>,
+    pub(crate) origin_locus_template: Option<String>,
+    pub(crate) target_owner_locus_template: Option<String>,
+    pub(crate) declared_failure_row: FailureRow,
+    pub(crate) effect_row: ProjectedEffectRow,
+    pub(crate) authority_requirement_rows: Vec<I3AdapterCarrierStaticAuthorityRequirementRow>,
+    pub(crate) occurrence_slots: Vec<CarrierOccurrenceSlotKind>,
+    pub(crate) frontiers: BTreeSet<CarrierFrontierKind>,
+    pub(crate) linked_request_identity: bool,
+    pub(crate) typed_outcome: bool,
+    pub(crate) evaluator_receipt_consumption: bool,
+    pub(crate) reference_only_redaction: bool,
+    pub(crate) checked_core_bound: bool,
+    pub(crate) transfers_authority: bool,
+    pub(crate) mints_authority_without_source: bool,
+    pub(crate) variant: I3AdapterCarrierStaticVariant,
+}
+
+/// One exact ordered runtime-seam requirement retained by the static I3
+/// adapter facts. This keeps the source tuple nominally typed after it leaves
+/// the private authority container.
+#[derive(Debug, Clone, PartialEq, Eq)]
+pub(crate) struct I3AdapterCarrierStaticAuthorityRequirementRow {
+    pub(crate) requirement_kind: RuntimeSeamRequirementKind,
+    pub(crate) generated_obligation: Option<GeneratedObligationKind>,
+    pub(crate) provenance: CarrierProvenanceKind,
+    pub(crate) authority_category: Option<SeamAuthorityKind>,
+}
+
+/// The closed six-family static I3 adapter algebra.  It is intentionally
+/// exhaustive: a generated family cannot enter I3-1 through a catch-all
+/// variant or a nullable cross-family payload.
+#[derive(Debug, Clone, PartialEq, Eq)]
+pub(crate) enum I3AdapterCarrierStaticVariant {
+    OwnerRequest {
+        origin_principal_template: String,
+    },
+    OwnerReplyReceipt {
+        origin_principal_template: String,
+    },
+    DesignatedInputRequest {
+        dependency: StaticProjectionFacts,
+    },
+    DesignatedInputReceipt {
+        dependency: StaticProjectionFacts,
+    },
+    RelationProjectionPublication,
+    DesignatedResultDelivery {
+        result_version: ResultVersion,
+        input_frontier: InputFrontier,
+        result_frontier: ResultFrontier,
+        observation_policy: ObservationPolicy,
+        policy_stamp: PolicyStamp,
+        retry_contract: StaticRetryContractKind,
+    },
+}
+
 #[derive(Debug, Clone, PartialEq, Eq)]
 pub(crate) struct CarrierContract {
     edge_kind: CommunicationEdgeKind,
@@ -1240,6 +1307,243 @@ impl CarrierContract {
 
     pub(crate) const fn mints_authority_without_source(&self) -> bool {
         false
+    }
+
+    /// Converts the complete private carrier into the exact finite I3-1
+    /// static algebra.  The destructuring is deliberately exhaustive: adding
+    /// a `CarrierContract` field must make this conversion stop compiling
+    /// until the new field is either represented or explicitly rejected.
+    pub(crate) fn i3_adapter_static_facts(&self) -> Option<I3AdapterCarrierStaticFacts> {
+        let CarrierContract {
+            edge_kind,
+            lifecycle_kind,
+            operation_identity_template,
+            request_identity_template,
+            source_ref,
+            core_ref,
+            origin_principal_template,
+            origin_locus_template,
+            target_owner_locus_template,
+            declared_failure_row,
+            effect_row,
+            authority_requirements,
+            occurrence_slots,
+            frontiers,
+            linked_request_identity,
+            typed_outcome,
+            evaluator_receipt_consumption,
+            designated_dependency,
+            visibility_policy,
+            provenance,
+            designated_result_details,
+        } = self;
+
+        let OperationIdentityTemplate {
+            operation_id: operation_template_operation_id,
+        } = operation_identity_template;
+        let request_identity_template_has_slot = request_identity_template.has_slot();
+        let RequestIdentityTemplate {
+            operation_id: request_template_operation_id,
+            source_ref: request_template_source_ref,
+        } = request_identity_template;
+        let designated_result_details = designated_result_details.as_ref().map(
+            |DesignatedResultCarrierDetails {
+                 result_version,
+                 input_frontier,
+                 result_frontier,
+                 observation_policy,
+                 policy_stamp,
+                 retry_contract,
+             }| {
+                (
+                    result_version,
+                    input_frontier,
+                    result_frontier,
+                    observation_policy,
+                    policy_stamp,
+                    retry_contract,
+                )
+            },
+        );
+
+        if request_template_operation_id != operation_template_operation_id
+            || request_template_source_ref != source_ref
+            || !request_identity_template_has_slot
+            || !visibility_policy.is_reference_only()
+            || !matches!(provenance, CarrierContractProvenance::CheckedCoreBound)
+        {
+            return None;
+        }
+
+        let variant = match *edge_kind {
+            CommunicationEdgeKind::OwnerRequest => {
+                if *lifecycle_kind != CarrierLifecycleKind::OwnerRequest {
+                    return None;
+                }
+                let (Some(origin_principal_template), Some(_), Some(_)) = (
+                    origin_principal_template,
+                    origin_locus_template,
+                    target_owner_locus_template,
+                ) else {
+                    return None;
+                };
+                if designated_dependency.is_some() || designated_result_details.is_some() {
+                    return None;
+                }
+                I3AdapterCarrierStaticVariant::OwnerRequest {
+                    origin_principal_template: origin_principal_template.clone(),
+                }
+            }
+            CommunicationEdgeKind::OwnerReplyReceipt => {
+                if *lifecycle_kind != CarrierLifecycleKind::OwnerReplyReceipt {
+                    return None;
+                }
+                let (Some(origin_principal_template), Some(_), Some(_)) = (
+                    origin_principal_template,
+                    origin_locus_template,
+                    target_owner_locus_template,
+                ) else {
+                    return None;
+                };
+                if designated_dependency.is_some() || designated_result_details.is_some() {
+                    return None;
+                }
+                I3AdapterCarrierStaticVariant::OwnerReplyReceipt {
+                    origin_principal_template: origin_principal_template.clone(),
+                }
+            }
+            CommunicationEdgeKind::DesignatedInputRequest => {
+                if *lifecycle_kind != CarrierLifecycleKind::DesignatedInputRequest {
+                    return None;
+                }
+                let (None, Some(_), Some(_), Some(dependency)) = (
+                    origin_principal_template,
+                    origin_locus_template,
+                    target_owner_locus_template,
+                    designated_dependency,
+                ) else {
+                    return None;
+                };
+                if designated_result_details.is_some() {
+                    return None;
+                }
+                I3AdapterCarrierStaticVariant::DesignatedInputRequest {
+                    dependency: dependency.static_projection_facts(),
+                }
+            }
+            CommunicationEdgeKind::DesignatedInputReceipt => {
+                if *lifecycle_kind != CarrierLifecycleKind::DesignatedInputReceipt {
+                    return None;
+                }
+                let (None, Some(_), Some(_), Some(dependency)) = (
+                    origin_principal_template,
+                    origin_locus_template,
+                    target_owner_locus_template,
+                    designated_dependency,
+                ) else {
+                    return None;
+                };
+                if designated_result_details.is_some() {
+                    return None;
+                }
+                I3AdapterCarrierStaticVariant::DesignatedInputReceipt {
+                    dependency: dependency.static_projection_facts(),
+                }
+            }
+            CommunicationEdgeKind::RelationProjectionPublication => {
+                if *lifecycle_kind != CarrierLifecycleKind::RelationProjectionPublication {
+                    return None;
+                }
+                let (None, Some(_), Some(_)) = (
+                    origin_principal_template,
+                    origin_locus_template,
+                    target_owner_locus_template,
+                ) else {
+                    return None;
+                };
+                if designated_dependency.is_some() || designated_result_details.is_some() {
+                    return None;
+                }
+                I3AdapterCarrierStaticVariant::RelationProjectionPublication
+            }
+            CommunicationEdgeKind::DesignatedResultDelivery => {
+                if *lifecycle_kind != CarrierLifecycleKind::DesignatedResultDelivery {
+                    return None;
+                }
+                let (
+                    None,
+                    Some(_),
+                    Some(_),
+                    Some((
+                        result_version,
+                        input_frontier,
+                        result_frontier,
+                        observation_policy,
+                        policy_stamp,
+                        retry_contract,
+                    )),
+                ) = (
+                    origin_principal_template,
+                    origin_locus_template,
+                    target_owner_locus_template,
+                    designated_result_details,
+                )
+                else {
+                    return None;
+                };
+                if designated_dependency.is_some() {
+                    return None;
+                }
+                I3AdapterCarrierStaticVariant::DesignatedResultDelivery {
+                    result_version: *result_version,
+                    input_frontier: input_frontier.clone(),
+                    result_frontier: result_frontier.clone(),
+                    observation_policy: observation_policy.clone(),
+                    policy_stamp: policy_stamp.clone(),
+                    retry_contract: *retry_contract,
+                }
+            }
+            CommunicationEdgeKind::AbsoluteValueStream => return None,
+        };
+
+        let AuthorityRequirements { requirements } = authority_requirements;
+        let RuntimeSeamRequirements { rows } = requirements;
+        let authority_requirement_rows = rows
+            .iter()
+            .map(
+                |(requirement_kind, generated_obligation, provenance, authority_category)| {
+                    I3AdapterCarrierStaticAuthorityRequirementRow {
+                        requirement_kind: *requirement_kind,
+                        generated_obligation: generated_obligation.clone(),
+                        provenance: *provenance,
+                        authority_category: *authority_category,
+                    }
+                },
+            )
+            .collect();
+
+        Some(I3AdapterCarrierStaticFacts {
+            edge_kind: *edge_kind,
+            lifecycle_kind: *lifecycle_kind,
+            operation_id: operation_template_operation_id.clone(),
+            source_ref: source_ref.clone(),
+            core_ref: core_ref.clone(),
+            origin_locus_template: origin_locus_template.clone(),
+            target_owner_locus_template: target_owner_locus_template.clone(),
+            declared_failure_row: declared_failure_row.clone(),
+            effect_row: effect_row.clone(),
+            authority_requirement_rows,
+            occurrence_slots: occurrence_slots.clone(),
+            frontiers: frontiers.clone(),
+            linked_request_identity: *linked_request_identity,
+            typed_outcome: *typed_outcome,
+            evaluator_receipt_consumption: *evaluator_receipt_consumption,
+            reference_only_redaction: visibility_policy.is_reference_only(),
+            checked_core_bound: provenance.is_checked_core_bound(),
+            transfers_authority: false,
+            mints_authority_without_source: false,
+            variant,
+        })
     }
 
     /// Returns a private digest component for the exact retained owner-request
@@ -4105,5 +4409,194 @@ impl GlobalProjectionResult {
     ) {
         self.effect_handler_plan
             .for_test_clear_provenance(operation, kind, locus);
+    }
+}
+
+#[cfg(test)]
+mod i3_adapter_static_authority_rows_red_tests {
+    use super::*;
+    use mir_ast::surface_v0::FixtureSource;
+    use mir_semantics::surface_v0_pipeline::check_and_elaborate_surface_v0;
+
+    const ACTIVE_I2_SOURCE: &str =
+        include_str!("../../../../samples/clean-near-end/mirrorea-i2-local-toy/main.mir");
+
+    fn active_projection() -> GlobalProjectionResult {
+        let checked = check_and_elaborate_surface_v0(FixtureSource::new(
+            "samples/clean-near-end/mirrorea-i2-local-toy/main.mir",
+            ACTIVE_I2_SOURCE,
+        ))
+        .expect("the active source must check before projection");
+        let topology = DeclaredLogicalTopology::try_new(
+            checked.program_identity().clone(),
+            ["WorldAuthority", "ParticipantA", "ParticipantB", "ViewerC"],
+        )
+        .expect("the active source has exactly its four declared loci");
+        crate::sys3_projection::project_checked_core(&checked, &topology)
+            .expect("the active source must project")
+    }
+
+    #[test]
+    fn static_authority_rows_exhaustively_preserve_the_source_containers() {
+        let projection = active_projection();
+        let carrier = projection
+            .communication_plan()
+            .edges()
+            .iter()
+            .find(|edge| edge.kind() == CommunicationEdgeKind::DesignatedInputRequest)
+            .expect("the active projection retains a designated input request")
+            .carrier_contract();
+
+        let AuthorityRequirements { requirements } = carrier.authority_requirements();
+        let RuntimeSeamRequirements { rows } = requirements;
+        let static_facts = carrier
+            .i3_adapter_static_facts()
+            .expect("the accepted carrier must retain its static projection facts");
+        let I3AdapterCarrierStaticFacts {
+            edge_kind,
+            lifecycle_kind,
+            operation_id,
+            source_ref,
+            core_ref,
+            origin_locus_template,
+            target_owner_locus_template,
+            declared_failure_row,
+            effect_row,
+            authority_requirement_rows,
+            occurrence_slots,
+            frontiers,
+            linked_request_identity,
+            typed_outcome,
+            evaluator_receipt_consumption,
+            reference_only_redaction,
+            checked_core_bound,
+            transfers_authority,
+            mints_authority_without_source,
+            variant,
+        } = static_facts;
+        let _ = (
+            edge_kind,
+            lifecycle_kind,
+            operation_id,
+            source_ref,
+            core_ref,
+            origin_locus_template,
+            target_owner_locus_template,
+            declared_failure_row,
+            effect_row,
+            occurrence_slots,
+            frontiers,
+            linked_request_identity,
+            typed_outcome,
+            evaluator_receipt_consumption,
+            reference_only_redaction,
+            checked_core_bound,
+            transfers_authority,
+            mints_authority_without_source,
+            variant,
+        );
+
+        assert_eq!(authority_requirement_rows.len(), rows.len());
+        for (
+            I3AdapterCarrierStaticAuthorityRequirementRow {
+                requirement_kind,
+                generated_obligation,
+                provenance,
+                authority_category,
+            },
+            (
+                source_requirement_kind,
+                source_generated_obligation,
+                source_provenance,
+                source_authority_category,
+            ),
+        ) in authority_requirement_rows.iter().zip(rows)
+        {
+            assert_eq!(requirement_kind, source_requirement_kind);
+            assert_eq!(generated_obligation, source_generated_obligation);
+            assert_eq!(provenance, source_provenance);
+            assert_eq!(authority_category, source_authority_category);
+        }
+    }
+
+    #[test]
+    fn static_facts_exhaustively_preserve_identity_templates_and_result_details() {
+        let projection = active_projection();
+        let mut accepted_carriers = 0;
+        let mut saw_designated_result_delivery = false;
+
+        for carrier in projection
+            .communication_plan()
+            .edges()
+            .iter()
+            .map(|edge| edge.carrier_contract())
+        {
+            let Some(static_facts) = carrier.i3_adapter_static_facts() else {
+                continue;
+            };
+            accepted_carriers += 1;
+
+            let OperationIdentityTemplate {
+                operation_id: source_operation_id,
+            } = carrier.operation_identity_template();
+            let RequestIdentityTemplate {
+                operation_id: source_request_operation_id,
+                source_ref: source_request_source_ref,
+            } = carrier.request_identity_template();
+            assert_eq!(source_operation_id, source_request_operation_id);
+            assert_eq!(source_operation_id, &static_facts.operation_id);
+            assert_eq!(source_request_source_ref, carrier.source_ref());
+            assert_eq!(source_request_source_ref, &static_facts.source_ref);
+
+            match carrier.designated_result_details.as_ref() {
+                Some(DesignatedResultCarrierDetails {
+                    result_version: source_result_version,
+                    input_frontier: source_input_frontier,
+                    result_frontier: source_result_frontier,
+                    observation_policy: source_observation_policy,
+                    policy_stamp: source_policy_stamp,
+                    retry_contract: source_retry_contract,
+                }) => {
+                    saw_designated_result_delivery = true;
+                    assert_eq!(
+                        static_facts.edge_kind,
+                        CommunicationEdgeKind::DesignatedResultDelivery
+                    );
+                    let I3AdapterCarrierStaticVariant::DesignatedResultDelivery {
+                        result_version,
+                        input_frontier,
+                        result_frontier,
+                        observation_policy,
+                        policy_stamp,
+                        retry_contract,
+                    } = &static_facts.variant
+                    else {
+                        panic!(
+                            "a carrier with designated-result details must retain the delivery variant"
+                        );
+                    };
+                    assert_eq!(source_result_version, result_version);
+                    assert_eq!(source_input_frontier, input_frontier);
+                    assert_eq!(source_result_frontier, result_frontier);
+                    assert_eq!(source_observation_policy, observation_policy);
+                    assert_eq!(source_policy_stamp, policy_stamp);
+                    assert_eq!(source_retry_contract, retry_contract);
+                }
+                None => assert_ne!(
+                    static_facts.edge_kind,
+                    CommunicationEdgeKind::DesignatedResultDelivery,
+                    "only carriers with complete designated-result details may retain delivery facts"
+                ),
+            }
+        }
+
+        assert!(
+            accepted_carriers > 0,
+            "the active source retains accepted carriers"
+        );
+        assert!(
+            saw_designated_result_delivery,
+            "the active source retains a designated-result delivery carrier"
+        );
     }
 }

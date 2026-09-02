@@ -17,10 +17,11 @@ quinn = { version = "=0.11.11", default-features = false, features = ["runtime-t
 rcgen = { version = "=0.14.10", default-features = false, features = ["crypto", "ring"] }
 rustls = { version = "=0.23.43", default-features = false, features = ["std", "ring"] }
 serde = { version = "1", features = ["derive"] }
-serde_json = "1"
+serde_json = { version = "1", features = ["raw_value"] }
 sha2 = "0.10"
 tokio = { version = "=1.53.1", default-features = false, features = ["rt-multi-thread", "macros", "net", "io-util", "sync", "time"] }
 tokio-rustls = { version = "=0.26.4", default-features = false, features = ["ring"] }
+zeroize = { version = "=1.9.0", features = ["serde"] }
 
 [lints]
 workspace = true

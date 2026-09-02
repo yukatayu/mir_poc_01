@@ -9,7 +9,7 @@ use std::{io, sync::Arc};
 
 use rustls::{
     ClientConfig, RootCertStore, ServerConfig,
-    pki_types::{CertificateDer, PrivateKeyDer, PrivatePkcs8KeyDer, ServerName},
+    pki_types::{CertificateDer, PrivateKeyDer, ServerName},
 };
 use tokio::{
     io::{AsyncReadExt, AsyncWriteExt},
@@ -185,7 +185,7 @@ fn install_ring_provider() -> Result<(), CandidateExecutionError> {
 }
 
 async fn run_server(
-    control: ChildProcessControl,
+    mut control: ChildProcessControl,
 ) -> Result<ChildProcessEvent, CandidateExecutionError> {
     let listener = TcpListener::bind("127.0.0.1:0")
         .await
@@ -196,7 +196,7 @@ async fn run_server(
         .to_string();
     emit_ready(endpoint)?;
 
-    let acceptor = TlsAcceptor::from(Arc::new(server_config(&control)?));
+    let acceptor = TlsAcceptor::from(Arc::new(server_config(&mut control)?));
     let mut receiver_child = control.receiver_child_canary().map_err(map_child_error)?;
     let connections =
         usize::from(control.case() == crate::CandidateCase::DuplicateAcrossReconnect) + 1;
@@ -533,17 +533,16 @@ fn oversized_client_prefix() -> Result<Vec<u8>, CandidateExecutionError> {
     Ok(declared.to_be_bytes().to_vec())
 }
 
-fn server_config(control: &ChildProcessControl) -> Result<ServerConfig, CandidateExecutionError> {
+fn server_config(
+    control: &mut ChildProcessControl,
+) -> Result<ServerConfig, CandidateExecutionError> {
+    let certificate = CertificateDer::from(control.certificate_der().to_vec());
     let private_key = control
-        .server_private_key_der()
-        .ok_or_else(transport_failure)?
-        .to_vec();
+        .take_transport_private_key()
+        .ok_or_else(transport_failure)?;
     ServerConfig::builder()
         .with_no_client_auth()
-        .with_single_cert(
-            vec![CertificateDer::from(control.certificate_der().to_vec())],
-            PrivateKeyDer::Pkcs8(PrivatePkcs8KeyDer::from(private_key)),
-        )
+        .with_single_cert(vec![certificate], PrivateKeyDer::Pkcs8(private_key))
         .map_err(|_| transport_failure())
 }
 
