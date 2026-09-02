@@ -2,8 +2,8 @@
 id: meta/source-hierarchy
 status: L0-frozen
 maturity: draft
-depends_on: [adr/ADR-0012, adr/ADR-0014, adr/ADR-0015, adr/ADR-0026, adr/ADR-0033, adr/ADR-0034, adr/ADR-0035, adr/ADR-0036, adr/ADR-0037]
-summary: canon > LAB、active ADR-0034 program、ADR-0035三軸map、ADR-0036 trust boundary、ADR-0037 private transport selection、program外ADR-0014 routeの境界。
+depends_on: [adr/ADR-0012, adr/ADR-0014, adr/ADR-0015, adr/ADR-0026, adr/ADR-0033, adr/ADR-0034, adr/ADR-0035, adr/ADR-0036, adr/ADR-0037, adr/ADR-0038, meta/proposal-041]
+summary: canon > LAB、active ADR-0034 program、ADR-0035三軸map、ADR-0036 trust boundary、ADR-0037/0038 private adapter、program外ADR-0014 routeの境界。
 open_items: []
 ---
 
@@ -37,7 +37,7 @@ ADR-0026 / PROPOSAL-029 の SYS-0--SYS-7 bounded program はADR-0033によりclo
 Plan 249はclosed execution recordである。PROPOSAL-037 / ADR-0034はplan/05をconsumeし、
 Plan 250をsole current roadmapとする。ADR-0035はALIGN-1 three-axis map、ADR-0036は
 ALIGN-2 Browser/Host trust boundary、ADR-0037はI3-0 private QUIC reliable-stream adapter
-selectionを受理し、ALIGN-0/1/2とI3-0はcompleted、I3-1がactive goalである。
+selectionを受理し、PROPOSAL-041 / ADR-0038でI3-1 private adapter/encodingを受理した。ALIGN-0/1/2とI3-0/I3-1はcompleted、I3-2がactive goalである。
 OPEN-032はこのbounded programだけresolvedし、official I3 lifecycleは未entryである。
 `root/design-constitution` は North Star/ADR の下で後続 Canon を拘束する current
 decision filterであり、LAB roadmap/reportはそれを再解釈しない。`.mir` source、Rust、

@@ -254,12 +254,12 @@
       </div>
       <div class="headline-status">
         <h2>最初に結論</h2>
-      <p><strong>North Star に沿うin-process systems foundationを、source-first evidence付きで受理し、SYS-0--SYS-7 programを閉じました。</strong> accepted SYS-6 cut <code>5429712d...</code> はone ordinary sourceからのartifacts/generated dispatch/devtoolsをexact 22-row profileで検査し、ADR-0032はofficial I2 entry後exitを受理しました。PROPOSAL-037 / ADR-0034は公式I3 lifecycle entryを主張せず、Mirrorea I3 Distributed Foundation bounded programを開始しました。ALIGN-0/1/2とI3-0は完了し、<a href="../mirrorea_canon/adr/ADR-0037.md">ADR-0037</a>によりQUIC reliable streamをprivate provisional adapterとして選択、I3-1が現在地です。実 socket・ブラウザ・耐久分散・一般公開は後段です。</p>
+      <p><strong>North Star に沿うin-process systems foundationを、source-first evidence付きで受理し、SYS-0--SYS-7 programを閉じました。</strong> accepted SYS-6 cut <code>5429712d...</code> はone ordinary sourceからのartifacts/generated dispatch/devtoolsをexact 22-row profileで検査し、ADR-0032はofficial I2 entry後exitを受理しました。PROPOSAL-037 / ADR-0034は公式I3 lifecycle entryを主張せず、Mirrorea I3 Distributed Foundation bounded programを開始しました。ALIGN-0/1/2、I3-0、I3-1は完了し、<a href="../mirrorea_canon/adr/ADR-0038.md">ADR-0038</a>によりI3-2が現在地です。実 socket・ブラウザ・耐久分散・一般公開は後段です。</p>
         <div class="status-grid">
           <div class="status-card"><strong>理論 lifecycle</strong><span><b>official lifecycle は T1</b>。T0/G0 は閉じたが、T1 の広い exit と T2 の一般証明骨格は未達。</span></div>
-          <div class="status-card"><strong>bounded program</strong><span><b>Mirrorea I3 Distributed Foundation / I3-1 sole active goal</b>。Plan 250がsole current roadmap。ALIGN-0 / ALIGN-1 / ALIGN-2 / I3-0 completed、I3-2 next/not active。private selected adapterはQUIC reliable stream、TLS-over-TCP framed reliable streamはdeferred baselineです。固定順序はALIGN-0..2 → I3-0..6 → NEXT-0。</span></div>
+          <div class="status-card"><strong>bounded program</strong><span><b>Mirrorea I3 Distributed Foundation / I3-2 sole active goal</b>。Plan 250がsole current roadmap。ALIGN-0 / ALIGN-1 / ALIGN-2 / I3-0 / I3-1 completed。private selected adapterはQUIC reliable stream、TLS-over-TCP framed reliable streamはdeferred baselineです。固定順序はALIGN-0..2 → I3-0..6 → NEXT-0。</span></div>
           <div class="status-card"><strong>動く reference</strong><span><b>有限 I1+ deterministic reference profile は受理済み</b>。ordinary source から trace/projection まで接続済み。</span></div>
-          <div class="status-card"><strong>実装 lifecycle</strong><span><b>official I2 entry→exit は受理済み</b>。ただし広い PHASE-I1 exit は未受理で、OPEN-026/027 と full carrier freeze は残る。I3-0は完了しI3-1がactiveですが、official I3 lifecycle未entryです。OPEN-032はこのbounded programに限り解決済みです。</span></div>
+          <div class="status-card"><strong>実装 lifecycle</strong><span><b>official I2 entry→exit は受理済み</b>。ただし広い PHASE-I1 exit は未受理で、OPEN-026/027 と full carrier freeze は残る。I3-0/I3-1は完了しI3-2がactiveですが、official I3 lifecycle未entryです。OPEN-032はこのbounded programに限り解決済みです。</span></div>
         </div>
       </div>
     </div>
@@ -348,9 +348,9 @@
             <div class="axis-label">independent lifecycle / program coordinate</div>
             <div class="axis-track" aria-label="broad I1, bounded I2 lifecycle, and I3 program control are separate"><span class="axis-step edge">broad I1 exit 未受理</span><span class="axis-arrow">∥</span><span class="axis-step done">official I2 entry→exit accepted</span><span class="axis-arrow">∥</span><span class="axis-step later">I3 program active / lifecycle未entry</span></div>
             <div class="axis-label">independent authority / queue coordinate</div>
-            <div class="axis-track"><span class="axis-step done">ADR-0015 / Plan 247 closed</span><span class="axis-arrow">→</span><span class="axis-step done">ADR-0026 / Plan 249 / SYS-0--SYS-7 closed</span><span class="axis-arrow">→</span><span class="axis-step later">ADR-0037 / Plan 250 / I3-1 active</span></div>
+            <div class="axis-track"><span class="axis-step done">ADR-0015 / Plan 247 closed</span><span class="axis-arrow">→</span><span class="axis-step done">ADR-0026 / Plan 249 / SYS-0--SYS-7 closed</span><span class="axis-arrow">→</span><span class="axis-step later">ADR-0038 / Plan 250 / I3-2 active</span></div>
           </div>
-          <figcaption id="current-caption">official I2 exit acceptance は本物ですが、Theory T2、broad I1、general theorem、public contract、production への自動昇格ではありません。Plan 247とPlan 249はclosed baselinesです。I3-0の選択は完了しI3-1がactiveですが、official I3 lifecycle entryとproductionは主張しません。</figcaption>
+          <figcaption id="current-caption">official I2 exit acceptance は本物ですが、Theory T2、broad I1、general theorem、public contract、production への自動昇格ではありません。Plan 247とPlan 249はclosed baselinesです。I3-0/I3-1のadapter受理は完了しI3-2がactiveですが、official I3 lifecycle entryとproductionは主張しません。</figcaption>
         </figure>
 
         <article class="card" aria-labelledby="three-axis-title">
@@ -358,12 +358,12 @@
           <p><strong>semantic strata（S0–S6）</strong> は意味の責任、<strong>project/product layers（PL-0–PL-6）</strong> は製品積層の責任、<strong>lifecycle / implementation phases（T0–T2 / I1–I6）</strong> は実現・受理の状態を表します。三軸は<strong>多対多</strong>で、同じ番号や完了語から相互の受理を導きません。</p>
           <p><a href="../mirrorea_canon/architecture/06-project-product-layers.md">Canonical project/product layer map</a> に、PL-0 Host / physical substrate、PL-1 Mir language and semantic kernel、PL-2 Mirrorea distributed fabric、PL-3 Mir Browser / Host safe participant runtime、PL-4 Shared-Space / World-Web platform、PL-5 Domain Kits and applications、PL-6 Reversed Library / knowledge-world projectを定義しています。PL-4は<strong>責任境界のみ</strong>で、Reversed LibraryはMirroreaのcompletion条件へ混ぜない。PrismCascadeとTyped-Effect Wiring Platformはsatelliteとして保持します。</p>
           <p><a href="../mirrorea_canon/architecture/07-browser-host-trust-boundaries.md">Browser/Host trust boundary contract</a> と <a href="../mirrorea_canon/architecture/08-browser-host-security-invariants.md">cross-edge security invariants</a> は trust tier T0–T4 を Theory T0–T2 とは別に定義します。T1 checked untrusted Mir package の package admission と semantic grant は分離され、raw FFI / direct store は許可されません。Runtime/Projection→View は redaction 済みの projection を渡し、View は authoritative domain semantics を所有せず presentation-local computation のみを行います。</p>
-          <p class="note">ALIGN-2 boundary evidence: BND-007, BND-010, BND-011, BND-012, BND-013, BND-014, BND-015, BND-016。ALIGN-2/I3-0 completed、I3-1 sole active。QUIC reliable streamをprivate provisional adapterに選択し、TLS-over-TCP framed reliable streamはdeferred baseline、OPEN-032はbounded program内で解決済みです。official I3 lifecycle entryは未受理です。</p>
+          <p class="note">ALIGN-2 boundary evidence: BND-007, BND-010, BND-011, BND-012, BND-013, BND-014, BND-015, BND-016。ALIGN-2/I3-0/I3-1 completed、I3-2 sole active。QUIC reliable streamをprivate provisional adapterに選択し、TLS-over-TCP framed reliable streamはdeferred baseline、OPEN-032はbounded program内で解決済みです。official I3 lifecycle entryは未受理です。</p>
         </article>
 
         <div class="three-col">
           <article class="card"><h3>確定したもの</h3><p>v0/I1+ の有限意味、Surface → Core → runtime → projection の同一 source 経路、SCN-01..10 の静的・実行 correspondence、有限 Lean/model/runtime evidence。</p></article>
-          <article class="card orange"><h3>選択済みの現在</h3><p>SYS-5 はfour-locus local toyとjoined causal viewを実行し、SYS-6は <code>mir conform-i2</code> の22-row profileでそのsource/Core/artifact/edge/occurrence evidenceを検査しました。ADR-0032はofficial I2 entry後exit、ADR-0033はinactive I3 entry contract、ADR-0035/0036はALIGN-1/2 architecture、<a href="../mirrorea_canon/adr/ADR-0037.md">ADR-0037</a>はI3-0 transport selectionを受理しました。I3-1がactiveですがofficial I3 lifecycle entryは未受理です。</p></article>
+          <article class="card orange"><h3>選択済みの現在</h3><p>SYS-5 はfour-locus local toyとjoined causal viewを実行し、SYS-6は <code>mir conform-i2</code> の22-row profileでそのsource/Core/artifact/edge/occurrence evidenceを検査しました。ADR-0032はofficial I2 entry後exit、ADR-0033はinactive I3 entry contract、ADR-0035/0036はALIGN-1/2 architecture、<a href="../mirrorea_canon/adr/ADR-0037.md">ADR-0037</a>はI3-0 transport selection、<a href="../mirrorea_canon/adr/ADR-0038.md">ADR-0038</a>はI3-1 private adapterを受理しました。I3-1はclosedしI3-2がactiveですがofficial I3 lifecycle entryは未受理です。</p></article>
           <article class="card red"><h3>delegated decision と owner-reserved の後段</h3><p>OPEN-032は同条件canaryと<a href="../mirrorea_canon/meta/proposals/PROPOSAL-040-i3-0-transport-selection.md">PROPOSAL-040</a> / ADR-0037でこのbounded program内に解決しました。public carrier/wire freeze、production/publication、North Starや保証の変更はowner-reservedです。official I3 lifecycle entryはI3-6 acceptanceまで未受理です。</p></article>
         </div>
       </div>
@@ -439,7 +439,7 @@
             <div class="time">2026-08-28 / closed</div><div class="event"><strong>SYS-5 typed devtools / toy world</strong><span>cut <code>53a21e64...</code>でordinary source、four-locus generated dispatch、local save/restore、patch lifecycle、relation fallback/reacquire、observer-safe joined viewを受理。</span></div>
             <div class="time">2026-08-28 / closed</div><div class="event"><strong>SYS-6 I2 assurance / lifecycle closeout</strong><span>cut <code>5429712d...</code>の22-row profileとADR-0032でofficial I2 entry→exitを受理。</span></div>
             <div class="time">2026-08-28 / closed</div><div class="event"><strong>ADR-0033 / SYS-7 I3 entry contract only</strong><span>二つのreliable-stream候補を未選定のまま、inactive entry contractとprogram closeを記録。</span></div>
-            <div class="time">2026-09-02 / current</div><div class="event"><strong>ADR-0037 / I3-0 closed → I3-1 active</strong><span>ALIGN-0 / ALIGN-1 / ALIGN-2 / I3-0 completed。QUIC reliable streamをprivate provisional adapterに選択し、TLS-over-TCP framed reliable streamはdeferred baseline。OPEN-032はbounded program内で解決済みです。</span></div>
+            <div class="time">2026-09-02 / current</div><div class="event"><strong>ADR-0038 / I3-1 closed → I3-2 active</strong><span>ALIGN-0 / ALIGN-1 / ALIGN-2 / I3-0 / I3-1 completed、I3-2 active。QUIC reliable streamをprivate provisional adapterに選択し、TLS-over-TCP framed reliable streamはdeferred baseline。OPEN-032はbounded program内で解決済みです。</span></div>
             <div class="time">中長期</div><div class="event"><strong>I3 → I4 → I5 → I6</strong><span>実 transport、durable world/live patch、browser View demo、分散永続/federation。</span></div>
           </div>
           <figcaption id="timeline-caption">将来日は決まっていません。順序は依存関係を示し、納期を約束するものではありません。current-frontier discipline により、次の semantic milestone は一つだけ選びます。</figcaption>
@@ -455,7 +455,7 @@
               <tr><th><strong>T2</strong><br>骨格証明</th><td><span class="cell-status">将来</span></td><td>直接の製品機能より、実装の一般化に対する信頼が増える。</td><td>OBL-020/021/002 を中心に general preservation / determinism / soundness の proof skeleton。</td><td>exact Core/source correspondence と statement scope を owner-directed program で選ぶ。</td></tr>
               <tr class="accepted-row"><th><strong>I1</strong><br>参照実装</th><td><span class="cell-status partial">有限 I1+ 受理</span><br>広い exit は未受理</td><td>bounded <code>.mir</code> を single process で parse/check/run し、trace・save/load・patch・projection を調べられる。</td><td>SCN-01..10 finite C-static/C-runtime、designated / relation pressure slices、source/Core/trace correspondence。</td><td><code>architecture/04</code> full carrier freeze と <code>OPEN-026/027</code>。OPEN-030 narrow internal解決だけでは別のbroad exit acceptanceにならない。</td></tr>
               <tr class="accepted-row"><th><strong>I2</strong><br>process内 multi-locus</th><td><span class="cell-status done">official exit accepted</span><br>broad I1とは別軸</td><td>ordinary sourceからlocal toy world、複数 locus、generated dispatch、typed devtools、finite assuranceを再現できる。</td><td>generated communication を実 dispatchし、authority/failure/projection/observationを22-row profileで検査。</td><td><a href="../mirrorea_canon/adr/ADR-0032.md">ADR-0032</a> / <a href="../mirrorea_canon/spec/15-sys6-i2-conformance.md">spec 15</a> / OBL-063 / cut <code>5429712d...</code>。Theory T1、broad PHASE-I1、public contractは不変。</td></tr>
-              <tr><th><strong>I3</strong><br>実 transport</th><td><span class="cell-status now">program active / lifecycle未entry</span><br>I3-1 active</td><td>Plan 250の固定順序で2 OS process以上と実 transportによるC-distributed profileを構築する。</td><td>transport/session/certificateをauthorityにせず、internal carrierとpublic wireを分離し、network orderingをMir edgeへrefineする。</td><td><a href="../mirrorea_canon/adr/ADR-0037.md">ADR-0037</a>でQUIC reliable streamをprivate provisional adapterに選択。TLS-over-TCP framed reliable streamはdeferred baseline、QUIC datagramは除外。public version、codec、wire、library、portは未選定。</td></tr>
+              <tr><th><strong>I3</strong><br>実 transport</th><td><span class="cell-status now">program active / lifecycle未entry</span><br>I3-2 active</td><td>Plan 250の固定順序で2 OS process以上と実 transportによるC-distributed profileを構築する。</td><td>transport/session/certificateをauthorityにせず、internal carrierとpublic wireを分離し、network orderingをMir edgeへrefineする。</td><td><a href="../mirrorea_canon/adr/ADR-0037.md">ADR-0037</a> / <a href="../mirrorea_canon/adr/ADR-0038.md">ADR-0038</a>でQUIC reliable streamとI3-1 private adapterを受理。TLS-over-TCP framed reliable streamはdeferred baseline、QUIC datagramは除外。public version、codec、wire、library、portは未選定。</td></tr>
               <tr><th><strong>I4</strong><br>永続と patch</th><td><span class="cell-status">将来</span></td><td>world を落として再開し、実 session 中に checked patch を適用できる。</td><td>local durable cut、no-stale-resurrection、live activation cut、patch DAG。</td><td>finite local save/patch から durable implementation への widening。distributed durability はまだ外。</td></tr>
               <tr><th><strong>I5</strong><br>projection と View</th><td><span class="cell-status">将来</span></td><td>browser client と viewer/devtools を備えた、人に見せられる仮想空間 demo α。</td><td>View FFI、pose契約、consumer-local presentation、typed observation/provider boundary。</td><td><code>mir-lsp</code>、View/provider scope、public surface の reversible な設計。final ABI はまだ凍結しない。</td></tr>
               <tr><th><strong>I6</strong><br>分散永続と連合</th><td><span class="cell-status">長期</span></td><td>複数 server と federation 入口を備えた、招待制の常設小世界。</td><td>distributed durable save/load、複数 server evolution、federation policy。</td><td>production identity/operations、durability/failure model、公開範囲。一般公開・scale保証はさらに後。</td></tr>
@@ -585,7 +585,7 @@
       <div class="container">
         <p class="eyebrow">07 / Barriers and gates</p>
         <h2>閉じたprogramのreopen条件と、後段のowner decisionを分ける</h2>
-        <p class="section-intro">ADR-0026 / Plan 249 の systems route はSYS-0--SYS-7までclosedです。SYS-4 cut <code>22196f93...</code> はgenerated endpoint dispatch、SYS-5 cut <code>53a21e64...</code> はfour-locus toyとminimal typed devtools、SYS-6 cut <code>5429712d...</code> は22-row assuranceとofficial I2 lifecycle closeoutを閉じました。PROPOSAL-037 / ADR-0034のPlan 250ではALIGN-0 / ALIGN-1 / ALIGN-2 / I3-0をclosedし、ADR-0037によりI3-1がsole active goalです。QUIC reliable streamをprivate provisional adapterに選択し、TLS-over-TCP framed reliable streamはdeferred baseline、durability、View実装、operationsは後段です。</p>
+        <p class="section-intro">ADR-0026 / Plan 249 の systems route はSYS-0--SYS-7までclosedです。SYS-4 cut <code>22196f93...</code> はgenerated endpoint dispatch、SYS-5 cut <code>53a21e64...</code> はfour-locus toyとminimal typed devtools、SYS-6 cut <code>5429712d...</code> は22-row assuranceとofficial I2 lifecycle closeoutを閉じました。PROPOSAL-037 / ADR-0034のPlan 250ではALIGN-0 / ALIGN-1 / ALIGN-2 / I3-0 / I3-1をclosedし、ADR-0038によりI3-2がsole active goalです。QUIC reliable streamをprivate provisional adapterに選択し、TLS-over-TCP framed reliable streamはdeferred baseline、durability、View実装、operationsは後段です。</p>
 
         <div class="table-scroll" tabindex="0" aria-label="障壁と影響するフェーズ">
           <table>
@@ -636,13 +636,13 @@
       <div class="container">
         <p class="eyebrow">08 / Decision points</p>
         <h2>現在の決定: closed I2 boundaryを保ち、bounded I3 programを一つずつ進める</h2>
-        <p class="section-intro">ADR-0026で選択されたMirrorea I2 Systems FoundationはSYS-0--SYS-7を完了し、ADR-0033でclosedです。PROPOSAL-037 / ADR-0034のPlan 250はALIGN-0 / ALIGN-1 / ALIGN-2 / I3-0をclosedし、<a href="../mirrorea_canon/adr/ADR-0037.md">ADR-0037</a>によりI3-1だけをactiveにしています。general theory、public contract、productionは自動的に開始されません。</p>
+        <p class="section-intro">ADR-0026で選択されたMirrorea I2 Systems FoundationはSYS-0--SYS-7を完了し、ADR-0033でclosedです。PROPOSAL-037 / ADR-0034のPlan 250はALIGN-0 / ALIGN-1 / ALIGN-2 / I3-0 / I3-1をclosedし、<a href="../mirrorea_canon/adr/ADR-0038.md">ADR-0038</a>によりI3-2だけをactiveにしています。general theory、public contract、productionは自動的に開始されません。</p>
 
         <div class="decision-tree">
           <article class="decision-path">
             <h3>Accepted systems route</h3>
             <p><b>目的:</b> 一つの ordinary source から per-locus artifacts と generated communication を作り、process 内で実 dispatch して typed devtools まで接続する。</p>
-            <div class="mini-flow"><span>SYS-0..5 completed</span><b>→</b><span>SYS-6 completed: I2 assurance/exit</span><b>→</b><span>SYS-7 contract / program closed</span><b>→</b><span>I3-0 selected / I3-1 active</span></div>
+            <div class="mini-flow"><span>SYS-0..5 completed</span><b>→</b><span>SYS-6 completed: I2 assurance/exit</span><b>→</b><span>SYS-7 contract / program closed</span><b>→</b><span>I3-0 selected / I3-1 closed / I3-2 active</span></div>
             <p><b>必須確認:</b> public ABI/wire を凍結しないこと、M10 source/Core/trace correspondence と safety invariant を保持すること。</p>
           </article>
           <article class="decision-path research">
@@ -653,8 +653,8 @@
           </article>
           <article class="decision-path pause">
             <h3>Reserved later route</h3>
-            <p><b>扱い:</b> real transportはADR-0034 program内でI3-0選択を経てI3-1へ進行中です。public ABI/wireの不可逆freeze、production、final browser rendererはowner-reservedです。SYS-7 は inactive I3 entry contract だけを記録してclosedしました。</p>
-            <div class="mini-flow"><span>accepted I2 boundary</span><b>→</b><span>closed SYS-7 inactive I3 contract</span><b>→</b><span>ADR-0037 / I3-1 active</span></div>
+            <p><b>扱い:</b> real transportはADR-0034 program内でI3-0選択とI3-1 adapter受理を経てI3-2へ進行中です。public ABI/wireの不可逆freeze、production、final browser rendererはowner-reservedです。SYS-7 は inactive I3 entry contract だけを記録してclosedしました。</p>
+            <div class="mini-flow"><span>accepted I2 boundary</span><b>→</b><span>closed SYS-7 inactive I3 contract</span><b>→</b><span>ADR-0038 / I3-1 closed / I3-2 active</span></div>
             <p><b>必須確認:</b> transport を authority にせず、public freeze や external deployment を今回のprogramへ混ぜないこと。</p>
           </article>
         </div>
@@ -773,7 +773,7 @@ MirTheoryV0M8DeterministicRuntime.lean</code></pre>
               <tr><th>ADR-0026 program / SYS-0--SYS-7 completed; ADR-0037 / Plan 250 active</th><td>Canon L0/L1 + current LAB control</td><td><a href="../mirrorea_canon/adr/ADR-0026.md">ADR-0026</a> / <a href="../mirrorea_canon/adr/ADR-0032.md">ADR-0032</a> / <a href="../mirrorea_canon/adr/ADR-0033.md">ADR-0033</a> / <a href="../mirrorea_canon/adr/ADR-0034.md">ADR-0034</a> / <a href="../mirrorea_canon/adr/ADR-0037.md">ADR-0037</a> / <a href="../mirrorea_canon/plan/05-i3-entry-contract.md">plan 05</a> / <a href="../plan/250-mirrorea-i3-distributed-foundation-current-roadmap.md">active Plan 250</a></td></tr>
               <tr><th>proof status</th><td>Canon single ledger</td><td><a href="../mirrorea_canon/theory/11-metatheory-ledger.md">theory/11-metatheory-ledger</a></td></tr>
               <tr><th>OPEN-030 narrow internal resolution / broad carrier residual</th><td>Canon L1 decision + L2-working architecture</td><td><a href="../mirrorea_canon/adr/ADR-0027.md">ADR-0027</a> / <a href="../mirrorea_canon/architecture/04-runtime-carriers.md">architecture/04-runtime-carriers</a></td></tr>
-          <tr><th>Plan 250 / I3-1 active</th><td>Canon lifecycle + derived LAB snapshot</td><td><a href="../mirrorea_canon/adr/ADR-0034.md">ADR-0034</a> / <a href="../mirrorea_canon/adr/ADR-0037.md">ADR-0037</a> / <a href="../progress.md">progress</a> / <a href="../tasks.md">tasks</a> / <a href="project-status.md">project-status</a></td></tr>
+          <tr><th>Plan 250 / I3-2 active</th><td>Canon lifecycle + derived LAB snapshot</td><td><a href="../mirrorea_canon/adr/ADR-0034.md">ADR-0034</a> / <a href="../mirrorea_canon/adr/ADR-0037.md">ADR-0037</a> / <a href="../mirrorea_canon/adr/ADR-0038.md">ADR-0038</a> / <a href="../progress.md">progress</a> / <a href="../tasks.md">tasks</a> / <a href="project-status.md">project-status</a></td></tr>
             </tbody>
           </table>
         </div>
@@ -798,7 +798,7 @@ MirTheoryV0M8DeterministicRuntime.lean</code></pre>
           <li><strong>[Canon]</strong> <a href="../mirrorea_canon/adr/ADR-0028.md">ADR-0028</a>: accepted SYS-2 ST/OW1 execution and bounded ordering refinement。</li>
           <li><strong>[Canon]</strong> <a href="../mirrorea_canon/adr/ADR-0032.md">ADR-0032</a>: accepted SYS-6 finite conformance and official I2 entry/exit。</li>
           <li><strong>[Canon]</strong> <a href="../mirrorea_canon/adr/ADR-0033.md">ADR-0033</a> / <a href="../mirrorea_canon/plan/05-i3-entry-contract.md">plan 05</a>: inactive I3 entry contract、SYS-7 / program close、当時点ではOPEN-032 unresolved（歴史記録）。</li>
-          <li><strong>[Canon]</strong> <a href="../mirrorea_canon/meta/proposals/PROPOSAL-040-i3-0-transport-selection.md">PROPOSAL-040</a> / <a href="../mirrorea_canon/adr/ADR-0037.md">ADR-0037</a>: I3-0 transport selection、I3-1 active、OPEN-032のbounded disposition。</li>
+          <li><strong>[Canon]</strong> <a href="../mirrorea_canon/meta/proposals/PROPOSAL-040-i3-0-transport-selection.md">PROPOSAL-040</a> / <a href="../mirrorea_canon/adr/ADR-0037.md">ADR-0037</a> / <a href="../mirrorea_canon/adr/ADR-0038.md">ADR-0038</a>: I3-0 transport selection、I3-1 closed、I3-2 active、OPEN-032のbounded disposition。</li>
           <li><strong>[Canon]</strong> <a href="../mirrorea_canon/spec/15-sys6-i2-conformance.md">spec 15</a>: fixed I2 conformance rows、evidence provenance、non-claims。</li>
           <li><strong>[LAB]</strong> <a href="../Documentation.md">Documentation</a>: reader entry。</li>
           <li><strong>[LAB]</strong> <a href="../plan/249-mirrorea-i2-systems-foundation-current-roadmap.md">Plan 249</a>: closed execution record。</li>
@@ -816,7 +816,7 @@ MirTheoryV0M8DeterministicRuntime.lean</code></pre>
 
   <footer>
     <div class="container">
-      <p>2026-09-02 時点の LAB reader view。ADR-0026--0037 / spec 15 / OBL-063 / closed Plan 249 / active Plan 250 / I3-1を反映し、official I2 exit、broad PHASE-I1 residual、bounded I3 status、OPEN-032のbounded解決、public product nonclaimを分離しています。</p>
+      <p>2026-09-02 時点の LAB reader view。ADR-0026--0038 / spec 15 / OBL-063 / closed Plan 249 / active Plan 250 / I3-2を反映し、official I2 exit、broad PHASE-I1 residual、bounded I3 status、OPEN-032のbounded解決、public product nonclaimを分離しています。</p>
     </div>
   </footer>
 </body>

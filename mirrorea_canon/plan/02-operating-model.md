@@ -2,8 +2,8 @@
 id: plan/02-operating-model
 status: L1-fixed
 maturity: reviewed
-depends_on: [adr/ADR-0012, adr/ADR-0014, adr/ADR-0015, adr/ADR-0026, adr/ADR-0033, adr/ADR-0034, adr/ADR-0035, adr/ADR-0036, adr/ADR-0037]
-summary: active ADR-0034 program/ADR-0035三軸map/ADR-0036 trust boundary、program外L3 research、goal/frontier/review規律。
+depends_on: [adr/ADR-0012, adr/ADR-0014, adr/ADR-0015, adr/ADR-0026, adr/ADR-0033, adr/ADR-0034, adr/ADR-0035, adr/ADR-0036, adr/ADR-0037, adr/ADR-0038, meta/proposal-041]
+summary: active ADR-0034 program/ADR-0035三軸map/ADR-0036 trust boundary/ADR-0037--0038 private adapter、program外L3 research、goal/frontier/review規律。
 open_items: []
 ---
 
@@ -15,8 +15,8 @@ Four profiles are deliberately separate.
 
 1. **Mirrorea I3 Distributed Foundation** follows ADR-0034 and
    PROPOSAL-037. Its fixed sequence is ALIGN-0--2, I3-0--6, NEXT-0; Plan 250
-   is its sole current roadmap. ALIGN-0/1/2 and I3-0 are completed, I3-1 is the
-   sole active frontier, and I3-2 is next/inactive under ADR-0037.
+   is its sole current roadmap. ALIGN-0/1/2, I3-0 and I3-1 are completed, I3-2 is the
+   sole active frontier under ADR-0038.
 2. **Mirrorea I2 Systems Foundation SYS-0--SYS-7** followed ADR-0026 and
    PROPOSAL-029. It is closed by ADR-0033; its accepted cuts and Plan 249 are
    immutable history/regression baseline and grant no I3 or successor authority.

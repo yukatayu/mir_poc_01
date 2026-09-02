@@ -18,6 +18,12 @@ open_items: []
 
 ## 履歴
 
+- **2026-09-02** PROPOSAL-041 / ADR-0038でI3-1をclosedした。source/Core由来
+  の6 carrier family / 12 edge、strict private adapter/encoding、bounded
+  localhost QUIC reliable bidi seamを受理し、I3-2をsole active goalとした。
+  official I3 lifecycleは未entryであり、public wire/API/ABI、一般proof、
+  retry/reconnect、productionは未主張である。
+
 - **2026-09-02** PROPOSAL-040 / ADR-0037により、同一private
   source/Core-bound nine-case receiver-child canaryをactual TLS-over-TCPとQUIC
   reliable streamで実行したI3-0を受理した。両候補はcriteria 1--7でtieし、criterion 8

@@ -2,8 +2,8 @@
 id: meta/agent-instructions
 status: L0-frozen
 maturity: draft
-depends_on: [adr/ADR-0012, adr/ADR-0014, adr/ADR-0015, adr/ADR-0026, adr/ADR-0033, adr/ADR-0034, adr/ADR-0035, adr/ADR-0036, adr/ADR-0037, arch/06-project-product-layers, arch/07-browser-host-trust-boundaries, plan/02-operating-model]
-summary: agent の読込、active ADR-0034 program、ADR-0035三軸map、ADR-0036 trust boundary、ADR-0037 private transport selection、program外L3 research、review境界。
+depends_on: [adr/ADR-0012, adr/ADR-0014, adr/ADR-0015, adr/ADR-0026, adr/ADR-0033, adr/ADR-0034, adr/ADR-0035, adr/ADR-0036, adr/ADR-0037, adr/ADR-0038, meta/proposal-041, arch/06-project-product-layers, arch/07-browser-host-trust-boundaries, plan/02-operating-model]
+summary: agent の読込、active ADR-0034 program、ADR-0035三軸map、ADR-0036 trust boundary、ADR-0037/0038 private adapter、program外L3 research、review境界。
 open_items: []
 ---
 
@@ -22,7 +22,7 @@ open_items: []
   PROPOSAL-037 / ADR-0034はADR-0033 / plan/05をconsumeするactive bounded programを
   authorizeし、Plan 250をsole roadmapとする。ADR-0035はALIGN-1 three-axis map、
   ADR-0036はALIGN-2 Browser/Host trust boundary、ADR-0037はI3-0 private
-  QUIC reliable-stream adapter selectionを受理した。ALIGN-0/1/2とI3-0はcompleted、I3-1が
+  QUIC reliable-stream adapter selectionを受理した。PROPOSAL-041 / ADR-0038でI3-1 private adapter/encodingを受理し、ALIGN-0/1/2とI3-0/I3-1はcompleted、I3-2が
   active goalである。program activation又はI3-0 close
   自体はofficial I3 entry/exit又はpublic contract freezeではない。
 - ADR-0014 の standing route に従う L2/L3 working theory: `working/WRK-####` に

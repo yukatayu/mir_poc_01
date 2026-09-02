@@ -2,7 +2,7 @@
 id: arch/04-runtime-carriers
 status: L2-working
 maturity: reviewed
-depends_on: [theory/04-ordering-and-cuts, theory/05-authority, theory/07-observation, theory/08-patch-hotplug, theory/13-evaluation-materialization, theory/18-m9-auth-verification, adr/ADR-0027, adr/ADR-0028, adr/ADR-0029, adr/ADR-0030, adr/ADR-0031, adr/ADR-0032, spec/15-sys6-i2-conformance]
+depends_on: [theory/04-ordering-and-cuts, theory/05-authority, theory/07-observation, theory/08-patch-hotplug, theory/13-evaluation-materialization, theory/18-m9-auth-verification, adr/ADR-0027, adr/ADR-0028, adr/ADR-0029, adr/ADR-0030, adr/ADR-0031, adr/ADR-0032, adr/ADR-0038, arch/09-i3-private-adapter, spec/15-sys6-i2-conformance]
 summary: broad runtime carrier catalogとSYS-1--6 internal lifecycle/execution/projection/dispatch/devtools/assurance requirements。public API/ABI/wireは未凍結。
 open_items: [OPEN-026, OPEN-027]
 ---
@@ -318,3 +318,10 @@ OPEN-027 external delivery observability, and the broader carrier catalog/full
 internal freeze remain unresolved. Therefore broad PHASE-I1 remains
 unaccepted even though ADR-0032 separately accepts the bounded official I2
 entry and exit criteria.
+
+## I3-1 bounded private adapter mapping
+
+The accepted bounded mapping is maintained separately in
+[`architecture/09-i3-private-adapter.md`](09-i3-private-adapter.md) and is
+consumed directly by I3-2. This broad carrier catalog remains L2-working and
+does not become a public schema.

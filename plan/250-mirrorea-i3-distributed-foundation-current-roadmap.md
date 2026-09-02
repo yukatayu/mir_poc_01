@@ -1,6 +1,6 @@
 # Plan 250 — Mirrorea I3 Distributed Foundation current execution roadmap
 
-最終更新: 2026-09-02 02:52 JST
+最終更新: 2026-09-02 10:36 JST
 
 ## 役割、authority、current control state
 
@@ -42,11 +42,12 @@ roadmap/status pointer の一致を検証する。
   (the milestone integration commit cannot embed its own future hash)
 - accepted ALIGN-2 trust-boundary decision: PROPOSAL-039 / ADR-0036
 - accepted I3-0 private transport selection: PROPOSAL-040 / ADR-0037
+- accepted I3-1 private adapter/encoding: PROPOSAL-041 / ADR-0038, cut `d75fa2e7...`
   (the milestone integration commit cannot embed its own future hash)
 - sole current roadmap: **Plan 250**
-- completed goals: **ALIGN-0, ALIGN-1, ALIGN-2, I3-0**
-- sole active goal: **I3-1**
-- next goal after accepted I3-1 close: **I3-2**
+- completed goals: **ALIGN-0, ALIGN-1, ALIGN-2, I3-0, I3-1**
+- sole active goal: **I3-2**
+- next goal after accepted I3-2 close: **I3-3**
 - all other milestones: **ordered, inactive, and dependency-gated**
 - Plan 247: closed M0--M10 execution record / regression baseline
 - Plan 249: closed SYS-0--SYS-7 execution record / accepted I2 baseline
@@ -74,17 +75,17 @@ Normative direction for this roadmap is read in the following order:
 1. `mirrorea_canon/README.md`, `MAP.md`, `NORTH-STAR.md`, and
    `DESIGN-CONSTITUTION.md`;
 2. `mirrorea_canon/architecture/01-strata.md` through
-   `architecture/05-satellites.md`;
+   `architecture/09-i3-private-adapter.md`;
 3. `mirrorea_canon/plan/00-gates.md`, `plan/01-phases.md`, and
    `plan/05-i3-entry-contract.md`;
-4. ADR-0026, ADR-0028 through ADR-0033, and
+4. ADR-0026, ADR-0028 through ADR-0038, PROPOSAL-037 through PROPOSAL-041, and
    `mirrorea_canon/theory/11-metatheory-ledger.md`; and
-5. the owner-authorized PROPOSAL-037 / ADR-0034 activation mirror when
-   accepted.
+5. the owner-authorized PROPOSAL-037 / ADR-0034 activation mirror and the
+   milestone acceptance chain through PROPOSAL-041 / ADR-0038.
 
 LAB evidence is `progress.md`, `tasks.md`,
 `.docs/progress-task-axes.md`, closed Plan 249, and milestone Reports
-2598--2599. If LAB wording conflicts with Canon, Canon wins. The owner direction
+2598--2604. If LAB wording conflicts with Canon, Canon wins. The owner direction
 supplies new program authority but does not silently rewrite an existing Canon
 semantic invariant.
 
@@ -244,14 +245,14 @@ rule both permit it. Historical WRKs do not become a program queue.
 Reports use `docs/reports/TEMPLATE.md`, retain all 22 required report sections,
 and are exactly one per milestone:
 
-| Milestone | Report path | Status at program start |
+| Milestone | Report path | Current status |
 | --- | --- | --- |
 | ALIGN-0 | `docs/reports/2600-mirrorea-i3-distributed-foundation-align0-baseline-goal-alignment.md` | completed |
 | ALIGN-1 | `docs/reports/2601-mirrorea-i3-distributed-foundation-align1-layer-map.md` | completed |
 | ALIGN-2 | `docs/reports/2602-mirrorea-i3-distributed-foundation-align2-trust-boundaries.md` | completed |
 | I3-0 | `docs/reports/2603-mirrorea-i3-distributed-foundation-i3-0-transport-selection.md` | completed |
-| I3-1 | `docs/reports/2604-mirrorea-i3-distributed-foundation-i3-1-adapter-encoding.md` | active report |
-| I3-2 | `docs/reports/2605-mirrorea-i3-distributed-foundation-i3-2-two-process-runtime.md` | inactive |
+| I3-1 | `docs/reports/2604-mirrorea-i3-distributed-foundation-i3-1-adapter-encoding.md` | completed; ADR-0038 |
+| I3-2 | `docs/reports/2605-mirrorea-i3-distributed-foundation-i3-2-two-process-runtime.md` | active |
 | I3-3 | `docs/reports/2606-mirrorea-i3-distributed-foundation-i3-3-failure-ordering.md` | inactive |
 | I3-4 | `docs/reports/2607-mirrorea-i3-distributed-foundation-i3-4-c-distributed-scenarios.md` | inactive |
 | I3-5 | `docs/reports/2608-mirrorea-i3-distributed-foundation-i3-5-devtools-workflow.md` | inactive |
@@ -636,7 +637,7 @@ counterexample, a loss of the equal canary floor, or evidence that Candidate B
 cannot conservatively satisfy I3-1. An irreversible public/non-migratable tie or
 both candidates failing would trigger the owner stop rule; neither occurred.
 
-## I3-1 milestone contract — sole active goal
+## I3-1 milestone contract — completed
 
 **Goal ID:** I3-1
 
@@ -677,9 +678,10 @@ deployment or supported-platform claim.
 version bytes become an admitted semantic carrier, or any round trip loses,
 aliases, invents or defaults a required semantic field.
 
-**Exit evidence:** Exact field-level round-trip/property tests, selected-adapter
+**Exit evidence:** Exact field-level round-trip/mutation tests, selected-adapter
 tests, malformed/truncated/oversized/version/provenance/redaction negative tests,
-fuzz/property evidence for private decode, preserved I2/M10 regressions and an
+deterministic property/mutation evidence for private decode (not coverage-guided
+fuzz), preserved I2/M10 regressions and an
 independent codec/security/semantic review with P0/P1 zero.
 
 **Stop condition:** Stop I3-1 when I3-2 can consume the accepted adapter without
@@ -714,8 +716,21 @@ oversize and unknown fields/versions; preserved I2/M10 regression; independent
 codec/security/semantics review; Report 2604; accepted source/evidence and
 integration commits pushed with parity; advance exactly to I3-2.
 
-**Carried I3-0 P2 residuals/non-claims:** These are direct hardening consumers,
-not I3-0 blockers or already-passing I3-1 evidence.
+**Close evidence / disposition:** Cut `d75fa2e7...` passed focused source suites
+60/60 and accepted floors 104/104. Final source-implementation reviews found
+P0/P1/P2 = 0 and quality 0/0/0; the aggregate close review separately retains
+the accepted/deferred architecture/04 size-budget P2. The workspace-wide run
+exited 130 before tests under disk pressure and
+is NOT PASS. Deterministic property/mutation tests passed; no coverage-guided
+fuzz or general proof is claimed. P2-1 is closed for probe-owned key buffers
+(library-copy scope remains a non-claim); P2-2 is closed by bounded reaping;
+P2-3 remains Linux x86_64 localhost only; P2-4 has static no-mint/revalidation
+evidence while live admission remains I3-3; P2-5 is deferred to I3-3; P2-6
+remains canary-only and I3-2 replaces it; P2-7 strict negatives are closed;
+P2-8 v2 identity and six-family coverage are closed.
+
+The former P2 table is retained below as entry-history only; none is an open
+I3-1 blocker.
 
 | ID | Residual / exact non-claim | I3-1 acceptance use |
 | --- | --- | --- |
@@ -733,11 +748,50 @@ carrier meaning change outside the program. Reopen for ambiguous decoding,
 allocation before limit checks, semantic defaulting, secret leakage or
 replacement-seam failure.
 
-## I3-2 milestone contract — inactive until I3-1 closes
+## I3-2 milestone contract — sole active goal
 
-**Goal:** Execute accepted generated artifacts and communication across at
-least two actual OS processes, with deployment limited to logical-locus-to-
-endpoint mapping and with remote owner service/result behavior observable.
+**Goal ID:** I3-2
+
+**Goal sentence:** By the end of this milestone, accepted generated artifacts
+and communication execute across at least two actual OS processes, with
+deployment limited to logical-locus-to-endpoint mapping and with remote owner
+service/result behavior observable.
+
+**Layer advanced:** Semantic S4/PL-2 Mirrorea fabric, lifecycle I3; Core meaning,
+Browser/Host boundaries and official lifecycle remain unchanged.
+
+**North Star link:** Correctly communicate checked meaning across real process
+boundaries while preserving placement, authority, verification and observation.
+
+**User-visible outcome:** A bounded fresh-checkout workflow starts two processes
+from checked per-locus artifacts and performs a remote owner request/result with
+source/Core/artifact/network/runtime correspondence.
+
+**Semantic invariants:** Deployment maps only logical loci to endpoints; edges,
+owner, authority, capability, witness, state, failure and occurrence identity
+come from checked artifacts. No cross-process direct store; transport/session/
+address is non-authoritative; provenance, redaction and typed failure survive.
+
+**Direct consumer:** I3-3 injects its complete network failure, retry, reconnect
+and ordering matrix into this actual route.
+
+**Non-goals:** Complete fault matrix, retry/reconnect policy, durability, live
+patch, browser/provider integration, public wire/API/ABI, production/WAN,
+general proof, and official I3 entry/exit.
+
+**Primary falsifier:** Runtime reparses source, hand-writes a route, uses a
+fixture/expected result, shares a cross-process store, mutates a non-owner,
+mints authority from endpoint/session identity, or leaves orphan processes.
+
+**Exit evidence:** Actual two-or-more-process generated dispatch over the
+accepted adapter; remote owner serve/result/receipt; correspondence and clean
+shutdown; representative falsifiers; typed fault evidence; independent review;
+Report 2605 and remote parity.
+
+**Stop condition:** Close when positive/falsifier evidence passes with no P0/P1
+and I3-3 can consume the runtime seam. Reopen for source-free routing,
+authority violation, stale resurrection, hidden retry, direct store,
+provenance/redaction loss or unbounded orphan resources.
 
 **Entry:** I3-1 adapter/encoding accepted, Report 2604, pushed parity, current
 goal I3-2, and no unresolved I3-1 semantic/security finding.
@@ -749,16 +803,7 @@ typed result or receipt, and terminates/cleans up deterministically. Neither
 launcher nor deployment metadata supplies Core, routes absent from the plan,
 authority, state, arguments, expected results, or semantic occurrence IDs.
 
-**Direct consumer:** I3-3 injects the complete network failure and ordering
-matrix into this actual multi-process route.
-
-**Primary falsifier:** A success path reparses source at runtime, chooses a
-fixture/expected result, hand-writes an edge, uses a shared cross-process store,
-mutates a non-owner, mints authority from endpoint/session identity, executes in
-one process while claiming distributed evidence, or leaves nondeterministic
-orphan processes/resources.
-
-**Exit and validation:** Actual two-or-more-process positive execution; process
+**Detailed validation:** Actual two-or-more-process positive execution; process
 identity and address non-authority negatives; missing/extra/retargeted edge and
 direct-remote-store falsifiers; remote owner mutation and typed result lineage;
 deterministic replay at the declared bounded scheduler profile; clean startup,
@@ -768,7 +813,7 @@ independent runtime/concurrency/security review; Report 2605; accepted
 source/evidence and integration commits pushed with parity; advance exactly to
 I3-3.
 
-**Stop/reopen:** Stop for unavoidable manual communication, authority collapse,
+**Stop/reopen detail:** Stop for unavoidable manual communication, authority collapse,
 hidden shared state, unsafe cleanup, or production/deployment requirement.
 Reopen for a reproducible route/owner/provenance mismatch or process boundary
 that the I3-3 fault harness cannot control deterministically.
@@ -1178,9 +1223,8 @@ integration, or Typed-Effect platform collapse.
 
 ## Recommended next action
 
-Execute I3-1 only: turn the retained owner-request facade into the checked,
-transport-neutral private provisional encode/decode/admission boundary consumed
-by I3-2, target the ADR-0037 selected QUIC reliable-stream adapter, close the eight carried
-P2 residual groups, and preserve the TLS/TCP implementation only
-as replacement evidence. Add no process deployment/runtime semantics, public
-wire promise, hidden retry/exactly-once or production/platform claim.
+Execute I3-2 only: use generated artifacts and the accepted adapter to launch
+two or more OS processes, perform remote owner service/result, and preserve
+source/Core/artifact correspondence. Add no manual route, direct cross-process
+store, authority mint, public wire promise, hidden retry/exactly-once or
+production/platform claim.

@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-09-02 02:52 JST
+最終更新: 2026-09-02 09:59 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -12,8 +12,8 @@ creates no Canon, Gate, Phase, proof, lifecycle, or compatibility decision.
 
 Plan 247 and Plan 249 are closed execution records. PROPOSAL-037 / ADR-0034
 authorize the active bounded Mirrorea I3 Distributed Foundation program;
-Plan 250 is the sole current roadmap. ALIGN-0, ALIGN-1, and ALIGN-2 completed;
-I3-0 completed and I3-1 is the sole active goal. Reports retain detailed evidence.
+Plan 250 is the sole current roadmap. ALIGN-0, ALIGN-1, ALIGN-2, I3-0 and I3-1
+are completed; I3-2 is the sole active goal. Reports retain detailed evidence.
 
 ## project axis
 
@@ -45,7 +45,8 @@ ordinary source -> checked Core -> ownership/effect/failure/lifetime
 ```
 
 The accepted boundary reaches in-process generated dispatch and finite typed
-assurance. Real multi-process transport and product layers remain later.
+assurance. I3-1 adds bounded private QUIC adapter/encoding evidence; real
+multi-process owner runtime and product layers remain later.
 
 ## current milestone position
 
@@ -53,15 +54,15 @@ assurance. Real multi-process transport and product layers remain later.
 |---|---|---|
 | Logical specification | finite source -> Core -> artifact -> communication -> in-process trace/conformance accepted; Theory T1 and broad PHASE-I1 unaccepted | maintenance **着手可能**; general widening **後段依存** |
 | User-facing specification | provisional project/run/inspect/conform workflow exists; public grammar/CLI/JSON/API/ABI/wire/devtools unfrozen | regression **着手可能**; public contract **要仕様確認** |
-| Implementation / operation | I2 exit preserved; private QUIC reliable stream selected after equal I3-0 canaries; I3-1 active | I3-1 **着手可能**; lifecycle entry not official |
+| Implementation / operation | I2 exit preserved; I3-1 private QUIC adapter/encoding accepted; I3-2 active | I3-2 **着手可能**; lifecycle entry not official |
 
 ```text
 Theory: T1
 Broad PHASE-I1: unaccepted (OPEN-026/027 + full carrier freeze)
 Official I2: entry accepted -> exit accepted (ADR-0032)
 ADR-0026 program: SYS-0--SYS-7 closed (ADR-0033)
-Active roadmap / goal: Plan 250 / I3-1 sole active goal
-Sequence: ALIGN-0 completed → ALIGN-1 completed → ALIGN-2 completed → I3-0 completed → I3-1 active → I3-2..6 → NEXT-0
+Active roadmap / goal: Plan 250 / I3-2 sole active goal
+Sequence: ALIGN-0 completed → ALIGN-1 completed → ALIGN-2 completed → I3-0 completed → I3-1 completed → I3-2 active → I3-3..6 → NEXT-0
 I3 bounded program active; lifecycle entry not official; OPEN-032 resolved only for this program
 ```
 
@@ -97,7 +98,8 @@ Sources: `mirrorea_canon/adr/ADR-0034.md`, `mirrorea_canon/plan/05-i3-entry-cont
 | ALIGN-1 | project/product layer constitution | closed; three-axis map accepted |
 | ALIGN-2 | Browser/Host/package/View/provider boundary contracts | completed; BND-007, BND-010..BND-016 and trust boundaries accepted |
 | I3-0 | transport candidate evidence and selection | completed; private QUIC selected, TLS/TCP deferred baseline |
-| I3-1 | checked private adapter/encoding/admission | sole active goal; public wire and I3-2 process runtime remain inactive |
+| I3-1 | checked private adapter/encoding/admission | completed by ADR-0038; bounded evidence, not official lifecycle |
+| I3-2 | generated-artifact multi-process runtime | sole active goal; entry contract ready |
 | SYS-7 | inactive I3 entry contract only | closed; ADR-0033 / Canon plan/05 |
 
 ## line snapshots
@@ -151,7 +153,7 @@ browser/View/renderer, and upper applications remain separable.
 | implementation close | workspace, format, warnings-denied Clippy |
 | lifecycle close | independent I2/broad-I1/I3/no-roadmap review |
 
-ALIGN-0 changed Canon/docs/status only and is closed. ALIGN-1 changed Canon/docs/status only and is closed. ALIGN-2 closed the Browser/Host/package/View/provider responsibility boundary: trust tier T0–T4 (Theory T0–T2 とは別), package admission and semantic grant remain separate, T1 has no raw FFI or direct store, and View permits presentation-local computation without authoritative domain semantics. I3-0 closed the private transport choice after equal canaries; I3-1 is active.
+ALIGN-0 changed Canon/docs/status only and is closed. ALIGN-1 changed Canon/docs/status only and is closed. ALIGN-2 closed the Browser/Host/package/View/provider responsibility boundary: trust tier T0–T4 (Theory T0–T2 とは別), package admission and semantic grant remain separate, T1 has no raw FFI or direct store, and View permits presentation-local computation without authoritative domain semantics. I3-0 closed the private transport choice after equal canaries; I3-1 closed the private adapter/encoding boundary and I3-2 is active.
 
 ## non-claims
 
@@ -166,7 +168,7 @@ theorem, exactly-once, lock-free runtime, or public completion is claimed.
 | Class | Item | Current state |
 |---|---|---|
 | Maintenance | accepted M10/I2 regressions and docs consistency | **着手可能** |
-| Active package | I3-1 checked private mapping | **着手可能**; I3-0 selection accepted |
+| Active package | I3-2 generated-artifact multi-process runtime | **着手可能**; I3-1 accepted |
 | Research discovery | private carrier mapping, network failures/order, C-distributed gates | fixed I3-1/I3-3/I3-4 consumers |
 | Delegated decision | OPEN-032 transport choice | resolved for this program by ADR-0037 |
 | Owner decision | public freeze or production | reserved |
@@ -176,13 +178,13 @@ theorem, exactly-once, lock-free runtime, or public completion is claimed.
 
 | Macro | Focus | Current position | Weight | Self-drive |
 |---|---|---|---|---|
-| 0 | governance/repository memory | ALIGN-0--2 and I3-0 completed; I3-1 active | medium | status/decision maintenance |
+| 0 | governance/repository memory | ALIGN-0--2 and I3-0/I3-1 completed; I3-2 active | medium | status/decision maintenance |
 | 1 | semantics/shared model | finite semantics through I2 | heavy | ADR-0014 research only |
 | 2 | parser-free evidence | historical | medium | maintenance |
 | 3 | source/checker/runtime | in-process I2 accepted | heavy | after ALIGN-1/2, I3-1/2 |
 | 4 | executable samples | toy + conform reproducible | medium | regression |
 | 5 | theorem/model bridge | OBL-058 bounded; 059--063 runtime | heavy | class maintenance |
-| 6 | generated/distributed fabric | equal transport canaries/selective probe accepted; owner runtime absent | heavy | I3-1 checked mapping active |
+| 6 | generated/distributed fabric | I3-1 checked mapping accepted; owner runtime absent | heavy | I3-2 actual process runtime active |
 | 7 | toolchain/backend | provisional commands | heavy | no freeze |
 | 8 | applications | toy is library/sample | heavy | no Core promotion |
 
@@ -191,7 +193,7 @@ theorem, exactly-once, lock-free runtime, or public completion is claimed.
 | Feature/subsystem | Evidence status | Remaining gate | Startability |
 |---|---|---|---|
 | Mir core/runtime | finite source/check/project/dispatch assured | general/public widening | maintenance |
-| Mirrorea fabric | generated in-process endpoints plus private transport selection canary; official I2 exit | checked private mapping then multi-process owner runtime | I3-1 **着手可能** |
+| Mirrorea fabric | generated in-process endpoints plus accepted private adapter; official I2 exit | multi-process owner runtime | I3-2 **着手可能** |
 | contracts/model | typed falsifiers + bounded/runtime classes | network/general proof | **後段依存** |
 | attach/detach/DAG | leave/fresh, local cut, bounded patch | durable/general evolution | **後段依存** |
 | `atomic_cut` / ordering | high-level edges, ST/OW1, bounded model | network/general memory | **後段依存** |
@@ -230,3 +232,7 @@ theorem, exactly-once, lock-free runtime, or public completion is claimed.
 - 2026-08-27 01:09 JST: SYS-2 cut `920d3fe...` closed ST/OW1 evidence.
 - 2026-08-26 23:09 JST: SYS-1 cut `94e3707c...` closed kernel/carrier.
 - 2026-08-05 15:53 JST: M10 cut `23f5a813...` accepted finite I1+ baseline.
+- 2026-09-02 09:39 JST: I3-1 private adapter/encoding cut `d75fa2e7...` and
+  ADR-0038 were recorded; focused evidence/reviews passed and I3-2 became the
+  sole active goal. Workspace validation remains explicitly NOT PASS after
+  disk-pressure exit 130.

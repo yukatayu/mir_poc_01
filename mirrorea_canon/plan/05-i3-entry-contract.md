@@ -2,8 +2,8 @@
 id: plan/05-i3-entry-contract
 status: L1-fixed
 maturity: reviewed
-depends_on: [adr/ADR-0033, adr/ADR-0034, adr/ADR-0035, adr/ADR-0036, adr/ADR-0037, arch/04-runtime-carriers, arch/06-project-product-layers, arch/07-browser-host-trust-boundaries, arch/08-browser-host-security-invariants, theory/04-ordering-and-cuts, theory/05-authority, theory/07-observation, theory/08-patch-hotplug, spec/06-conformance, scenarios/SCN-01, scenarios/SCN-02, scenarios/SCN-03, scenarios/SCN-06]
-summary: ADR-0034 programがconsumeするI3 goal、ADR-0037 selected private adapter、transport-neutral mapping、failure/order refinement、C-distributed gates。
+depends_on: [adr/ADR-0033, adr/ADR-0034, adr/ADR-0035, adr/ADR-0036, adr/ADR-0037, adr/ADR-0038, meta/proposal-041, arch/04-runtime-carriers, arch/09-i3-private-adapter, arch/06-project-product-layers, arch/07-browser-host-trust-boundaries, arch/08-browser-host-security-invariants, theory/04-ordering-and-cuts, theory/05-authority, theory/07-observation, theory/08-patch-hotplug, spec/06-conformance, scenarios/SCN-01, scenarios/SCN-02, scenarios/SCN-03, scenarios/SCN-06]
+summary: ADR-0034 programがconsumeするI3 goal、ADR-0037 selected transport、ADR-0038 accepted private mapping、failure/order refinement、C-distributed gates。
 open_items: []
 ---
 
@@ -21,10 +21,12 @@ ADR-0034 now consumes it for the active bounded program, whose parent goal is:
 > profile.
 
 Program activation is not official I3 lifecycle entry or exit. LAB Plan 250 is
-the sole current roadmap; ALIGN-0/1/2 and I3-0 are completed and I3-1 is the
+the sole current roadmap; ALIGN-0/1/2, I3-0 and I3-1 are completed and I3-2 is the
 sole active goal. PROPOSAL-040 / ADR-0037 select QUIC reliable stream as the
 private I3 adapter after equal actual-process canaries. OPEN-032
 is resolved only for this bounded program. Official I3 remains unentered.
+PROPOSAL-041 / ADR-0038 accept the bounded I3-1 private mapping and make I3-2
+the sole active goal; they do not accept official I3 lifecycle entry.
 
 I3 transport/runtime must preserve `arch/07-browser-host-trust-boundaries` and
 `arch/08-browser-host-security-invariants`:
@@ -96,7 +98,7 @@ semantic request, renew a revoked grant, or resurrect an old incarnation.
 
 ## Internal carrier and public wire
 
-The accepted I2 internal carrier is typed and non-public. Active I3-1 implements
+The accepted I2 internal carrier is typed and non-public. Accepted I3-1 implements
 a private provisional mapping; a future public wire remains a separate
 representation and decision:
 
@@ -234,10 +236,10 @@ independent review.
 
 ## Non-claims
 
-This contract and ADR-0037 select only QUIC reliable stream as
-the private bounded-program adapter. They do not admit/evaluate QUIC datagrams,
+This contract, ADR-0037 and ADR-0038 select only QUIC reliable stream and the
+bounded private mapping for this program. They do not admit/evaluate QUIC datagrams,
 freeze a public version/codec/wire/API/certificate/port/deployment or supported-
-platform contract, claim exactly-once or hidden retry, complete I3-1, implement
+platform contract, claim exactly-once or hidden retry, complete I3-2, implement
 the I3-2 owner runtime, prove general network ordering/fairness/security/
 durability, accept broad PHASE-I1, change theory T1 or OBL status, apply official
 I3 lifecycle entry/exit without I3-6 acceptance, deploy production, or complete

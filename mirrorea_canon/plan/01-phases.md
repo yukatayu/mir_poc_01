@@ -2,8 +2,8 @@
 id: plan/01-phases
 status: L1-fixed
 maturity: draft
-depends_on: [plan/00-gates, plan/02-operating-model, plan/05-i3-entry-contract, spec/06-conformance, meta/source-hierarchy, adr/ADR-0013, adr/ADR-0014, adr/ADR-0015, adr/ADR-0017, adr/ADR-0026, adr/ADR-0027, adr/ADR-0028, adr/ADR-0029, adr/ADR-0030, adr/ADR-0031, adr/ADR-0032, adr/ADR-0033, adr/ADR-0034, adr/ADR-0035, adr/ADR-0036, plan/04-t0-g0-semantic-assertion-profile]
-summary: lifecycle T/IとS/PLを分離し、T1・I2 exit・I3-0 close・I3-1 activeを記録する。
+depends_on: [plan/00-gates, plan/02-operating-model, plan/05-i3-entry-contract, spec/06-conformance, meta/source-hierarchy, adr/ADR-0013, adr/ADR-0014, adr/ADR-0015, adr/ADR-0017, adr/ADR-0026, adr/ADR-0027, adr/ADR-0028, adr/ADR-0029, adr/ADR-0030, adr/ADR-0031, adr/ADR-0032, adr/ADR-0033, adr/ADR-0034, adr/ADR-0035, adr/ADR-0036, adr/ADR-0037, adr/ADR-0038, meta/proposal-041, plan/04-t0-g0-semantic-assertion-profile]
+summary: lifecycle T/IとS/PLを分離し、T1・I2 exit・I3-0/I3-1 close・I3-2 activeを記録する。
 open_items: []
 ---
 
@@ -15,10 +15,11 @@ open_items: []
 - theory lifecycle: **T1**（M2 semantic-assertion profile v3 の pass digest、G0-D3、
   G0 exit、T1 entry を ADR-0017 により受理済み）;
 - implementation evidence: **M10 accepted; official I2 entry then exit accepted;
-  SYS-0--SYS-7 / ADR-0026 program closed; ADR-0034 / Plan 250 active at I3-1
-  after ALIGN-0--2 and I3-0 close**。architecture/04 の full L2 carrier freeze と
+  SYS-0--SYS-7 / ADR-0026 program closed; ADR-0034 / Plan 250 active at I3-2
+  after ALIGN-0--2 and I3-0/I3-1 close**。architecture/04 の full L2 carrier freeze と
   OPEN-026/027が残るため broad PHASE-I1 exitは未受理。Official I3 lifecycleは未entry、
-  ADR-0037はprivate QUIC reliable-stream adapterを選択し、OPEN-032はこのbounded
+  ADR-0037はprivate QUIC reliable-stream adapterを選択し、PROPOSAL-041 /
+  ADR-0038はI3-1をcloseしI3-2をsole active goalとした。OPEN-032はこのbounded
   programに限り解決済みである。
 
 ## 理論フェーズ
@@ -167,7 +168,7 @@ certificateはauthorityでない。failure/order、C-distributed gate、public-w
 PROPOSAL-037 / ADR-0034はこのcontractをconsumeし、Plan 250をsole roadmapとする。
 ADR-0035/0036はALIGN-1/2をcloseした。PROPOSAL-040 / ADR-0037は同条件2-process
 canaryと固定criteriaを受理し、private QUIC reliable streamを選択した。ALIGN-0--2と
-I3-0 completed、I3-1 sole active、I3-2 next/not activeである。これはofficial I3
+I3-0/I3-1 completed、I3-2 sole activeである。これはofficial I3
 entry/exitではない。I2 exitを維持し、I3 lifecycleは未entry、OPEN-032はこのbounded
 programに限り解決済みである。
 
@@ -214,7 +215,8 @@ Each phase exits only through its canonically defined profile result and the
 authorized acceptance record. T0 uses v3 above. SCN C-static/C-runtime/
 C-distributed JSON follows `spec/06-conformance` and the `mir-conform`
 contract. **Phase を跨ぐ最適化の先取りは禁止**（BND-006 の意味保存を先に）。
-OPEN-032: I3のtransport選定は未決である。I2 exit条件ではなく、recorded plan/05
+OPEN-032: I3のtransport選定はADR-0037によりこのbounded program内でresolvedである。
+I2 exit条件ではなく、recorded plan/05
 entry contractをconsumeするcurrent ADR-0034 programのI3-0 delegated decisionで、
 候補A/Bを同じexecutable two-process failure/order gatesにより比較して初めてADR対象に
 できる。ADR-0033自体はtransportを選ばず、official I3 lifecycleをactivateしない。
