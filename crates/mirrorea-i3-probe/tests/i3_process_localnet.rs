@@ -22,10 +22,12 @@ use mirrorea_i3_probe::{
     I3LocalnetControlDelivery, I3LocalnetDeliveryPhase, I3LocalnetFailureStage,
     I3LocalnetFalsifier, I3LocalnetFaultAuditFalsifier, I3LocalnetFaultProfile,
     I3LocalnetImageDelivery, I3LocalnetLifecycleRejectionCause,
-    I3LocalnetObserverSafeDeliveryRecord, I3LocalnetRejectionAudit,
-    I3LocalnetRemoteAdmissionEvidence, I3LocalnetRemoteEvidenceRejection,
-    I3LocalnetRequesterFaultObservation, I3LocalnetRunErrorKind, I3ProcessLocalnetRequest,
-    run_i3_process_localnet,
+    I3LocalnetObserverSafeDeliveryRecord, I3LocalnetReconnectOwnerOutcome,
+    I3LocalnetRejectionAudit, I3LocalnetRemoteAdmissionEvidence, I3LocalnetRemoteEvidenceRejection,
+    I3LocalnetRequesterFaultObservation, I3LocalnetRetryAttemptReason, I3LocalnetRetryAudit,
+    I3LocalnetRetryAuditFalsifier, I3LocalnetRetryEvidenceRejection, I3LocalnetRetryFalsifier,
+    I3LocalnetRetryProfile, I3LocalnetRetryRequesterOutcome, I3LocalnetRunErrorKind,
+    I3ProcessLocalnetRequest, run_i3_process_localnet,
 };
 
 const ACTIVE_I2_SOURCE: &str = concat!(
@@ -179,6 +181,144 @@ fn assert_handled_delivery_fault_lifecycle(audit: &I3LocalnetRejectionAudit) {
         "the normal fault path must retain clean shutdown evidence from natural zero-exit reaping"
     );
     assert!(audit.observer_safe());
+}
+
+fn assert_no_rejected_child_transport_observation(audit: &I3LocalnetRejectionAudit) {
+    assert_eq!(
+        audit.fixed_child_control_descriptors_preserved(),
+        None,
+        "a handled delivery fault has no rejected-child control observation"
+    );
+    assert_eq!(
+        audit.quic_certificate_initializations(),
+        None,
+        "a handled delivery fault has no rejected-child certificate count"
+    );
+    assert_eq!(
+        audit.quic_handshake_count(),
+        None,
+        "a handled delivery fault has no rejected-child handshake count"
+    );
+}
+
+fn assert_retry_child_sessions(
+    audit: &I3LocalnetRetryAudit,
+    expected_terminal_outcome: I3LocalnetChildTerminalOutcome,
+) {
+    let requester = audit.requester_child();
+    let owner = audit.owner_child();
+    assert_eq!(requester.slot(), I3LocalnetChildSlot::ProcessA);
+    assert_eq!(owner.slot(), I3LocalnetChildSlot::ProcessB);
+    assert_ne!(requester.slot(), owner.slot());
+    assert!(!requester.run_ref().is_empty());
+    assert_eq!(requester.run_ref(), owner.run_ref());
+    let reconnect_attempt = requester.reconnect_session_runtime_attempt();
+    assert_eq!(
+        reconnect_attempt.semantic_request_identity_ref(),
+        audit.request_identity_ref(),
+        "the runtime attempt summary must retain the source-generated semantic identity"
+    );
+    assert_eq!(
+        reconnect_attempt.source_requester_locus(),
+        "ParticipantA",
+        "the retry summary must retain the runtime-selected requester locus"
+    );
+    assert!(
+        !reconnect_attempt.requester_binding_ref().is_empty(),
+        "the retry summary must retain its observer-safe requester binding"
+    );
+    assert_eq!(
+        reconnect_attempt.reason(),
+        I3LocalnetRetryAttemptReason::ReconnectRetry,
+        "the runtime, not the profile, must classify the begun second-session action as its fixed reconnect retry"
+    );
+    match audit.profile() {
+        I3LocalnetRetryProfile::ReconnectBeforeInitialCarrierWrite => {
+            assert!(
+                requester.first_session_runtime_attempt().is_none(),
+                "a pre-write first session must not consume the runtime delivery-attempt budget"
+            );
+            assert_eq!(reconnect_attempt.attempt_generation(), 1);
+        }
+        I3LocalnetRetryProfile::ReconnectAfterOwnerAdmissionBeforeReply => {
+            let first_attempt = requester.first_session_runtime_attempt().expect(
+                "the post-admission profile must retain its real first runtime attempt before reconnect",
+            );
+            assert_eq!(
+                first_attempt.semantic_request_identity_ref(),
+                audit.request_identity_ref()
+            );
+            assert_eq!(first_attempt.source_requester_locus(), "ParticipantA");
+            assert!(!first_attempt.requester_binding_ref().is_empty());
+            assert_eq!(first_attempt.attempt_generation(), 1);
+            assert_eq!(
+                first_attempt.reason(),
+                I3LocalnetRetryAttemptReason::InitialDelivery
+            );
+            assert_eq!(reconnect_attempt.attempt_generation(), 2);
+        }
+    }
+    for child in [requester, owner] {
+        assert_eq!(child.first_session_generation(), 1);
+        assert_eq!(child.reconnect_session_generation(), 2);
+        assert!(child.first_session_peer_spki_verified());
+        assert!(child.first_session_reciprocal_preface_verified());
+        assert!(child.reconnect_session_peer_spki_verified());
+        assert!(child.reconnect_session_reciprocal_preface_verified());
+        assert_eq!(child.terminal_outcome(), expected_terminal_outcome);
+    }
+}
+
+fn assert_initial_retry_owner_admission(
+    audit: &I3LocalnetRetryAudit,
+    request_contract: &Sys5I3AdapterCarrierContract,
+    request_identity: &str,
+) {
+    let initial_sender = audit.initial_request_delivery().expect(
+        "post-admission retry evidence must retain the actual first requester send before joining owner admission",
+    );
+    match audit.initial_owner_admission() {
+        Some(I3LocalnetRemoteAdmissionEvidence::Admitted {
+            request_receive,
+            owner_serve_count,
+            owner_mutation_count,
+            owner_serve_occurrence_ref,
+            owner_write_occurrence_ref,
+        }) => {
+            assert_delivery_matches_contract(
+                request_receive.as_ref(),
+                request_contract,
+                request_identity,
+                None,
+            );
+            assert_delivery_semantics_match(initial_sender, request_receive.as_ref());
+            assert!(
+                !initial_sender.candidate_commitment_ref().is_empty(),
+                "the first requester send must retain its adapter-computed commitment"
+            );
+            assert!(
+                !request_receive.candidate_commitment_ref().is_empty(),
+                "the admitted owner receive must retain its adapter-computed commitment"
+            );
+            assert_eq!(
+                initial_sender.candidate_commitment_ref(),
+                request_receive.candidate_commitment_ref(),
+                "owner admission must join the exact actual first-session sender commitment"
+            );
+            assert_eq!(*owner_serve_count, 1);
+            assert_eq!(*owner_mutation_count, 1);
+            assert!(!owner_serve_occurrence_ref.is_empty());
+            assert!(
+                owner_write_occurrence_ref
+                    .as_deref()
+                    .is_some_and(|reference| !reference.is_empty())
+            );
+        }
+        Some(I3LocalnetRemoteAdmissionEvidence::NoAdmission { .. }) => {
+            panic!("post-admission retry evidence must not report known no-admission")
+        }
+        None => panic!("post-admission retry must retain the actual first owner admission"),
+    }
 }
 
 #[test]
@@ -826,6 +966,405 @@ fn i3_3_malformed_owner_audit_contract_is_rejected_without_validated_remote_evid
 }
 
 #[test]
+fn i3_3_reconnect_before_initial_carrier_write_reuses_the_original_request_once() {
+    let run = run_i3_process_localnet(
+        canonical_request().with_retry_profile(I3LocalnetRetryProfile::ReconnectBeforeInitialCarrierWrite),
+    )
+    .expect("a pre-write reconnect must deliver the retained original request once and consume one receipt");
+
+    let retry = run
+        .retry_audit()
+        .expect("the selected retry profile must retain its separate observer-safe retry audit");
+    assert_eq!(
+        retry.profile(),
+        I3LocalnetRetryProfile::ReconnectBeforeInitialCarrierWrite
+    );
+    assert!(!retry.request_identity_ref().is_empty());
+    assert!(retry.original_request_succeeded());
+    assert_eq!(
+        retry.requester_outcome(),
+        I3LocalnetRetryRequesterOutcome::ReceiptConsumed
+    );
+    assert!(!retry.first_session_carrier_write_attempted());
+    assert!(
+        retry.initial_request_delivery().is_none(),
+        "no request delivery record may be fabricated for the pre-write session"
+    );
+    assert!(
+        retry.initial_owner_admission().is_none(),
+        "no owner admission may be inferred when the first request write never began"
+    );
+    assert!(retry.evidence_rejection().is_none());
+
+    let request_contract = active_contract("owner-request");
+    let reply_contract = active_contract("owner-reply-receipt");
+    let reconnect_request = retry.reconnect_request_delivery();
+    assert_delivery_matches_contract(
+        reconnect_request,
+        &request_contract,
+        retry.request_identity_ref(),
+        None,
+    );
+    assert!(!reconnect_request.candidate_commitment_ref().is_empty());
+    match retry.reconnect_owner_outcome() {
+        Some(I3LocalnetReconnectOwnerOutcome::Replied {
+            owner_serve_count,
+            owner_mutation_count,
+            owner_serve_occurrence_ref,
+            owner_write_occurrence_ref,
+        }) => {
+            assert_eq!(*owner_serve_count, 1);
+            assert_eq!(*owner_mutation_count, 1);
+            assert!(!owner_serve_occurrence_ref.is_empty());
+            assert!(
+                owner_write_occurrence_ref
+                    .as_deref()
+                    .is_some_and(|reference| !reference.is_empty())
+            );
+        }
+        Some(I3LocalnetReconnectOwnerOutcome::DuplicateRequestRejected { .. }) => {
+            panic!(
+                "the first actual request delivery must receive one owner reply, not a duplicate rejection"
+            )
+        }
+        None => {
+            panic!("the completed pre-write retry must retain its actual reconnect owner outcome")
+        }
+    }
+
+    assert_retry_child_sessions(retry, I3LocalnetChildTerminalOutcome::Completed);
+    let requester = run
+        .child(I3LocalnetChildSlot::ProcessA)
+        .expect("the retry run retains its actual requester child");
+    let owner = run
+        .child(I3LocalnetChildSlot::ProcessB)
+        .expect("the retry run retains its actual owner child");
+    assert_ne!(requester.pid(), owner.pid());
+    assert!(requester.reaped() && owner.reaped());
+    assert!(!requester.was_force_killed() && !owner.was_force_killed());
+
+    let execution = run.execution_audit();
+    assert_eq!(execution.generated_request_count(), 1);
+    assert_eq!(execution.remote_owner_serve_count(), 1);
+    assert_eq!(execution.remote_owner_write_count(), 1);
+    assert_eq!(execution.generated_reply_count(), 1);
+    assert_eq!(execution.requester_local_receipt_count(), 1);
+    assert_eq!(execution.network_receipt_frame_count(), 0);
+
+    let deliveries = run.observer_safe_trace().actual_delivery_records();
+    let request_send = delivery_for_phase(deliveries, I3LocalnetDeliveryPhase::RequestSend);
+    let request_receive = delivery_for_phase(deliveries, I3LocalnetDeliveryPhase::RequestReceive);
+    let reply_send = delivery_for_phase(deliveries, I3LocalnetDeliveryPhase::ReplySend);
+    let reply_receive = delivery_for_phase(deliveries, I3LocalnetDeliveryPhase::ReplyReceive);
+    assert_delivery_matches_contract(
+        request_send,
+        &request_contract,
+        retry.request_identity_ref(),
+        None,
+    );
+    assert_delivery_matches_contract(
+        request_receive,
+        &request_contract,
+        retry.request_identity_ref(),
+        None,
+    );
+    assert_delivery_matches_contract(
+        reply_send,
+        &reply_contract,
+        retry.request_identity_ref(),
+        Some(retry.request_identity_ref()),
+    );
+    assert_delivery_matches_contract(
+        reply_receive,
+        &reply_contract,
+        retry.request_identity_ref(),
+        Some(retry.request_identity_ref()),
+    );
+    assert_delivery_semantics_match(request_send, reconnect_request);
+    assert_delivery_semantics_match(request_send, request_receive);
+    assert_delivery_semantics_match(reply_send, reply_receive);
+    assert_eq!(
+        request_send.candidate_commitment_ref(),
+        reconnect_request.candidate_commitment_ref(),
+        "the trace and retry audit must retain the adapter-computed sender commitment for one exact reconnect request"
+    );
+}
+
+#[test]
+fn i3_3_reconnect_after_owner_admission_retains_requester_unknown_and_rejects_the_exact_duplicate()
+{
+    let error = run_i3_process_localnet(
+        canonical_request()
+            .with_retry_profile(I3LocalnetRetryProfile::ReconnectAfterOwnerAdmissionBeforeReply),
+    )
+    .expect_err(
+        "a retry after actual owner admission but before its reply must retain requester ambiguity",
+    );
+
+    assert_eq!(error.kind(), I3LocalnetRunErrorKind::AmbiguousDelivery);
+    assert!(error.fault_audit().is_none());
+    let retry = error.retry_audit().expect(
+        "the selected retry profile must retain a retry audit separate from the fault audit",
+    );
+    assert_eq!(
+        retry.profile(),
+        I3LocalnetRetryProfile::ReconnectAfterOwnerAdmissionBeforeReply
+    );
+    assert!(!retry.request_identity_ref().is_empty());
+    assert!(!retry.original_request_succeeded());
+    assert_eq!(
+        retry.requester_outcome(),
+        I3LocalnetRetryRequesterOutcome::PendingReplyOrReceiptNotObserved
+    );
+    assert!(retry.first_session_carrier_write_attempted());
+    assert!(retry.evidence_rejection().is_none());
+
+    let request_contract = active_contract("owner-request");
+    let initial_request = retry
+        .initial_request_delivery()
+        .expect("the first post-admission session must retain its actual request delivery");
+    let reconnect_request = retry.reconnect_request_delivery();
+    assert_delivery_matches_contract(
+        initial_request,
+        &request_contract,
+        retry.request_identity_ref(),
+        None,
+    );
+    assert_delivery_matches_contract(
+        reconnect_request,
+        &request_contract,
+        retry.request_identity_ref(),
+        None,
+    );
+    assert_delivery_semantics_match(initial_request, reconnect_request);
+    assert_ne!(
+        initial_request.network_occurrence_ref(),
+        reconnect_request.network_occurrence_ref(),
+        "the two actual session deliveries retain distinct network occurrences"
+    );
+    assert!(!initial_request.candidate_commitment_ref().is_empty());
+    assert!(!reconnect_request.candidate_commitment_ref().is_empty());
+    assert_ne!(
+        initial_request.candidate_commitment_ref(),
+        reconnect_request.candidate_commitment_ref(),
+        "the same exact request bytes must retain distinct session-scoped commitments across generations"
+    );
+    assert_initial_retry_owner_admission(retry, &request_contract, retry.request_identity_ref());
+
+    match retry.reconnect_owner_outcome() {
+        Some(I3LocalnetReconnectOwnerOutcome::DuplicateRequestRejected {
+            candidate_commitment_ref,
+            network_occurrence_ref,
+            owner_serve_count,
+            owner_mutation_count,
+        }) => {
+            assert_eq!(
+                candidate_commitment_ref,
+                reconnect_request.candidate_commitment_ref(),
+                "duplicate evidence must join the actual reconnect sender commitment, not only an unrelated nonempty reference"
+            );
+            assert!(!candidate_commitment_ref.is_empty());
+            assert!(!network_occurrence_ref.is_empty());
+            assert_eq!(*owner_serve_count, 1);
+            assert_eq!(*owner_mutation_count, 1);
+        }
+        Some(I3LocalnetReconnectOwnerOutcome::Replied { .. }) => {
+            panic!("the exact retry after owner admission must not produce a second reply")
+        }
+        None => panic!("the exact reconnect duplicate must retain its typed owner outcome"),
+    }
+
+    assert_retry_child_sessions(retry, I3LocalnetChildTerminalOutcome::HandledDeliveryFault);
+    let lifecycle = error.rejection_audit();
+    assert_handled_delivery_fault_lifecycle(&lifecycle);
+    assert_no_rejected_child_transport_observation(&lifecycle);
+    assert!(lifecycle.requester_pending_request_is_retained());
+    assert_eq!(
+        lifecycle.child_owner_starts(),
+        1,
+        "the post-admission retry failure must retain the actual owner start"
+    );
+    assert_eq!(lifecycle.aggregate_semantic_admission_count(), 1);
+    assert_eq!(lifecycle.aggregate_owner_mutation_count(), 1);
+}
+
+#[test]
+fn i3_3_reconnect_duplicate_evidence_requires_the_actual_sender_commitment() {
+    for (falsifier, expected_rejection, label) in [
+        (
+            I3LocalnetRetryAuditFalsifier::MutateReconnectSenderCandidateCommitment,
+            I3LocalnetRetryEvidenceRejection::ReconnectAttemptCommitmentMismatch,
+            "mismatched",
+        ),
+        (
+            I3LocalnetRetryAuditFalsifier::ClearReconnectSenderCandidateCommitment,
+            I3LocalnetRetryEvidenceRejection::ReconnectAttemptCommitmentMissing,
+            "missing",
+        ),
+        (
+            I3LocalnetRetryAuditFalsifier::UseInitialSessionCandidateCommitmentForReconnect,
+            I3LocalnetRetryEvidenceRejection::ReconnectAttemptCommitmentMismatch,
+            "initial-session",
+        ),
+    ] {
+        let error = run_i3_process_localnet(
+            canonical_request()
+                .with_retry_profile(I3LocalnetRetryProfile::ReconnectAfterOwnerAdmissionBeforeReply)
+                .with_retry_audit_falsifier(falsifier),
+        )
+        .expect_err(
+            "observer-only commitment corruption after the real retry must preserve requester uncertainty",
+        );
+
+        assert_eq!(error.kind(), I3LocalnetRunErrorKind::AmbiguousDelivery);
+        let retry = error.retry_audit().expect(
+            "a retry profile with observer corruption must retain typed retry evidence rather than fault evidence",
+        );
+        assert!(!retry.original_request_succeeded());
+        assert_eq!(
+            retry.requester_outcome(),
+            I3LocalnetRetryRequesterOutcome::PendingReplyOrReceiptNotObserved
+        );
+        assert_eq!(retry.evidence_rejection(), Some(expected_rejection));
+        assert!(
+            retry.reconnect_owner_outcome().is_none(),
+            "{label} sender commitment evidence must not publish a duplicate-owner conclusion"
+        );
+
+        let request_contract = active_contract("owner-request");
+        let initial_request = retry.initial_request_delivery().expect(
+            "the actual first post-admission request remains observed under observer corruption",
+        );
+        let reconnect_request = retry.reconnect_request_delivery();
+        assert_delivery_matches_contract(
+            initial_request,
+            &request_contract,
+            retry.request_identity_ref(),
+            None,
+        );
+        assert_delivery_matches_contract(
+            reconnect_request,
+            &request_contract,
+            retry.request_identity_ref(),
+            None,
+        );
+        assert_delivery_semantics_match(initial_request, reconnect_request);
+        assert_ne!(
+            initial_request.network_occurrence_ref(),
+            reconnect_request.network_occurrence_ref()
+        );
+        assert_initial_retry_owner_admission(
+            retry,
+            &request_contract,
+            retry.request_identity_ref(),
+        );
+        assert_retry_child_sessions(retry, I3LocalnetChildTerminalOutcome::HandledDeliveryFault);
+
+        let lifecycle = error.rejection_audit();
+        assert_handled_delivery_fault_lifecycle(&lifecycle);
+        assert_no_rejected_child_transport_observation(&lifecycle);
+        assert!(lifecycle.requester_pending_request_is_retained());
+        assert_eq!(
+            lifecycle.child_owner_starts(),
+            1,
+            "{label} observer corruption must not erase the actual owner start"
+        );
+        assert_eq!(lifecycle.aggregate_semantic_admission_count(), 1);
+        assert_eq!(lifecycle.aggregate_owner_mutation_count(), 1);
+    }
+}
+
+#[test]
+fn i3_3_reconnect_requester_binding_corruption_rejects_retry_evidence_without_an_owner_conclusion()
+{
+    let error = run_i3_process_localnet(
+        canonical_request()
+            .with_retry_profile(I3LocalnetRetryProfile::ReconnectAfterOwnerAdmissionBeforeReply)
+            .with_retry_audit_falsifier(
+                I3LocalnetRetryAuditFalsifier::MutateReconnectRequesterBindingRef,
+            ),
+    )
+    .expect_err(
+        "a nonempty reconnect requester-binding mismatch must reject observer evidence after the real retry",
+    );
+
+    assert_eq!(error.kind(), I3LocalnetRunErrorKind::LifecycleRejected);
+    assert!(
+        error.retry_audit().is_none(),
+        "a malformed requester binding must not publish an accepted retry audit or owner conclusion"
+    );
+    let lifecycle = error.rejection_audit();
+    assert_eq!(
+        lifecycle.stage(),
+        I3LocalnetFailureStage::LifecycleEvidenceRejected,
+        "a bad observer binding must be typed lifecycle evidence rejection, not remote admission"
+    );
+    assert_handled_delivery_fault_lifecycle(&lifecycle);
+    assert_no_rejected_child_transport_observation(&lifecycle);
+    assert_eq!(lifecycle.child_owner_starts(), 1);
+    assert!(lifecycle.requester_pending_request_is_retained());
+    assert_eq!(lifecycle.aggregate_semantic_admission_count(), 1);
+    assert_eq!(lifecycle.aggregate_owner_mutation_count(), 1);
+}
+
+#[test]
+fn i3_3_retry_on_a_verified_initial_session_is_a_local_attempt_rejection_not_peer_failure() {
+    let error = run_i3_process_localnet(
+        canonical_request()
+            .with_retry_profile(I3LocalnetRetryProfile::ReconnectBeforeInitialCarrierWrite)
+            .with_retry_falsifier(I3LocalnetRetryFalsifier::RetryOnInitialVerifiedSession),
+    )
+    .expect_err("a reconnect retry cannot begin on the fully verified initial session");
+
+    let lifecycle = error.rejection_audit();
+    assert_eq!(
+        lifecycle.adapter_rejection_kind(),
+        Some(I3LocalnetAdapterRejectionKind::LocalAttemptRejected),
+        "a wrong session generation is local attempt misuse after peer verification, not a peer-binding failure"
+    );
+    assert_ne!(
+        lifecycle.adapter_rejection_kind(),
+        Some(I3LocalnetAdapterRejectionKind::PeerBindingRejected)
+    );
+    assert!(
+        error.retry_audit().is_none(),
+        "a generation-one misuse occurs before reconnect transport, so it must not fabricate a mandatory two-session retry audit"
+    );
+    assert_eq!(
+        lifecycle.fixed_child_control_descriptors_preserved(),
+        Some(true)
+    );
+    assert_eq!(
+        lifecycle.quic_handshake_count(),
+        Some(1),
+        "the local generation-one rejection must retain its one actual initial-session handshake"
+    );
+    assert_eq!(lifecycle.quic_certificate_initializations(), Some(1));
+    assert!(
+        lifecycle.requester_first_session_peer_spki_verified(),
+        "the local attempt guard must run only after actual first-session peer-SPKI verification"
+    );
+    assert!(
+        lifecycle.requester_first_session_reciprocal_preface_verified(),
+        "the local attempt guard must run only after actual first-session reciprocal-preface verification"
+    );
+    assert!(
+        lifecycle.requester_pending_request_is_retained(),
+        "a rejected local attempt must leave the original requester pending"
+    );
+    assert_eq!(
+        lifecycle.semantic_admission_count(),
+        0,
+        "the wrong-session guard must run before owner semantic admission"
+    );
+    assert_eq!(
+        lifecycle.owner_mutation_count(),
+        0,
+        "the wrong-session guard must run before owner mutation"
+    );
+}
+
+#[test]
 fn swapped_complete_image_and_binding_pairs_are_rejected_before_child_start_or_network_activity() {
     // The falsifier swaps both complete image and retained binding pairs, while
     // preserving the private child keys and their fixed control descriptors.
@@ -839,10 +1378,13 @@ fn swapped_complete_image_and_binding_pairs_are_rejected_before_child_start_or_n
     assert_eq!(error.kind(), I3LocalnetRunErrorKind::StartBindingRejected);
     let audit = error.rejection_audit();
     assert_eq!(audit.stage(), I3LocalnetFailureStage::BeforeOwnerStart);
-    assert!(audit.fixed_child_control_descriptors_preserved());
+    assert_eq!(
+        audit.fixed_child_control_descriptors_preserved(),
+        Some(true)
+    );
     assert_eq!(audit.child_owner_starts(), 0);
-    assert_eq!(audit.quic_certificate_initializations(), 0);
-    assert_eq!(audit.quic_handshake_count(), 0);
+    assert_eq!(audit.quic_certificate_initializations(), Some(0));
+    assert_eq!(audit.quic_handshake_count(), Some(0));
     assert_eq!(audit.semantic_admission_count(), 0);
     assert_eq!(audit.owner_mutation_count(), 0);
     assert!(audit.all_children_reaped());

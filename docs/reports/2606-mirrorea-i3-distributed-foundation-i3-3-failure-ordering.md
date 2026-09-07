@@ -356,6 +356,16 @@ profile passed. Root remained at 18 GiB available. Secret-pattern screening
 found no matches in the tracked diff or either new source file; this is a
 bounded screening check, not a general secret-detection guarantee.
 
+During the next probe implementation, the independent runtime-only compile
+check with `--features i3-private-quic,i3-process-test-seams` passed for the
+new commitment evidence API; the local-attempt guard still intentionally had
+its old behavior. Direct accepted-I2 regression also passed using only
+`--test sys5_local_slice --test sys6_i2_cli`: 5/5 and 8/8 respectively, exit 0
+(0.60 s build; 0.05 s and 11.28 s execution). That default-feature run emitted
+the same eight `dead_code` warnings; it is not warning-free evidence. Neither
+command compiled the in-progress probe or established actual reconnect. Root
+remained at 18 GiB and no further cleanup occurred.
+
 ## What changed in understanding
 
 Owner-intent checkpoint: at the owner's explicit request, the parent used a
@@ -513,6 +523,151 @@ uncertainty remains; they cannot import rejected source/Core claims. This
 narrow evidence addition belongs to the next actual-session slice, not the
 current checkpoint, and does not add a rejection wire message.
 
+The next slice starts from pushed checkpoint `87ee2418`. Four separately
+authored integration tests cover pre-write reconnect success, post-admission
+duplicate/uncertainty, modified or missing duplicate-commitment evidence, and
+verified first-session retry misuse. The first focused Cargo invocation exited
+101 with 16 compile diagnostics for the absent agreed retry APIs and related
+type inference. No tests executed: this is intentional missing-API RED, not a
+runtime counterexample. Runtime/adapter and probe owners then started disjoint
+implementation. The `LocalAttemptRejected` declaration may be added to permit
+compilation, but its generation guard must remain unchanged until the actual
+verified-session test demonstrates the existing incorrect peer-blame outcome.
+
+Parent test review caught an impossible evidence requirement in that last
+negative: first-session misuse occurs before reconnect, so it cannot carry
+the two-session retry audit's mandatory second delivery. The test and producer
+contract now require a local rejection audit with actual first-session and
+pending/nonmutation evidence, and no retry audit. The two genuine reconnect
+profiles retain their mandatory second-session evidence. No fictitious
+connection, delivery or owner outcome may be inserted to satisfy an audit type.
+
+Session generation and begun runtime-attempt generation are separate: the
+pre-write profile sends attempt 1 on session 2, whereas the post-admission
+profile sends attempt 2 on session 2. The probe must capture the runtime's
+actual source-requester binding, reason and attempt summary before a successful
+receipt removes its pending record. Neither generation nor retry initiator
+may be inferred from a profile label or minted by observer output.
+
+In-progress parent flow review at `2026-09-07T14:30:56+09:00` identified two
+schedule/evidence hazards before execution. The post-admission requester must
+wait for the actual owner-close reply outcome and retain the returned opaque
+pending handle, rather than close immediately after sending and race owner
+admission. The verified-session misuse owner must check the actual receive
+failure and zero serve/write summary, rather than discard a receive result and
+report profile-selected nonmutation. The production owner corrected both in
+source; these are not yet executed passes. The successful reconnect reply also
+needs the existing peer-close lifecycle discipline so stream `finish` is not
+mistaken for requester receipt before closing the owner connection.
+
+The next exact reconnect-filter compilation stopped with four probe errors:
+two mismatched local variable names, one unresolved delivery tuple type, and
+use of the retry audit after consuming its enclosing failure value. Exit was
+101 after approximately 27 seconds; no tests executed and the separate local
+misuse behavioral RED was not run. Disk remained 18 GiB free, with no competing
+Cargo/rustc processes. The production owner received only these bounded fixes;
+test expectations and semantic behavior are unchanged.
+
+After those compile fixes, the same source-bound actual-process reconnect
+filter passed 3/3 (18 filtered; build 4.75 seconds, tests 6.03 seconds). The
+separate verified-first-session misuse test then produced the intended
+behavioral counterexample: required `Some(LocalAttemptRejected)`, actual
+`Some(PeerBindingRejected)`, exit 101, 0/1 passed, 1.19 seconds. Unlike the
+earlier missing-API compilation failure, this test executed the verified QUIC
+session and exposed the incorrect local-error classification. The runtime
+owner then split peer/preface validation from the local generation guard,
+preserving genuine peer failure while returning the zero-payload local error
+before runtime authorization. Fresh post-fix verification remains pending.
+The two unread intermediate probe verification fields were redundant with
+the actual child-rejection-to-public-audit path and were removed, rather than
+suppressing the compiler warning or adding profile-derived evidence.
+
+Post-fix execution supersedes that pending check: the verified-session misuse
+filter passed 1/1 (33.80-second build, 1.15-second test), and the complete
+`i3_process_localnet` integration target passed 21/21 in 32.17 seconds. The
+subsequent focused two-crate all-target Clippy command exited 101 on three
+probe style diagnostics: two excessive-argument signatures and one nonminimal
+boolean. These are not a behavioral failure, but deny-warnings validation is
+not yet passing for this slice. The owner is making bounded signature/boolean
+changes; independent review is in progress. Disk remained 18 GiB free and no
+full-workspace validation or cleanup was performed.
+
+The independent retry-slice review then found a P1 accounting defect: the
+post-admission retry early return omitted the previously observed owner
+`Ready` fact, so the public rejection audit reported zero owner starts while
+validated admission and mutation counts were one. The test owner added exact
+owner-start assertions to the normal path and all three commitment-falsifier
+cases. The focused normal path reproduced `0 != 1` at test line 1162 (exit
+101, 0/1, build 4.84 seconds, test 1.35 seconds). The production owner is
+retaining the actual observed-start fact on that early return; no admission,
+mutation, or successful-recovery fact is inferred from the retry profile.
+
+That one-line correction passed the full actual-process target again: 21/21,
+build 4.60 seconds and tests 32.02 seconds. The next all-target lint invocation
+exposed a cfg(test)-only call lacking the newly added optional retry-audit
+argument; the test owner supplied `None` for that existing non-retry helper.
+The lifecycle unit target was not run after the failed compile, so it remains
+pending until the final rerun.
+
+The independent reviewer completed this slice with no further P0/P1 and two
+P2 audit repairs, both accepted by the parent. First, fields sourced only from
+a `Rejected` child event cannot report `false/0/0` when handled-fault events
+provide no such observation. The smallest correction is explicit optional
+control/certificate/handshake observations, not synthesizing counts from the
+retry profile; actual retry-session facts remain in their child audit. Second,
+the two runtime attempt summaries must carry the same exact requester binding,
+not merely two nonempty strings. An observer-only changed reconnect binding
+must reject the join without altering the actual request, owner mutation or
+retained uncertainty. The test owner is adding these narrow regressions before
+production changes. These repairs do not authorize further profile or framework
+expansion, and are not complete I3-3 evidence.
+
+The final P2 test-first command produced 10 compile diagnostics (nine
+scalar-versus-optional observation assertions and the absent binding-falsifier
+variant), exit 101, with no tests executed. Production now reports those
+rejection-event-only observations as `Some(actual)` or `None`, and requires
+equal requester bindings across the two attempts. The binding falsifier changes
+only the emitted observer summary after the actual retry, not carrier bytes or
+runtime state. Rejected joins preserve the independently source-bound requester
+pending observation and actual terminal admission/mutation counts, but publish
+neither an accepted retry audit nor a duplicate owner conclusion. Accepted
+post-admission joins also propagate the validated pending fact into the generic
+error audit. These changes await the final full-target run and narrow review.
+
+Final actual-reconnect checkpoint, `2026-09-07T15:00:30+09:00`: the full probe
+integration target passed **22/22** (build 5.08 seconds, tests 34.74 seconds),
+focused two-crate all-target Clippy with the selected private feature and
+`-D warnings` passed (6.82 seconds), and probe lifecycle unit tests passed
+**2/2** (one filtered; build 2.42 seconds). All Cargo commands used
+`CARGO_INCREMENTAL=0 CARGO_BUILD_JOBS=2` and `--locked`; disk remained 18 GiB
+free throughout. Fresh formatting and diff checks passed. These results
+supersede the pending/error checkpoints above for this source delta.
+
+The narrow independent re-review resolved both P2 mechanisms and retained the
+P1 disposition, with no remaining finding in the reviewed slice. It confirmed
+unknown versus observed transport facts, exact attempt-binding equality, the
+observer-only falsifier, and conservative requester-only pending retention on
+join rejection. No actual-reconnect issue remains open in this bounded slice;
+authority withdrawal between sessions, late replies/order, provider/time/cut,
+the full 20-family matrix and I3-3 acceptance remain open. Prior 51/51 runtime,
+285/285 library and bounded-model evidence is retained at checkpoint
+`87ee2418`, not relabeled as a new full-suite execution. The current source
+delta only refines the private QUIC adapter and probe execution/evidence path.
+The main agent also ran `make docs` successfully: agent configuration, the
+210-file Canon index, all 800 hierarchy paths, and the 1760-report scaffold
+passed. A bounded private-key/token pattern screen of the source diff found no
+match. These checks do not establish a general secret/noninterference proof.
+
+The advisory planner review recommends completing this slice before adding
+the remaining authority/order controls. Same-production-boundary codec,
+target/provenance, authority-precedence, capacity and result-admission tests may
+be reused with exact source/runtime correspondence; actual process controls
+must establish their network-dependent claims. Every family remains required,
+but each parser negative need not become a new subprocess profile. Process
+startup/reaping and exact joins should be reused when a direct consumer repeats
+them. No broad harness framework refactor or weaker evidence gate is authorized
+by this advice; provider/time remain OPEN and I3-4 remains inactive.
+
 ## Suggested next prompt
 
 Continue active I3-3 in the original Plan 250 program: map all 20 failure
@@ -630,10 +785,12 @@ product realization remain outside this bounded milestone.
 The parent committed and pushed the resume integration at
 `48d98ed0279cf6fa2a0eaabd7d1ec21c926c7aec`, with fresh remote parity confirmed
 during recovery. The source/evidence checkpoint containing this report pins
-the verified first I3-3 slice, not milestone acceptance. The planned commit
-subject is `feat: checkpoint I3 request lifecycle and fault evidence`; its
-exact hash and push result will be recorded during the next slice, without a
-metadata-only commit. Parent owns
+the verified first I3-3 slice, not milestone acceptance. It was committed as
+`87ee241898b58c40bb5fcafa98df39a815d57498`
+(`feat: checkpoint I3 request lifecycle and fault evidence`) and pushed to
+`origin/main`; fresh `git ls-remote origin refs/heads/main` matched HEAD and
+the worktree was clean before the next actual-session test assignment. This
+update accompanies that next slice, not a metadata-only commit. Parent owns
 accepted source/evidence pinning, integration commits, authorized pushes and
 fresh remote parity before the fixed transition to I3-4.
 

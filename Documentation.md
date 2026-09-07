@@ -280,8 +280,8 @@ recordが揃ったためofficial I2 entry後exitを受理しました。broad PH
 - blocked/deferred: I3 lifecycle entry remains unentered. Broad PHASE-I1 exit,
   final public API/ABI/wire/carrier freeze, production, and browser/View product
   remain outside the accepted claim.
-- in-progress: authorized removal of only `target/debug/incremental` restored
-  about 18 GiB free. Latest dirty-source slices pass full-runtime integration
+- prior checkpoint `87ee2418`: authorized removal of only `target/debug/incremental`
+  restored about 18 GiB free. That slice passed full-runtime integration
   51/51 (44.43s), evaluator owner-capacity 1/1, I3-3 filter 4/4, probe library
   lifecycle evidence 2/2 (one filtered), selected runtime library 1/1 + 1/1
   (old-owner withdrawal and exact-ledger different-snapshot), actual probe
@@ -290,10 +290,17 @@ recordが揃ったためofficial I2 entry後exitを受理しました。broad PH
   source evidence. The bounded standalone model passed 3/3 tests (432 states,
   2136 transitions) and exposed three mutant counterexamples; this is not a
   general runtime proof.
-- latest checkpoint: runtime-only retry 2/2 and full same-feature library
+- prior checkpoint continued: runtime-only retry 2/2 and full same-feature library
   285/285 (82.33s) pass. Focused two-crate all-target Clippy with `-Dwarnings`
   also passes; model-target dead-code warnings without its private feature are
   not a deny-lint profile. This checkpoint does not accept I3-3.
+- actual reconnect slice: the same two live OS processes consume one checked
+  receipt on the pre-write path. After owner admission and a lost reply, the
+  retry is duplicate-rejected while the requester remains pending/ambiguous;
+  it is not successful recovery. Three commitment corruptions and one binding
+  corruption reject joins; local misuse returns `LocalAttemptRejected`.
+  Fresh probe 22/22, lifecycle unit 2/2, focused deny-warnings Clippy and
+  format/diff checks pass. The full I3-3 matrix remains open.
 - decisions taken: the working interpretation remains ordinary meaning ->
   generated distribution -> continually checked composition. World/Avatar remain
   domain-library vocabulary, not Mir Core primitives; ledger64/coordinator/

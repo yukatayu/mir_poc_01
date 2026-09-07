@@ -1,6 +1,6 @@
 # Current Task Map (LAB)
 
-最終更新: 2026-09-07 13:57 JST
+最終更新: 2026-09-07 15:00 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -45,8 +45,11 @@ input history, not the promoted I3-3 goal.
 
 ### Active goal: I3-3 network failure, retry, and ordering refinement
 
-Direct consumer: I3-4 C-distributed scenarios and cross-process semantic
-pressure consume the I3-3 matrix after acceptance.
+Milestone direct consumer: I3-4 C-distributed scenarios and cross-process
+semantic pressure consume the I3-3 matrix only after milestone acceptance.
+The next work within I3-3 uses the verified reconnect seam for retained-M9-
+publisher successor installation and late pending-ingress revalidation; the
+full matrix is not yet complete.
 
 Scope: execute all 20 required network failure families against the accepted
 generated-artifact runtime; make retry and ambiguous delivery request-bound and
@@ -64,20 +67,16 @@ Sources: `plan/250-mirrorea-i3-distributed-foundation-current-roadmap.md`,
 `mirrorea_canon/plan/05-i3-entry-contract.md`. I3-2 evidence remains the
 input history in Report 2605, not the active goal.
 
-Current validation slice passes full-runtime integration 51/51 (44.43s),
-evaluator owner-capacity 1/1, I3-3 filter 4/4, probe library lifecycle evidence
-2/2 (one filtered), selected runtime library 1/1 + 1/1 (old-owner withdrawal and
-exact-ledger different-snapshot), actual probe integration 17/17, and cargo fmt.
-The historical ledger-source binary remains 49/49 in 47.70s only.
-Bounded model evidence is 3/3 tests (432 states, 2136 transitions) with three
-mutant counterexamples, not a general runtime proof. Authorized cleanup removed
-only `target/debug/incremental`, restoring about 18 GiB free. Full 20-family
-matrix and retry/reconnect acceptance remain unverified. Runtime-only retry 2/2
-and full same-feature library 285/285 (82.33s) pass. Focused two-crate all-target
-Clippy with `-Dwarnings` passes; model-target dead-code warnings without its
-private feature are not a deny-lint profile. Remaining validation is the full
-failure matrix and actual reconnect behavior. This is a validation checkpoint,
-not milestone acceptance.
+Fresh actual-reconnect evidence: probe 22/22, lifecycle unit 2/2, focused
+two-crate all-target Clippy with the private feature and `-D warnings`, and
+format/diff checks pass. Pre-write reconnect consumes one checked receipt;
+post-admission retry is duplicate-rejected while the original requester stays
+pending/ambiguous. Report 2606 retains prior checkpoint `87ee2418` runtime
+51/51, library 285/285, probe 17/17 and bounded model 3/3 evidence; those suites
+were not all rerun for this delta. The model is not a general proof. Root free
+space remains about 18 GiB after the narrowly authorized incremental-cache
+cleanup. Late-authority/order and the full 20-family matrix remain open; this
+is not milestone acceptance.
 
 ### Dated LAB rough remaining estimates (not acceptance or guarantee)
 

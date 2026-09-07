@@ -28,8 +28,11 @@ pub use framing::{
 };
 pub use i3_process_faults::{
     I3LocalnetFaultAudit, I3LocalnetFaultAuditFalsifier, I3LocalnetFaultProfile,
-    I3LocalnetRemoteAdmissionEvidence, I3LocalnetRemoteEvidenceRejection,
-    I3LocalnetRequesterFaultObservation,
+    I3LocalnetReconnectOwnerOutcome, I3LocalnetRemoteAdmissionEvidence,
+    I3LocalnetRemoteEvidenceRejection, I3LocalnetRequesterFaultObservation,
+    I3LocalnetRetryAttemptAudit, I3LocalnetRetryAttemptReason, I3LocalnetRetryAudit,
+    I3LocalnetRetryAuditFalsifier, I3LocalnetRetryChildAudit, I3LocalnetRetryEvidenceRejection,
+    I3LocalnetRetryFalsifier, I3LocalnetRetryProfile, I3LocalnetRetryRequesterOutcome,
 };
 pub use i3_process_localnet::{
     I3LocalnetAdapterRejectionKind, I3LocalnetChildSlot, I3LocalnetChildTerminalEvent,

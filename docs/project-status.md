@@ -1,6 +1,6 @@
 # Project status
 
-最終更新: 2026-09-07 13:57 JST
+最終更新: 2026-09-07 15:00 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -77,18 +77,26 @@ I3-3 is the only active promoted semantic package after explicit owner resume;
 I3-4/I3-5/I3-6/NEXT-0 remain inactive pending their dependency gates. The
 accepted I3-2 source cut and remote parity are the preserved entry evidence.
 
-The resumed I3-3 workspace has current dirty-source slice evidence: full-runtime
+Prior checkpoint `87ee2418` retains this slice evidence: full-runtime
 integration 51/51 (44.43s), evaluator owner-capacity 1/1, I3-3 filter 4/4, probe
 library lifecycle evidence 2/2 (one filtered), selected runtime library 1/1 +
 1/1 (old-owner withdrawal and exact-ledger different-snapshot), actual probe
 integration 17/17, and `cargo fmt --all -- --check` pass. The
 historical ledger-source binary remains 49/49 in 47.70s only. Bounded model
 evidence remains 3/3 tests (432 states, 2136 transitions) with three mutant
-counterexamples, not a general runtime proof. Full 20-family matrix and
-retry/reconnect acceptance remain unverified.
+counterexamples, not a general runtime proof. Full 20-family matrix remains
+unverified; post-admission retry remains duplicate-rejected with requester
+pending/ambiguous rather than successful recovery.
 Runtime-only retry 2/2 and full same-feature library 285/285 (82.33s) now pass.
 Focused two-crate all-target Clippy with `-Dwarnings` passes; model-target
 dead-code warnings without its private feature are not a deny-lint profile.
+The actual reconnect slice covers two live OS processes: the pre-write path
+consumes one checked receipt; in the separate post-admission path, retry after
+a lost reply is duplicate-rejected while the requester remains pending/ambiguous.
+Fresh probe 22/22, lifecycle unit 2/2, focused deny-warnings Clippy and format/
+diff checks pass, including corruption and local-misuse rejection.
+Remaining validation is late-authority/order and the full failure matrix;
+I3-4 remains inactive.
 
 Detailed edge contracts: [`mirrorea_canon/architecture/07-browser-host-trust-boundaries.md`](../mirrorea_canon/architecture/07-browser-host-trust-boundaries.md).
 Cross-edge binding/freshness/revocation/redaction/resource rules: [`mirrorea_canon/architecture/08-browser-host-security-invariants.md`](../mirrorea_canon/architecture/08-browser-host-security-invariants.md).
