@@ -13,7 +13,7 @@ use std::{
     io::{self, BufRead, BufReader, Read, Write},
     net::{IpAddr, Ipv4Addr, Shutdown, SocketAddr, UdpSocket},
     os::{
-        fd::{AsRawFd, FromRawFd},
+        fd::{AsRawFd, FromRawFd, RawFd},
         unix::{net::UnixStream, process::CommandExt},
     },
     path::{Path, PathBuf},
@@ -52,12 +52,16 @@ use zeroize::Zeroizing;
 
 use super::i3_process_faults::{
     I3LocalnetFaultAudit, I3LocalnetFaultAuditFalsifier, I3LocalnetFaultProfile,
-    I3LocalnetReconnectOwnerOutcome, I3LocalnetRemoteAdmissionEvidence,
-    I3LocalnetRemoteEvidenceRejection, I3LocalnetRequesterFaultObservation,
-    I3LocalnetRetryAttemptAudit, I3LocalnetRetryAttemptReason, I3LocalnetRetryAudit,
-    I3LocalnetRetryAuditFalsifier, I3LocalnetRetryChildAudit, I3LocalnetRetryChildAuditEvidence,
-    I3LocalnetRetryEvidenceRejection, I3LocalnetRetryFalsifier, I3LocalnetRetryProfile,
-    I3LocalnetRetryRequesterOutcome,
+    I3LocalnetLateIngressAckReaderOutcome, I3LocalnetLateIngressEvidenceRejection,
+    I3LocalnetLateIngressFalsifier, I3LocalnetLateIngressLifecycleProvenance,
+    I3LocalnetLateIngressNonregisteredAckInputDisposition, I3LocalnetLateIngressOwnerOutcome,
+    I3LocalnetLateIngressParentPublication, I3LocalnetLateIngressProfile,
+    I3LocalnetLateIngressRequesterOutcome, I3LocalnetReconnectOwnerOutcome,
+    I3LocalnetRemoteAdmissionEvidence, I3LocalnetRemoteEvidenceRejection,
+    I3LocalnetRequesterFaultObservation, I3LocalnetRetryAttemptAudit, I3LocalnetRetryAttemptReason,
+    I3LocalnetRetryAudit, I3LocalnetRetryAuditFalsifier, I3LocalnetRetryChildAudit,
+    I3LocalnetRetryChildAuditEvidence, I3LocalnetRetryEvidenceRejection, I3LocalnetRetryFalsifier,
+    I3LocalnetRetryProfile, I3LocalnetRetryRequesterOutcome,
 };
 
 const PROCESS_A_SLOT: &str = "process-a";
@@ -66,6 +70,9 @@ const PROCESS_A_LOCI: [&str; 2] = ["ParticipantA", "ViewerC"];
 const PROCESS_B_LOCI: [&str; 2] = ["WorldAuthority", "ParticipantB"];
 const ACTIVE_I2_LOGICAL_SOURCE_PATH: &str = "samples/clean-near-end/mirrorea-i2-local-toy/main.mir";
 const LOCALNET_CONTROL_FD: i32 = 3;
+// Bounded, private B-to-parent lifecycle completion route. It is never
+// multiplexed with child stdout observer events or the trusted bootstrap FD.
+const LOCALNET_OWNER_LIFECYCLE_ACK_FD: i32 = 4;
 const MAX_TRUSTED_CONTROL_BYTES: usize = 512 * 1024;
 const MAX_CHILD_EVENT_BYTES: usize = 64 * 1024;
 const PRIVATE_LOCALNET_ALPN: &[u8] = b"mirrorea-i3-process-localnet-v1";
@@ -160,14 +167,23 @@ pub enum I3LocalnetChildTerminalOutcome {
 #[doc(hidden)]
 #[derive(Clone, Debug)]
 pub struct I3LocalnetChildTerminalEvent {
+    slot: Option<I3LocalnetChildSlot>,
     outcome: I3LocalnetChildTerminalOutcome,
     semantic_admission_count: usize,
     owner_mutation_count: usize,
+    trusted_control_consumed: Option<bool>,
+    unauthenticated_semantic_admission_count: Option<usize>,
     observed_exit_status_code: Option<i32>,
     was_force_killed: bool,
 }
 
 impl I3LocalnetChildTerminalEvent {
+    /// The actual child slot when the terminal format records one. Generic
+    /// lifecycle rejections make no slot claim.
+    pub const fn slot(&self) -> Option<I3LocalnetChildSlot> {
+        self.slot
+    }
+
     pub const fn outcome(&self) -> I3LocalnetChildTerminalOutcome {
         self.outcome
     }
@@ -178,6 +194,19 @@ impl I3LocalnetChildTerminalEvent {
 
     pub const fn owner_mutation_count(&self) -> usize {
         self.owner_mutation_count
+    }
+
+    /// The child-reported one-shot control consumption when that terminal
+    /// format carries the observation. This is never synthesized for a
+    /// generic rejection or fault record.
+    pub const fn trusted_control_consumed(&self) -> Option<bool> {
+        self.trusted_control_consumed
+    }
+
+    /// The child-reported unauthenticated semantic admission count when the
+    /// terminal format carries it. It is not a global aggregate.
+    pub const fn unauthenticated_semantic_admission_count(&self) -> Option<usize> {
+        self.unauthenticated_semantic_admission_count
     }
 
     /// The supervisor-observed OS exit code, not a semantic outcome.
@@ -245,6 +274,8 @@ pub struct I3ProcessLocalnetRequest {
     retry_profile: Option<I3LocalnetRetryProfile>,
     retry_falsifier: Option<I3LocalnetRetryFalsifier>,
     retry_audit_falsifier: Option<I3LocalnetRetryAuditFalsifier>,
+    late_ingress_profile: Option<I3LocalnetLateIngressProfile>,
+    late_ingress_falsifier: Option<I3LocalnetLateIngressFalsifier>,
 }
 
 impl I3ProcessLocalnetRequest {
@@ -259,6 +290,8 @@ impl I3ProcessLocalnetRequest {
             retry_profile: None,
             retry_falsifier: None,
             retry_audit_falsifier: None,
+            late_ingress_profile: None,
+            late_ingress_falsifier: None,
         }
     }
 
@@ -320,6 +353,25 @@ impl I3ProcessLocalnetRequest {
     /// Select one post-send observer-only reconnect-evidence falsifier.
     pub fn with_retry_audit_falsifier(mut self, falsifier: I3LocalnetRetryAuditFalsifier) -> Self {
         self.retry_audit_falsifier = Some(falsifier);
+        self
+    }
+
+    /// Select one bounded route that retains a complete checked session-one
+    /// frame opaquely until session two.  It is neither a resend nor a source
+    /// operation and cannot supply authority or an expected result.
+    pub fn with_late_ingress_profile(mut self, profile: I3LocalnetLateIngressProfile) -> Self {
+        self.late_ingress_profile = Some(profile);
+        self
+    }
+
+    /// Select one probe-owned negative for the genuine pre-staged lifecycle
+    /// ACK route.  The control contains no candidate, receipt, ACK, owner
+    /// label, publisher, or raw record.
+    pub fn with_late_ingress_falsifier(
+        mut self,
+        falsifier: I3LocalnetLateIngressFalsifier,
+    ) -> Self {
+        self.late_ingress_falsifier = Some(falsifier);
         self
     }
 }
@@ -483,6 +535,207 @@ impl I3LocalnetObserverSafeDeliveryRecord {
     }
     pub fn candidate_commitment_ref(&self) -> &str {
         &self.candidate_commitment_ref
+    }
+}
+
+/// Observer-safe transport evidence for one complete frame held before any
+/// semantic admission.  It intentionally omits decoded source/Core/artifact,
+/// carrier, request identity, and owner facts: those remain unavailable until
+/// the runtime actually admits the frame.
+#[doc(hidden)]
+#[derive(Clone, Debug)]
+pub struct I3LocalnetRetainedIngressEvidence {
+    session_generation: u8,
+    candidate_commitment_ref: String,
+    network_occurrence_ref: String,
+}
+
+impl I3LocalnetRetainedIngressEvidence {
+    pub const fn session_generation(&self) -> u8 {
+        self.session_generation
+    }
+
+    pub fn candidate_commitment_ref(&self) -> &str {
+        &self.candidate_commitment_ref
+    }
+
+    pub fn network_occurrence_ref(&self) -> &str {
+        &self.network_occurrence_ref
+    }
+}
+
+/// Two-session transport/lifecycle evidence emitted by one actual child for
+/// the late-ingress schedule.  It carries no frame bytes, source, candidate,
+/// receipt, capability, or authority material.
+#[doc(hidden)]
+#[derive(Clone, Debug)]
+pub struct I3LocalnetLateIngressChildAudit {
+    slot: I3LocalnetChildSlot,
+    run_ref: String,
+    first_session_generation: u8,
+    reconnect_session_generation: u8,
+    first_session_peer_spki_verified: bool,
+    first_session_reciprocal_preface_verified: bool,
+    reconnect_session_peer_spki_verified: bool,
+    reconnect_session_reciprocal_preface_verified: bool,
+    terminal_outcome: I3LocalnetChildTerminalOutcome,
+}
+
+impl I3LocalnetLateIngressChildAudit {
+    pub const fn slot(&self) -> I3LocalnetChildSlot {
+        self.slot
+    }
+
+    pub fn run_ref(&self) -> &str {
+        &self.run_ref
+    }
+
+    pub const fn first_session_generation(&self) -> u8 {
+        self.first_session_generation
+    }
+
+    pub const fn reconnect_session_generation(&self) -> u8 {
+        self.reconnect_session_generation
+    }
+
+    pub const fn first_session_peer_spki_verified(&self) -> bool {
+        self.first_session_peer_spki_verified
+    }
+
+    pub const fn first_session_reciprocal_preface_verified(&self) -> bool {
+        self.first_session_reciprocal_preface_verified
+    }
+
+    pub const fn reconnect_session_peer_spki_verified(&self) -> bool {
+        self.reconnect_session_peer_spki_verified
+    }
+
+    pub const fn reconnect_session_reciprocal_preface_verified(&self) -> bool {
+        self.reconnect_session_reciprocal_preface_verified
+    }
+
+    pub const fn terminal_outcome(&self) -> I3LocalnetChildTerminalOutcome {
+        self.terminal_outcome
+    }
+}
+
+/// Joined observer-safe evidence for one actual retained session-one ingress
+/// route.  This audit never exposes a held decoded candidate or lifecycle ACK
+/// data; it reports only outcomes already produced by the adapter, runtime,
+/// registered child route, and coordinator.
+#[doc(hidden)]
+#[derive(Clone, Debug)]
+pub struct I3LocalnetLateIngressAudit {
+    profile: I3LocalnetLateIngressProfile,
+    request_identity_ref: String,
+    requester_child: I3LocalnetLateIngressChildAudit,
+    owner_child: I3LocalnetLateIngressChildAudit,
+    initial_sender_delivery: I3LocalnetObserverSafeDeliveryRecord,
+    retained_session_one_ingress: I3LocalnetRetainedIngressEvidence,
+    retained_ingress_repeat_acquisition_rejection: Option<I3LocalnetAdapterRejectionKind>,
+    late_admission_delivery: Option<I3LocalnetObserverSafeDeliveryRecord>,
+    admission_session_generation: u8,
+    owner_outcome: Option<I3LocalnetLateIngressOwnerOutcome>,
+    requester_outcome: I3LocalnetLateIngressRequesterOutcome,
+    outbound_request_frame_write_count: usize,
+    lifecycle_provenance: I3LocalnetLateIngressLifecycleProvenance,
+    m9_lifecycle_source_derived: Option<bool>,
+    registered_owner_ack_reader_outcome: I3LocalnetLateIngressAckReaderOutcome,
+    nonregistered_ack_input_disposition: I3LocalnetLateIngressNonregisteredAckInputDisposition,
+    nonregistered_ack_input_count: usize,
+    parent_publication: I3LocalnetLateIngressParentPublication,
+    parent_publication_commit_count: usize,
+}
+
+impl I3LocalnetLateIngressAudit {
+    pub const fn profile(&self) -> I3LocalnetLateIngressProfile {
+        self.profile
+    }
+
+    pub fn request_identity_ref(&self) -> &str {
+        &self.request_identity_ref
+    }
+
+    pub fn requester_child(&self) -> &I3LocalnetLateIngressChildAudit {
+        &self.requester_child
+    }
+
+    pub fn owner_child(&self) -> &I3LocalnetLateIngressChildAudit {
+        &self.owner_child
+    }
+
+    pub fn initial_sender_delivery(&self) -> &I3LocalnetObserverSafeDeliveryRecord {
+        &self.initial_sender_delivery
+    }
+
+    pub fn retained_session_one_ingress(&self) -> &I3LocalnetRetainedIngressEvidence {
+        &self.retained_session_one_ingress
+    }
+
+    /// Present only when B actually called its production retained-ingress
+    /// acquisition a second time after retaining the single session-one
+    /// frame. The adapter's local rejection occurs before a second I/O read.
+    pub const fn retained_ingress_repeat_acquisition_rejection(
+        &self,
+    ) -> Option<I3LocalnetAdapterRejectionKind> {
+        self.retained_ingress_repeat_acquisition_rejection
+    }
+
+    pub fn late_admission_delivery(&self) -> Option<&I3LocalnetObserverSafeDeliveryRecord> {
+        self.late_admission_delivery.as_ref()
+    }
+
+    pub const fn admission_session_generation(&self) -> u8 {
+        self.admission_session_generation
+    }
+
+    pub fn owner_outcome(&self) -> Option<&I3LocalnetLateIngressOwnerOutcome> {
+        self.owner_outcome.as_ref()
+    }
+
+    pub const fn requester_outcome(&self) -> I3LocalnetLateIngressRequesterOutcome {
+        self.requester_outcome
+    }
+
+    pub const fn outbound_request_frame_write_count(&self) -> usize {
+        self.outbound_request_frame_write_count
+    }
+
+    pub const fn lifecycle_provenance(&self) -> I3LocalnetLateIngressLifecycleProvenance {
+        self.lifecycle_provenance
+    }
+
+    pub const fn m9_lifecycle_source_derived(&self) -> Option<bool> {
+        self.m9_lifecycle_source_derived
+    }
+
+    pub const fn registered_owner_ack_reader_outcome(
+        &self,
+    ) -> I3LocalnetLateIngressAckReaderOutcome {
+        self.registered_owner_ack_reader_outcome
+    }
+
+    /// Observation of bounded, decoded-as-tainted candidate input from A's
+    /// actual stdout route. It is not a registered-B completion or authority
+    /// publication route.
+    pub const fn nonregistered_ack_input_disposition(
+        &self,
+    ) -> I3LocalnetLateIngressNonregisteredAckInputDisposition {
+        self.nonregistered_ack_input_disposition
+    }
+
+    /// Number of bounded A stdout candidate inputs actually observed by the
+    /// parent. The finite route permits at most one.
+    pub const fn nonregistered_ack_input_count(&self) -> usize {
+        self.nonregistered_ack_input_count
+    }
+
+    pub const fn parent_publication(&self) -> I3LocalnetLateIngressParentPublication {
+        self.parent_publication
+    }
+
+    pub const fn parent_publication_commit_count(&self) -> usize {
+        self.parent_publication_commit_count
     }
 }
 
@@ -933,6 +1186,8 @@ pub struct I3LocalnetRunError {
     rejection_audit: I3LocalnetRejectionAudit,
     fault_audit: Option<I3LocalnetFaultAudit>,
     retry_audit: Option<I3LocalnetRetryAudit>,
+    late_ingress_audit: Option<I3LocalnetLateIngressAudit>,
+    late_ingress_evidence_rejection: Option<I3LocalnetLateIngressEvidenceRejection>,
 }
 
 impl I3LocalnetRunError {
@@ -941,12 +1196,16 @@ impl I3LocalnetRunError {
         rejection_audit: I3LocalnetRejectionAudit,
         fault_audit: Option<I3LocalnetFaultAudit>,
         retry_audit: Option<I3LocalnetRetryAudit>,
+        late_ingress_audit: Option<I3LocalnetLateIngressAudit>,
+        late_ingress_evidence_rejection: Option<I3LocalnetLateIngressEvidenceRejection>,
     ) -> Self {
         Self {
             kind,
             rejection_audit,
             fault_audit,
             retry_audit,
+            late_ingress_audit,
+            late_ingress_evidence_rejection,
         }
     }
 
@@ -970,6 +1229,20 @@ impl I3LocalnetRunError {
     pub fn retry_audit(&self) -> Option<&I3LocalnetRetryAudit> {
         self.retry_audit.as_ref()
     }
+
+    /// Present only when actual child records reached the retained-ingress
+    /// join.  A rejected bootstrap may intentionally retain no owner outcome.
+    pub fn late_ingress_audit(&self) -> Option<&I3LocalnetLateIngressAudit> {
+        self.late_ingress_audit.as_ref()
+    }
+
+    /// Present only when the retained session-one adapter evidence failed the
+    /// strict observer join. It makes no owner semantic conclusion.
+    pub const fn late_ingress_evidence_rejection(
+        &self,
+    ) -> Option<I3LocalnetLateIngressEvidenceRejection> {
+        self.late_ingress_evidence_rejection
+    }
 }
 
 struct LocalnetFailure {
@@ -980,6 +1253,8 @@ struct LocalnetFailure {
     lifecycle_rejection_cause: Option<I3LocalnetLifecycleRejectionCause>,
     fault_profile: Option<I3LocalnetFaultProfile>,
     retry_audit: Option<I3LocalnetRetryAudit>,
+    late_ingress_audit: Option<I3LocalnetLateIngressAudit>,
+    late_ingress_evidence_rejection: Option<I3LocalnetLateIngressEvidenceRejection>,
 }
 
 #[derive(Default)]
@@ -1009,6 +1284,8 @@ impl LocalnetFailure {
             lifecycle_rejection_cause: None,
             fault_profile: None,
             retry_audit: None,
+            late_ingress_audit: None,
+            late_ingress_evidence_rejection: None,
         }
     }
 
@@ -1025,6 +1302,8 @@ impl LocalnetFailure {
             lifecycle_rejection_cause: None,
             fault_profile: None,
             retry_audit: None,
+            late_ingress_audit: None,
+            late_ingress_evidence_rejection: None,
         }
     }
 
@@ -1066,6 +1345,8 @@ impl LocalnetFailure {
             lifecycle_rejection_cause: None,
             fault_profile: Some(profile),
             retry_audit: None,
+            late_ingress_audit: None,
+            late_ingress_evidence_rejection: None,
         }
     }
 
@@ -1090,7 +1371,36 @@ impl LocalnetFailure {
             lifecycle_rejection_cause: None,
             fault_profile: None,
             retry_audit: Some(retry_audit),
+            late_ingress_audit: None,
+            late_ingress_evidence_rejection: None,
         }
+    }
+
+    fn late_ingress_delivery(late_ingress_audit: I3LocalnetLateIngressAudit) -> Self {
+        let requester_pending_request_is_retained = matches!(
+            late_ingress_audit.requester_outcome(),
+            I3LocalnetLateIngressRequesterOutcome::PendingReplyOrReceiptNotObserved
+        );
+        Self {
+            kind: I3LocalnetRunErrorKind::AmbiguousDelivery,
+            stage: I3LocalnetFailureStage::RequesterReplyOrReceiptNotObserved,
+            child_rejection: None,
+            evidence: LocalnetRejectionEvidence {
+                requester_pending_request_is_retained,
+                ..LocalnetRejectionEvidence::default()
+            },
+            lifecycle_rejection_cause: None,
+            fault_profile: None,
+            retry_audit: None,
+            late_ingress_audit: Some(late_ingress_audit),
+            late_ingress_evidence_rejection: None,
+        }
+    }
+
+    fn late_ingress_evidence_rejected(rejection: I3LocalnetLateIngressEvidenceRejection) -> Self {
+        let mut failure = Self::lifecycle_evidence_rejected();
+        failure.late_ingress_evidence_rejection = Some(rejection);
+        failure
     }
 
     /// A server `Ready` event is emitted only after the owner image/control
@@ -1275,6 +1585,8 @@ impl LocalnetFailure {
             },
             fault_audit,
             retry_audit,
+            self.late_ingress_audit,
+            self.late_ingress_evidence_rejection,
         )
     }
 
@@ -1352,6 +1664,7 @@ pub struct I3ProcessLocalnetRun {
     trace: I3LocalnetObserverSafeTrace,
     lifecycle: I3LocalnetLifecycleAudit,
     retry_audit: Option<I3LocalnetRetryAudit>,
+    late_ingress_audit: Option<I3LocalnetLateIngressAudit>,
 }
 
 impl I3ProcessLocalnetRun {
@@ -1375,6 +1688,10 @@ impl I3ProcessLocalnetRun {
     }
     pub fn retry_audit(&self) -> Option<&I3LocalnetRetryAudit> {
         self.retry_audit.as_ref()
+    }
+
+    pub fn late_ingress_audit(&self) -> Option<&I3LocalnetLateIngressAudit> {
+        self.late_ingress_audit.as_ref()
     }
 }
 
@@ -1410,6 +1727,12 @@ struct PrivateChildControl {
     retry_profile: Option<I3LocalnetRetryProfile>,
     retry_falsifier: Option<I3LocalnetRetryFalsifier>,
     retry_audit_falsifier: Option<I3LocalnetRetryAuditFalsifier>,
+    late_ingress_profile: Option<I3LocalnetLateIngressProfile>,
+    late_ingress_falsifier: Option<I3LocalnetLateIngressFalsifier>,
+    // A negative-only candidate-shaped ACK frame for A's actual stdout route.
+    // It cannot be decoded to an installed receipt or offered to the
+    // registered-B reader; the parent may decode it only as tainted input.
+    tainted_owner_lifecycle_ack_candidate: Option<Vec<u8>>,
     timeout_millis: u64,
 }
 
@@ -1517,6 +1840,107 @@ enum PrivateChildEvent {
         owner_mutation_count: usize,
         retry_evidence: Option<PrivateChildRetryEvidence>,
     },
+    /// Dedicated terminal record for the bounded late-ingress schedules. It
+    /// keeps the held-frame evidence distinct from ordinary completion and
+    /// fault records, so a pre-admission frame can never borrow their decoded
+    /// provenance fields.
+    LateIngress {
+        slot: I3LocalnetChildSlot,
+        terminal_outcome: PrivateLateIngressTerminalOutcome,
+        exec_confirmed: bool,
+        assigned_loci: Vec<String>,
+        trusted_control_consumed: bool,
+        tainted_image_consumed: bool,
+        tls_peer_verified: bool,
+        reciprocal_preface_verified: bool,
+        reliable_bidi_stream_count: usize,
+        quic_datagrams_enabled: bool,
+        semantic_admission_count: usize,
+        unauthenticated_semantic_admission_count: usize,
+        network_receipt_frame_count: usize,
+        generated_request_count: usize,
+        served_count: usize,
+        write_count: usize,
+        reply_count: usize,
+        receipt_count: usize,
+        runtime_occurrence_count: usize,
+        observer_evidence: PrivateChildObserverEvidence,
+        late_ingress_evidence: PrivateChildLateIngressEvidence,
+    },
+}
+
+#[derive(Clone, Copy, Debug, Eq, PartialEq, Serialize, Deserialize)]
+#[serde(rename_all = "snake_case")]
+enum PrivateLateIngressTerminalOutcome {
+    Completed,
+    HandledDeliveryFault,
+}
+
+impl PrivateLateIngressTerminalOutcome {
+    const fn public(self) -> I3LocalnetChildTerminalOutcome {
+        match self {
+            Self::Completed => I3LocalnetChildTerminalOutcome::Completed,
+            Self::HandledDeliveryFault => I3LocalnetChildTerminalOutcome::HandledDeliveryFault,
+        }
+    }
+}
+
+/// Child-local evidence for the one late session-one ingress.  The retained
+/// receiver evidence intentionally has no decoded carrier lineage until the
+/// runtime's later successful admission returns an ordinary delivery record.
+#[derive(Clone, Debug, Default, Serialize, Deserialize)]
+#[serde(deny_unknown_fields)]
+struct PrivateChildLateIngressEvidence {
+    run_ref: String,
+    first_session_generation: u8,
+    reconnect_session_generation: u8,
+    first_session_peer_spki_verified: bool,
+    first_session_reciprocal_preface_verified: bool,
+    reconnect_session_peer_spki_verified: bool,
+    reconnect_session_reciprocal_preface_verified: bool,
+    initial_sender_delivery: Option<PrivateDeliveryEvidence>,
+    retained_session_one_ingress: Option<PrivateRetainedIngressEvidence>,
+    retained_ingress_repeat_acquisition_rejection: Option<I3LocalnetAdapterRejectionKind>,
+    late_admission_delivery: Option<PrivateDeliveryEvidence>,
+    owner_outcome: Option<PrivateLateIngressOwnerOutcome>,
+    requester_outcome: Option<I3LocalnetLateIngressRequesterOutcome>,
+    outbound_request_frame_write_count: Option<usize>,
+    tainted_owner_lifecycle_ack_candidate: Option<Vec<u8>>,
+    lifecycle_provenance: Option<I3LocalnetLateIngressLifecycleProvenance>,
+    m9_lifecycle_source_derived: Option<bool>,
+}
+
+#[derive(Clone, Debug, Serialize, Deserialize)]
+#[serde(deny_unknown_fields)]
+struct PrivateRetainedIngressEvidence {
+    session_generation: u8,
+    candidate_commitment_ref: String,
+    network_occurrence_ref: String,
+}
+
+#[derive(Clone, Debug, Serialize, Deserialize)]
+#[serde(rename_all = "snake_case", tag = "kind", deny_unknown_fields)]
+enum PrivateLateIngressOwnerOutcome {
+    Admitted {
+        owner_serve_count: usize,
+        owner_mutation_count: usize,
+    },
+    CarrierAdmissionRejected {
+        owner_serve_count: usize,
+        owner_mutation_count: usize,
+    },
+}
+
+/// Parent-side facts from the one actual registered-owner ACK reader. This
+/// stays separate from child stdout events: no child can nominate a reader or
+/// publication disposition by serializing an observer record.
+#[derive(Clone, Copy)]
+struct PrivateLateIngressParentObservation {
+    ack_reader_outcome: I3LocalnetLateIngressAckReaderOutcome,
+    nonregistered_ack_input_disposition: I3LocalnetLateIngressNonregisteredAckInputDisposition,
+    nonregistered_ack_input_count: usize,
+    publication: I3LocalnetLateIngressParentPublication,
+    publication_commit_count: usize,
 }
 
 /// Serialized child evidence for the bounded retry schedules.  Its delivery
@@ -1702,12 +2126,22 @@ impl PrivateChildEvent {
     fn is_terminal(&self) -> bool {
         matches!(
             self,
-            Self::Completed { .. } | Self::Rejected { .. } | Self::HandledDeliveryFault { .. }
+            Self::Completed { .. }
+                | Self::Rejected { .. }
+                | Self::HandledDeliveryFault { .. }
+                | Self::LateIngress { .. }
         )
     }
 
     fn is_completed(&self) -> bool {
-        matches!(self, Self::Completed { .. })
+        matches!(
+            self,
+            Self::Completed { .. }
+                | Self::LateIngress {
+                    terminal_outcome: PrivateLateIngressTerminalOutcome::Completed,
+                    ..
+                }
+        )
     }
 
     fn retry_evidence(&self) -> Option<&PrivateChildRetryEvidence> {
@@ -1716,7 +2150,7 @@ impl PrivateChildEvent {
                 observer_evidence, ..
             } => observer_evidence.retry_evidence.as_ref(),
             Self::HandledDeliveryFault { retry_evidence, .. } => retry_evidence.as_ref(),
-            Self::Ready { .. } | Self::Rejected { .. } => None,
+            Self::Ready { .. } | Self::Rejected { .. } | Self::LateIngress { .. } => None,
         }
     }
 
@@ -1733,6 +2167,10 @@ impl PrivateChildEvent {
             | Self::HandledDeliveryFault {
                 semantic_admission_count,
                 ..
+            }
+            | Self::LateIngress {
+                semantic_admission_count,
+                ..
             } => Some(*semantic_admission_count),
             Self::Ready { .. } => None,
         }
@@ -1741,13 +2179,21 @@ impl PrivateChildEvent {
     fn terminal_event(&self) -> Option<I3LocalnetChildTerminalEvent> {
         match self {
             Self::Completed {
+                slot,
+                trusted_control_consumed,
+                unauthenticated_semantic_admission_count,
                 semantic_admission_count,
                 write_count,
                 ..
             } => Some(I3LocalnetChildTerminalEvent {
+                slot: Some(*slot),
                 outcome: I3LocalnetChildTerminalOutcome::Completed,
                 semantic_admission_count: *semantic_admission_count,
                 owner_mutation_count: *write_count,
+                trusted_control_consumed: Some(*trusted_control_consumed),
+                unauthenticated_semantic_admission_count: Some(
+                    *unauthenticated_semantic_admission_count,
+                ),
                 observed_exit_status_code: None,
                 was_force_killed: false,
             }),
@@ -1756,9 +2202,12 @@ impl PrivateChildEvent {
                 owner_mutation_count,
                 ..
             } => Some(I3LocalnetChildTerminalEvent {
+                slot: None,
                 outcome: I3LocalnetChildTerminalOutcome::Rejected,
                 semantic_admission_count: *semantic_admission_count,
                 owner_mutation_count: *owner_mutation_count,
+                trusted_control_consumed: None,
+                unauthenticated_semantic_admission_count: None,
                 observed_exit_status_code: None,
                 was_force_killed: false,
             }),
@@ -1767,9 +2216,32 @@ impl PrivateChildEvent {
                 owner_mutation_count,
                 ..
             } => Some(I3LocalnetChildTerminalEvent {
+                slot: None,
                 outcome: I3LocalnetChildTerminalOutcome::HandledDeliveryFault,
                 semantic_admission_count: *semantic_admission_count,
                 owner_mutation_count: *owner_mutation_count,
+                trusted_control_consumed: None,
+                unauthenticated_semantic_admission_count: None,
+                observed_exit_status_code: None,
+                was_force_killed: false,
+            }),
+            Self::LateIngress {
+                slot,
+                terminal_outcome,
+                trusted_control_consumed,
+                unauthenticated_semantic_admission_count,
+                semantic_admission_count,
+                write_count,
+                ..
+            } => Some(I3LocalnetChildTerminalEvent {
+                slot: Some(*slot),
+                outcome: terminal_outcome.public(),
+                semantic_admission_count: *semantic_admission_count,
+                owner_mutation_count: *write_count,
+                trusted_control_consumed: Some(*trusted_control_consumed),
+                unauthenticated_semantic_admission_count: Some(
+                    *unauthenticated_semantic_admission_count,
+                ),
                 observed_exit_status_code: None,
                 was_force_killed: false,
             }),
@@ -1822,7 +2294,7 @@ impl PrivateChildEvent {
     }
 
     fn into_completed(self) -> Option<PrivateChildCompleted> {
-        let Self::Completed {
+        let (
             slot,
             exec_confirmed,
             assigned_loci,
@@ -1842,9 +2314,72 @@ impl PrivateChildEvent {
             receipt_count,
             runtime_occurrence_count,
             observer_evidence,
-        } = self
-        else {
-            return None;
+        ) = match self {
+            Self::Completed {
+                slot,
+                exec_confirmed,
+                assigned_loci,
+                trusted_control_consumed,
+                tainted_image_consumed,
+                tls_peer_verified,
+                reciprocal_preface_verified,
+                reliable_bidi_stream_count,
+                quic_datagrams_enabled,
+                semantic_admission_count,
+                unauthenticated_semantic_admission_count,
+                network_receipt_frame_count,
+                generated_request_count,
+                served_count,
+                write_count,
+                reply_count,
+                receipt_count,
+                runtime_occurrence_count,
+                observer_evidence,
+            }
+            | Self::LateIngress {
+                terminal_outcome: PrivateLateIngressTerminalOutcome::Completed,
+                slot,
+                exec_confirmed,
+                assigned_loci,
+                trusted_control_consumed,
+                tainted_image_consumed,
+                tls_peer_verified,
+                reciprocal_preface_verified,
+                reliable_bidi_stream_count,
+                quic_datagrams_enabled,
+                semantic_admission_count,
+                unauthenticated_semantic_admission_count,
+                network_receipt_frame_count,
+                generated_request_count,
+                served_count,
+                write_count,
+                reply_count,
+                receipt_count,
+                runtime_occurrence_count,
+                observer_evidence,
+                ..
+            } => (
+                slot,
+                exec_confirmed,
+                assigned_loci,
+                trusted_control_consumed,
+                tainted_image_consumed,
+                tls_peer_verified,
+                reciprocal_preface_verified,
+                reliable_bidi_stream_count,
+                quic_datagrams_enabled,
+                semantic_admission_count,
+                unauthenticated_semantic_admission_count,
+                network_receipt_frame_count,
+                generated_request_count,
+                served_count,
+                write_count,
+                reply_count,
+                receipt_count,
+                runtime_occurrence_count,
+                observer_evidence,
+            ),
+            _ => return None,
         };
         Some(PrivateChildCompleted {
             slot,
@@ -1895,6 +2430,10 @@ struct SpawnedChild {
     observed_exit_status: Option<ExitStatus>,
     was_force_killed: bool,
     terminal_event: Option<PrivateChildEvent>,
+    // Present only for the actual ProcessB G2 launch. This parent endpoint is
+    // moved exactly once into the runtime-owned registered reader; callers
+    // cannot write an ACK or substitute a child identity for it.
+    owner_lifecycle_ack_stream: Option<UnixStream>,
 }
 
 struct LocalnetSupervisor {
@@ -1927,6 +2466,8 @@ pub fn run_i3_process_localnet(
     request: I3ProcessLocalnetRequest,
 ) -> Result<I3ProcessLocalnetRun, I3LocalnetRunError> {
     let deadline = request.deadline;
+    let late_ingress_profile = request.late_ingress_profile;
+    let late_ingress_falsifier = request.late_ingress_falsifier;
     if deadline.is_zero() {
         return Err(LocalnetFailure::lifecycle().into_error(true));
     }
@@ -1948,6 +2489,8 @@ pub fn run_i3_process_localnet(
             lifecycle_rejection_cause: None,
             fault_profile: None,
             retry_audit: None,
+            late_ingress_audit: None,
+            late_ingress_evidence_rejection: None,
         }
         .into_error(true)
     })?;
@@ -1965,6 +2508,8 @@ pub fn run_i3_process_localnet(
             lifecycle_rejection_cause: None,
             fault_profile: None,
             retry_audit: None,
+            late_ingress_audit: None,
+            late_ingress_evidence_rejection: None,
         }
         .into_error(true)
     })?;
@@ -1984,35 +2529,10 @@ pub fn run_i3_process_localnet(
         return Err(LocalnetFailure::lifecycle().into_error(true));
     }
     let codec = Sys5I3PrivateProcessCodec::private_provisional_v1();
-    let first_binding = cohort
-        .parent_held_expected_start_binding(PROCESS_A_SLOT)
+    let request_contract = project_adapter_contract(&project, "owner-request")
         .map_err(|_| LocalnetFailure::lifecycle().into_error(true))?;
-    let second_binding = cohort
-        .parent_held_expected_start_binding(PROCESS_B_SLOT)
+    let reply_contract = project_adapter_contract(&project, "owner-reply-receipt")
         .map_err(|_| LocalnetFailure::lifecycle().into_error(true))?;
-    let first_image = codec
-        .encode_image(
-            cohort
-                .take_process_image(PROCESS_A_SLOT)
-                .map_err(|_| LocalnetFailure::lifecycle().into_error(true))?,
-        )
-        .map_err(|_| LocalnetFailure::lifecycle().into_error(true))?;
-    let second_image = codec
-        .encode_image(
-            cohort
-                .take_process_image(PROCESS_B_SLOT)
-                .map_err(|_| LocalnetFailure::lifecycle().into_error(true))?,
-        )
-        .map_err(|_| LocalnetFailure::lifecycle().into_error(true))?;
-    let lineage = SupervisorLineageEvidence {
-        ordinary_source_build_count,
-        admission_count: summary.full_admission_count(),
-        m9_generation_count: summary.authority_generation_count(),
-        request_contract: project_adapter_contract(&project, "owner-request")
-            .map_err(|_| LocalnetFailure::lifecycle().into_error(true))?,
-        reply_contract: project_adapter_contract(&project, "owner-reply-receipt")
-            .map_err(|_| LocalnetFailure::lifecycle().into_error(true))?,
-    };
     let credentials =
         generate_run_credentials().map_err(|_| LocalnetFailure::lifecycle().into_error(true))?;
     let run_ref = fresh_run_ref(
@@ -2020,15 +2540,101 @@ pub fn run_i3_process_localnet(
         &credentials.process_a.spki_ref,
         &credentials.process_b.spki_ref,
     );
-    let (first_control, second_control) = codec
-        .split_trusted_localnet_controls(
-            run_ref,
-            first_binding,
-            credentials.process_a.spki_ref.clone(),
-            second_binding,
-            credentials.process_b.spki_ref.clone(),
+    if late_ingress_profile
+        == Some(
+            I3LocalnetLateIngressProfile::PrestageOwnerCapabilityRevocationBeforeLateIngressAdmission,
+        )
+    {
+        // This consumes only parent-owned checked contract facts and must
+        // complete before either image or expected start binding is taken.
+        // The bootstrap negative retains this same genuine stage and changes
+        // only B's later tainted wrapper.
+        cohort
+            .prestage_owner_capability_revocation(&run_ref, &request_contract)
+            .map_err(|_| LocalnetFailure::lifecycle().into_error(true))?;
+    }
+    let (first_control, second_control) = if late_ingress_profile
+        == Some(
+            I3LocalnetLateIngressProfile::PrestageOwnerCapabilityRevocationBeforeLateIngressAdmission,
+        )
+    {
+        cohort
+            .split_trusted_localnet_controls_with_prestaged_lifecycle(
+                &codec,
+                &run_ref,
+                PROCESS_A_SLOT,
+                &credentials.process_a.spki_ref,
+                PROCESS_B_SLOT,
+                &credentials.process_b.spki_ref,
+            )
+            .map_err(|_| LocalnetFailure::lifecycle().into_error(true))?
+    } else {
+        let first_binding = cohort
+            .parent_held_expected_start_binding(PROCESS_A_SLOT)
+            .map_err(|_| LocalnetFailure::lifecycle().into_error(true))?;
+        let second_binding = cohort
+            .parent_held_expected_start_binding(PROCESS_B_SLOT)
+            .map_err(|_| LocalnetFailure::lifecycle().into_error(true))?;
+        codec
+            .split_trusted_localnet_controls(
+                &run_ref,
+                first_binding,
+                credentials.process_a.spki_ref.clone(),
+                second_binding,
+                credentials.process_b.spki_ref.clone(),
+            )
+            .map_err(|_| LocalnetFailure::lifecycle().into_error(true))?
+    };
+    // This is candidate-shaped test input only. It is created from the
+    // genuine parent-held prestage before either image is taken, then sent
+    // only to A's bounded stdout event path. It never receives B's installed
+    // receipt, registered descriptor, or publication authority.
+    let requester_stdout_tainted_ack_candidate = if late_ingress_falsifier
+        == Some(I3LocalnetLateIngressFalsifier::RouteTaintedAckCandidateFromActualAStdout)
+    {
+        let candidate = cohort
+            .test_only_encode_prestaged_owner_lifecycle_ack_candidate(&codec)
+            .map_err(|_| LocalnetFailure::lifecycle().into_error(true))?;
+        if candidate.len() > MAX_CHILD_EVENT_BYTES {
+            return Err(LocalnetFailure::lifecycle().into_error(true));
+        }
+        Some(candidate)
+    } else {
+        None
+    };
+    let first_image = codec
+        .encode_image(
+            cohort
+                .take_process_image(PROCESS_A_SLOT)
+                .map_err(|_| LocalnetFailure::lifecycle().into_error(true))?,
         )
         .map_err(|_| LocalnetFailure::lifecycle().into_error(true))?;
+    let second_process_image = cohort
+        .take_process_image(PROCESS_B_SLOT)
+        .map_err(|_| LocalnetFailure::lifecycle().into_error(true))?;
+    let second_process_image = if late_ingress_falsifier
+        == Some(I3LocalnetLateIngressFalsifier::GenuineCandidateBindingTamper)
+    {
+        // The stage and trusted B bootstrap expectation above remain genuine.
+        // This consumes the sole tainted B image and alters only its staged
+        // wrapper target, so B rejects before Ready without a second image or
+        // any source/A child activity.
+        second_process_image.into_test_only_tamper(
+            mir_runtime::sys5_i3_process_runtime::Sys5I3ProcessImageTamper::mismatch_prestaged_owner_capability_lifecycle_target_slot(),
+        )
+    } else {
+        second_process_image
+    };
+    let second_image = codec
+        .encode_image(second_process_image)
+        .map_err(|_| LocalnetFailure::lifecycle().into_error(true))?;
+    let lineage = SupervisorLineageEvidence {
+        ordinary_source_build_count,
+        admission_count: summary.full_admission_count(),
+        m9_generation_count: summary.authority_generation_count(),
+        request_contract,
+        reply_contract,
+    };
 
     // This finite I3-2 deadline begins only after synchronous source/build,
     // admission/cohort, and credential preflight.  It bounds actual child
@@ -2050,7 +2656,9 @@ pub fn run_i3_process_localnet(
             || request.fault_audit_falsifier.is_some()
             || request.retry_profile.is_some()
             || request.retry_falsifier.is_some()
-            || request.retry_audit_falsifier.is_some())
+            || request.retry_audit_falsifier.is_some()
+            || late_ingress_profile.is_some()
+            || late_ingress_falsifier.is_some())
     {
         return Err(LocalnetFailure::lifecycle().into_error(true));
     }
@@ -2074,6 +2682,35 @@ pub fn run_i3_process_localnet(
             != Some(I3LocalnetRetryProfile::ReconnectAfterOwnerAdmissionBeforeReply)
     {
         return Err(LocalnetFailure::lifecycle().into_error(true));
+    }
+    if late_ingress_profile.is_some()
+        && (request.fault_profile.is_some()
+            || request.fault_audit_falsifier.is_some()
+            || request.retry_profile.is_some()
+            || request.retry_falsifier.is_some()
+            || request.retry_audit_falsifier.is_some())
+    {
+        return Err(LocalnetFailure::lifecycle().into_error(true));
+    }
+    if let Some(falsifier) = late_ingress_falsifier {
+        let required_profile = match falsifier {
+            I3LocalnetLateIngressFalsifier::RepeatRetainedIngressAcquisition => {
+                I3LocalnetLateIngressProfile::HoldSessionOneIngressAcrossVerifiedReconnect
+            }
+            I3LocalnetLateIngressFalsifier::GenuineCandidateBindingTamper
+            | I3LocalnetLateIngressFalsifier::ClearRetainedIngressCandidateCommitment
+            | I3LocalnetLateIngressFalsifier::MutateRetainedIngressCandidateCommitment
+            | I3LocalnetLateIngressFalsifier::RouteTaintedAckCandidateFromActualAStdout
+            | I3LocalnetLateIngressFalsifier::DropBRegisteredAck
+            | I3LocalnetLateIngressFalsifier::ReplayBRegisteredAck
+            | I3LocalnetLateIngressFalsifier::SetOwnerLateIngressTerminalUnauthenticatedAdmissionAndClearTrustedControl
+            | I3LocalnetLateIngressFalsifier::ClearRequesterLateIngressTerminalTrustedControl => {
+                I3LocalnetLateIngressProfile::PrestageOwnerCapabilityRevocationBeforeLateIngressAdmission
+            }
+        };
+        if late_ingress_profile != Some(required_profile) {
+            return Err(LocalnetFailure::lifecycle().into_error(true));
+        }
     }
     let fault_profile = request.fault_profile;
     let fault_audit_falsifier = request.fault_audit_falsifier;
@@ -2116,6 +2753,7 @@ pub fn run_i3_process_localnet(
             run_positive_or_peer_falsifier(
                 &mut supervisor,
                 &codec,
+                &mut cohort,
                 first_image,
                 second_image,
                 first_control,
@@ -2134,6 +2772,9 @@ pub fn run_i3_process_localnet(
                 retry_profile,
                 retry_falsifier,
                 retry_audit_falsifier,
+                late_ingress_profile,
+                late_ingress_falsifier,
+                requester_stdout_tainted_ack_candidate,
                 &lineage,
             )
         }
@@ -2189,6 +2830,9 @@ fn run_swapped_pair_falsifier(
         retry_profile: None,
         retry_falsifier: None,
         retry_audit_falsifier: None,
+        late_ingress_profile: None,
+        late_ingress_falsifier: None,
+        tainted_owner_lifecycle_ack_candidate: None,
         timeout_millis: deadline.as_millis().try_into().unwrap_or(u64::MAX),
     };
     let control_b = PrivateChildControl {
@@ -2211,6 +2855,9 @@ fn run_swapped_pair_falsifier(
         retry_profile: None,
         retry_falsifier: None,
         retry_audit_falsifier: None,
+        late_ingress_profile: None,
+        late_ingress_falsifier: None,
+        tainted_owner_lifecycle_ack_candidate: None,
         timeout_millis: deadline.as_millis().try_into().unwrap_or(u64::MAX),
     };
     supervisor
@@ -2344,6 +2991,7 @@ fn unexpected_owner_terminal_failure(owner_terminal: PrivateChildEvent) -> Local
 fn run_positive_or_peer_falsifier(
     supervisor: &mut LocalnetSupervisor,
     codec: &Sys5I3PrivateProcessCodec,
+    cohort: &mut Sys5I3ProcessCohort,
     first_image: Vec<u8>,
     second_image: Vec<u8>,
     first_control: mir_runtime::sys5_i3_process_runtime::Sys5I3TrustedLocalnetControl,
@@ -2362,6 +3010,9 @@ fn run_positive_or_peer_falsifier(
     retry_profile: Option<I3LocalnetRetryProfile>,
     retry_falsifier: Option<I3LocalnetRetryFalsifier>,
     retry_audit_falsifier: Option<I3LocalnetRetryAuditFalsifier>,
+    late_ingress_profile: Option<I3LocalnetLateIngressProfile>,
+    late_ingress_falsifier: Option<I3LocalnetLateIngressFalsifier>,
+    requester_stdout_tainted_ack_candidate: Option<Vec<u8>>,
     lineage: &SupervisorLineageEvidence,
 ) -> Result<I3ProcessLocalnetRun, LocalnetFailure> {
     let RunCredentials {
@@ -2398,11 +3049,35 @@ fn run_positive_or_peer_falsifier(
         retry_profile,
         retry_falsifier,
         retry_audit_falsifier,
+        late_ingress_profile,
+        late_ingress_falsifier,
+        tainted_owner_lifecycle_ack_candidate: None,
         timeout_millis: deadline.as_millis().try_into().unwrap_or(u64::MAX),
     };
     let process_b = supervisor
         .spawn(I3LocalnetChildSlot::ProcessB, second_image, server_control)
         .map_err(|_| LocalnetFailure::lifecycle())?;
+    let mut registered_owner_lifecycle_ack_reader = if late_ingress_profile
+        == Some(
+            I3LocalnetLateIngressProfile::PrestageOwnerCapabilityRevocationBeforeLateIngressAdmission,
+        )
+    {
+        let remaining = supervisor
+            .deadline
+            .checked_duration_since(Instant::now())
+            .filter(|duration| !duration.is_zero())
+            .ok_or_else(LocalnetFailure::lifecycle)?;
+        let stream = supervisor
+            .take_registered_owner_lifecycle_ack_stream()
+            .ok_or_else(LocalnetFailure::lifecycle)?;
+        Some(
+            cohort
+                .take_registered_owner_lifecycle_ack_reader(PROCESS_B_SLOT, stream, remaining)
+                .map_err(|_| LocalnetFailure::lifecycle())?,
+        )
+    } else {
+        None
+    };
     let server_initial_event = supervisor.next_event(process_b).map_err(|_| {
         if setup_failure_during_stall {
             LocalnetFailure::lifecycle_with_cause(
@@ -2470,6 +3145,9 @@ fn run_positive_or_peer_falsifier(
         retry_profile,
         retry_falsifier,
         retry_audit_falsifier,
+        late_ingress_profile,
+        late_ingress_falsifier,
+        tainted_owner_lifecycle_ack_candidate: requester_stdout_tainted_ack_candidate,
         timeout_millis: deadline.as_millis().try_into().unwrap_or(u64::MAX),
     };
     let process_a = supervisor
@@ -2552,6 +3230,198 @@ fn run_positive_or_peer_falsifier(
             return Err(LocalnetFailure::retry_delivery(audit).after_observed_owner_runtime_start());
         }
         Some(audit)
+    } else {
+        None
+    };
+    let late_ingress_audit = if let Some(profile) = late_ingress_profile {
+        // G1 has no registered lifecycle ACK route by construction. This is
+        // an actual parent launch disposition, retained separately from B's
+        // child event rather than inferred from delivery results.
+        let parent_observation = match profile {
+            I3LocalnetLateIngressProfile::HoldSessionOneIngressAcrossVerifiedReconnect => {
+                PrivateLateIngressParentObservation {
+                    ack_reader_outcome: I3LocalnetLateIngressAckReaderOutcome::NotSelected,
+                    nonregistered_ack_input_disposition:
+                        I3LocalnetLateIngressNonregisteredAckInputDisposition::NotObserved,
+                    nonregistered_ack_input_count: 0,
+                    publication: I3LocalnetLateIngressParentPublication::NoPrestageSelected,
+                    publication_commit_count: 0,
+                }
+            }
+            I3LocalnetLateIngressProfile::PrestageOwnerCapabilityRevocationBeforeLateIngressAdmission => {
+                let selected_requester_stdout_route = late_ingress_falsifier
+                    == Some(
+                        I3LocalnetLateIngressFalsifier::RouteTaintedAckCandidateFromActualAStdout,
+                    );
+                let (nonregistered_ack_input_disposition, nonregistered_ack_input_count) =
+                    match (
+                        selected_requester_stdout_route,
+                        supervisor.requester_stdout_tainted_owner_lifecycle_ack_candidate(),
+                    ) {
+                        (true, Some(candidate)) => {
+                            // This is an actual bounded A stdout input. The
+                            // codec can establish only a tainted shape; the
+                            // result is deliberately dropped and never
+                            // offered to B's registered reader or cohort.
+                            let _tainted = codec.decode_owner_lifecycle_ack(candidate).map_err(|_| {
+                                LocalnetFailure::lifecycle_evidence_rejected()
+                                    .after_observed_owner_runtime_start()
+                            })?;
+                            (
+                                I3LocalnetLateIngressNonregisteredAckInputDisposition::RequesterStdoutTaintedCandidateIgnored,
+                                1,
+                            )
+                        }
+                        (true, None) | (false, Some(_)) => {
+                            return Err(
+                                LocalnetFailure::lifecycle_evidence_rejected()
+                                    .after_observed_owner_runtime_start(),
+                            );
+                        }
+                        (false, None) => (
+                            I3LocalnetLateIngressNonregisteredAckInputDisposition::NotObserved,
+                            0,
+                        ),
+                    };
+                // The sole accepting route owns the actual parent endpoint
+                // of B's dedicated inherited FD.  It reads and decodes the
+                // frame internally, then yields an opaque completion for the
+                // cohort.  No probe caller can substitute bytes, a decoded
+                // DTO, an FD label, or an observer record here.
+                let reader = registered_owner_lifecycle_ack_reader
+                    .as_mut()
+                    .ok_or_else(LocalnetFailure::lifecycle)?;
+                match reader.read_next_completion(codec) {
+                    Ok(completion) => {
+                        if selected_requester_stdout_route {
+                            // The selected A route must not be masked by a
+                            // registered-B completion. Do not publish before
+                            // rejecting this contradictory actual evidence.
+                            return Err(
+                                LocalnetFailure::lifecycle_evidence_rejected()
+                                    .after_observed_owner_runtime_start(),
+                            );
+                        }
+                        cohort
+                            .publish_registered_owner_lifecycle_completion(completion)
+                            .map_err(|_| LocalnetFailure::lifecycle())?;
+                        let ack_reader_outcome = if late_ingress_falsifier
+                            == Some(I3LocalnetLateIngressFalsifier::ReplayBRegisteredAck)
+                        {
+                            // The reader consumes its internal completion
+                            // state before returning the first completion. A
+                            // second call therefore exercises the registered
+                            // reader's replay rejection without accepting a
+                            // second publication.
+                            if reader.read_next_completion(codec).is_ok() {
+                                return Err(
+                                    LocalnetFailure::lifecycle_evidence_rejected()
+                                        .after_observed_owner_runtime_start(),
+                                );
+                            }
+                            I3LocalnetLateIngressAckReaderOutcome::ReplayRejected
+                        } else {
+                            I3LocalnetLateIngressAckReaderOutcome::AcceptedRegisteredOwnerChildFd
+                        };
+                        let publication = cohort.observer_safe_lifecycle_publication_summary();
+                        if publication.publication_outcome()
+                            != Some(
+                                mir_runtime::sys5_i3_process_runtime::Sys5I3LifecyclePublicationOutcome::G2Published,
+                            )
+                            || publication.published_authority_generation_ref().is_empty()
+                        {
+                            return Err(
+                                LocalnetFailure::lifecycle_evidence_rejected()
+                                    .after_observed_owner_runtime_start(),
+                            );
+                        }
+                        PrivateLateIngressParentObservation {
+                            ack_reader_outcome,
+                            nonregistered_ack_input_disposition,
+                            nonregistered_ack_input_count,
+                            publication: I3LocalnetLateIngressParentPublication::G2Published,
+                            publication_commit_count: 1,
+                        }
+                    }
+                    Err(_) => {
+                        // An EOF, timeout, malformed registered-B frame, or
+                        // a deliberately withheld route cannot publish G2.
+                        // The cohort retains that terminal observation as
+                        // incomplete without treating any observer/A route
+                        // as a completion path.
+                        cohort
+                            .mark_registered_owner_lifecycle_publication_incomplete()
+                            .map_err(|_| LocalnetFailure::lifecycle())?;
+                        let publication = cohort.observer_safe_lifecycle_publication_summary();
+                        if publication.publication_outcome()
+                            != Some(
+                                mir_runtime::sys5_i3_process_runtime::Sys5I3LifecyclePublicationOutcome::PublicationIncomplete,
+                            )
+                        {
+                            return Err(
+                                LocalnetFailure::lifecycle_evidence_rejected()
+                                    .after_observed_owner_runtime_start(),
+                            );
+                        }
+                        let ack_reader_outcome = match late_ingress_falsifier {
+                            Some(
+                                I3LocalnetLateIngressFalsifier::RouteTaintedAckCandidateFromActualAStdout,
+                            ) => I3LocalnetLateIngressAckReaderOutcome::UntrustedRouteIgnored,
+                            Some(I3LocalnetLateIngressFalsifier::DropBRegisteredAck) => {
+                                I3LocalnetLateIngressAckReaderOutcome::LostBeforeParentAcceptance
+                            }
+                            _ => {
+                                return Err(
+                                    LocalnetFailure::lifecycle_evidence_rejected()
+                                        .after_observed_owner_runtime_start(),
+                                );
+                            }
+                        };
+                        PrivateLateIngressParentObservation {
+                            ack_reader_outcome,
+                            nonregistered_ack_input_disposition,
+                            nonregistered_ack_input_count,
+                            publication: I3LocalnetLateIngressParentPublication::PublicationIncomplete,
+                            publication_commit_count: 0,
+                        }
+                    }
+                }
+            }
+        };
+        match supervisor.late_ingress_join(profile, lineage, parent_observation) {
+            Some(PrivateLateIngressJoin::Accepted(audit)) => {
+                let audit = *audit;
+                if profile
+                    == I3LocalnetLateIngressProfile::PrestageOwnerCapabilityRevocationBeforeLateIngressAdmission
+                {
+                    return Err(
+                        LocalnetFailure::late_ingress_delivery(audit)
+                            .after_observed_owner_runtime_start(),
+                    );
+                }
+                Some(audit)
+            }
+            Some(PrivateLateIngressJoin::EvidenceRejected(rejection)) => {
+                let mut failure = LocalnetFailure::late_ingress_evidence_rejected(rejection)
+                    .after_observed_owner_runtime_start();
+                if supervisor
+                    .validated_requester_late_ingress_pending_observation(&lineage.request_contract)
+                {
+                    failure.evidence.requester_pending_request_is_retained = true;
+                }
+                return Err(failure);
+            }
+            None => {
+                let mut failure = LocalnetFailure::lifecycle_evidence_rejected()
+                    .after_observed_owner_runtime_start();
+                if supervisor
+                    .validated_requester_late_ingress_pending_observation(&lineage.request_contract)
+                {
+                    failure.evidence.requester_pending_request_is_retained = true;
+                }
+                return Err(failure);
+            }
+        }
     } else {
         None
     };
@@ -2874,6 +3744,7 @@ fn run_positive_or_peer_falsifier(
                 .captured_zero_exit_reap_observation_elapsed(),
         },
         retry_audit,
+        late_ingress_audit,
     })
 }
 
@@ -2959,7 +3830,28 @@ impl LocalnetSupervisor {
         let executable = probe_binary_path()
             .ok_or_else(|| io::Error::new(io::ErrorKind::NotFound, "probe binary"))?;
         let (mut parent_control, child_control) = UnixStream::pair()?;
+        set_close_on_exec(parent_control.as_raw_fd())?;
+        set_close_on_exec(child_control.as_raw_fd())?;
+        let (parent_owner_lifecycle_ack, child_owner_lifecycle_ack) = if slot
+            == I3LocalnetChildSlot::ProcessB
+            && control.late_ingress_profile
+                == Some(
+                    I3LocalnetLateIngressProfile::PrestageOwnerCapabilityRevocationBeforeLateIngressAdmission,
+                )
+        {
+            let (parent, child) = UnixStream::pair()?;
+            // The A child is spawned after B. Mark the parent end close-on-
+            // exec before either spawn so no later child inherits a usable
+            // B-completion route.
+            set_close_on_exec(parent.as_raw_fd())?;
+            set_close_on_exec(child.as_raw_fd())?;
+            (Some(parent), Some(child))
+        } else {
+            (None, None)
+        };
         let child_fd = child_control.as_raw_fd();
+        let child_owner_lifecycle_ack_fd =
+            child_owner_lifecycle_ack.as_ref().map(AsRawFd::as_raw_fd);
         let mut command = Command::new(executable);
         command
             .env_clear()
@@ -2972,17 +3864,32 @@ impl LocalnetSupervisor {
         // syscall. The closure does not allocate, lock, or inspect Rust state.
         unsafe {
             command.pre_exec(move || {
-                if libc::dup2(child_fd, LOCALNET_CONTROL_FD) == -1 {
-                    return Err(io::Error::last_os_error());
+                // Duplicate both sources above the reserved targets before
+                // either `dup2`: a UnixStream pair can otherwise allocate a
+                // source descriptor equal to the other target (3/4), making
+                // the second replacement silently lose an ACK endpoint.
+                let inherited_control = duplicate_child_fd(child_fd)?;
+                let inherited_ack = match child_owner_lifecycle_ack_fd {
+                    Some(fd) => Some(duplicate_child_fd(fd)?),
+                    None => None,
+                };
+                let install = (|| {
+                    install_child_fd(inherited_control, LOCALNET_CONTROL_FD)?;
+                    if let Some(inherited_ack) = inherited_ack {
+                        install_child_fd(inherited_ack, LOCALNET_OWNER_LIFECYCLE_ACK_FD)?;
+                    }
+                    Ok(())
+                })();
+                let _ = libc::close(inherited_control);
+                if let Some(inherited_ack) = inherited_ack {
+                    let _ = libc::close(inherited_ack);
                 }
-                if libc::fcntl(LOCALNET_CONTROL_FD, libc::F_SETFD, 0) == -1 {
-                    return Err(io::Error::last_os_error());
-                }
-                Ok(())
+                install
             });
         }
         let child = command.spawn()?;
         drop(child_control);
+        drop(child_owner_lifecycle_ack);
         let (sender, receiver) = mpsc::channel();
         let (bootstrap_sender, bootstrap_done) = mpsc::channel();
         // Register the PID before any fallible descriptor extraction or
@@ -3000,6 +3907,7 @@ impl LocalnetSupervisor {
             observed_exit_status: None,
             was_force_killed: false,
             terminal_event: None,
+            owner_lifecycle_ack_stream: parent_owner_lifecycle_ack,
         });
         let tracked = self.children.last_mut().expect("registered child");
         let stdout = tracked
@@ -3102,6 +4010,14 @@ impl LocalnetSupervisor {
             child.terminal_event = Some(event.clone());
         }
         Ok(event)
+    }
+
+    fn take_registered_owner_lifecycle_ack_stream(&mut self) -> Option<UnixStream> {
+        self.children
+            .iter_mut()
+            .find(|child| child.slot == I3LocalnetChildSlot::ProcessB)?
+            .owner_lifecycle_ack_stream
+            .take()
     }
 
     fn record_natural_exits(&mut self) {
@@ -3364,6 +4280,50 @@ impl LocalnetSupervisor {
             remote_admission,
             remote_evidence_rejection,
         ))
+    }
+
+    fn late_ingress_join(
+        &self,
+        profile: I3LocalnetLateIngressProfile,
+        lineage: &SupervisorLineageEvidence,
+        parent_observation: PrivateLateIngressParentObservation,
+    ) -> Option<PrivateLateIngressJoin> {
+        let requester = self
+            .children
+            .iter()
+            .find(|child| child.slot == I3LocalnetChildSlot::ProcessA)?
+            .terminal_event
+            .as_ref()?;
+        let owner = self
+            .children
+            .iter()
+            .find(|child| child.slot == I3LocalnetChildSlot::ProcessB)?
+            .terminal_event
+            .as_ref()?;
+        joined_late_ingress_audit(profile, lineage, requester, owner, parent_observation)
+    }
+
+    /// Returns only a bounded candidate-shaped ACK frame that A actually
+    /// serialized in its captured terminal stdout event. The caller may decode
+    /// it only as tainted input; this accessor cannot nominate B's registered
+    /// reader or create a completion.
+    fn requester_stdout_tainted_owner_lifecycle_ack_candidate(&self) -> Option<&[u8]> {
+        let PrivateChildEvent::LateIngress {
+            slot: I3LocalnetChildSlot::ProcessA,
+            late_ingress_evidence,
+            ..
+        } = self
+            .children
+            .iter()
+            .find(|child| child.slot == I3LocalnetChildSlot::ProcessA)?
+            .terminal_event
+            .as_ref()?
+        else {
+            return None;
+        };
+        late_ingress_evidence
+            .tainted_owner_lifecycle_ack_candidate
+            .as_deref()
     }
 
     /// Join the two terminal retry reports.  This comparison never derives
@@ -3693,6 +4653,61 @@ impl LocalnetSupervisor {
             )
     }
 
+    /// Preserve only A's independently source-contract-checked pending fact
+    /// when the later retained-ingress observer join is rejected. B's
+    /// received frame, lifecycle, and semantic outcome stay unaccepted.
+    fn validated_requester_late_ingress_pending_observation(
+        &self,
+        request_contract: &Sys5I3AdapterCarrierContract,
+    ) -> bool {
+        let Some(requester_event) = self
+            .children
+            .iter()
+            .find(|child| child.slot == I3LocalnetChildSlot::ProcessA)
+            .and_then(|child| child.terminal_event.as_ref())
+        else {
+            return false;
+        };
+        let PrivateChildEvent::LateIngress {
+            slot: I3LocalnetChildSlot::ProcessA,
+            terminal_outcome: PrivateLateIngressTerminalOutcome::HandledDeliveryFault,
+            generated_request_count: 1,
+            semantic_admission_count: 0,
+            receipt_count: 0,
+            late_ingress_evidence,
+            ..
+        } = requester_event
+        else {
+            return false;
+        };
+        if validated_late_ingress_child_audit(
+            I3LocalnetLateIngressProfile::PrestageOwnerCapabilityRevocationBeforeLateIngressAdmission,
+            I3LocalnetChildSlot::ProcessA,
+            requester_event,
+            late_ingress_evidence,
+        )
+        .is_none()
+        {
+            return false;
+        }
+        let Some(initial_sender) = late_ingress_evidence.initial_sender_delivery.as_ref() else {
+            return false;
+        };
+        let request_identity_ref = &initial_sender.semantic_request_identity_ref;
+        late_ingress_child_sessions_valid(late_ingress_evidence)
+            && !late_ingress_evidence.run_ref.is_empty()
+            && late_ingress_evidence.requester_outcome
+                == Some(I3LocalnetLateIngressRequesterOutcome::PendingReplyOrReceiptNotObserved)
+            && late_ingress_evidence.outbound_request_frame_write_count == Some(1)
+            && !request_identity_ref.is_empty()
+            && retry_request_delivery_matches_contract(
+                initial_sender,
+                request_contract,
+                request_identity_ref,
+            )
+            && !initial_sender.candidate_commitment_ref.is_empty()
+    }
+
     fn completed_child_exited_nonzero(&self) -> bool {
         self.children.iter().any(|child| {
             child
@@ -3755,6 +4770,41 @@ impl Drop for LocalnetSupervisor {
     fn drop(&mut self) {
         let _ = self.cleanup();
     }
+}
+
+fn set_close_on_exec(fd: RawFd) -> io::Result<()> {
+    // Parent-held descriptor ends must not survive a later child exec. The
+    // inherited child end is installed separately below with FD_CLOEXEC
+    // cleared only at its fixed private target.
+    let result = unsafe { libc::fcntl(fd, libc::F_SETFD, libc::FD_CLOEXEC) };
+    if result == -1 {
+        return Err(io::Error::last_os_error());
+    }
+    Ok(())
+}
+
+fn duplicate_child_fd(fd: RawFd) -> io::Result<RawFd> {
+    let duplicate = unsafe {
+        libc::fcntl(
+            fd,
+            libc::F_DUPFD_CLOEXEC,
+            LOCALNET_OWNER_LIFECYCLE_ACK_FD + 1,
+        )
+    };
+    if duplicate == -1 {
+        return Err(io::Error::last_os_error());
+    }
+    Ok(duplicate)
+}
+
+fn install_child_fd(source: RawFd, target: RawFd) -> io::Result<()> {
+    if unsafe { libc::dup2(source, target) } == -1 {
+        return Err(io::Error::last_os_error());
+    }
+    if unsafe { libc::fcntl(target, libc::F_SETFD, 0) } == -1 {
+        return Err(io::Error::last_os_error());
+    }
+    Ok(())
 }
 
 fn write_tainted_image(mut stdin: std::process::ChildStdin, image: Vec<u8>) -> io::Result<()> {
@@ -3957,6 +5007,423 @@ fn delivery_record(
         network_occurrence_ref: evidence.network_occurrence_ref.clone(),
         candidate_commitment_ref: evidence.candidate_commitment_ref.clone(),
     }
+}
+
+enum PrivateLateIngressJoin {
+    Accepted(Box<I3LocalnetLateIngressAudit>),
+    EvidenceRejected(I3LocalnetLateIngressEvidenceRejection),
+}
+
+fn late_ingress_child_sessions_valid(evidence: &PrivateChildLateIngressEvidence) -> bool {
+    evidence.first_session_generation == 1
+        && evidence.reconnect_session_generation == 2
+        && evidence.first_session_peer_spki_verified
+        && evidence.first_session_reciprocal_preface_verified
+        && evidence.reconnect_session_peer_spki_verified
+        && evidence.reconnect_session_reciprocal_preface_verified
+}
+
+/// Validate the complete observer-safe terminal contract before accepting any
+/// late-ingress child evidence. This is deliberately shared by the full join
+/// and A's independently retained-pending fallback so a malformed A terminal
+/// cannot keep pending merely because B's later join failed.
+fn validated_late_ingress_child_audit(
+    profile: I3LocalnetLateIngressProfile,
+    slot: I3LocalnetChildSlot,
+    event: &PrivateChildEvent,
+    evidence: &PrivateChildLateIngressEvidence,
+) -> Option<I3LocalnetLateIngressChildAudit> {
+    let PrivateChildEvent::LateIngress {
+        slot: reported_slot,
+        terminal_outcome,
+        exec_confirmed,
+        assigned_loci,
+        trusted_control_consumed,
+        tainted_image_consumed,
+        tls_peer_verified,
+        reciprocal_preface_verified,
+        reliable_bidi_stream_count,
+        quic_datagrams_enabled,
+        semantic_admission_count,
+        unauthenticated_semantic_admission_count,
+        network_receipt_frame_count,
+        generated_request_count,
+        served_count,
+        write_count,
+        reply_count,
+        receipt_count,
+        runtime_occurrence_count,
+        ..
+    } = event
+    else {
+        return None;
+    };
+    if *reported_slot != slot
+        || evidence.run_ref.is_empty()
+        || !late_ingress_child_sessions_valid(evidence)
+        || !*exec_confirmed
+        || !matches_slot_loci(assigned_loci, slot)
+        || !*trusted_control_consumed
+        || !*tainted_image_consumed
+        || !*tls_peer_verified
+        || !*reciprocal_preface_verified
+        || *reliable_bidi_stream_count != 1
+        || *quic_datagrams_enabled
+        || *unauthenticated_semantic_admission_count != 0
+        || *network_receipt_frame_count != 0
+    {
+        return None;
+    }
+    let counts_valid = match (profile, slot) {
+        (
+            I3LocalnetLateIngressProfile::HoldSessionOneIngressAcrossVerifiedReconnect,
+            I3LocalnetChildSlot::ProcessA,
+        ) => {
+            *terminal_outcome == PrivateLateIngressTerminalOutcome::Completed
+                && *generated_request_count == 1
+                && *served_count == 0
+                && *write_count == 0
+                && *reply_count == 0
+                && *receipt_count == 1
+                && *semantic_admission_count == 1
+                && *runtime_occurrence_count == 1
+        }
+        (
+            I3LocalnetLateIngressProfile::HoldSessionOneIngressAcrossVerifiedReconnect,
+            I3LocalnetChildSlot::ProcessB,
+        ) => {
+            *terminal_outcome == PrivateLateIngressTerminalOutcome::Completed
+                && *generated_request_count == 0
+                && *served_count == 1
+                && *write_count == 1
+                && *reply_count == 1
+                && *receipt_count == 0
+                && *semantic_admission_count == 1
+                && *runtime_occurrence_count == 2
+        }
+        (
+            I3LocalnetLateIngressProfile::PrestageOwnerCapabilityRevocationBeforeLateIngressAdmission,
+            I3LocalnetChildSlot::ProcessA,
+        ) => {
+            *terminal_outcome == PrivateLateIngressTerminalOutcome::HandledDeliveryFault
+                && *generated_request_count == 1
+                && *served_count == 0
+                && *write_count == 0
+                && *reply_count == 0
+                && *receipt_count == 0
+                && *semantic_admission_count == 0
+                && *runtime_occurrence_count == 0
+        }
+        (
+            I3LocalnetLateIngressProfile::PrestageOwnerCapabilityRevocationBeforeLateIngressAdmission,
+            I3LocalnetChildSlot::ProcessB,
+        ) => {
+            *terminal_outcome == PrivateLateIngressTerminalOutcome::HandledDeliveryFault
+                && *generated_request_count == 0
+                && *served_count == 0
+                && *write_count == 0
+                && *reply_count == 0
+                && *receipt_count == 0
+                && *semantic_admission_count == 0
+                && *runtime_occurrence_count == 0
+        }
+    };
+    if !counts_valid {
+        return None;
+    }
+    Some(I3LocalnetLateIngressChildAudit {
+        slot,
+        run_ref: evidence.run_ref.clone(),
+        first_session_generation: evidence.first_session_generation,
+        reconnect_session_generation: evidence.reconnect_session_generation,
+        first_session_peer_spki_verified: evidence.first_session_peer_spki_verified,
+        first_session_reciprocal_preface_verified: evidence
+            .first_session_reciprocal_preface_verified,
+        reconnect_session_peer_spki_verified: evidence.reconnect_session_peer_spki_verified,
+        reconnect_session_reciprocal_preface_verified: evidence
+            .reconnect_session_reciprocal_preface_verified,
+        terminal_outcome: terminal_outcome.public(),
+    })
+}
+
+fn late_ingress_owner_outcome(
+    outcome: &PrivateLateIngressOwnerOutcome,
+) -> I3LocalnetLateIngressOwnerOutcome {
+    match outcome {
+        PrivateLateIngressOwnerOutcome::Admitted {
+            owner_serve_count,
+            owner_mutation_count,
+        } => I3LocalnetLateIngressOwnerOutcome::Admitted {
+            owner_serve_count: *owner_serve_count,
+            owner_mutation_count: *owner_mutation_count,
+        },
+        PrivateLateIngressOwnerOutcome::CarrierAdmissionRejected {
+            owner_serve_count,
+            owner_mutation_count,
+        } => I3LocalnetLateIngressOwnerOutcome::CarrierAdmissionRejected {
+            owner_serve_count: *owner_serve_count,
+            owner_mutation_count: *owner_mutation_count,
+        },
+    }
+}
+
+fn late_ingress_parent_observation_valid(
+    profile: I3LocalnetLateIngressProfile,
+    observation: PrivateLateIngressParentObservation,
+) -> bool {
+    match profile {
+        I3LocalnetLateIngressProfile::HoldSessionOneIngressAcrossVerifiedReconnect => {
+            observation.ack_reader_outcome == I3LocalnetLateIngressAckReaderOutcome::NotSelected
+                && observation.nonregistered_ack_input_disposition
+                    == I3LocalnetLateIngressNonregisteredAckInputDisposition::NotObserved
+                && observation.nonregistered_ack_input_count == 0
+                && observation.publication
+                    == I3LocalnetLateIngressParentPublication::NoPrestageSelected
+                && observation.publication_commit_count == 0
+        }
+        I3LocalnetLateIngressProfile::PrestageOwnerCapabilityRevocationBeforeLateIngressAdmission => {
+            match observation.ack_reader_outcome {
+                I3LocalnetLateIngressAckReaderOutcome::AcceptedRegisteredOwnerChildFd
+                | I3LocalnetLateIngressAckReaderOutcome::ReplayRejected => {
+                    observation.nonregistered_ack_input_disposition
+                        == I3LocalnetLateIngressNonregisteredAckInputDisposition::NotObserved
+                        && observation.nonregistered_ack_input_count == 0
+                        &&
+                    observation.publication == I3LocalnetLateIngressParentPublication::G2Published
+                        && observation.publication_commit_count == 1
+                }
+                I3LocalnetLateIngressAckReaderOutcome::UntrustedRouteIgnored => {
+                    observation.nonregistered_ack_input_disposition
+                        == I3LocalnetLateIngressNonregisteredAckInputDisposition::RequesterStdoutTaintedCandidateIgnored
+                        && observation.nonregistered_ack_input_count == 1
+                        && observation.publication
+                            == I3LocalnetLateIngressParentPublication::PublicationIncomplete
+                        && observation.publication_commit_count == 0
+                }
+                I3LocalnetLateIngressAckReaderOutcome::LostBeforeParentAcceptance => {
+                    observation.nonregistered_ack_input_disposition
+                        == I3LocalnetLateIngressNonregisteredAckInputDisposition::NotObserved
+                        && observation.nonregistered_ack_input_count == 0
+                        && observation.publication
+                        == I3LocalnetLateIngressParentPublication::PublicationIncomplete
+                        && observation.publication_commit_count == 0
+                }
+                I3LocalnetLateIngressAckReaderOutcome::NotSelected => false,
+            }
+        }
+    }
+}
+
+fn joined_late_ingress_audit(
+    profile: I3LocalnetLateIngressProfile,
+    lineage: &SupervisorLineageEvidence,
+    requester_event: &PrivateChildEvent,
+    owner_event: &PrivateChildEvent,
+    parent_observation: PrivateLateIngressParentObservation,
+) -> Option<PrivateLateIngressJoin> {
+    let PrivateChildEvent::LateIngress {
+        slot: I3LocalnetChildSlot::ProcessA,
+        terminal_outcome: requester_terminal,
+        generated_request_count: requester_generated_count,
+        receipt_count: requester_receipt_count,
+        semantic_admission_count: requester_semantic_admission_count,
+        late_ingress_evidence: requester_evidence,
+        ..
+    } = requester_event
+    else {
+        return None;
+    };
+    let PrivateChildEvent::LateIngress {
+        slot: I3LocalnetChildSlot::ProcessB,
+        terminal_outcome: owner_terminal,
+        served_count: owner_served_count,
+        write_count: owner_write_count,
+        reply_count: owner_reply_count,
+        semantic_admission_count: owner_semantic_admission_count,
+        late_ingress_evidence: owner_evidence,
+        ..
+    } = owner_event
+    else {
+        return None;
+    };
+    if requester_evidence.run_ref.is_empty()
+        || requester_evidence.run_ref != owner_evidence.run_ref
+        || !late_ingress_parent_observation_valid(profile, parent_observation)
+    {
+        return None;
+    }
+    let requester_child = validated_late_ingress_child_audit(
+        profile,
+        I3LocalnetChildSlot::ProcessA,
+        requester_event,
+        requester_evidence,
+    )?;
+    let owner_child = validated_late_ingress_child_audit(
+        profile,
+        I3LocalnetChildSlot::ProcessB,
+        owner_event,
+        owner_evidence,
+    )?;
+    let initial_sender = requester_evidence.initial_sender_delivery.as_ref()?;
+    let request_identity_ref = initial_sender.semantic_request_identity_ref.clone();
+    if request_identity_ref.is_empty()
+        || !retry_request_delivery_matches_contract(
+            initial_sender,
+            &lineage.request_contract,
+            &request_identity_ref,
+        )
+        || initial_sender.candidate_commitment_ref.is_empty()
+    {
+        return None;
+    }
+    let retained = owner_evidence.retained_session_one_ingress.as_ref()?;
+    if retained.session_generation != requester_evidence.first_session_generation
+        || retained.session_generation != owner_evidence.first_session_generation
+        || retained.network_occurrence_ref.is_empty()
+    {
+        return None;
+    }
+    if retained.candidate_commitment_ref.is_empty() {
+        return Some(PrivateLateIngressJoin::EvidenceRejected(
+            I3LocalnetLateIngressEvidenceRejection::RetainedIngressCommitmentMissing,
+        ));
+    }
+    if retained.candidate_commitment_ref != initial_sender.candidate_commitment_ref {
+        return Some(PrivateLateIngressJoin::EvidenceRejected(
+            I3LocalnetLateIngressEvidenceRejection::RetainedIngressCommitmentMismatch,
+        ));
+    }
+    if retained.network_occurrence_ref == initial_sender.network_occurrence_ref {
+        return None;
+    }
+    if !matches!(
+        owner_evidence.retained_ingress_repeat_acquisition_rejection,
+        None | Some(I3LocalnetAdapterRejectionKind::LocalAttemptRejected)
+    ) {
+        return None;
+    }
+    let (late_admission_delivery, owner_outcome, requester_outcome, lifecycle_provenance) =
+        match profile {
+            I3LocalnetLateIngressProfile::HoldSessionOneIngressAcrossVerifiedReconnect => {
+                if *requester_terminal != PrivateLateIngressTerminalOutcome::Completed
+                    || *owner_terminal != PrivateLateIngressTerminalOutcome::Completed
+                    || *requester_generated_count != 1
+                    || *requester_receipt_count != 1
+                    || *requester_semantic_admission_count != 1
+                    || *owner_semantic_admission_count != 1
+                    || *owner_served_count != 1
+                    || *owner_write_count != 1
+                    || *owner_reply_count != 1
+                    || requester_evidence.requester_outcome
+                        != Some(I3LocalnetLateIngressRequesterOutcome::ReceiptConsumed)
+                    || owner_evidence.lifecycle_provenance
+                        != Some(I3LocalnetLateIngressLifecycleProvenance::NotSelected)
+                    || owner_evidence.m9_lifecycle_source_derived.is_some()
+                {
+                    return None;
+                }
+                let delivery = owner_evidence.late_admission_delivery.as_ref()?;
+                if !retry_request_delivery_matches_contract(
+                    delivery,
+                    &lineage.request_contract,
+                    &request_identity_ref,
+                ) || !delivery_semantics_match(initial_sender, delivery)
+                    || delivery.candidate_commitment_ref != retained.candidate_commitment_ref
+                    || delivery.network_occurrence_ref != retained.network_occurrence_ref
+                {
+                    return None;
+                }
+                let PrivateLateIngressOwnerOutcome::Admitted {
+                    owner_serve_count,
+                    owner_mutation_count,
+                } = owner_evidence.owner_outcome.as_ref()?
+                else {
+                    return None;
+                };
+                if *owner_serve_count != 1 || *owner_mutation_count != 1 {
+                    return None;
+                }
+                (
+                    Some(delivery_record(I3LocalnetDeliveryPhase::RequestReceive, delivery)),
+                    late_ingress_owner_outcome(owner_evidence.owner_outcome.as_ref()?),
+                    I3LocalnetLateIngressRequesterOutcome::ReceiptConsumed,
+                    I3LocalnetLateIngressLifecycleProvenance::NotSelected,
+                )
+            }
+            I3LocalnetLateIngressProfile::PrestageOwnerCapabilityRevocationBeforeLateIngressAdmission => {
+                if *requester_terminal != PrivateLateIngressTerminalOutcome::HandledDeliveryFault
+                    || *owner_terminal != PrivateLateIngressTerminalOutcome::HandledDeliveryFault
+                    || *requester_generated_count != 1
+                    || *requester_receipt_count != 0
+                    || *requester_semantic_admission_count != 0
+                    || *owner_semantic_admission_count != 0
+                    || *owner_served_count != 0
+                    || *owner_write_count != 0
+                    || *owner_reply_count != 0
+                    || requester_evidence.requester_outcome
+                        != Some(I3LocalnetLateIngressRequesterOutcome::PendingReplyOrReceiptNotObserved)
+                    || owner_evidence.lifecycle_provenance
+                        != Some(I3LocalnetLateIngressLifecycleProvenance::M9AdmittedLifecycle)
+                    || owner_evidence.m9_lifecycle_source_derived != Some(false)
+                    || owner_evidence.late_admission_delivery.is_some()
+                {
+                    return None;
+                }
+                let PrivateLateIngressOwnerOutcome::CarrierAdmissionRejected {
+                    owner_serve_count,
+                    owner_mutation_count,
+                } = owner_evidence.owner_outcome.as_ref()?
+                else {
+                    return None;
+                };
+                if *owner_serve_count != 0 || *owner_mutation_count != 0 {
+                    return None;
+                }
+                (
+                    None,
+                    late_ingress_owner_outcome(owner_evidence.owner_outcome.as_ref()?),
+                    I3LocalnetLateIngressRequesterOutcome::PendingReplyOrReceiptNotObserved,
+                    I3LocalnetLateIngressLifecycleProvenance::M9AdmittedLifecycle,
+                )
+            }
+        };
+    let outbound_request_frame_write_count =
+        requester_evidence.outbound_request_frame_write_count?;
+    if outbound_request_frame_write_count != 1 {
+        return None;
+    }
+    Some(PrivateLateIngressJoin::Accepted(Box::new(
+        I3LocalnetLateIngressAudit {
+            profile,
+            request_identity_ref,
+            requester_child,
+            owner_child,
+            initial_sender_delivery: delivery_record(
+                I3LocalnetDeliveryPhase::RequestSend,
+                initial_sender,
+            ),
+            retained_session_one_ingress: I3LocalnetRetainedIngressEvidence {
+                session_generation: retained.session_generation,
+                candidate_commitment_ref: retained.candidate_commitment_ref.clone(),
+                network_occurrence_ref: retained.network_occurrence_ref.clone(),
+            },
+            retained_ingress_repeat_acquisition_rejection: owner_evidence
+                .retained_ingress_repeat_acquisition_rejection,
+            late_admission_delivery,
+            admission_session_generation: owner_evidence.reconnect_session_generation,
+            owner_outcome: Some(owner_outcome),
+            requester_outcome,
+            outbound_request_frame_write_count,
+            lifecycle_provenance,
+            m9_lifecycle_source_derived: owner_evidence.m9_lifecycle_source_derived,
+            registered_owner_ack_reader_outcome: parent_observation.ack_reader_outcome,
+            nonregistered_ack_input_disposition: parent_observation
+                .nonregistered_ack_input_disposition,
+            nonregistered_ack_input_count: parent_observation.nonregistered_ack_input_count,
+            parent_publication: parent_observation.publication,
+            parent_publication_commit_count: parent_observation.publication_commit_count,
+        },
+    )))
 }
 
 fn retry_child_sessions_valid(evidence: &PrivateChildRetryEvidence) -> bool {
@@ -4371,23 +5838,33 @@ fn run_private_localnet_child_inner(fixed_slot: I3LocalnetChildSlot) -> Result<(
         .map(str::to_owned)
         .into_iter()
         .collect();
-    let (runtime, runtime_control) =
-        match codec.validate_and_start_image_with_localnet_control(image, runtime_control) {
-            Ok(value) => value,
-            Err(_) => {
-                emit_child_event(&PrivateChildEvent::rejected(
-                    PrivateChildRejection::StartBinding,
-                    true,
-                    0,
-                    0,
-                    0,
-                    0,
-                    0,
-                ))
-                .map_err(|_| ())?;
-                return Ok(());
+    let start_result = match control.late_ingress_profile {
+            Some(
+                I3LocalnetLateIngressProfile::PrestageOwnerCapabilityRevocationBeforeLateIngressAdmission,
+            ) => codec
+                .validate_and_start_image_with_prestaged_lifecycle(image, runtime_control),
+            None | Some(I3LocalnetLateIngressProfile::HoldSessionOneIngressAcrossVerifiedReconnect) => {
+                codec
+                    .validate_and_start_image_with_localnet_control(image, runtime_control)
+                    .map(|(runtime, runtime_control)| (runtime, runtime_control, None))
             }
-        };
+    };
+    let (runtime, runtime_control, admitted_lifecycle_stimulus) = match start_result {
+        Ok(value) => value,
+        Err(_) => {
+            emit_child_event(&PrivateChildEvent::rejected(
+                PrivateChildRejection::StartBinding,
+                true,
+                0,
+                0,
+                0,
+                0,
+                0,
+            ))
+            .map_err(|_| ())?;
+            return Ok(());
+        }
+    };
     let duration = Duration::from_millis(control.timeout_millis.max(1));
     let tokio_runtime = tokio::runtime::Builder::new_current_thread()
         .enable_all()
@@ -4396,9 +5873,20 @@ fn run_private_localnet_child_inner(fixed_slot: I3LocalnetChildSlot) -> Result<(
     tokio_runtime.block_on(async move {
         match fixed_slot {
             I3LocalnetChildSlot::ProcessB => {
-                run_server_child(runtime, runtime_control, control, duration, assigned_loci).await
+                run_server_child(
+                    runtime,
+                    runtime_control,
+                    admitted_lifecycle_stimulus,
+                    control,
+                    duration,
+                    assigned_loci,
+                )
+                .await
             }
             I3LocalnetChildSlot::ProcessA => {
+                if admitted_lifecycle_stimulus.is_some() {
+                    return Err(());
+                }
                 run_client_child(runtime, runtime_control, control, duration, assigned_loci).await
             }
         }
@@ -4446,9 +5934,44 @@ fn read_trusted_control() -> io::Result<Vec<u8>> {
     Ok(bytes.split_off(4))
 }
 
+fn take_registered_owner_lifecycle_ack_writer() -> io::Result<UnixStream> {
+    // SAFETY: this fixed descriptor is installed only for ProcessB's selected
+    // G2 launch. It is consumed once by the B-local receipt-gated emitter;
+    // ProcessA and ordinary G1 launches never open it.
+    if unsafe { libc::fcntl(LOCALNET_OWNER_LIFECYCLE_ACK_FD, libc::F_GETFD) } == -1 {
+        return Err(io::Error::last_os_error());
+    }
+    Ok(unsafe { UnixStream::from_raw_fd(LOCALNET_OWNER_LIFECYCLE_ACK_FD) })
+}
+
+fn write_registered_owner_lifecycle_ack(
+    stream: &mut UnixStream,
+    framed_ack: &[u8],
+    replay_once: bool,
+) -> io::Result<()> {
+    if framed_ack.is_empty() || framed_ack.len() > MAX_TRUSTED_CONTROL_BYTES {
+        return Err(io::Error::new(
+            io::ErrorKind::InvalidData,
+            "lifecycle ack frame",
+        ));
+    }
+    stream.write_all(framed_ack)?;
+    if replay_once {
+        // The only replay control copies the exact receipt-produced frame on
+        // the same registered B stream; it neither constructs fields nor
+        // injects a detached caller-provided ACK.
+        stream.write_all(framed_ack)?;
+    }
+    stream.flush()?;
+    stream.shutdown(Shutdown::Write)
+}
+
 async fn run_server_child(
     mut runtime: mir_runtime::sys5_i3_process_runtime::Sys5I3ProcessRuntime,
     trusted: mir_runtime::sys5_i3_process_runtime::Sys5I3TrustedLocalnetControl,
+    admitted_lifecycle_stimulus: Option<
+        mir_runtime::sys5_i3_process_runtime::Sys5I3AdmittedLifecycleStimulus,
+    >,
     control: PrivateChildControl,
     timeout: Duration,
     assigned_loci: Vec<String>,
@@ -4504,6 +6027,9 @@ async fn run_server_child(
         }
         session.send_local_preface().await.map_err(|_| ())?;
         if let Some(profile) = control.retry_profile {
+            if admitted_lifecycle_stimulus.is_some() {
+                return Err(());
+            }
             return run_server_retry_sessions(
                 runtime,
                 session,
@@ -4514,6 +6040,24 @@ async fn run_server_child(
                 assigned_loci,
             )
             .await;
+        }
+        if let Some(profile) = control.late_ingress_profile {
+            return run_server_late_ingress_sessions(
+                runtime,
+                session,
+                &endpoint,
+                &control,
+                PrivateLateIngressServerSessionPlan {
+                    profile,
+                    run_ref,
+                    assigned_loci,
+                    admitted_lifecycle_stimulus,
+                },
+            )
+            .await;
+        }
+        if admitted_lifecycle_stimulus.is_some() {
+            return Err(());
         }
         let (reply, request_delivery) = match session
             .receive_and_admit_generated_message(&mut runtime)
@@ -4844,6 +6388,24 @@ async fn run_client_child(
             )
             .await;
         }
+        if let Some(profile) = control.late_ingress_profile {
+            return run_client_late_ingress_sessions(
+                runtime,
+                session,
+                &endpoint,
+                endpoint_address,
+                PrivateLateIngressClientSessionPlan {
+                    profile,
+                    run_ref,
+                    assigned_loci,
+                    late_ingress_falsifier: control.late_ingress_falsifier,
+                    tainted_owner_lifecycle_ack_candidate: control
+                        .tainted_owner_lifecycle_ack_candidate
+                        .clone(),
+                },
+            )
+            .await;
+        }
         let request = match prepared_request {
             Some((request, _)) => request,
             None => runtime
@@ -5035,6 +6597,331 @@ async fn connect_reconnect_session(
         .await
         .map_err(|_| ())?;
     reconnect.connect(connection).await.map_err(|_| ())
+}
+
+/// Immutable actual-child inputs for the one held session-one ingress on B.
+/// Grouping them keeps the session routine focused on the retained ingress
+/// state rather than widening the child protocol.
+struct PrivateLateIngressServerSessionPlan {
+    profile: I3LocalnetLateIngressProfile,
+    run_ref: String,
+    assigned_loci: Vec<String>,
+    admitted_lifecycle_stimulus:
+        Option<mir_runtime::sys5_i3_process_runtime::Sys5I3AdmittedLifecycleStimulus>,
+}
+
+async fn run_server_late_ingress_sessions(
+    mut runtime: mir_runtime::sys5_i3_process_runtime::Sys5I3ProcessRuntime,
+    mut first_session: mir_runtime::sys5_i3_private_quic::Sys5I3PrivateQuicSession,
+    endpoint: &Endpoint,
+    control: &PrivateChildControl,
+    late_plan: PrivateLateIngressServerSessionPlan,
+) -> Result<(), ()> {
+    let PrivateLateIngressServerSessionPlan {
+        profile,
+        run_ref,
+        assigned_loci,
+        admitted_lifecycle_stimulus,
+    } = late_plan;
+    let first_session_peer_spki_verified = first_session.peer_spki_verified();
+    let first_session_reciprocal_preface_verified = first_session.peer_preface_verified();
+    if !first_session_peer_spki_verified
+        || !first_session_reciprocal_preface_verified
+        || first_session.session_attempt_generation() != 1
+    {
+        return Err(());
+    }
+    // The adapter owns the raw frame and decoded candidate. Probe code sees
+    // only this session-one receiver record before a later runtime admission.
+    let pending_ingress = first_session
+        .receive_complete_pending_ingress()
+        .await
+        .map_err(|_| ())?;
+    let retained = pending_ingress.observer_safe_evidence();
+    let mut retained_observer_evidence = PrivateRetainedIngressEvidence {
+        session_generation: retained.session_attempt_generation(),
+        candidate_commitment_ref: retained.candidate_commitment_ref().to_string(),
+        network_occurrence_ref: retained.network_occurrence_ref().to_string(),
+    };
+    if retained_observer_evidence.session_generation != 1
+        || retained_observer_evidence
+            .candidate_commitment_ref
+            .is_empty()
+        || retained_observer_evidence.network_occurrence_ref.is_empty()
+    {
+        return Err(());
+    }
+    let retained_ingress_repeat_acquisition_rejection = if control.late_ingress_falsifier
+        == Some(I3LocalnetLateIngressFalsifier::RepeatRetainedIngressAcquisition)
+    {
+        match first_session.receive_complete_pending_ingress().await {
+            Err(
+                mir_runtime::sys5_i3_private_quic::Sys5I3PrivateQuicError::LocalAttemptRejected,
+            ) => Some(I3LocalnetAdapterRejectionKind::LocalAttemptRejected),
+            _ => return Err(()),
+        }
+    } else {
+        None
+    };
+    match control.late_ingress_falsifier {
+        Some(I3LocalnetLateIngressFalsifier::ClearRetainedIngressCandidateCommitment) => {
+            retained_observer_evidence.candidate_commitment_ref.clear();
+        }
+        Some(I3LocalnetLateIngressFalsifier::MutateRetainedIngressCandidateCommitment) => {
+            retained_observer_evidence.candidate_commitment_ref =
+                "observer-falsifier:retained-ingress-commitment".to_string();
+        }
+        _ => {}
+    }
+    let m9_lifecycle_source_derived = match profile {
+        I3LocalnetLateIngressProfile::HoldSessionOneIngressAcrossVerifiedReconnect => {
+            if admitted_lifecycle_stimulus.is_some() {
+                return Err(());
+            }
+            None
+        }
+        I3LocalnetLateIngressProfile::PrestageOwnerCapabilityRevocationBeforeLateIngressAdmission => {
+            // The retained session-one frame is already complete, but no
+            // reconnect exists yet. Install and consume the receipt before
+            // releasing session one so the requester cannot reach session
+            // two before the real G2 withdrawal is locally installed.
+            let stimulus = admitted_lifecycle_stimulus.ok_or(())?;
+            let installed_ack = runtime
+                .install_admitted_owner_capability_successor(stimulus)
+                .map_err(|_| ())?;
+            let source_derived = {
+                let installed_lifecycle = runtime
+                    .observer_safe_installed_owner_capability_lifecycle()
+                    .ok_or(())?;
+                if installed_lifecycle.origin()
+                    != mir_runtime::sys5_i3_process_runtime::Sys5I3ObserverSafeLifecycleOrigin::M9AdmittedLifecycle
+                    || installed_lifecycle.source_derived()
+                {
+                    return Err(());
+                }
+                // Retain only this observer-safe scalar. The receipt and
+                // installed lifecycle borrow do not survive late admission.
+                installed_lifecycle.source_derived()
+            };
+            let suppress_registered_b_ack = matches!(
+                control.late_ingress_falsifier,
+                Some(
+                    I3LocalnetLateIngressFalsifier::RouteTaintedAckCandidateFromActualAStdout
+                        | I3LocalnetLateIngressFalsifier::DropBRegisteredAck
+                )
+            );
+            let replay_registered_b_ack = control.late_ingress_falsifier
+                == Some(I3LocalnetLateIngressFalsifier::ReplayBRegisteredAck);
+            if !suppress_registered_b_ack {
+                let codec = Sys5I3PrivateProcessCodec::private_provisional_v1();
+                let framed_ack = codec
+                    .encode_installed_owner_lifecycle_ack(installed_ack)
+                    .map_err(|_| ())?;
+                let mut writer = take_registered_owner_lifecycle_ack_writer().map_err(|_| ())?;
+                write_registered_owner_lifecycle_ack(
+                    &mut writer,
+                    &framed_ack,
+                    replay_registered_b_ack,
+                )
+                .map_err(|_| ())?;
+            }
+            Some(source_derived)
+        }
+    };
+    first_session.close();
+    let reconnect = first_session.into_reconnect();
+    let mut reconnect_session = accept_reconnect_session(endpoint, reconnect).await?;
+    reconnect_session
+        .receive_and_validate_peer_preface()
+        .await
+        .map_err(|_| ())?;
+    reconnect_session
+        .send_local_preface()
+        .await
+        .map_err(|_| ())?;
+    if !reconnect_session.peer_spki_verified()
+        || !reconnect_session.peer_preface_verified()
+        || reconnect_session.session_attempt_generation() != 2
+    {
+        return Err(());
+    }
+
+    match profile {
+        I3LocalnetLateIngressProfile::HoldSessionOneIngressAcrossVerifiedReconnect => {
+            let (reply, late_admission_delivery) = reconnect_session
+                .admit_retained_pending_ingress(&mut runtime, pending_ingress)
+                .map_err(|_| ())?;
+            let reply = reply.ok_or(())?;
+            let reply_delivery = reconnect_session
+                .send_generated_message(reply)
+                .await
+                .map_err(|_| ())?;
+            reconnect_session.finish_send().map_err(|_| ())?;
+            // Local finish is not a receipt. Wait for the actual requester
+            // close after its consumed receipt before completing B's report.
+            reconnect_session.wait_for_peer_close().await;
+            let summary = runtime.observer_safe_runtime_summary();
+            let occurrences = runtime.observer_safe_semantic_occurrences();
+            let request_identity_ref = late_admission_delivery
+                .semantic_request_identity_ref()
+                .to_string();
+            let observer_evidence = PrivateChildObserverEvidence {
+                request_received: Some(late_admission_delivery.clone().into()),
+                reply_sent: Some(reply_delivery.into()),
+                local_store_ref: runtime.local_store_identity_ref().to_string(),
+                owner_serve_occurrence_ref: occurrences
+                    .owner_serve_linearization_occurrence_ref(&request_identity_ref)
+                    .map(str::to_string),
+                owner_write_occurrence_ref: occurrences
+                    .actual_owner_write_occurrence_ref(&request_identity_ref)
+                    .map(str::to_string),
+                ..PrivateChildObserverEvidence::default()
+            };
+            if summary.served_owner_request_count() != 1
+                || summary.actual_owner_write_count() != 1
+                || observer_evidence.owner_serve_occurrence_ref.is_none()
+                || observer_evidence.owner_write_occurrence_ref.is_none()
+            {
+                return Err(());
+            }
+            emit_child_event(&PrivateChildEvent::LateIngress {
+                slot: I3LocalnetChildSlot::ProcessB,
+                terminal_outcome: PrivateLateIngressTerminalOutcome::Completed,
+                exec_confirmed: true,
+                assigned_loci,
+                trusted_control_consumed: true,
+                tainted_image_consumed: true,
+                tls_peer_verified: reconnect_session.peer_spki_verified(),
+                reciprocal_preface_verified: reconnect_session.peer_preface_verified(),
+                reliable_bidi_stream_count: reconnect_session.reliable_bidi_stream_count(),
+                quic_datagrams_enabled: reconnect_session.quic_datagrams_enabled(),
+                semantic_admission_count: 1,
+                unauthenticated_semantic_admission_count: 0,
+                network_receipt_frame_count: 0,
+                generated_request_count: 0,
+                served_count: summary.served_owner_request_count(),
+                write_count: summary.actual_owner_write_count(),
+                reply_count: 1,
+                receipt_count: 0,
+                runtime_occurrence_count: occurrences.owner_serve_linearization_count()
+                    + occurrences.actual_owner_write_count(),
+                observer_evidence,
+                late_ingress_evidence: PrivateChildLateIngressEvidence {
+                    run_ref,
+                    first_session_generation: 1,
+                    reconnect_session_generation: reconnect_session.session_attempt_generation(),
+                    first_session_peer_spki_verified,
+                    first_session_reciprocal_preface_verified,
+                    reconnect_session_peer_spki_verified: reconnect_session.peer_spki_verified(),
+                    reconnect_session_reciprocal_preface_verified: reconnect_session
+                        .peer_preface_verified(),
+                    retained_session_one_ingress: Some(retained_observer_evidence),
+                    retained_ingress_repeat_acquisition_rejection,
+                    late_admission_delivery: Some(late_admission_delivery.into()),
+                    owner_outcome: Some(PrivateLateIngressOwnerOutcome::Admitted {
+                        owner_serve_count: summary.served_owner_request_count(),
+                        owner_mutation_count: summary.actual_owner_write_count(),
+                    }),
+                    lifecycle_provenance: Some(
+                        I3LocalnetLateIngressLifecycleProvenance::NotSelected,
+                    ),
+                    ..PrivateChildLateIngressEvidence::default()
+                },
+            })
+            .map_err(|_| ())?;
+        }
+        I3LocalnetLateIngressProfile::PrestageOwnerCapabilityRevocationBeforeLateIngressAdmission => {
+            let m9_lifecycle_source_derived = m9_lifecycle_source_derived.ok_or(())?;
+            let error = match reconnect_session
+                .admit_retained_pending_ingress(&mut runtime, pending_ingress)
+            {
+                Err(error) => error,
+                Ok(_) => return Err(()),
+            };
+            let mir_runtime::sys5_i3_private_quic::Sys5I3PrivateQuicError::SemanticRejected {
+                error,
+                rejected_attempt: _,
+            } = error
+            else {
+                return Err(());
+            };
+            if error.kind()
+                != mir_runtime::sys5_i3_process_runtime::Sys5I3ProcessRuntimeErrorKind::CarrierAdmissionRejected
+            {
+                return Err(());
+            }
+            let summary = runtime.observer_safe_runtime_summary();
+            if summary.served_owner_request_count() != 0 || summary.actual_owner_write_count() != 0
+            {
+                return Err(());
+            }
+            // B has emitted only its reconnect preface.  A local connection
+            // close can race A's preface validation, so finish this stream
+            // and wait for A's actual post-EOF pending observation/close.
+            reconnect_session.finish_send().map_err(|_| ())?;
+            reconnect_session.wait_for_peer_close().await;
+            let owner_terminal_trusted_control_consumed = control.late_ingress_falsifier
+                != Some(
+                    I3LocalnetLateIngressFalsifier::SetOwnerLateIngressTerminalUnauthenticatedAdmissionAndClearTrustedControl,
+                );
+            let owner_terminal_unauthenticated_semantic_admission_count = if owner_terminal_trusted_control_consumed {
+                0
+            } else {
+                1
+            };
+            emit_child_event(&PrivateChildEvent::LateIngress {
+                slot: I3LocalnetChildSlot::ProcessB,
+                terminal_outcome: PrivateLateIngressTerminalOutcome::HandledDeliveryFault,
+                exec_confirmed: true,
+                assigned_loci,
+                trusted_control_consumed: owner_terminal_trusted_control_consumed,
+                tainted_image_consumed: true,
+                tls_peer_verified: reconnect_session.peer_spki_verified(),
+                reciprocal_preface_verified: reconnect_session.peer_preface_verified(),
+                reliable_bidi_stream_count: reconnect_session.reliable_bidi_stream_count(),
+                quic_datagrams_enabled: reconnect_session.quic_datagrams_enabled(),
+                semantic_admission_count: 0,
+                unauthenticated_semantic_admission_count:
+                    owner_terminal_unauthenticated_semantic_admission_count,
+                network_receipt_frame_count: 0,
+                generated_request_count: 0,
+                served_count: summary.served_owner_request_count(),
+                write_count: summary.actual_owner_write_count(),
+                reply_count: 0,
+                receipt_count: 0,
+                runtime_occurrence_count: 0,
+                observer_evidence: PrivateChildObserverEvidence {
+                    local_store_ref: runtime.local_store_identity_ref().to_string(),
+                    ..PrivateChildObserverEvidence::default()
+                },
+                late_ingress_evidence: PrivateChildLateIngressEvidence {
+                    run_ref,
+                    first_session_generation: 1,
+                    reconnect_session_generation: reconnect_session.session_attempt_generation(),
+                    first_session_peer_spki_verified,
+                    first_session_reciprocal_preface_verified,
+                    reconnect_session_peer_spki_verified: reconnect_session.peer_spki_verified(),
+                    reconnect_session_reciprocal_preface_verified: reconnect_session
+                        .peer_preface_verified(),
+                    retained_session_one_ingress: Some(retained_observer_evidence),
+                    owner_outcome: Some(
+                        PrivateLateIngressOwnerOutcome::CarrierAdmissionRejected {
+                            owner_serve_count: summary.served_owner_request_count(),
+                            owner_mutation_count: summary.actual_owner_write_count(),
+                        },
+                    ),
+                    lifecycle_provenance: Some(
+                        I3LocalnetLateIngressLifecycleProvenance::M9AdmittedLifecycle,
+                    ),
+                    m9_lifecycle_source_derived: Some(m9_lifecycle_source_derived),
+                    ..PrivateChildLateIngressEvidence::default()
+                },
+            })
+            .map_err(|_| ())?;
+        }
+    }
+    reconnect_session.close();
+    Ok(())
 }
 
 async fn run_server_retry_sessions(
@@ -5303,6 +7190,203 @@ struct PrivateRetryClientSessionPlan {
     profile: I3LocalnetRetryProfile,
     run_ref: String,
     assigned_loci: Vec<String>,
+}
+
+/// Immutable actual-child inputs for one held session-one ingress. The source
+/// request is emitted once on the first verified session; the second session
+/// is receive-only from A's perspective.
+struct PrivateLateIngressClientSessionPlan {
+    profile: I3LocalnetLateIngressProfile,
+    run_ref: String,
+    assigned_loci: Vec<String>,
+    late_ingress_falsifier: Option<I3LocalnetLateIngressFalsifier>,
+    tainted_owner_lifecycle_ack_candidate: Option<Vec<u8>>,
+}
+
+async fn run_client_late_ingress_sessions(
+    mut runtime: mir_runtime::sys5_i3_process_runtime::Sys5I3ProcessRuntime,
+    mut first_session: mir_runtime::sys5_i3_private_quic::Sys5I3PrivateQuicSession,
+    endpoint: &Endpoint,
+    endpoint_address: SocketAddr,
+    late_plan: PrivateLateIngressClientSessionPlan,
+) -> Result<(), ()> {
+    let PrivateLateIngressClientSessionPlan {
+        profile,
+        run_ref,
+        assigned_loci,
+        late_ingress_falsifier,
+        tainted_owner_lifecycle_ack_candidate,
+    } = late_plan;
+    let first_session_peer_spki_verified = first_session.peer_spki_verified();
+    let first_session_reciprocal_preface_verified = first_session.peer_preface_verified();
+    if !first_session_peer_spki_verified
+        || !first_session_reciprocal_preface_verified
+        || first_session.session_attempt_generation() != 1
+    {
+        return Err(());
+    }
+    let request = runtime
+        .emit_generated_owner_request("init_avatar_hp")
+        .map_err(|_| ())?;
+    let pending = runtime
+        .into_original_owner_request_pending(request)
+        .map_err(|_| ())?;
+    let request_identity_ref = pending.semantic_request_identity_ref().to_string();
+    let initial_sender_delivery = first_session
+        .send_initial_original_owner_request(&mut runtime, &pending)
+        .await
+        .map_err(|_| ())?;
+    first_session.finish_send().map_err(|_| ())?;
+    // `finish_send` only closes A's local stream half. B closes session one
+    // only after its adapter has retained the complete frame, which makes the
+    // following peer-close wait the actual hand-off rather than a guessed
+    // carrier delivery point.
+    first_session.wait_for_peer_close().await;
+    // This close follows the actual B-side retained-ingress hand-off.
+    // `into_reconnect` preserves the checked peer/preface context but neither
+    // exposes nor replays the source request.
+    first_session.close();
+    let reconnect = first_session.into_reconnect();
+    let mut reconnect_session =
+        connect_reconnect_session(endpoint, endpoint_address, reconnect).await?;
+    reconnect_session
+        .send_local_preface()
+        .await
+        .map_err(|_| ())?;
+    reconnect_session
+        .receive_and_validate_peer_preface()
+        .await
+        .map_err(|_| ())?;
+    if !reconnect_session.peer_spki_verified()
+        || !reconnect_session.peer_preface_verified()
+        || reconnect_session.session_attempt_generation() != 2
+    {
+        return Err(());
+    }
+
+    let outcome = reconnect_session
+        .receive_and_admit_original_owner_reply(&mut runtime, pending)
+        .await;
+    let (
+        terminal_outcome,
+        requester_outcome,
+        receipt_count,
+        semantic_admission_count,
+        reply_received,
+        retained_pending,
+    ) =
+        match profile {
+            I3LocalnetLateIngressProfile::HoldSessionOneIngressAcrossVerifiedReconnect => {
+                let mir_runtime::sys5_i3_private_quic::Sys5I3PrivateQuicOriginalOwnerReplyOutcome::Consumed {
+                    receipt,
+                    delivery,
+                } = outcome
+                else {
+                    return Err(());
+                };
+                if !receipt.is_observer_safe_typed_result_or_receipt()
+                    || !receipt.has_no_transportable_carrier()
+                    || runtime.observer_safe_pending_owner_request_count() != 0
+                {
+                    return Err(());
+                }
+                (
+                    PrivateLateIngressTerminalOutcome::Completed,
+                    I3LocalnetLateIngressRequesterOutcome::ReceiptConsumed,
+                    1,
+                    1,
+                    Some(PrivateDeliveryEvidence::from(delivery)),
+                    None,
+                )
+            }
+            I3LocalnetLateIngressProfile::PrestageOwnerCapabilityRevocationBeforeLateIngressAdmission => {
+                let mir_runtime::sys5_i3_private_quic::Sys5I3PrivateQuicOriginalOwnerReplyOutcome::Pending {
+                    pending: returned_pending,
+                    // The session-two preface was independently verified
+                    // above. B then finishes its preface-only stream after
+                    // the actual carrier rejection, so this is the adapter's
+                    // observed no-reply frame outcome, not a profile claim.
+                    error: mir_runtime::sys5_i3_private_quic::Sys5I3PrivateQuicError::FrameRejected,
+                } = outcome
+                else {
+                    return Err(());
+                };
+                if returned_pending.semantic_request_identity_ref() != request_identity_ref
+                    || runtime.observer_safe_pending_owner_request_count() != 1
+                {
+                    return Err(());
+                }
+                (
+                    PrivateLateIngressTerminalOutcome::HandledDeliveryFault,
+                    I3LocalnetLateIngressRequesterOutcome::PendingReplyOrReceiptNotObserved,
+                    0,
+                    0,
+                    None,
+                    Some(returned_pending),
+                )
+            }
+        };
+    let summary = runtime.observer_safe_runtime_summary();
+    let occurrences = runtime.observer_safe_semantic_occurrences();
+    let observer_evidence = PrivateChildObserverEvidence {
+        request_sent: Some(initial_sender_delivery.clone().into()),
+        reply_received,
+        local_store_ref: runtime.local_store_identity_ref().to_string(),
+        requester_receipt_occurrence_ref: occurrences
+            .requester_local_receipt_occurrence_ref(&request_identity_ref)
+            .map(str::to_string),
+        ..PrivateChildObserverEvidence::default()
+    };
+    let trusted_control_consumed = late_ingress_falsifier
+        != Some(I3LocalnetLateIngressFalsifier::ClearRequesterLateIngressTerminalTrustedControl);
+    emit_child_event(&PrivateChildEvent::LateIngress {
+        slot: I3LocalnetChildSlot::ProcessA,
+        terminal_outcome,
+        exec_confirmed: true,
+        assigned_loci,
+        trusted_control_consumed,
+        tainted_image_consumed: true,
+        tls_peer_verified: reconnect_session.peer_spki_verified(),
+        reciprocal_preface_verified: reconnect_session.peer_preface_verified(),
+        reliable_bidi_stream_count: reconnect_session.reliable_bidi_stream_count(),
+        quic_datagrams_enabled: reconnect_session.quic_datagrams_enabled(),
+        semantic_admission_count,
+        unauthenticated_semantic_admission_count: 0,
+        network_receipt_frame_count: 0,
+        generated_request_count: 1,
+        served_count: 0,
+        write_count: 0,
+        reply_count: 0,
+        receipt_count: summary.accepted_inbound_receipt_count(),
+        runtime_occurrence_count: occurrences.requester_local_receipt_count(),
+        observer_evidence,
+        late_ingress_evidence: PrivateChildLateIngressEvidence {
+            run_ref,
+            first_session_generation: 1,
+            reconnect_session_generation: reconnect_session.session_attempt_generation(),
+            first_session_peer_spki_verified,
+            first_session_reciprocal_preface_verified,
+            reconnect_session_peer_spki_verified: reconnect_session.peer_spki_verified(),
+            reconnect_session_reciprocal_preface_verified: reconnect_session
+                .peer_preface_verified(),
+            initial_sender_delivery: Some(initial_sender_delivery.into()),
+            requester_outcome: Some(requester_outcome),
+            outbound_request_frame_write_count: Some(1),
+            tainted_owner_lifecycle_ack_candidate,
+            ..PrivateChildLateIngressEvidence::default()
+        },
+    })
+    .map_err(|_| ())?;
+    if summary.accepted_inbound_receipt_count() != receipt_count {
+        return Err(());
+    }
+    // The opaque pending handle is intentionally kept to this point in the
+    // G2 case: no
+    // second send or local consumption occurs after the actual pending reply
+    // outcome. It then drops with the child runtime, not as a new request.
+    let _ = retained_pending;
+    reconnect_session.close();
+    Ok(())
 }
 
 async fn run_client_retry_sessions(

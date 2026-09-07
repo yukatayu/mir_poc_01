@@ -478,6 +478,416 @@ is rejected as inconsistent with that producer rule. Exact installation and
 actual-network withdrawal tests remain open; no new authority is inferred from
 deployment, session or fault controls.
 
+The next within-I3-3 authority/late-ingress slice starts from verified reconnect
+cut `7580e3a1298dd39bc26ef1979c5033d485e92de5`. Its direct consumer is the
+required control/data ordering and stale/revoked-authority fault boundary;
+I3-4 remains inactive. The first bounded case pre-stages one genuine M9
+owner-capability revocation before any owner semantic admission, avoiding a
+new observation-counter synchronization protocol. The exact successor must
+preserve the admitted program, advance one generation, tombstone only the
+selected existing owner lineage, introduce no grants/lineages and retain
+unrelated inventory and prior tombstones. A child receives a tainted restricted
+candidate plus an independently trusted run/program/projection/cohort/slot/
+closure/generation/kind/digest binding, never a publisher or self-withdrawal
+constructor. A separate checked install and exact owner acknowledgement gate
+coordinator publication; lost acknowledgement remains incomplete/unknown, not
+a rollback or distributed-durability guarantee.
+
+The adapter's next direct seam is opaque complete-frame pending ingress:
+verified network receive may precede a genuine authority successor, while
+semantic admission still revalidates the current owner state. The positive
+control holds an old-session frame across a second verified session without
+an authority update and admits once. The falsifier installs the genuine
+revocation first and then admits the retained old frame: the existing current-
+binding precedence must yield `CarrierAdmissionRejected` with zero serve/write,
+not an invented later `MissingCapability` diagnostic. The lifecycle stimulus
+is explicitly `M9AdmittedLifecycle`, not source-derived `SourceAction` or
+transport authority. No general administration, issuer-in-child, hidden retry,
+membership reacquisition, provider/time, durability or later-milestone scope is
+opened by this case. Concrete APIs and tests are being bounded before edits.
+
+The parent reviewed the complete bounded ACK advisory from temporary Oracle
+session `i3-3-ack-publicatio-boundary` (5m44s;
+SHA-256 `07d8d32bc4604ecf2ddd648c1428e29430c922b5e7d17ce370d538087bb4a8d8`)
+against theory/18's install/ack/publication order. It selects A: reuse the
+trusted compiled kernel and isolated owner-child control route, with no new
+challenge/cryptographic management protocol. Only completed installation and
+live-floor advancement may privately construct an installed receipt; a
+kernel-only ACK emitter consumes that receipt. The parent reader associates
+the exact received record with the registered owner-child instance/descriptor,
+not an owner label in JSON or a detachable origin token. Decoding remains
+tainted; exact retained pending binding and one-use parent completion gate
+publication. Candidate integrity, matching references, `NonClone`, transport
+identity and observer logs do not establish installation.
+
+The direct falsifiers are a correct-field candidate-derived ACK through an
+untrusted/requester/observer path, failure before the install/floor
+postcondition, wrong actual origin or binding, replay, and lost ACK. A test
+that replaces the trusted owner emitter with a privileged lying writer on its
+genuine descriptor is outside this honest-kernel/OS boundary; it must not be
+reported as a rejected forgery. Lost ACK may leave B at G2 while parent
+publication remains incomplete, without rollback or hidden retry. This is a
+bounded implementation decision and test contract, not executed evidence,
+Byzantine-kernel resistance, public protocol, durability, or a new theorem.
+
+Current coverage reconciliation at `7580e3a` separates already executed slices
+from candidate tests and missing interactions. The row numbers follow Canon
+plan/05's 20 rows; this table does not accept a row or substitute test existence
+for execution. Its direct consumer is the remaining I3-3 test assignment.
+
+| Rows | Executed checkpoint / reusable boundary | Remaining claim before full matrix acceptance |
+|---|---|---|
+| 1 route/partition/endpoint | Before-write disconnect is executed, but is not absent/refused endpoint evidence | bounded actual route/endpoint failure and no invented route |
+| 2 handshake/peer | Actual peer/preface rejection is in the 22-test process floor | bind exact positive/falsifier and non-authority evidence to row |
+| 3 target; 4 provenance | Retained runtime/private-codec target/lineage tests use the production receiver binder | exact test-to-row inventory and representative actual-ingress correspondence |
+| 5 partial/split; 6 malformed/limits | Private process codec has bounded complete-frame negatives; older static-adapter chunk tests are a different profile | actual selected process adapter split/truncation behavior; no partial admission |
+| 7 before-admission loss; 8 after-admission loss | Actual unavailable versus request-bound ambiguity paths and rejected/missing observer joins are executed | final exact ordering/evidence classification |
+| 9 reconnect; 10 duplicate | Two actual sessions, one original identity, owner duplicate rejection and retained requester ambiguity are executed | current-authority/late-traffic interaction; no migration or exactly-once claim |
+| 11 result/receipt replay | Retained process-runtime checked reply/replay boundary | actual late/duplicate reply schedule and current pending binding |
+| 12 control/data order | Session/attempt distinctions are executed | current retained-ingress/successor slice |
+| 13 membership/epoch; 14 capability/witness | Retained M9 withdrawal test distinguishes current binding from pure authority revalidation | actual genuine successor and old-use rejection; capability-only revocation must not be mislabeled membership retirement |
+| 15 auth/policy | Existing M9 admission tests are candidate evidence, not actual I3 policy execution | exact admitted-policy failure and pre-use ordering |
+| 16 capacity | Retained 51-test floor includes bounded requester/owner ledger capacity | exact positive/negative source/runtime binding; no new network-flow saturation requirement inferred |
+| 17 external time | Lifecycle reaper deadline is not semantic request expiry | OPEN request-bound pre-serve time contract and actual check |
+| 18 provider | Ordinary owner RMW is not a provider invocation | OPEN declared generic effect, generated execution and actual typed provider result/failure |
+| 19 visibility/redaction | Source/observer-safe joins are executed; local/static mismatch tests are candidate evidence | exact production admission mismatch and redacted actual diagnostic |
+| 20 cut/patch/save | Accepted local quiescence rules are input evidence | actual child quiescent control plus in-flight rejection/late-traffic interaction, without durability |
+
+The same production boundary may supply multiple finite negative inputs; each
+parser variant need not create another subprocess profile. Network-dependent
+claims still need actual selected adapter/process observations. No row is
+removed, broadened into a new general theorem, or silently closed by this
+reconciliation.
+
+The separate test owner then added the first prestaged-lifecycle runtime test
+group. The sole evaluator ran
+`CARGO_INCREMENTAL=0 CARGO_BUILD_JOBS=2 cargo test --locked -p mir-runtime
+--test sys5_i3_process_runtime --features i3-process-test-seams i3_3_prestaged
+-- --nocapture --test-threads=1`: exit 101 with 24 missing-API/cascading type
+errors. The binary did not execute; this is API/compile RED, not a behavioral
+falsifier or passing evidence. The production owner may now implement that
+bounded surface. The fourth tainted-ACK filter and new process tests were not
+run. Eight dead-code warnings were also emitted; no warning-free or independently
+established pre-existing-warning claim is made. Root free space was 16 GiB,
+above the 10 GiB build-stop guard; no further cleanup was performed.
+
+The first two actual late-ingress test bodies were then added separately.
+`CARGO_INCREMENTAL=0 CARGO_BUILD_JOBS=2 cargo test --locked
+-p mirrorea-i3-probe --test i3_process_localnet i3_3_late_session_one_ingress
+-- --nocapture --test-threads=1` exited 101 with seven compile errors: missing
+late-ingress exports/builders/audit APIs plus a helper lifetime and an inferred
+type error. No test executed. The test owner must correct the helper lifetime
+rather than treating every error as an absent-production-API cascade. This
+opens the probe implementation gate only; disk remained 16 GiB and no cleanup
+was performed.
+
+During the bounded implementation, the parent found an exact-delta gap in the
+initial predicate draft: preserving M9 maps and checking the selected M8
+capability/witness alone would not exclude an added or changed unrelated M8
+record. The source owner must compare the complete M8 state against the prior
+state with only the selected capability/witness retired; the test owner adds
+an independent unrelated-M8-state falsifier. The parent extended source
+ownership narrowly to `m8_runtime_authority.rs` for pure crate-private checks
+and private test seams, not a public authority API or broader M8 redesign.
+A genuine prior-tombstone predicate test uses two actual M9 revocations, not
+an empty-G1 set mislabeled as prior-tombstone evidence. These are identified
+implementation/test requirements, not yet executed results.
+
+The parent also rejected an intermediate cross-crate ACK signature that let a
+cohort-issued reader/token consume a caller-supplied tainted ACK. Without
+actually owning and reading the registered output stream, the method name
+"from registered owner FD" cannot establish record origin: a caller could
+combine the token with correct candidate-derived bytes before installation.
+The required replacement owns the actual registered child-output stream and
+performs the framed read/decode itself; it must not expose completion from
+arbitrary decoded records. Existing compiled-kernel/OS trust remains explicit.
+This corrects a proposed API boundary before acceptance, not an executed
+security test or a reason to add a cryptographic management protocol.
+
+The concrete bounded replacement uses one dedicated inherited B-to-parent
+UnixStream ACK descriptor. The alternative was ownership of the existing
+multiplexed `ChildStdout`, but its probe-local event enum would invert the
+runtime/probe dependency. Only the actual B spawn path registers the dedicated
+route. Its reader owns the parent stream plus the independent cohort binding,
+performs bounded framed reads internally, and returns an immutable opaque
+completion; the cohort separately consumes that completion for one pending
+publication. There is no completion API accepting caller-supplied bytes or
+tainted records. The ordinary stdout parser remains unchanged. Descriptor
+duplication/close-on-exec, writer-end closure, deadline and reap behavior must
+preserve the existing bounded process lifecycle. This private local ACK route
+does not grant semantic authority, introduce a general management protocol, or
+close the separate semantic external-time row.
+
+At the first frozen runtime-source handoff, the same focused prestaged test
+command stopped at compilation with six errors: owned-string/hash component
+types, incorrect assumed `LocalFabric` identity/fingerprint/summary accessors,
+and an immutable coordinator admission binding. No test body executed; ACK,
+install-failure and private M9 predicate targets were not run. The source owner
+corrected the existing program accessors and types without inventing a shadow
+summary, then re-froze after formatting/diff checks for another evaluation.
+Disk ended at 17 GiB free; no deletion occurred.
+
+The parent also authorized the private probe dependency to enable the existing
+`mir-runtime/i3-process-test-seams` feature alongside `i3-private-quic`, solely
+to consume the genuine post-stage image-wrapper falsifier. Runtime default and
+workspace features are unchanged. This negative alters B's tainted lifecycle
+wrapper after genuine prestaging and retained control binding; the separate
+M9 predicate negatives reject in the parent and cannot stand in for actual
+child bootstrap rejection. No positive path gains an authority constructor.
+
+The post-type-fix runtime build compiled, then executed four prestaged tests:
+one passed and three normal staging paths failed with
+`LifecyclePrestageRejected` (1.65 s; build 33.69 s). The targeted private M9
+module subsequently ran two tests, both failing at their genuine G1-to-G2 or
+G2-to-G3 positive predicates before the intended tombstone/unrelated-state
+falsifiers (0.01 s; build 30.61 s). These are behavioral RED results, not
+successful falsifier execution or upper image-restriction evidence.
+
+The source owner localized a representation mismatch, which the parent
+verified against committed `7580e3a` translation code: M9 retains inactive
+capabilities, stale dependent witnesses and revocation evidence, but its M8
+execution projection includes only active capabilities/live witnesses. Thus
+the genuine projected successor omits the selected retired records rather
+than retaining explicit inactive/stale M8 records. The parent rejected a
+proposed change to the accepted M9-to-M8 producer merely to satisfy the new
+I3 predicate. The new predicate must instead compare the entire M8 projection
+to the prior projection minus exactly the selected capability and dependent
+witness rows, retaining every unrelated row and the exact M9 successor,
+lineage and monotone tombstone conditions. Test-only reanimation restores
+only the corresponding genuine prior record. This corrects the new
+representation assumption; it does not weaken logical revocation or change
+accepted I2 authority semantics. Fresh positive/falsifier execution is pending.
+
+The subsequent focused M9 rerun remains RED (0/2): genuine G1-to-G2 now
+passes, but both tests stop at genuine G2-to-G3 before their falsifiers.
+Static diagnosis localizes a second representation question: the existing
+successor constructor restores only the newly revoked owner-use/lineage
+entries after active-only translation, while retaining all earlier
+tombstones. Earlier retired owner-use/lineage entries therefore disappear.
+The parent requested a bounded independent comparison of retaining those
+historical maps in the producer versus recognizing their exact permitted
+omission in the new predicate. Neither a producer change nor a relaxed
+predicate is accepted merely to make the positive tests pass. This run does
+not establish actual QUIC or process behavior; root free space remains 16 GiB.
+
+The independent bounded review recommends retaining both historical M9
+owner-use and kernel-lineage maps in the existing revocation-successor
+constructor. The parent accepts this narrow correction: these paired maps
+are sealed binding/history, already retained for the most recently revoked
+owner, whereas M8 remains the active-only authority projection. Allowing their
+omission only in the new predicate would also break exact per-process
+restriction when that scope still contains the earlier-retired owner operation,
+and would remove that owner's current-generation lineage binding.
+The correction preserves the exact tombstone set and M8 omission, adds no
+grant, and must be tested with both retired owners denied without new
+validation observations, as well as map/tombstone/unrelated-state falsifiers.
+This decision is not yet a passing implementation or milestone acceptance.
+
+With that narrow correction, the focused private M9 module passes 2/2
+(build 29.07 s, one dead-code warning). The subsequent exact
+`i3_3_prestaged` runtime integration filter still fails: 1/4 passes and three
+normal stages return `LifecyclePrestageRejected` before child bootstrap
+(build 31.53 s, tests 1.64 s; eight dead-code warnings). Full runtime
+integration, registered-ACK and actual late-ingress execution therefore have
+not run on this cut. The remaining diagnosis is the process/coordinator
+prestaging boundary, not a reason to weaken the now-tested M9 predicate.
+
+The runtime owner localized that rejection before M9 restriction: the new
+prestage gate incorrectly required reply-only linked-request and typed-outcome
+flags from an owner-request contract. The parent verified SYS-3's existing
+separate request/reply constructors and authorized removing only those two
+requirements from the new gate. Exact owner-request kind, checked identity,
+full retained-contract match, target and M9 checks remain. The existing
+genuine-request positive and wrong-reply-edge falsifier are its direct tests;
+the accepted carrier definitions do not change.
+
+After that correction, the prestaged filter passes 4/4 (build 32.65 s,
+tests 3.26 s). The full runtime integration target then executes 59 tests:
+58 pass, while the cross-cohort completion test fails during its originating
+cohort's genuine ACK acceptance, before the intended foreign-publication
+falsifier (49.65 s). Static binding propagation is unchanged end-to-end; the
+test registers its new absolute 250 ms deadline before image bootstrap and
+M9 installation. The next narrow diagnostic measures that setup duration.
+No production deadline or binding relaxation is authorized. Actual-process
+late ingress remains unexecuted on this cut.
+
+The narrow rerun measures 364.342423 ms from reader registration to the
+genuine ACK rejection, exceeding that fixture's 250 ms absolute budget
+(0/1 passes; 0.98 s test, 58 filtered). The parent authorizes a finite 5 s
+budget only for the cross-cohort provenance test's valid setup. The separate
+250 ms fragmented-reader deadline test and production deadline remain
+unchanged. This is a measured fixture correction, not a timeout waiver.
+
+The corrected full runtime integration target passes 59/59 (build 0.87 s,
+tests 49.40 s; eight default-feature dead-code warnings). The first actual
+late-ingress probe filter then stops at compilation with 13 errors and two
+warnings: enum variant field visibility, missing serialization derives for
+bounded audit enums, and an immutable lifecycle-summary borrow held across
+mutable runtime admission. No probe test executes. The probe owner must
+correct these local Rust issues without duplicating receipts/authority or
+changing tested runtime semantics. Disk remains 16 GiB free.
+
+After the probe compile repairs, the focused actual-process late-ingress
+filter executes: unchanged-G1 control passes; the G2 case returns
+`LifecycleRejected` instead of the expected joined `AmbiguousDelivery`
+(1/2 passes; build 4.67 s, tests 2.39 s, 25 filtered). The full 27-test
+probe target has not run. The parent requests observer-safe failure-stage
+diagnosis; neither a profile-selected expected outcome nor unvalidated owner
+evidence may override the actual failure. Root free space ends at 15 GiB.
+Parent inspection also finds the G2 install currently follows session-two
+establishment; the approved schedule requires install before that reconnect,
+so the actual test must establish reconnect-after-withdrawal, not merely
+withdrawal-before-eventual-admission. The probe owner must restore that order
+without cloning a receipt or changing runtime admission.
+
+The safe diagnostic identifies B's actual handled carrier rejection (exit 0,
+zero admission/write) followed by A's generic rejection (exit 1), with both
+children reaped. B immediately closes the QUIC connection after writing its
+session-two preface, which need not yet have reached A; A may therefore fail
+preface validation before reaching its pending-reply boundary. The authorized
+probe correction installs G2 before closing session one, and after the actual
+late rejection finishes only B's send half and waits for A's real peer close.
+A must validate the preface, observe EOF as pending, report that fact and
+close. No sleep, retry, semantic reply or receipt is added. B's local peer
+validation precedes its admission attempt; A's validation precedes its pending
+observation. No additional global application-level handshake barrier is
+claimed. Outer lifecycle/reaper deadlines remain unchanged.
+
+After the bounded schedule/EOF correction, actual G1/G2 late-ingress passes
+2/2 (build 5.16 s, tests 2.45 s). Full probe integration then passes 27/27
+(48.14 s, cached build 0.04 s). This establishes the executed G1/G2 paths,
+not the validity of every named falsifier. The independent reviewer confirms
+a P1 evidence defect: five ACK profiles named A-route, observer-route and
+wrong run/reference/slot only suppress B's valid ACK, then classify the same
+reader failure from the selected profile. They inject no corresponding
+candidate/frame. Those passes are only repeated dropped-ACK executions and
+cannot close origin or wrong-binding falsifiers. Acceptance is withheld until
+the actual inputs are exercised or the names/claims are consolidated with
+genuine production-boundary evidence. Normal post-install ACK gating and
+full runtime 59/59 remain separate evidence, not a waiver of this finding.
+
+The independent current-slice review reports three P1 findings and no P0 or
+additional independent P2: the ACK-input defect above; missing session-owned
+one-shot acquisition/consumption guards for retained ingress; and G2 joining
+selected counters without validating the complete per-slot terminal contract.
+The latter can accept contradictory control/transport/unauthenticated-count
+observations. All three are in-scope repairs, not milestone or owner-reserved
+stops. The approved repair consolidates the false ACK profiles into real drop,
+replay and one actual A-stdout tainted-input path, plus production-reader
+component field-mismatch tests; adds a private one-shot permit reserved before
+I/O and consumed before semantic handoff; and shares exact terminal validation
+between the full join and independently retained A-pending evidence.
+
+Before those repairs, full runtime library regression with
+`i3-process-test-seams,i3-private-quic` passes 288/288 (build 30.33 s,
+tests 82.79 s), including the control-binding component test. Focused
+two-crate deny-warnings Clippy fails on the large accepted late-ingress audit
+enum variant and the eight-argument server helper. Boxing the audit payload
+and a small server invocation aggregate are authorized local fixes, not a
+general harness framework. Those pre-repair green counts are its regression
+floor, not evidence that the findings were resolved.
+
+The one-shot permit tests first fail to compile with three missing-type errors
+(no test execution), then pass 2/2 against the production-used private state
+machine (build 29.85 s). The separate terminal-corruption probe tests initially
+fail to compile with five missing-API errors, again not a behavioral falsifier.
+After the runtime repair, the exact runtime integration target passes 61/61
+(build 1.00 s, tests 54.90 s), including genuine ACK-v2 field mutation through
+the registered reader and wrong-slot registration preserving the valid B
+registration. The eight known default-feature dead-code warnings remain;
+their pre-existing status was not independently established by a pinned-cut
+comparison. Root free space remains 15 GiB, above the 10 GiB build-stop guard.
+
+At 2026-09-07 17:47 JST the probe source/test owners freeze the repair cut for
+fresh actual-process evaluation and narrow independent re-review. The probe
+now routes a tainted candidate through actual A stdout, retains real dropped
+and replayed B ACK controls, validates complete per-slot terminal observations,
+and exercises a second retained-ingress acquisition before completing the
+original G1 request. These are implemented claims awaiting fresh process
+results, not acceptance. Runtime and probe writers are distinct from the
+test author, sole command evaluator and independent reviewer. I3-3 remains
+the sole active milestone.
+
+Fresh actual-process evaluation of that frozen repair passes each of the four
+focused tests 1/1: terminal validation (2.49 s), second retained acquisition
+(1.24 s), actual A-stdout/dropped/replayed ACK inputs (3.74 s), and the G2
+late-admission join (1.24 s). Full probe integration passes 29/29 in 46.25 s;
+full runtime feature library passes 289/289 in 81.32 s. The exact commands,
+with `CARGO_INCREMENTAL=0 CARGO_BUILD_JOBS=2`, are:
+
+```bash
+cargo test --locked -p mirrorea-i3-probe --test i3_process_localnet -- --test-threads=1
+cargo test --locked -p mir-runtime --lib --features i3-process-test-seams,i3-private-quic -- --nocapture --test-threads=1
+cargo clippy --locked -p mir-runtime -p mirrorea-i3-probe --all-targets --features mir-runtime/i3-process-test-seams -- -D warnings
+```
+
+The focused Clippy gate passes in 30.90 s with no warnings. Parent format and
+diff checks also pass. These results apply to HEAD `7580e3a` **plus the frozen
+dirty successor/repair changes**, not to that committed revision alone.
+Independent narrow review then confirms no remaining P0/P1 in the three
+repaired mechanisms: actual tainted A input cannot produce registered-B
+completion; the session-owned permit transfers and is consumed before semantic
+admission; and exact terminal validation gates both the joined owner conclusion
+and independently retained requester uncertainty. The reviewer ran no Cargo;
+the results above come from the sole evaluator. Optional P2 strengthening is
+an actual partial-prefix/cancelled receive; the next selected-adapter framing
+package is its direct consumer, not a new general framework or current
+acceptance blocker. This disposition assumes the stated honest compiled
+kernel/control plane and OS descriptor provenance, not Byzantine attestation.
+Applicable I2/M10 regression then passes with the same bounded build settings:
+
+```bash
+cargo test --locked -p mir-runtime --test sys5_local_slice --test sys6_i2_cli -- --test-threads=1
+cargo test --locked -p mir-runtime --test m10_conformance -- --test-threads=1
+```
+
+SYS-5 passes 5/5 (0.05 s), SYS-6 CLI 8/8 (12.32 s), and M10 conformance
+67/67 (13.59 s); builds take 37.64 s and 1.87 s respectively. These test
+commands emit the eight known default-feature dead-code warnings, distinct
+from the passing seam-feature deny-warnings Clippy gate. The evaluator's
+read-only process check finds no `mirrorea-i3-probe` children; none was
+signalled or killed. Disk remains 15 GiB free. No new Lean or bounded-model
+run, complete I3-3 matrix, or milestone acceptance is claimed.
+
+Parent integration checks pass: `cargo fmt --all -- --check`,
+`git diff --check`, and `make docs` (agent configuration, 210 Canon index
+files, 800/800 hierarchy paths, 1760 reports). A scoped diff plus the two new
+private test files has no match for the checked private-key, webhook,
+private-chat-link and common API-key patterns; this is a limited pattern
+screen, not a general secret-freedom proof. The parent corrects snapshot
+wording that had mislabeled the older probe lifecycle 2/2 as fresh, omitted
+the current runtime 61/61 and library 289/289, or left successor installation
+as the next consumer. No code changes result from that synchronization.
+
+Independent planner advice selects the smallest next package: actual endpoint
+unavailability, controlled writes of one complete generated frame, and actual
+truncated-frame rejection through the existing selected adapter and child
+lifecycle. Production decoder variants remain component evidence rather than
+each receiving a new process harness. Provider/time contract specification
+follows that bounded package, so easy transport cases do not indefinitely
+postpone those two OPEN dependencies. All 20 rows and ordering obligations
+remain required. Direct consumer: I3-3's missing network-interaction evidence;
+blocker reduced: selected-adapter delivery behavior; acceptance use: exact
+positive/falsifier observations, nonmutation and bounded cleanup. No milestone
+or additional semantic frontier is activated.
+
+The independent final snapshot planner review finds no P0/P1 acceptance or
+scope issue: fresh and retained evidence are separated, only I3-3 is active,
+and the next bounded package does not remove the provider/time dependencies
+or complete failure/order inventory. This review is read-only and does not
+rerun execution evidence. The parent may pin this reviewed checkpoint and
+continue without a program pause.
+
+Two further ACK checks are required before acceptance: the completion must
+carry the complete independent run/cohort/slot/program/projection/closure/
+generation/kind/candidate binding through to cohort publication, not just
+three possibly reusable SYS-4 references; and framed reads must consume one
+absolute lifecycle budget, not reset a socket inactivity timeout on each
+partial read. Cross-cohort completion and fragmented-reader deadline tests
+are direct consumers. Opaque pending-ingress implementation ownership moves
+to the probe implementer for `sys5_i3_private_quic.rs` only, independently of
+the runtime owner's M9/SYS-4/process-image/ACK corrections.
+
 Owner decisions are required only at the existing ADR-0034 reserved stops:
 guarantee/North-Star weakening, unavoidable hidden retry/transaction, public
 freeze, irreversible semantic tie, both retained transports failing required
@@ -793,6 +1203,13 @@ the worktree was clean before the next actual-session test assignment. This
 update accompanies that next slice, not a metadata-only commit. Parent owns
 accepted source/evidence pinning, integration commits, authorized pushes and
 fresh remote parity before the fixed transition to I3-4.
+
+The actual-reconnect slice was subsequently committed and pushed as
+`7580e3a1298dd39bc26ef1979c5033d485e92de5`
+(`feat: exercise I3 actual-session reconnect and retry`). Fresh remote lookup
+matched HEAD and the worktree was clean before this successor-slice update.
+This is another source/evidence checkpoint within active I3-3, not milestone
+acceptance or I3-4 activation.
 
 ## Sub-agent session close status
 

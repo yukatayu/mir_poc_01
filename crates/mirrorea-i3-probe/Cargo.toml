@@ -13,7 +13,10 @@ path = "src/bin/mirrorea-i3-probe.rs"
 
 [dependencies]
 libc = "0.2"
-mir-runtime = { path = "../mir-runtime", features = ["i3-private-quic"] }
+# Private probe-only negative seams are needed to consume a genuine staged B
+# image and corrupt only its lifecycle wrapper binding before bootstrap. They
+# are not enabled for normal Mir runtime consumers.
+mir-runtime = { path = "../mir-runtime", features = ["i3-private-quic", "i3-process-test-seams"] }
 quinn = { version = "=0.11.11", default-features = false, features = ["runtime-tokio", "rustls-ring"] }
 rcgen = { version = "=0.14.10", default-features = false, features = ["crypto", "ring"] }
 rustls = { version = "=0.23.43", default-features = false, features = ["std", "ring"] }

@@ -1,6 +1,6 @@
 # Plan 250 — Mirrorea I3 Distributed Foundation current execution roadmap
 
-最終更新: 2026-09-07 15:00 JST
+最終更新: 2026-09-07 17:52 JST
 
 ## 役割、authority、current control state
 
@@ -1033,13 +1033,25 @@ same two live process runtimes now execute pre-write reconnect with one checked
 receipt, and post-admission reconnect with exact-original duplicate rejection,
 no second mutation and retained requester uncertainty. Sender/receiver
 commitment and attempt-binding falsifiers preserve observer-safe distinctions;
-verified local session misuse no longer blames the peer. Fresh probe 22/22,
-lifecycle unit 2/2 and focused deny-warnings Clippy pass; independent review
-findings in this slice are resolved. Report 2606 retains exact commands and
-scope. This is not I3-3 acceptance. The next direct consumer is legitimate
-retained-M9-publisher successor installation and late-traffic/revalidation
-controls, followed by the remaining matrix. Provider/time contracts remain
-OPEN; no later milestone or broader harness framework is activated.
+verified local session misuse no longer blames the peer. That committed
+checkpoint passed probe 22/22 and lifecycle unit 2/2.
+
+**Successor / retained-ingress checkpoint (2026-09-07):** B installs a genuine
+M9 capability-revocation successor before reconnect, then rejects the original
+session-one frame with zero owner admission/serve/write; A remains pending.
+G1 control admits once and consumes one checked receipt. Publication requires
+an install-gated, exactly bound registered-B ACK; actual A-stdout tainted input,
+duplicate completion, repeated ingress acquisition and contradictory terminal
+observations are rejected at their respective boundaries. Fresh runtime
+integration 61/61, feature library 289/289, private QUIC unit 2/2 and probe
+29/29 pass, with focused deny-warnings Clippy and no remaining P0/P1 in the
+independently reviewed repair. I2 SYS-5 5/5, SYS-6 CLI 8/8 and M10 conformance
+67/67 regressions pass. No new model or Lean run is claimed.
+Report 2606 retains exact commands and scope. This is not I3-3 acceptance.
+The next direct consumer is the bounded actual-endpoint/fragments/truncation
+package, followed by contract-first provider/time work (still OPEN). All 20
+families and remaining ordering obligations remain required; no later milestone
+or general harness framework is activated.
 
 ## I3-4 milestone contract — inactive until I3-3 closes
 

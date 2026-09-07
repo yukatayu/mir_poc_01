@@ -5,6 +5,14 @@
 
 use std::collections::BTreeSet;
 
+#[cfg(all(unix, feature = "i3-process-test-seams"))]
+use std::{
+    io::Write,
+    os::unix::net::UnixStream,
+    thread,
+    time::{Duration, Instant},
+};
+
 use mir_runtime::{
     sys5_i3_process_runtime::{
         Sys5I3Deployment, Sys5I3DeploymentSlot, Sys5I3PrivateProcessCodec,
@@ -16,8 +24,18 @@ use mir_runtime::{
 };
 use serde_json::Value;
 
+#[cfg(all(unix, feature = "i3-process-test-seams"))]
+use mir_runtime::sys5_i3_process_runtime::Sys5I3ObserverSafeLifecycleOrigin;
 #[cfg(feature = "i3-process-test-seams")]
 use mir_runtime::sys5_i3_process_runtime::Sys5I3ProcessImageTamper;
+#[cfg(all(unix, feature = "i3-process-test-seams"))]
+use mir_runtime::sys5_i3_process_runtime::Sys5I3RegisteredOwnerLifecycleAckReader;
+#[cfg(feature = "i3-process-test-seams")]
+use mir_runtime::sys5_i3_process_runtime::{
+    Sys5I3LifecyclePublicationOutcome, Sys5I3OwnerCapabilitySuccessorTamper,
+};
+#[cfg(feature = "i3-process-test-seams")]
+use mir_runtime::sys5_local_slice::Sys5I3AdapterCarrierContract;
 
 const CANONICAL_SOURCE_PATH: &str = "samples/clean-near-end/mirrorea-i2-local-toy/main.mir";
 const CANONICAL_SOURCE: &str =
@@ -100,6 +118,35 @@ verify finite_refinement
 fn build_once(source_text: &str) -> Sys5LocalProject {
     build_project(Sys5SourceInput::inline(CANONICAL_SOURCE_PATH, source_text))
         .expect("the canonical finite I2 ordinary source must remain checkable")
+}
+
+/// Derive the exact checked owner-request contract from ordinary source.  The
+/// test never manufactures an operation, carrier, capability, or authority
+/// input for the M9 prestage boundary.
+#[cfg(feature = "i3-process-test-seams")]
+fn checked_owner_request_contract(project: &Sys5LocalProject) -> Sys5I3AdapterCarrierContract {
+    let edge = project
+        .semantic_summary()
+        .generated_communication
+        .iter()
+        .find(|edge| edge.operation_id == "init_avatar_hp" && edge.kind == "owner-request")
+        .expect("the canonical source must retain its checked generated owner-request edge");
+    project
+        .i3_adapter_carrier_contract(&edge.edge_ref)
+        .expect("the checked generated owner-request edge has its exact adapter contract")
+}
+
+#[cfg(feature = "i3-process-test-seams")]
+fn checked_owner_reply_contract(project: &Sys5LocalProject) -> Sys5I3AdapterCarrierContract {
+    let edge = project
+        .semantic_summary()
+        .generated_communication
+        .iter()
+        .find(|edge| edge.operation_id == "init_avatar_hp" && edge.kind == "owner-reply-receipt")
+        .expect("the canonical source must retain its distinct checked owner-reply edge");
+    project
+        .i3_adapter_carrier_contract(&edge.edge_ref)
+        .expect("the checked generated owner-reply edge has its own adapter contract")
 }
 
 fn two_nonempty_slots(project: &Sys5LocalProject) -> Sys5I3Deployment {
@@ -232,6 +279,115 @@ fn private_process_json_frame(value: &Value) -> Vec<u8> {
     let mut frame = length.to_be_bytes().to_vec();
     frame.extend_from_slice(&body);
     frame
+}
+
+#[cfg(all(unix, feature = "i3-process-test-seams"))]
+fn private_owner_lifecycle_ack_v2_json(frame: &[u8]) -> Value {
+    assert!(
+        frame.len() >= PRIVATE_PROCESS_CODEC_PREFIX_BYTES,
+        "an installed owner lifecycle ACK frame begins with the fixed four-byte length prefix"
+    );
+    let declared = u32::from_be_bytes(
+        frame[..PRIVATE_PROCESS_CODEC_PREFIX_BYTES]
+            .try_into()
+            .expect("private ACK codec prefix has exactly four bytes"),
+    );
+    assert_eq!(
+        declared as usize,
+        frame.len() - PRIVATE_PROCESS_CODEC_PREFIX_BYTES,
+        "the genuine B-installed ACK frame must declare its exact JSON body length"
+    );
+    let value: Value = serde_json::from_slice(&frame[PRIVATE_PROCESS_CODEC_PREFIX_BYTES..])
+        .expect("the genuine B-installed ACK frame body is JSON for test-local wire mutation");
+    assert_eq!(
+        value.pointer("/version").and_then(Value::as_u64),
+        Some(2),
+        "the installed ACK component regression intentionally mutates only the current private ACKv2 envelope"
+    );
+    for field in [
+        "stage_identity_binding_ref",
+        "prior_generation_ref",
+        "successor_generation_ref",
+        "candidate_binding_ref",
+    ] {
+        assert!(
+            value
+                .pointer(&format!("/{field}"))
+                .and_then(Value::as_str)
+                .is_some_and(|value| !value.is_empty()),
+            "the genuine installed ACKv2 frame retains nonempty {field} before the test mutates exactly that one field"
+        );
+    }
+    value
+}
+
+#[cfg(all(unix, feature = "i3-process-test-seams"))]
+fn mutate_private_owner_lifecycle_ack_v2_binding(
+    genuine_frame: &[u8],
+    field: &str,
+    mutation_label: &str,
+) -> Vec<u8> {
+    let mut value = private_owner_lifecycle_ack_v2_json(genuine_frame);
+    let object = value
+        .as_object_mut()
+        .expect("the private ACKv2 envelope remains a JSON object for one-field wire corruption");
+    let original = object
+        .get(field)
+        .and_then(Value::as_str)
+        .unwrap_or_else(|| panic!("private ACKv2 must expose string field {field}"));
+    object.insert(
+        field.to_string(),
+        Value::String(format!("{original}-{mutation_label}")),
+    );
+    private_process_json_frame(&value)
+}
+
+#[cfg(all(unix, feature = "i3-process-test-seams"))]
+fn genuine_prestaged_owner_lifecycle_ack_frame(
+    cohort: &mut Sys5I3ProcessCohort,
+    codec: &Sys5I3PrivateProcessCodec,
+    run_ref: &str,
+    requester_spki_ref: &str,
+    owner_spki_ref: &str,
+) -> Vec<u8> {
+    let (_requester_control, owner_control) = cohort
+        .split_trusted_localnet_controls_with_prestaged_lifecycle(
+            codec,
+            run_ref,
+            REQUESTER_SLOT,
+            requester_spki_ref,
+            OWNER_SLOT,
+            owner_spki_ref,
+        )
+        .expect("the staged cohort supplies matching B bootstrap control only for its genuine installed ACK frame");
+    let owner_image = codec
+        .decode_untrusted_image(
+            &codec
+                .encode_image(take_process_image(cohort, OWNER_SLOT))
+                .expect("the genuine B image serializes as tainted child input"),
+        )
+        .expect("the genuine B image crosses the private child codec boundary");
+    let (mut owner, _owner_control, owner_stimulus) = codec
+        .validate_and_start_image_with_prestaged_lifecycle(owner_image, owner_control)
+        .expect(
+            "only the matching B image and trusted control produce the opaque lifecycle stimulus",
+        );
+    let installed_ack = owner
+        .install_admitted_owner_capability_successor(
+            owner_stimulus.expect("the selected genuine B owns the one install stimulus"),
+        )
+        .expect("the actual B install produces the sole installed-receipt ACK wrapper");
+    let installed = owner
+        .observer_safe_installed_owner_capability_lifecycle()
+        .expect("the genuine installed B exposes only bounded lifecycle observation");
+    assert_eq!(
+        installed.origin(),
+        Sys5I3ObserverSafeLifecycleOrigin::M9AdmittedLifecycle
+    );
+    assert!(!installed.source_derived());
+    codec
+        .encode_installed_owner_lifecycle_ack(installed_ack)
+        .expect("only a genuine B installed receipt serializes the ACKv2 frame")
 }
 
 #[cfg(feature = "i3-process-test-seams")]
@@ -1059,6 +1215,741 @@ fn assert_candidate_a_child_runtime(runtime: &Sys5I3ProcessRuntime) {
     assert!(
         !summary.carries_full_admission_or_fabric_program(),
         "a child process runtime must not retain the coordinator's full admission or FabricProgram"
+    );
+}
+
+#[test]
+#[cfg(feature = "i3-process-test-seams")]
+fn i3_3_prestaged_owner_capability_revocation_accepts_only_the_exact_checked_prelaunch_contract() {
+    let project = build_once(CANONICAL_SOURCE);
+    let deployment = two_nonempty_slots(&project);
+    let exact_owner_request = checked_owner_request_contract(&project);
+    let distinct_checked_reply = checked_owner_reply_contract(&project);
+
+    let mut wrong_contract_cohort = single_coordinator_cohort(&project, &deployment);
+    assert_eq!(
+        wrong_contract_cohort
+            .prestage_owner_capability_revocation(
+                "i3-3-prestage-exact-contract",
+                &distinct_checked_reply,
+            )
+            .expect_err(
+                "a checked reply contract must not select or replace the exact owner-request capability",
+            )
+            .kind(),
+        Sys5I3ProcessRuntimeErrorKind::LifecyclePrestageRejected,
+        "prestage rejects the wrong checked generated edge without accepting caller-selected authority"
+    );
+    let wrong_contract_owner =
+        Sys5I3ProcessRuntime::start(take_process_image(&mut wrong_contract_cohort, OWNER_SLOT))
+            .expect("a rejected prelaunch request leaves the original G1 owner image startable");
+    assert_candidate_a_child_runtime(&wrong_contract_owner);
+
+    let mut after_start_binding_cohort = single_coordinator_cohort(&project, &deployment);
+    let _consumed_binding = after_start_binding_cohort
+        .parent_held_expected_start_binding(OWNER_SLOT)
+        .expect("the owner start binding may be deliberately consumed for this ordering negative");
+    assert_eq!(
+        after_start_binding_cohort
+            .prestage_owner_capability_revocation(
+                "i3-3-prestage-after-binding",
+                &exact_owner_request,
+            )
+            .expect_err(
+                "prestage is forbidden after any expected start binding has left parent control",
+            )
+            .kind(),
+        Sys5I3ProcessRuntimeErrorKind::LifecyclePrestageRejected,
+        "the lifecycle candidate must be sealed before image/bootstrap handoff, never retrofitted into a child"
+    );
+}
+
+#[test]
+#[cfg(feature = "i3-process-test-seams")]
+fn i3_3_prestaged_owner_capability_revocation_binds_the_staged_run_before_controls_are_consumed() {
+    let project = build_once(CANONICAL_SOURCE);
+    let deployment = two_nonempty_slots(&project);
+    let contract = checked_owner_request_contract(&project);
+    let codec = Sys5I3PrivateProcessCodec::private_provisional_v1();
+    let staged_run = "i3-3-prestage-run-a";
+    let mismatched_split_run = "i3-3-prestage-run-b";
+    let mut cohort = single_coordinator_cohort(&project, &deployment);
+    let parent_g1_generation = cohort
+        .observer_safe_lifecycle_publication_summary()
+        .published_authority_generation_ref()
+        .to_string();
+
+    cohort
+        .prestage_owner_capability_revocation(staged_run, &contract)
+        .expect("the exact checked owner-request contract stages one parent-held lifecycle candidate for Run A");
+
+    let mismatched_split_error = match cohort
+        .split_trusted_localnet_controls_with_prestaged_lifecycle(
+            &codec,
+            mismatched_split_run,
+            REQUESTER_SLOT,
+            "requester-spki:i3-3-prestage-run-a",
+            OWNER_SLOT,
+            "owner-spki:i3-3-prestage-run-a",
+        ) {
+        Ok(_) => panic!(
+            "a control split for Run B must not consume the candidate or trusted bindings staged for Run A"
+        ),
+        Err(error) => error,
+    };
+    assert_eq!(
+        mismatched_split_error.kind(),
+        Sys5I3ProcessRuntimeErrorKind::LifecyclePrestageRejected,
+        "the retained prestage run reference is part of the prelaunch lifecycle binding"
+    );
+
+    let after_rejected_split = cohort.observer_safe_lifecycle_publication_summary();
+    assert_eq!(
+        after_rejected_split.published_authority_generation_ref(),
+        parent_g1_generation.as_str(),
+        "a mismatched control split cannot publish a successor generation"
+    );
+    assert_eq!(
+        after_rejected_split.publication_outcome(),
+        None,
+        "a rejected Run B split is neither an acknowledged publication nor a terminal lost-ACK outcome"
+    );
+
+    let _controls = cohort
+        .split_trusted_localnet_controls_with_prestaged_lifecycle(
+            &codec,
+            staged_run,
+            REQUESTER_SLOT,
+            "requester-spki:i3-3-prestage-run-a",
+            OWNER_SLOT,
+            "owner-spki:i3-3-prestage-run-a",
+        )
+        .expect(
+            "the rejected Run B attempt must leave the exact Run A trusted controls and parent-held bindings consumable once",
+        );
+}
+
+#[test]
+#[cfg(feature = "i3-process-test-seams")]
+fn i3_3_prestaged_owner_capability_revocation_installs_only_from_b_opaque_stimulus_without_a_child_issuer()
+ {
+    let project = build_once(CANONICAL_SOURCE);
+    let deployment = two_nonempty_slots(&project);
+    let contract = checked_owner_request_contract(&project);
+    let codec = Sys5I3PrivateProcessCodec::private_provisional_v1();
+    let mut cohort = single_coordinator_cohort(&project, &deployment);
+    let parent_g1_generation = cohort
+        .observer_safe_lifecycle_publication_summary()
+        .published_authority_generation_ref()
+        .to_string();
+
+    cohort
+        .prestage_owner_capability_revocation("i3-3-prestage-install", &contract)
+        .expect("the parent accepts the exact checked owner-request contract before any image/control handoff");
+    let pending_publication = cohort.observer_safe_lifecycle_publication_summary();
+    assert_eq!(
+        pending_publication.published_authority_generation_ref(),
+        parent_g1_generation.as_str(),
+        "prestage alone must retain G1 at the parent until a B-installed lifecycle acknowledgement completes publication"
+    );
+    assert_eq!(pending_publication.publication_outcome(), None);
+
+    let (requester_control, owner_control) = cohort
+        .split_trusted_localnet_controls_with_prestaged_lifecycle(
+            &codec,
+            "i3-3-prestage-install",
+            REQUESTER_SLOT,
+            "requester-spki:i3-3-prestage-install",
+            OWNER_SLOT,
+            "owner-spki:i3-3-prestage-install",
+        )
+        .expect("the parent splits two independently bound controls only after the prelaunch candidate is sealed");
+    let requester_image = codec
+        .decode_untrusted_image(
+            &codec
+                .encode_image(take_process_image(&mut cohort, REQUESTER_SLOT))
+                .expect("the source-derived requester image encodes as tainted child input"),
+        )
+        .expect("the requester image remains only an untrusted decode candidate");
+    let owner_image = codec
+        .decode_untrusted_image(
+            &codec
+                .encode_image(take_process_image(&mut cohort, OWNER_SLOT))
+                .expect("the source-derived owner image encodes as tainted child input"),
+        )
+        .expect("the owner image remains only an untrusted decode candidate");
+    let (requester, _requester_control, requester_stimulus) = codec
+        .validate_and_start_image_with_prestaged_lifecycle(requester_image, requester_control)
+        .expect("the independently trusted requester control starts only its matching image");
+    assert!(
+        requester_stimulus.is_none(),
+        "the non-owner child receives no lifecycle stimulus"
+    );
+    assert_candidate_a_child_runtime(&requester);
+
+    let (mut owner, _owner_control, owner_stimulus) = codec
+        .validate_and_start_image_with_prestaged_lifecycle(owner_image, owner_control)
+        .expect("the independently trusted owner control starts only its matching image");
+    let owner_stimulus = owner_stimulus.expect(
+        "only the selected owner child receives the opaque, one-use prestaged lifecycle stimulus",
+    );
+    assert_candidate_a_child_runtime(&owner);
+    let _install_ack = owner
+        .install_admitted_owner_capability_successor(owner_stimulus)
+        .expect("B installs the exact restricted G1-to-G2 successor only by consuming its opaque stimulus");
+    assert_candidate_a_child_runtime(&owner);
+
+    let post_install_publication = cohort.observer_safe_lifecycle_publication_summary();
+    assert_eq!(
+        post_install_publication.published_authority_generation_ref(),
+        parent_g1_generation.as_str(),
+        "a locally installed B successor is not a parent publication without the registered B-FD acknowledgement path"
+    );
+    assert_eq!(post_install_publication.publication_outcome(), None);
+}
+
+#[test]
+#[cfg(feature = "i3-process-test-seams")]
+fn i3_3_prestaged_owner_capability_install_rejects_after_a_real_g1_owner_admission_changes_its_prior()
+ {
+    let project = build_once(CANONICAL_SOURCE);
+    let deployment = two_nonempty_slots(&project);
+    let contract = checked_owner_request_contract(&project);
+    let codec = Sys5I3PrivateProcessCodec::private_provisional_v1();
+    let mut cohort = single_coordinator_cohort(&project, &deployment);
+    let parent_g1_generation = cohort
+        .observer_safe_lifecycle_publication_summary()
+        .published_authority_generation_ref()
+        .to_string();
+    cohort
+        .prestage_owner_capability_revocation("i3-3-stale-install", &contract)
+        .expect(
+            "the exact source-derived owner contract stages the bounded successor before bootstrap",
+        );
+    let (requester_control, owner_control) = cohort
+        .split_trusted_localnet_controls_with_prestaged_lifecycle(
+            &codec,
+            "i3-3-stale-install",
+            REQUESTER_SLOT,
+            "requester-spki:i3-3-stale-install",
+            OWNER_SLOT,
+            "owner-spki:i3-3-stale-install",
+        )
+        .expect(
+            "the staged lifecycle splits into independently bound requester and owner controls",
+        );
+    let requester_image = codec
+        .decode_untrusted_image(
+            &codec
+                .encode_image(take_process_image(&mut cohort, REQUESTER_SLOT))
+                .expect("the checked requester image encodes for bounded private bootstrap"),
+        )
+        .expect("the requester image decodes only as a tainted candidate");
+    let owner_image = codec
+        .decode_untrusted_image(
+            &codec
+                .encode_image(take_process_image(&mut cohort, OWNER_SLOT))
+                .expect("the checked owner image encodes for bounded private bootstrap"),
+        )
+        .expect("the owner image decodes only as a tainted candidate");
+    let (mut requester, _requester_control, requester_stimulus) = codec
+        .validate_and_start_image_with_prestaged_lifecycle(requester_image, requester_control)
+        .expect("the matching requester control starts its source-derived G1 runtime");
+    assert!(requester_stimulus.is_none());
+    let (mut owner, _owner_control, owner_stimulus) = codec
+        .validate_and_start_image_with_prestaged_lifecycle(owner_image, owner_control)
+        .expect("the matching owner control starts its source-derived G1 runtime");
+    let owner_stimulus = owner_stimulus.expect(
+        "the selected owner receives one opaque G2 install stimulus but has not consumed it yet",
+    );
+    assert_candidate_a_child_runtime(&requester);
+    assert_candidate_a_child_runtime(&owner);
+
+    let request = requester
+        .emit_generated_owner_request("init_avatar_hp")
+        .expect(
+            "ordinary checked source emits the real G1 owner request before the delayed install",
+        );
+    let request_identity = request.semantic_request_identity_ref().to_string();
+    let request_bytes = codec
+        .encode_outbound_message(request)
+        .expect("the real source-derived request encodes through the private ingress codec");
+    let reply = owner
+        .admit_untrusted_message(
+            codec
+                .decode_untrusted_message(&request_bytes)
+                .expect("the private bytes remain untrusted until the G1 owner admission boundary"),
+        )
+        .expect(
+            "the started G1 owner performs its one genuine source-derived admission before install",
+        )
+        .expect("that genuine owner admission creates one reply without a requester receipt");
+    assert_eq!(reply.semantic_request_identity_ref(), request_identity);
+    let owner_after_g1_admission = owner.observer_safe_runtime_summary();
+    let owner_occurrences_after_g1_admission = owner.observer_safe_semantic_occurrences();
+    let owner_hp_after_g1_admission = owner
+        .authoritative_i64_state("avatar", "self", "hp")
+        .expect("the one real G1 owner admission writes its ordinary source-derived state");
+    assert_eq!(owner_after_g1_admission.served_owner_request_count(), 1);
+    assert_eq!(owner_after_g1_admission.actual_owner_write_count(), 1);
+    assert_eq!(owner_hp_after_g1_admission, 21);
+    assert_eq!(
+        requester
+            .observer_safe_runtime_summary()
+            .accepted_inbound_receipt_count(),
+        0,
+        "the reply remains undelivered to A, so this setup cannot mint a receipt before the stale install is tested"
+    );
+
+    let install_error = match owner.install_admitted_owner_capability_successor(owner_stimulus) {
+        Ok(_) => panic!(
+            "a prestaged successor whose exact G1 prior changed through real owner admission must not produce an installed receipt or ACK"
+        ),
+        Err(error) => error,
+    };
+    assert_eq!(
+        install_error.kind(),
+        Sys5I3ProcessRuntimeErrorKind::LifecycleInstallRejected,
+        "the stale exact-prior check must fail at install rather than accepting a successor with outdated M9 observations"
+    );
+    assert_eq!(
+        owner.observer_safe_runtime_summary(),
+        owner_after_g1_admission,
+        "rejected install must preserve the one real G1 serve/write exactly and add no mutation, receipt, or lifecycle side effect"
+    );
+    assert_eq!(
+        owner.observer_safe_semantic_occurrences(),
+        owner_occurrences_after_g1_admission,
+        "rejected install must preserve the completed G1 use occurrences without minting or replacing one"
+    );
+    assert_eq!(
+        owner
+            .authoritative_i64_state("avatar", "self", "hp")
+            .expect("rejected install cannot erase the prior real G1 store write"),
+        owner_hp_after_g1_admission
+    );
+    let publication = cohort.observer_safe_lifecycle_publication_summary();
+    assert_eq!(
+        publication.published_authority_generation_ref(),
+        parent_g1_generation.as_str(),
+        "a failed install leaves parent publication at the retained G1 generation"
+    );
+    assert_eq!(
+        publication.publication_outcome(),
+        None,
+        "without an installed receipt there is no ACK completion or terminal parent publication outcome"
+    );
+}
+
+#[test]
+#[cfg(feature = "i3-process-test-seams")]
+fn i3_3_prestage_exact_successor_predicate_rejects_added_or_reanimated_authority_evidence() {
+    let project = build_once(CANONICAL_SOURCE);
+    let deployment = two_nonempty_slots(&project);
+    let contract = checked_owner_request_contract(&project);
+
+    // The fresh cohort has no earlier revoked-owner tombstone.  The distinct
+    // private M9 predicate unit will establish that genuine prior-tombstone
+    // baseline before attempting its removal; this integration test covers
+    // only mutations meaningful from G1.
+    for tamper in [
+        Sys5I3OwnerCapabilitySuccessorTamper::AddUnrelatedOwnerLineage,
+        Sys5I3OwnerCapabilitySuccessorTamper::ReanimateSelectedCapability,
+        Sys5I3OwnerCapabilitySuccessorTamper::ReanimateSelectedWitness,
+    ] {
+        let mut cohort = single_coordinator_cohort(&project, &deployment);
+        let parent_g1_generation = cohort
+            .observer_safe_lifecycle_publication_summary()
+            .published_authority_generation_ref()
+            .to_string();
+        assert_eq!(
+            cohort
+                .test_only_prestage_owner_capability_revocation_with_tamper(
+                    "i3-3-prestage-predicate-falsifier",
+                    &contract,
+                    tamper,
+                )
+                .expect_err(
+                    "an internally generated successor with any extra, reanimated, or removed authority evidence must fail the exact M9 predicate",
+                )
+                .kind(),
+            Sys5I3ProcessRuntimeErrorKind::LifecyclePrestageRejected
+        );
+        let publication = cohort.observer_safe_lifecycle_publication_summary();
+        assert_eq!(
+            publication.published_authority_generation_ref(),
+            parent_g1_generation.as_str(),
+            "a failed exact-successor predicate must not publish a replacement generation"
+        );
+        assert_eq!(
+            publication.publication_outcome(),
+            Some(Sys5I3LifecyclePublicationOutcome::NoPrestageSelected)
+        );
+        let owner = Sys5I3ProcessRuntime::start(take_process_image(&mut cohort, OWNER_SLOT))
+            .expect("a failed prestage leaves the original G1 owner image usable");
+        assert_candidate_a_child_runtime(&owner);
+    }
+}
+
+#[test]
+#[cfg(feature = "i3-process-test-seams")]
+fn i3_3_tainted_correct_field_ack_decode_does_not_complete_prestaged_publication() {
+    let project = build_once(CANONICAL_SOURCE);
+    let deployment = two_nonempty_slots(&project);
+    let contract = checked_owner_request_contract(&project);
+    let codec = Sys5I3PrivateProcessCodec::private_provisional_v1();
+    let mut cohort = single_coordinator_cohort(&project, &deployment);
+    let parent_g1_generation = cohort
+        .observer_safe_lifecycle_publication_summary()
+        .published_authority_generation_ref()
+        .to_string();
+    cohort
+        .prestage_owner_capability_revocation("i3-3-tainted-ack", &contract)
+        .expect("the parent may stage the exact checked owner capability before testing tainted acknowledgement input");
+
+    let candidate_derived_bytes = cohort
+        .test_only_encode_prestaged_owner_lifecycle_ack_candidate(&codec)
+        .expect(
+            "the negative-only seam emits syntactically correct candidate-derived bytes without an installed receipt",
+        );
+    let _tainted_ack = codec
+        .decode_owner_lifecycle_ack(&candidate_derived_bytes)
+        .expect("correct-field candidate bytes decode only to a tainted acknowledgement candidate");
+    let publication = cohort.observer_safe_lifecycle_publication_summary();
+    assert_eq!(
+        publication.published_authority_generation_ref(),
+        parent_g1_generation.as_str(),
+        "decoding self-consistent candidate fields alone leaves parent G1 unchanged; only the registered B-FD completion route may publish G2"
+    );
+    assert_eq!(publication.publication_outcome(), None);
+}
+
+#[test]
+#[cfg(all(unix, feature = "i3-process-test-seams"))]
+fn i3_3_registered_b_completion_cannot_publish_an_identically_staged_separate_cohort() {
+    let project = build_once(CANONICAL_SOURCE);
+    let deployment = two_nonempty_slots(&project);
+    let contract = checked_owner_request_contract(&project);
+    let codec = Sys5I3PrivateProcessCodec::private_provisional_v1();
+    let run_ref = "i3-3-cross-cohort-completion";
+    let reader_setup_budget = Duration::from_secs(5);
+    let mut originating_cohort = single_coordinator_cohort(&project, &deployment);
+    let mut separate_cohort = single_coordinator_cohort(&project, &deployment);
+    let originating_g1 = originating_cohort
+        .observer_safe_lifecycle_publication_summary()
+        .published_authority_generation_ref()
+        .to_string();
+    let separate_g1 = separate_cohort
+        .observer_safe_lifecycle_publication_summary()
+        .published_authority_generation_ref()
+        .to_string();
+
+    originating_cohort
+        .prestage_owner_capability_revocation(run_ref, &contract)
+        .expect("the first coordinator stages the exact source-derived owner revocation");
+    separate_cohort
+        .prestage_owner_capability_revocation(run_ref, &contract)
+        .expect(
+            "an independently constructed coordinator may stage the same checked source without sharing completion authority",
+        );
+
+    let (parent_ack_stream, mut registered_b_ack_writer) = UnixStream::pair()
+        .expect("the component test creates one real local Unix-stream descriptor pair");
+    let reader_registration_started = Instant::now();
+    let mut originating_reader = originating_cohort
+        .take_registered_owner_lifecycle_ack_reader(
+            OWNER_SLOT,
+            parent_ack_stream,
+            reader_setup_budget,
+        )
+        .expect("only the originating parent cohort may register its B-owned ACK reader");
+    let (_requester_control, owner_control) = originating_cohort
+        .split_trusted_localnet_controls_with_prestaged_lifecycle(
+            &codec,
+            run_ref,
+            REQUESTER_SLOT,
+            "requester-spki:i3-3-cross-cohort",
+            OWNER_SLOT,
+            "owner-spki:i3-3-cross-cohort",
+        )
+        .expect("the originating cohort alone consumes its matching prelaunch bindings");
+    let owner_image = codec
+        .decode_untrusted_image(
+            &codec
+                .encode_image(take_process_image(&mut originating_cohort, OWNER_SLOT))
+                .expect("the originating B image serializes as tainted child input"),
+        )
+        .expect("the originating B image decodes only through the private child boundary");
+    let (mut owner, _owner_control, owner_stimulus) = codec
+        .validate_and_start_image_with_prestaged_lifecycle(owner_image, owner_control)
+        .expect("the matching originating B control starts its locally bounded runtime");
+    let installed_ack = owner
+        .install_admitted_owner_capability_successor(
+            owner_stimulus.expect(
+                "the genuine selected B receives the one opaque prestaged lifecycle stimulus",
+            ),
+        )
+        .expect("only a genuine B install may create the non-forgeable installed receipt wrapper");
+    let installed = owner
+        .observer_safe_installed_owner_capability_lifecycle()
+        .expect("a successful genuine B install has bounded observer-safe lifecycle evidence");
+    assert_eq!(
+        installed.origin(),
+        Sys5I3ObserverSafeLifecycleOrigin::M9AdmittedLifecycle
+    );
+    assert!(!installed.source_derived());
+
+    let framed_installed_ack = codec
+        .encode_installed_owner_lifecycle_ack(installed_ack)
+        .expect("only the genuine installed receipt serializes one ACK frame for B's inherited descriptor");
+    registered_b_ack_writer
+        .write_all(&framed_installed_ack)
+        .expect("the test supplies the actual installed B frame only through the reader's paired descriptor");
+    let originating_completion_result = originating_reader.read_next_completion(&codec);
+    let elapsed_since_reader_registration = reader_registration_started.elapsed();
+    let originating_completion = match originating_completion_result {
+        Ok(completion) => completion,
+        Err(error) => {
+            let error_kind = error.kind();
+            panic!(
+                "the originating registered reader rejected its genuine B-installed ACK frame after {elapsed_since_reader_registration:?} of its finite {reader_setup_budget:?} setup budget; this safe elapsed value diagnoses only the bounded reader lifecycle, not ACK/image contents; typed kind: {error_kind:?}"
+            )
+        }
+    };
+
+    let foreign_publication_error = match separate_cohort
+        .publish_registered_owner_lifecycle_completion(originating_completion)
+    {
+        Ok(()) => panic!(
+            "a completion accepted from the originating cohort must not authorize publication in an identically staged separate cohort"
+        ),
+        Err(error) => error,
+    };
+    assert_eq!(
+        foreign_publication_error.kind(),
+        Sys5I3ProcessRuntimeErrorKind::LifecycleAckRejected,
+        "registered completion provenance binds the staged run and originating cohort, not merely candidate-shaped M9 fields"
+    );
+
+    for (label, cohort, expected_g1) in [
+        ("originating", &originating_cohort, originating_g1.as_str()),
+        ("separate", &separate_cohort, separate_g1.as_str()),
+    ] {
+        let publication = cohort.observer_safe_lifecycle_publication_summary();
+        assert_eq!(
+            publication.published_authority_generation_ref(),
+            expected_g1,
+            "the {label} cohort retains its parent-held G1 after a cross-cohort completion rejection"
+        );
+        assert_eq!(
+            publication.publication_outcome(),
+            None,
+            "the {label} cohort remains pending rather than publishing or reporting a terminal ACK outcome"
+        );
+    }
+}
+
+#[test]
+#[cfg(all(unix, feature = "i3-process-test-seams"))]
+fn i3_3_registered_b_reader_rejects_each_mutated_genuine_ack_v2_binding_before_completion() {
+    let project = build_once(CANONICAL_SOURCE);
+    let deployment = two_nonempty_slots(&project);
+    let contract = checked_owner_request_contract(&project);
+    let codec = Sys5I3PrivateProcessCodec::private_provisional_v1();
+
+    for (field, label) in [
+        ("stage_identity_binding_ref", "stage identity"),
+        ("prior_generation_ref", "prior generation"),
+        ("successor_generation_ref", "successor generation"),
+        ("candidate_binding_ref", "candidate binding"),
+    ] {
+        let run_ref = format!("i3-3-mutated-ack-v2-{field}");
+        let mut cohort = single_coordinator_cohort(&project, &deployment);
+        let parent_g1 = cohort
+            .observer_safe_lifecycle_publication_summary()
+            .published_authority_generation_ref()
+            .to_string();
+        cohort
+            .prestage_owner_capability_revocation(&run_ref, &contract)
+            .expect("the component negative starts from one genuinely staged M9 successor");
+
+        let (parent_ack_stream, mut registered_b_ack_writer) = UnixStream::pair()
+            .expect("each field mutation uses one real parent/B Unix-stream pair");
+        let mut reader = cohort
+            .take_registered_owner_lifecycle_ack_reader(
+                OWNER_SLOT,
+                parent_ack_stream,
+                Duration::from_secs(5),
+            )
+            .expect(
+                "the parent registers only the genuine B descriptor before any ACK bytes exist",
+            );
+        let genuine_frame = genuine_prestaged_owner_lifecycle_ack_frame(
+            &mut cohort,
+            &codec,
+            &run_ref,
+            "requester-spki:i3-3-mutated-ack-v2",
+            "owner-spki:i3-3-mutated-ack-v2",
+        );
+        let mutated_frame =
+            mutate_private_owner_lifecycle_ack_v2_binding(&genuine_frame, field, "test-mutation");
+        registered_b_ack_writer
+            .write_all(&mutated_frame)
+            .expect("the test routes the mutated genuine frame only through the real registered B descriptor");
+        let rejection = match reader.read_next_completion(&codec) {
+            Ok(_) => panic!(
+                "a genuine ACKv2 frame with a mutated {label} must reject before creating an opaque registered completion"
+            ),
+            Err(error) => error,
+        };
+        assert_eq!(
+            rejection.kind(),
+            Sys5I3ProcessRuntimeErrorKind::LifecycleAckRejected,
+            "the registered reader must validate the exact {label} binding rather than accept self-consistent JSON"
+        );
+
+        let publication = cohort.observer_safe_lifecycle_publication_summary();
+        assert_eq!(
+            publication.published_authority_generation_ref(),
+            parent_g1.as_str(),
+            "a rejected {label} frame cannot move the parent from its held G1"
+        );
+        assert_eq!(
+            publication.publication_outcome(),
+            None,
+            "a rejected {label} frame yields no opaque completion and therefore no publication transition"
+        );
+    }
+}
+
+#[test]
+#[cfg(all(unix, feature = "i3-process-test-seams"))]
+fn i3_3_wrong_slot_ack_registration_leaves_the_genuine_b_registration_usable() {
+    let project = build_once(CANONICAL_SOURCE);
+    let deployment = two_nonempty_slots(&project);
+    let contract = checked_owner_request_contract(&project);
+    let codec = Sys5I3PrivateProcessCodec::private_provisional_v1();
+    let run_ref = "i3-3-wrong-slot-ack-registration";
+    let mut cohort = single_coordinator_cohort(&project, &deployment);
+    let parent_g1 = cohort
+        .observer_safe_lifecycle_publication_summary()
+        .published_authority_generation_ref()
+        .to_string();
+    cohort
+        .prestage_owner_capability_revocation(run_ref, &contract)
+        .expect("the wrong-slot negative begins from one exact staged B lifecycle");
+
+    let (wrong_parent_stream, _wrong_slot_writer) =
+        UnixStream::pair().expect("the wrong-slot attempt receives a disposable Unix descriptor");
+    let wrong_slot_rejection = match cohort.take_registered_owner_lifecycle_ack_reader(
+        REQUESTER_SLOT,
+        wrong_parent_stream,
+        Duration::from_secs(5),
+    ) {
+        Ok(_) => panic!("a requester-slot descriptor must not register as the staged B ACK route"),
+        Err(error) => error,
+    };
+    assert_eq!(
+        wrong_slot_rejection.kind(),
+        Sys5I3ProcessRuntimeErrorKind::LifecycleAckRejected,
+        "a wrong slot must reject before taking the cohort's exact B ACK registration"
+    );
+
+    let (parent_ack_stream, mut registered_b_ack_writer) =
+        UnixStream::pair().expect("the genuine B registration receives a fresh Unix descriptor");
+    let mut reader = cohort
+        .take_registered_owner_lifecycle_ack_reader(
+            OWNER_SLOT,
+            parent_ack_stream,
+            Duration::from_secs(5),
+        )
+        .expect("a prior wrong-slot attempt must not consume the genuine B registration");
+    let genuine_frame = genuine_prestaged_owner_lifecycle_ack_frame(
+        &mut cohort,
+        &codec,
+        run_ref,
+        "requester-spki:i3-3-wrong-slot-ack-registration",
+        "owner-spki:i3-3-wrong-slot-ack-registration",
+    );
+    registered_b_ack_writer.write_all(&genuine_frame).expect(
+        "the genuine B installed frame travels through the subsequently registered B descriptor",
+    );
+    let completion = match reader.read_next_completion(&codec) {
+        Ok(completion) => completion,
+        Err(error) => panic!(
+            "the valid B registration after a rejected wrong-slot attempt must still read the genuine installed ACK; typed kind: {:?}",
+            error.kind()
+        ),
+    };
+    cohort
+        .publish_registered_owner_lifecycle_completion(completion)
+        .expect("only the completion from the still-valid registered B descriptor publishes the staged G2");
+
+    let publication = cohort.observer_safe_lifecycle_publication_summary();
+    assert_ne!(
+        publication.published_authority_generation_ref(),
+        parent_g1.as_str(),
+        "the valid B completion proves the wrong-slot rejection did not consume the retained registration"
+    );
+    assert_eq!(
+        publication.publication_outcome(),
+        Some(Sys5I3LifecyclePublicationOutcome::G2Published),
+        "the one genuine B completion performs the sole parent publication transition"
+    );
+}
+
+#[test]
+#[cfg(all(unix, feature = "i3-process-test-seams"))]
+fn i3_3_registered_owner_ack_reader_enforces_one_absolute_deadline_across_short_fragments() {
+    // This is an I/O-component test only.  It deliberately uses no cohort,
+    // child install, or publication path: the reader must reject before a
+    // complete frame could decode, so these bytes establish neither an ACK
+    // origin nor an owner lifecycle conclusion.
+    let codec = Sys5I3PrivateProcessCodec::private_provisional_v1();
+    let total_budget = Duration::from_millis(250);
+    let fragment_interval = Duration::from_millis(100);
+    let component_frame = vec![0, 0, 0, 1, b'x'];
+    let (parent_stream, mut paired_component_writer) =
+        UnixStream::pair().expect("the deadline component test uses a real Unix-stream pair");
+    let mut reader = Sys5I3RegisteredOwnerLifecycleAckReader::test_only_for_absolute_deadline(
+        parent_stream,
+        total_budget,
+    )
+    .expect(
+        "the deadline-only reader fixture owns no registration, completion, cohort, or publisher",
+    );
+
+    let writer = thread::spawn(move || {
+        for (index, byte) in component_frame.into_iter().enumerate() {
+            if paired_component_writer.write_all(&[byte]).is_err() {
+                return;
+            }
+            if index + 1 < 5 {
+                thread::sleep(fragment_interval);
+            }
+        }
+    });
+
+    let started = Instant::now();
+    let read_error = match reader.read_next_completion(&codec) {
+        Ok(_) => panic!(
+            "a fragmented component stream that exceeds its total read budget must not yield an ACK completion"
+        ),
+        Err(error) => error,
+    };
+    let elapsed = started.elapsed();
+    writer
+        .join()
+        .expect("the bounded component writer thread completes after its finite fragments");
+
+    assert_eq!(
+        read_error.kind(),
+        Sys5I3ProcessRuntimeErrorKind::LifecycleAckRejected,
+        "absolute ACK-read expiry is a typed boundary rejection, never a publication or installed-receipt outcome"
+    );
+    assert!(
+        elapsed < total_budget + Duration::from_millis(100),
+        "continued short reads must not reset the one absolute {total_budget:?} ACK-read budget; observed {elapsed:?}"
     );
 }
 

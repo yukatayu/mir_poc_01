@@ -21,7 +21,12 @@ use mirrorea_i3_probe::{
     I3LocalnetAdapterRejectionKind, I3LocalnetChildSlot, I3LocalnetChildTerminalOutcome,
     I3LocalnetControlDelivery, I3LocalnetDeliveryPhase, I3LocalnetFailureStage,
     I3LocalnetFalsifier, I3LocalnetFaultAuditFalsifier, I3LocalnetFaultProfile,
-    I3LocalnetImageDelivery, I3LocalnetLifecycleRejectionCause,
+    I3LocalnetImageDelivery, I3LocalnetLateIngressAckReaderOutcome, I3LocalnetLateIngressAudit,
+    I3LocalnetLateIngressEvidenceRejection, I3LocalnetLateIngressFalsifier,
+    I3LocalnetLateIngressLifecycleProvenance,
+    I3LocalnetLateIngressNonregisteredAckInputDisposition, I3LocalnetLateIngressOwnerOutcome,
+    I3LocalnetLateIngressParentPublication, I3LocalnetLateIngressProfile,
+    I3LocalnetLateIngressRequesterOutcome, I3LocalnetLifecycleRejectionCause,
     I3LocalnetObserverSafeDeliveryRecord, I3LocalnetReconnectOwnerOutcome,
     I3LocalnetRejectionAudit, I3LocalnetRemoteAdmissionEvidence, I3LocalnetRemoteEvidenceRejection,
     I3LocalnetRequesterFaultObservation, I3LocalnetRetryAttemptReason, I3LocalnetRetryAudit,
@@ -319,6 +324,144 @@ fn assert_initial_retry_owner_admission(
         }
         None => panic!("post-admission retry must retain the actual first owner admission"),
     }
+}
+
+/// The held complete frame is a receiver-side transport fact, not decoded
+/// semantic provenance.  It may join the independent exact sender contract
+/// only through the adapter-derived session-one commitment and its distinct
+/// receive occurrence.
+fn assert_late_ingress_sender_and_retained_frame<'audit>(
+    audit: &'audit I3LocalnetLateIngressAudit,
+    request_contract: &Sys5I3AdapterCarrierContract,
+) -> &'audit I3LocalnetObserverSafeDeliveryRecord {
+    let sender = audit.initial_sender_delivery();
+    assert_delivery_matches_contract(sender, request_contract, audit.request_identity_ref(), None);
+
+    let retained = audit.retained_session_one_ingress();
+    assert_eq!(retained.session_generation(), 1);
+    assert!(
+        !sender.candidate_commitment_ref().is_empty(),
+        "the actual initial sender delivery must retain its adapter-derived commitment"
+    );
+    assert!(
+        !retained.candidate_commitment_ref().is_empty(),
+        "the retained receiver frame must retain its adapter-derived session-one commitment"
+    );
+    assert_eq!(
+        sender.candidate_commitment_ref(),
+        retained.candidate_commitment_ref(),
+        "the held receiver frame may join only the exact same session-one sender commitment"
+    );
+    assert!(
+        !retained.network_occurrence_ref().is_empty(),
+        "the held frame must retain its actual receiver-side network occurrence"
+    );
+    assert_ne!(
+        sender.network_occurrence_ref(),
+        retained.network_occurrence_ref(),
+        "send and receive are separate actual transport events even for one retained frame"
+    );
+    sender
+}
+
+fn assert_late_ingress_child_sessions(
+    audit: &I3LocalnetLateIngressAudit,
+    expected_terminal_outcome: I3LocalnetChildTerminalOutcome,
+) {
+    let requester = audit.requester_child();
+    let owner = audit.owner_child();
+    assert_eq!(requester.slot(), I3LocalnetChildSlot::ProcessA);
+    assert_eq!(owner.slot(), I3LocalnetChildSlot::ProcessB);
+    assert_ne!(requester.slot(), owner.slot());
+    assert!(!requester.run_ref().is_empty());
+    assert_eq!(requester.run_ref(), owner.run_ref());
+
+    for child in [requester, owner] {
+        assert_eq!(child.first_session_generation(), 1);
+        assert_eq!(child.reconnect_session_generation(), 2);
+        assert!(child.first_session_peer_spki_verified());
+        assert!(child.first_session_reciprocal_preface_verified());
+        assert!(child.reconnect_session_peer_spki_verified());
+        assert!(child.reconnect_session_reciprocal_preface_verified());
+        assert_eq!(child.terminal_outcome(), expected_terminal_outcome);
+    }
+}
+
+fn assert_prestaged_late_ingress_rejection(
+    audit: &I3LocalnetLateIngressAudit,
+    expected_ack_reader: I3LocalnetLateIngressAckReaderOutcome,
+    expected_publication: I3LocalnetLateIngressParentPublication,
+    expected_publication_commit_count: usize,
+    expected_nonregistered_ack_input_disposition: I3LocalnetLateIngressNonregisteredAckInputDisposition,
+    expected_nonregistered_ack_input_count: usize,
+) {
+    assert_eq!(
+        audit.profile(),
+        I3LocalnetLateIngressProfile::PrestageOwnerCapabilityRevocationBeforeLateIngressAdmission
+    );
+    assert!(!audit.request_identity_ref().is_empty());
+    let request_contract = active_contract("owner-request");
+    let initial_sender = assert_late_ingress_sender_and_retained_frame(audit, &request_contract);
+    assert!(
+        audit.late_admission_delivery().is_none(),
+        "a rejected held frame must not expose decoded source/Core/artifact/edge/carrier claims as admitted delivery evidence"
+    );
+    assert_eq!(
+        initial_sender.semantic_request_identity_ref(),
+        audit.request_identity_ref(),
+        "the independently observed original sender, not the unadmitted retained frame, carries source-bound request identity"
+    );
+    assert_eq!(audit.admission_session_generation(), 2);
+    match audit.owner_outcome() {
+        Some(I3LocalnetLateIngressOwnerOutcome::CarrierAdmissionRejected {
+            owner_serve_count,
+            owner_mutation_count,
+        }) => {
+            assert_eq!(*owner_serve_count, 0);
+            assert_eq!(*owner_mutation_count, 0);
+        }
+        Some(I3LocalnetLateIngressOwnerOutcome::Admitted { .. }) => {
+            panic!("a G2-revoked held frame must not receive an owner serve or reply")
+        }
+        None => {
+            panic!("the actual current-authority rejection must retain its typed owner outcome")
+        }
+    }
+    assert_eq!(
+        audit.requester_outcome(),
+        I3LocalnetLateIngressRequesterOutcome::PendingReplyOrReceiptNotObserved
+    );
+    assert_eq!(
+        audit.outbound_request_frame_write_count(),
+        1,
+        "authority rejection must not trigger a request resend or a second source frame write"
+    );
+    assert_eq!(
+        audit.lifecycle_provenance(),
+        I3LocalnetLateIngressLifecycleProvenance::M9AdmittedLifecycle
+    );
+    assert_eq!(audit.m9_lifecycle_source_derived(), Some(false));
+    assert_eq!(
+        audit.registered_owner_ack_reader_outcome(),
+        expected_ack_reader
+    );
+    assert_eq!(audit.parent_publication(), expected_publication);
+    assert_eq!(
+        audit.parent_publication_commit_count(),
+        expected_publication_commit_count,
+        "publication count must come from the parent coordinator's actual transition, not the selected profile"
+    );
+    assert_eq!(
+        audit.nonregistered_ack_input_disposition(),
+        expected_nonregistered_ack_input_disposition,
+        "the audit must report the actual nonregistered ACK input disposition, not merely the selected late-ingress profile"
+    );
+    assert_eq!(
+        audit.nonregistered_ack_input_count(),
+        expected_nonregistered_ack_input_count,
+        "the audit must retain the actual number of nonregistered ACK inputs observed on child stdout"
+    );
+    assert_late_ingress_child_sessions(audit, I3LocalnetChildTerminalOutcome::HandledDeliveryFault);
 }
 
 #[test]
@@ -1362,6 +1505,546 @@ fn i3_3_retry_on_a_verified_initial_session_is_a_local_attempt_rejection_not_pee
         0,
         "the wrong-session guard must run before owner mutation"
     );
+}
+
+#[test]
+fn i3_3_late_session_one_ingress_under_g1_is_admitted_once_after_verified_session_two() {
+    let run = run_i3_process_localnet(
+        canonical_request().with_late_ingress_profile(
+            I3LocalnetLateIngressProfile::HoldSessionOneIngressAcrossVerifiedReconnect,
+        ),
+    )
+    .expect(
+        "a real complete session-one frame held before semantic admission must admit once under unchanged G1 on session two",
+    );
+
+    let late = run
+        .late_ingress_audit()
+        .expect("the selected late-ingress schedule must retain a dedicated observer-safe audit");
+    assert_eq!(
+        late.profile(),
+        I3LocalnetLateIngressProfile::HoldSessionOneIngressAcrossVerifiedReconnect
+    );
+    assert!(!late.request_identity_ref().is_empty());
+    let request_contract = active_contract("owner-request");
+    let initial_sender = assert_late_ingress_sender_and_retained_frame(late, &request_contract);
+    let retained = late.retained_session_one_ingress();
+    let admitted = late.late_admission_delivery().expect(
+        "unchanged G1 must publish a full delivery record only after the retained frame is semantically admitted",
+    );
+    assert_delivery_matches_contract(
+        admitted,
+        &request_contract,
+        late.request_identity_ref(),
+        None,
+    );
+    assert_delivery_semantics_match(initial_sender, admitted);
+    assert_eq!(
+        admitted.candidate_commitment_ref(),
+        retained.candidate_commitment_ref(),
+        "the successful session-two admission must retain the original session-one frame commitment"
+    );
+    assert_eq!(
+        admitted.network_occurrence_ref(),
+        retained.network_occurrence_ref(),
+        "admission of one held frame must not mint or relabel a second receiver occurrence"
+    );
+    assert_eq!(late.admission_session_generation(), 2);
+    match late.owner_outcome() {
+        Some(I3LocalnetLateIngressOwnerOutcome::Admitted {
+            owner_serve_count,
+            owner_mutation_count,
+            ..
+        }) => {
+            assert_eq!(*owner_serve_count, 1);
+            assert_eq!(*owner_mutation_count, 1);
+        }
+        Some(I3LocalnetLateIngressOwnerOutcome::CarrierAdmissionRejected { .. }) => {
+            panic!("unchanged G1 must admit the held original frame rather than reject it")
+        }
+        None => panic!("a successful late admission must retain its actual owner outcome"),
+    }
+    assert_eq!(
+        late.requester_outcome(),
+        I3LocalnetLateIngressRequesterOutcome::ReceiptConsumed
+    );
+    assert_eq!(late.outbound_request_frame_write_count(), 1);
+    assert_eq!(
+        late.lifecycle_provenance(),
+        I3LocalnetLateIngressLifecycleProvenance::NotSelected
+    );
+    assert_eq!(late.m9_lifecycle_source_derived(), None);
+    assert_eq!(
+        late.registered_owner_ack_reader_outcome(),
+        I3LocalnetLateIngressAckReaderOutcome::NotSelected
+    );
+    assert_eq!(
+        late.parent_publication(),
+        I3LocalnetLateIngressParentPublication::NoPrestageSelected
+    );
+    assert_eq!(
+        late.nonregistered_ack_input_disposition(),
+        I3LocalnetLateIngressNonregisteredAckInputDisposition::NotObserved
+    );
+    assert_eq!(late.nonregistered_ack_input_count(), 0);
+    assert_late_ingress_child_sessions(late, I3LocalnetChildTerminalOutcome::Completed);
+
+    let execution = run.execution_audit();
+    assert_eq!(execution.generated_request_count(), 1);
+    assert_eq!(execution.remote_owner_serve_count(), 1);
+    assert_eq!(execution.remote_owner_write_count(), 1);
+    assert_eq!(execution.generated_reply_count(), 1);
+    assert_eq!(execution.requester_local_receipt_count(), 1);
+    assert_eq!(execution.network_receipt_frame_count(), 0);
+    let requester = run
+        .child(I3LocalnetChildSlot::ProcessA)
+        .expect("the late-ingress run retains its actual requester child");
+    let owner = run
+        .child(I3LocalnetChildSlot::ProcessB)
+        .expect("the late-ingress run retains its actual owner child");
+    assert_ne!(requester.pid(), owner.pid());
+    assert!(requester.reaped() && owner.reaped());
+    assert!(!requester.was_force_killed() && !owner.was_force_killed());
+}
+
+#[test]
+fn i3_3_late_ingress_repeat_acquisition_rejects_before_io_without_discarding_the_original_pending_frame()
+ {
+    let run = run_i3_process_localnet(
+        canonical_request()
+            .with_late_ingress_profile(
+                I3LocalnetLateIngressProfile::HoldSessionOneIngressAcrossVerifiedReconnect,
+            )
+            .with_late_ingress_falsifier(
+                I3LocalnetLateIngressFalsifier::RepeatRetainedIngressAcquisition,
+            ),
+    )
+    .expect(
+        "a local repeat-acquisition rejection after one real held frame must preserve the original pending ingress for the normal G1 receipt path",
+    );
+
+    let late = run
+        .late_ingress_audit()
+        .expect("the actual one-frame G1 schedule retains its observer-safe late-ingress audit");
+    assert_eq!(
+        late.profile(),
+        I3LocalnetLateIngressProfile::HoldSessionOneIngressAcrossVerifiedReconnect
+    );
+    assert_eq!(
+        late.retained_ingress_repeat_acquisition_rejection(),
+        Some(I3LocalnetAdapterRejectionKind::LocalAttemptRejected),
+        "the second production acquisition must fail locally before it can read, reserve, decode, or admit another frame"
+    );
+    let request_contract = active_contract("owner-request");
+    let initial_sender = assert_late_ingress_sender_and_retained_frame(late, &request_contract);
+    let retained = late.retained_session_one_ingress();
+    let admitted = late.late_admission_delivery().expect(
+        "the first opaque pending ingress remains the only frame admitted after the repeat rejection",
+    );
+    assert_delivery_matches_contract(
+        admitted,
+        &request_contract,
+        late.request_identity_ref(),
+        None,
+    );
+    assert_delivery_semantics_match(initial_sender, admitted);
+    assert_eq!(
+        admitted.candidate_commitment_ref(),
+        retained.candidate_commitment_ref(),
+        "the eventual admission must consume the original session-one commitment, not a second acquisition"
+    );
+    assert_eq!(
+        admitted.network_occurrence_ref(),
+        retained.network_occurrence_ref(),
+        "the eventual admission must consume the original receiver occurrence without a second I/O reservation"
+    );
+    assert_eq!(late.admission_session_generation(), 2);
+    match late.owner_outcome() {
+        Some(I3LocalnetLateIngressOwnerOutcome::Admitted {
+            owner_serve_count,
+            owner_mutation_count,
+            ..
+        }) => {
+            assert_eq!(*owner_serve_count, 1);
+            assert_eq!(*owner_mutation_count, 1);
+        }
+        Some(I3LocalnetLateIngressOwnerOutcome::CarrierAdmissionRejected { .. }) => {
+            panic!("the preserved original G1 pending frame must admit once")
+        }
+        None => {
+            panic!("the successful original pending frame must retain the actual owner outcome")
+        }
+    }
+    assert_eq!(
+        late.requester_outcome(),
+        I3LocalnetLateIngressRequesterOutcome::ReceiptConsumed
+    );
+    assert_eq!(late.outbound_request_frame_write_count(), 1);
+    assert_eq!(
+        late.lifecycle_provenance(),
+        I3LocalnetLateIngressLifecycleProvenance::NotSelected
+    );
+    assert_eq!(late.m9_lifecycle_source_derived(), None);
+    assert_eq!(
+        late.registered_owner_ack_reader_outcome(),
+        I3LocalnetLateIngressAckReaderOutcome::NotSelected
+    );
+    assert_eq!(
+        late.parent_publication(),
+        I3LocalnetLateIngressParentPublication::NoPrestageSelected
+    );
+    assert_eq!(
+        late.nonregistered_ack_input_disposition(),
+        I3LocalnetLateIngressNonregisteredAckInputDisposition::NotObserved
+    );
+    assert_eq!(late.nonregistered_ack_input_count(), 0);
+    assert_late_ingress_child_sessions(late, I3LocalnetChildTerminalOutcome::Completed);
+
+    let execution = run.execution_audit();
+    assert_eq!(execution.generated_request_count(), 1);
+    assert_eq!(execution.remote_owner_serve_count(), 1);
+    assert_eq!(execution.remote_owner_write_count(), 1);
+    assert_eq!(execution.generated_reply_count(), 1);
+    assert_eq!(execution.requester_local_receipt_count(), 1);
+    assert_eq!(execution.network_receipt_frame_count(), 0);
+    let requester = run
+        .child(I3LocalnetChildSlot::ProcessA)
+        .expect("the repeated-acquisition G1 path retains its actual requester child");
+    let owner = run
+        .child(I3LocalnetChildSlot::ProcessB)
+        .expect("the repeated-acquisition G1 path retains its actual owner child");
+    assert_ne!(requester.pid(), owner.pid());
+    assert!(requester.reaped() && owner.reaped());
+    assert!(!requester.was_force_killed() && !owner.was_force_killed());
+}
+
+#[test]
+fn i3_3_late_session_one_ingress_after_b_installs_g2_is_carrier_admission_rejected() {
+    let error = run_i3_process_localnet(
+        canonical_request().with_late_ingress_profile(
+            I3LocalnetLateIngressProfile::PrestageOwnerCapabilityRevocationBeforeLateIngressAdmission,
+        ),
+    )
+    .expect_err(
+        "the exact session-one frame must be revalidated against B's installed G2 before semantic admission",
+    );
+
+    let diagnostic_lifecycle = error.rejection_audit();
+    let terminal_metadata = diagnostic_lifecycle
+        .child_terminal_events()
+        .iter()
+        .map(|event| {
+            (
+                event.outcome(),
+                event.semantic_admission_count(),
+                event.owner_mutation_count(),
+                event.observed_exit_status_code(),
+                event.was_force_killed(),
+            )
+        })
+        .collect::<Vec<_>>();
+    assert_eq!(
+        error.kind(),
+        I3LocalnetRunErrorKind::AmbiguousDelivery,
+        "G2 late ingress must retain the actual remote current-authority rejection rather than collapse into generic lifecycle rejection; observer-safe diagnostic: stage={:?}, lifecycle_cause={:?}, owner_starts={}, semantic_admissions={}, owner_mutations={}, aggregate_semantic_admissions={}, aggregate_owner_mutations={}, requester_pending={}, terminals={terminal_metadata:?}, children_reaped={}, no_orphan_pids={}, late_ingress_audit_present={}, late_ingress_evidence_rejection={:?}",
+        diagnostic_lifecycle.stage(),
+        diagnostic_lifecycle.lifecycle_rejection_cause(),
+        diagnostic_lifecycle.child_owner_starts(),
+        diagnostic_lifecycle.semantic_admission_count(),
+        diagnostic_lifecycle.owner_mutation_count(),
+        diagnostic_lifecycle.aggregate_semantic_admission_count(),
+        diagnostic_lifecycle.aggregate_owner_mutation_count(),
+        diagnostic_lifecycle.requester_pending_request_is_retained(),
+        diagnostic_lifecycle.all_children_reaped(),
+        diagnostic_lifecycle.no_orphan_child_pids(),
+        error.late_ingress_audit().is_some(),
+        error.late_ingress_evidence_rejection(),
+    );
+    let late = error.late_ingress_audit().expect(
+        "the late rejection must retain actual schedule and owner outcome evidence without treating rejection as a reply",
+    );
+    assert_prestaged_late_ingress_rejection(
+        late,
+        I3LocalnetLateIngressAckReaderOutcome::AcceptedRegisteredOwnerChildFd,
+        I3LocalnetLateIngressParentPublication::G2Published,
+        1,
+        I3LocalnetLateIngressNonregisteredAckInputDisposition::NotObserved,
+        0,
+    );
+
+    let lifecycle = error.rejection_audit();
+    assert_eq!(
+        lifecycle.stage(),
+        I3LocalnetFailureStage::RequesterReplyOrReceiptNotObserved,
+        "a typed remote rejection keeps the requester original pending rather than becoming a reply/receipt success"
+    );
+    assert_handled_delivery_fault_lifecycle(&lifecycle);
+    assert!(lifecycle.requester_pending_request_is_retained());
+    assert_eq!(lifecycle.child_owner_starts(), 1);
+    assert_eq!(lifecycle.aggregate_semantic_admission_count(), 0);
+    assert_eq!(lifecycle.aggregate_owner_mutation_count(), 0);
+}
+
+#[test]
+fn i3_3_late_ingress_terminal_validation_rejects_untrusted_control_or_unauthenticated_admission_observations()
+ {
+    for (falsifier, corrupted_slot, expected_unauthenticated_admissions, requester_pending, label) in [
+        (
+            I3LocalnetLateIngressFalsifier::SetOwnerLateIngressTerminalUnauthenticatedAdmissionAndClearTrustedControl,
+            I3LocalnetChildSlot::ProcessB,
+            1,
+            true,
+            "owner unauthenticated admission with cleared trusted control",
+        ),
+        (
+            I3LocalnetLateIngressFalsifier::ClearRequesterLateIngressTerminalTrustedControl,
+            I3LocalnetChildSlot::ProcessA,
+            0,
+            false,
+            "requester cleared trusted control",
+        ),
+    ] {
+        let error = run_i3_process_localnet(
+            canonical_request()
+                .with_late_ingress_profile(
+                    I3LocalnetLateIngressProfile::PrestageOwnerCapabilityRevocationBeforeLateIngressAdmission,
+                )
+                .with_late_ingress_falsifier(falsifier),
+        )
+        .expect_err(
+            "a mutated observer-only terminal record must not validate a late-ingress semantic conclusion",
+        );
+
+        assert_eq!(
+            error.kind(),
+            I3LocalnetRunErrorKind::LifecycleRejected,
+            "{label} is a terminal-evidence rejection, never a remote admission or reply"
+        );
+        assert!(
+            error.late_ingress_audit().is_none(),
+            "{label} must not publish a validated late-ingress audit or owner conclusion"
+        );
+        assert_eq!(
+            error.late_ingress_evidence_rejection(),
+            None,
+            "{label} is validated from terminal structure, not a retained-ingress commitment join"
+        );
+
+        let lifecycle = error.rejection_audit();
+        assert_eq!(
+            lifecycle.stage(),
+            I3LocalnetFailureStage::LifecycleEvidenceRejected,
+            "{label} must retain the explicit terminal-shape validation failure"
+        );
+        assert_handled_delivery_fault_lifecycle(&lifecycle);
+        assert_eq!(lifecycle.child_owner_starts(), 1);
+        assert_eq!(lifecycle.aggregate_semantic_admission_count(), 0);
+        assert_eq!(lifecycle.aggregate_owner_mutation_count(), 0);
+        assert_eq!(
+            lifecycle.requester_pending_request_is_retained(),
+            requester_pending,
+            "{label} may retain pending only when A's independently validated terminal record remains trustworthy"
+        );
+
+        let matching = lifecycle
+            .child_terminal_events()
+            .iter()
+            .filter(|event| event.slot() == Some(corrupted_slot))
+            .collect::<Vec<_>>();
+        assert_eq!(
+            matching.len(),
+            1,
+            "{label} must retain exactly one observer-safe terminal record for the corrupted child slot"
+        );
+        let corrupted = matching[0];
+        assert_eq!(corrupted.trusted_control_consumed(), Some(false));
+        assert_eq!(
+            corrupted.unauthenticated_semantic_admission_count(),
+            Some(expected_unauthenticated_admissions),
+            "{label} must preserve the actual corrupted observer fields rather than silently normalizing them"
+        );
+        assert_eq!(corrupted.semantic_admission_count(), 0);
+        assert_eq!(corrupted.owner_mutation_count(), 0);
+    }
+}
+
+#[test]
+fn i3_3_late_ingress_candidate_binding_tamper_rejects_before_any_sender_or_owner_evidence() {
+    let error = run_i3_process_localnet(
+        canonical_request()
+            .with_late_ingress_profile(
+                I3LocalnetLateIngressProfile::PrestageOwnerCapabilityRevocationBeforeLateIngressAdmission,
+            )
+            .with_late_ingress_falsifier(
+                I3LocalnetLateIngressFalsifier::GenuineCandidateBindingTamper,
+            ),
+    )
+    .expect_err(
+        "a genuine prestaged candidate paired with a mismatched independently trusted binding must reject before B starts",
+    );
+
+    assert_eq!(error.kind(), I3LocalnetRunErrorKind::StartBindingRejected);
+    assert!(
+        error.late_ingress_audit().is_none(),
+        "a bootstrap rejection before B is ready cannot fabricate A sender, retained-frame, owner, requester-pending, or ACK evidence"
+    );
+    let lifecycle = error.rejection_audit();
+    assert_eq!(lifecycle.stage(), I3LocalnetFailureStage::BeforeOwnerStart);
+    assert_eq!(
+        lifecycle.fixed_child_control_descriptors_preserved(),
+        Some(true)
+    );
+    assert_eq!(lifecycle.child_owner_starts(), 0);
+    assert_eq!(lifecycle.quic_certificate_initializations(), Some(0));
+    assert_eq!(lifecycle.quic_handshake_count(), Some(0));
+    assert_eq!(lifecycle.semantic_admission_count(), 0);
+    assert_eq!(lifecycle.owner_mutation_count(), 0);
+    assert!(
+        !lifecycle.requester_pending_request_is_retained(),
+        "when A never sends, the harness must not infer requester pending state from the selected candidate tamper"
+    );
+    assert!(lifecycle.all_children_reaped());
+    assert!(lifecycle.no_orphan_child_pids());
+    assert!(lifecycle.observer_safe());
+}
+
+#[test]
+fn i3_3_late_ingress_ack_completion_accepts_only_registered_b_fd_and_observes_actual_a_stdout_candidate()
+ {
+    for (
+        falsifier,
+        expected_reader,
+        expected_publication,
+        expected_publication_commit_count,
+        expected_nonregistered_ack_input_disposition,
+        expected_nonregistered_ack_input_count,
+        label,
+    ) in [
+        (
+            I3LocalnetLateIngressFalsifier::RouteTaintedAckCandidateFromActualAStdout,
+            I3LocalnetLateIngressAckReaderOutcome::UntrustedRouteIgnored,
+            I3LocalnetLateIngressParentPublication::PublicationIncomplete,
+            0,
+            I3LocalnetLateIngressNonregisteredAckInputDisposition::RequesterStdoutTaintedCandidateIgnored,
+            1,
+            "actual-requester-stdout-tainted-candidate",
+        ),
+        (
+            I3LocalnetLateIngressFalsifier::DropBRegisteredAck,
+            I3LocalnetLateIngressAckReaderOutcome::LostBeforeParentAcceptance,
+            I3LocalnetLateIngressParentPublication::PublicationIncomplete,
+            0,
+            I3LocalnetLateIngressNonregisteredAckInputDisposition::NotObserved,
+            0,
+            "dropped-registered-b",
+        ),
+        (
+            I3LocalnetLateIngressFalsifier::ReplayBRegisteredAck,
+            I3LocalnetLateIngressAckReaderOutcome::ReplayRejected,
+            I3LocalnetLateIngressParentPublication::G2Published,
+            1,
+            I3LocalnetLateIngressNonregisteredAckInputDisposition::NotObserved,
+            0,
+            "replayed-registered-b",
+        ),
+    ] {
+        let error = run_i3_process_localnet(
+            canonical_request()
+                .with_late_ingress_profile(
+                    I3LocalnetLateIngressProfile::PrestageOwnerCapabilityRevocationBeforeLateIngressAdmission,
+                )
+                .with_late_ingress_falsifier(falsifier),
+        )
+        .expect_err(
+            "each failed or replayed acknowledgement route leaves the original requester without a reply or receipt",
+        );
+
+        assert_eq!(
+            error.kind(),
+            I3LocalnetRunErrorKind::AmbiguousDelivery,
+            "{label} must not convert current-authority rejection into a source success"
+        );
+        let late = error.late_ingress_audit().expect(
+            "post-install acknowledgement routing retains actual session-one ingress and session-two current-authority evidence",
+        );
+        assert_prestaged_late_ingress_rejection(
+            late,
+            expected_reader,
+            expected_publication,
+            expected_publication_commit_count,
+            expected_nonregistered_ack_input_disposition,
+            expected_nonregistered_ack_input_count,
+        );
+
+        let lifecycle = error.rejection_audit();
+        assert_eq!(
+            lifecycle.stage(),
+            I3LocalnetFailureStage::RequesterReplyOrReceiptNotObserved,
+            "{label} cannot fabricate a reply/receipt from a lifecycle ACK route"
+        );
+        assert_handled_delivery_fault_lifecycle(&lifecycle);
+        assert!(lifecycle.requester_pending_request_is_retained());
+        assert_eq!(lifecycle.child_owner_starts(), 1);
+        assert_eq!(lifecycle.aggregate_semantic_admission_count(), 0);
+        assert_eq!(lifecycle.aggregate_owner_mutation_count(), 0);
+    }
+}
+
+#[test]
+fn i3_3_late_ingress_retained_commitment_evidence_requires_the_exact_initial_sender_commitment() {
+    for (falsifier, expected_rejection, label) in [
+        (
+            I3LocalnetLateIngressFalsifier::ClearRetainedIngressCandidateCommitment,
+            I3LocalnetLateIngressEvidenceRejection::RetainedIngressCommitmentMissing,
+            "missing",
+        ),
+        (
+            I3LocalnetLateIngressFalsifier::MutateRetainedIngressCandidateCommitment,
+            I3LocalnetLateIngressEvidenceRejection::RetainedIngressCommitmentMismatch,
+            "mismatched",
+        ),
+    ] {
+        let error = run_i3_process_localnet(
+            canonical_request()
+                .with_late_ingress_profile(
+                    I3LocalnetLateIngressProfile::PrestageOwnerCapabilityRevocationBeforeLateIngressAdmission,
+                )
+                .with_late_ingress_falsifier(falsifier),
+        )
+        .expect_err(
+            "missing or mismatched retained-frame commitment evidence must not publish a late-admission owner conclusion",
+        );
+
+        assert_eq!(
+            error.kind(),
+            I3LocalnetRunErrorKind::LifecycleRejected,
+            "{label} retained-frame evidence corruption is a typed evidence rejection, not an owner reply or requester success"
+        );
+        assert_eq!(
+            error.late_ingress_evidence_rejection(),
+            Some(expected_rejection),
+            "{label} must retain the exact failed commitment join rather than silently treating it as no admission"
+        );
+        assert!(
+            error.late_ingress_audit().is_none(),
+            "{label} evidence rejection must not fabricate a validated late-ingress audit or owner semantic conclusion"
+        );
+
+        let lifecycle = error.rejection_audit();
+        assert_eq!(
+            lifecycle.stage(),
+            I3LocalnetFailureStage::LifecycleEvidenceRejected,
+            "{label} must retain the typed observer-join failure rather than reclassifying it as remote admission"
+        );
+        assert_handled_delivery_fault_lifecycle(&lifecycle);
+        assert!(
+            lifecycle.requester_pending_request_is_retained(),
+            "{label} must preserve the independently source-bound requester pending fact"
+        );
+        assert_eq!(lifecycle.child_owner_starts(), 1);
+        assert_eq!(lifecycle.aggregate_semantic_admission_count(), 0);
+        assert_eq!(lifecycle.aggregate_owner_mutation_count(), 0);
+    }
 }
 
 #[test]

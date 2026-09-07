@@ -50,6 +50,157 @@ pub enum I3LocalnetRemoteEvidenceRejection {
     ProvenanceMismatch,
 }
 
+/// The two finite controls for one complete owner-request frame received on
+/// session one and admitted, if at all, only after both children reconnect on
+/// session two.  They do not select a resend, source operation, authority
+/// value, or expected semantic result.
+#[doc(hidden)]
+#[derive(Clone, Copy, Debug, Eq, PartialEq, Serialize, Deserialize)]
+#[serde(rename_all = "snake_case")]
+pub enum I3LocalnetLateIngressProfile {
+    HoldSessionOneIngressAcrossVerifiedReconnect,
+    PrestageOwnerCapabilityRevocationBeforeLateIngressAdmission,
+}
+
+/// Bounded probe-only negative controls for the genuine pre-staged owner
+/// lifecycle route.  They never expose a candidate, installed receipt, ACK
+/// record, publisher, or source operation to the caller.
+#[doc(hidden)]
+#[derive(Clone, Copy, Debug, Eq, PartialEq, Serialize, Deserialize)]
+#[serde(rename_all = "snake_case")]
+pub enum I3LocalnetLateIngressFalsifier {
+    GenuineCandidateBindingTamper,
+    ClearRetainedIngressCandidateCommitment,
+    MutateRetainedIngressCandidateCommitment,
+    /// After the real session-one frame is retained, acquire it a second time
+    /// from the same B session. The adapter must reject locally before I/O;
+    /// the original opaque ingress remains the only one later admitted.
+    RepeatRetainedIngressAcquisition,
+    /// B suppresses its receipt-gated registered-FD emission. A instead emits
+    /// one bounded, candidate-shaped ACK record on its actual stdout route;
+    /// parent may decode it only as tainted and must not publish it.
+    RouteTaintedAckCandidateFromActualAStdout,
+    DropBRegisteredAck,
+    ReplayBRegisteredAck,
+    /// Mutates only B's already-produced terminal observer record after the
+    /// actual late-admission attempt. It never changes a frame, runtime
+    /// admission, or owner mutation.
+    SetOwnerLateIngressTerminalUnauthenticatedAdmissionAndClearTrustedControl,
+    /// Mutates only A's already-produced terminal observer record after the
+    /// actual pending outcome. It never changes A's source request or runtime
+    /// pending state.
+    ClearRequesterLateIngressTerminalTrustedControl,
+}
+
+/// Why the adapter-only session-one ingress record could not be joined to the
+/// independently retained source sender record.  This rejects observer
+/// evidence only; it does not recast the original requester operation or
+/// publish an owner outcome.
+#[doc(hidden)]
+#[derive(Clone, Copy, Debug, Eq, PartialEq, Serialize, Deserialize)]
+#[serde(rename_all = "snake_case")]
+pub enum I3LocalnetLateIngressEvidenceRejection {
+    RetainedIngressCommitmentMissing,
+    RetainedIngressCommitmentMismatch,
+}
+
+/// Parent observation of one bounded ACK-shaped input delivered on the
+/// requester's actual stdout route. It is never a completion route: decoding
+/// remains tainted and the parent does not offer it to the registered-B reader
+/// or cohort publisher.
+#[doc(hidden)]
+#[derive(Clone, Copy, Debug, Eq, PartialEq)]
+pub enum I3LocalnetLateIngressNonregisteredAckInputDisposition {
+    NotObserved,
+    RequesterStdoutTaintedCandidateIgnored,
+}
+
+/// Owner-local outcome when the opaque session-one ingress is finally offered
+/// to the runtime on session two.  A rejection is not a reply delivered to
+/// the requester.
+#[doc(hidden)]
+#[derive(Clone, Debug, Eq, PartialEq)]
+pub enum I3LocalnetLateIngressOwnerOutcome {
+    Admitted {
+        owner_serve_count: usize,
+        owner_mutation_count: usize,
+    },
+    CarrierAdmissionRejected {
+        owner_serve_count: usize,
+        owner_mutation_count: usize,
+    },
+}
+
+impl I3LocalnetLateIngressOwnerOutcome {
+    pub const fn owner_serve_count(&self) -> usize {
+        match self {
+            Self::Admitted {
+                owner_serve_count, ..
+            }
+            | Self::CarrierAdmissionRejected {
+                owner_serve_count, ..
+            } => *owner_serve_count,
+        }
+    }
+
+    pub const fn owner_mutation_count(&self) -> usize {
+        match self {
+            Self::Admitted {
+                owner_mutation_count,
+                ..
+            }
+            | Self::CarrierAdmissionRejected {
+                owner_mutation_count,
+                ..
+            } => *owner_mutation_count,
+        }
+    }
+}
+
+/// Requester-local disposition of the one original request after the
+/// session-two late-admission attempt.
+#[doc(hidden)]
+#[derive(Clone, Copy, Debug, Eq, PartialEq, Serialize, Deserialize)]
+#[serde(rename_all = "snake_case")]
+pub enum I3LocalnetLateIngressRequesterOutcome {
+    ReceiptConsumed,
+    PendingReplyOrReceiptNotObserved,
+}
+
+/// Provenance of the optional genuine M9 lifecycle installation.  It is
+/// intentionally separate from the parent publication state.
+#[doc(hidden)]
+#[derive(Clone, Copy, Debug, Eq, PartialEq, Serialize, Deserialize)]
+#[serde(rename_all = "snake_case")]
+pub enum I3LocalnetLateIngressLifecycleProvenance {
+    NotSelected,
+    M9AdmittedLifecycle,
+    CandidateBindingRejected,
+}
+
+/// Classification made by the parent-owned reader for the dedicated,
+/// registered owner-child lifecycle ACK route.  No variant contains an FD,
+/// owner label, decoded ACK, or detachable origin token.
+#[doc(hidden)]
+#[derive(Clone, Copy, Debug, Eq, PartialEq)]
+pub enum I3LocalnetLateIngressAckReaderOutcome {
+    NotSelected,
+    AcceptedRegisteredOwnerChildFd,
+    UntrustedRouteIgnored,
+    LostBeforeParentAcceptance,
+    ReplayRejected,
+}
+
+/// Parent-local disposition of the one pre-staged G1-to-G2 publication.
+/// This makes no durability, rollback, or all-child-generation claim.
+#[doc(hidden)]
+#[derive(Clone, Copy, Debug, Eq, PartialEq)]
+pub enum I3LocalnetLateIngressParentPublication {
+    NoPrestageSelected,
+    G2Published,
+    PublicationIncomplete,
+}
+
 /// The two finite actual-session controls for the original source-emitted
 /// owner request.  They select no caller retry policy, new source operation,
 /// request identity, authority, or wire result.

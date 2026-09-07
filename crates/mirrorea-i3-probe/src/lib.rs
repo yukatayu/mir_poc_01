@@ -28,19 +28,25 @@ pub use framing::{
 };
 pub use i3_process_faults::{
     I3LocalnetFaultAudit, I3LocalnetFaultAuditFalsifier, I3LocalnetFaultProfile,
-    I3LocalnetReconnectOwnerOutcome, I3LocalnetRemoteAdmissionEvidence,
-    I3LocalnetRemoteEvidenceRejection, I3LocalnetRequesterFaultObservation,
-    I3LocalnetRetryAttemptAudit, I3LocalnetRetryAttemptReason, I3LocalnetRetryAudit,
-    I3LocalnetRetryAuditFalsifier, I3LocalnetRetryChildAudit, I3LocalnetRetryEvidenceRejection,
-    I3LocalnetRetryFalsifier, I3LocalnetRetryProfile, I3LocalnetRetryRequesterOutcome,
+    I3LocalnetLateIngressAckReaderOutcome, I3LocalnetLateIngressEvidenceRejection,
+    I3LocalnetLateIngressFalsifier, I3LocalnetLateIngressLifecycleProvenance,
+    I3LocalnetLateIngressNonregisteredAckInputDisposition, I3LocalnetLateIngressOwnerOutcome,
+    I3LocalnetLateIngressParentPublication, I3LocalnetLateIngressProfile,
+    I3LocalnetLateIngressRequesterOutcome, I3LocalnetReconnectOwnerOutcome,
+    I3LocalnetRemoteAdmissionEvidence, I3LocalnetRemoteEvidenceRejection,
+    I3LocalnetRequesterFaultObservation, I3LocalnetRetryAttemptAudit, I3LocalnetRetryAttemptReason,
+    I3LocalnetRetryAudit, I3LocalnetRetryAuditFalsifier, I3LocalnetRetryChildAudit,
+    I3LocalnetRetryEvidenceRejection, I3LocalnetRetryFalsifier, I3LocalnetRetryProfile,
+    I3LocalnetRetryRequesterOutcome,
 };
 pub use i3_process_localnet::{
     I3LocalnetAdapterRejectionKind, I3LocalnetChildSlot, I3LocalnetChildTerminalEvent,
     I3LocalnetChildTerminalOutcome, I3LocalnetControlDelivery, I3LocalnetDeliveryPhase,
     I3LocalnetFailureStage, I3LocalnetFalsifier, I3LocalnetImageDelivery,
-    I3LocalnetLifecycleRejectionCause, I3LocalnetObserverSafeDeliveryRecord,
-    I3LocalnetRejectionAudit, I3LocalnetRunError, I3LocalnetRunErrorKind, I3ProcessLocalnetRequest,
-    I3ProcessLocalnetRun, run_i3_process_localnet,
+    I3LocalnetLateIngressAudit, I3LocalnetLateIngressChildAudit, I3LocalnetLifecycleRejectionCause,
+    I3LocalnetObserverSafeDeliveryRecord, I3LocalnetRejectionAudit,
+    I3LocalnetRetainedIngressEvidence, I3LocalnetRunError, I3LocalnetRunErrorKind,
+    I3ProcessLocalnetRequest, I3ProcessLocalnetRun, run_i3_process_localnet,
 };
 pub use model::{
     RequestIdentity, SemanticAdmissionError, SemanticAdmissionErrorKind, SemanticCarrier,

@@ -9,7 +9,11 @@ use serde::{Deserialize, Serialize};
 
 use crate::{
     sys3_i3_private_snapshot::I3PrivateProjectionSnapshot,
-    sys4_dispatch::{FabricProgram, SealedFabricAdmission, Sys4I3PrivateSealedAdmissionSnapshot},
+    sys4_dispatch::{
+        FabricProgram, SealedFabricAdmission,
+        Sys4I3PrivateRestrictedOwnerCapabilitySuccessorSnapshot,
+        Sys4I3PrivateSealedAdmissionSnapshot,
+    },
 };
 
 use super::{
@@ -31,6 +35,15 @@ pub(super) struct PrivateProcessImageSnapshot {
     projection: I3PrivateProjectionSnapshot,
     admission: Sys4I3PrivateSealedAdmissionSnapshot,
     private_snapshot_binding_ref: String,
+    prestaged_owner_capability_lifecycle: Option<PrivatePrestagedOwnerCapabilityLifecycleSnapshot>,
+}
+
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[serde(deny_unknown_fields)]
+struct PrivatePrestagedOwnerCapabilityLifecycleSnapshot {
+    target_slot_name: String,
+    stage_identity_binding_ref: String,
+    candidate: Sys4I3PrivateRestrictedOwnerCapabilitySuccessorSnapshot,
 }
 
 impl PrivateProcessImageSnapshot {
@@ -48,6 +61,17 @@ impl PrivateProcessImageSnapshot {
             .private_runtime_seed
             .private_snapshot_binding_ref
             .clone();
+        let prestaged_owner_capability_lifecycle = image
+            .private_runtime_seed
+            .prestaged_owner_capability_lifecycle
+            .as_ref()
+            .map(
+                |lifecycle| PrivatePrestagedOwnerCapabilityLifecycleSnapshot {
+                    target_slot_name: lifecycle.target_slot_name.clone(),
+                    stage_identity_binding_ref: lifecycle.stage_identity_binding_ref.clone(),
+                    candidate: lifecycle.candidate.i3_private_snapshot(),
+                },
+            );
         if private_snapshot_binding_ref.is_empty()
             || private_snapshot_binding_ref
                 != private_runtime_seed_binding_ref(
@@ -63,6 +87,7 @@ impl PrivateProcessImageSnapshot {
             projection,
             admission,
             private_snapshot_binding_ref,
+            prestaged_owner_capability_lifecycle,
         })
     }
 
@@ -115,6 +140,33 @@ impl PrivateProcessImageSnapshot {
         ) = self.image.into_image_fields().map_err(|_| {
             Sys5I3ProcessRuntimeError::new(Sys5I3ProcessRuntimeErrorKind::ImageIntegrityMismatch)
         })?;
+        let prestaged_owner_capability_lifecycle = self
+            .prestaged_owner_capability_lifecycle
+            .map(|lifecycle| {
+                if lifecycle.target_slot_name.is_empty()
+                    || lifecycle.stage_identity_binding_ref.is_empty()
+                {
+                    return Err(Sys5I3ProcessRuntimeError::new(
+                        Sys5I3ProcessRuntimeErrorKind::ImageIntegrityMismatch,
+                    ));
+                }
+                let candidate =
+                    crate::sys4_dispatch::Sys4I3RestrictedOwnerCapabilitySuccessor::from_i3_private_snapshot(
+                        lifecycle.candidate,
+                        &program,
+                    )
+                    .map_err(|_| {
+                        Sys5I3ProcessRuntimeError::new(
+                            Sys5I3ProcessRuntimeErrorKind::ImageIntegrityMismatch,
+                        )
+                    })?;
+                Ok(super::Sys5I3PrestagedOwnerCapabilityLifecycle {
+                    target_slot_name: lifecycle.target_slot_name,
+                    stage_identity_binding_ref: lifecycle.stage_identity_binding_ref,
+                    candidate,
+                })
+            })
+            .transpose()?;
         let private_runtime_seed = Sys5I3PrivateRuntimeSeed {
             parent_checked_program_ref: child_seed.parent_checked_program_ref.clone(),
             projection_ref: child_seed.projection_ref.clone(),
@@ -123,6 +175,7 @@ impl PrivateProcessImageSnapshot {
             private_snapshot_binding_ref: self.private_snapshot_binding_ref,
             program,
             admission,
+            prestaged_owner_capability_lifecycle,
         };
         Ok(Sys5I3ProcessImage {
             slot_name,

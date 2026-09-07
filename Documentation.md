@@ -301,6 +301,15 @@ recordが揃ったためofficial I2 entry後exitを受理しました。broad PH
   corruption reject joins; local misuse returns `LocalAttemptRejected`.
   Fresh probe 22/22, lifecycle unit 2/2, focused deny-warnings Clippy and
   format/diff checks pass. The full I3-3 matrix remains open.
+- current successor slice: a genuine M9 capability successor is installed in B
+  before reconnect; late session-one traffic is rejected without owner mutation,
+  while A remains pending/unknown. G1 control completes once. Registered B ACK
+  publication, actual A-stdout tainted input, one-shot ingress and contradictory
+  terminal-observation rejection have fresh runtime 61/61, probe 29/29 and
+  feature-library 289/289 evidence; focused Clippy and format/diff pass.
+  Independent narrow review finds no remaining P0/P1 in the repaired slice;
+  I2 regressions 5/5 + 8/8 and M10 conformance 67/67 pass. This is checkpoint
+  evidence over `7580e3a`, not I3-3 acceptance or a refreshed model.
 - decisions taken: the working interpretation remains ordinary meaning ->
   generated distribution -> continually checked composition. World/Avatar remain
   domain-library vocabulary, not Mir Core primitives; ledger64/coordinator/

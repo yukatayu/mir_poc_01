@@ -1,6 +1,6 @@
 # Current Task Map (LAB)
 
-最終更新: 2026-09-07 15:00 JST
+最終更新: 2026-09-07 17:52 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -47,9 +47,10 @@ input history, not the promoted I3-3 goal.
 
 Milestone direct consumer: I3-4 C-distributed scenarios and cross-process
 semantic pressure consume the I3-3 matrix only after milestone acceptance.
-The next work within I3-3 uses the verified reconnect seam for retained-M9-
-publisher successor installation and late pending-ingress revalidation; the
-full matrix is not yet complete.
+The genuine M9 successor and retained-ingress slice has passed bounded repair
+review. Next within I3-3 is actual endpoint-unavailable, fragmented and truncated
+delivery, followed by the still-OPEN provider/time contracts; the full matrix
+is not yet complete.
 
 Scope: execute all 20 required network failure families against the accepted
 generated-artifact runtime; make retry and ambiguous delivery request-bound and
@@ -67,15 +68,18 @@ Sources: `plan/250-mirrorea-i3-distributed-foundation-current-roadmap.md`,
 `mirrorea_canon/plan/05-i3-entry-contract.md`. I3-2 evidence remains the
 input history in Report 2605, not the active goal.
 
-Fresh actual-reconnect evidence: probe 22/22, lifecycle unit 2/2, focused
-two-crate all-target Clippy with the private feature and `-D warnings`, and
-format/diff checks pass. Pre-write reconnect consumes one checked receipt;
+Fresh successor evidence: runtime integration 61/61, feature library 289/289,
+probe 29/29, private QUIC unit 2/2, focused Clippy and format/diff pass; I2
+regressions 5/5 + 8/8 and M10 67/67 pass. Independent repair review has no
+remaining P0/P1. B installs genuine revocation before reconnect and rejects
+retained ingress without owner mutation; A stays pending. The earlier probe
+lifecycle unit 2/2 is prior evidence. Pre-write reconnect consumes one checked receipt;
 post-admission retry is duplicate-rejected while the original requester stays
 pending/ambiguous. Report 2606 retains prior checkpoint `87ee2418` runtime
 51/51, library 285/285, probe 17/17 and bounded model 3/3 evidence; those suites
 were not all rerun for this delta. The model is not a general proof. Root free
-space remains about 18 GiB after the narrowly authorized incremental-cache
-cleanup. Late-authority/order and the full 20-family matrix remain open; this
+space is about 15 GiB; no further cleanup was performed. Remaining authority/
+ordering and the full 20-family matrix remain open; this
 is not milestone acceptance.
 
 ### Dated LAB rough remaining estimates (not acceptance or guarantee)

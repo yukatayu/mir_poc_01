@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-09-07 15:00 JST
+最終更新: 2026-09-07 17:52 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -220,10 +220,16 @@ cleanup removed only `target/debug/incremental`, restoring about 18 GiB free.
 Runtime-only retry 2/2 and full same-feature library 285/285 (82.33s) pass.
 Focused two-crate all-target Clippy with `-Dwarnings` passes; model-target
 dead-code warnings without its private feature are not a deny-lint profile.
-Fresh actual-reconnect validation passes probe 22/22, lifecycle unit 2/2,
-focused private-feature deny-warnings Clippy and format/diff checks. The prior
-runtime/model suites above were not all rerun for this delta. Remaining
-validation is late-authority/order and the full failure matrix.
+The successor slice installs genuine M9 revocation in B before reconnect and
+rejects retained old ingress without owner mutation; A remains pending/unknown.
+G1 control completes once. Registered-B ACK publication, actual tainted A input,
+one-shot ingress and terminal-observation rejection pass independent repair
+review (no remaining P0/P1). Fresh runtime integration 61/61, feature library
+289/289, probe 29/29, private QUIC unit 2/2, focused Clippy and format/diff pass;
+I2 regressions 5/5 + 8/8 and M10 67/67 also pass. The earlier probe lifecycle
+2/2 and model 3/3 remain prior evidence, not new runs. Full failure/order
+coverage remains open; disk free space is about 15 GiB. Next is the bounded
+actual-endpoint/fragments/truncation package, then provider/time contracts.
 
 Owner clarification is retained as a working interpretation: ordinary meaning ->
 generated distribution -> continually checked composition. World/Avatar remain
@@ -272,8 +278,7 @@ requirements, and do not create a new theory gate or roadmap item.
 
 - 2026-09-07 11:38 JST: owner resume accepted at the I3-2 cut; status mirrors
   now designate only I3-3 as active and retain I3-4/I3-5/I3-6/NEXT-0 as inactive.
-- 2026-09-07 15:00 JST: actual reconnect slice, corruption rejection, local
-  misuse rejection, fresh probe 22/22, focused Clippy, lifecycle, format, and
-  diff checks passed; prior model 3/3 evidence was retained, not rerun. Late-
-  authority/order and full-matrix validation remain open without milestone
-  acceptance.
+- 2026-09-07 17:52 JST: genuine revocation/retained-ingress slice passes runtime
+  61/61, feature library 289/289, probe 29/29, QUIC unit 2/2, Clippy/format/diff,
+  I2 5/5 + 8/8 and M10 67/67; independent repair review clears P0/P1. Earlier
+  model evidence is retained, not rerun; I3-3 full-matrix acceptance remains open.

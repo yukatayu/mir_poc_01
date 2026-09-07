@@ -398,6 +398,115 @@ impl M8AuthorityState {
         Ok(())
     }
 
+    /// Exact M8 half of one M9 owner-capability revocation.  It rejects an
+    /// added, removed, or altered unrelated membership/grant/witness record;
+    /// the only permitted delta is the selected live capability and every
+    /// dependent live witness being omitted from this private execution
+    /// snapshot. M9 retains the logical tombstone and owner lineage; the
+    /// accepted M9-to-M8 translation deliberately omits retired rows.
+    pub(crate) fn is_exact_owner_capability_revocation_successor_of(
+        &self,
+        prior: &Self,
+        capability_ref: Option<&str>,
+        witness_ref: Option<&str>,
+    ) -> bool {
+        let (Some(capability_ref), Some(witness_ref)) = (capability_ref, witness_ref) else {
+            return false;
+        };
+        let Some(prior_capability) = prior.capability_grants.get(capability_ref) else {
+            return false;
+        };
+        let Some(prior_witness) = prior.witness_records.get(witness_ref) else {
+            return false;
+        };
+        if !prior_capability.active
+            || !prior_witness.live
+            || prior_witness.capability_ref.as_deref() != Some(capability_ref)
+        {
+            return false;
+        }
+
+        let mut expected = prior.clone();
+        expected.capability_grants.remove(capability_ref);
+        expected
+            .witness_records
+            .retain(|_, witness| witness.capability_ref.as_deref() != Some(capability_ref));
+        self == &expected
+    }
+
+    /// Negative-only I3-3 tamper: restore only the selected, genuinely prior
+    /// active capability into the successor's otherwise omitted M8 inventory.
+    /// It cannot construct a new grant or alter an unrelated record.
+    #[cfg(feature = "i3-process-test-seams")]
+    pub(crate) fn test_only_restore_owner_capability_from_prior_for_i3(
+        &mut self,
+        prior: &Self,
+        capability_ref: Option<&str>,
+        witness_ref: Option<&str>,
+    ) -> bool {
+        let (Some(capability_ref), Some(witness_ref)) = (capability_ref, witness_ref) else {
+            return false;
+        };
+        let Some(prior_grant) = prior.capability_grants.get(capability_ref) else {
+            return false;
+        };
+        let Some(prior_witness) = prior.witness_records.get(witness_ref) else {
+            return false;
+        };
+        if !prior_grant.active
+            || !prior_witness.live
+            || prior_witness.capability_ref.as_deref() != Some(capability_ref)
+            || self.capability_grants.contains_key(capability_ref)
+        {
+            return false;
+        }
+        self.capability_grants
+            .insert(capability_ref.to_string(), prior_grant.clone())
+            .is_none()
+    }
+
+    /// Negative-only I3-3 tamper: restore only the selected, genuinely prior
+    /// live witness into the successor's otherwise omitted M8 inventory.
+    /// It cannot construct a new witness or alter an unrelated record.
+    #[cfg(feature = "i3-process-test-seams")]
+    pub(crate) fn test_only_restore_owner_witness_from_prior_for_i3(
+        &mut self,
+        prior: &Self,
+        capability_ref: Option<&str>,
+        witness_ref: Option<&str>,
+    ) -> bool {
+        let (Some(capability_ref), Some(witness_ref)) = (capability_ref, witness_ref) else {
+            return false;
+        };
+        let Some(prior_capability) = prior.capability_grants.get(capability_ref) else {
+            return false;
+        };
+        let Some(prior_witness) = prior.witness_records.get(witness_ref) else {
+            return false;
+        };
+        if !prior_capability.active
+            || !prior_witness.live
+            || prior_witness.capability_ref.as_deref() != Some(capability_ref)
+            || self.witness_records.contains_key(witness_ref)
+        {
+            return false;
+        }
+        self.witness_records
+            .insert(witness_ref.to_string(), prior_witness.clone())
+            .is_none()
+    }
+
+    /// Negative-only exact-delta falsifier.  It can remove only an existing
+    /// record selected by M9's enclosing test seam; it has no constructor or
+    /// production call path for memberships.
+    #[cfg(feature = "i3-process-test-seams")]
+    pub(crate) fn test_only_remove_existing_membership_for_i3_exact_delta_falsifier(
+        &mut self,
+        membership_ref: &str,
+    ) -> bool {
+        self.memberships.remove(membership_ref).is_some()
+    }
+
     pub(crate) fn validates_relation_use(&self, use_refs: M8RelationAuthorityLookup<'_>) -> bool {
         let (
             Some(membership_ref),

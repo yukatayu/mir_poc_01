@@ -2288,6 +2288,121 @@ pub(crate) struct M9AuthoritySuccessorPublisher {
     fresh_anchor_reacquire_templates: BTreeMap<String, M9FreshAnchorReacquireTemplate>,
 }
 
+/// One uncommitted, M9-produced I3 owner-capability successor.  It retains a
+/// cloned publisher privately at the parent boundary; no process image ever
+/// receives this value or a publisher derived from it.
+pub(crate) struct M9PrestagedOwnerCapabilityRevocation {
+    prior_generation: M9AuthorityGeneration,
+    successor_generation: M9AuthorityGeneration,
+    successor_publisher: M9AuthoritySuccessorPublisher,
+}
+
+impl M9PrestagedOwnerCapabilityRevocation {
+    pub(crate) fn prior_generation(&self) -> &M9AuthorityGeneration {
+        &self.prior_generation
+    }
+
+    pub(crate) fn successor_generation(&self) -> &M9AuthorityGeneration {
+        &self.successor_generation
+    }
+
+    pub(crate) fn remains_exact_owner_capability_revocation_for(
+        &self,
+        operation: &str,
+        owner_locus: &str,
+    ) -> bool {
+        self.successor_generation
+            .is_exact_owner_capability_revocation_successor_of(
+                &self.prior_generation,
+                operation,
+                owner_locus,
+            )
+    }
+
+    /// Consume the provisional stage only at the parent publication
+    /// boundary.  The returned publisher has no constructor outside M9.
+    pub(crate) fn into_successor_publisher(self) -> M9AuthoritySuccessorPublisher {
+        self.successor_publisher
+    }
+
+    #[cfg(feature = "i3-process-test-seams")]
+    pub(crate) fn test_only_append_unrelated_owner_lineage_for_i3(
+        &mut self,
+        operation: &str,
+        owner_locus: &str,
+    ) -> bool {
+        let Some((principal, authority_use)) = self
+            .successor_generation
+            .owner_authority_for_operation(operation, owner_locus)
+        else {
+            return false;
+        };
+        let key = (
+            format!("i3-test-unrelated-owner-lineage:{operation}"),
+            principal.clone(),
+            owner_locus.to_string(),
+        );
+        let source_key = (operation.to_string(), principal, owner_locus.to_string());
+        let Some(lineage) = self
+            .successor_generation
+            .kernel_owner_lineages
+            .get(&source_key)
+            .cloned()
+        else {
+            return false;
+        };
+        self.successor_generation
+            .owner_uses
+            .insert(key.clone(), authority_use);
+        self.successor_generation
+            .kernel_owner_lineages
+            .insert(key, lineage);
+        true
+    }
+
+    #[cfg(feature = "i3-process-test-seams")]
+    pub(crate) fn test_only_reanimate_selected_owner_capability_for_i3(
+        &mut self,
+        operation: &str,
+        owner_locus: &str,
+    ) -> bool {
+        let Some((_, authority_use)) = self
+            .prior_generation
+            .owner_authority_for_operation(operation, owner_locus)
+        else {
+            return false;
+        };
+        self.successor_generation
+            .authority_state
+            .test_only_restore_owner_capability_from_prior_for_i3(
+                &self.prior_generation.authority_state,
+                authority_use.capability_ref(),
+                authority_use.witness_ref(),
+            )
+    }
+
+    #[cfg(feature = "i3-process-test-seams")]
+    pub(crate) fn test_only_reanimate_selected_owner_witness_for_i3(
+        &mut self,
+        operation: &str,
+        owner_locus: &str,
+    ) -> bool {
+        let Some((_, authority_use)) = self
+            .prior_generation
+            .owner_authority_for_operation(operation, owner_locus)
+        else {
+            return false;
+        };
+        self.successor_generation
+            .authority_state
+            .test_only_restore_owner_witness_from_prior_for_i3(
+                &self.prior_generation.authority_state,
+                authority_use.capability_ref(),
+                authority_use.witness_ref(),
+            )
+    }
+}
+
 impl std::fmt::Debug for M9AuthorityGeneration {
     fn fmt(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         formatter
@@ -5257,6 +5372,177 @@ impl M9AuthorityGeneration {
                 .is_subset(&self.designated_consumer_witness_retirements)
     }
 
+    /// Recognize the one bounded I3 owner-capability withdrawal successor.
+    ///
+    /// This is deliberately stricter than the monotone tombstone relation
+    /// used by ordinary lifecycle install.  The I3 coordinator may select
+    /// only an already admitted `(operation, owner_locus)`; M9 resolves the
+    /// principal and retains every unrelated authority fact unchanged.  In
+    /// particular, neither a new authority row nor an observation-counter
+    /// rebase is accepted as part of this prelaunch transition.
+    pub(crate) fn is_exact_owner_capability_revocation_successor_of(
+        &self,
+        prior: &Self,
+        operation: &str,
+        owner_locus: &str,
+    ) -> bool {
+        let Some((principal, prior_use)) =
+            prior.owner_authority_for_operation(operation, owner_locus)
+        else {
+            return false;
+        };
+        let key = (operation.to_string(), principal, owner_locus.to_string());
+        let Some(prior_lineage) = prior.kernel_owner_lineages.get(&key) else {
+            return false;
+        };
+        let Some(successor_lineage) = self.kernel_owner_lineages.get(&key) else {
+            return false;
+        };
+        let Some(successor_use) = self.owner_uses.get(&key) else {
+            return false;
+        };
+        let Some(expected_generation) = prior.generation.checked_add(1) else {
+            return false;
+        };
+
+        // `with_successor_generation_and_revoked_owner_lineage` is the only
+        // M9 constructor for this cut. Keep the expected generation reference
+        // explicit so an otherwise numerically adjacent foreign generation
+        // cannot become an I3 lifecycle candidate.
+        if self.program_identity != prior.program_identity
+            || self.generation != expected_generation
+            || self.generation_ref != format!("m9-authority-generation:{:020}", expected_generation)
+            || prior.revoked_owner_capabilities.contains(&key)
+            || !self.revoked_owner_capabilities.contains(&key)
+            || self.kernel_owner_lineages != prior.kernel_owner_lineages
+            || self.owner_uses != prior.owner_uses
+            || successor_lineage != prior_lineage
+            || successor_use != &prior_use
+            || self.relation_uses != prior.relation_uses
+            || self.fresh_relation_reacquire_bindings != prior.fresh_relation_reacquire_bindings
+            || self.designated_evaluation_uses != prior.designated_evaluation_uses
+            || self.designated_consumption_uses != prior.designated_consumption_uses
+            || self.kernel_designated_remote_input_lineages
+                != prior.kernel_designated_remote_input_lineages
+            || self.revoked_designated_consumption_capabilities
+                != prior.revoked_designated_consumption_capabilities
+            || self.designated_consumer_failures != prior.designated_consumer_failures
+            || self.designated_consumer_witness_retirements
+                != prior.designated_consumer_witness_retirements
+            || self.designated_source_release_failures != prior.designated_source_release_failures
+            || self.designated_consumer_validation_occurrences
+                != prior.designated_consumer_validation_occurrences
+            || self.owner_operation_validation_occurrences
+                != prior.owner_operation_validation_occurrences
+            || self.source_release_validation_occurrences
+                != prior.source_release_validation_occurrences
+        {
+            return false;
+        }
+
+        let mut expected_tombstones = prior.revoked_owner_capabilities.clone();
+        expected_tombstones.insert(key);
+        if self.revoked_owner_capabilities != expected_tombstones {
+            return false;
+        }
+
+        // Check the prior selected use before its M8 records are omitted.
+        // The M9 tombstone remains the logical revocation fact while the
+        // accepted M9-to-M8 translation deliberately removes the selected
+        // capability and dependent witnesses. The exact-delta comparison
+        // therefore rejects both a resurrection and every unrelated M8
+        // inventory mutation.
+        prior
+            .authority_state
+            .validate_owner_use(
+                prior_use.principal(),
+                prior_use.membership_ref(),
+                prior_use.capability_ref(),
+                prior_use.witness_ref(),
+                owner_locus,
+                operation,
+            )
+            .is_ok()
+            && self
+                .authority_state
+                .is_exact_owner_capability_revocation_successor_of(
+                    &prior.authority_state,
+                    prior_use.capability_ref(),
+                    prior_use.witness_ref(),
+                )
+    }
+
+    /// Feature-gated, negative-only exact-delta falsifier for the I3 M9
+    /// unit.  M9 resolves both admitted owner uses and permits removal only
+    /// of the membership belonging to the distinct unrelated owner.  It
+    /// cannot insert a record, choose a raw authority reference, or run in a
+    /// normal build.
+    #[cfg(feature = "i3-process-test-seams")]
+    pub(crate) fn test_only_remove_unrelated_owner_membership_for_i3_exact_delta_falsifier(
+        &mut self,
+        selected_operation: &str,
+        selected_owner_locus: &str,
+        unrelated_operation: &str,
+        unrelated_owner_locus: &str,
+    ) -> bool {
+        let Some((_, selected)) =
+            self.owner_authority_for_operation(selected_operation, selected_owner_locus)
+        else {
+            return false;
+        };
+        let Some((_, unrelated)) =
+            self.owner_authority_for_operation(unrelated_operation, unrelated_owner_locus)
+        else {
+            return false;
+        };
+        let (Some(selected_membership), Some(unrelated_membership)) =
+            (selected.membership_ref(), unrelated.membership_ref())
+        else {
+            return false;
+        };
+        if selected_operation == unrelated_operation
+            || selected_owner_locus == unrelated_owner_locus
+            || selected_membership == unrelated_membership
+        {
+            return false;
+        }
+        self.authority_state
+            .test_only_remove_existing_membership_for_i3_exact_delta_falsifier(unrelated_membership)
+    }
+
+    /// Negative-only I3-3 falsifier for the retained logical owner maps.
+    /// It removes the already tombstoned selected pair only; it cannot add a
+    /// use, choose a principal, or alter M8 authority material.
+    #[cfg(feature = "i3-process-test-seams")]
+    pub(crate) fn test_only_remove_existing_revoked_owner_binding_for_i3_exact_delta_falsifier(
+        &mut self,
+        operation: &str,
+        owner_locus: &str,
+    ) -> bool {
+        let Some((principal, _)) = self.owner_authority_for_operation(operation, owner_locus)
+        else {
+            return false;
+        };
+        let key = (operation.to_string(), principal, owner_locus.to_string());
+        if !self.revoked_owner_capabilities.contains(&key) {
+            return false;
+        }
+        let removed_use = self.owner_uses.remove(&key);
+        let removed_lineage = self.kernel_owner_lineages.remove(&key);
+        match (removed_use, removed_lineage) {
+            (Some(_), Some(_)) => true,
+            (removed_use, removed_lineage) => {
+                if let Some(owner_use) = removed_use {
+                    self.owner_uses.insert(key.clone(), owner_use);
+                }
+                if let Some(lineage) = removed_lineage {
+                    self.kernel_owner_lineages.insert(key, lineage);
+                }
+                false
+            }
+        }
+    }
+
     #[cfg_attr(not(test), allow(dead_code))]
     fn with_successor_generation_and_revoked_owner_lineage(
         mut self,
@@ -5277,6 +5563,12 @@ impl M9AuthorityGeneration {
         }
         self.generation = previous.generation.checked_add(1)?;
         self.generation_ref = format!("m9-authority-generation:{:020}", self.generation);
+        // A fresh M9-to-M8 translation contains only currently live owner
+        // rows. Retain every previously sealed logical owner map here so a
+        // later revocation cannot prune the historical binding that M9's
+        // tombstone and process restriction still require.
+        self.kernel_owner_lineages = previous.kernel_owner_lineages.clone();
+        self.owner_uses = previous.owner_uses.clone();
         self.kernel_owner_lineages
             .insert(key.clone(), prior_lineage);
         self.owner_uses.insert(key.clone(), prior_use);
@@ -5776,6 +6068,41 @@ impl M9AuthoritySuccessorPublisher {
                     active.source_release_validation_occurrences.clone();
                 (rebased.current.clone(), rebased)
             })
+    }
+
+    /// Stage, but do not publish, the one I3 owner-capability successor.
+    /// The caller supplies only an exact checked operation/locus selection;
+    /// M9 resolves its admitted principal, capability, and witness.  The
+    /// original publisher remains at the prior generation until a later
+    /// parent-side acknowledgement commits this returned cloned publisher.
+    pub(crate) fn prestage_exact_owner_capability_revocation(
+        &self,
+        operation: &str,
+        owner_locus: &str,
+    ) -> Result<M9PrestagedOwnerCapabilityRevocation, M9AdmissionDiagnostics> {
+        let prior_generation = self.current.clone();
+        let (principal, _) = prior_generation
+            .owner_authority_for_operation(operation, owner_locus)
+            .ok_or_else(|| {
+                M9AdmissionDiagnostics::one(M9AdmissionErrorKind::InvalidCapabilityLineage)
+            })?;
+        let mut successor_publisher = self.clone();
+        let successor_generation =
+            successor_publisher.revoke_owner_capability(operation, &principal, owner_locus)?;
+        if !successor_generation.is_exact_owner_capability_revocation_successor_of(
+            &prior_generation,
+            operation,
+            owner_locus,
+        ) {
+            return Err(M9AdmissionDiagnostics::one(
+                M9AdmissionErrorKind::InvalidCapabilityLineage,
+            ));
+        }
+        Ok(M9PrestagedOwnerCapabilityRevocation {
+            prior_generation,
+            successor_generation,
+            successor_publisher,
+        })
     }
 
     pub(crate) fn revoke_owner_capability(
@@ -11557,3 +11884,7 @@ impl M9ContractRuntime {
 #[cfg(test)]
 #[path = "m9_auth_verification_unit_tests.rs"]
 mod m9_auth_verification_unit_tests;
+
+#[cfg(test)]
+#[path = "m9_auth_verification_i3_tests.rs"]
+mod m9_auth_verification_i3_tests;

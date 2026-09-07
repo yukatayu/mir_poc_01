@@ -18,7 +18,8 @@ use super::sys5_i3_process_runtime::{
     Sys5I3LocalnetControlErrorKind, Sys5I3LocalnetPeerPreface,
     Sys5I3OriginalOwnerRequestAttemptKind, Sys5I3OriginalOwnerRequestPending,
     Sys5I3PrivateProcessCodec, Sys5I3ProcessMessage, Sys5I3ProcessRuntime,
-    Sys5I3ProcessRuntimeError, Sys5I3TrustedLocalnetControl, strict_json_value,
+    Sys5I3ProcessRuntimeError, Sys5I3TrustedLocalnetControl, Sys5I3UntrustedProcessMessage,
+    strict_json_value,
 };
 
 const MAX_PRIVATE_QUIC_BLOB_BYTES: usize = 64 * 1024;
@@ -148,6 +149,110 @@ impl Sys5I3PrivateQuicRejectedAttemptEvidence {
     }
 }
 
+/// Reference-only evidence for one complete session-one frame retained by the
+/// adapter before any semantic admission.  It deliberately cannot report a
+/// decoded carrier's source, Core, artifact, edge, identity, or authority
+/// assertions: those remain unavailable until a later successful runtime
+/// admission.
+#[doc(hidden)]
+#[derive(Clone, Debug, PartialEq, Eq)]
+pub struct Sys5I3PrivateQuicPendingIngressEvidence {
+    session_attempt_generation: u8,
+    candidate_commitment_ref: String,
+    network_occurrence_ref: String,
+}
+
+impl Sys5I3PrivateQuicPendingIngressEvidence {
+    pub const fn session_attempt_generation(&self) -> u8 {
+        self.session_attempt_generation
+    }
+
+    pub fn candidate_commitment_ref(&self) -> &str {
+        &self.candidate_commitment_ref
+    }
+
+    pub fn network_occurrence_ref(&self) -> &str {
+        &self.network_occurrence_ref
+    }
+}
+
+/// One adapter-owned complete frame read on the verified initial session but
+/// not offered to the runtime until the one consuming reconnect session.
+///
+/// This type deliberately implements neither `Clone` nor `Debug`.  Its
+/// decoded candidate, frame bytes, and existing trusted-control binding
+/// remain private to this adapter.  The only observer-safe view is the
+/// reference record returned by `observer_safe_evidence`.
+#[doc(hidden)]
+pub struct Sys5I3PrivateQuicPendingIngress {
+    bytes: Vec<u8>,
+    candidate: Sys5I3UntrustedProcessMessage,
+    session_attempt_generation: u8,
+    control_binding: Sys5I3LocalnetPeerPreface,
+    candidate_commitment_ref: String,
+    network_occurrence_ref: String,
+}
+
+impl Sys5I3PrivateQuicPendingIngress {
+    pub fn observer_safe_evidence(&self) -> Sys5I3PrivateQuicPendingIngressEvidence {
+        Sys5I3PrivateQuicPendingIngressEvidence {
+            session_attempt_generation: self.session_attempt_generation,
+            candidate_commitment_ref: self.candidate_commitment_ref.clone(),
+            network_occurrence_ref: self.network_occurrence_ref.clone(),
+        }
+    }
+}
+
+/// One session-owned permit for the sole retained session-one ingress.  It is
+/// intentionally private: the adapter alone reserves it before a read and
+/// consumes it before semantic admission, so a caller cannot manufacture or
+/// replay an ingress right.
+enum Sys5I3PrivateQuicPendingIngressPermit {
+    Unacquired,
+    Reserved,
+    Completed { network_occurrence_ref: String },
+    Consumed,
+}
+
+impl Sys5I3PrivateQuicPendingIngressPermit {
+    fn reserve_acquisition(&mut self) -> Result<(), Sys5I3PrivateQuicError> {
+        if !matches!(self, Self::Unacquired) {
+            return Err(Sys5I3PrivateQuicError::LocalAttemptRejected);
+        }
+        *self = Self::Reserved;
+        Ok(())
+    }
+
+    fn complete_acquisition(
+        &mut self,
+        network_occurrence_ref: &str,
+    ) -> Result<(), Sys5I3PrivateQuicError> {
+        if !matches!(self, Self::Reserved) || network_occurrence_ref.is_empty() {
+            return Err(Sys5I3PrivateQuicError::LocalAttemptRejected);
+        }
+        *self = Self::Completed {
+            network_occurrence_ref: network_occurrence_ref.to_string(),
+        };
+        Ok(())
+    }
+
+    fn consume_completed(
+        &mut self,
+        network_occurrence_ref: &str,
+    ) -> Result<(), Sys5I3PrivateQuicError> {
+        if !matches!(
+            self,
+            Self::Completed {
+                network_occurrence_ref: expected,
+            } if expected == network_occurrence_ref
+        ) {
+            return Err(Sys5I3PrivateQuicError::LocalAttemptRejected);
+        }
+        *self = Self::Consumed;
+        Ok(())
+    }
+}
+
 /// Observer-safe evidence derived from an actual one-stream send or receive.
 /// It contains references only; the adapter never exports carrier bytes.
 #[doc(hidden)]
@@ -235,6 +340,7 @@ pub struct Sys5I3PrivateQuicSession {
     peer_preface_verified: bool,
     session_attempt_generation: u8,
     next_network_occurrence: u64,
+    pending_ingress_permit: Sys5I3PrivateQuicPendingIngressPermit,
 }
 
 /// A consuming private reconnect capability.  It transfers the sole retained
@@ -245,6 +351,7 @@ pub struct Sys5I3PrivateQuicReconnect {
     control: Sys5I3TrustedLocalnetControl,
     prior_session_attempt_generation: u8,
     next_network_occurrence: u64,
+    pending_ingress_permit: Sys5I3PrivateQuicPendingIngressPermit,
 }
 
 /// A reply result that either consumes the original pending handle exactly
@@ -285,6 +392,7 @@ impl Sys5I3PrivateQuicSession {
             peer_preface_verified: false,
             session_attempt_generation: 1,
             next_network_occurrence: 0,
+            pending_ingress_permit: Sys5I3PrivateQuicPendingIngressPermit::Unacquired,
         })
     }
 
@@ -308,6 +416,7 @@ impl Sys5I3PrivateQuicSession {
             peer_preface_verified: false,
             session_attempt_generation: 1,
             next_network_occurrence: 0,
+            pending_ingress_permit: Sys5I3PrivateQuicPendingIngressPermit::Unacquired,
         })
     }
 
@@ -319,6 +428,7 @@ impl Sys5I3PrivateQuicSession {
             control: self.control,
             prior_session_attempt_generation: self.session_attempt_generation,
             next_network_occurrence: self.next_network_occurrence,
+            pending_ingress_permit: self.pending_ingress_permit,
         }
     }
 
@@ -504,6 +614,127 @@ impl Sys5I3PrivateQuicSession {
                 candidate_commitment_ref,
                 semantic_request_identity_ref,
                 linked_request_identity_ref,
+                source_ref: lineage.source_ref,
+                core_ref: lineage.core_ref,
+                source_artifact_ref: lineage.source_artifact_ref,
+                target_artifact_ref: lineage.target_artifact_ref,
+                edge_ref: lineage.edge_ref,
+                network_occurrence_ref,
+            },
+        ))
+    }
+
+    /// Read one complete frame from the verified initial session without
+    /// semantic admission.  The returned opaque value is the sole retained
+    /// frame; it cannot be cloned, decoded by a caller, or supplied to a
+    /// different run/control/session.
+    pub async fn receive_complete_pending_ingress(
+        &mut self,
+    ) -> Result<Sys5I3PrivateQuicPendingIngress, Sys5I3PrivateQuicError> {
+        if !self.peer_spki_verified || !self.peer_preface_verified {
+            return Err(Sys5I3PrivateQuicError::peer_binding_rejected(
+                self.control.expected_peer_spki_ref(),
+            ));
+        }
+        if self.session_attempt_generation != 1 {
+            return Err(Sys5I3PrivateQuicError::LocalAttemptRejected);
+        }
+        // Reserve before the first await so cancellation, partial reads, and
+        // codec failure cannot reopen this session-one acquisition.
+        self.pending_ingress_permit.reserve_acquisition()?;
+        let bytes = self.read_blob().await?;
+        let candidate_commitment_ref = self.candidate_commitment_ref_for_frame(&bytes);
+        let network_occurrence_ref =
+            self.reserve_network_occurrence_ref("receive", &candidate_commitment_ref)?;
+        let candidate = Sys5I3PrivateProcessCodec::private_provisional_v1()
+            .decode_untrusted_message(&bytes)
+            .map_err(|_| Sys5I3PrivateQuicError::CodecRejected)?;
+        self.pending_ingress_permit
+            .complete_acquisition(&network_occurrence_ref)?;
+        Ok(Sys5I3PrivateQuicPendingIngress {
+            bytes,
+            candidate,
+            session_attempt_generation: self.session_attempt_generation,
+            // This is the existing trusted transport control rendered as its
+            // exact preface binding.  It is retained opaquely and compared
+            // only by the adapter on session two; it conveys no authority.
+            control_binding: self.control.localnet_preface(),
+            candidate_commitment_ref,
+            network_occurrence_ref,
+        })
+    }
+
+    /// Consume one retained, verified session-one ingress on the exact
+    /// successor session.  It performs no additional read, send, retry, or
+    /// occurrence reservation.  A rejected semantic admission exposes only
+    /// the receiver-owned session-one commitment/occurrence; full delivery
+    /// lineage is constructed solely after the runtime accepts the candidate.
+    pub fn admit_retained_pending_ingress(
+        &mut self,
+        runtime: &mut Sys5I3ProcessRuntime,
+        pending: Sys5I3PrivateQuicPendingIngress,
+    ) -> Result<
+        (
+            Option<Sys5I3ProcessMessage>,
+            Sys5I3PrivateQuicDeliveryEvidence,
+        ),
+        Sys5I3PrivateQuicError,
+    > {
+        if !self.peer_spki_verified || !self.peer_preface_verified {
+            return Err(Sys5I3PrivateQuicError::peer_binding_rejected(
+                self.control.expected_peer_spki_ref(),
+            ));
+        }
+        let reconnect_control_binding = self.control.localnet_preface();
+        if !retained_ingress_matches_reconnect_binding(
+            pending.session_attempt_generation,
+            &pending.control_binding,
+            self.session_attempt_generation,
+            &reconnect_control_binding,
+        ) {
+            return Err(Sys5I3PrivateQuicError::LocalAttemptRejected);
+        }
+        // The exact inherited permit is consumed before semantic handoff.
+        // A runtime rejection therefore cannot reopen or replace this ingress.
+        self.pending_ingress_permit
+            .consume_completed(&pending.network_occurrence_ref)?;
+        let Sys5I3PrivateQuicPendingIngress {
+            bytes,
+            candidate,
+            session_attempt_generation: _,
+            control_binding: _,
+            candidate_commitment_ref,
+            network_occurrence_ref,
+        } = pending;
+        // Keep all decoded lineage local until the runtime has bound this
+        // candidate to its current sealed image.  Any rejection below returns
+        // neither the manifest nor carrier provenance.
+        let admitted = runtime
+            .admit_decoded_process_message(candidate)
+            .map_err(|error| Sys5I3PrivateQuicError::SemanticRejected {
+                error,
+                rejected_attempt: Sys5I3PrivateQuicRejectedAttemptEvidence {
+                    rejected_candidate_commitment_ref: candidate_commitment_ref.clone(),
+                    network_occurrence_ref: network_occurrence_ref.clone(),
+                },
+            })?;
+        // The retained bytes are re-decoded only after successful semantic
+        // admission so the pending value never exports candidate lineage.
+        // This is not a second ingress or admission path.
+        let lineage = carrier_lineage(&bytes)?;
+        let manifest = Sys5I3PrivateProcessCodec::private_provisional_v1()
+            .decode_untrusted_message(&bytes)
+            .map_err(|_| Sys5I3PrivateQuicError::CodecRejected)?
+            .observer_safe_manifest();
+        Ok((
+            admitted,
+            Sys5I3PrivateQuicDeliveryEvidence {
+                carrier_ref: carrier_ref(&bytes),
+                candidate_commitment_ref,
+                semantic_request_identity_ref: manifest.semantic_request_identity_ref().to_string(),
+                linked_request_identity_ref: manifest
+                    .linked_request_identity_ref()
+                    .map(str::to_string),
                 source_ref: lineage.source_ref,
                 core_ref: lineage.core_ref,
                 source_artifact_ref: lineage.source_artifact_ref,
@@ -737,6 +968,7 @@ impl Sys5I3PrivateQuicReconnect {
             control,
             prior_session_attempt_generation,
             next_network_occurrence,
+            pending_ingress_permit,
         } = self;
         let session_attempt_generation =
             next_reconnect_session_attempt_generation(prior_session_attempt_generation)?;
@@ -754,6 +986,7 @@ impl Sys5I3PrivateQuicReconnect {
             peer_preface_verified: false,
             session_attempt_generation,
             next_network_occurrence,
+            pending_ingress_permit,
         })
     }
 
@@ -767,6 +1000,7 @@ impl Sys5I3PrivateQuicReconnect {
             control,
             prior_session_attempt_generation,
             next_network_occurrence,
+            pending_ingress_permit,
         } = self;
         let session_attempt_generation =
             next_reconnect_session_attempt_generation(prior_session_attempt_generation)?;
@@ -784,6 +1018,7 @@ impl Sys5I3PrivateQuicReconnect {
             peer_preface_verified: false,
             session_attempt_generation,
             next_network_occurrence,
+            pending_ingress_permit,
         })
     }
 }
@@ -795,6 +1030,23 @@ fn next_reconnect_session_attempt_generation(
         .checked_add(1)
         .filter(|generation| *generation <= MAX_PRIVATE_QUIC_SESSION_ATTEMPTS)
         .ok_or(Sys5I3PrivateQuicError::SessionAttemptExhausted)
+}
+
+/// The exact non-semantic transport check that keeps a complete session-one
+/// frame tied to the consuming session-two control.  The retained preface is
+/// an existing control binding, not an authority, credential, or candidate
+/// fact; this predicate creates neither an ingress right nor a semantic
+/// admission result.
+fn retained_ingress_matches_reconnect_binding(
+    retained_session_attempt_generation: u8,
+    retained_control_binding: &Sys5I3LocalnetPeerPreface,
+    reconnect_session_attempt_generation: u8,
+    reconnect_control_binding: &Sys5I3LocalnetPeerPreface,
+) -> bool {
+    retained_session_attempt_generation == 1
+        && reconnect_session_attempt_generation
+            == retained_session_attempt_generation.saturating_add(1)
+        && retained_control_binding == reconnect_control_binding
 }
 
 fn carrier_ref(bytes: &[u8]) -> String {
@@ -925,3 +1177,7 @@ fn peer_leaf_ref(certificate: &[u8]) -> String {
         hasher.finalize()
     )
 }
+
+#[cfg(test)]
+#[path = "sys5_i3_private_quic_tests.rs"]
+mod sys5_i3_private_quic_tests;

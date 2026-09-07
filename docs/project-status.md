@@ -1,6 +1,6 @@
 # Project status
 
-最終更新: 2026-09-07 15:00 JST
+最終更新: 2026-09-07 17:52 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -93,10 +93,14 @@ dead-code warnings without its private feature are not a deny-lint profile.
 The actual reconnect slice covers two live OS processes: the pre-write path
 consumes one checked receipt; in the separate post-admission path, retry after
 a lost reply is duplicate-rejected while the requester remains pending/ambiguous.
-Fresh probe 22/22, lifecycle unit 2/2, focused deny-warnings Clippy and format/
-diff checks pass, including corruption and local-misuse rejection.
-Remaining validation is late-authority/order and the full failure matrix;
-I3-4 remains inactive.
+The successor slice installs genuine M9 revocation before reconnect and rejects
+retained old ingress without owner mutation, keeping A pending. G1 completes
+once; registered-B ACK publication, actual tainted A input, one-shot ingress
+and terminal validation pass independent repair review (no remaining P0/P1).
+Fresh runtime integration 61/61, feature library 289/289, probe 29/29, private
+QUIC unit 2/2, focused Clippy and format/diff pass. Earlier probe lifecycle
+2/2 is prior evidence. I2/M10 regressions pass (5/5, 8/8, 67/67). Remaining
+authority/order and full failure-matrix validation stay open; I3-4 is inactive.
 
 Detailed edge contracts: [`mirrorea_canon/architecture/07-browser-host-trust-boundaries.md`](../mirrorea_canon/architecture/07-browser-host-trust-boundaries.md).
 Cross-edge binding/freshness/revocation/redaction/resource rules: [`mirrorea_canon/architecture/08-browser-host-security-invariants.md`](../mirrorea_canon/architecture/08-browser-host-security-invariants.md).
