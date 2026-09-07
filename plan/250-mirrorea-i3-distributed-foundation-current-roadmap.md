@@ -1,6 +1,6 @@
 # Plan 250 — Mirrorea I3 Distributed Foundation current execution roadmap
 
-最終更新: 2026-09-07 17:52 JST
+最終更新: 2026-09-07 18:13 JST
 
 ## 役割、authority、current control state
 
@@ -52,10 +52,16 @@ roadmap/status pointer の一致を検証する。
   ADR-0040; ADR-0039 remains the immutable I3-2 acceptance/pause record
 - sole current roadmap: **Plan 250**
 - completed goals: **ALIGN-0, ALIGN-1, ALIGN-2, I3-0, I3-1, I3-2**
-- execution state: **resumed original bounded program through NEXT-0**
+- execution state: **execute through I3-3 acceptance, then owner-requested pause**
 - sole active semantic milestone: **I3-3**
-- next goal: **I3-4 (inactive until I3-3 acceptance)**
+- next goal: **I3-4 (requires I3-3 acceptance and explicit owner resume)**
 - all other milestones: **ordered, inactive, and dependency-gated**
+- latest owner control (2026-09-07 18:13 JST observation): complete I3-3 with
+  validation, independent review, commit/push and remote parity, then stop.
+  The earlier through-NEXT-0 execution instruction is superseded only at this
+  pause boundary; original program scope and fixed remaining order are unchanged.
+  I3-3 is active until accepted; afterward Plan 250 remains the authorized
+  paused roadmap with no active semantic milestone, neither blocked nor closed.
 - Plan 247: closed M0--M10 execution record / regression baseline
 - Plan 249: closed SYS-0--SYS-7 execution record / accepted I2 baseline
 - official lifecycle at program start: theory **T1**; broad PHASE-I1
@@ -232,12 +238,15 @@ active milestone accepted
   -> its one report is complete
   -> required validation and independent review pass
   -> accepted evidence/integration commit is pushed and remote parity checked
-  -> roadmap/status pointers advance to exactly one next active milestone
+  -> absent an explicit owner pause, advance to exactly one next active milestone
 
 After an accepted milestone, an explicit owner pause retains Plan 250 as the
 current roadmap but leaves no active semantic milestone; the next milestone
 remains inactive until an explicit resume and a fresh cut/parity recheck.
 ```
+
+The current owner instruction schedules this exception immediately after
+I3-3 acceptance. I3-4 must not activate automatically.
 
 No next milestone implementation begins before this transition. Planning,
 tests, formal obligations, and source work may run concurrently only inside the
@@ -905,8 +914,9 @@ product integration; upper-domain/Core promotion or satellite collapse.
 
 **Entry and resume cut:** I3-2 is accepted at source/evidence cut
 `19c5b386613d6adb1f0b934e6ced81acb327d245`, with ADR-0039, architecture/10 and
-Report 2605 as inputs. Explicit owner direction resumes the original program
-through NEXT-0 under PROPOSAL-043 / ADR-0040. At the resume baseline
+Report 2605 as inputs. Historical owner direction resumed the original program
+through NEXT-0 under PROPOSAL-043 / ADR-0040; the latest instruction schedules
+a pause after I3-3 acceptance without changing that program's scope. At the resume baseline
 `648425f6bd4304d003d36bc04d346ddf0e78c058`, `HEAD == origin/main` and the
 worktree was clean. Parent-reported fresh baseline evidence passed localnet
 12/12 and probe package 62/62, with no orphan children. This is retained I3-2
@@ -976,12 +986,13 @@ ambiguous-delivery/duplicate identity tests; stale membership/capability/
 witness and late-session negatives; trace/order correspondence; preserved
 I2/M10 regression; independent concurrency, distributed-systems, semantic, and
 security review; Report 2606; accepted source/evidence and integration commits
-pushed with parity; advance exactly to I3-4.
+pushed with parity; apply the owner-requested pause with I3-4 inactive.
 
 **Stop condition / reopen:** Close only when the complete failure/order
 inventory, its positive/falsifier evidence, fresh applicable regressions,
 independent review and accepted source/integration cut satisfy the common
-milestone contract; then activate only I3-4. Stop if the selected transport cannot expose a required
+milestone contract; then stop and report the accepted boundary, leaving I3-4
+inactive until explicit owner resume. Stop earlier if the selected transport cannot expose a required
 failure/order distinction without changing Mir semantics, or if safe progress
 requires hidden retry/exactly-once. Reopen for any failure-atomicity,
 linearization, stale-resurrection, or bounded-termination counterexample.
@@ -997,7 +1008,7 @@ These are parts of I3-3, not new milestones or independent active queues.
 | 1. Contract and seam inventory | accepted architecture/09--10, ADR-0039, plan/05 and Report 2605; map every failure family and ordering edge to actual admission/serve/result/receipt boundaries | parent integrates Canon; mapper/planner advisory | exact 20-family inventory; operation-specific duplicate policy; request-bound ambiguity states; controls cannot mint semantic inputs |
 | 2. Runtime fault and order refinement | phase 1 mapping; explicit before/after-admission fault controls and dependency checks on accepted generated dispatch | one production implementation owner; separate test owner | positive/control and falsifier executions; exact joins, mutation/consume counts or bounded uncertainty; reject blind retry, stale lineage and fake coverage |
 | 3. Full matrix and finite ordering evidence | phase 2 behavior; complete all 20 families and the preserved ordering inventory | test/evaluation owners; bounded model owner only where needed | all families bound to meaningful execution; finite scheduler assumptions and runtime/model/deferred classifications; quiescent positive plus in-flight negative without durability implementation |
-| 4. Acceptance and I3-4 handoff | phases 1--3, fresh applicable I2/M10 and I3 regression | parent acceptance; independent semantics/security/concurrency reviewer; status/report owners | one Report 2606, no unresolved P0/P1; disposition material P2; Canon acceptance and required validation; accepted commits/push/parity before I3-4 activation |
+| 4. Acceptance and owner pause | phases 1--3, fresh applicable I2/M10 and I3 regression | parent acceptance; independent semantics/security/concurrency reviewer; status/report owners | one Report 2606, no unresolved P0/P1; disposition material P2; Canon acceptance and required validation; accepted commits/push/parity, then no active milestone; I3-4 requires explicit resume |
 
 **UNRESOLVED implementation questions:** Which accepted operation returns its
 stored decision and which rejects a duplicate; how each exact request retains
@@ -1053,7 +1064,7 @@ package, followed by contract-first provider/time work (still OPEN). All 20
 families and remaining ordering obligations remain required; no later milestone
 or general harness framework is activated.
 
-## I3-4 milestone contract — inactive until I3-3 closes
+## I3-4 milestone contract — inactive until I3-3 closes and owner resumes
 
 **Goal:** Produce actual C-distributed positive and representative falsifier
 evidence for frozen SCN-01, SCN-02, SCN-03, and SCN-06, plus bounded maintained-
@@ -1061,6 +1072,7 @@ relation and designated-result cross-process pressure, without theorem or
 product overclaim.
 
 **Entry:** I3-3 failure/order boundary accepted, Report 2606, pushed parity,
+explicit owner resume after the scheduled I3-3 pause,
 current goal I3-4, and all scenario execution uses generated artifacts and the
 actual multi-process adapter.
 
@@ -1387,9 +1399,9 @@ integration, or Typed-Effect platform collapse.
 
 ## Recommended next action
 
-Execute I3-3 phase 1 at the verified resume cut: map all 20 failure families and
-the ordering inventory to the accepted generated-artifact runtime, pin
-operation-specific duplicate/ambiguity behavior, then implement and validate
-bounded actual fault controls. Preserve the parent goal and fixed sequence
-through NEXT-0. I3-4 remains inactive until I3-3 evidence, independent review,
-acceptance and remote parity close; subsequent milestones activate one at a time.
+Continue the bounded endpoint/fragments/truncation package from `cb050be2`,
+then resolve the provider/time contracts and complete the remaining I3-3
+failure/order inventory. Preserve all 20 families, applicable regressions and
+independent acceptance review. After I3-3 commit/push and remote parity, stop
+and report the accepted boundary. I3-4 remains inactive until explicit owner
+resume; the original fixed program through NEXT-0 is neither removed nor closed.

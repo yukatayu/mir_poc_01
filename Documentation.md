@@ -21,6 +21,11 @@ sole current roadmap、ALIGN-0, ALIGN-1, ALIGN-2, I3-0, I3-1 and I3-2 completed;
 memoryです。現在の停止線は
 `docs/project-status.md`、`progress.md`、`tasks.md` で確認します。
 
+最新のowner指示は、I3-3を検証・独立レビュー・commit/push・remote parityまで
+完了して一旦停止することです。I3-4には明示的なresumeなしで進みません。
+現在はI3-3 active、受理後はPlan 250を保持してactive milestoneなしとし、
+program完了やblockedとは区別します。
+
 ALIGN-2 の受理済み境界は
 [`architecture/07-browser-host-trust-boundaries.md`](mirrorea_canon/architecture/07-browser-host-trust-boundaries.md)
 と共通security record

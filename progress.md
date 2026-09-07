@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-09-07 17:52 JST
+最終更新: 2026-09-07 18:13 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -15,6 +15,11 @@ authorize the active bounded Mirrorea I3 Distributed Foundation program;
 Plan 250 is the sole current roadmap. ALIGN-0, ALIGN-1, ALIGN-2, I3-0 and I3-1
 are completed; I3-2 is accepted and the owner has resumed execution at I3-3. I3-4, I3-5,
 I3-6, and NEXT-0 remain inactive and dependency-gated.
+
+Latest owner control: finish I3-3 through required validation, independent
+review, commit/push and parity, then pause. I3-4 requires explicit owner resume.
+Until I3-3 acceptance it remains the sole active milestone; afterward Plan 250
+is retained with no active semantic milestone, not blocked or program-closed.
 
 ## project axis
 
@@ -238,6 +243,10 @@ closed-cohort finite-profile machinery are bounded evidence, not general Mir
 requirements, and do not create a new theory gate or roadmap item.
 
 ## recent log
+
+- 2026-09-07 18:13 JST: owner schedules pause after complete I3-3 acceptance,
+  validation/review and push/parity; I3-4 will require explicit resume. Current
+  I3-3 work and all failure/order requirements remain unchanged.
 
 - 2026-09-02 02:52 JST: I3-0 equal TLS/TCP and QUIC actual-process canaries
   passed the bounded nine-case floor; PROPOSAL-040 / ADR-0037 selected private

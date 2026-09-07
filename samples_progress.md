@@ -1,6 +1,10 @@
 # samples_progress
 
-Last updated: 2026-09-07 17:52 JST
+Last updated: 2026-09-07 18:13 JST
+
+Current execution control: I3-3 remains active; after its complete acceptance,
+validation/review and commit/push/parity, pause with I3-4 inactive until explicit
+owner resume. No sample, program completion or lifecycle claim follows.
 
 Workflow focus: current-L2 runnable floor, practical alpha-1 evidence, bounded
 operational α-0.5 / α-0.8 / α-0.9 workflows, product alpha-1 release candidate,

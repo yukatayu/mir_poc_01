@@ -1,6 +1,6 @@
 # Current Task Map (LAB)
 
-最終更新: 2026-09-07 17:52 JST
+最終更新: 2026-09-07 18:13 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -22,6 +22,11 @@ resumed at its accepted cut. PROPOSAL-037 / ADR-0034 authorize the bounded
 Mirrorea I3 Distributed Foundation program. ALIGN-0, ALIGN-1, ALIGN-2 and I3-0
 are completed, and I3-1 is closed by ADR-0038. I3-2 is accepted at the bounded FM-5 source/evidence cut. The fixed sequence remains ALIGN-0..2 → I3-0..6 → NEXT-0; I3-4/I3-5/I3-6/NEXT-0 are dependency-gated inactive.
 Official I3 lifecycle entry is not claimed.
+
+Latest owner instruction schedules a pause after I3-3 acceptance, required
+validation/review, commit/push and parity. Do not activate I3-4 without explicit
+owner resume. I3-3 remains active now; after acceptance retain Plan 250 with no
+active milestone, neither blocked nor program-closed.
 
 PROPOSAL-040 / ADR-0037 resolve OPEN-032 only for this bounded program and
 select QUIC reliable stream as the private adapter. Both TLS/TCP
@@ -93,7 +98,8 @@ I3-2 elapsed time is not used as an active-work estimate.
 ## ordered self-driven packages
 
 I3-3 is the only active semantic milestone; I3-1 and I3-2 are closed bounded evidence. Later packages become active one at a time after the
-preceding report, validation, review, commit/push and remote parity close:
+preceding report, validation, review, commit/push and remote parity close;
+the scheduled pause after I3-3 additionally requires explicit owner resume:
 
 | Order | Package | Capability / evidence | Current state / rough estimate |
 |---|---|---|---|

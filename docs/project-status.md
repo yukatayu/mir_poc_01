@@ -1,11 +1,16 @@
 # Project status
 
-最終更新: 2026-09-07 17:52 JST
+最終更新: 2026-09-07 18:13 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
 `mirrorea_canon/` is LAB: evidence, history, implementation, and operational
 notes. If LAB text conflicts with canon, canon wins.
+
+Owner control: finish I3-3 through validation, independent review, commit/push
+and parity, then pause. I3-4 requires explicit owner resume. This does not
+weaken I3-3's gates, close the program or mark it blocked; I3-3 remains active
+until acceptance, after which Plan 250 is retained with no active milestone.
 
 ## この文書の役割
 

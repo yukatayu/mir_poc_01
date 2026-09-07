@@ -16,6 +16,25 @@ request-bound retry/ambiguity, Mir ordering refinement, owner preservation,
 typed/redacted evidence and bounded termination. I3-4 is the direct consumer.
 The original Plan 250 parent objective and sequence through NEXT-0 are unchanged.
 
+Latest owner execution control (recorded at `2026-09-07T18:13:00+09:00`):
+complete I3-3 with its full evidence, independent review, commit/push and
+remote parity, then stop and report. I3-4 must not activate without explicit
+owner resume. This supersedes automatic continuation only, not the original
+program scope or the 20-family/order gates. I3-3 remains active now; after
+acceptance retain Plan 250 with no active semantic milestone. The user controls
+the goal pause; do not represent this as blocked, stale or whole-program
+completion. Independent pre-edit planner review confirms the existing
+ADR-0040/PROPOSAL-043/operating-model pause exception permits this control.
+The I3-3 acceptance record will carry the effective pause; historical ADRs are
+not rewritten now.
+
+Independent final control-diff review finds no P0/P1 scope inconsistency.
+Fresh `make docs` passes (agent configuration, 210 Canon files, 800 hierarchy
+paths, 1760 reports), as does `git diff --check`. The material owner-stop
+instruction is committed separately from the in-progress adapter delivery
+implementation; that documentation commit does not claim those new tests pass
+or pause the currently active I3-3 work.
+
 ## Scope and assumptions
 
 The explicit owner instruction resumes the ADR-0034 program at I3-3 only.
@@ -878,6 +897,42 @@ or complete failure/order inventory. This review is read-only and does not
 rerun execution evidence. The parent may pin this reviewed checkpoint and
 continue without a program pause.
 
+The next bounded delivery assignment starts from clean committed cut
+`cb050be23be6bc2cbc420b24f8d8c583503d6fff`. It reuses the existing source
+request, selected QUIC blob codec, child lifecycle and observer joins. Complete
+fragmented writes remain ordinary success; strict truncation must produce an
+actual receiver frame failure before decode/admission, with no receiver source
+lineage invented from incomplete bytes. A truncated sender has attempted a
+write and cannot be labeled `RequestCarrierWriteNotAttempted`. Endpoint
+unavailability must reach actual connection failure and known owner-side
+nonadmission, not infer nonmutation from a missing child or count the parent
+reaper deadline as the semantic timeout family. The separate source and test
+owners first agree minimal private controls, then the sole evaluator captures
+RED before production implementation. No new Core, public wire, retry policy,
+general control protocol or network-packet fragmentation claim is introduced.
+
+The selected control design is one private adapter-delivery profile, mutually
+exclusive with existing disconnect/retry/late-ingress schedules. Folding a
+successful fragmented send into the older fault enum is rejected because it
+would blur normal completion and the distinct connection/frame failures.
+`EndpointClosedBeforeConnect` names the actual order: B closes its bound
+endpoint before A connects to the subsequently reported address. Its bounded
+adapter connection outcome is not the still-OPEN semantic time contract.
+The main review requires an actual runtime-produced write observation for the
+complete-frame positive: using the normal whole-frame path must not leave
+the fragmentation test green. Only completed controlled writes may supply
+that observation; normal delivery has none. This adds no bytes, dynamic frame
+length, packet-boundary or semantic-authority claim to observer output.
+
+The three new probe tests then produce compile-only RED: the focused
+`i3_3_complete_generated_request_in_two_application_writes_preserves_the_exact_source_bound_round_trip`
+filter on the existing probe integration target exits 101 with 17 missing-API
+errors (two exports, profile builder and observer/terminal getters). No test
+executes. This opens the bounded production implementation gate; it is not
+runtime fault evidence. Disk remains 15 GiB free. Runtime QUIC and probe
+production writers retain disjoint ownership, separate from the test author
+and sole Cargo evaluator.
+
 Two further ACK checks are required before acceptance: the completion must
 carry the complete independent run/cohort/slot/program/projection/closure/
 generation/kind/candidate binding through to cohort publication, not just
@@ -1210,6 +1265,13 @@ The actual-reconnect slice was subsequently committed and pushed as
 matched HEAD and the worktree was clean before this successor-slice update.
 This is another source/evidence checkpoint within active I3-3, not milestone
 acceptance or I3-4 activation.
+
+The genuine-revocation/retained-ingress slice and its reviewed repairs are
+committed and pushed as `cb050be23be6bc2cbc420b24f8d8c583503d6fff`
+(`feat: revalidate retained I3 ingress after genuine revocation`). Fresh
+`git ls-remote origin refs/heads/main` matched HEAD at
+`2026-09-07T18:00:05+09:00`, and the worktree was clean before the next
+delivery assignment. This is an I3-3 checkpoint, not milestone acceptance.
 
 ## Sub-agent session close status
 
