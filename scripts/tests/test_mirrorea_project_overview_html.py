@@ -87,8 +87,8 @@ class MirroreaProjectOverviewHtmlTests(unittest.TestCase):
             "PROPOSAL-037 / ADR-0034",
             "Mirrorea I3 Distributed Foundation bounded program",
             "Plan 250がsole current roadmap",
-            "Mirrorea I3 Distributed Foundation / I3-2 accepted, owner-paused",
-            "ALIGN-0 / ALIGN-1 / ALIGN-2 / I3-0 / I3-1 / I3-2 completed、no active semantic milestone",
+            "Mirrorea I3 Distributed Foundation / I3-2 accepted, I3-3 active",
+            "ALIGN-0 / ALIGN-1 / ALIGN-2 / I3-0 / I3-1 / I3-2 completed、I3-4/I3-5/I3-6/NEXT-0はdependency-gated inactive",
             "official I3 lifecycle entryは未受理",
             "official I3 lifecycle entryとproductionは主張しません",
             "closed / SYS-3",
@@ -215,7 +215,7 @@ class MirroreaProjectOverviewHtmlTests(unittest.TestCase):
             "T1 checked untrusted Mir package",
             "package admission",
             "semantic grant",
-            "I3-2 accepted, owner-paused",
+            "I3-2 accepted, I3-3 active",
             "ADR-0037",
             "QUIC reliable streamをprivate provisional adapterに選択",
             "TLS-over-TCP framed reliable streamはdeferred baseline",
@@ -363,7 +363,7 @@ class MirroreaProjectOverviewHtmlTests(unittest.TestCase):
         self.assert_contains_marker(documentation, "Plan 250 sole roadmap", "Documentation I3 program status")
         self.assert_contains_marker(
             documentation,
-            "ALIGN-0--2, I3-0/I3-1 and I3-2 completed; no active semantic milestone.",
+            "ALIGN-0--2, I3-0/I3-1 and I3-2 completed; owner resume activates I3-3 only. I3-4/I3-5/I3-6/NEXT-0 remain dependency-gated inactive.",
             "Documentation I3 program status",
         )
         self.assert_contains_marker(

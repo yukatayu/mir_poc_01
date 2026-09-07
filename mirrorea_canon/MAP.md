@@ -47,7 +47,7 @@ plan/ (Gate 0-7 → Phase T0-T2, I1-I6; ADR-0034 consumes I3 entry contract)   m
 
 - **理論筋**(体系を理解・拡張する): NORTH-STAR → adr → DESIGN-CONSTITUTION → theory/00 → 01 → (関心の章) → 11 → scenarios。
 - **実装筋**(toolchain を作る): spec/02..15 → architecture/03..04 → architecture/09 → architecture/10 → scenarios → plan/01 の該当 Phase → plan/05 I3 boundary。
-- **運用筋**(進め方を知る): plan/00..05 → meta/agent-instructions → adr/ADR-0012 → adr/ADR-0014 → adr/ADR-0015 → adr/ADR-0026 → adr/ADR-0027 → adr/ADR-0028 → adr/ADR-0029 → adr/ADR-0030 → adr/ADR-0031 → adr/ADR-0032 → adr/ADR-0033 → adr/ADR-0034 → adr/ADR-0035 → adr/ADR-0036 → adr/ADR-0037 → meta/proposals/PROPOSAL-041 → adr/ADR-0038 → meta/proposals/PROPOSAL-042 → adr/ADR-0039。
+- **運用筋**(進め方を知る): plan/00..05 → meta/agent-instructions → adr/ADR-0012 → adr/ADR-0014 → adr/ADR-0015 → adr/ADR-0026 → adr/ADR-0027 → adr/ADR-0028 → adr/ADR-0029 → adr/ADR-0030 → adr/ADR-0031 → adr/ADR-0032 → adr/ADR-0033 → adr/ADR-0034 → adr/ADR-0035 → adr/ADR-0036 → adr/ADR-0037 → meta/proposals/PROPOSAL-041 → adr/ADR-0038 → meta/proposals/PROPOSAL-042 → adr/ADR-0039 → meta/proposals/PROPOSAL-043 → adr/ADR-0040。
 
 Mir Theory v0 / I1+ Milestones 0--10 は ADR-0015--0025 と
 PROPOSAL-018--028 に従って完走した。accepted finite reference-profile の正本は
@@ -149,7 +149,7 @@ canaryでcriteria 1--7がtieし、criterion 8 implementation/library maturityと
 cross-platform maintainabilityにauditable/tested winnerがないことを確認した。最初の
 material differenceであるcriterion 10 future browser relevanceによりQUIC reliable
 streamをprivate selected adapterとした。TLS-over-TCP framed reliable streamはrejected/
-deferred replacement baseline、QUIC datagramはexcludedのままである。PROPOSAL-041 / ADR-0038でI3-1、PROPOSAL-042 / ADR-0039でI3-2をcompletedとした。program executionはowner pause中でactive semantic milestoneはなく、I3-3はexplicit resumeまでinactiveである。OPEN-032はこのbounded programだけresolvedした。
+deferred replacement baseline、QUIC datagramはexcludedのままである。PROPOSAL-041 / ADR-0038でI3-1、PROPOSAL-042 / ADR-0039でI3-2をcompletedとし、PROPOSAL-043 / ADR-0040でowner instructionによるresumeを記録した。I3-3のみactive、I3-4以降は固定順序に従いinactiveである。OPEN-032はこのbounded programだけresolvedした。
 これはpublic wire/API freeze又はofficial I3 lifecycle entryではなく、theory T1とbroad
 I1 residualは不変である。
 

@@ -52,3 +52,4 @@ open_items: []
 | ADR-0037 | 同条件actual-process canaryと固定criteria後にprivate QUIC reliable streamを選択しI3-0 close、I3-1 active | L1 |
 | ADR-0038 | I3-1 private adapter/encodingを受理しI3-1 close、I3-2をsole active goalとする | L1 |
 | ADR-0039 | I3-2 source-first two-process runtimeを受理し、I3-3をinactiveのままprogram executionをowner pauseする | L1 |
+| ADR-0040 | owner instructionによりADR-0034 / Plan 250を再開し、I3-3をsole active milestoneとする | L1 |

@@ -17,7 +17,7 @@ I3 roadmap は `plan/250-mirrorea-i3-distributed-foundation-current-roadmap.md`�
 下の `plan/` 索引は時系列の LAB repository memory です。索引にある候補や過去の
 「次」は current queue を意味しません。Plan 247とPlan 249はclosed execution
 recordsである。PROPOSAL-037 / ADR-0034によりI3 bounded programがactive、Plan 250が
-sole current roadmap、ALIGN-0, ALIGN-1, ALIGN-2, I3-0, I3-1 and I3-2 completed; execution is owner-paused after I3-2 with no active semantic milestone. I3-3 is next/inactive until explicit resume. older plansもhistorical
+sole current roadmap、ALIGN-0, ALIGN-1, ALIGN-2, I3-0, I3-1 and I3-2 completed; owner resumeによりI3-3のみactive。I3-4, I3-5, I3-6 and NEXT-0はdependency-gated inactive。older plansもhistorical
 memoryです。現在の停止線は
 `docs/project-status.md`、`progress.md`、`tasks.md` で確認します。
 
@@ -238,7 +238,7 @@ Mir、Mirrorea、PrismCascade、Typed-Effect Wiring Platform は関連します�
   exitを適用した。PROPOSAL-036 / ADR-0033 / Canon plan 05 は transport-neutralな
   inactive I3 entry contractを記録し、SYS-7とprogramをclosedした。OPEN-026/027とfull
   carrier freezeは残り、broad PHASE-I1は未受理です。現在はPROPOSAL-037 / ADR-0034の
-  bounded programとPlan 250がcurrentだがI3-2 close後はowner pause中で、program外だけがADR-0014のbounded L3 route、
+  bounded programとPlan 250がcurrentでI3-3 active、program外だけがADR-0014のbounded L3 route、
   L2 promotionは引き続きfail-closedです。
 - reader-facing な統合図は `docs/mirrorea-project-overview.html`、短い現在地は
   `docs/project-status.md`、proof status は Canon ledger、runnable LAB evidence は
@@ -253,7 +253,7 @@ Mir、Mirrorea、PrismCascade、Typed-Effect Wiring Platform は関連します�
 | T2 | OBL-020/021/002 skeleton・G5 statement | not reopened; general T2 obligations unchanged, while SYS-2/3 add bounded OBL-058/059/060 only |
 | I1 | 単一 process reference implementation | finite deterministic reference profile accepted by M10 R5, but broad PHASE-I1 exit / public contract are not claimed |
 | I2 | process 内 multi-place | ADR-0032 accepted official entry then exit from SYS-3--SYS-6 evidence; ADR-0033 closed SYS-7/program |
-| I3 | 実 socket transport | bounded I3-2 evidence accepted; owner-paused with no active semantic milestone; lifecycle entry not official; I3-3 next/inactive |
+| I3 | 実 socket transport | bounded I3-2 evidence accepted; I3-3 active; I3-4..I3-6/NEXT-0 dependency-gated inactive; lifecycle entry not official |
 | I4-I6 | 永続/patch、View、分散永続/federation | 後段 |
 
 M10 の finite acceptance は broad I1 exit や I2 entry の代用ではありません。ADR-0026 /
@@ -269,8 +269,8 @@ recordが揃ったためofficial I2 entry後exitを受理しました。broad PH
 - done: SYS-0--SYS-7 and the ADR-0026 / Plan 249 program are closed. Accepted
   SYS-6 implementation/evidence cut is `5429712d...`, Canon/status integration
   cut is `bcb0f767...`, and official I2 entry then exit is accepted.
-- in-progress but owner-paused: PROPOSAL-037 / ADR-0034 bounded I3 program; Plan 250 sole roadmap;
-  ALIGN-0--2, I3-0/I3-1 and I3-2 completed; no active semantic milestone. I3-3 is next/inactive until explicit resume.
+- in-progress: PROPOSAL-037 / ADR-0034 bounded I3 program; Plan 250 sole roadmap;
+  ALIGN-0--2, I3-0/I3-1 and I3-2 completed; owner resume activates I3-3 only. I3-4/I3-5/I3-6/NEXT-0 remain dependency-gated inactive.
 - decisions taken: ALIGN-1 accepted the independent three-axis project/product
   map; PL-4 remains responsibility-only, PL-6 remains separate, and satellites
   remain outside the numbered product layers.
@@ -295,9 +295,11 @@ recordが揃ったためofficial I2 entry後exitを受理しました。broad PH
   SYS-5/SYS-6 CLI/JSON/grammar are internal/provisional, the four-locus toy is
   not whole-workflow OW1, and the evidence is not a general scheduler,
   memory-model, relation-DAG, public transport, or lifecycle theorem.
-- verification status: accepted SYS-6 evidence is cut `5429712d...`, Report
-  2598, focused 25+8 / 28 / 28 / 104 / 62 / M10 67+4, full workspace,
-  format/Clippy/diff, and final independent ACCEPT.
+- verification status: accepted I3-2 regression evidence remains the cached
+  localnet 12/12 and package 62/62 result at the pinned cut; no I3-3 tests are
+  claimed. Focused overview HTML tests were run and currently fail only on
+  stale pause-era assertions in the test source, which was not edited under the
+  no-test-source-change constraint.
 
 ## Historical plan index（Plan 249を含めrepository memory、current queueではない）
 

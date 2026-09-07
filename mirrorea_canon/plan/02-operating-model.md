@@ -2,8 +2,8 @@
 id: plan/02-operating-model
 status: L1-fixed
 maturity: reviewed
-depends_on: [adr/ADR-0012, adr/ADR-0014, adr/ADR-0015, adr/ADR-0026, adr/ADR-0033, adr/ADR-0034, adr/ADR-0035, adr/ADR-0036, adr/ADR-0037, adr/ADR-0038, adr/ADR-0039, meta/proposal-042]
-summary: owner-paused ADR-0034 program、三軸/trust/private adapter/two-process acceptance、program外L3 research、goal/frontier/review規律。
+depends_on: [adr/ADR-0012, adr/ADR-0014, adr/ADR-0015, adr/ADR-0026, adr/ADR-0033, adr/ADR-0034, adr/ADR-0035, adr/ADR-0036, adr/ADR-0037, adr/ADR-0038, adr/ADR-0039, adr/ADR-0040, meta/proposal-042, meta/proposal-043]
+summary: ADR-0040で再開したADR-0034 program、三軸/trust/private adapter/two-process acceptance、program外L3 research、goal/frontier/review規律。
 open_items: []
 ---
 
@@ -16,8 +16,8 @@ Four profiles are deliberately separate.
 1. **Mirrorea I3 Distributed Foundation** follows ADR-0034 and
    PROPOSAL-037. Its fixed sequence is ALIGN-0--2, I3-0--6, NEXT-0; Plan 250
    is its sole current roadmap. ALIGN-0/1/2 and I3-0/1/2 are completed under
-   ADR-0039. Execution is owner-paused, no semantic milestone is active and
-   I3-3 remains inactive until explicit resume.
+   the accepted cuts through ADR-0039. ADR-0040 resumes execution; I3-3 is the sole active semantic
+   milestone, and I3-4 through NEXT-0 remain inactive.
 2. **Mirrorea I2 Systems Foundation SYS-0--SYS-7** followed ADR-0026 and
    PROPOSAL-029. It is closed by ADR-0033; its accepted cuts and Plan 249 are
    immutable history/regression baseline and grant no I3 or successor authority.
@@ -29,7 +29,8 @@ Four profiles are deliberately separate.
    fail-closed while the owner-authenticated trust anchor is absent.
 
 ADR-0033 / plan/05 remains the accepted I3 entry boundary consumed by
-PROPOSAL-037 / ADR-0034. Program activation is not official I3 entry or exit.
+PROPOSAL-037 / ADR-0034. PROPOSAL-043 / ADR-0040 records the explicit resume;
+program activation is not official I3 entry or exit.
 
 Neither profile changes `canon > LAB`. An agent's filesystem write capability
 is not semantic authority.
@@ -78,8 +79,8 @@ An explicit owner pause after an accepted milestone is the sole exception to
 the one-active-frontier rule: the authorized program and its one roadmap remain
 current, but no semantic milestone is active and the fixed next milestone stays
 inactive until explicit resume. The pause is not `blocked`, `stale`, program
-close or official lifecycle transition. ADR-0039 applies this exception after
-I3-2 with I3-3 next/inactive.
+close or official lifecycle transition. ADR-0039 applied this exception after
+I3-2; ADR-0040 satisfies it and resumes I3-3.
 
 `progress.md`, `tasks.md`, `docs/project-status.md`, and `Documentation.md` are
 derived snapshots. Older numbered plans remain repository memory and are not a

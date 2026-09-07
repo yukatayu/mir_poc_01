@@ -18,6 +18,12 @@ open_items: []
 
 ## 履歴
 
+- **2026-09-07** PROPOSAL-043 / ADR-0040により、owner instructionをsource cut
+  `648425f6bd4304d003d36bc04d346ddf0e78c058`へ固定し、ADR-0034 / Plan 250の元の固定順を
+  NEXT-0まで再開した。I3-3のみをsole active semantic milestoneとし、I3-4以降は固定順序に
+  従いinactiveとする。これはresume-only decisionであり、I3-2 acceptance、authority / failure /
+  ordering semantics、transport選択、official I3 lifecycle、theory T1、broad I1 residualを変更しない。
+
 - **2026-09-02** PROPOSAL-042 / ADR-0039 / architecture/10でI3-2を
   source/evidence cut `19c5b386...`としてclosedした。ordinary sourceをsupervisorで
   一度build/check/admitし、derived imageだけを二つのactual `exec` childへ配置、private

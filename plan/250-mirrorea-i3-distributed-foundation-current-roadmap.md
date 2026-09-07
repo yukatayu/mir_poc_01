@@ -1,6 +1,6 @@
 # Plan 250 — Mirrorea I3 Distributed Foundation current execution roadmap
 
-最終更新: 2026-09-02 20:00 JST
+最終更新: 2026-09-07 11:37 JST
 
 ## 役割、authority、current control state
 
@@ -46,10 +46,15 @@ roadmap/status pointer の一致を検証する。
   (the milestone integration commit cannot embed its own future hash)
 - accepted I3-2 two-process source/evidence cut: `19c5b386613d6adb1f0b934e6ced81acb327d245`
 - accepted I3-2 Canon/status integration cut: `ab038f277d3cfd5ae1db2ad3e1fbc0147dfe0180`
+- owner-resume baseline cut: `648425f6bd4304d003d36bc04d346ddf0e78c058`
+  (`HEAD == origin/main`, clean before this task; 2026-09-07)
+- resume authority: explicit owner direction, mirrored by PROPOSAL-043 /
+  ADR-0040; ADR-0039 remains the immutable I3-2 acceptance/pause record
 - sole current roadmap: **Plan 250**
 - completed goals: **ALIGN-0, ALIGN-1, ALIGN-2, I3-0, I3-1, I3-2**
-- execution state: **owner-paused after I3-2; no active semantic milestone**
-- next goal after explicit resume: **I3-3 (inactive until resume)**
+- execution state: **resumed original bounded program through NEXT-0**
+- sole active semantic milestone: **I3-3**
+- next goal: **I3-4 (inactive until I3-3 acceptance)**
 - all other milestones: **ordered, inactive, and dependency-gated**
 - Plan 247: closed M0--M10 execution record / regression baseline
 - Plan 249: closed SYS-0--SYS-7 execution record / accepted I2 baseline
@@ -77,17 +82,19 @@ Normative direction for this roadmap is read in the following order:
 1. `mirrorea_canon/README.md`, `MAP.md`, `NORTH-STAR.md`, and
    `DESIGN-CONSTITUTION.md`;
 2. `mirrorea_canon/architecture/01-strata.md` through
-   `architecture/09-i3-private-adapter.md`;
+   `architecture/10-i3-multi-process-runtime.md`;
 3. `mirrorea_canon/plan/00-gates.md`, `plan/01-phases.md`, and
    `plan/05-i3-entry-contract.md`;
-4. ADR-0026, ADR-0028 through ADR-0038, PROPOSAL-037 through PROPOSAL-041, and
+4. ADR-0026, ADR-0028 through ADR-0040, PROPOSAL-037 through PROPOSAL-043, and
    `mirrorea_canon/theory/11-metatheory-ledger.md`; and
 5. the owner-authorized PROPOSAL-037 / ADR-0034 activation mirror and the
-   milestone acceptance chain through PROPOSAL-041 / ADR-0038.
+   milestone acceptance chain through PROPOSAL-042 / ADR-0039, followed by
+   the PROPOSAL-043 / ADR-0040 execution-resume record.
 
 LAB evidence is `progress.md`, `tasks.md`,
 `.docs/progress-task-axes.md`, closed Plan 249, and milestone Reports
-2598--2604. If LAB wording conflicts with Canon, Canon wins. The owner direction
+2598--2605; Report 2606 is the ongoing I3-3 record, not acceptance evidence.
+If LAB wording conflicts with Canon, Canon wins. The owner direction
 supplies new program authority but does not silently rewrite an existing Canon
 semantic invariant.
 
@@ -258,8 +265,8 @@ and are exactly one per milestone:
 | ALIGN-2 | `docs/reports/2602-mirrorea-i3-distributed-foundation-align2-trust-boundaries.md` | completed |
 | I3-0 | `docs/reports/2603-mirrorea-i3-distributed-foundation-i3-0-transport-selection.md` | completed |
 | I3-1 | `docs/reports/2604-mirrorea-i3-distributed-foundation-i3-1-adapter-encoding.md` | completed; ADR-0038 |
-| I3-2 | `docs/reports/2605-mirrorea-i3-distributed-foundation-i3-2-two-process-runtime.md` | completed/accepted; owner-paused |
-| I3-3 | `docs/reports/2606-mirrorea-i3-distributed-foundation-i3-3-failure-ordering.md` | inactive |
+| I3-2 | `docs/reports/2605-mirrorea-i3-distributed-foundation-i3-2-two-process-runtime.md` | completed/accepted; historical pause superseded by ADR-0040 |
+| I3-3 | `docs/reports/2606-mirrorea-i3-distributed-foundation-i3-3-failure-ordering.md` | active; ongoing, not accepted |
 | I3-4 | `docs/reports/2607-mirrorea-i3-distributed-foundation-i3-4-c-distributed-scenarios.md` | inactive |
 | I3-5 | `docs/reports/2608-mirrorea-i3-distributed-foundation-i3-5-devtools-workflow.md` | inactive |
 | I3-6 | `docs/reports/2609-mirrorea-i3-distributed-foundation-i3-6-conformance-lifecycle.md` | inactive |
@@ -754,7 +761,7 @@ carrier meaning change outside the program. Reopen for ambiguous decoding,
 allocation before limit checks, semantic defaulting, secret leakage or
 replacement-seam failure.
 
-## I3-2 milestone contract — completed/accepted; owner-paused after close
+## I3-2 milestone contract — completed/accepted; historical pause after close
 
 **Goal ID:** I3-2
 
@@ -796,7 +803,8 @@ Report 2605 and remote parity.
 
 **Close result:** Positive/falsifier evidence passed with no P0/P1 at source/evidence cut
 `19c5b386613d6adb1f0b934e6ced81acb327d245`; Report 2605 records the exact bounded
-scope and non-claims. Execution is now owner-paused; this is neither blocked nor stale.
+scope and non-claims. ADR-0039 recorded an owner pause at close; ADR-0040
+subsequently resumes execution at I3-3 without reopening this accepted cut.
 
 **Stop condition:** Close when positive/falsifier evidence passes with no P0/P1
 and I3-3 can consume the runtime seam. Reopen for source-free routing,
@@ -828,18 +836,82 @@ hidden shared state, unsafe cleanup, or production/deployment requirement.
 Reopen for a reproducible route/owner/provenance mismatch or process boundary
 that the I3-3 fault harness cannot control deterministically.
 
-## I3-3 milestone contract — next; inactive until explicit owner/user resume
+## I3-3 detailed Goal Statement — active
 
-**Goal:** Close the required network failure, explicit retry/ambiguity, and Mir
-ordering-refinement boundary on the actual multi-process runtime without stale
-resurrection or exactly-once overclaim.
+**Goal ID:** I3-3
 
-**Entry:** I3-2 multi-process route accepted, Report 2605, pushed parity,
-explicit owner/user resume, current goal I3-3, and fault injection controls cannot supply semantic facts.
+**Goal sentence:** By the end of this milestone, the accepted source-derived
+multi-process runtime executes all 20 required network failure families and
+their controls with typed, request-bound retry/ambiguity and explicit Mir
+ordering refinement, preserving owner-local mutation, authority, provenance,
+redaction and bounded termination so I3-4 can run its C-distributed scenarios.
+
+**Layer advanced:** Semantic S4 Projection/fabric over replaceable S6 Host,
+preserving S0 Surface/S1 Core authority and S2 Trace/S3 Verify evidence; bounded
+S5 sample vocabulary stays outside Core. Project/product PL-2 Mirrorea fabric
+consumes PL-1 checked semantics and PL-0 process/network delivery; PL-3
+Browser/Host, PL-4 Shared-Space, PL-5 kits/apps and PL-6 Reversed Library are
+not implemented. Lifecycle remains the resumed ADR-0034 bounded program,
+theory T1, broad PHASE-I1 unaccepted and official I2 exit accepted. Official I3
+entry/exit remains an I3-6 acceptance action, not a consequence of this resume.
+
+**North Star link:** Make communication derived from ordinary checked source
+correct under actual process/network faults, with explicit verification and
+typed/redacted observation, while preserving the checked evolution boundary.
+Network schedules and handwritten interfaces do not become semantic authority.
+
+**User-visible outcome:** A maintainer can rerun finite positive/control and
+fault cases on the accepted local two-process QUIC route and inspect typed
+outcomes and observer-safe source/Core/artifact/request/network/runtime joins.
+The evidence distinguishes pre-admission rejection, possible post-admission
+execution, operation-specific duplicate handling and rejected late traffic.
+The joined end-user workflow remains I3-5's direct task after I3-4.
+
+**Semantic invariants:** Ordinary source, checked Core and generated plans own
+semantic edges, operations, authority and provenance. Mutation remains
+owner-local; stores remain process-local. Certificate, connection, session,
+stream, process, route, retry token and timing cannot grant authority. Retired
+membership/epoch/incarnation/capability/witness and fallback/consume lineage
+cannot resurrect. Retry is explicit and operation-specific: stored-result /
+no-new-consume where the accepted operation permits it, or typed duplicate
+rejection; there is no universal replay policy or global exactly-once claim.
+Post-admission ambiguity stays bound to the original request and never proves
+nonmutation, clean success or permission for blind retry. Mir dependency,
+frontier and provenance justify semantic order; stream order cannot substitute.
+Failure atomicity applies at the declared semantic boundary, and observer
+output preserves label/authority/redaction without exposing private material.
+
+**Direct consumer:** I3-4 consumes this executable failure/order boundary for
+SCN-01/02/03/06 C-distributed cases and bounded relation/designated-result
+cross-process pressure; it remains inactive until I3-3 is accepted.
+
+**Non-goals:** Changing the parent goal or fixed remaining milestone sequence;
+accepting I3-4 scenarios or I3-5 workflow early; official I3 entry/exit; broad
+theory or ledger promotion; universal retry, hidden transaction or exactly-once;
+public grammar/CLI/API/ABI/codec/wire freeze; QUIC datagrams; WAN/production
+support; general scheduling/fairness/security/durability proof; durable
+save/load or live distributed patch implementation; Browser/Host/provider
+product integration; upper-domain/Core promotion or satellite collapse.
+
+**Entry and resume cut:** I3-2 is accepted at source/evidence cut
+`19c5b386613d6adb1f0b934e6ced81acb327d245`, with ADR-0039, architecture/10 and
+Report 2605 as inputs. Explicit owner direction resumes the original program
+through NEXT-0 under PROPOSAL-043 / ADR-0040. At the resume baseline
+`648425f6bd4304d003d36bc04d346ddf0e78c058`, `HEAD == origin/main` and the
+worktree was clean. Parent-reported fresh baseline evidence passed localnet
+12/12 and probe package 62/62, with no orphan children. This is retained I3-2
+regression evidence, not new I3-3 acceptance. Only I3-3 becomes active; fault
+controls must not supply semantic facts.
 
 **Required failure matrix:** Every row needs a positive/control path, a typed
 negative outcome, no forbidden semantic mutation, exact request/provenance
 binding, and bounded termination.
+
+All 20 families below must be executed at meaningful runtime/admission/adapter
+boundaries. A harness-selected label or a report row without a bound execution
+is not coverage. Each family records the reached boundary, triggering input,
+actual typed result, mutation/consume evidence and request/provenance join;
+post-admission cases report observed mutation or bounded uncertainty explicitly.
 
 | Condition family | Required result / invariant |
 | --- | --- |
@@ -866,7 +938,10 @@ binding, and bounded termination.
 
 Retry records initiator, reason, authorization, original request identity, and
 whether the operation returns a stored decision or rejects duplication.
-Ambiguous delivery is not silently retried or reported as success.
+Ambiguous delivery is not silently retried or reported as success. The final
+patch/cut/save family may use a positive quiescent admission boundary and an
+in-flight typed rejection/late-traffic falsifier. It must exercise the actual
+boundary, but does not require durability or live distributed patch machinery.
 
 **Required ordering refinement:** Concrete occurrences must justify local
 eligibility -> request -> send admission -> transmission -> complete receive ->
@@ -878,15 +953,14 @@ dispatch, verdict->activation, fallback->later-access, and cut/quiescence->later
 transition. Late old-session traffic is rejected or placed by an explicit
 current dependency.
 
-**Direct consumer:** I3-4 runs frozen C-distributed scenarios and added
-cross-process semantic pressure only after this failure/order contract is
-executable.
-
 **Primary falsifier:** Blind retry, false success, second mutation, unbounded
 hang/buffer, stale lineage resurrection, stream-order-as-Mir-order, missing
-linearization/provenance, or a typed network failure that mutates semantic state.
+linearization/provenance, harness-label-only coverage, or a pre-admission typed
+rejection that nevertheless mutates owner state. Post-admission ambiguity
+cannot be relabeled as proof of nonmutation.
 
-**Exit and validation:** Executed matrix with deterministic fault controls;
+**Exit evidence and validation:** All 20 families have executed positive/control
+and typed negative cases at meaningful boundaries with deterministic fault controls;
 bounded scheduler/order model where used and exactly classified; retry/
 ambiguous-delivery/duplicate identity tests; stale membership/capability/
 witness and late-session negatives; trace/order correspondence; preserved
@@ -894,10 +968,43 @@ I2/M10 regression; independent concurrency, distributed-systems, semantic, and
 security review; Report 2606; accepted source/evidence and integration commits
 pushed with parity; advance exactly to I3-4.
 
-**Stop/reopen:** Stop if the selected transport cannot expose a required
+**Stop condition / reopen:** Close only when the complete failure/order
+inventory, its positive/falsifier evidence, fresh applicable regressions,
+independent review and accepted source/integration cut satisfy the common
+milestone contract; then activate only I3-4. Stop if the selected transport cannot expose a required
 failure/order distinction without changing Mir semantics, or if safe progress
 requires hidden retry/exactly-once. Reopen for any failure-atomicity,
 linearization, stale-resurrection, or bounded-termination counterexample.
+The program-wide owner-reserved stops still apply; ordinary implementation
+uncertainty or a missing general proof does not itself require owner input.
+
+### I3-3 ordered work phases, ownership and decision checkpoints
+
+These are parts of I3-3, not new milestones or independent active queues.
+
+| Phase | Dependency and bounded work | Ownership | Evidence / checkpoint |
+| --- | --- | --- | --- |
+| 1. Contract and seam inventory | accepted architecture/09--10, ADR-0039, plan/05 and Report 2605; map every failure family and ordering edge to actual admission/serve/result/receipt boundaries | parent integrates Canon; mapper/planner advisory | exact 20-family inventory; operation-specific duplicate policy; request-bound ambiguity states; controls cannot mint semantic inputs |
+| 2. Runtime fault and order refinement | phase 1 mapping; explicit before/after-admission fault controls and dependency checks on accepted generated dispatch | one production implementation owner; separate test owner | positive/control and falsifier executions; exact joins, mutation/consume counts or bounded uncertainty; reject blind retry, stale lineage and fake coverage |
+| 3. Full matrix and finite ordering evidence | phase 2 behavior; complete all 20 families and the preserved ordering inventory | test/evaluation owners; bounded model owner only where needed | all families bound to meaningful execution; finite scheduler assumptions and runtime/model/deferred classifications; quiescent positive plus in-flight negative without durability implementation |
+| 4. Acceptance and I3-4 handoff | phases 1--3, fresh applicable I2/M10 and I3 regression | parent acceptance; independent semantics/security/concurrency reviewer; status/report owners | one Report 2606, no unresolved P0/P1; disposition material P2; Canon acceptance and required validation; accepted commits/push/parity before I3-4 activation |
+
+**UNRESOLVED implementation questions:** Which accepted operation returns its
+stored decision and which rejects a duplicate; how each exact request retains
+an observer-safe ambiguity witness across a new session; which explicit
+dependency/frontier admits or rejects reordered traffic; and the smallest
+finite boundary controls needed to exercise authority/provider/time/cut rows.
+Resolve these against accepted operation contracts within I3-3, comparing the
+current candidate with at most one smallest viable alternative. Do not choose
+a universal retry policy, infer nonmutation after admission, omit a difficult
+family, or activate durability/product work to simplify evidence.
+
+**Adoption/discard rule:** Retain a refinement only when its real execution and
+falsifier preserve the source-bound operation contract and all required edges.
+Discard label-only evidence or a candidate that creates authority, hidden retry,
+second consume or false success; reopen I3-2 only for its named reproducible
+runtime-seam counterexample. Record implementation questions and evidence in
+Report 2606 rather than creating a resume report or adjacent roadmap.
 
 ## I3-4 milestone contract — inactive until I3-3 closes
 
@@ -1233,9 +1340,9 @@ integration, or Typed-Effect platform collapse.
 
 ## Recommended next action
 
-Hold execution at the owner pause after accepted I3-2. On explicit resume,
-recheck source/evidence cut and remote parity, then activate I3-3 only: consume
-the accepted runtime for typed network failure, retry/ambiguity, reconnect and
-ordering evidence. Add no manual route, direct cross-process store, authority
-mint, public wire promise, hidden retry/exactly-once or production/platform
-claim.
+Execute I3-3 phase 1 at the verified resume cut: map all 20 failure families and
+the ordering inventory to the accepted generated-artifact runtime, pin
+operation-specific duplicate/ambiguity behavior, then implement and validate
+bounded actual fault controls. Preserve the parent goal and fixed sequence
+through NEXT-0. I3-4 remains inactive until I3-3 evidence, independent review,
+acceptance and remote parity close; subsequent milestones activate one at a time.

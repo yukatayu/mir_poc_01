@@ -1,6 +1,6 @@
 # Current Task Map (LAB)
 
-最終更新: 2026-09-02 20:00 JST
+最終更新: 2026-09-07 11:38 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -17,10 +17,10 @@ milestone or Canon L2 promotion.
 
 ## current promoted package
 
-**None while owner-paused.** I3-2 is a completed/accepted inventory item, not
-an active or promoted semantic package. PROPOSAL-037 / ADR-0034 authorize the bounded
+**I3-3 active.** I3-2 is a completed/accepted inventory item; the owner has
+resumed at its accepted cut. PROPOSAL-037 / ADR-0034 authorize the bounded
 Mirrorea I3 Distributed Foundation program. ALIGN-0, ALIGN-1, ALIGN-2 and I3-0
-are completed, and I3-1 is closed by ADR-0038. I3-2 is accepted at the bounded FM-5 source/evidence cut. The fixed sequence remains ALIGN-0..2 → I3-0..6 → NEXT-0; no semantic milestone is active while paused.
+are completed, and I3-1 is closed by ADR-0038. I3-2 is accepted at the bounded FM-5 source/evidence cut. The fixed sequence remains ALIGN-0..2 → I3-0..6 → NEXT-0; I3-4/I3-5/I3-6/NEXT-0 are dependency-gated inactive.
 Official I3 lifecycle entry is not claimed.
 
 PROPOSAL-040 / ADR-0037 resolve OPEN-032 only for this bounded program and
@@ -32,28 +32,41 @@ was the first material difference. TLS-over-TCP is retained as a rejected/deferr
 comparison and replacement baseline. QUIC
 datagrams remain excluded.
 
+### Accepted input history: I3-2
+
 I3-2 launched at least two independent OS processes from accepted generated
-per-locus artifacts and dispatch remote owner work through the accepted private
-QUIC adapter. Deployment data may map only logical loci to process/endpoint;
+per-locus artifacts and dispatched remote owner work through the accepted private
+QUIC adapter. Deployment data mapped only logical loci to process/endpoint;
 communication edges, owner operations, authority, state, arguments and
-occurrence identity remain checked-artifact facts. The runtime must preserve
-source/Core/artifact/carrier/network correspondence, prohibit a shared remote
-store, and terminate/reap all processes deterministically.
+occurrence identity remained checked-artifact facts. The runtime preserved
+source/Core/artifact/carrier/network correspondence, prohibited a shared remote
+store, and terminated/reaped all processes deterministically. This is accepted
+input history, not the promoted I3-3 goal.
 
-Direct consumer: I3-3 network failure/order refinement consumes the I3-2 runtime after explicit resume.
+### Active goal: I3-3 network failure, retry, and ordering refinement
 
-Primary falsifier: the launcher reparses source or injects a route, owner,
-authority, argument or expected result; two processes share a semantic store;
-the requester performs owner mutation; or shutdown leaves an orphan process or
-bound endpoint.
+Direct consumer: I3-4 C-distributed scenarios and cross-process semantic
+pressure consume the I3-3 matrix after acceptance.
 
-Sources: `mirrorea_canon/adr/ADR-0039.md`, `docs/reports/2605-mirrorea-i3-distributed-foundation-i3-2-two-process-runtime.md`,
-`mirrorea_canon/plan/05-i3-entry-contract.md`, and
-`plan/250-mirrorea-i3-distributed-foundation-current-roadmap.md`.
+Scope: execute all 20 required network failure families against the accepted
+generated-artifact runtime; make retry and ambiguous delivery request-bound and
+operation-specific; refine concrete occurrences to Mir dependency/frontier/
+provenance order rather than stream order; preserve owner-local mutation,
+authority, provenance, redaction, and bounded termination.
+
+Primary falsifier: second mutation or consume, stale resurrection, false
+unavailable or false success, blind/universal retry, lost redaction, or an
+unbounded/orphaned resource or lifecycle.
+
+Sources: `plan/250-mirrorea-i3-distributed-foundation-current-roadmap.md`,
+`docs/reports/2606-mirrorea-i3-distributed-foundation-i3-3-failure-ordering.md`,
+`mirrorea_canon/adr/ADR-0039.md`, and
+`mirrorea_canon/plan/05-i3-entry-contract.md`. I3-2 evidence remains the
+input history in Report 2605, not the active goal.
 
 ## ordered self-driven packages
 
-No semantic milestone is active during the owner pause; I3-1 and I3-2 are closed bounded evidence. Later packages become active one at a time after the
+I3-3 is the only active semantic milestone; I3-1 and I3-2 are closed bounded evidence. Later packages become active one at a time after the
 preceding report, validation, review, commit/push and remote parity close:
 
 | Order | Package | Capability / evidence | Current state / rough estimate |
@@ -64,9 +77,10 @@ preceding report, validation, review, commit/push and remote parity close:
 | 4 | I3-0 | equal transport canaries and selected private adapter | completed; Macro 6 front |
 | 5 | I3-1 | checked private encoding/adapter/admission | completed by ADR-0038; bounded evidence |
 | 6 | I3-2 | generated-artifact two-or-more-process owner runtime | completed/accepted FM-5; Macro 6 middle, heavy |
-| 7 | I3-3 / I3-4 | full finite fault/order matrix and C-distributed scenarios | next but inactive until explicit resume; Macro 5/6 middle, heavy |
-| 8 | I3-5 / I3-6 | joined workflow and finite conformance/lifecycle close | later; Macro 6/7 close, heavy |
-| 9 | NEXT-0 | two separate inactive I4/I5 entry contracts only | reserve path, short |
+| 7 | I3-3 | all 20 failure families, explicit retry/ambiguity, and ordering refinement | active; Macro 5/6 middle, heavy |
+| 8 | I3-4 | C-distributed scenarios | inactive; dependency-gated on I3-3 |
+| 9 | I3-5 / I3-6 | joined workflow and finite conformance/lifecycle close | inactive; dependency-gated |
+| 10 | NEXT-0 | two separate inactive I4/I5 entry contracts only | reserve path; dependency-gated |
 
 ## I3-2 closed work-package inventory
 
@@ -89,21 +103,21 @@ separate goals or a current queue:
 | 0 governance/repository memory | ALIGN-0--2 and I3-0/I3-2 completed | maintenance |
 | 1 semantic kernel | finite kernel/backend/projection/runtime accepted | maintenance / ADR-0014 L3 |
 | 2 parser-free history | retained; not current architecture | maintenance |
-| 3 source/checker/runtime | source-first I2 boundary accepted; I3-2 accepted | maintenance; I3-3 after resume |
+| 3 source/checker/runtime | source-first I2 boundary accepted; I3-2 accepted; I3-3 active | I3-3 self-drive |
 | 4 executable samples | four-locus toy + conform reproducible | regression only |
 | 5 theorem/model bridge | OBL-058 bounded; 059--063 runtime | class maintenance |
-| 6 generated/distributed fabric | actual two-process owner runtime accepted; full fault/order remains | paused; I3-3 needs explicit resume |
+| 6 generated/distributed fabric | actual two-process owner runtime accepted; I3-3 fault/order active | later I3 gates dependency-gated |
 | 7 toolchain/backend | provisional commands | no public freeze |
 | 8 upper application | toy remains sample/library consumer | no Core promotion |
 
 ## user decision gates
 
 OPEN-032 is no longer a user blocker for this program. The remaining rows are
-the current pause-control decision followed by owner-reserved stop boundaries:
+owner-reserved stop boundaries. The explicit resume decision is resolved history:
+the owner resumed at the verified I3-2 cut and activated I3-3 only.
 
 | Overview | Impact | Major options | Current recommendation |
 |---|---|---|---|
-| explicit owner/user resume | activates I3-3 only | retain pause / resume at verified I3-2 cut | retain pause until an explicit new instruction |
 | public API/ABI/wire freeze | compatibility | provisional / freeze | keep private and provisional |
 | production/publication/resources | external risk | local evidence / deploy | remain local |
 | North Star or safety/privacy change | whole semantics | preserve / weaken | preserve; owner decision bundle |
@@ -111,7 +125,7 @@ the current pause-control decision followed by owner-reserved stop boundaries:
 | hidden multi-owner transaction/retry | authority/atomicity | explicit / hidden | preserve explicit operations |
 | irreversible semantic tie | migration | Constitution / owner | stop if non-migratable |
 
-Theory T1, broad-I1 residuals, missing public ABI, deferred general OBLs,
+The resume decision is resolved history, not a current blocker. Theory T1, broad-I1 residuals, missing public ABI, deferred general OBLs,
 unoptimized performance, untested production/browser platforms and incomplete
 I3+ are not by themselves stop conditions.
 
@@ -123,7 +137,7 @@ These are fixed direct consumers, not parallel queues:
 |---|---|---|---|
 | internal/private/public representation | I3-1 (closed) | accepted exhaustive checked carrier mapping/redaction | private provisional only; no public freeze |
 | decoder/limit policy | I3-1 (closed) | accepted deterministic property/mutation plus typed falsifiers | no partial request or pre-limit allocation; no coverage-guided fuzz claim |
-| actual process runtime | I3-2 accepted | generated-plan-only owner dispatch | no source reparse/manual route/shared store; I3-3 consumes after resume |
+| actual process runtime | I3-2 accepted input history | generated-plan-only owner dispatch | no source reparse/manual route/shared store; I3-3 refines faults/order on this seam |
 | network failure matrix | I3-3 | typed positive/falsifier executions | no hidden retry/exactly-once |
 | network ordering | I3-3 | request/serve, revoke/use, publish/observe, patch/cut mapping | stream order insufficient |
 | C-distributed gates | I3-4 / I3-6 | SCN-01/02/03/06 source-first correspondence | I2 and I3-0 canaries alone insufficient |
@@ -145,8 +159,8 @@ and adoption/discard rule.
 - Treat the I3-0 fixed-capacity in-memory cache as canary evidence only, not
   actual owner runtime, durability or exactly-once.
 - Reopen I3-0 only for its equal-canary/selection/security falsifier.
-- Do not activate I3-3 or create another roadmap before explicit owner/user resume after the I3-2 close under the
-  fixed sequence.
+- Do not activate I3-4/I3-5/I3-6/NEXT-0 before their preceding package acceptance
+  under the fixed sequence; no new roadmap is created.
 
 ## non-promoted references
 
