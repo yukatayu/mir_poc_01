@@ -34,9 +34,11 @@ use crate::m8_runtime_admission::{
     M8AdmissionDiagnosticKind, M8AdmissionEvidence, M8DeferredM9Base, M8RuntimeAdmission,
     M8RuntimeInstance, materialize_m9_resolved_base, prepare_deferred_m9_base,
 };
-use crate::m8_runtime_authority::M8I3PrivateAuthorityStateSnapshot;
 use crate::m8_runtime_authority::{
     M8AuthorityState, M8CapabilityGrant, M8MembershipRecord, M8WitnessRecord,
+};
+use crate::m8_runtime_authority::{
+    M8AuthorityValidationFailure, M8I3PrivateAuthorityStateSnapshot,
 };
 use crate::m8_runtime_designated_value::M8DesignatedAuthorityUse;
 use crate::m8_runtime_designated_value::M8I3PrivateDesignatedAuthorityUseSnapshot;
@@ -2031,12 +2033,27 @@ impl M9SealedGeneration {
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub(crate) enum M9AuthorityTransitionKind {
+    /// A test-only administrative withdrawal of one existing owner
+    /// capability.  The successor itself is still produced and sealed by the
+    /// normal M9 publisher; SYS-4 receives no authority material.
+    OwnerCapabilityRevoked,
     DesignatedConsumerCapabilityRevoked,
     DesignatedConsumerMembershipRetired,
     DesignatedConsumerWitnessRetired,
     DesignatedSourceReleaseRevoked,
     SourceDeclaredMembershipRetired,
     SourceDeclaredPrimaryAnchorReacquired,
+}
+
+/// Pure current-generation outcome for one already-issued owner operation.
+/// This is not an M9 validation occurrence and cannot mint, refresh, or
+/// otherwise alter authority.
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+pub(crate) enum M9OwnerOperationRevalidationFailure {
+    UnavailableOwnerOperation,
+    StaleMembership,
+    MissingCapability,
+    MissingWitness,
 }
 
 #[derive(Debug, Clone, PartialEq, Eq)]
@@ -5411,6 +5428,43 @@ impl M9AuthorityGeneration {
             ))
             .or_default() += 1;
         Some(authority)
+    }
+
+    /// Revalidate a sealed owner use against the current M8 authority state
+    /// without recording an M9 owner-operation occurrence.  Callers use this
+    /// only after their own source/Core/route/lineage binding has completed;
+    /// it deliberately has no retry or success-observation effect.
+    pub(crate) fn revalidate_owner_operation_without_observation(
+        &self,
+        operation: &str,
+        owner_locus: &str,
+    ) -> Result<(), M9OwnerOperationRevalidationFailure> {
+        let (principal, authority) = self
+            .owner_authority_for_operation(operation, owner_locus)
+            .ok_or(M9OwnerOperationRevalidationFailure::UnavailableOwnerOperation)?;
+        if self.owner_capability_is_revoked(operation, &principal, owner_locus) {
+            return Err(M9OwnerOperationRevalidationFailure::MissingCapability);
+        }
+        self.authority_state
+            .validate_owner_use(
+                authority.principal(),
+                authority.membership_ref(),
+                authority.capability_ref(),
+                authority.witness_ref(),
+                owner_locus,
+                operation,
+            )
+            .map_err(|failure| match failure {
+                M8AuthorityValidationFailure::StaleMembership => {
+                    M9OwnerOperationRevalidationFailure::StaleMembership
+                }
+                M8AuthorityValidationFailure::MissingCapability => {
+                    M9OwnerOperationRevalidationFailure::MissingCapability
+                }
+                M8AuthorityValidationFailure::MissingWitness => {
+                    M9OwnerOperationRevalidationFailure::MissingWitness
+                }
+            })
     }
 
     pub(crate) fn designated_evaluation_authority_use(

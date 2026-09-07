@@ -64,6 +64,16 @@ roadmap/status pointer の一致を検証する。
 - OPEN-032: **RESOLVED for this bounded program only by PROPOSAL-040 /
   ADR-0037; no public/production/platform selection follows**
 
+LAB execution estimate, `2026-09-07T13:57:42+09:00`: the parent estimates
+26–52 hours of remaining continuous execution across I3-3 through NEXT-0;
+the dated per-milestone ranges are in `tasks.md`. This is a rough planning
+estimate, not measured remaining work or an acceptance deadline. The earlier
+I3-2 gate-to-gate Git timestamps span approximately ten hours, not separately
+tracked active effort. Provider/time contracts, actual-session falsifiers and
+review corrections dominate uncertainty. Six of eleven milestones are
+accepted; that count is not a workload-weighted completion metric. No scope,
+gate, evidence requirement or fixed ordering changes to meet an estimate.
+
 Program authorization and official lifecycle acceptance are distinct. Work in
 the fixed program may proceed after ALIGN-0 authority/alignment close, but
 official I3 entry is not claimed by program activation. I3-6 alone may propose
@@ -1005,6 +1015,18 @@ Discard label-only evidence or a candidate that creates authority, hidden retry,
 second consume or false success; reopen I3-2 only for its named reproducible
 runtime-seam counterexample. Record implementation questions and evidence in
 Report 2606 rather than creating a resume report or adjacent roadmap.
+
+**Owner-intent alignment checkpoint:** I3-3 refines checked meaning under
+network faults. Its finite owner-ledger limit, retained coordinator, closed
+cohort and provisional operation-specific retry behavior are bounded
+realization assumptions, not general Mir composition or continued-operation
+semantics. All 20 failure families remain required. Each row must identify its
+accepted semantic or explicitly admitted external boundary, actual execution,
+positive control, falsifier and evidence class. Missing source/effect coverage
+remains **OPEN**; matrix completion alone does not justify new Surface/Core
+meaning. Checked evolution constrains this work now, while later implementation
+acceptance remains dependency-gated. Broader compositional research is not a
+new active queue or an added I3-3 gate.
 
 ## I3-4 milestone contract — inactive until I3-3 closes
 

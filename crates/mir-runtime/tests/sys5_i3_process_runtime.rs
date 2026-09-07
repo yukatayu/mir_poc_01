@@ -2520,6 +2520,390 @@ fn g2_private_reply_outer_kind_must_match_the_exact_reply_carrier_before_receipt
 
 #[test]
 #[cfg(feature = "i3-process-test-seams")]
+fn i3_3_duplicate_source_generated_owner_request_rejects_without_a_second_owner_serve_or_write() {
+    let project = build_once(CANONICAL_SOURCE);
+    let deployment = two_nonempty_slots(&project);
+    let codec = Sys5I3PrivateProcessCodec::private_provisional_v1();
+    let mut cohort = single_coordinator_cohort(&project, &deployment);
+    let mut requester = decode_and_start_private_image(&codec, &mut cohort, REQUESTER_SLOT);
+    let mut owner = decode_and_start_private_image(&codec, &mut cohort, OWNER_SLOT);
+
+    let request = requester
+        .emit_generated_owner_request("init_avatar_hp")
+        .expect("ordinary checked source emits its generated owner request once");
+    let request_identity = request.semantic_request_identity_ref().to_string();
+    let request_bytes = codec
+        .encode_outbound_message(request)
+        .expect("the source-generated request encodes through the private codec");
+
+    let first_reply = owner
+        .admit_untrusted_message(
+            codec
+                .decode_untrusted_message(&request_bytes)
+                .expect("the first private request delivery decodes as untrusted input"),
+        )
+        .expect("the first source-generated request is admitted")
+        .expect("the first owner admission produces one typed reply");
+    assert_eq!(
+        first_reply.semantic_request_identity_ref(),
+        request_identity
+    );
+    assert_eq!(
+        first_reply.linked_request_identity_ref(),
+        Some(request_identity.as_str()),
+        "the first reply keeps the exact source-derived request lineage"
+    );
+
+    let owner_summary_after_first = owner.observer_safe_runtime_summary();
+    let owner_occurrences_after_first = owner.observer_safe_semantic_occurrences();
+    assert_eq!(owner_summary_after_first.served_owner_request_count(), 1);
+    assert_eq!(owner_summary_after_first.actual_owner_write_count(), 1);
+    assert!(
+        owner_occurrences_after_first
+            .owner_serve_linearization_occurrence_ref(&request_identity)
+            .is_some(),
+        "the admitted source request has one owner-serve occurrence"
+    );
+    assert!(
+        owner_occurrences_after_first
+            .actual_owner_write_occurrence_ref(&request_identity)
+            .is_some(),
+        "the admitted source request has one owner-write occurrence"
+    );
+
+    let duplicate_error = owner
+        .admit_untrusted_message(
+            codec
+                .decode_untrusted_message(&request_bytes)
+                .expect("a duplicate delivery of the same bytes remains untrusted input"),
+        )
+        .expect_err(
+            "the same source-generated request identity must reject rather than receive a second owner serve",
+        );
+    assert_eq!(
+        duplicate_error.kind(),
+        Sys5I3ProcessRuntimeErrorKind::DuplicateRequestRejected,
+        "the owner must report a typed duplicate-request rejection rather than collapse it into generic carrier admission"
+    );
+    assert_eq!(
+        owner.observer_safe_runtime_summary(),
+        owner_summary_after_first,
+        "a duplicate request must preserve owner serve/write counters"
+    );
+    assert_eq!(
+        owner.observer_safe_semantic_occurrences(),
+        owner_occurrences_after_first,
+        "a duplicate request must not mint or replace owner semantic occurrences"
+    );
+    assert_eq!(
+        owner
+            .authoritative_i64_state("avatar", "self", "hp")
+            .expect("the one admitted source request leaves exactly its owner-local state"),
+        21
+    );
+}
+
+#[test]
+#[cfg(feature = "i3-process-test-seams")]
+fn i3_3_pre_handoff_owner_failure_retains_an_ambiguous_tombstone_for_exact_replay_rejection() {
+    let project = build_once(CANONICAL_SOURCE);
+    let deployment = two_nonempty_slots(&project);
+    let codec = Sys5I3PrivateProcessCodec::private_provisional_v1();
+    let mut cohort = single_coordinator_cohort(&project, &deployment);
+    let mut requester = decode_and_start_private_image(&codec, &mut cohort, REQUESTER_SLOT);
+    let mut owner = decode_and_start_private_image(&codec, &mut cohort, OWNER_SLOT);
+
+    let request_bytes = codec
+        .encode_outbound_message(
+            requester
+                .emit_generated_owner_request("init_avatar_hp")
+                .expect(
+                    "ordinary checked source emits the owner request before the downstream fault",
+                ),
+        )
+        .expect("the exact source-generated request encodes through the private codec");
+    let owner_summary_before = owner.observer_safe_runtime_summary();
+    let owner_occurrences_before = owner.observer_safe_semantic_occurrences();
+    let owner_outbox_before = owner.observer_safe_outbox_summary();
+
+    owner.test_only_reject_next_owner_admission_after_reservation();
+    assert_eq!(
+        owner
+            .admit_untrusted_message(
+                codec
+                    .decode_untrusted_message(&request_bytes)
+                    .expect("the exact request remains untrusted until owner admission"),
+            )
+            .expect_err(
+                "the selected downstream fault occurs after reservation but before owner handoff",
+            )
+            .kind(),
+        Sys5I3ProcessRuntimeErrorKind::CarrierAdmissionRejected
+    );
+    assert_eq!(
+        owner.observer_safe_inbound_owner_request_tombstone_count(),
+        1,
+        "the uncertain post-reservation outcome retains its exact owner-local tombstone"
+    );
+    assert_eq!(owner.observer_safe_runtime_summary(), owner_summary_before);
+    assert_eq!(
+        owner.observer_safe_semantic_occurrences(),
+        owner_occurrences_before,
+        "the pre-handoff fault creates no owner serve/write occurrence"
+    );
+    assert_eq!(owner.observer_safe_outbox_summary(), owner_outbox_before);
+
+    assert_eq!(
+        owner
+            .admit_untrusted_message(
+                codec
+                    .decode_untrusted_message(&request_bytes)
+                    .expect("the replayed exact bytes remain untrusted input"),
+            )
+            .expect_err(
+                "a retained ambiguous reservation rejects replay rather than permitting a second handoff",
+            )
+            .kind(),
+        Sys5I3ProcessRuntimeErrorKind::DuplicateRequestRejected
+    );
+    assert_eq!(
+        owner.observer_safe_inbound_owner_request_tombstone_count(),
+        1,
+        "the replay must retain rather than overwrite the ambiguous tombstone"
+    );
+    assert_eq!(owner.observer_safe_runtime_summary(), owner_summary_before);
+    assert_eq!(
+        owner.observer_safe_semantic_occurrences(),
+        owner_occurrences_before,
+        "the rejected replay must not mint a semantic occurrence after the uncertain first handoff"
+    );
+    assert_eq!(owner.observer_safe_outbox_summary(), owner_outbox_before);
+}
+
+#[test]
+#[cfg(feature = "i3-process-test-seams")]
+fn i3_3_owner_duplicate_ledger_rejects_capacity_without_evicting_prior_source_requests() {
+    const INBOUND_OWNER_REQUEST_LEDGER_CAPACITY: usize = 64;
+
+    let project = build_once(CANONICAL_SOURCE);
+    let deployment = two_nonempty_slots(&project);
+    let codec = Sys5I3PrivateProcessCodec::private_provisional_v1();
+    let mut cohort = single_coordinator_cohort(&project, &deployment);
+    let mut requester = decode_and_start_private_image(&codec, &mut cohort, REQUESTER_SLOT);
+    let mut owner = decode_and_start_private_image(&codec, &mut cohort, OWNER_SLOT);
+    let mut request_identities = BTreeSet::new();
+    let mut first_request_bytes = None;
+    let mut first_request_identity = None;
+
+    for expected_count in 1..=INBOUND_OWNER_REQUEST_LEDGER_CAPACITY {
+        let request = requester
+            .emit_generated_owner_request("init_avatar_hp")
+            .expect("the checked source may emit each independently generated owner request");
+        let request_identity = request.semantic_request_identity_ref().to_string();
+        assert!(
+            request_identities.insert(request_identity.clone()),
+            "each source-derived emission must retain a new semantic request identity rather than reuse a prior request"
+        );
+        let request_bytes = codec
+            .encode_outbound_message(request)
+            .expect("each source-derived request encodes through the private codec");
+        if expected_count == 1 {
+            first_request_identity = Some(request_identity.clone());
+            first_request_bytes = Some(request_bytes.clone());
+        }
+        let reply = owner
+            .admit_untrusted_message(
+                codec
+                    .decode_untrusted_message(&request_bytes)
+                    .expect("each private request delivery decodes as untrusted input"),
+            )
+            .expect("each distinct request within the bounded ledger capacity is admitted")
+            .expect("each admitted request produces only its typed owner reply");
+        let receipt = requester
+            .admit_untrusted_message(
+                codec
+                    .decode_untrusted_message(
+                        &codec
+                            .encode_outbound_message(reply)
+                            .expect("each owner reply encodes through the private codec"),
+                    )
+                    .expect("each owner reply decodes only as untrusted input"),
+            )
+            .expect("each exact owner reply admits against its locally pending request")
+            .expect("each exact owner reply produces one requester-local receipt");
+        assert!(receipt.is_observer_safe_typed_result_or_receipt());
+        assert!(receipt.has_no_transportable_carrier());
+        assert_eq!(
+            receipt.semantic_request_identity_ref(),
+            request_identity.as_str(),
+            "the requester receipt completes the exact source-generated request"
+        );
+        assert_eq!(
+            requester.observer_safe_pending_owner_request_count(),
+            0,
+            "a validated local receipt frees only the completed requester pending record"
+        );
+        assert_eq!(
+            requester
+                .observer_safe_runtime_summary()
+                .accepted_inbound_receipt_count(),
+            expected_count,
+            "each completed owner reply has one actual requester-local receipt"
+        );
+        assert_eq!(
+            owner
+                .observer_safe_runtime_summary()
+                .served_owner_request_count(),
+            expected_count,
+            "every admitted identity has one actual owner serve"
+        );
+        assert_eq!(
+            owner
+                .observer_safe_runtime_summary()
+                .actual_owner_write_count(),
+            expected_count,
+            "every admitted identity has one actual owner write"
+        );
+        assert_eq!(
+            owner.observer_safe_inbound_owner_request_tombstone_count(),
+            expected_count,
+            "owner completion does not release a prior duplicate reservation"
+        );
+    }
+
+    let first_request_bytes =
+        first_request_bytes.expect("the capacity loop records its first request");
+    let first_request_identity =
+        first_request_identity.expect("the capacity loop records its first request identity");
+    assert_eq!(
+        owner.observer_safe_inbound_owner_request_tombstone_count(),
+        INBOUND_OWNER_REQUEST_LEDGER_CAPACITY,
+        "the owner retains every bounded reservation without exposing request payloads or prior results"
+    );
+    let owner_summary_at_capacity = owner.observer_safe_runtime_summary();
+    let owner_occurrences_at_capacity = owner.observer_safe_semantic_occurrences();
+
+    let overflow_request = requester
+        .emit_generated_owner_request("init_avatar_hp")
+        .expect("the requester may form one next source-derived request beyond owner capacity");
+    let overflow_identity = overflow_request.semantic_request_identity_ref().to_string();
+    assert!(
+        request_identities.insert(overflow_identity),
+        "the capacity outcome must apply to a new semantic request, not a duplicate"
+    );
+    let overflow_bytes = codec
+        .encode_outbound_message(overflow_request)
+        .expect("the new overflow request still encodes as an untrusted-delivery candidate");
+    assert_eq!(
+        owner
+            .admit_untrusted_message(
+                codec
+                    .decode_untrusted_message(&overflow_bytes)
+                    .expect("the overflow request decodes as untrusted input"),
+            )
+            .expect_err("the bounded owner ledger must reject a new identity rather than evict")
+            .kind(),
+        Sys5I3ProcessRuntimeErrorKind::InboundRequestLedgerExhausted
+    );
+    assert_eq!(
+        owner.observer_safe_runtime_summary(),
+        owner_summary_at_capacity
+    );
+    assert_eq!(
+        owner.observer_safe_semantic_occurrences(),
+        owner_occurrences_at_capacity,
+        "capacity rejection must not mint a serve/write occurrence"
+    );
+    assert_eq!(
+        owner.observer_safe_inbound_owner_request_tombstone_count(),
+        INBOUND_OWNER_REQUEST_LEDGER_CAPACITY,
+        "capacity rejection must retain, not replace, all prior reservations"
+    );
+
+    assert_eq!(
+        owner
+            .admit_untrusted_message(
+                codec
+                    .decode_untrusted_message(&first_request_bytes)
+                    .expect("the first request replay remains untrusted input"),
+            )
+            .expect_err("the first reservation must survive later capacity rejection")
+            .kind(),
+        Sys5I3ProcessRuntimeErrorKind::DuplicateRequestRejected,
+        "no-eviction preserves the first request's duplicate disposition"
+    );
+    assert_eq!(
+        owner.observer_safe_runtime_summary(),
+        owner_summary_at_capacity
+    );
+    assert_eq!(
+        owner
+            .observer_safe_semantic_occurrences()
+            .actual_owner_write_occurrence_ref(&first_request_identity),
+        owner_occurrences_at_capacity.actual_owner_write_occurrence_ref(&first_request_identity),
+        "the replay must retain the first write occurrence rather than mint a new one"
+    );
+}
+
+#[test]
+fn i3_3_requester_pending_ledger_rejects_the_65th_unresolved_source_request_without_eviction() {
+    const OUTBOUND_OWNER_REQUEST_PENDING_CAPACITY: usize = 64;
+
+    let project = build_once(CANONICAL_SOURCE);
+    let deployment = two_nonempty_slots(&project);
+    let codec = Sys5I3PrivateProcessCodec::private_provisional_v1();
+    let mut cohort = single_coordinator_cohort(&project, &deployment);
+    let mut requester = decode_and_start_private_image(&codec, &mut cohort, REQUESTER_SLOT);
+    let mut request_identities = BTreeSet::new();
+
+    for expected_pending_count in 1..=OUTBOUND_OWNER_REQUEST_PENDING_CAPACITY {
+        let request = requester
+            .emit_generated_owner_request("init_avatar_hp")
+            .expect("each bounded unresolved requester operation is source-generated");
+        assert!(
+            request_identities.insert(request.semantic_request_identity_ref().to_string()),
+            "each unresolved source-generated request retains a distinct semantic identity"
+        );
+        assert_eq!(
+            requester.observer_safe_pending_owner_request_count(),
+            expected_pending_count,
+            "the requester retains each unresolved original operation without eviction"
+        );
+    }
+
+    let occurrences_at_capacity = requester.observer_safe_semantic_occurrences();
+    let outbox_at_capacity = requester.observer_safe_outbox_summary();
+    assert_eq!(
+        requester.observer_safe_pending_owner_request_count(),
+        OUTBOUND_OWNER_REQUEST_PENDING_CAPACITY
+    );
+
+    assert_eq!(
+        requester
+            .emit_generated_owner_request("init_avatar_hp")
+            .expect_err("the 65th unresolved source request must fail before a new source action")
+            .kind(),
+        Sys5I3ProcessRuntimeErrorKind::OutboundRequestLedgerExhausted
+    );
+    assert_eq!(
+        requester.observer_safe_pending_owner_request_count(),
+        OUTBOUND_OWNER_REQUEST_PENDING_CAPACITY,
+        "requester capacity rejection retains every unresolved pending operation"
+    );
+    assert_eq!(
+        requester.observer_safe_semantic_occurrences(),
+        occurrences_at_capacity,
+        "requester capacity rejection occurs before a new accepted semantic occurrence"
+    );
+    assert_eq!(
+        requester.observer_safe_outbox_summary(),
+        outbox_at_capacity,
+        "requester capacity rejection occurs before a new outbound source carrier is created"
+    );
+}
+
+#[test]
+#[cfg(feature = "i3-process-test-seams")]
 fn g2_private_reply_requires_exact_locally_pending_request_linkage_and_rejects_replay() {
     let project = build_once(CANONICAL_SOURCE);
     let deployment = two_nonempty_slots(&project);

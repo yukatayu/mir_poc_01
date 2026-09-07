@@ -280,6 +280,25 @@ recordが揃ったためofficial I2 entry後exitを受理しました。broad PH
 - blocked/deferred: I3 lifecycle entry remains unentered. Broad PHASE-I1 exit,
   final public API/ABI/wire/carrier freeze, production, and browser/View product
   remain outside the accepted claim.
+- in-progress: authorized removal of only `target/debug/incremental` restored
+  about 18 GiB free. Latest dirty-source slices pass full-runtime integration
+  51/51 (44.43s), evaluator owner-capacity 1/1, I3-3 filter 4/4, probe library
+  lifecycle evidence 2/2 (one filtered), selected runtime library 1/1 + 1/1
+  (old-owner withdrawal and exact-ledger different-snapshot), actual probe
+  integration 17/17, and `cargo fmt --all -- --check`. The historical
+  compiled ledger-source binary remains 49/49 in 47.70s only; it is not latest
+  source evidence. The bounded standalone model passed 3/3 tests (432 states,
+  2136 transitions) and exposed three mutant counterexamples; this is not a
+  general runtime proof.
+- latest checkpoint: runtime-only retry 2/2 and full same-feature library
+  285/285 (82.33s) pass. Focused two-crate all-target Clippy with `-Dwarnings`
+  also passes; model-target dead-code warnings without its private feature are
+  not a deny-lint profile. This checkpoint does not accept I3-3.
+- decisions taken: the working interpretation remains ordinary meaning ->
+  generated distribution -> continually checked composition. World/Avatar remain
+  domain-library vocabulary, not Mir Core primitives; ledger64/coordinator/
+  closed-cohort finite-profile machinery are bounded evidence, not general Mir
+  requirements, and add no theory gate or roadmap item.
 - decisions taken: SYS-5 closes only the bounded local toy/devtools workflow:
   four-locus source-derived projection, generated in-process dispatch, joined
   observer-safe causal rows, local save/restore, one accepted designated-only
@@ -296,10 +315,10 @@ recordが揃ったためofficial I2 entry後exitを受理しました。broad PH
   not whole-workflow OW1, and the evidence is not a general scheduler,
   memory-model, relation-DAG, public transport, or lifecycle theorem.
 - verification status: accepted I3-2 regression evidence remains the cached
-  localnet 12/12 and package 62/62 result at the pinned cut; no I3-3 tests are
-  claimed. Focused overview HTML tests were run and currently fail only on
-  stale pause-era assertions in the test source, which was not edited under the
-  no-test-source-change constraint.
+  localnet 12/12 and package 62/62 result at the pinned cut; latest dirty-source
+  slices pass as recorded above. No full 20-family I3-3 matrix, retry/reconnect
+  acceptance, or I3-3 milestone acceptance is claimed. This timestamped
+  checkpoint is not milestone acceptance.
 
 ## Historical plan index（Plan 249を含めrepository memory、current queueではない）
 

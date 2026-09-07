@@ -15,12 +15,14 @@ use quinn::{Connection, RecvStream, SendStream};
 use sha2::{Digest, Sha256};
 
 use super::sys5_i3_process_runtime::{
-    Sys5I3LocalnetControlErrorKind, Sys5I3LocalnetPeerPreface, Sys5I3PrivateProcessCodec,
-    Sys5I3ProcessMessage, Sys5I3ProcessRuntime, Sys5I3ProcessRuntimeError,
-    Sys5I3TrustedLocalnetControl, strict_json_value,
+    Sys5I3LocalnetControlErrorKind, Sys5I3LocalnetPeerPreface,
+    Sys5I3OriginalOwnerRequestAttemptKind, Sys5I3OriginalOwnerRequestPending,
+    Sys5I3PrivateProcessCodec, Sys5I3ProcessMessage, Sys5I3ProcessRuntime,
+    Sys5I3ProcessRuntimeError, Sys5I3TrustedLocalnetControl, strict_json_value,
 };
 
 const MAX_PRIVATE_QUIC_BLOB_BYTES: usize = 64 * 1024;
+const MAX_PRIVATE_QUIC_SESSION_ATTEMPTS: u8 = 2;
 
 /// Fail-closed private-adapter outcomes.  They contain no peer address,
 /// certificate, key, raw preface, carrier payload, or semantic state.
@@ -32,7 +34,22 @@ pub enum Sys5I3PrivateQuicError {
     PeerBindingRejected(Sys5I3PrivateQuicPeerBindingEvidence),
     FrameRejected,
     CodecRejected,
-    SemanticRejected(Sys5I3ProcessRuntimeError),
+    /// A syntactically decoded carrier failed the sealed runtime boundary.
+    /// It retains receiver-owned network-attempt evidence only, never the
+    /// untrusted candidate's asserted route, source, Core, or identity.
+    SemanticRejected {
+        error: Sys5I3ProcessRuntimeError,
+        rejected_attempt: Sys5I3PrivateQuicRejectedAttemptEvidence,
+    },
+    /// The runtime refused a locally retained original-request attempt before
+    /// any stream write.  The caller still owns the opaque pending handle.
+    OriginalRequestAttemptRejected(Sys5I3ProcessRuntimeError),
+    /// A checked per-session occurrence counter cannot advance without
+    /// collision, so this adapter refuses the next frame effect.
+    NetworkOccurrenceExhausted,
+    /// A consuming reconnect token already represents the fixed second
+    /// session attempt.  Its retained control is deliberately not returned.
+    SessionAttemptExhausted,
 }
 
 /// Reference-only evidence from an exact post-handshake peer-binding check.
@@ -74,8 +91,46 @@ impl Sys5I3PrivateQuicError {
     pub fn peer_binding_evidence(&self) -> Option<&Sys5I3PrivateQuicPeerBindingEvidence> {
         match self {
             Self::PeerBindingRejected(evidence) => Some(evidence),
-            Self::FrameRejected | Self::CodecRejected | Self::SemanticRejected(_) => None,
+            Self::FrameRejected
+            | Self::CodecRejected
+            | Self::SemanticRejected { .. }
+            | Self::OriginalRequestAttemptRejected(_)
+            | Self::NetworkOccurrenceExhausted
+            | Self::SessionAttemptExhausted => None,
         }
+    }
+
+    /// Bounded receiver-owned evidence for a decoded rejection.  It is
+    /// intentionally absent for framing/codec failures, which never reached
+    /// a typed semantic admission boundary.
+    pub fn rejected_attempt_evidence(&self) -> Option<&Sys5I3PrivateQuicRejectedAttemptEvidence> {
+        match self {
+            Self::SemanticRejected {
+                rejected_attempt, ..
+            } => Some(rejected_attempt),
+            _ => None,
+        }
+    }
+}
+
+/// Evidence that an actual received frame reached a typed semantic rejection.
+/// The commitment is run-scoped and domain-separated from source or carrier
+/// provenance, so a rejected candidate cannot be reported as a validated
+/// source/Core/route fact or joined to an original request.
+#[doc(hidden)]
+#[derive(Clone, Debug, PartialEq, Eq)]
+pub struct Sys5I3PrivateQuicRejectedAttemptEvidence {
+    rejected_candidate_commitment_ref: String,
+    network_occurrence_ref: String,
+}
+
+impl Sys5I3PrivateQuicRejectedAttemptEvidence {
+    pub fn rejected_candidate_commitment_ref(&self) -> &str {
+        &self.rejected_candidate_commitment_ref
+    }
+
+    pub fn network_occurrence_ref(&self) -> &str {
+        &self.network_occurrence_ref
     }
 }
 
@@ -153,7 +208,34 @@ pub struct Sys5I3PrivateQuicSession {
     control: Sys5I3TrustedLocalnetControl,
     peer_spki_verified: bool,
     peer_preface_verified: bool,
+    session_attempt_generation: u8,
     next_network_occurrence: u64,
+}
+
+/// A consuming private reconnect capability.  It transfers the sole retained
+/// peer control and checked occurrence counter into at most one second
+/// adapter session; it is neither cloneable nor an authority credential.
+#[doc(hidden)]
+pub struct Sys5I3PrivateQuicReconnect {
+    control: Sys5I3TrustedLocalnetControl,
+    prior_session_attempt_generation: u8,
+    next_network_occurrence: u64,
+}
+
+/// A reply result that either consumes the original pending handle exactly
+/// once after local receipt admission, or returns it intact after a delivery
+/// failure/rejection.  A retry rejection therefore cannot complete the
+/// original semantic operation.
+#[doc(hidden)]
+pub enum Sys5I3PrivateQuicOriginalOwnerReplyOutcome {
+    Consumed {
+        receipt: Box<Sys5I3ProcessMessage>,
+        delivery: Sys5I3PrivateQuicDeliveryEvidence,
+    },
+    Pending {
+        pending: Sys5I3OriginalOwnerRequestPending,
+        error: Sys5I3PrivateQuicError,
+    },
 }
 
 impl Sys5I3PrivateQuicSession {
@@ -176,6 +258,7 @@ impl Sys5I3PrivateQuicSession {
             control,
             peer_spki_verified: true,
             peer_preface_verified: false,
+            session_attempt_generation: 1,
             next_network_occurrence: 0,
         })
     }
@@ -198,8 +281,20 @@ impl Sys5I3PrivateQuicSession {
             control,
             peer_spki_verified: true,
             peer_preface_verified: false,
+            session_attempt_generation: 1,
             next_network_occurrence: 0,
         })
+    }
+
+    /// Consume this session into the only possible reconnect capability.  The
+    /// connection/streams are dropped with the old adapter; the retained
+    /// control and occurrence counter move by value and cannot be cloned.
+    pub fn into_reconnect(self) -> Sys5I3PrivateQuicReconnect {
+        Sys5I3PrivateQuicReconnect {
+            control: self.control,
+            prior_session_attempt_generation: self.session_attempt_generation,
+            next_network_occurrence: self.next_network_occurrence,
+        }
     }
 
     pub const fn peer_spki_verified(&self) -> bool {
@@ -216,6 +311,10 @@ impl Sys5I3PrivateQuicSession {
 
     pub const fn quic_datagrams_enabled(&self) -> bool {
         false
+    }
+
+    pub const fn session_attempt_generation(&self) -> u8 {
+        self.session_attempt_generation
     }
 
     pub async fn send_local_preface(&mut self) -> Result<(), Sys5I3PrivateQuicError> {
@@ -278,9 +377,8 @@ impl Sys5I3PrivateQuicSession {
             .map_err(|_| Sys5I3PrivateQuicError::CodecRejected)?;
         let lineage = carrier_lineage(&bytes)?;
         let carrier_ref = carrier_ref(&bytes);
+        let network_occurrence_ref = self.reserve_network_occurrence_ref("send", &carrier_ref)?;
         self.write_blob(&bytes).await?;
-        let network_occurrence_ref =
-            self.next_network_occurrence_ref("send", &carrier_ref, &semantic_request_identity_ref);
         Ok(Sys5I3PrivateQuicDeliveryEvidence {
             carrier_ref,
             semantic_request_identity_ref,
@@ -292,6 +390,41 @@ impl Sys5I3PrivateQuicSession {
             edge_ref: lineage.edge_ref,
             network_occurrence_ref,
         })
+    }
+
+    /// Begin the one source-emitted original request on its first checked
+    /// session.  The runtime authorizes the attempt from its retained exact
+    /// carrier immediately before this adapter begins a write; a frame error
+    /// leaves the original pending while consuming only its attempt budget.
+    pub async fn send_initial_original_owner_request(
+        &mut self,
+        runtime: &mut Sys5I3ProcessRuntime,
+        pending: &Sys5I3OriginalOwnerRequestPending,
+    ) -> Result<Sys5I3PrivateQuicDeliveryEvidence, Sys5I3PrivateQuicError> {
+        self.send_original_owner_request_attempt(
+            runtime,
+            pending,
+            Sys5I3OriginalOwnerRequestAttemptKind::InitialDelivery,
+            1,
+        )
+        .await
+    }
+
+    /// Retry the unchanged original request only after its control has moved
+    /// through `Sys5I3PrivateQuicReconnect` into the fixed second session.
+    /// The retry is an attempt outcome, never a replacement request/result.
+    pub async fn retry_original_owner_request_after_reconnect(
+        &mut self,
+        runtime: &mut Sys5I3ProcessRuntime,
+        pending: &Sys5I3OriginalOwnerRequestPending,
+    ) -> Result<Sys5I3PrivateQuicDeliveryEvidence, Sys5I3PrivateQuicError> {
+        self.send_original_owner_request_attempt(
+            runtime,
+            pending,
+            Sys5I3OriginalOwnerRequestAttemptKind::ReconnectRetry,
+            2,
+        )
+        .await
     }
 
     /// Reads exactly one complete bounded carrier frame and invokes the
@@ -313,23 +446,30 @@ impl Sys5I3PrivateQuicSession {
             ));
         }
         let bytes = self.read_blob().await?;
+        let rejected_candidate_commitment_ref = self.rejected_candidate_commitment_ref(&bytes);
+        let network_occurrence_ref =
+            self.reserve_network_occurrence_ref("receive", &rejected_candidate_commitment_ref)?;
         let candidate = Sys5I3PrivateProcessCodec::private_provisional_v1()
             .decode_untrusted_message(&bytes)
             .map_err(|_| Sys5I3PrivateQuicError::CodecRejected)?;
+        // These private parses must succeed before semantic mutation.  Their
+        // values are retained only on success; a rejection below reports the
+        // run-scoped commitment instead of any candidate provenance.
         let lineage = carrier_lineage(&bytes)?;
         let manifest = candidate.observer_safe_manifest();
+        let admitted = runtime
+            .admit_decoded_process_message(candidate)
+            .map_err(|error| Sys5I3PrivateQuicError::SemanticRejected {
+                error,
+                rejected_attempt: Sys5I3PrivateQuicRejectedAttemptEvidence {
+                    rejected_candidate_commitment_ref,
+                    network_occurrence_ref: network_occurrence_ref.clone(),
+                },
+            })?;
         let semantic_request_identity_ref = manifest.semantic_request_identity_ref().to_string();
         let linked_request_identity_ref =
             manifest.linked_request_identity_ref().map(str::to_string);
         let carrier_ref = carrier_ref(&bytes);
-        let admitted = runtime
-            .admit_decoded_process_message(candidate)
-            .map_err(Sys5I3PrivateQuicError::SemanticRejected)?;
-        let network_occurrence_ref = self.next_network_occurrence_ref(
-            "receive",
-            &carrier_ref,
-            &semantic_request_identity_ref,
-        );
         Ok((
             admitted,
             Sys5I3PrivateQuicDeliveryEvidence {
@@ -344,6 +484,35 @@ impl Sys5I3PrivateQuicSession {
                 network_occurrence_ref,
             },
         ))
+    }
+
+    /// Receive one exact owner reply for an opaque original pending handle.
+    /// A local receipt consumes the handle by value; every frame, codec, or
+    /// semantic rejection returns it intact so a later original reply can
+    /// still complete exactly once through the runtime's pending map.
+    pub async fn receive_and_admit_original_owner_reply(
+        &mut self,
+        runtime: &mut Sys5I3ProcessRuntime,
+        pending: Sys5I3OriginalOwnerRequestPending,
+    ) -> Sys5I3PrivateQuicOriginalOwnerReplyOutcome {
+        if !self.peer_spki_verified || !self.peer_preface_verified {
+            return Sys5I3PrivateQuicOriginalOwnerReplyOutcome::Pending {
+                pending,
+                error: Sys5I3PrivateQuicError::peer_binding_rejected(
+                    self.control.expected_peer_spki_ref(),
+                ),
+            };
+        }
+        let result = self
+            .receive_and_admit_original_owner_reply_inner(runtime, &pending)
+            .await;
+        match result {
+            Ok((receipt, delivery)) => Sys5I3PrivateQuicOriginalOwnerReplyOutcome::Consumed {
+                receipt: Box::new(receipt),
+                delivery,
+            },
+            Err(error) => Sys5I3PrivateQuicOriginalOwnerReplyOutcome::Pending { pending, error },
+        }
     }
 
     /// Completes this side's one request/reply direction.  The caller keeps
@@ -400,30 +569,201 @@ impl Sys5I3PrivateQuicSession {
         Ok(body)
     }
 
-    fn next_network_occurrence_ref(
+    async fn send_original_owner_request_attempt(
+        &mut self,
+        runtime: &mut Sys5I3ProcessRuntime,
+        pending: &Sys5I3OriginalOwnerRequestPending,
+        kind: Sys5I3OriginalOwnerRequestAttemptKind,
+        required_session_attempt_generation: u8,
+    ) -> Result<Sys5I3PrivateQuicDeliveryEvidence, Sys5I3PrivateQuicError> {
+        if !self.peer_spki_verified
+            || !self.peer_preface_verified
+            || self.session_attempt_generation != required_session_attempt_generation
+        {
+            return Err(Sys5I3PrivateQuicError::peer_binding_rejected(
+                self.control.expected_peer_spki_ref(),
+            ));
+        }
+        let authorization = runtime
+            .authorize_original_owner_request_attempt(pending, kind)
+            .map_err(Sys5I3PrivateQuicError::OriginalRequestAttemptRejected)?;
+        let bytes = authorization.encoded_message_bytes();
+        let lineage = carrier_lineage(bytes)?;
+        let carrier_ref = carrier_ref(bytes);
+        let network_occurrence_ref = self.reserve_network_occurrence_ref("send", &carrier_ref)?;
+        runtime
+            .commit_authorized_original_owner_request_attempt(&authorization)
+            .map_err(Sys5I3PrivateQuicError::OriginalRequestAttemptRejected)?;
+        self.write_blob(bytes).await?;
+        Ok(Sys5I3PrivateQuicDeliveryEvidence {
+            carrier_ref,
+            semantic_request_identity_ref: authorization
+                .semantic_request_identity_ref()
+                .to_string(),
+            linked_request_identity_ref: None,
+            source_ref: lineage.source_ref,
+            core_ref: lineage.core_ref,
+            source_artifact_ref: lineage.source_artifact_ref,
+            target_artifact_ref: lineage.target_artifact_ref,
+            edge_ref: lineage.edge_ref,
+            network_occurrence_ref,
+        })
+    }
+
+    async fn receive_and_admit_original_owner_reply_inner(
+        &mut self,
+        runtime: &mut Sys5I3ProcessRuntime,
+        pending: &Sys5I3OriginalOwnerRequestPending,
+    ) -> Result<(Sys5I3ProcessMessage, Sys5I3PrivateQuicDeliveryEvidence), Sys5I3PrivateQuicError>
+    {
+        let bytes = self.read_blob().await?;
+        let rejected_candidate_commitment_ref = self.rejected_candidate_commitment_ref(&bytes);
+        let network_occurrence_ref =
+            self.reserve_network_occurrence_ref("receive", &rejected_candidate_commitment_ref)?;
+        let candidate = Sys5I3PrivateProcessCodec::private_provisional_v1()
+            .decode_untrusted_message(&bytes)
+            .map_err(|_| Sys5I3PrivateQuicError::CodecRejected)?;
+        let lineage = carrier_lineage(&bytes)?;
+        let manifest = candidate.observer_safe_manifest();
+        let admitted = runtime
+            .admit_decoded_original_owner_reply(candidate, pending)
+            .map_err(|error| Sys5I3PrivateQuicError::SemanticRejected {
+                error,
+                rejected_attempt: Sys5I3PrivateQuicRejectedAttemptEvidence {
+                    rejected_candidate_commitment_ref,
+                    network_occurrence_ref: network_occurrence_ref.clone(),
+                },
+            })?;
+        let receipt = admitted
+            .filter(Sys5I3ProcessMessage::is_observer_safe_typed_result_or_receipt)
+            .ok_or(Sys5I3PrivateQuicError::FrameRejected)?;
+        let carrier_ref = carrier_ref(&bytes);
+        Ok((
+            receipt,
+            Sys5I3PrivateQuicDeliveryEvidence {
+                carrier_ref,
+                semantic_request_identity_ref: manifest.semantic_request_identity_ref().to_string(),
+                linked_request_identity_ref: manifest
+                    .linked_request_identity_ref()
+                    .map(str::to_string),
+                source_ref: lineage.source_ref,
+                core_ref: lineage.core_ref,
+                source_artifact_ref: lineage.source_artifact_ref,
+                target_artifact_ref: lineage.target_artifact_ref,
+                edge_ref: lineage.edge_ref,
+                network_occurrence_ref,
+            },
+        ))
+    }
+
+    fn reserve_network_occurrence_ref(
         &mut self,
         direction: &str,
-        carrier_ref: &str,
-        request_identity_ref: &str,
-    ) -> String {
-        self.next_network_occurrence = self.next_network_occurrence.saturating_add(1);
+        attempt_material_ref: &str,
+    ) -> Result<String, Sys5I3PrivateQuicError> {
+        self.next_network_occurrence = self
+            .next_network_occurrence
+            .checked_add(1)
+            .ok_or(Sys5I3PrivateQuicError::NetworkOccurrenceExhausted)?;
         let mut hasher = Sha256::new();
-        hasher.update(b"mirrorea/i3/private-quic/network-occurrence/v1\0");
-        for component in [
-            self.control.run_ref(),
-            direction,
-            carrier_ref,
-            request_identity_ref,
-        ] {
+        hasher.update(b"mirrorea/i3/private-quic/network-occurrence/v2\0");
+        for component in [self.control.run_ref(), direction, attempt_material_ref] {
             hasher.update((component.len() as u64).to_be_bytes());
             hasher.update(component.as_bytes());
         }
+        hasher.update(self.session_attempt_generation.to_be_bytes());
         hasher.update(self.next_network_occurrence.to_be_bytes());
+        Ok(format!(
+            "i3-private-quic-network-occurrence-sha256-v2:{:x}",
+            hasher.finalize()
+        ))
+    }
+
+    fn rejected_candidate_commitment_ref(&self, bytes: &[u8]) -> String {
+        let mut hasher = Sha256::new();
+        hasher.update(b"mirrorea/i3/private-quic/rejected-attempt/v1\0");
+        hasher.update((self.control.run_ref().len() as u64).to_be_bytes());
+        hasher.update(self.control.run_ref().as_bytes());
+        hasher.update(self.session_attempt_generation.to_be_bytes());
+        hasher.update((bytes.len() as u64).to_be_bytes());
+        hasher.update(bytes);
         format!(
-            "i3-private-quic-network-occurrence-sha256-v1:{:x}",
+            "i3-private-quic-rejected-attempt-sha256-v1:{:x}",
             hasher.finalize()
         )
     }
+}
+
+impl Sys5I3PrivateQuicReconnect {
+    /// Open the fixed second client-side session by consuming the retained
+    /// control.  A failed attempt intentionally does not return the control:
+    /// retry cannot turn one control into an unbounded connection manager.
+    pub async fn connect(
+        self,
+        connection: Connection,
+    ) -> Result<Sys5I3PrivateQuicSession, Sys5I3PrivateQuicError> {
+        let Self {
+            control,
+            prior_session_attempt_generation,
+            next_network_occurrence,
+        } = self;
+        let session_attempt_generation =
+            next_reconnect_session_attempt_generation(prior_session_attempt_generation)?;
+        verify_exact_peer_spki(&connection, control.expected_peer_spki_ref())?;
+        let (send, receive) = connection
+            .open_bi()
+            .await
+            .map_err(|_| Sys5I3PrivateQuicError::FrameRejected)?;
+        Ok(Sys5I3PrivateQuicSession {
+            connection,
+            send,
+            receive,
+            control,
+            peer_spki_verified: true,
+            peer_preface_verified: false,
+            session_attempt_generation,
+            next_network_occurrence,
+        })
+    }
+
+    /// Server-side counterpart to `connect`; it has the same consuming,
+    /// two-session bound and transfers the exact occurrence counter.
+    pub async fn accept(
+        self,
+        connection: Connection,
+    ) -> Result<Sys5I3PrivateQuicSession, Sys5I3PrivateQuicError> {
+        let Self {
+            control,
+            prior_session_attempt_generation,
+            next_network_occurrence,
+        } = self;
+        let session_attempt_generation =
+            next_reconnect_session_attempt_generation(prior_session_attempt_generation)?;
+        verify_exact_peer_spki(&connection, control.expected_peer_spki_ref())?;
+        let (send, receive) = connection
+            .accept_bi()
+            .await
+            .map_err(|_| Sys5I3PrivateQuicError::FrameRejected)?;
+        Ok(Sys5I3PrivateQuicSession {
+            connection,
+            send,
+            receive,
+            control,
+            peer_spki_verified: true,
+            peer_preface_verified: false,
+            session_attempt_generation,
+            next_network_occurrence,
+        })
+    }
+}
+
+fn next_reconnect_session_attempt_generation(
+    prior_session_attempt_generation: u8,
+) -> Result<u8, Sys5I3PrivateQuicError> {
+    prior_session_attempt_generation
+        .checked_add(1)
+        .filter(|generation| *generation <= MAX_PRIVATE_QUIC_SESSION_ATTEMPTS)
+        .ok_or(Sys5I3PrivateQuicError::SessionAttemptExhausted)
 }
 
 fn carrier_ref(bytes: &[u8]) -> String {

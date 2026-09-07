@@ -1,6 +1,6 @@
 # Project status
 
-最終更新: 2026-09-07 11:38 JST
+最終更新: 2026-09-07 13:57 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -77,11 +77,24 @@ I3-3 is the only active promoted semantic package after explicit owner resume;
 I3-4/I3-5/I3-6/NEXT-0 remain inactive pending their dependency gates. The
 accepted I3-2 source cut and remote parity are the preserved entry evidence.
 
+The resumed I3-3 workspace has current dirty-source slice evidence: full-runtime
+integration 51/51 (44.43s), evaluator owner-capacity 1/1, I3-3 filter 4/4, probe
+library lifecycle evidence 2/2 (one filtered), selected runtime library 1/1 +
+1/1 (old-owner withdrawal and exact-ledger different-snapshot), actual probe
+integration 17/17, and `cargo fmt --all -- --check` pass. The
+historical ledger-source binary remains 49/49 in 47.70s only. Bounded model
+evidence remains 3/3 tests (432 states, 2136 transitions) with three mutant
+counterexamples, not a general runtime proof. Full 20-family matrix and
+retry/reconnect acceptance remain unverified.
+Runtime-only retry 2/2 and full same-feature library 285/285 (82.33s) now pass.
+Focused two-crate all-target Clippy with `-Dwarnings` passes; model-target
+dead-code warnings without its private feature are not a deny-lint profile.
+
 Detailed edge contracts: [`mirrorea_canon/architecture/07-browser-host-trust-boundaries.md`](../mirrorea_canon/architecture/07-browser-host-trust-boundaries.md).
 Cross-edge binding/freshness/revocation/redaction/resource rules: [`mirrorea_canon/architecture/08-browser-host-security-invariants.md`](../mirrorea_canon/architecture/08-browser-host-security-invariants.md).
 View は authoritative domain semantics を所有せず、presentation-local computation のみを許可する。View からの入力は typed command/effect request とし direct store を禁止する。I3-0 はprivate transport選定をclosedし、OPEN-032はこのbounded programだけresolvedした。I3-1とI3-2はbounded evidenceとしてclosedした。official I3 lifecycle は未entry、I3-3のみactive、I3-4/I3-5/I3-6/NEXT-0はdependency-gated inactive、I5 implementation は inactiveである。
 
-I3-2の最終bounded evidenceはlocalnet 12/12（repeat）、full probe 62/62、runtime default 29/29、seam 47/47、library 281/281、docs compile-fail 1/1（default/private）である。6/11 milestones acceptedであり、これは重み付き完成率ではない。FM-5 bounded executable ratchetで、public workflowや100% completionは主張しない。
+I3-2の最終bounded evidenceはlocalnet 12/12（repeat）、full probe 62/62、runtime default 29/29、seam 47/47、library 281/281、docs compile-fail 1/1（default/private）である。6/11 milestones acceptedであり、これは重み付き完成率ではない。FM-5 bounded executable ratchetで、public workflowや100% completionは主張しない。I3-3の回復作業は未受理であり、target/debug/incrementalのみを削除してroot free spaceは約18 GiBに回復した。runtime 51/51、probe cfg-testとruntime fullは再実行済みである。
 
 The active bounded I3 programはinternal carrierとpublic wireを分離し、route/handshake/framing/
 disconnect/reconnect/ambiguous delivery/duplicate/reorder/stale authority/backpressure/

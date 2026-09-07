@@ -54,6 +54,43 @@ baseline: root approximately 15 GiB free, configured external work mount absent,
 and no orphan children after focused baseline execution. No heavy builds,
 artifact allocation or cleanup are performed by this planning assignment.
 
+Crash recovery at `2026-09-07T12:32:34+09:00` (fresh `date -Iseconds`):
+the resume integration is committed at
+`48d98ed0279cf6fa2a0eaabd7d1ec21c926c7aec`; fresh `git ls-remote origin
+refs/heads/main` matched HEAD. Uncommitted runtime, probe and test changes
+survived. No previous trial/build processes remained and the old agent sessions
+were unavailable; replacement specialists resumed with disjoint ownership.
+Root free space was approximately 17 GiB, with no configured external mount.
+No cleanup or user-change discard occurred.
+
+The recovery test assignment then ran a package-wide `cargo test --locked
+-p mir-runtime --features i3-process-test-seams --no-run` rather than the
+intended narrowly selected test target. Free root space fell to 6.3 GiB;
+the parent stopped additional builds. Read-only inspection found `target`
+43 GiB, including `target/debug/incremental` 12 GiB, `target/debug/deps`
+28 GiB and `target/debug/build` 81 MiB. The parent requested explicit owner
+permission to remove only the regenerable incremental directory; no deletion
+has been performed at this checkpoint. Existing compiled tests may be run
+without rebuilding; source work continues under the resource guard.
+
+Owner-authorized cleanup completed at `2026-09-07T13:25:58+09:00`
+(fresh `date -Iseconds`). The parent verified that the exact
+`target/debug/incremental` directory and its parents were not symlinks and
+that no Cargo/rustc process remained, then removed only that regenerable
+directory. Source, Git history, and existing test binaries were preserved.
+`df -h .` reported 18 GiB available afterward; no other cleanup was authorized
+or performed. Targeted validation resumed with `CARGO_INCREMENTAL=0`,
+`CARGO_BUILD_JOBS=2`, `--locked`, and one Cargo builder.
+
+The latest-source `mir-runtime` process-runtime integration target compiled
+successfully and ran 50 tests: 49 passed and one failed. The owner-capacity
+test could not emit its 65th request because the newly bounded requester
+ledger returned `OutboundRequestLedgerExhausted` first. This is an unresolved
+test-path interaction, not passing evidence for owner overflow, and neither
+capacity guarantee is relaxed. Disk remained at 18 GiB available. The test
+owner investigates the distinct boundaries while the evaluator checks the
+remaining independently selected targets; I3-3 remains unaccepted.
+
 ## Documents consulted
 
 Operational instructions: AGENTS.md. Normative: Canon README/MAP, NORTH-STAR,
@@ -128,7 +165,14 @@ Actual test work subsequently reported by the parent:
 
 - `crates/mir-runtime/tests/sys5_i3_process_runtime.rs`
 - `crates/mir-runtime/src/sys5_i3_process_runtime.rs` (implementation in progress)
+- `crates/mir-runtime/src/sys5_i3_private_quic.rs` (bounded retry/session evidence)
 - `crates/mirrorea-i3-probe/tests/i3_process_localnet.rs` (new fault contracts)
+- `crates/mir-runtime/src/m9_auth_verification.rs`
+- `crates/mir-runtime/src/sys4_dispatch.rs`
+- `crates/mir-runtime/tests/i3_request_lifecycle_model.rs`
+- `crates/mirrorea-i3-probe/src/i3_process_localnet.rs`
+- `crates/mirrorea-i3-probe/src/i3_process_faults.rs`
+- `crates/mirrorea-i3-probe/src/lib.rs`
 
 This is the ongoing task-wide inventory, not an accepted source cut. Source,
 test and status writers have distinct ownership; parent owns integration.
@@ -190,11 +234,155 @@ milestone acceptance. Source and test owners are working on the bounded fix.
 
 The I3-3 20-family execution inventory, operation-specific retry/ambiguity
 results, ordering evidence and full exit checks are not yet established.
-No new `lean-proved`, `lean-stated` or `model-checked-bounded` result is claimed.
-Any later finite model must state its bounds and remain separate from runtime
-evidence; unexecuted/deferred checks cannot be counted as passing rows.
+No new `lean-proved` or `lean-stated` result is claimed. Following crash
+recovery, the test owner compiled the standalone std-only lifecycle model with
+`rustc --edition=2021 --test crates/mir-runtime/tests/i3_request_lifecycle_model.rs
+-o /tmp/mir-i3-model-J2zA0R/model_test` and executed it: 2/2 tests passed,
+432 states and 2328 transitions explored for the initial positive model. All three
+mutants (remove dedup, clear ledger on reconnect, renew grant on reconnect)
+produced their expected counterexamples. The prior missing lifetime annotation
+was corrected before this successful compile. Bounds are one owner, two
+semantic identities, two attempts per identity, one withdrawal, one disconnect/
+reconnect and ledger capacity one. This is `model-checked-bounded` evidence
+for the stated abstract model only; reconnect and withdrawal correspondence
+remain implementation targets, not proven concrete runtime/network behavior.
+No Canon assurance ledger promotion follows. Unexecuted/deferred checks cannot
+be counted as passing rows.
+
+Recovery execution of the newly available
+`target/debug/deps/sys5_i3_process_runtime-6ed64992515d5698` binary passed the
+exact duplicate rejection test and the exact 64-entry capacity/no-eviction
+test, 1/1 each (48 filtered out), with `--exact --nocapture --test-threads=1`.
+The Cargo-generated `i3_request_lifecycle_model-5893a4f85fa139c3` also passed
+2/2 with the same finite exploration counts. The retained-publisher internal
+test then exposed an incorrect test expectation: fresh binding rejects the
+old lineage, whereas a deliberately retained old binding passed directly to
+the pure authority helper correctly returns `MissingCapability`. The test
+was corrected to distinguish both gates and assert unchanged use-audit count;
+that corrected test had not been rebuilt at the disk-guard checkpoint; its
+subsequent passing execution is recorded below.
+
+The same compiled runtime integration binary subsequently passed its full
+49-test inventory: exit 0, 49 passed / 0 failed, 47.70 s with `--nocapture
+--test-threads=1`. This verifies that binary's ledger-era source cut, not the
+later retry additions or corrected internal test. Independent review then
+identified a model transition that classified an already-reserved identity as
+capacity pressure. A new negative test reproduced that wrong precedence;
+the model now permits capacity pressure only for absent identities and checks
+duplicate precedence defensively. Fresh standalone execution passed 3/3,
+432 states / 2136 transitions, preserving all three mutant witnesses.
+The earlier 2328-transition exploration is superseded, not acceptance evidence
+for the corrected model.
+
+The parent independently recompiled and ran that standalone model in a fresh
+`mktemp -d /tmp/mir-i3-model-checkpoint-XXXXXX` directory using `rustc
+--edition=2021 --test` and `--nocapture --test-threads=1`: exit 0, 3/3 tests,
+432 states / 2136 transitions and the three expected mutant traces. This
+small dependency-free check does not run Cargo or bypass the main build guard.
+
+After the explicitly authorized incremental-cache cleanup, the sole evaluator
+rebuilt the latest dirty source with incremental compilation disabled and two
+build jobs. The process-runtime integration target compiled and ran 49/50
+successfully; the remaining owner-capacity test incorrectly retained all 64
+requester pending entries by discarding real replies. The requester correctly
+rejected the 65th emission before owner admission. The test-only correction
+must consume checked replies to distinguish owner tombstone capacity from
+requester unresolved-request capacity; neither production limit changes.
+
+The independently selected latest-source checks then passed:
+
+- `cargo test --locked -p mir-runtime --lib --features i3-process-test-seams i3_old_owner_carrier_after_m9_withdrawal -- --test-threads=1`: 1/1.
+- The same lib target filtered to `i3_same_source_identity_with_a_different_snapshot_rejects_without_replacing_its_tombstone`: 1/1.
+- `cargo test --locked -p mirrorea-i3-probe --test i3_process_localnet -- --test-threads=1`: 17/17.
+
+Each used `CARGO_INCREMENTAL=0 CARGO_BUILD_JOBS=2`. These results supersede
+the earlier uncompiled status for the selected authority/binding tests and
+actual-process fault/audit slice, not the unexecuted retry/reconnect route or
+the complete 20-family milestone. Current-slice independent review continues.
+
+The test-only repairs subsequently passed fresh execution. The owner-capacity
+test now returns each of its first 64 actual owner replies through checked
+requester admission, asserts its exact local receipt and cleared pending
+record, and retains every owner tombstone before testing the 65th owner
+admission. A separate requester test holds 64 unresolved generated requests
+and confirms the next rejection preserves pending, outbox and occurrence
+snapshots. No production limit or authority rule changed. The private probe
+test's array-to-iterator conversion error (`E0599`, no tests executed in that
+failed run) was also corrected without changing production code.
+
+Fresh evaluator results: exact owner-capacity 1/1; runtime integration
+`i3_3_` filter 4/4; full `sys5_i3_process_runtime` integration 51/51 (44.43 s);
+probe library `lifecycle_evidence_tests` 2/2; `cargo fmt --all -- --check`
+exit 0. All Cargo invocations retained `--locked`, incremental disabled and
+two jobs, with disk remaining at 18 GiB available. The immediately preceding
+17/17 actual-process integration result remains applicable; it was not rerun
+after changes confined to runtime integration tests and probe `cfg(test)`.
+These are current-slice runtime results, not an I3-3 close or actual-network
+retry proof. The next verification directly exercises the already-added
+runtime-bound retry API before its actual two-session harness consumer.
+
+That runtime-only retry verification subsequently passed 2/2, followed by the
+full same-feature `mir-runtime --lib` suite: 285/285, exit 0, 82.33 s. The
+selected retry module compiled in 28.57 s and executed in 0.67 s. An initial
+test compile error (`expect_err` required `Debug` for an opaque authorization)
+was repaired only in test assertions using `.err().expect(...)`; no `Debug`
+implementation or carrier/token disclosure was added. Tests preserve exact
+bytes/identity across two authorized attempts, reject a foreign runtime handle
+and excess/incorrect attempts, retain pending state on an invalid reply, then
+consume one checked receipt and reject stale replay. They do not create QUIC
+sessions. Disk remained at 18 GiB. The parent's `make docs` also completed
+with exit 0, including configuration, 210-file Canon index, 800/800 hierarchy
+and 1760-report scaffold checks. Focused changed-crate lint and checkpoint
+planning review were the next pre-commit checks. Planning review subsequently
+found no P0/P1 alignment issue and requested only reconciliation of historical
+uncompiled/pending statements with these fresh results. Focused lint exposed
+`large_enum_variant` in the new private reply outcome; the production owner
+boxed only its large receipt field without changing pending/consumption
+semantics. The same lint then identified two large admitted-evidence variants
+in the probe; only their request-receive fields were boxed, preserving Serde
+shape. Two model-test nested conditions became equivalent Rust-2021 match
+guards. No warnings were suppressed and no model transition changed.
+
+Final checkpoint verification passed: focused `cargo clippy --locked
+-p mir-runtime -p mirrorea-i3-probe --all-targets --features
+mir-runtime/i3-process-test-seams -- -D warnings`; workspace formatting and
+diff checks; actual probe integration 17/17; runtime retry module 2/2; private
+probe lifecycle 2/2; model 3/3 with 432 states, 2136 transitions and all three
+mutant witnesses. Each Cargo command used incremental disabled and two jobs.
+The separately run model target emitted eight runtime `dead_code` warnings
+without the private feature profile; its exit was 0, but this does not claim
+all default-feature targets are warning-free. The requested two-crate lint
+profile passed. Root remained at 18 GiB available. Secret-pattern screening
+found no matches in the tracked diff or either new source file; this is a
+bounded screening check, not a general secret-detection guarantee.
 
 ## What changed in understanding
+
+Owner-intent checkpoint: at the owner's explicit request, the parent used a
+separate read-only tab in the existing Oracle Chrome profile to read the
+specified discussion's owner statements and latest analysis. No messages were
+posted or edited; the temporary reading tab was closed without touching the
+running independent Oracle consultation. No private transcript or conversation
+URL is reproduced in this public repository.
+
+The owner reaffirmed meaning-derived distribution, ordinary programming,
+distinct lifetime/admission/patch responsibilities, Mir-owned authoritative
+logic, typed replaceable external boundaries and continued checked evolution.
+The long-term goal is a programmable, observable computational environment,
+not merely a transport runtime or a particular VR application. Reversed Library
+remains an upper application. Independent Canon-first planner review found
+these intentions consistent with current Canon and the fixed Plan 250
+sequence. Advice in that separate discussion about broader compositional proof
+is advisory future scope, not an added I3-3 gate. Its pause-era repository
+snapshot does not supersede the current ADR-0040 resume.
+
+The concrete steering correction is to keep finite implementation assumptions
+finite: the 64-entry ledger is neither a universal no-GC requirement nor a
+continued-operation solution; the admitted cohort coordinator is not a global
+Mir authority requirement; retry-attempt rejection does not resolve the
+original uncertain operation; and fault-matrix completion cannot justify
+synthetic evidence or new source meaning by itself. Plan 250 records this
+containment without a new roadmap or general-theory prerequisite.
 
 The owner pause has been explicitly lifted without changing the program goal
 or reopening accepted I3-2. The accepted actual-process seam is now I3-3's
@@ -226,6 +414,28 @@ provenance and may withdraw existing authority; fault configuration may
 schedule around that real transition but cannot manufacture a grant or revoke.
 No new Surface syntax is inferred merely to represent external stimuli.
 
+A second, distinct one-off Oracle consultation, `i3-3-effect-time-provider`,
+completed normally in 11m24s with 6Pro selection verified. The parent read its
+full answer and compared it with the mapper's accepted-path findings. The
+current SurfaceV0/SYS3 path has no declared external-provider invocation;
+historical Full System V1 syntax and provider-admission fixtures are not an
+I3 execution path. Consequently, renaming an RMW, transport or policy error
+as provider failure would invent missing effect meaning and is rejected.
+The narrow proposed alternative is one checked, read-only external invocation
+with its own declared failure, generated projection and actual provider
+attempt. Its source/Core/admission contract remains **OPEN**; no provider
+implementation or Canon adoption has been made at this checkpoint.
+
+For the combined timeout/lease/clock family, the advisory proposes a distinct
+admitted request-lifecycle deadline and actual pre-serve time check. It is not
+the launcher/reaper timeout and must not silently change an existing operation
+failure contract. A finite pending-request timeout would not establish lease,
+fallback, synchronized-clock or arbitrary cancellation semantics. Its exact
+contract is also still **OPEN**. The parent retains all 20 required families;
+neither missing row is counted as covered by this design advice. The next
+consumer is I3-3 boundary specification/implementation after the current
+runtime slice is freshly verified, not a new Browser/Host or theory program.
+
 An implementation counterexample refined rejection precedence: actual M9
 revocation advances generation, so an old carrier fails the existing exact
 lineage-binding gate before a capability check. That fail-closed rule is
@@ -235,11 +445,73 @@ revalidation and actual-network withdrawal remain separate evidence work.
 Correctness, capacity, exact binding and all fault rows still require final
 execution and independent review before acceptance.
 
+The subsequent retry source checkpoint retains at most 64 requester pending
+records, checks capacity before source submission, and permits at most two
+explicit attempts through opaque runtime-bound pending handles. Reconnect
+consumes the peer-control/counter state into one second session; current
+lineage/authority is revalidated, occurrence counters fail closed on overflow,
+and rejected ingress exposes only run-scoped commitment/occurrence evidence.
+Reply failure retains the original pending handle; one checked local receipt
+consumes it. At that source handoff, these additions and their safe attempt
+summaries had formatting/diff checks only. The later 2/2 runtime-only retry
+and 285/285 library runs above supersede that uncompiled state; actual
+reconnect execution and milestone acceptance remain pending.
+
+The decoded/restricted child images intentionally omit the M9 successor
+publisher. Therefore an integration test cannot manufacture local revocation
+by exposing that publisher to a child. Canon theory/05 and theory/18 require
+the retained admitted-program M9 publisher to produce successors. The parent
+selected the smallest conforming direction: genuine coordinator-published
+immutable successors, restricted per child and validated through independently
+trusted control binding. A child-produced "monotone self-withdrawal" successor
+is rejected as inconsistent with that producer rule. Exact installation and
+actual-network withdrawal tests remain open; no new authority is inferred from
+deployment, session or fault controls.
+
 Owner decisions are required only at the existing ADR-0034 reserved stops:
 guarantee/North-Star weakening, unavoidable hidden retry/transaction, public
 freeze, irreversible semantic tie, both retained transports failing required
 criteria, or protected production/resource/security scope. Missing later
 features and general proofs are not themselves stop conditions.
+
+The next actual-session consumer uses the existing generated owner carrier,
+opaque original-pending handle, and consuming QUIC reconnect API. The parent
+selects this smallest extension over adding a new network rejection codec:
+owner-local typed duplicate rejection can be joined as actual owner evidence,
+but cannot be described as a failure delivered to the requester or as completion
+of the original operation. No new wire meaning is needed for these two cases.
+
+- Before first carrier write: retain one source-emitted original request,
+  complete and close the first checked session without sending its carrier,
+  reconnect using consumed control on both sides, explicitly send the retained
+  original on session two, and consume the actual checked reply exactly once.
+- After actual owner admission before reply: send the original once, retain
+  actual owner serve/write evidence while the reply is withheld by connection
+  close, reconnect the same live runtimes, and explicitly send the identical
+  original carrier. Owner current admission then duplicate lookup rejects it
+  without a second mutation. Requester retains the original pending operation;
+  the joined view separates owner-observed attempt rejection from requester
+  reply uncertainty and makes no successful-recovery claim.
+
+Implementation ownership remains probe-local scheduling/evidence in
+`i3_process_localnet.rs` and `i3_process_faults.rs`, runtime/adapter enforcement
+in `sys5_i3_process_runtime.rs` and `sys5_i3_private_quic.rs`, and separately
+owned tests. Request identity and carrier binding stay unchanged; session and
+network occurrences change. Positive/control and falsifier tests must inspect
+actual child events, exact joins, pending/receipt state, unchanged owner
+mutation count on duplicate, bounded reaping, and wrong-session local misuse
+without peer-blame diagnostics. No identity manufacture, child reboot, ledger
+reset, authority update, automatic retry, or new source operation is permitted.
+This is an I3-3 direct consumer, not I3-4 activation or complete fault coverage.
+
+The rejected-attempt join additionally requires a common adapter-derived,
+run/session-bound commitment to the actual encoded frame. Sender evidence and
+receiver rejection must agree on it before the supervisor attaches a duplicate
+outcome. A nonempty unrelated hash is insufficient. Missing/mutated or
+wrong-session commitments produce explicit evidence rejection while requester
+uncertainty remains; they cannot import rejected source/Core claims. This
+narrow evidence addition belongs to the next actual-session slice, not the
+current checkpoint, and does not add a rejection wire message.
 
 ## Suggested next prompt
 
@@ -292,20 +564,76 @@ An independent final reviewer will assess this writer's changes; this writer
 does not self-accept the milestone. Final findings and dispositions must be
 recorded before acceptance.
 
+Parent review of the first two actual-process disconnect profiles found three
+gaps before acceptance: normal joined tests permitted absent owner evidence;
+owner evidence was not checked against the complete retained source/Core/
+artifact/edge contract; and absent owner-terminal evidence escaped through a
+lifecycle error before request-bound ambiguity could be retained. Separate
+source/test owners are adding strict normal joins, an evidence-only provenance
+falsifier, and a post-admission suppress-owner-audit control. Missing evidence
+must remain unknown, not zero mutation; clean child exit is not semantic
+success. These findings remain open until fresh execution and review.
+
+Independent first-slice review found no P0 and assessed the owner ledger's
+ordering/retention as coherent. It reported three P1 findings: unexpected
+normal-profile owner terminal shapes silently became unknown evidence;
+request-delivery validation omitted linked-identity and nonempty carrier/
+network-reference checks; and the model's capacity-pressure transition
+contradicted duplicate precedence. The source/test owners are correcting the
+two harness issues; the model correction has the fresh 3/3 result above.
+The reviewer also requested concrete retention-after-handoff-error and
+same-identity/different-binding tests and stronger model-bound checks (P2).
+Later in-progress retry code was explicitly excluded from this review.
+No aggregate first-slice or milestone acceptance is claimed pending the fixes,
+fresh compilation/execution and narrow re-review.
+
+The narrow re-review confirmed the three original P1 mechanisms were fixed in
+source, then found an incorrect lifecycle stage/count default for unexpected
+owner terminals. Source now preserves post-Ready owner-start/terminal evidence
+and classifies missing or unusable evidence explicitly. Post-loss starts at
+`RequesterReplyOrReceiptNotObserved`; only a validated admitted-owner join may
+upgrade it to `AfterRemoteAdmission`. Suppressed or provenance-rejected owner
+evidence remains unknown. The separate test owner added all-terminal-shape,
+zero-mutation/positive-admission and missing-evidence assertions. The parent
+inspected these changes; initially only formatting/diff checks passed. The
+subsequent 17/17 actual-process and 2/2 internal lifecycle tests above supersede
+that uncompiled checkpoint. Concrete P2 tests now cover the
+pre-handoff reservation failure and private-ledger binding mismatch; the
+pre-handoff seam is not claimed as a failure after actual mutation.
+
+The subsequent independent current-slice review found no P0/P1 production
+defect and confirmed the earlier lifecycle-stage P1 resolved. It inspected
+current-binding/authority-before-dedup order, exact retained snapshots,
+non-eviction, opaque runtime-bound retry handles, attempt commitment before
+network writes, consuming two-session control, and fail-closed rejected-input
+evidence. One P2 remains: the new send-attempt guard reports
+`PeerBindingRejected` when peer/preface checks succeeded but the caller uses
+the wrong session generation. Its direct fix/test consumer is the actual
+two-session retry slice; this local misuse must not blame the peer. The review
+does not establish actual reconnect, withdrawal-between-sessions, or complete
+I3-3 coverage. Runtime-only retry tests subsequently passed 2/2, with 285/285
+full library regression as recorded above; actual-session evidence is next.
+
 ## Skipped validations and reasons
 
 The planning writer runs no builds or runtime tests: the assignment is limited
 to two planning/report files and the parent already supplied focused baseline
 results. Full I3-3 fault/order coverage, I2/M10 close regression, independent
-milestone acceptance, final remote parity and any bounded model are still
-unexecuted for I3-3. They are required as applicable before milestone close,
+milestone acceptance and final remote parity are still unexecuted for I3-3.
+The standalone bounded model above does not replace those checks.
+They are required as applicable before milestone close,
 not skipped passes. General proof, WAN/production, durability and Browser/Host
 product realization remain outside this bounded milestone.
 
 ## Commit / push status
 
-No commit or push by this writer; explicitly outside the delegated assignment.
-Baseline local `HEAD` and `origin/main` match the resume cut. Parent owns
+The parent committed and pushed the resume integration at
+`48d98ed0279cf6fa2a0eaabd7d1ec21c926c7aec`, with fresh remote parity confirmed
+during recovery. The source/evidence checkpoint containing this report pins
+the verified first I3-3 slice, not milestone acceptance. The planned commit
+subject is `feat: checkpoint I3 request lifecycle and fault evidence`; its
+exact hash and push result will be recorded during the next slice, without a
+metadata-only commit. Parent owns
 accepted source/evidence pinning, integration commits, authorized pushes and
 fresh remote parity before the fixed transition to I3-4.
 
@@ -316,3 +644,16 @@ scoped validation. Source and test owners remain active. Other agents' work is
 preserved; parent retains active-goal integration and final acceptance.
 I3-3 remains ongoing when this writer returns; no user-task completion or
 milestone close is asserted by the sub-agent handoff.
+
+Recovery checkpoint: replacement runtime, harness, test, mapping, planner and
+review specialists have handed back their bounded work; both Oracle consults
+completed. Their contexts are retained for continuation, with no new feature
+assignment pending. The parent stops additional build/integration acceptance
+at the explicit cleanup-permission boundary, not at I3-3 completion. No
+milestone was accepted, no later milestone activated, and no unvalidated
+source commit/push or deletion was performed in this recovery checkpoint.
+
+The subsequent explicit owner approval resolved that cleanup-permission
+pause. The narrowly authorized cleanup and resumed validation are recorded
+under Start state above. Evaluation and bounded test diagnosis are active;
+no later milestone has been activated.

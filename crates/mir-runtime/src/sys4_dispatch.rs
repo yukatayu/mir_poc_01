@@ -46,9 +46,9 @@ use crate::{
         M9AuthoritySuccessorPublisher, M9AuthorityTransitionKind, M9CacheValidationInspection,
         M9CheckedPatchAuthorityBinding, M9DesignatedSourceReleaseLineage, M9ExecutionRestriction,
         M9I3PrivateAuthorityGenerationSnapshot, M9KernelAuthorityView,
-        M9RelationPublicationAdmission, M9RuntimeExecutionSeam,
-        M9RuntimeValidationObservationSnapshot, M9SealedFailureInspection, M9SealedGeneration,
-        M9SealedTransitionInspection, M9SourceReleaseValidationInspection,
+        M9OwnerOperationRevalidationFailure, M9RelationPublicationAdmission,
+        M9RuntimeExecutionSeam, M9RuntimeValidationObservationSnapshot, M9SealedFailureInspection,
+        M9SealedGeneration, M9SealedTransitionInspection, M9SourceReleaseValidationInspection,
     },
     sys2_execution_backend::{
         Ow1ContextualM8Execution, Ow1ObserverDesignatedPublication, Ow1WorkerBackend,
@@ -3811,7 +3811,27 @@ pub(crate) struct Sys4I3PendingOwnerRequestBinding {
     owner_lineage_ref: String,
 }
 
+/// Result of a pure, post-binding current-authority check for one incoming
+/// owner request.  It is deliberately separate from the later M9 validation
+/// occurrence recorded by `step_locus`.
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+pub(crate) enum Sys4I3OwnerRequestRevalidationFailure {
+    CarrierBindingMismatch,
+    StaleMembership,
+    MissingCapability,
+    MissingWitness,
+}
+
 impl Sys4I3PendingOwnerRequestBinding {
+    /// The source locus already selected by checked source/Core dispatch for
+    /// this exact request.  SYS-5 uses this only to verify that a retained
+    /// requester-local pending record still belongs to its own image before
+    /// authorizing a bounded delivery attempt; it is not a caller-selected
+    /// retry initiator.
+    pub(crate) fn requester_locus(&self) -> &str {
+        &self.requester_locus
+    }
+
     /// Bind one SYS-5 observer request identity to the exact source-derived
     /// request/reply contract which both endpoints can independently obtain
     /// from their already sealed SYS-4/M9 state.  The request/carrier IDs are
@@ -8298,6 +8318,46 @@ impl M9AuthorityLifecycle {
         })
     }
 
+    /// Exercise an administrative owner-capability withdrawal only in the
+    /// typed local-fabric test seam.  The operation and owner locus select an
+    /// already sealed source operation; M9 alone resolves the retained
+    /// principal, capability, and witness before producing the successor.
+    #[cfg(test)]
+    fn revoke_owner_capability(
+        &mut self,
+        operation: &str,
+        owner_locus: &str,
+    ) -> Sys4Result<M9AuthorityTransition> {
+        let Some(publisher) = self.publisher.as_mut() else {
+            return Err(Sys4DispatchDiagnostics::one(
+                Sys4DiagnosticKind::ProgramAdmissionMismatch,
+            ));
+        };
+        let prior = publisher.current_inspection();
+        let prior_publisher = publisher.clone();
+        let prior_runtime_validation_observations =
+            publisher.current_runtime_validation_observation_snapshot();
+        let (principal, _) = publisher
+            .current_generation_for_restore()
+            .owner_authority_for_operation(operation, owner_locus)
+            .ok_or_else(|| Sys4DispatchDiagnostics::one(Sys4DiagnosticKind::M8ExecutionRejected))?;
+        let generation = publisher
+            .revoke_owner_capability(operation, &principal, owner_locus)
+            .map_err(|_| Sys4DispatchDiagnostics::one(Sys4DiagnosticKind::M8ExecutionRejected))?;
+        let sealed_m9_inspection = generation.transition_inspection(
+            &prior,
+            M9AuthorityTransitionKind::OwnerCapabilityRevoked,
+            None,
+            None,
+        );
+        Ok(M9AuthorityTransition {
+            generation,
+            sealed_m9_inspection,
+            prior_runtime_validation_observations,
+            prior_publisher,
+        })
+    }
+
     /// Retire a relation's source-declared primary membership only through
     /// the M9 publisher.  The caller supplies the relation plus its explicit
     /// checked anchor locus; M9 derives the principal and resolves the live
@@ -8440,6 +8500,17 @@ impl M9AuthorityLifecycleAccess<'_> {
         self.lifecycle.revoke_designated_source_release(lineage)
     }
 
+    #[cfg(test)]
+    pub(crate) fn revoke_owner_capability(
+        &mut self,
+        operation: &str,
+        owner_locus: &str,
+    ) -> Sys4Result<M9AuthorityTransition> {
+        self.synchronize_before_successor()?;
+        self.lifecycle
+            .revoke_owner_capability(operation, owner_locus)
+    }
+
     fn retire_source_declared_primary_anchor(
         &mut self,
         relation: &str,
@@ -8485,6 +8556,7 @@ impl M9AuthorityTransition {
     pub(crate) fn observer_transition_ref(&self) -> Option<String> {
         let inspection = self.sealed_m9_inspection();
         let kind = match inspection.transition_kind() {
+            M9AuthorityTransitionKind::OwnerCapabilityRevoked => return None,
             M9AuthorityTransitionKind::DesignatedConsumerCapabilityRevoked => {
                 "designated-consumer-capability-revoked"
             }
@@ -10132,6 +10204,73 @@ impl LocalFabric {
             core_ref,
             owner_lineage_ref,
         })
+    }
+
+    /// Recheck the current M8 authority behind an already completed I3 owner
+    /// request binding without recording an M9 semantic-use occurrence.  The
+    /// caller must first obtain `pending` through
+    /// `i3_pending_owner_request_binding`; this method neither relaxes that
+    /// current-lineage gate nor consumes, enqueues, or serves the carrier.
+    pub(crate) fn revalidate_i3_bound_owner_request_authority(
+        &self,
+        pending: &Sys4I3PendingOwnerRequestBinding,
+        carrier: &Sys4ProcessCarrier,
+    ) -> Result<(), Sys4I3OwnerRequestRevalidationFailure> {
+        let envelope = &carrier.envelope;
+        if envelope.edge_kind != CommunicationEdgeKind::OwnerRequest
+            || envelope.request_id != pending.request_id
+            || envelope.carrier_id != pending.request_carrier_id
+            || envelope.operation_id != pending.operation_id
+            || envelope.edge_ref != pending.request_edge_ref
+            || envelope.source_locus != pending.requester_locus
+            || envelope.target_locus != pending.owner_locus
+            || envelope.core_ref.as_deref() != Some(pending.core_ref.as_str())
+            || envelope.m9_owner_lineage_ref.as_deref() != Some(pending.owner_lineage_ref.as_str())
+        {
+            return Err(Sys4I3OwnerRequestRevalidationFailure::CarrierBindingMismatch);
+        }
+        self.authority_generation
+            .revalidate_owner_operation_without_observation(
+                &pending.operation_id,
+                &pending.owner_locus,
+            )
+            .map_err(|failure| match failure {
+                M9OwnerOperationRevalidationFailure::UnavailableOwnerOperation => {
+                    Sys4I3OwnerRequestRevalidationFailure::CarrierBindingMismatch
+                }
+                M9OwnerOperationRevalidationFailure::StaleMembership => {
+                    Sys4I3OwnerRequestRevalidationFailure::StaleMembership
+                }
+                M9OwnerOperationRevalidationFailure::MissingCapability => {
+                    Sys4I3OwnerRequestRevalidationFailure::MissingCapability
+                }
+                M9OwnerOperationRevalidationFailure::MissingWitness => {
+                    Sys4I3OwnerRequestRevalidationFailure::MissingWitness
+                }
+            })
+    }
+
+    /// Test-only administrative withdrawal from a retained-publisher local
+    /// fabric.  A decoded I3 child image has no publisher and therefore
+    /// cannot call this seam or manufacture a successor.  The generated
+    /// carrier supplies the exact already-checked operation/locus selection;
+    /// it never provides principal/capability/witness material.
+    #[cfg(test)]
+    pub(crate) fn test_only_revoke_i3_owner_request_authority(
+        &mut self,
+        carrier: &Sys4ProcessCarrier,
+    ) -> Sys4Result<()> {
+        if carrier.envelope.edge_kind != CommunicationEdgeKind::OwnerRequest {
+            return Err(Sys4DispatchDiagnostics::one(
+                Sys4DiagnosticKind::CarrierProvenanceMismatch,
+            ));
+        }
+        let operation = carrier.envelope.operation_id.clone();
+        let owner_locus = carrier.envelope.target_locus.clone();
+        let transition = self
+            .m9_authority_lifecycle_mut()
+            .revoke_owner_capability(&operation, &owner_locus)?;
+        self.apply_admitted_authority_lifecycle(transition)
     }
 
     /// Check an already locally bound reply against the requester's exact
@@ -14781,6 +14920,60 @@ verify finite_refinement
         assert_eq!(diagnostic.primary().kind(), expected);
         assert_eq!(diagnostic.partial_fabric(), None);
         diagnostic
+    }
+
+    #[test]
+    fn i3_old_owner_carrier_after_m9_withdrawal_rejects_at_lineage_binding_without_a_new_use_audit()
+    {
+        let (_program, _admission, mut fabric) = boot_relation_fabric();
+        let submission = fabric
+            .submit_source_action(SourceAction::owner_operation("attack"))
+            .expect("the checked source emits the owner request before withdrawal");
+        let request_id = submission.request_id().to_string();
+        let carrier = fabric
+            .take_outbound_process_carrier(submission.origin_locus(), submission.envelope_id())
+            .expect("the source-generated carrier is retained for the exact I3 binding check");
+        let pending = fabric
+            .i3_pending_owner_request_binding(&carrier)
+            .expect("the pre-withdrawal carrier has the current exact owner lineage");
+        let before = fabric
+            .current_m9_authority_inspection()
+            .owner_operation_validation_count("attack", "WorldAuthority", &request_id);
+        assert_eq!(
+            before, 0,
+            "binding and pure revalidation are not M9 use observations"
+        );
+        fabric
+            .revalidate_i3_bound_owner_request_authority(&pending, &carrier)
+            .expect("the current carrier passes pure authority revalidation before withdrawal");
+        assert_eq!(
+            fabric
+                .current_m9_authority_inspection()
+                .owner_operation_validation_count("attack", "WorldAuthority", &request_id),
+            before,
+            "pure I3 revalidation must not add an M9 owner-operation observation"
+        );
+
+        fabric
+            .test_only_revoke_i3_owner_request_authority(&carrier)
+            .expect("only the retained M9 publisher may produce the withdrawn successor");
+
+        assert_diagnostic(
+            fabric.i3_pending_owner_request_binding(&carrier),
+            Sys4DiagnosticKind::CarrierProvenanceMismatch,
+        );
+        assert_eq!(
+            fabric.revalidate_i3_bound_owner_request_authority(&pending, &carrier),
+            Err(Sys4I3OwnerRequestRevalidationFailure::MissingCapability),
+            "a previously captured exact binding reaches the pure current-authority check, which reports the revoked capability without creating a use observation"
+        );
+        assert_eq!(
+            fabric
+                .current_m9_authority_inspection()
+                .owner_operation_validation_count("attack", "WorldAuthority", &request_id),
+            before,
+            "neither fresh strict prebinding rejection nor pure current-authority revalidation may add an M9 use audit"
+        );
     }
 
     #[test]

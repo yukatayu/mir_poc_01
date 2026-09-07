@@ -23,12 +23,23 @@ mod process_snapshot;
 // local-store or request identity before I3-3 retry semantics exist.
 static NEXT_PROCESS_COHORT_OCCURRENCE: AtomicU64 = AtomicU64::new(1);
 
+// This is a bounded, in-memory I3-3 duplicate-admission guard for the
+// accepted local profile.  It is deliberately neither durable nor a retry,
+// reconnect, or exactly-once policy; reaching the bound fails closed.
+const MAX_INBOUND_OWNER_REQUEST_TOMBSTONES: usize = 64;
+
+// Requester-local original-operation state is bounded independently from the
+// owner duplicate ledger.  Neither reconnect nor a pending handle can evict
+// or reset this map; exhaustion happens before source action submission.
+const MAX_OUTBOUND_OWNER_REQUEST_PENDING: usize = 64;
+const MAX_OUTBOUND_OWNER_REQUEST_ATTEMPTS: u8 = 2;
+
 use crate::{
     sys3_projection::{BackendProfile, CommunicationEdgeKind},
     sys4_dispatch::{
         FabricProgram, LocalFabric, ObserverSafeM9SemanticRowSets, SealedFabricAdmission,
-        SourceAction, Sys4I3PendingOwnerRequestBinding, Sys4I3PrivateProcessCarrierSnapshot,
-        Sys4ProcessCarrier,
+        SourceAction, Sys4I3OwnerRequestRevalidationFailure, Sys4I3PendingOwnerRequestBinding,
+        Sys4I3PrivateProcessCarrierSnapshot, Sys4ProcessCarrier,
     },
     sys5_local_slice::Sys5LocalProject,
 };
@@ -62,6 +73,37 @@ pub enum Sys5I3ProcessRuntimeErrorKind {
     NonOwnerServe,
     DirectRemoteStore,
     CarrierAdmissionRejected,
+    /// A complete source/Core/route/lineage binding named an owner whose
+    /// current membership is stale.  No duplicate outcome is disclosed.
+    StaleMembership,
+    /// A complete source/Core/route/lineage binding named an owner whose
+    /// current capability is absent or revoked.  No duplicate outcome is
+    /// disclosed.
+    MissingCapability,
+    /// A complete source/Core/route/lineage binding named an owner whose
+    /// current witness is absent or no longer live.  No duplicate outcome is
+    /// disclosed.
+    MissingWitness,
+    /// A second delivery bound to an already reserved source-derived owner
+    /// request identity.  It is intentionally not a stored-result return.
+    DuplicateRequestRejected,
+    /// The outer semantic identity matched a prior reservation but the exact
+    /// private generated-carrier snapshot did not.  This never reuses the
+    /// prior outcome.
+    RequestIdentityBindingMismatch,
+    /// The bounded in-memory duplicate ledger cannot accept another distinct
+    /// request identity without eviction, so it rejects rather than forget.
+    InboundRequestLedgerExhausted,
+    /// The requester-local bounded original-operation table cannot retain a
+    /// new emitted request without eviction.
+    OutboundRequestLedgerExhausted,
+    /// An opaque original-request pending handle did not name the retained
+    /// requester-local operation, its exact carrier, or its source-selected
+    /// requester locus.  This discloses no authority or transport detail.
+    OriginalRequestPendingRejected,
+    /// The original request has already used its fixed two delivery-attempt
+    /// budget.  This is not a completed semantic result.
+    OutboundAttemptBudgetExhausted,
     MissingAuthoritativeState,
     OutboundExtractionRejected,
 }
@@ -81,6 +123,144 @@ impl Sys5I3ProcessRuntimeError {
 
     pub const fn kind(&self) -> Sys5I3ProcessRuntimeErrorKind {
         self.kind
+    }
+}
+
+/// The owner-local duplicate guard's state.  It is narrower than the I3-3
+/// request lifecycle: `Reserved` is intentionally retained if a later
+/// SYS-4 handoff errors, where this layer cannot prove non-mutation.
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+enum Sys5I3InboundOwnerRequestTombstonePhase {
+    Reserved,
+    Received,
+    Ambiguous,
+}
+
+/// Private, source-derived replay protection retained by an owner runtime.
+/// The exact canonical snapshot bytes are checked only for equality; neither
+/// they nor any prior outcome are exposed to a duplicate sender.
+///
+/// This intentionally has no `Debug` implementation: raw private payload
+/// bytes must not become an observer/debug surface.
+#[derive(Clone, PartialEq, Eq)]
+struct Sys5I3InboundOwnerRequestTombstone {
+    carrier_snapshot_binding_bytes: Vec<u8>,
+    phase: Sys5I3InboundOwnerRequestTombstonePhase,
+}
+
+/// Retained requester-local state for a source-emitted owner request.  The
+/// exact carrier is deliberately not exported through the pending handle:
+/// only the runtime can revalidate and encode it for an adapter-owned send.
+struct Sys5I3OutboundOwnerRequestRecord {
+    pending: Sys4I3PendingOwnerRequestBinding,
+    exact_carrier: Sys4ProcessCarrier,
+    pending_token_ref: String,
+    started_attempts: u8,
+    // The source-selected requester stays in `pending`; this fixed intent
+    // records whether its most recent bounded attempt was original delivery
+    // or the one authorized reconnect retry.  No caller text participates.
+    last_started_attempt_kind: Option<Sys5I3OriginalOwnerRequestAttemptKind>,
+    pending_handle_issued: bool,
+}
+
+/// A non-cloneable, opaque claim to one runtime-retained original owner
+/// request.  Possession alone grants no retry: the runtime compares this
+/// token with its own record, rechecks exact current binding/M9 authority,
+/// and enforces the source-selected requester and attempt budget.
+#[doc(hidden)]
+pub struct Sys5I3OriginalOwnerRequestPending {
+    semantic_request_identity_ref: String,
+    runtime_token_ref: String,
+}
+
+impl Sys5I3OriginalOwnerRequestPending {
+    /// An observer-safe source-derived identity for correlation only.  It is
+    /// not a carrier, capability, retry authorization, or transport key.
+    pub fn semantic_request_identity_ref(&self) -> &str {
+        &self.semantic_request_identity_ref
+    }
+}
+
+/// Private attempt intent selected by the adapter API, not by caller text.
+/// A reconnect retry is accepted only by a consuming second-session adapter.
+#[derive(Clone, Copy, Debug, PartialEq, Eq)]
+pub(crate) enum Sys5I3OriginalOwnerRequestAttemptKind {
+    InitialDelivery,
+    ReconnectRetry,
+}
+
+/// Fixed reason recorded for a runtime-authorized original-request delivery
+/// attempt.  It has no free-form/caller-provided branch and is not authority.
+#[doc(hidden)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+pub enum Sys5I3ObserverSafeOriginalOwnerRequestAttemptReason {
+    InitialDelivery,
+    ReconnectRetry,
+}
+
+impl From<Sys5I3OriginalOwnerRequestAttemptKind>
+    for Sys5I3ObserverSafeOriginalOwnerRequestAttemptReason
+{
+    fn from(value: Sys5I3OriginalOwnerRequestAttemptKind) -> Self {
+        match value {
+            Sys5I3OriginalOwnerRequestAttemptKind::InitialDelivery => Self::InitialDelivery,
+            Sys5I3OriginalOwnerRequestAttemptKind::ReconnectRetry => Self::ReconnectRetry,
+        }
+    }
+}
+
+/// Observer-safe summary of the latest begun attempt for one retained
+/// original request.  The requester binding is a domain-separated reference,
+/// not an M8/M9 principal/capability/witness or a transport credential.
+#[doc(hidden)]
+#[derive(Debug, Clone, PartialEq, Eq)]
+pub struct Sys5I3ObserverSafeOriginalOwnerRequestAttempt {
+    semantic_request_identity_ref: String,
+    source_requester_locus: String,
+    requester_binding_ref: String,
+    attempt_generation: u8,
+    reason: Sys5I3ObserverSafeOriginalOwnerRequestAttemptReason,
+}
+
+impl Sys5I3ObserverSafeOriginalOwnerRequestAttempt {
+    pub fn semantic_request_identity_ref(&self) -> &str {
+        &self.semantic_request_identity_ref
+    }
+
+    pub fn source_requester_locus(&self) -> &str {
+        &self.source_requester_locus
+    }
+
+    pub fn requester_binding_ref(&self) -> &str {
+        &self.requester_binding_ref
+    }
+
+    pub const fn attempt_generation(&self) -> u8 {
+        self.attempt_generation
+    }
+
+    pub const fn reason(&self) -> Sys5I3ObserverSafeOriginalOwnerRequestAttemptReason {
+        self.reason
+    }
+}
+
+/// One runtime-authorized, one-use exact request frame.  It stays
+/// crate-private so no caller can replay or inspect its carrier bytes.
+pub(crate) struct Sys5I3AuthorizedOriginalOwnerRequestAttempt {
+    semantic_request_identity_ref: String,
+    runtime_token_ref: String,
+    attempt_number: u8,
+    attempt_kind: Sys5I3OriginalOwnerRequestAttemptKind,
+    encoded_message_bytes: Vec<u8>,
+}
+
+impl Sys5I3AuthorizedOriginalOwnerRequestAttempt {
+    pub(crate) fn encoded_message_bytes(&self) -> &[u8] {
+        &self.encoded_message_bytes
+    }
+
+    pub(crate) fn semantic_request_identity_ref(&self) -> &str {
+        &self.semantic_request_identity_ref
     }
 }
 
@@ -2346,6 +2526,42 @@ impl Sys5I3PrivateProcessCodec {
         self.frame_body(body, Self::MAX_MESSAGE_BYTES)
     }
 
+    /// Encode the runtime-retained exact original request for one
+    /// adapter-authorized attempt.  This is crate-private so ordinary callers
+    /// cannot turn an opaque pending handle into cloneable carrier bytes.
+    pub(crate) fn encode_retained_owner_request_attempt(
+        &self,
+        carrier: &Sys4ProcessCarrier,
+        semantic_request_identity_ref: &str,
+        cohort_provenance_ref: &str,
+    ) -> Result<Vec<u8>, Sys5I3PrivateProcessCodecError> {
+        if carrier.edge_kind() != CommunicationEdgeKind::OwnerRequest
+            || semantic_request_identity_ref.is_empty()
+            || cohort_provenance_ref.is_empty()
+        {
+            return Err(Sys5I3PrivateProcessCodecError::new(
+                Sys5I3PrivateProcessCodecErrorKind::Malformed,
+            ));
+        }
+        let carrier = carrier.i3_private_process_snapshot().map_err(|_| {
+            Sys5I3PrivateProcessCodecError::new(Sys5I3PrivateProcessCodecErrorKind::Malformed)
+        })?;
+        let envelope = PrivateProcessMessageEnvelope {
+            version: process_snapshot::PRIVATE_PROCESS_SNAPSHOT_VERSION,
+            message: PrivateProcessMessageSnapshot {
+                kind: PrivateProcessMessageKind::Request,
+                carrier,
+                semantic_request_identity_ref: semantic_request_identity_ref.to_string(),
+                linked_request_identity_ref: None,
+                cohort_provenance_ref: cohort_provenance_ref.to_string(),
+            },
+        };
+        let body = serde_json::to_vec(&envelope).map_err(|_| {
+            Sys5I3PrivateProcessCodecError::new(Sys5I3PrivateProcessCodecErrorKind::Malformed)
+        })?;
+        self.frame_body(body, Self::MAX_MESSAGE_BYTES)
+    }
+
     pub fn decode_untrusted_message(
         &self,
         bytes: &[u8],
@@ -2668,9 +2884,15 @@ pub struct Sys5I3ProcessRuntime {
     // A requester-local claim for one emitted owner request.  It contains
     // only receiver-owned, source-derived route/provenance facts; it is not
     // a transport session, credential, or mutable remote-store handle.
-    pending_outbound_owner_requests: BTreeMap<String, Sys4I3PendingOwnerRequestBinding>,
+    pending_outbound_owner_requests: BTreeMap<String, Sys5I3OutboundOwnerRequestRecord>,
+    // Bounded owner-local replay tombstones.  A key is retained after the
+    // first reservation for this runtime lifetime; no reconnect or retry
+    // path may clear it.
+    inbound_owner_request_tombstones: BTreeMap<String, Sys5I3InboundOwnerRequestTombstone>,
     #[cfg(feature = "i3-process-test-seams")]
     reject_next_outbound_extraction: bool,
+    #[cfg(feature = "i3-process-test-seams")]
+    reject_next_owner_admission_after_reservation: bool,
 }
 
 impl std::fmt::Debug for Sys5I3ProcessRuntime {
@@ -2740,8 +2962,11 @@ impl Sys5I3ProcessRuntime {
             accepted_inbound_receipt_count: 0,
             semantic_occurrences: Sys5I3ObserverSafeSemanticOccurrences::default(),
             pending_outbound_owner_requests: BTreeMap::new(),
+            inbound_owner_request_tombstones: BTreeMap::new(),
             #[cfg(feature = "i3-process-test-seams")]
             reject_next_outbound_extraction: false,
+            #[cfg(feature = "i3-process-test-seams")]
+            reject_next_owner_admission_after_reservation: false,
         })
     }
 
@@ -2784,16 +3009,77 @@ impl Sys5I3ProcessRuntime {
         self.pending_outbound_owner_requests.len()
     }
 
+    /// Total started delivery attempts retained across the bounded original
+    /// requester-operation table.  This is a count only: it exposes no
+    /// request identity, carrier bytes, source, or authority material.
+    pub fn observer_safe_started_owner_request_attempt_count(&self) -> usize {
+        self.pending_outbound_owner_requests
+            .values()
+            .map(|record| usize::from(record.started_attempts))
+            .sum()
+    }
+
+    /// Latest started attempt per retained original request.  This supports
+    /// bounded I3-3 failure/reconnect evidence without exposing an exact
+    /// carrier, M8/M9 authority material, peer control, or caller-supplied
+    /// reason text.
+    pub fn observer_safe_original_owner_request_attempts(
+        &self,
+    ) -> Vec<Sys5I3ObserverSafeOriginalOwnerRequestAttempt> {
+        self.pending_outbound_owner_requests
+            .iter()
+            .filter_map(|(semantic_request_identity_ref, record)| {
+                record.last_started_attempt_kind.map(|kind| {
+                    let source_requester_locus = record.pending.requester_locus().to_string();
+                    Sys5I3ObserverSafeOriginalOwnerRequestAttempt {
+                        semantic_request_identity_ref: semantic_request_identity_ref.clone(),
+                        requester_binding_ref: observer_safe_requester_binding_ref(
+                            &self.parent_checked_program_ref,
+                            &self.projection_ref,
+                            &self.cohort_ref,
+                            semantic_request_identity_ref,
+                            &source_requester_locus,
+                        ),
+                        source_requester_locus,
+                        attempt_generation: record.started_attempts,
+                        reason: kind.into(),
+                    }
+                })
+            })
+            .collect()
+    }
+
+    /// Count the retained, owner-local duplicate reservations without
+    /// exposing request identities, bindings, or prior semantic results.
+    pub fn observer_safe_inbound_owner_request_tombstone_count(&self) -> usize {
+        self.inbound_owner_request_tombstones.len()
+    }
+
     #[cfg(feature = "i3-process-test-seams")]
     #[doc(hidden)]
     pub fn test_only_reject_next_outbound_extraction(&mut self) {
         self.reject_next_outbound_extraction = true;
     }
 
+    /// Negative-only I3-3 test control.  It rejects immediately after the
+    /// owner duplicate ledger has retained the exact request but before any
+    /// SYS-4 handoff.  It does not simulate or claim a post-mutation failure;
+    /// that ambiguity remains fail-closed in the normal downstream path.
+    #[cfg(feature = "i3-process-test-seams")]
+    #[doc(hidden)]
+    pub fn test_only_reject_next_owner_admission_after_reservation(&mut self) {
+        self.reject_next_owner_admission_after_reservation = true;
+    }
+
     pub fn emit_generated_owner_request(
         &mut self,
         operation_id: &str,
     ) -> Result<Sys5I3ProcessMessage, Sys5I3ProcessRuntimeError> {
+        if self.pending_outbound_owner_requests.len() >= MAX_OUTBOUND_OWNER_REQUEST_PENDING {
+            return Err(Sys5I3ProcessRuntimeError::new(
+                Sys5I3ProcessRuntimeErrorKind::OutboundRequestLedgerExhausted,
+            ));
+        }
         let submission = self
             .fabric
             .submit_source_action(SourceAction::owner_operation(operation_id))
@@ -2842,9 +3128,27 @@ impl Sys5I3ProcessRuntime {
             &self.projection_ref,
             &self.cohort_ref,
         );
+        let pending_token_ref = original_owner_request_pending_token_ref(
+            &self.local_store_identity_ref,
+            &request_identity_ref,
+            &carrier,
+        )
+        .map_err(|_| {
+            Sys5I3ProcessRuntimeError::new(Sys5I3ProcessRuntimeErrorKind::CarrierAdmissionRejected)
+        })?;
         if self
             .pending_outbound_owner_requests
-            .insert(request_identity_ref.clone(), pending)
+            .insert(
+                request_identity_ref.clone(),
+                Sys5I3OutboundOwnerRequestRecord {
+                    pending,
+                    exact_carrier: carrier.clone(),
+                    pending_token_ref,
+                    started_attempts: 0,
+                    last_started_attempt_kind: None,
+                    pending_handle_issued: false,
+                },
+            )
             .is_some()
         {
             return Err(Sys5I3ProcessRuntimeError::new(
@@ -2859,6 +3163,233 @@ impl Sys5I3ProcessRuntime {
             cohort_provenance_ref: self.cohort_ref.clone(),
             identity_basis: Sys5I3ObserverSafeSemanticRequestIdentityBasis,
         })
+    }
+
+    /// Consume one source-emitted request message into the private retry
+    /// route.  The returned handle carries no carrier bytes and cannot
+    /// authorize a send by itself.  Ordinary one-shot delivery may continue
+    /// to consume `Sys5I3ProcessMessage` directly, but cannot later recover a
+    /// retry handle from that moved value.
+    pub fn into_original_owner_request_pending(
+        &mut self,
+        message: Sys5I3ProcessMessage,
+    ) -> Result<Sys5I3OriginalOwnerRequestPending, Sys5I3ProcessRuntimeError> {
+        if !matches!(message.kind, Sys5I3ProcessMessageKind::Request)
+            || message.linked_request_identity_ref.is_some()
+            || message.cohort_provenance_ref != self.cohort_ref
+        {
+            return Err(Sys5I3ProcessRuntimeError::new(
+                Sys5I3ProcessRuntimeErrorKind::OriginalRequestPendingRejected,
+            ));
+        }
+        let carrier = message.carrier.as_ref().ok_or_else(|| {
+            Sys5I3ProcessRuntimeError::new(
+                Sys5I3ProcessRuntimeErrorKind::OriginalRequestPendingRejected,
+            )
+        })?;
+        let supplied_snapshot =
+            private_process_carrier_snapshot_binding_bytes(carrier).map_err(|_| {
+                Sys5I3ProcessRuntimeError::new(
+                    Sys5I3ProcessRuntimeErrorKind::OriginalRequestPendingRejected,
+                )
+            })?;
+        let record = self
+            .pending_outbound_owner_requests
+            .get_mut(&message.semantic_request_identity_ref)
+            .ok_or_else(|| {
+                Sys5I3ProcessRuntimeError::new(
+                    Sys5I3ProcessRuntimeErrorKind::OriginalRequestPendingRejected,
+                )
+            })?;
+        if record.pending_handle_issued
+            || private_process_carrier_snapshot_binding_bytes(&record.exact_carrier)
+                .map_or(true, |exact| exact != supplied_snapshot)
+        {
+            return Err(Sys5I3ProcessRuntimeError::new(
+                Sys5I3ProcessRuntimeErrorKind::OriginalRequestPendingRejected,
+            ));
+        }
+        record.pending_handle_issued = true;
+        Ok(Sys5I3OriginalOwnerRequestPending {
+            semantic_request_identity_ref: message.semantic_request_identity_ref,
+            runtime_token_ref: record.pending_token_ref.clone(),
+        })
+    }
+
+    /// Validate the runtime-owned original operation before the private QUIC
+    /// adapter may reserve one network attempt.  This repeats the strict
+    /// current lineage gate before the pure M9/M8 check, so a historical
+    /// carrier never gets a more specific authority error after withdrawal.
+    pub(crate) fn authorize_original_owner_request_attempt(
+        &self,
+        pending_handle: &Sys5I3OriginalOwnerRequestPending,
+        kind: Sys5I3OriginalOwnerRequestAttemptKind,
+    ) -> Result<Sys5I3AuthorizedOriginalOwnerRequestAttempt, Sys5I3ProcessRuntimeError> {
+        let record = self
+            .pending_outbound_owner_requests
+            .get(&pending_handle.semantic_request_identity_ref)
+            .ok_or_else(|| {
+                Sys5I3ProcessRuntimeError::new(
+                    Sys5I3ProcessRuntimeErrorKind::OriginalRequestPendingRejected,
+                )
+            })?;
+        if !record.pending_handle_issued
+            || record.pending_token_ref != pending_handle.runtime_token_ref
+            || !self
+                .assigned_loci
+                .contains(record.pending.requester_locus())
+        {
+            return Err(Sys5I3ProcessRuntimeError::new(
+                Sys5I3ProcessRuntimeErrorKind::OriginalRequestPendingRejected,
+            ));
+        }
+        let required_started_attempts = match kind {
+            Sys5I3OriginalOwnerRequestAttemptKind::InitialDelivery => {
+                (record.started_attempts == 0).then_some(())
+            }
+            // A pre-write connection/preface failure has not begun a frame
+            // effect and leaves the initial budget unused.  The consuming
+            // reconnect may therefore be its first actual send, or may be
+            // the second after an ambiguous initial write.
+            Sys5I3OriginalOwnerRequestAttemptKind::ReconnectRetry => {
+                (record.started_attempts <= 1).then_some(())
+            }
+        };
+        if record.started_attempts >= MAX_OUTBOUND_OWNER_REQUEST_ATTEMPTS {
+            return Err(Sys5I3ProcessRuntimeError::new(
+                Sys5I3ProcessRuntimeErrorKind::OutboundAttemptBudgetExhausted,
+            ));
+        }
+        if required_started_attempts.is_none() {
+            return Err(Sys5I3ProcessRuntimeError::new(
+                Sys5I3ProcessRuntimeErrorKind::OriginalRequestPendingRejected,
+            ));
+        }
+
+        // Resolve the current local contract before looking at the historical
+        // record.  A revoked/superseded lineage is a generic carrier failure,
+        // not an oracle for an otherwise captured M9 capability.
+        let current = self
+            .fabric
+            .i3_pending_owner_request_binding(&record.exact_carrier)
+            .map_err(|_| {
+                Sys5I3ProcessRuntimeError::new(
+                    Sys5I3ProcessRuntimeErrorKind::CarrierAdmissionRejected,
+                )
+            })?;
+        if current != record.pending {
+            return Err(Sys5I3ProcessRuntimeError::new(
+                Sys5I3ProcessRuntimeErrorKind::CarrierAdmissionRejected,
+            ));
+        }
+        self.fabric
+            .revalidate_i3_bound_owner_request_authority(&record.pending, &record.exact_carrier)
+            .map_err(owner_request_revalidation_runtime_error)?;
+        let encoded_message_bytes = Sys5I3PrivateProcessCodec::private_provisional_v1()
+            .encode_retained_owner_request_attempt(
+                &record.exact_carrier,
+                &pending_handle.semantic_request_identity_ref,
+                &self.cohort_ref,
+            )
+            .map_err(|_| {
+                Sys5I3ProcessRuntimeError::new(
+                    Sys5I3ProcessRuntimeErrorKind::CarrierAdmissionRejected,
+                )
+            })?;
+        let attempt_number = record.started_attempts.checked_add(1).ok_or_else(|| {
+            Sys5I3ProcessRuntimeError::new(
+                Sys5I3ProcessRuntimeErrorKind::OutboundAttemptBudgetExhausted,
+            )
+        })?;
+        Ok(Sys5I3AuthorizedOriginalOwnerRequestAttempt {
+            semantic_request_identity_ref: pending_handle.semantic_request_identity_ref.clone(),
+            runtime_token_ref: pending_handle.runtime_token_ref.clone(),
+            attempt_number,
+            attempt_kind: kind,
+            encoded_message_bytes,
+        })
+    }
+
+    /// Record that an adapter-owned write has become ambiguous by beginning
+    /// its actual frame effect.  The original request remains pending after a
+    /// frame failure; only its bounded delivery-attempt budget advances.
+    pub(crate) fn commit_authorized_original_owner_request_attempt(
+        &mut self,
+        authorization: &Sys5I3AuthorizedOriginalOwnerRequestAttempt,
+    ) -> Result<(), Sys5I3ProcessRuntimeError> {
+        let record = self
+            .pending_outbound_owner_requests
+            .get_mut(authorization.semantic_request_identity_ref())
+            .ok_or_else(|| {
+                Sys5I3ProcessRuntimeError::new(
+                    Sys5I3ProcessRuntimeErrorKind::OriginalRequestPendingRejected,
+                )
+            })?;
+        if !record.pending_handle_issued
+            || record.pending_token_ref != authorization.runtime_token_ref
+            || record.started_attempts.checked_add(1) != Some(authorization.attempt_number)
+            || authorization.attempt_number > MAX_OUTBOUND_OWNER_REQUEST_ATTEMPTS
+            || !matches!(
+                (record.started_attempts, authorization.attempt_kind),
+                (0, Sys5I3OriginalOwnerRequestAttemptKind::InitialDelivery)
+                    | (0, Sys5I3OriginalOwnerRequestAttemptKind::ReconnectRetry)
+                    | (1, Sys5I3OriginalOwnerRequestAttemptKind::ReconnectRetry)
+            )
+            || !matches!(
+                (record.last_started_attempt_kind, authorization.attempt_kind),
+                (None, Sys5I3OriginalOwnerRequestAttemptKind::InitialDelivery)
+                    | (None, Sys5I3OriginalOwnerRequestAttemptKind::ReconnectRetry)
+                    | (
+                        Some(Sys5I3OriginalOwnerRequestAttemptKind::InitialDelivery),
+                        Sys5I3OriginalOwnerRequestAttemptKind::ReconnectRetry,
+                    )
+            )
+        {
+            return Err(Sys5I3ProcessRuntimeError::new(
+                Sys5I3ProcessRuntimeErrorKind::OriginalRequestPendingRejected,
+            ));
+        }
+        record.started_attempts = authorization.attempt_number;
+        record.last_started_attempt_kind = Some(authorization.attempt_kind);
+        Ok(())
+    }
+
+    /// Admission companion for a caller-held original pending handle.  The
+    /// candidate's claimed identity is compared with that trusted local
+    /// handle only as an early reject; it cannot join an operation until the
+    /// usual sealed carrier and pending-reply checks succeed.  On success
+    /// `accept_inbound` removes the runtime-owned pending record exactly once.
+    pub(crate) fn admit_decoded_original_owner_reply(
+        &mut self,
+        candidate: Sys5I3UntrustedProcessMessage,
+        pending_handle: &Sys5I3OriginalOwnerRequestPending,
+    ) -> Result<Option<Sys5I3ProcessMessage>, Sys5I3ProcessRuntimeError> {
+        if !matches!(candidate.message.kind, PrivateProcessMessageKind::Reply)
+            || candidate.message.semantic_request_identity_ref
+                != pending_handle.semantic_request_identity_ref
+            || candidate.message.linked_request_identity_ref.as_deref()
+                != Some(pending_handle.semantic_request_identity_ref.as_str())
+        {
+            return Err(Sys5I3ProcessRuntimeError::new(
+                Sys5I3ProcessRuntimeErrorKind::OriginalRequestPendingRejected,
+            ));
+        }
+        let record = self
+            .pending_outbound_owner_requests
+            .get(&pending_handle.semantic_request_identity_ref)
+            .ok_or_else(|| {
+                Sys5I3ProcessRuntimeError::new(
+                    Sys5I3ProcessRuntimeErrorKind::OriginalRequestPendingRejected,
+                )
+            })?;
+        if !record.pending_handle_issued
+            || record.pending_token_ref != pending_handle.runtime_token_ref
+        {
+            return Err(Sys5I3ProcessRuntimeError::new(
+                Sys5I3ProcessRuntimeErrorKind::OriginalRequestPendingRejected,
+            ));
+        }
+        self.admit_decoded_process_message(candidate)
     }
 
     pub fn accept_inbound(
@@ -2885,19 +3416,19 @@ impl Sys5I3ProcessRuntime {
                         Sys5I3ProcessRuntimeErrorKind::CarrierAdmissionRejected,
                     ));
                 }
-                let expected_request_identity_ref = self
+                let pending = self
                     .fabric
                     .i3_pending_owner_request_binding(&carrier)
                     .map_err(|_| {
                         Sys5I3ProcessRuntimeError::new(
                             Sys5I3ProcessRuntimeErrorKind::CarrierAdmissionRejected,
                         )
-                    })?
-                    .semantic_request_identity_ref(
-                        &self.parent_checked_program_ref,
-                        &self.projection_ref,
-                        &self.cohort_ref,
-                    );
+                    })?;
+                let expected_request_identity_ref = pending.semantic_request_identity_ref(
+                    &self.parent_checked_program_ref,
+                    &self.projection_ref,
+                    &self.cohort_ref,
+                );
                 if message.semantic_request_identity_ref != expected_request_identity_ref
                     || message.linked_request_identity_ref.is_some()
                 {
@@ -2910,81 +3441,68 @@ impl Sys5I3ProcessRuntime {
                         Sys5I3ProcessRuntimeErrorKind::NonOwnerServe,
                     ));
                 }
-                let target_locus = carrier.target_locus().to_string();
-                let step = self
-                    .fabric
-                    .accept_inbound_process_carrier(carrier)
-                    .map_err(|_| {
+                let request_identity_ref = message.semantic_request_identity_ref;
+                let carrier_snapshot_binding_bytes =
+                    private_process_carrier_snapshot_binding_bytes(&carrier).map_err(|_| {
                         Sys5I3ProcessRuntimeError::new(
                             Sys5I3ProcessRuntimeErrorKind::CarrierAdmissionRejected,
                         )
                     })?;
-                self.served_owner_request_count = self
-                    .served_owner_request_count
-                    .checked_add(1)
-                    .ok_or_else(|| {
-                        Sys5I3ProcessRuntimeError::new(
-                            Sys5I3ProcessRuntimeErrorKind::CarrierAdmissionRejected,
-                        )
+                self.fabric
+                    .revalidate_i3_bound_owner_request_authority(&pending, &carrier)
+                    .map_err(|failure| {
+                        Sys5I3ProcessRuntimeError::new(match failure {
+                            Sys4I3OwnerRequestRevalidationFailure::CarrierBindingMismatch => {
+                                Sys5I3ProcessRuntimeErrorKind::CarrierAdmissionRejected
+                            }
+                            Sys4I3OwnerRequestRevalidationFailure::StaleMembership => {
+                                Sys5I3ProcessRuntimeErrorKind::StaleMembership
+                            }
+                            Sys4I3OwnerRequestRevalidationFailure::MissingCapability => {
+                                Sys5I3ProcessRuntimeErrorKind::MissingCapability
+                            }
+                            Sys4I3OwnerRequestRevalidationFailure::MissingWitness => {
+                                Sys5I3ProcessRuntimeErrorKind::MissingWitness
+                            }
+                        })
                     })?;
-                let reply_envelope_id = step.reply_envelope_id().to_string();
-                if reply_envelope_id.is_empty() {
-                    return Err(Sys5I3ProcessRuntimeError::new(
-                        Sys5I3ProcessRuntimeErrorKind::CarrierAdmissionRejected,
-                    ));
-                }
-                let reply = self
-                    .fabric
-                    .take_outbound_process_carrier(&target_locus, &reply_envelope_id)
-                    .map_err(|_| {
-                        Sys5I3ProcessRuntimeError::new(
-                            Sys5I3ProcessRuntimeErrorKind::CarrierAdmissionRejected,
-                        )
-                    })?;
-                if reply.edge_kind() != CommunicationEdgeKind::OwnerReplyReceipt {
-                    return Err(Sys5I3ProcessRuntimeError::new(
-                        Sys5I3ProcessRuntimeErrorKind::CarrierAdmissionRejected,
-                    ));
-                }
-                let request_identity_ref = message.semantic_request_identity_ref.clone();
-                let serve_occurrence = observer_safe_process_occurrence_ref(
-                    "owner-serve-linearization",
+                self.reserve_inbound_owner_request(
                     &request_identity_ref,
-                    step.m8_serve_node_id(),
-                    step.consumed_envelope_id(),
-                );
-                self.semantic_occurrences
-                    .owner_serve_linearizations
-                    .insert(request_identity_ref.clone(), serve_occurrence);
-                if let Some(actual_owner_write_occurrence_id) =
-                    step.actual_owner_write_occurrence_id()
-                {
-                    self.local_authoritative_mutation_count = self
-                        .local_authoritative_mutation_count
-                        .checked_add(1)
-                        .ok_or_else(|| {
-                            Sys5I3ProcessRuntimeError::new(
-                                Sys5I3ProcessRuntimeErrorKind::CarrierAdmissionRejected,
-                            )
-                        })?;
-                    let write_occurrence = observer_safe_process_occurrence_ref(
-                        "owner-actual-write",
+                    carrier_snapshot_binding_bytes,
+                )?;
+
+                #[cfg(feature = "i3-process-test-seams")]
+                if self.reject_next_owner_admission_after_reservation {
+                    self.reject_next_owner_admission_after_reservation = false;
+                    self.mark_inbound_owner_request_tombstone(
                         &request_identity_ref,
-                        actual_owner_write_occurrence_id,
-                        step.locus_dequeue_occurrence_id(),
+                        Sys5I3InboundOwnerRequestTombstonePhase::Ambiguous,
                     );
-                    self.semantic_occurrences
-                        .actual_owner_writes
-                        .insert(request_identity_ref, write_occurrence);
+                    return Err(Sys5I3ProcessRuntimeError::new(
+                        Sys5I3ProcessRuntimeErrorKind::CarrierAdmissionRejected,
+                    ));
                 }
-                Ok(Some(Sys5I3ProcessMessage {
-                    kind: Sys5I3ProcessMessageKind::Reply,
-                    carrier: Some(reply),
-                    semantic_request_identity_ref: message.semantic_request_identity_ref.clone(),
-                    linked_request_identity_ref: Some(message.semantic_request_identity_ref),
-                    cohort_provenance_ref: self.cohort_ref.clone(),
-                    identity_basis: Sys5I3ObserverSafeSemanticRequestIdentityBasis,
-                }))
+
+                // Reserve before SYS-4 can enqueue/linearize the carrier.
+                // If any later step fails, retain the tombstone as ambiguous:
+                // this layer must not turn an uncertain post-handoff result
+                // into permission to replay the semantic request.
+                match self.accept_reserved_inbound_owner_request(carrier, &request_identity_ref) {
+                    Ok(reply) => {
+                        self.mark_inbound_owner_request_tombstone(
+                            &request_identity_ref,
+                            Sys5I3InboundOwnerRequestTombstonePhase::Received,
+                        );
+                        Ok(Some(reply))
+                    }
+                    Err(error) => {
+                        self.mark_inbound_owner_request_tombstone(
+                            &request_identity_ref,
+                            Sys5I3InboundOwnerRequestTombstonePhase::Ambiguous,
+                        );
+                        Err(error)
+                    }
+                }
             }
             Sys5I3ProcessMessageKind::Reply => {
                 let carrier = message.carrier.ok_or_else(|| {
@@ -3008,7 +3526,7 @@ impl Sys5I3ProcessRuntime {
                 let pending = self
                     .pending_outbound_owner_requests
                     .get(&request_identity_ref)
-                    .cloned()
+                    .map(|record| record.pending.clone())
                     .ok_or_else(|| {
                         Sys5I3ProcessRuntimeError::new(
                             Sys5I3ProcessRuntimeErrorKind::CarrierAdmissionRejected,
@@ -3079,6 +3597,135 @@ impl Sys5I3ProcessRuntime {
                 ))
             }
         }
+    }
+
+    fn reserve_inbound_owner_request(
+        &mut self,
+        request_identity_ref: &str,
+        carrier_snapshot_binding_bytes: Vec<u8>,
+    ) -> Result<(), Sys5I3ProcessRuntimeError> {
+        if let Some(existing) = self
+            .inbound_owner_request_tombstones
+            .get(request_identity_ref)
+        {
+            return Err(Sys5I3ProcessRuntimeError::new(
+                if existing.carrier_snapshot_binding_bytes == carrier_snapshot_binding_bytes {
+                    Sys5I3ProcessRuntimeErrorKind::DuplicateRequestRejected
+                } else {
+                    Sys5I3ProcessRuntimeErrorKind::RequestIdentityBindingMismatch
+                },
+            ));
+        }
+        if self.inbound_owner_request_tombstones.len() >= MAX_INBOUND_OWNER_REQUEST_TOMBSTONES {
+            return Err(Sys5I3ProcessRuntimeError::new(
+                Sys5I3ProcessRuntimeErrorKind::InboundRequestLedgerExhausted,
+            ));
+        }
+        self.inbound_owner_request_tombstones.insert(
+            request_identity_ref.to_string(),
+            Sys5I3InboundOwnerRequestTombstone {
+                carrier_snapshot_binding_bytes,
+                phase: Sys5I3InboundOwnerRequestTombstonePhase::Reserved,
+            },
+        );
+        Ok(())
+    }
+
+    fn mark_inbound_owner_request_tombstone(
+        &mut self,
+        request_identity_ref: &str,
+        phase: Sys5I3InboundOwnerRequestTombstonePhase,
+    ) {
+        let Some(tombstone) = self
+            .inbound_owner_request_tombstones
+            .get_mut(request_identity_ref)
+        else {
+            debug_assert!(
+                false,
+                "reserved inbound owner request must retain its tombstone"
+            );
+            return;
+        };
+        tombstone.phase = phase;
+    }
+
+    fn accept_reserved_inbound_owner_request(
+        &mut self,
+        carrier: Sys4ProcessCarrier,
+        request_identity_ref: &str,
+    ) -> Result<Sys5I3ProcessMessage, Sys5I3ProcessRuntimeError> {
+        let target_locus = carrier.target_locus().to_string();
+        let step = self
+            .fabric
+            .accept_inbound_process_carrier(carrier)
+            .map_err(|_| {
+                Sys5I3ProcessRuntimeError::new(
+                    Sys5I3ProcessRuntimeErrorKind::CarrierAdmissionRejected,
+                )
+            })?;
+        self.served_owner_request_count = self
+            .served_owner_request_count
+            .checked_add(1)
+            .ok_or_else(|| {
+                Sys5I3ProcessRuntimeError::new(
+                    Sys5I3ProcessRuntimeErrorKind::CarrierAdmissionRejected,
+                )
+            })?;
+        let reply_envelope_id = step.reply_envelope_id().to_string();
+        if reply_envelope_id.is_empty() {
+            return Err(Sys5I3ProcessRuntimeError::new(
+                Sys5I3ProcessRuntimeErrorKind::CarrierAdmissionRejected,
+            ));
+        }
+        let reply = self
+            .fabric
+            .take_outbound_process_carrier(&target_locus, &reply_envelope_id)
+            .map_err(|_| {
+                Sys5I3ProcessRuntimeError::new(
+                    Sys5I3ProcessRuntimeErrorKind::CarrierAdmissionRejected,
+                )
+            })?;
+        if reply.edge_kind() != CommunicationEdgeKind::OwnerReplyReceipt {
+            return Err(Sys5I3ProcessRuntimeError::new(
+                Sys5I3ProcessRuntimeErrorKind::CarrierAdmissionRejected,
+            ));
+        }
+        let serve_occurrence = observer_safe_process_occurrence_ref(
+            "owner-serve-linearization",
+            request_identity_ref,
+            step.m8_serve_node_id(),
+            step.consumed_envelope_id(),
+        );
+        self.semantic_occurrences
+            .owner_serve_linearizations
+            .insert(request_identity_ref.to_string(), serve_occurrence);
+        if let Some(actual_owner_write_occurrence_id) = step.actual_owner_write_occurrence_id() {
+            self.local_authoritative_mutation_count = self
+                .local_authoritative_mutation_count
+                .checked_add(1)
+                .ok_or_else(|| {
+                    Sys5I3ProcessRuntimeError::new(
+                        Sys5I3ProcessRuntimeErrorKind::CarrierAdmissionRejected,
+                    )
+                })?;
+            let write_occurrence = observer_safe_process_occurrence_ref(
+                "owner-actual-write",
+                request_identity_ref,
+                actual_owner_write_occurrence_id,
+                step.locus_dequeue_occurrence_id(),
+            );
+            self.semantic_occurrences
+                .actual_owner_writes
+                .insert(request_identity_ref.to_string(), write_occurrence);
+        }
+        Ok(Sys5I3ProcessMessage {
+            kind: Sys5I3ProcessMessageKind::Reply,
+            carrier: Some(reply),
+            semantic_request_identity_ref: request_identity_ref.to_string(),
+            linked_request_identity_ref: Some(request_identity_ref.to_string()),
+            cohort_provenance_ref: self.cohort_ref.clone(),
+            identity_basis: Sys5I3ObserverSafeSemanticRequestIdentityBasis,
+        })
     }
 
     /// Receiver-owned admission core.  It is crate-private so only the
@@ -3198,6 +3845,90 @@ fn observer_safe_process_occurrence_ref(
     )
 }
 
+/// Canonicalize the exact private generated-carrier snapshot without exposing
+/// it or treating it as a wire/API identity.  The ledger retains these bytes
+/// only within its fixed 64-entry bound, so equality needs no standalone hash
+/// collision assumption.
+fn private_process_carrier_snapshot_binding_bytes(
+    carrier: &Sys4ProcessCarrier,
+) -> Result<Vec<u8>, ()> {
+    let snapshot = carrier.i3_private_process_snapshot().map_err(|_| ())?;
+    let bytes = serde_json::to_vec(&snapshot).map_err(|_| ())?;
+    (bytes.len() <= Sys5I3PrivateProcessCodec::MAX_MESSAGE_BYTES)
+        .then_some(bytes)
+        .ok_or(())
+}
+
+fn owner_request_revalidation_runtime_error(
+    failure: Sys4I3OwnerRequestRevalidationFailure,
+) -> Sys5I3ProcessRuntimeError {
+    Sys5I3ProcessRuntimeError::new(match failure {
+        Sys4I3OwnerRequestRevalidationFailure::CarrierBindingMismatch => {
+            Sys5I3ProcessRuntimeErrorKind::CarrierAdmissionRejected
+        }
+        Sys4I3OwnerRequestRevalidationFailure::StaleMembership => {
+            Sys5I3ProcessRuntimeErrorKind::StaleMembership
+        }
+        Sys4I3OwnerRequestRevalidationFailure::MissingCapability => {
+            Sys5I3ProcessRuntimeErrorKind::MissingCapability
+        }
+        Sys4I3OwnerRequestRevalidationFailure::MissingWitness => {
+            Sys5I3ProcessRuntimeErrorKind::MissingWitness
+        }
+    })
+}
+
+/// Bind an opaque local pending handle to both this runtime store and the
+/// exact source-emitted carrier.  It is never sent on the network or used as
+/// semantic provenance; the runtime still owns the only equality check.
+fn original_owner_request_pending_token_ref(
+    local_store_identity_ref: &str,
+    semantic_request_identity_ref: &str,
+    carrier: &Sys4ProcessCarrier,
+) -> Result<String, ()> {
+    let carrier_snapshot = private_process_carrier_snapshot_binding_bytes(carrier)?;
+    let mut hasher = Sha256::new();
+    hasher.update(b"mirrorea/sys5/i3/original-owner-request-pending/v1\0");
+    for component in [
+        local_store_identity_ref.as_bytes(),
+        semantic_request_identity_ref.as_bytes(),
+    ] {
+        hasher.update((component.len() as u64).to_be_bytes());
+        hasher.update(component);
+    }
+    hasher.update((carrier_snapshot.len() as u64).to_be_bytes());
+    hasher.update(carrier_snapshot);
+    Ok(format!(
+        "sys5-i3-original-owner-request-pending-sha256-v1:{:x}",
+        hasher.finalize()
+    ))
+}
+
+fn observer_safe_requester_binding_ref(
+    parent_checked_program_ref: &str,
+    projection_ref: &str,
+    cohort_ref: &str,
+    semantic_request_identity_ref: &str,
+    source_requester_locus: &str,
+) -> String {
+    let mut hasher = Sha256::new();
+    hasher.update(b"mirrorea/sys5/i3/original-owner-request-requester/v1\0");
+    for component in [
+        parent_checked_program_ref,
+        projection_ref,
+        cohort_ref,
+        semantic_request_identity_ref,
+        source_requester_locus,
+    ] {
+        hasher.update((component.len() as u64).to_be_bytes());
+        hasher.update(component.as_bytes());
+    }
+    format!(
+        "sys5-i3-original-owner-request-requester-sha256-v1:{:x}",
+        hasher.finalize()
+    )
+}
+
 fn logical_origin_ref(
     slot_name: &str,
     assigned_loci: &BTreeSet<String>,
@@ -3230,4 +3961,405 @@ fn process_store_identity_ref(
     hasher.update(logical_origin_ref);
     hasher.update(ordinal.to_le_bytes());
     format!("sys5-i3-local-store-sha256-v2:{:x}", hasher.finalize())
+}
+
+#[cfg(test)]
+mod i3_owner_request_ledger_tests {
+    use super::*;
+
+    use crate::sys5_local_slice::{Sys5SourceInput, build_project};
+
+    const LEDGER_FIXTURE_PATH: &str = "tests/inline/sys5_i3_request_ledger.mir";
+    const LEDGER_FIXTURE_SOURCE: &str =
+        include_str!("../../../samples/clean-near-end/mirrorea-i2-local-toy/main.mir");
+
+    fn owner_and_exact_source_request_snapshot() -> (Sys5I3ProcessRuntime, String, Vec<u8>) {
+        let project = build_project(Sys5SourceInput::inline(
+            LEDGER_FIXTURE_PATH,
+            LEDGER_FIXTURE_SOURCE,
+        ))
+        .expect("the ordinary checked source is available before a private ledger test");
+        let deployment = Sys5I3Deployment::from_checked_project(
+            &project,
+            [
+                Sys5I3DeploymentSlot::new(
+                    "ledger-requester",
+                    "127.0.0.1:41001",
+                    ["ParticipantA", "ViewerC"],
+                ),
+                Sys5I3DeploymentSlot::new(
+                    "ledger-owner",
+                    "127.0.0.1:41002",
+                    ["WorldAuthority", "ParticipantB"],
+                ),
+            ],
+        )
+        .expect("the checked source maps every locus to one nonempty private slot");
+        let mut cohort = Sys5I3ProcessCohort::from_checked_project(&project, &deployment)
+            .expect("one checked cohort derives both source-bound runtime images");
+        let mut requester = Sys5I3ProcessRuntime::start(
+            cohort
+                .take_process_image("ledger-requester")
+                .expect("the requester image is taken once"),
+        )
+        .expect("the checked requester image starts locally for this ledger-only test");
+        let owner = Sys5I3ProcessRuntime::start(
+            cohort
+                .take_process_image("ledger-owner")
+                .expect("the owner image is taken once"),
+        )
+        .expect("the checked owner image starts locally for this ledger-only test");
+        let request = requester
+            .emit_generated_owner_request("init_avatar_hp")
+            .expect("ordinary checked source emits the exact owner request");
+        let request_identity = request.semantic_request_identity_ref().to_string();
+        let exact_snapshot = private_process_carrier_snapshot_binding_bytes(
+            request
+                .carrier
+                .as_ref()
+                .expect("the generated owner request retains its private carrier internally"),
+        )
+        .expect("the real generated owner carrier has one bounded opaque snapshot");
+        assert_eq!(
+            owner.observer_safe_inbound_owner_request_tombstone_count(),
+            0,
+            "the owner ledger starts empty before its first private reservation"
+        );
+        (owner, request_identity, exact_snapshot)
+    }
+
+    #[test]
+    fn i3_same_source_identity_with_a_different_snapshot_rejects_without_replacing_its_tombstone() {
+        let (mut owner, request_identity, exact_snapshot) =
+            owner_and_exact_source_request_snapshot();
+        owner
+            .reserve_inbound_owner_request(&request_identity, exact_snapshot.clone())
+            .expect("the first source identity reserves its exact private snapshot");
+
+        let mut different_snapshot = exact_snapshot;
+        different_snapshot.push(0);
+        assert_eq!(
+            owner
+                .reserve_inbound_owner_request(&request_identity, different_snapshot)
+                .expect_err(
+                    "the same semantic identity with another snapshot must not reuse the retained reservation",
+                )
+                .kind(),
+            Sys5I3ProcessRuntimeErrorKind::RequestIdentityBindingMismatch
+        );
+        assert_eq!(
+            owner.observer_safe_inbound_owner_request_tombstone_count(),
+            1,
+            "a binding mismatch must retain the original reservation rather than overwrite it"
+        );
+
+        // This test reaches only the private ledger comparison. Normal
+        // decoded ingress rejects an altered carrier at its earlier fresh
+        // source/current-binding gate; this neither constructs one nor
+        // creates authority for it.
+    }
+}
+
+#[cfg(test)]
+mod i3_original_owner_request_retry_tests {
+    use super::*;
+
+    use crate::sys5_local_slice::{Sys5SourceInput, build_project};
+
+    const RETRY_FIXTURE_PATH: &str = "tests/inline/sys5_i3_original_owner_request_retry.mir";
+    const RETRY_FIXTURE_SOURCE: &str =
+        include_str!("../../../samples/clean-near-end/mirrorea-i2-local-toy/main.mir");
+
+    fn source_generated_pending_fixture() -> (
+        Sys5I3ProcessRuntime,
+        Sys5I3ProcessRuntime,
+        Sys5I3PrivateProcessCodec,
+        Sys5I3OriginalOwnerRequestPending,
+        String,
+    ) {
+        let project = build_project(Sys5SourceInput::inline(
+            RETRY_FIXTURE_PATH,
+            RETRY_FIXTURE_SOURCE,
+        ))
+        .expect("the ordinary checked source is available before a runtime-only retry test");
+        let deployment = Sys5I3Deployment::from_checked_project(
+            &project,
+            [
+                Sys5I3DeploymentSlot::new(
+                    "retry-requester",
+                    "127.0.0.1:42001",
+                    ["ParticipantA", "ViewerC"],
+                ),
+                Sys5I3DeploymentSlot::new(
+                    "retry-owner",
+                    "127.0.0.1:42002",
+                    ["WorldAuthority", "ParticipantB"],
+                ),
+            ],
+        )
+        .expect("the checked source maps every locus to one nonempty retry-test slot");
+        let mut cohort = Sys5I3ProcessCohort::from_checked_project(&project, &deployment)
+            .expect("one checked cohort derives both source-bound retry-test images");
+        let mut requester = Sys5I3ProcessRuntime::start(
+            cohort
+                .take_process_image("retry-requester")
+                .expect("the requester image is taken once"),
+        )
+        .expect("the checked requester image starts locally for this runtime-only retry test");
+        let owner = Sys5I3ProcessRuntime::start(
+            cohort
+                .take_process_image("retry-owner")
+                .expect("the owner image is taken once"),
+        )
+        .expect("the checked owner image starts locally for this runtime-only retry test");
+        let source_request = requester
+            .emit_generated_owner_request("init_avatar_hp")
+            .expect("ordinary checked source emits the original owner request");
+        let request_identity = source_request.semantic_request_identity_ref().to_string();
+        let pending = requester
+            .into_original_owner_request_pending(source_request)
+            .expect("only the exact source-emitted request becomes the opaque pending handle");
+        assert_eq!(pending.semantic_request_identity_ref(), request_identity);
+        assert_eq!(requester.observer_safe_pending_owner_request_count(), 1);
+        (
+            requester,
+            owner,
+            Sys5I3PrivateProcessCodec::private_provisional_v1(),
+            pending,
+            request_identity,
+        )
+    }
+
+    #[test]
+    fn i3_runtime_only_original_request_allows_one_initial_and_one_exact_reconnect_attempt() {
+        let (mut requester, owner, _codec, pending, request_identity) =
+            source_generated_pending_fixture();
+
+        assert_eq!(
+            owner
+                .authorize_original_owner_request_attempt(
+                    &pending,
+                    Sys5I3OriginalOwnerRequestAttemptKind::InitialDelivery,
+                )
+                .err()
+                .expect("a pending handle names no operation in a foreign owner runtime")
+                .kind(),
+            Sys5I3ProcessRuntimeErrorKind::OriginalRequestPendingRejected
+        );
+
+        let initial = requester
+            .authorize_original_owner_request_attempt(
+                &pending,
+                Sys5I3OriginalOwnerRequestAttemptKind::InitialDelivery,
+            )
+            .expect(
+                "the source-generated opaque pending handle authorizes the first runtime attempt",
+            );
+        assert_eq!(initial.semantic_request_identity_ref(), request_identity);
+        let initial_bytes = initial.encoded_message_bytes().to_vec();
+        requester
+            .commit_authorized_original_owner_request_attempt(&initial)
+            .expect("beginning the initial frame effect commits only attempt generation one");
+
+        let initial_attempts = requester.observer_safe_original_owner_request_attempts();
+        assert_eq!(initial_attempts.len(), 1);
+        let initial_observation = &initial_attempts[0];
+        assert_eq!(
+            initial_observation.semantic_request_identity_ref(),
+            request_identity
+        );
+        assert_eq!(initial_observation.source_requester_locus(), "ParticipantA");
+        assert_eq!(initial_observation.attempt_generation(), 1);
+        assert_eq!(
+            initial_observation.reason(),
+            Sys5I3ObserverSafeOriginalOwnerRequestAttemptReason::InitialDelivery
+        );
+        assert!(!initial_observation.requester_binding_ref().is_empty());
+        assert_ne!(
+            initial_observation.requester_binding_ref(),
+            pending.runtime_token_ref.as_str(),
+            "the observer-safe requester binding is not the opaque pending token"
+        );
+        assert_eq!(
+            requester.observer_safe_started_owner_request_attempt_count(),
+            1
+        );
+
+        assert_eq!(
+            requester
+                .authorize_original_owner_request_attempt(
+                    &pending,
+                    Sys5I3OriginalOwnerRequestAttemptKind::InitialDelivery,
+                )
+                .err()
+                .expect("a second initial delivery is not a reconnect retry")
+                .kind(),
+            Sys5I3ProcessRuntimeErrorKind::OriginalRequestPendingRejected
+        );
+
+        let reconnect = requester
+            .authorize_original_owner_request_attempt(
+                &pending,
+                Sys5I3OriginalOwnerRequestAttemptKind::ReconnectRetry,
+            )
+            .expect("the retained original operation authorizes exactly one reconnect attempt");
+        assert_eq!(reconnect.semantic_request_identity_ref(), request_identity);
+        assert_eq!(
+            reconnect.encoded_message_bytes(),
+            initial_bytes.as_slice(),
+            "a reconnect attempt retains the exact original private request bytes"
+        );
+        requester
+            .commit_authorized_original_owner_request_attempt(&reconnect)
+            .expect("the reconnect attempt consumes the second and final runtime attempt");
+
+        let reconnect_attempts = requester.observer_safe_original_owner_request_attempts();
+        assert_eq!(reconnect_attempts.len(), 1);
+        let reconnect_observation = &reconnect_attempts[0];
+        assert_eq!(
+            reconnect_observation.semantic_request_identity_ref(),
+            request_identity
+        );
+        assert_eq!(
+            reconnect_observation.source_requester_locus(),
+            "ParticipantA"
+        );
+        assert_eq!(reconnect_observation.attempt_generation(), 2);
+        assert_eq!(
+            reconnect_observation.reason(),
+            Sys5I3ObserverSafeOriginalOwnerRequestAttemptReason::ReconnectRetry
+        );
+        assert!(!reconnect_observation.requester_binding_ref().is_empty());
+        assert_ne!(
+            reconnect_observation.requester_binding_ref(),
+            pending.runtime_token_ref.as_str(),
+            "the observer-safe retry record excludes the opaque pending token"
+        );
+        assert_eq!(
+            requester.observer_safe_started_owner_request_attempt_count(),
+            2
+        );
+
+        assert_eq!(
+            requester
+                .authorize_original_owner_request_attempt(
+                    &pending,
+                    Sys5I3OriginalOwnerRequestAttemptKind::ReconnectRetry,
+                )
+                .err()
+                .expect("a third actual delivery attempt exceeds the fixed runtime budget")
+                .kind(),
+            Sys5I3ProcessRuntimeErrorKind::OutboundAttemptBudgetExhausted
+        );
+        assert_eq!(requester.observer_safe_pending_owner_request_count(), 1);
+
+        // This covers only the runtime-owned pending/authorization state
+        // machine. It does not create a QUIC session or establish a live
+        // reconnect/transport proof.
+    }
+
+    #[test]
+    fn i3_runtime_only_original_reply_rejection_preserves_pending_until_one_checked_receipt() {
+        let (mut requester, mut owner, codec, pending, request_identity) =
+            source_generated_pending_fixture();
+
+        let initial = requester
+            .authorize_original_owner_request_attempt(
+                &pending,
+                Sys5I3OriginalOwnerRequestAttemptKind::InitialDelivery,
+            )
+            .expect("the source-generated pending handle authorizes the initial runtime attempt");
+        let request_bytes = initial.encoded_message_bytes().to_vec();
+        requester
+            .commit_authorized_original_owner_request_attempt(&initial)
+            .expect("the runtime marks one begun initial attempt before owner admission");
+        let reply = owner
+            .admit_decoded_process_message(
+                codec.decode_untrusted_message(&request_bytes).expect(
+                    "the retained exact request bytes decode only as an untrusted candidate",
+                ),
+            )
+            .expect("the checked owner admits the exact runtime-authorized request")
+            .expect("the checked owner produces one typed reply");
+        let reply_bytes = codec
+            .encode_outbound_message(reply)
+            .expect("the checked owner reply encodes through the private codec");
+
+        let mut rejected_reply = codec
+            .decode_untrusted_message(&reply_bytes)
+            .expect("the checked reply decodes before its negative-input link omission");
+        rejected_reply.message.linked_request_identity_ref = None;
+        let attempts_before_rejection = requester.observer_safe_original_owner_request_attempts();
+        assert_eq!(
+            requester
+                .admit_decoded_original_owner_reply(rejected_reply, &pending)
+                .expect_err(
+                    "a reply without the exact original-request link cannot consume pending"
+                )
+                .kind(),
+            Sys5I3ProcessRuntimeErrorKind::OriginalRequestPendingRejected
+        );
+        assert_eq!(requester.observer_safe_pending_owner_request_count(), 1);
+        assert_eq!(
+            requester.observer_safe_original_owner_request_attempts(),
+            attempts_before_rejection,
+            "rejecting a candidate reply does not replace the retained original operation"
+        );
+        assert_eq!(
+            requester
+                .observer_safe_runtime_summary()
+                .accepted_inbound_receipt_count(),
+            0
+        );
+
+        let receipt = requester
+            .admit_decoded_original_owner_reply(
+                codec.decode_untrusted_message(&reply_bytes).expect(
+                    "the checked reply remains an untrusted input until requester admission",
+                ),
+                &pending,
+            )
+            .expect("the exact checked reply admits for its retained original pending handle")
+            .expect("one accepted reply produces one requester-local receipt");
+        assert!(receipt.is_observer_safe_typed_result_or_receipt());
+        assert!(receipt.has_no_transportable_carrier());
+        assert_eq!(receipt.semantic_request_identity_ref(), request_identity);
+        assert_eq!(
+            receipt.linked_request_identity_ref(),
+            Some(request_identity.as_str())
+        );
+        assert_eq!(requester.observer_safe_pending_owner_request_count(), 0);
+        assert_eq!(
+            requester
+                .observer_safe_runtime_summary()
+                .accepted_inbound_receipt_count(),
+            1
+        );
+
+        assert_eq!(
+            requester
+                .admit_decoded_original_owner_reply(
+                    codec
+                        .decode_untrusted_message(&reply_bytes)
+                        .expect("the stale checked reply remains syntactically untrusted input"),
+                    &pending,
+                )
+                .expect_err("a stale reply cannot recreate a consumed original pending operation")
+                .kind(),
+            Sys5I3ProcessRuntimeErrorKind::OriginalRequestPendingRejected
+        );
+        assert_eq!(requester.observer_safe_pending_owner_request_count(), 0);
+        assert_eq!(
+            requester
+                .observer_safe_runtime_summary()
+                .accepted_inbound_receipt_count(),
+            1,
+            "a stale reply cannot mint a second local receipt"
+        );
+
+        // The negative reply is derived from an actual checked owner reply
+        // and removes only its required outer request link. This is a
+        // runtime-only reply-binding falsifier, not a fabricated pending,
+        // authority, or live QUIC/session scenario.
+    }
 }

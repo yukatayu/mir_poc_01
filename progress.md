@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-09-07 11:38 JST
+最終更新: 2026-09-07 13:57 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -57,7 +57,7 @@ remain later.
 |---|---|---|
 | Logical specification | finite source -> Core -> artifact -> communication -> in-process trace/conformance accepted; Theory T1 and broad PHASE-I1 unaccepted | maintenance **着手可能**; general widening **後段依存** |
 | User-facing specification | provisional project/run/inspect/conform workflow exists; public grammar/CLI/JSON/API/ABI/wire/devtools unfrozen | regression **着手可能**; public contract **要仕様確認** |
-| Implementation / operation | I2 exit preserved; I3-1 and I3-2 bounded private QUIC evidence accepted; I3-3 resumed | I3-3 **着手可能**; I3-4+ **後段依存** |
+| Implementation / operation | I2 exit preserved; I3-1 and I3-2 bounded private QUIC evidence accepted; current I3-3 runtime/fault slices validated, with the remaining matrix and actual-reconnect validation pending | I3-3 **着手可能**; I3-4+ **後段依存** |
 
 ```text
 Theory: T1
@@ -206,6 +206,28 @@ theorem, exactly-once, lock-free runtime, or public completion is claimed.
 | View/browser | historical boundary | product/API program | deferred |
 | upper applications | toy + historical consumers | no domain Core promotion | product-specific |
 
+## current validation checkpoint
+
+The recovered I3-3 workspace is not an accepted milestone. Current dirty-source
+slices pass full-runtime integration 51/51 (44.43s), evaluator owner-capacity
+1/1, I3-3 filter 4/4, probe library lifecycle evidence 2/2 (one filtered),
+selected runtime library 1/1 + 1/1 (old-owner withdrawal and exact-ledger
+different-snapshot), actual probe integration 17/17, and cargo fmt.
+The historical ledger-source binary remains 49/49 in 47.70s only. The bounded
+model passed 3/3 tests (432 states, 2136 transitions) with three mutant
+counterexamples; this does not establish a general runtime proof. Authorized
+cleanup removed only `target/debug/incremental`, restoring about 18 GiB free.
+Runtime-only retry 2/2 and full same-feature library 285/285 (82.33s) pass.
+Focused two-crate all-target Clippy with `-Dwarnings` passes; model-target
+dead-code warnings without its private feature are not a deny-lint profile.
+Remaining validation is the full failure matrix and actual reconnect behavior.
+
+Owner clarification is retained as a working interpretation: ordinary meaning ->
+generated distribution -> continually checked composition. World/Avatar remain
+domain-library vocabulary, not Mir Core primitives; ledger64/coordinator/
+closed-cohort finite-profile machinery are bounded evidence, not general Mir
+requirements, and do not create a new theory gate or roadmap item.
+
 ## recent log
 
 - 2026-09-02 02:52 JST: I3-0 equal TLS/TCP and QUIC actual-process canaries
@@ -247,3 +269,6 @@ theorem, exactly-once, lock-free runtime, or public completion is claimed.
 
 - 2026-09-07 11:38 JST: owner resume accepted at the I3-2 cut; status mirrors
   now designate only I3-3 as active and retain I3-4/I3-5/I3-6/NEXT-0 as inactive.
+- 2026-09-07 13:57 JST: focused Clippy, retry, lifecycle, model, format, and
+  probe checks were refreshed; remaining matrix and reconnect validation stays
+  open without milestone acceptance.

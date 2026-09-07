@@ -20,9 +20,12 @@ use mir_runtime::sys5_local_slice::{Sys5I3AdapterCarrierContract, Sys5SourceInpu
 use mirrorea_i3_probe::{
     I3LocalnetAdapterRejectionKind, I3LocalnetChildSlot, I3LocalnetChildTerminalOutcome,
     I3LocalnetControlDelivery, I3LocalnetDeliveryPhase, I3LocalnetFailureStage,
-    I3LocalnetFalsifier, I3LocalnetImageDelivery, I3LocalnetLifecycleRejectionCause,
-    I3LocalnetObserverSafeDeliveryRecord, I3LocalnetRejectionAudit, I3LocalnetRunErrorKind,
-    I3ProcessLocalnetRequest, run_i3_process_localnet,
+    I3LocalnetFalsifier, I3LocalnetFaultAuditFalsifier, I3LocalnetFaultProfile,
+    I3LocalnetImageDelivery, I3LocalnetLifecycleRejectionCause,
+    I3LocalnetObserverSafeDeliveryRecord, I3LocalnetRejectionAudit,
+    I3LocalnetRemoteAdmissionEvidence, I3LocalnetRemoteEvidenceRejection,
+    I3LocalnetRequesterFaultObservation, I3LocalnetRunErrorKind, I3ProcessLocalnetRequest,
+    run_i3_process_localnet,
 };
 
 const ACTIVE_I2_SOURCE: &str = concat!(
@@ -145,6 +148,37 @@ fn assert_delivery_semantics_match(
         sent.linked_request_identity_ref(),
         received.linked_request_identity_ref()
     );
+}
+
+/// A fault result is not a semantic success merely because both child PIDs
+/// were naturally reaped.  The terminal reports must remain distinct from
+/// I3-2's successful `Completed` reports so a supervisor cannot turn fault
+/// cleanup into a successful source-derived round trip.
+fn assert_handled_delivery_fault_lifecycle(audit: &I3LocalnetRejectionAudit) {
+    let terminal_events = audit.child_terminal_events();
+    assert_eq!(
+        terminal_events.len(),
+        2,
+        "a handled delivery fault must retain a terminal event for each exec child"
+    );
+    assert!(
+        terminal_events.iter().all(|event| {
+            event.outcome() == I3LocalnetChildTerminalOutcome::HandledDeliveryFault
+        })
+    );
+    assert!(audit.all_children_reaped());
+    assert!(audit.no_orphan_child_pids());
+    assert!(
+        terminal_events.iter().all(|event| {
+            event.observed_exit_status_code() == Some(0) && !event.was_force_killed()
+        }),
+        "a normal handled fault must retain each child's natural zero exit rather than a force-kill cleanup"
+    );
+    assert!(
+        audit.zero_exit_reap_observed_within_deadline(),
+        "the normal fault path must retain clean shutdown evidence from natural zero-exit reaping"
+    );
+    assert!(audit.observer_safe());
 }
 
 #[test]
@@ -499,6 +533,296 @@ fn source_first_localnet_executes_one_remote_owner_round_trip_across_two_reaped_
         lifecycle.captured_zero_exit_reap_observation_elapsed(),
         "reported lifecycle elapsed must be captured at natural zero-exit reaping, not later during evidence assembly"
     );
+}
+
+#[test]
+fn i3_3_disconnect_before_request_carrier_write_is_unavailable_without_remote_admission() {
+    let error = run_i3_process_localnet(
+        canonical_request()
+            .with_fault_profile(I3LocalnetFaultProfile::DisconnectBeforeRequestCarrierWrite),
+    )
+    .expect_err("a faulted localnet run must not return the I3-2 positive completion");
+
+    assert_eq!(error.kind(), I3LocalnetRunErrorKind::DeliveryUnavailable);
+    let fault = error
+        .fault_audit()
+        .expect("a formed source-derived request fault must retain its observer-safe audit");
+    assert_eq!(
+        fault.profile(),
+        I3LocalnetFaultProfile::DisconnectBeforeRequestCarrierWrite
+    );
+    assert!(
+        !fault.semantic_success(),
+        "a handled pre-write fault is not semantic success even if cleanup reaps naturally"
+    );
+    assert!(
+        !fault.request_identity_ref().is_empty(),
+        "the requester must retain the original source-derived request identity"
+    );
+    assert_eq!(
+        fault.requester_observation(),
+        I3LocalnetRequesterFaultObservation::RequestCarrierWriteNotAttempted,
+        "the injected pre-write control must establish no request bytes were written"
+    );
+    match fault.remote_admission() {
+        Some(I3LocalnetRemoteAdmissionEvidence::NoAdmission {
+            owner_serve_count,
+            owner_mutation_count,
+        }) => {
+            assert_eq!(*owner_serve_count, 0);
+            assert_eq!(*owner_mutation_count, 0);
+            // NoAdmission deliberately carries no received-frame/request
+            // identity: the requester identity above is not a fabricated
+            // remote delivery record.
+        }
+        Some(I3LocalnetRemoteAdmissionEvidence::Admitted { .. }) => panic!(
+            "a request-carrier write that was not attempted cannot be reported as remote admission"
+        ),
+        None => panic!(
+            "the normal controlled pre-write schedule must retain its actual owner NoAdmission report; \
+             remote unknown belongs to a separate suppress-audit falsifier"
+        ),
+    }
+    assert_handled_delivery_fault_lifecycle(&error.rejection_audit());
+}
+
+#[test]
+fn i3_3_disconnect_after_remote_admission_is_request_bound_ambiguity_not_false_success() {
+    let error = run_i3_process_localnet(
+        canonical_request()
+            .with_fault_profile(I3LocalnetFaultProfile::DisconnectAfterRemoteAdmission),
+    )
+    .expect_err("a post-admission delivery loss must not return the I3-2 positive completion");
+
+    assert_eq!(error.kind(), I3LocalnetRunErrorKind::AmbiguousDelivery);
+    let fault = error
+        .fault_audit()
+        .expect("a post-admission fault must retain its original request-bound audit");
+    assert_eq!(
+        fault.profile(),
+        I3LocalnetFaultProfile::DisconnectAfterRemoteAdmission
+    );
+    assert!(
+        !fault.semantic_success(),
+        "a missing reply or receipt is never false semantic success"
+    );
+    let request_identity = fault.request_identity_ref();
+    assert!(
+        !request_identity.is_empty(),
+        "post-admission ambiguity remains bound to the original source-derived request"
+    );
+    assert_eq!(
+        fault.requester_observation(),
+        I3LocalnetRequesterFaultObservation::ReplyOrReceiptNotObserved,
+        "the requester records the missing reply/receipt without inferring whether owner admission happened"
+    );
+
+    match fault.remote_admission() {
+        Some(I3LocalnetRemoteAdmissionEvidence::Admitted {
+            request_receive,
+            owner_serve_count,
+            owner_mutation_count,
+            owner_serve_occurrence_ref,
+            owner_write_occurrence_ref,
+        }) => {
+            assert_eq!(*owner_serve_count, 1);
+            assert_eq!(*owner_mutation_count, 1);
+            assert!(!owner_serve_occurrence_ref.is_empty());
+            assert!(
+                owner_write_occurrence_ref
+                    .as_deref()
+                    .is_some_and(|reference| !reference.is_empty()),
+                "an admitted owner mutation retains its own observer-safe occurrence"
+            );
+            assert_delivery_matches_contract(
+                request_receive,
+                &active_contract("owner-request"),
+                request_identity,
+                None,
+            );
+        }
+        Some(I3LocalnetRemoteAdmissionEvidence::NoAdmission { .. }) => {
+            panic!("a post-admission fault must not manufacture a known no-admission verdict")
+        }
+        None => panic!(
+            "the normal controlled post-admission schedule must join the actual owner report; \
+             remote unknown belongs to a separate suppress-audit falsifier"
+        ),
+    }
+    let lifecycle = error.rejection_audit();
+    assert_eq!(
+        lifecycle.stage(),
+        I3LocalnetFailureStage::AfterRemoteAdmission,
+        "only the validated owner admission record may refine the requester's missing-reply observation"
+    );
+    assert_handled_delivery_fault_lifecycle(&lifecycle);
+}
+
+#[test]
+fn i3_3_missing_post_admission_owner_audit_is_ambiguous_unknown_not_lifecycle_rejection() {
+    let error = run_i3_process_localnet(canonical_request().with_fault_profile(
+        I3LocalnetFaultProfile::DisconnectAfterRemoteAdmissionSuppressOwnerAudit,
+    ))
+    .expect_err("a post-admission fault with no owner report must not return I3-2 completion");
+
+    assert_eq!(
+        error.kind(),
+        I3LocalnetRunErrorKind::AmbiguousDelivery,
+        "the requester cannot infer remote admission from a missing reply or suppressed owner audit"
+    );
+    let fault = error
+        .fault_audit()
+        .expect("the requester formed a source-derived request before the selected fault");
+    assert_eq!(
+        fault.profile(),
+        I3LocalnetFaultProfile::DisconnectAfterRemoteAdmissionSuppressOwnerAudit
+    );
+    assert!(
+        !fault.semantic_success(),
+        "a handled ambiguous delivery is never semantic success"
+    );
+    assert!(
+        !fault.request_identity_ref().is_empty(),
+        "the requester retains the original source-derived request identity"
+    );
+    assert_eq!(
+        fault.requester_observation(),
+        I3LocalnetRequesterFaultObservation::ReplyOrReceiptNotObserved
+    );
+    assert!(
+        fault.remote_admission().is_none(),
+        "a deliberately suppressed owner report is remote unknown, never a fabricated zero-mutation verdict"
+    );
+
+    let lifecycle = error.rejection_audit();
+    assert_eq!(
+        lifecycle.stage(),
+        I3LocalnetFailureStage::RequesterReplyOrReceiptNotObserved,
+        "a deliberately suppressed owner report leaves only the requester-side missing-reply observation"
+    );
+    assert_eq!(lifecycle.spawned_child_count(), 2);
+    assert!(lifecycle.all_children_reaped());
+    assert!(lifecycle.no_orphan_child_pids());
+    assert!(
+        lifecycle.child_terminal_event_count() < lifecycle.spawned_child_count(),
+        "the suppress-audit profile must not be rejected merely because process B supplied no terminal owner audit"
+    );
+    assert!(lifecycle.observer_safe());
+}
+
+#[test]
+fn i3_3_normal_post_admission_profile_rejects_an_unexpected_owner_terminal() {
+    let error = run_i3_process_localnet(
+        canonical_request()
+            .with_fault_profile(I3LocalnetFaultProfile::DisconnectAfterRemoteAdmission)
+            .with_fault_audit_falsifier(
+                I3LocalnetFaultAuditFalsifier::ReplaceOwnerFaultWithRejectedTerminal,
+            ),
+    )
+    .expect_err(
+        "a post-admission schedule with an unexpected owner terminal must not become ambiguity",
+    );
+
+    assert_eq!(error.kind(), I3LocalnetRunErrorKind::LifecycleRejected);
+    assert!(
+        error.fault_audit().is_none(),
+        "an unexpected owner terminal is an explicit lifecycle rejection, not remote unknown evidence"
+    );
+    let lifecycle = error.rejection_audit();
+    assert_eq!(
+        lifecycle.stage(),
+        I3LocalnetFailureStage::AfterRemoteAdmission,
+        "the unexpected owner terminal arrives only after the actual remote admission"
+    );
+    assert_eq!(lifecycle.child_owner_starts(), 1);
+    assert_eq!(lifecycle.semantic_admission_count(), 1);
+    assert_eq!(lifecycle.owner_mutation_count(), 1);
+    assert_eq!(lifecycle.child_terminal_event_count(), 2);
+    assert!(
+        lifecycle
+            .child_terminal_events()
+            .iter()
+            .any(|event| event.outcome() == I3LocalnetChildTerminalOutcome::Rejected),
+        "the rejection audit must retain the actual unexpected owner terminal"
+    );
+    assert!(lifecycle.all_children_reaped());
+    assert!(lifecycle.no_orphan_child_pids());
+    assert!(lifecycle.observer_safe());
+}
+
+#[test]
+fn i3_3_malformed_owner_audit_contract_is_rejected_without_validated_remote_evidence() {
+    for (falsifier, label) in [
+        (
+            I3LocalnetFaultAuditFalsifier::MutateOwnerRequestReceiveCoreRef,
+            "core-ref",
+        ),
+        (
+            I3LocalnetFaultAuditFalsifier::SetOwnerRequestReceiveLinkedRequestIdentity,
+            "linked-request-identity",
+        ),
+        (
+            I3LocalnetFaultAuditFalsifier::ClearOwnerRequestReceiveCarrierRef,
+            "carrier-ref",
+        ),
+        (
+            I3LocalnetFaultAuditFalsifier::ClearOwnerRequestReceiveNetworkOccurrenceRef,
+            "network-occurrence-ref",
+        ),
+    ] {
+        let error = run_i3_process_localnet(
+            canonical_request()
+                .with_fault_profile(I3LocalnetFaultProfile::DisconnectAfterRemoteAdmission)
+                .with_fault_audit_falsifier(falsifier),
+        )
+        .expect_err(
+            "a malformed owner report after actual admission must not return I3-2 completion",
+        );
+
+        assert_eq!(
+            error.kind(),
+            I3LocalnetRunErrorKind::AmbiguousDelivery,
+            "{label} corruption leaves requester delivery ambiguous rather than successful"
+        );
+        let fault = error
+            .fault_audit()
+            .expect("the requester formed a source-derived request before the selected fault");
+        assert_eq!(
+            fault.profile(),
+            I3LocalnetFaultProfile::DisconnectAfterRemoteAdmission
+        );
+        assert!(
+            !fault.semantic_success(),
+            "a missing reply remains non-success even when the owner report itself is rejected"
+        );
+        assert!(
+            !fault.request_identity_ref().is_empty(),
+            "the requester retains its source-derived identity while the remote report is rejected"
+        );
+        assert_eq!(
+            fault.requester_observation(),
+            I3LocalnetRequesterFaultObservation::ReplyOrReceiptNotObserved
+        );
+        assert!(
+            fault.remote_admission().is_none(),
+            "{label} corruption must not escape as validated remote evidence"
+        );
+        assert_eq!(
+            fault.remote_evidence_rejection(),
+            Some(I3LocalnetRemoteEvidenceRejection::ProvenanceMismatch),
+            "the supervisor must identify the rejected observer report rather than silently treating it as no admission"
+        );
+
+        let lifecycle = error.rejection_audit();
+        assert_eq!(
+            lifecycle.stage(),
+            I3LocalnetFailureStage::RequesterReplyOrReceiptNotObserved,
+            "{label} corruption cannot refine requester-side missing-reply evidence into remote admission"
+        );
+        assert_handled_delivery_fault_lifecycle(&lifecycle);
+        assert_eq!(lifecycle.aggregate_semantic_admission_count(), 1);
+        assert_eq!(lifecycle.aggregate_owner_mutation_count(), 1);
+    }
 }
 
 #[test]

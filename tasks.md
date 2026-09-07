@@ -1,6 +1,6 @@
 # Current Task Map (LAB)
 
-最終更新: 2026-09-07 11:38 JST
+最終更新: 2026-09-07 13:57 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -63,6 +63,29 @@ Sources: `plan/250-mirrorea-i3-distributed-foundation-current-roadmap.md`,
 `mirrorea_canon/adr/ADR-0039.md`, and
 `mirrorea_canon/plan/05-i3-entry-contract.md`. I3-2 evidence remains the
 input history in Report 2605, not the active goal.
+
+Current validation slice passes full-runtime integration 51/51 (44.43s),
+evaluator owner-capacity 1/1, I3-3 filter 4/4, probe library lifecycle evidence
+2/2 (one filtered), selected runtime library 1/1 + 1/1 (old-owner withdrawal and
+exact-ledger different-snapshot), actual probe integration 17/17, and cargo fmt.
+The historical ledger-source binary remains 49/49 in 47.70s only.
+Bounded model evidence is 3/3 tests (432 states, 2136 transitions) with three
+mutant counterexamples, not a general runtime proof. Authorized cleanup removed
+only `target/debug/incremental`, restoring about 18 GiB free. Full 20-family
+matrix and retry/reconnect acceptance remain unverified. Runtime-only retry 2/2
+and full same-feature library 285/285 (82.33s) pass. Focused two-crate all-target
+Clippy with `-Dwarnings` passes; model-target dead-code warnings without its
+private feature are not a deny-lint profile. Remaining validation is the full
+failure matrix and actual reconnect behavior. This is a validation checkpoint,
+not milestone acceptance.
+
+### Dated LAB rough remaining estimates (not acceptance or guarantee)
+
+As of 2026-09-07 13:57 JST, rough uninterrupted work estimates are I3-3
+12–24h, I3-4 6–12h, I3-5 3–6h, I3-6 4–8h, and NEXT-0 1–2h (total 26–52h).
+These are planning estimates only; provider/time contracts, review findings,
+validation breadth, and interruption time are uncertain and excluded. Historical
+I3-2 elapsed time is not used as an active-work estimate.
 
 ## ordered self-driven packages
 
@@ -161,6 +184,12 @@ and adoption/discard rule.
 - Reopen I3-0 only for its equal-canary/selection/security falsifier.
 - Do not activate I3-4/I3-5/I3-6/NEXT-0 before their preceding package acceptance
   under the fixed sequence; no new roadmap is created.
+
+The working interpretation remains ordinary meaning -> generated distribution ->
+continually checked composition. World/Avatar remain domain-library vocabulary,
+not Mir Core primitives; ledger64/coordinator/closed-cohort finite-profile
+machinery are bounded evidence, not general Mir requirements, and do not create
+a new theory gate or roadmap item.
 
 ## non-promoted references
 

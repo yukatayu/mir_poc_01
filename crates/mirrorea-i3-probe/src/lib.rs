@@ -12,6 +12,7 @@ promise.
 
 mod candidates;
 mod framing;
+mod i3_process_faults;
 mod i3_process_localnet;
 mod model;
 mod observer;
@@ -24,6 +25,11 @@ mod static_adapter_framing;
 pub use framing::{
     FrameDecodeErrorKind, FrameDecodeEvent, FrameDecoder, FrameDecoderStateError, FrameEncodeError,
     MAX_PRIVATE_FRAME_BYTES, WireCompatibility, encode_frame, private_wire_contract,
+};
+pub use i3_process_faults::{
+    I3LocalnetFaultAudit, I3LocalnetFaultAuditFalsifier, I3LocalnetFaultProfile,
+    I3LocalnetRemoteAdmissionEvidence, I3LocalnetRemoteEvidenceRejection,
+    I3LocalnetRequesterFaultObservation,
 };
 pub use i3_process_localnet::{
     I3LocalnetAdapterRejectionKind, I3LocalnetChildSlot, I3LocalnetChildTerminalEvent,
