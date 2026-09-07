@@ -20,7 +20,7 @@ open_items: []
 ## 最短の読み順
 
 - 全体像: `MAP.md` → `NORTH-STAR.md` → `DESIGN-CONSTITUTION.md` → `GLOSSARY.md`
-- 決定: `adr/README.md`(40 本の決定の一覧)
+- 決定: `adr/README.md`(41 本の決定の一覧)
 - 理論: `theory/00-overview.md` → `theory/01-mircore-v0.md` →
   `theory/13-evaluation-materialization.md` →
   `theory/14-maintained-relation-projection.md` →
@@ -60,6 +60,9 @@ open_items: []
   `plan/05-i3-entry-contract.md` →
   `LAB:plan/250-mirrorea-i3-distributed-foundation-current-roadmap.md`
 - 何がいつ動くか: `plan/01-phases.md` → `plan/04-t0-g0-semantic-assertion-profile.md`
+- I3-3 owner-admission budget契約: `meta/proposals/PROPOSAL-044-i3-owner-admission-budget.md`
+  → `adr/ADR-0041.md` → `spec/16-i3-owner-admission-budget.md`。
+  限定契約の選択であり、実装又はI3-3受理ではない。
 
 各ディレクトリの `README.md` が、そのディレクトリの 1 頁要約・読み順・「ここから推論してはいけないこと」を持つ。全ファイルは YAML front matter(id / status / maturity / depends_on / summary / open_items)を持ち、`INDEX.json` が機械可読索引である。
 

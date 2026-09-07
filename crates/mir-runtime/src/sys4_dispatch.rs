@@ -32,10 +32,11 @@ use crate::{
         M8InputReceiptSet, M8PublishedDesignatedValue,
     },
     m8_runtime_local_cut::{
-        M8LiveFloor, M8LocalCut, M8LocalDesignatedTraceContext, M8LocalRuntime, M8LocalRuntimeSeed,
-        M8LocalTrace, M8LocalTraceKind, M8LocalTraceObservation,
+        M8LiveFloor, M8LocalCut, M8LocalDesignatedTraceContext, M8LocalOwnerExecutionFailure,
+        M8LocalRuntime, M8LocalRuntimeSeed, M8LocalTrace, M8LocalTraceKind,
+        M8LocalTraceObservation,
     },
-    m8_runtime_owner_queue::{M8OwnerRequest, M8ServeOutcome, M8StateKey},
+    m8_runtime_owner_queue::{M8EnqueueDiagnosticKind, M8OwnerRequest, M8ServeOutcome, M8StateKey},
     m8_runtime_relation_projection::{
         M8BindingInvalidation, M8LeaseRecord, M8ObservedRelationShadow, M8Point,
         M8PresentationContext, M8PresentationFallback, M8PublishedRelationState,
@@ -7455,7 +7456,18 @@ impl M8ExecutionBackend {
                         serve_observation,
                     },
                 )
-                .map_err(M8BackendFailure::observed),
+                .map_err(|failure| match failure {
+                    M8LocalOwnerExecutionFailure::AdmissionRejected(diagnostics) => {
+                        debug_assert_eq!(
+                            diagnostics.primary().kind(),
+                            M8EnqueueDiagnosticKind::OwnerAdmissionAuthorizationRequired
+                        );
+                        M8BackendFailure::unobserved(Sys4DiagnosticKind::M8ExecutionRejected)
+                    }
+                    M8LocalOwnerExecutionFailure::Observed(observation) => {
+                        M8BackendFailure::observed(observation)
+                    }
+                }),
             Self::Ow1(worker) => {
                 let execution = worker
                     .execute_owner_with_context(owner_locus, request, context)
@@ -7468,6 +7480,15 @@ impl M8ExecutionBackend {
                     }),
                     Ow1ContextualM8Execution::Rejected { observation } => {
                         Err(M8BackendFailure::observed(observation))
+                    }
+                    Ow1ContextualM8Execution::AdmissionRejected { diagnostics } => {
+                        debug_assert_eq!(
+                            diagnostics.primary().kind(),
+                            M8EnqueueDiagnosticKind::OwnerAdmissionAuthorizationRequired
+                        );
+                        Err(M8BackendFailure::unobserved(
+                            Sys4DiagnosticKind::M8ExecutionRejected,
+                        ))
                     }
                 }
             }

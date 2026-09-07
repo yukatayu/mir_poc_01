@@ -6,6 +6,8 @@
 
 use std::ops::Range;
 
+use serde::{Deserialize, Deserializer, Serialize, de::Error as _};
+
 #[derive(Debug, Clone, PartialEq, Eq)]
 pub struct FixtureSource {
     file: String,
@@ -45,7 +47,7 @@ impl FixtureSource {
 
 /// Canonical, file-qualified byte span.  This remains parser-owned and is
 /// intentionally independent from the M5 semantic source-location carrier.
-#[derive(Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash, Serialize)]
 pub struct SurfaceV0Span {
     file: String,
     byte_start: usize,
@@ -54,6 +56,46 @@ pub struct SurfaceV0Span {
     start_column: u32,
     end_line: u32,
     end_column: u32,
+}
+
+#[derive(Deserialize)]
+#[serde(deny_unknown_fields)]
+struct SurfaceV0SpanWire {
+    file: String,
+    byte_start: usize,
+    byte_end: usize,
+    start_line: u32,
+    start_column: u32,
+    end_line: u32,
+    end_column: u32,
+}
+
+impl<'de> Deserialize<'de> for SurfaceV0Span {
+    fn deserialize<D>(deserializer: D) -> Result<Self, D::Error>
+    where
+        D: Deserializer<'de>,
+    {
+        let wire = SurfaceV0SpanWire::deserialize(deserializer)?;
+        if wire.byte_start > wire.byte_end {
+            return Err(D::Error::custom("surface span byte range is inverted"));
+        }
+        if wire.start_line > wire.end_line
+            || (wire.start_line == wire.end_line && wire.start_column > wire.end_column)
+        {
+            return Err(D::Error::custom(
+                "surface span line-column range is inverted",
+            ));
+        }
+        Ok(Self {
+            file: wire.file,
+            byte_start: wire.byte_start,
+            byte_end: wire.byte_end,
+            start_line: wire.start_line,
+            start_column: wire.start_column,
+            end_line: wire.end_line,
+            end_column: wire.end_column,
+        })
+    }
 }
 
 impl SurfaceV0Span {
@@ -226,6 +268,7 @@ impl DeferredForm {
 pub enum ParseErrorKind {
     RoleActorMustBeLiteralSelf,
     IntegerLiteralOutOfRange,
+    OwnerAdmissionBudgetOutOfRange,
     UnsupportedTransportSyntax,
     UnsupportedOccurrenceSyntax,
     UnsupportedEnvelopeSyntax,
@@ -683,6 +726,8 @@ pub struct WhenDecl {
     event: String,
     parameters: Vec<Parameter>,
     failures: Vec<String>,
+    owner_admission_budget: Option<OwnerAdmissionBudgetClause>,
+    owner_assignment_count: usize,
     actor: String,
     role_locus: String,
     node: SyntaxNode,
@@ -701,6 +746,17 @@ impl WhenDecl {
         &self.failures
     }
 
+    pub fn owner_admission_budget(&self) -> Option<&OwnerAdmissionBudgetClause> {
+        self.owner_admission_budget.as_ref()
+    }
+
+    /// Number of parsed owner assignments in this handler.  M6 combines this
+    /// parser fact with its existing lowerability checks before admitting an
+    /// owner-admission budget.
+    pub const fn owner_assignment_count(&self) -> usize {
+        self.owner_assignment_count
+    }
+
     pub fn actor(&self) -> &str {
         &self.actor
     }
@@ -711,6 +767,26 @@ impl WhenDecl {
 
     pub fn span(&self) -> &SurfaceV0Span {
         self.node.span()
+    }
+}
+
+/// Optional finite source condition on one handler's owner admission.
+///
+/// This is parser-owned syntax only.  It does not supply a clock, authority,
+/// permit, or runtime behavior.
+#[derive(Debug, Clone, PartialEq, Eq)]
+pub struct OwnerAdmissionBudgetClause {
+    ticks: u64,
+    span: SurfaceV0Span,
+}
+
+impl OwnerAdmissionBudgetClause {
+    pub const fn ticks(&self) -> u64 {
+        self.ticks
+    }
+
+    pub fn span(&self) -> &SurfaceV0Span {
+        &self.span
     }
 }
 
@@ -1553,19 +1629,66 @@ impl Parser {
         }
         let header_end = self.expect(")")?.span;
         let header_span = joined_span(&start, &header_end);
+        let owner_admission_budget = self.parse_owner_admission_budget()?;
+        let assignment_count_before = self.assignments.len();
         self.expect("{")?;
         while !self.check("}") {
-            self.parse_at_block(&event, actor, role_locus)?;
+            self.parse_at_block(&event, actor, role_locus, owner_admission_budget.is_some())?;
         }
         self.expect("}")?;
         Ok(WhenDecl {
             event: event.clone(),
             parameters,
             failures,
+            owner_admission_budget,
+            owner_assignment_count: self.assignments.len() - assignment_count_before,
             actor: actor.to_string(),
             role_locus: role_locus.to_string(),
             node: SyntaxNode::new(SyntaxKind::When, event, header_span, Vec::new()),
         })
+    }
+
+    fn parse_owner_admission_budget(
+        &mut self,
+    ) -> Result<Option<OwnerAdmissionBudgetClause>, ParseDiagnostics> {
+        if !self.check("within") {
+            return Ok(None);
+        }
+
+        let start = self.expect("within")?.span;
+        self.expect("owner_ticks")?;
+        if self.check("-") {
+            return Err(ParseDiagnostics::one(
+                ParseErrorKind::OwnerAdmissionBudgetOutOfRange,
+                self.advance().span,
+            ));
+        }
+        let (raw_ticks, ticks_span) = match self.integer() {
+            Ok(value) => value,
+            Err(_) => {
+                return Err(ParseDiagnostics::one(
+                    ParseErrorKind::OwnerAdmissionBudgetOutOfRange,
+                    self.current().span.clone(),
+                ));
+            }
+        };
+        let ticks = raw_ticks.parse::<u64>().map_err(|_| {
+            ParseDiagnostics::one(
+                ParseErrorKind::OwnerAdmissionBudgetOutOfRange,
+                ticks_span.clone(),
+            )
+        })?;
+        if !(1..=65_535).contains(&ticks) {
+            return Err(ParseDiagnostics::one(
+                ParseErrorKind::OwnerAdmissionBudgetOutOfRange,
+                ticks_span,
+            ));
+        }
+
+        Ok(Some(OwnerAdmissionBudgetClause {
+            ticks,
+            span: joined_span(&start, &ticks_span),
+        }))
     }
 
     fn parse_at_block(
@@ -1573,6 +1696,7 @@ impl Parser {
         event: &str,
         actor: &str,
         role_locus: &str,
+        owner_admission_budget: bool,
     ) -> Result<(), ParseDiagnostics> {
         let at = self.expect("at")?.span;
         let (locus, locus_end) = self.identifier()?;
@@ -1582,7 +1706,14 @@ impl Parser {
             if self.check("relation") {
                 self.parse_relation_mutation(&locus)?;
             } else {
-                self.parse_assignment(event, actor, role_locus, &locus, &owner_locus_span)?;
+                self.parse_assignment(
+                    event,
+                    actor,
+                    role_locus,
+                    &locus,
+                    &owner_locus_span,
+                    owner_admission_budget,
+                )?;
             }
         }
         self.expect("}")?;
@@ -1596,11 +1727,16 @@ impl Parser {
         role_locus: &str,
         locus: &str,
         owner_locus_span: &SurfaceV0Span,
+        owner_admission_budget: bool,
     ) -> Result<(), ParseDiagnostics> {
         let target = self.parse_reference()?;
         let start = target.span.clone();
         self.expect("=")?;
-        let expression = self.parse_bounded_expression_until(&["}"])?;
+        let expression = if owner_admission_budget {
+            self.parse_owner_expression_until_block_end()?
+        } else {
+            self.parse_bounded_expression_until(&["}"])?
+        };
         let expression_span = expression.span().clone();
         let span = joined_span(&start, expression.span());
         let label = target.text.clone();
@@ -1797,6 +1933,20 @@ impl Parser {
         &mut self,
         terminators: &[&str],
     ) -> Result<BoundedExpression, ParseDiagnostics> {
+        self.parse_bounded_expression_until_with_owner_assignment_boundary(terminators, false)
+    }
+
+    fn parse_owner_expression_until_block_end(
+        &mut self,
+    ) -> Result<BoundedExpression, ParseDiagnostics> {
+        self.parse_bounded_expression_until_with_owner_assignment_boundary(&["}"], true)
+    }
+
+    fn parse_bounded_expression_until_with_owner_assignment_boundary(
+        &mut self,
+        terminators: &[&str],
+        stop_before_owner_assignment: bool,
+    ) -> Result<BoundedExpression, ParseDiagnostics> {
         if self.is_eof() || terminators.iter().any(|terminator| self.check(terminator)) {
             return Err(self.unexpected());
         }
@@ -1809,6 +1959,12 @@ impl Parser {
         let mut parts = Vec::new();
 
         while !self.is_eof() && !terminators.iter().any(|terminator| self.check(terminator)) {
+            if stop_before_owner_assignment
+                && self.index > token_start
+                && self.owner_assignment_starts_here()
+            {
+                break;
+            }
             if self.current_is_identifier() && self.reference_starts_here() {
                 let reference = self.parse_reference()?;
                 last = reference.span.clone();
@@ -1847,8 +2003,9 @@ impl Parser {
                 }
                 // M6 deliberately retains its broad expression-token
                 // collector. `}` remains the surrounding owner-block
-                // terminator, while the other grammar tokens are retained as
-                // opaque input for M7's finite expression check.
+                // terminator; owner parsing additionally recognizes a later
+                // field-bearing assignment head so handler cardinality is not
+                // swallowed as opaque expression input.
                 "{" | "[" | "]" | "(" | ")" | ":" | "," | "." | "=" => {
                     last = self.advance().span;
                     parts.push(BoundedExpressionPart::Opaque);
@@ -1881,6 +2038,36 @@ impl Parser {
             tokens,
             tree: bounded_expression_tree(parts, span),
         })
+    }
+
+    fn owner_assignment_starts_here(&self) -> bool {
+        if !self.current_is_identifier() {
+            return false;
+        }
+
+        let mut cursor = self.index + 1;
+        if self.token_text_at(cursor) == Some("[") {
+            if !self.token_is_identifier_at(cursor + 1)
+                || self.token_text_at(cursor + 2) != Some("]")
+            {
+                return false;
+            }
+            cursor += 3;
+        }
+        if self.token_text_at(cursor) != Some(".") || !self.token_is_identifier_at(cursor + 1) {
+            return false;
+        }
+        self.token_text_at(cursor + 2) == Some("=")
+    }
+
+    fn token_text_at(&self, index: usize) -> Option<&str> {
+        self.tokens.get(index).map(|token| token.text.as_str())
+    }
+
+    fn token_is_identifier_at(&self, index: usize) -> bool {
+        self.tokens
+            .get(index)
+            .is_some_and(|token| is_identifier(&token.text))
     }
 
     fn parse_with_auth(&mut self) -> Result<(), ParseDiagnostics> {
@@ -1988,11 +2175,7 @@ impl Parser {
     }
 
     fn current_is_identifier(&self) -> bool {
-        self.current()
-            .text
-            .bytes()
-            .next()
-            .is_some_and(|byte| byte.is_ascii_alphabetic() || byte == b'_')
+        is_identifier(&self.current().text)
     }
 
     fn current(&self) -> &Token {
@@ -2029,6 +2212,12 @@ impl Parser {
             self.current().span.clone(),
         )
     }
+}
+
+fn is_identifier(text: &str) -> bool {
+    text.bytes()
+        .next()
+        .is_some_and(|byte| byte.is_ascii_alphabetic() || byte == b'_')
 }
 
 fn bounded_expression_tree(

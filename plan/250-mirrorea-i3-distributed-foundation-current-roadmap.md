@@ -1070,9 +1070,78 @@ provenance without erasing genuine admitted evidence. Fresh probe integration
 I2 5/5 + 8/8, focused Clippy and format/diff pass; independent review has no
 remaining P0/P1. The earlier feature library 289/289, M10 67/67 and model 3/3
 are prior evidence, not rerun here. All 20 families and remaining ordering
-obligations remain required. The next direct consumer is contract-first time,
-then provider, both still OPEN pending normative adoption. No later milestone
-or general harness framework is activated.
+obligations remain required. That cut leaves time/provider contracts open;
+the following integration selects the time contract without accepting its
+implementation. No later milestone or general harness framework is activated.
+
+**Owner-admission time contract checkpoint (2026-09-07, uncommitted integration
+over `31be54b9`):** PROPOSAL-044 / ADR-0041 select spec/16's explicit source
+opt-in budget and declared `DeadlineExpired`. Candidate A, a separately
+authorized outer lifecycle contract, is deferred: the existing M9 update does
+not supply that request-expiry authorization. Provider remains **OPEN**.
+Independent normative review has no remaining P0/P1. Contract selection is
+not implementation, runtime evidence, or acceptance of row 17 or I3-3.
+
+The concrete dependent implementation steps within this same milestone are:
+
+1. Static preservation: `mir-ast/src/surface_v0.rs`, M6 classification, M7
+   checked pipeline and its private snapshot retain the clause, source span,
+   owner-clock condition and conditional failure row. A separate test owner
+   owns `mir-semantics/tests/i3_owner_admission_budget.rs`; the sole evaluator
+   captured behavioral `UnexpectedSyntax` RED before source implementation.
+   Test old-source identity/behavior, budget distinctions, failure padding,
+   underdeclaration, unsupported shapes and non-erasing M5 export. Direct
+   consumer: generated carrier contracts and guarded execution.
+2. Projection and enforcement: retain the condition in both generated
+   request/reply contracts and private execution translations. Every actual
+   M8/SYS4/SYS5/M10 entry enforces the condition or rejects before mutation;
+   initial artifact admission cannot replace the one-use per-request permit.
+   Then implement serialized owner clock/stage/resolve and retained requester
+   terminal-failure state. Direct consumer: genuine typed failure transport.
+3. Selected-QUIC execution: timely reservation, delivered expiry with zero
+   owner mutation, lost outcomes with requester uncertainty, replay and
+   authority/capacity falsifiers. Observe reservation, actual serve,
+   failure send/receive/consume and success separately. Run applicable
+   regressions and independent review before checkpoint acceptance.
+
+Reopen for erased/aliased metadata, a serve bypass or reused permit,
+requester-controlled time, false nonexecution, reservation counted as actual
+serve, budget restart after loss, or failure counted as success. No generic
+clock/lease theorem, provider implementation or new roadmap is opened.
+
+Static-slice checkpoint (`2026-09-07T19:56+09:00`): step 1 now passes
+14 new static/snapshot tests, old AST/M6/M7 10/13/27, a compile-fail raw-Core
+export falsifier and focused Clippy, with no remaining independently reviewed
+P0/P1. Step 2 is the direct consumer; source acceptance is not committed while
+annotated execution lacks its required lower guard. This is not I3-3 acceptance.
+
+Default-enforcement checkpoint (`2026-09-07T20:34+09:00`): generated contracts
+8/8, private projection snapshots 6/6, ordinary M8 rejection 2/2 and M8
+regressions 33/33 pass; independent projection/M8 reviews have no P0/P1.
+Current-delta I2 5/5 + 8/8, I3 runtime 61/61 and M10 67/67 pass. Three
+runtime Clippy style lints are under repair. Before committing this safe
+checkpoint, verify actual alternative entry/private image negatives and
+prevent the kernel from relabelling unsupported admission as `RouteUnavailable`.
+The next direct consumer is the existing owner ledger extended with serialized
+clock/stage/resolve and retained decisions, then a non-Clone one-use permit
+through SYS4/M8, genuine typed failure consumption, and selected QUIC evidence.
+Do not introduce a second scheduler/identity ledger. Started process runtimes
+have no live cut/export API; pre-start images do not preserve live requests.
+Genuine authority installation must retain awaiting decisions and allow current
+authority revalidation to reject them, not silently restart or revive them.
+
+Final safe-checkpoint validation (`2026-09-07T21:00+09:00`): an actual SYS5
+negative exposed the old contextual executor's assumption that every rejection
+has an M8 trace. The repaired ST/OW1 path carries a typed unobserved rejection;
+M10's false route diagnosis is separately repaired for this exact new guard.
+Budget library 11/11 (including real worker rejection/snapshot/shutdown), M10
+source 3/3, direct guard 2/2 and full SYS5 runtime 63/63 pass. Broader runtime
+library with test seams 298/298, M8 33/33, M10 conformance 67/67, I2 5/5+8/8,
+probe 32/32, private QUIC 2/2 and focused Clippy/format pass. Independent
+integration review has no P0/P1. These are finite default-rejection and
+preservation results, not clock/permit/expiry execution or row-17 acceptance.
+The Stage C consumer remains as above; provider and remaining I3-3 matrix/order
+remain required. Only full I3-3 acceptance triggers the owner-requested pause.
 
 ## I3-4 milestone contract — inactive until I3-3 closes and owner resumes
 
@@ -1409,8 +1478,9 @@ integration, or Typed-Effect platform collapse.
 
 ## Recommended next action
 
-After the bounded delivery checkpoint, resolve the time contract and then the
-provider contract, and complete the remaining I3-3
+Implement the selected ADR-0041 time contract through static preservation,
+non-bypass runtime enforcement and actual QUIC evidence, then resolve the
+still-open provider contract and complete the remaining I3-3
 failure/order inventory. Preserve all 20 families, applicable regressions and
 independent acceptance review. After I3-3 commit/push and remote parity, stop
 and report the accepted boundary. I3-4 remains inactive until explicit owner

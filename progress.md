@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-09-07 18:58 JST
+最終更新: 2026-09-07 21:00 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -240,7 +240,19 @@ Validated-only observer projection retains genuine evidence and rejects
 malformed provenance. Full probe library 3/3 also passes. These are bounded
 application-write/process observations, not complete failure-family acceptance.
 Full failure/order coverage remains open; disk free space is about 15 GiB.
-Next is contract-first time, then provider; both remain OPEN pending adoption.
+The current uncommitted integration over `31be54b9` selects ADR-0041/spec/16's
+source-declared owner-admission budget; implementation remains in progress.
+Static tests now pass 14/14, old AST/M6/M7 10/13/27 and the raw-Core escape
+compile-fail doctest 1/1; focused Clippy passes and reviewed P0/P1 are resolved.
+Generated-contract tests 8/8, private projection snapshots 6/6, default M8
+rejection 2/2 and M8 regressions 33/33 now pass. Contextual ST/OW1 rejection
+no longer fabricates/assumes an M8 trace, and M10 reports the distinct guard.
+Final budget library 11/11, M10 source 3/3, I3 runtime 63/63, runtime library
+with test seams 298/298, M10 conformance 67/67, I2 5/5 + 8/8, probe 32/32,
+private QUIC 2/2 and focused Clippy/format pass. Independent integration review
+has no P0/P1. Next: serialized owner clock/stage/resolve, sealed one-use permit,
+retained typed expiry/requester consumption, then actual QUIC evidence. Root free space
+is now 14 GiB. Provider remains OPEN; no whole fault row is accepted.
 
 Owner clarification is retained as a working interpretation: ordinary meaning ->
 generated distribution -> continually checked composition. World/Avatar remain
@@ -301,3 +313,20 @@ requirements, and do not create a new theory gate or roadmap item.
   observer evidence pass probe 32/32, full probe library 3/3, runtime 61/61,
   QUIC 2/2, I2 5/5 + 8/8 and focused Clippy; independent P0/P1 clear.
   Feature-library/M10/model remain prior; time/provider and full I3-3 stay open.
+- 2026-09-07 19:31 JST: ADR-0041/spec/16 time contract selected in the current
+  integration; independent normative P0/P1 resolved. Static source test confirms
+  behavioral parser RED before implementation; runtime/network evidence remains
+  pending, provider OPEN, I3-3 active until complete acceptance then owner pause.
+- 2026-09-07 19:56 JST: static budget/identity/snapshot tests 14/14, old
+  AST/M6/M7 10/13/27, compile-fail 1/1 and focused Clippy pass after reviewed
+  cardinality/span/raw-Core repairs. Generated contracts and runtime gating
+  remain pending; no milestone or annotated network workflow accepted.
+- 2026-09-07 20:34 JST: generated contracts 8/8, snapshots 6/6, default M8
+  guard 2/2, M8 regressions 33/33 and current I2/I3/M10 regressions pass;
+  independent projection/M8 review clear. Alternative-entry tests, precise
+  kernel rejection and runtime Clippy repairs precede the actual clock gate.
+- 2026-09-07 21:00 JST: default budget guard integration is validated after
+  repairing a contextual-trace panic and false route diagnosis. Budget library
+  11/11, M10 source 3/3, runtime 63/63, library 298/298, M8/I2/M10/probe/QUIC
+  regressions and Clippy/format pass; independent review clear. Actual clock,
+  permit and expiry are next; I3-3 remains active, not accepted.

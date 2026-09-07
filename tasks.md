@@ -1,6 +1,6 @@
 # Current Task Map (LAB)
 
-最終更新: 2026-09-07 18:49 JST
+最終更新: 2026-09-07 21:00 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -55,8 +55,21 @@ semantic pressure consume the I3-3 matrix only after milestone acceptance.
 The genuine M9 successor/retained-ingress and selected-adapter delivery slices
 have passed bounded repair review. Actual endpoint closure, a complete frame
 split over two application writes, and strict truncation/FIN execute with
-validated-only observer evidence. Next within I3-3 is contract-first time, then
-provider, both still OPEN pending adoption; the full matrix is not complete.
+validated-only observer evidence. The current uncommitted integration over
+`31be54b9` selects ADR-0041/spec/16's source-declared owner-admission budget.
+Static/source identity and generated/private contracts are retained; unsupported
+annotated execution now rejects before M8 occurrence/mutation. Contextual
+ST/OW1 rejection produces no invented trace, and M10 reports the distinct
+guard rather than route failure. Static 14, old AST/M6/M7 10/13/27, compile-fail
+1, budget library 11, direct guard 2, M10 source 3 and full SYS5 runtime 63
+pass. Final runtime library 298, M8 33, M10 conformance 67, I2 5+8, probe 32,
+private QUIC 2 and focused Clippy/format pass; independent integration review
+has no P0/P1. Immediate consumer after the safe checkpoint commit: serialized
+owner clock/stage/resolve, sealed one-use permit, retained typed expiry and
+requester consumption, then actual two-process QUIC evidence. These execution
+capabilities remain pending; source acceptance alone does not implement expiry.
+Provider remains OPEN and the
+full matrix is not complete; no whole fault row is accepted by this decision.
 
 Scope: execute all 20 required network failure families against the accepted
 generated-artifact runtime; make retry and ambiguous delivery request-bound and

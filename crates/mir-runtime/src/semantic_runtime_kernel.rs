@@ -20,7 +20,8 @@ use mir_semantics::{
 use crate::{
     m8_runtime_local_cut::{M8LeaseRecord, M8LocalRuntime, M8LocalRuntimeSeed},
     m8_runtime_owner_queue::{
-        M8AuthorityUse, M8DeclaredFailure, M8Occurrence, M8OwnerRequest, M8ServeOutcome, M8StateKey,
+        M8AuthorityUse, M8DeclaredFailure, M8EnqueueDiagnosticKind, M8EnqueueDiagnostics,
+        M8Occurrence, M8OwnerRequest, M8ServeOutcome, M8StateKey,
     },
     m9_auth_verification::{
         M9_REMOTE_INPUT_VISIBILITY_RESTRICTED_REDACTED, M9AuthorityGeneration,
@@ -1497,6 +1498,7 @@ pub(crate) enum KernelDiagnosticKind {
     MissingCapability,
     ExecutionProfileUnsupported,
     AuthorityGenerationRejected,
+    OwnerAdmissionAuthorizationRequired,
     RouteUnavailable,
 }
 
@@ -1525,6 +1527,17 @@ impl KernelDiagnostics {
 
     pub(crate) fn primary(&self) -> &KernelDiagnostic {
         &self.primary
+    }
+}
+
+/// Preserve the legacy generic enqueue rejection while exposing the one
+/// checked condition which deliberately rejects before M8 allocates work.
+fn kernel_enqueue_diagnostics(diagnostics: &M8EnqueueDiagnostics) -> KernelDiagnostics {
+    match diagnostics.primary().kind() {
+        M8EnqueueDiagnosticKind::OwnerAdmissionAuthorizationRequired => {
+            KernelDiagnostics::one(KernelDiagnosticKind::OwnerAdmissionAuthorizationRequired)
+        }
+        _ => KernelDiagnostics::one(KernelDiagnosticKind::RouteUnavailable),
     }
 }
 
@@ -2298,14 +2311,13 @@ impl SemanticRuntimeKernel {
             (OwnerExecutionBackend::AdmittedSt(runtime), Some(m8_request)) => runtime
                 .enqueue_owner(m8_request)
                 .map(Some)
-                .map_err(|_| KernelDiagnostics::one(KernelDiagnosticKind::RouteUnavailable))?,
+                .map_err(|diagnostics| kernel_enqueue_diagnostics(&diagnostics))?,
             (OwnerExecutionBackend::Ow1(worker), Some(m8_request)) => worker
                 .enqueue(m8_request)
                 .map(Some)
                 .map_err(|failure| match failure {
                     Ow1WorkerFailure::Enqueue(diagnostics) => {
-                        let _ = diagnostics.primary();
-                        KernelDiagnostics::one(KernelDiagnosticKind::RouteUnavailable)
+                        kernel_enqueue_diagnostics(&diagnostics)
                     }
                     _ => KernelDiagnostics::one(KernelDiagnosticKind::RouteUnavailable),
                 })?,

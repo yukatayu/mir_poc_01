@@ -18,6 +18,13 @@ open_items: []
 
 ## 履歴
 
+- **2026-09-07** PROPOSAL-044 / ADR-0041 / spec/16により、I3-3の限定consumerへ
+  source opt-in owner admission budgetと型付きterminal failureを選択した。M6/M7の
+  condition/identity保存、owner-local u64 clock、sealed one-use admission permit、
+  失敗受理のretained stateと全実行経路の非迂回を要求する。旧source/failure rowと
+  M5 proof scopeは不変。これは実装又はmilestone受理ではなく、provider/general
+  clock/leaseとofficial lifecycleは未受理のまま。I3-3完了後のowner pauseを維持する。
+
 - **2026-09-07** PROPOSAL-043 / ADR-0040により、owner instructionをsource cut
   `648425f6bd4304d003d36bc04d346ddf0e78c058`へ固定し、ADR-0034 / Plan 250の元の固定順を
   NEXT-0まで再開した。I3-3のみをsole active semantic milestoneとし、I3-4以降は固定順序に

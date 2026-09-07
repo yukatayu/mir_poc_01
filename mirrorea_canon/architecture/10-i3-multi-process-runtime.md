@@ -2,7 +2,7 @@
 id: arch/10-i3-multi-process-runtime
 status: L1-fixed
 maturity: reviewed
-depends_on: [arch/04-runtime-carriers, arch/09-i3-private-adapter, adr/ADR-0039, meta/proposal-042]
+depends_on: [arch/04-runtime-carriers, arch/09-i3-private-adapter, adr/ADR-0039, meta/proposal-042, adr/ADR-0041, spec/16-i3-owner-admission-budget]
 summary: I3-2のsource-first two-process runtime、private QUIC ingress、exact joined evidenceとbounded child lifecycle。
 open_items: []
 ---
@@ -61,3 +61,12 @@ failure/ordering contract, a public process/wire/certificate/API ABI, a package
 or Browser/Host boundary, production support, durability, exactly-once or a
 general proof. Synchronous preflight and exact return time under host suspension
 are outside its child-lifecycle bound.
+
+## I3-3 source-declared admission budget
+
+ADR-0041 / spec/16 select the subsequent finite owner-admission gate and
+request-bound terminal-failure contract. The clock is a private owner-runtime
+input, not a requester/session or reaper fact. Gate reservation is not actual
+serve; joined observations must distinguish expiry, actual failure delivery/
+consumption, success and unknown remote disposition. This extends the contract,
+not the accepted I3-2 evidence or its lifecycle claims.

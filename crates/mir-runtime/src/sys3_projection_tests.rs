@@ -7,12 +7,14 @@ use std::{
 use mir_ast::surface_v0::FixtureSource;
 use mir_semantics::{
     shared_model::{BindingActivationFrontier, SourceRef},
+    surface_v0_classification::OwnerAdmissionBudgetCondition,
     surface_v0_pipeline::{
         CheckedEvaluation, CheckedEvaluationKind, CheckedProgramIdentity, CheckedSurfaceV0,
         EffectKind, GeneratedObligationKind, RelationAnchorCore, ResidualObligationKind,
         StaticRetryContractKind, check_and_elaborate_surface_v0,
     },
 };
+use serde_json::Value;
 
 use crate::{
     m8_runtime_admission::{
@@ -26,6 +28,7 @@ use crate::{
         M8AnchorSample, M8LeaseInventory, M8LeaseRecord, M8Point, M8PresentationContext,
         M8RelationProjectionSeed, M8RestrictionPolicy, M8Transform2,
     },
+    sys3_i3_private_snapshot::{I3PrivateProjectionSnapshot, I3PrivateProjectionSnapshotError},
     sys3_projection::{
         BackendEligibility, BackendIneligibilityReason, BackendProfile, CarrierFrontierKind,
         CarrierLifecycleKind, CarrierOccurrenceSlotKind, CarrierProvenanceKind,
@@ -57,6 +60,10 @@ const RELATION_CAPABILITY_REF: &str =
     "cap:relation:bird_follow:S:self:invalidate_primary:binding_epoch1";
 const RELATION_WITNESS_REF: &str =
     "witness:relation:bird_follow:S:self:invalidate_primary:witness_epoch1";
+const OWNER_ADMISSION_BUDGET_PROJECTION_PATH: &str =
+    "tests/inline/sys3_owner_admission_budget_projection.mir";
+const OWNER_ADMISSION_BUDGET_REPLACEMENT_PATH: &str =
+    "tests/inline/sys3_owner_admission_budget_projection_replacement.mir";
 
 fn surface_fixture_path(name: &str) -> String {
     format!("{SURFACE_FIXTURE_DIR}/{name}")
@@ -172,6 +179,117 @@ fn assert_verify_diag(
     let diagnostics = actual.expect_err("verification should reject the mutated projection");
     assert_eq!(diagnostics.primary().kind(), expected);
     assert!(diagnostics.partial_result().is_none());
+}
+
+fn owner_admission_budget_projection_source(ticks: u64, include_clause: bool) -> String {
+    let clause = if include_clause {
+        format!(" within owner_ticks {ticks}")
+    } else {
+        String::new()
+    };
+    format!(
+        "module Combat.Sys3.OwnerAdmissionBudgetProjection
+
+locus A
+locus S
+principal self
+principal target
+type Player
+
+state player[id: Player] at S {{
+  hp: Int
+  atk: Int
+}}
+
+Role[self] at A {{
+  when attack(target: Player) fails (StaleMembership, MissingCapability, MissingWitness, RouteUnavailable, DeadlineExpired){clause} {{
+    at S {{
+      player[target].hp = player[target].hp - player[self].atk
+    }}
+  }}
+}}
+
+with auth MembershipAuth
+
+verify finite_refinement
+"
+    )
+}
+
+fn checked_owner_admission_budget_projection(
+    path: &str,
+    ticks: u64,
+    include_clause: bool,
+) -> CheckedSurfaceV0 {
+    check_and_elaborate_surface_v0(FixtureSource::new(
+        path,
+        owner_admission_budget_projection_source(ticks, include_clause),
+    ))
+    .expect("ordinary source-generated owner request checks before SYS-3 projection")
+}
+
+fn assert_owner_admission_budget_matches(
+    actual: Option<&OwnerAdmissionBudgetCondition>,
+    expected: &OwnerAdmissionBudgetCondition,
+    carrier_name: &str,
+) {
+    let actual = actual.unwrap_or_else(|| {
+        panic!("{carrier_name} carrier must retain the source-generated owner-admission budget")
+    });
+    assert_eq!(actual, expected, "{carrier_name} condition must stay typed");
+    assert_eq!(actual.budget_ticks(), expected.budget_ticks());
+    assert_eq!(actual.owner_locus(), expected.owner_locus());
+    assert_eq!(actual.clock_domain(), expected.clock_domain());
+    assert_eq!(actual.source_span(), expected.source_span());
+    assert_eq!(actual.source_ref(), expected.source_ref());
+}
+
+fn private_snapshot_edge_mut<'a>(
+    snapshot: &'a mut Value,
+    expected_kind: &str,
+    expected_source: &str,
+    expected_target: &str,
+) -> &'a mut serde_json::Map<String, Value> {
+    let edges = snapshot
+        .get_mut("communication_plan")
+        .and_then(Value::as_object_mut)
+        .and_then(|plan| plan.get_mut("edges"))
+        .and_then(Value::as_array_mut)
+        .expect("private projection snapshot retains its communication edges");
+    let edge = edges
+        .iter_mut()
+        .find(|edge| {
+            edge.get("kind").and_then(Value::as_str) == Some(expected_kind)
+                && edge.get("source_locus").and_then(Value::as_str) == Some(expected_source)
+                && edge.get("target_locus").and_then(Value::as_str) == Some(expected_target)
+        })
+        .unwrap_or_else(|| {
+            panic!(
+                "private projection snapshot retains {expected_kind} edge {expected_source}->{expected_target}"
+            )
+        });
+    edge.as_object_mut()
+        .expect("private projection communication edge serializes as an object")
+}
+
+fn private_snapshot_owner_edge_mut<'a>(
+    snapshot: &'a mut Value,
+    expected_kind: &str,
+    expected_source: &str,
+    expected_target: &str,
+) -> &'a mut serde_json::Map<String, Value> {
+    private_snapshot_edge_mut(snapshot, expected_kind, expected_source, expected_target)
+        .get_mut("carrier_contract")
+        .and_then(Value::as_object_mut)
+        .expect("private projection snapshot retains the edge carrier contract")
+}
+
+fn restore_private_projection_snapshot(
+    serialized: Value,
+) -> Result<GlobalProjectionResult, I3PrivateProjectionSnapshotError> {
+    let snapshot: I3PrivateProjectionSnapshot = serde_json::from_value(serialized)
+        .expect("a known-shape private snapshot mutation remains syntactically decodable");
+    GlobalProjectionResult::from_i3_private_snapshot(snapshot)
 }
 
 fn assert_projected_anchor_matches_checked(
@@ -3232,4 +3350,273 @@ fn strict_verifier_reports_structural_and_provenance_mismatches_honestly() {
         verify_projection(&checked, &topology, &handler_mismatch),
         ProjectionDiagnosticKind::EffectHandlerProvenanceMismatch,
     );
+}
+
+#[test]
+fn i3_owner_admission_budget_projection_preserves_the_checked_condition_on_request_and_reply() {
+    let checked =
+        checked_owner_admission_budget_projection(OWNER_ADMISSION_BUDGET_PROJECTION_PATH, 1, true);
+    let expected = checked_eval(&checked, "attack")
+        .owner_admission_budget()
+        .expect("budgeted M7 owner evaluation retains the checked condition");
+    let result = project_checked_core(&checked, &topology(checked.program_identity(), ["A", "S"]))
+        .expect("budgeted checked owner request projects across its declared loci");
+
+    let request = result
+        .communication_plan()
+        .single_edge("attack", CommunicationEdgeKind::OwnerRequest, "A", "S")
+        .expect("source-generated owner request edge");
+    let reply = result
+        .communication_plan()
+        .single_edge("attack", CommunicationEdgeKind::OwnerReplyReceipt, "S", "A")
+        .expect("source-generated owner reply/receipt edge");
+    assert_owner_admission_budget_matches(
+        request.carrier_contract().owner_admission_budget(),
+        expected,
+        "owner request",
+    );
+    assert_owner_admission_budget_matches(
+        reply.carrier_contract().owner_admission_budget(),
+        expected,
+        "owner reply/receipt",
+    );
+}
+
+#[test]
+fn i3_owner_admission_budget_projection_keeps_padded_deadline_name_unannotated() {
+    let checked =
+        checked_owner_admission_budget_projection(OWNER_ADMISSION_BUDGET_PROJECTION_PATH, 1, false);
+    assert!(
+        checked_eval(&checked, "attack")
+            .owner_admission_budget()
+            .is_none(),
+        "a declared DeadlineExpired name without the source clause is not a budget condition"
+    );
+    let result = project_checked_core(&checked, &topology(checked.program_identity(), ["A", "S"]))
+        .expect("ordinary padded owner request still projects");
+
+    let request = result
+        .communication_plan()
+        .single_edge("attack", CommunicationEdgeKind::OwnerRequest, "A", "S")
+        .expect("ordinary owner request edge");
+    let reply = result
+        .communication_plan()
+        .single_edge("attack", CommunicationEdgeKind::OwnerReplyReceipt, "S", "A")
+        .expect("ordinary owner reply/receipt edge");
+    assert!(
+        request
+            .carrier_contract()
+            .owner_admission_budget()
+            .is_none(),
+        "padding must not synthesize a request budget condition"
+    );
+    assert!(
+        reply.carrier_contract().owner_admission_budget().is_none(),
+        "padding must not synthesize a reply/receipt budget condition"
+    );
+}
+
+#[test]
+fn i3_owner_admission_budget_projection_rejects_an_erased_or_foreign_request_condition() {
+    let checked_one =
+        checked_owner_admission_budget_projection(OWNER_ADMISSION_BUDGET_PROJECTION_PATH, 1, true);
+    let topology_one = topology(checked_one.program_identity(), ["A", "S"]);
+    let canonical = project_checked_core(&checked_one, &topology_one)
+        .expect("one-tick owner budget has a canonical projection");
+
+    let mut erased = canonical.clone();
+    erased.for_test_replace_owner_request_admission_budget("attack", None);
+    // The verifier compares the complete derived edge before its generic
+    // structural fallback, so an erased condition is an extra non-derived edge.
+    assert_verify_diag(
+        verify_projection(&checked_one, &topology_one, &erased),
+        ProjectionDiagnosticKind::ExtraNonDerivedEdge,
+    );
+
+    let checked_two =
+        checked_owner_admission_budget_projection(OWNER_ADMISSION_BUDGET_REPLACEMENT_PATH, 2, true);
+    let foreign_condition = checked_eval(&checked_two, "attack")
+        .owner_admission_budget()
+        .expect("independently checked two-tick source retains its own condition");
+    let mut replaced = canonical;
+    replaced.for_test_replace_owner_request_admission_budget("attack", Some(foreign_condition));
+    assert_verify_diag(
+        verify_projection(&checked_one, &topology_one, &replaced),
+        ProjectionDiagnosticKind::ExtraNonDerivedEdge,
+    );
+}
+
+#[test]
+fn i3_owner_admission_budget_private_snapshot_round_trips_the_exact_request_and_reply_condition() {
+    let checked =
+        checked_owner_admission_budget_projection(OWNER_ADMISSION_BUDGET_PROJECTION_PATH, 1, true);
+    let expected = checked_eval(&checked, "attack")
+        .owner_admission_budget()
+        .expect("budgeted M7 owner evaluation retains its checked condition");
+    let projection =
+        project_checked_core(&checked, &topology(checked.program_identity(), ["A", "S"]))
+            .expect("budgeted owner source projects before process-image snapshotting");
+    let snapshot = projection
+        .to_i3_private_snapshot()
+        .expect("complete checked projection exports its private image snapshot");
+    let serialized = serde_json::to_value(snapshot).expect("private image snapshot serializes");
+
+    let restored = restore_private_projection_snapshot(serialized)
+        .expect("exact private image snapshot restores its selected projection");
+    assert_eq!(restored, projection);
+    let request = restored
+        .communication_plan()
+        .single_edge("attack", CommunicationEdgeKind::OwnerRequest, "A", "S")
+        .expect("restored owner request edge");
+    let reply = restored
+        .communication_plan()
+        .single_edge("attack", CommunicationEdgeKind::OwnerReplyReceipt, "S", "A")
+        .expect("restored owner reply/receipt edge");
+    assert_owner_admission_budget_matches(
+        request.carrier_contract().owner_admission_budget(),
+        expected,
+        "restored owner request",
+    );
+    assert_owner_admission_budget_matches(
+        reply.carrier_contract().owner_admission_budget(),
+        expected,
+        "restored owner reply/receipt",
+    );
+}
+
+#[test]
+fn i3_owner_admission_budget_requester_only_private_snapshot_keeps_owner_contract_without_owner_artifact()
+ {
+    let checked =
+        checked_owner_admission_budget_projection(OWNER_ADMISSION_BUDGET_PROJECTION_PATH, 1, true);
+    let expected = checked_eval(&checked, "attack")
+        .owner_admission_budget()
+        .expect("budgeted M7 owner evaluation retains its checked condition");
+    let projection =
+        project_checked_core(&checked, &topology(checked.program_identity(), ["A", "S"]))
+            .expect("budgeted owner source projects before requester-only restriction");
+    let requester_only = projection.restricted_to_loci(&BTreeSet::from(["A".to_string()]));
+    assert!(
+        requester_only.locus_program("S").is_none(),
+        "requester-only image deliberately omits the remote owner artifact"
+    );
+
+    let snapshot = requester_only
+        .to_i3_private_snapshot()
+        .expect("requester-only selected projection exports a private image snapshot");
+    let restored = restore_private_projection_snapshot(
+        serde_json::to_value(snapshot).expect("requester-only private image snapshot serializes"),
+    )
+    .expect(
+        "requester-only structural projection candidate restores without copying remote owner Core",
+    );
+    assert_eq!(restored, requester_only);
+    assert!(
+        restored.locus_program("S").is_none(),
+        "restored requester-only image must not reintroduce the remote owner artifact"
+    );
+    let request = restored
+        .communication_plan()
+        .single_edge("attack", CommunicationEdgeKind::OwnerRequest, "A", "S")
+        .expect("requester-only image retains the outgoing owner request contract");
+    let reply = restored
+        .communication_plan()
+        .single_edge("attack", CommunicationEdgeKind::OwnerReplyReceipt, "S", "A")
+        .expect("requester-only image retains the incoming owner reply contract");
+    assert_owner_admission_budget_matches(
+        request.carrier_contract().owner_admission_budget(),
+        expected,
+        "requester-only owner request",
+    );
+    assert_owner_admission_budget_matches(
+        reply.carrier_contract().owner_admission_budget(),
+        expected,
+        "requester-only owner reply/receipt",
+    );
+}
+
+#[test]
+fn i3_owner_admission_budget_private_snapshot_rejects_wrong_edge_owner_or_carrier_family_and_omits_legacy_none()
+ {
+    let checked =
+        checked_owner_admission_budget_projection(OWNER_ADMISSION_BUDGET_PROJECTION_PATH, 1, true);
+    let projection =
+        project_checked_core(&checked, &topology(checked.program_identity(), ["A", "S"]))
+            .expect("budgeted owner source projects before snapshot falsification");
+    let snapshot = projection
+        .to_i3_private_snapshot()
+        .expect("budgeted projection exports a private image snapshot");
+
+    let mut wrong_edge_owner =
+        serde_json::to_value(&snapshot).expect("private image snapshot serializes");
+    let owner_request = private_snapshot_edge_mut(&mut wrong_edge_owner, "owner_request", "A", "S");
+    owner_request.insert("target_locus".into(), Value::String("T".into()));
+    assert!(matches!(
+        restore_private_projection_snapshot(wrong_edge_owner),
+        Err(I3PrivateProjectionSnapshotError::StructuralMismatch { .. })
+    ));
+
+    let mut wrong_carrier_family =
+        serde_json::to_value(&snapshot).expect("private image snapshot serializes");
+    let owner_request =
+        private_snapshot_owner_edge_mut(&mut wrong_carrier_family, "owner_request", "A", "S");
+    owner_request.insert(
+        "lifecycle_kind".into(),
+        Value::String("designated_input_request".into()),
+    );
+    assert!(matches!(
+        restore_private_projection_snapshot(wrong_carrier_family),
+        Err(I3PrivateProjectionSnapshotError::StructuralMismatch { .. })
+    ));
+
+    let legacy_checked =
+        checked_owner_admission_budget_projection(OWNER_ADMISSION_BUDGET_PROJECTION_PATH, 1, false);
+    let legacy_projection = project_checked_core(
+        &legacy_checked,
+        &topology(legacy_checked.program_identity(), ["A", "S"]),
+    )
+    .expect("unannotated padded source projects before private snapshotting");
+    let legacy_snapshot = legacy_projection
+        .to_i3_private_snapshot()
+        .expect("legacy projection exports a private image snapshot");
+    let legacy_json =
+        serde_json::to_value(legacy_snapshot).expect("legacy image snapshot serializes");
+    for (kind, source, target) in [
+        ("owner_request", "A", "S"),
+        ("owner_reply_receipt", "S", "A"),
+    ] {
+        let mut legacy_probe = legacy_json.clone();
+        assert!(
+            !private_snapshot_owner_edge_mut(&mut legacy_probe, kind, source, target)
+                .contains_key("owner_admission_budget"),
+            "legacy {kind} snapshot must omit the absent condition field"
+        );
+    }
+    let restored_legacy = restore_private_projection_snapshot(legacy_json)
+        .expect("legacy private image snapshot restores without an implicit budget");
+    assert_eq!(restored_legacy, legacy_projection);
+}
+
+#[test]
+fn i3_owner_admission_budget_private_snapshot_rejects_a_valid_but_foreign_checked_budget_component()
+{
+    let checked =
+        checked_owner_admission_budget_projection(OWNER_ADMISSION_BUDGET_PROJECTION_PATH, 1, true);
+    let projection =
+        project_checked_core(&checked, &topology(checked.program_identity(), ["A", "S"]))
+            .expect("one-tick source projects before private snapshot falsification");
+    let snapshot = projection
+        .to_i3_private_snapshot()
+        .expect("one-tick projection exports a private image snapshot");
+    let mut serialized = serde_json::to_value(snapshot).expect("private image snapshot serializes");
+    let condition = private_snapshot_owner_edge_mut(&mut serialized, "owner_request", "A", "S")
+        .get_mut("owner_admission_budget")
+        .and_then(Value::as_object_mut)
+        .expect("budgeted request snapshot retains a syntactically valid condition component");
+    condition.insert("budget_ticks".into(), Value::from(2_u64));
+
+    assert!(matches!(
+        restore_private_projection_snapshot(serialized),
+        Err(I3PrivateProjectionSnapshotError::StructuralMismatch { .. })
+    ));
 }

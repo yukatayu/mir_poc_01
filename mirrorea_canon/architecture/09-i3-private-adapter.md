@@ -2,7 +2,7 @@
 id: arch/09-i3-private-adapter
 status: L1-fixed
 maturity: reviewed
-depends_on: [arch/04-runtime-carriers, adr/ADR-0038, meta/proposal-041]
+depends_on: [arch/04-runtime-carriers, adr/ADR-0038, meta/proposal-041, adr/ADR-0041, spec/16-i3-owner-admission-budget]
 summary: I3-1のbounded private adapter/encoding mapping。I3-2が直接consumeする。
 open_items: []
 ---
@@ -36,3 +36,12 @@ reference-only and redacted.
 This is not a public wire/codec/API, a general proof or coverage-guided fuzz
 claim, retry/reconnect semantics, durability, production support, or official
 I3 lifecycle entry.
+
+## Subsequent bounded owner-outcome contract
+
+ADR-0041 / spec/16 select a typed declared-owner-failure alternative on the
+existing generated owner reply edge for explicitly opted-in source. It must
+preserve exact retained bindings and reject unknown/malformed variants; it
+cannot be represented by a success receipt or transport failure. The I3-1
+accepted cut above remains historical evidence, not evidence for this new
+producer or a public compatibility promise.

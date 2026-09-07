@@ -2,7 +2,7 @@
 id: plan/05-i3-entry-contract
 status: L1-fixed
 maturity: reviewed
-depends_on: [adr/ADR-0033, adr/ADR-0034, adr/ADR-0035, adr/ADR-0036, adr/ADR-0037, adr/ADR-0038, adr/ADR-0039, adr/ADR-0040, meta/proposal-042, meta/proposal-043, arch/04-runtime-carriers, arch/09-i3-private-adapter, arch/10-i3-multi-process-runtime, arch/06-project-product-layers, arch/07-browser-host-trust-boundaries, arch/08-browser-host-security-invariants, theory/04-ordering-and-cuts, theory/05-authority, theory/07-observation, theory/08-patch-hotplug, spec/06-conformance, scenarios/SCN-01, scenarios/SCN-02, scenarios/SCN-03, scenarios/SCN-06]
+depends_on: [adr/ADR-0033, adr/ADR-0034, adr/ADR-0035, adr/ADR-0036, adr/ADR-0037, adr/ADR-0038, adr/ADR-0039, adr/ADR-0040, meta/proposal-042, meta/proposal-043, arch/04-runtime-carriers, arch/09-i3-private-adapter, arch/10-i3-multi-process-runtime, arch/06-project-product-layers, arch/07-browser-host-trust-boundaries, arch/08-browser-host-security-invariants, theory/04-ordering-and-cuts, theory/05-authority, theory/07-observation, theory/08-patch-hotplug, spec/06-conformance, scenarios/SCN-01, scenarios/SCN-02, scenarios/SCN-03, scenarios/SCN-06, adr/ADR-0041, spec/16-i3-owner-admission-budget]
 summary: ADR-0034 programがconsumeするI3 goal、accepted transport/private mapping/two-process runtime、I3-3 failure/order refinementとC-distributed gates。
 open_items: []
 ---
@@ -152,6 +152,14 @@ Retry is never implicit. A future profile must record who initiated retry, why
 it is permitted, its relation to the original request identity, and whether
 the semantic operation specifies stored-result return or duplicate failure.
 Neither reliable stream candidate supplies exactly-once semantics.
+
+For the external-time row, ADR-0041 / spec/16 select one finite source-declared
+owner-admission budget and typed terminal-failure contract. Its scope is
+owner-local admission waiting, not end-to-end deadlines or general leases.
+Implementation and the row's positive/falsifier evidence remain required;
+selection alone does not close row 17, any other row or I3-3. Provider invocation
+remains a separate unselected contract. The owner pause after complete I3-3
+acceptance remains in force; I3-4 requires explicit resume.
 
 ## Network ordering refinement
 

@@ -15,7 +15,7 @@ open_items: []
 NORTH-STAR (軸)
    │
    ▼
-adr/ (決定 ADR-0001..0039) ◄──── GLOSSARY (概念 CON-###)
+adr/ (決定 ADR-0001..0041) ◄──── GLOSSARY (概念 CON-###)
    │
    ▼
 DESIGN-CONSTITUTION (v0/I1+ の横断判断)
@@ -154,6 +154,11 @@ deferred replacement baseline、QUIC datagramはexcludedのままである。PRO
 I1 residualは不変である。
 
 ## ID 体系
+
+I3-3の時間failure consumerへPROPOSAL-044 / ADR-0041 / spec/16はsource opt-in
+owner admission budgetと型付きterminal failureを選択する。これは初期checked
+contractの限定拡張であり、旧source又はM5 proofの変更、実装/行列/milestone受理、
+provider/general clock又はofficial I3 lifecycleの受理ではない。
 
 | 接頭辞 | 意味 | 台帳 |
 |---|---|---|

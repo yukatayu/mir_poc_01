@@ -2,7 +2,7 @@
 id: spec/04-core-ir
 status: L2-working
 maturity: draft
-depends_on: [theory/01-mircore-v0, theory/03-elaboration, theory/13-evaluation-materialization, theory/14-maintained-relation-projection, theory/15-shared-formal-model, adr/ADR-0021, adr/ADR-0025, adr/ADR-0029, adr/ADR-0031]
+depends_on: [theory/01-mircore-v0, theory/03-elaboration, theory/13-evaluation-materialization, theory/14-maintained-relation-projection, theory/15-shared-formal-model, adr/ADR-0021, adr/ADR-0025, adr/ADR-0029, adr/ADR-0031, adr/ADR-0041, spec/16-i3-owner-admission-budget]
 summary: M6 CoreTemplate と将来の Core IR 交換形。生成辺・義務・span・provisional relation anchor locus の形、Core companion 記法の附録。
 open_items: [OPEN-026]
 ---
@@ -176,3 +176,12 @@ atomic_cut
 
 These tokens are rejected in Surface v0 (E-PARSE-005). OPEN-026: field-name
 freeze for the JSON form happens at PHASE-I1 exit.
+
+## I3 owner-admission condition (private, non-final)
+
+ADR-0041 / spec/16 add typed optional owner-admission metadata to the retained
+M6 template and M7 checked owner contract: source condition, budget, owner and
+exact clock-domain identity. A complete executable bare-M5 conversion rejects
+or retains that guard; inspecting the unchanged RMW subcomponent is not a
+complete program conversion. Request/reply identities retain the condition.
+This selects neither a new domain primitive nor the OPEN-026 exchange freeze.

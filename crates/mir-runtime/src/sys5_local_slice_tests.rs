@@ -9,7 +9,8 @@ use crate::{
         M9FiniteLocalAdmissionFact, M9RuntimeExecutionSeam,
     },
     sys3_projection::{
-        BackendProfile, DeclaredLogicalTopology, GlobalProjectionResult, project_checked_core,
+        BackendProfile, CommunicationEdgeKind, DeclaredLogicalTopology, GlobalProjectionResult,
+        project_checked_core,
     },
     sys4_dispatch::LocalFabric,
     sys5_local_slice::{
@@ -19,6 +20,8 @@ use crate::{
 };
 
 const SYS5_LOCAL_TOY_PATH: &str = "tests/inline/sys5_local_toy_admission_surface_v0.mir";
+const SYS5_OWNER_ADMISSION_BUDGET_PATH: &str =
+    "tests/inline/sys5_owner_admission_budget_adapter_contract.mir";
 
 const SYS5_LOCAL_TOY_SOURCE: &str = r#"
 module Mirrorea.Sys5.LocalToyAdmission
@@ -128,6 +131,41 @@ with auth MembershipAuth
 
 verify finite_refinement
 "#;
+
+fn owner_admission_budget_adapter_source(ticks: u64, include_clause: bool) -> String {
+    let clause = if include_clause {
+        format!(" within owner_ticks {ticks}")
+    } else {
+        String::new()
+    };
+    format!(
+        "module Mirrorea.Sys5.OwnerAdmissionBudgetAdapter
+
+locus A
+locus S
+principal self
+principal target
+type Player
+
+state player[id: Player] at S {{
+  hp: Int
+  atk: Int
+}}
+
+Role[self] at A {{
+  when attack(target: Player) fails (StaleMembership, MissingCapability, MissingWitness, RouteUnavailable, DeadlineExpired){clause} {{
+    at S {{
+      player[target].hp = player[target].hp - player[self].atk
+    }}
+  }}
+}}
+
+with auth MembershipAuth
+
+verify finite_refinement
+"
+    )
+}
 
 fn valid_admission_request() -> Sys5LocalAdmissionRequest {
     source_declared_memberships(Sys5LocalAdmissionRequest::source_declared(
@@ -719,6 +757,107 @@ fn finite_admission_rejects_missing_optional_verification_discharge_fail_closed(
     );
     assert!(err.rejected_before_authority_issuance());
     assert!(err.partial_admission().is_none());
+}
+
+#[test]
+fn i3_owner_admission_budget_adapter_contract_preserves_checked_metadata_and_changes_its_fingerprint()
+ {
+    let one_tick_source = owner_admission_budget_adapter_source(1, true);
+    let checked_one = check_and_elaborate_surface_v0(FixtureSource::new(
+        SYS5_OWNER_ADMISSION_BUDGET_PATH,
+        one_tick_source.clone(),
+    ))
+    .expect("one-tick source checks before the SYS-5 adapter facade reads its projection");
+    let expected_one = checked_one
+        .evaluation("attack")
+        .expect("one-tick source has its checked owner evaluation")
+        .owner_admission_budget()
+        .expect("one-tick checked owner evaluation retains its budget");
+    let one_tick_project = build_project(Sys5SourceInput::inline(
+        SYS5_OWNER_ADMISSION_BUDGET_PATH,
+        one_tick_source,
+    ))
+    .expect("one-tick source projects through the SYS-5 facade");
+    let one_tick_projection = one_tick_project.projected_result_for_i2_evidence();
+    let one_tick_request_edge = one_tick_projection
+        .communication_plan()
+        .single_edge("attack", CommunicationEdgeKind::OwnerRequest, "A", "S")
+        .expect("one-tick source has an owner request edge");
+    let one_tick_reply_edge = one_tick_projection
+        .communication_plan()
+        .single_edge("attack", CommunicationEdgeKind::OwnerReplyReceipt, "S", "A")
+        .expect("one-tick source has an owner reply/receipt edge");
+    let one_tick_request = one_tick_project
+        .i3_adapter_carrier_contract(one_tick_request_edge.edge_ref())
+        .expect("one-tick owner request obtains its source-bound adapter contract");
+    let one_tick_reply = one_tick_project
+        .i3_adapter_carrier_contract(one_tick_reply_edge.edge_ref())
+        .expect("one-tick owner reply obtains its source-bound adapter contract");
+    let restored_request = one_tick_request
+        .owner_admission_budget()
+        .expect("adapter owner request retains a private typed budget snapshot")
+        .clone()
+        .into_checked(expected_one.owner_locus().as_str())
+        .expect("adapter request snapshot restores only against the checked owner locus");
+    let restored_reply = one_tick_reply
+        .owner_admission_budget()
+        .expect("adapter owner reply retains a private typed budget snapshot")
+        .clone()
+        .into_checked(expected_one.owner_locus().as_str())
+        .expect("adapter reply snapshot restores only against the checked owner locus");
+    assert_eq!(&restored_request, expected_one);
+    assert_eq!(&restored_reply, expected_one);
+    assert_eq!(restored_request, restored_reply);
+
+    let two_tick_project = build_project(Sys5SourceInput::inline(
+        SYS5_OWNER_ADMISSION_BUDGET_PATH,
+        owner_admission_budget_adapter_source(2, true),
+    ))
+    .expect("two-tick source projects through the SYS-5 facade");
+    let two_tick_request_edge = two_tick_project
+        .projected_result_for_i2_evidence()
+        .communication_plan()
+        .single_edge("attack", CommunicationEdgeKind::OwnerRequest, "A", "S")
+        .expect("two-tick source has an owner request edge");
+    let two_tick_request = two_tick_project
+        .i3_adapter_carrier_contract(two_tick_request_edge.edge_ref())
+        .expect("two-tick owner request obtains its source-bound adapter contract");
+    assert_ne!(
+        one_tick_request.full_retained_contract_fingerprint(),
+        two_tick_request.full_retained_contract_fingerprint(),
+        "changing only the checked budget must change the exact retained adapter fingerprint"
+    );
+
+    let padded_project = build_project(Sys5SourceInput::inline(
+        SYS5_OWNER_ADMISSION_BUDGET_PATH,
+        owner_admission_budget_adapter_source(1, false),
+    ))
+    .expect("unannotated DeadlineExpired padding remains projectable ordinary source");
+    let padded_projection = padded_project.projected_result_for_i2_evidence();
+    let padded_request_edge = padded_projection
+        .communication_plan()
+        .single_edge("attack", CommunicationEdgeKind::OwnerRequest, "A", "S")
+        .expect("padded source has an owner request edge");
+    let padded_reply_edge = padded_projection
+        .communication_plan()
+        .single_edge("attack", CommunicationEdgeKind::OwnerReplyReceipt, "S", "A")
+        .expect("padded source has an owner reply/receipt edge");
+    assert!(
+        padded_project
+            .i3_adapter_carrier_contract(padded_request_edge.edge_ref())
+            .expect("padded request obtains an adapter contract")
+            .owner_admission_budget()
+            .is_none(),
+        "padding must not manufacture an adapter request budget"
+    );
+    assert!(
+        padded_project
+            .i3_adapter_carrier_contract(padded_reply_edge.edge_ref())
+            .expect("padded reply obtains an adapter contract")
+            .owner_admission_budget()
+            .is_none(),
+        "padding must not manufacture an adapter reply budget"
+    );
 }
 
 #[test]

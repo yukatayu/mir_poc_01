@@ -24,7 +24,7 @@ use crate::{
         BindingActivationFrontier, OccurrenceId, ResultFrontier, ResultVersion, SourceRef,
     },
     surface_v0_classification::{
-        CoreTemplateKind, SourceToCoreKind, SurfaceV0Classification,
+        CoreTemplateKind, OwnerAdmissionBudgetCondition, SourceToCoreKind, SurfaceV0Classification,
         SurfaceV0ClassificationOptions, SurfaceV0DiagnosticKind, classify_surface_v0,
     },
 };
@@ -38,6 +38,7 @@ const OWNER_RMW_FAILURES: [&str; 4] = [
 
 const OBSERVER_SAFE_CHANNEL: &str = "observer_safe";
 const VISIBILITY_DENIED_FAILURE: &str = "VisibilityDenied";
+pub const OWNER_ADMISSION_DEADLINE_EXPIRED_FAILURE: &str = "DeadlineExpired";
 
 #[derive(Debug, Clone, PartialEq, Eq)]
 pub struct PipelineSourceSpan {
@@ -135,6 +136,8 @@ pub enum M7DiagnosticKind {
     DuplicateDeferred,
     UndefinedDesignatedResultConsumerLocus,
     CompetingDesignatedResultConsumer,
+    OwnerAdmissionBudgetOutOfRange,
+    OwnerAdmissionBudgetRequiresExactlyOneLowerableOwnerAssignment,
     ResidualCannotExecute,
 }
 
@@ -895,6 +898,7 @@ pub struct OwnerRmwCheckedCore {
     owner_locus: String,
     target: TypedStateRead,
     expression: TypedExpression,
+    owner_admission_budget: Option<OwnerAdmissionBudgetCondition>,
 }
 
 impl OwnerRmwCheckedCore {
@@ -916,6 +920,10 @@ impl OwnerRmwCheckedCore {
 
     pub fn same_owner_reads(&self) -> &[TypedStateRead] {
         self.expression.state_reads()
+    }
+
+    pub fn owner_admission_budget(&self) -> Option<&OwnerAdmissionBudgetCondition> {
+        self.owner_admission_budget.as_ref()
     }
 }
 
@@ -1645,8 +1653,12 @@ pub struct GeneratedObligations {
 }
 
 impl GeneratedObligations {
-    fn owner_rmw(span: PipelineSourceSpan, observer_safe: bool) -> Self {
-        let mut entries = owner_rmw_failure_names(observer_safe)
+    fn owner_rmw(
+        span: PipelineSourceSpan,
+        observer_safe: bool,
+        owner_admission_budget: bool,
+    ) -> Self {
+        let mut entries = owner_rmw_failure_names(observer_safe, owner_admission_budget)
             .iter()
             .map(|failure| {
                 GeneratedObligation::new(
@@ -1756,13 +1768,16 @@ impl GeneratedObligations {
     }
 }
 
-fn owner_rmw_failure_names(observer_safe: bool) -> Vec<String> {
+fn owner_rmw_failure_names(observer_safe: bool, owner_admission_budget: bool) -> Vec<String> {
     let mut names = OWNER_RMW_FAILURES
         .iter()
         .map(|failure| (*failure).to_string())
         .collect::<Vec<_>>();
     if observer_safe {
         names.push(VISIBILITY_DENIED_FAILURE.to_string());
+    }
+    if owner_admission_budget {
+        names.push(OWNER_ADMISSION_DEADLINE_EXPIRED_FAILURE.to_string());
     }
     names
 }
@@ -1915,6 +1930,12 @@ impl CheckedEvaluation {
 
     pub fn owner_rmw_core(&self) -> Option<&OwnerRmwCheckedCore> {
         self.owner_rmw_core.as_ref()
+    }
+
+    pub fn owner_admission_budget(&self) -> Option<&OwnerAdmissionBudgetCondition> {
+        self.owner_rmw_core
+            .as_ref()
+            .and_then(OwnerRmwCheckedCore::owner_admission_budget)
     }
 
     pub fn relation_core(&self) -> Option<&RelationCheckedCore> {
@@ -2339,7 +2360,7 @@ pub fn check_and_elaborate_surface_v0(
     let ast = parse_surface_v0(source.clone()).map_err(forward_parse_diagnostic)?;
     let classification = classify_surface_v0(&ast, SurfaceV0ClassificationOptions::default())
         .map_err(forward_classification_diagnostic)?;
-    if let Some(diagnostic) = m7_static_diagnostic(&source, &ast) {
+    if let Some(diagnostic) = m7_static_diagnostic(&source, &ast, &classification) {
         return Err(diagnostic);
     }
     Ok(build_checked_artifact(source, ast, classification))
@@ -2538,12 +2559,23 @@ fn checked_identity_structure(
                 let owner = evaluation
                     .owner_rmw_core()
                     .expect("owner evaluation retains its checked Core");
-                format!(
+                let mut identity = format!(
                     "owner:{:?}:{:?}:{:?}",
                     owner.target(),
                     owner.expression(),
                     owner.same_owner_reads()
-                )
+                );
+                if let Some(condition) = owner.owner_admission_budget() {
+                    identity.push_str(&format!(
+                        ":owner-admission-budget:budget_ticks={}:owner_locus={}:clock_domain={}:source_span={:?}:source_ref={:?}",
+                        condition.budget_ticks(),
+                        condition.owner_locus().as_str(),
+                        condition.clock_domain().as_str(),
+                        condition.source_span(),
+                        condition.source_ref(),
+                    ));
+                }
+                identity
             }
             CheckedEvaluationKind::PublishRelation => {
                 let relation = evaluation
@@ -2629,12 +2661,11 @@ fn build_checked_artifact(
     let mut evaluations = Vec::new();
     let mut source_map = CheckedSourceMap::default();
     for assignment in ast.assignments() {
-        let source_span = PipelineSourceSpan::from_surface(
-            consumed_m6_classification
-                .core_template(assignment.event())
-                .expect("accepted M6 classification retains every owner-RMW template")
-                .source_span(),
-        );
+        let m6_owner_template = consumed_m6_classification
+            .core_template(assignment.event())
+            .expect("accepted M6 classification retains every owner-RMW template");
+        let source_span = PipelineSourceSpan::from_surface(m6_owner_template.source_span());
+        let owner_admission_budget = m6_owner_template.owner_admission_budget().cloned();
         let target = TypedStateRead::from_target(&ast, assignment.target());
         let expression = TypedExpression::from_surface(&ast, assignment.expression());
         let observer_safe =
@@ -2644,6 +2675,7 @@ fn build_checked_artifact(
             owner_locus: assignment.owner_locus().to_string(),
             target: target.clone(),
             expression,
+            owner_admission_budget: owner_admission_budget.clone(),
         };
         let failure_row = ast
             .when(assignment.event())
@@ -2674,7 +2706,10 @@ fn build_checked_artifact(
             authority_origin_locus: assignment.role_locus().to_string(),
             owner_evaluation_locus: assignment.owner_locus().to_string(),
             declared_failure_row: FailureRow::new(failure_row.failures().iter().cloned()),
-            generated_failure_row: FailureRow::new(owner_rmw_failure_names(observer_safe)),
+            generated_failure_row: FailureRow::new(owner_rmw_failure_names(
+                observer_safe,
+                owner_admission_budget.is_some(),
+            )),
             owner_rmw_core: Some(owner_core),
             relation_core: None,
             designated_core: None,
@@ -2701,6 +2736,7 @@ fn build_checked_artifact(
             generated_obligations: GeneratedObligations::owner_rmw(
                 source_span.clone(),
                 observer_safe,
+                owner_admission_budget.is_some(),
             ),
         });
         for (kind, suffix) in [
@@ -3057,10 +3093,11 @@ fn build_checked_artifact(
 fn m7_static_diagnostic(
     source: &FixtureSource,
     ast: &SurfaceV0File,
+    consumed_m6_classification: &SurfaceV0Classification,
 ) -> Option<SurfaceV0PipelineDiagnostics> {
     duplicate_diagnostic(source, ast)
         .or_else(|| declaration_consistency_diagnostic(ast))
-        .or_else(|| generated_failure_diagnostic(source, ast))
+        .or_else(|| generated_failure_diagnostic(source, ast, consumed_m6_classification))
         .or_else(|| expression_diagnostic(source, ast))
 }
 
@@ -3298,6 +3335,7 @@ fn declaration_consistency_diagnostic(ast: &SurfaceV0File) -> Option<SurfaceV0Pi
 fn generated_failure_diagnostic(
     source: &FixtureSource,
     ast: &SurfaceV0File,
+    consumed_m6_classification: &SurfaceV0Classification,
 ) -> Option<SurfaceV0PipelineDiagnostics> {
     for assignment in ast.assignments() {
         let when = ast
@@ -3306,7 +3344,15 @@ fn generated_failure_diagnostic(
         let declared = FailureRow::new(when.failures().iter().cloned());
         let observer_safe =
             observer_visibility_channel(ast, assignment.target()) == Some(OBSERVER_SAFE_CHANNEL);
-        let generated = FailureRow::new(owner_rmw_failure_names(observer_safe));
+        let owner_admission_budget = consumed_m6_classification
+            .core_template(assignment.event())
+            .expect("accepted M6 classification retains every owner-RMW template")
+            .owner_admission_budget()
+            .is_some();
+        let generated = FailureRow::new(owner_rmw_failure_names(
+            observer_safe,
+            owner_admission_budget,
+        ));
         if !generated.is_subset_of(&declared) {
             let Some(missing) = generated
                 .names()
@@ -3506,6 +3552,9 @@ fn forward_parse_diagnostic(
                 M7DiagnosticKind::RoleActorMustBeLiteralSelf
             }
             ParseErrorKind::IntegerLiteralOutOfRange => M7DiagnosticKind::UnexpectedSyntax,
+            ParseErrorKind::OwnerAdmissionBudgetOutOfRange => {
+                M7DiagnosticKind::OwnerAdmissionBudgetOutOfRange
+            }
             ParseErrorKind::UnsupportedTransportSyntax => {
                 M7DiagnosticKind::UnsupportedTransportSyntax
             }
@@ -3560,6 +3609,12 @@ fn forward_classification_diagnostic(
                 M7DiagnosticKind::UnsupportedEnvelopeSyntax
             }
             SurfaceV0DiagnosticKind::UnexpectedSyntax => M7DiagnosticKind::UnexpectedSyntax,
+            SurfaceV0DiagnosticKind::OwnerAdmissionBudgetOutOfRange => {
+                M7DiagnosticKind::OwnerAdmissionBudgetOutOfRange
+            }
+            SurfaceV0DiagnosticKind::OwnerAdmissionBudgetRequiresExactlyOneLowerableOwnerAssignment => {
+                M7DiagnosticKind::OwnerAdmissionBudgetRequiresExactlyOneLowerableOwnerAssignment
+            }
         },
         PipelineSourceSpan::from_surface(diagnostic.span()),
     )

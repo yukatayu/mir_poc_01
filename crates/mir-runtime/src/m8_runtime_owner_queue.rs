@@ -670,6 +670,11 @@ pub enum M8ServeDiagnosticKind {
 pub enum M8EnqueueDiagnosticKind {
     UnknownEvaluation,
     StaleMembership,
+    /// This admitted owner operation carries a checked owner-admission
+    /// condition.  Ordinary M8 enqueue has no authority to bypass its future
+    /// one-use gate, so it rejects before allocating an occurrence or queue
+    /// entry.
+    OwnerAdmissionAuthorizationRequired,
 }
 
 #[derive(Debug, Clone, PartialEq, Eq)]
@@ -713,6 +718,16 @@ impl M8EnqueueDiagnostics {
         Self {
             entries: vec![M8EnqueueDiagnostic {
                 kind: M8EnqueueDiagnosticKind::StaleMembership,
+                evaluation: evaluation.to_string(),
+                source_ref,
+            }],
+        }
+    }
+
+    fn owner_admission_authorization_required(evaluation: &str, source_ref: SourceRef) -> Self {
+        Self {
+            entries: vec![M8EnqueueDiagnostic {
+                kind: M8EnqueueDiagnosticKind::OwnerAdmissionAuthorizationRequired,
                 evaluation: evaluation.to_string(),
                 source_ref,
             }],
@@ -1107,6 +1122,14 @@ impl M8RuntimeExecution {
             );
             return Err(diagnostics);
         };
+        if plan.owner_admission_budget().is_some() {
+            return Err(
+                M8EnqueueDiagnostics::owner_admission_authorization_required(
+                    request.evaluation(),
+                    plan.source_ref().clone(),
+                ),
+            );
+        }
         let authority = request
             .authority_use()
             .cloned()

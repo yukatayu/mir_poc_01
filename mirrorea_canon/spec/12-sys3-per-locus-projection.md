@@ -2,7 +2,7 @@
 id: spec/12-sys3-per-locus-projection
 status: L1-fixed
 maturity: draft
-depends_on: [spec/04-core-ir, spec/08-m7-checked-elaboration, arch/03-toolchain, arch/04-runtime-carriers, theory/13-evaluation-materialization, theory/14-maintained-relation-projection, adr/ADR-0029, adr/ADR-0030]
+depends_on: [spec/04-core-ir, spec/08-m7-checked-elaboration, arch/03-toolchain, arch/04-runtime-carriers, theory/13-evaluation-materialization, theory/14-maintained-relation-projection, adr/ADR-0029, adr/ADR-0030, adr/ADR-0041, spec/16-i3-owner-admission-budget]
 summary: cut 3013e7feで受理したSYS-3 bounded source/Core projectionと、SYS-4が実現したgenerated endpoint refinementへのstatic handoff。
 open_items: []
 ---
@@ -213,3 +213,13 @@ binding fails closed. OBL-061 records that runtime evidence separately from
 OBL-060. This note does not retroactively turn SYS-3 projection into dispatch,
 change legacy M8/M10 duplicate behavior, or claim public compatibility,
 transport, exactly-once, multi-consumer semantics, or a general theorem.
+
+## I3 owner budget projection
+
+ADR-0041 / spec/16 require the new checked owner-admission condition in the
+owner fragment and both generated request/reply contracts, including their
+identities. Failure-name padding, topology and deployment cannot create it.
+The existing reply edge carries the selected typed terminal-outcome sum;
+no manually supplied communication edge or successful-receipt substitution
+is permitted. This is a contract extension, not additional accepted SYS-3
+runtime/proof evidence.

@@ -81,6 +81,8 @@ const PRIVATE_PROCESS_MESSAGE_REPLY_RECEIPT_REQUEST_ID_PATH: &str =
 const PRIVATE_PROCESS_IMAGE_ASSIGNED_LOCI_PATH: &str = "/image/assigned_loci";
 const PRIVATE_PROCESS_IMAGE_SEMANTIC_ROWS_PATH: &str =
     "/image/child_seed/required_local_authority_closure/rows";
+const PRIVATE_PROCESS_IMAGE_OWNER_ADMISSION_BUDGET_PATH: &str =
+    "/admission/instance/owner_execution_plans/0/owner_admission_budget";
 const PRIVATE_PROCESS_MESSAGE_PAYLOAD_PATH: &str = "/message/carrier/payload";
 const PRIVATE_PROCESS_PROJECTION_VERSION_PATH: &str = "/projection/version";
 const PRIVATE_PROCESS_ADMISSION_VERSION_PATH: &str = "/admission/version";
@@ -192,6 +194,16 @@ fn owner_only_two_slot_deployment(project: &Sys5LocalProject) -> Sys5I3Deploymen
         ],
     )
     .expect("the designated-free owner source must map exactly once to two nonempty slots")
+}
+
+fn owner_admission_budget_owner_only_source(ticks: u64) -> String {
+    OWNER_ONLY_SOURCE.replacen(
+        "MissingWitness, VisibilityDenied, RouteUnavailable) {",
+        &format!(
+            "MissingWitness, VisibilityDenied, RouteUnavailable, DeadlineExpired) within owner_ticks {ticks} {{"
+        ),
+        1,
+    )
 }
 
 fn two_dependency_same_operation_source() -> String {
@@ -4546,5 +4558,158 @@ fn g1_nonowner_serve_is_rejected_without_requester_owner_state_or_mutation() {
             .expect_err("requester must not acquire owner state after a rejected serve")
             .kind(),
         Sys5I3ProcessRuntimeErrorKind::MissingAuthoritativeState
+    );
+}
+
+#[test]
+fn i3_owner_admission_budget_sys5_default_owner_entry_rejects_before_owner_effects_and_keeps_the_unannotated_control()
+ {
+    let budgeted_source = owner_admission_budget_owner_only_source(1);
+    let budgeted_project = build_once(&budgeted_source);
+    let budgeted_deployment = owner_only_two_slot_deployment(&budgeted_project);
+    let (mut budgeted_requester, mut budgeted_owner) =
+        start_runtime_pair_directly(&budgeted_project, &budgeted_deployment);
+    let budgeted_owner_summary_before = budgeted_owner.observer_safe_runtime_summary();
+    let budgeted_owner_outbox_before = budgeted_owner.observer_safe_outbox_summary();
+
+    let budgeted_request = budgeted_requester
+        .emit_generated_owner_request("init_avatar_hp")
+        .expect("the annotated checked source still generates only its ordinary owner request");
+    assert_eq!(
+        budgeted_requester.observer_safe_pending_owner_request_count(),
+        1,
+        "the source-selected requester retains its original pending operation before the owner entry rejects"
+    );
+    assert_eq!(
+        budgeted_owner
+            .accept_inbound(budgeted_request)
+            .expect_err(
+                "the default SYS5 owner entry must not bypass a checked owner-admission condition",
+            )
+            .kind(),
+        Sys5I3ProcessRuntimeErrorKind::CarrierAdmissionRejected,
+        "SYS5 may quarantine the lower M8 diagnostic at its carrier boundary, but must fail closed"
+    );
+    assert_eq!(
+        budgeted_owner.observer_safe_runtime_summary(),
+        budgeted_owner_summary_before,
+        "the default owner entry must not record a serve, write, reply, or receipt on admission-authorization rejection"
+    );
+    assert_eq!(
+        budgeted_owner
+            .observer_safe_runtime_summary()
+            .served_owner_request_count(),
+        0,
+        "the rejected annotated request must have no owner serve occurrence"
+    );
+    assert_eq!(
+        budgeted_owner
+            .observer_safe_runtime_summary()
+            .actual_owner_write_count(),
+        0,
+        "the rejected annotated request must have no owner write occurrence"
+    );
+    assert_eq!(
+        budgeted_owner.observer_safe_outbox_summary(),
+        budgeted_owner_outbox_before,
+        "the rejected annotated request must not mint an owner reply carrier"
+    );
+    assert_eq!(
+        budgeted_requester.observer_safe_pending_owner_request_count(),
+        1,
+        "owner rejection must retain the original requester operation rather than manufacture a receipt"
+    );
+    assert_eq!(
+        budgeted_requester
+            .observer_safe_runtime_summary()
+            .accepted_inbound_receipt_count(),
+        0,
+        "the requester must not claim a local receipt for the rejected owner admission"
+    );
+
+    let ordinary_project = build_once(OWNER_ONLY_SOURCE);
+    let ordinary_deployment = owner_only_two_slot_deployment(&ordinary_project);
+    let (mut ordinary_requester, mut ordinary_owner) =
+        start_runtime_pair_directly(&ordinary_project, &ordinary_deployment);
+    let ordinary_reply = ordinary_owner
+        .accept_inbound(
+            ordinary_requester
+                .emit_generated_owner_request("init_avatar_hp")
+                .expect(
+                    "the unannotated checked source keeps its ordinary generated owner request",
+                ),
+        )
+        .expect("the unannotated SYS5 owner entry remains admitted")
+        .expect("ordinary owner execution returns one typed reply");
+    let ordinary_receipt = ordinary_requester
+        .accept_inbound(ordinary_reply)
+        .expect("the ordinary requester admits the typed reply")
+        .expect("ordinary reply admission produces one local receipt");
+    assert!(ordinary_receipt.has_no_transportable_carrier());
+    assert_eq!(
+        ordinary_owner
+            .observer_safe_runtime_summary()
+            .served_owner_request_count(),
+        1,
+        "unannotated source retains its ordinary one-owner-serve behavior"
+    );
+    assert_eq!(
+        ordinary_owner
+            .observer_safe_runtime_summary()
+            .actual_owner_write_count(),
+        1,
+        "unannotated source retains its ordinary one-owner-write behavior"
+    );
+}
+
+#[test]
+fn i3_owner_admission_budget_changed_private_m8_component_cannot_replace_the_sealed_sys5_image_binding()
+ {
+    let budget_one_project = build_once(&owner_admission_budget_owner_only_source(1));
+    let budget_one_deployment = owner_only_two_slot_deployment(&budget_one_project);
+    let codec = Sys5I3PrivateProcessCodec::private_provisional_v1();
+    let mut budget_one_cohort =
+        single_coordinator_cohort(&budget_one_project, &budget_one_deployment);
+    let budget_one_binding = budget_one_cohort
+        .parent_held_expected_start_binding(OWNER_SLOT)
+        .expect("the parent retains the exact budget-one owner image binding");
+    let budget_one_image = take_process_image(&mut budget_one_cohort, OWNER_SLOT);
+    let budget_one_bytes = codec
+        .encode_image(budget_one_image)
+        .expect("the genuine budget-one owner image encodes through the private codec");
+    let budget_one_candidate = codec
+        .decode_untrusted_image(&budget_one_bytes)
+        .expect("the untouched budget-one image remains an untrusted candidate");
+    codec
+        .validate_and_start_image(budget_one_candidate, budget_one_binding)
+        .expect("only the exact parent-held budget-one binding starts its genuine image");
+
+    let budget_two_project = build_once(&owner_admission_budget_owner_only_source(2));
+    let budget_two_deployment = owner_only_two_slot_deployment(&budget_two_project);
+    let mut budget_two_cohort =
+        single_coordinator_cohort(&budget_two_project, &budget_two_deployment);
+    let budget_two_bytes = codec
+        .encode_image(take_process_image(&mut budget_two_cohort, OWNER_SLOT))
+        .expect("the independently checked budget-two owner image encodes for the explicit component-copy falsifier");
+    let replacement = private_process_json(&budget_two_bytes, PRIVATE_PROCESS_IMAGE_ROOT)
+        .pointer(PRIVATE_PROCESS_IMAGE_OWNER_ADMISSION_BUDGET_PATH)
+        .cloned()
+        .expect("the independently checked budget-two image retains its M8 budget component");
+    let mut changed_budget_one =
+        private_process_json(&budget_one_bytes, PRIVATE_PROCESS_IMAGE_ROOT);
+    *changed_budget_one
+        .pointer_mut(PRIVATE_PROCESS_IMAGE_OWNER_ADMISSION_BUDGET_PATH)
+        .expect("the budget-one image retains the M8 budget component selected for this narrow falsifier") = replacement;
+    let changed_budget_one_bytes = private_process_json_frame(&changed_budget_one);
+
+    assert_eq!(
+        codec
+            .decode_untrusted_image(&changed_budget_one_bytes)
+            .expect_err(
+                "a valid-looking budget-two component cannot replace the budget-one M8 snapshot under its sealed image binding",
+            )
+            .kind(),
+        Sys5I3PrivateProcessCodecErrorKind::Malformed,
+        "private image decode must reject the changed M8 component before an untrusted child candidate can reach start"
     );
 }

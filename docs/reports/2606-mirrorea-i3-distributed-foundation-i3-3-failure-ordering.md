@@ -1051,6 +1051,272 @@ from successful receipt and unresolved remote disposition. This needed path
 also has the next provider-failure row as a direct consumer. Neither candidate
 opens general clock/lease theory or a new control protocol.
 
+The parent subsequently selects B under ADR-0034 through PROPOSAL-044 /
+ADR-0041 / spec/16, after independent exact-diff review. This is a normative
+contract change before implementation, not runtime or milestone acceptance.
+Review required exact u64 clock-domain identity and arithmetic; atomic
+clock/revoke/resolve order; `ServeReserved` distinct from actual M8 success;
+retained authority rejection and immutable wrong-handle behavior; a sealed
+one-use request/runtime/source/M9-bound serve permit; atomic requester terminal
+retention; and record-derived expiry/delivery/consume versus success counters.
+All P1s were repaired in the reviewed contract. The final P2 permit-reuse,
+foreign-runtime/request, wrong-handle and downstream-failure falsifiers are
+also written into its acceptance matrix.
+
+Mapping found concrete lower-entry bypasses that the new contract must close:
+SYS4 bootstraps M8 directly, and an M10 typed handoff schedule also bypasses
+the semantic-kernel wrapper. A CLI-only or Kernel-only budget check therefore
+cannot suffice. Every private M9 execution translation retains the condition;
+unimplemented execution entrances reject annotated requests before mutation.
+The complete bare-M5 export must not erase it. An existing owner grant is not
+the additional sealed admission permit, nor does that permit replace M9 use
+validation. No broad M9 layer/clock framework or hidden ContractUpdate is
+introduced. Production implementation has not begun at this decision point;
+the separate static implementer and test author first agree exact metadata
+APIs and RED tests. Current provider remains OPEN and I3-4 remains inactive.
+
+Final normative integration review found one remaining proposal sentence
+promising actual serve before expiry or guaranteed requester delivery. The
+parent replaced it with the exact gate reservation/expiry decision and
+validated-delivery knowledge boundary; narrow independent confirmation has
+no remaining P0/P1. The read-only planner approves a snapshot-only next-step
+update: static preservation, projection/non-bypass enforcement, then actual
+QUIC failure evidence, all within I3-3. No additional roadmap is opened.
+
+The sole evaluator captures behavioral RED on the first new source test at
+`31be54b9` plus the new test/Canon delta:
+`CARGO_INCREMENTAL=0 CARGO_BUILD_JOBS=2 cargo test --locked -p mir-semantics
+--test i3_owner_admission_budget
+explicit_owner_budget_with_declared_deadline_failure_reaches_m6_and_m7
+-- --exact`. Compilation succeeds (0.23 s), then 0/1 passes, exit 101:
+`UnexpectedSyntax` at bytes 287--293, line 14 columns 125--131. M6/M7 are not
+reached; this is not an API compile failure or passing implementation evidence.
+Disk remains 15 GiB free. The parent then authorizes only the AST/M6/M7/private
+snapshot production slice, with a separate single-file static test owner.
+The agreed metadata API retains exact budget, owner, typed clock domain,
+source span/ref; absent annotations retain old identity, while complete M5
+export of an annotated template rejects instead of discarding its condition.
+Runtime/projection/provider implementation is outside this static assignment.
+
+The four production files are then frozen for evaluation. Existing static
+regressions pass: M6 classification 13/13 and M7 pipeline 27/27 (shared
+9.10 s build), AST Surface M6 10/10 (0.21 s build), no warnings, disk 15 GiB
+free. Commands use `CARGO_INCREMENTAL=0 CARGO_BUILD_JOBS=2`, `--locked`,
+`cargo test -p mir-semantics --test surface_v0_classification_m6
+--test surface_v0_pipeline_m7 -- --test-threads=1` and
+`cargo test -p mir-ast --test surface_v0_m6 -- --test-threads=1`.
+These old-source regressions do not establish new annotated runtime behavior.
+The new test target is held for its separately authored private-snapshot
+round-trip and malformed-binding checks; no passing new-target result exists
+at this point.
+
+Parent index invocation initially used the repository root, which the script
+does not accept (`canon root not found`). Rerunning from `mirrorea_canon/`
+regenerates and validates 213 entries. The first full docs check then rejects
+the expanded status view at 184 lines against its 180-line limit. The parent
+condenses only that current-view paragraph; the full `make docs` rerun passes
+agent config, 213-file index, 800 hierarchy paths and 1760-report scaffold.
+No semantics or test assertion is changed for these documentation repairs.
+
+The new static target then runs 14 tests: 10 pass and four fail (0.39 s
+build, 0.01 s tests, no warnings, disk 15 GiB). Three implementation defects
+are exposed: the broad owner-expression collector swallowed a second
+assignment, and the new nested span decoder accepted unknown fields and
+inverted byte ranges. The repair recognizes subsequent assignment heads only
+for annotated handlers, preserving the old unannotated collector, and uses
+strict structural span decoding. The fourth assertion overclaimed component
+restoration: a still-ordered changed byte offset cannot be checked against
+source text absent that text or an independently expected artifact. Parent
+and independent reviewer require it to restore as a distinct component, just
+like a valid changed budget; the later expected-artifact/projection binder must
+reject the mismatch. Wrong source-ref coherence, inverted ranges and unknown
+fields remain rejection tests. No duplicate self-authenticating hash is added.
+
+After the bounded repairs, new static tests pass 14/14 (8.78 s build), M6
+13/13 and M7 27/27 (0.44 s build), and AST 10/10 (0.21 s build), with no
+warnings and disk still 15 GiB. These passes do not resolve the independent
+review's remaining P1: the public inspection accessor returns `&Core`, whose
+`.cloned()` recreates the complete raw M5 export that the annotated conversion
+rejects. The parent selects a non-executable inspection summary with no raw
+Core conversion. A separately supplied compile-fail doctest is added before
+the API repair to demonstrate the current escape. Static-slice acceptance
+remains withheld until that falsifier and the repaired regression pass.
+
+The doctest produces the intended RED: `cargo test --locked -p mir-semantics
+--doc m5_owner_rmw_subcomponent -- --test-threads=1` reports 0/1 because the
+`compile_fail` example actually compiles (6.20 s build). The repaired accessor
+returns only an owned non-executable summary containing copied source-ref and
+operation count, with no Core or conversion escape. Narrow independent
+review resolves the P1. Final tests pass: new static 14/14, M6 13/13 and M7
+27/27 (combined 6.82 s build), AST 10/10, and the same compile-fail doctest
+1/1. Clippy first reports a test-only `single_match`; the test owner changes
+it to equivalent `if let` without changing assertions. New static tests then
+pass again 14/14 (0.44 s build, 0.01 s tests) and two-crate all-target
+deny-warnings Clippy passes (2.63 s). Disk remains 15 GiB free.
+These checks close the static implementation/review slice only, not a safe
+annotated execution checkpoint: generated-contract preservation and every
+runtime non-bypass path remain the immediate required consumers before any
+source acceptance commit/push. Existing static proof claims are unchanged.
+
+For that runtime consumer, the parent selects central M8 enqueue rejection
+for unsupported annotated execution over introducing a new serve diagnostic
+algebra immediately. Existing `M8ServeDiagnostics` always carries a terminal
+outcome, so a new local rejection must not be represented as success or a
+fabricated `RouteUnavailable`. The admitted owner plan must retain the exact
+checked condition independently of any caller marker; ordinary enqueue then
+rejects before occurrence allocation or mutation. A later private one-use
+authorization path is separately required for actual gate-produced execution.
+
+At `2026-09-07T20:26+09:00`, generated owner request/reply contracts and
+private projection/SYS5 adapter snapshots retain the exact condition. The
+first projection tests exposed an assertion expecting a later structural
+diagnostic although the unchanged edge validator correctly rejects the
+non-derived edge first; only that exact expected diagnostic was corrected.
+The existing restricted-image regression then exposed a real defect: a
+requester-only image was incorrectly required to carry the remote owner's
+Core. Restoration now requires the exact local Core when the owner artifact
+is retained, but does not invent/copy it into a requester-only image. Such a
+restored image remains a candidate authenticated by the independently retained
+expected-start binding, not by its own recomputed digest. Projection-budget
+tests pass 8/8 and existing private projection snapshots 6/6. Independent
+projection review reports no remaining P0/P1.
+
+The separate M8 behavioral RED was 1/2: the unannotated failure-name-padding
+control served `100 -> 90`, while the annotated request was wrongly accepted
+by ordinary enqueue. The admitted M8 plan and its private snapshot now retain
+the checked condition, and central ordinary enqueue returns the distinct
+`OwnerAdmissionAuthorizationRequired` diagnostic before allocating request
+occurrences, recording trace, queueing, or mutation. Repaired tests pass 2/2
+(23.86 s build). Existing M8 admission/local-cut/owner-queue/patch targets pass
+7/11/7/8, respectively (33 total; 1.26 s common build); projection-budget
+8/8 (22.89 s build) and private projection snapshot 6/6 (0.25 s) pass again.
+Commands use `CARGO_INCREMENTAL=0 CARGO_BUILD_JOBS=2 cargo test --locked
+-p mir-runtime`, the named integration targets and `--lib
+i3_owner_admission_budget_` / `--lib private_projection_snapshot`, with
+`--test-threads=1`. Default runtime targets emit eight dead-code warnings;
+library guards emit two, so these runs are not warning-free. Root free space
+ends at 14 GiB; no cleanup is performed.
+
+This is default fail-closed enforcement, not a running clock gate, one-use
+permit, transported expiry, or I3-3 acceptance. Actual alternative workflow
+negatives, private M8 image condition retention, broader regressions and the
+independent M8 review remain required before the source checkpoint is committed.
+
+Current-delta broader regressions subsequently pass: I2 local 5/5 (0.05 s)
+and CLI 8/8 (9.73 s, 0.54 s build), I3 process-runtime integration 61/61
+(47.74 s, 25.24 s build), and M10 conformance 67/67 (9.73 s, 1.15 s build).
+The report-pinned `cargo clippy --locked -p mir-runtime -p mirrorea-i3-probe
+--all-targets --features mir-runtime/i3-process-test-seams -- -D warnings`
+then fails on three style lints: one production `collapsible_if` in the
+projection budget check and two test-only `obfuscated_if_else` clause builders.
+Their respective source/test owners receive bounded syntax-only repairs;
+no successful rerun is claimed here. Disk remains 14 GiB free.
+
+The production style repair initially introduces E0507 by calling consuming
+`is_some_and` on a borrowed optional condition; adding `as_ref()` repairs the
+borrow without cloning or changing the predicate. No B3 tests ran on that
+compile failure. The test-only module hook and private-image JSON pointer were
+also corrected by inspection before the subsequent run.
+
+The next B3 feature-enabled SYS5 filter compiles (24.60 s) and runs 2 tests:
+the changed private M8 budget component is rejected by the internal sealed-image
+decode binding, but the actual default owner entry panics at
+`m8_runtime_local_cut.rs`'s `owner_context_row`. This is a genuine integration
+defect: contextual execution assumes every enqueue rejection has an M8 trace
+row, whereas the new authorization guard intentionally rejects before trace
+or occurrence allocation. The test is retained unchanged. The parent
+authorizes the smallest typed pre-enqueue/unobserved error through local M8,
+the OW1 contextual response and SYS4, preserving ordinary observed failures.
+It must not fabricate a trace, successful outcome, or `RouteUnavailable`.
+Private-M8 and M10 diagnostic tests have not yet run at this point. Eight
+runtime dead-code warnings are emitted; root free space is 15 GiB. This
+counterexample reopens the default-execution integration checkpoint despite
+the earlier bounded two-file review; no commit/acceptance follows its green
+component tests alone.
+
+The contextual-result repair's first build exposes E0308 in the unchanged
+serve-error return arm, which still returned the old boxed observation type.
+Wrapping that actual observation in the new `Observed` variant repairs the
+type mismatch without changing its semantics. No tests ran on this compile
+failure. The repaired chain is frozen for renewed B3 tests; the separate kernel
+diagnostic change still waits for its own behavioral RED.
+
+After that repair, the feature-enabled SYS5 budget filter passes 2/2
+(24.93 s build), and the private-M8 snapshot filter passes 2/2 (23.06 s
+build). These execute genuine source-derived default owner entry and its
+unannotated control, internal image-component mismatch rejection, exact
+restricted-plan round-trip, and malformed owner/clock/span rejection. They
+are runtime/private-codec evidence, not new OS-process or expiry evidence.
+The image tamper negative is an internal sealed-image decode check; its
+positive start uses a separately held coordinator binding, but the negative
+does not claim to have reached that outer start validator.
+
+The M10 source-execution diagnostic test then produces the intended behavioral
+RED, 0/1 (24.56 s build): the lower authorization rejection is incorrectly
+reported as `KernelDiagnosticKind::RouteUnavailable`. The parent authorizes
+mapping only that new M8 guard to a distinct private
+`KernelDiagnosticKind::OwnerAdmissionAuthorizationRequired` in both ST and
+OW1 enqueue paths; every previous mapping remains unchanged. The Reference
+backend is only an internal test backend or an unobservable initializer that
+production M9 construction replaces before returning, not a supported annotated
+execution path. The source repair is frozen for fresh validation. The test
+owner also adds actual OW1 contextual-worker rejection, exact trace/state
+nonmutation and clean shutdown, without inventing an OS/network claim.
+
+Final default-guard integration results (`2026-09-07T21:00+09:00`):
+
+| Gate on the frozen source delta | Actual result |
+|---|---|
+| `--test m10_source_execution` | 3/3, 24.74 s build; new diagnostic plus existing source controls |
+| `--lib i3_owner_admission_budget_` | 11/11, 22.58 s build; projection, private M8 and actual OW1 worker |
+| `--test i3_owner_admission_budget_runtime` | 2/2; final syntax-only test repair rerun builds in 0.38 s |
+| `--test sys5_i3_process_runtime --features i3-process-test-seams` | 63/63, 25.31 s build, 47.97 s tests |
+| `--lib --features i3-process-test-seams` | 298/298, 22.87 s build, 72.87 s tests |
+| M8 admission/local-cut/owner-queue/patch targets | 33/33; 1.21 s build, owner-queue 9.42 s |
+| `--test m10_conformance` | 67/67, 1.14 s build, 9.65 s tests |
+| I2 local slice and CLI | 5/5 and 8/8; 0.53 s build, 0.04/10.03 s tests |
+| `mirrorea-i3-probe --test i3_process_localnet` | 32/32, 32.25 s build, 46.62 s tests |
+| `--lib --features i3-process-test-seams,i3-private-quic sys5_i3_private_quic_tests` | 2/2, 31.68 s build, 0.00 s tests |
+| report-pinned two-crate all-target Clippy `-D warnings` | pass, final 0.12 s |
+| `cargo fmt --all -- --check`; `git diff --check` | parent rerun passes after workspace formatter repair |
+
+Cargo tests above use `cargo test --locked -p mir-runtime` unless the probe
+package is named, `CARGO_INCREMENTAL=0 CARGO_BUILD_JOBS=2`, and
+`--test-threads=1`. Default runtime builds emit eight dead-code warnings;
+the budget library emits two, and the full test-seam library emits one warning
+for three peer-preface test helpers. Do not call those test builds warning-free
+or confuse the 298-test feature profile with a different earlier library run.
+The final Clippy attempt first detects one additional test-only
+`obfuscated_if_else`; the author changes only its clause builder to `if/else`.
+The next Clippy passes, but workspace format detects two files previously
+formatted under a different style. The source owner runs the workspace
+formatter; only private projection/SYS5 import grouping and assertion wrapping
+change. The parent's full format/diff check then passes. No assertion or
+production behavior is weakened for lint/format acceptance. Root free space
+remains about 14 GiB; no additional cleanup occurs.
+
+Independent spec-first and code-quality integration review reports no P0/P1.
+It confirms real endpoint dequeue/quarantine without an invented M8 observation,
+exact guard propagation, unchanged old failure paths, and live OW1 rejection.
+The recommended worker snapshot/shutdown and private-M8 round-trip/restriction
+tests are now executed. Additional direct kernel-counter/SYS4-diagnostic-context
+and coherent full-image binding falsifiers remain useful Stage C consumers;
+they do not supply clock/permit/expiry evidence by implication. Read-only planner
+review confirms the same consumer and whole-I3-3 pause boundary. This closes
+the finite default-guard slice only: actual clock staging/resolution, one-use
+permit, retained typed expiry/requester consumption and selected-QUIC delivery
+remain next, with provider and every other required I3-3 family/order still
+in scope. No new Lean/model run, theorem/ledger/lifecycle acceptance or public
+compatibility claim follows.
+
+Parent final documentation validation passes `make docs`: agent config,
+213-entry Canon index, 800 required hierarchy paths and the 1760-report
+scaffold. Staged whitespace validation passes. A targeted added-line scan
+finds no private-key PEM, GitHub/OpenAI token or Discord webhook pattern;
+this is a bounded credential-pattern check, not a general security proof.
+Existing patch quiescence and whole-owner cut restoration must preserve that
+condition; no new general patch/clock framework is authorized by this choice.
+
 Two further ACK checks are required before acceptance: the completion must
 carry the complete independent run/cohort/slot/program/projection/closure/
 generation/kind/candidate binding through to cohort publication, not just
@@ -1274,6 +1540,9 @@ with the accepted I3-2 runtime retained as its input.
 Delivery checkpoint: `Documentation.md` 更新不要; its current entry pointers,
 owner-pause boundary and provisional workflow remain accurate. No CLI or
 sample-root change is introduced here.
+Time slice: updated the reader pointer from the prior successor checkpoint to
+the selected contract and validated static slice, explicitly retaining pending
+generated-contract/runtime enforcement and the unchanged workflow boundary.
 
 ## docs/project-status.md update status
 
@@ -1287,6 +1556,10 @@ the resume; the actual-time recent log is 2026-09-07 11:38 JST.
 The current delivery checkpoint also synchronizes Plan 250, progress/tasks,
 project status and sample dashboard with fresh versus prior validation and
 time-then-provider as the next still-OPEN contract consumer.
+The subsequent time slice supersedes that pointer: ADR-0041/spec/16 is
+selected, static tests/review pass, generated contracts/runtime gating remain
+pending and provider alone remains an OPEN contract. The 19:56 JST snapshot
+and recent log separate this evidence from whole I3-3 acceptance.
 
 ## tasks.md update status
 
@@ -1299,6 +1572,8 @@ correction is applied: I3-4 consumes I3-3 and resume is resolved history.
 更新済み: the sample dashboard records resumed I3-3 as active/not accepted,
 with all 20 families explicitly a target. Accepted I3-2 runnable evidence
 retains its existing class. No new workflow-ready or product-completion claim.
+The time slice adds the 14-test static command as evidence only; its embedded
+source strings are not a new active sample root or network workflow.
 
 ## Reviewer findings and follow-up
 
@@ -1407,6 +1682,21 @@ above and is ready for the parent's scoped commit/push. Its exact committed
 cut and parity will be recorded with the next in-scope I3-3 work; this report
 does not predict a commit hash or treat the whole milestone as accepted.
 
+That delivery checkpoint is now committed and pushed as
+`31be54b9ec83b3a75a56f6d71a5523674237b035`
+(`feat: exercise I3 endpoint and generated-frame delivery faults`). Fresh
+remote lookup matches HEAD at `2026-09-07T19:04:33+09:00`, with a clean
+worktree before the next contract-first assignment. I3-3 remains active and
+unaccepted; the next work does not activate I3-4.
+
+The owner-admission contract/static/default-guard integration is prepared as
+the next scoped source checkpoint over `31be54b9`, after the executed repair
+and regression gates above. Parent updates this report, Plan 250,
+Documentation, project status, progress, tasks and sample dashboard together;
+no new runnable network sample is promoted. Its commit/push and exact parity
+will be recorded with the next in-scope Stage C work, rather than predicting
+a hash here. This checkpoint does not trigger the scheduled whole-I3-3 pause.
+
 ## Sub-agent session close status
 
 Planning writer hands both planning/report files back to the parent after
@@ -1427,3 +1717,9 @@ The subsequent explicit owner approval resolved that cleanup-permission
 pause. The narrowly authorized cleanup and resumed validation are recorded
 under Start state above. Evaluation and bounded test diagnosis are active;
 no later milestone has been activated.
+
+At the default-guard checkpoint, static, projection, runtime, test, evaluation,
+independent integration review and read-only planner assignments have returned
+their bounded results. Contexts are retained for Stage C; production source
+and tests are frozen until the parent finishes this checkpoint's commit/push.
+The parent continues I3-3 and does not send task completion or activate I3-4.

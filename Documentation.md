@@ -306,7 +306,7 @@ recordが揃ったためofficial I2 entry後exitを受理しました。broad PH
   corruption reject joins; local misuse returns `LocalAttemptRejected`.
   Fresh probe 22/22, lifecycle unit 2/2, focused deny-warnings Clippy and
   format/diff checks pass. The full I3-3 matrix remains open.
-- current successor slice: a genuine M9 capability successor is installed in B
+- prior successor slice: a genuine M9 capability successor is installed in B
   before reconnect; late session-one traffic is rejected without owner mutation,
   while A remains pending/unknown. G1 control completes once. Registered B ACK
   publication, actual A-stdout tainted input, one-shot ingress and contradictory
@@ -315,6 +315,18 @@ recordが揃ったためofficial I2 entry後exitを受理しました。broad PH
   Independent narrow review finds no remaining P0/P1 in the repaired slice;
   I2 regressions 5/5 + 8/8 and M10 conformance 67/67 pass. This is checkpoint
   evidence over `7580e3a`, not I3-3 acceptance or a refreshed model.
+- current I3-3 work: ADR-0041/spec/16 selects an explicit source owner-admission
+  budget. Static retention/snapshot tests 14/14, old AST/M6/M7 10/13/27,
+  raw-Core-export compile-fail 1/1 and focused Clippy pass; independent static
+  P0/P1 are resolved. Generated-contract tests 8/8, private snapshots 6/6,
+  default M8 rejection 2/2 and M8 regressions 33/33 pass with independent
+  projection/M8 review clear. The repaired contextual rejection emits no fake
+  M8 trace; M10 reports the distinct guard, and OW1 remains live. Budget library
+  11/11, M10 source 3/3, full I3 runtime 63/63, runtime library 298/298,
+  I2/M10/probe/QUIC regressions and Clippy/format pass. Independent integration
+  review clears P0/P1. Next: actual clock gate, one-use permit, typed expiry and
+  QUIC delivery; none of these are implemented or accepted by this checkpoint.
+  Provider remains OPEN; Report 2606 holds exact checkpoint evidence.
 - decisions taken: the working interpretation remains ordinary meaning ->
   generated distribution -> continually checked composition. World/Avatar remain
   domain-library vocabulary, not Mir Core primitives; ledger64/coordinator/

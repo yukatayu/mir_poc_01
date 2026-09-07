@@ -2,7 +2,7 @@
 id: spec/03-static-semantics
 status: L1-fixed
 maturity: draft
-depends_on: [spec/02-surface-grammar, theory/03-elaboration, theory/10-diagnostics, theory/13-evaluation-materialization, theory/14-maintained-relation-projection, theory/15-shared-formal-model, adr/ADR-0021, adr/ADR-0025, adr/ADR-0031]
+depends_on: [spec/02-surface-grammar, theory/03-elaboration, theory/10-diagnostics, theory/13-evaluation-materialization, theory/14-maintained-relation-projection, theory/15-shared-formal-model, adr/ADR-0021, adr/ADR-0025, adr/ADR-0031, adr/ADR-0041, spec/16-i3-owner-admission-budget]
 summary: 実装済み M6 source form、provisional explicit relation-anchor locusの M5 Core / typed CoreTemplate / typed Diagnostic classification と source-span obligation。
 open_items: []
 ---
@@ -98,3 +98,11 @@ finite refinement/evidence is spec/08 and OBL-049; neither changes this M6
 classification contract. General parser coverage, elaboration determinism,
 diagnostic soundness/completeness, checker decidability, and M9 semantics
 remain separately deferred.
+
+## I3 typed admission-condition extension
+
+ADR-0041 / spec/16 require a source-declared owner budget to survive M6 as
+exact typed CoreTemplate admission metadata and source span. The base owner
+computation is unchanged; a complete executable projection may not erase its
+new condition into bare M5 Core. The new profile's evidence is separate from
+OBL-048/049 and does not extend their proof claims.

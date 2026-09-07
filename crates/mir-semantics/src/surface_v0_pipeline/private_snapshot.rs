@@ -6,6 +6,8 @@
 
 use serde::{Deserialize, Serialize};
 
+use mir_ast::surface_v0::SurfaceV0Span;
+
 use crate::{
     evaluation_materialization::{
         AuthorityOrigin, EvaluationPolicy, EvaluationSite, InputFrontier, Locus, ObservationPolicy,
@@ -24,9 +26,9 @@ use super::{
     CheckedIntegerLiteral, CheckedProgramIdentity, CheckedStateFieldSchema, DesignatedCheckedCore,
     DesignatedInputReceiptUse, DesignatedInputRequest, DesignatedMaterializationCore,
     DesignatedRemoteInputDependency, DesignatedResultConsumerCore, DesignatedTriggerCore,
-    EffectKind, FailureRow, GeneratedObligationKind, OwnerRmwCheckedCore, PipelineSourceSpan,
-    RelationAnchorCore, RelationCheckedCore, RelationTransformCore, TypedExpression,
-    TypedStateRead,
+    EffectKind, FailureRow, GeneratedObligationKind, OwnerAdmissionBudgetCondition,
+    OwnerRmwCheckedCore, PipelineSourceSpan, RelationAnchorCore, RelationCheckedCore,
+    RelationTransformCore, TypedExpression, TypedStateRead,
 };
 
 /// Private snapshot schema version. A receiver rejects every other version.
@@ -570,6 +572,8 @@ pub struct SnapshotOwnerRmwCheckedCore {
     pub owner_locus: String,
     pub target: SnapshotTypedStateRead,
     pub expression: SnapshotTypedExpression,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub owner_admission_budget: Option<SnapshotOwnerAdmissionBudgetCondition>,
 }
 
 impl SnapshotOwnerRmwCheckedCore {
@@ -579,6 +583,10 @@ impl SnapshotOwnerRmwCheckedCore {
             owner_locus: core.owner_locus.clone(),
             target: SnapshotTypedStateRead::from_checked(&core.target),
             expression: SnapshotTypedExpression::from_checked(&core.expression),
+            owner_admission_budget: core
+                .owner_admission_budget
+                .as_ref()
+                .map(SnapshotOwnerAdmissionBudgetCondition::from_checked),
         }
     }
 
@@ -589,11 +597,69 @@ impl SnapshotOwnerRmwCheckedCore {
                 reason: "owner RMW target is not an owner-owned state field",
             });
         }
+        let owner_admission_budget = self
+            .owner_admission_budget
+            .map(|condition| condition.into_checked(&self.owner_locus))
+            .transpose()?;
         Ok(OwnerRmwCheckedCore {
             authority_origin_locus: self.authority_origin_locus,
             owner_locus: self.owner_locus,
             target,
             expression: self.expression.into_checked()?,
+            owner_admission_budget,
+        })
+    }
+}
+
+/// Private process-image representation of the typed M6/M7 condition.
+///
+/// The canonical clock-domain spelling is validated while restoring; it is
+/// not a caller-selected provider, grant, or runtime clock input.
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[serde(deny_unknown_fields)]
+pub struct SnapshotOwnerAdmissionBudgetCondition {
+    budget_ticks: u64,
+    owner_locus: String,
+    clock_domain: String,
+    source_span: SurfaceV0Span,
+    source_ref: SnapshotSourceRef,
+}
+
+impl SnapshotOwnerAdmissionBudgetCondition {
+    #[doc(hidden)]
+    pub fn from_checked(condition: &OwnerAdmissionBudgetCondition) -> Self {
+        Self {
+            budget_ticks: condition.budget_ticks(),
+            owner_locus: condition.owner_locus().as_str().to_string(),
+            clock_domain: condition.clock_domain().as_str().to_string(),
+            source_span: condition.source_span().clone(),
+            source_ref: SnapshotSourceRef::from_checked(condition.source_ref()),
+        }
+    }
+
+    #[doc(hidden)]
+    pub fn into_checked(
+        self,
+        checked_owner_locus: &str,
+    ) -> Result<OwnerAdmissionBudgetCondition, SnapshotError> {
+        if self.owner_locus != checked_owner_locus {
+            return Err(SnapshotError::StructuralMismatch {
+                reason: "owner admission budget owner does not match owner RMW core",
+            });
+        }
+        if self.clock_domain != "OwnerAdmissionTicksU64" {
+            return Err(SnapshotError::StructuralMismatch {
+                reason: "owner admission budget has a noncanonical clock domain",
+            });
+        }
+        OwnerAdmissionBudgetCondition::from_private_snapshot(
+            self.budget_ticks,
+            crate::shared_model::LocusRef::new(self.owner_locus),
+            self.source_span,
+            self.source_ref.into_checked()?,
+        )
+        .ok_or(SnapshotError::StructuralMismatch {
+            reason: "owner admission budget has an invalid static binding",
         })
     }
 }

@@ -23,8 +23,8 @@ use mir_semantics::{
             SnapshotCheckedProgramIdentity, SnapshotDesignatedCheckedCore,
             SnapshotDesignatedRemoteInputDependency, SnapshotDesignatedResultConsumerCore,
             SnapshotEffectKind, SnapshotFailureRow, SnapshotGeneratedObligationKind,
-            SnapshotOwnerRmwCheckedCore, SnapshotRelationCheckedCore,
-            SnapshotRelationTransformCore, SnapshotSourceRef,
+            SnapshotOwnerAdmissionBudgetCondition, SnapshotOwnerRmwCheckedCore,
+            SnapshotRelationCheckedCore, SnapshotRelationTransformCore, SnapshotSourceRef,
         },
     },
 };
@@ -178,9 +178,79 @@ impl I3PrivateProjectionSnapshot {
             backend_requirements: self.backend_requirements.into_requirements()?,
             static_conflict_policy,
         };
+        validate_owner_admission_budget_bindings(&restored)?;
         validate_logical_source_paths(&restored)?;
         Ok(restored)
     }
+}
+
+fn validate_owner_admission_budget_bindings(
+    projection: &GlobalProjectionResult,
+) -> Result<(), I3PrivateProjectionSnapshotError> {
+    for edge in &projection.communication_plan.edges {
+        let expected_owner_locus = match edge.kind {
+            CommunicationEdgeKind::OwnerRequest => Some(edge.target_locus.as_str()),
+            CommunicationEdgeKind::OwnerReplyReceipt => Some(edge.source_locus.as_str()),
+            _ => None,
+        };
+        let actual = edge.carrier_contract.owner_admission_budget();
+        let Some(expected_owner_locus) = expected_owner_locus else {
+            if actual.is_some() {
+                return Err(I3PrivateProjectionSnapshotError::StructuralMismatch {
+                    reason: "owner-admission budget requires an owner communication edge",
+                });
+            }
+            continue;
+        };
+
+        let retained_cores = projection
+            .locus_programs
+            .iter()
+            .flat_map(|(locus, program)| {
+                program
+                    .operations
+                    .entries
+                    .iter()
+                    .map(move |fragment| (locus.as_str(), fragment))
+            })
+            .filter(|fragment| {
+                fragment.1.operation_id == edge.operation
+                    && fragment.1.kind == ProjectedOperationFragmentKind::OwnerRmwExecution
+            })
+            .filter_map(|(locus, fragment)| {
+                fragment.owner_rmw_checked_core().map(|core| (locus, core))
+            })
+            .collect::<Vec<_>>();
+        let owner_artifact_is_retained = projection.locus_program(expected_owner_locus).is_some();
+        if owner_artifact_is_retained {
+            let Some((retained_locus, expected_core)) = retained_cores.first() else {
+                return Err(I3PrivateProjectionSnapshotError::StructuralMismatch {
+                    reason: "retained owner carrier requires exactly one owner Core",
+                });
+            };
+            if retained_cores.len() != 1
+                || *retained_locus != expected_owner_locus
+                || expected_core.owner_locus() != expected_owner_locus
+                || actual != expected_core.owner_admission_budget()
+            {
+                return Err(I3PrivateProjectionSnapshotError::StructuralMismatch {
+                    reason: "owner carrier budget must match the retained owner Core",
+                });
+            }
+        } else if !retained_cores.is_empty() {
+            return Err(I3PrivateProjectionSnapshotError::StructuralMismatch {
+                reason: "owner carrier retains a misplaced owner Core",
+            });
+        }
+        if actual.is_some()
+            && edge.carrier_contract.target_owner_locus_template() != Some(expected_owner_locus)
+        {
+            return Err(I3PrivateProjectionSnapshotError::StructuralMismatch {
+                reason: "owner carrier budget must bind the communication edge owner",
+            });
+        }
+    }
+    Ok(())
 }
 
 fn validate_logical_source_paths(
@@ -227,6 +297,9 @@ fn validate_logical_source_paths(
         check(&edge.checked_core_identity.source_ref)?;
         check(&edge.carrier_contract.source_ref)?;
         check(&edge.carrier_contract.request_identity_template.source_ref)?;
+        if let Some(condition) = edge.carrier_contract.owner_admission_budget() {
+            check(condition.source_ref())?;
+        }
     }
     for handler in &projection.effect_handler_plan.handlers {
         check(&handler.source_ref)?;
@@ -913,28 +986,62 @@ impl SnapshotCommunicationEdge {
     }
 
     fn into_edge(self) -> Result<CommunicationEdge, I3PrivateProjectionSnapshotError> {
-        let kind: CommunicationEdgeKind = self.kind.into();
+        let SnapshotCommunicationEdge {
+            operation,
+            kind,
+            source_locus,
+            target_locus,
+            core_ref,
+            source_ref,
+            derived_from_checked_core,
+            transfers_authority,
+            edge_ref,
+            source_fragment_ref,
+            target_fragment_ref,
+            checked_core_identity,
+            carrier_contract,
+            designated_remote_input_requirement,
+        } = self;
+        let kind: CommunicationEdgeKind = kind.into();
         if kind == CommunicationEdgeKind::AbsoluteValueStream {
             return Err(I3PrivateProjectionSnapshotError::UnsupportedVariant {
                 kind: "absolute value stream carrier",
             });
         }
+        let carrier_contract = carrier_contract.into_contract()?;
+        if let Some(condition) = carrier_contract.owner_admission_budget() {
+            let expected_owner_locus = match kind {
+                CommunicationEdgeKind::OwnerRequest => &target_locus,
+                CommunicationEdgeKind::OwnerReplyReceipt => &source_locus,
+                _ => {
+                    return Err(I3PrivateProjectionSnapshotError::StructuralMismatch {
+                        reason: "owner-admission budget requires an owner communication edge",
+                    });
+                }
+            };
+            if carrier_contract.target_owner_locus_template() != Some(expected_owner_locus.as_str())
+                || condition.owner_locus().as_str() != expected_owner_locus.as_str()
+            {
+                return Err(I3PrivateProjectionSnapshotError::StructuralMismatch {
+                    reason: "owner-admission budget must bind the communication edge owner",
+                });
+            }
+        }
         Ok(CommunicationEdge {
-            operation: self.operation,
+            operation,
             kind,
-            source_locus: self.source_locus,
-            target_locus: self.target_locus,
-            core_ref: self.core_ref,
-            source_ref: self.source_ref.into_checked()?,
-            derived_from_checked_core: self.derived_from_checked_core,
-            transfers_authority: self.transfers_authority,
-            edge_ref: self.edge_ref,
-            source_fragment_ref: self.source_fragment_ref,
-            target_fragment_ref: self.target_fragment_ref,
-            checked_core_identity: self.checked_core_identity.into_identity()?,
-            carrier_contract: self.carrier_contract.into_contract()?,
-            designated_remote_input_requirement: self
-                .designated_remote_input_requirement
+            source_locus,
+            target_locus,
+            core_ref,
+            source_ref: source_ref.into_checked()?,
+            derived_from_checked_core,
+            transfers_authority,
+            edge_ref,
+            source_fragment_ref,
+            target_fragment_ref,
+            checked_core_identity: checked_core_identity.into_identity()?,
+            carrier_contract,
+            designated_remote_input_requirement: designated_remote_input_requirement
                 .map(SnapshotProjectedDesignatedRemoteInputRequirement::into_requirement)
                 .transpose()?,
         })
@@ -997,6 +1104,8 @@ struct SnapshotCarrierContract {
     origin_principal_template: Option<String>,
     origin_locus_template: Option<String>,
     target_owner_locus_template: Option<String>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    owner_admission_budget: Option<SnapshotOwnerAdmissionBudgetCondition>,
     declared_failure_row: SnapshotFailureRow,
     effect_row: Vec<SnapshotEffectKind>,
     authority_requirements: SnapshotAuthorityRequirements,
@@ -1859,6 +1968,10 @@ impl SnapshotCarrierContract {
             origin_principal_template: value.origin_principal_template.clone(),
             origin_locus_template: value.origin_locus_template.clone(),
             target_owner_locus_template: value.target_owner_locus_template.clone(),
+            owner_admission_budget: value
+                .owner_admission_budget
+                .as_ref()
+                .map(SnapshotOwnerAdmissionBudgetCondition::from_checked),
             declared_failure_row: SnapshotFailureRow::from_checked(&value.declared_failure_row),
             effect_row: value
                 .effect_row
@@ -1905,9 +2018,37 @@ impl SnapshotCarrierContract {
                 kind: "absolute value stream carrier contract",
             });
         }
+        let lifecycle_kind: CarrierLifecycleKind = self.lifecycle_kind.into();
+        let owner_admission_budget = match self.owner_admission_budget {
+            Some(condition) => {
+                if !matches!(
+                    (edge_kind, lifecycle_kind),
+                    (
+                        CommunicationEdgeKind::OwnerRequest,
+                        CarrierLifecycleKind::OwnerRequest
+                    ) | (
+                        CommunicationEdgeKind::OwnerReplyReceipt,
+                        CarrierLifecycleKind::OwnerReplyReceipt
+                    )
+                ) {
+                    return Err(I3PrivateProjectionSnapshotError::StructuralMismatch {
+                        reason: "owner-admission budget requires a matching owner carrier family",
+                    });
+                }
+                let expected_owner_locus = self
+                    .target_owner_locus_template
+                    .as_deref()
+                    .filter(|locus| !locus.is_empty())
+                    .ok_or(I3PrivateProjectionSnapshotError::StructuralMismatch {
+                        reason: "owner-admission budget requires the retained owner locus",
+                    })?;
+                Some(condition.into_checked(expected_owner_locus)?)
+            }
+            None => None,
+        };
         Ok(CarrierContract {
             edge_kind,
-            lifecycle_kind: self.lifecycle_kind.into(),
+            lifecycle_kind,
             operation_identity_template: OperationIdentityTemplate {
                 operation_id: self.operation_identity_template,
             },
@@ -1920,6 +2061,7 @@ impl SnapshotCarrierContract {
             origin_principal_template: self.origin_principal_template,
             origin_locus_template: self.origin_locus_template,
             target_owner_locus_template: self.target_owner_locus_template,
+            owner_admission_budget,
             declared_failure_row: self.declared_failure_row.into_checked()?,
             effect_row: ProjectedEffectRow {
                 kinds: self

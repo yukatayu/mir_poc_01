@@ -20,8 +20,8 @@ use crate::{
         M8DesignatedEvaluationRequest, M8InputReceiptSet, M8PublishedDesignatedValue,
     },
     m8_runtime_local_cut::{
-        M8LocalDesignatedTraceContext, M8LocalRuntime, M8LocalTrace, M8LocalTraceKind,
-        M8LocalTraceObservation,
+        M8LocalDesignatedTraceContext, M8LocalOwnerExecutionFailure, M8LocalRuntime, M8LocalTrace,
+        M8LocalTraceKind, M8LocalTraceObservation,
     },
     m8_runtime_owner_queue::{
         M8EnqueueDiagnostics, M8Occurrence, M8OwnerRequest, M8ServeDiagnostics, M8ServeOutcome,
@@ -198,6 +198,9 @@ pub(crate) enum Ow1ContextualM8Execution {
     Served(Box<Ow1ContextualM8ExecutionReceipt>),
     Rejected {
         observation: Box<M8LocalTraceObservation>,
+    },
+    AdmissionRejected {
+        diagnostics: M8EnqueueDiagnostics,
     },
 }
 
@@ -786,7 +789,12 @@ fn run_worker(receiver: Receiver<Ow1Command>, mut runtime: M8LocalRuntime) {
                                 },
                             ))
                         }
-                        Err(observation) => Ow1ContextualM8Execution::Rejected { observation },
+                        Err(M8LocalOwnerExecutionFailure::Observed(observation)) => {
+                            Ow1ContextualM8Execution::Rejected { observation }
+                        }
+                        Err(M8LocalOwnerExecutionFailure::AdmissionRejected(diagnostics)) => {
+                            Ow1ContextualM8Execution::AdmissionRejected { diagnostics }
+                        }
                     };
                 let _ = reply.send(Ok(result));
             }

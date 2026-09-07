@@ -58,6 +58,14 @@ fn run_inline_source() -> Value {
     serde_json::to_value(report).expect("M10 source run report is serializable")
 }
 
+fn budgeted_inline_source() -> String {
+    INLINE_M10_SOURCE.replacen(
+        "MissingWitness, RouteUnavailable, VisibilityDenied) {",
+        "MissingWitness, RouteUnavailable, VisibilityDenied, DeadlineExpired) within owner_ticks 1 {",
+        1,
+    )
+}
+
 fn assert_json_pointer_eq(value: &Value, pointer: &str, expected: Value) {
     assert_eq!(
         value.pointer(pointer),
@@ -180,6 +188,39 @@ fn temp_ordinary_source_flows_once_through_m6_m7_m8_m9_trace_and_projection() {
         Some(first_replay),
         "same source/profile must replay deterministically"
     );
+}
+
+#[test]
+fn i3_owner_admission_budget_m10_default_entry_reports_the_distinct_enqueue_guard() {
+    let mut system = M10ReferenceSystem::deterministic_profile("m10-reference-profile");
+    let rejection = system
+        .run_source(
+            M10SourceRunRequest::inline_text(
+                "tmp/m10/owner_admission_budget_source_execution.mir",
+                budgeted_inline_source(),
+            )
+            .entry_event("attack")
+            .principal("self")
+            .target("target")
+            .initial_player_hp("target", 100)
+            .initial_player_atk("self", 10)
+            .attack_count(1),
+        )
+        .expect_err(
+            "the ordinary M10 default owner entry must reject a checked admission budget before it serves",
+        );
+    assert!(
+        rejection.contains("OwnerAdmissionAuthorizationRequired"),
+        "M10 must preserve the central M8 admission-authorization diagnostic: {rejection}"
+    );
+    assert!(
+        !rejection.contains("RouteUnavailable"),
+        "the admission guard is not a route failure and must not be relabeled as one: {rejection}"
+    );
+
+    let ordinary = run_inline_source();
+    assert_json_pointer_eq(&ordinary, "/terminal_outcome", json!("Accepted"));
+    assert_json_pointer_eq(&ordinary, "/runtime/mutation_count", json!(2));
 }
 
 #[test]

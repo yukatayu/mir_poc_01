@@ -7,8 +7,8 @@
 use std::{collections::BTreeSet, fs, path::PathBuf};
 
 use mir_ast::surface_v0::{
-    DeferredFormKind, FixtureSource, ParseDiagnostics, ParseErrorKind, RelationPublication,
-    SurfaceV0File, SurfaceV0Span, parse_surface_v0,
+    DeferredFormKind, FixtureSource, OwnerAdmissionBudgetClause, ParseDiagnostics, ParseErrorKind,
+    RelationPublication, SurfaceV0File, SurfaceV0Span, parse_surface_v0,
 };
 
 use crate::{
@@ -79,6 +79,8 @@ pub enum SurfaceV0DiagnosticKind {
     UnsupportedOccurrenceSyntax,
     UnsupportedEnvelopeSyntax,
     UnexpectedSyntax,
+    OwnerAdmissionBudgetOutOfRange,
+    OwnerAdmissionBudgetRequiresExactlyOneLowerableOwnerAssignment,
 }
 
 #[derive(Debug, Clone, PartialEq, Eq)]
@@ -140,6 +142,115 @@ impl SurfaceV0Diagnostics {
     }
 }
 
+const MAX_OWNER_ADMISSION_BUDGET_TICKS: u64 = 65_535;
+
+/// The one finite owner-local clock coordinate selected for this provisional
+/// condition.  Its private field prevents callers from minting a domain tag.
+#[derive(Debug, Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash)]
+pub struct OwnerAdmissionTicksU64 {
+    _private: (),
+}
+
+impl OwnerAdmissionTicksU64 {
+    const fn canonical() -> Self {
+        Self { _private: () }
+    }
+
+    pub const fn as_str(&self) -> &'static str {
+        "OwnerAdmissionTicksU64"
+    }
+}
+
+/// M6-retained, source-declared owner-admission metadata.
+///
+/// This is neither a clock input nor an admission authorization.  It is a
+/// typed static condition that later checked consumers must retain or reject.
+#[derive(Debug, Clone, PartialEq, Eq)]
+pub struct OwnerAdmissionBudgetCondition {
+    budget_ticks: u64,
+    owner_locus: LocusRef,
+    clock_domain: OwnerAdmissionTicksU64,
+    source_span: SurfaceV0Span,
+    source_ref: SourceRef,
+}
+
+impl OwnerAdmissionBudgetCondition {
+    fn from_clause(clause: &OwnerAdmissionBudgetClause, owner_locus: LocusRef) -> Self {
+        let source_span = clause.span().clone();
+        Self {
+            budget_ticks: clause.ticks(),
+            owner_locus,
+            clock_domain: OwnerAdmissionTicksU64::canonical(),
+            source_ref: source_ref_from_span(&source_span),
+            source_span,
+        }
+    }
+
+    pub(crate) fn from_private_snapshot(
+        budget_ticks: u64,
+        owner_locus: LocusRef,
+        source_span: SurfaceV0Span,
+        source_ref: SourceRef,
+    ) -> Option<Self> {
+        ((1..=MAX_OWNER_ADMISSION_BUDGET_TICKS).contains(&budget_ticks)
+            && source_ref == source_ref_from_span(&source_span))
+        .then_some(Self {
+            budget_ticks,
+            owner_locus,
+            clock_domain: OwnerAdmissionTicksU64::canonical(),
+            source_span,
+            source_ref,
+        })
+    }
+
+    pub const fn budget_ticks(&self) -> u64 {
+        self.budget_ticks
+    }
+
+    pub fn owner_locus(&self) -> &LocusRef {
+        &self.owner_locus
+    }
+
+    pub fn clock_domain(&self) -> &OwnerAdmissionTicksU64 {
+        &self.clock_domain
+    }
+
+    pub fn source_span(&self) -> &SurfaceV0Span {
+        &self.source_span
+    }
+
+    pub fn source_ref(&self) -> &SourceRef {
+        &self.source_ref
+    }
+}
+
+/// Non-executable inspection summary of the preserved M5 RMW subcomponent.
+///
+/// This intentionally exposes only provenance and operation cardinality; it
+/// cannot be converted back into an executable M5 core.
+#[derive(Debug, Clone, PartialEq, Eq)]
+pub struct OwnerRmwSubcomponentInspection {
+    source_ref: SourceRef,
+    operation_count: usize,
+}
+
+impl OwnerRmwSubcomponentInspection {
+    fn from_core(core: &Core) -> Self {
+        Self {
+            source_ref: core.source_ref().clone(),
+            operation_count: core.ops().len(),
+        }
+    }
+
+    pub fn source_ref(&self) -> &SourceRef {
+        &self.source_ref
+    }
+
+    pub const fn operation_count(&self) -> usize {
+        self.operation_count
+    }
+}
+
 #[derive(Debug, Clone, PartialEq, Eq)]
 pub struct CoreTemplate {
     kind: CoreTemplateKind,
@@ -147,6 +258,7 @@ pub struct CoreTemplate {
     result_name: Option<String>,
     source_span: SurfaceV0Span,
     m5_core: Option<Core>,
+    owner_admission_budget: Option<OwnerAdmissionBudgetCondition>,
     result_frontier: Option<ResultFrontier>,
     input_frontier: Option<InputFrontier>,
     result_version: Option<ResultVersion>,
@@ -172,13 +284,19 @@ struct DesignatedResultMetadata {
 }
 
 impl CoreTemplate {
-    fn owner_rmw(name: String, source_span: SurfaceV0Span, m5_core: Core) -> Self {
+    fn owner_rmw(
+        name: String,
+        source_span: SurfaceV0Span,
+        m5_core: Core,
+        owner_admission_budget: Option<OwnerAdmissionBudgetCondition>,
+    ) -> Self {
         Self {
             kind: CoreTemplateKind::OwnerRmw,
             name,
             result_name: None,
             source_span,
             m5_core: Some(m5_core),
+            owner_admission_budget,
             result_frontier: None,
             input_frontier: None,
             result_version: None,
@@ -207,6 +325,7 @@ impl CoreTemplate {
             result_name: Some(result),
             source_span,
             m5_core: None,
+            owner_admission_budget: None,
             result_frontier: Some(metadata.result_frontier),
             input_frontier: Some(metadata.input_frontier),
             result_version: Some(metadata.result_version),
@@ -235,6 +354,7 @@ impl CoreTemplate {
             result_name: None,
             source_span,
             m5_core: None,
+            owner_admission_budget: None,
             result_frontier: None,
             input_frontier: None,
             result_version: None,
@@ -262,6 +382,7 @@ impl CoreTemplate {
             result_name: None,
             source_span,
             m5_core: None,
+            owner_admission_budget: None,
             result_frontier: None,
             input_frontier: None,
             result_version: None,
@@ -291,6 +412,7 @@ impl CoreTemplate {
             result_name: Some(result),
             source_span,
             m5_core: None,
+            owner_admission_budget: None,
             result_frontier: Some(producer.result_frontier().clone()),
             input_frontier: Some(producer.input_frontier().clone()),
             result_version: Some(producer.result_version()),
@@ -320,7 +442,30 @@ impl CoreTemplate {
     }
 
     pub fn to_m5_core(&self) -> Option<Core> {
-        self.m5_core.clone()
+        self.owner_admission_budget
+            .is_none()
+            .then(|| self.m5_core.clone())
+            .flatten()
+    }
+
+    /// Inspection-only summary of the unchanged M5 RMW subcomponent.  For an
+    /// owner-admission template this is not a complete executable conversion.
+    ///
+    /// ```compile_fail
+    /// use mir_semantics::{shared_model::Core, surface_v0_classification::CoreTemplate};
+    ///
+    /// fn leak(template: &CoreTemplate) -> Option<Core> {
+    ///     template.m5_owner_rmw_subcomponent().cloned()
+    /// }
+    /// ```
+    pub fn m5_owner_rmw_subcomponent(&self) -> Option<OwnerRmwSubcomponentInspection> {
+        self.m5_core
+            .as_ref()
+            .map(OwnerRmwSubcomponentInspection::from_core)
+    }
+
+    pub fn owner_admission_budget(&self) -> Option<&OwnerAdmissionBudgetCondition> {
+        self.owner_admission_budget.as_ref()
     }
 
     pub const fn is_non_executable(&self) -> bool {
@@ -619,6 +764,12 @@ pub fn classify_surface_v0(
             entries: assignment_target_diagnostics,
         });
     }
+    let owner_admission_budget_diagnostics = owner_admission_budget_diagnostics(ast);
+    if !owner_admission_budget_diagnostics.is_empty() {
+        return Err(SurfaceV0Diagnostics {
+            entries: owner_admission_budget_diagnostics,
+        });
+    }
     let mut diagnostics = name_resolution_diagnostics(ast);
     diagnostics.extend(relation_diagnostics(ast));
     diagnostics.extend(cross_owner_diagnostics(ast));
@@ -659,10 +810,18 @@ pub fn classify_surface_v0(
             StateKey::field(assignment.target().base(), FieldRef::new(field)),
             Value::int(-1),
         );
+        let owner_locus = LocusRef::new(assignment.owner_locus());
+        let owner_admission_budget = ast
+            .when(assignment.event())
+            .and_then(|when| when.owner_admission_budget())
+            .map(|clause| {
+                source_refs.push((clause.span().clone(), source_ref_from_span(clause.span())));
+                OwnerAdmissionBudgetCondition::from_clause(clause, owner_locus.clone())
+            });
         let core = Core::same_owner_rmw(
             source_ref,
             PrincipalRef::new(assignment.actor()),
-            LocusRef::new(assignment.owner_locus()),
+            owner_locus,
             command,
             capability.clone(),
         );
@@ -673,6 +832,7 @@ pub fn classify_surface_v0(
             assignment.event().to_string(),
             assignment.span().clone(),
             core,
+            owner_admission_budget,
         ));
         authority_audits.push(AuthorityAudit {
             event: assignment.event().to_string(),
@@ -916,6 +1076,23 @@ fn assignment_target_diagnostics(ast: &SurfaceV0File) -> Vec<SurfaceV0Diagnostic
     diagnostics
 }
 
+fn owner_admission_budget_diagnostics(ast: &SurfaceV0File) -> Vec<SurfaceV0Diagnostic> {
+    ast.roles()
+        .iter()
+        .flat_map(|role| role.whens())
+        .filter_map(|when| {
+            let clause = when.owner_admission_budget()?;
+            (when.owner_assignment_count() != 1).then(|| {
+                SurfaceV0Diagnostic::new(
+                    SurfaceV0DiagnosticKind::OwnerAdmissionBudgetRequiresExactlyOneLowerableOwnerAssignment,
+                    clause.span().clone(),
+                    DiagnosticCode::BadRelationship,
+                )
+            })
+        })
+        .collect()
+}
+
 fn cross_owner_diagnostics(ast: &SurfaceV0File) -> Vec<SurfaceV0Diagnostic> {
     let mut diagnostics = Vec::new();
     for assignment in ast.assignments() {
@@ -1094,6 +1271,9 @@ fn parse_error_kind(diagnostics: ParseDiagnostics) -> SurfaceV0DiagnosticKind {
             SurfaceV0DiagnosticKind::RoleActorMustBeLiteralSelf
         }
         ParseErrorKind::IntegerLiteralOutOfRange => SurfaceV0DiagnosticKind::UnexpectedSyntax,
+        ParseErrorKind::OwnerAdmissionBudgetOutOfRange => {
+            SurfaceV0DiagnosticKind::OwnerAdmissionBudgetOutOfRange
+        }
         ParseErrorKind::UnsupportedTransportSyntax => {
             SurfaceV0DiagnosticKind::UnsupportedTransportSyntax
         }

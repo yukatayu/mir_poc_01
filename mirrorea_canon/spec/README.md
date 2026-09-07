@@ -17,6 +17,7 @@ open_items: []
 13 SYS-4 in-process generated dispatch + ST local cut / designated-only patch →
 14 SYS-5 four-locus local toy + source-bound leave/fresh + joined typed devtools →
 15 SYS-6 finite source-first I2 producer/verifier + lifecycle evidence →
+16 I3-3 selected owner-admission budget / terminal-failure contract（実装受理ではない） →
 05 runtime 意味(参照実装の観測可能挙動) → 06 適合性 → 07 診断形式。
 
 ここから推論してはいけないこと: M6 grammar の存在は parser/checker/runtime

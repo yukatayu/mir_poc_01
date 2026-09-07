@@ -4,6 +4,7 @@ use mir_semantics::{
     evaluation_materialization::{InputFrontier, ObservationPolicy, PolicyStamp},
     shared_model::{BindingActivationFrontier, SourceRef},
     shared_model::{ResultFrontier, ResultVersion},
+    surface_v0_classification::OwnerAdmissionBudgetCondition,
     surface_v0_pipeline::{
         CheckedEvaluation, CheckedEvaluationKind, CheckedEvaluationSignature,
         CheckedIndexedStateSchema, CheckedProgramIdentity, DesignatedCheckedCore,
@@ -1080,6 +1081,7 @@ pub(crate) struct I3AdapterCarrierStaticFacts {
     pub(crate) core_ref: Option<String>,
     pub(crate) origin_locus_template: Option<String>,
     pub(crate) target_owner_locus_template: Option<String>,
+    pub(crate) owner_admission_budget: Option<OwnerAdmissionBudgetCondition>,
     pub(crate) declared_failure_row: FailureRow,
     pub(crate) effect_row: ProjectedEffectRow,
     pub(crate) authority_requirement_rows: Vec<I3AdapterCarrierStaticAuthorityRequirementRow>,
@@ -1145,6 +1147,7 @@ pub(crate) struct CarrierContract {
     pub(crate) origin_principal_template: Option<String>,
     pub(crate) origin_locus_template: Option<String>,
     pub(crate) target_owner_locus_template: Option<String>,
+    pub(crate) owner_admission_budget: Option<OwnerAdmissionBudgetCondition>,
     pub(crate) declared_failure_row: FailureRow,
     pub(crate) effect_row: ProjectedEffectRow,
     pub(crate) authority_requirements: AuthorityRequirements,
@@ -1197,6 +1200,10 @@ impl CarrierContract {
 
     pub(crate) fn target_owner_locus_template(&self) -> Option<&str> {
         self.target_owner_locus_template.as_deref()
+    }
+
+    pub(crate) fn owner_admission_budget(&self) -> Option<&OwnerAdmissionBudgetCondition> {
+        self.owner_admission_budget.as_ref()
     }
 
     pub(crate) fn requires_occurrence_slot(&self, slot: CarrierOccurrenceSlotKind) -> bool {
@@ -1324,6 +1331,7 @@ impl CarrierContract {
             origin_principal_template,
             origin_locus_template,
             target_owner_locus_template,
+            owner_admission_budget,
             declared_failure_row,
             effect_row,
             authority_requirements,
@@ -1373,6 +1381,18 @@ impl CarrierContract {
             || !matches!(provenance, CarrierContractProvenance::CheckedCoreBound)
         {
             return None;
+        }
+
+        match *edge_kind {
+            CommunicationEdgeKind::OwnerRequest | CommunicationEdgeKind::OwnerReplyReceipt => {
+                if owner_admission_budget.as_ref().is_some_and(|condition| {
+                    target_owner_locus_template.as_deref() != Some(condition.owner_locus().as_str())
+                }) {
+                    return None;
+                }
+            }
+            _ if owner_admission_budget.is_some() => return None,
+            _ => {}
         }
 
         let variant = match *edge_kind {
@@ -1530,6 +1550,7 @@ impl CarrierContract {
             core_ref: core_ref.clone(),
             origin_locus_template: origin_locus_template.clone(),
             target_owner_locus_template: target_owner_locus_template.clone(),
+            owner_admission_budget: owner_admission_budget.clone(),
             declared_failure_row: declared_failure_row.clone(),
             effect_row: effect_row.clone(),
             authority_requirement_rows,
@@ -1562,6 +1583,7 @@ impl CarrierContract {
             origin_principal_template,
             origin_locus_template,
             target_owner_locus_template,
+            owner_admission_budget,
             declared_failure_row,
             effect_row,
             authority_requirements,
@@ -1640,6 +1662,9 @@ impl CarrierContract {
             b"target-owner-locus-template",
             target_owner_locus_template,
         );
+        if let Some(condition) = owner_admission_budget {
+            i3_owner_request_component_owner_admission_budget(&mut hasher, condition);
+        }
         i3_owner_request_component_texts(
             &mut hasher,
             b"declared-failure-row",
@@ -1690,7 +1715,7 @@ impl CarrierContract {
         let core = evaluation
             .owner_rmw_core()
             .expect("owner request carrier comes from owner checked Core");
-        Self::new(
+        let mut contract = Self::new(
             CommunicationEdgeKind::OwnerRequest,
             CarrierLifecycleKind::OwnerRequest,
             evaluation.name(),
@@ -1708,11 +1733,16 @@ impl CarrierContract {
             false,
             false,
             None,
-        )
+        );
+        contract.owner_admission_budget = core.owner_admission_budget().cloned();
+        contract
     }
 
     pub(super) fn owner_reply(evaluation: &CheckedEvaluation) -> Self {
-        Self::new(
+        let core = evaluation
+            .owner_rmw_core()
+            .expect("owner reply carrier comes from owner checked Core");
+        let mut contract = Self::new(
             CommunicationEdgeKind::OwnerReplyReceipt,
             CarrierLifecycleKind::OwnerReplyReceipt,
             evaluation.name(),
@@ -1730,7 +1760,9 @@ impl CarrierContract {
             true,
             false,
             None,
-        )
+        );
+        contract.owner_admission_budget = core.owner_admission_budget().cloned();
+        contract
     }
 
     pub(super) fn designated_request(
@@ -1908,6 +1940,7 @@ impl CarrierContract {
             origin_principal_template,
             origin_locus_template,
             target_owner_locus_template,
+            owner_admission_budget: None,
             declared_failure_row,
             effect_row,
             authority_requirements,
@@ -1934,6 +1967,73 @@ fn i3_owner_request_component_bool(hasher: &mut Sha256, tag: &[u8], value: bool)
 
 fn i3_owner_request_component_u64(hasher: &mut Sha256, tag: &[u8], value: u64) {
     i3_owner_request_component_field(hasher, tag, &value.to_be_bytes());
+}
+
+fn i3_owner_request_component_owner_admission_budget(
+    hasher: &mut Sha256,
+    condition: &OwnerAdmissionBudgetCondition,
+) {
+    let source_span = condition.source_span();
+    let source_range = source_span.byte_range();
+    let (start_line, start_column) = source_span.start_line_column();
+    let (end_line, end_column) = source_span.end_line_column();
+
+    i3_owner_request_component_u64(
+        hasher,
+        b"owner-admission-budget-ticks",
+        condition.budget_ticks(),
+    );
+    i3_owner_request_component_text(
+        hasher,
+        b"owner-admission-budget-owner-locus",
+        condition.owner_locus().as_str(),
+    );
+    i3_owner_request_component_text(
+        hasher,
+        b"owner-admission-budget-clock-domain",
+        condition.clock_domain().as_str(),
+    );
+    i3_owner_request_component_text(
+        hasher,
+        b"owner-admission-budget-source-span-file",
+        source_span.file(),
+    );
+    i3_owner_request_component_u64(
+        hasher,
+        b"owner-admission-budget-source-span-start",
+        u64::try_from(source_range.start)
+            .expect("finite owner-admission-budget source start fits u64"),
+    );
+    i3_owner_request_component_u64(
+        hasher,
+        b"owner-admission-budget-source-span-end",
+        u64::try_from(source_range.end).expect("finite owner-admission-budget source end fits u64"),
+    );
+    i3_owner_request_component_u64(
+        hasher,
+        b"owner-admission-budget-source-span-start-line",
+        u64::from(start_line),
+    );
+    i3_owner_request_component_u64(
+        hasher,
+        b"owner-admission-budget-source-span-start-column",
+        u64::from(start_column),
+    );
+    i3_owner_request_component_u64(
+        hasher,
+        b"owner-admission-budget-source-span-end-line",
+        u64::from(end_line),
+    );
+    i3_owner_request_component_u64(
+        hasher,
+        b"owner-admission-budget-source-span-end-column",
+        u64::from(end_column),
+    );
+    i3_owner_request_component_source_ref(
+        hasher,
+        b"owner-admission-budget-source-ref",
+        condition.source_ref(),
+    );
 }
 
 fn i3_owner_request_component_texts(hasher: &mut Sha256, tag: &[u8], values: &[String]) {
@@ -4487,6 +4587,23 @@ impl GlobalProjectionResult {
         self.communication_plan.for_test_remove(operation, kind);
     }
 
+    #[cfg(test)]
+    pub(crate) fn for_test_replace_owner_request_admission_budget(
+        &mut self,
+        operation: &str,
+        replacement: Option<&OwnerAdmissionBudgetCondition>,
+    ) {
+        let edge = self
+            .communication_plan
+            .edges
+            .iter_mut()
+            .find(|edge| {
+                edge.operation == operation && edge.kind == CommunicationEdgeKind::OwnerRequest
+            })
+            .expect("test projection retains the selected owner request edge");
+        edge.carrier_contract.owner_admission_budget = replacement.cloned();
+    }
+
     /// Construct an isolated malformed candidate for a bounded conformance
     /// control. The live projection is never mutated or admitted; callers
     /// must submit the returned candidate to `verify_projection`.
@@ -4717,6 +4834,7 @@ mod i3_adapter_static_authority_rows_red_tests {
             core_ref,
             origin_locus_template,
             target_owner_locus_template,
+            owner_admission_budget,
             declared_failure_row,
             effect_row,
             authority_requirement_rows,
@@ -4739,6 +4857,7 @@ mod i3_adapter_static_authority_rows_red_tests {
             core_ref,
             origin_locus_template,
             target_owner_locus_template,
+            owner_admission_budget,
             declared_failure_row,
             effect_row,
             occurrence_slots,

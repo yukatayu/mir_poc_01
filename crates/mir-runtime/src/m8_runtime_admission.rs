@@ -10,13 +10,14 @@ use std::collections::BTreeSet;
 use serde::{Deserialize, Serialize};
 
 use mir_semantics::surface_v0_pipeline::private_snapshot::{
-    SnapshotCheckedProgramIdentity, SnapshotDesignatedCheckedCore, SnapshotRelationCheckedCore,
-    SnapshotSourceRef, SnapshotTypedExpression, SnapshotTypedStateRead,
+    SnapshotCheckedProgramIdentity, SnapshotDesignatedCheckedCore,
+    SnapshotOwnerAdmissionBudgetCondition, SnapshotRelationCheckedCore, SnapshotSourceRef,
+    SnapshotTypedExpression, SnapshotTypedStateRead,
 };
 use mir_semantics::{
     evaluation_materialization::{EvaluationPolicy, InputFrontier, ObservationPolicy, PolicyStamp},
     shared_model::{ResultFrontier, SourceRef},
-    surface_v0_classification::SourceToCoreKind,
+    surface_v0_classification::{OwnerAdmissionBudgetCondition, SourceToCoreKind},
     surface_v0_pipeline::{
         CheckedProgramIdentity, CheckedSurfaceV0, DesignatedCheckedCore, RelationCheckedCore,
         ResidualObligation, ResidualObligationKind, TypedExpression, TypedStateRead,
@@ -727,6 +728,7 @@ pub(crate) struct M8OwnerExecutionPlan {
     source_ref: SourceRef,
     target: TypedStateRead,
     expression: TypedExpression,
+    owner_admission_budget: Option<OwnerAdmissionBudgetCondition>,
 }
 
 impl M8OwnerExecutionPlan {
@@ -752,6 +754,10 @@ impl M8OwnerExecutionPlan {
 
     pub(crate) fn expression(&self) -> &TypedExpression {
         &self.expression
+    }
+
+    pub(crate) fn owner_admission_budget(&self) -> Option<&OwnerAdmissionBudgetCondition> {
+        self.owner_admission_budget.as_ref()
     }
 }
 
@@ -892,6 +898,7 @@ impl M8RuntimeInstance {
                     source_ref: evaluation.source_ref().clone(),
                     target: owner.target().clone(),
                     expression: owner.expression().clone(),
+                    owner_admission_budget: owner.owner_admission_budget().cloned(),
                 })
             })
             .collect();
@@ -1284,6 +1291,8 @@ struct PrivateM8OwnerExecutionPlanSnapshot {
     source_ref: SnapshotSourceRef,
     target: SnapshotTypedStateRead,
     expression: SnapshotTypedExpression,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    owner_admission_budget: Option<SnapshotOwnerAdmissionBudgetCondition>,
 }
 
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
@@ -1708,14 +1717,24 @@ impl PrivateM8OwnerExecutionPlanSnapshot {
             source_ref: SnapshotSourceRef::from_checked(&plan.source_ref),
             target: SnapshotTypedStateRead::from_checked(&plan.target),
             expression: SnapshotTypedExpression::from_checked(&plan.expression),
+            owner_admission_budget: plan
+                .owner_admission_budget
+                .as_ref()
+                .map(SnapshotOwnerAdmissionBudgetCondition::from_checked),
         }
     }
 
     fn into_plan(self) -> Result<M8OwnerExecutionPlan, M8I3PrivateSnapshotError> {
+        let owner_locus = self.owner_locus;
+        let owner_admission_budget = self
+            .owner_admission_budget
+            .map(|condition| condition.into_checked(&owner_locus))
+            .transpose()
+            .map_err(|_| M8I3PrivateSnapshotError::SemanticSnapshot)?;
         Ok(M8OwnerExecutionPlan {
             evaluation: self.evaluation,
             actor: self.actor,
-            owner_locus: self.owner_locus,
+            owner_locus,
             source_ref: self
                 .source_ref
                 .into_checked()
@@ -1728,6 +1747,7 @@ impl PrivateM8OwnerExecutionPlanSnapshot {
                 .expression
                 .into_checked()
                 .map_err(|_| M8I3PrivateSnapshotError::SemanticSnapshot)?,
+            owner_admission_budget,
         })
     }
 }
@@ -1866,3 +1886,7 @@ fn relation_payload_diagnostic(
     }
     None
 }
+
+#[cfg(test)]
+#[path = "m8_owner_budget_snapshot_tests.rs"]
+mod m8_owner_budget_snapshot_tests;

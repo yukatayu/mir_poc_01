@@ -2,7 +2,7 @@
 id: spec/02-surface-grammar
 status: L1-fixed
 maturity: draft
-depends_on: [spec/01-lexical-and-modules, adr/ADR-0021, adr/ADR-0025, adr/ADR-0029, adr/ADR-0031, theory/13-evaluation-materialization, theory/14-maintained-relation-projection, theory/15-shared-formal-model]
+depends_on: [spec/01-lexical-and-modules, adr/ADR-0021, adr/ADR-0025, adr/ADR-0029, adr/ADR-0031, theory/13-evaluation-materialization, theory/14-maintained-relation-projection, theory/15-shared-formal-model, adr/ADR-0041, spec/16-i3-owner-admission-budget]
 summary: 実装済み M6 parser / fixture とSYS-3 designated-consume、SYS-5 provisional explicit relation-anchor locusを含むordinary Surface reference grammar。
 open_items: []
 ---
@@ -146,3 +146,12 @@ There is no Surface production for `send`, `receive`, receipt/release,
 occurrence/envelope/witness, `PresentationContext`, `chain`, `try`, patch,
 transport, provider, or renderer control.  The historical ADR-0008
 place/role/chain profile remains LAB compatibility evidence only.
+
+## I3 owner-admission extension
+
+ADR-0041 / spec/16 select optional `within owner_ticks PositiveInt` between
+an owner's handler failure row and its body, with the exact bounded shape,
+range and rejection rules in spec/16. This is an explicit source condition,
+not transport syntax or a final language freeze. The preceding grammar remains
+the accepted unannotated regression profile; the new clause does not change
+those sources or imply that the selected extension has been implemented.

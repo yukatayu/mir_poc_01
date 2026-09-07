@@ -2,7 +2,7 @@
 id: spec/09-m8-deterministic-runtime
 status: L1-fixed
 maturity: draft
-depends_on: [spec/05-runtime-semantics, spec/08-m7-checked-elaboration, theory/17-m8-deterministic-runtime, adr/ADR-0023, adr/ADR-0025]
+depends_on: [spec/05-runtime-semantics, spec/08-m7-checked-elaboration, theory/17-m8-deterministic-runtime, adr/ADR-0023, adr/ADR-0025, adr/ADR-0041, spec/16-i3-owner-admission-budget]
 summary: M8 reference runtimeのchecked-artifact-only input、finite admission、deterministic trace/state output boundary。
 open_items: []
 ---
@@ -88,3 +88,12 @@ This specification is a bounded reference-runtime contract.  It does not
 claim transport, multi-process delivery, M9 auth/verification, final public
 interfaces, or C-static/C-runtime conformance.  Official frozen SCN-01..10
 conformance remains M10 fresh release-profile evidence.
+
+## I3 guarded-owner admission extension
+
+The unannotated admission table remains the accepted regression profile.
+ADR-0041 / spec/16 require every newly annotated owner request to reach a
+sealed, exact one-use owner-admission permit before execution. Public admission
+or private M9 translation cannot erase the condition. A consumer lacking this
+gate rejects before evaluation/mutation; generic `RuntimeAdmitted` alone is
+not a serve permit. No original M8 proof/evidence claim covers this extension.

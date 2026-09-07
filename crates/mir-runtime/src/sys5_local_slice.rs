@@ -15,11 +15,13 @@ use std::{
 use mir_ast::surface_v0::FixtureSource;
 use mir_semantics::{
     shared_model::SourceRef,
+    surface_v0_classification::OwnerAdmissionBudgetCondition,
     surface_v0_pipeline::{
         CheckedEvaluationKind, CheckedSurfaceV0, EffectKind, GeneratedObligationKind,
         ResidualObligationKind, StaticProjectionDesignatedInputReceiptUseFacts,
         StaticProjectionDesignatedInputRequestFacts, StaticProjectionFacts,
         StaticProjectionTypedStateReadFacts, check_and_elaborate_surface_v0,
+        private_snapshot::SnapshotOwnerAdmissionBudgetCondition,
     },
 };
 use serde::{Deserialize, Serialize};
@@ -801,6 +803,8 @@ pub struct Sys5I3AdapterWireSnapshot {
     mints_authority_without_source: bool,
     public_api_or_wire_contract: bool,
     variant: Sys5I3AdapterWireVariant,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    owner_admission_budget: Option<SnapshotOwnerAdmissionBudgetCondition>,
     full_retained_contract_fingerprint: String,
     full_retained_contract_fingerprint_field_names: Vec<String>,
 }
@@ -980,6 +984,7 @@ pub struct Sys5I3AdapterCarrierContract {
     transfers_authority: bool,
     mints_authority_without_source: bool,
     variant_facts: Sys5I3AdapterCarrierVariantFacts,
+    owner_admission_budget: Option<SnapshotOwnerAdmissionBudgetCondition>,
     full_retained_contract_fingerprint: String,
     full_retained_contract_fingerprint_field_names: Vec<String>,
 }
@@ -1085,6 +1090,11 @@ impl Sys5I3AdapterCarrierContract {
         &self.variant_facts
     }
 
+    #[doc(hidden)]
+    pub fn owner_admission_budget(&self) -> Option<&SnapshotOwnerAdmissionBudgetCondition> {
+        self.owner_admission_budget.as_ref()
+    }
+
     pub fn full_retained_contract_fingerprint(&self) -> &str {
         &self.full_retained_contract_fingerprint
     }
@@ -1128,6 +1138,7 @@ impl Sys5I3AdapterCarrierContract {
             transfers_authority,
             mints_authority_without_source,
             variant_facts,
+            owner_admission_budget,
             full_retained_contract_fingerprint,
             full_retained_contract_fingerprint_field_names,
         } = self;
@@ -1221,6 +1232,7 @@ impl Sys5I3AdapterCarrierContract {
             mints_authority_without_source: *mints_authority_without_source,
             public_api_or_wire_contract: false,
             variant: i3_adapter_wire_variant(variant_facts),
+            owner_admission_budget: owner_admission_budget.clone(),
             full_retained_contract_fingerprint: full_retained_contract_fingerprint.clone(),
             // The inventory's exact order and multiplicity are retained, but
             // its labels are one-way refs so static byte evidence cannot make
@@ -1646,6 +1658,7 @@ impl Sys5LocalProject {
             core_ref,
             origin_locus_template,
             target_owner_locus_template,
+            owner_admission_budget,
             declared_failure_row,
             effect_row,
             authority_requirement_rows,
@@ -1687,6 +1700,14 @@ impl Sys5LocalProject {
                 Sys5I3ProbeFacadeErrorKind::CarrierContractMismatch,
             ));
         }
+
+        let owner_admission_budget = i3_adapter_checked_owner_admission_budget(
+            &self.checked,
+            family,
+            &operation_id,
+            target_owner_locus_template.as_deref(),
+            owner_admission_budget,
+        )?;
 
         let variant_facts = i3_adapter_variant_facts(I3AdapterVariantProjectionInput {
             family,
@@ -1734,6 +1755,7 @@ impl Sys5LocalProject {
             transfers_authority,
             mints_authority_without_source,
             variant_facts,
+            owner_admission_budget,
             full_retained_contract_fingerprint: String::new(),
             full_retained_contract_fingerprint_field_names: Vec::new(),
         };
@@ -8527,6 +8549,52 @@ fn i3_adapter_expected_lifecycle_kind(family: I3AdapterCarrierFamily) -> Carrier
     }
 }
 
+fn i3_adapter_checked_owner_admission_budget(
+    checked: &CheckedSurfaceV0,
+    family: I3AdapterCarrierFamily,
+    operation_id: &str,
+    target_owner_locus_template: Option<&str>,
+    candidate: Option<OwnerAdmissionBudgetCondition>,
+) -> Result<Option<SnapshotOwnerAdmissionBudgetCondition>, Sys5I3ProbeFacadeError> {
+    let mismatch =
+        || Sys5I3ProbeFacadeError::new(Sys5I3ProbeFacadeErrorKind::CarrierContractMismatch);
+
+    let expected = match family {
+        I3AdapterCarrierFamily::OwnerRequest | I3AdapterCarrierFamily::OwnerReplyReceipt => {
+            let owner_core = checked
+                .evaluation(operation_id)
+                .and_then(|evaluation| evaluation.owner_rmw_core())
+                .ok_or_else(mismatch)?;
+            if target_owner_locus_template != Some(owner_core.owner_locus()) {
+                return Err(mismatch());
+            }
+            owner_core.owner_admission_budget()
+        }
+        _ => {
+            if candidate.is_some() {
+                return Err(mismatch());
+            }
+            return Ok(None);
+        }
+    };
+
+    match (candidate.as_ref(), expected) {
+        (None, None) => Ok(None),
+        (Some(candidate), Some(expected)) if candidate == expected => {
+            let snapshot = SnapshotOwnerAdmissionBudgetCondition::from_checked(expected);
+            let restored = snapshot
+                .clone()
+                .into_checked(expected.owner_locus().as_str())
+                .map_err(|_| mismatch())?;
+            if restored != *expected {
+                return Err(mismatch());
+            }
+            Ok(Some(snapshot))
+        }
+        _ => Err(mismatch()),
+    }
+}
+
 struct I3AdapterVariantProjectionInput<'a> {
     family: I3AdapterCarrierFamily,
     variant: I3AdapterCarrierStaticVariant,
@@ -9197,6 +9265,84 @@ fn i3_adapter_visit_owner_facts(
     visitor.push_text("target-owner-locus-template", target_owner_locus_template);
 }
 
+fn i3_adapter_visit_owner_admission_budget(
+    visitor: &mut I3AdapterFullRetainedContractFingerprintVisitor,
+    snapshot: &SnapshotOwnerAdmissionBudgetCondition,
+    expected_owner_locus: &str,
+) {
+    let condition = snapshot
+        .clone()
+        .into_checked(expected_owner_locus)
+        .expect("adapter contract stores a budget checked against its owner carrier");
+    let source_span = condition.source_span();
+    let source_range = source_span.byte_range();
+    let (start_line, start_column) = source_span.start_line_column();
+    let (end_line, end_column) = source_span.end_line_column();
+    let source_ref = condition.source_ref();
+    let source_start = u64::try_from(source_range.start)
+        .expect("finite owner-admission-budget source start fits u64");
+    let source_end =
+        u64::try_from(source_range.end).expect("finite owner-admission-budget source end fits u64");
+
+    visitor.push_text(
+        "owner-admission-budget-ticks",
+        &condition.budget_ticks().to_string(),
+    );
+    visitor.push_text(
+        "owner-admission-budget-owner-locus",
+        condition.owner_locus().as_str(),
+    );
+    visitor.push_text(
+        "owner-admission-budget-clock-domain",
+        condition.clock_domain().as_str(),
+    );
+    visitor.push_text(
+        "owner-admission-budget-source-span-file",
+        source_span.file(),
+    );
+    visitor.push_text(
+        "owner-admission-budget-source-span-start",
+        &source_start.to_string(),
+    );
+    visitor.push_text(
+        "owner-admission-budget-source-span-end",
+        &source_end.to_string(),
+    );
+    visitor.push_text(
+        "owner-admission-budget-source-span-start-line",
+        &start_line.to_string(),
+    );
+    visitor.push_text(
+        "owner-admission-budget-source-span-start-column",
+        &start_column.to_string(),
+    );
+    visitor.push_text(
+        "owner-admission-budget-source-span-end-line",
+        &end_line.to_string(),
+    );
+    visitor.push_text(
+        "owner-admission-budget-source-span-end-column",
+        &end_column.to_string(),
+    );
+    visitor.push_text("owner-admission-budget-source-ref-path", &source_ref.path);
+    visitor.push_text(
+        "owner-admission-budget-source-ref-start-line",
+        &source_ref.start_line.to_string(),
+    );
+    visitor.push_text(
+        "owner-admission-budget-source-ref-start-column",
+        &source_ref.start_column.to_string(),
+    );
+    visitor.push_text(
+        "owner-admission-budget-source-ref-end-line",
+        &source_ref.end_line.to_string(),
+    );
+    visitor.push_text(
+        "owner-admission-budget-source-ref-end-column",
+        &source_ref.end_column.to_string(),
+    );
+}
+
 fn i3_adapter_visit_designated_input_facts(
     visitor: &mut I3AdapterFullRetainedContractFingerprintVisitor,
     facts: &Sys5I3AdapterDesignatedInputFacts,
@@ -9252,6 +9398,7 @@ fn i3_adapter_full_retained_contract_fingerprint_visitor(
         transfers_authority,
         mints_authority_without_source,
         variant_facts,
+        owner_admission_budget,
         full_retained_contract_fingerprint: _,
         full_retained_contract_fingerprint_field_names: _,
     } = contract;
@@ -9311,6 +9458,21 @@ fn i3_adapter_full_retained_contract_fingerprint_visitor(
         *mints_authority_without_source,
     );
     visitor.push_bool("public-api-or-wire-contract", false);
+    match (owner_admission_budget, variant_facts) {
+        (
+            Some(condition),
+            Sys5I3AdapterCarrierVariantFacts::OwnerRequest(facts)
+            | Sys5I3AdapterCarrierVariantFacts::OwnerReplyReceipt(facts),
+        ) => i3_adapter_visit_owner_admission_budget(
+            &mut visitor,
+            condition,
+            &facts.target_owner_locus_template,
+        ),
+        (Some(_), _) => {
+            panic!("only owner carrier families may retain an owner-admission budget")
+        }
+        (None, _) => {}
+    }
     match variant_facts {
         Sys5I3AdapterCarrierVariantFacts::OwnerRequest(facts) => {
             i3_adapter_visit_owner_facts(&mut visitor, facts);
@@ -9803,6 +9965,7 @@ mod i3_adapter_carrier_contract_red_tests {
             core_ref,
             origin_locus_template,
             target_owner_locus_template,
+            owner_admission_budget,
             declared_failure_row,
             effect_row,
             authority_requirement_rows,
@@ -9825,6 +9988,7 @@ mod i3_adapter_carrier_contract_red_tests {
             core_ref,
             origin_locus_template,
             target_owner_locus_template,
+            owner_admission_budget,
             declared_failure_row,
             effect_row,
             occurrence_slots,
@@ -10019,6 +10183,7 @@ mod i3_adapter_carrier_contract_red_tests {
             transfers_authority,
             mints_authority_without_source,
             variant_facts,
+            owner_admission_budget,
             full_retained_contract_fingerprint,
             full_retained_contract_fingerprint_field_names,
         } = contract;
@@ -10047,6 +10212,7 @@ mod i3_adapter_carrier_contract_red_tests {
             checked_core_bound,
             transfers_authority,
             mints_authority_without_source,
+            owner_admission_budget,
             full_retained_contract_fingerprint,
             full_retained_contract_fingerprint_field_names,
         );

@@ -2,7 +2,7 @@
 id: spec/08-m7-checked-elaboration
 status: L1-fixed
 maturity: draft
-depends_on: [spec/03-static-semantics, spec/04-core-ir, theory/16-m7-checked-elaboration, adr/ADR-0022, adr/ADR-0025, adr/ADR-0029, adr/ADR-0031]
+depends_on: [spec/03-static-semantics, spec/04-core-ir, theory/16-m7-checked-elaboration, adr/ADR-0022, adr/ADR-0025, adr/ADR-0029, adr/ADR-0031, adr/ADR-0041, spec/16-i3-owner-admission-budget]
 summary: M6 sourceを唯一の入力とするM7 finite check/elaboration API、designated consume Core、provisional relation anchor locus、生成義務、residual、非実行境界。
 open_items: []
 ---
@@ -182,3 +182,12 @@ This specification does not claim arbitrary checker completeness/decidability,
 runtime admission behavior, transport/receipt semantics, M9 auth/verify
 semantics, C-static conformance, final diagnostics wording/IDs, or a public
 interface.
+
+## I3 checked owner-admission extension
+
+ADR-0041 / spec/16 extend the base failure-row rule only for explicit opted-in
+source. M7 consumes the retained M6 condition, adds typed `DeadlineExpired` to
+its generated row, requires declaration, and binds condition/source/clock to
+checked identity and both generated contracts. A padded failure name does not
+supply the condition. Existing sources and OBL-049 proof scope are unchanged;
+unsupported execution consumers reject rather than dropping this metadata.

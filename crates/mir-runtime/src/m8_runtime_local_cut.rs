@@ -1673,6 +1673,16 @@ pub struct M8LocalRuntime {
     designated_evaluation_test_rejection: Option<M8LocalDesignatedTraceContext>,
 }
 
+/// Contextual owner execution either carries M8's actual trace row or rejects
+/// before M8 has allocated one.  The latter is deliberately limited to the
+/// checked owner-admission condition: ordinary enqueue has no authority to
+/// bypass its future one-use gate.
+#[derive(Debug, Clone, PartialEq, Eq)]
+pub(crate) enum M8LocalOwnerExecutionFailure {
+    AdmissionRejected(M8EnqueueDiagnostics),
+    Observed(Box<M8LocalTraceObservation>),
+}
+
 impl M8LocalRuntime {
     pub fn from_admitted(instance: M8RuntimeInstance, seed: M8LocalRuntimeSeed) -> Self {
         let M8LocalRuntimeSeed {
@@ -1736,7 +1746,8 @@ impl M8LocalRuntime {
     /// Execute an owner request that has already crossed a checked endpoint.
     /// M8 allocates and returns the exact local trace rows carrying the
     /// supplied carrier context; callers never recover them by a global
-    /// latest-row lookup.
+    /// latest-row lookup. A checked owner-admission condition can instead
+    /// reject before an M8 occurrence or trace row exists.
     pub(crate) fn execute_owner_with_context(
         &mut self,
         owner_locus: &str,
@@ -1748,17 +1759,21 @@ impl M8LocalRuntime {
             M8LocalTraceObservation,
             M8LocalTraceObservation,
         ),
-        Box<M8LocalTraceObservation>,
+        M8LocalOwnerExecutionFailure,
     > {
         let request = self.request_for_owner_context(request, &context);
         let enqueue_start = self.owner.trace().entries().len();
         let enqueue = self.with_owner_snapshot(|owner| owner.try_enqueue(request));
         let enqueue_trace_rows = self.append_owner_trace_since(enqueue_start);
         let enqueue_rows = self.attach_context_to_rows(enqueue_trace_rows, context.clone());
-        if enqueue.is_err() {
-            return Err(Box::new(owner_context_row(
-                &enqueue_rows,
-                M8LocalTraceKind::OwnerOperationRejected,
+        if let Err(diagnostics) = enqueue {
+            if diagnostics.primary().kind()
+                == M8EnqueueDiagnosticKind::OwnerAdmissionAuthorizationRequired
+            {
+                return Err(M8LocalOwnerExecutionFailure::AdmissionRejected(diagnostics));
+            }
+            return Err(M8LocalOwnerExecutionFailure::Observed(Box::new(
+                owner_context_row(&enqueue_rows, M8LocalTraceKind::OwnerOperationRejected),
             )));
         }
         let enqueue_observation = owner_context_row(&enqueue_rows, M8LocalTraceKind::OwnerEnqueued);
@@ -1779,7 +1794,9 @@ impl M8LocalRuntime {
             .unwrap_or_else(|| owner_context_row(&serve_rows, M8LocalTraceKind::OwnerWrite));
         match served {
             Ok(outcome) => Ok((outcome, enqueue_observation, serve_observation)),
-            Err(_) => Err(Box::new(serve_observation)),
+            Err(_) => Err(M8LocalOwnerExecutionFailure::Observed(Box::new(
+                serve_observation,
+            ))),
         }
     }
 

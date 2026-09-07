@@ -2,7 +2,7 @@
 id: spec/13-sys4-in-process-generated-dispatch
 status: L1-fixed
 maturity: draft
-depends_on: [spec/05-runtime-semantics, spec/09-m8-deterministic-runtime, spec/10-m9-auth-verification, spec/12-sys3-per-locus-projection, arch/03-toolchain, arch/04-runtime-carriers, theory/13-evaluation-materialization, adr/ADR-0030]
+depends_on: [spec/05-runtime-semantics, spec/09-m8-deterministic-runtime, spec/10-m9-auth-verification, spec/12-sys3-per-locus-projection, arch/03-toolchain, arch/04-runtime-carriers, theory/13-evaluation-materialization, adr/ADR-0030, adr/ADR-0041, spec/16-i3-owner-admission-budget]
 summary: cut 22196f93で受理したSYS-4 generated-plan-only locus runtime、endpoint dispatch、typed faults、ST local cut、designated-only checked patchの有限仕様。
 open_items: []
 ---
@@ -206,3 +206,12 @@ format, real transport, deployment mapping, durable recovery, OW1 cut/patch,
 multi-owner OW, arbitrary relation DAG, arbitrary patch, general
 projection/dispatch/retry/save/refinement theorem, browser/View, final
 devtools, broad PHASE-I1, official I2 entry, or I2 exit.
+
+## I3 guarded owner and typed terminal failure
+
+ADR-0041 / spec/16 constrain annotated owner execution at the actual serve
+boundary, including local/SYS4 paths that directly bootstrap M8. Consume the
+exact sealed one-use gate permit or reject before mutation; a check only in
+CLI, SYS5 ingress or a different kernel path is insufficient. Declared expiry
+is a typed owner failure, not a successful receipt or a synthetic `fault_id`.
+All unannotated accepted dispatch/cut/patch behavior remains a regression floor.

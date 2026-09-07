@@ -2,7 +2,7 @@
 id: spec/10-m9-auth-verification
 status: L1-fixed
 maturity: draft
-depends_on: [spec/08-m7-checked-elaboration, spec/09-m8-deterministic-runtime, theory/18-m9-auth-verification, adr/ADR-0024]
+depends_on: [spec/08-m7-checked-elaboration, spec/09-m8-deterministic-runtime, theory/18-m9-auth-verification, adr/ADR-0024, adr/ADR-0041, spec/16-i3-owner-admission-budget]
 summary: M9 external residual resolution、Contract policy、verification outcome、invalidationのbounded contract。
 open_items: []
 ---
@@ -45,3 +45,11 @@ source/proof references.
 This is a finite contract only. It does not claim general M9 semantics,
 THM-004/005 proof, M10/SCN conformance, transport, final diagnostics catalog,
 or public API/ABI/wire behavior.
+
+## I3 initial owner-admission contract
+
+ADR-0041 / spec/16 select a new source-declared initial owner contract, not
+another M9 layer Attach/Remove operation or an implicit ContractUpdate.
+Checked identity and every private execution translation retain its condition.
+Initial M9 admission and current membership/capability/witness validation remain
+required; the clock and gate permit do not mint or replace that authority.
