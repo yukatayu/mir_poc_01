@@ -1,6 +1,6 @@
 # Plan 250 — Mirrorea I3 Distributed Foundation current execution roadmap
 
-最終更新: 2026-09-07 18:13 JST
+最終更新: 2026-09-07 18:52 JST
 
 ## 役割、authority、current control state
 
@@ -1059,9 +1059,19 @@ integration 61/61, feature library 289/289, private QUIC unit 2/2 and probe
 independently reviewed repair. I2 SYS-5 5/5, SYS-6 CLI 8/8 and M10 conformance
 67/67 regressions pass. No new model or Lean run is claimed.
 Report 2606 retains exact commands and scope. This is not I3-3 acceptance.
-The next direct consumer is the bounded actual-endpoint/fragments/truncation
-package, followed by contract-first provider/time work (still OPEN). All 20
-families and remaining ordering obligations remain required; no later milestone
+**Selected-adapter delivery checkpoint (2026-09-07):** An actually closed
+endpoint produces bounded unavailability with a retained zero-admission owner
+terminal. A complete generated frame split across two application writes
+round-trips once; strict body truncation followed by FIN rejects at the owner
+before decode/admission. These are not packet-fragmentation or full-row claims.
+The observer join now projects only validated owner records, rejecting malformed
+provenance without erasing genuine admitted evidence. Fresh probe integration
+32/32, full probe library 3/3, private QUIC 2/2, runtime integration 61/61,
+I2 5/5 + 8/8, focused Clippy and format/diff pass; independent review has no
+remaining P0/P1. The earlier feature library 289/289, M10 67/67 and model 3/3
+are prior evidence, not rerun here. All 20 families and remaining ordering
+obligations remain required. The next direct consumer is contract-first time,
+then provider, both still OPEN pending normative adoption. No later milestone
 or general harness framework is activated.
 
 ## I3-4 milestone contract — inactive until I3-3 closes and owner resumes
@@ -1399,8 +1409,8 @@ integration, or Typed-Effect platform collapse.
 
 ## Recommended next action
 
-Continue the bounded endpoint/fragments/truncation package from `cb050be2`,
-then resolve the provider/time contracts and complete the remaining I3-3
+After the bounded delivery checkpoint, resolve the time contract and then the
+provider contract, and complete the remaining I3-3
 failure/order inventory. Preserve all 20 families, applicable regressions and
 independent acceptance review. After I3-3 commit/push and remote parity, stop
 and report the accepted boundary. I3-4 remains inactive until explicit owner

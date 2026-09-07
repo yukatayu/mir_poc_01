@@ -10,6 +10,29 @@ use super::i3_process_localnet::{
     I3LocalnetChildSlot, I3LocalnetChildTerminalOutcome, I3LocalnetObserverSafeDeliveryRecord,
 };
 
+/// The three bounded actual adapter-delivery schedules. They select only one
+/// concrete local transport action after ordinary source has generated the
+/// request; they carry no carrier bytes, authority, retry, or expected result.
+#[doc(hidden)]
+#[derive(Clone, Copy, Debug, Eq, PartialEq, Serialize, Deserialize)]
+#[serde(rename_all = "snake_case")]
+pub enum I3LocalnetAdapterDeliveryProfile {
+    EndpointClosedBeforeConnect,
+    CompleteGeneratedRequestInTwoWrites,
+    TruncateGeneratedRequestAfterBodyPrefix,
+}
+
+/// Actual adapter failure observed by a bounded delivery schedule. This is
+/// distinct from peer binding or semantic admission; it never asserts owner
+/// mutation or a remote request record.
+#[doc(hidden)]
+#[derive(Clone, Copy, Debug, Eq, PartialEq, Serialize, Deserialize)]
+#[serde(rename_all = "snake_case")]
+pub enum I3LocalnetAdapterDeliveryFailure {
+    EndpointUnavailable,
+    FrameRejected,
+}
+
 /// The first finite delivery controls on the existing two-process route.
 /// They select a real adapter scheduling point; they do not select a route,
 /// operation, authority, or semantic result.

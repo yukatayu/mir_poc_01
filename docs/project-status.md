@@ -1,6 +1,6 @@
 # Project status
 
-最終更新: 2026-09-07 18:13 JST
+最終更新: 2026-09-07 18:49 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -102,16 +102,23 @@ The successor slice installs genuine M9 revocation before reconnect and rejects
 retained old ingress without owner mutation, keeping A pending. G1 completes
 once; registered-B ACK publication, actual tainted A input, one-shot ingress
 and terminal validation pass independent repair review (no remaining P0/P1).
-Fresh runtime integration 61/61, feature library 289/289, probe 29/29, private
-QUIC unit 2/2, focused Clippy and format/diff pass. Earlier probe lifecycle
-2/2 is prior evidence. I2/M10 regressions pass (5/5, 8/8, 67/67). Remaining
-authority/order and full failure-matrix validation stay open; I3-4 is inactive.
+Fresh runtime integration 61/61 (55.23s), I2 local 5/5 (0.05s), I2 CLI 8/8
+(11.60s), probe 32/32, private QUIC unit 2/2, focused Clippy and format/diff
+pass. Feature library 289/289, M10 67/67 and model 3/3 remain prior evidence;
+earlier probe lifecycle 2/2 is prior evidence. I2 regressions pass (5/5, 8/8).
+The delivery checkpoint executes actual endpoint-unavailability, complete
+two-application-write round-trip and strict truncation/FIN rejection before
+owner admission. Only validated owner records reach the joined rejection
+view; genuine presence and malformed absence are both tested. Full probe
+library 3/3 also passes. These do not close whole fault families or I3-3.
+Next is contract-first time, then provider; both remain OPEN pending adoption.
+Remaining authority/order and full matrix validation stay open; I3-4 is inactive.
 
 Detailed edge contracts: [`mirrorea_canon/architecture/07-browser-host-trust-boundaries.md`](../mirrorea_canon/architecture/07-browser-host-trust-boundaries.md).
 Cross-edge binding/freshness/revocation/redaction/resource rules: [`mirrorea_canon/architecture/08-browser-host-security-invariants.md`](../mirrorea_canon/architecture/08-browser-host-security-invariants.md).
 View は authoritative domain semantics を所有せず、presentation-local computation のみを許可する。View からの入力は typed command/effect request とし direct store を禁止する。I3-0 はprivate transport選定をclosedし、OPEN-032はこのbounded programだけresolvedした。I3-1とI3-2はbounded evidenceとしてclosedした。official I3 lifecycle は未entry、I3-3のみactive、I3-4/I3-5/I3-6/NEXT-0はdependency-gated inactive、I5 implementation は inactiveである。
 
-I3-2の最終bounded evidenceはlocalnet 12/12（repeat）、full probe 62/62、runtime default 29/29、seam 47/47、library 281/281、docs compile-fail 1/1（default/private）である。6/11 milestones acceptedであり、これは重み付き完成率ではない。FM-5 bounded executable ratchetで、public workflowや100% completionは主張しない。I3-3の回復作業は未受理であり、target/debug/incrementalのみを削除してroot free spaceは約18 GiBに回復した。runtime 51/51、probe cfg-testとruntime fullは再実行済みである。
+I3-2の最終bounded evidenceはlocalnet 12/12（repeat）、full probe 62/62、runtime default 29/29、seam 47/47、library 281/281、docs compile-fail 1/1（default/private）である。6/11 milestones acceptedであり、これは重み付き完成率ではない。FM-5 bounded executable ratchetで、public workflowや100% completionは主張しない。I3-3の回復作業は未受理であり、target/debug/incrementalのみを削除した。root free spaceは現在約15 GiB（過去のcleanup checkpointでは約18 GiB）であり、今回のfresh sliceではruntime 61/61、probe 32/32を確認した。
 
 The active bounded I3 programはinternal carrierとpublic wireを分離し、route/handshake/framing/
 disconnect/reconnect/ambiguous delivery/duplicate/reorder/stale authority/backpressure/

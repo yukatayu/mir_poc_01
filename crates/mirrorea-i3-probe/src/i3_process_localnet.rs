@@ -51,9 +51,10 @@ use sha2::{Digest, Sha256};
 use zeroize::Zeroizing;
 
 use super::i3_process_faults::{
-    I3LocalnetFaultAudit, I3LocalnetFaultAuditFalsifier, I3LocalnetFaultProfile,
-    I3LocalnetLateIngressAckReaderOutcome, I3LocalnetLateIngressEvidenceRejection,
-    I3LocalnetLateIngressFalsifier, I3LocalnetLateIngressLifecycleProvenance,
+    I3LocalnetAdapterDeliveryFailure, I3LocalnetAdapterDeliveryProfile, I3LocalnetFaultAudit,
+    I3LocalnetFaultAuditFalsifier, I3LocalnetFaultProfile, I3LocalnetLateIngressAckReaderOutcome,
+    I3LocalnetLateIngressEvidenceRejection, I3LocalnetLateIngressFalsifier,
+    I3LocalnetLateIngressLifecycleProvenance,
     I3LocalnetLateIngressNonregisteredAckInputDisposition, I3LocalnetLateIngressOwnerOutcome,
     I3LocalnetLateIngressParentPublication, I3LocalnetLateIngressProfile,
     I3LocalnetLateIngressRequesterOutcome, I3LocalnetReconnectOwnerOutcome,
@@ -80,6 +81,10 @@ const PRIVATE_LOCALNET_ALPN: &[u8] = b"mirrorea-i3-process-localnet-v1";
 // room to observe a post-kill exit without exceeding the caller's total main
 // deadline plus reaper allowance under suite load.
 const LIFECYCLE_REAP_RESERVE: Duration = Duration::from_millis(100);
+// This bounds only the selected unavailable-endpoint connect attempt. It is
+// deliberately below the enclosing child deadline and is not a semantic
+// lease, retry, or reaper timeout.
+const ENDPOINT_UNAVAILABLE_CONNECT_BUDGET: Duration = Duration::from_millis(250);
 
 /// The fixed, provisional deployment grouping for this finite profile.
 #[doc(hidden)]
@@ -171,8 +176,11 @@ pub struct I3LocalnetChildTerminalEvent {
     outcome: I3LocalnetChildTerminalOutcome,
     semantic_admission_count: usize,
     owner_mutation_count: usize,
+    owner_serve_count: Option<usize>,
     trusted_control_consumed: Option<bool>,
     unauthenticated_semantic_admission_count: Option<usize>,
+    tls_peer_verified: Option<bool>,
+    reciprocal_preface_verified: Option<bool>,
     observed_exit_status_code: Option<i32>,
     was_force_killed: bool,
 }
@@ -196,6 +204,13 @@ impl I3LocalnetChildTerminalEvent {
         self.owner_mutation_count
     }
 
+    /// Present only when the terminal carries an actual owner runtime
+    /// observation. In particular, requester and generic rejection records
+    /// cannot manufacture a zero owner-serve count.
+    pub const fn owner_serve_count(&self) -> Option<usize> {
+        self.owner_serve_count
+    }
+
     /// The child-reported one-shot control consumption when that terminal
     /// format carries the observation. This is never synthesized for a
     /// generic rejection or fault record.
@@ -207,6 +222,18 @@ impl I3LocalnetChildTerminalEvent {
     /// terminal format carries it. It is not a global aggregate.
     pub const fn unauthenticated_semantic_admission_count(&self) -> Option<usize> {
         self.unauthenticated_semantic_admission_count
+    }
+
+    /// Actual child-local TLS peer verification where the terminal format
+    /// records it. A generic rejection remains unknown.
+    pub const fn tls_peer_verified(&self) -> Option<bool> {
+        self.tls_peer_verified
+    }
+
+    /// Actual child-local reciprocal preface verification where the terminal
+    /// format records it. A generic rejection remains unknown.
+    pub const fn reciprocal_preface_verified(&self) -> Option<bool> {
+        self.reciprocal_preface_verified
     }
 
     /// The supervisor-observed OS exit code, not a semantic outcome.
@@ -276,6 +303,10 @@ pub struct I3ProcessLocalnetRequest {
     retry_audit_falsifier: Option<I3LocalnetRetryAuditFalsifier>,
     late_ingress_profile: Option<I3LocalnetLateIngressProfile>,
     late_ingress_falsifier: Option<I3LocalnetLateIngressFalsifier>,
+    // Selects only a concrete bounded adapter action after source generation.
+    // No endpoint, carrier, authority, or expected result comes from this
+    // control value.
+    adapter_delivery_profile: Option<I3LocalnetAdapterDeliveryProfile>,
 }
 
 impl I3ProcessLocalnetRequest {
@@ -292,6 +323,7 @@ impl I3ProcessLocalnetRequest {
             retry_audit_falsifier: None,
             late_ingress_profile: None,
             late_ingress_falsifier: None,
+            adapter_delivery_profile: None,
         }
     }
 
@@ -372,6 +404,16 @@ impl I3ProcessLocalnetRequest {
         falsifier: I3LocalnetLateIngressFalsifier,
     ) -> Self {
         self.late_ingress_falsifier = Some(falsifier);
+        self
+    }
+
+    /// Select one bounded actual adapter-delivery action. The profile does
+    /// not accept source, carrier, authority, retry, or expected-result data.
+    pub fn with_adapter_delivery_profile(
+        mut self,
+        profile: I3LocalnetAdapterDeliveryProfile,
+    ) -> Self {
+        self.adapter_delivery_profile = Some(profile);
         self
     }
 }
@@ -483,6 +525,31 @@ pub enum I3LocalnetDeliveryPhase {
     ReplyReceive,
 }
 
+/// Runtime-produced successful stream-write observation for the selected
+/// complete-frame control. It has no bytes, frame length, packet, or read
+/// boundary information. Normal generated sends intentionally carry none.
+#[doc(hidden)]
+#[derive(Clone, Copy, Debug, Eq, PartialEq)]
+pub struct I3LocalnetGeneratedFrameWriteObservation {
+    application_write_count: u8,
+    frame_prefix_split_across_writes: bool,
+    complete_frame_written: bool,
+}
+
+impl I3LocalnetGeneratedFrameWriteObservation {
+    pub const fn application_write_count(&self) -> u8 {
+        self.application_write_count
+    }
+
+    pub const fn frame_prefix_split_across_writes(&self) -> bool {
+        self.frame_prefix_split_across_writes
+    }
+
+    pub const fn complete_frame_written(&self) -> bool {
+        self.complete_frame_written
+    }
+}
+
 /// One child-reported delivery record.  Its checked provenance is extracted
 /// by the runtime adapter from the exact encoded/decoded carrier bytes; the
 /// supervisor merely equality-joins it to the generated contract.
@@ -500,6 +567,7 @@ pub struct I3LocalnetObserverSafeDeliveryRecord {
     linked_request_identity_ref: Option<String>,
     network_occurrence_ref: String,
     candidate_commitment_ref: String,
+    generated_frame_write_observation: Option<I3LocalnetGeneratedFrameWriteObservation>,
 }
 
 impl I3LocalnetObserverSafeDeliveryRecord {
@@ -535,6 +603,14 @@ impl I3LocalnetObserverSafeDeliveryRecord {
     }
     pub fn candidate_commitment_ref(&self) -> &str {
         &self.candidate_commitment_ref
+    }
+
+    /// Present only when the adapter itself completed the selected two-write
+    /// generated frame send. It is not a probe profile echo.
+    pub fn generated_frame_write_observation(
+        &self,
+    ) -> Option<&I3LocalnetGeneratedFrameWriteObservation> {
+        self.generated_frame_write_observation.as_ref()
     }
 }
 
@@ -1028,6 +1104,8 @@ pub struct I3LocalnetRejectionAudit {
     reaper_deadline_enforced: bool,
     lifecycle_rejection_cause: Option<I3LocalnetLifecycleRejectionCause>,
     adapter_rejection_kind: Option<I3LocalnetAdapterRejectionKind>,
+    adapter_delivery_failure: Option<I3LocalnetAdapterDeliveryFailure>,
+    owner_request_delivery_record: Option<I3LocalnetObserverSafeDeliveryRecord>,
     wrong_peer_ca_validated_leaf_ref: Option<String>,
     expected_peer_spki_ref: Option<String>,
     actual_peer_spki_ref: Option<String>,
@@ -1109,6 +1187,18 @@ impl I3LocalnetRejectionAudit {
     }
     pub const fn adapter_rejection_kind(&self) -> Option<I3LocalnetAdapterRejectionKind> {
         self.adapter_rejection_kind
+    }
+    /// Concrete local adapter failure observed by an actual selected delivery
+    /// terminal. It carries no conclusion about remote admission.
+    pub const fn adapter_delivery_failure(&self) -> Option<I3LocalnetAdapterDeliveryFailure> {
+        self.adapter_delivery_failure
+    }
+    /// An admitted owner request-receive record only when a fault or retry
+    /// audit has already validated that B evidence against the retained
+    /// requester contract. Other terminals, including malformed or
+    /// no-admission observations, deliberately expose none.
+    pub fn owner_request_delivery_record(&self) -> Option<&I3LocalnetObserverSafeDeliveryRecord> {
+        self.owner_request_delivery_record.as_ref()
     }
     pub fn wrong_peer_ca_validated_leaf_ref(&self) -> Option<&str> {
         self.wrong_peer_ca_validated_leaf_ref.as_deref()
@@ -1269,6 +1359,7 @@ struct LocalnetRejectionEvidence {
     deadline_enforced: bool,
     reaper_deadline_enforced: bool,
     adapter_rejection_kind: Option<I3LocalnetAdapterRejectionKind>,
+    adapter_delivery_failure: Option<I3LocalnetAdapterDeliveryFailure>,
     wrong_peer_ca_validated_leaf_ref: Option<String>,
     expected_peer_spki_ref: Option<String>,
     actual_peer_spki_ref: Option<String>,
@@ -1344,6 +1435,23 @@ impl LocalnetFailure {
             evidence: LocalnetRejectionEvidence::default(),
             lifecycle_rejection_cause: None,
             fault_profile: Some(profile),
+            retry_audit: None,
+            late_ingress_audit: None,
+            late_ingress_evidence_rejection: None,
+        }
+    }
+
+    fn adapter_delivery_failure(failure: I3LocalnetAdapterDeliveryFailure) -> Self {
+        Self {
+            kind: I3LocalnetRunErrorKind::DeliveryUnavailable,
+            stage: I3LocalnetFailureStage::BeforeSemanticAdmission,
+            child_rejection: None,
+            evidence: LocalnetRejectionEvidence {
+                adapter_delivery_failure: Some(failure),
+                ..LocalnetRejectionEvidence::default()
+            },
+            lifecycle_rejection_cause: None,
+            fault_profile: None,
             retry_audit: None,
             late_ingress_audit: None,
             late_ingress_evidence_rejection: None,
@@ -1426,6 +1534,7 @@ impl LocalnetFailure {
             Duration::ZERO,
             None,
             None,
+            None,
         )
     }
 
@@ -1444,6 +1553,7 @@ impl LocalnetFailure {
         captured_zero_exit_reap_observation_elapsed: Duration,
         fault_audit: Option<I3LocalnetFaultAudit>,
         retry_audit: Option<I3LocalnetRetryAudit>,
+        owner_request_delivery_record: Option<I3LocalnetObserverSafeDeliveryRecord>,
     ) -> I3LocalnetRunError {
         let aggregate_semantic_admission_count = child_terminal_events
             .iter()
@@ -1553,6 +1663,8 @@ impl LocalnetFailure {
                     .evidence
                     .adapter_rejection_kind
                     .or(child_evidence.adapter_rejection_kind),
+                adapter_delivery_failure: self.evidence.adapter_delivery_failure,
+                owner_request_delivery_record,
                 wrong_peer_ca_validated_leaf_ref: self
                     .evidence
                     .wrong_peer_ca_validated_leaf_ref
@@ -1637,6 +1749,30 @@ impl LocalnetFailure {
             self.stage = I3LocalnetFailureStage::AfterRemoteAdmission;
         }
         let retry_audit = self.retry_audit.take();
+        // This record is an optional projection of an already validated
+        // audit join. It must never be re-read directly from a raw B terminal:
+        // malformed owner evidence remains rejected rather than becoming an
+        // apparently observer-safe delivery record.
+        let owner_request_delivery_record = fault_audit
+            .as_ref()
+            .and_then(|audit| match audit.remote_admission() {
+                Some(I3LocalnetRemoteAdmissionEvidence::Admitted {
+                    request_receive, ..
+                }) => Some(request_receive.as_ref()),
+                Some(I3LocalnetRemoteAdmissionEvidence::NoAdmission { .. }) | None => None,
+            })
+            .or_else(|| {
+                retry_audit
+                    .as_ref()
+                    .and_then(|audit| match audit.initial_owner_admission() {
+                        Some(I3LocalnetRemoteAdmissionEvidence::Admitted {
+                            request_receive,
+                            ..
+                        }) => Some(request_receive.as_ref()),
+                        Some(I3LocalnetRemoteAdmissionEvidence::NoAdmission { .. }) | None => None,
+                    })
+            })
+            .cloned();
         self.into_error_with_terminal_events(
             all_children_reaped,
             supervisor.terminal_events(),
@@ -1650,6 +1786,7 @@ impl LocalnetFailure {
             supervisor.captured_zero_exit_reap_observation_elapsed(),
             fault_audit,
             retry_audit,
+            owner_request_delivery_record,
         )
     }
 }
@@ -1729,6 +1866,7 @@ struct PrivateChildControl {
     retry_audit_falsifier: Option<I3LocalnetRetryAuditFalsifier>,
     late_ingress_profile: Option<I3LocalnetLateIngressProfile>,
     late_ingress_falsifier: Option<I3LocalnetLateIngressFalsifier>,
+    adapter_delivery_profile: Option<I3LocalnetAdapterDeliveryProfile>,
     // A negative-only candidate-shaped ACK frame for A's actual stdout route.
     // It cannot be decoded to an installed receipt or offered to the
     // registered-B reader; the parent may decode it only as tainted input.
@@ -1839,6 +1977,28 @@ enum PrivateChildEvent {
         semantic_admission_count: usize,
         owner_mutation_count: usize,
         retry_evidence: Option<PrivateChildRetryEvidence>,
+    },
+    /// Exact child terminal for the selected adapter-delivery controls. It
+    /// is still consumed by the existing supervisor/reap path, but retains
+    /// the actual transport shape instead of borrowing the older fault
+    /// profile's looser terminal contract.
+    AdapterDeliveryFault {
+        slot: I3LocalnetChildSlot,
+        exec_confirmed: bool,
+        assigned_loci: Vec<String>,
+        trusted_control_consumed: bool,
+        tainted_image_consumed: bool,
+        tls_peer_verified: bool,
+        reciprocal_preface_verified: bool,
+        reliable_bidi_stream_count: usize,
+        quic_datagrams_enabled: bool,
+        request_identity_ref: Option<String>,
+        requester_pending_request_is_retained: Option<bool>,
+        adapter_delivery_failure: Option<I3LocalnetAdapterDeliveryFailure>,
+        remote_admission: Option<PrivateRemoteAdmissionEvidence>,
+        semantic_admission_count: usize,
+        unauthenticated_semantic_admission_count: usize,
+        owner_mutation_count: usize,
     },
     /// Dedicated terminal record for the bounded late-ingress schedules. It
     /// keeps the held-frame evidence distinct from ordinary completion and
@@ -2079,6 +2239,15 @@ struct PrivateDeliveryEvidence {
     edge_ref: String,
     network_occurrence_ref: String,
     candidate_commitment_ref: String,
+    generated_frame_write_observation: Option<PrivateGeneratedFrameWriteObservation>,
+}
+
+#[derive(Clone, Copy, Debug, Serialize, Deserialize)]
+#[serde(deny_unknown_fields)]
+struct PrivateGeneratedFrameWriteObservation {
+    application_write_count: u8,
+    frame_prefix_split_across_writes: bool,
+    complete_frame_written: bool,
 }
 
 impl From<mir_runtime::sys5_i3_private_quic::Sys5I3PrivateQuicDeliveryEvidence>
@@ -2096,6 +2265,14 @@ impl From<mir_runtime::sys5_i3_private_quic::Sys5I3PrivateQuicDeliveryEvidence>
             edge_ref: value.edge_ref().to_string(),
             network_occurrence_ref: value.network_occurrence_ref().to_string(),
             candidate_commitment_ref: value.candidate_commitment_ref().to_string(),
+            generated_frame_write_observation: value.generated_frame_write_observation().map(
+                |observation| PrivateGeneratedFrameWriteObservation {
+                    application_write_count: observation.application_write_count(),
+                    frame_prefix_split_across_writes: observation
+                        .frame_prefix_split_across_writes(),
+                    complete_frame_written: observation.complete_frame_written(),
+                },
+            ),
         }
     }
 }
@@ -2129,6 +2306,7 @@ impl PrivateChildEvent {
             Self::Completed { .. }
                 | Self::Rejected { .. }
                 | Self::HandledDeliveryFault { .. }
+                | Self::AdapterDeliveryFault { .. }
                 | Self::LateIngress { .. }
         )
     }
@@ -2150,7 +2328,10 @@ impl PrivateChildEvent {
                 observer_evidence, ..
             } => observer_evidence.retry_evidence.as_ref(),
             Self::HandledDeliveryFault { retry_evidence, .. } => retry_evidence.as_ref(),
-            Self::Ready { .. } | Self::Rejected { .. } | Self::LateIngress { .. } => None,
+            Self::Ready { .. }
+            | Self::Rejected { .. }
+            | Self::AdapterDeliveryFault { .. }
+            | Self::LateIngress { .. } => None,
         }
     }
 
@@ -2165,6 +2346,10 @@ impl PrivateChildEvent {
                 ..
             }
             | Self::HandledDeliveryFault {
+                semantic_admission_count,
+                ..
+            }
+            | Self::AdapterDeliveryFault {
                 semantic_admission_count,
                 ..
             }
@@ -2183,17 +2368,27 @@ impl PrivateChildEvent {
                 trusted_control_consumed,
                 unauthenticated_semantic_admission_count,
                 semantic_admission_count,
+                served_count,
                 write_count,
+                tls_peer_verified,
+                reciprocal_preface_verified,
                 ..
             } => Some(I3LocalnetChildTerminalEvent {
                 slot: Some(*slot),
                 outcome: I3LocalnetChildTerminalOutcome::Completed,
                 semantic_admission_count: *semantic_admission_count,
                 owner_mutation_count: *write_count,
+                // `served_count` is meaningful as an owner-runtime count
+                // only for B. A completed requester report must not turn its
+                // own zero into a claim about B's owner work.
+                owner_serve_count: (*slot == I3LocalnetChildSlot::ProcessB)
+                    .then_some(*served_count),
                 trusted_control_consumed: Some(*trusted_control_consumed),
                 unauthenticated_semantic_admission_count: Some(
                     *unauthenticated_semantic_admission_count,
                 ),
+                tls_peer_verified: Some(*tls_peer_verified),
+                reciprocal_preface_verified: Some(*reciprocal_preface_verified),
                 observed_exit_status_code: None,
                 was_force_killed: false,
             }),
@@ -2206,22 +2401,71 @@ impl PrivateChildEvent {
                 outcome: I3LocalnetChildTerminalOutcome::Rejected,
                 semantic_admission_count: *semantic_admission_count,
                 owner_mutation_count: *owner_mutation_count,
+                owner_serve_count: None,
                 trusted_control_consumed: None,
                 unauthenticated_semantic_admission_count: None,
+                tls_peer_verified: None,
+                reciprocal_preface_verified: None,
                 observed_exit_status_code: None,
                 was_force_killed: false,
             }),
             Self::HandledDeliveryFault {
+                slot,
                 semantic_admission_count,
                 owner_mutation_count,
+                remote_admission,
                 ..
             } => Some(I3LocalnetChildTerminalEvent {
-                slot: None,
+                slot: Some(*slot),
                 outcome: I3LocalnetChildTerminalOutcome::HandledDeliveryFault,
                 semantic_admission_count: *semantic_admission_count,
                 owner_mutation_count: *owner_mutation_count,
+                owner_serve_count: match remote_admission {
+                    Some(PrivateRemoteAdmissionEvidence::NoAdmission {
+                        owner_serve_count, ..
+                    })
+                    | Some(PrivateRemoteAdmissionEvidence::Admitted {
+                        owner_serve_count, ..
+                    }) => Some(*owner_serve_count),
+                    None => None,
+                },
                 trusted_control_consumed: None,
                 unauthenticated_semantic_admission_count: None,
+                tls_peer_verified: None,
+                reciprocal_preface_verified: None,
+                observed_exit_status_code: None,
+                was_force_killed: false,
+            }),
+            Self::AdapterDeliveryFault {
+                slot,
+                trusted_control_consumed,
+                tls_peer_verified,
+                reciprocal_preface_verified,
+                remote_admission,
+                semantic_admission_count,
+                unauthenticated_semantic_admission_count,
+                owner_mutation_count,
+                ..
+            } => Some(I3LocalnetChildTerminalEvent {
+                slot: Some(*slot),
+                outcome: I3LocalnetChildTerminalOutcome::HandledDeliveryFault,
+                semantic_admission_count: *semantic_admission_count,
+                owner_mutation_count: *owner_mutation_count,
+                owner_serve_count: match remote_admission {
+                    Some(PrivateRemoteAdmissionEvidence::NoAdmission {
+                        owner_serve_count, ..
+                    })
+                    | Some(PrivateRemoteAdmissionEvidence::Admitted {
+                        owner_serve_count, ..
+                    }) => Some(*owner_serve_count),
+                    None => None,
+                },
+                trusted_control_consumed: Some(*trusted_control_consumed),
+                unauthenticated_semantic_admission_count: Some(
+                    *unauthenticated_semantic_admission_count,
+                ),
+                tls_peer_verified: Some(*tls_peer_verified),
+                reciprocal_preface_verified: Some(*reciprocal_preface_verified),
                 observed_exit_status_code: None,
                 was_force_killed: false,
             }),
@@ -2231,17 +2475,27 @@ impl PrivateChildEvent {
                 trusted_control_consumed,
                 unauthenticated_semantic_admission_count,
                 semantic_admission_count,
+                served_count,
                 write_count,
+                tls_peer_verified,
+                reciprocal_preface_verified,
                 ..
             } => Some(I3LocalnetChildTerminalEvent {
                 slot: Some(*slot),
                 outcome: terminal_outcome.public(),
                 semantic_admission_count: *semantic_admission_count,
                 owner_mutation_count: *write_count,
+                // As above, preserve an actual owner-runtime observation
+                // only from the owner slot; requester late-ingress records
+                // cannot manufacture a zero owner-serve conclusion.
+                owner_serve_count: (*slot == I3LocalnetChildSlot::ProcessB)
+                    .then_some(*served_count),
                 trusted_control_consumed: Some(*trusted_control_consumed),
                 unauthenticated_semantic_admission_count: Some(
                     *unauthenticated_semantic_admission_count,
                 ),
+                tls_peer_verified: Some(*tls_peer_verified),
+                reciprocal_preface_verified: Some(*reciprocal_preface_verified),
                 observed_exit_status_code: None,
                 was_force_killed: false,
             }),
@@ -2468,6 +2722,7 @@ pub fn run_i3_process_localnet(
     let deadline = request.deadline;
     let late_ingress_profile = request.late_ingress_profile;
     let late_ingress_falsifier = request.late_ingress_falsifier;
+    let adapter_delivery_profile = request.adapter_delivery_profile;
     if deadline.is_zero() {
         return Err(LocalnetFailure::lifecycle().into_error(true));
     }
@@ -2658,7 +2913,8 @@ pub fn run_i3_process_localnet(
             || request.retry_falsifier.is_some()
             || request.retry_audit_falsifier.is_some()
             || late_ingress_profile.is_some()
-            || late_ingress_falsifier.is_some())
+            || late_ingress_falsifier.is_some()
+            || adapter_delivery_profile.is_some())
     {
         return Err(LocalnetFailure::lifecycle().into_error(true));
     }
@@ -2689,6 +2945,17 @@ pub fn run_i3_process_localnet(
             || request.retry_profile.is_some()
             || request.retry_falsifier.is_some()
             || request.retry_audit_falsifier.is_some())
+    {
+        return Err(LocalnetFailure::lifecycle().into_error(true));
+    }
+    if adapter_delivery_profile.is_some()
+        && (request.fault_profile.is_some()
+            || request.fault_audit_falsifier.is_some()
+            || request.retry_profile.is_some()
+            || request.retry_falsifier.is_some()
+            || request.retry_audit_falsifier.is_some()
+            || late_ingress_profile.is_some()
+            || late_ingress_falsifier.is_some())
     {
         return Err(LocalnetFailure::lifecycle().into_error(true));
     }
@@ -2774,6 +3041,7 @@ pub fn run_i3_process_localnet(
                 retry_audit_falsifier,
                 late_ingress_profile,
                 late_ingress_falsifier,
+                adapter_delivery_profile,
                 requester_stdout_tainted_ack_candidate,
                 &lineage,
             )
@@ -2832,6 +3100,7 @@ fn run_swapped_pair_falsifier(
         retry_audit_falsifier: None,
         late_ingress_profile: None,
         late_ingress_falsifier: None,
+        adapter_delivery_profile: None,
         tainted_owner_lifecycle_ack_candidate: None,
         timeout_millis: deadline.as_millis().try_into().unwrap_or(u64::MAX),
     };
@@ -2857,6 +3126,7 @@ fn run_swapped_pair_falsifier(
         retry_audit_falsifier: None,
         late_ingress_profile: None,
         late_ingress_falsifier: None,
+        adapter_delivery_profile: None,
         tainted_owner_lifecycle_ack_candidate: None,
         timeout_millis: deadline.as_millis().try_into().unwrap_or(u64::MAX),
     };
@@ -2958,6 +3228,126 @@ fn is_profile_shaped_normal_delivery_fault_pair(
     }
 }
 
+fn adapter_delivery_failure_from_actual_terminals(
+    profile: I3LocalnetAdapterDeliveryProfile,
+    requester: &PrivateChildEvent,
+    owner: &PrivateChildEvent,
+) -> Option<I3LocalnetAdapterDeliveryFailure> {
+    match profile {
+        I3LocalnetAdapterDeliveryProfile::EndpointClosedBeforeConnect
+            if exact_adapter_delivery_terminal(
+                requester,
+                I3LocalnetChildSlot::ProcessA,
+                false,
+                0,
+                true,
+                Some(I3LocalnetAdapterDeliveryFailure::EndpointUnavailable),
+                false,
+            ) && exact_adapter_delivery_terminal(
+                owner,
+                I3LocalnetChildSlot::ProcessB,
+                false,
+                0,
+                false,
+                None,
+                true,
+            ) =>
+        {
+            Some(I3LocalnetAdapterDeliveryFailure::EndpointUnavailable)
+        }
+        I3LocalnetAdapterDeliveryProfile::TruncateGeneratedRequestAfterBodyPrefix
+            if exact_adapter_delivery_terminal(
+                requester,
+                I3LocalnetChildSlot::ProcessA,
+                true,
+                1,
+                true,
+                Some(I3LocalnetAdapterDeliveryFailure::FrameRejected),
+                false,
+            ) && exact_adapter_delivery_terminal(
+                owner,
+                I3LocalnetChildSlot::ProcessB,
+                true,
+                1,
+                false,
+                Some(I3LocalnetAdapterDeliveryFailure::FrameRejected),
+                true,
+            ) =>
+        {
+            Some(I3LocalnetAdapterDeliveryFailure::FrameRejected)
+        }
+        I3LocalnetAdapterDeliveryProfile::CompleteGeneratedRequestInTwoWrites => None,
+        _ => None,
+    }
+}
+
+fn exact_adapter_delivery_terminal(
+    event: &PrivateChildEvent,
+    expected_slot: I3LocalnetChildSlot,
+    expected_transport_verified: bool,
+    expected_stream_count: usize,
+    requires_requester_pending: bool,
+    expected_failure: Option<I3LocalnetAdapterDeliveryFailure>,
+    requires_owner_no_admission: bool,
+) -> bool {
+    let PrivateChildEvent::AdapterDeliveryFault {
+        slot,
+        exec_confirmed,
+        assigned_loci,
+        trusted_control_consumed,
+        tainted_image_consumed,
+        tls_peer_verified,
+        reciprocal_preface_verified,
+        reliable_bidi_stream_count,
+        quic_datagrams_enabled,
+        request_identity_ref,
+        requester_pending_request_is_retained,
+        adapter_delivery_failure,
+        remote_admission,
+        semantic_admission_count,
+        unauthenticated_semantic_admission_count,
+        owner_mutation_count,
+    } = event
+    else {
+        return false;
+    };
+    let request_shape = if requires_requester_pending {
+        request_identity_ref
+            .as_deref()
+            .is_some_and(|reference| !reference.is_empty())
+            && *requester_pending_request_is_retained == Some(true)
+            && remote_admission.is_none()
+    } else {
+        request_identity_ref.is_none() && requester_pending_request_is_retained.is_none()
+    };
+    let owner_no_admission = if requires_owner_no_admission {
+        matches!(
+            remote_admission,
+            Some(PrivateRemoteAdmissionEvidence::NoAdmission {
+                owner_serve_count: 0,
+                owner_mutation_count: 0,
+            })
+        )
+    } else {
+        remote_admission.is_none()
+    };
+    *slot == expected_slot
+        && *exec_confirmed
+        && *assigned_loci == expected_slot.assigned_loci().map(str::to_owned)
+        && *trusted_control_consumed
+        && *tainted_image_consumed
+        && *tls_peer_verified == expected_transport_verified
+        && *reciprocal_preface_verified == expected_transport_verified
+        && *reliable_bidi_stream_count == expected_stream_count
+        && !*quic_datagrams_enabled
+        && request_shape
+        && *adapter_delivery_failure == expected_failure
+        && owner_no_admission
+        && *semantic_admission_count == 0
+        && *unauthenticated_semantic_admission_count == 0
+        && *owner_mutation_count == 0
+}
+
 fn unexpected_owner_terminal_failure(owner_terminal: PrivateChildEvent) -> LocalnetFailure {
     // This phase is sourced only from the retained B terminal.  In
     // particular, a selected post-admission profile cannot establish remote
@@ -3012,6 +3402,7 @@ fn run_positive_or_peer_falsifier(
     retry_audit_falsifier: Option<I3LocalnetRetryAuditFalsifier>,
     late_ingress_profile: Option<I3LocalnetLateIngressProfile>,
     late_ingress_falsifier: Option<I3LocalnetLateIngressFalsifier>,
+    adapter_delivery_profile: Option<I3LocalnetAdapterDeliveryProfile>,
     requester_stdout_tainted_ack_candidate: Option<Vec<u8>>,
     lineage: &SupervisorLineageEvidence,
 ) -> Result<I3ProcessLocalnetRun, LocalnetFailure> {
@@ -3051,6 +3442,7 @@ fn run_positive_or_peer_falsifier(
         retry_audit_falsifier,
         late_ingress_profile,
         late_ingress_falsifier,
+        adapter_delivery_profile,
         tainted_owner_lifecycle_ack_candidate: None,
         timeout_millis: deadline.as_millis().try_into().unwrap_or(u64::MAX),
     };
@@ -3147,6 +3539,7 @@ fn run_positive_or_peer_falsifier(
         retry_audit_falsifier,
         late_ingress_profile,
         late_ingress_falsifier,
+        adapter_delivery_profile,
         tainted_owner_lifecycle_ack_candidate: requester_stdout_tainted_ack_candidate,
         timeout_millis: deadline.as_millis().try_into().unwrap_or(u64::MAX),
     };
@@ -3180,6 +3573,27 @@ fn run_positive_or_peer_falsifier(
             );
         }
     };
+    if let Some(
+        profile @ (I3LocalnetAdapterDeliveryProfile::EndpointClosedBeforeConnect
+        | I3LocalnetAdapterDeliveryProfile::TruncateGeneratedRequestAfterBodyPrefix),
+    ) = adapter_delivery_profile
+    {
+        let owner_event = b_event.as_ref().ok_or_else(|| {
+            LocalnetFailure::lifecycle_evidence_rejected().after_observed_owner_runtime_start()
+        })?;
+        let failure_kind =
+            adapter_delivery_failure_from_actual_terminals(profile, &a_event, owner_event)
+                .ok_or_else(|| {
+                    LocalnetFailure::lifecycle_evidence_rejected()
+                        .after_observed_owner_runtime_start()
+                })?;
+        let mut failure = LocalnetFailure::adapter_delivery_failure(failure_kind)
+            .after_observed_owner_runtime_start();
+        // The exact requester terminal checks the runtime's pending count;
+        // retaining this fact here does not infer it from the selected profile.
+        failure.evidence.requester_pending_request_is_retained = true;
+        return Err(failure);
+    }
     if retry_falsifier == Some(I3LocalnetRetryFalsifier::RetryOnInitialVerifiedSession) {
         if let PrivateChildEvent::Rejected {
             rejection: PrivateChildRejection::Lifecycle,
@@ -3542,6 +3956,21 @@ fn run_positive_or_peer_falsifier(
             _ => return Err(LocalnetFailure::lifecycle()),
         },
     };
+    let request_write_observation = a
+        .observer_evidence
+        .request_sent
+        .as_ref()
+        .and_then(|delivery| delivery.generated_frame_write_observation.as_ref());
+    match adapter_delivery_profile {
+        Some(I3LocalnetAdapterDeliveryProfile::CompleteGeneratedRequestInTwoWrites)
+            if request_write_observation.is_some_and(|observation| {
+                observation.application_write_count == 2
+                    && observation.frame_prefix_split_across_writes
+                    && observation.complete_frame_written
+            }) => {}
+        None if request_write_observation.is_none() => {}
+        _ => return Err(LocalnetFailure::lifecycle()),
+    }
     if a.generated_request_count != 1
         || a.receipt_count != 1
         || b.served_count != 1
@@ -4888,6 +5317,12 @@ fn joined_observer_evidence(
         || requester.observer_evidence.local_store_ref.is_empty()
         || owner.observer_evidence.local_store_ref.is_empty()
         || requester.observer_evidence.local_store_ref == owner.observer_evidence.local_store_ref
+        || !valid_generated_frame_write_observation(
+            request_sent.generated_frame_write_observation.as_ref(),
+        )
+        || request_received.generated_frame_write_observation.is_some()
+        || reply_sent.generated_frame_write_observation.is_some()
+        || reply_received.generated_frame_write_observation.is_some()
     {
         return None;
     }
@@ -4990,6 +5425,16 @@ fn joined_observer_evidence(
     })
 }
 
+fn valid_generated_frame_write_observation(
+    observation: Option<&PrivateGeneratedFrameWriteObservation>,
+) -> bool {
+    observation.is_none_or(|observation| {
+        observation.application_write_count == 2
+            && observation.frame_prefix_split_across_writes
+            && observation.complete_frame_written
+    })
+}
+
 fn delivery_record(
     phase: I3LocalnetDeliveryPhase,
     evidence: &PrivateDeliveryEvidence,
@@ -5006,6 +5451,13 @@ fn delivery_record(
         linked_request_identity_ref: evidence.linked_request_identity_ref.clone(),
         network_occurrence_ref: evidence.network_occurrence_ref.clone(),
         candidate_commitment_ref: evidence.candidate_commitment_ref.clone(),
+        generated_frame_write_observation: evidence.generated_frame_write_observation.map(
+            |observation| I3LocalnetGeneratedFrameWriteObservation {
+                application_write_count: observation.application_write_count,
+                frame_prefix_split_across_writes: observation.frame_prefix_split_across_writes,
+                complete_frame_written: observation.complete_frame_written,
+            },
+        ),
     }
 }
 
@@ -5984,8 +6436,49 @@ async fn run_server_child(
     let (server_config, _transport_evidence) = server_config(&control)?;
     let endpoint =
         Endpoint::server(server_config, SocketAddr::from(([127, 0, 0, 1], 0))).map_err(|_| ())?;
+    let endpoint_address = endpoint.local_addr().map_err(|_| ())?.to_string();
+    if control.adapter_delivery_profile
+        == Some(I3LocalnetAdapterDeliveryProfile::EndpointClosedBeforeConnect)
+    {
+        // Close the actually bound endpoint before advertising its former
+        // address. The supervisor therefore cannot race A's connect against
+        // this B listener becoming available, and no new child protocol is
+        // needed to establish the ordering.
+        endpoint.close(0_u32.into(), b"endpoint unavailable");
+        emit_child_event(&PrivateChildEvent::Ready {
+            endpoint: endpoint_address,
+        })
+        .map_err(|_| ())?;
+        let summary = runtime.observer_safe_runtime_summary();
+        if summary.served_owner_request_count() != 0 || summary.actual_owner_write_count() != 0 {
+            return Err(());
+        }
+        emit_child_event(&PrivateChildEvent::AdapterDeliveryFault {
+            slot: I3LocalnetChildSlot::ProcessB,
+            exec_confirmed: true,
+            assigned_loci,
+            trusted_control_consumed: true,
+            tainted_image_consumed: true,
+            tls_peer_verified: false,
+            reciprocal_preface_verified: false,
+            reliable_bidi_stream_count: 0,
+            quic_datagrams_enabled: false,
+            request_identity_ref: None,
+            requester_pending_request_is_retained: None,
+            adapter_delivery_failure: None,
+            remote_admission: Some(PrivateRemoteAdmissionEvidence::NoAdmission {
+                owner_serve_count: summary.served_owner_request_count(),
+                owner_mutation_count: summary.actual_owner_write_count(),
+            }),
+            semantic_admission_count: 0,
+            unauthenticated_semantic_admission_count: 0,
+            owner_mutation_count: summary.actual_owner_write_count(),
+        })
+        .map_err(|_| ())?;
+        return Ok(());
+    }
     emit_child_event(&PrivateChildEvent::Ready {
-        endpoint: endpoint.local_addr().map_err(|_| ())?.to_string(),
+        endpoint: endpoint_address,
     })
     .map_err(|_| ())?;
     let result = tokio::time::timeout(timeout, async {
@@ -6064,6 +6557,51 @@ async fn run_server_child(
             .await
         {
             Ok(received) => received,
+            Err(mir_runtime::sys5_i3_private_quic::Sys5I3PrivateQuicError::FrameRejected)
+                if control.adapter_delivery_profile
+                    == Some(
+                        I3LocalnetAdapterDeliveryProfile::TruncateGeneratedRequestAfterBodyPrefix,
+                    ) =>
+            {
+                let tls_peer_verified = session.peer_spki_verified();
+                let reciprocal_preface_verified = session.peer_preface_verified();
+                let reliable_bidi_stream_count = session.reliable_bidi_stream_count();
+                let quic_datagrams_enabled = session.quic_datagrams_enabled();
+                let summary = runtime.observer_safe_runtime_summary();
+                if !tls_peer_verified
+                    || !reciprocal_preface_verified
+                    || reliable_bidi_stream_count != 1
+                    || quic_datagrams_enabled
+                    || summary.served_owner_request_count() != 0
+                    || summary.actual_owner_write_count() != 0
+                {
+                    return Err(());
+                }
+                emit_child_event(&PrivateChildEvent::AdapterDeliveryFault {
+                    slot: I3LocalnetChildSlot::ProcessB,
+                    exec_confirmed: true,
+                    assigned_loci: assigned_loci.clone(),
+                    trusted_control_consumed: true,
+                    tainted_image_consumed: true,
+                    tls_peer_verified,
+                    reciprocal_preface_verified,
+                    reliable_bidi_stream_count,
+                    quic_datagrams_enabled,
+                    request_identity_ref: None,
+                    requester_pending_request_is_retained: None,
+                    adapter_delivery_failure: Some(I3LocalnetAdapterDeliveryFailure::FrameRejected),
+                    remote_admission: Some(PrivateRemoteAdmissionEvidence::NoAdmission {
+                        owner_serve_count: summary.served_owner_request_count(),
+                        owner_mutation_count: summary.actual_owner_write_count(),
+                    }),
+                    semantic_admission_count: 0,
+                    unauthenticated_semantic_admission_count: 0,
+                    owner_mutation_count: summary.actual_owner_write_count(),
+                })
+                .map_err(|_| ())?;
+                session.close();
+                return Ok(());
+            }
             Err(_)
                 if control.fault_profile
                     == Some(I3LocalnetFaultProfile::DisconnectBeforeRequestCarrierWrite) =>
@@ -6274,7 +6812,11 @@ async fn run_client_child(
     let (client_config, _transport_evidence) = client_config(&control)?;
     endpoint.set_default_client_config(client_config);
     let result = tokio::time::timeout(timeout, async {
-        let prepared_request = if control.emit_request_before_wrong_peer_rejection {
+        let endpoint_closed_before_connect = control.adapter_delivery_profile
+            == Some(I3LocalnetAdapterDeliveryProfile::EndpointClosedBeforeConnect);
+        let prepared_request = if control.emit_request_before_wrong_peer_rejection
+            || endpoint_closed_before_connect
+        {
             let request = runtime
                 .emit_generated_owner_request("init_avatar_hp")
                 .map_err(|_| ())?;
@@ -6283,11 +6825,48 @@ async fn run_client_child(
         } else {
             None
         };
-        let connection = endpoint
-            .connect(endpoint_address, "localhost")
-            .map_err(|_| ())?
-            .await
-            .map_err(|_| ())?;
+        let endpoint_request_identity = prepared_request
+            .as_ref()
+            .filter(|_| endpoint_closed_before_connect)
+            .map(|(request, _)| request.semantic_request_identity_ref().to_string());
+        let connection = match endpoint.connect(endpoint_address, "localhost") {
+            Ok(connecting) => {
+                if endpoint_closed_before_connect {
+                    match tokio::time::timeout(
+                        endpoint_unavailable_connect_budget(timeout).ok_or(())?,
+                        connecting,
+                    )
+                    .await
+                    {
+                        Ok(Ok(connection)) => connection,
+                        Ok(Err(_)) | Err(_) => {
+                            emit_endpoint_unavailable_terminal(
+                                &runtime,
+                                assigned_loci.clone(),
+                                endpoint_request_identity.ok_or(())?,
+                            )?;
+                            return Ok(());
+                        }
+                    }
+                } else {
+                    connecting.await.map_err(|_| ())?
+                }
+            }
+            Err(_) if endpoint_closed_before_connect => {
+                emit_endpoint_unavailable_terminal(
+                    &runtime,
+                    assigned_loci.clone(),
+                    endpoint_request_identity.ok_or(())?,
+                )?;
+                return Ok(());
+            }
+            Err(_) => return Err(()),
+        };
+        if endpoint_closed_before_connect {
+            // A successful connection contradicts the B-before-Ready close
+            // schedule. Do not relabel it as endpoint unavailability.
+            return Err(());
+        }
         let mut session =
             match mir_runtime::sys5_i3_private_quic::Sys5I3PrivateQuicSession::connect(
                 connection, trusted,
@@ -6434,10 +7013,86 @@ async fn run_client_child(
             session.close();
             return Ok(());
         }
-        let request_delivery = session
-            .send_generated_message(request)
-            .await
-            .map_err(|_| ())?;
+        let request_delivery = match control.adapter_delivery_profile {
+            Some(I3LocalnetAdapterDeliveryProfile::CompleteGeneratedRequestInTwoWrites) => {
+                session
+                    .test_only_send_generated_message_with_frame_write_control(
+                        request,
+                        mir_runtime::sys5_i3_private_quic::Sys5I3PrivateQuicGeneratedFrameWriteControl::CompleteInTwoWrites {
+                            first_frame_fragment_len: 1,
+                        },
+                    )
+                    .await
+                    .map_err(|_| ())?
+            }
+            Some(
+                I3LocalnetAdapterDeliveryProfile::TruncateGeneratedRequestAfterBodyPrefix,
+            ) => {
+                let request_identity_ref = request.semantic_request_identity_ref().to_string();
+                match session
+                    .test_only_send_generated_message_with_frame_write_control(
+                        request,
+                        mir_runtime::sys5_i3_private_quic::Sys5I3PrivateQuicGeneratedFrameWriteControl::TruncateAfterBodyPrefix {
+                            body_prefix_len: 1,
+                        },
+                    )
+                    .await
+                {
+                    Err(mir_runtime::sys5_i3_private_quic::Sys5I3PrivateQuicError::FrameRejected) => {
+                        let tls_peer_verified = session.peer_spki_verified();
+                        let reciprocal_preface_verified = session.peer_preface_verified();
+                        let reliable_bidi_stream_count = session.reliable_bidi_stream_count();
+                        let quic_datagrams_enabled = session.quic_datagrams_enabled();
+                        if !tls_peer_verified
+                            || !reciprocal_preface_verified
+                            || reliable_bidi_stream_count != 1
+                            || quic_datagrams_enabled
+                            || request_identity_ref.is_empty()
+                            || runtime.observer_safe_pending_owner_request_count() != 1
+                            || runtime
+                                .observer_safe_runtime_summary()
+                                .accepted_inbound_receipt_count()
+                                != 0
+                        {
+                            return Err(());
+                        }
+                        emit_child_event(&PrivateChildEvent::AdapterDeliveryFault {
+                            slot: I3LocalnetChildSlot::ProcessA,
+                            exec_confirmed: true,
+                            assigned_loci: assigned_loci.clone(),
+                            trusted_control_consumed: true,
+                            tainted_image_consumed: true,
+                            tls_peer_verified,
+                            reciprocal_preface_verified,
+                            reliable_bidi_stream_count,
+                            quic_datagrams_enabled,
+                            request_identity_ref: Some(request_identity_ref),
+                            requester_pending_request_is_retained: Some(true),
+                            adapter_delivery_failure: Some(
+                                I3LocalnetAdapterDeliveryFailure::FrameRejected,
+                            ),
+                            remote_admission: None,
+                            semantic_admission_count: 0,
+                            unauthenticated_semantic_admission_count: 0,
+                            owner_mutation_count: 0,
+                        })
+                        .map_err(|_| ())?;
+                        // The actual FIN was emitted by the controlled
+                        // write. Keep A's connection alive until B has read
+                        // that EOF, rejected the incomplete frame, and
+                        // closed; this is not an early local-loss schedule.
+                        session.wait_for_peer_close().await;
+                        session.close();
+                        return Ok(());
+                    }
+                    Ok(_) | Err(_) => return Err(()),
+                }
+            }
+            Some(I3LocalnetAdapterDeliveryProfile::EndpointClosedBeforeConnect) => {
+                return Err(());
+            }
+            None => session.send_generated_message(request).await.map_err(|_| ())?,
+        };
         session.finish_send().map_err(|_| ())?;
         let (receipt, reply_delivery) = match session
             .receive_and_admit_generated_message(&mut runtime)
@@ -6550,6 +7205,48 @@ async fn run_client_child(
     endpoint.close(0_u32.into(), b"completed");
     let _ = tokio::time::timeout(Duration::from_secs(1), endpoint.wait_idle()).await;
     result.map_err(|_| ())?
+}
+
+fn endpoint_unavailable_connect_budget(timeout: Duration) -> Option<Duration> {
+    timeout
+        .checked_sub(Duration::from_millis(1))
+        .filter(|remaining| !remaining.is_zero())
+        .map(|remaining| remaining.min(ENDPOINT_UNAVAILABLE_CONNECT_BUDGET))
+}
+
+fn emit_endpoint_unavailable_terminal(
+    runtime: &mir_runtime::sys5_i3_process_runtime::Sys5I3ProcessRuntime,
+    assigned_loci: Vec<String>,
+    request_identity_ref: String,
+) -> Result<(), ()> {
+    if request_identity_ref.is_empty()
+        || runtime.observer_safe_pending_owner_request_count() != 1
+        || runtime
+            .observer_safe_runtime_summary()
+            .accepted_inbound_receipt_count()
+            != 0
+    {
+        return Err(());
+    }
+    emit_child_event(&PrivateChildEvent::AdapterDeliveryFault {
+        slot: I3LocalnetChildSlot::ProcessA,
+        exec_confirmed: true,
+        assigned_loci,
+        trusted_control_consumed: true,
+        tainted_image_consumed: true,
+        tls_peer_verified: false,
+        reciprocal_preface_verified: false,
+        reliable_bidi_stream_count: 0,
+        quic_datagrams_enabled: false,
+        request_identity_ref: Some(request_identity_ref),
+        requester_pending_request_is_retained: Some(true),
+        adapter_delivery_failure: Some(I3LocalnetAdapterDeliveryFailure::EndpointUnavailable),
+        remote_admission: None,
+        semantic_admission_count: 0,
+        unauthenticated_semantic_admission_count: 0,
+        owner_mutation_count: 0,
+    })
+    .map_err(|_| ())
 }
 
 fn retry_attempt_snapshot(
@@ -7776,6 +8473,7 @@ mod lifecycle_evidence_tests {
             Duration::ZERO,
             true,
             Duration::ZERO,
+            None,
             None,
             None,
         )

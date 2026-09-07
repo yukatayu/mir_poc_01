@@ -57,6 +57,42 @@ pub enum Sys5I3PrivateQuicError {
     LocalAttemptRejected,
 }
 
+/// Test-profile control for one source-generated message's private stream
+/// framing.  This controls application writes only; it says nothing about
+/// QUIC packetization or receiver read boundaries.
+#[cfg(feature = "i3-process-test-seams")]
+#[doc(hidden)]
+pub enum Sys5I3PrivateQuicGeneratedFrameWriteControl {
+    /// Split the outer bounded-frame prefix across exactly two application
+    /// writes, while still sending the complete encoded message.
+    CompleteInTwoWrites { first_frame_fragment_len: usize },
+    /// Send the outer bounded-frame prefix and a strict proper prefix of the
+    /// already encoded message, then finish the send stream.
+    TruncateAfterBodyPrefix { body_prefix_len: usize },
+}
+
+#[cfg(feature = "i3-process-test-seams")]
+impl Sys5I3PrivateQuicGeneratedFrameWriteControl {
+    fn validate_encoded_body(&self, body: &[u8]) -> Result<(), Sys5I3PrivateQuicError> {
+        let prefix = private_quic_blob_prefix(body)?;
+        match self {
+            Self::CompleteInTwoWrites {
+                first_frame_fragment_len,
+            } if *first_frame_fragment_len > 0 && *first_frame_fragment_len < prefix.len() => {
+                Ok(())
+            }
+            Self::TruncateAfterBodyPrefix { body_prefix_len }
+                if *body_prefix_len > 0 && *body_prefix_len < body.len() =>
+            {
+                Ok(())
+            }
+            Self::CompleteInTwoWrites { .. } | Self::TruncateAfterBodyPrefix { .. } => {
+                Err(Sys5I3PrivateQuicError::FrameRejected)
+            }
+        }
+    }
+}
+
 /// Reference-only evidence from an exact post-handshake peer-binding check.
 /// The leaf reference is populated only after Quinn/Rustls has validated the
 /// run CA chain and exposed the peer identity.
@@ -268,6 +304,35 @@ pub struct Sys5I3PrivateQuicDeliveryEvidence {
     target_artifact_ref: String,
     edge_ref: String,
     network_occurrence_ref: String,
+    #[cfg(feature = "i3-process-test-seams")]
+    generated_frame_write_observation: Option<Sys5I3PrivateQuicGeneratedFrameWriteObservation>,
+}
+
+/// Observer-safe facts from a completed test-profile generated-frame write.
+/// It is constructed only after the adapter's actual application writes
+/// succeed; it exports neither bytes nor fragment lengths.
+#[cfg(feature = "i3-process-test-seams")]
+#[doc(hidden)]
+#[derive(Clone, Debug, PartialEq, Eq)]
+pub struct Sys5I3PrivateQuicGeneratedFrameWriteObservation {
+    application_write_count: u8,
+    frame_prefix_split_across_writes: bool,
+    complete_frame_written: bool,
+}
+
+#[cfg(feature = "i3-process-test-seams")]
+impl Sys5I3PrivateQuicGeneratedFrameWriteObservation {
+    pub const fn application_write_count(&self) -> u8 {
+        self.application_write_count
+    }
+
+    pub const fn frame_prefix_split_across_writes(&self) -> bool {
+        self.frame_prefix_split_across_writes
+    }
+
+    pub const fn complete_frame_written(&self) -> bool {
+        self.complete_frame_written
+    }
 }
 
 impl Sys5I3PrivateQuicDeliveryEvidence {
@@ -325,6 +390,25 @@ impl Sys5I3PrivateQuicDeliveryEvidence {
     pub fn network_occurrence_ref(&self) -> &str {
         &self.network_occurrence_ref
     }
+
+    /// Present only for the successful controlled generated-frame test
+    /// profile. Normal sends deliberately have no such observation.
+    #[cfg(feature = "i3-process-test-seams")]
+    pub fn generated_frame_write_observation(
+        &self,
+    ) -> Option<&Sys5I3PrivateQuicGeneratedFrameWriteObservation> {
+        self.generated_frame_write_observation.as_ref()
+    }
+}
+
+/// Private result of encoding the existing generated-message path.  It keeps
+/// the exact carrier-derived references with the one encoded body until a
+/// session reserves its delivery occurrence and writes it.
+struct Sys5I3PrivateQuicEncodedGeneratedMessage {
+    body: Vec<u8>,
+    semantic_request_identity_ref: String,
+    linked_request_identity_ref: Option<String>,
+    lineage: PrivateCarrierLineage,
 }
 
 /// One inspected connection and its adapter-owned bidi stream.  Neither the
@@ -505,28 +589,44 @@ impl Sys5I3PrivateQuicSession {
         &mut self,
         message: Sys5I3ProcessMessage,
     ) -> Result<Sys5I3PrivateQuicDeliveryEvidence, Sys5I3PrivateQuicError> {
-        let semantic_request_identity_ref = message.semantic_request_identity_ref().to_string();
-        let linked_request_identity_ref = message.linked_request_identity_ref().map(str::to_string);
-        let bytes = Sys5I3PrivateProcessCodec::private_provisional_v1()
-            .encode_outbound_message(message)
-            .map_err(|_| Sys5I3PrivateQuicError::CodecRejected)?;
-        let lineage = carrier_lineage(&bytes)?;
-        let carrier_ref = carrier_ref(&bytes);
-        let candidate_commitment_ref = self.candidate_commitment_ref_for_frame(&bytes);
-        let network_occurrence_ref = self.reserve_network_occurrence_ref("send", &carrier_ref)?;
-        self.write_blob(&bytes).await?;
-        Ok(Sys5I3PrivateQuicDeliveryEvidence {
-            carrier_ref,
-            candidate_commitment_ref,
-            semantic_request_identity_ref,
-            linked_request_identity_ref,
-            source_ref: lineage.source_ref,
-            core_ref: lineage.core_ref,
-            source_artifact_ref: lineage.source_artifact_ref,
-            target_artifact_ref: lineage.target_artifact_ref,
-            edge_ref: lineage.edge_ref,
-            network_occurrence_ref,
-        })
+        let encoded = Self::encode_generated_message(message)?;
+        let (body, evidence) = self.reserve_generated_message_delivery(encoded)?;
+        self.write_blob(&body).await?;
+        Ok(evidence)
+    }
+
+    /// Sends one existing source-generated message through a bounded
+    /// test-profile stream-write control.  The control never accepts raw
+    /// caller bytes or exposes packetization.  Invalid controls reject before
+    /// reserving an occurrence or writing the stream.
+    #[cfg(feature = "i3-process-test-seams")]
+    #[doc(hidden)]
+    pub async fn test_only_send_generated_message_with_frame_write_control(
+        &mut self,
+        message: Sys5I3ProcessMessage,
+        control: Sys5I3PrivateQuicGeneratedFrameWriteControl,
+    ) -> Result<Sys5I3PrivateQuicDeliveryEvidence, Sys5I3PrivateQuicError> {
+        let encoded = Self::encode_generated_message(message)?;
+        control.validate_encoded_body(&encoded.body)?;
+        let (body, mut evidence) = self.reserve_generated_message_delivery(encoded)?;
+        match control {
+            Sys5I3PrivateQuicGeneratedFrameWriteControl::CompleteInTwoWrites {
+                first_frame_fragment_len,
+            } => {
+                let observation = self
+                    .write_complete_blob_in_two_writes(&body, first_frame_fragment_len)
+                    .await?;
+                evidence.generated_frame_write_observation = Some(observation);
+                Ok(evidence)
+            }
+            Sys5I3PrivateQuicGeneratedFrameWriteControl::TruncateAfterBodyPrefix {
+                body_prefix_len,
+            } => {
+                self.write_truncated_blob_then_finish(&body, body_prefix_len)
+                    .await?;
+                Err(Sys5I3PrivateQuicError::FrameRejected)
+            }
+        }
     }
 
     /// Begin the one source-emitted original request on its first checked
@@ -620,6 +720,8 @@ impl Sys5I3PrivateQuicSession {
                 target_artifact_ref: lineage.target_artifact_ref,
                 edge_ref: lineage.edge_ref,
                 network_occurrence_ref,
+                #[cfg(feature = "i3-process-test-seams")]
+                generated_frame_write_observation: None,
             },
         ))
     }
@@ -741,6 +843,8 @@ impl Sys5I3PrivateQuicSession {
                 target_artifact_ref: lineage.target_artifact_ref,
                 edge_ref: lineage.edge_ref,
                 network_occurrence_ref,
+                #[cfg(feature = "i3-process-test-seams")]
+                generated_frame_write_observation: None,
             },
         ))
     }
@@ -793,21 +897,118 @@ impl Sys5I3PrivateQuicSession {
         let _ = self.connection.closed().await;
     }
 
+    fn encode_generated_message(
+        message: Sys5I3ProcessMessage,
+    ) -> Result<Sys5I3PrivateQuicEncodedGeneratedMessage, Sys5I3PrivateQuicError> {
+        let semantic_request_identity_ref = message.semantic_request_identity_ref().to_string();
+        let linked_request_identity_ref = message.linked_request_identity_ref().map(str::to_string);
+        let body = Sys5I3PrivateProcessCodec::private_provisional_v1()
+            .encode_outbound_message(message)
+            .map_err(|_| Sys5I3PrivateQuicError::CodecRejected)?;
+        let lineage = carrier_lineage(&body)?;
+        Ok(Sys5I3PrivateQuicEncodedGeneratedMessage {
+            body,
+            semantic_request_identity_ref,
+            linked_request_identity_ref,
+            lineage,
+        })
+    }
+
+    fn reserve_generated_message_delivery(
+        &mut self,
+        encoded: Sys5I3PrivateQuicEncodedGeneratedMessage,
+    ) -> Result<(Vec<u8>, Sys5I3PrivateQuicDeliveryEvidence), Sys5I3PrivateQuicError> {
+        let Sys5I3PrivateQuicEncodedGeneratedMessage {
+            body,
+            semantic_request_identity_ref,
+            linked_request_identity_ref,
+            lineage,
+        } = encoded;
+        let carrier_ref = carrier_ref(&body);
+        let candidate_commitment_ref = self.candidate_commitment_ref_for_frame(&body);
+        let network_occurrence_ref = self.reserve_network_occurrence_ref("send", &carrier_ref)?;
+        Ok((
+            body,
+            Sys5I3PrivateQuicDeliveryEvidence {
+                carrier_ref,
+                candidate_commitment_ref,
+                semantic_request_identity_ref,
+                linked_request_identity_ref,
+                source_ref: lineage.source_ref,
+                core_ref: lineage.core_ref,
+                source_artifact_ref: lineage.source_artifact_ref,
+                target_artifact_ref: lineage.target_artifact_ref,
+                edge_ref: lineage.edge_ref,
+                network_occurrence_ref,
+                #[cfg(feature = "i3-process-test-seams")]
+                generated_frame_write_observation: None,
+            },
+        ))
+    }
+
     async fn write_blob(&mut self, body: &[u8]) -> Result<(), Sys5I3PrivateQuicError> {
-        if body.len() > MAX_PRIVATE_QUIC_BLOB_BYTES {
-            return Err(Sys5I3PrivateQuicError::FrameRejected);
-        }
+        let prefix = private_quic_blob_prefix(body)?;
         self.send
-            .write_all(
-                &(u32::try_from(body.len()).map_err(|_| Sys5I3PrivateQuicError::FrameRejected)?)
-                    .to_be_bytes(),
-            )
+            .write_all(&prefix)
             .await
             .map_err(|_| Sys5I3PrivateQuicError::FrameRejected)?;
         self.send
             .write_all(body)
             .await
             .map_err(|_| Sys5I3PrivateQuicError::FrameRejected)
+    }
+
+    #[cfg(feature = "i3-process-test-seams")]
+    async fn write_complete_blob_in_two_writes(
+        &mut self,
+        body: &[u8],
+        first_frame_fragment_len: usize,
+    ) -> Result<Sys5I3PrivateQuicGeneratedFrameWriteObservation, Sys5I3PrivateQuicError> {
+        let prefix = private_quic_blob_prefix(body)?;
+        if first_frame_fragment_len == 0 || first_frame_fragment_len >= prefix.len() {
+            return Err(Sys5I3PrivateQuicError::FrameRejected);
+        }
+        let mut frame = Vec::with_capacity(prefix.len() + body.len());
+        frame.extend_from_slice(&prefix);
+        frame.extend_from_slice(body);
+        let mut application_write_count = 0_u8;
+        self.send
+            .write_all(&frame[..first_frame_fragment_len])
+            .await
+            .map_err(|_| Sys5I3PrivateQuicError::FrameRejected)?;
+        application_write_count = application_write_count
+            .checked_add(1)
+            .ok_or(Sys5I3PrivateQuicError::FrameRejected)?;
+        self.send
+            .write_all(&frame[first_frame_fragment_len..])
+            .await
+            .map_err(|_| Sys5I3PrivateQuicError::FrameRejected)?;
+        application_write_count = application_write_count
+            .checked_add(1)
+            .ok_or(Sys5I3PrivateQuicError::FrameRejected)?;
+        Ok(Sys5I3PrivateQuicGeneratedFrameWriteObservation {
+            application_write_count,
+            frame_prefix_split_across_writes: true,
+            complete_frame_written: true,
+        })
+    }
+
+    #[cfg(feature = "i3-process-test-seams")]
+    async fn write_truncated_blob_then_finish(
+        &mut self,
+        body: &[u8],
+        body_prefix_len: usize,
+    ) -> Result<(), Sys5I3PrivateQuicError> {
+        let prefix = private_quic_blob_prefix(body)?;
+        self.send
+            .write_all(&prefix)
+            .await
+            .map_err(|_| Sys5I3PrivateQuicError::FrameRejected)?;
+        self.send
+            .write_all(&body[..body_prefix_len])
+            .await
+            .map_err(|_| Sys5I3PrivateQuicError::FrameRejected)?;
+        self.finish_send()
     }
 
     async fn read_blob(&mut self) -> Result<Vec<u8>, Sys5I3PrivateQuicError> {
@@ -868,6 +1069,8 @@ impl Sys5I3PrivateQuicSession {
             target_artifact_ref: lineage.target_artifact_ref,
             edge_ref: lineage.edge_ref,
             network_occurrence_ref,
+            #[cfg(feature = "i3-process-test-seams")]
+            generated_frame_write_observation: None,
         })
     }
 
@@ -914,6 +1117,8 @@ impl Sys5I3PrivateQuicSession {
                 target_artifact_ref: lineage.target_artifact_ref,
                 edge_ref: lineage.edge_ref,
                 network_occurrence_ref,
+                #[cfg(feature = "i3-process-test-seams")]
+                generated_frame_write_observation: None,
             },
         ))
     }
@@ -1047,6 +1252,15 @@ fn retained_ingress_matches_reconnect_binding(
         && reconnect_session_attempt_generation
             == retained_session_attempt_generation.saturating_add(1)
         && retained_control_binding == reconnect_control_binding
+}
+
+fn private_quic_blob_prefix(body: &[u8]) -> Result<[u8; 4], Sys5I3PrivateQuicError> {
+    if body.len() > MAX_PRIVATE_QUIC_BLOB_BYTES {
+        return Err(Sys5I3PrivateQuicError::FrameRejected);
+    }
+    Ok(u32::try_from(body.len())
+        .map_err(|_| Sys5I3PrivateQuicError::FrameRejected)?
+        .to_be_bytes())
 }
 
 fn carrier_ref(bytes: &[u8]) -> String {

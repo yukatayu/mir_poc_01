@@ -18,6 +18,7 @@ use std::{
 
 use mir_runtime::sys5_local_slice::{Sys5I3AdapterCarrierContract, Sys5SourceInput, build_project};
 use mirrorea_i3_probe::{
+    I3LocalnetAdapterDeliveryFailure, I3LocalnetAdapterDeliveryProfile,
     I3LocalnetAdapterRejectionKind, I3LocalnetChildSlot, I3LocalnetChildTerminalOutcome,
     I3LocalnetControlDelivery, I3LocalnetDeliveryPhase, I3LocalnetFailureStage,
     I3LocalnetFalsifier, I3LocalnetFaultAuditFalsifier, I3LocalnetFaultProfile,
@@ -186,6 +187,45 @@ fn assert_handled_delivery_fault_lifecycle(audit: &I3LocalnetRejectionAudit) {
         "the normal fault path must retain clean shutdown evidence from natural zero-exit reaping"
     );
     assert!(audit.observer_safe());
+}
+
+/// The adapter-delivery negatives must retain the actual owner terminal.  A
+/// missing B report is not evidence that its semantic owner performed zero
+/// work, and a session-less endpoint failure is intentionally distinct from a
+/// complete-frame transport session rejected before decode.
+fn assert_adapter_delivery_owner_terminal(
+    audit: &I3LocalnetRejectionAudit,
+    expected_tls_and_preface_verified: bool,
+) {
+    let owner_events = audit
+        .child_terminal_events()
+        .iter()
+        .filter(|event| event.slot() == Some(I3LocalnetChildSlot::ProcessB))
+        .collect::<Vec<_>>();
+    assert_eq!(
+        owner_events.len(),
+        1,
+        "the fault must retain exactly one actual B terminal instead of inferring owner zero from its absence"
+    );
+    let owner = owner_events[0];
+    assert_eq!(
+        owner.outcome(),
+        I3LocalnetChildTerminalOutcome::HandledDeliveryFault,
+        "a controlled adapter delivery failure is not an owner completion or a generic synthetic rejection"
+    );
+    assert_eq!(owner.owner_serve_count(), Some(0));
+    assert_eq!(owner.semantic_admission_count(), 0);
+    assert_eq!(owner.owner_mutation_count(), 0);
+    assert_eq!(
+        owner.tls_peer_verified(),
+        Some(expected_tls_and_preface_verified),
+        "terminal transport facts must come from this child, never from the selected control"
+    );
+    assert_eq!(
+        owner.reciprocal_preface_verified(),
+        Some(expected_tls_and_preface_verified),
+        "terminal preface facts must come from this child, never from the selected control"
+    );
 }
 
 fn assert_no_rejected_child_transport_observation(audit: &I3LocalnetRejectionAudit) {
@@ -616,6 +656,11 @@ fn source_first_localnet_executes_one_remote_owner_round_trip_across_two_reaped_
     let reply_receive = delivery_for_phase(deliveries, I3LocalnetDeliveryPhase::ReplyReceive);
     let request_identity = request_send.semantic_request_identity_ref();
 
+    assert!(
+        request_send.generated_frame_write_observation().is_none(),
+        "the ordinary send path must not claim a controlled application-write split"
+    );
+
     assert_delivery_matches_contract(request_send, &request_contract, request_identity, None);
     assert_delivery_matches_contract(request_receive, &request_contract, request_identity, None);
     assert_delivery_matches_contract(
@@ -819,6 +864,182 @@ fn source_first_localnet_executes_one_remote_owner_round_trip_across_two_reaped_
 }
 
 #[test]
+fn i3_3_endpoint_closed_before_connect_is_explicit_unavailable_without_semantic_admission() {
+    let error = run_i3_process_localnet(canonical_request().with_adapter_delivery_profile(
+        I3LocalnetAdapterDeliveryProfile::EndpointClosedBeforeConnect,
+    ))
+    .expect_err("closing B's actual endpoint before Ready must not become successful delivery");
+
+    assert_eq!(error.kind(), I3LocalnetRunErrorKind::DeliveryUnavailable);
+    assert!(
+        error.fault_audit().is_none(),
+        "an endpoint-close control is not one of the request-carrier fault schedules"
+    );
+
+    let lifecycle = error.rejection_audit();
+    assert_eq!(
+        lifecycle.stage(),
+        I3LocalnetFailureStage::BeforeSemanticAdmission,
+        "a connect failure must remain pre-admission rather than be recast as a reaper or lifecycle deadline"
+    );
+    assert_eq!(
+        lifecycle.adapter_delivery_failure(),
+        Some(I3LocalnetAdapterDeliveryFailure::EndpointUnavailable)
+    );
+    assert!(
+        lifecycle.requester_pending_request_is_retained(),
+        "the source-generated original remains pending after connection failure; this is not a no-write claim"
+    );
+    assert!(
+        !lifecycle.deadline_enforced() && !lifecycle.reaper_deadline_enforced(),
+        "the explicit endpoint failure must not be attributed to a lifecycle or reaper timeout"
+    );
+    assert!(
+        lifecycle.owner_request_delivery_record().is_none(),
+        "no unavailable endpoint may publish an owner delivery record or decoded request provenance"
+    );
+    assert_handled_delivery_fault_lifecycle(&lifecycle);
+    assert_adapter_delivery_owner_terminal(&lifecycle, false);
+    assert!(
+        lifecycle.child_terminal_events().iter().all(|event| {
+            event.tls_peer_verified() == Some(false)
+                && event.reciprocal_preface_verified() == Some(false)
+        }),
+        "both actual child terminals must record the absence of a verified session, not infer it from the profile"
+    );
+}
+
+#[test]
+fn i3_3_complete_generated_request_in_two_application_writes_preserves_the_exact_source_bound_round_trip()
+ {
+    let run = run_i3_process_localnet(canonical_request().with_adapter_delivery_profile(
+        I3LocalnetAdapterDeliveryProfile::CompleteGeneratedRequestInTwoWrites,
+    ))
+    .expect(
+        "a complete source-generated frame split across two application writes must round-trip",
+    );
+
+    let requester = run
+        .child(I3LocalnetChildSlot::ProcessA)
+        .expect("the two-write run must retain the actual requester child");
+    let owner = run
+        .child(I3LocalnetChildSlot::ProcessB)
+        .expect("the two-write run must retain the actual owner child");
+    assert!(requester.exec_confirmed() && owner.exec_confirmed());
+    assert!(requester.reaped() && owner.reaped());
+    assert!(!requester.was_force_killed() && !owner.was_force_killed());
+
+    let execution = run.execution_audit();
+    assert_eq!(execution.generated_request_count(), 1);
+    assert_eq!(execution.remote_owner_serve_count(), 1);
+    assert_eq!(execution.remote_owner_write_count(), 1);
+    assert_eq!(execution.generated_reply_count(), 1);
+    assert_eq!(execution.requester_local_receipt_count(), 1);
+    assert_eq!(execution.network_receipt_frame_count(), 0);
+    assert!(execution.source_derived_only());
+
+    let transport = run.transport_audit();
+    assert!(transport.mutually_authenticated_quic_peer_binding());
+    assert!(transport.reliable_bidirectional_streams_only());
+    assert!(!transport.quic_datagrams_enabled());
+    assert_eq!(transport.unauthenticated_semantic_admission_count(), 0);
+
+    let trace = run.observer_safe_trace();
+    assert!(trace.is_observer_safe());
+    assert!(trace.has_exact_source_core_artifact_carrier_network_runtime_chain());
+    let deliveries = trace.actual_delivery_records();
+    assert_eq!(deliveries.len(), 4);
+    let request_send = delivery_for_phase(deliveries, I3LocalnetDeliveryPhase::RequestSend);
+    let request_receive = delivery_for_phase(deliveries, I3LocalnetDeliveryPhase::RequestReceive);
+    let reply_send = delivery_for_phase(deliveries, I3LocalnetDeliveryPhase::ReplySend);
+    let reply_receive = delivery_for_phase(deliveries, I3LocalnetDeliveryPhase::ReplyReceive);
+    let request_identity = request_send.semantic_request_identity_ref();
+    let request_contract = active_contract("owner-request");
+    let reply_contract = active_contract("owner-reply-receipt");
+
+    assert_delivery_matches_contract(request_send, &request_contract, request_identity, None);
+    assert_delivery_matches_contract(request_receive, &request_contract, request_identity, None);
+    assert_delivery_matches_contract(
+        reply_send,
+        &reply_contract,
+        request_identity,
+        Some(request_identity),
+    );
+    assert_delivery_matches_contract(
+        reply_receive,
+        &reply_contract,
+        request_identity,
+        Some(request_identity),
+    );
+    assert_delivery_semantics_match(request_send, request_receive);
+    assert_delivery_semantics_match(reply_send, reply_receive);
+    assert_ne!(
+        request_send.network_occurrence_ref(),
+        request_receive.network_occurrence_ref(),
+        "the controlled sender and actual receiver remain distinct transport occurrences"
+    );
+
+    let controlled_write = request_send.generated_frame_write_observation().expect(
+        "the controlled sender must retain actual post-write evidence so an ignored profile cannot pass this test",
+    );
+    assert_eq!(controlled_write.application_write_count(), 2);
+    assert!(controlled_write.frame_prefix_split_across_writes());
+    assert!(controlled_write.complete_frame_written());
+
+    let lifecycle = run.lifecycle();
+    assert!(lifecycle.all_children_reaped());
+    assert!(lifecycle.clean_shutdown());
+    assert!(lifecycle.clean_shutdown_is_backed_by_zero_exit_reaps_without_force_kill());
+    assert!(lifecycle.zero_exit_reap_observed_within_deadline());
+}
+
+#[test]
+fn i3_3_truncated_generated_request_frame_is_rejected_before_decode_or_admission() {
+    let error = run_i3_process_localnet(canonical_request().with_adapter_delivery_profile(
+        I3LocalnetAdapterDeliveryProfile::TruncateGeneratedRequestAfterBodyPrefix,
+    ))
+    .expect_err("a prefix plus partial body followed by FIN must not decode or admit a request");
+
+    assert_eq!(error.kind(), I3LocalnetRunErrorKind::DeliveryUnavailable);
+    assert!(
+        error.fault_audit().is_none(),
+        "a controlled truncated frame is an adapter failure, not a request-carrier fault schedule"
+    );
+
+    let lifecycle = error.rejection_audit();
+    assert_eq!(
+        lifecycle.stage(),
+        I3LocalnetFailureStage::BeforeSemanticAdmission,
+        "the receiver must reject a truncated frame before decode, carrier lineage, or runtime admission"
+    );
+    assert_eq!(
+        lifecycle.adapter_delivery_failure(),
+        Some(I3LocalnetAdapterDeliveryFailure::FrameRejected)
+    );
+    assert!(
+        lifecycle.requester_pending_request_is_retained(),
+        "the failed complete-frame write attempt must leave A's original request pending"
+    );
+    assert!(
+        !lifecycle.deadline_enforced() && !lifecycle.reaper_deadline_enforced(),
+        "an actual frame rejection must not be reclassified as lifecycle or reaper timeout"
+    );
+    assert!(
+        lifecycle.owner_request_delivery_record().is_none(),
+        "the rejected partial body must not export decoded source/Core/artifact/edge/carrier provenance"
+    );
+    assert_handled_delivery_fault_lifecycle(&lifecycle);
+    assert_adapter_delivery_owner_terminal(&lifecycle, true);
+    assert!(
+        lifecycle.child_terminal_events().iter().all(|event| {
+            event.tls_peer_verified() == Some(true)
+                && event.reciprocal_preface_verified() == Some(true)
+        }),
+        "the actual terminal reports, not the selected control, must establish verified TLS and reciprocal prefaces"
+    );
+}
+
+#[test]
 fn i3_3_disconnect_before_request_carrier_write_is_unavailable_without_remote_admission() {
     let error = run_i3_process_localnet(
         canonical_request()
@@ -900,6 +1121,7 @@ fn i3_3_disconnect_after_remote_admission_is_request_bound_ambiguity_not_false_s
         "the requester records the missing reply/receipt without inferring whether owner admission happened"
     );
 
+    let lifecycle = error.rejection_audit();
     match fault.remote_admission() {
         Some(I3LocalnetRemoteAdmissionEvidence::Admitted {
             request_receive,
@@ -923,6 +1145,29 @@ fn i3_3_disconnect_after_remote_admission_is_request_bound_ambiguity_not_false_s
                 request_identity,
                 None,
             );
+            let projected_request_receive = lifecycle.owner_request_delivery_record().expect(
+                "only the validated owner admission record may be projected into the rejection audit",
+            );
+            assert_delivery_semantics_match(projected_request_receive, request_receive);
+            assert_eq!(
+                projected_request_receive.network_occurrence_ref(),
+                request_receive.network_occurrence_ref(),
+                "the projection must retain the exact validated owner receive occurrence"
+            );
+            assert_eq!(
+                projected_request_receive.candidate_commitment_ref(),
+                request_receive.candidate_commitment_ref(),
+                "the projection must retain the exact validated owner receive commitment"
+            );
+            assert_eq!(
+                projected_request_receive
+                    .generated_frame_write_observation()
+                    .is_some(),
+                request_receive
+                    .generated_frame_write_observation()
+                    .is_some(),
+                "the projection must reuse the validated record rather than synthesize sender-only write evidence"
+            );
         }
         Some(I3LocalnetRemoteAdmissionEvidence::NoAdmission { .. }) => {
             panic!("a post-admission fault must not manufacture a known no-admission verdict")
@@ -932,7 +1177,6 @@ fn i3_3_disconnect_after_remote_admission_is_request_bound_ambiguity_not_false_s
              remote unknown belongs to a separate suppress-audit falsifier"
         ),
     }
-    let lifecycle = error.rejection_audit();
     assert_eq!(
         lifecycle.stage(),
         I3LocalnetFailureStage::AfterRemoteAdmission,
@@ -1101,6 +1345,10 @@ fn i3_3_malformed_owner_audit_contract_is_rejected_without_validated_remote_evid
             lifecycle.stage(),
             I3LocalnetFailureStage::RequesterReplyOrReceiptNotObserved,
             "{label} corruption cannot refine requester-side missing-reply evidence into remote admission"
+        );
+        assert!(
+            lifecycle.owner_request_delivery_record().is_none(),
+            "{label} corruption must not project the unvalidated B request record into observer-safe rejection evidence"
         );
         assert_handled_delivery_fault_lifecycle(&lifecycle);
         assert_eq!(lifecycle.aggregate_semantic_admission_count(), 1);

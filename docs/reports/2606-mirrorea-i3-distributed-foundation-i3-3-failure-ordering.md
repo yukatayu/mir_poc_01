@@ -222,6 +222,20 @@ against the pinned resume cut. `python3 scripts/validate_docs.py` is the
 repository-wide documentation check. Milestone runtime/model commands and
 final regression evidence will accumulate here as I3-3 proceeds.
 
+Post-repair delivery checkpoint commands (all executed with
+`CARGO_INCREMENTAL=0 CARGO_BUILD_JOBS=2`; results and source scope below):
+
+```bash
+cargo test --locked -p mirrorea-i3-probe --test i3_process_localnet i3_3_malformed_owner_audit_contract_is_rejected_without_validated_remote_evidence -- --test-threads=1
+cargo test --locked -p mirrorea-i3-probe --test i3_process_localnet i3_3_disconnect_after_remote_admission_is_request_bound_ambiguity_not_false_success -- --test-threads=1
+cargo test --locked -p mirrorea-i3-probe --test i3_process_localnet -- --test-threads=1
+cargo test --locked -p mirrorea-i3-probe --lib -- --test-threads=1
+cargo clippy --locked -p mir-runtime -p mirrorea-i3-probe --all-targets --features mir-runtime/i3-process-test-seams -- -D warnings
+cargo test --locked -p mir-runtime --lib --features i3-process-test-seams,i3-private-quic sys5_i3_private_quic_tests -- --nocapture --test-threads=1
+cargo test --locked -p mir-runtime --test sys5_i3_process_runtime --features i3-process-test-seams -- --nocapture --test-threads=1
+cargo test --locked -p mir-runtime --test sys5_local_slice --test sys6_i2_cli -- --test-threads=1
+```
+
 ## Evidence / outputs / test results
 
 Parent-reported resume baseline: focused localnet 12/12 and full probe package
@@ -933,6 +947,110 @@ runtime fault evidence. Disk remains 15 GiB free. Runtime QUIC and probe
 production writers retain disjoint ownership, separate from the test author
 and sole Cargo evaluator.
 
+The first actual delivery run passes endpoint-closed 1/1 (build 36.12 s,
+test 2.56 s). Complete two-write then fails with `LifecycleRejected` /
+`LifecycleEvidenceRejected` after 1.29 s: both children actually complete,
+both sessions validate, the owner serves/writes once, and natural reaping
+finishes within the bound. Truncation/full probe/Clippy are not run after this
+failure. The cause is the probe's early adapter-failure join accepting all
+three controls, while its classifier correctly returns no failure for the
+complete-frame positive. The independent reviewer reproduces this P1 in
+source. The bounded correction restricts that early branch to endpoint and
+truncation negatives so the complete case reaches the normal join and exact
+sender write-observation check. A missing write observation on B's receive
+record is expected: it must not receive A's sender-only observation. No
+runtime or test assertion is weakened; fresh rerun is required.
+
+After that branch correction, complete two-write passes 1/1 (build 6.43 s,
+test 1.34 s), truncation passes 1/1 (1.24 s), and full probe integration
+passes 32/32 (54.45 s). The all-target Clippy command stops before lint
+evaluation on one old inline-test call missing the new optional delivery-record
+argument. This is an additional compile surface, not a passing Clippy gate.
+
+Independent review then finds a second P1: the new rejection-audit accessor
+projects a raw B terminal's delivery record even when the existing validated
+fault join rejects that same record as `ProvenanceMismatch`. The selected
+repair deletes the raw-terminal projection and derives any returned record
+only from an already validated fault/retry admission join. Other failures
+remain `None` (unknown, not proof of nonadmission). The separate test owner
+adds both malformed-record absence and genuine validated-record presence
+assertions, so returning constant `None` cannot satisfy the repair. Acceptance
+is withheld pending behavioral RED, implementation, fresh execution and narrow
+review disposition.
+
+The malformed-owner-audit test then compiles and fails behaviorally at its
+new `core-ref` corruption assertion (build 5.53 s, test 1.17 s). The invalid
+record is still visible through the new accessor, confirming the falsifier
+without an API error. The minimal repair removes the raw supervisor accessor
+and clones only `request_receive` from validated fault/retry `Admitted`
+evidence. Independent narrow source review finds both P1s resolved; final
+post-repair execution remains evaluator-owned. Optional direct mutations of
+each adapter-terminal field and an additional durable peer-close event are
+P2 test hardening, not new current correctness findings. No Cargo pass is
+inferred from this static review.
+
+Final post-repair delivery validation applies to `386d5f09` **plus the five
+source/test files in this delivery delta**, not that docs-only committed cut
+in isolation. The malformed-audit negative passes 1/1 (build 5.19 s, test
+4.60 s), and genuine post-admission lost-reply control passes 1/1 (1.21 s).
+Full probe integration passes 32/32 (52.62 s), full probe library 3/3 (build
+2.78 s), private QUIC unit module 2/2 (build 31.10 s), runtime I3 integration
+61/61 (55.23 s), and I2 local slice/CLI 5/5 (0.05 s) + 8/8 (11.60 s).
+Focused two-crate all-target deny-warnings Clippy passes (5.73 s). Runtime
+integration and I2 emit eight dead-code warnings; this does not claim those
+commands warning-free or independently establish that the warnings predate
+the delta. Root disk remains 15 GiB free. Feature-library 289/289, M10 67/67
+and bounded model 3/3 remain prior checkpoint evidence, not fresh runs.
+The independent reviewer finds no remaining P0/P1 in this delivery delta.
+This closes only the bounded delivery/observer-repair checkpoint, not any
+whole failure family, the full matrix, or I3-3. No new Lean evidence is claimed.
+
+Parent formatting and diff checks pass, and the bounded source-diff
+private-key/token/private-chat pattern screen finds no match. The first
+`make docs` attempt passes agent configuration, Canon index (210 files) and
+hierarchy (800 paths), then rejects a stale progress header: 18:49 was older
+than its newly appended 18:52 log. The header is corrected using the actual
+18:58 JST clock; full documentation validation is rerun, not assumed passed.
+The rerun passes all four checks, including the 1760-report scaffold. Final
+read-only planner review clears the snapshot delta: prior executions remain
+historical, the time/provider contracts stay OPEN, and the owner pause after
+full I3-3 acceptance is preserved. The status writer's stale next-package text
+and accidental historical-log rewrite were corrected by the parent before
+that review; the 17:52 successor log retains its actual 29/289/M10 results.
+
+A further temporary Oracle preservation review completed in 8m42s; the parent
+read the complete answer, SHA-256
+`2c958bda69926ea31d97aa98ba203c9f97ec047510e247491378121deed01b44`.
+Direct consumer: the still-OPEN I3-3 time/provider contracts after the delivery
+checkpoint. Blocker reduced: failure containment and authority-preserving
+representation choices. Acceptance use: proposed positive/falsifier contracts,
+not evidence for the current implementation. Its recommendation is a separate
+explicitly updated admission-lifecycle expiry contract, leaving the checked
+Core failure row unchanged, and a distinct checked external invocation whose
+effect-specific authorization may share an owner-local inventory. Confirmed
+unserved expiry requires a serialized owner gate that excludes later serve;
+requester-local expiry after an unknown remote disposition cannot assert
+nonexecution. An RMW grant cannot authorize the new effect, nor can an effect
+grant authorize a store. The advice remains non-normative pending Canon-first
+review and the bounded proposal/decision route; no source language, failure
+row, M9 authority or time/provider implementation is changed by the consult.
+
+Subsequent mapping changes the time recommendation, without silently adopting
+the Oracle answer. Restricted SYS5/LocalFabric cannot reach the existing M9
+`apply_contract_update`; that operation supports authorized layer Attach/Remove,
+not a request-expiry contract. A new opaque bridge would still need a supported
+semantic authority rule. The parent and planner therefore prefer retained
+alternative B: an explicit opt-in source owner-admission budget with its own
+generated declared failure, preserving old sources and failure rows. The
+finite clock origin/comparison, owner gate, retained expiry decision and
+validated terminal failure remain under design review before Canon adoption.
+The existing owner reply is success-only: a `FabricReceipt` or `fault_id`
+cannot be relabeled as a declared deadline failure. A distinct typed terminal
+outcome must preserve exact request/source/owner bindings and remain separate
+from successful receipt and unresolved remote disposition. This needed path
+also has the next provider-failure row as a direct consumer. Neither candidate
+opens general clock/lease theory or a new control protocol.
+
 Two further ACK checks are required before acceptance: the completion must
 carry the complete independent run/cohort/slot/program/projection/closure/
 generation/kind/candidate binding through to cohort publication, not just
@@ -1138,7 +1256,9 @@ by this advice; provider/time remain OPEN and I3-4 remains inactive.
 Continue active I3-3 in the original Plan 250 program: map all 20 failure
 families and ordering edges to accepted runtime boundaries, resolve operation-
 specific duplicate/ambiguity handling, and implement/validate bounded real fault
-controls. Keep I3-4 inactive until I3-3 acceptance and remote parity close.
+controls. After full I3-3 acceptance, validation, review, commit/push and remote
+parity, honor the latest owner-requested pause. I3-4 requires explicit resume;
+the retained program is not blocked, stale, or completed by that pause.
 
 ## Plan update status
 
@@ -1151,6 +1271,9 @@ synchronization belongs to the status assignment.
 
 更新済み: resume pointer now identifies I3-3 as the sole active milestone,
 with the accepted I3-2 runtime retained as its input.
+Delivery checkpoint: `Documentation.md` 更新不要; its current entry pointers,
+owner-pause boundary and provisional workflow remain accurate. No CLI or
+sample-root change is introduced here.
 
 ## docs/project-status.md update status
 
@@ -1161,6 +1284,9 @@ I3-2 accepted evidence と official I3 unentered を維持する。
 
 更新済み: current I3-3 pointer, preserved three axes and startability mirror
 the resume; the actual-time recent log is 2026-09-07 11:38 JST.
+The current delivery checkpoint also synchronizes Plan 250, progress/tasks,
+project status and sample dashboard with fresh versus prior validation and
+time-then-provider as the next still-OPEN contract consumer.
 
 ## tasks.md update status
 
@@ -1272,6 +1398,14 @@ committed and pushed as `cb050be23be6bc2cbc420b24f8d8c583503d6fff`
 `git ls-remote origin refs/heads/main` matched HEAD at
 `2026-09-07T18:00:05+09:00`, and the worktree was clean before the next
 delivery assignment. This is an I3-3 checkpoint, not milestone acceptance.
+
+The separate docs-only owner-control commit
+`386d5f09d779fd327ecdc616234cbb34d4f75241` schedules a pause after full I3-3
+acceptance; its push/parity was confirmed before the delivery checkpoint.
+The current delivery delta has passed source/test review and the fresh gates
+above and is ready for the parent's scoped commit/push. Its exact committed
+cut and parity will be recorded with the next in-scope I3-3 work; this report
+does not predict a commit hash or treat the whole milestone as accepted.
 
 ## Sub-agent session close status
 

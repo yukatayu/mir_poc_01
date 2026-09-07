@@ -1,6 +1,6 @@
 # Current Task Map (LAB)
 
-最終更新: 2026-09-07 18:13 JST
+最終更新: 2026-09-07 18:49 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -52,10 +52,11 @@ input history, not the promoted I3-3 goal.
 
 Milestone direct consumer: I3-4 C-distributed scenarios and cross-process
 semantic pressure consume the I3-3 matrix only after milestone acceptance.
-The genuine M9 successor and retained-ingress slice has passed bounded repair
-review. Next within I3-3 is actual endpoint-unavailable, fragmented and truncated
-delivery, followed by the still-OPEN provider/time contracts; the full matrix
-is not yet complete.
+The genuine M9 successor/retained-ingress and selected-adapter delivery slices
+have passed bounded repair review. Actual endpoint closure, a complete frame
+split over two application writes, and strict truncation/FIN execute with
+validated-only observer evidence. Next within I3-3 is contract-first time, then
+provider, both still OPEN pending adoption; the full matrix is not complete.
 
 Scope: execute all 20 required network failure families against the accepted
 generated-artifact runtime; make retry and ambiguous delivery request-bound and
@@ -73,12 +74,14 @@ Sources: `plan/250-mirrorea-i3-distributed-foundation-current-roadmap.md`,
 `mirrorea_canon/plan/05-i3-entry-contract.md`. I3-2 evidence remains the
 input history in Report 2605, not the active goal.
 
-Fresh successor evidence: runtime integration 61/61, feature library 289/289,
-probe 29/29, private QUIC unit 2/2, focused Clippy and format/diff pass; I2
-regressions 5/5 + 8/8 and M10 67/67 pass. Independent repair review has no
+Fresh delivery-checkpoint evidence: runtime integration 61/61 (55.23s), I2 local 5/5
+(0.05s), I2 CLI 8/8 (11.60s), probe 32/32, private QUIC unit 2/2, focused
+Clippy and format/diff pass. Feature library 289/289 and M10 67/67 remain prior
+evidence; I2 regressions 5/5 + 8/8 pass. Independent repair review has no
 remaining P0/P1. B installs genuine revocation before reconnect and rejects
 retained ingress without owner mutation; A stays pending. The earlier probe
-lifecycle unit 2/2 is prior evidence. Pre-write reconnect consumes one checked receipt;
+lifecycle unit 2/2 is prior evidence; the full probe library now passes 3/3.
+Pre-write reconnect consumes one checked receipt;
 post-admission retry is duplicate-rejected while the original requester stays
 pending/ambiguous. Report 2606 retains prior checkpoint `87ee2418` runtime
 51/51, library 285/285, probe 17/17 and bounded model 3/3 evidence; those suites

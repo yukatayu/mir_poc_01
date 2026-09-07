@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-09-07 18:13 JST
+最終更新: 2026-09-07 18:58 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -221,7 +221,8 @@ different-snapshot), actual probe integration 17/17, and cargo fmt.
 The historical ledger-source binary remains 49/49 in 47.70s only. The bounded
 model passed 3/3 tests (432 states, 2136 transitions) with three mutant
 counterexamples; this does not establish a general runtime proof. Authorized
-cleanup removed only `target/debug/incremental`, restoring about 18 GiB free.
+cleanup removed only `target/debug/incremental`; current free space is about
+15 GiB (the prior cleanup checkpoint was about 18 GiB).
 Runtime-only retry 2/2 and full same-feature library 285/285 (82.33s) pass.
 Focused two-crate all-target Clippy with `-Dwarnings` passes; model-target
 dead-code warnings without its private feature are not a deny-lint profile.
@@ -229,12 +230,17 @@ The successor slice installs genuine M9 revocation in B before reconnect and
 rejects retained old ingress without owner mutation; A remains pending/unknown.
 G1 control completes once. Registered-B ACK publication, actual tainted A input,
 one-shot ingress and terminal-observation rejection pass independent repair
-review (no remaining P0/P1). Fresh runtime integration 61/61, feature library
-289/289, probe 29/29, private QUIC unit 2/2, focused Clippy and format/diff pass;
-I2 regressions 5/5 + 8/8 and M10 67/67 also pass. The earlier probe lifecycle
-2/2 and model 3/3 remain prior evidence, not new runs. Full failure/order
-coverage remains open; disk free space is about 15 GiB. Next is the bounded
-actual-endpoint/fragments/truncation package, then provider/time contracts.
+review (no remaining P0/P1). Fresh runtime integration 61/61 (55.23s), I2 local
+5/5 (0.05s), I2 CLI 8/8 (11.60s), probe 32/32, private QUIC unit 2/2, focused
+Clippy and format/diff pass. Feature library 289/289, M10 67/67 and model 3/3
+remain prior evidence, not new runs. Earlier probe lifecycle 2/2 is prior evidence.
+The delivery checkpoint adds actual endpoint-unavailable, complete two-write
+frame round-trip, and strict truncation/FIN rejection before owner admission.
+Validated-only observer projection retains genuine evidence and rejects
+malformed provenance. Full probe library 3/3 also passes. These are bounded
+application-write/process observations, not complete failure-family acceptance.
+Full failure/order coverage remains open; disk free space is about 15 GiB.
+Next is contract-first time, then provider; both remain OPEN pending adoption.
 
 Owner clarification is retained as a working interpretation: ordinary meaning ->
 generated distribution -> continually checked composition. World/Avatar remain
@@ -291,3 +297,7 @@ requirements, and do not create a new theory gate or roadmap item.
   61/61, feature library 289/289, probe 29/29, QUIC unit 2/2, Clippy/format/diff,
   I2 5/5 + 8/8 and M10 67/67; independent repair review clears P0/P1. Earlier
   model evidence is retained, not rerun; I3-3 full-matrix acceptance remains open.
+- 2026-09-07 18:52 JST: endpoint-close/two-write/truncation and validated-only
+  observer evidence pass probe 32/32, full probe library 3/3, runtime 61/61,
+  QUIC 2/2, I2 5/5 + 8/8 and focused Clippy; independent P0/P1 clear.
+  Feature-library/M10/model remain prior; time/provider and full I3-3 stay open.
