@@ -216,6 +216,13 @@ pub(crate) struct I3PrivateProviderStaticProjectionSnapshot {
     provider_coverage: SnapshotReadOnlyProviderEffectCoverage,
 }
 
+#[cfg(test)]
+pub(crate) enum I3PrivateProviderStaticSnapshotTamper {
+    ChangeRoleDescriptor,
+    ChangeEdgeDescriptor,
+    RemoveProviderSourceMapAssociation,
+}
+
 impl I3PrivateProviderStaticProjectionSnapshot {
     fn from_static_projection(
         value: &crate::sys3_projection::ReadOnlyProviderEffectStaticProjection,
@@ -227,6 +234,79 @@ impl I3PrivateProviderStaticProjectionSnapshot {
                 value.provider_coverage(),
             ),
         })
+    }
+
+    fn from_static_projection_restricted_to_loci(
+        value: &crate::sys3_projection::ReadOnlyProviderEffectStaticProjection,
+        assigned_loci: &BTreeSet<String>,
+    ) -> Result<Self, I3PrivateProjectionSnapshotError> {
+        if assigned_loci.is_empty()
+            || assigned_loci
+                .iter()
+                .any(|locus| value.projection().locus_program(locus).is_none())
+        {
+            return Err(I3PrivateProjectionSnapshotError::StructuralMismatch {
+                reason: "provider static snapshot requires assigned checked loci",
+            });
+        }
+        let restricted = value.projection().restricted_to_loci(assigned_loci);
+        Ok(Self {
+            version: I3_PRIVATE_PROVIDER_STATIC_SNAPSHOT_VERSION,
+            projection: I3PrivateProjectionSnapshot::from_projection_unchecked(&restricted)?,
+            provider_coverage: SnapshotReadOnlyProviderEffectCoverage::from_coverage(
+                value.provider_coverage(),
+            ),
+        })
+    }
+
+    /// Compare a tainted, decoded structural candidate against the
+    /// parent-retained static plan without projecting or checking source in
+    /// the child-image path.
+    pub(crate) fn matches_static_projection_restricted_to_loci(
+        &self,
+        value: &crate::sys3_projection::ReadOnlyProviderEffectStaticProjection,
+        assigned_loci: &BTreeSet<String>,
+    ) -> bool {
+        Self::from_static_projection_restricted_to_loci(value, assigned_loci)
+            .is_ok_and(|expected| expected == *self)
+    }
+
+    #[cfg(test)]
+    pub(crate) fn test_only_tamper(
+        &mut self,
+        tamper: I3PrivateProviderStaticSnapshotTamper,
+    ) -> bool {
+        match tamper {
+            I3PrivateProviderStaticSnapshotTamper::ChangeRoleDescriptor => {
+                self.provider_coverage.requester_locus =
+                    "i3-provider-tampered-requester".to_string();
+                true
+            }
+            I3PrivateProviderStaticSnapshotTamper::ChangeEdgeDescriptor => {
+                let Some(edge) = self
+                    .projection
+                    .communication_plan
+                    .edges
+                    .iter_mut()
+                    .find(|edge| {
+                        matches!(
+                            edge.kind,
+                            SnapshotCommunicationEdgeKind::ReadOnlyProviderEffectRequest
+                                | SnapshotCommunicationEdgeKind::ReadOnlyProviderEffectResult
+                        )
+                    })
+                else {
+                    return false;
+                };
+                edge.edge_ref.push_str(":i3-provider-tampered");
+                true
+            }
+            I3PrivateProviderStaticSnapshotTamper::RemoveProviderSourceMapAssociation => self
+                .provider_coverage
+                .provider_source_map_associations
+                .pop()
+                .is_some(),
+        }
     }
 
     fn into_static_projection(
@@ -277,6 +357,16 @@ impl crate::sys3_projection::ReadOnlyProviderEffectStaticProjection {
         &self,
     ) -> Result<I3PrivateProviderStaticProjectionSnapshot, I3PrivateProjectionSnapshotError> {
         I3PrivateProviderStaticProjectionSnapshot::from_static_projection(self)
+    }
+
+    pub(crate) fn to_i3_private_static_snapshot_restricted_to_loci(
+        &self,
+        assigned_loci: &BTreeSet<String>,
+    ) -> Result<I3PrivateProviderStaticProjectionSnapshot, I3PrivateProjectionSnapshotError> {
+        I3PrivateProviderStaticProjectionSnapshot::from_static_projection_restricted_to_loci(
+            self,
+            assigned_loci,
+        )
     }
 
     pub(crate) fn from_i3_private_static_snapshot(

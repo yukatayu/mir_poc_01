@@ -6,13 +6,22 @@
 //! value only so the subsequent transport milestone has a narrow boundary.
 
 use std::collections::{BTreeMap, BTreeSet};
-use std::sync::atomic::{AtomicU64, Ordering};
+use std::sync::{
+    Arc,
+    atomic::{AtomicBool, AtomicU64, Ordering},
+};
 
 #[cfg(all(unix, feature = "i3-process-test-seams"))]
 use std::{
     io::Read,
     os::unix::net::UnixStream,
     time::{Duration, Instant},
+};
+
+#[cfg(test)]
+use std::sync::{
+    Mutex,
+    mpsc::{Receiver, SyncSender},
 };
 
 use mir_semantics::surface_v0_classification::OwnerAdmissionBudgetCondition;
@@ -45,13 +54,19 @@ const MAX_OUTBOUND_OWNER_REQUEST_ATTEMPTS: u8 = 2;
 
 use crate::{
     m8_owner_admission_gate::{M8I3OwnerAdmissionIssuance, M8I3OwnerAdmissionPermit},
+    m8_runtime_admission::{
+        M8I3PrivateProviderComponentSnapshot, M8ReadOnlyProviderEffectComponentInventory,
+    },
+    m9_auth_verification::M9I3PrivateAuthorityGenerationSnapshot,
+    sys3_i3_private_snapshot::I3PrivateProviderStaticProjectionSnapshot,
     sys3_projection::{BackendProfile, CommunicationEdgeKind},
     sys4_dispatch::{
         FabricProgram, LocalFabric, LocusStep, ObserverSafeM9SemanticRowSets,
         SealedFabricAdmission, SourceAction, Sys4I3InstalledOwnerCapabilitySuccessorReceipt,
         Sys4I3OwnerCapabilitySuccessorCoordinator, Sys4I3OwnerRequestRevalidationFailure,
         Sys4I3PendingOwnerRequestBinding, Sys4I3PrivateProcessCarrierSnapshot,
-        Sys4I3RestrictedOwnerCapabilitySuccessor, Sys4I3ValidatedOwnerReply, Sys4ProcessCarrier,
+        Sys4I3RestrictedOwnerCapabilitySuccessor, Sys4I3ValidatedOwnerReply,
+        Sys4InactiveProviderAdmission, Sys4InactiveProviderRestrictedAdmission, Sys4ProcessCarrier,
     },
     sys5_local_slice::{Sys5I3AdapterCarrierContract, Sys5LocalProject},
 };
@@ -83,6 +98,10 @@ pub enum Sys5I3ProcessRuntimeErrorKind {
     CohortM9GenerationMismatch,
     CohortProvenanceMismatch,
     AuthorityClosureDigestMismatch,
+    /// A Stage 2c inactive provider image no longer matched the parent-held
+    /// current setup/effect authorization association. No image can revive it
+    /// and no bootstrap/start work follows.
+    InactiveProviderBindingNotCurrent,
     RuntimeBootstrapRejected,
     NoGeneratedOwnerRequest,
     NonOwnerServe,
@@ -149,6 +168,11 @@ pub enum Sys5I3ProcessRuntimeErrorKind {
     LifecyclePublicationIncomplete,
     MissingAuthoritativeState,
     OutboundExtractionRejected,
+    /// The cfg(test)-only bounded handshake did not reach its deterministic
+    /// post-structural validation point. It is not a runtime authority or
+    /// lifecycle result.
+    #[cfg(test)]
+    TestOnlyInactiveProviderValidationSynchronizationTimedOut,
 }
 
 /// One observer-safe process-seam failure.  No raw M8/M9 material or source
@@ -628,43 +652,7 @@ impl Sys5I3Deployment {
             .cloned()
             .collect::<BTreeSet<_>>();
         let slots = slots.into_iter().collect::<Vec<_>>();
-        if slots.len() < 2 {
-            return Err(Sys5I3ProcessRuntimeError::new(
-                Sys5I3ProcessRuntimeErrorKind::InsufficientDeploymentSlots,
-            ));
-        }
-        if slots.iter().any(|slot| slot.loci.is_empty()) {
-            return Err(Sys5I3ProcessRuntimeError::new(
-                Sys5I3ProcessRuntimeErrorKind::EmptyDeploymentSlot,
-            ));
-        }
-        let mut slot_names = BTreeSet::new();
-        if slots
-            .iter()
-            .any(|slot| !slot_names.insert(slot.slot_name.clone()))
-        {
-            return Err(Sys5I3ProcessRuntimeError::new(
-                Sys5I3ProcessRuntimeErrorKind::DuplicateDeploymentSlot,
-            ));
-        }
-        let mut assigned = BTreeSet::new();
-        for locus in slots.iter().flat_map(|slot| slot.loci.iter()) {
-            if !expected.contains(locus) {
-                return Err(Sys5I3ProcessRuntimeError::new(
-                    Sys5I3ProcessRuntimeErrorKind::ExtraLocusAssignment,
-                ));
-            }
-            if !assigned.insert(locus.clone()) {
-                return Err(Sys5I3ProcessRuntimeError::new(
-                    Sys5I3ProcessRuntimeErrorKind::DuplicateLocusAssignment,
-                ));
-            }
-        }
-        if assigned != expected {
-            return Err(Sys5I3ProcessRuntimeError::new(
-                Sys5I3ProcessRuntimeErrorKind::MissingLocusAssignment,
-            ));
-        }
+        validate_i3_deployment_slots(&expected, &slots)?;
         Ok(Self {
             slots,
             parent_checked_program_ref: project.checked_program_identity_ref().to_string(),
@@ -679,6 +667,52 @@ impl Sys5I3Deployment {
     fn slot(&self, slot_name: &str) -> Option<&Sys5I3DeploymentSlot> {
         self.slots.iter().find(|slot| slot.slot_name == slot_name)
     }
+}
+
+/// Preserve the ordinary deployment cardinality and locus-assignment rules
+/// when an inactive provider cohort is assembled before image handoff.
+fn validate_i3_deployment_slots(
+    expected: &BTreeSet<String>,
+    slots: &[Sys5I3DeploymentSlot],
+) -> Result<(), Sys5I3ProcessRuntimeError> {
+    if slots.len() < 2 {
+        return Err(Sys5I3ProcessRuntimeError::new(
+            Sys5I3ProcessRuntimeErrorKind::InsufficientDeploymentSlots,
+        ));
+    }
+    if slots.iter().any(|slot| slot.loci.is_empty()) {
+        return Err(Sys5I3ProcessRuntimeError::new(
+            Sys5I3ProcessRuntimeErrorKind::EmptyDeploymentSlot,
+        ));
+    }
+    let mut slot_names = BTreeSet::new();
+    if slots
+        .iter()
+        .any(|slot| !slot_names.insert(slot.slot_name.clone()))
+    {
+        return Err(Sys5I3ProcessRuntimeError::new(
+            Sys5I3ProcessRuntimeErrorKind::DuplicateDeploymentSlot,
+        ));
+    }
+    let mut assigned = BTreeSet::new();
+    for locus in slots.iter().flat_map(|slot| slot.loci.iter()) {
+        if !expected.contains(locus) {
+            return Err(Sys5I3ProcessRuntimeError::new(
+                Sys5I3ProcessRuntimeErrorKind::ExtraLocusAssignment,
+            ));
+        }
+        if !assigned.insert(locus.clone()) {
+            return Err(Sys5I3ProcessRuntimeError::new(
+                Sys5I3ProcessRuntimeErrorKind::DuplicateLocusAssignment,
+            ));
+        }
+    }
+    if assigned != *expected {
+        return Err(Sys5I3ProcessRuntimeError::new(
+            Sys5I3ProcessRuntimeErrorKind::MissingLocusAssignment,
+        ));
+    }
+    Ok(())
 }
 
 /// A compact source-free description of one executable artifact retained in
@@ -1033,6 +1067,23 @@ impl Sys5I3ProcessImageTamper {
     }
 }
 
+/// Test-only mutations of a decoded inactive provider candidate. Each choice
+/// changes one tainted descriptor and recomputes the candidate commitment; it
+/// has no constructor for M8/M9 authority, a host binding, or an executable
+/// runtime seed.
+#[cfg(test)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+pub(crate) enum Sys5I3InactiveProviderImageTamper {
+    ChangeProviderRoleDescriptor,
+    ChangeProviderEdgeDescriptor,
+    ChangeRetainedLoweringAssociation,
+    RemoveExcludedProviderLoweringAssociation,
+    ChangeEndpointMetadata,
+    StripAssignedLocus,
+    WidenAssignedLocus,
+    RemoveRequiredLegacyAuthorityLineage,
+}
+
 /// Tainted image-carried successor material.  It has no issuer and becomes
 /// usable only after the matching trusted start binding is consumed for B.
 struct Sys5I3PrestagedOwnerCapabilityLifecycle {
@@ -1108,7 +1159,7 @@ pub struct Sys5I3RegisteredOwnerLifecycleAckReader {
     deadline_only: bool,
 }
 
-struct Sys5I3PrivateRuntimeSeed {
+struct Sys5I3OrdinaryPrivateRuntimeSeed {
     program: FabricProgram,
     admission: SealedFabricAdmission,
     parent_checked_program_ref: String,
@@ -1117,6 +1168,58 @@ struct Sys5I3PrivateRuntimeSeed {
     cohort_occurrence_ref: String,
     private_snapshot_binding_ref: String,
     prestaged_owner_capability_lifecycle: Option<Sys5I3PrestagedOwnerCapabilityLifecycle>,
+}
+
+/// The private runtime seed remains tagged through codec decode. Provider
+/// images carry only static/descriptive correspondence and have no ordinary
+/// M9 generation, FabricProgram, SealedFabricAdmission, or LocalFabric seed.
+enum Sys5I3PrivateRuntimeSeed {
+    Ordinary(Box<Sys5I3OrdinaryPrivateRuntimeSeed>),
+    InactiveProvider(Box<Sys5I3InactiveProviderRuntimeSeed>),
+}
+
+impl Sys5I3PrivateRuntimeSeed {
+    fn ordinary(&self) -> Option<&Sys5I3OrdinaryPrivateRuntimeSeed> {
+        match self {
+            Self::Ordinary(seed) => Some(seed),
+            Self::InactiveProvider(_) => None,
+        }
+    }
+
+    fn ordinary_mut(&mut self) -> Option<&mut Sys5I3OrdinaryPrivateRuntimeSeed> {
+        match self {
+            Self::Ordinary(seed) => Some(seed),
+            Self::InactiveProvider(_) => None,
+        }
+    }
+
+    fn inactive_provider(&self) -> Option<&Sys5I3InactiveProviderRuntimeSeed> {
+        match self {
+            Self::Ordinary(_) => None,
+            Self::InactiveProvider(seed) => Some(seed),
+        }
+    }
+}
+
+#[derive(Debug, Clone)]
+struct Sys5I3InactiveProviderRuntimeSeed {
+    parent_checked_program_ref: String,
+    static_snapshot: I3PrivateProviderStaticProjectionSnapshot,
+    component_snapshot: M8I3PrivateProviderComponentSnapshot,
+    legacy_authority_snapshot: M9I3PrivateAuthorityGenerationSnapshot,
+    component_binding_ref: String,
+}
+
+/// Static provider descriptor carried by a tainted inactive image. It is not
+/// an executable artifact, a carrier, an M9 generation, or a resource handle.
+#[derive(Debug, Clone)]
+struct Sys5I3InactiveProviderImageSeed {
+    assigned_loci: BTreeSet<String>,
+    parent_checked_program_ref: String,
+    static_snapshot: I3PrivateProviderStaticProjectionSnapshot,
+    component_snapshot: M8I3PrivateProviderComponentSnapshot,
+    legacy_authority_snapshot: M9I3PrivateAuthorityGenerationSnapshot,
+    component_binding_ref: String,
 }
 
 /// An immutable process image.  Its private runtime seed is already reduced
@@ -1132,6 +1235,7 @@ pub struct Sys5I3ProcessImage {
     designated_remote_input_closure: Sys5I3DesignatedRemoteInputClosure,
     child_seed: Sys5I3ObserverSafeChildSeed,
     private_runtime_seed: Sys5I3PrivateRuntimeSeed,
+    inactive_provider: Option<Sys5I3InactiveProviderImageSeed>,
     private_integrity_ref: String,
 }
 
@@ -1168,12 +1272,12 @@ pub struct Sys5I3ProcessCohortSummary {
     cohort_occurrence_ref: String,
 }
 
-/// A coordinator-retained, observer-safe expectation for exactly one child
-/// bootstrap.  It contains no executable program, authority generation,
-/// issuer, publisher, store, or source text.  The private child snapshot is
-/// therefore never self-authorizing merely because it decodes successfully.
+/// A coordinator-retained expectation for exactly one child bootstrap. For a
+/// tagged inactive provider image it retains private DTOs only for structural
+/// equality at the expected-start boundary; decoding them never reconstructs
+/// authority. Its `Debug` surface exposes only bounded routing facts.
 #[doc(hidden)]
-#[derive(Debug, PartialEq, Eq)]
+#[derive(PartialEq, Eq)]
 pub struct Sys5I3ExpectedStartBinding {
     slot_name: String,
     assigned_loci: BTreeSet<String>,
@@ -1184,6 +1288,30 @@ pub struct Sys5I3ExpectedStartBinding {
     image_integrity_ref: String,
     private_snapshot_binding_ref: String,
     expected_owner_capability_lifecycle: Option<Sys5I3ExpectedOwnerCapabilityLifecycle>,
+    inactive_provider: Option<Sys5I3ExpectedInactiveProviderBinding>,
+}
+
+#[derive(Debug, Clone, PartialEq, Eq)]
+struct Sys5I3ExpectedInactiveProviderBinding {
+    static_snapshot: I3PrivateProviderStaticProjectionSnapshot,
+    component_snapshot: M8I3PrivateProviderComponentSnapshot,
+    legacy_authority_snapshot: M9I3PrivateAuthorityGenerationSnapshot,
+    component_binding_ref: String,
+}
+
+impl std::fmt::Debug for Sys5I3ExpectedStartBinding {
+    fn fmt(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        formatter
+            .debug_struct("Sys5I3ExpectedStartBinding")
+            .field("slot_name", &self.slot_name)
+            .field("assigned_loci", &self.assigned_loci)
+            .field(
+                "parent_checked_program_ref",
+                &self.parent_checked_program_ref,
+            )
+            .field("image_integrity_ref", &self.image_integrity_ref)
+            .finish_non_exhaustive()
+    }
 }
 
 /// One supervisor-issued control record for the finite two-child localnet
@@ -1382,6 +1510,10 @@ impl Sys5I3TrustedLocalnetControl {
 
 impl Sys5I3ExpectedStartBinding {
     fn for_image(image: &Sys5I3ProcessImage) -> Self {
+        let seed = image
+            .private_runtime_seed
+            .ordinary()
+            .expect("ordinary image retains ordinary private seed");
         Self {
             slot_name: image.slot_name.clone(),
             assigned_loci: image.assigned_loci.clone(),
@@ -1394,12 +1526,8 @@ impl Sys5I3ExpectedStartBinding {
                 .opaque_cohort_ref()
                 .to_string(),
             image_integrity_ref: image.private_integrity_ref.clone(),
-            private_snapshot_binding_ref: image
-                .private_runtime_seed
-                .private_snapshot_binding_ref
-                .clone(),
-            expected_owner_capability_lifecycle: image
-                .private_runtime_seed
+            private_snapshot_binding_ref: seed.private_snapshot_binding_ref.clone(),
+            expected_owner_capability_lifecycle: seed
                 .prestaged_owner_capability_lifecycle
                 .as_ref()
                 .map(|lifecycle| Sys5I3ExpectedOwnerCapabilityLifecycle {
@@ -1412,10 +1540,43 @@ impl Sys5I3ExpectedStartBinding {
                         .to_string(),
                     candidate_binding_ref: lifecycle.candidate.candidate_binding_ref().to_string(),
                 }),
+            inactive_provider: None,
         }
     }
 
+    fn for_inactive_provider_image(image: &Sys5I3ProcessImage) -> Option<Self> {
+        let provider = image.inactive_provider.as_ref()?;
+        Some(Self {
+            slot_name: image.slot_name.clone(),
+            assigned_loci: image.assigned_loci.clone(),
+            parent_checked_program_ref: provider.parent_checked_program_ref.clone(),
+            projection_ref: String::new(),
+            // A composite association never occupies this ordinary M9
+            // generation field. Provider validation uses the explicit tagged
+            // binding below instead.
+            m9_generation_ref: String::new(),
+            cohort_provenance_ref: String::new(),
+            image_integrity_ref: image.private_integrity_ref.clone(),
+            private_snapshot_binding_ref: String::new(),
+            expected_owner_capability_lifecycle: None,
+            inactive_provider: Some(Sys5I3ExpectedInactiveProviderBinding {
+                static_snapshot: provider.static_snapshot.clone(),
+                component_snapshot: provider.component_snapshot.clone(),
+                legacy_authority_snapshot: provider.legacy_authority_snapshot.clone(),
+                component_binding_ref: provider.component_binding_ref.clone(),
+            }),
+        })
+    }
+
     fn validate_image(&self, image: &Sys5I3ProcessImage) -> Result<(), Sys5I3ProcessRuntimeError> {
+        if image.inactive_provider.is_some() || self.inactive_provider.is_some() {
+            return Err(Sys5I3ProcessRuntimeError::new(
+                Sys5I3ProcessRuntimeErrorKind::ImageIntegrityMismatch,
+            ));
+        }
+        let seed = image.private_runtime_seed.ordinary().ok_or_else(|| {
+            Sys5I3ProcessRuntimeError::new(Sys5I3ProcessRuntimeErrorKind::ImageIntegrityMismatch)
+        })?;
         if self.cohort_provenance_ref
             != image
                 .child_seed
@@ -1444,11 +1605,9 @@ impl Sys5I3ExpectedStartBinding {
         if self.slot_name != image.slot_name
             || self.assigned_loci != image.assigned_loci
             || self.image_integrity_ref != image.private_integrity_ref
-            || self.private_snapshot_binding_ref
-                != image.private_runtime_seed.private_snapshot_binding_ref
+            || self.private_snapshot_binding_ref != seed.private_snapshot_binding_ref
             || self.expected_owner_capability_lifecycle
-                != image
-                    .private_runtime_seed
+                != seed
                     .prestaged_owner_capability_lifecycle
                     .as_ref()
                     .map(|lifecycle| Sys5I3ExpectedOwnerCapabilityLifecycle {
@@ -1521,6 +1680,377 @@ pub struct Sys5I3ProcessCohort {
     pending_owner_lifecycle_ack_registration: Option<Sys5I3RegisteredOwnerLifecycleAckRegistration>,
     #[cfg(all(unix, feature = "i3-process-test-seams"))]
     pending_owner_lifecycle_stage_identity_binding_ref: Option<String>,
+}
+
+/// Stage 2c's parent-held provider-image cohort. The actual M9 composite and
+/// current setup association remain in this parent object; images carry only
+/// tainted static/descriptive candidates and cannot start a runtime.
+#[doc(hidden)]
+pub(crate) struct Sys5I3InactiveProviderCohort {
+    images: BTreeMap<String, Option<Sys5I3ProcessImage>>,
+    expected_start_bindings: BTreeMap<String, Option<Sys5I3ExpectedStartBinding>>,
+    checked: mir_semantics::surface_v0_pipeline::CheckedSurfaceV0,
+    admission: Sys4InactiveProviderAdmission,
+    setup_current: Arc<AtomicBool>,
+    #[cfg(test)]
+    inactive_validation_pause: Option<Sys5I3InactiveProviderValidationPause>,
+}
+
+#[cfg(test)]
+struct Sys5I3InactiveProviderValidationPause {
+    entered: SyncSender<()>,
+    resume: Mutex<Receiver<()>>,
+}
+
+#[cfg_attr(
+    not(test),
+    expect(
+        dead_code,
+        reason = "the inactive cohort methods are intentionally pre-start only until activation is added"
+    )
+)]
+impl Sys5I3InactiveProviderCohort {
+    pub(crate) fn from_parent_inactive_provider_admission<I>(
+        checked: mir_semantics::surface_v0_pipeline::CheckedSurfaceV0,
+        admission: Sys4InactiveProviderAdmission,
+        setup_current: Arc<AtomicBool>,
+        slots: I,
+    ) -> Result<Self, Sys5I3ProcessRuntimeError>
+    where
+        I: IntoIterator<Item = Sys5I3DeploymentSlot>,
+    {
+        if !setup_current.load(Ordering::Acquire)
+            || admission.checked_program_identity() != checked.program_identity()
+            || !admission.has_current_composite_seal()
+        {
+            return Err(Sys5I3ProcessRuntimeError::new(
+                Sys5I3ProcessRuntimeErrorKind::InactiveProviderBindingNotCurrent,
+            ));
+        }
+        let slots = slots.into_iter().collect::<Vec<_>>();
+        let expected_loci = admission
+            .static_plan()
+            .projection()
+            .locus_order()
+            .into_iter()
+            .map(ToOwned::to_owned)
+            .collect::<BTreeSet<_>>();
+        validate_i3_deployment_slots(&expected_loci, &slots)?;
+        let mut images = BTreeMap::new();
+        let mut expected_start_bindings = BTreeMap::new();
+        for slot in &slots {
+            if slot.slot_name.is_empty() || slot.endpoint.is_empty() || slot.loci.is_empty() {
+                return Err(Sys5I3ProcessRuntimeError::new(
+                    Sys5I3ProcessRuntimeErrorKind::EmptyDeploymentSlot,
+                ));
+            }
+            let slot_loci = slot.loci.iter().cloned().collect::<BTreeSet<_>>();
+            let restricted = admission.restricted_to_loci(&slot_loci).map_err(|_| {
+                Sys5I3ProcessRuntimeError::new(
+                    Sys5I3ProcessRuntimeErrorKind::ProgramProjectionMismatch,
+                )
+            })?;
+            let image = Sys5I3ProcessImage::from_inactive_provider_restriction(
+                slot,
+                &checked.program_identity().stable_key(),
+                &restricted,
+            )?;
+            let expected = Sys5I3ExpectedStartBinding::for_inactive_provider_image(&image)
+                .ok_or_else(|| {
+                    Sys5I3ProcessRuntimeError::new(
+                        Sys5I3ProcessRuntimeErrorKind::ImageIntegrityMismatch,
+                    )
+                })?;
+            if images.insert(slot.slot_name.clone(), Some(image)).is_some()
+                || expected_start_bindings
+                    .insert(slot.slot_name.clone(), Some(expected))
+                    .is_some()
+            {
+                return Err(Sys5I3ProcessRuntimeError::new(
+                    Sys5I3ProcessRuntimeErrorKind::DuplicateDeploymentSlot,
+                ));
+            }
+        }
+        Ok(Self {
+            images,
+            expected_start_bindings,
+            checked,
+            admission,
+            setup_current,
+            #[cfg(test)]
+            inactive_validation_pause: None,
+        })
+    }
+
+    pub(crate) fn take_process_image(
+        &mut self,
+        slot_name: &str,
+    ) -> Result<Sys5I3ProcessImage, Sys5I3ProcessRuntimeError> {
+        self.images
+            .get_mut(slot_name)
+            .ok_or_else(|| {
+                Sys5I3ProcessRuntimeError::new(Sys5I3ProcessRuntimeErrorKind::UnknownDeploymentSlot)
+            })?
+            .take()
+            .ok_or_else(|| {
+                Sys5I3ProcessRuntimeError::new(
+                    Sys5I3ProcessRuntimeErrorKind::ProcessImageAlreadyTaken,
+                )
+            })
+    }
+
+    pub(crate) fn parent_held_expected_start_binding(
+        &mut self,
+        slot_name: &str,
+    ) -> Result<Sys5I3ExpectedStartBinding, Sys5I3ProcessRuntimeError> {
+        self.expected_start_bindings
+            .get_mut(slot_name)
+            .ok_or_else(|| {
+                Sys5I3ProcessRuntimeError::new(Sys5I3ProcessRuntimeErrorKind::UnknownDeploymentSlot)
+            })?
+            .take()
+            .ok_or_else(|| {
+                Sys5I3ProcessRuntimeError::new(
+                    Sys5I3ProcessRuntimeErrorKind::RuntimeBootstrapRejected,
+                )
+            })
+    }
+
+    pub(crate) fn validate_inactive_untrusted_image(
+        &self,
+        image: Sys5I3UntrustedProcessImage,
+        expected: Sys5I3ExpectedStartBinding,
+    ) -> Result<Sys5I3InactiveProviderImageValidation, Sys5I3ProcessRuntimeError> {
+        if !self.setup_current.load(Ordering::Acquire)
+            || !self.admission.has_current_composite_seal()
+        {
+            return Err(Sys5I3ProcessRuntimeError::new(
+                Sys5I3ProcessRuntimeErrorKind::InactiveProviderBindingNotCurrent,
+            ));
+        }
+        let expected_provider = expected.inactive_provider.as_ref().ok_or_else(|| {
+            Sys5I3ProcessRuntimeError::new(Sys5I3ProcessRuntimeErrorKind::ImageIntegrityMismatch)
+        })?;
+        let candidate = image.image;
+        let provider = candidate.inactive_provider.as_ref().ok_or_else(|| {
+            Sys5I3ProcessRuntimeError::new(Sys5I3ProcessRuntimeErrorKind::ImageIntegrityMismatch)
+        })?;
+        let provider_seed = candidate
+            .private_runtime_seed
+            .inactive_provider()
+            .ok_or_else(|| {
+                Sys5I3ProcessRuntimeError::new(
+                    Sys5I3ProcessRuntimeErrorKind::ImageIntegrityMismatch,
+                )
+            })?;
+        let restricted = self
+            .admission
+            .restricted_to_loci(&candidate.assigned_loci)
+            .map_err(|_| {
+                Sys5I3ProcessRuntimeError::new(
+                    Sys5I3ProcessRuntimeErrorKind::ImageIntegrityMismatch,
+                )
+            })?;
+        if candidate.private_integrity_ref != candidate.recomputed_private_integrity()
+            || candidate.private_integrity_ref != expected.image_integrity_ref
+            || candidate.slot_name != expected.slot_name
+            || candidate.assigned_loci != expected.assigned_loci
+            || provider.assigned_loci != candidate.assigned_loci
+            || provider.parent_checked_program_ref != expected.parent_checked_program_ref
+            || provider.parent_checked_program_ref != provider_seed.parent_checked_program_ref
+            || provider.static_snapshot != provider_seed.static_snapshot
+            || provider.component_snapshot != provider_seed.component_snapshot
+            || provider.legacy_authority_snapshot != provider_seed.legacy_authority_snapshot
+            || provider.component_binding_ref != provider_seed.component_binding_ref
+            || provider.static_snapshot != expected_provider.static_snapshot
+            || provider.component_snapshot != expected_provider.component_snapshot
+            || provider.legacy_authority_snapshot != expected_provider.legacy_authority_snapshot
+            || provider.component_binding_ref != expected_provider.component_binding_ref
+            || !restricted.matches_parent(&self.admission)
+            || provider.static_snapshot != *restricted.static_snapshot()
+            || !provider
+                .component_snapshot
+                .matches_parent_component(restricted.component())
+            || provider.legacy_authority_snapshot
+                != restricted
+                    .legacy_authority_generation()
+                    .i3_private_snapshot()
+            || provider.component_binding_ref != restricted.component_binding_ref()
+        {
+            return Err(Sys5I3ProcessRuntimeError::new(
+                Sys5I3ProcessRuntimeErrorKind::ImageIntegrityMismatch,
+            ));
+        }
+        #[cfg(test)]
+        if let Some(pause) = self.inactive_validation_pause.as_ref() {
+            pause.entered.send(()).map_err(|_| {
+                Sys5I3ProcessRuntimeError::new(
+                    Sys5I3ProcessRuntimeErrorKind::TestOnlyInactiveProviderValidationSynchronizationTimedOut,
+                )
+            })?;
+            let resume = pause.resume.lock().map_err(|_| {
+                Sys5I3ProcessRuntimeError::new(
+                    Sys5I3ProcessRuntimeErrorKind::TestOnlyInactiveProviderValidationSynchronizationTimedOut,
+                )
+            })?;
+            resume
+                .recv_timeout(std::time::Duration::from_secs(5))
+                .map_err(|_| {
+                    Sys5I3ProcessRuntimeError::new(
+                        Sys5I3ProcessRuntimeErrorKind::TestOnlyInactiveProviderValidationSynchronizationTimedOut,
+                    )
+                })?;
+        }
+        if !self.admission.has_current_composite_seal() {
+            return Err(Sys5I3ProcessRuntimeError::new(
+                Sys5I3ProcessRuntimeErrorKind::InactiveProviderBindingNotCurrent,
+            ));
+        }
+        if !self.setup_current.load(Ordering::Acquire) {
+            return Err(Sys5I3ProcessRuntimeError::new(
+                Sys5I3ProcessRuntimeErrorKind::InactiveProviderBindingNotCurrent,
+            ));
+        }
+        let candidate_assigned_loci = candidate.assigned_loci.clone();
+        Ok(Sys5I3InactiveProviderImageValidation {
+            assigned_loci: candidate_assigned_loci.clone(),
+            checked_program_identity: self.checked.program_identity().clone(),
+            exact_provider_static_coverage: provider
+                .static_snapshot
+                .matches_static_projection_restricted_to_loci(
+                    self.admission.static_plan(),
+                    &provider.assigned_loci,
+                ),
+            provider_lowering_count: restricted.declared_provider_lowering_count(),
+            retained_non_provider_lowering_inventory: restricted.component().inventory(),
+            binding_was_current_at_validation: true,
+            composite_seal_association_at_validation: true,
+            exact_translated_legacy_m9_authority_inventory: restricted
+                .matches_m9_execution_restriction_for_assigned_loci(&self.admission),
+            matches_m9_execution_restriction: restricted
+                .matches_m9_execution_restriction_for_assigned_loci(&self.admission),
+            assigned_provider_static_descriptors_only: provider.assigned_loci
+                == candidate_assigned_loci,
+        })
+    }
+
+    #[cfg(test)]
+    pub(crate) fn test_only_pause_after_inactive_structural_validation(
+        &mut self,
+        entered: SyncSender<()>,
+        resume: Receiver<()>,
+    ) {
+        self.inactive_validation_pause = Some(Sys5I3InactiveProviderValidationPause {
+            entered,
+            resume: Mutex::new(resume),
+        });
+    }
+
+    #[cfg(test)]
+    pub(crate) fn test_only_retire_effect_authorization(
+        &mut self,
+    ) -> Result<(), Sys5I3ProcessRuntimeError> {
+        self.admission.retire_effect_authorization().map_err(|_| {
+            Sys5I3ProcessRuntimeError::new(
+                Sys5I3ProcessRuntimeErrorKind::InactiveProviderBindingNotCurrent,
+            )
+        })
+    }
+}
+
+/// T0-internal inspection surface for a successfully validated inactive
+/// provider image. It carries no executable seed or M9 authority material.
+#[doc(hidden)]
+pub(crate) struct Sys5I3InactiveProviderImageValidation {
+    assigned_loci: BTreeSet<String>,
+    checked_program_identity: mir_semantics::surface_v0_pipeline::CheckedProgramIdentity,
+    exact_provider_static_coverage: bool,
+    provider_lowering_count: usize,
+    retained_non_provider_lowering_inventory: M8ReadOnlyProviderEffectComponentInventory,
+    binding_was_current_at_validation: bool,
+    composite_seal_association_at_validation: bool,
+    exact_translated_legacy_m9_authority_inventory: bool,
+    matches_m9_execution_restriction: bool,
+    assigned_provider_static_descriptors_only: bool,
+}
+
+#[cfg_attr(
+    not(test),
+    expect(
+        dead_code,
+        reason = "the inactive validation receipt exposes no active runtime behavior before its next consumer"
+    )
+)]
+impl Sys5I3InactiveProviderImageValidation {
+    pub(crate) fn activation_pending(&self) -> bool {
+        true
+    }
+
+    pub(crate) fn provider_runtime_active(&self) -> bool {
+        false
+    }
+
+    pub(crate) fn provider_call_count(&self) -> usize {
+        0
+    }
+
+    /// The parent binding and effect authorization passed their checks at the
+    /// validation boundary. This receipt does not assert continuing authority
+    /// after validation returns.
+    pub(crate) fn binding_was_current_at_validation(&self) -> bool {
+        self.binding_was_current_at_validation
+    }
+
+    pub(crate) fn matches_checked_program_identity(
+        &self,
+        checked: &mir_semantics::surface_v0_pipeline::CheckedSurfaceV0,
+    ) -> bool {
+        self.checked_program_identity == *checked.program_identity()
+            && self
+                .retained_non_provider_lowering_inventory
+                .matches_checked_program_identity(checked)
+            && self.exact_provider_static_coverage
+    }
+
+    pub(crate) fn has_exact_provider_static_coverage(&self) -> bool {
+        self.exact_provider_static_coverage
+    }
+
+    pub(crate) fn declared_provider_lowering_count(&self) -> usize {
+        self.provider_lowering_count
+    }
+
+    pub(crate) fn retains_exact_non_provider_ordered_lowering_associations(
+        &self,
+        checked: &mir_semantics::surface_v0_pipeline::CheckedSurfaceV0,
+    ) -> bool {
+        self.checked_program_identity == *checked.program_identity()
+            && self
+                .retained_non_provider_lowering_inventory
+                .retains_exact_non_provider_ordered_lowering_associations(checked)
+    }
+
+    /// The decoded candidate matched the parent-held composite seal when this
+    /// receipt was produced. It is not a live effect-authorization query.
+    pub(crate) fn has_retained_composite_seal_association_at_validation(&self) -> bool {
+        self.composite_seal_association_at_validation
+    }
+
+    pub(crate) fn has_exact_translated_legacy_m9_authority_inventory(&self) -> bool {
+        self.exact_translated_legacy_m9_authority_inventory
+    }
+
+    pub(crate) fn matches_m9_execution_restriction_for_assigned_loci(&self) -> bool {
+        self.matches_m9_execution_restriction
+    }
+
+    pub(crate) fn retains_assigned_provider_static_descriptors_only(&self) -> bool {
+        self.assigned_provider_static_descriptors_only
+    }
+
+    pub(crate) fn assigned_loci(&self) -> Vec<String> {
+        self.assigned_loci.iter().cloned().collect()
+    }
 }
 
 impl Sys5I3ProcessCohort {
@@ -1734,13 +2264,21 @@ impl Sys5I3ProcessCohort {
                     Sys5I3ProcessRuntimeErrorKind::LifecyclePrestageRejected,
                 )
             })?;
+        let target_seed = target_image
+            .private_runtime_seed
+            .ordinary()
+            .ok_or_else(|| {
+                Sys5I3ProcessRuntimeError::new(
+                    Sys5I3ProcessRuntimeErrorKind::LifecyclePrestageRejected,
+                )
+            })?;
         #[cfg(feature = "i3-process-test-seams")]
         let staged = match tamper {
             Some(tamper) => self
                 .authority_successor_coordinator
                 .test_only_prestage_owner_capability_revocation_with_tamper(
-                    &target_image.private_runtime_seed.program,
-                    &target_image.private_runtime_seed.admission,
+                    &target_seed.program,
+                    &target_seed.admission,
                     contract.operation_id(),
                     contract.target_locus(),
                     match tamper {
@@ -1758,8 +2296,8 @@ impl Sys5I3ProcessCohort {
             None => self
                 .authority_successor_coordinator
                 .prestage_owner_capability_revocation(
-                    &target_image.private_runtime_seed.program,
-                    &target_image.private_runtime_seed.admission,
+                    &target_seed.program,
+                    &target_seed.admission,
                     contract.operation_id(),
                     contract.target_locus(),
                 ),
@@ -1768,8 +2306,8 @@ impl Sys5I3ProcessCohort {
         let staged = self
             .authority_successor_coordinator
             .prestage_owner_capability_revocation(
-                &target_image.private_runtime_seed.program,
-                &target_image.private_runtime_seed.admission,
+                &target_seed.program,
+                &target_seed.admission,
                 contract.operation_id(),
                 contract.target_locus(),
             );
@@ -1795,9 +2333,10 @@ impl Sys5I3ProcessCohort {
             .get_mut(&target_slot_name)
             .and_then(Option::as_mut)
             .expect("target image remained parent-held during prestage");
-        image
-            .private_runtime_seed
-            .prestaged_owner_capability_lifecycle = Some(Sys5I3PrestagedOwnerCapabilityLifecycle {
+        let seed = image.private_runtime_seed.ordinary_mut().ok_or_else(|| {
+            Sys5I3ProcessRuntimeError::new(Sys5I3ProcessRuntimeErrorKind::LifecyclePrestageRejected)
+        })?;
+        seed.prestaged_owner_capability_lifecycle = Some(Sys5I3PrestagedOwnerCapabilityLifecycle {
             target_slot_name: target_slot_name.clone(),
             stage_identity_binding_ref: stage_identity_binding_ref.clone(),
             candidate,
@@ -1880,8 +2419,8 @@ impl Sys5I3ProcessCohort {
             .filter_map(|image| {
                 image
                     .private_runtime_seed
-                    .prestaged_owner_capability_lifecycle
-                    .as_ref()
+                    .ordinary()
+                    .and_then(|seed| seed.prestaged_owner_capability_lifecycle.as_ref())
             })
             .next()
             .ok_or_else(|| {
@@ -2192,6 +2731,87 @@ impl Sys5I3RegisteredOwnerLifecycleAckReader {
 }
 
 impl Sys5I3ProcessImage {
+    /// Construct a tainted, inactive provider-image candidate from one
+    /// parent-held restricted admission. This does not construct a
+    /// `FabricProgram`, `SealedFabricAdmission`, M9 generation, executable
+    /// artifact, or provider call path.
+    fn from_inactive_provider_restriction(
+        slot: &Sys5I3DeploymentSlot,
+        parent_checked_program_ref: &str,
+        restriction: &Sys4InactiveProviderRestrictedAdmission,
+    ) -> Result<Self, Sys5I3ProcessRuntimeError> {
+        if slot.slot_name.is_empty()
+            || slot.endpoint.is_empty()
+            || slot.loci.is_empty()
+            || slot.loci.iter().cloned().collect::<BTreeSet<_>>().len() != slot.loci.len()
+            || slot.loci.iter().cloned().collect::<BTreeSet<_>>() != *restriction.assigned_loci()
+            || parent_checked_program_ref.is_empty()
+            || restriction.component_binding_ref().is_empty()
+            || restriction.declared_provider_lowering_count() != 4
+        {
+            return Err(Sys5I3ProcessRuntimeError::new(
+                Sys5I3ProcessRuntimeErrorKind::ImageIntegrityMismatch,
+            ));
+        }
+        let assigned_loci = slot.loci.iter().cloned().collect::<BTreeSet<_>>();
+        let provider = Sys5I3InactiveProviderImageSeed {
+            assigned_loci: assigned_loci.clone(),
+            parent_checked_program_ref: parent_checked_program_ref.to_string(),
+            static_snapshot: restriction.static_snapshot().clone(),
+            component_snapshot: restriction
+                .component()
+                .i3_private_provider_component_snapshot(),
+            legacy_authority_snapshot: restriction
+                .legacy_authority_generation()
+                .i3_private_snapshot(),
+            component_binding_ref: restriction.component_binding_ref().to_string(),
+        };
+        // The ordinary observer seed is deliberately inert for this tagged
+        // image. No composite reference is placed in its M9-generation field;
+        // all provider correspondence stays in `inactive_provider` below.
+        let child_seed = Sys5I3ObserverSafeChildSeed {
+            parent_checked_program_ref: parent_checked_program_ref.to_string(),
+            projection_ref: String::new(),
+            m9_generation_ref: String::new(),
+            cohort_occurrence_ref: String::new(),
+            required_local_authority_closure: Sys5I3RequiredLocalAuthorityClosure {
+                assigned_loci: assigned_loci.clone(),
+                rows: Vec::new(),
+                semantic_row_digest_ref: String::new(),
+                opaque_digest_ref: String::new(),
+                opaque_cohort_ref: String::new(),
+            },
+        };
+        let private_runtime_seed = Sys5I3PrivateRuntimeSeed::InactiveProvider(Box::new(
+            Sys5I3InactiveProviderRuntimeSeed {
+                parent_checked_program_ref: parent_checked_program_ref.to_string(),
+                static_snapshot: provider.static_snapshot.clone(),
+                component_snapshot: provider.component_snapshot.clone(),
+                legacy_authority_snapshot: provider.legacy_authority_snapshot.clone(),
+                component_binding_ref: provider.component_binding_ref.clone(),
+            },
+        ));
+        let mut image = Self {
+            slot_name: slot.slot_name.clone(),
+            endpoint: slot.endpoint.clone(),
+            assigned_loci,
+            executable_artifacts: Vec::new(),
+            required_edge_contracts: Vec::new(),
+            designated_remote_input_closure: Sys5I3DesignatedRemoteInputClosure {
+                request_receipt_pair_count: 0,
+                distinct_operation_count: 0,
+                pairs_are_distinguished_beyond_operation: false,
+                opaque_digest_ref: String::new(),
+            },
+            child_seed,
+            private_runtime_seed,
+            inactive_provider: Some(provider),
+            private_integrity_ref: String::new(),
+        };
+        image.refresh_private_integrity();
+        Ok(image)
+    }
+
     /// Construct one child image from the one coordinator-owned checked
     /// admission.  This is intentionally private: an image must not trigger
     /// a second full check/projection/admission or authority generation.
@@ -2307,16 +2927,17 @@ impl Sys5I3ProcessImage {
             cohort_occurrence_ref: cohort_occurrence_ref.to_string(),
             required_local_authority_closure: closure,
         };
-        let private_runtime_seed = Sys5I3PrivateRuntimeSeed {
-            program,
-            admission,
-            parent_checked_program_ref,
-            projection_ref,
-            m9_generation_ref,
-            cohort_occurrence_ref: cohort_occurrence_ref.to_string(),
-            private_snapshot_binding_ref,
-            prestaged_owner_capability_lifecycle: None,
-        };
+        let private_runtime_seed =
+            Sys5I3PrivateRuntimeSeed::Ordinary(Box::new(Sys5I3OrdinaryPrivateRuntimeSeed {
+                program,
+                admission,
+                parent_checked_program_ref,
+                projection_ref,
+                m9_generation_ref,
+                cohort_occurrence_ref: cohort_occurrence_ref.to_string(),
+                private_snapshot_binding_ref,
+                prestaged_owner_capability_lifecycle: None,
+            }));
         let mut image = Self {
             slot_name: slot.slot_name.clone(),
             endpoint: slot.endpoint.clone(),
@@ -2326,6 +2947,7 @@ impl Sys5I3ProcessImage {
             designated_remote_input_closure,
             child_seed,
             private_runtime_seed,
+            inactive_provider: None,
             private_integrity_ref: String::new(),
         };
         image.refresh_private_integrity();
@@ -2375,17 +2997,19 @@ impl Sys5I3ProcessImage {
                 self.private_integrity_ref = "sys5-i3-corrupt-image-integrity".to_string();
             }
             Sys5I3ProcessImageTamper::RemoveProjectedDesignatedRemoteInputRequirement => {
-                let _ = self
-                    .private_runtime_seed
-                    .program
-                    .remove_i3_process_designated_requirement_for_test();
+                if let Some(seed) = self.private_runtime_seed.ordinary_mut() {
+                    let _ = seed
+                        .program
+                        .remove_i3_process_designated_requirement_for_test();
+                }
                 self.refresh_private_integrity();
             }
             Sys5I3ProcessImageTamper::MismatchProjectedDesignatedRemoteInputRequestReceipt => {
-                let _ = self
-                    .private_runtime_seed
-                    .program
-                    .mismatch_i3_process_designated_requirement_for_test();
+                if let Some(seed) = self.private_runtime_seed.ordinary_mut() {
+                    let _ = seed
+                        .program
+                        .mismatch_i3_process_designated_requirement_for_test();
+                }
                 self.refresh_private_integrity();
             }
             Sys5I3ProcessImageTamper::RemoveOneRequiredSemanticBinding => {
@@ -2469,8 +3093,8 @@ impl Sys5I3ProcessImage {
             Sys5I3ProcessImageTamper::MismatchPrestagedOwnerCapabilityLifecycleTargetSlot => {
                 if let Some(lifecycle) = self
                     .private_runtime_seed
-                    .prestaged_owner_capability_lifecycle
-                    .as_mut()
+                    .ordinary_mut()
+                    .and_then(|seed| seed.prestaged_owner_capability_lifecycle.as_mut())
                 {
                     lifecycle.target_slot_name =
                         "i3-test-mismatched-owner-lifecycle-target".to_string();
@@ -2478,17 +3102,19 @@ impl Sys5I3ProcessImage {
                 }
             }
             Sys5I3ProcessImageTamper::RemoveActualRestrictedOwnerBindingFromPrivateSeed => {
-                let _ = self
-                    .private_runtime_seed
-                    .admission
-                    .remove_actual_restricted_owner_binding_for_i3_process_test();
+                if let Some(seed) = self.private_runtime_seed.ordinary_mut() {
+                    let _ = seed
+                        .admission
+                        .remove_actual_restricted_owner_binding_for_i3_process_test();
+                }
                 self.refresh_private_integrity();
             }
             Sys5I3ProcessImageTamper::RemoveActualDesignatedRemoteInputLineageFromPrivateSeed => {
-                let _ = self
-                    .private_runtime_seed
-                    .admission
-                    .remove_actual_designated_remote_input_lineage_for_i3_process_test();
+                if let Some(seed) = self.private_runtime_seed.ordinary_mut() {
+                    let _ = seed
+                        .admission
+                        .remove_actual_designated_remote_input_lineage_for_i3_process_test();
+                }
                 self.refresh_private_integrity();
             }
         }
@@ -2502,21 +3128,33 @@ impl Sys5I3ProcessImage {
     fn recomputed_private_integrity(&self) -> String {
         let mut hasher = Sha256::new();
         hasher.update(b"mirrorea/sys5/i3/process-image-integrity/v1\\0");
-        let prestaged_lifecycle_binding = self
-            .private_runtime_seed
-            .prestaged_owner_capability_lifecycle
-            .as_ref()
-            .map(|lifecycle| {
-                (
-                    lifecycle.target_slot_name.as_str(),
-                    lifecycle.stage_identity_binding_ref.as_str(),
-                    lifecycle.candidate.prior_generation_ref(),
-                    lifecycle.candidate.successor_generation_ref(),
-                    lifecycle.candidate.candidate_binding_ref(),
-                )
-            });
+        let prestaged_lifecycle_binding = match &self.private_runtime_seed {
+            Sys5I3PrivateRuntimeSeed::Ordinary(seed) => seed
+                .prestaged_owner_capability_lifecycle
+                .as_ref()
+                .map(|lifecycle| {
+                    (
+                        lifecycle.target_slot_name.as_str(),
+                        lifecycle.stage_identity_binding_ref.as_str(),
+                        lifecycle.candidate.prior_generation_ref(),
+                        lifecycle.candidate.successor_generation_ref(),
+                        lifecycle.candidate.candidate_binding_ref(),
+                    )
+                }),
+            Sys5I3PrivateRuntimeSeed::InactiveProvider(_) => None,
+        };
+        let inactive_provider_binding = self.inactive_provider.as_ref().map(|provider| {
+            (
+                &provider.assigned_loci,
+                &provider.parent_checked_program_ref,
+                &provider.static_snapshot,
+                &provider.component_snapshot,
+                &provider.legacy_authority_snapshot,
+                &provider.component_binding_ref,
+            )
+        });
         hasher.update(format!(
-            "{}{}{:?}{:?}{:?}{:?}{:?}{prestaged_lifecycle_binding:?}",
+            "{}{}{:?}{:?}{:?}{:?}{:?}{prestaged_lifecycle_binding:?}{inactive_provider_binding:?}",
             self.slot_name,
             self.endpoint,
             self.assigned_loci,
@@ -2534,8 +3172,17 @@ impl Sys5I3ProcessImage {
                 Sys5I3ProcessRuntimeErrorKind::ImageIntegrityMismatch,
             ));
         }
-        if self
-            .private_runtime_seed
+        if self.inactive_provider.is_some()
+            || self.private_runtime_seed.inactive_provider().is_some()
+        {
+            return Err(Sys5I3ProcessRuntimeError::new(
+                Sys5I3ProcessRuntimeErrorKind::RuntimeBootstrapRejected,
+            ));
+        }
+        let seed = self.private_runtime_seed.ordinary().ok_or_else(|| {
+            Sys5I3ProcessRuntimeError::new(Sys5I3ProcessRuntimeErrorKind::RuntimeBootstrapRejected)
+        })?;
+        if seed
             .program
             .validate_i3_process_designated_requirements()
             .is_err()
@@ -2561,34 +3208,28 @@ impl Sys5I3ProcessImage {
                 Sys5I3ProcessRuntimeErrorKind::ForeignEdgeContract,
             ));
         }
-        if self.child_seed.parent_checked_program_ref
-            != self.private_runtime_seed.parent_checked_program_ref
-        {
+        if self.child_seed.parent_checked_program_ref != seed.parent_checked_program_ref {
             return Err(Sys5I3ProcessRuntimeError::new(
                 Sys5I3ProcessRuntimeErrorKind::CohortParentProgramMismatch,
             ));
         }
-        if self.child_seed.projection_ref != self.private_runtime_seed.projection_ref {
+        if self.child_seed.projection_ref != seed.projection_ref {
             return Err(Sys5I3ProcessRuntimeError::new(
                 Sys5I3ProcessRuntimeErrorKind::CohortProjectionMismatch,
             ));
         }
-        if self.child_seed.m9_generation_ref != self.private_runtime_seed.m9_generation_ref {
+        if self.child_seed.m9_generation_ref != seed.m9_generation_ref {
             return Err(Sys5I3ProcessRuntimeError::new(
                 Sys5I3ProcessRuntimeErrorKind::CohortM9GenerationMismatch,
             ));
         }
-        if self.child_seed.cohort_occurrence_ref()
-            != self.private_runtime_seed.cohort_occurrence_ref
-        {
+        if self.child_seed.cohort_occurrence_ref() != seed.cohort_occurrence_ref {
             return Err(Sys5I3ProcessRuntimeError::new(
                 Sys5I3ProcessRuntimeErrorKind::CohortM9GenerationMismatch,
             ));
         }
-        let (expected_artifacts, expected_edges) = self
-            .private_runtime_seed
-            .program
-            .i3_process_normalized_inventory_refs();
+        let (expected_artifacts, expected_edges) =
+            seed.program.i3_process_normalized_inventory_refs();
         let actual_artifacts = self
             .executable_artifacts
             .iter()
@@ -2616,8 +3257,7 @@ impl Sys5I3ProcessImage {
                 Sys5I3ProcessRuntimeErrorKind::ImageInventoryProvenanceMismatch,
             ));
         }
-        let designated_inventory = self
-            .private_runtime_seed
+        let designated_inventory = seed
             .program
             .i3_process_designated_remote_input_inventory()
             .map_err(|_| {
@@ -2656,10 +3296,7 @@ impl Sys5I3ProcessImage {
             &self.child_seed.projection_ref,
             &self.child_seed.m9_generation_ref,
             self.child_seed.cohort_occurrence_ref(),
-            &self
-                .private_runtime_seed
-                .admission
-                .observer_safe_m9_semantic_row_sets_clone(),
+            &seed.admission.observer_safe_m9_semantic_row_sets_clone(),
         );
         if closure != &expected {
             return Err(Sys5I3ProcessRuntimeError::new(
@@ -3132,6 +3769,7 @@ impl TryFrom<PrivateExpectedStartBindingSnapshot> for Sys5I3ExpectedStartBinding
             image_integrity_ref: snapshot.image_integrity_ref,
             private_snapshot_binding_ref: snapshot.private_snapshot_binding_ref,
             expected_owner_capability_lifecycle,
+            inactive_provider: None,
         })
     }
 }
@@ -3344,6 +3982,74 @@ impl Sys5I3UntrustedProcessImage {
                 .opaque_cohort_ref()
                 .to_string(),
         }
+    }
+
+    #[cfg(test)]
+    pub(crate) fn into_test_only_inactive_provider_tamper(
+        mut self,
+        tamper: Sys5I3InactiveProviderImageTamper,
+    ) -> Self {
+        if self.image.inactive_provider.is_none() {
+            return self;
+        }
+        match tamper {
+            Sys5I3InactiveProviderImageTamper::ChangeProviderRoleDescriptor => {
+                let _ = self.image.inactive_provider.as_mut().and_then(|provider| provider.static_snapshot.test_only_tamper(
+                    crate::sys3_i3_private_snapshot::I3PrivateProviderStaticSnapshotTamper::ChangeRoleDescriptor,
+                ).then_some(()));
+            }
+            Sys5I3InactiveProviderImageTamper::ChangeProviderEdgeDescriptor => {
+                let _ = self.image.inactive_provider.as_mut().and_then(|provider| provider.static_snapshot.test_only_tamper(
+                    crate::sys3_i3_private_snapshot::I3PrivateProviderStaticSnapshotTamper::ChangeEdgeDescriptor,
+                ).then_some(()));
+            }
+            Sys5I3InactiveProviderImageTamper::ChangeRetainedLoweringAssociation => {
+                let _ = self.image.inactive_provider.as_mut().and_then(|provider| {
+                    provider
+                        .component_snapshot
+                        .test_only_change_retained_lowering_association()
+                        .then_some(())
+                });
+            }
+            Sys5I3InactiveProviderImageTamper::RemoveExcludedProviderLoweringAssociation => {
+                let _ = self.image.inactive_provider.as_mut().and_then(|provider| {
+                    provider
+                        .static_snapshot
+                        .test_only_tamper(
+                            crate::sys3_i3_private_snapshot::I3PrivateProviderStaticSnapshotTamper::RemoveProviderSourceMapAssociation,
+                        )
+                        .then_some(())
+                });
+            }
+            Sys5I3InactiveProviderImageTamper::ChangeEndpointMetadata => {
+                self.image.endpoint.push_str(":i3-provider-tampered");
+            }
+            Sys5I3InactiveProviderImageTamper::RemoveRequiredLegacyAuthorityLineage => {
+                let _ = self.image.inactive_provider.as_mut().and_then(|provider| {
+                    provider
+                        .legacy_authority_snapshot
+                        .test_only_remove_required_legacy_authority_lineage()
+                        .then_some(())
+                });
+            }
+            Sys5I3InactiveProviderImageTamper::StripAssignedLocus => {
+                if let Some(locus) = self.image.assigned_loci.iter().next().cloned() {
+                    self.image.assigned_loci.remove(&locus);
+                    if let Some(provider) = self.image.inactive_provider.as_mut() {
+                        provider.assigned_loci.remove(&locus);
+                    }
+                }
+            }
+            Sys5I3InactiveProviderImageTamper::WidenAssignedLocus => {
+                let widened = "i3-provider-unassigned-locus".to_string();
+                self.image.assigned_loci.insert(widened.clone());
+                if let Some(provider) = self.image.inactive_provider.as_mut() {
+                    provider.assigned_loci.insert(widened);
+                }
+            }
+        }
+        self.image.refresh_private_integrity();
+        self
     }
 }
 
@@ -3735,11 +4441,16 @@ impl Sys5I3PrivateProcessCodec {
                     Sys5I3LocalnetControlErrorKind::StartBindingRejected,
                 )
             })?;
-        let image_lifecycle = image
-            .image
-            .private_runtime_seed
-            .prestaged_owner_capability_lifecycle
-            .take();
+        let image_lifecycle = match &mut image.image.private_runtime_seed {
+            Sys5I3PrivateRuntimeSeed::Ordinary(seed) => {
+                seed.prestaged_owner_capability_lifecycle.take()
+            }
+            Sys5I3PrivateRuntimeSeed::InactiveProvider(_) => {
+                return Err(Sys5I3LocalnetControlError::new(
+                    Sys5I3LocalnetControlErrorKind::StartBindingRejected,
+                ));
+            }
+        };
         let stimulus = match (
             image_lifecycle,
             control
@@ -4294,10 +5005,17 @@ impl Sys5I3ProcessRuntime {
     /// image bytes must use `validate_and_start_image_with_localnet_control`,
     /// which binds the untrusted image to its separately retained control.
     pub fn start(image: Sys5I3ProcessImage) -> Result<Self, Sys5I3ProcessRuntimeError> {
+        if image.inactive_provider.is_some()
+            || image.private_runtime_seed.inactive_provider().is_some()
+        {
+            return Err(Sys5I3ProcessRuntimeError::new(
+                Sys5I3ProcessRuntimeErrorKind::RuntimeBootstrapRejected,
+            ));
+        }
         if image
             .private_runtime_seed
-            .prestaged_owner_capability_lifecycle
-            .is_some()
+            .ordinary()
+            .is_some_and(|seed| seed.prestaged_owner_capability_lifecycle.is_some())
         {
             // A staged image must move its candidate only through the
             // independently bound bootstrap path above.  Direct start cannot
@@ -4328,12 +5046,14 @@ impl Sys5I3ProcessRuntime {
             &logical_origin_ref,
             0,
         );
-        let mut fabric = LocalFabric::bootstrap(
-            image.private_runtime_seed.program,
-            image.private_runtime_seed.admission,
-            BackendProfile::St,
-        )
-        .map_err(|_| {
+        let assigned_loci = image.assigned_loci.clone();
+        let Sys5I3PrivateRuntimeSeed::Ordinary(seed) = image.private_runtime_seed else {
+            return Err(Sys5I3ProcessRuntimeError::new(
+                Sys5I3ProcessRuntimeErrorKind::RuntimeBootstrapRejected,
+            ));
+        };
+        let mut fabric = LocalFabric::bootstrap(seed.program, seed.admission, BackendProfile::St)
+            .map_err(|_| {
             Sys5I3ProcessRuntimeError::new(Sys5I3ProcessRuntimeErrorKind::RuntimeBootstrapRejected)
         })?;
         let owner_admission_runtime_instance = fabric
@@ -4347,9 +5067,7 @@ impl Sys5I3ProcessRuntime {
             .i3_checked_owner_admission_conditions()
             .into_iter()
             .filter(|condition: &OwnerAdmissionBudgetCondition| {
-                image
-                    .assigned_loci
-                    .contains(condition.owner_locus().as_str())
+                assigned_loci.contains(condition.owner_locus().as_str())
             })
             .map(|condition: OwnerAdmissionBudgetCondition| {
                 (
@@ -4362,7 +5080,7 @@ impl Sys5I3ProcessRuntime {
             })
             .collect::<BTreeMap<_, _>>();
         Ok(Self {
-            assigned_loci: image.assigned_loci,
+            assigned_loci,
             local_store_identity_ref,
             identity_basis: Sys5I3ObserverSafeIdentityBasis,
             parent_checked_program_ref,

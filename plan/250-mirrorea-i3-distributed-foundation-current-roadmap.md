@@ -1,6 +1,6 @@
 # Plan 250 — Mirrorea I3 Distributed Foundation current execution roadmap
 
-最終更新: 2026-09-08 19:07 JST
+最終更新: 2026-09-08 21:23 JST
 
 ## 役割、authority、current control state
 
@@ -59,14 +59,20 @@ roadmap/status pointer の一致を検証する。
   ADR-0042/spec/17 selects the provider contract; its source/checker and
   fail-closed legacy guards are integrated at `9e8d674a`. Exact static coverage,
   composite verification and projection are integrated at `3862b168`, with
-  clean pushed parity. Current is genuine resource binding -> actual M9
+  clean pushed parity. Genuine resource binding -> actual M9
   authentication/verification and separate policy -> inactive scoped M8
-  component (Stage 2b), not a new milestone or provider runtime activation.
-  Its frozen gates now pass: runtime362, process63, M10/I2 67/5/8, public
-  guards5, scoped Clippy, workspace format and all-target compilation.
-  Independent spec/quality reviews have no remaining P0/P1/P2; planner gives
-  GO for inactive-only integration. Parent's LAB/Git close is current, then
-  the existing SYS4/SYS5 mixed-image handoff is the direct consumer.
+  component (Stage 2b) is integrated at `7142b205`, with clean HEAD/origin/main/
+  live parity observed `2026-09-08T19:22:07+09:00`. This is not a new milestone
+  or provider runtime activation.
+  The Stage 2b gates above remain its accepted input evidence. Current
+  Stage 2c carries exact scoped M8/M9/static data through existing SYS4/SYS5
+  inactive images, private codec and separately held expected validation.
+  Final gates pass focused13 (included in runtime375), process63, M10/I2
+  67/5/8, public guards5, actual ordinary localnet41, scoped Clippy, workspace
+  format and all-target check. Independent spec/quality reviews are P0/P1/P2
+  zero after reproduced expected-commitment/retirement repairs; the planner
+  gives conditional GO for inactive-only integration. LAB/Git close is current,
+  followed by actual provider runtime/host/QUIC within I3-3.
 - next goal: **I3-4 (requires I3-3 acceptance and explicit owner resume)**
 - all other milestones: **ordered, inactive, and dependency-gated**
 - latest owner control (2026-09-07 18:13 JST observation): complete I3-3 with
@@ -1544,7 +1550,9 @@ invocation/networking/runtime/supervisor and row18 remain absent. Final free
 space is 30,906,707,968 bytes after the approved five-file deletion and owner
 housekeeping; no additional agent cleanup occurs. No gate is waived.
 
-The direct next consumer is the private checked mixed-image variant through
+Stage 2b closes at `7142b205b4e2805d50ce78156de99e6feb1db37a`; commit/push and
+clean live parity are observed at `2026-09-08T19:22:07+09:00`. Stage 2c is the
+private checked mixed-image variant through
 the EXISTING SYS4/SYS5 admission/initial-state/restriction/snapshot/trusted-start
 seams. It must retain the actual consumed composite evidence and needed M9
 facts at sealing, full identity, exact four-row scope, independent effect
@@ -1555,6 +1563,56 @@ serialized image. Decisive negatives are evidence splicing, stale/foreign
 context, scope widening/stripping, ordinary-path laundering and hidden
 activation. Runtime/supervisor/actual host and QUIC evidence follow this join.
 
+Stage 2c implementation uses three narrow shared seams: the existing finite-local
+M9 source-derived capability/witness issuer and active-snapshot inventory
+translation; SYS4's checked per-locus restriction traversal; SYS5's existing
+deployment/image/control assembly. The ordinary path retains ordinary final
+verification and its successor publisher. The composite path retains the
+actual consumed composite discharge, ContractUpdate facts and scoped M8,
+without synthesizing `M9FinalAdmissionEvidence` or a provider-free verdict.
+Composite successor/patch routes remain unavailable in this component.
+Private image seeds distinguish ordinary generation from inactive composite
+association. All source loci remain deployed; provider roles/edges are exact
+inactive descriptors, not an excuse to widen child legacy execution scope.
+Decoded images remain candidates until separately trusted expected-start
+validation; that validation still cannot start a provider/LocalFabric/endpoint.
+
+- [x] Separate test author and fail-closed production scaffold; record an actual
+  positive assertion RED independently of any missing-API compiler error.
+- [x] Genuine M9 legacy issuer/inventory reuse and retained composite evidence.
+- [x] Exact A/B restriction, private codec round-trip and inactive expected-start
+  validation; ordinary escape, splicing, altered coverage/scope and actual
+  retired-context falsifiers reject without activation.
+- [ ] Focused quality/regression, independent review, LAB synchronization and
+  observed commit/push/parity. Then continue actual provider runtime in I3-3.
+
+Initial Stage 2c positive executes and fails at the genuine sealed composite's
+typed `InactiveProcessHandoffPending` boundary: 0 passed, 1 failed, 363
+filtered, exit 101, inspected `2026-09-08T19:32:46+09:00`. The uninhabited
+scaffold emitted nine warnings, not final warning-clean evidence. The subsequent
+genuine handoff exposes missing retained relation-reacquire facts; preserving
+those already validated facts yields six passing image/codec/guard tests and
+one reached foreign-checked-identity query failure. That query and the reached
+ordinary-restore/single-slot-deployment falsifiers are repaired: nine focused
+checks pass. Required private M8 scope is preserved in version 2; old or
+unknown scope cannot default to ordinary. The genuine retained-start Debug
+privacy falsifier then fails and is repaired with a reference-only formatter:
+ten focused tests now pass (362 filtered, 7.57 seconds). Removing four redundant
+lint expectations then passes scoped warnings-denied Clippy and workspace
+format. Runtime372/372 and process63/63 pass before independent review finds
+two acceptance blockers: missing equality with the separately held exact image
+commitment, and inconsistent receipt facts on actual mid-validation setup
+retirement. Both are reproduced and repaired; ordinary decoded-start and
+actual excluded-provider-row negative coverage are also tightened. The final
+frozen packet passes thirteen focused tests (included in runtime375/375),
+process63/63, M10 67/67, I2 local/CLI 5/5 and 8/8, provider guards5/5,
+ordinary localnet41/41, scoped warnings-denied Clippy, workspace format and
+workspace all-target check. Both independent reviews have zero remaining
+P0/P1/P2 findings. The planning review's evidence conditions are met except
+final LAB/docs/Git integration. This is local inactive-image evidence, not
+provider activation or whole-I3-3 acceptance. Actual Stage3 host/QUIC execution
+is the next direct consumer, not another inactive-only handoff.
+
 Default M8/M9/SYS5/kernel execution remains rejecting, and new provider
 fragments must explicitly fail the SYS4 completeness boundary until a genuine
 composite admission exists. Static snapshots cannot become ordinary executable
@@ -1562,12 +1620,13 @@ images. `RuntimeUnsupported` is retained as an exact activation-pending
 requirement, not waived or declared discharged. Actual binding/permit/runtime/
 supervisor/call/cut evidence remains required in the dependent components.
 
-Ownership: `time_host_driver` owns the semantics composite checker and SYS3
-static production files; `c3_test_repair` owns the separate semantics test
+Historical Stage 2a ownership (superseded for current Stage 2c):
+`time_host_driver` owned the semantics composite checker and SYS3
+static production files; `c3_test_repair` owned the separate semantics test
 target, `time_network_tests` the separate private runtime tests. Only necessary
-downstream explicit refusal/compile guards are delegated to `c3_runtime_fix`;
-dynamic composite work waits for the static interface freeze. One evaluator
-runs commands, parent owns integration, and independent reviewers remain
+downstream explicit refusal/compile guards were delegated to `c3_runtime_fix`;
+dynamic composite work waited for the static interface freeze. One evaluator
+ran commands, parent owned integration, and independent reviewers remained
 separate from authors. A necessarily new API's compiler gap is recorded as
 such; an assertion RED on a fail-closed interface precedes behavior completion.
 

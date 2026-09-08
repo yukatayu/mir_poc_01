@@ -1,6 +1,6 @@
 # Current Task Map (LAB)
 
-最終更新: 2026-09-08 19:08 JST
+最終更新: 2026-09-08 21:14 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project direction,
 theory, ADRs, conformance, and process. Everything outside it is LAB evidence,
@@ -50,11 +50,12 @@ false success/nonexecution, blind retry, leaked private information, or hang.
 Current component is the source-declared provider effect selected by
 ADR-0042/spec/17 at contract cut 985ee179. Source/guard cut `9e8d674a` is
 pushed with clean remote parity observed 2026-09-08 14:05 JST. Stage 2a static
-coverage/projection/composite verification is now integrated at `3862b168`,
-clean pushed parity 15:41:54 JST. Stage 2b actual resource binding and M9
-authorization/scoped-M8 are current; invocation/runtime remain downstream.
+coverage/projection/composite verification is retained at `3862b168`.
+Accepted Stage2b cut `7142b205b4e2805d50ce78156de99e6feb1db37a` has clean
+HEAD/origin/main/live parity at 2026-09-08 19:22 JST. Stage 2b actual resource binding and M9
+authorization/scoped-M8 are accepted inactive evidence; invocation/runtime remain downstream.
 
-Fresh frozen Stage 2a evidence:
+Retained frozen Stage 2a evidence:
 
 - Semantics composite 6/6, provider source 17/17, legacy finite 8/8.
 - Composite privacy doctest 1/1; static runtime module 11/11.
@@ -69,10 +70,21 @@ that total; process is 63/63, M10 is 67/67, I2 local/CLI is 5/5 and 8/8, and
 public guards are 5/5. Three-crate all-target warnings-denied Clippy, workspace
 format, and workspace all-target check pass; workspace tests and CLI/probe
 Clippy are not claimed. Independent spec/quality review is P0/P1/P2 zero after
-three direct tests and generic M8 typed refusal. The source is frozen and the
-Stage2b component is inactive/green for parent integration; a new Git cut is
-pending. This is not provider activation, host/network runtime, supervisor
-availability or component acceptance. Report 2606 retains exact logs.
+three direct tests and generic M8 typed refusal. The accepted Stage2b source/cut
+is frozen; current Stage2c is dirty. Stage2b component is accepted but inactive.
+Current Stage2c is the existing
+SYS4/SYS5 inactive mixed-image handoff: final focused module/runtime is 13/13
+included in runtime 375/375 (362 filtered; 9.65s/88.17s), process 63/63, M10
+67/67, I2 local/CLI 5/5 and 8/8, guards 5/5, and actual ordinary localnet
+41/41 (59.92s). Feature-union all-target Clippy `-Dwarnings` (22.06s), workspace
+format and all-target check (17.41s) pass with no warnings; workspace tests and
+probe-all tests are not claimed. Final independent review is P0/P1/P2 zero after
+two P1 falsifiers and three P2 coverage/comment repairs. Stage2c is inactive/
+green for parent integration; a new component commit/push remains pending. The
+next direct consumer is actual Stage3 provider host/QUIC runtime; private M8
+version 2 is required in scope, with no compatibility promise. This is not
+Stage2c acceptance, host activity, provider row-18 completion or I3-3 completion.
+Report 2606 retains exact logs.
 
 Four review defects were reproduced and repaired: cross-source composite
 candidate acceptance, raw legacy-discharge escape, nested provider-only

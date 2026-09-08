@@ -1,4 +1,4 @@
-//! Private Stage 2b inactive-composite admission for the finite read-only
+//! Private Stage 2b/2c inactive-composite admission for the finite read-only
 //! provider profile.
 //!
 //! This module binds the complete checked profile to a genuine trusted
@@ -13,7 +13,7 @@
     not(test),
     expect(
         dead_code,
-        reason = "Stage 2b inactive composite awaits its direct SYS-4/SYS-5 consumer"
+        reason = "the inactive composite awaits the deferred provider activation consumer"
     )
 )]
 
@@ -47,6 +47,8 @@ use crate::{
         M9ReadOnlyProviderPolicyProof, M9VerifiedReadOnlyProviderComposite,
         trusted_read_only_provider_composite_bootstrap, verify_read_only_provider_composite,
     },
+    sys4_dispatch::Sys4InactiveProviderAdmission,
+    sys5_i3_process_runtime::{Sys5I3DeploymentSlot, Sys5I3InactiveProviderCohort},
 };
 
 const TRUSTED_LOGICAL_RESOURCE_SLOT: &str = "sample_input";
@@ -73,6 +75,7 @@ pub(crate) enum I3ProviderCompositeErrorKind {
     EffectAuthorizationRetired,
     OrdinarySnapshotRejected,
     ScopedSnapshotRestoreRejected,
+    InactiveProcessHandoffRejected,
 }
 
 /// Safe failure carrier for the private Stage 2b composite boundary.
@@ -106,7 +109,9 @@ impl I3ProviderCompositeError {
 struct TrustedFixtureContext {
     resource_runtime_nonce: [u8; 32],
     root: PathBuf,
-    current: AtomicBool,
+    // The parent-held inactive cohort must observe the same retirement cell as
+    // the trusted setup, rather than a copied point-in-time value.
+    current: Arc<AtomicBool>,
     admission_sealed: AtomicBool,
 }
 
@@ -186,7 +191,7 @@ impl I3TrustedReadOnlyProviderFixtureSetup {
             context: Arc::new(TrustedFixtureContext {
                 resource_runtime_nonce,
                 root,
-                current: AtomicBool::new(true),
+                current: Arc::new(AtomicBool::new(true)),
                 admission_sealed: AtomicBool::new(false),
             }),
         })
@@ -443,6 +448,8 @@ impl I3ReadOnlyProviderCompositeCandidate {
         .map(|inner| I3VerifiedReadOnlyProviderComposite {
             inner,
             context: Arc::clone(&resource_binding.context),
+            checked,
+            static_plan,
         })
         .map_err(|_| {
             I3ProviderCompositeError::new(
@@ -455,6 +462,8 @@ impl I3ReadOnlyProviderCompositeCandidate {
 pub(crate) struct I3VerifiedReadOnlyProviderComposite {
     inner: M9VerifiedReadOnlyProviderComposite,
     context: Arc<TrustedFixtureContext>,
+    checked: CheckedSurfaceV0,
+    static_plan: ReadOnlyProviderEffectStaticProjection,
 }
 
 impl fmt::Debug for I3VerifiedReadOnlyProviderComposite {
@@ -478,7 +487,12 @@ impl I3VerifiedReadOnlyProviderComposite {
                 I3ProviderCompositeErrorKind::ResourceBindingNotCurrent,
             ));
         }
-        let I3VerifiedReadOnlyProviderComposite { inner, context } = self;
+        let I3VerifiedReadOnlyProviderComposite {
+            inner,
+            context,
+            checked,
+            static_plan,
+        } = self;
         if !context.reserve_successful_admission() {
             return Err(I3ProviderCompositeError::new(
                 I3ProviderCompositeErrorKind::AdmissionAlreadyUsed,
@@ -486,7 +500,12 @@ impl I3VerifiedReadOnlyProviderComposite {
         }
         match inner.seal_with_fixed_policy(policy.inner) {
             Ok(inner) if context.current.load(Ordering::Acquire) => {
-                Ok(I3InactiveReadOnlyProviderComposite { inner, context })
+                Ok(I3InactiveReadOnlyProviderComposite {
+                    inner,
+                    context,
+                    checked,
+                    static_plan,
+                })
             }
             Ok(_) => {
                 context.release_unsuccessful_admission_reservation();
@@ -517,6 +536,8 @@ impl fmt::Debug for I3ReadOnlyProviderPolicyDecision {
 pub(crate) struct I3InactiveReadOnlyProviderComposite {
     inner: M9InactiveReadOnlyProviderComposite,
     context: Arc<TrustedFixtureContext>,
+    checked: CheckedSurfaceV0,
+    static_plan: ReadOnlyProviderEffectStaticProjection,
 }
 
 impl fmt::Debug for I3InactiveReadOnlyProviderComposite {
@@ -639,6 +660,44 @@ impl I3InactiveReadOnlyProviderComposite {
                     I3ProviderCompositeErrorKind::OrdinarySnapshotRejected,
                 )
             })
+    }
+
+    /// Stage 2c's private path into the existing inactive process-image
+    /// handoff. It retains the actual M9/SYS-4 facts through decoded-image
+    /// validation, but does not activate a provider or start a runtime.
+    pub(crate) fn into_inactive_process_cohort<I>(
+        self,
+        slots: I,
+    ) -> Result<Sys5I3InactiveProviderCohort, I3ProviderCompositeError>
+    where
+        I: IntoIterator<Item = Sys5I3DeploymentSlot>,
+    {
+        if !self.context.current.load(Ordering::Acquire) {
+            return Err(I3ProviderCompositeError::new(
+                I3ProviderCompositeErrorKind::ResourceBindingNotCurrent,
+            ));
+        }
+        let admission = Sys4InactiveProviderAdmission::from_m9_inactive_provider_composite(
+            self.checked.program_identity().clone(),
+            self.static_plan,
+            self.inner,
+        )
+        .map_err(|_| {
+            I3ProviderCompositeError::new(
+                I3ProviderCompositeErrorKind::InactiveProcessHandoffRejected,
+            )
+        })?;
+        Sys5I3InactiveProviderCohort::from_parent_inactive_provider_admission(
+            self.checked,
+            admission,
+            Arc::clone(&self.context.current),
+            slots,
+        )
+        .map_err(|_| {
+            I3ProviderCompositeError::new(
+                I3ProviderCompositeErrorKind::InactiveProcessHandoffRejected,
+            )
+        })
     }
 }
 

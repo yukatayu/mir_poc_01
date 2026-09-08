@@ -8,7 +8,11 @@ use std::collections::BTreeSet;
 use serde::{Deserialize, Serialize};
 
 use crate::{
-    sys3_i3_private_snapshot::I3PrivateProjectionSnapshot,
+    m8_runtime_admission::M8I3PrivateProviderComponentSnapshot,
+    m9_auth_verification::M9I3PrivateAuthorityGenerationSnapshot,
+    sys3_i3_private_snapshot::{
+        I3PrivateProjectionSnapshot, I3PrivateProviderStaticProjectionSnapshot,
+    },
     sys4_dispatch::{
         FabricProgram, SealedFabricAdmission,
         Sys4I3PrivateRestrictedOwnerCapabilitySuccessorSnapshot,
@@ -17,9 +21,11 @@ use crate::{
 };
 
 use super::{
-    Sys5I3DesignatedRemoteInputClosure, Sys5I3ObserverSafeChildSeed, Sys5I3PrivateRuntimeSeed,
-    Sys5I3ProcessArtifact, Sys5I3ProcessImage, Sys5I3ProcessRuntimeError,
-    Sys5I3ProcessRuntimeErrorKind, Sys5I3RetainedEdgeContract, private_runtime_seed_binding_ref,
+    Sys5I3DesignatedRemoteInputClosure, Sys5I3InactiveProviderImageSeed,
+    Sys5I3InactiveProviderRuntimeSeed, Sys5I3ObserverSafeChildSeed,
+    Sys5I3OrdinaryPrivateRuntimeSeed, Sys5I3PrivateRuntimeSeed, Sys5I3ProcessArtifact,
+    Sys5I3ProcessImage, Sys5I3ProcessRuntimeError, Sys5I3ProcessRuntimeErrorKind,
+    Sys5I3RetainedEdgeContract, private_runtime_seed_binding_ref,
 };
 
 pub(super) const PRIVATE_PROCESS_SNAPSHOT_VERSION: u64 = 1;
@@ -28,8 +34,20 @@ pub(super) const PRIVATE_PROCESS_SNAPSHOT_VERSION: u64 = 1;
 /// length frame.  It contains an exact already restricted projection and
 /// admission snapshot, never ordinary source or a coordinator's full values.
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[serde(untagged)]
+pub(super) enum PrivateProcessImageSnapshot {
+    /// Preserve the ordinary outer private-body shape. Its nested M8 snapshot
+    /// owns a required, versioned scope discriminator and may evolve without
+    /// giving this ordinary image a provider tag.
+    Ordinary(Box<PrivateOrdinaryProcessImageSnapshot>),
+    /// Provider images use a distinct tagged internal seed and contain no
+    /// ordinary executable projection/admission snapshot.
+    InactiveProvider(Box<PrivateInactiveProviderProcessImageSnapshot>),
+}
+
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
 #[serde(deny_unknown_fields)]
-pub(super) struct PrivateProcessImageSnapshot {
+pub(super) struct PrivateOrdinaryProcessImageSnapshot {
     pub(super) version: u64,
     pub(super) image: PrivateImageMetadataSnapshot,
     projection: I3PrivateProjectionSnapshot,
@@ -46,27 +64,17 @@ struct PrivatePrestagedOwnerCapabilityLifecycleSnapshot {
     candidate: Sys4I3PrivateRestrictedOwnerCapabilitySuccessorSnapshot,
 }
 
-impl PrivateProcessImageSnapshot {
+impl PrivateOrdinaryProcessImageSnapshot {
     /// Consume the one process image and snapshot only its already reduced
     /// executable values.  No call here can check source, lower a projection,
     /// run M8 admission, or generate M9 authority.
     pub(super) fn from_image(image: Sys5I3ProcessImage) -> Result<Self, ()> {
+        let seed = image.private_runtime_seed.ordinary().ok_or(())?;
         let metadata = PrivateImageMetadataSnapshot::from_image(&image);
-        let projection = image
-            .private_runtime_seed
-            .program
-            .i3_private_projection_snapshot()?;
-        let admission = image
-            .private_runtime_seed
-            .admission
-            .i3_private_snapshot()
-            .map_err(|_| ())?;
-        let private_snapshot_binding_ref = image
-            .private_runtime_seed
-            .private_snapshot_binding_ref
-            .clone();
-        let prestaged_owner_capability_lifecycle = image
-            .private_runtime_seed
+        let projection = seed.program.i3_private_projection_snapshot()?;
+        let admission = seed.admission.i3_private_snapshot().map_err(|_| ())?;
+        let private_snapshot_binding_ref = seed.private_snapshot_binding_ref.clone();
+        let prestaged_owner_capability_lifecycle = seed
             .prestaged_owner_capability_lifecycle
             .as_ref()
             .map(|lifecycle| {
@@ -82,10 +90,7 @@ impl PrivateProcessImageSnapshot {
             .map_err(|_| ())?;
         if private_snapshot_binding_ref.is_empty()
             || private_snapshot_binding_ref
-                != private_runtime_seed_binding_ref(
-                    &image.private_runtime_seed.program,
-                    &image.private_runtime_seed.admission,
-                )?
+                != private_runtime_seed_binding_ref(&seed.program, &seed.admission)?
         {
             return Err(());
         }
@@ -175,16 +180,17 @@ impl PrivateProcessImageSnapshot {
                 })
             })
             .transpose()?;
-        let private_runtime_seed = Sys5I3PrivateRuntimeSeed {
-            parent_checked_program_ref: child_seed.parent_checked_program_ref.clone(),
-            projection_ref: child_seed.projection_ref.clone(),
-            m9_generation_ref: child_seed.m9_generation_ref.clone(),
-            cohort_occurrence_ref: child_seed.cohort_occurrence_ref.clone(),
-            private_snapshot_binding_ref: self.private_snapshot_binding_ref,
-            program,
-            admission,
-            prestaged_owner_capability_lifecycle,
-        };
+        let private_runtime_seed =
+            Sys5I3PrivateRuntimeSeed::Ordinary(Box::new(Sys5I3OrdinaryPrivateRuntimeSeed {
+                parent_checked_program_ref: child_seed.parent_checked_program_ref.clone(),
+                projection_ref: child_seed.projection_ref.clone(),
+                m9_generation_ref: child_seed.m9_generation_ref.clone(),
+                cohort_occurrence_ref: child_seed.cohort_occurrence_ref.clone(),
+                private_snapshot_binding_ref: self.private_snapshot_binding_ref,
+                program,
+                admission,
+                prestaged_owner_capability_lifecycle,
+            }));
         Ok(Sys5I3ProcessImage {
             slot_name,
             endpoint,
@@ -194,8 +200,144 @@ impl PrivateProcessImageSnapshot {
             designated_remote_input_closure,
             child_seed,
             private_runtime_seed,
+            inactive_provider: None,
             private_integrity_ref,
         })
+    }
+}
+
+/// A distinct private body for an inactive provider image. It retains actual
+/// restricted M8/M9 structure for the future child consumer, but none of the
+/// ordinary executable `FabricProgram` or `SealedFabricAdmission` values.
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[serde(deny_unknown_fields)]
+pub(super) struct PrivateInactiveProviderProcessImageSnapshot {
+    version: u64,
+    image: PrivateImageMetadataSnapshot,
+    static_snapshot: I3PrivateProviderStaticProjectionSnapshot,
+    component_snapshot: M8I3PrivateProviderComponentSnapshot,
+    legacy_authority_snapshot: M9I3PrivateAuthorityGenerationSnapshot,
+    component_binding_ref: String,
+}
+
+impl PrivateProcessImageSnapshot {
+    pub(super) fn from_image(image: Sys5I3ProcessImage) -> Result<Self, ()> {
+        if image.inactive_provider.is_some()
+            || image.private_runtime_seed.inactive_provider().is_some()
+        {
+            return PrivateInactiveProviderProcessImageSnapshot::from_image(image)
+                .map(|snapshot| Self::InactiveProvider(Box::new(snapshot)));
+        }
+        PrivateOrdinaryProcessImageSnapshot::from_image(image)
+            .map(|snapshot| Self::Ordinary(Box::new(snapshot)))
+    }
+
+    pub(super) fn into_untrusted_image(
+        self,
+    ) -> Result<Sys5I3ProcessImage, Sys5I3ProcessRuntimeError> {
+        match self {
+            Self::Ordinary(snapshot) => (*snapshot).into_untrusted_image(),
+            Self::InactiveProvider(snapshot) => (*snapshot).into_untrusted_image(),
+        }
+    }
+}
+
+impl PrivateInactiveProviderProcessImageSnapshot {
+    fn from_image(image: Sys5I3ProcessImage) -> Result<Self, ()> {
+        let provider = image.inactive_provider.as_ref().ok_or(())?;
+        let seed = image.private_runtime_seed.inactive_provider().ok_or(())?;
+        if provider.assigned_loci != image.assigned_loci
+            || provider.parent_checked_program_ref.is_empty()
+            || provider.component_binding_ref.is_empty()
+            || provider.component_binding_ref != seed.component_binding_ref
+            || provider.static_snapshot != seed.static_snapshot
+            || provider.component_snapshot != seed.component_snapshot
+            || provider.legacy_authority_snapshot != seed.legacy_authority_snapshot
+            || provider.component_snapshot.component_binding_ref() != provider.component_binding_ref
+            || provider
+                .component_snapshot
+                .declared_provider_lowering_count()
+                != 4
+            || !image.executable_artifacts.is_empty()
+            || !image.required_edge_contracts.is_empty()
+        {
+            return Err(());
+        }
+        Ok(Self {
+            version: PRIVATE_PROCESS_SNAPSHOT_VERSION,
+            image: PrivateImageMetadataSnapshot::from_image(&image),
+            static_snapshot: provider.static_snapshot.clone(),
+            component_snapshot: provider.component_snapshot.clone(),
+            legacy_authority_snapshot: provider.legacy_authority_snapshot.clone(),
+            component_binding_ref: provider.component_binding_ref.clone(),
+        })
+    }
+
+    fn into_untrusted_image(self) -> Result<Sys5I3ProcessImage, Sys5I3ProcessRuntimeError> {
+        if self.version != PRIVATE_PROCESS_SNAPSHOT_VERSION {
+            return Err(Sys5I3ProcessRuntimeError::new(
+                Sys5I3ProcessRuntimeErrorKind::ProgramProjectionMismatch,
+            ));
+        }
+        let (
+            slot_name,
+            endpoint,
+            assigned_loci,
+            executable_artifacts,
+            required_edge_contracts,
+            designated_remote_input_closure,
+            child_seed,
+            private_integrity_ref,
+        ) = self.image.into_image_fields().map_err(|_| {
+            Sys5I3ProcessRuntimeError::new(Sys5I3ProcessRuntimeErrorKind::ImageIntegrityMismatch)
+        })?;
+        if assigned_loci.is_empty()
+            || child_seed.parent_checked_program_ref.is_empty()
+            || !executable_artifacts.is_empty()
+            || !required_edge_contracts.is_empty()
+            || self.component_binding_ref.is_empty()
+            || self.component_snapshot.component_binding_ref() != self.component_binding_ref
+            || self.component_snapshot.declared_provider_lowering_count() != 4
+        {
+            return Err(Sys5I3ProcessRuntimeError::new(
+                Sys5I3ProcessRuntimeErrorKind::ImageIntegrityMismatch,
+            ));
+        }
+        let provider = Sys5I3InactiveProviderImageSeed {
+            assigned_loci: assigned_loci.clone(),
+            parent_checked_program_ref: child_seed.parent_checked_program_ref.clone(),
+            static_snapshot: self.static_snapshot.clone(),
+            component_snapshot: self.component_snapshot.clone(),
+            legacy_authority_snapshot: self.legacy_authority_snapshot.clone(),
+            component_binding_ref: self.component_binding_ref.clone(),
+        };
+        let private_runtime_seed = Sys5I3PrivateRuntimeSeed::InactiveProvider(Box::new(
+            Sys5I3InactiveProviderRuntimeSeed {
+                parent_checked_program_ref: provider.parent_checked_program_ref.clone(),
+                static_snapshot: provider.static_snapshot.clone(),
+                component_snapshot: provider.component_snapshot.clone(),
+                legacy_authority_snapshot: provider.legacy_authority_snapshot.clone(),
+                component_binding_ref: provider.component_binding_ref.clone(),
+            },
+        ));
+        let image = Sys5I3ProcessImage {
+            slot_name,
+            endpoint,
+            assigned_loci,
+            executable_artifacts,
+            required_edge_contracts,
+            designated_remote_input_closure,
+            child_seed,
+            private_runtime_seed,
+            inactive_provider: Some(provider),
+            private_integrity_ref,
+        };
+        if image.private_integrity_ref != image.recomputed_private_integrity() {
+            return Err(Sys5I3ProcessRuntimeError::new(
+                Sys5I3ProcessRuntimeErrorKind::ImageIntegrityMismatch,
+            ));
+        }
+        Ok(image)
     }
 }
 

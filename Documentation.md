@@ -325,20 +325,30 @@ recordが揃ったためofficial I2 entry後exitを受理しました。broad PH
   selects the finite provider contract. Its source/check/snapshot and explicit
   unsupported-legacy-runtime handoff now pass source 17/17, privacy 1/1,
   private guards 2/2 and public guards 5/5, with independent review clear.
-  Source/guard cut `9e8d674a` is pushed. Static successor `3862b168` has clean
-  pushed parity; its composite/projection packet passes fresh semantics 6/17/8,
-  privacy 1, static runtime 11. Stage2b module is included in fresh runtime
+  Source/guard cut `9e8d674a` is pushed. Static successor `3862b168` remains the
+  Stage2a evidence cut; accepted Stage2b cut `7142b205b4e2805d50ce78156de99e6feb1db37a`
+  has clean HEAD/origin/main/live parity at 2026-09-08 19:22 JST. Retained
+  Stage2a composite/projection evidence is semantics 6/17/8,
+  privacy 1, static runtime 11. Stage2b module is included in its fresh runtime
   362/362; provider filtering is 26/26 within that runtime total, not additive;
   process integration is 63/63. M10 is 67/67, I2 local is 5/5 and CLI is 8/8,
   and public guards are 5/5. The three-crate all-target warnings-denied Clippy,
   workspace format, and workspace all-target check pass; workspace tests,
   CLI/probe Clippy, and provider activation are not claimed. Independent
   spec/quality review is P0/P1/P2 zero after three direct tests and generic M8
-  typed-refusal coverage. The source is frozen and this Stage2b component is
-  inactive/green for parent integration, with a new Git cut pending. Binding,
-  actual M9 authorization and intact composite verification feed separate policy
-  and scoped M8, then the existing SYS4/SYS5 mixed private-image/admission
-  variant; actual bounded host/QUIC runtime remains later.
+  typed-refusal coverage. Stage2b is accepted as an inactive component at the
+  clean `7142b205b4e2805d50ce78156de99e6feb1db37a` cut. Current Stage2c is the
+  existing SYS4/SYS5 inactive mixed-image handoff. Final focused module/runtime
+  is 13/13 included in 375/375 (362 filtered; 9.65s/88.17s), process 63/63,
+  M10 67/67, I2 local/CLI 5/5 and 8/8, guards 5/5, and actual ordinary localnet
+  41/41 (59.92s). Feature-union all-target Clippy `-Dwarnings` (22.06s),
+  workspace format and all-target check (17.41s) pass with no warnings; workspace
+  tests and probe-all tests are not claimed. Final review is P0/P1/P2 zero after
+  two P1 falsifiers and three P2 coverage/comment repairs. Stage2c is inactive/
+  green for parent integration; new component commit/push remains pending. Next
+  direct consumer: actual Stage3 provider host/QUIC runtime; private M8 version 2
+  is required in scope, with no compatibility promise. This is not Stage2c
+  acceptance, host activity, provider row-18 completion, or I3-3 completion.
   All remaining I3-3 failure/order obligations stay required; I3-3 itself
   is not accepted, and I3-4 remains inactive.
 - decisions taken: the working interpretation remains ordinary meaning ->
@@ -367,9 +377,16 @@ recordが揃ったためofficial I2 entry後exitを受理しました。broad PH
   warnings-clean, workspace format passes, and workspace all-target check
   passes; workspace tests, CLI/probe Clippy and provider activation are not
   claimed. Independent spec/quality review is P0/P1/P2 zero. Stage2b is
-  inactive/green for parent integration and awaits a new Git cut; no provider
-  invocation/network/runtime or supervisor availability is claimed. Report
-  2606 keeps exact logs.
+  accepted as an inactive component at `7142b205b4e2805d50ce78156de99e6feb1db37a`;
+  current Stage2c final focused module/runtime is 13/13 included in 375/375
+  (362 filtered; 9.65s/88.17s), with actual ordinary localnet 41/41 (59.92s).
+  Feature-union Clippy/workspace format/check are green; workspace tests,
+  probe-all tests and provider activation are not claimed. Final independent
+  review is P0/P1/P2 zero. Stage2c is inactive/green for parent integration;
+  a new component commit/push remains pending. The next direct consumer is
+  actual Stage3 provider host/QUIC runtime with private M8 version 2 required;
+  no compatibility promise, Stage2c acceptance, host activity, provider
+  row-18 completion or I3-3 completion is claimed. Report 2606 keeps exact logs.
   Provider, remaining membership/redaction/cut and full ordering/acceptance remain
   open. No whole-I3-3, official lifecycle or public workflow claim follows.
 

@@ -1042,6 +1042,30 @@ pub(crate) struct M9RuntimeExecutionSeam {
     authority_successor: Option<M9AuthoritySuccessorPublisher>,
 }
 
+/// Shared translation of an already authenticated M9 authority runtime into
+/// the finite SYS-4/M8 execution inventory.  This has no final-verdict field:
+/// ordinary M9 admission attaches its own final evidence and publisher after
+/// translation, while the provider composite retains this inventory as a
+/// distinct inactive verification outcome.
+struct M9TranslatedExecutionAuthorityInventory {
+    authority_state: M8AuthorityState,
+    authority_snapshot_projection: String,
+    authority_membership_projection: String,
+    authority_grant_projection: String,
+    owner_uses: BTreeMap<(String, String, String), M8AuthorityUse>,
+    patch_uses: BTreeMap<(String, String, String), M8PatchAuthorityUse>,
+    relation_uses: BTreeMap<(String, String), M8RelationAuthorityUse>,
+    fresh_relation_reacquire_bindings: BTreeMap<String, M9FreshRelationReacquireBinding>,
+    designated_evaluation_uses: BTreeMap<(String, String), M8DesignatedAuthorityUse>,
+    designated_consumption_uses: BTreeMap<(String, String), M8DesignatedAuthorityUse>,
+    observer_authorities: BTreeMap<String, M8ObserverAuthorityGrant>,
+    translation_refs: BTreeMap<String, (String, String, String)>,
+    kernel_owner_lineages: BTreeMap<(String, String, String), M9KernelOwnerLineage>,
+    kernel_designated_remote_input_lineages:
+        BTreeMap<(String, String, String, usize, String), M9KernelDesignatedRemoteInputLineage>,
+    authority_generation: M9AuthorityGeneration,
+}
+
 /// Immutable, crate-private authority successor view.  It is produced by the
 /// M9 boundary and carries the exact translated inventory and audit lineages
 /// needed by the kernel; it is neither a credential constructor nor a wire
@@ -1202,6 +1226,18 @@ pub(crate) struct M9I3PrivateAuthorityGenerationSnapshot {
     owner_operation_validation_occurrences: Vec<PrivateM9OwnerOccurrenceCounterSnapshot>,
     source_release_validation_occurrences: Vec<PrivateM9OccurrenceCounterSnapshot>,
     integrity_ref: String,
+}
+
+impl M9I3PrivateAuthorityGenerationSnapshot {
+    #[cfg(test)]
+    pub(crate) fn test_only_remove_required_legacy_authority_lineage(&mut self) -> bool {
+        let Some(owner) = self.owner_uses.pop() else {
+            return false;
+        };
+        self.kernel_owner_lineages
+            .retain(|lineage| lineage.key != owner.key);
+        true
+    }
 }
 
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
@@ -3247,6 +3283,11 @@ pub(crate) fn trusted_read_only_provider_composite_bootstrap(
 pub(crate) struct M9VerifiedReadOnlyProviderComposite {
     base: M9AdmittedBase,
     authority: M9AuthorityRuntime,
+    checked: CheckedSurfaceV0,
+    anchor: M9FiniteLocalMembershipIdentity,
+    memberships: BTreeMap<(String, String), M9MembershipAuth>,
+    relation_lifecycle_facts: BTreeMap<String, M9FiniteFreshAtAdmissionLifecycleFact>,
+    auth_residual_name: String,
     primary_membership: M9MembershipAuth,
     contract_capability: M9CapabilityAuth,
     contract_witness: M9WitnessAuth,
@@ -3397,6 +3438,11 @@ pub(crate) fn verify_read_only_provider_composite(
     Ok(M9VerifiedReadOnlyProviderComposite {
         base,
         authority,
+        checked: validated_checked,
+        anchor,
+        memberships,
+        relation_lifecycle_facts,
+        auth_residual_name: auth_discharge,
         primary_membership,
         contract_capability,
         contract_witness,
@@ -3407,10 +3453,30 @@ pub(crate) fn verify_read_only_provider_composite(
 }
 
 pub(crate) struct M9InactiveReadOnlyProviderComposite {
+    // Retain the exact source-bound M9 base and ContractUpdate lineage that
+    // were authenticated before the distinct provider policy was consumed.
+    // This is deliberately not `M9FinalAdmissionEvidence`: the composite
+    // remains a typed inactive outcome rather than an ordinary runtime
+    // admission.
+    base: M9AdmittedBase,
     authority: M9AuthorityRuntime,
     membership: M9MembershipAuth,
+    contract_capability: M9CapabilityAuth,
+    contract_witness: M9WitnessAuth,
     capability: M9CapabilityAuth,
     witness: M9WitnessAuth,
+    coverage: M9ReadOnlyProviderEffectCoverage,
+    composite_discharge: M9CompositeFiniteRefinementDischarge,
+    policy_generation_ref: String,
+    /// Existing checked admission facts for dormant relation re-acquire
+    /// bindings. They are retained only to bind the already-issued legacy
+    /// relation authority into the inactive child inventory; they do not
+    /// provide an authority issuer or ordinary final verdict.
+    relation_lifecycle_facts: BTreeMap<String, M9FiniteFreshAtAdmissionLifecycleFact>,
+    /// Exact existing owner/relation/designated inventory translated from the
+    /// authenticated finite-local authority after separate provider policy
+    /// acceptance.  It is not an ordinary final M9 judgment or publisher.
+    legacy_authority_generation: M9AuthorityGeneration,
     component: M8ReadOnlyProviderEffectComponent,
     resource_runtime_nonce: [u8; 32],
 }
@@ -3477,6 +3543,30 @@ impl M9VerifiedReadOnlyProviderComposite {
                 M9AdmissionErrorKind::InvalidCapabilityLineage,
             ));
         }
+        let auth_residual = self
+            .checked
+            .residual_obligations()
+            .entries()
+            .iter()
+            .find(|residual| {
+                residual.kind() == ResidualObligationKind::AuthDeferred
+                    && residual.name() == self.auth_residual_name
+            })
+            .ok_or_else(|| {
+                M9AdmissionDiagnostics::one(M9AdmissionErrorKind::InvalidMembershipLineage)
+            })?;
+        // The distinct provider policy has now been accepted. Only then does
+        // the composite reuse the ordinary finite-local issuer for legacy
+        // owner/relation/designated authority inventory; it never substitutes
+        // the provider effect capability for those existing scopes.
+        issue_finite_local_legacy_capabilities(
+            &self.checked,
+            &self.anchor,
+            &self.memberships,
+            auth_residual,
+            &mut self.authority,
+        )?;
+        let policy_generation_ref = policy.generation_ref.clone();
         let capability = self.authority.issue_read_only_provider_effect_capability(
             &self.primary_membership,
             &self.coverage,
@@ -3507,16 +3597,33 @@ impl M9VerifiedReadOnlyProviderComposite {
                 M9AdmissionErrorKind::InvalidCapabilityLineage,
             ));
         }
+        let mut legacy_authority_generation =
+            M9RuntimeAdmitted::translate_actual_execution_authority_inventory(
+                &self.base,
+                &self.authority,
+            )?
+            .authority_generation;
+        legacy_authority_generation.install_finite_local_fresh_relation_reacquire_bindings(
+            &self.relation_lifecycle_facts,
+        )?;
         let component = materialize_read_only_provider_effect_component(
-            self.base._embedded_m8_base,
-            self.coverage,
+            self.base._embedded_m8_base.clone(),
+            self.coverage.clone(),
         )
         .map_err(|_| M9AdmissionDiagnostics::one(M9AdmissionErrorKind::M8BaseEvidenceMismatch))?;
         Ok(M9InactiveReadOnlyProviderComposite {
+            base: self.base.clone(),
             authority: self.authority,
             membership: self.primary_membership,
+            contract_capability: self.contract_capability,
+            contract_witness: self.contract_witness,
             capability,
             witness,
+            coverage: self.coverage,
+            composite_discharge: self.composite_discharge,
+            policy_generation_ref,
+            relation_lifecycle_facts: self.relation_lifecycle_facts,
+            legacy_authority_generation,
             component,
             resource_runtime_nonce: self.resource_runtime_nonce,
         })
@@ -3547,6 +3654,75 @@ impl M9InactiveReadOnlyProviderComposite {
 
     pub(crate) fn resource_runtime_nonce_matches(&self, nonce: &[u8; 32]) -> bool {
         &self.resource_runtime_nonce == nonce
+    }
+
+    pub(crate) fn provider_coverage(&self) -> &M9ReadOnlyProviderEffectCoverage {
+        &self.coverage
+    }
+
+    /// Select the actual translated legacy authority inventory required by a
+    /// restricted SYS-4 child.  This remains a monotone filter over M9 facts
+    /// already issued after policy acceptance; it cannot create a publisher,
+    /// successor, or ordinary final verification evidence.
+    pub(crate) fn restricted_legacy_authority_inventory(
+        &self,
+        restriction: &M9ExecutionRestriction,
+    ) -> Result<M9AuthorityGeneration, M9AdmissionDiagnostics> {
+        self.legacy_authority_generation
+            .validate_execution_restriction_exact(restriction)
+            .map_err(|_| {
+                M9AdmissionDiagnostics::one(M9AdmissionErrorKind::InvalidCapabilityLineage)
+            })?;
+        Ok(self
+            .legacy_authority_generation
+            .restricted_for_execution(restriction))
+    }
+
+    /// Verify the actual retained source/M9/policy association at the parent
+    /// handoff boundary. This is a liveness/correspondence check only: it
+    /// neither reconstructs a finite verdict nor produces an executable M9
+    /// runtime admission.
+    pub(crate) fn has_retained_current_composite_seal_association(&self) -> bool {
+        !self.policy_generation_ref.is_empty()
+            && self.composite_discharge.program_identity() == self.coverage.program_identity()
+            && self.composite_discharge.provider_coverage() == &self.coverage
+            && self.composite_discharge.activation_pending()
+            && !self.composite_discharge.grants_authority()
+            && !self.composite_discharge.permits_effect_use()
+            && !self.composite_discharge.discharges_runtime_requirement()
+            && contract_authority_lineage_matches_base(
+                &self.base,
+                &self.authority,
+                &self.membership,
+                &self.contract_capability,
+                &self.contract_witness,
+            )
+            && provider_final_evidence_matches_base(
+                &self.base,
+                &self.authority,
+                &self.membership,
+                &self.capability,
+                &self.witness,
+                &self.coverage,
+                self.resource_runtime_nonce,
+                &self.policy_generation_ref,
+                &self.composite_discharge,
+            )
+            && M9RuntimeAdmitted::translate_actual_execution_authority_inventory(
+                &self.base,
+                &self.authority,
+            )
+            .and_then(|translated| {
+                let mut generation = translated.authority_generation;
+                generation.install_finite_local_fresh_relation_reacquire_bindings(
+                    &self.relation_lifecycle_facts,
+                )?;
+                Ok(generation)
+            })
+            .is_ok_and(|generation| {
+                generation.matches_for_restore(&self.legacy_authority_generation)
+            })
+            && self.effect_authorization_is_current()
     }
 
     pub(crate) fn effect_authorization_is_current(&self) -> bool {
@@ -5128,6 +5304,38 @@ impl M9AuthorityGeneration {
         {
             return Err(());
         }
+        Ok(())
+    }
+
+    /// Bind the exact fresh-at-admission relation facts to already translated
+    /// `reacquire_primary` authority. This is a monotone retention step for
+    /// the inactive composite path: it neither issues a capability nor
+    /// creates the successor-publisher templates used by ordinary execution.
+    fn install_finite_local_fresh_relation_reacquire_bindings(
+        &mut self,
+        facts: &BTreeMap<String, M9FiniteFreshAtAdmissionLifecycleFact>,
+    ) -> Result<(), M9AdmissionDiagnostics> {
+        let mut bindings = BTreeMap::new();
+        for (relation, fact) in facts {
+            let authority = self
+                .relation_uses
+                .get(&(relation.clone(), "reacquire_primary".to_string()))
+                .cloned()
+                .ok_or_else(|| {
+                    M9AdmissionDiagnostics::one(M9AdmissionErrorKind::InvalidCapabilityLineage)
+                })?;
+            let binding =
+                M9FreshRelationReacquireBinding::from_validated_local_fact(fact, authority)
+                    .ok_or_else(|| {
+                        M9AdmissionDiagnostics::one(M9AdmissionErrorKind::InvalidCapabilityLineage)
+                    })?;
+            if bindings.insert(relation.clone(), binding).is_some() {
+                return Err(M9AdmissionDiagnostics::one(
+                    M9AdmissionErrorKind::InvalidCapabilityLineage,
+                ));
+            }
+        }
+        self.fresh_relation_reacquire_bindings = bindings;
         Ok(())
     }
 
@@ -7348,148 +7556,13 @@ impl M9RuntimeExecutionSeam {
             auth_residual.source_ref(),
         )?;
 
-        for evaluation in checked.evaluations() {
-            if let Some(core) = evaluation.owner_rmw_core() {
-                let principal = evaluation.actor_authority_origin();
-                let owner_locus = core.owner_locus();
-                let membership =
-                    finite_local_required_membership(&memberships, principal, owner_locus)?;
-                let _ = finite_local_capability_and_witness(
-                    &mut authority,
-                    &membership,
-                    &format!(
-                        "finite-local-owner-evaluation:{}:{}:{}",
-                        evaluation.name(),
-                        principal,
-                        owner_locus
-                    ),
-                    M9CapabilityScope::owner_evaluation(evaluation.name(), owner_locus),
-                    auth_residual.source_ref(),
-                )?;
-            }
-
-            if let Some(relation) = evaluation.relation_core() {
-                let relation_name = evaluation.name();
-                let owner_locus = relation.owner_locus();
-                let binding_frontier = relation
-                    .binding_frontier()
-                    .as_slice()
-                    .first()
-                    .map(|occurrence| occurrence.as_str())
-                    .ok_or_else(|| {
-                        M9AdmissionDiagnostics::one(M9AdmissionErrorKind::CapabilityPolicyRejected)
-                    })?;
-                let membership =
-                    finite_local_required_membership(&memberships, &anchor.principal, owner_locus)?;
-                for transition in [
-                    "publish_relation",
-                    "invalidate_primary",
-                    "reacquire_primary",
-                ] {
-                    let _ = finite_local_capability_and_witness(
-                        &mut authority,
-                        &membership,
-                        &format!(
-                            "finite-local-relation:{relation_name}:{transition}:{owner_locus}"
-                        ),
-                        M9CapabilityScope::relation_transition(
-                            relation_name,
-                            transition,
-                            owner_locus,
-                            binding_frontier,
-                        ),
-                        auth_residual.source_ref(),
-                    )?;
-                }
-            }
-
-            if let Some(designated) = evaluation.designated_core() {
-                let evaluator = designated.evaluator();
-                let result = designated.result();
-                let input_frontier = designated.trigger().frontier().ok_or_else(|| {
-                    M9AdmissionDiagnostics::one(M9AdmissionErrorKind::CapabilityPolicyRejected)
-                })?;
-                let evaluator_membership =
-                    finite_local_required_membership(&memberships, &anchor.principal, evaluator)?;
-                let _ = finite_local_capability_and_witness(
-                    &mut authority,
-                    &evaluator_membership,
-                    &format!("finite-local-designated-evaluation:{evaluator}:{result}"),
-                    M9CapabilityScope::designated_evaluation(evaluator, result, input_frontier),
-                    auth_residual.source_ref(),
-                )?;
-
-                for (dependency_index, dependency) in designated
-                    .generated_remote_input_dependencies()
-                    .iter()
-                    .enumerate()
-                {
-                    let producer_locus = dependency.source_owner_locus();
-                    let producer_membership = finite_local_required_membership(
-                        &memberships,
-                        &anchor.principal,
-                        producer_locus,
-                    )?;
-                    let read = dependency.typed_state_read();
-                    let release_label = canonical_designated_remote_input_release_label(
-                        read.namespace(),
-                        read.index(),
-                        read.field(),
-                        producer_locus,
-                        input_frontier,
-                    );
-                    let _ = finite_local_capability_and_witness(
-                        &mut authority,
-                        &producer_membership,
-                        &format!(
-                            "finite-local-designated-release:{producer_locus}:{evaluator}:{result}:{dependency_index}"
-                        ),
-                        M9CapabilityScope::designated_remote_input_release(
-                            producer_locus,
-                            evaluator,
-                            result,
-                            dependency_index,
-                            input_frontier,
-                            release_label,
-                            M9_REMOTE_INPUT_VISIBILITY_RESTRICTED_REDACTED,
-                        ),
-                        auth_residual.source_ref(),
-                    )?;
-                }
-
-                for consumer_evaluation in checked.evaluations().iter().filter(|candidate| {
-                    candidate
-                        .designated_result_consumer_core()
-                        .is_some_and(|consumer| {
-                            consumer.evaluator() == evaluator && consumer.result() == result
-                        })
-                }) {
-                    let consumer = consumer_evaluation
-                        .designated_result_consumer_core()
-                        .expect("filtered designated consumer retains checked Core");
-                    let consumer_locus = consumer.consumer_locus();
-                    let consumer_membership = finite_local_required_membership(
-                        &memberships,
-                        &anchor.principal,
-                        consumer_locus,
-                    )?;
-                    let value_name = format!("{evaluator}.{result}");
-                    let _ = finite_local_capability_and_witness(
-                        &mut authority,
-                        &consumer_membership,
-                        &format!(
-                            "finite-local-designated-consumption:{consumer_locus}:{value_name}"
-                        ),
-                        M9CapabilityScope::designated_consumption(
-                            consumer_locus,
-                            value_name,
-                            consumer.result_version().value(),
-                        ),
-                        auth_residual.source_ref(),
-                    )?;
-                }
-            }
-        }
+        issue_finite_local_legacy_capabilities(
+            &checked,
+            &anchor,
+            &memberships,
+            auth_residual,
+            &mut authority,
+        )?;
 
         let discharge = M9FiniteRefinementChecker::default()
             .discharge_candidate(
@@ -7814,6 +7887,158 @@ fn finite_local_capability_and_witness(
     Ok((capability, witness))
 }
 
+/// Issue the pre-existing finite-local owner/relation/designated capability
+/// inventory from already authenticated memberships. Both the ordinary and
+/// the inactive provider-composite routes call this exact helper; the
+/// provider effect capability remains separate and is never used as an alias
+/// for these legacy scopes.
+fn issue_finite_local_legacy_capabilities(
+    checked: &CheckedSurfaceV0,
+    anchor: &M9FiniteLocalMembershipIdentity,
+    memberships: &BTreeMap<(String, String), M9MembershipAuth>,
+    auth_residual: &mir_semantics::surface_v0_pipeline::ResidualObligation,
+    authority: &mut M9AuthorityRuntime,
+) -> Result<(), M9AdmissionDiagnostics> {
+    for evaluation in checked.evaluations() {
+        if let Some(core) = evaluation.owner_rmw_core() {
+            let principal = evaluation.actor_authority_origin();
+            let owner_locus = core.owner_locus();
+            let membership = finite_local_required_membership(memberships, principal, owner_locus)?;
+            let _ = finite_local_capability_and_witness(
+                authority,
+                &membership,
+                &format!(
+                    "finite-local-owner-evaluation:{}:{}:{}",
+                    evaluation.name(),
+                    principal,
+                    owner_locus
+                ),
+                M9CapabilityScope::owner_evaluation(evaluation.name(), owner_locus),
+                auth_residual.source_ref(),
+            )?;
+        }
+
+        if let Some(relation) = evaluation.relation_core() {
+            let relation_name = evaluation.name();
+            let owner_locus = relation.owner_locus();
+            let binding_frontier = relation
+                .binding_frontier()
+                .as_slice()
+                .first()
+                .map(|occurrence| occurrence.as_str())
+                .ok_or_else(|| {
+                    M9AdmissionDiagnostics::one(M9AdmissionErrorKind::CapabilityPolicyRejected)
+                })?;
+            let membership =
+                finite_local_required_membership(memberships, &anchor.principal, owner_locus)?;
+            for transition in [
+                "publish_relation",
+                "invalidate_primary",
+                "reacquire_primary",
+            ] {
+                let _ = finite_local_capability_and_witness(
+                    authority,
+                    &membership,
+                    &format!("finite-local-relation:{relation_name}:{transition}:{owner_locus}"),
+                    M9CapabilityScope::relation_transition(
+                        relation_name,
+                        transition,
+                        owner_locus,
+                        binding_frontier,
+                    ),
+                    auth_residual.source_ref(),
+                )?;
+            }
+        }
+
+        if let Some(designated) = evaluation.designated_core() {
+            let evaluator = designated.evaluator();
+            let result = designated.result();
+            let input_frontier = designated.trigger().frontier().ok_or_else(|| {
+                M9AdmissionDiagnostics::one(M9AdmissionErrorKind::CapabilityPolicyRejected)
+            })?;
+            let evaluator_membership =
+                finite_local_required_membership(memberships, &anchor.principal, evaluator)?;
+            let _ = finite_local_capability_and_witness(
+                authority,
+                &evaluator_membership,
+                &format!("finite-local-designated-evaluation:{evaluator}:{result}"),
+                M9CapabilityScope::designated_evaluation(evaluator, result, input_frontier),
+                auth_residual.source_ref(),
+            )?;
+
+            for (dependency_index, dependency) in designated
+                .generated_remote_input_dependencies()
+                .iter()
+                .enumerate()
+            {
+                let producer_locus = dependency.source_owner_locus();
+                let producer_membership = finite_local_required_membership(
+                    memberships,
+                    &anchor.principal,
+                    producer_locus,
+                )?;
+                let read = dependency.typed_state_read();
+                let release_label = canonical_designated_remote_input_release_label(
+                    read.namespace(),
+                    read.index(),
+                    read.field(),
+                    producer_locus,
+                    input_frontier,
+                );
+                let _ = finite_local_capability_and_witness(
+                    authority,
+                    &producer_membership,
+                    &format!(
+                        "finite-local-designated-release:{producer_locus}:{evaluator}:{result}:{dependency_index}"
+                    ),
+                    M9CapabilityScope::designated_remote_input_release(
+                        producer_locus,
+                        evaluator,
+                        result,
+                        dependency_index,
+                        input_frontier,
+                        release_label,
+                        M9_REMOTE_INPUT_VISIBILITY_RESTRICTED_REDACTED,
+                    ),
+                    auth_residual.source_ref(),
+                )?;
+            }
+
+            for consumer_evaluation in checked.evaluations().iter().filter(|candidate| {
+                candidate
+                    .designated_result_consumer_core()
+                    .is_some_and(|consumer| {
+                        consumer.evaluator() == evaluator && consumer.result() == result
+                    })
+            }) {
+                let consumer = consumer_evaluation
+                    .designated_result_consumer_core()
+                    .expect("filtered designated consumer retains checked Core");
+                let consumer_locus = consumer.consumer_locus();
+                let consumer_membership = finite_local_required_membership(
+                    memberships,
+                    &anchor.principal,
+                    consumer_locus,
+                )?;
+                let value_name = format!("{evaluator}.{result}");
+                let _ = finite_local_capability_and_witness(
+                    authority,
+                    &consumer_membership,
+                    &format!("finite-local-designated-consumption:{consumer_locus}:{value_name}"),
+                    M9CapabilityScope::designated_consumption(
+                        consumer_locus,
+                        value_name,
+                        consumer.result_version().value(),
+                    ),
+                    auth_residual.source_ref(),
+                )?;
+            }
+        }
+    }
+    Ok(())
+}
+
 fn finite_local_m8_admission_for(
     checked: &CheckedSurfaceV0,
     relation_lifecycle_facts: &BTreeMap<String, M9FiniteFreshAtAdmissionLifecycleFact>,
@@ -8097,6 +8322,73 @@ impl M9RuntimeAdmitted {
             authority_runtime,
             evidence,
         } = self;
+        let inventory =
+            Self::translate_actual_execution_authority_inventory(&base, &authority_runtime)?;
+        let authority_successor = M9AuthoritySuccessorPublisher {
+            base: base.clone(),
+            evidence,
+            authority_runtime: authority_runtime.clone(),
+            current: inventory.authority_generation.clone(),
+            fresh_anchor_reacquire_templates: BTreeMap::new(),
+        };
+        let instance =
+            materialize_m9_resolved_base(base.into_embedded_m8_base()).map_err(|diagnostics| {
+                match diagnostics.primary().kind() {
+                    M8AdmissionDiagnosticKind::UnsupportedReadOnlyProviderEffectProfile => {
+                        M9AdmissionDiagnostics::one(
+                            M9AdmissionErrorKind::UnsupportedReadOnlyProviderEffectProfile,
+                        )
+                    }
+                    _ => M9AdmissionDiagnostics::one(M9AdmissionErrorKind::M8BaseEvidenceMismatch),
+                }
+            })?;
+        let M9TranslatedExecutionAuthorityInventory {
+            authority_state,
+            authority_snapshot_projection,
+            authority_membership_projection,
+            authority_grant_projection,
+            owner_uses,
+            patch_uses,
+            relation_uses,
+            fresh_relation_reacquire_bindings,
+            designated_evaluation_uses,
+            designated_consumption_uses,
+            observer_authorities,
+            translation_refs,
+            kernel_owner_lineages,
+            kernel_designated_remote_input_lineages,
+            authority_generation,
+        } = inventory;
+        Ok(M9M10ExecutionSeam {
+            instance,
+            authority_state,
+            authority_snapshot_projection,
+            authority_membership_projection,
+            authority_grant_projection,
+            owner_uses,
+            patch_uses,
+            relation_uses,
+            fresh_relation_reacquire_bindings,
+            designated_evaluation_uses,
+            designated_consumption_uses,
+            observer_authorities,
+            translation_refs,
+            kernel_owner_lineages,
+            kernel_designated_remote_input_lineages,
+            authority_generation,
+            final_residual_discharge_complete: true,
+            authority_successor: Some(authority_successor),
+        })
+    }
+
+    /// Translate only facts that M9 has already authenticated and issued.
+    /// The ordinary wrapper attaches final verification evidence separately;
+    /// the inactive provider composite can retain this inventory without
+    /// becoming an `M9RuntimeAdmitted` value.
+    fn translate_actual_execution_authority_inventory(
+        base: &M9AdmittedBase,
+        authority_runtime: &M9AuthorityRuntime,
+    ) -> Result<M9TranslatedExecutionAuthorityInventory, M9AdmissionDiagnostics> {
         let snapshot = authority_runtime.authority_snapshot();
         let authority_snapshot_projection = authority_runtime.canonical_snapshot_projection();
         let authority_membership_projection = authority_runtime.canonical_membership_projection();
@@ -8519,26 +8811,7 @@ impl M9RuntimeAdmitted {
             authority_generation.generation,
             authority_generation.checked_patch_authority_lineage_digest()
         );
-        let authority_successor = M9AuthoritySuccessorPublisher {
-            base: base.clone(),
-            evidence,
-            authority_runtime: authority_runtime.clone(),
-            current: authority_generation.clone(),
-            fresh_anchor_reacquire_templates: BTreeMap::new(),
-        };
-        let instance =
-            materialize_m9_resolved_base(base.into_embedded_m8_base()).map_err(|diagnostics| {
-                match diagnostics.primary().kind() {
-                    M8AdmissionDiagnosticKind::UnsupportedReadOnlyProviderEffectProfile => {
-                        M9AdmissionDiagnostics::one(
-                            M9AdmissionErrorKind::UnsupportedReadOnlyProviderEffectProfile,
-                        )
-                    }
-                    _ => M9AdmissionDiagnostics::one(M9AdmissionErrorKind::M8BaseEvidenceMismatch),
-                }
-            })?;
-        Ok(M9M10ExecutionSeam {
-            instance,
+        Ok(M9TranslatedExecutionAuthorityInventory {
             authority_state,
             authority_snapshot_projection,
             authority_membership_projection,
@@ -8554,8 +8827,6 @@ impl M9RuntimeAdmitted {
             kernel_owner_lineages,
             kernel_designated_remote_input_lineages,
             authority_generation,
-            final_residual_discharge_complete: true,
-            authority_successor: Some(authority_successor),
         })
     }
 

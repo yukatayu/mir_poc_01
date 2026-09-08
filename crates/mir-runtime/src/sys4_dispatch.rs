@@ -32,7 +32,8 @@ use crate::{
         M8I3OwnerAdmissionIssuance, M8I3OwnerAdmissionPermit, M8I3VerifiedOwnerAdmissionHandoff,
     },
     m8_runtime_admission::{
-        EvidenceSecurityLabel, M8I3PrivateSnapshot, M8RuntimeInstance, M8SecurityClass,
+        EvidenceSecurityLabel, M8I3PrivateSnapshot, M8ReadOnlyProviderEffectComponent,
+        M8RuntimeInstance, M8SecurityClass,
     },
     m8_runtime_designated_value::{
         M8ConsumeRequest, M8DesignatedEvaluationRequest, M8DesignatedTick, M8InputReceipt,
@@ -53,20 +54,22 @@ use crate::{
         M9AdmissionErrorKind, M9AuthorityGeneration, M9AuthorityInspection,
         M9AuthoritySuccessorPublisher, M9AuthorityTransitionKind, M9CacheValidationInspection,
         M9CheckedPatchAuthorityBinding, M9DesignatedSourceReleaseLineage, M9ExecutionRestriction,
-        M9I3PrivateAuthorityGenerationSnapshot, M9KernelAuthorityView,
-        M9OwnerOperationRevalidationFailure, M9PrestagedOwnerCapabilityRevocation,
-        M9RelationPublicationAdmission, M9RuntimeExecutionSeam,
-        M9RuntimeValidationObservationSnapshot, M9SealedFailureInspection, M9SealedGeneration,
-        M9SealedTransitionInspection, M9SourceReleaseValidationInspection,
+        M9I3PrivateAuthorityGenerationSnapshot, M9InactiveReadOnlyProviderComposite,
+        M9KernelAuthorityView, M9OwnerOperationRevalidationFailure,
+        M9PrestagedOwnerCapabilityRevocation, M9RelationPublicationAdmission,
+        M9RuntimeExecutionSeam, M9RuntimeValidationObservationSnapshot, M9SealedFailureInspection,
+        M9SealedGeneration, M9SealedTransitionInspection, M9SourceReleaseValidationInspection,
     },
     sys2_execution_backend::{
         Ow1ContextualM8Execution, Ow1ObserverDesignatedPublication, Ow1WorkerBackend,
         Ow1WorkerFailure,
     },
+    sys3_i3_private_snapshot::I3PrivateProviderStaticProjectionSnapshot,
     sys3_projection::{
         BackendEligibility, BackendIneligibilityReason, BackendProfile, CarrierContract,
         CommunicationEdge, CommunicationEdgeKind, GlobalProjectionResult, LocusProgram,
-        ProjectedOperationFragment, ProjectedOperationFragmentKind, ReferenceOnlyRedactionPolicy,
+        ProjectedOperationFragment, ProjectedOperationFragmentKind,
+        ReadOnlyProviderEffectStaticProjection, ReferenceOnlyRedactionPolicy,
         RuntimeAdmissionStatus, SourceRefView,
     },
 };
@@ -472,6 +475,188 @@ pub(crate) struct FabricProgram {
     route_index: FabricRouteIndex,
 }
 
+/// Parent-held, non-executable admission for the Stage 2c provider composite.
+/// It retains the actual M9 composite result and static projection separately
+/// from the ordinary `FabricProgram`/`SealedFabricAdmission` path, which stays
+/// fail-closed for provider semantics.
+pub(crate) struct Sys4InactiveProviderAdmission {
+    checked_program_identity: CheckedProgramIdentity,
+    static_plan: ReadOnlyProviderEffectStaticProjection,
+    composite: M9InactiveReadOnlyProviderComposite,
+}
+
+/// One child-local structural restriction of a parent-held inactive provider
+/// admission. It has no route index, LocalFabric seed, M9 publisher, or
+/// executable M8 instance.
+pub(crate) struct Sys4InactiveProviderRestrictedAdmission {
+    assigned_loci: BTreeSet<String>,
+    static_snapshot: I3PrivateProviderStaticProjectionSnapshot,
+    component: M8ReadOnlyProviderEffectComponent,
+    component_binding_ref: String,
+    legacy_authority_generation: M9AuthorityGeneration,
+}
+
+impl Sys4InactiveProviderAdmission {
+    pub(crate) fn from_m9_inactive_provider_composite(
+        checked_program_identity: CheckedProgramIdentity,
+        static_plan: ReadOnlyProviderEffectStaticProjection,
+        composite: M9InactiveReadOnlyProviderComposite,
+    ) -> Sys4Result<Self> {
+        if static_plan.checked_program_identity() != &checked_program_identity
+            || static_plan.provider_coverage().program_identity() != &checked_program_identity
+            || !static_plan.activation_pending()
+            || composite.provider_coverage().program_identity() != &checked_program_identity
+            || !composite.has_retained_current_composite_seal_association()
+        {
+            return Err(Sys4DispatchDiagnostics::one(
+                Sys4DiagnosticKind::ProgramAdmissionMismatch,
+            ));
+        }
+        Ok(Self {
+            checked_program_identity,
+            static_plan,
+            composite,
+        })
+    }
+
+    pub(crate) fn restricted_to_loci(
+        &self,
+        assigned_loci: &BTreeSet<String>,
+    ) -> Sys4Result<Sys4InactiveProviderRestrictedAdmission> {
+        if assigned_loci.is_empty()
+            || assigned_loci
+                .iter()
+                .any(|locus| self.static_plan.projection().locus_program(locus).is_none())
+            || !self
+                .composite
+                .has_retained_current_composite_seal_association()
+        {
+            return Err(Sys4DispatchDiagnostics::one(
+                Sys4DiagnosticKind::ProgramAdmissionMismatch,
+            ));
+        }
+        let static_snapshot = self
+            .static_plan
+            .to_i3_private_static_snapshot_restricted_to_loci(assigned_loci)
+            .map_err(|_| {
+                Sys4DispatchDiagnostics::one(Sys4DiagnosticKind::ProgramProjectionMismatch)
+            })?;
+        let restricted_projection = self
+            .static_plan
+            .projection()
+            .restricted_to_loci(assigned_loci);
+        let restriction = m9_execution_restriction_for_projection(&restricted_projection, true)?;
+        let legacy_authority_generation = self
+            .composite
+            .restricted_legacy_authority_inventory(&restriction)
+            .map_err(|_| {
+                Sys4DispatchDiagnostics::one(Sys4DiagnosticKind::ProgramAdmissionMismatch)
+            })?;
+        let component = self.composite.component().restricted_to_loci(assigned_loci);
+        if !component.is_component_scoped() {
+            return Err(Sys4DispatchDiagnostics::one(
+                Sys4DiagnosticKind::ProgramAdmissionMismatch,
+            ));
+        }
+        let component_binding_ref = component.i3_inactive_component_binding_ref();
+        Ok(Sys4InactiveProviderRestrictedAdmission {
+            assigned_loci: assigned_loci.clone(),
+            static_snapshot,
+            component,
+            component_binding_ref,
+            legacy_authority_generation,
+        })
+    }
+
+    pub(crate) fn has_current_composite_seal(&self) -> bool {
+        self.composite
+            .has_retained_current_composite_seal_association()
+    }
+
+    pub(crate) fn checked_program_identity(&self) -> &CheckedProgramIdentity {
+        &self.checked_program_identity
+    }
+
+    pub(crate) fn static_plan(&self) -> &ReadOnlyProviderEffectStaticProjection {
+        &self.static_plan
+    }
+
+    pub(crate) fn retire_effect_authorization(&mut self) -> Result<(), Sys4DispatchDiagnostics> {
+        self.composite
+            .retire_effect_authorization()
+            .map_err(|_| Sys4DispatchDiagnostics::one(Sys4DiagnosticKind::ProgramAdmissionMismatch))
+    }
+}
+
+impl Sys4InactiveProviderRestrictedAdmission {
+    pub(crate) fn assigned_loci(&self) -> &BTreeSet<String> {
+        &self.assigned_loci
+    }
+
+    pub(crate) fn static_snapshot(&self) -> &I3PrivateProviderStaticProjectionSnapshot {
+        &self.static_snapshot
+    }
+
+    pub(crate) fn component_binding_ref(&self) -> &str {
+        &self.component_binding_ref
+    }
+
+    pub(crate) fn component(&self) -> &M8ReadOnlyProviderEffectComponent {
+        &self.component
+    }
+
+    pub(crate) fn legacy_authority_generation(&self) -> &M9AuthorityGeneration {
+        &self.legacy_authority_generation
+    }
+
+    pub(crate) fn declared_provider_lowering_count(&self) -> usize {
+        self.component.inventory().provider_lowering_count()
+    }
+
+    pub(crate) fn matches_parent(&self, parent: &Sys4InactiveProviderAdmission) -> bool {
+        self.assigned_loci.iter().all(|locus| {
+            parent
+                .static_plan
+                .projection()
+                .locus_program(locus)
+                .is_some()
+        }) && self
+            .static_snapshot
+            .matches_static_projection_restricted_to_loci(&parent.static_plan, &self.assigned_loci)
+            && self.component.is_component_scoped()
+            && self.component_binding_ref == self.component.i3_inactive_component_binding_ref()
+            && self.matches_m9_execution_restriction_for_assigned_loci(parent)
+            && parent
+                .composite
+                .has_retained_current_composite_seal_association()
+    }
+
+    /// Re-derive the ordinary SYS-4 restriction from the parent static plan
+    /// and compare the exact restricted M9 snapshot. This retains incident
+    /// owner and designated-input closure semantics; it is intentionally not
+    /// a simplistic "authority locus equals child locus" predicate.
+    pub(crate) fn matches_m9_execution_restriction_for_assigned_loci(
+        &self,
+        parent: &Sys4InactiveProviderAdmission,
+    ) -> bool {
+        let restricted_projection = parent
+            .static_plan
+            .projection()
+            .restricted_to_loci(&self.assigned_loci);
+        let Ok(restriction) = m9_execution_restriction_for_projection(&restricted_projection, true)
+        else {
+            return false;
+        };
+        let Ok(expected) = parent
+            .composite
+            .restricted_legacy_authority_inventory(&restriction)
+        else {
+            return false;
+        };
+        expected.i3_private_snapshot() == self.legacy_authority_generation.i3_private_snapshot()
+    }
+}
+
 impl FabricProgram {
     pub(crate) fn from_projection(projection: GlobalProjectionResult) -> Sys4Result<Self> {
         // Stage 2a can retain provider-effect topology only as a dedicated
@@ -617,7 +802,7 @@ impl FabricProgram {
         &self,
     ) -> Sys4Result<Sys4I3DesignatedRemoteInputInventory> {
         Ok(Sys4I3DesignatedRemoteInputInventory {
-            requirements: designated_remote_input_requirements_for_program(self)?,
+            requirements: designated_remote_input_requirements_for_projection(&self.projection)?,
         })
     }
 
@@ -2516,13 +2701,21 @@ fn i3_snapshot_edge_kind_from_tag(tag: u8) -> Option<CommunicationEdgeKind> {
 fn m9_execution_restriction_for_program(
     program: &FabricProgram,
 ) -> Sys4Result<M9ExecutionRestriction> {
+    m9_execution_restriction_for_projection(&program.projection, false)
+}
+
+fn m9_execution_restriction_for_projection(
+    projection: &GlobalProjectionResult,
+    permit_inactive_provider_fragments: bool,
+) -> Sys4Result<M9ExecutionRestriction> {
     let mut restriction = M9ExecutionRestriction::default();
     // A remote designated-input requirement is not reconstructed from an
     // operation name or a materialized frontier.  The checked projector
     // wrote the same typed descriptor on the request and receipt edges; pair
     // those exact descriptors first, then retain that closure on both the
     // evaluator and producer process images.
-    let remote_input_requirements = designated_remote_input_requirements_for_program(program)?;
+    let remote_input_requirements =
+        designated_remote_input_requirements_for_projection(projection)?;
     for requirement in &remote_input_requirements {
         restriction.require_designated_remote_input(
             &requirement.producer_locus,
@@ -2532,7 +2725,7 @@ fn m9_execution_restriction_for_program(
             &requirement.trigger_frontier,
         );
     }
-    for fragment in program.projection.sys4_artifact_fragments().entries() {
+    for fragment in projection.sys4_artifact_fragments().entries() {
         match fragment.fragment_kind() {
             ProjectedOperationFragmentKind::OwnerRequestInvocation => {
                 let owner_locus = fragment.target_owner_locus().ok_or_else(|| {
@@ -2598,9 +2791,11 @@ fn m9_execution_restriction_for_program(
             ProjectedOperationFragmentKind::ReadOnlyProviderEffectRequester
             | ProjectedOperationFragmentKind::ReadOnlyProviderEffectService
             | ProjectedOperationFragmentKind::ReadOnlyProviderEffectResultConsumer => {
-                return Err(Sys4DispatchDiagnostics::one(
-                    Sys4DiagnosticKind::ProgramProjectionMismatch,
-                ));
+                if !permit_inactive_provider_fragments {
+                    return Err(Sys4DispatchDiagnostics::one(
+                        Sys4DiagnosticKind::ProgramProjectionMismatch,
+                    ));
+                }
             }
         }
     }
@@ -2620,13 +2815,12 @@ struct I3DesignatedRemoteInputKey {
 /// Derive the typed designated-input closure from paired checked edge
 /// descriptors.  A key carries more than an operation ID, so two source
 /// dependencies of one designated operation cannot collapse.
-fn designated_remote_input_requirements_for_program(
-    program: &FabricProgram,
+fn designated_remote_input_requirements_for_projection(
+    projection: &GlobalProjectionResult,
 ) -> Sys4Result<BTreeSet<I3DesignatedRemoteInputKey>> {
     let mut requests = BTreeMap::<I3DesignatedRemoteInputKey, usize>::new();
     let mut receipts = BTreeMap::<I3DesignatedRemoteInputKey, usize>::new();
-    for edge in program
-        .projection
+    for edge in projection
         .communication_plan()
         .edges()
         .iter()

@@ -61,6 +61,14 @@ durability or live distributed patch.
 
 ## Start state / dirty state
 
+Provider Stage 2c starts from accepted inactive Stage 2b
+`7142b205b4e2805d50ce78156de99e6feb1db37a`, observed clean with live remote
+parity at `2026-09-08T19:22:07+09:00`. All subsequent source/test/LAB changes
+belong to this continuation. Parent fetches `origin/main` again before
+integration and observes zero ahead/behind; no user source edits are discarded.
+Owner housekeeping increases available storage; the parent performs no further
+cleanup beyond the separately authorized five old rlibs recorded below.
+
 Provider Stage 2b starts from static cut
 `3862b1688821c8fb243f8f148f54cd313ad3b163`. Parent verifies HEAD, origin/main
 and live remote equality plus clean worktree at `2026-09-08T15:41:54+09:00`.
@@ -132,6 +140,19 @@ docs/reports/TEMPLATE.md and the report validation helpers in
 scripts/validate_docs.py. Historical plans/reports are evidence, not authority.
 
 ## Actions taken
+
+Provider Stage 2c starts from accepted inactive cut `7142b205`. Parent selects
+the private mixed-image variant in the existing SYS4/SYS5 pipeline after the
+bounded Oracle advisory and local seam inspection. Ordinary evidence remains
+ordinary; no reconstructed final-verdict input is permitted for the composite.
+The existing finite-local grant issuer and active-snapshot inventory are shared,
+not replaced by a second authority system. Actual composite/ContractUpdate
+facts are retained at sealing, then restricted into inactive child candidates.
+This is a direct consumer of Stage 2b and supplier to actual host/runtime work,
+not a new milestone or provider invocation claim. Parent assigns one coupled
+production writer, a separate private test author and one evaluator. The first
+gate is a fail-closed scaffold's actual positive assertion RED. Exact packet:
+`/tmp/i3-provider-stage2c-parent-packet-20260908.md` (working input, not Canon).
 
 Owner resume observed `2026-09-08T18:43:01+09:00`: the owner approves the
 previously listed five old regenerable runtime-library artifacts and again
@@ -417,6 +438,190 @@ CARGO_INCREMENTAL=0 CARGO_BUILD_JOBS=2 cargo test --locked -p mir-runtime --test
 ```
 
 ## Evidence / outputs / test results
+
+Stage 2c parent integration: the first `make docs` stops at the report's
+project-status update section because the validator forbids the literal
+`pending` there even when referring to Git integration rather than an
+unfinished document update. The section now states the current integration
+stage; no milestone or Git success is substituted. The complete docs command
+is rerun after this wording correction. Staged added-line credential-pattern
+scan finds zero matches in the sixteen owned files; this is a limited pattern
+scan, not a general proof of secret absence. Staged whitespace check passes.
+
+Stage 2c post-review frozen packet is complete under
+`/tmp/c3-stage2c-final-packet-20260908.gTUvUc/`. Parent reads the actual logs:
+focused13/13 (9.65 seconds, included in the library total), scoped three-crate
+Clippy exit0 (22.06 seconds), workspace format exit0, runtime library375/375
+(88.17 seconds), process63/63 (49.19 seconds), M10 67/67 (10.35 seconds),
+I2 local5/5 (0.05 seconds), I2 CLI8/8 (10.47 seconds), and public provider
+guards5/5 (0.34 seconds). Logs are respectively `01-provider-module.log`,
+`02-clippy.log`, `03-fmt-check.log`, `04-runtime-lib.log`, `05-process.log`,
+`06-legacy-regressions.log` (three distinct targets), and
+`07-provider-guards.log`. Actual ordinary localnet regression then passes
+41/41 in 59.92 seconds (`08-probe-localnet.log`), and workspace all-target
+check passes in 17.41 seconds (`09-workspace-check.log`). They emit no
+warnings or failures. Every command passes the pre-run 10 GiB disk guard;
+final free space is 29,851,475,968 bytes. The workspace check compiles the
+runtime, probe and CLI but is not workspace test execution or their complete
+Clippy coverage. No probe-all-tests, actual provider invocation, whole-I3-3
+matrix/order or public/production acceptance claim follows.
+
+Stage 2c reviewer falsifiers execute: 11/13 pass, 362 filtered, exit 101,
+compile 28.78 seconds and tests 9.99 seconds, no warnings. Log:
+`/tmp/c3-stage2c-review-falsifiers-red-20260908.53sBo2/01-provider-module.log`.
+Both proposed P1 cases are reached: changed endpoint metadata with a refreshed
+candidate digest is accepted, and actual trusted setup retirement between
+structural validation and receipt construction is accepted. The latter uses
+capacity-one channels and bounded waits, not fabricated currentness flags.
+The new decoded ordinary-start rejection passes. The coverage table now
+distinguishes a retained non-provider M8 row mutation from removal of one
+actual excluded provider source/Core/ordinal association; both reject.
+Parent reads the full output and authorizes exact parent-commitment equality
+plus one final parent-local currentness point, with receipt facts captured
+there rather than later contradictory reloads. The stale scaffold comment is
+also assigned for correction. Post-run free space is 30,797,791,232 bytes.
+These findings and repairs do not change the contract into a continuous or
+cross-process authority guarantee.
+
+Stage 2c pre-review-repair regressions pass runtime feature-union library
+372/372 in 86.90 seconds and SYS5 process integration 63/63 in 49.82 seconds,
+with no warnings (`03-runtime-lib.log`, `04-process.log` under
+`/tmp/c3-stage2c-regression-final-20260908.21X7Qr/`). The parent stops the
+remaining sequence after the running command finishes when independent
+review identifies two expected-start defects: a candidate's recomputed image
+digest is not compared with the separately retained parent commitment, and
+mid-validation setup retirement can return an `Ok` receipt whose currentness
+flag is false. These are acceptance blockers despite the passing existing
+tests. New deterministic metadata-tamper and real-retirement falsifiers are
+being authored; a bounded test-only synchronization handshake avoids hanging
+on an unexpected earlier rejection. M10/I2, provider guards, actual ordinary
+localnet and workspace check are not run in this interrupted packet. The
+pre-repair passes are not final-cut evidence.
+
+Stage 2c final-quality recheck passes after the exact lint-only removal:
+`cargo clippy --locked -p mir-ast -p mir-semantics -p mir-runtime --features
+mir-runtime/i3-private-quic,mir-runtime/i3-process-test-seams --all-targets
+-- -D warnings` exits 0 in 22.60 seconds, and
+`cargo fmt --all -- --check` exits 0. Logs:
+`/tmp/c3-stage2c-regression-final-20260908.21X7Qr/01-clippy.log` and
+`02-fmt-check.log`. No warnings are emitted. Post-format free space is
+30,824,005,632 bytes. Frozen runtime/process/I2/probe regression and independent
+source review follow; this quality checkpoint alone does not close Stage 2c.
+
+Stage 2c Debug repair passes all ten focused tests, 362 filtered, 7.57 seconds
+after 28.13 seconds compilation, no emitted warnings
+(`/tmp/c3-stage2c-debug-quality-green-20260908.ZgIdD0/01-provider-module.log`).
+Expected-start Debug now emits only slot, assigned loci and safe parent/image
+references; private snapshots remain available for exact trusted comparison,
+not formatting. Scoped Clippy then reports four unfulfilled narrow lint
+expectations (`02-clippy.log`); parent authorizes only their removal, retaining
+the needed inactive impl-root annotations. Independent source reviews and
+frozen regression are pending. The read-only planning review gives conditional
+GO with the original component gates, followed by actual provider runtime and
+remaining I3-3 obligations. Neither review planning nor focused tests establish
+component or milestone acceptance.
+
+Stage 2c expected-start Debug privacy falsifier executes after bounded layout
+and dead-code cleanup: 9/10 pass, 362 filtered, exit 101, compile 32.67 seconds
+and tests 8.17 seconds, with no emitted warnings. Log:
+`/tmp/c3-stage2c-provider-module-debug-red-20260908.GsB89Q/01-provider-module.log`.
+The public expected-start type's derived Debug traverses the newly retained
+private component/authority DTOs. The test examines genuine formatted data
+locally and emits only a static failure message, not the private rendering.
+Parent reads the actual failure and authorizes a reference-only custom Debug
+implementation and correction of its retained-data documentation. This is
+neither a host call nor a trusted-start admission bypass. Post-run free space
+is 30,835,892,224 bytes; final Clippy/regression gates are still pending.
+
+Stage 2c focused behavior first turns GREEN: 9/9, 362 filtered, 7.77 seconds
+after 31.19 seconds compilation
+(`/tmp/c3-stage2c-module-quality-20260908.5W4LFu/01-provider-module.log`).
+The new nested M8 private snapshot is version 2 with a required scope tag;
+ordinary restore rejects the provider component, and missing/unknown tags
+cannot default into ordinary scope. The existing deployment validator is
+shared, and exact legacy inventory queries derive from the actual M9
+restriction/filter/snapshot comparison rather than a nonempty digest.
+These are private/provisional implementation changes, not compatibility claims.
+The following scoped three-crate all-target Clippy run with warnings denied
+fails on inactive-only dead-code and two large-enum layouts
+(`02-clippy.log` in the same directory); workspace format is not run after
+that failure. Parent reads both logs and delegates bounded quality repairs.
+Separately, a new expected-start Debug privacy falsifier is authored against
+genuine retained data; its execution is still pending at this checkpoint.
+No component acceptance, actual host call or whole-I3-3 acceptance follows.
+
+Stage 2c extended falsifiers reach their actual boundaries after the identity
+repair: nine module tests yield 7 passed / 2 failed / 362 filtered, exit 101,
+compile 38.52 seconds and tests 8.74 seconds. Log:
+`/tmp/c3-stage2c-provider-module-nine-rerun-20260908.sgX2US/01-provider-module.log`.
+First, extracting the component DTO from genuine codec-produced image bytes
+permits ordinary M8 restoration because the nested snapshot loses its scope.
+Second, the new inactive handoff accepts one slot containing all four loci,
+unlike the existing two-or-more-slot deployment validator. These are reached
+behavior failures, not claims of an external trusted-start bypass. Parent
+reads both failures and authorizes scope-preserving private serialization and
+reuse of the existing deployment validator. All prior seven checks, including
+foreign checked identity, now pass. Five warning groups remain, and post-run
+free space is 30,845,276,160 bytes. A preceding import typo caused E0432/E0425
+and no test execution
+(`/tmp/c3-stage2c-provider-module-two-reds-20260908.zCtJCh/01-provider-module.log`);
+the exact import-only repair precedes this behavioral run.
+
+Stage 2c incremental repair checkpoints (not component acceptance): the
+bounded compiler repair passes the same library check in 12.77 seconds, with
+eight warning groups and no tests
+(`/tmp/c3-stage2c-runtime-lib-check-rerun-20260908.0l1roX/01-runtime-lib-check.log`).
+The subsequent seven-test module run compiles but all seven fail at genuine
+handoff with `InactiveProcessHandoffRejected`, before codec or intended
+negative boundaries
+(`/tmp/c3-stage2c-provider-module-red-20260908.QavNlg/01-provider-module.log`).
+The existing exact M9 restriction correctly rejects the missing retained
+relation-reacquire association: issuance was retained, but the already
+validated lifecycle facts were discarded. The bounded repair retains those
+facts and binds the existing translated authority; it does not issue new
+authority or synthesize ordinary final evidence.
+
+After that repair, the same focused command
+`cargo test --locked -p mir-runtime --features
+i3-private-quic,i3-process-test-seams --lib sys5_i3_provider_composite_tests
+-- --test-threads=1` (incremental off, two build jobs) reaches 6 passed / 1
+failed, 362 filtered, compile 36.50 seconds and tests 7.70 seconds. Actual log:
+`/tmp/c3-stage2c-provider-module-rerun-20260908.D45gJY/01-provider-module.log`.
+The genuine A/B codec, scope, trusted-binding, retirement and ordinary-start
+guards pass. The remaining reached behavioral falsifier shows that an image
+inspection query incorrectly accepts a different valid checked identity
+(test line 346). Parent reads the actual failure and authorizes a bounded
+query-association repair. Four warning groups remain; post-run free space is
+30,849,011,712 bytes. These are inactive-image checks, not provider calls,
+host reads, cross-process revocation or I3-3 acceptance.
+
+Stage 2c coherent-source incremental check:
+`CARGO_INCREMENTAL=0 CARGO_BUILD_JOBS=2 cargo check --locked -p mir-runtime
+--features i3-private-quic,i3-process-test-seams --lib` exits 101 with 18
+compiler errors and no test execution. Exact log:
+`/tmp/c3-stage2c-runtime-lib-check-20260908.U6XuHx/01-runtime-lib-check.log`.
+Errors are actual shared-liveness-cell type mismatch, moved M9 base/coverage,
+misplaced relation-reacquire fields, Vec/set deployment drift, missed ordinary
+seed-field migrations, a missing expected-binding tag and a moved locus set.
+Parent reads all diagnostics and delegates bounded compile repairs without
+default authority, copied liveness flags or discarded tag checks. Pre/post
+free space is 30,877,523,968 / 30,877,278,208 bytes. This is a compile
+checkpoint failure, not a test failure or accepted inactive-image result.
+
+Stage 2c first behavior RED, inspected `2026-09-08T19:32:46+09:00`:
+`CARGO_INCREMENTAL=0 CARGO_BUILD_JOBS=2 cargo test --locked -p mir-runtime
+--features i3-private-quic,i3-process-test-seams --lib
+i3_provider_composite_validates_exact_all_locus_inactive_images_after_codec_roundtrip
+-- --test-threads=1` exits 101. One actual test body runs: 0 passed, 1 failed,
+363 filtered; after genuine source/setup/M9/policy sealing the positive
+expectation fails at `InactiveProcessHandoffPending` (test line 181). This is
+not a missing-symbol/compiler-only RED. Compile takes 27.71 seconds, test
+0.03 seconds; the uninhabited scaffold yields nine unreachable/unused
+warnings, not final quality evidence. Log:
+`/tmp/c3-stage2c-focused-red-20260908.Ezxnpb/01-focused-red.log`.
+Pre/post free bytes: 30,893,686,784 / 30,893,654,016. Parent reads the actual
+output and authorizes behavior plus separate falsifier implementation.
+No Stage 2c successful image, authority activation or runtime claim follows.
 
 Stage 2b final frozen regression, observed `2026-09-08T19:07:58+09:00`,
 supersedes intermediate results below. Parent reads the final logs in
@@ -1220,6 +1425,15 @@ result does the parent authorize the adjusted C3 production packet and paired
 test implementation. Actual QUIC remains the later direct consumer.
 
 ## What changed in understanding
+
+Stage 2c scope uses the existing SYS4 artifact/incident-edge restriction, not
+naive authority-locus equality. A requester image legitimately needs the target
+owner's operation lineage; a designated remote-input closure is retained at
+both incident ends. This preserves assigned execution without deleting required
+remote authorization. Parent also catches and corrects an interim draft that
+issued legacy capabilities before separate policy and lacked the actual
+restricted translated inventory. These are implementation corrections within
+the selected contract, not new Canon decisions or accepted test evidence.
 
 One bounded temporary Oracle consult (`i3-provider-stage2c-join-20260908`)
 reviews the next mixed-image join while Stage 2b repair proceeds. Direct
@@ -2366,12 +2580,13 @@ by this advice; provider/time remain OPEN and I3-4 remains inactive.
 
 ## Suggested next prompt
 
-Continue active I3-3 after the green inactive Stage 2b integration:
-retain actual consumed composite/M9 evidence at the seal, then carry the
-private inactive mixed admission through existing SYS4/SYS5 restriction,
-image and trusted-start validation (Stage 2c). Ordinary entry points remain
-rejectors; no synthetic ordinary verdict or hidden provider activation.
-Actual provider runtime/network and its fault tests follow that direct consumer.
+Continue active I3-3 after the green inactive Stage 2c integration:
+consume its actual retained composite/M9 evidence and restricted images in
+Stage 3's actual provider runtime, bounded host call and distinct QUIC
+request/result flow. Reuse existing SYS4/SYS5 and supervisor/FD3 mechanisms.
+Ordinary entry points remain rejectors; no synthetic ordinary verdict,
+scope erasure or second runtime/transport. This is an executable direct
+consumer, not another inactive-only handoff.
 ADR-0042/spec/17 is selected; invocation is not yet implemented. Preserve all
 20 failure families and ordering requirements, including remaining actual
 membership, redaction and in-flight cut boundaries. After full I3-3 acceptance,
@@ -2380,6 +2595,11 @@ parity, honor the latest owner-requested pause. I3-4 requires explicit resume;
 the retained program is not blocked, stale, or completed by that pause.
 
 ## Plan update status
+
+Provider Stage 2c: Plan 250 records actual inactive restriction/codec and
+parent-held validation, repaired falsifiers, final frozen runtime/regression
+and review evidence. Actual Stage 3 provider execution is the next direct
+consumer; the sole milestone and owner stop boundary remain unchanged.
 
 Provider Stage 2b: Plan 250 records actual binding/verification/policy/scoped
 M8 evidence, the fresh final regression/review packet and Stage 2c as next
@@ -2399,6 +2619,9 @@ rows, ordering edges and later milestone order are preserved. plan/00-index
 synchronization belongs to the status assignment.
 
 ## Documentation.md update status
+
+Provider Stage 2c: final inactive packet and actual Stage 3 consumer mirrored;
+ordinary localnet regression is not labelled provider execution.
 
 Provider Stage 2b: refreshed current 362/26/63/67/5/8/5 evidence, with filtered
 tests explicitly non-additive and runtime activation still pending.
@@ -2420,6 +2643,9 @@ generated-contract/runtime enforcement and the unchanged workflow boundary.
 
 ## docs/project-status.md update status
 
+Provider Stage 2c: final frozen packet, zero remaining review findings and
+the current component integration stage are synchronized within the 180-line bound.
+
 Provider Stage 2b: synchronized current evidence/review, capacity and next
 mixed-image boundary; six accepted milestones and lifecycle remain unchanged.
 
@@ -2434,6 +2660,10 @@ changing official lifecycle or the stop-after-I3-3 instruction.
 I3-2 accepted evidence と official I3 unentered を維持する。
 
 ## progress.md update status
+
+Provider Stage 2c: current evidence and actual-timestamp recent log separate
+inactive validation from still-unimplemented host execution. No percentage
+increase or official lifecycle change is inferred from the test count.
 
 Provider Stage 2b: current snapshot and actual-timestamp recent log updated;
 retained Stage 1/2a results are distinguished from final Stage 2b reruns.
@@ -2460,6 +2690,9 @@ is active. All later network, provider and full-matrix requirements remain.
 
 ## tasks.md update status
 
+Provider Stage 2c: current snapshot names actual provider execution as next
+consumer and retains all remaining I3-3 gates and stop-after-I3-3 control.
+
 Provider Stage 2b: current task map separates component integration, inactive
 mixed images, actual provider execution and remaining failure/order gates.
 
@@ -2480,6 +2713,10 @@ The 22:42 JST maintenance records C1/C2 as an uncommitted delta over pushed
 as the direct consumer. No new roadmap or queue is created.
 
 ## samples_progress.md update status
+
+Provider Stage 2c: inactive-image evidence is updated; the provider source is
+still not an operational network sample. Sample/script taxonomy is unchanged,
+so samples/README and scripts/README updates are unnecessary in this component.
 
 Provider Stage 2b: current evidence row updated; provider sample remains
 non-operational, with no new sample root, public workflow or Lean registration.
@@ -2502,6 +2739,30 @@ The C1/C2 update now points to its actual library test command and preserves
 the no-new-network-sample/non-workflow classification.
 
 ## Reviewer findings and follow-up
+
+Stage 2c final independent specification and quality reviews each report
+P0=0/P1=0/P2=0 after the narrow repairs. Both first identify two P1 blockers:
+the separately held exact image commitment was unused, and real retirement
+during structural validation could produce inconsistent successful receipt
+facts. The executed 11/13 RED and post-repair 13/13 GREEN establish both
+falsifiers and repairs. Final validation compares the expected commitment and
+checks retained M9 seal then monotone setup currentness before capturing the
+historical receipt facts. This does not assert continuing or cross-process
+authority. P2 follow-up also adds decoded generic-start refusal, distinguishes
+retained M8-row mutation from actual excluded-provider-row removal, and removes
+the obsolete no-cohort scaffold comment. Both reviewers inspect the full
+Stage 2c diff plus these narrow changes without running Cargo. Their clearance
+is conditional on the remaining frozen-cut regression/LAB/Git gates and is
+strictly inactive-component-only, not provider activation or I3-3 acceptance.
+
+Stage 2c pre-edit/sequence planner review gives GO for the bounded test-first
+packet: exact all-locus A/B inactive images and separately trusted validation
+are a sufficient direct consumer without starting endpoints or providers.
+It confirms no synthetic ordinary verification, no decode-time issuance,
+ordinary/composite distinction through restriction/restore and explicit
+parent-local versus later cross-process liveness claims. Parent marks the
+older Stage 2a ownership paragraph historical. This is a plan review, not a
+Stage 2c implementation or milestone acceptance review.
 
 Independent Canon-first planner pre-close review gives GO for inactive-only
 Stage 2b component integration after the executed gates above. Parent accepts
@@ -3246,6 +3507,14 @@ remains the explicitly reported failure, not an I3 runtime or passing gate.
 
 ## Skipped validations and reasons
 
+Stage 2c: no new Lean/general model, provider activation/host call, full
+workspace tests or probe-all-tests run is claimed. The component changes a
+private inactive image/validation boundary and its shared ordinary helpers;
+the final frozen focused/runtime/process/I2/localnet/quality/check packet above
+is its bounded regression evidence. Actual provider runtime and remaining
+fault/order/model/full-workspace gates remain required inside I3-3. The nested
+M8 private DTO version change is not a public or durable format migration.
+
 Stage 2b current resource hold: after fresh library 359/359 and process 63/63,
 available root space is about 9.65 GiB, below the 10 GiB pre-command guard.
 The planned public guard rerun, warning cleanup/Clippy, extra review negatives
@@ -3302,6 +3571,31 @@ not skipped passes. General proof, WAN/production, durability and Browser/Host
 product realization remain outside this bounded milestone.
 
 ## Commit / push status
+
+Stage 2c parent final integration gates: `make docs` rerun exits zero,
+observed `2026-09-08T21:23:31+09:00` (agent config, 216 Canon entries,
+800/800 hierarchy, 1760-report scaffold). Report-section checks and staged
+whitespace checks pass. Sixteen-file added-line credential-pattern scan has
+zero matches; this is not a general secret audit. Parent accepts this bounded
+inactive handoff for the actual Stage 3 consumer and performs its scoped
+commit/push next. Actual resulting identity/parity remains an observed
+post-commit fact to record with that next in-scope work, not a future hash.
+
+Provider Stage 2c's frozen source/test packet, independent reviews and Rust
+gates are green over `7142b205`. Parent is synchronizing LAB records and
+performing final documentation/diff/changed-line credential checks before its
+scoped commit/push. No future self-referential hash or remote success is
+asserted. The actual observed cut/parity will be recorded with the next
+in-scope provider-runtime work. This integration is inactive-component-only:
+I3-3 remains active and the owner-requested stop applies to its full close.
+
+Provider Stage 2b is committed/pushed as
+`7142b205b4e2805d50ce78156de99e6feb1db37a`
+(`feat: seal inactive provider composite with scoped authority`). Parent
+observes clean HEAD/origin/main/live remote parity at
+`2026-09-08T19:22:07+09:00`. This accepts the inactive component only;
+I3-3 remains active/unaccepted and I3-4 inactive. The next in-scope Stage 2c
+starts from that cut and retains the owner-requested I3-3 stopping point.
 
 The final Stage 2b source/test packet and independent reviews are green and
 ready for parent's scoped integration over `3862b168`. Parent synchronized
@@ -3443,7 +3737,16 @@ This is the fifth source checkpoint inside I3-3, not milestone acceptance.
 
 ## Sub-agent session close status
 
-Current provider Stage 2b: production/test writers, the sole evaluator,
+Current provider Stage 2c: the production writer, separate test author, sole
+Cargo evaluator, independent specification/quality reviewers and read-only
+planner have returned their bounded results. The exact post-review source is
+frozen with all required component Rust gates green. The five-file LAB writer
+has completed snapshot synchronization; parent completed report/roadmap/docs
+integration and owns acceptance/Git. The mapper has returned a read-only map of the next
+existing runtime/carrier/FD3 consumer; no Stage 3 implementation has started.
+Contexts are retained for the same I3-3 continuation, not competing goals.
+
+Historical provider Stage 2b: production/test writers, the sole evaluator,
 independent specification/quality reviewers, planner and five-file LAB writer
 have returned their bounded results. Final source/test behavior is frozen;
 the repaired constructor and full current regression/quality packet are green.

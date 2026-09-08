@@ -8,6 +8,7 @@
 use std::collections::BTreeSet;
 
 use serde::{Deserialize, Serialize};
+use sha2::{Digest, Sha256};
 
 use mir_semantics::m9_finite_refinement::M9ReadOnlyProviderEffectCoverage;
 use mir_semantics::surface_v0_pipeline::private_snapshot::{
@@ -1027,6 +1028,20 @@ impl std::fmt::Debug for M8ReadOnlyProviderEffectComponentSnapshot {
     }
 }
 
+/// Versioned, private image DTO for the non-executable portion of a scoped
+/// provider component. It retains an explicit nested private-snapshot scope
+/// discriminator, so the component cannot be decoded as an ordinary M8
+/// instance. The current binding remains checked against the parent-held
+/// component at the SYS-5 expected-start boundary.
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[serde(deny_unknown_fields)]
+pub(crate) struct M8I3PrivateProviderComponentSnapshot {
+    version: u32,
+    component: M8I3PrivateSnapshot,
+    component_binding_ref: String,
+    declared_provider_lowering_count: usize,
+}
+
 /// T0-internal, non-authorizing inventory for a sealed provider component. It
 /// retains only checked identity and ordered-lowering correspondence; it
 /// exposes neither the underlying M8 instance nor any authority, witness, or
@@ -1135,6 +1150,21 @@ impl M8ReadOnlyProviderEffectComponent {
         }
     }
 
+    /// Export only the already restricted, non-provider M8 plan inventory for
+    /// a tagged inactive provider image.  This is deliberately distinct from
+    /// the ordinary I3 snapshot route, which continues to reject the scoped
+    /// component rather than erasing its provider identity.
+    pub(crate) fn i3_private_provider_component_snapshot(
+        &self,
+    ) -> M8I3PrivateProviderComponentSnapshot {
+        M8I3PrivateProviderComponentSnapshot {
+            version: M8I3PrivateProviderComponentSnapshot::VERSION,
+            component: M8I3PrivateSnapshot::from_read_only_provider_component(&self.instance),
+            component_binding_ref: self.i3_inactive_component_binding_ref(),
+            declared_provider_lowering_count: self.declared_provider_lowering_count,
+        }
+    }
+
     pub(crate) fn is_component_scoped(&self) -> bool {
         matches!(
             &self.instance.scope,
@@ -1151,6 +1181,23 @@ impl M8ReadOnlyProviderEffectComponent {
             ordered_lowering: self.instance.ordered_lowering().clone(),
             declared_provider_lowering_count: self.declared_provider_lowering_count,
         }
+    }
+
+    /// Opaque private correspondence reference for an already restricted
+    /// inactive component. It is not a credential and exposes neither the
+    /// resource nonce nor any authority/witness material to an image.
+    pub(crate) fn i3_inactive_component_binding_ref(&self) -> String {
+        let mut hasher = Sha256::new();
+        hasher.update(b"mirrorea/m8/i3/inactive-provider-component/v1\0");
+        hasher.update(self.instance.program_identity().stable_key());
+        hasher.update(format!("{:?}", self.instance.ordered_lowering()));
+        hasher.update(format!("{:?}", self.coverage));
+        hasher.update(self.binding_context.resource_runtime_nonce);
+        hasher.update(self.declared_provider_lowering_count.to_be_bytes());
+        format!(
+            "m8-i3-inactive-provider-component-sha256-v1:{:x}",
+            hasher.finalize()
+        )
     }
 }
 
@@ -1238,6 +1285,43 @@ impl M8ReadOnlyProviderEffectComponentSnapshot {
                 Err(M8I3PrivateSnapshotError::StructuralMismatch)
             }
         }
+    }
+}
+
+impl M8I3PrivateProviderComponentSnapshot {
+    const VERSION: u32 = 1;
+
+    /// Compare a decoded image DTO to the exact parent-held restricted
+    /// component.  The comparison is structural and non-authorizing: it does
+    /// not restore an M8 instance, issue a capability, or make the binding
+    /// current.
+    pub(crate) fn matches_parent_component(
+        &self,
+        parent: &M8ReadOnlyProviderEffectComponent,
+    ) -> bool {
+        self.version == Self::VERSION
+            && self.declared_provider_lowering_count == parent.declared_provider_lowering_count
+            && self.component_binding_ref == parent.i3_inactive_component_binding_ref()
+            && self.component
+                == M8I3PrivateSnapshot::from_read_only_provider_component(&parent.instance)
+            && parent.is_component_scoped()
+    }
+
+    pub(crate) const fn declared_provider_lowering_count(&self) -> usize {
+        self.declared_provider_lowering_count
+    }
+
+    pub(crate) fn component_binding_ref(&self) -> &str {
+        &self.component_binding_ref
+    }
+
+    #[cfg(test)]
+    pub(crate) fn test_only_change_retained_lowering_association(&mut self) -> bool {
+        let Some(entry) = self.component.ordered_lowering.first_mut() else {
+            return false;
+        };
+        entry.core_ref.push_str(":i3-provider-tampered");
+        true
     }
 }
 
@@ -1587,6 +1671,9 @@ pub(crate) enum M8I3PrivateSnapshotError {
 #[serde(deny_unknown_fields)]
 pub(crate) struct M8I3PrivateSnapshot {
     version: u32,
+    /// Required private discriminator. It deliberately has no serde default:
+    /// pre-discriminator bytes and unknown scopes cannot restore as ordinary.
+    scope: M8I3PrivateSnapshotScope,
     program_identity: SnapshotCheckedProgramIdentity,
     runtime_alias: String,
     ordered_lowering: Vec<PrivateRuntimeLoweringEntrySnapshot>,
@@ -1594,6 +1681,13 @@ pub(crate) struct M8I3PrivateSnapshot {
     designated_execution_plans: Vec<PrivateM8DesignatedExecutionPlanSnapshot>,
     owner_execution_plans: Vec<PrivateM8OwnerExecutionPlanSnapshot>,
     relation_execution_plans: Vec<PrivateM8RelationExecutionPlanSnapshot>,
+}
+
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize, Deserialize)]
+#[serde(rename_all = "snake_case")]
+enum M8I3PrivateSnapshotScope {
+    Ordinary,
+    ReadOnlyProviderEffectComponent,
 }
 
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
@@ -1723,11 +1817,12 @@ struct PrivateM8RelationExecutionPlanSnapshot {
 }
 
 impl M8I3PrivateSnapshot {
-    const VERSION: u32 = 1;
+    const VERSION: u32 = 2;
 
     fn from_instance(instance: &M8RuntimeInstance) -> Self {
         Self {
             version: Self::VERSION,
+            scope: M8I3PrivateSnapshotScope::Ordinary,
             program_identity: SnapshotCheckedProgramIdentity::from_checked(
                 &instance.program_identity,
             ),
@@ -1757,8 +1852,14 @@ impl M8I3PrivateSnapshot {
         }
     }
 
+    fn from_read_only_provider_component(instance: &M8RuntimeInstance) -> Self {
+        let mut snapshot = Self::from_instance(instance);
+        snapshot.scope = M8I3PrivateSnapshotScope::ReadOnlyProviderEffectComponent;
+        snapshot
+    }
+
     fn into_instance(self) -> Result<M8RuntimeInstance, M8I3PrivateSnapshotError> {
-        if self.version != Self::VERSION {
+        if self.version != Self::VERSION || self.scope != M8I3PrivateSnapshotScope::Ordinary {
             return Err(M8I3PrivateSnapshotError::StructuralMismatch);
         }
         if self.ordered_lowering.iter().any(|entry| {
