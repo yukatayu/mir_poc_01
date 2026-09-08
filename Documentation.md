@@ -325,30 +325,26 @@ recordが揃ったためofficial I2 entry後exitを受理しました。broad PH
   selects the finite provider contract. Its source/check/snapshot and explicit
   unsupported-legacy-runtime handoff now pass source 17/17, privacy 1/1,
   private guards 2/2 and public guards 5/5, with independent review clear.
-  Source/guard cut `9e8d674a` is pushed. Static successor `3862b168` remains the
-  Stage2a evidence cut; accepted Stage2b cut `7142b205b4e2805d50ce78156de99e6feb1db37a`
-  has clean HEAD/origin/main/live parity at 2026-09-08 19:22 JST. Retained
-  Stage2a composite/projection evidence is semantics 6/17/8,
-  privacy 1, static runtime 11. Stage2b module is included in its fresh runtime
-  362/362; provider filtering is 26/26 within that runtime total, not additive;
-  process integration is 63/63. M10 is 67/67, I2 local is 5/5 and CLI is 8/8,
-  and public guards are 5/5. The three-crate all-target warnings-denied Clippy,
-  workspace format, and workspace all-target check pass; workspace tests,
-  CLI/probe Clippy, and provider activation are not claimed. Independent
-  spec/quality review is P0/P1/P2 zero after three direct tests and generic M8
-  typed-refusal coverage. Stage2b is accepted as an inactive component at the
-  clean `7142b205b4e2805d50ce78156de99e6feb1db37a` cut. Current Stage2c is the
-  existing SYS4/SYS5 inactive mixed-image handoff. Final focused module/runtime
-  is 13/13 included in 375/375 (362 filtered; 9.65s/88.17s), process 63/63,
-  M10 67/67, I2 local/CLI 5/5 and 8/8, guards 5/5, and actual ordinary localnet
-  41/41 (59.92s). Feature-union all-target Clippy `-Dwarnings` (22.06s),
-  workspace format and all-target check (17.41s) pass with no warnings; workspace
-  tests and probe-all tests are not claimed. Final review is P0/P1/P2 zero after
-  two P1 falsifiers and three P2 coverage/comment repairs. Stage2c is inactive/
-  green for parent integration; new component commit/push remains pending. Next
-  direct consumer: actual Stage3 provider host/QUIC runtime; private M8 version 2
-  is required in scope, with no compatibility promise. This is not Stage2c
-  acceptance, host activity, provider row-18 completion, or I3-3 completion.
+  Accepted inputs are source/guard `9e8d674a`, static `3862b168`, inactive
+  authorization `7142b205`, and inactive process handoff Stage2c `a027d61b`
+  (clean remote parity observed 2026-09-08 21:24 JST). Retained Stage2c evidence
+  is focused13 included in runtime375, process63, ordinary localnet41,
+  M10/I2 67/5/8, guards5, scoped Clippy/format/workspace check and independent
+  review with no remaining findings; Report2606 retains exact commands.
+  The current slice-2 provider packet is actual probe 20/20, exact guard 1/1,
+  held-S2 1/1, local execution 18/18, runtime 7/7 and control 9/9 green.
+  Four actual two-session fault profiles use genuine child-private assertions
+  with generic completion only; their fault trace is not exported. The repaired
+  held-S2 and unsupported-slot cases use shared-body generation/decoder checks.
+  The lost case decoded and discarded a complete frame before semantic admission;
+  it is not wire packet loss or a no-read result. Final post-review runtime410,
+  all probe targets, process64, M1067, I2 local5/CLI8 and provider guards5 pass;
+  scoped Clippy/format pass and review has no remaining findings. Component
+  docs/Git integration is being recorded; I3-3 itself remains unaccepted.
+  Ordinary 512 KiB, semantic 64 KiB and image 8 MiB caps remain unchanged;
+  detailed prior lifecycle and boundary evidence remains in Report2606.
+  Private M8 v2 remains provisional. No provider row-18 or whole-I3-3
+  acceptance follows.
   All remaining I3-3 failure/order obligations stay required; I3-3 itself
   is not accepted, and I3-4 remains inactive.
 - decisions taken: the working interpretation remains ordinary meaning ->
@@ -377,18 +373,23 @@ recordが揃ったためofficial I2 entry後exitを受理しました。broad PH
   warnings-clean, workspace format passes, and workspace all-target check
   passes; workspace tests, CLI/probe Clippy and provider activation are not
   claimed. Independent spec/quality review is P0/P1/P2 zero. Stage2b is
-  accepted as an inactive component at `7142b205b4e2805d50ce78156de99e6feb1db37a`;
-  current Stage2c final focused module/runtime is 13/13 included in 375/375
+  accepted as an inactive component at `7142b205`;
+  retained Stage2c final focused module/runtime is 13/13 included in 375/375
   (362 filtered; 9.65s/88.17s), with actual ordinary localnet 41/41 (59.92s).
   Feature-union Clippy/workspace format/check are green; workspace tests,
   probe-all tests and provider activation are not claimed. Final independent
-  review is P0/P1/P2 zero. Stage2c is inactive/green for parent integration;
-  a new component commit/push remains pending. The next direct consumer is
-  actual Stage3 provider host/QUIC runtime with private M8 version 2 required;
-  no compatibility promise, Stage2c acceptance, host activity, provider
-  row-18 completion or I3-3 completion is claimed. Report 2606 keeps exact logs.
-  Provider, remaining membership/redaction/cut and full ordering/acceptance remain
-  open. No whole-I3-3, official lifecycle or public workflow claim follows.
+  review is P0/P1/P2 zero. Stage2c is accepted inactive at the observed cut.
+  Current Stage3 actual provider probe passes20/20 and local execution/read/control
+  filters pass18/7/9. Genuine FD3-installed children execute the host/QUIC path.
+  Normal v2 observation is separately M9-authorized; four two-session fault
+  profiles use child-private assertions and generic completion, not exported
+  fault traces. The lost-result case discards a received, decoded frame before
+  semantic admission; it is not wire packet loss. Final post-review runtime410,
+  all probe targets, process64, M10/I2 and provider guards pass, as do scoped
+  Clippy/format; review has no remaining findings. Component docs/Git integration
+  and remaining rows13/15/19/20/order/whole-I3-3 acceptance are tracked in
+  Report2606 and Plan250. Historical micro-checkpoints stay in Report2606; no
+  official lifecycle or public workflow claim follows.
 
 ## Historical plan index（Plan 249を含めrepository memory、current queueではない）
 

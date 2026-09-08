@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-09-08 21:14 JST
+最終更新: 2026-09-09 05:16 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -59,36 +59,31 @@ remain later.
 
 ## current milestone position
 
-Provider static handoff `3862b168` remains the Stage2a evidence cut. Accepted
-Stage2b cut `7142b205b4e2805d50ce78156de99e6feb1db37a` has clean
-HEAD/origin/main/live parity at 2026-09-08 19:22 JST. Retained Stage2a static
-coverage/composite/projection evidence is semantics 6/17/8, privacy 1, static
-runtime 11. Stage2b runtime is 362/362, including provider filtering 26/26
-(not additive); process is 63/63, M10 is 67/67, I2 local/CLI is 5/5 and 8/8,
-and public guards are 5/5. Three-crate all-target warnings-denied Clippy,
-workspace format, and workspace all-target check pass; workspace tests and
-CLI/probe Clippy are not claimed. Independent spec/quality review is P0/P1/P2
-zero after three direct tests and generic M8 typed refusal. The accepted Stage2b
-source/cut is frozen; current Stage2c is dirty. Stage2b is accepted as an inactive component. Current Stage2c is the
-existing SYS4/SYS5 inactive mixed-image handoff. Final focused module/runtime
-  is 13/13 included in runtime 375/375 (362 filtered; 9.65s/88.17s), process
-  63/63, M10 67/67, I2 local/CLI 5/5 and 8/8, and guards 5/5. Actual ordinary
-  localnet is 41/41 (59.92s). Feature-union all-target Clippy `-Dwarnings`
-  (22.06s), workspace format and all-target check (17.41s) pass with no warnings;
-  workspace tests, probe-all tests and provider activation are not claimed.
-  Final independent review is P0/P1/P2 zero after two P1 falsifiers and three
-  P2 coverage/comment repairs. Stage2c is inactive/green for parent integration;
-  a new component commit/push remains pending. The next direct consumer is actual
-  Stage3 provider host/QUIC runtime, with private M8 version 2 required in scope
-  and no compatibility promise. This is not Stage2c acceptance, host activity,
-  provider row-18 completion or I3-3 completion. Six of eleven
-milestones are accepted; I3-3 remains unaccepted.
+Accepted inactive provider handoff: `a027d61b8030a903f892de2f7483ec8b64627963`.
+Stage3 now executes genuine FD3-installed A/B children, checked provider requests,
+bounded host reads, current-authority result consumption and normal M9-authorized
+v2 joined observation over real QUIC. After the review repair, runtime library
+410/410 and all probe targets pass, including ordinary localnet41/provider20;
+scoped all-target Clippy and format pass. Independent review has no remaining
+P0/P1/P2. Final component integration and its exact Git cut remain in Report2606.
+
+Four actual two-session fault profiles use child-private assertions and generic
+completion only, not exported fault traces. The lost-result case receives and
+decodes the complete frame, then discards it before semantic admission; it is
+not wire packet loss. AdapterUnavailable retains LOCAL injected-read/codec
+evidence, not an actual OS operational-error claim. B64+A65 is a finite bound,
+not independent B65 or global exactly-once. Supported live provider cut/export
+and public interfaces are not claimed.
+
+After provider integration, rows13/15/19/20, ordering and whole-I3-3 acceptance
+remain. Six of eleven milestones are accepted; I3-3 is the sole active milestone.
+Stop only after its full validation/review/commit/push/parity; I3-4 stays inactive.
 
 | Axis | Current status | Startability |
 |---|---|---|
 | Logical specification | finite source -> Core -> artifact -> communication -> in-process trace/conformance accepted; Theory T1 and broad PHASE-I1 unaccepted | maintenance **着手可能**; general widening **後段依存** |
 | User-facing specification | provisional project/run/inspect/conform workflow exists; public grammar/CLI/JSON/API/ABI/wire/devtools unfrozen | regression **着手可能**; public contract **要仕様確認** |
-| Implementation / operation | I2 exit preserved; I3-1/I3-2 accepted; provider source/static projection tested; inactive effect grant is issued, while activation/revalidation/actual invocation and remaining membership/redaction/cut/full-matrix gates remain | I3-3 **着手可能**; I3-4+ **後段依存** |
+| Implementation / operation | I2 exit preserved; I3-1/I3-2 accepted; provider actual process/QUIC/host path verified; membership/cut/order and full-matrix acceptance remain | I3-3 **着手可能**; I3-4+ **後段依存** |
 
 ```text
 Theory: T1
@@ -261,7 +256,7 @@ unsupported-legacy-handoff portion of ADR-0042/spec/17 (not current Stage2b):
   overlap broader suites and are not additive totals.
 
 Logs, earlier AST/M6/M7/time regressions and final docs/Git state are in Report
-2606. The new sample is an incomplete local effect-authorization prototype with
+2606. Historical Stage2b sample was an incomplete local effect-authorization prototype with
 partial local authorization, not an M5/Lean clean-runner registration or
 executable provider workflow. No accepted host invocation, supervisor
 availability, row-18 acceptance, new Lean/general proof or I3 lifecycle is
@@ -277,6 +272,12 @@ then stop with Plan 250 retained and I3-4 inactive.
 
 ## recent log
 
+- 2026-09-09 04:41 JST: slice-2 actual probe 20/20, guard 1/1, held-S2 1/1,
+  execution 18/18, runtime 7/7 and control 9/9 are green; fault profiles remain
+  generic-completion evidence and broad review/regression remain pending.
+- 2026-09-08 21:25 JST: accepted bounded Stage2c cut `a027d61b8030a903f892de2f7483ec8b64627963`
+  has clean parity observed at 21:24 JST; retained final packet is 13/13 in
+  runtime 375/375, with no fresh Stage3 runtime result or I3-3 acceptance.
 - 2026-09-08 21:14 JST: final Stage2c packet is 13/13 in runtime 375/375,
   process 63/63, ordinary localnet 41/41, feature-union Clippy/format/check
   green, and final review P0/P1/P2 zero; inactive/green for parent integration,
@@ -286,11 +287,12 @@ then stop with Plan 250 retained and I3-4 inactive.
   has clean HEAD/origin/main/live parity; final quality/regression evidence is
   runtime 362/362, provider filter 26/26 within that total, process 63/63, M10 67/67,
   I2 local/CLI 5/5 and 8/8, and public guards 5/5; reviews are P0/P1/P2 zero.
-  Component is accepted but inactive; current Stage2c is an unexecuted
+  Component was accepted but inactive; the then-Stage2c was an unexecuted
   fail-closed/test-first handoff, with no provider activation or I3-3 acceptance.
 - 2026-09-08 20:37 JST (superseded Stage2c checkpoint): Stage2c focused module 9/9 passed with 362 filtered in
   7.77s; scoped Clippy remains RED on dead-code/layout warnings, and the added
-  debug privacy falsifier (tenth case) is not executed. No Stage2c acceptance.
+  debug privacy falsifier (tenth case) is not executed. Superseded before the
+  accepted Stage2c cut; no current status follows.
 - 2026-09-08 16:48 JST: Stage2b module behavior recorded as 7 passed, 3 failed,
   and 345 filtered; two policy regressions pass and three repair blocks remain.
 
@@ -412,3 +414,7 @@ then stop with Plan 250 retained and I3-4 inactive.
   HEAD/origin/main/live parity at 15:41:54 JST. Stage 2b actual resource binding,
   M9 composite authorization and inactive scoped M8 are current; no invocation,
   I3-3 acceptance or I3-4 activation.
+- 2026-09-09 05:16 JST: ProviderStage3 final post-review library410, all probe targets
+  (provider20/ordinary41), process64, M10/I2/guards, scoped Clippy/format pass;
+  P2 mode/budget separation repaired and review clear. Component docs/Git
+  integration follows; membership/cut/order and whole-I3-3 acceptance remain.

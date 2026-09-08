@@ -1,6 +1,7 @@
 use std::{fmt::Debug, path::PathBuf};
 
 use crate::{
+    m8_runtime_owner_queue::M8RelationFloor,
     m8_runtime_relation_projection::M8ObservedRelationShadow,
     sys3_projection::{BackendProfile, CommunicationEdgeKind},
     sys4_dispatch::{
@@ -455,6 +456,125 @@ fn relation_endpoint_causality_preserves_publish_dispatch_receive_observe_serve_
         fabric.relation_semantic_digest("bird_follow"),
         Some(shadow_digest.as_str()),
         "fabric devtools digest must be derived from the imported relation shadow"
+    );
+}
+
+#[test]
+fn relation_fallback_publication_causally_precedes_viewerc_later_serve() {
+    let (program, admission, _checked_program_ref) = sys4_relation_fabric_parts();
+    let mut fabric = LocalFabric::bootstrap(program, admission, BackendProfile::St)
+        .expect("complete source-derived admission boots SYS-4 relation fabric");
+
+    let initial = fabric
+        .publish_relation_current("bird_follow")
+        .expect("the live primary relation publishes before semantic fallback");
+    let fallback = fabric
+        .invalidate_relation_primary("bird_follow")
+        .expect("primary invalidation generates the real fallback publication endpoint");
+
+    assert!(
+        fabric.observer_exact_relation_endpoint_receipt(&fallback),
+        "the fallback receipt must retain one exact generated endpoint and checked provenance"
+    );
+    assert_eq!(fallback.edge().operation_id(), "bird_follow");
+    assert_eq!(fallback.edge().source_locus(), "ParticipantB");
+    assert_eq!(fallback.edge().target_locus(), "ViewerC");
+    assert_eq!(
+        fallback.shadow().semantic().selected_anchor(),
+        "participant_b_shoulder"
+    );
+    assert_eq!(
+        fallback.shadow().semantic().selected_floor(),
+        M8RelationFloor::Anchor
+    );
+    assert_ne!(
+        fallback.request_id(),
+        initial.request_id(),
+        "fallback must use its own generated endpoint identity"
+    );
+    assert_ne!(
+        fallback.consumer_serve_occurrence_id(),
+        initial.consumer_serve_occurrence_id(),
+        "ViewerC later serve must be a distinct fallback occurrence"
+    );
+
+    let transport = fallback.transport();
+    let graph = fabric.causality();
+    assert_eq!(
+        graph.predecessor_ids(fallback.request_enqueue_occurrence_id()),
+        vec![fallback.owner_publish_occurrence_id().to_string()],
+        "fallback generated enqueue must follow its owner-side semantic publication"
+    );
+    assert_eq!(
+        graph.predecessor_ids(transport.source_outbox_dequeue_occurrence_id()),
+        vec![fallback.request_enqueue_occurrence_id().to_string()],
+        "fallback dispatch must follow its generated enqueue"
+    );
+    assert_eq!(
+        graph.predecessor_ids(transport.target_inbox_enqueue_occurrence_id()),
+        vec![transport.source_outbox_dequeue_occurrence_id().to_string()],
+        "ViewerC receive must follow the fallback dispatch"
+    );
+    let observe_predecessors = graph.predecessor_ids(fallback.consumer_observe_occurrence_id());
+    assert_eq!(
+        observe_predecessors.len(),
+        2,
+        "the later ViewerC M8 observation retains its prior local observation and adds the fallback dequeue"
+    );
+    assert_eq!(
+        observe_predecessors[0],
+        initial.consumer_observe_occurrence_id(),
+        "ViewerC's second M8 relation observation must retain the first local observation as its ordered predecessor"
+    );
+    let fallback_target_dequeue = &observe_predecessors[1];
+    assert!(
+        fallback_target_dequeue.starts_with("sys4-locus-dequeue-"),
+        "ViewerC fallback observation must follow the target-locus dequeue"
+    );
+    assert_eq!(
+        graph.predecessor_ids(fallback_target_dequeue),
+        vec![transport.target_inbox_enqueue_occurrence_id().to_string()],
+        "ViewerC target-locus dequeue must follow the fallback receive"
+    );
+    assert_eq!(
+        graph.predecessor_ids(fallback.consumer_serve_occurrence_id()),
+        vec![fallback.consumer_observe_occurrence_id().to_string()],
+        "ViewerC later serve must follow imported fallback observation"
+    );
+    assert!(
+        graph.reaches(
+            fallback.consumer_serve_occurrence_id(),
+            fallback.owner_publish_occurrence_id(),
+        ),
+        "semantic fallback publication must causally precede the later ViewerC serve"
+    );
+    assert!(
+        !graph.reaches(
+            fallback.owner_publish_occurrence_id(),
+            fallback.consumer_serve_occurrence_id(),
+        ),
+        "the later ViewerC serve cannot causally precede semantic fallback publication"
+    );
+
+    let semantic_digest_before_presentation = fabric
+        .relation_semantic_digest("bird_follow")
+        .expect("ViewerC fallback publication installs the semantic digest")
+        .to_string();
+    let endpoint_count_before_presentation =
+        fabric.endpoint_carrier_count_for_relation("bird_follow");
+    let presentation = fabric
+        .project_relation_presentation_gap("bird_follow")
+        .expect("the imported fallback shadow supports only a consumer-local presentation gap");
+    assert!(presentation.is_consumer_local_fallback());
+    assert_eq!(
+        fabric.relation_semantic_digest("bird_follow"),
+        Some(semantic_digest_before_presentation.as_str()),
+        "a presentation fallback cannot replace the semantic fallback already published to ViewerC"
+    );
+    assert_eq!(
+        fabric.endpoint_carrier_count_for_relation("bird_follow"),
+        endpoint_count_before_presentation,
+        "a presentation fallback cannot create another generated relation access or endpoint"
     );
 }
 

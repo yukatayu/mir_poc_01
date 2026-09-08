@@ -26,7 +26,11 @@ use std::{
 
 use mir_runtime::{
     sys5_i3_process_runtime::{
-        Sys5I3Deployment, Sys5I3DeploymentSlot, Sys5I3PrivateProcessCodec, Sys5I3ProcessCohort,
+        Sys5I3Deployment, Sys5I3DeploymentSlot, Sys5I3InstalledProviderChildRuntime,
+        Sys5I3PreparedProviderLocalnetLaunch, Sys5I3PrivateProcessCodec, Sys5I3ProcessCohort,
+        Sys5I3ProviderChildRole, Sys5I3ProviderLaunchError, Sys5I3ProviderLaunchErrorKind,
+        Sys5I3ProviderTerminalOutcomeClass, Sys5I3TrustedProviderLocalnetControl,
+        Sys5I3UntrustedProviderTerminalAuditObserverViewCandidate,
     },
     sys5_local_slice::{Sys5I3AdapterCarrierContract, Sys5SourceInput, build_project},
 };
@@ -84,8 +88,15 @@ const LOCALNET_CONTROL_FD: i32 = 3;
 // multiplexed with child stdout observer events or the trusted bootstrap FD.
 const LOCALNET_OWNER_LIFECYCLE_ACK_FD: i32 = 4;
 const MAX_TRUSTED_CONTROL_BYTES: usize = 512 * 1024;
+// The runtime independently rejects a larger provider transport blob before
+// it writes the one inherited FD3 frame. Keeping the same private bound here
+// prevents the probe from serializing an oversized TLS/slot record first.
+const MAX_PROVIDER_TRANSPORT_BOOTSTRAP_BYTES: usize = 64 * 1024;
 const MAX_CHILD_EVENT_BYTES: usize = 64 * 1024;
 const PRIVATE_LOCALNET_ALPN: &[u8] = b"mirrorea-i3-process-localnet-v1";
+const FIXED_PROVIDER_TERMINAL_AUDIT_PROFILE_V2: &str = "fixed-provider-terminal-audit-v2";
+const FIXED_PROVIDER_NETWORK_PROVENANCE_SCHEMA_V2: &str =
+    "fixed-provider-terminal-audit-network-provenance-v2";
 // The reaper reserve is part of the finite lifecycle allowance: it leaves
 // room to observe a post-kill exit without exceeding the caller's total main
 // deadline plus reaper allowance under suite load.
@@ -125,6 +136,238 @@ impl I3LocalnetChildSlot {
             Self::ProcessB => "--i3-2-private-child-slot=process-b",
         }
     }
+
+    fn provider_child_arg(self) -> &'static str {
+        match self {
+            Self::ProcessA => "--i3-3-private-provider-child-slot=process-a",
+            Self::ProcessB => "--i3-3-private-provider-child-slot=process-b",
+        }
+    }
+
+    const fn provider_role(self) -> Sys5I3ProviderChildRole {
+        match self {
+            Self::ProcessA => Sys5I3ProviderChildRole::RequesterConsumer,
+            Self::ProcessB => Sys5I3ProviderChildRole::Executor,
+        }
+    }
+}
+
+/// Physical whole-run limits for the private source-derived provider launch.
+///
+/// This carries neither source, fixture/path, effect authority, image/control
+/// bytes, nor a semantic result. The opaque runtime-prepared launch supplies
+/// the only admitted provider material. These limits are operational
+/// supervisor inputs, not semantic leases or a public process contract.
+#[doc(hidden)]
+#[derive(Clone, Copy, Debug, Eq, PartialEq)]
+pub struct I3ReadOnlyProviderLocalnetRequest {
+    whole_run_deadline: Duration,
+    reaper_allowance: Duration,
+    // A finite physical lifecycle falsifier. It is transferred only in A's
+    // private provider transport bootstrap after source-derived preparation;
+    // it cannot select a fixture, semantic result, authority, or carrier.
+    requester_exit_nonzero_after_completed: bool,
+}
+
+impl I3ReadOnlyProviderLocalnetRequest {
+    /// The selected finite profile's largest permitted whole-run bounds.
+    pub const fn bounded_defaults() -> Self {
+        Self {
+            whole_run_deadline: Duration::from_secs(15),
+            reaper_allowance: Duration::from_secs(1),
+            requester_exit_nonzero_after_completed: false,
+        }
+    }
+
+    /// Changes only the supervisor's physical whole-run deadline.
+    pub const fn with_whole_run_deadline(mut self, whole_run_deadline: Duration) -> Self {
+        self.whole_run_deadline = whole_run_deadline;
+        self
+    }
+
+    /// Changes only the finite allowance reserved for forced reaping.
+    pub const fn with_reaper_allowance(mut self, reaper_allowance: Duration) -> Self {
+        self.reaper_allowance = reaper_allowance;
+        self
+    }
+
+    /// Selects the finite physical falsifier where A exits nonzero only after
+    /// its real consume, private fixture assertion, terminal audit emission,
+    /// and QUIC close/drain have all completed. This is not a source,
+    /// authority, result, or fault-outcome input.
+    #[doc(hidden)]
+    pub const fn with_requester_exit_nonzero_after_completed(mut self) -> Self {
+        self.requester_exit_nonzero_after_completed = true;
+        self
+    }
+}
+
+/// Observer-safe bounded supervision failures for the private provider
+/// runner. A rejected run does not imply that no provider invocation occurred;
+/// its stage is operational evidence only.
+#[doc(hidden)]
+#[derive(Clone, Copy, Debug, Eq, PartialEq)]
+pub enum I3ReadOnlyProviderLocalnetRunErrorKind {
+    InvalidWholeRunDeadline,
+    InvalidReaperAllowance,
+    ProviderLaunchRejected,
+    /// The runtime rejected the source/composite activation boundary before a
+    /// provider child could enter its checked local path. The supervisor has
+    /// reaped any already registered child before returning.
+    ProviderRuntimeActivationPending,
+}
+
+/// Bounded, observer-safe progress categories for the private provider
+/// runner. A category identifies only the supervisor/child boundary which
+/// rejected; it does not expose an OS error, endpoint, source value, control,
+/// authority material, witness, or provider result.
+#[doc(hidden)]
+#[derive(Clone, Copy, Debug, Eq, PartialEq)]
+pub enum I3ReadOnlyProviderLocalnetFailureStage {
+    Preflight,
+    CredentialProvision,
+    ExecutorBootstrap,
+    ExecutorReady,
+    RequesterBootstrap,
+    ExecutorTerminal,
+    RequesterTerminal,
+    TerminalObservationCorrelation,
+    NaturalReap,
+    EndpointRebind,
+}
+
+/// Fixed physical bootstrap boundary for an observer-safe provider-launch
+/// rejection. This is diagnostic evidence only: it neither authenticates a
+/// child nor grants authority, and it retains no operating-system error or
+/// private bootstrap material.
+#[doc(hidden)]
+#[derive(Clone, Copy, Debug, Eq, PartialEq)]
+pub enum I3ReadOnlyProviderLocalnetBootstrapSubstage {
+    RouteConsistency,
+    ExecutableResolve,
+    ControlPipeSetup,
+    SpawnRegistration,
+    ImageHandoff,
+    ControlHandoff,
+}
+
+/// A typed private provider-run failure with no fixture, authority, carrier,
+/// control, or result material.
+#[doc(hidden)]
+#[derive(Clone, Copy, Debug, Eq, PartialEq)]
+pub struct I3ReadOnlyProviderLocalnetRunError {
+    kind: I3ReadOnlyProviderLocalnetRunErrorKind,
+    stage: I3ReadOnlyProviderLocalnetFailureStage,
+    bootstrap_substage: Option<I3ReadOnlyProviderLocalnetBootstrapSubstage>,
+    provider_launch_error_kind: Option<Sys5I3ProviderLaunchErrorKind>,
+}
+
+impl I3ReadOnlyProviderLocalnetRunError {
+    const fn new(kind: I3ReadOnlyProviderLocalnetRunErrorKind) -> Self {
+        Self::at(kind, I3ReadOnlyProviderLocalnetFailureStage::Preflight)
+    }
+
+    const fn at(
+        kind: I3ReadOnlyProviderLocalnetRunErrorKind,
+        stage: I3ReadOnlyProviderLocalnetFailureStage,
+    ) -> Self {
+        Self {
+            kind,
+            stage,
+            bootstrap_substage: None,
+            provider_launch_error_kind: None,
+        }
+    }
+
+    const fn bootstrap_rejection(
+        kind: I3ReadOnlyProviderLocalnetRunErrorKind,
+        stage: I3ReadOnlyProviderLocalnetFailureStage,
+        bootstrap_substage: Option<I3ReadOnlyProviderLocalnetBootstrapSubstage>,
+        provider_launch_error_kind: Option<Sys5I3ProviderLaunchErrorKind>,
+    ) -> Self {
+        Self {
+            kind,
+            stage,
+            bootstrap_substage,
+            provider_launch_error_kind,
+        }
+    }
+
+    pub const fn kind(&self) -> I3ReadOnlyProviderLocalnetRunErrorKind {
+        self.kind
+    }
+
+    pub const fn stage(&self) -> I3ReadOnlyProviderLocalnetFailureStage {
+        self.stage
+    }
+
+    /// The fixed physical bootstrap boundary, when the rejection occurred
+    /// during parent-side child setup. It exposes no OS error or child data.
+    pub const fn bootstrap_substage(&self) -> Option<I3ReadOnlyProviderLocalnetBootstrapSubstage> {
+        self.bootstrap_substage
+    }
+
+    /// The existing typed runtime launch category, when the runtime rejected
+    /// a privileged image/control operation. This is not a carrier, result,
+    /// source, or authority diagnostic.
+    pub const fn provider_launch_error_kind(&self) -> Option<Sys5I3ProviderLaunchErrorKind> {
+        self.provider_launch_error_kind
+    }
+}
+
+/// One source-real two-process provider run. The terminal records are only
+/// strict decoded observer-view candidates which the supervisor correlated
+/// with its own children and physical run; they are neither M9 permits nor
+/// reconstructible issued audits.
+#[doc(hidden)]
+pub struct I3ReadOnlyProviderLocalnetRun {
+    requester_terminal_observer_view: Sys5I3UntrustedProviderTerminalAuditObserverViewCandidate,
+    executor_terminal_observer_view: Sys5I3UntrustedProviderTerminalAuditObserverViewCandidate,
+}
+
+impl I3ReadOnlyProviderLocalnetRun {
+    /// A's bounded, reference-only terminal observation candidate.
+    pub fn requester_terminal_observer_view(
+        &self,
+    ) -> &Sys5I3UntrustedProviderTerminalAuditObserverViewCandidate {
+        &self.requester_terminal_observer_view
+    }
+
+    /// B's bounded, reference-only terminal observation candidate.
+    pub fn executor_terminal_observer_view(
+        &self,
+    ) -> &Sys5I3UntrustedProviderTerminalAuditObserverViewCandidate {
+        &self.executor_terminal_observer_view
+    }
+}
+
+/// Opaque completion of one sealed fixed terminal-observation conformance
+/// route. It carries no profile, M9 diagnostic, audit, provider result,
+/// reference, count, or non-execution claim.
+#[doc(hidden)]
+pub struct I3ReadOnlyProviderTerminalObservationConformanceRun {
+    _private: (),
+}
+
+/// Opaque completion of one sealed fixed provider-network conformance route.
+/// It carries no selected fault profile, terminal audit, result, provenance
+/// reference, count, or reason for any denied transition.
+#[doc(hidden)]
+pub struct I3ReadOnlyProviderNetworkConformanceRun {
+    _private: (),
+}
+
+#[derive(Clone, Copy, Debug, Eq, PartialEq)]
+enum PrivateProviderTerminalExpectation {
+    NormalAudit,
+    FixedTerminalObservationConformance,
+    FixedProviderNetworkConformance,
+}
+
+enum PrivateProviderTerminalCompletion {
+    NormalAudit(Box<I3ReadOnlyProviderLocalnetRun>),
+    FixedTerminalObservationConformance(I3ReadOnlyProviderTerminalObservationConformanceRun),
+    FixedProviderNetworkConformance(I3ReadOnlyProviderNetworkConformanceRun),
 }
 
 /// Deliberately limited test-facing fault switches.  They model one finite
@@ -2268,6 +2511,103 @@ struct PrivateChildControl {
     timeout_millis: u64,
 }
 
+/// Probe-owned, transport-only input carried beside the opaque runtime
+/// authority in its one provider FD3 frame. This must never grow source,
+/// path/resource, grant, request, result, or M9 fields: those remain in the
+/// runtime-owned opaque half of the frame.
+#[derive(Serialize, Deserialize)]
+struct PrivateProviderChildTransportBootstrap {
+    slot: I3LocalnetChildSlot,
+    endpoint: Option<String>,
+    // These three strings bind only this ephemeral QUIC run and its two TLS
+    // leaves. They are neither Mir source/Core provenance nor authority.
+    run_ref: String,
+    local_spki_ref: String,
+    peer_spki_ref: String,
+    ca_der: Vec<u8>,
+    leaf_cert_der: Vec<u8>,
+    leaf_key_der: Zeroizing<Vec<u8>>,
+    timeout_millis: u64,
+    // The parent sets this only for A. It is a finite process-liveness
+    // selector, never provider semantic input or runtime authority.
+    requester_exit_nonzero_after_completed: bool,
+}
+
+/// Provider children receive only this physical half of the runtime-owned
+/// FD3 frame. Reject duplicate members before ordinary serde decoding so a
+/// compromised inherited descriptor cannot select a last-key-wins slot,
+/// endpoint, or certificate record.
+struct StrictPrivateProviderChildTransportBootstrap(PrivateProviderChildTransportBootstrap);
+
+impl<'de> Deserialize<'de> for StrictPrivateProviderChildTransportBootstrap {
+    fn deserialize<D>(deserializer: D) -> Result<Self, D::Error>
+    where
+        D: serde::Deserializer<'de>,
+    {
+        struct StrictProviderTransportVisitor;
+
+        impl<'de> Visitor<'de> for StrictProviderTransportVisitor {
+            type Value = StrictPrivateProviderChildTransportBootstrap;
+
+            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                formatter.write_str("provider transport bootstrap without duplicate members")
+            }
+
+            fn visit_map<A>(self, mut map: A) -> Result<Self::Value, A::Error>
+            where
+                A: MapAccess<'de>,
+            {
+                let mut fields = serde_json::Map::new();
+                while let Some(key) = map.next_key::<String>()? {
+                    if fields.contains_key(&key) {
+                        return Err(A::Error::custom(
+                            "duplicate provider transport bootstrap member",
+                        ));
+                    }
+                    fields.insert(key, map.next_value::<serde_json::Value>()?);
+                }
+                serde_json::from_value(serde_json::Value::Object(fields))
+                    .map(StrictPrivateProviderChildTransportBootstrap)
+                    .map_err(A::Error::custom)
+            }
+        }
+
+        deserializer.deserialize_map(StrictProviderTransportVisitor)
+    }
+}
+
+fn decode_private_provider_child_transport_bootstrap(
+    bytes: &[u8],
+) -> Result<PrivateProviderChildTransportBootstrap, ()> {
+    let mut deserializer = serde_json::Deserializer::from_slice(bytes);
+    let bootstrap = StrictPrivateProviderChildTransportBootstrap::deserialize(&mut deserializer)
+        .map_err(|_| ())?;
+    deserializer.end().map_err(|_| ())?;
+    Ok(bootstrap.0)
+}
+
+fn provider_transport_bootstrap_matches_slot(
+    bootstrap: &PrivateProviderChildTransportBootstrap,
+    slot: I3LocalnetChildSlot,
+) -> bool {
+    bootstrap.slot == slot
+        && bootstrap
+            .endpoint
+            .as_deref()
+            .is_none_or(is_loopback_endpoint)
+        && !bootstrap.run_ref.is_empty()
+        && !bootstrap.local_spki_ref.is_empty()
+        && !bootstrap.peer_spki_ref.is_empty()
+        && bootstrap.local_spki_ref != bootstrap.peer_spki_ref
+        && !bootstrap.ca_der.is_empty()
+        && !bootstrap.leaf_cert_der.is_empty()
+        && !bootstrap.leaf_key_der.is_empty()
+        && bootstrap.timeout_millis > 0
+        && bootstrap.timeout_millis <= 15_000
+        && (slot != I3LocalnetChildSlot::ProcessB
+            || !bootstrap.requester_exit_nonzero_after_completed)
+}
+
 #[derive(Clone, Copy, Debug, Default, Eq, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "snake_case")]
 enum PrivateChildTerminalLifecycleFalsifier {
@@ -2352,6 +2692,40 @@ enum PrivateChildEvent {
         receipt_count: usize,
         runtime_occurrence_count: usize,
         observer_evidence: PrivateChildObserverEvidence,
+    },
+    /// Provider-specific terminal that deliberately reports only actual
+    /// physical bootstrap and QUIC session facts plus one M9-authorized,
+    /// strict reference-only observer-view frame. The frame is not an issued
+    /// audit or permit: the parent must decode and correlate it with the
+    /// owned provider run before it can become evidence. It contains no raw
+    /// value, path, source text, grant, witness, or host-outcome payload.
+    ProviderCompleted {
+        slot: I3LocalnetChildSlot,
+        assigned_loci: Vec<String>,
+        provider_control_consumed: bool,
+        tainted_image_consumed: bool,
+        // This fixed fact is emitted only after A's runtime-owned finite T0
+        // assertion has checked its actual local consume receipt. It carries
+        // neither the selected profile nor a raw provider value or outcome.
+        requester_fixture_assertion_completed: bool,
+        tls_peer_verified: bool,
+        reciprocal_preface_verified: bool,
+        reliable_bidi_stream_count: usize,
+        quic_datagrams_enabled: bool,
+        terminal_observer_view_frame: Vec<u8>,
+    },
+    /// Generic terminal marker for the sealed fixed observer-conformance
+    /// routes. It carries only the physical child slot; it is neither an
+    /// audit export nor evidence of a particular observer verdict.
+    ProviderTerminalObservationConformanceCompleted {
+        slot: I3LocalnetChildSlot,
+    },
+    /// Generic terminal marker for the sealed fixed provider-network
+    /// conformance routes. It carries only the physical child slot; the
+    /// selected schedule, transport facts, and internal duplicate/rejection
+    /// checks remain within the installed runtime.
+    ProviderNetworkConformanceCompleted {
+        slot: I3LocalnetChildSlot,
     },
     Rejected {
         rejection: PrivateChildRejection,
@@ -2902,6 +3276,9 @@ impl PrivateChildEvent {
         matches!(
             self,
             Self::Completed { .. }
+                | Self::ProviderCompleted { .. }
+                | Self::ProviderTerminalObservationConformanceCompleted { .. }
+                | Self::ProviderNetworkConformanceCompleted { .. }
                 | Self::Rejected { .. }
                 | Self::HandledDeliveryFault { .. }
                 | Self::AdapterDeliveryFault { .. }
@@ -2915,6 +3292,7 @@ impl PrivateChildEvent {
         matches!(
             self,
             Self::Completed { .. }
+                | Self::ProviderCompleted { .. }
                 | Self::LateIngress {
                     terminal_outcome: PrivateLateIngressTerminalOutcome::Completed,
                     ..
@@ -2929,6 +3307,9 @@ impl PrivateChildEvent {
             } => observer_evidence.retry_evidence.as_ref(),
             Self::HandledDeliveryFault { retry_evidence, .. } => retry_evidence.as_ref(),
             Self::Ready { .. }
+            | Self::ProviderCompleted { .. }
+            | Self::ProviderTerminalObservationConformanceCompleted { .. }
+            | Self::ProviderNetworkConformanceCompleted { .. }
             | Self::Rejected { .. }
             | Self::AdapterDeliveryFault { .. }
             | Self::LateIngress { .. }
@@ -2945,6 +3326,9 @@ impl PrivateChildEvent {
             } => owner_reply_replay_evidence.as_ref(),
             Self::Ready { .. }
             | Self::Completed { .. }
+            | Self::ProviderCompleted { .. }
+            | Self::ProviderTerminalObservationConformanceCompleted { .. }
+            | Self::ProviderNetworkConformanceCompleted { .. }
             | Self::Rejected { .. }
             | Self::AdapterDeliveryFault { .. }
             | Self::LateIngress { .. }
@@ -2979,7 +3363,11 @@ impl PrivateChildEvent {
                 semantic_admission_count,
                 ..
             } => Some(*semantic_admission_count),
-            Self::Ready { .. } | Self::UnknownLifecycleFailure { .. } => None,
+            Self::Ready { .. }
+            | Self::ProviderCompleted { .. }
+            | Self::ProviderTerminalObservationConformanceCompleted { .. }
+            | Self::ProviderNetworkConformanceCompleted { .. }
+            | Self::UnknownLifecycleFailure { .. } => None,
         }
     }
 
@@ -3150,7 +3538,11 @@ impl PrivateChildEvent {
                 observed_exit_status_code: None,
                 was_force_killed: false,
             }),
-            Self::Ready { .. } | Self::UnknownLifecycleFailure { .. } => None,
+            Self::Ready { .. }
+            | Self::ProviderCompleted { .. }
+            | Self::ProviderTerminalObservationConformanceCompleted { .. }
+            | Self::ProviderNetworkConformanceCompleted { .. }
+            | Self::UnknownLifecycleFailure { .. } => None,
         }
     }
 
@@ -3350,6 +3742,73 @@ struct LocalnetSupervisor {
     zero_exit_reap_observation_elapsed: Option<Duration>,
     zero_exit_reap_observed_within_deadline: bool,
     children: Vec<SpawnedChild>,
+    // The opaque runtime launch retains the trusted setup guard until this
+    // supervisor has naturally or forcibly reaped every provider child.
+    provider_launch: Option<Sys5I3PreparedProviderLocalnetLaunch>,
+}
+
+enum ProviderChildSpawnError {
+    Rejected {
+        bootstrap_substage: Option<I3ReadOnlyProviderLocalnetBootstrapSubstage>,
+        provider_launch_error_kind: Option<Sys5I3ProviderLaunchErrorKind>,
+    },
+}
+
+impl ProviderChildSpawnError {
+    const fn physical(bootstrap_substage: I3ReadOnlyProviderLocalnetBootstrapSubstage) -> Self {
+        Self::Rejected {
+            bootstrap_substage: Some(bootstrap_substage),
+            provider_launch_error_kind: None,
+        }
+    }
+
+    const fn runtime(
+        bootstrap_substage: I3ReadOnlyProviderLocalnetBootstrapSubstage,
+        error: &Sys5I3ProviderLaunchError,
+    ) -> Self {
+        Self::Rejected {
+            bootstrap_substage: Some(bootstrap_substage),
+            provider_launch_error_kind: Some(error.kind()),
+        }
+    }
+
+    const fn deadline() -> Self {
+        Self::Rejected {
+            bootstrap_substage: None,
+            provider_launch_error_kind: None,
+        }
+    }
+}
+
+struct ProviderRunFailure {
+    stage: I3ReadOnlyProviderLocalnetFailureStage,
+    bootstrap_substage: Option<I3ReadOnlyProviderLocalnetBootstrapSubstage>,
+    provider_launch_error_kind: Option<Sys5I3ProviderLaunchErrorKind>,
+}
+
+impl ProviderRunFailure {
+    const fn io(stage: I3ReadOnlyProviderLocalnetFailureStage) -> Self {
+        Self {
+            stage,
+            bootstrap_substage: None,
+            provider_launch_error_kind: None,
+        }
+    }
+
+    const fn bootstrap(
+        stage: I3ReadOnlyProviderLocalnetFailureStage,
+        error: ProviderChildSpawnError,
+    ) -> Self {
+        let ProviderChildSpawnError::Rejected {
+            bootstrap_substage,
+            provider_launch_error_kind,
+        } = error;
+        Self {
+            stage,
+            bootstrap_substage,
+            provider_launch_error_kind,
+        }
+    }
 }
 
 #[derive(Clone)]
@@ -3359,6 +3818,352 @@ struct SupervisorLineageEvidence {
     m9_generation_count: usize,
     request_contract: Sys5I3AdapterCarrierContract,
     reply_contract: Sys5I3AdapterCarrierContract,
+}
+
+/// This is the deliberately fail-closed Stage3 provider-runner seam. The
+/// opaque launch is accepted only by move, while this probe boundary accepts
+/// only physical whole-run supervision limits. It has no path to recover
+/// control bytes, an image, a capability, a fixture value, or a semantic
+/// result from the launch. It registers an executor child before the one-shot
+/// opaque image/control handoff and reaps it on every partial-launch failure;
+/// it cannot construct a successful audit without the child runtime's checked
+/// install, carrier, and separately permitted observer paths.
+#[doc(hidden)]
+pub fn run_i3_read_only_provider_localnet(
+    launch: Sys5I3PreparedProviderLocalnetLaunch,
+    request: I3ReadOnlyProviderLocalnetRequest,
+) -> Result<I3ReadOnlyProviderLocalnetRun, I3ReadOnlyProviderLocalnetRunError> {
+    match run_i3_read_only_provider_localnet_with_terminal_expectation(
+        launch,
+        request,
+        PrivateProviderTerminalExpectation::NormalAudit,
+    )? {
+        PrivateProviderTerminalCompletion::NormalAudit(run) => Ok(*run),
+        PrivateProviderTerminalCompletion::FixedTerminalObservationConformance(_)
+        | PrivateProviderTerminalCompletion::FixedProviderNetworkConformance(_) => {
+            Err(I3ReadOnlyProviderLocalnetRunError::at(
+                I3ReadOnlyProviderLocalnetRunErrorKind::ProviderLaunchRejected,
+                I3ReadOnlyProviderLocalnetFailureStage::Preflight,
+            ))
+        }
+    }
+}
+
+/// Runs one source-real provider launch selected by a sealed fixed
+/// terminal-observation conformance factory. The opaque completion provides
+/// no audit, profile, failure reason, result, or authority.
+#[doc(hidden)]
+pub fn run_i3_read_only_provider_terminal_observer_conformance(
+    launch: Sys5I3PreparedProviderLocalnetLaunch,
+    request: I3ReadOnlyProviderLocalnetRequest,
+) -> Result<I3ReadOnlyProviderTerminalObservationConformanceRun, I3ReadOnlyProviderLocalnetRunError>
+{
+    match run_i3_read_only_provider_localnet_with_terminal_expectation(
+        launch,
+        request,
+        PrivateProviderTerminalExpectation::FixedTerminalObservationConformance,
+    )? {
+        PrivateProviderTerminalCompletion::FixedTerminalObservationConformance(completion) => {
+            Ok(completion)
+        }
+        PrivateProviderTerminalCompletion::NormalAudit(_)
+        | PrivateProviderTerminalCompletion::FixedProviderNetworkConformance(_) => {
+            Err(I3ReadOnlyProviderLocalnetRunError::at(
+                I3ReadOnlyProviderLocalnetRunErrorKind::ProviderLaunchRejected,
+                I3ReadOnlyProviderLocalnetFailureStage::Preflight,
+            ))
+        }
+    }
+}
+
+/// Runs one source-real provider launch selected by a sealed fixed
+/// provider-network conformance factory. The opaque completion is only the
+/// child-private profile's pass/fail result; it carries no fault record,
+/// result, occurrence, or observer audit.
+#[doc(hidden)]
+pub fn run_i3_read_only_provider_network_conformance(
+    launch: Sys5I3PreparedProviderLocalnetLaunch,
+    request: I3ReadOnlyProviderLocalnetRequest,
+) -> Result<I3ReadOnlyProviderNetworkConformanceRun, I3ReadOnlyProviderLocalnetRunError> {
+    match run_i3_read_only_provider_localnet_with_terminal_expectation(
+        launch,
+        request,
+        PrivateProviderTerminalExpectation::FixedProviderNetworkConformance,
+    )? {
+        PrivateProviderTerminalCompletion::FixedProviderNetworkConformance(completion) => {
+            Ok(completion)
+        }
+        PrivateProviderTerminalCompletion::NormalAudit(_)
+        | PrivateProviderTerminalCompletion::FixedTerminalObservationConformance(_) => {
+            Err(I3ReadOnlyProviderLocalnetRunError::at(
+                I3ReadOnlyProviderLocalnetRunErrorKind::ProviderLaunchRejected,
+                I3ReadOnlyProviderLocalnetFailureStage::Preflight,
+            ))
+        }
+    }
+}
+
+fn run_i3_read_only_provider_localnet_with_terminal_expectation(
+    launch: Sys5I3PreparedProviderLocalnetLaunch,
+    request: I3ReadOnlyProviderLocalnetRequest,
+    terminal_expectation: PrivateProviderTerminalExpectation,
+) -> Result<PrivateProviderTerminalCompletion, I3ReadOnlyProviderLocalnetRunError> {
+    let sealed_terminal_observation = launch.has_fixed_terminal_observation_conformance_profile();
+    let sealed_provider_network = launch.has_fixed_provider_network_conformance_profile();
+    let expectation_matches_sealed_profile = match terminal_expectation {
+        PrivateProviderTerminalExpectation::NormalAudit => {
+            !sealed_terminal_observation && !sealed_provider_network
+        }
+        PrivateProviderTerminalExpectation::FixedTerminalObservationConformance => {
+            sealed_terminal_observation && !sealed_provider_network
+        }
+        PrivateProviderTerminalExpectation::FixedProviderNetworkConformance => {
+            !sealed_terminal_observation && sealed_provider_network
+        }
+    };
+    if !expectation_matches_sealed_profile {
+        return Err(I3ReadOnlyProviderLocalnetRunError::at(
+            I3ReadOnlyProviderLocalnetRunErrorKind::ProviderLaunchRejected,
+            I3ReadOnlyProviderLocalnetFailureStage::Preflight,
+        ));
+    }
+    if request.whole_run_deadline.is_zero() || request.whole_run_deadline > Duration::from_secs(15)
+    {
+        return Err(I3ReadOnlyProviderLocalnetRunError::new(
+            I3ReadOnlyProviderLocalnetRunErrorKind::InvalidWholeRunDeadline,
+        ));
+    }
+    if request.reaper_allowance < LIFECYCLE_REAP_RESERVE
+        || request.reaper_allowance > Duration::from_secs(1)
+    {
+        return Err(I3ReadOnlyProviderLocalnetRunError::new(
+            I3ReadOnlyProviderLocalnetRunErrorKind::InvalidReaperAllowance,
+        ));
+    }
+
+    let credentials = generate_run_credentials().map_err(|_| {
+        I3ReadOnlyProviderLocalnetRunError::at(
+            I3ReadOnlyProviderLocalnetRunErrorKind::ProviderLaunchRejected,
+            I3ReadOnlyProviderLocalnetFailureStage::CredentialProvision,
+        )
+    })?;
+    let RunCredentials {
+        ca_der,
+        process_a,
+        process_b,
+        wrong_peer: _,
+    } = credentials;
+    let provider_run_ref =
+        fresh_provider_transport_run_ref(&process_a.spki_ref, &process_b.spki_ref);
+    let requester_spki_ref = process_a.spki_ref.clone();
+    let executor_spki_ref = process_b.spki_ref.clone();
+    let lifecycle_started = Instant::now();
+    let main_deadline = lifecycle_started + request.whole_run_deadline;
+    let mut supervisor = LocalnetSupervisor {
+        lifecycle_started,
+        deadline: main_deadline,
+        total_lifecycle_deadline: main_deadline + request.reaper_allowance,
+        natural_reaper_exhausted: false,
+        zero_exit_reap_observed_at: None,
+        zero_exit_reap_observation_elapsed: None,
+        zero_exit_reap_observed_within_deadline: false,
+        children: Vec::new(),
+        provider_launch: Some(launch),
+    };
+    let transport = PrivateProviderChildTransportBootstrap {
+        slot: I3LocalnetChildSlot::ProcessB,
+        endpoint: None,
+        run_ref: provider_run_ref.clone(),
+        local_spki_ref: executor_spki_ref.clone(),
+        peer_spki_ref: requester_spki_ref.clone(),
+        ca_der: ca_der.clone(),
+        leaf_cert_der: process_b.certificate_der,
+        leaf_key_der: process_b.private_key_der,
+        timeout_millis: request
+            .whole_run_deadline
+            .as_millis()
+            .try_into()
+            .unwrap_or(u64::MAX),
+        requester_exit_nonzero_after_completed: false,
+    };
+    let provider_execution =
+        (|| -> Result<PrivateProviderTerminalCompletion, ProviderRunFailure> {
+            supervisor
+                .spawn_provider_child(transport)
+                .map_err(|error| {
+                    ProviderRunFailure::bootstrap(
+                        I3ReadOnlyProviderLocalnetFailureStage::ExecutorBootstrap,
+                        error,
+                    )
+                })?;
+            let endpoint = match supervisor
+                .next_event(I3LocalnetChildSlot::ProcessB)
+                .map_err(|_| {
+                    ProviderRunFailure::io(I3ReadOnlyProviderLocalnetFailureStage::ExecutorReady)
+                })? {
+                PrivateChildEvent::Ready { endpoint } if is_loopback_endpoint(&endpoint) => {
+                    endpoint
+                }
+                _ => {
+                    return Err(ProviderRunFailure::io(
+                        I3ReadOnlyProviderLocalnetFailureStage::ExecutorReady,
+                    ));
+                }
+            };
+            let requester_transport = PrivateProviderChildTransportBootstrap {
+                slot: I3LocalnetChildSlot::ProcessA,
+                endpoint: Some(endpoint.clone()),
+                run_ref: provider_run_ref,
+                local_spki_ref: requester_spki_ref,
+                peer_spki_ref: executor_spki_ref,
+                ca_der,
+                leaf_cert_der: process_a.certificate_der,
+                leaf_key_der: process_a.private_key_der,
+                timeout_millis: request
+                    .whole_run_deadline
+                    .as_millis()
+                    .try_into()
+                    .unwrap_or(u64::MAX),
+                requester_exit_nonzero_after_completed: request
+                    .requester_exit_nonzero_after_completed,
+            };
+            supervisor
+                .spawn_provider_child(requester_transport)
+                .map_err(|error| {
+                    ProviderRunFailure::bootstrap(
+                        I3ReadOnlyProviderLocalnetFailureStage::RequesterBootstrap,
+                        error,
+                    )
+                })?;
+            let executor_terminal = supervisor
+                .next_event(I3LocalnetChildSlot::ProcessB)
+                .map_err(|_| {
+                    ProviderRunFailure::io(I3ReadOnlyProviderLocalnetFailureStage::ExecutorTerminal)
+                })?;
+            let requester_terminal = supervisor
+                .next_event(I3LocalnetChildSlot::ProcessA)
+                .map_err(|_| {
+                    ProviderRunFailure::io(
+                        I3ReadOnlyProviderLocalnetFailureStage::RequesterTerminal,
+                    )
+                })?;
+            let terminal_completion = match terminal_expectation {
+                PrivateProviderTerminalExpectation::NormalAudit => {
+                    let executor_terminal_observer_view = provider_completion_observer_view(
+                        executor_terminal,
+                        I3LocalnetChildSlot::ProcessB,
+                    )
+                    .map_err(|_| {
+                        ProviderRunFailure::io(
+                            I3ReadOnlyProviderLocalnetFailureStage::TerminalObservationCorrelation,
+                        )
+                    })?;
+                    let requester_terminal_observer_view = provider_completion_observer_view(
+                        requester_terminal,
+                        I3LocalnetChildSlot::ProcessA,
+                    )
+                    .map_err(|_| {
+                        ProviderRunFailure::io(
+                            I3ReadOnlyProviderLocalnetFailureStage::TerminalObservationCorrelation,
+                        )
+                    })?;
+                    if !provider_terminal_observer_views_match(
+                        &requester_terminal_observer_view,
+                        &executor_terminal_observer_view,
+                    ) {
+                        return Err(ProviderRunFailure::io(
+                            I3ReadOnlyProviderLocalnetFailureStage::TerminalObservationCorrelation,
+                        ));
+                    }
+                    PrivateProviderTerminalCompletion::NormalAudit(Box::new(
+                        I3ReadOnlyProviderLocalnetRun {
+                            requester_terminal_observer_view,
+                            executor_terminal_observer_view,
+                        },
+                    ))
+                }
+                PrivateProviderTerminalExpectation::FixedTerminalObservationConformance => {
+                    provider_terminal_observation_conformance_completed(
+                        executor_terminal,
+                        I3LocalnetChildSlot::ProcessB,
+                    )
+                    .and_then(|_| {
+                        provider_terminal_observation_conformance_completed(
+                            requester_terminal,
+                            I3LocalnetChildSlot::ProcessA,
+                        )
+                    })
+                    .map_err(|_| {
+                        ProviderRunFailure::io(
+                            I3ReadOnlyProviderLocalnetFailureStage::TerminalObservationCorrelation,
+                        )
+                    })?;
+                    PrivateProviderTerminalCompletion::FixedTerminalObservationConformance(
+                        I3ReadOnlyProviderTerminalObservationConformanceRun { _private: () },
+                    )
+                }
+                PrivateProviderTerminalExpectation::FixedProviderNetworkConformance => {
+                    provider_network_conformance_completed(
+                        executor_terminal,
+                        I3LocalnetChildSlot::ProcessB,
+                    )
+                    .and_then(|_| {
+                        provider_network_conformance_completed(
+                            requester_terminal,
+                            I3LocalnetChildSlot::ProcessA,
+                        )
+                    })
+                    .map_err(|_| {
+                        ProviderRunFailure::io(
+                            I3ReadOnlyProviderLocalnetFailureStage::TerminalObservationCorrelation,
+                        )
+                    })?;
+                    PrivateProviderTerminalCompletion::FixedProviderNetworkConformance(
+                        I3ReadOnlyProviderNetworkConformanceRun { _private: () },
+                    )
+                }
+            };
+            // `wait_for_natural_exits` is also the cleanup primitive, where a
+            // reaped nonzero child is a successful reaping result. A provider
+            // positive additionally requires the existing captured proof that
+            // both children exited zero naturally inside this same deadline.
+            if !supervisor.wait_for_natural_exits()
+                || !supervisor.zero_exit_reap_observed_within_deadline()
+            {
+                return Err(ProviderRunFailure::io(
+                    I3ReadOnlyProviderLocalnetFailureStage::NaturalReap,
+                ));
+            }
+            if !verify_actual_ready_endpoint_rebind(&endpoint) {
+                return Err(ProviderRunFailure::io(
+                    I3ReadOnlyProviderLocalnetFailureStage::EndpointRebind,
+                ));
+            }
+            Ok(terminal_completion)
+        })();
+    let cleanup_succeeded = supervisor.cleanup_after_failure();
+    let failure = match provider_execution {
+        Ok(completion) if cleanup_succeeded => return Ok(completion),
+        Ok(_) => {
+            return Err(I3ReadOnlyProviderLocalnetRunError::at(
+                I3ReadOnlyProviderLocalnetRunErrorKind::ProviderLaunchRejected,
+                I3ReadOnlyProviderLocalnetFailureStage::NaturalReap,
+            ));
+        }
+        Err(failure) => failure,
+    };
+    let kind = match failure.provider_launch_error_kind {
+        Some(Sys5I3ProviderLaunchErrorKind::ProviderRuntimeActivationPending) => {
+            I3ReadOnlyProviderLocalnetRunErrorKind::ProviderRuntimeActivationPending
+        }
+        _ => I3ReadOnlyProviderLocalnetRunErrorKind::ProviderLaunchRejected,
+    };
+    Err(I3ReadOnlyProviderLocalnetRunError::bootstrap_rejection(
+        kind,
+        failure.stage,
+        failure.bootstrap_substage,
+        failure.provider_launch_error_kind,
+    ))
 }
 
 /// Builds/checks ordinary source once, creates one checked/admitted cohort,
@@ -3567,6 +4372,7 @@ pub fn run_i3_process_localnet(
         zero_exit_reap_observation_elapsed: None,
         zero_exit_reap_observed_within_deadline: false,
         children: Vec::new(),
+        provider_launch: None,
     };
     if request.falsifier.is_some()
         && (request.fault_profile.is_some()
@@ -5276,6 +6082,191 @@ impl LocalnetSupervisor {
         Ok(slot)
     }
 
+    /// Register one provider child before moving either opaque image or FD3
+    /// authority out of the runtime launch. Unlike the ordinary path above,
+    /// the probe never serializes an image or a runtime control: both writes
+    /// stay at the runtime-owned privileged boundary.
+    fn spawn_provider_child(
+        &mut self,
+        transport: PrivateProviderChildTransportBootstrap,
+    ) -> Result<(), ProviderChildSpawnError> {
+        if Instant::now() >= self.deadline {
+            return Err(ProviderChildSpawnError::deadline());
+        }
+        let slot = transport.slot;
+        let role = slot.provider_role();
+        let route = self
+            .provider_launch
+            .as_ref()
+            .ok_or_else(|| {
+                ProviderChildSpawnError::physical(
+                    I3ReadOnlyProviderLocalnetBootstrapSubstage::RouteConsistency,
+                )
+            })?
+            .child_route(role)
+            .map_err(|error| {
+                ProviderChildSpawnError::runtime(
+                    I3ReadOnlyProviderLocalnetBootstrapSubstage::RouteConsistency,
+                    &error,
+                )
+            })?;
+        if route.role() != role
+            || route.slot_name() != slot.slot_name()
+            || !is_loopback_endpoint(route.endpoint())
+        {
+            return Err(ProviderChildSpawnError::physical(
+                I3ReadOnlyProviderLocalnetBootstrapSubstage::RouteConsistency,
+            ));
+        }
+        let executable = probe_binary_path().ok_or_else(|| {
+            ProviderChildSpawnError::physical(
+                I3ReadOnlyProviderLocalnetBootstrapSubstage::ExecutableResolve,
+            )
+        })?;
+        let (mut parent_control, child_control) = UnixStream::pair().map_err(|_| {
+            ProviderChildSpawnError::physical(
+                I3ReadOnlyProviderLocalnetBootstrapSubstage::ControlPipeSetup,
+            )
+        })?;
+        set_close_on_exec(parent_control.as_raw_fd()).map_err(|_| {
+            ProviderChildSpawnError::physical(
+                I3ReadOnlyProviderLocalnetBootstrapSubstage::ControlPipeSetup,
+            )
+        })?;
+        set_close_on_exec(child_control.as_raw_fd()).map_err(|_| {
+            ProviderChildSpawnError::physical(
+                I3ReadOnlyProviderLocalnetBootstrapSubstage::ControlPipeSetup,
+            )
+        })?;
+        let child_fd = child_control.as_raw_fd();
+        let mut command = Command::new(executable);
+        command
+            .env_clear()
+            .arg(slot.provider_child_arg())
+            .stdin(Stdio::piped())
+            .stdout(Stdio::piped())
+            .stderr(Stdio::null());
+        // SAFETY: as on the ordinary path, this closure only installs the
+        // already-open provider FD3 descriptor and checks every syscall.
+        unsafe {
+            command.pre_exec(move || {
+                let inherited_control = duplicate_child_fd(child_fd)?;
+                let install = install_child_fd(inherited_control, LOCALNET_CONTROL_FD);
+                let _ = libc::close(inherited_control);
+                install
+            });
+        }
+        let child = command.spawn().map_err(|_| {
+            ProviderChildSpawnError::physical(
+                I3ReadOnlyProviderLocalnetBootstrapSubstage::SpawnRegistration,
+            )
+        })?;
+        drop(child_control);
+        let (sender, receiver) = mpsc::channel();
+        let (bootstrap_sender, bootstrap_done) = mpsc::channel();
+        // This registration precedes the image and FD3 handoffs. Thus every
+        // subsequent partial bootstrap, including the current typed-Pending
+        // runtime implementation, remains inside the supervisor's reaping
+        // ownership rather than orphaning an exec child.
+        self.children.push(SpawnedChild {
+            slot,
+            child,
+            events: receiver,
+            reader: None,
+            bootstrap_done,
+            bootstrap: None,
+            bootstrap_complete: false,
+            reaped: false,
+            observed_exit_status: None,
+            was_force_killed: false,
+            terminal_event: None,
+            owner_lifecycle_ack_stream: None,
+        });
+        let tracked = self.children.last_mut().expect("registered provider child");
+        let stdout = tracked.child.stdout.take().ok_or_else(|| {
+            ProviderChildSpawnError::physical(
+                I3ReadOnlyProviderLocalnetBootstrapSubstage::SpawnRegistration,
+            )
+        })?;
+        let reader = thread::spawn(move || {
+            let mut reader = BufReader::new(stdout);
+            loop {
+                let mut line = String::new();
+                let mut bounded = reader.by_ref().take((MAX_CHILD_EVENT_BYTES + 1) as u64);
+                match bounded.read_line(&mut line) {
+                    Ok(0) => break,
+                    Ok(size) if size <= MAX_CHILD_EVENT_BYTES => {
+                        let _ = sender.send(serde_json::from_str(&line).map_err(|_| ()));
+                    }
+                    _ => {
+                        let _ = sender.send(Err(()));
+                        break;
+                    }
+                }
+            }
+        });
+        tracked.reader = Some(reader);
+        let stdin = tracked.child.stdin.take().ok_or_else(|| {
+            ProviderChildSpawnError::physical(
+                I3ReadOnlyProviderLocalnetBootstrapSubstage::SpawnRegistration,
+            )
+        })?;
+        let mut stdin = DeadlineChildStdin::new(stdin, self.deadline).map_err(|_| {
+            ProviderChildSpawnError::physical(
+                I3ReadOnlyProviderLocalnetBootstrapSubstage::SpawnRegistration,
+            )
+        })?;
+        let encoded = Zeroizing::new(serde_json::to_vec(&transport).map_err(|_| {
+            ProviderChildSpawnError::physical(
+                I3ReadOnlyProviderLocalnetBootstrapSubstage::ControlHandoff,
+            )
+        })?);
+        if encoded.len() > MAX_PROVIDER_TRANSPORT_BOOTSTRAP_BYTES {
+            return Err(ProviderChildSpawnError::physical(
+                I3ReadOnlyProviderLocalnetBootstrapSubstage::ControlHandoff,
+            ));
+        }
+        let launch = self
+            .provider_launch
+            .as_mut()
+            .expect("provider launch was retained through child registration");
+        launch
+            .write_provider_child_image_once(role, &mut stdin)
+            .map_err(|error| {
+                ProviderChildSpawnError::runtime(
+                    I3ReadOnlyProviderLocalnetBootstrapSubstage::ImageHandoff,
+                    &error,
+                )
+            })?;
+        // The child must observe EOF for its tainted image before the sole
+        // runtime-owned FD3 frame is written and shut down.
+        drop(stdin);
+        if Instant::now() >= self.deadline {
+            return Err(ProviderChildSpawnError::physical(
+                I3ReadOnlyProviderLocalnetBootstrapSubstage::ControlHandoff,
+            ));
+        }
+        // The runtime keeps both opaque frame construction and bounded
+        // nonblocking progress. Passing this unchanged supervisor deadline
+        // permits continuation of only the one already-issued frame; it does
+        // not let the probe retry or append a second control frame.
+        launch
+            .write_provider_child_control_once(
+                role,
+                &mut parent_control,
+                encoded.as_ref(),
+                self.deadline,
+            )
+            .map_err(|error| {
+                ProviderChildSpawnError::runtime(
+                    I3ReadOnlyProviderLocalnetBootstrapSubstage::ControlHandoff,
+                    &error,
+                )
+            })?;
+        let _ = bootstrap_sender.send(Ok(()));
+        Ok(())
+    }
+
     fn next_event(&mut self, slot: I3LocalnetChildSlot) -> Result<PrivateChildEvent, ()> {
         let remaining = self
             .deadline
@@ -6503,6 +7494,97 @@ fn install_child_fd(source: RawFd, target: RawFd) -> io::Result<()> {
     Ok(())
 }
 
+/// A one-shot image writer bounded by the supervisor's existing absolute
+/// main deadline. It owns no semantic/control data and makes no retry: a
+/// stalled child stdin fails closed so the caller can enter the existing
+/// natural/forced reap path.
+struct DeadlineChildStdin {
+    inner: std::process::ChildStdin,
+    deadline: Instant,
+}
+
+impl DeadlineChildStdin {
+    fn new(inner: std::process::ChildStdin, deadline: Instant) -> io::Result<Self> {
+        let fd = inner.as_raw_fd();
+        // SAFETY: fcntl only changes the parent-owned pipe descriptor that is
+        // consumed by this wrapper and never inherited by another child.
+        let flags = unsafe { libc::fcntl(fd, libc::F_GETFL) };
+        if flags == -1 {
+            return Err(io::Error::last_os_error());
+        }
+        if unsafe { libc::fcntl(fd, libc::F_SETFL, flags | libc::O_NONBLOCK) } == -1 {
+            return Err(io::Error::last_os_error());
+        }
+        Ok(Self { inner, deadline })
+    }
+
+    fn deadline_exceeded() -> io::Error {
+        io::Error::new(io::ErrorKind::TimedOut, "provider image handoff deadline")
+    }
+
+    fn wait_writable(&self) -> io::Result<()> {
+        let mut pollfd = libc::pollfd {
+            fd: self.inner.as_raw_fd(),
+            events: libc::POLLOUT,
+            revents: 0,
+        };
+        loop {
+            let remaining = self.deadline.saturating_duration_since(Instant::now());
+            // Failing closed during a sub-millisecond remainder is preferable
+            // to rounding a poll timeout upward beyond the finite main
+            // deadline. Recompute after EINTR rather than retaining a stale
+            // timeout that could outlive that deadline.
+            let timeout_millis = i32::try_from(remaining.as_millis()).unwrap_or(i32::MAX);
+            if timeout_millis == 0 {
+                return Err(Self::deadline_exceeded());
+            }
+            // SAFETY: pollfd points to one valid parent-owned pipe descriptor
+            // for the duration of this call.
+            let result = unsafe { libc::poll(&mut pollfd, 1, timeout_millis) };
+            if result == 0 {
+                return Err(Self::deadline_exceeded());
+            }
+            if result < 0 {
+                let error = io::Error::last_os_error();
+                if error.kind() == io::ErrorKind::Interrupted {
+                    if Instant::now() >= self.deadline {
+                        return Err(Self::deadline_exceeded());
+                    }
+                    continue;
+                }
+                return Err(error);
+            }
+            if pollfd.revents & libc::POLLOUT != 0 {
+                return Ok(());
+            }
+            return Err(io::Error::new(
+                io::ErrorKind::BrokenPipe,
+                "provider image pipe is no longer writable",
+            ));
+        }
+    }
+}
+
+impl Write for DeadlineChildStdin {
+    fn write(&mut self, buffer: &[u8]) -> io::Result<usize> {
+        loop {
+            if Instant::now() >= self.deadline {
+                return Err(Self::deadline_exceeded());
+            }
+            match self.inner.write(buffer) {
+                Err(error) if error.kind() == io::ErrorKind::WouldBlock => self.wait_writable()?,
+                result => return result,
+            }
+        }
+    }
+
+    fn flush(&mut self) -> io::Result<()> {
+        // This wrapper has no user-space buffer; successful writes already
+        // reached the kernel pipe. EOF on drop remains the image boundary.
+        Ok(())
+    }
+}
+
 fn write_tainted_image(mut stdin: std::process::ChildStdin, image: Vec<u8>) -> io::Result<()> {
     stdin.write_all(&image)?;
     stdin.flush()
@@ -7606,6 +8688,290 @@ fn matches_slot_loci(actual: &[String], slot: I3LocalnetChildSlot) -> bool {
             .collect()
 }
 
+/// Decode only an M9-issued child's strict, reference-only terminal view
+/// after checking the event belongs to the expected physical child. The
+/// decoded value remains a non-authorizing candidate: the sibling view and
+/// full actual process evidence must still agree before the runner returns.
+fn provider_completion_observer_view(
+    event: PrivateChildEvent,
+    slot: I3LocalnetChildSlot,
+) -> Result<Sys5I3UntrustedProviderTerminalAuditObserverViewCandidate, ()> {
+    let PrivateChildEvent::ProviderCompleted {
+        slot: event_slot,
+        assigned_loci,
+        provider_control_consumed: true,
+        tainted_image_consumed: true,
+        requester_fixture_assertion_completed,
+        tls_peer_verified: true,
+        reciprocal_preface_verified: true,
+        reliable_bidi_stream_count: 1,
+        quic_datagrams_enabled: false,
+        terminal_observer_view_frame,
+    } = event
+    else {
+        return Err(());
+    };
+    if event_slot != slot
+        || !matches_slot_loci(&assigned_loci, slot)
+        || requester_fixture_assertion_completed != (slot == I3LocalnetChildSlot::ProcessA)
+    {
+        return Err(());
+    }
+    let candidate = Sys5I3PrivateProcessCodec::private_provisional_v1()
+        .decode_untrusted_provider_terminal_audit_observer_view(&terminal_observer_view_frame)
+        .map_err(|_| ())?;
+    if candidate.fixed_profile_ref() != FIXED_PROVIDER_TERMINAL_AUDIT_PROFILE_V2
+        || candidate.fixed_schema_ref() != FIXED_PROVIDER_NETWORK_PROVENANCE_SCHEMA_V2
+        || candidate.role() != slot.provider_role()
+    {
+        return Err(());
+    }
+    Ok(candidate)
+}
+
+/// Correlate a sealed observer-conformance completion with its actual child
+/// slot without decoding or receiving any observer audit. This does not prove
+/// a profile's individual verdict; that assertion stays inside the installed
+/// runtime's opaque completion path.
+fn provider_terminal_observation_conformance_completed(
+    event: PrivateChildEvent,
+    slot: I3LocalnetChildSlot,
+) -> Result<(), ()> {
+    let PrivateChildEvent::ProviderTerminalObservationConformanceCompleted { slot: event_slot } =
+        event
+    else {
+        return Err(());
+    };
+    if event_slot != slot {
+        return Err(());
+    }
+    Ok(())
+}
+
+/// Correlate a sealed provider-network conformance completion with its
+/// physical child slot. The child-local runtime has already checked the
+/// selected two-session schedule; this marker exports neither the selected
+/// schedule nor a transport, semantic, or audit fact.
+fn provider_network_conformance_completed(
+    event: PrivateChildEvent,
+    slot: I3LocalnetChildSlot,
+) -> Result<(), ()> {
+    let PrivateChildEvent::ProviderNetworkConformanceCompleted { slot: event_slot } = event else {
+        return Err(());
+    };
+    if event_slot != slot {
+        return Err(());
+    }
+    Ok(())
+}
+
+/// The fixed source-real path has exactly one request. Its M9-gated views
+/// retain actual first-slot send reservation/completion and complete-receive
+/// facts on their local endpoint. The join proves each local chain against the
+/// same admitted descriptors and semantic request; it deliberately never
+/// equates independently allocated endpoint-local occurrence references.
+/// Exact fixture outcome checking remains inside A's private post-consume
+/// assertion. This compares only decoded reference-only candidates, never a
+/// raw value, path, grant, or witness.
+fn provider_terminal_observer_views_match(
+    requester: &Sys5I3UntrustedProviderTerminalAuditObserverViewCandidate,
+    executor: &Sys5I3UntrustedProviderTerminalAuditObserverViewCandidate,
+) -> bool {
+    if requester.role() != Sys5I3ProviderChildRole::RequesterConsumer
+        || executor.role() != Sys5I3ProviderChildRole::Executor
+        || requester.fixed_profile_ref() != FIXED_PROVIDER_TERMINAL_AUDIT_PROFILE_V2
+        || executor.fixed_profile_ref() != FIXED_PROVIDER_TERMINAL_AUDIT_PROFILE_V2
+        || requester.fixed_schema_ref() != FIXED_PROVIDER_NETWORK_PROVENANCE_SCHEMA_V2
+        || executor.fixed_schema_ref() != FIXED_PROVIDER_NETWORK_PROVENANCE_SCHEMA_V2
+        || requester.request_descriptor() != executor.request_descriptor()
+        || requester.result_descriptor() != executor.result_descriptor()
+        || requester.request_descriptor().generated_edge_ref()
+            == requester.result_descriptor().generated_edge_ref()
+    {
+        return false;
+    }
+    let [requester_row] = requester.rows() else {
+        return false;
+    };
+    let [executor_row] = executor.rows() else {
+        return false;
+    };
+    let (
+        Some(requester_request_send_reservation),
+        Some(requester_request_send_completed),
+        Some(requester_result_receive),
+        Some(requester_consume),
+    ) = (
+        first_provider_transport_slot(requester_row.request_send_reservation_occurrence_refs()),
+        first_provider_transport_slot(requester_row.request_send_completed_occurrence_refs()),
+        first_provider_transport_slot(requester_row.result_receive_occurrence_refs()),
+        requester_row.local_consume_ref(),
+    )
+    else {
+        return false;
+    };
+    let (
+        Some(executor_request_receive),
+        Some(executor_host_started),
+        Some(executor_adapter_entry),
+        Some(executor_outcome_retained),
+        Some(executor_release),
+        Some(executor_result_send_reservation),
+        Some(executor_result_send_completed),
+    ) = (
+        first_provider_transport_slot(executor_row.request_receive_occurrence_refs()),
+        executor_row.host_started_occurrence_ref(),
+        executor_row.adapter_entry_occurrence_ref(),
+        executor_row.outcome_retained_occurrence_ref(),
+        executor_row.release_occurrence_ref(),
+        first_provider_transport_slot(executor_row.result_send_reservation_occurrence_refs()),
+        first_provider_transport_slot(executor_row.result_send_completed_occurrence_refs()),
+    )
+    else {
+        return false;
+    };
+    let Some(outcome_class) = requester_row.outcome_class() else {
+        return false;
+    };
+    let expected_executor_read_count = match outcome_class {
+        Sys5I3ProviderTerminalOutcomeClass::ValuePresent
+        | Sys5I3ProviderTerminalOutcomeClass::ProviderInvalidResult
+            if executor_row.adapter_read_occurrence_ref().is_some() =>
+        {
+            1
+        }
+        // Resource and adapter failures can arise at lookup/open/read. Keep
+        // the actual bounded-read occurrence, if any, rather than treating a
+        // typed failure as proof that no provider read occurred. Individual
+        // source-real fixtures still assert their selected count exactly.
+        Sys5I3ProviderTerminalOutcomeClass::ProviderResourceNotFound
+        | Sys5I3ProviderTerminalOutcomeClass::ProviderPolicyDenied
+        | Sys5I3ProviderTerminalOutcomeClass::AdapterUnavailable => {
+            if executor_row.adapter_read_occurrence_ref().is_some() {
+                1
+            } else {
+                0
+            }
+        }
+        Sys5I3ProviderTerminalOutcomeClass::ValuePresent
+        | Sys5I3ProviderTerminalOutcomeClass::ProviderInvalidResult => return false,
+    };
+    if requester_row.semantic_request_ref() != executor_row.semantic_request_ref()
+        || requester_row.provider_invocation_ref().is_some()
+        || requester_row.host_started_occurrence_ref().is_some()
+        || requester_row.adapter_entry_occurrence_ref().is_some()
+        || requester_row.adapter_read_occurrence_ref().is_some()
+        || requester_row.outcome_retained_occurrence_ref().is_some()
+        || requester_row.release_occurrence_ref().is_some()
+        || executor_row.local_consume_ref().is_some()
+        || executor_row.provider_invocation_ref() != Some(executor_host_started)
+        || executor_row.outcome_class() != Some(outcome_class)
+        || requester_row
+            .ordered_predecessor_refs()
+            .iter()
+            .map(String::as_str)
+            .ne([
+                requester_row.semantic_request_ref(),
+                requester_request_send_reservation,
+                requester_request_send_completed,
+                requester_result_receive,
+                requester_consume,
+            ])
+        || !provider_executor_predecessors_match(
+            executor_row,
+            PrivateProviderExecutorPredecessors {
+                request_receive: executor_request_receive,
+                host_started: executor_host_started,
+                adapter_entry: executor_adapter_entry,
+                expected_read_count: expected_executor_read_count,
+                outcome_retained: executor_outcome_retained,
+                release: executor_release,
+                result_send_reservation: executor_result_send_reservation,
+                result_send_completed: executor_result_send_completed,
+            },
+        )
+    {
+        return false;
+    }
+    let requester_counts = requester.counts();
+    let executor_counts = executor.counts();
+    requester_counts.request_count() == 1
+        && requester_counts.reserved_count() == 0
+        && requester_counts.rejected_before_call_count() == 0
+        && requester_counts.call_started_count() == 0
+        && requester_counts.physical_adapter_entry_count() == 0
+        && requester_counts.actual_read_count() == 0
+        && requester_counts.outcome_retained_count() == 0
+        && requester_counts.released_count() == 0
+        && requester_counts.consume_count() == 1
+        && requester_counts.pending_count() == 0
+        && executor_counts.request_count() == 1
+        && executor_counts.reserved_count() == 1
+        && executor_counts.rejected_before_call_count() == 0
+        && executor_counts.call_started_count() == 1
+        && executor_counts.physical_adapter_entry_count() == 1
+        && executor_counts.actual_read_count() == expected_executor_read_count
+        && executor_counts.outcome_retained_count() == 1
+        && executor_counts.released_count() == 1
+        && executor_counts.consume_count() == 0
+        && executor_counts.pending_count() == 0
+}
+
+fn first_provider_transport_slot(slots: &[Option<String>; 2]) -> Option<&str> {
+    match (slots[0].as_deref(), slots[1].as_deref()) {
+        (Some(reference), None) if !reference.is_empty() => Some(reference),
+        _ => None,
+    }
+}
+
+struct PrivateProviderExecutorPredecessors<'reference> {
+    request_receive: &'reference str,
+    host_started: &'reference str,
+    adapter_entry: &'reference str,
+    expected_read_count: usize,
+    outcome_retained: &'reference str,
+    release: &'reference str,
+    result_send_reservation: &'reference str,
+    result_send_completed: &'reference str,
+}
+
+fn provider_executor_predecessors_match(
+    row: &mir_runtime::sys5_i3_process_runtime::Sys5I3ProviderTerminalAuditRow,
+    expected_predecessors: PrivateProviderExecutorPredecessors<'_>,
+) -> bool {
+    let PrivateProviderExecutorPredecessors {
+        request_receive,
+        host_started,
+        adapter_entry,
+        expected_read_count,
+        outcome_retained,
+        release,
+        result_send_reservation,
+        result_send_completed,
+    } = expected_predecessors;
+    let mut expected = vec![
+        row.semantic_request_ref(),
+        request_receive,
+        host_started,
+        adapter_entry,
+    ];
+    match (expected_read_count, row.adapter_read_occurrence_ref()) {
+        (1, Some(adapter_read)) => expected.push(adapter_read),
+        (0, None) => {}
+        _ => return false,
+    }
+    expected.extend([
+        outcome_retained,
+        release,
+        result_send_reservation,
+        result_send_completed,
+    ]);
+    row.ordered_predecessor_refs()
+        .iter()
+        .map(String::as_str)
+        .eq(expected)
+}
+
 fn verify_actual_ready_endpoint_rebind(endpoint: &str) -> bool {
     endpoint
         .parse::<SocketAddr>()
@@ -7625,6 +8991,23 @@ fn fresh_run_ref(cohort_ref: &str, first_spki_ref: &str, second_spki_ref: &str) 
         hasher.update(component.as_bytes());
     }
     format!("i3-process-localnet-run-sha256-v1:{:x}", hasher.finalize())
+}
+
+/// Reference-only identity for one provider QUIC transport attempt. The
+/// actual source/Core/artifact lineage remains sealed in the opaque runtime
+/// launch and is not an input to this physical TLS binding.
+fn fresh_provider_transport_run_ref(first_spki_ref: &str, second_spki_ref: &str) -> String {
+    let mut hasher = Sha256::new();
+    hasher.update(b"mirrorea/i3/provider-localnet/run/v1\0");
+    for component in [first_spki_ref, second_spki_ref] {
+        hasher.update(
+            u64::try_from(component.len())
+                .expect("usize fits u64")
+                .to_be_bytes(),
+        );
+        hasher.update(component.as_bytes());
+    }
+    format!("i3-provider-localnet-run-sha256-v1:{:x}", hasher.finalize())
 }
 
 fn spki_ref(spki: &[u8]) -> String {
@@ -7682,16 +9065,21 @@ fn probe_binary_path() -> Option<PathBuf> {
 /// Binary-only dispatcher. It returns `None` when the argv belongs to the
 /// older candidate harness, preserving its isolated private protocol.
 pub(crate) fn run_private_localnet_child_from_args(args: Vec<String>) -> Option<bool> {
-    let slot = match args.as_slice() {
+    match args.as_slice() {
         [value] if value == I3LocalnetChildSlot::ProcessA.child_arg() => {
-            I3LocalnetChildSlot::ProcessA
+            Some(run_private_localnet_child(I3LocalnetChildSlot::ProcessA).is_ok())
         }
         [value] if value == I3LocalnetChildSlot::ProcessB.child_arg() => {
-            I3LocalnetChildSlot::ProcessB
+            Some(run_private_localnet_child(I3LocalnetChildSlot::ProcessB).is_ok())
         }
-        _ => return None,
-    };
-    Some(run_private_localnet_child(slot).is_ok())
+        [value] if value == I3LocalnetChildSlot::ProcessA.provider_child_arg() => {
+            Some(run_private_provider_localnet_child(I3LocalnetChildSlot::ProcessA).is_ok())
+        }
+        [value] if value == I3LocalnetChildSlot::ProcessB.provider_child_arg() => {
+            Some(run_private_provider_localnet_child(I3LocalnetChildSlot::ProcessB).is_ok())
+        }
+        _ => None,
+    }
 }
 
 fn run_private_localnet_child(fixed_slot: I3LocalnetChildSlot) -> Result<(), ()> {
@@ -7700,6 +9088,74 @@ fn run_private_localnet_child(fixed_slot: I3LocalnetChildSlot) -> Result<(), ()>
         let _ = emit_child_event(&PrivateChildEvent::UnknownLifecycleFailure { slot: fixed_slot });
     }
     result
+}
+
+/// Dedicated provider process branch. It deliberately bypasses the ordinary
+/// `read_trusted_control`/decoded-control startup path: the runtime is the
+/// only FD3 reader and will install only from its opaque inherited result.
+fn run_private_provider_localnet_child(fixed_slot: I3LocalnetChildSlot) -> Result<(), ()> {
+    let result = run_private_provider_localnet_child_inner(fixed_slot);
+    if result.is_err() {
+        let _ = emit_child_event(&PrivateChildEvent::UnknownLifecycleFailure { slot: fixed_slot });
+    }
+    result
+}
+
+fn run_private_provider_localnet_child_inner(fixed_slot: I3LocalnetChildSlot) -> Result<(), ()> {
+    let image = read_tainted_image().map_err(|_| ())?;
+    let codec = Sys5I3PrivateProcessCodec::private_provisional_v1();
+    let image = codec.decode_untrusted_image(&image).map_err(|_| ())?;
+    let manifest = image.observer_safe_manifest();
+    let assigned_loci = manifest.assigned_loci();
+    if !manifest.has_assigned_artifacts_only() || !matches_slot_loci(&assigned_loci, fixed_slot) {
+        return Err(());
+    }
+    // This call solely owns FD3 on the provider branch. In particular, do
+    // not call the ordinary `read_trusted_control`, decode its outer JSON, or
+    // convert any generic decoded record into provider authority.
+    let inherited = codec
+        .take_inherited_provider_child_control_from_fd3()
+        .map_err(|_| ())?;
+    if inherited.role() != fixed_slot.provider_role() {
+        return Err(());
+    }
+    let transport =
+        decode_private_provider_child_transport_bootstrap(inherited.transport_bootstrap())?;
+    if !provider_transport_bootstrap_matches_slot(&transport, fixed_slot) {
+        return Err(());
+    }
+    let installed = codec
+        .install_provider_from_inherited_control(image, inherited, fixed_slot.provider_role())
+        .map_err(|_| ())?;
+    let trusted = installed
+        .bind_provider_localnet_transport(
+            &transport.run_ref,
+            &transport.local_spki_ref,
+            &transport.peer_spki_ref,
+        )
+        .map_err(|_| ())?;
+    let assigned_loci = fixed_slot
+        .assigned_loci()
+        .into_iter()
+        .map(str::to_owned)
+        .collect();
+    let duration = Duration::from_millis(transport.timeout_millis);
+    let tokio_runtime = tokio::runtime::Builder::new_current_thread()
+        .enable_all()
+        .build()
+        .map_err(|_| ())?;
+    tokio_runtime.block_on(async move {
+        match fixed_slot {
+            I3LocalnetChildSlot::ProcessB => {
+                run_provider_server_child(installed, trusted, transport, duration, assigned_loci)
+                    .await
+            }
+            I3LocalnetChildSlot::ProcessA => {
+                run_provider_client_child(installed, trusted, transport, duration, assigned_loci)
+                    .await
+            }
+        }
+    })
 }
 
 fn run_private_localnet_child_inner(fixed_slot: I3LocalnetChildSlot) -> Result<(), ()> {
@@ -7956,6 +9412,431 @@ fn resolve_received_owner_reply(
         }
         Ok(PrivateResolvedOwnerReply::Served(reply))
     }
+}
+
+/// B's only provider path: after opaque installation and reciprocal mTLS
+/// preface validation, let the runtime-owned session decode/admit one request,
+/// execute the bounded local effect, retain the result, and send that opaque
+/// result. No owner-message path or probe-decoded carrier participates.
+async fn run_provider_server_child(
+    mut installed: Sys5I3InstalledProviderChildRuntime,
+    trusted: Sys5I3TrustedProviderLocalnetControl,
+    transport: PrivateProviderChildTransportBootstrap,
+    timeout: Duration,
+    assigned_loci: Vec<String>,
+) -> Result<(), ()> {
+    if transport.endpoint.is_some() {
+        return Err(());
+    }
+    install_ring()?;
+    let (server_config, evidence) = server_config_from_transport_material(
+        &transport.ca_der,
+        &transport.leaf_cert_der,
+        transport.leaf_key_der.as_ref(),
+    )?;
+    let endpoint =
+        Endpoint::server(server_config, SocketAddr::from(([127, 0, 0, 1], 0))).map_err(|_| ())?;
+    let endpoint_address = endpoint.local_addr().map_err(|_| ())?.to_string();
+    emit_child_event(&PrivateChildEvent::Ready {
+        endpoint: endpoint_address,
+    })
+    .map_err(|_| ())?;
+    if evidence.datagrams_enabled() {
+        return Err(());
+    }
+    tokio::time::timeout(timeout, async {
+        if installed.has_fixed_provider_network_conformance_profile() {
+            return run_provider_network_server_sessions(&mut installed, trusted, &endpoint).await;
+        }
+        let connecting = endpoint.accept().await.ok_or(())?;
+        let connection = connecting.await.map_err(|_| ())?;
+        let mut session =
+            mir_runtime::sys5_i3_private_quic::Sys5I3PrivateQuicSession::accept_provider(
+                connection, trusted,
+            )
+            .await
+            .map_err(|_| ())?;
+        // Client sends first; the server validates it before releasing its
+        // own preface, so no provider carrier is admitted first.
+        session
+            .receive_and_validate_peer_preface()
+            .await
+            .map_err(|_| ())?;
+        session.send_local_preface().await.map_err(|_| ())?;
+        let result = session
+            .receive_provider_request_and_execute(&mut installed)
+            .await
+            .map_err(|_| ())?;
+        session
+            .send_provider_result(&mut installed, result)
+            .await
+            .map_err(|_| ())?;
+        session.finish_send().map_err(|_| ())?;
+        if !session.peer_spki_verified()
+            || !session.peer_preface_verified()
+            || session.reliable_bidi_stream_count() != 1
+            || session.quic_datagrams_enabled()
+        {
+            return Err(());
+        }
+        match installed
+            .complete_fixed_terminal_observation_conformance_if_selected()
+            .map_err(|_| ())?
+        {
+            Some(_) => emit_child_event(
+                &PrivateChildEvent::ProviderTerminalObservationConformanceCompleted {
+                    slot: I3LocalnetChildSlot::ProcessB,
+                },
+            )
+            .map_err(|_| ())?,
+            None => {
+                let audit = installed.provider_terminal_audit().map_err(|_| ())?;
+                let terminal_observer_view_frame =
+                    Sys5I3PrivateProcessCodec::private_provisional_v1()
+                        .encode_provider_terminal_audit_observer_view(&audit)
+                        .map_err(|_| ())?;
+                emit_child_event(&PrivateChildEvent::ProviderCompleted {
+                    slot: I3LocalnetChildSlot::ProcessB,
+                    assigned_loci,
+                    provider_control_consumed: true,
+                    tainted_image_consumed: true,
+                    requester_fixture_assertion_completed: false,
+                    tls_peer_verified: true,
+                    reciprocal_preface_verified: true,
+                    reliable_bidi_stream_count: 1,
+                    quic_datagrams_enabled: false,
+                    terminal_observer_view_frame,
+                })
+                .map_err(|_| ())?;
+            }
+        }
+        // A closes after it consumes the opaque result. Waiting here
+        // prevents B from closing the connection before that checked
+        // consume path observes the already-framed result.
+        session.wait_for_peer_close().await;
+        session.close();
+        Ok::<_, ()>(())
+    })
+    .await
+    .map_err(|_| ())?
+}
+
+/// A's matching provider path. It creates the request only from its opaque
+/// installed runtime after reciprocal preface validation, then consumes the
+/// opaque result locally. The raw result is not available to this event path.
+async fn run_provider_client_child(
+    mut installed: Sys5I3InstalledProviderChildRuntime,
+    trusted: Sys5I3TrustedProviderLocalnetControl,
+    transport: PrivateProviderChildTransportBootstrap,
+    timeout: Duration,
+    assigned_loci: Vec<String>,
+) -> Result<(), ()> {
+    let endpoint_address = transport
+        .endpoint
+        .as_deref()
+        .ok_or(())?
+        .parse::<SocketAddr>()
+        .map_err(|_| ())?;
+    if endpoint_address.ip() != IpAddr::V4(Ipv4Addr::LOCALHOST) {
+        return Err(());
+    }
+    install_ring()?;
+    let mut endpoint = Endpoint::client(SocketAddr::from(([127, 0, 0, 1], 0))).map_err(|_| ())?;
+    let (client_config, evidence) = client_config_from_transport_material(
+        &transport.ca_der,
+        &transport.leaf_cert_der,
+        transport.leaf_key_der.as_ref(),
+    )?;
+    endpoint.set_default_client_config(client_config);
+    if evidence.datagrams_enabled() {
+        return Err(());
+    }
+    tokio::time::timeout(timeout, async {
+        if installed.has_fixed_provider_network_conformance_profile() {
+            run_provider_network_client_sessions(
+                &mut installed,
+                trusted,
+                &mut endpoint,
+                endpoint_address,
+            )
+            .await?;
+            if transport.requester_exit_nonzero_after_completed {
+                std::process::exit(9);
+            }
+            return Ok::<_, ()>(());
+        }
+        let connecting = endpoint
+            .connect(endpoint_address, "localhost")
+            .map_err(|_| ())?;
+        let connection = connecting.await.map_err(|_| ())?;
+        let mut session =
+            mir_runtime::sys5_i3_private_quic::Sys5I3PrivateQuicSession::connect_provider(
+                connection, trusted,
+            )
+            .await
+            .map_err(|_| ())?;
+        session.send_local_preface().await.map_err(|_| ())?;
+        session
+            .receive_and_validate_peer_preface()
+            .await
+            .map_err(|_| ())?;
+        let request = installed
+            .begin_read_only_provider_request()
+            .map_err(|_| ())?;
+        session
+            .send_provider_request(&mut installed, request)
+            .await
+            .map_err(|_| ())?;
+        session.finish_send().map_err(|_| ())?;
+        let receipt = session
+            .receive_provider_result_and_consume(&mut installed)
+            .await
+            .map_err(|_| ())?;
+        installed
+            .complete_fixture_post_consume_assertion(&receipt)
+            .map_err(|_| ())?;
+        if !session.peer_spki_verified()
+            || !session.peer_preface_verified()
+            || session.reliable_bidi_stream_count() != 1
+            || session.quic_datagrams_enabled()
+        {
+            return Err(());
+        }
+        let terminal_observation_conformance = installed
+            .complete_fixed_terminal_observation_conformance_if_selected()
+            .map_err(|_| ())?;
+        session.close();
+        // Remain online under the enclosing, unchanged child deadline long
+        // enough for B to observe A's actual connection close after its
+        // result has been consumed. `wait_idle` adds no independent timeout,
+        // retry, or semantic acknowledgement.
+        endpoint.wait_idle().await;
+        match terminal_observation_conformance {
+            Some(_) => emit_child_event(
+                &PrivateChildEvent::ProviderTerminalObservationConformanceCompleted {
+                    slot: I3LocalnetChildSlot::ProcessA,
+                },
+            )
+            .map_err(|_| ())?,
+            None => {
+                let audit = installed.provider_terminal_audit().map_err(|_| ())?;
+                let terminal_observer_view_frame =
+                    Sys5I3PrivateProcessCodec::private_provisional_v1()
+                        .encode_provider_terminal_audit_observer_view(&audit)
+                        .map_err(|_| ())?;
+                emit_child_event(&PrivateChildEvent::ProviderCompleted {
+                    slot: I3LocalnetChildSlot::ProcessA,
+                    assigned_loci,
+                    provider_control_consumed: true,
+                    tainted_image_consumed: true,
+                    requester_fixture_assertion_completed: true,
+                    tls_peer_verified: true,
+                    reciprocal_preface_verified: true,
+                    reliable_bidi_stream_count: 1,
+                    quic_datagrams_enabled: false,
+                    terminal_observer_view_frame,
+                })
+                .map_err(|_| ())?;
+            }
+        }
+        if transport.requester_exit_nonzero_after_completed {
+            std::process::exit(9);
+        }
+        Ok::<_, ()>(())
+    })
+    .await
+    .map_err(|_| ())?
+}
+
+/// The sealed network-conformance path uses exactly the existing provider
+/// session and its consuming reconnect control. The probe does not select a
+/// schedule: every phase is delegated to the installed runtime, which checks
+/// the inherited sealed profile before it changes a carrier or local ledger.
+async fn run_provider_network_server_sessions(
+    installed: &mut Sys5I3InstalledProviderChildRuntime,
+    trusted: Sys5I3TrustedProviderLocalnetControl,
+    endpoint: &Endpoint,
+) -> Result<(), ()> {
+    let connecting = endpoint.accept().await.ok_or(())?;
+    let connection = connecting.await.map_err(|_| ())?;
+    let mut first_session =
+        mir_runtime::sys5_i3_private_quic::Sys5I3PrivateQuicSession::accept_provider(
+            connection, trusted,
+        )
+        .await
+        .map_err(|_| ())?;
+    first_session
+        .receive_and_validate_peer_preface()
+        .await
+        .map_err(|_| ())?;
+    first_session.send_local_preface().await.map_err(|_| ())?;
+    let result = first_session
+        .receive_provider_request_and_execute(installed)
+        .await
+        .map_err(|_| ())?;
+    first_session
+        .drive_fixed_provider_network_first_result_send(installed, &result)
+        .await
+        .map_err(|_| ())?;
+    first_session.finish_send().map_err(|_| ())?;
+    if !provider_session_is_verified(&first_session, 1) {
+        return Err(());
+    }
+
+    // A explicitly closes the first session only after its selected actual
+    // receive/EOF phase. Keep B online until that close rather than relying
+    // on `into_reconnect` dropping the old Quinn connection.
+    first_session.wait_for_peer_close().await;
+    first_session.close();
+    let reconnect = first_session.into_reconnect();
+    let mut second_session = accept_provider_reconnect_session(endpoint, reconnect).await?;
+    second_session
+        .receive_and_validate_peer_preface()
+        .await
+        .map_err(|_| ())?;
+    second_session.send_local_preface().await.map_err(|_| ())?;
+    second_session
+        .drive_fixed_provider_network_second_request_receive(installed)
+        .await
+        .map_err(|_| ())?;
+    second_session
+        .drive_fixed_provider_network_second_result_send(installed, &result)
+        .await
+        .map_err(|_| ())?;
+    second_session.finish_send().map_err(|_| ())?;
+    if !provider_session_is_verified(&second_session, 2) {
+        return Err(());
+    }
+    if installed
+        .complete_fixed_provider_network_conformance_if_selected()
+        .map_err(|_| ())?
+        .is_none()
+    {
+        return Err(());
+    }
+    emit_child_event(&PrivateChildEvent::ProviderNetworkConformanceCompleted {
+        slot: I3LocalnetChildSlot::ProcessB,
+    })
+    .map_err(|_| ())?;
+    // A closes after it reaches its own sealed completion. Waiting on B is
+    // part of the unchanged enclosing child deadline and adds no retry.
+    second_session.wait_for_peer_close().await;
+    second_session.close();
+    Ok(())
+}
+
+/// A's half of the same sealed two-session path. The runtime keeps each
+/// profile's held/lost/replayed carrier and any typed rejection private; this
+/// function only composes real Quinn connections in the fixed order.
+async fn run_provider_network_client_sessions(
+    installed: &mut Sys5I3InstalledProviderChildRuntime,
+    trusted: Sys5I3TrustedProviderLocalnetControl,
+    endpoint: &mut Endpoint,
+    endpoint_address: SocketAddr,
+) -> Result<(), ()> {
+    let connection = endpoint
+        .connect(endpoint_address, "localhost")
+        .map_err(|_| ())?
+        .await
+        .map_err(|_| ())?;
+    let mut first_session =
+        mir_runtime::sys5_i3_private_quic::Sys5I3PrivateQuicSession::connect_provider(
+            connection, trusted,
+        )
+        .await
+        .map_err(|_| ())?;
+    first_session.send_local_preface().await.map_err(|_| ())?;
+    first_session
+        .receive_and_validate_peer_preface()
+        .await
+        .map_err(|_| ())?;
+    let request = installed
+        .begin_read_only_provider_request()
+        .map_err(|_| ())?;
+    first_session
+        .send_provider_request(installed, request)
+        .await
+        .map_err(|_| ())?;
+    first_session.finish_send().map_err(|_| ())?;
+    first_session
+        .drive_fixed_provider_network_first_result_receive(installed)
+        .await
+        .map_err(|_| ())?;
+    if !provider_session_is_verified(&first_session, 1) {
+        return Err(());
+    }
+
+    // The first result phase has completed its sealed consume, discard, or
+    // clean-FIN boundary. Closing here releases B's same-deadline peer-close
+    // wait before either side consumes reconnect.
+    first_session.close();
+    let reconnect = first_session.into_reconnect();
+    let mut second_session =
+        connect_provider_reconnect_session(endpoint, endpoint_address, reconnect).await?;
+    second_session.send_local_preface().await.map_err(|_| ())?;
+    second_session
+        .receive_and_validate_peer_preface()
+        .await
+        .map_err(|_| ())?;
+    second_session
+        .drive_fixed_provider_network_second_request_send(installed)
+        .await
+        .map_err(|_| ())?;
+    second_session.finish_send().map_err(|_| ())?;
+    second_session
+        .drive_fixed_provider_network_second_result_receive(installed)
+        .await
+        .map_err(|_| ())?;
+    if !provider_session_is_verified(&second_session, 2) {
+        return Err(());
+    }
+    if installed
+        .complete_fixed_provider_network_conformance_if_selected()
+        .map_err(|_| ())?
+        .is_none()
+    {
+        return Err(());
+    }
+    second_session.close();
+    endpoint.wait_idle().await;
+    emit_child_event(&PrivateChildEvent::ProviderNetworkConformanceCompleted {
+        slot: I3LocalnetChildSlot::ProcessA,
+    })
+    .map_err(|_| ())?;
+    Ok(())
+}
+
+fn provider_session_is_verified(
+    session: &mir_runtime::sys5_i3_private_quic::Sys5I3PrivateQuicSession,
+    expected_generation: u8,
+) -> bool {
+    session.peer_spki_verified()
+        && session.peer_preface_verified()
+        && session.reliable_bidi_stream_count() == 1
+        && !session.quic_datagrams_enabled()
+        && session.session_attempt_generation() == expected_generation
+}
+
+async fn accept_provider_reconnect_session(
+    endpoint: &Endpoint,
+    reconnect: mir_runtime::sys5_i3_private_quic::Sys5I3PrivateQuicReconnect,
+) -> Result<mir_runtime::sys5_i3_private_quic::Sys5I3PrivateQuicSession, ()> {
+    let connecting = endpoint.accept().await.ok_or(())?;
+    let connection = connecting.await.map_err(|_| ())?;
+    reconnect.accept_provider(connection).await.map_err(|_| ())
+}
+
+async fn connect_provider_reconnect_session(
+    endpoint: &Endpoint,
+    endpoint_address: SocketAddr,
+    reconnect: mir_runtime::sys5_i3_private_quic::Sys5I3PrivateQuicReconnect,
+) -> Result<mir_runtime::sys5_i3_private_quic::Sys5I3PrivateQuicSession, ()> {
+    let connection = endpoint
+        .connect(endpoint_address, "localhost")
+        .map_err(|_| ())?
+        .await
+        .map_err(|_| ())?;
+    reconnect.connect_provider(connection).await.map_err(|_| ())
 }
 
 async fn run_server_child(
@@ -10612,9 +12493,21 @@ fn install_ring() -> Result<(), ()> {
 fn server_config(
     control: &PrivateChildControl,
 ) -> Result<(quinn::ServerConfig, PrivateQuicTransportEvidence), ()> {
+    server_config_from_transport_material(
+        &control.ca_der,
+        &control.leaf_cert_der,
+        control.leaf_key_der.as_ref(),
+    )
+}
+
+fn server_config_from_transport_material(
+    ca_der: &[u8],
+    leaf_cert_der: &[u8],
+    leaf_key_der: &[u8],
+) -> Result<(quinn::ServerConfig, PrivateQuicTransportEvidence), ()> {
     let mut roots = RootCertStore::empty();
     roots
-        .add(CertificateDer::from(control.ca_der.clone()))
+        .add(CertificateDer::from(ca_der.to_vec()))
         .map_err(|_| ())?;
     let verifier = WebPkiClientVerifier::builder(Arc::new(roots))
         .build()
@@ -10622,8 +12515,8 @@ fn server_config(
     let mut crypto = ServerConfig::builder()
         .with_client_cert_verifier(verifier)
         .with_single_cert(
-            vec![CertificateDer::from(control.leaf_cert_der.clone())],
-            PrivateKeyDer::Pkcs8(PrivatePkcs8KeyDer::from(control.leaf_key_der.to_vec())),
+            vec![CertificateDer::from(leaf_cert_der.to_vec())],
+            PrivateKeyDer::Pkcs8(PrivatePkcs8KeyDer::from(leaf_key_der.to_vec())),
         )
         .map_err(|_| ())?;
     crypto.alpn_protocols = vec![PRIVATE_LOCALNET_ALPN.to_vec()];
@@ -10646,15 +12539,27 @@ fn server_config(
 fn client_config(
     control: &PrivateChildControl,
 ) -> Result<(quinn::ClientConfig, PrivateQuicTransportEvidence), ()> {
+    client_config_from_transport_material(
+        &control.ca_der,
+        &control.leaf_cert_der,
+        control.leaf_key_der.as_ref(),
+    )
+}
+
+fn client_config_from_transport_material(
+    ca_der: &[u8],
+    leaf_cert_der: &[u8],
+    leaf_key_der: &[u8],
+) -> Result<(quinn::ClientConfig, PrivateQuicTransportEvidence), ()> {
     let mut roots = RootCertStore::empty();
     roots
-        .add(CertificateDer::from(control.ca_der.clone()))
+        .add(CertificateDer::from(ca_der.to_vec()))
         .map_err(|_| ())?;
     let mut crypto = ClientConfig::builder()
         .with_root_certificates(roots)
         .with_client_auth_cert(
-            vec![CertificateDer::from(control.leaf_cert_der.clone())],
-            PrivateKeyDer::Pkcs8(PrivatePkcs8KeyDer::from(control.leaf_key_der.to_vec())),
+            vec![CertificateDer::from(leaf_cert_der.to_vec())],
+            PrivateKeyDer::Pkcs8(PrivatePkcs8KeyDer::from(leaf_key_der.to_vec())),
         )
         .map_err(|_| ())?;
     crypto.alpn_protocols = vec![PRIVATE_LOCALNET_ALPN.to_vec()];

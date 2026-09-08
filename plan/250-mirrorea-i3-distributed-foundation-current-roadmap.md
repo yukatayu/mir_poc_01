@@ -1,6 +1,6 @@
 # Plan 250 — Mirrorea I3 Distributed Foundation current execution roadmap
 
-最終更新: 2026-09-08 21:23 JST
+最終更新: 2026-09-09 05:16 JST
 
 ## 役割、authority、current control state
 
@@ -54,7 +54,8 @@ roadmap/status pointer の一致を検証する。
 - completed goals: **ALIGN-0, ALIGN-1, ALIGN-2, I3-0, I3-1, I3-2**
 - execution state: **execute through I3-3 acceptance, then owner-requested pause**
 - sole active semantic milestone: **I3-3**
-- current component checkpoint: **row 11 / spec/16 bounded time-and-reply
+- retained runtime checkpoint: **row 11 duplicate/stale replies plus
+  row 17 / spec/16 bounded time-and-reply
   evidence integrated at `55f1fd7f`, pushed with clean remote parity**.
   ADR-0042/spec/17 selects the provider contract; its source/checker and
   fail-closed legacy guards are integrated at `9e8d674a`. Exact static coverage,
@@ -71,8 +72,11 @@ roadmap/status pointer の一致を検証する。
   67/5/8, public guards5, actual ordinary localnet41, scoped Clippy, workspace
   format and all-target check. Independent spec/quality reviews are P0/P1/P2
   zero after reproduced expected-commitment/retirement repairs; the planner
-  gives conditional GO for inactive-only integration. LAB/Git close is current,
-  followed by actual provider runtime/host/QUIC within I3-3.
+  gives conditional GO for inactive-only integration. Those gates are met:
+  Stage 2c is integrated at `a027d61b8030a903f892de2f7483ec8b64627963`,
+  with clean HEAD/origin/main/live parity observed
+  `2026-09-08T21:24:14+09:00`. The current direct consumer is actual Stage 3
+  provider runtime/host/QUIC within I3-3, not another inactive-only handoff.
 - next goal: **I3-4 (requires I3-3 acceptance and explicit owner resume)**
 - all other milestones: **ordered, inactive, and dependency-gated**
 - latest owner control (2026-09-07 18:13 JST observation): complete I3-3 with
@@ -1583,7 +1587,7 @@ validation; that validation still cannot start a provider/LocalFabric/endpoint.
 - [x] Exact A/B restriction, private codec round-trip and inactive expected-start
   validation; ordinary escape, splicing, altered coverage/scope and actual
   retired-context falsifiers reject without activation.
-- [ ] Focused quality/regression, independent review, LAB synchronization and
+- [x] Focused quality/regression, independent review, LAB synchronization and
   observed commit/push/parity. Then continue actual provider runtime in I3-3.
 
 Initial Stage 2c positive executes and fails at the genuine sealed composite's
@@ -1612,6 +1616,403 @@ P0/P1/P2 findings. The planning review's evidence conditions are met except
 final LAB/docs/Git integration. This is local inactive-image evidence, not
 provider activation or whole-I3-3 acceptance. Actual Stage3 host/QUIC execution
 is the next direct consumer, not another inactive-only handoff.
+
+Stage 2c closes at `a027d61b8030a903f892de2f7483ec8b64627963`; clean
+HEAD/origin/main/live parity is observed `2026-09-08T21:24:14+09:00`.
+
+### Stage 3 — actual provider execution through the existing process fabric
+
+Direct consumer: I3-3 row 18 and its request/call/result/order/cut obligations.
+Blocker reduced: the admitted source effect has no actual host/QUIC execution.
+Acceptance use: real A request -> B bounded file read -> retained typed outcome
+-> A checked consumption, with source/Core/artifact/edge/occurrence provenance.
+This is one executable implementation component within I3-3, not a new
+milestone, roadmap or inactive-only acceptance shell.
+
+The read-only planner requires explicit custody at activation. Parent-held
+Stage 2c setup/seal currentness is historical and local to the parent; its
+`Arc` is not shared across `exec`. The genuine admission must be consumed
+into one-shot, role-restricted A/B installation records through the existing
+trusted child-control path. B owns serialized current M9 checks, reservation,
+`CallStarted`, retirement and release; A owns its current-grant check before
+consumption. Already-issued facts are installed, not re-issued from an image,
+transport identity or serialized `verified/current` flag. Pre-transfer parent
+retirement denies activation. Post-transfer parent state cannot be advertised
+as child revocation without actual causal delivery/installation evidence.
+Arbitrary live rebinding and instantaneous global revocation are not supplied.
+
+The actual supervisor must own the trusted fixture lifetime through termination
+and reaping, and supply B-only resource/deadline enforcement through existing
+FD3 control. Parent selects the narrow privileged T0 writer and runtime-owned
+inherited-control reader boundary after implementer/Oracle advice. The private
+probe whole-run owner performs the write only after child registration under
+the armed deadline/reaper. A public/doc-hidden writer is not access control:
+T0 can capture bytes or fabricate a pipe, outside this finite trust profile.
+Actual supported control flow and tests establish supervision; ordinary image
+or generic decoded control cannot construct the opaque inherited install.
+Moving broad Child/event/reaper ownership across crates is deferred as
+unnecessary under the same T0 assumption. Reopen for an untrusted activation
+escape or a supported run that omits enforcement. An availability Boolean or
+hash-only proof is not a substitute for operational custody.
+Ordinary M8/M9/SYS4/SYS5 rejectors remain unchanged in meaning. Reuse the
+existing process runtime, private carrier codec, QUIC session and launcher;
+distinct effect variants must not become owner RMW/request/receipt aliases.
+
+The first acceptance path is real source-first execution with two fresh
+admissions and two different nonsecret fixture values, plus actual missing
+resource failure with zero owner writes. Assert the designated consumer's
+actual typed result separately from value-free observer output; neither a
+test expectation nor a fault tag may supply the semantic result. Then cover
+strict bounded parsing, resource/type/policy refusal, pre/post-call retirement,
+capacity/spent allowance, duplicate request/result, reconnect, lost reply and
+requester retention. Exact local tests remain labelled local. Pending work
+rejects unsupported cut/export; the later row-20 consumer integrates the full
+process-local cut obligations before I3-3 closes.
+
+Initial Stage 3 source-real positive executes RED, inspected
+`2026-09-08T21:42:20+09:00`: 0 passed/1 failed/375 filtered, exit101,
+typed `ProviderRuntimeActivationPending` after genuine composite/cohort
+preparation (not a compiler error or actual-child run). Runtime and disjoint
+probe behavior implementation now proceeds with separate tests and one Cargo
+evaluator. The real fixture setup guard must be transferred and retained
+through reaping; context cloning alone cannot survive its retiring Drop.
+The full-fact child M9 custody/interface compile checkpoint subsequently
+passes the narrow runtime library check after an exact setup-context type
+repair; four unfinished-interface warning groups remain. This is compilation
+only, not provider installation/host/QUIC success. The runtime and probe
+writers continue the actual one-frame inherited-control and runtime path.
+After the FD3/install source is implemented, the local source-real module
+passes4/4 and the probe library check passes. These cover genuine preparation
+and local role-restricted M9 installation/tamper/retirement, not an actual
+FD3 child run, host call or QUIC result. Runtime/probe writers continue the
+actual LocalFabric/carrier/host/consume path without an intermediate close.
+The local fallback-order test then passes1/1 after its assertion is corrected
+to retain the legitimate prior ViewerC M8 observation as well as the new
+target-dequeue predecessor. The actual-launch integration positive executes
+RED even after a factory-only physical slot-name correction: the observed
+generic `ProviderLaunchRejected` does not establish child/FD3/host/QUIC success.
+This supplies the direct process consumer while runtime/probe writers complete
+the scoped common LocalFabric initializer and actual effect lifecycle. No
+further inactive-only component acceptance is introduced.
+The scoped shared-initializer runtime library check passes at the 23:05
+checkpoint (9.87 seconds, two unfinished dead-code warning groups). This is
+structural compilation only; the process positive above remains the latest
+actual-run result. The selected ordinary source profile has an explicitly
+empty `Sys4InitialStateSeed`; installed provider children preserve that state
+and the checked schemas/legacy authority, rather than inventing initial
+values from handler literals. Actual carrier/host/consume work continues.
+Capacity scope follows spec/17: the sole executor enforces at most64
+invocation reservations per admitted operation, and each installed runtime
+has one at-most64 decision budget shared across its pending/reserved/rejected/
+retained/consumed states. A/B records for the same semantic request do not
+create a second invocation allowance. This does not require a distributed
+mutable counter, a new permission round trip or a shared physical ledger;
+reconnect still cannot replenish either runtime's retained budget.
+
+The distinct provider request/result and existing QUIC session profile pass
+the narrow runtime library check after a misplaced helper-impl/borrow repair
+(9.97 seconds, five staged dead-code warning groups). This is not an actual
+process success. Terminal audit correctly remains fail-closed: current role
+data retains no independent observer capability/policy, and ordinary M9
+Observation is specifically ContractUpdate-history scoped. The mapper and
+independent planner confirm that spec/17 already requires this missing direct
+consumer. The selected private implementation adds a separate trusted-policy
+Observation capability/witness with a bound provider observer-use record,
+exact authenticated membership/source/operation/incarnation/role, fixed
+reference-only fields and a single bounded terminal export per child. Generic
+Observation meaning and ordinary M8 projection remain unchanged. Actual
+current-use and export capacity checks precede projection/release; observer
+denial does not change effect facts or enable fallback diagnostic leakage.
+Missing/revoked observer-only authority, effect-cap substitution, wrong
+operation/incarnation/role, repeat export/reconnect reset and raw-data output
+are decisive falsifiers. This is not a new grammar, telemetry framework,
+Canon guarantee or semantic milestone. `provider_observer_authority` now owns
+only `m9_auth_verification.rs`, explicitly released by `c3_runtime_fix`, who
+retains the other production runtime files; probe and tests retain their
+separate ownership. All Stage3 work remains one actual-execution component.
+Fresh compilation including the new observer producer/consumer stops on two
+M9 snapshot-versus-auth membership type mismatches; no tests run in that
+packet. The M9 writer fixes only the pre-install structural matcher, retaining
+actual reconstructed-authority current-use checks, and withdraws an accidental
+claim based on the older pre-observer green checkpoint. The fresh corrected
+runtime check passes in10.15s, and the local provider module passes6/6;
+neither establishes host/QUIC execution. SYS5/probe now implement a strict bounded,
+versioned, non-authorizing observer-view candidate for child stdout; decoding
+it cannot manufacture an issued M9 export or permission. The runtime keeps
+the real permit/projection producer, and the probe checks owned-run/child and
+source/request correspondence before using received evidence. This boundary
+is connected in source, but the fresh actual provider test remains0/1 RED
+(`ProviderLaunchRejected`). Fresh fixed-stage diagnosis narrows it to
+`ExecutorBootstrap -> ControlHandoff -> ProviderControlWriteRejected`
+(0.54s body,4.97s compile); a freshly rebuilt child excludes a stale binary.
+That runtime kind still includes construction failures and is not proof of
+an actual `WouldBlock`. Source inspection separately identifies a defect:
+the nonblocking FD3 stream requires an entire control chunk in one `write`.
+The selected bounded repair keeps frame construction and byte access inside
+the runtime, uses offset/poll progress under the supervisor's unchanged
+absolute deadline, closes on success/failure, and never reissues a control
+or semantic request. The probe passes only its existing deadline, not a
+generic writer that could inspect control bytes. Safe pre-write/size/physical
+failure categories and actual rerun must distinguish the reached boundary.
+The writer's three physical progress/deadline tests pass, but the actual
+rerun now identifies `ProviderControlSnapshotOversized`; this clarifies the
+old conflated error rather than proving a prior physical write failure.
+The selected next repair replaces only the full peer start-binding copy with
+the exact peer slot/program/image/component references used by its direct
+transport consumer. Those references still come from the actual parent-held
+binding. Full local image correlation and actual role M9 authority remain,
+and each peer validates its own full image. The512-KiB bound stays unchanged;
+raising it without a measured sufficient bound is the rejected alternative.
+This is lossless for the peer identity consumer, not a general full-snapshot
+round-trip claim. If still oversized, inspect component sizes before any
+further choice. No normal observer output includes private control bytes.
+The compact peer tests pass2/2 but the actual control remains oversized.
+Count-only measurements through the real consuming snapshot producer give
+requester/executor empty controls3,917,843/3,803,597 bytes and worst admitted
+transport upper bounds4,179,987/4,065,741 bytes. Source-local static snapshots
+account for about3MiB each. Independent Canon-first planner review and parent
+inspection distinguish the new provider-only limit from accepted ordinary
+control512KiB, semantic messages64KiB, images8MiB and existing event/queue
+limits. Those accepted limits remain unchanged. The selected provider-only
+cap is now5MiB (5,242,880 bytes), leaving1,062,893 bytes above the measured
+maximum transport bound. Preserve full local image/M9 checks and enforce the
+cap during encoding, not only after allocation, plus bounded strict reading.
+The alternative compact-local/hash reconstruction would introduce a new
+validation argument and is not selected. Tests must cover both roles and all
+three current fixture profiles, cap+1/truncation/length/duplicate rejection,
+unchanged ordinary limits, actual bootstrap and its memory/deadline behavior.
+Measurement is not a general heap bound or observer-policy expansion; full
+frame/JSON/DTO/retained-image copy accounting remains an explicit gate.
+The provider-only encoder now reserves bounded capacity before serialization;
+the strict reader rejects an oversized prefix before body allocation. These
+changes remain unaccepted pending the frozen packet. The first packet stops
+at a test-helper compile error (`expect_err` requires Debug on the private
+authority-bearing success DTO); fix the test with a non-printing match, not
+by exposing the DTO through Debug. No test body ran in that packet.
+The59-KiB peer program field is a source-derived structural stable key, not
+an opaque reference. Preserve that full key for local image/M9 validation,
+but use the existing domain-separated checked-program SHA reference for
+provider peer prefaces and carrier binding only. Move the unchanged helper
+to a private shared leaf so M9 does not depend on the SYS5 facade. Exact
+expected-reference comparison and current authority checks remain required;
+a compact reference cannot issue or restore authority. This does not widen
+the64-KiB semantic frame or observer output policy.
+The repaired frozen packet passes control9/9, local execution8/8,
+compact-peer2/2 (included in control9), and the first actual source-real
+provider A/B supervised QUIC probe1/1. Parent reads its log at
+`2026-09-09T01:28:52+09:00`; the15.59s test body includes fixture preparation
+and is not the measured child-only lifecycle duration. No orphan probe remains.
+This proves the normal path, not exact41/-7 value correspondence or the full
+provider fault profile. Next integrate the private A post-consume fixture
+assertion, typed M9 revalidation and bounded read accounting; then the
+remaining spec/17 falsifiers. Four runtime dead-code warning groups, one
+probe unused-mut warning and final regression/review remain open at that cut.
+The next packet passes parser/read5, execution9 and control9. After correcting
+an inverted probe predecessor predicate, actual normal/41/−7/absent tests
+pass4/4, including private A retained-consume comparison and genuine M8
+owner-occurrence-zero checks. Parent then finds the provider success gate
+accepted cleanup-only reaping without requiring zero child exits. These green
+probes therefore do not establish clean lifecycle completion. The strict
+existing zero-exit/no-kill/deadline observation is now required and the normal
+probe is0/1 RED at `NaturalReap`; diagnosing and repairing this shutdown path
+was the immediate blocker. Exit-only tracing of unchanged old binaries then
+confirms one child exited1 and the other0 (role mapping deliberately absent).
+Waiting for A's QUIC endpoint drain after close, inside the unchanged timeout,
+fixes the reached defect: strict normal1/1 passes in1.10s and the full four
+profiles pass4/4 in4.19s. Parent reads both logs at
+`2026-09-09T01:56:49+09:00`; normal is duplicated across the two commands.
+This is the first strict normal-exit evidence. Next add actual post-terminal
+nonzero rejection and local genuine-component retirement/capacity/duplicate
+tests. The local fixture may construct actual checked/M9/M8 execution pieces
+while borrowing the trusted setup guard; it is not an inherited-FD3 installer
+or end-to-end evidence and cannot promote a decoded control into authority.
+Keep one-export budget reservation before projection allocation and currentness
+at commit; post-work denial does not refund the allocation allowance. Actual
+network loss/reconnect, observer faults, remaining rows and review still follow.
+The following frozen packet passes execution15/15 (including six local
+retirement/capacity/duplicate cases), parser/read5, control9, and full actual
+probe5/5. The fifth probe is a real A post-terminal exit9 which the strict
+gate rejects; its focused run is duplicated, not a sixth unique case.
+Local64/65 and duplicate results are not reconnect/network evidence. Current
+work has passed bounded observer encoding before allocation: parser/read/writer7,
+execution15 and strict actual probe5 are green in the subsequent frozen packet.
+Actual installed observer-currentness/budget falsifiers are the direct consumer.
+Independent planner and parent select a sealed, fixed, nonsecret conformance
+profile in the source-real launch/private runtime control, consumed only after
+normal FD3/image installation. Four cases exercise real installed M9 retirement
+before preflight, retirement after projection before commit, second export,
+and effect retirement with independently current observation permission.
+Exact denial/no-export/budget assertions remain private to the child. One
+generic opaque experiment-completion result, identical across cases, is finite
+owner-requested test instrumentation, not an observation, provider outcome or
+proof of nonexecution. Ordinary denied observations cannot use this route.
+There are no caller-defined callbacks, semantic physical-request flags or
+denial-reason/private-reference exports. T0 identity is not authority. Reuse
+the existing real QUIC supervisor and strict natural-zero gate; no second
+launcher or information-flow theorem is introduced. Stop this route if it
+requires unauthorized metadata release. The provider component and I3-3
+remain unaccepted.
+
+The installed-observer packet now passes actual probe11/11 (five prior
+normal/physical cases, four observer cases and two prelaunch mode-confusion
+rejections), local execution15, parser/read/writer7 and control9. Parent reads
+the logs at `2026-09-09T02:44:18+09:00`. The generic conformance event contains
+only its fixed marker and physical slot; extra image/locus/transport flags were
+removed before evaluation. Next execute three fixed source-real resource
+profiles: noncanonical integer,33-byte overflow and directory-kind rejection,
+plus the missing local witness-before-call zero-host falsifier.
+Independent planner and parent omit the optional actual EMFILE/RLIMIT experiment:
+spec/17 requires representative actual I/O, not every OS error atom. Preserve
+`AdapterUnavailable` implementation, production-read-loop LOCAL injected-I/O
+classification and typed carrier/consumer preservation; do not claim actual
+OS operational-error evidence. B64 plus A's checked65th rejection establishes
+the finite system bound, not independently exercised B65. No new requester
+source or authority path is introduced solely to force that unreachable case.
+The resource packet now passes actual probe14, execution16, parser/read/writer7
+and control9; parent reads all logs at `2026-09-09T02:58:09+09:00`.
+The three new actual profiles reach their expected typed outcomes. The local
+before-call table covers capability and witness retirement; the added local
+codec/admission test mutates a genuine NotFound result into an explicitly
+untrusted AdapterUnavailable candidate and proves atom preservation/one consume,
+not an actual host operational failure. Private FD3 control is nowv6 for the
+expanded trusted assertion enum. Provider network producer retention/join and
+payload-hash removal are the current implementation slice; reconnect/fault
+execution follows it and is not yet claimed.
+
+The next provider-network slice has independent planner conditional GO for
+reuse of the existing bounded two-session control transfer. Carry the same
+installed runtime, M9 lineage, occurrence counter and ingress obligations;
+reverify peer/preface without reinstall, authority issuance or a third session.
+An original genuine result held unsent may receive its first send on session2
+after current B release revalidation and current A consumption checks. This
+is withheld-result/post-call-disconnect evidence, not already-transmitted loss
+or stored-ledger result reconstruction. Separately exercise actual transmission
+with lost consumption and bounded genuine request/result replay through normal
+receivers. Preserve pending remote-unknown state and typed duplicate rejection,
+with no second invocation, consume, refund or hidden retry.
+Actual adapter attempt references use run/session/direction/ordinal, never
+raw result/frame hashes; join admitted semantic identity afterward. Reserve,
+completed send, complete receive, host/outcome/release and consume producers
+remain distinct. Safe metadata still requires the separate observer gate,
+including rejected attempts; public error accessors/Debug are not an exemption.
+The alternative reconnect refusal plus only local late-result evidence cannot
+support the required actual-network claim. This is selected bounded work,
+not executed evidence; stop if it needs authority renewal, stored-result
+reconstruction, unbounded replay or unauthorized fault diagnostics.
+
+Pre-edit M9 mapping finds v1 does not authorize new network metadata. Parent
+and independent planner authorize a separate private fixed terminal profilev2
+under existing ADR-0042/spec/17, not a silent expansion of v1 or a new owner
+decision. Existing separate T0 observation-policy proof and current M9 bound-use
+must pin v2's allowlist and limits: A request-send reservation/completion and
+complete result receive; B complete request receive, host-start, retained outcome,
+release and result-send reservation/completion; existing source/Core/artifact/
+edge/request/adapter/consume refs and permitted retained-state counts. Transport
+kinds have two fixed slots per semantic entry, preserving the first occurrence;
+this is schema capacity, not retry permission or executed second-session evidence.
+Retain64 semantic rows AND65,532 body bytes plus4-byte prefix, with one export;
+reject the complete projection if either bound fails, without truncation, refund
+or a claim that all64-row shapes fit. Generic Observation remains unchanged.
+The first network slice fills real first-session producer records and joins them;
+reconnect/loss/replay behavior remains the next slice. References are allocated
+at actual transitions, and complete receive precedes semantic admission/host
+execution even though accepted semantic binding is attached afterward.
+
+At `2026-09-09T03:31:30+09:00`, slice1 remains unaccepted. Initial v2
+compilation exposed six runtime integration errors; bounded fixes preserve
+the stored send-reservation reference and its completion check. The rerun
+reached only the two expected old probe send-method arity errors. After their
+mechanical migration, the real value41 two-process test executes and fails
+at `TerminalObservationCorrelation` (0/1,13 filtered). This is the behavioral
+RED for migrating the old host join to the v2 producer records, not passing
+network evidence. Runtime/M9/tests stay frozen during the probe-only join
+update. Existing local execution/M9 checks and malformed-version behavior
+remain explicit regression checks; reconnect/loss/replay has not started.
+
+Independent bounded planner review and the parent select the smaller fault
+evidence path: keep the strict normal v2 exported join, and verify each actual
+QUIC fault with assertions inside the genuine installed children, exposing
+only a generic conformance completion. This is actual network execution with
+child-private assertions, not an exported provider-fault trace, and ordinary
+owner traces cannot substitute for these provider experiments. Assertions must
+use actual pending/ledger/allowance/currentness and producer checkpoints;
+held-unsent and transmitted-but-unconsumed outcomes stay distinct. A later
+replay branch must not be flattened into predecessors of the original host
+call or consume. No new audit constructor, general trace schema, permission
+profile or semantic retry is needed. If the assertions cannot establish the
+required facts without manufacturing or exposing denied observations, reopen
+only the alternative narrowly enumerated v2 state/branch projection.
+
+Slice1's bounded gate passes, parent read `2026-09-09T03:41:42+09:00`:
+actual v2 probe14/14; genuine local execution/M9 tests17/17; parser/read/writer
+7/7; control9/9. The synthetic untrusted decoder baseline first exposed a
+test-only enum spelling error; after correcting it to the existing private
+Serde spelling, isolated profile/schema/missing-slot/predecessor negatives
+pass. Those negatives establish structural validation, not authenticity or
+cryptographic attestation. The actual producer path supplies the positive
+joined provenance. Release the bounded two-session fault slice to separate
+runtime, host and test writers; no provider/component or I3-3 acceptance is
+implied at that checkpoint.
+
+Slice2 subsequently executes19/20 actual probe cases (parent log read
+`2026-09-09T04:34:37+09:00`): duplicate delivery, sent-result discard before
+semantic admission, and post-call retirement pass, as do the prior16 cases.
+Only the held result's first send/consume on session2 fails; its requester
+incorrectly enters a generation1-only receive guard. A private shared receive
+body repair preserves the normal guard and existing currentness checks.
+The sent/discarded case is not wire packet loss. These fault results are
+child-private assertions with generic completion, not exported fault traces.
+An independently authored synthetic second-slot terminal candidate also
+reproduces an intended decoder RED; normal v2 producer/decoder must reject
+that unsupported shape without reducing private two-slot retention capacity.
+Both bounded repairs precede the fresh full-slice gate and independent review;
+no provider component or milestone acceptance is claimed.
+
+After those repairs, the exact second-slot guard and held-session2 positives
+both pass1/1; the complete actual provider probe passes20/20 (17.90s bodies,
+parent read `2026-09-09T04:40:28+09:00`). This supersedes the19/20 behavioral
+checkpoint, not the still-pending broad regression, lint and independent
+acceptance gates. No additional fault-profile expansion is required by the
+independent finite acceptance inventory: existing unsupported export/restore
+guards must rerun; actual process-local cut admission remains row20.
+
+Provider Stage3 final runtime gate is now met. Independent review's one P2
+mode/budget incompatibility is reproduced by a genuine held-session2 test and
+repaired with early network-profile audit denial plus an unspent-budget
+completion guard. Its observed RED is generic `RequesterTerminal`, not an
+externally demonstrated unauthorized audit. Fresh post-repair tests pass
+runtime library410, all probe targets (ordinary41/provider20), process64,
+M1067, I2 local5/CLI8 and provider public guards5; scoped Clippy and format
+pass. Independent review has no remaining P0/P1/P2. Report2606 pins the exact
+commands and distinguishes the earlier full runtime all-target packet from
+these fresh affected-target reruns. Parent prepares finite component
+integration, not another milestone or whole-I3-3 acceptance. No additional
+EMFILE/B65/general fault-trace work is admitted by this completed consumer.
+
+Next row13 selects the smaller checked `init_avatar_hp` A-to-B path and a
+genuine parent-produced retirement of its source-declared WorldAuthority
+membership, replacing the earlier `init_focus`/reversed-role sketch below.
+This requires its own exact membership-successor validation and qualified
+install/ACK/publication within the existing chain, not reuse of an
+owner-capability-revocation predicate or a child issuer. Generic M9/SYS4
+construction/install/publication need no use of the retired ContractUpdate
+or observer lineage; those retirements must remain effective. Preserve the
+normal old-carrier `CarrierAdmissionRejected` precedence and pair the actual
+network case with LOCAL current-generation `StaleMembership` classification.
+Implementation stays gated on provider commit/push/parity; no source grammar,
+arbitrary principal selector or new authority policy is authorized by this
+LAB consumer substitution. Rows15/19 reuse their exact evidence before row20
+cut/ordering and whole-I3-3 acceptance.
+
+The old fixture
+default remains0; the feature-gated source-real factory now explicitly selects
+a fixed real41 fixture, with fresh -7 and absent-target variants, never caller
+bytes, native paths or an injected result.
+
+Stop expansion when these direct runtime consumers and falsifiers, required
+regressions and independent review pass. Rows 13/15/19/20, remaining ordering
+and whole-I3-3 validation/acceptance still follow; only that complete milestone
+and observed push/parity trigger the owner's stop. I3-4 remains inactive.
 
 Default M8/M9/SYS5/kernel execution remains rejecting, and new provider
 fragments must explicitly fail the SYS4 completeness boundary until a genuine
@@ -1656,6 +2057,47 @@ pressure remains I3-4. Unsupported-carrier rejection alone cannot replace a
 positive ordering producer. The time consumer is now integrated at `55f1fd7f`
 and ADR-0042/spec/17 selects the distinct provider contract; its implementation
 and all remaining evidence are still required.
+
+Parallel test-only work within this same I3-3 ordering obligation is admitted:
+`c3_test_repair` owns `sys5_relation_dispatch_tests.rs` to make the real
+fallback publication's causal path through ViewerC's later access explicit.
+Direct consumer: the I3-3 `fallback -> later access` ordering row. Blocker
+reduced: existing initial-publication causality and fallback-shadow tests
+cover the facts separately. Acceptance use: one focused actual LocalFabric
+causal assertion/falsifier, reusing existing APIs without production or
+cross-process changes. The mapper's existing relation/designated and M10
+runtime-backed tests remain reusable local evidence, not new network claims.
+After that local test passes, the same test writer separately owns one
+test-only addition in `tests/sys5_i3_process_runtime.rs`: flip the existing
+image carrier's `reference_only_redaction` field and require the actual
+decoder to reject it before releasing an executable candidate, paired with
+the unchanged source-derived image's validated start. Direct consumer: row19.
+Blocker reduced: the production fail-closed guard has no exact image-level
+falsifier. Acceptance use: focused decoder test now1/1 GREEN after correcting
+the test's JSON pointer to top-level `projection`, without production changes;
+both original-image start and changed-redaction `Malformed` execute. No new
+wire field, dynamic policy or network visibility claim.
+
+The read-only post-provider planning review confirms row20 is process-local
+cut admission, not simultaneous distributed quiescence or persistence.
+Runtime queues, unresolved requests/remote-unknown states, one-use admission
+reservations, staged lifecycle obligations and actual adapter acquisition /
+complete ingress must be checked and committed under the same serialized
+ownership boundary. Completed decisions and spent allowances remain retained
+history, never reset by a cut/reconnect. A positive actual ordinary round
+trip must reach this boundary and then a later checked transition; pending,
+retained-ingress, reservation and late-old-traffic cases are falsifiers.
+These are implementation/evidence obligations, not executed results or a
+new milestone. Runtime/probe production work remains provider-first.
+The smallest later transition is a genuine existing checked owner dispatch /
+serve, causally joined to an identity-bound committed cut-admission occurrence.
+Independent Canon-first review confirms plan/05 requires that actual retained
+runtime/adapter boundary, not new checked-patch installation. Reject the larger
+patch-installation alternative for this finite row: it adds a consumer not
+required by the quiescence rule. The admission occurrence is evidence, never
+authority, a saved image or restore support. This selection does not waive any
+pending/ingress/ambiguity/lifecycle/late-traffic falsifier or activate row20
+implementation before the provider component closes.
 
 ## I3-4 milestone contract — inactive until I3-3 closes and owner resumes
 

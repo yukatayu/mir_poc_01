@@ -11,10 +11,14 @@ use std::sync::{
     atomic::{AtomicBool, AtomicU64, Ordering},
 };
 
-#[cfg(all(unix, feature = "i3-process-test-seams"))]
+#[cfg(unix)]
 use std::{
-    io::Read,
-    os::unix::net::UnixStream,
+    io::{Read, Write},
+    net::Shutdown,
+    os::unix::{
+        io::{AsRawFd, FromRawFd},
+        net::UnixStream,
+    },
     time::{Duration, Instant},
 };
 
@@ -33,12 +37,47 @@ use sha2::{Digest, Sha256};
 
 #[path = "sys5_i3_process_snapshot.rs"]
 mod process_snapshot;
+#[path = "sys5_i3_provider_runtime.rs"]
+mod provider_runtime;
+
+use provider_runtime::{
+    PrivateProviderRequestCarrierSnapshot, PrivateProviderResultCarrierSnapshot,
+    Sys5I3ProviderExecution,
+};
+#[cfg(feature = "i3-process-test-seams")]
+pub(crate) use provider_runtime::{
+    Sys5I3PrivateProviderConsumedRequestReplay, Sys5I3PrivateProviderReleasedResultReplay,
+};
+pub(crate) use provider_runtime::{
+    Sys5I3PrivateProviderTransportOccurrence, Sys5I3PrivateProviderTransportOccurrenceKind,
+    Sys5I3PrivateProviderTransportWriteTicket,
+};
+pub use provider_runtime::{
+    Sys5I3ProviderConsumeReceipt, Sys5I3ProviderRequestCarrier, Sys5I3ProviderResultCarrier,
+    Sys5I3ProviderTerminalAudit, Sys5I3ProviderTerminalAuditCarrierDescriptorRefs,
+    Sys5I3ProviderTerminalAuditCounts, Sys5I3ProviderTerminalAuditRow,
+    Sys5I3ProviderTerminalOutcomeClass, Sys5I3UntrustedProviderTerminalAuditObserverViewCandidate,
+};
+#[cfg(feature = "i3-process-test-seams")]
+pub use provider_runtime::{
+    Sys5I3ProviderFixtureAssertionCompletion, Sys5I3ProviderLedgerTestFacts,
+};
+#[cfg(all(test, feature = "i3-process-test-seams"))]
+pub use provider_runtime::{
+    Sys5I3ProviderRevalidationTestPoint, Sys5I3ProviderRevalidationTestRetirement,
+};
 
 // A logical activation occurrence is local runtime evidence, not a process
 // identifier, endpoint, session, or transport attempt.  It prevents two
 // independently derived cohorts of the same checked source from sharing a
 // local-store or request identity before I3-3 retry semantics exist.
 static NEXT_PROCESS_COHORT_OCCURRENCE: AtomicU64 = AtomicU64::new(1);
+
+// The dedicated provider child branch takes inherited FD3 exactly once per
+// process. This protects against a later descriptor-number reuse becoming a
+// second authority-bearing control read.
+#[cfg(unix)]
+static PROVIDER_INHERITED_CONTROL_FD3_TAKEN: AtomicBool = AtomicBool::new(false);
 
 // This is a bounded, in-memory I3-3 duplicate-admission guard for the
 // accepted local profile.  It is deliberately neither durable nor a retry,
@@ -53,11 +92,22 @@ const MAX_OUTBOUND_OWNER_TERMINAL_FAILURES: usize = 64;
 const MAX_OUTBOUND_OWNER_REQUEST_ATTEMPTS: u8 = 2;
 
 use crate::{
+    checked_program_reference::{checked_program_identity_ref, is_checked_program_identity_ref},
+    i3_read_only_provider_composite::{
+        I3PrivateFixedProviderNetworkConformanceProfile,
+        I3PrivateFixedTerminalObservationConformanceProfile,
+        I3PrivateReadOnlyProviderFixtureAssertion, I3PrivateReadOnlyProviderResourceEnvelope,
+        I3TrustedReadOnlyProviderFixtureSetup, TrustedFixtureContext,
+    },
     m8_owner_admission_gate::{M8I3OwnerAdmissionIssuance, M8I3OwnerAdmissionPermit},
     m8_runtime_admission::{
-        M8I3PrivateProviderComponentSnapshot, M8ReadOnlyProviderEffectComponentInventory,
+        M8I3PrivateProviderComponentSnapshot, M8InstalledReadOnlyProviderEffectComponent,
+        M8ReadOnlyProviderEffectComponentInventory,
     },
-    m9_auth_verification::M9I3PrivateAuthorityGenerationSnapshot,
+    m9_auth_verification::{
+        M9I3PrivateAuthorityGenerationSnapshot, M9I3PrivateReadOnlyProviderRoleSnapshot,
+        M9I3ReadOnlyProviderChildRole, M9I3ReadOnlyProviderLocalAuthority,
+    },
     sys3_i3_private_snapshot::I3PrivateProviderStaticProjectionSnapshot,
     sys3_projection::{BackendProfile, CommunicationEdgeKind},
     sys4_dispatch::{
@@ -66,7 +116,8 @@ use crate::{
         Sys4I3OwnerCapabilitySuccessorCoordinator, Sys4I3OwnerRequestRevalidationFailure,
         Sys4I3PendingOwnerRequestBinding, Sys4I3PrivateProcessCarrierSnapshot,
         Sys4I3RestrictedOwnerCapabilitySuccessor, Sys4I3ValidatedOwnerReply,
-        Sys4InactiveProviderAdmission, Sys4InactiveProviderRestrictedAdmission, Sys4ProcessCarrier,
+        Sys4InactiveProviderAdmission, Sys4InactiveProviderRestrictedAdmission,
+        Sys4InstalledProviderLocalFabric, Sys4ProcessCarrier,
     },
     sys5_local_slice::{Sys5I3AdapterCarrierContract, Sys5LocalProject},
 };
@@ -118,6 +169,21 @@ pub enum Sys5I3ProcessRuntimeErrorKind {
     /// current witness is absent or no longer live.  No duplicate outcome is
     /// disclosed.
     MissingWitness,
+    /// The bounded provider ledger cannot retain another reservation or
+    /// outcome without evicting an earlier fact.
+    ResourceExhausted,
+    /// The B-local trusted adapter reached CallStarted but the selected
+    /// logical resource was absent.
+    ProviderResourceNotFound,
+    /// The B-local trusted adapter reached CallStarted but rejected the
+    /// selected resource kind or fixed physical policy.
+    ProviderPolicyDenied,
+    /// The B-local trusted adapter reached CallStarted but did not produce
+    /// the exact bounded canonical i64 representation.
+    ProviderInvalidResult,
+    /// The B-local trusted adapter reached CallStarted but an operational
+    /// failure prevented a typed physical result.
+    AdapterUnavailable,
     /// A second delivery bound to an already reserved source-derived owner
     /// request identity.  It is intentionally not a stored-result return.
     DuplicateRequestRejected,
@@ -189,6 +255,48 @@ impl Sys5I3ProcessRuntimeError {
     }
 
     pub const fn kind(&self) -> Sys5I3ProcessRuntimeErrorKind {
+        self.kind
+    }
+}
+
+/// Typed failures at the narrow trusted provider-launch boundary. These are
+/// operational control failures, never source/provider result diagnostics.
+#[doc(hidden)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+pub enum Sys5I3ProviderLaunchErrorKind {
+    /// The feature-gated canonical source fixture could not reach the real
+    /// checked/composite/binding/policy launch boundary. The error retains no
+    /// source text, fixture path, result, authority, or control material.
+    SourceCompositePreparationRejected,
+    ProviderRuntimeActivationPending,
+    InactiveProviderBindingNotCurrent,
+    InvalidChildRole,
+    ProviderChildImageAlreadyTaken,
+    ProviderChildImageNotWritten,
+    ProviderChildImageWriteRejected,
+    ProviderChildControlAlreadyTaken,
+    ProviderTransportBootstrapOversized,
+    ProviderControlConstructionRejected,
+    ProviderControlSerializationRejected,
+    ProviderControlSnapshotOversized,
+    ProviderControlDeadlineElapsed,
+    ProviderControlWriteRejected,
+    ProviderControlShutdownRejected,
+    InheritedProviderControlRejected,
+}
+
+#[doc(hidden)]
+#[derive(Debug, Clone, PartialEq, Eq)]
+pub struct Sys5I3ProviderLaunchError {
+    kind: Sys5I3ProviderLaunchErrorKind,
+}
+
+impl Sys5I3ProviderLaunchError {
+    pub(crate) const fn new(kind: Sys5I3ProviderLaunchErrorKind) -> Self {
+        Self { kind }
+    }
+
+    pub const fn kind(&self) -> Sys5I3ProviderLaunchErrorKind {
         self.kind
     }
 }
@@ -1277,7 +1385,7 @@ pub struct Sys5I3ProcessCohortSummary {
 /// equality at the expected-start boundary; decoding them never reconstructs
 /// authority. Its `Debug` surface exposes only bounded routing facts.
 #[doc(hidden)]
-#[derive(PartialEq, Eq)]
+#[derive(Clone, PartialEq, Eq)]
 pub struct Sys5I3ExpectedStartBinding {
     slot_name: String,
     assigned_loci: BTreeSet<String>,
@@ -1508,6 +1616,118 @@ impl Sys5I3TrustedLocalnetControl {
     }
 }
 
+/// Provider-only trusted QUIC control created after an inherited FD3 install.
+/// It retains its complete local start binding and the peer's exact identity
+/// descriptor, but no peer M8/M9 snapshot, native envelope, source text, or
+/// provider outcome. Its presence is not proof of supervision; the supported
+/// probe owner remains the T0 operational trust boundary for control delivery.
+#[doc(hidden)]
+pub struct Sys5I3TrustedProviderLocalnetControl {
+    run_ref: String,
+    local_role: Sys5I3ProviderChildRole,
+    peer_role: Sys5I3ProviderChildRole,
+    local_spki_ref: String,
+    peer_spki_ref: String,
+    expected_start_binding: Sys5I3ExpectedStartBinding,
+    peer_start_binding: PrivateProviderPeerStartBinding,
+    #[cfg(feature = "i3-process-test-seams")]
+    fixed_provider_network_conformance_enabled: bool,
+}
+
+impl std::fmt::Debug for Sys5I3TrustedProviderLocalnetControl {
+    fn fmt(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        formatter
+            .debug_struct("Sys5I3TrustedProviderLocalnetControl")
+            .field("local_role", &self.local_role)
+            .field("peer_role", &self.peer_role)
+            .field("local_slot_name", &self.expected_start_binding.slot_name)
+            .field("peer_slot_name", &self.peer_start_binding.slot_name)
+            .finish_non_exhaustive()
+    }
+}
+
+/// The provider-specific non-semantic transport preface. It binds the one
+/// selected QUIC peer to exact role/image/static component correspondence
+/// before a distinct provider carrier reaches local M9 admission.
+#[doc(hidden)]
+#[derive(Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[serde(deny_unknown_fields)]
+pub struct Sys5I3ProviderLocalnetPeerPreface {
+    run_ref: String,
+    local_role: Sys5I3ProviderChildRole,
+    peer_role: Sys5I3ProviderChildRole,
+    local_slot_name: String,
+    peer_slot_name: String,
+    local_spki_ref: String,
+    image_integrity_ref: String,
+    checked_program_ref: String,
+    component_binding_ref: String,
+}
+
+impl Sys5I3TrustedProviderLocalnetControl {
+    pub fn expected_peer_spki_ref(&self) -> &str {
+        &self.peer_spki_ref
+    }
+
+    pub(crate) fn run_ref(&self) -> &str {
+        &self.run_ref
+    }
+
+    #[cfg(feature = "i3-process-test-seams")]
+    pub(crate) const fn permits_fixed_provider_network_conformance(&self) -> bool {
+        self.fixed_provider_network_conformance_enabled
+    }
+
+    pub(crate) fn localnet_preface(
+        &self,
+    ) -> Result<Sys5I3ProviderLocalnetPeerPreface, Sys5I3LocalnetControlError> {
+        let component_binding_ref = self
+            .expected_start_binding
+            .inactive_provider
+            .as_ref()
+            .map(|provider| provider.component_binding_ref.clone())
+            .filter(|value| !value.is_empty())
+            .ok_or_else(|| {
+                Sys5I3LocalnetControlError::new(Sys5I3LocalnetControlErrorKind::MalformedControl)
+            })?;
+        Ok(Sys5I3ProviderLocalnetPeerPreface {
+            run_ref: self.run_ref.clone(),
+            local_role: self.local_role,
+            peer_role: self.peer_role,
+            local_slot_name: self.expected_start_binding.slot_name.clone(),
+            peer_slot_name: self.peer_start_binding.slot_name.clone(),
+            local_spki_ref: self.local_spki_ref.clone(),
+            image_integrity_ref: self.expected_start_binding.image_integrity_ref.clone(),
+            checked_program_ref: checked_program_identity_ref(
+                &self.expected_start_binding.parent_checked_program_ref,
+            ),
+            component_binding_ref,
+        })
+    }
+
+    pub(crate) fn validate_peer_preface(
+        &self,
+        received: &Sys5I3ProviderLocalnetPeerPreface,
+    ) -> Result<(), Sys5I3LocalnetControlError> {
+        if received.run_ref != self.run_ref
+            || received.local_role != self.peer_role
+            || received.peer_role != self.local_role
+            || received.local_slot_name != self.peer_start_binding.slot_name
+            || received.peer_slot_name != self.expected_start_binding.slot_name
+            || received.local_spki_ref != self.peer_spki_ref
+            || received.image_integrity_ref != self.peer_start_binding.image_integrity_ref
+            || !is_checked_program_identity_ref(&received.checked_program_ref)
+            || received.checked_program_ref != self.peer_start_binding.parent_checked_program_ref
+            || received.component_binding_ref != self.peer_start_binding.component_binding_ref
+        {
+            return Err(Sys5I3LocalnetControlError::new(
+                Sys5I3LocalnetControlErrorKind::PeerBindingRejected,
+            ));
+        }
+        Ok(())
+    }
+}
+
 impl Sys5I3ExpectedStartBinding {
     fn for_image(image: &Sys5I3ProcessImage) -> Self {
         let seed = image
@@ -1633,6 +1853,52 @@ impl Sys5I3ExpectedStartBinding {
         }
         Ok(())
     }
+
+    /// Bind a decoded tagged provider image to the distinct expected-start
+    /// record carried through inherited FD3. This is structural only: the M9
+    /// role record is installed separately and no ordinary runtime starts.
+    fn validate_inactive_provider_image(
+        &self,
+        image: &Sys5I3ProcessImage,
+    ) -> Result<(), Sys5I3ProcessRuntimeError> {
+        let expected = self.inactive_provider.as_ref().ok_or_else(|| {
+            Sys5I3ProcessRuntimeError::new(Sys5I3ProcessRuntimeErrorKind::ImageIntegrityMismatch)
+        })?;
+        let provider = image.inactive_provider.as_ref().ok_or_else(|| {
+            Sys5I3ProcessRuntimeError::new(Sys5I3ProcessRuntimeErrorKind::ImageIntegrityMismatch)
+        })?;
+        let seed = image
+            .private_runtime_seed
+            .inactive_provider()
+            .ok_or_else(|| {
+                Sys5I3ProcessRuntimeError::new(
+                    Sys5I3ProcessRuntimeErrorKind::ImageIntegrityMismatch,
+                )
+            })?;
+        if image.private_integrity_ref != image.recomputed_private_integrity()
+            || image.private_integrity_ref != self.image_integrity_ref
+            || image.slot_name != self.slot_name
+            || image.assigned_loci != self.assigned_loci
+            || provider.assigned_loci != image.assigned_loci
+            || provider.parent_checked_program_ref != self.parent_checked_program_ref
+            || provider.parent_checked_program_ref != seed.parent_checked_program_ref
+            || provider.static_snapshot != expected.static_snapshot
+            || provider.static_snapshot != seed.static_snapshot
+            || provider.component_snapshot != expected.component_snapshot
+            || provider.component_snapshot != seed.component_snapshot
+            || provider.legacy_authority_snapshot != expected.legacy_authority_snapshot
+            || provider.legacy_authority_snapshot != seed.legacy_authority_snapshot
+            || provider.component_binding_ref != expected.component_binding_ref
+            || provider.component_binding_ref != seed.component_binding_ref
+            || provider.static_snapshot.declared_provider_lowering_count() != 4
+            || !provider.component_snapshot.is_scoped_component_snapshot()
+        {
+            return Err(Sys5I3ProcessRuntimeError::new(
+                Sys5I3ProcessRuntimeErrorKind::ImageIntegrityMismatch,
+            ));
+        }
+        Ok(())
+    }
 }
 
 impl Sys5I3ProcessCohortSummary {
@@ -1691,9 +1957,1866 @@ pub(crate) struct Sys5I3InactiveProviderCohort {
     expected_start_bindings: BTreeMap<String, Option<Sys5I3ExpectedStartBinding>>,
     checked: mir_semantics::surface_v0_pipeline::CheckedSurfaceV0,
     admission: Sys4InactiveProviderAdmission,
-    setup_current: Arc<AtomicBool>,
+    setup_context: Arc<TrustedFixtureContext>,
     #[cfg(test)]
     inactive_validation_pause: Option<Sys5I3InactiveProviderValidationPause>,
+}
+
+/// The only two source-derived provider child roles. This routing descriptor
+/// names no grant, result, source, or resource authority.
+#[doc(hidden)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Serialize, Deserialize)]
+pub enum Sys5I3ProviderChildRole {
+    RequesterConsumer,
+    Executor,
+}
+
+impl Sys5I3ProviderChildRole {
+    fn m9_role(self) -> M9I3ReadOnlyProviderChildRole {
+        match self {
+            Self::RequesterConsumer => M9I3ReadOnlyProviderChildRole::RequesterConsumer,
+            Self::Executor => M9I3ReadOnlyProviderChildRole::Executor,
+        }
+    }
+
+    fn from_m9_role(role: M9I3ReadOnlyProviderChildRole) -> Self {
+        match role {
+            M9I3ReadOnlyProviderChildRole::RequesterConsumer => Self::RequesterConsumer,
+            M9I3ReadOnlyProviderChildRole::Executor => Self::Executor,
+        }
+    }
+}
+
+/// Non-authorizing transport route selected from an already checked provider
+/// cohort. It deliberately contains neither image bytes nor trusted control.
+#[doc(hidden)]
+#[derive(Debug, Clone, PartialEq, Eq)]
+pub struct Sys5I3ProviderChildRoute {
+    role: Sys5I3ProviderChildRole,
+    slot_name: String,
+    endpoint: String,
+}
+
+impl Sys5I3ProviderChildRoute {
+    pub const fn role(&self) -> Sys5I3ProviderChildRole {
+        self.role
+    }
+
+    pub fn slot_name(&self) -> &str {
+        &self.slot_name
+    }
+
+    pub fn endpoint(&self) -> &str {
+        &self.endpoint
+    }
+}
+
+/// Runtime-only result of consuming the real inherited provider FD3 frame.
+/// It has no constructor or authority/control payload accessor.
+#[doc(hidden)]
+pub struct Sys5I3InheritedProviderChildControl {
+    transport_bootstrap: Vec<u8>,
+    role: Sys5I3ProviderChildRole,
+    expected_start_binding: Sys5I3ExpectedStartBinding,
+    peer_role: Sys5I3ProviderChildRole,
+    peer_start_binding: PrivateProviderPeerStartBinding,
+    m9_role_snapshot: M9I3PrivateReadOnlyProviderRoleSnapshot,
+    expected_resource_runtime_nonce: [u8; 32],
+    executor_resource_envelope: Option<I3PrivateReadOnlyProviderResourceEnvelope>,
+    requester_fixture_assertion: Option<I3PrivateReadOnlyProviderFixtureAssertion>,
+    terminal_observation_conformance_profile:
+        Option<I3PrivateFixedTerminalObservationConformanceProfile>,
+    provider_network_conformance_profile: Option<I3PrivateFixedProviderNetworkConformanceProfile>,
+}
+
+impl std::fmt::Debug for Sys5I3InheritedProviderChildControl {
+    fn fmt(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        formatter.write_str("Sys5I3InheritedProviderChildControl(..)")
+    }
+}
+
+impl Sys5I3InheritedProviderChildControl {
+    pub const fn role(&self) -> Sys5I3ProviderChildRole {
+        self.role
+    }
+
+    /// This is the sole probe-visible part of a provider FD3 frame. It is
+    /// restricted to physical transport bootstrap metadata and carries no M9
+    /// fact, resource envelope, path, request, or result.
+    pub fn transport_bootstrap(&self) -> &[u8] {
+        &self.transport_bootstrap
+    }
+}
+
+/// Installed child-local provider runtime. It is populated only after a
+/// trusted inherited-control read and remains opaque to the probe.
+#[doc(hidden)]
+pub struct Sys5I3InstalledProviderChildRuntime {
+    role: Sys5I3ProviderChildRole,
+    expected_start_binding: Sys5I3ExpectedStartBinding,
+    peer_role: Sys5I3ProviderChildRole,
+    peer_start_binding: PrivateProviderPeerStartBinding,
+    local_authority: M9I3ReadOnlyProviderLocalAuthority,
+    _scoped_component: M8InstalledReadOnlyProviderEffectComponent,
+    provider_local_fabric: Sys4InstalledProviderLocalFabric,
+    executor_resource_envelope: Option<I3PrivateReadOnlyProviderResourceEnvelope>,
+    requester_fixture_assertion: Option<I3PrivateReadOnlyProviderFixtureAssertion>,
+    fixture_post_consume_assertion_completed: bool,
+    provider_execution: Sys5I3ProviderExecution,
+    terminal_observation_export_reserved: bool,
+    #[cfg(feature = "i3-process-test-seams")]
+    terminal_observation_conformance_profile:
+        Option<I3PrivateFixedTerminalObservationConformanceProfile>,
+    #[cfg(feature = "i3-process-test-seams")]
+    terminal_observation_conformance_completed: bool,
+    #[cfg(feature = "i3-process-test-seams")]
+    provider_network_conformance_profile: Option<I3PrivateFixedProviderNetworkConformanceProfile>,
+    #[cfg(feature = "i3-process-test-seams")]
+    provider_network_conformance_facts: Sys5I3FixedProviderNetworkConformanceFacts,
+    #[cfg(feature = "i3-process-test-seams")]
+    provider_network_conformance_completed: bool,
+}
+
+/// Opaque completion of one sealed terminal-observation conformance
+/// experiment. It carries no experiment selector, M9 diagnostic, audit,
+/// result, reference, count, or proof of nonexecution.
+#[cfg(feature = "i3-process-test-seams")]
+#[doc(hidden)]
+pub struct Sys5I3FixedTerminalObservationConformanceCompletion {
+    _private: (),
+}
+
+#[cfg(feature = "i3-process-test-seams")]
+impl std::fmt::Debug for Sys5I3FixedTerminalObservationConformanceCompletion {
+    fn fmt(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        formatter.write_str("Sys5I3FixedTerminalObservationConformanceCompletion(..)")
+    }
+}
+
+/// Opaque completion of one sealed provider-network conformance experiment.
+/// It discloses neither the selected fault profile nor a result, carrier,
+/// occurrence, authority, or evidence record.
+#[cfg(feature = "i3-process-test-seams")]
+#[doc(hidden)]
+pub struct Sys5I3FixedProviderNetworkConformanceCompletion {
+    _private: (),
+}
+
+#[cfg(feature = "i3-process-test-seams")]
+impl std::fmt::Debug for Sys5I3FixedProviderNetworkConformanceCompletion {
+    fn fmt(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        formatter.write_str("Sys5I3FixedProviderNetworkConformanceCompletion(..)")
+    }
+}
+
+#[cfg(feature = "i3-process-test-seams")]
+#[derive(Default)]
+struct Sys5I3FixedProviderNetworkConformanceFacts {
+    first_result_send_withheld: bool,
+    first_result_send_completed: bool,
+    first_result_receive_finished_without_frame: bool,
+    first_result_consumed: bool,
+    first_result_received_and_discarded_before_consume: bool,
+    second_request_duplicate_rejected: bool,
+    second_result_send_completed: bool,
+    second_result_receive_finished_without_frame: bool,
+    second_result_consumed: bool,
+    second_result_duplicate_rejected: bool,
+    effect_retired_after_call: bool,
+    second_result_send_currentness_rejected: bool,
+}
+
+#[cfg(feature = "i3-process-test-seams")]
+#[derive(Clone, Copy, PartialEq, Eq)]
+pub(crate) enum Sys5I3FixedProviderNetworkFirstResultSendAction {
+    Withhold,
+    Send,
+}
+
+#[cfg(feature = "i3-process-test-seams")]
+#[derive(Clone, Copy, PartialEq, Eq)]
+pub(crate) enum Sys5I3FixedProviderNetworkFirstResultReceiveAction {
+    ExpectFinishedWithoutFrame,
+    Consume,
+    ReadAndDiscardBeforeConsume,
+}
+
+#[cfg(feature = "i3-process-test-seams")]
+#[derive(Clone, Copy, PartialEq, Eq)]
+pub(crate) enum Sys5I3FixedProviderNetworkSecondResultSendAction {
+    Send,
+    FinishWithoutFrame,
+    ExpectCurrentnessRejection,
+}
+
+#[cfg(feature = "i3-process-test-seams")]
+#[derive(Clone, Copy, PartialEq, Eq)]
+pub(crate) enum Sys5I3FixedProviderNetworkSecondResultReceiveAction {
+    Consume,
+    ExpectFinishedWithoutFrame,
+    ExpectDuplicateRejection,
+}
+
+impl std::fmt::Debug for Sys5I3InstalledProviderChildRuntime {
+    fn fmt(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        formatter.write_str("Sys5I3InstalledProviderChildRuntime(..)")
+    }
+}
+
+/// A source-real local component pair for focused runtime-boundary tests.
+/// It retains the trusted setup borrow and constructs the same restricted M9,
+/// scoped M8, SYS-4, and provider-execution parts as an installed child, but
+/// it neither reads FD3 nor represents an inherited-control installation.
+/// The supervised probe remains the sole evidence path for full child install
+/// and transport behavior.
+#[cfg(test)]
+pub(crate) struct Sys5I3SourceRealProviderLocalExecutionPair<'setup> {
+    _setup_guard: &'setup I3TrustedReadOnlyProviderFixtureSetup,
+    requester: Sys5I3ProviderLocalExecution,
+    executor: Sys5I3ProviderLocalExecution,
+}
+
+#[cfg(test)]
+impl<'setup> Sys5I3SourceRealProviderLocalExecutionPair<'setup> {
+    pub(crate) fn requester_mut(&mut self) -> &mut Sys5I3ProviderLocalExecution {
+        &mut self.requester
+    }
+
+    pub(crate) fn executor_mut(&mut self) -> &mut Sys5I3ProviderLocalExecution {
+        &mut self.executor
+    }
+}
+
+/// One local execution boundary built only from genuine restricted provider
+/// parts. This is not an installed runtime and deliberately has no image,
+/// control, transport, or authority constructor exposed to tests.
+#[cfg(test)]
+pub(crate) struct Sys5I3ProviderLocalExecution {
+    role: Sys5I3ProviderChildRole,
+    local_authority: M9I3ReadOnlyProviderLocalAuthority,
+    _scoped_component: M8InstalledReadOnlyProviderEffectComponent,
+    provider_local_fabric: Sys4InstalledProviderLocalFabric,
+    executor_resource_envelope: Option<I3PrivateReadOnlyProviderResourceEnvelope>,
+    provider_execution: Sys5I3ProviderExecution,
+}
+
+#[cfg(test)]
+impl Sys5I3ProviderLocalExecution {
+    pub(crate) fn begin_read_only_provider_request(
+        &mut self,
+    ) -> Result<Sys5I3ProviderRequestCarrier, Sys5I3ProcessRuntimeError> {
+        self.provider_execution
+            .begin_request(self.role, &mut self.local_authority)
+    }
+
+    pub(crate) fn admit_read_only_provider_request_and_execute(
+        &mut self,
+        request: Sys5I3ProviderRequestCarrier,
+    ) -> Result<Sys5I3ProviderResultCarrier, Sys5I3ProcessRuntimeError> {
+        self.provider_execution.admit_request_and_execute(
+            self.role,
+            &mut self.local_authority,
+            self.executor_resource_envelope.as_ref(),
+            request,
+        )
+    }
+
+    pub(crate) fn admit_read_only_provider_result_and_consume(
+        &mut self,
+        result: Sys5I3ProviderResultCarrier,
+    ) -> Result<Sys5I3ProviderConsumeReceipt, Sys5I3ProcessRuntimeError> {
+        self.provider_execution.admit_result_and_consume(
+            self.role,
+            &mut self.local_authority,
+            result,
+        )
+    }
+
+    pub(crate) fn has_no_owner_execution_occurrences(&self) -> bool {
+        self.provider_local_fabric
+            .has_no_owner_execution_occurrences()
+    }
+
+    #[cfg(all(test, feature = "i3-process-test-seams"))]
+    pub(crate) fn configure_revalidation_test_retirement(
+        &mut self,
+        point: Sys5I3ProviderRevalidationTestPoint,
+        retirement: Sys5I3ProviderRevalidationTestRetirement,
+    ) -> Result<(), Sys5I3ProcessRuntimeError> {
+        self.provider_execution
+            .configure_revalidation_test_retirement(self.role, point, retirement)
+    }
+
+    #[cfg(feature = "i3-process-test-seams")]
+    pub(crate) fn test_only_ledger_facts(&self) -> Sys5I3ProviderLedgerTestFacts {
+        self.provider_execution.test_only_ledger_facts()
+    }
+}
+
+impl Sys5I3InstalledProviderChildRuntime {
+    /// Begin the distinct requester-to-executor provider carrier. This is
+    /// intentionally not an owner request or a generated owner message.
+    pub fn begin_read_only_provider_request(
+        &mut self,
+    ) -> Result<Sys5I3ProviderRequestCarrier, Sys5I3ProcessRuntimeError> {
+        self.provider_execution
+            .begin_request(self.role, &mut self.local_authority)
+    }
+
+    /// Admit a distinct provider request at the executor, reserve its only
+    /// bounded entry, synchronously invoke the B-local adapter after
+    /// CallStarted, then retain a typed result before release.
+    pub fn admit_read_only_provider_request_and_execute(
+        &mut self,
+        request: Sys5I3ProviderRequestCarrier,
+    ) -> Result<Sys5I3ProviderResultCarrier, Sys5I3ProcessRuntimeError> {
+        self.provider_execution.admit_request_and_execute(
+            self.role,
+            &mut self.local_authority,
+            self.executor_resource_envelope.as_ref(),
+            request,
+        )
+    }
+
+    /// Crate-private QUIC ingress. The adapter has already completed one
+    /// physical stream read and allocated a run/session/direction/ordinal
+    /// occurrence without inspecting the carrier. This method binds that
+    /// occurrence only after exact static carrier admission and before the
+    /// executor crosses the local host boundary.
+    pub(crate) fn admit_read_only_provider_request_and_execute_from_transport(
+        &mut self,
+        request: Sys5I3ProviderRequestCarrier,
+        request_receive: Sys5I3PrivateProviderTransportOccurrence,
+    ) -> Result<Sys5I3ProviderResultCarrier, Sys5I3ProcessRuntimeError> {
+        self.provider_execution
+            .admit_request_and_execute_with_transport_occurrence(
+                self.role,
+                &mut self.local_authority,
+                self.executor_resource_envelope.as_ref(),
+                request,
+                Some(request_receive),
+            )
+    }
+
+    /// Admit and consume a distinct provider result exactly once. The receipt
+    /// has no raw value or carrier accessor.
+    pub fn admit_read_only_provider_result_and_consume(
+        &mut self,
+        result: Sys5I3ProviderResultCarrier,
+    ) -> Result<Sys5I3ProviderConsumeReceipt, Sys5I3ProcessRuntimeError> {
+        self.provider_execution.admit_result_and_consume(
+            self.role,
+            &mut self.local_authority,
+            result,
+        )
+    }
+
+    /// Crate-private QUIC ingress for the one completed result read. The
+    /// opaque occurrence is retained only when this current requester-side
+    /// consume accepts the exact carrier; decoded bytes never issue it.
+    pub(crate) fn admit_read_only_provider_result_and_consume_from_transport(
+        &mut self,
+        result: Sys5I3ProviderResultCarrier,
+        result_receive: Sys5I3PrivateProviderTransportOccurrence,
+    ) -> Result<Sys5I3ProviderConsumeReceipt, Sys5I3ProcessRuntimeError> {
+        self.provider_execution
+            .admit_result_and_consume_with_transport_occurrence(
+                self.role,
+                &mut self.local_authority,
+                result,
+                Some(result_receive),
+            )
+    }
+
+    /// Reserve exactly one requester send occurrence before the provider
+    /// stream write. The returned opaque ticket can complete only that same
+    /// retained request/slot after the adapter's complete write succeeds.
+    pub(crate) fn reserve_provider_request_transport_send(
+        &mut self,
+        request: &Sys5I3ProviderRequestCarrier,
+        occurrence: Sys5I3PrivateProviderTransportOccurrence,
+    ) -> Result<Sys5I3PrivateProviderTransportWriteTicket, Sys5I3ProcessRuntimeError> {
+        self.provider_execution
+            .reserve_request_send_transport_occurrence(self.role, request, occurrence)
+    }
+
+    /// Reserve exactly one executor result-send occurrence only after M9
+    /// currentness has been revalidated against the retained released result.
+    pub(crate) fn reserve_provider_result_transport_send(
+        &mut self,
+        result: &Sys5I3ProviderResultCarrier,
+        occurrence: Sys5I3PrivateProviderTransportOccurrence,
+    ) -> Result<Sys5I3PrivateProviderTransportWriteTicket, Sys5I3ProcessRuntimeError> {
+        self.provider_execution
+            .reserve_result_send_transport_occurrence(
+                self.role,
+                &mut self.local_authority,
+                result,
+                occurrence,
+            )
+    }
+
+    /// Record one completed provider stream write at the ticket's retained
+    /// slot. A ticket is move-only and cannot issue a second frame.
+    pub(crate) fn complete_provider_transport_send(
+        &mut self,
+        ticket: Sys5I3PrivateProviderTransportWriteTicket,
+        completed: Sys5I3PrivateProviderTransportOccurrence,
+    ) -> Result<(), Sys5I3ProcessRuntimeError> {
+        self.provider_execution
+            .complete_provider_transport_write(self.role, ticket, completed)
+    }
+
+    /// Complete the finite requester-side fixture assertion only after the
+    /// current A-local consume retained this exact receipt. The expectation is
+    /// carried in A's trusted inherited control; callers cannot supply a
+    /// value, outcome, path, or fixture selector.
+    #[cfg(feature = "i3-process-test-seams")]
+    #[doc(hidden)]
+    pub fn complete_fixture_post_consume_assertion(
+        &mut self,
+        receipt: &Sys5I3ProviderConsumeReceipt,
+    ) -> Result<Sys5I3ProviderFixtureAssertionCompletion, Sys5I3ProcessRuntimeError> {
+        if self.role != Sys5I3ProviderChildRole::RequesterConsumer {
+            return Err(Sys5I3ProcessRuntimeError::new(
+                Sys5I3ProcessRuntimeErrorKind::RuntimeBootstrapRejected,
+            ));
+        }
+        if self.fixture_post_consume_assertion_completed {
+            return Err(Sys5I3ProcessRuntimeError::new(
+                Sys5I3ProcessRuntimeErrorKind::ResourceExhausted,
+            ));
+        }
+        let expected = self.requester_fixture_assertion.ok_or_else(|| {
+            Sys5I3ProcessRuntimeError::new(Sys5I3ProcessRuntimeErrorKind::RuntimeBootstrapRejected)
+        })?;
+        let completion = self
+            .provider_execution
+            .verifies_fixture_post_consume_assertion(receipt, expected)?;
+        if !self
+            .provider_local_fabric
+            .has_no_owner_execution_occurrences()
+        {
+            return Err(Sys5I3ProcessRuntimeError::new(
+                Sys5I3ProcessRuntimeErrorKind::RuntimeBootstrapRejected,
+            ));
+        }
+        self.fixture_post_consume_assertion_completed = true;
+        Ok(completion)
+    }
+
+    /// Report only whether this installed child inherited one sealed
+    /// provider-network conformance profile. The probe uses this routing bit
+    /// before choosing its fixed two-session schedule; it exposes neither the
+    /// selected profile nor any authority, carrier, result, or occurrence.
+    #[cfg(feature = "i3-process-test-seams")]
+    #[doc(hidden)]
+    pub fn has_fixed_provider_network_conformance_profile(&self) -> bool {
+        self.provider_network_conformance_profile.is_some()
+    }
+
+    #[cfg(feature = "i3-process-test-seams")]
+    pub(crate) fn fixed_provider_network_first_result_send_action(
+        &mut self,
+        result: &Sys5I3ProviderResultCarrier,
+    ) -> Result<Sys5I3FixedProviderNetworkFirstResultSendAction, Sys5I3ProcessRuntimeError> {
+        if self.role != Sys5I3ProviderChildRole::Executor
+            || !self.provider_execution.has_exact_released_executor_facts()
+            || self
+                .provider_execution
+                .prepare_released_result_replay(self.role, result)
+                .is_err()
+        {
+            return Err(Sys5I3ProcessRuntimeError::new(
+                Sys5I3ProcessRuntimeErrorKind::RuntimeBootstrapRejected,
+            ));
+        }
+        match self.fixed_provider_network_profile()? {
+            I3PrivateFixedProviderNetworkConformanceProfile::HeldResultFirstSendOnSecondSession => {
+                self.provider_network_conformance_facts.first_result_send_withheld = true;
+                Ok(Sys5I3FixedProviderNetworkFirstResultSendAction::Withhold)
+            }
+            I3PrivateFixedProviderNetworkConformanceProfile::SentResultLostBeforeConsume
+            | I3PrivateFixedProviderNetworkConformanceProfile::DuplicateProviderDeliveryOnSecondSession => {
+                Ok(Sys5I3FixedProviderNetworkFirstResultSendAction::Send)
+            }
+            I3PrivateFixedProviderNetworkConformanceProfile::PostCallEffectRetiredBeforeHeldResultSend => {
+                self.local_authority.retire_effect_authorization().map_err(|_| {
+                    Sys5I3ProcessRuntimeError::new(
+                        Sys5I3ProcessRuntimeErrorKind::RuntimeBootstrapRejected,
+                    )
+                })?;
+                self.provider_network_conformance_facts.first_result_send_withheld = true;
+                self.provider_network_conformance_facts.effect_retired_after_call = true;
+                Ok(Sys5I3FixedProviderNetworkFirstResultSendAction::Withhold)
+            }
+        }
+    }
+
+    #[cfg(feature = "i3-process-test-seams")]
+    pub(crate) fn record_fixed_provider_network_first_result_sent(
+        &mut self,
+        result: &Sys5I3ProviderResultCarrier,
+    ) -> Result<(), Sys5I3ProcessRuntimeError> {
+        if self.role != Sys5I3ProviderChildRole::Executor
+            || !matches!(
+                self.fixed_provider_network_profile()?,
+                I3PrivateFixedProviderNetworkConformanceProfile::SentResultLostBeforeConsume
+                    | I3PrivateFixedProviderNetworkConformanceProfile::DuplicateProviderDeliveryOnSecondSession
+            )
+            || !self
+                .provider_execution
+                .has_completed_transport_slot(self.role, result, 0)
+        {
+            return Err(Sys5I3ProcessRuntimeError::new(
+                Sys5I3ProcessRuntimeErrorKind::RuntimeBootstrapRejected,
+            ));
+        }
+        self.provider_network_conformance_facts
+            .first_result_send_completed = true;
+        Ok(())
+    }
+
+    #[cfg(feature = "i3-process-test-seams")]
+    pub(crate) fn fixed_provider_network_first_result_receive_action(
+        &self,
+    ) -> Result<Sys5I3FixedProviderNetworkFirstResultReceiveAction, Sys5I3ProcessRuntimeError> {
+        if self.role != Sys5I3ProviderChildRole::RequesterConsumer {
+            return Err(Sys5I3ProcessRuntimeError::new(
+                Sys5I3ProcessRuntimeErrorKind::RuntimeBootstrapRejected,
+            ));
+        }
+        match self.fixed_provider_network_profile()? {
+            I3PrivateFixedProviderNetworkConformanceProfile::HeldResultFirstSendOnSecondSession
+            | I3PrivateFixedProviderNetworkConformanceProfile::PostCallEffectRetiredBeforeHeldResultSend => {
+                Ok(Sys5I3FixedProviderNetworkFirstResultReceiveAction::ExpectFinishedWithoutFrame)
+            }
+            I3PrivateFixedProviderNetworkConformanceProfile::SentResultLostBeforeConsume => {
+                Ok(
+                    Sys5I3FixedProviderNetworkFirstResultReceiveAction::ReadAndDiscardBeforeConsume,
+                )
+            }
+            I3PrivateFixedProviderNetworkConformanceProfile::DuplicateProviderDeliveryOnSecondSession => {
+                Ok(Sys5I3FixedProviderNetworkFirstResultReceiveAction::Consume)
+            }
+        }
+    }
+
+    #[cfg(feature = "i3-process-test-seams")]
+    pub(crate) fn record_fixed_provider_network_first_result_finished_without_frame(
+        &mut self,
+    ) -> Result<(), Sys5I3ProcessRuntimeError> {
+        if self.role != Sys5I3ProviderChildRole::RequesterConsumer
+            || !matches!(
+                self.fixed_provider_network_profile()?,
+                I3PrivateFixedProviderNetworkConformanceProfile::HeldResultFirstSendOnSecondSession
+                    | I3PrivateFixedProviderNetworkConformanceProfile::PostCallEffectRetiredBeforeHeldResultSend
+            )
+            || !self.provider_execution.has_exact_requester_pending_facts()
+        {
+            return Err(Sys5I3ProcessRuntimeError::new(
+                Sys5I3ProcessRuntimeErrorKind::RuntimeBootstrapRejected,
+            ));
+        }
+        self.provider_network_conformance_facts
+            .first_result_receive_finished_without_frame = true;
+        Ok(())
+    }
+
+    #[cfg(feature = "i3-process-test-seams")]
+    pub(crate) fn record_fixed_provider_network_first_result_received_and_discarded_before_consume(
+        &mut self,
+        result: &Sys5I3ProviderResultCarrier,
+    ) -> Result<(), Sys5I3ProcessRuntimeError> {
+        if self.role != Sys5I3ProviderChildRole::RequesterConsumer
+            || self.fixed_provider_network_profile()?
+                != I3PrivateFixedProviderNetworkConformanceProfile::SentResultLostBeforeConsume
+            || !self.provider_execution.has_exact_requester_pending_facts()
+            || !self
+                .provider_execution
+                .matches_exact_requester_pending_result(result)
+        {
+            return Err(Sys5I3ProcessRuntimeError::new(
+                Sys5I3ProcessRuntimeErrorKind::RuntimeBootstrapRejected,
+            ));
+        }
+        self.provider_network_conformance_facts
+            .first_result_received_and_discarded_before_consume = true;
+        Ok(())
+    }
+
+    #[cfg(feature = "i3-process-test-seams")]
+    pub(crate) fn record_fixed_provider_network_first_result_consumed(
+        &mut self,
+        receipt: &Sys5I3ProviderConsumeReceipt,
+    ) -> Result<(), Sys5I3ProcessRuntimeError> {
+        if self.role != Sys5I3ProviderChildRole::RequesterConsumer
+            || self.fixed_provider_network_profile()?
+                != I3PrivateFixedProviderNetworkConformanceProfile::DuplicateProviderDeliveryOnSecondSession
+        {
+            return Err(Sys5I3ProcessRuntimeError::new(
+                Sys5I3ProcessRuntimeErrorKind::RuntimeBootstrapRejected,
+            ));
+        }
+        self.complete_fixture_post_consume_assertion(receipt)?;
+        self.provider_network_conformance_facts
+            .first_result_consumed = true;
+        Ok(())
+    }
+
+    #[cfg(feature = "i3-process-test-seams")]
+    pub(crate) fn prepare_fixed_provider_network_second_request_replay(
+        &self,
+    ) -> Result<Option<Sys5I3PrivateProviderConsumedRequestReplay>, Sys5I3ProcessRuntimeError> {
+        let profile = self.fixed_provider_network_profile()?;
+        if self.role != Sys5I3ProviderChildRole::RequesterConsumer {
+            return Err(Sys5I3ProcessRuntimeError::new(
+                Sys5I3ProcessRuntimeErrorKind::RuntimeBootstrapRejected,
+            ));
+        }
+        if profile != I3PrivateFixedProviderNetworkConformanceProfile::DuplicateProviderDeliveryOnSecondSession {
+            return Ok(None);
+        }
+        if !self
+            .provider_network_conformance_facts
+            .first_result_consumed
+        {
+            return Err(Sys5I3ProcessRuntimeError::new(
+                Sys5I3ProcessRuntimeErrorKind::RuntimeBootstrapRejected,
+            ));
+        }
+        self.provider_execution
+            .prepare_consumed_request_replay(self.role)
+            .map(Some)
+    }
+
+    #[cfg(feature = "i3-process-test-seams")]
+    pub(crate) fn reserve_fixed_provider_network_second_request_send(
+        &mut self,
+        replay: &Sys5I3PrivateProviderConsumedRequestReplay,
+        occurrence: Sys5I3PrivateProviderTransportOccurrence,
+    ) -> Result<Sys5I3PrivateProviderTransportWriteTicket, Sys5I3ProcessRuntimeError> {
+        if self.role != Sys5I3ProviderChildRole::RequesterConsumer
+            || self.fixed_provider_network_profile()?
+                != I3PrivateFixedProviderNetworkConformanceProfile::DuplicateProviderDeliveryOnSecondSession
+            || !self.provider_network_conformance_facts.first_result_consumed
+        {
+            return Err(Sys5I3ProcessRuntimeError::new(
+                Sys5I3ProcessRuntimeErrorKind::RuntimeBootstrapRejected,
+            ));
+        }
+        self.provider_execution
+            .reserve_consumed_request_replay_transport_occurrence(self.role, replay, occurrence)
+    }
+
+    #[cfg(feature = "i3-process-test-seams")]
+    pub(crate) fn record_fixed_provider_network_second_request_duplicate_rejected(
+        &mut self,
+        request: &Sys5I3ProviderRequestCarrier,
+    ) -> Result<(), Sys5I3ProcessRuntimeError> {
+        if self.role != Sys5I3ProviderChildRole::Executor
+            || self.fixed_provider_network_profile()?
+                != I3PrivateFixedProviderNetworkConformanceProfile::DuplicateProviderDeliveryOnSecondSession
+            || !self.provider_execution.has_exact_released_request(request)
+            || !self.provider_execution.has_exact_released_executor_facts()
+        {
+            return Err(Sys5I3ProcessRuntimeError::new(
+                Sys5I3ProcessRuntimeErrorKind::RuntimeBootstrapRejected,
+            ));
+        }
+        self.provider_network_conformance_facts
+            .second_request_duplicate_rejected = true;
+        Ok(())
+    }
+
+    #[cfg(feature = "i3-process-test-seams")]
+    pub(crate) fn expects_fixed_provider_network_second_request_replay(
+        &self,
+    ) -> Result<bool, Sys5I3ProcessRuntimeError> {
+        if self.role != Sys5I3ProviderChildRole::Executor {
+            return Err(Sys5I3ProcessRuntimeError::new(
+                Sys5I3ProcessRuntimeErrorKind::RuntimeBootstrapRejected,
+            ));
+        }
+        Ok(self.fixed_provider_network_profile()?
+            == I3PrivateFixedProviderNetworkConformanceProfile::DuplicateProviderDeliveryOnSecondSession)
+    }
+
+    #[cfg(feature = "i3-process-test-seams")]
+    pub(crate) fn fixed_provider_network_second_result_send_action(
+        &self,
+        result: &Sys5I3ProviderResultCarrier,
+    ) -> Result<Sys5I3FixedProviderNetworkSecondResultSendAction, Sys5I3ProcessRuntimeError> {
+        if self.role != Sys5I3ProviderChildRole::Executor
+            || self
+                .provider_execution
+                .prepare_released_result_replay(self.role, result)
+                .is_err()
+        {
+            return Err(Sys5I3ProcessRuntimeError::new(
+                Sys5I3ProcessRuntimeErrorKind::RuntimeBootstrapRejected,
+            ));
+        }
+        match self.fixed_provider_network_profile()? {
+            I3PrivateFixedProviderNetworkConformanceProfile::HeldResultFirstSendOnSecondSession
+                if self.provider_network_conformance_facts.first_result_send_withheld =>
+            {
+                Ok(Sys5I3FixedProviderNetworkSecondResultSendAction::Send)
+            }
+            I3PrivateFixedProviderNetworkConformanceProfile::SentResultLostBeforeConsume
+                if self.provider_network_conformance_facts.first_result_send_completed =>
+            {
+                Ok(Sys5I3FixedProviderNetworkSecondResultSendAction::FinishWithoutFrame)
+            }
+            I3PrivateFixedProviderNetworkConformanceProfile::DuplicateProviderDeliveryOnSecondSession
+                if self.provider_network_conformance_facts.first_result_send_completed
+                    && self
+                        .provider_network_conformance_facts
+                        .second_request_duplicate_rejected =>
+            {
+                Ok(Sys5I3FixedProviderNetworkSecondResultSendAction::Send)
+            }
+            I3PrivateFixedProviderNetworkConformanceProfile::PostCallEffectRetiredBeforeHeldResultSend
+                if self.provider_network_conformance_facts.first_result_send_withheld
+                    && self.provider_network_conformance_facts.effect_retired_after_call =>
+            {
+                Ok(Sys5I3FixedProviderNetworkSecondResultSendAction::ExpectCurrentnessRejection)
+            }
+            _ => Err(Sys5I3ProcessRuntimeError::new(
+                Sys5I3ProcessRuntimeErrorKind::RuntimeBootstrapRejected,
+            )),
+        }
+    }
+
+    #[cfg(feature = "i3-process-test-seams")]
+    pub(crate) fn prepare_fixed_provider_network_second_result_replay(
+        &self,
+        result: &Sys5I3ProviderResultCarrier,
+    ) -> Result<Sys5I3PrivateProviderReleasedResultReplay, Sys5I3ProcessRuntimeError> {
+        match self.fixed_provider_network_second_result_send_action(result)? {
+            Sys5I3FixedProviderNetworkSecondResultSendAction::Send
+            | Sys5I3FixedProviderNetworkSecondResultSendAction::ExpectCurrentnessRejection => {}
+            Sys5I3FixedProviderNetworkSecondResultSendAction::FinishWithoutFrame => {
+                return Err(Sys5I3ProcessRuntimeError::new(
+                    Sys5I3ProcessRuntimeErrorKind::RuntimeBootstrapRejected,
+                ));
+            }
+        }
+        self.provider_execution
+            .prepare_released_result_replay(self.role, result)
+    }
+
+    #[cfg(feature = "i3-process-test-seams")]
+    pub(crate) fn reserve_fixed_provider_network_result_send(
+        &mut self,
+        replay: &Sys5I3PrivateProviderReleasedResultReplay,
+        occurrence: Sys5I3PrivateProviderTransportOccurrence,
+    ) -> Result<Sys5I3PrivateProviderTransportWriteTicket, Sys5I3ProcessRuntimeError> {
+        self.reserve_provider_result_transport_send(replay.result(), occurrence)
+    }
+
+    #[cfg(feature = "i3-process-test-seams")]
+    pub(crate) fn record_fixed_provider_network_second_result_sent(
+        &mut self,
+        replay: &Sys5I3PrivateProviderReleasedResultReplay,
+    ) -> Result<(), Sys5I3ProcessRuntimeError> {
+        let expected_slot = match self.fixed_provider_network_profile()? {
+            I3PrivateFixedProviderNetworkConformanceProfile::HeldResultFirstSendOnSecondSession => 0,
+            I3PrivateFixedProviderNetworkConformanceProfile::DuplicateProviderDeliveryOnSecondSession => 1,
+            _ => {
+                return Err(Sys5I3ProcessRuntimeError::new(
+                    Sys5I3ProcessRuntimeErrorKind::RuntimeBootstrapRejected,
+                ));
+            }
+        };
+        if self.role != Sys5I3ProviderChildRole::Executor
+            || !self.provider_execution.has_completed_transport_slot(
+                self.role,
+                replay.result(),
+                expected_slot,
+            )
+        {
+            return Err(Sys5I3ProcessRuntimeError::new(
+                Sys5I3ProcessRuntimeErrorKind::RuntimeBootstrapRejected,
+            ));
+        }
+        self.provider_network_conformance_facts
+            .second_result_send_completed = true;
+        Ok(())
+    }
+
+    #[cfg(feature = "i3-process-test-seams")]
+    pub(crate) fn record_fixed_provider_network_second_result_currentness_rejected(
+        &mut self,
+        result: &Sys5I3ProviderResultCarrier,
+    ) -> Result<(), Sys5I3ProcessRuntimeError> {
+        if self.role != Sys5I3ProviderChildRole::Executor
+            || self.fixed_provider_network_profile()?
+                != I3PrivateFixedProviderNetworkConformanceProfile::PostCallEffectRetiredBeforeHeldResultSend
+            || !self.provider_network_conformance_facts.effect_retired_after_call
+            || !self
+                .provider_execution
+                .has_empty_result_transport_slot(result, 0)
+            || !self
+                .provider_execution
+                .has_empty_result_transport_slot(result, 1)
+            || !self.provider_execution.has_exact_released_executor_facts()
+        {
+            return Err(Sys5I3ProcessRuntimeError::new(
+                Sys5I3ProcessRuntimeErrorKind::RuntimeBootstrapRejected,
+            ));
+        }
+        self.provider_network_conformance_facts
+            .second_result_send_currentness_rejected = true;
+        Ok(())
+    }
+
+    #[cfg(feature = "i3-process-test-seams")]
+    pub(crate) fn fixed_provider_network_second_result_receive_action(
+        &self,
+    ) -> Result<Sys5I3FixedProviderNetworkSecondResultReceiveAction, Sys5I3ProcessRuntimeError>
+    {
+        if self.role != Sys5I3ProviderChildRole::RequesterConsumer {
+            return Err(Sys5I3ProcessRuntimeError::new(
+                Sys5I3ProcessRuntimeErrorKind::RuntimeBootstrapRejected,
+            ));
+        }
+        match self.fixed_provider_network_profile()? {
+            I3PrivateFixedProviderNetworkConformanceProfile::HeldResultFirstSendOnSecondSession => {
+                Ok(Sys5I3FixedProviderNetworkSecondResultReceiveAction::Consume)
+            }
+            I3PrivateFixedProviderNetworkConformanceProfile::SentResultLostBeforeConsume
+            | I3PrivateFixedProviderNetworkConformanceProfile::PostCallEffectRetiredBeforeHeldResultSend => {
+                Ok(Sys5I3FixedProviderNetworkSecondResultReceiveAction::ExpectFinishedWithoutFrame)
+            }
+            I3PrivateFixedProviderNetworkConformanceProfile::DuplicateProviderDeliveryOnSecondSession => {
+                Ok(Sys5I3FixedProviderNetworkSecondResultReceiveAction::ExpectDuplicateRejection)
+            }
+        }
+    }
+
+    #[cfg(feature = "i3-process-test-seams")]
+    pub(crate) fn record_fixed_provider_network_second_result_finished_without_frame(
+        &mut self,
+    ) -> Result<(), Sys5I3ProcessRuntimeError> {
+        if self.role != Sys5I3ProviderChildRole::RequesterConsumer
+            || !matches!(
+                self.fixed_provider_network_profile()?,
+                I3PrivateFixedProviderNetworkConformanceProfile::SentResultLostBeforeConsume
+                    | I3PrivateFixedProviderNetworkConformanceProfile::PostCallEffectRetiredBeforeHeldResultSend
+            )
+            || !self.provider_execution.has_exact_requester_pending_facts()
+        {
+            return Err(Sys5I3ProcessRuntimeError::new(
+                Sys5I3ProcessRuntimeErrorKind::RuntimeBootstrapRejected,
+            ));
+        }
+        self.provider_network_conformance_facts
+            .second_result_receive_finished_without_frame = true;
+        Ok(())
+    }
+
+    #[cfg(feature = "i3-process-test-seams")]
+    pub(crate) fn record_fixed_provider_network_second_result_consumed(
+        &mut self,
+        receipt: &Sys5I3ProviderConsumeReceipt,
+    ) -> Result<(), Sys5I3ProcessRuntimeError> {
+        if self.role != Sys5I3ProviderChildRole::RequesterConsumer
+            || self.fixed_provider_network_profile()?
+                != I3PrivateFixedProviderNetworkConformanceProfile::HeldResultFirstSendOnSecondSession
+            || !self
+                .provider_network_conformance_facts
+                .first_result_receive_finished_without_frame
+        {
+            return Err(Sys5I3ProcessRuntimeError::new(
+                Sys5I3ProcessRuntimeErrorKind::RuntimeBootstrapRejected,
+            ));
+        }
+        self.complete_fixture_post_consume_assertion(receipt)?;
+        self.provider_network_conformance_facts
+            .second_result_consumed = true;
+        Ok(())
+    }
+
+    #[cfg(feature = "i3-process-test-seams")]
+    pub(crate) fn record_fixed_provider_network_second_result_duplicate_rejected(
+        &mut self,
+        result: &Sys5I3ProviderResultCarrier,
+    ) -> Result<(), Sys5I3ProcessRuntimeError> {
+        if self.role != Sys5I3ProviderChildRole::RequesterConsumer
+            || self.fixed_provider_network_profile()?
+                != I3PrivateFixedProviderNetworkConformanceProfile::DuplicateProviderDeliveryOnSecondSession
+            || !self.provider_network_conformance_facts.first_result_consumed
+            || !self.provider_execution.has_exact_consumed_result(result)
+        {
+            return Err(Sys5I3ProcessRuntimeError::new(
+                Sys5I3ProcessRuntimeErrorKind::RuntimeBootstrapRejected,
+            ));
+        }
+        self.provider_network_conformance_facts
+            .second_result_duplicate_rejected = true;
+        Ok(())
+    }
+
+    #[cfg(feature = "i3-process-test-seams")]
+    #[doc(hidden)]
+    pub fn complete_fixed_provider_network_conformance_if_selected(
+        &mut self,
+    ) -> Result<Option<Sys5I3FixedProviderNetworkConformanceCompletion>, Sys5I3ProcessRuntimeError>
+    {
+        let Some(profile) = self.provider_network_conformance_profile else {
+            return Ok(None);
+        };
+        if self.provider_network_conformance_completed
+            || self.terminal_observation_export_reserved
+            || !self
+                .provider_local_fabric
+                .has_no_owner_execution_occurrences()
+        {
+            return Err(Sys5I3ProcessRuntimeError::new(
+                Sys5I3ProcessRuntimeErrorKind::RuntimeBootstrapRejected,
+            ));
+        }
+        let facts = &self.provider_network_conformance_facts;
+        let completed = match (self.role, profile) {
+            (
+                Sys5I3ProviderChildRole::Executor,
+                I3PrivateFixedProviderNetworkConformanceProfile::HeldResultFirstSendOnSecondSession,
+            ) => {
+                facts.first_result_send_withheld
+                    && facts.second_result_send_completed
+                    && self.provider_execution.has_exact_released_executor_facts()
+            }
+            (
+                Sys5I3ProviderChildRole::RequesterConsumer,
+                I3PrivateFixedProviderNetworkConformanceProfile::HeldResultFirstSendOnSecondSession,
+            ) => {
+                facts.first_result_receive_finished_without_frame
+                    && facts.second_result_consumed
+                    && self.fixture_post_consume_assertion_completed
+                    && self
+                        .provider_execution
+                        .has_completed_terminal_facts_for_role(self.role)
+            }
+            (
+                Sys5I3ProviderChildRole::Executor,
+                I3PrivateFixedProviderNetworkConformanceProfile::SentResultLostBeforeConsume,
+            ) => {
+                facts.first_result_send_completed
+                    && self.provider_execution.has_exact_released_executor_facts()
+            }
+            (
+                Sys5I3ProviderChildRole::RequesterConsumer,
+                I3PrivateFixedProviderNetworkConformanceProfile::SentResultLostBeforeConsume,
+            ) => {
+                facts.first_result_received_and_discarded_before_consume
+                    && facts.second_result_receive_finished_without_frame
+                    && self.provider_execution.has_exact_requester_pending_facts()
+            }
+            (
+                Sys5I3ProviderChildRole::Executor,
+                I3PrivateFixedProviderNetworkConformanceProfile::DuplicateProviderDeliveryOnSecondSession,
+            ) => {
+                facts.first_result_send_completed
+                    && facts.second_request_duplicate_rejected
+                    && facts.second_result_send_completed
+                    && self.provider_execution.has_exact_released_executor_facts()
+            }
+            (
+                Sys5I3ProviderChildRole::RequesterConsumer,
+                I3PrivateFixedProviderNetworkConformanceProfile::DuplicateProviderDeliveryOnSecondSession,
+            ) => {
+                facts.first_result_consumed
+                    && facts.second_result_duplicate_rejected
+                    && self.fixture_post_consume_assertion_completed
+                    && self
+                        .provider_execution
+                        .has_completed_terminal_facts_for_role(self.role)
+            }
+            (
+                Sys5I3ProviderChildRole::Executor,
+                I3PrivateFixedProviderNetworkConformanceProfile::PostCallEffectRetiredBeforeHeldResultSend,
+            ) => {
+                facts.first_result_send_withheld
+                    && facts.effect_retired_after_call
+                    && facts.second_result_send_currentness_rejected
+                    && self.provider_execution.has_exact_released_executor_facts()
+            }
+            (
+                Sys5I3ProviderChildRole::RequesterConsumer,
+                I3PrivateFixedProviderNetworkConformanceProfile::PostCallEffectRetiredBeforeHeldResultSend,
+            ) => {
+                facts.first_result_receive_finished_without_frame
+                    && facts.second_result_receive_finished_without_frame
+                    && self.provider_execution.has_exact_requester_pending_facts()
+            }
+        };
+        if !completed {
+            return Err(Sys5I3ProcessRuntimeError::new(
+                Sys5I3ProcessRuntimeErrorKind::RuntimeBootstrapRejected,
+            ));
+        }
+        let audit_error = match self.provider_terminal_audit() {
+            Ok(_) => {
+                return Err(Sys5I3ProcessRuntimeError::new(
+                    Sys5I3ProcessRuntimeErrorKind::RuntimeBootstrapRejected,
+                ));
+            }
+            Err(error) => error,
+        };
+        if audit_error.kind() != Sys5I3ProcessRuntimeErrorKind::RuntimeBootstrapRejected
+            || self.terminal_observation_export_reserved
+        {
+            return Err(Sys5I3ProcessRuntimeError::new(
+                Sys5I3ProcessRuntimeErrorKind::RuntimeBootstrapRejected,
+            ));
+        }
+        self.provider_network_conformance_completed = true;
+        Ok(Some(Sys5I3FixedProviderNetworkConformanceCompletion {
+            _private: (),
+        }))
+    }
+
+    #[cfg(feature = "i3-process-test-seams")]
+    fn fixed_provider_network_profile(
+        &self,
+    ) -> Result<I3PrivateFixedProviderNetworkConformanceProfile, Sys5I3ProcessRuntimeError> {
+        self.provider_network_conformance_profile.ok_or_else(|| {
+            Sys5I3ProcessRuntimeError::new(Sys5I3ProcessRuntimeErrorKind::RuntimeBootstrapRejected)
+        })
+    }
+
+    /// Run exactly one sealed, source-real terminal-observation conformance
+    /// experiment after normal installed-child execution. A launch without a
+    /// profile returns `None` and must follow the ordinary terminal-audit
+    /// path; callers cannot use this method to make an ordinary denied audit
+    /// look like a successful experiment.
+    #[cfg(feature = "i3-process-test-seams")]
+    #[doc(hidden)]
+    pub fn complete_fixed_terminal_observation_conformance_if_selected(
+        &mut self,
+    ) -> Result<
+        Option<Sys5I3FixedTerminalObservationConformanceCompletion>,
+        Sys5I3ProcessRuntimeError,
+    > {
+        let Some(profile) = self.terminal_observation_conformance_profile else {
+            return Ok(None);
+        };
+        if self.terminal_observation_conformance_completed
+            || !self
+                .provider_execution
+                .has_completed_terminal_facts_for_role(self.role)
+            || (self.role == Sys5I3ProviderChildRole::RequesterConsumer
+                && !self.fixture_post_consume_assertion_completed)
+            || !self
+                .provider_local_fabric
+                .has_no_owner_execution_occurrences()
+        {
+            return Err(Sys5I3ProcessRuntimeError::new(
+                Sys5I3ProcessRuntimeErrorKind::RuntimeBootstrapRejected,
+            ));
+        }
+
+        match profile {
+            I3PrivateFixedTerminalObservationConformanceProfile::RetireBeforeInitialPreflight => {
+                self.local_authority
+                    .retire_terminal_observation_authorization()
+                    .map_err(|_| {
+                        Sys5I3ProcessRuntimeError::new(
+                            Sys5I3ProcessRuntimeErrorKind::RuntimeBootstrapRejected,
+                        )
+                    })?;
+                let error = match self.provider_terminal_audit() {
+                    Ok(_) => {
+                        return Err(Sys5I3ProcessRuntimeError::new(
+                            Sys5I3ProcessRuntimeErrorKind::RuntimeBootstrapRejected,
+                        ));
+                    }
+                    Err(error) => error,
+                };
+                if error.kind() != Sys5I3ProcessRuntimeErrorKind::MissingCapability
+                    || self.terminal_observation_export_reserved
+                {
+                    return Err(Sys5I3ProcessRuntimeError::new(
+                        Sys5I3ProcessRuntimeErrorKind::RuntimeBootstrapRejected,
+                    ));
+                }
+            }
+            I3PrivateFixedTerminalObservationConformanceProfile::RetireAfterProjectionBeforeCommit => {
+                let error = match self.provider_terminal_audit() {
+                    Ok(_) => {
+                        return Err(Sys5I3ProcessRuntimeError::new(
+                            Sys5I3ProcessRuntimeErrorKind::RuntimeBootstrapRejected,
+                        ));
+                    }
+                    Err(error) => error,
+                };
+                if error.kind() != Sys5I3ProcessRuntimeErrorKind::MissingCapability
+                    || !self.terminal_observation_export_reserved
+                {
+                    return Err(Sys5I3ProcessRuntimeError::new(
+                        Sys5I3ProcessRuntimeErrorKind::RuntimeBootstrapRejected,
+                    ));
+                }
+            }
+            I3PrivateFixedTerminalObservationConformanceProfile::RepeatExport => {
+                let audit = self.provider_terminal_audit()?;
+                audit.encode_observer_view_body().map_err(|_| {
+                    Sys5I3ProcessRuntimeError::new(
+                        Sys5I3ProcessRuntimeErrorKind::RuntimeBootstrapRejected,
+                    )
+                })?;
+                let error = match self.provider_terminal_audit() {
+                    Ok(_) => {
+                        return Err(Sys5I3ProcessRuntimeError::new(
+                            Sys5I3ProcessRuntimeErrorKind::RuntimeBootstrapRejected,
+                        ));
+                    }
+                    Err(error) => error,
+                };
+                if error.kind() != Sys5I3ProcessRuntimeErrorKind::ResourceExhausted
+                    || !self.terminal_observation_export_reserved
+                {
+                    return Err(Sys5I3ProcessRuntimeError::new(
+                        Sys5I3ProcessRuntimeErrorKind::RuntimeBootstrapRejected,
+                    ));
+                }
+            }
+            I3PrivateFixedTerminalObservationConformanceProfile::EffectRetiredObserverCurrent => {
+                self.local_authority.retire_effect_authorization().map_err(|_| {
+                    Sys5I3ProcessRuntimeError::new(
+                        Sys5I3ProcessRuntimeErrorKind::RuntimeBootstrapRejected,
+                    )
+                })?;
+                // Retiring effect use after the retained call must reject an
+                // actual next use at its ordinary local M9 boundary.  The
+                // failed attempt is deliberately before any new ledger
+                // reservation, adapter entry, or consume fact; terminal
+                // observation stays separately current for the already
+                // retained terminal fact.
+                let facts_before = self.provider_execution.test_only_ledger_facts();
+                let error = match self
+                    .provider_execution
+                    .attempt_post_effect_retirement_provider_use(
+                        self.role,
+                        &mut self.local_authority,
+                    ) {
+                    Ok(()) => {
+                        return Err(Sys5I3ProcessRuntimeError::new(
+                            Sys5I3ProcessRuntimeErrorKind::RuntimeBootstrapRejected,
+                        ));
+                    }
+                    Err(error) => error,
+                };
+                if error.kind() != Sys5I3ProcessRuntimeErrorKind::MissingCapability
+                    || facts_before != self.provider_execution.test_only_ledger_facts()
+                {
+                    return Err(Sys5I3ProcessRuntimeError::new(
+                        Sys5I3ProcessRuntimeErrorKind::RuntimeBootstrapRejected,
+                    ));
+                }
+                let audit = self.provider_terminal_audit()?;
+                audit.encode_observer_view_body().map_err(|_| {
+                    Sys5I3ProcessRuntimeError::new(
+                        Sys5I3ProcessRuntimeErrorKind::RuntimeBootstrapRejected,
+                    )
+                })?;
+            }
+        }
+
+        self.terminal_observation_conformance_completed = true;
+        Ok(Some(Sys5I3FixedTerminalObservationConformanceCompletion {
+            _private: (),
+        }))
+    }
+
+    /// Project one fixed, reference-only terminal audit only after the
+    /// separate installed M9 Observation lineage is current for this exact
+    /// provider carrier. Effect-use authority is neither checked nor reused
+    /// here: a retained post-call fact can remain observable after effect
+    /// retirement when membership, contract, observer policy, and profile
+    /// correspondence are still current.
+    pub fn provider_terminal_audit(
+        &mut self,
+    ) -> Result<Sys5I3ProviderTerminalAudit, Sys5I3ProcessRuntimeError> {
+        #[cfg(feature = "i3-process-test-seams")]
+        if self.provider_network_conformance_profile.is_some() {
+            // A sealed two-session conformance witness has no truthful normal
+            // v2 terminal-audit chronology. It must complete without spending
+            // an observer export allowance or emitting an audit candidate.
+            return Err(Sys5I3ProcessRuntimeError::new(
+                Sys5I3ProcessRuntimeErrorKind::RuntimeBootstrapRejected,
+            ));
+        }
+        if self.terminal_observation_export_reserved {
+            return Err(Sys5I3ProcessRuntimeError::new(
+                Sys5I3ProcessRuntimeErrorKind::ResourceExhausted,
+            ));
+        }
+        if !self
+            .provider_local_fabric
+            .has_no_owner_execution_occurrences()
+        {
+            return Err(Sys5I3ProcessRuntimeError::new(
+                Sys5I3ProcessRuntimeErrorKind::RuntimeBootstrapRejected,
+            ));
+        }
+        let permit = self
+            .local_authority
+            .preflight_provider_terminal_observation_export(
+                self.provider_execution.provider_carrier_binding(),
+            )
+            .map_err(|_| {
+                Sys5I3ProcessRuntimeError::new(Sys5I3ProcessRuntimeErrorKind::MissingCapability)
+            })?;
+        if !permit.permits_fixed_v2_terminal_export() {
+            return Err(Sys5I3ProcessRuntimeError::new(
+                Sys5I3ProcessRuntimeErrorKind::MissingCapability,
+            ));
+        }
+        // Spend the one fixed export allowance before allocating or encoding
+        // the projection. A later projection or commit-currentness failure
+        // deliberately does not refund it, so repeated attempts cannot turn
+        // observer work into an unbounded retry surface.
+        self.terminal_observation_export_reserved = true;
+        let audit = self
+            .provider_execution
+            .terminal_audit_projection(self.role)
+            .map_err(|_| {
+                Sys5I3ProcessRuntimeError::new(
+                    Sys5I3ProcessRuntimeErrorKind::RuntimeBootstrapRejected,
+                )
+            })?;
+        #[cfg(feature = "i3-process-test-seams")]
+        if self.terminal_observation_conformance_profile
+            == Some(
+                I3PrivateFixedTerminalObservationConformanceProfile::RetireAfterProjectionBeforeCommit,
+            )
+        {
+            self.local_authority
+                .retire_terminal_observation_authorization()
+                .map_err(|_| {
+                    Sys5I3ProcessRuntimeError::new(
+                        Sys5I3ProcessRuntimeErrorKind::RuntimeBootstrapRejected,
+                    )
+                })?;
+        }
+        let commit_permit = self
+            .local_authority
+            .preflight_provider_terminal_observation_export(
+                self.provider_execution.provider_carrier_binding(),
+            )
+            .map_err(|_| {
+                Sys5I3ProcessRuntimeError::new(Sys5I3ProcessRuntimeErrorKind::MissingCapability)
+            })?;
+        if !commit_permit.permits_fixed_v2_terminal_export() {
+            return Err(Sys5I3ProcessRuntimeError::new(
+                Sys5I3ProcessRuntimeErrorKind::MissingCapability,
+            ));
+        }
+        Ok(audit)
+    }
+
+    /// Bind only physical QUIC identity facts parsed by the provider child
+    /// from its inherited transport blob. The installed runtime is the sole
+    /// producer of this control, so a generic decoded image/control cannot
+    /// create an executable provider transport session.
+    pub fn bind_provider_localnet_transport(
+        &self,
+        run_ref: &str,
+        local_spki_ref: &str,
+        peer_spki_ref: &str,
+    ) -> Result<Sys5I3TrustedProviderLocalnetControl, Sys5I3LocalnetControlError> {
+        if run_ref.is_empty()
+            || local_spki_ref.is_empty()
+            || peer_spki_ref.is_empty()
+            || local_spki_ref == peer_spki_ref
+            || self.role == self.peer_role
+            || self.expected_start_binding.slot_name == self.peer_start_binding.slot_name
+            || self.expected_start_binding.inactive_provider.is_none()
+            || !self.peer_start_binding.is_structurally_valid()
+        {
+            return Err(Sys5I3LocalnetControlError::new(
+                Sys5I3LocalnetControlErrorKind::MalformedControl,
+            ));
+        }
+        Ok(Sys5I3TrustedProviderLocalnetControl {
+            run_ref: run_ref.to_string(),
+            local_role: self.role,
+            peer_role: self.peer_role,
+            local_spki_ref: local_spki_ref.to_string(),
+            peer_spki_ref: peer_spki_ref.to_string(),
+            expected_start_binding: self.expected_start_binding.clone(),
+            peer_start_binding: self.peer_start_binding.clone(),
+            #[cfg(feature = "i3-process-test-seams")]
+            fixed_provider_network_conformance_enabled: self
+                .provider_network_conformance_profile
+                .is_some(),
+        })
+    }
+}
+
+/// Opaque input to the sole supervised provider-localnet launcher. It owns
+/// the real setup guard through child reaping and exposes only one-shot
+/// privileged image/control operations, never authority or resource payloads.
+#[doc(hidden)]
+pub struct Sys5I3PreparedProviderLocalnetLaunch {
+    cohort: Sys5I3InactiveProviderCohort,
+    setup: I3TrustedReadOnlyProviderFixtureSetup,
+    child_routes: BTreeMap<Sys5I3ProviderChildRole, Sys5I3ProviderChildRoute>,
+    provider_peer_expected_start_bindings:
+        BTreeMap<Sys5I3ProviderChildRole, Sys5I3ExpectedStartBinding>,
+    image_written_roles: BTreeSet<Sys5I3ProviderChildRole>,
+    control_attempted_roles: BTreeSet<Sys5I3ProviderChildRole>,
+}
+
+impl std::fmt::Debug for Sys5I3PreparedProviderLocalnetLaunch {
+    fn fmt(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        formatter.write_str("Sys5I3PreparedProviderLocalnetLaunch(..)")
+    }
+}
+
+impl Sys5I3PreparedProviderLocalnetLaunch {
+    pub(crate) fn from_inactive_provider_cohort(
+        cohort: Sys5I3InactiveProviderCohort,
+        setup: I3TrustedReadOnlyProviderFixtureSetup,
+    ) -> Result<Self, Sys5I3ProcessRuntimeError> {
+        if !setup.matches_live_context(&cohort.setup_context)
+            || !cohort.admission.has_current_composite_seal()
+        {
+            return Err(Sys5I3ProcessRuntimeError::new(
+                Sys5I3ProcessRuntimeErrorKind::InactiveProviderBindingNotCurrent,
+            ));
+        }
+        let mut child_routes = BTreeMap::new();
+        for role in [
+            Sys5I3ProviderChildRole::RequesterConsumer,
+            Sys5I3ProviderChildRole::Executor,
+        ] {
+            let route = cohort.provider_child_route(role).ok_or_else(|| {
+                Sys5I3ProcessRuntimeError::new(
+                    Sys5I3ProcessRuntimeErrorKind::RuntimeBootstrapRejected,
+                )
+            })?;
+            let role_snapshot = cohort
+                .admission
+                .i3_private_provider_role_snapshot(role.m9_role())
+                .map_err(|_| {
+                    Sys5I3ProcessRuntimeError::new(
+                        Sys5I3ProcessRuntimeErrorKind::InactiveProviderBindingNotCurrent,
+                    )
+                })?;
+            let route_loci = cohort
+                .images
+                .get(route.slot_name())
+                .and_then(Option::as_ref)
+                .map(|image| &image.assigned_loci)
+                .ok_or_else(|| {
+                    Sys5I3ProcessRuntimeError::new(
+                        Sys5I3ProcessRuntimeErrorKind::RuntimeBootstrapRejected,
+                    )
+                })?;
+            if !role_snapshot.matches_provider_child_installation(
+                role.m9_role(),
+                cohort.checked.program_identity().stable_key().as_str(),
+                &setup.i3_private_resource_runtime_nonce(),
+                route_loci,
+            ) {
+                return Err(Sys5I3ProcessRuntimeError::new(
+                    Sys5I3ProcessRuntimeErrorKind::RuntimeBootstrapRejected,
+                ));
+            }
+            if child_routes.insert(role, route).is_some() {
+                return Err(Sys5I3ProcessRuntimeError::new(
+                    Sys5I3ProcessRuntimeErrorKind::RuntimeBootstrapRejected,
+                ));
+            }
+        }
+        let requester_route = child_routes
+            .get(&Sys5I3ProviderChildRole::RequesterConsumer)
+            .ok_or_else(|| {
+                Sys5I3ProcessRuntimeError::new(
+                    Sys5I3ProcessRuntimeErrorKind::RuntimeBootstrapRejected,
+                )
+            })?;
+        let executor_route = child_routes
+            .get(&Sys5I3ProviderChildRole::Executor)
+            .ok_or_else(|| {
+                Sys5I3ProcessRuntimeError::new(
+                    Sys5I3ProcessRuntimeErrorKind::RuntimeBootstrapRejected,
+                )
+            })?;
+        let requester_expected = cohort
+            .expected_start_bindings
+            .get(requester_route.slot_name())
+            .and_then(Option::as_ref)
+            .cloned()
+            .ok_or_else(|| {
+                Sys5I3ProcessRuntimeError::new(
+                    Sys5I3ProcessRuntimeErrorKind::RuntimeBootstrapRejected,
+                )
+            })?;
+        let executor_expected = cohort
+            .expected_start_bindings
+            .get(executor_route.slot_name())
+            .and_then(Option::as_ref)
+            .cloned()
+            .ok_or_else(|| {
+                Sys5I3ProcessRuntimeError::new(
+                    Sys5I3ProcessRuntimeErrorKind::RuntimeBootstrapRejected,
+                )
+            })?;
+        let provider_peer_expected_start_bindings = BTreeMap::from([
+            (
+                Sys5I3ProviderChildRole::RequesterConsumer,
+                executor_expected,
+            ),
+            (Sys5I3ProviderChildRole::Executor, requester_expected),
+        ]);
+        Ok(Self {
+            cohort,
+            setup,
+            child_routes,
+            provider_peer_expected_start_bindings,
+            image_written_roles: BTreeSet::new(),
+            control_attempted_roles: BTreeSet::new(),
+        })
+    }
+
+    fn is_current(&self) -> bool {
+        self.setup.matches_live_context(&self.cohort.setup_context)
+            && self.cohort.admission.has_current_composite_seal()
+    }
+
+    /// Report only whether this opaque launch was created by one of the four
+    /// fixed source-real observer conformance factories. The profile itself,
+    /// its expected outcome, and all authority facts remain private to the
+    /// trusted control path. The probe uses this before spawning either child
+    /// so an ordinary launch cannot enter its harness-only validation runner.
+    #[cfg(feature = "i3-process-test-seams")]
+    #[doc(hidden)]
+    pub fn has_fixed_terminal_observation_conformance_profile(&self) -> bool {
+        self.is_current()
+            && self
+                .setup
+                .i3_private_terminal_observation_conformance_profile()
+                .is_some()
+    }
+
+    /// Report only whether this opaque launch was created by one of the fixed
+    /// source-real provider-network conformance factories. The selected
+    /// schedule, its expected terminal state, and all authority facts remain
+    /// private to trusted setup and FD3 control. The probe uses this solely to
+    /// reject ordinary launches before either child is spawned.
+    #[cfg(feature = "i3-process-test-seams")]
+    #[doc(hidden)]
+    pub fn has_fixed_provider_network_conformance_profile(&self) -> bool {
+        self.is_current()
+            && self
+                .setup
+                .i3_private_provider_network_conformance_profile()
+                .is_some()
+    }
+
+    #[cfg(test)]
+    pub(crate) fn test_only_peer_start_binding_descriptor_for_role(
+        &self,
+        role: Sys5I3ProviderChildRole,
+    ) -> Result<PrivateProviderPeerStartBinding, Sys5I3ProviderLaunchError> {
+        let peer = self
+            .provider_peer_expected_start_bindings
+            .get(&role)
+            .ok_or_else(|| {
+                Sys5I3ProviderLaunchError::new(
+                    Sys5I3ProviderLaunchErrorKind::ProviderControlConstructionRejected,
+                )
+            })?;
+        PrivateProviderPeerStartBinding::try_from(peer).map_err(|_| {
+            Sys5I3ProviderLaunchError::new(
+                Sys5I3ProviderLaunchErrorKind::ProviderControlConstructionRejected,
+            )
+        })
+    }
+
+    #[cfg(test)]
+    pub(crate) fn test_only_peer_start_binding_descriptor_matches_parent_held_binding(
+        &self,
+        role: Sys5I3ProviderChildRole,
+        candidate: &PrivateProviderPeerStartBinding,
+    ) -> Result<(), Sys5I3ProviderLaunchError> {
+        let parent_held_binding = self
+            .provider_peer_expected_start_bindings
+            .get(&role)
+            .ok_or_else(|| {
+                Sys5I3ProviderLaunchError::new(
+                    Sys5I3ProviderLaunchErrorKind::ProviderControlConstructionRejected,
+                )
+            })?;
+        if candidate.matches_parent_held_binding(parent_held_binding) {
+            Ok(())
+        } else {
+            Err(Sys5I3ProviderLaunchError::new(
+                Sys5I3ProviderLaunchErrorKind::ProviderControlConstructionRejected,
+            ))
+        }
+    }
+
+    /// Return only the selected physical routing facts for a provider child.
+    /// The caller cannot obtain the corresponding image/control through this
+    /// view.
+    pub fn child_route(
+        &self,
+        role: Sys5I3ProviderChildRole,
+    ) -> Result<Sys5I3ProviderChildRoute, Sys5I3ProviderLaunchError> {
+        if !self.is_current() {
+            return Err(Sys5I3ProviderLaunchError::new(
+                Sys5I3ProviderLaunchErrorKind::InactiveProviderBindingNotCurrent,
+            ));
+        }
+        self.child_routes.get(&role).cloned().ok_or_else(|| {
+            Sys5I3ProviderLaunchError::new(Sys5I3ProviderLaunchErrorKind::InvalidChildRole)
+        })
+    }
+
+    /// Consume and write exactly one tagged provider image after probe child
+    /// registration. A failed write spends the image and never enables a
+    /// later control write or image replay.
+    pub fn write_provider_child_image_once<W: std::io::Write>(
+        &mut self,
+        role: Sys5I3ProviderChildRole,
+        writer: &mut W,
+    ) -> Result<(), Sys5I3ProviderLaunchError> {
+        let route = self.child_route(role)?;
+        let image = self
+            .cohort
+            .take_process_image(route.slot_name())
+            .map_err(|_| {
+                Sys5I3ProviderLaunchError::new(
+                    Sys5I3ProviderLaunchErrorKind::ProviderChildImageAlreadyTaken,
+                )
+            })?;
+        let bytes = Sys5I3PrivateProcessCodec::private_provisional_v1()
+            .encode_image(image)
+            .map_err(|_| {
+                Sys5I3ProviderLaunchError::new(
+                    Sys5I3ProviderLaunchErrorKind::ProviderChildImageWriteRejected,
+                )
+            })?;
+        let result = writer
+            .write_all(&bytes)
+            .and_then(|_| writer.flush())
+            .map_err(|_| {
+                Sys5I3ProviderLaunchError::new(
+                    Sys5I3ProviderLaunchErrorKind::ProviderChildImageWriteRejected,
+                )
+            });
+        if result.is_ok() {
+            self.image_written_roles.insert(role);
+        }
+        result
+    }
+
+    /// The actual Stage 3 control handoff writes one complete private frame
+    /// directly to FD3 and shuts down its write side. `transport_bootstrap`
+    /// is bounded physical routing material only; runtime alone encodes the
+    /// authority-bearing frame and the probe never accepts a decoded control
+    /// as authority.
+    #[cfg(unix)]
+    pub fn write_provider_child_control_once(
+        &mut self,
+        role: Sys5I3ProviderChildRole,
+        fd3: &mut UnixStream,
+        transport_bootstrap: &[u8],
+        deadline: Instant,
+    ) -> Result<(), Sys5I3ProviderLaunchError> {
+        if !self.control_attempted_roles.insert(role) {
+            let _ = fd3.shutdown(Shutdown::Write);
+            return Err(Sys5I3ProviderLaunchError::new(
+                Sys5I3ProviderLaunchErrorKind::ProviderChildControlAlreadyTaken,
+            ));
+        }
+
+        let write_result = (|| {
+            if transport_bootstrap.len() > Sys5I3PrivateProcessCodec::MAX_MESSAGE_BYTES {
+                return Err(Sys5I3ProviderLaunchError::new(
+                    Sys5I3ProviderLaunchErrorKind::ProviderTransportBootstrapOversized,
+                ));
+            }
+            let route = self.child_route(role)?;
+            if !self.image_written_roles.contains(&role) {
+                return Err(Sys5I3ProviderLaunchError::new(
+                    Sys5I3ProviderLaunchErrorKind::ProviderChildImageNotWritten,
+                ));
+            }
+            let snapshot = self.provider_child_control_snapshot_for_route(
+                role,
+                &route,
+                transport_bootstrap.to_vec(),
+            )?;
+            let body = serialize_bounded_provider_child_control_snapshot(&snapshot)?;
+            let body_len = u32::try_from(body.len()).map_err(|_| {
+                Sys5I3ProviderLaunchError::new(
+                    Sys5I3ProviderLaunchErrorKind::ProviderControlSnapshotOversized,
+                )
+            })?;
+            write_provider_control_frame_until(fd3, &body_len.to_be_bytes(), &body, deadline)
+                .map_err(|failure| {
+                    Sys5I3ProviderLaunchError::new(match failure {
+                        ProviderControlFrameWriteFailure::DeadlineElapsed => {
+                            Sys5I3ProviderLaunchErrorKind::ProviderControlDeadlineElapsed
+                        }
+                        ProviderControlFrameWriteFailure::StreamRejected => {
+                            Sys5I3ProviderLaunchErrorKind::ProviderControlWriteRejected
+                        }
+                    })
+                })
+        })();
+        // Every attempted provider control closes this write end, including a
+        // construction, size, progress, or deadline failure. The launch has
+        // already spent `role`, so no alternate FD can reissue the control.
+        let shutdown_result = fd3.shutdown(Shutdown::Write);
+        match (write_result, shutdown_result) {
+            (Err(error), _) => Err(error),
+            (Ok(()), Err(_)) => Err(Sys5I3ProviderLaunchError::new(
+                Sys5I3ProviderLaunchErrorKind::ProviderControlShutdownRejected,
+            )),
+            (Ok(()), Ok(())) => Ok(()),
+        }
+    }
+
+    fn provider_child_control_snapshot_for_route(
+        &mut self,
+        role: Sys5I3ProviderChildRole,
+        route: &Sys5I3ProviderChildRoute,
+        transport_bootstrap: Vec<u8>,
+    ) -> Result<PrivateProviderChildControlSnapshot, Sys5I3ProviderLaunchError> {
+        if route.role() != role {
+            return Err(Sys5I3ProviderLaunchError::new(
+                Sys5I3ProviderLaunchErrorKind::ProviderControlConstructionRejected,
+            ));
+        }
+        let expected_start_binding = self
+            .cohort
+            .parent_held_expected_start_binding(route.slot_name())
+            .map_err(|_| {
+                Sys5I3ProviderLaunchError::new(
+                    Sys5I3ProviderLaunchErrorKind::ProviderChildControlAlreadyTaken,
+                )
+            })?;
+        let peer_role = match role {
+            Sys5I3ProviderChildRole::RequesterConsumer => Sys5I3ProviderChildRole::Executor,
+            Sys5I3ProviderChildRole::Executor => Sys5I3ProviderChildRole::RequesterConsumer,
+        };
+        let peer_expected_start_binding = self
+            .provider_peer_expected_start_bindings
+            .get(&role)
+            .cloned()
+            .filter(|binding| binding.slot_name != expected_start_binding.slot_name)
+            .ok_or_else(|| {
+                Sys5I3ProviderLaunchError::new(
+                    Sys5I3ProviderLaunchErrorKind::ProviderControlConstructionRejected,
+                )
+            })?;
+        let m9_role_snapshot = self
+            .cohort
+            .admission
+            .i3_private_provider_role_snapshot(role.m9_role())
+            .map_err(|_| {
+                Sys5I3ProviderLaunchError::new(
+                    Sys5I3ProviderLaunchErrorKind::InactiveProviderBindingNotCurrent,
+                )
+            })?;
+        let expected_resource_runtime_nonce = self.setup.i3_private_resource_runtime_nonce();
+        let requester_fixture_assertion = match role {
+            Sys5I3ProviderChildRole::RequesterConsumer => {
+                Some(self.setup.i3_private_requester_fixture_assertion())
+            }
+            Sys5I3ProviderChildRole::Executor => None,
+        };
+        let executor_resource_envelope = match role {
+            Sys5I3ProviderChildRole::RequesterConsumer => None,
+            Sys5I3ProviderChildRole::Executor => Some(
+                self.setup
+                    .i3_private_executor_resource_envelope()
+                    .map_err(|_| {
+                        Sys5I3ProviderLaunchError::new(
+                            Sys5I3ProviderLaunchErrorKind::InactiveProviderBindingNotCurrent,
+                        )
+                    })?,
+            ),
+        };
+        let terminal_observation_conformance_profile = self
+            .setup
+            .i3_private_terminal_observation_conformance_profile();
+        let provider_network_conformance_profile =
+            self.setup.i3_private_provider_network_conformance_profile();
+        let expected_start_binding =
+            PrivateInactiveProviderExpectedStartBindingSnapshot::try_from(&expected_start_binding)
+                .map_err(|_| {
+                    Sys5I3ProviderLaunchError::new(
+                        Sys5I3ProviderLaunchErrorKind::ProviderControlConstructionRejected,
+                    )
+                })?;
+        let peer_start_binding = PrivateProviderPeerStartBinding::try_from(
+            &peer_expected_start_binding,
+        )
+        .map_err(|_| {
+            Sys5I3ProviderLaunchError::new(
+                Sys5I3ProviderLaunchErrorKind::ProviderControlConstructionRejected,
+            )
+        })?;
+        Ok(PrivateProviderChildControlSnapshot {
+            version: PRIVATE_PROVIDER_CHILD_CONTROL_VERSION,
+            role: role.m9_role(),
+            expected_start_binding,
+            peer_role: peer_role.m9_role(),
+            peer_start_binding,
+            m9_role_snapshot,
+            expected_resource_runtime_nonce,
+            executor_resource_envelope,
+            requester_fixture_assertion,
+            terminal_observation_conformance_profile,
+            provider_network_conformance_profile,
+            transport_bootstrap,
+        })
+    }
+
+    #[cfg(test)]
+    pub(crate) fn test_only_provider_child_control_snapshot_size_metrics(
+        &mut self,
+        role: Sys5I3ProviderChildRole,
+    ) -> Result<PrivateProviderChildControlSnapshotSizeMetrics, Sys5I3ProviderLaunchError> {
+        let route = self.child_route(role)?;
+        let snapshot = self.provider_child_control_snapshot_for_route(role, &route, Vec::new())?;
+        PrivateProviderChildControlSnapshotSizeMetrics::from_snapshot(&snapshot)
+    }
+
+    /// Returns only the bounded serializer allocation capacity for one
+    /// source-real control snapshot. The snapshot is still built by the
+    /// consuming parent-held binding path; no bytes or authority facts escape.
+    #[cfg(all(test, unix))]
+    pub(crate) fn test_only_provider_child_control_serialized_capacity_for_role(
+        &mut self,
+        role: Sys5I3ProviderChildRole,
+    ) -> Result<usize, Sys5I3ProviderLaunchError> {
+        let route = self.child_route(role)?;
+        let snapshot = self.provider_child_control_snapshot_for_route(role, &route, Vec::new())?;
+        Ok(serialize_bounded_provider_child_control_snapshot(&snapshot)?.capacity())
+    }
+}
+
+#[cfg(unix)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+enum ProviderControlFrameWriteFailure {
+    DeadlineElapsed,
+    StreamRejected,
+}
+
+#[cfg(unix)]
+fn write_provider_control_frame_until(
+    stream: &mut UnixStream,
+    prefix: &[u8],
+    body: &[u8],
+    deadline: Instant,
+) -> Result<(), ProviderControlFrameWriteFailure> {
+    const MAX_CONTROL_WRITE_WINDOW: Duration = Duration::from_secs(15);
+    if deadline
+        .checked_duration_since(Instant::now())
+        .filter(|remaining| !remaining.is_zero() && *remaining <= MAX_CONTROL_WRITE_WINDOW)
+        .is_none()
+    {
+        return Err(ProviderControlFrameWriteFailure::DeadlineElapsed);
+    }
+    stream
+        .set_nonblocking(true)
+        .map_err(|_| ProviderControlFrameWriteFailure::StreamRejected)?;
+    for bytes in [prefix, body] {
+        let mut written = 0;
+        while written < bytes.len() {
+            if Instant::now() >= deadline {
+                return Err(ProviderControlFrameWriteFailure::DeadlineElapsed);
+            }
+            match stream.write(&bytes[written..]) {
+                Ok(0) => return Err(ProviderControlFrameWriteFailure::StreamRejected),
+                Ok(count) => {
+                    written = written
+                        .checked_add(count)
+                        .ok_or(ProviderControlFrameWriteFailure::StreamRejected)?
+                }
+                Err(error) if error.kind() == std::io::ErrorKind::WouldBlock => {
+                    wait_for_provider_control_writable(stream, deadline)?;
+                }
+                Err(error) if error.kind() == std::io::ErrorKind::Interrupted => {}
+                Err(_) => return Err(ProviderControlFrameWriteFailure::StreamRejected),
+            }
+        }
+    }
+    if Instant::now() >= deadline {
+        return Err(ProviderControlFrameWriteFailure::DeadlineElapsed);
+    }
+    stream
+        .flush()
+        .map_err(|_| ProviderControlFrameWriteFailure::StreamRejected)?;
+    if Instant::now() >= deadline {
+        return Err(ProviderControlFrameWriteFailure::DeadlineElapsed);
+    }
+    Ok(())
+}
+
+#[cfg(unix)]
+fn wait_for_provider_control_writable(
+    stream: &UnixStream,
+    deadline: Instant,
+) -> Result<(), ProviderControlFrameWriteFailure> {
+    #[repr(C)]
+    struct PollFd {
+        fd: std::os::raw::c_int,
+        events: std::os::raw::c_short,
+        revents: std::os::raw::c_short,
+    }
+
+    unsafe extern "C" {
+        fn poll(
+            descriptors: *mut PollFd,
+            descriptor_count: std::os::raw::c_ulong,
+            timeout_millis: std::os::raw::c_int,
+        ) -> std::os::raw::c_int;
+    }
+
+    const POLLOUT: std::os::raw::c_short = 0x0004;
+    loop {
+        let remaining = deadline
+            .checked_duration_since(Instant::now())
+            .filter(|remaining| !remaining.is_zero())
+            .ok_or(ProviderControlFrameWriteFailure::DeadlineElapsed)?;
+        let millis = remaining
+            .as_millis()
+            .saturating_add(u128::from(remaining.subsec_nanos() % 1_000_000 != 0))
+            .min(std::os::raw::c_int::MAX as u128) as std::os::raw::c_int;
+        let mut descriptor = PollFd {
+            fd: stream.as_raw_fd(),
+            events: POLLOUT,
+            revents: 0,
+        };
+        // SAFETY: `descriptor` is valid for one poll entry, and `stream`
+        // retains the borrowed descriptor for this bounded wait.
+        let outcome = unsafe { poll(&mut descriptor, 1, millis.max(1)) };
+        match outcome {
+            1 if descriptor.revents & POLLOUT != 0 => return Ok(()),
+            0 if Instant::now() >= deadline => {
+                return Err(ProviderControlFrameWriteFailure::DeadlineElapsed);
+            }
+            0 => continue,
+            value
+                if value < 0
+                    && std::io::Error::last_os_error().kind()
+                        == std::io::ErrorKind::Interrupted =>
+            {
+                continue;
+            }
+            _ => return Err(ProviderControlFrameWriteFailure::StreamRejected),
+        }
+    }
 }
 
 #[cfg(test)]
@@ -1713,13 +3836,13 @@ impl Sys5I3InactiveProviderCohort {
     pub(crate) fn from_parent_inactive_provider_admission<I>(
         checked: mir_semantics::surface_v0_pipeline::CheckedSurfaceV0,
         admission: Sys4InactiveProviderAdmission,
-        setup_current: Arc<AtomicBool>,
+        setup_context: Arc<TrustedFixtureContext>,
         slots: I,
     ) -> Result<Self, Sys5I3ProcessRuntimeError>
     where
         I: IntoIterator<Item = Sys5I3DeploymentSlot>,
     {
-        if !setup_current.load(Ordering::Acquire)
+        if !setup_context.is_current()
             || admission.checked_program_identity() != checked.program_identity()
             || !admission.has_current_composite_seal()
         {
@@ -1776,9 +3899,30 @@ impl Sys5I3InactiveProviderCohort {
             expected_start_bindings,
             checked,
             admission,
-            setup_current,
+            setup_context,
             #[cfg(test)]
             inactive_validation_pause: None,
+        })
+    }
+
+    fn provider_child_route(
+        &self,
+        role: Sys5I3ProviderChildRole,
+    ) -> Option<Sys5I3ProviderChildRoute> {
+        let expected_loci = match role {
+            Sys5I3ProviderChildRole::RequesterConsumer => {
+                BTreeSet::from(["ParticipantA".to_string(), "ViewerC".to_string()])
+            }
+            Sys5I3ProviderChildRole::Executor => {
+                BTreeSet::from(["ParticipantB".to_string(), "WorldAuthority".to_string()])
+            }
+        };
+        self.images.values().flatten().find_map(|image| {
+            (image.assigned_loci == expected_loci).then(|| Sys5I3ProviderChildRoute {
+                role,
+                slot_name: image.slot_name.clone(),
+                endpoint: image.endpoint.clone(),
+            })
         })
     }
 
@@ -1821,9 +3965,7 @@ impl Sys5I3InactiveProviderCohort {
         image: Sys5I3UntrustedProcessImage,
         expected: Sys5I3ExpectedStartBinding,
     ) -> Result<Sys5I3InactiveProviderImageValidation, Sys5I3ProcessRuntimeError> {
-        if !self.setup_current.load(Ordering::Acquire)
-            || !self.admission.has_current_composite_seal()
-        {
+        if !self.setup_context.is_current() || !self.admission.has_current_composite_seal() {
             return Err(Sys5I3ProcessRuntimeError::new(
                 Sys5I3ProcessRuntimeErrorKind::InactiveProviderBindingNotCurrent,
             ));
@@ -1906,7 +4048,7 @@ impl Sys5I3InactiveProviderCohort {
                 Sys5I3ProcessRuntimeErrorKind::InactiveProviderBindingNotCurrent,
             ));
         }
-        if !self.setup_current.load(Ordering::Acquire) {
+        if !self.setup_context.is_current() {
             return Err(Sys5I3ProcessRuntimeError::new(
                 Sys5I3ProcessRuntimeErrorKind::InactiveProviderBindingNotCurrent,
             ));
@@ -1954,6 +4096,164 @@ impl Sys5I3InactiveProviderCohort {
             Sys5I3ProcessRuntimeError::new(
                 Sys5I3ProcessRuntimeErrorKind::InactiveProviderBindingNotCurrent,
             )
+        })
+    }
+
+    /// Build two focused local provider-execution components from the same
+    /// source-real inactive cohort. This is deliberately narrower than an
+    /// inherited-control installation: it neither consumes an image nor
+    /// creates FD3 control, a child runtime, or transport evidence. Keeping
+    /// `setup` borrowed makes the actual fixture context remain live for the
+    /// entire local test pair instead of treating an `Arc` retirement flag as
+    /// a substitute for the native setup guard.
+    #[cfg(test)]
+    pub(crate) fn test_only_source_real_provider_local_execution_pair<'setup>(
+        &self,
+        setup: &'setup I3TrustedReadOnlyProviderFixtureSetup,
+    ) -> Result<Sys5I3SourceRealProviderLocalExecutionPair<'setup>, Sys5I3ProcessRuntimeError> {
+        if !setup.matches_live_context(&self.setup_context)
+            || !self.admission.has_current_composite_seal()
+        {
+            return Err(Sys5I3ProcessRuntimeError::new(
+                Sys5I3ProcessRuntimeErrorKind::InactiveProviderBindingNotCurrent,
+            ));
+        }
+        Ok(Sys5I3SourceRealProviderLocalExecutionPair {
+            _setup_guard: setup,
+            requester: self.test_only_source_real_provider_local_execution_for_role(
+                setup,
+                Sys5I3ProviderChildRole::RequesterConsumer,
+            )?,
+            executor: self.test_only_source_real_provider_local_execution_for_role(
+                setup,
+                Sys5I3ProviderChildRole::Executor,
+            )?,
+        })
+    }
+
+    #[cfg(test)]
+    fn test_only_source_real_provider_local_execution_for_role(
+        &self,
+        setup: &I3TrustedReadOnlyProviderFixtureSetup,
+        role: Sys5I3ProviderChildRole,
+    ) -> Result<Sys5I3ProviderLocalExecution, Sys5I3ProcessRuntimeError> {
+        let route = self.provider_child_route(role).ok_or_else(|| {
+            Sys5I3ProcessRuntimeError::new(Sys5I3ProcessRuntimeErrorKind::RuntimeBootstrapRejected)
+        })?;
+        let assigned_loci = self
+            .images
+            .get(route.slot_name())
+            .and_then(Option::as_ref)
+            .map(|image| image.assigned_loci.clone())
+            .ok_or_else(|| {
+                Sys5I3ProcessRuntimeError::new(
+                    Sys5I3ProcessRuntimeErrorKind::RuntimeBootstrapRejected,
+                )
+            })?;
+        let restriction = self
+            .admission
+            .restricted_to_loci(&assigned_loci)
+            .map_err(|_| {
+                Sys5I3ProcessRuntimeError::new(
+                    Sys5I3ProcessRuntimeErrorKind::RuntimeBootstrapRejected,
+                )
+            })?;
+        if restriction.assigned_loci() != &assigned_loci
+            || !restriction.matches_parent(&self.admission)
+        {
+            return Err(Sys5I3ProcessRuntimeError::new(
+                Sys5I3ProcessRuntimeErrorKind::RuntimeBootstrapRejected,
+            ));
+        }
+
+        let resource_runtime_nonce = setup.i3_private_resource_runtime_nonce();
+        let role_snapshot = self
+            .admission
+            .i3_private_provider_role_snapshot(role.m9_role())
+            .map_err(|_| {
+                Sys5I3ProcessRuntimeError::new(
+                    Sys5I3ProcessRuntimeErrorKind::RuntimeBootstrapRejected,
+                )
+            })?;
+        if !role_snapshot.matches_provider_child_installation(
+            role.m9_role(),
+            self.checked.program_identity().stable_key().as_str(),
+            &resource_runtime_nonce,
+            &assigned_loci,
+        ) {
+            return Err(Sys5I3ProcessRuntimeError::new(
+                Sys5I3ProcessRuntimeErrorKind::RuntimeBootstrapRejected,
+            ));
+        }
+        let local_authority = role_snapshot
+            .install_local_authority(
+                role.m9_role(),
+                self.checked.program_identity().stable_key().as_str(),
+                &resource_runtime_nonce,
+            )
+            .map_err(|_| {
+                Sys5I3ProcessRuntimeError::new(
+                    Sys5I3ProcessRuntimeErrorKind::RuntimeBootstrapRejected,
+                )
+            })?;
+        let scoped_component = restriction
+            .component()
+            .i3_private_provider_component_snapshot()
+            .restore_for_inherited_provider_install(&resource_runtime_nonce)
+            .map_err(|_| {
+                Sys5I3ProcessRuntimeError::new(
+                    Sys5I3ProcessRuntimeErrorKind::RuntimeBootstrapRejected,
+                )
+            })?;
+        if scoped_component.component_binding_ref() != restriction.component_binding_ref() {
+            return Err(Sys5I3ProcessRuntimeError::new(
+                Sys5I3ProcessRuntimeErrorKind::RuntimeBootstrapRejected,
+            ));
+        }
+        let provider_local_fabric =
+            Sys4InstalledProviderLocalFabric::from_inherited_provider_parts(
+                restriction.static_snapshot().clone(),
+                &scoped_component,
+                restriction
+                    .legacy_authority_generation()
+                    .i3_private_snapshot(),
+                assigned_loci,
+                restriction.component_binding_ref(),
+            )
+            .map_err(|_| {
+                Sys5I3ProcessRuntimeError::new(
+                    Sys5I3ProcessRuntimeErrorKind::RuntimeBootstrapRejected,
+                )
+            })?;
+        if provider_local_fabric.checked_program_identity() != self.checked.program_identity()
+            || provider_local_fabric.component_binding_ref() != restriction.component_binding_ref()
+            || !provider_local_fabric.has_exact_legacy_authority_generation()
+        {
+            return Err(Sys5I3ProcessRuntimeError::new(
+                Sys5I3ProcessRuntimeErrorKind::RuntimeBootstrapRejected,
+            ));
+        }
+        let executor_resource_envelope = match role {
+            Sys5I3ProviderChildRole::RequesterConsumer => None,
+            Sys5I3ProviderChildRole::Executor => {
+                Some(setup.i3_private_executor_resource_envelope().map_err(|_| {
+                    Sys5I3ProcessRuntimeError::new(
+                        Sys5I3ProcessRuntimeErrorKind::InactiveProviderBindingNotCurrent,
+                    )
+                })?)
+            }
+        };
+        let provider_execution = Sys5I3ProviderExecution::from_installed_profile(
+            &local_authority,
+            &provider_local_fabric,
+        )?;
+        Ok(Sys5I3ProviderLocalExecution {
+            role,
+            local_authority,
+            _scoped_component: scoped_component,
+            provider_local_fabric,
+            executor_resource_envelope,
+            provider_execution,
         })
     }
 }
@@ -3631,6 +5931,29 @@ struct PrivateProcessMessageSnapshot {
     cohort_provenance_ref: String,
 }
 
+/// Private nested provider carrier framing.  It deliberately has no route
+/// through the public generated owner message codec and is decoded only by
+/// the private QUIC adapter before the installed child validates exact local
+/// M9/static correspondence.
+#[derive(Serialize, Deserialize)]
+#[serde(deny_unknown_fields)]
+struct PrivateProviderCarrierEnvelope {
+    version: u8,
+    carrier: PrivateProviderCarrierPayload,
+}
+
+#[derive(Serialize, Deserialize)]
+#[serde(
+    rename_all = "snake_case",
+    tag = "kind",
+    content = "payload",
+    deny_unknown_fields
+)]
+enum PrivateProviderCarrierPayload {
+    Request(PrivateProviderRequestCarrierSnapshot),
+    Result(PrivateProviderResultCarrierSnapshot),
+}
+
 const PRIVATE_OWNER_LIFECYCLE_ACK_VERSION: u64 = 2;
 
 /// Codec-decoded lifecycle ACK candidate.  This is deliberately tainted:
@@ -3774,6 +6097,324 @@ impl TryFrom<PrivateExpectedStartBindingSnapshot> for Sys5I3ExpectedStartBinding
     }
 }
 
+/// The provider FD3 record keeps its expected binding in a distinct private
+/// DTO. Ordinary start bindings intentionally cannot represent a tagged
+/// provider image, and this conversion never defaults that tag away.
+#[derive(Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[serde(deny_unknown_fields)]
+struct PrivateInactiveProviderExpectedStartBindingSnapshot {
+    slot_name: String,
+    assigned_loci: Vec<String>,
+    parent_checked_program_ref: String,
+    image_integrity_ref: String,
+    static_snapshot: I3PrivateProviderStaticProjectionSnapshot,
+    component_snapshot: M8I3PrivateProviderComponentSnapshot,
+    legacy_authority_snapshot: M9I3PrivateAuthorityGenerationSnapshot,
+    component_binding_ref: String,
+}
+
+impl TryFrom<&Sys5I3ExpectedStartBinding> for PrivateInactiveProviderExpectedStartBindingSnapshot {
+    type Error = ();
+
+    fn try_from(binding: &Sys5I3ExpectedStartBinding) -> Result<Self, Self::Error> {
+        let provider = binding.inactive_provider.as_ref().ok_or(())?;
+        if binding.slot_name.is_empty()
+            || binding.assigned_loci.is_empty()
+            || binding.parent_checked_program_ref.is_empty()
+            || binding.image_integrity_ref.is_empty()
+            || provider.component_binding_ref.is_empty()
+            || provider.static_snapshot.declared_provider_lowering_count() != 4
+            || !provider.component_snapshot.is_scoped_component_snapshot()
+        {
+            return Err(());
+        }
+        Ok(Self {
+            slot_name: binding.slot_name.clone(),
+            assigned_loci: binding.assigned_loci.iter().cloned().collect(),
+            parent_checked_program_ref: binding.parent_checked_program_ref.clone(),
+            image_integrity_ref: binding.image_integrity_ref.clone(),
+            static_snapshot: provider.static_snapshot.clone(),
+            component_snapshot: provider.component_snapshot.clone(),
+            legacy_authority_snapshot: provider.legacy_authority_snapshot.clone(),
+            component_binding_ref: provider.component_binding_ref.clone(),
+        })
+    }
+}
+
+impl TryFrom<PrivateInactiveProviderExpectedStartBindingSnapshot> for Sys5I3ExpectedStartBinding {
+    type Error = ();
+
+    fn try_from(
+        snapshot: PrivateInactiveProviderExpectedStartBindingSnapshot,
+    ) -> Result<Self, Self::Error> {
+        let assigned_loci = snapshot.assigned_loci.into_iter().collect::<BTreeSet<_>>();
+        if snapshot.slot_name.is_empty()
+            || assigned_loci.is_empty()
+            || snapshot.parent_checked_program_ref.is_empty()
+            || snapshot.image_integrity_ref.is_empty()
+            || snapshot.component_binding_ref.is_empty()
+            || snapshot.static_snapshot.declared_provider_lowering_count() != 4
+            || !snapshot.component_snapshot.is_scoped_component_snapshot()
+        {
+            return Err(());
+        }
+        Ok(Sys5I3ExpectedStartBinding {
+            slot_name: snapshot.slot_name,
+            assigned_loci,
+            parent_checked_program_ref: snapshot.parent_checked_program_ref,
+            projection_ref: String::new(),
+            m9_generation_ref: String::new(),
+            cohort_provenance_ref: String::new(),
+            image_integrity_ref: snapshot.image_integrity_ref,
+            private_snapshot_binding_ref: String::new(),
+            expected_owner_capability_lifecycle: None,
+            inactive_provider: Some(Sys5I3ExpectedInactiveProviderBinding {
+                static_snapshot: snapshot.static_snapshot,
+                component_snapshot: snapshot.component_snapshot,
+                legacy_authority_snapshot: snapshot.legacy_authority_snapshot,
+                component_binding_ref: snapshot.component_binding_ref,
+            }),
+        })
+    }
+}
+
+/// The peer portion of a provider FD3 record. It is derived only from the
+/// coordinator's complete parent-held binding and preserves exactly the facts
+/// consumed later by the peer-preface validator. It intentionally is not a
+/// peer image or authority restore DTO.
+#[derive(Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[serde(deny_unknown_fields)]
+pub(crate) struct PrivateProviderPeerStartBinding {
+    slot_name: String,
+    parent_checked_program_ref: String,
+    image_integrity_ref: String,
+    component_binding_ref: String,
+}
+
+impl PrivateProviderPeerStartBinding {
+    fn is_structurally_valid(&self) -> bool {
+        !self.slot_name.is_empty()
+            && is_checked_program_identity_ref(&self.parent_checked_program_ref)
+            && !self.image_integrity_ref.is_empty()
+            && !self.component_binding_ref.is_empty()
+    }
+
+    #[cfg(test)]
+    fn matches_parent_held_binding(&self, binding: &Sys5I3ExpectedStartBinding) -> bool {
+        Self::try_from(binding).is_ok_and(|expected| expected == *self)
+    }
+}
+
+impl TryFrom<&Sys5I3ExpectedStartBinding> for PrivateProviderPeerStartBinding {
+    type Error = ();
+
+    fn try_from(binding: &Sys5I3ExpectedStartBinding) -> Result<Self, Self::Error> {
+        let provider = binding.inactive_provider.as_ref().ok_or(())?;
+        // Keep the pre-existing assigned-locus guard at the trusted producer.
+        // The compact peer record is not a full image DTO and cannot carry an
+        // additional child-local locus set without recreating the duplication
+        // this descriptor removes.
+        if binding.slot_name.is_empty()
+            || binding.assigned_loci.is_empty()
+            || binding.parent_checked_program_ref.is_empty()
+            || binding.image_integrity_ref.is_empty()
+            || provider.component_binding_ref.is_empty()
+            || provider.static_snapshot.declared_provider_lowering_count() != 4
+            || !provider.component_snapshot.is_scoped_component_snapshot()
+        {
+            return Err(());
+        }
+        Ok(Self {
+            slot_name: binding.slot_name.clone(),
+            parent_checked_program_ref: checked_program_identity_ref(
+                &binding.parent_checked_program_ref,
+            ),
+            image_integrity_ref: binding.image_integrity_ref.clone(),
+            component_binding_ref: provider.component_binding_ref.clone(),
+        })
+    }
+}
+
+// Version 7 rejects every previous private FD3 record: v2 duplicated the
+// peer's full scoped image/authority snapshot, v3 carried only the exact
+// peer identity facts, v4 bound the requester-only finite T0 fixture
+// assertion, v5 carried the sealed fixed observer-conformance profile, and
+// v6 expands the sealed finite fixture-assertion vocabulary. Version 7 adds
+// the independently sealed fixed provider-network conformance profile. No
+// earlier private record is accepted as if it had selected either profile.
+const PRIVATE_PROVIDER_CHILD_CONTROL_VERSION: u64 = 7;
+// This is a provider-FD3-body-only ceiling. The accepted ordinary private
+// message ceiling remains 64 KiB, while image and queue bounds stay separate.
+// The handoff can transiently retain this bounded body, its strict JSON value,
+// its decoded DTO, and the independently bounded child image; this limit is
+// not an RSS or whole-process memory guarantee.
+const PRIVATE_PROVIDER_CHILD_CONTROL_MAX_BYTES: usize = 5 * 1024 * 1024;
+
+/// One whole FD3 control record for a provider child. It is decoded only by
+/// the runtime's inherited-FD3 reader; there is no generic decoded-control
+/// constructor for its authority-bearing fields.
+#[derive(Serialize, Deserialize)]
+#[serde(deny_unknown_fields)]
+struct PrivateProviderChildControlSnapshot {
+    version: u64,
+    role: M9I3ReadOnlyProviderChildRole,
+    expected_start_binding: PrivateInactiveProviderExpectedStartBindingSnapshot,
+    peer_role: M9I3ReadOnlyProviderChildRole,
+    peer_start_binding: PrivateProviderPeerStartBinding,
+    m9_role_snapshot: M9I3PrivateReadOnlyProviderRoleSnapshot,
+    expected_resource_runtime_nonce: [u8; 32],
+    executor_resource_envelope: Option<I3PrivateReadOnlyProviderResourceEnvelope>,
+    requester_fixture_assertion: Option<I3PrivateReadOnlyProviderFixtureAssertion>,
+    terminal_observation_conformance_profile:
+        Option<I3PrivateFixedTerminalObservationConformanceProfile>,
+    provider_network_conformance_profile: Option<I3PrivateFixedProviderNetworkConformanceProfile>,
+    transport_bootstrap: Vec<u8>,
+}
+
+/// Bounded serialization sink for the one authority-bearing provider FD3
+/// body. It checks a write's complete remaining budget before extending the
+/// backing vector, so JSON serialization cannot first allocate an oversized
+/// body and only then reject it.
+#[cfg(unix)]
+struct BoundedProviderControlJsonWriter {
+    bytes: Vec<u8>,
+    limit: usize,
+    overflowed: bool,
+}
+
+#[cfg(unix)]
+impl BoundedProviderControlJsonWriter {
+    fn new(limit: usize) -> std::io::Result<Self> {
+        let mut bytes = Vec::new();
+        bytes
+            .try_reserve_exact(limit)
+            .map_err(|_| std::io::Error::from(std::io::ErrorKind::Other))?;
+        // `try_reserve_exact` asks the allocator for this exact bounded
+        // policy capacity. Refuse an allocator result larger than the policy
+        // rather than allowing later `extend_from_slice` growth to exceed it.
+        if bytes.capacity() > limit {
+            return Err(std::io::Error::from(std::io::ErrorKind::Other));
+        }
+        Ok(Self {
+            bytes,
+            limit,
+            overflowed: false,
+        })
+    }
+
+    fn into_bytes(self) -> Vec<u8> {
+        self.bytes
+    }
+}
+
+#[cfg(unix)]
+impl Write for BoundedProviderControlJsonWriter {
+    fn write(&mut self, bytes: &[u8]) -> std::io::Result<usize> {
+        let remaining = self.limit.saturating_sub(self.bytes.len());
+        if bytes.len() > remaining {
+            self.overflowed = true;
+            return Err(std::io::Error::from(std::io::ErrorKind::WriteZero));
+        }
+        self.bytes.extend_from_slice(bytes);
+        Ok(bytes.len())
+    }
+
+    fn flush(&mut self) -> std::io::Result<()> {
+        Ok(())
+    }
+}
+
+#[cfg(unix)]
+fn serialize_bounded_provider_child_control_snapshot(
+    snapshot: &PrivateProviderChildControlSnapshot,
+) -> Result<Vec<u8>, Sys5I3ProviderLaunchError> {
+    let mut writer = BoundedProviderControlJsonWriter::new(
+        PRIVATE_PROVIDER_CHILD_CONTROL_MAX_BYTES,
+    )
+    .map_err(|_| {
+        Sys5I3ProviderLaunchError::new(
+            Sys5I3ProviderLaunchErrorKind::ProviderControlSerializationRejected,
+        )
+    })?;
+    let serialization = serde_json::to_writer(&mut writer, snapshot);
+    if writer.overflowed {
+        return Err(Sys5I3ProviderLaunchError::new(
+            Sys5I3ProviderLaunchErrorKind::ProviderControlSnapshotOversized,
+        ));
+    }
+    serialization.map_err(|_| {
+        Sys5I3ProviderLaunchError::new(
+            Sys5I3ProviderLaunchErrorKind::ProviderControlSerializationRejected,
+        )
+    })?;
+    Ok(writer.into_bytes())
+}
+
+/// Test-only non-sensitive size evidence for one production-built provider
+/// control record. It contains only fixed field names and encoded lengths;
+/// no DTO, bytes, path, grant, witness, or credential can be recovered from
+/// it. The transport upper bound accounts for JSON's at-most-four-byte
+/// encoding per one of the permitted 64 KiB physical transport bytes.
+#[cfg(test)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+pub(crate) struct PrivateProviderChildControlSnapshotSizeMetrics {
+    local_static_snapshot_bytes: usize,
+    local_component_snapshot_bytes: usize,
+    local_legacy_authority_snapshot_bytes: usize,
+    role_m9_snapshot_bytes: usize,
+    peer_start_binding_bytes: usize,
+    whole_control_empty_transport_bytes: usize,
+    whole_control_max_transport_upper_bound_bytes: usize,
+}
+
+#[cfg(test)]
+impl PrivateProviderChildControlSnapshotSizeMetrics {
+    fn from_snapshot(
+        snapshot: &PrivateProviderChildControlSnapshot,
+    ) -> Result<Self, Sys5I3ProviderLaunchError> {
+        fn encoded_len<T: Serialize>(value: &T) -> Result<usize, Sys5I3ProviderLaunchError> {
+            serde_json::to_vec(value)
+                .map(|encoded| encoded.len())
+                .map_err(|_| {
+                    Sys5I3ProviderLaunchError::new(
+                        Sys5I3ProviderLaunchErrorKind::ProviderControlSerializationRejected,
+                    )
+                })
+        }
+
+        let whole_control_empty_transport_bytes = encoded_len(snapshot)?;
+        let transport_upper_bound = Sys5I3PrivateProcessCodec::MAX_MESSAGE_BYTES
+            .checked_mul(4)
+            .ok_or_else(|| {
+                Sys5I3ProviderLaunchError::new(
+                    Sys5I3ProviderLaunchErrorKind::ProviderControlSerializationRejected,
+                )
+            })?;
+        let whole_control_max_transport_upper_bound_bytes = whole_control_empty_transport_bytes
+            .checked_add(transport_upper_bound)
+            .ok_or_else(|| {
+                Sys5I3ProviderLaunchError::new(
+                    Sys5I3ProviderLaunchErrorKind::ProviderControlSerializationRejected,
+                )
+            })?;
+        Ok(Self {
+            local_static_snapshot_bytes: encoded_len(
+                &snapshot.expected_start_binding.static_snapshot,
+            )?,
+            local_component_snapshot_bytes: encoded_len(
+                &snapshot.expected_start_binding.component_snapshot,
+            )?,
+            local_legacy_authority_snapshot_bytes: encoded_len(
+                &snapshot.expected_start_binding.legacy_authority_snapshot,
+            )?,
+            role_m9_snapshot_bytes: encoded_len(&snapshot.m9_role_snapshot)?,
+            peer_start_binding_bytes: encoded_len(&snapshot.peer_start_binding)?,
+            whole_control_empty_transport_bytes,
+            whole_control_max_transport_upper_bound_bytes,
+        })
+    }
+}
+
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
 #[serde(deny_unknown_fields)]
 struct PrivateTrustedLocalnetControlSnapshot {
@@ -3909,6 +6550,42 @@ impl<'de> Visitor<'de> for StrictJsonValueVisitor {
         }
         Ok(StrictJsonValue(serde_json::Value::Object(values)))
     }
+}
+
+/// Read exactly one provider FD3 body after its fixed prefix. This is private
+/// parser work only: the sole production caller is the inherited-FD3 branch,
+/// and parsing never constructs an installed runtime. The declared body size
+/// is rejected before any body allocation; after allocation the exact body,
+/// EOF, strict duplicate-key parsing, and closed DTO shape are all required.
+#[cfg(unix)]
+fn read_private_provider_child_control_frame<R: Read>(
+    reader: &mut R,
+) -> Result<PrivateProviderChildControlSnapshot, Sys5I3ProviderLaunchError> {
+    fn rejected() -> Sys5I3ProviderLaunchError {
+        Sys5I3ProviderLaunchError::new(
+            Sys5I3ProviderLaunchErrorKind::InheritedProviderControlRejected,
+        )
+    }
+
+    let mut prefix = [0_u8; 4];
+    reader.read_exact(&mut prefix).map_err(|_| rejected())?;
+    let declared = u32::from_be_bytes(prefix) as usize;
+    if declared > PRIVATE_PROVIDER_CHILD_CONTROL_MAX_BYTES {
+        return Err(rejected());
+    }
+
+    let mut body = Vec::new();
+    body.try_reserve_exact(declared).map_err(|_| rejected())?;
+    body.resize(declared, 0);
+    reader.read_exact(&mut body).map_err(|_| rejected())?;
+    let mut trailing = [0_u8; 1];
+    match reader.read(&mut trailing) {
+        Ok(0) => {}
+        Ok(_) | Err(_) => return Err(rejected()),
+    }
+
+    let value = strict_json_value(&body).map_err(|_| rejected())?;
+    serde_json::from_value(value).map_err(|_| rejected())
 }
 
 pub(crate) fn strict_json_value(bytes: &[u8]) -> Result<serde_json::Value, ()> {
@@ -4156,6 +6833,286 @@ impl Sys5I3PrivateProcessCodec {
 
     pub const fn private_provisional_v1() -> Self {
         Self
+    }
+
+    /// The provider branch will be the sole FD3 reader for its one complete
+    /// private frame. The ordinary inherited-control reader remains unchanged.
+    /// Successful decoding produces only an opaque installation input; it
+    /// cannot turn image bytes or a generic decoded control into authority.
+    #[cfg(unix)]
+    pub fn take_inherited_provider_child_control_from_fd3(
+        &self,
+    ) -> Result<Sys5I3InheritedProviderChildControl, Sys5I3ProviderLaunchError> {
+        const INHERITED_PROVIDER_CONTROL_FD: std::os::raw::c_int = 3;
+        const F_GETFD: std::os::raw::c_int = 1;
+
+        unsafe extern "C" {
+            fn fcntl(fd: std::os::raw::c_int, command: std::os::raw::c_int) -> std::os::raw::c_int;
+        }
+
+        if PROVIDER_INHERITED_CONTROL_FD3_TAKEN
+            .compare_exchange(false, true, Ordering::AcqRel, Ordering::Acquire)
+            .is_err()
+        {
+            return Err(Sys5I3ProviderLaunchError::new(
+                Sys5I3ProviderLaunchErrorKind::InheritedProviderControlRejected,
+            ));
+        }
+        // Check the fixed inherited descriptor before taking ownership. The
+        // process runner provides this FD exactly once for the provider argv
+        // branch; an absent or malformed FD is a typed bootstrap rejection.
+        if unsafe { fcntl(INHERITED_PROVIDER_CONTROL_FD, F_GETFD) } == -1 {
+            return Err(Sys5I3ProviderLaunchError::new(
+                Sys5I3ProviderLaunchErrorKind::InheritedProviderControlRejected,
+            ));
+        }
+        // SAFETY: the descriptor was just observed valid and this provider
+        // reader is the sole owner for the provider child branch.
+        let mut stream = unsafe { UnixStream::from_raw_fd(INHERITED_PROVIDER_CONTROL_FD) };
+        let snapshot = read_private_provider_child_control_frame(&mut stream)?;
+        let expected_start_binding: Sys5I3ExpectedStartBinding =
+            snapshot.expected_start_binding.try_into().map_err(|_| {
+                Sys5I3ProviderLaunchError::new(
+                    Sys5I3ProviderLaunchErrorKind::InheritedProviderControlRejected,
+                )
+            })?;
+        let peer_start_binding = snapshot.peer_start_binding;
+        let role = Sys5I3ProviderChildRole::from_m9_role(snapshot.role);
+        let peer_role = Sys5I3ProviderChildRole::from_m9_role(snapshot.peer_role);
+        let envelope_matches_role = match role {
+            Sys5I3ProviderChildRole::RequesterConsumer => {
+                snapshot.executor_resource_envelope.is_none()
+            }
+            Sys5I3ProviderChildRole::Executor => snapshot
+                .executor_resource_envelope
+                .as_ref()
+                .is_some_and(|envelope| {
+                    envelope.matches_runtime_nonce(&snapshot.expected_resource_runtime_nonce)
+                }),
+        };
+        let fixture_assertion_matches_role = match role {
+            Sys5I3ProviderChildRole::RequesterConsumer => {
+                snapshot.requester_fixture_assertion.is_some()
+            }
+            Sys5I3ProviderChildRole::Executor => snapshot.requester_fixture_assertion.is_none(),
+        };
+        if snapshot.version != PRIVATE_PROVIDER_CHILD_CONTROL_VERSION
+            || role == peer_role
+            || expected_start_binding.slot_name == peer_start_binding.slot_name
+            || expected_start_binding.assigned_loci.is_empty()
+            || !peer_start_binding.is_structurally_valid()
+            || snapshot.transport_bootstrap.len() > Self::MAX_MESSAGE_BYTES
+            || !snapshot
+                .m9_role_snapshot
+                .matches_provider_child_installation(
+                    snapshot.role,
+                    &expected_start_binding.parent_checked_program_ref,
+                    &snapshot.expected_resource_runtime_nonce,
+                    &expected_start_binding.assigned_loci,
+                )
+            || !envelope_matches_role
+            || !fixture_assertion_matches_role
+            || (snapshot.terminal_observation_conformance_profile.is_some()
+                && snapshot.provider_network_conformance_profile.is_some())
+            || {
+                #[cfg(not(feature = "i3-process-test-seams"))]
+                {
+                    snapshot.terminal_observation_conformance_profile.is_some()
+                        || snapshot.provider_network_conformance_profile.is_some()
+                }
+                #[cfg(feature = "i3-process-test-seams")]
+                {
+                    false
+                }
+            }
+        {
+            return Err(Sys5I3ProviderLaunchError::new(
+                Sys5I3ProviderLaunchErrorKind::InheritedProviderControlRejected,
+            ));
+        }
+        Ok(Sys5I3InheritedProviderChildControl {
+            transport_bootstrap: snapshot.transport_bootstrap,
+            role,
+            expected_start_binding,
+            peer_role,
+            peer_start_binding,
+            m9_role_snapshot: snapshot.m9_role_snapshot,
+            expected_resource_runtime_nonce: snapshot.expected_resource_runtime_nonce,
+            executor_resource_envelope: snapshot.executor_resource_envelope,
+            requester_fixture_assertion: snapshot.requester_fixture_assertion,
+            terminal_observation_conformance_profile: snapshot
+                .terminal_observation_conformance_profile,
+            provider_network_conformance_profile: snapshot.provider_network_conformance_profile,
+        })
+    }
+
+    /// Install a provider child only from the opaque result of the dedicated
+    /// inherited-control reader. Generic decoded controls and ordinary image
+    /// start paths remain incapable of reaching this branch.
+    pub fn install_provider_from_inherited_control(
+        &self,
+        image: Sys5I3UntrustedProcessImage,
+        control: Sys5I3InheritedProviderChildControl,
+        role: Sys5I3ProviderChildRole,
+    ) -> Result<Sys5I3InstalledProviderChildRuntime, Sys5I3ProcessRuntimeError> {
+        let Sys5I3InheritedProviderChildControl {
+            transport_bootstrap: _,
+            role: control_role,
+            expected_start_binding,
+            peer_role,
+            peer_start_binding,
+            m9_role_snapshot,
+            expected_resource_runtime_nonce,
+            executor_resource_envelope,
+            requester_fixture_assertion,
+            terminal_observation_conformance_profile,
+            provider_network_conformance_profile,
+        } = control;
+        #[cfg(not(feature = "i3-process-test-seams"))]
+        if terminal_observation_conformance_profile.is_some()
+            || provider_network_conformance_profile.is_some()
+        {
+            return Err(Sys5I3ProcessRuntimeError::new(
+                Sys5I3ProcessRuntimeErrorKind::RuntimeBootstrapRejected,
+            ));
+        }
+        if terminal_observation_conformance_profile.is_some()
+            && provider_network_conformance_profile.is_some()
+        {
+            return Err(Sys5I3ProcessRuntimeError::new(
+                Sys5I3ProcessRuntimeErrorKind::RuntimeBootstrapRejected,
+            ));
+        }
+        if role != control_role
+            || role == peer_role
+            || expected_start_binding.slot_name == peer_start_binding.slot_name
+            || expected_start_binding.assigned_loci.is_empty()
+            || !peer_start_binding.is_structurally_valid()
+            || expected_start_binding
+                .validate_inactive_provider_image(&image.image)
+                .is_err()
+            || !m9_role_snapshot.matches_provider_child_installation(
+                role.m9_role(),
+                &expected_start_binding.parent_checked_program_ref,
+                &expected_resource_runtime_nonce,
+                &image.image.assigned_loci,
+            )
+        {
+            return Err(Sys5I3ProcessRuntimeError::new(
+                Sys5I3ProcessRuntimeErrorKind::RuntimeBootstrapRejected,
+            ));
+        }
+        let local_authority = m9_role_snapshot
+            .install_local_authority(
+                role.m9_role(),
+                &expected_start_binding.parent_checked_program_ref,
+                &expected_resource_runtime_nonce,
+            )
+            .map_err(|_| {
+                Sys5I3ProcessRuntimeError::new(
+                    Sys5I3ProcessRuntimeErrorKind::RuntimeBootstrapRejected,
+                )
+            })?;
+        let executor_resource_envelope = match (role, executor_resource_envelope) {
+            (Sys5I3ProviderChildRole::RequesterConsumer, None) => None,
+            (Sys5I3ProviderChildRole::Executor, Some(envelope))
+                if envelope.matches_runtime_nonce(&expected_resource_runtime_nonce) =>
+            {
+                Some(envelope)
+            }
+            _ => {
+                return Err(Sys5I3ProcessRuntimeError::new(
+                    Sys5I3ProcessRuntimeErrorKind::RuntimeBootstrapRejected,
+                ));
+            }
+        };
+        let requester_fixture_assertion = match (role, requester_fixture_assertion) {
+            (Sys5I3ProviderChildRole::RequesterConsumer, Some(assertion)) => Some(assertion),
+            (Sys5I3ProviderChildRole::Executor, None) => None,
+            _ => {
+                return Err(Sys5I3ProcessRuntimeError::new(
+                    Sys5I3ProcessRuntimeErrorKind::RuntimeBootstrapRejected,
+                ));
+            }
+        };
+        let scoped_component = image
+            .image
+            .inactive_provider
+            .as_ref()
+            .map(|provider| provider.component_snapshot.clone())
+            .filter(M8I3PrivateProviderComponentSnapshot::is_scoped_component_snapshot)
+            .ok_or_else(|| {
+                Sys5I3ProcessRuntimeError::new(
+                    Sys5I3ProcessRuntimeErrorKind::RuntimeBootstrapRejected,
+                )
+            })?
+            .restore_for_inherited_provider_install(&expected_resource_runtime_nonce)
+            .map_err(|_| {
+                Sys5I3ProcessRuntimeError::new(
+                    Sys5I3ProcessRuntimeErrorKind::RuntimeBootstrapRejected,
+                )
+            })?;
+        let provider = image.image.inactive_provider.as_ref().ok_or_else(|| {
+            Sys5I3ProcessRuntimeError::new(Sys5I3ProcessRuntimeErrorKind::RuntimeBootstrapRejected)
+        })?;
+        if scoped_component.component_binding_ref() != provider.component_binding_ref {
+            return Err(Sys5I3ProcessRuntimeError::new(
+                Sys5I3ProcessRuntimeErrorKind::RuntimeBootstrapRejected,
+            ));
+        }
+        let provider_local_fabric =
+            Sys4InstalledProviderLocalFabric::from_inherited_provider_parts(
+                provider.static_snapshot.clone(),
+                &scoped_component,
+                provider.legacy_authority_snapshot.clone(),
+                image.image.assigned_loci.clone(),
+                &provider.component_binding_ref,
+            )
+            .map_err(|_| {
+                Sys5I3ProcessRuntimeError::new(
+                    Sys5I3ProcessRuntimeErrorKind::RuntimeBootstrapRejected,
+                )
+            })?;
+        if provider_local_fabric
+            .checked_program_identity()
+            .stable_key()
+            != expected_start_binding.parent_checked_program_ref
+            || provider_local_fabric.assigned_loci() != &image.image.assigned_loci
+            || provider_local_fabric.component_binding_ref() != provider.component_binding_ref
+            || !provider_local_fabric.has_exact_legacy_authority_generation()
+        {
+            return Err(Sys5I3ProcessRuntimeError::new(
+                Sys5I3ProcessRuntimeErrorKind::RuntimeBootstrapRejected,
+            ));
+        }
+        let provider_execution = Sys5I3ProviderExecution::from_installed_profile(
+            &local_authority,
+            &provider_local_fabric,
+        )?;
+        Ok(Sys5I3InstalledProviderChildRuntime {
+            role,
+            expected_start_binding,
+            peer_role,
+            peer_start_binding,
+            local_authority,
+            _scoped_component: scoped_component,
+            provider_local_fabric,
+            executor_resource_envelope,
+            requester_fixture_assertion,
+            fixture_post_consume_assertion_completed: false,
+            provider_execution,
+            terminal_observation_export_reserved: false,
+            #[cfg(feature = "i3-process-test-seams")]
+            terminal_observation_conformance_profile,
+            #[cfg(feature = "i3-process-test-seams")]
+            terminal_observation_conformance_completed: false,
+            #[cfg(feature = "i3-process-test-seams")]
+            provider_network_conformance_profile,
+            #[cfg(feature = "i3-process-test-seams")]
+            provider_network_conformance_facts: Default::default(),
+            #[cfg(feature = "i3-process-test-seams")]
+            provider_network_conformance_completed: false,
+        })
     }
 
     /// Turns two coordinator-held bindings into exactly two dedicated trusted
@@ -4583,6 +7540,119 @@ impl Sys5I3PrivateProcessCodec {
         self.frame_body(body, Self::MAX_MESSAGE_BYTES)
     }
 
+    /// Encode one distinct provider request for the private QUIC adapter.
+    /// This is crate-private: external callers cannot turn an arbitrary JSON
+    /// record into a carrier accepted by an installed child.
+    pub(crate) fn encode_provider_request(
+        &self,
+        request: &Sys5I3ProviderRequestCarrier,
+    ) -> Result<Vec<u8>, Sys5I3PrivateProcessCodecError> {
+        let envelope = PrivateProviderCarrierEnvelope {
+            version: 1,
+            carrier: PrivateProviderCarrierPayload::Request(request.private_snapshot()),
+        };
+        let body = serde_json::to_vec(&envelope).map_err(|_| {
+            Sys5I3PrivateProcessCodecError::new(Sys5I3PrivateProcessCodecErrorKind::Malformed)
+        })?;
+        self.frame_body(body, Self::MAX_MESSAGE_BYTES)
+    }
+
+    /// Decode one tainted provider request. The result is usable only by the
+    /// private QUIC receiver, whose installed role performs its own exact
+    /// static/M9 admission before any host crossing.
+    pub(crate) fn decode_untrusted_provider_request(
+        &self,
+        bytes: &[u8],
+    ) -> Result<Sys5I3ProviderRequestCarrier, Sys5I3PrivateProcessCodecError> {
+        let envelope = self.decode_provider_carrier_envelope(bytes)?;
+        let PrivateProviderCarrierPayload::Request(snapshot) = envelope.carrier else {
+            return Err(Sys5I3PrivateProcessCodecError::new(
+                Sys5I3PrivateProcessCodecErrorKind::Malformed,
+            ));
+        };
+        Sys5I3ProviderRequestCarrier::from_private_snapshot(snapshot).map_err(|_| {
+            Sys5I3PrivateProcessCodecError::new(Sys5I3PrivateProcessCodecErrorKind::Malformed)
+        })
+    }
+
+    /// Encode one distinct provider result for the private QUIC adapter.
+    pub(crate) fn encode_provider_result(
+        &self,
+        result: &Sys5I3ProviderResultCarrier,
+    ) -> Result<Vec<u8>, Sys5I3PrivateProcessCodecError> {
+        let envelope = PrivateProviderCarrierEnvelope {
+            version: 1,
+            carrier: PrivateProviderCarrierPayload::Result(result.private_snapshot()),
+        };
+        let body = serde_json::to_vec(&envelope).map_err(|_| {
+            Sys5I3PrivateProcessCodecError::new(Sys5I3PrivateProcessCodecErrorKind::Malformed)
+        })?;
+        self.frame_body(body, Self::MAX_MESSAGE_BYTES)
+    }
+
+    /// Decode one tainted provider result. It carries no receipt and cannot
+    /// consume a requester pending entry until the installed requester checks
+    /// its actual current M9 role state.
+    pub(crate) fn decode_untrusted_provider_result(
+        &self,
+        bytes: &[u8],
+    ) -> Result<Sys5I3ProviderResultCarrier, Sys5I3PrivateProcessCodecError> {
+        let envelope = self.decode_provider_carrier_envelope(bytes)?;
+        let PrivateProviderCarrierPayload::Result(snapshot) = envelope.carrier else {
+            return Err(Sys5I3PrivateProcessCodecError::new(
+                Sys5I3PrivateProcessCodecErrorKind::Malformed,
+            ));
+        };
+        Sys5I3ProviderResultCarrier::from_private_snapshot(snapshot).map_err(|_| {
+            Sys5I3PrivateProcessCodecError::new(Sys5I3PrivateProcessCodecErrorKind::Malformed)
+        })
+    }
+
+    /// Encode the one M9-authorized, reference-only terminal audit emitted by
+    /// an installed provider child. The audit value can arise only from the
+    /// runtime's current M9 preflight; this codec does not issue a permit.
+    #[doc(hidden)]
+    pub fn encode_provider_terminal_audit_observer_view(
+        &self,
+        audit: &Sys5I3ProviderTerminalAudit,
+    ) -> Result<Vec<u8>, Sys5I3PrivateProcessCodecError> {
+        let body = audit.encode_observer_view_body().map_err(|_| {
+            Sys5I3PrivateProcessCodecError::new(Sys5I3PrivateProcessCodecErrorKind::Oversized)
+        })?;
+        self.frame_body(body, Self::MAX_MESSAGE_BYTES)
+    }
+
+    /// Decode only a bounded, strict, reference-only child-output candidate.
+    /// This cannot be used to issue M9 authority, recreate a terminal audit,
+    /// or enter a provider runtime. The supervising probe must separately
+    /// correlate it with its owned run, role, source facts, request joins, and
+    /// physical child completion before accepting it as evidence.
+    #[doc(hidden)]
+    pub fn decode_untrusted_provider_terminal_audit_observer_view(
+        &self,
+        bytes: &[u8],
+    ) -> Result<
+        Sys5I3UntrustedProviderTerminalAuditObserverViewCandidate,
+        Sys5I3PrivateProcessCodecError,
+    > {
+        let body = self.unframe_body(bytes, Self::MAX_MESSAGE_BYTES)?;
+        provider_runtime::decode_untrusted_provider_terminal_audit_observer_view_body(body)
+            .map_err(|error| {
+                let kind = match error {
+                    provider_runtime::PrivateProviderTerminalAuditObserverViewDecodeError::Malformed => {
+                        Sys5I3PrivateProcessCodecErrorKind::Malformed
+                    }
+                    provider_runtime::PrivateProviderTerminalAuditObserverViewDecodeError::Oversized => {
+                        Sys5I3PrivateProcessCodecErrorKind::Oversized
+                    }
+                    provider_runtime::PrivateProviderTerminalAuditObserverViewDecodeError::UnknownVersion => {
+                        Sys5I3PrivateProcessCodecErrorKind::UnknownVersion
+                    }
+                };
+                Sys5I3PrivateProcessCodecError::new(kind)
+            })
+    }
+
     /// Encode the runtime-retained exact original request for one
     /// adapter-authorized attempt.  This is crate-private so ordinary callers
     /// cannot turn an opaque pending handle into cloneable carrier bytes.
@@ -4660,6 +7730,26 @@ impl Sys5I3PrivateProcessCodec {
         let mut framed = (body.len() as u32).to_be_bytes().to_vec();
         framed.extend(body);
         Ok(framed)
+    }
+
+    fn decode_provider_carrier_envelope(
+        &self,
+        bytes: &[u8],
+    ) -> Result<PrivateProviderCarrierEnvelope, Sys5I3PrivateProcessCodecError> {
+        let body = self.unframe_body(bytes, Self::MAX_MESSAGE_BYTES)?;
+        let value = strict_json_value(body).map_err(|_| {
+            Sys5I3PrivateProcessCodecError::new(Sys5I3PrivateProcessCodecErrorKind::Malformed)
+        })?;
+        let envelope: PrivateProviderCarrierEnvelope =
+            serde_json::from_value(value).map_err(|_| {
+                Sys5I3PrivateProcessCodecError::new(Sys5I3PrivateProcessCodecErrorKind::Malformed)
+            })?;
+        if envelope.version != 1 {
+            return Err(Sys5I3PrivateProcessCodecError::new(
+                Sys5I3PrivateProcessCodecErrorKind::UnknownVersion,
+            ));
+        }
+        Ok(envelope)
     }
 
     fn unframe_body<'a>(
@@ -7049,6 +10139,10 @@ fn observer_safe_requester_binding_ref(
 #[cfg(test)]
 #[path = "sys5_i3_owner_admission_tests.rs"]
 mod sys5_i3_owner_admission_tests;
+
+#[cfg(all(test, unix))]
+#[path = "sys5_i3_provider_control_tests.rs"]
+mod sys5_i3_provider_control_tests;
 
 fn logical_origin_ref(
     slot_name: &str,

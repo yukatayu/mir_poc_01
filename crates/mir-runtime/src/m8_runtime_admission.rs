@@ -493,6 +493,20 @@ impl M8ReadOnlyProviderEffectBindingContext {
     fn matches_resource_runtime_nonce(&self, resource_runtime_nonce: &[u8; 32]) -> bool {
         &self.resource_runtime_nonce == resource_runtime_nonce
     }
+
+    fn resource_runtime_nonce_ref(&self) -> String {
+        resource_runtime_nonce_ref(&self.resource_runtime_nonce)
+    }
+}
+
+fn resource_runtime_nonce_ref(resource_runtime_nonce: &[u8; 32]) -> String {
+    let mut hasher = Sha256::new();
+    hasher.update(b"mirrorea/m8/i3/provider-resource-runtime-nonce/v1\0");
+    hasher.update(resource_runtime_nonce);
+    format!(
+        "m8-i3-provider-resource-runtime-nonce-sha256-v1:{:x}",
+        hasher.finalize()
+    )
 }
 
 #[derive(Debug, Clone, PartialEq, Eq)]
@@ -996,6 +1010,13 @@ enum M8RuntimeInstanceScope {
         coverage: Box<M9ReadOnlyProviderEffectCoverage>,
         binding_context: M8ReadOnlyProviderEffectBindingContext,
     },
+    /// A decoded I3 provider component may enter this state only through the
+    /// dedicated inherited-control restore below. It remains non-ordinary:
+    /// generic M8 admission and private ordinary snapshots reject it.
+    ReadOnlyProviderEffectInstalled {
+        binding_context: M8ReadOnlyProviderEffectBindingContext,
+        component_binding_ref: String,
+    },
 }
 
 /// Opaque M8 component retained by the private read-only provider composite.
@@ -1039,7 +1060,46 @@ pub(crate) struct M8I3PrivateProviderComponentSnapshot {
     version: u32,
     component: M8I3PrivateSnapshot,
     component_binding_ref: String,
+    resource_runtime_nonce_ref: String,
     declared_provider_lowering_count: usize,
+}
+
+/// One private, installed M8 provider component. It is returned only after a
+/// tagged component snapshot has matched the resource-runtime nonce carried
+/// through inherited provider control; it is not an ordinary M8 instance.
+pub(crate) struct M8InstalledReadOnlyProviderEffectComponent {
+    instance: M8RuntimeInstance,
+    component_binding_ref: String,
+}
+
+impl std::fmt::Debug for M8InstalledReadOnlyProviderEffectComponent {
+    fn fmt(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        formatter.write_str("M8InstalledReadOnlyProviderEffectComponent(..)")
+    }
+}
+
+impl M8InstalledReadOnlyProviderEffectComponent {
+    /// Copy one still-scoped M8 instance only for the dedicated local
+    /// provider bootstrap.  The returned instance remains marked as an
+    /// inherited provider component, so the ordinary I3 snapshot/export
+    /// path continues to reject it.
+    pub(crate) fn scoped_instance_for_local_provider_runtime(
+        &self,
+        expected_component_binding_ref: &str,
+    ) -> Option<M8RuntimeInstance> {
+        matches!(
+            &self.instance.scope,
+            M8RuntimeInstanceScope::ReadOnlyProviderEffectInstalled {
+                component_binding_ref,
+                ..
+            } if component_binding_ref == expected_component_binding_ref
+        )
+        .then(|| self.instance.clone())
+    }
+
+    pub(crate) fn component_binding_ref(&self) -> &str {
+        &self.component_binding_ref
+    }
 }
 
 /// T0-internal, non-authorizing inventory for a sealed provider component. It
@@ -1161,6 +1221,7 @@ impl M8ReadOnlyProviderEffectComponent {
             version: M8I3PrivateProviderComponentSnapshot::VERSION,
             component: M8I3PrivateSnapshot::from_read_only_provider_component(&self.instance),
             component_binding_ref: self.i3_inactive_component_binding_ref(),
+            resource_runtime_nonce_ref: self.binding_context.resource_runtime_nonce_ref(),
             declared_provider_lowering_count: self.declared_provider_lowering_count,
         }
     }
@@ -1281,7 +1342,8 @@ impl M8ReadOnlyProviderEffectComponentSnapshot {
                 Ok(self.component)
             }
             M8RuntimeInstanceScope::Ordinary
-            | M8RuntimeInstanceScope::ReadOnlyProviderEffectComposite { .. } => {
+            | M8RuntimeInstanceScope::ReadOnlyProviderEffectComposite { .. }
+            | M8RuntimeInstanceScope::ReadOnlyProviderEffectInstalled { .. } => {
                 Err(M8I3PrivateSnapshotError::StructuralMismatch)
             }
         }
@@ -1289,7 +1351,22 @@ impl M8ReadOnlyProviderEffectComponentSnapshot {
 }
 
 impl M8I3PrivateProviderComponentSnapshot {
-    const VERSION: u32 = 1;
+    // Version 2 made `resource_runtime_nonce_ref` mandatory.  This is a
+    // private, provider-only DTO; older/missing-field bytes are rejected
+    // rather than being interpreted as an ordinary or unbound component.
+    const VERSION: u32 = 2;
+
+    /// Verify that a private provider image retained the required nested
+    /// scoped discriminator. This is structural only: it neither restores an
+    /// ordinary M8 instance nor issues any authority.
+    pub(crate) fn is_scoped_component_snapshot(&self) -> bool {
+        self.version == Self::VERSION
+            && self.declared_provider_lowering_count == 4
+            && !self.component_binding_ref.is_empty()
+            && !self.resource_runtime_nonce_ref.is_empty()
+            && self.component.version == M8I3PrivateSnapshot::VERSION
+            && self.component.scope == M8I3PrivateSnapshotScope::ReadOnlyProviderEffectComponent
+    }
 
     /// Compare a decoded image DTO to the exact parent-held restricted
     /// component.  The comparison is structural and non-authorizing: it does
@@ -1302,6 +1379,8 @@ impl M8I3PrivateProviderComponentSnapshot {
         self.version == Self::VERSION
             && self.declared_provider_lowering_count == parent.declared_provider_lowering_count
             && self.component_binding_ref == parent.i3_inactive_component_binding_ref()
+            && self.resource_runtime_nonce_ref
+                == parent.binding_context.resource_runtime_nonce_ref()
             && self.component
                 == M8I3PrivateSnapshot::from_read_only_provider_component(&parent.instance)
             && parent.is_component_scoped()
@@ -1313,6 +1392,33 @@ impl M8I3PrivateProviderComponentSnapshot {
 
     pub(crate) fn component_binding_ref(&self) -> &str {
         &self.component_binding_ref
+    }
+
+    /// Restore only the explicitly tagged scoped component for a child whose
+    /// inherited control carries the exact resource-runtime nonce. This does
+    /// not construct an ordinary snapshot, invoke M8 admission, or supply a
+    /// provider-effect capability; M9 installs and revalidates that lineage
+    /// separately at the caller's preceding boundary.
+    pub(crate) fn restore_for_inherited_provider_install(
+        self,
+        resource_runtime_nonce: &[u8; 32],
+    ) -> Result<M8InstalledReadOnlyProviderEffectComponent, M8I3PrivateSnapshotError> {
+        if !self.is_scoped_component_snapshot()
+            || self.resource_runtime_nonce_ref != resource_runtime_nonce_ref(resource_runtime_nonce)
+        {
+            return Err(M8I3PrivateSnapshotError::StructuralMismatch);
+        }
+        let component_binding_ref = self.component_binding_ref;
+        let instance = self.component.into_provider_component_instance(
+            M8ReadOnlyProviderEffectBindingContext {
+                resource_runtime_nonce: *resource_runtime_nonce,
+            },
+            component_binding_ref.clone(),
+        )?;
+        Ok(M8InstalledReadOnlyProviderEffectComponent {
+            instance,
+            component_binding_ref,
+        })
     }
 
     #[cfg(test)]
@@ -1641,7 +1747,8 @@ impl M8RuntimeInstance {
     ) -> Result<M8I3PrivateSnapshot, M8I3PrivateSnapshotError> {
         match &self.scope {
             M8RuntimeInstanceScope::Ordinary => Ok(M8I3PrivateSnapshot::from_instance(self)),
-            M8RuntimeInstanceScope::ReadOnlyProviderEffectComposite { .. } => {
+            M8RuntimeInstanceScope::ReadOnlyProviderEffectComposite { .. }
+            | M8RuntimeInstanceScope::ReadOnlyProviderEffectInstalled { .. } => {
                 Err(M8I3PrivateSnapshotError::StructuralMismatch)
             }
         }
@@ -1859,7 +1966,32 @@ impl M8I3PrivateSnapshot {
     }
 
     fn into_instance(self) -> Result<M8RuntimeInstance, M8I3PrivateSnapshotError> {
-        if self.version != Self::VERSION || self.scope != M8I3PrivateSnapshotScope::Ordinary {
+        self.into_instance_with_scope(
+            M8I3PrivateSnapshotScope::Ordinary,
+            M8RuntimeInstanceScope::Ordinary,
+        )
+    }
+
+    fn into_provider_component_instance(
+        self,
+        binding_context: M8ReadOnlyProviderEffectBindingContext,
+        component_binding_ref: String,
+    ) -> Result<M8RuntimeInstance, M8I3PrivateSnapshotError> {
+        self.into_instance_with_scope(
+            M8I3PrivateSnapshotScope::ReadOnlyProviderEffectComponent,
+            M8RuntimeInstanceScope::ReadOnlyProviderEffectInstalled {
+                binding_context,
+                component_binding_ref,
+            },
+        )
+    }
+
+    fn into_instance_with_scope(
+        self,
+        expected_scope: M8I3PrivateSnapshotScope,
+        restored_scope: M8RuntimeInstanceScope,
+    ) -> Result<M8RuntimeInstance, M8I3PrivateSnapshotError> {
+        if self.version != Self::VERSION || self.scope != expected_scope {
             return Err(M8I3PrivateSnapshotError::StructuralMismatch);
         }
         if self.ordered_lowering.iter().any(|entry| {
@@ -1929,7 +2061,7 @@ impl M8I3PrivateSnapshot {
             designated_execution_plans,
             owner_execution_plans,
             relation_execution_plans,
-            scope: M8RuntimeInstanceScope::Ordinary,
+            scope: restored_scope,
         })
     }
 }

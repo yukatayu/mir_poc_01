@@ -16,6 +16,7 @@ pub mod alpha_avatar_runtime;
 pub mod alpha_layer_insertion_runtime;
 pub mod alpha_local_runtime;
 pub mod alpha_network_runtime;
+pub(crate) mod checked_program_reference;
 pub mod clean_near_end;
 pub mod current_l2;
 pub mod current_l2_cli;
@@ -26,6 +27,20 @@ pub mod full_system_v1_renderer_pose_backend;
 pub mod full_system_v1_session;
 pub mod hotplug_runtime;
 pub(crate) mod i3_read_only_provider_composite;
+#[cfg(feature = "i3-process-test-seams")]
+#[doc(hidden)]
+pub use i3_read_only_provider_composite::{
+    I3ReadOnlyProviderFixtureProfile, prepare_source_real_i3_read_only_provider_localnet_launch,
+    prepare_source_real_i3_read_only_provider_localnet_launch_duplicate_provider_delivery_on_second_session,
+    prepare_source_real_i3_read_only_provider_localnet_launch_effect_retired_observer_current,
+    prepare_source_real_i3_read_only_provider_localnet_launch_held_result_first_send_on_second_session,
+    prepare_source_real_i3_read_only_provider_localnet_launch_observer_repeat_export,
+    prepare_source_real_i3_read_only_provider_localnet_launch_observer_retired_after_projection_before_commit,
+    prepare_source_real_i3_read_only_provider_localnet_launch_observer_retired_before_preflight,
+    prepare_source_real_i3_read_only_provider_localnet_launch_post_call_effect_retired_before_held_result_send,
+    prepare_source_real_i3_read_only_provider_localnet_launch_sent_result_lost_before_consume,
+    prepare_source_real_i3_read_only_provider_localnet_launch_with_fixture_profile,
+};
 pub mod m10_reference_system;
 pub(crate) mod m8_owner_admission_gate;
 pub mod m8_runtime_admission;
@@ -106,6 +121,8 @@ mod sys3_projection_tests;
 mod sys4_dispatch_tests;
 #[cfg(test)]
 mod sys5_i3_provider_composite_tests;
+#[cfg(test)]
+mod sys5_i3_provider_execution_tests;
 #[cfg(test)]
 mod sys5_local_cut_patch_tests;
 #[cfg(test)]

@@ -32,8 +32,8 @@ use crate::{
         M8I3OwnerAdmissionIssuance, M8I3OwnerAdmissionPermit, M8I3VerifiedOwnerAdmissionHandoff,
     },
     m8_runtime_admission::{
-        EvidenceSecurityLabel, M8I3PrivateSnapshot, M8ReadOnlyProviderEffectComponent,
-        M8RuntimeInstance, M8SecurityClass,
+        EvidenceSecurityLabel, M8I3PrivateSnapshot, M8InstalledReadOnlyProviderEffectComponent,
+        M8ReadOnlyProviderEffectComponent, M8RuntimeInstance, M8SecurityClass,
     },
     m8_runtime_designated_value::{
         M8ConsumeRequest, M8DesignatedEvaluationRequest, M8DesignatedTick, M8InputReceipt,
@@ -496,6 +496,76 @@ pub(crate) struct Sys4InactiveProviderRestrictedAdmission {
     legacy_authority_generation: M9AuthorityGeneration,
 }
 
+/// One installed, non-ordinary provider child profile. It reuses the same
+/// SYS-4 locus stores, mailboxes and M8 local backend as `LocalFabric`, but
+/// deliberately does not contain a `FabricProgram`, a sealed ordinary
+/// admission, or a final-M9 publisher. The retained projection stays tagged
+/// provider topology and can reach only the dedicated provider carrier path.
+pub(crate) struct Sys4InstalledProviderLocalFabric {
+    projection: GlobalProjectionResult,
+    assigned_loci: BTreeSet<String>,
+    loci: BTreeMap<String, LocusRuntime>,
+    backend: M8ExecutionBackend,
+    authority_generation: M9AuthorityGeneration,
+    component_binding_ref: String,
+}
+
+/// Exact static provenance for one distinct provider carrier direction. It
+/// is copied from the installed provider projection, never supplied by a
+/// source action, host adapter, or network peer.
+#[derive(Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[serde(deny_unknown_fields)]
+pub(crate) struct Sys4ProviderCarrierDescriptor {
+    operation_id: String,
+    source_locus: String,
+    target_locus: String,
+    source_ref: String,
+    core_ref: String,
+    source_artifact_ref: String,
+    target_artifact_ref: String,
+    edge_ref: String,
+}
+
+impl std::fmt::Debug for Sys4ProviderCarrierDescriptor {
+    fn fmt(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        formatter.write_str("Sys4ProviderCarrierDescriptor(..)")
+    }
+}
+
+impl Sys4ProviderCarrierDescriptor {
+    pub(crate) fn operation_id(&self) -> &str {
+        &self.operation_id
+    }
+
+    pub(crate) fn source_locus(&self) -> &str {
+        &self.source_locus
+    }
+
+    pub(crate) fn target_locus(&self) -> &str {
+        &self.target_locus
+    }
+
+    pub(crate) fn source_ref(&self) -> &str {
+        &self.source_ref
+    }
+
+    pub(crate) fn core_ref(&self) -> &str {
+        &self.core_ref
+    }
+
+    pub(crate) fn source_artifact_ref(&self) -> &str {
+        &self.source_artifact_ref
+    }
+
+    pub(crate) fn target_artifact_ref(&self) -> &str {
+        &self.target_artifact_ref
+    }
+
+    pub(crate) fn edge_ref(&self) -> &str {
+        &self.edge_ref
+    }
+}
+
 impl Sys4InactiveProviderAdmission {
     pub(crate) fn from_m9_inactive_provider_composite(
         checked_program_identity: CheckedProgramIdentity,
@@ -586,6 +656,18 @@ impl Sys4InactiveProviderAdmission {
             .retire_effect_authorization()
             .map_err(|_| Sys4DispatchDiagnostics::one(Sys4DiagnosticKind::ProgramAdmissionMismatch))
     }
+
+    /// Select already-issued M9 facts for one installed provider child. This
+    /// remains distinct from ordinary final-admission evidence and from SYS-4
+    /// authority issuance.
+    pub(crate) fn i3_private_provider_role_snapshot(
+        &self,
+        role: crate::m9_auth_verification::M9I3ReadOnlyProviderChildRole,
+    ) -> Sys4Result<crate::m9_auth_verification::M9I3PrivateReadOnlyProviderRoleSnapshot> {
+        self.composite
+            .i3_private_provider_role_snapshot(role)
+            .map_err(|_| Sys4DispatchDiagnostics::one(Sys4DiagnosticKind::ProgramAdmissionMismatch))
+    }
 }
 
 impl Sys4InactiveProviderRestrictedAdmission {
@@ -654,6 +736,180 @@ impl Sys4InactiveProviderRestrictedAdmission {
             return false;
         };
         expected.i3_private_snapshot() == self.legacy_authority_generation.i3_private_snapshot()
+    }
+}
+
+impl Sys4InstalledProviderLocalFabric {
+    /// Restore the exact, already-restricted local fabric state needed by a
+    /// provider child. Production callers arrive through SYS-5's
+    /// inherited-control installation after it has matched the candidate
+    /// image to the trusted expected-start record and installed the
+    /// independent M9 effect role. A cfg(test) SYS-5 local-component pair may
+    /// reuse these same already-restricted parts without constructing an
+    /// image, FD3 control, or installed child. This never creates an ordinary
+    /// program/admission/verdict or issues a capability from decoded data.
+    pub(crate) fn from_inherited_provider_parts(
+        static_snapshot: I3PrivateProviderStaticProjectionSnapshot,
+        component: &M8InstalledReadOnlyProviderEffectComponent,
+        legacy_authority_snapshot: M9I3PrivateAuthorityGenerationSnapshot,
+        assigned_loci: BTreeSet<String>,
+        expected_component_binding_ref: &str,
+    ) -> Sys4Result<Self> {
+        if assigned_loci.is_empty() || expected_component_binding_ref.is_empty() {
+            return Err(Sys4DispatchDiagnostics::one(
+                Sys4DiagnosticKind::ProgramAdmissionMismatch,
+            ));
+        }
+        let projection = static_snapshot
+            .into_inherited_provider_projection()
+            .map_err(|_| {
+                Sys4DispatchDiagnostics::one(Sys4DiagnosticKind::ProgramProjectionMismatch)
+            })?;
+        let projection_loci = projection
+            .locus_order()
+            .into_iter()
+            .map(str::to_string)
+            .collect::<BTreeSet<_>>();
+        if projection_loci != assigned_loci
+            || !projection.contains_read_only_provider_effect_static_semantics()
+        {
+            return Err(Sys4DispatchDiagnostics::one(
+                Sys4DiagnosticKind::ProgramProjectionMismatch,
+            ));
+        }
+        let authority_generation = M9AuthorityGeneration::from_i3_private_snapshot(
+            legacy_authority_snapshot,
+        )
+        .map_err(|_| Sys4DispatchDiagnostics::one(Sys4DiagnosticKind::ProgramAdmissionMismatch))?;
+        if authority_generation.program_identity()
+            != projection.checked_program_identity().stable_key()
+        {
+            return Err(Sys4DispatchDiagnostics::one(
+                Sys4DiagnosticKind::ProgramAdmissionMismatch,
+            ));
+        }
+        let restriction = m9_execution_restriction_for_projection(&projection, true)?;
+        authority_generation
+            .validate_execution_restriction_exact(&restriction)
+            .map_err(|_| {
+                Sys4DispatchDiagnostics::one(Sys4DiagnosticKind::IncompleteM9AuthorityInventory)
+            })?;
+        let loci = initialize_locus_runtimes_for_projection(&projection, &assigned_loci)?;
+        let mut sessions = BTreeMap::new();
+        for locus in &assigned_loci {
+            let seed = M8LocalRuntimeSeed::new()
+                .with_authority_state(authority_generation.authority_state())
+                .with_designated_input_receipts(M8InputReceiptSet::new());
+            let session = M8LocalRuntime::from_i3_installed_provider_component(
+                component,
+                expected_component_binding_ref,
+                seed,
+            )
+            .map_err(|_| {
+                Sys4DispatchDiagnostics::one(Sys4DiagnosticKind::ProgramAdmissionMismatch)
+            })?;
+            if sessions.insert(locus.clone(), Box::new(session)).is_some() {
+                return Err(Sys4DispatchDiagnostics::one(
+                    Sys4DiagnosticKind::ProgramProjectionMismatch,
+                ));
+            }
+        }
+        let mut backend = M8ExecutionBackend::St(sessions);
+        install_relation_bootstraps_for_projection(&mut backend, &projection)?;
+        Ok(Self {
+            projection,
+            assigned_loci,
+            loci,
+            backend,
+            authority_generation,
+            component_binding_ref: expected_component_binding_ref.to_string(),
+        })
+    }
+
+    pub(crate) fn assigned_loci(&self) -> &BTreeSet<String> {
+        &self.assigned_loci
+    }
+
+    pub(crate) fn checked_program_identity(&self) -> &CheckedProgramIdentity {
+        self.projection.checked_program_identity()
+    }
+
+    pub(crate) fn component_binding_ref(&self) -> &str {
+        &self.component_binding_ref
+    }
+
+    pub(crate) fn has_exact_legacy_authority_generation(&self) -> bool {
+        self.authority_generation.program_identity()
+            == self.projection.checked_program_identity().stable_key()
+            && self.loci.len() == self.assigned_loci.len()
+            && matches!(self.backend, M8ExecutionBackend::St(_))
+    }
+
+    /// The installed provider profile exposes no owner-operation entrypoint.
+    /// This checks the retained M8 sessions directly so the finite provider
+    /// fixture assertion can establish that its carrier-only execution added
+    /// no owner occurrence to the stored local fabric.
+    pub(crate) fn has_no_owner_execution_occurrences(&self) -> bool {
+        match &self.backend {
+            M8ExecutionBackend::St(sessions) => sessions
+                .values()
+                .all(|session| session.has_no_owner_execution_occurrences()),
+            M8ExecutionBackend::Ow1(_) => false,
+        }
+    }
+
+    pub(crate) fn provider_request_descriptor(
+        &self,
+    ) -> Result<Sys4ProviderCarrierDescriptor, Sys4DispatchDiagnostics> {
+        self.provider_carrier_descriptor(CommunicationEdgeKind::ReadOnlyProviderEffectRequest)
+    }
+
+    pub(crate) fn provider_result_descriptor(
+        &self,
+    ) -> Result<Sys4ProviderCarrierDescriptor, Sys4DispatchDiagnostics> {
+        self.provider_carrier_descriptor(CommunicationEdgeKind::ReadOnlyProviderEffectResult)
+    }
+
+    fn provider_carrier_descriptor(
+        &self,
+        expected_kind: CommunicationEdgeKind,
+    ) -> Result<Sys4ProviderCarrierDescriptor, Sys4DispatchDiagnostics> {
+        let mut matching = self
+            .projection
+            .communication_plan()
+            .edges()
+            .iter()
+            .filter(|edge| edge.kind() == expected_kind);
+        let edge = matching.next().ok_or_else(|| {
+            Sys4DispatchDiagnostics::one(Sys4DiagnosticKind::ProgramProjectionMismatch)
+        })?;
+        if matching.next().is_some()
+            // A restricted child retains each incident provider edge so a
+            // requester may validate the executor's required lineage and
+            // vice versa.  Requiring both endpoints to be local would drop
+            // that existing remote-input closure at the A/B boundary.
+            || (!self.assigned_loci.contains(edge.source_locus())
+                && !self.assigned_loci.contains(edge.target_locus()))
+            || edge.operation_id().is_empty()
+            || edge.core_ref().is_none_or(str::is_empty)
+            || edge.source_fragment_ref().is_empty()
+            || edge.target_fragment_ref().is_empty()
+            || edge.edge_ref().is_empty()
+        {
+            return Err(Sys4DispatchDiagnostics::one(
+                Sys4DiagnosticKind::ProgramProjectionMismatch,
+            ));
+        }
+        Ok(Sys4ProviderCarrierDescriptor {
+            operation_id: edge.operation_id().to_string(),
+            source_locus: edge.source_locus().to_string(),
+            target_locus: edge.target_locus().to_string(),
+            source_ref: provider_source_ref(&edge.source_ref()),
+            core_ref: edge.core_ref().unwrap_or_default().to_string(),
+            source_artifact_ref: edge.source_fragment_ref().to_string(),
+            target_artifact_ref: edge.target_fragment_ref().to_string(),
+            edge_ref: edge.edge_ref().to_string(),
+        })
     }
 }
 
@@ -11001,23 +11257,9 @@ impl LocalFabric {
             diagnostics.context.backend_ineligibility_reason = Some(reason);
             return Err(diagnostics);
         }
-        let mut loci = BTreeMap::new();
-        for locus in program.locus_names() {
-            let artifact = fabric_artifact_for(program.projection.locus_program(&locus));
-            loci.insert(
-                locus.clone(),
-                LocusRuntime {
-                    local_store: LocusLocalStore::owned(locus.clone()),
-                    locus,
-                    program_identity: program.checked_program_identity().clone(),
-                    artifact,
-                    incoming_endpoint: EndpointCarrierHistory::default(),
-                    outgoing_endpoint: EndpointCarrierHistory::default(),
-                    incoming_mailbox: IncomingMailbox::default(),
-                    outgoing_mailbox: OutgoingMailbox::default(),
-                },
-            );
-        }
+        let program_loci = program.locus_names().into_iter().collect::<BTreeSet<_>>();
+        let mut loci =
+            initialize_locus_runtimes_for_projection(&program.projection, &program_loci)?;
         for ((locus, state, index, field), value) in &admission.initial_state_seed.ints {
             loci.get_mut(locus)
                 .expect("validated SYS-4 seed locus remains present")
@@ -11076,17 +11318,7 @@ impl LocalFabric {
         // The finite local relation fallback chain is constructed inside the
         // owner M8 session from its admitted plan and M9-derived bootstrap
         // lease.  No schedule or SYS-5 caller provides chain material.
-        for fragment in program.projection.sys4_artifact_fragments().entries() {
-            if fragment.fragment_kind() != ProjectedOperationFragmentKind::RelationPublication {
-                continue;
-            }
-            let relation = fragment
-                .relation_checked_core()
-                .expect("relation publication fragment retains checked Core");
-            backend
-                .install_relation_bootstrap(relation.owner_locus(), fragment.operation_id())
-                .map_err(Sys4DispatchDiagnostics::one)?;
-        }
+        install_relation_bootstraps_for_projection(&mut backend, &program.projection)?;
         let local_store_read_audits = program
             .locus_names()
             .into_iter()
@@ -16373,6 +16605,71 @@ impl LocalFabric {
             ),
         }
     }
+}
+
+fn initialize_locus_runtimes_for_projection(
+    projection: &GlobalProjectionResult,
+    assigned_loci: &BTreeSet<String>,
+) -> Sys4Result<BTreeMap<String, LocusRuntime>> {
+    if assigned_loci.is_empty() {
+        return Err(Sys4DispatchDiagnostics::one(
+            Sys4DiagnosticKind::ProgramProjectionMismatch,
+        ));
+    }
+    let mut loci = BTreeMap::new();
+    for locus in assigned_loci {
+        let artifact = fabric_artifact_for(projection.locus_program(locus));
+        if projection.locus_program(locus).is_none()
+            || loci
+                .insert(
+                    locus.clone(),
+                    LocusRuntime {
+                        local_store: LocusLocalStore::owned(locus.clone()),
+                        locus: locus.clone(),
+                        program_identity: projection.checked_program_identity().clone(),
+                        artifact,
+                        incoming_endpoint: EndpointCarrierHistory::default(),
+                        outgoing_endpoint: EndpointCarrierHistory::default(),
+                        incoming_mailbox: IncomingMailbox::default(),
+                        outgoing_mailbox: OutgoingMailbox::default(),
+                    },
+                )
+                .is_some()
+        {
+            return Err(Sys4DispatchDiagnostics::one(
+                Sys4DiagnosticKind::ProgramProjectionMismatch,
+            ));
+        }
+    }
+    Ok(loci)
+}
+
+fn install_relation_bootstraps_for_projection(
+    backend: &mut M8ExecutionBackend,
+    projection: &GlobalProjectionResult,
+) -> Sys4Result<()> {
+    for fragment in projection.sys4_artifact_fragments().entries() {
+        if fragment.fragment_kind() != ProjectedOperationFragmentKind::RelationPublication {
+            continue;
+        }
+        let relation = fragment.relation_checked_core().ok_or_else(|| {
+            Sys4DispatchDiagnostics::one(Sys4DiagnosticKind::ProgramProjectionMismatch)
+        })?;
+        backend
+            .install_relation_bootstrap(relation.owner_locus(), fragment.operation_id())
+            .map_err(Sys4DispatchDiagnostics::one)?;
+    }
+    Ok(())
+}
+
+fn provider_source_ref(source_ref: &SourceRef) -> String {
+    let mut hasher = Sha256::new();
+    hasher.update(b"mirrorea/sys4/i3/provider-carrier-source-ref/v1\0");
+    hasher.update(format!("{source_ref:?}"));
+    format!(
+        "sys4-i3-provider-source-ref-sha256-v1:{:x}",
+        hasher.finalize()
+    )
 }
 
 fn fabric_artifact_for(program: Option<&LocusProgram>) -> FabricArtifact {

@@ -61,6 +61,14 @@ durability or live distributed patch.
 
 ## Start state / dirty state
 
+Provider Stage 3 starts at `a027d61b8030a903f892de2f7483ec8b64627963`,
+with clean HEAD/origin/main/live parity observed
+`2026-09-08T21:24:14+09:00`. Subsequent seven LAB edits record that observed
+close and the actual-runtime consumer before delegated source/test work.
+There are no user source edits to overwrite. Resource check before Stage 3
+shows about 28 GiB disk free and 12 GiB available memory; the existing
+10 GiB pre-Cargo guard remains and no extra cleanup is performed.
+
 Provider Stage 2c starts from accepted inactive Stage 2b
 `7142b205b4e2805d50ce78156de99e6feb1db37a`, observed clean with live remote
 parity at `2026-09-08T19:22:07+09:00`. All subsequent source/test/LAB changes
@@ -127,6 +135,14 @@ remaining independently selected targets; I3-3 remains unaccepted.
 
 ## Documents consulted
 
+Provider Stage 3: full Canon spec/17, architecture/09/10, ADR-0042 and current
+Plan 250; targeted actual M9/composite/SYS4/SYS5/FD3/supervisor source. Parent
+reads the full bounded Oracle answer from session
+`i3-provider-stage3-actual-20260908` at
+`/tmp/i3-provider-stage3-oracle-answer-20260908.md` and verifies it against
+local source. The reply is advisory, not authority; source-relevant conclusions
+are mirrored below and in Plan 250. No old-report bulk audit or new WRK occurs.
+
 Operational instructions: AGENTS.md. Normative: Canon README/MAP, NORTH-STAR,
 architecture/01-strata, architecture/06-project-product-layers,
 architecture/10-i3-multi-process-runtime, ADR-0034, ADR-0039, PROPOSAL-042,
@@ -140,6 +156,70 @@ docs/reports/TEMPLATE.md and the report validation helpers in
 scripts/validate_docs.py. Historical plans/reports are evidence, not authority.
 
 ## Actions taken
+
+Provider two-session evidence choice (2026-09-09 continuation): independent
+planner review and parent integration select actual child-private assertions
+with generic completion for the finite reconnect/loss/replay experiments.
+Keep the normal v2 observer join strict; do not broaden its terminal decoder
+to optional fault-state fields merely to export each negative case. Provider
+experiments must inspect genuine installed runtime/adapter facts after real
+QUIC crossings, not borrow ordinary-owner evidence or expected counters.
+Classify them as actual network execution with child-private assertions,
+not exported observer-safe provider-fault traces. The alternative narrow v2
+lifecycle/branch extension remains a reopen path only if private assertions
+cannot establish the required facts. In particular, a second receive after
+the original host call cannot be flattened into that call's predecessors.
+This is the next consumer design; no reconnect test has run at this point.
+
+Provider Stage 3: parent retains the sole I3-3 goal and selects a coherent
+actual-runtime component after independent read-only planner and Oracle
+advice. Runtime/M9/M8/SYS4/SYS5/carrier changes have one writer; existing probe
+supervisor/child integration has a separate non-overlapping writer; tests have
+their own author and one evaluator owns Cargo. The working packet
+`/tmp/i3-provider-stage3-parent-packet-20260908.md` specifies exact ownership,
+preserved invariants, direct consumer and positive/falsifier gates. It is LAB
+input, not a second roadmap or normative source. First implementation is a
+minimal source-real fail-closed scaffold for a separate positive assertion
+RED, then actual host/QUIC execution; no intermediate inactive-only acceptance.
+
+The selected T0 boundary uses an opaque genuine prepared admission and a
+one-shot privileged FD writer inside the existing private whole-run supervisor
+owner, after child registration under the armed deadline/reaper. Runtime
+installation requires a distinct opaque inherited-control reader result;
+ordinary image/generic decoded controls cannot create it. Public/doc-hidden
+visibility, non-Clone, pipe number and hashes are not supervision or authority
+proofs. A T0 caller can capture bytes or fabricate a pipe, outside this finite
+trusted-launcher claim; actual supported control flow/tests establish bounded
+enforcement. Moving broad Child/event/reaper ownership across crates is
+deferred as unnecessary under the same trust assumption. Reopen for an
+untrusted activation escape or a supported run omitting enforcement.
+
+Parent setup currentness is checked before consuming launch custody; its Arc
+is not live child authority. B serializes actual local M9 checks and retirement
+with reserve/start/release; A retains restricted actual effect grant/witness
+lineage and rechecks before consumption, without B host-use custody/path.
+Parent-side later policy fencing requires whole-run quiescence/termination,
+not a claimed instantaneous distributed revoke. Membership retirement must
+also invalidate dependent legacy uses rather than leave stale sealed inventory.
+No new general authority propagation, public ABI, durability or I3-4 work.
+
+During Stage 3 source inspection, parent identifies a supervision gap in the
+draft's synchronous child image/control writes: an armed deadline alone cannot
+interrupt a blocked pipe write on the supervisor thread. The probe writer
+selects deadline-aware nonblocking image writes and fail-closed nonblocking
+FD3 writes, retaining the existing absolute deadline and reaper. A tracked
+worker alternative is not selected because an unconditional post-deadline
+join or detached authority writer would not establish the required bound.
+Actual nonreading/partial-bootstrap falsifiers remain to be run; source
+inspection and formatting are not process-containment evidence.
+
+Read-only mapping identifies reusable local relation/designated causal tests
+and actual M8/M10 fallback/reacquire negatives. A separate test author adds
+one local `relation_fallback_publication_causally_precedes_viewerc_later_serve`
+test to directly link the real fallback publication to ViewerC's later serve,
+including presentation-local nonmutation/nonpublication assertions. It uses
+existing production APIs only and awaits the sole evaluator. No cross-process
+relation/designated pressure or I3-4 activation is introduced.
 
 Provider Stage 2c starts from accepted inactive cut `7142b205`. Parent selects
 the private mixed-image variant in the existing SYS4/SYS5 pipeline after the
@@ -285,6 +365,19 @@ stored-result/no-new-consume contracts remain preserved.
 
 ## Files changed
 
+Current Stage 3 working changes are in the runtime provider composite, M9
+authority, SYS4 dispatch, SYS5 process runtime and lib registration; existing
+probe process-localnet/lib modules; new private
+`crates/mir-runtime/src/sys5_i3_provider_execution_tests.rs`; and the local
+ordering test in `crates/mir-runtime/src/sys5_relation_dispatch_tests.rs`.
+The actual-launch positive is separately authored in
+`crates/mirrorea-i3-probe/tests/i3_provider_process_localnet.rs`. M8 admission
+and SYS3 private snapshot gain narrow structural queries for the dedicated
+installation boundary, not an ordinary restore/authority constructor.
+Plan 250, this report and the five LAB snapshots are maintained in place.
+This is an evolving, unaccepted source inventory, not evidence of working
+provider invocation. No new Canon record or report is created at this stage.
+
 Provider Stage 2a changes semantics finite-refinement/coverage and the existing
 checked identity query; SYS3 pure lowering/model, new static provider projector
 and private static snapshot; SYS4/SYS5 explicit unsupported boundaries; and
@@ -373,6 +466,24 @@ It changes no Canon rule, theory ledger or official lifecycle.
 
 ## Commands run
 
+Final ProviderStage3 gates (sole evaluator, `CARGO_INCREMENTAL=0`,
+`CARGO_BUILD_JOBS=2`,10 GiB pre-command floor):
+
+```bash
+cargo test --locked -p mirrorea-i3-probe --all-targets -- --test-threads=1
+cargo test --locked -p mir-runtime --lib --features i3-private-quic,i3-process-test-seams -- --test-threads=1
+cargo test --locked -p mir-runtime --features i3-private-quic,i3-process-test-seams --test sys5_i3_process_runtime --test m10_conformance --test sys5_local_slice --test sys6_i2_cli --test i3_provider_effect_guards -- --test-threads=1
+cargo clippy --locked -p mir-runtime -p mirrorea-i3-probe --all-targets --features mir-runtime/i3-process-test-seams -- -D warnings
+cargo fmt --all -- --check
+```
+
+Stage 3: the source-real positive test and narrow runtime compile check/rerun
+are recorded with exact logs and results under Evidence below. All Cargo runs
+use `CARGO_INCREMENTAL=0 CARGO_BUILD_JOBS=2`, locked dependencies and the
+`i3-private-quic,i3-process-test-seams` union. Other intermediate checks are
+read-only source/Git/resource inspection, scoped Rust formatting and diff
+checks; none substitutes for the pending actual process/host/QUIC tests.
+
 Provider Stage 1: sole evaluator uses `CARGO_INCREMENTAL=0 CARGO_BUILD_JOBS=2`,
 locked dependencies and serial tests. Commands include source
 `cargo test --locked -p mir-semantics --test i3_provider_effect`, the constructor
@@ -438,6 +549,769 @@ CARGO_INCREMENTAL=0 CARGO_BUILD_JOBS=2 cargo test --locked -p mir-runtime --test
 ```
 
 ## Evidence / outputs / test results
+
+Final ProviderStage3 post-review gates are GREEN. The P2 packet
+`/tmp/c3-stage3-p2-green-20260909.3ps1Q2/` contains fresh library410/410
+(91.01s bodies), all probe targets, scoped all-target Clippy with warnings
+denied and format. The additional affected integration packet
+`/tmp/c3-stage3-p2-extra-regression-20260909.9h0zjr/cargo.log` passes
+process64/64, M1067/67, I2 local5/5, CLI8/8 and public provider guards5/5
+(1m39.29s). These are fresh after the P2 guard, unlike the earlier complete
+runtime all-target packet. Independent final source review has no remaining
+P0/P1/P2 and approves finite component integration; the Canon-first planner
+concurs subject to final docs/diff/Git checks. Free16,830,140,416 bytes.
+The bounded scan of29 changed/new file contents finds no selected private-key,
+AWS/GitHub/API-key patterns; output is filepath-only. This is not a general
+secret/entropy audit. Fetch confirms unchanged main/origin tracking parity
+before the integration commit. Full I3-3 and official lifecycle stay open.
+
+The P2 actual misuse assertion produces RED in
+`/tmp/c3-stage3-p2-held-misuse-red-20260909.MfC5CN/cargo.log`:0/1,19 filtered,
+32.08s compile/15.96s bodies. The observed outer error is `RequesterTerminal`,
+not the predicted `TerminalObservationCorrelation`; it does not demonstrate
+an externally emitted unauthorized audit or directly expose an audit-stage
+failure. The static finding is missing early mode exclusion and incompatibility
+with a spent export budget. Both are now guarded before normal audit work,
+and the genuine post-completion denial assertion remains in the fixed child
+conformance path. Independent narrow re-review finds the P2 closed, with no
+remaining static P0/P1/P2, conditional on validation.
+
+Post-repair actual held-session2 passes1/1 (1.05s bodies) in
+`/tmp/c3-stage3-p2-green-20260909.3ps1Q2/01-held-s2.log`.
+The same packet's `02-probe-all-targets.log` passes all probe targets
+(1m29.16s): lib3, frame contract28, ordinary localnet41, provider localnet20,
+observer safety2, QUIC static8, source binding6, supervisor falsifiers2 and
+equal-comparison/QUIC-candidate/TLS-candidate1 each. Results are per target, not additive;
+this includes the four fixed fault cases and preserved normal observer path.
+Post-command free16,777,527,296 bytes; no cleanup. Fresh full runtime library,
+scoped Clippy and format checks remain the current validation consumers.
+
+The broad runtime feature-union all-target test command completes GREEN in
+`/tmp/c3-stage3-slice2-broad-20260909.uPOcH6/03-runtime-all-targets.log`
+(4m10.22s, exit0). Per-target results include library410/410, process64/64,
+M10 conformance67/67, I2 local5/5, I2 CLI8/8, provider public guards5/5,
+request-lifecycle bounded model3/3 and admission-policy2/2; all other runtime
+integration/example targets in the log also pass. Counts overlap prior
+focused packets and are not additive. Post-command free18,803,171,328 bytes.
+
+Independent Stage3 static review reports P0=0/P1=0/P2=1. The supported
+supervisor already separates normal audit and fixed-network modes, but the
+installed runtime does not itself forbid a fixed-network child from using
+the normal audit method or require an unspent export allowance before generic
+network completion. This is a trusted-T0 encapsulation risk, not a reachable
+external permission bypass. Parent chooses bounded hardening before component
+acceptance. A separate test-author review confirms the smallest falsifier:
+after genuine held-session2 completion facts, attempt normal audit internally
+and require typed rejection before spending its allowance; the existing actual
+held-process test witnesses the result. This assertion is installed first for
+RED, before adding the audit-entry/completion guards. The broad runtime result
+above predates that repair; probe all-target tests wait for its GREEN cut.
+
+After the internal runtime/M9 cleanup, scoped Clippy reaches the probe and
+reports only its private large completion enum and nine-argument predecessor
+helper (`/tmp/c3-stage3-slice2-quality-rerun-20260909.DzXXoL/01-clippy.log`).
+Boxing only the private normal-audit payload and grouping borrowed predecessor
+inputs preserves the public return and exact checks. The subsequent scoped
+all-target Clippy is GREEN with `-D warnings` in
+`/tmp/c3-stage3-slice2-quality-green-20260909.0wXMwR/01-clippy.log` (6.50s).
+Its format check then identifies only pre-existing style drift in
+`sys5_i3_owner_admission_tests.rs`, `sys5_i3_process_snapshot.rs` and
+`sys5_local_slice.rs`; the production writer applies only the standard formatter.
+Fresh format verification passes in
+`/tmp/c3-stage3-slice2-broad-20260909.uPOcH6/01-fmt.log`.
+The no-default-features runtime check also passes (`02-no-default.log`,13.51s),
+with28 unused/dead warnings in that build profile; it is not warning-clean
+default-profile Clippy evidence. Full runtime/probe all-target tests follow.
+
+Parent `make docs` completes successfully at the
+`2026-09-09T04:55:57+09:00` observation: agent config,216 Canon entries,
+800/800 hierarchy paths and1760-report scaffold. This is docs verification,
+not independent implementation acceptance. Broad test compilation increases
+artifact storage; the observed root filesystem has18 GiB free, and the sole
+evaluator retains the10 GiB pre-command floor without additional cleanup.
+
+The next scoped two-crate all-target Clippy invocation is RED in
+`/tmp/c3-stage3-slice2-clippy-20260909.JQ1O8a/cargo.log` (27.56s, exit101).
+It stops in runtime compilation, so no successful probe lint is claimed.
+The diagnostic identifies unused helpers/fields, three large-enum warnings,
+one private return-type complexity warning, and I/O error construction in
+two production locations plus one test fixture. The selected repair keeps
+installed-component custody, narrows genuinely unit-test-only helpers to
+test builds, boxes only internal large M9 snapshot payloads (unchanged Serde
+shape), and aliases the private return tuple. It changes no authority, wire
+schema/version, resource limit, deadline or public scope constructor. Warning
+suppression is not used to substitute for this gate. Post-repair validation
+remains pending.
+
+Provider network slice2 repaired focused packet is GREEN under
+`/tmp/c3-stage3-slice2-repair-green-20260909.Wdad0A/`: exact normal-v2 guard1/1
+(`01-normal-v2.log`), exact held-session2 positive1/1
+(`02-held-second-session.log`,1.07s bodies), full actual provider probe20/20
+(`03-full-probe.log`,17.90s bodies; parent read04:40:28 JST), genuine local
+execution18/18, parser/read/writer7/7 and control9/9 (`04` through`06`).
+The focused positives overlap the full targets and are not additive coverage.
+The runtime unit targets retain three unused-member warnings; probe builds
+retain five. Scoped Clippy, broad regressions and current independent Stage3
+review follow; this is not component or I3-3 acceptance. Free disk after
+the packet29,215,432,704 bytes; no cleanup was performed.
+
+Provider network slice2 behavioral checkpoint, parent reads at
+`2026-09-09T04:34:37+09:00`: actual full probe20 runs19/20 in
+`/tmp/c3-stage3-slice2-fullprobe-20260909.Ub0yIJ/cargo.log`
+(30.01s compile,32.21s bodies). The held-result first-send on session2 alone
+fails at `TerminalObservationCorrelation`; the other three new fault cases
+and prior16 pass. Inspection locates the held requester calling the normal
+generation1-only receive method from generation2. The bounded repair shares
+the actual decode/current-consume body privately, retaining the normal
+generation1 guard and selecting generation2 only for the sealed held profile.
+No additional deadline, retry, diagnostic payload or public selector is added.
+The sent-but-unconsumed experiment receives and validates the actual original
+frame, then discards it before semantic admission: it is not wire packet loss
+or an unread frame. Its requester stays pending/remote-unknown with no consume.
+
+The normal v2 terminal projection must also reject populated second transport
+slots rather than flattening a replay branch into original predecessors.
+An initial test-fixture failure in
+`/tmp/c3-stage3-slice2-decoder-red-20260909.TFZ7uR/01-decoder.log`
+attempted to replace a null slot with a string-only helper; it did not reach
+the decoder claim. After the test-only null-slot setup repair, the exact test
+reaches the intended behavioral RED in
+`/tmp/c3-stage3-slice2-decoder-red-rerun-20260909.R8nJXR/cargo.log`:
+0/1,409 filtered,27.98s elapsed, assertion at execution-tests line1548.
+This is an untrusted synthetic structural candidate, not an issued audit.
+The shared producer/decoder well-formedness guard is released for repair;
+two-slot private retention capacity remains, without expanding normal v2
+exportable states. Current whole-slice validation and independent review
+remain pending; neither provider nor I3-3 is accepted by these partial results.
+
+Provider network slice2 scaffold RED, parent reads at
+`2026-09-09T03:58:58+09:00`: the first packet
+`/tmp/c3-stage3-slice2-initial-20260909.JHv7zZ/01-probe.log`
+rejects compilation at the four absent fixed factories and opaque runner,
+without executing bodies. The genuine setup/profile/FD3-v7 scaffold then runs
+20 tests in `/tmp/c3-stage3-slice2-behavior-20260909.H3PnqS/01-probe.log`:
+16 pass,4 new network-profile positives fail at `TerminalObservationCorrelation`
+(29.88s compile,17.51s bodies). The failure occurs after terminal-event
+collection but without accepting the events, fault actions, strict zero-exit
+acceptance or generic completion; it is not executed network-fault evidence.
+The two new cross-mode negatives reject before spawn. Full bounded fault
+implementation is released after this RED. The new v7/mixed-profile guard is
+at inherited FD3 consumption, not the structural DTO parser; no safe existing
+unit seam reaches it, so its rejection is source-inspected, not a claimed
+executed child-negative. No parser weakening or decoded-control install
+bypass is added solely for that test.
+
+Provider network slice1 GREEN, parent reads at
+`2026-09-09T03:41:42+09:00`: actual full probe14/14 in
+`/tmp/c3-stage3-network-v2-fullprobe-20260909.jSqdPi/01-probe.log`
+(5.07s compile,12.89s bodies), followed by execution17/17, parser/read/writer
+7/7 and control9/9 in
+`/tmp/c3-stage3-network-v2-runtime-rerun-20260909.eHhhvB/`
+(execution27.69s compile/3.54s bodies; control4.50s).
+The first runtime packet
+`/tmp/c3-stage3-network-v2-runtime-packet-20260909.gDBJBB/01-execution.log`
+ran16/17: its synthetic candidate used `ValuePresent` instead of the existing
+`value_present` Serde spelling and failed before intended negatives. Only that
+test data changed; no production admission was weakened. The repaired
+structural baseline decodes before isolated v1/profile/schema/missing-slot/
+predecessor falsifiers. These untrusted-input checks are not M9-issued audits
+or cryptographic authenticity evidence; the actual two-process producer
+provides normal joined provenance. Final free disk29,249,323,008 bytes;
+no cleanup. Probe reports six dead-code warning groups, runtime tests four;
+final deny-warnings and broad gates remain. The two-session provider fault
+slice is now released, without component or milestone acceptance.
+
+Provider network slice1 v2 RED checkpoint, parent recorded
+`2026-09-09T03:31:30+09:00`: the initial packet
+`/tmp/c3-stage3-network-v2-initial-20260909.BbxbNG/01-network.log`
+fails compilation with six runtime errors, without a test body. The bounded
+runtime repair retains/checks the actual send ticket reservation, handles the
+new typed error without peer evidence, and fixes borrow/lifetime issues.
+`/tmp/c3-stage3-network-v2-runtime-repair-20260909.5p3J6L/01-network.log`
+then reaches only the two expected old probe send-method arity errors
+(exit101,27s; no body). After probe-only argument adaptation,
+`/tmp/c3-stage3-network-v2-behavior-20260909.GAvPPw/01-network.log`
+compiles in5.02s and runs the actual value41 test for1.04s:0 passed,1 failed,
+13 filtered, safe `TerminalObservationCorrelation`. The parent personally
+reads both latter logs before releasing the v2 host-join migration. No semantic
+success, broad validation or provider acceptance is claimed. Post-command
+free disk is29,250,830,336 bytes; no cleanup is performed. Six dead-code
+warning groups remain for the final quality gate. The next regression packet
+must include genuine LOCAL execution/M9 checks and strict v2 decoding as well as the
+actual two-process producer join; two-session faults remain subsequent work.
+
+Resource packet passes at
+`/tmp/c3-stage3-resource-green-20260909.fYWIUP/`: actual probe14/14
+(5.03s compile,12.87s bodies), execution16/16 (27.49s compile,3.27s),
+parser/read/writer7/7 and control9/9 (4.41s). Parent reads all logs at
+`2026-09-09T02:58:09+09:00`. Noncanonical integer and33-byte profiles produce
+`ProviderInvalidResult` with one actual bounded read; the directory produces
+`ProviderPolicyDenied` without a successful read. All retain the real host
+entry/CallStarted and checked requester consumption with no owner execution.
+Private trusted assertion enum expansion bumps FD3 controlv5 tov6; no public
+wire or semantic-provider-result input is introduced.
+
+The expanded local pre-call retirement table covers real capability and witness
+retirement after reservation, with zero host activity. A separately named LOCAL
+codec/admission test mutates only the unit outcome kind in a genuine source-bound
+NotFound carrier into an untrusted AdapterUnavailable candidate; strict roundtrip
+preserves that atom, current A consumes once and rejects the duplicate. It is not
+an actual B/OS failure, authentic outcome-provenance proof or issued observation.
+No actual EMFILE test was executed. Parent self-review also preserves optional
+successful-read occurrence for all lookup/open/read failure classes in the
+generic observer join, rather than conflating a later error with zero reads.
+
+Pre-implementation RED at `/tmp/c3-stage3-resource-initial-20260909.X2A9V9/`
+is three missing variants (E0599), no body; parent reads it at02:48:47.
+The next RED at `/tmp/c3-stage3-resource-behavior-20260909.lZZ0yj/` is an
+actual executed noncanonical case rejected by the old observer join at
+`TerminalObservationCorrelation` (29.87s compile,1.05s body); parent reads
+it at02:53:32 before releasing the minimal probe join correction.
+Final free bytes29,272,440,832; known runtime warning groups remain, no orphan
+or additional cleanup. Current work is actual network producer retention/join
+and removal of provider value-derived attempt hashes, before reconnect/loss
+tests. This packet is not provider or I3-3 acceptance.
+
+Installed-observer conformance now passes at
+`/tmp/c3-stage3-observer-conformance-green-20260909.b3wGpd/`:
+actual probe11/11 (4.93s compile,9.76s bodies), execution15/15
+(27.91s compile,2.72s bodies), parser/read/writer7/7 and control9/9 (4.41s).
+Parent reads all four logs at `2026-09-09T02:44:18+09:00`.
+The11 comprise five previous normal/physical cases, four fixed actual-installed
+observer experiments and two mode-confusion prelaunch rejections. One common
+supervisor retains strict natural-zero/deadline/reap checks. Parent self-review
+removed extra locus/image/transport fields from the generic conformance event;
+only a fixed marker and physical slot remain, with no denied-observation record.
+No actual provider reconnect/loss claim or component acceptance follows.
+Final free bytes29,276,909,568; no orphan, extra cleanup or independent final
+review. Five runtime warning groups (four in lib-test builds) remain.
+
+The next finite resource tests use three fixed T0 profiles, not caller payloads:
+noncanonical integer and33-byte overflow -> `ProviderInvalidResult`, directory
+kind -> `ProviderPolicyDenied`, through normal actual host/QUIC/consume paths.
+Independent planner and parent find no spec/17 or Plan250 requirement for the
+previously considered optional actual EMFILE experiment. It is not implemented:
+`AdapterUnavailable` retains production classification and LOCAL injected-read
+evidence, including successful-read retention before a later error, plus typed
+carrier/consumer preservation. No actual OS operational-error test is claimed.
+B64/A65 remains finite system-bound evidence, not a separately reached B65
+admission test; no new source or fake request is added just for branch coverage.
+
+The subsequent bounded-observer-encoding packet
+`/tmp/c3-stage3-observer-byteencoding-20260909.voGDsl/` passes parser/read/writer7/7,
+execution15/15 (2.72s bodies), and strict actual probe5/5 (5.29s bodies).
+Parent reads all three logs at `2026-09-09T02:28:24+09:00`.
+Borrowed serialization uses a counting writer before body allocation and a
+preallocated65,532-byte bounded body writer; exact-cap and cap-plus-one tests
+exercise the synthetic writer, not an actual observer-retirement race or a
+general heap bound. Final free bytes29,294,743,552; no cleanup or orphan process.
+
+The next actual-installed observer slice has independent planner conditional GO
+and parent selection: four fixed nonsecret profiles selected only by genuine
+source-real launch factories and bound into private runtime control. Normal
+FD3/image installation and actual QUIC host/consume precede validation. Actual
+M9 observer retirement before preflight leaves budget unspent; retirement after
+projection before commit rejects export with budget spent; a second export
+rejects; effect retirement does not substitute for independently current
+observer permission. The child privately asserts these facts through the
+production export path. Only the same opaque generic experiment-completion
+indication leaves each validation case, not denied metadata, observation,
+provider outcome or proof of nonexecution. No normal denied-observation fallback,
+package-controlled query, raw reference, budget count or denial reason is allowed.
+The existing supervisor is shared and strict natural-zero/deadline requirements
+remain. This finite owner-requested conformance instrumentation does not make
+T0 identity authority or establish information-flow/timing noninterference.
+No new Canon decision is needed under this restriction; actual tests are pending.
+Initial frozen compile at
+`/tmp/c3-stage3-observer-conformance-initial-20260909.V6Qicq/01-initial.log`
+reaches the expected absent probe runner export (E0432), exit101 in29s with
+no test body executed. Parent reads it at `2026-09-09T02:37:14+09:00` and
+releases the probe-only shared-supervisor integration; runtime stays frozen.
+This is an API-gap RED, not a semantic falsifier or passing conformance.
+Five runtime warning groups remain for final scoped Clippy cleanup; free
+bytes29,278,507,008 and no extra cleanup.
+
+Read-only mapping and independent planner review at the next network boundary
+find successful provider occurrence reservations discarded, value-bearing frame
+hashes used as occurrence material, and provider reconnect explicitly refused.
+Parent selects reuse of the existing two-session control/occurrence/ingress
+transfer with the same installed runtime and M9 lineage. An unsent original
+result may first be sent on session2 only after current release revalidation;
+it is not reconstructed from retained outcomes or regenerated by execution.
+This withheld-result experiment is distinct from actual sent-result loss and
+from bounded test-only genuine-carrier duplicate replay. All preserve pending
+ambiguity, tombstones, spent capacity and independent current consume checks.
+Transport attempts use payload-independent references, with admitted semantic
+identity joined afterward; reserved, sent and received occurrences cannot be
+collapsed. Both successful and rejected metadata remain observer-gated.
+Local-only/refused reconnect is insufficient for that actual-network claim.
+No network implementation or test result is claimed by this decision.
+
+The subsequent M9 policy map finds the old fixed v1 scope insufficient for new
+network metadata. Parent and independent planner select private fixedv2 under
+existing ADR-0042/spec/17 authority; no new owner input or guarantee weakening
+is required. M9's separate T0 policy proof/bound-use must explicitly name the
+approved request-send reservation/completion, complete-request-receive,
+host-start/outcome/release, result-send reservation/completion, complete-result-
+receive and local-consume joins, alongside existing permitted static provenance
+and retained-state counts. Two inline slots per transport kind retain distinct
+actual occurrences without overwriting the first; the second slot is bounded
+capacity, not retry permission. Keep64 rows, one export and65,532 body bytes
+(plus4-byte framing); capacity failure rejects a complete projection rather
+than truncating joins or reducing the row limit to one. V1 grants cannot silently
+authorize v2, and generic Observation scope/issuance is unchanged. M9 writer
+owns only M9; runtime/probe/test writers retain disjoint ownership. Initial
+network work remains first-session retention/join, not reconnect behavior.
+
+Latest local/physical-fault packet
+`/tmp/c3-stage3-requester-nonzero-green-20260909.c1VhgV/` passes focused
+actual requester-nonzero1/1 (5.00s compile,1.05s body), execution15/15
+(27.76s compile,2.82s bodies), parser/read5/5, control9/9 (4.53s), and
+full actual probe5/5 (5.22s). The focused negative is duplicated in the full
+target. Parent personally reads `02-execution.log` and `05-full-probe.log`
+after the `2026-09-09T02:17:32+09:00` clock check. Free bytes29,299,802,112;
+no additional cleanup, broad regression or independent final review.
+
+The six new local cases use genuine checked/M9/M8 components while borrowing
+the real fixture guard: pre-reserve retirement leaves no executor reservation;
+post-reserve retirement retains `RejectedBeforeCall`; post-call retirement
+retains the actual outcome without release; pre-consume retirement retains
+requester pending;64 decisions remain and the65th rejects without refund;
+duplicate carriers do not invoke or consume twice. The one-shot fault driver
+cannot be rearmed after firing. These are local component facts, not FD3/full
+installation/network/reconnect evidence. No generic decoded-control installer
+or new authority producer was added.
+
+The actual physical falsifier uses an A-only, default-off supervisor option
+carried in the private physical bootstrap over FD3. It performs real consume,
+private fixture assertion, close/drain and flushed permitted terminal emission
+before `exit(9)`; strict success rejects it at `NaturalReap`. It does not inject
+a semantic outcome, grant, resource path or fabricated audit. Initial TDD
+compile RED records the missing method and an opaque-success `expect_err`
+Debug requirement; the latter was repaired with a non-printing match, never
+by exposing the successful run through Debug. The final behavior is executed.
+
+Terminal export now reserves its one attempt before projection and rechecks
+actual M9 observer currentness at commit, without refund after work. Dedicated
+race/denial coverage is still open. Parent identifies the remaining byte-bound
+issue: the old encoder creates a JSON body before checking65,532 bytes.
+The next bounded writer/counting preflight removes that allocation-before-limit
+path. Actual installed observer failures must not introduce an alternative
+unauthorized diagnostic. Provider network faults and remaining I3-3 rows/order
+are still required; no component or milestone acceptance follows this packet.
+
+Strict lifecycle repair is now executed. Old-binary exit-only tracing
+(`/tmp/c3-stage3-natural-reap-oldbinary-20260909.nEt4kU/`) observes one child
+exit1 and another0, with both binary hashes unchanged before/after. Role
+mapping is unavailable because exec/clone and payload syscalls were deliberately
+not traced. This is actual nonzero-exit evidence, not merely a late-zero guess.
+After A closes its QUIC session, it now waits for endpoint drain inside the
+same enclosing timeout and before its terminal event. No new deadline, retry,
+semantic acknowledgment or shorter B wait is introduced.
+
+Fresh `/tmp/c3-stage3-natural-reap-repair-20260909.7FgbZp/` passes strict
+normal1/1 (4.93s compile,1.10s body) and then full profile4/4 (4.19s bodies).
+Parent reads both logs at `2026-09-09T01:56:49+09:00`. Normal is deliberately
+duplicated across these commands, not a fifth unique case. The final four
+profiles now execute exact A consume, real M8 owner-zero and both-child natural
+zero/no-kill/deadline checks. Four runtime dead-code warnings remain; this is
+narrow lifecycle/fixture evidence, not full provider or I3-3 acceptance.
+Next consumers are the actual post-terminal nonzero falsifier and local genuine
+execution-component retirement/capacity/duplicate tests. The latter must borrow
+the real setup guard and cannot create an inherited control or full installed
+child outside the sole FD3 route. Observer allocation budget/currentness and
+actual provider network fault evidence remain required.
+
+Current lifecycle counterevidence (`2026-09-09T01:52:01+09:00` inspection):
+the parent finds that provider success used `wait_for_natural_exits`, a shared
+cleanup helper that also succeeds after reaping nonzero children. It did not
+require the existing captured zero-exit/no-kill/within-deadline observation.
+Consequently the earlier green probes establish reached communication and
+consumption checks, not clean process exit or lifecycle acceptance. The
+provider-only callsite now additionally requires that existing strict
+observation; shared cleanup semantics and all time limits are unchanged.
+The resulting normal probe is0/1 RED at `NaturalReap` (3 filtered),
+`/tmp/c3-stage3-lifecycle-normal-20260909.6V7ynk/01-normal.log`,4.89s compile,
+15.59s body. That category alone does not identify the exact child/status;
+an exit-only old-binary diagnostic is next. No provider acceptance is claimed.
+
+Preceding exact-fixture packet passes parser/read5/5, execution9/9 including
+real typed M9 retirement, and control9/9. Its first compile failure was a
+missing live M8 counter accessor; repair adds a private predicate on the actual
+retained `owner.next_occurrence`, not a synthetic zero. Four actual probes
+then reject terminal correlation because the probe's new positive predecessor
+helper used inequality under a negated caller. Correcting only that helper to
+equality yields4/4 GREEN in
+`/tmp/c3-stage3-terminal-correlation-rerun-20260909.zWnM0o/01-probe.log`
+(4.78s compile,62.32s bodies), personally read at
+`2026-09-09T01:50:37+09:00`: normal plus fresh41,−7 and absent fixtures.
+The actual A retained-consume comparisons and actual M8 owner-zero checks
+execute, but this cut has the lifecycle deficiency above. Local parser/read
+cases are synthetic bounded `Read` helper evidence; real filesystem absence
+is separately exercised by the actual absent-fixture process run.
+
+The shutdown hypothesis is that A closes its QUIC session and immediately
+drops its endpoint while B waits for the peer close. Installed Quinn0.11.11
+and its [Endpoint documentation](https://docs.rs/quinn/0.11.11/quinn/struct.Endpoint.html#method.wait_idle)
+explain that waiting for endpoint drain lets close notifications be sent;
+immediate exit can leave the peer waiting for idle timeout. This supports the
+candidate repair, not proof of the observed cause. Preserve consume-before-close
+and use only the existing enclosing timeout; do not shorten B's wait or add a
+new semantic deadline. Independent later-row review also confirms that row20
+needs actual retained process-local cut admission followed by an existing
+checked owner transition, not new patch installation; Plan250 records that
+bounded selection without activating its implementation now.
+
+Fresh repaired frozen packet
+`/tmp/c3-stage3-cap-hash-rerun-20260909.0ZOvVR/` passes all four gates:
+control9/9 (27.61s compile,4.42s bodies), execution8/8 (0.52s bodies),
+compact-peer2/2 (0.50s, included in control9), and actual source-real provider
+A/B supervised QUIC1/1 (30.08s compile,15.59s test body). Parent reads
+`04-probe.log` at `2026-09-09T01:28:52+09:00`. The body includes fixture
+preparation and is not a child-only lifecycle measurement. Evaluator observes
+an actual process-B child during the run and no remaining Cargo/rustc/probe
+afterward. Free bytes29,340,749,824; no cleanup performed.
+
+This is the first actual normal provider path success, not exact41/-7 consumer
+correspondence or full spec/17 acceptance. The probe still discards the actual
+opaque consume receipt; next use the approved private A post-consume validator
+against its retained consumed outcome and T0-selected finite fixture profile.
+Typed M9 stale/capability/witness mapping and actual-read accounting remain
+required repairs. Four known runtime dead-code warning groups and one probe
+unused-mut warning remain; no final Clippy, full regression, independent
+Stage3 review or I3-3 acceptance is claimed. Freeze is released only for that
+next bounded implementation/test slice; I3-4 remains inactive.
+
+At the `2026-09-09T01:24:21+09:00` recovery check, HEAD remains `a027d61`
+with the known Stage3 working diff, about28GiB disk free and11GiB available
+memory. The owner is independently housekeeping; the parent performs no
+additional deletion. The cap/hash packet then stops at compilation:
+`/tmp/c3-stage3-cap-hash-packet-20260909.EGbtGB/01-control.log`, exit101,
+13s, E0277 at the parser test's `expect_err`. The success DTO intentionally
+does not implement Debug. Repair only the test with a fixed-message match;
+do not derive Debug for authority-bearing control. No control, execution,
+compact-peer or actual-probe test body ran in this packet.
+
+Parent-integrated source decision: the measured59-KiB peer program field is
+the full source-derived structural stable key. Preserve it in local image,
+scope and currentness validation, but derive provider peer/preface/carrier
+network references with the existing domain-separated SHA helper. Extract
+that unchanged helper to `checked_program_reference.rs`, avoiding an M9 to
+SYS5-facade dependency. Exact recomputed-reference checks remain alongside
+all authority checks; hashes do not mint authority. The observer audit still
+excludes the structural key and result-derived hashes. Production and tests
+are frozen for focused validation, not accepted runtime evidence.
+
+At the `2026-09-09T01:09:43+09:00` inspection, compact-peer v3 tests pass2/2
+but the actual probe remains0/1 `ProviderControlSnapshotOversized`
+(`/tmp/c3-stage3-compact-peer-v3-20260909.C0MxAI/`,26.76s/29.21s compiles;
+0.47s/0.46s bodies). The first count-only measurement fails compilation with
+E0596 because the shared real snapshot producer consumes a mutable parent-held
+binding. The narrow repair uses `&mut self` and one measurement per role;
+it does not clone or fabricate an alternative authority/binding producer.
+Fresh `/tmp/c3-stage3-control-size-rerun-20260909.sB4tFl/01-metrics.log`
+passes1/1 (27.15s compile,0.65s body), printing fixed count-only fields.
+
+| Actual role | Empty control bytes | Maximum transport upper-bound bytes |
+| --- | ---: | ---: |
+| Requester/consumer | 3,917,843 | 4,179,987 |
+| Executor | 3,803,597 | 4,065,741 |
+
+The largest contributors are local static snapshots3,165,072/3,041,753 bytes;
+role M9 snapshots are375,783/375,745 bytes. No payload or field value is
+printed. These measurements supersede the insufficient512-KiB implementation
+candidate, not any accepted resource guarantee. Parent verifies the provider
+constant was introduced only in uncommitted Stage3, and separately rereads
+arch/10 and spec/17. Independent planner review permits an evidence-sized
+provider-only allowance while preserving all accepted ordinary control,
+semantic message, image, event and queue limits. Select5MiB (5,242,880 bytes),
+with1,062,893 bytes over the largest measured transport upper bound. Reject
+compact-local/hash reconstruction as an unnecessary new validation argument.
+Full local expected-image correlation, actual M9 role/currentness, one-shot
+FD3 ownership and unchanged supervisor deadline remain required.
+
+Implementation/acceptance conditions: bounded encoding before growth,
+bounded strict frame reading, all current fixture variants/both roles,
+cap+1/truncated/length/duplicate rejection before installation, unchanged
+ordinary512-KiB rejection, existing image/M9 tamper negatives, and actual
+bootstrap/memory behavior. Account separately for frame, JSON/DTO and retained
+image copies; count-only evidence is not a general heap or hard memory-limit
+claim. Source mapping of the unexpectedly large peer identity fields is a
+bounded read-only follow-up for the semantic64-KiB and observer-ref consumers,
+not authorization to widen either. No actual provider run is yet accepted.
+
+The next fresh packet `/tmp/c3-stage3-fd3-repair-20260909.r8xuAs/` passes
+the three direct Unix-stream writer tests (27.19s compile,0.10s bodies),
+including draining progress, already-expired deadline and a full non-draining
+stream with a future deadline. The actual probe remains0/1 RED (30.06s
+compile,0.55s body), now precisely `ExecutorBootstrap -> ControlHandoff ->
+ProviderControlSnapshotOversized`. Parent reads `02-probe.log`. The earlier
+error conflated snapshot size and physical write failures; this is not proof
+that the actual run previously hit `WouldBlock`. Local provider7 is not run
+after that first failing gate. Free bytes after:29,377,351,680.
+
+The next bounded choice preserves the512-KiB control limit. Source inspection
+finds a complete second peer start-binding snapshot (static projection, M8
+component and legacy M9 authority) although its downstream peer consumer
+uses only slot/program/image/component identity references. Replace only
+that peer representation with the actual parent-issued references and retain
+all meaningful role/source separation checks. Keep the full local expected
+binding, exact image correlation, actual local M9 role snapshot, and each
+peer's own full image validation. This preserves the peer identity consumer,
+not an arbitrary full-snapshot round-trip theorem. The alternative of raising
+the control cap lacks a measured sufficient bound and is not selected.
+An actual rerun and peer-identity falsifier remain required; if still over
+the bound, component-level sizing precedes another decision. No payload,
+native path, grant or witness is added to diagnostics.
+
+Diagnostic checkpoint inspected `2026-09-09T00:37:13+09:00`: an initial
+safe-stage run overlaps a final M9 edit at00:26:05 and is retained only as
+diagnostic, not final-cut validation. The strictly frozen rerun
+`/tmp/c3-stage3-provider-finalcut-20260909.Ng4NL3/01-probe-final.log` is0/1
+RED at `ExecutorBootstrap` (29.64s compile,0.55s body); the actual child
+binary rebuilt at00:28:04, after the freeze, excludes stale-child evidence.
+A further bounded physical-substage/typed-runtime-kind diagnostic in
+`/tmp/c3-stage3-bootstrap-substage-20260909.9OzXwQ/01-probe.log` is0/1 RED
+(4.97s compile,0.54s body): `ExecutorBootstrap -> ControlHandoff ->
+ProviderControlWriteRejected`. Parent reads the actual output. No host read,
+successful FD3 installation or QUIC success follows from this category.
+Free bytes after that packet:29,378,117,632; no extra cleanup is performed.
+
+Source inspection identifies a definite transport-progress defect independent
+of the still-collapsed control error: probe sets FD3 nonblocking, whereas the
+runtime requires each single `write` to complete the whole prefix/body chunk.
+The selected repair keeps opaque construction and physical byte access inside
+the runtime, adds bounded offset/poll progress under the supervisor's same
+absolute deadline, and shuts down the one logical control frame on either
+outcome. It neither exposes bytes to a generic caller writer nor replays a
+control/request. Safe pre-write/size/write/shutdown error categories and a fresh
+actual rerun are required; the current diagnostic does not prove `WouldBlock`
+was the observed cause. Other provider feature changes wait for that result.
+M9's new typed current-use API is compiled but not behaviorally accepted;
+its membership/capability/witness mapping remains a later focused gate. The
+new malformed/version/oversize decoder test and two parser-only tests are
+written but not yet executed; the parser module is not yet registered.
+
+Fresh continuation inspected `2026-09-09T00:21:26+09:00`: packet
+`/tmp/c3-stage3-runtime-only-rerun-20260909.E4GBjK/` passes the corrected
+post-observer runtime check (10.15s) and local provider module6/6 (27.45s
+compile,0.47s body). This supersedes the failed two-type-mismatch checkpoint,
+not the outstanding actual process gate. Its row19 test initially fails at
+a test JSON pointer before the decoder negative; `projection` is a top-level
+sibling of image metadata, not nested beneath `image`. The test-only pointer
+repair preserves the genuine original-image start and `Malformed` negative.
+Fresh packet `/tmp/c3-stage3-row19-localnet-20260909.8Hf7ug/01-row19.log`
+then passes1/1,63filtered (0.90s compile,0.72s body).
+
+The same packet's `02-probe-localnet.log` freshly compiles the combined
+runtime/probe in30.60s, but the actual provider positive remains0/1 RED
+(0.55s body), returning only `ProviderLaunchRejected`. That generic result
+does not prove a child/FD3/host/QUIC stage was reached. The probe writer now
+diagnoses an exact bounded safe failure stage before speculative repair;
+the success expectation remains unchanged. Four runtime dead-code groups
+and one probe unused-mut warning remain. Free bytes before/after are
+29,409,021,952 /29,387,460,608; no lingering Cargo/compiler/probe process was
+observed. These focused commands use the existing nonincremental/two-job,
+locked/serial evaluator discipline. No full regression, whole-I3-3 review,
+Canon acceptance, commit/push or additional cleanup occurred.
+
+Fresh post-observer runtime-only packet, inspected before the
+`2026-09-09T00:09:23+09:00` snapshot: the same nonincremental/two-job runtime
+library check exits101 with two E0308 errors in the new M9 installation
+checks. Log: `/tmp/c3-stage3-runtime-only-20260909.1D88wY/01-runtime-check.log`.
+`matches_membership_incarnation` expects actual `M9MembershipAuth`, but two
+pre-install call sites supply `M9I3PrivateMembershipSnapshot`. The sole M9
+writer adds a separate structural snapshot matcher for those sites; the
+actual reconstructed/current M9 authority path is unchanged. No tests or
+probe commands run after this failed check; free bytes are 29,476,769,792
+before and 29,476,741,120 after. The earlier 9.97-second green checkpoint
+predates the observer changes. An agent's accidental inference that it
+covered the new M9 source is explicitly retracted, not accepted as evidence.
+The new source/fixes still require a fresh combined run.
+
+The runtime/probe observer crossing is extended only with fixed safe getters
+and a strict bounded/versioned non-authorizing view candidate: the issued M9
+permit and actual projection producer stay separate from received stdout
+data. Decoding a candidate cannot grant permission or create an issued audit;
+the probe must check its owned run/child/source/request correspondence.
+The real terminal projection profile permits fixed retained-state counts,
+opaque source/Core/artifact/edge/request/invocation/consume/adapter joins and
+typed value-presence/failure classes, with one export per child, at most64
+rows and a 64-KiB encoded bound. It excludes raw values/value-derived hashes,
+paths, private text, credentials, grants, witnesses and arbitrary timing/size
+fields. The A-only exact-value assertion remains a private post-consume test
+driver, not an ordinary observer field or semantic input. These source
+changes are unvalidated at this checkpoint. The source-real fixture uses
+explicit fixed41, with fresh -7/absent variants; accepted default0 setup is
+preserved rather than silently reinterpreted. Probe source also mirrors
+ordinary FIN/peer-close ordering to avoid discarding an outstanding result;
+that repair is source-inspected, not yet executed evidence.
+
+Stage3 distinct carrier/QUIC runtime-profile compilation: the initial check
+under `/tmp/c3-stage3-runtime-profile-check-20260908.wilNlq/` exits101 with
+32 errors, mostly cascades from three session helpers accidentally placed in
+the pending-ingress evidence impl. Parent inspects that source/log; a
+separate borrowed SourceRefView mismatch and unused import are also fixed.
+The exact same `cargo check --locked -p mir-runtime --features
+i3-private-quic,i3-process-test-seams --lib` with nonincremental/two-job
+environment then exits0 in 9.97 seconds. Parent reads
+`/tmp/c3-stage3-runtime-profile-check-rerun-20260908.8wjc23/01-runtime-check.log`
+at `2026-09-08T23:36:55+09:00`. Five staged dead-code warning groups remain;
+free bytes are 29,493,833,728 before and 29,493,555,200 after. Neither command
+runs tests or establishes child/host/QUIC execution success.
+
+Current direct blocker includes the separate provider observer-use policy:
+mapper source inspection finds no observer capability/policy in the retained
+role snapshot. Independent planner review confirms ordinary Observation's
+fixed ContractUpdate-history permission cannot be reinterpreted as provider
+telemetry. Under existing spec/17, the parent selects a distinct private
+trusted-policy-issued Observation capability/witness and source/operation/
+incarnation-bound use record, with fixed reference-only terminal fields,
+bounded size/retention and one terminal export per installed child. Actual
+M9 currentness and export capacity must be checked before projection/release;
+observer-only denial leaves effect facts unchanged. No ordinary M8 fake
+provider trace, effect-grant alias, new grammar or ordinary-policy weakening
+is admitted. The M9 file is explicitly reassigned to the separate
+`provider_observer_authority` implementation writer, with all other runtime,
+probe and test ownership retained. This is required Stage3 work, not another
+handoff acceptance or a change of active milestone. The parent also resolves
+a test-scope overinterpretation: spec/17 limits reservations to64 at the sole
+executor and retained combined-state decisions to64 per runtime; it does not
+require a new distributed A/B mutable counter or double-count mirrored facts
+as new invocation allowances.
+
+At `2026-09-08T23:13:31+09:00`, the independent remaining-row map and
+read-only planner review confirm the existing preactivation auth tests can
+support row15 within their exact scope. Row13 still needs actual source-bound
+M9 membership retirement followed by a rejected dependent process request;
+row20 still needs runtime/adapter-owned process-local quiescent admission and
+a later actual checked transition. Neither is replaced by capability
+revocation, a caller Boolean, a child ACK or a persistence claim. Their
+implementation remains after the actual provider component, not a second
+active milestone. The test writer adds and freezes
+`g2_private_image_decoder_rejects_non_reference_only_carrier_contract_before_candidate_start`
+in `tests/sys5_i3_process_runtime.rs`: it asserts that an unchanged source
+image validates and starts, while changing only the existing `reference_only_redaction` contract
+must cause `Malformed` at decode. This new row19 test is formatted but has
+not yet run. It creates no wire field and is not actual network evidence.
+
+Stage 3 scoped-installation compile checkpoint, parent log inspection at
+`2026-09-08T23:05:36+09:00`: `cargo check --locked -p mir-runtime --features
+i3-private-quic,i3-process-test-seams --lib` with the same two-job,
+nonincremental environment passes in 9.87 seconds. Log:
+`/tmp/c3-stage3-scoped-install-check-20260908.FboAWo/01-runtime-check.log`.
+The unused scoped-instance accessor and installed-child fields produce two
+staged warning groups; no tests or actual provider calls run in this check.
+Free space changes from 29,518,163,968 to 29,517,758,464 bytes. Writers resume
+the actual carrier/host/consume path, with no component acceptance.
+Parent checks the initializer against the ordinary selected source path:
+`sys5_local_slice.rs` constructs an explicitly empty checked-program state
+seed. Handler literals are later operations, not initial state. Therefore
+the installed restricted profile preserves empty owner stores, all checked
+schemas, local queues, relation bootstrap and restricted legacy authority;
+it must not fabricate initial values from sample literals. This comparison
+is source inspection, not an executed legacy-action regression.
+
+Stage 3 actual-launch positive now compiles and executes RED. The private
+feature-gated factory checks the real embedded canonical `.mir`, derives its
+projection/composite verdict and actual T0 binding/M9 policy, and hands its
+opaque launch to the existing probe runner. It is a finite test fixture, not
+a general user-source API or a source-free admission constructor.
+`/tmp/c3-stage3-provider-localnet-red-20260908.Z5jzUV/01-provider-localnet.log`
+records 0/1, exit101, 0.24 seconds after 29.03 seconds compilation. Parent
+source inspection separately identifies `provider-a/b` factory slots versus
+the runner's fixed `process-a/b` physical slot names. The factory-only repair
+uses `process-a/b` and loopback ephemeral endpoints; the same positive rerun
+under `/tmp/c3-stage3-provider-localnet-mapping-rerun-20260908.2hFgo9/` remains
+0/1, exit101, 0.47 seconds after 28.64 seconds compilation. Parent reads its
+log at `2026-09-08T22:48:29+09:00`. The only observed error is
+`ProviderLaunchRejected`: it does not establish successful child spawn, FD3
+installation, host execution or QUIC progress. Runtime/probe writers then
+resume the complete scoped common initializer/carrier/host/consume path.
+Final free space is 29,525,561,344 bytes; dead-field/uninhabited-result
+warnings remain staged, not accepted quality evidence.
+
+The repaired local fallback test separately passes **1/1**, 379 filtered,
+0.02 seconds after 27.55 seconds compilation, in that first packet's
+`02-fallback.log`. Source inspection explains its two observation parents:
+the prior ViewerC M8 observation and the new SYS4 target dequeue. The test
+asserts those exact parents plus receive/dequeue/observe/serve reachability
+and presentation-local nonmutation; no runtime behavior was weakened.
+This is local ordering evidence only, not I3-4 process pressure.
+
+Stage 3 FD3/install intermediate packet: parent reads the actual logs under
+`/tmp/c3-stage3-fd3-resume-20260908.neQQjC/` at
+`2026-09-08T22:34:59+09:00`. `01-provider-execution.log` records the source-real
+local module **4/4 passed**, 376 filtered, 0.40 seconds after 26.59 seconds
+compilation. The cases cover genuine prepared launch, restricted local M9
+installation, role/lineage tampering and actual local effect-capability
+retirement. They do not execute FD3 children, a host call or QUIC.
+`03-probe-check.log` records the probe library check exit0 in 11.50 seconds
+with `--features mir-runtime/i3-private-quic,mir-runtime/i3-process-test-seams`.
+Unconsumed resource-path/installed-runtime fields still generate staged
+dead-code warnings. Final free space is 29,793,959,936 bytes.
+
+The independent local fallback test in `02-fallback.log` executes RED:
+0 passed/1 failed/379 filtered, 0.02 seconds, exit101. Its assumed single
+observation predecessor conflicts with the actual graph's two predecessors.
+The test author must inspect the actual causal producer before adjusting the
+assertion; this is neither accepted fallback evidence nor a demonstrated
+runtime ordering defect. Runtime/probe implementation is released to continue
+the actual execution path while that isolated test is repaired.
+
+Preceding compile-only packets are retained, not counted as test execution:
+`/tmp/c3-stage3-fd3-install-packet-20260908.ASH0nV/01-runtime-check.log` exits101
+for three calls to a missing snapshot count accessor and an untyped conversion;
+the narrow non-authorizing accessor/type repair is followed by runtime check
+exit0 in 9.69 seconds under
+`/tmp/c3-stage3-fd3-install-rerun-20260908.QZcAq6/01-runtime-check.log`.
+That packet's test compilation fails because the new fallback test compared
+`M8RelationFloor` to a string; its author corrects the assertion to the existing
+`M8RelationFloor::Anchor` variant before the behavioral runs above.
+
+Stage 3 narrow compile rerun succeeds after the context-identity repair.
+Parent reads `/tmp/c3-stage3-runtime-check-rerun-20260908.fUTxu1/01-runtime-check.log`
+at `2026-09-08T22:15:38+09:00`: the same locked runtime library check below
+exits0 in 10.32 seconds. Four unused/dead-code warning groups remain in the
+unfinished SYS5 interface; no tests, provider invocation or network run are
+claimed. Pre/post free space is 29,743,484,928 / 29,806,288,896 bytes.
+The actual source retains the same `TrustedFixtureContext` Arc and validates
+pointer identity plus currentness, not just a Boolean with a matching value.
+
+Stage 3 intermediate runtime compile check is RED, not runtime evidence.
+Parent reads `/tmp/c3-stage3-runtime-check-20260908.8dC9Bc/01-runtime-check.log`
+at `2026-09-08T22:12:38+09:00`. With `CARGO_INCREMENTAL=0` and
+`CARGO_BUILD_JOBS=2`, `cargo check --locked -p mir-runtime --features
+i3-private-quic,i3-process-test-seams --lib` exits101 with two E0308
+setup-context type mismatches in SYS5 and two unused-import warnings.
+Pre/post free space is 29,814,726,656 / 29,814,583,296 bytes. No tests run
+in this check. The runtime writer owns the context-identity repair and the
+subsequent actual FD3/codec/install bodies; no successful activation is claimed.
+Parent self-check had rejected an earlier reference-plus-current-booleans
+role snapshot: the replacement carries actual membership, capability/witness,
+structural effect scope and current/revoked/retired map facts, using child-local
+M9 checks rather than claiming parent Arc currentness crosses exec. That
+replacement remains unaccepted pending behavioral falsifiers and final review.
+The provider FD3 branch must have one runtime-owned complete-frame reader,
+not a public-deserializable control payload or two competing EOF readers.
+
+Stage 3 initial source-real positive executes RED. Parent inspects
+`/tmp/c3-stage3-initial-red-20260908.zpqwBH/01-provider-execution.log` at
+`2026-09-08T21:42:20+09:00`: `cargo test --locked -p mir-runtime --features
+i3-private-quic,i3-process-test-seams --lib sys5_i3_provider_execution_tests
+-- --test-threads=1` compiles in 27.15 seconds without warnings, then runs
+0 passed/1 failed/375 filtered in 0.23 seconds, exit101. The positive
+`provider_source_real_composite_launch_is_ready_for_two_process_supervision`
+reaches genuine source/static projection/composite verification/T0 binding/
+M9 policy/scoped inactive cohort and fails only at
+`ProviderRuntimeActivationPending`. This is behavior RED, not missing-API
+compilation failure; no child/host/network execution is claimed. Pre/post
+free space is 29,833,736,192 / 29,833,666,560 bytes. Parent then releases the
+coupled runtime and disjoint probe writers to implement actual behavior under
+the same Stage 3 packet; the separately authored positive is not inverted
+into an expected-error success test. No other Cargo command is run in this
+checkpoint. Actual setup guard ownership must move through launch to final
+reaping; cloning its context does not extend currentness past setup Drop.
 
 Stage 2c parent integration: the first `make docs` stops at the report's
 project-status update section because the validator forbids the literal
@@ -2580,21 +3454,21 @@ by this advice; provider/time remain OPEN and I3-4 remains inactive.
 
 ## Suggested next prompt
 
-Continue active I3-3 after the green inactive Stage 2c integration:
-consume its actual retained composite/M9 evidence and restricted images in
-Stage 3's actual provider runtime, bounded host call and distinct QUIC
-request/result flow. Reuse existing SYS4/SYS5 and supervisor/FD3 mechanisms.
-Ordinary entry points remain rejectors; no synthetic ordinary verdict,
-scope erasure or second runtime/transport. This is an executable direct
-consumer, not another inactive-only handoff.
-ADR-0042/spec/17 is selected; invocation is not yet implemented. Preserve all
-20 failure families and ordering requirements, including remaining actual
-membership, redaction and in-flight cut boundaries. After full I3-3 acceptance,
-validation, review, commit/push and remote
-parity, honor the latest owner-requested pause. I3-4 requires explicit resume;
-the retained program is not blocked, stale, or completed by that pause.
+After verified provider component commit/push/parity, continue I3-3 row13:
+genuine source-checked owner-membership successor using the existing A-to-B
+`init_avatar_hp` route, with distinct exact-delta validation/qualified ACK and
+no renewed retired authority. Preserve old-carrier rejection precedence and
+pair actual network evidence with LOCAL membership classification. Reuse
+row15/19 evidence, then complete row20 runtime/adapter cut obligations and
+remaining ordering. Close all twenty families and whole-I3-3 validation,
+independent acceptance, commit/push/parity, then honor the owner pause.
+I3-4 remains inactive; the paused product goal is unchanged.
 
 ## Plan update status
+
+Provider Stage3: final evidence/review and precise non-claims are recorded;
+the smaller row13 membership consumer replaces the reversed-role sketch,
+dependency-gated on provider integration. No new milestone or roadmap.
 
 Provider Stage 2c: Plan 250 records actual inactive restriction/codec and
 parent-held validation, repaired falsifiers, final frozen runtime/regression
@@ -2620,6 +3494,9 @@ synchronization belongs to the status assignment.
 
 ## Documentation.md update status
 
+Provider Stage3: actual runtime/host/QUIC evidence replaces stale inactive-only
+current statements; historical cuts remain explicitly historical.
+
 Provider Stage 2c: final inactive packet and actual Stage 3 consumer mirrored;
 ordinary localnet regression is not labelled provider execution.
 
@@ -2643,6 +3520,9 @@ generated-contract/runtime enforcement and the unchanged workflow boundary.
 
 ## docs/project-status.md update status
 
+Provider Stage3: condensed current verified capabilities, exact deferred
+claims and unchanged whole-I3-3 stop boundary; old micro-counts move to report history.
+
 Provider Stage 2c: final frozen packet, zero remaining review findings and
 the current component integration stage are synchronized within the 180-line bound.
 
@@ -2660,6 +3540,9 @@ changing official lifecycle or the stop-after-I3-3 instruction.
 I3-2 accepted evidence と official I3 unentered を維持する。
 
 ## progress.md update status
+
+Provider Stage3: verified current execution/observation replaces contradictory
+no-invocation wording; semantic/product/phase axes and remaining gates stay separate.
 
 Provider Stage 2c: current evidence and actual-timestamp recent log separate
 inactive validation from still-unimplemented host execution. No percentage
@@ -2690,6 +3573,9 @@ is active. All later network, provider and full-matrix requirements remain.
 
 ## tasks.md update status
 
+Provider Stage3: current task snapshot now separates component integration,
+membership, row15/19 reuse, cut/order and whole-milestone acceptance.
+
 Provider Stage 2c: current snapshot names actual provider execution as next
 consumer and retains all remaining I3-3 gates and stop-after-I3-3 control.
 
@@ -2713,6 +3599,9 @@ The 22:42 JST maintenance records C1/C2 as an uncommitted delta over pushed
 as the direct consumer. No new roadmap or queue is created.
 
 ## samples_progress.md update status
+
+Provider Stage3: real provider/ordinary probe results and current runtime gates
+are mirrored with precise fault/OS-error non-claims; no sample-root taxonomy changes.
 
 Provider Stage 2c: inactive-image evidence is updated; the provider source is
 still not an operational network sample. Sample/script taxonomy is unchanged,
@@ -2739,6 +3628,13 @@ The C1/C2 update now points to its actual library test command and preserves
 the no-new-network-sample/non-workflow classification.
 
 ## Reviewer findings and follow-up
+
+Provider Stage3 final independent review: P0/P1/P2=0 after the reproduced P2
+network-mode audit/budget guard repair. The current supported runner was already
+mode-separated; no actual unauthorized audit output was demonstrated. The
+genuine held-session2 RED/GREEN and permanent internal refusal assertion cover
+the hardening. Scope is finite checked provider execution/observation, not
+whole-I3-3, general provider tracing, live provider cut or public/production ABI.
 
 Stage 2c final independent specification and quality reviews each report
 P0=0/P1=0/P2=0 after the narrow repairs. Both first identify two P1 blockers:
@@ -3507,6 +4403,16 @@ remains the explicitly reported failure, not an I3 runtime or passing gate.
 
 ## Skipped validations and reasons
 
+Provider Stage3: fresh full runtime library, all probe targets, affected
+process/I2/M10/guard regressions, scoped Clippy/format are executed. Other
+runtime all-target cases retain the immediately pre-P2 run; the repair touches
+only installed fixed-network provider mode guards. Whole-workspace all-target
+tests/Clippy and final full-matrix acceptance remain whole-I3-3 gates after
+rows13/20. No Lean statements change, so no new Lean proof/axiom acceptance is
+claimed. Actual OS EMFILE/operational error, independent B65, generic fault
+trace export, WAN/browser/production and live provider cut are not executed
+or claimed; finite LOCAL injected evidence is labelled as such.
+
 Stage 2c: no new Lean/general model, provider activation/host call, full
 workspace tests or probe-all-tests run is claimed. The component changes a
 private inactive image/validation boundary and its shared ordinary helpers;
@@ -3571,6 +4477,28 @@ not skipped passes. General proof, WAN/production, durability and Browser/Host
 product realization remain outside this bounded milestone.
 
 ## Commit / push status
+
+ProviderStage3 final synchronized docs gate passes at
+`2026-09-09T05:19:58+09:00` (agent config,216 Canon entries,800/800 hierarchy,
+1760-report scaffold). Parent accepts this finite source/evidence component
+for integration after the fresh runtime/probe/I2/M10/guard/lint/format gates
+and independent P0/P1/P2=0 review. All29 tracked/new task paths are intentional;
+no user source change or extra cleanup is included. This acceptance is not
+whole-I3-3, official lifecycle or public/production acceptance. The commit/push
+operation follows; row13 production waits for observed live parity.
+
+Provider Stage3: all code gates and independent review are satisfied on the
+known task worktree based on a027d61. Parent prepares the single finite
+component integration commit after final synchronized docs validation; commit,
+push and live parity must be observed before releasing row13 production.
+This record does not pre-claim a future hash or successful push.
+
+Stage 2c is committed and pushed as
+`a027d61b8030a903f892de2f7483ec8b64627963`
+(`feat: add checked inactive provider process handoff`). Parent observes clean
+HEAD/origin/main/live remote parity at `2026-09-08T21:24:14+09:00`. The actual
+Stage 3 runtime consumer starts from that cut. This closes only the inactive
+component, not I3-3, provider invocation, or official I3 lifecycle entry.
 
 Stage 2c parent final integration gates: `make docs` rerun exits zero,
 observed `2026-09-08T21:23:31+09:00` (agent config, 216 Canon entries,
@@ -3737,13 +4665,28 @@ This is the fifth source checkpoint inside I3-3, not milestone acceptance.
 
 ## Sub-agent session close status
 
-Current provider Stage 2c: the production writer, separate test author, sole
+Current provider Stage 3: independent planner, mapper and Oracle have returned
+bounded advisory results. The actual provider full probe20 and runtime
+18/7/9 focused packet pass after the two-session/normal-v2 repairs recorded
+above. c3_eval remains sole Cargo executor. c3_quality_review owns the
+independent current Stage3 review; the old Stage2c review is not reused.
+The scoped Clippy diagnostic exposes unused members, large internal M9 enum
+variants, a complex return tuple and idiomatic I/O-error construction.
+Only bounded repairs are released to c3_runtime_fix (non-M9 runtime),
+provider_observer_authority (M9) and time_network_tests (one test fixture).
+time_host_driver keeps probe production frozen; c3_status_sync owns five LAB
+snapshots. Broad regression, warning-clean validation and review acceptance
+remain pending. Parent owns Canon, roadmap/report, integration and Git; no
+provider or whole-I3-3 acceptance is asserted yet.
+
+Historical provider Stage 2c: the production writer, separate test author, sole
 Cargo evaluator, independent specification/quality reviewers and read-only
 planner have returned their bounded results. The exact post-review source is
 frozen with all required component Rust gates green. The five-file LAB writer
 has completed snapshot synchronization; parent completed report/roadmap/docs
 integration and owns acceptance/Git. The mapper has returned a read-only map of the next
-existing runtime/carrier/FD3 consumer; no Stage 3 implementation has started.
+existing runtime/carrier/FD3 consumer; at that checkpoint Stage 3 implementation
+had not started.
 Contexts are retained for the same I3-3 continuation, not competing goals.
 
 Historical provider Stage 2b: production/test writers, the sole evaluator,

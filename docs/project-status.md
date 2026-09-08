@@ -1,6 +1,6 @@
 # Project status
 
-最終更新: 2026-09-08 21:14 JST
+最終更新: 2026-09-09 05:16 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -82,75 +82,49 @@ I3-3 is the only active promoted semantic package after explicit owner resume;
 I3-4/I3-5/I3-6/NEXT-0 remain inactive pending their dependency gates. The
 accepted I3-2 source cut and remote parity are the preserved entry evidence.
 
-Earlier I3-3 delivery/reconnect cuts and exact commands remain in Report 2606,
-not current rerun counts. They include actual two-process prewrite recovery,
-post-admission duplicate rejection with requester pending/ambiguous, genuine
-M9 revocation before reconnect, complete-frame delivery and strict truncation
-rejection before owner admission. Bounded model evidence is 3 tests covering
-432 states/2136 transitions with three mutant counterexamples, not a general
-proof. No earlier component closes the full 20-family failure/order matrix.
-ADR-0041/spec/16 time/reply checkpoint is retained at pushed 55f1fd7f
-(probe 41/41, replay 3/3); those are not new provider runs. The ADR-0042/spec/17
-provider source/guard evidence is pushed at `9e8d674a` (17 source, 1 privacy,
-2 private and 5 public guards; retained Stage1 runtime 334, process 63, I2 local/CLI 5/8,
-M10 67 and focused quality gates). Its successor static coverage/composite
-verification/projection retains Stage2a evidence semantics 6/17/8, privacy 1,
-static runtime 11 after four review repairs; runtime 345 is retained at `3862b168`.
-Accepted inactive Stage2b cut `7142b205` has clean HEAD/origin/main/live parity
-observed 2026-09-08 19:22 JST. Stage2b runtime is 362/362, including provider
-filtering 26/26 (not additive); process is 63/63, M10 is 67/67, I2 local/CLI is
-5/5 and 8/8, and public guards are 5/5. The three-crate all-target
-warnings-denied Clippy, workspace format, and workspace all-target check pass;
-workspace tests, CLI/probe Clippy and provider activation are not claimed.
-Independent spec/quality review is P0/P1/P2 zero after three direct tests and
-generic M8 typed refusal. Stage2b is accepted as an inactive component at the
-clean cut above. Current Stage2c is the existing SYS4/SYS5 inactive mixed-image
-handoff; final module/runtime 13/13 in 375/375 (362 filtered; 9.65s/88.17s),
-process 63/63, M10 67/67, I2 local/CLI 5/5 and 8/8, guards 5/5, ordinary
-localnet 41/41 (59.92s). Feature-union Clippy `-Dwarnings` (22.06s), format and
-all-target check (17.41s) pass with no warnings; workspace/probe tests and
-provider activation are not claimed. Final review P0/P1/P2=0 after two P1 and
-three P2 repairs. Stage2c is inactive/green for parent integration; new commit/
-push pending. Next: actual Stage3 provider host/QUIC runtime; private M8 version
-2 required, no compatibility promise. No Stage2c acceptance, host activity,
-provider row-18 or I3-3 completion. Exact state is in Report 2606.
-I3-3 remains unaccepted; authority/order and full matrix remain open; I3-4 is inactive. Pause only after full I3-3 close.
+Earlier delivery/reconnect/time and provider source/static/inactive cuts remain
+in Report2606 and Plan250; they are not fresh Stage3 results. The accepted
+inactive process handoff is a027d61. Stage3 now executes genuine FD3-installed
+children, real QUIC provider requests, bounded host reads and current-authority
+consumption, with separately M9-authorized normal v2 joined observation.
+Fresh post-review gates pass runtime library410, all probe targets
+(ordinary41/provider20), process64, M1067, I2 local5/CLI8 and provider guards5.
+Scoped all-target Clippy/format pass; review has no remaining P0/P1/P2.
+
+Four real two-session fault profiles use child-private assertions and generic
+completion, not exported fault traces. The lost-result case receives/decodes
+then discards the frame before semantic admission; it is not wire packet loss.
+AdapterUnavailable retains LOCAL injected-read/codec evidence, not actual OS
+operational failure. Live provider cut/export and public interfaces are not
+claimed. Component docs/Git integration is being recorded; I3-3 remains active.
+Rows13/15/19/20, ordering and whole-milestone acceptance remain. After full
+I3-3 validation/review/commit/push/parity, stop; I3-4 stays inactive.
 Detailed edge contracts: [`mirrorea_canon/architecture/07-browser-host-trust-boundaries.md`](../mirrorea_canon/architecture/07-browser-host-trust-boundaries.md); cross-edge binding/freshness/revocation/redaction/resource rules: [`mirrorea_canon/architecture/08-browser-host-security-invariants.md`](../mirrorea_canon/architecture/08-browser-host-security-invariants.md).
 View は authoritative domain semantics を所有せず、presentation-local computation のみを許可する。View からの入力は typed command/effect request とし direct store を禁止する。I3-0 はprivate transport選定をclosedし、OPEN-032はこのbounded programだけresolvedした。I3-1とI3-2はbounded evidenceとしてclosedした。official I3 lifecycle は未entry、I3-3のみactive、I3-4/I3-5/I3-6/NEXT-0はdependency-gated inactive、I5 implementation は inactiveである。
-
 I3-2の最終bounded evidenceはlocalnet 12/12（repeat）、full probe 62/62、runtime default 29/29、seam 47/47、library 281/281、docs compile-fail 1/1（default/private）である。6/11 milestones acceptedであり、これは重み付き完成率ではない。FM-5 bounded executable ratchetで、public workflowや100% completionは主張しない。I3-3全体は未受理。19:08 JSTの測定空き容量は30,906,707,968 bytes（約28.78 GiB）で、10 GiB guardに現在の容量保留はない。
-
 The active bounded I3 programはinternal carrierとpublic wireを分離し、route/handshake/framing/
 disconnect/reconnect/ambiguous delivery/duplicate/reorder/stale authority/backpressure/
 timeout/provider/redaction/patch/cut failureをtypedに扱い、network occurrencesをMir
 orderingへrefineしなければならない。hidden retry、exactly-once、hidden transactionは不可。
-
 I3-4/I3-6のC-distributed evidenceはordinary-source SCN-01/02/03/06のpositive/falsifier、
 source/Core/artifact/carrier/network/runtime correspondence、observer-safe diagnostics、
 evidence classification、independent reviewを必要とする。I2 evidenceだけでは満たさない。
-
 Reopen accepted I2 evidenceはmissing/manual edge、owner movement、direct remote store、
 source-free mint、selected ST/OW divergence、stale cut/patch mutation、relation/designated
 drift、observer leak、lower-layer conformance dependency、M10 regressionの場合だけ。
-
 ## オーナーの確認・判断待ち
-
 OPEN-032はPROPOSAL-040 / ADR-0037によりこのbounded programだけresolvedした。
 owner/userの明示的resumeによりI3-3をactivateした。これはI3-2 cutとremote parityを
 保持した再開であり、I3-4以降は前段acceptanceまでactivateしない。
 このpause gateに加え、次のbounded sequence外の変更もowner decisionを必要とする。
-
 - public API/ABI/wire/grammar/CLI compatibility freeze;
 - production deployment、external publication、paid resource;
 - North Star、authority/privacy/redaction/no-stale guaranteeの変更;
 - World/Avatar等のCore primitive化、hidden multi-owner transaction; および
 - Constitutionでも解けないirreversible semantic tie。
-
 Authority boundaryは`mirrorea_canon/meta/agent-instructions.md`と
 `mirrorea_canon/adr/ADR-0034.md`を参照する。これらは未完了SYS-7 taskではない。
-
 ## 根拠と詳細
-
 | 読みたい内容 | 一次の確認先 |
 |---|---|
 | Canon entry | `mirrorea_canon/README.md`, `mirrorea_canon/MAP.md` |
@@ -166,14 +140,11 @@ Authority boundaryは`mirrorea_canon/meta/agent-instructions.md`と
 | SYS-6 close evidence | `docs/reports/2598-mirrorea-i2-systems-foundation-sys6-i2-conformance-closeout.md` |
 | SYS-7 close evidence | `docs/reports/2599-mirrorea-i2-systems-foundation-sys7-i3-entry-contract-closeout.md` |
 | runnable commands | `samples_progress.md` |
-
 Inherited validation floor: SYS-6 25+8、SYS-2/3/4/5 28/28/104/62、M10 67+4、
 workspace。I3-0 adds private facade/frame/source/supervisor/TLS/QUIC/equality/
 observer test evidence, format, warnings-denied focused Clippy, diff and final
 independent ACCEPT; exact current results and skipped reruns are in Report 2603.
-
 ## 更新規約
-
 active program/roadmap、official lifecycle、major blocker、accepted cut、evidence class、
 またはuser-visible commandが変わるtaskで同期する。authorityは常にCanonへ戻し、
 詳細履歴はone milestone reportへ置く。未実行validationをpassと書かず、helper/reportを

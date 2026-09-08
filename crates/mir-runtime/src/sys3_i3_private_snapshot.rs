@@ -224,6 +224,14 @@ pub(crate) enum I3PrivateProviderStaticSnapshotTamper {
 }
 
 impl I3PrivateProviderStaticProjectionSnapshot {
+    /// T0-internal structural count for the fixed four provider lowering
+    /// associations. It grants no execution, authority, or projection path.
+    pub(crate) fn declared_provider_lowering_count(&self) -> usize {
+        self.provider_coverage
+            .provider_source_map_associations
+            .len()
+    }
+
     fn from_static_projection(
         value: &crate::sys3_projection::ReadOnlyProviderEffectStaticProjection,
     ) -> Result<Self, I3PrivateProjectionSnapshotError> {
@@ -342,6 +350,35 @@ impl I3PrivateProviderStaticProjectionSnapshot {
             });
         }
         Ok(expected)
+    }
+
+    /// Restore the exact projection retained in a provider child image only
+    /// after SYS-5 has matched this tainted DTO to its separate trusted
+    /// expected-start record and installed M9 role facts.  This is not the
+    /// ordinary projection snapshot route: it keeps provider topology
+    /// explicit, performs no source check/lowering/admission, and cannot
+    /// produce a `FabricProgram`.
+    pub(crate) fn into_inherited_provider_projection(
+        self,
+    ) -> Result<GlobalProjectionResult, I3PrivateProjectionSnapshotError> {
+        if self.version != I3_PRIVATE_PROVIDER_STATIC_SNAPSHOT_VERSION
+            || self
+                .provider_coverage
+                .provider_source_map_associations
+                .len()
+                != 4
+        {
+            return Err(I3PrivateProjectionSnapshotError::StructuralMismatch {
+                reason: "inherited provider projection requires complete provider coverage",
+            });
+        }
+        let projection = self.projection.into_projection()?;
+        if !projection.contains_read_only_provider_effect_static_semantics() {
+            return Err(I3PrivateProjectionSnapshotError::StructuralMismatch {
+                reason: "inherited provider projection must retain provider semantics",
+            });
+        }
+        Ok(projection)
     }
 }
 

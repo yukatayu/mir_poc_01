@@ -11,19 +11,55 @@
 
 use std::any::Any;
 
+#[cfg(feature = "i3-process-test-seams")]
+use quinn::ReadExactError;
 use quinn::{Connection, RecvStream, SendStream};
 use sha2::{Digest, Sha256};
 
+#[cfg(feature = "i3-process-test-seams")]
 use super::sys5_i3_process_runtime::{
-    Sys5I3LocalnetControlErrorKind, Sys5I3LocalnetPeerPreface,
+    Sys5I3FixedProviderNetworkFirstResultReceiveAction,
+    Sys5I3FixedProviderNetworkFirstResultSendAction,
+    Sys5I3FixedProviderNetworkSecondResultReceiveAction,
+    Sys5I3FixedProviderNetworkSecondResultSendAction,
+};
+use super::sys5_i3_process_runtime::{
+    Sys5I3InstalledProviderChildRuntime, Sys5I3LocalnetControlErrorKind, Sys5I3LocalnetPeerPreface,
     Sys5I3OriginalOwnerRequestAttemptKind, Sys5I3OriginalOwnerRequestPending,
-    Sys5I3PrivateProcessCodec, Sys5I3ProcessMessage, Sys5I3ProcessRuntime,
-    Sys5I3ProcessRuntimeError, Sys5I3TrustedLocalnetControl, Sys5I3UntrustedProcessMessage,
-    strict_json_value,
+    Sys5I3PrivateProcessCodec, Sys5I3PrivateProviderTransportOccurrence,
+    Sys5I3PrivateProviderTransportOccurrenceKind, Sys5I3ProcessMessage, Sys5I3ProcessRuntime,
+    Sys5I3ProcessRuntimeError, Sys5I3ProcessRuntimeErrorKind, Sys5I3ProviderConsumeReceipt,
+    Sys5I3ProviderLocalnetPeerPreface, Sys5I3ProviderRequestCarrier, Sys5I3ProviderResultCarrier,
+    Sys5I3TrustedLocalnetControl, Sys5I3TrustedProviderLocalnetControl,
+    Sys5I3UntrustedProcessMessage, strict_json_value,
 };
 
 const MAX_PRIVATE_QUIC_BLOB_BYTES: usize = 64 * 1024;
 const MAX_PRIVATE_QUIC_SESSION_ATTEMPTS: u8 = 2;
+
+/// The existing private QUIC session has two control profiles. The provider
+/// profile shares the inspected Quinn connection and bounded stream framing,
+/// but cannot enter ordinary generated-owner carrier operations or reconnect.
+enum PrivateQuicControl {
+    Ordinary(Sys5I3TrustedLocalnetControl),
+    Provider(Sys5I3TrustedProviderLocalnetControl),
+}
+
+impl PrivateQuicControl {
+    fn expected_peer_spki_ref(&self) -> &str {
+        match self {
+            Self::Ordinary(control) => control.expected_peer_spki_ref(),
+            Self::Provider(control) => control.expected_peer_spki_ref(),
+        }
+    }
+
+    fn run_ref(&self) -> &str {
+        match self {
+            Self::Ordinary(control) => control.run_ref(),
+            Self::Provider(control) => control.run_ref(),
+        }
+    }
+}
 
 /// Fail-closed private-adapter outcomes.  They contain no peer address,
 /// certificate, key, raw preface, carrier payload, or semantic state.
@@ -42,6 +78,11 @@ pub enum Sys5I3PrivateQuicError {
         error: Sys5I3ProcessRuntimeError,
         rejected_attempt: Sys5I3PrivateQuicRejectedAttemptEvidence,
     },
+    /// A provider carrier reached the installed currentness/admission
+    /// boundary. Unlike ordinary delivery rejection, this carries no
+    /// frame-derived commitment or candidate evidence because provider frames
+    /// may contain a raw value.
+    ProviderSemanticRejected(Sys5I3ProcessRuntimeError),
     /// The runtime refused a locally retained original-request attempt before
     /// any stream write.  The caller still owns the opaque pending handle.
     OriginalRequestAttemptRejected(Sys5I3ProcessRuntimeError),
@@ -135,6 +176,7 @@ impl Sys5I3PrivateQuicError {
             Self::FrameRejected
             | Self::CodecRejected
             | Self::SemanticRejected { .. }
+            | Self::ProviderSemanticRejected(_)
             | Self::OriginalRequestAttemptRejected(_)
             | Self::NetworkOccurrenceExhausted
             | Self::SessionAttemptExhausted
@@ -459,7 +501,7 @@ pub struct Sys5I3PrivateQuicSession {
     connection: Connection,
     send: SendStream,
     receive: RecvStream,
-    control: Sys5I3TrustedLocalnetControl,
+    control: PrivateQuicControl,
     peer_spki_verified: bool,
     peer_preface_verified: bool,
     session_attempt_generation: u8,
@@ -474,7 +516,7 @@ pub struct Sys5I3PrivateQuicSession {
 /// adapter session; it is neither cloneable nor an authority credential.
 #[doc(hidden)]
 pub struct Sys5I3PrivateQuicReconnect {
-    control: Sys5I3TrustedLocalnetControl,
+    control: PrivateQuicControl,
     prior_session_attempt_generation: u8,
     next_network_occurrence: u64,
     pending_ingress_permit: Sys5I3PrivateQuicPendingIngressPermit,
@@ -543,7 +585,7 @@ impl Sys5I3PrivateQuicSession {
             connection,
             send,
             receive,
-            control,
+            control: PrivateQuicControl::Ordinary(control),
             peer_spki_verified: true,
             peer_preface_verified: false,
             session_attempt_generation: 1,
@@ -569,7 +611,60 @@ impl Sys5I3PrivateQuicSession {
             connection,
             send,
             receive,
-            control,
+            control: PrivateQuicControl::Ordinary(control),
+            peer_spki_verified: true,
+            peer_preface_verified: false,
+            session_attempt_generation: 1,
+            next_network_occurrence: 0,
+            pending_ingress_permit: Sys5I3PrivateQuicPendingIngressPermit::Unacquired,
+            #[cfg(feature = "i3-process-test-seams")]
+            generated_reply_replay_candidate_issued: false,
+        })
+    }
+
+    /// Client-side provider session over the existing owned QUIC bidi stream.
+    /// The distinct control can be created only by an installed inherited-FD3
+    /// provider runtime; it cannot be reconstructed from image or frame data.
+    pub async fn connect_provider(
+        connection: Connection,
+        control: Sys5I3TrustedProviderLocalnetControl,
+    ) -> Result<Self, Sys5I3PrivateQuicError> {
+        verify_exact_peer_spki(&connection, control.expected_peer_spki_ref())?;
+        let (send, receive) = connection
+            .open_bi()
+            .await
+            .map_err(|_| Sys5I3PrivateQuicError::FrameRejected)?;
+        Ok(Self {
+            connection,
+            send,
+            receive,
+            control: PrivateQuicControl::Provider(control),
+            peer_spki_verified: true,
+            peer_preface_verified: false,
+            session_attempt_generation: 1,
+            next_network_occurrence: 0,
+            pending_ingress_permit: Sys5I3PrivateQuicPendingIngressPermit::Unacquired,
+            #[cfg(feature = "i3-process-test-seams")]
+            generated_reply_replay_candidate_issued: false,
+        })
+    }
+
+    /// Server-side provider counterpart. It reuses the same inspected
+    /// connection and owned ingress stream as the ordinary profile.
+    pub async fn accept_provider(
+        connection: Connection,
+        control: Sys5I3TrustedProviderLocalnetControl,
+    ) -> Result<Self, Sys5I3PrivateQuicError> {
+        verify_exact_peer_spki(&connection, control.expected_peer_spki_ref())?;
+        let (send, receive) = connection
+            .accept_bi()
+            .await
+            .map_err(|_| Sys5I3PrivateQuicError::FrameRejected)?;
+        Ok(Self {
+            connection,
+            send,
+            receive,
+            control: PrivateQuicControl::Provider(control),
             peer_spki_verified: true,
             peer_preface_verified: false,
             session_attempt_generation: 1,
@@ -612,11 +707,54 @@ impl Sys5I3PrivateQuicSession {
         self.session_attempt_generation
     }
 
+    fn require_ordinary_control(
+        &self,
+    ) -> Result<&Sys5I3TrustedLocalnetControl, Sys5I3PrivateQuicError> {
+        match &self.control {
+            PrivateQuicControl::Ordinary(control) => Ok(control),
+            PrivateQuicControl::Provider(_) => Err(Sys5I3PrivateQuicError::LocalAttemptRejected),
+        }
+    }
+
+    fn require_provider_control(
+        &self,
+    ) -> Result<&Sys5I3TrustedProviderLocalnetControl, Sys5I3PrivateQuicError> {
+        match &self.control {
+            PrivateQuicControl::Provider(control) => Ok(control),
+            PrivateQuicControl::Ordinary(_) => Err(Sys5I3PrivateQuicError::LocalAttemptRejected),
+        }
+    }
+
+    fn require_verified_provider_session(&self) -> Result<(), Sys5I3PrivateQuicError> {
+        self.require_verified_provider_session_generation(1)
+    }
+
+    /// Internal provider-session validation for a named bounded generation.
+    /// It is not exposed to callers; ordinary provider operations remain
+    /// fixed to generation one, while the sealed conformance route names the
+    /// only permitted second session at its private phase boundary.
+    fn require_verified_provider_session_generation(
+        &self,
+        required_session_attempt_generation: u8,
+    ) -> Result<(), Sys5I3PrivateQuicError> {
+        self.require_provider_control()?;
+        if !self.peer_spki_verified || !self.peer_preface_verified {
+            return Err(Sys5I3PrivateQuicError::peer_binding_rejected(
+                self.control.expected_peer_spki_ref(),
+            ));
+        }
+        if self.session_attempt_generation != required_session_attempt_generation {
+            return Err(Sys5I3PrivateQuicError::LocalAttemptRejected);
+        }
+        Ok(())
+    }
+
     #[cfg(feature = "i3-process-test-seams")]
     fn require_verified_session_generation(
         &self,
         required_session_attempt_generation: u8,
     ) -> Result<(), Sys5I3PrivateQuicError> {
+        self.require_ordinary_control()?;
         if !self.peer_spki_verified || !self.peer_preface_verified {
             return Err(Sys5I3PrivateQuicError::peer_binding_rejected(
                 self.control.expected_peer_spki_ref(),
@@ -629,8 +767,17 @@ impl Sys5I3PrivateQuicSession {
     }
 
     pub async fn send_local_preface(&mut self) -> Result<(), Sys5I3PrivateQuicError> {
-        let body = serde_json::to_vec(&self.control.localnet_preface())
-            .map_err(|_| Sys5I3PrivateQuicError::FrameRejected)?;
+        let body = match &self.control {
+            PrivateQuicControl::Ordinary(control) => {
+                serde_json::to_vec(&control.localnet_preface())
+            }
+            PrivateQuicControl::Provider(control) => serde_json::to_vec(
+                &control
+                    .localnet_preface()
+                    .map_err(|_| Sys5I3PrivateQuicError::FrameRejected)?,
+            ),
+        }
+        .map_err(|_| Sys5I3PrivateQuicError::FrameRejected)?;
         self.write_blob(&body).await
     }
 
@@ -639,7 +786,7 @@ impl Sys5I3PrivateQuicSession {
     pub async fn send_unbound_preface_for_private_falsifier(
         &mut self,
     ) -> Result<(), Sys5I3PrivateQuicError> {
-        let mut value = serde_json::to_value(self.control.localnet_preface())
+        let mut value = serde_json::to_value(self.require_ordinary_control()?.localnet_preface())
             .map_err(|_| Sys5I3PrivateQuicError::FrameRejected)?;
         let object = value
             .as_object_mut()
@@ -658,20 +805,409 @@ impl Sys5I3PrivateQuicSession {
     ) -> Result<(), Sys5I3PrivateQuicError> {
         let body = self.read_blob().await?;
         let value = strict_json_value(&body).map_err(|_| Sys5I3PrivateQuicError::FrameRejected)?;
-        let preface: Sys5I3LocalnetPeerPreface =
-            serde_json::from_value(value).map_err(|_| Sys5I3PrivateQuicError::FrameRejected)?;
-        self.control
-            .validate_peer_preface(&preface)
-            .map_err(|error| match error.kind() {
-                Sys5I3LocalnetControlErrorKind::PeerBindingRejected => {
-                    Sys5I3PrivateQuicError::peer_binding_rejected(
-                        self.control.expected_peer_spki_ref(),
-                    )
-                }
-                _ => Sys5I3PrivateQuicError::FrameRejected,
-            })?;
+        match &self.control {
+            PrivateQuicControl::Ordinary(control) => {
+                let preface: Sys5I3LocalnetPeerPreface = serde_json::from_value(value)
+                    .map_err(|_| Sys5I3PrivateQuicError::FrameRejected)?;
+                control.validate_peer_preface(&preface)
+            }
+            PrivateQuicControl::Provider(control) => {
+                let preface: Sys5I3ProviderLocalnetPeerPreface = serde_json::from_value(value)
+                    .map_err(|_| Sys5I3PrivateQuicError::FrameRejected)?;
+                control.validate_peer_preface(&preface)
+            }
+        }
+        .map_err(|error| match error.kind() {
+            Sys5I3LocalnetControlErrorKind::PeerBindingRejected => {
+                Sys5I3PrivateQuicError::peer_binding_rejected(self.control.expected_peer_spki_ref())
+            }
+            _ => Sys5I3PrivateQuicError::FrameRejected,
+        })?;
         self.peer_preface_verified = true;
         Ok(())
+    }
+
+    /// Send one distinct provider request after the existing mTLS and
+    /// reciprocal provider-preface checks. The carrier remains opaque to the
+    /// probe and never reuses the generated owner-message path.
+    pub async fn send_provider_request(
+        &mut self,
+        runtime: &mut Sys5I3InstalledProviderChildRuntime,
+        request: Sys5I3ProviderRequestCarrier,
+    ) -> Result<(), Sys5I3PrivateQuicError> {
+        self.require_provider_control()?;
+        self.require_verified_provider_session()?;
+        let bytes = Sys5I3PrivateProcessCodec::private_provisional_v1()
+            .encode_provider_request(&request)
+            .map_err(|_| Sys5I3PrivateQuicError::CodecRejected)?;
+        let reservation = self.reserve_provider_transport_occurrence(
+            Sys5I3PrivateProviderTransportOccurrenceKind::RequestSendReservation,
+        )?;
+        let ticket = runtime
+            .reserve_provider_request_transport_send(&request, reservation)
+            .map_err(Sys5I3PrivateQuicError::ProviderSemanticRejected)?;
+        // Allocate the next opaque adapter-owned occurrence before beginning
+        // the frame write, but bind it only after the write completes. This
+        // prevents a post-write counter failure from erasing completion while
+        // still keeping reservation and completion distinct retained facts.
+        let completion = self.reserve_provider_transport_occurrence(
+            Sys5I3PrivateProviderTransportOccurrenceKind::RequestSendCompleted,
+        )?;
+        self.write_blob(&bytes).await?;
+        runtime
+            .complete_provider_transport_send(ticket, completion)
+            .map_err(Sys5I3PrivateQuicError::ProviderSemanticRejected)
+    }
+
+    /// Receive exactly one provider request and let the installed executor
+    /// perform current admission, reservation, CallStarted, bounded host read
+    /// and result retention. Decoded bytes alone never carry authority.
+    pub async fn receive_provider_request_and_execute(
+        &mut self,
+        runtime: &mut Sys5I3InstalledProviderChildRuntime,
+    ) -> Result<Sys5I3ProviderResultCarrier, Sys5I3PrivateQuicError> {
+        self.require_provider_control()?;
+        self.require_verified_provider_session()?;
+        let bytes = self.read_blob().await?;
+        let occurrence = self.reserve_provider_transport_occurrence(
+            Sys5I3PrivateProviderTransportOccurrenceKind::RequestReceive,
+        )?;
+        let request = Sys5I3PrivateProcessCodec::private_provisional_v1()
+            .decode_untrusted_provider_request(&bytes)
+            .map_err(|_| Sys5I3PrivateQuicError::CodecRejected)?;
+        runtime
+            .admit_read_only_provider_request_and_execute_from_transport(request, occurrence)
+            .map_err(Sys5I3PrivateQuicError::ProviderSemanticRejected)
+    }
+
+    /// Send one retained executor outcome in the distinct provider result
+    /// direction. A local failed release has no carrier to send.
+    pub async fn send_provider_result(
+        &mut self,
+        runtime: &mut Sys5I3InstalledProviderChildRuntime,
+        result: Sys5I3ProviderResultCarrier,
+    ) -> Result<(), Sys5I3PrivateQuicError> {
+        self.require_provider_control()?;
+        self.require_verified_provider_session()?;
+        let bytes = Sys5I3PrivateProcessCodec::private_provisional_v1()
+            .encode_provider_result(&result)
+            .map_err(|_| Sys5I3PrivateQuicError::CodecRejected)?;
+        let reservation = self.reserve_provider_transport_occurrence(
+            Sys5I3PrivateProviderTransportOccurrenceKind::ResultSendReservation,
+        )?;
+        let ticket = runtime
+            .reserve_provider_result_transport_send(&result, reservation)
+            .map_err(Sys5I3PrivateQuicError::ProviderSemanticRejected)?;
+        let completion = self.reserve_provider_transport_occurrence(
+            Sys5I3PrivateProviderTransportOccurrenceKind::ResultSendCompleted,
+        )?;
+        self.write_blob(&bytes).await?;
+        runtime
+            .complete_provider_transport_send(ticket, completion)
+            .map_err(Sys5I3PrivateQuicError::ProviderSemanticRejected)
+    }
+
+    /// Receive and consume one provider result at the requester. The receipt
+    /// is local-only and carries no raw result getter.
+    pub async fn receive_provider_result_and_consume(
+        &mut self,
+        runtime: &mut Sys5I3InstalledProviderChildRuntime,
+    ) -> Result<Sys5I3ProviderConsumeReceipt, Sys5I3PrivateQuicError> {
+        self.receive_provider_result_and_consume_at_verified_provider_session_generation(runtime, 1)
+            .await
+    }
+
+    /// Keep the one normal result-consume codec/admission path shared with
+    /// the sealed held-result second-session phase. The generation remains a
+    /// private adapter parameter: no caller can turn it into a general retry
+    /// or decoded-carrier admission operation.
+    async fn receive_provider_result_and_consume_at_verified_provider_session_generation(
+        &mut self,
+        runtime: &mut Sys5I3InstalledProviderChildRuntime,
+        required_session_attempt_generation: u8,
+    ) -> Result<Sys5I3ProviderConsumeReceipt, Sys5I3PrivateQuicError> {
+        self.require_verified_provider_session_generation(required_session_attempt_generation)?;
+        let bytes = self.read_blob().await?;
+        let occurrence = self.reserve_provider_transport_occurrence(
+            Sys5I3PrivateProviderTransportOccurrenceKind::ResultReceive,
+        )?;
+        let result = Sys5I3PrivateProcessCodec::private_provisional_v1()
+            .decode_untrusted_provider_result(&bytes)
+            .map_err(|_| Sys5I3PrivateQuicError::CodecRejected)?;
+        runtime
+            .admit_read_only_provider_result_and_consume_from_transport(result, occurrence)
+            .map_err(Sys5I3PrivateQuicError::ProviderSemanticRejected)
+    }
+
+    /// Execute the executor's sealed first-result phase on session one. The
+    /// selected action is retained in inherited control; no transport flag or
+    /// caller-supplied outcome can choose it.
+    #[cfg(feature = "i3-process-test-seams")]
+    #[doc(hidden)]
+    pub async fn drive_fixed_provider_network_first_result_send(
+        &mut self,
+        runtime: &mut Sys5I3InstalledProviderChildRuntime,
+        result: &Sys5I3ProviderResultCarrier,
+    ) -> Result<(), Sys5I3PrivateQuicError> {
+        self.require_verified_provider_session_generation(1)?;
+        match runtime
+            .fixed_provider_network_first_result_send_action(result)
+            .map_err(Sys5I3PrivateQuicError::ProviderSemanticRejected)?
+        {
+            Sys5I3FixedProviderNetworkFirstResultSendAction::Withhold => Ok(()),
+            Sys5I3FixedProviderNetworkFirstResultSendAction::Send => {
+                self.send_provider_result(runtime, result.clone()).await?;
+                runtime
+                    .record_fixed_provider_network_first_result_sent(result)
+                    .map_err(Sys5I3PrivateQuicError::ProviderSemanticRejected)
+            }
+        }
+    }
+
+    /// Execute the requester session-one result phase. A withheld frame is
+    /// accepted only as a clean FIN before any prefix byte; a truncated or
+    /// nonempty frame is still a frame rejection. The sent/unconsumed profile
+    /// reads and validates the exact pending frame, then discards it before
+    /// semantic admission; it is not labelled as wire loss or a receipt.
+    #[cfg(feature = "i3-process-test-seams")]
+    #[doc(hidden)]
+    pub async fn drive_fixed_provider_network_first_result_receive(
+        &mut self,
+        runtime: &mut Sys5I3InstalledProviderChildRuntime,
+    ) -> Result<(), Sys5I3PrivateQuicError> {
+        self.require_verified_provider_session_generation(1)?;
+        match runtime
+            .fixed_provider_network_first_result_receive_action()
+            .map_err(Sys5I3PrivateQuicError::ProviderSemanticRejected)?
+        {
+            Sys5I3FixedProviderNetworkFirstResultReceiveAction::ExpectFinishedWithoutFrame => {
+                if self.read_blob_or_finished_without_frame().await?.is_some() {
+                    return Err(Sys5I3PrivateQuicError::FrameRejected);
+                }
+                runtime
+                    .record_fixed_provider_network_first_result_finished_without_frame()
+                    .map_err(Sys5I3PrivateQuicError::ProviderSemanticRejected)
+            }
+            Sys5I3FixedProviderNetworkFirstResultReceiveAction::Consume => {
+                let receipt = self.receive_provider_result_and_consume(runtime).await?;
+                runtime
+                    .record_fixed_provider_network_first_result_consumed(&receipt)
+                    .map_err(Sys5I3PrivateQuicError::ProviderSemanticRejected)
+            }
+            Sys5I3FixedProviderNetworkFirstResultReceiveAction::ReadAndDiscardBeforeConsume => {
+                let bytes = self.read_blob().await?;
+                let _unbound_receive = self.reserve_provider_transport_occurrence(
+                    Sys5I3PrivateProviderTransportOccurrenceKind::ResultReceive,
+                )?;
+                let result = Sys5I3PrivateProcessCodec::private_provisional_v1()
+                    .decode_untrusted_provider_result(&bytes)
+                    .map_err(|_| Sys5I3PrivateQuicError::CodecRejected)?;
+                runtime
+                    .record_fixed_provider_network_first_result_received_and_discarded_before_consume(
+                        &result,
+                    )
+                    .map_err(Sys5I3PrivateQuicError::ProviderSemanticRejected)
+            }
+        }
+    }
+
+    /// Replays only the exact already-consumed requester carrier on the
+    /// second session. This does not reopen requester admission or create a
+    /// second semantic operation; it fills the bounded second send slot.
+    #[cfg(feature = "i3-process-test-seams")]
+    #[doc(hidden)]
+    pub async fn drive_fixed_provider_network_second_request_send(
+        &mut self,
+        runtime: &mut Sys5I3InstalledProviderChildRuntime,
+    ) -> Result<(), Sys5I3PrivateQuicError> {
+        self.require_verified_provider_session_generation(2)?;
+        let Some(replay) = runtime
+            .prepare_fixed_provider_network_second_request_replay()
+            .map_err(Sys5I3PrivateQuicError::ProviderSemanticRejected)?
+        else {
+            return Ok(());
+        };
+        let request = replay.request();
+        let bytes = Sys5I3PrivateProcessCodec::private_provisional_v1()
+            .encode_provider_request(request)
+            .map_err(|_| Sys5I3PrivateQuicError::CodecRejected)?;
+        let reservation = self.reserve_provider_transport_occurrence(
+            Sys5I3PrivateProviderTransportOccurrenceKind::RequestSendReservation,
+        )?;
+        let ticket = runtime
+            .reserve_fixed_provider_network_second_request_send(&replay, reservation)
+            .map_err(Sys5I3PrivateQuicError::ProviderSemanticRejected)?;
+        let completion = self.reserve_provider_transport_occurrence(
+            Sys5I3PrivateProviderTransportOccurrenceKind::RequestSendCompleted,
+        )?;
+        self.write_blob(&bytes).await?;
+        runtime
+            .complete_provider_transport_send(ticket, completion)
+            .map_err(Sys5I3PrivateQuicError::ProviderSemanticRejected)
+    }
+
+    /// Receive the exact consumed requester carrier only for the duplicate
+    /// conformance profile. The ordinary runtime boundary must reject it as
+    /// the same retained semantic request before host invocation.
+    #[cfg(feature = "i3-process-test-seams")]
+    #[doc(hidden)]
+    pub async fn drive_fixed_provider_network_second_request_receive(
+        &mut self,
+        runtime: &mut Sys5I3InstalledProviderChildRuntime,
+    ) -> Result<(), Sys5I3PrivateQuicError> {
+        self.require_verified_provider_session_generation(2)?;
+        if !runtime
+            .expects_fixed_provider_network_second_request_replay()
+            .map_err(Sys5I3PrivateQuicError::ProviderSemanticRejected)?
+        {
+            return Ok(());
+        }
+        let bytes = self.read_blob().await?;
+        let occurrence = self.reserve_provider_transport_occurrence(
+            Sys5I3PrivateProviderTransportOccurrenceKind::RequestReceive,
+        )?;
+        let request = Sys5I3PrivateProcessCodec::private_provisional_v1()
+            .decode_untrusted_provider_request(&bytes)
+            .map_err(|_| Sys5I3PrivateQuicError::CodecRejected)?;
+        match runtime.admit_read_only_provider_request_and_execute_from_transport(
+            request.clone(),
+            occurrence,
+        ) {
+            Err(error)
+                if error.kind() == Sys5I3ProcessRuntimeErrorKind::DuplicateRequestRejected =>
+            {
+                runtime
+                    .record_fixed_provider_network_second_request_duplicate_rejected(&request)
+                    .map_err(Sys5I3PrivateQuicError::ProviderSemanticRejected)
+            }
+            Err(error) => Err(Sys5I3PrivateQuicError::ProviderSemanticRejected(error)),
+            Ok(_) => Err(Sys5I3PrivateQuicError::LocalAttemptRejected),
+        }
+    }
+
+    /// Execute the executor's sealed second-result phase. A held retained
+    /// result still crosses the normal current M9 release check immediately
+    /// before reservation; the post-call retirement profile must therefore
+    /// reject before any result-frame write.
+    #[cfg(feature = "i3-process-test-seams")]
+    #[doc(hidden)]
+    pub async fn drive_fixed_provider_network_second_result_send(
+        &mut self,
+        runtime: &mut Sys5I3InstalledProviderChildRuntime,
+        result: &Sys5I3ProviderResultCarrier,
+    ) -> Result<(), Sys5I3PrivateQuicError> {
+        self.require_verified_provider_session_generation(2)?;
+        match runtime
+            .fixed_provider_network_second_result_send_action(result)
+            .map_err(Sys5I3PrivateQuicError::ProviderSemanticRejected)?
+        {
+            Sys5I3FixedProviderNetworkSecondResultSendAction::FinishWithoutFrame => Ok(()),
+            Sys5I3FixedProviderNetworkSecondResultSendAction::Send => {
+                let replay = runtime
+                    .prepare_fixed_provider_network_second_result_replay(result)
+                    .map_err(Sys5I3PrivateQuicError::ProviderSemanticRejected)?;
+                let bytes = Sys5I3PrivateProcessCodec::private_provisional_v1()
+                    .encode_provider_result(replay.result())
+                    .map_err(|_| Sys5I3PrivateQuicError::CodecRejected)?;
+                let reservation = self.reserve_provider_transport_occurrence(
+                    Sys5I3PrivateProviderTransportOccurrenceKind::ResultSendReservation,
+                )?;
+                let ticket = runtime
+                    .reserve_fixed_provider_network_result_send(&replay, reservation)
+                    .map_err(Sys5I3PrivateQuicError::ProviderSemanticRejected)?;
+                let completion = self.reserve_provider_transport_occurrence(
+                    Sys5I3PrivateProviderTransportOccurrenceKind::ResultSendCompleted,
+                )?;
+                self.write_blob(&bytes).await?;
+                runtime
+                    .complete_provider_transport_send(ticket, completion)
+                    .map_err(Sys5I3PrivateQuicError::ProviderSemanticRejected)?;
+                runtime
+                    .record_fixed_provider_network_second_result_sent(&replay)
+                    .map_err(Sys5I3PrivateQuicError::ProviderSemanticRejected)
+            }
+            Sys5I3FixedProviderNetworkSecondResultSendAction::ExpectCurrentnessRejection => {
+                let replay = runtime
+                    .prepare_fixed_provider_network_second_result_replay(result)
+                    .map_err(Sys5I3PrivateQuicError::ProviderSemanticRejected)?;
+                let reservation = self.reserve_provider_transport_occurrence(
+                    Sys5I3PrivateProviderTransportOccurrenceKind::ResultSendReservation,
+                )?;
+                match runtime.reserve_fixed_provider_network_result_send(&replay, reservation) {
+                    Err(error)
+                        if error.kind() == Sys5I3ProcessRuntimeErrorKind::MissingCapability =>
+                    {
+                        runtime
+                            .record_fixed_provider_network_second_result_currentness_rejected(
+                                result,
+                            )
+                            .map_err(Sys5I3PrivateQuicError::ProviderSemanticRejected)
+                    }
+                    Err(error) => Err(Sys5I3PrivateQuicError::ProviderSemanticRejected(error)),
+                    Ok(_) => Err(Sys5I3PrivateQuicError::LocalAttemptRejected),
+                }
+            }
+        }
+    }
+
+    /// Execute the requester session-two result phase. Duplicate result
+    /// handling is again delegated to the normal current consume boundary;
+    /// it must preserve the original consumed receipt rather than creating a
+    /// second consume fact.
+    #[cfg(feature = "i3-process-test-seams")]
+    #[doc(hidden)]
+    pub async fn drive_fixed_provider_network_second_result_receive(
+        &mut self,
+        runtime: &mut Sys5I3InstalledProviderChildRuntime,
+    ) -> Result<(), Sys5I3PrivateQuicError> {
+        self.require_verified_provider_session_generation(2)?;
+        match runtime
+            .fixed_provider_network_second_result_receive_action()
+            .map_err(Sys5I3PrivateQuicError::ProviderSemanticRejected)?
+        {
+            Sys5I3FixedProviderNetworkSecondResultReceiveAction::Consume => {
+                let receipt = self
+                    .receive_provider_result_and_consume_at_verified_provider_session_generation(
+                        runtime, 2,
+                    )
+                    .await?;
+                runtime
+                    .record_fixed_provider_network_second_result_consumed(&receipt)
+                    .map_err(Sys5I3PrivateQuicError::ProviderSemanticRejected)
+            }
+            Sys5I3FixedProviderNetworkSecondResultReceiveAction::ExpectFinishedWithoutFrame => {
+                if self.read_blob_or_finished_without_frame().await?.is_some() {
+                    return Err(Sys5I3PrivateQuicError::FrameRejected);
+                }
+                runtime
+                    .record_fixed_provider_network_second_result_finished_without_frame()
+                    .map_err(Sys5I3PrivateQuicError::ProviderSemanticRejected)
+            }
+            Sys5I3FixedProviderNetworkSecondResultReceiveAction::ExpectDuplicateRejection => {
+                let bytes = self.read_blob().await?;
+                let occurrence = self.reserve_provider_transport_occurrence(
+                    Sys5I3PrivateProviderTransportOccurrenceKind::ResultReceive,
+                )?;
+                let result = Sys5I3PrivateProcessCodec::private_provisional_v1()
+                    .decode_untrusted_provider_result(&bytes)
+                    .map_err(|_| Sys5I3PrivateQuicError::CodecRejected)?;
+                match runtime.admit_read_only_provider_result_and_consume_from_transport(
+                    result.clone(),
+                    occurrence,
+                ) {
+                    Err(error)
+                        if error.kind()
+                            == Sys5I3ProcessRuntimeErrorKind::DuplicateRequestRejected =>
+                    {
+                        runtime
+                            .record_fixed_provider_network_second_result_duplicate_rejected(&result)
+                            .map_err(Sys5I3PrivateQuicError::ProviderSemanticRejected)
+                    }
+                    Err(error) => Err(Sys5I3PrivateQuicError::ProviderSemanticRejected(error)),
+                    Ok(_) => Err(Sys5I3PrivateQuicError::LocalAttemptRejected),
+                }
+            }
+        }
     }
 
     /// Encodes and sends a generated request/reply over this adapter-owned
@@ -681,6 +1217,7 @@ impl Sys5I3PrivateQuicSession {
         &mut self,
         message: Sys5I3ProcessMessage,
     ) -> Result<Sys5I3PrivateQuicDeliveryEvidence, Sys5I3PrivateQuicError> {
+        self.require_ordinary_control()?;
         let encoded = Self::encode_generated_message(message)?;
         let (body, evidence) = self.reserve_generated_message_delivery(encoded)?;
         self.write_blob(&body).await?;
@@ -703,6 +1240,7 @@ impl Sys5I3PrivateQuicSession {
         ),
         Sys5I3PrivateQuicError,
     > {
+        self.require_ordinary_control()?;
         self.require_verified_session_generation(1)?;
         if self.generated_reply_replay_candidate_issued {
             return Err(Sys5I3PrivateQuicError::LocalAttemptRejected);
@@ -719,7 +1257,7 @@ impl Sys5I3PrivateQuicSession {
         let candidate = Sys5I3PrivateQuicGeneratedReplyReplayCandidate {
             body,
             session_attempt_generation: self.session_attempt_generation,
-            control_binding: self.control.localnet_preface(),
+            control_binding: self.require_ordinary_control()?.localnet_preface(),
             original_send_delivery: evidence.clone(),
         };
         Ok((evidence, candidate))
@@ -735,8 +1273,9 @@ impl Sys5I3PrivateQuicSession {
         &mut self,
         candidate: Sys5I3PrivateQuicGeneratedReplyReplayCandidate,
     ) -> Result<Sys5I3PrivateQuicReplayedGeneratedReplyDelivery, Sys5I3PrivateQuicError> {
+        self.require_ordinary_control()?;
         self.require_verified_session_generation(2)?;
-        let control_binding = self.control.localnet_preface();
+        let control_binding = self.require_ordinary_control()?.localnet_preface();
         if !retained_ingress_matches_reconnect_binding(
             candidate.session_attempt_generation,
             &candidate.control_binding,
@@ -771,6 +1310,7 @@ impl Sys5I3PrivateQuicSession {
         message: Sys5I3ProcessMessage,
         control: Sys5I3PrivateQuicGeneratedFrameWriteControl,
     ) -> Result<Sys5I3PrivateQuicDeliveryEvidence, Sys5I3PrivateQuicError> {
+        self.require_ordinary_control()?;
         let encoded = Self::encode_generated_message(message)?;
         control.validate_encoded_body(&encoded.body)?;
         let (body, mut evidence) = self.reserve_generated_message_delivery(encoded)?;
@@ -803,6 +1343,7 @@ impl Sys5I3PrivateQuicSession {
         runtime: &mut Sys5I3ProcessRuntime,
         pending: &Sys5I3OriginalOwnerRequestPending,
     ) -> Result<Sys5I3PrivateQuicDeliveryEvidence, Sys5I3PrivateQuicError> {
+        self.require_ordinary_control()?;
         self.send_original_owner_request_attempt(
             runtime,
             pending,
@@ -820,6 +1361,7 @@ impl Sys5I3PrivateQuicSession {
         runtime: &mut Sys5I3ProcessRuntime,
         pending: &Sys5I3OriginalOwnerRequestPending,
     ) -> Result<Sys5I3PrivateQuicDeliveryEvidence, Sys5I3PrivateQuicError> {
+        self.require_ordinary_control()?;
         self.send_original_owner_request_attempt(
             runtime,
             pending,
@@ -842,6 +1384,7 @@ impl Sys5I3PrivateQuicSession {
         ),
         Sys5I3PrivateQuicError,
     > {
+        self.require_ordinary_control()?;
         if !self.peer_spki_verified || !self.peer_preface_verified {
             return Err(Sys5I3PrivateQuicError::peer_binding_rejected(
                 self.control.expected_peer_spki_ref(),
@@ -898,6 +1441,7 @@ impl Sys5I3PrivateQuicSession {
     pub async fn receive_complete_pending_ingress(
         &mut self,
     ) -> Result<Sys5I3PrivateQuicPendingIngress, Sys5I3PrivateQuicError> {
+        self.require_ordinary_control()?;
         if !self.peer_spki_verified || !self.peer_preface_verified {
             return Err(Sys5I3PrivateQuicError::peer_binding_rejected(
                 self.control.expected_peer_spki_ref(),
@@ -925,7 +1469,7 @@ impl Sys5I3PrivateQuicSession {
             // This is the existing trusted transport control rendered as its
             // exact preface binding.  It is retained opaquely and compared
             // only by the adapter on session two; it conveys no authority.
-            control_binding: self.control.localnet_preface(),
+            control_binding: self.require_ordinary_control()?.localnet_preface(),
             candidate_commitment_ref,
             network_occurrence_ref,
         })
@@ -947,12 +1491,13 @@ impl Sys5I3PrivateQuicSession {
         ),
         Sys5I3PrivateQuicError,
     > {
+        self.require_ordinary_control()?;
         if !self.peer_spki_verified || !self.peer_preface_verified {
             return Err(Sys5I3PrivateQuicError::peer_binding_rejected(
                 self.control.expected_peer_spki_ref(),
             ));
         }
-        let reconnect_control_binding = self.control.localnet_preface();
+        let reconnect_control_binding = self.require_ordinary_control()?.localnet_preface();
         if !retained_ingress_matches_reconnect_binding(
             pending.session_attempt_generation,
             &pending.control_binding,
@@ -1024,6 +1569,12 @@ impl Sys5I3PrivateQuicSession {
         runtime: &mut Sys5I3ProcessRuntime,
         pending: Sys5I3OriginalOwnerRequestPending,
     ) -> Sys5I3PrivateQuicOriginalOwnerReplyOutcome {
+        if self.require_ordinary_control().is_err() {
+            return Sys5I3PrivateQuicOriginalOwnerReplyOutcome::Pending {
+                pending,
+                error: Sys5I3PrivateQuicError::LocalAttemptRejected,
+            };
+        }
         if !self.peer_spki_verified || !self.peer_preface_verified {
             return Sys5I3PrivateQuicOriginalOwnerReplyOutcome::Pending {
                 pending,
@@ -1066,9 +1617,10 @@ impl Sys5I3PrivateQuicSession {
         self.connection.close(0_u32.into(), b"i3-private-complete");
     }
 
-    /// Server-side lifecycle coordination only.  This is called after the
-    /// reply stream is finished and after the child emitted its observer-safe
-    /// completion report, so it cannot create a semantic acknowledgement.
+    /// Server-side lifecycle coordination only. This waits for physical
+    /// connection closure after a finished stream; it is neither a semantic
+    /// receipt nor a delivery acknowledgement and may precede a later
+    /// sealed-session completion report.
     pub async fn wait_for_peer_close(&self) {
         let _ = self.connection.closed().await;
     }
@@ -1205,6 +1757,31 @@ impl Sys5I3PrivateQuicSession {
         Ok(body)
     }
 
+    /// Read either one complete bounded blob or a clean stream FIN before the
+    /// first prefix byte. A partial prefix, declared body, or body read is a
+    /// rejected frame rather than an absent result.
+    #[cfg(feature = "i3-process-test-seams")]
+    async fn read_blob_or_finished_without_frame(
+        &mut self,
+    ) -> Result<Option<Vec<u8>>, Sys5I3PrivateQuicError> {
+        let mut prefix = [0_u8; 4];
+        match self.receive.read_exact(&mut prefix).await {
+            Ok(()) => {}
+            Err(ReadExactError::FinishedEarly(0)) => return Ok(None),
+            Err(_) => return Err(Sys5I3PrivateQuicError::FrameRejected),
+        }
+        let length = u32::from_be_bytes(prefix) as usize;
+        if length > MAX_PRIVATE_QUIC_BLOB_BYTES {
+            return Err(Sys5I3PrivateQuicError::FrameRejected);
+        }
+        let mut body = vec![0; length];
+        self.receive
+            .read_exact(&mut body)
+            .await
+            .map_err(|_| Sys5I3PrivateQuicError::FrameRejected)?;
+        Ok(Some(body))
+    }
+
     async fn send_original_owner_request_attempt(
         &mut self,
         runtime: &mut Sys5I3ProcessRuntime,
@@ -1325,6 +1902,56 @@ impl Sys5I3PrivateQuicSession {
         ))
     }
 
+    /// Allocate one provider adapter occurrence from only the authenticated
+    /// run, this bounded session generation, a fixed direction, and a local
+    /// ordinal. It never reads a carrier frame, so neither a value nor a
+    /// value-derived hash can reach an error, audit, or observer candidate.
+    fn reserve_provider_transport_occurrence(
+        &mut self,
+        kind: Sys5I3PrivateProviderTransportOccurrenceKind,
+    ) -> Result<Sys5I3PrivateProviderTransportOccurrence, Sys5I3PrivateQuicError> {
+        self.next_network_occurrence = self
+            .next_network_occurrence
+            .checked_add(1)
+            .ok_or(Sys5I3PrivateQuicError::NetworkOccurrenceExhausted)?;
+        let direction = match kind {
+            Sys5I3PrivateProviderTransportOccurrenceKind::RequestSendReservation => {
+                "provider-request-send-reservation"
+            }
+            Sys5I3PrivateProviderTransportOccurrenceKind::RequestSendCompleted => {
+                "provider-request-send-completed"
+            }
+            Sys5I3PrivateProviderTransportOccurrenceKind::RequestReceive => {
+                "provider-request-complete-receive"
+            }
+            Sys5I3PrivateProviderTransportOccurrenceKind::ResultSendReservation => {
+                "provider-result-send-reservation"
+            }
+            Sys5I3PrivateProviderTransportOccurrenceKind::ResultSendCompleted => {
+                "provider-result-send-completed"
+            }
+            Sys5I3PrivateProviderTransportOccurrenceKind::ResultReceive => {
+                "provider-result-complete-receive"
+            }
+        };
+        let mut hasher = Sha256::new();
+        hasher.update(b"mirrorea/i3/private-quic/provider-network-occurrence/v1\0");
+        for component in [self.control.run_ref(), direction] {
+            hasher.update((component.len() as u64).to_be_bytes());
+            hasher.update(component.as_bytes());
+        }
+        hasher.update(self.session_attempt_generation.to_be_bytes());
+        hasher.update(self.next_network_occurrence.to_be_bytes());
+        Sys5I3PrivateProviderTransportOccurrence::from_private_quic(
+            kind,
+            format!(
+                "i3-provider-network-occurrence-sha256-v1:{:x}",
+                hasher.finalize()
+            ),
+        )
+        .map_err(|_| Sys5I3PrivateQuicError::LocalAttemptRejected)
+    }
+
     fn candidate_commitment_ref_for_frame(&self, bytes: &[u8]) -> String {
         let mut hasher = Sha256::new();
         hasher.update(b"mirrorea/i3/private-quic/rejected-attempt/v1\0");
@@ -1354,6 +1981,9 @@ impl Sys5I3PrivateQuicReconnect {
             next_network_occurrence,
             pending_ingress_permit,
         } = self;
+        if matches!(&control, PrivateQuicControl::Provider(_)) {
+            return Err(Sys5I3PrivateQuicError::LocalAttemptRejected);
+        }
         let session_attempt_generation =
             next_reconnect_session_attempt_generation(prior_session_attempt_generation)?;
         verify_exact_peer_spki(&connection, control.expected_peer_spki_ref())?;
@@ -1388,6 +2018,9 @@ impl Sys5I3PrivateQuicReconnect {
             next_network_occurrence,
             pending_ingress_permit,
         } = self;
+        if matches!(&control, PrivateQuicControl::Provider(_)) {
+            return Err(Sys5I3PrivateQuicError::LocalAttemptRejected);
+        }
         let session_attempt_generation =
             next_reconnect_session_attempt_generation(prior_session_attempt_generation)?;
         verify_exact_peer_spki(&connection, control.expected_peer_spki_ref())?;
@@ -1406,6 +2039,89 @@ impl Sys5I3PrivateQuicReconnect {
             next_network_occurrence,
             pending_ingress_permit,
             #[cfg(feature = "i3-process-test-seams")]
+            generated_reply_replay_candidate_issued: false,
+        })
+    }
+
+    /// Consume the sealed provider reconnect control into the one permitted
+    /// second client session. This entry is available only to the fixed
+    /// conformance profile; ordinary provider delivery remains one session.
+    #[cfg(feature = "i3-process-test-seams")]
+    #[doc(hidden)]
+    pub async fn connect_provider(
+        self,
+        connection: Connection,
+    ) -> Result<Sys5I3PrivateQuicSession, Sys5I3PrivateQuicError> {
+        let Self {
+            control,
+            prior_session_attempt_generation,
+            next_network_occurrence,
+            pending_ingress_permit,
+        } = self;
+        let PrivateQuicControl::Provider(provider_control) = &control else {
+            return Err(Sys5I3PrivateQuicError::LocalAttemptRejected);
+        };
+        if !provider_control.permits_fixed_provider_network_conformance() {
+            return Err(Sys5I3PrivateQuicError::LocalAttemptRejected);
+        }
+        let session_attempt_generation =
+            next_reconnect_session_attempt_generation(prior_session_attempt_generation)?;
+        verify_exact_peer_spki(&connection, control.expected_peer_spki_ref())?;
+        let (send, receive) = connection
+            .open_bi()
+            .await
+            .map_err(|_| Sys5I3PrivateQuicError::FrameRejected)?;
+        Ok(Sys5I3PrivateQuicSession {
+            connection,
+            send,
+            receive,
+            control,
+            peer_spki_verified: true,
+            peer_preface_verified: false,
+            session_attempt_generation,
+            next_network_occurrence,
+            pending_ingress_permit,
+            generated_reply_replay_candidate_issued: false,
+        })
+    }
+
+    /// Server counterpart to `connect_provider`, preserving the same single
+    /// consuming control, occurrence counter, and two-session bound.
+    #[cfg(feature = "i3-process-test-seams")]
+    #[doc(hidden)]
+    pub async fn accept_provider(
+        self,
+        connection: Connection,
+    ) -> Result<Sys5I3PrivateQuicSession, Sys5I3PrivateQuicError> {
+        let Self {
+            control,
+            prior_session_attempt_generation,
+            next_network_occurrence,
+            pending_ingress_permit,
+        } = self;
+        let PrivateQuicControl::Provider(provider_control) = &control else {
+            return Err(Sys5I3PrivateQuicError::LocalAttemptRejected);
+        };
+        if !provider_control.permits_fixed_provider_network_conformance() {
+            return Err(Sys5I3PrivateQuicError::LocalAttemptRejected);
+        }
+        let session_attempt_generation =
+            next_reconnect_session_attempt_generation(prior_session_attempt_generation)?;
+        verify_exact_peer_spki(&connection, control.expected_peer_spki_ref())?;
+        let (send, receive) = connection
+            .accept_bi()
+            .await
+            .map_err(|_| Sys5I3PrivateQuicError::FrameRejected)?;
+        Ok(Sys5I3PrivateQuicSession {
+            connection,
+            send,
+            receive,
+            control,
+            peer_spki_verified: true,
+            peer_preface_verified: false,
+            session_attempt_generation,
+            next_network_occurrence,
+            pending_ingress_permit,
             generated_reply_replay_candidate_issued: false,
         })
     }

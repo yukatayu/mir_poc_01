@@ -51,6 +51,8 @@ const PRIVATE_PROCESS_IMAGE_ROOT: &str = "/image";
 const PRIVATE_PROCESS_MESSAGE_ROOT: &str = "/message";
 const PRIVATE_PROCESS_VERSION_PATH: &str = "/version";
 const PRIVATE_PROCESS_IMAGE_EDGE_OBJECT_PATH: &str = "/image/required_edge_contracts/0";
+const PRIVATE_PROCESS_IMAGE_CARRIER_REFERENCE_ONLY_REDACTION_PATH: &str =
+    "/projection/communication_plan/edges/0/carrier_contract/reference_only_redaction";
 #[cfg(feature = "i3-process-test-seams")]
 const PRIVATE_PROCESS_MESSAGE_COHORT_PATH: &str = "/message/cohort_provenance_ref";
 #[cfg(feature = "i3-process-test-seams")]
@@ -2958,6 +2960,53 @@ fn g2_private_image_codec_bounds_untrusted_decode_and_requires_parent_held_start
             .expect_err("a missing incident-edge Core reference must not default to an empty provenance value")
             .kind(),
         Sys5I3PrivateProcessCodecErrorKind::MissingRequiredCoreProvenance
+    );
+}
+
+#[test]
+fn g2_private_image_decoder_rejects_non_reference_only_carrier_contract_before_candidate_start() {
+    let project = build_once(CANONICAL_SOURCE);
+    let deployment = two_nonempty_slots(&project);
+    let codec = Sys5I3PrivateProcessCodec::private_provisional_v1();
+    let mut cohort = single_coordinator_cohort(&project, &deployment);
+    let expected_start_binding = cohort
+        .parent_held_expected_start_binding(REQUESTER_SLOT)
+        .expect("the coordinator retains the exact requester start binding");
+    let original = codec
+        .encode_image(take_process_image(&mut cohort, REQUESTER_SLOT))
+        .expect("the source-derived requester image encodes through the private codec");
+
+    let runtime = codec
+        .validate_and_start_image(
+            codec.decode_untrusted_image(&original).expect(
+                "the untouched source-derived image decodes only as an untrusted candidate",
+            ),
+            expected_start_binding,
+        )
+        .expect("the exact parent-held binding starts the untouched source-derived image");
+    assert_candidate_a_child_runtime(&runtime);
+
+    let mut non_reference_only = private_process_json(&original, PRIVATE_PROCESS_IMAGE_ROOT);
+    let redaction = non_reference_only
+        .pointer_mut(PRIVATE_PROCESS_IMAGE_CARRIER_REFERENCE_ONLY_REDACTION_PATH)
+        .expect("the source-derived image retains the first generated carrier redaction guard");
+    assert_eq!(
+        redaction.as_bool(),
+        Some(true),
+        "the source-derived generated carrier begins reference-only before this one-field mutation"
+    );
+    *redaction = Value::Bool(false);
+    let non_reference_only = private_process_json_frame(&non_reference_only);
+
+    assert_eq!(
+        codec
+            .decode_untrusted_image(&non_reference_only)
+            .expect_err(
+                "a non-reference-only carrier contract must reject before candidate release or runtime start",
+            )
+            .kind(),
+        Sys5I3PrivateProcessCodecErrorKind::Malformed,
+        "private image decode must fail closed rather than admit a carrier that can disclose non-reference data"
     );
 }
 

@@ -18,8 +18,8 @@ use mir_semantics::{
 use crate::{
     m8_owner_admission_gate::M8I3VerifiedOwnerAdmissionHandoff,
     m8_runtime_admission::{
-        EvidenceRedaction, EvidenceSecurityLabel, M8AdmissionEvidence, M8RuntimeInstance,
-        M8SecurityClass,
+        EvidenceRedaction, EvidenceSecurityLabel, M8AdmissionEvidence,
+        M8InstalledReadOnlyProviderEffectComponent, M8RuntimeInstance, M8SecurityClass,
     },
     m8_runtime_authority::M8AuthorityState,
     m8_runtime_designated_value::{
@@ -1685,6 +1685,28 @@ pub(crate) enum M8LocalOwnerExecutionFailure {
 }
 
 impl M8LocalRuntime {
+    /// Construct one local session only from the dedicated inherited-provider
+    /// component wrapper.  The ordinary constructor has no way to obtain
+    /// such an instance from an ordinary source/admission/snapshot path.
+    pub(crate) fn from_i3_installed_provider_component(
+        component: &M8InstalledReadOnlyProviderEffectComponent,
+        component_binding_ref: &str,
+        seed: M8LocalRuntimeSeed,
+    ) -> Result<Self, ()> {
+        let instance = component
+            .scoped_instance_for_local_provider_runtime(component_binding_ref)
+            .ok_or(())?;
+        Ok(Self::from_admitted(instance, seed))
+    }
+
+    /// Report whether this retained local session has allocated an owner
+    /// execution occurrence.  The provider profile has no owner-operation
+    /// entrypoint; SYS-4 uses this direct M8 state check for its finite
+    /// post-consume invariant rather than a derived bookkeeping flag.
+    pub(crate) const fn has_no_owner_execution_occurrences(&self) -> bool {
+        self.owner.next_occurrence == 0
+    }
+
     pub fn from_admitted(instance: M8RuntimeInstance, seed: M8LocalRuntimeSeed) -> Self {
         let M8LocalRuntimeSeed {
             owner_ints,

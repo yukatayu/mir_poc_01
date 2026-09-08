@@ -1,6 +1,6 @@
 # Current Task Map (LAB)
 
-最終更新: 2026-09-08 21:14 JST
+最終更新: 2026-09-09 05:16 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project direction,
 theory, ADRs, conformance, and process. Everything outside it is LAB evidence,
@@ -47,76 +47,36 @@ source/Core/artifact provenance, redaction, explicit retry and bounded shutdown.
 Primary falsifiers: second mutation/consume, stale authority resurrection,
 false success/nonexecution, blind retry, leaked private information, or hang.
 
-Current component is the source-declared provider effect selected by
-ADR-0042/spec/17 at contract cut 985ee179. Source/guard cut `9e8d674a` is
-pushed with clean remote parity observed 2026-09-08 14:05 JST. Stage 2a static
-coverage/projection/composite verification is retained at `3862b168`.
-Accepted Stage2b cut `7142b205b4e2805d50ce78156de99e6feb1db37a` has clean
-HEAD/origin/main/live parity at 2026-09-08 19:22 JST. Stage 2b actual resource binding and M9
-authorization/scoped-M8 are accepted inactive evidence; invocation/runtime remain downstream.
+The current provider component implements ADR-0042/spec/17, building on accepted
+source/static cuts9e8d674a/3862b168, inactive M9/M8 authorization7142b205 and
+inactive process handoffa027d61. Historical counts and repairs stay in Report2606.
 
-Retained frozen Stage 2a evidence:
+Stage3 now runs actual FD3-installed A/B children, source-derived QUIC provider
+requests, bounded host reads, current-authority result consumption and separately
+authorized normal v2 observation. Fresh post-review evidence passes runtime
+library410, all probe targets (ordinary41/provider20), process64, M1067,
+I2 local5/CLI8 and provider public guards5. Scoped all-target Clippy and format
+pass; independent review has no remaining P0/P1/P2. Component integration is
+being recorded; it is not a new milestone or official lifecycle change.
 
-- Semantics composite 6/6, provider source 17/17, legacy finite 8/8.
-- Composite privacy doctest 1/1; static runtime module 11/11.
-- Full feature-union runtime library 345/345.
-- Independent spec and quality reviews: no remaining P0/P1/P2.
-- Fresh process 63/63, I2/M10 5/8/67, public guards 5/5, three-crate Clippy,
-  workspace format and all-target compilation pass. The latter is not
-  workspace test execution. Exact Git state remains in Report 2606.
+The four actual two-session fault profiles use genuine child-private assertions
+and generic completion, not exported provider-fault traces. The lost-result case
+receives/decodes then discards the frame before semantic admission, not wire
+packet loss. AdapterUnavailable has LOCAL injected-read/codec evidence, not
+an actual OS operational-error claim. B64+A65 is not independent B65 or global
+exactly-once. Supported live provider cut/export and public interfaces are not
+claimed.
 
-Current Stage2b runtime is 362/362, including provider filtering 26/26 within
-that total; process is 63/63, M10 is 67/67, I2 local/CLI is 5/5 and 8/8, and
-public guards are 5/5. Three-crate all-target warnings-denied Clippy, workspace
-format, and workspace all-target check pass; workspace tests and CLI/probe
-Clippy are not claimed. Independent spec/quality review is P0/P1/P2 zero after
-three direct tests and generic M8 typed refusal. The accepted Stage2b source/cut
-is frozen; current Stage2c is dirty. Stage2b component is accepted but inactive.
-Current Stage2c is the existing
-SYS4/SYS5 inactive mixed-image handoff: final focused module/runtime is 13/13
-included in runtime 375/375 (362 filtered; 9.65s/88.17s), process 63/63, M10
-67/67, I2 local/CLI 5/5 and 8/8, guards 5/5, and actual ordinary localnet
-41/41 (59.92s). Feature-union all-target Clippy `-Dwarnings` (22.06s), workspace
-format and all-target check (17.41s) pass with no warnings; workspace tests and
-probe-all tests are not claimed. Final independent review is P0/P1/P2 zero after
-two P1 falsifiers and three P2 coverage/comment repairs. Stage2c is inactive/
-green for parent integration; a new component commit/push remains pending. The
-next direct consumer is actual Stage3 provider host/QUIC runtime; private M8
-version 2 is required in scope, with no compatibility promise. This is not
-Stage2c acceptance, host activity, provider row-18 completion or I3-3 completion.
-Report 2606 retains exact logs.
+The current-to-next sequence is:
 
-Four review defects were reproduced and repaired: cross-source composite
-candidate acceptance, raw legacy-discharge escape, nested provider-only
-snapshot markers, and total provider-row omission by locus restriction.
-Exact source binding and typed guards now preserve the pending requirement;
-an identity query is not authentication. The production dependency guard also
-required relocating tests, not weakening the guard. Stage 1 M8 7/7 and M9
-external 1/1 remain earlier evidence. Stage2a results above are retained at
-`3862b168`; the separately labelled current Stage2b packet reran process/I2/M10.
-Exact commands and fresh versus retained results remain in Report 2606.
-
-Stage2b is an incomplete local effect-authorization prototype: local tests
-contain partial effect-authorization behavior, but no accepted host invocation,
-provider network workflow, supervisor availability, M5/Lean clean-runner
-registration or row-18 acceptance. The new ordinary source is
-checking evidence, not an operational workflow.
-
-The current-to-next component sequence is:
-
-1. Bind a genuine trusted resource
-   incarnation -> actual M9 membership/authentication and full composite
-   verification -> separate effect policy -> inactive scoped M8 component.
-   Preserve full checked-source identity; a legacy M8 component must not
-   pretend to be the complete mixed program or escape through bare snapshots.
-2. In the existing SYS4/SYS5 path, check the mixed private-image/admission
-   variant without a second runtime or transport, followed by bounded ledger,
-   admitted supervisor/resource binding, trusted host read, typed result/failure
-   and the shared existing QUIC process path.
-3. Real success with two fresh fixture values, actual resource failure,
-   duplicate/loss/revocation/capacity/redaction falsifiers and integration.
-4. Remaining membership/redaction/cut families, full ordering, final I3-3
-   regressions/review/acceptance, then the owner-requested stop.
+1. Complete the provider component's docs/Git integration and observe parity.
+2. Row13: genuine checked-operation-bound membership retirement, distinct from
+   capability revocation; preserve current-binding rejection precedence.
+3. Reuse and validate exact row15 preactivation policy and row19 redaction
+   evidence, then implement row20 process-local runtime/adapter cut admission
+   with in-flight/late-traffic falsifiers and finish ordering correspondence.
+4. Close all twenty I3-3 families, full validation and independent acceptance;
+   commit/push/parity, then stop. I3-4 requires explicit owner resume.
 
 These are direct consumers within I3-3, not extra milestones or parallel queues.
 Runtime source work and tests are separately owned; one evaluator serializes

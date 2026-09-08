@@ -28,6 +28,7 @@ use serde::{Deserialize, Serialize};
 use sha2::{Digest, Sha256};
 
 use crate::{
+    checked_program_reference::checked_program_identity_ref,
     m9_auth_verification::{
         M9FiniteLocalAdmissionCandidate, M9FiniteLocalAdmissionFact, M9RuntimeExecutionSeam,
     },
@@ -51,7 +52,6 @@ use crate::{
 const PROFILE_NAME: &str = "sys5-local-slice";
 const PROFILE_STATUS: &str = "provisional-no-compatibility-promise";
 const OBSERVER_SAFETY: &str = "observer-safe-no-raw-authority-capability-witness-payload";
-const CHECKED_PROGRAM_REF_DOMAIN: &[u8] = b"mirrorea/sys5/checked-program-ref/v1\0";
 const SEALED_INVENTORY_REF_DOMAIN: &[u8] = b"mirrorea/sys5/sealed-inventory-ref/v1\0";
 const DEBUG_PATH_REF_DOMAIN: &[u8] = b"mirrorea/sys5/debug-logical-path-ref/v1\0";
 const RELATION_OBSERVER_REF_DOMAIN: &[u8] = b"mirrorea/sys5/relation-observer-ref/v1\0";
@@ -8315,21 +8315,6 @@ fn is_allowed_logical_source_path(path: &str) -> bool {
         && path
             .split('/')
             .all(|component| !component.is_empty() && !matches!(component, "." | ".."))
-}
-
-/// Returns a domain-separated SHA-256 reference for the exact checked-program
-/// identity.  Only the fixed lower-case hexadecimal digest is serialized; the
-/// stable key remains an internal authority identity, not observer output.
-fn checked_program_identity_ref(stable_key: &str) -> String {
-    let mut hasher = Sha256::new();
-    hasher.update(CHECKED_PROGRAM_REF_DOMAIN);
-    hasher.update(
-        u64::try_from(stable_key.len())
-            .expect("logical source input length fits u64")
-            .to_le_bytes(),
-    );
-    hasher.update(stable_key.as_bytes());
-    format!("sys5-checked-program-sha256-v1:{:x}", hasher.finalize())
 }
 
 fn debug_path_ref(logical_source_path: &str) -> String {

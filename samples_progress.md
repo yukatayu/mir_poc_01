@@ -1,6 +1,6 @@
 # samples_progress
 
-Last updated: 2026-09-08 21:14 JST
+Last updated: 2026-09-09 05:16 JST
 
 Current execution control: I3-3 remains active; after its complete acceptance,
 validation/review and commit/push/parity, pause with I3-4 inactive until explicit
@@ -20,24 +20,24 @@ Three-crate all-target warnings-denied Clippy, workspace format, and workspace
 all-target check pass; workspace tests and CLI/probe Clippy are not claimed.
 Independent review is P0/P1/P2 zero after three direct tests and generic M8
 typed refusal. Static cut `3862b168` remains the Stage2a evidence cut. Accepted
-Stage2b cut `7142b205b4e2805d50ce78156de99e6feb1db37a` has clean
-HEAD/origin/main/live parity at 2026-09-08 19:22 JST; the accepted Stage2b
-source/cut is frozen, while current Stage2c remains dirty. Stage2b is accepted
-as an inactive component. Current Stage2c is the existing
-SYS4/SYS5 inactive mixed-image handoff: final focused module/runtime is 13/13
-included in runtime 375/375 (362 filtered; 9.65s/88.17s), process 63/63, M10
-67/67, I2 local/CLI 5/5 and 8/8, guards 5/5, and actual ordinary localnet
-41/41 (59.92s). Feature-union all-target Clippy `-Dwarnings` (22.06s), workspace
-format and all-target check (17.41s) pass with no warnings; workspace tests and
-probe-all tests are not claimed. Final independent review is P0/P1/P2 zero after
-two P1 falsifiers and three P2 coverage/comment repairs. Stage2c is inactive/
-green for parent integration; a new component commit/push remains pending. The
-next direct consumer is actual Stage3 provider host/QUIC runtime; private M8
-version 2 is required in scope, with no compatibility promise. This is not
-Stage2c acceptance, host activity or provider row-18 completion. Current trusted
-resource binding, actual M9 verification/policy and inactive scoped M8 admission
-feed this handoff (no second runtime/transport), then actual host/QUIC execution.
-Report 2606 records exact evidence and Git state.
+Stage2b cut `7142b205b4e2805d50ce78156de99e6feb1db37a` remains retained input;
+the accepted Stage2b source/cut is frozen. Accepted bounded Stage2c cut
+`a027d61b8030a903f892de2f7483ec8b64627963` has clean parity observed at 21:24
+JST. Stage2b and Stage2c are accepted inactive components. Stage2c retains final
+13/13 in runtime 375/375, process 63/63, ordinary localnet 41/41 and final
+review P0/P1/P2 zero; these are retained Stage2c results. Current Stage3 executes
+actual FD3-installed children, real QUIC and bounded host reads. After the review
+repair, runtime library410 and all probe targets pass, including provider20 and
+ordinary localnet41; scoped Clippy and format pass, with no remaining review
+findings. The normal joined v2 view is separately M9-authorized. Four two-session
+fault profiles use child-private assertions and generic completion, not exported
+fault traces. The lost-result case decodes/discards a complete received frame
+before semantic admission; no wire-loss claim follows. AdapterUnavailable is
+LOCAL injected-read/codec evidence, not an actual OS operational error.
+Ordinary512 KiB, semantic64 KiB and image8 MiB caps are unchanged. Row19's exact
+image-redaction falsifier passes; live provider cut/export is not supported.
+Component Git integration and remaining rows13/15/19/20/order/full-milestone
+acceptance are tracked in Report2606 and Plan250; this is not I3-3 completion.
 
 Workflow focus: current-L2 runnable floor, practical alpha-1 evidence, bounded
 operational α-0.5 / α-0.8 / α-0.9 workflows, product alpha-1 release candidate,
@@ -157,7 +157,7 @@ Notes:
 | Mirrorea I3-0 reliable-stream selection probe | evidence-closed bounded runnable probe; **not workflow/product completion** | `CARGO_INCREMENTAL=0 CARGO_BUILD_JOBS=2 cargo test --locked -p mirrorea-i3-probe --tests -- --test-threads=1` | Private source/Core-bound actual-process canaries compared TLS/TCP and QUIC reliable streams under the same nine cases; ADR-0037 selects QUIC and retains TLS/TCP as replacement baseline. | I3-1 adapter evidence was the next consumer; Linux x86_64 localhost only, not owner runtime, durability, exactly-once, public wire/API, browser/platform support, production or official I3 entry. |
 | Mirrorea I3-1 private adapter/encoding | evidence-closed bounded runnable evidence; **not workflow/product completion** | focused `mirrorea-i3-probe` suites (source cut `d75fa2e7`) | Six exhaustive carrier families / twelve edges, strict private marker/version/u32-frame/JSON admission, receiver-retained snapshot checks, selected localhost QUIC reliable bidi seam, observer-safe references, zeroizing key handling and bounded reaping. | I3-2 consumed this boundary for actual generated-artifact process runtime. Linux x86_64 localhost only; no public wire/API, browser/platform, production, retry/reconnect, exactly-once, durability or official I3 claim. |
 | Mirrorea I3-2 generated-artifact two-process runtime | evidence-closed bounded runnable evidence; **not workflow/product completion** | `cargo test --locked -p mirrorea-i3-probe --tests -- --test-threads=1` (source cut `19c5b386`) | Ordinary source is built once, generated per-locus images run in two actual exec children over private QUIC/mTLS/exact-SPKI, remote owner serve/write/reply reaches requester-local receipt, and exact four delivery records retain source/Core/artifact/edge/carrier/request/network/runtime lineage. Localnet 12/12 repeated; full probe 62/62; independent review P0=0/P1=0. | FM-5 localhost evidence only; accepted input history for active I3-3. No public workflow, 100%, production, durability, C-distributed conformance, or official I3 lifecycle claim. |
-| Mirrorea I3-3 network failure/retry/order refinement | active ongoing milestone; **not accepted** | Plan 250 / Report 2606; Stage2b provider component | Retained Stage2b runtime 362/362, provider filter 26/26 included, process 63/63, M10 67/67, I2 local/CLI 5/5 and 8/8, guards 5/5. Current Stage2c final focused module/runtime is 13/13 included in 375/375 (362 filtered; 9.65s/88.17s), actual ordinary localnet 41/41 (59.92s), feature-union Clippy/workspace format/check green, and final review P0/P1/P2 zero. | Not provider activation or Stage2c acceptance: inactive/green for parent integration, next actual Stage3 provider host/QUIC runtime; private M8 version 2 required, no compatibility promise. Rows 13/15/19/20, ordering and whole-I3-3 gates remain. No I3-4 activation or public/production claim. |
+| Mirrorea I3-3 network failure/retry/order refinement | active ongoing milestone; **not accepted** | Plan 250 / Report 2606; source-real Stage3 provider component | Post-review runtime410, all probe targets (provider20/ordinary41), process64, M10/I2/guards, scoped Clippy and format pass; review has no remaining findings. | Four network faults use child-private assertions/generic completion, not exported fault traces. Lost case is received-frame discard before semantic admission, not wire loss. AdapterUnavailable is LOCAL injected-read/codec evidence. Component Git integration and rows13/15/19/20/order/full-I3-3 acceptance remain; I3-4 is inactive. |
 | I3-3 provider ordinary source | source/check evidence; runtime unsupported | `samples/clean-near-end/mirrorea-i3-provider-effect/main.mir`; `cargo test --locked -p mir-semantics --test i3_provider_effect -- --test-threads=1` | Accepted source/check/static projection and partial inactive effect-authorization behavior in local tests; not an execution workflow. | Actual provider invocation/network/runtime and supervisor availability remain absent; generated communication is the next SYS4/SYS5 consumer. |
 | autonomous execution contract | boundary-fixed, no sample claim | docs validation plus package helpers | `specs/32` / `plan/57` define front-half closeout, implementation half, package cadence, and close protocol; the current chain has passed all-up closeout validation | reopen only when a new package line is promoted |
 | Full System V1 roadmap | workflow-ready bounded release-check lane, audit-closed, not final product | `python3 scripts/full_system_v1_release_check.py --format json check-all --out /tmp/mirrorea-full-v1-release` | `specs/33..38`, `plan/58..63`, `samples/full-system-v1/computational/`, `samples/full-system-v1/world-core/`, `samples/full-system-v1/membership-chat/`, `samples/full-system-v1/sugoroku-world/`, `samples/full-system-v1/portal-worldlink/`, `samples/full-system-v1/two-shard-hard-boundary/`, `samples/full-system-v1/gradient-observation/`, `samples/full-system-v1/avatar-pose/`, `samples/full-system-v1/projection/`, `samples/full-system-v1/server-client/`, `samples/full-system-v1/provider-adapter/`, `scripts/textual_mir_samples.py`, `scripts/full_system_v1_samples.py`, `scripts/posegraph_runtime_samples.py`, `scripts/projection_v1_samples.py`, `scripts/provider_admission_samples.py`, `scripts/renderer_pose_backend_samples.py`, `scripts/full_system_v1_release_check.py`, `crates/mir-ast::textual_alpha`, `crates/mir-semantics::full_system_v1`, `crates/mir-runtime::full_system_v1_session`, `crates/mir-runtime::posegraph_runtime`, `crates/mir-runtime::full_system_v1_projection`, `crates/mir-runtime::full_system_v1_local_split`, `crates/mir-runtime::full_system_v1_provider_admission`, and `crates/mir-runtime::full_system_v1_renderer_pose_backend` now actualize the first source-first parser lane, typed checker lane, bounded effectful runtime lane, bounded six-family operational lane, bounded PoseGraph runtime lane, bounded pose save/devtools lane, bounded projection IR plus boundary-schema lane, bounded local role-split lane, bounded provider-admission lane, bounded renderer-pose lane, bounded release-check/report/viewer bundle lane with repo-relative Full System V1 representative CLI argv, repo-relative nested checker/runtime source argv for repo-owned `.mir` inputs, repo-relative textual parser raw source/diagnostic paths, output-root-relative report / bundle / viewer path display, and the final audit closeout of that bounded chain | later reopen only for broader/public work |
