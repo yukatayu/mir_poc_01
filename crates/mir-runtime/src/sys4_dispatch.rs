@@ -20,10 +20,17 @@ use mir_semantics::surface_v0_pipeline::private_snapshot::SnapshotCheckedProgram
 use mir_semantics::{
     evaluation_materialization::{InputFrontier, ObservationPolicy, PolicyStamp},
     shared_model::{ResultFrontier, ResultVersion, SourceRef},
-    surface_v0_pipeline::{CheckedProgramIdentity, TypedStateRead},
+    surface_v0_classification::OwnerAdmissionBudgetCondition,
+    surface_v0_pipeline::{
+        CheckedProgramIdentity, OWNER_ADMISSION_DEADLINE_EXPIRED_FAILURE, TypedStateRead,
+    },
 };
 
 use crate::{
+    m8_owner_admission_gate::{
+        M8I3DeclaredOwnerDeadlineExpired, M8I3OwnerAdmissionBinding, M8I3OwnerAdmissionGate,
+        M8I3OwnerAdmissionIssuance, M8I3OwnerAdmissionPermit, M8I3VerifiedOwnerAdmissionHandoff,
+    },
     m8_runtime_admission::{
         EvidenceSecurityLabel, M8I3PrivateSnapshot, M8RuntimeInstance, M8SecurityClass,
     },
@@ -36,7 +43,7 @@ use crate::{
         M8LocalRuntime, M8LocalRuntimeSeed, M8LocalTrace, M8LocalTraceKind,
         M8LocalTraceObservation,
     },
-    m8_runtime_owner_queue::{M8EnqueueDiagnosticKind, M8OwnerRequest, M8ServeOutcome, M8StateKey},
+    m8_runtime_owner_queue::{M8OwnerRequest, M8ServeOutcome, M8StateKey},
     m8_runtime_relation_projection::{
         M8BindingInvalidation, M8LeaseRecord, M8ObservedRelationShadow, M8Point,
         M8PresentationContext, M8PresentationFallback, M8PublishedRelationState,
@@ -3999,7 +4006,7 @@ enum MailboxPayload {
         arguments: BTreeMap<String, String>,
     },
     OwnerReply {
-        receipt: Box<FabricReceipt>,
+        outcome: Sys4I3OwnerReplyOutcome,
     },
     DesignatedInputRequest {
         frontier: String,
@@ -4022,6 +4029,169 @@ enum MailboxPayload {
         target_admission: M9RelationPublicationAdmission,
     },
     CacheRetry,
+}
+
+/// The existing generated owner-reply carrier's private typed result sum.
+/// A declared failure is deliberately not a `FabricReceipt` or a transport
+/// diagnostic; both variants still use the same checked reply edge.
+#[derive(Debug, Clone, PartialEq, Eq)]
+enum Sys4I3OwnerReplyOutcome {
+    Success {
+        receipt: Box<FabricReceipt>,
+    },
+    DeclaredDeadlineExpired {
+        failure: Box<Sys4I3DeclaredOwnerDeadlineExpired>,
+    },
+}
+
+/// Gate-sealed facts for the one declared owner-admission failure.  This is
+/// private carrier material, not observer evidence or an authority token.
+#[derive(Debug, Clone, PartialEq, Eq)]
+pub(crate) struct Sys4I3DeclaredOwnerDeadlineExpired {
+    request_id: String,
+    request_carrier_id: String,
+    operation_id: String,
+    request_edge_ref: String,
+    reply_edge_ref: String,
+    requester_locus: String,
+    owner_locus: String,
+    core_ref: String,
+    owner_lineage_ref: String,
+    decision_generation_ref: String,
+    decision_occurrence_ref: String,
+    decision_commitment_ref: String,
+}
+
+/// Pure requester-side classification after exact pending/contract/current
+/// generation validation and before the received reply carrier is admitted.
+#[derive(Debug, Clone, PartialEq, Eq)]
+pub(crate) enum Sys4I3ValidatedOwnerReply {
+    Success,
+    DeclaredDeadlineExpired { decision_commitment_ref: String },
+}
+
+impl Sys4I3DeclaredOwnerDeadlineExpired {
+    fn from_gate_decision(
+        pending: &Sys4I3PendingOwnerRequestBinding,
+        decision: &M8I3DeclaredOwnerDeadlineExpired,
+    ) -> Self {
+        let decision_commitment_ref = decision.decision_commitment_ref().to_string();
+        Self {
+            request_id: pending.request_id.clone(),
+            request_carrier_id: pending.request_carrier_id.clone(),
+            operation_id: pending.operation_id.clone(),
+            request_edge_ref: pending.request_edge_ref.clone(),
+            reply_edge_ref: pending.reply_edge_ref.clone(),
+            requester_locus: pending.requester_locus.clone(),
+            owner_locus: pending.owner_locus.clone(),
+            core_ref: pending.core_ref.clone(),
+            owner_lineage_ref: pending.owner_lineage_ref.clone(),
+            decision_generation_ref: decision.decision_generation_ref().to_string(),
+            decision_occurrence_ref: format!(
+                "sys4-i3-owner-declared-deadline-expired:{}",
+                decision_commitment_ref
+            ),
+            decision_commitment_ref,
+        }
+    }
+
+    fn is_well_formed(&self) -> bool {
+        [
+            &self.request_id,
+            &self.request_carrier_id,
+            &self.operation_id,
+            &self.request_edge_ref,
+            &self.reply_edge_ref,
+            &self.requester_locus,
+            &self.owner_locus,
+            &self.core_ref,
+            &self.owner_lineage_ref,
+            &self.decision_generation_ref,
+            &self.decision_occurrence_ref,
+            &self.decision_commitment_ref,
+        ]
+        .iter()
+        .all(|value| !value.is_empty())
+            && is_canonical_i3_owner_admission_deadline_expiry_commitment(
+                &self.decision_commitment_ref,
+            )
+            && self.decision_occurrence_ref
+                == format!(
+                    "sys4-i3-owner-declared-deadline-expired:{}",
+                    self.decision_commitment_ref
+                )
+    }
+
+    pub(crate) fn decision_commitment_ref(&self) -> &str {
+        &self.decision_commitment_ref
+    }
+
+    pub(crate) fn decision_occurrence_ref(&self) -> &str {
+        &self.decision_occurrence_ref
+    }
+}
+
+/// The exact private carrier and decision references produced by one
+/// successful gate-declared expiry reply.  This is not an authority token,
+/// carrier decoder, or transport delivery record.  It exists only to carry
+/// producer-derived observer-safe references across the SYS-4/SYS-5 boundary
+/// after the existing carrier has actually been constructed.
+pub(crate) struct Sys4I3ProducedOwnerAdmissionDeadlineExpired {
+    reply: Sys4ProcessCarrier,
+    decision_commitment_ref: String,
+    decision_occurrence_ref: String,
+}
+
+impl Sys4I3ProducedOwnerAdmissionDeadlineExpired {
+    /// Consume the private production result exactly once.  No caller can
+    /// construct this production wrapper from a raw carrier or expected decision.
+    pub(crate) fn into_parts(self) -> (Sys4ProcessCarrier, String, String) {
+        (
+            self.reply,
+            self.decision_commitment_ref,
+            self.decision_occurrence_ref,
+        )
+    }
+}
+
+/// A declared expiry carries the opaque gate-produced SHA-256 reference, not
+/// a caller-selected nonempty string.  This is a private codec shape check;
+/// it does not add an authenticity or Byzantine-signature claim.
+fn is_canonical_i3_owner_admission_deadline_expiry_commitment(value: &str) -> bool {
+    let Some(digest) = value.strip_prefix("sys5-i3-owner-admission-deadline-expired-sha256-v1:")
+    else {
+        return false;
+    };
+    digest.len() == 64
+        && digest
+            .bytes()
+            .all(|byte| byte.is_ascii_digit() || matches!(byte, b'a'..=b'f'))
+}
+
+/// The typed expiry branch is available only when both source-derived owner
+/// carrier contracts preserve the same checked budget and declared failure.
+/// `None` remains the legacy-success-only path, even when a source happens
+/// to declare a same-named ordinary failure.
+fn has_exact_i3_declared_deadline_expiry_contract(
+    request_contract: &CarrierContract,
+    reply_contract: &CarrierContract,
+    pending_budget: Option<&OwnerAdmissionBudgetCondition>,
+) -> bool {
+    let Some(pending_budget) = pending_budget else {
+        return false;
+    };
+    request_contract.owner_admission_budget() == Some(pending_budget)
+        && reply_contract.owner_admission_budget() == Some(pending_budget)
+        && request_contract
+            .declared_failure_row()
+            .names()
+            .iter()
+            .any(|failure| failure == OWNER_ADMISSION_DEADLINE_EXPIRED_FAILURE)
+        && reply_contract
+            .declared_failure_row()
+            .names()
+            .iter()
+            .any(|failure| failure == OWNER_ADMISSION_DEADLINE_EXPIRED_FAILURE)
 }
 
 #[derive(Debug, Clone, PartialEq, Eq)]
@@ -4251,6 +4421,10 @@ pub(crate) struct Sys4ProcessCarrier {
 }
 
 impl Sys4ProcessCarrier {
+    pub(crate) fn envelope_id(&self) -> &str {
+        &self.envelope.envelope_id
+    }
+
     pub(crate) fn target_locus(&self) -> &str {
         &self.envelope.target_locus
     }
@@ -4285,6 +4459,7 @@ pub(crate) struct Sys4I3PendingOwnerRequestBinding {
     owner_locus: String,
     core_ref: String,
     owner_lineage_ref: String,
+    owner_admission_budget: Option<OwnerAdmissionBudgetCondition>,
 }
 
 /// Result of a pure, post-binding current-authority check for one incoming
@@ -4306,6 +4481,18 @@ impl Sys4I3PendingOwnerRequestBinding {
     /// retry initiator.
     pub(crate) fn requester_locus(&self) -> &str {
         &self.requester_locus
+    }
+
+    pub(crate) fn operation_id(&self) -> &str {
+        &self.operation_id
+    }
+
+    pub(crate) fn owner_locus(&self) -> &str {
+        &self.owner_locus
+    }
+
+    pub(crate) fn owner_admission_budget(&self) -> Option<&OwnerAdmissionBudgetCondition> {
+        self.owner_admission_budget.as_ref()
     }
 
     /// Bind one SYS-5 observer request identity to the exact source-derived
@@ -4375,8 +4562,36 @@ enum Sys4I3PrivateProcessCarrierPayloadSnapshot {
         arguments: BTreeMap<String, String>,
     },
     OwnerReply {
+        outcome: Sys4I3PrivateOwnerReplyOutcomeSnapshot,
+    },
+}
+
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[serde(tag = "kind", content = "fields", deny_unknown_fields)]
+enum Sys4I3PrivateOwnerReplyOutcomeSnapshot {
+    Success {
         receipt: Box<Sys4I3PrivateFabricReceiptSnapshot>,
     },
+    DeclaredDeadlineExpired {
+        failure: Box<Sys4I3PrivateDeclaredOwnerDeadlineExpiredSnapshot>,
+    },
+}
+
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[serde(deny_unknown_fields)]
+struct Sys4I3PrivateDeclaredOwnerDeadlineExpiredSnapshot {
+    request_id: String,
+    request_carrier_id: String,
+    operation_id: String,
+    request_edge_ref: String,
+    reply_edge_ref: String,
+    requester_locus: String,
+    owner_locus: String,
+    core_ref: String,
+    owner_lineage_ref: String,
+    decision_generation_ref: String,
+    decision_occurrence_ref: String,
+    decision_commitment_ref: String,
 }
 
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
@@ -4434,9 +4649,9 @@ impl Sys4I3PrivateProcessCarrierSnapshot {
                     arguments: arguments.clone(),
                 }
             }
-            MailboxPayload::OwnerReply { receipt } => {
+            MailboxPayload::OwnerReply { outcome } => {
                 Sys4I3PrivateProcessCarrierPayloadSnapshot::OwnerReply {
-                    receipt: Box::new(Sys4I3PrivateFabricReceiptSnapshot::from_receipt(receipt)?),
+                    outcome: Sys4I3PrivateOwnerReplyOutcomeSnapshot::from_outcome(outcome)?,
                 }
             }
             _ => {
@@ -4516,6 +4731,79 @@ impl Sys4I3PrivateProcessCarrierSnapshot {
             ));
         }
         Ok(())
+    }
+}
+
+impl Sys4I3PrivateOwnerReplyOutcomeSnapshot {
+    fn from_outcome(outcome: &Sys4I3OwnerReplyOutcome) -> Sys4Result<Self> {
+        match outcome {
+            Sys4I3OwnerReplyOutcome::Success { receipt } => Ok(Self::Success {
+                receipt: Box::new(Sys4I3PrivateFabricReceiptSnapshot::from_receipt(receipt)?),
+            }),
+            Sys4I3OwnerReplyOutcome::DeclaredDeadlineExpired { failure } => {
+                if !failure.is_well_formed() {
+                    return Err(Sys4DispatchDiagnostics::one(
+                        Sys4DiagnosticKind::CarrierProvenanceMismatch,
+                    ));
+                }
+                Ok(Self::DeclaredDeadlineExpired {
+                    failure: Box::new(
+                        Sys4I3PrivateDeclaredOwnerDeadlineExpiredSnapshot::from_failure(failure),
+                    ),
+                })
+            }
+        }
+    }
+
+    fn into_outcome(self) -> Result<Sys4I3OwnerReplyOutcome, ()> {
+        match self {
+            Self::Success { receipt } => Ok(Sys4I3OwnerReplyOutcome::Success {
+                receipt: Box::new(receipt.into_receipt()),
+            }),
+            Self::DeclaredDeadlineExpired { failure } => {
+                let failure = failure.into_failure()?;
+                Ok(Sys4I3OwnerReplyOutcome::DeclaredDeadlineExpired {
+                    failure: Box::new(failure),
+                })
+            }
+        }
+    }
+}
+
+impl Sys4I3PrivateDeclaredOwnerDeadlineExpiredSnapshot {
+    fn from_failure(failure: &Sys4I3DeclaredOwnerDeadlineExpired) -> Self {
+        Self {
+            request_id: failure.request_id.clone(),
+            request_carrier_id: failure.request_carrier_id.clone(),
+            operation_id: failure.operation_id.clone(),
+            request_edge_ref: failure.request_edge_ref.clone(),
+            reply_edge_ref: failure.reply_edge_ref.clone(),
+            requester_locus: failure.requester_locus.clone(),
+            owner_locus: failure.owner_locus.clone(),
+            core_ref: failure.core_ref.clone(),
+            owner_lineage_ref: failure.owner_lineage_ref.clone(),
+            decision_generation_ref: failure.decision_generation_ref.clone(),
+            decision_occurrence_ref: failure.decision_occurrence_ref.clone(),
+            decision_commitment_ref: failure.decision_commitment_ref.clone(),
+        }
+    }
+
+    fn into_failure(self) -> Result<Sys4I3DeclaredOwnerDeadlineExpired, ()> {
+        let failure = Sys4I3DeclaredOwnerDeadlineExpired {
+            request_id: self.request_id,
+            request_carrier_id: self.request_carrier_id,
+            operation_id: self.operation_id,
+            request_edge_ref: self.request_edge_ref,
+            reply_edge_ref: self.reply_edge_ref,
+            requester_locus: self.requester_locus,
+            owner_locus: self.owner_locus,
+            core_ref: self.core_ref,
+            owner_lineage_ref: self.owner_lineage_ref,
+            decision_generation_ref: self.decision_generation_ref,
+            decision_occurrence_ref: self.decision_occurrence_ref,
+            decision_commitment_ref: self.decision_commitment_ref,
+        };
+        failure.is_well_formed().then_some(failure).ok_or(())
     }
 }
 
@@ -5364,6 +5652,7 @@ pub(crate) struct LocusStep {
     local_store_read_audit: Option<LocalStoreReadAudit>,
     local_store_reads: Vec<RuntimeStoreRead>,
     receipt: Option<FabricReceipt>,
+    declared_owner_deadline_expired: Option<Sys4I3DeclaredOwnerDeadlineExpired>,
     request_id: String,
     semantic_identity: Option<String>,
     m9_cache_validation: Option<M9CacheValidationInspection>,
@@ -5413,6 +5702,11 @@ impl LocusStep {
     }
     pub(crate) fn receipt(&self) -> Option<&FabricReceipt> {
         self.receipt.as_ref()
+    }
+    pub(crate) fn declared_owner_deadline_expired(
+        &self,
+    ) -> Option<&Sys4I3DeclaredOwnerDeadlineExpired> {
+        self.declared_owner_deadline_expired.as_ref()
     }
     pub(crate) fn request_id(&self) -> &str {
         &self.request_id
@@ -7457,11 +7751,7 @@ impl M8ExecutionBackend {
                     },
                 )
                 .map_err(|failure| match failure {
-                    M8LocalOwnerExecutionFailure::AdmissionRejected(diagnostics) => {
-                        debug_assert_eq!(
-                            diagnostics.primary().kind(),
-                            M8EnqueueDiagnosticKind::OwnerAdmissionAuthorizationRequired
-                        );
+                    M8LocalOwnerExecutionFailure::AdmissionRejected(_) => {
                         M8BackendFailure::unobserved(Sys4DiagnosticKind::M8ExecutionRejected)
                     }
                     M8LocalOwnerExecutionFailure::Observed(observation) => {
@@ -7481,17 +7771,48 @@ impl M8ExecutionBackend {
                     Ow1ContextualM8Execution::Rejected { observation } => {
                         Err(M8BackendFailure::observed(observation))
                     }
-                    Ow1ContextualM8Execution::AdmissionRejected { diagnostics } => {
-                        debug_assert_eq!(
-                            diagnostics.primary().kind(),
-                            M8EnqueueDiagnosticKind::OwnerAdmissionAuthorizationRequired
-                        );
-                        Err(M8BackendFailure::unobserved(
-                            Sys4DiagnosticKind::M8ExecutionRejected,
-                        ))
-                    }
+                    Ow1ContextualM8Execution::AdmissionRejected { .. } => Err(
+                        M8BackendFailure::unobserved(Sys4DiagnosticKind::M8ExecutionRejected),
+                    ),
                 }
             }
+        }
+    }
+
+    /// Consume the live-fabric-verified I3 admission handoff at the selected
+    /// ST owner session.  OW1 remains fail-closed in C1/C2: its normal entry
+    /// still rejects annotated plans and this narrow permit path does not
+    /// synthesize a worker protocol.
+    fn enqueue_and_serve_i3_owner_admission(
+        &mut self,
+        owner_locus: &str,
+        request: M8OwnerRequest,
+        context: M8LocalDesignatedTraceContext,
+        handoff: M8I3VerifiedOwnerAdmissionHandoff,
+    ) -> Result<M8OwnerExecution, M8BackendFailure> {
+        match self {
+            Self::St(sessions) => sessions
+                .get_mut(owner_locus)
+                .ok_or_else(|| M8BackendFailure::unobserved(Sys4DiagnosticKind::BackendIneligible))?
+                .execute_owner_with_i3_admission_handoff(owner_locus, request, context, handoff)
+                .map(
+                    |(outcome, request_observation, serve_observation)| M8OwnerExecution {
+                        outcome,
+                        request_observation,
+                        serve_observation,
+                    },
+                )
+                .map_err(|failure| match failure {
+                    M8LocalOwnerExecutionFailure::AdmissionRejected(_) => {
+                        M8BackendFailure::unobserved(Sys4DiagnosticKind::M8ExecutionRejected)
+                    }
+                    M8LocalOwnerExecutionFailure::Observed(observation) => {
+                        M8BackendFailure::observed(observation)
+                    }
+                }),
+            Self::Ow1(_) => Err(M8BackendFailure::unobserved(
+                Sys4DiagnosticKind::BackendIneligible,
+            )),
         }
     }
 
@@ -9158,6 +9479,10 @@ pub(crate) struct LocalFabric {
     program: FabricProgram,
     loci: BTreeMap<String, LocusRuntime>,
     backend: M8ExecutionBackend,
+    // This verifier is live SYS-4 state, deliberately outside cloneable M8
+    // runtimes and checked-patch candidates.  A candidate never inherits a
+    // usable owner-admission handoff path.
+    owner_admission_gate: Option<M8I3OwnerAdmissionGate>,
     authority_generation: M9AuthorityGeneration,
     authority_lifecycle: M9AuthorityLifecycle,
     authority_live_floor: M9AuthorityLiveFloor,
@@ -10515,6 +10840,7 @@ impl LocalFabric {
             program,
             loci,
             backend,
+            owner_admission_gate: None,
             authority_generation: admission.authority_generation,
             authority_lifecycle: M9AuthorityLifecycle {
                 publisher: admission.authority_successor,
@@ -10678,6 +11004,19 @@ impl LocalFabric {
                 Sys4DiagnosticKind::CarrierProvenanceMismatch,
             ));
         }
+        let request_edge = self.edge_for(
+            &envelope.operation_id,
+            CommunicationEdgeKind::OwnerRequest,
+            &envelope.source_locus,
+            &envelope.target_locus,
+        )?;
+        if request_edge.edge_ref() != envelope.edge_ref
+            || request_edge.core_ref() != Some(core_ref.as_str())
+        {
+            return Err(Sys4DispatchDiagnostics::one(
+                Sys4DiagnosticKind::CarrierProvenanceMismatch,
+            ));
+        }
         let reply_edge = self.edge_for(
             &envelope.operation_id,
             CommunicationEdgeKind::OwnerReplyReceipt,
@@ -10689,6 +11028,26 @@ impl LocalFabric {
                 Sys4DiagnosticKind::CarrierProvenanceMismatch,
             ));
         }
+        let owner_admission_budget = match (
+            request_edge.carrier_contract().owner_admission_budget(),
+            reply_edge.carrier_contract().owner_admission_budget(),
+        ) {
+            (None, None) => None,
+            (Some(condition), Some(_))
+                if has_exact_i3_declared_deadline_expiry_contract(
+                    request_edge.carrier_contract(),
+                    reply_edge.carrier_contract(),
+                    Some(condition),
+                ) =>
+            {
+                Some(condition.clone())
+            }
+            _ => {
+                return Err(Sys4DispatchDiagnostics::one(
+                    Sys4DiagnosticKind::CarrierProvenanceMismatch,
+                ));
+            }
+        };
         Ok(Sys4I3PendingOwnerRequestBinding {
             request_id: envelope.request_id.clone(),
             request_carrier_id: envelope.carrier_id.clone(),
@@ -10699,6 +11058,7 @@ impl LocalFabric {
             owner_locus: envelope.target_locus.clone(),
             core_ref,
             owner_lineage_ref,
+            owner_admission_budget,
         })
     }
 
@@ -10725,6 +11085,21 @@ impl LocalFabric {
         {
             return Err(Sys4I3OwnerRequestRevalidationFailure::CarrierBindingMismatch);
         }
+        let request_edge = self
+            .edge_for(
+                &pending.operation_id,
+                CommunicationEdgeKind::OwnerRequest,
+                &pending.requester_locus,
+                &pending.owner_locus,
+            )
+            .map_err(|_| Sys4I3OwnerRequestRevalidationFailure::CarrierBindingMismatch)?;
+        if request_edge.edge_ref() != pending.request_edge_ref
+            || request_edge.core_ref() != Some(pending.core_ref.as_str())
+            || request_edge.carrier_contract().owner_admission_budget()
+                != pending.owner_admission_budget.as_ref()
+        {
+            return Err(Sys4I3OwnerRequestRevalidationFailure::CarrierBindingMismatch);
+        }
         self.authority_generation
             .revalidate_owner_operation_without_observation(
                 &pending.operation_id,
@@ -10744,6 +11119,346 @@ impl LocalFabric {
                     Sys4I3OwnerRequestRevalidationFailure::MissingWitness
                 }
             })
+    }
+
+    /// Install the non-Clone verifier only into a started SYS-5 runtime's
+    /// live fabric.  Checked-patch candidates deliberately leave this absent.
+    pub(crate) fn install_i3_owner_admission_gate(
+        &mut self,
+        runtime_binding_ref: &str,
+    ) -> Sys4Result<u64> {
+        if self.owner_admission_gate.is_some() {
+            return Err(Sys4DispatchDiagnostics::one(
+                Sys4DiagnosticKind::M8ExecutionRejected,
+            ));
+        }
+        self.owner_admission_gate =
+            M8I3OwnerAdmissionGate::install_for_runtime(runtime_binding_ref);
+        self.owner_admission_gate
+            .as_ref()
+            .map(M8I3OwnerAdmissionGate::live_instance)
+            .ok_or_else(|| Sys4DispatchDiagnostics::one(Sys4DiagnosticKind::M8ExecutionRejected))
+    }
+
+    /// Exact checked owner/domain conditions retained by this restricted
+    /// local projection.  SYS-5 derives its trusted clocks at start from
+    /// these rows; a later request cannot create a new clock domain.
+    pub(crate) fn i3_checked_owner_admission_conditions(
+        &self,
+    ) -> Vec<OwnerAdmissionBudgetCondition> {
+        let mut conditions = Vec::new();
+        for edge in self
+            .program
+            .projection
+            .communication_plan()
+            .edges()
+            .iter()
+            .filter(|edge| edge.kind() == CommunicationEdgeKind::OwnerRequest)
+        {
+            let Some(condition) = edge.carrier_contract().owner_admission_budget() else {
+                continue;
+            };
+            if !conditions.contains(condition) {
+                conditions.push(condition.clone());
+            }
+        }
+        conditions
+    }
+
+    /// Current M9 generation retained by this live local fabric.  This is a
+    /// private terminal-decision provenance field, not a caller authority.
+    pub(crate) fn i3_owner_admission_generation_ref(&self) -> &str {
+        self.authority_generation.generation_ref()
+    }
+
+    /// Stage one exact linear issuance token into SYS-5's existing inbound
+    /// ledger.  This neither queues nor serves the carrier.
+    pub(crate) fn stage_i3_owner_admission_issuance(
+        &self,
+        pending: &Sys4I3PendingOwnerRequestBinding,
+        carrier: &Sys4ProcessCarrier,
+        semantic_request_identity_ref: &str,
+        runtime_binding_ref: &str,
+        carrier_snapshot_binding_bytes: Vec<u8>,
+    ) -> Sys4Result<M8I3OwnerAdmissionIssuance> {
+        let binding = self.i3_owner_admission_binding(
+            pending,
+            carrier,
+            semantic_request_identity_ref,
+            runtime_binding_ref,
+            carrier_snapshot_binding_bytes,
+        )?;
+        self.owner_admission_gate
+            .as_ref()
+            .and_then(|gate| gate.stage_issuance(binding))
+            .ok_or_else(|| Sys4DispatchDiagnostics::one(Sys4DiagnosticKind::M8ExecutionRejected))
+    }
+
+    /// Consume a staged issuance token only at the Awaiting -> ServeReserved
+    /// transition.  The returned permit is still unverified for lower M8 and
+    /// must immediately travel through `accept_i3_owner_request_with_permit`.
+    pub(crate) fn issue_i3_owner_admission_permit(
+        &self,
+        issuance: M8I3OwnerAdmissionIssuance,
+        pending: &Sys4I3PendingOwnerRequestBinding,
+        carrier: &Sys4ProcessCarrier,
+        semantic_request_identity_ref: &str,
+        runtime_binding_ref: &str,
+        carrier_snapshot_binding_bytes: Vec<u8>,
+    ) -> Sys4Result<M8I3OwnerAdmissionPermit> {
+        let binding = self.i3_owner_admission_binding(
+            pending,
+            carrier,
+            semantic_request_identity_ref,
+            runtime_binding_ref,
+            carrier_snapshot_binding_bytes,
+        )?;
+        self.owner_admission_gate
+            .as_ref()
+            .and_then(|gate| issuance.issue_after_current_revalidation(gate, binding))
+            .ok_or_else(|| Sys4DispatchDiagnostics::one(Sys4DiagnosticKind::M8ExecutionRejected))
+    }
+
+    /// Check the exact staged token against the freshly revalidated live
+    /// binding without consuming it.  SYS-5 uses this before committing its
+    /// Awaiting -> ServeReserved transition so a known G1/G2 mismatch leaves
+    /// the original Awaiting record available for its typed disposition.
+    pub(crate) fn can_issue_i3_owner_admission_permit(
+        &self,
+        issuance: &M8I3OwnerAdmissionIssuance,
+        pending: &Sys4I3PendingOwnerRequestBinding,
+        carrier: &Sys4ProcessCarrier,
+        semantic_request_identity_ref: &str,
+        runtime_binding_ref: &str,
+        carrier_snapshot_binding_bytes: Vec<u8>,
+    ) -> Sys4Result<()> {
+        let binding = self.i3_owner_admission_binding(
+            pending,
+            carrier,
+            semantic_request_identity_ref,
+            runtime_binding_ref,
+            carrier_snapshot_binding_bytes,
+        )?;
+        self.owner_admission_gate
+            .as_ref()
+            .is_some_and(|gate| issuance.is_issuable_after_current_revalidation(gate, &binding))
+            .then_some(())
+            .ok_or_else(|| Sys4DispatchDiagnostics::one(Sys4DiagnosticKind::M8ExecutionRejected))
+    }
+
+    /// Pure feasibility check for the one gate-produced expiry declaration.
+    /// This neither consumes the linear issuance nor constructs a reply from
+    /// caller fields; SYS-5 uses it before retaining `Expired`.
+    #[allow(clippy::too_many_arguments)]
+    pub(crate) fn can_declare_i3_owner_admission_deadline_expired(
+        &self,
+        issuance: &M8I3OwnerAdmissionIssuance,
+        pending: &Sys4I3PendingOwnerRequestBinding,
+        carrier: &Sys4ProcessCarrier,
+        semantic_request_identity_ref: &str,
+        runtime_binding_ref: &str,
+        carrier_snapshot_binding_bytes: Vec<u8>,
+        start_tick: u64,
+        resolution_tick: u64,
+    ) -> Sys4Result<()> {
+        let binding = self.i3_owner_admission_binding(
+            pending,
+            carrier,
+            semantic_request_identity_ref,
+            runtime_binding_ref,
+            carrier_snapshot_binding_bytes,
+        )?;
+        self.owner_admission_gate
+            .as_ref()
+            .is_some_and(|gate| {
+                issuance.can_declare_deadline_expired(gate, &binding, start_tick, resolution_tick)
+            })
+            .then_some(())
+            .ok_or_else(|| Sys4DispatchDiagnostics::one(Sys4DiagnosticKind::M8ExecutionRejected))
+    }
+
+    /// Consume an already retained expiry decision into the ordinary generated
+    /// owner-reply carrier.  No raw expiry facts are accepted here: the only
+    /// producer input is the linear gate issuance plus the exact retained
+    /// request binding.
+    #[allow(clippy::too_many_arguments)]
+    pub(crate) fn declare_i3_owner_admission_deadline_expired(
+        &mut self,
+        issuance: M8I3OwnerAdmissionIssuance,
+        pending: &Sys4I3PendingOwnerRequestBinding,
+        carrier: &Sys4ProcessCarrier,
+        semantic_request_identity_ref: &str,
+        runtime_binding_ref: &str,
+        carrier_snapshot_binding_bytes: Vec<u8>,
+        start_tick: u64,
+        resolution_tick: u64,
+    ) -> Sys4Result<Sys4I3ProducedOwnerAdmissionDeadlineExpired> {
+        let binding = self.i3_owner_admission_binding(
+            pending,
+            carrier,
+            semantic_request_identity_ref,
+            runtime_binding_ref,
+            carrier_snapshot_binding_bytes,
+        )?;
+        let current_binding = binding.clone();
+        let decision = self
+            .owner_admission_gate
+            .as_ref()
+            .and_then(|gate| {
+                issuance.declare_deadline_expired(gate, binding, start_tick, resolution_tick)
+            })
+            .ok_or_else(|| Sys4DispatchDiagnostics::one(Sys4DiagnosticKind::M8ExecutionRejected))?;
+        if !decision.certifies_exact_current_binding(&current_binding) {
+            return Err(Sys4DispatchDiagnostics::one(
+                Sys4DiagnosticKind::M8ExecutionRejected,
+            ));
+        }
+        let reply_edge = self
+            .edge_for(
+                &pending.operation_id,
+                CommunicationEdgeKind::OwnerReplyReceipt,
+                &pending.owner_locus,
+                &pending.requester_locus,
+            )?
+            .clone();
+        if reply_edge.edge_ref() != pending.reply_edge_ref
+            || reply_edge.core_ref() != Some(pending.core_ref.as_str())
+        {
+            return Err(Sys4DispatchDiagnostics::one(
+                Sys4DiagnosticKind::CarrierProvenanceMismatch,
+            ));
+        }
+        let current_lineage = self
+            .authority_generation
+            .owner_lineage_ref(&pending.operation_id, &pending.owner_locus)
+            .ok_or_else(|| Sys4DispatchDiagnostics::one(Sys4DiagnosticKind::M8ExecutionRejected))?;
+        let failure = Sys4I3DeclaredOwnerDeadlineExpired::from_gate_decision(pending, &decision);
+        let decision_commitment_ref = failure.decision_commitment_ref().to_string();
+        let decision_occurrence_ref = failure.decision_occurrence_ref().to_string();
+        let reply = self.enqueue_outbox(
+            &reply_edge,
+            &pending.request_id,
+            MailboxPayload::OwnerReply {
+                outcome: Sys4I3OwnerReplyOutcome::DeclaredDeadlineExpired {
+                    failure: Box::new(failure),
+                },
+            },
+            Some(pending.request_carrier_id.clone()),
+            None,
+            Some(current_lineage),
+            None,
+            None,
+            None,
+            None,
+            Vec::new(),
+        )?;
+        let reply =
+            self.take_outbound_process_carrier(reply_edge.source_locus(), &reply.envelope_id)?;
+        Ok(Sys4I3ProducedOwnerAdmissionDeadlineExpired {
+            reply,
+            decision_commitment_ref,
+            decision_occurrence_ref,
+        })
+    }
+
+    /// Admit an already reserved I3 owner request through the only live gate
+    /// path.  The raw permit is verified against this fabric before it can
+    /// become the sealed lower-M8 handoff.
+    pub(crate) fn accept_i3_owner_request_with_permit(
+        &mut self,
+        carrier: Sys4ProcessCarrier,
+        pending: &Sys4I3PendingOwnerRequestBinding,
+        semantic_request_identity_ref: &str,
+        runtime_binding_ref: &str,
+        carrier_snapshot_binding_bytes: Vec<u8>,
+        permit: M8I3OwnerAdmissionPermit,
+    ) -> Sys4Result<LocusStep> {
+        let target_locus = carrier.envelope.target_locus.clone();
+        if !self.loci.contains_key(&target_locus)
+            || !envelope_matches_projected_edge(&self.program, &carrier.envelope)
+        {
+            return Err(Sys4DispatchDiagnostics::one(
+                Sys4DiagnosticKind::CarrierProvenanceMismatch,
+            ));
+        }
+        // C1/C2 has no permit-aware queue record.  Refuse before insertion if
+        // another envelope could become the next dequeue: otherwise a valid
+        // handoff for this carrier could be consumed by an older equal-plan
+        // request.  The caller's Reserved tombstone remains terminal and the
+        // pre-existing mailbox entry is untouched.
+        if self
+            .loci
+            .get(&target_locus)
+            .is_none_or(|runtime| !runtime.incoming_mailbox.pending.is_empty())
+        {
+            return Err(Sys4DispatchDiagnostics::one(
+                Sys4DiagnosticKind::M8ExecutionRejected,
+            ));
+        }
+        let binding = self.i3_owner_admission_binding(
+            pending,
+            &carrier,
+            semantic_request_identity_ref,
+            runtime_binding_ref,
+            carrier_snapshot_binding_bytes,
+        )?;
+        let handoff = self
+            .owner_admission_gate
+            .as_ref()
+            .and_then(|gate| permit.verify_for_live_fabric(gate, binding))
+            .ok_or_else(|| Sys4DispatchDiagnostics::one(Sys4DiagnosticKind::M8ExecutionRejected))?;
+        self.loci
+            .get_mut(&target_locus)
+            .expect("checked local target exists")
+            .incoming_mailbox
+            .pending
+            .push_back(carrier.envelope);
+        self.step_locus_with_i3_owner_admission_handoff(&target_locus, handoff)
+    }
+
+    fn i3_owner_admission_binding(
+        &self,
+        pending: &Sys4I3PendingOwnerRequestBinding,
+        carrier: &Sys4ProcessCarrier,
+        semantic_request_identity_ref: &str,
+        runtime_binding_ref: &str,
+        carrier_snapshot_binding_bytes: Vec<u8>,
+    ) -> Sys4Result<M8I3OwnerAdmissionBinding> {
+        self.revalidate_i3_bound_owner_request_authority(pending, carrier)
+            .map_err(|_| Sys4DispatchDiagnostics::one(Sys4DiagnosticKind::M8ExecutionRejected))?;
+        let actual_snapshot =
+            serde_json::to_vec(&carrier.i3_private_process_snapshot().map_err(|_| {
+                Sys4DispatchDiagnostics::one(Sys4DiagnosticKind::CarrierProvenanceMismatch)
+            })?)
+            .map_err(|_| {
+                Sys4DispatchDiagnostics::one(Sys4DiagnosticKind::CarrierProvenanceMismatch)
+            })?;
+        if actual_snapshot != carrier_snapshot_binding_bytes {
+            return Err(Sys4DispatchDiagnostics::one(
+                Sys4DiagnosticKind::CarrierProvenanceMismatch,
+            ));
+        }
+        let condition = pending
+            .owner_admission_budget()
+            .cloned()
+            .ok_or_else(|| Sys4DispatchDiagnostics::one(Sys4DiagnosticKind::M8ExecutionRejected))?;
+        Ok(M8I3OwnerAdmissionBinding::new(
+            runtime_binding_ref.to_string(),
+            semantic_request_identity_ref.to_string(),
+            carrier.envelope.envelope_id.clone(),
+            pending.request_id.clone(),
+            pending.request_carrier_id.clone(),
+            pending.operation_id.clone(),
+            pending.request_edge_ref.clone(),
+            pending.reply_edge_ref.clone(),
+            pending.requester_locus.clone(),
+            pending.owner_locus.clone(),
+            pending.core_ref.clone(),
+            pending.owner_lineage_ref.clone(),
+            carrier_snapshot_binding_bytes,
+            condition,
+            self.authority_generation.generation_ref().to_string(),
+        ))
     }
 
     /// Test-only administrative withdrawal from a retained-publisher local
@@ -10776,7 +11491,7 @@ impl LocalFabric {
         &self,
         pending: &Sys4I3PendingOwnerRequestBinding,
         carrier: &Sys4ProcessCarrier,
-    ) -> Sys4Result<()> {
+    ) -> Sys4Result<Sys4I3ValidatedOwnerReply> {
         let envelope = &carrier.envelope;
         let current_lineage = self
             .authority_generation
@@ -10784,8 +11499,7 @@ impl LocalFabric {
             .ok_or_else(|| {
                 Sys4DispatchDiagnostics::one(Sys4DiagnosticKind::CarrierProvenanceMismatch)
             })?;
-        if current_lineage != pending.owner_lineage_ref
-            || envelope.edge_kind != CommunicationEdgeKind::OwnerReplyReceipt
+        if envelope.edge_kind != CommunicationEdgeKind::OwnerReplyReceipt
             || envelope.request_id != pending.request_id
             || envelope.operation_id != pending.operation_id
             || envelope.edge_ref != pending.reply_edge_ref
@@ -10793,7 +11507,6 @@ impl LocalFabric {
             || envelope.target_locus != pending.requester_locus
             || envelope.core_ref.as_deref() != Some(pending.core_ref.as_str())
             || envelope.request_carrier_id.as_deref() != Some(pending.request_carrier_id.as_str())
-            || envelope.m9_owner_lineage_ref.as_deref() != Some(pending.owner_lineage_ref.as_str())
         {
             return Err(Sys4DispatchDiagnostics::one(
                 Sys4DiagnosticKind::CarrierProvenanceMismatch,
@@ -10821,19 +11534,53 @@ impl LocalFabric {
                 Sys4DiagnosticKind::CarrierProvenanceMismatch,
             ));
         }
+        if current_lineage != pending.owner_lineage_ref {
+            return Err(Sys4DispatchDiagnostics::one(
+                Sys4DiagnosticKind::CarrierProvenanceMismatch,
+            ));
+        }
+        let declared_deadline_expiry_contract = has_exact_i3_declared_deadline_expiry_contract(
+            request_edge.carrier_contract(),
+            reply_edge.carrier_contract(),
+            pending.owner_admission_budget.as_ref(),
+        );
         match &envelope.payload {
-            MailboxPayload::OwnerReply { receipt }
-                if receipt.request_id == pending.request_id
-                    && receipt.delivery_id == pending.request_carrier_id
-                    && receipt.operation_id == pending.operation_id
-                    && receipt.origin_locus == pending.requester_locus
-                    && receipt.target_locus == pending.owner_locus
-                    && receipt
-                        .owner_rmw
-                        .as_ref()
-                        .is_some_and(|report| report.core_ref == pending.core_ref) =>
+            MailboxPayload::OwnerReply {
+                outcome: Sys4I3OwnerReplyOutcome::Success { receipt },
+            } if envelope.m9_owner_lineage_ref.as_deref()
+                == Some(pending.owner_lineage_ref.as_str())
+                && receipt.request_id == pending.request_id
+                && receipt.delivery_id == pending.request_carrier_id
+                && receipt.operation_id == pending.operation_id
+                && receipt.origin_locus == pending.requester_locus
+                && receipt.target_locus == pending.owner_locus
+                && receipt
+                    .owner_rmw
+                    .as_ref()
+                    .is_some_and(|report| report.core_ref == pending.core_ref) =>
             {
-                Ok(())
+                Ok(Sys4I3ValidatedOwnerReply::Success)
+            }
+            MailboxPayload::OwnerReply {
+                outcome: Sys4I3OwnerReplyOutcome::DeclaredDeadlineExpired { failure },
+            } if declared_deadline_expiry_contract
+                && envelope.m9_owner_lineage_ref.as_deref() == Some(current_lineage.as_str())
+                && failure.is_well_formed()
+                && failure.request_id == pending.request_id
+                && failure.request_carrier_id == pending.request_carrier_id
+                && failure.operation_id == pending.operation_id
+                && failure.request_edge_ref == pending.request_edge_ref
+                && failure.reply_edge_ref == pending.reply_edge_ref
+                && failure.requester_locus == pending.requester_locus
+                && failure.owner_locus == pending.owner_locus
+                && failure.core_ref == pending.core_ref
+                && failure.owner_lineage_ref == pending.owner_lineage_ref
+                && failure.decision_generation_ref
+                    == self.authority_generation.generation_ref() =>
+            {
+                Ok(Sys4I3ValidatedOwnerReply::DeclaredDeadlineExpired {
+                    decision_commitment_ref: failure.decision_commitment_ref.clone(),
+                })
             }
             _ => Err(Sys4DispatchDiagnostics::one(
                 Sys4DiagnosticKind::CarrierProvenanceMismatch,
@@ -10913,7 +11660,7 @@ impl LocalFabric {
             }
             (
                 CommunicationEdgeKind::OwnerReplyReceipt,
-                Sys4I3PrivateProcessCarrierPayloadSnapshot::OwnerReply { receipt },
+                Sys4I3PrivateProcessCarrierPayloadSnapshot::OwnerReply { outcome },
             ) => {
                 if candidate.input_receipt_carrier_id.is_some()
                     || candidate
@@ -10936,22 +11683,50 @@ impl LocalFabric {
                         Sys4DiagnosticKind::CarrierProvenanceMismatch,
                     ));
                 }
-                if receipt.request_id != candidate.request_id
-                    || receipt.operation_id != candidate.operation_id
-                    || receipt.origin_locus != candidate.target_locus
-                    || receipt.target_locus != candidate.source_locus
-                    || receipt
-                        .owner_rmw
-                        .as_ref()
-                        .is_none_or(|report| report.core_ref != candidate.core_ref)
-                {
-                    return Err(Sys4DispatchDiagnostics::one(
-                        Sys4DiagnosticKind::CarrierProvenanceMismatch,
-                    ));
+                let declared_deadline_expiry_contract = self
+                    .edge_for(
+                        edge.operation_id(),
+                        CommunicationEdgeKind::OwnerRequest,
+                        edge.target_locus(),
+                        edge.source_locus(),
+                    )
+                    .ok()
+                    .is_some_and(|request_edge| {
+                        request_edge.core_ref() == edge.core_ref()
+                            && has_exact_i3_declared_deadline_expiry_contract(
+                                request_edge.carrier_contract(),
+                                edge.carrier_contract(),
+                                request_edge.carrier_contract().owner_admission_budget(),
+                            )
+                    });
+                let outcome = outcome.into_outcome().map_err(|_| {
+                    Sys4DispatchDiagnostics::one(Sys4DiagnosticKind::CarrierProvenanceMismatch)
+                })?;
+                match &outcome {
+                    Sys4I3OwnerReplyOutcome::Success { receipt }
+                        if receipt.request_id == candidate.request_id
+                            && receipt.operation_id == candidate.operation_id
+                            && receipt.origin_locus == candidate.target_locus
+                            && receipt.target_locus == candidate.source_locus
+                            && receipt
+                                .owner_rmw
+                                .as_ref()
+                                .is_some_and(|report| report.core_ref == candidate.core_ref) => {}
+                    Sys4I3OwnerReplyOutcome::DeclaredDeadlineExpired { failure }
+                        if declared_deadline_expiry_contract
+                            && failure.is_well_formed()
+                            && failure.request_id == candidate.request_id
+                            && failure.operation_id == candidate.operation_id
+                            && failure.requester_locus == candidate.target_locus
+                            && failure.owner_locus == candidate.source_locus
+                            && failure.core_ref == candidate.core_ref => {}
+                    _ => {
+                        return Err(Sys4DispatchDiagnostics::one(
+                            Sys4DiagnosticKind::CarrierProvenanceMismatch,
+                        ));
+                    }
                 }
-                MailboxPayload::OwnerReply {
-                    receipt: Box::new((*receipt).into_receipt()),
-                }
+                MailboxPayload::OwnerReply { outcome }
             }
             _ => {
                 return Err(Sys4DispatchDiagnostics::one(
@@ -11324,6 +12099,9 @@ impl LocalFabric {
             program: self.program.clone(),
             loci: self.loci.clone(),
             backend: self.backend.clone_for_checked_patch()?,
+            // A detached patch candidate has no live SYS-5 runtime binding,
+            // and therefore cannot issue or verify an owner-admission permit.
+            owner_admission_gate: None,
             authority_generation: self.authority_generation.clone(),
             authority_lifecycle: self.authority_lifecycle.clone(),
             // Candidate execution must not share the canonical live floor:
@@ -13584,6 +14362,22 @@ impl LocalFabric {
     }
 
     pub(crate) fn step_locus(&mut self, locus: &str) -> Sys4Result<LocusStep> {
+        self.step_locus_inner(locus, None)
+    }
+
+    fn step_locus_with_i3_owner_admission_handoff(
+        &mut self,
+        locus: &str,
+        handoff: M8I3VerifiedOwnerAdmissionHandoff,
+    ) -> Sys4Result<LocusStep> {
+        self.step_locus_inner(locus, Some(handoff))
+    }
+
+    fn step_locus_inner(
+        &mut self,
+        locus: &str,
+        i3_owner_admission_handoff: Option<M8I3VerifiedOwnerAdmissionHandoff>,
+    ) -> Sys4Result<LocusStep> {
         let (envelope, dequeue_occurrence) = self.dequeue_locus(locus)?;
         let base = |m9_validation, receipt: Option<FabricReceipt>| LocusStep {
             consumed_envelope_id: envelope.envelope_id.clone(),
@@ -13600,6 +14394,7 @@ impl LocalFabric {
             local_store_read_audit: None,
             local_store_reads: Vec::new(),
             receipt,
+            declared_owner_deadline_expired: None,
             request_id: envelope.request_id.clone(),
             semantic_identity: envelope.semantic_identity.clone(),
             m9_cache_validation: None,
@@ -13653,7 +14448,32 @@ impl LocalFabric {
                             &envelope.request_id,
                         )
                     })?;
-                if envelope.m9_owner_lineage_ref.as_deref() != Some(lineage.as_str()) {
+                let handoff_certifies_dequeued_envelope =
+                    i3_owner_admission_handoff.as_ref().map(|handoff| {
+                        handoff.certifies_exact_dequeued_owner_envelope(
+                            &envelope.envelope_id,
+                            &envelope.request_id,
+                            &envelope.carrier_id,
+                            &envelope.operation_id,
+                            &envelope.edge_ref,
+                            &envelope.source_locus,
+                            &envelope.target_locus,
+                            envelope.core_ref.as_deref().unwrap_or_default(),
+                            envelope.m9_owner_lineage_ref.as_deref().unwrap_or_default(),
+                            self.authority_generation.generation_ref(),
+                        )
+                    });
+                // Ordinary owner admission remains strict against the current
+                // generation's lineage.  The sole exception is a handoff
+                // whose live gate already revalidated current authority and
+                // whose sealed binding certifies this exact dequeued G1
+                // envelope while recording the current generation.  M8 still
+                // receives the current M9 authority use below, after its
+                // backend was refreshed during successor installation.
+                if handoff_certifies_dequeued_envelope == Some(false)
+                    || (handoff_certifies_dequeued_envelope.is_none()
+                        && envelope.m9_owner_lineage_ref.as_deref() != Some(lineage.as_str()))
+                {
                     return Err(self.quarantine(
                         locus,
                         &envelope,
@@ -13682,7 +14502,13 @@ impl LocalFabric {
                         .with_operation_id(&envelope.operation_id)
                         .with_owner_locus(locus)
                         .with_edge_ref(&envelope.edge_ref);
-                let execution = match self.backend.enqueue_and_serve(locus, request, context) {
+                let execution_result = match i3_owner_admission_handoff {
+                    Some(handoff) => self
+                        .backend
+                        .enqueue_and_serve_i3_owner_admission(locus, request, context, handoff),
+                    None => self.backend.enqueue_and_serve(locus, request, context),
+                };
+                let execution = match execution_result {
                     Ok(execution) => execution,
                     Err(failure) => {
                         self.refresh_m8_local_runtime_trace(locus);
@@ -13857,7 +14683,9 @@ impl LocalFabric {
                     &reply_edge,
                     &envelope.request_id,
                     MailboxPayload::OwnerReply {
-                        receipt: Box::new(receipt.clone()),
+                        outcome: Sys4I3OwnerReplyOutcome::Success {
+                            receipt: Box::new(receipt.clone()),
+                        },
                     },
                     Some(envelope.carrier_id.clone()),
                     None,
@@ -13880,10 +14708,25 @@ impl LocalFabric {
                 step.reply_envelope_id = Some(reply.envelope_id);
                 Ok(step)
             }
-            (CommunicationEdgeKind::OwnerReplyReceipt, MailboxPayload::OwnerReply { receipt }) => {
+            (
+                CommunicationEdgeKind::OwnerReplyReceipt,
+                MailboxPayload::OwnerReply {
+                    outcome: Sys4I3OwnerReplyOutcome::Success { receipt },
+                },
+            ) => {
                 self.completed_receipts
                     .insert(envelope.request_id.clone(), (**receipt).clone());
                 Ok(base(LocusM9Validation::None, Some((**receipt).clone())))
+            }
+            (
+                CommunicationEdgeKind::OwnerReplyReceipt,
+                MailboxPayload::OwnerReply {
+                    outcome: Sys4I3OwnerReplyOutcome::DeclaredDeadlineExpired { failure },
+                },
+            ) => {
+                let mut step = base(LocusM9Validation::None, None);
+                step.declared_owner_deadline_expired = Some((**failure).clone());
+                Ok(step)
             }
             (
                 CommunicationEdgeKind::DesignatedInputRequest,
@@ -14762,6 +15605,7 @@ impl LocalFabric {
             local_store_read_audit: None,
             local_store_reads: Vec::new(),
             receipt: Some(receipt),
+            declared_owner_deadline_expired: None,
             request_id: envelope.request_id.clone(),
             semantic_identity: Some(semantic_identity),
             m9_cache_validation: Some(validation),
@@ -14964,6 +15808,7 @@ impl LocalFabric {
             local_store_read_audit: None,
             local_store_reads: Vec::new(),
             receipt: Some(receipt),
+            declared_owner_deadline_expired: None,
             request_id: envelope.request_id.clone(),
             semantic_identity: Some(semantic_identity),
             m9_cache_validation: Some(validation),

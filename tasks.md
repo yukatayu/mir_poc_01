@@ -1,6 +1,6 @@
 # Current Task Map (LAB)
 
-最終更新: 2026-09-07 21:00 JST
+最終更新: 2026-09-08 10:53 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -55,21 +55,29 @@ semantic pressure consume the I3-3 matrix only after milestone acceptance.
 The genuine M9 successor/retained-ingress and selected-adapter delivery slices
 have passed bounded repair review. Actual endpoint closure, a complete frame
 split over two application writes, and strict truncation/FIN execute with
-validated-only observer evidence. The current uncommitted integration over
-`31be54b9` selects ADR-0041/spec/16's source-declared owner-admission budget.
-Static/source identity and generated/private contracts are retained; unsupported
-annotated execution now rejects before M8 occurrence/mutation. Contextual
-ST/OW1 rejection produces no invented trace, and M10 reports the distinct
-guard rather than route failure. Static 14, old AST/M6/M7 10/13/27, compile-fail
-1, budget library 11, direct guard 2, M10 source 3 and full SYS5 runtime 63
-pass. Final runtime library 298, M8 33, M10 conformance 67, I2 5+8, probe 32,
-private QUIC 2 and focused Clippy/format pass; independent integration review
-has no P0/P1. Immediate consumer after the safe checkpoint commit: serialized
-owner clock/stage/resolve, sealed one-use permit, retained typed expiry and
-requester consumption, then actual two-process QUIC evidence. These execution
-capabilities remain pending; source acceptance alone does not implement expiry.
-Provider remains OPEN and the
-full matrix is not complete; no whole fault row is accepted by this decision.
+validated-only observer evidence. Pushed checkpoint `050f5067` selects and
+preserves ADR-0041/spec/16's source-declared owner-admission budget with default
+  execution guards. The current C1/C2/C3 runtime checkpoint is prepared over that
+checkpoint; it has a serialized per-owner u64
+clock, bounded existing ledger Awaiting/Expired/Rejected/Reserved states, a
+non-Clone one-use permit through SYS-4/M8, current-M9 revalidation, four P1
+repairs, and a narrow G1 held-to-unchanged-authority G2 handoff repair. Fresh
+  authorized tests are owner-module 19/19, G1-pending→G2 decision 1/1, private
+  QUIC module 3/3, full process-runtime integration 63/63, dropped-expiry replay
+  1/1, and queued-handoff 1/1. These are bounded-local C3 evidence, not
+  actual-time network, fault-row 17, or milestone acceptance. The authentic
+  real budget run is 1/1 with two exec children reaped, request/serve/write/
+  reply/receipt, four exact delivery joins, host-driver 5/5, and broad local I3
+  library 61/61. Source-known LAB alias privacy is fixed. Provider remains
+  OPEN and the full matrix is not complete; no whole fault row is accepted.
+  Scoped runtime Clippy with both I3 features and `-Dwarnings` is green, source
+  budget is 4/4, and full probe integration is 38/38. Local-wait six named
+  tests/seven cases and narrow review are closed. Delivered expiry, lost reply,
+  expired reconnect, and producer-derived reference getter 2/2 are green.
+  Whole feature-union runtime library 332/332, integration 63/63, Clippy and
+  format are green. Remaining time gates are full-time review and actual
+  row-11 reply replay; genuine G1→G2 stale-binder evidence is already local-green
+  and must remain connected to the actual receive path. Root has 12.03 GiB free.
 
 Scope: execute all 20 required network failure families against the accepted
 generated-artifact runtime; make retry and ambiguous delivery request-bound and
@@ -99,7 +107,8 @@ post-admission retry is duplicate-rejected while the original requester stays
 pending/ambiguous. Report 2606 retains prior checkpoint `87ee2418` runtime
 51/51, library 285/285, probe 17/17 and bounded model 3/3 evidence; those suites
 were not all rerun for this delta. The model is not a general proof. Root free
-space is about 15 GiB; no further cleanup was performed. Remaining authority/
+space was about 15 GiB at that prior delivery checkpoint; current C1/C2 has
+14 GiB free, with no further cleanup. Remaining authority/
 ordering and the full 20-family matrix remain open; this
 is not milestone acceptance.
 

@@ -28,8 +28,8 @@ use crate::{
         LocalFabric, MailboxEnvelope, ObserverSnapshotChannel, RuntimeStoreRead, RuntimeStoreWrite,
         RuntimeValue, SealedDeliveryBinding, SealedFabricAdmission, SourceAction,
         Sys4CheckedPatchCandidate, Sys4DiagnosticKind, Sys4DispatchDiagnostics,
-        Sys4InitialStateSeed, Sys4LocalCut, Sys4PatchDiagnosticKind, Sys4PatchVerdict,
-        Sys4TraceEntry, Sys4TraceKind,
+        Sys4I3PrivateProcessCarrierSnapshot, Sys4I3ValidatedOwnerReply, Sys4InitialStateSeed,
+        Sys4LocalCut, Sys4PatchDiagnosticKind, Sys4PatchVerdict, Sys4TraceEntry, Sys4TraceKind,
     },
 };
 
@@ -142,6 +142,51 @@ fn relation_only_checked() -> CheckedSurfaceV0 {
 
 fn four_locus_checked() -> CheckedSurfaceV0 {
     load_checked_fixture(FOUR_LOCUS_FIXTURE)
+}
+
+fn four_locus_budgeted_s_checked() -> CheckedSurfaceV0 {
+    checked_inline(
+        "tests/inline/sys4_two_owner_four_locus_budgeted_s_with_auth.mir",
+        r#"
+module Combat.Sys4.TwoOwnerFourLocusBudgetedSWithAuth
+
+locus A
+locus S
+locus T
+locus V
+principal self
+principal target
+type Player
+
+state player[id: Player] at S {
+  hp: Int
+  atk: Int
+}
+
+state shield[id: Player] at T {
+  hp: Int
+  atk: Int
+}
+
+Role[self] at A {
+  when attack_s(target: Player) fails (StaleMembership, MissingCapability, MissingWitness, RouteUnavailable, DeadlineExpired) within owner_ticks 1 {
+    at S {
+      player[target].hp = player[target].hp - player[self].atk
+    }
+  }
+
+  when attack_t(target: Player) fails (StaleMembership, MissingCapability, MissingWitness, RouteUnavailable) {
+    at T {
+      shield[target].hp = shield[target].hp - shield[self].atk
+    }
+  }
+}
+
+with auth MembershipAuth
+
+verify finite_refinement
+"#,
+    )
 }
 
 fn checked_inline(relative: &str, source: &str) -> CheckedSurfaceV0 {
@@ -784,6 +829,511 @@ fn communication_edge_refs(projection: &GlobalProjectionResult) -> BTreeSet<Stri
 
 fn owner_attack_action(operation: &str) -> SourceAction {
     SourceAction::owner_operation(operation).with_argument("target", "self")
+}
+
+#[test]
+fn i3_reserved_owner_admission_refuses_before_insertion_when_a_genuine_prior_owner_request_is_queued()
+ {
+    let checked = checked_inline(
+        "tests/inline/sys4_i3_owner_admission_queued_prior_request.mir",
+        r#"
+module Mirrorea.Sys4.I3OwnerAdmissionQueuedPriorRequest
+
+locus A
+locus S
+principal self
+principal target
+type Player
+
+state player[id: Player] at S {
+  hp: Int
+  atk: Int
+}
+
+Role[self] at A {
+  when attack(target: Player) fails (StaleMembership, MissingCapability, MissingWitness, RouteUnavailable, DeadlineExpired) within owner_ticks 1 {
+    at S {
+      player[target].hp = player[target].hp - player[self].atk
+    }
+  }
+}
+
+with auth MembershipAuth
+
+verify finite_refinement
+"#,
+    );
+    let projection = project_fixture(&checked, ["A", "S"]);
+    let program = fabric_program(projection);
+    let mut fabric = boot(&checked, program, BackendProfile::St);
+
+    let prior_a = fabric
+        .submit_source_action(owner_attack_action("attack"))
+        .expect("checked source emits the first owner request through A's actual outbox");
+    fabric
+        .step_transport("A", "S", prior_a.envelope_id())
+        .expect("only the first source-generated request is transported into S's real inbox");
+    assert_eq!(
+        fabric
+            .locus_runtime("S")
+            .expect("S exists")
+            .incoming_mailbox()
+            .pending_envelopes()
+            .len(),
+        1,
+        "the prior source-generated A request is genuinely queued before B is reserved"
+    );
+    let prior_a_envelope_id = fabric
+        .locus_runtime("S")
+        .expect("S remains available")
+        .incoming_mailbox()
+        .pending_envelopes()
+        .single()
+        .envelope_id()
+        .to_string();
+    assert_eq!(prior_a_envelope_id, prior_a.envelope_id());
+
+    let reserved_b_submission = fabric
+        .submit_source_action(owner_attack_action("attack"))
+        .expect(
+            "checked source emits an independent second owner request for the reserved handoff",
+        );
+    let reserved_b = fabric
+        .take_outbound_process_carrier("A", reserved_b_submission.envelope_id())
+        .expect(
+            "the second request remains a genuine source-generated carrier until gate admission",
+        );
+    let pending_b = fabric
+        .i3_pending_owner_request_binding(&reserved_b)
+        .expect("the live fabric derives B's exact pending owner-request binding");
+    let semantic_b = pending_b.semantic_request_identity_ref(
+        &checked.program_identity().stable_key(),
+        "sys4-test-projection:queued-prior-owner-request",
+        "sys4-test-cohort:queued-prior-owner-request",
+    );
+    let b_snapshot_binding_bytes = serde_json::to_vec(
+        &reserved_b
+            .i3_private_process_snapshot()
+            .expect("the genuine B carrier has its private process snapshot"),
+    )
+    .expect("the genuine B private process snapshot serializes for exact gate binding");
+    let runtime_binding_ref = "sys4-test-runtime:queued-prior-owner-request";
+    fabric
+        .install_i3_owner_admission_gate(runtime_binding_ref)
+        .expect("the live fabric installs one private owner-admission gate");
+    let issuance = fabric
+        .stage_i3_owner_admission_issuance(
+            &pending_b,
+            &reserved_b,
+            &semantic_b,
+            runtime_binding_ref,
+            b_snapshot_binding_bytes.clone(),
+        )
+        .expect("the exact B binding stages one live-gate issuance");
+    let permit = fabric
+        .issue_i3_owner_admission_permit(
+            issuance,
+            &pending_b,
+            &reserved_b,
+            &semantic_b,
+            runtime_binding_ref,
+            b_snapshot_binding_bytes.clone(),
+        )
+        .expect("the staged B issuance becomes one exact opaque permit");
+
+    let semantic_before_rejection = fabric.semantic_snapshot();
+    let owner_enqueues_before = m8_trace_kind_count(&fabric, M8LocalTraceKind::OwnerEnqueued);
+    let owner_writes_before = m8_trace_kind_count(&fabric, M8LocalTraceKind::OwnerWrite);
+    assert_eq!(fabric.m8_owner_queue_depth("S"), 0);
+
+    assert_sys4_diag(
+        fabric.accept_i3_owner_request_with_permit(
+            reserved_b,
+            &pending_b,
+            &semantic_b,
+            runtime_binding_ref,
+            b_snapshot_binding_bytes,
+            permit,
+        ),
+        Sys4DiagnosticKind::M8ExecutionRejected,
+    );
+
+    assert_eq!(
+        fabric
+            .locus_runtime("S")
+            .expect("S remains available after the pre-insertion rejection")
+            .incoming_mailbox()
+            .pending_envelopes()
+            .len(),
+        1,
+        "the rejected B permit must not insert a second envelope ahead of the genuine queued A request"
+    );
+    assert_eq!(
+        fabric
+            .locus_runtime("S")
+            .expect("S remains available after the pre-insertion rejection")
+            .incoming_mailbox()
+            .pending_envelopes()
+            .single()
+            .envelope_id(),
+        prior_a_envelope_id,
+        "the pre-existing A envelope remains the exact next owner dequeue candidate"
+    );
+    assert_eq!(fabric.m8_owner_queue_depth("S"), 0);
+    assert_eq!(
+        m8_trace_kind_count(&fabric, M8LocalTraceKind::OwnerEnqueued),
+        owner_enqueues_before,
+        "pre-insertion rejection must not manufacture an M8 enqueue for either request"
+    );
+    assert_eq!(
+        m8_trace_kind_count(&fabric, M8LocalTraceKind::OwnerWrite),
+        owner_writes_before,
+        "pre-insertion rejection must not manufacture an M8 owner write"
+    );
+    assert!(
+        fabric
+            .semantic_snapshot()
+            .same_state(&semantic_before_rejection),
+        "the rejected B handoff must leave owner semantic state unchanged while A remains pending"
+    );
+}
+
+#[test]
+fn i3_declared_expiry_rejects_a_g1_pending_request_after_a_genuine_g2_successor_even_when_the_selected_owner_lineage_is_preserved()
+ {
+    let checked = four_locus_budgeted_s_checked();
+    let projection = four_locus_projection(&checked);
+    let program = fabric_program(projection);
+    let admission = sealed_four_locus_admission(&checked, &program);
+    let mut fabric = boot_with_admission(program, admission, BackendProfile::St);
+
+    let staged = fabric
+        .submit_source_action(owner_attack_action("attack_s"))
+        .expect("the genuine budgeted S source operation emits its ordinary checked request");
+    let held_g1_carrier = fabric
+        .take_outbound_process_carrier("A", staged.envelope_id())
+        .expect("the exact G1 source request extracts from A's real outbox without transport fabrication");
+    let pending_g1 = fabric
+        .i3_pending_owner_request_binding(&held_g1_carrier)
+        .expect("the live SYS4 fabric retains the checked G1 requester binding");
+    assert!(
+        pending_g1.owner_admission_budget().is_some(),
+        "only the source-declared S operation may enter the real owner-admission gate"
+    );
+    let semantic_request_identity_ref = pending_g1.semantic_request_identity_ref(
+        &checked.program_identity().stable_key(),
+        "sys4-test-projection:g1-pending-g2-expiry",
+        "sys4-test-cohort:g1-pending-g2-expiry",
+    );
+    let carrier_snapshot_binding_bytes = serde_json::to_vec(
+        &held_g1_carrier
+            .i3_private_process_snapshot()
+            .expect("the genuine G1 carrier has one exact private snapshot for gate binding"),
+    )
+    .expect("the genuine G1 carrier snapshot serializes only for the private binding check");
+    let runtime_binding_ref = "sys4-test-runtime:g1-pending-g2-expiry";
+    fabric
+        .install_i3_owner_admission_gate(runtime_binding_ref)
+        .expect("the live fabric installs exactly one private gate before staging the G1 request");
+    let issuance = fabric
+        .stage_i3_owner_admission_issuance(
+            &pending_g1,
+            &held_g1_carrier,
+            &semantic_request_identity_ref,
+            runtime_binding_ref,
+            carrier_snapshot_binding_bytes.clone(),
+        )
+        .expect("the genuine budgeted G1 request stages one exact gate issuance");
+    let g1_generation = fabric.current_m9_authority_inspection().generation();
+
+    let distinct_owner_revocation = fabric
+        .m9_authority_lifecycle_mut()
+        .revoke_owner_capability("attack_t", "T")
+        .expect("the admitted M9 publisher creates a genuine G2 successor that revokes only T");
+    let g2_generation = distinct_owner_revocation
+        .sealed_m9_inspection()
+        .successor_generation();
+    fabric
+        .apply_admitted_authority_lifecycle(distinct_owner_revocation)
+        .expect("the live fabric legitimately advances A, S, and T together to G2");
+    assert_ne!(g2_generation, g1_generation);
+    assert_eq!(
+        fabric.current_m9_authority_inspection().generation(),
+        g2_generation,
+        "the requester-side lower SYS4 component now validates against the genuinely installed G2 generation"
+    );
+    assert!(
+        fabric
+            .revalidate_i3_bound_owner_request_authority(&pending_g1, &held_g1_carrier)
+            .is_ok(),
+        "the distinct T revocation preserves the held S operation's current authority and lineage"
+    );
+
+    let genuine_g2_expiry_reply = fabric
+        .declare_i3_owner_admission_deadline_expired(
+            issuance,
+            &pending_g1,
+            &held_g1_carrier,
+            &semantic_request_identity_ref,
+            runtime_binding_ref,
+            carrier_snapshot_binding_bytes,
+            0,
+            1,
+        )
+        .expect("the live G2 gate—not test data—produces the exact typed expiry reply")
+        .into_parts()
+        .0;
+    let semantic_before_validation = fabric.semantic_snapshot();
+    let trace_before_validation = fabric.trace().clone();
+
+    assert_sys4_diag(
+        fabric.validate_i3_pending_owner_reply(&pending_g1, &genuine_g2_expiry_reply),
+        Sys4DiagnosticKind::CarrierProvenanceMismatch,
+    );
+    assert!(
+        fabric
+            .semantic_snapshot()
+            .same_state(&semantic_before_validation),
+        "rejecting a stale G1 pending binding must not mutate SYS4 semantic state"
+    );
+    assert_eq!(
+        fabric.trace(),
+        &trace_before_validation,
+        "the pure receiver-side current-generation rejection must not append a receive or dequeue trace"
+    );
+}
+
+#[test]
+fn i3_g1_declared_expiry_bytes_reject_after_an_unrelated_g2_revocation_without_requester_component_mutation()
+ {
+    let checked = four_locus_budgeted_s_checked();
+    let projection = four_locus_projection(&checked);
+    let program = fabric_program(projection);
+    let admission = sealed_four_locus_admission(&checked, &program);
+    let mut fabric = boot_with_admission(program, admission, BackendProfile::St);
+
+    let staged = fabric
+        .submit_source_action(owner_attack_action("attack_s"))
+        .expect("the genuine budgeted S source operation emits one checked G1 request");
+    let held_g1_carrier = fabric
+        .take_outbound_process_carrier("A", staged.envelope_id())
+        .expect("the exact G1 source request extracts from A's real outbox for gate binding");
+    let pending_g1 = fabric
+        .i3_pending_owner_request_binding(&held_g1_carrier)
+        .expect("the live SYS4 fabric retains the exact G1 requester binding");
+    let semantic_request_identity_ref = pending_g1.semantic_request_identity_ref(
+        &checked.program_identity().stable_key(),
+        "sys4-test-projection:g1-expiry-bytes-g2-reject",
+        "sys4-test-cohort:g1-expiry-bytes-g2-reject",
+    );
+    let carrier_snapshot_binding_bytes = serde_json::to_vec(
+        &held_g1_carrier
+            .i3_private_process_snapshot()
+            .expect("the genuine G1 request has one exact private snapshot for gate binding"),
+    )
+    .expect("the genuine G1 carrier snapshot serializes for its exact gate binding");
+    let runtime_binding_ref = "sys4-test-runtime:g1-expiry-bytes-g2-reject";
+    fabric
+        .install_i3_owner_admission_gate(runtime_binding_ref)
+        .expect("the live fabric installs one private owner-admission gate before G1 expiry");
+    let issuance = fabric
+        .stage_i3_owner_admission_issuance(
+            &pending_g1,
+            &held_g1_carrier,
+            &semantic_request_identity_ref,
+            runtime_binding_ref,
+            carrier_snapshot_binding_bytes.clone(),
+        )
+        .expect("the genuine G1 request stages its one owner-admission issuance");
+    let g1_generation = fabric.current_m9_authority_inspection().generation();
+    let genuine_g1_expiry_reply = fabric
+        .declare_i3_owner_admission_deadline_expired(
+            issuance,
+            &pending_g1,
+            &held_g1_carrier,
+            &semantic_request_identity_ref,
+            runtime_binding_ref,
+            carrier_snapshot_binding_bytes,
+            0,
+            1,
+        )
+        .expect("only the genuine G1 gate produces the typed deadline-expiry reply")
+        .into_parts()
+        .0;
+    assert!(matches!(
+        fabric.validate_i3_pending_owner_reply(&pending_g1, &genuine_g1_expiry_reply),
+        Ok(Sys4I3ValidatedOwnerReply::DeclaredDeadlineExpired { .. })
+    ));
+    let retained_g1_expiry_bytes = serde_json::to_vec(
+        &genuine_g1_expiry_reply
+            .i3_private_process_snapshot()
+            .expect("the gate-produced G1 expiry retains one current private carrier snapshot"),
+    )
+    .expect("the genuine G1 expiry snapshot retains exact bytes before G2 exists");
+
+    let unrelated_t_revocation = fabric
+        .m9_authority_lifecycle_mut()
+        .revoke_owner_capability("attack_t", "T")
+        .expect("the admitted M9 publisher creates a genuine unrelated T-only G2 successor");
+    let g2_generation = unrelated_t_revocation
+        .sealed_m9_inspection()
+        .successor_generation();
+    fabric
+        .apply_admitted_authority_lifecycle(unrelated_t_revocation)
+        .expect("the full SYS4 fixture installs the actual requester-side G2 authority generation");
+    assert_ne!(g2_generation, g1_generation);
+    assert_eq!(
+        fabric.current_m9_authority_inspection().generation(),
+        g2_generation,
+        "the retained bytes are considered only against the newly installed G2 generation"
+    );
+
+    let pending_before_rejection = pending_g1.clone();
+    let semantic_before_rejection = fabric.semantic_snapshot();
+    let trace_before_rejection = fabric.trace().clone();
+    let causality_before_rejection = fabric.causality().clone();
+    let requester_endpoint_before_rejection = fabric
+        .locus_runtime("A")
+        .expect("the requester locus remains present under G2")
+        .incoming_endpoint()
+        .clone();
+    let requester_mailbox_before_rejection = fabric
+        .locus_runtime("A")
+        .expect("the requester locus remains present under G2")
+        .incoming_mailbox()
+        .clone();
+
+    assert_sys4_diag(
+        fabric.bind_i3_untrusted_process_carrier(
+            serde_json::from_slice::<Sys4I3PrivateProcessCarrierSnapshot>(
+                &retained_g1_expiry_bytes,
+            )
+            .expect("the retained genuine G1 bytes remain structurally decodable only as a private candidate"),
+            CommunicationEdgeKind::OwnerReplyReceipt,
+        ),
+        Sys4DiagnosticKind::CarrierProvenanceMismatch,
+    );
+    assert_eq!(
+        pending_g1, pending_before_rejection,
+        "current-generation rejection cannot alter the exact requester pending binding"
+    );
+    assert!(
+        fabric
+            .semantic_snapshot()
+            .same_state(&semantic_before_rejection),
+        "the stale G1 expiry cannot mutate requester-visible SYS4 semantic state under G2"
+    );
+    assert_eq!(
+        fabric.trace(),
+        &trace_before_rejection,
+        "the G2 binder rejection must not append a requester receive or dequeue trace"
+    );
+    assert_eq!(
+        fabric.causality(),
+        &causality_before_rejection,
+        "the G2 binder rejection must not append a requester causality or terminal-consumption edge"
+    );
+    let requester_after_rejection = fabric
+        .locus_runtime("A")
+        .expect("the requester locus remains present after stale expiry rejection");
+    assert_eq!(
+        requester_after_rejection.incoming_endpoint(),
+        &requester_endpoint_before_rejection,
+        "the stale G1 expiry must not enter the requester endpoint through the rejecting G2 binder"
+    );
+    assert_eq!(
+        requester_after_rejection.incoming_mailbox(),
+        &requester_mailbox_before_rejection,
+        "the stale G1 expiry must not enqueue a requester mailbox record or terminal outcome through the rejecting G2 binder"
+    );
+}
+
+#[test]
+fn valid_owner_actor_with_absent_target_returns_traceless_m8_rejection_and_leaves_the_owner_live() {
+    let checked = owner_endpoint_checked();
+    let program = fabric_program(owner_endpoint_projection(&checked));
+    let mut fabric = boot(&checked, program, BackendProfile::St);
+
+    let rejected_submission = fabric
+        .submit_source_action(owner_attack_action_with_target("attack", "absent-target"))
+        .expect(
+            "the checked source may generate an owner request for a syntactically valid Player argument before M8 validates target liveness",
+        );
+    let rejected_envelope = fabric
+        .locus_runtime("A")
+        .expect("A exists")
+        .outgoing_mailbox()
+        .pending_envelopes()
+        .single();
+    assert_eq!(
+        rejected_envelope.envelope_id(),
+        rejected_submission.envelope_id()
+    );
+    fabric
+        .step_transport("A", "S", rejected_envelope.envelope_id())
+        .expect("the source-generated request reaches the genuine owner endpoint before target liveness is checked");
+
+    let state_before_rejection = fabric.semantic_snapshot();
+    let m8_before_rejection = fabric
+        .m8_actual_trace()
+        .expect("M8 observer is available")
+        .stable_digest();
+    let rejected = assert_sys4_diag(
+        fabric.step_locus("S"),
+        Sys4DiagnosticKind::M8ExecutionRejected,
+    );
+    assert_eq!(
+        rejected.rejected_envelope_id(),
+        Some(rejected_envelope.envelope_id()),
+        "the typed lower-boundary rejection remains tied to the actual source-generated envelope"
+    );
+    assert!(
+        rejected.m8_trace_node_id().is_none(),
+        "an authority-valid but absent target is rejected before any M8 enqueue or serve trace exists"
+    );
+    assert!(
+        rejected.backend_m8_failure_inspection().is_none(),
+        "the absent-target pre-enqueue check returns a trace-less typed M8 rejection rather than manufacturing an owner-operation row"
+    );
+    assert!(
+        fabric
+            .semantic_snapshot()
+            .same_state(&state_before_rejection),
+        "the absent target cannot mutate the owner state"
+    );
+    assert_eq!(
+        fabric
+            .m8_actual_trace()
+            .expect("M8 observer remains available after rejection")
+            .stable_digest(),
+        m8_before_rejection,
+        "the pre-enqueue rejection does not allocate hidden M8 owner evidence"
+    );
+    assert_eq!(
+        fabric
+            .locus_runtime("S")
+            .expect("S remains live after the typed rejection")
+            .incoming_mailbox()
+            .terminal_rejected_envelope(rejected_envelope.envelope_id())
+            .expect("the rejected source-generated envelope is terminally quarantined")
+            .diagnostic_kind(),
+        Sys4DiagnosticKind::M8ExecutionRejected
+    );
+
+    let clean_submission = fabric
+        .submit_source_action(owner_attack_action_with_target("attack", "self"))
+        .expect("the same valid actor may issue a later source-generated request after the absent target rejection");
+    fabric
+        .step_transport("A", "S", clean_submission.envelope_id())
+        .expect("the later valid request reaches the owner after terminal quarantine");
+    fabric
+        .step_locus("S")
+        .expect("the terminal absent-target rejection neither panics nor head-blocks the subsequent valid owner request");
+    assert_eq!(
+        fabric.semantic_snapshot().int("S", "player", "self", "hp"),
+        Some(90),
+        "the owner remains live for the later genuine source action"
+    );
 }
 
 #[test]

@@ -59,10 +59,12 @@ use super::i3_process_faults::{
     I3LocalnetLateIngressParentPublication, I3LocalnetLateIngressProfile,
     I3LocalnetLateIngressRequesterOutcome, I3LocalnetReconnectOwnerOutcome,
     I3LocalnetRemoteAdmissionEvidence, I3LocalnetRemoteEvidenceRejection,
-    I3LocalnetRequesterFaultObservation, I3LocalnetRetryAttemptAudit, I3LocalnetRetryAttemptReason,
-    I3LocalnetRetryAudit, I3LocalnetRetryAuditFalsifier, I3LocalnetRetryChildAudit,
-    I3LocalnetRetryChildAuditEvidence, I3LocalnetRetryEvidenceRejection, I3LocalnetRetryFalsifier,
-    I3LocalnetRetryProfile, I3LocalnetRetryRequesterOutcome,
+    I3LocalnetRequesterFaultObservation, I3LocalnetRequesterLocalWaitAudit,
+    I3LocalnetRequesterLocalWaitFalsifier, I3LocalnetRequesterLocalWaitProfile,
+    I3LocalnetRetryAttemptAudit, I3LocalnetRetryAttemptReason, I3LocalnetRetryAudit,
+    I3LocalnetRetryAuditFalsifier, I3LocalnetRetryChildAudit, I3LocalnetRetryChildAuditEvidence,
+    I3LocalnetRetryEvidenceRejection, I3LocalnetRetryFalsifier, I3LocalnetRetryProfile,
+    I3LocalnetRetryRequesterOutcome,
 };
 
 const PROCESS_A_SLOT: &str = "process-a";
@@ -70,6 +72,9 @@ const PROCESS_B_SLOT: &str = "process-b";
 const PROCESS_A_LOCI: [&str; 2] = ["ParticipantA", "ViewerC"];
 const PROCESS_B_LOCI: [&str; 2] = ["WorldAuthority", "ParticipantB"];
 const ACTIVE_I2_LOGICAL_SOURCE_PATH: &str = "samples/clean-near-end/mirrorea-i2-local-toy/main.mir";
+const OWNER_ADMISSION_LOGICAL_SOURCE_PATH: &str =
+    "samples/clean-near-end/mirrorea-i3-owner-admission/main.mir";
+const REQUESTER_LOCAL_WAIT_MINIMUM: Duration = Duration::from_millis(20);
 const LOCALNET_CONTROL_FD: i32 = 3;
 // Bounded, private B-to-parent lifecycle completion route. It is never
 // multiplexed with child stdout observer events or the trusted bootstrap FD.
@@ -157,6 +162,10 @@ pub enum I3LocalnetLifecycleRejectionCause {
     InvalidReaperAllowance,
     SetupOrControlFailure,
     CompletedChildExitedNonzero,
+    /// A real B child retained one source-budgeted request Awaiting a trusted
+    /// owner-runtime driver. This is not an owner result or a fabricated
+    /// failure reply.
+    OwnerAdmissionDriveRequired,
 }
 
 /// The finite child report outcome retained even when the aggregate run fails.
@@ -166,6 +175,9 @@ pub enum I3LocalnetChildTerminalOutcome {
     Completed,
     Rejected,
     HandledDeliveryFault,
+    /// A verified B session admitted a source-budgeted request, whose owner
+    /// runtime retained it Awaiting a later trusted clock/driver decision.
+    OwnerAdmissionAwaiting,
 }
 
 /// Observer-safe counters from one terminal child report.
@@ -181,6 +193,7 @@ pub struct I3LocalnetChildTerminalEvent {
     unauthenticated_semantic_admission_count: Option<usize>,
     tls_peer_verified: Option<bool>,
     reciprocal_preface_verified: Option<bool>,
+    owner_admission_awaiting_count: Option<usize>,
     observed_exit_status_code: Option<i32>,
     was_force_killed: bool,
 }
@@ -236,6 +249,13 @@ impl I3LocalnetChildTerminalEvent {
         self.reciprocal_preface_verified
     }
 
+    /// Present only when B itself reported its bounded owner-admission
+    /// disposition. Generic lifecycle failures deliberately carry no zero
+    /// substitute for this observation.
+    pub const fn owner_admission_awaiting_count(&self) -> Option<usize> {
+        self.owner_admission_awaiting_count
+    }
+
     /// The supervisor-observed OS exit code, not a semantic outcome.
     pub const fn observed_exit_status_code(&self) -> Option<i32> {
         self.observed_exit_status_code
@@ -269,6 +289,13 @@ pub enum I3LocalnetFailureStage {
     RequesterReplyOrReceiptNotObserved,
     /// Set only after a validated owner admission record is joined.
     AfterRemoteAdmission,
+    /// The supervisor joined B's actual retained declared-expiry evidence,
+    /// while A still retained the original request after a lost reply.
+    AfterRemoteDeclaredOwnerExpiry,
+    /// A received and consumed a gate-produced declared owner failure. This
+    /// is a semantic terminal command result, not a lifecycle or transport
+    /// failure stage.
+    RequesterTerminalFailureConsumed,
     LifecycleEvidenceRejected,
     BootstrapDeadline,
     CleanupDeadline,
@@ -284,6 +311,21 @@ pub enum I3LocalnetRunErrorKind {
     LifecycleDeadlineExceeded,
     DeliveryUnavailable,
     AmbiguousDelivery,
+    /// The generated declared owner failure reached and was consumed by the
+    /// requester. The enclosing `Err` preserves the existing result shape;
+    /// it is not a lifecycle or transport failure.
+    TerminalFailureConsumed,
+}
+
+/// One neutral, fixed owner-runtime schedule used only after B has actually
+/// retained a budgeted request Awaiting. It supplies neither a raw tick nor
+/// an expected semantic outcome: the runtime's checked gate still determines
+/// whether the returned message serves or declares expiry.
+#[doc(hidden)]
+#[derive(Clone, Copy, Debug, Eq, PartialEq, Serialize, Deserialize)]
+#[serde(rename_all = "snake_case")]
+pub enum I3LocalnetOwnerAdmissionDriveProfile {
+    AdvanceOneTickAfterAwaiting,
 }
 
 /// Ordinary source input for one bounded localnet run.  The supervisor never
@@ -298,9 +340,12 @@ pub struct I3ProcessLocalnetRequest {
     falsifier: Option<I3LocalnetFalsifier>,
     fault_profile: Option<I3LocalnetFaultProfile>,
     fault_audit_falsifier: Option<I3LocalnetFaultAuditFalsifier>,
+    requester_local_wait_profile: Option<I3LocalnetRequesterLocalWaitProfile>,
+    requester_local_wait_falsifier: Option<I3LocalnetRequesterLocalWaitFalsifier>,
     retry_profile: Option<I3LocalnetRetryProfile>,
     retry_falsifier: Option<I3LocalnetRetryFalsifier>,
     retry_audit_falsifier: Option<I3LocalnetRetryAuditFalsifier>,
+    owner_admission_drive_profile: Option<I3LocalnetOwnerAdmissionDriveProfile>,
     late_ingress_profile: Option<I3LocalnetLateIngressProfile>,
     late_ingress_falsifier: Option<I3LocalnetLateIngressFalsifier>,
     // Selects only a concrete bounded adapter action after source generation.
@@ -318,9 +363,12 @@ impl I3ProcessLocalnetRequest {
             falsifier: None,
             fault_profile: None,
             fault_audit_falsifier: None,
+            requester_local_wait_profile: None,
+            requester_local_wait_falsifier: None,
             retry_profile: None,
             retry_falsifier: None,
             retry_audit_falsifier: None,
+            owner_admission_drive_profile: None,
             late_ingress_profile: None,
             late_ingress_falsifier: None,
             adapter_delivery_profile: None,
@@ -368,6 +416,28 @@ impl I3ProcessLocalnetRequest {
         self
     }
 
+    /// Select the one fixed requester-local monotonic wait after A observed
+    /// an actual lost reply. It carries no duration, retry, session, carrier,
+    /// or semantic outcome input.
+    pub fn with_requester_local_wait_profile(
+        mut self,
+        profile: I3LocalnetRequesterLocalWaitProfile,
+    ) -> Self {
+        self.requester_local_wait_profile = Some(profile);
+        self
+    }
+
+    /// Select one observer-only corruption after the real requester-local
+    /// wait has completed. It cannot alter the request, transport, owner, or
+    /// requester runtime state.
+    pub fn with_requester_local_wait_falsifier(
+        mut self,
+        falsifier: I3LocalnetRequesterLocalWaitFalsifier,
+    ) -> Self {
+        self.requester_local_wait_falsifier = Some(falsifier);
+        self
+    }
+
     /// Select one bounded two-session use of the runtime-retained original
     /// request.  This is probe scheduling only, never a caller retry policy.
     pub fn with_retry_profile(mut self, profile: I3LocalnetRetryProfile) -> Self {
@@ -385,6 +455,17 @@ impl I3ProcessLocalnetRequest {
     /// Select one post-send observer-only reconnect-evidence falsifier.
     pub fn with_retry_audit_falsifier(mut self, falsifier: I3LocalnetRetryAuditFalsifier) -> Self {
         self.retry_audit_falsifier = Some(falsifier);
+        self
+    }
+
+    /// Select one fixed owner-runtime scheduling action after B has observed
+    /// an actual Awaiting admission. The profile cannot provide a tick,
+    /// carrier, authority, source operation, or expected result.
+    pub fn with_owner_admission_drive_profile(
+        mut self,
+        profile: I3LocalnetOwnerAdmissionDriveProfile,
+    ) -> Self {
+        self.owner_admission_drive_profile = Some(profile);
         self
     }
 
@@ -611,6 +692,103 @@ impl I3LocalnetObserverSafeDeliveryRecord {
         &self,
     ) -> Option<&I3LocalnetGeneratedFrameWriteObservation> {
         self.generated_frame_write_observation.as_ref()
+    }
+}
+
+/// Owner-local evidence copied only from the runtime's retained,
+/// producer-derived declared-expiry decision and its actual counters. It
+/// carries no clock value, driver, permit, carrier bytes, source, authority,
+/// witness, or expected semantic result.
+#[doc(hidden)]
+#[derive(Clone, Debug)]
+pub struct I3LocalnetOwnerAdmissionExpiryEvidence {
+    decision_commitment_ref: String,
+    decision_occurrence_ref: String,
+    generated_reply_count: usize,
+    expired_count: usize,
+    owner_serve_count: usize,
+    owner_mutation_count: usize,
+}
+
+impl I3LocalnetOwnerAdmissionExpiryEvidence {
+    pub fn decision_commitment_ref(&self) -> &str {
+        &self.decision_commitment_ref
+    }
+
+    pub fn decision_occurrence_ref(&self) -> &str {
+        &self.decision_occurrence_ref
+    }
+
+    pub const fn generated_reply_count(&self) -> usize {
+        self.generated_reply_count
+    }
+
+    pub const fn expired_count(&self) -> usize {
+        self.expired_count
+    }
+
+    pub const fn owner_serve_count(&self) -> usize {
+        self.owner_serve_count
+    }
+
+    pub const fn owner_mutation_count(&self) -> usize {
+        self.owner_mutation_count
+    }
+}
+
+/// Joined actual delivery and local-terminal evidence for one generated
+/// declared owner deadline expiry that reached requester consumption. The
+/// four delivery records remain distinct actual adapter observations; the
+/// producer references are copied only from B's runtime record.
+#[doc(hidden)]
+#[derive(Clone, Debug)]
+pub struct I3LocalnetDeclaredOwnerDeadlineExpiredAudit {
+    request_identity_ref: String,
+    request_send: I3LocalnetObserverSafeDeliveryRecord,
+    request_receive: I3LocalnetObserverSafeDeliveryRecord,
+    reply_send: I3LocalnetObserverSafeDeliveryRecord,
+    reply_receive: I3LocalnetObserverSafeDeliveryRecord,
+    owner_expiry: I3LocalnetOwnerAdmissionExpiryEvidence,
+    requester_terminal_failure_occurrence_ref: String,
+    requester_terminal_failure_consumed_count: usize,
+    requester_local_receipt_count: usize,
+}
+
+impl I3LocalnetDeclaredOwnerDeadlineExpiredAudit {
+    pub fn request_identity_ref(&self) -> &str {
+        &self.request_identity_ref
+    }
+
+    pub fn request_send(&self) -> &I3LocalnetObserverSafeDeliveryRecord {
+        &self.request_send
+    }
+
+    pub fn request_receive(&self) -> &I3LocalnetObserverSafeDeliveryRecord {
+        &self.request_receive
+    }
+
+    pub fn reply_send(&self) -> &I3LocalnetObserverSafeDeliveryRecord {
+        &self.reply_send
+    }
+
+    pub fn reply_receive(&self) -> &I3LocalnetObserverSafeDeliveryRecord {
+        &self.reply_receive
+    }
+
+    pub fn owner_expiry(&self) -> &I3LocalnetOwnerAdmissionExpiryEvidence {
+        &self.owner_expiry
+    }
+
+    pub fn requester_terminal_failure_occurrence_ref(&self) -> &str {
+        &self.requester_terminal_failure_occurrence_ref
+    }
+
+    pub const fn requester_terminal_failure_consumed_count(&self) -> usize {
+        self.requester_terminal_failure_consumed_count
+    }
+
+    pub const fn requester_local_receipt_count(&self) -> usize {
+        self.requester_local_receipt_count
     }
 }
 
@@ -1112,6 +1290,7 @@ pub struct I3LocalnetRejectionAudit {
     requester_first_session_peer_spki_verified: bool,
     requester_first_session_reciprocal_preface_verified: bool,
     child_terminal_events: Vec<I3LocalnetChildTerminalEvent>,
+    unknown_child_failure_count: usize,
     structurally_valid_completed_child_report_observed: bool,
     no_orphan_child_pids: bool,
     completed_child_exited_nonzero: bool,
@@ -1128,27 +1307,34 @@ impl I3LocalnetRejectionAudit {
     pub const fn stage(&self) -> I3LocalnetFailureStage {
         self.stage
     }
-    /// Fixed-control preservation is reported only by an actual rejected
-    /// child terminal; non-rejected terminals make no such observation.
+    /// Fixed-control preservation is reported only by a typed child terminal
+    /// that carries it; generic failures make no such observation.
     pub const fn fixed_child_control_descriptors_preserved(&self) -> Option<bool> {
         self.fixed_child_control_descriptors_preserved
     }
+    /// Sum from typed child observations only. If
+    /// `unknown_child_failure_count` is nonzero, this is not a claim that an
+    /// unobserved child contributed zero starts.
     pub const fn child_owner_starts(&self) -> usize {
         self.child_owner_starts
     }
-    /// Certificate setup count reported only by an actual rejected child
-    /// terminal, never synthesized from a global child count.
+    /// Certificate setup count reported only by a typed child terminal that
+    /// carries it, never synthesized from a global child count.
     pub const fn quic_certificate_initializations(&self) -> Option<usize> {
         self.quic_certificate_initializations
     }
-    /// Handshake count reported only by an actual rejected child terminal,
-    /// never synthesized from a global child count.
+    /// Handshake count reported only by a typed child terminal that carries
+    /// it, never synthesized from a global child count.
     pub const fn quic_handshake_count(&self) -> Option<usize> {
         self.quic_handshake_count
     }
+    /// Sum from typed child observations only. See
+    /// `unknown_child_failure_count` before treating a zero as exhaustive.
     pub const fn semantic_admission_count(&self) -> usize {
         self.semantic_admission_count
     }
+    /// Sum from typed child observations only. See
+    /// `unknown_child_failure_count` before treating a zero as exhaustive.
     pub const fn owner_mutation_count(&self) -> usize {
         self.owner_mutation_count
     }
@@ -1225,6 +1411,25 @@ impl I3LocalnetRejectionAudit {
     pub fn child_terminal_event_count(&self) -> usize {
         self.child_terminal_events.len()
     }
+    /// Generic child failure preserves no semantic or owner-runtime counters.
+    /// Its count is kept separately so callers cannot mistake absent evidence
+    /// for an observed zero terminal record.
+    pub const fn unknown_child_failure_count(&self) -> usize {
+        self.unknown_child_failure_count
+    }
+
+    /// The one narrow B-local observation for a source-budgeted request held
+    /// Awaiting a trusted owner driver. It contains no driver, clock handle,
+    /// permit, carrier bytes, key, or source text.
+    pub fn owner_admission_awaiting_observation(&self) -> Option<&I3LocalnetChildTerminalEvent> {
+        self.child_terminal_events
+            .iter()
+            .find(|event| event.outcome == I3LocalnetChildTerminalOutcome::OwnerAdmissionAwaiting)
+    }
+
+    /// Sum of counters carried by actual typed terminal observations. A
+    /// generic child failure is excluded and is exposed by
+    /// `unknown_child_failure_count` instead of contributing a synthetic zero.
     pub fn aggregate_semantic_admission_count(&self) -> usize {
         self.child_terminal_events
             .iter()
@@ -1276,6 +1481,7 @@ pub struct I3LocalnetRunError {
     rejection_audit: I3LocalnetRejectionAudit,
     fault_audit: Option<I3LocalnetFaultAudit>,
     retry_audit: Option<I3LocalnetRetryAudit>,
+    declared_owner_deadline_expired_audit: Option<I3LocalnetDeclaredOwnerDeadlineExpiredAudit>,
     late_ingress_audit: Option<I3LocalnetLateIngressAudit>,
     late_ingress_evidence_rejection: Option<I3LocalnetLateIngressEvidenceRejection>,
 }
@@ -1286,6 +1492,7 @@ impl I3LocalnetRunError {
         rejection_audit: I3LocalnetRejectionAudit,
         fault_audit: Option<I3LocalnetFaultAudit>,
         retry_audit: Option<I3LocalnetRetryAudit>,
+        declared_owner_deadline_expired_audit: Option<I3LocalnetDeclaredOwnerDeadlineExpiredAudit>,
         late_ingress_audit: Option<I3LocalnetLateIngressAudit>,
         late_ingress_evidence_rejection: Option<I3LocalnetLateIngressEvidenceRejection>,
     ) -> Self {
@@ -1294,6 +1501,7 @@ impl I3LocalnetRunError {
             rejection_audit,
             fault_audit,
             retry_audit,
+            declared_owner_deadline_expired_audit,
             late_ingress_audit,
             late_ingress_evidence_rejection,
         }
@@ -1320,6 +1528,14 @@ impl I3LocalnetRunError {
         self.retry_audit.as_ref()
     }
 
+    /// Present only for a complete actual route whose generated declared
+    /// owner failure reached requester terminal consumption.
+    pub fn declared_owner_deadline_expired_audit(
+        &self,
+    ) -> Option<&I3LocalnetDeclaredOwnerDeadlineExpiredAudit> {
+        self.declared_owner_deadline_expired_audit.as_ref()
+    }
+
     /// Present only when actual child records reached the retained-ingress
     /// join.  A rejected bootstrap may intentionally retain no owner outcome.
     pub fn late_ingress_audit(&self) -> Option<&I3LocalnetLateIngressAudit> {
@@ -1342,7 +1558,9 @@ struct LocalnetFailure {
     evidence: LocalnetRejectionEvidence,
     lifecycle_rejection_cause: Option<I3LocalnetLifecycleRejectionCause>,
     fault_profile: Option<I3LocalnetFaultProfile>,
+    requester_local_wait_profile: Option<I3LocalnetRequesterLocalWaitProfile>,
     retry_audit: Option<I3LocalnetRetryAudit>,
+    declared_owner_deadline_expired_audit: Option<I3LocalnetDeclaredOwnerDeadlineExpiredAudit>,
     late_ingress_audit: Option<I3LocalnetLateIngressAudit>,
     late_ingress_evidence_rejection: Option<I3LocalnetLateIngressEvidenceRejection>,
 }
@@ -1374,7 +1592,9 @@ impl LocalnetFailure {
             evidence: LocalnetRejectionEvidence::default(),
             lifecycle_rejection_cause: None,
             fault_profile: None,
+            requester_local_wait_profile: None,
             retry_audit: None,
+            declared_owner_deadline_expired_audit: None,
             late_ingress_audit: None,
             late_ingress_evidence_rejection: None,
         }
@@ -1392,7 +1612,9 @@ impl LocalnetFailure {
             evidence: LocalnetRejectionEvidence::default(),
             lifecycle_rejection_cause: None,
             fault_profile: None,
+            requester_local_wait_profile: None,
             retry_audit: None,
+            declared_owner_deadline_expired_audit: None,
             late_ingress_audit: None,
             late_ingress_evidence_rejection: None,
         }
@@ -1404,16 +1626,33 @@ impl LocalnetFailure {
         failure
     }
 
-    /// The owner has reached the observed Ready point, but its later terminal
-    /// evidence is absent or cannot justify one of the profile's accepted
-    /// terminal shapes.  This does not claim remote admission.
+    /// Available lifecycle evidence cannot justify one of the accepted
+    /// terminal shapes. This does not claim a remote admission or an owner
+    /// start; a caller that actually observed `Ready` retains it explicitly.
     fn lifecycle_evidence_rejected() -> Self {
         let mut failure = Self::lifecycle();
         failure.stage = I3LocalnetFailureStage::LifecycleEvidenceRejected;
         failure
     }
 
-    fn delivery_fault(profile: I3LocalnetFaultProfile) -> Self {
+    /// The owner child itself observed the one source-budgeted request held
+    /// Awaiting a later trusted driver decision. This is diagnostic evidence
+    /// of a missing local continuation, never a generated semantic outcome.
+    fn owner_admission_drive_required(child_event: PrivateChildEvent) -> Self {
+        let mut failure = Self::from_child(
+            I3LocalnetRunErrorKind::LifecycleRejected,
+            I3LocalnetFailureStage::LifecycleEvidenceRejected,
+            child_event,
+        );
+        failure.lifecycle_rejection_cause =
+            Some(I3LocalnetLifecycleRejectionCause::OwnerAdmissionDriveRequired);
+        failure
+    }
+
+    fn delivery_fault(
+        profile: I3LocalnetFaultProfile,
+        requester_local_wait_profile: Option<I3LocalnetRequesterLocalWaitProfile>,
+    ) -> Self {
         // A profile selects a real scheduling point, not a proven remote
         // outcome. Post-loss begins with the requester observation and may be
         // refined only by the later supervisor-side evidence join.
@@ -1435,7 +1674,9 @@ impl LocalnetFailure {
             evidence: LocalnetRejectionEvidence::default(),
             lifecycle_rejection_cause: None,
             fault_profile: Some(profile),
+            requester_local_wait_profile,
             retry_audit: None,
+            declared_owner_deadline_expired_audit: None,
             late_ingress_audit: None,
             late_ingress_evidence_rejection: None,
         }
@@ -1452,7 +1693,9 @@ impl LocalnetFailure {
             },
             lifecycle_rejection_cause: None,
             fault_profile: None,
+            requester_local_wait_profile: None,
             retry_audit: None,
+            declared_owner_deadline_expired_audit: None,
             late_ingress_audit: None,
             late_ingress_evidence_rejection: None,
         }
@@ -1478,10 +1721,22 @@ impl LocalnetFailure {
             },
             lifecycle_rejection_cause: None,
             fault_profile: None,
+            requester_local_wait_profile: None,
             retry_audit: Some(retry_audit),
+            declared_owner_deadline_expired_audit: None,
             late_ingress_audit: None,
             late_ingress_evidence_rejection: None,
         }
+    }
+
+    fn declared_owner_deadline_expired_consumed(
+        audit: I3LocalnetDeclaredOwnerDeadlineExpiredAudit,
+    ) -> Self {
+        let mut failure = Self::lifecycle();
+        failure.kind = I3LocalnetRunErrorKind::TerminalFailureConsumed;
+        failure.stage = I3LocalnetFailureStage::RequesterTerminalFailureConsumed;
+        failure.declared_owner_deadline_expired_audit = Some(audit);
+        failure
     }
 
     fn late_ingress_delivery(late_ingress_audit: I3LocalnetLateIngressAudit) -> Self {
@@ -1499,7 +1754,9 @@ impl LocalnetFailure {
             },
             lifecycle_rejection_cause: None,
             fault_profile: None,
+            requester_local_wait_profile: None,
             retry_audit: None,
+            declared_owner_deadline_expired_audit: None,
             late_ingress_audit: Some(late_ingress_audit),
             late_ingress_evidence_rejection: None,
         }
@@ -1524,6 +1781,7 @@ impl LocalnetFailure {
         self.into_error_with_terminal_events(
             all_children_reaped,
             Vec::new(),
+            0,
             false,
             false,
             false,
@@ -1543,6 +1801,7 @@ impl LocalnetFailure {
         self,
         all_children_reaped: bool,
         child_terminal_events: Vec<I3LocalnetChildTerminalEvent>,
+        unknown_child_failure_count: usize,
         completed_child_exited_nonzero: bool,
         completed_child_ignored_graceful_completion: bool,
         completed_child_was_force_killed_after_reaper_allowance: bool,
@@ -1591,6 +1850,22 @@ impl LocalnetFailure {
                 _child_owner_mutation_count,
                 true,
                 child_evidence,
+            ),
+            Some(PrivateChildEvent::OwnerAdmissionAwaiting {
+                fixed_control_descriptor_preserved,
+                owner_start_count,
+                certificate_initialization_count,
+                handshake_count,
+                ..
+            }) => (
+                Some(fixed_control_descriptor_preserved),
+                owner_start_count,
+                Some(certificate_initialization_count),
+                Some(handshake_count),
+                0,
+                0,
+                true,
+                PrivateChildRejectionEvidence::default(),
             ),
             // Only an actual rejected terminal supplies these three local
             // observations. Other terminal shapes, and no terminal at all,
@@ -1686,6 +1961,7 @@ impl LocalnetFailure {
                     .any(|event| event.outcome == I3LocalnetChildTerminalOutcome::Completed),
                 no_orphan_child_pids: all_children_reaped,
                 child_terminal_events,
+                unknown_child_failure_count,
                 completed_child_exited_nonzero,
                 completed_child_ignored_graceful_completion,
                 completed_child_was_force_killed_after_reaper_allowance,
@@ -1697,6 +1973,7 @@ impl LocalnetFailure {
             },
             fault_audit,
             retry_audit,
+            self.declared_owner_deadline_expired_audit,
             self.late_ingress_audit,
             self.late_ingress_evidence_rejection,
         )
@@ -1722,9 +1999,38 @@ impl LocalnetFailure {
             self.lifecycle_rejection_cause =
                 Some(I3LocalnetLifecycleRejectionCause::CompletedChildExitedNonzero);
         }
-        let fault_audit = self
-            .fault_profile
-            .and_then(|profile| supervisor.fault_audit(profile, &lineage.request_contract));
+        let fault_join = self.fault_profile.and_then(|profile| {
+            supervisor.fault_audit(
+                profile,
+                self.requester_local_wait_profile,
+                &lineage.request_contract,
+            )
+        });
+        if self.requester_local_wait_profile.is_some()
+            && fault_join.is_none()
+            && self.kind == I3LocalnetRunErrorKind::AmbiguousDelivery
+            && self.stage == I3LocalnetFailureStage::RequesterReplyOrReceiptNotObserved
+        {
+            // A selected wait is accepted only from A's actual pre/post
+            // runtime observations and the existing independent B admission
+            // join. A malformed emitted observation is evidence rejection,
+            // never remote unavailability or retained-pending proof.
+            self.kind = I3LocalnetRunErrorKind::LifecycleRejected;
+            self.stage = I3LocalnetFailureStage::LifecycleEvidenceRejected;
+            self.evidence.requester_pending_request_is_retained = false;
+        }
+        if fault_join
+            .as_ref()
+            .is_some_and(|(_, requester_pending_request_is_retained)| {
+                *requester_pending_request_is_retained
+            })
+        {
+            // This flag comes only from A's typed post-loss terminal after
+            // its own runtime retained the original request, and only after
+            // the parent joined that terminal with the selected fault route.
+            self.evidence.requester_pending_request_is_retained = true;
+        }
+        let fault_audit = fault_join.map(|(audit, _)| audit);
         if self.stage == I3LocalnetFailureStage::RequesterReplyOrReceiptNotObserved
             && fault_audit.as_ref().is_some_and(|audit| {
                 matches!(
@@ -1747,6 +2053,17 @@ impl LocalnetFailure {
             })
         {
             self.stage = I3LocalnetFailureStage::AfterRemoteAdmission;
+        }
+        if self.stage == I3LocalnetFailureStage::RequesterReplyOrReceiptNotObserved
+            && self
+                .retry_audit
+                .as_ref()
+                .is_some_and(|audit| audit.initial_owner_expiry().is_some())
+        {
+            // The retry join validates the retained B producer record and
+            // the exact session-one receive. It is stronger and distinct
+            // from a served remote admission.
+            self.stage = I3LocalnetFailureStage::AfterRemoteDeclaredOwnerExpiry;
         }
         let retry_audit = self.retry_audit.take();
         // This record is an optional projection of an already validated
@@ -1776,6 +2093,7 @@ impl LocalnetFailure {
         self.into_error_with_terminal_events(
             all_children_reaped,
             supervisor.terminal_events(),
+            supervisor.unknown_child_failure_count(),
             completed_nonzero,
             completed_hung,
             completed_hung,
@@ -1858,12 +2176,19 @@ struct PrivateChildControl {
     // A private, post-admission observer-event falsifier. It is not carried
     // in the generated request/reply traffic or runtime dispatch.
     fault_audit_falsifier: Option<I3LocalnetFaultAuditFalsifier>,
+    // A requester-local observer-only wait, selected only after this child
+    // has actually observed the selected reply-loss schedule.
+    requester_local_wait_profile: Option<I3LocalnetRequesterLocalWaitProfile>,
+    requester_local_wait_falsifier: Option<I3LocalnetRequesterLocalWaitFalsifier>,
     // I3-3's bounded two-session schedules.  These controls select only
     // actual adapter timing and post-send observer evidence; they never
     // transport a request, grant, expected result, or source operation.
     retry_profile: Option<I3LocalnetRetryProfile>,
     retry_falsifier: Option<I3LocalnetRetryFalsifier>,
     retry_audit_falsifier: Option<I3LocalnetRetryAuditFalsifier>,
+    // The only owner-runtime scheduling hint carried to B. It selects no
+    // semantic result; B acts only after an actual Awaiting disposition.
+    owner_admission_drive_profile: Option<I3LocalnetOwnerAdmissionDriveProfile>,
     late_ingress_profile: Option<I3LocalnetLateIngressProfile>,
     late_ingress_falsifier: Option<I3LocalnetLateIngressFalsifier>,
     adapter_delivery_profile: Option<I3LocalnetAdapterDeliveryProfile>,
@@ -1973,6 +2298,13 @@ enum PrivateChildEvent {
         slot: I3LocalnetChildSlot,
         request_identity_ref: Option<String>,
         requester_observation: Option<I3LocalnetRequesterFaultObservation>,
+        // Set only by A after its own runtime still retains the exact
+        // source-generated request following an observed missing reply.
+        // Other fault terminals make no requester-state claim.
+        requester_pending_request_is_retained: Option<bool>,
+        // Present only when A completed the selected actual local wait after
+        // observing the reply loss. It is never a transport or semantic fact.
+        requester_local_wait: Option<PrivateRequesterLocalWaitEvidence>,
         remote_admission: Option<PrivateRemoteAdmissionEvidence>,
         semantic_admission_count: usize,
         owner_mutation_count: usize,
@@ -2026,6 +2358,34 @@ enum PrivateChildEvent {
         runtime_occurrence_count: usize,
         observer_evidence: PrivateChildObserverEvidence,
         late_ingress_evidence: PrivateChildLateIngressEvidence,
+    },
+    /// A generic child error carries no trustworthy lifecycle, transport, or
+    /// semantic counters. Keeping it separate from `Rejected` prevents an
+    /// unobserved state from being rendered as an observed all-zero state.
+    UnknownLifecycleFailure {
+        slot: I3LocalnetChildSlot,
+    },
+    /// B alone records this exact branch after the ordinary private receive
+    /// path has admitted a source-budgeted request but before a trusted owner
+    /// runtime driver has resolved it. It exposes only fixed counters and
+    /// verified transport booleans, never control bytes, keys, a clock handle,
+    /// a permit, raw carrier bytes, or a semantic expected result.
+    OwnerAdmissionAwaiting {
+        slot: I3LocalnetChildSlot,
+        fixed_control_descriptor_preserved: bool,
+        owner_start_count: usize,
+        certificate_initialization_count: usize,
+        handshake_count: usize,
+        trusted_control_consumed: bool,
+        tainted_image_consumed: bool,
+        tls_peer_verified: bool,
+        reciprocal_preface_verified: bool,
+        reliable_bidi_stream_count: usize,
+        quic_datagrams_enabled: bool,
+        semantic_admission_count: usize,
+        owner_admission_awaiting_count: usize,
+        owner_serve_count: usize,
+        owner_mutation_count: usize,
     },
 }
 
@@ -2125,7 +2485,100 @@ struct PrivateChildRetryEvidence {
     initial_request_delivery: Option<PrivateDeliveryEvidence>,
     reconnect_request_delivery: Option<PrivateDeliveryEvidence>,
     initial_owner_admission: Option<PrivateRemoteAdmissionEvidence>,
+    initial_owner_expiry: Option<PrivateOwnerAdmissionExpiryEvidence>,
     reconnect_owner_outcome: Option<PrivateReconnectOwnerOutcome>,
+}
+
+/// A-only observer evidence captured around one actual, fixed local wait.
+/// It deliberately contains no tick, session, carrier, source, or semantic
+/// result. The parent accepts it only alongside the independently emitted B
+/// remote-admission evidence for the existing loss route.
+#[derive(Clone, Debug, Serialize, Deserialize)]
+#[serde(deny_unknown_fields)]
+struct PrivateRequesterLocalWaitEvidence {
+    observed_elapsed: Duration,
+    required_minimum_elapsed: Duration,
+    pending_before: usize,
+    pending_after: usize,
+    local_receipt_before: usize,
+    local_receipt_after: usize,
+    terminal_failure_before: usize,
+    terminal_failure_after: usize,
+}
+
+impl PrivateRequesterLocalWaitEvidence {
+    fn public(&self) -> I3LocalnetRequesterLocalWaitAudit {
+        I3LocalnetRequesterLocalWaitAudit::from_actual_observation(
+            self.observed_elapsed,
+            self.required_minimum_elapsed,
+            self.pending_before,
+            self.pending_after,
+            self.local_receipt_before,
+            self.local_receipt_after,
+            self.terminal_failure_before,
+            self.terminal_failure_after,
+        )
+    }
+
+    fn is_exact(&self) -> bool {
+        self.required_minimum_elapsed == REQUESTER_LOCAL_WAIT_MINIMUM
+            && self.observed_elapsed >= self.required_minimum_elapsed
+            && self.pending_before == 1
+            && self.pending_after == 1
+            && self.local_receipt_before == 0
+            && self.local_receipt_after == 0
+            && self.terminal_failure_before == 0
+            && self.terminal_failure_after == 0
+    }
+}
+
+/// B-local declared-expiry observation, formed only after the runtime returns
+/// the generated reply and exposes its producer-derived decision record. It
+/// deliberately contains no host tick, driver, carrier bytes, authority,
+/// witness, or source text.
+#[derive(Clone, Debug, Serialize, Deserialize)]
+#[serde(deny_unknown_fields)]
+struct PrivateOwnerAdmissionExpiryEvidence {
+    // Retained privately only to join B's actual initial receive to the
+    // requester-side first-session delivery in the reconnect audit. The
+    // public expiry projection deliberately does not expose a carrier record.
+    request_receive: Option<Box<PrivateDeliveryEvidence>>,
+    decision_commitment_ref: String,
+    decision_occurrence_ref: String,
+    generated_reply_count: usize,
+    expired_count: usize,
+    owner_serve_count: usize,
+    owner_mutation_count: usize,
+}
+
+impl PrivateOwnerAdmissionExpiryEvidence {
+    fn public(&self) -> I3LocalnetOwnerAdmissionExpiryEvidence {
+        I3LocalnetOwnerAdmissionExpiryEvidence {
+            decision_commitment_ref: self.decision_commitment_ref.clone(),
+            decision_occurrence_ref: self.decision_occurrence_ref.clone(),
+            generated_reply_count: self.generated_reply_count,
+            expired_count: self.expired_count,
+            owner_serve_count: self.owner_serve_count,
+            owner_mutation_count: self.owner_mutation_count,
+        }
+    }
+
+    fn is_exact_declared_expiry(&self) -> bool {
+        !self.decision_commitment_ref.is_empty()
+            && !self.decision_occurrence_ref.is_empty()
+            && self.generated_reply_count == 1
+            && self.expired_count == 1
+            && self.owner_serve_count == 0
+            && self.owner_mutation_count == 0
+    }
+}
+
+enum PrivateResolvedOwnerReply {
+    Served(mir_runtime::sys5_i3_process_runtime::Sys5I3ProcessMessage),
+    DeclaredDeadlineExpired {
+        reply: mir_runtime::sys5_i3_process_runtime::Sys5I3ProcessMessage,
+        expiry: PrivateOwnerAdmissionExpiryEvidence,
+    },
 }
 
 #[derive(Clone, Debug, Serialize, Deserialize)]
@@ -2150,6 +2603,13 @@ enum PrivateReconnectOwnerOutcome {
     DuplicateRequestRejected {
         candidate_commitment_ref: String,
         network_occurrence_ref: String,
+        owner_serve_count: usize,
+        owner_mutation_count: usize,
+    },
+    DuplicateRequestRejectedAfterDeclaredDeadlineExpired {
+        candidate_commitment_ref: String,
+        network_occurrence_ref: String,
+        owner_expired_count: usize,
         owner_serve_count: usize,
         owner_mutation_count: usize,
     },
@@ -2223,6 +2683,8 @@ struct PrivateChildObserverEvidence {
     owner_serve_occurrence_ref: Option<String>,
     owner_write_occurrence_ref: Option<String>,
     requester_receipt_occurrence_ref: Option<String>,
+    requester_terminal_failure_occurrence_ref: Option<String>,
+    owner_expiry: Option<PrivateOwnerAdmissionExpiryEvidence>,
     retry_evidence: Option<PrivateChildRetryEvidence>,
 }
 
@@ -2308,6 +2770,8 @@ impl PrivateChildEvent {
                 | Self::HandledDeliveryFault { .. }
                 | Self::AdapterDeliveryFault { .. }
                 | Self::LateIngress { .. }
+                | Self::UnknownLifecycleFailure { .. }
+                | Self::OwnerAdmissionAwaiting { .. }
         )
     }
 
@@ -2331,7 +2795,9 @@ impl PrivateChildEvent {
             Self::Ready { .. }
             | Self::Rejected { .. }
             | Self::AdapterDeliveryFault { .. }
-            | Self::LateIngress { .. } => None,
+            | Self::LateIngress { .. }
+            | Self::UnknownLifecycleFailure { .. }
+            | Self::OwnerAdmissionAwaiting { .. } => None,
         }
     }
 
@@ -2356,8 +2822,12 @@ impl PrivateChildEvent {
             | Self::LateIngress {
                 semantic_admission_count,
                 ..
+            }
+            | Self::OwnerAdmissionAwaiting {
+                semantic_admission_count,
+                ..
             } => Some(*semantic_admission_count),
-            Self::Ready { .. } => None,
+            Self::Ready { .. } | Self::UnknownLifecycleFailure { .. } => None,
         }
     }
 
@@ -2389,6 +2859,7 @@ impl PrivateChildEvent {
                 ),
                 tls_peer_verified: Some(*tls_peer_verified),
                 reciprocal_preface_verified: Some(*reciprocal_preface_verified),
+                owner_admission_awaiting_count: None,
                 observed_exit_status_code: None,
                 was_force_killed: false,
             }),
@@ -2406,6 +2877,7 @@ impl PrivateChildEvent {
                 unauthenticated_semantic_admission_count: None,
                 tls_peer_verified: None,
                 reciprocal_preface_verified: None,
+                owner_admission_awaiting_count: None,
                 observed_exit_status_code: None,
                 was_force_killed: false,
             }),
@@ -2433,6 +2905,7 @@ impl PrivateChildEvent {
                 unauthenticated_semantic_admission_count: None,
                 tls_peer_verified: None,
                 reciprocal_preface_verified: None,
+                owner_admission_awaiting_count: None,
                 observed_exit_status_code: None,
                 was_force_killed: false,
             }),
@@ -2466,6 +2939,7 @@ impl PrivateChildEvent {
                 ),
                 tls_peer_verified: Some(*tls_peer_verified),
                 reciprocal_preface_verified: Some(*reciprocal_preface_verified),
+                owner_admission_awaiting_count: None,
                 observed_exit_status_code: None,
                 was_force_killed: false,
             }),
@@ -2496,10 +2970,35 @@ impl PrivateChildEvent {
                 ),
                 tls_peer_verified: Some(*tls_peer_verified),
                 reciprocal_preface_verified: Some(*reciprocal_preface_verified),
+                owner_admission_awaiting_count: None,
                 observed_exit_status_code: None,
                 was_force_killed: false,
             }),
-            Self::Ready { .. } => None,
+            Self::OwnerAdmissionAwaiting {
+                slot,
+                trusted_control_consumed,
+                tls_peer_verified,
+                reciprocal_preface_verified,
+                semantic_admission_count,
+                owner_admission_awaiting_count,
+                owner_serve_count,
+                owner_mutation_count,
+                ..
+            } => Some(I3LocalnetChildTerminalEvent {
+                slot: Some(*slot),
+                outcome: I3LocalnetChildTerminalOutcome::OwnerAdmissionAwaiting,
+                semantic_admission_count: *semantic_admission_count,
+                owner_mutation_count: *owner_mutation_count,
+                owner_serve_count: Some(*owner_serve_count),
+                trusted_control_consumed: Some(*trusted_control_consumed),
+                unauthenticated_semantic_admission_count: Some(0),
+                tls_peer_verified: Some(*tls_peer_verified),
+                reciprocal_preface_verified: Some(*reciprocal_preface_verified),
+                owner_admission_awaiting_count: Some(*owner_admission_awaiting_count),
+                observed_exit_status_code: None,
+                was_force_killed: false,
+            }),
+            Self::Ready { .. } | Self::UnknownLifecycleFailure { .. } => None,
         }
     }
 
@@ -2723,6 +3222,9 @@ pub fn run_i3_process_localnet(
     let late_ingress_profile = request.late_ingress_profile;
     let late_ingress_falsifier = request.late_ingress_falsifier;
     let adapter_delivery_profile = request.adapter_delivery_profile;
+    let owner_admission_drive_profile = request.owner_admission_drive_profile;
+    let requester_local_wait_profile = request.requester_local_wait_profile;
+    let requester_local_wait_falsifier = request.requester_local_wait_falsifier;
     if deadline.is_zero() {
         return Err(LocalnetFailure::lifecycle().into_error(true));
     }
@@ -2743,7 +3245,9 @@ pub fn run_i3_process_localnet(
             evidence: LocalnetRejectionEvidence::default(),
             lifecycle_rejection_cause: None,
             fault_profile: None,
+            requester_local_wait_profile: None,
             retry_audit: None,
+            declared_owner_deadline_expired_audit: None,
             late_ingress_audit: None,
             late_ingress_evidence_rejection: None,
         }
@@ -2762,7 +3266,9 @@ pub fn run_i3_process_localnet(
             evidence: LocalnetRejectionEvidence::default(),
             lifecycle_rejection_cause: None,
             fault_profile: None,
+            requester_local_wait_profile: None,
             retry_audit: None,
+            declared_owner_deadline_expired_audit: None,
             late_ingress_audit: None,
             late_ingress_evidence_rejection: None,
         }
@@ -2909,9 +3415,12 @@ pub fn run_i3_process_localnet(
     if request.falsifier.is_some()
         && (request.fault_profile.is_some()
             || request.fault_audit_falsifier.is_some()
+            || requester_local_wait_profile.is_some()
+            || requester_local_wait_falsifier.is_some()
             || request.retry_profile.is_some()
             || request.retry_falsifier.is_some()
             || request.retry_audit_falsifier.is_some()
+            || owner_admission_drive_profile.is_some()
             || late_ingress_profile.is_some()
             || late_ingress_falsifier.is_some()
             || adapter_delivery_profile.is_some())
@@ -2921,6 +3430,22 @@ pub fn run_i3_process_localnet(
     if request.fault_audit_falsifier.is_some()
         && request.fault_profile != Some(I3LocalnetFaultProfile::DisconnectAfterRemoteAdmission)
     {
+        return Err(LocalnetFailure::lifecycle().into_error(true));
+    }
+    if requester_local_wait_profile.is_some()
+        && (request.fault_profile != Some(I3LocalnetFaultProfile::DisconnectAfterRemoteAdmission)
+            || request.fault_audit_falsifier.is_some()
+            || request.retry_profile.is_some()
+            || request.retry_falsifier.is_some()
+            || request.retry_audit_falsifier.is_some()
+            || owner_admission_drive_profile.is_some()
+            || late_ingress_profile.is_some()
+            || late_ingress_falsifier.is_some()
+            || adapter_delivery_profile.is_some())
+    {
+        return Err(LocalnetFailure::lifecycle().into_error(true));
+    }
+    if requester_local_wait_falsifier.is_some() && requester_local_wait_profile.is_none() {
         return Err(LocalnetFailure::lifecycle().into_error(true));
     }
     if request.retry_profile.is_some()
@@ -2936,6 +3461,20 @@ pub fn run_i3_process_localnet(
     if request.retry_audit_falsifier.is_some()
         && request.retry_profile
             != Some(I3LocalnetRetryProfile::ReconnectAfterOwnerAdmissionBeforeReply)
+    {
+        return Err(LocalnetFailure::lifecycle().into_error(true));
+    }
+    if owner_admission_drive_profile.is_some()
+        && (request.fault_profile.is_some()
+            || request.fault_audit_falsifier.is_some()
+            || request.retry_profile.is_some_and(|profile| {
+                profile != I3LocalnetRetryProfile::ReconnectAfterOwnerAdmissionBeforeReply
+            })
+            || request.retry_falsifier.is_some()
+            || request.retry_audit_falsifier.is_some()
+            || late_ingress_profile.is_some()
+            || late_ingress_falsifier.is_some()
+            || adapter_delivery_profile.is_some())
     {
         return Err(LocalnetFailure::lifecycle().into_error(true));
     }
@@ -3036,9 +3575,12 @@ pub fn run_i3_process_localnet(
                 delay_supervisor_exit_observation,
                 fault_profile,
                 fault_audit_falsifier,
+                requester_local_wait_profile,
+                requester_local_wait_falsifier,
                 retry_profile,
                 retry_falsifier,
                 retry_audit_falsifier,
+                owner_admission_drive_profile,
                 late_ingress_profile,
                 late_ingress_falsifier,
                 adapter_delivery_profile,
@@ -3095,9 +3637,12 @@ fn run_swapped_pair_falsifier(
         emit_request_before_wrong_peer_rejection: false,
         fault_profile: None,
         fault_audit_falsifier: None,
+        requester_local_wait_profile: None,
+        requester_local_wait_falsifier: None,
         retry_profile: None,
         retry_falsifier: None,
         retry_audit_falsifier: None,
+        owner_admission_drive_profile: None,
         late_ingress_profile: None,
         late_ingress_falsifier: None,
         adapter_delivery_profile: None,
@@ -3121,9 +3666,12 @@ fn run_swapped_pair_falsifier(
         emit_request_before_wrong_peer_rejection: false,
         fault_profile: None,
         fault_audit_falsifier: None,
+        requester_local_wait_profile: None,
+        requester_local_wait_falsifier: None,
         retry_profile: None,
         retry_falsifier: None,
         retry_audit_falsifier: None,
+        owner_admission_drive_profile: None,
         late_ingress_profile: None,
         late_ingress_falsifier: None,
         adapter_delivery_profile: None,
@@ -3170,6 +3718,7 @@ fn is_expected_suppressed_owner_fault_requester_event(event: &PrivateChildEvent)
             requester_observation: Some(
                 I3LocalnetRequesterFaultObservation::ReplyOrReceiptNotObserved,
             ),
+            requester_pending_request_is_retained: Some(true),
             remote_admission: None,
             semantic_admission_count: 0,
             owner_mutation_count: 0,
@@ -3187,6 +3736,7 @@ fn is_profile_shaped_normal_delivery_fault_pair(
         slot: I3LocalnetChildSlot::ProcessA,
         request_identity_ref: Some(request_identity_ref),
         requester_observation: Some(requester_observation),
+        requester_pending_request_is_retained,
         remote_admission: None,
         ..
     } = requester
@@ -3213,6 +3763,7 @@ fn is_profile_shaped_normal_delivery_fault_pair(
         }
         I3LocalnetFaultProfile::DisconnectAfterRemoteAdmission => {
             *requester_observation == I3LocalnetRequesterFaultObservation::ReplyOrReceiptNotObserved
+                && *requester_pending_request_is_retained == Some(true)
                 && matches!(
                     owner,
                     PrivateChildEvent::HandledDeliveryFault {
@@ -3397,9 +3948,12 @@ fn run_positive_or_peer_falsifier(
     delay_supervisor_exit_observation: bool,
     fault_profile: Option<I3LocalnetFaultProfile>,
     fault_audit_falsifier: Option<I3LocalnetFaultAuditFalsifier>,
+    requester_local_wait_profile: Option<I3LocalnetRequesterLocalWaitProfile>,
+    requester_local_wait_falsifier: Option<I3LocalnetRequesterLocalWaitFalsifier>,
     retry_profile: Option<I3LocalnetRetryProfile>,
     retry_falsifier: Option<I3LocalnetRetryFalsifier>,
     retry_audit_falsifier: Option<I3LocalnetRetryAuditFalsifier>,
+    owner_admission_drive_profile: Option<I3LocalnetOwnerAdmissionDriveProfile>,
     late_ingress_profile: Option<I3LocalnetLateIngressProfile>,
     late_ingress_falsifier: Option<I3LocalnetLateIngressFalsifier>,
     adapter_delivery_profile: Option<I3LocalnetAdapterDeliveryProfile>,
@@ -3437,9 +3991,12 @@ fn run_positive_or_peer_falsifier(
         emit_request_before_wrong_peer_rejection: false,
         fault_profile,
         fault_audit_falsifier,
+        requester_local_wait_profile: None,
+        requester_local_wait_falsifier: None,
         retry_profile,
         retry_falsifier,
         retry_audit_falsifier,
+        owner_admission_drive_profile,
         late_ingress_profile,
         late_ingress_falsifier,
         adapter_delivery_profile,
@@ -3515,6 +4072,11 @@ fn run_positive_or_peer_falsifier(
                 rejection,
             ));
         }
+        // The generic child wrapper has no authenticated or typed lifecycle
+        // observation to turn into an all-zero pre-start assertion.
+        PrivateChildEvent::UnknownLifecycleFailure { .. } => {
+            return Err(LocalnetFailure::lifecycle_evidence_rejected());
+        }
         _ => return Err(LocalnetFailure::lifecycle()),
     };
     let client_control = PrivateChildControl {
@@ -3534,9 +4096,12 @@ fn run_positive_or_peer_falsifier(
         emit_request_before_wrong_peer_rejection: wrong_peer,
         fault_profile,
         fault_audit_falsifier: None,
+        requester_local_wait_profile,
+        requester_local_wait_falsifier,
         retry_profile,
         retry_falsifier,
         retry_audit_falsifier,
+        owner_admission_drive_profile,
         late_ingress_profile,
         late_ingress_falsifier,
         adapter_delivery_profile,
@@ -3886,6 +4451,24 @@ fn run_positive_or_peer_falsifier(
             ));
         }
         (
+            PrivateChildEvent::UnknownLifecycleFailure {
+                slot: I3LocalnetChildSlot::ProcessA,
+            },
+            Some(
+                owner @ PrivateChildEvent::OwnerAdmissionAwaiting {
+                    slot: I3LocalnetChildSlot::ProcessB,
+                    ..
+                },
+            ),
+        ) => {
+            // B emitted this exact record only after the verified session
+            // admitted the source-budgeted request and retained it Awaiting.
+            // A's later generic EOF/error cannot erase that owner observation
+            // or relabel it as a pre-start failure.
+            return Err(LocalnetFailure::owner_admission_drive_required(owner)
+                .after_observed_owner_runtime_start());
+        }
+        (
             requester @ PrivateChildEvent::HandledDeliveryFault {
                 slot: I3LocalnetChildSlot::ProcessA,
                 ..
@@ -3902,6 +4485,7 @@ fn run_positive_or_peer_falsifier(
         {
             return Err(LocalnetFailure::delivery_fault(
                 fault_profile.expect("guarded delivery-fault profile"),
+                requester_local_wait_profile,
             ));
         }
         (
@@ -3924,6 +4508,7 @@ fn run_positive_or_peer_falsifier(
         {
             return Err(LocalnetFailure::delivery_fault(
                 I3LocalnetFaultProfile::DisconnectAfterRemoteAdmissionSuppressOwnerAudit,
+                None,
             ));
         }
         (
@@ -3953,7 +4538,12 @@ fn run_positive_or_peer_falsifier(
             {
                 (a, b)
             }
-            _ => return Err(LocalnetFailure::lifecycle()),
+            // B Ready was observed before A launched. A later unknown child
+            // failure therefore cannot truthfully become `BeforeOwnerStart`.
+            _ => {
+                return Err(LocalnetFailure::lifecycle_evidence_rejected()
+                    .after_observed_owner_runtime_start());
+            }
         },
     };
     let request_write_observation = a
@@ -3970,6 +4560,85 @@ fn run_positive_or_peer_falsifier(
             }) => {}
         None if request_write_observation.is_none() => {}
         _ => return Err(LocalnetFailure::lifecycle()),
+    }
+    if let Some(expiry_audit) = joined_declared_owner_deadline_expired_evidence(lineage, &a, &b) {
+        // A semantic terminal failure uses the same verified QUIC route as a
+        // receipt, but it has no owner serve/write and no requester receipt.
+        // Validate that exact completed shape before retaining the natural
+        // child exits in the error audit.
+        if a.generated_request_count != 1
+            || a.receipt_count != 0
+            || a.served_count != 0
+            || a.write_count != 0
+            || a.reply_count != 0
+            || a.runtime_occurrence_count != 1
+            || b.generated_request_count != 0
+            || b.served_count != 0
+            || b.write_count != 0
+            || b.reply_count != 1
+            || b.receipt_count != 0
+            || b.runtime_occurrence_count != 0
+            || !a.tls_peer_verified
+            || !b.tls_peer_verified
+            || !a.reciprocal_preface_verified
+            || !b.reciprocal_preface_verified
+            || a.reliable_bidi_stream_count != 1
+            || b.reliable_bidi_stream_count != 1
+            || a.quic_datagrams_enabled
+            || b.quic_datagrams_enabled
+            || a.semantic_admission_count != 1
+            || b.semantic_admission_count != 1
+            || a.unauthenticated_semantic_admission_count != 0
+            || b.unauthenticated_semantic_admission_count != 0
+            || a.assigned_loci
+                != I3LocalnetChildSlot::ProcessA
+                    .assigned_loci()
+                    .map(str::to_owned)
+            || b.assigned_loci
+                != I3LocalnetChildSlot::ProcessB
+                    .assigned_loci()
+                    .map(str::to_owned)
+            || !a.exec_confirmed
+            || !b.exec_confirmed
+            || !a.trusted_control_consumed
+            || !b.trusted_control_consumed
+            || !a.tainted_image_consumed
+            || !b.tainted_image_consumed
+        {
+            return Err(LocalnetFailure::lifecycle());
+        }
+        let mut terminal_children = BTreeMap::new();
+        for child in &supervisor.children {
+            let report = match child.slot {
+                I3LocalnetChildSlot::ProcessA => &a,
+                I3LocalnetChildSlot::ProcessB => &b,
+            };
+            terminal_children.insert(
+                child.slot,
+                I3LocalnetChildAudit {
+                    slot: child.slot,
+                    pid: child.child.id(),
+                    reaped: false,
+                    exec_confirmed: report.exec_confirmed
+                        && report.slot == child.slot
+                        && child.child.id() != std::process::id(),
+                    assigned_loci: report.assigned_loci.clone(),
+                    trusted_control_consumed: report.trusted_control_consumed,
+                    tainted_image_consumed: report.tainted_image_consumed,
+                    observed_exit_status: None,
+                    was_force_killed: false,
+                },
+            );
+        }
+        if !terminal_children.values().all(|child| child.exec_confirmed)
+            || !supervisor.mark_reaped_in(&mut terminal_children)
+        {
+            return Err(LocalnetFailure::lifecycle());
+        }
+        return Err(
+            LocalnetFailure::declared_owner_deadline_expired_consumed(expiry_audit)
+                .after_observed_owner_runtime_start(),
+        );
     }
     if a.generated_request_count != 1
         || a.receipt_count != 1
@@ -4562,14 +5231,28 @@ impl LocalnetSupervisor {
             .collect()
     }
 
+    /// A child may report only that it failed; this is intentionally not
+    /// upgraded into an all-zero semantic or owner-runtime terminal record.
+    fn unknown_child_failure_count(&self) -> usize {
+        self.children
+            .iter()
+            .filter(|child| {
+                child.terminal_event.as_ref().is_some_and(|event| {
+                    matches!(event, PrivateChildEvent::UnknownLifecycleFailure { .. })
+                })
+            })
+            .count()
+    }
+
     /// Join only the two actual child terminal events.  The selected profile
     /// chooses which event shape is admissible, but never fills a reference,
     /// counter, or remote conclusion itself.
     fn fault_audit(
         &self,
         profile: I3LocalnetFaultProfile,
+        requester_local_wait_profile: Option<I3LocalnetRequesterLocalWaitProfile>,
         request_contract: &Sys5I3AdapterCarrierContract,
-    ) -> Option<I3LocalnetFaultAudit> {
+    ) -> Option<(I3LocalnetFaultAudit, bool)> {
         let requester = self
             .children
             .iter()
@@ -4585,6 +5268,8 @@ impl LocalnetSupervisor {
             slot: requester_slot,
             request_identity_ref: Some(request_identity_ref),
             requester_observation: Some(requester_observation),
+            requester_pending_request_is_retained,
+            requester_local_wait,
             remote_admission: None,
             ..
         } = requester
@@ -4594,120 +5279,146 @@ impl LocalnetSupervisor {
         if *requester_slot != I3LocalnetChildSlot::ProcessA || request_identity_ref.is_empty() {
             return None;
         }
-        let (remote_admission, remote_evidence_rejection) = match profile {
-            I3LocalnetFaultProfile::DisconnectBeforeRequestCarrierWrite
-                if *requester_observation
-                    == I3LocalnetRequesterFaultObservation::RequestCarrierWriteNotAttempted =>
+        let validated_requester_local_wait = match requester_local_wait_profile {
+            None if requester_local_wait.is_none() => None,
+            Some(I3LocalnetRequesterLocalWaitProfile::WaitLocallyAfterObservedLoss)
+                if profile == I3LocalnetFaultProfile::DisconnectAfterRemoteAdmission =>
             {
-                match owner {
-                    Some(PrivateChildEvent::HandledDeliveryFault {
-                        slot: I3LocalnetChildSlot::ProcessB,
-                        request_identity_ref: None,
-                        requester_observation: None,
-                        remote_admission:
-                            Some(PrivateRemoteAdmissionEvidence::NoAdmission {
-                                owner_serve_count,
-                                owner_mutation_count: remote_owner_mutation_count,
-                            }),
-                        semantic_admission_count: 0,
-                        owner_mutation_count: 0,
-                        ..
-                    }) if *owner_serve_count == 0 && *remote_owner_mutation_count == 0 => (
-                        Some(I3LocalnetRemoteAdmissionEvidence::NoAdmission {
-                            owner_serve_count: *owner_serve_count,
-                            owner_mutation_count: *remote_owner_mutation_count,
-                        }),
-                        None,
-                    ),
-                    Some(PrivateChildEvent::HandledDeliveryFault {
-                        slot: I3LocalnetChildSlot::ProcessB,
-                        ..
-                    }) => (
-                        None,
-                        Some(I3LocalnetRemoteEvidenceRejection::ProvenanceMismatch),
-                    ),
-                    _ => (
-                        None,
-                        Some(I3LocalnetRemoteEvidenceRejection::ProvenanceMismatch),
-                    ),
+                let evidence = requester_local_wait.as_ref()?;
+                if !evidence.is_exact() {
+                    return None;
                 }
-            }
-            I3LocalnetFaultProfile::DisconnectAfterRemoteAdmission
-                if *requester_observation
-                    == I3LocalnetRequesterFaultObservation::ReplyOrReceiptNotObserved =>
-            {
-                match owner {
-                    Some(PrivateChildEvent::HandledDeliveryFault {
-                        slot: I3LocalnetChildSlot::ProcessB,
-                        request_identity_ref: Some(owner_request_identity_ref),
-                        requester_observation: None,
-                        remote_admission:
-                            Some(PrivateRemoteAdmissionEvidence::Admitted {
-                                request_receive,
-                                owner_serve_count,
-                                owner_mutation_count: remote_owner_mutation_count,
-                                owner_serve_occurrence_ref,
-                                owner_write_occurrence_ref,
-                            }),
-                        semantic_admission_count: 1,
-                        owner_mutation_count: 1,
-                        ..
-                    }) if owner_request_identity_ref == request_identity_ref
-                        && request_receive.semantic_request_identity_ref
-                            == *request_identity_ref
-                        && *owner_serve_count == 1
-                        && *remote_owner_mutation_count == 1
-                        && !owner_serve_occurrence_ref.is_empty()
-                        && owner_write_occurrence_ref
-                            .as_deref()
-                            .is_some_and(|reference| !reference.is_empty())
-                        && request_receive.linked_request_identity_ref.is_none()
-                        && !request_receive.carrier_ref.is_empty()
-                        && !request_receive.network_occurrence_ref.is_empty()
-                        && delivery_matches_contract(request_receive, request_contract) =>
-                    {
-                        (
-                            Some(I3LocalnetRemoteAdmissionEvidence::Admitted {
-                                request_receive: Box::new(delivery_record(
-                                    I3LocalnetDeliveryPhase::RequestReceive,
-                                    request_receive,
-                                )),
-                                owner_serve_count: *owner_serve_count,
-                                owner_mutation_count: *remote_owner_mutation_count,
-                                owner_serve_occurrence_ref: owner_serve_occurrence_ref.clone(),
-                                owner_write_occurrence_ref: owner_write_occurrence_ref.clone(),
-                            }),
-                            None,
-                        )
-                    }
-                    Some(PrivateChildEvent::HandledDeliveryFault {
-                        slot: I3LocalnetChildSlot::ProcessB,
-                        ..
-                    }) => (
-                        None,
-                        Some(I3LocalnetRemoteEvidenceRejection::ProvenanceMismatch),
-                    ),
-                    _ => (
-                        None,
-                        Some(I3LocalnetRemoteEvidenceRejection::ProvenanceMismatch),
-                    ),
-                }
-            }
-            I3LocalnetFaultProfile::DisconnectAfterRemoteAdmissionSuppressOwnerAudit
-                if *requester_observation
-                    == I3LocalnetRequesterFaultObservation::ReplyOrReceiptNotObserved
-                    && owner.is_none() =>
-            {
-                (None, None)
+                Some(evidence.public())
             }
             _ => return None,
         };
-        Some(I3LocalnetFaultAudit::from_actual_child_events(
-            profile,
-            request_identity_ref.clone(),
-            *requester_observation,
-            remote_admission,
-            remote_evidence_rejection,
+        let (remote_admission, remote_evidence_rejection, requester_pending_request_is_retained) =
+            match profile {
+                I3LocalnetFaultProfile::DisconnectBeforeRequestCarrierWrite
+                    if *requester_observation
+                        == I3LocalnetRequesterFaultObservation::RequestCarrierWriteNotAttempted =>
+                {
+                    match owner {
+                        Some(PrivateChildEvent::HandledDeliveryFault {
+                            slot: I3LocalnetChildSlot::ProcessB,
+                            request_identity_ref: None,
+                            requester_observation: None,
+                            remote_admission:
+                                Some(PrivateRemoteAdmissionEvidence::NoAdmission {
+                                    owner_serve_count,
+                                    owner_mutation_count: remote_owner_mutation_count,
+                                }),
+                            semantic_admission_count: 0,
+                            owner_mutation_count: 0,
+                            ..
+                        }) if *owner_serve_count == 0 && *remote_owner_mutation_count == 0 => (
+                            Some(I3LocalnetRemoteAdmissionEvidence::NoAdmission {
+                                owner_serve_count: *owner_serve_count,
+                                owner_mutation_count: *remote_owner_mutation_count,
+                            }),
+                            None,
+                            false,
+                        ),
+                        Some(PrivateChildEvent::HandledDeliveryFault {
+                            slot: I3LocalnetChildSlot::ProcessB,
+                            ..
+                        }) => (
+                            None,
+                            Some(I3LocalnetRemoteEvidenceRejection::ProvenanceMismatch),
+                            false,
+                        ),
+                        _ => (
+                            None,
+                            Some(I3LocalnetRemoteEvidenceRejection::ProvenanceMismatch),
+                            false,
+                        ),
+                    }
+                }
+                I3LocalnetFaultProfile::DisconnectAfterRemoteAdmission
+                    if *requester_observation
+                        == I3LocalnetRequesterFaultObservation::ReplyOrReceiptNotObserved
+                        && *requester_pending_request_is_retained == Some(true) =>
+                {
+                    match owner {
+                        Some(PrivateChildEvent::HandledDeliveryFault {
+                            slot: I3LocalnetChildSlot::ProcessB,
+                            request_identity_ref: Some(owner_request_identity_ref),
+                            requester_observation: None,
+                            remote_admission:
+                                Some(PrivateRemoteAdmissionEvidence::Admitted {
+                                    request_receive,
+                                    owner_serve_count,
+                                    owner_mutation_count: remote_owner_mutation_count,
+                                    owner_serve_occurrence_ref,
+                                    owner_write_occurrence_ref,
+                                }),
+                            semantic_admission_count: 1,
+                            owner_mutation_count: 1,
+                            ..
+                        }) if owner_request_identity_ref == request_identity_ref
+                            && request_receive.semantic_request_identity_ref
+                                == *request_identity_ref
+                            && *owner_serve_count == 1
+                            && *remote_owner_mutation_count == 1
+                            && !owner_serve_occurrence_ref.is_empty()
+                            && owner_write_occurrence_ref
+                                .as_deref()
+                                .is_some_and(|reference| !reference.is_empty())
+                            && request_receive.linked_request_identity_ref.is_none()
+                            && !request_receive.carrier_ref.is_empty()
+                            && !request_receive.network_occurrence_ref.is_empty()
+                            && delivery_matches_contract(request_receive, request_contract) =>
+                        {
+                            (
+                                Some(I3LocalnetRemoteAdmissionEvidence::Admitted {
+                                    request_receive: Box::new(delivery_record(
+                                        I3LocalnetDeliveryPhase::RequestReceive,
+                                        request_receive,
+                                    )),
+                                    owner_serve_count: *owner_serve_count,
+                                    owner_mutation_count: *remote_owner_mutation_count,
+                                    owner_serve_occurrence_ref: owner_serve_occurrence_ref.clone(),
+                                    owner_write_occurrence_ref: owner_write_occurrence_ref.clone(),
+                                }),
+                                None,
+                                true,
+                            )
+                        }
+                        Some(PrivateChildEvent::HandledDeliveryFault {
+                            slot: I3LocalnetChildSlot::ProcessB,
+                            ..
+                        }) => (
+                            None,
+                            Some(I3LocalnetRemoteEvidenceRejection::ProvenanceMismatch),
+                            false,
+                        ),
+                        _ => (
+                            None,
+                            Some(I3LocalnetRemoteEvidenceRejection::ProvenanceMismatch),
+                            false,
+                        ),
+                    }
+                }
+                I3LocalnetFaultProfile::DisconnectAfterRemoteAdmissionSuppressOwnerAudit
+                    if *requester_observation
+                        == I3LocalnetRequesterFaultObservation::ReplyOrReceiptNotObserved
+                        && *requester_pending_request_is_retained == Some(true)
+                        && owner.is_none() =>
+                {
+                    (None, None, true)
+                }
+                _ => return None,
+            };
+        Some((
+            I3LocalnetFaultAudit::from_actual_child_events(
+                profile,
+                request_identity_ref.clone(),
+                *requester_observation,
+                remote_admission,
+                remote_evidence_rejection,
+                validated_requester_local_wait,
+            ),
+            requester_pending_request_is_retained,
         ))
     }
 
@@ -4849,6 +5560,7 @@ impl LocalnetSupervisor {
                     None,
                     delivery_record(I3LocalnetDeliveryPhase::RequestSend, request_delivery),
                     None,
+                    None,
                     Some(I3LocalnetReconnectOwnerOutcome::Replied {
                         owner_serve_count: *owner_serve_count,
                         owner_mutation_count: *owner_mutation_count,
@@ -4878,9 +5590,9 @@ impl LocalnetSupervisor {
                     slot: I3LocalnetChildSlot::ProcessB,
                     request_identity_ref: Some(owner_identity_ref),
                     requester_observation: None,
-                    remote_admission: Some(owner_admission_event),
+                    remote_admission: owner_admission_event,
                     semantic_admission_count: 1,
-                    owner_mutation_count: 1,
+                    owner_mutation_count: event_owner_mutation_count,
                     ..
                 } = owner_event
                 else {
@@ -4918,92 +5630,186 @@ impl LocalnetSupervisor {
                 {
                     return None;
                 }
-                let initial_owner_admission = retry_owner_admission(
-                    owner.initial_owner_admission.as_ref()?,
-                    &lineage.request_contract,
-                    &request_identity_ref,
-                )?;
-                let event_owner_admission = retry_owner_admission(
-                    owner_admission_event,
-                    &lineage.request_contract,
-                    &request_identity_ref,
-                )?;
-                if !same_remote_admission(&initial_owner_admission, &event_owner_admission) {
-                    return None;
+                match (
+                    owner.initial_owner_admission.as_ref(),
+                    owner.initial_owner_expiry.as_ref(),
+                    owner_admission_event.as_ref(),
+                ) {
+                    (Some(initial_owner_admission), None, Some(owner_admission_event)) => {
+                        if *event_owner_mutation_count != 1 {
+                            return None;
+                        }
+                        let initial_owner_admission = retry_owner_admission(
+                            initial_owner_admission,
+                            &lineage.request_contract,
+                            &request_identity_ref,
+                        )?;
+                        let event_owner_admission = retry_owner_admission(
+                            owner_admission_event,
+                            &lineage.request_contract,
+                            &request_identity_ref,
+                        )?;
+                        if !same_remote_admission(&initial_owner_admission, &event_owner_admission)
+                        {
+                            return None;
+                        }
+                        let I3LocalnetRemoteAdmissionEvidence::Admitted {
+                            request_receive: initial_owner_receive,
+                            ..
+                        } = &initial_owner_admission
+                        else {
+                            return None;
+                        };
+                        // The first sender and the owner admission must describe the
+                        // same actual session-one frame, not merely a contract-shaped
+                        // carrier with the same semantic request identity.
+                        if initial_owner_receive.candidate_commitment_ref().is_empty()
+                            || initial_request_delivery.candidate_commitment_ref.is_empty()
+                            || initial_owner_receive.candidate_commitment_ref()
+                                != initial_request_delivery.candidate_commitment_ref
+                        {
+                            return None;
+                        }
+                        let PrivateReconnectOwnerOutcome::DuplicateRequestRejected {
+                            candidate_commitment_ref,
+                            network_occurrence_ref,
+                            owner_serve_count,
+                            owner_mutation_count,
+                        } = owner.reconnect_owner_outcome.as_ref()?
+                        else {
+                            return None;
+                        };
+                        if *owner_serve_count != 1
+                            || *owner_mutation_count != 1
+                            || network_occurrence_ref.is_empty()
+                        {
+                            return None;
+                        }
+                        let (reconnect_owner_outcome, evidence_rejection) = if request_delivery
+                            .candidate_commitment_ref
+                            .is_empty()
+                            || candidate_commitment_ref.is_empty()
+                        {
+                            (
+                                None,
+                                Some(I3LocalnetRetryEvidenceRejection::ReconnectAttemptCommitmentMissing),
+                            )
+                        } else if request_delivery.candidate_commitment_ref
+                            != *candidate_commitment_ref
+                        {
+                            (
+                                None,
+                                Some(I3LocalnetRetryEvidenceRejection::ReconnectAttemptCommitmentMismatch),
+                            )
+                        } else {
+                            (
+                                Some(I3LocalnetReconnectOwnerOutcome::DuplicateRequestRejected {
+                                    candidate_commitment_ref: candidate_commitment_ref.clone(),
+                                    network_occurrence_ref: network_occurrence_ref.clone(),
+                                    owner_serve_count: *owner_serve_count,
+                                    owner_mutation_count: *owner_mutation_count,
+                                }),
+                                None,
+                            )
+                        };
+                        Some(I3LocalnetRetryAudit::from_actual_child_events(
+                            profile,
+                            request_identity_ref,
+                            I3LocalnetRetryRequesterOutcome::PendingReplyOrReceiptNotObserved,
+                            true,
+                            Some(delivery_record(
+                                I3LocalnetDeliveryPhase::RequestSend,
+                                initial_request_delivery,
+                            )),
+                            delivery_record(I3LocalnetDeliveryPhase::RequestSend, request_delivery),
+                            Some(initial_owner_admission),
+                            None,
+                            reconnect_owner_outcome,
+                            evidence_rejection,
+                            requester_child,
+                            owner_child,
+                        ))
+                    }
+                    (None, Some(expiry), None) => {
+                        let request_receive = expiry.request_receive.as_deref()?;
+                        if *event_owner_mutation_count != 0
+                            || !expiry.is_exact_declared_expiry()
+                            || !retry_request_delivery_matches_contract(
+                                request_receive,
+                                &lineage.request_contract,
+                                &request_identity_ref,
+                            )
+                            || request_receive.candidate_commitment_ref.is_empty()
+                            || request_receive.candidate_commitment_ref
+                                != initial_request_delivery.candidate_commitment_ref
+                        {
+                            return None;
+                        }
+                        let PrivateReconnectOwnerOutcome::DuplicateRequestRejectedAfterDeclaredDeadlineExpired {
+                            candidate_commitment_ref,
+                            network_occurrence_ref,
+                            owner_expired_count,
+                            owner_serve_count,
+                            owner_mutation_count,
+                        } = owner.reconnect_owner_outcome.as_ref()?
+                        else {
+                            return None;
+                        };
+                        if *owner_expired_count != 1
+                            || *owner_serve_count != 0
+                            || *owner_mutation_count != 0
+                            || network_occurrence_ref.is_empty()
+                        {
+                            return None;
+                        }
+                        let (reconnect_owner_outcome, evidence_rejection) = if request_delivery
+                            .candidate_commitment_ref
+                            .is_empty()
+                            || candidate_commitment_ref.is_empty()
+                        {
+                            (
+                                None,
+                                Some(I3LocalnetRetryEvidenceRejection::ReconnectAttemptCommitmentMissing),
+                            )
+                        } else if request_delivery.candidate_commitment_ref
+                            != *candidate_commitment_ref
+                        {
+                            (
+                                None,
+                                Some(I3LocalnetRetryEvidenceRejection::ReconnectAttemptCommitmentMismatch),
+                            )
+                        } else {
+                            (
+                                Some(I3LocalnetReconnectOwnerOutcome::DuplicateRequestRejectedAfterDeclaredDeadlineExpired {
+                                    candidate_commitment_ref: candidate_commitment_ref.clone(),
+                                    network_occurrence_ref: network_occurrence_ref.clone(),
+                                    owner_expired_count: *owner_expired_count,
+                                    owner_serve_count: *owner_serve_count,
+                                    owner_mutation_count: *owner_mutation_count,
+                                }),
+                                None,
+                            )
+                        };
+                        Some(I3LocalnetRetryAudit::from_actual_child_events(
+                            profile,
+                            request_identity_ref,
+                            I3LocalnetRetryRequesterOutcome::PendingReplyOrReceiptNotObserved,
+                            true,
+                            Some(delivery_record(
+                                I3LocalnetDeliveryPhase::RequestSend,
+                                initial_request_delivery,
+                            )),
+                            delivery_record(I3LocalnetDeliveryPhase::RequestSend, request_delivery),
+                            None,
+                            Some(expiry.public()),
+                            reconnect_owner_outcome,
+                            evidence_rejection,
+                            requester_child,
+                            owner_child,
+                        ))
+                    }
+                    _ => None,
                 }
-                let I3LocalnetRemoteAdmissionEvidence::Admitted {
-                    request_receive: initial_owner_receive,
-                    ..
-                } = &initial_owner_admission
-                else {
-                    return None;
-                };
-                // The first sender and the owner admission must describe the
-                // same actual session-one frame, not merely a contract-shaped
-                // carrier with the same semantic request identity.
-                if initial_owner_receive.candidate_commitment_ref().is_empty()
-                    || initial_request_delivery.candidate_commitment_ref.is_empty()
-                    || initial_owner_receive.candidate_commitment_ref()
-                        != initial_request_delivery.candidate_commitment_ref
-                {
-                    return None;
-                }
-                let PrivateReconnectOwnerOutcome::DuplicateRequestRejected {
-                    candidate_commitment_ref,
-                    network_occurrence_ref,
-                    owner_serve_count,
-                    owner_mutation_count,
-                } = owner.reconnect_owner_outcome.as_ref()?
-                else {
-                    return None;
-                };
-                if *owner_serve_count != 1
-                    || *owner_mutation_count != 1
-                    || network_occurrence_ref.is_empty()
-                {
-                    return None;
-                }
-                let (reconnect_owner_outcome, evidence_rejection) = if request_delivery
-                    .candidate_commitment_ref
-                    .is_empty()
-                    || candidate_commitment_ref.is_empty()
-                {
-                    (
-                        None,
-                        Some(I3LocalnetRetryEvidenceRejection::ReconnectAttemptCommitmentMissing),
-                    )
-                } else if request_delivery.candidate_commitment_ref != *candidate_commitment_ref {
-                    (
-                        None,
-                        Some(I3LocalnetRetryEvidenceRejection::ReconnectAttemptCommitmentMismatch),
-                    )
-                } else {
-                    (
-                        Some(I3LocalnetReconnectOwnerOutcome::DuplicateRequestRejected {
-                            candidate_commitment_ref: candidate_commitment_ref.clone(),
-                            network_occurrence_ref: network_occurrence_ref.clone(),
-                            owner_serve_count: *owner_serve_count,
-                            owner_mutation_count: *owner_mutation_count,
-                        }),
-                        None,
-                    )
-                };
-                Some(I3LocalnetRetryAudit::from_actual_child_events(
-                    profile,
-                    request_identity_ref,
-                    I3LocalnetRetryRequesterOutcome::PendingReplyOrReceiptNotObserved,
-                    true,
-                    Some(delivery_record(
-                        I3LocalnetDeliveryPhase::RequestSend,
-                        initial_request_delivery,
-                    )),
-                    delivery_record(I3LocalnetDeliveryPhase::RequestSend, request_delivery),
-                    Some(initial_owner_admission),
-                    reconnect_owner_outcome,
-                    evidence_rejection,
-                    requester_child,
-                    owner_child,
-                ))
             }
         }
     }
@@ -5028,6 +5834,10 @@ impl LocalnetSupervisor {
             request_identity_ref: Some(request_identity_ref),
             requester_observation:
                 Some(I3LocalnetRequesterFaultObservation::ReplyOrReceiptNotObserved),
+            // Retry owns its retained-pending proof in `retry_evidence`; it
+            // must not borrow the ordinary post-loss fault observation.
+            requester_pending_request_is_retained: None,
+            requester_local_wait: None,
             remote_admission: None,
             semantic_admission_count: 0,
             owner_mutation_count: 0,
@@ -5258,11 +6068,11 @@ fn write_trusted_control(stream: &mut UnixStream, encoded: &[u8]) -> io::Result<
 }
 
 fn logical_source_path(path: &Path) -> &'static str {
-    if path
-        .to_string_lossy()
-        .ends_with(ACTIVE_I2_LOGICAL_SOURCE_PATH)
-    {
+    let path = path.to_string_lossy();
+    if path.ends_with(ACTIVE_I2_LOGICAL_SOURCE_PATH) {
         ACTIVE_I2_LOGICAL_SOURCE_PATH
+    } else if path.ends_with(OWNER_ADMISSION_LOGICAL_SOURCE_PATH) {
+        OWNER_ADMISSION_LOGICAL_SOURCE_PATH
     } else {
         "i3-2-private-input.mir"
     }
@@ -5422,6 +6232,90 @@ fn joined_observer_evidence(
         core_ref_inventory,
         artifact_ref_inventory,
         edge_ref_inventory,
+    })
+}
+
+/// Join the completed children only for a generated declared owner failure
+/// that was actually delivered and consumed. This is deliberately separate
+/// from the successful receipt join: the carrier route is identical, while
+/// the runtime terminal and owner counters are not.
+fn joined_declared_owner_deadline_expired_evidence(
+    lineage: &SupervisorLineageEvidence,
+    requester: &PrivateChildCompleted,
+    owner: &PrivateChildCompleted,
+) -> Option<I3LocalnetDeclaredOwnerDeadlineExpiredAudit> {
+    let request_sent = requester.observer_evidence.request_sent.as_ref()?;
+    let request_received = owner.observer_evidence.request_received.as_ref()?;
+    let reply_sent = owner.observer_evidence.reply_sent.as_ref()?;
+    let reply_received = requester.observer_evidence.reply_received.as_ref()?;
+    let request_identity_ref = &request_sent.semantic_request_identity_ref;
+    let terminal_occurrence_ref = requester
+        .observer_evidence
+        .requester_terminal_failure_occurrence_ref
+        .as_ref()?;
+    let expiry = owner.observer_evidence.owner_expiry.as_ref()?;
+    if lineage.ordinary_source_build_count != 1
+        || lineage.admission_count != 1
+        || lineage.m9_generation_count != 1
+        || request_identity_ref.is_empty()
+        || request_identity_ref != &request_received.semantic_request_identity_ref
+        || request_identity_ref != &reply_sent.semantic_request_identity_ref
+        || request_identity_ref != &reply_received.semantic_request_identity_ref
+        || reply_sent.linked_request_identity_ref.as_deref() != Some(request_identity_ref)
+        || reply_received.linked_request_identity_ref.as_deref() != Some(request_identity_ref)
+        || !delivery_semantics_match(request_sent, request_received)
+        || !delivery_semantics_match(reply_sent, reply_received)
+        || !delivery_matches_contract(request_sent, &lineage.request_contract)
+        || !delivery_matches_contract(request_received, &lineage.request_contract)
+        || !delivery_matches_contract(reply_sent, &lineage.reply_contract)
+        || !delivery_matches_contract(reply_received, &lineage.reply_contract)
+        || requester.observer_evidence.local_store_ref.is_empty()
+        || owner.observer_evidence.local_store_ref.is_empty()
+        || requester.observer_evidence.local_store_ref == owner.observer_evidence.local_store_ref
+        || !valid_generated_frame_write_observation(
+            request_sent.generated_frame_write_observation.as_ref(),
+        )
+        || request_sent.carrier_ref.is_empty()
+        || reply_sent.carrier_ref.is_empty()
+        || request_received.generated_frame_write_observation.is_some()
+        || reply_sent.generated_frame_write_observation.is_some()
+        || reply_received.generated_frame_write_observation.is_some()
+        || requester
+            .observer_evidence
+            .requester_receipt_occurrence_ref
+            .is_some()
+        || owner.observer_evidence.owner_serve_occurrence_ref.is_some()
+        || owner.observer_evidence.owner_write_occurrence_ref.is_some()
+        || terminal_occurrence_ref.is_empty()
+        || !expiry.is_exact_declared_expiry()
+    {
+        return None;
+    }
+    let records = [
+        delivery_record(I3LocalnetDeliveryPhase::RequestSend, request_sent),
+        delivery_record(I3LocalnetDeliveryPhase::RequestReceive, request_received),
+        delivery_record(I3LocalnetDeliveryPhase::ReplySend, reply_sent),
+        delivery_record(I3LocalnetDeliveryPhase::ReplyReceive, reply_received),
+    ];
+    if records
+        .iter()
+        .map(I3LocalnetObserverSafeDeliveryRecord::network_occurrence_ref)
+        .collect::<BTreeSet<_>>()
+        .len()
+        != records.len()
+    {
+        return None;
+    }
+    Some(I3LocalnetDeclaredOwnerDeadlineExpiredAudit {
+        request_identity_ref: request_identity_ref.clone(),
+        request_send: records[0].clone(),
+        request_receive: records[1].clone(),
+        reply_send: records[2].clone(),
+        reply_receive: records[3].clone(),
+        owner_expiry: expiry.public(),
+        requester_terminal_failure_occurrence_ref: terminal_occurrence_ref.clone(),
+        requester_terminal_failure_consumed_count: requester.runtime_occurrence_count,
+        requester_local_receipt_count: requester.receipt_count,
     })
 }
 
@@ -6227,15 +7121,7 @@ pub(crate) fn run_private_localnet_child_from_args(args: Vec<String>) -> Option<
 fn run_private_localnet_child(fixed_slot: I3LocalnetChildSlot) -> Result<(), ()> {
     let result = run_private_localnet_child_inner(fixed_slot);
     if result.is_err() {
-        let _ = emit_child_event(&PrivateChildEvent::rejected(
-            PrivateChildRejection::Lifecycle,
-            false,
-            0,
-            0,
-            0,
-            0,
-            0,
-        ));
+        let _ = emit_child_event(&PrivateChildEvent::UnknownLifecycleFailure { slot: fixed_slot });
     }
     result
 }
@@ -6416,6 +7302,84 @@ fn write_registered_owner_lifecycle_ack(
     }
     stream.flush()?;
     stream.shutdown(Shutdown::Write)
+}
+
+/// Resolve an actual generated-owner receive result. Only an observed
+/// `Awaiting` admission may invoke the opaque host driver; the neutral probe
+/// profile changes its one fixed clock input but never predicts the checked
+/// gate outcome. The returned expiry evidence is copied from the runtime's
+/// retained producer record, never reconstructed from counts or a carrier.
+fn resolve_received_owner_reply(
+    runtime: &mut mir_runtime::sys5_i3_process_runtime::Sys5I3ProcessRuntime,
+    received: Option<mir_runtime::sys5_i3_process_runtime::Sys5I3ProcessMessage>,
+    request_identity_ref: &str,
+    profile: Option<I3LocalnetOwnerAdmissionDriveProfile>,
+) -> Result<PrivateResolvedOwnerReply, ()> {
+    let reply = match received {
+        Some(reply) => reply,
+        None => {
+            let owner_admission = runtime.observer_safe_owner_admission_summary();
+            let summary = runtime.observer_safe_runtime_summary();
+            if owner_admission.awaiting_count() != 1
+                || owner_admission.expired_count() != 0
+                || owner_admission.rejected_before_serve_count() != 0
+                || owner_admission.serve_reserved_count() != 0
+                || runtime.observer_safe_inbound_owner_request_tombstone_count() != 1
+                || summary.served_owner_request_count() != 0
+                || summary.actual_owner_write_count() != 0
+            {
+                return Err(());
+            }
+            let drivers = runtime.i3_admitted_owner_admission_host_drivers();
+            let [driver] = drivers.as_slice() else {
+                return Err(());
+            };
+            let next_tick = profile.map(|_| 1);
+            runtime
+                .drive_next_owner_admission(driver, next_tick)
+                .map_err(|_| ())?
+                .ok_or(())?
+        }
+    };
+    let owner_admission = runtime.observer_safe_owner_admission_summary();
+    let summary = runtime.observer_safe_runtime_summary();
+    if let Some(decision) =
+        runtime.observer_safe_owner_admission_expiry_decision(request_identity_ref)
+    {
+        let expiry = PrivateOwnerAdmissionExpiryEvidence {
+            request_receive: None,
+            decision_commitment_ref: decision.decision_commitment_ref().to_string(),
+            decision_occurrence_ref: decision.decision_occurrence_ref().to_string(),
+            generated_reply_count: 1,
+            expired_count: owner_admission.expired_count(),
+            owner_serve_count: summary.served_owner_request_count(),
+            owner_mutation_count: summary.actual_owner_write_count(),
+        };
+        if owner_admission.awaiting_count() != 0
+            || owner_admission.rejected_before_serve_count() != 0
+            || owner_admission.serve_reserved_count() != 0
+            || runtime.observer_safe_inbound_owner_request_tombstone_count() != 1
+            || !expiry.is_exact_declared_expiry()
+        {
+            return Err(());
+        }
+        Ok(PrivateResolvedOwnerReply::DeclaredDeadlineExpired { reply, expiry })
+    } else {
+        // A source condition may still permit a successful serve after the
+        // fixed neutral schedule. Keep the pre-existing strict success
+        // invariants rather than treating the profile as an expected expiry.
+        if owner_admission.awaiting_count() != 0
+            || owner_admission.expired_count() != 0
+            || owner_admission.rejected_before_serve_count() != 0
+            || owner_admission.serve_reserved_count() != 0
+            || runtime.observer_safe_inbound_owner_request_tombstone_count() != 1
+            || summary.served_owner_request_count() != 1
+            || summary.actual_owner_write_count() != 1
+        {
+            return Err(());
+        }
+        Ok(PrivateResolvedOwnerReply::Served(reply))
+    }
 }
 
 async fn run_server_child(
@@ -6613,6 +7577,8 @@ async fn run_server_child(
                     slot: I3LocalnetChildSlot::ProcessB,
                     request_identity_ref: None,
                     requester_observation: None,
+                    requester_pending_request_is_retained: None,
+                    requester_local_wait: None,
                     remote_admission: Some(PrivateRemoteAdmissionEvidence::NoAdmission {
                         owner_serve_count: summary.served_owner_request_count(),
                         owner_mutation_count: summary.actual_owner_write_count(),
@@ -6627,7 +7593,25 @@ async fn run_server_child(
             }
             Err(_) => return Err(()),
         };
-        let reply = reply.ok_or(())?;
+        if !session.peer_spki_verified()
+            || !session.peer_preface_verified()
+            || session.reliable_bidi_stream_count() != 1
+            || session.quic_datagrams_enabled()
+        {
+            return Err(());
+        }
+        let request_identity = request_delivery.semantic_request_identity_ref().to_string();
+        let (reply, owner_expiry) = match resolve_received_owner_reply(
+            &mut runtime,
+            reply,
+            &request_identity,
+            control.owner_admission_drive_profile,
+        )? {
+            PrivateResolvedOwnerReply::Served(reply) => (reply, None),
+            PrivateResolvedOwnerReply::DeclaredDeadlineExpired { reply, expiry } => {
+                (reply, Some(expiry))
+            }
+        };
         if control.fault_profile
             == Some(I3LocalnetFaultProfile::DisconnectAfterRemoteAdmissionSuppressOwnerAudit)
         {
@@ -6703,6 +7687,8 @@ async fn run_server_child(
                 slot: I3LocalnetChildSlot::ProcessB,
                 request_identity_ref: Some(request_identity),
                 requester_observation: None,
+                requester_pending_request_is_retained: None,
+                requester_local_wait: None,
                 remote_admission: Some(PrivateRemoteAdmissionEvidence::Admitted {
                     request_receive: Box::new(request_receive),
                     owner_serve_count: summary.served_owner_request_count(),
@@ -6744,6 +7730,7 @@ async fn run_server_child(
             owner_write_occurrence_ref: occurrences
                 .actual_owner_write_occurrence_ref(&request_identity)
                 .map(str::to_string),
+            owner_expiry,
             ..PrivateChildObserverEvidence::default()
         };
         emit_child_event(&PrivateChildEvent::Completed {
@@ -7001,6 +7988,8 @@ async fn run_client_child(
                 requester_observation: Some(
                     I3LocalnetRequesterFaultObservation::RequestCarrierWriteNotAttempted,
                 ),
+                requester_pending_request_is_retained: None,
+                requester_local_wait: None,
                 remote_admission: None,
                 semantic_admission_count: 0,
                 owner_mutation_count: 0,
@@ -7108,6 +8097,53 @@ async fn run_client_child(
                     )
                 ) =>
             {
+                let summary_before = runtime.observer_safe_runtime_summary();
+                let pending_before = runtime.observer_safe_pending_owner_request_count();
+                let requester_pending_request_is_retained = pending_before == 1;
+                if !requester_pending_request_is_retained
+                    || summary_before.accepted_inbound_receipt_count() != 0
+                    || summary_before.accepted_inbound_declared_owner_failure_count() != 0
+                {
+                    return Err(());
+                }
+                let requester_local_wait = match control.requester_local_wait_profile {
+                    None => {
+                        if control.requester_local_wait_falsifier.is_some() {
+                            return Err(());
+                        }
+                        None
+                    }
+                    Some(I3LocalnetRequesterLocalWaitProfile::WaitLocallyAfterObservedLoss) => {
+                        let wait_started = Instant::now();
+                        tokio::time::sleep(REQUESTER_LOCAL_WAIT_MINIMUM).await;
+                        let summary_after = runtime.observer_safe_runtime_summary();
+                        let mut evidence = PrivateRequesterLocalWaitEvidence {
+                            observed_elapsed: wait_started.elapsed(),
+                            required_minimum_elapsed: REQUESTER_LOCAL_WAIT_MINIMUM,
+                            pending_before,
+                            pending_after: runtime.observer_safe_pending_owner_request_count(),
+                            local_receipt_before: summary_before.accepted_inbound_receipt_count(),
+                            local_receipt_after: summary_after.accepted_inbound_receipt_count(),
+                            terminal_failure_before: summary_before
+                                .accepted_inbound_declared_owner_failure_count(),
+                            terminal_failure_after: summary_after
+                                .accepted_inbound_declared_owner_failure_count(),
+                        };
+                        if !evidence.is_exact() {
+                            return Err(());
+                        }
+                        match control.requester_local_wait_falsifier {
+                            None => {}
+                            Some(
+                                I3LocalnetRequesterLocalWaitFalsifier::SetObservedElapsedBelowMinimum,
+                            ) => evidence.observed_elapsed = Duration::ZERO,
+                            Some(
+                                I3LocalnetRequesterLocalWaitFalsifier::ClearPostWaitPendingObservation,
+                            ) => evidence.pending_after = 0,
+                        }
+                        Some(evidence)
+                    }
+                };
                 emit_child_event(&PrivateChildEvent::HandledDeliveryFault {
                     slot: I3LocalnetChildSlot::ProcessA,
                     request_identity_ref: Some(
@@ -7116,6 +8152,10 @@ async fn run_client_child(
                     requester_observation: Some(
                         I3LocalnetRequesterFaultObservation::ReplyOrReceiptNotObserved,
                     ),
+                    requester_pending_request_is_retained: Some(
+                        requester_pending_request_is_retained,
+                    ),
+                    requester_local_wait,
                     remote_admission: None,
                     semantic_admission_count: 0,
                     owner_mutation_count: 0,
@@ -7128,8 +8168,11 @@ async fn run_client_child(
             Err(_) => return Err(()),
         };
         let receipt = receipt.ok_or(())?;
-        if !receipt.is_observer_safe_typed_result_or_receipt()
-            || !receipt.has_no_transportable_carrier()
+        let terminal_failure_consumed = receipt.is_observer_safe_terminal_failure_consumed()
+            && receipt.has_no_transportable_carrier();
+        if !terminal_failure_consumed
+            && (!receipt.is_observer_safe_typed_result_or_receipt()
+                || !receipt.has_no_transportable_carrier())
         {
             return Err(());
         }
@@ -7141,6 +8184,53 @@ async fn run_client_child(
         let summary = runtime.observer_safe_runtime_summary();
         let occurrences = runtime.observer_safe_semantic_occurrences();
         let request_identity = request_delivery.semantic_request_identity_ref().to_string();
+        if terminal_failure_consumed {
+            let terminal_occurrence = occurrences
+                .requester_terminal_declared_owner_failure_occurrence_ref(&request_identity)
+                .map(str::to_string)
+                .ok_or(())?;
+            if summary.accepted_inbound_declared_owner_failure_count() != 1
+                || summary.accepted_inbound_receipt_count() != 0
+                || occurrences.requester_terminal_declared_owner_failure_count() != 1
+                || occurrences.requester_local_receipt_count() != 0
+                || runtime.observer_safe_pending_owner_request_count() != 0
+                || terminal_occurrence.is_empty()
+            {
+                return Err(());
+            }
+            let observer_evidence = PrivateChildObserverEvidence {
+                request_sent: Some(request_delivery.into()),
+                reply_received: Some(reply_delivery.into()),
+                local_store_ref: runtime.local_store_identity_ref().to_string(),
+                requester_terminal_failure_occurrence_ref: Some(terminal_occurrence),
+                ..PrivateChildObserverEvidence::default()
+            };
+            emit_child_event(&PrivateChildEvent::Completed {
+                slot: I3LocalnetChildSlot::ProcessA,
+                exec_confirmed: true,
+                assigned_loci,
+                trusted_control_consumed: true,
+                tainted_image_consumed: true,
+                tls_peer_verified,
+                reciprocal_preface_verified,
+                reliable_bidi_stream_count,
+                quic_datagrams_enabled,
+                semantic_admission_count: 1,
+                unauthenticated_semantic_admission_count: 0,
+                network_receipt_frame_count: 0,
+                generated_request_count: 1,
+                served_count: 0,
+                write_count: 0,
+                reply_count: 0,
+                receipt_count: 0,
+                runtime_occurrence_count: occurrences.requester_terminal_declared_owner_failure_count(),
+                observer_evidence,
+            })
+            .map_err(|_| ())?;
+            session.wait_for_peer_close().await;
+            session.close();
+            return Ok(());
+        }
         let observer_evidence = PrivateChildObserverEvidence {
             request_sent: Some(request_delivery.into()),
             reply_received: Some(reply_delivery.into()),
@@ -7661,6 +8751,8 @@ async fn run_server_retry_sessions(
             slot: I3LocalnetChildSlot::ProcessB,
             request_identity_ref: None,
             requester_observation: None,
+            requester_pending_request_is_retained: None,
+            requester_local_wait: None,
             remote_admission: Some(PrivateRemoteAdmissionEvidence::NoAdmission {
                 owner_serve_count: summary.served_owner_request_count(),
                 owner_mutation_count: summary.actual_owner_write_count(),
@@ -7674,9 +8766,10 @@ async fn run_server_retry_sessions(
         return Ok(());
     }
 
-    let (initial_request_delivery, initial_owner_admission): (
+    let (initial_request_delivery, initial_owner_admission, initial_owner_expiry): (
         Option<PrivateDeliveryEvidence>,
         Option<PrivateRemoteAdmissionEvidence>,
+        Option<PrivateOwnerAdmissionExpiryEvidence>,
     ) = match profile {
         I3LocalnetRetryProfile::ReconnectBeforeInitialCarrierWrite => {
             // The client closes the first checked session before any carrier
@@ -7694,32 +8787,51 @@ async fn run_server_retry_sessions(
             {
                 return Err(());
             }
-            (None, None)
+            (None, None, None)
         }
         I3LocalnetRetryProfile::ReconnectAfterOwnerAdmissionBeforeReply => {
             let (reply, delivery) = first_session
                 .receive_and_admit_generated_message(&mut runtime)
                 .await
                 .map_err(|_| ())?;
-            let _ = reply.ok_or(())?;
             let request_identity_ref = delivery.semantic_request_identity_ref().to_string();
-            let summary = runtime.observer_safe_runtime_summary();
-            let occurrences = runtime.observer_safe_semantic_occurrences();
-            let owner_serve_occurrence_ref = occurrences
-                .owner_serve_linearization_occurrence_ref(&request_identity_ref)
-                .map(str::to_string)
-                .ok_or(())?;
-            let owner_write_occurrence_ref = occurrences
-                .actual_owner_write_occurrence_ref(&request_identity_ref)
-                .map(str::to_string);
-            let admission = PrivateRemoteAdmissionEvidence::Admitted {
-                request_receive: Box::new(delivery.clone().into()),
-                owner_serve_count: summary.served_owner_request_count(),
-                owner_mutation_count: summary.actual_owner_write_count(),
-                owner_serve_occurrence_ref,
-                owner_write_occurrence_ref,
-            };
-            (Some(delivery.into()), Some(admission))
+            match resolve_received_owner_reply(
+                &mut runtime,
+                reply,
+                &request_identity_ref,
+                control.owner_admission_drive_profile,
+            )? {
+                PrivateResolvedOwnerReply::Served(_) => {
+                    let summary = runtime.observer_safe_runtime_summary();
+                    let occurrences = runtime.observer_safe_semantic_occurrences();
+                    let owner_serve_occurrence_ref = occurrences
+                        .owner_serve_linearization_occurrence_ref(&request_identity_ref)
+                        .map(str::to_string)
+                        .ok_or(())?;
+                    let owner_write_occurrence_ref = occurrences
+                        .actual_owner_write_occurrence_ref(&request_identity_ref)
+                        .map(str::to_string);
+                    let admission = PrivateRemoteAdmissionEvidence::Admitted {
+                        request_receive: Box::new(delivery.clone().into()),
+                        owner_serve_count: summary.served_owner_request_count(),
+                        owner_mutation_count: summary.actual_owner_write_count(),
+                        owner_serve_occurrence_ref,
+                        owner_write_occurrence_ref,
+                    };
+                    (Some(delivery.into()), Some(admission), None)
+                }
+                PrivateResolvedOwnerReply::DeclaredDeadlineExpired {
+                    reply: _,
+                    mut expiry,
+                } => {
+                    // The owner did generate the reply, but this existing
+                    // retry profile intentionally drops it before A can
+                    // consume it. Retain B's actual first-session receive
+                    // privately for the later strict audit join.
+                    expiry.request_receive = Some(Box::new(delivery.clone().into()));
+                    (Some(delivery.into()), None, Some(expiry))
+                }
+            }
         }
     };
     first_session.close();
@@ -7841,6 +8953,50 @@ async fn run_server_retry_sessions(
                 .as_ref()
                 .map(|delivery| delivery.semantic_request_identity_ref.clone())
                 .ok_or(())?;
+            let reconnect_owner_outcome = if let Some(expiry) = initial_owner_expiry.as_ref() {
+                let request_receive = expiry.request_receive.as_deref().ok_or(())?;
+                let decision = runtime
+                    .observer_safe_owner_admission_expiry_decision(&request_identity_ref)
+                    .ok_or(())?;
+                let owner_admission = runtime.observer_safe_owner_admission_summary();
+                if !expiry.is_exact_declared_expiry()
+                    || request_receive.semantic_request_identity_ref != request_identity_ref
+                    || request_receive.candidate_commitment_ref.is_empty()
+                    || initial_request_delivery.as_ref().is_none_or(|delivery| {
+                        delivery.candidate_commitment_ref
+                            != request_receive.candidate_commitment_ref
+                    })
+                    || decision.decision_commitment_ref() != expiry.decision_commitment_ref
+                    || decision.decision_occurrence_ref() != expiry.decision_occurrence_ref
+                    || owner_admission.awaiting_count() != 0
+                    || owner_admission.expired_count() != 1
+                    || owner_admission.rejected_before_serve_count() != 0
+                    || owner_admission.serve_reserved_count() != 0
+                    || runtime.observer_safe_inbound_owner_request_tombstone_count() != 1
+                    || summary.served_owner_request_count() != 0
+                    || summary.actual_owner_write_count() != 0
+                {
+                    return Err(());
+                }
+                PrivateReconnectOwnerOutcome::DuplicateRequestRejectedAfterDeclaredDeadlineExpired {
+                    candidate_commitment_ref: rejected_attempt
+                        .candidate_commitment_ref()
+                        .to_string(),
+                    network_occurrence_ref: rejected_attempt.network_occurrence_ref().to_string(),
+                    owner_expired_count: owner_admission.expired_count(),
+                    owner_serve_count: summary.served_owner_request_count(),
+                    owner_mutation_count: summary.actual_owner_write_count(),
+                }
+            } else {
+                PrivateReconnectOwnerOutcome::DuplicateRequestRejected {
+                    candidate_commitment_ref: rejected_attempt
+                        .candidate_commitment_ref()
+                        .to_string(),
+                    network_occurrence_ref: rejected_attempt.network_occurrence_ref().to_string(),
+                    owner_serve_count: summary.served_owner_request_count(),
+                    owner_mutation_count: summary.actual_owner_write_count(),
+                }
+            };
             let retry_evidence = PrivateChildRetryEvidence {
                 run_ref,
                 first_session_generation: 1,
@@ -7852,24 +9008,16 @@ async fn run_server_retry_sessions(
                     .peer_preface_verified(),
                 initial_request_delivery,
                 initial_owner_admission: initial_owner_admission.clone(),
-                reconnect_owner_outcome: Some(
-                    PrivateReconnectOwnerOutcome::DuplicateRequestRejected {
-                        candidate_commitment_ref: rejected_attempt
-                            .candidate_commitment_ref()
-                            .to_string(),
-                        network_occurrence_ref: rejected_attempt
-                            .network_occurrence_ref()
-                            .to_string(),
-                        owner_serve_count: summary.served_owner_request_count(),
-                        owner_mutation_count: summary.actual_owner_write_count(),
-                    },
-                ),
+                initial_owner_expiry,
+                reconnect_owner_outcome: Some(reconnect_owner_outcome),
                 ..PrivateChildRetryEvidence::default()
             };
             emit_child_event(&PrivateChildEvent::HandledDeliveryFault {
                 slot: I3LocalnetChildSlot::ProcessB,
                 request_identity_ref: Some(request_identity_ref),
                 requester_observation: None,
+                requester_pending_request_is_retained: None,
+                requester_local_wait: None,
                 remote_admission: initial_owner_admission,
                 semantic_admission_count: 1,
                 owner_mutation_count: summary.actual_owner_write_count(),
@@ -8336,6 +9484,8 @@ async fn run_client_retry_sessions(
                 requester_observation: Some(
                     I3LocalnetRequesterFaultObservation::ReplyOrReceiptNotObserved,
                 ),
+                requester_pending_request_is_retained: None,
+                requester_local_wait: None,
                 remote_admission: None,
                 semantic_admission_count: 0,
                 owner_mutation_count: 0,
@@ -8465,6 +9615,7 @@ mod lifecycle_evidence_tests {
         unexpected_owner_terminal_failure(owner_terminal).into_error_with_terminal_events(
             true,
             vec![terminal_event],
+            0,
             false,
             false,
             false,
@@ -8491,6 +9642,8 @@ mod lifecycle_evidence_tests {
                     slot: I3LocalnetChildSlot::ProcessB,
                     request_identity_ref: None,
                     requester_observation: None,
+                    requester_pending_request_is_retained: None,
+                    requester_local_wait: None,
                     remote_admission: None,
                     semantic_admission_count: 1,
                     owner_mutation_count: 0,

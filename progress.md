@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-09-07 21:00 JST
+最終更新: 2026-09-08 10:53 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -62,7 +62,7 @@ remain later.
 |---|---|---|
 | Logical specification | finite source -> Core -> artifact -> communication -> in-process trace/conformance accepted; Theory T1 and broad PHASE-I1 unaccepted | maintenance **着手可能**; general widening **後段依存** |
 | User-facing specification | provisional project/run/inspect/conform workflow exists; public grammar/CLI/JSON/API/ABI/wire/devtools unfrozen | regression **着手可能**; public contract **要仕様確認** |
-| Implementation / operation | I2 exit preserved; I3-1 and I3-2 bounded private QUIC evidence accepted; current I3-3 runtime/fault slices validated, with late-authority/order and full-matrix validation pending | I3-3 **着手可能**; I3-4+ **後段依存** |
+| Implementation / operation | I2 exit preserved; I3-1 and I3-2 bounded private QUIC evidence accepted; actual-time expiry/lost-reply/reconnect and getter checks are green, while requester-local wait, cross-session duplicate/stale reply, provider, and full-matrix validation remain pending | I3-3 **着手可能**; I3-4+ **後段依存** |
 
 ```text
 Theory: T1
@@ -240,7 +240,7 @@ Validated-only observer projection retains genuine evidence and rejects
 malformed provenance. Full probe library 3/3 also passes. These are bounded
 application-write/process observations, not complete failure-family acceptance.
 Full failure/order coverage remains open; disk free space is about 15 GiB.
-The current uncommitted integration over `31be54b9` selects ADR-0041/spec/16's
+The pushed checkpoint `050f5067` selects ADR-0041/spec/16's
 source-declared owner-admission budget; implementation remains in progress.
 Static tests now pass 14/14, old AST/M6/M7 10/13/27 and the raw-Core escape
 compile-fail doctest 1/1; focused Clippy passes and reviewed P0/P1 are resolved.
@@ -250,9 +250,22 @@ no longer fabricates/assumes an M8 trace, and M10 reports the distinct guard.
 Final budget library 11/11, M10 source 3/3, I3 runtime 63/63, runtime library
 with test seams 298/298, M10 conformance 67/67, I2 5/5 + 8/8, probe 32/32,
 private QUIC 2/2 and focused Clippy/format pass. Independent integration review
-has no P0/P1. Next: serialized owner clock/stage/resolve, sealed one-use permit,
-retained typed expiry/requester consumption, then actual QUIC evidence. Root free space
-is now 14 GiB. Provider remains OPEN; no whole fault row is accepted.
+has no P0/P1. Frozen C3 evidence is owner module 19/19, G1-pending→G2 decision
+1/1, private QUIC module 3/3, full process-runtime integration 63/63,
+dropped-expiry replay 1/1, and queued-handoff 1/1. The authentic two-process
+budget fixture is now a real 1/1 run with both children reaped, request/serve/
+write/reply/receipt, and four exact delivery joins; host-driver is 5/5 and broad
+local I3 library 61/61. Source-known LAB alias privacy is fixed. Scoped runtime
+Clippy with both I3 features and `-Dwarnings`, source budget 4/4, and full probe
+integration 38/38 are green; no matching children remain. Local-wait six named
+tests/seven cases and narrow review are closed. Delivered expiry, lost reply,
+expired reconnect, and producer getter 2/2 are green. Remaining actual-time gates
+are full-time review and actual row-11 reply replay. The genuine G1→G2 requester
+stale-binder test is already local-green; preserve its actual receive-path correspondence.
+Whole feature-union runtime library 332/332, integration 63/63, Clippy and format
+are green. Provider and remaining matrix/order validation remain open.
+Root free space is now 12.03 GiB; provider remains OPEN and no
+whole fault row is accepted.
 
 Owner clarification is retained as a working interpretation: ordinary meaning ->
 generated distribution -> continually checked composition. World/Avatar remain
@@ -261,6 +274,26 @@ closed-cohort finite-profile machinery are bounded evidence, not general Mir
 requirements, and do not create a new theory gate or roadmap item.
 
 ## recent log
+
+- 2026-09-08 10:53 JST: delivered expiry/loss/reconnect and local wait pass
+  6 named tests (7 cases), full probe 38/38, runtime library 332/332 and
+  integration 63/63; narrow review, Clippy/format and I2/M10 floor are green.
+  Actual reply replay and the remaining I3-3 matrix are next; no milestone acceptance.
+
+- 2026-09-08 09:42 JST: predecessor owner-budget run and full probe integration
+  pass with four exact delivery joins; host-driver 5/5 and broad local I3 56/56
+  were green. Superseded by the current 61/61 feature-union rerun.
+
+- 2026-09-07 22:39 JST: I3-3 owner clock/gate/one-use handoff slice passes
+  14+1+1+1 focused tests after four review repairs and exact G2 handoff repair;
+  independent source review has no P0/P1. Dirty delta over `050f5067`, not a
+  milestone close. Next: typed expiry reply/requester terminal retention,
+  then actual QUIC evidence; provider/full matrix remain open.
+
+- 2026-09-07 21:19 JST: default-guard checkpoint `050f5067` is pushed with
+  remote parity verified at 21:09. Source-based staging falsifier now reaches
+  the expected behavioral RED (0/1); serialized owner gate implementation
+  begins within I3-3. No milestone closes or later milestone activates.
 
 - 2026-09-07 18:13 JST: owner schedules pause after complete I3-3 acceptance,
   validation/review and push/parity; I3-4 will require explicit resume. Current

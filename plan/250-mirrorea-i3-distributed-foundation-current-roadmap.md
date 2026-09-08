@@ -1,6 +1,6 @@
 # Plan 250 — Mirrorea I3 Distributed Foundation current execution roadmap
 
-最終更新: 2026-09-07 18:52 JST
+最終更新: 2026-09-08 10:55 JST
 
 ## 役割、authority、current control state
 
@@ -1074,8 +1074,8 @@ obligations remain required. That cut leaves time/provider contracts open;
 the following integration selects the time contract without accepting its
 implementation. No later milestone or general harness framework is activated.
 
-**Owner-admission time contract checkpoint (2026-09-07, uncommitted integration
-over `31be54b9`):** PROPOSAL-044 / ADR-0041 select spec/16's explicit source
+**Owner-admission time contract checkpoint (2026-09-07, committed integration
+`050f5067`):** PROPOSAL-044 / ADR-0041 select spec/16's explicit source
 opt-in budget and declared `DeadlineExpired`. Candidate A, a separately
 authorized outer lifecycle contract, is deferred: the existing M9 update does
 not supply that request-expiry authorization. Provider remains **OPEN**.
@@ -1142,6 +1142,145 @@ integration review has no P0/P1. These are finite default-rejection and
 preservation results, not clock/permit/expiry execution or row-17 acceptance.
 The Stage C consumer remains as above; provider and remaining I3-3 matrix/order
 remain required. Only full I3-3 acceptance triggers the owner-requested pause.
+
+The safe checkpoint was pushed as
+`050f5067c5f63384abd7b8a6389158ddc76187da`; fresh remote parity and a clean
+worktree were verified at `2026-09-07T21:09:01+09:00`. Stage C now advances
+the existing ledger through owner-local staging, serialized clock resolution
+and one-use admission, without a second scheduler or identity version.
+Its initial source-based behavioral falsifier fails 0/1: the current SYS5
+entry returns `CarrierAdmissionRejected` instead of staging with no owner
+effects. The preceding opaque-Option assertion compile failure is not this
+behavioral evidence. Typed failure transport/requester retention is the next
+dependent consumer, not implemented by staging alone.
+
+Stage C1/C2 internal checkpoint (`2026-09-07T22:39:42+09:00`): the frozen
+dirty runtime/test delta over `050f5067` passes the complete owner-admission
+module 14/14, absent-target 1/1, queued-owner 1/1 and source staging 1/1.
+Independent narrow review has no remaining P0/P1 after correcting binding
+nonmutation, immutable resolution provenance, trace-less typed rejection,
+record-derived finalization and exact current-generation handoff. Ordinary
+historical-carrier rejection remains strict. These are local finite results,
+not typed expiry transport or full fault-row acceptance; integration still
+emits 16 unused-path warnings until its direct consumer is connected.
+The immediate consumer is C3: gate-produced declared expiry in the generated
+reply, bounded requester terminal retention before pending deletion, then
+actual selected-QUIC time/loss/replay evidence. Provider and all remaining
+I3-3 failure/order obligations remain required. No additional milestone,
+general generation migration, scheduler or public compatibility is introduced.
+
+Resumed C3 checkpoint (`2026-09-08T08:36:36+09:00`): the owner again explicitly
+requests execution through I3-3 completion, followed by the same pause. HEAD
+and freshly queried remote main remain `050f5067`; C1/C2 and C3 changes are
+preserved uncommitted. Fresh local tests compile and run 16 passed / 3 failed:
+independently modified decision provenance and an expiry substituted into an
+unbudgeted request are incorrectly accepted; the capacity test stops in its
+fixture because repeated tick 1 correctly becomes a no-op. The separate
+genuine G1-pending/G2-successor test also reproduces incorrect acceptance.
+The private QUIC classifier test has compile errors (missing intended API and
+test-only private-field access), not network evidence. Repair those test setup
+issues, capture capacity rejection before dequeue, and complete the narrow
+receiver repairs before connecting the actual selected-transport consumer.
+Independent read-only planning review retains all 20 families and ordering
+requirements; it establishes no mandatory owner escalation. Provider remains
+the distinct unselected contract, not a relabelled RMW or expiry failure.
+
+The next time consumer uses the existing two-process probe, not a second
+transport fixture. Under spec/16's already selected T0 host-clock boundary,
+the parent selects one opaque runtime-bound host driver over the larger
+alternative of changing serialized startup controls to carry sealed clock
+stimuli. Its bounded operation advances one checked owner clock and resolves
+the deterministic next Awaiting request through the existing gate/handoff;
+it cannot accept a request identity, permit, carrier or expected outcome.
+Keep ClockHandle/Awaiting/Reserved implementation types private. The default
+immediate owner scheduling resolves at the current tick; explicit monotonic
+host tick input tests expiry only after genuine complete-frame admission.
+Neither source requests nor deployment mappings provide that clock input.
+
+The ordinary source consumer is the separate budget-1 source at
+`samples/clean-near-end/mirrorea-i3-owner-admission/main.mir`, retaining the
+existing four-locus shape and adding the condition only to `init_avatar_hp`.
+Its initial existing-API process test must expose the missing host driver
+before implementation. Later delivered-expiry, served/lost-reply uncertainty
+and retained-expiry replay use the same launcher and selected QUIC adapter.
+The probe must distinguish successful receipt from actual terminal failure;
+it may not relax its normal `serve/write/receipt == 1` validation to invent
+expiry evidence. Add only actual producer-derived expiry decision references,
+requester terminal references and corresponding delivery records. Missing
+actor observations remain unknown rather than zero. This is I3-3 row-17
+evidence, not I3-4 scenario acceptance, a public control API or a new clock
+framework.
+
+The actual served/lost-reply test initially observes peer close, not a
+requester wait expiry. The bounded completion step is an explicit T0 local
+monotonic wait after that observed loss, over the same retained pending
+request. The existing causal path is owner serve/write -> withheld reply and
+physical close -> requester loss observation -> local wait -> elapsed
+observation. Validate actual pending, receipt and terminal-consumption state
+before/after; elapsed time creates no remote fact, cancellation, retry right
+or semantic `DeadlineExpired`. This is not an adapter timeout or the global
+child/reaper deadline. Independent review prefers this smallest design over
+keeping the session open with a new serve-to-wait causal barrier: the latter
+adds machinery without a stronger required semantic fact. Direct consumer:
+spec/16's served/lost-reply/requester-wait row. Falsifier: local wait clears
+pending, reports unserved/expiry, consumes a receipt, or silently resends. The
+current peer-close-only test is predecessor evidence, not this row's closure.
+
+Row 11's remaining time consumer is exact generated-reply replay through a
+verified successor QUIC session, separately for successful and declared-expiry
+replies. The current API consumes a non-Clone reply on send and cannot perform
+that fault injection. Select one feature-gated adapter-only, non-Clone opaque
+replay candidate over exposing raw encoding/caller bytes: issue it only after
+the original generated reply was actually sent; bind its exact body, original
+peer/cohort and permitted successor session; consume it for one explicit replay
+attempt with a new network occurrence. The ordinary checked receiver, not the
+fault control, determines rejection and preserves the first receipt/terminal
+decision. No new semantic retry policy, source action, authority or public wire
+is introduced. Adapter tests/refinement and probe-local wait are independent
+implementation parts of the same time/reply boundary, with disjoint writers.
+
+Independent Canon-first planning review confirms the evidence split: actual
+network duplicates for both reply variants, plus the existing genuinely
+G1-produced expiry bytes rejected against a genuinely updated G2 requester at
+the production binder, explicitly classified **local stale-generation binder
+evidence**. Verify that actual QUIC consumption uses that same checked binder.
+Do not add B-G2 while A stays G1 and call it requester-staleness evidence; that
+does not test the relevant condition. This plan does not waive any family or
+accept unexecuted evidence. Direct consumer: row 11/spec/16 and the current
+time checkpoint; primary falsifiers are second receipt/terminal consumption,
+replaced decision, retargeted/reissued replay, current-generation bypass or a
+network occurrence mislabeled as successful delivery/admission.
+
+Time-runtime checkpoint (`2026-09-08T10:55:34+09:00`): delivered expiry,
+served/lost-reply uncertainty, retained-expiry reconnect and the explicit local
+wait now pass six named tests (seven cases), with full probe integration 38/38.
+Feature-union runtime library 332/332 and process integration 63/63, I2 5/5
+plus 8/8, M10 67/67, two-crate deny-warnings Clippy, workspace format and docs
+validation pass. Narrow independent time/local-wait review has no P0/P1.
+The optional HTML-reader embedded catalog has a documented preexisting
+failure, outside this runtime evidence; it is not recorded as passing.
+The parent integrates this bounded checkpoint before the row-11 actual reply
+replay consumer. Neither this checkpoint nor the passed local stale-generation
+test accepts row 17, all of spec/16, I3-3 or official I3 lifecycle. Provider and
+the remaining complete matrix/order still follow; I3-4 remains inactive.
+
+Independent remaining-row sequencing review keeps the following direct
+consumers after the time path. Membership uses the actual M9 retirement of
+ParticipantA and the already checked `init_focus` operation, not capability
+revocation renamed as membership. Auth/policy can exercise real pre-activation
+auth-discharge rejection; do not claim dynamic policy revocation from it.
+Visibility/redaction can reject a changed existing redaction contract through
+the actual tainted process-image admission boundary, paired with local
+visibility/consume negatives; no invented owner-message visibility field or
+designated network crossing is required. Process cut admission must check
+actual retained adapter ingress and unresolved SYS5 requests in addition to
+local fabric queues, and execute a quiescent positive plus in-flight denial.
+None of these sketches is executed evidence or permission to omit a row.
+Relation/designated ordering uses executed local producer positives and
+falsifiers in I3-3, accurately labelled local; their actual cross-process
+pressure remains I3-4. Unsupported-carrier rejection alone cannot replace a
+positive ordering producer. The distinct provider contract remains unselected
+until the time consumer is closed and its bounded Canon review is performed.
 
 ## I3-4 milestone contract — inactive until I3-3 closes and owner resumes
 

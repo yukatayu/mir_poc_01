@@ -316,17 +316,19 @@ recordが揃ったためofficial I2 entry後exitを受理しました。broad PH
   I2 regressions 5/5 + 8/8 and M10 conformance 67/67 pass. This is checkpoint
   evidence over `7580e3a`, not I3-3 acceptance or a refreshed model.
 - current I3-3 work: ADR-0041/spec/16 selects an explicit source owner-admission
-  budget. Static retention/snapshot tests 14/14, old AST/M6/M7 10/13/27,
-  raw-Core-export compile-fail 1/1 and focused Clippy pass; independent static
-  P0/P1 are resolved. Generated-contract tests 8/8, private snapshots 6/6,
-  default M8 rejection 2/2 and M8 regressions 33/33 pass with independent
-  projection/M8 review clear. The repaired contextual rejection emits no fake
-  M8 trace; M10 reports the distinct guard, and OW1 remains live. Budget library
-  11/11, M10 source 3/3, full I3 runtime 63/63, runtime library 298/298,
-  I2/M10/probe/QUIC regressions and Clippy/format pass. Independent integration
-  review clears P0/P1. Next: actual clock gate, one-use permit, typed expiry and
-  QUIC delivery; none of these are implemented or accepted by this checkpoint.
-  Provider remains OPEN; Report 2606 holds exact checkpoint evidence.
+  budget in pushed checkpoint `050f5067`. The dirty C1/C2/C3 delta includes the
+  serialized owner clock, bounded ledger states, one-use permit, M9 revalidation,
+  and G1/G2 repairs. Frozen C3 owner evidence is 19/19; G1-pending→G2 decision
+  is 1/1, private QUIC module is 3/3, and full process-runtime integration is
+  63/63. Extra dropped-expiry replay and queued-handoff slices pass 1/1 each.
+  Scoped runtime Clippy with both I3 features and `-Dwarnings` is green; source
+  budget predecessor is 4/4; current probe integration is 38/38, with no matching children remaining.
+  A real budget run passes 1/1 with two exec children reaped, request/serve/
+  write/reply/receipt, and four exact delivery joins. Host-driver is 5/5 and
+  broad local I3 library 61/61. Actual-time whole review selects requester-local
+  T0 pending-wait after B serve/lost-reply physical close, with no new clock
+  contract or transport timeout. Provider and remaining 20 families/order remain
+  open; no row-17 or I3-3 acceptance is claimed.
 - decisions taken: the working interpretation remains ordinary meaning ->
   generated distribution -> continually checked composition. World/Avatar remain
   domain-library vocabulary, not Mir Core primitives; ledger64/coordinator/
@@ -347,11 +349,18 @@ recordが揃ったためofficial I2 entry後exitを受理しました。broad PH
   SYS-5/SYS-6 CLI/JSON/grammar are internal/provisional, the four-locus toy is
   not whole-workflow OW1, and the evidence is not a general scheduler,
   memory-model, relation-DAG, public transport, or lifecycle theorem.
-- verification status: accepted I3-2 regression evidence remains the cached
-  localnet 12/12 and package 62/62 result at the pinned cut; latest dirty-source
-  slices pass as recorded above. No full 20-family I3-3 matrix, retry/reconnect
-  acceptance, or I3-3 milestone acceptance is claimed. This timestamped
-  checkpoint is not milestone acceptance.
+- verification status: accepted I3-2 regression evidence remains cached prior
+  evidence. Current C3 validation includes the real budget run 1/1, host-driver
+  5/5, broad local I3 library 61/61, private QUIC 3/3, and process-runtime
+  integration 63/63. Local-wait six named tests/seven cases and full probe 38/38
+  are green; narrow local-wait review is closed. Live delivered-expiry, lost-
+  reply, expired-reconnect, and producer getter 2/2 are green. Remaining are
+  full-time review and actual row-11 reply replay. Genuine G1→G2 requester
+  stale-binder evidence is already local-green; its network-path correspondence
+  must be retained. Whole runtime library 332/332, integration 63/63, Clippy and
+  format are green. Provider and remaining matrix/order validation remain open.
+  No retry/reconnect acceptance or I3-3 milestone acceptance is
+  claimed. This timestamped checkpoint is not milestone acceptance.
 
 ## Historical plan index（Plan 249を含めrepository memory、current queueではない）
 

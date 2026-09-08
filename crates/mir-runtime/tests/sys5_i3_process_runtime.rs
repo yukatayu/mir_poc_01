@@ -77,7 +77,7 @@ const PRIVATE_PROCESS_MESSAGE_REQUEST_CARRIER_ID_PATH: &str = "/message/carrier/
 const PRIVATE_PROCESS_MESSAGE_M9_OWNER_LINEAGE_PATH: &str = "/message/carrier/m9_owner_lineage_ref";
 #[cfg(feature = "i3-process-test-seams")]
 const PRIVATE_PROCESS_MESSAGE_REPLY_RECEIPT_REQUEST_ID_PATH: &str =
-    "/message/carrier/payload/fields/receipt/request_id";
+    "/message/carrier/payload/fields/outcome/fields/receipt/request_id";
 const PRIVATE_PROCESS_IMAGE_ASSIGNED_LOCI_PATH: &str = "/image/assigned_loci";
 const PRIVATE_PROCESS_IMAGE_SEMANTIC_ROWS_PATH: &str =
     "/image/child_seed/required_local_authority_closure/rows";
@@ -4562,7 +4562,7 @@ fn g1_nonowner_serve_is_rejected_without_requester_owner_state_or_mutation() {
 }
 
 #[test]
-fn i3_owner_admission_budget_sys5_default_owner_entry_rejects_before_owner_effects_and_keeps_the_unannotated_control()
+fn i3_owner_admission_budget_sys5_source_request_stages_without_owner_effects_and_keeps_the_unannotated_control()
  {
     let budgeted_source = owner_admission_budget_owner_only_source(1);
     let budgeted_project = build_once(&budgeted_source);
@@ -4580,51 +4580,50 @@ fn i3_owner_admission_budget_sys5_default_owner_entry_rejects_before_owner_effec
         1,
         "the source-selected requester retains its original pending operation before the owner entry rejects"
     );
-    assert_eq!(
+    assert!(
         budgeted_owner
             .accept_inbound(budgeted_request)
-            .expect_err(
-                "the default SYS5 owner entry must not bypass a checked owner-admission condition",
+            .expect(
+                "the checked budgeted source request must stage at the owner gate before any ordinary M8 owner execution",
             )
-            .kind(),
-        Sys5I3ProcessRuntimeErrorKind::CarrierAdmissionRejected,
-        "SYS5 may quarantine the lower M8 diagnostic at its carrier boundary, but must fail closed"
+            .is_none(),
+        "staging retains the exact request without manufacturing a reply before the serialized owner gate resolves it"
     );
     assert_eq!(
         budgeted_owner.observer_safe_runtime_summary(),
         budgeted_owner_summary_before,
-        "the default owner entry must not record a serve, write, reply, or receipt on admission-authorization rejection"
+        "staging must not record an owner serve, write, reply, or requester receipt before gate resolution"
     );
     assert_eq!(
         budgeted_owner
             .observer_safe_runtime_summary()
             .served_owner_request_count(),
         0,
-        "the rejected annotated request must have no owner serve occurrence"
+        "the staged annotated request must have no owner serve occurrence"
     );
     assert_eq!(
         budgeted_owner
             .observer_safe_runtime_summary()
             .actual_owner_write_count(),
         0,
-        "the rejected annotated request must have no owner write occurrence"
+        "the staged annotated request must have no owner write occurrence"
     );
     assert_eq!(
         budgeted_owner.observer_safe_outbox_summary(),
         budgeted_owner_outbox_before,
-        "the rejected annotated request must not mint an owner reply carrier"
+        "staging must not mint an owner reply carrier"
     );
     assert_eq!(
         budgeted_requester.observer_safe_pending_owner_request_count(),
         1,
-        "owner rejection must retain the original requester operation rather than manufacture a receipt"
+        "owner staging must retain the original requester operation rather than manufacture a receipt"
     );
     assert_eq!(
         budgeted_requester
             .observer_safe_runtime_summary()
             .accepted_inbound_receipt_count(),
         0,
-        "the requester must not claim a local receipt for the rejected owner admission"
+        "the requester must not claim a local receipt before owner-gate resolution"
     );
 
     let ordinary_project = build_once(OWNER_ONLY_SOURCE);

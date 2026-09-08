@@ -32,6 +32,11 @@
     source-derived projection, generated in-process dispatch, and one joined
     observer-safe devtools report. The command names and JSON shape are
     internal/provisional and do not freeze public API/ABI/wire.
+- I3-3 owner-admission source evidence uses the existing Rust two-process
+  probe integration tests, not a new script or public CLI. The focused command
+  is `cargo test --locked -p mirrorea-i3-probe --test i3_process_localnet source_first_localnet_owner_budget -- --test-threads=1`.
+  Its source is `samples/clean-near-end/mirrorea-i3-owner-admission/main.mir`;
+  actual-time network validation remains in progress (Report 2606).
 - `practical_alpha_error_display.py`
   shared practical helper display utility that redacts repo-owned absolute path
   prefixes from failure surfaces while preserving external/temp absolute paths

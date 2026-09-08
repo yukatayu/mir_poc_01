@@ -28,12 +28,14 @@ use mirrorea_i3_probe::{
     I3LocalnetLateIngressNonregisteredAckInputDisposition, I3LocalnetLateIngressOwnerOutcome,
     I3LocalnetLateIngressParentPublication, I3LocalnetLateIngressProfile,
     I3LocalnetLateIngressRequesterOutcome, I3LocalnetLifecycleRejectionCause,
-    I3LocalnetObserverSafeDeliveryRecord, I3LocalnetReconnectOwnerOutcome,
-    I3LocalnetRejectionAudit, I3LocalnetRemoteAdmissionEvidence, I3LocalnetRemoteEvidenceRejection,
-    I3LocalnetRequesterFaultObservation, I3LocalnetRetryAttemptReason, I3LocalnetRetryAudit,
-    I3LocalnetRetryAuditFalsifier, I3LocalnetRetryEvidenceRejection, I3LocalnetRetryFalsifier,
-    I3LocalnetRetryProfile, I3LocalnetRetryRequesterOutcome, I3LocalnetRunErrorKind,
-    I3ProcessLocalnetRequest, run_i3_process_localnet,
+    I3LocalnetObserverSafeDeliveryRecord, I3LocalnetOwnerAdmissionDriveProfile,
+    I3LocalnetReconnectOwnerOutcome, I3LocalnetRejectionAudit, I3LocalnetRemoteAdmissionEvidence,
+    I3LocalnetRemoteEvidenceRejection, I3LocalnetRequesterFaultObservation,
+    I3LocalnetRequesterLocalWaitFalsifier, I3LocalnetRequesterLocalWaitProfile,
+    I3LocalnetRetryAttemptReason, I3LocalnetRetryAudit, I3LocalnetRetryAuditFalsifier,
+    I3LocalnetRetryEvidenceRejection, I3LocalnetRetryFalsifier, I3LocalnetRetryProfile,
+    I3LocalnetRetryRequesterOutcome, I3LocalnetRunErrorKind, I3ProcessLocalnetRequest,
+    run_i3_process_localnet,
 };
 
 const ACTIVE_I2_SOURCE: &str = concat!(
@@ -43,12 +45,28 @@ const ACTIVE_I2_SOURCE: &str = concat!(
 const ACTIVE_I2_LOGICAL_SOURCE_PATH: &str = "samples/clean-near-end/mirrorea-i2-local-toy/main.mir";
 const ACTIVE_I2_SOURCE_TEXT: &str =
     include_str!("../../../samples/clean-near-end/mirrorea-i2-local-toy/main.mir");
+const OWNER_ADMISSION_SOURCE: &str = concat!(
+    env!("CARGO_MANIFEST_DIR"),
+    "/../../samples/clean-near-end/mirrorea-i3-owner-admission/main.mir"
+);
+const OWNER_ADMISSION_LOGICAL_SOURCE_PATH: &str =
+    "samples/clean-near-end/mirrorea-i3-owner-admission/main.mir";
+const OWNER_ADMISSION_SOURCE_TEXT: &str =
+    include_str!("../../../samples/clean-near-end/mirrorea-i3-owner-admission/main.mir");
 
 fn canonical_request() -> I3ProcessLocalnetRequest {
     // This is an ordinary source path, not a supervisor-fed expected outcome
     // or a pre-assembled process image.  The implementation must check/build
     // and admit it exactly once in the supervisor before process launch.
     I3ProcessLocalnetRequest::from_ordinary_source_path(ACTIVE_I2_SOURCE)
+        .with_deadline(Duration::from_secs(20))
+}
+
+fn owner_admission_request() -> I3ProcessLocalnetRequest {
+    // The supervisor receives the ordinary budgeted source alone.  It must
+    // derive the checked admission condition and eventual normal result; the
+    // test supplies neither a gate disposition nor a semantic expected value.
+    I3ProcessLocalnetRequest::from_ordinary_source_path(OWNER_ADMISSION_SOURCE)
         .with_deadline(Duration::from_secs(20))
 }
 
@@ -70,6 +88,23 @@ fn active_contract(kind: &str) -> Sys5I3AdapterCarrierContract {
     project
         .i3_adapter_carrier_contract(&edge.edge_ref)
         .expect("a generated edge has the matching checked I3 adapter contract")
+}
+
+fn owner_admission_contract(kind: &str) -> Sys5I3AdapterCarrierContract {
+    let project = build_project(Sys5SourceInput::inline(
+        OWNER_ADMISSION_LOGICAL_SOURCE_PATH,
+        OWNER_ADMISSION_SOURCE_TEXT,
+    ))
+    .expect("the ordinary budgeted source remains checkable for observer expectations");
+    let edge = project
+        .semantic_summary()
+        .generated_communication
+        .iter()
+        .find(|edge| edge.operation_id == "init_avatar_hp" && edge.kind == kind)
+        .unwrap_or_else(|| panic!("budgeted source must generate the {kind} edge"));
+    project
+        .i3_adapter_carrier_contract(&edge.edge_ref)
+        .expect("a generated budgeted edge has the matching checked I3 adapter contract")
 }
 
 /// The trace must publish inventories from child-observed delivery records,
@@ -864,6 +899,457 @@ fn source_first_localnet_executes_one_remote_owner_round_trip_across_two_reaped_
 }
 
 #[test]
+fn source_first_localnet_owner_budget_serves_before_expiry() {
+    let run = run_i3_process_localnet(owner_admission_request()).expect(
+        "the source-declared owner budget must serve normally at owner tick zero before budget one expires",
+    );
+
+    let process_a = run
+        .child(I3LocalnetChildSlot::ProcessA)
+        .expect("the budgeted source must launch process A");
+    let process_b = run
+        .child(I3LocalnetChildSlot::ProcessB)
+        .expect("the budgeted source must launch process B");
+    assert!(process_a.exec_confirmed());
+    assert!(process_b.exec_confirmed());
+    assert!(process_a.reaped());
+    assert!(process_b.reaped());
+    assert!(run.lifecycle().all_children_reaped());
+
+    let execution = run.execution_audit();
+    assert_eq!(execution.generated_request_count(), 1);
+    assert_eq!(execution.remote_owner_serve_count(), 1);
+    assert_eq!(execution.remote_owner_write_count(), 1);
+    assert_eq!(execution.generated_reply_count(), 1);
+    assert_eq!(execution.requester_local_receipt_count(), 1);
+    assert!(execution.source_derived_only());
+
+    let trace = run.observer_safe_trace();
+    assert!(trace.is_observer_safe());
+    let deliveries = trace.actual_delivery_records();
+    assert_eq!(deliveries.len(), 4);
+    let request_send = delivery_for_phase(deliveries, I3LocalnetDeliveryPhase::RequestSend);
+    let request_receive = delivery_for_phase(deliveries, I3LocalnetDeliveryPhase::RequestReceive);
+    let reply_send = delivery_for_phase(deliveries, I3LocalnetDeliveryPhase::ReplySend);
+    let reply_receive = delivery_for_phase(deliveries, I3LocalnetDeliveryPhase::ReplyReceive);
+    let request_identity = request_send.semantic_request_identity_ref();
+
+    let request_contract = owner_admission_contract("owner-request");
+    let reply_contract = owner_admission_contract("owner-reply-receipt");
+    assert_delivery_matches_contract(request_send, &request_contract, request_identity, None);
+    assert_delivery_matches_contract(request_receive, &request_contract, request_identity, None);
+    assert_delivery_matches_contract(
+        reply_send,
+        &reply_contract,
+        request_identity,
+        Some(request_identity),
+    );
+    assert_delivery_matches_contract(
+        reply_receive,
+        &reply_contract,
+        request_identity,
+        Some(request_identity),
+    );
+    assert_delivery_semantics_match(request_send, request_receive);
+    assert_delivery_semantics_match(reply_send, reply_receive);
+    assert_eq!(
+        [
+            request_send.network_occurrence_ref(),
+            request_receive.network_occurrence_ref(),
+            reply_send.network_occurrence_ref(),
+            reply_receive.network_occurrence_ref(),
+        ]
+        .into_iter()
+        .collect::<BTreeSet<_>>()
+        .len(),
+        4,
+        "the source-first budgeted round trip needs four actual, distinct delivery observations"
+    );
+}
+
+#[test]
+fn source_first_localnet_owner_budget_expiry_is_delivered_and_consumed_at_tick_one() {
+    let error = run_i3_process_localnet(
+        owner_admission_request().with_owner_admission_drive_profile(
+            I3LocalnetOwnerAdmissionDriveProfile::AdvanceOneTickAfterAwaiting,
+        ),
+    )
+    .expect_err(
+        "the owner-local tick-one decision must return the declared terminal failure, not a successful receipt",
+    );
+
+    assert_eq!(
+        error.kind(),
+        I3LocalnetRunErrorKind::TerminalFailureConsumed
+    );
+    assert!(error.fault_audit().is_none());
+    assert!(error.retry_audit().is_none());
+
+    let expiry = error.declared_owner_deadline_expired_audit().expect(
+        "the real owner expiry and requester terminal consumption must retain a joined observer-safe audit",
+    );
+    let request_identity = expiry.request_identity_ref();
+    assert!(!request_identity.is_empty());
+
+    let request_contract = owner_admission_contract("owner-request");
+    let reply_contract = owner_admission_contract("owner-reply-receipt");
+    let request_send = expiry.request_send();
+    let request_receive = expiry.request_receive();
+    let reply_send = expiry.reply_send();
+    let reply_receive = expiry.reply_receive();
+    assert_delivery_matches_contract(request_send, &request_contract, request_identity, None);
+    assert_delivery_matches_contract(request_receive, &request_contract, request_identity, None);
+    assert_delivery_matches_contract(
+        reply_send,
+        &reply_contract,
+        request_identity,
+        Some(request_identity),
+    );
+    assert_delivery_matches_contract(
+        reply_receive,
+        &reply_contract,
+        request_identity,
+        Some(request_identity),
+    );
+    assert_delivery_semantics_match(request_send, request_receive);
+    assert_delivery_semantics_match(reply_send, reply_receive);
+    assert_eq!(
+        [
+            request_send.network_occurrence_ref(),
+            request_receive.network_occurrence_ref(),
+            reply_send.network_occurrence_ref(),
+            reply_receive.network_occurrence_ref(),
+        ]
+        .into_iter()
+        .collect::<BTreeSet<_>>()
+        .len(),
+        4,
+        "the declared failure must retain the four actual request/reply delivery phases"
+    );
+
+    let owner_expiry = expiry.owner_expiry();
+    assert!(!owner_expiry.decision_commitment_ref().is_empty());
+    assert!(!owner_expiry.decision_occurrence_ref().is_empty());
+    assert_eq!(owner_expiry.generated_reply_count(), 1);
+    assert_eq!(owner_expiry.expired_count(), 1);
+    assert_eq!(owner_expiry.owner_serve_count(), 0);
+    assert_eq!(owner_expiry.owner_mutation_count(), 0);
+    assert_eq!(expiry.requester_terminal_failure_consumed_count(), 1);
+    assert_eq!(expiry.requester_local_receipt_count(), 0);
+    assert!(
+        !expiry
+            .requester_terminal_failure_occurrence_ref()
+            .is_empty()
+    );
+
+    let lifecycle = error.rejection_audit();
+    assert_eq!(
+        lifecycle.stage(),
+        I3LocalnetFailureStage::RequesterTerminalFailureConsumed
+    );
+    assert_eq!(lifecycle.child_terminal_event_count(), 2);
+    assert!(lifecycle.all_children_reaped());
+    assert!(lifecycle.no_orphan_child_pids());
+    assert!(lifecycle.zero_exit_reap_observed_within_deadline());
+    assert!(!lifecycle.deadline_enforced());
+    assert!(!lifecycle.reaper_deadline_enforced());
+    for event in lifecycle.child_terminal_events() {
+        assert_eq!(event.outcome(), I3LocalnetChildTerminalOutcome::Completed);
+        assert_eq!(event.observed_exit_status_code(), Some(0));
+        assert!(!event.was_force_killed());
+    }
+}
+
+#[test]
+fn source_first_localnet_owner_budget_serves_then_dropped_reply_keeps_requester_unknown() {
+    let error = run_i3_process_localnet(
+        owner_admission_request()
+            .with_fault_profile(I3LocalnetFaultProfile::DisconnectAfterRemoteAdmission),
+    )
+    .expect_err("a lost reply after the budgeted owner serves must retain requester uncertainty");
+
+    assert_eq!(error.kind(), I3LocalnetRunErrorKind::AmbiguousDelivery);
+    let fault = error
+        .fault_audit()
+        .expect("the selected post-admission loss must retain actual fault evidence");
+    assert_eq!(
+        fault.profile(),
+        I3LocalnetFaultProfile::DisconnectAfterRemoteAdmission
+    );
+    assert_eq!(
+        fault.requester_observation(),
+        I3LocalnetRequesterFaultObservation::ReplyOrReceiptNotObserved
+    );
+    match fault.remote_admission() {
+        Some(I3LocalnetRemoteAdmissionEvidence::Admitted {
+            request_receive,
+            owner_serve_count,
+            owner_mutation_count,
+            ..
+        }) => {
+            assert_eq!(*owner_serve_count, 1);
+            assert_eq!(*owner_mutation_count, 1);
+            assert_delivery_matches_contract(
+                request_receive,
+                &owner_admission_contract("owner-request"),
+                fault.request_identity_ref(),
+                None,
+            );
+        }
+        Some(I3LocalnetRemoteAdmissionEvidence::NoAdmission { .. }) => {
+            panic!("a post-admission loss cannot be relabeled as known non-admission")
+        }
+        None => {
+            panic!("the actual owner serve must be retained independently of requester uncertainty")
+        }
+    }
+
+    let lifecycle = error.rejection_audit();
+    assert_eq!(
+        lifecycle.stage(),
+        I3LocalnetFailureStage::AfterRemoteAdmission
+    );
+    assert!(lifecycle.requester_pending_request_is_retained());
+}
+
+#[test]
+fn source_first_localnet_owner_budget_lost_reply_then_local_wait_keeps_remote_unknown() {
+    let error = run_i3_process_localnet(
+        owner_admission_request()
+            .with_fault_profile(I3LocalnetFaultProfile::DisconnectAfterRemoteAdmission)
+            .with_requester_local_wait_profile(
+                I3LocalnetRequesterLocalWaitProfile::WaitLocallyAfterObservedLoss,
+            ),
+    )
+    .expect_err(
+        "a local wait after the real post-admission peer close must retain remote uncertainty rather than infer a terminal outcome",
+    );
+
+    assert_eq!(error.kind(), I3LocalnetRunErrorKind::AmbiguousDelivery);
+    let fault = error.fault_audit().expect(
+        "the selected served-but-lost-reply schedule must retain validated fault evidence before the local wait",
+    );
+    assert_eq!(
+        fault.profile(),
+        I3LocalnetFaultProfile::DisconnectAfterRemoteAdmission
+    );
+    assert_eq!(
+        fault.requester_observation(),
+        I3LocalnetRequesterFaultObservation::ReplyOrReceiptNotObserved
+    );
+    assert!(
+        !fault.semantic_success(),
+        "a completed requester-local wait after reply loss is never a successful receipt"
+    );
+    let request_identity = fault.request_identity_ref();
+    assert!(!request_identity.is_empty());
+    assert!(error.retry_audit().is_none());
+    assert!(error.declared_owner_deadline_expired_audit().is_none());
+    match fault.remote_admission() {
+        Some(I3LocalnetRemoteAdmissionEvidence::Admitted {
+            request_receive,
+            owner_serve_count,
+            owner_mutation_count,
+            ..
+        }) => {
+            assert_eq!(*owner_serve_count, 1);
+            assert_eq!(*owner_mutation_count, 1);
+            assert_delivery_matches_contract(
+                request_receive,
+                &owner_admission_contract("owner-request"),
+                request_identity,
+                None,
+            );
+            assert_eq!(
+                request_receive.semantic_request_identity_ref(),
+                request_identity,
+                "the actual owner receive must retain the exact source-generated request identity through the local wait"
+            );
+        }
+        Some(I3LocalnetRemoteAdmissionEvidence::NoAdmission { .. }) => {
+            panic!("a real served reply loss cannot be relabeled as known non-admission")
+        }
+        None => panic!("the local wait must preserve the actual owner serve/write evidence"),
+    }
+
+    let local_wait = fault.requester_local_wait().expect(
+        "the requester-local wait must retain its own observed elapsed evidence after the actual loss",
+    );
+    assert!(
+        local_wait.required_minimum_elapsed() > Duration::ZERO,
+        "the requester-local wait must have a positive fixed minimum rather than a zero-duration observer mark"
+    );
+    assert!(
+        local_wait.observed_elapsed() >= local_wait.required_minimum_elapsed(),
+        "the actual observed local wait must meet its fixed minimum"
+    );
+    assert_eq!(local_wait.pending_before(), 1);
+    assert_eq!(local_wait.pending_after(), 1);
+    assert_eq!(local_wait.local_receipt_before(), 0);
+    assert_eq!(local_wait.local_receipt_after(), 0);
+    assert_eq!(local_wait.terminal_failure_before(), 0);
+    assert_eq!(local_wait.terminal_failure_after(), 0);
+
+    let lifecycle = error.rejection_audit();
+    assert_eq!(
+        lifecycle.stage(),
+        I3LocalnetFailureStage::AfterRemoteAdmission,
+        "a requester-local wait after observed loss cannot upgrade remote uncertainty into a remote outcome"
+    );
+    assert!(lifecycle.requester_pending_request_is_retained());
+    assert_handled_delivery_fault_lifecycle(&lifecycle);
+}
+
+#[test]
+fn source_first_localnet_owner_budget_local_wait_falsifiers_reject_observer_evidence() {
+    for (falsifier, label) in [
+        (
+            I3LocalnetRequesterLocalWaitFalsifier::SetObservedElapsedBelowMinimum,
+            "elapsed below the fixed local-wait minimum",
+        ),
+        (
+            I3LocalnetRequesterLocalWaitFalsifier::ClearPostWaitPendingObservation,
+            "cleared post-wait pending observation",
+        ),
+    ] {
+        let error = run_i3_process_localnet(
+            owner_admission_request()
+                .with_fault_profile(I3LocalnetFaultProfile::DisconnectAfterRemoteAdmission)
+                .with_requester_local_wait_profile(
+                    I3LocalnetRequesterLocalWaitProfile::WaitLocallyAfterObservedLoss,
+                )
+                .with_requester_local_wait_falsifier(falsifier),
+        )
+        .expect_err(
+            "observer-only corruption of the local wait must reject evidence rather than create a remote result",
+        );
+
+        assert_eq!(
+            error.kind(),
+            I3LocalnetRunErrorKind::LifecycleRejected,
+            "{label} is a typed lifecycle-evidence rejection, never semantic success or a declared owner deadline"
+        );
+        assert!(
+            error.fault_audit().is_none(),
+            "{label} must not publish accepted fault or local-wait evidence"
+        );
+
+        let lifecycle = error.rejection_audit();
+        assert_eq!(
+            lifecycle.stage(),
+            I3LocalnetFailureStage::LifecycleEvidenceRejected,
+            "{label} must retain the typed observer-evidence rejection"
+        );
+        assert!(
+            !lifecycle.requester_pending_request_is_retained(),
+            "{label} must not promote an unvalidated post-wait pending observation"
+        );
+        assert_handled_delivery_fault_lifecycle(&lifecycle);
+    }
+}
+
+#[test]
+fn source_first_localnet_owner_budget_expiry_lost_reply_rejects_the_exact_reconnect_duplicate() {
+    let error = run_i3_process_localnet(
+        owner_admission_request()
+            .with_owner_admission_drive_profile(
+                I3LocalnetOwnerAdmissionDriveProfile::AdvanceOneTickAfterAwaiting,
+            )
+            .with_retry_profile(I3LocalnetRetryProfile::ReconnectAfterOwnerAdmissionBeforeReply),
+    )
+    .expect_err(
+        "a dropped declared expiry remains requester-unknown while the exact reconnect duplicate stays expired",
+    );
+
+    assert_eq!(error.kind(), I3LocalnetRunErrorKind::AmbiguousDelivery);
+    let retry = error.retry_audit().expect(
+        "the two-session run must join source-derived retry evidence without creating another source operation",
+    );
+    assert_eq!(
+        retry.profile(),
+        I3LocalnetRetryProfile::ReconnectAfterOwnerAdmissionBeforeReply
+    );
+    assert!(!retry.original_request_succeeded());
+    assert_eq!(
+        retry.requester_outcome(),
+        I3LocalnetRetryRequesterOutcome::PendingReplyOrReceiptNotObserved
+    );
+    assert!(retry.first_session_carrier_write_attempted());
+    assert!(retry.initial_owner_admission().is_none());
+
+    let initial_expiry = retry.initial_owner_expiry().expect(
+        "the first session must retain actual declared-expiry evidence before the reconnect is attempted",
+    );
+    assert!(!initial_expiry.decision_commitment_ref().is_empty());
+    assert!(!initial_expiry.decision_occurrence_ref().is_empty());
+    assert_eq!(initial_expiry.generated_reply_count(), 1);
+    assert_eq!(initial_expiry.expired_count(), 1);
+    assert_eq!(initial_expiry.owner_serve_count(), 0);
+    assert_eq!(initial_expiry.owner_mutation_count(), 0);
+
+    let request_contract = owner_admission_contract("owner-request");
+    let initial_request = retry
+        .initial_request_delivery()
+        .expect("the first session must retain its actual source-generated request delivery");
+    let reconnect_request = retry.reconnect_request_delivery();
+    assert_delivery_matches_contract(
+        initial_request,
+        &request_contract,
+        retry.request_identity_ref(),
+        None,
+    );
+    assert_delivery_matches_contract(
+        reconnect_request,
+        &request_contract,
+        retry.request_identity_ref(),
+        None,
+    );
+    assert_delivery_semantics_match(initial_request, reconnect_request);
+    assert_ne!(
+        initial_request.network_occurrence_ref(),
+        reconnect_request.network_occurrence_ref(),
+        "the retained original request must still cross distinct session-one and session-two network occurrences"
+    );
+
+    match retry.reconnect_owner_outcome() {
+        Some(
+            I3LocalnetReconnectOwnerOutcome::DuplicateRequestRejectedAfterDeclaredDeadlineExpired {
+                candidate_commitment_ref,
+                network_occurrence_ref,
+                owner_expired_count,
+                owner_serve_count,
+                owner_mutation_count,
+            },
+        ) => {
+            assert_eq!(
+                candidate_commitment_ref,
+                reconnect_request.candidate_commitment_ref(),
+                "the duplicate rejection must bind its actual second-session sender commitment"
+            );
+            assert!(!candidate_commitment_ref.is_empty());
+            assert!(!network_occurrence_ref.is_empty());
+            assert_eq!(*owner_expired_count, 1);
+            assert_eq!(*owner_serve_count, 0);
+            assert_eq!(*owner_mutation_count, 0);
+        }
+        Some(I3LocalnetReconnectOwnerOutcome::DuplicateRequestRejected { .. }) => {
+            panic!("an expiry reconnect must retain the declared-expiry duplicate disposition")
+        }
+        Some(I3LocalnetReconnectOwnerOutcome::Replied { .. }) => {
+            panic!("an expired request must not receive a successful reconnect reply")
+        }
+        None => panic!("the actual reconnect duplicate must retain its owner outcome"),
+    }
+
+    let lifecycle = error.rejection_audit();
+    assert_eq!(
+        lifecycle.stage(),
+        I3LocalnetFailureStage::AfterRemoteDeclaredOwnerExpiry
+    );
+    assert!(lifecycle.requester_pending_request_is_retained());
+}
+
+#[test]
 fn i3_3_endpoint_closed_before_connect_is_explicit_unavailable_without_semantic_admission() {
     let error = run_i3_process_localnet(canonical_request().with_adapter_delivery_profile(
         I3LocalnetAdapterDeliveryProfile::EndpointClosedBeforeConnect,
@@ -1418,6 +1904,15 @@ fn i3_3_reconnect_before_initial_carrier_write_reuses_the_original_request_once(
                 "the first actual request delivery must receive one owner reply, not a duplicate rejection"
             )
         }
+        Some(
+            I3LocalnetReconnectOwnerOutcome::DuplicateRequestRejectedAfterDeclaredDeadlineExpired {
+                ..
+            },
+        ) => {
+            panic!(
+                "a reconnect before any initial carrier write cannot retain a declared-expiry duplicate disposition"
+            )
+        }
         None => {
             panic!("the completed pre-write retry must retain its actual reconnect owner outcome")
         }
@@ -1561,6 +2056,15 @@ fn i3_3_reconnect_after_owner_admission_retains_requester_unknown_and_rejects_th
         }
         Some(I3LocalnetReconnectOwnerOutcome::Replied { .. }) => {
             panic!("the exact retry after owner admission must not produce a second reply")
+        }
+        Some(
+            I3LocalnetReconnectOwnerOutcome::DuplicateRequestRejectedAfterDeclaredDeadlineExpired {
+                ..
+            },
+        ) => {
+            panic!(
+                "a successful initial owner admission must not be recast as a declared-expiry duplicate"
+            )
         }
         None => panic!("the exact reconnect duplicate must retain its typed owner outcome"),
     }

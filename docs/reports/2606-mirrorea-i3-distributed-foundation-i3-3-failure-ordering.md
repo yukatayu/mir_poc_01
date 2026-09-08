@@ -196,6 +196,13 @@ Actual test work subsequently reported by the parent:
 This is the ongoing task-wide inventory, not an accepted source cut. Source,
 test and status writers have distinct ownership; parent owns integration.
 
+Stage C additionally changes `mir-runtime/src/lib.rs`,
+`m8_owner_admission_gate.rs` (new private linear handoff),
+`m8_runtime_owner_queue.rs`, `m8_runtime_local_cut.rs`,
+`sys5_i3_owner_admission_tests.rs` (new source-derived unit tests), and
+`sys4_dispatch_tests.rs` (genuine queued-request falsifier). No new runtime
+sample or public control surface is promoted.
+
 ## Commands run
 
 This writer ran read-only source/status inspections with `rg`, `sed`, `head`,
@@ -234,6 +241,12 @@ cargo clippy --locked -p mir-runtime -p mirrorea-i3-probe --all-targets --featur
 cargo test --locked -p mir-runtime --lib --features i3-process-test-seams,i3-private-quic sys5_i3_private_quic_tests -- --nocapture --test-threads=1
 cargo test --locked -p mir-runtime --test sys5_i3_process_runtime --features i3-process-test-seams -- --nocapture --test-threads=1
 cargo test --locked -p mir-runtime --test sys5_local_slice --test sys6_i2_cli -- --test-threads=1
+```
+
+Initial Stage C behavioral falsifier, after pushed `050f5067`:
+
+```bash
+CARGO_INCREMENTAL=0 CARGO_BUILD_JOBS=2 cargo test --locked -p mir-runtime --test sys5_i3_process_runtime --features i3-process-test-seams i3_owner_admission_budget_sys5_source_request_stages_without_owner_effects_and_keeps_the_unannotated_control -- --test-threads=1
 ```
 
 ## Evidence / outputs / test results
@@ -398,6 +411,153 @@ its old behavior. Direct accepted-I2 regression also passed using only
 the same eight `dead_code` warnings; it is not warning-free evidence. Neither
 command compiled the in-progress probe or established actual reconnect. Root
 remained at 18 GiB and no further cleanup occurred.
+
+Stage C begins from the source-based SYS5 default-guard control. Its expected
+behavior now deliberately advances from unsupported rejection to `Ok(None)`
+staging, retaining every zero-effect/requester-pending and unannotated control.
+The first run fails to compile because `assert_eq!(opaque Option, None)`
+requires an unavailable message `PartialEq`; it is not behavioral evidence.
+The test-only `.is_none()` correction exposes the actual intended RED:
+0/1, 62 filtered, 0.02 s execution, `CarrierAdmissionRejected` at the staging
+expectation. Only then does the parent authorize the bounded clock/gate/permit
+implementation. Eight existing dead-code warnings remain; root has 14 GiB
+free. No passing staging, permit, expiry or actual-network result is claimed.
+
+Initial Stage C results (`2026-09-07T21:56+09:00`): after compile-only repairs
+to the condition import/collection type and existing post-dequeue test seam,
+the staging target passes 1/1 (0.04 s). The feature-enabled library filter
+`i3_owner_admission_budget_` passes 15/15 (22.55 s build, 0.16 s tests), and
+`i3_reserved_owner_admission_refuses_before_insertion_when_a_genuine_prior_owner_request_is_queued`
+passes 1/1. These use the same locked two-job, incremental-disabled Cargo
+environment and `--test-threads=1`. The library commands add
+`--lib --features i3-process-test-seams`; no actual network execution follows
+from these results. Root remains at 14 GiB free.
+
+The integration target emits 16 dead-code warnings while the later private
+consumer is not connected. The library emits two warnings: three existing
+peer-preface helper items, and one ignored test-hook `Result`. The test owner
+now checks that hook result; this test-only change has not yet been rerun.
+Two tool launches returned no output/session despite an active Cargo process;
+the evaluator waited for its exit and confirmed no remaining Cargo process
+before obtaining a fresh captured result. No status was inferred for a lost
+run. Parent `make docs` also passes, including the 213-entry Canon index,
+800 required hierarchy paths and 1760-report scaffold.
+
+This is not C1/C2 acceptance. Review found a separate staged-G1/current-G2
+issuance mismatch when exact current owner authority remains valid. Parent and
+read-only planner select the existing spec/16 rule: compare every immutable
+staged binding field exactly, derive permit generation from freshly revalidated
+current authority, and require full generation equality at later handoff.
+Ordinary carrier admission and requester outcome checks are unchanged.
+The paired genuine-M9 falsifier and narrow repair are next; capacity,
+independent progress, multiple owner clocks and final independent review also
+remain. Provider, typed expiry transport and the full I3-3 matrix remain open.
+
+Stage C review repair checkpoint (`2026-09-07T22:28:09+09:00` observation):
+the parent-authorized frozen pre-repair budget filter records 16 passes and
+4 failures (289 filtered, 0.94 s). Three failures expose retained-state
+defects: substituted genuine carrier consumes `Awaiting`, late selected-owner
+revocation overwrites the winning resolution tick, and successful handoff
+remains `ServeReserved`. The fourth is a G2 fixture failure: the source
+requires a caller argument, whereas the SYS5 emission API supplies none.
+It is not evidence of a remaining generation defect. The separate genuine
+ordinary SYS4 absent-target test fails at the contextual trace assumption in
+`m8_runtime_local_cut.rs`, completing executable reproduction of the four
+independent P1 findings. Logs are local disposable evidence at
+`/tmp/i3-p1-budget-8Ipxtg.log` and `/tmp/i3-p1-absent-target-IUzuPg.log`.
+
+The production owner has repaired wrong-binding nonmutation, separated later
+handoff revalidation from original decision provenance, made trace-less enqueue
+rejection typed/unobserved, and shared normal/gated record-derived finalization.
+The test owner has replaced the G2 fixture with genuine no-argument A/S/T
+source operations and a G1 control; the unused V locus is absent from this
+finite fixture, not silently authorized by a production membership change.
+Additional tests cover retained 64-record capacity, independent eligible
+progress, separate owner clocks and dropped reservation non-reissuance.
+Both writers report static checks and freeze; joint execution and narrow
+independent re-review are now in progress. No repaired-green claim, C1/C2
+acceptance, typed transported expiry or I3-3 close follows yet.
+
+One intermediate post-generation-repair run was triggered by a producer's
+direct evaluator message while the test owner was still editing. Its captured
+G2 handoff rejection is diagnostic only, not frozen-cut evidence. The parent
+has restored a single scheduling rule: only root authorizes Cargo after both
+production and test owners freeze. The 16/4 and separate absent-target results
+above were captured under that corrected rule. No concurrent Cargo build or
+unrecorded inferred success is used as evidence.
+
+The next jointly frozen C1/C2 run records 13/14 in the complete
+`sys5_i3_owner_admission_tests` module (300 filtered, 23.51 s compile,
+1.32 s tests; one existing peer-preface dead-code warning). The G1 no-argument
+control and binding/provenance/success/capacity/progress/multiple-clock/drop
+cases pass. The corrected genuine G2 distinct-owner case still rejects at
+handoff with `CarrierAdmissionRejected`; this is now an actual remaining
+boundary failure, no longer the missing-argument fixture failure. The sole
+evaluator stopped as instructed, so absent-target, queued-owner and staging
+filters were not rerun. Source owner diagnoses the exact handoff boundary;
+test owner independently checks the current-authority fixture. Log:
+`/tmp/i3-c12-owner-tests-XNZRsz.log`. Root remains at 14 GiB free. No aggregate
+C1/C2 acceptance is claimed from the passing subset.
+
+Independent reviewer, test owner and parent traced the remaining failure to
+the final ordinary SYS4 lineage equality, not permit issuance. M9's opaque
+`owner_lineage_ref` incorporates the global generation reference, so genuine
+G2 changes that reference even when the held operation's exact underlying
+membership/capability/witness remain valid. The selected repair is confined to
+the exact current-generation verified handoff: it must preserve the sealed
+staged envelope while using current M9 authority for M8. The ordinary carrier
+path and requester historical-outcome checks keep their exact current-lineage
+rule. This is the existing spec/16 current-authority contract, not general
+historical-generation reuse or a new migration policy.
+
+The repaired jointly frozen run is GREEN (`2026-09-07T22:39:42+09:00`
+observation): complete owner-admission module 14/14 (24.20 s compile,
+1.35 s tests), absent-target 1/1 and queued-owner 1/1 (each 0.02 s cached
+compile, 0.00 s tests), and SYS5 integration staging 1/1 (24.87 s compile,
+0.04 s tests). All use `CARGO_INCREMENTAL=0 CARGO_BUILD_JOBS=2`, locked
+`mir-runtime`, `--features i3-process-test-seams`, and one test thread;
+the first three use `--lib`, the last `--test sys5_i3_process_runtime`.
+Each library filter retains one existing peer-preface dead-code warning;
+integration retains 16 unused-path warnings pending the C3 consumer. Root
+remains at 14 GiB free, RAM 10 GiB available. Logs:
+`/tmp/i3-c12-rerun-owner-tests-onEZEc.log`,
+`/tmp/i3-c12-absent-target-K0uCXB.log`,
+`/tmp/i3-c12-queued-owner-0IeIJf.log`, and
+`/tmp/i3-c12-sys5-staging-EPkfpL.log`.
+Parent `make docs` also passes (213 Canon entries, 800 hierarchy paths,
+1760 reports). This closes the bounded C1/C2 repair loop, not a milestone.
+The uncommitted delta now has C3 typed reply/requester retention as its direct
+consumer; no actual annotated QUIC, provider or whole-I3-3 acceptance follows.
+
+C3 implementation boundary: replace silent expiry `None` with a private
+resolution sum (one-use serve reservation or genuine declared-failure reply).
+The gate consumes its retained issuance into an opaque expiry decision; only
+that decision may construct the generated SYS4 reply. The success/failure sum
+belongs inside the existing SYS4 owner-reply payload and private snapshot,
+retaining the shared envelope/codec/admission path. A separate SYS5 failure
+sidecar bypassing that path is not selected. Requester terminal retention is
+distinct from a successful receipt and precedes pending deletion. The first
+test must not assert pending removal before delivery: initially it falsifies
+the absence of a deliverable expiry outcome; the completed positive must
+actually encode, decode, admit and consume the gate-produced reply.
+Requester consumption must also return a distinct local typed terminal
+result, not silent `Ok(None)`: the existing QUIC caller interprets absent
+local output as rejection and would otherwise return an invalid pending
+handle after the runtime had deleted it. The receipt-only success predicate
+must remain unchanged. This direct-consumer check prevents locally passing
+terminal retention from breaking the next actual transport stage.
+
+C3 availability behavioral RED is captured on the unchanged C1/C2 production
+cut: exactly 1 selected test, 0/1, 314 filtered, 23.84 s compile and 0.05 s
+execution. The filter is
+`i3_owner_admission_budget_expiry_exposes_a_sendable_declared_outcome_before_requester_terminal_consumption`
+under the same locked two-job, incremental-disabled library/test-seam command.
+It fails because expiry returns `Ok(None)` rather than an available outcome;
+this is not a compile failure or evidence of delivered/consumed failure.
+Log: `/tmp/i3-c3-availability-red-RhjxiL.log`. One existing peer-preface warning
+remains; root retains 14 GiB free and 10 GiB available RAM. Only after this
+result does the parent authorize the adjusted C3 production packet and paired
+test implementation. Actual QUIC remains the later direct consumer.
 
 ## What changed in understanding
 
@@ -1560,12 +1720,18 @@ The subsequent time slice supersedes that pointer: ADR-0041/spec/16 is
 selected, static tests/review pass, generated contracts/runtime gating remain
 pending and provider alone remains an OPEN contract. The 19:56 JST snapshot
 and recent log separate this evidence from whole I3-3 acceptance.
+The 22:39 JST snapshot supersedes those implementation pointers: C1/C2 local
+gate/permit checks and narrow review pass; C3 typed reply/requester retention
+is active. All later network, provider and full-matrix requirements remain.
 
 ## tasks.md update status
 
 更新済み: active I3-3 and inactive later packages are separated from accepted
 I3-2 history. The parent-requested current-goal/direct-consumer coherence
 correction is applied: I3-4 consumes I3-3 and resume is resolved history.
+The 22:42 JST maintenance records C1/C2 as an uncommitted delta over pushed
+`050f5067`, separates fresh 14+1+1+1 from prior regression counts, and names C3
+as the direct consumer. No new roadmap or queue is created.
 
 ## samples_progress.md update status
 
@@ -1574,6 +1740,8 @@ with all 20 families explicitly a target. Accepted I3-2 runnable evidence
 retains its existing class. No new workflow-ready or product-completion claim.
 The time slice adds the 14-test static command as evidence only; its embedded
 source strings are not a new active sample root or network workflow.
+The C1/C2 update now points to its actual library test command and preserves
+the no-new-network-sample/non-workflow classification.
 
 ## Reviewer findings and follow-up
 
@@ -1634,6 +1802,423 @@ two-session retry slice; this local misuse must not blame the peer. The review
 does not establish actual reconnect, withdrawal-between-sessions, or complete
 I3-3 coverage. Runtime-only retry tests subsequently passed 2/2, with 285/285
 full library regression as recorded above; actual-session evidence is next.
+
+Stage C narrow independent re-review finds no remaining P0/P1 in C1/C2
+source after the four repairs and verified-handoff G2 correction. Exact
+envelope identity is now included in the immutable permit binding. The
+reviewer confirms ordinary current-lineage rejection remains unchanged and
+that a permit issued under G1 still cannot cross into G2. The shared finalizer
+does not expose a reachable post-M8 extraction gap under the present private,
+exclusive in-process boundary; no artificial extraction fault API is added.
+This is source-review evidence, not a Cargo pass, C3 acceptance or full
+I3-3 acceptance. Fresh frozen evaluation is recorded separately.
+
+C3 independent core review reports no P0 and three P1s awaiting concrete
+falsifier capture: failure replies omit the shared exact-current pending
+lineage check; nonempty decision commitment/occurrence strings can lose their
+canonical correlation; and terminal capacity is checked after SYS4 reply
+dequeue. The selected narrow repairs preserve the original requester policy,
+check canonical decision references without claiming Byzantine authentication,
+and preflight capacity before carrier consumption. A separate QUIC component
+test will cover the production-used post-admission classifier; no new TLS
+fixture/dependencies or fake network evidence are introduced. Production-only
+compile checking may run while test files change because those files are not
+compiled; behavioral tests still require all compiled inputs frozen and root
+authorization. C3 and whole I3-3 remain unaccepted.
+
+At the owner-requested continuation on 2026-09-08, fresh local C3 evaluation
+over dirty `050f5067` compiles and runs 16 passed / 3 failed. Two failures
+reproduce invalid decision provenance and unbudgeted-source expiry admission.
+The third is a fixture defect, not capacity counterevidence: the helper always
+advances to tick 1, so its second staged request legitimately remains eligible
+at start tick 1 / deadline 2. The test owner changes only the trusted test
+clock sequence to 1..64 (the independent second owner starts at 0). All full
+requester-state nonmutation assertions remain. The lower SYS4 genuine
+G1-pending/G2-successor test separately runs 0 passed / 1 failed by accepting
+the declared failure. Logs are `/tmp/c3-1-owner-admission-20260908.log` and
+`/tmp/c3-2-requester-lineage-20260908.log`.
+
+The private QUIC classifier test does not run: its intended function/type are
+absent, and its direct private message-field assertions also fail compilation.
+The latter are test-only repairs using existing predicates, not justification
+to widen production visibility. Log:
+`/tmp/c3-3-private-quic-classifier-20260908.log`. No result here establishes
+actual network time behavior. Source inspection confirms the additional
+receiver P1: failure admission must require the exact checked nonempty budget
+and declared failure containment at both binder and pending-validation seams;
+the producer-side gate alone cannot enforce that receiver invariant.
+
+The read-only independent planner retains C3 -> actual time/QUIC -> distinct
+provider contract -> remaining membership/policy/visibility/cut and ordering
+evidence -> final regression/review/acceptance. Local save snapshots do not
+establish network quiescence; existing RMW records do not establish relation
+publication/fallback ordering. No new roadmap, milestone, general theorem,
+I3-4 activation or mandatory owner escalation follows. Fresh remote main still
+matches `050f5067`; the dirty delta is not committed or accepted.
+
+The repaired test fixture and first three receiver guards subsequently pass
+19/19 owner tests and the 1/1 genuine generation test. The capacity result was
+not sufficient: trace/store/inbox snapshots omit SYS4's causality graph, and
+enqueue followed by dequeue leaves the inbox empty. Adding an assertion using
+the existing read-only causality accessor reproduces one phantom dequeue edge
+on the 65th terminal-capacity refusal (18 passed / 1 failed). No testing API or
+production visibility is added. The implementation then moves the validated
+failure's duplicate/capacity preflight before SYS4 admission. Its final rerun
+is pending here. The actual-used QUIC post-admission classifier now separately
+returns terminal consumption, never a success receipt or a now-invalid pending
+handle; its genuine runtime component test passes 1/1. These local logs are
+under `/tmp/c3-runtime-batch-20260908.fyXq93/`, not actual network evidence.
+
+One asynchronous Temporary Chat Oracle consult, `i3-provider-minimum-20260908`,
+finishes in 9m42s with verified model selection. It receives a bounded context
+packet and the Constitution, BND contracts and plan/05; no implicit repository
+context is assumed. Its advisory answer agrees that a distinct checked
+read-only external-effect operation, generated path and effect-only grant are
+unavoidable; neither owner RMW nor the expiry producer is a substitute. It
+suggests one bounded task-local integer-file read through a trusted T0 adapter
+to the T4 host service, with genuine missing-entry failure, separate typed
+result/authority validation, bounded retention and no T2 sandbox claim. The
+parent retains this as design input only: the provider contract remains
+unselected until its explicit Canon proposal/review. In particular, advisory
+terminal-ambiguity wording is not adopted over the existing pending/unknown
+requester contract. Output remains local at
+`/tmp/i3-provider-minimum-20260908.md`; no new theory, I3-3 acceptance or I3-4
+activation follows.
+
+The planner subsequently clarifies the ordering/frontier distinction against
+plan/05's "for each accepted operation" and Plan 250's explicit I3-4 pressure
+contracts: I3-3 does not need to move relation/designated cross-process
+realization forward from I3-4. Keep every ordering edge in the inventory,
+execute and classify local producer/positive/falsifier preservation evidence,
+and exercise dependency-preserving admission for the network operations I3-3
+actually admits. Unsupported-carrier rejection alone is not positive ordering
+evidence. No local result becomes distributed relation/designated evidence,
+and none of the 20 required failure families is deferred by this distinction.
+The parent adopts this narrower sequencing interpretation; the earlier advice
+to introduce those crossings during I3-3 is not followed.
+
+The frozen predecessor C3 evaluation passes owner tests 19/19, genuine-generation test
+1/1, private QUIC module 3/3 and process-runtime integration 63/63. Two old
+integration negatives initially used the pre-sum receipt JSON pointer; only
+their pointer is updated to `payload/fields/outcome/fields/receipt/request_id`,
+preserving the same request-linkage/replay falsifiers. The independent C3 spec
+review finds no P0/P1 source defect but requests focused genuine G1-produced
+expiry-after-G2 and dropped-expiry/duplicate-retention coverage. Code-quality
+review and those additional tests remain pending at this checkpoint.
+
+The new ordinary-source two-process test executes and fails (0/1); both child
+PIDs exit and are reaped, with no orphan. The returned audit labels this
+`LifecycleRejected / BeforeOwnerStart` and contains zero counters, but the
+parent identifies that the generic child wrapper emits exactly that record
+for any inner error, including errors after startup or network admission.
+Consequently these labels do not establish the actual failure point or zero
+semantic activity. Diagnose the genuine transition and preserve unknown
+state instead of adopting the wrapper's default zeroes. The current B loop
+also requires `Some(reply)` immediately after admission; a valid source-budget
+request can instead be Awaiting. Neither a QUIC handshake nor its absence is
+claimed from this failing audit. Logs:
+`/tmp/c3-full-validation-20260908.APoPwq/` and
+`/tmp/c3-runtime-probe-rerun-20260908.3anlLA/`.
+
+At `2026-09-08T09:11:05+09:00`, the independent quality reviewer withdraws
+an initially proposed P1 requiring receiver-verifiable expiry attestation.
+Canon architecture/08 explicitly assumes T0 checker/policy/runtime integrity;
+architecture/10 uses exact selected-peer transport integrity separately from
+receiver-local M9/pending semantic authority. Coherently replacing both a
+decision commitment and its occurrence reference requires the raw test seam
+or a compromised/alternative trusted peer in this profile; ordinary packages
+cannot construct the private runtime message. The parent checks these sources
+and agrees: the present negative proves canonical shape and correlation, not
+Byzantine T0 resistance or a signed gate proof. No new cryptographic authority
+scheme or weakening of the existing trust boundary is adopted.
+
+The two additional reviewer-requested tests are not yet green: the first
+focused build reports missing test imports for `Sys4I3ValidatedOwnerReply`
+and `Sys4I3PrivateProcessCarrierSnapshot`; its body and the second test have
+not executed. The earlier 19/1/3/63 results therefore describe their frozen
+predecessor, not this newer test snapshot. The test author owns the import
+repair. Log: `/tmp/c3-focused-runtime-20260908.qsiMMN/`.
+
+The fresh follow-up executes the genuine G1-byte test and observes an earlier
+fail-closed `CarrierProvenanceMismatch` at the current-G2 carrier binder, not
+at its later pending validator. Its test expectation is corrected to that
+actual boundary, with pending/state/trace/causality/endpoint/mailbox snapshots
+captured before attempted binding. The authentic G1 producer and real M9
+successor are preserved; no production admission rule is loosened. The dropped
+expiry/exact-request replay and prior-queued-request handoff falsifiers both
+pass 1/1. Log: `/tmp/c3-focused-rerun-20260908.vU9Sgy/`. The broader current
+local rerun is pending. The quality review closes with no P0/P1 in this bounded
+local slice; its two P2 dispositions are the explicit non-Byzantine/shape-only
+wording above and fresh coverage of the new tests. Its final repetition of
+generic prestart/zero activity is corrected by the parent: the failed probe
+does not establish those facts.
+
+The corrected current local test snapshot then passes the owner-admission
+filter (31/31) and the `i3_` library filter (51/51), including the authentic
+G1-bytes/current-G2 binder rejection, dropped-expiry exact replay and prior
+queued-request refusal. These sets overlap and are not summed as unique
+tests. Both use locked serial tests with the existing process-test seam
+feature, `CARGO_INCREMENTAL=0` and `CARGO_BUILD_JOBS=2`; the two known
+dead-code warning categories remain, so this is not a warning-free clippy
+claim. Logs: `/tmp/c3-complete-focused-20260908.BPNWXy/`. Available disk remains
+13.39 GiB. Production ownership is now separated for genuinely independent
+time-consumer work: the opaque host driver in the runtime file, and truthful
+child/supervisor diagnostics in the probe file. The sole evaluator still
+waits for the relevant compiled inputs to freeze.
+
+The corrected diagnostic probe executes the existing budgeted positive test
+again (0/1, expected behavioral RED). It now reports actual B-local
+`OwnerAdmissionAwaiting`: verified peer/preface, one handshake, one admitted
+request, Awaiting 1, serve/write 0, and B natural zero exit. A contributes an
+explicit unknown child failure rather than synthetic zero semantic evidence.
+The aggregate cause is `OwnerAdmissionDriveRequired` at
+`LifecycleEvidenceRejected`; both actual child PIDs are reaped and the
+supervised observation is 416.455 ms within its 21 s envelope. This proves the
+missing owner-driver continuation after real selected-transport admission,
+not successful resolution or a delivered expiry. Parent diff review also
+corrected the generic post-Ready fallback to change its failure stage as well
+as retain its observed start. Log:
+`/tmp/c3-probe-diagnostic-20260908.Llvtgv/01-budget-positive-probe.log`.
+
+The current documentation check passes agent configuration validation, Canon
+index (213 files), source hierarchy (800 required/present), and documentation
+scaffold validation. The subsequent sample/runner navigation additions
+explicitly classify the ordinary budget source as current test input with
+network validation in progress; they add no script or public workflow.
+
+The opaque host-driver tests first fail to compile solely because the two
+intended runtime methods are absent (14 `E0599` uses across five tests).
+After the source owner adds the non-Clone/private-field driver and the
+optional monotonic-tick/one-Awaiting continuation, all five tests pass and
+the broad `i3_` library filter passes 56/56. The API accepts no request ID,
+carrier, permit or expected outcome; it validates the exact runtime/owner
+driver even for an empty queue and invokes only the retained gate/handoff.
+Tests cover current-tick serve, deadline expiry/terminal consumption, foreign
+and backward input nonmutation, empty/settled non-reissue, and absence of
+drivers for unbudgeted source. These are local runtime tests, not the pending
+probe continuation. Logs: `/tmp/c3-host-driver-red-20260908.zYxHM6/` and
+`/tmp/c3-host-driver-green-20260908.ZwyanW/`.
+
+Formatting coordination correction: the runtime writer's direct `rustfmt`
+followed child modules and mechanically formatted the test-author-owned
+untracked module before the green run. That tested formatting is preserved;
+no untracked prior state is reconstructed. Its unrelated snapshot import
+reordering is restored with an exact `apply_patch` of the writer's own delta.
+Subsequent scoped formatting uses `skip_children=true`. There is no semantic
+test change claimed from formatting and no concurrent Cargo writer.
+
+The first default probe wiring used the wrong post-handoff summary: it
+expected an outstanding `ServeReserved`, although the genuine successful
+finalizer transitions the retained tombstone to `Received`. Parent source
+inspection identifies this mismatch after a run reports two unknown child
+errors; that diagnostic alone cannot establish execution or nonexecution.
+The probe guard is corrected to zero outstanding reservations, one retained
+tombstone and the unchanged actual serve/write counts of one.
+
+The next run returns a successful process result and passes the two-child,
+serve/write/reply/receipt and four-delivery assertions, but fails the later
+source-reference comparison: the new sample still receives the generic
+`i3-2-private-input.mir` alias. This is not a pre-start failure. The writer
+adds only the known LAB sample's safe logical alias alongside the existing I2
+allowlist; all arbitrary paths retain the private alias and no lineage test
+is weakened. Full probe regression awaits the corrected rerun. Logs:
+`/tmp/c3-probe-green-20260908.P21PZi/` and
+`/tmp/c3-probe-guard-rerun-20260908.IoHczL/`.
+
+The corrected source-first budgeted round trip passes 1/1; the entire probe
+integration target then passes 33/33. The new positive checks two actual
+exec/reaped processes, request/serve/write/reply/receipt each one, and all four
+distinct observer-safe request/reply delivery records against exact checked
+source/Core/artifact/edge/request contracts. Existing diagnostics remain
+green. This is actual default-time network execution, not delivered-expiry
+or full row-17/I3-3 acceptance. Logs:
+`/tmp/c3-probe-alias-rerun-20260908.9fCbJY/`; final available disk 13.37 GiB.
+
+Next, a private producer-return wrapper retains the already generated expiry
+commitment and occurrence in the existing owner terminal ledger, only after
+successful message construction. A read-only observer projection cannot
+reconstruct these refs from counts, transport data or caller strings. The
+neutral finite host schedule advances tick one after actual Awaiting and
+branches on the gate's real outcome. Live expiry requires all four network
+records plus actual owner production and requester terminal consumption, and
+both natural zero exits/reaps even though the typed command outcome is an
+error. The existing post-admission reconnect runner is reused with distinct
+retained Expired evidence; no second retry runner or schedule-minted expiry
+is selected. Tests precede these source changes.
+
+The producer-ref boundary first fails at its intended absent APIs, then the
+two new runtime tests pass: retained refs equal the actual serialized
+gate-produced reply and requester terminal; a genuine M9 revocation before
+resolution produces no expiry record. The broad `i3_` library filter passes
+58/58. The three new probe cases then fail to compile only at their intended
+new drive-profile/audit/stage interfaces (nine missing APIs), establishing
+the next implementation consumer rather than network evidence. Logs:
+`/tmp/c3-expiry-decision-red-20260908.XRbMVT/` and
+`/tmp/c3-expiry-runtime-probe-batch-20260908.31qZhM/`.
+
+While that probe-only implementation proceeds, an independent test-only
+assignment exercises the already accepted `prepare_finite_admission`
+missing/unknown auth-discharge boundary for row 15. It introduces no new
+semantic frontier, provider contract, dynamic policy-revocation claim or
+network claim; the runtime production files stay frozen. The parent schedules
+all Cargo commands and keeps compiled-input ownership disjoint.
+
+The new public-method admission-policy integration target passes 2/2:
+missing and unknown actual auth-discharge inputs reject before prepared/live
+runtime handles, preserve checked project metadata, and permit a subsequent
+genuine admission/start. This is local pre-activation evidence, not dynamic
+revocation or network/provider execution. Log:
+`/tmp/c3-new-admission-policy-20260908.GQ89cJ/`.
+
+Scoped `cargo clippy --locked -p mir-runtime --all-targets -- -D warnings`
+is RED, not a validation pass. Eleven new unit-test calls incorrectly depend
+on the feature-gated public decoded-ingress test seam under the default
+feature command; the unit test owner switches those calls to the existing
+crate-private shared admission body, preserving decoded candidates and every
+assertion without exposing another production API. Clippy also reports nine
+dead-code groups and the large admission-resolution enum. A bounded source
+owner audit separates baseline/feature-dependent warnings from this delta
+before repair. Log: `/tmp/c3-clippy-runtime-20260908.LbZYWv/`.
+
+Parent source inspection additionally corrects a prior review premise:
+`mirrorea-i3-probe` enables `i3-process-test-seams` for its negative bootstrap
+controls. Consequently absence of that compiled API from the probe cannot be
+claimed. The actual normal child path still uses verified QUIC followed by
+the shared receiver checks; the T0-integrity/non-Byzantine boundary, not a
+false compile-absence claim, governs the correlation-only assurance. Narrow
+review is requested on this factual correction; no raw Mir/native ingress
+route or new authority scheme is introduced.
+
+After the unit-only repair, the exact default-feature `cargo test --locked
+-p mir-runtime --lib i3_ -- --test-threads=1` passes 57/57 (not the
+feature-enabled 58-test set). Three configuration-dependent dead-code groups
+remain. Log: `/tmp/c3-default-i3-20260908.1QuedH/`.
+The narrow independent trust review confirms no P0/P1 change: the compiled
+test seam is callable by trusted probe code, but repository call inspection
+finds no current probe/Mir-source/native-FFI caller bypassing verified QUIC.
+Its presence is an in-process accidental-regression surface, not a present
+remote entry. The stale absence/unlinkability source comment is a P2 to
+correct. No cryptographic gate-attestation claim follows.
+
+Actual-time network checkpoint, `2026-09-08T10:15:31+09:00`: the four-case
+ordinary budget-source integration filter executes 3 passing cases and one
+behavioral failure. Delivered tick-one expiry is consumed as a terminal
+failure, expiry followed by a lost reply rejects the exact reconnect duplicate,
+and tick-zero serve passes. The served-but-lost-reply case validates actual
+owner serve/write and source-bound evidence, then fails the requester pending
+retention audit assertion. The full 36-test target is not run after that RED.
+The source owner is investigating the actual child-to-supervisor pending
+projection; no profile-derived pending or remote-nonexecution fact is admitted.
+Log: `/tmp/c3-time-probe-final-rerun-20260908.nqVyY1/`.
+Earlier attempts stopped at compile errors (borrowed counter comparisons,
+then two old exhaustive reconnect-result matches); those were repaired
+without weakening the old non-expiry assertions. Independent review of the
+actual-time delta is in progress. This is not row-17 or I3-3 acceptance.
+
+The pending projection repair then passes all four actual owner-budget cases
+and the full probe integration target 36/36. The matching runtime feature
+union (`i3-private-quic,i3-process-test-seams`) passes library `i3_` 61/61
+and all-target deny-warnings Clippy. The prior 58 and default-feature 57
+counts are different feature selections, not results to add together.
+Clippy's four test-only `err_expect` sites were replaced with explicit matches
+without exposing Debug/Clone on linear success values. Private resolution
+payloads are boxed without changing one-use ownership; the expiry producer
+now checks its exact private binding explicitly, and a field-scoped lint
+expectation documents retention of the exact requester commitment.
+Logs: `/tmp/c3-runtime-clippy-rerun-20260908.tph1dS/` and
+`/tmp/c3-clippy-probe-final-20260908.sUzTbQ/`. No matching child executable
+remains after the probe runs; root has 13.14 GiB free.
+
+Independent actual-time review finds no current P0/P1 but identifies an
+unexecuted required condition: physical peer close is not requester-local wait
+expiry. The parent selects an explicit local monotonic wait over the retained
+request after the existing causal owner-serve/withheld-reply/close path.
+Before/after pending and receipt/terminal counts plus actual elapsed evidence
+must preserve remote uncertainty and perform no new send. A keepalive route
+with an extra causal barrier is the one considered larger alternative; it
+adds no stronger required semantic fact. This implementation remains within
+spec/16's T0 host boundary, not a new timeout/provider contract. Actual reply
+replay/staleness across sessions remains separate required evidence. These
+gaps prevent time-row or I3-3 acceptance despite the current 36/36 result.
+
+Sample-taxonomy spot check: `samples/clean-near-end/README.md` now explicitly
+distinguishes the budget source's probe-only execution from unsupported
+`run-local`, and distinguishes program activation from official I3 lifecycle.
+The optional HTML-reader inventory test
+`python3 -m unittest scripts.tests.test_mir_hilight_html.MirHilightHtmlTests.test_embeds_every_active_clean_near_end_mir_sample`
+fails first on the already committed
+`i1plus-reference/scn-01/negative-missing-visibility-denied.mir` entry, not the
+new budget file. `git ls-tree HEAD` confirms that predecessor file and
+`git diff -- mir_hilight.html` is empty. The reader therefore has a preexisting
+stale embedded sample catalog, also not updated for this new sample. It is
+not a passing check or an I3 runtime failure; broad HTML catalog regeneration
+is not opened as a new semantic frontier. No reader output is Canon evidence.
+
+Local-wait completion checkpoint (`2026-09-08T10:46:24+09:00`): an initial
+compile RED captured the absent profile/falsifier/audit API in
+`/tmp/c3-localwait-red-20260908.rvPI1o/`. The implemented probe-only wait
+then passes six named budget tests (seven behavioral cases, including two
+observer-only corruptions) and full probe integration 38/38. The real
+monotonic wait is fixed at 20 ms, follows the selected actual loss path, and
+retains pending `1 -> 1`, receipt `0 -> 0`, and terminal failure `0 -> 0`.
+Invalid elapsed/pending evidence produces lifecycle-evidence rejection, no
+accepted fault audit and no promoted pending fact. It is not an adapter
+timeout, remote expiry or retry. Logs:
+`/tmp/c3-probe-localwait-20260908.WrlwI3/` and
+`/tmp/c3-probe-localwait-full-20260908.xCtTQc/`.
+
+Fresh accepted-regression floor passes SYS5 5/5, SYS6 CLI 8/8 and M10
+conformance 67/67 in `/tmp/c3-runtime-regression-floor-20260908.L0a44m/`.
+That no-feature runtime build retains seven preexisting retry-related
+dead-code warning groups, distinct from the selected feature-union gate.
+The first two-crate deny-warnings Clippy attempt rejects two probe style
+lints (eight named audit arguments and a manual Option map). The source owner
+applies a documented constructor-scoped expectation and an equivalent map;
+quality rerun and final narrow review are pending at this record. No full
+milestone acceptance follows from these component results.
+
+Canon-first independent planner review approves the row-11 evidence plan:
+actual successor-session duplicates of both successful and expiry replies,
+plus the existing local genuine G1-outcome/G2-requester binder falsifier and
+verification that actual QUIC consumes through that binder. Only B currently
+has the live successor control; installing B-G2 while A remains G1 would not
+prove requester-generation staleness and is deliberately omitted. The
+adapter-only replay token is not yet implemented or accepted. It must retain
+only the exact successfully sent generated reply, bind the permitted peer/
+cohort/successor session, permit one explicit replay attempt and preserve the
+first requester decision. No second Quinn harness is added merely for unit
+tests: existing component binding tests remain, and the actual two-process
+probe is the direct producer/falsifier consumer. Plan 250 records this finite
+classification without reducing any required family or opening I3-4.
+
+The independent local-wait re-review closes its previous P2 with P0/P1 zero
+and no new P2. A reports missing reply generically (`Err(_)`), not a separately
+identified QUIC peer-close error: the physical close belongs to the trusted
+selected B serve/withhold/close path. Its local elapsed observation and the
+independent same-request B record are the accepted finite evidence. Full
+row-11, time-matrix and I3-3 acceptance remain open.
+The two-crate Clippy rerun is warning-free; the subsequent all-workspace
+format check finds one test-only panic wrapping, repaired exactly without
+behavior changes. Whole-runtime and format reruns remain pending at this
+record. A changed-file credential-pattern scan covers 27 files and finds no
+private-key header, GitHub token, AWS access-key or project API-key pattern.
+No dedicated entropy scanner is installed; this is a bounded scan, not a
+general secret-freedom proof.
+
+Final bounded checkpoint gates (`2026-09-08T10:55:34+09:00`) pass: workspace
+format; feature-union whole runtime library 332/332; feature-union process
+integration 63/63; two-crate all-target deny-warnings Clippy (only the exact
+verified whitespace change followed that run); and `make docs` (agent config,
+213 Canon indexed files, 800/800 hierarchy paths, scaffold with 1760 reports).
+Runtime logs: `/tmp/c3-runtime-feature-union-20260908.0HlZJi/`.
+Full probe 38/38 and I2/M10 5/8/67 are the fresh results above; no source
+behavior changed afterward. Final snapshot synchronization corrects stale
+counts, the ambiguous shorthand "6/7", and a reused log timestamp: the actual
+meaning is all six named tests/seven behavioral cases passing. Local G1→G2
+binder evidence is already green, not a missing implementation; actual replay
+and its receive-path correspondence are the next consumer. Root free space
+is 12.03 GiB, with no cleanup performed. The optional stale HTML-reader test
+remains the explicitly reported failure, not an I3 runtime or passing gate.
 
 ## Skipped validations and reasons
 
@@ -1697,7 +2282,19 @@ no new runnable network sample is promoted. Its commit/push and exact parity
 will be recorded with the next in-scope Stage C work, rather than predicting
 a hash here. This checkpoint does not trigger the scheduled whole-I3-3 pause.
 
+That integration is committed and pushed as
+`050f5067c5f63384abd7b8a6389158ddc76187da`
+(`feat: preserve and guard source owner admission budgets`). Fresh remote
+lookup matched HEAD/main/origin/main at `2026-09-07T21:09:01+09:00`; the
+worktree was clean before the next authorized Stage C test change.
+This is the fifth source checkpoint inside I3-3, not milestone acceptance.
+
 ## Sub-agent session close status
+
+At the C3/time-runtime checkpoint, source/test/evaluation/status writers and
+the narrow reviewer have completed their bounded assignments and remain idle
+with context retained for the next I3-3 reply-replay consumer. Parent owns
+integration; no I3-4 work is authorized or started.
 
 Planning writer hands both planning/report files back to the parent after
 scoped validation. Source and test owners remain active. Other agents' work is
@@ -1723,3 +2320,12 @@ independent integration review and read-only planner assignments have returned
 their bounded results. Contexts are retained for Stage C; production source
 and tests are frozen until the parent finishes this checkpoint's commit/push.
 The parent continues I3-3 and does not send task completion or activate I3-4.
+
+Current Stage C handoff: C1/C2 source, tests, evaluation and independent review
+have returned bounded green results. The read-only planner confirms the
+existing dependent sequence; the scoped status writer has returned its four
+snapshots, followed by parent correction of cut/command anchors. C3 production
+and tests are active after the captured availability RED; sole evaluator is
+idle until the parent receives both freezes. QUIC mapping is advisory and its
+implementation remains dependency-gated. Agent contexts are retained; no
+whole-I3-3 acceptance, requested pause, or I3-4 activation has occurred.

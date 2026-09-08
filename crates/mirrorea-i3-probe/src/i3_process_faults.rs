@@ -4,10 +4,13 @@
 //! evidence emitted by actual children.  They never carry an expected result,
 //! carrier bytes, credentials, semantic authority, or a retry decision.
 
+use std::time::Duration;
+
 use serde::{Deserialize, Serialize};
 
 use super::i3_process_localnet::{
     I3LocalnetChildSlot, I3LocalnetChildTerminalOutcome, I3LocalnetObserverSafeDeliveryRecord,
+    I3LocalnetOwnerAdmissionExpiryEvidence,
 };
 
 /// The three bounded actual adapter-delivery schedules. They select only one
@@ -43,6 +46,27 @@ pub enum I3LocalnetFaultProfile {
     DisconnectBeforeRequestCarrierWrite,
     DisconnectAfterRemoteAdmission,
     DisconnectAfterRemoteAdmissionSuppressOwnerAudit,
+}
+
+/// Opts into one fixed requester-local monotonic wait after A has observed
+/// the existing post-admission reply loss. It supplies no duration, retry,
+/// session, carrier, or semantic outcome to the caller.
+#[doc(hidden)]
+#[derive(Clone, Copy, Debug, Eq, PartialEq, Serialize, Deserialize)]
+#[serde(rename_all = "snake_case")]
+pub enum I3LocalnetRequesterLocalWaitProfile {
+    WaitLocallyAfterObservedLoss,
+}
+
+/// Observer-only corruptions applied after A has completed the real local
+/// wait. They cannot alter the source request, QUIC traffic, owner result, or
+/// requester runtime state.
+#[doc(hidden)]
+#[derive(Clone, Copy, Debug, Eq, PartialEq, Serialize, Deserialize)]
+#[serde(rename_all = "snake_case")]
+pub enum I3LocalnetRequesterLocalWaitFalsifier {
+    SetObservedElapsedBelowMinimum,
+    ClearPostWaitPendingObservation,
 }
 
 /// Private observer-record falsifiers for the bounded post-admission profile.
@@ -474,6 +498,16 @@ pub enum I3LocalnetReconnectOwnerOutcome {
         owner_serve_count: usize,
         owner_mutation_count: usize,
     },
+    /// The first session produced and retained a declared owner expiry, then
+    /// the exact original request reached the existing session-two duplicate
+    /// guard. This remains owner-local evidence, never a reply to A.
+    DuplicateRequestRejectedAfterDeclaredDeadlineExpired {
+        candidate_commitment_ref: String,
+        network_occurrence_ref: String,
+        owner_expired_count: usize,
+        owner_serve_count: usize,
+        owner_mutation_count: usize,
+    },
 }
 
 /// Joined observer-safe evidence for one selected actual two-session control.
@@ -490,6 +524,7 @@ pub struct I3LocalnetRetryAudit {
     initial_request_delivery: Option<I3LocalnetObserverSafeDeliveryRecord>,
     reconnect_request_delivery: I3LocalnetObserverSafeDeliveryRecord,
     initial_owner_admission: Option<I3LocalnetRemoteAdmissionEvidence>,
+    initial_owner_expiry: Option<I3LocalnetOwnerAdmissionExpiryEvidence>,
     reconnect_owner_outcome: Option<I3LocalnetReconnectOwnerOutcome>,
     evidence_rejection: Option<I3LocalnetRetryEvidenceRejection>,
     requester_child: I3LocalnetRetryChildAudit,
@@ -506,6 +541,7 @@ impl I3LocalnetRetryAudit {
         initial_request_delivery: Option<I3LocalnetObserverSafeDeliveryRecord>,
         reconnect_request_delivery: I3LocalnetObserverSafeDeliveryRecord,
         initial_owner_admission: Option<I3LocalnetRemoteAdmissionEvidence>,
+        initial_owner_expiry: Option<I3LocalnetOwnerAdmissionExpiryEvidence>,
         reconnect_owner_outcome: Option<I3LocalnetReconnectOwnerOutcome>,
         evidence_rejection: Option<I3LocalnetRetryEvidenceRejection>,
         requester_child: I3LocalnetRetryChildAudit,
@@ -523,6 +559,7 @@ impl I3LocalnetRetryAudit {
             initial_request_delivery,
             reconnect_request_delivery,
             initial_owner_admission,
+            initial_owner_expiry,
             reconnect_owner_outcome,
             evidence_rejection,
             requester_child,
@@ -560,6 +597,13 @@ impl I3LocalnetRetryAudit {
 
     pub fn initial_owner_admission(&self) -> Option<&I3LocalnetRemoteAdmissionEvidence> {
         self.initial_owner_admission.as_ref()
+    }
+
+    /// Present only when B's first session actually produced a declared
+    /// expiry and retained it before the reply was intentionally lost. It is
+    /// distinct from a successful owner admission.
+    pub fn initial_owner_expiry(&self) -> Option<&I3LocalnetOwnerAdmissionExpiryEvidence> {
+        self.initial_owner_expiry.as_ref()
     }
 
     pub fn reconnect_owner_outcome(&self) -> Option<&I3LocalnetReconnectOwnerOutcome> {
@@ -624,6 +668,82 @@ pub struct I3LocalnetFaultAudit {
     requester_observation: I3LocalnetRequesterFaultObservation,
     remote_admission: Option<I3LocalnetRemoteAdmissionEvidence>,
     remote_evidence_rejection: Option<I3LocalnetRemoteEvidenceRejection>,
+    requester_local_wait: Option<I3LocalnetRequesterLocalWaitAudit>,
+}
+
+/// A's monotonic local observation after a real reply loss. It deliberately
+/// has no remote completion, timeout, driver, retry, or semantic-result fact.
+#[doc(hidden)]
+#[derive(Clone, Debug)]
+pub struct I3LocalnetRequesterLocalWaitAudit {
+    observed_elapsed: Duration,
+    required_minimum_elapsed: Duration,
+    pending_before: usize,
+    pending_after: usize,
+    local_receipt_before: usize,
+    local_receipt_after: usize,
+    terminal_failure_before: usize,
+    terminal_failure_after: usize,
+}
+
+impl I3LocalnetRequesterLocalWaitAudit {
+    #[expect(
+        clippy::too_many_arguments,
+        reason = "the eight named arguments preserve independently observed elapsed and before/after runtime counts without an anonymous tuple or test-only wrapper"
+    )]
+    pub(crate) const fn from_actual_observation(
+        observed_elapsed: Duration,
+        required_minimum_elapsed: Duration,
+        pending_before: usize,
+        pending_after: usize,
+        local_receipt_before: usize,
+        local_receipt_after: usize,
+        terminal_failure_before: usize,
+        terminal_failure_after: usize,
+    ) -> Self {
+        Self {
+            observed_elapsed,
+            required_minimum_elapsed,
+            pending_before,
+            pending_after,
+            local_receipt_before,
+            local_receipt_after,
+            terminal_failure_before,
+            terminal_failure_after,
+        }
+    }
+
+    pub const fn observed_elapsed(&self) -> Duration {
+        self.observed_elapsed
+    }
+
+    pub const fn required_minimum_elapsed(&self) -> Duration {
+        self.required_minimum_elapsed
+    }
+
+    pub const fn pending_before(&self) -> usize {
+        self.pending_before
+    }
+
+    pub const fn pending_after(&self) -> usize {
+        self.pending_after
+    }
+
+    pub const fn local_receipt_before(&self) -> usize {
+        self.local_receipt_before
+    }
+
+    pub const fn local_receipt_after(&self) -> usize {
+        self.local_receipt_after
+    }
+
+    pub const fn terminal_failure_before(&self) -> usize {
+        self.terminal_failure_before
+    }
+
+    pub const fn terminal_failure_after(&self) -> usize {
+        self.terminal_failure_after
+    }
 }
 
 impl I3LocalnetFaultAudit {
@@ -633,6 +753,7 @@ impl I3LocalnetFaultAudit {
         requester_observation: I3LocalnetRequesterFaultObservation,
         remote_admission: Option<I3LocalnetRemoteAdmissionEvidence>,
         remote_evidence_rejection: Option<I3LocalnetRemoteEvidenceRejection>,
+        requester_local_wait: Option<I3LocalnetRequesterLocalWaitAudit>,
     ) -> Self {
         Self {
             profile,
@@ -643,6 +764,7 @@ impl I3LocalnetFaultAudit {
             requester_observation,
             remote_admission,
             remote_evidence_rejection,
+            requester_local_wait,
         }
     }
 
@@ -668,5 +790,11 @@ impl I3LocalnetFaultAudit {
 
     pub const fn remote_evidence_rejection(&self) -> Option<I3LocalnetRemoteEvidenceRejection> {
         self.remote_evidence_rejection
+    }
+
+    /// Present only after the parent validated A's actual post-loss local
+    /// wait together with the selected remote-admission fault evidence.
+    pub fn requester_local_wait(&self) -> Option<&I3LocalnetRequesterLocalWaitAudit> {
+        self.requester_local_wait.as_ref()
     }
 }

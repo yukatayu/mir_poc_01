@@ -15,6 +15,7 @@ use mir_semantics::{
 use serde::{Deserialize, Serialize};
 
 use crate::{
+    m8_owner_admission_gate::M8I3VerifiedOwnerAdmissionHandoff,
     m8_runtime_admission::{M8OwnerExecutionPlan, M8RuntimeInstance},
     m8_runtime_authority::{M8AuthorityState, M8AuthorityValidationFailure},
 };
@@ -1100,6 +1101,25 @@ impl M8RuntimeExecution {
         &mut self,
         request: M8OwnerRequest,
     ) -> Result<M8Occurrence, M8EnqueueDiagnostics> {
+        self.try_enqueue_inner(request, None)
+    }
+
+    /// Consume one SYS-5/SYS-4-private, exact owner-admission handoff.  This
+    /// is intentionally not a second public enqueue policy: ordinary callers
+    /// still use `try_enqueue` and fail closed for an annotated owner plan.
+    pub(crate) fn try_enqueue_i3_owner_admission(
+        &mut self,
+        request: M8OwnerRequest,
+        handoff: M8I3VerifiedOwnerAdmissionHandoff,
+    ) -> Result<M8Occurrence, M8EnqueueDiagnostics> {
+        self.try_enqueue_inner(request, Some(handoff))
+    }
+
+    fn try_enqueue_inner(
+        &mut self,
+        request: M8OwnerRequest,
+        handoff: Option<M8I3VerifiedOwnerAdmissionHandoff>,
+    ) -> Result<M8Occurrence, M8EnqueueDiagnostics> {
         let Some(plan) = self.owner_plan(request.evaluation()).cloned() else {
             let authority = request
                 .authority_use()
@@ -1122,7 +1142,13 @@ impl M8RuntimeExecution {
             );
             return Err(diagnostics);
         };
-        if plan.owner_admission_budget().is_some() {
+        let exact_admission = match (plan.owner_admission_budget(), handoff) {
+            (Some(_), Some(handoff)) => handoff.consumes_exact_owner_plan(&plan, &request),
+            (Some(_), None) => false,
+            (None, Some(_)) => false,
+            (None, None) => true,
+        };
+        if !exact_admission {
             return Err(
                 M8EnqueueDiagnostics::owner_admission_authorization_required(
                     request.evaluation(),

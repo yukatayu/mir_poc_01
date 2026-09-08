@@ -16,6 +16,7 @@ use mir_semantics::{
 };
 
 use crate::{
+    m8_owner_admission_gate::M8I3VerifiedOwnerAdmissionHandoff,
     m8_runtime_admission::{
         EvidenceRedaction, EvidenceSecurityLabel, M8AdmissionEvidence, M8RuntimeInstance,
         M8SecurityClass,
@@ -1674,9 +1675,9 @@ pub struct M8LocalRuntime {
 }
 
 /// Contextual owner execution either carries M8's actual trace row or rejects
-/// before M8 has allocated one.  The latter is deliberately limited to the
-/// checked owner-admission condition: ordinary enqueue has no authority to
-/// bypass its future one-use gate.
+/// before M8 has allocated one.  The latter retains the exact typed enqueue
+/// diagnostics; it includes the checked owner-admission guard and genuine
+/// pre-occurrence validation such as target stale membership.
 #[derive(Debug, Clone, PartialEq, Eq)]
 pub(crate) enum M8LocalOwnerExecutionFailure {
     AdmissionRejected(M8EnqueueDiagnostics),
@@ -1761,20 +1762,67 @@ impl M8LocalRuntime {
         ),
         M8LocalOwnerExecutionFailure,
     > {
+        self.execute_owner_with_context_inner(owner_locus, request, context, None)
+    }
+
+    /// The only lower-runtime entry which can consume the private I3 owner
+    /// admission handoff.  The handoff is moved into M8 before enqueue, so it
+    /// cannot be cloned into a queue/cut or retried after a failed handoff.
+    pub(crate) fn execute_owner_with_i3_admission_handoff(
+        &mut self,
+        owner_locus: &str,
+        request: M8OwnerRequest,
+        context: M8LocalDesignatedTraceContext,
+        handoff: M8I3VerifiedOwnerAdmissionHandoff,
+    ) -> Result<
+        (
+            M8ServeOutcome,
+            M8LocalTraceObservation,
+            M8LocalTraceObservation,
+        ),
+        M8LocalOwnerExecutionFailure,
+    > {
+        self.execute_owner_with_context_inner(owner_locus, request, context, Some(handoff))
+    }
+
+    fn execute_owner_with_context_inner(
+        &mut self,
+        owner_locus: &str,
+        request: M8OwnerRequest,
+        context: M8LocalDesignatedTraceContext,
+        handoff: Option<M8I3VerifiedOwnerAdmissionHandoff>,
+    ) -> Result<
+        (
+            M8ServeOutcome,
+            M8LocalTraceObservation,
+            M8LocalTraceObservation,
+        ),
+        M8LocalOwnerExecutionFailure,
+    > {
         let request = self.request_for_owner_context(request, &context);
         let enqueue_start = self.owner.trace().entries().len();
-        let enqueue = self.with_owner_snapshot(|owner| owner.try_enqueue(request));
+        let enqueue = self.with_owner_snapshot(|owner| match handoff {
+            Some(handoff) => owner.try_enqueue_i3_owner_admission(request, handoff),
+            None => owner.try_enqueue(request),
+        });
         let enqueue_trace_rows = self.append_owner_trace_since(enqueue_start);
         let enqueue_rows = self.attach_context_to_rows(enqueue_trace_rows, context.clone());
         if let Err(diagnostics) = enqueue {
-            if diagnostics.primary().kind()
-                == M8EnqueueDiagnosticKind::OwnerAdmissionAuthorizationRequired
+            if let Some(observation) = enqueue_rows
+                .iter()
+                .rev()
+                .find(|row| row.kind() == M8LocalTraceKind::OwnerOperationRejected)
+                .cloned()
             {
-                return Err(M8LocalOwnerExecutionFailure::AdmissionRejected(diagnostics));
+                return Err(M8LocalOwnerExecutionFailure::Observed(Box::new(
+                    observation,
+                )));
             }
-            return Err(M8LocalOwnerExecutionFailure::Observed(Box::new(
-                owner_context_row(&enqueue_rows, M8LocalTraceKind::OwnerOperationRejected),
-            )));
+            // Several real enqueue checks, including the admission guard and
+            // target stale-membership preflight, reject before M8 allocates a
+            // trace row.  Preserve their typed diagnostics rather than
+            // fabricating an OwnerOperationRejected observation.
+            return Err(M8LocalOwnerExecutionFailure::AdmissionRejected(diagnostics));
         }
         let enqueue_observation = owner_context_row(&enqueue_rows, M8LocalTraceKind::OwnerEnqueued);
         let serve_start = self.owner.trace().entries().len();

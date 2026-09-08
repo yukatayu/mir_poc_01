@@ -15,6 +15,7 @@ use std::{
     time::{Duration, Instant},
 };
 
+use mir_semantics::surface_v0_classification::OwnerAdmissionBudgetCondition;
 use serde::{
     Deserialize, Serialize,
     de::{self, Error as _, MapAccess, SeqAccess, Visitor},
@@ -39,16 +40,18 @@ const MAX_INBOUND_OWNER_REQUEST_TOMBSTONES: usize = 64;
 // owner duplicate ledger.  Neither reconnect nor a pending handle can evict
 // or reset this map; exhaustion happens before source action submission.
 const MAX_OUTBOUND_OWNER_REQUEST_PENDING: usize = 64;
+const MAX_OUTBOUND_OWNER_TERMINAL_FAILURES: usize = 64;
 const MAX_OUTBOUND_OWNER_REQUEST_ATTEMPTS: u8 = 2;
 
 use crate::{
+    m8_owner_admission_gate::{M8I3OwnerAdmissionIssuance, M8I3OwnerAdmissionPermit},
     sys3_projection::{BackendProfile, CommunicationEdgeKind},
     sys4_dispatch::{
-        FabricProgram, LocalFabric, ObserverSafeM9SemanticRowSets, SealedFabricAdmission,
-        SourceAction, Sys4I3InstalledOwnerCapabilitySuccessorReceipt,
+        FabricProgram, LocalFabric, LocusStep, ObserverSafeM9SemanticRowSets,
+        SealedFabricAdmission, SourceAction, Sys4I3InstalledOwnerCapabilitySuccessorReceipt,
         Sys4I3OwnerCapabilitySuccessorCoordinator, Sys4I3OwnerRequestRevalidationFailure,
         Sys4I3PendingOwnerRequestBinding, Sys4I3PrivateProcessCarrierSnapshot,
-        Sys4I3RestrictedOwnerCapabilitySuccessor, Sys4ProcessCarrier,
+        Sys4I3RestrictedOwnerCapabilitySuccessor, Sys4I3ValidatedOwnerReply, Sys4ProcessCarrier,
     },
     sys5_local_slice::{Sys5I3AdapterCarrierContract, Sys5LocalProject},
 };
@@ -106,9 +109,22 @@ pub enum Sys5I3ProcessRuntimeErrorKind {
     /// The bounded in-memory duplicate ledger cannot accept another distinct
     /// request identity without eviction, so it rejects rather than forget.
     InboundRequestLedgerExhausted,
+    /// A trusted owner-runtime clock control was foreign, stale, or moved
+    /// backwards.  It makes no admission, queue, or store mutation.
+    OwnerAdmissionClockRejected,
+    /// The checked `start + budget` deadline cannot be represented as u64,
+    /// so no Awaiting ledger entry is retained.
+    OwnerAdmissionDeadlineOverflow,
+    /// An opaque Awaiting/Reserved control did not belong to this exact live
+    /// runtime ledger state.  It discloses no carrier or authority material.
+    OwnerAdmissionResolutionRejected,
     /// The requester-local bounded original-operation table cannot retain a
     /// new emitted request without eviction.
     OutboundRequestLedgerExhausted,
+    /// A locally validated declared owner-admission failure cannot be
+    /// retained without evicting an earlier terminal outcome.  The matching
+    /// requester pending entry remains intact.
+    OutboundTerminalFailureLedgerExhausted,
     /// An opaque original-request pending handle did not name the retained
     /// requester-local operation, its exact carrier, or its source-selected
     /// requester locus.  This discloses no authority or transport detail.
@@ -238,6 +254,10 @@ enum Sys5I3InboundOwnerRequestTombstonePhase {
     Reserved,
     Received,
     Ambiguous,
+    Awaiting,
+    Expired,
+    RejectedBeforeServe,
+    ServeReserved,
 }
 
 /// Private, source-derived replay protection retained by an owner runtime.
@@ -246,10 +266,185 @@ enum Sys5I3InboundOwnerRequestTombstonePhase {
 ///
 /// This intentionally has no `Debug` implementation: raw private payload
 /// bytes must not become an observer/debug surface.
-#[derive(Clone, PartialEq, Eq)]
 struct Sys5I3InboundOwnerRequestTombstone {
     carrier_snapshot_binding_bytes: Vec<u8>,
     phase: Sys5I3InboundOwnerRequestTombstonePhase,
+    terminal_admission: Option<Sys5I3TerminalOwnerAdmission>,
+}
+
+/// A single ledger entry keeps replay disposition clone-free from live
+/// authority handoff material.  No second issuer or request-ID map exists.
+struct Sys5I3InboundOwnerRequestRecord {
+    tombstone: Sys5I3InboundOwnerRequestTombstone,
+    live_admission: Option<Sys5I3LiveOwnerAdmission>,
+}
+
+#[derive(Clone, PartialEq, Eq, PartialOrd, Ord)]
+struct Sys5I3OwnerAdmissionClockKey {
+    owner_locus: String,
+    clock_domain: String,
+}
+
+struct Sys5I3OwnerAdmissionClockState {
+    tick: u64,
+}
+
+/// A trusted runtime-control selector, not observer output or authority.  It
+/// can name only one checked owner/domain already retained in this runtime.
+#[doc(hidden)]
+pub(crate) struct Sys5I3OwnerAdmissionClockHandle {
+    runtime_binding_ref: String,
+    runtime_instance: u64,
+    clock_key: Sys5I3OwnerAdmissionClockKey,
+}
+
+/// The sole T0 control for advancing one checked owner clock and resolving
+/// its deterministic next staged admission.  It is runtime-bound and opaque:
+/// callers cannot construct it, select a request, or obtain the underlying
+/// clock handle, Awaiting entry, reservation, permit, carrier, or authority.
+///
+/// This is a private I3-3 host-control seam, not a public clock, wire, or
+/// provider API.  In particular, it carries no observer-safe tick projection
+/// and derives no authority beyond the already admitted runtime condition.
+#[doc(hidden)]
+pub struct Sys5I3OwnerAdmissionHostDriver {
+    clock_handle: Sys5I3OwnerAdmissionClockHandle,
+}
+
+/// A non-Clone opaque reference to one exact Awaiting record.  It contains no
+/// carrier, permit, authority, condition, or caller-selected request fields.
+#[doc(hidden)]
+pub(crate) struct Sys5I3OwnerAdmissionAwaiting {
+    runtime_binding_ref: String,
+    runtime_instance: u64,
+    clock_key: Sys5I3OwnerAdmissionClockKey,
+    request_identity_ref: String,
+}
+
+/// The only owner-runtime handoff carrying an unverified linear permit.  It
+/// cannot be cloned, saved, or re-created once consumed or dropped.
+#[doc(hidden)]
+pub(crate) struct Sys5I3OwnerAdmissionReserved {
+    runtime_binding_ref: String,
+    runtime_instance: u64,
+    request_identity_ref: String,
+    carrier: Sys4ProcessCarrier,
+    pending: Sys4I3PendingOwnerRequestBinding,
+    carrier_snapshot_binding_bytes: Vec<u8>,
+    permit: M8I3OwnerAdmissionPermit,
+}
+
+/// The only two terminal results of resolving one exact Awaiting entry.  A
+/// declared failure remains an ordinary checked OwnerReply carrier; it is not
+/// a transport result or a receipt.
+#[doc(hidden)]
+pub(crate) enum Sys5I3OwnerAdmissionResolution {
+    ServeReserved(Box<Sys5I3OwnerAdmissionReserved>),
+    DeclaredOwnerFailure(Box<Sys5I3ProcessMessage>),
+}
+
+struct Sys5I3LiveOwnerAdmission {
+    carrier: Sys4ProcessCarrier,
+    pending: Sys4I3PendingOwnerRequestBinding,
+    clock_key: Sys5I3OwnerAdmissionClockKey,
+    start_tick: u64,
+    deadline_tick: u64,
+    issuance: M8I3OwnerAdmissionIssuance,
+}
+
+struct Sys5I3PreparedOwnerAdmission {
+    clock_key: Sys5I3OwnerAdmissionClockKey,
+    start_tick: u64,
+    deadline_tick: u64,
+    issuance: M8I3OwnerAdmissionIssuance,
+}
+
+/// Immutable stage material needed by the next typed failure producer.  It
+/// retains checked source/Core/request/reply contract binding without a live
+/// permit, carrier export, or authority issuer.
+struct Sys5I3TerminalOwnerAdmission {
+    semantic_request_identity_ref: String,
+    carrier: Sys4ProcessCarrier,
+    pending: Sys4I3PendingOwnerRequestBinding,
+    clock_key: Sys5I3OwnerAdmissionClockKey,
+    start_tick: u64,
+    deadline_tick: u64,
+    resolution_tick: u64,
+    resolution_generation_ref: String,
+    // Present only after SYS-4 has successfully constructed the one
+    // gate-produced expiry reply carrier.  It records production, not any
+    // later adapter send, receive, or requester consumption.
+    declared_deadline_expiry: Option<Sys5I3ObserverSafeOwnerAdmissionExpiryDecision>,
+    current_authority_failure: Option<Sys4I3OwnerRequestRevalidationFailure>,
+    // A later use-time check after the one-use permit has been consumed must
+    // not relabel the immutable resolution decision above.  It is retained
+    // separately for the next typed failure producer.
+    handoff_revalidation_tick: Option<u64>,
+    handoff_revalidation_generation_ref: Option<String>,
+    handoff_authority_failure: Option<Sys4I3OwnerRequestRevalidationFailure>,
+}
+
+struct Sys5I3RequesterTerminalDeclaredOwnerFailure {
+    #[cfg_attr(
+        not(test),
+        expect(
+            dead_code,
+            reason = "spec/16 retains the exact requester-terminal commitment while the current observer output exports only the correlated occurrence"
+        )
+    )]
+    decision_commitment_ref: String,
+    decision_occurrence_ref: String,
+}
+
+/// A typed observer-safe projection of one actually produced owner-side
+/// `DeadlineExpired` reply.  These opaque references are correlation
+/// evidence, not a clock control, carrier, capability, witness, or proof
+/// that a transport send/receive/consume occurred.
+#[doc(hidden)]
+#[derive(Debug, Clone, PartialEq, Eq)]
+pub struct Sys5I3ObserverSafeOwnerAdmissionExpiryDecision {
+    decision_commitment_ref: String,
+    decision_occurrence_ref: String,
+}
+
+impl Sys5I3ObserverSafeOwnerAdmissionExpiryDecision {
+    pub fn decision_commitment_ref(&self) -> &str {
+        &self.decision_commitment_ref
+    }
+
+    pub fn decision_occurrence_ref(&self) -> &str {
+        &self.decision_occurrence_ref
+    }
+}
+
+/// Counts only retained owner-admission lifecycle dispositions.  It never
+/// exposes controls, identities, source payload, carrier, permit, or M9/M8
+/// material.
+#[doc(hidden)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Default)]
+pub struct Sys5I3ObserverSafeOwnerAdmissionSummary {
+    awaiting_count: usize,
+    expired_count: usize,
+    rejected_before_serve_count: usize,
+    serve_reserved_count: usize,
+}
+
+impl Sys5I3ObserverSafeOwnerAdmissionSummary {
+    pub const fn awaiting_count(&self) -> usize {
+        self.awaiting_count
+    }
+
+    pub const fn expired_count(&self) -> usize {
+        self.expired_count
+    }
+
+    pub const fn rejected_before_serve_count(&self) -> usize {
+        self.rejected_before_serve_count
+    }
+
+    pub const fn serve_reserved_count(&self) -> usize {
+        self.serve_reserved_count
+    }
 }
 
 /// Retained requester-local state for a source-emitted owner request.  The
@@ -2659,6 +2854,7 @@ enum Sys5I3ProcessMessageKind {
     Request,
     Reply,
     Receipt,
+    TerminalFailureConsumed,
 }
 
 /// One generated carrier moving by value between two process runtimes.  It
@@ -2670,6 +2866,9 @@ pub struct Sys5I3ProcessMessage {
     carrier: Option<Sys4ProcessCarrier>,
     semantic_request_identity_ref: String,
     linked_request_identity_ref: Option<String>,
+    // Present only on the local terminal-failure consumption result.  It is
+    // copied from the retained requester ledger, never decoded from a peer.
+    terminal_failure_decision_occurrence_ref: Option<String>,
     // Private admission provenance.  This binds a generated carrier to the
     // cohort occurrence which sealed its process images; it is neither an
     // authority fact nor a substitute for M9 validation.
@@ -2694,8 +2893,18 @@ impl Sys5I3ProcessMessage {
         matches!(self.kind, Sys5I3ProcessMessageKind::Receipt)
     }
 
+    /// A locally retained declared owner-admission failure was consumed.  It
+    /// is deliberately distinct from a receipt or successful typed result.
+    pub const fn is_observer_safe_terminal_failure_consumed(&self) -> bool {
+        matches!(self.kind, Sys5I3ProcessMessageKind::TerminalFailureConsumed)
+            && self.terminal_failure_decision_occurrence_ref.is_some()
+    }
+
     pub fn has_no_transportable_carrier(&self) -> bool {
-        matches!(self.kind, Sys5I3ProcessMessageKind::Receipt) && self.carrier.is_none()
+        matches!(
+            self.kind,
+            Sys5I3ProcessMessageKind::Receipt | Sys5I3ProcessMessageKind::TerminalFailureConsumed
+        ) && self.carrier.is_none()
     }
 
     pub const fn observer_safe_identity_basis(
@@ -2735,6 +2944,7 @@ pub enum Sys5I3PrivateProcessCodecErrorKind {
     UnknownVersion,
     MissingRequiredCoreProvenance,
     ReceiptIsLocalOnly,
+    TerminalFailureIsLocalOnly,
 }
 
 #[doc(hidden)]
@@ -3628,6 +3838,11 @@ impl Sys5I3PrivateProcessCodec {
                     Sys5I3PrivateProcessCodecErrorKind::ReceiptIsLocalOnly,
                 ));
             }
+            Sys5I3ProcessMessageKind::TerminalFailureConsumed => {
+                return Err(Sys5I3PrivateProcessCodecError::new(
+                    Sys5I3PrivateProcessCodecErrorKind::TerminalFailureIsLocalOnly,
+                ));
+            }
         };
         let carrier = message.carrier.as_ref().ok_or_else(|| {
             Sys5I3PrivateProcessCodecError::new(Sys5I3PrivateProcessCodecErrorKind::Malformed)
@@ -3905,6 +4120,7 @@ pub struct Sys5I3ObserverSafeRuntimeSummary {
     served_owner_request_count: usize,
     actual_owner_write_count: usize,
     accepted_inbound_receipt_count: usize,
+    accepted_inbound_declared_owner_failure_count: usize,
 }
 
 /// Exact, observer-safe semantic occurrence references retained by the
@@ -3916,6 +4132,7 @@ pub struct Sys5I3ObserverSafeSemanticOccurrences {
     owner_serve_linearizations: BTreeMap<String, String>,
     actual_owner_writes: BTreeMap<String, String>,
     requester_local_receipts: BTreeMap<String, String>,
+    requester_terminal_declared_owner_failures: BTreeMap<String, String>,
 }
 
 impl Sys5I3ObserverSafeSemanticOccurrences {
@@ -3954,6 +4171,19 @@ impl Sys5I3ObserverSafeSemanticOccurrences {
             .get(request_identity_ref)
             .map(String::as_str)
     }
+
+    pub fn requester_terminal_declared_owner_failure_count(&self) -> usize {
+        self.requester_terminal_declared_owner_failures.len()
+    }
+
+    pub fn requester_terminal_declared_owner_failure_occurrence_ref(
+        &self,
+        request_identity_ref: &str,
+    ) -> Option<&str> {
+        self.requester_terminal_declared_owner_failures
+            .get(request_identity_ref)
+            .map(String::as_str)
+    }
 }
 
 impl Sys5I3ObserverSafeRuntimeSummary {
@@ -3975,6 +4205,10 @@ impl Sys5I3ObserverSafeRuntimeSummary {
 
     pub const fn accepted_inbound_receipt_count(&self) -> usize {
         self.accepted_inbound_receipt_count
+    }
+
+    pub const fn accepted_inbound_declared_owner_failure_count(&self) -> usize {
+        self.accepted_inbound_declared_owner_failure_count
     }
 }
 
@@ -4002,18 +4236,27 @@ pub struct Sys5I3ProcessRuntime {
     projection_ref: String,
     cohort_ref: String,
     fabric: LocalFabric,
+    // This is copied only from the live SYS-4 gate.  It distinguishes two
+    // simultaneous starts from the same image whose stable store refs match.
+    owner_admission_runtime_instance: u64,
     local_authoritative_mutation_count: usize,
     served_owner_request_count: usize,
     accepted_inbound_receipt_count: usize,
+    accepted_inbound_declared_owner_failure_count: usize,
     semantic_occurrences: Sys5I3ObserverSafeSemanticOccurrences,
     // A requester-local claim for one emitted owner request.  It contains
     // only receiver-owned, source-derived route/provenance facts; it is not
     // a transport session, credential, or mutable remote-store handle.
     pending_outbound_owner_requests: BTreeMap<String, Sys5I3OutboundOwnerRequestRecord>,
+    requester_terminal_declared_owner_failures:
+        BTreeMap<String, Sys5I3RequesterTerminalDeclaredOwnerFailure>,
     // Bounded owner-local replay tombstones.  A key is retained after the
     // first reservation for this runtime lifetime; no reconnect or retry
     // path may clear it.
-    inbound_owner_request_tombstones: BTreeMap<String, Sys5I3InboundOwnerRequestTombstone>,
+    inbound_owner_request_tombstones: BTreeMap<String, Sys5I3InboundOwnerRequestRecord>,
+    // Per checked owner/domain time coordinates.  These are not transport or
+    // requester clocks and cannot issue a permit by themselves.
+    owner_admission_clocks: BTreeMap<Sys5I3OwnerAdmissionClockKey, Sys5I3OwnerAdmissionClockState>,
     installed_owner_capability_lifecycle: Option<Sys5I3ObserverSafeInstalledLifecycle>,
     #[cfg(feature = "i3-process-test-seams")]
     reject_next_outbound_extraction: bool,
@@ -4079,7 +4322,7 @@ impl Sys5I3ProcessRuntime {
             &logical_origin_ref,
             0,
         );
-        let fabric = LocalFabric::bootstrap(
+        let mut fabric = LocalFabric::bootstrap(
             image.private_runtime_seed.program,
             image.private_runtime_seed.admission,
             BackendProfile::St,
@@ -4087,6 +4330,31 @@ impl Sys5I3ProcessRuntime {
         .map_err(|_| {
             Sys5I3ProcessRuntimeError::new(Sys5I3ProcessRuntimeErrorKind::RuntimeBootstrapRejected)
         })?;
+        let owner_admission_runtime_instance = fabric
+            .install_i3_owner_admission_gate(&local_store_identity_ref)
+            .map_err(|_| {
+                Sys5I3ProcessRuntimeError::new(
+                    Sys5I3ProcessRuntimeErrorKind::RuntimeBootstrapRejected,
+                )
+            })?;
+        let owner_admission_clocks = fabric
+            .i3_checked_owner_admission_conditions()
+            .into_iter()
+            .filter(|condition: &OwnerAdmissionBudgetCondition| {
+                image
+                    .assigned_loci
+                    .contains(condition.owner_locus().as_str())
+            })
+            .map(|condition: OwnerAdmissionBudgetCondition| {
+                (
+                    Sys5I3OwnerAdmissionClockKey {
+                        owner_locus: condition.owner_locus().as_str().to_string(),
+                        clock_domain: condition.clock_domain().as_str().to_string(),
+                    },
+                    Sys5I3OwnerAdmissionClockState { tick: 0 },
+                )
+            })
+            .collect::<BTreeMap<_, _>>();
         Ok(Self {
             assigned_loci: image.assigned_loci,
             local_store_identity_ref,
@@ -4095,12 +4363,16 @@ impl Sys5I3ProcessRuntime {
             projection_ref,
             cohort_ref,
             fabric,
+            owner_admission_runtime_instance,
             local_authoritative_mutation_count: 0,
             served_owner_request_count: 0,
             accepted_inbound_receipt_count: 0,
+            accepted_inbound_declared_owner_failure_count: 0,
             semantic_occurrences: Sys5I3ObserverSafeSemanticOccurrences::default(),
             pending_outbound_owner_requests: BTreeMap::new(),
+            requester_terminal_declared_owner_failures: BTreeMap::new(),
             inbound_owner_request_tombstones: BTreeMap::new(),
+            owner_admission_clocks,
             installed_owner_capability_lifecycle: None,
             #[cfg(feature = "i3-process-test-seams")]
             reject_next_outbound_extraction: false,
@@ -4151,6 +4423,8 @@ impl Sys5I3ProcessRuntime {
             served_owner_request_count: self.served_owner_request_count,
             actual_owner_write_count: self.local_authoritative_mutation_count,
             accepted_inbound_receipt_count: self.accepted_inbound_receipt_count,
+            accepted_inbound_declared_owner_failure_count: self
+                .accepted_inbound_declared_owner_failure_count,
         }
     }
 
@@ -4235,6 +4509,308 @@ impl Sys5I3ProcessRuntime {
         self.inbound_owner_request_tombstones.len()
     }
 
+    /// Counts retained C1/C2 dispositions without exporting a carrier,
+    /// clock-control handle, pending identity, permit, or authority fact.
+    pub fn observer_safe_owner_admission_summary(&self) -> Sys5I3ObserverSafeOwnerAdmissionSummary {
+        self.inbound_owner_request_tombstones.values().fold(
+            Sys5I3ObserverSafeOwnerAdmissionSummary::default(),
+            |mut summary, record| {
+                match record.tombstone.phase {
+                    Sys5I3InboundOwnerRequestTombstonePhase::Awaiting => {
+                        summary.awaiting_count += 1;
+                    }
+                    Sys5I3InboundOwnerRequestTombstonePhase::Expired => {
+                        summary.expired_count += 1;
+                    }
+                    Sys5I3InboundOwnerRequestTombstonePhase::RejectedBeforeServe => {
+                        summary.rejected_before_serve_count += 1;
+                    }
+                    Sys5I3InboundOwnerRequestTombstonePhase::ServeReserved => {
+                        summary.serve_reserved_count += 1;
+                    }
+                    Sys5I3InboundOwnerRequestTombstonePhase::Reserved
+                    | Sys5I3InboundOwnerRequestTombstonePhase::Received
+                    | Sys5I3InboundOwnerRequestTombstonePhase::Ambiguous => {}
+                }
+                summary
+            },
+        )
+    }
+
+    /// Return only the producer-derived decision references retained for one
+    /// exact expired request.  `None` covers every non-expiry disposition and
+    /// any failure before SYS-4 successfully produced its reply carrier.
+    /// This does not inspect or decode a carrier, recompute a decision, or
+    /// expose ticks, controls, authority, capability, witness, or payload.
+    #[doc(hidden)]
+    pub fn observer_safe_owner_admission_expiry_decision(
+        &self,
+        semantic_request_identity_ref: &str,
+    ) -> Option<Sys5I3ObserverSafeOwnerAdmissionExpiryDecision> {
+        self.inbound_owner_request_tombstones
+            .get(semantic_request_identity_ref)
+            .filter(|record| {
+                record.tombstone.phase == Sys5I3InboundOwnerRequestTombstonePhase::Expired
+            })
+            .and_then(|record| record.tombstone.terminal_admission.as_ref())
+            .and_then(|terminal| terminal.declared_deadline_expiry.clone())
+    }
+
+    /// Trusted owner-runtime controls derived from checked staged conditions.
+    /// This is crate-private specifically so an observer/devtool/serde path
+    /// cannot turn a count projection into clock-control authority.
+    pub(crate) fn i3_trusted_owner_admission_clock_handles(
+        &self,
+    ) -> Vec<Sys5I3OwnerAdmissionClockHandle> {
+        self.owner_admission_clocks
+            .keys()
+            .cloned()
+            .map(|clock_key| Sys5I3OwnerAdmissionClockHandle {
+                runtime_binding_ref: self.local_store_identity_ref.clone(),
+                runtime_instance: self.owner_admission_runtime_instance,
+                clock_key,
+            })
+            .collect()
+    }
+
+    /// Derive the finite set of opaque T0 host drivers from the admitted
+    /// runtime's checked owner-admission conditions.  This exposes neither
+    /// clock handles nor source-selected request control, and unbudgeted
+    /// source derives no driver.
+    ///
+    /// The name and Rust visibility are provisional and doc-hidden.  They
+    /// make no public API, ABI, provider, or clock-framework commitment.
+    #[doc(hidden)]
+    pub fn i3_admitted_owner_admission_host_drivers(&self) -> Vec<Sys5I3OwnerAdmissionHostDriver> {
+        self.i3_trusted_owner_admission_clock_handles()
+            .into_iter()
+            .map(|clock_handle| Sys5I3OwnerAdmissionHostDriver { clock_handle })
+            .collect()
+    }
+
+    /// Advance the opaque driver's checked owner clock when requested, then
+    /// resolve and hand off at most one deterministic Awaiting admission.
+    ///
+    /// `None` retains the current tick; `Some` is the sole private monotonic
+    /// host-clock input.  The driver is validated before either an empty
+    /// queue or a ledger entry is inspected.  The caller cannot name a
+    /// request, carrier, permit, expected outcome, or retry.  A generated
+    /// reply is returned only after the existing gate and SYS-4/M8 handoff
+    /// have produced it; an empty queue returns `None`.
+    #[doc(hidden)]
+    pub fn drive_next_owner_admission(
+        &mut self,
+        driver: &Sys5I3OwnerAdmissionHostDriver,
+        next_tick: Option<u64>,
+    ) -> Result<Option<Sys5I3ProcessMessage>, Sys5I3ProcessRuntimeError> {
+        if let Some(next_tick) = next_tick {
+            // This validates runtime binding/key before mutating the clock,
+            // and rejects backward input before any ledger inspection.
+            self.advance_owner_admission_clock(&driver.clock_handle, next_tick)?;
+        }
+        // `take_next...` always validates the exact runtime-bound key before
+        // reading the ledger.  Thus `None` cannot make foreign or stale
+        // control look like an empty queue.
+        let Some(awaiting) = self.take_next_owner_admission_awaiting(&driver.clock_handle)? else {
+            return Ok(None);
+        };
+        match self.resolve_staged_owner_admission(awaiting)? {
+            Sys5I3OwnerAdmissionResolution::ServeReserved(reserved) => {
+                self.handoff_reserved_owner_admission(*reserved).map(Some)
+            }
+            Sys5I3OwnerAdmissionResolution::DeclaredOwnerFailure(message) => Ok(Some(*message)),
+        }
+    }
+
+    /// Advance exactly one checked owner/domain clock.  This does not choose
+    /// a request, issue a permit, expire an entry, or invoke M8/SYS-4.
+    pub(crate) fn advance_owner_admission_clock(
+        &mut self,
+        handle: &Sys5I3OwnerAdmissionClockHandle,
+        next_tick: u64,
+    ) -> Result<(), Sys5I3ProcessRuntimeError> {
+        if handle.runtime_binding_ref != self.local_store_identity_ref
+            || handle.runtime_instance != self.owner_admission_runtime_instance
+        {
+            return Err(Sys5I3ProcessRuntimeError::new(
+                Sys5I3ProcessRuntimeErrorKind::OwnerAdmissionClockRejected,
+            ));
+        }
+        let Some(clock) = self.owner_admission_clocks.get_mut(&handle.clock_key) else {
+            return Err(Sys5I3ProcessRuntimeError::new(
+                Sys5I3ProcessRuntimeErrorKind::OwnerAdmissionClockRejected,
+            ));
+        };
+        if next_tick < clock.tick {
+            return Err(Sys5I3ProcessRuntimeError::new(
+                Sys5I3ProcessRuntimeErrorKind::OwnerAdmissionClockRejected,
+            ));
+        }
+        // Equal ticks are intentionally a no-op and cannot resolve any
+        // lifecycle decision implicitly.
+        clock.tick = next_tick;
+        Ok(())
+    }
+
+    /// Return the first exact Awaiting entry for this checked owner/domain in
+    /// deterministic ledger order.  The caller cannot name a request ID.
+    pub(crate) fn take_next_owner_admission_awaiting(
+        &self,
+        handle: &Sys5I3OwnerAdmissionClockHandle,
+    ) -> Result<Option<Sys5I3OwnerAdmissionAwaiting>, Sys5I3ProcessRuntimeError> {
+        if handle.runtime_binding_ref != self.local_store_identity_ref
+            || handle.runtime_instance != self.owner_admission_runtime_instance
+            || !self.owner_admission_clocks.contains_key(&handle.clock_key)
+        {
+            return Err(Sys5I3ProcessRuntimeError::new(
+                Sys5I3ProcessRuntimeErrorKind::OwnerAdmissionClockRejected,
+            ));
+        }
+        Ok(self.inbound_owner_request_tombstones.iter().find_map(
+            |(request_identity_ref, record)| {
+                (record.tombstone.phase == Sys5I3InboundOwnerRequestTombstonePhase::Awaiting
+                    && record
+                        .live_admission
+                        .as_ref()
+                        .is_some_and(|live| live.clock_key == handle.clock_key))
+                .then(|| Sys5I3OwnerAdmissionAwaiting {
+                    runtime_binding_ref: self.local_store_identity_ref.clone(),
+                    runtime_instance: self.owner_admission_runtime_instance,
+                    clock_key: handle.clock_key.clone(),
+                    request_identity_ref: request_identity_ref.clone(),
+                })
+            },
+        ))
+    }
+
+    /// Resolve one opaque Awaiting entry.  Current authority is revalidated
+    /// before the deadline decision.  On-time resolution consumes the sole
+    /// ledger issuance token and returns a non-Clone Reserved handoff; expiry
+    /// and current-authority failure retain terminal metadata in the same map.
+    pub(crate) fn resolve_staged_owner_admission(
+        &mut self,
+        awaiting: Sys5I3OwnerAdmissionAwaiting,
+    ) -> Result<Sys5I3OwnerAdmissionResolution, Sys5I3ProcessRuntimeError> {
+        if awaiting.runtime_binding_ref != self.local_store_identity_ref
+            || awaiting.runtime_instance != self.owner_admission_runtime_instance
+            || !self
+                .owner_admission_clocks
+                .contains_key(&awaiting.clock_key)
+        {
+            return Err(Sys5I3ProcessRuntimeError::new(
+                Sys5I3ProcessRuntimeErrorKind::OwnerAdmissionResolutionRejected,
+            ));
+        }
+        let (pending, carrier, deadline_tick, clock_key_matches) = self
+            .inbound_owner_request_tombstones
+            .get(&awaiting.request_identity_ref)
+            .and_then(|record| {
+                (record.tombstone.phase == Sys5I3InboundOwnerRequestTombstonePhase::Awaiting)
+                    .then_some(record.live_admission.as_ref())
+                    .flatten()
+                    .map(|live| {
+                        (
+                            &live.pending,
+                            &live.carrier,
+                            live.deadline_tick,
+                            live.clock_key == awaiting.clock_key,
+                        )
+                    })
+            })
+            .ok_or_else(|| {
+                Sys5I3ProcessRuntimeError::new(
+                    Sys5I3ProcessRuntimeErrorKind::OwnerAdmissionResolutionRejected,
+                )
+            })?;
+        if !clock_key_matches {
+            return Err(Sys5I3ProcessRuntimeError::new(
+                Sys5I3ProcessRuntimeErrorKind::OwnerAdmissionResolutionRejected,
+            ));
+        }
+        let resolution_tick = self
+            .owner_admission_clocks
+            .get(&awaiting.clock_key)
+            .expect("validated owner-admission clock remains live")
+            .tick;
+        let resolution_generation_ref = self.fabric.i3_owner_admission_generation_ref().to_string();
+        if let Err(failure) = self
+            .fabric
+            .revalidate_i3_bound_owner_request_authority(pending, carrier)
+        {
+            // A substituted carrier is not a current-authority decision for
+            // the retained exact request.  It must leave the sole Awaiting
+            // issuance available for its authentic source carrier.
+            if failure == Sys4I3OwnerRequestRevalidationFailure::CarrierBindingMismatch {
+                return Err(owner_request_revalidation_runtime_error(failure));
+            }
+            self.reject_awaiting_owner_admission_before_serve(
+                &awaiting.request_identity_ref,
+                failure,
+                resolution_tick,
+                resolution_generation_ref,
+            )?;
+            return Err(owner_request_revalidation_runtime_error(failure));
+        }
+        if resolution_tick >= deadline_tick {
+            let message = self.expire_awaiting_owner_admission(
+                &awaiting.request_identity_ref,
+                resolution_tick,
+                resolution_generation_ref,
+            )?;
+            return Ok(Sys5I3OwnerAdmissionResolution::DeclaredOwnerFailure(
+                Box::new(message),
+            ));
+        }
+        self.reserve_staged_owner_admission(
+            awaiting.request_identity_ref,
+            resolution_tick,
+            resolution_generation_ref,
+        )
+        .map(|reserved| Sys5I3OwnerAdmissionResolution::ServeReserved(Box::new(reserved)))
+    }
+
+    /// Consume a Reserved handoff before it can enter the existing SYS-4/M8
+    /// path.  Any failure drops the permit and leaves the ledger disposition
+    /// ServeReserved, so a caller cannot reacquire or count a second serve.
+    pub(crate) fn handoff_reserved_owner_admission(
+        &mut self,
+        reserved: Sys5I3OwnerAdmissionReserved,
+    ) -> Result<Sys5I3ProcessMessage, Sys5I3ProcessRuntimeError> {
+        if reserved.runtime_binding_ref != self.local_store_identity_ref
+            || reserved.runtime_instance != self.owner_admission_runtime_instance
+            || !self.reserved_owner_admission_matches(&reserved)
+        {
+            return Err(Sys5I3ProcessRuntimeError::new(
+                Sys5I3ProcessRuntimeErrorKind::OwnerAdmissionResolutionRejected,
+            ));
+        }
+        let resolution_tick = self
+            .inbound_owner_request_tombstones
+            .get(&reserved.request_identity_ref)
+            .and_then(|record| record.tombstone.terminal_admission.as_ref())
+            .and_then(|terminal| self.owner_admission_clocks.get(&terminal.clock_key))
+            .map(|clock| clock.tick)
+            .ok_or_else(|| {
+                Sys5I3ProcessRuntimeError::new(
+                    Sys5I3ProcessRuntimeErrorKind::OwnerAdmissionResolutionRejected,
+                )
+            })?;
+        let resolution_generation_ref = self.fabric.i3_owner_admission_generation_ref().to_string();
+        if let Err(failure) = self
+            .fabric
+            .revalidate_i3_bound_owner_request_authority(&reserved.pending, &reserved.carrier)
+        {
+            self.record_reserved_owner_admission_authority_failure(
+                &reserved.request_identity_ref,
+                failure,
+                resolution_tick,
+                resolution_generation_ref,
+            );
+            return Err(owner_request_revalidation_runtime_error(failure));
+        }
+        self.accept_reserved_owner_admission_handoff(reserved)
+    }
+
     #[cfg(feature = "i3-process-test-seams")]
     #[doc(hidden)]
     pub fn test_only_reject_next_outbound_extraction(&mut self) {
@@ -4249,6 +4825,37 @@ impl Sys5I3ProcessRuntime {
     #[doc(hidden)]
     pub fn test_only_reject_next_owner_admission_after_reservation(&mut self) {
         self.reject_next_owner_admission_after_reservation = true;
+    }
+
+    /// Negative-only C2 control over the existing real post-dequeue M8
+    /// rejection seam.  It accepts neither an authority nor a carrier: the
+    /// borrowed Reserved handoff supplies only the already staged exact
+    /// operation/locus needed to arm that one genuine backend failure.
+    #[cfg(test)]
+    pub(crate) fn test_only_reject_next_staged_owner_admission_handoff(
+        &mut self,
+        reserved: &Sys5I3OwnerAdmissionReserved,
+    ) -> Result<(), Sys5I3ProcessRuntimeError> {
+        if reserved.runtime_binding_ref != self.local_store_identity_ref
+            || reserved.runtime_instance != self.owner_admission_runtime_instance
+            || !self.reserved_owner_admission_matches(reserved)
+        {
+            return Err(Sys5I3ProcessRuntimeError::new(
+                Sys5I3ProcessRuntimeErrorKind::OwnerAdmissionResolutionRejected,
+            ));
+        }
+        self.fabric
+            .m8_backend_test_support_mut()
+            .reject_next_owner_operation_after_dequeue(
+                reserved.carrier.envelope_id(),
+                reserved.pending.operation_id(),
+                reserved.pending.owner_locus(),
+            )
+            .map_err(|_| {
+                Sys5I3ProcessRuntimeError::new(
+                    Sys5I3ProcessRuntimeErrorKind::CarrierAdmissionRejected,
+                )
+            })
     }
 
     pub fn emit_generated_owner_request(
@@ -4340,6 +4947,7 @@ impl Sys5I3ProcessRuntime {
             carrier: Some(carrier),
             semantic_request_identity_ref: request_identity_ref,
             linked_request_identity_ref: None,
+            terminal_failure_decision_occurrence_ref: None,
             cohort_provenance_ref: self.cohort_ref.clone(),
             identity_basis: Sys5I3ObserverSafeSemanticRequestIdentityBasis,
         })
@@ -4646,6 +5254,19 @@ impl Sys5I3ProcessRuntime {
                             }
                         })
                     })?;
+                // Duplicate identity/binding and finite-ledger capacity take
+                // precedence over later clock arithmetic.  A duplicate at
+                // an overflowing tick remains a duplicate.
+                self.preflight_inbound_owner_request_reservation(
+                    &request_identity_ref,
+                    &carrier_snapshot_binding_bytes,
+                )?;
+                let staged_owner_admission = self.prepare_owner_admission_stage(
+                    &pending,
+                    &carrier,
+                    &request_identity_ref,
+                    &carrier_snapshot_binding_bytes,
+                )?;
                 self.reserve_inbound_owner_request(
                     &request_identity_ref,
                     carrier_snapshot_binding_bytes,
@@ -4661,6 +5282,19 @@ impl Sys5I3ProcessRuntime {
                     return Err(Sys5I3ProcessRuntimeError::new(
                         Sys5I3ProcessRuntimeErrorKind::CarrierAdmissionRejected,
                     ));
+                }
+
+                if let Some(staged_owner_admission) = staged_owner_admission {
+                    self.stage_reserved_owner_admission(
+                        &request_identity_ref,
+                        carrier,
+                        pending,
+                        staged_owner_admission,
+                    )?;
+                    // A checked budget condition stages only its exact source
+                    // request.  It has no reply, queue occurrence, M8 use, or
+                    // store mutation until a later trusted clock resolution.
+                    return Ok(None);
                 }
 
                 // Reserve before SYS-4 can enqueue/linearize the carrier.
@@ -4712,13 +5346,38 @@ impl Sys5I3ProcessRuntime {
                             Sys5I3ProcessRuntimeErrorKind::CarrierAdmissionRejected,
                         )
                     })?;
-                self.fabric
+                let validated_reply = self
+                    .fabric
                     .validate_i3_pending_owner_reply(&pending, &carrier)
                     .map_err(|_| {
                         Sys5I3ProcessRuntimeError::new(
                             Sys5I3ProcessRuntimeErrorKind::CarrierAdmissionRejected,
                         )
                     })?;
+                // A validated terminal failure must be retainable before
+                // SYS-4 admits and dequeues its reply carrier.  Otherwise a
+                // full terminal ledger would record a phantom local dequeue
+                // despite preserving the genuine requester pending entry.
+                if matches!(
+                    &validated_reply,
+                    Sys4I3ValidatedOwnerReply::DeclaredDeadlineExpired { .. }
+                ) {
+                    if self
+                        .requester_terminal_declared_owner_failures
+                        .contains_key(&request_identity_ref)
+                    {
+                        return Err(Sys5I3ProcessRuntimeError::new(
+                            Sys5I3ProcessRuntimeErrorKind::CarrierAdmissionRejected,
+                        ));
+                    }
+                    if self.requester_terminal_declared_owner_failures.len()
+                        >= MAX_OUTBOUND_OWNER_TERMINAL_FAILURES
+                    {
+                        return Err(Sys5I3ProcessRuntimeError::new(
+                            Sys5I3ProcessRuntimeErrorKind::OutboundTerminalFailureLedgerExhausted,
+                        ));
+                    }
+                }
                 if !self.assigned_loci.contains(carrier.target_locus()) {
                     return Err(Sys5I3ProcessRuntimeError::new(
                         Sys5I3ProcessRuntimeErrorKind::CarrierAdmissionRejected,
@@ -4732,40 +5391,110 @@ impl Sys5I3ProcessRuntime {
                             Sys5I3ProcessRuntimeErrorKind::CarrierAdmissionRejected,
                         )
                     })?;
-                if step.receipt().is_none() {
-                    return Err(Sys5I3ProcessRuntimeError::new(
-                        Sys5I3ProcessRuntimeErrorKind::CarrierAdmissionRejected,
-                    ));
+                match validated_reply {
+                    Sys4I3ValidatedOwnerReply::Success => {
+                        if step.receipt().is_none()
+                            || step.declared_owner_deadline_expired().is_some()
+                        {
+                            return Err(Sys5I3ProcessRuntimeError::new(
+                                Sys5I3ProcessRuntimeErrorKind::CarrierAdmissionRejected,
+                            ));
+                        }
+                        let receipt_occurrence = observer_safe_process_occurrence_ref(
+                            "requester-local-receipt",
+                            &request_identity_ref,
+                            step.consumed_envelope_id(),
+                            step.locus_dequeue_occurrence_id(),
+                        );
+                        self.semantic_occurrences
+                            .requester_local_receipts
+                            .insert(request_identity_ref.clone(), receipt_occurrence);
+                        self.accepted_inbound_receipt_count = self
+                            .accepted_inbound_receipt_count
+                            .checked_add(1)
+                            .ok_or_else(|| {
+                                Sys5I3ProcessRuntimeError::new(
+                                    Sys5I3ProcessRuntimeErrorKind::CarrierAdmissionRejected,
+                                )
+                            })?;
+                        self.pending_outbound_owner_requests
+                            .remove(&request_identity_ref);
+                        Ok(Some(Sys5I3ProcessMessage {
+                            kind: Sys5I3ProcessMessageKind::Receipt,
+                            carrier: None,
+                            semantic_request_identity_ref: message
+                                .semantic_request_identity_ref
+                                .clone(),
+                            linked_request_identity_ref: Some(
+                                message.semantic_request_identity_ref,
+                            ),
+                            terminal_failure_decision_occurrence_ref: None,
+                            cohort_provenance_ref: self.cohort_ref.clone(),
+                            identity_basis: Sys5I3ObserverSafeSemanticRequestIdentityBasis,
+                        }))
+                    }
+                    Sys4I3ValidatedOwnerReply::DeclaredDeadlineExpired {
+                        decision_commitment_ref,
+                    } => {
+                        let failure = step.declared_owner_deadline_expired().ok_or_else(|| {
+                            Sys5I3ProcessRuntimeError::new(
+                                Sys5I3ProcessRuntimeErrorKind::CarrierAdmissionRejected,
+                            )
+                        })?;
+                        if step.receipt().is_some()
+                            || failure.decision_commitment_ref() != decision_commitment_ref
+                        {
+                            return Err(Sys5I3ProcessRuntimeError::new(
+                                Sys5I3ProcessRuntimeErrorKind::CarrierAdmissionRejected,
+                            ));
+                        }
+                        let occurrence = observer_safe_process_occurrence_ref(
+                            "requester-terminal-declared-owner-failure",
+                            &request_identity_ref,
+                            failure.decision_occurrence_ref(),
+                            step.locus_dequeue_occurrence_id(),
+                        );
+                        self.requester_terminal_declared_owner_failures.insert(
+                            request_identity_ref.clone(),
+                            Sys5I3RequesterTerminalDeclaredOwnerFailure {
+                                decision_commitment_ref,
+                                decision_occurrence_ref: occurrence.clone(),
+                            },
+                        );
+                        self.semantic_occurrences
+                            .requester_terminal_declared_owner_failures
+                            .insert(request_identity_ref.clone(), occurrence);
+                        self.accepted_inbound_declared_owner_failure_count = self
+                            .accepted_inbound_declared_owner_failure_count
+                            .checked_add(1)
+                            .ok_or_else(|| {
+                                Sys5I3ProcessRuntimeError::new(
+                                    Sys5I3ProcessRuntimeErrorKind::CarrierAdmissionRejected,
+                                )
+                            })?;
+                        // Terminal retention is committed before removing the
+                        // original pending entry; this is deliberately not a
+                        // receipt or a successful owner execution.
+                        self.pending_outbound_owner_requests
+                            .remove(&request_identity_ref);
+                        Ok(Some(Sys5I3ProcessMessage {
+                            kind: Sys5I3ProcessMessageKind::TerminalFailureConsumed,
+                            carrier: None,
+                            semantic_request_identity_ref: message
+                                .semantic_request_identity_ref
+                                .clone(),
+                            linked_request_identity_ref: Some(
+                                message.semantic_request_identity_ref,
+                            ),
+                            terminal_failure_decision_occurrence_ref: self
+                                .requester_terminal_declared_owner_failures
+                                .get(&request_identity_ref)
+                                .map(|record| record.decision_occurrence_ref.clone()),
+                            cohort_provenance_ref: self.cohort_ref.clone(),
+                            identity_basis: Sys5I3ObserverSafeSemanticRequestIdentityBasis,
+                        }))
+                    }
                 }
-                let receipt_occurrence = observer_safe_process_occurrence_ref(
-                    "requester-local-receipt",
-                    &request_identity_ref,
-                    step.consumed_envelope_id(),
-                    step.locus_dequeue_occurrence_id(),
-                );
-                self.semantic_occurrences
-                    .requester_local_receipts
-                    .insert(request_identity_ref.clone(), receipt_occurrence);
-                self.accepted_inbound_receipt_count = self
-                    .accepted_inbound_receipt_count
-                    .checked_add(1)
-                    .ok_or_else(|| {
-                        Sys5I3ProcessRuntimeError::new(
-                            Sys5I3ProcessRuntimeErrorKind::CarrierAdmissionRejected,
-                        )
-                    })?;
-                // A reply is consumed only after the receiver-owned SYS-4
-                // admission completed and produced its local receipt.
-                self.pending_outbound_owner_requests
-                    .remove(&request_identity_ref);
-                Ok(Some(Sys5I3ProcessMessage {
-                    kind: Sys5I3ProcessMessageKind::Receipt,
-                    carrier: None,
-                    semantic_request_identity_ref: message.semantic_request_identity_ref.clone(),
-                    linked_request_identity_ref: Some(message.semantic_request_identity_ref),
-                    cohort_provenance_ref: self.cohort_ref.clone(),
-                    identity_basis: Sys5I3ObserverSafeSemanticRequestIdentityBasis,
-                }))
             }
             Sys5I3ProcessMessageKind::Receipt => {
                 // A consumed owner reply completes requester-locally.  There
@@ -4776,7 +5505,455 @@ impl Sys5I3ProcessRuntime {
                     Sys5I3ProcessRuntimeErrorKind::CarrierAdmissionRejected,
                 ))
             }
+            Sys5I3ProcessMessageKind::TerminalFailureConsumed => {
+                Err(Sys5I3ProcessRuntimeError::new(
+                    Sys5I3ProcessRuntimeErrorKind::CarrierAdmissionRejected,
+                ))
+            }
         }
+    }
+
+    fn prepare_owner_admission_stage(
+        &self,
+        pending: &Sys4I3PendingOwnerRequestBinding,
+        carrier: &Sys4ProcessCarrier,
+        request_identity_ref: &str,
+        carrier_snapshot_binding_bytes: &[u8],
+    ) -> Result<Option<Sys5I3PreparedOwnerAdmission>, Sys5I3ProcessRuntimeError> {
+        let Some(condition) = pending.owner_admission_budget() else {
+            return Ok(None);
+        };
+        let clock_key = Sys5I3OwnerAdmissionClockKey {
+            owner_locus: condition.owner_locus().as_str().to_string(),
+            clock_domain: condition.clock_domain().as_str().to_string(),
+        };
+        let start_tick = self
+            .owner_admission_clocks
+            .get(&clock_key)
+            .map(|clock| clock.tick)
+            .ok_or_else(|| {
+                Sys5I3ProcessRuntimeError::new(
+                    Sys5I3ProcessRuntimeErrorKind::CarrierAdmissionRejected,
+                )
+            })?;
+        let deadline_tick = start_tick
+            .checked_add(condition.budget_ticks())
+            .ok_or_else(|| {
+                Sys5I3ProcessRuntimeError::new(
+                    Sys5I3ProcessRuntimeErrorKind::OwnerAdmissionDeadlineOverflow,
+                )
+            })?;
+        let issuance = self
+            .fabric
+            .stage_i3_owner_admission_issuance(
+                pending,
+                carrier,
+                request_identity_ref,
+                &self.local_store_identity_ref,
+                carrier_snapshot_binding_bytes.to_vec(),
+            )
+            .map_err(|_| {
+                Sys5I3ProcessRuntimeError::new(
+                    Sys5I3ProcessRuntimeErrorKind::CarrierAdmissionRejected,
+                )
+            })?;
+        Ok(Some(Sys5I3PreparedOwnerAdmission {
+            clock_key,
+            start_tick,
+            deadline_tick,
+            issuance,
+        }))
+    }
+
+    fn stage_reserved_owner_admission(
+        &mut self,
+        request_identity_ref: &str,
+        carrier: Sys4ProcessCarrier,
+        pending: Sys4I3PendingOwnerRequestBinding,
+        staged: Sys5I3PreparedOwnerAdmission,
+    ) -> Result<(), Sys5I3ProcessRuntimeError> {
+        let record = self
+            .inbound_owner_request_tombstones
+            .get_mut(request_identity_ref)
+            .ok_or_else(|| {
+                Sys5I3ProcessRuntimeError::new(
+                    Sys5I3ProcessRuntimeErrorKind::OwnerAdmissionResolutionRejected,
+                )
+            })?;
+        if record.tombstone.phase != Sys5I3InboundOwnerRequestTombstonePhase::Reserved
+            || record.live_admission.is_some()
+        {
+            return Err(Sys5I3ProcessRuntimeError::new(
+                Sys5I3ProcessRuntimeErrorKind::OwnerAdmissionResolutionRejected,
+            ));
+        }
+        record.tombstone.phase = Sys5I3InboundOwnerRequestTombstonePhase::Awaiting;
+        record.live_admission = Some(Sys5I3LiveOwnerAdmission {
+            carrier,
+            pending,
+            clock_key: staged.clock_key,
+            start_tick: staged.start_tick,
+            deadline_tick: staged.deadline_tick,
+            issuance: staged.issuance,
+        });
+        Ok(())
+    }
+
+    fn reject_awaiting_owner_admission_before_serve(
+        &mut self,
+        request_identity_ref: &str,
+        failure: Sys4I3OwnerRequestRevalidationFailure,
+        resolution_tick: u64,
+        resolution_generation_ref: String,
+    ) -> Result<(), Sys5I3ProcessRuntimeError> {
+        let record = self
+            .inbound_owner_request_tombstones
+            .get_mut(request_identity_ref)
+            .ok_or_else(|| {
+                Sys5I3ProcessRuntimeError::new(
+                    Sys5I3ProcessRuntimeErrorKind::OwnerAdmissionResolutionRejected,
+                )
+            })?;
+        let live = record.live_admission.take().ok_or_else(|| {
+            Sys5I3ProcessRuntimeError::new(
+                Sys5I3ProcessRuntimeErrorKind::OwnerAdmissionResolutionRejected,
+            )
+        })?;
+        record.tombstone.phase = Sys5I3InboundOwnerRequestTombstonePhase::RejectedBeforeServe;
+        record.tombstone.terminal_admission = Some(Sys5I3TerminalOwnerAdmission {
+            semantic_request_identity_ref: request_identity_ref.to_string(),
+            carrier: live.carrier,
+            pending: live.pending,
+            clock_key: live.clock_key,
+            start_tick: live.start_tick,
+            deadline_tick: live.deadline_tick,
+            resolution_tick,
+            resolution_generation_ref,
+            declared_deadline_expiry: None,
+            current_authority_failure: Some(failure),
+            handoff_revalidation_tick: None,
+            handoff_revalidation_generation_ref: None,
+            handoff_authority_failure: None,
+        });
+        // Dropping the issuance is deliberate: a revoked Awaiting request
+        // cannot obtain another permit after an authority change.
+        Ok(())
+    }
+
+    fn expire_awaiting_owner_admission(
+        &mut self,
+        request_identity_ref: &str,
+        resolution_tick: u64,
+        resolution_generation_ref: String,
+    ) -> Result<Sys5I3ProcessMessage, Sys5I3ProcessRuntimeError> {
+        // Fail known-invalid expiry before terminalizing the live issuance.
+        // The gate owns both the current-authority proof and the checked
+        // deadline arithmetic; no raw tick or carrier field can be turned
+        // into a failure reply by this caller.
+        {
+            let record = self
+                .inbound_owner_request_tombstones
+                .get(request_identity_ref)
+                .ok_or_else(|| {
+                    Sys5I3ProcessRuntimeError::new(
+                        Sys5I3ProcessRuntimeErrorKind::OwnerAdmissionResolutionRejected,
+                    )
+                })?;
+            let live = record.live_admission.as_ref().ok_or_else(|| {
+                Sys5I3ProcessRuntimeError::new(
+                    Sys5I3ProcessRuntimeErrorKind::OwnerAdmissionResolutionRejected,
+                )
+            })?;
+            self.fabric
+                .can_declare_i3_owner_admission_deadline_expired(
+                    &live.issuance,
+                    &live.pending,
+                    &live.carrier,
+                    request_identity_ref,
+                    &self.local_store_identity_ref,
+                    record.tombstone.carrier_snapshot_binding_bytes.clone(),
+                    live.start_tick,
+                    resolution_tick,
+                )
+                .map_err(|_| {
+                    Sys5I3ProcessRuntimeError::new(
+                        Sys5I3ProcessRuntimeErrorKind::CarrierAdmissionRejected,
+                    )
+                })?;
+        }
+        let record = self
+            .inbound_owner_request_tombstones
+            .get_mut(request_identity_ref)
+            .ok_or_else(|| {
+                Sys5I3ProcessRuntimeError::new(
+                    Sys5I3ProcessRuntimeErrorKind::OwnerAdmissionResolutionRejected,
+                )
+            })?;
+        let live = record.live_admission.take().ok_or_else(|| {
+            Sys5I3ProcessRuntimeError::new(
+                Sys5I3ProcessRuntimeErrorKind::OwnerAdmissionResolutionRejected,
+            )
+        })?;
+        let carrier_snapshot_binding_bytes =
+            record.tombstone.carrier_snapshot_binding_bytes.clone();
+        record.tombstone.phase = Sys5I3InboundOwnerRequestTombstonePhase::Expired;
+        record.tombstone.terminal_admission = Some(Sys5I3TerminalOwnerAdmission {
+            semantic_request_identity_ref: request_identity_ref.to_string(),
+            carrier: live.carrier.clone(),
+            pending: live.pending.clone(),
+            clock_key: live.clock_key.clone(),
+            start_tick: live.start_tick,
+            deadline_tick: live.deadline_tick,
+            resolution_tick,
+            resolution_generation_ref,
+            declared_deadline_expiry: None,
+            current_authority_failure: None,
+            handoff_revalidation_tick: None,
+            handoff_revalidation_generation_ref: None,
+            handoff_authority_failure: None,
+        });
+        // Terminal retention commits before consuming the issuance to create
+        // the existing checked reply carrier.  A later construction failure
+        // leaves `Expired` retained and cannot reissue the token.
+        let produced = self
+            .fabric
+            .declare_i3_owner_admission_deadline_expired(
+                live.issuance,
+                &live.pending,
+                &live.carrier,
+                request_identity_ref,
+                &self.local_store_identity_ref,
+                carrier_snapshot_binding_bytes,
+                live.start_tick,
+                resolution_tick,
+            )
+            .map_err(|_| {
+                Sys5I3ProcessRuntimeError::new(
+                    Sys5I3ProcessRuntimeErrorKind::CarrierAdmissionRejected,
+                )
+            })?;
+        let (reply, decision_commitment_ref, decision_occurrence_ref) = produced.into_parts();
+        let message = Sys5I3ProcessMessage {
+            kind: Sys5I3ProcessMessageKind::Reply,
+            carrier: Some(reply),
+            semantic_request_identity_ref: request_identity_ref.to_string(),
+            linked_request_identity_ref: Some(request_identity_ref.to_string()),
+            terminal_failure_decision_occurrence_ref: None,
+            cohort_provenance_ref: self.cohort_ref.clone(),
+            identity_basis: Sys5I3ObserverSafeSemanticRequestIdentityBasis,
+        };
+        let terminal = self
+            .inbound_owner_request_tombstones
+            .get_mut(request_identity_ref)
+            .filter(|record| {
+                record.tombstone.phase == Sys5I3InboundOwnerRequestTombstonePhase::Expired
+            })
+            .and_then(|record| record.tombstone.terminal_admission.as_mut())
+            .filter(|terminal| {
+                terminal.semantic_request_identity_ref == request_identity_ref
+                    && terminal.declared_deadline_expiry.is_none()
+            })
+            .ok_or_else(|| {
+                Sys5I3ProcessRuntimeError::new(
+                    Sys5I3ProcessRuntimeErrorKind::OwnerAdmissionResolutionRejected,
+                )
+            })?;
+        terminal.declared_deadline_expiry = Some(Sys5I3ObserverSafeOwnerAdmissionExpiryDecision {
+            decision_commitment_ref,
+            decision_occurrence_ref,
+        });
+        Ok(message)
+    }
+
+    fn reserve_staged_owner_admission(
+        &mut self,
+        request_identity_ref: String,
+        resolution_tick: u64,
+        resolution_generation_ref: String,
+    ) -> Result<Sys5I3OwnerAdmissionReserved, Sys5I3ProcessRuntimeError> {
+        // Consume no issuance token and mutate no ledger state until the
+        // freshly revalidated binding is feasible.  G1/G2 may differ only in
+        // generation: SYS-4 checks every immutable request/carrier/contract
+        // field here and a later handoff remains generation-exact.
+        {
+            let record = self
+                .inbound_owner_request_tombstones
+                .get(&request_identity_ref)
+                .ok_or_else(|| {
+                    Sys5I3ProcessRuntimeError::new(
+                        Sys5I3ProcessRuntimeErrorKind::OwnerAdmissionResolutionRejected,
+                    )
+                })?;
+            if record.tombstone.phase != Sys5I3InboundOwnerRequestTombstonePhase::Awaiting {
+                return Err(Sys5I3ProcessRuntimeError::new(
+                    Sys5I3ProcessRuntimeErrorKind::OwnerAdmissionResolutionRejected,
+                ));
+            }
+            let live = record.live_admission.as_ref().ok_or_else(|| {
+                Sys5I3ProcessRuntimeError::new(
+                    Sys5I3ProcessRuntimeErrorKind::OwnerAdmissionResolutionRejected,
+                )
+            })?;
+            self.fabric
+                .can_issue_i3_owner_admission_permit(
+                    &live.issuance,
+                    &live.pending,
+                    &live.carrier,
+                    &request_identity_ref,
+                    &self.local_store_identity_ref,
+                    record.tombstone.carrier_snapshot_binding_bytes.clone(),
+                )
+                .map_err(|_| {
+                    Sys5I3ProcessRuntimeError::new(
+                        Sys5I3ProcessRuntimeErrorKind::CarrierAdmissionRejected,
+                    )
+                })?;
+        }
+        let (live, carrier_snapshot_binding_bytes) = {
+            let record = self
+                .inbound_owner_request_tombstones
+                .get_mut(&request_identity_ref)
+                .ok_or_else(|| {
+                    Sys5I3ProcessRuntimeError::new(
+                        Sys5I3ProcessRuntimeErrorKind::OwnerAdmissionResolutionRejected,
+                    )
+                })?;
+            if record.tombstone.phase != Sys5I3InboundOwnerRequestTombstonePhase::Awaiting {
+                return Err(Sys5I3ProcessRuntimeError::new(
+                    Sys5I3ProcessRuntimeErrorKind::OwnerAdmissionResolutionRejected,
+                ));
+            }
+            let live = record.live_admission.take().ok_or_else(|| {
+                Sys5I3ProcessRuntimeError::new(
+                    Sys5I3ProcessRuntimeErrorKind::OwnerAdmissionResolutionRejected,
+                )
+            })?;
+            record.tombstone.phase = Sys5I3InboundOwnerRequestTombstonePhase::ServeReserved;
+            record.tombstone.terminal_admission = Some(Sys5I3TerminalOwnerAdmission {
+                semantic_request_identity_ref: request_identity_ref.clone(),
+                carrier: live.carrier.clone(),
+                pending: live.pending.clone(),
+                clock_key: live.clock_key.clone(),
+                start_tick: live.start_tick,
+                deadline_tick: live.deadline_tick,
+                resolution_tick,
+                resolution_generation_ref,
+                declared_deadline_expiry: None,
+                current_authority_failure: None,
+                handoff_revalidation_tick: None,
+                handoff_revalidation_generation_ref: None,
+                handoff_authority_failure: None,
+            });
+            (
+                live,
+                record.tombstone.carrier_snapshot_binding_bytes.clone(),
+            )
+        };
+        let permit = self
+            .fabric
+            .issue_i3_owner_admission_permit(
+                live.issuance,
+                &live.pending,
+                &live.carrier,
+                &request_identity_ref,
+                &self.local_store_identity_ref,
+                carrier_snapshot_binding_bytes.clone(),
+            )
+            .map_err(|_| {
+                Sys5I3ProcessRuntimeError::new(
+                    Sys5I3ProcessRuntimeErrorKind::CarrierAdmissionRejected,
+                )
+            })?;
+        Ok(Sys5I3OwnerAdmissionReserved {
+            runtime_binding_ref: self.local_store_identity_ref.clone(),
+            runtime_instance: self.owner_admission_runtime_instance,
+            request_identity_ref,
+            carrier: live.carrier,
+            pending: live.pending,
+            carrier_snapshot_binding_bytes,
+            permit,
+        })
+    }
+
+    fn reserved_owner_admission_matches(&self, reserved: &Sys5I3OwnerAdmissionReserved) -> bool {
+        self.inbound_owner_request_tombstones
+            .get(&reserved.request_identity_ref)
+            .is_some_and(|record| {
+                record.tombstone.phase == Sys5I3InboundOwnerRequestTombstonePhase::ServeReserved
+                    && record.tombstone.carrier_snapshot_binding_bytes
+                        == reserved.carrier_snapshot_binding_bytes
+                    && record
+                        .tombstone
+                        .terminal_admission
+                        .as_ref()
+                        .is_some_and(|terminal| {
+                            terminal.semantic_request_identity_ref == reserved.request_identity_ref
+                                && terminal.pending == reserved.pending
+                                && terminal.carrier.envelope_id() == reserved.carrier.envelope_id()
+                                && terminal.start_tick <= terminal.resolution_tick
+                                && terminal.resolution_tick < terminal.deadline_tick
+                                && !terminal.resolution_generation_ref.is_empty()
+                                && terminal.current_authority_failure.is_none()
+                        })
+            })
+    }
+
+    fn record_reserved_owner_admission_authority_failure(
+        &mut self,
+        request_identity_ref: &str,
+        failure: Sys4I3OwnerRequestRevalidationFailure,
+        resolution_tick: u64,
+        resolution_generation_ref: String,
+    ) {
+        if let Some(terminal) = self
+            .inbound_owner_request_tombstones
+            .get_mut(request_identity_ref)
+            .and_then(|record| record.tombstone.terminal_admission.as_mut())
+        {
+            terminal.handoff_revalidation_tick = Some(resolution_tick);
+            terminal.handoff_revalidation_generation_ref = Some(resolution_generation_ref);
+            terminal.handoff_authority_failure = Some(failure);
+        }
+    }
+
+    fn accept_reserved_owner_admission_handoff(
+        &mut self,
+        reserved: Sys5I3OwnerAdmissionReserved,
+    ) -> Result<Sys5I3ProcessMessage, Sys5I3ProcessRuntimeError> {
+        let Sys5I3OwnerAdmissionReserved {
+            request_identity_ref,
+            carrier,
+            pending,
+            carrier_snapshot_binding_bytes,
+            permit,
+            ..
+        } = reserved;
+        let target_locus = carrier.target_locus().to_string();
+        let step = self
+            .fabric
+            .accept_i3_owner_request_with_permit(
+                carrier,
+                &pending,
+                &request_identity_ref,
+                &self.local_store_identity_ref,
+                carrier_snapshot_binding_bytes,
+                permit,
+            )
+            .map_err(|_| {
+                Sys5I3ProcessRuntimeError::new(
+                    Sys5I3ProcessRuntimeErrorKind::CarrierAdmissionRejected,
+                )
+            })?;
+        let reply =
+            self.finalize_accepted_owner_step(&target_locus, &request_identity_ref, step)?;
+        // A successful finalizer has extracted and validated the reply and
+        // recorded the actual SYS-4/M8 occurrences.  Only now is this no
+        // longer an outstanding one-use reservation.
+        self.mark_inbound_owner_request_tombstone(
+            &request_identity_ref,
+            Sys5I3InboundOwnerRequestTombstonePhase::Received,
+        );
+        Ok(reply)
     }
 
     fn reserve_inbound_owner_request(
@@ -4784,12 +5961,40 @@ impl Sys5I3ProcessRuntime {
         request_identity_ref: &str,
         carrier_snapshot_binding_bytes: Vec<u8>,
     ) -> Result<(), Sys5I3ProcessRuntimeError> {
+        self.preflight_inbound_owner_request_reservation(
+            request_identity_ref,
+            &carrier_snapshot_binding_bytes,
+        )?;
+        self.inbound_owner_request_tombstones.insert(
+            request_identity_ref.to_string(),
+            Sys5I3InboundOwnerRequestRecord {
+                tombstone: Sys5I3InboundOwnerRequestTombstone {
+                    carrier_snapshot_binding_bytes,
+                    phase: Sys5I3InboundOwnerRequestTombstonePhase::Reserved,
+                    terminal_admission: None,
+                },
+                live_admission: None,
+            },
+        );
+        Ok(())
+    }
+
+    /// Check the existing bounded inbound ledger without changing it.  C1/C2
+    /// invokes this before deadline arithmetic so a duplicate/capacity
+    /// result cannot be masked by a temporal failure.
+    fn preflight_inbound_owner_request_reservation(
+        &self,
+        request_identity_ref: &str,
+        carrier_snapshot_binding_bytes: &[u8],
+    ) -> Result<(), Sys5I3ProcessRuntimeError> {
         if let Some(existing) = self
             .inbound_owner_request_tombstones
             .get(request_identity_ref)
         {
             return Err(Sys5I3ProcessRuntimeError::new(
-                if existing.carrier_snapshot_binding_bytes == carrier_snapshot_binding_bytes {
+                if existing.tombstone.carrier_snapshot_binding_bytes.as_slice()
+                    == carrier_snapshot_binding_bytes
+                {
                     Sys5I3ProcessRuntimeErrorKind::DuplicateRequestRejected
                 } else {
                     Sys5I3ProcessRuntimeErrorKind::RequestIdentityBindingMismatch
@@ -4801,13 +6006,6 @@ impl Sys5I3ProcessRuntime {
                 Sys5I3ProcessRuntimeErrorKind::InboundRequestLedgerExhausted,
             ));
         }
-        self.inbound_owner_request_tombstones.insert(
-            request_identity_ref.to_string(),
-            Sys5I3InboundOwnerRequestTombstone {
-                carrier_snapshot_binding_bytes,
-                phase: Sys5I3InboundOwnerRequestTombstonePhase::Reserved,
-            },
-        );
         Ok(())
     }
 
@@ -4816,7 +6014,7 @@ impl Sys5I3ProcessRuntime {
         request_identity_ref: &str,
         phase: Sys5I3InboundOwnerRequestTombstonePhase,
     ) {
-        let Some(tombstone) = self
+        let Some(record) = self
             .inbound_owner_request_tombstones
             .get_mut(request_identity_ref)
         else {
@@ -4826,7 +6024,7 @@ impl Sys5I3ProcessRuntime {
             );
             return;
         };
-        tombstone.phase = phase;
+        record.tombstone.phase = phase;
     }
 
     fn accept_reserved_inbound_owner_request(
@@ -4843,6 +6041,19 @@ impl Sys5I3ProcessRuntime {
                     Sys5I3ProcessRuntimeErrorKind::CarrierAdmissionRejected,
                 )
             })?;
+        self.finalize_accepted_owner_step(&target_locus, request_identity_ref, step)
+    }
+
+    /// Apply the common post-SYS-4 step accounting only after a genuine
+    /// accepted owner handoff.  Both ordinary admission and the private
+    /// budget-gated route must derive their counters and occurrence evidence
+    /// from the same `LocusStep`; neither infers a write from a reservation.
+    fn finalize_accepted_owner_step(
+        &mut self,
+        target_locus: &str,
+        request_identity_ref: &str,
+        step: LocusStep,
+    ) -> Result<Sys5I3ProcessMessage, Sys5I3ProcessRuntimeError> {
         self.served_owner_request_count = self
             .served_owner_request_count
             .checked_add(1)
@@ -4859,7 +6070,7 @@ impl Sys5I3ProcessRuntime {
         }
         let reply = self
             .fabric
-            .take_outbound_process_carrier(&target_locus, &reply_envelope_id)
+            .take_outbound_process_carrier(target_locus, &reply_envelope_id)
             .map_err(|_| {
                 Sys5I3ProcessRuntimeError::new(
                     Sys5I3ProcessRuntimeErrorKind::CarrierAdmissionRejected,
@@ -4903,6 +6114,7 @@ impl Sys5I3ProcessRuntime {
             carrier: Some(reply),
             semantic_request_identity_ref: request_identity_ref.to_string(),
             linked_request_identity_ref: Some(request_identity_ref.to_string()),
+            terminal_failure_decision_occurrence_ref: None,
             cohort_provenance_ref: self.cohort_ref.clone(),
             identity_basis: Sys5I3ObserverSafeSemanticRequestIdentityBasis,
         })
@@ -4949,15 +6161,16 @@ impl Sys5I3ProcessRuntime {
             carrier: Some(carrier),
             semantic_request_identity_ref: message.semantic_request_identity_ref,
             linked_request_identity_ref: message.linked_request_identity_ref,
+            terminal_failure_decision_occurrence_ref: None,
             cohort_provenance_ref: message.cohort_provenance_ref,
             identity_basis: Sys5I3ObserverSafeSemanticRequestIdentityBasis,
         })
     }
 
-    /// Test-only direct decoded ingress retained for the G2a/G2b codec
-    /// falsifiers.  It is absent from the normal production build and cannot
-    /// be linked by the child executable.  Localnet child code must use
-    /// the private QUIC adapter instead.
+    /// Feature-gated direct decoded ingress retained for the G2a/G2b codec
+    /// falsifiers.  The probe explicitly compiles this seam for negative
+    /// bootstrap controls, while current normal localnet child ingress uses
+    /// the private QUIC adapter rather than this entry point.
     #[cfg(feature = "i3-process-test-seams")]
     #[doc(hidden)]
     pub fn admit_untrusted_message(
@@ -5108,6 +6321,10 @@ fn observer_safe_requester_binding_ref(
         hasher.finalize()
     )
 }
+
+#[cfg(test)]
+#[path = "sys5_i3_owner_admission_tests.rs"]
+mod sys5_i3_owner_admission_tests;
 
 fn logical_origin_ref(
     slot_name: &str,

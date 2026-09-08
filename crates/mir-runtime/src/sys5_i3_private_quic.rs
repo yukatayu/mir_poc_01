@@ -439,19 +439,49 @@ pub struct Sys5I3PrivateQuicReconnect {
 }
 
 /// A reply result that either consumes the original pending handle exactly
-/// once after local receipt admission, or returns it intact after a delivery
-/// failure/rejection.  A retry rejection therefore cannot complete the
-/// original semantic operation.
+/// once after local receipt or terminal-failure admission, or returns it
+/// intact after a delivery failure/rejection.  A retry rejection therefore
+/// cannot complete the original semantic operation.
 #[doc(hidden)]
 pub enum Sys5I3PrivateQuicOriginalOwnerReplyOutcome {
     Consumed {
         receipt: Box<Sys5I3ProcessMessage>,
         delivery: Sys5I3PrivateQuicDeliveryEvidence,
     },
+    TerminalFailureConsumed {
+        terminal: Box<Sys5I3ProcessMessage>,
+        delivery: Sys5I3PrivateQuicDeliveryEvidence,
+    },
     Pending {
         pending: Sys5I3OriginalOwnerRequestPending,
         error: Sys5I3PrivateQuicError,
     },
+}
+
+/// An already-admitted requester-local result, classified before the adapter
+/// exposes its original-pending outcome.  The classifier owns no decoded
+/// candidate or transport input: it only preserves the runtime's existing
+/// receipt versus terminal-consumption distinction.
+enum Sys5I3PrivateQuicAdmittedOriginalOwnerReply {
+    Receipt(Sys5I3ProcessMessage),
+    TerminalFailureConsumed(Sys5I3ProcessMessage),
+}
+
+fn classify_admitted_original_owner_reply(
+    admitted: Option<Sys5I3ProcessMessage>,
+) -> Result<Sys5I3PrivateQuicAdmittedOriginalOwnerReply, Sys5I3PrivateQuicError> {
+    let admitted = admitted.ok_or(Sys5I3PrivateQuicError::FrameRejected)?;
+    if admitted.is_observer_safe_typed_result_or_receipt() {
+        Ok(Sys5I3PrivateQuicAdmittedOriginalOwnerReply::Receipt(
+            admitted,
+        ))
+    } else if admitted.is_observer_safe_terminal_failure_consumed()
+        && admitted.has_no_transportable_carrier()
+    {
+        Ok(Sys5I3PrivateQuicAdmittedOriginalOwnerReply::TerminalFailureConsumed(admitted))
+    } else {
+        Err(Sys5I3PrivateQuicError::FrameRejected)
+    }
 }
 
 impl Sys5I3PrivateQuicSession {
@@ -850,9 +880,10 @@ impl Sys5I3PrivateQuicSession {
     }
 
     /// Receive one exact owner reply for an opaque original pending handle.
-    /// A local receipt consumes the handle by value; every frame, codec, or
-    /// semantic rejection returns it intact so a later original reply can
-    /// still complete exactly once through the runtime's pending map.
+    /// A local receipt or terminal consumption consumes the handle by value;
+    /// every frame, codec, or semantic rejection returns it intact so a later
+    /// original reply can still complete exactly once through the runtime's
+    /// pending map.
     pub async fn receive_and_admit_original_owner_reply(
         &mut self,
         runtime: &mut Sys5I3ProcessRuntime,
@@ -870,9 +901,19 @@ impl Sys5I3PrivateQuicSession {
             .receive_and_admit_original_owner_reply_inner(runtime, &pending)
             .await;
         match result {
-            Ok((receipt, delivery)) => Sys5I3PrivateQuicOriginalOwnerReplyOutcome::Consumed {
-                receipt: Box::new(receipt),
-                delivery,
+            Ok((admitted, delivery)) => match admitted {
+                Sys5I3PrivateQuicAdmittedOriginalOwnerReply::Receipt(receipt) => {
+                    Sys5I3PrivateQuicOriginalOwnerReplyOutcome::Consumed {
+                        receipt: Box::new(receipt),
+                        delivery,
+                    }
+                }
+                Sys5I3PrivateQuicAdmittedOriginalOwnerReply::TerminalFailureConsumed(terminal) => {
+                    Sys5I3PrivateQuicOriginalOwnerReplyOutcome::TerminalFailureConsumed {
+                        terminal: Box::new(terminal),
+                        delivery,
+                    }
+                }
             },
             Err(error) => Sys5I3PrivateQuicOriginalOwnerReplyOutcome::Pending { pending, error },
         }
@@ -1078,8 +1119,13 @@ impl Sys5I3PrivateQuicSession {
         &mut self,
         runtime: &mut Sys5I3ProcessRuntime,
         pending: &Sys5I3OriginalOwnerRequestPending,
-    ) -> Result<(Sys5I3ProcessMessage, Sys5I3PrivateQuicDeliveryEvidence), Sys5I3PrivateQuicError>
-    {
+    ) -> Result<
+        (
+            Sys5I3PrivateQuicAdmittedOriginalOwnerReply,
+            Sys5I3PrivateQuicDeliveryEvidence,
+        ),
+        Sys5I3PrivateQuicError,
+    > {
         let bytes = self.read_blob().await?;
         let candidate_commitment_ref = self.candidate_commitment_ref_for_frame(&bytes);
         let network_occurrence_ref =
@@ -1098,12 +1144,10 @@ impl Sys5I3PrivateQuicSession {
                     network_occurrence_ref: network_occurrence_ref.clone(),
                 },
             })?;
-        let receipt = admitted
-            .filter(Sys5I3ProcessMessage::is_observer_safe_typed_result_or_receipt)
-            .ok_or(Sys5I3PrivateQuicError::FrameRejected)?;
+        let admitted = classify_admitted_original_owner_reply(admitted)?;
         let carrier_ref = carrier_ref(&bytes);
         Ok((
-            receipt,
+            admitted,
             Sys5I3PrivateQuicDeliveryEvidence {
                 carrier_ref,
                 candidate_commitment_ref,

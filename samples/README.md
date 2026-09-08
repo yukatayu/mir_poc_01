@@ -14,6 +14,10 @@
     source input. Together with the local toy and patches, provisional
     `mir conform-i2` produces the exact finite 22-row assurance report. It is
     source input, not generated output or a public contract.
+  - `mirrorea-i3-owner-admission/main.mir` is the current I3-3 ordinary-source
+    budget-1 test input for the existing two-process probe. It is source, not
+    a generated fixture or accepted network workflow. Actual-time transport
+    validation is still in progress; Report 2606 retains its executed evidence.
 - `current-l2/`
   base current-L2 source corpus
 - `lean/`
