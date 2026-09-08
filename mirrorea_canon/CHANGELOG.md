@@ -18,6 +18,12 @@ open_items: []
 
 ## 履歴
 
+- **2026-09-08** PROPOSAL-045 / ADR-0042 / spec/17は、I3-3 provider failureへ
+  source-derived read-only effect、独立したeffect grant、実T0/T4 host read、
+  distinct typed result/failure、call-start/revocation/retentionとobserver分離の
+  有限契約を選択した。既存private QUICを使い、providerをowner又はauthorityにしない。
+  実装・I3-3・official lifecycle・proof・Browser/I5・public契約の受理ではない。
+
 - **2026-09-07** PROPOSAL-044 / ADR-0041 / spec/16により、I3-3の限定consumerへ
   source opt-in owner admission budgetと型付きterminal failureを選択した。M6/M7の
   condition/identity保存、owner-local u64 clock、sealed one-use admission permit、

@@ -157,8 +157,11 @@ For the external-time row, ADR-0041 / spec/16 select one finite source-declared
 owner-admission budget and typed terminal-failure contract. Its scope is
 owner-local admission waiting, not end-to-end deadlines or general leases.
 Implementation and the row's positive/falsifier evidence remain required;
-selection alone does not close row 17, any other row or I3-3. Provider invocation
-remains a separate unselected contract. The owner pause after complete I3-3
+selection alone does not close row 17, any other row or I3-3. ADR-0042 / spec/17
+separately select a source-declared read-only provider effect, distinct effect
+authorization and actual bounded T0/T4 crossing over the selected transport.
+Its implementation and positive/falsifier evidence remain required; no row or
+milestone is accepted by that contract decision. The owner pause after complete I3-3
 acceptance remains in force; I3-4 requires explicit resume.
 
 ## Network ordering refinement

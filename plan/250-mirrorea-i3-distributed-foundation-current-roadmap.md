@@ -1,6 +1,6 @@
 # Plan 250 — Mirrorea I3 Distributed Foundation current execution roadmap
 
-最終更新: 2026-09-08 10:55 JST
+最終更新: 2026-09-08 12:43 JST
 
 ## 役割、authority、current control state
 
@@ -55,8 +55,9 @@ roadmap/status pointer の一致を検証する。
 - execution state: **execute through I3-3 acceptance, then owner-requested pause**
 - sole active semantic milestone: **I3-3**
 - current component checkpoint: **row 11 / spec/16 bounded time-and-reply
-  evidence reviewed; integration commit/parity pending**. Provider contract
-  selection is the next I3-3 blocker, not a new milestone.
+  evidence integrated at `55f1fd7f`, pushed with clean remote parity**.
+  ADR-0042/spec/17 selects the provider contract; source/checker implementation
+  is the current I3-3 component, not a new milestone.
 - next goal: **I3-4 (requires I3-3 acceptance and explicit owner resume)**
 - all other milestones: **ordered, inactive, and dependency-gated**
 - latest owner control (2026-09-07 18:13 JST observation): complete I3-3 with
@@ -1296,6 +1297,119 @@ that effect. The existing Oracle advice is advisory and unadopted. Provider
 contract/code, remaining membership/redaction/cut families, full ordering,
 milestone regressions and acceptance review remain required. I3-4 is inactive.
 
+The reviewed time/reply integration is now committed and pushed as
+`55f1fd7f76b86a2fc6a846c0133d55d5c8213831`; HEAD, origin/main and live remote
+matched with a clean worktree at `2026-09-08T12:16:45+09:00`. This completes
+that bounded component, not I3-3. Its frozen evidence and non-claims above
+remain unchanged.
+
+### Provider component contract checkpoint — within I3-3
+
+Direct consumer: failure family 18 and effect-order correspondence.
+Blocker reduced: no accepted source-derived external invocation currently
+exists; owner RMW, authentication rejection and expiry cannot stand in for it.
+Acceptance use: ordinary checked source produces a remote effect request,
+actual bounded provider call and validated typed result/failure consumption.
+
+Read-only Canon-first planner review recommends distinct source effect
+execution at an already remote locus, with generated request/result branches
+sharing the existing private QUIC framing. A separate provider process/network
+leg is unnecessary. Separate Core/effect authorization/result semantics remain
+mandatory. The one alternative is a dedicated effect transport-facing service;
+do not collapse this comparison into a ban on necessary enum variants.
+
+Parent-written PROPOSAL-045/spec/17 were reviewed and **adopted by ADR-0042**
+under ADR-0034's delegated authority. They constrain a T0 adapter to a dedicated
+nonsecret T4 regular-file fixture,
+with exact source resource/allowance, independent effect grant, actual read,
+typed missing-resource failure, bounded retention and no owner write. Oracle
+advice is advisory; its terminal-ambiguity suggestion is rejected in favor of
+the accepted pending/remote-unknown rule. The initial five P1 findings on exact
+failure classes, call-start ordering, provider incarnation, resource admission
+and observation were integrated; narrow independent re-review has P0/P1/P2
+zero. Production still requires the test-first gate. No I5, public API,
+arbitrary file access, new roadmap or milestone is opened.
+
+#### Provider implementation sequence (activation follows contract adoption)
+
+**Goal:** The existing checked-source pipeline retains a distinct authorized
+external invocation and executes its actual typed provider result/failure
+through the selected two-process transport, without owner writes or hidden
+retry. Parent owns cross-layer acceptance; specialist writers own disjoint
+source/test files. These stages are components of I3-3, not new goals.
+
+1. **Source/checking and fail-closed handoff.** Production owner:
+   `time_host_driver`; test owner: `c3_test_repair`. Add
+   `crates/mir-ast/src/surface_v0/read_only_provider_effect.rs` and wire the
+   declaration into `surface_v0.rs`. Add
+   `crates/mir-semantics/src/surface_v0_provider_effect.rs`; wire its typed M6
+   template through `surface_v0_classification.rs`, distinct M7 checked core,
+   effect/authority obligation through `surface_v0_pipeline.rs`, exact
+   `surface_v0_pipeline/private_snapshot.rs` preservation and a non-authorizing
+   source contract in `m9_finite_refinement.rs`. The existing axes are
+   Computation/Locus/OnRequest/Caller/PublishValue; provider permission remains
+   a separate use-time grant. Do not overload an owner signature or theorem.
+   Unsupported lower execution/export paths must reject, not omit the effect.
+   Any necessary ownership expansion for exhaustive guards is coordinated
+   before editing; production and test writers never overlap.
+2. **Projection and authority.** After stage 1 API freezes, one production owner
+   adds distinct SYS3 requester/service/consumer fragments, generated edge
+   contracts and private projection snapshots, and the effect-specific M9
+   policy/opaque grant. Tests derive all coordinates from the ordinary source
+   and prove wrong/missing/revoked grant and tampered snapshot cannot invoke.
+   Existing owner grants and valid transport are negative controls, not inputs
+   to a permissive adapter. Exact symbols/file ownership are assigned at this
+   gate, rather than guessed before source types exist.
+3. **Actual runtime/transport/provider.** Add the monotone source-bound effect
+   ledger and host adapter, then distinct private carrier branches through
+   existing SYS4/SYS5/QUIC. Preserve the existing process launcher, not a second
+   Quinn harness. The private supervisor envelope, resource binding and
+   provider incarnation must be available before activation. Execute success,
+   actual missing resource, invalid data and rejection/failure lifecycle tests.
+4. **Network evidence and component integration.** Test author exercises two
+   fresh values, actual typed provider failure, missing grant, duplicate/loss/
+   revocation and observer-safe joins. Run applicable source/runtime/probe and
+   I2/M10 regressions, independent spec and quality review, then commit/push
+   and parity. Only afterward proceed to remaining I3-3 membership/redaction/
+   cut/order consumers. No component green run is whole-I3-3 acceptance.
+
+Stage 1 RED uses existing APIs, not a missing-symbol compile error:
+
+```rust
+#[test]
+fn ordinary_provider_source_is_checked() {
+    let source = include_str!(
+        "../../../samples/clean-near-end/mirrorea-i3-provider-effect/main.mir"
+    );
+    let result = check_and_elaborate_surface_v0(FixtureSource::new(
+        "samples/clean-near-end/mirrorea-i3-provider-effect/main.mir", source,
+    ));
+    assert!(result.is_ok(), "declared provider effect must check: {result:?}");
+}
+```
+
+- [x] Contract review/adoption and docs validation (Canon index 216,
+  hierarchy 800/800, scaffold 1760; diff and bounded 17-file secret scan clean).
+- [ ] Test-only source fixture and `crates/mir-semantics/tests/i3_provider_effect.rs`;
+  execute `cargo test --locked -p mir-semantics --test i3_provider_effect
+  ordinary_provider_source_is_checked -- --test-threads=1` and capture the
+  actual unsupported-source assertion failure before production changes.
+- [ ] Implement AST/M6/M7 preservation; add focused typed tests for exact
+  coordinates, ten generated failures, one-declaration limit, unsupported
+  profile, underdeclared failure, identity change and non-erasing snapshots.
+- [ ] Run the whole new source target plus existing M6/M7/budget targets;
+  map and test every unsupported execution/export guard before handoff.
+- [ ] Stage 1 independent review and precise downstream interface packet;
+  source support alone is not admitted provider execution.
+
+The sole evaluator serializes Cargo with `CARGO_INCREMENTAL=0`,
+`CARGO_BUILD_JOBS=2`, `--locked` and serial tests. Before heavy commands inspect
+disk/memory; below 10 GiB free, do not start another heavy command or silently
+delete artifacts. Final I3-3 gates include runtime feature-union library,
+process integration, `i3_request_lifecycle_model`, I2/M10 targets, all probe
+tests, workspace all-target tests/Clippy, format, docs, diff and secret scan.
+Overlapping suites have separate result classes, never additive counts.
+
 Independent remaining-row sequencing review keeps the following direct
 consumers after the time path. Membership uses the actual M9 retirement of
 ParticipantA and the already checked `init_focus` operation, not capability
@@ -1311,8 +1425,9 @@ None of these sketches is executed evidence or permission to omit a row.
 Relation/designated ordering uses executed local producer positives and
 falsifiers in I3-3, accurately labelled local; their actual cross-process
 pressure remains I3-4. Unsupported-carrier rejection alone cannot replace a
-positive ordering producer. The distinct provider contract remains unselected
-until the time consumer is closed and its bounded Canon review is performed.
+positive ordering producer. The time consumer is now integrated at `55f1fd7f`
+and ADR-0042/spec/17 selects the distinct provider contract; its implementation
+and all remaining evidence are still required.
 
 ## I3-4 milestone contract — inactive until I3-3 closes and owner resumes
 
@@ -1649,8 +1764,8 @@ integration, or Typed-Effect platform collapse.
 
 ## Recommended next action
 
-Integrate and pin the reviewed row-11/spec/16 time-and-reply checkpoint, then
-resolve the still-open provider contract and complete the remaining I3-3
+From the integrated `55f1fd7f` time-and-reply checkpoint, implement the
+ADR-0042/spec/17 provider contract and complete the remaining I3-3
 failure/order inventory. Preserve all 20 families, applicable regressions and
 independent acceptance review. After I3-3 commit/push and remote parity, stop
 and report the accepted boundary. I3-4 remains inactive until explicit owner

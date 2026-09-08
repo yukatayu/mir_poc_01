@@ -54,3 +54,4 @@ open_items: []
 | ADR-0039 | I3-2 source-first two-process runtimeを受理し、I3-3をinactiveのままprogram executionをowner pauseする | L1 |
 | ADR-0040 | owner instructionによりADR-0034 / Plan 250を再開し、I3-3をsole active milestoneとする | L1 |
 | ADR-0041 | I3-3のsource opt-in owner admission budget、sealed gate、typed terminal failureを限定契約として選択。実装/milestone受理ではない | L1 |
+| ADR-0042 | I3-3のsource-derived read-only provider effect、独立grant、実host crossingとtyped result/failureを限定契約として選択。実装/milestone受理ではない | L1 |

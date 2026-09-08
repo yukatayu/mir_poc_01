@@ -1,6 +1,6 @@
 {
  "canon_version": "0.1.0",
- "files": 213,
+ "files": 216,
  "entries": [
   {
    "id": "root/changelog",
@@ -12,7 +12,7 @@
    "summary": "canon 自体の版履歴と改定手続きの要約。",
    "open_items": [],
    "path": "CHANGELOG.md",
-   "bytes": 33176
+   "bytes": 33635
   },
   {
    "id": "root/design-constitution",
@@ -52,7 +52,7 @@
    "summary": "知識マップ 1 枚。全域の依存図、3 種の読み筋、ID 体系。",
    "open_items": [],
    "path": "MAP.md",
-   "bytes": 30966
+   "bytes": 31300
   },
   {
    "id": "root/north-star",
@@ -74,7 +74,7 @@
    "summary": "canon の入口。正本宣言、LAB(既存 repo)との関係、読み順、版。",
    "open_items": [],
    "path": "README.md",
-   "bytes": 5973
+   "bytes": 6243
   },
   {
    "id": "adr/ADR-0001",
@@ -686,6 +686,26 @@
    "bytes": 3068
   },
   {
+   "id": "adr/ADR-0042",
+   "status": "L1-fixed",
+   "maturity": "reviewed",
+   "depends_on": [
+    "root/north-star",
+    "root/design-constitution",
+    "adr/ADR-0034",
+    "adr/ADR-0040",
+    "meta/proposal-045",
+    "spec/17-i3-read-only-provider-effect",
+    "plan/05-i3-entry-contract",
+    "arch/07-browser-host-trust-boundaries",
+    "arch/08-browser-host-security-invariants"
+   ],
+   "summary": "I3-3 provider failureへsource-derived read-only effectと既存QUIC上のdistinct resultを限定契約として選択する。",
+   "open_items": [],
+   "path": "adr/ADR-0042.md",
+   "bytes": 3599
+  },
+  {
    "id": "adr/readme",
    "status": "L1-fixed",
    "maturity": "draft",
@@ -695,7 +715,7 @@
    "summary": "決定記録の一覧と読み方。LAB の決定台帳(specs/12)との関係。",
    "open_items": [],
    "path": "adr/README.md",
-   "bytes": 5460
+   "bytes": 5651
   },
   {
    "id": "arch/01-strata",
@@ -1724,6 +1744,25 @@
    "bytes": 4230
   },
   {
+   "id": "meta/proposal-045",
+   "status": "L1-fixed",
+   "maturity": "reviewed",
+   "depends_on": [
+    "root/design-constitution",
+    "adr/ADR-0034",
+    "adr/ADR-0040",
+    "adr/ADR-0042",
+    "plan/05-i3-entry-contract",
+    "arch/07-browser-host-trust-boundaries",
+    "arch/08-browser-host-security-invariants",
+    "spec/17-i3-read-only-provider-effect"
+   ],
+   "summary": "I3-3 provider failureへdistinct source effectと既存private transportを使う有限契約を選択する。実装受理ではない。",
+   "open_items": [],
+   "path": "meta/proposals/PROPOSAL-045-i3-read-only-provider-effect.md",
+   "bytes": 3841
+  },
+  {
    "id": "meta/source-hierarchy",
    "status": "L0-frozen",
    "maturity": "draft",
@@ -1905,7 +1944,7 @@
    "summary": "ADR-0034 programがconsumeするI3 goal、accepted transport/private mapping/two-process runtime、I3-3 failure/order refinementとC-distributed gates。",
    "open_items": [],
    "path": "plan/05-i3-entry-contract.md",
-   "bytes": 14437
+   "bytes": 14679
   },
   {
    "id": "plan/readme",
@@ -2393,6 +2432,31 @@
    "bytes": 13179
   },
   {
+   "id": "spec/17-i3-read-only-provider-effect",
+   "status": "L1-fixed",
+   "maturity": "reviewed",
+   "depends_on": [
+    "root/design-constitution",
+    "theory/02-types-effects-failures",
+    "theory/05-authority",
+    "theory/07-observation",
+    "spec/08-m7-checked-elaboration",
+    "spec/10-m9-auth-verification",
+    "spec/12-sys3-per-locus-projection",
+    "arch/07-browser-host-trust-boundaries",
+    "arch/08-browser-host-security-invariants",
+    "arch/09-i3-private-adapter",
+    "arch/10-i3-multi-process-runtime",
+    "adr/ADR-0034",
+    "adr/ADR-0042",
+    "meta/proposal-045"
+   ],
+   "summary": "I3-3 provider failureへsource-derived read-only effectと有限T0/T4境界を選択する。実装受理ではない。",
+   "open_items": [],
+   "path": "spec/17-i3-read-only-provider-effect.md",
+   "bytes": 14951
+  },
+  {
    "id": "spec/readme",
    "status": "L1-fixed",
    "maturity": "draft",
@@ -2413,7 +2477,7 @@
    "summary": "Mir Report(仕様の蒸留)の読み方。theory との優先関係、章構成。",
    "open_items": [],
    "path": "spec/README.md",
-   "bytes": 1701
+   "bytes": 1797
   },
   {
    "id": "theory/00-overview",

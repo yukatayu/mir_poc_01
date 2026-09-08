@@ -321,8 +321,9 @@ recordが揃ったためofficial I2 entry後exitを受理しました。broad PH
   successful/expiry reply replay through verified QUIC session 2, preserving the
   first receipt/terminal and owner state; wrong-session replay rejects prewrite.
   Final independent review has P0/P1/P2 zero. The bounded time/reply consumer is
-  ready for documentation/commit/parity integration; provider contract selection
-  is next. All remaining I3-3 failure/order obligations stay required; I3-3 itself
+  integrated/pushed at `55f1fd7f` with clean remote parity. ADR-0042/spec/17 now
+  selects the finite provider contract; source/checker implementation is next.
+  All remaining I3-3 failure/order obligations stay required; I3-3 itself
   is not accepted, and I3-4 remains inactive.
 - decisions taken: the working interpretation remains ordinary meaning ->
   generated distribution -> continually checked composition. World/Avatar remain

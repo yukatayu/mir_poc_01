@@ -126,6 +126,32 @@ scripts/validate_docs.py. Historical plans/reports are evidence, not authority.
 
 ## Actions taken
 
+Provider contract checkpoint after the time/reply integration: parent wrote
+PROPOSAL-045/spec/17 candidates, using the existing verified
+Oracle advice as advisory input and a fresh Canon-first planner review. The
+smallest path keeps a distinct source effect/grant/result at the already
+remote locus and shares selected QUIC framing. No extra provider process or
+I5 registry is required. Actual bounded T0/T4 fixture I/O, exact typed failure,
+retention and current-binding consumption remain required. The Oracle's
+terminal-ambiguity suggestion is not adopted; lost results remain pending and
+remote-unknown. Independent contract review found five P1 gaps: failure
+taxonomy, call-start/revocation ordering, provider incarnation, resource
+activation/accounting and observation separation. Parent corrected all five
+plus role/cardinality/decimal/allowance P2 wording; narrow re-review returned
+P0/P1/P2 zero. Parent adopts the finite contract through ADR-0042 under
+ADR-0034, without inventing a new owner message. No provider code/execution
+or milestone acceptance is claimed. This is an explicit normative addition,
+not a LAB reinterpretation of accepted owner RMW or authentication.
+
+The actual I3 localnet constructor at
+`crates/mirrorea-i3-probe/src/i3_process_localnet.rs` uses a 15-second deadline
+and 1-second reaper allowance. The reviewer also cited the separate canary's
+`process_harness.rs` defaults; that is not substituted for actual I3 child
+evidence. Spec/17 binds these finite operational maxima, preserving the existing
+non-hard-real-time/host-suspension non-claim rather than promising a new clock
+or CPU scheduling theorem. Source/test implementation starts after this
+docs-only integration and a behavioral RED test.
+
 - Preserved the parent Goal Statement, fixed milestone sequence, all 20 failure
   rows and the full ordering inventory in Plan 250.
 - Mirrored the explicit resume cut and I3-3-only activation; refreshed source
@@ -148,6 +174,12 @@ not a Canon adoption or a universal duplicate policy. Accepted operation-specifi
 stored-result/no-new-consume contracts remain preserved.
 
 ## Files changed
+
+Provider contract integration adds Canon PROPOSAL-045, ADR-0042 and spec/17;
+updates Canon README/MAP/spec and ADR navigation, CHANGELOG, plan/05 and the
+generated INDEX; and synchronizes Plan 250, this report, Documentation,
+project-status, progress, tasks and samples_progress. No Rust source, test,
+sample root or artifact changes belong to this docs-only checkpoint.
 
 Resume integration:
 
@@ -211,6 +243,12 @@ It changes no Canon rule, theory ledger or official lifecycle.
 
 ## Commands run
 
+Provider contract integration: read-only git/disk/time/source checks;
+`python3 meta/build-index.py` (216 files indexed); `git diff --check`;
+docs-only evaluator `make docs` and changed-text credential-pattern scan
+(exact results recorded below when returned). Discord progress was sent at
+the natural contract checkpoint; no complete notification or user-task stop.
+
 This writer ran read-only source/status inspections with `rg`, `sed`, `head`,
 `cat`, `git status --short`, `git rev-parse HEAD`, `git rev-parse origin/main`
 and `date --iso-8601=seconds`; edits used `apply_patch`.
@@ -256,6 +294,17 @@ CARGO_INCREMENTAL=0 CARGO_BUILD_JOBS=2 cargo test --locked -p mir-runtime --test
 ```
 
 ## Evidence / outputs / test results
+
+Provider contract docs-only gate passes, logs
+`/tmp/c3-provider-contract-validation-20260908.GDxYjC/`: `01-make-docs.log`
+records agent-config validation, Canon index 216, hierarchy 800/800 and complete
+scaffold with 1760 numbered reports; `02-git-diff-check.log` is clean;
+`03-scanned-paths.txt`/`04-credential-pattern-matches.txt`/`05-summary.txt`
+record a bounded 17-dirty-text-path scan with zero filename matches. No secret
+contents or entropy scan were used. Final free disk is 12.23 GiB. Parent read
+the summary and actual docs log. No provider implementation/runtime test is
+claimed. This adopted contract is ready for its scoped commit/push before the
+behavioral source RED gate; exact cut/parity is recorded by the next component.
 
 Parent-reported resume baseline: focused localnet 12/12 and full probe package
 62/62 passed at `648425f6bd4304d003d36bc04d346ddf0e78c058`; no orphan children.
@@ -1752,6 +1801,15 @@ the no-new-network-sample/non-workflow classification.
 
 ## Reviewer findings and follow-up
 
+Provider contract review: read-only `c3_spec_review` returned five initial P1
+and the P2 precision items recorded above. Parent checked against Constitution,
+BND-014/016, architecture/08 and actual supervisor defaults before integrating;
+final narrow review reports P0/P1/P2 zero. Read-only `i3_remaining_plan` confirms
+bounded scope, direct consumers, stage gates and full-I3-3 stop. Its three stale
+current pending-integration pointers in Documentation/sample dashboard/Plan250
+were corrected to the actual `55f1fd7f` pushed checkpoint. No source or runtime
+review is claimed by these contract reviews.
+
 The parent reports completed independent Canon-first pre-edit planner review at
 `648425f6bd4304d003d36bc04d346ddf0e78c058`. Its requirements are incorporated:
 exact resume, complete Goal Statement, all 20 rows, preserved operation-specific
@@ -2314,6 +2372,12 @@ remains the explicitly reported failure, not an I3 runtime or passing gate.
 
 ## Skipped validations and reasons
 
+Provider contract checkpoint changes only Canon/LAB documents and generated
+index. Rust/Lean/runtime/network tests and Clippy/format are not rerun for this
+docs-only decision; earlier exact-cut results remain retained evidence. The
+provider's behavioral RED and implementation validation follow this contract
+integration. This does not waive the final full-I3-3 gates.
+
 The planning writer runs no builds or runtime tests: the assignment is limited
 to two planning/report files and the parent already supplied focused baseline
 results. Full I3-3 fault/order coverage, I2/M10 close regression, independent
@@ -2324,6 +2388,13 @@ not skipped passes. General proof, WAN/production, durability and Browser/Host
 product realization remain outside this bounded milestone.
 
 ## Commit / push status
+
+The reviewed row-11/spec/16 time-and-reply checkpoint is committed and pushed:
+`55f1fd7f76b86a2fc6a846c0133d55d5c8213831`
+(`feat: reject cross-session replay of known owner replies`). HEAD, main,
+origin/main and live remote matched with a clean worktree at
+`2026-09-08T12:16:45+09:00`. Provider contract work starts from that exact cut.
+This is a component checkpoint only; I3-3 remains active and unaccepted.
 
 The reviewed row-11/spec/16 time-and-reply integration over `30429d5` is
 prepared for the parent's scoped commit/push after LAB synchronization and
@@ -2399,6 +2470,12 @@ worktree was clean before the next authorized Stage C test change.
 This is the fifth source checkpoint inside I3-3, not milestone acceptance.
 
 ## Sub-agent session close status
+
+Provider contract: mapper, source implementation planner, acceptance-command
+evaluator planning, independent planner and contract reviewer returned their
+bounded read-only packets. The final contract reviewer reports P0/P1/P2 zero;
+the evaluator now owns only docs validation. All contexts remain retained for
+source/test implementation, no production writer has started, and I3-4 is inactive.
 
 At the reviewed replay checkpoint, adapter/probe/test/evaluation writers,
 independent quality reviewer and read-only planner have returned their bounded

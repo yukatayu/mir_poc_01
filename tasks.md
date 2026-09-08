@@ -1,6 +1,6 @@
 # Current Task Map (LAB)
 
-最終更新: 2026-09-08 12:07 JST
+最終更新: 2026-09-08 12:43 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -66,9 +66,10 @@ Current full probe 41/41, focused replay 3/3, two-crate all-target Clippy and
 workspace format pass. Runtime 332/process 63/I2-M10 5/8/67 are retained
 `30429d5` results, not reruns. Genuine G1-expiry→G2 rejection remains local
 production-binder evidence; actual QUIC's use of that binder is verified.
-The row-11/spec/16 consumer awaits documentation/commit/parity integration,
-not more time/replay implementation. Next: adopt a bounded provider contract
-before adding its source-derived invocation, effect grant, projection and real
+The row-11/spec/16 consumer is integrated/pushed at `55f1fd7f`, with clean
+remote parity confirmed at `2026-09-08T12:16:45+09:00`.
+Current work: implement the selected ADR-0042/spec/17 provider contract,
+starting with test-first source/checker preservation, then effect grant, projection and real
 external attempt. Remaining membership/redaction/cut families, full ordering,
 regressions and I3-3 acceptance remain required. Root has about 12.00 GiB free.
 

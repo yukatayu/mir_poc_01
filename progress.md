@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-09-08 12:07 JST
+最終更新: 2026-09-08 12:43 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -62,7 +62,7 @@ remain later.
 |---|---|---|
 | Logical specification | finite source -> Core -> artifact -> communication -> in-process trace/conformance accepted; Theory T1 and broad PHASE-I1 unaccepted | maintenance **着手可能**; general widening **後段依存** |
 | User-facing specification | provisional project/run/inspect/conform workflow exists; public grammar/CLI/JSON/API/ABI/wire/devtools unfrozen | regression **着手可能**; public contract **要仕様確認** |
-| Implementation / operation | I2 exit preserved; I3-1 and I3-2 bounded private QUIC evidence accepted; actual-time expiry/lost-reply/reconnect and getter checks are green, while requester-local wait, cross-session duplicate/stale reply, provider, and full-matrix validation remain pending | I3-3 **着手可能**; I3-4+ **後段依存** |
+| Implementation / operation | I2 exit preserved; I3-1/I3-2 accepted; time/local wait/reply replay integrated at `55f1fd7f`; provider contract selected by ADR-0042/spec/17, implementation and membership/redaction/cut/full-matrix validation remain | I3-3 **着手可能**; I3-4+ **後段依存** |
 
 ```text
 Theory: T1
@@ -264,9 +264,10 @@ are consumed once, then rejected on verified successor-session replay; the
 initial-session falsifier rejects before replay write. Genuine G1-expiry→G2
 requester rejection remains local binder evidence, with actual QUIC-path
 correspondence inspected. Runtime 332/process 63/I2-M10 5/8/67 are retained
-`30429d5` results, not new reruns. The reviewed row-11/spec/16 consumer is ready
-for documentation/commit/parity integration; I3-3 remains unaccepted. Next is
-the unadopted provider contract, then remaining membership/redaction/cut,
+`30429d5` results, not new reruns. The reviewed row-11/spec/16 consumer is
+integrated/pushed at `55f1fd7f`, with clean remote parity confirmed at
+`2026-09-08T12:16:45+09:00`; I3-3 remains unaccepted. Current work is
+the ADR-0042/spec/17 provider source/checker implementation, then runtime and remaining membership/redaction/cut,
 ordering and full milestone acceptance. Root free space is about 12.00 GiB.
 
 Owner clarification is retained as a working interpretation: ordinary meaning ->
@@ -370,3 +371,7 @@ requirements, and do not create a new theory gate or roadmap item.
   11/11, M10 source 3/3, runtime 63/63, library 298/298, M8/I2/M10/probe/QUIC
   regressions and Clippy/format pass; independent review clear. Actual clock,
   permit and expiry are next; I3-3 remains active, not accepted.
+- 2026-09-08 12:43 JST: pinned pushed time/reply checkpoint `55f1fd7f` with
+  clean remote parity; ADR-0042/spec/17 provider contract selected after
+  five P1 repairs and independent P0/P1/P2-zero re-review. Source/test work
+  follows docs validation; no provider execution or I3-3 acceptance claimed.

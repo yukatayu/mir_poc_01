@@ -20,7 +20,7 @@ open_items: []
 ## 最短の読み順
 
 - 全体像: `MAP.md` → `NORTH-STAR.md` → `DESIGN-CONSTITUTION.md` → `GLOSSARY.md`
-- 決定: `adr/README.md`(41 本の決定の一覧)
+- 決定: `adr/README.md`(42 本の決定の一覧)
 - 理論: `theory/00-overview.md` → `theory/01-mircore-v0.md` →
   `theory/13-evaluation-materialization.md` →
   `theory/14-maintained-relation-projection.md` →
@@ -63,6 +63,9 @@ open_items: []
 - I3-3 owner-admission budget契約: `meta/proposals/PROPOSAL-044-i3-owner-admission-budget.md`
   → `adr/ADR-0041.md` → `spec/16-i3-owner-admission-budget.md`。
   限定契約の選択であり、実装又はI3-3受理ではない。
+- I3-3 provider failure契約: `meta/proposals/PROPOSAL-045-i3-read-only-provider-effect.md`
+  → `adr/ADR-0042.md` → `spec/17-i3-read-only-provider-effect.md`。
+  独立effect grantと実host crossingの有限契約であり、実装又はI3-3受理ではない。
 
 各ディレクトリの `README.md` が、そのディレクトリの 1 頁要約・読み順・「ここから推論してはいけないこと」を持つ。全ファイルは YAML front matter(id / status / maturity / depends_on / summary / open_items)を持ち、`INDEX.json` が機械可読索引である。
 
