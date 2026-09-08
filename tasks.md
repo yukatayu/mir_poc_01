@@ -1,6 +1,6 @@
 # Current Task Map (LAB)
 
-最終更新: 2026-09-09 05:16 JST
+最終更新: 2026-09-09 07:33 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project direction,
 theory, ADRs, conformance, and process. Everything outside it is LAB evidence,
@@ -53,13 +53,18 @@ inactive process handoffa027d61. Historical counts and repairs stay in Report260
 
 Stage3 now runs actual FD3-installed A/B children, source-derived QUIC provider
 requests, bounded host reads, current-authority result consumption and separately
-authorized normal v2 observation. Fresh post-review evidence passes runtime
-library410, all probe targets (ordinary41/provider20), process64, M1067,
+authorized normal v2 observation. Fresh row13 follow-up evidence passes runtime
+library413, all probe targets (ordinary43/provider20), process68, M1067,
 I2 local5/CLI8 and provider public guards5. Scoped all-target Clippy and format
-pass; independent review has no remaining P0/P1/P2. Component integration is
-being recorded; it is not a new milestone or official lifecycle change.
+pass; independent review has no remaining P0/P1/P2. The finite provider component
+is committed/pushed at `94ad584577fadfd0b016ff798a22b84df536939f`, with clean
+HEAD/origin/main/live parity observed 2026-09-09 05:21 JST; this is not a new
+milestone or official lifecycle change.
 
-The four actual two-session fault profiles use genuine child-private assertions
+Row13 verifies source-derived WorldAuthority membership retirement with full-parent
+M9 and qualified restricted-child G1→G2 coverage; old-G1 CarrierAdmissionRejected
+is before owner use and LOCAL genuine M8 StaleMembership is separate. No observer
+renewal, grant mint or session authority follows. The four actual two-session fault profiles use genuine child-private assertions
 and generic completion, not exported provider-fault traces. The lost-result case
 receives/decodes then discards the frame before semantic admission, not wire
 packet loss. AdapterUnavailable has LOCAL injected-read/codec evidence, not
@@ -69,13 +74,12 @@ claimed.
 
 The current-to-next sequence is:
 
-1. Complete the provider component's docs/Git integration and observe parity.
-2. Row13: genuine checked-operation-bound membership retirement, distinct from
+1. Row13: genuine checked-operation-bound membership retirement, distinct from
    capability revocation; preserve current-binding rejection precedence.
-3. Reuse and validate exact row15 preactivation policy and row19 redaction
+2. Reuse and validate exact row15 preactivation policy and row19 redaction
    evidence, then implement row20 process-local runtime/adapter cut admission
    with in-flight/late-traffic falsifiers and finish ordering correspondence.
-4. Close all twenty I3-3 families, full validation and independent acceptance;
+3. Close all twenty I3-3 families, full validation and independent acceptance;
    commit/push/parity, then stop. I3-4 requires explicit owner resume.
 
 These are direct consumers within I3-3, not extra milestones or parallel queues.
@@ -145,8 +149,7 @@ not an addressing/governance/product specification. Reversed Library is separate
 ## user decision gates
 
 No semantic owner decision is currently required for bounded I3-3 implementation.
-At 2026-09-08 19:08 JST, measured free disk is 30,906,707,968 bytes (~28.78
-GiB) after the approved five-file cleanup and subsequent owner housekeeping.
+At 2026-09-09 05:30 JST, measured free disk is approximately16GiB.
 The 10 GiB safety floor has no current capacity
 hold; no inferred or broadened cleanup permission is used.
 The following remain mandatory escalation boundaries, not autonomous options
@@ -185,7 +188,7 @@ No new WRK/report lane without a direct consumer and bounded closure.
 - Keep provisional internal representations separate from public compatibility.
 - Maintain one report (2606), one roadmap (250), one active milestone (I3-3).
 - Run resources preflight before heavy commands. The latest regression gate
-  measured 30,906,707,968 bytes (~28.78 GiB) free; keep the 10 GiB safety
+  measured approximately16GiB free at2026-09-09 05:30 JST; keep the 10 GiB safety
   floor. No unmounted external workdir is assumed.
 - Stage 1 lint/docs/diff/secret scan and commit/push/parity are complete;
   repeat applicable gates at the next integration. Full workspace/probe/matrix

@@ -1998,11 +1998,64 @@ owner-capability-revocation predicate or a child issuer. Generic M9/SYS4
 construction/install/publication need no use of the retired ContractUpdate
 or observer lineage; those retirements must remain effective. Preserve the
 normal old-carrier `CarrierAdmissionRejected` precedence and pair the actual
-network case with LOCAL current-generation `StaleMembership` classification.
-Implementation stays gated on provider commit/push/parity; no source grammar,
+network case with LOCAL `StaleMembership` classification: an M9 unit retains
+the genuine prior issued owner use and validates it against the genuinely
+retired successor's translated M8 inventory. Neither a fresh G2 carrier nor
+a new production pending-use path is invented for that local test; the
+existing SYS4 current-owner lookup can reject earlier when its use is absent.
+For actual execution, child installation precedes both its qualified ACK and
+its stale-carrier rejection; the registered ACK precedes parent publication.
+Parent publication and remote rejection are not assigned an extra causal edge
+without an actual gate. Both branches and natural zero-exit/reaping are required
+before the opaque conformance completion, whose child terminal exports only
+the process slot; existing detailed fault/observation DTOs are not reused.
+Provider component `94ad584577fadfd0b016ff798a22b84df536939f` is committed and
+pushed; clean HEAD/origin/main/live-main parity was observed at
+`2026-09-09T05:21:50+09:00`. Row13's bounded contract/test/implementation
+consumer is now released within the same active I3-3 milestone; no source grammar,
 arbitrary principal selector or new authority policy is authorized by this
 LAB consumer substitution. Rows15/19 reuse their exact evidence before row20
 cut/ordering and whole-I3-3 acceptance.
+
+Row13's first actual rejection was M9 exact-delta loss of unrelated finite
+fresh-reacquire bindings during fresh translation. Retaining the genuine G1
+map before the existing selected-primary removals now passes the independent
+accepted-four-locus M9 regression and old-use `StaleMembership` test. The
+subsequent diagnostic reaches the separately predicted generic static
+restriction guard; its later publication-summary assertion remains a test
+harness failure, not network evidence (Report2606 records both).
+
+The released smallest qualified-withdrawal route keeps generic initial
+admission/restriction/restore and capability-successor admission unchanged.
+It validates ordinary G1 against independently retained checked source and
+start control, admits the parent's genuine full exact M9 retirement, then
+checks restricted G2 against validated G1 and the independently retained
+expected candidate. Child checks must include all M9/M8 uses, lineages,
+fresh bindings, tombstones, failure history, counters and generation fields;
+a tag, self-computed hash or qualification flag is insufficient. The current
+WorldAuthority consumer preserves fresh bindings exactly; an unexplained
+relation-dependent membership retirement is explicitly unsupported and
+fail-closed, not a new network anchor-retirement/reacquisition contract.
+No caller-selected retirement set, replacement grant, child issuer, observer
+renewal or fresh G2 request is admitted. Failed qualification/install leaves
+prior runtime/publication intact. Stop extending this mechanism when genuine
+restore/install/network positives, exact-delta and wrong-kind/replay
+falsifiers, regressions and independent review pass.
+
+The qualified component now passes its focused and scope-wide gates:
+M9 module5/5, SYS5 membership4/4, actual two-process profiles2/2; after review
+follow-up, the same-reader wrong-kind-then-genuine ACK ratchet1/1, runtime
+all-targets (library413/process68/M10conformance67/I2CLI8), probe all-targets
+(ordinary43/provider20), format and scoped Clippy with warnings denied.
+Independent review has no unresolved P0/P1/P2. The new conformance runners
+return only a fieldless opaque outer error, avoiding false post-start stage
+claims or retired-observer output. Temporary diagnoses are removed.
+Report2606 pins exact commands/logs and scope. Row13 is verified and awaiting
+Git integration/parity; this does not accept row20 or whole I3-3. The fixed
+next consumer is row20 cut/order, whose implementation has not begun. A single
+bounded Oracle consultation is advisory preparation for that existing consumer,
+not a new roadmap, implementation release or general cut theorem. I3-4 remains
+inactive.
 
 The old fixture
 default remains0; the feature-gated source-real factory now explicitly selects
@@ -2039,10 +2092,12 @@ process integration, `i3_request_lifecycle_model`, I2/M10 targets, all probe
 tests, workspace all-target tests/Clippy, format, docs, diff and secret scan.
 Overlapping suites have separate result classes, never additive counts.
 
-Independent remaining-row sequencing review keeps the following direct
+Historical remaining-row sequencing review kept the following direct
 consumers after the time path. Membership uses the actual M9 retirement of
 ParticipantA and the already checked `init_focus` operation, not capability
-revocation renamed as membership. Auth/policy can exercise real pre-activation
+revocation renamed as membership; the later row13 decision above supersedes
+that operation/role selection with `init_avatar_hp` and WorldAuthority.
+Auth/policy can exercise real pre-activation
 auth-discharge rejection; do not claim dynamic policy revocation from it.
 Visibility/redaction can reject a changed existing redaction contract through
 the actual tainted process-image admission boundary, paired with local
@@ -2088,7 +2143,8 @@ history, never reset by a cut/reconnect. A positive actual ordinary round
 trip must reach this boundary and then a later checked transition; pending,
 retained-ingress, reservation and late-old-traffic cases are falsifiers.
 These are implementation/evidence obligations, not executed results or a
-new milestone. Runtime/probe production work remains provider-first.
+new milestone. The provider component is now committed; row13 membership
+validation remains the current consumer before row20 production work.
 The smallest later transition is a genuine existing checked owner dispatch /
 serve, causally joined to an identity-bound committed cut-admission occurrence.
 Independent Canon-first review confirms plan/05 requires that actual retained

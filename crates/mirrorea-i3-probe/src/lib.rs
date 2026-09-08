@@ -56,13 +56,17 @@ pub use i3_process_localnet::{
     I3LocalnetObserverSafeDeliveryRecord, I3LocalnetOwnerAdmissionDriveProfile,
     I3LocalnetOwnerAdmissionExpiryEvidence, I3LocalnetRejectionAudit,
     I3LocalnetRetainedIngressEvidence, I3LocalnetRunError, I3LocalnetRunErrorKind,
-    I3ProcessLocalnetRequest, I3ProcessLocalnetRun, I3ReadOnlyProviderLocalnetBootstrapSubstage,
+    I3OwnerMembershipSuccessorLocalnetConformanceError,
+    I3OwnerMembershipSuccessorLocalnetConformanceRun, I3ProcessLocalnetRequest,
+    I3ProcessLocalnetRun, I3ReadOnlyProviderLocalnetBootstrapSubstage,
     I3ReadOnlyProviderLocalnetFailureStage, I3ReadOnlyProviderLocalnetRequest,
     I3ReadOnlyProviderLocalnetRun, I3ReadOnlyProviderLocalnetRunError,
     I3ReadOnlyProviderLocalnetRunErrorKind, I3ReadOnlyProviderNetworkConformanceRun,
     I3ReadOnlyProviderTerminalObservationConformanceRun, run_i3_process_localnet,
     run_i3_read_only_provider_localnet, run_i3_read_only_provider_network_conformance,
     run_i3_read_only_provider_terminal_observer_conformance,
+    run_i3_source_real_g1_carrier_after_owner_membership_successor_localnet,
+    run_i3_source_real_owner_membership_successor_positive_localnet,
 };
 pub use model::{
     RequestIdentity, SemanticAdmissionError, SemanticAdmissionErrorKind, SemanticCarrier,

@@ -16,6 +16,7 @@ use crate::{
     sys4_dispatch::{
         FabricProgram, SealedFabricAdmission,
         Sys4I3PrivateRestrictedOwnerCapabilitySuccessorSnapshot,
+        Sys4I3PrivateRestrictedSourceDeclaredOwnerMembershipSuccessorSnapshot,
         Sys4I3PrivateSealedAdmissionSnapshot,
     },
 };
@@ -54,6 +55,12 @@ pub(super) struct PrivateOrdinaryProcessImageSnapshot {
     admission: Sys4I3PrivateSealedAdmissionSnapshot,
     private_snapshot_binding_ref: String,
     prestaged_owner_capability_lifecycle: Option<PrivatePrestagedOwnerCapabilityLifecycleSnapshot>,
+    /// A missing field from a legacy v1 private image means no membership
+    /// lifecycle. A staged membership candidate always has this explicit tag;
+    /// it is never inferred from the capability shape.
+    #[serde(default)]
+    prestaged_source_declared_owner_membership_lifecycle:
+        Option<PrivatePrestagedSourceDeclaredOwnerMembershipLifecycleSnapshot>,
 }
 
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
@@ -62,6 +69,14 @@ struct PrivatePrestagedOwnerCapabilityLifecycleSnapshot {
     target_slot_name: String,
     stage_identity_binding_ref: String,
     candidate: Sys4I3PrivateRestrictedOwnerCapabilitySuccessorSnapshot,
+}
+
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[serde(deny_unknown_fields)]
+struct PrivatePrestagedSourceDeclaredOwnerMembershipLifecycleSnapshot {
+    target_slot_name: String,
+    stage_identity_binding_ref: String,
+    candidate: Sys4I3PrivateRestrictedSourceDeclaredOwnerMembershipSuccessorSnapshot,
 }
 
 impl PrivateOrdinaryProcessImageSnapshot {
@@ -88,6 +103,25 @@ impl PrivateOrdinaryProcessImageSnapshot {
             })
             .transpose()
             .map_err(|_| ())?;
+        let prestaged_source_declared_owner_membership_lifecycle = seed
+            .prestaged_source_declared_owner_membership_lifecycle
+            .as_ref()
+            .map(|lifecycle| {
+                lifecycle.candidate.i3_private_snapshot().map(|candidate| {
+                    PrivatePrestagedSourceDeclaredOwnerMembershipLifecycleSnapshot {
+                        target_slot_name: lifecycle.target_slot_name.clone(),
+                        stage_identity_binding_ref: lifecycle.stage_identity_binding_ref.clone(),
+                        candidate,
+                    }
+                })
+            })
+            .transpose()
+            .map_err(|_| ())?;
+        if prestaged_owner_capability_lifecycle.is_some()
+            && prestaged_source_declared_owner_membership_lifecycle.is_some()
+        {
+            return Err(());
+        }
         if private_snapshot_binding_ref.is_empty()
             || private_snapshot_binding_ref
                 != private_runtime_seed_binding_ref(&seed.program, &seed.admission)?
@@ -101,6 +135,7 @@ impl PrivateOrdinaryProcessImageSnapshot {
             admission,
             private_snapshot_binding_ref,
             prestaged_owner_capability_lifecycle,
+            prestaged_source_declared_owner_membership_lifecycle,
         })
     }
 
@@ -180,6 +215,40 @@ impl PrivateOrdinaryProcessImageSnapshot {
                 })
             })
             .transpose()?;
+        let prestaged_source_declared_owner_membership_lifecycle = self
+            .prestaged_source_declared_owner_membership_lifecycle
+            .map(|lifecycle| {
+                if lifecycle.target_slot_name.is_empty()
+                    || lifecycle.stage_identity_binding_ref.is_empty()
+                {
+                    return Err(Sys5I3ProcessRuntimeError::new(
+                        Sys5I3ProcessRuntimeErrorKind::ImageIntegrityMismatch,
+                    ));
+                }
+                let candidate = crate::sys4_dispatch::Sys4I3RestrictedSourceDeclaredOwnerMembershipSuccessor::from_i3_private_snapshot(
+                    lifecycle.candidate,
+                    &program,
+                    &admission,
+                )
+                .map_err(|_| {
+                    Sys5I3ProcessRuntimeError::new(
+                        Sys5I3ProcessRuntimeErrorKind::ImageIntegrityMismatch,
+                    )
+                })?;
+                Ok(super::Sys5I3PrestagedSourceDeclaredOwnerMembershipLifecycle {
+                    target_slot_name: lifecycle.target_slot_name,
+                    stage_identity_binding_ref: lifecycle.stage_identity_binding_ref,
+                    candidate,
+                })
+            })
+            .transpose()?;
+        if prestaged_owner_capability_lifecycle.is_some()
+            && prestaged_source_declared_owner_membership_lifecycle.is_some()
+        {
+            return Err(Sys5I3ProcessRuntimeError::new(
+                Sys5I3ProcessRuntimeErrorKind::ImageIntegrityMismatch,
+            ));
+        }
         let private_runtime_seed =
             Sys5I3PrivateRuntimeSeed::Ordinary(Box::new(Sys5I3OrdinaryPrivateRuntimeSeed {
                 parent_checked_program_ref: child_seed.parent_checked_program_ref.clone(),
@@ -190,6 +259,7 @@ impl PrivateOrdinaryProcessImageSnapshot {
                 program,
                 admission,
                 prestaged_owner_capability_lifecycle,
+                prestaged_source_declared_owner_membership_lifecycle,
             }));
         Ok(Sys5I3ProcessImage {
             slot_name,

@@ -357,6 +357,21 @@ pub struct I3ReadOnlyProviderNetworkConformanceRun {
     _private: (),
 }
 
+/// Opaque completion of one fixed source-owner membership-successor route.
+/// It exposes no membership, generation, carrier, rejected admission,
+/// mutation count, lifecycle ACK, observer record, or failure reason.
+#[doc(hidden)]
+pub struct I3OwnerMembershipSuccessorLocalnetConformanceRun {
+    _private: (),
+}
+
+/// Opaque non-success for one fixed source-owner membership-successor route.
+/// It reveals no stage, activity, authority, membership, carrier, lifecycle,
+/// or owner-state information.
+#[doc(hidden)]
+#[derive(Clone, Copy, Debug, Eq, PartialEq)]
+pub struct I3OwnerMembershipSuccessorLocalnetConformanceError;
+
 #[derive(Clone, Copy, Debug, Eq, PartialEq)]
 enum PrivateProviderTerminalExpectation {
     NormalAudit,
@@ -2503,6 +2518,10 @@ struct PrivateChildControl {
     owner_reply_replay_falsifier: Option<I3LocalnetOwnerReplyReplayFalsifier>,
     late_ingress_profile: Option<I3LocalnetLateIngressProfile>,
     late_ingress_falsifier: Option<I3LocalnetLateIngressFalsifier>,
+    // This is a sealed no-input host route selector. It cannot carry an
+    // authority-bearing membership field: B must still validate the distinct
+    // typed membership lifecycle embedded in its trusted runtime control.
+    owner_membership_successor_profile: Option<PrivateOwnerMembershipSuccessorConformanceProfile>,
     adapter_delivery_profile: Option<I3LocalnetAdapterDeliveryProfile>,
     // A negative-only candidate-shaped ACK frame for A's actual stdout route.
     // It cannot be decoded to an installed receipt or offered to the
@@ -2618,6 +2637,16 @@ enum PrivateChildTerminalLifecycleFalsifier {
     RejectAfterCompleted,
 }
 
+/// The sealed host schedule for Row13. This picks no operation, membership,
+/// generation, carrier, ACK, authority, or expected outcome. The distinct
+/// typed runtime control remains the sole membership-successor authority.
+#[derive(Clone, Copy, Debug, Eq, PartialEq, Serialize, Deserialize)]
+#[serde(rename_all = "snake_case")]
+enum PrivateOwnerMembershipSuccessorConformanceProfile {
+    FreshUnretiredG1,
+    RetainedG1AfterInstalledSuccessor,
+}
+
 /// The trusted descriptor is still untrusted input from the child process's
 /// perspective.  Reject duplicate top-level members before deserializing the
 /// finite control DTO; `serde_json::Value` alone would silently apply
@@ -2725,6 +2754,13 @@ enum PrivateChildEvent {
     /// selected schedule, transport facts, and internal duplicate/rejection
     /// checks remain within the installed runtime.
     ProviderNetworkConformanceCompleted {
+        slot: I3LocalnetChildSlot,
+    },
+    /// Generic terminal marker for the fixed source-owner membership
+    /// successor routes. It deliberately carries only the physical child
+    /// slot: retirement removes the ordinary ContractUpdate/observer lineage,
+    /// so no semantic fault, trace, ACK, membership, or counter is exported.
+    OwnerMembershipSuccessorConformanceCompleted {
         slot: I3LocalnetChildSlot,
     },
     Rejected {
@@ -3279,6 +3315,7 @@ impl PrivateChildEvent {
                 | Self::ProviderCompleted { .. }
                 | Self::ProviderTerminalObservationConformanceCompleted { .. }
                 | Self::ProviderNetworkConformanceCompleted { .. }
+                | Self::OwnerMembershipSuccessorConformanceCompleted { .. }
                 | Self::Rejected { .. }
                 | Self::HandledDeliveryFault { .. }
                 | Self::AdapterDeliveryFault { .. }
@@ -3310,6 +3347,7 @@ impl PrivateChildEvent {
             | Self::ProviderCompleted { .. }
             | Self::ProviderTerminalObservationConformanceCompleted { .. }
             | Self::ProviderNetworkConformanceCompleted { .. }
+            | Self::OwnerMembershipSuccessorConformanceCompleted { .. }
             | Self::Rejected { .. }
             | Self::AdapterDeliveryFault { .. }
             | Self::LateIngress { .. }
@@ -3329,6 +3367,7 @@ impl PrivateChildEvent {
             | Self::ProviderCompleted { .. }
             | Self::ProviderTerminalObservationConformanceCompleted { .. }
             | Self::ProviderNetworkConformanceCompleted { .. }
+            | Self::OwnerMembershipSuccessorConformanceCompleted { .. }
             | Self::Rejected { .. }
             | Self::AdapterDeliveryFault { .. }
             | Self::LateIngress { .. }
@@ -3367,6 +3406,7 @@ impl PrivateChildEvent {
             | Self::ProviderCompleted { .. }
             | Self::ProviderTerminalObservationConformanceCompleted { .. }
             | Self::ProviderNetworkConformanceCompleted { .. }
+            | Self::OwnerMembershipSuccessorConformanceCompleted { .. }
             | Self::UnknownLifecycleFailure { .. } => None,
         }
     }
@@ -3542,6 +3582,7 @@ impl PrivateChildEvent {
             | Self::ProviderCompleted { .. }
             | Self::ProviderTerminalObservationConformanceCompleted { .. }
             | Self::ProviderNetworkConformanceCompleted { .. }
+            | Self::OwnerMembershipSuccessorConformanceCompleted { .. }
             | Self::UnknownLifecycleFailure { .. } => None,
         }
     }
@@ -3900,6 +3941,275 @@ pub fn run_i3_read_only_provider_network_conformance(
                 I3ReadOnlyProviderLocalnetFailureStage::Preflight,
             ))
         }
+    }
+}
+
+/// Runs the fixed unretired `init_avatar_hp` owner path. Completion remains
+/// opaque: both children use the normal accepted source path internally but
+/// emit only their physical slot after their private checks and natural reaping.
+#[doc(hidden)]
+pub fn run_i3_source_real_owner_membership_successor_positive_localnet() -> Result<
+    I3OwnerMembershipSuccessorLocalnetConformanceRun,
+    I3OwnerMembershipSuccessorLocalnetConformanceError,
+> {
+    run_i3_source_real_owner_membership_successor_conformance(
+        PrivateOwnerMembershipSuccessorConformanceProfile::FreshUnretiredG1,
+    )
+}
+
+/// Runs the fixed source-generated G1 carrier after B installs the qualified
+/// owner-membership successor. The internal admission rejection never becomes
+/// an outer semantic fault or an observer record.
+#[doc(hidden)]
+pub fn run_i3_source_real_g1_carrier_after_owner_membership_successor_localnet() -> Result<
+    I3OwnerMembershipSuccessorLocalnetConformanceRun,
+    I3OwnerMembershipSuccessorLocalnetConformanceError,
+> {
+    run_i3_source_real_owner_membership_successor_conformance(
+        PrivateOwnerMembershipSuccessorConformanceProfile::RetainedG1AfterInstalledSuccessor,
+    )
+}
+
+/// Parent-only Row13 orchestration. It deliberately shares the existing
+/// supervisor, image/control framing, absolute deadline, reaper reserve, and
+/// two real QUIC children. This is not a second launcher or a semantic
+/// acknowledgment channel.
+fn run_i3_source_real_owner_membership_successor_conformance(
+    profile: PrivateOwnerMembershipSuccessorConformanceProfile,
+) -> Result<
+    I3OwnerMembershipSuccessorLocalnetConformanceRun,
+    I3OwnerMembershipSuccessorLocalnetConformanceError,
+> {
+    let source_path = Path::new(env!("CARGO_MANIFEST_DIR"))
+        .join("../..")
+        .join(ACTIVE_I2_LOGICAL_SOURCE_PATH);
+    let source = fs::read_to_string(&source_path)
+        .map_err(|_| I3OwnerMembershipSuccessorLocalnetConformanceError)?;
+    let project = build_project(Sys5SourceInput::inline(
+        logical_source_path(&source_path),
+        source,
+    ))
+    .map_err(|_| I3OwnerMembershipSuccessorLocalnetConformanceError)?;
+    let deployment = Sys5I3Deployment::from_checked_project(
+        &project,
+        [
+            Sys5I3DeploymentSlot::new(PROCESS_A_SLOT, "127.0.0.1:0", PROCESS_A_LOCI),
+            Sys5I3DeploymentSlot::new(PROCESS_B_SLOT, "127.0.0.1:0", PROCESS_B_LOCI),
+        ],
+    )
+    .map_err(|_| I3OwnerMembershipSuccessorLocalnetConformanceError)?;
+    let mut cohort = Sys5I3ProcessCohort::from_checked_project(&project, &deployment)
+        .map_err(|_| I3OwnerMembershipSuccessorLocalnetConformanceError)?;
+    let summary = cohort.observer_safe_summary();
+    if summary.full_admission_count() != 1 || summary.authority_generation_count() != 1 {
+        return Err(I3OwnerMembershipSuccessorLocalnetConformanceError);
+    }
+    let codec = Sys5I3PrivateProcessCodec::private_provisional_v1();
+    let request_contract = project_adapter_contract(&project, "owner-request")
+        .map_err(|_| I3OwnerMembershipSuccessorLocalnetConformanceError)?;
+    let credentials = generate_run_credentials()
+        .map_err(|_| I3OwnerMembershipSuccessorLocalnetConformanceError)?;
+    let run_ref = fresh_run_ref(
+        summary.cohort_occurrence_ref(),
+        &credentials.process_a.spki_ref,
+        &credentials.process_b.spki_ref,
+    );
+    let (first_control, second_control) = match profile {
+        PrivateOwnerMembershipSuccessorConformanceProfile::FreshUnretiredG1 => {
+            let first_binding = cohort
+                .parent_held_expected_start_binding(PROCESS_A_SLOT)
+                .map_err(|_| I3OwnerMembershipSuccessorLocalnetConformanceError)?;
+            let second_binding = cohort
+                .parent_held_expected_start_binding(PROCESS_B_SLOT)
+                .map_err(|_| I3OwnerMembershipSuccessorLocalnetConformanceError)?;
+            codec
+                .split_trusted_localnet_controls(
+                    &run_ref,
+                    first_binding,
+                    credentials.process_a.spki_ref.clone(),
+                    second_binding,
+                    credentials.process_b.spki_ref.clone(),
+                )
+                .map_err(|_| I3OwnerMembershipSuccessorLocalnetConformanceError)?
+        }
+        PrivateOwnerMembershipSuccessorConformanceProfile::RetainedG1AfterInstalledSuccessor => {
+            cohort
+                .prestage_source_declared_owner_membership_retirement(&run_ref, &request_contract)
+                .map_err(|_| I3OwnerMembershipSuccessorLocalnetConformanceError)?;
+            cohort
+                .split_trusted_localnet_controls_with_prestaged_source_declared_owner_membership_lifecycle(
+                    &codec,
+                    &run_ref,
+                    PROCESS_A_SLOT,
+                    &credentials.process_a.spki_ref,
+                    PROCESS_B_SLOT,
+                    &credentials.process_b.spki_ref,
+                )
+                .map_err(|_| I3OwnerMembershipSuccessorLocalnetConformanceError)?
+        }
+    };
+    let first_image = codec
+        .encode_image(
+            cohort
+                .take_process_image(PROCESS_A_SLOT)
+                .map_err(|_| I3OwnerMembershipSuccessorLocalnetConformanceError)?,
+        )
+        .map_err(|_| I3OwnerMembershipSuccessorLocalnetConformanceError)?;
+    let second_image = codec
+        .encode_image(
+            cohort
+                .take_process_image(PROCESS_B_SLOT)
+                .map_err(|_| I3OwnerMembershipSuccessorLocalnetConformanceError)?,
+        )
+        .map_err(|_| I3OwnerMembershipSuccessorLocalnetConformanceError)?;
+
+    let deadline = Duration::from_secs(15);
+    let lifecycle_started = Instant::now();
+    let main_deadline = lifecycle_started + deadline;
+    let mut supervisor = LocalnetSupervisor {
+        lifecycle_started,
+        deadline: main_deadline,
+        total_lifecycle_deadline: main_deadline + Duration::from_secs(1),
+        natural_reaper_exhausted: false,
+        zero_exit_reap_observed_at: None,
+        zero_exit_reap_observation_elapsed: None,
+        zero_exit_reap_observed_within_deadline: false,
+        children: Vec::new(),
+        provider_launch: None,
+    };
+    let execution = (|| -> Result<I3OwnerMembershipSuccessorLocalnetConformanceRun, ()> {
+        let server_control = PrivateChildControl {
+            slot: I3LocalnetChildSlot::ProcessB,
+            endpoint: None,
+            trusted_runtime_control: codec
+                .encode_trusted_localnet_control(second_control)
+                .map_err(|_| ())?,
+            ca_der: credentials.ca_der.clone(),
+            leaf_cert_der: credentials.process_b.certificate_der,
+            leaf_key_der: credentials.process_b.private_key_der,
+            inject_bad_preface: false,
+            stall_bootstrap: false,
+            stall_cleanup: false,
+            setup_failure_during_stall: false,
+            terminal_lifecycle_falsifier: PrivateChildTerminalLifecycleFalsifier::None,
+            emit_request_before_wrong_peer_rejection: false,
+            fault_profile: None,
+            fault_audit_falsifier: None,
+            requester_local_wait_profile: None,
+            requester_local_wait_falsifier: None,
+            retry_profile: None,
+            retry_falsifier: None,
+            retry_audit_falsifier: None,
+            owner_admission_drive_profile: None,
+            owner_reply_replay_profile: None,
+            owner_reply_replay_falsifier: None,
+            late_ingress_profile: None,
+            late_ingress_falsifier: None,
+            owner_membership_successor_profile: Some(profile),
+            adapter_delivery_profile: None,
+            tainted_owner_lifecycle_ack_candidate: None,
+            timeout_millis: deadline.as_millis().try_into().unwrap_or(u64::MAX),
+        };
+        let process_b = supervisor
+            .spawn(I3LocalnetChildSlot::ProcessB, second_image, server_control)
+            .map_err(|_| ())?;
+        let mut registered_membership_lifecycle_ack_reader = if profile
+            == PrivateOwnerMembershipSuccessorConformanceProfile::RetainedG1AfterInstalledSuccessor
+        {
+            let remaining = supervisor
+                .deadline
+                .checked_duration_since(Instant::now())
+                .filter(|duration| !duration.is_zero())
+                .ok_or(())?;
+            let stream = supervisor
+                .take_registered_owner_lifecycle_ack_stream()
+                .ok_or(())?;
+            Some(
+                cohort
+                    .take_registered_source_declared_owner_membership_lifecycle_ack_reader(
+                        PROCESS_B_SLOT,
+                        stream,
+                        remaining,
+                    )
+                    .map_err(|_| ())?,
+            )
+        } else {
+            None
+        };
+        let endpoint = match supervisor.next_event(process_b) {
+            Ok(PrivateChildEvent::Ready { endpoint }) if is_loopback_endpoint(&endpoint) => {
+                endpoint
+            }
+            _ => return Err(()),
+        };
+        let client_control = PrivateChildControl {
+            slot: I3LocalnetChildSlot::ProcessA,
+            endpoint: Some(endpoint.clone()),
+            trusted_runtime_control: codec
+                .encode_trusted_localnet_control(first_control)
+                .map_err(|_| ())?,
+            ca_der: credentials.ca_der,
+            leaf_cert_der: credentials.process_a.certificate_der,
+            leaf_key_der: credentials.process_a.private_key_der,
+            inject_bad_preface: false,
+            stall_bootstrap: false,
+            stall_cleanup: false,
+            setup_failure_during_stall: false,
+            terminal_lifecycle_falsifier: PrivateChildTerminalLifecycleFalsifier::None,
+            emit_request_before_wrong_peer_rejection: false,
+            fault_profile: None,
+            fault_audit_falsifier: None,
+            requester_local_wait_profile: None,
+            requester_local_wait_falsifier: None,
+            retry_profile: None,
+            retry_falsifier: None,
+            retry_audit_falsifier: None,
+            owner_admission_drive_profile: None,
+            owner_reply_replay_profile: None,
+            owner_reply_replay_falsifier: None,
+            late_ingress_profile: None,
+            late_ingress_falsifier: None,
+            owner_membership_successor_profile: Some(profile),
+            adapter_delivery_profile: None,
+            tainted_owner_lifecycle_ack_candidate: None,
+            timeout_millis: deadline.as_millis().try_into().unwrap_or(u64::MAX),
+        };
+        let process_a = supervisor
+            .spawn(I3LocalnetChildSlot::ProcessA, first_image, client_control)
+            .map_err(|_| ())?;
+        let requester_terminal = supervisor.next_event(process_a).map_err(|_| ())?;
+        let executor_terminal = supervisor.next_event(process_b).map_err(|_| ())?;
+        owner_membership_successor_conformance_completed(
+            requester_terminal,
+            I3LocalnetChildSlot::ProcessA,
+        )
+        .and_then(|_| {
+            owner_membership_successor_conformance_completed(
+                executor_terminal,
+                I3LocalnetChildSlot::ProcessB,
+            )
+        })
+        .map_err(|_| ())?;
+        if let Some(reader) = registered_membership_lifecycle_ack_reader.as_mut() {
+            let completion = reader.read_next_completion(&codec).map_err(|_| ())?;
+            cohort
+                .publish_registered_source_declared_owner_membership_lifecycle_completion(
+                    completion,
+                )
+                .map_err(|_| ())?;
+        }
+        if !supervisor.wait_for_natural_exits()
+            || !supervisor.zero_exit_reap_observed_within_deadline()
+            || !verify_actual_ready_endpoint_rebind(&endpoint)
+        {
+            return Err(());
+        }
+        Ok(I3OwnerMembershipSuccessorLocalnetConformanceRun { _private: () })
+    })();
+    let cleanup_succeeded = supervisor.cleanup_after_failure();
+    match execution {
+        Ok(completion) if cleanup_succeeded => Ok(completion),
+        Ok(_) | Err(()) => Err(I3OwnerMembershipSuccessorLocalnetConformanceError),
     }
 }
 
@@ -4636,6 +4946,7 @@ fn run_swapped_pair_falsifier(
         owner_reply_replay_falsifier: None,
         late_ingress_profile: None,
         late_ingress_falsifier: None,
+        owner_membership_successor_profile: None,
         adapter_delivery_profile: None,
         tainted_owner_lifecycle_ack_candidate: None,
         timeout_millis: deadline.as_millis().try_into().unwrap_or(u64::MAX),
@@ -4667,6 +4978,7 @@ fn run_swapped_pair_falsifier(
         owner_reply_replay_falsifier: None,
         late_ingress_profile: None,
         late_ingress_falsifier: None,
+        owner_membership_successor_profile: None,
         adapter_delivery_profile: None,
         tainted_owner_lifecycle_ack_candidate: None,
         timeout_millis: deadline.as_millis().try_into().unwrap_or(u64::MAX),
@@ -4996,6 +5308,7 @@ fn run_positive_or_peer_falsifier(
         owner_reply_replay_falsifier,
         late_ingress_profile,
         late_ingress_falsifier,
+        owner_membership_successor_profile: None,
         adapter_delivery_profile,
         tainted_owner_lifecycle_ack_candidate: None,
         timeout_millis: deadline.as_millis().try_into().unwrap_or(u64::MAX),
@@ -5103,6 +5416,7 @@ fn run_positive_or_peer_falsifier(
         owner_reply_replay_falsifier,
         late_ingress_profile,
         late_ingress_falsifier,
+        owner_membership_successor_profile: None,
         adapter_delivery_profile,
         tainted_owner_lifecycle_ack_candidate: requester_stdout_tainted_ack_candidate,
         timeout_millis: deadline.as_millis().try_into().unwrap_or(u64::MAX),
@@ -5938,23 +6252,27 @@ impl LocalnetSupervisor {
         let (mut parent_control, child_control) = UnixStream::pair()?;
         set_close_on_exec(parent_control.as_raw_fd())?;
         set_close_on_exec(child_control.as_raw_fd())?;
-        let (parent_owner_lifecycle_ack, child_owner_lifecycle_ack) = if slot
-            == I3LocalnetChildSlot::ProcessB
-            && control.late_ingress_profile
+        let needs_registered_lifecycle_ack = slot == I3LocalnetChildSlot::ProcessB
+            && (control.late_ingress_profile
                 == Some(
                     I3LocalnetLateIngressProfile::PrestageOwnerCapabilityRevocationBeforeLateIngressAdmission,
                 )
-        {
-            let (parent, child) = UnixStream::pair()?;
-            // The A child is spawned after B. Mark the parent end close-on-
-            // exec before either spawn so no later child inherits a usable
-            // B-completion route.
-            set_close_on_exec(parent.as_raw_fd())?;
-            set_close_on_exec(child.as_raw_fd())?;
-            (Some(parent), Some(child))
-        } else {
-            (None, None)
-        };
+                || control.owner_membership_successor_profile
+                    == Some(
+                        PrivateOwnerMembershipSuccessorConformanceProfile::RetainedG1AfterInstalledSuccessor,
+                    ));
+        let (parent_owner_lifecycle_ack, child_owner_lifecycle_ack) =
+            if needs_registered_lifecycle_ack {
+                let (parent, child) = UnixStream::pair()?;
+                // The A child is spawned after B. Mark the parent end close-on-
+                // exec before either spawn so no later child inherits a usable
+                // B-completion route.
+                set_close_on_exec(parent.as_raw_fd())?;
+                set_close_on_exec(child.as_raw_fd())?;
+                (Some(parent), Some(child))
+            } else {
+                (None, None)
+            };
         let child_fd = child_control.as_raw_fd();
         let child_owner_lifecycle_ack_fd =
             child_owner_lifecycle_ack.as_ref().map(AsRawFd::as_raw_fd);
@@ -8765,6 +9083,25 @@ fn provider_network_conformance_completed(
     Ok(())
 }
 
+/// Correlate the fixed Row13 membership successor completion only with its
+/// physical child slot. All membership/G1/G2/ACK/admission facts remain in
+/// the qualified runtime and registered parent FD route; this host marker is
+/// intentionally not an observer record.
+fn owner_membership_successor_conformance_completed(
+    event: PrivateChildEvent,
+    slot: I3LocalnetChildSlot,
+) -> Result<(), ()> {
+    let PrivateChildEvent::OwnerMembershipSuccessorConformanceCompleted { slot: event_slot } =
+        event
+    else {
+        return Err(());
+    };
+    if event_slot != slot {
+        return Err(());
+    }
+    Ok(())
+}
+
 /// The fixed source-real path has exactly one request. Its M9-gated views
 /// retain actual first-slot send reservation/completion and complete-receive
 /// facts on their local endpoint. The join proves each local chain against the
@@ -9208,18 +9545,45 @@ fn run_private_localnet_child_inner(fixed_slot: I3LocalnetChildSlot) -> Result<(
         .map(str::to_owned)
         .into_iter()
         .collect();
-    let start_result = match control.late_ingress_profile {
+    let start_result = match (
+        control.late_ingress_profile,
+        control.owner_membership_successor_profile,
+    ) {
+        (
             Some(
                 I3LocalnetLateIngressProfile::PrestageOwnerCapabilityRevocationBeforeLateIngressAdmission,
-            ) => codec
-                .validate_and_start_image_with_prestaged_lifecycle(image, runtime_control),
-            None | Some(I3LocalnetLateIngressProfile::HoldSessionOneIngressAcrossVerifiedReconnect) => {
-                codec
-                    .validate_and_start_image_with_localnet_control(image, runtime_control)
-                    .map(|(runtime, runtime_control)| (runtime, runtime_control, None))
-            }
+            ),
+            None,
+        ) => codec
+            .validate_and_start_image_with_prestaged_lifecycle(image, runtime_control)
+            .map(|(runtime, runtime_control, stimulus)| {
+                (runtime, runtime_control, stimulus, None)
+            }),
+        (
+            None,
+            Some(PrivateOwnerMembershipSuccessorConformanceProfile::RetainedG1AfterInstalledSuccessor),
+        ) => codec
+            .validate_and_start_image_with_prestaged_source_declared_owner_membership_lifecycle(
+                image,
+                runtime_control,
+            )
+            .map(|(runtime, runtime_control, stimulus)| {
+                (runtime, runtime_control, None, stimulus)
+            }),
+        (
+            None | Some(I3LocalnetLateIngressProfile::HoldSessionOneIngressAcrossVerifiedReconnect),
+            None | Some(PrivateOwnerMembershipSuccessorConformanceProfile::FreshUnretiredG1),
+        ) => codec
+            .validate_and_start_image_with_localnet_control(image, runtime_control)
+            .map(|(runtime, runtime_control)| (runtime, runtime_control, None, None)),
+        _ => return Err(()),
     };
-    let (runtime, runtime_control, admitted_lifecycle_stimulus) = match start_result {
+    let (
+        runtime,
+        runtime_control,
+        admitted_lifecycle_stimulus,
+        admitted_membership_lifecycle_stimulus,
+    ) = match start_result {
         Ok(value) => value,
         Err(_) => {
             emit_child_event(&PrivateChildEvent::rejected(
@@ -9247,6 +9611,7 @@ fn run_private_localnet_child_inner(fixed_slot: I3LocalnetChildSlot) -> Result<(
                     runtime,
                     runtime_control,
                     admitted_lifecycle_stimulus,
+                    admitted_membership_lifecycle_stimulus,
                     control,
                     duration,
                     assigned_loci,
@@ -9254,7 +9619,9 @@ fn run_private_localnet_child_inner(fixed_slot: I3LocalnetChildSlot) -> Result<(
                 .await
             }
             I3LocalnetChildSlot::ProcessA => {
-                if admitted_lifecycle_stimulus.is_some() {
+                if admitted_lifecycle_stimulus.is_some()
+                    || admitted_membership_lifecycle_stimulus.is_some()
+                {
                     return Err(());
                 }
                 run_client_child(runtime, runtime_control, control, duration, assigned_loci).await
@@ -9845,6 +10212,9 @@ async fn run_server_child(
     admitted_lifecycle_stimulus: Option<
         mir_runtime::sys5_i3_process_runtime::Sys5I3AdmittedLifecycleStimulus,
     >,
+    admitted_membership_lifecycle_stimulus: Option<
+        mir_runtime::sys5_i3_process_runtime::Sys5I3AdmittedSourceDeclaredOwnerMembershipLifecycleStimulus,
+    >,
     control: PrivateChildControl,
     timeout: Duration,
     assigned_loci: Vec<String>,
@@ -9943,7 +10313,9 @@ async fn run_server_child(
         }
         session.send_local_preface().await.map_err(|_| ())?;
         if let Some(profile) = control.retry_profile {
-            if admitted_lifecycle_stimulus.is_some() {
+            if admitted_lifecycle_stimulus.is_some()
+                || admitted_membership_lifecycle_stimulus.is_some()
+            {
                 return Err(());
             }
             return run_server_retry_sessions(
@@ -9958,7 +10330,9 @@ async fn run_server_child(
             .await;
         }
         if let Some(profile) = control.owner_reply_replay_profile {
-            if admitted_lifecycle_stimulus.is_some() {
+            if admitted_lifecycle_stimulus.is_some()
+                || admitted_membership_lifecycle_stimulus.is_some()
+            {
                 return Err(());
             }
             return run_server_owner_reply_replay_sessions(
@@ -9975,7 +10349,26 @@ async fn run_server_child(
             )
             .await;
         }
+        if control.owner_membership_successor_profile
+            == Some(
+                PrivateOwnerMembershipSuccessorConformanceProfile::RetainedG1AfterInstalledSuccessor,
+            )
+        {
+            if admitted_lifecycle_stimulus.is_some() {
+                return Err(());
+            }
+            return run_server_owner_membership_successor_sessions(
+                runtime,
+                session,
+                &endpoint,
+                admitted_membership_lifecycle_stimulus.ok_or(())?,
+            )
+            .await;
+        }
         if let Some(profile) = control.late_ingress_profile {
+            if admitted_membership_lifecycle_stimulus.is_some() {
+                return Err(());
+            }
             return run_server_late_ingress_sessions(
                 runtime,
                 session,
@@ -9990,7 +10383,8 @@ async fn run_server_child(
             )
             .await;
         }
-        if admitted_lifecycle_stimulus.is_some() {
+        if admitted_lifecycle_stimulus.is_some() || admitted_membership_lifecycle_stimulus.is_some()
+        {
             return Err(());
         }
         let (reply, request_delivery) = match session
@@ -10199,6 +10593,28 @@ async fn run_server_child(
         let summary = runtime.observer_safe_runtime_summary();
         let occurrences = runtime.observer_safe_semantic_occurrences();
         let request_identity = request_delivery.semantic_request_identity_ref().to_string();
+        if control.owner_membership_successor_profile
+            == Some(PrivateOwnerMembershipSuccessorConformanceProfile::FreshUnretiredG1)
+        {
+            // This sealed conformance route still uses the ordinary actual
+            // source-generated request/reply path. Its private child check is
+            // deliberately complete before the slot-only terminal marker is
+            // emitted; no ordinary observer trace is constructed or exported.
+            if summary.served_owner_request_count() != 1
+                || summary.actual_owner_write_count() != 1
+            {
+                return Err(());
+            }
+            emit_child_event(
+                &PrivateChildEvent::OwnerMembershipSuccessorConformanceCompleted {
+                    slot: I3LocalnetChildSlot::ProcessB,
+                },
+            )
+            .map_err(|_| ())?;
+            session.wait_for_peer_close().await;
+            session.close();
+            return Ok(());
+        }
         let observer_evidence = PrivateChildObserverEvidence {
             request_received: Some(request_delivery.into()),
             reply_sent: Some(reply_delivery.into()),
@@ -10418,6 +10834,19 @@ async fn run_client_child(
             ))
             .map_err(|_| ())?;
             return Ok(());
+        }
+        if control.owner_membership_successor_profile
+            == Some(
+                PrivateOwnerMembershipSuccessorConformanceProfile::RetainedG1AfterInstalledSuccessor,
+            )
+        {
+            return run_client_owner_membership_successor_sessions(
+                runtime,
+                session,
+                &endpoint,
+                endpoint_address,
+            )
+            .await;
         }
         if let Some(profile) = control.retry_profile {
             let retry_plan = PrivateRetryClientSessionPlan {
@@ -10682,6 +11111,26 @@ async fn run_client_child(
         let summary = runtime.observer_safe_runtime_summary();
         let occurrences = runtime.observer_safe_semantic_occurrences();
         let request_identity = request_delivery.semantic_request_identity_ref().to_string();
+        if control.owner_membership_successor_profile
+            == Some(PrivateOwnerMembershipSuccessorConformanceProfile::FreshUnretiredG1)
+        {
+            if terminal_failure_consumed
+                || summary.accepted_inbound_receipt_count() != 1
+                || summary.accepted_inbound_declared_owner_failure_count() != 0
+                || runtime.observer_safe_pending_owner_request_count() != 0
+            {
+                return Err(());
+            }
+            emit_child_event(
+                &PrivateChildEvent::OwnerMembershipSuccessorConformanceCompleted {
+                    slot: I3LocalnetChildSlot::ProcessA,
+                },
+            )
+            .map_err(|_| ())?;
+            session.wait_for_peer_close().await;
+            session.close();
+            return Ok(());
+        }
         if terminal_failure_consumed {
             let terminal_occurrence = occurrences
                 .requester_terminal_declared_owner_failure_occurrence_ref(&request_identity)
@@ -10882,6 +11331,170 @@ async fn connect_reconnect_session(
         .await
         .map_err(|_| ())?;
     reconnect.connect(connection).await.map_err(|_| ())
+}
+
+/// B's Row13 path retains the actual complete G1 ingress on session one,
+/// installs the distinct admitted membership successor, then offers that same
+/// opaque pending ingress to the ordinary session-two admission gate. No
+/// probe-visible record is assembled from either the rejection or the ACK.
+async fn run_server_owner_membership_successor_sessions(
+    mut runtime: mir_runtime::sys5_i3_process_runtime::Sys5I3ProcessRuntime,
+    mut first_session: mir_runtime::sys5_i3_private_quic::Sys5I3PrivateQuicSession,
+    endpoint: &Endpoint,
+    membership_stimulus: mir_runtime::sys5_i3_process_runtime::Sys5I3AdmittedSourceDeclaredOwnerMembershipLifecycleStimulus,
+) -> Result<(), ()> {
+    if !first_session.peer_spki_verified()
+        || !first_session.peer_preface_verified()
+        || first_session.session_attempt_generation() != 1
+    {
+        return Err(());
+    }
+    let pending_ingress = first_session
+        .receive_complete_pending_ingress()
+        .await
+        .map_err(|_| ())?;
+    let codec = Sys5I3PrivateProcessCodec::private_provisional_v1();
+    let installed_ack = runtime
+        .install_admitted_source_declared_owner_membership_successor(membership_stimulus)
+        .map_err(|_| ())?;
+    let framed_ack = codec
+        .encode_installed_source_declared_owner_membership_lifecycle_ack(installed_ack)
+        .map_err(|_| ())?;
+    let mut writer = take_registered_owner_lifecycle_ack_writer().map_err(|_| ())?;
+    write_registered_owner_lifecycle_ack(&mut writer, &framed_ack, false).map_err(|_| ())?;
+
+    // B's local install precedes releasing session one. A reaches the
+    // verified successor only after this close; no parent publication is
+    // claimed as a dispatch precondition here.
+    first_session.close();
+    let reconnect = first_session.into_reconnect();
+    let mut reconnect_session = accept_reconnect_session(endpoint, reconnect).await?;
+    reconnect_session
+        .receive_and_validate_peer_preface()
+        .await
+        .map_err(|_| ())?;
+    reconnect_session
+        .send_local_preface()
+        .await
+        .map_err(|_| ())?;
+    if !reconnect_session.peer_spki_verified()
+        || !reconnect_session.peer_preface_verified()
+        || reconnect_session.session_attempt_generation() != 2
+    {
+        return Err(());
+    }
+    let error =
+        match reconnect_session.admit_retained_pending_ingress(&mut runtime, pending_ingress) {
+            Err(error) => error,
+            Ok(_) => return Err(()),
+        };
+    let mir_runtime::sys5_i3_private_quic::Sys5I3PrivateQuicError::SemanticRejected {
+        error,
+        rejected_attempt: _,
+    } = error
+    else {
+        return Err(());
+    };
+    if error.kind()
+        != mir_runtime::sys5_i3_process_runtime::Sys5I3ProcessRuntimeErrorKind::CarrierAdmissionRejected
+    {
+        return Err(());
+    }
+    let summary = runtime.observer_safe_runtime_summary();
+    if summary.served_owner_request_count() != 0 || summary.actual_owner_write_count() != 0 {
+        return Err(());
+    }
+    // A's session-two receive is expected to observe only the clean FIN after
+    // the private rejection. It owns the close which releases this B wait;
+    // there is no application acknowledgment or extra deadline.
+    reconnect_session.finish_send().map_err(|_| ())?;
+    reconnect_session.wait_for_peer_close().await;
+    reconnect_session.close();
+    emit_child_event(
+        &PrivateChildEvent::OwnerMembershipSuccessorConformanceCompleted {
+            slot: I3LocalnetChildSlot::ProcessB,
+        },
+    )
+    .map_err(|_| ())
+}
+
+/// A's companion Row13 path creates the source-generated G1 exactly once,
+/// keeps the original pending handle across the verified reconnect, and
+/// confirms the normal receiver returned it pending after B's installed G2.
+async fn run_client_owner_membership_successor_sessions(
+    mut runtime: mir_runtime::sys5_i3_process_runtime::Sys5I3ProcessRuntime,
+    mut first_session: mir_runtime::sys5_i3_private_quic::Sys5I3PrivateQuicSession,
+    endpoint: &Endpoint,
+    endpoint_address: SocketAddr,
+) -> Result<(), ()> {
+    if !first_session.peer_spki_verified()
+        || !first_session.peer_preface_verified()
+        || first_session.session_attempt_generation() != 1
+    {
+        return Err(());
+    }
+    let request = runtime
+        .emit_generated_owner_request("init_avatar_hp")
+        .map_err(|_| ())?;
+    let pending = runtime
+        .into_original_owner_request_pending(request)
+        .map_err(|_| ())?;
+    let request_identity_ref = pending.semantic_request_identity_ref().to_string();
+    first_session
+        .send_initial_original_owner_request(&mut runtime, &pending)
+        .await
+        .map_err(|_| ())?;
+    first_session.finish_send().map_err(|_| ())?;
+    // B closes session one only after retaining the complete genuine carrier
+    // and installing G2, so this is the actual handoff boundary.
+    first_session.wait_for_peer_close().await;
+    first_session.close();
+    let reconnect = first_session.into_reconnect();
+    let mut reconnect_session =
+        connect_reconnect_session(endpoint, endpoint_address, reconnect).await?;
+    reconnect_session
+        .send_local_preface()
+        .await
+        .map_err(|_| ())?;
+    reconnect_session
+        .receive_and_validate_peer_preface()
+        .await
+        .map_err(|_| ())?;
+    if !reconnect_session.peer_spki_verified()
+        || !reconnect_session.peer_preface_verified()
+        || reconnect_session.session_attempt_generation() != 2
+    {
+        return Err(());
+    }
+    let outcome = reconnect_session
+        .receive_and_admit_original_owner_reply(&mut runtime, pending)
+        .await;
+    let mir_runtime::sys5_i3_private_quic::Sys5I3PrivateQuicOriginalOwnerReplyOutcome::Pending {
+        pending: returned_pending,
+        error: mir_runtime::sys5_i3_private_quic::Sys5I3PrivateQuicError::FrameRejected,
+    } = outcome
+    else {
+        return Err(());
+    };
+    let summary = runtime.observer_safe_runtime_summary();
+    if returned_pending.semantic_request_identity_ref() != request_identity_ref
+        || runtime.observer_safe_pending_owner_request_count() != 1
+        || summary.accepted_inbound_receipt_count() != 0
+        || summary.accepted_inbound_declared_owner_failure_count() != 0
+    {
+        return Err(());
+    }
+    // Keep the original pending handle to this point. It then drops with A's
+    // runtime; this conformance path does not retry, consume, or synthesize a
+    // second request after the real stale-carrier rejection.
+    let _ = returned_pending;
+    reconnect_session.close();
+    emit_child_event(
+        &PrivateChildEvent::OwnerMembershipSuccessorConformanceCompleted {
+            slot: I3LocalnetChildSlot::ProcessA,
+        },
+    )
+    .map_err(|_| ())
 }
 
 /// Immutable actual-child inputs for the one held session-one ingress on B.

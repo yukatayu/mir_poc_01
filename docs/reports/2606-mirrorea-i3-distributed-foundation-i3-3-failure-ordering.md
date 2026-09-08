@@ -157,6 +157,56 @@ scripts/validate_docs.py. Historical plans/reports are evidence, not authority.
 
 ## Actions taken
 
+Current row13 integration closes its runtime/test/review loop before the
+pending row20 consumer. Genuine membership withdrawal is separate from
+capability revocation and ordinary initial admission. The final review adds
+same-reader ACK recoverability and removes inaccurate outer failure-stage
+claims without granting a retired observer more output. One asynchronous
+temporary Oracle consultation (`i3-row20-cut-admission-20260909`) reviewed
+the smallest process-local cut ownership boundary using only a bounded source
+packet and theory04/plan05/spec17. Direct consumer: row20. Blocker reduced:
+runtime pending records and adapter-owned ingress/send handles have no joint
+cut-admission boundary yet. Acceptance use: advisory design falsifiers checked
+against local source before implementation. The parent read the complete answer
+at `2026-09-09T07:36:06+09:00`: prefer a finite eligibility guard over drain/close,
+but only with actual complete custody and serialized check/commit. A mutable
+runtime/session pair alone is insufficient; unresolved parent publication and
+escaped ingress/reservations cannot be hidden. This is advisory preparation,
+not row20 implementation or acceptance. No new research lane/report is opened.
+
+Row13 begins from provider94ad5845. Parent/planner select the existing
+`init_avatar_hp` requesterA/ownerB path with genuine source-derived
+WorldAuthority membership retirement, not renamed capability revocation.
+M9 retains the genuine issuer retirement; the child receives only a separately
+bound restricted membership successor, with distinct install/ACK qualification.
+All dependent capabilities/witnesses, including ContractUpdate/observation,
+remain retired. Physical completion and child-private assertions do not grant
+new observation permission. Parent rejects a proposed production pending-use
+extension whose only consumer was a desired test diagnostic: LOCAL M9 evidence
+will instead validate a genuinely retained prior owner use against the genuine
+successor's existing M8 inventory. Actual network fresh binding keeps its
+earlier `CarrierAdmissionRejected`; no G2 carrier or authority use is forged.
+Independent test author and host writer receive these corrections before edits.
+
+The host writer also rejects reuse of the ordinary `HandledDeliveryFault` /
+`LateIngress` result shape: it exports semantic identity/count/audit fields
+after the selected observer membership has retired. Parent approves only a
+minimal private membership-specific slot-only terminal plus opaque conformance
+completion, sharing the existing supervisor, custody, deadline and reaping
+infrastructure. Actual child-private rejection/nonmutation and qualified
+membership install/registered ACK publication must precede success; an outer
+launch error alone is never the network falsifier. No new M9 observer policy
+or public result interface is introduced by this finite test seam.
+
+The runtime writer finds that cohort construction already consumes the one
+M9 publisher into the capability coordinator. Parent selects one private
+parent-only authority-successor custody holder with separately typed capability
+and membership paths, rather than choosing/duplicating coordinators during
+source cohort construction. At most one pending lifecycle is retained; wrong
+kind does not consume the legitimate pending stage. Candidate, receipt,
+registered reader and publication qualification remain noninterchangeable.
+This shares custody only, not semantic authority or an extensible admin bus.
+
 Provider two-session evidence choice (2026-09-09 continuation): independent
 planner review and parent integration select actual child-private assertions
 with generic completion for the finite reconnect/loss/replay experiments.
@@ -466,6 +516,45 @@ It changes no Canon rule, theory ledger or official lifecycle.
 
 ## Commands run
 
+Final row13 review-followup packet, with `CARGO_INCREMENTAL=0`,
+`CARGO_BUILD_JOBS=2`, locked dependencies and a10GiB free-space floor before
+each heavy command:
+
+```text
+cargo test --locked -p mir-runtime --features i3-private-quic,i3-process-test-seams --test sys5_i3_process_runtime i3_3_genuine_capability_ack_cannot_complete_source_declared_membership_successor -- --exact --test-threads=1
+cargo test --locked -p mirrorea-i3-probe --test i3_process_localnet member_successor_conformance -- --test-threads=1
+cargo fmt --all -- --check
+cargo clippy --locked -p mir-runtime -p mirrorea-i3-probe --all-targets --features mir-runtime/i3-private-quic,mir-runtime/i3-process-test-seams -- -D warnings
+cargo test --locked -p mir-runtime --all-targets --features i3-private-quic,i3-process-test-seams -- --test-threads=1
+cargo test --locked -p mirrorea-i3-probe --all-targets -- --test-threads=1
+make docs
+```
+
+Row13 qualified narrow gates (same serialized evaluator and environment):
+
+```text
+cargo test --locked -p mir-runtime --lib --features i3-private-quic,i3-process-test-seams m9_auth_verification::m9_auth_verification_i3_tests -- --test-threads=1
+cargo test --locked -p mir-runtime --features i3-private-quic,i3-process-test-seams --test sys5_i3_process_runtime membership -- --test-threads=1
+cargo test --locked -p mirrorea-i3-probe --test i3_process_localnet source_real_unretired_g1_owner_membership_path_completes_member_successor_conformance -- --exact --test-threads=1
+cargo test --locked -p mirrorea-i3-probe --test i3_process_localnet source_real_g1_owner_carrier_against_installed_g2_completes_member_successor_conformance -- --exact --test-threads=1
+```
+
+Row13 fresh-binding repair's LOCAL M9 gates, using
+`CARGO_INCREMENTAL=0 CARGO_BUILD_JOBS=2` and the same locked feature union:
+
+```text
+cargo test --locked -p mir-runtime --lib --features i3-private-quic,i3-process-test-seams m9_auth_verification::m9_auth_verification_i3_tests::i3_3_accepted_four_locus_membership_successor_preserves_unretired_fresh_relation_binding -- --exact --test-threads=1
+cargo test --locked -p mir-runtime --lib --features i3-private-quic,i3-process-test-seams m9_auth_verification::m9_auth_verification_i3_tests::i3_3_source_declared_owner_membership_successor_makes_the_retained_g1_use_stale -- --exact --test-threads=1
+```
+
+Rows15/19 retained evidence rerun on provider94ad5845, with
+`CARGO_INCREMENTAL=0 CARGO_BUILD_JOBS=2` for both commands:
+
+```text
+cargo test --locked -p mir-runtime --test sys5_i3_admission_policy -- --test-threads=1
+cargo test --locked -p mir-runtime --features i3-private-quic,i3-process-test-seams --test sys5_i3_process_runtime g2_private_image_decoder_rejects_non_reference_only_carrier_contract_before_candidate_start -- --test-threads=1
+```
+
 Final ProviderStage3 gates (sole evaluator, `CARGO_INCREMENTAL=0`,
 `CARGO_BUILD_JOBS=2`,10 GiB pre-command floor):
 
@@ -549,6 +638,173 @@ CARGO_INCREMENTAL=0 CARGO_BUILD_JOBS=2 cargo test --locked -p mir-runtime --test
 ```
 
 ## Evidence / outputs / test results
+
+The final row13 packet
+`/tmp/c3-i3-3-row13-followup-20260909.xL6AvO/` is GREEN: same-cohort/reader
+wrong-kind-then-genuine ACK ratchet1/1, actual member-process profiles2/2,
+format and scoped all-target Clippy with warnings denied. Runtime feature-union
+all-targets passes (elapsed3:49.01): library413, process68, M10conformance67,
+I2CLI8/local5, request lifecycle bounded model3, provider export guards5,
+admission policy2 and all other target summaries. These overlapping suites
+are not summed or promoted to a new general proof. Probe all-targets passes
+(elapsed1:38.59): ordinary43, provider20, library3, frame28, static8, source6,
+observer2, supervisor2 and each transport/comparison singleton. Parent
+inspected the actual all-target result summaries. Final free space is
+15,479,324,672bytes; no cleanup occurred. The repaired docs rerun completes
+successfully by `2026-09-09T07:31:40+09:00`: configs, index216,
+hierarchy800/800 and1760report scaffolds. Final snapshot synchronization still
+requires its own check before integration. Whole-workspace and whole-I3-3
+acceptance remain later gates after row20; no new Lean/proof claim is made.
+
+Intermediate Clippy failures were bounded and repaired: private SYS4 pending
+stage size/8-argument binding helper in `abZXM8/02-clippy.log`, then the new
+probe helpers' large shared error in `OAfgHk/02-clippy.log`. Private boxing and
+a borrowed input struct retain the same hash domain/field order. The reviewed
+opaque-error repair supersedes shared error reuse; no global lint suppression
+or authority/admission weakening was used.
+
+An intermediate `make docs` passes agent configuration, Canon index216 and
+source hierarchy800/800, but fails the snapshot-header check: `progress.md`
+still said05:31 while its existing latest log was05:35. Parent corrects the
+header using the actual `2026-09-09 07:18 JST` command timestamp and adds the
+narrow membership checkpoint without claiming broad acceptance. A fresh
+complete docs pass is still required.
+
+Row13's qualified narrow packet is GREEN, not yet broad/milestone acceptance.
+`/tmp/c3-i3-3-row13-qualified-20260909.zwOp30/01-m9-i3-module.log` selects
+and passes5M9 tests (408filtered,29.15s). The completed packet
+`/tmp/c3-i3-3-row13-qualified-final-20260909.yrimPA/` records4/4SYS5
+membership tests (64filtered,2.61s), the genuine unretired-G1 two-process
+QUIC positive1/1 (42filtered,6.29s), and the retained-G1 carrier against
+installed-G2 two-process negative1/1 (42filtered,1.17s). Parent inspected
+the actual logs by `2026-09-09T07:10:38+09:00`. SYS5 covers real qualified
+install/typed ACK/registered parent publication, capability-route kind
+separation, restored-membership rejection and wrong-kind genuine capability
+ACK. The probe uses opaque slot-only completion with private facts and strict
+natural exit/reap/rebind; it does not export a retired semantic observer's
+fault DTO. LOCAL M9 `StaleMembership` and network `CarrierAdmissionRejected`
+precedence remain distinct claims. Post-packet free space is15,612,821,504bytes.
+
+Intermediate compile/selection corrections are not behavioral evidence:
+`zwOp30/02-sys5-membership.log` failed E0599 because the test used the runtime
+error enum rather than the existing localnet-control `StartBindingRejected`;
+`/tmp/c3-i3-3-row13-qualified-resume-20260909.HbEs4V/02-unretired-g1-probe.log`
+failed E0308 because a logical-path helper received a string instead of the
+physical `Path`. Both repairs preserve existing contracts. The earlier
+`source_declared_membership` filter selected only two negatives, not the new
+positive/kind-separation pair; the final `membership` filter demonstrably
+selects all four. Temporary diagnostic APIs/tests are removed. Generic
+restriction non-weakening is source review plus existing generic-start
+coverage, not a newly added direct restriction test or new harness. Scoped
+broad quality/regression and independent review now follow; row20 and whole
+I3-3 acceptance remain outstanding.
+
+The third `agEKKv` gate remains RED:1selected failure/67filtered,29.15s,
+15,641,387,008bytes free. Source/log inspection distinguishes its two
+assertions: `SuccessorStaticRestrictionRejected` is successfully matched
+first; the later nonmutation assertion incorrectly assumes an initial
+publication outcome of `None`, whereas the genuine cohort retains
+`Some(NoPrestageSelected)`. Thus the static restriction is now an observed
+stop, although the whole diagnostic test does not pass. Both temporary
+diagnostic tests are removed in favor of permanent positive/falsifier tests.
+Parent releases the planner-reviewed conditional qualified-withdrawal route
+recorded in Plan250, preserving ordinary/generic/capability admission and
+requiring complete restricted M9/M8 exact-delta checks. The source-selected
+WorldAuthority profile does not generalize network anchor retirement.
+
+The minimal fresh-binding repair passes both LOCAL M9 gates in
+`/tmp/c3-i3-3-row13-fresh-binding-20260909.agEKKv/`: the accepted four-locus
+test selects/passes1 (411filtered,28.08s), and the retained-G1-use test
+selects/passes1 (411filtered,0.06s). Parent inspected both actual logs at
+`2026-09-09T06:48:48+09:00`. The permanent four-locus test requires a genuine
+nonempty `bird_follow` binding and checks exact G1-minus-selected equality;
+it also validates the genuinely issued old owner use as `StaleMembership`
+against G2. This is neither SYS5 successor installation nor actual network
+completion. Post-second-test free space is15,641,559,040bytes.
+
+The fixed-label refinement identifies `FreshRelationBindingsRejected` in
+`/tmp/c3-i3-3-row13-m9-label-rerun-20260909.gzgscr/cargo.log`:1selected
+deliberate failure/67filtered,29.02s,15,647,485,952bytes free. Parent inspected
+the log at `2026-09-09T06:43:10+09:00` and checked both production callers.
+Fresh M9 translation initializes the fresh-reacquire binding map empty,
+whereas finite-local G1 admission seals genuine bindings into it; retirement
+preserved other history but failed to carry this map before removing the
+selected primary's entries. Thus an unrelated binding was lost. The released
+minimal repair retains the exact prior map before the existing M9-selected
+removals, paired with an independent genuine four-locus M9 regression.
+No grant is reissued, exact-delta checks are not weakened, and generic
+restriction/restore behavior remains outside this repair. Diagnostic RED is
+not positive execution evidence.
+
+The next enum-only, deliberately failing diagnostic isolates M9's first stop
+as `ExactDeltaRejected`, not retirement, translation, or successor-shape
+construction. `/tmp/c3-i3-3-row13-m9-first-stop-rerun-20260909.meyoi7/cargo.log`
+records1selected failure/67filtered, elapsed28.96s, with compilation successful
+and15,651,504,128bytes free afterward; parent inspected it at
+`2026-09-09T06:34:05+09:00`. Its preceding run
+`/tmp/c3-i3-3-row13-m9-first-stop-20260909.xaRI2s/cargo.log` failed to compile
+(E0631/E0282 in diagnostic-only borrowed/owned mapping), and the bounded
+repair changed no admission predicate. Neither deliberate diagnostic failure
+is acceptance evidence. The current consumer is to identify the exact
+predicate mismatch against genuine four-locus translation before changing
+behavior; generic admission and qualified withdrawal remain unchanged.
+
+The dedicated diagnosis falsifies the hypothesized earliest failure stage.
+`/tmp/c3-i3-3-row13-prestage-diagnostic-20260909.FfsLPV/cargo.log` selects1
+test and fails (66filtered): actual `M9ProducerRejected`, expected
+`SuccessorStaticRestrictionRejected`. Parent inspects the actual log at
+`2026-09-09T06:26:52+09:00` and corrects the user-facing attribution. The
+generic restriction's live-use requirement is a static potential later
+obstacle, not the observed first cause. Planner's conservative qualified-
+withdrawal advice remains conditional; no such behavior repair is released
+until M9's earlier rejection is isolated. The original positive tests remain
+unchanged. Post-gate free space is15,653,003,264bytes; one unused diagnostic
+`slot_name` warning remains, and no network test runs.
+
+First row13 joint packet is not GREEN. In
+`/tmp/c3-i3-3-row13-joint-20260909.cfUrbV/`, M9/M8 remains1/1 GREEN, but
+SYS5 membership tests select2 and produce1pass/1failure (64filtered).
+`i3_3_genuine_capability_ack_cannot_complete_source_declared_membership_successor`
+fails at the genuine four-locus membership prestage, before reaching its ACK
+negative: `LifecyclePrestageRejected` at test line1674. The restored-membership
+negative's pass is not yet persuasive counterevidence while its unmodified
+positive cannot stage. No probe test runs after this failure. Parent reads the
+actual log at `2026-09-09T06:16:43+09:00` and releases only bounded runtime
+diagnosis/repair, not a weaker check or inverted positive. New unused private
+alias/getter warnings are also identified for removal after the frozen gate.
+Post-packet free space is15,656,157,184bytes.
+
+Row13 initial independent tests reach behavioral RED before implementation.
+`/tmp/c3-i3-3-row13-initial-red-20260909.f5tyCF/cargo.log` records the LOCAL
+M9 checked-source test0/1 (410filtered), rejecting at the fail-closed stage
+with `InvalidMembershipLineage`, not a compiler gap. The first probe filter
+used the runner spelling and selected0 tests; that is a command-selection
+error, never GREEN. Corrected filter `member_successor_conformance` in
+`/tmp/c3-i3-3-row13-probe-red-corrected-20260909.GXEPZk/cargo.log` selects both
+ordinary-probe tests and both fail at their required opaque-success assertion
+with `LifecycleRejected` (0/2,41filtered). Generic default audit fields in
+that scaffold error do not establish actual child activity or failure phase.
+Parent reads the logs and releases bounded production behavior only after
+these actual assertions fail. Post-packet free space is15,682,404,352bytes.
+
+The first implemented M9/M8 slice then passes the same LOCAL test1/1
+(410filtered), log
+`/tmp/c3-i3-3-row13-m9m8-green-20260909.iKc9DZ/cargo.log`, elapsed27.58s.
+Parent inspects the actual result before releasing downstream custody/install
+work. This is a minimal checked-owner fixture using the genuine M9 issuer and
+existing M8 validation, not the accepted four-locus cohort, actual child install
+or network success. Those remain required. Post-gate free space is
+15,672,676,352bytes; no source cleanup or broad test is performed.
+
+Rows15/19 reuse packet on provider94ad5845 (only LAB docs dirty) is GREEN,
+parent log inspection `2026-09-09T05:36:46+09:00`:
+`/tmp/c3-i3-3-row15-row19-reuse-20260909.LfP0Dn/` records policy2/2 and the exact
+private-image redaction test1/1 (63filtered). Policy evidence is LOCAL
+pre-issuance/preactivation; redaction evidence is private image rejection
+before candidate start, not dynamic network policy or new visibility semantics.
+The default-feature policy build emits28 existing unused/dead-code warnings;
+this is not warning-clean default Clippy. Post-packet free space is
+15,689,998,336bytes. No cleanup or broad build was performed for this packet.
 
 Final ProviderStage3 post-review gates are GREEN. The P2 packet
 `/tmp/c3-stage3-p2-green-20260909.3ps1Q2/` contains fresh library410/410
@@ -3454,12 +3710,10 @@ by this advice; provider/time remain OPEN and I3-4 remains inactive.
 
 ## Suggested next prompt
 
-After verified provider component commit/push/parity, continue I3-3 row13:
-genuine source-checked owner-membership successor using the existing A-to-B
-`init_avatar_hp` route, with distinct exact-delta validation/qualified ACK and
-no renewed retired authority. Preserve old-carrier rejection precedence and
-pair actual network evidence with LOCAL membership classification. Reuse
-row15/19 evidence, then complete row20 runtime/adapter cut obligations and
+Integrate the verified row13 membership component after final synchronized docs,
+commit/push/parity. Preserve its old-carrier rejection precedence and separate
+LOCAL membership classification. Reuse row15/19 evidence, then complete row20
+runtime/adapter cut obligations with actual complete custody and
 remaining ordering. Close all twenty families and whole-I3-3 validation,
 independent acceptance, commit/push/parity, then honor the owner pause.
 I3-4 remains inactive; the paused product goal is unchanged.
@@ -3628,6 +3882,21 @@ The C1/C2 update now points to its actual library test command and preserves
 the no-new-network-sample/non-workflow classification.
 
 ## Reviewer findings and follow-up
+
+Row13 final independent review (`c3_quality_review`) reports P0/P1/P2=0 after
+two resolved P2 findings. First, wrong-kind ACK rejection now proves the same
+membership cohort, registered reader and B UnixStream subsequently complete
+genuine member install/ACK/G2 publication, rather than merely remaining G1.
+Second, the two new doc-hidden conformance runners return a fieldless opaque
+error instead of falsely reporting `BeforeOwnerStart` after an install or
+ACK. No stage/activity/semantic getters, retired-observer DTO or invented
+counters are exposed; success still requires actual private facts, both slot
+terminals, qualified publication and strict natural zero-exit/reap/rebind.
+Fresh focused and all-target evidence above validates both repairs. The
+review accepts only this finite row13 integration, not general membership,
+row20, whole-I3-3, public wire/API or production. A separate Canon-first
+planner pre-snapshot check gives GO for verified/integrating row13 and pending
+row20, preserving six-of-eleven milestone count and I3-3 as sole active.
 
 Provider Stage3 final independent review: P0/P1/P2=0 after the reproduced P2
 network-mode audit/budget guard repair. The current supported runner was already
@@ -4478,6 +4747,21 @@ product realization remain outside this bounded milestone.
 
 ## Commit / push status
 
+Row13 runtime/probe all-target gates, format, scoped Clippy and independent
+review are green in the final follow-up packet. Seventeen task-owned tracked
+paths are prepared for integration; final synchronized docs, commit/push and
+live parity remain to be observed. No future hash or push success is claimed.
+
+Provider Stage3 is committed and pushed as
+`94ad584577fadfd0b016ff798a22b84df536939f`
+(`feat: execute checked provider effects across QUIC processes`). Clean
+HEAD/origin/main/live-main parity was observed at
+`2026-09-09T05:21:50+09:00`; this supersedes the pre-commit gate below.
+The row13 membership consumer starts from this cut, with no user source edits
+and approximately16GiB free at `2026-09-09T05:30:26+09:00`. No further cleanup
+was performed. I3-3 remains active; I3-4 remains inactive and the owner stop
+still follows whole-I3-3 acceptance, not this component checkpoint.
+
 ProviderStage3 final synchronized docs gate passes at
 `2026-09-09T05:19:58+09:00` (agent config,216 Canon entries,800/800 hierarchy,
 1760-report scaffold). Parent accepts this finite source/evidence component
@@ -4665,7 +4949,14 @@ This is the fifth source checkpoint inside I3-3, not milestone acceptance.
 
 ## Sub-agent session close status
 
-Current provider Stage 3: independent planner, mapper and Oracle have returned
+Current row13: production and test authors, evaluator, status writer and
+independent reviewer have completed their bounded work. Parent owns final
+integration and Git. The planner's row20 Oracle consultation is complete;
+source-backed custody planning remains advisory while row13 is integrated.
+Contexts are retained for the remaining I3-3 work. No row13 implementation or
+review remains pending; row20 is not implemented or accepted.
+
+Historical provider Stage 3 pre-final-gate checkpoint: independent planner, mapper and Oracle have returned
 bounded advisory results. The actual provider full probe20 and runtime
 18/7/9 focused packet pass after the two-session/normal-v2 repairs recorded
 above. c3_eval remains sole Cargo executor. c3_quality_review owns the

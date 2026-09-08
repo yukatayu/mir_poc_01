@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-09-09 05:16 JST
+最終更新: 2026-09-09 07:33 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -63,9 +63,12 @@ Accepted inactive provider handoff: `a027d61b8030a903f892de2f7483ec8b64627963`.
 Stage3 now executes genuine FD3-installed A/B children, checked provider requests,
 bounded host reads, current-authority result consumption and normal M9-authorized
 v2 joined observation over real QUIC. After the review repair, runtime library
-410/410 and all probe targets pass, including ordinary localnet41/provider20;
+413/413 and all probe targets pass, including ordinary localnet43/provider20 and process68;
 scoped all-target Clippy and format pass. Independent review has no remaining
-P0/P1/P2. Final component integration and its exact Git cut remain in Report2606.
+P0/P1/P2. Row13 verifies source-derived WorldAuthority membership retirement with
+full-parent M9 and qualified restricted-child G1→G2 coverage; old-G1
+CarrierAdmissionRejected is before owner use and LOCAL genuine M8 StaleMembership
+is separate. No observer renewal, grant mint or session authority follows.
 
 Four actual two-session fault profiles use child-private assertions and generic
 completion only, not exported fault traces. The lost-result case receives and
@@ -75,8 +78,12 @@ evidence, not an actual OS operational-error claim. B64+A65 is a finite bound,
 not independent B65 or global exactly-once. Supported live provider cut/export
 and public interfaces are not claimed.
 
-After provider integration, rows13/15/19/20, ordering and whole-I3-3 acceptance
-remain. Six of eleven milestones are accepted; I3-3 is the sole active milestone.
+Finite provider component is committed/pushed at `94ad584577fadfd0b016ff798a22b84df536939f`,
+with clean HEAD/origin/main/live parity observed 2026-09-09 05:21 JST. Unrelated
+relation bindings remain exact; terminal errors are fieldless opaque/slot-only,
+including wrong-kind ACK then valid publication. Row15/19 evidence reuse, row20
+cut/order and whole-I3-3 acceptance remain. Six of eleven milestones are accepted;
+I3-3 is the sole active milestone.
 Stop only after its full validation/review/commit/push/parity; I3-4 stays inactive.
 
 | Axis | Current status | Startability |
@@ -258,10 +265,10 @@ unsupported-legacy-handoff portion of ADR-0042/spec/17 (not current Stage2b):
 Logs, earlier AST/M6/M7/time regressions and final docs/Git state are in Report
 2606. Historical Stage2b sample was an incomplete local effect-authorization prototype with
 partial local authorization, not an M5/Lean clean-runner registration or
-executable provider workflow. No accepted host invocation, supervisor
+executable provider workflow. At that historical checkpoint, no host invocation, supervisor
 availability, row-18 acceptance, new Lean/general proof or I3 lifecycle is
 claimed. Remaining rows 13/15/19/20, ordering, and whole-I3-3 validation remain
-required. Latest measured free disk is 30,906,707,968 bytes (~28.78 GiB); the
+required. At2026-09-09 05:30 JST, measured free disk is approximately16GiB; the
 10 GiB guard has no current capacity hold. Older lower-disk readings remain
 historical only.
 
@@ -414,7 +421,14 @@ then stop with Plan 250 retained and I3-4 inactive.
   HEAD/origin/main/live parity at 15:41:54 JST. Stage 2b actual resource binding,
   M9 composite authorization and inactive scoped M8 are current; no invocation,
   I3-3 acceptance or I3-4 activation.
-- 2026-09-09 05:16 JST: ProviderStage3 final post-review library410, all probe targets
+- 2026-09-09 05:16 JST (superseded pre-row13 packet): ProviderStage3 final post-review library410, all probe targets
   (provider20/ordinary41), process64, M10/I2/guards, scoped Clippy/format pass;
-  P2 mode/budget separation repaired and review clear. Component docs/Git
-  integration follows; membership/cut/order and whole-I3-3 acceptance remain.
+  P2 mode/budget separation repaired and review clear. Component integration gate
+  is met; membership/cut/order and whole-I3-3 acceptance remain.
+- 2026-09-09 05:35 JST: Provider component `94ad5845` is committed/pushed with
+  clean live parity observed at05:21 JST; genuine membership retirement is the
+  next active I3-3 consumer. I3-4 remains inactive.
+- 2026-09-09 07:33 JST: Row13 source-derived WorldAuthority membership retirement
+  gates pass with runtime413/process68 and probe provider20/ordinary43; full-parent
+  M9 plus restricted-child G1→G2 and old-G1 pre-owner rejection are covered.
+  Row20 cut/order and whole-I3-3 acceptance remain; no I3-4 activation.

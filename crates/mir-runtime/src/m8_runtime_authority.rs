@@ -434,6 +434,59 @@ impl M8AuthorityState {
         self == &expected
     }
 
+    /// Exact M8 half of one source-declared membership retirement.
+    ///
+    /// M8 holds only the translated, currently usable inventory.  It does
+    /// not claim to retain the parent M9 tombstone; that remains an
+    /// M9-only fact.  The one permitted M8 delta removes the selected
+    /// membership and every grant/witness bound to it, while every unrelated
+    /// admitted record stays byte-for-byte equivalent.
+    pub(crate) fn is_exact_source_declared_membership_retirement_successor_of(
+        &self,
+        prior: &Self,
+        membership_ref: Option<&str>,
+    ) -> bool {
+        let Some(membership_ref) = membership_ref else {
+            return false;
+        };
+        if !prior.memberships.contains_key(membership_ref) {
+            return false;
+        }
+
+        let mut expected = prior.clone();
+        expected.memberships.remove(membership_ref);
+        expected
+            .capability_grants
+            .retain(|_, grant| grant.membership_ref.as_deref() != Some(membership_ref));
+        expected
+            .witness_records
+            .retain(|_, witness| witness.membership_ref.as_deref() != Some(membership_ref));
+        self == &expected
+    }
+
+    /// Negative-only I3-3 tamper: restore only the selected membership record
+    /// from the genuine prior inventory. It cannot mint a membership, grant,
+    /// or witness and is compiled only for the exact-delta falsifier.
+    #[cfg(feature = "i3-process-test-seams")]
+    pub(crate) fn test_only_restore_membership_from_prior_for_i3(
+        &mut self,
+        prior: &Self,
+        membership_ref: Option<&str>,
+    ) -> bool {
+        let Some(membership_ref) = membership_ref else {
+            return false;
+        };
+        let Some(membership) = prior.memberships.get(membership_ref) else {
+            return false;
+        };
+        if self.memberships.contains_key(membership_ref) {
+            return false;
+        }
+        self.memberships
+            .insert(membership_ref.to_string(), membership.clone());
+        true
+    }
+
     /// Negative-only I3-3 tamper: restore only the selected, genuinely prior
     /// active capability into the successor's otherwise omitted M8 inventory.
     /// It cannot construct a new grant or alter an unrelated record.

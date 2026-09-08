@@ -112,10 +112,12 @@ use crate::{
     sys3_projection::{BackendProfile, CommunicationEdgeKind},
     sys4_dispatch::{
         FabricProgram, LocalFabric, LocusStep, ObserverSafeM9SemanticRowSets,
-        SealedFabricAdmission, SourceAction, Sys4I3InstalledOwnerCapabilitySuccessorReceipt,
-        Sys4I3OwnerCapabilitySuccessorCoordinator, Sys4I3OwnerRequestRevalidationFailure,
-        Sys4I3PendingOwnerRequestBinding, Sys4I3PrivateProcessCarrierSnapshot,
-        Sys4I3RestrictedOwnerCapabilitySuccessor, Sys4I3ValidatedOwnerReply,
+        SealedFabricAdmission, SourceAction, Sys4I3AuthoritySuccessorCoordinator,
+        Sys4I3InstalledOwnerCapabilitySuccessorReceipt,
+        Sys4I3InstalledSourceDeclaredOwnerMembershipSuccessorReceipt,
+        Sys4I3OwnerRequestRevalidationFailure, Sys4I3PendingOwnerRequestBinding,
+        Sys4I3PrivateProcessCarrierSnapshot, Sys4I3RestrictedOwnerCapabilitySuccessor,
+        Sys4I3RestrictedSourceDeclaredOwnerMembershipSuccessor, Sys4I3ValidatedOwnerReply,
         Sys4InactiveProviderAdmission, Sys4InactiveProviderRestrictedAdmission,
         Sys4InstalledProviderLocalFabric, Sys4ProcessCarrier,
     },
@@ -123,7 +125,9 @@ use crate::{
 };
 
 #[cfg(feature = "i3-process-test-seams")]
-use crate::sys4_dispatch::Sys4I3OwnerCapabilitySuccessorTamper;
+use crate::sys4_dispatch::{
+    Sys4I3OwnerCapabilitySuccessorTamper, Sys4I3SourceDeclaredOwnerMembershipSuccessorTamper,
+};
 
 /// Typed, fail-closed outcomes for the provisional I3-2 process seam.
 #[doc(hidden)]
@@ -376,6 +380,17 @@ pub enum Sys5I3OwnerCapabilitySuccessorTamper {
     AddUnrelatedOwnerLineage,
     ReanimateSelectedCapability,
     ReanimateSelectedWitness,
+}
+
+/// Feature-only negative selector for the M9-produced membership candidate.
+/// It restores no caller-selected fact: SYS-4 copies only the genuine G1
+/// membership record so the exact-delta predicate can reject it before image
+/// install.
+#[cfg(feature = "i3-process-test-seams")]
+#[doc(hidden)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+pub enum Sys5I3SourceDeclaredOwnerMembershipSuccessorTamper {
+    RestoreSelectedMembership,
 }
 
 /// The owner-local duplicate guard's state.  It is narrower than the I3-3
@@ -1200,11 +1215,29 @@ struct Sys5I3PrestagedOwnerCapabilityLifecycle {
     candidate: Sys4I3RestrictedOwnerCapabilitySuccessor,
 }
 
+/// Tainted image-carried material for the distinct membership successor. It
+/// stays separate from the owner-capability lifecycle all the way through the
+/// private image/control correspondence and has no issuer.
+struct Sys5I3PrestagedSourceDeclaredOwnerMembershipLifecycle {
+    target_slot_name: String,
+    stage_identity_binding_ref: String,
+    candidate: Sys4I3RestrictedSourceDeclaredOwnerMembershipSuccessor,
+}
+
 /// Observer-safe portion of the parent-held lifecycle expectation.  It is
 /// separately transported on trusted bootstrap control and therefore cannot
 /// be reconstructed from an image candidate alone.
 #[derive(Debug, Clone, PartialEq, Eq)]
 struct Sys5I3ExpectedOwnerCapabilityLifecycle {
+    target_slot_name: String,
+    stage_identity_binding_ref: String,
+    prior_generation_ref: String,
+    successor_generation_ref: String,
+    candidate_binding_ref: String,
+}
+
+#[derive(Debug, Clone, PartialEq, Eq)]
+struct Sys5I3ExpectedSourceDeclaredOwnerMembershipLifecycle {
     target_slot_name: String,
     stage_identity_binding_ref: String,
     prior_generation_ref: String,
@@ -1221,6 +1254,15 @@ pub struct Sys5I3AdmittedLifecycleStimulus {
     candidate: Sys4I3RestrictedOwnerCapabilitySuccessor,
 }
 
+/// One-use B-local membership stimulus. Its candidate type is distinct from
+/// the capability stimulus, so matching control fields cannot switch the
+/// lifecycle meaning after image/control correspondence.
+#[doc(hidden)]
+pub struct Sys5I3AdmittedSourceDeclaredOwnerMembershipLifecycleStimulus {
+    stage_identity_binding_ref: String,
+    candidate: Sys4I3RestrictedSourceDeclaredOwnerMembershipSuccessor,
+}
+
 /// B's post-install receipt wrapper.  It is intentionally opaque and
 /// non-cloneable: future ACK emission consumes the SYS-4 receipt rather than
 /// candidate fields or observer output.
@@ -1230,11 +1272,29 @@ pub struct Sys5I3OwnerLifecycleInstallAck {
     receipt: Sys4I3InstalledOwnerCapabilitySuccessorReceipt,
 }
 
+/// B's opaque post-install ACK material for the membership lifecycle. The
+/// dedicated encoder consumes this type; a capability receipt is not
+/// serializable on this route.
+#[doc(hidden)]
+pub struct Sys5I3SourceDeclaredOwnerMembershipLifecycleInstallAck {
+    stage_identity_binding_ref: String,
+    receipt: Sys4I3InstalledSourceDeclaredOwnerMembershipSuccessorReceipt,
+}
+
 /// Parent-only, non-cloneable registration derived while the exact B
 /// candidate is staged.  It is intentionally not exposed to callers: the
 /// cohort moves it directly into the owned actual-B Unix-stream reader.
 #[cfg(all(unix, feature = "i3-process-test-seams"))]
 struct Sys5I3RegisteredOwnerLifecycleAckRegistration {
+    target_slot_name: String,
+    stage_identity_binding_ref: String,
+    prior_generation_ref: String,
+    successor_generation_ref: String,
+    candidate_binding_ref: String,
+}
+
+#[cfg(all(unix, feature = "i3-process-test-seams"))]
+struct Sys5I3RegisteredSourceDeclaredOwnerMembershipLifecycleAckRegistration {
     target_slot_name: String,
     stage_identity_binding_ref: String,
     prior_generation_ref: String,
@@ -1254,6 +1314,15 @@ pub struct Sys5I3RegisteredOwnerLifecycleCompletion {
     candidate_binding_ref: String,
 }
 
+#[cfg(all(unix, feature = "i3-process-test-seams"))]
+#[doc(hidden)]
+pub struct Sys5I3RegisteredSourceDeclaredOwnerMembershipLifecycleCompletion {
+    stage_identity_binding_ref: String,
+    prior_generation_ref: String,
+    successor_generation_ref: String,
+    candidate_binding_ref: String,
+}
+
 /// Dedicated I3 test-adapter reader for the inherited B→parent ACK FD.  It
 /// owns the OS stream, has no `Read`-generic/byte constructor, and can only
 /// produce a completion by bounded-reading and decoding that actual stream.
@@ -1267,6 +1336,15 @@ pub struct Sys5I3RegisteredOwnerLifecycleAckReader {
     deadline_only: bool,
 }
 
+#[cfg(all(unix, feature = "i3-process-test-seams"))]
+#[doc(hidden)]
+pub struct Sys5I3RegisteredSourceDeclaredOwnerMembershipLifecycleAckReader {
+    stream: UnixStream,
+    registration: Sys5I3RegisteredSourceDeclaredOwnerMembershipLifecycleAckRegistration,
+    deadline: Instant,
+    completion_consumed: bool,
+}
+
 struct Sys5I3OrdinaryPrivateRuntimeSeed {
     program: FabricProgram,
     admission: SealedFabricAdmission,
@@ -1276,6 +1354,8 @@ struct Sys5I3OrdinaryPrivateRuntimeSeed {
     cohort_occurrence_ref: String,
     private_snapshot_binding_ref: String,
     prestaged_owner_capability_lifecycle: Option<Sys5I3PrestagedOwnerCapabilityLifecycle>,
+    prestaged_source_declared_owner_membership_lifecycle:
+        Option<Sys5I3PrestagedSourceDeclaredOwnerMembershipLifecycle>,
 }
 
 /// The private runtime seed remains tagged through codec decode. Provider
@@ -1396,6 +1476,8 @@ pub struct Sys5I3ExpectedStartBinding {
     image_integrity_ref: String,
     private_snapshot_binding_ref: String,
     expected_owner_capability_lifecycle: Option<Sys5I3ExpectedOwnerCapabilityLifecycle>,
+    expected_source_declared_owner_membership_lifecycle:
+        Option<Sys5I3ExpectedSourceDeclaredOwnerMembershipLifecycle>,
     inactive_provider: Option<Sys5I3ExpectedInactiveProviderBinding>,
 }
 
@@ -1760,6 +1842,27 @@ impl Sys5I3ExpectedStartBinding {
                         .to_string(),
                     candidate_binding_ref: lifecycle.candidate.candidate_binding_ref().to_string(),
                 }),
+            expected_source_declared_owner_membership_lifecycle: seed
+                .prestaged_source_declared_owner_membership_lifecycle
+                .as_ref()
+                .map(
+                    |lifecycle| Sys5I3ExpectedSourceDeclaredOwnerMembershipLifecycle {
+                        target_slot_name: lifecycle.target_slot_name.clone(),
+                        stage_identity_binding_ref: lifecycle.stage_identity_binding_ref.clone(),
+                        prior_generation_ref: lifecycle
+                            .candidate
+                            .prior_generation_ref()
+                            .to_string(),
+                        successor_generation_ref: lifecycle
+                            .candidate
+                            .successor_generation_ref()
+                            .to_string(),
+                        candidate_binding_ref: lifecycle
+                            .candidate
+                            .candidate_binding_ref()
+                            .to_string(),
+                    },
+                ),
             inactive_provider: None,
         }
     }
@@ -1779,6 +1882,7 @@ impl Sys5I3ExpectedStartBinding {
             image_integrity_ref: image.private_integrity_ref.clone(),
             private_snapshot_binding_ref: String::new(),
             expected_owner_capability_lifecycle: None,
+            expected_source_declared_owner_membership_lifecycle: None,
             inactive_provider: Some(Sys5I3ExpectedInactiveProviderBinding {
                 static_snapshot: provider.static_snapshot.clone(),
                 component_snapshot: provider.component_snapshot.clone(),
@@ -1826,6 +1930,10 @@ impl Sys5I3ExpectedStartBinding {
             || self.assigned_loci != image.assigned_loci
             || self.image_integrity_ref != image.private_integrity_ref
             || self.private_snapshot_binding_ref != seed.private_snapshot_binding_ref
+            || (self.expected_owner_capability_lifecycle.is_some()
+                && self
+                    .expected_source_declared_owner_membership_lifecycle
+                    .is_some())
             || self.expected_owner_capability_lifecycle
                 != seed
                     .prestaged_owner_capability_lifecycle
@@ -1846,6 +1954,30 @@ impl Sys5I3ExpectedStartBinding {
                             .candidate_binding_ref()
                             .to_string(),
                     })
+            || self.expected_source_declared_owner_membership_lifecycle
+                != seed
+                    .prestaged_source_declared_owner_membership_lifecycle
+                    .as_ref()
+                    .map(
+                        |lifecycle| Sys5I3ExpectedSourceDeclaredOwnerMembershipLifecycle {
+                            target_slot_name: lifecycle.target_slot_name.clone(),
+                            stage_identity_binding_ref: lifecycle
+                                .stage_identity_binding_ref
+                                .clone(),
+                            prior_generation_ref: lifecycle
+                                .candidate
+                                .prior_generation_ref()
+                                .to_string(),
+                            successor_generation_ref: lifecycle
+                                .candidate
+                                .successor_generation_ref()
+                                .to_string(),
+                            candidate_binding_ref: lifecycle
+                                .candidate
+                                .candidate_binding_ref()
+                                .to_string(),
+                        },
+                    )
         {
             return Err(Sys5I3ProcessRuntimeError::new(
                 Sys5I3ProcessRuntimeErrorKind::ImageIntegrityMismatch,
@@ -1938,7 +2070,7 @@ pub struct Sys5I3ProcessCohort {
     images: BTreeMap<String, Option<Sys5I3ProcessImage>>,
     expected_start_bindings: BTreeMap<String, Option<Sys5I3ExpectedStartBinding>>,
     summary: Sys5I3ProcessCohortSummary,
-    authority_successor_coordinator: Sys4I3OwnerCapabilitySuccessorCoordinator,
+    authority_successor_coordinator: Sys4I3AuthoritySuccessorCoordinator,
     published_authority_generation_ref: String,
     lifecycle_publication_outcome: Option<Sys5I3LifecyclePublicationOutcome>,
     prestage_run_ref: Option<String>,
@@ -1946,6 +2078,11 @@ pub struct Sys5I3ProcessCohort {
     pending_owner_lifecycle_ack_registration: Option<Sys5I3RegisteredOwnerLifecycleAckRegistration>,
     #[cfg(all(unix, feature = "i3-process-test-seams"))]
     pending_owner_lifecycle_stage_identity_binding_ref: Option<String>,
+    #[cfg(all(unix, feature = "i3-process-test-seams"))]
+    pending_source_declared_owner_membership_lifecycle_ack_registration:
+        Option<Sys5I3RegisteredSourceDeclaredOwnerMembershipLifecycleAckRegistration>,
+    #[cfg(all(unix, feature = "i3-process-test-seams"))]
+    pending_source_declared_owner_membership_lifecycle_stage_identity_binding_ref: Option<String>,
 }
 
 /// Stage 2c's parent-held provider-image cohort. The actual M9 composite and
@@ -4423,7 +4560,7 @@ impl Sys5I3ProcessCohort {
         let published_authority_generation_ref =
             coordinator_admission.m9_generation_ref().to_string();
         let authority_successor_coordinator = coordinator_admission
-            .take_i3_owner_capability_successor_coordinator()
+            .take_i3_authority_successor_coordinator()
             .map_err(|_| {
                 Sys5I3ProcessRuntimeError::new(
                     Sys5I3ProcessRuntimeErrorKind::RuntimeBootstrapRejected,
@@ -4451,6 +4588,10 @@ impl Sys5I3ProcessCohort {
             pending_owner_lifecycle_ack_registration: None,
             #[cfg(all(unix, feature = "i3-process-test-seams"))]
             pending_owner_lifecycle_stage_identity_binding_ref: None,
+            #[cfg(all(unix, feature = "i3-process-test-seams"))]
+            pending_source_declared_owner_membership_lifecycle_ack_registration: None,
+            #[cfg(all(unix, feature = "i3-process-test-seams"))]
+            pending_source_declared_owner_membership_lifecycle_stage_identity_binding_ref: None,
         })
     }
 
@@ -4507,6 +4648,18 @@ impl Sys5I3ProcessCohort {
         >,
         #[cfg(not(feature = "i3-process-test-seams"))] _tamper: Option<()>,
     ) -> Result<(), Sys5I3ProcessRuntimeError> {
+        #[cfg(all(unix, feature = "i3-process-test-seams"))]
+        if self
+            .pending_source_declared_owner_membership_lifecycle_ack_registration
+            .is_some()
+            || self
+                .pending_source_declared_owner_membership_lifecycle_stage_identity_binding_ref
+                .is_some()
+        {
+            return Err(Sys5I3ProcessRuntimeError::new(
+                Sys5I3ProcessRuntimeErrorKind::LifecyclePrestageRejected,
+            ));
+        }
         if run_ref.is_empty()
             || contract.edge_ref().is_empty()
             || contract.operation_id().is_empty()
@@ -4572,6 +4725,14 @@ impl Sys5I3ProcessCohort {
                     Sys5I3ProcessRuntimeErrorKind::LifecyclePrestageRejected,
                 )
             })?;
+        if target_seed
+            .prestaged_source_declared_owner_membership_lifecycle
+            .is_some()
+        {
+            return Err(Sys5I3ProcessRuntimeError::new(
+                Sys5I3ProcessRuntimeErrorKind::LifecyclePrestageRejected,
+            ));
+        }
         #[cfg(feature = "i3-process-test-seams")]
         let staged = match tamper {
             Some(tamper) => self
@@ -4659,6 +4820,208 @@ impl Sys5I3ProcessCohort {
         Ok(())
     }
 
+    /// Select the one exact source-checked owner-request contract whose
+    /// WorldAuthority membership may retire. The selected membership and all
+    /// dependent M9 lineage are resolved only by the retained parent
+    /// publisher; no child or deployment supplies authority material.
+    pub fn prestage_source_declared_owner_membership_retirement(
+        &mut self,
+        run_ref: &str,
+        contract: &Sys5I3AdapterCarrierContract,
+    ) -> Result<(), Sys5I3ProcessRuntimeError> {
+        self.prestage_source_declared_owner_membership_retirement_inner(run_ref, contract, None)
+    }
+
+    /// Feature-only exact-delta falsifier. It never accepts membership
+    /// material from a caller; SYS-4 mutates only an M9-produced candidate.
+    #[cfg(feature = "i3-process-test-seams")]
+    #[doc(hidden)]
+    pub fn test_only_prestage_source_declared_owner_membership_retirement_with_tamper(
+        &mut self,
+        run_ref: &str,
+        contract: &Sys5I3AdapterCarrierContract,
+        tamper: Sys5I3SourceDeclaredOwnerMembershipSuccessorTamper,
+    ) -> Result<(), Sys5I3ProcessRuntimeError> {
+        self.prestage_source_declared_owner_membership_retirement_inner(
+            run_ref,
+            contract,
+            Some(tamper),
+        )
+    }
+
+    fn prestage_source_declared_owner_membership_retirement_inner(
+        &mut self,
+        run_ref: &str,
+        contract: &Sys5I3AdapterCarrierContract,
+        #[cfg(feature = "i3-process-test-seams")] tamper: Option<
+            Sys5I3SourceDeclaredOwnerMembershipSuccessorTamper,
+        >,
+        #[cfg(not(feature = "i3-process-test-seams"))] _tamper: Option<()>,
+    ) -> Result<(), Sys5I3ProcessRuntimeError> {
+        #[cfg(all(unix, feature = "i3-process-test-seams"))]
+        if self.pending_owner_lifecycle_ack_registration.is_some()
+            || self
+                .pending_owner_lifecycle_stage_identity_binding_ref
+                .is_some()
+        {
+            return Err(Sys5I3ProcessRuntimeError::new(
+                Sys5I3ProcessRuntimeErrorKind::LifecyclePrestageRejected,
+            ));
+        }
+        if run_ref.is_empty()
+            || contract.edge_ref().is_empty()
+            || contract.operation_id().is_empty()
+            || contract.source_locus().is_empty()
+            || contract.target_locus().is_empty()
+            || contract.edge_kind() != "owner-request"
+            || contract.checked_program_ref() != self.summary.parent_checked_program_ref
+            || contract.full_retained_contract_fingerprint().is_empty()
+            || !contract.checked_core_bound()
+            || contract.transfers_authority()
+            || contract.mints_authority_without_source()
+            || self.lifecycle_publication_outcome.is_none()
+            || self.prestage_run_ref.is_some()
+            || !self.expected_start_bindings.values().all(Option::is_some)
+            || self.images.values().any(Option::is_none)
+        {
+            return Err(Sys5I3ProcessRuntimeError::new(
+                Sys5I3ProcessRuntimeErrorKind::LifecyclePrestageRejected,
+            ));
+        }
+        let matching_slots = self
+            .images
+            .iter()
+            .filter_map(|(slot_name, image)| {
+                let image = image.as_ref()?;
+                (image.assigned_loci.contains(contract.target_locus())
+                    && image.required_edge_contracts.iter().any(|candidate| {
+                        candidate.edge_ref == contract.edge_ref()
+                            && candidate.operation_id == contract.operation_id()
+                            && candidate.kind == contract.edge_kind()
+                            && candidate.source_locus == contract.source_locus()
+                            && candidate.target_locus == contract.target_locus()
+                            && candidate.core_ref == contract.core_ref()
+                            && candidate.source_artifact_ref == contract.source_artifact_ref()
+                            && candidate.target_artifact_ref == contract.target_artifact_ref()
+                            && candidate.parent_checked_program_ref
+                                == contract.checked_program_ref()
+                    }))
+                .then(|| slot_name.clone())
+            })
+            .collect::<Vec<_>>();
+        let [target_slot_name] = matching_slots.as_slice() else {
+            return Err(Sys5I3ProcessRuntimeError::new(
+                Sys5I3ProcessRuntimeErrorKind::LifecyclePrestageRejected,
+            ));
+        };
+        let target_slot_name = target_slot_name.clone();
+        let target_image = self
+            .images
+            .get(&target_slot_name)
+            .and_then(Option::as_ref)
+            .ok_or_else(|| {
+                Sys5I3ProcessRuntimeError::new(
+                    Sys5I3ProcessRuntimeErrorKind::LifecyclePrestageRejected,
+                )
+            })?;
+        let target_seed = target_image
+            .private_runtime_seed
+            .ordinary()
+            .ok_or_else(|| {
+                Sys5I3ProcessRuntimeError::new(
+                    Sys5I3ProcessRuntimeErrorKind::LifecyclePrestageRejected,
+                )
+            })?;
+        if target_seed.prestaged_owner_capability_lifecycle.is_some()
+            || target_seed
+                .prestaged_source_declared_owner_membership_lifecycle
+                .is_some()
+        {
+            return Err(Sys5I3ProcessRuntimeError::new(
+                Sys5I3ProcessRuntimeErrorKind::LifecyclePrestageRejected,
+            ));
+        }
+        #[cfg(feature = "i3-process-test-seams")]
+        let staged = match tamper {
+            Some(Sys5I3SourceDeclaredOwnerMembershipSuccessorTamper::RestoreSelectedMembership) => {
+                self.authority_successor_coordinator
+                    .test_only_prestage_source_declared_owner_membership_retirement_with_tamper(
+                    &target_seed.program,
+                    &target_seed.admission,
+                    contract.operation_id(),
+                    contract.target_locus(),
+                    Sys4I3SourceDeclaredOwnerMembershipSuccessorTamper::RestoreSelectedMembership,
+                )
+            }
+            None => self
+                .authority_successor_coordinator
+                .prestage_source_declared_owner_membership_retirement(
+                    &target_seed.program,
+                    &target_seed.admission,
+                    contract.operation_id(),
+                    contract.target_locus(),
+                ),
+        };
+        #[cfg(not(feature = "i3-process-test-seams"))]
+        let staged = self
+            .authority_successor_coordinator
+            .prestage_source_declared_owner_membership_retirement(
+                &target_seed.program,
+                &target_seed.admission,
+                contract.operation_id(),
+                contract.target_locus(),
+            );
+        let candidate = staged.map_err(|_| {
+            Sys5I3ProcessRuntimeError::new(Sys5I3ProcessRuntimeErrorKind::LifecyclePrestageRejected)
+        })?;
+        let stage_identity_binding_ref =
+            source_declared_owner_membership_lifecycle_stage_identity_binding_ref(
+                run_ref,
+                target_image,
+                &candidate,
+            );
+        #[cfg(all(unix, feature = "i3-process-test-seams"))]
+        let ack_registration =
+            Sys5I3RegisteredSourceDeclaredOwnerMembershipLifecycleAckRegistration {
+                target_slot_name: target_slot_name.clone(),
+                stage_identity_binding_ref: stage_identity_binding_ref.clone(),
+                prior_generation_ref: candidate.prior_generation_ref().to_string(),
+                successor_generation_ref: candidate.successor_generation_ref().to_string(),
+                candidate_binding_ref: candidate.candidate_binding_ref().to_string(),
+            };
+        let image = self
+            .images
+            .get_mut(&target_slot_name)
+            .and_then(Option::as_mut)
+            .expect("target image remained parent-held during membership prestage");
+        let seed = image.private_runtime_seed.ordinary_mut().ok_or_else(|| {
+            Sys5I3ProcessRuntimeError::new(Sys5I3ProcessRuntimeErrorKind::LifecyclePrestageRejected)
+        })?;
+        seed.prestaged_source_declared_owner_membership_lifecycle =
+            Some(Sys5I3PrestagedSourceDeclaredOwnerMembershipLifecycle {
+                target_slot_name: target_slot_name.clone(),
+                stage_identity_binding_ref: stage_identity_binding_ref.clone(),
+                candidate,
+            });
+        image.refresh_private_integrity();
+        let expected_start_binding = Sys5I3ExpectedStartBinding::for_image(image);
+        let expected = self
+            .expected_start_bindings
+            .get_mut(&target_slot_name)
+            .expect("image and start-binding slot inventories are constructed together");
+        *expected = Some(expected_start_binding);
+        self.lifecycle_publication_outcome = None;
+        self.prestage_run_ref = Some(run_ref.to_string());
+        #[cfg(all(unix, feature = "i3-process-test-seams"))]
+        {
+            self.pending_source_declared_owner_membership_lifecycle_ack_registration =
+                Some(ack_registration);
+            self.pending_source_declared_owner_membership_lifecycle_stage_identity_binding_ref =
+                Some(stage_identity_binding_ref);
+        }
+        Ok(())
+    }
+
     /// Consume two parent-held bootstrap bindings only after exact pre-stage.
     /// The control pair contains the lifecycle expectation independently of
     /// the tainted image; it carries no publisher and grants no child issuer.
@@ -4676,6 +5039,68 @@ impl Sys5I3ProcessCohort {
     > {
         if self.lifecycle_publication_outcome.is_some()
             || self.prestage_run_ref.as_deref() != Some(run_ref)
+            || first_slot_name.is_empty()
+            || second_slot_name.is_empty()
+            || first_slot_name == second_slot_name
+            || first_spki_ref.is_empty()
+            || second_spki_ref.is_empty()
+        {
+            return Err(Sys5I3ProcessRuntimeError::new(
+                Sys5I3ProcessRuntimeErrorKind::LifecyclePrestageRejected,
+            ));
+        }
+        let first = self.parent_held_expected_start_binding(first_slot_name)?;
+        let second = self.parent_held_expected_start_binding(second_slot_name)?;
+        codec
+            .split_trusted_localnet_controls(
+                run_ref,
+                first,
+                first_spki_ref,
+                second,
+                second_spki_ref,
+            )
+            .map_err(|_| {
+                Sys5I3ProcessRuntimeError::new(
+                    Sys5I3ProcessRuntimeErrorKind::LifecyclePrestageRejected,
+                )
+            })
+    }
+
+    /// Consume the two parent-held bootstrap bindings only for the distinct
+    /// source-declared membership lifecycle. The ordinary/capability splitter
+    /// cannot be used to make this selected membership stage implicit.
+    pub fn split_trusted_localnet_controls_with_prestaged_source_declared_owner_membership_lifecycle(
+        &mut self,
+        codec: &Sys5I3PrivateProcessCodec,
+        run_ref: &str,
+        first_slot_name: &str,
+        first_spki_ref: &str,
+        second_slot_name: &str,
+        second_spki_ref: &str,
+    ) -> Result<
+        (Sys5I3TrustedLocalnetControl, Sys5I3TrustedLocalnetControl),
+        Sys5I3ProcessRuntimeError,
+    > {
+        let matching_membership_slots = self
+            .expected_start_bindings
+            .iter()
+            .filter_map(|(slot, binding)| {
+                binding
+                    .as_ref()
+                    .and_then(|binding| {
+                        binding
+                            .expected_source_declared_owner_membership_lifecycle
+                            .as_ref()
+                    })
+                    .map(|_| slot.as_str())
+            })
+            .collect::<Vec<_>>();
+        if self.lifecycle_publication_outcome.is_some()
+            || self.prestage_run_ref.as_deref() != Some(run_ref)
+            || matching_membership_slots.len() != 1
+            || !matching_membership_slots
+                .iter()
+                .any(|slot| *slot == first_slot_name || *slot == second_slot_name)
             || first_slot_name.is_empty()
             || second_slot_name.is_empty()
             || first_slot_name == second_slot_name
@@ -4829,6 +5254,95 @@ impl Sys5I3ProcessCohort {
         Ok(())
     }
 
+    /// Register the parent half of the distinct B→parent membership ACK
+    /// route. The reader owns its OS stream and cannot accept caller bytes or
+    /// a decoded capability ACK.
+    #[cfg(all(unix, feature = "i3-process-test-seams"))]
+    #[doc(hidden)]
+    pub fn take_registered_source_declared_owner_membership_lifecycle_ack_reader(
+        &mut self,
+        owner_slot_name: &str,
+        parent_stream: UnixStream,
+        read_timeout: Duration,
+    ) -> Result<
+        Sys5I3RegisteredSourceDeclaredOwnerMembershipLifecycleAckReader,
+        Sys5I3ProcessRuntimeError,
+    > {
+        if read_timeout.is_zero()
+            || self.lifecycle_publication_outcome.is_some()
+            || self.pending_owner_lifecycle_ack_registration.is_some()
+            || self.pending_owner_lifecycle_stage_identity_binding_ref.is_some()
+            || self
+                .pending_source_declared_owner_membership_lifecycle_ack_registration
+                .as_ref()
+                .is_none_or(|registration| {
+                    registration.target_slot_name != owner_slot_name
+                        || self
+                            .pending_source_declared_owner_membership_lifecycle_stage_identity_binding_ref
+                            .as_deref()
+                            != Some(registration.stage_identity_binding_ref.as_str())
+                })
+            || self
+                .pending_source_declared_owner_membership_lifecycle_stage_identity_binding_ref
+                .as_deref()
+                .is_none()
+        {
+            return Err(Sys5I3ProcessRuntimeError::new(
+                Sys5I3ProcessRuntimeErrorKind::LifecycleAckRejected,
+            ));
+        }
+        let registration = self
+            .pending_source_declared_owner_membership_lifecycle_ack_registration
+            .take()
+            .expect("checked membership registration exists before B reader construction");
+        Sys5I3RegisteredSourceDeclaredOwnerMembershipLifecycleAckReader::from_registered_stream(
+            parent_stream,
+            registration,
+            read_timeout,
+        )
+    }
+
+    /// Commit the parent M9 publisher only from a completion produced by the
+    /// owned, registered membership reader. A capability completion cannot
+    /// enter this route, and a failed comparison leaves the valid stage
+    /// retained for its bounded cohort lifetime.
+    #[cfg(all(unix, feature = "i3-process-test-seams"))]
+    #[doc(hidden)]
+    pub fn publish_registered_source_declared_owner_membership_lifecycle_completion(
+        &mut self,
+        completion: Sys5I3RegisteredSourceDeclaredOwnerMembershipLifecycleCompletion,
+    ) -> Result<(), Sys5I3ProcessRuntimeError> {
+        if self.lifecycle_publication_outcome.is_some()
+            || self.pending_owner_lifecycle_ack_registration.is_some()
+            || self
+                .pending_owner_lifecycle_stage_identity_binding_ref
+                .is_some()
+            || self
+                .pending_source_declared_owner_membership_lifecycle_stage_identity_binding_ref
+                .as_deref()
+                != Some(completion.stage_identity_binding_ref.as_str())
+        {
+            return Err(Sys5I3ProcessRuntimeError::new(
+                Sys5I3ProcessRuntimeErrorKind::LifecycleAckRejected,
+            ));
+        }
+        let published_generation_ref = self
+            .authority_successor_coordinator
+            .publish_prestaged_source_declared_owner_membership_retirement(
+                &completion.prior_generation_ref,
+                &completion.successor_generation_ref,
+                &completion.candidate_binding_ref,
+            )
+            .map_err(|_| {
+                Sys5I3ProcessRuntimeError::new(Sys5I3ProcessRuntimeErrorKind::LifecycleAckRejected)
+            })?;
+        self.published_authority_generation_ref = published_generation_ref;
+        self.lifecycle_publication_outcome = Some(Sys5I3LifecyclePublicationOutcome::G2Published);
+        self.prestage_run_ref = None;
+        self.pending_source_declared_owner_membership_lifecycle_stage_identity_binding_ref = None;
+        Ok(())
+    }
+
     /// Record the terminal finite outcome when the registered B reader cannot
     /// yield its one completion (including a lost child ACK or rejected B
     /// bootstrap).  This publishes no successor, performs no rollback, and
@@ -4849,6 +5363,8 @@ impl Sys5I3ProcessCohort {
         self.prestage_run_ref = None;
         self.pending_owner_lifecycle_ack_registration = None;
         self.pending_owner_lifecycle_stage_identity_binding_ref = None;
+        self.pending_source_declared_owner_membership_lifecycle_ack_registration = None;
+        self.pending_source_declared_owner_membership_lifecycle_stage_identity_binding_ref = None;
         Ok(())
     }
 
@@ -4885,6 +5401,63 @@ impl Sys5I3ProcessCohort {
             Sys5I3ProcessRuntimeError::new(Sys5I3ProcessRuntimeErrorKind::ProcessImageAlreadyTaken)
         })
     }
+}
+
+#[cfg(all(unix, feature = "i3-process-test-seams"))]
+fn read_registered_lifecycle_ack_frame_before_deadline(
+    stream: &mut UnixStream,
+    deadline: Instant,
+) -> Result<Vec<u8>, Sys5I3ProcessRuntimeError> {
+    let mut prefix = [0_u8; 4];
+    read_registered_lifecycle_ack_exact_before_deadline(stream, deadline, &mut prefix)?;
+    let length = u32::from_be_bytes(prefix) as usize;
+    if length > Sys5I3PrivateProcessCodec::MAX_MESSAGE_BYTES {
+        return Err(Sys5I3ProcessRuntimeError::new(
+            Sys5I3ProcessRuntimeErrorKind::LifecycleAckRejected,
+        ));
+    }
+    let frame_length = length.checked_add(prefix.len()).ok_or_else(|| {
+        Sys5I3ProcessRuntimeError::new(Sys5I3ProcessRuntimeErrorKind::LifecycleAckRejected)
+    })?;
+    let mut frame = Vec::with_capacity(frame_length);
+    frame.extend_from_slice(&prefix);
+    frame.resize(frame_length, 0);
+    read_registered_lifecycle_ack_exact_before_deadline(
+        stream,
+        deadline,
+        &mut frame[prefix.len()..],
+    )?;
+    Ok(frame)
+}
+
+#[cfg(all(unix, feature = "i3-process-test-seams"))]
+fn read_registered_lifecycle_ack_exact_before_deadline(
+    stream: &mut UnixStream,
+    deadline: Instant,
+    destination: &mut [u8],
+) -> Result<(), Sys5I3ProcessRuntimeError> {
+    let mut read = 0;
+    while read < destination.len() {
+        let remaining = deadline
+            .checked_duration_since(Instant::now())
+            .filter(|remaining| !remaining.is_zero())
+            .ok_or_else(|| {
+                Sys5I3ProcessRuntimeError::new(Sys5I3ProcessRuntimeErrorKind::LifecycleAckRejected)
+            })?;
+        stream.set_read_timeout(Some(remaining)).map_err(|_| {
+            Sys5I3ProcessRuntimeError::new(Sys5I3ProcessRuntimeErrorKind::LifecycleAckRejected)
+        })?;
+        let count = stream.read(&mut destination[read..]).map_err(|_| {
+            Sys5I3ProcessRuntimeError::new(Sys5I3ProcessRuntimeErrorKind::LifecycleAckRejected)
+        })?;
+        if count == 0 {
+            return Err(Sys5I3ProcessRuntimeError::new(
+                Sys5I3ProcessRuntimeErrorKind::LifecycleAckRejected,
+            ));
+        }
+        read += count;
+    }
+    Ok(())
 }
 
 #[cfg(all(unix, feature = "i3-process-test-seams"))]
@@ -4938,37 +5511,6 @@ impl Sys5I3RegisteredOwnerLifecycleAckReader {
         Instant::now() >= self.deadline
     }
 
-    fn read_exact_before_deadline(
-        &mut self,
-        destination: &mut [u8],
-    ) -> Result<(), Sys5I3ProcessRuntimeError> {
-        let mut read = 0;
-        while read < destination.len() {
-            let remaining = self
-                .deadline
-                .checked_duration_since(Instant::now())
-                .filter(|remaining| !remaining.is_zero())
-                .ok_or_else(|| {
-                    Sys5I3ProcessRuntimeError::new(
-                        Sys5I3ProcessRuntimeErrorKind::LifecycleAckRejected,
-                    )
-                })?;
-            self.stream.set_read_timeout(Some(remaining)).map_err(|_| {
-                Sys5I3ProcessRuntimeError::new(Sys5I3ProcessRuntimeErrorKind::LifecycleAckRejected)
-            })?;
-            let count = self.stream.read(&mut destination[read..]).map_err(|_| {
-                Sys5I3ProcessRuntimeError::new(Sys5I3ProcessRuntimeErrorKind::LifecycleAckRejected)
-            })?;
-            if count == 0 {
-                return Err(Sys5I3ProcessRuntimeError::new(
-                    Sys5I3ProcessRuntimeErrorKind::LifecycleAckRejected,
-                ));
-            }
-            read += count;
-        }
-        Ok(())
-    }
-
     /// Read exactly one bounded framed ACK from the registered B child stream.
     /// This method owns both the stream and registration; it has no parameter
     /// for bytes or a tainted decoded candidate.  A second read attempt is a
@@ -4987,21 +5529,8 @@ impl Sys5I3RegisteredOwnerLifecycleAckReader {
                 Sys5I3ProcessRuntimeErrorKind::LifecycleAckRejected,
             ));
         }
-        let mut prefix = [0_u8; 4];
-        self.read_exact_before_deadline(&mut prefix)?;
-        let length = u32::from_be_bytes(prefix) as usize;
-        if length > Sys5I3PrivateProcessCodec::MAX_MESSAGE_BYTES {
-            return Err(Sys5I3ProcessRuntimeError::new(
-                Sys5I3ProcessRuntimeErrorKind::LifecycleAckRejected,
-            ));
-        }
-        let frame_length = length.checked_add(prefix.len()).ok_or_else(|| {
-            Sys5I3ProcessRuntimeError::new(Sys5I3ProcessRuntimeErrorKind::LifecycleAckRejected)
-        })?;
-        let mut frame = Vec::with_capacity(frame_length);
-        frame.extend_from_slice(&prefix);
-        frame.resize(frame_length, 0);
-        self.read_exact_before_deadline(&mut frame[prefix.len()..])?;
+        let frame =
+            read_registered_lifecycle_ack_frame_before_deadline(&mut self.stream, self.deadline)?;
         if self.deadline_only {
             return Err(Sys5I3ProcessRuntimeError::new(
                 Sys5I3ProcessRuntimeErrorKind::LifecycleAckRejected,
@@ -5027,6 +5556,68 @@ impl Sys5I3RegisteredOwnerLifecycleAckReader {
             successor_generation_ref: tainted.successor_generation_ref,
             candidate_binding_ref: tainted.candidate_binding_ref,
         })
+    }
+}
+
+#[cfg(all(unix, feature = "i3-process-test-seams"))]
+impl Sys5I3RegisteredSourceDeclaredOwnerMembershipLifecycleAckReader {
+    fn from_registered_stream(
+        stream: UnixStream,
+        registration: Sys5I3RegisteredSourceDeclaredOwnerMembershipLifecycleAckRegistration,
+        read_timeout: Duration,
+    ) -> Result<Self, Sys5I3ProcessRuntimeError> {
+        let deadline = Instant::now().checked_add(read_timeout).ok_or_else(|| {
+            Sys5I3ProcessRuntimeError::new(Sys5I3ProcessRuntimeErrorKind::LifecycleAckRejected)
+        })?;
+        Ok(Self {
+            stream,
+            registration,
+            deadline,
+            completion_consumed: false,
+        })
+    }
+
+    /// Read one bounded ACK from the registered membership B→parent stream.
+    /// The shared frame reader retains only physical framing mechanics; this
+    /// type validates the distinct membership schema and registration.
+    pub fn read_next_completion(
+        &mut self,
+        codec: &Sys5I3PrivateProcessCodec,
+    ) -> Result<
+        Sys5I3RegisteredSourceDeclaredOwnerMembershipLifecycleCompletion,
+        Sys5I3ProcessRuntimeError,
+    > {
+        if self.completion_consumed || Instant::now() >= self.deadline {
+            return Err(Sys5I3ProcessRuntimeError::new(
+                Sys5I3ProcessRuntimeErrorKind::LifecycleAckRejected,
+            ));
+        }
+        let frame =
+            read_registered_lifecycle_ack_frame_before_deadline(&mut self.stream, self.deadline)?;
+        let tainted = codec
+            .decode_source_declared_owner_membership_lifecycle_ack(&frame)
+            .map_err(|_| {
+                Sys5I3ProcessRuntimeError::new(Sys5I3ProcessRuntimeErrorKind::LifecycleAckRejected)
+            })?;
+        if Instant::now() >= self.deadline
+            || tainted.stage_identity_binding_ref != self.registration.stage_identity_binding_ref
+            || tainted.prior_generation_ref != self.registration.prior_generation_ref
+            || tainted.successor_generation_ref != self.registration.successor_generation_ref
+            || tainted.candidate_binding_ref != self.registration.candidate_binding_ref
+        {
+            return Err(Sys5I3ProcessRuntimeError::new(
+                Sys5I3ProcessRuntimeErrorKind::LifecycleAckRejected,
+            ));
+        }
+        self.completion_consumed = true;
+        Ok(
+            Sys5I3RegisteredSourceDeclaredOwnerMembershipLifecycleCompletion {
+                stage_identity_binding_ref: tainted.stage_identity_binding_ref,
+                prior_generation_ref: tainted.prior_generation_ref,
+                successor_generation_ref: tainted.successor_generation_ref,
+                candidate_binding_ref: tainted.candidate_binding_ref,
+            },
+        )
     }
 }
 
@@ -5237,6 +5828,7 @@ impl Sys5I3ProcessImage {
                 cohort_occurrence_ref: cohort_occurrence_ref.to_string(),
                 private_snapshot_binding_ref,
                 prestaged_owner_capability_lifecycle: None,
+                prestaged_source_declared_owner_membership_lifecycle: None,
             }));
         let mut image = Self {
             slot_name: slot.slot_name.clone(),
@@ -5761,6 +6353,45 @@ fn owner_capability_lifecycle_stage_identity_binding_ref(
     )
 }
 
+fn source_declared_owner_membership_lifecycle_stage_identity_binding_ref(
+    run_ref: &str,
+    image: &Sys5I3ProcessImage,
+    candidate: &Sys4I3RestrictedSourceDeclaredOwnerMembershipSuccessor,
+) -> String {
+    let mut hasher = Sha256::new();
+    hasher.update(b"mirrorea/sys5/i3/source-declared-owner-membership-lifecycle-stage/v1\0");
+    for component in [
+        run_ref,
+        image.child_seed.parent_checked_program_ref.as_str(),
+        image.child_seed.projection_ref.as_str(),
+        image.child_seed.cohort_occurrence_ref.as_str(),
+        image.slot_name.as_str(),
+        image
+            .child_seed
+            .required_local_authority_closure
+            .opaque_digest_ref(),
+        candidate.operation(),
+        candidate.owner_locus(),
+        candidate.prior_generation_ref(),
+        candidate.successor_generation_ref(),
+        candidate.membership_delta_ref(),
+        "source-declared-owner-membership-retirement",
+        candidate.candidate_binding_ref(),
+    ] {
+        hasher.update((component.len() as u64).to_be_bytes());
+        hasher.update(component.as_bytes());
+    }
+    hasher.update((image.assigned_loci.len() as u64).to_be_bytes());
+    for locus in &image.assigned_loci {
+        hasher.update((locus.len() as u64).to_be_bytes());
+        hasher.update(locus.as_bytes());
+    }
+    format!(
+        "sys5-i3-source-declared-owner-membership-lifecycle-stage-sha256-v1:{:x}",
+        hasher.finalize()
+    )
+}
+
 fn observer_safe_semantic_rows_digest(rows: &ObserverSafeM9SemanticRowSets) -> String {
     let mut hasher = Sha256::new();
     hasher.update(b"mirrorea/sys5/i3/process-authority-semantic-rows/v1\\0");
@@ -5955,12 +6586,23 @@ enum PrivateProviderCarrierPayload {
 }
 
 const PRIVATE_OWNER_LIFECYCLE_ACK_VERSION: u64 = 2;
+const PRIVATE_SOURCE_DECLARED_OWNER_MEMBERSHIP_LIFECYCLE_ACK_VERSION: u64 = 1;
 
 /// Codec-decoded lifecycle ACK candidate.  This is deliberately tainted:
 /// decoding correctly shaped fields cannot claim B installation, registered
 /// child-stream origin, or authority publication.
 #[doc(hidden)]
 pub struct Sys5I3TaintedOwnerLifecycleAck {
+    stage_identity_binding_ref: String,
+    prior_generation_ref: String,
+    successor_generation_ref: String,
+    candidate_binding_ref: String,
+}
+
+/// Tainted decoded membership-lifecycle ACK. Its distinct private schema
+/// cannot be interpreted as the owner-capability ACK shape.
+#[doc(hidden)]
+pub struct Sys5I3TaintedSourceDeclaredOwnerMembershipLifecycleAck {
     stage_identity_binding_ref: String,
     prior_generation_ref: String,
     successor_generation_ref: String,
@@ -5989,6 +6631,16 @@ struct PrivateOwnerLifecycleAckSnapshot {
     candidate_binding_ref: String,
 }
 
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[serde(deny_unknown_fields)]
+struct PrivateSourceDeclaredOwnerMembershipLifecycleAckSnapshot {
+    version: u64,
+    stage_identity_binding_ref: String,
+    prior_generation_ref: String,
+    successor_generation_ref: String,
+    candidate_binding_ref: String,
+}
+
 /// JSON DTO for a coordinator-retained start binding.  This remains inside
 /// the private trusted-control codec; it is intentionally separate from the
 /// tainted image DTO and cannot be recovered by image decoding alone.
@@ -6004,11 +6656,26 @@ struct PrivateExpectedStartBindingSnapshot {
     image_integrity_ref: String,
     private_snapshot_binding_ref: String,
     expected_owner_capability_lifecycle: Option<PrivateExpectedOwnerCapabilityLifecycleSnapshot>,
+    /// Missing from an older private control means no membership lifecycle;
+    /// a membership image always requires this explicit tagged counterpart.
+    #[serde(default)]
+    expected_source_declared_owner_membership_lifecycle:
+        Option<PrivateExpectedSourceDeclaredOwnerMembershipLifecycleSnapshot>,
 }
 
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
 #[serde(deny_unknown_fields)]
 struct PrivateExpectedOwnerCapabilityLifecycleSnapshot {
+    target_slot_name: String,
+    stage_identity_binding_ref: String,
+    prior_generation_ref: String,
+    successor_generation_ref: String,
+    candidate_binding_ref: String,
+}
+
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[serde(deny_unknown_fields)]
+struct PrivateExpectedSourceDeclaredOwnerMembershipLifecycleSnapshot {
     target_slot_name: String,
     stage_identity_binding_ref: String,
     prior_generation_ref: String,
@@ -6032,6 +6699,18 @@ impl From<&Sys5I3ExpectedStartBinding> for PrivateExpectedStartBindingSnapshot {
                 .as_ref()
                 .map(
                     |lifecycle| PrivateExpectedOwnerCapabilityLifecycleSnapshot {
+                        target_slot_name: lifecycle.target_slot_name.clone(),
+                        stage_identity_binding_ref: lifecycle.stage_identity_binding_ref.clone(),
+                        prior_generation_ref: lifecycle.prior_generation_ref.clone(),
+                        successor_generation_ref: lifecycle.successor_generation_ref.clone(),
+                        candidate_binding_ref: lifecycle.candidate_binding_ref.clone(),
+                    },
+                ),
+            expected_source_declared_owner_membership_lifecycle: binding
+                .expected_source_declared_owner_membership_lifecycle
+                .as_ref()
+                .map(
+                    |lifecycle| PrivateExpectedSourceDeclaredOwnerMembershipLifecycleSnapshot {
                         target_slot_name: lifecycle.target_slot_name.clone(),
                         stage_identity_binding_ref: lifecycle.stage_identity_binding_ref.clone(),
                         prior_generation_ref: lifecycle.prior_generation_ref.clone(),
@@ -6078,6 +6757,31 @@ impl TryFrom<PrivateExpectedStartBindingSnapshot> for Sys5I3ExpectedStartBinding
                 })
             })
             .transpose()?;
+        let expected_source_declared_owner_membership_lifecycle = snapshot
+            .expected_source_declared_owner_membership_lifecycle
+            .map(|lifecycle| {
+                if lifecycle.target_slot_name.is_empty()
+                    || lifecycle.stage_identity_binding_ref.is_empty()
+                    || lifecycle.prior_generation_ref.is_empty()
+                    || lifecycle.successor_generation_ref.is_empty()
+                    || lifecycle.candidate_binding_ref.is_empty()
+                {
+                    return Err(());
+                }
+                Ok(Sys5I3ExpectedSourceDeclaredOwnerMembershipLifecycle {
+                    target_slot_name: lifecycle.target_slot_name,
+                    stage_identity_binding_ref: lifecycle.stage_identity_binding_ref,
+                    prior_generation_ref: lifecycle.prior_generation_ref,
+                    successor_generation_ref: lifecycle.successor_generation_ref,
+                    candidate_binding_ref: lifecycle.candidate_binding_ref,
+                })
+            })
+            .transpose()?;
+        if expected_owner_capability_lifecycle.is_some()
+            && expected_source_declared_owner_membership_lifecycle.is_some()
+        {
+            return Err(());
+        }
         let assigned_loci = snapshot.assigned_loci.into_iter().collect::<BTreeSet<_>>();
         if assigned_loci.is_empty() {
             return Err(());
@@ -6092,6 +6796,7 @@ impl TryFrom<PrivateExpectedStartBindingSnapshot> for Sys5I3ExpectedStartBinding
             image_integrity_ref: snapshot.image_integrity_ref,
             private_snapshot_binding_ref: snapshot.private_snapshot_binding_ref,
             expected_owner_capability_lifecycle,
+            expected_source_declared_owner_membership_lifecycle,
             inactive_provider: None,
         })
     }
@@ -6168,6 +6873,7 @@ impl TryFrom<PrivateInactiveProviderExpectedStartBindingSnapshot> for Sys5I3Expe
             image_integrity_ref: snapshot.image_integrity_ref,
             private_snapshot_binding_ref: String::new(),
             expected_owner_capability_lifecycle: None,
+            expected_source_declared_owner_membership_lifecycle: None,
             inactive_provider: Some(Sys5I3ExpectedInactiveProviderBinding {
                 static_snapshot: snapshot.static_snapshot,
                 component_snapshot: snapshot.component_snapshot,
@@ -7295,6 +8001,42 @@ impl Sys5I3PrivateProcessCodec {
         })
     }
 
+    /// Decode the distinct membership ACK only as tainted input. It still
+    /// cannot claim an installed receipt, registered-stream provenance, or
+    /// parent publication.
+    pub fn decode_source_declared_owner_membership_lifecycle_ack(
+        &self,
+        bytes: &[u8],
+    ) -> Result<
+        Sys5I3TaintedSourceDeclaredOwnerMembershipLifecycleAck,
+        Sys5I3PrivateProcessCodecError,
+    > {
+        let body = self.unframe_body(bytes, Self::MAX_MESSAGE_BYTES)?;
+        let value = strict_json_value(body).map_err(|_| {
+            Sys5I3PrivateProcessCodecError::new(Sys5I3PrivateProcessCodecErrorKind::Malformed)
+        })?;
+        let snapshot: PrivateSourceDeclaredOwnerMembershipLifecycleAckSnapshot =
+            serde_json::from_value(value).map_err(|_| {
+                Sys5I3PrivateProcessCodecError::new(Sys5I3PrivateProcessCodecErrorKind::Malformed)
+            })?;
+        if snapshot.version != PRIVATE_SOURCE_DECLARED_OWNER_MEMBERSHIP_LIFECYCLE_ACK_VERSION
+            || snapshot.stage_identity_binding_ref.is_empty()
+            || snapshot.prior_generation_ref.is_empty()
+            || snapshot.successor_generation_ref.is_empty()
+            || snapshot.candidate_binding_ref.is_empty()
+        {
+            return Err(Sys5I3PrivateProcessCodecError::new(
+                Sys5I3PrivateProcessCodecErrorKind::Malformed,
+            ));
+        }
+        Ok(Sys5I3TaintedSourceDeclaredOwnerMembershipLifecycleAck {
+            stage_identity_binding_ref: snapshot.stage_identity_binding_ref,
+            prior_generation_ref: snapshot.prior_generation_ref,
+            successor_generation_ref: snapshot.successor_generation_ref,
+            candidate_binding_ref: snapshot.candidate_binding_ref,
+        })
+    }
+
     /// Serialize the one child ACK only by consuming a post-install receipt.
     /// This does not publish anything: the parent still requires its owned,
     /// registered B output reader to obtain and validate this frame.
@@ -7308,6 +8050,30 @@ impl Sys5I3PrivateProcessCodec {
         } = ack;
         let body = serde_json::to_vec(&PrivateOwnerLifecycleAckSnapshot {
             version: PRIVATE_OWNER_LIFECYCLE_ACK_VERSION,
+            stage_identity_binding_ref,
+            prior_generation_ref: receipt.prior_generation_ref().to_string(),
+            successor_generation_ref: receipt.successor_generation_ref().to_string(),
+            candidate_binding_ref: receipt.candidate_binding_ref().to_string(),
+        })
+        .map_err(|_| {
+            Sys5I3PrivateProcessCodecError::new(Sys5I3PrivateProcessCodecErrorKind::Malformed)
+        })?;
+        self.frame_body(body, Self::MAX_MESSAGE_BYTES)
+    }
+
+    /// Serialize the one membership ACK only by consuming the separately
+    /// typed post-install receipt. This frame is not accepted by the
+    /// capability reader and still carries no publication authority.
+    pub fn encode_installed_source_declared_owner_membership_lifecycle_ack(
+        &self,
+        ack: Sys5I3SourceDeclaredOwnerMembershipLifecycleInstallAck,
+    ) -> Result<Vec<u8>, Sys5I3PrivateProcessCodecError> {
+        let Sys5I3SourceDeclaredOwnerMembershipLifecycleInstallAck {
+            stage_identity_binding_ref,
+            receipt,
+        } = ack;
+        let body = serde_json::to_vec(&PrivateSourceDeclaredOwnerMembershipLifecycleAckSnapshot {
+            version: PRIVATE_SOURCE_DECLARED_OWNER_MEMBERSHIP_LIFECYCLE_ACK_VERSION,
             stage_identity_binding_ref,
             prior_generation_ref: receipt.prior_generation_ref().to_string(),
             successor_generation_ref: receipt.successor_generation_ref().to_string(),
@@ -7442,6 +8208,80 @@ impl Sys5I3PrivateProcessCodec {
         // The candidate moved into the opaque B-local stimulus before fabric
         // bootstrap.  Re-seal the now publisher-free child image so ordinary
         // start validation cannot retain a second copy in its private seed.
+        image.image.refresh_private_integrity();
+        let runtime = Sys5I3ProcessRuntime::start(image.image).map_err(|_| {
+            Sys5I3LocalnetControlError::new(Sys5I3LocalnetControlErrorKind::StartBindingRejected)
+        })?;
+        Ok((runtime, control, stimulus))
+    }
+
+    /// The only child bootstrap path that may transfer the distinct
+    /// source-declared membership candidate. It shares image/control custody
+    /// mechanics with capability lifecycle bootstrap but matches only the
+    /// membership-tagged image and control fields.
+    pub fn validate_and_start_image_with_prestaged_source_declared_owner_membership_lifecycle(
+        &self,
+        mut image: Sys5I3UntrustedProcessImage,
+        control: Sys5I3TrustedLocalnetControl,
+    ) -> Result<
+        (
+            Sys5I3ProcessRuntime,
+            Sys5I3TrustedLocalnetControl,
+            Option<Sys5I3AdmittedSourceDeclaredOwnerMembershipLifecycleStimulus>,
+        ),
+        Sys5I3LocalnetControlError,
+    > {
+        control
+            .expected_start_binding
+            .validate_image(&image.image)
+            .map_err(|_| {
+                Sys5I3LocalnetControlError::new(
+                    Sys5I3LocalnetControlErrorKind::StartBindingRejected,
+                )
+            })?;
+        let image_lifecycle = match &mut image.image.private_runtime_seed {
+            Sys5I3PrivateRuntimeSeed::Ordinary(seed) => seed
+                .prestaged_source_declared_owner_membership_lifecycle
+                .take(),
+            Sys5I3PrivateRuntimeSeed::InactiveProvider(_) => {
+                return Err(Sys5I3LocalnetControlError::new(
+                    Sys5I3LocalnetControlErrorKind::StartBindingRejected,
+                ));
+            }
+        };
+        let stimulus = match (
+            image_lifecycle,
+            control
+                .expected_start_binding
+                .expected_source_declared_owner_membership_lifecycle
+                .as_ref(),
+        ) {
+            (None, None) => None,
+            (Some(lifecycle), Some(expected))
+                if lifecycle.target_slot_name == control.local_slot_name
+                    && lifecycle.target_slot_name == expected.target_slot_name
+                    && lifecycle.stage_identity_binding_ref
+                        == expected.stage_identity_binding_ref
+                    && lifecycle.candidate.prior_generation_ref()
+                        == expected.prior_generation_ref
+                    && lifecycle.candidate.successor_generation_ref()
+                        == expected.successor_generation_ref
+                    && lifecycle.candidate.candidate_binding_ref()
+                        == expected.candidate_binding_ref =>
+            {
+                Some(
+                    Sys5I3AdmittedSourceDeclaredOwnerMembershipLifecycleStimulus {
+                        stage_identity_binding_ref: lifecycle.stage_identity_binding_ref,
+                        candidate: lifecycle.candidate,
+                    },
+                )
+            }
+            _ => {
+                return Err(Sys5I3LocalnetControlError::new(
+                    Sys5I3LocalnetControlErrorKind::StartBindingRejected,
+                ));
+            }
+        };
         image.image.refresh_private_integrity();
         let runtime = Sys5I3ProcessRuntime::start(image.image).map_err(|_| {
             Sys5I3LocalnetControlError::new(Sys5I3LocalnetControlErrorKind::StartBindingRejected)
@@ -8102,11 +8942,12 @@ impl Sys5I3ProcessRuntime {
                 Sys5I3ProcessRuntimeErrorKind::RuntimeBootstrapRejected,
             ));
         }
-        if image
-            .private_runtime_seed
-            .ordinary()
-            .is_some_and(|seed| seed.prestaged_owner_capability_lifecycle.is_some())
-        {
+        if image.private_runtime_seed.ordinary().is_some_and(|seed| {
+            seed.prestaged_owner_capability_lifecycle.is_some()
+                || seed
+                    .prestaged_source_declared_owner_membership_lifecycle
+                    .is_some()
+        }) {
             // A staged image must move its candidate only through the
             // independently bound bootstrap path above.  Direct start cannot
             // silently discard, duplicate, or self-authorize that candidate.
@@ -8223,6 +9064,32 @@ impl Sys5I3ProcessRuntime {
             source_derived: false,
         });
         Ok(Sys5I3OwnerLifecycleInstallAck {
+            stage_identity_binding_ref,
+            receipt,
+        })
+    }
+
+    /// Install B's exact membership successor only from the separately typed
+    /// membership stimulus. SYS-4 refreshes B's real backend and commits its
+    /// local G2 floor before this returns; no parent publisher enters B.
+    pub fn install_admitted_source_declared_owner_membership_successor(
+        &mut self,
+        stimulus: Sys5I3AdmittedSourceDeclaredOwnerMembershipLifecycleStimulus,
+    ) -> Result<Sys5I3SourceDeclaredOwnerMembershipLifecycleInstallAck, Sys5I3ProcessRuntimeError>
+    {
+        let Sys5I3AdmittedSourceDeclaredOwnerMembershipLifecycleStimulus {
+            stage_identity_binding_ref,
+            candidate,
+        } = stimulus;
+        let receipt = self
+            .fabric
+            .install_i3_restricted_source_declared_owner_membership_successor(candidate)
+            .map_err(|_| {
+                Sys5I3ProcessRuntimeError::new(
+                    Sys5I3ProcessRuntimeErrorKind::LifecycleInstallRejected,
+                )
+            })?;
+        Ok(Sys5I3SourceDeclaredOwnerMembershipLifecycleInstallAck {
             stage_identity_binding_ref,
             receipt,
         })

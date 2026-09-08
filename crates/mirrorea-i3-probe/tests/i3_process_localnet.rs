@@ -40,6 +40,8 @@ use mirrorea_i3_probe::{
     I3LocalnetRetryEvidenceRejection, I3LocalnetRetryFalsifier, I3LocalnetRetryProfile,
     I3LocalnetRetryRequesterOutcome, I3LocalnetRunErrorKind, I3ProcessLocalnetRequest,
     run_i3_process_localnet,
+    run_i3_source_real_g1_carrier_after_owner_membership_successor_localnet,
+    run_i3_source_real_owner_membership_successor_positive_localnet,
 };
 
 const ACTIVE_I2_SOURCE: &str = concat!(
@@ -3636,4 +3638,18 @@ fn asymmetric_completed_and_rejected_child_reports_preserve_both_terminal_and_mu
     assert!(audit.all_children_reaped());
     assert!(audit.no_orphan_child_pids());
     assert!(audit.observer_safe());
+}
+
+#[test]
+fn source_real_unretired_g1_owner_membership_path_completes_member_successor_conformance() {
+    let _completion = run_i3_source_real_owner_membership_successor_positive_localnet().expect(
+        "the unretired G1 A-to-WorldAuthority owner path completes its fixed opaque two-process conformance",
+    );
+}
+
+#[test]
+fn source_real_g1_owner_carrier_against_installed_g2_completes_member_successor_conformance() {
+    let _completion = run_i3_source_real_g1_carrier_after_owner_membership_successor_localnet().expect(
+        "the real G1 carrier is rejected before B owner admission under installed G2, then completes only its fixed opaque two-process conformance",
+    );
 }

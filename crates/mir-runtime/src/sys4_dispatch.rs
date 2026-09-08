@@ -56,9 +56,10 @@ use crate::{
         M9CheckedPatchAuthorityBinding, M9DesignatedSourceReleaseLineage, M9ExecutionRestriction,
         M9I3PrivateAuthorityGenerationSnapshot, M9InactiveReadOnlyProviderComposite,
         M9KernelAuthorityView, M9OwnerOperationRevalidationFailure,
-        M9PrestagedOwnerCapabilityRevocation, M9RelationPublicationAdmission,
-        M9RuntimeExecutionSeam, M9RuntimeValidationObservationSnapshot, M9SealedFailureInspection,
-        M9SealedGeneration, M9SealedTransitionInspection, M9SourceReleaseValidationInspection,
+        M9PrestagedOwnerCapabilityRevocation, M9PrestagedSourceDeclaredOwnerMembershipRetirement,
+        M9RelationPublicationAdmission, M9RuntimeExecutionSeam,
+        M9RuntimeValidationObservationSnapshot, M9SealedFailureInspection, M9SealedGeneration,
+        M9SealedTransitionInspection, M9SourceReleaseValidationInspection,
     },
     sys2_execution_backend::{
         Ow1ContextualM8Execution, Ow1ObserverDesignatedPublication, Ow1WorkerBackend,
@@ -1650,16 +1651,23 @@ pub(crate) struct SealedFabricAdmission {
     initial_state_seed: Sys4InitialStateSeed,
 }
 
-/// Parent-only holder for the single genuine M9 publisher admitted for an I3
-/// process cohort.  It can stage one exact owner-capability successor before
+/// Parent-only custody for the single genuine M9 publisher admitted for an I3
+/// process cohort. It can retain at most one exact lifecycle stage before
 /// children receive images or start bindings; it is never serializable and no
-/// child image can reconstruct it.
-pub(crate) struct Sys4I3OwnerCapabilitySuccessorCoordinator {
+/// child image can reconstruct it. The pending tag is deliberately private:
+/// the externally carried candidates, receipts, and ACK routes remain
+/// lifecycle-kind-specific.
+pub(crate) struct Sys4I3AuthoritySuccessorCoordinator {
     program_identity: CheckedProgramIdentity,
     current_generation: M9AuthorityGeneration,
     publisher: M9AuthoritySuccessorPublisher,
-    pending: Option<M9PrestagedOwnerCapabilityRevocation>,
+    pending: Option<Sys4I3PendingAuthoritySuccessor>,
     pending_candidate_binding_ref: Option<String>,
+}
+
+enum Sys4I3PendingAuthoritySuccessor {
+    OwnerCapability(Box<M9PrestagedOwnerCapabilityRevocation>),
+    SourceDeclaredOwnerMembership(Box<M9PrestagedSourceDeclaredOwnerMembershipRetirement>),
 }
 
 /// Restricted successor material carried only inside B's tainted process
@@ -1776,6 +1784,148 @@ impl Sys4I3RestrictedOwnerCapabilitySuccessor {
     }
 }
 
+/// Restricted successor material for the distinct source-declared owner
+/// membership retirement. This is intentionally a different type from the
+/// owner-capability candidate: it contains an already restricted G2 seed and
+/// an opaque M9 membership-delta binding, never a publisher or issuer.
+pub(crate) struct Sys4I3RestrictedSourceDeclaredOwnerMembershipSuccessor {
+    operation: String,
+    owner_locus: String,
+    prior_generation_ref: String,
+    prior_generation_integrity_ref: String,
+    successor_generation_ref: String,
+    membership_delta_ref: String,
+    successor_admission: SealedFabricAdmission,
+    candidate_binding_ref: String,
+}
+
+/// Strict private image DTO for the distinct membership lifecycle. It cannot
+/// be decoded as an owner-capability candidate, and it carries no parent M9
+/// publisher, live floor, or authority constructor.
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[serde(deny_unknown_fields)]
+pub(crate) struct Sys4I3PrivateRestrictedSourceDeclaredOwnerMembershipSuccessorSnapshot {
+    version: u32,
+    operation: String,
+    owner_locus: String,
+    prior_generation_ref: String,
+    prior_generation_integrity_ref: String,
+    successor_generation_ref: String,
+    membership_delta_ref: String,
+    successor_admission: Sys4I3PrivateSealedAdmissionSnapshot,
+    candidate_binding_ref: String,
+}
+
+impl Sys4I3RestrictedSourceDeclaredOwnerMembershipSuccessor {
+    pub(crate) fn operation(&self) -> &str {
+        &self.operation
+    }
+
+    pub(crate) fn owner_locus(&self) -> &str {
+        &self.owner_locus
+    }
+
+    pub(crate) fn prior_generation_ref(&self) -> &str {
+        &self.prior_generation_ref
+    }
+
+    pub(crate) fn successor_generation_ref(&self) -> &str {
+        &self.successor_generation_ref
+    }
+
+    pub(crate) fn membership_delta_ref(&self) -> &str {
+        &self.membership_delta_ref
+    }
+
+    pub(crate) fn candidate_binding_ref(&self) -> &str {
+        &self.candidate_binding_ref
+    }
+
+    pub(crate) fn i3_private_snapshot(
+        &self,
+    ) -> Sys4Result<Sys4I3PrivateRestrictedSourceDeclaredOwnerMembershipSuccessorSnapshot> {
+        Ok(
+            Sys4I3PrivateRestrictedSourceDeclaredOwnerMembershipSuccessorSnapshot {
+                version: 1,
+                operation: self.operation.clone(),
+                owner_locus: self.owner_locus.clone(),
+                prior_generation_ref: self.prior_generation_ref.clone(),
+                prior_generation_integrity_ref: self.prior_generation_integrity_ref.clone(),
+                successor_generation_ref: self.successor_generation_ref.clone(),
+                membership_delta_ref: self.membership_delta_ref.clone(),
+                successor_admission: self.successor_admission.i3_private_snapshot()?,
+                candidate_binding_ref: self.candidate_binding_ref.clone(),
+            },
+        )
+    }
+
+    pub(crate) fn from_i3_private_snapshot(
+        snapshot: Sys4I3PrivateRestrictedSourceDeclaredOwnerMembershipSuccessorSnapshot,
+        program: &FabricProgram,
+        prior_admission: &SealedFabricAdmission,
+    ) -> Sys4Result<Self> {
+        if snapshot.version != 1
+            || snapshot.operation.is_empty()
+            || snapshot.owner_locus.is_empty()
+            || snapshot.prior_generation_ref.is_empty()
+            || snapshot.prior_generation_integrity_ref.is_empty()
+            || snapshot.successor_generation_ref.is_empty()
+            || snapshot.membership_delta_ref.is_empty()
+            || snapshot.candidate_binding_ref.is_empty()
+            || snapshot.prior_generation_ref
+                != prior_admission.authority_generation.generation_ref()
+            || snapshot.prior_generation_integrity_ref
+                != prior_admission
+                    .authority_generation
+                    .private_restore_integrity_digest()
+        {
+            return Err(Sys4DispatchDiagnostics::one(
+                Sys4DiagnosticKind::ProgramAdmissionMismatch,
+            ));
+        }
+        let successor_admission = snapshot
+            .successor_admission
+            .into_source_declared_owner_membership_successor_admission(
+                program,
+                prior_admission,
+                &snapshot.operation,
+                &snapshot.owner_locus,
+            )?;
+        let successor_admission_binding_ref = successor_admission.i3_private_snapshot_binding_ref();
+        if successor_admission.authority_successor.is_some()
+            || successor_admission.authority_generation.generation_ref()
+                != snapshot.successor_generation_ref
+            || snapshot.candidate_binding_ref
+                != sys4_i3_source_declared_owner_membership_successor_binding_ref(
+                    &Sys4I3SourceDeclaredOwnerMembershipSuccessorBindingInput {
+                        program_identity: program.checked_program_identity(),
+                        prior_generation_ref: &snapshot.prior_generation_ref,
+                        prior_generation_integrity_ref: &snapshot.prior_generation_integrity_ref,
+                        successor_generation_ref: &snapshot.successor_generation_ref,
+                        membership_delta_ref: &snapshot.membership_delta_ref,
+                        successor_admission_binding_ref: &successor_admission_binding_ref,
+                        operation: &snapshot.operation,
+                        owner_locus: &snapshot.owner_locus,
+                    },
+                )
+        {
+            return Err(Sys4DispatchDiagnostics::one(
+                Sys4DiagnosticKind::ProgramAdmissionMismatch,
+            ));
+        }
+        Ok(Self {
+            operation: snapshot.operation,
+            owner_locus: snapshot.owner_locus,
+            prior_generation_ref: snapshot.prior_generation_ref,
+            prior_generation_integrity_ref: snapshot.prior_generation_integrity_ref,
+            successor_generation_ref: snapshot.successor_generation_ref,
+            membership_delta_ref: snapshot.membership_delta_ref,
+            successor_admission,
+            candidate_binding_ref: snapshot.candidate_binding_ref,
+        })
+    }
+}
+
 /// Non-cloneable receipt constructed only after B has installed the exact
 /// restricted successor and committed its local M9 live floor.  The ACK
 /// emitter consumes this value later; candidate fields and observer records
@@ -1800,12 +1950,41 @@ impl Sys4I3InstalledOwnerCapabilitySuccessorReceipt {
     }
 }
 
+/// Non-cloneable B-local receipt for the distinct membership lifecycle. The
+/// separately typed ACK emitter consumes it; no capability ACK can substitute
+/// for this receipt.
+pub(crate) struct Sys4I3InstalledSourceDeclaredOwnerMembershipSuccessorReceipt {
+    prior_generation_ref: String,
+    candidate_binding_ref: String,
+    successor_generation_ref: String,
+}
+
+impl Sys4I3InstalledSourceDeclaredOwnerMembershipSuccessorReceipt {
+    pub(crate) fn prior_generation_ref(&self) -> &str {
+        &self.prior_generation_ref
+    }
+
+    pub(crate) fn candidate_binding_ref(&self) -> &str {
+        &self.candidate_binding_ref
+    }
+
+    pub(crate) fn successor_generation_ref(&self) -> &str {
+        &self.successor_generation_ref
+    }
+}
+
 #[cfg(feature = "i3-process-test-seams")]
 #[derive(Clone, Copy)]
 pub(crate) enum Sys4I3OwnerCapabilitySuccessorTamper {
     AddUnrelatedOwnerLineage,
     ReanimateSelectedCapability,
     ReanimateSelectedWitness,
+}
+
+#[cfg(feature = "i3-process-test-seams")]
+#[derive(Clone, Copy)]
+pub(crate) enum Sys4I3SourceDeclaredOwnerMembershipSuccessorTamper {
+    RestoreSelectedMembership,
 }
 
 /// Strict private DTO for a process-restricted sealed admission.  It excludes
@@ -2184,9 +2363,9 @@ impl SealedFabricAdmission {
     /// coordinator after every child image has been derived.  Process
     /// restrictions intentionally receive `None`; only this parent-owned
     /// value can stage a successor.
-    pub(crate) fn take_i3_owner_capability_successor_coordinator(
+    pub(crate) fn take_i3_authority_successor_coordinator(
         &mut self,
-    ) -> Sys4Result<Sys4I3OwnerCapabilitySuccessorCoordinator> {
+    ) -> Sys4Result<Sys4I3AuthoritySuccessorCoordinator> {
         let publisher = self.authority_successor.take().ok_or_else(|| {
             Sys4DispatchDiagnostics::one(Sys4DiagnosticKind::ProgramAdmissionMismatch)
         })?;
@@ -2198,7 +2377,7 @@ impl SealedFabricAdmission {
                 Sys4DiagnosticKind::ProgramAdmissionMismatch,
             ));
         }
-        Ok(Sys4I3OwnerCapabilitySuccessorCoordinator {
+        Ok(Sys4I3AuthoritySuccessorCoordinator {
             program_identity: self.program_identity.clone(),
             current_generation: self.authority_generation.clone(),
             publisher,
@@ -2235,11 +2414,6 @@ impl SealedFabricAdmission {
             .map_err(|_| {
                 Sys4DispatchDiagnostics::one(Sys4DiagnosticKind::ProgramAdmissionMismatch)
             })?;
-        successor_full_generation
-            .validate_execution_restriction_exact(&restriction)
-            .map_err(|_| {
-                Sys4DispatchDiagnostics::one(Sys4DiagnosticKind::ProgramAdmissionMismatch)
-            })?;
         let prior_restricted = prior_full_generation.restricted_for_execution(&restriction);
         if !self
             .authority_generation
@@ -2255,6 +2429,67 @@ impl SealedFabricAdmission {
             operation,
             owner_locus,
         ) {
+            return Err(Sys4DispatchDiagnostics::one(
+                Sys4DiagnosticKind::ProgramAdmissionMismatch,
+            ));
+        }
+        Ok(SealedFabricAdmission {
+            program_identity: self.program_identity.clone(),
+            program_fingerprint: self.program_fingerprint.clone(),
+            summary: self.summary.clone(),
+            instance: self.instance.clone(),
+            authority_generation: successor_generation.clone(),
+            authority_successor: None,
+            authority_live_floor: M9AuthorityLiveFloor::new(successor_generation),
+            initial_state_seed: self.initial_state_seed.clone(),
+        })
+    }
+
+    /// Restrict the already M9-validated source-declared membership
+    /// retirement to B's process program. The parent has retained the full
+    /// M9 retirement/tombstone lineage; this child-facing cut verifies the
+    /// exact restricted M9/M8 negative delta and never acquires an issuer.
+    fn i3_restricted_source_declared_owner_membership_successor(
+        &self,
+        program: &FabricProgram,
+        prior_full_generation: &M9AuthorityGeneration,
+        successor_full_generation: &M9AuthorityGeneration,
+        operation: &str,
+        owner_locus: &str,
+    ) -> Sys4Result<SealedFabricAdmission> {
+        if self.program_identity != *program.checked_program_identity() {
+            return Err(Sys4DispatchDiagnostics::one(
+                Sys4DiagnosticKind::ProgramAdmissionMismatch,
+            ));
+        }
+        let restriction = m9_execution_restriction_for_program(program)?;
+        prior_full_generation
+            .validate_execution_restriction_exact(&restriction)
+            .map_err(|_| {
+                Sys4DispatchDiagnostics::one(Sys4DiagnosticKind::ProgramAdmissionMismatch)
+            })?;
+        // The generic restriction intentionally requires the live G1 owner
+        // use and therefore cannot validate the already-retired full G2.
+        // Parent-only prestage has already proven that full M9 retirement;
+        // below B proves the separately bounded restricted delta against its
+        // independently restored and generically validated G1.
+        let prior_restricted = prior_full_generation.restricted_for_execution(&restriction);
+        if !self
+            .authority_generation
+            .matches_for_restore(&prior_restricted)
+        {
+            return Err(Sys4DispatchDiagnostics::one(
+                Sys4DiagnosticKind::ProgramAdmissionMismatch,
+            ));
+        }
+        let successor_generation = successor_full_generation.restricted_for_execution(&restriction);
+        if !successor_generation
+            .is_exact_restricted_source_declared_membership_retirement_successor_of(
+                &prior_restricted,
+                operation,
+                owner_locus,
+            )
+        {
             return Err(Sys4DispatchDiagnostics::one(
                 Sys4DiagnosticKind::ProgramAdmissionMismatch,
             ));
@@ -2381,7 +2616,7 @@ impl SealedFabricAdmission {
     }
 }
 
-impl Sys4I3OwnerCapabilitySuccessorCoordinator {
+impl Sys4I3AuthoritySuccessorCoordinator {
     /// Stage one exact, already-admitted owner-capability successor before
     /// any child image or expected start binding has been handed off.  The
     /// caller supplies an operation/locus only after resolving it from the
@@ -2421,6 +2656,16 @@ impl Sys4I3OwnerCapabilitySuccessorCoordinator {
             self.pending_candidate_binding_ref.take().ok_or_else(|| {
                 Sys4DispatchDiagnostics::one(Sys4DiagnosticKind::ProgramAdmissionMismatch)
             })?;
+        let pending = match pending {
+            Sys4I3PendingAuthoritySuccessor::OwnerCapability(pending) => pending,
+            other => {
+                self.pending = Some(other);
+                self.pending_candidate_binding_ref = Some(expected_candidate_binding_ref);
+                return Err(Sys4DispatchDiagnostics::one(
+                    Sys4DiagnosticKind::ProgramAdmissionMismatch,
+                ));
+            }
+        };
         if prior_generation_ref != self.current_generation.generation_ref()
             || successor_generation_ref != pending.successor_generation().generation_ref()
             || candidate_binding_ref != expected_candidate_binding_ref
@@ -2428,14 +2673,14 @@ impl Sys4I3OwnerCapabilitySuccessorCoordinator {
                 .prior_generation()
                 .matches_for_restore(&self.current_generation)
         {
-            self.pending = Some(pending);
+            self.pending = Some(Sys4I3PendingAuthoritySuccessor::OwnerCapability(pending));
             self.pending_candidate_binding_ref = Some(expected_candidate_binding_ref);
             return Err(Sys4DispatchDiagnostics::one(
                 Sys4DiagnosticKind::ProgramAdmissionMismatch,
             ));
         }
         let successor_generation = pending.successor_generation().clone();
-        let successor_publisher = pending.into_successor_publisher();
+        let successor_publisher = (*pending).into_successor_publisher();
         if !successor_publisher
             .current_generation_for_restore()
             .matches_for_restore(&successor_generation)
@@ -2563,7 +2808,9 @@ impl Sys4I3OwnerCapabilitySuccessorCoordinator {
             operation,
             owner_locus,
         );
-        self.pending = Some(staged);
+        self.pending = Some(Sys4I3PendingAuthoritySuccessor::OwnerCapability(Box::new(
+            staged,
+        )));
         self.pending_candidate_binding_ref = Some(candidate_binding_ref.clone());
         Ok(Sys4I3RestrictedOwnerCapabilitySuccessor {
             operation: operation.to_string(),
@@ -2571,6 +2818,216 @@ impl Sys4I3OwnerCapabilitySuccessorCoordinator {
             prior_generation_ref,
             prior_generation_integrity_ref,
             successor_generation_ref,
+            successor_admission,
+            candidate_binding_ref,
+        })
+    }
+
+    /// Stage the one exact M9-produced source-declared owner-membership
+    /// retirement. The caller supplies only the checked owner contract's
+    /// operation/locus; M9 resolves the membership and all dependent lineage.
+    pub(crate) fn prestage_source_declared_owner_membership_retirement(
+        &mut self,
+        target_program: &FabricProgram,
+        target_admission: &SealedFabricAdmission,
+        operation: &str,
+        owner_locus: &str,
+    ) -> Sys4Result<Sys4I3RestrictedSourceDeclaredOwnerMembershipSuccessor> {
+        let staged =
+            self.begin_source_declared_owner_membership_prestage(operation, owner_locus)?;
+        self.finish_source_declared_owner_membership_prestage(
+            staged,
+            target_program,
+            target_admission,
+            operation,
+            owner_locus,
+        )
+    }
+
+    #[cfg(feature = "i3-process-test-seams")]
+    pub(crate) fn test_only_prestage_source_declared_owner_membership_retirement_with_tamper(
+        &mut self,
+        target_program: &FabricProgram,
+        target_admission: &SealedFabricAdmission,
+        operation: &str,
+        owner_locus: &str,
+        tamper: Sys4I3SourceDeclaredOwnerMembershipSuccessorTamper,
+    ) -> Sys4Result<Sys4I3RestrictedSourceDeclaredOwnerMembershipSuccessor> {
+        let mut staged =
+            self.begin_source_declared_owner_membership_prestage(operation, owner_locus)?;
+        let applied = match tamper {
+            Sys4I3SourceDeclaredOwnerMembershipSuccessorTamper::RestoreSelectedMembership => {
+                staged.test_only_restore_selected_membership_for_i3(operation, owner_locus)
+            }
+        };
+        if !applied {
+            return Err(Sys4DispatchDiagnostics::one(
+                Sys4DiagnosticKind::ProgramAdmissionMismatch,
+            ));
+        }
+        self.finish_source_declared_owner_membership_prestage(
+            staged,
+            target_program,
+            target_admission,
+            operation,
+            owner_locus,
+        )
+    }
+
+    /// Publish only the exact M9 successor retained in the matching
+    /// membership stage. A capability receipt is rejected without consuming
+    /// the membership stage or its expected binding.
+    pub(crate) fn publish_prestaged_source_declared_owner_membership_retirement(
+        &mut self,
+        prior_generation_ref: &str,
+        successor_generation_ref: &str,
+        candidate_binding_ref: &str,
+    ) -> Sys4Result<String> {
+        let pending = self.pending.take().ok_or_else(|| {
+            Sys4DispatchDiagnostics::one(Sys4DiagnosticKind::ProgramAdmissionMismatch)
+        })?;
+        let expected_candidate_binding_ref =
+            self.pending_candidate_binding_ref.take().ok_or_else(|| {
+                Sys4DispatchDiagnostics::one(Sys4DiagnosticKind::ProgramAdmissionMismatch)
+            })?;
+        let pending = match pending {
+            Sys4I3PendingAuthoritySuccessor::SourceDeclaredOwnerMembership(pending) => pending,
+            other => {
+                self.pending = Some(other);
+                self.pending_candidate_binding_ref = Some(expected_candidate_binding_ref);
+                return Err(Sys4DispatchDiagnostics::one(
+                    Sys4DiagnosticKind::ProgramAdmissionMismatch,
+                ));
+            }
+        };
+        if prior_generation_ref != self.current_generation.generation_ref()
+            || successor_generation_ref != pending.successor_generation().generation_ref()
+            || candidate_binding_ref != expected_candidate_binding_ref
+            || !pending
+                .prior_generation()
+                .matches_for_restore(&self.current_generation)
+        {
+            self.pending =
+                Some(Sys4I3PendingAuthoritySuccessor::SourceDeclaredOwnerMembership(pending));
+            self.pending_candidate_binding_ref = Some(expected_candidate_binding_ref);
+            return Err(Sys4DispatchDiagnostics::one(
+                Sys4DiagnosticKind::ProgramAdmissionMismatch,
+            ));
+        }
+        let successor_generation = pending.successor_generation().clone();
+        let successor_publisher = (*pending).into_successor_publisher();
+        if !successor_publisher
+            .current_generation_for_restore()
+            .matches_for_restore(&successor_generation)
+        {
+            return Err(Sys4DispatchDiagnostics::one(
+                Sys4DiagnosticKind::ProgramAdmissionMismatch,
+            ));
+        }
+        self.current_generation = successor_generation;
+        self.publisher = successor_publisher;
+        Ok(self.current_generation.generation_ref().to_string())
+    }
+
+    fn begin_source_declared_owner_membership_prestage(
+        &self,
+        operation: &str,
+        owner_locus: &str,
+    ) -> Sys4Result<M9PrestagedSourceDeclaredOwnerMembershipRetirement> {
+        if self.pending.is_some()
+            || self.pending_candidate_binding_ref.is_some()
+            || operation.is_empty()
+            || owner_locus.is_empty()
+            || !self
+                .publisher
+                .current_generation_for_restore()
+                .matches_for_restore(&self.current_generation)
+        {
+            return Err(Sys4DispatchDiagnostics::one(
+                Sys4DiagnosticKind::ProgramAdmissionMismatch,
+            ));
+        }
+        let staged = self
+            .publisher
+            .prestage_exact_source_declared_owner_membership_retirement(operation, owner_locus)
+            .map_err(|_| {
+                Sys4DispatchDiagnostics::one(Sys4DiagnosticKind::ProgramAdmissionMismatch)
+            })?;
+        if !staged
+            .prior_generation()
+            .matches_for_restore(&self.current_generation)
+        {
+            return Err(Sys4DispatchDiagnostics::one(
+                Sys4DiagnosticKind::ProgramAdmissionMismatch,
+            ));
+        }
+        Ok(staged)
+    }
+
+    fn finish_source_declared_owner_membership_prestage(
+        &mut self,
+        staged: M9PrestagedSourceDeclaredOwnerMembershipRetirement,
+        target_program: &FabricProgram,
+        target_admission: &SealedFabricAdmission,
+        operation: &str,
+        owner_locus: &str,
+    ) -> Sys4Result<Sys4I3RestrictedSourceDeclaredOwnerMembershipSuccessor> {
+        if self.pending.is_some()
+            || self.pending_candidate_binding_ref.is_some()
+            || self.program_identity != *target_program.checked_program_identity()
+            || !staged.remains_exact_source_declared_owner_membership_retirement_for(
+                operation,
+                owner_locus,
+            )
+            || !staged.has_no_retired_relation_bindings()
+        {
+            return Err(Sys4DispatchDiagnostics::one(
+                Sys4DiagnosticKind::ProgramAdmissionMismatch,
+            ));
+        }
+        let successor_admission = target_admission
+            .i3_restricted_source_declared_owner_membership_successor(
+                target_program,
+                staged.prior_generation(),
+                staged.successor_generation(),
+                operation,
+                owner_locus,
+            )?;
+        let prior_generation_ref = target_admission
+            .authority_generation
+            .generation_ref()
+            .to_string();
+        let prior_generation_integrity_ref = target_admission
+            .authority_generation
+            .private_restore_integrity_digest();
+        let successor_generation_ref = successor_admission
+            .authority_generation
+            .generation_ref()
+            .to_string();
+        let membership_delta_ref = staged.membership_delta_ref().to_string();
+        let successor_admission_binding_ref = successor_admission.i3_private_snapshot_binding_ref();
+        let candidate_binding_ref = sys4_i3_source_declared_owner_membership_successor_binding_ref(
+            &Sys4I3SourceDeclaredOwnerMembershipSuccessorBindingInput {
+                program_identity: target_program.checked_program_identity(),
+                prior_generation_ref: &prior_generation_ref,
+                prior_generation_integrity_ref: &prior_generation_integrity_ref,
+                successor_generation_ref: &successor_generation_ref,
+                membership_delta_ref: &membership_delta_ref,
+                successor_admission_binding_ref: &successor_admission_binding_ref,
+                operation,
+                owner_locus,
+            },
+        );
+        self.pending =
+            Some(Sys4I3PendingAuthoritySuccessor::SourceDeclaredOwnerMembership(Box::new(staged)));
+        self.pending_candidate_binding_ref = Some(candidate_binding_ref.clone());
+        Ok(Sys4I3RestrictedSourceDeclaredOwnerMembershipSuccessor {
+            operation: operation.to_string(),
+            owner_locus: owner_locus.to_string(),
+            prior_generation_ref,
+            prior_generation_integrity_ref,
+            successor_generation_ref,
+            membership_delta_ref,
             successor_admission,
             candidate_binding_ref,
         })
@@ -2606,6 +3063,41 @@ fn sys4_i3_owner_capability_successor_binding_ref(
     )
 }
 
+struct Sys4I3SourceDeclaredOwnerMembershipSuccessorBindingInput<'a> {
+    program_identity: &'a CheckedProgramIdentity,
+    prior_generation_ref: &'a str,
+    prior_generation_integrity_ref: &'a str,
+    successor_generation_ref: &'a str,
+    membership_delta_ref: &'a str,
+    successor_admission_binding_ref: &'a str,
+    operation: &'a str,
+    owner_locus: &'a str,
+}
+
+fn sys4_i3_source_declared_owner_membership_successor_binding_ref(
+    input: &Sys4I3SourceDeclaredOwnerMembershipSuccessorBindingInput<'_>,
+) -> String {
+    let mut hasher = Sha256::new();
+    hasher.update(b"mirrorea/sys4/i3/source-declared-owner-membership-successor/v1\0");
+    for component in [
+        input.program_identity.stable_key(),
+        input.prior_generation_ref.to_string(),
+        input.prior_generation_integrity_ref.to_string(),
+        input.successor_generation_ref.to_string(),
+        input.membership_delta_ref.to_string(),
+        input.successor_admission_binding_ref.to_string(),
+        input.operation.to_string(),
+        input.owner_locus.to_string(),
+    ] {
+        hasher.update((component.len() as u64).to_be_bytes());
+        hasher.update(component.as_bytes());
+    }
+    format!(
+        "sys4-i3-source-declared-owner-membership-successor-sha256-v1:{:x}",
+        hasher.finalize()
+    )
+}
+
 impl Sys4I3PrivateSealedAdmissionSnapshot {
     const VERSION: u32 = 1;
 
@@ -2632,6 +3124,67 @@ impl Sys4I3PrivateSealedAdmissionSnapshot {
     }
 
     fn into_admission(self, program: &FabricProgram) -> Sys4Result<SealedFabricAdmission> {
+        let admission = self.into_admission_with_structural_checks(program)?;
+        let restriction = m9_execution_restriction_for_program(program)?;
+        admission
+            .authority_generation
+            .validate_execution_restriction_exact(&restriction)
+            .map_err(|_| {
+                Sys4DispatchDiagnostics::one(Sys4DiagnosticKind::IncompleteM9AuthorityInventory)
+            })?;
+        if !summary_matches_i3_restriction(&admission.summary, &restriction) {
+            return Err(Sys4DispatchDiagnostics::one(
+                Sys4DiagnosticKind::IncompleteM9AuthorityInventory,
+            ));
+        }
+        Ok(admission)
+    }
+
+    /// Restore only the separately tagged source-membership G2 candidate.
+    /// The same image first restores a generic, fully validated G1. This
+    /// path then proves the complete restricted negative delta against that
+    /// G1; it never weakens generic snapshot restore or admits a source-free
+    /// successor.
+    fn into_source_declared_owner_membership_successor_admission(
+        self,
+        program: &FabricProgram,
+        prior: &SealedFabricAdmission,
+        operation: &str,
+        owner_locus: &str,
+    ) -> Sys4Result<SealedFabricAdmission> {
+        let admission = self.into_admission_with_structural_checks(program)?;
+        let restriction = m9_execution_restriction_for_program(program)?;
+        if prior.program_identity != *program.checked_program_identity()
+            || prior.program_fingerprint != program.projected_fingerprint()
+            || prior.authority_successor.is_some()
+            || prior
+                .authority_generation
+                .validate_execution_restriction_exact(&restriction)
+                .is_err()
+            || !summary_matches_i3_restriction(&prior.summary, &restriction)
+            || admission.summary != prior.summary
+            || admission.instance != prior.instance
+            || admission.initial_state_seed != prior.initial_state_seed
+            || admission.authority_successor.is_some()
+            || !admission
+                .authority_generation
+                .is_exact_restricted_source_declared_membership_retirement_successor_of(
+                    &prior.authority_generation,
+                    operation,
+                    owner_locus,
+                )
+        {
+            return Err(Sys4DispatchDiagnostics::one(
+                Sys4DiagnosticKind::ProgramAdmissionMismatch,
+            ));
+        }
+        Ok(admission)
+    }
+
+    fn into_admission_with_structural_checks(
+        self,
+        program: &FabricProgram,
+    ) -> Sys4Result<SealedFabricAdmission> {
         if self.version != Self::VERSION {
             return Err(Sys4DispatchDiagnostics::one(
                 Sys4DiagnosticKind::ProgramAdmissionMismatch,
@@ -2687,17 +3240,6 @@ impl Sys4I3PrivateSealedAdmissionSnapshot {
             ));
         }
         validate_seed(program, &initial_state_seed)?;
-        let restriction = m9_execution_restriction_for_program(program)?;
-        authority_generation
-            .validate_execution_restriction_exact(&restriction)
-            .map_err(|_| {
-                Sys4DispatchDiagnostics::one(Sys4DiagnosticKind::IncompleteM9AuthorityInventory)
-            })?;
-        if !summary_matches_i3_restriction(&summary, &restriction) {
-            return Err(Sys4DispatchDiagnostics::one(
-                Sys4DiagnosticKind::IncompleteM9AuthorityInventory,
-            ));
-        }
         Ok(SealedFabricAdmission {
             program_identity,
             program_fingerprint,
@@ -13931,6 +14473,69 @@ impl LocalFabric {
             candidate_binding_ref,
             successor_generation_ref,
         })
+    }
+
+    /// Install the exact parent-prestaged restricted source-declared owner
+    /// membership successor. The full M9 retirement lineage remains at the
+    /// parent; B proves its own restricted, current M8 delta before the
+    /// backend refresh and local live-floor commit make G2 usable.
+    pub(crate) fn install_i3_restricted_source_declared_owner_membership_successor(
+        &mut self,
+        candidate: Sys4I3RestrictedSourceDeclaredOwnerMembershipSuccessor,
+    ) -> Sys4Result<Sys4I3InstalledSourceDeclaredOwnerMembershipSuccessorReceipt> {
+        let Sys4I3RestrictedSourceDeclaredOwnerMembershipSuccessor {
+            operation,
+            owner_locus,
+            prior_generation_ref,
+            prior_generation_integrity_ref,
+            successor_generation_ref,
+            membership_delta_ref: _,
+            successor_admission,
+            candidate_binding_ref,
+        } = candidate;
+        if self.authority_generation.generation_ref() != prior_generation_ref
+            || self.authority_generation.private_restore_integrity_digest()
+                != prior_generation_integrity_ref
+            || successor_admission.program_identity != *self.program.checked_program_identity()
+            || successor_admission.program_fingerprint != self.program.projected_fingerprint()
+            || successor_admission.authority_successor.is_some()
+            || successor_admission.authority_generation.generation_ref() != successor_generation_ref
+            || !successor_admission
+                .authority_generation
+                .is_exact_restricted_source_declared_membership_retirement_successor_of(
+                    &self.authority_generation,
+                    &operation,
+                    &owner_locus,
+                )
+        {
+            return Err(Sys4DispatchDiagnostics::one(
+                Sys4DiagnosticKind::ProgramAdmissionMismatch,
+            ));
+        }
+        let successor_generation = successor_admission.authority_generation;
+        let live_floor = self.authority_live_floor.clone();
+        let Some(mut floor_guard) = live_floor.guard_matching(&self.authority_generation) else {
+            return Err(Sys4DispatchDiagnostics::one(
+                Sys4DiagnosticKind::ProgramAdmissionMismatch,
+            ));
+        };
+        if !floor_guard.accepts_successor(&self.authority_generation, &successor_generation) {
+            return Err(Sys4DispatchDiagnostics::one(
+                Sys4DiagnosticKind::ProgramAdmissionMismatch,
+            ));
+        }
+        self.backend
+            .refresh_authority(&successor_generation)
+            .map_err(Sys4DispatchDiagnostics::one)?;
+        floor_guard.commit_successor(&successor_generation);
+        self.authority_generation = successor_generation;
+        Ok(
+            Sys4I3InstalledSourceDeclaredOwnerMembershipSuccessorReceipt {
+                prior_generation_ref,
+                candidate_binding_ref,
+                successor_generation_ref,
+            },
+        )
     }
 
     fn reject_uninstalled_authority_transition(

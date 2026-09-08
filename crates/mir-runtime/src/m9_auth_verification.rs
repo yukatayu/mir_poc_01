@@ -2437,6 +2437,122 @@ pub(crate) struct M9PrestagedOwnerCapabilityRevocation {
     successor_publisher: M9AuthoritySuccessorPublisher,
 }
 
+/// One uncommitted, parent-retained I3 source-declared membership successor.
+///
+/// This type is intentionally distinct from owner-capability revocation.  The
+/// only future constructor must retire the exact M9-resolved owner membership
+/// and its dependent capability/witness lineage before SYS-4 restricts the
+/// successor for B.  No image or child receives the publisher.
+pub(crate) struct M9PrestagedSourceDeclaredOwnerMembershipRetirement {
+    prior_generation: M9AuthorityGeneration,
+    successor_generation: M9AuthorityGeneration,
+    successor_publisher: M9AuthoritySuccessorPublisher,
+    retirement: M9RetiredMembershipLineage,
+    membership_delta_ref: String,
+    retired_relation_bindings: BTreeSet<String>,
+}
+
+impl M9PrestagedSourceDeclaredOwnerMembershipRetirement {
+    pub(crate) fn prior_generation(&self) -> &M9AuthorityGeneration {
+        &self.prior_generation
+    }
+
+    pub(crate) fn successor_generation(&self) -> &M9AuthorityGeneration {
+        &self.successor_generation
+    }
+
+    pub(crate) fn membership_delta_ref(&self) -> &str {
+        &self.membership_delta_ref
+    }
+
+    pub(crate) fn remains_exact_source_declared_owner_membership_retirement_for(
+        &self,
+        operation: &str,
+        owner_locus: &str,
+    ) -> bool {
+        let Some((_, prior_use)) = self
+            .prior_generation
+            .owner_authority_for_operation(operation, owner_locus)
+        else {
+            return false;
+        };
+        let Some(membership_ref) = prior_use.membership_ref() else {
+            return false;
+        };
+        self.successor_generation
+            .is_exact_source_declared_owner_membership_retirement_successor_of(
+                &self.prior_generation,
+                operation,
+                owner_locus,
+                membership_ref,
+                &self.retirement,
+                self.retired_relation_bindings(),
+            )
+    }
+
+    fn retired_relation_bindings(&self) -> &BTreeSet<String> {
+        &self.retired_relation_bindings
+    }
+
+    /// This bounded WorldAuthority-consumer successor has no primary-anchor
+    /// relation retirement. Any such source shape needs a separately proven
+    /// child-visible relation delta and is therefore unsupported here.
+    pub(crate) fn has_no_retired_relation_bindings(&self) -> bool {
+        self.retired_relation_bindings.is_empty()
+    }
+
+    /// Feature-only exact-delta falsifier. It restores only the genuine G1
+    /// selected M8 membership into the M9-produced G2 translation; it cannot
+    /// mint authority or alter the parent-side M9 retirement lineage.
+    #[cfg(feature = "i3-process-test-seams")]
+    pub(crate) fn test_only_restore_selected_membership_for_i3(
+        &mut self,
+        operation: &str,
+        owner_locus: &str,
+    ) -> bool {
+        let Some((_, prior_use)) = self
+            .prior_generation
+            .owner_authority_for_operation(operation, owner_locus)
+        else {
+            return false;
+        };
+        self.successor_generation
+            .authority_state
+            .test_only_restore_membership_from_prior_for_i3(
+                &self.prior_generation.authority_state,
+                prior_use.membership_ref(),
+            )
+    }
+
+    /// Negative-only exact-delta falsifier. It removes one already retained,
+    /// unretired finite binding from the M9-produced G2 and cannot select or
+    /// construct authority material.
+    #[cfg(feature = "i3-process-test-seams")]
+    pub(crate) fn test_only_remove_one_unretired_fresh_relation_binding_for_i3_exact_delta_falsifier(
+        &mut self,
+    ) -> bool {
+        let Some(relation) = self
+            .successor_generation
+            .fresh_relation_reacquire_bindings
+            .keys()
+            .find(|relation| !self.retired_relation_bindings.contains(*relation))
+            .cloned()
+        else {
+            return false;
+        };
+        self.successor_generation
+            .fresh_relation_reacquire_bindings
+            .remove(&relation)
+            .is_some()
+    }
+
+    /// Consume the provisional stage only at the parent publication
+    /// boundary.  The returned publisher has no constructor outside M9.
+    pub(crate) fn into_successor_publisher(self) -> M9AuthoritySuccessorPublisher {
+        self.successor_publisher
+    }
+}
+
 impl M9PrestagedOwnerCapabilityRevocation {
     pub(crate) fn prior_generation(&self) -> &M9AuthorityGeneration {
         &self.prior_generation
@@ -8399,6 +8515,287 @@ impl M9AuthorityGeneration {
                 )
     }
 
+    /// Recognize one bounded I3 source-declared membership retirement.
+    ///
+    /// Unlike capability retirement, the selected membership is absent from
+    /// the fresh M8 translation, together with every translated use bound to
+    /// it.  The full M9 tombstone stays parent-side; a restricted child later
+    /// validates only its exact translated M8 delta plus the opaque binding.
+    pub(crate) fn is_exact_source_declared_owner_membership_retirement_successor_of(
+        &self,
+        prior: &Self,
+        operation: &str,
+        owner_locus: &str,
+        membership_ref: &str,
+        retirement: &M9RetiredMembershipLineage,
+        retired_relation_bindings: &BTreeSet<String>,
+    ) -> bool {
+        let Some((principal, prior_use)) =
+            prior.owner_authority_for_operation(operation, owner_locus)
+        else {
+            return false;
+        };
+        let Some(prior_lineage) = prior.kernel_owner_lineages.get(&(
+            operation.to_string(),
+            principal.clone(),
+            owner_locus.to_string(),
+        )) else {
+            return false;
+        };
+        if prior_use.membership_ref() != Some(membership_ref)
+            || prior_lineage.membership_ref() != membership_ref
+            || prior
+                .authority_state
+                .validate_owner_use(
+                    prior_use.principal(),
+                    prior_use.membership_ref(),
+                    prior_use.capability_ref(),
+                    prior_use.witness_ref(),
+                    owner_locus,
+                    operation,
+                )
+                .is_err()
+        {
+            return false;
+        }
+
+        let Some(expected_generation) = prior.generation.checked_add(1) else {
+            return false;
+        };
+        let audit_frontier =
+            format!("sys4-source-declared-membership-retire:{principal}:{owner_locus}");
+        if self.program_identity != prior.program_identity
+            || self.generation != expected_generation
+            || self.generation_ref
+                != format!(
+                    "m9-authority-generation:{:020}:{}",
+                    expected_generation,
+                    self.checked_patch_authority_lineage_digest()
+                )
+            || retirement.checked_membership_identity_ref()
+                != m9_opaque_ref(&format!(
+                    "source-declared-membership-identity:{principal}:{owner_locus}:{membership_ref}"
+                ))
+            || retirement.prior_membership_ref()
+                != m9_opaque_ref(&format!(
+                    "source-declared-membership-active:{principal}:{owner_locus}:{membership_ref}"
+                ))
+            || retirement.successor_tombstone_ref()
+                != m9_opaque_ref(&format!(
+                    "source-declared-membership-retired:{principal}:{owner_locus}:{membership_ref}:{audit_frontier}"
+                ))
+            || retirement.membership_epoch_before_ref()
+                != m9_opaque_ref(&format!(
+                    "source-declared-membership-epoch-before:{membership_ref}:{}",
+                    prior_lineage.membership_epoch()
+                ))
+            || retirement.membership_epoch_after_ref()
+                != m9_opaque_ref(&format!(
+                    "source-declared-membership-epoch-after-retirement:{membership_ref}:{}",
+                    prior_lineage.membership_epoch()
+                ))
+            || retirement.incarnation_before_ref()
+                != m9_opaque_ref(&format!(
+                    "source-declared-membership-incarnation-before:{membership_ref}:{}",
+                    prior_lineage.membership_incarnation()
+                ))
+            || retirement.incarnation_after_ref()
+                != m9_opaque_ref(&format!(
+                    "source-declared-membership-incarnation-after-retirement:{membership_ref}:{}",
+                    prior_lineage.membership_incarnation()
+                ))
+        {
+            return false;
+        }
+
+        let expected_owner_uses = prior
+            .owner_uses
+            .iter()
+            .filter(|(_, authority_use)| authority_use.membership_ref() != Some(membership_ref))
+            .map(|(key, authority_use)| (key.clone(), authority_use.clone()))
+            .collect::<BTreeMap<_, _>>();
+        let expected_relation_uses = prior
+            .relation_uses
+            .iter()
+            .filter(|(_, authority_use)| authority_use.membership_ref() != Some(membership_ref))
+            .map(|(key, authority_use)| (key.clone(), authority_use.clone()))
+            .collect::<BTreeMap<_, _>>();
+        let expected_designated_evaluation_uses = prior
+            .designated_evaluation_uses
+            .iter()
+            .filter(|(_, authority_use)| authority_use.membership_ref() != Some(membership_ref))
+            .map(|(key, authority_use)| (key.clone(), authority_use.clone()))
+            .collect::<BTreeMap<_, _>>();
+        let expected_designated_consumption_uses = prior
+            .designated_consumption_uses
+            .iter()
+            .filter(|(_, authority_use)| authority_use.membership_ref() != Some(membership_ref))
+            .map(|(key, authority_use)| (key.clone(), authority_use.clone()))
+            .collect::<BTreeMap<_, _>>();
+        let expected_owner_lineages = prior
+            .kernel_owner_lineages
+            .iter()
+            .filter(|(_, lineage)| lineage.membership_ref() != membership_ref)
+            .map(|(key, lineage)| (key.clone(), lineage.clone()))
+            .collect::<BTreeMap<_, _>>();
+        let expected_remote_input_lineages = prior
+            .kernel_designated_remote_input_lineages
+            .iter()
+            .filter(|(_, lineage)| lineage.membership_ref() != membership_ref)
+            .map(|(key, lineage)| (key.clone(), lineage.clone()))
+            .collect::<BTreeMap<_, _>>();
+        let mut expected_fresh_relation_bindings = prior.fresh_relation_reacquire_bindings.clone();
+        for relation in retired_relation_bindings {
+            expected_fresh_relation_bindings.remove(relation);
+        }
+
+        self.owner_uses == expected_owner_uses
+            && self.relation_uses == expected_relation_uses
+            && self.designated_evaluation_uses == expected_designated_evaluation_uses
+            && self.designated_consumption_uses == expected_designated_consumption_uses
+            && self.kernel_owner_lineages == expected_owner_lineages
+            && self.kernel_designated_remote_input_lineages == expected_remote_input_lineages
+            && self.fresh_relation_reacquire_bindings == expected_fresh_relation_bindings
+            && self.revoked_owner_capabilities == prior.revoked_owner_capabilities
+            && self.revoked_designated_consumption_capabilities
+                == prior.revoked_designated_consumption_capabilities
+            && self.designated_consumer_failures == prior.designated_consumer_failures
+            && self.designated_consumer_witness_retirements
+                == prior.designated_consumer_witness_retirements
+            && self.designated_source_release_failures == prior.designated_source_release_failures
+            && self.designated_consumer_validation_occurrences
+                == prior.designated_consumer_validation_occurrences
+            && self.owner_operation_validation_occurrences
+                == prior.owner_operation_validation_occurrences
+            && self.source_release_validation_occurrences
+                == prior.source_release_validation_occurrences
+            && self
+                .authority_state
+                .is_exact_source_declared_membership_retirement_successor_of(
+                    &prior.authority_state,
+                    Some(membership_ref),
+                )
+    }
+
+    /// Exact child-visible half of the one supported source-declared
+    /// membership retirement. The parent has already verified the full M9
+    /// retirement/tombstone lineage. A child can prove only this restricted
+    /// negative delta against its validated G1 and matching expected
+    /// candidate; it never receives an issuer or a caller-selected delta.
+    pub(crate) fn is_exact_restricted_source_declared_membership_retirement_successor_of(
+        &self,
+        prior: &Self,
+        operation: &str,
+        owner_locus: &str,
+    ) -> bool {
+        let Some((principal, prior_use)) =
+            prior.owner_authority_for_operation(operation, owner_locus)
+        else {
+            return false;
+        };
+        let Some(membership_ref) = prior_use.membership_ref() else {
+            return false;
+        };
+        let Some(prior_lineage) = prior.kernel_owner_lineages.get(&(
+            operation.to_string(),
+            principal,
+            owner_locus.to_string(),
+        )) else {
+            return false;
+        };
+        let Some(expected_generation) = prior.generation.checked_add(1) else {
+            return false;
+        };
+        if prior_lineage.membership_ref() != membership_ref
+            || prior
+                .authority_state
+                .validate_owner_use(
+                    prior_use.principal(),
+                    prior_use.membership_ref(),
+                    prior_use.capability_ref(),
+                    prior_use.witness_ref(),
+                    owner_locus,
+                    operation,
+                )
+                .is_err()
+            || self.program_identity != prior.program_identity
+            || self.generation != expected_generation
+            // The selected WorldAuthority membership may not own a finite
+            // relation binding in this bounded consumer route. Primary-anchor
+            // retirement/reacquisition remains unsupported rather than being
+            // inferred from a child-side relation record.
+            || prior.fresh_relation_reacquire_bindings.values().any(|binding| {
+                binding.authority.membership_ref() == Some(membership_ref)
+            })
+        {
+            return false;
+        }
+
+        let expected_owner_uses = prior
+            .owner_uses
+            .iter()
+            .filter(|(_, authority_use)| authority_use.membership_ref() != Some(membership_ref))
+            .map(|(key, authority_use)| (key.clone(), authority_use.clone()))
+            .collect::<BTreeMap<_, _>>();
+        let expected_relation_uses = prior
+            .relation_uses
+            .iter()
+            .filter(|(_, authority_use)| authority_use.membership_ref() != Some(membership_ref))
+            .map(|(key, authority_use)| (key.clone(), authority_use.clone()))
+            .collect::<BTreeMap<_, _>>();
+        let expected_designated_evaluation_uses = prior
+            .designated_evaluation_uses
+            .iter()
+            .filter(|(_, authority_use)| authority_use.membership_ref() != Some(membership_ref))
+            .map(|(key, authority_use)| (key.clone(), authority_use.clone()))
+            .collect::<BTreeMap<_, _>>();
+        let expected_designated_consumption_uses = prior
+            .designated_consumption_uses
+            .iter()
+            .filter(|(_, authority_use)| authority_use.membership_ref() != Some(membership_ref))
+            .map(|(key, authority_use)| (key.clone(), authority_use.clone()))
+            .collect::<BTreeMap<_, _>>();
+        let expected_owner_lineages = prior
+            .kernel_owner_lineages
+            .iter()
+            .filter(|(_, lineage)| lineage.membership_ref() != membership_ref)
+            .map(|(key, lineage)| (key.clone(), lineage.clone()))
+            .collect::<BTreeMap<_, _>>();
+        let expected_remote_input_lineages = prior
+            .kernel_designated_remote_input_lineages
+            .iter()
+            .filter(|(_, lineage)| lineage.membership_ref() != membership_ref)
+            .map(|(key, lineage)| (key.clone(), lineage.clone()))
+            .collect::<BTreeMap<_, _>>();
+
+        self.owner_uses == expected_owner_uses
+            && self.relation_uses == expected_relation_uses
+            && self.designated_evaluation_uses == expected_designated_evaluation_uses
+            && self.designated_consumption_uses == expected_designated_consumption_uses
+            && self.kernel_owner_lineages == expected_owner_lineages
+            && self.kernel_designated_remote_input_lineages == expected_remote_input_lineages
+            && self.fresh_relation_reacquire_bindings == prior.fresh_relation_reacquire_bindings
+            && self.revoked_owner_capabilities == prior.revoked_owner_capabilities
+            && self.revoked_designated_consumption_capabilities
+                == prior.revoked_designated_consumption_capabilities
+            && self.designated_consumer_failures == prior.designated_consumer_failures
+            && self.designated_consumer_witness_retirements
+                == prior.designated_consumer_witness_retirements
+            && self.designated_source_release_failures == prior.designated_source_release_failures
+            && self.designated_consumer_validation_occurrences
+                == prior.designated_consumer_validation_occurrences
+            && self.owner_operation_validation_occurrences
+                == prior.owner_operation_validation_occurrences
+            && self.source_release_validation_occurrences
+                == prior.source_release_validation_occurrences
+            && self
+                .authority_state
+                .is_exact_source_declared_membership_retirement_successor_of(
+                    &prior.authority_state,
+                    Some(membership_ref),
+                )
+    }
+
     /// Feature-gated, negative-only exact-delta falsifier for the I3 M9
     /// unit.  M9 resolves both admitted owner uses and permits removal only
     /// of the membership belonging to the distinct unrelated owner.  It
@@ -8550,6 +8947,10 @@ impl M9AuthorityGeneration {
             previous.owner_operation_validation_occurrences.clone();
         self.source_release_validation_occurrences =
             previous.source_release_validation_occurrences.clone();
+        // These finite bindings were checked at G1 admission, not minted by
+        // the fresh translation. The retirement caller removes exactly the
+        // M9-selected primary relations before sealing G2.
+        self.fresh_relation_reacquire_bindings = previous.fresh_relation_reacquire_bindings.clone();
         self.generation_ref = format!(
             "m9-authority-generation:{:020}:{}",
             self.generation,
@@ -9029,6 +9430,59 @@ impl M9AuthoritySuccessorPublisher {
             prior_generation,
             successor_generation,
             successor_publisher,
+        })
+    }
+
+    /// Stage, but do not publish, the one I3 source-declared membership
+    /// successor. M9 alone resolves the admitted principal and retires its
+    /// membership with every dependent capability/witness lineage.  The
+    /// returned publisher remains parent-only until a qualified child install
+    /// receipt reaches the separate membership ACK route.
+    pub(crate) fn prestage_exact_source_declared_owner_membership_retirement(
+        &self,
+        operation: &str,
+        owner_locus: &str,
+    ) -> Result<M9PrestagedSourceDeclaredOwnerMembershipRetirement, M9AdmissionDiagnostics> {
+        let prior_generation = self.current.clone();
+        let (principal, prior_use) = prior_generation
+            .owner_authority_for_operation(operation, owner_locus)
+            .ok_or_else(|| {
+                M9AdmissionDiagnostics::one(M9AdmissionErrorKind::InvalidMembershipLineage)
+            })?;
+        let membership_ref = prior_use.membership_ref().ok_or_else(|| {
+            M9AdmissionDiagnostics::one(M9AdmissionErrorKind::InvalidMembershipLineage)
+        })?;
+        let retired_relation_bindings = self
+            .fresh_anchor_reacquire_templates
+            .iter()
+            .filter_map(|(relation, template)| {
+                (template.primary_principal == principal && template.primary_locus == owner_locus)
+                    .then_some(relation.clone())
+            })
+            .collect::<BTreeSet<_>>();
+        let mut successor_publisher = self.clone();
+        let (successor_generation, retirement) =
+            successor_publisher.retire_source_declared_membership(&principal, owner_locus)?;
+        if !successor_generation.is_exact_source_declared_owner_membership_retirement_successor_of(
+            &prior_generation,
+            operation,
+            owner_locus,
+            membership_ref,
+            &retirement,
+            &retired_relation_bindings,
+        ) {
+            return Err(M9AdmissionDiagnostics::one(
+                M9AdmissionErrorKind::InvalidMembershipLineage,
+            ));
+        }
+        let membership_delta_ref = retirement.successor_tombstone_ref().to_string();
+        Ok(M9PrestagedSourceDeclaredOwnerMembershipRetirement {
+            prior_generation,
+            successor_generation,
+            successor_publisher,
+            retirement,
+            membership_delta_ref,
+            retired_relation_bindings,
         })
     }
 

@@ -337,11 +337,19 @@ recordが揃ったためofficial I2 entry後exitを受理しました。broad PH
   with generic completion only; their fault trace is not exported. The repaired
   held-S2 and unsupported-slot cases use shared-body generation/decoder checks.
   The lost case decoded and discarded a complete frame before semantic admission;
-  it is not wire packet loss or a no-read result. Final post-review runtime410,
-  all probe targets, process64, M1067, I2 local5/CLI8 and provider guards5 pass;
-  scoped Clippy/format pass and review has no remaining findings. Component
-  docs/Git integration is being recorded; I3-3 itself remains unaccepted.
-  Ordinary 512 KiB, semantic 64 KiB and image 8 MiB caps remain unchanged;
+  it is not wire packet loss or a no-read result. Final row13 follow-up runtime413,
+  all probe targets, process68, M1067, I2 local5/CLI8 and provider guards5 pass;
+  scoped Clippy/format pass and review has no remaining findings. Row13 verifies
+  source-derived WorldAuthority membership retirement with full-parent M9 and
+  qualified restricted-child G1→G2 coverage; old-G1 CarrierAdmissionRejected is
+  before owner use and LOCAL genuine M8 StaleMembership is separate. No observer
+  renewal, grant mint or session authority follows. The finite
+  provider component is committed/pushed at `94ad584577fadfd0b016ff798a22b84df536939f`
+  with clean HEAD/origin/main/live parity observed 2026-09-09 05:21 JST; I3-3
+  itself remains unaccepted.
+  Unrelated relation bindings remain exact; terminal errors are fieldless opaque/
+  slot-only, including wrong-kind ACK then valid publication. Row20 cut/order is
+  the next unimplemented consumer. Ordinary 512 KiB, semantic 64 KiB and image 8 MiB caps remain unchanged;
   detailed prior lifecycle and boundary evidence remains in Report2606.
   Private M8 v2 remains provisional. No provider row-18 or whole-I3-3
   acceptance follows.
@@ -384,11 +392,13 @@ recordが揃ったためofficial I2 entry後exitを受理しました。broad PH
   Normal v2 observation is separately M9-authorized; four two-session fault
   profiles use child-private assertions and generic completion, not exported
   fault traces. The lost-result case discards a received, decoded frame before
-  semantic admission; it is not wire packet loss. Final post-review runtime410,
-  all probe targets, process64, M10/I2 and provider guards pass, as do scoped
-  Clippy/format; review has no remaining findings. Component docs/Git integration
-  and remaining rows13/15/19/20/order/whole-I3-3 acceptance are tracked in
-  Report2606 and Plan250. Historical micro-checkpoints stay in Report2606; no
+  semantic admission; it is not wire packet loss. Final row13 follow-up runtime413,
+  all probe targets, process68, M10/I2 and provider guards pass, as do scoped
+  Clippy/format; review has no remaining findings. The finite provider component
+  is committed/pushed at `94ad584577fadfd0b016ff798a22b84df536939f` with parity
+  observed 2026-09-09 05:21 JST. Row13 membership successor, row15/19 evidence
+  reuse, row20 cut/order and whole-I3-3 acceptance remain tracked in Report2606
+  and Plan250. Historical micro-checkpoints stay in Report2606; no
   official lifecycle or public workflow claim follows.
 
 ## Historical plan index（Plan 249を含めrepository memory、current queueではない）

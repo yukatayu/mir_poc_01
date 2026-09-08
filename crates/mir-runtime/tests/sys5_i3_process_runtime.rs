@@ -15,10 +15,10 @@ use std::{
 
 use mir_runtime::{
     sys5_i3_process_runtime::{
-        Sys5I3Deployment, Sys5I3DeploymentSlot, Sys5I3PrivateProcessCodec,
-        Sys5I3PrivateProcessCodecErrorKind, Sys5I3ProcessArtifact, Sys5I3ProcessCohort,
-        Sys5I3ProcessImage, Sys5I3ProcessRuntime, Sys5I3ProcessRuntimeErrorKind,
-        Sys5I3RetainedEdgeContract,
+        Sys5I3Deployment, Sys5I3DeploymentSlot, Sys5I3LocalnetControlErrorKind,
+        Sys5I3PrivateProcessCodec, Sys5I3PrivateProcessCodecErrorKind, Sys5I3ProcessArtifact,
+        Sys5I3ProcessCohort, Sys5I3ProcessImage, Sys5I3ProcessRuntime,
+        Sys5I3ProcessRuntimeErrorKind, Sys5I3RetainedEdgeContract,
     },
     sys5_local_slice::{Sys5LocalProject, Sys5LocalSliceError, Sys5SourceInput, build_project},
 };
@@ -33,6 +33,7 @@ use mir_runtime::sys5_i3_process_runtime::Sys5I3RegisteredOwnerLifecycleAckReade
 #[cfg(feature = "i3-process-test-seams")]
 use mir_runtime::sys5_i3_process_runtime::{
     Sys5I3LifecyclePublicationOutcome, Sys5I3OwnerCapabilitySuccessorTamper,
+    Sys5I3SourceDeclaredOwnerMembershipSuccessorTamper,
 };
 #[cfg(feature = "i3-process-test-seams")]
 use mir_runtime::sys5_local_slice::Sys5I3AdapterCarrierContract;
@@ -1603,6 +1604,330 @@ fn i3_3_prestage_exact_successor_predicate_rejects_added_or_reanimated_authority
             .expect("a failed prestage leaves the original G1 owner image usable");
         assert_candidate_a_child_runtime(&owner);
     }
+}
+
+#[test]
+#[cfg(all(unix, feature = "i3-process-test-seams"))]
+fn i3_3_qualified_membership_successor_installs_acknowledges_and_publishes_g2() {
+    // LOCAL parent/B custody evidence only. This reaches the real qualified
+    // membership install and registered ACK path, but does not claim a
+    // multi-process delivery or a renewed G2 request carrier.
+    let project = build_once(CANONICAL_SOURCE);
+    let deployment = two_nonempty_slots(&project);
+    let owner_request = checked_owner_request_contract(&project);
+    let codec = Sys5I3PrivateProcessCodec::private_provisional_v1();
+    let run_ref = "i3-3-qualified-source-declared-membership-positive";
+    let mut cohort = single_coordinator_cohort(&project, &deployment);
+    let parent_g1_generation = cohort
+        .observer_safe_lifecycle_publication_summary()
+        .published_authority_generation_ref()
+        .to_string();
+
+    cohort
+        .prestage_source_declared_owner_membership_retirement(run_ref, &owner_request)
+        .expect("the exact checked owner contract stages one qualified parent-held membership successor");
+    let (parent_ack_stream, mut registered_b_ack_writer) = UnixStream::pair()
+        .expect("the local qualified lifecycle uses one parent/B Unix-stream pair");
+    let mut reader = cohort
+        .take_registered_source_declared_owner_membership_lifecycle_ack_reader(
+            OWNER_SLOT,
+            parent_ack_stream,
+            Duration::from_secs(5),
+        )
+        .expect("only the staged parent registers the distinct B membership ACK reader");
+    let (_requester_control, owner_control) = cohort
+        .split_trusted_localnet_controls_with_prestaged_source_declared_owner_membership_lifecycle(
+            &codec,
+            run_ref,
+            REQUESTER_SLOT,
+            "requester-spki:i3-3-qualified-membership",
+            OWNER_SLOT,
+            "owner-spki:i3-3-qualified-membership",
+        )
+        .expect("the qualified membership prestage consumes only matching parent-held controls");
+    let owner_image = codec
+        .decode_untrusted_image(
+            &codec
+                .encode_image(take_process_image(&mut cohort, OWNER_SLOT))
+                .expect(
+                    "the genuine B membership image crosses the private codec as tainted input",
+                ),
+        )
+        .expect("the genuine B membership image decodes only to an untrusted candidate");
+    let (mut owner, _owner_control, owner_stimulus) = codec
+        .validate_and_start_image_with_prestaged_source_declared_owner_membership_lifecycle(
+            owner_image,
+            owner_control,
+        )
+        .expect(
+            "only the qualified restore accepts the genuine membership-staged B image and control",
+        );
+    let installed_ack = owner
+        .install_admitted_source_declared_owner_membership_successor(
+            owner_stimulus
+                .expect("only the selected genuine B owns the membership install stimulus"),
+        )
+        .expect("the qualified B install returns the one typed membership ACK wrapper");
+    let framed_ack = codec
+        .encode_installed_source_declared_owner_membership_lifecycle_ack(installed_ack)
+        .expect("only the genuine qualified B install serializes a membership ACK frame");
+    registered_b_ack_writer
+        .write_all(&framed_ack)
+        .expect("the genuine B membership ACK reaches only its registered parent descriptor");
+    let completion = match reader.read_next_completion(&codec) {
+        Ok(completion) => completion,
+        Err(_) => panic!(
+            "the registered membership reader accepts only the genuine B-installed membership ACK"
+        ),
+    };
+    cohort
+        .publish_registered_source_declared_owner_membership_lifecycle_completion(completion)
+        .expect("only the registered qualified membership completion publishes G2");
+
+    let publication = cohort.observer_safe_lifecycle_publication_summary();
+    assert!(
+        publication.published_authority_generation_ref() != parent_g1_generation
+            && publication.publication_outcome()
+                == Some(Sys5I3LifecyclePublicationOutcome::G2Published),
+        "the one qualified B membership install and registered ACK publish a distinct parent-held G2"
+    );
+    let requester = Sys5I3ProcessRuntime::start(take_process_image(&mut cohort, REQUESTER_SLOT))
+        .expect("the unmodified G1 requester image remains ordinarily startable after the distinct B membership publication");
+    assert_candidate_a_child_runtime(&requester);
+}
+
+#[test]
+#[cfg(all(unix, feature = "i3-process-test-seams"))]
+fn i3_3_capability_restore_rejects_genuine_membership_staged_image_before_install() {
+    // This is only lifecycle-kind separation. It does not assert generic
+    // sealed-admission withdrawal behavior, which is tested at M9/SYS4.
+    let project = build_once(CANONICAL_SOURCE);
+    let deployment = two_nonempty_slots(&project);
+    let owner_request = checked_owner_request_contract(&project);
+    let codec = Sys5I3PrivateProcessCodec::private_provisional_v1();
+    let run_ref = "i3-3-generic-capability-restore-rejects-membership-stage";
+    let mut cohort = single_coordinator_cohort(&project, &deployment);
+    let parent_g1_generation = cohort
+        .observer_safe_lifecycle_publication_summary()
+        .published_authority_generation_ref()
+        .to_string();
+
+    cohort
+        .prestage_source_declared_owner_membership_retirement(run_ref, &owner_request)
+        .expect("the genuine parent membership candidate must be staged before kind separation is tested");
+    let (_requester_control, owner_control) = cohort
+        .split_trusted_localnet_controls_with_prestaged_source_declared_owner_membership_lifecycle(
+            &codec,
+            run_ref,
+            REQUESTER_SLOT,
+            "requester-spki:i3-3-generic-kind-separation",
+            OWNER_SLOT,
+            "owner-spki:i3-3-generic-kind-separation",
+        )
+        .expect("the genuine membership stage supplies only its matching parent-held controls");
+    let owner_image = codec
+        .decode_untrusted_image(
+            &codec
+                .encode_image(take_process_image(&mut cohort, OWNER_SLOT))
+                .expect("the genuine membership B image serializes as tainted input"),
+        )
+        .expect("the genuine membership B image decodes only through the private codec boundary");
+    let rejection = match codec
+        .validate_and_start_image_with_prestaged_lifecycle(owner_image, owner_control)
+    {
+        Ok(_) => panic!(
+            "the capability-only restore must not install a genuine membership-staged image or control"
+        ),
+        Err(error) => error,
+    };
+    assert_eq!(
+        rejection.kind(),
+        Sys5I3LocalnetControlErrorKind::StartBindingRejected,
+        "generic capability lifecycle restore rejects the membership stage before any install stimulus exists"
+    );
+    let publication = cohort.observer_safe_lifecycle_publication_summary();
+    assert_eq!(
+        publication.published_authority_generation_ref(),
+        parent_g1_generation.as_str(),
+        "a kind-mismatched restore cannot replace the parent-held G1 generation"
+    );
+    assert_eq!(
+        publication.publication_outcome(),
+        None,
+        "a kind-mismatched restore cannot create a registered completion or publication"
+    );
+}
+
+#[test]
+#[cfg(feature = "i3-process-test-seams")]
+fn i3_3_source_declared_membership_successor_rejects_restored_selected_membership_before_install() {
+    // LOCAL custody evidence only: the real checked four-locus parent cohort
+    // derives the candidate, and this narrow negative seam restores just its
+    // selected prior membership.  It does not create a child, FD handoff, or
+    // multi-process delivery claim.
+    let project = build_once(CANONICAL_SOURCE);
+    let deployment = two_nonempty_slots(&project);
+    let owner_request = checked_owner_request_contract(&project);
+    let mut cohort = single_coordinator_cohort(&project, &deployment);
+    let parent_g1_generation = cohort
+        .observer_safe_lifecycle_publication_summary()
+        .published_authority_generation_ref()
+        .to_string();
+
+    let rejection = match cohort
+        .test_only_prestage_source_declared_owner_membership_retirement_with_tamper(
+            "i3-3-owner-membership-restored-selected-membership",
+            &owner_request,
+            Sys5I3SourceDeclaredOwnerMembershipSuccessorTamper::RestoreSelectedMembership,
+        ) {
+        Ok(_) => panic!(
+            "a membership successor that restores the selected retired membership must reject before image or control installation"
+        ),
+        Err(error) => error,
+    };
+    assert_eq!(
+        rejection.kind(),
+        Sys5I3ProcessRuntimeErrorKind::LifecyclePrestageRejected,
+        "the exact membership successor predicate rejects the reanimated selected membership at the parent prestage boundary"
+    );
+
+    let publication = cohort.observer_safe_lifecycle_publication_summary();
+    assert_eq!(
+        publication.published_authority_generation_ref(),
+        parent_g1_generation.as_str(),
+        "the failed membership successor cannot replace the parent-held G1 generation"
+    );
+    assert_eq!(
+        publication.publication_outcome(),
+        Some(Sys5I3LifecyclePublicationOutcome::NoPrestageSelected),
+        "a rejected membership candidate creates neither an installed receipt nor a publication outcome"
+    );
+}
+
+#[test]
+#[cfg(all(unix, feature = "i3-process-test-seams"))]
+fn i3_3_genuine_capability_ack_cannot_complete_source_declared_membership_successor() {
+    // LOCAL registered-FD custody evidence only. The frame below comes from a
+    // separate real B capability install; this test neither fabricates an ACK
+    // DTO nor starts a multi-process run.
+    let project = build_once(CANONICAL_SOURCE);
+    let deployment = two_nonempty_slots(&project);
+    let owner_request = checked_owner_request_contract(&project);
+    let codec = Sys5I3PrivateProcessCodec::private_provisional_v1();
+    let run_ref = "i3-3-membership-reader-rejects-capability-ack";
+
+    let mut membership_cohort = single_coordinator_cohort(&project, &deployment);
+    let membership_g1 = membership_cohort
+        .observer_safe_lifecycle_publication_summary()
+        .published_authority_generation_ref()
+        .to_string();
+    membership_cohort
+        .prestage_source_declared_owner_membership_retirement(run_ref, &owner_request)
+        .expect("the exact checked owner contract stages one parent-held membership successor");
+    let (membership_parent_stream, mut registered_b_ack_writer) =
+        UnixStream::pair().expect("the component test uses one actual parent/B Unix-stream pair");
+    let mut membership_reader = membership_cohort
+        .take_registered_source_declared_owner_membership_lifecycle_ack_reader(
+            OWNER_SLOT,
+            membership_parent_stream,
+            Duration::from_secs(5),
+        )
+        .expect("only the membership cohort registers its exact B-owned membership ACK reader");
+
+    let mut capability_cohort = single_coordinator_cohort(&project, &deployment);
+    capability_cohort
+        .prestage_owner_capability_revocation(run_ref, &owner_request)
+        .expect("the separate genuine capability cohort stages its own exact checked lifecycle");
+    let genuine_capability_ack = genuine_prestaged_owner_lifecycle_ack_frame(
+        &mut capability_cohort,
+        &codec,
+        run_ref,
+        "requester-spki:i3-3-membership-kind-mismatch",
+        "owner-spki:i3-3-membership-kind-mismatch",
+    );
+    registered_b_ack_writer
+        .write_all(&genuine_capability_ack)
+        .expect("the actual B-installed capability ACK reaches only the membership reader's paired descriptor");
+
+    let rejection = match membership_reader.read_next_completion(&codec) {
+        Ok(_) => panic!(
+            "a genuine capability lifecycle ACK must not type-check as a source-declared membership completion"
+        ),
+        Err(error) => error,
+    };
+    assert_eq!(
+        rejection.kind(),
+        Sys5I3ProcessRuntimeErrorKind::LifecycleAckRejected,
+        "the dedicated membership reader rejects a capability ACK before returning a publishable completion"
+    );
+
+    let publication = membership_cohort.observer_safe_lifecycle_publication_summary();
+    assert_eq!(
+        publication.published_authority_generation_ref(),
+        membership_g1.as_str(),
+        "a rejected capability ACK cannot replace the membership cohort's parent-held G1"
+    );
+    assert_eq!(
+        publication.publication_outcome(),
+        None,
+        "without a typed membership completion the parent cannot publish any successor outcome"
+    );
+
+    // The rejected capability frame must not consume this registered reader
+    // or its genuine parent-held membership stage. Reuse the same cohort,
+    // reader, and B stream—not a fresh fixture—to prove that the next typed
+    // membership ACK remains admissible.
+    let (_requester_control, owner_control) = membership_cohort
+        .split_trusted_localnet_controls_with_prestaged_source_declared_owner_membership_lifecycle(
+            &codec,
+            run_ref,
+            REQUESTER_SLOT,
+            "requester-spki:i3-3-membership-reader-after-kind-rejection",
+            OWNER_SLOT,
+            "owner-spki:i3-3-membership-reader-after-kind-rejection",
+        )
+        .expect("the same pending membership cohort retains its matching parent-held controls after the wrong ACK kind");
+    let owner_image = codec
+        .decode_untrusted_image(
+            &codec
+                .encode_image(take_process_image(&mut membership_cohort, OWNER_SLOT))
+                .expect("the same genuine membership B image serializes as tainted input"),
+        )
+        .expect("the same genuine membership B image decodes only to an untrusted candidate");
+    let (mut owner, _owner_control, owner_stimulus) = codec
+        .validate_and_start_image_with_prestaged_source_declared_owner_membership_lifecycle(
+            owner_image,
+            owner_control,
+        )
+        .expect("the rejected capability ACK leaves the matching membership restore admissible");
+    let genuine_membership_ack = owner
+        .install_admitted_source_declared_owner_membership_successor(
+            owner_stimulus
+                .expect("the same genuine B owns the retained membership install stimulus"),
+        )
+        .expect("the matching B install yields the one typed membership ACK");
+    let framed_membership_ack = codec
+        .encode_installed_source_declared_owner_membership_lifecycle_ack(genuine_membership_ack)
+        .expect("the genuine membership install serializes only its typed ACK frame");
+    registered_b_ack_writer
+        .write_all(&framed_membership_ack)
+        .expect("the same registered B stream remains writable after rejecting the capability ACK");
+    let completion = match membership_reader.read_next_completion(&codec) {
+        Ok(completion) => completion,
+        Err(_) => panic!(
+            "the same registered membership reader accepts the genuine membership ACK after rejecting the capability ACK"
+        ),
+    };
+    membership_cohort
+        .publish_registered_source_declared_owner_membership_lifecycle_completion(completion)
+        .expect("the legitimate membership completion remains publishable after the wrong-kind rejection");
+    let publication = membership_cohort.observer_safe_lifecycle_publication_summary();
+    assert!(
+        publication.published_authority_generation_ref() != membership_g1
+            && publication.publication_outcome()
+                == Some(Sys5I3LifecyclePublicationOutcome::G2Published),
+        "wrong-kind rejection consumes neither the pending membership stage nor its one registered completion"
+    );
 }
 
 #[test]

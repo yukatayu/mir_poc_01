@@ -1,6 +1,8 @@
 use mir_ast::surface_v0::FixtureSource;
 use mir_semantics::surface_v0_pipeline::{CheckedSurfaceV0, check_and_elaborate_surface_v0};
 
+use crate::sys3_projection::{DeclaredLogicalTopology, project_checked_core};
+
 use super::*;
 
 const FOUR_LOCUS_SOURCE_PATH: &str =
@@ -12,6 +14,37 @@ const FIRST_OWNER_LOCUS: &str = "S";
 const SECOND_OPERATION: &str = "attack_t";
 const SECOND_OWNER_LOCUS: &str = "T";
 const OWNER_PRINCIPAL: &str = "self";
+const I3_OWNER_MEMBERSHIP_SUCCESSOR_SOURCE_PATH: &str =
+    "tests/inline/i3_owner_membership_successor.mir";
+const I3_OWNER_MEMBERSHIP_SUCCESSOR_SOURCE: &str = r#"module Mirrorea.I3OwnerMembershipSuccessor
+
+locus WorldAuthority
+locus ParticipantA
+principal self
+type Player
+
+state avatar[id: Player] at WorldAuthority {
+  hp: Int
+}
+
+Role[self] at ParticipantA {
+  when init_avatar_hp() fails (StaleMembership, MissingCapability, MissingWitness, VisibilityDenied, RouteUnavailable) {
+    at WorldAuthority {
+      avatar[self].hp = 21
+    }
+  }
+}
+
+with auth MembershipAuth
+
+verify finite_refinement
+"#;
+const I3_OWNER_MEMBERSHIP_SUCCESSOR_OPERATION: &str = "init_avatar_hp";
+const I3_OWNER_MEMBERSHIP_SUCCESSOR_LOCUS: &str = "WorldAuthority";
+const I3_ACCEPTED_FOUR_LOCUS_SOURCE_PATH: &str =
+    "samples/clean-near-end/mirrorea-i2-local-toy/main.mir";
+const I3_ACCEPTED_FOUR_LOCUS_SOURCE: &str =
+    include_str!("../../../samples/clean-near-end/mirrorea-i2-local-toy/main.mir");
 
 fn checked_two_owner_source() -> CheckedSurfaceV0 {
     check_and_elaborate_surface_v0(FixtureSource::new(
@@ -19,6 +52,65 @@ fn checked_two_owner_source() -> CheckedSurfaceV0 {
         FOUR_LOCUS_SOURCE,
     ))
     .expect("the two-owner fixture must pass the real source/check pipeline")
+}
+
+fn checked_i3_owner_membership_successor_source() -> CheckedSurfaceV0 {
+    check_and_elaborate_surface_v0(FixtureSource::new(
+        I3_OWNER_MEMBERSHIP_SUCCESSOR_SOURCE_PATH,
+        I3_OWNER_MEMBERSHIP_SUCCESSOR_SOURCE,
+    ))
+    .expect("the checked A-to-WorldAuthority owner source must admit before its M9 successor test")
+}
+
+fn admitted_i3_accepted_four_locus_finite_local_seam() -> M9RuntimeExecutionSeam {
+    let checked = check_and_elaborate_surface_v0(FixtureSource::new(
+        I3_ACCEPTED_FOUR_LOCUS_SOURCE_PATH,
+        I3_ACCEPTED_FOUR_LOCUS_SOURCE,
+    ))
+    .expect("the accepted four-locus source must check before finite-local M9 admission");
+    let topology = DeclaredLogicalTopology::try_new(
+        checked.program_identity().clone(),
+        ["WorldAuthority", "ParticipantA", "ParticipantB", "ViewerC"],
+    )
+    .expect("the accepted source has exactly its four declared loci");
+    let projection = project_checked_core(&checked, &topology)
+        .expect("the accepted four-locus source has an exact checked Core projection");
+    let candidate = M9FiniteLocalAdmissionCandidate::from_checked(
+        &checked,
+        &projection,
+        vec![
+            M9FiniteLocalAdmissionFact::anchor_membership(
+                OWNER_PRINCIPAL,
+                I3_OWNER_MEMBERSHIP_SUCCESSOR_LOCUS,
+                "epoch:i3-row13-world-authority",
+                "incarnation:self:WorldAuthority:epoch:i3-row13-world-authority",
+            ),
+            M9FiniteLocalAdmissionFact::source_declared_membership(
+                OWNER_PRINCIPAL,
+                "ParticipantA",
+                "epoch:i3-row13-participant-a",
+                "incarnation:self:ParticipantA:epoch:i3-row13-participant-a",
+            ),
+            M9FiniteLocalAdmissionFact::source_declared_membership(
+                OWNER_PRINCIPAL,
+                "ParticipantB",
+                "epoch:i3-row13-participant-b",
+                "incarnation:self:ParticipantB:epoch:i3-row13-participant-b",
+            ),
+            M9FiniteLocalAdmissionFact::source_declared_membership(
+                OWNER_PRINCIPAL,
+                "ViewerC",
+                "epoch:i3-row13-viewer-c",
+                "incarnation:self:ViewerC:epoch:i3-row13-viewer-c",
+            ),
+            M9FiniteLocalAdmissionFact::relation_bootstrap_fresh_at_admission("bird_follow"),
+            M9FiniteLocalAdmissionFact::auth_discharge("MembershipAuth"),
+            M9FiniteLocalAdmissionFact::optional_verification_discharge("finite_refinement"),
+        ],
+    )
+    .expect("the accepted four-locus facts form one validated finite-local M9 candidate");
+    M9RuntimeExecutionSeam::admit_validated_finite_local_candidate(candidate)
+        .expect("the finite-local candidate admits through the real M9 execution seam")
 }
 
 #[cfg(feature = "i3-process-test-seams")]
@@ -218,6 +310,190 @@ fn i3_3_exact_owner_capability_successor_preserves_a_genuine_prior_owner_tombsto
             SECOND_OWNER_LOCUS,
         ),
         "a G3 candidate that removes G2's real prior tombstone cannot be an exact owner-capability revocation successor"
+    );
+}
+
+#[test]
+fn i3_3_source_declared_owner_membership_successor_makes_the_retained_g1_use_stale() {
+    let checked = checked_i3_owner_membership_successor_source();
+    let seam = M9RuntimeExecutionSeam::test_real_admitted_owner_seam_for_kernel(
+        &checked,
+        I3_OWNER_MEMBERSHIP_SUCCESSOR_OPERATION,
+        OWNER_PRINCIPAL,
+        I3_OWNER_MEMBERSHIP_SUCCESSOR_LOCUS,
+    )
+    .expect("the checked A-to-WorldAuthority owner operation admits through the real M9 seam");
+    let publisher = seam
+        .into_authority_successor_publisher()
+        .expect("the real admitted owner seam retains its source-derived successor publisher");
+    let g1 = publisher.current_generation_for_restore();
+    let (_, prior_use) = g1
+        .owner_authority_for_operation(
+            I3_OWNER_MEMBERSHIP_SUCCESSOR_OPERATION,
+            I3_OWNER_MEMBERSHIP_SUCCESSOR_LOCUS,
+        )
+        .expect("G1 retains the actual issued owner use for the checked owner operation");
+
+    assert!(
+        g1.authority_state()
+            .validate_owner_use(
+                prior_use.principal(),
+                prior_use.membership_ref(),
+                prior_use.capability_ref(),
+                prior_use.witness_ref(),
+                I3_OWNER_MEMBERSHIP_SUCCESSOR_LOCUS,
+                I3_OWNER_MEMBERSHIP_SUCCESSOR_OPERATION,
+            )
+            .is_ok(),
+        "the retained G1 use is current before the source-declared membership successor is staged"
+    );
+
+    let staged = publisher
+        .prestage_exact_source_declared_owner_membership_retirement(
+            I3_OWNER_MEMBERSHIP_SUCCESSOR_OPERATION,
+            I3_OWNER_MEMBERSHIP_SUCCESSOR_LOCUS,
+        )
+        .expect("M9 alone resolves and stages the exact WorldAuthority membership retirement");
+    assert!(
+        staged.prior_generation().matches_for_restore(&g1),
+        "the staged lifecycle candidate retains the exact genuine G1 generation rather than a cap alias"
+    );
+    let g2 = staged.successor_generation();
+    let observations_before = g2.runtime_validation_observation_snapshot();
+
+    assert!(
+        matches!(
+            g2.authority_state().validate_owner_use(
+                prior_use.principal(),
+                prior_use.membership_ref(),
+                prior_use.capability_ref(),
+                prior_use.witness_ref(),
+                I3_OWNER_MEMBERSHIP_SUCCESSOR_LOCUS,
+                I3_OWNER_MEMBERSHIP_SUCCESSOR_OPERATION,
+            ),
+            Err(M8AuthorityValidationFailure::StaleMembership)
+        ),
+        "the genuine G2 membership successor must reject the retained G1 owner use as stale membership"
+    );
+    assert!(
+        g2.runtime_validation_observation_snapshot() == observations_before,
+        "direct M8 stale-membership validation must not mint an M9 validation observation"
+    );
+}
+
+#[test]
+fn i3_3_accepted_four_locus_membership_successor_preserves_unretired_fresh_relation_binding() {
+    // LOCAL M9/M8 evidence only. This exercises the accepted four-locus
+    // finite-local admission path; it does not construct a process image,
+    // carrier, ACK, or network delivery.
+    let seam = admitted_i3_accepted_four_locus_finite_local_seam();
+    let publisher = seam
+        .into_authority_successor_publisher()
+        .expect("the admitted finite-local seam retains its source-derived M9 publisher");
+    let g1 = publisher.current_generation_for_restore();
+    let (_, prior_use) = g1
+        .owner_authority_for_operation(
+            I3_OWNER_MEMBERSHIP_SUCCESSOR_OPERATION,
+            I3_OWNER_MEMBERSHIP_SUCCESSOR_LOCUS,
+        )
+        .expect("accepted G1 retains the actual WorldAuthority owner use");
+    assert!(
+        !g1.fresh_relation_reacquire_bindings.is_empty()
+            && g1
+                .fresh_relation_reacquire_bindings
+                .contains_key("bird_follow"),
+        "the accepted finite-local G1 retains a genuine unretired fresh relation binding"
+    );
+    assert!(
+        g1.authority_state()
+            .validate_owner_use(
+                prior_use.principal(),
+                prior_use.membership_ref(),
+                prior_use.capability_ref(),
+                prior_use.witness_ref(),
+                I3_OWNER_MEMBERSHIP_SUCCESSOR_LOCUS,
+                I3_OWNER_MEMBERSHIP_SUCCESSOR_OPERATION,
+            )
+            .is_ok(),
+        "the selected G1 owner use is current before its exact membership retirement"
+    );
+
+    let staged = publisher
+        .prestage_exact_source_declared_owner_membership_retirement(
+            I3_OWNER_MEMBERSHIP_SUCCESSOR_OPERATION,
+            I3_OWNER_MEMBERSHIP_SUCCESSOR_LOCUS,
+        )
+        .expect("M9 stages the exact source-declared WorldAuthority membership successor");
+    let mut expected_fresh_bindings = g1.fresh_relation_reacquire_bindings.clone();
+    for relation in &staged.retired_relation_bindings {
+        assert!(
+            expected_fresh_bindings.remove(relation).is_some(),
+            "a selected retired relation must have been genuinely present in the G1 finite-local binding inventory"
+        );
+    }
+    let g2 = staged.successor_generation();
+    assert!(
+        g2.fresh_relation_reacquire_bindings == expected_fresh_bindings
+            && g2.fresh_relation_reacquire_bindings.get("bird_follow")
+                == g1.fresh_relation_reacquire_bindings.get("bird_follow"),
+        "G2 preserves every unretired fresh relation binding and removes no relation beyond the exact selected retirement"
+    );
+
+    let observations_before = g2.runtime_validation_observation_snapshot();
+    assert!(
+        matches!(
+            g2.authority_state().validate_owner_use(
+                prior_use.principal(),
+                prior_use.membership_ref(),
+                prior_use.capability_ref(),
+                prior_use.witness_ref(),
+                I3_OWNER_MEMBERSHIP_SUCCESSOR_LOCUS,
+                I3_OWNER_MEMBERSHIP_SUCCESSOR_OPERATION,
+            ),
+            Err(M8AuthorityValidationFailure::StaleMembership)
+        ),
+        "the selected retired G1 owner membership remains stale in G2 even while unrelated fresh relation bindings survive"
+    );
+    assert!(
+        g2.runtime_validation_observation_snapshot() == observations_before,
+        "pure local stale-membership validation cannot mint an M9 validation observation"
+    );
+}
+
+#[test]
+#[cfg(feature = "i3-process-test-seams")]
+fn i3_3_source_declared_membership_successor_rejects_loss_of_an_unretired_fresh_relation_binding() {
+    // LOCAL M9 exact-delta evidence only. The negative seam starts with the
+    // genuine source-derived G2 candidate and can remove only one actual
+    // unretired binding; it cannot construct membership or authority facts.
+    let seam = admitted_i3_accepted_four_locus_finite_local_seam();
+    let publisher = seam
+        .into_authority_successor_publisher()
+        .expect("the accepted finite-local seam retains its source-derived M9 publisher");
+    let mut staged = publisher
+        .prestage_exact_source_declared_owner_membership_retirement(
+            I3_OWNER_MEMBERSHIP_SUCCESSOR_OPERATION,
+            I3_OWNER_MEMBERSHIP_SUCCESSOR_LOCUS,
+        )
+        .expect("M9 first stages the unmodified exact source-declared membership successor");
+
+    assert!(
+        staged.remains_exact_source_declared_owner_membership_retirement_for(
+            I3_OWNER_MEMBERSHIP_SUCCESSOR_OPERATION,
+            I3_OWNER_MEMBERSHIP_SUCCESSOR_LOCUS,
+        ),
+        "the unmodified source-derived G2 satisfies the complete membership-only exact delta"
+    );
+    assert!(
+        staged.test_only_remove_one_unretired_fresh_relation_binding_for_i3_exact_delta_falsifier(),
+        "the genuine G2 contains one unretired fresh relation binding available to the bounded falsifier"
+    );
+    assert!(
+        !staged.remains_exact_source_declared_owner_membership_retirement_for(
+            I3_OWNER_MEMBERSHIP_SUCCESSOR_OPERATION,
+            I3_OWNER_MEMBERSHIP_SUCCESSOR_LOCUS,
+        ),
+        "dropping one genuine unretired fresh binding must invalidate the full membership-successor exact delta"
     );
 }
 

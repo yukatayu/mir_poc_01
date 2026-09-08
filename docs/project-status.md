@@ -1,6 +1,6 @@
 # Project status
 
-最終更新: 2026-09-09 05:16 JST
+最終更新: 2026-09-09 07:33 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -87,21 +87,27 @@ in Report2606 and Plan250; they are not fresh Stage3 results. The accepted
 inactive process handoff is a027d61. Stage3 now executes genuine FD3-installed
 children, real QUIC provider requests, bounded host reads and current-authority
 consumption, with separately M9-authorized normal v2 joined observation.
-Fresh post-review gates pass runtime library410, all probe targets
-(ordinary41/provider20), process64, M1067, I2 local5/CLI8 and provider guards5.
-Scoped all-target Clippy/format pass; review has no remaining P0/P1/P2.
+Fresh row13 follow-up gates pass runtime library413, all probe targets
+(ordinary43/provider20), process68, M10/I2/guards, scoped Clippy/format and
+independent review with no remaining P0/P1/P2.
 
 Four real two-session fault profiles use child-private assertions and generic
 completion, not exported fault traces. The lost-result case receives/decodes
 then discards the frame before semantic admission; it is not wire packet loss.
+Row13 now verifies source-derived `WorldAuthority` membership retirement with
+full-parent M9 and qualified restricted-child G1→G2 coverage; old-G1
+`CarrierAdmissionRejected` remains before owner use, and LOCAL genuine M8
+`StaleMembership` is separate. No observer renewal, grant mint or session
+authority follows. Unrelated relation bindings remain exact; terminal errors are
+fieldless opaque/slot-only, including wrong-kind ACK then valid publication.
 AdapterUnavailable retains LOCAL injected-read/codec evidence, not actual OS
-operational failure. Live provider cut/export and public interfaces are not
-claimed. Component docs/Git integration is being recorded; I3-3 remains active.
-Rows13/15/19/20, ordering and whole-milestone acceptance remain. After full
-I3-3 validation/review/commit/push/parity, stop; I3-4 stays inactive.
+operational failure. The finite provider component remains committed/pushed at
+`94ad584577fadfd0b016ff798a22b84df536939f`; row20 cut/order is the next
+unimplemented consumer, then whole-milestone validation/review/parity and stop.
+I3-4 stays inactive.
 Detailed edge contracts: [`mirrorea_canon/architecture/07-browser-host-trust-boundaries.md`](../mirrorea_canon/architecture/07-browser-host-trust-boundaries.md); cross-edge binding/freshness/revocation/redaction/resource rules: [`mirrorea_canon/architecture/08-browser-host-security-invariants.md`](../mirrorea_canon/architecture/08-browser-host-security-invariants.md).
 View は authoritative domain semantics を所有せず、presentation-local computation のみを許可する。View からの入力は typed command/effect request とし direct store を禁止する。I3-0 はprivate transport選定をclosedし、OPEN-032はこのbounded programだけresolvedした。I3-1とI3-2はbounded evidenceとしてclosedした。official I3 lifecycle は未entry、I3-3のみactive、I3-4/I3-5/I3-6/NEXT-0はdependency-gated inactive、I5 implementation は inactiveである。
-I3-2の最終bounded evidenceはlocalnet 12/12（repeat）、full probe 62/62、runtime default 29/29、seam 47/47、library 281/281、docs compile-fail 1/1（default/private）である。6/11 milestones acceptedであり、これは重み付き完成率ではない。FM-5 bounded executable ratchetで、public workflowや100% completionは主張しない。I3-3全体は未受理。19:08 JSTの測定空き容量は30,906,707,968 bytes（約28.78 GiB）で、10 GiB guardに現在の容量保留はない。
+I3-2の最終bounded evidenceはlocalnet 12/12（repeat）、full probe 62/62、runtime default 29/29、seam 47/47、library 281/281、docs compile-fail 1/1（default/private）である。6/11 milestones acceptedであり、これは重み付き完成率ではない。FM-5 localhost evidenceであり、public workflowや100% completionは主張しない。I3-3全体は未受理。2026-09-09 05:30 JSTの測定空き容量は約16GiBで、10GiB guardに現在の容量保留はない。
 The active bounded I3 programはinternal carrierとpublic wireを分離し、route/handshake/framing/
 disconnect/reconnect/ambiguous delivery/duplicate/reorder/stale authority/backpressure/
 timeout/provider/redaction/patch/cut failureをtypedに扱い、network occurrencesをMir
