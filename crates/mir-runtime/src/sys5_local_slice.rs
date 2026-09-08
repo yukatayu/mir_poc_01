@@ -6795,6 +6795,14 @@ impl Sys5VerticalSliceRuntime {
         endpoint_target_locus: &str,
     ) -> Result<Sys5VerticalEndpointChain, Sys5VerticalSliceError> {
         let (dispatch_kind, receive_kind) = match edge_kind {
+            // A provider-effect edge is retained only by the dedicated static
+            // projector.  It has no SYS-5 endpoint/serve profile in Stage 2a.
+            CommunicationEdgeKind::ReadOnlyProviderEffectRequest
+            | CommunicationEdgeKind::ReadOnlyProviderEffectResult => {
+                return Err(Sys5VerticalSliceError::new(
+                    Sys5VerticalDiagnosticKind::DispatchRejected,
+                ));
+            }
             CommunicationEdgeKind::DesignatedResultDelivery => (
                 crate::sys4_dispatch::Sys4TraceKind::DesignatedResultDispatched,
                 crate::sys4_dispatch::Sys4TraceKind::DesignatedResultReceived,
@@ -7149,7 +7157,9 @@ fn vertical_typed_segment_kind(kind: CommunicationEdgeKind) -> Option<&'static s
         CommunicationEdgeKind::DesignatedResultDelivery => Some("designated-result-delivery"),
         CommunicationEdgeKind::OwnerReplyReceipt
         | CommunicationEdgeKind::RelationProjectionPublication
-        | CommunicationEdgeKind::AbsoluteValueStream => None,
+        | CommunicationEdgeKind::AbsoluteValueStream
+        | CommunicationEdgeKind::ReadOnlyProviderEffectRequest
+        | CommunicationEdgeKind::ReadOnlyProviderEffectResult => None,
     }
 }
 
@@ -8440,6 +8450,15 @@ fn fragment_kind_name(kind: ProjectedOperationFragmentKind) -> &'static str {
         }
         ProjectedOperationFragmentKind::DesignatedEvaluation => "designated-evaluation",
         ProjectedOperationFragmentKind::DesignatedResultConsumer => "designated-result-consumer",
+        ProjectedOperationFragmentKind::ReadOnlyProviderEffectRequester => {
+            "read-only-provider-effect-requester"
+        }
+        ProjectedOperationFragmentKind::ReadOnlyProviderEffectService => {
+            "read-only-provider-effect-service"
+        }
+        ProjectedOperationFragmentKind::ReadOnlyProviderEffectResultConsumer => {
+            "read-only-provider-effect-result-consumer"
+        }
     }
 }
 
@@ -8452,6 +8471,11 @@ fn core_kind_name(kind: ProjectedOperationFragmentKind) -> &'static str {
         ProjectedOperationFragmentKind::DesignatedRemoteInputService
         | ProjectedOperationFragmentKind::DesignatedEvaluation => "DesignatedPublishValue",
         ProjectedOperationFragmentKind::DesignatedResultConsumer => "DesignatedResultConsume",
+        ProjectedOperationFragmentKind::ReadOnlyProviderEffectRequester
+        | ProjectedOperationFragmentKind::ReadOnlyProviderEffectService
+        | ProjectedOperationFragmentKind::ReadOnlyProviderEffectResultConsumer => {
+            "ReadOnlyProviderEffect"
+        }
     }
 }
 
@@ -8464,6 +8488,8 @@ fn edge_kind_name(kind: CommunicationEdgeKind) -> &'static str {
         CommunicationEdgeKind::DesignatedInputReceipt => "designated-input-receipt",
         CommunicationEdgeKind::DesignatedResultDelivery => "designated-result-delivery",
         CommunicationEdgeKind::AbsoluteValueStream => "absolute-value-stream",
+        CommunicationEdgeKind::ReadOnlyProviderEffectRequest => "read-only-provider-effect-request",
+        CommunicationEdgeKind::ReadOnlyProviderEffectResult => "read-only-provider-effect-result",
     }
 }
 
@@ -8475,6 +8501,8 @@ fn carrier_lifecycle_kind_name(kind: CarrierLifecycleKind) -> &'static str {
         CarrierLifecycleKind::DesignatedInputReceipt => "designated-input-receipt",
         CarrierLifecycleKind::RelationProjectionPublication => "relation-projection-publication",
         CarrierLifecycleKind::DesignatedResultDelivery => "designated-result-delivery",
+        CarrierLifecycleKind::ReadOnlyProviderEffectRequest => "read-only-provider-effect-request",
+        CarrierLifecycleKind::ReadOnlyProviderEffectResult => "read-only-provider-effect-result",
     }
 }
 
@@ -8540,6 +8568,12 @@ fn i3_adapter_carrier_family_for_edge_kind(
             Ok(I3AdapterCarrierFamily::DesignatedResultDelivery)
         }
         CommunicationEdgeKind::AbsoluteValueStream => Err(Sys5I3ProbeFacadeError::new(
+            Sys5I3ProbeFacadeErrorKind::NotAcceptedCarrierFamily,
+        )),
+        // Provider-effect carriers are static-only in Stage 2a.  Do not map
+        // either edge onto an owner or designated adapter family.
+        CommunicationEdgeKind::ReadOnlyProviderEffectRequest
+        | CommunicationEdgeKind::ReadOnlyProviderEffectResult => Err(Sys5I3ProbeFacadeError::new(
             Sys5I3ProbeFacadeErrorKind::NotAcceptedCarrierFamily,
         )),
     }
@@ -9756,6 +9790,11 @@ fn i3_adapter_runtime_seam_requirement_kind_name(kind: RuntimeSeamRequirementKin
         }
         RuntimeSeamRequirementKind::ConsumerCapabilityRef => "ConsumerCapabilityRef",
         RuntimeSeamRequirementKind::ConsumerWitnessRef => "ConsumerWitnessRef",
+        RuntimeSeamRequirementKind::ProviderEffectMembershipEpochIncarnation => {
+            "ProviderEffectMembershipEpochIncarnation"
+        }
+        RuntimeSeamRequirementKind::ProviderEffectUseCapability => "ProviderEffectUseCapability",
+        RuntimeSeamRequirementKind::ProviderEffectUseWitness => "ProviderEffectUseWitness",
     }
 }
 
@@ -9817,6 +9856,9 @@ fn seam_authority_category_name(kind: SeamAuthorityKind) -> &'static str {
             "DesignatedResultConsumerCapability"
         }
         SeamAuthorityKind::DesignatedResultConsumerWitness => "DesignatedResultConsumerWitness",
+        SeamAuthorityKind::ProviderEffectMembership => "ProviderEffectMembership",
+        SeamAuthorityKind::ProviderEffectUseCapability => "ProviderEffectUseCapability",
+        SeamAuthorityKind::ProviderEffectUseWitness => "ProviderEffectUseWitness",
     }
 }
 
@@ -9882,6 +9924,13 @@ mod i3_adapter_carrier_contract_red_tests {
             }
             RuntimeSeamRequirementKind::ConsumerCapabilityRef => "ConsumerCapabilityRef",
             RuntimeSeamRequirementKind::ConsumerWitnessRef => "ConsumerWitnessRef",
+            RuntimeSeamRequirementKind::ProviderEffectMembershipEpochIncarnation => {
+                "ProviderEffectMembershipEpochIncarnation"
+            }
+            RuntimeSeamRequirementKind::ProviderEffectUseCapability => {
+                "ProviderEffectUseCapability"
+            }
+            RuntimeSeamRequirementKind::ProviderEffectUseWitness => "ProviderEffectUseWitness",
         }
     }
 
@@ -9906,6 +9955,9 @@ mod i3_adapter_carrier_contract_red_tests {
                 "DesignatedResultConsumerCapability"
             }
             SeamAuthorityKind::DesignatedResultConsumerWitness => "DesignatedResultConsumerWitness",
+            SeamAuthorityKind::ProviderEffectMembership => "ProviderEffectMembership",
+            SeamAuthorityKind::ProviderEffectUseCapability => "ProviderEffectUseCapability",
+            SeamAuthorityKind::ProviderEffectUseWitness => "ProviderEffectUseWitness",
         }
     }
 

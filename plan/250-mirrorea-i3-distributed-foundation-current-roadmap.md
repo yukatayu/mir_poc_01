@@ -1,6 +1,6 @@
 # Plan 250 — Mirrorea I3 Distributed Foundation current execution roadmap
 
-最終更新: 2026-09-08 13:47 JST
+最終更新: 2026-09-08 14:05 JST
 
 ## 役割、authority、current control state
 
@@ -57,8 +57,8 @@ roadmap/status pointer の一致を検証する。
 - current component checkpoint: **row 11 / spec/16 bounded time-and-reply
   evidence integrated at `55f1fd7f`, pushed with clean remote parity**.
   ADR-0042/spec/17 selects the provider contract; its source/checker and
-  fail-closed legacy guards are verified, with component Git integration
-  pending. Exact mixed-program coverage, projection and independent effect
+  fail-closed legacy guards are integrated at `9e8d674a`, with clean pushed
+  parity. Exact mixed-program coverage, projection and independent effect
   permission are the next I3-3 consumer, not a new milestone.
 - next goal: **I3-4 (requires I3-3 acceptance and explicit owner resume)**
 - all other milestones: **ordered, inactive, and dependency-gated**
@@ -1431,6 +1431,76 @@ source-bound mixed-program coverage and separate provider permission. It must
 not silently erase provider Core to materialize M8 or treat an owner grant as
 effect authorization. A bounded advisory Oracle comparison checks that handoff;
 no second transport/runtime or I3-4 implementation is opened.
+
+Stage 1 is committed/pushed as
+`9e8d674a29b724d3947c8fccf1cf78e62a491206`; HEAD, origin/main and live remote
+match with clean worktree at `2026-09-08T14:05:06+09:00`. It closes only the
+source/guard component. The paused product goal and stop-after-I3-3 control
+are unchanged.
+
+Stage 2 implementation choice (LAB, within ADR-0042/spec/17): choose the
+smallest explicit, activation-pending M9 composite over a separate provider
+issuer/runtime. One Oracle consultation and independent read-only planner
+confirm the actual M8-before-M9 dependency; parent verifies against the code.
+The sequence is static coverage/projection, then actual M9 authority plus
+mixed finite verification/separate effect policy, then exact SYS4/SYS5 closure.
+These are ordered components of I3-3, not parallel semantic frontiers.
+
+The current static component derives total ordered executable source-map
+coverage, four provider lowering associations, three distinct roles and two
+generated edges from the full checked source. Pure projection must not depend
+on a finite admission verdict: the shared coverage producer is static and
+non-authorizing; a separate composite verifier preserves all existing finite
+checks and the exact provider profile. It must retain all four provider effects
+and the source-label row `provider-effect:{operation}` exactly. That row alone
+does not prove observer authority, redaction/rate enforcement or permission to
+disclose a result. No generic legacy refinement rule or redaction lattice changes.
+
+Source-only independent review found two composite interface gaps; both were
+reproduced before repair on 2026-09-08. A source-A candidate was accepted for
+source B when only its resource changed, and the composite exposed a cloneable
+ordinary discharge without its pending coverage. The bounded repair uses a
+new opaque exact-source-bound composite candidate and removes raw inner
+discharge access. Existing generic candidates remain unchanged. Current
+runtime guards still prevent invocation; these findings concern the next
+admission consumer, not evidence of an executed unauthorized provider call.
+
+Further static review distinguishes typed-marker concealment from complete
+local omission. Ordinary snapshot/SYS4 guards share a provider-only typed
+marker scan; source identity must also preserve the full-program requirement
+when a locus restriction contains no provider-local rows. The smallest
+selected repair direction queries the existing canonical identity record in
+the source producer (fixed record positions, not arbitrary text scanning),
+rather than introducing duplicated profile state. Changing that record changes
+the exact identity; expected-source/image binding remains the authority
+boundary. This query does not authenticate a freely supplied snapshot.
+
+The final frozen Stage 2a test packet passes semantics 6/17/8, composite
+privacy doctest 1, static runtime 11 and the full feature-union runtime library
+345. Independent spec review closes all four interface/integrity findings with
+no P0/P1/P2. Separate quality review also reports P0/P1/P2 zero; process 63,
+I2/M10 5/8/67, public guards 5, three-crate Clippy, workspace format and
+all-target compilation pass. The post-lint static 11 rerun passes; annotation
+and lifetime changes do not alter behavior. Workspace compilation is not tests.
+The test-only snapshot module was moved outside the production projection
+directory to preserve its dependency scanner; no architecture guard was waived.
+Report 2606 records each actual RED and final GREEN separately.
+
+Default M8/M9/SYS5/kernel execution remains rejecting, and new provider
+fragments must explicitly fail the SYS4 completeness boundary until a genuine
+composite admission exists. Static snapshots cannot become ordinary executable
+images. `RuntimeUnsupported` is retained as an exact activation-pending
+requirement, not waived or declared discharged. Actual binding/permit/runtime/
+supervisor/call/cut evidence remains required in the dependent components.
+
+Ownership: `time_host_driver` owns the semantics composite checker and SYS3
+static production files; `c3_test_repair` owns the separate semantics test
+target, `time_network_tests` the separate private runtime tests. Only necessary
+downstream explicit refusal/compile guards are delegated to `c3_runtime_fix`;
+dynamic composite work waits for the static interface freeze. One evaluator
+runs commands, parent owns integration, and independent reviewers remain
+separate from authors. A necessarily new API's compiler gap is recorded as
+such; an assertion RED on a fail-closed interface precedes behavior completion.
 
 The sole evaluator serializes Cargo with `CARGO_INCREMENTAL=0`,
 `CARGO_BUILD_JOBS=2`, `--locked` and serial tests. Before heavy commands inspect

@@ -12,6 +12,7 @@ use mir_semantics::{
         GeneratedObligationKind, OwnerRmwCheckedCore, RelationCheckedCore, RelationTransformCore,
         ResidualObligationKind, StaticProjectionFacts, StaticRetryContractKind, TypedStateRead,
     },
+    surface_v0_provider_effect::CheckedReadOnlyProviderEffectCore,
 };
 use sha2::{Digest, Sha256};
 
@@ -286,6 +287,9 @@ pub(crate) enum ProjectedOperationFragmentKind {
     DesignatedRemoteInputService,
     DesignatedEvaluation,
     DesignatedResultConsumer,
+    ReadOnlyProviderEffectRequester,
+    ReadOnlyProviderEffectService,
+    ReadOnlyProviderEffectResultConsumer,
 }
 
 #[derive(Debug, Clone, PartialEq, Eq, Default)]
@@ -309,6 +313,15 @@ impl AuthorityRequirements {
     pub(super) fn designated_result_consumer(_operation: &str, _source_ref: &SourceRef) -> Self {
         Self {
             requirements: RuntimeSeamRequirements::designated_result_consumer(),
+        }
+    }
+
+    /// This is a static requirement for the separate provider-effect
+    /// authorization. It is not an owner capability and does not issue a
+    /// usable permit or activate a provider runtime.
+    pub(super) fn read_only_provider_effect(_operation: &str, _source_ref: &SourceRef) -> Self {
+        Self {
+            requirements: RuntimeSeamRequirements::read_only_provider_effect(),
         }
     }
 
@@ -432,6 +445,9 @@ pub(crate) enum PlacementSpecificCore {
     DesignatedResultConsumer {
         core: DesignatedResultConsumerCore,
     },
+    ReadOnlyProviderEffect {
+        core: CheckedReadOnlyProviderEffectCore,
+    },
 }
 
 #[derive(Debug, Clone, PartialEq, Eq)]
@@ -549,6 +565,15 @@ impl ProjectedOperationFragment {
         }
     }
 
+    pub(crate) fn read_only_provider_effect_core(
+        &self,
+    ) -> Option<&CheckedReadOnlyProviderEffectCore> {
+        match &self.placement {
+            PlacementSpecificCore::ReadOnlyProviderEffect { core } => Some(core),
+            _ => None,
+        }
+    }
+
     pub(crate) fn exposes_typed_expression(&self) -> bool {
         self.designated_checked_core().is_some()
             || self.designated_result_consumer_expression_leakage
@@ -652,6 +677,9 @@ pub(crate) enum RuntimeSeamRequirementKind {
     ConsumerMembershipEpochIncarnation,
     ConsumerCapabilityRef,
     ConsumerWitnessRef,
+    ProviderEffectMembershipEpochIncarnation,
+    ProviderEffectUseCapability,
+    ProviderEffectUseWitness,
 }
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
@@ -665,6 +693,9 @@ pub(crate) enum SeamAuthorityKind {
     DesignatedResultConsumerMembership,
     DesignatedResultConsumerCapability,
     DesignatedResultConsumerWitness,
+    ProviderEffectMembership,
+    ProviderEffectUseCapability,
+    ProviderEffectUseWitness,
 }
 
 pub(crate) type RuntimeSeamRequirementRow = (
@@ -754,6 +785,35 @@ impl RuntimeSeamRequirements {
                     Some(GeneratedObligationKind::DesignatedResultConsumerAuthority),
                     CarrierProvenanceKind::RequiredFromSealedRuntimeSeam,
                     Some(SeamAuthorityKind::DesignatedResultConsumerWitness),
+                ),
+            ],
+        }
+    }
+
+    /// The checked provider profile requires a separate current membership,
+    /// effect-use capability, and witness. Stage 2a records these as static
+    /// requirements only; it neither issues them nor treats owner authority as
+    /// a substitute.
+    pub(super) fn read_only_provider_effect() -> Self {
+        Self {
+            rows: vec![
+                (
+                    RuntimeSeamRequirementKind::ProviderEffectMembershipEpochIncarnation,
+                    Some(GeneratedObligationKind::ProviderEffectAuthorization),
+                    CarrierProvenanceKind::RequiredFromSealedRuntimeSeam,
+                    Some(SeamAuthorityKind::ProviderEffectMembership),
+                ),
+                (
+                    RuntimeSeamRequirementKind::ProviderEffectUseCapability,
+                    Some(GeneratedObligationKind::ProviderEffectAuthorization),
+                    CarrierProvenanceKind::RequiredFromSealedRuntimeSeam,
+                    Some(SeamAuthorityKind::ProviderEffectUseCapability),
+                ),
+                (
+                    RuntimeSeamRequirementKind::ProviderEffectUseWitness,
+                    Some(GeneratedObligationKind::ProviderEffectAuthorization),
+                    CarrierProvenanceKind::RequiredFromSealedRuntimeSeam,
+                    Some(SeamAuthorityKind::ProviderEffectUseWitness),
                 ),
             ],
         }
@@ -978,6 +1038,8 @@ pub(crate) enum CommunicationEdgeKind {
     DesignatedInputReceipt,
     DesignatedResultDelivery,
     AbsoluteValueStream,
+    ReadOnlyProviderEffectRequest,
+    ReadOnlyProviderEffectResult,
 }
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
@@ -988,6 +1050,8 @@ pub(crate) enum CarrierLifecycleKind {
     DesignatedInputReceipt,
     RelationProjectionPublication,
     DesignatedResultDelivery,
+    ReadOnlyProviderEffectRequest,
+    ReadOnlyProviderEffectResult,
 }
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, PartialOrd, Ord)]
@@ -1067,6 +1131,14 @@ pub(crate) struct DesignatedResultCarrierDetails {
     pub(crate) observation_policy: ObservationPolicy,
     pub(crate) policy_stamp: PolicyStamp,
     pub(crate) retry_contract: StaticRetryContractKind,
+}
+
+/// Private static carrier data for the selected read-only provider profile.
+/// This retains the checked Core profile but contains no route, host handle,
+/// authority token, result payload, or permission to invoke the provider.
+#[derive(Debug, Clone, PartialEq, Eq)]
+pub(crate) struct ReadOnlyProviderEffectCarrierDetails {
+    pub(crate) core: CheckedReadOnlyProviderEffectCore,
 }
 
 /// Private, static I3 adapter facts copied from one checked I2 carrier.  This
@@ -1161,6 +1233,7 @@ pub(crate) struct CarrierContract {
     pub(crate) visibility_policy: ReferenceOnlyRedactionPolicy,
     pub(crate) provenance: CarrierContractProvenance,
     pub(crate) designated_result_details: Option<DesignatedResultCarrierDetails>,
+    pub(crate) read_only_provider_effect_details: Option<ReadOnlyProviderEffectCarrierDetails>,
 }
 
 const I3_PROBE_OWNER_REQUEST_COMPONENT_DOMAIN: &[u8] =
@@ -1309,6 +1382,12 @@ impl CarrierContract {
             .map(|details| details.retry_contract)
     }
 
+    pub(crate) fn read_only_provider_effect_details(
+        &self,
+    ) -> Option<&ReadOnlyProviderEffectCarrierDetails> {
+        self.read_only_provider_effect_details.as_ref()
+    }
+
     pub(crate) const fn transfers_authority(&self) -> bool {
         false
     }
@@ -1322,6 +1401,12 @@ impl CarrierContract {
     /// a `CarrierContract` field must make this conversion stop compiling
     /// until the new field is either represented or explicitly rejected.
     pub(crate) fn i3_adapter_static_facts(&self) -> Option<I3AdapterCarrierStaticFacts> {
+        // Provider-effect semantics are not an I3-1 carrier family.  Refuse a
+        // profile even when a malformed projection hides one of its typed
+        // slots beneath a legacy outer edge kind.
+        if self.contains_read_only_provider_effect_static_semantics() {
+            return None;
+        }
         let CarrierContract {
             edge_kind,
             lifecycle_kind,
@@ -1345,6 +1430,7 @@ impl CarrierContract {
             visibility_policy,
             provenance,
             designated_result_details,
+            read_only_provider_effect_details,
         } = self;
 
         let OperationIdentityTemplate {
@@ -1380,6 +1466,7 @@ impl CarrierContract {
             || !request_identity_template_has_slot
             || !visibility_policy.is_reference_only()
             || !matches!(provenance, CarrierContractProvenance::CheckedCoreBound)
+            || read_only_provider_effect_details.is_some()
         {
             return None;
         }
@@ -1524,7 +1611,9 @@ impl CarrierContract {
                     retry_contract: *retry_contract,
                 }
             }
-            CommunicationEdgeKind::AbsoluteValueStream => return None,
+            CommunicationEdgeKind::AbsoluteValueStream
+            | CommunicationEdgeKind::ReadOnlyProviderEffectRequest
+            | CommunicationEdgeKind::ReadOnlyProviderEffectResult => return None,
         };
 
         let AuthorityRequirements { requirements } = authority_requirements;
@@ -1568,12 +1657,25 @@ impl CarrierContract {
         })
     }
 
+    fn contains_read_only_provider_effect_static_semantics(&self) -> bool {
+        is_read_only_provider_effect_edge_kind(self.edge_kind)
+            || is_read_only_provider_effect_lifecycle_kind(self.lifecycle_kind)
+            || projected_effect_row_contains_read_only_provider_effect(&self.effect_row)
+            || runtime_seam_requirements_contain_read_only_provider_effect(
+                &self.authority_requirements.requirements,
+            )
+            || self.read_only_provider_effect_details.is_some()
+    }
+
     /// Returns a private digest component for the exact retained owner-request
     /// contract. The exhaustive destructuring is intentional: adding a
     /// `CarrierContract` field must make this I3-0 canary stop compiling until
     /// its meaning is classified. It accepts neither other carrier families
     /// nor owner requests with designated/frontier result state.
     pub(crate) fn i3_probe_owner_request_fingerprint_component(&self) -> Option<[u8; 32]> {
+        if self.contains_read_only_provider_effect_static_semantics() {
+            return None;
+        }
         let CarrierContract {
             edge_kind,
             lifecycle_kind,
@@ -1597,6 +1699,7 @@ impl CarrierContract {
             visibility_policy,
             provenance,
             designated_result_details,
+            read_only_provider_effect_details,
         } = self;
 
         if *edge_kind != CommunicationEdgeKind::OwnerRequest
@@ -1604,6 +1707,7 @@ impl CarrierContract {
             || !frontiers.is_empty()
             || designated_dependency.is_some()
             || designated_result_details.is_some()
+            || read_only_provider_effect_details.is_some()
             || !visibility_policy.is_reference_only()
             || !matches!(provenance, CarrierContractProvenance::CheckedCoreBound)
         {
@@ -1901,6 +2005,67 @@ impl CarrierContract {
         contract
     }
 
+    pub(super) fn read_only_provider_effect_request(evaluation: &CheckedEvaluation) -> Self {
+        let core = evaluation
+            .read_only_provider_effect_core()
+            .expect("provider request carrier comes from provider checked Core");
+        let mut contract = Self::new(
+            CommunicationEdgeKind::ReadOnlyProviderEffectRequest,
+            CarrierLifecycleKind::ReadOnlyProviderEffectRequest,
+            core.operation(),
+            core.source_ref().clone(),
+            format!("provider-effect:{}", core.operation()),
+            None,
+            None,
+            None,
+            evaluation.declared_failure_row().clone(),
+            effect_row_for(evaluation),
+            AuthorityRequirements::read_only_provider_effect(core.operation(), core.source_ref()),
+            [CarrierOccurrenceSlotKind::Request],
+            [],
+            false,
+            false,
+            false,
+            None,
+        );
+        contract.read_only_provider_effect_details =
+            Some(ReadOnlyProviderEffectCarrierDetails { core: core.clone() });
+        contract
+    }
+
+    pub(super) fn read_only_provider_effect_result(evaluation: &CheckedEvaluation) -> Self {
+        let core = evaluation
+            .read_only_provider_effect_core()
+            .expect("provider result carrier comes from provider checked Core");
+        let mut contract = Self::new(
+            CommunicationEdgeKind::ReadOnlyProviderEffectResult,
+            CarrierLifecycleKind::ReadOnlyProviderEffectResult,
+            core.operation(),
+            core.source_ref().clone(),
+            format!("provider-effect:{}", core.operation()),
+            None,
+            None,
+            None,
+            evaluation.declared_failure_row().clone(),
+            effect_row_for(evaluation),
+            AuthorityRequirements::read_only_provider_effect(core.operation(), core.source_ref()),
+            [
+                CarrierOccurrenceSlotKind::Serve,
+                CarrierOccurrenceSlotKind::Reply,
+                CarrierOccurrenceSlotKind::Receive,
+                CarrierOccurrenceSlotKind::Consume,
+            ],
+            [],
+            true,
+            true,
+            false,
+            None,
+        );
+        contract.read_only_provider_effect_details =
+            Some(ReadOnlyProviderEffectCarrierDetails { core: core.clone() });
+        contract
+    }
+
     #[allow(clippy::too_many_arguments)]
     fn new<I, F>(
         edge_kind: CommunicationEdgeKind,
@@ -1954,6 +2119,7 @@ impl CarrierContract {
             visibility_policy: ReferenceOnlyRedactionPolicy,
             provenance: CarrierContractProvenance::CheckedCoreBound,
             designated_result_details: None,
+            read_only_provider_effect_details: None,
         }
     }
 }
@@ -2227,6 +2393,8 @@ fn i3_owner_request_component_edge_kind(kind: CommunicationEdgeKind) -> &'static
         CommunicationEdgeKind::DesignatedInputReceipt => "DesignatedInputReceipt",
         CommunicationEdgeKind::DesignatedResultDelivery => "DesignatedResultDelivery",
         CommunicationEdgeKind::AbsoluteValueStream => "AbsoluteValueStream",
+        CommunicationEdgeKind::ReadOnlyProviderEffectRequest => "ReadOnlyProviderEffectRequest",
+        CommunicationEdgeKind::ReadOnlyProviderEffectResult => "ReadOnlyProviderEffectResult",
     }
 }
 
@@ -2238,6 +2406,8 @@ fn i3_owner_request_component_lifecycle_kind(kind: CarrierLifecycleKind) -> &'st
         CarrierLifecycleKind::DesignatedInputReceipt => "DesignatedInputReceipt",
         CarrierLifecycleKind::RelationProjectionPublication => "RelationProjectionPublication",
         CarrierLifecycleKind::DesignatedResultDelivery => "DesignatedResultDelivery",
+        CarrierLifecycleKind::ReadOnlyProviderEffectRequest => "ReadOnlyProviderEffectRequest",
+        CarrierLifecycleKind::ReadOnlyProviderEffectResult => "ReadOnlyProviderEffectResult",
     }
 }
 
@@ -2278,6 +2448,11 @@ fn i3_owner_request_component_requirement_kind(kind: RuntimeSeamRequirementKind)
         }
         RuntimeSeamRequirementKind::ConsumerCapabilityRef => "ConsumerCapabilityRef",
         RuntimeSeamRequirementKind::ConsumerWitnessRef => "ConsumerWitnessRef",
+        RuntimeSeamRequirementKind::ProviderEffectMembershipEpochIncarnation => {
+            "ProviderEffectMembershipEpochIncarnation"
+        }
+        RuntimeSeamRequirementKind::ProviderEffectUseCapability => "ProviderEffectUseCapability",
+        RuntimeSeamRequirementKind::ProviderEffectUseWitness => "ProviderEffectUseWitness",
     }
 }
 
@@ -2308,6 +2483,9 @@ fn i3_owner_request_component_seam_authority_kind(kind: SeamAuthorityKind) -> &'
             "DesignatedResultConsumerCapability"
         }
         SeamAuthorityKind::DesignatedResultConsumerWitness => "DesignatedResultConsumerWitness",
+        SeamAuthorityKind::ProviderEffectMembership => "ProviderEffectMembership",
+        SeamAuthorityKind::ProviderEffectUseCapability => "ProviderEffectUseCapability",
+        SeamAuthorityKind::ProviderEffectUseWitness => "ProviderEffectUseWitness",
     }
 }
 
@@ -3615,6 +3793,13 @@ impl PersistencePlan {
                         PersistenceResponsibilityKind::ReceiptConsumption,
                         PersistenceResponsibilityKind::MembershipCapabilityWitnessRefs,
                     ],
+                    // The static provider projection has no installed runtime,
+                    // reservation state, or cut/export support yet.
+                    ProjectedOperationFragmentKind::ReadOnlyProviderEffectRequester
+                    | ProjectedOperationFragmentKind::ReadOnlyProviderEffectService
+                    | ProjectedOperationFragmentKind::ReadOnlyProviderEffectResultConsumer => {
+                        vec![]
+                    }
                 };
                 for responsibility in responsibilities {
                     if !entry.contains(&responsibility) {
@@ -3701,7 +3886,10 @@ impl ObservationPlan {
             ProjectedOperationFragmentKind::DesignatedResultConsumer => {
                 Some(RuntimeOccurrenceKind::Consume)
             }
-            ProjectedOperationFragmentKind::OwnerRequestInvocation => None,
+            ProjectedOperationFragmentKind::OwnerRequestInvocation
+            | ProjectedOperationFragmentKind::ReadOnlyProviderEffectRequester
+            | ProjectedOperationFragmentKind::ReadOnlyProviderEffectService
+            | ProjectedOperationFragmentKind::ReadOnlyProviderEffectResultConsumer => None,
         }) else {
             return;
         };
@@ -3810,7 +3998,8 @@ impl ObservationPlan {
                 let (occurrence, fragment_ref) = match (edge.kind, slot) {
                     (
                         CommunicationEdgeKind::OwnerRequest
-                        | CommunicationEdgeKind::DesignatedInputRequest,
+                        | CommunicationEdgeKind::DesignatedInputRequest
+                        | CommunicationEdgeKind::ReadOnlyProviderEffectRequest,
                         CarrierOccurrenceSlotKind::Request,
                     ) => (RuntimeOccurrenceKind::Request, &edge.source_fragment_ref),
                     (
@@ -3857,6 +4046,32 @@ impl ObservationPlan {
                         CommunicationEdgeKind::DesignatedResultDelivery,
                         CarrierOccurrenceSlotKind::Consume,
                     ) => (RuntimeOccurrenceKind::Consume, &edge.target_fragment_ref),
+                    (
+                        CommunicationEdgeKind::ReadOnlyProviderEffectResult,
+                        CarrierOccurrenceSlotKind::Serve | CarrierOccurrenceSlotKind::Reply,
+                    ) => (
+                        match slot {
+                            CarrierOccurrenceSlotKind::Serve => RuntimeOccurrenceKind::Serve,
+                            CarrierOccurrenceSlotKind::Reply => RuntimeOccurrenceKind::Reply,
+                            _ => {
+                                unreachable!("provider result lifecycle restricts occurrence slots")
+                            }
+                        },
+                        &edge.source_fragment_ref,
+                    ),
+                    (
+                        CommunicationEdgeKind::ReadOnlyProviderEffectResult,
+                        CarrierOccurrenceSlotKind::Receive | CarrierOccurrenceSlotKind::Consume,
+                    ) => (
+                        match slot {
+                            CarrierOccurrenceSlotKind::Receive => RuntimeOccurrenceKind::Receive,
+                            CarrierOccurrenceSlotKind::Consume => RuntimeOccurrenceKind::Consume,
+                            _ => {
+                                unreachable!("provider result lifecycle restricts occurrence slots")
+                            }
+                        },
+                        &edge.target_fragment_ref,
+                    ),
                     _ => continue,
                 };
                 let row = ObservationRow {
@@ -4354,6 +4569,45 @@ impl GlobalProjectionResult {
         &self.static_conflict_policy
     }
 
+    /// Returns whether this projection retains any typed provider-effect
+    /// semantics.  Ordinary executable snapshot and SYS-4 admission paths
+    /// share this structural guard so provider-only fields cannot be smuggled
+    /// through legacy outer enum variants.
+    pub(crate) fn contains_read_only_provider_effect_static_semantics(&self) -> bool {
+        self.checked_program_identity
+            .contains_read_only_provider_effect_evaluation()
+            || self
+                .locus_programs
+                .values()
+                .flat_map(|program| program.operations.entries.iter())
+                .any(projected_fragment_contains_read_only_provider_effect_static_semantics)
+            || self
+                .communication_plan
+                .edges
+                .iter()
+                .any(communication_edge_contains_read_only_provider_effect_static_semantics)
+            || self
+                .effect_handler_plan
+                .handlers
+                .iter()
+                .any(effect_handler_contains_read_only_provider_effect_static_semantics)
+            || self.projected_source_map.entries.values().any(|entry| {
+                checked_core_identity_contains_read_only_provider_effect_static_semantics(
+                    &entry.checked_core_identity,
+                )
+            })
+            || self.observation_plan.rows.iter().any(|row| {
+                row.edge_identity
+                    .as_ref()
+                    .is_some_and(|(_, kind, _, _)| is_read_only_provider_effect_edge_kind(*kind))
+            })
+            || self.relation_graph.relations.values().any(|relation| {
+                relation.residual_source_refs.iter().any(|(kind, _)| {
+                    *kind == ResidualObligationKind::ReadOnlyProviderEffectRuntimeUnsupported
+                })
+            })
+    }
+
     /// Derive a sealed process-local projection view from the checked global
     /// projection.  Only executable fragments for assigned loci and generated
     /// edges incident to those loci remain.  The original projection identity
@@ -4797,6 +5051,129 @@ impl GlobalProjectionResult {
         self.effect_handler_plan
             .for_test_clear_provenance(operation, kind, locus);
     }
+}
+
+fn projected_fragment_contains_read_only_provider_effect_static_semantics(
+    fragment: &ProjectedOperationFragment,
+) -> bool {
+    is_read_only_provider_effect_fragment_kind(fragment.kind)
+        || fragment.read_only_provider_effect_core().is_some()
+        || checked_core_identity_contains_read_only_provider_effect_static_semantics(
+            &fragment.checked_core_identity,
+        )
+        || fragment.semantic_obligations.rows.iter().any(|(kind, _)| {
+            generated_obligation_is_read_only_provider_effect_static_semantics(kind)
+        })
+        || runtime_seam_requirements_contain_read_only_provider_effect(
+            &fragment.authority_requirements.requirements,
+        )
+        || runtime_seam_requirements_contain_read_only_provider_effect(
+            &fragment.runtime_seam_requirements,
+        )
+}
+
+fn communication_edge_contains_read_only_provider_effect_static_semantics(
+    edge: &CommunicationEdge,
+) -> bool {
+    is_read_only_provider_effect_edge_kind(edge.kind)
+        || checked_core_identity_contains_read_only_provider_effect_static_semantics(
+            &edge.checked_core_identity,
+        )
+        || edge
+            .carrier_contract
+            .contains_read_only_provider_effect_static_semantics()
+}
+
+fn effect_handler_contains_read_only_provider_effect_static_semantics(
+    handler: &EffectHandlerPlanEntry,
+) -> bool {
+    projected_effect_row_contains_read_only_provider_effect(&handler.effect_row)
+        || checked_core_identity_contains_read_only_provider_effect_static_semantics(
+            &handler.checked_core_identity,
+        )
+}
+
+fn checked_core_identity_contains_read_only_provider_effect_static_semantics(
+    identity: &CheckedCoreIdentity,
+) -> bool {
+    identity
+        .fragment_kind
+        .is_some_and(is_read_only_provider_effect_fragment_kind)
+        || identity
+            .edge_kind
+            .is_some_and(is_read_only_provider_effect_edge_kind)
+}
+
+const fn is_read_only_provider_effect_fragment_kind(kind: ProjectedOperationFragmentKind) -> bool {
+    matches!(
+        kind,
+        ProjectedOperationFragmentKind::ReadOnlyProviderEffectRequester
+            | ProjectedOperationFragmentKind::ReadOnlyProviderEffectService
+            | ProjectedOperationFragmentKind::ReadOnlyProviderEffectResultConsumer
+    )
+}
+
+const fn is_read_only_provider_effect_edge_kind(kind: CommunicationEdgeKind) -> bool {
+    matches!(
+        kind,
+        CommunicationEdgeKind::ReadOnlyProviderEffectRequest
+            | CommunicationEdgeKind::ReadOnlyProviderEffectResult
+    )
+}
+
+const fn is_read_only_provider_effect_lifecycle_kind(kind: CarrierLifecycleKind) -> bool {
+    matches!(
+        kind,
+        CarrierLifecycleKind::ReadOnlyProviderEffectRequest
+            | CarrierLifecycleKind::ReadOnlyProviderEffectResult
+    )
+}
+
+fn projected_effect_row_contains_read_only_provider_effect(row: &ProjectedEffectRow) -> bool {
+    row.kinds.iter().any(|kind| {
+        matches!(
+            *kind,
+            EffectKind::ReadOnlyProviderEffectRequest
+                | EffectKind::ReadOnlyProviderEffectInvocation
+                | EffectKind::ReadOnlyProviderEffectResult
+                | EffectKind::ReadOnlyProviderEffectResultConsume
+        )
+    })
+}
+
+fn generated_obligation_is_read_only_provider_effect_static_semantics(
+    kind: &GeneratedObligationKind,
+) -> bool {
+    matches!(
+        kind,
+        GeneratedObligationKind::ProviderEffectAuthorization
+            | GeneratedObligationKind::Evaluation(CheckedEvaluationKind::ReadOnlyProviderEffect)
+    )
+}
+
+fn runtime_seam_requirements_contain_read_only_provider_effect(
+    requirements: &RuntimeSeamRequirements,
+) -> bool {
+    requirements.rows.iter().any(
+        |(requirement_kind, generated_obligation, _, authority_category)| {
+            matches!(
+                *requirement_kind,
+                RuntimeSeamRequirementKind::ProviderEffectMembershipEpochIncarnation
+                    | RuntimeSeamRequirementKind::ProviderEffectUseCapability
+                    | RuntimeSeamRequirementKind::ProviderEffectUseWitness
+            ) || generated_obligation
+                .as_ref()
+                .is_some_and(generated_obligation_is_read_only_provider_effect_static_semantics)
+                || authority_category.as_ref().is_some_and(|authority| {
+                    matches!(
+                        *authority,
+                        SeamAuthorityKind::ProviderEffectMembership
+                            | SeamAuthorityKind::ProviderEffectUseCapability
+                            | SeamAuthorityKind::ProviderEffectUseWitness
+                    )
+                })
+        },
+    )
 }
 
 #[cfg(test)]

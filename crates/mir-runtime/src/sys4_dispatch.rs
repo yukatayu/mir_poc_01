@@ -474,6 +474,15 @@ pub(crate) struct FabricProgram {
 
 impl FabricProgram {
     pub(crate) fn from_projection(projection: GlobalProjectionResult) -> Sys4Result<Self> {
+        // Stage 2a can retain provider-effect topology only as a dedicated
+        // static projection.  It has no installed SYS-4 execution, route,
+        // admission, or snapshot profile, so it must not be converted into
+        // the ordinary executable fabric program.
+        if projection.contains_read_only_provider_effect_static_semantics() {
+            return Err(Sys4DispatchDiagnostics::one(
+                Sys4DiagnosticKind::ProgramProjectionMismatch,
+            ));
+        }
         let mut routes = BTreeMap::new();
         for edge in projection.communication_plan().edges() {
             let key = FabricRouteKey::from_edge(edge);
@@ -837,6 +846,15 @@ fn i3_fragment_kind_name(kind: ProjectedOperationFragmentKind) -> &'static str {
         }
         ProjectedOperationFragmentKind::DesignatedEvaluation => "designated-evaluation",
         ProjectedOperationFragmentKind::DesignatedResultConsumer => "designated-result-consumer",
+        ProjectedOperationFragmentKind::ReadOnlyProviderEffectRequester => {
+            "read-only-provider-effect-requester"
+        }
+        ProjectedOperationFragmentKind::ReadOnlyProviderEffectService => {
+            "read-only-provider-effect-service"
+        }
+        ProjectedOperationFragmentKind::ReadOnlyProviderEffectResultConsumer => {
+            "read-only-provider-effect-result-consumer"
+        }
     }
 }
 
@@ -849,6 +867,8 @@ fn i3_edge_kind_name(kind: CommunicationEdgeKind) -> &'static str {
         CommunicationEdgeKind::DesignatedInputReceipt => "designated-input-receipt",
         CommunicationEdgeKind::DesignatedResultDelivery => "designated-result-delivery",
         CommunicationEdgeKind::AbsoluteValueStream => "absolute-value-stream",
+        CommunicationEdgeKind::ReadOnlyProviderEffectRequest => "read-only-provider-effect-request",
+        CommunicationEdgeKind::ReadOnlyProviderEffectResult => "read-only-provider-effect-result",
     }
 }
 
@@ -1545,7 +1565,14 @@ impl SealedFabricAdmission {
                                 .is_some()
                         })
                     }),
-                _ => true,
+                ProjectedOperationFragmentKind::OwnerRequestInvocation => true,
+                // Provider-effect static fragments intentionally have no M9
+                // authority lineage in Stage 2a.  They must fail the
+                // inventory gate rather than inherit an owner or designated
+                // authority family through a default arm.
+                ProjectedOperationFragmentKind::ReadOnlyProviderEffectRequester
+                | ProjectedOperationFragmentKind::ReadOnlyProviderEffectService
+                | ProjectedOperationFragmentKind::ReadOnlyProviderEffectResultConsumer => false,
             };
             if !complete {
                 return Err(Sys4DispatchDiagnostics::one(
@@ -1649,7 +1676,21 @@ impl SealedFabricAdmission {
                             .insert((fragment.operation_id().to_string(), transition.to_string()));
                     }
                 }
-                _ => {}
+                // These fragments have no independent M9 summary row; their
+                // paired source relation remains represented by the
+                // publication fragment above.
+                ProjectedOperationFragmentKind::OwnerRequestInvocation
+                | ProjectedOperationFragmentKind::ConsumerLocalRelationProjection => {}
+                // `FabricProgram::from_projection` rejects these before this
+                // point. Keep the sealed-admission summary path fail closed
+                // if a future constructor ever bypasses that preflight.
+                ProjectedOperationFragmentKind::ReadOnlyProviderEffectRequester
+                | ProjectedOperationFragmentKind::ReadOnlyProviderEffectService
+                | ProjectedOperationFragmentKind::ReadOnlyProviderEffectResultConsumer => {
+                    return Err(Sys4DispatchDiagnostics::one(
+                        Sys4DiagnosticKind::ProgramProjectionMismatch,
+                    ));
+                }
             }
         }
         let inventory_digest = generation.observer_safe_inventory_digest();
@@ -2443,6 +2484,13 @@ fn i3_snapshot_edge_kind_tag(kind: CommunicationEdgeKind) -> u8 {
         CommunicationEdgeKind::DesignatedInputReceipt => 4,
         CommunicationEdgeKind::DesignatedResultDelivery => 5,
         CommunicationEdgeKind::AbsoluteValueStream => 6,
+        // Provider-effect topology cannot enter `FabricProgram`, so this
+        // branch is unreachable through normal snapshot construction. Keep
+        // the infallible private route shape unchanged without minting a
+        // provider wire tag: 255 is an explicit unsupported sentinel and is
+        // rejected by restore below.
+        CommunicationEdgeKind::ReadOnlyProviderEffectRequest
+        | CommunicationEdgeKind::ReadOnlyProviderEffectResult => u8::MAX,
     }
 }
 
@@ -2455,6 +2503,10 @@ fn i3_snapshot_edge_kind_from_tag(tag: u8) -> Option<CommunicationEdgeKind> {
         4 => CommunicationEdgeKind::DesignatedInputReceipt,
         5 => CommunicationEdgeKind::DesignatedResultDelivery,
         6 => CommunicationEdgeKind::AbsoluteValueStream,
+        // This is a non-restoring sentinel, not a provider edge tag. It can
+        // occur only in an anomalous private snapshot because the executable
+        // program preflight rejects provider-effect topology before export.
+        u8::MAX => return None,
         _ => return None,
     })
 }
@@ -2538,6 +2590,16 @@ fn m9_execution_restriction_for_program(
             // designated remote input.  This preserves two dependencies of
             // one operation and retains the identical closure at either end.
             ProjectedOperationFragmentKind::DesignatedRemoteInputService => {}
+            // Provider-effect static fragments deliberately have no ordinary
+            // M9 execution restriction. A default/no-op arm here could make
+            // them appear executable with an incomplete lineage inventory.
+            ProjectedOperationFragmentKind::ReadOnlyProviderEffectRequester
+            | ProjectedOperationFragmentKind::ReadOnlyProviderEffectService
+            | ProjectedOperationFragmentKind::ReadOnlyProviderEffectResultConsumer => {
+                return Err(Sys4DispatchDiagnostics::one(
+                    Sys4DiagnosticKind::ProgramProjectionMismatch,
+                ));
+            }
         }
     }
     Ok(restriction)
@@ -7019,6 +7081,12 @@ fn i3_private_edge_kind_code(kind: CommunicationEdgeKind) -> Sys4Result<u8> {
         CommunicationEdgeKind::DesignatedInputReceipt => 5,
         CommunicationEdgeKind::DesignatedResultDelivery => 6,
         CommunicationEdgeKind::AbsoluteValueStream => 7,
+        CommunicationEdgeKind::ReadOnlyProviderEffectRequest
+        | CommunicationEdgeKind::ReadOnlyProviderEffectResult => {
+            return Err(Sys4DispatchDiagnostics::one(
+                Sys4DiagnosticKind::CarrierProvenanceMismatch,
+            ));
+        }
     })
 }
 

@@ -1,6 +1,6 @@
 # Current Task Map (LAB)
 
-最終更新: 2026-09-08 13:38 JST
+最終更新: 2026-09-08 15:35 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project direction,
 theory, ADRs, conformance, and process. Everything outside it is LAB evidence,
@@ -48,24 +48,29 @@ Primary falsifiers: second mutation/consume, stale authority resurrection,
 false success/nonexecution, blind retry, leaked private information, or hang.
 
 Current component is the source-declared provider effect selected by
-ADR-0042/spec/17 at contract cut 985ee179. Stage 1 now has checked source,
-private Core snapshots and fail-closed legacy runtime handoff:
+ADR-0042/spec/17 at contract cut 985ee179. Source/guard cut `9e8d674a` is
+pushed with clean remote parity observed 2026-09-08 14:05 JST. Stage 2a adds
+pure static coverage/projection and separate composite finite verification;
+dynamic permission/runtime remain dependency-gated components of I3-3.
 
-- Provider source tests 17/17 and constructor privacy doctest 1/1.
-- Private runtime guards 2/2 and public M8/M9/SYS5/M10 guards 5/5.
-- Independent source/spec and runtime reviews: no remaining P0/P1/P2.
-- Current feature-union runtime library 334/334; process runtime 63/63;
-  M8 admission 7/7, M9 external-boundary target 1/1; I2 local 5/5,
-  I2 CLI 8/8 and M10 conformance 67/67.
-- AST parser/M6 17/10, semantic M6/M7 13/27 and time/budget 14 passed in the
-  same component before the bounded constructor/restore repairs. Exact
-  final lint/docs/Git status belongs in Report 2606; do not infer it here.
+Fresh frozen Stage 2a evidence:
 
-Three review defects were reproduced and repaired: malformed snapshot
-identifiers, a public pre-M7 checked-Core constructor, and provider lowering
-tags restored into a legacy M8 executable image. Direct SYS3/kernel checks
-are also source-inspected common-entry correspondence, not separately counted
-public executions. M10 retains its existing rejection string interface.
+- Semantics composite 6/6, provider source 17/17, legacy finite 8/8.
+- Composite privacy doctest 1/1; static runtime module 11/11.
+- Full feature-union runtime library 345/345.
+- Independent spec and quality reviews: no remaining P0/P1/P2.
+- Fresh process 63/63, I2/M10 5/8/67, public guards 5/5, three-crate Clippy,
+  workspace format and all-target compilation pass. The latter is not
+  workspace test execution. Exact Git state remains in Report 2606.
+
+Four review defects were reproduced and repaired: cross-source composite
+candidate acceptance, raw legacy-discharge escape, nested provider-only
+snapshot markers, and total provider-row omission by locus restriction.
+Exact source binding and typed guards now preserve the pending requirement;
+an identity query is not authentication. The production dependency guard also
+required relocating tests, not weakening the guard. Stage 1 M8 7/7 and M9
+external 1/1 remain earlier evidence; process/I2/M10 above are fresh reruns.
+Exact commands and fresh versus retained results remain in Report 2606.
 
 There is still **no effect-use grant, provider invocation, generated provider
 network execution or row-18 acceptance**. The new ordinary source is checking
@@ -73,9 +78,11 @@ evidence, not a legacy clean-runner/M5/Lean registration or operational workflow
 
 The next component sequence remains:
 
-1. Generated provider fragments/edges and exact independent effect coverage
-   and authorization. Preserve full checked-source identity; a legacy M8
-   component must not pretend to be the complete mixed program.
+1. After static integration commit/parity, bind a genuine trusted resource
+   incarnation -> actual M9 membership/authentication and full composite
+   verification -> separate effect policy -> inactive scoped M8 component.
+   Preserve full checked-source identity; a legacy M8 component must not
+   pretend to be the complete mixed program or escape through bare snapshots.
 2. Bounded ledger, admitted supervisor/resource binding, trusted host read,
    typed result/failure and shared existing QUIC process path.
 3. Real success with two fresh fixture values, actual resource failure,
@@ -135,7 +142,7 @@ as an active queue by this snapshot.
 | 0 repository memory | three-axis/current-frontier discipline maintained | snapshot maintenance |
 | 1 semantic kernel | finite I2 boundary; selected spec/17 contract | bounded I3 consumers only |
 | 2 parser-free substrate | historical evidence | maintenance, not active architecture |
-| 3 source/checker/runtime | provider source/check FM-5; actual provider execution absent | current I3-3 component |
+| 3 source/checker/runtime | provider source/static projection tested; actual provider execution absent | current I3-3 component |
 | 4 samples | I2 toy/conformance reproducible; provider source-only | evidence-backed expansion |
 | 5 theorem/model bridge | bounded model/runtime evidence; no new Lean claim | exact classifications |
 | 6 distributed fabric | I3-2 accepted; I3-3 failure/order incomplete | through I3-3, then pause |
@@ -169,7 +176,7 @@ choices and unoptimized performance are not themselves stop conditions.
 
 | Bounded question | Direct consumer | Required evidence / recommendation |
 |---|---|---|
-| Mixed legacy M8 and independent provider coverage | current provider Stage 2 | exact opaque source-bound coverage; no silent erasure or owner-grant reuse |
+| Mixed legacy M8 and independent provider authorization | next provider Stage 2b | genuine binding, actual M9 verification/policy, retained component scope; no silent erasure or owner-grant reuse |
 | Effect invocation and release/revocation | provider Stage 3/4 | actual host call and retained typed outcome; no retry/false nonexecution |
 | Membership/redaction/cut with in-flight traffic | remaining I3-3 families | actual producer state and positive/falsifier; no distributed durability claim |
 | Concrete-to-abstract ordering | I3-3 | request/serve/result/consume and authority/cut edges, not stream order |
@@ -186,10 +193,11 @@ No new WRK/report lane without a direct consumer and bounded closure.
 - Keep provisional internal representations separate from public compatibility.
 - Maintain one report (2606), one roadmap (250), one active milestone (I3-3).
 - Run resources preflight before heavy commands. At the latest regression gate
-  free disk was 11.18 GiB; do not start heavy work below the 10 GiB safety floor.
+  free disk was about 11.04 GiB; do not start heavy work below the 10 GiB safety floor.
   No cleanup or unmounted external-workdir assumption was used in this component.
-- Finish relevant lint/docs/diff/secret scan and commit/push/parity before the
-  next provider component; full workspace/probe/matrix gates remain at I3-3 close.
+- Stage 1 lint/docs/diff/secret scan and commit/push/parity are complete;
+  repeat applicable gates at the next integration. Full workspace/probe/matrix
+  gates remain at I3-3 close.
 
 ## non-promoted references
 

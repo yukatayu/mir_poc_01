@@ -237,6 +237,29 @@ impl CheckedProgramIdentity {
     pub fn structural_entries(&self) -> &[String] {
         &self.structural_entries
     }
+
+    /// Whether this checked identity retains the canonical structural entry
+    /// for the fixed read-only provider-effect evaluation profile.
+    ///
+    /// This recognizes only the existing `evaluation:{name}:{kind}:{core}`
+    /// header, not an arbitrary substring. Exact identity is still validated
+    /// against the enclosing checked-source/admission binding; this query
+    /// neither authenticates an identity nor creates permission.
+    #[doc(hidden)]
+    pub fn contains_read_only_provider_effect_evaluation(&self) -> bool {
+        self.structural_entries.iter().any(|entry| {
+            let mut fields = entry.splitn(4, ':');
+            let (Some("evaluation"), Some(name), Some("ReadOnlyProviderEffect"), Some(core)) =
+                (fields.next(), fields.next(), fields.next(), fields.next())
+            else {
+                return false;
+            };
+            let Some((discriminant, payload)) = core.split_once(':') else {
+                return false;
+            };
+            !name.is_empty() && discriminant == "read-only-provider-effect" && !payload.is_empty()
+        })
+    }
 }
 
 #[derive(Debug, Clone, PartialEq, Eq)]

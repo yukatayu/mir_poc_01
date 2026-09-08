@@ -12,10 +12,14 @@ use mir_semantics::{
         InputFrontier, ObservationPolicy, OccurrenceId as MaterializationOccurrenceId, PolicyStamp,
         StaticRetryContractKind,
     },
+    m9_finite_refinement::{
+        M9CheckedExecutableSourceAssociation, M9FiniteEffectKind, M9ReadOnlyProviderEffectCoverage,
+    },
     shared_model::{
         BindingActivationFrontier, OccurrenceId as SharedOccurrenceId, ResultFrontier, ResultKey,
         ResultVersion, SourceRef,
     },
+    surface_v0_classification::SourceToCoreKind,
     surface_v0_pipeline::{
         ResidualObligationKind,
         private_snapshot::{
@@ -24,7 +28,8 @@ use mir_semantics::{
             SnapshotDesignatedRemoteInputDependency, SnapshotDesignatedResultConsumerCore,
             SnapshotEffectKind, SnapshotFailureRow, SnapshotGeneratedObligationKind,
             SnapshotOwnerAdmissionBudgetCondition, SnapshotOwnerRmwCheckedCore,
-            SnapshotRelationCheckedCore, SnapshotRelationTransformCore, SnapshotSourceRef,
+            SnapshotReadOnlyProviderEffectCore, SnapshotRelationCheckedCore,
+            SnapshotRelationTransformCore, SnapshotSourceRef,
         },
     },
 };
@@ -81,6 +86,16 @@ pub(crate) struct I3PrivateProjectionSnapshot {
 
 impl I3PrivateProjectionSnapshot {
     fn from_projection(
+        value: &GlobalProjectionResult,
+    ) -> Result<Self, I3PrivateProjectionSnapshotError> {
+        reject_provider_static_projection(value)?;
+        Self::from_projection_unchecked(value)
+    }
+
+    /// The dedicated static provider snapshot calls this only after retaining
+    /// its own full checked coverage. Ordinary executable export must use
+    /// `from_projection` and remains fail closed for every provider profile.
+    fn from_projection_unchecked(
         value: &GlobalProjectionResult,
     ) -> Result<Self, I3PrivateProjectionSnapshotError> {
         Ok(Self {
@@ -181,6 +196,197 @@ impl I3PrivateProjectionSnapshot {
         validate_owner_admission_budget_bindings(&restored)?;
         validate_logical_source_paths(&restored)?;
         Ok(restored)
+    }
+}
+
+/// Private version for a static provider projection snapshot. This is neither
+/// an executable image nor a transport/package format.
+const I3_PRIVATE_PROVIDER_STATIC_SNAPSHOT_VERSION: u32 = 1;
+
+/// Source-derived, static-only provider projection snapshot. Restoration
+/// requires the original checked source and topology, then compares the full
+/// re-derived projection and retained coverage; role/edge counts alone never
+/// constitute acceptance.
+#[doc(hidden)]
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[serde(deny_unknown_fields)]
+pub(crate) struct I3PrivateProviderStaticProjectionSnapshot {
+    version: u32,
+    projection: I3PrivateProjectionSnapshot,
+    provider_coverage: SnapshotReadOnlyProviderEffectCoverage,
+}
+
+impl I3PrivateProviderStaticProjectionSnapshot {
+    fn from_static_projection(
+        value: &crate::sys3_projection::ReadOnlyProviderEffectStaticProjection,
+    ) -> Result<Self, I3PrivateProjectionSnapshotError> {
+        Ok(Self {
+            version: I3_PRIVATE_PROVIDER_STATIC_SNAPSHOT_VERSION,
+            projection: I3PrivateProjectionSnapshot::from_projection_unchecked(value.projection())?,
+            provider_coverage: SnapshotReadOnlyProviderEffectCoverage::from_coverage(
+                value.provider_coverage(),
+            ),
+        })
+    }
+
+    fn into_static_projection(
+        self,
+        checked: &mir_semantics::surface_v0_pipeline::CheckedSurfaceV0,
+        topology: &DeclaredLogicalTopology,
+    ) -> Result<
+        crate::sys3_projection::ReadOnlyProviderEffectStaticProjection,
+        I3PrivateProjectionSnapshotError,
+    > {
+        if self.version != I3_PRIVATE_PROVIDER_STATIC_SNAPSHOT_VERSION {
+            return Err(I3PrivateProjectionSnapshotError::UnsupportedVersion {
+                found: self.version,
+            });
+        }
+        let coverage = M9ReadOnlyProviderEffectCoverage::from_checked(checked)
+            .map_err(|_| I3PrivateProjectionSnapshotError::SemanticSnapshot)?;
+        if !self.provider_coverage.matches_coverage(&coverage) {
+            return Err(I3PrivateProjectionSnapshotError::StructuralMismatch {
+                reason: "provider static snapshot coverage must match the full checked source",
+            });
+        }
+        let expected = crate::sys3_projection::project_read_only_provider_effect_static(
+            checked, topology, coverage,
+        )
+        .map_err(|_| I3PrivateProjectionSnapshotError::StructuralMismatch {
+            reason: "provider static snapshot must re-project from checked source",
+        })?;
+        let restored = self.projection.into_projection()?;
+        if restored != *expected.projection() {
+            return Err(I3PrivateProjectionSnapshotError::StructuralMismatch {
+                reason: "provider static snapshot must retain exact generated projection associations",
+            });
+        }
+        Ok(expected)
+    }
+}
+
+#[cfg_attr(
+    not(test),
+    expect(
+        dead_code,
+        reason = "Stage 2a retains this static snapshot for the Stage 2b composite-admission handoff; no executable consumer is admitted yet"
+    )
+)]
+impl crate::sys3_projection::ReadOnlyProviderEffectStaticProjection {
+    pub(crate) fn to_i3_private_static_snapshot(
+        &self,
+    ) -> Result<I3PrivateProviderStaticProjectionSnapshot, I3PrivateProjectionSnapshotError> {
+        I3PrivateProviderStaticProjectionSnapshot::from_static_projection(self)
+    }
+
+    pub(crate) fn from_i3_private_static_snapshot(
+        snapshot: I3PrivateProviderStaticProjectionSnapshot,
+        checked: &mir_semantics::surface_v0_pipeline::CheckedSurfaceV0,
+        topology: &DeclaredLogicalTopology,
+    ) -> Result<Self, I3PrivateProjectionSnapshotError> {
+        snapshot.into_static_projection(checked, topology)
+    }
+}
+
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[serde(deny_unknown_fields)]
+struct SnapshotReadOnlyProviderEffectCoverage {
+    program_identity: SnapshotCheckedProgramIdentity,
+    operation: String,
+    requester_principal: String,
+    requester_locus: String,
+    executor_locus: String,
+    result_consumer_locus: String,
+    adapter_profile: String,
+    logical_resource_slot: String,
+    allowance_max_bytes: u64,
+    allowance_max_calls: u64,
+    observation_label: String,
+    failures: Vec<String>,
+    effects: Vec<SnapshotM9FiniteEffectKind>,
+    executable_source_map_associations: Vec<SnapshotM9CheckedExecutableSourceAssociation>,
+    provider_source_map_associations: Vec<SnapshotM9CheckedExecutableSourceAssociation>,
+    runtime_requirement: SnapshotReadOnlyProviderEffectRuntimeRequirement,
+}
+
+impl SnapshotReadOnlyProviderEffectCoverage {
+    fn from_coverage(value: &M9ReadOnlyProviderEffectCoverage) -> Self {
+        let contract = value.contract();
+        Self {
+            program_identity: SnapshotCheckedProgramIdentity::from_checked(
+                value.program_identity(),
+            ),
+            operation: contract.operation().to_string(),
+            requester_principal: contract.requester_principal().to_string(),
+            requester_locus: contract.requester_locus().to_string(),
+            executor_locus: contract.executor_locus().to_string(),
+            result_consumer_locus: contract.result_consumer_locus().to_string(),
+            adapter_profile: contract.adapter_profile().as_str().to_string(),
+            logical_resource_slot: contract.logical_resource_slot().to_string(),
+            allowance_max_bytes: contract.allowance().max_bytes(),
+            allowance_max_calls: contract.allowance().max_calls(),
+            observation_label: contract.observation_label().to_string(),
+            failures: contract
+                .failures()
+                .into_iter()
+                .map(str::to_string)
+                .collect(),
+            effects: contract.effects().into_iter().map(Into::into).collect(),
+            executable_source_map_associations: value
+                .executable_source_map_associations()
+                .iter()
+                .map(SnapshotM9CheckedExecutableSourceAssociation::from_association)
+                .collect(),
+            provider_source_map_associations: value
+                .provider_source_map_associations()
+                .iter()
+                .map(SnapshotM9CheckedExecutableSourceAssociation::from_association)
+                .collect(),
+            runtime_requirement: SnapshotReadOnlyProviderEffectRuntimeRequirement::from_coverage(
+                value,
+            ),
+        }
+    }
+
+    fn matches_coverage(&self, value: &M9ReadOnlyProviderEffectCoverage) -> bool {
+        *self == Self::from_coverage(value)
+    }
+}
+
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[serde(deny_unknown_fields)]
+struct SnapshotM9CheckedExecutableSourceAssociation {
+    kind: SnapshotSourceToCoreKind,
+    core_ref: String,
+    source_ref: SnapshotSourceRef,
+}
+
+impl SnapshotM9CheckedExecutableSourceAssociation {
+    fn from_association(value: &M9CheckedExecutableSourceAssociation) -> Self {
+        Self {
+            kind: value.kind().into(),
+            core_ref: value.core_ref().to_string(),
+            source_ref: SnapshotSourceRef::from_checked(value.source_ref()),
+        }
+    }
+}
+
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[serde(deny_unknown_fields)]
+struct SnapshotReadOnlyProviderEffectRuntimeRequirement {
+    kind: SnapshotResidualObligationKind,
+    operation: String,
+    source_ref: SnapshotSourceRef,
+}
+
+impl SnapshotReadOnlyProviderEffectRuntimeRequirement {
+    fn from_coverage(value: &M9ReadOnlyProviderEffectCoverage) -> Self {
+        let requirement = value.runtime_requirement();
+        Self {
+            kind: requirement.kind().into(),
+            operation: requirement.operation().to_string(),
+            source_ref: SnapshotSourceRef::from_checked(requirement.source_ref()),
+        }
     }
 }
 
@@ -287,8 +493,14 @@ fn validate_logical_source_paths(
         for fragment in &program.operations.entries {
             check(&fragment.source_ref)?;
             check(&fragment.checked_core_identity.source_ref)?;
-            if let PlacementSpecificCore::RelationConsumer { descriptor } = &fragment.placement {
-                check(&descriptor.source_ref)?;
+            match &fragment.placement {
+                PlacementSpecificCore::RelationConsumer { descriptor } => {
+                    check(&descriptor.source_ref)?;
+                }
+                PlacementSpecificCore::ReadOnlyProviderEffect { core } => {
+                    check(core.source_ref())?;
+                }
+                _ => {}
             }
         }
     }
@@ -299,6 +511,9 @@ fn validate_logical_source_paths(
         check(&edge.carrier_contract.request_identity_template.source_ref)?;
         if let Some(condition) = edge.carrier_contract.owner_admission_budget() {
             check(condition.source_ref())?;
+        }
+        if let Some(details) = edge.carrier_contract.read_only_provider_effect_details() {
+            check(details.core.source_ref())?;
         }
     }
     for handler in &projection.effect_handler_plan.handlers {
@@ -346,8 +561,24 @@ impl GlobalProjectionResult {
     pub(crate) fn from_i3_private_snapshot(
         snapshot: I3PrivateProjectionSnapshot,
     ) -> Result<Self, I3PrivateProjectionSnapshotError> {
-        snapshot.into_projection()
+        let projection = snapshot.into_projection()?;
+        reject_provider_static_projection(&projection)?;
+        Ok(projection)
     }
+}
+
+/// Ordinary executable projection snapshots cannot carry provider-only static
+/// semantics—even if a typed provider slot is maliciously hidden under an
+/// otherwise legacy enum kind.
+fn reject_provider_static_projection(
+    projection: &GlobalProjectionResult,
+) -> Result<(), I3PrivateProjectionSnapshotError> {
+    if projection.contains_read_only_provider_effect_static_semantics() {
+        return Err(I3PrivateProjectionSnapshotError::UnsupportedVariant {
+            kind: "read-only provider static projection requires its dedicated snapshot",
+        });
+    }
+    Ok(())
 }
 
 fn collect_entries<T, V, F>(
@@ -619,6 +850,9 @@ enum SnapshotPlacementSpecificCore {
     DesignatedResultConsumer {
         core: SnapshotDesignatedResultConsumerCore,
     },
+    ReadOnlyProviderEffect {
+        core: SnapshotReadOnlyProviderEffectCore,
+    },
 }
 
 impl SnapshotPlacementSpecificCore {
@@ -669,6 +903,11 @@ impl SnapshotPlacementSpecificCore {
                     core: SnapshotDesignatedResultConsumerCore::from_checked(core),
                 }
             }
+            PlacementSpecificCore::ReadOnlyProviderEffect { core } => {
+                Self::ReadOnlyProviderEffect {
+                    core: SnapshotReadOnlyProviderEffectCore::from_checked(core),
+                }
+            }
         }
     }
 
@@ -714,6 +953,11 @@ impl SnapshotPlacementSpecificCore {
             },
             Self::DesignatedResultConsumer { core } => {
                 PlacementSpecificCore::DesignatedResultConsumer {
+                    core: core.into_checked()?,
+                }
+            }
+            Self::ReadOnlyProviderEffect { core } => {
+                PlacementSpecificCore::ReadOnlyProviderEffect {
                     core: core.into_checked()?,
                 }
             }
@@ -910,6 +1154,49 @@ snapshot_unit_enum!(
         DesignatedRemoteInputService,
         DesignatedEvaluation,
         DesignatedResultConsumer,
+        ReadOnlyProviderEffectRequester,
+        ReadOnlyProviderEffectService,
+        ReadOnlyProviderEffectResultConsumer,
+    }
+);
+snapshot_unit_enum!(
+    SnapshotSourceToCoreKind,
+    SourceToCoreKind,
+    {
+        OwnerRmw,
+        OwnerLocalRead,
+        OwnerLocalWrite,
+        ObserverPublish,
+        DesignatedDecision,
+        DesignatedResultConsume,
+        PublishRelation,
+        ConsumerLocalProjection,
+        DeferredPolicy,
+        ReadOnlyProviderEffectRequest,
+        ReadOnlyProviderEffectInvocation,
+        ReadOnlyProviderEffectResult,
+        ReadOnlyProviderEffectResultConsume,
+    }
+);
+snapshot_unit_enum!(
+    SnapshotM9FiniteEffectKind,
+    M9FiniteEffectKind,
+    {
+        OwnerRequest,
+        OwnerLocalRead,
+        OwnerWrite,
+        ObserverPublish,
+        RelationPublish,
+        DesignatedRemoteRequest,
+        DesignatedReceiptUse,
+        DesignatedValuePublish,
+        DesignatedResultDelivery,
+        DesignatedResultConsume,
+        ReadOnlyProviderEffectRequest,
+        ReadOnlyProviderEffectInvocation,
+        ReadOnlyProviderEffectResult,
+        ReadOnlyProviderEffectResultConsume,
+        ExternalUndeclared,
     }
 );
 
@@ -1118,6 +1405,8 @@ struct SnapshotCarrierContract {
     reference_only_redaction: bool,
     checked_core_bound: bool,
     designated_result_details: Option<SnapshotCarrierDesignatedResultDetails>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    read_only_provider_effect_details: Option<SnapshotReadOnlyProviderEffectCore>,
 }
 
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
@@ -2004,6 +2293,10 @@ impl SnapshotCarrierContract {
                 .designated_result_details
                 .as_ref()
                 .map(SnapshotCarrierDesignatedResultDetails::from_details),
+            read_only_provider_effect_details: value
+                .read_only_provider_effect_details
+                .as_ref()
+                .map(|details| SnapshotReadOnlyProviderEffectCore::from_checked(&details.core)),
         }
     }
 
@@ -2092,6 +2385,11 @@ impl SnapshotCarrierContract {
                 .designated_result_details
                 .map(SnapshotCarrierDesignatedResultDetails::into_details)
                 .transpose()?,
+            read_only_provider_effect_details: self
+                .read_only_provider_effect_details
+                .map(SnapshotReadOnlyProviderEffectCore::into_checked)
+                .transpose()?
+                .map(|core| ReadOnlyProviderEffectCarrierDetails { core }),
         })
     }
 }
@@ -2106,6 +2404,8 @@ snapshot_unit_enum!(
         DesignatedInputReceipt,
         DesignatedResultDelivery,
         AbsoluteValueStream,
+        ReadOnlyProviderEffectRequest,
+        ReadOnlyProviderEffectResult,
     }
 );
 snapshot_unit_enum!(
@@ -2118,6 +2418,8 @@ snapshot_unit_enum!(
         DesignatedInputReceipt,
         RelationProjectionPublication,
         DesignatedResultDelivery,
+        ReadOnlyProviderEffectRequest,
+        ReadOnlyProviderEffectResult,
     }
 );
 snapshot_unit_enum!(
@@ -2146,6 +2448,9 @@ snapshot_unit_enum!(
         ConsumerMembershipEpochIncarnation,
         ConsumerCapabilityRef,
         ConsumerWitnessRef,
+        ProviderEffectMembershipEpochIncarnation,
+        ProviderEffectUseCapability,
+        ProviderEffectUseWitness,
     }
 );
 snapshot_unit_enum!(
@@ -2161,6 +2466,9 @@ snapshot_unit_enum!(
         DesignatedResultConsumerMembership,
         DesignatedResultConsumerCapability,
         DesignatedResultConsumerWitness,
+        ProviderEffectMembership,
+        ProviderEffectUseCapability,
+        ProviderEffectUseWitness,
     }
 );
 

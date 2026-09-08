@@ -4,6 +4,8 @@
 //! diagnostic.  It does not create authority, execute a Core operation, or
 //! mutate an M8 runtime.
 
+mod read_only_provider_effect_coverage;
+
 use std::{
     collections::{BTreeMap, BTreeSet},
     fs,
@@ -18,6 +20,11 @@ use crate::{
     surface_v0_provider_effect::{
         READ_ONLY_PROVIDER_FAILURES, ReadOnlyProviderAdapterProfile, ReadOnlyProviderAllowance,
     },
+};
+
+pub use read_only_provider_effect_coverage::{
+    M9CheckedExecutableSourceAssociation, M9ReadOnlyProviderEffectCoverage,
+    M9ReadOnlyProviderEffectCoverageError, M9ReadOnlyProviderEffectRuntimeRequirement,
 };
 
 pub const M9_FINITE_REFINEMENT_WITNESS_SCHEMA: &str = "m9-proof-witness-required";
@@ -291,6 +298,50 @@ impl M9ContractCandidate {
     }
 }
 
+/// Source-bound candidate for the dedicated composite provider verifier.
+///
+/// Unlike the legacy normalized candidate, this retains the exact checked
+/// program identity and complete provider coverage from the checked source.
+/// Its constructors never accept caller-supplied source identity or coverage.
+#[doc(hidden)]
+#[derive(Debug, Clone, PartialEq, Eq)]
+pub struct M9CompositeContractCandidate {
+    checked_program_identity: CheckedProgramIdentity,
+    provider_coverage: M9ReadOnlyProviderEffectCoverage,
+    candidate: M9ContractCandidate,
+}
+
+impl M9CompositeContractCandidate {
+    /// Derive a composite candidate only from a complete checked provider
+    /// source. This remains a static verifier input; it grants no authority
+    /// and does not activate an external effect.
+    pub fn from_checked_surface(
+        checked: &CheckedSurfaceV0,
+    ) -> Result<Self, M9ReadOnlyProviderEffectCoverageError> {
+        Ok(Self {
+            checked_program_identity: checked.program_identity().clone(),
+            provider_coverage: M9ReadOnlyProviderEffectCoverage::from_checked(checked)?,
+            candidate: M9ContractCandidate::from_checked_surface(checked),
+        })
+    }
+
+    pub fn candidate_contract(&self) -> &M9FiniteContract {
+        self.candidate.candidate_contract()
+    }
+
+    pub fn with_candidate_contract(mut self, candidate_contract: M9FiniteContract) -> Self {
+        self.candidate = self.candidate.with_candidate_contract(candidate_contract);
+        self
+    }
+
+    /// Apply only the established finite MembershipAuth strengthening while
+    /// preserving the checked-source identity and provider coverage binding.
+    pub fn membership_auth_strengthening(mut self) -> Self {
+        self.candidate = self.candidate.membership_auth_strengthening();
+        self
+    }
+}
+
 fn source_contract_from_checked(checked: &CheckedSurfaceV0) -> M9FiniteContract {
     let mut contract = M9FiniteContract::default();
     for evaluation in checked.evaluations() {
@@ -328,6 +379,12 @@ fn source_contract_from_checked(checked: &CheckedSurfaceV0) -> M9FiniteContract 
             contract.observations.insert(
                 format!("evaluation:{}", evaluation.name()),
                 designated.observation_policy().name.clone(),
+            );
+        }
+        if let Some(provider) = evaluation.read_only_provider_effect_core() {
+            contract.observations.insert(
+                format!("provider-effect:{}", evaluation.name()),
+                provider.observation_label().to_string(),
             );
         }
     }
@@ -679,6 +736,8 @@ pub enum M9FiniteRefinementErrorKind {
     ReplayedEvidence,
     UnverifiedArtifact,
     ReadOnlyProviderEffectRequiresDedicatedRuntime,
+    ReadOnlyProviderEffectCoverageMismatch,
+    ReadOnlyProviderEffectProfileMismatch,
 }
 
 #[derive(Debug, Clone, PartialEq, Eq)]
@@ -801,127 +860,7 @@ impl M9FiniteRefinementChecker {
                 M9FiniteRefinementErrorKind::ReadOnlyProviderEffectRequiresDedicatedRuntime,
             ));
         }
-        let Some(residual) = checked
-            .residual_obligations()
-            .entries()
-            .iter()
-            .find(|entry| entry.kind() == ResidualObligationKind::VerifyDeferred)
-        else {
-            return Err(M9FiniteRefinementDiagnostics::one(
-                M9FiniteRefinementErrorKind::MissingVerifyResidual,
-            ));
-        };
-        if residual.name() != "finite_refinement" || checked.program_identity().module().is_empty()
-        {
-            return Err(M9FiniteRefinementDiagnostics::one(
-                M9FiniteRefinementErrorKind::UnverifiedArtifact,
-            ));
-        }
-        let source_contract = source_contract_from_checked(checked);
-        if candidate.source_contract != source_contract {
-            return Err(M9FiniteRefinementDiagnostics::one(
-                M9FiniteRefinementErrorKind::SourceContractMismatch,
-            ));
-        }
-        let after = &candidate.candidate_contract;
-        if !source_contract
-            .preconditions
-            .is_subset(&after.preconditions)
-        {
-            return Err(M9FiniteRefinementDiagnostics::one(
-                M9FiniteRefinementErrorKind::RemovedBaselinePrecondition,
-            ));
-        }
-        if !source_contract
-            .capability_requirements
-            .is_subset(&after.capability_requirements)
-        {
-            return Err(M9FiniteRefinementDiagnostics::one(
-                M9FiniteRefinementErrorKind::RemovedBaselineCapability,
-            ));
-        }
-        if !source_contract.failures.is_subset(&after.failures) {
-            return Err(M9FiniteRefinementDiagnostics::one(
-                M9FiniteRefinementErrorKind::RemovedBaselineFailure,
-            ));
-        }
-        if !after.effects.is_subset(&source_contract.effects) {
-            return Err(M9FiniteRefinementDiagnostics::one(
-                M9FiniteRefinementErrorKind::EffectExpansion,
-            ));
-        }
-        if source_contract
-            .observations
-            .iter()
-            .any(|(label, redaction)| {
-                after
-                    .observations
-                    .get(label)
-                    .is_none_or(|candidate_redaction| {
-                        redaction_rank(candidate_redaction) < redaction_rank(redaction)
-                    })
-            })
-        {
-            return Err(M9FiniteRefinementDiagnostics::one(
-                M9FiniteRefinementErrorKind::ObservationPolicyWeakening,
-            ));
-        }
-        if !after
-            .preconditions
-            .contains(M9_MEMBERSHIP_AUTH_PRECONDITION)
-        {
-            return Err(M9FiniteRefinementDiagnostics::one(
-                M9FiniteRefinementErrorKind::MissingMembershipAuthPrecondition,
-            ));
-        }
-        if !after
-            .capability_requirements
-            .contains(M9_MEMBERSHIP_AUTH_CAPABILITY)
-        {
-            return Err(M9FiniteRefinementDiagnostics::one(
-                M9FiniteRefinementErrorKind::MissingMembershipAuthCapability,
-            ));
-        }
-        if !after.failures.contains(M9_AUTH_REJECTED_FAILURE) {
-            return Err(M9FiniteRefinementDiagnostics::one(
-                M9FiniteRefinementErrorKind::MissingAuthRejectedFailure,
-            ));
-        }
-        match after
-            .observations
-            .get(M9_AUTHORITY_OBSERVATION_LABEL)
-            .map(String::as_str)
-        {
-            Some(redaction)
-                if redaction_rank(redaction)
-                    < redaction_rank(M9_AUTHORITY_OBSERVATION_REDACTION) =>
-            {
-                return Err(M9FiniteRefinementDiagnostics::one(
-                    M9FiniteRefinementErrorKind::ObservationPolicyWeakening,
-                ));
-            }
-            Some(M9_AUTHORITY_OBSERVATION_REDACTION) => {}
-            _ => {
-                return Err(M9FiniteRefinementDiagnostics::one(
-                    M9FiniteRefinementErrorKind::MissingAuthorityObservationRedaction,
-                ));
-            }
-        }
-        Ok(M9FiniteRefinementDischarge {
-            obligation_id: M9ObligationId::new(format!(
-                "OBL-M9-finite-refinement-{}",
-                checked.program_identity().module()
-            )),
-            program_identity: checked.program_identity().clone(),
-            residual_name: residual.name().to_string(),
-            source_ref: residual.source_ref().clone(),
-            module_contract: (
-                checked.program_identity().module().to_string(),
-                "finite-refinement/MembershipAuth".to_string(),
-            ),
-            normalized_candidate_fingerprint: after.normalized_fingerprint(),
-            expected_delta: normalized_delta(&source_contract, after),
-        })
+        discharge_candidate_against_normalized_source(checked, candidate)
     }
 
     /// Compatibility carrier for diagnostics-only callers.  Its public
@@ -1014,6 +953,255 @@ impl M9FiniteRefinementChecker {
             M9FiniteRefinementErrorKind::UnverifiedArtifact,
         ))
     }
+}
+
+fn discharge_candidate_against_normalized_source(
+    checked: &CheckedSurfaceV0,
+    candidate: M9ContractCandidate,
+) -> Result<M9FiniteRefinementDischarge, M9FiniteRefinementDiagnostics> {
+    let Some(residual) = checked
+        .residual_obligations()
+        .entries()
+        .iter()
+        .find(|entry| entry.kind() == ResidualObligationKind::VerifyDeferred)
+    else {
+        return Err(M9FiniteRefinementDiagnostics::one(
+            M9FiniteRefinementErrorKind::MissingVerifyResidual,
+        ));
+    };
+    if residual.name() != "finite_refinement" || checked.program_identity().module().is_empty() {
+        return Err(M9FiniteRefinementDiagnostics::one(
+            M9FiniteRefinementErrorKind::UnverifiedArtifact,
+        ));
+    }
+    let source_contract = source_contract_from_checked(checked);
+    if candidate.source_contract != source_contract {
+        return Err(M9FiniteRefinementDiagnostics::one(
+            M9FiniteRefinementErrorKind::SourceContractMismatch,
+        ));
+    }
+    let after = &candidate.candidate_contract;
+    if !source_contract
+        .preconditions
+        .is_subset(&after.preconditions)
+    {
+        return Err(M9FiniteRefinementDiagnostics::one(
+            M9FiniteRefinementErrorKind::RemovedBaselinePrecondition,
+        ));
+    }
+    if !source_contract
+        .capability_requirements
+        .is_subset(&after.capability_requirements)
+    {
+        return Err(M9FiniteRefinementDiagnostics::one(
+            M9FiniteRefinementErrorKind::RemovedBaselineCapability,
+        ));
+    }
+    if !source_contract.failures.is_subset(&after.failures) {
+        return Err(M9FiniteRefinementDiagnostics::one(
+            M9FiniteRefinementErrorKind::RemovedBaselineFailure,
+        ));
+    }
+    if !after.effects.is_subset(&source_contract.effects) {
+        return Err(M9FiniteRefinementDiagnostics::one(
+            M9FiniteRefinementErrorKind::EffectExpansion,
+        ));
+    }
+    if source_contract
+        .observations
+        .iter()
+        .any(|(label, redaction)| {
+            after
+                .observations
+                .get(label)
+                .is_none_or(|candidate_redaction| {
+                    redaction_rank(candidate_redaction) < redaction_rank(redaction)
+                })
+        })
+    {
+        return Err(M9FiniteRefinementDiagnostics::one(
+            M9FiniteRefinementErrorKind::ObservationPolicyWeakening,
+        ));
+    }
+    if !after
+        .preconditions
+        .contains(M9_MEMBERSHIP_AUTH_PRECONDITION)
+    {
+        return Err(M9FiniteRefinementDiagnostics::one(
+            M9FiniteRefinementErrorKind::MissingMembershipAuthPrecondition,
+        ));
+    }
+    if !after
+        .capability_requirements
+        .contains(M9_MEMBERSHIP_AUTH_CAPABILITY)
+    {
+        return Err(M9FiniteRefinementDiagnostics::one(
+            M9FiniteRefinementErrorKind::MissingMembershipAuthCapability,
+        ));
+    }
+    if !after.failures.contains(M9_AUTH_REJECTED_FAILURE) {
+        return Err(M9FiniteRefinementDiagnostics::one(
+            M9FiniteRefinementErrorKind::MissingAuthRejectedFailure,
+        ));
+    }
+    match after
+        .observations
+        .get(M9_AUTHORITY_OBSERVATION_LABEL)
+        .map(String::as_str)
+    {
+        Some(redaction)
+            if redaction_rank(redaction) < redaction_rank(M9_AUTHORITY_OBSERVATION_REDACTION) =>
+        {
+            return Err(M9FiniteRefinementDiagnostics::one(
+                M9FiniteRefinementErrorKind::ObservationPolicyWeakening,
+            ));
+        }
+        Some(M9_AUTHORITY_OBSERVATION_REDACTION) => {}
+        _ => {
+            return Err(M9FiniteRefinementDiagnostics::one(
+                M9FiniteRefinementErrorKind::MissingAuthorityObservationRedaction,
+            ));
+        }
+    }
+    Ok(M9FiniteRefinementDischarge {
+        obligation_id: M9ObligationId::new(format!(
+            "OBL-M9-finite-refinement-{}",
+            checked.program_identity().module()
+        )),
+        program_identity: checked.program_identity().clone(),
+        residual_name: residual.name().to_string(),
+        source_ref: residual.source_ref().clone(),
+        module_contract: (
+            checked.program_identity().module().to_string(),
+            "finite-refinement/MembershipAuth".to_string(),
+        ),
+        normalized_candidate_fingerprint: after.normalized_fingerprint(),
+        expected_delta: normalized_delta(&source_contract, after),
+    })
+}
+
+/// Dedicated finite-verification entry for a source that includes the fixed
+/// provider profile. The ordinary checker intentionally continues to reject
+/// that profile until this distinct composite path has completed its checks.
+#[doc(hidden)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Default)]
+pub struct M9CompositeFiniteRefinementChecker {
+    _private: (),
+}
+
+/// Opaque composite finite-verification evidence. It retains both exact
+/// static coverage and an actual normalized finite-verification discharge,
+/// while remaining activation-pending and non-authorizing.
+///
+/// ```compile_fail
+/// use mir_semantics::m9_finite_refinement::{
+///     M9CompositeFiniteRefinementDischarge, M9FiniteRefinementDischarge,
+/// };
+///
+/// fn erase_pending_composite(
+///     composite: &M9CompositeFiniteRefinementDischarge,
+/// ) -> M9FiniteRefinementDischarge {
+///     composite.finite_discharge().clone()
+/// }
+/// ```
+#[doc(hidden)]
+#[derive(Debug, Clone, PartialEq, Eq)]
+pub struct M9CompositeFiniteRefinementDischarge {
+    provider_coverage: M9ReadOnlyProviderEffectCoverage,
+    finite_discharge: M9FiniteRefinementDischarge,
+}
+
+impl M9CompositeFiniteRefinementDischarge {
+    pub fn program_identity(&self) -> &CheckedProgramIdentity {
+        self.finite_discharge.program_identity()
+    }
+
+    pub fn provider_coverage(&self) -> &M9ReadOnlyProviderEffectCoverage {
+        &self.provider_coverage
+    }
+
+    pub const fn activation_pending(&self) -> bool {
+        true
+    }
+
+    pub const fn grants_authority(&self) -> bool {
+        false
+    }
+
+    pub const fn permits_effect_use(&self) -> bool {
+        false
+    }
+
+    pub const fn discharges_runtime_requirement(&self) -> bool {
+        false
+    }
+}
+
+impl M9CompositeFiniteRefinementChecker {
+    /// Verify the complete checked source with the ordinary normalized finite
+    /// checks plus the exact selected provider profile. This produces neither
+    /// effect-use permission nor runtime activation.
+    pub fn discharge_composite_candidate(
+        &self,
+        checked: &CheckedSurfaceV0,
+        candidate: M9CompositeContractCandidate,
+    ) -> Result<M9CompositeFiniteRefinementDischarge, M9FiniteRefinementDiagnostics> {
+        let M9CompositeContractCandidate {
+            checked_program_identity,
+            provider_coverage,
+            candidate,
+        } = candidate;
+        if checked_program_identity != *checked.program_identity() {
+            return Err(M9FiniteRefinementDiagnostics::one(
+                M9FiniteRefinementErrorKind::ProgramIdentityMismatch,
+            ));
+        }
+        if !provider_coverage.matches_checked(checked) {
+            return Err(M9FiniteRefinementDiagnostics::one(
+                M9FiniteRefinementErrorKind::ReadOnlyProviderEffectCoverageMismatch,
+            ));
+        }
+        if candidate.source_contract != source_contract_from_checked(checked) {
+            return Err(M9FiniteRefinementDiagnostics::one(
+                M9FiniteRefinementErrorKind::SourceContractMismatch,
+            ));
+        }
+        validate_selected_provider_profile(&candidate, &provider_coverage)?;
+        let finite_discharge = discharge_candidate_against_normalized_source(checked, candidate)?;
+        Ok(M9CompositeFiniteRefinementDischarge {
+            provider_coverage,
+            finite_discharge,
+        })
+    }
+}
+
+fn validate_selected_provider_profile(
+    candidate: &M9ContractCandidate,
+    provider_coverage: &M9ReadOnlyProviderEffectCoverage,
+) -> Result<(), M9FiniteRefinementDiagnostics> {
+    let contract = provider_coverage.contract();
+    if !contract
+        .effects()
+        .into_iter()
+        .all(|effect| candidate.candidate_contract.effects.contains(&effect))
+    {
+        return Err(M9FiniteRefinementDiagnostics::one(
+            M9FiniteRefinementErrorKind::ReadOnlyProviderEffectProfileMismatch,
+        ));
+    }
+    let observation_key = format!("provider-effect:{}", contract.operation());
+    if candidate
+        .candidate_contract
+        .observations
+        .get(&observation_key)
+        .map(String::as_str)
+        != Some(contract.observation_label())
+    {
+        return Err(M9FiniteRefinementDiagnostics::one(
+            M9FiniteRefinementErrorKind::ReadOnlyProviderEffectProfileMismatch,
+        ));
+    }
+    Ok(())
 }
 
 #[derive(Debug, Clone, PartialEq, Eq)]

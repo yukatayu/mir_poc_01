@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-09-08 13:42 JST
+最終更新: 2026-09-08 15:35 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -58,11 +58,19 @@ remain later.
 
 ## current milestone position
 
+Provider source/guard component `9e8d674a` is the last pushed cut (clean parity
+2026-09-08 14:05 JST). Its successor static coverage/composite verification/
+generated projection passes fresh semantics 6/17/8, privacy 1, static runtime
+11 and full runtime 345 tests. Process 63, I2/M10 5/8/67, public guards 5,
+Clippy/format/workspace compilation and independent spec/quality reviews pass.
+Exact Git state is in Report 2606. Actual binding, effect authority and runtime
+remain next. I3-3 remains unaccepted; six of eleven milestones are accepted.
+
 | Axis | Current status | Startability |
 |---|---|---|
 | Logical specification | finite source -> Core -> artifact -> communication -> in-process trace/conformance accepted; Theory T1 and broad PHASE-I1 unaccepted | maintenance **着手可能**; general widening **後段依存** |
 | User-facing specification | provisional project/run/inspect/conform workflow exists; public grammar/CLI/JSON/API/ABI/wire/devtools unfrozen | regression **着手可能**; public contract **要仕様確認** |
-| Implementation / operation | I2 exit preserved; I3-1/I3-2 accepted; provider source/check/snapshot and fail-closed legacy handoff verified; effect grant/invocation and remaining membership/redaction/cut/full-matrix gates remain | I3-3 **着手可能**; I3-4+ **後段依存** |
+| Implementation / operation | I2 exit preserved; I3-1/I3-2 accepted; provider source and static projection/verification tested; effect grant/invocation and remaining membership/redaction/cut/full-matrix gates remain | I3-3 **着手可能**; I3-4+ **後段依存** |
 
 ```text
 Theory: T1
@@ -352,3 +360,14 @@ then stop with Plan 250 retained and I3-4 inactive.
   process 63, I2/M10 and focused quality gates pass after three reproduced
   review repairs. No provider invocation or I3-3 acceptance; exact Git state
   remains in Report 2606.
+- 2026-09-08 14:05 JST: source/guard component `9e8d674a` pushed with clean
+  HEAD/origin/main/live parity after code, review and docs gates. Static provider
+  coverage/projection is next; no host execution, I3-3 close or I3-4 activation.
+- 2026-09-08 15:23 JST: static provider coverage/composite verification/projection
+  final test packet passes 6/17/8 semantics, 1 privacy, 11 static and 345 full
+  runtime tests after four review repairs. Final integration gates remain;
+  no provider authority/invocation or I3-3 acceptance follows.
+- 2026-09-08 15:35 JST: static handoff independent spec/quality reviews have
+  no P0/P1/P2; process 63, I2/M10 5/8/67, public guards 5 and final lint/format/
+  workspace compilation pass. Post-lint static 11 passes; actual binding and
+  M9 policy/scoped-M8 follow, not provider invocation or milestone acceptance.

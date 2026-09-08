@@ -126,6 +126,19 @@ scripts/validate_docs.py. Historical plans/reports are evidence, not authority.
 
 ## Actions taken
 
+After the pushed Stage 1 cut, parent adopts the smallest activation-pending
+composite implementation route within spec/17. One temporary Oracle consult
+(`i3-provider-composite-handoff-20260908`, actual 6Pro picker verification)
+returns advisory candidate A; full local output is
+`/tmp/i3-provider-composite-handoff-20260908.md`. Independent planner checks
+the real M8-before-M9 ordering and incomplete mixed materialization hazard.
+Parent retains static projection before actual admission/verification, rather
+than making pure projection depend on a finite verifier verdict. It also
+requires exact provider-effect retention/source-label binding in the composite
+checker, without changing generic legacy refinement/redaction. Exact Stage 2
+sequence and disjoint ownership are recorded in Plan 250; no new Canon rule,
+milestone, authority issuer or transport is introduced by this coordination.
+
 Provider Stage 1 implements the selected source-only profile and rejects all
 legacy execution/export paths lacking a dedicated provider runtime. Independent
 review exposed identifier restoration, constructor visibility and M8 snapshot
@@ -183,6 +196,17 @@ not a Canon adoption or a universal duplicate policy. Accepted operation-specifi
 stored-result/no-new-consume contracts remain preserved.
 
 ## Files changed
+
+Provider Stage 2a changes semantics finite-refinement/coverage and the existing
+checked identity query; SYS3 pure lowering/model, new static provider projector
+and private static snapshot; SYS4/SYS5 explicit unsupported boundaries; and
+SYS6 metadata-name arms only. Separate source tests are
+`crates/mir-semantics/tests/i3_provider_composite.rs`; the runtime cfg-test
+module is `crates/mir-runtime/src/sys3_provider_effect_tests.rs`, outside the
+production projection directory. Plan 250, Report 2606, Documentation,
+project-status, progress, tasks and samples_progress are synchronized. No
+Canon, sample-root, script taxonomy, wire/runtime activation or lifecycle
+change belongs to this component.
 
 Provider Stage 1 changes AST surface/parser support; semantics classification,
 pipeline, private snapshot and static M9 refinement; runtime M8/M9/M10/kernel,
@@ -326,6 +350,189 @@ CARGO_INCREMENTAL=0 CARGO_BUILD_JOBS=2 cargo test --locked -p mir-runtime --test
 ```
 
 ## Evidence / outputs / test results
+
+Final frozen Stage 2a packet, `2026-09-08T15:23:52+09:00`, supersedes the
+earlier static RED/intermediate GREEN checkpoints below for the current delta
+over `9e8d674a`. All commands use `CARGO_INCREMENTAL=0 CARGO_BUILD_JOBS=2`,
+locked dependencies and serial tests; one evaluator runs Cargo.
+
+| Executed gate | Actual result | Exact log |
+| --- | --- | --- |
+| `cargo test --locked -p mir-semantics --test i3_provider_composite --test i3_provider_effect --test m9_finite_refinement -- --test-threads=1` | 6/6, 17/17, 8/8 separately | `/tmp/c3-stage2a-final-semantics-targets-20260908.JmMezY/01-cargo-test.log` |
+| `cargo test --locked -p mir-semantics --doc M9CompositeFiniteRefinementDischarge` | selected 1/1; 2 filtered | `/tmp/c3-stage2a-final-semantics-doctest-20260908.2oTpSU/01-cargo-test.log` |
+| `cargo test --locked -p mir-runtime --features i3-private-quic,i3-process-test-seams --lib sys3_projection::provider_effect_tests -- --test-threads=1` | 11/11; 334 filtered | `/tmp/c3-stage2a-final-runtime-staticmodule-20260908.dzny2B/01-cargo-test.log` |
+| Same runtime command without module filter | 345/345; 83.64 seconds | `/tmp/c3-stage2a-final-runtime-featureunion-full-20260908.V2cVMH/01-cargo-test.log` |
+
+The static 11 are included in the full 345, not additive. Source identity
+tests also distinguish genuine provider source from genuine I2 source whose
+ordinary operation is named exactly `ReadOnlyProviderEffect`. The full runtime
+run includes the unchanged production-projection dependency scanner after
+test relocation. Free disk is 11,855,839,232 bytes; no cleanup or alternate
+feature build occurs. Parent inspects the evidence. No effect grant, actual
+binding, host read, provider network execution or I3-3 acceptance follows.
+Independent spec review is clear; separate final quality/regression/Git gates
+remain in progress at this checkpoint.
+
+Stage 2a integration regression then passes process integration 63/63
+(`/tmp/c3-stage2a-process-integration-20260908.rJ7XlC/01-cargo-test.log`),
+M10 67/67 plus I2 local 5/5 and CLI 8/8
+(`/tmp/c3-stage2a-i2-m10-regression-20260908.Ddz3QT/01-cargo-test.log`), and
+public provider guards 5/5
+(`/tmp/c3-stage2a-runtime-public-guards-20260908.ARycgG/01-cargo-test.log`).
+These use `cargo test --locked -p mir-runtime` with the same feature union,
+respectively targets `sys5_i3_process_runtime`, `m10_conformance` /
+`sys5_local_slice` / `sys6_i2_cli`, and `i3_provider_effect_guards`, with
+serial tests. Unlike the cfg-test library packet, ordinary library compilation
+emits ten dead-code warnings for the intentionally inactive static snapshot.
+
+`cargo clippy --locked -p mir-semantics -p mir-runtime -p mirrorea-cli
+--features mir-runtime/i3-private-quic,mir-runtime/i3-process-test-seams
+--all-targets -- -D warnings` then exits 101 in
+`/tmp/c3-stage2a-threecrate-clippy-20260908.CmrcWi/01-cargo-clippy.log`.
+It reports those ten unused static snapshot items and six needless explicit
+lifetimes in the relocated test helpers. The evaluator stops: workspace fmt
+and all-target check have not run in this packet. Parent inspects the log,
+the existing static-module lint pattern and actual absent production consumer;
+authorizes only targeted non-test dead-code annotations with a pending-consumer
+reason and the exact six lifetime elisions. No file-wide warning waiver,
+semantic activation or schema change is authorized. Free disk is
+11,846,680,576 bytes. Final lint and affected-test reruns remain required.
+
+The first annotation rerun also exits 101:
+`/tmp/c3-stage2a-threecrate-clippy-rerun-20260908.uPqjjv/01-cargo-clippy.log`.
+Original dead-code and lifetime diagnostics are absent, but nine transitive
+snapshot helper annotations report unfulfilled lint expectations. The root
+static-projection snapshot-method impl is the one fulfilled expectation;
+marking that root makes its referenced helper items live for lint analysis.
+Parent selects removal of the nine redundant expectations, retaining only the
+non-test root expectation with its exact inactive-consumer reason. No general
+unfulfilled-lint waiver or executable use is added. Fmt, workspace check and
+the post-lifetime static rerun are still unexecuted at this intermediate RED.
+
+Final quality packet at `2026-09-08T15:35:01+09:00` supersedes both lint REDs:
+
+- Same three-crate all-target Clippy command: exit 0, 27.36 seconds,
+  `/tmp/c3-stage2a-threecrate-clippy-final-20260908.6bDyl6/01-cargo-clippy.log`.
+- `cargo fmt --all -- --check`: exit 0,
+  `/tmp/c3-stage2a-fmt-final-20260908.Fz8R9x/01-cargo-fmt.log`.
+- `cargo check --locked --workspace --all-targets --features mir-runtime/i3-private-quic,mir-runtime/i3-process-test-seams`:
+  exit 0, 26.92 seconds,
+  `/tmp/c3-stage2a-workspace-alltargets-check-20260908.2aX6sG/01-cargo-check.log`.
+  This is all-workspace compilation, not all-workspace test execution.
+- Same runtime static-module command: fresh 11/11, 334 filtered,
+  `/tmp/c3-stage2a-runtime-static11-final-20260908.uyFLiA/01-cargo-test.log`.
+
+Parent inspects final outputs; no warnings remain in these runs. Final free
+disk is 11,840,618,496 bytes. The only delta after the full 345/process 63/
+I2-M10 behavior gates is the exact annotation/lifetime repair; those full
+behavior suites are not relabeled as rerun after it. `make docs` also passes
+agent configs, 216-entry Canon index, all 800 hierarchy paths and the scaffold
+containing 1760 reports. Final LAB synchronization/documentation rerun and
+scoped Git integration follow; no effect activation or I3-3 close is claimed.
+
+Full static module at the typed-marker repair executes 11 tests: 10 pass and
+the new ViewerC restriction test fails in
+`/tmp/c3-stage2a-static-projection-module-red-20260908.EvAf9C/01-cargo-test.log`.
+Before the failure it verifies equality with the original full checked
+provider identity and absence of local provider fragments/edges. It then
+observes successful ordinary snapshot export and panics; the subsequent SYS4
+assertion is not reached in this RED. Parent inspected both log and test order
+and authorizes the source-owned identity profile query. The preceding ten
+tests include the eleven typed-marker mutation categories, direct carrier
+adapter/fingerprint refusal and genuine provider static SYS4 refusal. These
+are separate cases within the reported test bodies, not additive test counts.
+No provider invocation is performed. Free disk is 11,859,234,816 bytes.
+
+The two ordinary legacy snapshot mutations reach assertion RED (0/2,
+340 filtered, exit 101) in
+`/tmp/c3-stage2a-ordinary-snapshot-red-20260908.3A0UKC/01-cargo-test.log`.
+Their unchanged legacy snapshots restore positively before the mutation;
+the requested typed unsupported rejection is absent for a provider invocation
+effect row and a nested provider fragment identity. The log records failed
+rejection assertions; parent additionally traces the remaining budget/path
+checks and ordinary preflight before authorizing the bounded typed-marker fix.
+The relocated cfg-test module preserves the original architecture scanner:
+its regression passes 1/1 in
+`/tmp/c3-stage2a-projection-architecture-regression-20260908.hxPzW6/01-cargo-test.log`.
+Both commands use the same feature union, locked dependencies and serial
+tests. Free disk after the second command is 11,872,235,520 bytes.
+
+After the bounded compile repairs, the final-cut runtime static target passes
+6/6 in `/tmp/c3-stage2a-runtime-static6-finalcut-20260908.95zTPv/01-cargo-test.log`.
+The full feature-union library command then executes 340 tests, with 339 passed
+and one failed in
+`/tmp/c3-stage2a-runtime-featureunion-full-20260908.0MVbcZ/01-cargo-test.log`.
+The failed architectural scan finds `serde` in the new cfg-test file under the
+production projection directory. Parent preserves that scanner and relocates
+the test module outside the production directory with an explicit cfg-test
+path, rather than excluding a new production subtree. This is a full-suite
+RED, not a pass. A later focused rerun must bind the final relocated source.
+
+Stage 2a source review repair GREEN (2026-09-08):
+`/tmp/c3-stage2a-semantics-greenpacket-20260908.aXQXGs/01-cargo-test.log`
+records composite 6/6, provider source 17/17 and legacy finite refinement 8/8
+as separate targets. The composite getter-removal doctest, moved to the
+composite struct, passes 1/1 in
+`/tmp/c3-stage2a-composite-doctest-green-20260908.GgrkuE/01-cargo-test.log`.
+Parent inspected both outputs. Source A cannot verify source B after either
+candidate transformation; the ordinary discharge cannot be extracted.
+The opaque API no longer permits directly replacing the source-contract half
+of a composite candidate; its earlier constructible mutation is replaced by
+the genuine cross-source identity falsifier, not by a raw test-only constructor.
+
+The next runtime static test command does not yet pass. Its first integration
+attempt exits 101 before any test body in
+`/tmp/c3-stage2a-runtime-static-projection-green-20260908.Ij3sDk/01-cargo-test.log`
+(directory name is only an intended gate, not its result). Three test-source
+borrow/type errors and seven missing exhaustive match arms are captured.
+Repairs are scoped to test borrows, preserved existing relation-consumer
+handling and explicit new-provider metadata labels/refusals in SYS4/SYS5/SYS6.
+No conformance acceptance or provider execution is added to repair compilation.
+Postflight free disk is 11,880,099,840 bytes; no cleanup was performed.
+
+Stage 2a initial interface/compiler RED at pushed `9e8d674a` is captured in
+`/tmp/c3-stage2a-provider-composite-red-20260908.JlkxvC/01-cargo-test.log`:
+`cargo test --locked -p mir-semantics --test i3_provider_composite --
+--test-threads=1` exits 101 with E0432 for the two newly required coverage/
+composite-checker symbols. No test body executes; this is not behavioral RED.
+Parent inspects the output and authorizes a minimal fail-closed interface
+scaffold only, followed by actual assertion RED before behavior completion.
+Free disk remains 11.14 GiB; no cleanup or parallel Cargo is performed.
+
+Stage 2a behavioral RED follows in
+`/tmp/c3-stage2a-provider-composite-behavior-red-20260908.pXUxn1/01-cargo-test.log`:
+the same command compiles, executes exactly one test and fails at the composite
+verdict expectation with typed `ReadOnlyProviderEffectRequiresDedicatedRuntime`.
+The scaffold derives real static coverage, but no verification success,
+authority or execution follows. Parent inspects the failure and authorizes the
+shared full-source finite checks plus exact selected-profile retention. Final
+tests will separately assert static coverage so their checks do not remain
+behind the intentionally failing composite expectation. Free disk is 11.09 GiB.
+
+Stage 2a semantics is GREEN in
+`/tmp/c3-stage2a-semantics-composite-stage1-20260908.M5eGjx/01-cargo-test.log`:
+composite target 5/5 and retained provider source target 17/17. Actual
+source-derived candidate negatives cover source mismatch, baseline failure/
+capability/observation/effect constraints, each provider effect omission and
+missing/changed exact source-label row. Existing finite-refinement regression
+is 8/8 in
+`/tmp/c3-stage2a-m9-finite-refinement-regression-20260908.70ICZH/01-cargo-test.log`.
+Parent inspects both outputs. These are finite runtime test results, not a new
+Lean proof, permission, invocation or full Stage 2 integration. Static SYS3
+lowering and its actual-plan/snapshot falsifiers remain the direct consumer.
+
+Runtime static-projection behavioral RED is captured in
+`/tmp/c3-stage2a-runtime-static-projection-red-20260908.oyavwJ/01-cargo-test.log`:
+feature-union library command with the exact new test filter compiles in
+36.66 seconds, executes one test and fails at the dedicated projection with
+typed `UnsupportedReadOnlyProviderEffectProfile` (334 existing tests filtered).
+One non-fatal unused projection accessor warning belongs to this scaffold,
+not a passing warnings-denied gate. The success type has no construction path;
+its temporary unreachable borrowed-view panic must be removed before positive
+implementation acceptance. Parent verifies the log and authorizes actual
+static role/edge lowering plus exact snapshot validation; a separate writer
+owns only downstream explicit non-execution guards. No provider authority,
+handler activation, actual host I/O or network dispatch follows from this RED.
 
 Provider Stage 1 final integration, over `985ee179` (2026-09-08):
 
@@ -766,6 +973,16 @@ result does the parent authorize the adjusted C3 production packet and paired
 test implementation. Actual QUIC remains the later direct consumer.
 
 ## What changed in understanding
+
+The provider static boundary must preserve both positive complete coverage
+and negative whole-program requirements after local restriction. Outer enum
+tags alone do not detect hidden typed provider fields, and local inventory
+alone does not detect a requirement erased by restriction. The existing exact
+checked identity plus a shared typed predicate supplies the bounded guard.
+Static coverage, full finite-verification evidence and actual effect authority
+remain separate; a raw legacy discharge or unscoped M8 component cannot stand
+in for complete mixed-program admission. This narrows the next implementation
+consumer without adding a general verifier or new trust theory.
 
 Owner-intent checkpoint: at the owner's explicit request, the parent used a
 separate read-only tab in the existing Oracle Chrome profile to read the
@@ -1885,8 +2102,10 @@ by this advice; provider/time remain OPEN and I3-4 remains inactive.
 
 ## Suggested next prompt
 
-After pinning the reviewed row-11/spec/16 time-and-reply checkpoint, continue
-active I3-3 in Plan 250 at the still-unadopted provider contract. Preserve all
+Continue active I3-3 from the pushed provider source/guard cut `9e8d674a`:
+finish exact static projection/composite verification and its reproduced
+review repairs, then actual separate effect permission and provider runtime.
+ADR-0042/spec/17 is selected; invocation is not yet implemented. Preserve all
 20 failure families and ordering requirements, including remaining actual
 membership, redaction and in-flight cut boundaries. After full I3-3 acceptance,
 validation, review, commit/push and remote
@@ -1894,6 +2113,10 @@ parity, honor the latest owner-requested pause. I3-4 requires explicit resume;
 the retained program is not blocked, stale, or completed by that pause.
 
 ## Plan update status
+
+Provider Stage 2a: Plan 250 records the selected opaque composite path, exact
+static coverage/identity repairs, test results and trusted binding -> actual
+M9 policy/verification -> inactive scoped M8 consumer. No new goal is opened.
 
 Provider Stage 1: completed static/guard/review checkboxes and exact evidence
 are recorded in Plan 250. Next consumer is explicit composite coverage,
@@ -1905,6 +2128,9 @@ rows, ordering edges and later milestone order are preserved. plan/00-index
 synchronization belongs to the status assignment.
 
 ## Documentation.md update status
+
+Provider Stage 2a: fresh static test evidence and the remaining actual
+authorization/runtime consumer replace the prior source-only current pointer.
 
 Provider Stage 1: current pointer now distinguishes verified source/guard
 evidence from still-pending provider execution and milestone acceptance.
@@ -1920,6 +2146,10 @@ generated-contract/runtime enforcement and the unchanged workflow boundary.
 
 ## docs/project-status.md update status
 
+Provider Stage 2a: fresh versus retained results, current integration gates,
+six-of-eleven milestone count and unchanged lifecycle/control are synchronized;
+the reader snapshot remains 168 lines, within its 180-line bound.
+
 Provider Stage 1: current evidence and next consumer synchronized without
 changing official lifecycle or the stop-after-I3-3 instruction.
 
@@ -1927,6 +2157,9 @@ changing official lifecycle or the stop-after-I3-3 instruction.
 I3-2 accepted evidence と official I3 unentered を維持する。
 
 ## progress.md update status
+
+Provider Stage 2a: 15:23 JST snapshot and recent log record fresh static
+verification, separate pending authority/runtime and unchanged three axes.
 
 Provider Stage 1: dated 2026-09-08 13:42 JST snapshot/recent log replaces stale
 current counts, separates three axes and compresses older validation details
@@ -1947,6 +2180,10 @@ is active. All later network, provider and full-matrix requirements remain.
 
 ## tasks.md update status
 
+Provider Stage 2a: current snapshot is revised around the fresh static packet,
+remaining integration gates, binding/auth/policy/scoped-M8 sequence and all
+remaining I3-3 obligations. No remaining-time countdown is manufactured.
+
 Provider Stage 1: the whole current snapshot is rewritten at 13:38 JST around
 the unchanged 11-milestone sequence, verified static guards, next composite
 admission consumer and retained final gates. Historical estimates are labelled
@@ -1960,6 +2197,10 @@ The 22:42 JST maintenance records C1/C2 as an uncommitted delta over pushed
 as the direct consumer. No new roadmap or queue is created.
 
 ## samples_progress.md update status
+
+Provider Stage 2a: new test evidence is classified static-only, not a runnable
+provider network sample. No sample or script taxonomy change; samples/README
+and scripts/README need no update for this component.
 
 Provider Stage 1: adds an explicitly source-checking-only provider row and
 command. samples/README and scripts/README mirror that taxonomy. The new source
@@ -1975,6 +2216,81 @@ The C1/C2 update now points to its actual library test command and preserves
 the no-new-network-sample/non-workflow classification.
 
 ## Reviewer findings and follow-up
+
+Final Stage 2a independent spec and code-quality/security dispositions both
+report P0=0, P1=0, P2=0. The quality reviewer verifies exact source-bound
+opaque construction, pure static projection, exact checked-source/topology
+snapshot rederivation, centralized typed/identity refusal and unchanged
+ordinary entry guards. The final lint delta is annotation/lifetime-only.
+Its last written observation predates completion of the post-lint static run;
+the parent independently checks the final 11/11 log before integration.
+
+Reopen this static handoff if a later change exposes the ordinary inner
+discharge, turns static evidence into authority, changes restricted identity
+to erase a provider requirement, admits provider markers through ordinary
+snapshot/SYS4/SYS5, or restores the static snapshot without exact rederivation.
+Actual permission/binding/M8 materialization/host/network/ledger/cut and all
+I3-3 acceptance remain outside this static review's completion claim.
+
+A separate Stage 2a review finding concerns total local omission: the raw
+static projection can be restricted to ViewerC, dropping provider-local rows
+while retaining the original full program identity. Parent confirms that
+restriction preserves identity and adds a genuine restriction falsifier before
+repair. Candidate A uses a source-owned query on the existing canonical
+structural identity entry: record tag `evaluation`, exact evaluation-kind
+field `ReadOnlyProviderEffect`, and Core discriminant `read-only-provider-effect`.
+Candidate B introduces separate provider profile/origin state. Independent
+review agrees A is smaller and sound for this finite exact-identity boundary;
+checked identifiers cannot contain the record separator. A is selected as the
+bounded repair direction, not arbitrary substring scanning. Deleting or
+changing the identity record changes the identity, whose expected-source/image
+binding remains the authority boundary; this is not snapshot authentication.
+The new restriction test subsequently reaches the ordinary-export RED as
+recorded above. The final frozen 11/11 and 345/345 packet validates the repair,
+including ordinary export and SYS4 refusal after genuine restriction.
+
+Stage 2a runtime review identifies a further ordinary-carrier integrity gap:
+an otherwise legacy snapshot can encode a provider-only effect in its carrier
+effect row or a provider kind in a nested checked identity without changing
+the outer legacy kind. Existing outer-kind/placement/detail guards do not
+cover those fields. The parent confirms the decoder/preflight path by source
+inspection and requests genuine legacy-snapshot mutation tests before repair.
+This is not a claim of actual host invocation or bypass of every enclosing
+authenticated image check. A bounded typed-marker predicate, not arbitrary
+string/failure-name scanning or general snapshot redesign, is the selected
+repair direction. The actual 0/2 RED and final 11/11 plus 345/345 GREEN above
+establish the bounded repair; eleven typed-marker categories share the guard.
+
+Provider Stage 2a source review (2026-09-08): two P1 interface findings were
+independently reported and locally reproduced before production repair.
+The new composite checker accepted a source-A normalized candidate against
+independently checked source B with a changed resource; the generic candidate
+did not retain exact source identity. Its returned composite also exposed
+the cloneable ordinary finite discharge through a public getter, allowing
+coverage/pending context to be discarded. Existing runtime guards still
+prevent provider invocation; neither test demonstrates an actual unauthorized
+call. Parent selected an opaque source-bound composite candidate (without
+changing the legacy generic candidate) and removal of raw inner discharge
+access. Source repair tests subsequently pass as recorded above; independent
+source-only narrow re-review reports no remaining P0/P1/P2. Final Stage 2a
+spec review, after the nested-marker and omission repairs and final test
+packet, closes all four findings with no remaining P0/P1/P2. The dedicated
+projector remains pure and full-source-bound; SYS5 remains rejecting and SYS6
+changes only metadata-name exhaustiveness. Independent quality review is
+ separate and still pending here. The next direct consumer is genuine trusted
+binding -> actual M9 composite authentication/verification and separate policy
+-> inactive component-scoped M8, not invocation or milestone acceptance.
+
+Actual RED evidence, each one selected test and exit 101:
+`/tmp/c3-stage2a-cross-source-composite-red-20260908.NQzZG1/01-cargo-test.log`
+records the behavioral `expect_err` receiving a composite discharge;
+`/tmp/c3-stage2a-finite-discharge-doctest-red-20260908.atBxcA/01-cargo-test.log`
+records the compile-fail snippet compiling successfully. Commands respectively:
+`cargo test --locked -p mir-semantics --test i3_provider_composite composite_checker_rejects_a_candidate_derived_from_a_different_checked_resource_source -- --test-threads=1`
+and `cargo test --locked -p mir-semantics --doc finite_discharge`, both with
+incremental disabled and two jobs. These are distinct behavioral/privacy
+REDs, not passing conformance. Postflight free disk was 11,886,387,200 bytes;
+no runtime command, cleanup or provider invocation occurred in this gate.
 
 Provider Stage 1: independent source/spec review and runtime quality review
 both close with P0/P1/P2 zero after the three construction/restore repairs
@@ -2562,6 +2878,13 @@ remains the explicitly reported failure, not an I3 runtime or passing gate.
 
 ## Skipped validations and reasons
 
+Provider Stage 2a: no new Lean/model run, provider invocation or full I3-3
+matrix/acceptance is claimed. The static component's fresh tests and completed
+regression/quality gates are recorded above. Full workspace tests and full
+probe/matrix gates remain required at I3-3 close. The existing unrelated
+optional HTML sample-catalog failure is not rerun or counted as a pass here.
+
+
 Provider Stage 1: full workspace tests, full probe rerun and new Lean/model
 runs are not performed for this static/guard component; relevant source,
 runtime/process/I2/M10 regression, all-workspace compilation and quality gates
@@ -2585,6 +2908,24 @@ not skipped passes. General proof, WAN/production, durability and Browser/Host
 product realization remain outside this bounded milestone.
 
 ## Commit / push status
+
+Provider Stage 2a production and tests are frozen over `9e8d674a` with
+independent spec/quality reviews and executed code gates green. Parent final
+`make docs` passes again (agent config, 216 Canon entries, 800/800 hierarchy,
+1760-report scaffold). Staged whitespace checks and a 20-file added-line
+credential-pattern scan pass with zero matches; this is not a general secret
+audit. The last report-only metadata addition is checked with the repository
+section validators and diff inspection. Scoped commit/push/parity follow. Record the
+resulting exact cut with the next in-scope Stage 2b work, not a predicted
+self-referential hash. This closes only the static handoff after those gates;
+it is not I3-3 acceptance, a lifecycle change or the owner's stopping point.
+
+Provider Stage 1 is committed/pushed as
+`9e8d674a29b724d3947c8fccf1cf78e62a491206`
+(`feat: check source-declared read-only provider effects`). HEAD, origin/main
+and live remote match with clean worktree at `2026-09-08T14:05:06+09:00`.
+Stage 2 static work starts from this exact cut. This is not provider execution,
+I3-3 acceptance, an official lifecycle transition or the requested stopping point.
 
 Provider Stage 1 production/tests are frozen with independent reviews and
 executed code/documentation checks green over `985ee179`; parent scoped
@@ -2680,6 +3021,14 @@ worktree was clean before the next authorized Stage C test change.
 This is the fifth source checkpoint inside I3-3, not milestone acceptance.
 
 ## Sub-agent session close status
+
+Current provider Stage 2a: both production writers, separate source/runtime
+test authors, sole evaluator and independent spec/quality reviewers have
+returned their bounded results. Contexts are retained for continuation.
+The next coupled M9/M8 implementer has a read-only Stage 2b API preparation
+assignment; production waits for this static cut's commit/push/parity. Parent
+owns acceptance/Git and continues I3-3. No I3-4 work or final complete notice
+is issued. This supersedes older active-assignment snapshots below.
 
 Provider Stage 1: source/runtime and both test writers are frozen; independent
 source/spec and runtime quality reviewers have returned no remaining findings.

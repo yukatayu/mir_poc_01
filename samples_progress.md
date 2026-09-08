@@ -1,6 +1,6 @@
 # samples_progress
 
-Last updated: 2026-09-08 13:42 JST
+Last updated: 2026-09-08 15:35 JST
 
 Current execution control: I3-3 remains active; after its complete acceptance,
 validation/review and commit/push/parity, pause with I3-4 inactive until explicit
@@ -8,15 +8,19 @@ owner resume. No sample, program completion or lifecycle claim follows.
 
 I3-3 time/reply checkpoint 55f1fd7f remains pushed evidence (probe 41/41,
 actual replay 3/3). These are retained results, not provider-component reruns.
-The new mirrorea-i3-provider-effect/main.mir is ordinary source/checking evidence
+At pushed source/guard cut 9e8d674a, mirrorea-i3-provider-effect/main.mir is ordinary source/checking evidence
 for ADR-0042/spec/17: source suite 17/17, constructor privacy doctest 1/1,
 private unsupported guards 2/2 and public M8/M9/SYS5/M10 guards 5/5 pass.
-Current runtime library 334/334, process 63/63, I2 local/CLI 5/5 and 8/8,
-M10 67/67, three-crate all-target Clippy and workspace format pass. Independent
-source/spec and runtime review is clear after three reproduced repairs.
+That source/guard cut retains runtime 334/334, process 63/63 and I2/M10 evidence.
+Its successor static coverage/composite verification/projection passes fresh
+semantics 6/17/8, privacy 1, static runtime 11 and full runtime 345 tests.
+Independent spec/quality reviews are clear after four additional reproduced
+repairs; process 63, I2/M10 5/8/67, public guards 5 and focused quality gates
+pass. Exact Git state belongs to Report 2606.
 There is no effect grant, host invocation, provider network workflow, M5/Lean
-clean-runner registration or I3-3 acceptance. Projection/exact effect authority
-is the next direct consumer. Report 2606 records exact evidence and Git state.
+clean-runner registration or I3-3 acceptance. Trusted resource binding and
+actual M9 composite authority/policy, then inactive scoped M8 admission, are
+the next direct consumer. Report 2606 records exact evidence and Git state.
 
 Workflow focus: current-L2 runnable floor, practical alpha-1 evidence, bounded
 operational α-0.5 / α-0.8 / α-0.9 workflows, product alpha-1 release candidate,

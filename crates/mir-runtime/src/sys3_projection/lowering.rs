@@ -36,28 +36,13 @@ pub(crate) fn project_checked_core(
         BackendRequirements::from_combined_owner_source_owner_loci(&combined_loci(checked)?),
     );
     for evaluation in checked.evaluations() {
-        match evaluation.kind() {
-            CheckedEvaluationKind::OwnerRmw => project_owner(&mut result, checked, evaluation),
-            CheckedEvaluationKind::PublishRelation => {
-                project_relation(&mut result, checked, evaluation)
-            }
-            CheckedEvaluationKind::DesignatedPublishValue => {
-                project_designated(&mut result, checked, evaluation)?
-            }
-            CheckedEvaluationKind::DesignatedResultConsume => {
-                project_designated_result_consumer(&mut result, checked, evaluation)
-            }
-            CheckedEvaluationKind::ConsumerLocalProjection => {}
-            CheckedEvaluationKind::ReadOnlyProviderEffect => {
-                return Err(unsupported_read_only_provider_effect_diagnostics());
-            }
-        }
+        project_legacy_evaluation(&mut result, checked, evaluation)?;
     }
     result.finalize();
     Ok(result)
 }
 
-fn validate_topology(
+pub(super) fn validate_topology(
     checked: &CheckedSurfaceV0,
     topology: &DeclaredLogicalTopology,
 ) -> Result<(), ProjectionDiagnostics> {
@@ -127,14 +112,21 @@ fn required_loci(checked: &CheckedSurfaceV0) -> Result<BTreeSet<String>, Project
             }
             CheckedEvaluationKind::ConsumerLocalProjection => {}
             CheckedEvaluationKind::ReadOnlyProviderEffect => {
-                return Err(unsupported_read_only_provider_effect_diagnostics());
+                let core = evaluation
+                    .read_only_provider_effect_core()
+                    .expect("checked provider effect Core");
+                loci.insert(core.requester_locus().to_string());
+                loci.insert(core.executor_locus().to_string());
+                loci.insert(core.result_consumer_locus().to_string());
             }
         }
     }
     Ok(loci)
 }
 
-fn combined_loci(checked: &CheckedSurfaceV0) -> Result<BTreeSet<String>, ProjectionDiagnostics> {
+pub(super) fn combined_loci(
+    checked: &CheckedSurfaceV0,
+) -> Result<BTreeSet<String>, ProjectionDiagnostics> {
     let mut loci = BTreeSet::new();
     for evaluation in checked.evaluations() {
         match evaluation.kind() {
@@ -167,9 +159,9 @@ fn combined_loci(checked: &CheckedSurfaceV0) -> Result<BTreeSet<String>, Project
             }
             CheckedEvaluationKind::DesignatedResultConsume => {}
             CheckedEvaluationKind::ConsumerLocalProjection => {}
-            CheckedEvaluationKind::ReadOnlyProviderEffect => {
-                return Err(unsupported_read_only_provider_effect_diagnostics());
-            }
+            // The provider executor is never an owner/source-owner locus for
+            // the legacy OW1 backend calculation.
+            CheckedEvaluationKind::ReadOnlyProviderEffect => {}
         }
     }
     Ok(loci)
@@ -193,6 +185,32 @@ fn unsupported_read_only_provider_effect_diagnostics() -> ProjectionDiagnostics 
         ProjectionDiagnosticKind::UnsupportedReadOnlyProviderEffectProfile,
         "read-only provider effect requires its dedicated runtime profile",
     )
+}
+
+/// Project only forms owned by the established SYS-3 lowering. The dedicated
+/// provider projection calls this for its legacy inventory and lowers the
+/// provider form separately; the ordinary entry reaches the provider guard
+/// before this helper and remains fail closed.
+pub(super) fn project_legacy_evaluation(
+    result: &mut GlobalProjectionResult,
+    checked: &CheckedSurfaceV0,
+    evaluation: &CheckedEvaluation,
+) -> Result<(), ProjectionDiagnostics> {
+    match evaluation.kind() {
+        CheckedEvaluationKind::OwnerRmw => project_owner(result, checked, evaluation),
+        CheckedEvaluationKind::PublishRelation => project_relation(result, checked, evaluation),
+        CheckedEvaluationKind::DesignatedPublishValue => {
+            project_designated(result, checked, evaluation)?
+        }
+        CheckedEvaluationKind::DesignatedResultConsume => {
+            project_designated_result_consumer(result, checked, evaluation)
+        }
+        CheckedEvaluationKind::ConsumerLocalProjection => {}
+        CheckedEvaluationKind::ReadOnlyProviderEffect => {
+            return Err(unsupported_read_only_provider_effect_diagnostics());
+        }
+    }
+    Ok(())
 }
 
 fn effect_kinds(
@@ -823,6 +841,6 @@ fn project_designated_result_consumer(
         .add_designated_result_consumer(operation, consumer);
 }
 
-fn artifact_ref(locus: &str, operation: &str, role: &str) -> String {
+pub(super) fn artifact_ref(locus: &str, operation: &str, role: &str) -> String {
     format!("artifact:{locus}:{operation}:{role}")
 }

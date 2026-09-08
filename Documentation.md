@@ -325,8 +325,11 @@ recordが揃ったためofficial I2 entry後exitを受理しました。broad PH
   selects the finite provider contract. Its source/check/snapshot and explicit
   unsupported-legacy-runtime handoff now pass source 17/17, privacy 1/1,
   private guards 2/2 and public guards 5/5, with independent review clear.
-  Current runtime 334/334, process 63/63, I2/M10 and focused quality gates pass.
-  Provider projection and independent effect authorization are next; no host
+  Source/guard cut `9e8d674a` is pushed. The successor static composite and
+  projection packet passes fresh semantics 6/17/8, privacy 1, static runtime 11
+  and full runtime 345 tests; process/I2/M10 regressions, focused quality gates
+  and independent spec/quality reviews pass. Next is trusted binding -> actual M9 authentication/verification ->
+  separate effect policy -> inactive scoped M8 component. No grant, host
   invocation or provider network workflow is claimed. Exact evidence and Git
   state are in Report 2606.
   All remaining I3-3 failure/order obligations stay required; I3-3 itself

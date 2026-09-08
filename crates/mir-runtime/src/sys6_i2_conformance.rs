@@ -5262,6 +5262,15 @@ fn fragment_kind_name(kind: ProjectedOperationFragmentKind) -> &'static str {
         }
         ProjectedOperationFragmentKind::DesignatedEvaluation => "designated-evaluation",
         ProjectedOperationFragmentKind::DesignatedResultConsumer => "designated-result-consumer",
+        ProjectedOperationFragmentKind::ReadOnlyProviderEffectRequester => {
+            "read-only-provider-effect-requester"
+        }
+        ProjectedOperationFragmentKind::ReadOnlyProviderEffectService => {
+            "read-only-provider-effect-service"
+        }
+        ProjectedOperationFragmentKind::ReadOnlyProviderEffectResultConsumer => {
+            "read-only-provider-effect-result-consumer"
+        }
     }
 }
 
@@ -5274,6 +5283,8 @@ fn edge_kind_name(kind: CommunicationEdgeKind) -> &'static str {
         CommunicationEdgeKind::DesignatedInputReceipt => "designated-input-receipt",
         CommunicationEdgeKind::DesignatedResultDelivery => "designated-result-delivery",
         CommunicationEdgeKind::AbsoluteValueStream => "absolute-value-stream",
+        CommunicationEdgeKind::ReadOnlyProviderEffectRequest => "read-only-provider-effect-request",
+        CommunicationEdgeKind::ReadOnlyProviderEffectResult => "read-only-provider-effect-result",
     }
 }
 

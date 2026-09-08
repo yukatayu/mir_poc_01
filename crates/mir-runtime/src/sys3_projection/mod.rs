@@ -7,7 +7,12 @@
 
 mod lowering;
 pub(crate) mod model;
+mod read_only_provider_effect;
 mod validate;
+
+#[cfg(test)]
+#[path = "../sys3_provider_effect_tests.rs"]
+mod provider_effect_tests;
 
 pub(crate) use lowering::project_checked_core;
 #[allow(unused_imports)]
@@ -24,5 +29,9 @@ pub(crate) use model::{
     RelationGraphEdgeSeed, RelationGraphEdgeTag, RuntimeAdmissionStatus, RuntimeOccurrenceBinding,
     RuntimeOccurrenceKind, RuntimeSeamRequirementKind, SeamAuthorityKind, SourceRefView,
     StaticConflictPolicyKind, StaticConflictResolution, StaticProjectionReadiness,
+};
+pub(crate) use read_only_provider_effect::{
+    ReadOnlyProviderEffectStaticProjection, project_read_only_provider_effect_static,
+    verify_read_only_provider_effect_static_projection,
 };
 pub(crate) use validate::verify_projection;
