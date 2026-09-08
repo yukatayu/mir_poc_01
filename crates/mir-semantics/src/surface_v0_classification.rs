@@ -21,6 +21,7 @@ use crate::{
         LocusRef, OccurrenceId, OwnerCommand, PrincipalRef, ResultFrontier, ResultKey,
         ResultVersion, SourceRef, StateKey, SurfaceFragment, Value,
     },
+    surface_v0_provider_effect::ReadOnlyProviderEffectTemplate,
 };
 
 #[derive(Debug, Clone, Copy, Default, PartialEq, Eq)]
@@ -35,6 +36,7 @@ pub enum ClassificationKind {
     DesignatedPublishValue,
     OwnerRmwWithRelationAndDesignated,
     DeferredOnly,
+    ReadOnlyProviderEffect,
 }
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, PartialOrd, Ord)]
@@ -49,6 +51,7 @@ pub enum CoreTemplateKind {
     ConsumerLocalProjection,
     DeferredWithAuth,
     DeferredVerify,
+    ReadOnlyProviderEffect,
 }
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, PartialOrd, Ord)]
@@ -62,6 +65,10 @@ pub enum SourceToCoreKind {
     PublishRelation,
     ConsumerLocalProjection,
     DeferredPolicy,
+    ReadOnlyProviderEffectRequest,
+    ReadOnlyProviderEffectInvocation,
+    ReadOnlyProviderEffectResult,
+    ReadOnlyProviderEffectResultConsume,
 }
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, PartialOrd, Ord)]
@@ -677,6 +684,7 @@ pub struct SurfaceV0Classification {
     designated_result_consumer_templates: Vec<CoreTemplate>,
     relation_templates: Vec<CoreTemplate>,
     deferred_templates: Vec<CoreTemplate>,
+    read_only_provider_effect_templates: Vec<ReadOnlyProviderEffectTemplate>,
     authority_audits: Vec<AuthorityAudit>,
 }
 
@@ -742,6 +750,15 @@ impl SurfaceV0Classification {
         self.deferred_templates
             .iter()
             .find(|template| template.kind == kind && template.name == name)
+    }
+
+    pub fn read_only_provider_effect_template(
+        &self,
+        operation: &str,
+    ) -> Option<&ReadOnlyProviderEffectTemplate> {
+        self.read_only_provider_effect_templates
+            .iter()
+            .find(|template| template.name() == operation)
     }
 
     pub fn authority_audit(&self, event: &str) -> Option<&AuthorityAudit> {
@@ -937,10 +954,40 @@ pub fn classify_surface_v0(
         ));
     }
 
+    let mut read_only_provider_effect_templates = Vec::new();
+    for effect in ast.read_only_provider_effects() {
+        let template = ReadOnlyProviderEffectTemplate::from_decl(effect);
+        for span in [
+            template.declaration_span(),
+            template.requester_principal_span(),
+            template.requester_locus_span(),
+            template.executor_locus_span(),
+            template.logical_resource_slot_span(),
+            template.adapter_profile_span(),
+            template.result_type_span(),
+            template.observation_label_span(),
+            template.max_bytes_span(),
+            template.max_calls_span(),
+            template.failures_span(),
+        ] {
+            source_refs.push((span.clone(), source_ref_from_span(span)));
+        }
+        for kind in [
+            SourceToCoreKind::ReadOnlyProviderEffectRequest,
+            SourceToCoreKind::ReadOnlyProviderEffectInvocation,
+            SourceToCoreKind::ReadOnlyProviderEffectResult,
+            SourceToCoreKind::ReadOnlyProviderEffectResultConsume,
+        ] {
+            source_to_core_map.add(template.declaration_span().clone(), kind);
+        }
+        read_only_provider_effect_templates.push(template);
+    }
+
     let kind = classification_kind(
         !core_templates.is_empty(),
         !relation_templates.is_empty(),
         !designated_templates.is_empty(),
+        !read_only_provider_effect_templates.is_empty(),
     );
     let mut template_names = core_templates
         .iter()
@@ -950,6 +997,11 @@ pub fn classify_surface_v0(
         .chain(deferred_templates.iter())
         .map(|template| template.name().to_string())
         .collect::<Vec<_>>();
+    template_names.extend(
+        read_only_provider_effect_templates
+            .iter()
+            .map(|template| template.name().to_string()),
+    );
     template_names.sort();
     template_names.dedup();
     Ok(SurfaceV0Classification {
@@ -963,6 +1015,7 @@ pub fn classify_surface_v0(
         designated_result_consumer_templates,
         relation_templates,
         deferred_templates,
+        read_only_provider_effect_templates,
         authority_audits,
     })
 }
@@ -971,7 +1024,11 @@ fn classification_kind(
     has_owner_rmw: bool,
     has_relation: bool,
     has_designated: bool,
+    has_read_only_provider_effect: bool,
 ) -> ClassificationKind {
+    if has_read_only_provider_effect && !has_owner_rmw && !has_relation && !has_designated {
+        return ClassificationKind::ReadOnlyProviderEffect;
+    }
     match (has_owner_rmw, has_relation, has_designated) {
         (true, true, true) => ClassificationKind::OwnerRmwWithRelationAndDesignated,
         (_, true, _) => ClassificationKind::MaintainedRelationWithFallback,

@@ -22,6 +22,7 @@ pub(crate) fn project_checked_core(
     checked: &CheckedSurfaceV0,
     topology: &DeclaredLogicalTopology,
 ) -> Result<GlobalProjectionResult, ProjectionDiagnostics> {
+    reject_unsupported_read_only_provider_effect(checked)?;
     validate_topology(checked, topology)?;
     let runtime_admission_status = if checked.residual_obligations().is_empty() {
         RuntimeAdmissionStatus::AwaitingRuntimeSeam
@@ -32,7 +33,7 @@ pub(crate) fn project_checked_core(
         checked.program_identity().clone(),
         topology.loci().clone(),
         runtime_admission_status,
-        BackendRequirements::from_combined_owner_source_owner_loci(&combined_loci(checked)),
+        BackendRequirements::from_combined_owner_source_owner_loci(&combined_loci(checked)?),
     );
     for evaluation in checked.evaluations() {
         match evaluation.kind() {
@@ -47,6 +48,9 @@ pub(crate) fn project_checked_core(
                 project_designated_result_consumer(&mut result, checked, evaluation)
             }
             CheckedEvaluationKind::ConsumerLocalProjection => {}
+            CheckedEvaluationKind::ReadOnlyProviderEffect => {
+                return Err(unsupported_read_only_provider_effect_diagnostics());
+            }
         }
     }
     result.finalize();
@@ -63,7 +67,7 @@ fn validate_topology(
             "logical topology belongs to a different checked program identity",
         ));
     }
-    let required = required_loci(checked);
+    let required = required_loci(checked)?;
     if let Some(missing) = required.difference(topology.loci()).next() {
         return Err(ProjectionDiagnostics::one(
             ProjectionDiagnosticKind::MissingRequiredLocus,
@@ -79,7 +83,7 @@ fn validate_topology(
     Ok(())
 }
 
-fn required_loci(checked: &CheckedSurfaceV0) -> BTreeSet<String> {
+fn required_loci(checked: &CheckedSurfaceV0) -> Result<BTreeSet<String>, ProjectionDiagnostics> {
     let mut loci = checked
         .static_environment()
         .loci()
@@ -122,12 +126,15 @@ fn required_loci(checked: &CheckedSurfaceV0) -> BTreeSet<String> {
                 loci.insert(core.evaluator().to_string());
             }
             CheckedEvaluationKind::ConsumerLocalProjection => {}
+            CheckedEvaluationKind::ReadOnlyProviderEffect => {
+                return Err(unsupported_read_only_provider_effect_diagnostics());
+            }
         }
     }
-    loci
+    Ok(loci)
 }
 
-fn combined_loci(checked: &CheckedSurfaceV0) -> BTreeSet<String> {
+fn combined_loci(checked: &CheckedSurfaceV0) -> Result<BTreeSet<String>, ProjectionDiagnostics> {
     let mut loci = BTreeSet::new();
     for evaluation in checked.evaluations() {
         match evaluation.kind() {
@@ -160,9 +167,32 @@ fn combined_loci(checked: &CheckedSurfaceV0) -> BTreeSet<String> {
             }
             CheckedEvaluationKind::DesignatedResultConsume => {}
             CheckedEvaluationKind::ConsumerLocalProjection => {}
+            CheckedEvaluationKind::ReadOnlyProviderEffect => {
+                return Err(unsupported_read_only_provider_effect_diagnostics());
+            }
         }
     }
-    loci
+    Ok(loci)
+}
+
+fn reject_unsupported_read_only_provider_effect(
+    checked: &CheckedSurfaceV0,
+) -> Result<(), ProjectionDiagnostics> {
+    if checked
+        .evaluations()
+        .iter()
+        .any(|evaluation| evaluation.kind() == CheckedEvaluationKind::ReadOnlyProviderEffect)
+    {
+        return Err(unsupported_read_only_provider_effect_diagnostics());
+    }
+    Ok(())
+}
+
+fn unsupported_read_only_provider_effect_diagnostics() -> ProjectionDiagnostics {
+    ProjectionDiagnostics::one(
+        ProjectionDiagnosticKind::UnsupportedReadOnlyProviderEffectProfile,
+        "read-only provider effect requires its dedicated runtime profile",
+    )
 }
 
 fn effect_kinds(

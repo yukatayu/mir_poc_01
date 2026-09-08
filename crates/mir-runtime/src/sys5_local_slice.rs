@@ -1920,6 +1920,7 @@ impl Sys5LocalProject {
                     ));
                 }
                 CheckedEvaluationKind::ConsumerLocalProjection => {}
+                CheckedEvaluationKind::ReadOnlyProviderEffect => return false,
             }
         }
 
@@ -1979,6 +1980,11 @@ impl Sys5LocalProject {
         request: Sys5LocalAdmissionRequest,
     ) -> Result<Sys5PreparedAdmission, Sys5LocalAdmissionError> {
         self.validate_source_derived_membership_request(&request)?;
+        if has_read_only_provider_effect(&self.checked) {
+            return Err(Sys5LocalAdmissionError::new(
+                Sys5LocalAdmissionErrorKind::UnsupportedReadOnlyProviderEffectProfile,
+            ));
+        }
         let Some(auth_residual_name) = request.auth_discharge.as_deref() else {
             return Err(Sys5LocalAdmissionError::new(
                 Sys5LocalAdmissionErrorKind::MissingAuthDischarge,
@@ -7165,6 +7171,14 @@ pub enum Sys5LocalAdmissionErrorKind {
     ProjectionFabricMismatch,
     BackendIneligible,
     IncompleteSourceDerivedInventory,
+    UnsupportedReadOnlyProviderEffectProfile,
+}
+
+fn has_read_only_provider_effect(checked: &CheckedSurfaceV0) -> bool {
+    checked
+        .evaluations()
+        .iter()
+        .any(|evaluation| evaluation.kind() == CheckedEvaluationKind::ReadOnlyProviderEffect)
 }
 
 #[derive(Debug, Clone, PartialEq, Eq)]
@@ -7197,6 +7211,7 @@ impl Sys5LocalAdmissionError {
                 | Sys5LocalAdmissionErrorKind::MissingVerificationDischarge
                 | Sys5LocalAdmissionErrorKind::UnknownVerificationDischarge
                 | Sys5LocalAdmissionErrorKind::BackendIneligible
+                | Sys5LocalAdmissionErrorKind::UnsupportedReadOnlyProviderEffectProfile
         )
     }
 
@@ -9665,6 +9680,10 @@ fn effect_kind_name(kind: EffectKind) -> &'static str {
         EffectKind::DesignatedValuePublish => "DesignatedValuePublish",
         EffectKind::DesignatedResultDelivery => "DesignatedResultDelivery",
         EffectKind::DesignatedResultConsume => "DesignatedResultConsume",
+        EffectKind::ReadOnlyProviderEffectRequest => "ReadOnlyProviderEffectRequest",
+        EffectKind::ReadOnlyProviderEffectInvocation => "ReadOnlyProviderEffectInvocation",
+        EffectKind::ReadOnlyProviderEffectResult => "ReadOnlyProviderEffectResult",
+        EffectKind::ReadOnlyProviderEffectResultConsume => "ReadOnlyProviderEffectResultConsume",
     }
 }
 
@@ -9755,6 +9774,9 @@ fn i3_adapter_generated_obligation_parts(
         Some(GeneratedObligationKind::DesignatedResultConsumerAuthority) => {
             (true, Some("DesignatedResultConsumerAuthority"), None)
         }
+        Some(GeneratedObligationKind::ProviderEffectAuthorization) => {
+            (true, Some("ProviderEffectAuthorization"), None)
+        }
         Some(GeneratedObligationKind::Evaluation(kind)) => (
             true,
             Some("Evaluation"),
@@ -9770,6 +9792,7 @@ fn i3_adapter_checked_evaluation_kind_name(kind: CheckedEvaluationKind) -> &'sta
         CheckedEvaluationKind::PublishRelation => "PublishRelation",
         CheckedEvaluationKind::ConsumerLocalProjection => "ConsumerLocalProjection",
         CheckedEvaluationKind::DesignatedResultConsume => "DesignatedResultConsume",
+        CheckedEvaluationKind::ReadOnlyProviderEffect => "ReadOnlyProviderEffect",
     }
 }
 
@@ -9893,6 +9916,7 @@ mod i3_adapter_carrier_contract_red_tests {
             CheckedEvaluationKind::PublishRelation => "PublishRelation",
             CheckedEvaluationKind::ConsumerLocalProjection => "ConsumerLocalProjection",
             CheckedEvaluationKind::DesignatedResultConsume => "DesignatedResultConsume",
+            CheckedEvaluationKind::ReadOnlyProviderEffect => "ReadOnlyProviderEffect",
         }
     }
 
@@ -9910,6 +9934,9 @@ mod i3_adapter_carrier_contract_red_tests {
             }
             Some(GeneratedObligationKind::DesignatedResultConsumerAuthority) => {
                 (true, Some("DesignatedResultConsumerAuthority"), None)
+            }
+            Some(GeneratedObligationKind::ProviderEffectAuthorization) => {
+                (true, Some("ProviderEffectAuthorization"), None)
             }
             Some(GeneratedObligationKind::Evaluation(kind)) => (
                 true,

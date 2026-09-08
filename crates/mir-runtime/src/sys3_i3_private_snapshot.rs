@@ -1518,6 +1518,7 @@ snapshot_unit_enum!(
         ValueVisibilityRedaction,
         AuthDeferred,
         VerifyDeferred,
+        ReadOnlyProviderEffectRuntimeUnsupported,
     }
 );
 

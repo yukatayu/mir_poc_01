@@ -8,6 +8,10 @@ use std::ops::Range;
 
 use serde::{Deserialize, Deserializer, Serialize, de::Error as _};
 
+mod read_only_provider_effect;
+
+pub use read_only_provider_effect::ReadOnlyProviderEffectDecl;
+
 #[derive(Debug, Clone, PartialEq, Eq)]
 pub struct FixtureSource {
     file: String,
@@ -178,6 +182,7 @@ pub enum SyntaxKind {
     WithAuth,
     Verify,
     RelationMutation,
+    ReadOnlyProviderEffect,
 }
 
 #[derive(Debug, Clone, PartialEq, Eq)]
@@ -327,6 +332,7 @@ pub struct SurfaceV0File {
     relations: Vec<MaintainedRelation>,
     designated_results: Vec<DesignatedResultDecl>,
     designated_result_consumers: Vec<DesignatedResultConsumerDecl>,
+    read_only_provider_effects: Vec<ReadOnlyProviderEffectDecl>,
     deferred_forms: DeferredForms,
     relation_mutations: Vec<RelationMutation>,
 }
@@ -428,6 +434,14 @@ impl SurfaceV0File {
         &self.designated_result_consumers
     }
 
+    pub fn read_only_provider_effect(&self) -> Option<&ReadOnlyProviderEffectDecl> {
+        self.read_only_provider_effects.first()
+    }
+
+    pub fn read_only_provider_effects(&self) -> &[ReadOnlyProviderEffectDecl] {
+        &self.read_only_provider_effects
+    }
+
     pub fn deferred_forms(&self) -> &DeferredForms {
         &self.deferred_forms
     }
@@ -453,6 +467,11 @@ impl SurfaceV0File {
                 self.designated_result_consumers
                     .iter()
                     .map(|consumer| &consumer.node),
+            )
+            .chain(
+                self.read_only_provider_effects
+                    .iter()
+                    .map(ReadOnlyProviderEffectDecl::node),
             )
             .find(|node| node.kind == kind && node.label == label)
     }
@@ -1337,6 +1356,7 @@ struct Parser {
     relations: Vec<MaintainedRelation>,
     designated_results: Vec<DesignatedResultDecl>,
     designated_result_consumers: Vec<DesignatedResultConsumerDecl>,
+    read_only_provider_effects: Vec<ReadOnlyProviderEffectDecl>,
     deferred_forms: DeferredForms,
     relation_mutations: Vec<RelationMutation>,
 }
@@ -1356,6 +1376,7 @@ impl Parser {
             relations: Vec::new(),
             designated_results: Vec::new(),
             designated_result_consumers: Vec::new(),
+            read_only_provider_effects: Vec::new(),
             deferred_forms: DeferredForms::default(),
             relation_mutations: Vec::new(),
         }
@@ -1385,6 +1406,7 @@ impl Parser {
                 "Role" => self.parse_role()?,
                 "relation" => self.parse_relation()?,
                 "designated" => self.parse_designated()?,
+                "effect" => self.parse_read_only_provider_effect()?,
                 "with" => self.parse_with_auth()?,
                 "verify" => self.parse_verify()?,
                 _ => return Err(self.unexpected()),
@@ -1407,6 +1429,11 @@ impl Parser {
                     .iter()
                     .map(|decl| decl.node.clone()),
             )
+            .chain(
+                self.read_only_provider_effects
+                    .iter()
+                    .map(|decl| decl.node().clone()),
+            )
             .collect();
         Ok(SurfaceV0File {
             root: SyntaxNode::new(SyntaxKind::Module, module.name.clone(), root_span, children),
@@ -1420,6 +1447,7 @@ impl Parser {
             relations: self.relations,
             designated_results: self.designated_results,
             designated_result_consumers: self.designated_result_consumers,
+            read_only_provider_effects: self.read_only_provider_effects,
             deferred_forms: self.deferred_forms,
             relation_mutations: self.relation_mutations,
         })
@@ -1926,6 +1954,80 @@ impl Parser {
             expression_span,
             node: SyntaxNode::new(SyntaxKind::DesignatedResult, evaluator, span, Vec::new()),
         });
+        Ok(())
+    }
+
+    fn parse_read_only_provider_effect(&mut self) -> Result<(), ParseDiagnostics> {
+        let start = self.expect("effect")?.span;
+        let (name, _) = self.identifier()?;
+        self.expect("by")?;
+        let (requester_principal, requester_principal_span) = self.identifier()?;
+        self.expect("at")?;
+        let (requester_locus, requester_locus_span) = self.identifier()?;
+        self.expect("invoke")?;
+        let (adapter_profile, adapter_profile_span) = self.identifier()?;
+        self.expect("at")?;
+        let (executor_locus, executor_locus_span) = self.identifier()?;
+        self.expect("resource")?;
+        let (logical_resource_slot, logical_resource_slot_span) = self.identifier()?;
+        self.expect("returns")?;
+        let (result_type, result_type_span) = self.identifier()?;
+        self.expect("visible")?;
+        let (observation_label, observation_label_span) = self.identifier()?;
+        self.expect("limit")?;
+        self.expect("bytes")?;
+        let (max_bytes, max_bytes_span) = self.integer()?;
+        self.expect("calls")?;
+        let (max_calls, max_calls_span) = self.integer()?;
+        self.expect("fails")?;
+        let failures_start = self.expect("(")?.span;
+        let mut failures = Vec::new();
+        while !self.check(")") {
+            let (failure, _) = self.identifier()?;
+            failures.push(failure);
+            if !self.consume(",") {
+                break;
+            }
+        }
+        let failures_end = self.expect(")")?.span;
+        let max_bytes = max_bytes.parse::<u64>().map_err(|_| {
+            ParseDiagnostics::one(
+                ParseErrorKind::IntegerLiteralOutOfRange,
+                max_bytes_span.clone(),
+            )
+        })?;
+        let max_calls = max_calls.parse::<u64>().map_err(|_| {
+            ParseDiagnostics::one(
+                ParseErrorKind::IntegerLiteralOutOfRange,
+                max_calls_span.clone(),
+            )
+        })?;
+        let span = joined_span(&start, &failures_end);
+        self.read_only_provider_effects
+            .push(ReadOnlyProviderEffectDecl::new(
+                name.clone(),
+                requester_principal,
+                requester_principal_span,
+                requester_locus,
+                requester_locus_span,
+                adapter_profile,
+                adapter_profile_span,
+                executor_locus,
+                executor_locus_span,
+                logical_resource_slot,
+                logical_resource_slot_span,
+                result_type,
+                result_type_span,
+                observation_label,
+                observation_label_span,
+                max_bytes,
+                max_bytes_span,
+                max_calls,
+                max_calls_span,
+                failures,
+                joined_span(&failures_start, &failures_end),
+                SyntaxNode::new(SyntaxKind::ReadOnlyProviderEffect, name, span, Vec::new()),
+            ));
         Ok(())
     }
 

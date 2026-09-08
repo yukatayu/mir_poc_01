@@ -1,6 +1,6 @@
 # Project status
 
-最終更新: 2026-09-08 12:07 JST
+最終更新: 2026-09-08 13:42 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -82,43 +82,31 @@ I3-3 is the only active promoted semantic package after explicit owner resume;
 I3-4/I3-5/I3-6/NEXT-0 remain inactive pending their dependency gates. The
 accepted I3-2 source cut and remote parity are the preserved entry evidence.
 
-Prior checkpoint `87ee2418` retains this slice evidence: full-runtime
-integration 51/51 (44.43s), evaluator owner-capacity 1/1, I3-3 filter 4/4, probe
-library lifecycle evidence 2/2 (one filtered), selected runtime library 1/1 +
-1/1 (old-owner withdrawal and exact-ledger different-snapshot), actual probe
-integration 17/17, and `cargo fmt --all -- --check` pass. The
-historical ledger-source binary remains 49/49 in 47.70s only. Bounded model
-evidence remains 3/3 tests (432 states, 2136 transitions) with three mutant
-counterexamples, not a general runtime proof. Full 20-family matrix remains
-unverified; post-admission retry remains duplicate-rejected with requester
-pending/ambiguous rather than successful recovery.
-Runtime-only retry 2/2 and full same-feature library 285/285 (82.33s) now pass.
-Focused two-crate all-target Clippy with `-Dwarnings` passes; model-target
-dead-code warnings without its private feature are not a deny-lint profile.
-The actual reconnect slice covers two live OS processes: the pre-write path
-consumes one checked receipt; in the separate post-admission path, retry after
-a lost reply is duplicate-rejected while the requester remains pending/ambiguous.
-The successor slice installs genuine M9 revocation before reconnect and rejects
-retained old ingress without owner mutation, keeping A pending. G1 completes
-once; registered-B ACK publication, actual tainted A input, one-shot ingress
-and terminal validation pass independent repair review (no remaining P0/P1).
-Delivery-checkpoint runtime integration 61/61 (55.23s), I2 local 5/5 (0.05s), I2 CLI 8/8
-(11.60s), probe 32/32, private QUIC unit 2/2, focused Clippy and format/diff
-pass. Feature library 289/289, M10 67/67 and model 3/3 remain prior evidence;
-earlier probe lifecycle 2/2 is prior evidence. I2 regressions pass (5/5, 8/8).
-The delivery checkpoint executes actual endpoint-unavailability, complete
-two-application-write round-trip and strict truncation/FIN rejection before
-owner admission. Only validated owner records reach the joined rejection
-view; genuine presence and malformed absence are both tested. Full probe
-library 3/3 also passes. These do not close whole fault families or I3-3.
-ADR-0041/spec/16 time/reply checkpoint: actual successful/expiry reply replay and initial-session prewrite rejection pass 3/3; full probe 41/41, two-crate all-target Clippy and workspace format pass. Final independent review P0/P1/P2 zero; the bounded consumer is integrated/pushed at `55f1fd7f`, with clean remote parity confirmed at `2026-09-08T12:16:45+09:00`. Genuine G1-expiry→G2 requester rejection stays local binder evidence, with actual QUIC-path correspondence verified. Runtime 332/process 63/I2-M10 5/8/67 are retained `30429d5` results, not current reruns. ADR-0042/spec/17 selects the provider contract; current work is its test-first source/checker implementation, followed by runtime and remaining membership/redaction/cut, ordering and milestone acceptance. I3-3 itself is not accepted.
+Earlier I3-3 delivery/reconnect cuts and exact commands remain in Report 2606,
+not current rerun counts. They include actual two-process prewrite recovery,
+post-admission duplicate rejection with requester pending/ambiguous, genuine
+M9 revocation before reconnect, complete-frame delivery and strict truncation
+rejection before owner admission. Bounded model evidence is 3 tests covering
+432 states/2136 transitions with three mutant counterexamples, not a general
+proof. No earlier component closes the full 20-family failure/order matrix.
+ADR-0041/spec/16 time/reply checkpoint is retained at pushed 55f1fd7f
+(probe 41/41, replay 3/3); those are not new provider runs. The ADR-0042/spec/17
+provider source/check/snapshot and unsupported legacy handoff now pass source
+17/17, privacy doctest 1/1, private guards 2/2 and public guards 5/5. Current
+runtime library 334/334, process 63/63, I2 local/CLI 5/5 and 8/8, M10 67/67,
+three-crate all-target Clippy and workspace format pass. Independent source
+and runtime review has no remaining P0/P1/P2 after three reproduced repairs.
+This is static/guard evidence: no effect grant, host read or provider network
+execution yet. Next is generated provider projection with exact independent
+authorization, then actual execution; final docs/Git state is in Report 2606.
+I3-3 remains unaccepted and the owner pause applies only after its full close.
 Remaining authority/order and full matrix validation stay open; I3-4 is inactive.
 
 Detailed edge contracts: [`mirrorea_canon/architecture/07-browser-host-trust-boundaries.md`](../mirrorea_canon/architecture/07-browser-host-trust-boundaries.md).
 Cross-edge binding/freshness/revocation/redaction/resource rules: [`mirrorea_canon/architecture/08-browser-host-security-invariants.md`](../mirrorea_canon/architecture/08-browser-host-security-invariants.md).
 View は authoritative domain semantics を所有せず、presentation-local computation のみを許可する。View からの入力は typed command/effect request とし direct store を禁止する。I3-0 はprivate transport選定をclosedし、OPEN-032はこのbounded programだけresolvedした。I3-1とI3-2はbounded evidenceとしてclosedした。official I3 lifecycle は未entry、I3-3のみactive、I3-4/I3-5/I3-6/NEXT-0はdependency-gated inactive、I5 implementation は inactiveである。
 
-I3-2の最終bounded evidenceはlocalnet 12/12（repeat）、full probe 62/62、runtime default 29/29、seam 47/47、library 281/281、docs compile-fail 1/1（default/private）である。6/11 milestones acceptedであり、これは重み付き完成率ではない。FM-5 bounded executable ratchetで、public workflowや100% completionは主張しない。I3-3全体は未受理であり、過去のcleanupは許可されたtarget/debug/incrementalのみ。root free spaceは現在約12.00 GiBで、今回のreplay checkpointではcleanupしていない。
+I3-2の最終bounded evidenceはlocalnet 12/12（repeat）、full probe 62/62、runtime default 29/29、seam 47/47、library 281/281、docs compile-fail 1/1（default/private）である。6/11 milestones acceptedであり、これは重み付き完成率ではない。FM-5 bounded executable ratchetで、public workflowや100% completionは主張しない。I3-3全体は未受理であり、provider Stage 1終了前のroot空きは約11.15 GiB。今回のcomponentでcleanupしていない。
 
 The active bounded I3 programはinternal carrierとpublic wireを分離し、route/handshake/framing/
 disconnect/reconnect/ambiguous delivery/duplicate/reorder/stale authority/backpressure/

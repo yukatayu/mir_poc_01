@@ -126,6 +126,15 @@ scripts/validate_docs.py. Historical plans/reports are evidence, not authority.
 
 ## Actions taken
 
+Provider Stage 1 implements the selected source-only profile and rejects all
+legacy execution/export paths lacking a dedicated provider runtime. Independent
+review exposed identifier restoration, constructor visibility and M8 snapshot
+lowering-tag gaps; genuine failing tests preceded the bounded fixes. No provider
+call, grant, generated network edge or new normative rule belongs to this slice.
+Parent synchronizes current LAB snapshots after final source/runtime regression
+and quality checks. A single asynchronous Oracle consultation examines the next
+mixed M8/M9 coverage handoff; its advice is not authority or executed evidence.
+
 Provider contract checkpoint after the time/reply integration: parent wrote
 PROPOSAL-045/spec/17 candidates, using the existing verified
 Oracle advice as advisory input and a fresh Canon-first planner review. The
@@ -174,6 +183,15 @@ not a Canon adoption or a universal duplicate policy. Accepted operation-specifi
 stored-result/no-new-consume contracts remain preserved.
 
 ## Files changed
+
+Provider Stage 1 changes AST surface/parser support; semantics classification,
+pipeline, private snapshot and static M9 refinement; runtime M8/M9/M10/kernel,
+SYS3 projection/private snapshot and SYS5 unsupported guards. It adds the
+read-only provider AST/Core/snapshot modules, source test target, runtime guard
+test target and ordinary source-only provider sample; M8 private snapshot tests
+gain two negatives. Plan 250, this report, Documentation, project-status,
+progress, tasks, samples_progress, samples/README and scripts/README are
+synchronized. Canon is unchanged from the adopted contract cut `985ee179`.
 
 Provider contract integration adds Canon PROPOSAL-045, ADR-0042 and spec/17;
 updates Canon README/MAP/spec and ADR navigation, CHANGELOG, plan/05 and the
@@ -243,6 +261,20 @@ It changes no Canon rule, theory ledger or official lifecycle.
 
 ## Commands run
 
+Provider Stage 1: sole evaluator uses `CARGO_INCREMENTAL=0 CARGO_BUILD_JOBS=2`,
+locked dependencies and serial tests. Commands include source
+`cargo test --locked -p mir-semantics --test i3_provider_effect`, the constructor
+privacy doctest, runtime `--lib` with `i3-private-quic,i3-process-test-seams`,
+and integration targets `i3_provider_effect_guards`, `sys5_i3_process_runtime`,
+`m8_runtime_admission`, `m9_external_boundary`, `sys5_local_slice`, `sys6_i2_cli`
+and `m10_conformance` using that same feature union. Exact invocations are kept
+with the individual evaluator logs below. Quality commands are
+`cargo clippy --locked -p mir-ast -p mir-semantics -p mir-runtime --features
+mir-runtime/i3-private-quic,mir-runtime/i3-process-test-seams --all-targets --
+-D warnings`, `cargo fmt --all -- --check`, and the all-workspace `cargo check`
+recorded under final integration. Test results, compilation and static checks
+remain distinct evidence classes.
+
 Provider contract integration: read-only git/disk/time/source checks;
 `python3 meta/build-index.py` (216 files indexed); `git diff --check`;
 docs-only evaluator `make docs` and changed-text credential-pattern scan
@@ -294,6 +326,125 @@ CARGO_INCREMENTAL=0 CARGO_BUILD_JOBS=2 cargo test --locked -p mir-runtime --test
 ```
 
 ## Evidence / outputs / test results
+
+Provider Stage 1 final integration, over `985ee179` (2026-09-08):
+
+Initial docs-only gate in
+`/tmp/c3-provider-stage1-docs-final-20260908.MiX9U0/` passes agent configs,
+Canon index 216 and hierarchy 800/800, then fails the literal Canon-notice
+lint in rewritten tasks.md. Parent checks the validator's required phrases
+and restores backticks/lowercase wording; no semantics or validator is changed.
+Diff check passes and bounded credential-pattern scan has zero matching files
+across 30 dirty paths, including exactly six expected new source/test/sample
+files and no generated artifacts. Final docs rerun is tracked below.
+
+The next docs rerun in
+`/tmp/c3-provider-stage1-docs-rerun-20260908.Mn5TnO/` clears the notice lint but
+finds project-status at 190 lines against its 180-line concise-view budget.
+Parent replaces old repeated checkpoint counts with a short Report 2606
+history pointer and corrects stale current disk wording. No validator or
+acceptance limit is weakened; diff and 30-path credential scan still pass.
+Parent also restores exact Canon/Plan paths in tasks.md's current-position
+section; the validator's focused `snapshot_position_source_errors()` returns
+an empty mapping before the final full rerun completes.
+
+Final docs rerun is GREEN in
+`/tmp/c3-provider-stage1-docs-final-rerun-20260908.gl8MRa/`: agent configuration,
+Canon index 216, hierarchy 800/800 and documentation scaffold 1760 reports
+pass. Diff check passes; bounded 30-file credential-pattern scan has zero
+matching filenames, with six expected new files and no generated artifacts.
+Free disk is 11.14 GiB, available memory 11 GiB. Parent inspected the actual
+logs; source/tests remain the same frozen reviewed delta.
+
+- `/tmp/c3-provider-stage1-runtime-regression-20260908.N53EQJ/`:
+  feature-union runtime library 334/334, process integration 63/63, M8 admission
+  7/7, M9 external boundary 1/1, SYS5 local slice 5/5, I2 CLI 8/8 and M10 67/67.
+  These are separately scoped targets, not an additive test total.
+- `/tmp/c3-provider-stage1-quality-20260908.ad6Slv/`:
+  AST/semantics/runtime all-target Clippy with warnings denied and runtime
+  `i3-private-quic,i3-process-test-seams` features passes; workspace format passes.
+- `/tmp/c3-provider-stage1-workspace-check-20260908.5Ya3m6/`:
+  `cargo check --locked --workspace --all-targets --features
+  mir-runtime/i3-private-quic,mir-runtime/i3-process-test-seams` passes across
+  all 14 members. This is compilation, not a full workspace test run.
+- Final free space is 11.15 GiB; incremental builds remain disabled, jobs 2,
+  locked dependencies and serial tests. No cleanup or external workdir fallback
+  was performed. Full I3-3 validation is still required after actual effects and
+  remaining fault/cut/order work; no provider execution is inferred here.
+
+Provider Stage 1 intermediate validation (uncommitted source delta over
+`985ee179`): `cargo check --locked -p mir-semantics --lib` passes without
+warnings, log `/tmp/c3-provider-stage1-structural-20260908.pjeM9T/01-mir-semantics-lib-check.log`.
+The complete new semantics target then executes 16 bodies: 13 pass and three
+test expectations fail, log
+`/tmp/c3-provider-stage1-tests-20260908.vMpdjK/01-semantics-provider-effect.log`.
+The parent checked the actual identity wrapper and M9 normalized failure row,
+and the test author verified the old generated-row order against `985ee179`.
+Only those expectations were corrected; neither duplicate identity entries nor
+an unrelated production failure-order change was introduced to satisfy tests.
+The runtime guard target is separately **compile-blocked**, with 14 exhaustive
+match errors and no executed test body, log
+`/tmp/c3-provider-stage1-runtime-guard-20260908.d7QVCg/01-runtime-provider-guards.log`.
+It authorizes the already planned explicit unsupported-profile guards and
+lossless metadata mirrors, not provider execution or a passing runtime claim.
+Both runs used `CARGO_INCREMENTAL=0 CARGO_BUILD_JOBS=2`, `--locked` and
+serial test execution; final free disk after them was 12.48 GiB.
+
+The semantics-only rerun passes all 16 provider tests without warnings:
+`/tmp/c3-provider-stage1-semantics-rerun-20260908.LQ3ugU/01-semantics-provider-effect.log`.
+The focused unchanged-source regression packet also passes: AST parser 17/17
+and M6 10/10 (`/tmp/c3-provider-legacy-regression-20260908.n4EgtG/01-ast-m6.log`),
+and owner-admission budget 14/14, M6 classification 13/13 and M7 pipeline 27/27
+(`04-semantics-m6-m7-time.log` in the same directory). Commands select these
+five named targets in `mir-ast`/`mir-semantics`; no runtime or workspace test
+is included in these counts. Parent read the executed logs/results. Runtime
+unsupported-profile implementation and its tests remain the next evidence gate.
+
+Stage 1 independent review found three bounded construction/restore defects,
+not failures of the selected provider contract. First, private provider Core
+restoration accepted source-inexpressible identifiers; a real test body failed
+in `/tmp/c3-provider-source-identifier-red-20260908.WgAXFD/01-source-identifier.log`.
+The private constructor now checks the complete Surface lexer identifier form,
+and the rerun passes provider semantics 17/17 plus public runtime guards 5/5
+(`/tmp/c3-provider-stage1-p1-rerun-20260908.UHDJSy/01-semantics-provider-effect.log`
+and `04-runtime-provider-guards.log`). The public M10 test exercises its existing
+String rejection channel before execution; no new M10 diagnostic/profile is
+introduced. Second, the public M6-template constructor bypassed M7; the external
+compile-fail doctest actually compiled, producing RED in
+`/tmp/c3-provider-privacy-snapshot-red-20260908.aQaVqq/01-provider-core-doctest.log`.
+It is now crate-private, with the sole checked pipeline caller preserved.
+Third, new provider lowering tags could be restored into a legacy M8 instance
+without a provider Core/handler. The genuine-owner-snapshot tamper test reached
+that defect in
+`/tmp/c3-provider-privacy-snapshot-runtime-red-20260908.UV5RoH/01-private-snapshot-provider-kind.log`.
+An early four-tag guard now rejects before identity/admission/plan restoration.
+The normal enclosing child-image byte binding is a separate safeguard; this
+is a component integrity repair, not evidence of a network cryptographic bypass.
+Final green reruns and independent sign-off remain required for these last
+two repairs; no Stage 1 or I3-3 acceptance is inferred from the edits alone.
+
+Final P1 rerun packet is green in
+`/tmp/c3-provider-p1-green-20260908.hPcdw3/`: privacy doctest 1/1
+(`01-doctest.log`), source suite 17/17 (`04-semantics-provider-effect.log`),
+private runtime guards 2/2 (`07-runtime-provider-effect-lib.log`), and public
+guards 5/5 (`10-runtime-provider-guards.log`). Source/spec and runtime quality
+review independently report no remaining P0/P1/P2. The complete feature-union
+runtime library then passes 334/334 in
+`/tmp/c3-provider-stage1-runtime-regression-20260908.N53EQJ/01-runtime-feature-union-lib.log`.
+These nested/overlapping filters are not additive test totals. This supports
+the checked-source/unsupported-handoff component only; remaining integration,
+lint/docs gates and component commit/push are tracked separately.
+
+Provider Stage 1 behavioral RED, before production edits:
+`CARGO_INCREMENTAL=0 CARGO_BUILD_JOBS=2 cargo test --locked -p mir-semantics
+--test i3_provider_effect ordinary_provider_source_is_checked --
+--test-threads=1` executes one test body and fails its checked-source assertion
+with `UnexpectedSyntax` at the new source's `effect` (line 57, columns 1--7).
+This is the missing parser feature, not an undefined API/compile failure.
+Log `/tmp/c3-provider-effect-initial-red-20260908.BgbxVG/01-provider-effect.log`
+was read by the parent. Exit 101, wall 0.25s, RSS 228944 KiB; post-run free disk
+12.19 GiB. Parent then authorized AST/M6/M7/snapshot/M9-contract production
+work and separately assigned typed tests, without enabling provider execution.
 
 Provider contract docs-only gate passes, logs
 `/tmp/c3-provider-contract-validation-20260908.GDxYjC/`: `01-make-docs.log`
@@ -1744,12 +1895,19 @@ the retained program is not blocked, stale, or completed by that pause.
 
 ## Plan update status
 
+Provider Stage 1: completed static/guard/review checkboxes and exact evidence
+are recorded in Plan 250. Next consumer is explicit composite coverage,
+projection and independent provider permission; I3-4 stays inactive.
+
 `plan/` 更新済み: Plan 250 now records the resume cut, complete active I3-3
 Goal Statement and work/evidence/decision gates. The parent goal, all failure
 rows, ordering edges and later milestone order are preserved. plan/00-index
 synchronization belongs to the status assignment.
 
 ## Documentation.md update status
+
+Provider Stage 1: current pointer now distinguishes verified source/guard
+evidence from still-pending provider execution and milestone acceptance.
 
 更新済み: resume pointer now identifies I3-3 as the sole active milestone,
 with the accepted I3-2 runtime retained as its input.
@@ -1762,10 +1920,17 @@ generated-contract/runtime enforcement and the unchanged workflow boundary.
 
 ## docs/project-status.md update status
 
+Provider Stage 1: current evidence and next consumer synchronized without
+changing official lifecycle or the stop-after-I3-3 instruction.
+
 更新済み: owner resume、I3-3 sole active、後続 milestone inactive を同期した。
 I3-2 accepted evidence と official I3 unentered を維持する。
 
 ## progress.md update status
+
+Provider Stage 1: dated 2026-09-08 13:42 JST snapshot/recent log replaces stale
+current counts, separates three axes and compresses older validation details
+into this report. No workload-weighted percentage or completion claim is added.
 
 更新済み: current I3-3 pointer, preserved three axes and startability mirror
 the resume; the actual-time recent log is 2026-09-07 11:38 JST.
@@ -1782,6 +1947,11 @@ is active. All later network, provider and full-matrix requirements remain.
 
 ## tasks.md update status
 
+Provider Stage 1: the whole current snapshot is rewritten at 13:38 JST around
+the unchanged 11-milestone sequence, verified static guards, next composite
+admission consumer and retained final gates. Historical estimates are labelled
+as dated estimates, not a current countdown.
+
 更新済み: active I3-3 and inactive later packages are separated from accepted
 I3-2 history. The parent-requested current-goal/direct-consumer coherence
 correction is applied: I3-4 consumes I3-3 and resume is resolved history.
@@ -1790,6 +1960,11 @@ The 22:42 JST maintenance records C1/C2 as an uncommitted delta over pushed
 as the direct consumer. No new roadmap or queue is created.
 
 ## samples_progress.md update status
+
+Provider Stage 1: adds an explicitly source-checking-only provider row and
+command. samples/README and scripts/README mirror that taxonomy. The new source
+is not registered in legacy M5/M10/SYS5 sample execution and is not claimed to
+run over the network. No new script or active sample root is introduced.
 
 更新済み: the sample dashboard records resumed I3-3 as active/not accepted,
 with all 20 families explicitly a target. Accepted I3-2 runnable evidence
@@ -1800,6 +1975,21 @@ The C1/C2 update now points to its actual library test command and preserves
 the no-new-network-sample/non-workflow classification.
 
 ## Reviewer findings and follow-up
+
+Provider Stage 1: independent source/spec review and runtime quality review
+both close with P0/P1/P2 zero after the three construction/restore repairs
+recorded above. The private M8 snapshot check is a component integrity
+requirement, not a claim that enclosing authenticated image binding failed.
+The public M10 guard deliberately retains its existing String error interface;
+no provider M10 profile or public diagnostic contract is introduced.
+Planner's read-only handoff review retains all 20 fault families, single I3-3
+frontier and the owner pause; its sample-classification and final-evidence
+notes are incorporated during the component's status synchronization.
+Direct SYS3/kernel guards are source-inspected common-entry correspondence,
+not falsely counted as independent public test executions. Source M5 export,
+private M8 deferred-base and restored-image negatives have their own tests.
+Reopen if any legacy path admits provider execution, a provider-tagged legacy
+image restores, or a checked provider Core can bypass M7/validated restoration.
 
 Provider contract review: read-only `c3_spec_review` returned five initial P1
 and the P2 precision items recorded above. Parent checked against Constitution,
@@ -2372,6 +2562,13 @@ remains the explicitly reported failure, not an I3 runtime or passing gate.
 
 ## Skipped validations and reasons
 
+Provider Stage 1: full workspace tests, full probe rerun and new Lean/model
+runs are not performed for this static/guard component; relevant source,
+runtime/process/I2/M10 regression, all-workspace compilation and quality gates
+above are executed. Full final I3-3 gates remain required. The pre-existing
+optional embedded-HTML sample-catalog failure is retained as a known unrelated
+UI failure, not repaired or counted as passing by this slice.
+
 Provider contract checkpoint changes only Canon/LAB documents and generated
 index. Rust/Lean/runtime/network tests and Clippy/format are not rerun for this
 docs-only decision; earlier exact-cut results remain retained evidence. The
@@ -2388,6 +2585,19 @@ not skipped passes. General proof, WAN/production, durability and Browser/Host
 product realization remain outside this bounded milestone.
 
 ## Commit / push status
+
+Provider Stage 1 production/tests are frozen with independent reviews and
+executed code/documentation checks green over `985ee179`; parent scoped
+commit/push/parity are pending. Exact resulting cut will be recorded
+with the next in-scope component, not predicted as a self-referential hash.
+This checkpoint is not I3-3 acceptance or the requested stopping point.
+
+Provider contract integration is committed/pushed as
+`985ee179b76d8e1a9e72571ef5a275e190ae4cf9`
+(`docs: select bounded source provider effect contract`). Fresh live remote,
+HEAD and origin/main match with a clean worktree at
+`2026-09-08T12:50:23+09:00`. Stage 1 source/test work begins at that cut;
+no provider execution or I3-3 acceptance follows from the contract commit.
 
 The reviewed row-11/spec/16 time-and-reply checkpoint is committed and pushed:
 `55f1fd7f76b86a2fc6a846c0133d55d5c8213831`
@@ -2470,6 +2680,13 @@ worktree was clean before the next authorized Stage C test change.
 This is the fifth source checkpoint inside I3-3, not milestone acceptance.
 
 ## Sub-agent session close status
+
+Provider Stage 1: source/runtime and both test writers are frozen; independent
+source/spec and runtime quality reviewers have returned no remaining findings.
+The sole evaluator completed focused, regression, quality and workspace
+compilation checks. Parent owns LAB synchronization and Git integration. Mapper
+returned the exact Stage 2 coupling packet; the planner monitors one bounded
+Oracle handoff consult. All contexts are retained for the same I3-3 consumer.
 
 Provider contract: mapper, source implementation planner, acceptance-command
 evaluator planning, independent planner and contract reviewer returned their

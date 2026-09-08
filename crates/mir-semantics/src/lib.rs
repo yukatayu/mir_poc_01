@@ -25,6 +25,7 @@ pub mod surface_role_admission;
 pub mod surface_to_core_elaboration;
 pub mod surface_v0_classification;
 pub mod surface_v0_pipeline;
+pub mod surface_v0_provider_effect;
 
 use std::{
     collections::{BTreeMap, HashMap},

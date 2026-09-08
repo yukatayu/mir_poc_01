@@ -6,6 +6,10 @@
 
 use serde::{Deserialize, Serialize};
 
+mod read_only_provider_effect;
+
+pub use read_only_provider_effect::SnapshotReadOnlyProviderEffectCore;
+
 use mir_ast::surface_v0::SurfaceV0Span;
 
 use crate::{
@@ -235,6 +239,7 @@ pub enum SnapshotCheckedEvaluationKind {
     PublishRelation,
     ConsumerLocalProjection,
     DesignatedResultConsume,
+    ReadOnlyProviderEffect,
 }
 
 impl SnapshotCheckedEvaluationKind {
@@ -245,6 +250,7 @@ impl SnapshotCheckedEvaluationKind {
             CheckedEvaluationKind::PublishRelation => Self::PublishRelation,
             CheckedEvaluationKind::ConsumerLocalProjection => Self::ConsumerLocalProjection,
             CheckedEvaluationKind::DesignatedResultConsume => Self::DesignatedResultConsume,
+            CheckedEvaluationKind::ReadOnlyProviderEffect => Self::ReadOnlyProviderEffect,
         }
     }
 
@@ -255,6 +261,7 @@ impl SnapshotCheckedEvaluationKind {
             Self::PublishRelation => CheckedEvaluationKind::PublishRelation,
             Self::ConsumerLocalProjection => CheckedEvaluationKind::ConsumerLocalProjection,
             Self::DesignatedResultConsume => CheckedEvaluationKind::DesignatedResultConsume,
+            Self::ReadOnlyProviderEffect => CheckedEvaluationKind::ReadOnlyProviderEffect,
         }
     }
 }
@@ -1234,6 +1241,10 @@ pub enum SnapshotEffectKind {
     DesignatedValuePublish,
     DesignatedResultDelivery,
     DesignatedResultConsume,
+    ReadOnlyProviderEffectRequest,
+    ReadOnlyProviderEffectInvocation,
+    ReadOnlyProviderEffectResult,
+    ReadOnlyProviderEffectResultConsume,
 }
 
 impl SnapshotEffectKind {
@@ -1250,6 +1261,12 @@ impl SnapshotEffectKind {
             EffectKind::DesignatedValuePublish => Self::DesignatedValuePublish,
             EffectKind::DesignatedResultDelivery => Self::DesignatedResultDelivery,
             EffectKind::DesignatedResultConsume => Self::DesignatedResultConsume,
+            EffectKind::ReadOnlyProviderEffectRequest => Self::ReadOnlyProviderEffectRequest,
+            EffectKind::ReadOnlyProviderEffectInvocation => Self::ReadOnlyProviderEffectInvocation,
+            EffectKind::ReadOnlyProviderEffectResult => Self::ReadOnlyProviderEffectResult,
+            EffectKind::ReadOnlyProviderEffectResultConsume => {
+                Self::ReadOnlyProviderEffectResultConsume
+            }
         }
     }
 
@@ -1266,6 +1283,12 @@ impl SnapshotEffectKind {
             Self::DesignatedValuePublish => EffectKind::DesignatedValuePublish,
             Self::DesignatedResultDelivery => EffectKind::DesignatedResultDelivery,
             Self::DesignatedResultConsume => EffectKind::DesignatedResultConsume,
+            Self::ReadOnlyProviderEffectRequest => EffectKind::ReadOnlyProviderEffectRequest,
+            Self::ReadOnlyProviderEffectInvocation => EffectKind::ReadOnlyProviderEffectInvocation,
+            Self::ReadOnlyProviderEffectResult => EffectKind::ReadOnlyProviderEffectResult,
+            Self::ReadOnlyProviderEffectResultConsume => {
+                EffectKind::ReadOnlyProviderEffectResultConsume
+            }
         }
     }
 }
@@ -1284,6 +1307,7 @@ pub enum SnapshotGeneratedObligationKind {
     Authority,
     AdmittedEvaluatorAuthority,
     DesignatedResultConsumerAuthority,
+    ProviderEffectAuthorization,
     Evaluation(SnapshotCheckedEvaluationKind),
 }
 
@@ -1297,6 +1321,9 @@ impl SnapshotGeneratedObligationKind {
             GeneratedObligationKind::AdmittedEvaluatorAuthority => Self::AdmittedEvaluatorAuthority,
             GeneratedObligationKind::DesignatedResultConsumerAuthority => {
                 Self::DesignatedResultConsumerAuthority
+            }
+            GeneratedObligationKind::ProviderEffectAuthorization => {
+                Self::ProviderEffectAuthorization
             }
             GeneratedObligationKind::Evaluation(kind) => {
                 Self::Evaluation(SnapshotCheckedEvaluationKind::from_checked(*kind))
@@ -1313,6 +1340,9 @@ impl SnapshotGeneratedObligationKind {
             Self::AdmittedEvaluatorAuthority => GeneratedObligationKind::AdmittedEvaluatorAuthority,
             Self::DesignatedResultConsumerAuthority => {
                 GeneratedObligationKind::DesignatedResultConsumerAuthority
+            }
+            Self::ProviderEffectAuthorization => {
+                GeneratedObligationKind::ProviderEffectAuthorization
             }
             Self::Evaluation(kind) => GeneratedObligationKind::Evaluation(kind.into_checked()),
         }

@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-09-08 12:43 JST
+最終更新: 2026-09-08 13:42 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -62,7 +62,7 @@ remain later.
 |---|---|---|
 | Logical specification | finite source -> Core -> artifact -> communication -> in-process trace/conformance accepted; Theory T1 and broad PHASE-I1 unaccepted | maintenance **着手可能**; general widening **後段依存** |
 | User-facing specification | provisional project/run/inspect/conform workflow exists; public grammar/CLI/JSON/API/ABI/wire/devtools unfrozen | regression **着手可能**; public contract **要仕様確認** |
-| Implementation / operation | I2 exit preserved; I3-1/I3-2 accepted; time/local wait/reply replay integrated at `55f1fd7f`; provider contract selected by ADR-0042/spec/17, implementation and membership/redaction/cut/full-matrix validation remain | I3-3 **着手可能**; I3-4+ **後段依存** |
+| Implementation / operation | I2 exit preserved; I3-1/I3-2 accepted; provider source/check/snapshot and fail-closed legacy handoff verified; effect grant/invocation and remaining membership/redaction/cut/full-matrix gates remain | I3-3 **着手可能**; I3-4+ **後段依存** |
 
 ```text
 Theory: T1
@@ -141,8 +141,8 @@ leave/fresh incarnation. Arbitrary DAG theory remains deferred.
 Checked Core creates owned locus artifacts and generated plans; SYS-4 executes
 them across explicit endpoints. ST is the reference and selected OW1 is a
 separate exactly-one-worker source. Network refinement is authorized for the
-fixed I3 milestones; I3-0 supplied only the selection canary and I3-1 now owns
-the checked carrier mapping.
+fixed I3 milestones; I3-0 supplied the selection canary, I3-1 accepted the
+checked carrier mapping, and I3-3 now refines failure/ordering.
 
 ### Engine/Provider line
 
@@ -189,7 +189,7 @@ theorem, exactly-once, lock-free runtime, or public completion is claimed.
 | 0 | governance/repository memory | ALIGN-0--2 and I3-0/I3-2 completed; I3-3 resumed | medium | status/decision maintenance |
 | 1 | semantics/shared model | finite semantics through I2 | heavy | ADR-0014 research only |
 | 2 | parser-free evidence | historical | medium | maintenance |
-| 3 | source/checker/runtime | in-process I2 accepted | heavy | after ALIGN-1/2, I3-1/2 |
+| 3 | source/checker/runtime | I2 accepted; I3-3 provider source/guard component verified | heavy | I3-3 direct consumers only |
 | 4 | executable samples | toy + conform reproducible | medium | regression |
 | 5 | theorem/model bridge | OBL-058 bounded; 059--063 runtime | heavy | class maintenance |
 | 6 | generated/distributed fabric | I3-2 actual owner runtime accepted; I3-3 failure/order active | heavy | I3-3 self-drive; later gates dependency-gated |
@@ -208,73 +208,45 @@ theorem, exactly-once, lock-free runtime, or public completion is claimed.
 | samples | four-locus toy + conform | public workflow | regression possible |
 | Typed-Effect | typed request/result + no-mint | broader network/providers | **後段依存** |
 | PrismCascade | separate performance kernel | no I2 integration | deferred |
-| View/browser | historical boundary | product/API program | deferred |
+| View/browser | ALIGN-2 Canon responsibility/trust boundary fixed | safe package runtime and product/API program | **後段依存** |
 | upper applications | toy + historical consumers | no domain Core promotion | product-specific |
 
 ## current validation checkpoint
 
-The recovered I3-3 workspace is not an accepted milestone. Prior checkpoint
-`87ee2418` retains full-runtime integration 51/51 (44.43s), evaluator owner-capacity
-1/1, I3-3 filter 4/4, probe library lifecycle evidence 2/2 (one filtered),
-selected runtime library 1/1 + 1/1 (old-owner withdrawal and exact-ledger
-different-snapshot), actual probe integration 17/17, and cargo fmt.
-The historical ledger-source binary remains 49/49 in 47.70s only. The bounded
-model passed 3/3 tests (432 states, 2136 transitions) with three mutant
-counterexamples; this does not establish a general runtime proof. Authorized
-cleanup removed only `target/debug/incremental`; current free space is about
-15 GiB (the prior cleanup checkpoint was about 18 GiB).
-Runtime-only retry 2/2 and full same-feature library 285/285 (82.33s) pass.
-Focused two-crate all-target Clippy with `-Dwarnings` passes; model-target
-dead-code warnings without its private feature are not a deny-lint profile.
-The successor slice installs genuine M9 revocation in B before reconnect and
-rejects retained old ingress without owner mutation; A remains pending/unknown.
-G1 control completes once. Registered-B ACK publication, actual tainted A input,
-one-shot ingress and terminal-observation rejection pass independent repair
-review (no remaining P0/P1). Fresh runtime integration 61/61 (55.23s), I2 local
-5/5 (0.05s), I2 CLI 8/8 (11.60s), probe 32/32, private QUIC unit 2/2, focused
-Clippy and format/diff pass. Feature library 289/289, M10 67/67 and model 3/3
-remain prior evidence, not new runs. Earlier probe lifecycle 2/2 is prior evidence.
-The delivery checkpoint adds actual endpoint-unavailable, complete two-write
-frame round-trip, and strict truncation/FIN rejection before owner admission.
-Validated-only observer projection retains genuine evidence and rejects
-malformed provenance. Full probe library 3/3 also passes. These are bounded
-application-write/process observations, not complete failure-family acceptance.
-Full failure/order coverage remained open at that historical delivery checkpoint.
-The pushed checkpoint `050f5067` selects ADR-0041/spec/16's
-source-declared owner-admission budget; the later `30429d5` checkpoint implements it.
-Static tests now pass 14/14, old AST/M6/M7 10/13/27 and the raw-Core escape
-compile-fail doctest 1/1; focused Clippy passes and reviewed P0/P1 are resolved.
-Generated-contract tests 8/8, private projection snapshots 6/6, default M8
-rejection 2/2 and M8 regressions 33/33 now pass. Contextual ST/OW1 rejection
-no longer fabricates/assumes an M8 trace, and M10 reports the distinct guard.
-Final budget library 11/11, M10 source 3/3, I3 runtime 63/63, runtime library
-with test seams 298/298, M10 conformance 67/67, I2 5/5 + 8/8, probe 32/32,
-private QUIC 2/2 and focused Clippy/format pass. Independent integration review
-has no P0/P1. Frozen C3 evidence is owner module 19/19, G1-pending→G2 decision
-1/1, private QUIC module 3/3, full process-runtime integration 63/63,
-dropped-expiry replay 1/1, and queued-handoff 1/1. The authentic two-process
-budget fixture is now a real 1/1 run with both children reaped, request/serve/
-write/reply/receipt, and four exact delivery joins; host-driver is 5/5 and broad
-local I3 library 61/61. Source-known LAB alias privacy is fixed. Those tests,
-source-budget and local-wait results belong to the retained checkpoint.
-The successor time/reply slice now passes full probe 41/41, focused actual replay
-3/3, two-crate all-target Clippy and workspace format; no orphan children remain.
-Final independent review has P0/P1/P2 zero. Successful and genuine expiry replies
-are consumed once, then rejected on verified successor-session replay; the
-initial-session falsifier rejects before replay write. Genuine G1-expiry→G2
-requester rejection remains local binder evidence, with actual QUIC-path
-correspondence inspected. Runtime 332/process 63/I2-M10 5/8/67 are retained
-`30429d5` results, not new reruns. The reviewed row-11/spec/16 consumer is
-integrated/pushed at `55f1fd7f`, with clean remote parity confirmed at
-`2026-09-08T12:16:45+09:00`; I3-3 remains unaccepted. Current work is
-the ADR-0042/spec/17 provider source/checker implementation, then runtime and remaining membership/redaction/cut,
-ordering and full milestone acceptance. Root free space is about 12.00 GiB.
+I3-3 is active and unaccepted. Time/reply checkpoint 55f1fd7f is pushed;
+its full probe 41/41 and actual replay 3/3 are retained evidence, not reruns
+of the provider component. Genuine G1-expiry→G2 rejection remains local
+binder evidence with inspected QUIC correspondence. Earlier detailed cuts,
+counts and timing are retained in Report 2606, not a parallel current queue.
 
-Owner clarification is retained as a working interpretation: ordinary meaning ->
-generated distribution -> continually checked composition. World/Avatar remain
-domain-library vocabulary, not Mir Core primitives; ledger64/coordinator/
-closed-cohort finite-profile machinery are bounded evidence, not general Mir
-requirements, and do not create a new theory gate or roadmap item.
+ADR-0042/spec/17 contract cut 985ee179 is implemented through the bounded
+provider source/checking and unsupported-legacy-handoff component:
+
+- Provider source suite 17/17; external constructor privacy doctest 1/1.
+- Private runtime guards 2/2; public M8/M9/SYS5/M10 guards 5/5.
+- Current feature-union runtime library 334/334; process runtime 63/63;
+  M8 admission 7/7 and M9 external-boundary target 1/1.
+- I2 local 5/5, I2 CLI 8/8 and M10 conformance 67/67.
+- Three-crate all-target Clippy with private-QUIC/process-seam features and
+  warnings denied, plus workspace format check, pass.
+- Independent source/spec and runtime review: no remaining P0/P1/P2.
+  Invalid snapshot identifiers, public pre-M7 Core construction and unsupported
+  provider-tagged M8 restore were reproduced and repaired. Filtered suites
+  overlap broader suites and are not additive totals.
+
+Logs, earlier AST/M6/M7/time regressions and final docs/Git state are in Report
+2606. The new sample is source-check evidence, not an M5/Lean clean-runner
+registration or executable provider workflow. No effect grant, host invocation,
+row-18 acceptance, new Lean/general proof or I3 lifecycle is claimed.
+Next consumer: generated provider projection plus exact independent effect
+coverage/authorization, then the actual host/QUIC path. Membership/redaction/
+cut and full ordering/milestone validation still remain. Latest measured free
+disk is 11.17 GiB; no cleanup was performed.
+
+Owner clarification remains ordinary meaning -> generated distribution ->
+continually checked composition. Domain words remain library/sample vocabulary;
+finite ledger/cohort bounds are not general Mir requirements. Complete I3-3
+then stop with Plan 250 retained and I3-4 inactive.
 
 ## recent log
 
@@ -375,3 +347,8 @@ requirements, and do not create a new theory gate or roadmap item.
   clean remote parity; ADR-0042/spec/17 provider contract selected after
   five P1 repairs and independent P0/P1/P2-zero re-review. Source/test work
   follows docs validation; no provider execution or I3-3 acceptance claimed.
+- 2026-09-08 13:42 JST: provider source/snapshot and unsupported legacy handoff pass
+  17 source, 1 privacy, 2 private and 5 public guard tests; runtime 334,
+  process 63, I2/M10 and focused quality gates pass after three reproduced
+  review repairs. No provider invocation or I3-3 acceptance; exact Git state
+  remains in Report 2606.

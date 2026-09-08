@@ -15816,6 +15816,12 @@ fn m8_admission_for(checked: &CheckedSurfaceV0) -> Result<M8RuntimeAdmission, St
                     });
             }
             ResidualObligationKind::AuthDeferred | ResidualObligationKind::VerifyDeferred => {}
+            ResidualObligationKind::ReadOnlyProviderEffectRuntimeUnsupported => {
+                return Err(
+                    "M10 legacy finite helper rejects read-only provider effects without a dedicated runtime"
+                        .to_string(),
+                );
+            }
         }
     }
     Ok(admission)

@@ -322,7 +322,13 @@ recordが揃ったためofficial I2 entry後exitを受理しました。broad PH
   first receipt/terminal and owner state; wrong-session replay rejects prewrite.
   Final independent review has P0/P1/P2 zero. The bounded time/reply consumer is
   integrated/pushed at `55f1fd7f` with clean remote parity. ADR-0042/spec/17 now
-  selects the finite provider contract; source/checker implementation is next.
+  selects the finite provider contract. Its source/check/snapshot and explicit
+  unsupported-legacy-runtime handoff now pass source 17/17, privacy 1/1,
+  private guards 2/2 and public guards 5/5, with independent review clear.
+  Current runtime 334/334, process 63/63, I2/M10 and focused quality gates pass.
+  Provider projection and independent effect authorization are next; no host
+  invocation or provider network workflow is claimed. Exact evidence and Git
+  state are in Report 2606.
   All remaining I3-3 failure/order obligations stay required; I3-3 itself
   is not accepted, and I3-4 remains inactive.
 - decisions taken: the working interpretation remains ordinary meaning ->

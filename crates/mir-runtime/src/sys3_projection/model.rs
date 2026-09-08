@@ -33,6 +33,7 @@ pub(crate) enum ProjectionDiagnosticKind {
     MissingDerivedFragment,
     DesignatedResultConsumerMoved,
     DesignatedResultConsumerExpressionLeakage,
+    UnsupportedReadOnlyProviderEffectProfile,
     StructuralMismatch,
 }
 
@@ -2176,6 +2177,13 @@ fn i3_owner_request_component_generated_obligation(
                 "DesignatedResultConsumerAuthority",
             );
         }
+        GeneratedObligationKind::ProviderEffectAuthorization => {
+            i3_owner_request_component_text(
+                hasher,
+                b"generated-obligation-kind",
+                "ProviderEffectAuthorization",
+            );
+        }
         GeneratedObligationKind::Evaluation(kind) => {
             i3_owner_request_component_text(hasher, b"generated-obligation-kind", "Evaluation");
             i3_owner_request_component_text(
@@ -2246,6 +2254,10 @@ fn i3_owner_request_component_effect_kind(kind: EffectKind) -> &'static str {
         EffectKind::DesignatedValuePublish => "DesignatedValuePublish",
         EffectKind::DesignatedResultDelivery => "DesignatedResultDelivery",
         EffectKind::DesignatedResultConsume => "DesignatedResultConsume",
+        EffectKind::ReadOnlyProviderEffectRequest => "ReadOnlyProviderEffectRequest",
+        EffectKind::ReadOnlyProviderEffectInvocation => "ReadOnlyProviderEffectInvocation",
+        EffectKind::ReadOnlyProviderEffectResult => "ReadOnlyProviderEffectResult",
+        EffectKind::ReadOnlyProviderEffectResultConsume => "ReadOnlyProviderEffectResultConsume",
     }
 }
 
@@ -2306,6 +2318,7 @@ fn i3_owner_request_component_evaluation_kind(kind: CheckedEvaluationKind) -> &'
         CheckedEvaluationKind::PublishRelation => "PublishRelation",
         CheckedEvaluationKind::ConsumerLocalProjection => "ConsumerLocalProjection",
         CheckedEvaluationKind::DesignatedResultConsume => "DesignatedResultConsume",
+        CheckedEvaluationKind::ReadOnlyProviderEffect => "ReadOnlyProviderEffect",
     }
 }
 

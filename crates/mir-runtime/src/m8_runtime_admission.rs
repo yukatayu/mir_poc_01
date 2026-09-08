@@ -19,8 +19,9 @@ use mir_semantics::{
     shared_model::{ResultFrontier, SourceRef},
     surface_v0_classification::{OwnerAdmissionBudgetCondition, SourceToCoreKind},
     surface_v0_pipeline::{
-        CheckedProgramIdentity, CheckedSurfaceV0, DesignatedCheckedCore, RelationCheckedCore,
-        ResidualObligation, ResidualObligationKind, TypedExpression, TypedStateRead,
+        CheckedEvaluationKind, CheckedProgramIdentity, CheckedSurfaceV0, DesignatedCheckedCore,
+        RelationCheckedCore, ResidualObligation, ResidualObligationKind, TypedExpression,
+        TypedStateRead,
     },
 };
 
@@ -201,6 +202,7 @@ pub enum M8AdmissionDiagnosticKind {
     ConflictingResidualEvidence,
     DeferredToM9,
     RelationEvidencePayloadMismatch,
+    UnsupportedReadOnlyProviderEffectProfile,
 }
 
 #[derive(Debug, Clone, PartialEq, Eq)]
@@ -248,6 +250,41 @@ impl M8AdmissionDiagnostic {
             M8AdmissionDiagnosticKind::RelationEvidencePayloadMismatch,
             residual,
         )
+    }
+
+    fn unsupported_read_only_provider_effect_profile(checked: &CheckedSurfaceV0) -> Option<Self> {
+        if !checked
+            .evaluations()
+            .iter()
+            .any(|evaluation| evaluation.kind() == CheckedEvaluationKind::ReadOnlyProviderEffect)
+        {
+            return None;
+        }
+
+        if let Some(residual) = checked
+            .residual_obligations()
+            .entries()
+            .iter()
+            .find(|residual| {
+                residual.kind() == ResidualObligationKind::ReadOnlyProviderEffectRuntimeUnsupported
+            })
+        {
+            return Some(Self::for_residual(
+                M8AdmissionDiagnosticKind::UnsupportedReadOnlyProviderEffectProfile,
+                residual,
+            ));
+        }
+
+        let evaluation = checked.evaluations().iter().find(|evaluation| {
+            evaluation.kind() == CheckedEvaluationKind::ReadOnlyProviderEffect
+        })?;
+        Some(Self {
+            kind: M8AdmissionDiagnosticKind::UnsupportedReadOnlyProviderEffectProfile,
+            residual_kind: None,
+            residual_name: None,
+            source_ref: evaluation.source_ref().clone(),
+            expected_source_ref: None,
+        })
     }
 
     pub const fn kind(&self) -> M8AdmissionDiagnosticKind {
@@ -324,6 +361,12 @@ impl M8Runtime {
             return Err(M8AdmissionDiagnostics::one(
                 M8AdmissionDiagnostic::program_identity_mismatch(&checked),
             ));
+        }
+
+        if let Some(diagnostic) =
+            M8AdmissionDiagnostic::unsupported_read_only_provider_effect_profile(&checked)
+        {
+            return Err(M8AdmissionDiagnostics::one(diagnostic));
         }
 
         if let Some(residual) = checked
@@ -453,6 +496,12 @@ pub(crate) fn prepare_deferred_m9_base(
         ));
     }
 
+    if let Some(diagnostic) =
+        M8AdmissionDiagnostic::unsupported_read_only_provider_effect_profile(checked)
+    {
+        return Err(M8AdmissionDiagnostics::one(diagnostic));
+    }
+
     for residual in checked.residual_obligations().entries() {
         if matches!(
             residual.kind(),
@@ -543,6 +592,10 @@ pub enum RuntimeLoweringKind {
     RelationPublish,
     ConsumerLocalProjection,
     DeferredPolicy,
+    ReadOnlyProviderEffectRequest,
+    ReadOnlyProviderEffectInvocation,
+    ReadOnlyProviderEffectResult,
+    ReadOnlyProviderEffectResultConsume,
 }
 
 #[derive(Debug, Clone, PartialEq, Eq)]
@@ -601,6 +654,18 @@ impl OrderedRuntimeLowering {
                             RuntimeLoweringKind::ConsumerLocalProjection
                         }
                         SourceToCoreKind::DeferredPolicy => RuntimeLoweringKind::DeferredPolicy,
+                        SourceToCoreKind::ReadOnlyProviderEffectRequest => {
+                            RuntimeLoweringKind::ReadOnlyProviderEffectRequest
+                        }
+                        SourceToCoreKind::ReadOnlyProviderEffectInvocation => {
+                            RuntimeLoweringKind::ReadOnlyProviderEffectInvocation
+                        }
+                        SourceToCoreKind::ReadOnlyProviderEffectResult => {
+                            RuntimeLoweringKind::ReadOnlyProviderEffectResult
+                        }
+                        SourceToCoreKind::ReadOnlyProviderEffectResultConsume => {
+                            RuntimeLoweringKind::ReadOnlyProviderEffectResultConsume
+                        }
                     },
                     source_ref: entry.source_ref().clone(),
                     core_ref: entry.core_ref().to_string(),
@@ -1199,6 +1264,10 @@ enum PrivateRuntimeLoweringKindSnapshot {
     RelationPublish,
     ConsumerLocalProjection,
     DeferredPolicy,
+    ReadOnlyProviderEffectRequest,
+    ReadOnlyProviderEffectInvocation,
+    ReadOnlyProviderEffectResult,
+    ReadOnlyProviderEffectResultConsume,
 }
 
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
@@ -1348,6 +1417,17 @@ impl M8I3PrivateSnapshot {
         if self.version != Self::VERSION {
             return Err(M8I3PrivateSnapshotError::StructuralMismatch);
         }
+        if self.ordered_lowering.iter().any(|entry| {
+            matches!(
+                entry.kind,
+                PrivateRuntimeLoweringKindSnapshot::ReadOnlyProviderEffectRequest
+                    | PrivateRuntimeLoweringKindSnapshot::ReadOnlyProviderEffectInvocation
+                    | PrivateRuntimeLoweringKindSnapshot::ReadOnlyProviderEffectResult
+                    | PrivateRuntimeLoweringKindSnapshot::ReadOnlyProviderEffectResultConsume
+            )
+        }) {
+            return Err(M8I3PrivateSnapshotError::StructuralMismatch);
+        }
         let program_identity = self
             .program_identity
             .into_checked()
@@ -1438,6 +1518,18 @@ impl PrivateRuntimeLoweringEntrySnapshot {
                 RuntimeLoweringKind::DeferredPolicy => {
                     PrivateRuntimeLoweringKindSnapshot::DeferredPolicy
                 }
+                RuntimeLoweringKind::ReadOnlyProviderEffectRequest => {
+                    PrivateRuntimeLoweringKindSnapshot::ReadOnlyProviderEffectRequest
+                }
+                RuntimeLoweringKind::ReadOnlyProviderEffectInvocation => {
+                    PrivateRuntimeLoweringKindSnapshot::ReadOnlyProviderEffectInvocation
+                }
+                RuntimeLoweringKind::ReadOnlyProviderEffectResult => {
+                    PrivateRuntimeLoweringKindSnapshot::ReadOnlyProviderEffectResult
+                }
+                RuntimeLoweringKind::ReadOnlyProviderEffectResultConsume => {
+                    PrivateRuntimeLoweringKindSnapshot::ReadOnlyProviderEffectResultConsume
+                }
             },
             source_ref: SnapshotSourceRef::from_checked(&entry.source_ref),
             core_ref: entry.core_ref.clone(),
@@ -1472,6 +1564,18 @@ impl PrivateRuntimeLoweringEntrySnapshot {
                 }
                 PrivateRuntimeLoweringKindSnapshot::DeferredPolicy => {
                     RuntimeLoweringKind::DeferredPolicy
+                }
+                PrivateRuntimeLoweringKindSnapshot::ReadOnlyProviderEffectRequest => {
+                    RuntimeLoweringKind::ReadOnlyProviderEffectRequest
+                }
+                PrivateRuntimeLoweringKindSnapshot::ReadOnlyProviderEffectInvocation => {
+                    RuntimeLoweringKind::ReadOnlyProviderEffectInvocation
+                }
+                PrivateRuntimeLoweringKindSnapshot::ReadOnlyProviderEffectResult => {
+                    RuntimeLoweringKind::ReadOnlyProviderEffectResult
+                }
+                PrivateRuntimeLoweringKindSnapshot::ReadOnlyProviderEffectResultConsume => {
+                    RuntimeLoweringKind::ReadOnlyProviderEffectResultConsume
                 }
             },
             source_ref: self

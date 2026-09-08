@@ -1,10 +1,15 @@
 use std::collections::BTreeSet;
 
 use mir_ast::surface_v0::FixtureSource;
-use mir_semantics::surface_v0_pipeline::{CheckedSurfaceV0, check_and_elaborate_surface_v0};
+use mir_semantics::surface_v0_pipeline::{
+    CheckedSurfaceV0, ResidualObligationKind, check_and_elaborate_surface_v0,
+};
 use serde_json::Value;
 
-use super::{M8I3PrivateSnapshot, M8I3PrivateSnapshotError, M8Runtime, M8RuntimeAdmission};
+use super::{
+    M8AdmissionDiagnosticKind, M8I3PrivateSnapshot, M8I3PrivateSnapshotError, M8Runtime,
+    M8RuntimeAdmission, prepare_deferred_m9_base,
+};
 use crate::m8_runtime_local_cut::{
     M8LocalDesignatedTraceContext, M8LocalRuntime, M8LocalRuntimeSeed,
 };
@@ -16,6 +21,10 @@ const BUDGETED_SOURCE_PATH: &str =
     "tests/inline/i3_owner_admission_budget_m8_private_snapshot_budgeted.mir";
 const UNANNOTATED_SOURCE_PATH: &str =
     "tests/inline/i3_owner_admission_budget_m8_private_snapshot_unannotated.mir";
+const PROVIDER_EFFECT_SOURCE_PATH: &str =
+    "samples/clean-near-end/mirrorea-i3-provider-effect/main.mir";
+const PROVIDER_EFFECT_SOURCE: &str =
+    include_str!("../../../samples/clean-near-end/mirrorea-i3-provider-effect/main.mir");
 
 fn owner_budget_source(include_clause: bool) -> String {
     let clause = if include_clause {
@@ -53,6 +62,14 @@ fn checked_owner_source(path: &str, include_clause: bool) -> CheckedSurfaceV0 {
         owner_budget_source(include_clause),
     ))
     .expect("ordinary budgeted owner source checks before genuine M8 admission")
+}
+
+fn checked_provider_effect_source() -> CheckedSurfaceV0 {
+    check_and_elaborate_surface_v0(FixtureSource::new(
+        PROVIDER_EFFECT_SOURCE_PATH,
+        PROVIDER_EFFECT_SOURCE,
+    ))
+    .expect("the ordinary provider-effect source checks before the private deferred-M9 guard")
 }
 
 fn admitted_owner_instance(path: &str, include_clause: bool) -> super::M8RuntimeInstance {
@@ -93,6 +110,72 @@ fn private_snapshot_with_budget_field_replaced(
     *field = Value::String(replacement.to_string());
     serde_json::from_value(serialized)
         .expect("the malformed semantic component remains syntactically decodable as a private DTO")
+}
+
+#[test]
+fn i3_private_snapshot_rejects_tampered_provider_effect_lowering_before_restore() {
+    let admitted = admitted_owner_instance(UNANNOTATED_SOURCE_PATH, false);
+    let serialized = serde_json::to_value(admitted.i3_private_snapshot())
+        .expect("a genuine admitted unannotated owner instance serializes as a private M8 DTO");
+
+    let untampered: M8I3PrivateSnapshot = serde_json::from_value(serialized.clone())
+        .expect("the genuine private M8 DTO remains syntactically decodable");
+    let restored = super::M8RuntimeInstance::from_i3_private_snapshot(untampered)
+        .expect("the untampered unannotated owner snapshot restores positively");
+    assert!(restored.is_runtime_admitted());
+    assert_eq!(
+        owner_plan_budget(&restored),
+        None,
+        "the positive control remains the existing unannotated owner instance"
+    );
+
+    for provider_effect_kind in [
+        "read_only_provider_effect_request",
+        "read_only_provider_effect_invocation",
+        "read_only_provider_effect_result",
+        "read_only_provider_effect_result_consume",
+    ] {
+        let mut tampered = serialized.clone();
+        let kind = tampered
+            .pointer_mut("/ordered_lowering/0/kind")
+            .expect("the genuine private M8 DTO retains its first ordered lowering kind");
+        assert!(
+            kind.is_string(),
+            "the ordered lowering kind remains a typed string in the private DTO"
+        );
+        *kind = Value::String(provider_effect_kind.to_string());
+
+        let tampered_snapshot: M8I3PrivateSnapshot = serde_json::from_value(tampered).expect(
+            "a newly recognized provider-effect lowering kind remains syntactically decodable so the execution-image guard, rather than DTO parsing, decides it",
+        );
+        super::M8RuntimeInstance::from_i3_private_snapshot(tampered_snapshot).expect_err(
+            "a private M8 snapshot cannot restore a provider-effect lowering without a provider Core, handler, or authority grant",
+        );
+    }
+}
+
+#[test]
+fn i3_provider_effect_private_deferred_m9_base_rejects_before_ordered_lowering() {
+    let checked = checked_provider_effect_source();
+    let diagnostics = prepare_deferred_m9_base(
+        &checked,
+        &M8RuntimeAdmission::new(checked.program_identity().clone()),
+    )
+    .expect_err(
+        "the retained provider Core must reject before a deferred M9 base can retain ordered lowering",
+    );
+
+    assert_eq!(
+        diagnostics.primary().kind(),
+        M8AdmissionDiagnosticKind::UnsupportedReadOnlyProviderEffectProfile
+    );
+    assert_eq!(
+        diagnostics.primary().residual_kind(),
+        Some(ResidualObligationKind::ReadOnlyProviderEffectRuntimeUnsupported)
+    );
+    assert!(!diagnostics.has_runtime_success());
+    assert!(!diagnostics.grants_authority());
+    assert!(!diagnostics.emits_verdict());
 }
 
 #[test]

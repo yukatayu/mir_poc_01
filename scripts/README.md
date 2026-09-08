@@ -36,7 +36,14 @@
   probe integration tests, not a new script or public CLI. The focused command
   is `cargo test --locked -p mirrorea-i3-probe --test i3_process_localnet source_first_localnet_owner_budget -- --test-threads=1`.
   Its source is `samples/clean-near-end/mirrorea-i3-owner-admission/main.mir`;
-  actual-time network validation remains in progress (Report 2606).
+  bounded time/reply evidence is integrated at `55f1fd7f`; full I3-3
+  validation remains in progress (Report 2606).
+- I3-3 provider source/checking evidence uses
+  `cargo test --locked -p mir-semantics --test i3_provider_effect -- --test-threads=1`
+  and `samples/clean-near-end/mirrorea-i3-provider-effect/main.mir`.
+  It is not a new script, legacy clean-runner/M5/Lean entry or provider
+  execution workflow. The separate runtime guard tests require unsupported
+  legacy execution to reject; no host call or effect grant is claimed here.
 - `practical_alpha_error_display.py`
   shared practical helper display utility that redacts repo-owned absolute path
   prefixes from failure surfaces while preserving external/temp absolute paths

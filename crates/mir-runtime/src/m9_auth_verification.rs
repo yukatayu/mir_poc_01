@@ -25,7 +25,8 @@ use mir_semantics::{
     },
     shared_model::{ResultVersion, SourceRef},
     surface_v0_pipeline::{
-        CheckedProgramIdentity, CheckedSourceMapEntry, CheckedSurfaceV0, ResidualObligationKind,
+        CheckedEvaluationKind, CheckedProgramIdentity, CheckedSourceMapEntry, CheckedSurfaceV0,
+        ResidualObligationKind,
     },
 };
 
@@ -246,6 +247,7 @@ pub struct M9SourceArtifact {
     designated_scopes: BTreeSet<(String, String, String)>,
     designated_remote_input_release_scopes:
         BTreeSet<(String, String, String, usize, String, String, String)>,
+    unsupported_read_only_provider_effect_profile: bool,
 }
 
 impl M9SourceArtifact {
@@ -343,6 +345,7 @@ impl M9SourceArtifact {
                         })
                 })
                 .collect(),
+            unsupported_read_only_provider_effect_profile: has_read_only_provider_effect(checked),
         }
     }
 
@@ -369,6 +372,10 @@ impl M9SourceArtifact {
     fn contains_owner_evaluation_scope(&self, evaluation: &str, owner_locus: &str) -> bool {
         self.owner_evaluation_scopes
             .contains(&(evaluation.to_string(), owner_locus.to_string()))
+    }
+
+    fn has_unsupported_read_only_provider_effect_profile(&self) -> bool {
+        self.unsupported_read_only_provider_effect_profile
     }
 
     fn contains_relation_scope(
@@ -579,6 +586,7 @@ pub enum M9AdmissionErrorKind {
     ReplayedAuthorityCut,
     CompactionBeforeAuditCut,
     MissingVerifyDischarge,
+    UnsupportedReadOnlyProviderEffectProfile,
 }
 
 #[derive(Debug, Clone, PartialEq, Eq)]
@@ -1607,6 +1615,7 @@ fn m9_i3_error_tag(kind: M9AdmissionErrorKind) -> u8 {
         M9AdmissionErrorKind::ReplayedAuthorityCut => 22,
         M9AdmissionErrorKind::CompactionBeforeAuditCut => 23,
         M9AdmissionErrorKind::MissingVerifyDischarge => 24,
+        M9AdmissionErrorKind::UnsupportedReadOnlyProviderEffectProfile => 25,
     }
 }
 
@@ -1637,6 +1646,7 @@ fn m9_i3_error_from_tag(tag: u8) -> Result<M9AdmissionErrorKind, ()> {
         22 => M9AdmissionErrorKind::ReplayedAuthorityCut,
         23 => M9AdmissionErrorKind::CompactionBeforeAuditCut,
         24 => M9AdmissionErrorKind::MissingVerifyDischarge,
+        25 => M9AdmissionErrorKind::UnsupportedReadOnlyProviderEffectProfile,
         _ => return Err(()),
     })
 }
@@ -6720,6 +6730,11 @@ impl M9RuntimeExecutionSeam {
             auth_discharge,
             verification_discharge,
         } = candidate;
+        if has_read_only_provider_effect(&checked) {
+            return Err(M9AdmissionDiagnostics::one(
+                M9AdmissionErrorKind::UnsupportedReadOnlyProviderEffectProfile,
+            ));
+        }
         if projection.checked_program_identity() != checked.program_identity() {
             return Err(M9AdmissionDiagnostics::one(
                 M9AdmissionErrorKind::ProgramIdentityMismatch,
@@ -7341,6 +7356,11 @@ fn finite_local_m8_admission_for(
                     });
             }
             ResidualObligationKind::AuthDeferred | ResidualObligationKind::VerifyDeferred => {}
+            ResidualObligationKind::ReadOnlyProviderEffectRuntimeUnsupported => {
+                return Err(M9AdmissionDiagnostics::one(
+                    M9AdmissionErrorKind::UnsupportedReadOnlyProviderEffectProfile,
+                ));
+            }
         }
     }
     Ok(admission)
@@ -7430,6 +7450,12 @@ fn test_kernel_m8_admission_for(checked: &CheckedSurfaceV0) -> Result<M8RuntimeA
                     });
             }
             ResidualObligationKind::AuthDeferred | ResidualObligationKind::VerifyDeferred => {}
+            ResidualObligationKind::ReadOnlyProviderEffectRuntimeUnsupported => {
+                return Err(
+                    "kernel test source retains an unsupported read-only provider effect"
+                        .to_string(),
+                );
+            }
         }
     }
     Ok(admission)
@@ -8072,6 +8098,16 @@ fn validate_outer(
     checked: &CheckedSurfaceV0,
     envelope: &M9AdmissionEnvelope,
 ) -> Result<(), M9AdmissionDiagnostics> {
+    if has_read_only_provider_effect(checked)
+        || envelope
+            .original_source_artifact
+            .as_ref()
+            .is_some_and(M9SourceArtifact::has_unsupported_read_only_provider_effect_profile)
+    {
+        return Err(M9AdmissionDiagnostics::one(
+            M9AdmissionErrorKind::UnsupportedReadOnlyProviderEffectProfile,
+        ));
+    }
     if &envelope.program_identity != checked.program_identity() {
         return Err(M9AdmissionDiagnostics::one(
             M9AdmissionErrorKind::ProgramIdentityMismatch,
@@ -8148,6 +8184,13 @@ fn validate_outer(
         ));
     }
     Ok(())
+}
+
+fn has_read_only_provider_effect(checked: &CheckedSurfaceV0) -> bool {
+    checked
+        .evaluations()
+        .iter()
+        .any(|evaluation| evaluation.kind() == CheckedEvaluationKind::ReadOnlyProviderEffect)
 }
 
 #[derive(Debug, Clone, PartialEq, Eq)]

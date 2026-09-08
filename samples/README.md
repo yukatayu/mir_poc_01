@@ -5,7 +5,7 @@
 ## current taxonomy
 
 - `clean-near-end/`
-  active LAB clean executable suite
+  active LAB clean suite and explicitly classified source-only evidence
   - `mirrorea-i2-local-toy/` is the accepted SYS-5 four-locus local toy
     workflow root. It uses one ordinary `.mir` source plus two source patches
     and is exercised through `mir project-loci`, `mir run-local`, and
@@ -16,8 +16,14 @@
     source input, not generated output or a public contract.
   - `mirrorea-i3-owner-admission/main.mir` is the current I3-3 ordinary-source
     budget-1 test input for the existing two-process probe. It is source, not
-    a generated fixture or accepted network workflow. Actual-time transport
-    validation is still in progress; Report 2606 retains its executed evidence.
+    a generated fixture or accepted network workflow. Bounded time/reply
+    evidence is integrated at `55f1fd7f`; full I3-3 acceptance remains open
+    (Report 2606).
+  - `mirrorea-i3-provider-effect/main.mir` is I3-3 ordinary source/checking
+    evidence for ADR-0042/spec/17, exercised by the semantics
+    `i3_provider_effect` tests. Provider execution is unsupported at this
+    checkpoint; it is not registered in the legacy clean runner or M5/Lean
+    catalog and does not claim a runnable provider or SYS5/network workflow.
 - `current-l2/`
   base current-L2 source corpus
 - `lean/`

@@ -13,7 +13,8 @@ use mir_semantics::{
     shared_model::SourceRef,
     surface_v0_classification::SourceToCoreKind,
     surface_v0_pipeline::{
-        CheckedBinaryOperator, CheckedExpressionTree, CheckedSurfaceV0, EffectKind, TypedStateRead,
+        CheckedBinaryOperator, CheckedEvaluationKind, CheckedExpressionTree, CheckedSurfaceV0,
+        EffectKind, TypedStateRead,
     },
 };
 
@@ -1500,6 +1501,7 @@ pub(crate) enum KernelDiagnosticKind {
     AuthorityGenerationRejected,
     OwnerAdmissionAuthorizationRequired,
     RouteUnavailable,
+    UnsupportedReadOnlyProviderEffectProfile,
 }
 
 #[derive(Debug, Clone, PartialEq, Eq)]
@@ -2044,12 +2046,24 @@ fn authority_view_from_admission(admission: &SealedM9RuntimeAdmission) -> Author
     }
 }
 
+fn has_read_only_provider_effect(checked: &CheckedSurfaceV0) -> bool {
+    checked
+        .evaluations()
+        .iter()
+        .any(|evaluation| evaluation.kind() == CheckedEvaluationKind::ReadOnlyProviderEffect)
+}
+
 impl SemanticRuntimeKernel {
     pub(crate) fn from_checked_m9(
         checked: CheckedSurfaceV0,
         admission: SealedM9RuntimeAdmission,
         seed: KernelSeed,
     ) -> Result<Self, KernelDiagnostics> {
+        if has_read_only_provider_effect(&checked) {
+            return Err(KernelDiagnostics::one(
+                KernelDiagnosticKind::UnsupportedReadOnlyProviderEffectProfile,
+            ));
+        }
         if checked.program_identity().stable_key() != admission.program_identity {
             return Err(KernelDiagnostics::one(
                 KernelDiagnosticKind::SourceCoreProvenanceMismatch,
@@ -2097,6 +2111,11 @@ impl SemanticRuntimeKernel {
         seed: KernelSeed,
         profile: ExecutionProfile,
     ) -> Result<Self, KernelDiagnostics> {
+        if has_read_only_provider_effect(&checked) {
+            return Err(KernelDiagnostics::one(
+                KernelDiagnosticKind::UnsupportedReadOnlyProviderEffectProfile,
+            ));
+        }
         let admission = SealedM9RuntimeAdmission::from_m9_execution_seam(&checked, &seam)?;
         let ow1_loci = admission
             .owner_lineages

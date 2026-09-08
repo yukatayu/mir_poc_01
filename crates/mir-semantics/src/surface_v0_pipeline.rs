@@ -27,6 +27,11 @@ use crate::{
         CoreTemplateKind, OwnerAdmissionBudgetCondition, SourceToCoreKind, SurfaceV0Classification,
         SurfaceV0ClassificationOptions, SurfaceV0DiagnosticKind, classify_surface_v0,
     },
+    surface_v0_provider_effect::{
+        CheckedReadOnlyProviderEffectCore, READ_ONLY_PROVIDER_FAILURES,
+        READ_ONLY_PROVIDER_MAX_BYTES, READ_ONLY_PROVIDER_MAX_CALLS,
+        READ_ONLY_PROVIDER_OBSERVATION_LABEL,
+    },
 };
 
 const OWNER_RMW_FAILURES: [&str; 4] = [
@@ -136,6 +141,10 @@ pub enum M7DiagnosticKind {
     DuplicateDeferred,
     UndefinedDesignatedResultConsumerLocus,
     CompetingDesignatedResultConsumer,
+    DuplicateReadOnlyProviderEffect,
+    ReadOnlyProviderEffectProfileMismatch,
+    UndefinedReadOnlyProviderRequesterLocus,
+    UndefinedReadOnlyProviderExecutorLocus,
     OwnerAdmissionBudgetOutOfRange,
     OwnerAdmissionBudgetRequiresExactlyOneLowerableOwnerAssignment,
     ResidualCannotExecute,
@@ -594,6 +603,7 @@ pub enum CheckedEvaluationKind {
     PublishRelation,
     ConsumerLocalProjection,
     DesignatedResultConsume,
+    ReadOnlyProviderEffect,
 }
 
 #[derive(Debug, Clone, PartialEq, Eq)]
@@ -1494,6 +1504,10 @@ pub enum EffectKind {
     DesignatedValuePublish,
     DesignatedResultDelivery,
     DesignatedResultConsume,
+    ReadOnlyProviderEffectRequest,
+    ReadOnlyProviderEffectInvocation,
+    ReadOnlyProviderEffectResult,
+    ReadOnlyProviderEffectResultConsume,
 }
 
 #[derive(Debug, Clone, PartialEq, Eq)]
@@ -1610,6 +1624,7 @@ pub enum GeneratedObligationKind {
     Authority,
     AdmittedEvaluatorAuthority,
     DesignatedResultConsumerAuthority,
+    ProviderEffectAuthorization,
     Evaluation(CheckedEvaluationKind),
 }
 
@@ -1724,6 +1739,29 @@ impl GeneratedObligations {
         }
     }
 
+    fn read_only_provider_effect(span: PipelineSourceSpan) -> Self {
+        let mut entries = READ_ONLY_PROVIDER_FAILURES
+            .iter()
+            .map(|failure| {
+                GeneratedObligation::new(
+                    GeneratedObligationKind::Failure((*failure).to_string()),
+                    span.clone(),
+                )
+            })
+            .collect::<Vec<_>>();
+        entries.extend([
+            GeneratedObligation::new(
+                GeneratedObligationKind::ProviderEffectAuthorization,
+                span.clone(),
+            ),
+            GeneratedObligation::new(
+                GeneratedObligationKind::Evaluation(CheckedEvaluationKind::ReadOnlyProviderEffect),
+                span,
+            ),
+        ]);
+        Self { entries }
+    }
+
     pub fn entries(&self) -> &[GeneratedObligation] {
         &self.entries
     }
@@ -1759,6 +1797,12 @@ impl GeneratedObligations {
                     | GeneratedObligationKind::DesignatedResultConsumerAuthority
             )
         })
+    }
+
+    pub fn contains_provider_effect_authorization(&self) -> bool {
+        self.entries
+            .iter()
+            .any(|entry| entry.kind == GeneratedObligationKind::ProviderEffectAuthorization)
     }
 
     pub fn contains_evaluation(&self, kind: CheckedEvaluationKind) -> bool {
@@ -1822,6 +1866,7 @@ fn designated_effect_entries(
 #[derive(Debug, Clone, PartialEq, Eq, Default)]
 pub struct AuthorityRequirements {
     designated_result_consumer: Option<(String, String, String)>,
+    read_only_provider_effect: Option<(String, String, String, String)>,
 }
 
 impl AuthorityRequirements {
@@ -1836,6 +1881,7 @@ impl AuthorityRequirements {
                 result.into(),
                 consumer_locus.into(),
             )),
+            read_only_provider_effect: None,
         }
     }
 
@@ -1851,6 +1897,40 @@ impl AuthorityRequirements {
                 requirement.0 == evaluator
                     && requirement.1 == result
                     && requirement.2 == consumer_locus
+            })
+    }
+
+    fn read_only_provider_effect(
+        operation: impl Into<String>,
+        requester_principal: impl Into<String>,
+        executor_locus: impl Into<String>,
+        result_consumer_locus: impl Into<String>,
+    ) -> Self {
+        Self {
+            designated_result_consumer: None,
+            read_only_provider_effect: Some((
+                operation.into(),
+                requester_principal.into(),
+                executor_locus.into(),
+                result_consumer_locus.into(),
+            )),
+        }
+    }
+
+    pub fn requires_read_only_provider_effect_authority(
+        &self,
+        operation: &str,
+        requester_principal: &str,
+        executor_locus: &str,
+        result_consumer_locus: &str,
+    ) -> bool {
+        self.read_only_provider_effect
+            .as_ref()
+            .is_some_and(|requirement| {
+                requirement.0 == operation
+                    && requirement.1 == requester_principal
+                    && requirement.2 == executor_locus
+                    && requirement.3 == result_consumer_locus
             })
     }
 
@@ -1873,6 +1953,7 @@ pub struct CheckedEvaluation {
     relation_core: Option<RelationCheckedCore>,
     designated_core: Option<DesignatedCheckedCore>,
     designated_result_consumer_core: Option<DesignatedResultConsumerCore>,
+    read_only_provider_effect_core: Option<CheckedReadOnlyProviderEffectCore>,
     authority_requirements: AuthorityRequirements,
     evaluation_axes: EvaluationAxes,
     effect_row: EffectRow,
@@ -1950,6 +2031,10 @@ impl CheckedEvaluation {
         self.designated_result_consumer_core.as_ref()
     }
 
+    pub fn read_only_provider_effect_core(&self) -> Option<&CheckedReadOnlyProviderEffectCore> {
+        self.read_only_provider_effect_core.as_ref()
+    }
+
     pub fn authority_requirements(&self) -> &AuthorityRequirements {
         &self.authority_requirements
     }
@@ -2016,6 +2101,7 @@ pub enum ResidualObligationKind {
     ValueVisibilityRedaction,
     AuthDeferred,
     VerifyDeferred,
+    ReadOnlyProviderEffectRuntimeUnsupported,
 }
 
 #[derive(Debug, Clone, PartialEq, Eq)]
@@ -2171,6 +2257,10 @@ impl CheckedSourceMapEntry {
             SourceToCoreKind::PublishRelation => 6,
             SourceToCoreKind::ConsumerLocalProjection => 7,
             SourceToCoreKind::DeferredPolicy => 8,
+            SourceToCoreKind::ReadOnlyProviderEffectRequest => 9,
+            SourceToCoreKind::ReadOnlyProviderEffectInvocation => 10,
+            SourceToCoreKind::ReadOnlyProviderEffectResult => 11,
+            SourceToCoreKind::ReadOnlyProviderEffectResultConsume => 12,
         }
     }
 }
@@ -2319,6 +2409,13 @@ impl CheckedSurfaceV0 {
         })
     }
 
+    pub fn read_only_provider_effect(&self, operation: &str) -> Option<&CheckedEvaluation> {
+        self.evaluations.iter().find(|evaluation| {
+            evaluation.kind == CheckedEvaluationKind::ReadOnlyProviderEffect
+                && evaluation.name == operation
+        })
+    }
+
     pub fn source_map(&self) -> &CheckedSourceMap {
         &self.source_map
     }
@@ -2438,6 +2535,17 @@ fn checked_static_environment(
                 kind: evaluation.kind(),
                 actor: None,
                 owner_locus: Some(evaluation.owner_evaluation_locus().to_string()),
+                parameters: Vec::new(),
+                source_ref: evaluation.source_ref().clone(),
+            },
+            CheckedEvaluationKind::ReadOnlyProviderEffect => CheckedEvaluationSignature {
+                name: evaluation.name().to_string(),
+                kind: evaluation.kind(),
+                actor: Some(evaluation.actor_authority_origin().to_string()),
+                // This generic legacy field is an owner-operation signature
+                // coordinate.  The external effect's executor remains only
+                // in its typed Core and evaluation axes.
+                owner_locus: None,
                 parameters: Vec::new(),
                 source_ref: evaluation.source_ref().clone(),
             },
@@ -2625,6 +2733,25 @@ fn checked_identity_structure(
                     consumer.policy_stamp(),
                 )
             }
+            CheckedEvaluationKind::ReadOnlyProviderEffect => {
+                let effect = evaluation
+                    .read_only_provider_effect_core()
+                    .expect("provider evaluation retains its typed external Core");
+                format!(
+                    "read-only-provider-effect:{}:{}:{}:{}:{}:{:?}:{}:{}:{}:{:?}:{:?}",
+                    effect.operation(),
+                    effect.requester_principal(),
+                    effect.requester_locus(),
+                    effect.executor_locus(),
+                    effect.result_consumer_locus(),
+                    effect.adapter_profile(),
+                    effect.logical_resource_slot(),
+                    effect.result_type(),
+                    effect.observation_label(),
+                    effect.allowance(),
+                    effect.source_ref(),
+                )
+            }
             CheckedEvaluationKind::ConsumerLocalProjection => {
                 unreachable!("M7 has no standalone consumer-projection evaluation")
             }
@@ -2660,6 +2787,7 @@ fn build_checked_artifact(
 ) -> CheckedSurfaceV0 {
     let mut evaluations = Vec::new();
     let mut source_map = CheckedSourceMap::default();
+    let mut residual_entries = Vec::new();
     for assignment in ast.assignments() {
         let m6_owner_template = consumed_m6_classification
             .core_template(assignment.event())
@@ -2714,6 +2842,7 @@ fn build_checked_artifact(
             relation_core: None,
             designated_core: None,
             designated_result_consumer_core: None,
+            read_only_provider_effect_core: None,
             authority_requirements: AuthorityRequirements::default(),
             evaluation_axes: EvaluationAxes::new(
                 SemanticForm::State,
@@ -2771,7 +2900,98 @@ fn build_checked_artifact(
         }
     }
 
-    let mut residual_entries = Vec::new();
+    for effect in ast.read_only_provider_effects() {
+        let template = consumed_m6_classification
+            .read_only_provider_effect_template(effect.name())
+            .expect("accepted M6 classification retains every provider-effect template");
+        let provider_core = CheckedReadOnlyProviderEffectCore::from_template(template)
+            .expect("M7 validates the fixed provider adapter profile before Core construction");
+        let source_span = PipelineSourceSpan::from_surface(template.declaration_span());
+        let operation = provider_core.operation().to_string();
+        let requester_principal = provider_core.requester_principal().to_string();
+        let requester_locus = provider_core.requester_locus().to_string();
+        let executor_locus = provider_core.executor_locus().to_string();
+        let result_consumer_locus = provider_core.result_consumer_locus().to_string();
+        evaluations.push(CheckedEvaluation {
+            kind: CheckedEvaluationKind::ReadOnlyProviderEffect,
+            name: operation.clone(),
+            result_name: None,
+            actor_authority_origin: requester_principal.clone(),
+            authority_origin_locus: requester_locus.clone(),
+            // Never use this legacy owner-operation locator for the executor.
+            owner_evaluation_locus: String::new(),
+            declared_failure_row: FailureRow::new(
+                provider_core.declared_failures().iter().cloned(),
+            ),
+            generated_failure_row: FailureRow::new(
+                READ_ONLY_PROVIDER_FAILURES
+                    .iter()
+                    .map(|failure| (*failure).to_string()),
+            ),
+            owner_rmw_core: None,
+            relation_core: None,
+            designated_core: None,
+            designated_result_consumer_core: None,
+            read_only_provider_effect_core: Some(provider_core),
+            authority_requirements: AuthorityRequirements::read_only_provider_effect(
+                operation.clone(),
+                requester_principal.clone(),
+                executor_locus.clone(),
+                result_consumer_locus.clone(),
+            ),
+            evaluation_axes: EvaluationAxes::new(
+                SemanticForm::Computation,
+                EvaluationSite::Locus(Locus::new(executor_locus.clone())),
+                TriggerClock::OnRequest,
+                AuthorityOrigin::Caller(Principal::new(requester_principal.clone())),
+                Materialization::PublishValue,
+            ),
+            effect_row: EffectRow {
+                entries: [
+                    EffectKind::ReadOnlyProviderEffectRequest,
+                    EffectKind::ReadOnlyProviderEffectInvocation,
+                    EffectKind::ReadOnlyProviderEffectResult,
+                    EffectKind::ReadOnlyProviderEffectResultConsume,
+                ]
+                .into_iter()
+                .map(|kind| EffectEntry::new(kind, source_span.clone()))
+                .collect(),
+            },
+            generated_obligations: GeneratedObligations::read_only_provider_effect(
+                source_span.clone(),
+            ),
+        });
+        for (kind, suffix) in [
+            (SourceToCoreKind::ReadOnlyProviderEffectRequest, "request"),
+            (
+                SourceToCoreKind::ReadOnlyProviderEffectInvocation,
+                "invocation",
+            ),
+            (SourceToCoreKind::ReadOnlyProviderEffectResult, "result"),
+            (
+                SourceToCoreKind::ReadOnlyProviderEffectResultConsume,
+                "result-consume",
+            ),
+        ] {
+            source_map.add(
+                source_span.clone(),
+                kind,
+                format!(
+                    "{operation}:provider-effect-{suffix}:requester={requester_locus}:executor={executor_locus}:consumer={result_consumer_locus}"
+                ),
+            );
+        }
+        // Stage 1 retains the checked effect but makes every pre-existing
+        // executable route fail closed until its distinct projection/runtime
+        // carrier is present.
+        residual_entries.push(ResidualObligation::new(
+            ResidualObligationKind::ReadOnlyProviderEffectRuntimeUnsupported,
+            operation,
+            source_span,
+            None,
+        ));
+    }
+
     for relation in ast.relations() {
         let span = PipelineSourceSpan::from_surface(
             consumed_m6_classification
@@ -2806,6 +3026,7 @@ fn build_checked_artifact(
             relation_core: Some(relation_core),
             designated_core: None,
             designated_result_consumer_core: None,
+            read_only_provider_effect_core: None,
             authority_requirements: AuthorityRequirements::default(),
             evaluation_axes: EvaluationAxes::new(
                 SemanticForm::Relation,
@@ -2911,6 +3132,7 @@ fn build_checked_artifact(
             relation_core: None,
             designated_core: Some(designated_core),
             designated_result_consumer_core: None,
+            read_only_provider_effect_core: None,
             authority_requirements: AuthorityRequirements::default(),
             evaluation_axes: EvaluationAxes::new(
                 SemanticForm::Value,
@@ -2992,6 +3214,7 @@ fn build_checked_artifact(
             relation_core: None,
             designated_core: None,
             designated_result_consumer_core: Some(consumer_core),
+            read_only_provider_effect_core: None,
             authority_requirements: AuthorityRequirements::designated_result_consumer(
                 evaluator.clone(),
                 result.clone(),
@@ -3097,6 +3320,7 @@ fn m7_static_diagnostic(
 ) -> Option<SurfaceV0PipelineDiagnostics> {
     duplicate_diagnostic(source, ast)
         .or_else(|| declaration_consistency_diagnostic(ast))
+        .or_else(|| read_only_provider_effect_diagnostic(ast))
         .or_else(|| generated_failure_diagnostic(source, ast, consumed_m6_classification))
         .or_else(|| expression_diagnostic(source, ast))
 }
@@ -3332,6 +3556,67 @@ fn declaration_consistency_diagnostic(ast: &SurfaceV0File) -> Option<SurfaceV0Pi
     None
 }
 
+fn read_only_provider_effect_diagnostic(
+    ast: &SurfaceV0File,
+) -> Option<SurfaceV0PipelineDiagnostics> {
+    if ast.read_only_provider_effects().len() > 1 {
+        return Some(SurfaceV0PipelineDiagnostics::one(
+            M7DiagnosticKind::DuplicateReadOnlyProviderEffect,
+            PipelineSourceSpan::from_surface(ast.read_only_provider_effects()[1].span()),
+        ));
+    }
+    let effect = ast.read_only_provider_effect()?;
+    if effect.requester_principal() != "self"
+        || ast.principal(effect.requester_principal()).is_none()
+    {
+        return Some(SurfaceV0PipelineDiagnostics::one(
+            M7DiagnosticKind::ReadOnlyProviderEffectProfileMismatch,
+            PipelineSourceSpan::from_surface(effect.requester_principal_span()),
+        ));
+    }
+    if ast.locus(effect.requester_locus()).is_none() {
+        return Some(SurfaceV0PipelineDiagnostics::one(
+            M7DiagnosticKind::UndefinedReadOnlyProviderRequesterLocus,
+            PipelineSourceSpan::from_surface(effect.requester_locus_span()),
+        ));
+    }
+    if ast.locus(effect.executor_locus()).is_none() {
+        return Some(SurfaceV0PipelineDiagnostics::one(
+            M7DiagnosticKind::UndefinedReadOnlyProviderExecutorLocus,
+            PipelineSourceSpan::from_surface(effect.executor_locus_span()),
+        ));
+    }
+    if effect.requester_locus() == effect.executor_locus()
+        || effect.adapter_profile() != "read_int"
+        || effect.result_type() != "Int"
+        || effect.observation_label() != READ_ONLY_PROVIDER_OBSERVATION_LABEL
+        || effect.max_bytes() != READ_ONLY_PROVIDER_MAX_BYTES
+        || effect.max_calls() != READ_ONLY_PROVIDER_MAX_CALLS
+        || ast.when(effect.name()).is_some()
+    {
+        let span = if effect.requester_locus() == effect.executor_locus() {
+            effect.executor_locus_span()
+        } else if effect.adapter_profile() != "read_int" {
+            effect.adapter_profile_span()
+        } else if effect.result_type() != "Int" {
+            effect.result_type_span()
+        } else if effect.observation_label() != READ_ONLY_PROVIDER_OBSERVATION_LABEL {
+            effect.observation_label_span()
+        } else if effect.max_bytes() != READ_ONLY_PROVIDER_MAX_BYTES {
+            effect.max_bytes_span()
+        } else if effect.max_calls() != READ_ONLY_PROVIDER_MAX_CALLS {
+            effect.max_calls_span()
+        } else {
+            effect.span()
+        };
+        return Some(SurfaceV0PipelineDiagnostics::one(
+            M7DiagnosticKind::ReadOnlyProviderEffectProfileMismatch,
+            PipelineSourceSpan::from_surface(span),
+        ));
+    }
+    None
+}
+
 fn generated_failure_diagnostic(
     source: &FixtureSource,
     ast: &SurfaceV0File,
@@ -3372,6 +3657,39 @@ fn generated_failure_diagnostic(
                 .unwrap_or_else(|| PipelineSourceSpan::from_surface(when.span()));
             return Some(SurfaceV0PipelineDiagnostics::missing_generated_failure(
                 span, missing,
+            ));
+        }
+    }
+    if let Some(effect) = ast.read_only_provider_effect() {
+        let declared = FailureRow::new(effect.failures().iter().cloned());
+        let generated = FailureRow::new(
+            READ_ONLY_PROVIDER_FAILURES
+                .iter()
+                .map(|failure| (*failure).to_string()),
+        );
+        let exact_distinct_row = declared.names().len() == READ_ONLY_PROVIDER_FAILURES.len()
+            && declared
+                .names()
+                .iter()
+                .collect::<std::collections::BTreeSet<_>>()
+                .len()
+                == READ_ONLY_PROVIDER_FAILURES.len()
+            && generated.is_subset_of(&declared)
+            && declared.is_subset_of(&generated);
+        if !exact_distinct_row {
+            if let Some(missing) = generated
+                .names()
+                .into_iter()
+                .find(|name| !declared.names().iter().any(|candidate| candidate == name))
+            {
+                return Some(SurfaceV0PipelineDiagnostics::missing_generated_failure(
+                    PipelineSourceSpan::from_surface(effect.failures_span()),
+                    missing,
+                ));
+            }
+            return Some(SurfaceV0PipelineDiagnostics::one(
+                M7DiagnosticKind::ReadOnlyProviderEffectProfileMismatch,
+                PipelineSourceSpan::from_surface(effect.failures_span()),
             ));
         }
     }

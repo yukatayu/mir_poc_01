@@ -15,6 +15,9 @@ use crate::{
     surface_v0_pipeline::{
         CheckedProgramIdentity, CheckedSurfaceV0, EffectKind, ResidualObligationKind,
     },
+    surface_v0_provider_effect::{
+        READ_ONLY_PROVIDER_FAILURES, ReadOnlyProviderAdapterProfile, ReadOnlyProviderAllowance,
+    },
 };
 
 pub const M9_FINITE_REFINEMENT_WITNESS_SCHEMA: &str = "m9-proof-witness-required";
@@ -38,6 +41,10 @@ pub enum M9FiniteEffectKind {
     DesignatedValuePublish,
     DesignatedResultDelivery,
     DesignatedResultConsume,
+    ReadOnlyProviderEffectRequest,
+    ReadOnlyProviderEffectInvocation,
+    ReadOnlyProviderEffectResult,
+    ReadOnlyProviderEffectResultConsume,
     /// Candidate-only sentinel for a requested effect with no M7 source row.
     /// It exists so the finite checker can represent and reject an actual
     /// effect-set expansion without inventing a runtime effect primitive.
@@ -58,6 +65,12 @@ impl From<EffectKind> for M9FiniteEffectKind {
             EffectKind::DesignatedValuePublish => Self::DesignatedValuePublish,
             EffectKind::DesignatedResultDelivery => Self::DesignatedResultDelivery,
             EffectKind::DesignatedResultConsume => Self::DesignatedResultConsume,
+            EffectKind::ReadOnlyProviderEffectRequest => Self::ReadOnlyProviderEffectRequest,
+            EffectKind::ReadOnlyProviderEffectInvocation => Self::ReadOnlyProviderEffectInvocation,
+            EffectKind::ReadOnlyProviderEffectResult => Self::ReadOnlyProviderEffectResult,
+            EffectKind::ReadOnlyProviderEffectResultConsume => {
+                Self::ReadOnlyProviderEffectResultConsume
+            }
         }
     }
 }
@@ -306,6 +319,11 @@ fn source_contract_from_checked(checked: &CheckedSurfaceV0) -> M9FiniteContract 
                 .capability_requirements
                 .insert("Authority".to_string());
         }
+        if obligations.contains_provider_effect_authorization() {
+            contract
+                .capability_requirements
+                .insert("ReadOnlyProviderEffectUse".to_string());
+        }
         if let Some(designated) = evaluation.designated_core() {
             contract.observations.insert(
                 format!("evaluation:{}", evaluation.name()),
@@ -314,6 +332,165 @@ fn source_contract_from_checked(checked: &CheckedSurfaceV0) -> M9FiniteContract 
         }
     }
     contract
+}
+
+fn has_read_only_provider_effect(checked: &CheckedSurfaceV0) -> bool {
+    checked
+        .evaluations()
+        .iter()
+        .any(|evaluation| evaluation.read_only_provider_effect_core().is_some())
+}
+
+/// A source-derived M9 contract for the finite provider effect.  It retains
+/// only checked static coordinates; constructing it neither verifies a
+/// runtime policy decision nor issues an effect-use capability.
+#[derive(Debug, Clone, PartialEq, Eq)]
+pub struct M9ReadOnlyProviderEffectContract {
+    program_identity: CheckedProgramIdentity,
+    source_ref: SourceRef,
+    operation: String,
+    requester_principal: String,
+    requester_locus: String,
+    executor_locus: String,
+    result_consumer_locus: String,
+    adapter_profile: ReadOnlyProviderAdapterProfile,
+    logical_resource_slot: String,
+    allowance: ReadOnlyProviderAllowance,
+    failures: BTreeSet<String>,
+    effects: BTreeSet<M9FiniteEffectKind>,
+    observation_label: String,
+}
+
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+pub enum M9ReadOnlyProviderEffectContractError {
+    MissingCheckedEffect,
+    MultipleCheckedEffects,
+    InvalidCheckedEffect,
+}
+
+impl M9ReadOnlyProviderEffectContract {
+    pub fn try_from_checked(
+        checked: &CheckedSurfaceV0,
+        operation: &str,
+    ) -> Result<Self, M9ReadOnlyProviderEffectContractError> {
+        let matching = checked
+            .evaluations()
+            .iter()
+            .filter(|evaluation| {
+                evaluation.name() == operation
+                    && evaluation.read_only_provider_effect_core().is_some()
+            })
+            .collect::<Vec<_>>();
+        let [evaluation] = matching.as_slice() else {
+            return Err(if matching.is_empty() {
+                M9ReadOnlyProviderEffectContractError::MissingCheckedEffect
+            } else {
+                M9ReadOnlyProviderEffectContractError::MultipleCheckedEffects
+            });
+        };
+        let core = evaluation
+            .read_only_provider_effect_core()
+            .expect("filtered provider evaluation retains its Core");
+        let failures = core
+            .declared_failures()
+            .iter()
+            .cloned()
+            .collect::<BTreeSet<_>>();
+        let effects = evaluation
+            .effect_row()
+            .entries()
+            .iter()
+            .map(|entry| entry.kind().into())
+            .collect::<BTreeSet<_>>();
+        let expected_effects = [
+            M9FiniteEffectKind::ReadOnlyProviderEffectRequest,
+            M9FiniteEffectKind::ReadOnlyProviderEffectInvocation,
+            M9FiniteEffectKind::ReadOnlyProviderEffectResult,
+            M9FiniteEffectKind::ReadOnlyProviderEffectResultConsume,
+        ]
+        .into_iter()
+        .collect::<BTreeSet<_>>();
+        let expected_failures = READ_ONLY_PROVIDER_FAILURES
+            .iter()
+            .map(|failure| (*failure).to_string())
+            .collect::<BTreeSet<_>>();
+        if core.requester_locus() != core.result_consumer_locus()
+            || core.adapter_profile() != ReadOnlyProviderAdapterProfile::ReadInt
+            || core.result_type() != "Int"
+            || core.observation_label() != "observer_safe"
+            || core.allowance() != ReadOnlyProviderAllowance::fixed()
+            || failures != expected_failures
+            || effects != expected_effects
+            || !evaluation
+                .authority_requirements()
+                .requires_read_only_provider_effect_authority(
+                    core.operation(),
+                    core.requester_principal(),
+                    core.executor_locus(),
+                    core.result_consumer_locus(),
+                )
+        {
+            return Err(M9ReadOnlyProviderEffectContractError::InvalidCheckedEffect);
+        }
+        Ok(Self {
+            program_identity: checked.program_identity().clone(),
+            source_ref: core.source_ref().clone(),
+            operation: core.operation().to_string(),
+            requester_principal: core.requester_principal().to_string(),
+            requester_locus: core.requester_locus().to_string(),
+            executor_locus: core.executor_locus().to_string(),
+            result_consumer_locus: core.result_consumer_locus().to_string(),
+            adapter_profile: core.adapter_profile(),
+            logical_resource_slot: core.logical_resource_slot().to_string(),
+            allowance: core.allowance(),
+            failures,
+            effects,
+            observation_label: core.observation_label().to_string(),
+        })
+    }
+
+    pub fn program_identity(&self) -> &CheckedProgramIdentity {
+        &self.program_identity
+    }
+    pub fn source_ref(&self) -> &SourceRef {
+        &self.source_ref
+    }
+    pub fn operation(&self) -> &str {
+        &self.operation
+    }
+    pub fn requester_principal(&self) -> &str {
+        &self.requester_principal
+    }
+    pub fn requester_locus(&self) -> &str {
+        &self.requester_locus
+    }
+    pub fn executor_locus(&self) -> &str {
+        &self.executor_locus
+    }
+    pub fn result_consumer_locus(&self) -> &str {
+        &self.result_consumer_locus
+    }
+    pub const fn adapter_profile(&self) -> ReadOnlyProviderAdapterProfile {
+        self.adapter_profile
+    }
+    pub fn logical_resource_slot(&self) -> &str {
+        &self.logical_resource_slot
+    }
+    pub const fn allowance(&self) -> ReadOnlyProviderAllowance {
+        self.allowance
+    }
+    pub fn failures(&self) -> Vec<&str> {
+        self.failures.iter().map(String::as_str).collect()
+    }
+    pub fn effects(&self) -> Vec<M9FiniteEffectKind> {
+        self.effects.iter().copied().collect()
+    }
+    pub fn observation_label(&self) -> &str {
+        &self.observation_label
+    }
+    pub const fn grants_authority(&self) -> bool {
+        false
+    }
 }
 
 fn normalized_delta(
@@ -501,6 +678,7 @@ pub enum M9FiniteRefinementErrorKind {
     ModuleContractMismatch,
     ReplayedEvidence,
     UnverifiedArtifact,
+    ReadOnlyProviderEffectRequiresDedicatedRuntime,
 }
 
 #[derive(Debug, Clone, PartialEq, Eq)]
@@ -618,6 +796,11 @@ impl M9FiniteRefinementChecker {
         checked: &CheckedSurfaceV0,
         candidate: M9ContractCandidate,
     ) -> Result<M9FiniteRefinementDischarge, M9FiniteRefinementDiagnostics> {
+        if has_read_only_provider_effect(checked) {
+            return Err(M9FiniteRefinementDiagnostics::one(
+                M9FiniteRefinementErrorKind::ReadOnlyProviderEffectRequiresDedicatedRuntime,
+            ));
+        }
         let Some(residual) = checked
             .residual_obligations()
             .entries()
@@ -750,6 +933,11 @@ impl M9FiniteRefinementChecker {
         checked: &CheckedSurfaceV0,
         evidence: M9FiniteRefinementEvidence,
     ) -> Result<M9FiniteRefinementDischarge, M9FiniteRefinementDiagnostics> {
+        if has_read_only_provider_effect(checked) {
+            return Err(M9FiniteRefinementDiagnostics::one(
+                M9FiniteRefinementErrorKind::ReadOnlyProviderEffectRequiresDedicatedRuntime,
+            ));
+        }
         let Some(residual) = checked
             .residual_obligations()
             .entries()

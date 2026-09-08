@@ -1,6 +1,6 @@
 # Plan 250 — Mirrorea I3 Distributed Foundation current execution roadmap
 
-最終更新: 2026-09-08 12:43 JST
+最終更新: 2026-09-08 13:47 JST
 
 ## 役割、authority、current control state
 
@@ -56,8 +56,10 @@ roadmap/status pointer の一致を検証する。
 - sole active semantic milestone: **I3-3**
 - current component checkpoint: **row 11 / spec/16 bounded time-and-reply
   evidence integrated at `55f1fd7f`, pushed with clean remote parity**.
-  ADR-0042/spec/17 selects the provider contract; source/checker implementation
-  is the current I3-3 component, not a new milestone.
+  ADR-0042/spec/17 selects the provider contract; its source/checker and
+  fail-closed legacy guards are verified, with component Git integration
+  pending. Exact mixed-program coverage, projection and independent effect
+  permission are the next I3-3 consumer, not a new milestone.
 - next goal: **I3-4 (requires I3-3 acceptance and explicit owner resume)**
 - all other milestones: **ordered, inactive, and dependency-gated**
 - latest owner control (2026-09-07 18:13 JST observation): complete I3-3 with
@@ -1332,6 +1334,12 @@ arbitrary file access, new roadmap or milestone is opened.
 
 #### Provider implementation sequence (activation follows contract adoption)
 
+Contract integration is committed/pushed as
+`985ee179b76d8e1a9e72571ef5a275e190ae4cf9`, with clean HEAD/origin/main/live
+remote parity observed `2026-09-08T12:50:23+09:00`. Stage 1 starts from that
+exact cut. The test author owns only the new source fixture and source test;
+the production writer waits for the evaluator's actual behavioral RED.
+
 **Goal:** The existing checked-source pipeline retains a distinct authorized
 external invocation and executes its actual typed provider result/failure
 through the selected two-process transport, without owner writes or hidden
@@ -1390,17 +1398,39 @@ fn ordinary_provider_source_is_checked() {
 
 - [x] Contract review/adoption and docs validation (Canon index 216,
   hierarchy 800/800, scaffold 1760; diff and bounded 17-file secret scan clean).
-- [ ] Test-only source fixture and `crates/mir-semantics/tests/i3_provider_effect.rs`;
+- [x] Test-only source fixture and `crates/mir-semantics/tests/i3_provider_effect.rs`;
   execute `cargo test --locked -p mir-semantics --test i3_provider_effect
   ordinary_provider_source_is_checked -- --test-threads=1` and capture the
   actual unsupported-source assertion failure before production changes.
-- [ ] Implement AST/M6/M7 preservation; add focused typed tests for exact
+  Actual RED at `985ee179`: one test body fails `UnexpectedSyntax` at source
+  line 57 (`effect`), not a missing API; log
+  `/tmp/c3-provider-effect-initial-red-20260908.BgbxVG/01-provider-effect.log`.
+  Parent inspected the log and authorized the bounded AST/semantics writer;
+  separate typed source tests are being added. No provider runtime is enabled.
+- [x] Implement AST/M6/M7 preservation; add focused typed tests for exact
   coordinates, ten generated failures, one-declaration limit, unsupported
   profile, underdeclared failure, identity change and non-erasing snapshots.
-- [ ] Run the whole new source target plus existing M6/M7/budget targets;
+- [x] Run the whole new source target plus existing M6/M7/budget targets;
   map and test every unsupported execution/export guard before handoff.
-- [ ] Stage 1 independent review and precise downstream interface packet;
+- [x] Stage 1 independent review and precise downstream interface packet;
   source support alone is not admitted provider execution.
+
+Stage 1 final evidence: source 17/17, constructor-privacy doctest 1/1,
+private runtime guards 2/2, public runtime guards 5/5; existing AST/M6/M7/time
+targets pass. Feature-union runtime library 334/334 and process integration
+63/63 pass, as do M8 7/7, M9 external boundary 1/1, SYS5 5/5, I2 CLI 8/8
+and M10 67/67. Three-crate all-target Clippy, workspace all-target compilation
+and format pass. Workspace compilation is not workspace test execution;
+overlapping suites are not added together. Source/spec and runtime quality
+reviews report no remaining P0/P1/P2 after three construction/restore repairs.
+Exact commands, logs, skipped final gates and component Git status are in
+Report 2606. The new sample is source-checking evidence only.
+
+Stage 2 must preserve default legacy rejection while introducing explicit,
+source-bound mixed-program coverage and separate provider permission. It must
+not silently erase provider Core to materialize M8 or treat an owner grant as
+effect authorization. A bounded advisory Oracle comparison checks that handoff;
+no second transport/runtime or I3-4 implementation is opened.
 
 The sole evaluator serializes Cargo with `CARGO_INCREMENTAL=0`,
 `CARGO_BUILD_JOBS=2`, `--locked` and serial tests. Before heavy commands inspect
