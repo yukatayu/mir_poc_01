@@ -315,20 +315,15 @@ recordが揃ったためofficial I2 entry後exitを受理しました。broad PH
   Independent narrow review finds no remaining P0/P1 in the repaired slice;
   I2 regressions 5/5 + 8/8 and M10 conformance 67/67 pass. This is checkpoint
   evidence over `7580e3a`, not I3-3 acceptance or a refreshed model.
-- current I3-3 work: ADR-0041/spec/16 selects an explicit source owner-admission
-  budget in pushed checkpoint `050f5067`. The dirty C1/C2/C3 delta includes the
-  serialized owner clock, bounded ledger states, one-use permit, M9 revalidation,
-  and G1/G2 repairs. Frozen C3 owner evidence is 19/19; G1-pending→G2 decision
-  is 1/1, private QUIC module is 3/3, and full process-runtime integration is
-  63/63. Extra dropped-expiry replay and queued-handoff slices pass 1/1 each.
-  Scoped runtime Clippy with both I3 features and `-Dwarnings` is green; source
-  budget predecessor is 4/4; current probe integration is 38/38, with no matching children remaining.
-  A real budget run passes 1/1 with two exec children reaped, request/serve/
-  write/reply/receipt, and four exact delivery joins. Host-driver is 5/5 and
-  broad local I3 library 61/61. Actual-time whole review selects requester-local
-  T0 pending-wait after B serve/lost-reply physical close, with no new clock
-  contract or transport timeout. Provider and remaining 20 families/order remain
-  open; no row-17 or I3-3 acceptance is claimed.
+- current I3-3 work: the pushed `30429d5` checkpoint implements ADR-0041/spec/16's
+  source owner-admission budget, genuine expiry delivery, lost-result uncertainty
+  and requester-local wait. The successor row-11 delta now rejects actual
+  successful/expiry reply replay through verified QUIC session 2, preserving the
+  first receipt/terminal and owner state; wrong-session replay rejects prewrite.
+  Final independent review has P0/P1/P2 zero. The bounded time/reply consumer is
+  ready for documentation/commit/parity integration; provider contract selection
+  is next. All remaining I3-3 failure/order obligations stay required; I3-3 itself
+  is not accepted, and I3-4 remains inactive.
 - decisions taken: the working interpretation remains ordinary meaning ->
   generated distribution -> continually checked composition. World/Avatar remain
   domain-library vocabulary, not Mir Core primitives; ledger64/coordinator/
@@ -349,18 +344,15 @@ recordが揃ったためofficial I2 entry後exitを受理しました。broad PH
   SYS-5/SYS-6 CLI/JSON/grammar are internal/provisional, the four-locus toy is
   not whole-workflow OW1, and the evidence is not a general scheduler,
   memory-model, relation-DAG, public transport, or lifecycle theorem.
-- verification status: accepted I3-2 regression evidence remains cached prior
-  evidence. Current C3 validation includes the real budget run 1/1, host-driver
-  5/5, broad local I3 library 61/61, private QUIC 3/3, and process-runtime
-  integration 63/63. Local-wait six named tests/seven cases and full probe 38/38
-  are green; narrow local-wait review is closed. Live delivered-expiry, lost-
-  reply, expired-reconnect, and producer getter 2/2 are green. Remaining are
-  full-time review and actual row-11 reply replay. Genuine G1→G2 requester
-  stale-binder evidence is already local-green; its network-path correspondence
-  must be retained. Whole runtime library 332/332, integration 63/63, Clippy and
-  format are green. Provider and remaining matrix/order validation remain open.
-  No retry/reconnect acceptance or I3-3 milestone acceptance is
-  claimed. This timestamped checkpoint is not milestone acceptance.
+- verification status: current full probe 41/41, final focused replay 3/3,
+  two-crate all-target Clippy and workspace format pass, with no orphan children.
+  Runtime library 332/process integration 63/I2-M10 5/8/67 are retained `30429d5`
+  baseline evidence, not reruns of this replay delta. Genuine G1-expiry→G2
+  requester rejection remains local binder evidence; inspection confirms actual
+  QUIC uses the same binder before consumption, not an actual network-generation
+  update. Report 2606 keeps exact logs and finite runtime-only classification.
+  Provider, remaining membership/redaction/cut and full ordering/acceptance remain
+  open. No whole-I3-3, official lifecycle or public workflow claim follows.
 
 ## Historical plan index（Plan 249を含めrepository memory、current queueではない）
 

@@ -69,6 +69,412 @@ pub enum I3LocalnetRequesterLocalWaitFalsifier {
     ClearPostWaitPendingObservation,
 }
 
+/// Selects one bounded T0 fault-driver replay of B's already-written,
+/// source-generated owner reply.  It does not select a request retry, source
+/// operation, authority, expected result, or caller-provided reply body.
+#[doc(hidden)]
+#[derive(Clone, Copy, Debug, Eq, PartialEq, Serialize, Deserialize)]
+#[serde(rename_all = "snake_case")]
+pub enum I3LocalnetOwnerReplyReplayProfile {
+    ReplayKnownOwnerReplyOnVerifiedSuccessorSession,
+}
+
+/// Negative-only control for the bounded generated-owner-reply replay.  The
+/// opaque adapter token itself rejects this on the initial session before a
+/// second owner write or new transport occurrence can exist.
+#[doc(hidden)]
+#[derive(Clone, Copy, Debug, Eq, PartialEq, Serialize, Deserialize)]
+#[serde(rename_all = "snake_case")]
+pub enum I3LocalnetOwnerReplyReplayFalsifier {
+    ReplayOnInitialVerifiedSession,
+}
+
+/// The local initiator of a replay observation.  This is distinct from the
+/// source-owned semantic request/reply lifecycle.
+#[doc(hidden)]
+#[derive(Clone, Copy, Debug, Eq, PartialEq)]
+pub enum I3LocalnetOwnerReplyReplayInitiator {
+    T0FaultDriver,
+}
+
+/// Why the observer retained the bounded replay schedule.  It is not a
+/// source-authorized retry policy or a semantic result selector.
+#[doc(hidden)]
+#[derive(Clone, Copy, Debug, Eq, PartialEq)]
+pub enum I3LocalnetOwnerReplyReplayReason {
+    KnownGeneratedOwnerReplyReplay,
+}
+
+/// The known first requester decision before the replay driver is invoked.
+/// The requester's exact retained receipt/terminal occurrence remains in the
+/// corresponding observer snapshot instead of being reconstructed here.
+#[doc(hidden)]
+#[derive(Clone, Debug)]
+pub enum I3LocalnetOwnerReplyReplayFirstOutcome {
+    ReceiptConsumed,
+    TerminalFailureConsumed {
+        owner_expiry: I3LocalnetOwnerAdmissionExpiryEvidence,
+    },
+}
+
+/// The existing generic receiver binder's exact typed rejection for the
+/// session-two replay.  It exposes only the rejected adapter attempt, never
+/// raw frame bytes or decoded untrusted provenance.
+#[doc(hidden)]
+#[derive(Clone, Debug)]
+pub enum I3LocalnetOwnerReplyReplayReceiverRejection {
+    CarrierAdmissionRejected {
+        rejected_candidate_commitment_ref: String,
+        network_occurrence_ref: String,
+    },
+}
+
+/// The actual replay disposition.  A pre-write local refusal deliberately
+/// has no replay delivery record.
+#[doc(hidden)]
+#[derive(Clone, Debug)]
+pub enum I3LocalnetOwnerReplyReplayOutcome {
+    ReceiverRejected {
+        replay_reply_send: Box<I3LocalnetObserverSafeDeliveryRecord>,
+        receiver_rejection: I3LocalnetOwnerReplyReplayReceiverRejection,
+    },
+    RejectedBeforeReplayWrite {
+        rejection: super::i3_process_localnet::I3LocalnetAdapterRejectionKind,
+    },
+}
+
+/// Requester-local state observed immediately after the first known result
+/// and at A's final local observation. The latter follows generic replay
+/// rejection only when a successor is actually received; otherwise it is the
+/// post-close local state. Neither is inferred from the selected profile.
+#[doc(hidden)]
+#[derive(Clone, Debug)]
+pub struct I3LocalnetOwnerReplyReplayRequesterState {
+    pending_request_count: usize,
+    receipt_count: usize,
+    terminal_failure_count: usize,
+    receipt_occurrence_ref: Option<String>,
+    terminal_failure_occurrence_ref: Option<String>,
+}
+
+impl I3LocalnetOwnerReplyReplayRequesterState {
+    pub(crate) fn from_actual_observation(
+        pending_request_count: usize,
+        receipt_count: usize,
+        terminal_failure_count: usize,
+        receipt_occurrence_ref: Option<String>,
+        terminal_failure_occurrence_ref: Option<String>,
+    ) -> Self {
+        Self {
+            pending_request_count,
+            receipt_count,
+            terminal_failure_count,
+            receipt_occurrence_ref,
+            terminal_failure_occurrence_ref,
+        }
+    }
+
+    pub const fn pending_request_count(&self) -> usize {
+        self.pending_request_count
+    }
+
+    pub const fn receipt_count(&self) -> usize {
+        self.receipt_count
+    }
+
+    pub const fn terminal_failure_count(&self) -> usize {
+        self.terminal_failure_count
+    }
+
+    pub fn receipt_occurrence_ref(&self) -> Option<&str> {
+        self.receipt_occurrence_ref.as_deref()
+    }
+
+    pub fn terminal_failure_occurrence_ref(&self) -> Option<&str> {
+        self.terminal_failure_occurrence_ref.as_deref()
+    }
+}
+
+/// Owner-local state observed before and after the replay rejection.  It is
+/// intentionally separate from the requester snapshot, because the replay
+/// is rejected on A's generic receiver binder without another owner mutation.
+#[doc(hidden)]
+#[derive(Clone, Debug)]
+pub struct I3LocalnetOwnerReplyReplayOwnerState {
+    tombstone_count: usize,
+    served_owner_request_count: usize,
+    owner_mutation_count: usize,
+    expired_owner_admission_count: usize,
+}
+
+impl I3LocalnetOwnerReplyReplayOwnerState {
+    pub(crate) fn from_actual_observation(
+        tombstone_count: usize,
+        served_owner_request_count: usize,
+        owner_mutation_count: usize,
+        expired_owner_admission_count: usize,
+    ) -> Self {
+        Self {
+            tombstone_count,
+            served_owner_request_count,
+            owner_mutation_count,
+            expired_owner_admission_count,
+        }
+    }
+
+    pub const fn tombstone_count(&self) -> usize {
+        self.tombstone_count
+    }
+
+    pub const fn served_owner_request_count(&self) -> usize {
+        self.served_owner_request_count
+    }
+
+    pub const fn owner_mutation_count(&self) -> usize {
+        self.owner_mutation_count
+    }
+
+    pub const fn expired_owner_admission_count(&self) -> usize {
+        self.expired_owner_admission_count
+    }
+}
+
+/// Session evidence emitted by one replay child.  The successor-session
+/// fields stay `None` when the token is refused locally on the first session.
+#[doc(hidden)]
+#[derive(Clone, Debug)]
+pub struct I3LocalnetOwnerReplyReplayChildAudit {
+    slot: I3LocalnetChildSlot,
+    run_ref: String,
+    first_session_generation: u8,
+    first_session_peer_spki_verified: bool,
+    first_session_reciprocal_preface_verified: bool,
+    replay_session_generation: Option<u8>,
+    replay_session_peer_spki_verified: Option<bool>,
+    replay_session_reciprocal_preface_verified: Option<bool>,
+    terminal_outcome: I3LocalnetChildTerminalOutcome,
+}
+
+impl I3LocalnetOwnerReplyReplayChildAudit {
+    #[expect(
+        clippy::too_many_arguments,
+        reason = "the replay child exposes each independently observed session and terminal fact without a synthetic session wrapper"
+    )]
+    pub(crate) fn from_actual_observation(
+        slot: I3LocalnetChildSlot,
+        run_ref: String,
+        first_session_generation: u8,
+        first_session_peer_spki_verified: bool,
+        first_session_reciprocal_preface_verified: bool,
+        replay_session_generation: Option<u8>,
+        replay_session_peer_spki_verified: Option<bool>,
+        replay_session_reciprocal_preface_verified: Option<bool>,
+        terminal_outcome: I3LocalnetChildTerminalOutcome,
+    ) -> Self {
+        Self {
+            slot,
+            run_ref,
+            first_session_generation,
+            first_session_peer_spki_verified,
+            first_session_reciprocal_preface_verified,
+            replay_session_generation,
+            replay_session_peer_spki_verified,
+            replay_session_reciprocal_preface_verified,
+            terminal_outcome,
+        }
+    }
+
+    pub const fn slot(&self) -> I3LocalnetChildSlot {
+        self.slot
+    }
+
+    pub fn run_ref(&self) -> &str {
+        &self.run_ref
+    }
+
+    pub const fn first_session_generation(&self) -> u8 {
+        self.first_session_generation
+    }
+
+    pub const fn first_session_peer_spki_verified(&self) -> bool {
+        self.first_session_peer_spki_verified
+    }
+
+    pub const fn first_session_reciprocal_preface_verified(&self) -> bool {
+        self.first_session_reciprocal_preface_verified
+    }
+
+    pub const fn replay_session_generation(&self) -> Option<u8> {
+        self.replay_session_generation
+    }
+
+    pub const fn replay_session_peer_spki_verified(&self) -> Option<bool> {
+        self.replay_session_peer_spki_verified
+    }
+
+    pub const fn replay_session_reciprocal_preface_verified(&self) -> Option<bool> {
+        self.replay_session_reciprocal_preface_verified
+    }
+
+    pub const fn terminal_outcome(&self) -> I3LocalnetChildTerminalOutcome {
+        self.terminal_outcome
+    }
+}
+
+/// Joined actual evidence for the T0 generated-reply replay.  The token
+/// origin references are copied only from B's one consumed opaque token,
+/// which was issued after the actual first reply write.
+#[doc(hidden)]
+#[derive(Clone, Debug)]
+pub struct I3LocalnetOwnerReplyReplayAudit {
+    profile: I3LocalnetOwnerReplyReplayProfile,
+    replay_initiator: I3LocalnetOwnerReplyReplayInitiator,
+    replay_reason: I3LocalnetOwnerReplyReplayReason,
+    request_identity_ref: String,
+    cohort_provenance_ref: String,
+    first_request_send: I3LocalnetObserverSafeDeliveryRecord,
+    first_request_receive: I3LocalnetObserverSafeDeliveryRecord,
+    first_reply_send: I3LocalnetObserverSafeDeliveryRecord,
+    first_reply_receive: I3LocalnetObserverSafeDeliveryRecord,
+    original_first_reply_send_occurrence_ref: String,
+    original_first_reply_carrier_ref: String,
+    first_outcome: I3LocalnetOwnerReplyReplayFirstOutcome,
+    replay_outcome: I3LocalnetOwnerReplyReplayOutcome,
+    requester_state_after_first: I3LocalnetOwnerReplyReplayRequesterState,
+    requester_final_state: I3LocalnetOwnerReplyReplayRequesterState,
+    owner_state_after_first: I3LocalnetOwnerReplyReplayOwnerState,
+    owner_state_after_replay_rejection: I3LocalnetOwnerReplyReplayOwnerState,
+    requester_child: I3LocalnetOwnerReplyReplayChildAudit,
+    owner_child: I3LocalnetOwnerReplyReplayChildAudit,
+}
+
+impl I3LocalnetOwnerReplyReplayAudit {
+    #[expect(
+        clippy::too_many_arguments,
+        reason = "the joined replay audit retains named actual child observations rather than an untyped intermediate bundle"
+    )]
+    pub(crate) fn from_actual_observation(
+        profile: I3LocalnetOwnerReplyReplayProfile,
+        request_identity_ref: String,
+        cohort_provenance_ref: String,
+        first_request_send: I3LocalnetObserverSafeDeliveryRecord,
+        first_request_receive: I3LocalnetObserverSafeDeliveryRecord,
+        first_reply_send: I3LocalnetObserverSafeDeliveryRecord,
+        first_reply_receive: I3LocalnetObserverSafeDeliveryRecord,
+        original_first_reply_send_occurrence_ref: String,
+        original_first_reply_carrier_ref: String,
+        first_outcome: I3LocalnetOwnerReplyReplayFirstOutcome,
+        replay_outcome: I3LocalnetOwnerReplyReplayOutcome,
+        requester_state_after_first: I3LocalnetOwnerReplyReplayRequesterState,
+        requester_final_state: I3LocalnetOwnerReplyReplayRequesterState,
+        owner_state_after_first: I3LocalnetOwnerReplyReplayOwnerState,
+        owner_state_after_replay_rejection: I3LocalnetOwnerReplyReplayOwnerState,
+        requester_child: I3LocalnetOwnerReplyReplayChildAudit,
+        owner_child: I3LocalnetOwnerReplyReplayChildAudit,
+    ) -> Self {
+        Self {
+            profile,
+            replay_initiator: I3LocalnetOwnerReplyReplayInitiator::T0FaultDriver,
+            replay_reason: I3LocalnetOwnerReplyReplayReason::KnownGeneratedOwnerReplyReplay,
+            request_identity_ref,
+            cohort_provenance_ref,
+            first_request_send,
+            first_request_receive,
+            first_reply_send,
+            first_reply_receive,
+            original_first_reply_send_occurrence_ref,
+            original_first_reply_carrier_ref,
+            first_outcome,
+            replay_outcome,
+            requester_state_after_first,
+            requester_final_state,
+            owner_state_after_first,
+            owner_state_after_replay_rejection,
+            requester_child,
+            owner_child,
+        }
+    }
+
+    pub const fn profile(&self) -> I3LocalnetOwnerReplyReplayProfile {
+        self.profile
+    }
+
+    pub const fn replay_initiator(&self) -> I3LocalnetOwnerReplyReplayInitiator {
+        self.replay_initiator
+    }
+
+    pub const fn replay_reason(&self) -> I3LocalnetOwnerReplyReplayReason {
+        self.replay_reason
+    }
+
+    pub fn request_identity_ref(&self) -> &str {
+        &self.request_identity_ref
+    }
+
+    pub fn cohort_provenance_ref(&self) -> &str {
+        &self.cohort_provenance_ref
+    }
+
+    pub fn first_request_send(&self) -> &I3LocalnetObserverSafeDeliveryRecord {
+        &self.first_request_send
+    }
+
+    pub fn first_request_receive(&self) -> &I3LocalnetObserverSafeDeliveryRecord {
+        &self.first_request_receive
+    }
+
+    pub fn first_reply_send(&self) -> &I3LocalnetObserverSafeDeliveryRecord {
+        &self.first_reply_send
+    }
+
+    pub fn first_reply_receive(&self) -> &I3LocalnetObserverSafeDeliveryRecord {
+        &self.first_reply_receive
+    }
+
+    pub fn original_first_reply_send_occurrence_ref(&self) -> &str {
+        &self.original_first_reply_send_occurrence_ref
+    }
+
+    pub fn original_first_reply_carrier_ref(&self) -> &str {
+        &self.original_first_reply_carrier_ref
+    }
+
+    pub fn first_outcome(&self) -> &I3LocalnetOwnerReplyReplayFirstOutcome {
+        &self.first_outcome
+    }
+
+    pub fn replay_outcome(&self) -> &I3LocalnetOwnerReplyReplayOutcome {
+        &self.replay_outcome
+    }
+
+    pub fn requester_state_after_first(&self) -> &I3LocalnetOwnerReplyReplayRequesterState {
+        &self.requester_state_after_first
+    }
+
+    /// A's final locally observed runtime state. On a verified successor this
+    /// follows generic receiver rejection; on the initial-session falsifier
+    /// it follows A's local close and makes no claim about B's later refusal.
+    pub fn requester_final_state(&self) -> &I3LocalnetOwnerReplyReplayRequesterState {
+        &self.requester_final_state
+    }
+
+    pub fn owner_state_after_first(&self) -> &I3LocalnetOwnerReplyReplayOwnerState {
+        &self.owner_state_after_first
+    }
+
+    pub fn owner_state_after_replay_rejection(&self) -> &I3LocalnetOwnerReplyReplayOwnerState {
+        &self.owner_state_after_replay_rejection
+    }
+
+    pub fn requester_child(&self) -> &I3LocalnetOwnerReplyReplayChildAudit {
+        &self.requester_child
+    }
+
+    pub fn owner_child(&self) -> &I3LocalnetOwnerReplyReplayChildAudit {
+        &self.owner_child
+    }
+}
+
 /// Private observer-record falsifiers for the bounded post-admission profile.
 ///
 /// These mutate only the child event emitted to the supervisor after actual

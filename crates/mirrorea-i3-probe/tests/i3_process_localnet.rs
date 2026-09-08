@@ -29,6 +29,10 @@ use mirrorea_i3_probe::{
     I3LocalnetLateIngressParentPublication, I3LocalnetLateIngressProfile,
     I3LocalnetLateIngressRequesterOutcome, I3LocalnetLifecycleRejectionCause,
     I3LocalnetObserverSafeDeliveryRecord, I3LocalnetOwnerAdmissionDriveProfile,
+    I3LocalnetOwnerReplyReplayAudit, I3LocalnetOwnerReplyReplayFalsifier,
+    I3LocalnetOwnerReplyReplayFirstOutcome, I3LocalnetOwnerReplyReplayInitiator,
+    I3LocalnetOwnerReplyReplayOutcome, I3LocalnetOwnerReplyReplayProfile,
+    I3LocalnetOwnerReplyReplayReason, I3LocalnetOwnerReplyReplayReceiverRejection,
     I3LocalnetReconnectOwnerOutcome, I3LocalnetRejectionAudit, I3LocalnetRemoteAdmissionEvidence,
     I3LocalnetRemoteEvidenceRejection, I3LocalnetRequesterFaultObservation,
     I3LocalnetRequesterLocalWaitFalsifier, I3LocalnetRequesterLocalWaitProfile,
@@ -222,6 +226,285 @@ fn assert_handled_delivery_fault_lifecycle(audit: &I3LocalnetRejectionAudit) {
         "the normal fault path must retain clean shutdown evidence from natural zero-exit reaping"
     );
     assert!(audit.observer_safe());
+}
+
+/// The replay profile may retain only observer-safe facts already emitted by
+/// the real two-process sessions.  In particular, the stable carrier join is
+/// the opaque B-token binding to the actual first write, not a test-created
+/// cross-session hash: candidate commitments intentionally include session
+/// generation and therefore differ between the first and replay sessions.
+fn assert_owner_reply_replay_common(audit: &I3LocalnetOwnerReplyReplayAudit) {
+    assert_eq!(
+        audit.profile(),
+        I3LocalnetOwnerReplyReplayProfile::ReplayKnownOwnerReplyOnVerifiedSuccessorSession
+    );
+    assert_eq!(
+        audit.replay_initiator(),
+        I3LocalnetOwnerReplyReplayInitiator::T0FaultDriver
+    );
+    assert_eq!(
+        audit.replay_reason(),
+        I3LocalnetOwnerReplyReplayReason::KnownGeneratedOwnerReplyReplay
+    );
+    let request_identity = audit.request_identity_ref();
+    assert!(!request_identity.is_empty());
+    assert!(
+        !audit.cohort_provenance_ref().is_empty(),
+        "the joined actual child records must retain their one checked cohort provenance"
+    );
+
+    let request_contract = owner_admission_contract("owner-request");
+    let reply_contract = owner_admission_contract("owner-reply-receipt");
+    let request_send = audit.first_request_send();
+    let request_receive = audit.first_request_receive();
+    let reply_send = audit.first_reply_send();
+    let reply_receive = audit.first_reply_receive();
+    assert_delivery_matches_contract(request_send, &request_contract, request_identity, None);
+    assert_delivery_matches_contract(request_receive, &request_contract, request_identity, None);
+    assert_delivery_matches_contract(
+        reply_send,
+        &reply_contract,
+        request_identity,
+        Some(request_identity),
+    );
+    assert_delivery_matches_contract(
+        reply_receive,
+        &reply_contract,
+        request_identity,
+        Some(request_identity),
+    );
+    assert_delivery_semantics_match(request_send, request_receive);
+    assert_delivery_semantics_match(reply_send, reply_receive);
+    assert_eq!(
+        request_send.candidate_commitment_ref(),
+        request_receive.candidate_commitment_ref(),
+        "the first request sender and receiver must observe the same actual session-one frame"
+    );
+    assert_eq!(
+        reply_send.candidate_commitment_ref(),
+        reply_receive.candidate_commitment_ref(),
+        "the first reply sender and receiver must observe the same actual session-one frame"
+    );
+    assert_eq!(
+        [
+            request_send.network_occurrence_ref(),
+            request_receive.network_occurrence_ref(),
+            reply_send.network_occurrence_ref(),
+            reply_receive.network_occurrence_ref(),
+        ]
+        .into_iter()
+        .collect::<BTreeSet<_>>()
+        .len(),
+        4,
+        "the first known result retains four distinct actual request/reply observations"
+    );
+    assert_eq!(
+        audit.original_first_reply_send_occurrence_ref(),
+        reply_send.network_occurrence_ref(),
+        "the opaque B replay token must bind the actual first reply-send occurrence"
+    );
+    assert_eq!(
+        audit.original_first_reply_carrier_ref(),
+        reply_send.carrier_ref(),
+        "the opaque B replay token must bind the actual first reply carrier"
+    );
+
+    let requester = audit.requester_child();
+    let owner = audit.owner_child();
+    assert_eq!(requester.slot(), I3LocalnetChildSlot::ProcessA);
+    assert_eq!(owner.slot(), I3LocalnetChildSlot::ProcessB);
+    assert_ne!(requester.slot(), owner.slot());
+    assert!(!requester.run_ref().is_empty());
+    assert_eq!(requester.run_ref(), owner.run_ref());
+    for child in [requester, owner] {
+        assert_eq!(child.first_session_generation(), 1);
+        assert!(child.first_session_peer_spki_verified());
+        assert!(child.first_session_reciprocal_preface_verified());
+        assert_eq!(
+            child.terminal_outcome(),
+            I3LocalnetChildTerminalOutcome::HandledDeliveryFault
+        );
+    }
+}
+
+fn assert_owner_reply_replay_receiver_rejection(audit: &I3LocalnetOwnerReplyReplayAudit) {
+    let first_reply_send = audit.first_reply_send();
+    let request_identity = audit.request_identity_ref();
+    let I3LocalnetOwnerReplyReplayOutcome::ReceiverRejected {
+        replay_reply_send,
+        receiver_rejection,
+    } = audit.replay_outcome()
+    else {
+        panic!("the verified successor must deliver the one opaque B replay token")
+    };
+    assert_delivery_matches_contract(
+        replay_reply_send,
+        &owner_admission_contract("owner-reply-receipt"),
+        request_identity,
+        Some(request_identity),
+    );
+    assert_delivery_semantics_match(first_reply_send, replay_reply_send);
+    assert_eq!(
+        replay_reply_send.carrier_ref(),
+        audit.original_first_reply_carrier_ref(),
+        "the replay sender must use the carrier retained by B's one actual first-send token"
+    );
+    assert_eq!(
+        audit.original_first_reply_send_occurrence_ref(),
+        first_reply_send.network_occurrence_ref()
+    );
+    assert_ne!(
+        replay_reply_send.candidate_commitment_ref(),
+        first_reply_send.candidate_commitment_ref(),
+        "session generation is inside candidate commitment, so the identical reply body has a new session-two commitment"
+    );
+    assert_ne!(
+        replay_reply_send.network_occurrence_ref(),
+        first_reply_send.network_occurrence_ref(),
+        "replay send is a new actual session-two occurrence, not a relabeled first write"
+    );
+    let I3LocalnetOwnerReplyReplayReceiverRejection::CarrierAdmissionRejected {
+        rejected_candidate_commitment_ref,
+        network_occurrence_ref,
+    } = receiver_rejection;
+    assert_eq!(
+        rejected_candidate_commitment_ref,
+        replay_reply_send.candidate_commitment_ref(),
+        "the generic receiver rejection must retain the actual session-two replay candidate"
+    );
+    assert!(!network_occurrence_ref.is_empty());
+    assert_ne!(
+        network_occurrence_ref,
+        replay_reply_send.network_occurrence_ref()
+    );
+    assert_eq!(
+        [
+            audit.first_request_send().network_occurrence_ref(),
+            audit.first_request_receive().network_occurrence_ref(),
+            first_reply_send.network_occurrence_ref(),
+            audit.first_reply_receive().network_occurrence_ref(),
+            replay_reply_send.network_occurrence_ref(),
+            network_occurrence_ref.as_str(),
+        ]
+        .into_iter()
+        .collect::<BTreeSet<_>>()
+        .len(),
+        6,
+        "the actual replay send and generic receiver rejection must not collapse either session's observations"
+    );
+
+    for child in [audit.requester_child(), audit.owner_child()] {
+        assert_eq!(child.replay_session_generation(), Some(2));
+        assert_eq!(child.replay_session_peer_spki_verified(), Some(true));
+        assert_eq!(
+            child.replay_session_reciprocal_preface_verified(),
+            Some(true)
+        );
+    }
+}
+
+fn assert_owner_reply_replay_success_state(audit: &I3LocalnetOwnerReplyReplayAudit) {
+    assert!(matches!(
+        audit.first_outcome(),
+        I3LocalnetOwnerReplyReplayFirstOutcome::ReceiptConsumed
+    ));
+    let first = audit.requester_state_after_first();
+    let after_replay = audit.requester_final_state();
+    assert_eq!(first.pending_request_count(), 0);
+    assert_eq!(first.receipt_count(), 1);
+    assert_eq!(first.terminal_failure_count(), 0);
+    let receipt_occurrence = first
+        .receipt_occurrence_ref()
+        .expect("the first successful reply must retain one requester receipt occurrence");
+    assert!(!receipt_occurrence.is_empty());
+    assert_eq!(first.terminal_failure_occurrence_ref(), None);
+    assert_eq!(after_replay.pending_request_count(), 0);
+    assert_eq!(after_replay.receipt_count(), 1);
+    assert_eq!(after_replay.terminal_failure_count(), 0);
+    assert_eq!(
+        after_replay.receipt_occurrence_ref(),
+        Some(receipt_occurrence)
+    );
+    assert_eq!(after_replay.terminal_failure_occurrence_ref(), None);
+
+    let first_owner = audit.owner_state_after_first();
+    let after_replay_owner = audit.owner_state_after_replay_rejection();
+    assert_eq!(first_owner.tombstone_count(), 1);
+    assert_eq!(first_owner.served_owner_request_count(), 1);
+    assert_eq!(first_owner.owner_mutation_count(), 1);
+    assert_eq!(first_owner.expired_owner_admission_count(), 0);
+    assert_eq!(
+        after_replay_owner.tombstone_count(),
+        first_owner.tombstone_count()
+    );
+    assert_eq!(
+        after_replay_owner.served_owner_request_count(),
+        first_owner.served_owner_request_count()
+    );
+    assert_eq!(
+        after_replay_owner.owner_mutation_count(),
+        first_owner.owner_mutation_count()
+    );
+    assert_eq!(
+        after_replay_owner.expired_owner_admission_count(),
+        first_owner.expired_owner_admission_count()
+    );
+}
+
+fn assert_owner_reply_replay_expiry_state(audit: &I3LocalnetOwnerReplyReplayAudit) {
+    let I3LocalnetOwnerReplyReplayFirstOutcome::TerminalFailureConsumed { owner_expiry } =
+        audit.first_outcome()
+    else {
+        panic!("the tick-one source budget must consume its genuine declared expiry first")
+    };
+    assert!(!owner_expiry.decision_commitment_ref().is_empty());
+    assert!(!owner_expiry.decision_occurrence_ref().is_empty());
+    assert_eq!(owner_expiry.generated_reply_count(), 1);
+    assert_eq!(owner_expiry.expired_count(), 1);
+    assert_eq!(owner_expiry.owner_serve_count(), 0);
+    assert_eq!(owner_expiry.owner_mutation_count(), 0);
+
+    let first = audit.requester_state_after_first();
+    let after_replay = audit.requester_final_state();
+    assert_eq!(first.pending_request_count(), 0);
+    assert_eq!(first.receipt_count(), 0);
+    assert_eq!(first.terminal_failure_count(), 1);
+    let terminal_occurrence = first
+        .terminal_failure_occurrence_ref()
+        .expect("the first declared expiry must retain one requester terminal occurrence");
+    assert!(!terminal_occurrence.is_empty());
+    assert_eq!(first.receipt_occurrence_ref(), None);
+    assert_eq!(after_replay.pending_request_count(), 0);
+    assert_eq!(after_replay.receipt_count(), 0);
+    assert_eq!(after_replay.terminal_failure_count(), 1);
+    assert_eq!(
+        after_replay.terminal_failure_occurrence_ref(),
+        Some(terminal_occurrence)
+    );
+    assert_eq!(after_replay.receipt_occurrence_ref(), None);
+
+    let first_owner = audit.owner_state_after_first();
+    let after_replay_owner = audit.owner_state_after_replay_rejection();
+    assert_eq!(first_owner.tombstone_count(), 1);
+    assert_eq!(first_owner.served_owner_request_count(), 0);
+    assert_eq!(first_owner.owner_mutation_count(), 0);
+    assert_eq!(first_owner.expired_owner_admission_count(), 1);
+    assert_eq!(
+        after_replay_owner.tombstone_count(),
+        first_owner.tombstone_count()
+    );
+    assert_eq!(
+        after_replay_owner.served_owner_request_count(),
+        first_owner.served_owner_request_count()
+    );
+    assert_eq!(
+        after_replay_owner.owner_mutation_count(),
+        first_owner.owner_mutation_count()
+    );
+    assert_eq!(
+        after_replay_owner.expired_owner_admission_count(),
+        first_owner.expired_owner_admission_count()
+    );
 }
 
 /// The adapter-delivery negatives must retain the actual owner terminal.  A
@@ -1245,6 +1528,125 @@ fn source_first_localnet_owner_budget_local_wait_falsifiers_reject_observer_evid
             "{label} must not promote an unvalidated post-wait pending observation"
         );
         assert_handled_delivery_fault_lifecycle(&lifecycle);
+    }
+}
+
+#[test]
+fn source_first_localnet_owner_budget_success_reply_replay_on_verified_successor_is_rejected() {
+    let error = run_i3_process_localnet(
+        owner_admission_request().with_owner_reply_replay_profile(
+            I3LocalnetOwnerReplyReplayProfile::ReplayKnownOwnerReplyOnVerifiedSuccessorSession,
+        ),
+    )
+    .expect_err(
+        "a source-derived successful reply replayed on a verified successor must be rejected after its known first receipt",
+    );
+
+    assert_eq!(
+        error.kind(),
+        I3LocalnetRunErrorKind::OwnerReplyReplayRejected
+    );
+    assert!(error.fault_audit().is_none());
+    assert!(error.retry_audit().is_none());
+    let lifecycle = error.rejection_audit();
+    assert_eq!(
+        lifecycle.stage(),
+        I3LocalnetFailureStage::AfterKnownRequesterDecision
+    );
+    assert_handled_delivery_fault_lifecycle(&lifecycle);
+
+    let audit = error.owner_reply_replay_audit().expect(
+        "the actual two-session successful-reply replay must retain its source-bound observer-safe audit",
+    );
+    assert_owner_reply_replay_common(audit);
+    assert_owner_reply_replay_success_state(audit);
+    assert_owner_reply_replay_receiver_rejection(audit);
+}
+
+#[test]
+fn source_first_localnet_owner_budget_expiry_reply_replay_on_verified_successor_is_rejected() {
+    let error = run_i3_process_localnet(
+        owner_admission_request()
+            .with_owner_admission_drive_profile(
+                I3LocalnetOwnerAdmissionDriveProfile::AdvanceOneTickAfterAwaiting,
+            )
+            .with_owner_reply_replay_profile(
+                I3LocalnetOwnerReplyReplayProfile::ReplayKnownOwnerReplyOnVerifiedSuccessorSession,
+            ),
+    )
+    .expect_err(
+        "a genuine source-derived declared-expiry reply replayed on a verified successor must be rejected after terminal consumption",
+    );
+
+    assert_eq!(
+        error.kind(),
+        I3LocalnetRunErrorKind::OwnerReplyReplayRejected
+    );
+    assert!(error.fault_audit().is_none());
+    assert!(error.retry_audit().is_none());
+    let lifecycle = error.rejection_audit();
+    assert_eq!(
+        lifecycle.stage(),
+        I3LocalnetFailureStage::AfterKnownRequesterDecision
+    );
+    assert_handled_delivery_fault_lifecycle(&lifecycle);
+
+    let audit = error.owner_reply_replay_audit().expect(
+        "the actual two-session declared-expiry replay must retain its source-bound observer-safe audit",
+    );
+    assert_owner_reply_replay_common(audit);
+    assert_owner_reply_replay_expiry_state(audit);
+    assert_owner_reply_replay_receiver_rejection(audit);
+}
+
+#[test]
+fn source_first_localnet_owner_budget_reply_replay_on_initial_session_rejects_before_write() {
+    let error = run_i3_process_localnet(
+        owner_admission_request()
+            .with_owner_reply_replay_profile(
+                I3LocalnetOwnerReplyReplayProfile::ReplayKnownOwnerReplyOnVerifiedSuccessorSession,
+            )
+            .with_owner_reply_replay_falsifier(
+                I3LocalnetOwnerReplyReplayFalsifier::ReplayOnInitialVerifiedSession,
+            ),
+    )
+    .expect_err(
+        "a replay request on the already verified initial session must be rejected before B writes or mutates again",
+    );
+
+    assert_eq!(
+        error.kind(),
+        I3LocalnetRunErrorKind::OwnerReplyReplayRejected
+    );
+    assert!(error.fault_audit().is_none());
+    assert!(error.retry_audit().is_none());
+    let lifecycle = error.rejection_audit();
+    assert_eq!(
+        lifecycle.stage(),
+        I3LocalnetFailureStage::AfterKnownRequesterDecision
+    );
+    assert_handled_delivery_fault_lifecycle(&lifecycle);
+
+    let audit = error.owner_reply_replay_audit().expect(
+        "the wrong-initial-session rejection must retain the known first outcome without publishing replay delivery",
+    );
+    assert_owner_reply_replay_common(audit);
+    assert_owner_reply_replay_success_state(audit);
+    match audit.replay_outcome() {
+        I3LocalnetOwnerReplyReplayOutcome::RejectedBeforeReplayWrite { rejection } => {
+            assert_eq!(
+                *rejection,
+                I3LocalnetAdapterRejectionKind::LocalAttemptRejected
+            );
+        }
+        I3LocalnetOwnerReplyReplayOutcome::ReceiverRejected { .. } => {
+            panic!("the wrong-initial-session falsifier must reject before a replay carrier write")
+        }
+    }
+    for child in [audit.requester_child(), audit.owner_child()] {
+        assert_eq!(child.replay_session_generation(), None);
+        assert_eq!(child.replay_session_peer_spki_verified(), None);
+        assert_eq!(child.replay_session_reciprocal_preface_verified(), None);
     }
 }
 

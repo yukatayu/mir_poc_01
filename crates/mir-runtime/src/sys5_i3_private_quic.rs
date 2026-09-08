@@ -401,6 +401,46 @@ impl Sys5I3PrivateQuicDeliveryEvidence {
     }
 }
 
+/// One bounded, adapter-retained generated Reply frame that was fully written
+/// on the verified initial session.  This type deliberately implements
+/// neither `Clone` nor `Debug`: its exact private bytes and control binding
+/// never leave this adapter, and consuming it permits only the fixed
+/// successor-session replay falsifier.
+#[cfg(feature = "i3-process-test-seams")]
+#[doc(hidden)]
+pub struct Sys5I3PrivateQuicGeneratedReplyReplayCandidate {
+    body: Vec<u8>,
+    session_attempt_generation: u8,
+    control_binding: Sys5I3LocalnetPeerPreface,
+    original_send_delivery: Sys5I3PrivateQuicDeliveryEvidence,
+}
+
+/// Observer-safe evidence from the one retained initial Reply write and its
+/// one actual successor-session replay write.  The adapter returns this only
+/// after the replay write completes; it exports neither the retained bytes
+/// nor the trusted preface/control binding.
+#[cfg(feature = "i3-process-test-seams")]
+#[doc(hidden)]
+pub struct Sys5I3PrivateQuicReplayedGeneratedReplyDelivery {
+    replay_delivery: Sys5I3PrivateQuicDeliveryEvidence,
+    original_send_delivery: Sys5I3PrivateQuicDeliveryEvidence,
+}
+
+#[cfg(feature = "i3-process-test-seams")]
+impl Sys5I3PrivateQuicReplayedGeneratedReplyDelivery {
+    /// Evidence for the new, actual successor-session write.
+    pub fn replay_delivery(&self) -> &Sys5I3PrivateQuicDeliveryEvidence {
+        &self.replay_delivery
+    }
+
+    /// Evidence retained from the exact initial write that issued the opaque
+    /// candidate.  This is a reference-only audit join, not a delivery
+    /// acknowledgement or an authority fact.
+    pub fn original_send_delivery(&self) -> &Sys5I3PrivateQuicDeliveryEvidence {
+        &self.original_send_delivery
+    }
+}
+
 /// Private result of encoding the existing generated-message path.  It keeps
 /// the exact carrier-derived references with the one encoded body until a
 /// session reserves its delivery occurrence and writes it.
@@ -425,6 +465,8 @@ pub struct Sys5I3PrivateQuicSession {
     session_attempt_generation: u8,
     next_network_occurrence: u64,
     pending_ingress_permit: Sys5I3PrivateQuicPendingIngressPermit,
+    #[cfg(feature = "i3-process-test-seams")]
+    generated_reply_replay_candidate_issued: bool,
 }
 
 /// A consuming private reconnect capability.  It transfers the sole retained
@@ -507,6 +549,8 @@ impl Sys5I3PrivateQuicSession {
             session_attempt_generation: 1,
             next_network_occurrence: 0,
             pending_ingress_permit: Sys5I3PrivateQuicPendingIngressPermit::Unacquired,
+            #[cfg(feature = "i3-process-test-seams")]
+            generated_reply_replay_candidate_issued: false,
         })
     }
 
@@ -531,6 +575,8 @@ impl Sys5I3PrivateQuicSession {
             session_attempt_generation: 1,
             next_network_occurrence: 0,
             pending_ingress_permit: Sys5I3PrivateQuicPendingIngressPermit::Unacquired,
+            #[cfg(feature = "i3-process-test-seams")]
+            generated_reply_replay_candidate_issued: false,
         })
     }
 
@@ -564,6 +610,22 @@ impl Sys5I3PrivateQuicSession {
 
     pub const fn session_attempt_generation(&self) -> u8 {
         self.session_attempt_generation
+    }
+
+    #[cfg(feature = "i3-process-test-seams")]
+    fn require_verified_session_generation(
+        &self,
+        required_session_attempt_generation: u8,
+    ) -> Result<(), Sys5I3PrivateQuicError> {
+        if !self.peer_spki_verified || !self.peer_preface_verified {
+            return Err(Sys5I3PrivateQuicError::peer_binding_rejected(
+                self.control.expected_peer_spki_ref(),
+            ));
+        }
+        if self.session_attempt_generation != required_session_attempt_generation {
+            return Err(Sys5I3PrivateQuicError::LocalAttemptRejected);
+        }
+        Ok(())
     }
 
     pub async fn send_local_preface(&mut self) -> Result<(), Sys5I3PrivateQuicError> {
@@ -623,6 +685,79 @@ impl Sys5I3PrivateQuicSession {
         let (body, evidence) = self.reserve_generated_message_delivery(encoded)?;
         self.write_blob(&body).await?;
         Ok(evidence)
+    }
+
+    /// Test-only source-first replay falsifier.  It retains exactly one
+    /// generated Reply only after the verified initial session completed the
+    /// full bounded stream write.  Callers provide neither bytes nor a
+    /// decoded carrier, and a generated Request cannot mint this candidate.
+    #[cfg(feature = "i3-process-test-seams")]
+    #[doc(hidden)]
+    pub async fn test_only_send_generated_reply_and_retain_replay_candidate(
+        &mut self,
+        message: Sys5I3ProcessMessage,
+    ) -> Result<
+        (
+            Sys5I3PrivateQuicDeliveryEvidence,
+            Sys5I3PrivateQuicGeneratedReplyReplayCandidate,
+        ),
+        Sys5I3PrivateQuicError,
+    > {
+        self.require_verified_session_generation(1)?;
+        if self.generated_reply_replay_candidate_issued {
+            return Err(Sys5I3PrivateQuicError::LocalAttemptRejected);
+        }
+        let encoded = Self::encode_generated_message(message)?;
+        if encoded.linked_request_identity_ref.as_deref()
+            != Some(encoded.semantic_request_identity_ref.as_str())
+        {
+            return Err(Sys5I3PrivateQuicError::LocalAttemptRejected);
+        }
+        let (body, evidence) = self.reserve_generated_message_delivery(encoded)?;
+        self.write_blob(&body).await?;
+        self.generated_reply_replay_candidate_issued = true;
+        let candidate = Sys5I3PrivateQuicGeneratedReplyReplayCandidate {
+            body,
+            session_attempt_generation: self.session_attempt_generation,
+            control_binding: self.control.localnet_preface(),
+            original_send_delivery: evidence.clone(),
+        };
+        Ok((evidence, candidate))
+    }
+
+    /// Consume the one opaque Reply replay candidate on the verified exact
+    /// successor session.  A wrong session/control rejects before any replay
+    /// occurrence is reserved or bytes are written; consuming the candidate
+    /// still prevents retrying that rejected local attempt.
+    #[cfg(feature = "i3-process-test-seams")]
+    #[doc(hidden)]
+    pub async fn test_only_replay_retained_generated_reply(
+        &mut self,
+        candidate: Sys5I3PrivateQuicGeneratedReplyReplayCandidate,
+    ) -> Result<Sys5I3PrivateQuicReplayedGeneratedReplyDelivery, Sys5I3PrivateQuicError> {
+        self.require_verified_session_generation(2)?;
+        let control_binding = self.control.localnet_preface();
+        if !retained_ingress_matches_reconnect_binding(
+            candidate.session_attempt_generation,
+            &candidate.control_binding,
+            self.session_attempt_generation,
+            &control_binding,
+        ) {
+            return Err(Sys5I3PrivateQuicError::LocalAttemptRejected);
+        }
+        let candidate_commitment_ref = self.candidate_commitment_ref_for_frame(&candidate.body);
+        let network_occurrence_ref = self.reserve_network_occurrence_ref(
+            "send",
+            candidate.original_send_delivery.carrier_ref(),
+        )?;
+        self.write_blob(&candidate.body).await?;
+        let mut replay_delivery = candidate.original_send_delivery.clone();
+        replay_delivery.candidate_commitment_ref = candidate_commitment_ref;
+        replay_delivery.network_occurrence_ref = network_occurrence_ref;
+        Ok(Sys5I3PrivateQuicReplayedGeneratedReplyDelivery {
+            replay_delivery,
+            original_send_delivery: candidate.original_send_delivery,
+        })
     }
 
     /// Sends one existing source-generated message through a bounded
@@ -1236,6 +1371,8 @@ impl Sys5I3PrivateQuicReconnect {
             session_attempt_generation,
             next_network_occurrence,
             pending_ingress_permit,
+            #[cfg(feature = "i3-process-test-seams")]
+            generated_reply_replay_candidate_issued: false,
         })
     }
 
@@ -1268,6 +1405,8 @@ impl Sys5I3PrivateQuicReconnect {
             session_attempt_generation,
             next_network_occurrence,
             pending_ingress_permit,
+            #[cfg(feature = "i3-process-test-seams")]
+            generated_reply_replay_candidate_issued: false,
         })
     }
 }

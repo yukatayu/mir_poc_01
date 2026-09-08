@@ -1,6 +1,6 @@
 # Current Task Map (LAB)
 
-最終更新: 2026-09-08 10:53 JST
+最終更新: 2026-09-08 12:07 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -57,27 +57,20 @@ have passed bounded repair review. Actual endpoint closure, a complete frame
 split over two application writes, and strict truncation/FIN execute with
 validated-only observer evidence. Pushed checkpoint `050f5067` selects and
 preserves ADR-0041/spec/16's source-declared owner-admission budget with default
-  execution guards. The current C1/C2/C3 runtime checkpoint is prepared over that
-checkpoint; it has a serialized per-owner u64
-clock, bounded existing ledger Awaiting/Expired/Rejected/Reserved states, a
-non-Clone one-use permit through SYS-4/M8, current-M9 revalidation, four P1
-repairs, and a narrow G1 held-to-unchanged-authority G2 handoff repair. Fresh
-  authorized tests are owner-module 19/19, G1-pending→G2 decision 1/1, private
-  QUIC module 3/3, full process-runtime integration 63/63, dropped-expiry replay
-  1/1, and queued-handoff 1/1. These are bounded-local C3 evidence, not
-  actual-time network, fault-row 17, or milestone acceptance. The authentic
-  real budget run is 1/1 with two exec children reaped, request/serve/write/
-  reply/receipt, four exact delivery joins, host-driver 5/5, and broad local I3
-  library 61/61. Source-known LAB alias privacy is fixed. Provider remains
-  OPEN and the full matrix is not complete; no whole fault row is accepted.
-  Scoped runtime Clippy with both I3 features and `-Dwarnings` is green, source
-  budget is 4/4, and full probe integration is 38/38. Local-wait six named
-  tests/seven cases and narrow review are closed. Delivered expiry, lost reply,
-  expired reconnect, and producer-derived reference getter 2/2 are green.
-  Whole feature-union runtime library 332/332, integration 63/63, Clippy and
-  format are green. Remaining time gates are full-time review and actual
-  row-11 reply replay; genuine G1→G2 stale-binder evidence is already local-green
-  and must remain connected to the actual receive path. Root has 12.03 GiB free.
+execution guards. Pushed `30429d5` implements the owner clock, bounded ledger,
+one-use handoff, M9 revalidation, genuine expiry transport/consumption and
+requester-local wait. The successor replay delta is reviewed with P0/P1/P2 zero:
+successful and expiry replies are consumed once then rejected on verified
+session-2 replay, while wrong-initial-session replay rejects before write.
+Current full probe 41/41, focused replay 3/3, two-crate all-target Clippy and
+workspace format pass. Runtime 332/process 63/I2-M10 5/8/67 are retained
+`30429d5` results, not reruns. Genuine G1-expiry→G2 rejection remains local
+production-binder evidence; actual QUIC's use of that binder is verified.
+The row-11/spec/16 consumer awaits documentation/commit/parity integration,
+not more time/replay implementation. Next: adopt a bounded provider contract
+before adding its source-derived invocation, effect grant, projection and real
+external attempt. Remaining membership/redaction/cut families, full ordering,
+regressions and I3-3 acceptance remain required. Root has about 12.00 GiB free.
 
 Scope: execute all 20 required network failure families against the accepted
 generated-artifact runtime; make retry and ambiguous delivery request-bound and
@@ -95,7 +88,7 @@ Sources: `plan/250-mirrorea-i3-distributed-foundation-current-roadmap.md`,
 `mirrorea_canon/plan/05-i3-entry-contract.md`. I3-2 evidence remains the
 input history in Report 2605, not the active goal.
 
-Fresh delivery-checkpoint evidence: runtime integration 61/61 (55.23s), I2 local 5/5
+Retained delivery-checkpoint evidence: runtime integration 61/61 (55.23s), I2 local 5/5
 (0.05s), I2 CLI 8/8 (11.60s), probe 32/32, private QUIC unit 2/2, focused
 Clippy and format/diff pass. Feature library 289/289 and M10 67/67 remain prior
 evidence; I2 regressions 5/5 + 8/8 pass. Independent repair review has no
@@ -107,8 +100,8 @@ post-admission retry is duplicate-rejected while the original requester stays
 pending/ambiguous. Report 2606 retains prior checkpoint `87ee2418` runtime
 51/51, library 285/285, probe 17/17 and bounded model 3/3 evidence; those suites
 were not all rerun for this delta. The model is not a general proof. Root free
-space was about 15 GiB at that prior delivery checkpoint; current C1/C2 has
-14 GiB free, with no further cleanup. Remaining authority/
+space was about 15 GiB at that prior delivery checkpoint; the later C1/C2
+checkpoint had 14 GiB free. Remaining authority/
 ordering and the full 20-family matrix remain open; this
 is not milestone acceptance.
 

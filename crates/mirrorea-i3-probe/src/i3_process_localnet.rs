@@ -57,14 +57,18 @@ use super::i3_process_faults::{
     I3LocalnetLateIngressLifecycleProvenance,
     I3LocalnetLateIngressNonregisteredAckInputDisposition, I3LocalnetLateIngressOwnerOutcome,
     I3LocalnetLateIngressParentPublication, I3LocalnetLateIngressProfile,
-    I3LocalnetLateIngressRequesterOutcome, I3LocalnetReconnectOwnerOutcome,
-    I3LocalnetRemoteAdmissionEvidence, I3LocalnetRemoteEvidenceRejection,
-    I3LocalnetRequesterFaultObservation, I3LocalnetRequesterLocalWaitAudit,
-    I3LocalnetRequesterLocalWaitFalsifier, I3LocalnetRequesterLocalWaitProfile,
-    I3LocalnetRetryAttemptAudit, I3LocalnetRetryAttemptReason, I3LocalnetRetryAudit,
-    I3LocalnetRetryAuditFalsifier, I3LocalnetRetryChildAudit, I3LocalnetRetryChildAuditEvidence,
-    I3LocalnetRetryEvidenceRejection, I3LocalnetRetryFalsifier, I3LocalnetRetryProfile,
-    I3LocalnetRetryRequesterOutcome,
+    I3LocalnetLateIngressRequesterOutcome, I3LocalnetOwnerReplyReplayAudit,
+    I3LocalnetOwnerReplyReplayChildAudit, I3LocalnetOwnerReplyReplayFalsifier,
+    I3LocalnetOwnerReplyReplayFirstOutcome, I3LocalnetOwnerReplyReplayOutcome,
+    I3LocalnetOwnerReplyReplayOwnerState, I3LocalnetOwnerReplyReplayProfile,
+    I3LocalnetOwnerReplyReplayReceiverRejection, I3LocalnetOwnerReplyReplayRequesterState,
+    I3LocalnetReconnectOwnerOutcome, I3LocalnetRemoteAdmissionEvidence,
+    I3LocalnetRemoteEvidenceRejection, I3LocalnetRequesterFaultObservation,
+    I3LocalnetRequesterLocalWaitAudit, I3LocalnetRequesterLocalWaitFalsifier,
+    I3LocalnetRequesterLocalWaitProfile, I3LocalnetRetryAttemptAudit, I3LocalnetRetryAttemptReason,
+    I3LocalnetRetryAudit, I3LocalnetRetryAuditFalsifier, I3LocalnetRetryChildAudit,
+    I3LocalnetRetryChildAuditEvidence, I3LocalnetRetryEvidenceRejection, I3LocalnetRetryFalsifier,
+    I3LocalnetRetryProfile, I3LocalnetRetryRequesterOutcome,
 };
 
 const PROCESS_A_SLOT: &str = "process-a";
@@ -296,6 +300,11 @@ pub enum I3LocalnetFailureStage {
     /// is a semantic terminal command result, not a lifecycle or transport
     /// failure stage.
     RequesterTerminalFailureConsumed,
+    /// A first generated reply was already consumed by A. The later T0
+    /// replay action then reached its selected receiver rejection or local
+    /// pre-write refusal; it is neither an ambiguous delivery nor lifecycle
+    /// setup failure.
+    AfterKnownRequesterDecision,
     LifecycleEvidenceRejected,
     BootstrapDeadline,
     CleanupDeadline,
@@ -315,6 +324,9 @@ pub enum I3LocalnetRunErrorKind {
     /// requester. The enclosing `Err` preserves the existing result shape;
     /// it is not a lifecycle or transport failure.
     TerminalFailureConsumed,
+    /// One known generated reply was consumed first, then the bounded T0
+    /// replay action was rejected by the existing adapter/runtime path.
+    OwnerReplyReplayRejected,
 }
 
 /// One neutral, fixed owner-runtime schedule used only after B has actually
@@ -346,6 +358,8 @@ pub struct I3ProcessLocalnetRequest {
     retry_falsifier: Option<I3LocalnetRetryFalsifier>,
     retry_audit_falsifier: Option<I3LocalnetRetryAuditFalsifier>,
     owner_admission_drive_profile: Option<I3LocalnetOwnerAdmissionDriveProfile>,
+    owner_reply_replay_profile: Option<I3LocalnetOwnerReplyReplayProfile>,
+    owner_reply_replay_falsifier: Option<I3LocalnetOwnerReplyReplayFalsifier>,
     late_ingress_profile: Option<I3LocalnetLateIngressProfile>,
     late_ingress_falsifier: Option<I3LocalnetLateIngressFalsifier>,
     // Selects only a concrete bounded adapter action after source generation.
@@ -369,6 +383,8 @@ impl I3ProcessLocalnetRequest {
             retry_falsifier: None,
             retry_audit_falsifier: None,
             owner_admission_drive_profile: None,
+            owner_reply_replay_profile: None,
+            owner_reply_replay_falsifier: None,
             late_ingress_profile: None,
             late_ingress_falsifier: None,
             adapter_delivery_profile: None,
@@ -466,6 +482,28 @@ impl I3ProcessLocalnetRequest {
         profile: I3LocalnetOwnerAdmissionDriveProfile,
     ) -> Self {
         self.owner_admission_drive_profile = Some(profile);
+        self
+    }
+
+    /// Select the one T0 replay of B's actual source-generated reply after A
+    /// has consumed its first known result. This is probe scheduling only;
+    /// it accepts neither a reply body nor a semantic retry/result input.
+    pub fn with_owner_reply_replay_profile(
+        mut self,
+        profile: I3LocalnetOwnerReplyReplayProfile,
+    ) -> Self {
+        self.owner_reply_replay_profile = Some(profile);
+        self
+    }
+
+    /// Select the negative-only use of the opaque B replay token on its
+    /// original session. The adapter rejects before another write or replay
+    /// occurrence can exist.
+    pub fn with_owner_reply_replay_falsifier(
+        mut self,
+        falsifier: I3LocalnetOwnerReplyReplayFalsifier,
+    ) -> Self {
+        self.owner_reply_replay_falsifier = Some(falsifier);
         self
     }
 
@@ -1481,17 +1519,23 @@ pub struct I3LocalnetRunError {
     rejection_audit: I3LocalnetRejectionAudit,
     fault_audit: Option<I3LocalnetFaultAudit>,
     retry_audit: Option<I3LocalnetRetryAudit>,
+    owner_reply_replay_audit: Option<I3LocalnetOwnerReplyReplayAudit>,
     declared_owner_deadline_expired_audit: Option<I3LocalnetDeclaredOwnerDeadlineExpiredAudit>,
     late_ingress_audit: Option<I3LocalnetLateIngressAudit>,
     late_ingress_evidence_rejection: Option<I3LocalnetLateIngressEvidenceRejection>,
 }
 
 impl I3LocalnetRunError {
+    #[expect(
+        clippy::too_many_arguments,
+        reason = "the private constructor retains independently typed named audit channels rather than an untyped error bundle"
+    )]
     fn new(
         kind: I3LocalnetRunErrorKind,
         rejection_audit: I3LocalnetRejectionAudit,
         fault_audit: Option<I3LocalnetFaultAudit>,
         retry_audit: Option<I3LocalnetRetryAudit>,
+        owner_reply_replay_audit: Option<I3LocalnetOwnerReplyReplayAudit>,
         declared_owner_deadline_expired_audit: Option<I3LocalnetDeclaredOwnerDeadlineExpiredAudit>,
         late_ingress_audit: Option<I3LocalnetLateIngressAudit>,
         late_ingress_evidence_rejection: Option<I3LocalnetLateIngressEvidenceRejection>,
@@ -1501,6 +1545,7 @@ impl I3LocalnetRunError {
             rejection_audit,
             fault_audit,
             retry_audit,
+            owner_reply_replay_audit,
             declared_owner_deadline_expired_audit,
             late_ingress_audit,
             late_ingress_evidence_rejection,
@@ -1526,6 +1571,12 @@ impl I3LocalnetRunError {
     /// no retry audit because it made no reconnect session or frame effect.
     pub fn retry_audit(&self) -> Option<&I3LocalnetRetryAudit> {
         self.retry_audit.as_ref()
+    }
+
+    /// Present only after both children reported the actual first known
+    /// reply and the selected bounded replay disposition.
+    pub fn owner_reply_replay_audit(&self) -> Option<&I3LocalnetOwnerReplyReplayAudit> {
+        self.owner_reply_replay_audit.as_ref()
     }
 
     /// Present only for a complete actual route whose generated declared
@@ -1560,6 +1611,7 @@ struct LocalnetFailure {
     fault_profile: Option<I3LocalnetFaultProfile>,
     requester_local_wait_profile: Option<I3LocalnetRequesterLocalWaitProfile>,
     retry_audit: Option<I3LocalnetRetryAudit>,
+    owner_reply_replay_audit: Option<I3LocalnetOwnerReplyReplayAudit>,
     declared_owner_deadline_expired_audit: Option<I3LocalnetDeclaredOwnerDeadlineExpiredAudit>,
     late_ingress_audit: Option<I3LocalnetLateIngressAudit>,
     late_ingress_evidence_rejection: Option<I3LocalnetLateIngressEvidenceRejection>,
@@ -1594,6 +1646,7 @@ impl LocalnetFailure {
             fault_profile: None,
             requester_local_wait_profile: None,
             retry_audit: None,
+            owner_reply_replay_audit: None,
             declared_owner_deadline_expired_audit: None,
             late_ingress_audit: None,
             late_ingress_evidence_rejection: None,
@@ -1614,6 +1667,7 @@ impl LocalnetFailure {
             fault_profile: None,
             requester_local_wait_profile: None,
             retry_audit: None,
+            owner_reply_replay_audit: None,
             declared_owner_deadline_expired_audit: None,
             late_ingress_audit: None,
             late_ingress_evidence_rejection: None,
@@ -1676,6 +1730,7 @@ impl LocalnetFailure {
             fault_profile: Some(profile),
             requester_local_wait_profile,
             retry_audit: None,
+            owner_reply_replay_audit: None,
             declared_owner_deadline_expired_audit: None,
             late_ingress_audit: None,
             late_ingress_evidence_rejection: None,
@@ -1695,6 +1750,7 @@ impl LocalnetFailure {
             fault_profile: None,
             requester_local_wait_profile: None,
             retry_audit: None,
+            owner_reply_replay_audit: None,
             declared_owner_deadline_expired_audit: None,
             late_ingress_audit: None,
             late_ingress_evidence_rejection: None,
@@ -1723,6 +1779,7 @@ impl LocalnetFailure {
             fault_profile: None,
             requester_local_wait_profile: None,
             retry_audit: Some(retry_audit),
+            owner_reply_replay_audit: None,
             declared_owner_deadline_expired_audit: None,
             late_ingress_audit: None,
             late_ingress_evidence_rejection: None,
@@ -1736,6 +1793,14 @@ impl LocalnetFailure {
         failure.kind = I3LocalnetRunErrorKind::TerminalFailureConsumed;
         failure.stage = I3LocalnetFailureStage::RequesterTerminalFailureConsumed;
         failure.declared_owner_deadline_expired_audit = Some(audit);
+        failure
+    }
+
+    fn owner_reply_replay_rejected(audit: I3LocalnetOwnerReplyReplayAudit) -> Self {
+        let mut failure = Self::lifecycle();
+        failure.kind = I3LocalnetRunErrorKind::OwnerReplyReplayRejected;
+        failure.stage = I3LocalnetFailureStage::AfterKnownRequesterDecision;
+        failure.owner_reply_replay_audit = Some(audit);
         failure
     }
 
@@ -1756,6 +1821,7 @@ impl LocalnetFailure {
             fault_profile: None,
             requester_local_wait_profile: None,
             retry_audit: None,
+            owner_reply_replay_audit: None,
             declared_owner_deadline_expired_audit: None,
             late_ingress_audit: Some(late_ingress_audit),
             late_ingress_evidence_rejection: None,
@@ -1973,6 +2039,7 @@ impl LocalnetFailure {
             },
             fault_audit,
             retry_audit,
+            self.owner_reply_replay_audit,
             self.declared_owner_deadline_expired_audit,
             self.late_ingress_audit,
             self.late_ingress_evidence_rejection,
@@ -2189,6 +2256,8 @@ struct PrivateChildControl {
     // The only owner-runtime scheduling hint carried to B. It selects no
     // semantic result; B acts only after an actual Awaiting disposition.
     owner_admission_drive_profile: Option<I3LocalnetOwnerAdmissionDriveProfile>,
+    owner_reply_replay_profile: Option<I3LocalnetOwnerReplyReplayProfile>,
+    owner_reply_replay_falsifier: Option<I3LocalnetOwnerReplyReplayFalsifier>,
     late_ingress_profile: Option<I3LocalnetLateIngressProfile>,
     late_ingress_falsifier: Option<I3LocalnetLateIngressFalsifier>,
     adapter_delivery_profile: Option<I3LocalnetAdapterDeliveryProfile>,
@@ -2309,6 +2378,7 @@ enum PrivateChildEvent {
         semantic_admission_count: usize,
         owner_mutation_count: usize,
         retry_evidence: Option<PrivateChildRetryEvidence>,
+        owner_reply_replay_evidence: Option<PrivateChildOwnerReplyReplayEvidence>,
     },
     /// Exact child terminal for the selected adapter-delivery controls. It
     /// is still consumed by the existing supervisor/reap path, but retains
@@ -2688,7 +2758,73 @@ struct PrivateChildObserverEvidence {
     retry_evidence: Option<PrivateChildRetryEvidence>,
 }
 
+/// Child-local facts from the bounded T0 generated-reply replay.  Every
+/// transport and runtime field is copied after its actual event; no profile
+/// value creates a semantic outcome, source identity, or session fact.
+#[derive(Clone, Debug, Default, Serialize, Deserialize)]
+#[serde(deny_unknown_fields)]
+struct PrivateChildOwnerReplyReplayEvidence {
+    run_ref: String,
+    cohort_provenance_ref: String,
+    first_session_generation: u8,
+    first_session_peer_spki_verified: bool,
+    first_session_reciprocal_preface_verified: bool,
+    replay_session_generation: Option<u8>,
+    replay_session_peer_spki_verified: Option<bool>,
+    replay_session_reciprocal_preface_verified: Option<bool>,
+    first_request_send: Option<PrivateDeliveryEvidence>,
+    first_request_receive: Option<PrivateDeliveryEvidence>,
+    first_reply_send: Option<PrivateDeliveryEvidence>,
+    first_reply_receive: Option<PrivateDeliveryEvidence>,
+    token_original_first_reply_send_occurrence_ref: Option<String>,
+    token_original_first_reply_carrier_ref: Option<String>,
+    requester_first_outcome: Option<PrivateOwnerReplyReplayFirstOutcome>,
+    requester_state_after_first: Option<PrivateOwnerReplyReplayRequesterState>,
+    requester_final_state: Option<PrivateOwnerReplyReplayRequesterState>,
+    owner_state_after_first: Option<PrivateOwnerReplyReplayOwnerState>,
+    owner_state_after_replay_rejection: Option<PrivateOwnerReplyReplayOwnerState>,
+    owner_expiry: Option<PrivateOwnerAdmissionExpiryEvidence>,
+    replay_reply_send: Option<PrivateDeliveryEvidence>,
+    receiver_rejection: Option<PrivateOwnerReplyReplayReceiverRejection>,
+    replay_prewrite_rejection: Option<I3LocalnetAdapterRejectionKind>,
+}
+
+#[derive(Clone, Copy, Debug, Eq, PartialEq, Serialize, Deserialize)]
+#[serde(rename_all = "snake_case")]
+enum PrivateOwnerReplyReplayFirstOutcome {
+    ReceiptConsumed,
+    TerminalFailureConsumed,
+}
+
+#[derive(Clone, Debug, Eq, PartialEq, Serialize, Deserialize)]
+#[serde(deny_unknown_fields)]
+struct PrivateOwnerReplyReplayRequesterState {
+    pending_request_count: usize,
+    receipt_count: usize,
+    terminal_failure_count: usize,
+    receipt_occurrence_ref: Option<String>,
+    terminal_failure_occurrence_ref: Option<String>,
+}
+
+#[derive(Clone, Copy, Debug, Eq, PartialEq, Serialize, Deserialize)]
+#[serde(deny_unknown_fields)]
+struct PrivateOwnerReplyReplayOwnerState {
+    tombstone_count: usize,
+    served_owner_request_count: usize,
+    owner_mutation_count: usize,
+    expired_owner_admission_count: usize,
+}
+
 #[derive(Clone, Debug, Serialize, Deserialize)]
+#[serde(rename_all = "snake_case", tag = "kind", deny_unknown_fields)]
+enum PrivateOwnerReplyReplayReceiverRejection {
+    CarrierAdmissionRejected {
+        rejected_candidate_commitment_ref: String,
+        network_occurrence_ref: String,
+    },
+}
+
+#[derive(Clone, Debug, Eq, PartialEq, Serialize, Deserialize)]
 #[serde(deny_unknown_fields)]
 struct PrivateDeliveryEvidence {
     carrier_ref: String,
@@ -2704,7 +2840,7 @@ struct PrivateDeliveryEvidence {
     generated_frame_write_observation: Option<PrivateGeneratedFrameWriteObservation>,
 }
 
-#[derive(Clone, Copy, Debug, Serialize, Deserialize)]
+#[derive(Clone, Copy, Debug, Eq, PartialEq, Serialize, Deserialize)]
 #[serde(deny_unknown_fields)]
 struct PrivateGeneratedFrameWriteObservation {
     application_write_count: u8,
@@ -2793,6 +2929,22 @@ impl PrivateChildEvent {
             } => observer_evidence.retry_evidence.as_ref(),
             Self::HandledDeliveryFault { retry_evidence, .. } => retry_evidence.as_ref(),
             Self::Ready { .. }
+            | Self::Rejected { .. }
+            | Self::AdapterDeliveryFault { .. }
+            | Self::LateIngress { .. }
+            | Self::UnknownLifecycleFailure { .. }
+            | Self::OwnerAdmissionAwaiting { .. } => None,
+        }
+    }
+
+    fn owner_reply_replay_evidence(&self) -> Option<&PrivateChildOwnerReplyReplayEvidence> {
+        match self {
+            Self::HandledDeliveryFault {
+                owner_reply_replay_evidence,
+                ..
+            } => owner_reply_replay_evidence.as_ref(),
+            Self::Ready { .. }
+            | Self::Completed { .. }
             | Self::Rejected { .. }
             | Self::AdapterDeliveryFault { .. }
             | Self::LateIngress { .. }
@@ -3223,6 +3375,8 @@ pub fn run_i3_process_localnet(
     let late_ingress_falsifier = request.late_ingress_falsifier;
     let adapter_delivery_profile = request.adapter_delivery_profile;
     let owner_admission_drive_profile = request.owner_admission_drive_profile;
+    let owner_reply_replay_profile = request.owner_reply_replay_profile;
+    let owner_reply_replay_falsifier = request.owner_reply_replay_falsifier;
     let requester_local_wait_profile = request.requester_local_wait_profile;
     let requester_local_wait_falsifier = request.requester_local_wait_falsifier;
     if deadline.is_zero() {
@@ -3247,6 +3401,7 @@ pub fn run_i3_process_localnet(
             fault_profile: None,
             requester_local_wait_profile: None,
             retry_audit: None,
+            owner_reply_replay_audit: None,
             declared_owner_deadline_expired_audit: None,
             late_ingress_audit: None,
             late_ingress_evidence_rejection: None,
@@ -3268,6 +3423,7 @@ pub fn run_i3_process_localnet(
             fault_profile: None,
             requester_local_wait_profile: None,
             retry_audit: None,
+            owner_reply_replay_audit: None,
             declared_owner_deadline_expired_audit: None,
             late_ingress_audit: None,
             late_ingress_evidence_rejection: None,
@@ -3421,6 +3577,8 @@ pub fn run_i3_process_localnet(
             || request.retry_falsifier.is_some()
             || request.retry_audit_falsifier.is_some()
             || owner_admission_drive_profile.is_some()
+            || owner_reply_replay_profile.is_some()
+            || owner_reply_replay_falsifier.is_some()
             || late_ingress_profile.is_some()
             || late_ingress_falsifier.is_some()
             || adapter_delivery_profile.is_some())
@@ -3439,6 +3597,8 @@ pub fn run_i3_process_localnet(
             || request.retry_falsifier.is_some()
             || request.retry_audit_falsifier.is_some()
             || owner_admission_drive_profile.is_some()
+            || owner_reply_replay_profile.is_some()
+            || owner_reply_replay_falsifier.is_some()
             || late_ingress_profile.is_some()
             || late_ingress_falsifier.is_some()
             || adapter_delivery_profile.is_some())
@@ -3483,7 +3643,9 @@ pub fn run_i3_process_localnet(
             || request.fault_audit_falsifier.is_some()
             || request.retry_profile.is_some()
             || request.retry_falsifier.is_some()
-            || request.retry_audit_falsifier.is_some())
+            || request.retry_audit_falsifier.is_some()
+            || owner_reply_replay_profile.is_some()
+            || owner_reply_replay_falsifier.is_some())
     {
         return Err(LocalnetFailure::lifecycle().into_error(true));
     }
@@ -3493,6 +3655,8 @@ pub fn run_i3_process_localnet(
             || request.retry_profile.is_some()
             || request.retry_falsifier.is_some()
             || request.retry_audit_falsifier.is_some()
+            || owner_reply_replay_profile.is_some()
+            || owner_reply_replay_falsifier.is_some()
             || late_ingress_profile.is_some()
             || late_ingress_falsifier.is_some())
     {
@@ -3517,6 +3681,23 @@ pub fn run_i3_process_localnet(
         if late_ingress_profile != Some(required_profile) {
             return Err(LocalnetFailure::lifecycle().into_error(true));
         }
+    }
+    if owner_reply_replay_falsifier.is_some() && owner_reply_replay_profile.is_none() {
+        return Err(LocalnetFailure::lifecycle().into_error(true));
+    }
+    if owner_reply_replay_profile.is_some()
+        && (request.fault_profile.is_some()
+            || request.fault_audit_falsifier.is_some()
+            || requester_local_wait_profile.is_some()
+            || requester_local_wait_falsifier.is_some()
+            || request.retry_profile.is_some()
+            || request.retry_falsifier.is_some()
+            || request.retry_audit_falsifier.is_some()
+            || late_ingress_profile.is_some()
+            || late_ingress_falsifier.is_some()
+            || adapter_delivery_profile.is_some())
+    {
+        return Err(LocalnetFailure::lifecycle().into_error(true));
     }
     let fault_profile = request.fault_profile;
     let fault_audit_falsifier = request.fault_audit_falsifier;
@@ -3581,6 +3762,8 @@ pub fn run_i3_process_localnet(
                 retry_falsifier,
                 retry_audit_falsifier,
                 owner_admission_drive_profile,
+                owner_reply_replay_profile,
+                owner_reply_replay_falsifier,
                 late_ingress_profile,
                 late_ingress_falsifier,
                 adapter_delivery_profile,
@@ -3643,6 +3826,8 @@ fn run_swapped_pair_falsifier(
         retry_falsifier: None,
         retry_audit_falsifier: None,
         owner_admission_drive_profile: None,
+        owner_reply_replay_profile: None,
+        owner_reply_replay_falsifier: None,
         late_ingress_profile: None,
         late_ingress_falsifier: None,
         adapter_delivery_profile: None,
@@ -3672,6 +3857,8 @@ fn run_swapped_pair_falsifier(
         retry_falsifier: None,
         retry_audit_falsifier: None,
         owner_admission_drive_profile: None,
+        owner_reply_replay_profile: None,
+        owner_reply_replay_falsifier: None,
         late_ingress_profile: None,
         late_ingress_falsifier: None,
         adapter_delivery_profile: None,
@@ -3954,6 +4141,8 @@ fn run_positive_or_peer_falsifier(
     retry_falsifier: Option<I3LocalnetRetryFalsifier>,
     retry_audit_falsifier: Option<I3LocalnetRetryAuditFalsifier>,
     owner_admission_drive_profile: Option<I3LocalnetOwnerAdmissionDriveProfile>,
+    owner_reply_replay_profile: Option<I3LocalnetOwnerReplyReplayProfile>,
+    owner_reply_replay_falsifier: Option<I3LocalnetOwnerReplyReplayFalsifier>,
     late_ingress_profile: Option<I3LocalnetLateIngressProfile>,
     late_ingress_falsifier: Option<I3LocalnetLateIngressFalsifier>,
     adapter_delivery_profile: Option<I3LocalnetAdapterDeliveryProfile>,
@@ -3997,6 +4186,8 @@ fn run_positive_or_peer_falsifier(
         retry_falsifier,
         retry_audit_falsifier,
         owner_admission_drive_profile,
+        owner_reply_replay_profile,
+        owner_reply_replay_falsifier,
         late_ingress_profile,
         late_ingress_falsifier,
         adapter_delivery_profile,
@@ -4102,6 +4293,8 @@ fn run_positive_or_peer_falsifier(
         retry_falsifier,
         retry_audit_falsifier,
         owner_admission_drive_profile,
+        owner_reply_replay_profile,
+        owner_reply_replay_falsifier,
         late_ingress_profile,
         late_ingress_falsifier,
         adapter_delivery_profile,
@@ -4158,6 +4351,15 @@ fn run_positive_or_peer_falsifier(
         // retaining this fact here does not infer it from the selected profile.
         failure.evidence.requester_pending_request_is_retained = true;
         return Err(failure);
+    }
+    if let Some(profile) = owner_reply_replay_profile {
+        let audit = supervisor
+            .owner_reply_replay_audit(profile, lineage)
+            .ok_or_else(|| {
+                LocalnetFailure::lifecycle_evidence_rejected().after_observed_owner_runtime_start()
+            })?;
+        return Err(LocalnetFailure::owner_reply_replay_rejected(audit)
+            .after_observed_owner_runtime_start());
     }
     if retry_falsifier == Some(I3LocalnetRetryFalsifier::RetryOnInitialVerifiedSession) {
         if let PrivateChildEvent::Rejected {
@@ -5814,6 +6016,260 @@ impl LocalnetSupervisor {
         }
     }
 
+    /// Joins only the two actual child reports for the bounded generated
+    /// reply replay. The selected profile does not supply a result, delivery,
+    /// session, or final state: every accepted fact below originated in the
+    /// child event that observed it.
+    fn owner_reply_replay_audit(
+        &self,
+        profile: I3LocalnetOwnerReplyReplayProfile,
+        lineage: &SupervisorLineageEvidence,
+    ) -> Option<I3LocalnetOwnerReplyReplayAudit> {
+        let requester_event = self
+            .children
+            .iter()
+            .find(|child| child.slot == I3LocalnetChildSlot::ProcessA)?
+            .terminal_event
+            .as_ref()?;
+        let owner_event = self
+            .children
+            .iter()
+            .find(|child| child.slot == I3LocalnetChildSlot::ProcessB)?
+            .terminal_event
+            .as_ref()?;
+        let requester = requester_event.owner_reply_replay_evidence()?;
+        let owner = owner_event.owner_reply_replay_evidence()?;
+        if requester.run_ref.is_empty()
+            || requester.run_ref != owner.run_ref
+            || requester.cohort_provenance_ref.is_empty()
+            || requester.cohort_provenance_ref != owner.cohort_provenance_ref
+        {
+            return None;
+        }
+        let requester_child = owner_reply_replay_child_audit(
+            I3LocalnetChildSlot::ProcessA,
+            requester_event,
+            requester,
+        )?;
+        let owner_child =
+            owner_reply_replay_child_audit(I3LocalnetChildSlot::ProcessB, owner_event, owner)?;
+        let first_request_send = requester.first_request_send.as_ref()?;
+        let first_request_receive = owner.first_request_receive.as_ref()?;
+        let first_reply_send = owner.first_reply_send.as_ref()?;
+        let first_reply_receive = requester.first_reply_receive.as_ref()?;
+        let request_identity_ref = first_request_send.semantic_request_identity_ref.clone();
+        if request_identity_ref.is_empty()
+            || !retry_request_delivery_matches_contract(
+                first_request_send,
+                &lineage.request_contract,
+                &request_identity_ref,
+            )
+            || !retry_request_delivery_matches_contract(
+                first_request_receive,
+                &lineage.request_contract,
+                &request_identity_ref,
+            )
+            || !owner_reply_replay_reply_matches_contract(
+                first_reply_send,
+                &lineage.reply_contract,
+                &request_identity_ref,
+            )
+            || !owner_reply_replay_reply_matches_contract(
+                first_reply_receive,
+                &lineage.reply_contract,
+                &request_identity_ref,
+            )
+            || !delivery_semantics_match(first_request_send, first_request_receive)
+            || !delivery_semantics_match(first_reply_send, first_reply_receive)
+            || first_request_send.candidate_commitment_ref.is_empty()
+            || first_request_receive.candidate_commitment_ref.is_empty()
+            || first_request_send.candidate_commitment_ref
+                != first_request_receive.candidate_commitment_ref
+            || first_reply_send.candidate_commitment_ref
+                != first_reply_receive.candidate_commitment_ref
+            || owner
+                .token_original_first_reply_send_occurrence_ref
+                .as_deref()
+                != Some(first_reply_send.network_occurrence_ref.as_str())
+            || owner.token_original_first_reply_carrier_ref.as_deref()
+                != Some(first_reply_send.carrier_ref.as_str())
+        {
+            return None;
+        }
+        let first_records = [
+            first_request_send,
+            first_request_receive,
+            first_reply_send,
+            first_reply_receive,
+        ];
+        if first_records
+            .iter()
+            .map(|record| record.network_occurrence_ref.as_str())
+            .collect::<BTreeSet<_>>()
+            .len()
+            != first_records.len()
+        {
+            return None;
+        }
+        let requester_state_after_first = requester.requester_state_after_first.as_ref()?;
+        let requester_final_state = requester.requester_final_state.as_ref()?;
+        let owner_state_after_first = owner.owner_state_after_first.as_ref()?;
+        let owner_state_after_replay_rejection =
+            owner.owner_state_after_replay_rejection.as_ref()?;
+        if !owner_reply_replay_terminal_matches(
+            requester_event,
+            I3LocalnetChildSlot::ProcessA,
+            &request_identity_ref,
+            0,
+        ) || !owner_reply_replay_terminal_matches(
+            owner_event,
+            I3LocalnetChildSlot::ProcessB,
+            &request_identity_ref,
+            owner_state_after_first.owner_mutation_count,
+        ) {
+            return None;
+        }
+        let first_outcome = match requester.requester_first_outcome? {
+            PrivateOwnerReplyReplayFirstOutcome::ReceiptConsumed => {
+                if owner.owner_expiry.is_some()
+                    || !owner_reply_replay_requester_state_is_exact(
+                        requester_state_after_first,
+                        false,
+                    )
+                    || !owner_reply_replay_owner_state_is_exact(owner_state_after_first, false)
+                {
+                    return None;
+                }
+                I3LocalnetOwnerReplyReplayFirstOutcome::ReceiptConsumed
+            }
+            PrivateOwnerReplyReplayFirstOutcome::TerminalFailureConsumed => {
+                let expiry = owner.owner_expiry.as_ref()?;
+                let expiry_request_receive = expiry.request_receive.as_deref()?;
+                if !expiry.is_exact_declared_expiry()
+                    || !delivery_semantics_match(expiry_request_receive, first_request_receive)
+                    || expiry_request_receive.candidate_commitment_ref
+                        != first_request_receive.candidate_commitment_ref
+                    || expiry_request_receive.network_occurrence_ref
+                        != first_request_receive.network_occurrence_ref
+                    || !owner_reply_replay_requester_state_is_exact(
+                        requester_state_after_first,
+                        true,
+                    )
+                    || !owner_reply_replay_owner_state_is_exact(owner_state_after_first, true)
+                {
+                    return None;
+                }
+                I3LocalnetOwnerReplyReplayFirstOutcome::TerminalFailureConsumed {
+                    owner_expiry: expiry.public(),
+                }
+            }
+        };
+        if requester_final_state != requester_state_after_first
+            || owner_state_after_replay_rejection != owner_state_after_first
+        {
+            return None;
+        }
+        let replay_outcome = match (
+            owner.replay_reply_send.as_ref(),
+            requester.receiver_rejection.as_ref(),
+            owner.replay_prewrite_rejection,
+        ) {
+            (Some(replay_reply_send), Some(receiver_rejection), None) => {
+                if !owner_reply_replay_successor_session_valid(requester)
+                    || !owner_reply_replay_successor_session_valid(owner)
+                    || !owner_reply_replay_reply_matches_contract(
+                        replay_reply_send,
+                        &lineage.reply_contract,
+                        &request_identity_ref,
+                    )
+                    || !delivery_semantics_match(first_reply_send, replay_reply_send)
+                    || replay_reply_send.carrier_ref != first_reply_send.carrier_ref
+                    || replay_reply_send.candidate_commitment_ref
+                        == first_reply_send.candidate_commitment_ref
+                    || replay_reply_send.network_occurrence_ref
+                        == first_reply_send.network_occurrence_ref
+                {
+                    return None;
+                }
+                let PrivateOwnerReplyReplayReceiverRejection::CarrierAdmissionRejected {
+                    rejected_candidate_commitment_ref,
+                    network_occurrence_ref,
+                } = receiver_rejection;
+                if rejected_candidate_commitment_ref.is_empty()
+                    || network_occurrence_ref.is_empty()
+                    || rejected_candidate_commitment_ref
+                        != &replay_reply_send.candidate_commitment_ref
+                {
+                    return None;
+                }
+                let records = [
+                    first_request_send,
+                    first_request_receive,
+                    first_reply_send,
+                    first_reply_receive,
+                    replay_reply_send,
+                ];
+                if records
+                    .iter()
+                    .map(|record| record.network_occurrence_ref.as_str())
+                    .chain(std::iter::once(network_occurrence_ref.as_str()))
+                    .collect::<BTreeSet<_>>()
+                    .len()
+                    != records.len() + 1
+                {
+                    return None;
+                }
+                I3LocalnetOwnerReplyReplayOutcome::ReceiverRejected {
+                    replay_reply_send: Box::new(delivery_record(
+                        I3LocalnetDeliveryPhase::ReplySend,
+                        replay_reply_send,
+                    )),
+                    receiver_rejection:
+                        I3LocalnetOwnerReplyReplayReceiverRejection::CarrierAdmissionRejected {
+                            rejected_candidate_commitment_ref: rejected_candidate_commitment_ref
+                                .clone(),
+                            network_occurrence_ref: network_occurrence_ref.clone(),
+                        },
+                }
+            }
+            (None, None, Some(I3LocalnetAdapterRejectionKind::LocalAttemptRejected)) => {
+                if !owner_reply_replay_no_successor_session(requester)
+                    || !owner_reply_replay_no_successor_session(owner)
+                {
+                    return None;
+                }
+                I3LocalnetOwnerReplyReplayOutcome::RejectedBeforeReplayWrite {
+                    rejection: I3LocalnetAdapterRejectionKind::LocalAttemptRejected,
+                }
+            }
+            _ => return None,
+        };
+        Some(I3LocalnetOwnerReplyReplayAudit::from_actual_observation(
+            profile,
+            request_identity_ref,
+            requester.cohort_provenance_ref.clone(),
+            delivery_record(I3LocalnetDeliveryPhase::RequestSend, first_request_send),
+            delivery_record(
+                I3LocalnetDeliveryPhase::RequestReceive,
+                first_request_receive,
+            ),
+            delivery_record(I3LocalnetDeliveryPhase::ReplySend, first_reply_send),
+            delivery_record(I3LocalnetDeliveryPhase::ReplyReceive, first_reply_receive),
+            owner
+                .token_original_first_reply_send_occurrence_ref
+                .clone()?,
+            owner.token_original_first_reply_carrier_ref.clone()?,
+            first_outcome,
+            replay_outcome,
+            owner_reply_replay_public_requester_state(requester_state_after_first),
+            owner_reply_replay_public_requester_state(requester_final_state),
+            owner_reply_replay_public_owner_state(owner_state_after_first),
+            owner_reply_replay_public_owner_state(owner_state_after_replay_rejection),
+            requester_child,
+            owner_child,
+        ))
+    }
+
     /// Retains only A's independently checkable pending observation when a
     /// larger retry join is rejected.  This does not validate B's outcome or
     /// turn the retry into an accepted audit.
@@ -5842,6 +6298,7 @@ impl LocalnetSupervisor {
             semantic_admission_count: 0,
             owner_mutation_count: 0,
             retry_evidence: Some(retry_evidence),
+            ..
         } = requester_event
         else {
             return false;
@@ -6955,6 +7412,125 @@ fn delivery_matches_contract(
         && delivery.edge_ref == contract.edge_ref()
 }
 
+fn owner_reply_replay_reply_matches_contract(
+    delivery: &PrivateDeliveryEvidence,
+    contract: &Sys5I3AdapterCarrierContract,
+    request_identity_ref: &str,
+) -> bool {
+    delivery_matches_contract(delivery, contract)
+        && delivery.semantic_request_identity_ref == request_identity_ref
+        && delivery.linked_request_identity_ref.as_deref() == Some(request_identity_ref)
+        && !delivery.carrier_ref.is_empty()
+        && !delivery.network_occurrence_ref.is_empty()
+        && !delivery.candidate_commitment_ref.is_empty()
+}
+
+fn owner_reply_replay_child_audit(
+    slot: I3LocalnetChildSlot,
+    event: &PrivateChildEvent,
+    evidence: &PrivateChildOwnerReplyReplayEvidence,
+) -> Option<I3LocalnetOwnerReplyReplayChildAudit> {
+    let PrivateChildEvent::HandledDeliveryFault {
+        slot: event_slot,
+        semantic_admission_count: 1,
+        owner_reply_replay_evidence: Some(_),
+        ..
+    } = event
+    else {
+        return None;
+    };
+    let terminal = event.terminal_event()?;
+    if *event_slot != slot
+        || terminal.slot() != Some(slot)
+        || terminal.outcome() != I3LocalnetChildTerminalOutcome::HandledDeliveryFault
+        || evidence.run_ref.is_empty()
+        || evidence.first_session_generation != 1
+        || !evidence.first_session_peer_spki_verified
+        || !evidence.first_session_reciprocal_preface_verified
+    {
+        return None;
+    }
+    Some(
+        I3LocalnetOwnerReplyReplayChildAudit::from_actual_observation(
+            slot,
+            evidence.run_ref.clone(),
+            evidence.first_session_generation,
+            evidence.first_session_peer_spki_verified,
+            evidence.first_session_reciprocal_preface_verified,
+            evidence.replay_session_generation,
+            evidence.replay_session_peer_spki_verified,
+            evidence.replay_session_reciprocal_preface_verified,
+            terminal.outcome(),
+        ),
+    )
+}
+
+fn owner_reply_replay_terminal_matches(
+    event: &PrivateChildEvent,
+    slot: I3LocalnetChildSlot,
+    request_identity_ref: &str,
+    owner_mutation_count: usize,
+) -> bool {
+    matches!(
+        event,
+        PrivateChildEvent::HandledDeliveryFault {
+            slot: event_slot,
+            request_identity_ref: Some(event_identity_ref),
+            requester_observation: None,
+            requester_pending_request_is_retained: None,
+            requester_local_wait: None,
+            remote_admission: None,
+            semantic_admission_count: 1,
+            owner_mutation_count: event_owner_mutation_count,
+            retry_evidence: None,
+            owner_reply_replay_evidence: Some(_),
+        } if *event_slot == slot
+            && event_identity_ref == request_identity_ref
+            && *event_owner_mutation_count == owner_mutation_count
+    )
+}
+
+fn owner_reply_replay_successor_session_valid(
+    evidence: &PrivateChildOwnerReplyReplayEvidence,
+) -> bool {
+    evidence.replay_session_generation == Some(2)
+        && evidence.replay_session_peer_spki_verified == Some(true)
+        && evidence.replay_session_reciprocal_preface_verified == Some(true)
+}
+
+fn owner_reply_replay_no_successor_session(
+    evidence: &PrivateChildOwnerReplyReplayEvidence,
+) -> bool {
+    evidence.replay_session_generation.is_none()
+        && evidence.replay_session_peer_spki_verified.is_none()
+        && evidence
+            .replay_session_reciprocal_preface_verified
+            .is_none()
+}
+
+fn owner_reply_replay_public_requester_state(
+    state: &PrivateOwnerReplyReplayRequesterState,
+) -> I3LocalnetOwnerReplyReplayRequesterState {
+    I3LocalnetOwnerReplyReplayRequesterState::from_actual_observation(
+        state.pending_request_count,
+        state.receipt_count,
+        state.terminal_failure_count,
+        state.receipt_occurrence_ref.clone(),
+        state.terminal_failure_occurrence_ref.clone(),
+    )
+}
+
+fn owner_reply_replay_public_owner_state(
+    state: &PrivateOwnerReplyReplayOwnerState,
+) -> I3LocalnetOwnerReplyReplayOwnerState {
+    I3LocalnetOwnerReplyReplayOwnerState::from_actual_observation(
+        state.tombstone_count,
+        state.served_owner_request_count,
+        state.owner_mutation_count,
+        state.expired_owner_admission_count,
+    )
+}
+
 fn exact_observer_chain(references: &I3LocalnetObserverSafeReferences) -> bool {
     !references.request_source_ref.is_empty()
         && !references.request_core_ref.is_empty()
@@ -7396,7 +7972,9 @@ async fn run_server_child(
         return Err(());
     }
     install_ring()?;
-    let run_ref = trusted.localnet_preface().run_ref().to_string();
+    let local_preface = trusted.localnet_preface();
+    let run_ref = local_preface.run_ref().to_string();
+    let cohort_provenance_ref = local_preface.cohort_provenance_ref().to_string();
     let (server_config, _transport_evidence) = server_config(&control)?;
     let endpoint =
         Endpoint::server(server_config, SocketAddr::from(([127, 0, 0, 1], 0))).map_err(|_| ())?;
@@ -7498,6 +8076,24 @@ async fn run_server_child(
             )
             .await;
         }
+        if let Some(profile) = control.owner_reply_replay_profile {
+            if admitted_lifecycle_stimulus.is_some() {
+                return Err(());
+            }
+            return run_server_owner_reply_replay_sessions(
+                runtime,
+                session,
+                &endpoint,
+                &control,
+                PrivateOwnerReplyReplayServerSessionPlan {
+                    profile,
+                    falsifier: control.owner_reply_replay_falsifier,
+                    run_ref,
+                    cohort_provenance_ref: cohort_provenance_ref.clone(),
+                },
+            )
+            .await;
+        }
         if let Some(profile) = control.late_ingress_profile {
             return run_server_late_ingress_sessions(
                 runtime,
@@ -7586,6 +8182,7 @@ async fn run_server_child(
                     semantic_admission_count: 0,
                     owner_mutation_count: summary.actual_owner_write_count(),
                     retry_evidence: None,
+                    owner_reply_replay_evidence: None,
                 })
                 .map_err(|_| ())?;
                 session.close();
@@ -7699,6 +8296,7 @@ async fn run_server_child(
                 semantic_admission_count: 1,
                 owner_mutation_count,
                 retry_evidence: None,
+                owner_reply_replay_evidence: None,
             })
             .map_err(|_| ())?;
             // The reply carrier exists in the owner runtime but is deliberately
@@ -7794,7 +8392,9 @@ async fn run_client_child(
         .parse::<SocketAddr>()
         .map_err(|_| ())?;
     install_ring()?;
-    let run_ref = trusted.localnet_preface().run_ref().to_string();
+    let local_preface = trusted.localnet_preface();
+    let run_ref = local_preface.run_ref().to_string();
+    let cohort_provenance_ref = local_preface.cohort_provenance_ref().to_string();
     let mut endpoint = Endpoint::client(SocketAddr::from(([127, 0, 0, 1], 0))).map_err(|_| ())?;
     let (client_config, _transport_evidence) = client_config(&control)?;
     endpoint.set_default_client_config(client_config);
@@ -7954,6 +8554,21 @@ async fn run_client_child(
             )
             .await;
         }
+        if let Some(profile) = control.owner_reply_replay_profile {
+            return run_client_owner_reply_replay_sessions(
+                runtime,
+                session,
+                &endpoint,
+                endpoint_address,
+                PrivateOwnerReplyReplayClientSessionPlan {
+                    profile,
+                    falsifier: control.owner_reply_replay_falsifier,
+                    run_ref,
+                    cohort_provenance_ref: cohort_provenance_ref.clone(),
+                },
+            )
+            .await;
+        }
         if let Some(profile) = control.late_ingress_profile {
             return run_client_late_ingress_sessions(
                 runtime,
@@ -7994,6 +8609,7 @@ async fn run_client_child(
                 semantic_admission_count: 0,
                 owner_mutation_count: 0,
                 retry_evidence: None,
+                owner_reply_replay_evidence: None,
             })
             .map_err(|_| ())?;
             // No generated carrier enters the adapter in this schedule.  The
@@ -8160,6 +8776,7 @@ async fn run_client_child(
                     semantic_admission_count: 0,
                     owner_mutation_count: 0,
                     retry_evidence: None,
+                    owner_reply_replay_evidence: None,
                 })
                 .map_err(|_| ())?;
                 session.close();
@@ -8760,6 +9377,7 @@ async fn run_server_retry_sessions(
             semantic_admission_count: summary.served_owner_request_count(),
             owner_mutation_count: summary.actual_owner_write_count(),
             retry_evidence: None,
+            owner_reply_replay_evidence: None,
         })
         .map_err(|_| ())?;
         first_session.close();
@@ -9022,6 +9640,7 @@ async fn run_server_retry_sessions(
                 semantic_admission_count: 1,
                 owner_mutation_count: summary.actual_owner_write_count(),
                 retry_evidence: Some(retry_evidence),
+                owner_reply_replay_evidence: None,
             })
             .map_err(|_| ())?;
         }
@@ -9035,6 +9654,491 @@ struct PrivateRetryClientSessionPlan {
     profile: I3LocalnetRetryProfile,
     run_ref: String,
     assigned_loci: Vec<String>,
+}
+
+/// Immutable B-local inputs for the bounded reply replay. The source-derived
+/// reply itself stays inside the opaque private-QUIC candidate.
+struct PrivateOwnerReplyReplayServerSessionPlan {
+    profile: I3LocalnetOwnerReplyReplayProfile,
+    falsifier: Option<I3LocalnetOwnerReplyReplayFalsifier>,
+    run_ref: String,
+    cohort_provenance_ref: String,
+}
+
+/// Immutable A-local inputs for the bounded reply replay. There is no source
+/// resend or caller-provided reply/result on the successor session.
+struct PrivateOwnerReplyReplayClientSessionPlan {
+    profile: I3LocalnetOwnerReplyReplayProfile,
+    falsifier: Option<I3LocalnetOwnerReplyReplayFalsifier>,
+    run_ref: String,
+    cohort_provenance_ref: String,
+}
+
+async fn run_server_owner_reply_replay_sessions(
+    mut runtime: mir_runtime::sys5_i3_process_runtime::Sys5I3ProcessRuntime,
+    mut first_session: mir_runtime::sys5_i3_private_quic::Sys5I3PrivateQuicSession,
+    endpoint: &Endpoint,
+    control: &PrivateChildControl,
+    replay_plan: PrivateOwnerReplyReplayServerSessionPlan,
+) -> Result<(), ()> {
+    let PrivateOwnerReplyReplayServerSessionPlan {
+        profile,
+        falsifier,
+        run_ref,
+        cohort_provenance_ref,
+    } = replay_plan;
+    if profile != I3LocalnetOwnerReplyReplayProfile::ReplayKnownOwnerReplyOnVerifiedSuccessorSession
+        || !first_session.peer_spki_verified()
+        || !first_session.peer_preface_verified()
+        || first_session.session_attempt_generation() != 1
+        || cohort_provenance_ref.is_empty()
+    {
+        return Err(());
+    }
+    let first_session_peer_spki_verified = first_session.peer_spki_verified();
+    let first_session_reciprocal_preface_verified = first_session.peer_preface_verified();
+    let (reply, request_delivery) = first_session
+        .receive_and_admit_generated_message(&mut runtime)
+        .await
+        .map_err(|_| ())?;
+    let request_identity_ref = request_delivery.semantic_request_identity_ref().to_string();
+    let first_request_receive = PrivateDeliveryEvidence::from(request_delivery);
+    let (reply, mut owner_expiry) = match resolve_received_owner_reply(
+        &mut runtime,
+        reply,
+        &request_identity_ref,
+        control.owner_admission_drive_profile,
+    )? {
+        PrivateResolvedOwnerReply::Served(reply) => (reply, None),
+        PrivateResolvedOwnerReply::DeclaredDeadlineExpired { reply, expiry } => {
+            (reply, Some(expiry))
+        }
+    };
+    if let Some(expiry) = owner_expiry.as_mut() {
+        // The expiry producer record is joined only to this actual B receive;
+        // it retains no host driver or clock input.
+        expiry.request_receive = Some(Box::new(first_request_receive.clone()));
+    }
+    let owner_state_after_first = owner_reply_replay_owner_state(&runtime);
+    if !owner_reply_replay_owner_state_is_exact(&owner_state_after_first, owner_expiry.is_some()) {
+        return Err(());
+    }
+    let (first_reply_delivery, replay_candidate) = first_session
+        .test_only_send_generated_reply_and_retain_replay_candidate(reply)
+        .await
+        .map_err(|_| ())?;
+    first_session.finish_send().map_err(|_| ())?;
+    let first_reply_send = PrivateDeliveryEvidence::from(first_reply_delivery);
+    if first_request_receive.semantic_request_identity_ref != request_identity_ref
+        || first_reply_send.semantic_request_identity_ref != request_identity_ref
+        || first_reply_send.linked_request_identity_ref.as_deref() != Some(&request_identity_ref)
+        || first_reply_send.network_occurrence_ref.is_empty()
+        || first_reply_send.carrier_ref.is_empty()
+    {
+        return Err(());
+    }
+    // The accepted parent join requires A's emitted first-consumption record
+    // before treating its close as this hand-off. A peer close alone can be
+    // abnormal and proves no requester decision; no T0 label substitutes for
+    // the independent A evidence.
+    first_session.wait_for_peer_close().await;
+
+    let (
+        replay_session_generation,
+        replay_session_peer_spki_verified,
+        replay_session_preface_verified,
+        replay_reply_send,
+        receiver_rejection,
+        replay_prewrite_rejection,
+        owner_state_after_replay_rejection,
+        token_original_first_reply_send_occurrence_ref,
+        token_original_first_reply_carrier_ref,
+    ) = match falsifier {
+        Some(I3LocalnetOwnerReplyReplayFalsifier::ReplayOnInitialVerifiedSession) => {
+            let error = match first_session
+                .test_only_replay_retained_generated_reply(replay_candidate)
+                .await
+            {
+                Err(error) => error,
+                Ok(_) => return Err(()),
+            };
+            if !matches!(
+                error,
+                mir_runtime::sys5_i3_private_quic::Sys5I3PrivateQuicError::LocalAttemptRejected
+            ) {
+                return Err(());
+            }
+            let after = owner_reply_replay_owner_state(&runtime);
+            if after != owner_state_after_first {
+                return Err(());
+            }
+            first_session.close();
+            (
+                None,
+                None,
+                None,
+                None,
+                None,
+                Some(I3LocalnetAdapterRejectionKind::LocalAttemptRejected),
+                after,
+                first_reply_send.network_occurrence_ref.clone(),
+                first_reply_send.carrier_ref.clone(),
+            )
+        }
+        None => {
+            first_session.close();
+            let reconnect = first_session.into_reconnect();
+            let mut replay_session = accept_reconnect_session(endpoint, reconnect).await?;
+            replay_session.send_local_preface().await.map_err(|_| ())?;
+            replay_session
+                .receive_and_validate_peer_preface()
+                .await
+                .map_err(|_| ())?;
+            if !replay_session.peer_spki_verified()
+                || !replay_session.peer_preface_verified()
+                || replay_session.session_attempt_generation() != 2
+            {
+                return Err(());
+            }
+            let replay_delivery = replay_session
+                .test_only_replay_retained_generated_reply(replay_candidate)
+                .await
+                .map_err(|_| ())?;
+            let original_send =
+                PrivateDeliveryEvidence::from(replay_delivery.original_send_delivery().clone());
+            let replay_reply_send =
+                PrivateDeliveryEvidence::from(replay_delivery.replay_delivery().clone());
+            if original_send != first_reply_send
+                || !delivery_semantics_match(&first_reply_send, &replay_reply_send)
+                || replay_reply_send.carrier_ref != first_reply_send.carrier_ref
+                || replay_reply_send.candidate_commitment_ref
+                    == first_reply_send.candidate_commitment_ref
+                || replay_reply_send.network_occurrence_ref
+                    == first_reply_send.network_occurrence_ref
+            {
+                return Err(());
+            }
+            replay_session.finish_send().map_err(|_| ())?;
+            // A completes generic receiver admission/rejection before B
+            // reports its post-replay owner state to the supervisor.
+            replay_session.wait_for_peer_close().await;
+            let after = owner_reply_replay_owner_state(&runtime);
+            if after != owner_state_after_first {
+                return Err(());
+            }
+            let generation = replay_session.session_attempt_generation();
+            let peer_spki_verified = replay_session.peer_spki_verified();
+            let preface_verified = replay_session.peer_preface_verified();
+            replay_session.close();
+            (
+                Some(generation),
+                Some(peer_spki_verified),
+                Some(preface_verified),
+                Some(replay_reply_send),
+                None,
+                None,
+                after,
+                original_send.network_occurrence_ref,
+                original_send.carrier_ref,
+            )
+        }
+    };
+    let summary = runtime.observer_safe_runtime_summary();
+    emit_child_event(&PrivateChildEvent::HandledDeliveryFault {
+        slot: I3LocalnetChildSlot::ProcessB,
+        request_identity_ref: Some(request_identity_ref),
+        requester_observation: None,
+        requester_pending_request_is_retained: None,
+        requester_local_wait: None,
+        remote_admission: None,
+        semantic_admission_count: 1,
+        owner_mutation_count: summary.actual_owner_write_count(),
+        retry_evidence: None,
+        owner_reply_replay_evidence: Some(PrivateChildOwnerReplyReplayEvidence {
+            run_ref,
+            cohort_provenance_ref,
+            first_session_generation: 1,
+            first_session_peer_spki_verified,
+            first_session_reciprocal_preface_verified,
+            replay_session_generation,
+            replay_session_peer_spki_verified,
+            replay_session_reciprocal_preface_verified: replay_session_preface_verified,
+            first_request_receive: Some(first_request_receive),
+            first_reply_send: Some(first_reply_send),
+            token_original_first_reply_send_occurrence_ref: Some(
+                token_original_first_reply_send_occurrence_ref,
+            ),
+            token_original_first_reply_carrier_ref: Some(token_original_first_reply_carrier_ref),
+            owner_state_after_first: Some(owner_state_after_first),
+            owner_state_after_replay_rejection: Some(owner_state_after_replay_rejection),
+            owner_expiry,
+            replay_reply_send,
+            receiver_rejection,
+            replay_prewrite_rejection,
+            ..PrivateChildOwnerReplyReplayEvidence::default()
+        }),
+    })
+    .map_err(|_| ())?;
+    Ok(())
+}
+
+async fn run_client_owner_reply_replay_sessions(
+    mut runtime: mir_runtime::sys5_i3_process_runtime::Sys5I3ProcessRuntime,
+    mut first_session: mir_runtime::sys5_i3_private_quic::Sys5I3PrivateQuicSession,
+    endpoint: &Endpoint,
+    endpoint_address: SocketAddr,
+    replay_plan: PrivateOwnerReplyReplayClientSessionPlan,
+) -> Result<(), ()> {
+    let PrivateOwnerReplyReplayClientSessionPlan {
+        profile,
+        falsifier,
+        run_ref,
+        cohort_provenance_ref,
+    } = replay_plan;
+    if profile != I3LocalnetOwnerReplyReplayProfile::ReplayKnownOwnerReplyOnVerifiedSuccessorSession
+        || !first_session.peer_spki_verified()
+        || !first_session.peer_preface_verified()
+        || first_session.session_attempt_generation() != 1
+        || cohort_provenance_ref.is_empty()
+    {
+        return Err(());
+    }
+    let first_session_peer_spki_verified = first_session.peer_spki_verified();
+    let first_session_reciprocal_preface_verified = first_session.peer_preface_verified();
+    let request = runtime
+        .emit_generated_owner_request("init_avatar_hp")
+        .map_err(|_| ())?;
+    let request_identity_ref = request.semantic_request_identity_ref().to_string();
+    let request_delivery = first_session
+        .send_generated_message(request)
+        .await
+        .map_err(|_| ())?;
+    first_session.finish_send().map_err(|_| ())?;
+    let (receipt, first_reply_delivery) = first_session
+        .receive_and_admit_generated_message(&mut runtime)
+        .await
+        .map_err(|_| ())?;
+    let receipt = receipt.ok_or(())?;
+    let terminal_failure_consumed = receipt.is_observer_safe_terminal_failure_consumed()
+        && receipt.has_no_transportable_carrier();
+    if !terminal_failure_consumed
+        && (!receipt.is_observer_safe_typed_result_or_receipt()
+            || !receipt.has_no_transportable_carrier())
+    {
+        return Err(());
+    }
+    let first_outcome = if terminal_failure_consumed {
+        PrivateOwnerReplyReplayFirstOutcome::TerminalFailureConsumed
+    } else {
+        PrivateOwnerReplyReplayFirstOutcome::ReceiptConsumed
+    };
+    let requester_state_after_first =
+        owner_reply_replay_requester_state(&runtime, &request_identity_ref);
+    if !owner_reply_replay_requester_state_is_exact(
+        &requester_state_after_first,
+        terminal_failure_consumed,
+    ) {
+        return Err(());
+    }
+    let first_request_send = PrivateDeliveryEvidence::from(request_delivery);
+    let first_reply_receive = PrivateDeliveryEvidence::from(first_reply_delivery);
+    if first_request_send.semantic_request_identity_ref != request_identity_ref
+        || first_reply_receive.semantic_request_identity_ref != request_identity_ref
+        || first_reply_receive.linked_request_identity_ref.as_deref() != Some(&request_identity_ref)
+    {
+        return Err(());
+    }
+    // This close occurs only after generic admission has consumed A's first
+    // receipt/terminal. B's session-one wait therefore cannot advance before
+    // the known first decision exists in A's actual runtime.
+    first_session.close();
+
+    let (
+        replay_session_generation,
+        replay_session_peer_spki_verified,
+        replay_session_preface_verified,
+        receiver_rejection,
+        requester_final_state,
+    ) = match falsifier {
+        Some(I3LocalnetOwnerReplyReplayFalsifier::ReplayOnInitialVerifiedSession) => (
+            None,
+            None,
+            None,
+            None,
+            owner_reply_replay_requester_state(&runtime, &request_identity_ref),
+        ),
+        None => {
+            let reconnect = first_session.into_reconnect();
+            let mut replay_session =
+                connect_reconnect_session(endpoint, endpoint_address, reconnect).await?;
+            replay_session.send_local_preface().await.map_err(|_| ())?;
+            replay_session
+                .receive_and_validate_peer_preface()
+                .await
+                .map_err(|_| ())?;
+            if !replay_session.peer_spki_verified()
+                || !replay_session.peer_preface_verified()
+                || replay_session.session_attempt_generation() != 2
+            {
+                return Err(());
+            }
+            let error = match replay_session
+                .receive_and_admit_generated_message(&mut runtime)
+                .await
+            {
+                Err(error) => error,
+                Ok(_) => return Err(()),
+            };
+            let mir_runtime::sys5_i3_private_quic::Sys5I3PrivateQuicError::SemanticRejected {
+                error,
+                rejected_attempt,
+            } = error
+            else {
+                return Err(());
+            };
+            if error.kind()
+                    != mir_runtime::sys5_i3_process_runtime::Sys5I3ProcessRuntimeErrorKind::CarrierAdmissionRejected
+                {
+                    return Err(());
+                }
+            let after = owner_reply_replay_requester_state(&runtime, &request_identity_ref);
+            if after != requester_state_after_first {
+                return Err(());
+            }
+            let generation = replay_session.session_attempt_generation();
+            let peer_spki_verified = replay_session.peer_spki_verified();
+            let preface_verified = replay_session.peer_preface_verified();
+            replay_session.close();
+            (
+                Some(generation),
+                Some(peer_spki_verified),
+                Some(preface_verified),
+                Some(
+                    PrivateOwnerReplyReplayReceiverRejection::CarrierAdmissionRejected {
+                        rejected_candidate_commitment_ref: rejected_attempt
+                            .candidate_commitment_ref()
+                            .to_string(),
+                        network_occurrence_ref: rejected_attempt
+                            .network_occurrence_ref()
+                            .to_string(),
+                    },
+                ),
+                after,
+            )
+        }
+    };
+    if requester_final_state != requester_state_after_first {
+        return Err(());
+    }
+    let summary = runtime.observer_safe_runtime_summary();
+    emit_child_event(&PrivateChildEvent::HandledDeliveryFault {
+        slot: I3LocalnetChildSlot::ProcessA,
+        request_identity_ref: Some(request_identity_ref),
+        requester_observation: None,
+        requester_pending_request_is_retained: None,
+        requester_local_wait: None,
+        remote_admission: None,
+        semantic_admission_count: 1,
+        owner_mutation_count: 0,
+        retry_evidence: None,
+        owner_reply_replay_evidence: Some(PrivateChildOwnerReplyReplayEvidence {
+            run_ref,
+            cohort_provenance_ref,
+            first_session_generation: 1,
+            first_session_peer_spki_verified,
+            first_session_reciprocal_preface_verified,
+            replay_session_generation,
+            replay_session_peer_spki_verified,
+            replay_session_reciprocal_preface_verified: replay_session_preface_verified,
+            first_request_send: Some(first_request_send),
+            first_reply_receive: Some(first_reply_receive),
+            requester_first_outcome: Some(first_outcome),
+            requester_state_after_first: Some(requester_state_after_first),
+            requester_final_state: Some(requester_final_state),
+            receiver_rejection,
+            ..PrivateChildOwnerReplyReplayEvidence::default()
+        }),
+    })
+    .map_err(|_| ())?;
+    if summary.accepted_inbound_receipt_count()
+        + summary.accepted_inbound_declared_owner_failure_count()
+        != 1
+    {
+        return Err(());
+    }
+    Ok(())
+}
+
+fn owner_reply_replay_requester_state(
+    runtime: &mir_runtime::sys5_i3_process_runtime::Sys5I3ProcessRuntime,
+    request_identity_ref: &str,
+) -> PrivateOwnerReplyReplayRequesterState {
+    let summary = runtime.observer_safe_runtime_summary();
+    let occurrences = runtime.observer_safe_semantic_occurrences();
+    PrivateOwnerReplyReplayRequesterState {
+        pending_request_count: runtime.observer_safe_pending_owner_request_count(),
+        receipt_count: summary.accepted_inbound_receipt_count(),
+        terminal_failure_count: summary.accepted_inbound_declared_owner_failure_count(),
+        receipt_occurrence_ref: occurrences
+            .requester_local_receipt_occurrence_ref(request_identity_ref)
+            .map(str::to_string),
+        terminal_failure_occurrence_ref: occurrences
+            .requester_terminal_declared_owner_failure_occurrence_ref(request_identity_ref)
+            .map(str::to_string),
+    }
+}
+
+fn owner_reply_replay_requester_state_is_exact(
+    state: &PrivateOwnerReplyReplayRequesterState,
+    terminal_failure_consumed: bool,
+) -> bool {
+    state.pending_request_count == 0
+        && if terminal_failure_consumed {
+            state.receipt_count == 0
+                && state.terminal_failure_count == 1
+                && state.receipt_occurrence_ref.is_none()
+                && state
+                    .terminal_failure_occurrence_ref
+                    .as_deref()
+                    .is_some_and(|reference| !reference.is_empty())
+        } else {
+            state.receipt_count == 1
+                && state.terminal_failure_count == 0
+                && state.terminal_failure_occurrence_ref.is_none()
+                && state
+                    .receipt_occurrence_ref
+                    .as_deref()
+                    .is_some_and(|reference| !reference.is_empty())
+        }
+}
+
+fn owner_reply_replay_owner_state(
+    runtime: &mir_runtime::sys5_i3_process_runtime::Sys5I3ProcessRuntime,
+) -> PrivateOwnerReplyReplayOwnerState {
+    let summary = runtime.observer_safe_runtime_summary();
+    let owner_admission = runtime.observer_safe_owner_admission_summary();
+    PrivateOwnerReplyReplayOwnerState {
+        tombstone_count: runtime.observer_safe_inbound_owner_request_tombstone_count(),
+        served_owner_request_count: summary.served_owner_request_count(),
+        owner_mutation_count: summary.actual_owner_write_count(),
+        expired_owner_admission_count: owner_admission.expired_count(),
+    }
+}
+
+fn owner_reply_replay_owner_state_is_exact(
+    state: &PrivateOwnerReplyReplayOwnerState,
+    declared_expiry: bool,
+) -> bool {
+    state.tombstone_count == 1
+        && if declared_expiry {
+            state.served_owner_request_count == 0
+                && state.owner_mutation_count == 0
+                && state.expired_owner_admission_count == 1
+        } else {
+            state.served_owner_request_count == 1
+                && state.owner_mutation_count == 1
+                && state.expired_owner_admission_count == 0
+        }
 }
 
 /// Immutable actual-child inputs for one held session-one ingress. The source
@@ -9490,6 +10594,7 @@ async fn run_client_retry_sessions(
                 semantic_admission_count: 0,
                 owner_mutation_count: 0,
                 retry_evidence: Some(retry_evidence),
+                owner_reply_replay_evidence: None,
             })
             .map_err(|_| ())?;
         }
@@ -9648,6 +10753,7 @@ mod lifecycle_evidence_tests {
                     semantic_admission_count: 1,
                     owner_mutation_count: 0,
                     retry_evidence: None,
+                    owner_reply_replay_evidence: None,
                 },
                 I3LocalnetChildTerminalOutcome::HandledDeliveryFault,
             ),

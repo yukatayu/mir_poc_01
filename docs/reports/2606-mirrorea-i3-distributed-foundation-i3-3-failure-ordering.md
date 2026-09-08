@@ -200,8 +200,14 @@ Stage C additionally changes `mir-runtime/src/lib.rs`,
 `m8_owner_admission_gate.rs` (new private linear handoff),
 `m8_runtime_owner_queue.rs`, `m8_runtime_local_cut.rs`,
 `sys5_i3_owner_admission_tests.rs` (new source-derived unit tests), and
-`sys4_dispatch_tests.rs` (genuine queued-request falsifier). No new runtime
-sample or public control surface is promoted.
+`sys4_dispatch_tests.rs` (genuine queued-request falsifier). The later
+`30429d5` integration adds the ordinary budgeted source at
+`samples/clean-near-end/mirrorea-i3-owner-admission/main.mir` and its reader
+entry; the current reply-replay delta reuses it without adding another sample
+or public control surface. The replay delta touches the two existing SYS5 I3
+runtime/adapter files, the three existing probe production files and the probe
+integration test, plus Plan 250, this report and five current LAB snapshots.
+It changes no Canon rule, theory ledger or official lifecycle.
 
 ## Commands run
 
@@ -1679,10 +1685,11 @@ by this advice; provider/time remain OPEN and I3-4 remains inactive.
 
 ## Suggested next prompt
 
-Continue active I3-3 in the original Plan 250 program: map all 20 failure
-families and ordering edges to accepted runtime boundaries, resolve operation-
-specific duplicate/ambiguity handling, and implement/validate bounded real fault
-controls. After full I3-3 acceptance, validation, review, commit/push and remote
+After pinning the reviewed row-11/spec/16 time-and-reply checkpoint, continue
+active I3-3 in Plan 250 at the still-unadopted provider contract. Preserve all
+20 failure families and ordering requirements, including remaining actual
+membership, redaction and in-flight cut boundaries. After full I3-3 acceptance,
+validation, review, commit/push and remote
 parity, honor the latest owner-requested pause. I3-4 requires explicit resume;
 the retained program is not blocked, stale, or completed by that pause.
 
@@ -2191,6 +2198,91 @@ tests: existing component binding tests remain, and the actual two-process
 probe is the direct producer/falsifier consumer. Plan 250 records this finite
 classification without reducing any required family or opening I3-4.
 
+Parent source inspection at the pinned `30429d5` cut confirms the production
+correspondence: `receive_and_admit_generated_message` completes bounded frame
+decode after verified peer/preface checks, then calls
+`admit_decoded_process_message`; that function checks cohort and invokes
+`bind_i3_untrusted_process_carrier` before `accept_inbound`. The binder compares
+reply M9 lineage with the current owner generation. The existing genuine
+G1-expiry/G2-requester test reaches this same binder, not a substitute validator.
+Row-11 replay must use this ordinary receive path; a new pre-receive pending
+guard would not establish its rejection. Candidate commitments include the
+session generation: compare sender/receiver within each attempt, not equality
+across sessions. The retained exact body and token-derived original successful
+send binding establish replay correspondence. This is source inspection for
+the row-11 direct consumer, not unexecuted network acceptance.
+
+The three actual-process replay tests are authored first (successful reply,
+genuine expiry reply, and initial-session prewrite rejection). Their initial
+command, `cargo test --locked -p mirrorea-i3-probe --test
+i3_process_localnet reply_replay -- --test-threads=1`, with incremental builds
+disabled and two build jobs, exits 101 on the missing planned replay API;
+no test body executes. Log: `/tmp/c3-row11-initial-red-20260908.mv524A/`.
+This is API-availability RED, not behavioral evidence. Parent also catches
+three test calls to nonexistent `failure_stage()`; tests use the existing
+`stage()` instead of adding a redundant production alias. The adapter and
+probe writers then begin disjoint production changes; runtime/acceptance
+results are still pending. Free disk at this gate is 12.02 GiB.
+
+Row-11 implementation now executes the three actual-process cases. The first
+integrated build exposes two missing read-only preface cohort accessors, not
+behavioral failures; the bounded repair adds that diagnostic getter without
+changing a field, codec or grant. The rerun passes all three tests, with 38
+filtered, in `/tmp/c3-row11-replay-rerun-20260908.1qkaqU/`; no orphan probe
+child is observed. Two unused new session-plan fields are then removed, not
+suppressed. Full probe regression, deny-warnings Clippy, format and independent
+time/reply review follow this freeze; those results are not yet claimed.
+
+Parent integration also repairs three evidence issues before that green run:
+the initial-session falsifier takes A's actual final runtime snapshot rather
+than cloning its first snapshot or claiming an observation after B's later
+refusal; expiry evidence joins the exact actual B receive occurrence; and
+replay acceptance checks the outer terminal's request identity, mutation count
+and absence of conflicting evidence. On the accepted successor path, A's
+first consume precedes its close/reconnect, and the actual replay is rejected
+by the ordinary receiver. Peer close alone is not a consumption proof: the
+supervisor additionally requires A's independent known-result record. The
+wrong-initial-session branch creates no second session or replay delivery.
+The adapter-only regression at the earlier freeze passes three existing
+private-QUIC component tests in
+`/tmp/c3-runtime-private-quic-20260908.SvT8pR/`; it is not the actual replay test.
+
+Final reviewed time/reply disposition (`2026-09-08T12:04:34+09:00`): full probe
+integration passes 41/41 in `/tmp/c3-final-slice-20260908.at7tQr/`.
+Deny-warnings Clippy first finds a large observer-only enum and the existing
+private error constructor's eighth named argument. Boxing the delivery record
+and a documented constructor-scoped arity expectation preserve semantics;
+the rerun is clean in `/tmp/c3-row11-quality-repair-20260908.iN8Leo/`.
+The subsequent workspace format failure is a scope/style configuration
+mismatch in the earlier local formatter invocation. Direct Rustfmt with
+explicit `edition=2024` and `style_edition=2024` repairs only the owned file.
+Workspace format and the focused actual replay 3/3 then pass in
+`/tmp/c3-row11-format-rerun-20260908.KJQvAz/`; no orphan children remain.
+
+Final independent semantic/security/concurrency review records P0/P1/P2 zero;
+Canon-first planner review confirms the same bounded consumer disposition.
+After documentation and commit/parity integration, row 11 and the spec/16
+time/reply consumer can close. Reopen for cloneable/raw-exportable replay
+tokens, issuance before complete write, wrong control/generation use, a
+prewrite refusal reserving an occurrence, replaced/duplicated decisions,
+missing child joins or bypass of the current-generation production binder.
+Evidence is finite `runtime-monitored`, with the G1→G2 case explicitly local;
+no new Lean/general proof, network requester-generation update, provider
+support, whole I3-3 acceptance or public compatibility claim follows.
+Baseline runtime 332/process 63/I2/M10 5/8/67 are retained `30429d5` evidence,
+not reruns of this replay delta. Provider contract and implementation, the
+remaining matrix/order and full milestone acceptance still follow.
+
+Final documentation gate (`2026-09-08T12:15:50+09:00`) passes `make docs`:
+agent configuration, Canon index 213 files, hierarchy 800/800 and scaffold
+1760 reports. `git diff --check` is clean. The bounded credential-pattern
+scan checks 13 changed paths with zero matches and prints no secret contents;
+no entropy scanner is used or implied. Logs:
+`/tmp/c3-doc-validation-20260908.paufCw/`. Independent planner's final seven-file
+documentation-diff check finds no material P0/P1 or incoherent current claim.
+Root free space remains about 12.00 GiB; no cleanup is performed. Parent now
+integrates this reviewed source/evidence checkpoint before the provider contract.
+
 The independent local-wait re-review closes its previous P2 with P0/P1 zero
 and no new P2. A reports missing reply generically (`Err(_)`), not a separately
 identified QUIC peer-close error: the physical close belongs to the trusted
@@ -2232,6 +2324,23 @@ not skipped passes. General proof, WAN/production, durability and Browser/Host
 product realization remain outside this bounded milestone.
 
 ## Commit / push status
+
+The reviewed row-11/spec/16 time-and-reply integration over `30429d5` is
+prepared for the parent's scoped commit/push after LAB synchronization and
+documentation validation. Its exact hash and remote parity will be recorded
+with the next in-scope provider work rather than predicting a self-referential
+commit hash here. This component checkpoint does not trigger the owner pause;
+only full I3-3 acceptance does.
+
+The C3/time-runtime checkpoint is committed and pushed as
+`30429d5d0521d4ad03fd0500ad49092c89042caf`
+(`feat: enforce owner admission budgets across process transport`). At
+`2026-09-08T10:58:12+09:00`, fresh remote lookup, HEAD and origin/main agree
+and `git status --porcelain=v1` is empty. Its 27-file integration contains
+the clock/gate/one-use handoff, genuine expiry transport/consumption, local
+wait evidence, tests, source fixture and LAB synchronization. This is a
+validated component checkpoint only. I3-3 remains active and resumes with
+actual reply replay; I3-4 remains inactive until full acceptance and owner resume.
 
 The parent committed and pushed the resume integration at
 `48d98ed0279cf6fa2a0eaabd7d1ec21c926c7aec`, with fresh remote parity confirmed
@@ -2290,6 +2399,15 @@ worktree was clean before the next authorized Stage C test change.
 This is the fifth source checkpoint inside I3-3, not milestone acceptance.
 
 ## Sub-agent session close status
+
+At the reviewed replay checkpoint, adapter/probe/test/evaluation writers,
+independent quality reviewer and read-only planner have returned their bounded
+results. The five-file LAB writer hands back its files; parent corrects stale
+pending-replay/review wording, separates retained `30429d5` results from fresh
+41/3/Clippy/format evidence, and restores the prior recent-log timestamp before
+adding a genuinely new log entry. Parent owns the final synchronized snapshot.
+All contexts are retained for the provider direct consumer;
+no I3-4 assignment is active.
 
 At the C3/time-runtime checkpoint, source/test/evaluation/status writers and
 the narrow reviewer have completed their bounded assignments and remain idle

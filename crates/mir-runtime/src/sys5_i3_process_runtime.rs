@@ -1238,6 +1238,12 @@ impl Sys5I3LocalnetPeerPreface {
         &self.run_ref
     }
 
+    /// Reference-only cohort binding for observer-safe delivery diagnostics.
+    /// It is transport evidence, never an authority or admission grant.
+    pub fn cohort_provenance_ref(&self) -> &str {
+        &self.cohort_provenance_ref
+    }
+
     pub fn local_slot_name(&self) -> &str {
         &self.local_slot_name
     }

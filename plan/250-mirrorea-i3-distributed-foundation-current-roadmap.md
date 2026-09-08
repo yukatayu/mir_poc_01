@@ -54,6 +54,9 @@ roadmap/status pointer の一致を検証する。
 - completed goals: **ALIGN-0, ALIGN-1, ALIGN-2, I3-0, I3-1, I3-2**
 - execution state: **execute through I3-3 acceptance, then owner-requested pause**
 - sole active semantic milestone: **I3-3**
+- current component checkpoint: **row 11 / spec/16 bounded time-and-reply
+  evidence reviewed; integration commit/parity pending**. Provider contract
+  selection is the next I3-3 blocker, not a new milestone.
 - next goal: **I3-4 (requires I3-3 acceptance and explicit owner resume)**
 - all other milestones: **ordered, inactive, and dependency-gated**
 - latest owner control (2026-09-07 18:13 JST observation): complete I3-3 with
@@ -101,7 +104,8 @@ Normative direction for this roadmap is read in the following order:
    `architecture/10-i3-multi-process-runtime.md`;
 3. `mirrorea_canon/plan/00-gates.md`, `plan/01-phases.md`, and
    `plan/05-i3-entry-contract.md`;
-4. ADR-0026, ADR-0028 through ADR-0040, PROPOSAL-037 through PROPOSAL-043, and
+4. ADR-0026, ADR-0028 through ADR-0041, PROPOSAL-037 through PROPOSAL-044,
+   `mirrorea_canon/spec/16-i3-owner-admission-budget.md`, and
    `mirrorea_canon/theory/11-metatheory-ledger.md`; and
 5. the owner-authorized PROPOSAL-037 / ADR-0034 activation mirror and the
    milestone acceptance chain through PROPOSAL-042 / ADR-0039, followed by
@@ -1264,6 +1268,34 @@ replay consumer. Neither this checkpoint nor the passed local stale-generation
 test accepts row 17, all of spec/16, I3-3 or official I3 lifecycle. Provider and
 the remaining complete matrix/order still follow; I3-4 remains inactive.
 
+This checkpoint is committed and pushed as
+`30429d5d0521d4ad03fd0500ad49092c89042caf`. Fresh remote lookup, HEAD and
+origin/main match with a clean worktree at `2026-09-08T10:58:12+09:00`.
+It is the pinned input to the row-11 reply-replay work, not I3-3 acceptance.
+
+Current time/reply disposition (`2026-09-08T12:04:34+09:00`): actual successful
+and genuine expiry replies are consumed once, then their exact retained bytes
+are replayed through verified successor QUIC sessions and rejected by the
+ordinary receiver without changing the first requester decision or owner
+state. The initial-session falsifier rejects before replay occurrence/write.
+Full probe integration is 41/41; after observer-layout/format-only cleanup,
+focused replay is 3/3, two-crate all-target deny-warnings Clippy and workspace
+format pass. Final independent review has P0/P1/P2 zero. Canon-first planner
+review confirms that these results close the bounded row-11/spec/16 consumer
+after documentation integration and commit/push/parity, not I3-3 itself.
+The genuine G1-expiry/G2-requester check remains local production-binder
+evidence; no requester-generation network update is claimed. The 30429d5
+runtime 332/process 63/I2/M10 5/8/67 floor is retained baseline evidence, not
+rerun evidence for this adapter/probe delta. Report 2606 holds the exact logs.
+
+Next direct consumer: select the smallest source-declared typed external
+invocation contract for provider failure, then implement its checked grant,
+projection and actual provider attempt/result path. No existing owner RMW,
+expiry producer, auth-discharge rejection or transport error substitutes for
+that effect. The existing Oracle advice is advisory and unadopted. Provider
+contract/code, remaining membership/redaction/cut families, full ordering,
+milestone regressions and acceptance review remain required. I3-4 is inactive.
+
 Independent remaining-row sequencing review keeps the following direct
 consumers after the time path. Membership uses the actual M9 retirement of
 ParticipantA and the already checked `init_focus` operation, not capability
@@ -1617,9 +1649,8 @@ integration, or Typed-Effect platform collapse.
 
 ## Recommended next action
 
-Implement the selected ADR-0041 time contract through static preservation,
-non-bypass runtime enforcement and actual QUIC evidence, then resolve the
-still-open provider contract and complete the remaining I3-3
+Integrate and pin the reviewed row-11/spec/16 time-and-reply checkpoint, then
+resolve the still-open provider contract and complete the remaining I3-3
 failure/order inventory. Preserve all 20 families, applicable regressions and
 independent acceptance review. After I3-3 commit/push and remote parity, stop
 and report the accepted boundary. I3-4 remains inactive until explicit owner

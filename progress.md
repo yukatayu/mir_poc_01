@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-09-08 10:53 JST
+最終更新: 2026-09-08 12:07 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -239,9 +239,9 @@ frame round-trip, and strict truncation/FIN rejection before owner admission.
 Validated-only observer projection retains genuine evidence and rejects
 malformed provenance. Full probe library 3/3 also passes. These are bounded
 application-write/process observations, not complete failure-family acceptance.
-Full failure/order coverage remains open; disk free space is about 15 GiB.
+Full failure/order coverage remained open at that historical delivery checkpoint.
 The pushed checkpoint `050f5067` selects ADR-0041/spec/16's
-source-declared owner-admission budget; implementation remains in progress.
+source-declared owner-admission budget; the later `30429d5` checkpoint implements it.
 Static tests now pass 14/14, old AST/M6/M7 10/13/27 and the raw-Core escape
 compile-fail doctest 1/1; focused Clippy passes and reviewed P0/P1 are resolved.
 Generated-contract tests 8/8, private projection snapshots 6/6, default M8
@@ -255,17 +255,19 @@ has no P0/P1. Frozen C3 evidence is owner module 19/19, G1-pending→G2 decision
 dropped-expiry replay 1/1, and queued-handoff 1/1. The authentic two-process
 budget fixture is now a real 1/1 run with both children reaped, request/serve/
 write/reply/receipt, and four exact delivery joins; host-driver is 5/5 and broad
-local I3 library 61/61. Source-known LAB alias privacy is fixed. Scoped runtime
-Clippy with both I3 features and `-Dwarnings`, source budget 4/4, and full probe
-integration 38/38 are green; no matching children remain. Local-wait six named
-tests/seven cases and narrow review are closed. Delivered expiry, lost reply,
-expired reconnect, and producer getter 2/2 are green. Remaining actual-time gates
-are full-time review and actual row-11 reply replay. The genuine G1→G2 requester
-stale-binder test is already local-green; preserve its actual receive-path correspondence.
-Whole feature-union runtime library 332/332, integration 63/63, Clippy and format
-are green. Provider and remaining matrix/order validation remain open.
-Root free space is now 12.03 GiB; provider remains OPEN and no
-whole fault row is accepted.
+local I3 library 61/61. Source-known LAB alias privacy is fixed. Those tests,
+source-budget and local-wait results belong to the retained checkpoint.
+The successor time/reply slice now passes full probe 41/41, focused actual replay
+3/3, two-crate all-target Clippy and workspace format; no orphan children remain.
+Final independent review has P0/P1/P2 zero. Successful and genuine expiry replies
+are consumed once, then rejected on verified successor-session replay; the
+initial-session falsifier rejects before replay write. Genuine G1-expiry→G2
+requester rejection remains local binder evidence, with actual QUIC-path
+correspondence inspected. Runtime 332/process 63/I2-M10 5/8/67 are retained
+`30429d5` results, not new reruns. The reviewed row-11/spec/16 consumer is ready
+for documentation/commit/parity integration; I3-3 remains unaccepted. Next is
+the unadopted provider contract, then remaining membership/redaction/cut,
+ordering and full milestone acceptance. Root free space is about 12.00 GiB.
 
 Owner clarification is retained as a working interpretation: ordinary meaning ->
 generated distribution -> continually checked composition. World/Avatar remain
@@ -274,6 +276,11 @@ closed-cohort finite-profile machinery are bounded evidence, not general Mir
 requirements, and do not create a new theory gate or roadmap item.
 
 ## recent log
+
+- 2026-09-08 12:07 JST: actual successful/expiry reply replay and wrong-session
+  prewrite refusal pass 3/3, full probe 41/41 and final Clippy/format pass;
+  independent time/reply review P0/P1/P2 zero. Provider contract is next after
+  integration commit/parity; I3-3 remains active, with I3-4 inactive.
 
 - 2026-09-08 10:53 JST: delivered expiry/loss/reconnect and local wait pass
   6 named tests (7 cases), full probe 38/38, runtime library 332/332 and
