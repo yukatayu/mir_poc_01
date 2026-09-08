@@ -8599,7 +8599,10 @@ fn m10_portal_handoff_runtime(
             ),
         )
         .map_err(|diagnostics| format!("M10 portal final M9: {:?}", diagnostics.primary().kind()))?
-        .into_m10_execution_seam();
+        .into_m10_execution_seam()
+        .map_err(|diagnostics| {
+            format!("M10 portal final M9: {:?}", diagnostics.primary().kind())
+        })?;
     let spawn_authority = seam
         .owner_authority_use("portal", principal, world_b)
         .ok_or_else(|| "M10 portal M9 seam lacks WorldB spawn authority".to_string())?;
@@ -15252,7 +15255,12 @@ impl M10ReferenceSystem {
                     diagnostics.primary().kind()
                 )
             })?;
-        let seam = admitted.into_m10_execution_seam();
+        let seam = admitted.into_m10_execution_seam().map_err(|diagnostics| {
+            format!(
+                "M10 final M9 admission rejected: {:?}",
+                diagnostics.primary().kind()
+            )
+        })?;
 
         let hp_key = M8StateKey::indexed_field("player", target, "hp");
         let atk_key = M8StateKey::indexed_field("player", principal, "atk");
@@ -16230,7 +16238,7 @@ fn m10_resolve_checked_for_patch(
         authority,
         M9FinalAdmissionEvidence::from_lineage(&membership, &capability, &witness, discharge),
     )
-    .map(|admitted| admitted.into_m10_execution_seam())
+    .and_then(|admitted| admitted.into_m10_execution_seam())
     .map_err(|diagnostics| format!("M10 patch final M9: {:?}", diagnostics.primary().kind()))
 }
 
@@ -16378,7 +16386,7 @@ fn m10_resolve_checked_for_owner(
             discharge,
         ),
     )
-    .map(|admitted| admitted.into_m10_execution_seam())
+    .and_then(|admitted| admitted.into_m10_execution_seam())
     .map_err(|diagnostics| format!("M10 owner final M9: {:?}", diagnostics.primary().kind()))
 }
 

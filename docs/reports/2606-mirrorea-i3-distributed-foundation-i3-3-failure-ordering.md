@@ -61,6 +61,13 @@ durability or live distributed patch.
 
 ## Start state / dirty state
 
+Provider Stage 2b starts from static cut
+`3862b1688821c8fb243f8f148f54cd313ad3b163`. Parent verifies HEAD, origin/main
+and live remote equality plus clean worktree at `2026-09-08T15:41:54+09:00`.
+All subsequent initial LAB changes belong to this continuation; no user
+changes are overwritten. Final Stage 2a resource gate retained about 11.03
+GiB free, with no cleanup. The source/guard predecessor is `9e8d674a`.
+
 Resume baseline: `648425f6bd4304d003d36bc04d346ddf0e78c058`.
 The parent reported the baseline clean; this writer independently observed
 an empty `git status --short` and matching `git rev-parse HEAD` /
@@ -125,6 +132,66 @@ docs/reports/TEMPLATE.md and the report validation helpers in
 scripts/validate_docs.py. Historical plans/reports are evidence, not authority.
 
 ## Actions taken
+
+Owner resume observed `2026-09-08T18:43:01+09:00`: the owner approves the
+previously listed five old regenerable runtime-library artifacts and again
+requests execution through full I3-3 close, then stop. Parent rechecks exact
+regular files/sizes/link counts and absence of active Cargo/rustc, deletes only
+those five explicit paths, and observes 12,267,094,016 bytes free afterward.
+The files are recoverable by rebuilding; no source, Git history, evidence log
+or other cache is removed. The 10 GiB pre-command guard remains in force.
+Product goal remains paused; manual authorized execution resumes without
+changing the sole roadmap/milestone or activating I3-4. Test and implementation
+specialists resume only the already-reviewed Stage 2b constructor negatives
+and minimal hardening before its integration.
+
+While Stage 2b production/tests proceed, a read-only planner check confirms
+the later row-20 direct consumer: actual process-owned quiescent cut admission
+followed by a legal transition, with retained-ingress/in-flight rejection and
+late decided-traffic non-resurrection. Parent verifies this against Canon
+plan/05 (failure matrix and ordering), spec/17 and Plan 250. Existing local
+SYS4 save evidence alone is insufficient; process/runtime and adapter
+obligations must participate. The supported positive may be admission-only,
+without a complete process snapshot, durability or live distributed patch.
+Provider-bearing unsupported export may still reject, but cannot replace the
+supported profile's positive. This is remaining-scope clarification, not new
+implementation/evidence, a second active frontier or an I4 entry.
+
+Stage 2b parent integration additionally checks two concrete consumer gaps.
+The generic static finite checker validly permits additional preconditions;
+the new runtime may not accept arbitrary same-source evidence by identity/
+coverage alone. It compares the supplied intact discharge to the exact
+canonical MembershipAuth-strengthened discharge, preserving missing-input
+rejection and without a raw inner-proof accessor. A genuine stronger static
+discharge supplies the runtime-negative case, not a Stage 2a defect.
+
+The scaffold's process-local counter is inadequate as an eventual transferable
+resource incarnation. Parent selects an independently OS-random 32-byte T0
+incarnation over extending that counter with PID/path/session identity.
+`getrandom` 0.4.3 is already present in Cargo.lock and the local registry;
+parent verifies `fill(&mut [u8]) -> Result<(), Error>` in that exact source and
+the [official API documentation](https://docs.rs/getrandom/latest/getrandom/fn.fill.html).
+Only its existing dependency edge is added directly to mir-runtime, with no
+version upgrade or new package nodes. Entropy failure rejects setup without
+fallback. Randomness is not permission or a general uniqueness/security proof.
+Actual M9 membership, policy, binding lifetime and exact-coordinate checks
+remain necessary. Future B-only transfer uses the existing separately trusted
+FD-3 control seam, not tainted images or QUIC; that transfer is not implemented
+by this component and private namespace material cannot enter observers.
+
+Stage 2b consumes the reviewed static cut. Parent accepts reuse of the real
+M9/M8 machinery but rejects an initial proposed convenience API that omitted
+explicit bootstrap/auth, intact verification and separate policy inputs.
+Correct checked source cannot synthesize these approvals. The refined route
+requires genuine setup binding, exact finite-local bootstrap validation and
+membership authentication, full composite discharge, and separate fixed
+effect policy before a provider-specific capability/witness. The capability
+scope cannot be constructed through an unguarded generic grant route.
+Production lifetime retirement/Drop invalidates binding; a test-only stale
+flag is insufficient. Ordinary M8 exports must reject scoped component loss,
+and mechanically necessary caller changes must preserve legacy behavior.
+This is implementation boundary clarification within spec/17, not a new
+normative contract, authority shortcut or provider execution claim.
 
 After the pushed Stage 1 cut, parent adopts the smallest activation-pending
 composite implementation route within spec/17. One temporary Oracle consult
@@ -350,6 +417,186 @@ CARGO_INCREMENTAL=0 CARGO_BUILD_JOBS=2 cargo test --locked -p mir-runtime --test
 ```
 
 ## Evidence / outputs / test results
+
+Stage 2b final frozen regression, observed `2026-09-08T19:07:58+09:00`,
+supersedes intermediate results below. Parent reads the final logs in
+`/tmp/c3-stage2b-regression-packet-20260908.thVbcd/`. Commands use
+`CARGO_INCREMENTAL=0 CARGO_BUILD_JOBS=2`, locked dependencies, feature union
+`i3-private-quic,i3-process-test-seams`, package `mir-runtime` and serial tests:
+
+| Executed target | Actual result | Log |
+| --- | --- | --- |
+| `cargo test --locked -p mir-runtime --features i3-private-quic,i3-process-test-seams --lib -- --test-threads=1` | 362/362, 83.93 seconds | `01-runtime-lib.log` |
+| Same package/features, `--test sys5_i3_process_runtime` | 63/63, 53.08 seconds | `02-process.log` |
+| Same package/features, `--test m10_conformance --test sys5_local_slice --test sys6_i2_cli` | separate targets 67/67, 5/5, 8/8 | `03-legacy-regressions.log` |
+| Same package/features, `--test i3_provider_effect_guards` | 5/5, 0.36 seconds | `04-provider-guards.log` |
+| `cargo check --locked --workspace --all-targets --features mir-runtime/i3-private-quic,mir-runtime/i3-process-test-seams` | exit 0, 17.14 seconds; compile coverage only | `05-workspace-check.log` |
+
+The final provider filter26 is included in library362, not additive. No
+failures/warnings are emitted in this frozen regression packet. Final resource
+reading is 30,906,707,968 bytes free, with each command above the 10 GiB guard.
+The scoped three-crate Clippy and workspace format packet is recorded below.
+Workspace tests, complete probe/fault/order coverage, real provider use and
+whole-I3-3 acceptance are not supplied by these component results.
+
+Stage 2b initial API/compiler RED at `3862b168`:
+`CARGO_INCREMENTAL=0 CARGO_BUILD_JOBS=2 cargo test --locked -p mir-runtime
+--features i3-private-quic,i3-process-test-seams --lib
+i3_provider_composite_trusted_binding_yields_only_inactive_scoped_component
+-- --test-threads=1` exits 101 with exactly E0432: unresolved
+`crate::i3_read_only_provider_composite` in the new test module.
+Log: `/tmp/c3-stage2b-composite-api-red-20260908.gyaEqh/01-cargo-test.log`.
+No test body executes. Parent inspects the output and authorizes only a
+fallible, non-authorizing fail-closed scaffold before the behavioral RED.
+Actual setup/binding operations must return typed failure rather than panic;
+absence of the declared target remains a valid binding layout. No fake
+membership, verification, policy seal, M8 materialization or host-call audit
+is supplied by the scaffold. Free disk is 11,821,633,536 bytes; no cleanup.
+
+The same command then reaches actual behavioral RED in
+`/tmp/c3-stage2b-composite-binding-behavior-red-20260908.2CbCfn/01-cargo-test.log`:
+compilation succeeds, one test body runs and fails with
+`PendingGenuineInactiveAdmission` at its genuine candidate expectation
+(0 passed, 1 failed, 345 filtered). It has already prepared the full checked
+source/static plan, exact composite discharge and real setup-owned binding.
+Two nonfatal dead-code warning groups remain in the scaffold. No M9 authority,
+provider invocation or successful component is returned. Parent inspects the
+log and authorizes the full bounded Stage 2b implementation with separate
+test ownership. Postflight free disk is 11,802,308,608 bytes; no cleanup.
+
+The first two-policy falsifier attempt uses the same environment/package/
+features with `--lib i3_provider_composite_rejects_policy_ -- --test-threads=1`.
+It is compile-blocked, not behavioral evidence: E0308 at
+`sys4_dispatch.rs:1285` exposes one remaining successor-snapshot caller after
+ordinary M8 export became fallible. No test body runs. Log:
+`/tmp/c3-stage2b-policy-behavior-red-20260908.v5Kz9w/01-cargo-test.log`.
+Parent authorizes only typed error propagation through the existing SYS4/
+SYS5 snapshot chain before rerunning; no panic, default or lost scope.
+Postflight free disk is 11,792,039,936 bytes; no cleanup. The genuine planned
+falsifiers are retirement after policy issuance before sealing, and a policy
+for another checked operation within the same trusted setup. Neither is yet
+claimed reproduced by this compiler failure.
+
+After the compile-only propagation repair, the identical policy command runs
+both bodies and reproduces both wrong successful seals (0 passed, 2 failed,
+350 filtered; compile 31.23 seconds). The actual retired binding still returns
+an inactive component, as does a distinct checked operation using another
+operation's policy from the same setup. Parent reads
+`/tmp/c3-stage2b-policy-behavior-rerun-20260908.pYY6zQ/01-cargo-test.log`
+and authorizes current-binding and exact-policy repairs. Eleven dead-code
+warning groups remain in the evolving implementation/test helpers; this is
+not a lint pass. Free disk is 11,562,471,424 bytes; no cleanup. Scope binding,
+exact four-row M8 exclusion and lower-issuer policy enforcement remain part of
+the same component acceptance, not later waived requirements.
+
+The scoped-snapshot consumer first produces compiler-only API RED (two E0599,
+no test body) in
+`/tmp/c3-stage2b-scoped-snapshot-api-red-20260908.mAkvXk/01-cargo-test.log`.
+Parent then authorizes a fail-closed consumer scaffold and actual internal
+lowering-inventory inspection, without component acceptance. The complete
+module filter `--lib i3_read_only_provider_composite_tests` subsequently
+compiles in 33.64 seconds and runs 10 tests: 7 pass, 3 fail, 345 filtered.
+Log: `/tmp/c3-stage2b-composite-module-behavior-20260908.HnuhNJ/01-cargo-test.log`.
+Both policy regressions now pass. Remaining body REDs show a second seal
+accepted in the same setup, provider ordinals 15--18 still present instead of
+exact exclusion, and matching-context consumption rejected by the scaffold.
+Parent reads the log and authorizes those three bounded repairs together,
+including binding preservation inside the M8 scope and a precise private
+`AdmissionAlreadyUsed` diagnostic. Six dead-code warning groups remain;
+this is not component close or a quality-gate pass. Free disk is
+11,559,141,376 bytes, without cleanup. Inventory inspection is T0-internal,
+not an unconditional observer authorization claim.
+
+Stage 2b regression observation, `2026-09-08T17:13:31+09:00`: the three
+intermediate failures above have been repaired. The dedicated module runs
+14 passed, 0 failed, 345 filtered in
+`/tmp/c3-stage2b-composite-module-final-20260908.n50zoS/01-cargo-test.log`.
+After removal of two unused implementation remnants, the full feature-union
+runtime library runs 359 passed, 0 failed, 0 filtered (87.60 seconds) in
+`/tmp/c3-stage2b-runtime-full-regression-20260908.qeqIRk/01-cargo-test.log`.
+The same package/features with `--test sys5_i3_process_runtime` runs
+63 passed, 0 failed (55.72 seconds) in
+`/tmp/c3-stage2b-process-integration-regression-20260908.hHm28Q/01-cargo-test.log`.
+All use locked dependencies, incremental disabled, two build jobs and serial
+tests. The 14 are included in 359, not additive. Parent reads both broad logs.
+Normal-library compilation for process integration emits 34 dead-code warnings;
+this is functional regression evidence, not a Clippy/quality pass. Independent
+Stage 2b specification review is pending; neither this component nor row 18 nor
+I3-3 is accepted. There is still no provider invocation/network availability.
+
+The process command began above the 10 GiB resource floor and finished below
+it: 10,361,020,416 bytes available versus 10,737,418,240 required. The evaluator
+therefore does not start the public guard target or further Cargo commands.
+No old build artifacts are deleted without new owner approval; the earlier
+incremental-directory cleanup permission is not broadened. Read-only review
+and lightweight documentation validation may continue. Required quality and
+remaining integration gates are not waived or recorded as passing.
+
+After the later explicitly approved five-file cleanup, the review-negative
+filter runs with the same locked feature-union environment and
+`--lib i3_provider_ -- --test-threads=1`: actual 26 tests, 25 passed,
+1 failed, 336 filtered. Log:
+`/tmp/c3-stage2b-time-network-provider-filter-red-20260908.HnIIfA/01-cargo-test.log`.
+Both new existing-boundary guards pass (cross-checked bootstrap at actual M9
+verification and provider-scoped base at ordinary M9 runtime admission).
+The sole behavioral RED is direct generic M8 materialization returning a bare
+instance whose `is_runtime_admitted()` is true before composite sealing.
+Parent reads the log and authorizes typed rejection in that generic materializer,
+minimal fallible private M9/M10 call propagation, and migration of the same
+negative assertion to the exact existing M8 error. This is observed wrong
+success, not a compiler-only API absence or an ordinary snapshot counterexample.
+The internal constructor test uses a fixed test nonce, not claimed as actual
+trusted-fixture provisioning evidence. Postflight free space is 12,256,542,720
+bytes. No additional cleanup or acceptance claim follows.
+
+The first post-repair provider filter is compiler RED, not test evidence:
+`/tmp/c3-stage2b-provider-green-clippy-20260908.16SCVC/01-provider-filter.log`
+exits 101 before any body. Four errors identify three remaining M9 callers
+that used `map` with the now-fallible private execution seam, leaving nested
+Results (two existing String diagnostic boundaries and finite-local relation
+setup). Parent reads the exact E0308/E0599 output and authorizes only missing
+flattening/error propagation in those existing callers. No tests or semantic
+guarantees are weakened. Clippy is not run after this failed prerequisite.
+Postflight free space is 12,249,833,472 bytes.
+
+After the three missing Result flattenings, the same provider filter passes
+26/26 (336 filtered, 0.59 seconds), including the exact typed generic-M8
+rejection, in
+`/tmp/c3-stage2b-provider-green-clippy-rerun-20260908.DMte8T/01-provider-filter.log`.
+The subsequent three-crate feature-union all-target Clippy with `-D warnings`
+fails; `02-clippy.log` records 34 dead-code diagnostics from the still-inactive
+composite/M8 extension, two collapsible conditionals and two oversized enum
+variants. Parent reads the full output and authorizes only bounded lint repair:
+preserve all predicates and exact scope equality, indirect large private
+coverage payloads, and narrowly document unconsumed next-component roots.
+No activation or blanket existing-module warning waiver is introduced. The
+lib-test four-error summary overlaps lint output; it is not behavioral evidence.
+Available space is now 31,054,176,256 bytes following concurrent owner
+housekeeping; agents remove nothing beyond the five explicitly approved files.
+
+The next Clippy run reaches only seven unfulfilled M8 dead-code expectations:
+`/tmp/c3-stage2b-clippy-quality-rerun-20260908.FmD8fI/01-clippy.log`.
+The new inactive-composite module root already makes those referenced M8
+extensions live for lint analysis. Parent reads the output and authorizes
+removal of exactly the redundant expectations, not disabling the unfulfilled
+expectation lint. The private-payload size and conditional warnings are gone;
+no test bodies or subsequent format gate run after this failed prerequisite.
+
+The frozen final quality packet succeeds in
+`/tmp/c3-stage2b-quality-final-20260908.uI6Zpn/`:
+
+- `CARGO_INCREMENTAL=0 CARGO_BUILD_JOBS=2 cargo clippy --locked -p mir-ast
+  -p mir-semantics -p mir-runtime --features
+  mir-runtime/i3-private-quic,mir-runtime/i3-process-test-seams --all-targets
+  -- -D warnings`: exit 0, 21.62 seconds, `01-clippy.log`. These are the
+  actual three packages, not CLI/probe or a workspace-Clippy claim.
+- The same runtime provider filter passes 26/26, 336 filtered, 0.57 seconds
+  in `02-provider-filter.log` after the final private-layout/lint edits.
+- `cargo fmt --all -- --check`: exit 0, `03-fmt-check.log`.
+
+Postflight space is 31,544,897,536 bytes. No warnings are reported in final
+Clippy output. Full frozen library/process/I2/M10/guard regression and
+workspace all-target compilation follow as separate gates, not assumed passes.
 
 Final frozen Stage 2a packet, `2026-09-08T15:23:52+09:00`, supersedes the
 earlier static RED/intermediate GREEN checkpoints below for the current delta
@@ -973,6 +1220,23 @@ result does the parent authorize the adjusted C3 production packet and paired
 test implementation. Actual QUIC remains the later direct consumer.
 
 ## What changed in understanding
+
+One bounded temporary Oracle consult (`i3-provider-stage2c-join-20260908`)
+reviews the next mixed-image join while Stage 2b repair proceeds. Direct
+consumer: the next sealed SYS4/SYS5 composite/image component. Blocker reduced:
+avoiding an ordinary inner admission that erases provider obligations or a
+second execution stack. Acceptance use: exact full identity, independent
+effect authority, four-row scope, incarnation and trusted child-start
+association tests. Parent reads the complete answer at
+`/tmp/i3-provider-stage2c-oracle-answer-20260908.md` and checks it against
+spec/17 and mapped code. The advisory favors a private checked composite
+variant through existing admission/image/initial-state seams; a delegating
+wrapper is equivalent only if every usable route preserves the same boundary.
+Parent retains that smallest join direction, not a parallel runtime/transport.
+Actual supervisor, host invocation, effect lifecycle and network evidence
+remain required downstream; an inactive image cannot discharge those duties.
+The consult is completed with captured output; a subsequent browser-unreachable
+message is not retried. Oracle supplies no Canon or implementation acceptance.
 
 The provider static boundary must preserve both positive complete coverage
 and negative whole-program requirements after local restriction. Outer enum
@@ -2102,9 +2366,12 @@ by this advice; provider/time remain OPEN and I3-4 remains inactive.
 
 ## Suggested next prompt
 
-Continue active I3-3 from the pushed provider source/guard cut `9e8d674a`:
-finish exact static projection/composite verification and its reproduced
-review repairs, then actual separate effect permission and provider runtime.
+Continue active I3-3 after the green inactive Stage 2b integration:
+retain actual consumed composite/M9 evidence at the seal, then carry the
+private inactive mixed admission through existing SYS4/SYS5 restriction,
+image and trusted-start validation (Stage 2c). Ordinary entry points remain
+rejectors; no synthetic ordinary verdict or hidden provider activation.
+Actual provider runtime/network and its fault tests follow that direct consumer.
 ADR-0042/spec/17 is selected; invocation is not yet implemented. Preserve all
 20 failure families and ordering requirements, including remaining actual
 membership, redaction and in-flight cut boundaries. After full I3-3 acceptance,
@@ -2113,6 +2380,10 @@ parity, honor the latest owner-requested pause. I3-4 requires explicit resume;
 the retained program is not blocked, stale, or completed by that pause.
 
 ## Plan update status
+
+Provider Stage 2b: Plan 250 records actual binding/verification/policy/scoped
+M8 evidence, the fresh final regression/review packet and Stage 2c as next
+consumer. This remains one I3-3 milestone, not a new program or lifecycle gate.
 
 Provider Stage 2a: Plan 250 records the selected opaque composite path, exact
 static coverage/identity repairs, test results and trusted binding -> actual
@@ -2128,6 +2399,9 @@ rows, ordering edges and later milestone order are preserved. plan/00-index
 synchronization belongs to the status assignment.
 
 ## Documentation.md update status
+
+Provider Stage 2b: refreshed current 362/26/63/67/5/8/5 evidence, with filtered
+tests explicitly non-additive and runtime activation still pending.
 
 Provider Stage 2a: fresh static test evidence and the remaining actual
 authorization/runtime consumer replace the prior source-only current pointer.
@@ -2146,6 +2420,9 @@ generated-contract/runtime enforcement and the unchanged workflow boundary.
 
 ## docs/project-status.md update status
 
+Provider Stage 2b: synchronized current evidence/review, capacity and next
+mixed-image boundary; six accepted milestones and lifecycle remain unchanged.
+
 Provider Stage 2a: fresh versus retained results, current integration gates,
 six-of-eleven milestone count and unchanged lifecycle/control are synchronized;
 the reader snapshot remains 168 lines, within its 180-line bound.
@@ -2157,6 +2434,9 @@ changing official lifecycle or the stop-after-I3-3 instruction.
 I3-2 accepted evidence と official I3 unentered を維持する。
 
 ## progress.md update status
+
+Provider Stage 2b: current snapshot and actual-timestamp recent log updated;
+retained Stage 1/2a results are distinguished from final Stage 2b reruns.
 
 Provider Stage 2a: 15:23 JST snapshot and recent log record fresh static
 verification, separate pending authority/runtime and unchanged three axes.
@@ -2180,6 +2460,9 @@ is active. All later network, provider and full-matrix requirements remain.
 
 ## tasks.md update status
 
+Provider Stage 2b: current task map separates component integration, inactive
+mixed images, actual provider execution and remaining failure/order gates.
+
 Provider Stage 2a: current snapshot is revised around the fresh static packet,
 remaining integration gates, binding/auth/policy/scoped-M8 sequence and all
 remaining I3-3 obligations. No remaining-time countdown is manufactured.
@@ -2197,6 +2480,9 @@ The 22:42 JST maintenance records C1/C2 as an uncommitted delta over pushed
 as the direct consumer. No new roadmap or queue is created.
 
 ## samples_progress.md update status
+
+Provider Stage 2b: current evidence row updated; provider sample remains
+non-operational, with no new sample root, public workflow or Lean registration.
 
 Provider Stage 2a: new test evidence is classified static-only, not a runnable
 provider network sample. No sample or script taxonomy change; samples/README
@@ -2216,6 +2502,88 @@ The C1/C2 update now points to its actual library test command and preserves
 the no-new-network-sample/non-workflow classification.
 
 ## Reviewer findings and follow-up
+
+Independent Canon-first planner pre-close review gives GO for inactive-only
+Stage 2b component integration after the executed gates above. Parent accepts
+that bounded source contract subject to LAB validation and actual commit/push
+parity. The next consumer is a private inactive mixed-image variant through
+existing SYS4/SYS5, not a second runtime, launcher or transport. Stage 2b
+consumes the intact composite discharge but is not already a complete
+proof-retaining serialized image: Stage 2c must retain the actual evidence and
+needed legacy M9 facts at sealing and preserve them through restriction,
+restore and trusted start. No recomputed pass flag or provider-blind ordinary
+seed may substitute. Six/eleven accepted milestones and the I3-3 stop boundary
+are unchanged.
+
+Final constructor-repair follow-ups supersede the earlier pending findings:
+independent specification and quality reviewers each report P0=0, P1=0,
+P2=0. Both inspect the direct generic M8 refusal, ordinary M9 guard, fallible
+private M9/M10 propagation, three direct negatives, private scope boxing and
+unchanged exact equality. The inactive module-root expectation is narrow;
+redundant M8 expectations are removed. Readiness is conditional on the frozen
+regression/quality gates below and limited to the inactive Stage 2b component.
+It is not provider activation, row-18 or I3-3 acceptance.
+
+Final Stage 2b independent quality disposition, observed
+`2026-09-08T17:26:31+09:00`: P0=0, P1=0. The generic M8 constructor gap
+below is P2 but explicitly blocks component integration until direct refusal
+and its falsifier pass. The zero-call evidence clarification is P2 wording
+only and is incorporated below. No further bounded correctness/concurrency/
+authority or source-identity defect is found. Specification and quality reviews
+are complete, but their repair/test closure and Rust quality gates are not.
+Parent preserves the dirty work and requests the scoped cache-cleanup approval
+needed to resume safe build validation; no milestone acceptance or goal-status
+change is made at this operational hold.
+
+Stage 2b specification review over `3862b168` plus the frozen dirty source
+finds no P0/P1 defect. It identifies P2 stale module-header claims and two
+missing direct negatives: same-setup bootstrap from another checked operation
+must fail actual M9 authentication, and ordinary `admit_runtime` must reject a
+provider-scoped base. Parent checks both production guards before accepting
+the test recommendations; additional tests are not yet run. The production
+writer corrects only the stale module header, with scoped format/diff checks;
+no implementation behavior changes follow the broad regression. A separate quality
+review is requested after specification review, without Cargo below the disk
+guard. The reviewer confirms that full non-provider lowering inventory after
+locus restriction is provenance, not child-local executable ownership; the
+next SYS4/SYS5 consumer must preserve that distinction. Generic materialization
+is not a reachable ordinary escape through the current guarded call graph.
+No provider activation, host/network execution or milestone acceptance follows.
+
+Quality review additionally identifies a constructor-level hardening gap:
+`materialize_m9_resolved_base` can accept a provider-scoped deferred base and
+return a bare M8 instance. Parent verifies that the only current production
+caller is behind the ordinary M9 provider-scope rejection, so this is not
+evidence of an externally reachable bypass. Nevertheless, the component's
+constructor invariant should reject this generic materialization directly.
+A direct negative and the smallest typed/unrepresentable-boundary repair
+remain required before Stage 2b acceptance; neither is run or implemented
+while build capacity is held. No weaker authority contract is selected.
+
+Current `provider_call_count() == 0` assertions describe structural inactive
+objects; they are constants, not actual adapter invocation instrumentation.
+Source inspection finds no provider lookup/read/invocation in this component.
+Actual call/host crossing counters and their falsifiers belong to the dependent
+runtime component, not evidence claimed from these local preparation tests.
+
+The independent planner approves the 17:13 snapshot maintenance: fresh module
+14/14 is included in runtime 359/359, separate process 63/63; quality and
+component acceptance remain pending, and capacity does not waive later gates.
+Parent retains six of eleven accepted milestones and the fixed stop boundary.
+
+An independent read-only planner approves the intermediate Stage 2b snapshot
+correction only: local tests now produce actual effect authorization/inactive
+components, but 7/10 is incomplete and unaccepted; 345 is filtered in this
+run, while the earlier full 345/process 63 belong to accepted Stage 2a. The
+three reproduced blockers and later sealed SYS4/SYS5 consumer remain explicit.
+This is status review, not semantic/quality acceptance of the current code.
+Parent retains six of eleven accepted milestones, sole-active I3-3 and the
+owner's stop after full I3-3 acceptance. Historical 334/current-source-only
+snapshot wording is marked retained rather than allowed to describe this cut.
+Parent log/diff review rejects a draft snapshot that misread 7 passed / 3
+failed as 3 passed / 4 filtered, and corrects retained-cut attribution and
+reversed next-consumer ordering before integration. That dated intermediate
+7/3/345 result remains history; no draft count is acceptance evidence.
 
 Final Stage 2a independent spec and code-quality/security dispositions both
 report P0=0, P1=0, P2=0. The quality reviewer verifies exact source-bound
@@ -2878,6 +3246,32 @@ remains the explicitly reported failure, not an I3 runtime or passing gate.
 
 ## Skipped validations and reasons
 
+Stage 2b current resource hold: after fresh library 359/359 and process 63/63,
+available root space is about 9.65 GiB, below the 10 GiB pre-command guard.
+The planned public guard rerun, warning cleanup/Clippy, extra review negatives
+and further integration builds are not run. No new cleanup permission has
+been received; prior one-directory cleanup authority is not expanded. The
+full-milestone obligations remain open. Parent's lightweight `make docs` passes
+(agent configuration, 216 Canon entries, 800/800 hierarchy, 1760-report scaffold)
+before the final snapshot synchronization. The post-update `make docs` also
+passes all four checks; parent diff whitespace checks pass. Neither command
+replaces the unexecuted Rust quality or review-negative gates.
+
+Read-only cleanup candidate inventory is rechecked at
+`2026-09-08T17:18:24+09:00`. These five regular single-link regenerable files
+under `target/debug/deps/` total 1,885,726,492 bytes (about 1.76 GiB):
+
+- `libmir_runtime-82ee8eb6f7dfa021.rlib` (380,289,468 bytes)
+- `libmir_runtime-093be29134d3830d.rlib` (378,739,914 bytes)
+- `libmir_runtime-9343d5e60c3bd8a8.rlib` (376,320,432 bytes)
+- `libmir_runtime-b74aa02dad80a2cd.rlib` (375,311,936 bytes)
+- `libmir_runtime-7fa5e776cb77eefa.rlib` (375,064,742 bytes)
+
+This is an approval request inventory, not deletion evidence. Source, Git
+history, report/test logs and existing process-evidence binaries are excluded.
+No build-cache deletion occurs before owner approval; capacity must be checked
+again afterward, and this finite reclaim is not a whole-milestone space promise.
+
 Provider Stage 2a: no new Lean/model run, provider invocation or full I3-3
 matrix/acceptance is claimed. The static component's fresh tests and completed
 regression/quality gates are recorded above. Full workspace tests and full
@@ -2908,6 +3302,33 @@ not skipped passes. General proof, WAN/production, durability and Browser/Host
 product realization remain outside this bounded milestone.
 
 ## Commit / push status
+
+The final Stage 2b source/test packet and independent reviews are green and
+ready for parent's scoped integration over `3862b168`. Parent synchronized
+LAB snapshots and observed `make docs` exit zero at 19:21 JST (agent config,
+216 Canon entries, 800/800 hierarchy and 1760-report scaffold). Staged
+whitespace and 19-file added-line credential-pattern checks pass with zero
+matches; the latter is not a general secret audit. The final report-only
+metadata edit is checked with the section validators and staged diff check.
+Actual commit/push/parity follow; no prospective self-referential hash is
+asserted. Record the exact observed cut with the next Stage 2c work. This
+supersedes the earlier capacity-held Git state below without accepting I3-3.
+
+Historical capacity-held checkpoint (superseded by the final packet above):
+Stage 2b changes remained uncommitted over
+`3862b1688821c8fb243f8f148f54cd313ad3b163`; local HEAD and origin/main still
+matched that accepted Stage 2a cut. Required Stage 2b review/quality gates were
+not complete, so no new integration commit or push was claimed. Existing dirty
+implementation, tests, status and evidence are preserved. I3-3 remains active
+and unaccepted; the eventual owner-requested pause is still after full I3-3.
+
+Provider Stage 2a is committed/pushed as
+`3862b1688821c8fb243f8f148f54cd313ad3b163`
+(`feat: preserve static provider coverage and projection boundaries`). Parent
+verifies HEAD/origin/main/live remote parity and clean worktree at
+`2026-09-08T15:41:54+09:00`. This supersedes the pending Git record below.
+The complete static handoff is accepted as a component; I3-3 remains active,
+not accepted, and I3-4 remains inactive. Stage 2b is the next in-scope work.
 
 Provider Stage 2a production and tests are frozen over `9e8d674a` with
 independent spec/quality reviews and executed code gates green. Parent final
@@ -3021,6 +3442,15 @@ worktree was clean before the next authorized Stage C test change.
 This is the fifth source checkpoint inside I3-3, not milestone acceptance.
 
 ## Sub-agent session close status
+
+Current provider Stage 2b: production/test writers, the sole evaluator,
+independent specification/quality reviewers, planner and five-file LAB writer
+have returned their bounded results. Final source/test behavior is frozen;
+the repaired constructor and full current regression/quality packet are green.
+Parent owns integration, Canon/status and Git. The production writer has only
+a read-only Stage 2c planning task until this component is committed/pushed.
+All contexts are retained for the same I3-3 continuation, not competing
+implementations or I3-4.
 
 Current provider Stage 2a: both production writers, separate source/runtime
 test authors, sole evaluator and independent spec/quality reviewers have

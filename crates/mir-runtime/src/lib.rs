@@ -25,6 +25,7 @@ pub mod full_system_v1_provider_admission;
 pub mod full_system_v1_renderer_pose_backend;
 pub mod full_system_v1_session;
 pub mod hotplug_runtime;
+pub(crate) mod i3_read_only_provider_composite;
 pub mod m10_reference_system;
 pub(crate) mod m8_owner_admission_gate;
 pub mod m8_runtime_admission;
@@ -90,6 +91,8 @@ pub mod sys5_local_workflow;
 #[doc(hidden)]
 pub mod sys6_i2_conformance;
 
+#[cfg(test)]
+mod i3_read_only_provider_composite_tests;
 #[cfg(test)]
 mod sys1_runtime_kernel_tests;
 #[cfg(test)]

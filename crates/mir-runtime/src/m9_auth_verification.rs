@@ -20,8 +20,9 @@ use sha2::{Digest, Sha256};
 
 use mir_semantics::{
     m9_finite_refinement::{
-        M9ContractCandidate, M9FiniteContractDelta, M9FiniteRefinementChecker,
-        M9FiniteRefinementDischarge,
+        M9CompositeContractCandidate, M9CompositeFiniteRefinementChecker,
+        M9CompositeFiniteRefinementDischarge, M9ContractCandidate, M9FiniteContractDelta,
+        M9FiniteRefinementChecker, M9FiniteRefinementDischarge, M9ReadOnlyProviderEffectCoverage,
     },
     shared_model::{ResultVersion, SourceRef},
     surface_v0_pipeline::{
@@ -32,8 +33,11 @@ use mir_semantics::{
 
 use crate::m8_runtime_admission::{EvidenceRedaction, EvidenceSecurityLabel, M8SecurityClass};
 use crate::m8_runtime_admission::{
-    M8AdmissionDiagnosticKind, M8AdmissionEvidence, M8DeferredM9Base, M8RuntimeAdmission,
-    M8RuntimeInstance, materialize_m9_resolved_base, prepare_deferred_m9_base,
+    M8AdmissionDiagnosticKind, M8AdmissionEvidence, M8DeferredM9Base,
+    M8ReadOnlyProviderEffectBindingContext, M8ReadOnlyProviderEffectComponent, M8RuntimeAdmission,
+    M8RuntimeInstance, materialize_m9_resolved_base,
+    materialize_read_only_provider_effect_component, prepare_deferred_m9_base,
+    prepare_deferred_m9_base_for_provider_coverage, read_only_provider_effect_binding_context,
 };
 use crate::m8_runtime_authority::{
     M8AuthorityState, M8CapabilityGrant, M8MembershipRecord, M8WitnessRecord,
@@ -51,6 +55,7 @@ use crate::m8_runtime_relation_projection::M8I3PrivateRelationAuthorityUseSnapsh
 use crate::m8_runtime_relation_projection::{
     M8LeaseRecord, M8RelationAuthorityUse, M8RelationReacquire,
 };
+use crate::sys3_projection::ReadOnlyProviderEffectStaticProjection;
 
 const M9_AUTH_CONTRACT_PREFIX: &str = "membership-authority/";
 const M9_VERIFY_CONTRACT: &str = "finite-refinement/MembershipAuth";
@@ -831,6 +836,66 @@ impl M9AdmissionRuntime {
         })
     }
 
+    /// Dedicated Stage 2b base seam.  It admits no legacy M9 runtime or M8
+    /// execution path: complete provider coverage must be present and the
+    /// resulting base remains consumed only by the scoped composite.
+    pub(crate) fn admit_read_only_provider_effect_composite_base(
+        &self,
+        checked: CheckedSurfaceV0,
+        provider_coverage: &M9ReadOnlyProviderEffectCoverage,
+        provider_binding_context: M8ReadOnlyProviderEffectBindingContext,
+        m8_admission: M8RuntimeAdmission,
+        envelope: M9AdmissionEnvelope,
+    ) -> Result<M9AdmittedBase, M9AdmissionDiagnostics> {
+        validate_outer_for_provider_coverage(&checked, &envelope, Some(provider_coverage))?;
+        let outer = M9OuterAdmission {
+            program_identity: checked.program_identity().clone(),
+            source_artifact: envelope
+                .original_source_artifact
+                .expect("validated composite outer envelope retains source artifact"),
+            residual_bindings: M9ResidualBindings(envelope.residual_bindings),
+        };
+        let embedded = prepare_deferred_m9_base_for_provider_coverage(
+            &checked,
+            &m8_admission,
+            Some(provider_coverage),
+            Some(provider_binding_context),
+        )
+        .map_err(|diagnostics| {
+            let kind = match diagnostics.primary().kind() {
+                M8AdmissionDiagnosticKind::MissingResidualEvidence => {
+                    M9AdmissionErrorKind::M8BaseEvidenceMissing
+                }
+                _ => M9AdmissionErrorKind::M8BaseEvidenceMismatch,
+            };
+            M9AdmissionDiagnostics::one(kind)
+        })?;
+        let embedded_residuals_match_outer = embedded.deferred_residuals().iter().all(|residual| {
+            outer.residual_bindings.0.iter().any(|binding| {
+                binding.kind == residual.kind()
+                    && binding.name == residual.name()
+                    && binding.source_ref.as_ref() == Some(residual.source_ref())
+            })
+        });
+        if embedded.program_identity() != checked.program_identity()
+            || embedded.deferred_residuals().len() != outer.residual_bindings.0.len()
+            || !embedded_residuals_match_outer
+        {
+            return Err(M9AdmissionDiagnostics::one(
+                M9AdmissionErrorKind::M8BaseEvidenceMismatch,
+            ));
+        }
+        Ok(M9AdmittedBase {
+            program_identity: checked.program_identity().clone(),
+            m8_base_evidence: m8_admission.evidence().to_vec(),
+            m9_residual_bindings: M9AdmittedBaseBindings(outer.residual_bindings.0.clone()),
+            outer_admission: outer,
+            ordered_source_to_core_map: checked.source_map().entries().to_vec(),
+            plan_count: checked.evaluations().len(),
+            _embedded_m8_base: embedded,
+        })
+    }
+
     pub fn prepare_outer(&self, source_artifact: M9SourceArtifact) -> M9PreparedOuter {
         M9PreparedOuter {
             source_artifact,
@@ -849,6 +914,11 @@ impl M9AdmissionRuntime {
         authority_runtime: M9AuthorityRuntime,
         evidence: M9FinalAdmissionEvidence,
     ) -> Result<M9RuntimeAdmitted, M9AdmissionDiagnostics> {
+        if base._embedded_m8_base.has_read_only_provider_effect_scope() {
+            return Err(M9AdmissionDiagnostics::one(
+                M9AdmissionErrorKind::UnsupportedReadOnlyProviderEffectProfile,
+            ));
+        }
         if evidence.finite_refinement.is_none() {
             return Err(M9AdmissionDiagnostics::one(
                 M9AdmissionErrorKind::MissingVerifyDischarge,
@@ -3055,6 +3125,475 @@ fn finite_local_required_memberships(
     required
 }
 
+/// T0-produced finite-local facts for the one provider composite.  The
+/// nonce is an opaque setup association, not a membership credential.
+pub(crate) struct M9ReadOnlyProviderCompositeBootstrap {
+    facts: Vec<M9FiniteLocalAdmissionFact>,
+    program_identity: CheckedProgramIdentity,
+    coverage: M9ReadOnlyProviderEffectCoverage,
+    resource_runtime_nonce: [u8; 32],
+}
+
+impl std::fmt::Debug for M9ReadOnlyProviderCompositeBootstrap {
+    fn fmt(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        formatter.write_str("M9ReadOnlyProviderCompositeBootstrap(..)")
+    }
+}
+
+impl M9ReadOnlyProviderCompositeBootstrap {
+    pub(crate) fn resource_runtime_nonce(&self) -> &[u8; 32] {
+        &self.resource_runtime_nonce
+    }
+}
+
+pub(crate) fn trusted_read_only_provider_composite_bootstrap(
+    checked: &CheckedSurfaceV0,
+    static_plan: &ReadOnlyProviderEffectStaticProjection,
+    resource_runtime_nonce: [u8; 32],
+) -> Result<M9ReadOnlyProviderCompositeBootstrap, M9AdmissionDiagnostics> {
+    let coverage = static_plan.provider_coverage().clone();
+    if static_plan.checked_program_identity() != checked.program_identity()
+        || coverage.program_identity() != checked.program_identity()
+        || !coverage.matches_checked(checked)
+    {
+        return Err(M9AdmissionDiagnostics::one(
+            M9AdmissionErrorKind::ProgramIdentityMismatch,
+        ));
+    }
+    let owner_principals = checked
+        .evaluations()
+        .iter()
+        .filter(|evaluation| evaluation.owner_rmw_core().is_some())
+        .map(|evaluation| evaluation.actor_authority_origin())
+        .collect::<BTreeSet<_>>();
+    let Some(principal) = owner_principals.iter().next() else {
+        return Err(M9AdmissionDiagnostics::one(
+            M9AdmissionErrorKind::InvalidMembershipLineage,
+        ));
+    };
+    if owner_principals.len() != 1 {
+        return Err(M9AdmissionDiagnostics::one(
+            M9AdmissionErrorKind::InvalidMembershipLineage,
+        ));
+    }
+    let Some(anchor_locus) = checked
+        .evaluations()
+        .iter()
+        .find_map(|evaluation| evaluation.owner_rmw_core().map(|core| core.owner_locus()))
+    else {
+        return Err(M9AdmissionDiagnostics::one(
+            M9AdmissionErrorKind::InvalidMembershipLineage,
+        ));
+    };
+    let anchor = M9FiniteLocalMembershipIdentity {
+        principal: (*principal).to_string(),
+        locus: anchor_locus.to_string(),
+        epoch: "i3-read-only-provider-bootstrap-epoch".to_string(),
+        incarnation: "i3-read-only-provider-bootstrap-incarnation".to_string(),
+    };
+    let mut facts = vec![M9FiniteLocalAdmissionFact::anchor_membership(
+        anchor.principal.clone(),
+        anchor.locus.clone(),
+        anchor.epoch.clone(),
+        anchor.incarnation.clone(),
+    )];
+    for (membership_principal, membership_locus) in
+        finite_local_required_memberships(checked, &anchor)
+    {
+        if membership_principal == anchor.principal && membership_locus == anchor.locus {
+            continue;
+        }
+        facts.push(M9FiniteLocalAdmissionFact::source_declared_membership(
+            membership_principal,
+            membership_locus,
+            anchor.epoch.clone(),
+            anchor.incarnation.clone(),
+        ));
+    }
+    for evaluation in checked.evaluations() {
+        if evaluation.relation_core().is_some() {
+            facts.push(
+                M9FiniteLocalAdmissionFact::relation_bootstrap_fresh_at_admission(
+                    evaluation.name(),
+                ),
+            );
+        }
+    }
+    for residual in checked.residual_obligations().entries() {
+        match residual.kind() {
+            ResidualObligationKind::AuthDeferred => {
+                facts.push(M9FiniteLocalAdmissionFact::auth_discharge(residual.name()));
+            }
+            ResidualObligationKind::VerifyDeferred => {
+                facts.push(M9FiniteLocalAdmissionFact::optional_verification_discharge(
+                    residual.name(),
+                ));
+            }
+            _ => {}
+        }
+    }
+    // The established validator owns the authoritative exact-membership and
+    // residual checks; this factory only creates T0's source-bound input.
+    M9FiniteLocalAdmissionCandidate::from_checked(checked, static_plan.projection(), facts.clone())
+        .map_err(|_| M9AdmissionDiagnostics::one(M9AdmissionErrorKind::InvalidMembershipLineage))?;
+    Ok(M9ReadOnlyProviderCompositeBootstrap {
+        facts,
+        program_identity: checked.program_identity().clone(),
+        coverage,
+        resource_runtime_nonce,
+    })
+}
+
+pub(crate) struct M9VerifiedReadOnlyProviderComposite {
+    base: M9AdmittedBase,
+    authority: M9AuthorityRuntime,
+    primary_membership: M9MembershipAuth,
+    contract_capability: M9CapabilityAuth,
+    contract_witness: M9WitnessAuth,
+    coverage: M9ReadOnlyProviderEffectCoverage,
+    composite_discharge: M9CompositeFiniteRefinementDischarge,
+    resource_runtime_nonce: [u8; 32],
+}
+
+/// One opaque policy proof issued only for an authenticated composite.  It is
+/// non-Clone and consumed by the M9 issuer, so it cannot be replayed across
+/// a different checked identity, static coverage, or trusted binding nonce.
+pub(crate) struct M9ReadOnlyProviderPolicyProof {
+    program_identity: CheckedProgramIdentity,
+    coverage: M9ReadOnlyProviderEffectCoverage,
+    resource_runtime_nonce: [u8; 32],
+    generation_ref: String,
+}
+
+impl std::fmt::Debug for M9ReadOnlyProviderPolicyProof {
+    fn fmt(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        formatter.write_str("M9ReadOnlyProviderPolicyProof(..)")
+    }
+}
+
+impl std::fmt::Debug for M9VerifiedReadOnlyProviderComposite {
+    fn fmt(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        formatter.write_str("M9VerifiedReadOnlyProviderComposite(..)")
+    }
+}
+
+pub(crate) fn verify_read_only_provider_composite(
+    checked: &CheckedSurfaceV0,
+    static_plan: &ReadOnlyProviderEffectStaticProjection,
+    bootstrap: M9ReadOnlyProviderCompositeBootstrap,
+    composite_discharge: &M9CompositeFiniteRefinementDischarge,
+    binding_nonce: [u8; 32],
+) -> Result<M9VerifiedReadOnlyProviderComposite, M9AdmissionDiagnostics> {
+    let coverage = static_plan.provider_coverage();
+    if bootstrap.program_identity != *checked.program_identity()
+        || bootstrap.coverage != *coverage
+        || bootstrap.resource_runtime_nonce != binding_nonce
+        || coverage.program_identity() != checked.program_identity()
+        || !coverage.matches_checked(checked)
+    {
+        return Err(M9AdmissionDiagnostics::one(
+            M9AdmissionErrorKind::InvalidMembershipLineage,
+        ));
+    }
+    let expected_discharge = M9CompositeFiniteRefinementChecker::default()
+        .discharge_composite_candidate(
+            checked,
+            M9CompositeContractCandidate::from_checked_surface(checked)
+                .map_err(|_| {
+                    M9AdmissionDiagnostics::one(M9AdmissionErrorKind::MissingVerifyDischarge)
+                })?
+                .membership_auth_strengthening(),
+        )
+        .map_err(|_| M9AdmissionDiagnostics::one(M9AdmissionErrorKind::MissingVerifyDischarge))?;
+    if &expected_discharge != composite_discharge
+        || composite_discharge.provider_coverage() != coverage
+    {
+        return Err(M9AdmissionDiagnostics::one(
+            M9AdmissionErrorKind::MissingVerifyDischarge,
+        ));
+    }
+    let validated = M9FiniteLocalAdmissionCandidate::from_checked(
+        checked,
+        static_plan.projection(),
+        bootstrap.facts,
+    )
+    .map_err(|_| M9AdmissionDiagnostics::one(M9AdmissionErrorKind::InvalidMembershipLineage))?;
+    let M9ValidatedFiniteLocalAdmissionCandidate {
+        checked: validated_checked,
+        anchor,
+        memberships: membership_rows,
+        relation_bootstraps,
+        auth_discharge,
+        ..
+    } = validated;
+    let auth_residual = validated_checked
+        .residual_obligations()
+        .entries()
+        .iter()
+        .find(|residual| {
+            residual.kind() == ResidualObligationKind::AuthDeferred
+                && residual.name() == auth_discharge
+        })
+        .ok_or_else(|| {
+            M9AdmissionDiagnostics::one(M9AdmissionErrorKind::InvalidMembershipLineage)
+        })?;
+    let relation_lifecycle_facts = finite_local_fresh_at_admission_lifecycle_facts(
+        &validated_checked,
+        &anchor.principal,
+        &membership_rows,
+        &relation_bootstraps,
+    )?;
+    let m9 = M9AdmissionRuntime::default();
+    let base = m9.admit_read_only_provider_effect_composite_base(
+        validated_checked.clone(),
+        coverage,
+        read_only_provider_effect_binding_context(binding_nonce),
+        finite_local_m8_admission_for_provider_coverage(
+            &validated_checked,
+            &relation_lifecycle_facts,
+            Some(coverage),
+        )?,
+        finite_local_m9_envelope_for(&validated_checked),
+    )?;
+    let mut authority = base.authority_runtime();
+    let mut memberships = BTreeMap::new();
+    for membership_row in membership_rows.values() {
+        let membership =
+            finite_local_membership_for(&mut authority, membership_row, auth_residual)?;
+        memberships.insert(
+            (
+                membership_row.principal.clone(),
+                membership_row.locus.clone(),
+            ),
+            membership,
+        );
+    }
+    let primary_membership = finite_local_required_membership(
+        &memberships,
+        coverage.contract().requester_principal(),
+        coverage.contract().requester_locus(),
+    )?;
+    let (contract_capability, contract_witness) = finite_local_capability_and_witness(
+        &mut authority,
+        &primary_membership,
+        "read-only-provider-composite-contract-capability",
+        M9CapabilityScope::contract_update(
+            checked.program_identity().module(),
+            format!("{M9_AUTH_CONTRACT_PREFIX}{}", auth_residual.name()),
+        ),
+        auth_residual.source_ref(),
+    )?;
+    if !contract_authority_lineage_matches_base(
+        &base,
+        &authority,
+        &primary_membership,
+        &contract_capability,
+        &contract_witness,
+    ) {
+        return Err(M9AdmissionDiagnostics::one(
+            M9AdmissionErrorKind::InvalidCapabilityLineage,
+        ));
+    }
+    Ok(M9VerifiedReadOnlyProviderComposite {
+        base,
+        authority,
+        primary_membership,
+        contract_capability,
+        contract_witness,
+        coverage: coverage.clone(),
+        composite_discharge: composite_discharge.clone(),
+        resource_runtime_nonce: binding_nonce,
+    })
+}
+
+pub(crate) struct M9InactiveReadOnlyProviderComposite {
+    authority: M9AuthorityRuntime,
+    membership: M9MembershipAuth,
+    capability: M9CapabilityAuth,
+    witness: M9WitnessAuth,
+    component: M8ReadOnlyProviderEffectComponent,
+    resource_runtime_nonce: [u8; 32],
+}
+
+impl std::fmt::Debug for M9InactiveReadOnlyProviderComposite {
+    fn fmt(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        formatter.write_str("M9InactiveReadOnlyProviderComposite(..)")
+    }
+}
+
+impl M9VerifiedReadOnlyProviderComposite {
+    pub(crate) fn resource_runtime_nonce_matches(&self, nonce: &[u8; 32]) -> bool {
+        &self.resource_runtime_nonce == nonce
+    }
+
+    pub(crate) fn issue_fixed_policy_proof(
+        &self,
+        resource_runtime_nonce: &[u8; 32],
+    ) -> Result<M9ReadOnlyProviderPolicyProof, M9AdmissionDiagnostics> {
+        if !self.resource_runtime_nonce_matches(resource_runtime_nonce)
+            || !self.membership_is_current()
+            || self.composite_discharge.program_identity() != self.coverage.program_identity()
+            || self.composite_discharge.provider_coverage() != &self.coverage
+            || !self.composite_discharge.activation_pending()
+            || self.composite_discharge.grants_authority()
+            || self.composite_discharge.permits_effect_use()
+            || self.composite_discharge.discharges_runtime_requirement()
+        {
+            return Err(M9AdmissionDiagnostics::one(
+                M9AdmissionErrorKind::InvalidCapabilityLineage,
+            ));
+        }
+        Ok(M9ReadOnlyProviderPolicyProof {
+            program_identity: self.coverage.program_identity().clone(),
+            coverage: self.coverage.clone(),
+            resource_runtime_nonce: *resource_runtime_nonce,
+            generation_ref: m9_opaque_ref(&format!(
+                "read-only-provider-fixed-policy:{}:{}:{}",
+                self.coverage.program_identity().stable_key(),
+                self.primary_membership.ref_id(),
+                self.coverage.contract().operation(),
+            )),
+        })
+    }
+
+    pub(crate) fn seal_with_fixed_policy(
+        mut self,
+        policy: M9ReadOnlyProviderPolicyProof,
+    ) -> Result<M9InactiveReadOnlyProviderComposite, M9AdmissionDiagnostics> {
+        if policy.program_identity != *self.coverage.program_identity()
+            || policy.coverage != self.coverage
+            || policy.resource_runtime_nonce != self.resource_runtime_nonce
+            || policy.generation_ref.is_empty()
+            || !self.membership_is_current()
+            || !contract_authority_lineage_matches_base(
+                &self.base,
+                &self.authority,
+                &self.primary_membership,
+                &self.contract_capability,
+                &self.contract_witness,
+            )
+        {
+            return Err(M9AdmissionDiagnostics::one(
+                M9AdmissionErrorKind::InvalidCapabilityLineage,
+            ));
+        }
+        let capability = self.authority.issue_read_only_provider_effect_capability(
+            &self.primary_membership,
+            &self.coverage,
+            self.resource_runtime_nonce,
+            &policy.generation_ref,
+        )?;
+        let witness = self.authority.materialize_witness(
+            M9WitnessRequest::new(format!(
+                "read-only-provider-effect-witness:{}",
+                capability.ref_id()
+            ))
+            .with_membership_ref(self.primary_membership.ref_id())
+            .with_capability_ref(capability.ref_id())
+            .with_source_ref(self.primary_membership.auth_residual_source_ref().clone()),
+        )?;
+        if !provider_final_evidence_matches_base(
+            &self.base,
+            &self.authority,
+            &self.primary_membership,
+            &capability,
+            &witness,
+            &self.coverage,
+            self.resource_runtime_nonce,
+            &policy.generation_ref,
+            &self.composite_discharge,
+        ) {
+            return Err(M9AdmissionDiagnostics::one(
+                M9AdmissionErrorKind::InvalidCapabilityLineage,
+            ));
+        }
+        let component = materialize_read_only_provider_effect_component(
+            self.base._embedded_m8_base,
+            self.coverage,
+        )
+        .map_err(|_| M9AdmissionDiagnostics::one(M9AdmissionErrorKind::M8BaseEvidenceMismatch))?;
+        Ok(M9InactiveReadOnlyProviderComposite {
+            authority: self.authority,
+            membership: self.primary_membership,
+            capability,
+            witness,
+            component,
+            resource_runtime_nonce: self.resource_runtime_nonce,
+        })
+    }
+
+    fn membership_is_current(&self) -> bool {
+        self.authority
+            .snapshot
+            .memberships
+            .get(self.primary_membership.ref_id())
+            .is_some_and(|membership| {
+                membership == &self.primary_membership
+                    && membership.active
+                    && self
+                        .authority
+                        .snapshot
+                        .current_memberships
+                        .get(&(membership.principal.clone(), membership.locus.clone()))
+                        == Some(&membership.reference)
+            })
+    }
+}
+
+impl M9InactiveReadOnlyProviderComposite {
+    pub(crate) fn component(&self) -> &M8ReadOnlyProviderEffectComponent {
+        &self.component
+    }
+
+    pub(crate) fn resource_runtime_nonce_matches(&self, nonce: &[u8; 32]) -> bool {
+        &self.resource_runtime_nonce == nonce
+    }
+
+    pub(crate) fn effect_authorization_is_current(&self) -> bool {
+        let Some(membership) = self
+            .authority
+            .snapshot
+            .memberships
+            .get(self.membership.ref_id())
+        else {
+            return false;
+        };
+        let Some(capability) = self
+            .authority
+            .snapshot
+            .capabilities
+            .get(self.capability.ref_id())
+        else {
+            return false;
+        };
+        let Some(witness) = self.authority.snapshot.witnesses.get(self.witness.ref_id()) else {
+            return false;
+        };
+        membership == &self.membership
+            && capability == &self.capability
+            && witness == &self.witness
+            && membership.active
+            && capability.active
+            && witness.live
+            && !self
+                .authority
+                .snapshot
+                .revoked_capabilities
+                .contains(self.capability.ref_id())
+            && self
+                .authority
+                .snapshot
+                .current_memberships
+                .get(&(membership.principal.clone(), membership.locus.clone()))
+                == Some(&membership.reference)
+    }
+
+    pub(crate) fn retire_effect_authorization(&mut self) -> Result<(), M9AdmissionDiagnostics> {
+        self.authority
+            .retire_membership(self.membership.ref_id(), "i3-read-only-provider-retired")
+    }
+}
+
 impl M9RuntimeExecutionSeam {
     /// The initial immutable authority generation consumed by SYS-2.  The
     /// mutable authority runtime remains entirely inside M9; downstream code
@@ -3635,7 +4174,7 @@ impl M9RuntimeExecutionSeam {
                 discharge,
             ),
         )
-        .map(M9RuntimeAdmitted::into_m10_execution_seam)
+        .and_then(M9RuntimeAdmitted::into_m10_execution_seam)
         .map_err(|diagnostics| {
             format!(
                 "kernel test final M9 admission: {:?}",
@@ -4104,7 +4643,7 @@ impl M9RuntimeExecutionSeam {
                 discharge,
             ),
         )
-        .map(M9RuntimeAdmitted::into_m10_execution_seam)
+        .and_then(M9RuntimeAdmitted::into_m10_execution_seam)
         .map_err(|diagnostics| {
             format!(
                 "kernel test final M9 admission: {:?}",
@@ -6141,7 +6680,7 @@ impl M9AuthoritySuccessorPublisher {
             authority_runtime: self.authority_runtime.clone(),
             evidence: self.evidence.clone(),
         }
-        .into_m10_execution_seam()
+        .into_m10_execution_seam()?
         .initial_authority_generation();
         let successor = translated
             .with_successor_generation_and_revoked_owner_lineage(
@@ -6185,7 +6724,7 @@ impl M9AuthoritySuccessorPublisher {
             authority_runtime: self.authority_runtime.clone(),
             evidence: self.evidence.clone(),
         }
-        .into_m10_execution_seam()
+        .into_m10_execution_seam()?
         .initial_authority_generation();
         let successor = translated
             .with_successor_generation_and_revoked_designated_consumption(
@@ -6230,7 +6769,7 @@ impl M9AuthoritySuccessorPublisher {
             authority_runtime: self.authority_runtime.clone(),
             evidence: self.evidence.clone(),
         }
-        .into_m10_execution_seam()
+        .into_m10_execution_seam()?
         .initial_authority_generation();
         let successor = translated
             .with_successor_generation_and_revoked_designated_consumption(
@@ -6312,7 +6851,7 @@ impl M9AuthoritySuccessorPublisher {
             authority_runtime: self.authority_runtime.clone(),
             evidence: self.evidence.clone(),
         }
-        .into_m10_execution_seam()
+        .into_m10_execution_seam()?
         .initial_authority_generation();
         let successor = translated
             .with_successor_generation_after_retired_membership(&self.current)
@@ -6498,7 +7037,7 @@ impl M9AuthoritySuccessorPublisher {
             authority_runtime: self.authority_runtime.clone(),
             evidence: self.evidence.clone(),
         }
-        .into_m10_execution_seam()
+        .into_m10_execution_seam()?
         .initial_authority_generation();
         let relation_authority = translated
             .relation_authority_use(relation, "reacquire_primary")
@@ -6546,7 +7085,7 @@ impl M9AuthoritySuccessorPublisher {
             authority_runtime: self.authority_runtime.clone(),
             evidence: self.evidence.clone(),
         }
-        .into_m10_execution_seam()
+        .into_m10_execution_seam()?
         .initial_authority_generation();
         let successor = translated
             .with_successor_generation_and_revoked_designated_consumption(
@@ -6606,7 +7145,7 @@ impl M9AuthoritySuccessorPublisher {
             authority_runtime: self.authority_runtime.clone(),
             evidence: self.evidence.clone(),
         }
-        .into_m10_execution_seam()
+        .into_m10_execution_seam()?
         .initial_authority_generation();
         let successor = translated
             .with_successor_generation_and_source_release_failure(
@@ -6976,7 +7515,7 @@ impl M9RuntimeExecutionSeam {
                     discharge,
                 ),
             )
-            .map(M9RuntimeAdmitted::into_m10_execution_seam)?;
+            .and_then(M9RuntimeAdmitted::into_m10_execution_seam)?;
         seam.install_finite_local_fresh_relation_reacquire_bindings(&relation_lifecycle_facts)?;
         Ok(seam)
     }
@@ -7279,6 +7818,14 @@ fn finite_local_m8_admission_for(
     checked: &CheckedSurfaceV0,
     relation_lifecycle_facts: &BTreeMap<String, M9FiniteFreshAtAdmissionLifecycleFact>,
 ) -> Result<M8RuntimeAdmission, M9AdmissionDiagnostics> {
+    finite_local_m8_admission_for_provider_coverage(checked, relation_lifecycle_facts, None)
+}
+
+fn finite_local_m8_admission_for_provider_coverage(
+    checked: &CheckedSurfaceV0,
+    relation_lifecycle_facts: &BTreeMap<String, M9FiniteFreshAtAdmissionLifecycleFact>,
+    provider_coverage: Option<&M9ReadOnlyProviderEffectCoverage>,
+) -> Result<M8RuntimeAdmission, M9AdmissionDiagnostics> {
     let mut admission = M8RuntimeAdmission::new(checked.program_identity().clone());
     for residual in checked.residual_obligations().entries() {
         match residual.kind() {
@@ -7357,9 +7904,14 @@ fn finite_local_m8_admission_for(
             }
             ResidualObligationKind::AuthDeferred | ResidualObligationKind::VerifyDeferred => {}
             ResidualObligationKind::ReadOnlyProviderEffectRuntimeUnsupported => {
-                return Err(M9AdmissionDiagnostics::one(
-                    M9AdmissionErrorKind::UnsupportedReadOnlyProviderEffectProfile,
-                ));
+                if provider_coverage.is_none_or(|coverage| {
+                    coverage.program_identity() != checked.program_identity()
+                        || !coverage.matches_checked(checked)
+                }) {
+                    return Err(M9AdmissionDiagnostics::one(
+                        M9AdmissionErrorKind::UnsupportedReadOnlyProviderEffectProfile,
+                    ));
+                }
             }
         }
     }
@@ -7537,7 +8089,9 @@ impl M9RuntimeAdmitted {
     /// lineage already sealed in this M9 admission.  ContractUpdate records
     /// remain evidence for the final M9 judgment; this bridge neither applies
     /// an update nor exposes a provider or minting path.
-    pub(crate) fn into_m10_execution_seam(self) -> M9M10ExecutionSeam {
+    pub(crate) fn into_m10_execution_seam(
+        self,
+    ) -> Result<M9M10ExecutionSeam, M9AdmissionDiagnostics> {
         let M9RuntimeAdmitted {
             base,
             authority_runtime,
@@ -7934,7 +8488,8 @@ impl M9RuntimeAdmitted {
                 }
                 M9CapabilityScope::OwnerEvaluation { .. }
                 | M9CapabilityScope::ContractUpdate { .. }
-                | M9CapabilityScope::PrimaryAnchorPresence { .. } => {}
+                | M9CapabilityScope::PrimaryAnchorPresence { .. }
+                | M9CapabilityScope::ReadOnlyProviderEffect(_) => {}
             }
         }
         let mut authority_generation = M9AuthorityGeneration {
@@ -7971,8 +8526,18 @@ impl M9RuntimeAdmitted {
             current: authority_generation.clone(),
             fresh_anchor_reacquire_templates: BTreeMap::new(),
         };
-        let instance = materialize_m9_resolved_base(base.into_embedded_m8_base());
-        M9M10ExecutionSeam {
+        let instance =
+            materialize_m9_resolved_base(base.into_embedded_m8_base()).map_err(|diagnostics| {
+                match diagnostics.primary().kind() {
+                    M8AdmissionDiagnosticKind::UnsupportedReadOnlyProviderEffectProfile => {
+                        M9AdmissionDiagnostics::one(
+                            M9AdmissionErrorKind::UnsupportedReadOnlyProviderEffectProfile,
+                        )
+                    }
+                    _ => M9AdmissionDiagnostics::one(M9AdmissionErrorKind::M8BaseEvidenceMismatch),
+                }
+            })?;
+        Ok(M9M10ExecutionSeam {
             instance,
             authority_state,
             authority_snapshot_projection,
@@ -7991,12 +8556,16 @@ impl M9RuntimeAdmitted {
             authority_generation,
             final_residual_discharge_complete: true,
             authority_successor: Some(authority_successor),
-        }
+        })
     }
 
     #[allow(dead_code)] // Compatibility for internal callers before M10.
-    pub(crate) fn into_m8_execution_seam(self) -> M8RuntimeInstance {
-        self.into_m10_execution_seam().into_parts().0
+    pub(crate) fn into_m8_execution_seam(
+        self,
+    ) -> Result<M8RuntimeInstance, M9AdmissionDiagnostics> {
+        self.into_m10_execution_seam()
+            .map(M9M10ExecutionSeam::into_parts)
+            .map(|parts| parts.0)
     }
 }
 
@@ -8056,7 +8625,13 @@ fn final_evidence_matches_base(
     ) else {
         return false;
     };
-    outer == &base.outer_admission
+    contract_authority_lineage_matches_base(
+        base,
+        authority_runtime,
+        membership,
+        capability,
+        witness,
+    ) && outer == &base.outer_admission
         && membership.active
         && authority_runtime
             .snapshot
@@ -8094,15 +8669,148 @@ fn final_evidence_matches_base(
             })
 }
 
+/// Shared final M9 lineage check for an actual authenticated membership,
+/// capability, and witness. Callers supply the only capability scope that may
+/// satisfy their sealed admission profile; this helper never creates an M8
+/// execution carrier.
+fn final_authority_lineage_matches_base(
+    base: &M9AdmittedBase,
+    authority_runtime: &M9AuthorityRuntime,
+    membership_ref: &str,
+    capability_ref: &str,
+    witness_ref: &str,
+    expected_scope: &M9CapabilityScope,
+) -> bool {
+    let auth_binding = base.m9_residual_bindings.0.iter().find(|binding| {
+        binding.kind == ResidualObligationKind::AuthDeferred
+            && binding.module.as_deref() == Some(base.program_identity.module())
+            && binding.contract.as_deref()
+                == Some(format!("{M9_AUTH_CONTRACT_PREFIX}{}", binding.name).as_str())
+    });
+    let Some(auth_binding) = auth_binding else {
+        return false;
+    };
+    let Some(auth_ref) = auth_binding.source_ref.as_ref() else {
+        return false;
+    };
+    let Some(outer) = authority_runtime.outer_admission.as_ref() else {
+        return false;
+    };
+    let (Some(membership), Some(capability), Some(witness)) = (
+        authority_runtime.snapshot.memberships.get(membership_ref),
+        authority_runtime.snapshot.capabilities.get(capability_ref),
+        authority_runtime.snapshot.witnesses.get(witness_ref),
+    ) else {
+        return false;
+    };
+    outer == &base.outer_admission
+        && membership.active
+        && authority_runtime
+            .snapshot
+            .current_memberships
+            .get(&(membership.principal.clone(), membership.locus.clone()))
+            == Some(&membership.reference)
+        && capability.active
+        && witness.live
+        && !authority_runtime
+            .snapshot
+            .revoked_capabilities
+            .contains(capability_ref)
+        && membership.auth_residual_source_ref.as_ref() == Some(auth_ref)
+        && capability.membership_ref == membership.reference
+        && capability.lineage_epoch == membership.epoch
+        && capability.policy_version == "m9-policy-v1"
+        && capability.source_ref.as_ref() == Some(auth_ref)
+        && capability.scope == *expected_scope
+        && witness.membership_ref == membership.reference
+        && witness.capability_ref == capability.reference
+        && witness.source_ref.as_ref() == Some(auth_ref)
+}
+
+fn contract_authority_lineage_matches_base(
+    base: &M9AdmittedBase,
+    authority_runtime: &M9AuthorityRuntime,
+    membership: &M9MembershipAuth,
+    capability: &M9CapabilityAuth,
+    witness: &M9WitnessAuth,
+) -> bool {
+    let Some(auth_binding) = base.m9_residual_bindings.0.iter().find(|binding| {
+        binding.kind == ResidualObligationKind::AuthDeferred
+            && binding.module.as_deref() == Some(base.program_identity.module())
+            && binding.contract.as_deref()
+                == Some(format!("{M9_AUTH_CONTRACT_PREFIX}{}", binding.name).as_str())
+    }) else {
+        return false;
+    };
+    let (Some(module), Some(contract)) = (
+        auth_binding.module.as_deref(),
+        auth_binding.contract.as_deref(),
+    ) else {
+        return false;
+    };
+    let expected_scope = M9CapabilityScope::contract_update(module, contract);
+    final_authority_lineage_matches_base(
+        base,
+        authority_runtime,
+        membership.ref_id(),
+        capability.ref_id(),
+        witness.ref_id(),
+        &expected_scope,
+    )
+}
+
+fn provider_final_evidence_matches_base(
+    base: &M9AdmittedBase,
+    authority_runtime: &M9AuthorityRuntime,
+    membership: &M9MembershipAuth,
+    capability: &M9CapabilityAuth,
+    witness: &M9WitnessAuth,
+    coverage: &M9ReadOnlyProviderEffectCoverage,
+    resource_runtime_nonce: [u8; 32],
+    policy_generation_ref: &str,
+    composite_discharge: &M9CompositeFiniteRefinementDischarge,
+) -> bool {
+    let expected_scope = M9CapabilityScope::read_only_provider_effect(
+        coverage,
+        resource_runtime_nonce,
+        policy_generation_ref,
+    );
+    final_authority_lineage_matches_base(
+        base,
+        authority_runtime,
+        membership.ref_id(),
+        capability.ref_id(),
+        witness.ref_id(),
+        &expected_scope,
+    ) && composite_discharge.program_identity() == coverage.program_identity()
+        && composite_discharge.provider_coverage() == coverage
+        && composite_discharge.activation_pending()
+        && !composite_discharge.grants_authority()
+        && !composite_discharge.permits_effect_use()
+        && !composite_discharge.discharges_runtime_requirement()
+}
+
 fn validate_outer(
     checked: &CheckedSurfaceV0,
     envelope: &M9AdmissionEnvelope,
 ) -> Result<(), M9AdmissionDiagnostics> {
-    if has_read_only_provider_effect(checked)
+    validate_outer_for_provider_coverage(checked, envelope, None)
+}
+
+fn validate_outer_for_provider_coverage(
+    checked: &CheckedSurfaceV0,
+    envelope: &M9AdmissionEnvelope,
+    provider_coverage: Option<&M9ReadOnlyProviderEffectCoverage>,
+) -> Result<(), M9AdmissionDiagnostics> {
+    if (has_read_only_provider_effect(checked)
         || envelope
             .original_source_artifact
             .as_ref()
-            .is_some_and(M9SourceArtifact::has_unsupported_read_only_provider_effect_profile)
+            .is_some_and(M9SourceArtifact::has_unsupported_read_only_provider_effect_profile))
+        && provider_coverage.is_none_or(|coverage| {
+            coverage.program_identity() != checked.program_identity()
+                || !coverage.matches_checked(checked)
+        })
     {
         return Err(M9AdmissionDiagnostics::one(
             M9AdmissionErrorKind::UnsupportedReadOnlyProviderEffectProfile,
@@ -8649,6 +9357,37 @@ impl M9MembershipAuth {
     }
 }
 
+/// Opaque provider capability scope.  Its fields and constructor remain M9
+/// private, so naming the public capability enum cannot manufacture a scope
+/// accepted by the dedicated issuer.
+#[doc(hidden)]
+#[derive(Clone, PartialEq, Eq)]
+pub struct M9ReadOnlyProviderEffectScope {
+    coverage: Box<M9ReadOnlyProviderEffectCoverage>,
+    resource_runtime_nonce: [u8; 32],
+    policy_generation_ref: String,
+}
+
+impl std::fmt::Debug for M9ReadOnlyProviderEffectScope {
+    fn fmt(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        formatter.write_str("M9ReadOnlyProviderEffectScope(..)")
+    }
+}
+
+impl M9ReadOnlyProviderEffectScope {
+    fn from_admitted_composite(
+        coverage: &M9ReadOnlyProviderEffectCoverage,
+        resource_runtime_nonce: [u8; 32],
+        policy_generation_ref: &str,
+    ) -> Self {
+        Self {
+            coverage: Box::new(coverage.clone()),
+            resource_runtime_nonce,
+            policy_generation_ref: policy_generation_ref.to_string(),
+        }
+    }
+}
+
 #[derive(Debug, Clone, PartialEq, Eq)]
 pub enum M9CapabilityScope {
     OwnerEvaluation {
@@ -8701,6 +9440,9 @@ pub enum M9CapabilityScope {
         value_name: String,
         result_version: u64,
     },
+    /// Private Stage 2b capability.  Generic capability authorization always
+    /// rejects this scope; only the checked composite policy seam may issue it.
+    ReadOnlyProviderEffect(M9ReadOnlyProviderEffectScope),
 }
 
 impl M9CapabilityScope {
@@ -8818,6 +9560,18 @@ impl M9CapabilityScope {
             value_name: value_name.into(),
             result_version,
         }
+    }
+
+    fn read_only_provider_effect(
+        coverage: &M9ReadOnlyProviderEffectCoverage,
+        resource_runtime_nonce: [u8; 32],
+        policy_generation_ref: &str,
+    ) -> Self {
+        Self::ReadOnlyProviderEffect(M9ReadOnlyProviderEffectScope::from_admitted_composite(
+            coverage,
+            resource_runtime_nonce,
+            policy_generation_ref,
+        ))
     }
 }
 
@@ -10159,6 +10913,90 @@ impl M9AuthorityRuntime {
         }
     }
 
+    /// The only issuer for the provider-effect capability.  It is private to
+    /// the composite path and requires a current authenticated membership plus
+    /// exact checked coverage; callers cannot obtain this through the generic
+    /// `authorize_capability` request surface.
+    fn issue_read_only_provider_effect_capability(
+        &mut self,
+        membership: &M9MembershipAuth,
+        coverage: &M9ReadOnlyProviderEffectCoverage,
+        resource_runtime_nonce: [u8; 32],
+        policy_generation_ref: &str,
+    ) -> Result<M9CapabilityAuth, M9AdmissionDiagnostics> {
+        if self
+            .outer_admission
+            .as_ref()
+            .is_none_or(|outer| coverage.program_identity() != &outer.program_identity)
+        {
+            return Err(M9AdmissionDiagnostics::one(
+                M9AdmissionErrorKind::InvalidCapabilityLineage,
+            ));
+        }
+        let Some(snapshot_membership) = self.snapshot.memberships.get(membership.ref_id()) else {
+            return Err(M9AdmissionDiagnostics::one(
+                M9AdmissionErrorKind::InvalidMembershipLineage,
+            ));
+        };
+        if snapshot_membership != membership
+            || !snapshot_membership.active
+            || self
+                .snapshot
+                .current_memberships
+                .get(&(membership.principal.clone(), membership.locus.clone()))
+                != Some(&membership.reference)
+        {
+            return Err(M9AdmissionDiagnostics::one(
+                M9AdmissionErrorKind::InvalidCapabilityLineage,
+            ));
+        }
+        let contract = coverage.contract();
+        if membership.principal() != contract.requester_principal()
+            || membership.locus() != contract.requester_locus()
+            || policy_generation_ref.is_empty()
+        {
+            return Err(M9AdmissionDiagnostics::one(
+                M9AdmissionErrorKind::CapabilityPolicyRejected,
+            ));
+        }
+        let scope = M9CapabilityScope::read_only_provider_effect(
+            coverage,
+            resource_runtime_nonce,
+            policy_generation_ref,
+        );
+        let reference = m9_opaque_ref(&format!(
+            "read-only-provider-effect-capability:{}:{}:{}",
+            coverage.program_identity().stable_key(),
+            membership.ref_id(),
+            contract.operation(),
+        ));
+        if self.snapshot.capabilities.contains_key(&reference) {
+            return Err(M9AdmissionDiagnostics::one(
+                M9AdmissionErrorKind::DuplicateCapabilityReference,
+            ));
+        }
+        let capability = M9CapabilityAuth {
+            reference,
+            membership_ref: membership.ref_id().to_string(),
+            scope,
+            lineage_epoch: membership.epoch().to_string(),
+            policy_version: M9_POLICY_VERSION.to_string(),
+            source_ref: Some(membership.auth_residual_source_ref().clone()),
+            active: true,
+        };
+        self.snapshot
+            .capabilities
+            .insert(capability.reference.clone(), capability.clone());
+        self.evidence_graph.add_dependent(
+            &capability.reference,
+            format!(
+                "read-only-provider-effect:{}",
+                coverage.contract().operation()
+            ),
+        );
+        Ok(capability)
+    }
+
     pub fn authorize_capability(
         &mut self,
         request: M9CapabilityGrantRequest,
@@ -10398,6 +11236,10 @@ impl M9AuthorityRuntime {
                                 .unwrap_or(""),
                         )
                 }),
+            // A provider-effect scope is never available through this generic
+            // request API.  Its issuer below additionally checks the sealed
+            // composite coverage and the separate fixed policy decision.
+            M9CapabilityScope::ReadOnlyProviderEffect(_) => false,
         }
     }
 
@@ -10661,6 +11503,29 @@ fn canonical_m9_capability_scope(scope: &M9CapabilityScope) -> String {
             value_name,
             result_version,
         } => format!("designated_consumption:{consumer}:{value_name}:{result_version}"),
+        M9CapabilityScope::ReadOnlyProviderEffect(scope) => {
+            let contract = scope.coverage.contract();
+            let resource_runtime_nonce = scope
+                .resource_runtime_nonce
+                .iter()
+                .map(|byte| format!("{byte:02x}"))
+                .collect::<String>();
+            format!(
+                "read_only_provider_effect:{}",
+                m9_private_restore_digest(
+                    b"mirrorea/m9/read-only-provider-effect-capability-scope/v1\0",
+                    &[
+                        scope.coverage.program_identity().stable_key(),
+                        contract.operation().to_string(),
+                        contract.requester_locus().to_string(),
+                        contract.executor_locus().to_string(),
+                        contract.result_consumer_locus().to_string(),
+                        resource_runtime_nonce,
+                        scope.policy_generation_ref.clone(),
+                    ],
+                )
+            )
+        }
     }
 }
 
@@ -10892,7 +11757,8 @@ impl M9ContractAuthorityUse {
             | M9CapabilityScope::PrimaryAnchorPresence { .. }
             | M9CapabilityScope::DesignatedEvaluation { .. }
             | M9CapabilityScope::DesignatedRemoteInputRelease { .. }
-            | M9CapabilityScope::DesignatedConsumption { .. } => None,
+            | M9CapabilityScope::DesignatedConsumption { .. }
+            | M9CapabilityScope::ReadOnlyProviderEffect(_) => None,
         };
         Self {
             membership_ref: Some(capability.membership_ref.clone()),
@@ -11242,7 +12108,8 @@ impl M9ObserverRequest {
             | M9CapabilityScope::PrimaryAnchorPresence { .. }
             | M9CapabilityScope::DesignatedEvaluation { .. }
             | M9CapabilityScope::DesignatedRemoteInputRelease { .. }
-            | M9CapabilityScope::DesignatedConsumption { .. } => String::new(),
+            | M9CapabilityScope::DesignatedConsumption { .. }
+            | M9CapabilityScope::ReadOnlyProviderEffect(_) => String::new(),
         };
         Self {
             observer_principal,
@@ -11931,3 +12798,7 @@ mod m9_auth_verification_unit_tests;
 #[cfg(test)]
 #[path = "m9_auth_verification_i3_tests.rs"]
 mod m9_auth_verification_i3_tests;
+
+#[cfg(test)]
+#[path = "m9_auth_verification_i3_provider_composite_tests.rs"]
+mod m9_auth_verification_i3_provider_composite_tests;

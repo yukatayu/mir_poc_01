@@ -325,13 +325,20 @@ recordが揃ったためofficial I2 entry後exitを受理しました。broad PH
   selects the finite provider contract. Its source/check/snapshot and explicit
   unsupported-legacy-runtime handoff now pass source 17/17, privacy 1/1,
   private guards 2/2 and public guards 5/5, with independent review clear.
-  Source/guard cut `9e8d674a` is pushed. The successor static composite and
-  projection packet passes fresh semantics 6/17/8, privacy 1, static runtime 11
-  and full runtime 345 tests; process/I2/M10 regressions, focused quality gates
-  and independent spec/quality reviews pass. Next is trusted binding -> actual M9 authentication/verification ->
-  separate effect policy -> inactive scoped M8 component. No grant, host
-  invocation or provider network workflow is claimed. Exact evidence and Git
-  state are in Report 2606.
+  Source/guard cut `9e8d674a` is pushed. Static successor `3862b168` has clean
+  pushed parity; its composite/projection packet passes fresh semantics 6/17/8,
+  privacy 1, static runtime 11. Stage2b module is included in fresh runtime
+  362/362; provider filtering is 26/26 within that runtime total, not additive;
+  process integration is 63/63. M10 is 67/67, I2 local is 5/5 and CLI is 8/8,
+  and public guards are 5/5. The three-crate all-target warnings-denied Clippy,
+  workspace format, and workspace all-target check pass; workspace tests,
+  CLI/probe Clippy, and provider activation are not claimed. Independent
+  spec/quality review is P0/P1/P2 zero after three direct tests and generic M8
+  typed-refusal coverage. The source is frozen and this Stage2b component is
+  inactive/green for parent integration, with a new Git cut pending. Binding,
+  actual M9 authorization and intact composite verification feed separate policy
+  and scoped M8, then the existing SYS4/SYS5 mixed private-image/admission
+  variant; actual bounded host/QUIC runtime remains later.
   All remaining I3-3 failure/order obligations stay required; I3-3 itself
   is not accepted, and I3-4 remains inactive.
 - decisions taken: the working interpretation remains ordinary meaning ->
@@ -354,13 +361,15 @@ recordが揃ったためofficial I2 entry後exitを受理しました。broad PH
   SYS-5/SYS-6 CLI/JSON/grammar are internal/provisional, the four-locus toy is
   not whole-workflow OW1, and the evidence is not a general scheduler,
   memory-model, relation-DAG, public transport, or lifecycle theorem.
-- verification status: current full probe 41/41, final focused replay 3/3,
-  two-crate all-target Clippy and workspace format pass, with no orphan children.
-  Runtime library 332/process integration 63/I2-M10 5/8/67 are retained `30429d5`
-  baseline evidence, not reruns of this replay delta. Genuine G1-expiry→G2
-  requester rejection remains local binder evidence; inspection confirms actual
-  QUIC uses the same binder before consumption, not an actual network-generation
-  update. Report 2606 keeps exact logs and finite runtime-only classification.
+- verification status: Stage2b runtime is 362/362, including provider filtering
+  26/26 (not additive); process integration is 63/63, M10 is 67/67, I2 local/CLI
+  is 5/5 and 8/8, and public guards are 5/5. Three-crate all-target Clippy is
+  warnings-clean, workspace format passes, and workspace all-target check
+  passes; workspace tests, CLI/probe Clippy and provider activation are not
+  claimed. Independent spec/quality review is P0/P1/P2 zero. Stage2b is
+  inactive/green for parent integration and awaits a new Git cut; no provider
+  invocation/network/runtime or supervisor availability is claimed. Report
+  2606 keeps exact logs.
   Provider, remaining membership/redaction/cut and full ordering/acceptance remain
   open. No whole-I3-3, official lifecycle or public workflow claim follows.
 

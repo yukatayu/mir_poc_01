@@ -17,6 +17,7 @@ i3-process-test-seams = []
 i3-private-quic = ["dep:quinn", "dep:rustls", "dep:tokio", "dep:x509-parser"]
 
 [dependencies]
+getrandom = "=0.4.3"
 mir-ast = { path = "../mir-ast" }
 mir-semantics = { path = "../mir-semantics" }
 mirrorea-core = { path = "../mirrorea-core" }

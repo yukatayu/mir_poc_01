@@ -9,6 +9,7 @@ use std::collections::BTreeSet;
 
 use serde::{Deserialize, Serialize};
 
+use mir_semantics::m9_finite_refinement::M9ReadOnlyProviderEffectCoverage;
 use mir_semantics::surface_v0_pipeline::private_snapshot::{
     SnapshotCheckedProgramIdentity, SnapshotDesignatedCheckedCore,
     SnapshotOwnerAdmissionBudgetCondition, SnapshotRelationCheckedCore, SnapshotSourceRef,
@@ -447,6 +448,8 @@ pub(crate) struct M8DeferredM9Base {
     admission: M8RuntimeAdmission,
     ordered_lowering: OrderedRuntimeLowering,
     deferred_residuals: Vec<M8DeferredM9Residual>,
+    provider_coverage: Option<M9ReadOnlyProviderEffectCoverage>,
+    provider_binding_context: Option<M8ReadOnlyProviderEffectBindingContext>,
 }
 
 impl M8DeferredM9Base {
@@ -456,6 +459,38 @@ impl M8DeferredM9Base {
 
     pub(crate) fn deferred_residuals(&self) -> &[M8DeferredM9Residual] {
         &self.deferred_residuals
+    }
+
+    pub(crate) fn has_read_only_provider_effect_scope(&self) -> bool {
+        self.provider_coverage.is_some() || self.provider_binding_context.is_some()
+    }
+}
+
+/// Opaque, T0-internal binding coordinate retained only by the dedicated M8
+/// provider component. It exposes neither a resource nonce nor a native
+/// handle.
+#[derive(Clone, PartialEq, Eq)]
+pub(crate) struct M8ReadOnlyProviderEffectBindingContext {
+    resource_runtime_nonce: [u8; 32],
+}
+
+impl std::fmt::Debug for M8ReadOnlyProviderEffectBindingContext {
+    fn fmt(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        formatter.write_str("M8ReadOnlyProviderEffectBindingContext(..)")
+    }
+}
+
+pub(crate) fn read_only_provider_effect_binding_context(
+    resource_runtime_nonce: [u8; 32],
+) -> M8ReadOnlyProviderEffectBindingContext {
+    M8ReadOnlyProviderEffectBindingContext {
+        resource_runtime_nonce,
+    }
+}
+
+impl M8ReadOnlyProviderEffectBindingContext {
+    fn matches_resource_runtime_nonce(&self, resource_runtime_nonce: &[u8; 32]) -> bool {
+        &self.resource_runtime_nonce == resource_runtime_nonce
     }
 }
 
@@ -490,7 +525,25 @@ pub(crate) fn prepare_deferred_m9_base(
     checked: &CheckedSurfaceV0,
     admission: &M8RuntimeAdmission,
 ) -> Result<M8DeferredM9Base, M8AdmissionDiagnostics> {
+    prepare_deferred_m9_base_for_provider_coverage(checked, admission, None, None)
+}
+
+/// The composite provider path may carry the complete checked provider
+/// coverage while retaining the source residual.  This is deliberately a
+/// separate crate-private seam: ordinary M8 admission remains rejecting.
+pub(crate) fn prepare_deferred_m9_base_for_provider_coverage(
+    checked: &CheckedSurfaceV0,
+    admission: &M8RuntimeAdmission,
+    provider_coverage: Option<&M9ReadOnlyProviderEffectCoverage>,
+    provider_binding_context: Option<M8ReadOnlyProviderEffectBindingContext>,
+) -> Result<M8DeferredM9Base, M8AdmissionDiagnostics> {
     if admission.program_identity() != checked.program_identity() {
+        return Err(M8AdmissionDiagnostics::one(
+            M8AdmissionDiagnostic::program_identity_mismatch(checked),
+        ));
+    }
+
+    if provider_coverage.is_some() != provider_binding_context.is_some() {
         return Err(M8AdmissionDiagnostics::one(
             M8AdmissionDiagnostic::program_identity_mismatch(checked),
         ));
@@ -498,11 +551,20 @@ pub(crate) fn prepare_deferred_m9_base(
 
     if let Some(diagnostic) =
         M8AdmissionDiagnostic::unsupported_read_only_provider_effect_profile(checked)
+        && provider_coverage.is_none_or(|coverage| {
+            coverage.program_identity() != checked.program_identity()
+                || !coverage.matches_checked(checked)
+        })
     {
         return Err(M8AdmissionDiagnostics::one(diagnostic));
     }
 
     for residual in checked.residual_obligations().entries() {
+        if residual.kind() == ResidualObligationKind::ReadOnlyProviderEffectRuntimeUnsupported
+            && provider_coverage.is_some()
+        {
+            continue;
+        }
         if matches!(
             residual.kind(),
             ResidualObligationKind::AuthDeferred | ResidualObligationKind::VerifyDeferred
@@ -570,6 +632,8 @@ pub(crate) fn prepare_deferred_m9_base(
                 source_ref: residual.source_ref().clone(),
             })
             .collect(),
+        provider_coverage: provider_coverage.cloned(),
+        provider_binding_context,
     })
 }
 
@@ -577,8 +641,22 @@ pub(crate) fn prepare_deferred_m9_base(
 /// retained residuals.  This is crate-private so neither direct M8 admission
 /// nor the prepared M9 base can be mistaken for a public runtime success.
 #[allow(dead_code)] // Reserved crate-private M10 seam; no public M8 success route exists.
-pub(crate) fn materialize_m9_resolved_base(base: M8DeferredM9Base) -> M8RuntimeInstance {
-    M8RuntimeInstance::from_admitted(base.checked_surface, base.admission)
+pub(crate) fn materialize_m9_resolved_base(
+    base: M8DeferredM9Base,
+) -> Result<M8RuntimeInstance, M8AdmissionDiagnostics> {
+    if base.has_read_only_provider_effect_scope() {
+        let diagnostic = M8AdmissionDiagnostic::unsupported_read_only_provider_effect_profile(
+            &base.checked_surface,
+        )
+        .unwrap_or_else(|| M8AdmissionDiagnostic::program_identity_mismatch(&base.checked_surface));
+        return Err(M8AdmissionDiagnostics::one(diagnostic));
+    }
+    let M8DeferredM9Base {
+        checked_surface,
+        admission,
+        ..
+    } = base;
+    Ok(M8RuntimeInstance::from_admitted(checked_surface, admission))
 }
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
@@ -904,6 +982,263 @@ pub struct M8RuntimeInstance {
     designated_execution_plans: Vec<M8DesignatedExecutionPlan>,
     owner_execution_plans: Vec<M8OwnerExecutionPlan>,
     relation_execution_plans: Vec<M8RelationExecutionPlan>,
+    scope: M8RuntimeInstanceScope,
+}
+
+/// The ordinary instance is the only form allowed to leave M8 through the
+/// existing private I3 snapshot.  The provider composite marker is retained
+/// across restrictions and can only be observed through its sealed wrapper.
+#[derive(Debug, Clone, PartialEq, Eq)]
+enum M8RuntimeInstanceScope {
+    Ordinary,
+    ReadOnlyProviderEffectComposite {
+        coverage: Box<M9ReadOnlyProviderEffectCoverage>,
+        binding_context: M8ReadOnlyProviderEffectBindingContext,
+    },
+}
+
+/// Opaque M8 component retained by the private read-only provider composite.
+/// It deliberately exposes neither the bare runtime instance nor an ordinary
+/// process image.
+#[derive(Clone)]
+pub(crate) struct M8ReadOnlyProviderEffectComponent {
+    instance: M8RuntimeInstance,
+    coverage: M9ReadOnlyProviderEffectCoverage,
+    binding_context: M8ReadOnlyProviderEffectBindingContext,
+    declared_provider_lowering_count: usize,
+}
+
+impl std::fmt::Debug for M8ReadOnlyProviderEffectComponent {
+    fn fmt(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        formatter.write_str("M8ReadOnlyProviderEffectComponent(..)")
+    }
+}
+
+/// A component-only snapshot.  It is not an ordinary I3 process image and
+/// can restore only through the same provider-scoped wrapper.
+#[derive(Clone)]
+pub(crate) struct M8ReadOnlyProviderEffectComponentSnapshot {
+    component: M8ReadOnlyProviderEffectComponent,
+}
+
+impl std::fmt::Debug for M8ReadOnlyProviderEffectComponentSnapshot {
+    fn fmt(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        formatter.write_str("M8ReadOnlyProviderEffectComponentSnapshot(..)")
+    }
+}
+
+/// T0-internal, non-authorizing inventory for a sealed provider component. It
+/// retains only checked identity and ordered-lowering correspondence; it
+/// exposes neither the underlying M8 instance nor any authority, witness, or
+/// native binding.
+pub(crate) struct M8ReadOnlyProviderEffectComponentInventory {
+    program_identity: CheckedProgramIdentity,
+    ordered_lowering: OrderedRuntimeLowering,
+    declared_provider_lowering_count: usize,
+}
+
+impl std::fmt::Debug for M8ReadOnlyProviderEffectComponentInventory {
+    fn fmt(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        formatter.write_str("M8ReadOnlyProviderEffectComponentInventory(..)")
+    }
+}
+
+pub(crate) fn materialize_read_only_provider_effect_component(
+    base: M8DeferredM9Base,
+    coverage: M9ReadOnlyProviderEffectCoverage,
+) -> Result<M8ReadOnlyProviderEffectComponent, M8AdmissionDiagnostics> {
+    let M8DeferredM9Base {
+        program_identity,
+        checked_surface,
+        admission,
+        ordered_lowering,
+        provider_coverage,
+        provider_binding_context,
+        ..
+    } = base;
+    if coverage.program_identity() != &program_identity
+        || !coverage.matches_checked(&checked_surface)
+    {
+        return Err(M8AdmissionDiagnostics::one(
+            M8AdmissionDiagnostic::program_identity_mismatch(&checked_surface),
+        ));
+    }
+    let (Some(base_coverage), Some(binding_context)) =
+        (provider_coverage, provider_binding_context)
+    else {
+        return Err(M8AdmissionDiagnostics::one(
+            M8AdmissionDiagnostic::program_identity_mismatch(&checked_surface),
+        ));
+    };
+    if base_coverage != coverage {
+        return Err(M8AdmissionDiagnostics::one(
+            M8AdmissionDiagnostic::program_identity_mismatch(&checked_surface),
+        ));
+    }
+    let declared_provider_lowering_count = ordered_lowering
+        .entries()
+        .iter()
+        .filter(|entry| is_read_only_provider_effect_lowering(entry.kind()))
+        .count();
+    if declared_provider_lowering_count != 4 {
+        return Err(M8AdmissionDiagnostics::one(
+            M8AdmissionDiagnostic::program_identity_mismatch(&checked_surface),
+        ));
+    }
+    let retained_ordered_lowering = OrderedRuntimeLowering {
+        entries: ordered_lowering
+            .entries()
+            .iter()
+            .filter(|entry| !is_read_only_provider_effect_lowering(entry.kind()))
+            .cloned()
+            .collect(),
+    };
+    let mut instance = M8RuntimeInstance::from_admitted(checked_surface, admission);
+    instance.ordered_lowering = retained_ordered_lowering;
+    instance.scope = M8RuntimeInstanceScope::ReadOnlyProviderEffectComposite {
+        coverage: Box::new(coverage.clone()),
+        binding_context: binding_context.clone(),
+    };
+    Ok(M8ReadOnlyProviderEffectComponent {
+        instance,
+        coverage,
+        binding_context,
+        declared_provider_lowering_count,
+    })
+}
+
+impl M8ReadOnlyProviderEffectComponent {
+    pub(crate) fn restricted_to_loci(&self, assigned_loci: &BTreeSet<String>) -> Self {
+        let mut instance = self.instance.restricted_to_loci(assigned_loci);
+        // This sealed component retains its already-filtered static
+        // non-provider lowering correspondence across a locus restriction.
+        // The ordinary execution plans above remain restricted; this private
+        // inventory cannot become an ordinary M8 instance or process image.
+        instance.ordered_lowering = self.instance.ordered_lowering.clone();
+        Self {
+            instance,
+            coverage: self.coverage.clone(),
+            binding_context: self.binding_context.clone(),
+            declared_provider_lowering_count: self.declared_provider_lowering_count,
+        }
+    }
+
+    pub(crate) fn ordinary_i3_private_snapshot(
+        &self,
+    ) -> Result<M8I3PrivateSnapshot, M8I3PrivateSnapshotError> {
+        self.instance.i3_private_snapshot()
+    }
+
+    pub(crate) fn scoped_snapshot(&self) -> M8ReadOnlyProviderEffectComponentSnapshot {
+        M8ReadOnlyProviderEffectComponentSnapshot {
+            component: self.clone(),
+        }
+    }
+
+    pub(crate) fn is_component_scoped(&self) -> bool {
+        matches!(
+            &self.instance.scope,
+            M8RuntimeInstanceScope::ReadOnlyProviderEffectComposite {
+                coverage,
+                binding_context,
+            } if coverage.as_ref() == &self.coverage && binding_context == &self.binding_context
+        )
+    }
+
+    pub(crate) fn inventory(&self) -> M8ReadOnlyProviderEffectComponentInventory {
+        M8ReadOnlyProviderEffectComponentInventory {
+            program_identity: self.instance.program_identity().clone(),
+            ordered_lowering: self.instance.ordered_lowering().clone(),
+            declared_provider_lowering_count: self.declared_provider_lowering_count,
+        }
+    }
+}
+
+impl M8ReadOnlyProviderEffectComponentInventory {
+    pub(crate) fn matches_checked_program_identity(&self, checked: &CheckedSurfaceV0) -> bool {
+        self.program_identity == *checked.program_identity()
+    }
+
+    /// Count the provider rows declared by the original checked profile. This
+    /// remains four after the component execution inventory excludes them.
+    pub(crate) const fn provider_lowering_count(&self) -> usize {
+        self.declared_provider_lowering_count
+    }
+
+    pub(crate) fn retained_lowering_ordinals(&self) -> Vec<usize> {
+        self.ordered_lowering
+            .entries()
+            .iter()
+            .map(RuntimeLoweringEntry::ordinal)
+            .collect()
+    }
+
+    /// Compare the retained inventory against every non-provider checked
+    /// lowering internally, including ordinal, source association, and Core
+    /// association, without exporting those references to T0 inspection.
+    pub(crate) fn retains_exact_non_provider_ordered_lowering_associations(
+        &self,
+        checked: &CheckedSurfaceV0,
+    ) -> bool {
+        self.program_identity == *checked.program_identity()
+            && self.ordered_lowering.entries()
+                == OrderedRuntimeLowering::from_checked(checked)
+                    .entries()
+                    .iter()
+                    .filter(|entry| !is_read_only_provider_effect_lowering(entry.kind()))
+                    .cloned()
+                    .collect::<Vec<_>>()
+    }
+}
+
+fn is_read_only_provider_effect_lowering(kind: RuntimeLoweringKind) -> bool {
+    matches!(
+        kind,
+        RuntimeLoweringKind::ReadOnlyProviderEffectRequest
+            | RuntimeLoweringKind::ReadOnlyProviderEffectInvocation
+            | RuntimeLoweringKind::ReadOnlyProviderEffectResult
+            | RuntimeLoweringKind::ReadOnlyProviderEffectResultConsume
+    )
+}
+
+impl M8ReadOnlyProviderEffectComponentSnapshot {
+    pub(crate) fn is_component_scoped(&self) -> bool {
+        self.component.is_component_scoped()
+    }
+
+    pub(crate) fn restore_for_resource_runtime_nonce(
+        self,
+        resource_runtime_nonce: &[u8; 32],
+    ) -> Result<M8ReadOnlyProviderEffectComponent, M8I3PrivateSnapshotError> {
+        if !self
+            .component
+            .binding_context
+            .matches_resource_runtime_nonce(resource_runtime_nonce)
+        {
+            return Err(M8I3PrivateSnapshotError::StructuralMismatch);
+        }
+        self.restore()
+    }
+
+    pub(crate) fn restore(
+        self,
+    ) -> Result<M8ReadOnlyProviderEffectComponent, M8I3PrivateSnapshotError> {
+        match &self.component.instance.scope {
+            M8RuntimeInstanceScope::ReadOnlyProviderEffectComposite {
+                coverage,
+                binding_context,
+            } if coverage.as_ref() == &self.component.coverage
+                && binding_context == &self.component.binding_context
+                && coverage.program_identity() == self.component.instance.program_identity() =>
+            {
+                Ok(self.component)
+            }
+            M8RuntimeInstanceScope::Ordinary
+            | M8RuntimeInstanceScope::ReadOnlyProviderEffectComposite { .. } => {
+                Err(M8I3PrivateSnapshotError::StructuralMismatch)
+            }
+        }
+    }
 }
 
 impl M8RuntimeInstance {
@@ -1048,6 +1383,7 @@ impl M8RuntimeInstance {
             designated_execution_plans,
             owner_execution_plans,
             relation_execution_plans,
+            scope: M8RuntimeInstanceScope::Ordinary,
         }
     }
 
@@ -1202,6 +1538,7 @@ impl M8RuntimeInstance {
             designated_execution_plans,
             owner_execution_plans,
             relation_execution_plans,
+            scope: self.scope.clone(),
         }
     }
 
@@ -1215,8 +1552,15 @@ impl M8RuntimeInstance {
     /// process bootstrap.  This copies the restricted, source-free execution
     /// facts only; it neither invokes M8 admission nor exposes a public
     /// serialization contract.
-    pub(crate) fn i3_private_snapshot(&self) -> M8I3PrivateSnapshot {
-        M8I3PrivateSnapshot::from_instance(self)
+    pub(crate) fn i3_private_snapshot(
+        &self,
+    ) -> Result<M8I3PrivateSnapshot, M8I3PrivateSnapshotError> {
+        match &self.scope {
+            M8RuntimeInstanceScope::Ordinary => Ok(M8I3PrivateSnapshot::from_instance(self)),
+            M8RuntimeInstanceScope::ReadOnlyProviderEffectComposite { .. } => {
+                Err(M8I3PrivateSnapshotError::StructuralMismatch)
+            }
+        }
     }
 
     /// Restore an exact, already-admitted M8 execution image.  This is a
@@ -1484,6 +1828,7 @@ impl M8I3PrivateSnapshot {
             designated_execution_plans,
             owner_execution_plans,
             relation_execution_plans,
+            scope: M8RuntimeInstanceScope::Ordinary,
         })
     }
 }

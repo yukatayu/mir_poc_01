@@ -1274,17 +1274,17 @@ impl Sys4I3RestrictedOwnerCapabilitySuccessor {
 
     pub(crate) fn i3_private_snapshot(
         &self,
-    ) -> Sys4I3PrivateRestrictedOwnerCapabilitySuccessorSnapshot {
-        Sys4I3PrivateRestrictedOwnerCapabilitySuccessorSnapshot {
+    ) -> Sys4Result<Sys4I3PrivateRestrictedOwnerCapabilitySuccessorSnapshot> {
+        Ok(Sys4I3PrivateRestrictedOwnerCapabilitySuccessorSnapshot {
             version: 1,
             operation: self.operation.clone(),
             owner_locus: self.owner_locus.clone(),
             prior_generation_ref: self.prior_generation_ref.clone(),
             prior_generation_integrity_ref: self.prior_generation_integrity_ref.clone(),
             successor_generation_ref: self.successor_generation_ref.clone(),
-            successor_admission: self.successor_admission.i3_private_snapshot(),
+            successor_admission: self.successor_admission.i3_private_snapshot()?,
             candidate_binding_ref: self.candidate_binding_ref.clone(),
-        }
+        })
     }
 
     pub(crate) fn from_i3_private_snapshot(
@@ -1852,7 +1852,7 @@ impl SealedFabricAdmission {
     /// Export a previously restricted sealed admission.  The returned DTO has
     /// no successor publisher or live mutex state, so it cannot continue an
     /// authority lifecycle outside the restored local runtime.
-    pub(crate) fn i3_private_snapshot(&self) -> Sys4I3PrivateSealedAdmissionSnapshot {
+    pub(crate) fn i3_private_snapshot(&self) -> Sys4Result<Sys4I3PrivateSealedAdmissionSnapshot> {
         Sys4I3PrivateSealedAdmissionSnapshot::from_admission(self)
     }
 
@@ -2168,8 +2168,8 @@ fn sys4_i3_owner_capability_successor_binding_ref(
 impl Sys4I3PrivateSealedAdmissionSnapshot {
     const VERSION: u32 = 1;
 
-    fn from_admission(admission: &SealedFabricAdmission) -> Self {
-        Self {
+    fn from_admission(admission: &SealedFabricAdmission) -> Sys4Result<Self> {
+        Ok(Self {
             version: Self::VERSION,
             program_identity: SnapshotCheckedProgramIdentity::from_checked(
                 &admission.program_identity,
@@ -2180,12 +2180,14 @@ impl Sys4I3PrivateSealedAdmissionSnapshot {
                 .map(PrivateFabricRouteSnapshot::from_route)
                 .collect(),
             summary: PrivateObserverSafeM9SummarySnapshot::from_summary(&admission.summary),
-            instance: admission.instance.i3_private_snapshot(),
+            instance: admission.instance.i3_private_snapshot().map_err(|_| {
+                Sys4DispatchDiagnostics::one(Sys4DiagnosticKind::ProgramAdmissionMismatch)
+            })?,
             authority_generation: admission.authority_generation.i3_private_snapshot(),
             initial_state_seed: PrivateSys4InitialStateSeedSnapshot::from_seed(
                 &admission.initial_state_seed,
             ),
-        }
+        })
     }
 
     fn into_admission(self, program: &FabricProgram) -> Sys4Result<SealedFabricAdmission> {

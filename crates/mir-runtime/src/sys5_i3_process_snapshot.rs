@@ -56,7 +56,11 @@ impl PrivateProcessImageSnapshot {
             .private_runtime_seed
             .program
             .i3_private_projection_snapshot()?;
-        let admission = image.private_runtime_seed.admission.i3_private_snapshot();
+        let admission = image
+            .private_runtime_seed
+            .admission
+            .i3_private_snapshot()
+            .map_err(|_| ())?;
         let private_snapshot_binding_ref = image
             .private_runtime_seed
             .private_snapshot_binding_ref
@@ -65,13 +69,17 @@ impl PrivateProcessImageSnapshot {
             .private_runtime_seed
             .prestaged_owner_capability_lifecycle
             .as_ref()
-            .map(
-                |lifecycle| PrivatePrestagedOwnerCapabilityLifecycleSnapshot {
-                    target_slot_name: lifecycle.target_slot_name.clone(),
-                    stage_identity_binding_ref: lifecycle.stage_identity_binding_ref.clone(),
-                    candidate: lifecycle.candidate.i3_private_snapshot(),
-                },
-            );
+            .map(|lifecycle| {
+                lifecycle.candidate.i3_private_snapshot().map(|candidate| {
+                    PrivatePrestagedOwnerCapabilityLifecycleSnapshot {
+                        target_slot_name: lifecycle.target_slot_name.clone(),
+                        stage_identity_binding_ref: lifecycle.stage_identity_binding_ref.clone(),
+                        candidate,
+                    }
+                })
+            })
+            .transpose()
+            .map_err(|_| ())?;
         if private_snapshot_binding_ref.is_empty()
             || private_snapshot_binding_ref
                 != private_runtime_seed_binding_ref(

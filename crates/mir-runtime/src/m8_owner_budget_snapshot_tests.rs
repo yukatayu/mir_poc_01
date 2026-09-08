@@ -97,7 +97,9 @@ fn private_snapshot_with_budget_field_replaced(
     pointer: &str,
     replacement: &str,
 ) -> M8I3PrivateSnapshot {
-    let snapshot = admitted_owner_instance(BUDGETED_SOURCE_PATH, true).i3_private_snapshot();
+    let snapshot = admitted_owner_instance(BUDGETED_SOURCE_PATH, true)
+        .i3_private_snapshot()
+        .expect("an ordinary admitted owner instance exports a private M8 snapshot");
     let mut serialized = serde_json::to_value(snapshot)
         .expect("private M8 snapshot serializes for a bounded DTO falsifier");
     let field = serialized
@@ -115,7 +117,10 @@ fn private_snapshot_with_budget_field_replaced(
 #[test]
 fn i3_private_snapshot_rejects_tampered_provider_effect_lowering_before_restore() {
     let admitted = admitted_owner_instance(UNANNOTATED_SOURCE_PATH, false);
-    let serialized = serde_json::to_value(admitted.i3_private_snapshot())
+    let serialized =
+        serde_json::to_value(admitted.i3_private_snapshot().expect(
+            "an ordinary admitted unannotated owner instance exports a private M8 snapshot",
+        ))
         .expect("a genuine admitted unannotated owner instance serializes as a private M8 DTO");
 
     let untampered: M8I3PrivateSnapshot = serde_json::from_value(serialized.clone())
@@ -190,9 +195,12 @@ fn i3_owner_admission_budget_private_m8_snapshot_retains_the_exact_restricted_pl
     let restricted = admitted_owner_instance(BUDGETED_SOURCE_PATH, true)
         .restricted_to_loci(&BTreeSet::from(["S".to_string()]));
 
-    let restored =
-        super::M8RuntimeInstance::from_i3_private_snapshot(restricted.i3_private_snapshot())
-            .expect("the exact restricted private M8 snapshot restores structurally");
+    let restored = super::M8RuntimeInstance::from_i3_private_snapshot(
+        restricted
+            .i3_private_snapshot()
+            .expect("an ordinary restricted owner instance exports a private M8 snapshot"),
+    )
+    .expect("the exact restricted private M8 snapshot restores structurally");
     assert_eq!(
         owner_plan_budget(&restored),
         Some(expected_budget),
@@ -224,9 +232,12 @@ fn i3_owner_admission_budget_private_m8_snapshot_retains_the_exact_restricted_pl
 
     let unannotated = admitted_owner_instance(UNANNOTATED_SOURCE_PATH, false)
         .restricted_to_loci(&BTreeSet::from(["S".to_string()]));
-    let restored_unannotated =
-        super::M8RuntimeInstance::from_i3_private_snapshot(unannotated.i3_private_snapshot())
-            .expect("legacy unannotated private M8 snapshot restores structurally");
+    let restored_unannotated = super::M8RuntimeInstance::from_i3_private_snapshot(
+        unannotated
+            .i3_private_snapshot()
+            .expect("an ordinary restricted unannotated instance exports a private M8 snapshot"),
+    )
+    .expect("legacy unannotated private M8 snapshot restores structurally");
     assert_eq!(
         owner_plan_budget(&restored_unannotated),
         None,

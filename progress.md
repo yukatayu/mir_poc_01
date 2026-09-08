@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-09-08 15:35 JST
+最終更新: 2026-09-08 19:08 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -58,13 +58,20 @@ remain later.
 
 ## current milestone position
 
-Provider source/guard component `9e8d674a` is the last pushed cut (clean parity
-2026-09-08 14:05 JST). Its successor static coverage/composite verification/
+Provider static handoff `3862b168` is the last pushed cut (clean parity
+2026-09-08 15:41 JST). Its static coverage/composite verification/
 generated projection passes fresh semantics 6/17/8, privacy 1, static runtime
-11 and full runtime 345 tests. Process 63, I2/M10 5/8/67, public guards 5,
-Clippy/format/workspace compilation and independent spec/quality reviews pass.
-Exact Git state is in Report 2606. Actual binding, effect authority and runtime
-remain next. I3-3 remains unaccepted; six of eleven milestones are accepted.
+11. Current Stage2b runtime is 362/362, including provider filtering 26/26
+(not additive); process is 63/63, M10 is 67/67, I2 local/CLI is 5/5 and 8/8,
+and public guards are 5/5. Three-crate all-target warnings-denied Clippy,
+workspace format, and workspace all-target check pass; workspace tests and
+CLI/probe Clippy are not claimed. Independent spec/quality review is P0/P1/P2
+zero after three direct tests and generic M8 typed refusal. The source is
+frozen; Stage2b is inactive/green for parent integration and awaits a new Git
+cut. Actual binding, M9 authorization and intact composite verification feed
+separate policy/scoped M8, then the existing SYS4/SYS5 mixed private-image/
+admission variant; actual bounded host/QUIC runtime remains later. Six of eleven
+milestones are accepted; I3-3 remains unaccepted.
 
 | Axis | Current status | Startability |
 |---|---|---|
@@ -227,12 +234,12 @@ of the provider component. Genuine G1-expiry→G2 rejection remains local
 binder evidence with inspected QUIC correspondence. Earlier detailed cuts,
 counts and timing are retained in Report 2606, not a parallel current queue.
 
-ADR-0042/spec/17 contract cut 985ee179 is implemented through the bounded
-provider source/checking and unsupported-legacy-handoff component:
+Retained Stage 1 evidence at `9e8d674a`, implementing the source/checking and
+unsupported-legacy-handoff portion of ADR-0042/spec/17 (not current Stage2b):
 
 - Provider source suite 17/17; external constructor privacy doctest 1/1.
 - Private runtime guards 2/2; public M8/M9/SYS5/M10 guards 5/5.
-- Current feature-union runtime library 334/334; process runtime 63/63;
+- Stage 1 feature-union runtime library 334/334; process runtime 63/63;
   M8 admission 7/7 and M9 external-boundary target 1/1.
 - I2 local 5/5, I2 CLI 8/8 and M10 conformance 67/67.
 - Three-crate all-target Clippy with private-QUIC/process-seam features and
@@ -243,13 +250,14 @@ provider source/checking and unsupported-legacy-handoff component:
   overlap broader suites and are not additive totals.
 
 Logs, earlier AST/M6/M7/time regressions and final docs/Git state are in Report
-2606. The new sample is source-check evidence, not an M5/Lean clean-runner
-registration or executable provider workflow. No effect grant, host invocation,
-row-18 acceptance, new Lean/general proof or I3 lifecycle is claimed.
-Next consumer: generated provider projection plus exact independent effect
-coverage/authorization, then the actual host/QUIC path. Membership/redaction/
-cut and full ordering/milestone validation still remain. Latest measured free
-disk is 11.17 GiB; no cleanup was performed.
+2606. The new sample is an incomplete local effect-authorization prototype with
+partial local authorization, not an M5/Lean clean-runner registration or
+executable provider workflow. No accepted host invocation, supervisor
+availability, row-18 acceptance, new Lean/general proof or I3 lifecycle is
+claimed. Remaining rows 13/15/19/20, ordering, and whole-I3-3 validation remain
+required. Latest measured free disk is 30,906,707,968 bytes (~28.78 GiB); the
+10 GiB guard has no current capacity hold. Older lower-disk readings remain
+historical only.
 
 Owner clarification remains ordinary meaning -> generated distribution ->
 continually checked composition. Domain words remain library/sample vocabulary;
@@ -258,14 +266,23 @@ then stop with Plan 250 retained and I3-4 inactive.
 
 ## recent log
 
+- 2026-09-08 19:08 JST: final Stage2b quality/regression packet passes runtime
+  362/362, provider filter 26/26 within that total, process 63/63, M10 67/67,
+  I2 local/CLI 5/5 and 8/8, and public guards 5/5; reviews are P0/P1/P2 zero.
+  Component is inactive/green for parent integration; no provider activation or
+  I3-3 acceptance is claimed.
+- 2026-09-08 16:48 JST: Stage2b module behavior recorded as 7 passed, 3 failed,
+  and 345 filtered; two policy regressions pass and three repair blocks remain.
+
 - 2026-09-08 12:07 JST: actual successful/expiry reply replay and wrong-session
   prewrite refusal pass 3/3, full probe 41/41 and final Clippy/format pass;
   independent time/reply review P0/P1/P2 zero. Provider contract is next after
   integration commit/parity; I3-3 remains active, with I3-4 inactive.
 
-- 2026-09-08 10:53 JST: delivered expiry/loss/reconnect and local wait pass
-  6 named tests (7 cases), full probe 38/38, runtime library 332/332 and
-  integration 63/63; narrow review, Clippy/format and I2/M10 floor are green.
+- 2026-09-08 10:53 JST: retained predecessor delivered expiry/loss/reconnect and
+  local-wait evidence (six named tests), full probe 38/38, runtime library
+  332/332 and integration 63/63; narrow review, Clippy/format and I2/M10 floor
+  are green. This is historical evidence, not the current Stage2b rerun.
   Actual reply replay and the remaining I3-3 matrix are next; no milestone acceptance.
 
 - 2026-09-08 09:42 JST: predecessor owner-budget run and full probe integration
@@ -371,3 +388,7 @@ then stop with Plan 250 retained and I3-4 inactive.
   no P0/P1/P2; process 63, I2/M10 5/8/67, public guards 5 and final lint/format/
   workspace compilation pass. Post-lint static 11 passes; actual binding and
   M9 policy/scoped-M8 follow, not provider invocation or milestone acceptance.
+- 2026-09-08 15:44 JST: static handoff `3862b168` committed/pushed with clean
+  HEAD/origin/main/live parity at 15:41:54 JST. Stage 2b actual resource binding,
+  M9 composite authorization and inactive scoped M8 are current; no invocation,
+  I3-3 acceptance or I3-4 activation.

@@ -1,6 +1,6 @@
 # Plan 250 — Mirrorea I3 Distributed Foundation current execution roadmap
 
-最終更新: 2026-09-08 14:05 JST
+最終更新: 2026-09-08 19:07 JST
 
 ## 役割、authority、current control state
 
@@ -57,9 +57,16 @@ roadmap/status pointer の一致を検証する。
 - current component checkpoint: **row 11 / spec/16 bounded time-and-reply
   evidence integrated at `55f1fd7f`, pushed with clean remote parity**.
   ADR-0042/spec/17 selects the provider contract; its source/checker and
-  fail-closed legacy guards are integrated at `9e8d674a`, with clean pushed
-  parity. Exact mixed-program coverage, projection and independent effect
-  permission are the next I3-3 consumer, not a new milestone.
+  fail-closed legacy guards are integrated at `9e8d674a`. Exact static coverage,
+  composite verification and projection are integrated at `3862b168`, with
+  clean pushed parity. Current is genuine resource binding -> actual M9
+  authentication/verification and separate policy -> inactive scoped M8
+  component (Stage 2b), not a new milestone or provider runtime activation.
+  Its frozen gates now pass: runtime362, process63, M10/I2 67/5/8, public
+  guards5, scoped Clippy, workspace format and all-target compilation.
+  Independent spec/quality reviews have no remaining P0/P1/P2; planner gives
+  GO for inactive-only integration. Parent's LAB/Git close is current, then
+  the existing SYS4/SYS5 mixed-image handoff is the direct consumer.
 - next goal: **I3-4 (requires I3-3 acceptance and explicit owner resume)**
 - all other milestones: **ordered, inactive, and dependency-gated**
 - latest owner control (2026-09-07 18:13 JST observation): complete I3-3 with
@@ -1485,6 +1492,68 @@ and lifetime changes do not alter behavior. Workspace compilation is not tests.
 The test-only snapshot module was moved outside the production projection
 directory to preserve its dependency scanner; no architecture guard was waived.
 Report 2606 records each actual RED and final GREEN separately.
+
+Stage 2a is committed/pushed as
+`3862b1688821c8fb243f8f148f54cd313ad3b163`; HEAD, origin/main and live remote
+match with clean worktree at `2026-09-08T15:41:54+09:00`. The static handoff
+is closed; sole-active I3-3 and all remaining gates are unchanged.
+
+Stage 2b now consumes that cut. A genuine setup-owned resource incarnation
+precedes the dedicated M9 composite entry. Reuse actual finite-local bootstrap
+validation, authenticate membership, retain the full opaque finite composite
+verdict, and require separate fixed effect policy before issuing any effect
+capability. Correct source, provider identity, an owner grant or generic
+capability-scope input cannot supply that approval. Preserve every exact
+spec/17 coordinate, actual lifetime retirement and observer-safe diagnostics.
+Only that seal permits an inactive legacy M8 component; its internal scope
+must survive cloning/restriction and reject ordinary export/restore without
+composite context. No filtered checked source or raw inner discharge is allowed.
+Missing fixture target is a valid setup binding; request lookup waits for the
+later CallStarted runtime. No invocation, supervisor proof, network activation
+or row-18 acceptance is manufactured by this component.
+
+Two direct-consumer details are fixed within that implementation choice.
+First, supplied composite evidence must equal the exact supported canonical
+MembershipAuth strengthening, not merely share source identity and coverage:
+a valid static refinement may add requirements that this finite runtime does
+not implement. Compare the intact discharge; do not expose its legacy inner
+proof or replace a missing input. Second, actual setup issues a fresh opaque
+32-byte OS-random resource/runtime incarnation independently of temp path,
+PID, session and counters. Reuse already locked `getrandom` 0.4.3 as a direct
+runtime dependency; entropy failure is typed setup rejection with no fallback.
+This is finite implementation freshness, not a uniqueness theorem, authority
+credential or a new public identity scheme. M9 checks remain necessary.
+
+Single coupled production ownership moves to `c3_runtime_fix` for M9/M8 and
+trusted binding, with narrowly necessary ordinary snapshot callers only;
+`time_network_tests` owns a new separate private test module. Parent retains
+Canon/status/Git and evidence gates. Exact failing behavior precedes completion,
+with one evaluator and the same resource floor. Read-only planner's reviewed
+Stage 2b entry contract supplies this sequence; no second roadmap is opened.
+
+Stage 2b final evidence observed `2026-09-08T19:07:58+09:00` supersedes
+intermediate results retained in Report 2606: runtime362/362 (including the
+provider filter26), process63/63, M10/I2 67/5/8 and public guards5/5 pass.
+Clippy covers mir-ast/mir-semantics/mir-runtime with warning denial; workspace
+format and all-target check pass. The workspace check is not test execution.
+Generic M8 constructor refusal and three direct review negatives are closed;
+independent spec/quality reviewers have no remaining P0/P1/P2 and the planner
+approves inactive-only component integration. Parent's LAB/Git gates remain.
+Actual M9 effect authorization and scoped inactive M8 are produced; provider
+invocation/networking/runtime/supervisor and row18 remain absent. Final free
+space is 30,906,707,968 bytes after the approved five-file deletion and owner
+housekeeping; no additional agent cleanup occurs. No gate is waived.
+
+The direct next consumer is the private checked mixed-image variant through
+the EXISTING SYS4/SYS5 admission/initial-state/restriction/snapshot/trusted-start
+seams. It must retain the actual consumed composite evidence and needed M9
+facts at sealing, full identity, exact four-row scope, independent effect
+authority and current resource incarnation; it must not manufacture a
+filtered source, bare ordinary admission or second runtime/launcher/transport.
+The current inactive component is not already a complete proof-retaining
+serialized image. Decisive negatives are evidence splicing, stale/foreign
+context, scope widening/stripping, ordinary-path laundering and hidden
+activation. Runtime/supervisor/actual host and QUIC evidence follow this join.
 
 Default M8/M9/SYS5/kernel execution remains rejecting, and new provider
 fragments must explicitly fail the SYS4 completeness boundary until a genuine

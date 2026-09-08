@@ -1,6 +1,6 @@
 # Project status
 
-最終更新: 2026-09-08 15:35 JST
+最終更新: 2026-09-08 19:08 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -92,13 +92,21 @@ proof. No earlier component closes the full 20-family failure/order matrix.
 ADR-0041/spec/16 time/reply checkpoint is retained at pushed 55f1fd7f
 (probe 41/41, replay 3/3); those are not new provider runs. The ADR-0042/spec/17
 provider source/guard evidence is pushed at `9e8d674a` (17 source, 1 privacy,
-2 private and 5 public guards; runtime 334, process 63, I2 local/CLI 5/8,
+2 private and 5 public guards; retained Stage1 runtime 334, process 63, I2 local/CLI 5/8,
 M10 67 and focused quality gates). Its successor static coverage/composite
 verification/projection passes fresh semantics 6/17/8, privacy 1, static runtime
-11 and full runtime 345 tests after four review repairs. Process/I2/M10,
-focused quality gates and independent reviews pass. No effect grant, host read or
-provider network execution yet. Trusted binding -> actual M9 verification and
-separate policy -> inactive scoped M8 is next; exact state is in Report 2606.
+11 after four review repairs; full runtime 345 is retained Stage2a baseline from
+accepted cut `3862b168`. Current Stage2b runtime is 362/362, including provider
+filtering 26/26 (not additive); process is 63/63, M10 is 67/67, I2 local/CLI is
+5/5 and 8/8, and public guards are 5/5. The three-crate all-target
+warnings-denied Clippy, workspace format, and workspace all-target check pass;
+workspace tests, CLI/probe Clippy and provider activation are not claimed.
+Independent spec/quality review is P0/P1/P2 zero after three direct tests and
+generic M8 typed refusal. Stage2b is inactive/green for parent integration and
+awaits a new Git cut; binding, actual M9 authorization and intact composite
+verification feed separate policy/scoped M8, then an existing SYS4/SYS5 mixed
+private-image/admission variant. Actual bounded host/QUIC runtime and supervisor
+availability remain open. Exact state is in Report 2606.
 I3-3 remains unaccepted and the owner pause applies only after its full close.
 Remaining authority/order and full matrix validation stay open; I3-4 is inactive.
 
@@ -106,7 +114,7 @@ Detailed edge contracts: [`mirrorea_canon/architecture/07-browser-host-trust-bou
 Cross-edge binding/freshness/revocation/redaction/resource rules: [`mirrorea_canon/architecture/08-browser-host-security-invariants.md`](../mirrorea_canon/architecture/08-browser-host-security-invariants.md).
 View は authoritative domain semantics を所有せず、presentation-local computation のみを許可する。View からの入力は typed command/effect request とし direct store を禁止する。I3-0 はprivate transport選定をclosedし、OPEN-032はこのbounded programだけresolvedした。I3-1とI3-2はbounded evidenceとしてclosedした。official I3 lifecycle は未entry、I3-3のみactive、I3-4/I3-5/I3-6/NEXT-0はdependency-gated inactive、I5 implementation は inactiveである。
 
-I3-2の最終bounded evidenceはlocalnet 12/12（repeat）、full probe 62/62、runtime default 29/29、seam 47/47、library 281/281、docs compile-fail 1/1（default/private）である。6/11 milestones acceptedであり、これは重み付き完成率ではない。FM-5 bounded executable ratchetで、public workflowや100% completionは主張しない。I3-3全体は未受理であり、provider Stage 1終了前のroot空きは約11.15 GiB。今回のcomponentでcleanupしていない。
+I3-2の最終bounded evidenceはlocalnet 12/12（repeat）、full probe 62/62、runtime default 29/29、seam 47/47、library 281/281、docs compile-fail 1/1（default/private）である。6/11 milestones acceptedであり、これは重み付き完成率ではない。FM-5 bounded executable ratchetで、public workflowや100% completionは主張しない。I3-3全体は未受理。19:08 JSTの測定空き容量は30,906,707,968 bytes（約28.78 GiB）で、10 GiB guardに現在の容量保留はない。
 
 The active bounded I3 programはinternal carrierとpublic wireを分離し、route/handshake/framing/
 disconnect/reconnect/ambiguous delivery/duplicate/reorder/stale authority/backpressure/

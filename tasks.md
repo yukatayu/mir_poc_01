@@ -1,6 +1,6 @@
 # Current Task Map (LAB)
 
-最終更新: 2026-09-08 15:35 JST
+最終更新: 2026-09-08 19:08 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project direction,
 theory, ADRs, conformance, and process. Everything outside it is LAB evidence,
@@ -49,9 +49,10 @@ false success/nonexecution, blind retry, leaked private information, or hang.
 
 Current component is the source-declared provider effect selected by
 ADR-0042/spec/17 at contract cut 985ee179. Source/guard cut `9e8d674a` is
-pushed with clean remote parity observed 2026-09-08 14:05 JST. Stage 2a adds
-pure static coverage/projection and separate composite finite verification;
-dynamic permission/runtime remain dependency-gated components of I3-3.
+pushed with clean remote parity observed 2026-09-08 14:05 JST. Stage 2a static
+coverage/projection/composite verification is now integrated at `3862b168`,
+clean pushed parity 15:41:54 JST. Stage 2b actual resource binding and M9
+authorization/scoped-M8 are current; invocation/runtime remain downstream.
 
 Fresh frozen Stage 2a evidence:
 
@@ -63,28 +64,43 @@ Fresh frozen Stage 2a evidence:
   workspace format and all-target compilation pass. The latter is not
   workspace test execution. Exact Git state remains in Report 2606.
 
+Current Stage2b runtime is 362/362, including provider filtering 26/26 within
+that total; process is 63/63, M10 is 67/67, I2 local/CLI is 5/5 and 8/8, and
+public guards are 5/5. Three-crate all-target warnings-denied Clippy, workspace
+format, and workspace all-target check pass; workspace tests and CLI/probe
+Clippy are not claimed. Independent spec/quality review is P0/P1/P2 zero after
+three direct tests and generic M8 typed refusal. The source is frozen and the
+Stage2b component is inactive/green for parent integration; a new Git cut is
+pending. This is not provider activation, host/network runtime, supervisor
+availability or component acceptance. Report 2606 retains exact logs.
+
 Four review defects were reproduced and repaired: cross-source composite
 candidate acceptance, raw legacy-discharge escape, nested provider-only
 snapshot markers, and total provider-row omission by locus restriction.
 Exact source binding and typed guards now preserve the pending requirement;
 an identity query is not authentication. The production dependency guard also
 required relocating tests, not weakening the guard. Stage 1 M8 7/7 and M9
-external 1/1 remain earlier evidence; process/I2/M10 above are fresh reruns.
+external 1/1 remain earlier evidence. Stage2a results above are retained at
+`3862b168`; the separately labelled current Stage2b packet reran process/I2/M10.
 Exact commands and fresh versus retained results remain in Report 2606.
 
-There is still **no effect-use grant, provider invocation, generated provider
-network execution or row-18 acceptance**. The new ordinary source is checking
-evidence, not a legacy clean-runner/M5/Lean registration or operational workflow.
+Stage2b is an incomplete local effect-authorization prototype: local tests
+contain partial effect-authorization behavior, but no accepted host invocation,
+provider network workflow, supervisor availability, M5/Lean clean-runner
+registration or row-18 acceptance. The new ordinary source is
+checking evidence, not an operational workflow.
 
-The next component sequence remains:
+The current-to-next component sequence is:
 
-1. After static integration commit/parity, bind a genuine trusted resource
+1. Bind a genuine trusted resource
    incarnation -> actual M9 membership/authentication and full composite
    verification -> separate effect policy -> inactive scoped M8 component.
    Preserve full checked-source identity; a legacy M8 component must not
    pretend to be the complete mixed program or escape through bare snapshots.
-2. Bounded ledger, admitted supervisor/resource binding, trusted host read,
-   typed result/failure and shared existing QUIC process path.
+2. In the existing SYS4/SYS5 path, check the mixed private-image/admission
+   variant without a second runtime or transport, followed by bounded ledger,
+   admitted supervisor/resource binding, trusted host read, typed result/failure
+   and the shared existing QUIC process path.
 3. Real success with two fresh fixture values, actual resource failure,
    duplicate/loss/revocation/capacity/redaction falsifiers and integration.
 4. Remaining membership/redaction/cut families, full ordering, final I3-3
@@ -156,7 +172,11 @@ not an addressing/governance/product specification. Reversed Library is separate
 
 ## user decision gates
 
-No current owner decision is required for bounded I3-3 implementation.
+No semantic owner decision is currently required for bounded I3-3 implementation.
+At 2026-09-08 19:08 JST, measured free disk is 30,906,707,968 bytes (~28.78
+GiB) after the approved five-file cleanup and subsequent owner housekeeping.
+The 10 GiB safety floor has no current capacity
+hold; no inferred or broadened cleanup permission is used.
 The following remain mandatory escalation boundaries, not autonomous options
 to weaken the goal.
 
@@ -176,7 +196,7 @@ choices and unoptimized performance are not themselves stop conditions.
 
 | Bounded question | Direct consumer | Required evidence / recommendation |
 |---|---|---|
-| Mixed legacy M8 and independent provider authorization | next provider Stage 2b | genuine binding, actual M9 verification/policy, retained component scope; no silent erasure or owner-grant reuse |
+| Mixed legacy M8 and independent provider authorization | current provider Stage 2b | genuine binding, actual M9 verification/policy, retained component scope; no silent erasure or owner-grant reuse |
 | Effect invocation and release/revocation | provider Stage 3/4 | actual host call and retained typed outcome; no retry/false nonexecution |
 | Membership/redaction/cut with in-flight traffic | remaining I3-3 families | actual producer state and positive/falsifier; no distributed durability claim |
 | Concrete-to-abstract ordering | I3-3 | request/serve/result/consume and authority/cut edges, not stream order |
@@ -192,9 +212,9 @@ No new WRK/report lane without a direct consumer and bounded closure.
 - Keep source/Core/artifacts/authority separate from deployment/session/certificate.
 - Keep provisional internal representations separate from public compatibility.
 - Maintain one report (2606), one roadmap (250), one active milestone (I3-3).
-- Run resources preflight before heavy commands. At the latest regression gate
-  free disk was about 11.04 GiB; do not start heavy work below the 10 GiB safety floor.
-  No cleanup or unmounted external-workdir assumption was used in this component.
+- Run resources preflight before heavy commands. The latest regression gate
+  measured 30,906,707,968 bytes (~28.78 GiB) free; keep the 10 GiB safety
+  floor. No unmounted external workdir is assumed.
 - Stage 1 lint/docs/diff/secret scan and commit/push/parity are complete;
   repeat applicable gates at the next integration. Full workspace/probe/matrix
   gates remain at I3-3 close.
