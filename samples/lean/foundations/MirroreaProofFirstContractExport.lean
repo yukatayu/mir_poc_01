@@ -216,3 +216,321 @@ end Controls
 #print axioms lawful_export_allocates
 #print axioms export_cannot_grant
 end MirroreaProofFirst.ContractExport
+
+-- Later unreviewed reference candidate; excluded from frozen Oracle packets.
+namespace MirroreaProofFirst.ContractExport.RequestAllocation
+open ResourceBoundary
+-- Separately supplied current authorization. The callback must not be derived
+-- from arithmetic evidence. Binding/authenticity and physical atomicity remain TCB.
+def run (authorize : State → Binding → Action → Bool)
+ (s : State) (b : Binding) (e : Envelope) : Option (State × List Handle) :=
+ match accept b e with
+ | none => none
+ | some n => execute (fun _ => authorize s b (.allocate b.principal n))
+     s (.allocate b.principal n)
+
+theorem run_exact (authorize : State → Binding → Action → Bool)
+ (s : State) (b : Binding) (e : Envelope) (out : State × List Handle) :
+ run authorize s b e = some out ↔ ∃ n,
+ accept b e = some n ∧ authorize s b (.allocate b.principal n) = true ∧
+ out = raw s (.allocate b.principal n) := by
+ unfold run
+ cases ha : accept b e with
+ | none => simp
+ | some n =>
+   have pos := (accept_bound ha).1
+   simp [execute,ResourceBoundary.check,pos]
+   intro _
+   exact eq_comm
+
+theorem sound {authorize : State → Binding → Action → Bool}
+ {s : State} {b : Binding} {e : Envelope} {out : State × List Handle}
+ (ok : run authorize s b e = some out) : ∃ n,
+ PositiveExport b e n ∧ Int.ofNat n = LocalContract.eval (inputs b) b.code ∧
+ authorize s b (.allocate b.principal n) = true ∧
+ out = raw s (.allocate b.principal n) := by
+ obtain ⟨n,accepted,auth,ho⟩ := (run_exact _ _ _ _ _).mp ok
+ exact ⟨n,accept_sound accepted,accepted_integer_length accepted,auth,ho⟩
+
+theorem wf {authorize : State → Binding → Action → Bool}
+ {s : State} (w : WF s) {b : Binding} {e : Envelope} {out : State × List Handle}
+ (ok : run authorize s b e = some out) : WF out.1 := by
+ obtain ⟨n,accepted,auth,rfl⟩ := (run_exact _ _ _ _ _).mp ok
+ exact allocate_wf w _ _ (accept_bound accepted).1
+
+theorem denied {authorize : State → Binding → Action → Bool}
+ {s : State} {b : Binding} {e : Envelope}
+ (no : ∀ n, authorize s b (.allocate b.principal n) = false) :
+ run authorize s b e = none := by
+ unfold run
+ split
+ · rfl
+ · simp [execute,ResourceBoundary.check,no]
+
+theorem same_principal_policy (p : Nat → Bool) (b : Binding) (n m : Nat)
+ (hn : 0 < n) (hm : 0 < m) :
+ ResourceBoundary.check p empty (.allocate b.principal n) =
+ ResourceBoundary.check p empty (.allocate b.principal m) := by
+ simp [ResourceBoundary.check,hn,hm]
+
+namespace Controls
+open ContractExport.Controls
+def exactGrant (_ : State) (binding : Binding) (a : Action) : Bool :=
+ decide (binding = b ∧ a = .allocate b.principal 10)
+example : (run exactGrant empty b e).map (fun o => o.2.map (fun h => h.region.hi)) = some [10] := by decide
+example : run exactGrant empty {b with request := 43}
+ {e with binding := {b with request := 43}} = none := by decide
+-- A different valid result is not authorized by the 10-unit request grant.
+def larger : Binding := {b with arguments := [4]}
+def largerEnvelope : Envelope := {e with binding := larger,result := 17}
+example : accept larger largerEnvelope = some 17 := by decide
+example : run exactGrant empty larger largerEnvelope = none := by decide
+-- Independently isolate length binding from equality of the Binding record.
+def lengthGrant (_ : State) (_ : Binding) (a : Action) : Bool :=
+ decide (a = .allocate b.principal 10)
+example : run lengthGrant empty larger largerEnvelope = none := by decide
+example : run (fun _ _ _ => false) empty b e = none := by decide
+-- Original unary policy accepts both positive sizes. No deployed exploit claim.
+example : (allocateExport (fun _ => true) empty larger largerEnvelope).map
+ (fun o => o.2.map (fun h => h.region.hi)) = some [17] := by decide
+end Controls
+#print axioms run_exact
+#print axioms sound
+#print axioms wf
+#print axioms denied
+#print axioms same_principal_policy
+end MirroreaProofFirst.ContractExport.RequestAllocation
+
+-- Later unreviewed reference candidate; excluded from frozen Oracle packets.
+namespace MirroreaProofFirst.ContractExport.CheckedArithmetic
+open LocalContract
+
+def InRange (lo hi z : Int) : Prop := lo ≤ z ∧ z ≤ hi
+def checked (lo hi z : Int) : Option Int :=
+ if lo ≤ z ∧ z ≤ hi then some z else none
+
+def evaluate (lo hi : Int) (args : List Int) : Term → Option Int
+ | .input i => do let z ← args[i]?; checked lo hi z
+ | .integer z => checked lo hi z
+ | .add a b => do let x ← evaluate lo hi args a; let y ← evaluate lo hi args b; checked lo hi (x+y)
+ | .mul a b => do let x ← evaluate lo hi args a; let y ← evaluate lo hi args b; checked lo hi (x*y)
+ | .square a => do let x ← evaluate lo hi args a; checked lo hi (x*x)
+
+inductive Denotes (lo hi : Int) (args : List Int) : Term → Int → Prop where
+ | input {i z} : args[i]? = some z → InRange lo hi z → Denotes lo hi args (.input i) z
+ | integer {z} : InRange lo hi z → Denotes lo hi args (.integer z) z
+ | add {a b x y} : Denotes lo hi args a x → Denotes lo hi args b y →
+     InRange lo hi (x+y) → Denotes lo hi args (.add a b) (x+y)
+ | mul {a b x y} : Denotes lo hi args a x → Denotes lo hi args b y →
+     InRange lo hi (x*y) → Denotes lo hi args (.mul a b) (x*y)
+ | square {a x} : Denotes lo hi args a x → InRange lo hi (x*x) →
+     Denotes lo hi args (.square a) (x*x)
+
+theorem checked_exact (lo hi x z : Int) :
+ checked lo hi x = some z ↔ x = z ∧ InRange lo hi z := by
+ constructor
+ · intro hz
+   unfold checked at hz
+   split at hz
+   · rename_i h
+     cases hz
+     exact ⟨rfl,h⟩
+   · contradiction
+ · rintro ⟨rfl,h⟩
+   simp [checked,InRange] at h ⊢
+   exact h
+
+theorem bind_some {α β : Type} (a : Option α) (f : α → Option β) (y : β) :
+ (do let x ← a; f x) = some y ↔ ∃ x, a = some x ∧ f x = some y := by
+ cases a <;> simp
+
+theorem exact (lo hi : Int) (args : List Int) (e : Term) (z : Int) :
+ evaluate lo hi args e = some z ↔ Denotes lo hi args e z := by
+ induction e generalizing z with
+ | input i =>
+   simp only [evaluate,bind_some,checked_exact]
+   constructor
+   · rintro ⟨x,h,rfl,range⟩; exact .input h range
+   · intro h; cases h with | input h range => exact ⟨_,h,rfl,range⟩
+ | integer x =>
+   simp only [evaluate,checked_exact]
+   constructor
+   · rintro ⟨rfl,range⟩; exact .integer range
+   · intro h; cases h with | integer range => exact ⟨rfl,range⟩
+ | add a b ia ib =>
+   simp only [evaluate,bind_some,checked_exact,ia,ib]
+   constructor
+   · rintro ⟨x,ha,y,hb,rfl,range⟩; exact .add ha hb range
+   · intro h; cases h with | add ha hb range => exact ⟨_,ha,_,hb,rfl,range⟩
+ | mul a b ia ib =>
+   simp only [evaluate,bind_some,checked_exact,ia,ib]
+   constructor
+   · rintro ⟨x,ha,y,hb,rfl,range⟩; exact .mul ha hb range
+   · intro h; cases h with | mul ha hb range => exact ⟨_,ha,_,hb,rfl,range⟩
+ | square a ia =>
+   simp only [evaluate,bind_some,checked_exact,ia]
+   constructor
+   · rintro ⟨x,ha,rfl,range⟩; exact .square ha range
+   · intro h; cases h with | square ha range => exact ⟨_,ha,rfl,range⟩
+
+theorem denotes_math {lo hi : Int} {args : List Int} {e : Term} {z : Int}
+ (h : Denotes lo hi args e z) :
+ LocalContract.eval (fun i => args[i]?.getD 0) e = z ∧
+ Scoped args.length e ∧ InRange lo hi z := by
+ induction h with
+ | input lookup range =>
+   refine ⟨by simp [LocalContract.eval,lookup],.input ?_,range⟩
+   exact List.getElem?_eq_some_iff.mp lookup |>.1
+ | integer range => exact ⟨rfl,.integer _,range⟩
+ | add a b range ia ib => exact ⟨by simp [LocalContract.eval,ia.1,ib.1],.add ia.2.1 ib.2.1,range⟩
+ | mul a b range ia ib => exact ⟨by simp [LocalContract.eval,ia.1,ib.1],.mul ia.2.1 ib.2.1,range⟩
+ | square a range ia => exact ⟨by simp [LocalContract.eval,ia.1],.square ia.2.1,range⟩
+
+theorem sound {lo hi : Int} {args : List Int} {e : Term} {z : Int}
+ (h : evaluate lo hi args e = some z) :
+ LocalContract.eval (fun i => args[i]?.getD 0) e = z ∧
+ Scoped args.length e ∧ InRange lo hi z := denotes_math ((exact _ _ _ _ _).mp h)
+
+-- Mathematical bounds at every syntax node, separate from machine execution.
+def Bounds (lo hi : Int) (args : List Int) : Term → Prop
+ | .input i => InRange lo hi (args[i]?.getD 0)
+ | .integer z => InRange lo hi z
+ | .add a b => Bounds lo hi args a ∧ Bounds lo hi args b ∧
+     InRange lo hi (LocalContract.eval (fun i => args[i]?.getD 0) (.add a b))
+ | .mul a b => Bounds lo hi args a ∧ Bounds lo hi args b ∧
+     InRange lo hi (LocalContract.eval (fun i => args[i]?.getD 0) (.mul a b))
+ | .square a => Bounds lo hi args a ∧
+     InRange lo hi (LocalContract.eval (fun i => args[i]?.getD 0) (.square a))
+
+theorem denotes_bounds {lo hi : Int} {args : List Int} {e : Term} {z : Int}
+ (h : Denotes lo hi args e z) : Bounds lo hi args e := by
+ induction h with
+ | input lookup range => simpa [Bounds,lookup] using range
+ | integer range => exact range
+ | add ha hb range ia ib =>
+   exact ⟨ia,ib,by simpa [LocalContract.eval,(denotes_math ha).1,(denotes_math hb).1] using range⟩
+ | mul ha hb range ia ib =>
+   exact ⟨ia,ib,by simpa [LocalContract.eval,(denotes_math ha).1,(denotes_math hb).1] using range⟩
+ | square ha range ia =>
+   exact ⟨ia,by simpa [LocalContract.eval,(denotes_math ha).1] using range⟩
+
+theorem bounded_denotes {lo hi : Int} {args : List Int} {e : Term}
+ (scope : Scoped args.length e) (bounds : Bounds lo hi args e) :
+ Denotes lo hi args e (LocalContract.eval (fun i => args[i]?.getD 0) e) := by
+ induction scope with
+ | @input i hi =>
+   apply Denotes.input
+   · simp [LocalContract.eval,List.getElem?_eq_getElem hi]
+   · exact bounds
+ | integer z => exact .integer bounds
+ | add ha hb ia ib => exact .add (ia bounds.1) (ib bounds.2.1) bounds.2.2
+ | mul ha hb ia ib => exact .mul (ia bounds.1) (ib bounds.2.1) bounds.2.2
+ | square ha ia => exact .square (ia bounds.1) bounds.2
+
+theorem success_iff_scoped_bounds (lo hi : Int) (args : List Int) (e : Term) :
+ evaluate lo hi args e = some (LocalContract.eval (fun i => args[i]?.getD 0) e) ↔
+ Scoped args.length e ∧ Bounds lo hi args e := by
+ constructor
+ · intro h
+   have d := (exact _ _ _ _ _).mp h
+   exact ⟨(denotes_math d).2.1,denotes_bounds d⟩
+ · rintro ⟨sc,bs⟩
+   exact (exact _ _ _ _ _).mpr (bounded_denotes sc bs)
+
+theorem accepted_machine_value {lo hi : Int} {b : Binding} {e : Envelope} {n : Nat}
+ (accepted : accept b e = some n) (bounds : Bounds lo hi b.arguments b.code) :
+ evaluate lo hi b.arguments b.code = some (Int.ofNat n) := by
+ have scope := (accept_sound accepted).common.scope
+ have h := (success_iff_scoped_bounds lo hi b.arguments b.code).mpr ⟨scope,bounds⟩
+ rw [accepted_integer_length accepted]
+ exact h
+
+namespace Controls
+def cancellation : Term := .add (.mul (.integer 2) (.integer 6)) (.integer (-3))
+example : LocalContract.eval (fun _ => 0) cancellation = 9 := by rfl
+example : evaluate (-10) 10 [] cancellation = none := by decide
+example : evaluate (-20) 20 [] cancellation = some 9 := by decide
+example : evaluate (-10) 10 [] (.input 0) = none := by rfl
+example : LocalContract.eval (fun i => ([] : List Int)[i]?.getD 0) (.input 0) = 0 := by rfl
+example : evaluate (-9223372036854775808) 9223372036854775807 [-3]
+ (positiveTerm (.square (.input 0))) = some 10 := by decide
+example : evaluate (-9223372036854775808) 9223372036854775807 [9223372036854775807]
+ (positiveTerm (.square (.input 0))) = none := by decide
+def wideCancellation : Term := .add (.mul (.input 0) (.integer 2)) (.integer (-9223372036854775799))
+example : LocalContract.eval (fun _ => 4611686018427387904) wideCancellation = 9 := by decide
+example : evaluate (-9223372036854775808) 9223372036854775807 [4611686018427387904]
+ wideCancellation = none := by decide
+end Controls
+#print axioms checked_exact
+#print axioms exact
+#print axioms denotes_math
+#print axioms sound
+#print axioms denotes_bounds
+#print axioms bounded_denotes
+#print axioms success_iff_scoped_bounds
+#print axioms accepted_machine_value
+end MirroreaProofFirst.ContractExport.CheckedArithmetic
+
+-- Later unreviewed failure-inclusive local flow candidate.
+namespace MirroreaProofFirst.ContractExport.CheckedArithmetic
+open LocalContract
+-- Conditional local data-dependence boundary, not an adopted release policy.
+def flowCheck (label : Nat → Nat) (observer : Nat) : Term → Bool
+ | .input i => decide (label i ≤ observer)
+ | .integer _ => true
+ | .add a b | .mul a b => flowCheck label observer a && flowCheck label observer b
+ | .square a => flowCheck label observer a
+inductive Flows (label : Nat → Nat) (observer : Nat) : Term → Prop where
+ | input {i} : label i ≤ observer → Flows label observer (.input i)
+ | integer (z) : Flows label observer (.integer z)
+ | add {a b} : Flows label observer a → Flows label observer b → Flows label observer (.add a b)
+ | mul {a b} : Flows label observer a → Flows label observer b → Flows label observer (.mul a b)
+ | square {a} : Flows label observer a → Flows label observer (.square a)
+theorem flow_exact (label : Nat → Nat) (observer : Nat) (e : Term) :
+ flowCheck label observer e = true ↔ Flows label observer e := by
+ induction e with
+ | input i =>
+   simp only [flowCheck,decide_eq_true_eq]
+   exact ⟨Flows.input,fun h => by cases h; assumption⟩
+ | integer z =>
+   simp only [flowCheck]
+   exact ⟨fun _ => .integer z,fun _ => True.intro⟩
+ | add a b ia ib =>
+   simp only [flowCheck,Bool.and_eq_true,ia,ib]
+   exact ⟨fun h => .add h.1 h.2,fun h => by cases h; constructor <;> assumption⟩
+ | mul a b ia ib =>
+   simp only [flowCheck,Bool.and_eq_true,ia,ib]
+   exact ⟨fun h => .mul h.1 h.2,fun h => by cases h; constructor <;> assumption⟩
+ | square a ia =>
+   simp only [flowCheck,ia]
+   exact ⟨Flows.square,fun h => by cases h; assumption⟩
+
+theorem evaluate_low {label : Nat → Nat} {observer : Nat} {e : Term}
+ (flow : Flows label observer e) (lo hi : Int) (a b : List Int)
+ (same : ∀ i, label i ≤ observer → a[i]? = b[i]?) :
+ evaluate lo hi a e = evaluate lo hi b e := by
+ induction flow with
+ | @input i low => simp [evaluate,same i low]
+ | integer z => rfl
+ | add ha hb ia ib => simp only [evaluate,ia,ib]
+ | mul ha hb ia ib => simp only [evaluate,ia,ib]
+ | square ha ia => simp only [evaluate,ia]
+
+theorem checked_evaluate_low {label : Nat → Nat} {observer : Nat} {e : Term}
+ (flow : flowCheck label observer e = true) (lo hi : Int) (a b : List Int)
+ (same : ∀ i, label i ≤ observer → a[i]? = b[i]?) :
+ evaluate lo hi a e = evaluate lo hi b e :=
+ evaluate_low ((flow_exact _ _ _).mp flow) lo hi a b same
+
+namespace FlowControls
+def secretSquare : Term := positiveTerm (.square (.input 0))
+example : flowCheck (fun _ => 1) 0 secretSquare = false := by decide
+-- Even erasing successful payloads retains input-dependent completion.
+example : (evaluate (-10) 10 [0] secretSquare).map (fun _ => ()) = some () ∧
+ (evaluate (-10) 10 [4] secretSquare).map (fun _ => ()) = none := by decide
+example : flowCheck (fun _ => 0) 0 secretSquare = true := by decide
+end FlowControls
+#print axioms flow_exact
+#print axioms evaluate_low
+#print axioms checked_evaluate_low
+end MirroreaProofFirst.ContractExport.CheckedArithmetic

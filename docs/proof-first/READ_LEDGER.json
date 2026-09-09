@@ -21470,5 +21470,201 @@
     "range": "1-156",
     "role": "LAB historical example full read in tool result 172dcf; not current acceptance",
     "status": "full"
+  },
+  {
+    "path": "specs/examples/45-current-l2-first-checker-cut-regression-baseline.md",
+    "sha256": "c9a4116ca4461147cd6534bcc8db6dddda71a376d47fa1b32f186c2af9930059",
+    "range": "1-141",
+    "role": "LAB historical example full read; previous checker fixture comparisons are not general semantic proof or current W2 acceptance",
+    "status": "full"
+  },
+  {
+    "path": "specs/examples/46-current-l2-same-lineage-first-checker-spike.md",
+    "sha256": "6c6c9ce7a13d28780fadbc23771b68f722992b2f5c8f2e839e5ae0de3a2cb1fb",
+    "range": "1-138",
+    "role": "LAB historical example full read; previous checker fixture comparisons are not general semantic proof or current W2 acceptance",
+    "status": "full"
+  },
+  {
+    "path": "specs/examples/47-current-l2-missing-option-second-checker-spike.md",
+    "sha256": "c4f083baf45a6a1a1f86238763b061cd7bed08a90f11467186b8802d6f98f3bf",
+    "range": "1-127",
+    "role": "LAB historical example full read; previous checker fixture comparisons are not general semantic proof or current W2 acceptance",
+    "status": "full"
+  },
+  {
+    "path": "specs/examples/48-current-l2-capability-third-checker-spike.md",
+    "sha256": "b03b00c242ec20d08c5ce0367f42682ad7c9714cbd082da2b5a77c8298da387c",
+    "range": "1-126",
+    "role": "LAB historical example full read; previous checker fixture comparisons are not general semantic proof or current W2 acceptance",
+    "status": "full"
+  },
+  {
+    "path": "specs/examples/49-current-l2-shared-family-checker-support-helper.md",
+    "sha256": "05a444b78e4cadd5f75cf9f0c9778e805d0be7c6b7da93b2ef2cb0ff5d0ec3ab",
+    "range": "1-157",
+    "role": "LAB historical example full read; previous checker fixture comparisons are not general semantic proof or current W2 acceptance",
+    "status": "full"
+  },
+  {
+    "path": "specs/examples/50-current-l2-generic-family-checker-entry-comparison.md",
+    "sha256": "32206a638f59b9910fa8e2d245575b26ae37eb023f8c4ef011294667299f7708",
+    "range": "1-133",
+    "role": "LAB historical example full read; previous checker fixture comparisons are not general semantic proof or current W2 acceptance",
+    "status": "full"
+  },
+  {
+    "path": "specs/examples/51-current-l2-try-rollback-structural-floor-and-restore-scope.md",
+    "sha256": "a50e9afe226cf8c8d78bb67cf36d466a2afb37920758a22c56d67bcd81c6fac3",
+    "range": "1-148",
+    "role": "LAB historical example full read; previous checker fixture comparisons are not general semantic proof or current W2 acceptance",
+    "status": "full"
+  },
+  {
+    "path": "specs/examples/52-current-l2-try-rollback-fourth-checker-spike-comparison.md",
+    "sha256": "59070994e7bd2a58b24dea7a6686efd935b58916aee406d64d0bbeae0a8c6ad3",
+    "range": "1-135",
+    "role": "full source/document read or prior-full plus fully authored unreviewed extension; reference evidence not production acceptance",
+    "status": "full"
+  },
+  {
+    "path": "specs/examples/53-current-l2-try-rollback-ast-structural-helper-entry-criteria.md",
+    "sha256": "2e3fec520d01bc864abc89c3ff5e162300c2403ae010294e870a365a45eacd07",
+    "range": "1-187",
+    "role": "full source/document read or prior-full plus fully authored unreviewed extension; reference evidence not production acceptance",
+    "status": "full"
+  },
+  {
+    "path": "crates/mir-semantics/examples/full_system_v1_check.rs",
+    "sha256": "8822c63fc08828352477cb388d6ea83c94b404d93004d13ef0fc05e3283eaaa8",
+    "range": "1-123",
+    "role": "full source/document read or prior-full plus fully authored unreviewed extension; reference evidence not production acceptance",
+    "status": "full"
+  },
+  {
+    "path": "crates/mir-runtime/examples/mir_full_system_v1_session.rs",
+    "sha256": "0548580ea56fdbeed9f617ecf2658e47df3533d2d0201d83381eacd42f5a3334",
+    "range": "1-81",
+    "role": "full source/document read or prior-full plus fully authored unreviewed extension; reference evidence not production acceptance",
+    "status": "full"
+  },
+  {
+    "path": "samples/full-system-v1/projection/effectful-sugoroku-positive/shared/src/add-one.mir",
+    "sha256": "48a64bad7bdd0b125971db80c3eba323734277ba8168d90dc2b6c7655b70723a",
+    "range": "1-5",
+    "role": "full source/document read or prior-full plus fully authored unreviewed extension; reference evidence not production acceptance",
+    "status": "full"
+  },
+  {
+    "path": "samples/lean/foundations/MirroreaProofFirstContractExport.lean",
+    "sha256": "b69959246c309fe9256fa1fb77b965c2c483c195698bac24f210a61f48e3b1e0",
+    "range": "1-472",
+    "role": "full source/document read or prior-full plus fully authored unreviewed extension; reference evidence not production acceptance",
+    "status": "full"
+  },
+  {
+    "path": "plan/proof-first-foundation-correspondence.md",
+    "sha256": "87e774f43dffac597cd71da142de46229b1037bc02128ca3c77cab98f4525477",
+    "range": "1-275",
+    "role": "full source/document read or prior-full plus fully authored unreviewed extension; reference evidence not production acceptance",
+    "status": "full"
+  },
+  {
+    "path": "specs/examples/54-current-l2-try-rollback-structural-malformed-source-placement.md",
+    "sha256": "3b88b0f75a209d9bf7288504927d3a5f34f37ab28851dcb22a56ab803f317c26",
+    "range": "1-166",
+    "role": "full historical document read or prior-full plus fully authored unreviewed extension; no production acceptance",
+    "status": "full"
+  },
+  {
+    "path": "specs/examples/55-current-l2-try-rollback-malformed-static-family-actualization.md",
+    "sha256": "7bb65f95877048ac13b16a1b58b37894f06a5246f8a62409bb93728723ca8ec4",
+    "range": "1-118",
+    "role": "full historical document read or prior-full plus fully authored unreviewed extension; no production acceptance",
+    "status": "full"
+  },
+  {
+    "path": "samples/lean/foundations/MirroreaProofFirstContractExport.lean",
+    "sha256": "4192983318bf508b06101c36883a4945e3b08fc956f867298171fd3de8f27dd4",
+    "range": "1-536",
+    "role": "full historical document read or prior-full plus fully authored unreviewed extension; no production acceptance",
+    "status": "full"
+  },
+  {
+    "path": "plan/proof-first-foundation-correspondence.md",
+    "sha256": "d2a2a1f7f1f08dd2bf0e8ab84989eab97d1d4920263428a4f9a018cadae6b4e2",
+    "range": "1-283",
+    "role": "full historical document read or prior-full plus fully authored unreviewed extension; no production acceptance",
+    "status": "full"
+  },
+  {
+    "path": "specs/examples/56-current-l2-try-rollback-ast-helper-compare-contract.md",
+    "sha256": "bb909b1aec83a469d076b2e1bbd3cb6564907ade26b333e9a0f4086572d23f08",
+    "range": "1-135",
+    "role": "LAB historical future structural-helper proposal full read; not current executable evidence or adopted W2 requirements",
+    "status": "full"
+  },
+  {
+    "path": "specs/examples/57-current-l2-try-rollback-ast-helper-expected-field-name.md",
+    "sha256": "57bf4233674b4cedc1e1ef12836884507fad419b3b51247ade605e4d957a5998",
+    "range": "1-242",
+    "role": "LAB historical future structural-helper proposal full read; not current executable evidence or adopted W2 requirements",
+    "status": "full"
+  },
+  {
+    "path": "specs/examples/58-current-l2-try-rollback-ast-helper-detached-loop-insertion.md",
+    "sha256": "3780ec36e3389d20157bb8f132a93e11c1b6d3f60a1f9a277f99acdfe2fef9be",
+    "range": "1-168",
+    "role": "LAB historical future structural-helper proposal full read; not current executable evidence or adopted W2 requirements",
+    "status": "full"
+  },
+  {
+    "path": "specs/examples/59-current-l2-try-rollback-ast-helper-structural-verdict-carrier.md",
+    "sha256": "12961b25f97a8c06ea7f02330235d1e8004bd28aa30746a23f7bc8b830b6f2dc",
+    "range": "1-257",
+    "role": "LAB historical future structural-helper proposal full read; not current executable evidence or adopted W2 requirements",
+    "status": "full"
+  },
+  {
+    "path": "specs/examples/60-current-l2-try-rollback-ast-helper-shared-carrier-threshold.md",
+    "sha256": "afc2af9c4e0b09ae748af95b0b5817132e1eda72d300a9ed344417bd825960ef",
+    "range": "1-161",
+    "role": "LAB historical future structural-helper proposal full read; not current executable evidence or adopted W2 requirements",
+    "status": "full"
+  },
+  {
+    "path": "specs/examples/61-current-l2-try-rollback-ast-helper-subcommand-and-wrapper-family.md",
+    "sha256": "2f7c7f821cb200e93fb4a7b4b6466eceb9590669ca8e57a9f306b7b95e357c08",
+    "range": "1-149",
+    "role": "LAB historical future structural-helper proposal full read; not current executable evidence or adopted W2 requirements",
+    "status": "full"
+  },
+  {
+    "path": "specs/examples/62-current-l2-try-rollback-ast-helper-generic-family-boundary.md",
+    "sha256": "6d7a082f5c264bd21d316793596b12fab1472e7b68f7281565f2916e6cb0ddb5",
+    "range": "1-132",
+    "role": "LAB historical future structural-helper proposal full read; not current executable evidence or adopted W2 requirements",
+    "status": "full"
+  },
+  {
+    "path": "specs/examples/63-current-l2-try-rollback-ast-helper-public-checker-entry-criteria.md",
+    "sha256": "a35dccb4cfbcbc9124b1a586385e4ae0b6deb60b89ef47615515d5620dbd2613",
+    "range": "1-155",
+    "role": "LAB historical future structural-helper proposal full read; not current executable evidence or adopted W2 requirements",
+    "status": "full"
+  },
+  {
+    "path": "specs/examples/64-current-l2-try-rollback-malformed-static-family-timing.md",
+    "sha256": "4a8ee7a521cf4befe482e3c600c451be813e92b80ca73f8cdfd13c9fad518e4f",
+    "range": "1-141",
+    "role": "LAB historical future structural-helper proposal full read; not current executable evidence or adopted W2 requirements",
+    "status": "full"
+  },
+  {
+    "path": "specs/examples/65-current-l2-try-rollback-ast-helper-first-tranche-cut.md",
+    "sha256": "b2cdfcbe9c23ccc7f4252fcfd116100b6fde2c1cf2658839ab16841f8eb13a60",
+    "range": "1-158",
+    "role": "LAB historical future structural-helper proposal full read; not current executable evidence or adopted W2 requirements",
+    "status": "full"
   }
 ]

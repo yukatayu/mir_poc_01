@@ -831,3 +831,118 @@ clock. This was a documentation freshness failure, not a theorem failure.
 Final documentation check follows on the corrected cut.
 
 Final totality-cut validation: docs rerun33154 passed (fbc5b8) after the retained stale-header failure; full172-line proof delta reviewed (e5e909), current15 source hashes and successful axiom records matched. No new Rust/network/restore execution or Oracle acceptance is claimed.
+
+Forward continuation after totality checkpoint494571ea (normal push202165):
+request-bound allocation candidate remains in external scratch
+allocation-request-binding-fo86o09w, pointer ALLOCATION_REQUEST_WORKDIR.
+General exactness/soundness/WF/current-denial and unary policy size-indistinguishability
+checked108312; standard propext/Quot.sound only. Positive10, accepted17-but-denied,
+changed-request and deny controls; ignored authority and wrong length mutants
+rejected15cca9/108312, including decisive finite wrong-length rejection control.
+Two failed proof drafts retained as RED/SIMPLIFIER_RED, no accepted sorryAx.
+Authorization callback consumes current State/full existing Binding/exact Action;
+it is a trusted input, not a proven issuer or authenticated registry/head. Only
+allocation is composed here; this does not close all-mutator authorization,
+physical atomicity, source admission, replay, recovery or information-flow gates.
+A request-bound current callback is compared only with the original unary policy;
+no production contract or canon choice is adopted. Pending Oracle packets exclude it.
+`plan/ 更新不要`, `progress.md 更新不要`, `tasks.md 更新不要`,
+`samples_progress.md 更新不要` for this scratch comparison: existing documented
+request-binding obligation, same readiness/current goal and no source/sample delta.
+Documentation.md/docs/project-status.md remain unchanged for the same reason.
+No new report/framework, no Rust/network execution and no sub-agent.
+
+### 2026-09-10 05:37 JST — allocation request and checked-arithmetic consumer candidates
+
+
+Later unreviewed ContractExport extensions address two existing W2 consumer
+obligations. RequestAllocation passes the current reference State, the whole
+existing Binding and the exact allocation Action to an independently supplied
+authorization callback. General exactness exposes accepted positive actual length,
+the callback decision and the same raw allocation; WF is inherited. The old unary
+principal policy cannot distinguish any two positive lengths for that principal.
+10-unit acceptance, valid17-unit rejection, changed-request rejection and current
+deny controls separate arithmetic evidence from authorization. This callback is
+trusted input, not an issuer, authenticated current head, full CurrentUse context,
+all-mutator authorization, physical atomicity or a selected production contract.
+The other resource mutators retain their original explicit reference boundary.
+
+CheckedArithmetic adds a finite-interval evaluator for existing local-contract
+Term inputs/literals/add/mul/square and independent declarative rules. General
+exactness and soundness preserve the mathematical value, input scope and range.
+Successful evaluation is equivalent to scoped inputs and mathematical bounds at
+every syntax node. Accepted contract length plus these bounds yields the actual
+checked result Int.ofNat(length). A positive in-range final value alone is
+insufficient: an intermediate product may overflow before cancellation. Missing
+inputs reject instead of using the mathematical evaluator's default. General
+proofs use only propext/Classical.choice/Quot.sound (some subsets); no Mir axioms.
+Signed64 controls motivate one finite candidate; no final numeric/failure/privacy
+policy or existing-Rust implementation refinement is adopted. Current source
+checker accepts square-plus-one and cancellation programs, but the current debug
+interpreter panics on their overflowing products. This is retained counterevidence,
+not a fixed runtime or an alpha acceptance claim. Both extensions are outside the
+pending Oracle packets, and request-bound callback authenticity/actual source
+admission and machine failure information flow remain open.
+
+Same W2 goal/trace IDs/direct local-contract→exclusive allocation consumer.
+Candidates: exact independently supplied request decision vs unary principal policy;
+finite checked operations vs prior static intermediate-bound requirement. The
+static bounds characterize when checked execution succeeds; neither is adopted as
+final numeric policy. Existing arithmetic/authority obligations narrowed, not closed.
+
+Scratch RequestAllocation final108312 (11ea1def...) and CheckedArithmetic final
+e70a96 (exact hash in retained CHECK.json) passed trust=0. Arithmetic earlier
+560332 failed on range-proof and monadic simplification; correctedf9a9e2 then
+701cfb/e70a96 passed. Failed drafts with inferred sorryAx are rejected records.
+Arithmetic unchecked-intermediate and default-missing-input mutants both fail
+general proofs and concrete controls (e70a96/4a10aa). Request ignored-authority
+and wrong-size mutants fail (15cca9/108312). Finite controls are not general proof.
+
+Actual source: first29b683 invoked a preexisting test-harness artifact, which
+rejected --entry; no semantic result from that command. Correct offline/locked
+example builds393a60 and e5566b succeeded using existing target (runtime31 warnings,
+no Clippy claim). Current source checker accepted both programs with zero diagnostics.
+Actual session01ccde returns Int64(10) for x=-3 square-plus-one; x=Int64MAX and
+cancellation x=4611686018427387904 both exit101 at interpreter.rs:1418 multiply
+overflow. Cancellation's mathematical result9 is also Lean checked. The actual
+source subtraction and reference addition of a negative literal are a finite
+comparison, not a proved parser/IR refinement. Exact source/binary hashes, commands,
+stdout/stderr and rejected harness invocation are retained in
+checked-contract-arithmetic-npt5atdt. Capacity817528:59GiB free,12GiB available RAM;
+existing target reused, no new large workdir/cleanup. No network/restore execution.
+
+Mirrored into the existing ContractExport module only (cc3b83,472lines), preserving
+old entries and all frozen packets. Fresh15 dependency rebuild29153 is pending;
+no success claim before collection. No new framework/module/production source.
+Plan/companion/sample evidence/progress and this report synchronized. Existing ten
+unreviewed-source summary in Documentation.md/docs/project-status.md remains valid;
+those files 更新不要. tasks.md 更新不要: same goal/readiness/order/blockers and no
+milestone close. No sample taxonomy/new command; samples/README/scripts/README
+更新不要. No Canon/THM/OBL/phase changes or sub-agents. New delta uncommitted/unreviewed;
+continue after validation, not task close.
+
+Fresh15-source rebuild29153 completed19852a PASS. Current hashes and axiom records match; W2_EXTENSION_CHECK preserves the preceding dependency cut and exact new scratch/mutant/actual-source evidence. Final documentation/diff validation follows.
+
+Forward local flow closure for the checked arithmetic candidate:38863f general
+flow-check exactness and two-run equality of the entire Option result passed;
+b16089 True-constructor draft rejected. Inputs must agree as Option values on
+every input visible to the same observer under the same supplied labels/range.
+Thus both value and failure agree under those premises. Secret square counts0/4
+produce some()/none even after payload erasure; ignoring square dependency mutant
+fails both theorem and concrete control63de19. This does not cover runtime cost,
+source-label authenticity, allocation geometry, authorization callback outputs or
+a public failure policy. Source appended to the same ContractExport (536lines);
+fresh15 rebuild95412 pending. Original scratch/Oracle cuts preserved.
+
+Flow-inclusive fresh15 rebuild95412 completed e432a9 PASS; current15 hashes and
+axiom audits match. Original request/arithmetic cut retained in the check record.
+Finite ordinary-source texts are now included with their hashes beside their
+actual execution evidence for reproduction without the disposable workdir.
+Docs10674 passed22fc04 for its preceding cut; final flow-document check95362 remains
+pending. Main-only focused source review e3db2d; later64-line flow delta reviewed
+as authored, final diff check follows. Oracle79237f both still running/no answer.
+
+Final flow-document check95362 passed e86e3e; focused flow diff3efc16 and
+whitespace8fe215 passed. Current15 checked source hashes/axioms are verified.
+JSON evidence/ledger validation and own nine-file checkpoint follow; no production
+change or Oracle/alpha acceptance. Last Oracle a30fad remains running/no answer.

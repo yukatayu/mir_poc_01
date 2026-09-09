@@ -243,3 +243,41 @@ This discharges the semantic environment premise from structural typing; it does
 not add an external closure decoder, environment-admission checker, authority,
 serialization rule or information-flow policy. The selected registered entry
 remains closed. These general proofs have the same standard axiom boundary.
+
+
+Later unreviewed ContractExport extensions address two existing W2 consumer
+obligations. RequestAllocation passes the current reference State, the whole
+existing Binding and the exact allocation Action to an independently supplied
+authorization callback. General exactness exposes accepted positive actual length,
+the callback decision and the same raw allocation; WF is inherited. The old unary
+principal policy cannot distinguish any two positive lengths for that principal.
+10-unit acceptance, valid17-unit rejection, changed-request rejection and current
+deny controls separate arithmetic evidence from authorization. This callback is
+trusted input, not an issuer, authenticated current head, full CurrentUse context,
+all-mutator authorization, physical atomicity or a selected production contract.
+The other resource mutators retain their original explicit reference boundary.
+
+CheckedArithmetic adds a finite-interval evaluator for existing local-contract
+Term inputs/literals/add/mul/square and independent declarative rules. General
+exactness and soundness preserve the mathematical value, input scope and range.
+Successful evaluation is equivalent to scoped inputs and mathematical bounds at
+every syntax node. Accepted contract length plus these bounds yields the actual
+checked result Int.ofNat(length). A positive in-range final value alone is
+insufficient: an intermediate product may overflow before cancellation. Missing
+inputs reject instead of using the mathematical evaluator's default. General
+proofs use only propext/Classical.choice/Quot.sound (some subsets); no Mir axioms.
+Signed64 controls motivate one finite candidate; no final numeric/failure/privacy
+policy or existing-Rust implementation refinement is adopted. Current source
+checker accepts square-plus-one and cancellation programs, but the current debug
+interpreter panics on their overflowing products. This is retained counterevidence,
+not a fixed runtime or an alpha acceptance claim. Both extensions are outside the
+pending Oracle packets, and request-bound callback authenticity/actual source
+admission and machine failure information flow remain open.
+
+The checked-arithmetic extension additionally proves exact local flow checking and
+two-run equality of the complete Option result, including missing-input/overflow
+failure, when both inputs agree on all referenced low-classified argument options
+under the same supplied labels and bounds. Erasing successful payloads alone is
+insufficient: a secret square can still select some()/none. This conditional local
+property does not authenticate source labels, release a private result, constrain
+resource/time effects, or cover authorization callbacks/allocation geometry.
