@@ -1120,3 +1120,78 @@ Current proof delta source review78c3b4/c1e024 and whitespace8f2108 pass.
 Final documentation validator98910 completed PASSf9fdda. Remaining changes are
 evidence/read/continuation metadata. Final JSON/hash/diff checked before checkpoint.
 No validation/Lean/Git process pending; keep the two Oracle jobs.
+
+
+## Forward reservation/effect evidence — 2026-09-10 06:47 JST
+
+
+Reservation is a later unreviewed reference boundary around the same actual
+CurrentAllocation allocator. It separates retained identity, actual effect history
+and response visibility. A pre-effect stop retains identity with no effect; a
+lost response after checked allocation retains both allocation and effect history.
+Arbitrary finite attempt sequences preserve resource WF, distinct reserved/effect
+keys and effect-to-reservation inclusion. A repeated reserved key rejects without
+another allocation, even after other invocations with changed supplied context.
+A newly recorded effect entails actual checked allocation. Useful success returns
+the real length42 handle; response loss retains that same effect. Three mutations
+(ignore reservation, invent a pre-effect fact, erase effect on response loss) fail
+general proofs and concrete controls. General proofs use only propext, Quot.sound
+and inherited Classical.choice; no new Mir axiom or accepted sorry is introduced.
+
+This is a conservative nonproduction state machine, not a refinement proof for
+all SYS5/SYS4/native transitions. Its pre-effect stop is an explicit model input,
+not a conclusion available from an arbitrary network error. Smallest viable
+alternative: clear only an independently established no-effect/no-outstanding-action
+reservation; the model accepts a retry after such a pre-effect stop. Clearing on
+mere missing response instead repeats the actual allocation. No public outcome
+or Q18 authorization-reservation semantics is adopted. Reservation exhaustion,
+compaction, authenticated heads, crash persistence, concurrent ownership,
+availability and outcome/history information flow remain open. In particular,
+the atomic Once.failure_unchanged theorem does not describe every runtime error.
+
+Full reads of current sys5_i3_process_runtime.rs and sys5_i3_private_quic.rs
+confirm distinct real mechanisms: owner reservation before SYS4 handoff; retained
+Ambiguous/ServeReserved state after uncertainty; current authority revalidation;
+requester attempt reservation before the first awaited frame write; completed
+write versus accepted receipt; retained ingress reservation before a cancellable
+read. Provider occurrence references avoid raw-value-derived frame hashes, unlike
+the ordinary restricted carrier profile. These are code facts, not general privacy
+or durable-recovery proofs. The ordinary process start initializes pending,
+tombstone and effect-occurrence maps empty: its image bootstrap must not be counted
+as same-instance post-effect recovery. Runtime-only retry2 and ledger1 tests pass
+at this cut; no new actual QUIC or persistence test was executed in this increment.
+
+Start HEAD bbc25960968e93c3ffecfa1681f6a9a873de14c6, main already pushed;
+only own read-ledger/RESUME metadata dirty at increment start. Main alone.
+Scratch RESERVATION_EFFECT_WORKDIR: kernel b0361b, actual positive/negative controls;
+three final mutants e2ec0f, each concrete false. Initial failed elaboration ef7985
+retained in ELABORATION_RED.json (simp expansion, dependent equality, Handle numeral);
+corrected source has no sorry/admit. W2_EXTENSION_CHECK retains final source/cut
+and command output. Runtime regression2a65ae/413acc (2+1 pass, 30 existing warnings)
+uses cached target, not a full workspace or physical-network validation.
+
+plan/ and samples_progress.md updated for this evidence; progress.md recent log
+updated. CURRENT_GOAL preserves the same W2 consumer. Documentation.md,
+docs/project-status.md and tasks.md 更新不要: same active research, readiness,
+critical path and owner/Canon gates; no milestone close or roadmap adoption.
+Oracle269d86 both running with no answer/error; new extension excluded from frozen
+review packets. Self-review only, no independent review claimed. Production and
+required physical/durable/IFC validations remain unexecuted because the foundation
+and review gates are open. Commit/push follows focused diff and docs validation;
+no new report or subagent session, no task-complete notification.
+
+Follow-on full read of sys5_i3_owner_admission_tests.rs3098 lines completed. Actual
+component regression f56a8a:27 passed,0failed,0ignored,371filtered;30existing warnings.
+It confirms the existing distinction between G2 revalidation before permit issuance
+(preserved unrelated owner request can proceed) and generation-exact final handoff
+(an already G1-issued permit cannot cross G2 even when another owner was revoked).
+This is an existing restricted runtime policy, not adoption of a universal Q18
+answer. No new production source or test code, no physical-network claim. Exact
+command/logs are in W2_EXTENSION_CHECK.owner_admission_regression.
+
+Final fresh15 mirror6f3f61 PASS; exact source/axiom audit4f7146 PASS and focused
+source/docs diffsdac5ef/b4ed43 inspected. Documentation validator94276 exited0
+aeaa7d (1762 reports; --help is ignored by its membership-only argument handling,
+so this was the normal validation, not a help response). Whitespacef9368c PASS.
+Only continuation/read/evidence metadata changed after validation; no pending
+Lean/Rust/docs job. Two Oracle jobs retained, no review acceptance inferred.

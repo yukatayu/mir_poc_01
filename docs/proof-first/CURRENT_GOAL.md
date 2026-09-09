@@ -56,3 +56,16 @@ installation or current-head/restore claim follows.
 Higher-order reference-bound preservation now covers closure code, captured values
 and iteration, then connects to registered invocation. This is an unreviewed
 W2 consequence, not source authenticity, handle IFC or lifecycle installation.
+
+Current reservation/effect sub-boundary (same W2 consumer): actual checked module
+allocation supplies the effect; a reference reservation may survive pre-effect
+cancellation or a missing post-effect response. Compare retaining that reservation
+with the smallest viable alternative, clearing only an independently proved
+no-effect/no-outstanding-action reservation. Clearing on every missing response
+is the unsafe negative control. Prove
+resource preservation, truthful effect recording, retained identity across arbitrary
+finite attempts and no second effect; exhibit both a successful ordinary allocation
+and a response-lost allocation, plus the clear-and-retry counterexample. This is
+not a physical crash-recovery proof, fair progress guarantee, public outcome schema
+or Q18 authority policy. The actual runtime's preflight and all downstream mutators
+still need a refinement argument; Oracle review excludes this later extension.

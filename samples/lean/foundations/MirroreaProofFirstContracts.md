@@ -334,3 +334,40 @@ finite request namespace/storage exhaustion, concurrent ownership of the decisio
 recovery/fresh-import identity and history/failure information flow remain open.
 Neither Q-18 reservation versus reauthorization nor physical exactly-once delivery
 is selected or proved. Duplicate rejection returns no cached handle or authority.
+
+
+Reservation is a later unreviewed reference boundary around the same actual
+CurrentAllocation allocator. It separates retained identity, actual effect history
+and response visibility. A pre-effect stop retains identity with no effect; a
+lost response after checked allocation retains both allocation and effect history.
+Arbitrary finite attempt sequences preserve resource WF, distinct reserved/effect
+keys and effect-to-reservation inclusion. A repeated reserved key rejects without
+another allocation, even after other invocations with changed supplied context.
+A newly recorded effect entails actual checked allocation. Useful success returns
+the real length42 handle; response loss retains that same effect. Three mutations
+(ignore reservation, invent a pre-effect fact, erase effect on response loss) fail
+general proofs and concrete controls. General proofs use only propext, Quot.sound
+and inherited Classical.choice; no new Mir axiom or accepted sorry is introduced.
+
+This is a conservative nonproduction state machine, not a refinement proof for
+all SYS5/SYS4/native transitions. Its pre-effect stop is an explicit model input,
+not a conclusion available from an arbitrary network error. Smallest viable
+alternative: clear only an independently established no-effect/no-outstanding-action
+reservation; the model accepts a retry after such a pre-effect stop. Clearing on
+mere missing response instead repeats the actual allocation. No public outcome
+or Q18 authorization-reservation semantics is adopted. Reservation exhaustion,
+compaction, authenticated heads, crash persistence, concurrent ownership,
+availability and outcome/history information flow remain open. In particular,
+the atomic Once.failure_unchanged theorem does not describe every runtime error.
+
+Full reads of current sys5_i3_process_runtime.rs and sys5_i3_private_quic.rs
+confirm distinct real mechanisms: owner reservation before SYS4 handoff; retained
+Ambiguous/ServeReserved state after uncertainty; current authority revalidation;
+requester attempt reservation before the first awaited frame write; completed
+write versus accepted receipt; retained ingress reservation before a cancellable
+read. Provider occurrence references avoid raw-value-derived frame hashes, unlike
+the ordinary restricted carrier profile. These are code facts, not general privacy
+or durable-recovery proofs. The ordinary process start initializes pending,
+tombstone and effect-occurrence maps empty: its image bootstrap must not be counted
+as same-instance post-effect recovery. Runtime-only retry2 and ledger1 tests pass
+at this cut; no new actual QUIC or persistence test was executed in this increment.

@@ -750,3 +750,193 @@ end Controls
 #print axioms failure_unchanged
 #print axioms fresh_success
 end MirroreaProofFirst.ModuleContractBoundary.CurrentAllocation.Once
+
+-- Unreviewed reservation/effect reference; no physical recovery refinement.
+
+namespace MirroreaProofFirst.ModuleContractBoundary.CurrentAllocation.Reservation
+open ResourceBoundary
+abbrev Invocation := Once.Invocation
+structure Store where
+ resources : State
+ reserved : List CurrentUse.UseId
+ effects : List CurrentUse.UseId
+-- These are reference outcomes, not public errors or information-release policy.
+inductive Outcome where
+ | rejected
+ | retainedNoEffect
+ | effectUnacknowledged
+ | acknowledged (handles : List Handle)
+ deriving DecidableEq
+structure Result where
+ store : Store
+ outcome : Outcome
+
+def attempt (i : Invocation n) (s : Store) (stopBefore loseResponse : Bool) : Result :=
+ if i.key ∈ s.reserved then ⟨s,.rejected⟩ else
+ let held : Store := ⟨s.resources,i.key :: s.reserved,s.effects⟩
+ if stopBefore then ⟨held,.retainedNoEffect⟩ else
+ match i.allocate s.resources with
+ | none => ⟨held,.retainedNoEffect⟩
+ | some out =>
+   ⟨⟨out.1,i.key :: s.reserved,i.key :: s.effects⟩,
+    if loseResponse then .effectUnacknowledged else .acknowledged out.2⟩
+
+theorem retained (i : Invocation n) (s : Store) (before lost : Bool)
+ (key : CurrentUse.UseId) (h : key ∈ s.reserved) :
+ key ∈ (attempt i s before lost).store.reserved := by
+ by_cases old : i.key ∈ s.reserved
+ · simpa [attempt,old] using h
+ · cases before <;> cases allocated : i.allocate s.resources <;>
+   simp [attempt,old,allocated,h]
+
+theorem attempted_key_retained (i : Invocation n) (s : Store) (before lost : Bool) :
+ i.key ∈ (attempt i s before lost).store.reserved := by
+ by_cases old : i.key ∈ s.reserved
+ · simpa [attempt,old] using old
+ · cases before <;> cases allocated : i.allocate s.resources <;>
+   simp [attempt,old,allocated]
+
+structure Input (n : Nat) where
+ invocation : Invocation n
+ stopBefore : Bool
+ loseResponse : Bool
+
+def schedule : Store → List (Input n) → Store
+ | s,[] => s
+ | s,a::rest => schedule (attempt a.invocation s a.stopBefore a.loseResponse).store rest
+
+theorem schedule_retains (s : Store) (later : List (Input n))
+ (key : CurrentUse.UseId) (h : key ∈ s.reserved) :
+ key ∈ (schedule s later).reserved := by
+ induction later generalizing s with
+ | nil => exact h
+ | cons a rest ih => exact ih _ (retained _ _ _ _ _ h)
+
+theorem no_second_effect (i : Invocation n) (s : Store) (before lost : Bool)
+ (later : List (Input n)) (again : Invocation n) (same : again.key = i.key)
+ (beforeAgain lostAgain : Bool) :
+ attempt again (schedule (attempt i s before lost).store later) beforeAgain lostAgain =
+ ⟨schedule (attempt i s before lost).store later,.rejected⟩ := by
+ have h := schedule_retains _ later i.key (attempted_key_retained i s before lost)
+ rw [attempt]
+ simp only [same,h,ite_true]
+
+theorem resource_preserved (i : Invocation n) (s : Store) (before lost : Bool)
+ (wf : WF s.resources) : WF (attempt i s before lost).store.resources := by
+ by_cases old : i.key ∈ s.reserved
+ · simpa [attempt,old] using wf
+ · cases before with
+   | true => simpa [attempt,old] using wf
+   | false =>
+     cases allocated : i.allocate s.resources with
+     | none => simpa [attempt,old,allocated] using wf
+     | some out =>
+       have preserved := (CurrentAllocation.sound wf allocated).2
+       obtain ⟨_,_,_,_,_,_,_,_,wf',_⟩ := preserved
+       simpa [attempt,old,allocated] using wf'
+
+theorem schedule_resource_preserved (s : Store) (later : List (Input n))
+ (wf : WF s.resources) : WF (schedule s later).resources := by
+ induction later generalizing s with
+ | nil => exact wf
+ | cons a rest ih => exact ih _ (resource_preserved _ _ _ _ wf)
+
+
+def HistoryWF (s : Store) : Prop :=
+ s.reserved.Nodup ∧ s.effects.Nodup ∧ ∀ key, key ∈ s.effects → key ∈ s.reserved
+
+theorem history_preserved (i : Invocation n) (s : Store) (before lost : Bool)
+ (wf : HistoryWF s) : HistoryWF (attempt i s before lost).store := by
+ obtain ⟨unique,eu,sub⟩ := wf
+ by_cases old : i.key ∈ s.reserved
+ · simpa [attempt,old,HistoryWF] using And.intro unique (And.intro eu sub)
+ · have efresh : i.key ∉ s.effects := fun h => old (sub _ h)
+   have held : HistoryWF ⟨s.resources,i.key :: s.reserved,s.effects⟩ := by
+     refine ⟨List.nodup_cons.mpr ⟨old,unique⟩,eu,?_⟩
+     intro key h
+     exact List.mem_cons_of_mem _ (sub _ h)
+   have done (res : State) : HistoryWF ⟨res,i.key :: s.reserved,i.key :: s.effects⟩ := by
+     refine ⟨List.nodup_cons.mpr ⟨old,unique⟩,
+       List.nodup_cons.mpr ⟨efresh,eu⟩,?_⟩
+     intro key h
+     rcases List.mem_cons.mp h with h | h
+     · exact List.mem_cons.mpr (Or.inl h)
+     · exact List.mem_cons_of_mem _ (sub _ h)
+   cases before with
+   | true => simpa [attempt,old] using held
+   | false =>
+     cases allocated : i.allocate s.resources with
+     | none => simpa [attempt,old,allocated] using held
+     | some out => simpa [attempt,old,allocated] using done out.1
+
+theorem schedule_history_preserved (s : Store) (later : List (Input n))
+ (wf : HistoryWF s) : HistoryWF (schedule s later) := by
+ induction later generalizing s with
+ | nil => exact wf
+ | cons a rest ih => exact ih _ (history_preserved _ _ _ _ wf)
+
+-- A new recorded effect must come from the actual checked allocator, including
+-- its machine arithmetic, catalog, current-use and separate resource grant.
+theorem new_effect_sound (i : Invocation n) (s : Store) (before lost : Bool)
+ (fresh : i.key ∉ s.effects)
+ (recorded : i.key ∈ (attempt i s before lost).store.effects) :
+ ∃ out, i.allocate s.resources = some out ∧
+ (attempt i s before lost).store.resources = out.1 := by
+ by_cases old : i.key ∈ s.reserved
+ · simp [attempt,old,fresh] at recorded
+ · cases before with
+   | true => simp [attempt,old,fresh] at recorded
+   | false =>
+     cases allocated : i.allocate s.resources with
+     | none => simp [attempt,old,allocated,fresh] at recorded
+     | some out => exact ⟨out,rfl,by simp [attempt,old,allocated]⟩
+
+theorem useful_success (i : Invocation n) (s : Store)
+ (fresh : i.key ∉ s.reserved) (allocated : i.allocate s.resources = some out) :
+ attempt i s false false =
+ ⟨⟨out.1,i.key :: s.reserved,i.key :: s.effects⟩,.acknowledged out.2⟩ := by
+ simp [attempt,fresh,allocated]
+
+theorem response_loss_preserves_effect (i : Invocation n) (s : Store)
+ (fresh : i.key ∉ s.reserved) (allocated : i.allocate s.resources = some out) :
+ attempt i s false true =
+ ⟨⟨out.1,i.key :: s.reserved,i.key :: s.effects⟩,.effectUnacknowledged⟩ := by
+ simp [attempt,fresh,allocated]
+
+namespace Controls
+open Once.Controls
+def initial : Store := ⟨empty,[],[]⟩
+def lost := attempt invocation initial false true
+def stopped := attempt invocation initial true false
+example : lost.store.resources.nextId = 1 := by decide
+example : lost.outcome = .effectUnacknowledged := by decide
+example : stopped.store.resources.nextId = 0 := by decide
+example : stopped.store.reserved = lost.store.reserved := by decide
+example : stopped.store.effects = [] ∧ lost.store.effects = [invocation.key] := by decide
+example : (attempt invocation lost.store false false).outcome = .rejected := by decide
+example : (attempt invocation stopped.store false false).outcome = .rejected := by decide
+example : (attempt invocation initial false false).outcome =
+ .acknowledged [⟨0,⟨0,0,42,3⟩⟩] := by decide
+example : (attempt other lost.store false false).store.resources.nextId = 2 := by decide
+-- Clearing reservation on every absent reply permits a second real allocation.
+def cleared : Store := {lost.store with reserved := []}
+example : (attempt invocation cleared false false).store.resources.nextId = 2 := by decide
+-- A smallest viable alternative can clear only a proved pre-effect terminal
+-- reservation, after excluding an outstanding physical action. That latter
+-- exclusion is not supplied by merely losing a response.
+def clearedBefore : Store := {stopped.store with reserved := []}
+example : (attempt invocation clearedBefore false false).store.resources.nextId = 1 := by decide
+-- No arbitrary crash/import transition is present in the proved schedule.
+end Controls
+#print axioms retained
+#print axioms attempted_key_retained
+#print axioms schedule_retains
+#print axioms no_second_effect
+#print axioms resource_preserved
+#print axioms schedule_resource_preserved
+#print axioms history_preserved
+#print axioms schedule_history_preserved
+#print axioms new_effect_sound
+#print axioms useful_success
+#print axioms response_loss_preserves_effect
+end MirroreaProofFirst.ModuleContractBoundary.CurrentAllocation.Reservation

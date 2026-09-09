@@ -21876,5 +21876,68 @@
     "range": "1-386",
     "role": "Full nested local custody tests read; feature-gated LOCAL evidence, not actual child/QUIC/durable recovery.",
     "status": "full"
+  },
+  {
+    "path": "crates/mir-runtime/src/sys5_i3_process_runtime.rs",
+    "sha256": "010b03c5bd49cc2a918768aac69fa89168b11b718f3466b98116e286d2f0d24a",
+    "range": "1-1520",
+    "role": "Partial full-text read of current process runtime; remaining1521–12168 not read.",
+    "status": "partial"
+  },
+  {
+    "path": "crates/mir-runtime/src/sys5_i3_process_runtime.rs",
+    "sha256": "010b03c5bd49cc2a918768aac69fa89168b11b718f3466b98116e286d2f0d24a",
+    "range": "1-12168",
+    "role": "Full actual process runtime and nested retry/ledger tests read across consecutive ranges. Reservation before handoff, authority revalidation, retained ambiguity, attempt budgeting and bootstrap reset inspected; no durable recovery or all-mutator refinement claim.",
+    "status": "full"
+  },
+  {
+    "path": "crates/mir-runtime/src/sys5_i3_private_quic.rs",
+    "sha256": "317c59d2266e692238132483234fd22f236ede4f2cdb1f4304889a5545f3e924",
+    "range": "1-2772",
+    "role": "Full actual adapter read d5007f/368d39/d9e458/29d73b; separate send reservation/completion, exact-runtime semantic admission, pending and receipt; no transport-to-authority or durability inference.",
+    "status": "full"
+  },
+  {
+    "path": "samples/lean/foundations/MirroreaProofFirstModuleContractBoundary.lean",
+    "sha256": "4d292a956cbe0f90a62ac68134f9029d56f06bf4be829521f1cb5bf40ad0ed9b",
+    "range": "1-942",
+    "role": "Existing full read plus sole-main authored/reviewed reservation-effect delta; unreviewed LAB, no alpha/production/Canon adoption.",
+    "status": "full"
+  },
+  {
+    "path": "samples/lean/foundations/MirroreaProofFirstContracts.md",
+    "sha256": "0ea9129985836e905df4f764605c35335331098d87815a02e73e6ee658da143e",
+    "range": "1-373",
+    "role": "Existing full read plus sole-main authored/reviewed reservation-effect delta; unreviewed LAB, no alpha/production/Canon adoption.",
+    "status": "full"
+  },
+  {
+    "path": "plan/proof-first-foundation-correspondence.md",
+    "sha256": "6c79b86dae3698e9c56754a5f76ecf91cd3ddc91ad6f832b590a1bc1cf5f40b6",
+    "range": "1-382",
+    "role": "Existing full read plus sole-main authored/reviewed reservation-effect delta; unreviewed LAB, no alpha/production/Canon adoption.",
+    "status": "full"
+  },
+  {
+    "path": "docs/proof-first/CURRENT_GOAL.md",
+    "sha256": "50e6b3df87a70ff0dbce3e369a2cd70ca163bd9ac06ea02c3b0624d17a8e9ec0",
+    "range": "1-71",
+    "role": "Existing full read plus sole-main authored/reviewed reservation-effect delta; unreviewed LAB, no alpha/production/Canon adoption.",
+    "status": "full"
+  },
+  {
+    "path": "crates/mir-runtime/src/sys5_i3_owner_admission_tests.rs",
+    "sha256": "8cde47413fee78fef5612a21d1d0e3b095ae0643c33c43b052ca59aeddcafaae",
+    "range": "1-3098",
+    "role": "Full source-derived owner admission tests read61dcc9/5d0e7f/438bf2/e0af8e/4212e5: deadlines, real bounded capacity, G1/G2 reservation timing, retained failure, observer fact correlation. Component tests, not live QUIC/durability.",
+    "status": "full"
+  },
+  {
+    "path": "crates/mir-semantics/src/surface_v0_pipeline/private_snapshot.rs",
+    "sha256": "fa0990825166170b50cd161d08ac2bfc3c49a9317e8fd8ebe3e864e97c92a595",
+    "range": "1-1506",
+    "role": "Full private checked-fact DTO and nested tests read c7d3f7/d1d018/56d60f: strict schema, expression metadata agreement, owner budget binding, frontiers/policy stamps. Separate outer trusted admission needed; no post-effect recovery.",
+    "status": "full"
   }
 ]
