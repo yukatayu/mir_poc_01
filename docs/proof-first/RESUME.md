@@ -6,9 +6,10 @@ Updated 2026-09-10 05:01 JST (actual date output a47cfe).
   User objective remains foundations → gated existing implementation → verified
   ordinary-source real-network/hotplug/recovery/private-observation alpha candidate.
   Do not stop at reading, proof fragments, metadata or checkpoint commits.
-- HEAD 6d5a7c74670b604a261d38ebb0cee6a682a3658a, main/origin parity verified
-  821548/a4ef7d; initial cut7feef371bcd8dcd49f4855aeb172e631e70743bc.
-  Current own dirty: READ_LEDGER.json, this RESUME, Report2612 only. No production,
+- HEAD 4dde92c8f0779a007b7adf87b80fe52a87644b0f, own metadata checkpoint
+  committed870806, push47059/a44a35 succeeded; clean72ceac before new reading; initial cut7feef371bcd8dcd49f4855aeb172e631e70743bc.
+  Current own dirty: nine W2 proof/check/companion/plan/status/report/ledger files
+  listed by git status7c4c2d; current totality delta below is uncommitted. No production,
   Canon or handoff changes. Own checkpoint commits normal push authorized;
   --no-gpg-sign; never reset/clean/force. Latest diff check480bd0 passed before
   this RESUME rewrite. No Git/validator job pending.
@@ -28,7 +29,7 @@ Updated 2026-09-10 05:01 JST (actual date output a47cfe).
   reading-only delta. Full source refinement/authority/head/all-mutators/capture
   provenance/IFC/real-network integration remain open; no W2/alpha acceptance.
 - plan/ all302 current files now full/hash-ledgered (9aaceb); specifications and
-  samples/docs corpus remain incomplete. specs/examples00–19 full; next20.
+  samples/docs corpus remain incomplete. specs/examples00–40 full; next41.
   samples/README current hash fully read, truncated middle recoveredfdb1b0/c26c74.
   Ledger tracks hashes/ranges/status; indexes/grep/linked source are not full reads.
   WRK0040–0043 supplied detectors,0044/0045 conditional premises,0046 finite-line
@@ -46,7 +47,7 @@ Updated 2026-09-10 05:01 JST (actual date output a47cfe).
 
 - Read operating manuals already. Main alone launches/monitors/collects.
   Status at least180s apart per job; LAST_CHECK_UTC/READ_LOG_LINES in each workdir.
-  Lastbb2c87: both running/no error/no answer;1cb0be not due. No arbitrary wallclock
+  Lasta8333e: both running/no error/no answer. No arbitrary wallclock
   deadline, cancellation for latency, paid fallback or review-success inference.
 - W1 mirrorea-source-boundary, exec54675, oracle-source-boundary;
   Q314b9ca87817061575b5313db3877cd7fb4fd663209e0a49283d6b311bb5d6e8.
@@ -66,15 +67,37 @@ Updated 2026-09-10 05:01 JST (actual date output a47cfe).
 
 ## Next commands / evidence gates
 
-- Continue mandatory specs/examples17 and direct W2 source/contract-resource
+- Continue mandatory specs/examples45 and direct W2 source/contract-resource
   integration obligations; no new whole-project roadmap while corpus unread.
   Check existing Oracle metadata only when180s due, collect original final answer
   when available, then inspect advice against frozen/local source. Later deltas
   require separately scoped review; cannot inherit pending cut's advice.
-- Check own three-file diff and JSON ledger validity; metadata checkpoint if useful,
+- Check own nine-file diff and JSON ledger validity; metadata checkpoint if useful,
   then continue. Do not rerun baselines or resend consults without a concrete reason.
 - Report2611 retains scoped W1/kernel/actual-source/baseline evidence; report2612
   accumulates W2. Prior tests are not current-cut execution claims. Q01/Q02/Q18,
   signed acceptance, source capture/authority and authenticated recovery stay open.
 - Discord progress113df5 sent~04:26JST. Next roughlyhour or material package close;
   no complete notification until user request actually ends or legitimately stops.
+
+
+## Latest uncommitted totality delta
+
+PureHandleFunctions.Normalization adds172lines: type-indexed logical relation,
+fundamental theorem, finite iteration, closed typed execution, typed closure/env
+computability, typed-environment sufficient-fuel totality, eventual exact closed
+registered call including rejection. No fixed budget/source/auth/IFC guarantee.
+Original PureFunctions unchanged; analogous proof scratch only. Scratch pointer
+PURE_NORMALIZATION_WORKDIR → pure-normalization-7cstqpj9. Kernel c86ddb/base,
+3c1d27/handle controls, f3c8d7/typed env, af22c3/final whole module PASS.
+Failed drafts retained as rejected; no accepted sorryAx. Final source diff
+ e5e909 inspected; current15 hashes/axiom records match. Prior cuts preserved.
+Docs39061 FAILED1ee34a stale progress header; corrected and final33154 PASSfbc5b8.
+Companion/plan/sample/progress/report updated; Documentation/project-status/tasks
+unchanged with reasons in report. Own nine files dirty. No Lean/docs/Git job.
+Full plan corpus302 files read; specs/examples00–44 full ledgered. Much required
+specs/samples/docs corpus remains unread. Do not adopt whole-project roadmap.
+Last Oracle3b9cbe both running/no answer/error; jobs retained, >=180s status rule.
+Next: focused docs diff/JSON validation, checkpoint normal push, then continue W2
+source/contract-resource direct-consumer obligations and mandatory corpus. No final
+at this proof checkpoint; W2/alpha/production acceptance still absent.

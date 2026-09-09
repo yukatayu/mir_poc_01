@@ -21267,5 +21267,208 @@
     "range": "1-186",
     "role": "full historical LAB detached artifact placement; not current runtime observation guarantee or rerun",
     "status": "full"
+  },
+  {
+    "path": "specs/examples/20-current-l2-host-plan-coverage-failure-bundle-failure-artifact-schema.md",
+    "sha256": "554a2a348db71323b71e4272b4f67e7938db5c0765565e523988534b10f03540",
+    "range": "1-256",
+    "role": "full historical LAB detached/helper boundary; smoke differences may be informational, not semantic equality; no rerun",
+    "status": "full"
+  },
+  {
+    "path": "specs/examples/21-current-l2-host-plan-coverage-failure-aggregate-connection.md",
+    "sha256": "059a3dc58c9abad5875a9664d5461b8e0ad949bb679d7354e4cc691a50a73bf5",
+    "range": "1-238",
+    "role": "full historical LAB detached/helper boundary; smoke differences may be informational, not semantic equality; no rerun",
+    "status": "full"
+  },
+  {
+    "path": "specs/examples/22-current-l2-host-plan-coverage-failure-aggregate-histogram-migration.md",
+    "sha256": "859008e08ca2a30bfbcd07cc9be5c5e078df1b3e28ebaebfeea764778ef80b27",
+    "range": "1-313",
+    "role": "full historical LAB detached/helper boundary; smoke differences may be informational, not semantic equality; no rerun",
+    "status": "full"
+  },
+  {
+    "path": "specs/examples/23-current-l2-detached-export-loop-consolidation.md",
+    "sha256": "40b615b5c58bb157b5f1250b747644f696dc204a5dbce365c50ba0ba77aac5bc",
+    "range": "1-261",
+    "role": "full historical LAB detached/helper boundary; smoke differences may be informational, not semantic equality; no rerun",
+    "status": "full"
+  },
+  {
+    "path": "specs/examples/24-current-l2-detached-export-storage-and-aggregate-api.md",
+    "sha256": "e1a80be682f1751c27da2498bbe13d5246f6e8c3525783d43249162716ae415b",
+    "range": "1-275",
+    "role": "full historical LAB detached/helper boundary; smoke differences may be informational, not semantic equality; no rerun",
+    "status": "full"
+  },
+  {
+    "path": "specs/examples/25-current-l2-detached-aggregate-emitter-sketch.md",
+    "sha256": "e741e229c73017fd02e91c4b6c45f186685b0cbcdd73ae1b585807f1ecd4af3f",
+    "range": "1-186",
+    "role": "full historical LAB detached/helper boundary; smoke differences may be informational, not semantic equality; no rerun",
+    "status": "full"
+  },
+  {
+    "path": "specs/examples/26-current-l2-detached-aggregate-compare-helper.md",
+    "sha256": "72d760a01682f468352f6c7392afc7adb72de7240460ed70b1effdcefe3a456e",
+    "range": "1-131",
+    "role": "full historical LAB detached/helper boundary; smoke differences may be informational, not semantic equality; no rerun",
+    "status": "full"
+  },
+  {
+    "path": "specs/examples/27-current-l2-fixture-scaffold-helper.md",
+    "sha256": "f6b06042b8dedf93dca37be080db18527197ddbec78dab1d83ee3b73d03bd8c4",
+    "range": "1-169",
+    "role": "full historical LAB detached/helper boundary; smoke differences may be informational, not semantic equality; no rerun",
+    "status": "full"
+  },
+  {
+    "path": "specs/examples/28-current-l2-detached-fixture-validation-loop-helper.md",
+    "sha256": "ea5192670ffa32ac505b231a06604ec40baef0b6f82be0125f831ae0b1572871",
+    "range": "1-147",
+    "role": "full historical LAB detached/helper boundary; smoke differences may be informational, not semantic equality; no rerun",
+    "status": "full"
+  },
+  {
+    "path": "specs/examples/29-current-l2-first-parser-subset-inventory.md",
+    "sha256": "c765d4eabc4e6b9e203ae18ce2d43c3ef4e4a65a3fbfc8a5e1263d084ac09749",
+    "range": "1-182",
+    "role": "full historical LAB parser/checker inventory or artifact helper; not final source/proof acceptance or rerun",
+    "status": "full"
+  },
+  {
+    "path": "specs/examples/30-current-l2-first-checker-cut-entry-criteria.md",
+    "sha256": "518805b9963632713b3721af2b7833f423bbff44ff943cfd0d12fe489d869f7b",
+    "range": "1-222",
+    "role": "full historical LAB parser/checker inventory or artifact helper; not final source/proof acceptance or rerun",
+    "status": "full"
+  },
+  {
+    "path": "specs/examples/31-current-l2-detached-aggregate-transform-helper.md",
+    "sha256": "98d9778ddfeb1ad44849066b632848f0ed103f0b7c61754d4ae179da82000c96",
+    "range": "1-173",
+    "role": "full historical LAB parser/checker inventory or artifact helper; not final source/proof acceptance or rerun",
+    "status": "full"
+  },
+  {
+    "path": "specs/examples/32-current-l2-static-gate-artifact-loop.md",
+    "sha256": "037575e88fc616f3dbe3dd6fb3dc128b588ab92a10dc3803b551739b3ffecb03",
+    "range": "1-147",
+    "role": "full historical LAB parser/checker inventory or artifact helper; not final source/proof acceptance or rerun",
+    "status": "full"
+  },
+  {
+    "path": "specs/examples/33-current-l2-checked-static-reasons-carrier.md",
+    "sha256": "00653f644c1870dd4885e09b8bc9f7a2af496af1ef3f8a631b2a270fb4fd59bf",
+    "range": "1-177",
+    "role": "full historical LAB reason-carrier and mirror boundary; not general checker proof or rerun",
+    "status": "full"
+  },
+  {
+    "path": "specs/examples/34-current-l2-static-reason-code-entry-criteria.md",
+    "sha256": "b058fe69938625ab552045e1395e564723f93a12d8e6949d9cf0afde4ab75517",
+    "range": "1-184",
+    "role": "full historical LAB reason-carrier and mirror boundary; not general checker proof or rerun",
+    "status": "full"
+  },
+  {
+    "path": "specs/examples/35-current-l2-detached-static-reason-code-mirror.md",
+    "sha256": "43a3b06fc9e5d089bb00ae53c5a9ef175894c37a841ee4a99fd8a3e21319ebc5",
+    "range": "1-135",
+    "role": "full historical LAB reason-carrier and mirror boundary; not general checker proof or rerun",
+    "status": "full"
+  },
+  {
+    "path": "samples/lean/foundations/MirroreaProofFirstPureHandleFunctions.lean",
+    "sha256": "d53a5cccf84b99caac1a1fd34743f12cca25639eb7b8c43beb10323b219ea71a",
+    "range": "1-880",
+    "role": "previous full-read source plus fully authored totality extension",
+    "status": "full"
+  },
+  {
+    "path": "plan/proof-first-foundation-correspondence.md",
+    "sha256": "49bafb21db07e2dea3e10c6f4c14a4ac37dd140ec1164ed7ece75c0c473ca1d8",
+    "range": "1-235",
+    "role": "previous full-read source plus fully authored totality extension",
+    "status": "full"
+  },
+  {
+    "path": "specs/examples/38-current-l2-static-reason-codes-authoring-assist.md",
+    "sha256": "d8194c9d93d8ff462ff10f7777e1c3b67b096b8638f145366d19048965d96b78",
+    "range": "1-204",
+    "role": "full read LAB document or prior-full source with fully authored typed-environment extension; no current source acceptance",
+    "status": "full"
+  },
+  {
+    "path": "specs/examples/36-current-l2-checked-reasons-authoring-assist.md",
+    "sha256": "71e8910fc29257051a3207d8863325f807dd9309fdae7c8124f3619364abfd45",
+    "range": "1-220",
+    "role": "full read LAB document or prior-full source with fully authored typed-environment extension; no current source acceptance",
+    "status": "full"
+  },
+  {
+    "path": "specs/examples/39-current-l2-static-reason-code-readiness-scan.md",
+    "sha256": "300c15ef9145f1da77732c38cdb18361d3ccf0744d87a397cba6f68aee9d7b2d",
+    "range": "1-208",
+    "role": "full read LAB document or prior-full source with fully authored typed-environment extension; no current source acceptance",
+    "status": "full"
+  },
+  {
+    "path": "specs/examples/37-current-l2-detached-bundle-transform-helper.md",
+    "sha256": "652746a07126260b2f381f7f44d2c1ea8bdfcabc5a54107acb13a65376f92c84",
+    "range": "1-177",
+    "role": "full read LAB document or prior-full source with fully authored typed-environment extension; no current source acceptance",
+    "status": "full"
+  },
+  {
+    "path": "specs/examples/40-current-l2-first-typed-static-reason-family-selection.md",
+    "sha256": "f77a9becc23b1be953ad9247805411748e4d49bbeed729cf5be83921ee1028c9",
+    "range": "1-212",
+    "role": "full read LAB document or prior-full source with fully authored typed-environment extension; no current source acceptance",
+    "status": "full"
+  },
+  {
+    "path": "samples/lean/foundations/MirroreaProofFirstPureHandleFunctions.lean",
+    "sha256": "e4e1d8255fa8fb0885c5c74e87875804f0b87663b50fd026c542710757a90d74",
+    "range": "1-917",
+    "role": "full read LAB document or prior-full source with fully authored typed-environment extension; no current source acceptance",
+    "status": "full"
+  },
+  {
+    "path": "plan/proof-first-foundation-correspondence.md",
+    "sha256": "721da82b554a8319f0574df615e0b2b758c0a9b1ef7c38598e3317422f09852f",
+    "range": "1-245",
+    "role": "full read LAB document or prior-full source with fully authored typed-environment extension; no current source acceptance",
+    "status": "full"
+  },
+  {
+    "path": "specs/examples/41-current-l2-first-typed-static-reason-family-carrier-cut.md",
+    "sha256": "9ee99c2fe0f0925aa5799b732f528563271d03b9d12d78966ec12ed99c51cc2a",
+    "range": "1-158",
+    "role": "LAB historical example full read in tool result 172dcf; not current acceptance",
+    "status": "full"
+  },
+  {
+    "path": "specs/examples/42-current-l2-second-typed-static-reason-family-actualization.md",
+    "sha256": "d65bdc2c9e9d88d99e93c2370dd27ed7d1b83af9244a7530559647ac9fb5ea72",
+    "range": "1-171",
+    "role": "LAB historical example full read in tool result 172dcf; not current acceptance",
+    "status": "full"
+  },
+  {
+    "path": "specs/examples/43-current-l2-complete-stable-static-reason-tranche.md",
+    "sha256": "9dc7cb1a672ca2d17f789918a8025d19c596f5d40e5611ac67b2b85bcf83ba55",
+    "range": "1-118",
+    "role": "LAB historical example full read in tool result 172dcf; not current acceptance",
+    "status": "full"
+  },
+  {
+    "path": "specs/examples/44-current-l2-checked-reasons-coexistence-and-shrink-policy.md",
+    "sha256": "f5dacbcc5f1c57bddf69d5326241656a9cf161d7ab0f7928096548aca9547f2a",
+    "range": "1-156",
+    "role": "LAB historical example full read in tool result 172dcf; not current acceptance",
+    "status": "full"
   }
 ]

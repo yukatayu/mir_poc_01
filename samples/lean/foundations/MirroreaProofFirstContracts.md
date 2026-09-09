@@ -204,3 +204,33 @@ fixed fuel4 completes at count0 and fails at count3. This distinguishes referenc
 selection from budget-dependent completion. Neither semantic value equality nor
 existence of sufficient fuel proves fixed-budget success, timing, resource
 noninterference or a public failure policy.
+
+
+The later unreviewed Normalization namespace supplies a general totality result
+for closed, typed expressions of the pure higher-order handle calculus, including
+arbitrary finite natural iteration. A type-indexed logical relation is proved
+by induction on the independent typing derivation; it is not assumed for every
+expression. The fundamental/finite-iteration construction uses propext only.
+Existing execution completeness yields one result and a sufficient minimum fuel,
+with propext/Classical.choice/Quot.sound. This is big-step termination for this
+calculus, not strong normalization of an unspecified reduction relation.
+For a checked closed handle expression, a finite selection derivation now exists
+without a separate termination premise. At all sufficiently large fuel values,
+the registered entry equals the catalog/current-authority/contract call on that
+selected handle, including rejection. This creates no authority or successful
+call guarantee. An unbound variable never returns; closed typing cannot be
+omitted. Existing fixed-budget and secret-count counterexamples remain valid.
+No runtime cost bound, fixed-budget completion, timing/resource noninterference,
+source refinement, effectful/general recursion or module lifecycle is proved.
+Original PureFunctions is unchanged; its analogous scratch proof is supporting
+research only. All these additions are outside the pending Oracle packet.
+
+
+The same extension also proves every independently HasType-typed value computable
+using the existing mutual value/environment recursor. EnvTyped then entails the
+logical environment relation, so any Typed expression in an EnvTyped environment
+has an actual result of the declared type at every sufficiently large fuel.
+This discharges the semantic environment premise from structural typing; it does
+not add an external closure decoder, environment-admission checker, authority,
+serialization rule or information-flow policy. The selected registered entry
+remains closed. These general proofs have the same standard axiom boundary.

@@ -743,3 +743,175 @@ example : invokeRegistered 4 world registry catalog CurrentUse.Controls.request
 #print axioms quiet_result_unique
 #print axioms quiet_typed
 end MirroreaProofFirst.PureHandleFunctions.IterationBudget
+
+-- Later unreviewed totality extension; no source, fixed-budget or authority claim.
+namespace MirroreaProofFirst.PureHandleFunctions.Normalization
+variable {size : Nat}
+-- Logical relation over the type. This defines evidence of computation, not an
+-- axiom that every typeable expression computes.
+def Computable : Ty → Value size → Prop
+ | .handle, v => ∃ h, v = .handle h
+ | .int, v => ∃ z, v = .integer z
+ | .nat, v => ∃ n, v = .natural n
+ | .arrow a b, v => ∃ body captured,
+   v = .closure a body captured ∧
+   ∀ arg, Computable a arg → ∃ out,
+     Executes (.expression (arg::captured) body) out ∧ Computable b out
+
+def GoodEnv (G : List Ty) (env : List (Value size)) : Prop :=
+ ∀ (i : Nat) (t : Ty), G[i]? = some t → ∃ v, env[i]? = some v ∧ Computable t v
+
+theorem good_nil : GoodEnv (size := size) [] [] := by
+ intro i t h
+ simp at h
+
+theorem good_cons {G : List Ty} {env : List (Value size)} {t : Ty} {v : Value size} (head : Computable t v) (tail : GoodEnv G env) :
+ GoodEnv (t::G) (v::env) := by
+ intro i ty lookup
+ cases i with
+ | zero => simp at lookup; subst ty; exact ⟨v,rfl,head⟩
+ | succ i => exact tail i ty (by simpa using lookup)
+
+theorem iteration_computable {t : Ty} {env : List (Value size)} {body : Expr size}
+ (bodyTotal : ∀ v, Computable t v → ∃ out,
+   Executes (.expression (v::env) body) out ∧ Computable t out)
+ (count : Nat) : ∀ v, Computable t v → ∃ out,
+   Executes (.iteration count env body v) out ∧ Computable t out := by
+ induction count with
+ | zero => intro v hv; exact ⟨v,.zero,hv⟩
+ | succ n ih =>
+   intro v hv
+   obtain ⟨next,step,hn⟩ := bodyTotal v hv
+   obtain ⟨out,rest,ho⟩ := ih next hn
+   exact ⟨out,.step step rest,ho⟩
+
+theorem fundamental {G : List Ty} {e : Expr size} {t : Ty} (typed : Typed G e t) :
+ ∀ env, GoodEnv G env → ∃ out,
+   Executes (.expression env e) out ∧ Computable t out := by
+ induction typed with
+ | handle => intro env he; exact ⟨_,.handle,_,rfl⟩
+ | integer => intro env he; exact ⟨_,.integer,_,rfl⟩
+ | natural => intro env he; exact ⟨_,.natural,_,rfl⟩
+ | var lookup =>
+   intro env he
+   obtain ⟨v,hv,cv⟩ := he _ _ lookup
+   exact ⟨v,.lookupValue hv,cv⟩
+ | add ha hb ia ib =>
+   intro env he
+   obtain ⟨va,ea,za,rfl⟩ := ia env he
+   obtain ⟨vb,eb,zb,rfl⟩ := ib env he
+   exact ⟨_,.addition ea eb,_,rfl⟩
+ | mul ha hb ia ib =>
+   intro env he
+   obtain ⟨va,ea,za,rfl⟩ := ia env he
+   obtain ⟨vb,eb,zb,rfl⟩ := ib env he
+   exact ⟨_,.multiply ea eb,_,rfl⟩
+ | @lambda G a b body ht ih =>
+   intro env he
+   refine ⟨.closure a body env,.lambda,body,env,rfl,?_⟩
+   intro arg ca
+   exact ih (arg::env) (good_cons ca he)
+ | app hf ha fi ai =>
+   intro env he
+   obtain ⟨vf,ef,body,captured,rfl,total⟩ := fi env he
+   obtain ⟨arg,ea,ca⟩ := ai env he
+   obtain ⟨out,eb,cb⟩ := total arg ca
+   exact ⟨out,.application ef ea eb,cb⟩
+ | iterate hc hi hb ci ii bi =>
+   intro env he
+   obtain ⟨vc,ec,count,rfl⟩ := ci env he
+   obtain ⟨initial,ei,cv⟩ := ii env he
+   have bt := fun v hv => bi (v::env) (good_cons hv he)
+   obtain ⟨out,loop,co⟩ := iteration_computable bt count initial cv
+   exact ⟨out,.iteration ec ei loop,co⟩
+
+theorem closed_executes {e : Expr size} {t : Ty} (typed : Typed [] e t) :
+ ∃ out, Executes (.expression [] e) out ∧ Computable t out :=
+ fundamental typed [] good_nil
+
+theorem closed_evaluator_total {e : Expr size} {t : Ty} (typed : Typed [] e t) :
+ ∃ out minimum, ∀ fuel, minimum ≤ fuel → evaluate fuel [] e = some out := by
+ obtain ⟨out,executes,_⟩ := closed_executes typed
+ obtain ⟨minimum,enough⟩ := execution_complete executes
+ exact ⟨out,minimum,enough⟩
+
+#print axioms fundamental
+#print axioms iteration_computable
+#print axioms closed_executes
+#print axioms closed_evaluator_total
+
+-- Type admission alone supplies a finite pure handle-selection derivation.
+-- Currentness, invocation authority and contract acceptance remain separate.
+theorem checked_handle_total {e : Expr size} (checked : infer [] e = some .handle) :
+ ∃ h minimum, Executes (.expression [] e) (.handle h) ∧
+   ∀ fuel, minimum ≤ fuel → evaluate fuel [] e = some (.handle h) := by
+ obtain ⟨out,run,h,rfl⟩ := closed_executes ((infer_exact _ _ _).mp checked)
+ obtain ⟨minimum,enough⟩ := execution_complete run
+ exact ⟨h,minimum,run,enough⟩
+
+theorem checked_call_eventually_exact {e : Expr size}
+ (checked : infer [] e = some .handle)
+ (s : CurrentUse.World size) (registry : ModuleContractBoundary.Registry size)
+ (catalog : ModuleContractBoundary.Catalog) (caller : CurrentUse.UseRequest size)
+ (args : List Int) (auth : CurrentUse.Evidence) (proof : ModuleContractBoundary.CallProof size) :
+ ∃ h minimum, Executes (.expression [] e) (.handle h) ∧
+   ∀ fuel, minimum ≤ fuel →
+     invokeClosedRegistered fuel s registry catalog caller args auth proof e =
+       ModuleContractBoundary.catalogCall s registry catalog
+         (HandleValues.request caller h) args auth proof := by
+ obtain ⟨h,minimum,run,enough⟩ := checked_handle_total checked
+ refine ⟨h,minimum,run,?_⟩
+ intro fuel hf
+ simp [invokeClosedRegistered,checked,invokeRegistered,enough fuel hf]
+
+-- Dropping closed typing would assert totality even for a missing variable.
+theorem unbound_never_returns (fuel : Nat) :
+ evaluate fuel [] (.var 0 : Expr size) = none := by
+ cases fuel <;> rfl
+
+example : infer [] (.app (.integer 1) (.integer 2) : Expr size) = none := by rfl
+example (h : HandleValues.Interface size) :
+ ∃ out minimum, ∀ fuel, minimum ≤ fuel → evaluate fuel [] (carried h) = some out :=
+ closed_evaluator_total (carried_typed h)
+
+#print axioms checked_handle_total
+#print axioms checked_call_eventually_exact
+#print axioms unbound_never_returns
+end MirroreaProofFirst.PureHandleFunctions.Normalization
+
+-- Typed closure environments discharge the logical-relation premise.
+namespace MirroreaProofFirst.PureHandleFunctions.Normalization
+variable {size : Nat}
+theorem typed_value_computable {v : Value size} {t : Ty} (typed : HasType v t) :
+ Computable t v := by
+ induction typed using HasType.rec (motive_2 := fun env G _ => GoodEnv G env) with
+ | handle => exact ⟨_,rfl⟩
+ | integer => exact ⟨_,rfl⟩
+ | natural => exact ⟨_,rfl⟩
+ | @closure a b body env G he hb ih =>
+   refine ⟨body,env,rfl,?_⟩
+   intro arg ca
+   exact fundamental hb (arg::env) (good_cons ca ih)
+ | nil => exact good_nil
+ | cons hv he cv ce => exact good_cons cv ce
+
+theorem typed_environment_good {env : List (Value size)} {G : List Ty}
+ (typed : EnvTyped env G) : GoodEnv G env := by
+ induction env generalizing G with
+ | nil => cases typed; exact good_nil
+ | cons v env ih =>
+   cases typed with
+   | cons hv he => exact good_cons (typed_value_computable hv) (ih he)
+
+theorem typed_environment_total {env : List (Value size)} {G : List Ty}
+ {e : Expr size} {t : Ty} (he : EnvTyped env G) (ht : Typed G e t) :
+ ∃ out minimum, HasType out t ∧
+   ∀ fuel, minimum ≤ fuel → evaluate fuel env e = some out := by
+ obtain ⟨out,executes,_⟩ := fundamental ht env (typed_environment_good he)
+ obtain ⟨minimum,enough⟩ := execution_complete executes
+ refine ⟨out,minimum,?_,enough⟩
+ exact (evaluator_typed minimum).1 he ht (enough minimum (Nat.le_refl _))
+#print axioms typed_value_computable
+#print axioms typed_environment_good
+#print axioms typed_environment_total
+end MirroreaProofFirst.PureHandleFunctions.Normalization

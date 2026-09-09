@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-09-10 04:23 JST
+最終更新: 2026-09-10 05:10 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -304,3 +304,5 @@ The authorized roadmap is paused, not blocked, stale or closed.
 - 2026-09-10 03:59 JST: W2参照モデルのhandle評価を台帳付き入口へ接続し、現在性/認可とdescriptor結合をLean検査。閉じた式の型検査必須入口と有限実行からの相対完全性を追加、型検査迂回・台帳迂回・stamp再発行の3変異を拒否。実source/認証head/αは未達、未review。
 
 - 2026-09-10 04:23 JST: W2高階評価の参照保存を独立実行規則から一般Leanで検査し、台帳付き呼出しへ結合。closure本体・捕捉環境の除外で性質を失う反例を保持。未review、source認証/情報流/α未達。
+
+- 2026-09-10 05:10 JST: W2純粋高階handle計算の閉じた型付き式について、有限実行の存在と十分な燃料での評価を一般Lean検査。台帳付き呼出しの結果との対応へ結合。固定予算・情報流・認可・source接続は別義務、未review/α未達。

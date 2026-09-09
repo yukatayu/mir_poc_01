@@ -758,3 +758,76 @@ No independent review, W2 acceptance, alpha claim or task stop follows.
   progress.md 更新不要; tasks.md 更新不要; samples_progress.md 更新不要:
   same active W2 goal, readiness, commands, sample taxonomy and unresolved gates.
   READ_LEDGER/RESUME updated only. Not milestone/user-request close.
+
+### 2026-09-10 05:10 JST — closed typed pure-handle totality candidate
+
+Same W2 goal/direct consumer and trace IDs. Candidate A constructs a logical
+relation from typing, with induction over finite Nat iteration; smallest B retains
+only the earlier finite-derivation-relative completeness and requires a separate
+termination premise at each consumer. A now has kernel evidence and remains an
+unreviewed LAB candidate. No production gate is closed.
+
+Scratch base-calculus check c86ddb and handle-calculus check8d77e5 passed. Final
+handle/checker/registered-call scope3c1d27 passed, followed by current whole
+PureHandleFunctions mirror675bdb PASS. First drafts8b11fd/f0585a failed on explicit
+Nat/size binder inference; a403c8 had generic-decide/typed-input control errors.
+Those failed commands are not proofs; inferred sorryAx was never accepted.
+CHECK/HANDLE_CHECK/RED records remain under pure-normalization-7cstqpj9.
+W2_EXTENSION_CHECK retains the earlier source row and current hash/axiom output.
+Original PureFunctions and frozen Oracle packets are unchanged.
+
+
+The later unreviewed Normalization namespace supplies a general totality result
+for closed, typed expressions of the pure higher-order handle calculus, including
+arbitrary finite natural iteration. A type-indexed logical relation is proved
+by induction on the independent typing derivation; it is not assumed for every
+expression. The fundamental/finite-iteration construction uses propext only.
+Existing execution completeness yields one result and a sufficient minimum fuel,
+with propext/Classical.choice/Quot.sound. This is big-step termination for this
+calculus, not strong normalization of an unspecified reduction relation.
+For a checked closed handle expression, a finite selection derivation now exists
+without a separate termination premise. At all sufficiently large fuel values,
+the registered entry equals the catalog/current-authority/contract call on that
+selected handle, including rejection. This creates no authority or successful
+call guarantee. An unbound variable never returns; closed typing cannot be
+omitted. Existing fixed-budget and secret-count counterexamples remain valid.
+No runtime cost bound, fixed-budget completion, timing/resource noninterference,
+source refinement, effectful/general recursion or module lifecycle is proved.
+Original PureFunctions is unchanged; its analogous scratch proof is supporting
+research only. All these additions are outside the pending Oracle packet.
+
+
+Only the existing PureHandleFunctions source was extended; companion, plan memory,
+sample evidence row, progress log, current check record and continuation/read ledger
+are synchronized. Documentation.md/docs/project-status.md 更新不要: existing ten
+unreviewed-candidate summary remains accurate. tasks.md 更新不要: same goal,
+blockers/order/reopen triggers and no milestone close; no snapshot rewrite needed.
+No new taxonomy or command, so samples/README and scripts/README 更新不要.
+No Rust/network/restore rerun: proof-only extension and no production change.
+Focused diff/current-hash and docs validation remain to be run after this update.
+Oracle a8333e existing2jobs running/no answer/error. No review/acceptance inferred.
+No sub-agents used. Prior metadata checkpoint4dde92c8 was pushed a44a35; this
+new proof delta is not yet committed/pushed. Continue after validation/checkpoint.
+
+Typed-environment refinement: f3c8d7 scratch and af22c3 whole-source mirror pass.
+Draft9077e6 used unsupported mutual-inductive induction and was rejected; the
+corrected proof uses the explicit HasType recursor and list induction.
+
+The same extension also proves every independently HasType-typed value computable
+using the existing mutual value/environment recursor. EnvTyped then entails the
+logical environment relation, so any Typed expression in an EnvTyped environment
+has an actual result of the declared type at every sufficiently large fuel.
+This discharges the semantic environment premise from structural typing; it does
+not add an external closure decoder, environment-admission checker, authority,
+serialization rule or information-flow policy. The selected registered entry
+remains closed. These general proofs have the same standard axiom boundary.
+
+Docs39061 predates this last refinement and remains running; final docs validation
+must cover the updated documents. No new production/source/milestone acceptance.
+
+Docs39061 exited1 (1ee34a): progress last-updated header remained04:23 while
+its new log was05:10. Header corrected72bd26; sample header refreshed from actual
+clock. This was a documentation freshness failure, not a theorem failure.
+Final documentation check follows on the corrected cut.
+
+Final totality-cut validation: docs rerun33154 passed (fbc5b8) after the retained stale-header failure; full172-line proof delta reviewed (e5e909), current15 source hashes and successful axiom records matched. No new Rust/network/restore execution or Oracle acceptance is claimed.
