@@ -21939,5 +21939,124 @@
     "range": "1-1506",
     "role": "Full private checked-fact DTO and nested tests read c7d3f7/d1d018/56d60f: strict schema, expression metadata agreement, owner budget binding, frontiers/policy stamps. Separate outer trusted admission needed; no post-effect recovery.",
     "status": "full"
+  },
+  {
+    "path": "crates/mir-semantics/src/surface_v0_pipeline/private_snapshot/read_only_provider_effect.rs",
+    "sha256": "0af5c826e7b7b5664a3ca4646a489a738652acce8bb65d1f020108071cebc201",
+    "range": "1-64",
+    "role": "Full private provider Core DTO read4e45a7; retained source binding, label and allowance; checked reconstruction not effect-use authority.",
+    "status": "full"
+  },
+  {
+    "path": "specs/examples/85-current-l2-stage3-admit-slot-first-tranche-actualization.md",
+    "sha256": "4fb5916337056683819d7d933f4072185ac438bad99a87cc3653754543240529",
+    "range": "1-132",
+    "role": "Full historical LAB parser-spike comparison/actualization text read82c35d/fa085a; old current wording is history, not current authority or adopted grammar.",
+    "status": "full"
+  },
+  {
+    "path": "specs/examples/86-current-l2-stage3-admit-slot-malformed-source-comparison.md",
+    "sha256": "a07dbc64b898b5b3e6553002396ff6300a96efb329cf36e44543d869180d72e7",
+    "range": "1-172",
+    "role": "Full historical LAB parser-spike comparison/actualization text read82c35d/fa085a; old current wording is history, not current authority or adopted grammar.",
+    "status": "full"
+  },
+  {
+    "path": "specs/examples/87-current-l2-stage3-admit-slot-malformed-source-first-tranche-actualization.md",
+    "sha256": "6b9756156368ed6feebcdf424c1c77768a5399e3d0f51e8a26c4abf7b877fe5f",
+    "range": "1-67",
+    "role": "Full historical LAB parser-spike comparison/actualization text read82c35d/fa085a; old current wording is history, not current authority or adopted grammar.",
+    "status": "full"
+  },
+  {
+    "path": "specs/examples/88-current-l2-stage3-admit-next-step-sequencing.md",
+    "sha256": "000344b69bb8358dfda33e88a0231d67a91213c4fa8b065c21c3847bd4e36ef8",
+    "range": "1-146",
+    "role": "Full historical LAB parser-spike comparison/actualization text read82c35d/fa085a; old current wording is history, not current authority or adopted grammar.",
+    "status": "full"
+  },
+  {
+    "path": "specs/examples/89-current-l2-stage3-admit-node-handoff-comparison.md",
+    "sha256": "2505e319efa30744de46d52b9ef1da9b7b1e453f37de14612d290619c8cc0765",
+    "range": "1-141",
+    "role": "Full historical LAB parser-spike comparison/actualization text read82c35d/fa085a; old current wording is history, not current authority or adopted grammar.",
+    "status": "full"
+  },
+  {
+    "path": "specs/examples/90-current-l2-stage3-request-local-clause-spillover-comparison.md",
+    "sha256": "937fb44bf49442a33547092c82ea52d92e71edf28e40680384038bbbf626b1ec",
+    "range": "1-137",
+    "role": "Full historical LAB parser-spike comparison/actualization text read82c35d/fa085a; old current wording is history, not current authority or adopted grammar.",
+    "status": "full"
+  },
+  {
+    "path": "samples/lean/foundations/MirroreaProofFirstModuleContractBoundary.lean",
+    "sha256": "7014eacbd94edc09a14f4349340b84249d839f700ab3ddf98e0c50aaf10aa72f",
+    "range": "1-1095",
+    "role": "LAB authored and self-reviewed reference proof; appended allocation observation",
+    "status": "full"
+  },
+  {
+    "path": "specs/examples/91-current-l2-stage3-request-local-clause-spillover-first-tranche-actualization.md",
+    "sha256": "9256ba08e6a96b17355805564bf9076f5113a28a59bd895d0a674bec5c2951b0",
+    "range": "1-80",
+    "role": "LAB historical parser/helper comparison, no current authority; full read89705c",
+    "status": "full"
+  },
+  {
+    "path": "specs/examples/92-current-l2-stage3-predicate-fragment-reopen-sequencing.md",
+    "sha256": "3c17131ad0bb9b8f2f2e921f51f4d5f0f1ac2dd2a370f027eed0ba94eb61f7f6",
+    "range": "1-196",
+    "role": "LAB historical parser/helper comparison, no current authority; full read89705c",
+    "status": "full"
+  },
+  {
+    "path": "specs/examples/93-current-l2-stage3-predicate-fragment-boundary-comparison.md",
+    "sha256": "d8b1d01b6ea4c439c8bed8ddda83b973d298af8accfa64222ceb620b97a513ae",
+    "range": "1-189",
+    "role": "LAB historical parser/helper comparison, no current authority; full read89705c",
+    "status": "full"
+  },
+  {
+    "path": "specs/examples/94-current-l2-stage3-predicate-fragment-first-tranche-actualization.md",
+    "sha256": "27b9975b098a8d2d3ced683e4f8b18a0f8554ac1b2a0000871d925fdf44ac15d",
+    "range": "1-99",
+    "role": "LAB historical fragment/attachment comparison, not current plan; full readf61469",
+    "status": "full"
+  },
+  {
+    "path": "specs/examples/95-current-l2-stage3-fragment-vs-attachment-next-step-sequencing.md",
+    "sha256": "682f3d653beebfcd5edd792c265e5f382aee827ab977bf603b69b5102bde818c",
+    "range": "1-171",
+    "role": "LAB historical fragment/attachment comparison, not current plan; full readf61469",
+    "status": "full"
+  },
+  {
+    "path": "specs/examples/96-current-l2-stage3-multiline-attachment-shape-comparison.md",
+    "sha256": "43438c8236db7e1e4fffcf5574ca6fafee15ac788dc12b688d383423f9575eca",
+    "range": "1-213",
+    "role": "LAB historical fragment/attachment comparison, not current plan; full readf61469",
+    "status": "full"
+  },
+  {
+    "path": "specs/examples/97-current-l2-stage3-multiline-attachment-first-tranche-actualization.md",
+    "sha256": "32fc4c525370313b25afccbfc55570b6efdf2f8574fa107d1d798834b2f06129",
+    "range": "1-117",
+    "role": "LAB historical helper attachment/suite comparison, not current authority; full read0f8cc2",
+    "status": "full"
+  },
+  {
+    "path": "specs/examples/98-current-l2-stage3-suite-vs-malformed-sequencing.md",
+    "sha256": "8b87d0238fb9c3108e729f3c9e29a744ef8832c15de5b2532727c9d5a6e16313",
+    "range": "1-145",
+    "role": "LAB historical helper attachment/suite comparison, not current authority; full read0f8cc2",
+    "status": "full"
+  },
+  {
+    "path": "specs/examples/99-current-l2-stage3-request-clause-suite-structural-floor.md",
+    "sha256": "64a0e200f6ed83019e9487e52a3b4375e090b1b45b6338b983f942e7fed2c7af",
+    "range": "1-132",
+    "role": "LAB historical helper attachment/suite comparison, not current authority; full read0f8cc2",
+    "status": "full"
   }
 ]

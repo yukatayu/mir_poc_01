@@ -380,3 +380,48 @@ or durable-recovery proofs. The ordinary process start initializes pending,
 tombstone and effect-occurrence maps empty: its image bootstrap must not be counted
 as same-instance post-effect recovery. Runtime-only retry2 and ledger1 tests pass
 at this cut; no new actual QUIC or persistence test was executed in this increment.
+
+Allocation observation is a further UNREVIEWED reference consequence. Shared
+checked allocation exposes a private prior allocation through the next public
+handle ID (0 versus 1), and through success versus failure at capacity one even
+when handle payloads are erased. Two independent resource/reservation stores
+admit general low-state and complete low-outcome-trace projection proofs for
+arbitrary finite interleavings, conditional on equal initial low stores and equal
+low input subsequences. Actual outcomes include allocation failure and identifiers;
+this is not merely equality of erased returned values. Current low-handle lookup
+is likewise independent of the high store. Resource WF is preserved in both stores.
+
+The conditional candidate does not supply source classification or authority.
+Scoped addresses separate mathematical address domains, but a concrete control
+executes the SAME unscoped request once in each pool. Caller-chosen classification
+therefore cannot establish global request uniqueness or authorize a namespace.
+Binding source scope, request identity and grants remains an explicit consumer
+obligation; this candidate is not an adopted allocator or Q18 solution. Merely
+hiding IDs is an inadequate alternative because the capacity failure still leaks.
+An opaque-ID design with independently reserved low capacity is a possible smallest
+alternative, not yet established or selected.
+
+The two-run theorem assumes equal low inputs including current worlds, grants,
+arguments and resource limits. Source secret-dependent presence, globally changed
+authority generations, physical resource interference, timing, scheduling cost,
+divergence and active-debug authorization are not proved. The reference low trace
+omits high actions; an actual observer must justify that release policy separately.
+Three final mutations share the low state, reveal high action presence, or erase
+lookup scope: each breaks a general proof and a concrete control. Final scratch
+and fresh fifteen-module actual-source mirror pass Lean --trust=0; standard axioms
+are propext, Quot.sound and inherited Classical.choice, with no accepted sorry or
+new Mir axiom. No production increment or alpha/readiness claim follows.
+
+A follow-on finite F0.3 recovery control (95db2f, copied original model, no source
+edits) separates three cases. A newly constructed same-instance Kernel rejects a
+checkpoint as UntrustedCheckpoint because trusted snapshots/head have no restart
+loader. Injecting the latest retained trusted state restores stock7 and rejects
+duplicate serve; a subsequent consume after revocation is ReleaseDenied while
+stock remains7. Injecting BOTH the old data and old trusted head instead admits
+the old pending request and executes it again (stock10→7). This is the stated
+trusted-head assumption's counterexample, not an exploit against an honest retained
+head, a physical crash test, or proof that fresh import is same-instance recovery.
+A hash chain alone does not establish that its supplied head is current. No
+current authority is derived from a historical successful effect. Reproduction
+script, exact output and copied Python-source hashes are retained in
+W2_EXTENSION_CHECK.recovery_anchor_controls; work pointer RECOVERY_ANCHOR_CONTROLS.

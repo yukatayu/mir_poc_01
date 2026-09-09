@@ -69,3 +69,9 @@ and a response-lost allocation, plus the clear-and-retry counterexample. This is
 not a physical crash-recovery proof, fair progress guarantee, public outcome schema
 or Q18 authority policy. The actual runtime's preflight and all downstream mutators
 still need a refinement argument; Oracle review excludes this later extension.
+
+The same resource consumer now includes secret allocation interference: close the
+conditional reference observation property and expose ID/capacity leaks, while
+keeping source/auth-bound namespaces and physical pools as unmet obligations.
+The duplicate cross-pool unscoped request is a decisive counterexample against
+adopting caller-selected partitions as an authority or global-uniqueness mechanism.

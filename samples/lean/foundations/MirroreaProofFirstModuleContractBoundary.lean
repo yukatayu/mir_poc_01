@@ -940,3 +940,156 @@ end Controls
 #print axioms useful_success
 #print axioms response_loss_preserves_effect
 end MirroreaProofFirst.ModuleContractBoundary.CurrentAllocation.Reservation
+
+-- Unreviewed resource-isolation consequence; source classification and physical pools open.
+
+namespace MirroreaProofFirst.ModuleContractBoundary.CurrentAllocation.Reservation.Observation
+open ResourceBoundary
+-- Counterexamples use real checked allocation, not an expected-output fixture.
+def ids : Outcome → Option (List Nat)
+ | .acknowledged hs => some (hs.map Handle.id)
+ | _ => none
+namespace Controls
+open Once.Controls Reservation.Controls
+def publicAlone := attempt other initial false false
+def afterPrivate := attempt other lost.store false false
+example : ids publicAlone.outcome = some [0] := by decide
+example : ids afterPrivate.outcome = some [1] := by decide
+-- Even erasing all handle fields cannot hide allocation failure at shared capacity.
+def publicTight : Once.Invocation 4 := {other with limits := ⟨1,1⟩}
+example : ids (attempt publicTight initial false false).outcome = some [0] := by decide
+example : (attempt publicTight lost.store false false).outcome = .retainedNoEffect := by decide
+end Controls
+
+-- Candidate isolation boundary: disjoint resource namespaces and reserved pools.
+-- The classification is an input obligation, not a public source/Event syntax.
+structure PairStore where
+ low : Store
+ high : Store
+inductive Action (n : Nat) where
+ | low (input : Input n)
+ | high (input : Input n)
+
+def advance (s : PairStore) : Action n → PairStore
+ | .low a => ⟨(attempt a.invocation s.low a.stopBefore a.loseResponse).store,s.high⟩
+ | .high a => ⟨s.low,(attempt a.invocation s.high a.stopBefore a.loseResponse).store⟩
+
+def execute : PairStore → List (Action n) → PairStore
+ | s,[] => s
+ | s,a::rest => execute (advance s a) rest
+
+def lowInputs : List (Action n) → List (Input n)
+ | [] => []
+ | .low a::rest => a :: lowInputs rest
+ | .high _::rest => lowInputs rest
+
+theorem low_projection (s : PairStore) (actions : List (Action n)) :
+ (execute s actions).low = schedule s.low (lowInputs actions) := by
+ induction actions generalizing s with
+ | nil => rfl
+ | cons a rest ih =>
+   cases a with
+   | low a => simpa only [execute,advance,lowInputs,schedule] using ih (advance s (.low a))
+   | high a => simpa only [execute,advance,lowInputs] using ih (advance s (.high a))
+
+def lowTrace : PairStore → List (Action n) → List Outcome
+ | _,[] => []
+ | s,.low a::rest =>
+   (attempt a.invocation s.low a.stopBefore a.loseResponse).outcome ::
+   lowTrace (advance s (.low a)) rest
+ | s,.high a::rest => lowTrace (advance s (.high a)) rest
+
+def isolatedTrace : Store → List (Input n) → List Outcome
+ | _,[] => []
+ | s,a::rest =>
+   let result := attempt a.invocation s a.stopBefore a.loseResponse
+   result.outcome :: isolatedTrace result.store rest
+
+theorem trace_projection (s : PairStore) (actions : List (Action n)) :
+ lowTrace s actions = isolatedTrace s.low (lowInputs actions) := by
+ induction actions generalizing s with
+ | nil => rfl
+ | cons a rest ih =>
+   cases a with
+   | low a => simp only [lowTrace,isolatedTrace,lowInputs,ih,advance]
+   | high a => simpa only [lowTrace,lowInputs,advance] using ih (advance s (.high a))
+
+theorem two_run_low_trace (s t : PairStore) (left right : List (Action n))
+ (sameInitial : s.low = t.low) (sameLowInputs : lowInputs left = lowInputs right) :
+ lowTrace s left = lowTrace t right := by
+ rw [trace_projection,trace_projection,sameInitial,sameLowInputs]
+
+theorem two_run_low_state (s t : PairStore) (left right : List (Action n))
+ (sameInitial : s.low = t.low) (sameLowInputs : lowInputs left = lowInputs right) :
+ (execute s left).low = (execute t right).low := by
+ rw [low_projection,low_projection,sameInitial,sameLowInputs]
+
+-- This also covers a future low allocation's success/failure, IDs and bookkeeping.
+theorem next_low_result (s t : PairStore) (left right : List (Action n))
+ (sameInitial : s.low = t.low) (sameLowInputs : lowInputs left = lowInputs right)
+ (next : Input n) :
+ attempt next.invocation (execute s left).low next.stopBefore next.loseResponse =
+ attempt next.invocation (execute t right).low next.stopBefore next.loseResponse := by
+ rw [two_run_low_state s t left right sameInitial sameLowInputs]
+
+theorem pair_wf (s : PairStore) (actions : List (Action n))
+ (low : WF s.low.resources) (high : WF s.high.resources) :
+ WF (execute s actions).low.resources ∧ WF (execute s actions).high.resources := by
+ induction actions generalizing s with
+ | nil => exact ⟨low,high⟩
+ | cons a rest ih =>
+   cases a with
+   | low a => exact ih _ (resource_preserved _ _ _ _ low) high
+   | high a => exact ih _ low (resource_preserved _ _ _ _ high)
+
+-- Spatial independence requires the namespace as part of the address domain.
+-- Two untagged independent Nat allocators would both return block/id zero.
+structure ScopedHandle where
+ high : Bool
+ handle : Handle
+ deriving DecidableEq
+
+def Separate (a b : ScopedHandle) : Prop :=
+ a.high ≠ b.high ∨ Sep a.handle.region b.handle.region
+
+theorem distinct_scopes_separate (a b : Handle) :
+ Separate ⟨false,a⟩ ⟨true,b⟩ := by simp [Separate]
+
+def current (s : PairStore) (principal : Nat) (h : ScopedHandle) : Bool :=
+ if h.high then currentCheck s.high.resources principal h.handle
+ else currentCheck s.low.resources principal h.handle
+
+theorem low_current_independent (s t : PairStore) (same : s.low = t.low)
+ (principal : Nat) (h : Handle) : current s principal ⟨false,h⟩ = current t principal ⟨false,h⟩ := by
+ simp [current,same]
+
+namespace Controls
+open Once.Controls Reservation.Controls
+def pairInitial : PairStore := ⟨initial,initial⟩
+def hidden : Action 4 := .high ⟨invocation,false,true⟩
+example : lowTrace pairInitial [hidden] = [] := by decide
+example : current (execute pairInitial [hidden]) 3 ⟨true,⟨0,⟨0,0,42,3⟩⟩⟩ = true := by decide
+example : current (execute pairInitial [hidden]) 3 ⟨false,⟨0,⟨0,0,42,3⟩⟩⟩ = false := by decide
+def lowInput : Input 4 := ⟨other,false,false⟩
+example : ids (attempt lowInput.invocation (execute pairInitial [hidden]).low false false).outcome =
+ some [0] := by decide
+example : (execute pairInitial [hidden,.low lowInput]).low.resources.nextId = 1 ∧
+ (execute pairInitial [hidden,.low lowInput]).high.resources.nextId = 1 := by decide
+-- Reusing the same unscoped request in both stores shows why caller-chosen
+-- classification cannot stand for a source/auth-bound namespace.
+def duplicatedScope := execute pairInitial [hidden,.low ⟨invocation,false,false⟩]
+example : duplicatedScope.low.effects = [invocation.key] ∧
+ duplicatedScope.high.effects = [invocation.key] := by decide
+-- Namespace erasure is not a safe conversion to an unscoped shared allocator.
+example : (execute pairInitial [hidden,.low lowInput]).low.resources.live 0 =
+ (execute pairInitial [hidden,.low lowInput]).high.resources.live 0 := by decide
+end Controls
+#print axioms low_projection
+#print axioms trace_projection
+#print axioms two_run_low_trace
+#print axioms two_run_low_state
+#print axioms next_low_result
+#print axioms pair_wf
+#print axioms distinct_scopes_separate
+#print axioms low_current_independent
+end MirroreaProofFirst.ModuleContractBoundary.CurrentAllocation.Reservation.Observation

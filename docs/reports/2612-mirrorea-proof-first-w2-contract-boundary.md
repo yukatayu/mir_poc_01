@@ -1195,3 +1195,72 @@ aeaa7d (1762 reports; --help is ignored by its membership-only argument handling
 so this was the normal validation, not a help response). Whitespacef9368c PASS.
 Only continuation/read/evidence metadata changed after validation; no pending
 Lean/Rust/docs job. Two Oracle jobs retained, no review acceptance inferred.
+
+Allocation observation is a further UNREVIEWED reference consequence. Shared
+checked allocation exposes a private prior allocation through the next public
+handle ID (0 versus 1), and through success versus failure at capacity one even
+when handle payloads are erased. Two independent resource/reservation stores
+admit general low-state and complete low-outcome-trace projection proofs for
+arbitrary finite interleavings, conditional on equal initial low stores and equal
+low input subsequences. Actual outcomes include allocation failure and identifiers;
+this is not merely equality of erased returned values. Current low-handle lookup
+is likewise independent of the high store. Resource WF is preserved in both stores.
+
+The conditional candidate does not supply source classification or authority.
+Scoped addresses separate mathematical address domains, but a concrete control
+executes the SAME unscoped request once in each pool. Caller-chosen classification
+therefore cannot establish global request uniqueness or authorize a namespace.
+Binding source scope, request identity and grants remains an explicit consumer
+obligation; this candidate is not an adopted allocator or Q18 solution. Merely
+hiding IDs is an inadequate alternative because the capacity failure still leaks.
+An opaque-ID design with independently reserved low capacity is a possible smallest
+alternative, not yet established or selected.
+
+The two-run theorem assumes equal low inputs including current worlds, grants,
+arguments and resource limits. Source secret-dependent presence, globally changed
+authority generations, physical resource interference, timing, scheduling cost,
+divergence and active-debug authorization are not proved. The reference low trace
+omits high actions; an actual observer must justify that release policy separately.
+Three final mutations share the low state, reveal high action presence, or erase
+lookup scope: each breaks a general proof and a concrete control. Final scratch
+and fresh fifteen-module actual-source mirror pass Lean --trust=0; standard axioms
+are propext, Quot.sound and inherited Classical.choice, with no accepted sorry or
+new Mir axiom. No production increment or alpha/readiness claim follows.
+
+Start cut c380a7006c4cc0160d28b760904779bafe1bf53f, pushed main; own read metadata
+was dirty. Scratch final a94b09/7f8d89 passes baseline and rejects all three mutants;
+fresh exact-source fifteen-module mirror809010/d866c4 passes. Earlier elaboration
+errors remain in ELABORATION_RED.json and are not counted as accepted proofs.
+W2_EXTENSION_CHECK records exact hashes, commands and outputs. Local self-review
+added the cross-pool duplicate-request counterexample; Oracle535dd4 remains running
+without answer/error and neither frozen packet includes this extension.
+plan/, progress.md, samples_progress.md and CURRENT_GOAL updated for evidence.
+Documentation.md, docs/project-status.md and tasks.md 更新不要: no change to active
+milestone, readiness, critical path or accepted roadmap. No new runtime regression
+is warranted by this proof/document-only delta; physical network, persistence,
+source information-flow refinement and independent review remain unexecuted/open.
+No Canon/THM/OBL acceptance or subagent, no new report. Commit/push pending checks.
+
+Focused source diff5c0032 and exact hash/axiom audit1a3aa6 passed. The initial
+lexical audit a4bb44 falsely matched CurrentUse's admit action constructor; inspected
+529888, no admitted proof. Docs783471 failed19bbdc solely because progress.md's
+last-updated header preceded its new log. Header corrected before rerun.
+
+A follow-on finite F0.3 recovery control (95db2f, copied original model, no source
+edits) separates three cases. A newly constructed same-instance Kernel rejects a
+checkpoint as UntrustedCheckpoint because trusted snapshots/head have no restart
+loader. Injecting the latest retained trusted state restores stock7 and rejects
+duplicate serve; a subsequent consume after revocation is ReleaseDenied while
+stock remains7. Injecting BOTH the old data and old trusted head instead admits
+the old pending request and executes it again (stock10→7). This is the stated
+trusted-head assumption's counterexample, not an exploit against an honest retained
+head, a physical crash test, or proof that fresh import is same-instance recovery.
+A hash chain alone does not establish that its supplied head is current. No
+current authority is derived from a historical successful effect. Reproduction
+script, exact output and copied Python-source hashes are retained in
+W2_EXTENSION_CHECK.recovery_anchor_controls; work pointer RECOVERY_ANCHOR_CONTROLS.
+
+Corrected documentation validation772e1a/7d32b9 PASS (1762 reports). No source
+changed after fresh Lean cut; final whitespace and own-file commit/push follow.
+New finite-image research remains external scratch, outside this accepted kernel
+cut: resource state roundtrip4a6e2c only, validator and counterexamples unfinished.

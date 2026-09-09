@@ -7,10 +7,9 @@ Overall goal active, no budget. Single semantic goal W2-local-contract-resource,
 PL1 S1/S2 theory/proof/reference; no W2/alpha acceptance, no Plan250/I3-4 resume.
 Handoff originals immutable. Canon unchanged. No production increment yet.
 
-Last pushed HEAD bbc25960968e93c3ffecfa1681f6a9a873de14c6. Own dirty10files are
-reservation/effect proof+companion/report/plan/progress/sample/goal/read/evidence/
-continuation. No preexisting user dirty edits. Next commit these reviewed changes
-with --no-gpg-sign, normal push and remote equality; then continue same consumer.
+Last pushed HEAD c380a7006c4cc0160d28b760904779bafe1bf53f. Commit36b601,
+normal push89611d, remote equality315b7f; clean6d5b7b before new read metadata.
+Own allocation-observation proof/docs/evidence dirty; fresh15 and three mutants verified. Continue same consumer.
 No force/reset/clean. Next source obligation: restore/entry proof boundary and
 reservation/head mechanism; no broad roadmap adoption before remaining full reads.
 
@@ -38,12 +37,12 @@ ran; do not relaunch for that reason. Source/docs diffsdac5ef/b4ed43 self-review
 whitespacef9368c and exact hashes4f7146PASS. Only metadata afterward. No pending
 Lean/Rust/docs/Git process. Report2612 contains forward evidence, no new report.
 
-READ_LEDGER hashes/ranges authoritative: plan302full; specs00–43 andexamples00–84
-full (next85); handoffrequired/fullbaseline histories retained. Newly FULL:
+READ_LEDGER hashes/ranges authoritative: plan302full; specs00–43 andexamples00–99
+full (next100); handoffrequired/fullbaseline histories retained. Newly FULL:
 process runtime12168, privateQUIC2772, owner admission tests3098, semantic private
 snapshot1506, processsnapshot763, localcut1203/tests386, SYS3privatesnapshot2805.
 Large required samples/docs/source corpus remains unread; index/grep≠full read.
-No docs/reports bulk reading. Semantic snapshot provider submodule not yet read.
+No docs/reports bulk reading. Semantic snapshot provider submodule64 now full4e45a7/hash-ledgered.
 
 Workroot /tmp/mirrorea-proof-first-20260909-gn29zka5. /mnt/mirrorea-work absent/
 unmounted; last resources59GiBdisk/12GiBRAMavailable. Cachedtarget only for small
@@ -66,3 +65,9 @@ signed independent acceptance. No answer to pending user question yet.
 
 Discord progress4fc23c06:28JST sent; next roughly07:28 or material checkpoint.
 No complete until entire user request legitimately ends. Sole main continues.
+
+Observation work pointers ALLOCATION_OBSERVATION_WORKDIR/MIRROR. Final scratcha94b09/7f8d89 and actual15mirror809010/d866c4 PASS. Shared ID/capacity leak plus cross-pool duplicate-request counterexamples retained. No scope/auth adoption. Docs validation and commit/push next. Oracle last535dd4 22:05UTC running/noerror/noanswer; respect180s.
+
+F0.3 new finite recovery-anchor controls95db2f PASS on original work copy: fresh Kernel lacks trust loader; latest trusted state preserves effect/revocation; jointly rolled-back head/data permits repeat. W2_EXTENSION_CHECK retains script/output/hashes. Docs corrected header after19bbdc failure; rerun32383 pending. Oracle74fe80 22:10UTC bothrunning/noanswer.
+
+Docs rerun32383 PASS7d32b9. RESOURCE_PRIVATE_IMAGE_WORKDIR new scratch; roundtrip4a6e2c PASS only, finite validator/counterexamples still to implement. Not in repo source or fifteen-module evidence yet. Same W2 restore-entry consumer, not a new goal. Next implement independent finite image checker then correspondence/negative controls.
