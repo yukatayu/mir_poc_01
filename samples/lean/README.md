@@ -91,6 +91,11 @@ Support の有限 Lean/Python 比較は別に
 `python3 scripts/proof_first_support_check.py --help` から実行条件を確認します。
 実行済み cut と範囲は `docs/proof-first/` の検査記録、作業証跡は W1 の report2611 と W2 の report2612 にあります。
 
+W2のDurableDispatch一般証明は既存ModuleContractBoundaryに含まれます。
+別のLinux process停止試験は `python3 scripts/proof_first_durable_dispatch_check.py test <existing-work-directory>`。
+これは予約同期と排他の参照実験であり、LeanとPythonの一般refinement、電源断、
+真正な復旧、Mir sourceからのE2E、production採用を示すものではありません。
+
 ## 境界
 
 - Lean built-in として repo が使うのは Lean 自体の構文と基本型

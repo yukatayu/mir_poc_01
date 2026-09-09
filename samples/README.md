@@ -41,6 +41,9 @@
     GraphValidation, Passive, ProducerFlow, GeneralLabels, FallibleFlow, AbortFlow and AddressFlow companions distinguish their conditional proofs
     from runtime/authority/IFC bridges. Reproduction: `lean/README.md`; Report2611.
     Scoped passive and accepted producer reviews completed; actual-source/outcome/observer correspondence remains open. Canon makes its unlisted operand private by default; observer_safe does not grant implicit public release.
+  - W2's separate local process-crash reference uses
+    `python3 scripts/proof_first_durable_dispatch_check.py test <existing-work-directory>`.
+    It is nonproduction mechanism evidence, not a new active Mir sample or E2E.
   - W2 resource/contract/pure-function and owner/capture/handle candidates are documented in
     `lean/foundations/MirroreaProofFirstContracts.md` and Report2612. They have
     kernel evidence; review and existing-Mir refinement remain open. They are

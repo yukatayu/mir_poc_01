@@ -1222,3 +1222,145 @@ end Controls
 #print axioms resume_encoded
 #print axioms resumed_reserved_rejected
 end MirroreaProofFirst.ModuleContractBoundary.CurrentAllocation.Reservation.PrivateImage
+
+
+-- Nonproduction finite crash protocol. `dispatched` is an actual-start ghost
+-- history, not an image field reconstructed by replay or an authority source.
+namespace MirroreaProofFirst.ModuleContractBoundary.DurableDispatch
+abbrev Key := CurrentUse.UseId
+inductive Phase where
+ | idle
+ | preparing (key : Key)
+ | ready (key : Key)
+ | done (key : Key)
+ deriving DecidableEq, Repr
+structure Machine where
+ journal : List Key
+ dispatched : List Key
+ phase : Phase
+ deriving DecidableEq, Repr
+inductive Action where
+ | begin (key : Key)
+ | sync
+ | dispatch
+ | finish
+ | crash (unsyncedSurvives : Bool)
+ deriving DecidableEq, Repr
+
+def step (s : Machine) (action : Action) : Machine :=
+ match action, s.phase with
+ | .begin key, .idle =>
+   if key ∈ s.journal then s else {s with phase := .preparing key}
+ | .sync, .preparing key => {s with journal := key :: s.journal, phase := .ready key}
+ | .dispatch, .ready key => {s with dispatched := key :: s.dispatched, phase := .done key}
+ | .finish, .done _ => {s with phase := .idle}
+ | .crash true, .preparing key => {s with journal := key :: s.journal, phase := .idle}
+ | .crash _, _ => {s with phase := .idle}
+ | _, _ => s
+
+def PhaseWF (s : Machine) : Prop :=
+ match s.phase with
+ | .idle => True
+ | .preparing key => key ∉ s.journal
+ | .ready key => key ∈ s.journal ∧ key ∉ s.dispatched
+ | .done key => key ∈ s.dispatched
+
+def WF (s : Machine) : Prop :=
+ s.journal.Nodup ∧ s.dispatched.Nodup ∧
+ (∀ key, key ∈ s.dispatched → key ∈ s.journal) ∧ PhaseWF s
+
+def execute : Machine → List Action → Machine
+ | s, [] => s
+ | s, a :: rest => execute (step s a) rest
+
+theorem step_preserves (s : Machine) (a : Action) (h : WF s) : WF (step s a) := by
+ rcases s with ⟨journal, dispatched, phase⟩
+ rcases h with ⟨hj, hd, sub, hp⟩
+ cases a <;> cases phase <;>
+   simp_all [step, WF, PhaseWF, List.nodup_cons, List.mem_cons]
+ case begin.idle key => split <;> simp_all
+ case sync.preparing key => exact fun h => hp (sub _ h)
+ case crash.preparing survives key =>
+   cases survives <;> simp_all [List.nodup_cons]
+
+theorem journal_retained (s : Machine) (a : Action) (key : Key)
+ (h : key ∈ s.journal) : key ∈ (step s a).journal := by
+ cases a <;> cases hp : s.phase <;> simp_all [step]
+ case begin.idle k => split <;> simp_all
+ case crash.preparing survives k => cases survives <;> simp_all
+
+theorem dispatched_retained (s : Machine) (a : Action) (key : Key)
+ (h : key ∈ s.dispatched) : key ∈ (step s a).dispatched := by
+ cases a <;> cases hp : s.phase <;> simp_all [step]
+ case begin.idle k => split <;> simp_all
+ case crash.preparing survives k => cases survives <;> simp_all
+
+theorem execute_preserves (s : Machine) (actions : List Action) (h : WF s) :
+ WF (execute s actions) := by
+ induction actions generalizing s with
+ | nil => exact h
+ | cons a rest ih => exact ih _ (step_preserves _ _ h)
+
+theorem no_duplicate_dispatch (s : Machine) (actions : List Action) (h : WF s) :
+ (execute s actions).dispatched.Nodup := (execute_preserves s actions h).2.1
+
+theorem execute_journal_retains (s : Machine) (actions : List Action) (key : Key)
+ (h : key ∈ s.journal) : key ∈ (execute s actions).journal := by
+ induction actions generalizing s with
+ | nil => exact h
+ | cons a rest ih => exact ih _ (journal_retained _ _ _ h)
+
+theorem old_key_rejected_after_restart (s : Machine) (actions : List Action)
+ (key : Key) (h : key ∈ s.journal) (survives : Bool) :
+ step (step (execute s actions) (.crash survives)) (.begin key) =
+ step (execute s actions) (.crash survives) := by
+ have kept := journal_retained (execute s actions) (.crash survives) key (execute_journal_retains s actions key h)
+ cases survives <;> cases hp : (execute s actions).phase <;> simp_all [step]
+
+
+theorem fresh_completes (s : Machine) (key : Key) (idle : s.phase = .idle)
+ (fresh : key ∉ s.journal) :
+ execute s [.begin key,.sync,.dispatch,.finish] =
+ ⟨key :: s.journal,key :: s.dispatched,.idle⟩ := by
+ simp [execute,step,idle,fresh]
+
+theorem new_dispatch_has_durable_reservation (s : Machine) (a : Action)
+ (key : Key) (h : WF s) (fresh : key ∉ s.dispatched)
+ (appeared : key ∈ (step s a).dispatched) : key ∈ s.journal := by
+ cases a <;> cases hp : s.phase <;> simp_all [step]
+ case begin.idle k => split at appeared <;> simp_all
+ case dispatch.ready k =>
+   rcases h with ⟨_,_,_,phase⟩
+   simp only [PhaseWF,hp] at phase
+   exact phase.1
+ case crash.preparing survives k => cases survives <;> simp_all
+
+-- A synchronized journal survives a crash. Unsynchronized bytes may either
+-- survive or disappear; both outcomes are represented. Rollback/corrupt media,
+-- multiple owners and a physical operation outliving this owner are excluded.
+namespace Controls
+def key : Key := ⟨1,2,3⟩
+def empty : Machine := ⟨[],[],.idle⟩
+def good : List Action := [.begin key,.sync,.dispatch,.finish]
+example : WF empty := by simp [WF, PhaseWF, empty]
+example : (execute empty good).dispatched = [key] := by decide
+example : (execute empty [.begin key,.sync,.dispatch,.dispatch]).dispatched = [key] := by decide
+example : (execute empty (good ++ [.crash false] ++ good)).dispatched = [key] := by decide
+example : (execute empty [.begin key,.sync,.crash false]).journal = [key] := by decide
+example : (execute empty [.begin key,.sync,.crash false]).dispatched = [] := by decide
+example : (execute empty ([.begin key,.crash false] ++ good)).dispatched = [key] := by decide
+example : (execute empty ([.begin key,.crash true] ++ good)).dispatched = [] := by decide
+-- Unsafe order: effect starts before its reservation reaches durability.
+def premature : Machine := ⟨[],[key],.preparing key⟩
+example : (execute premature ([.crash false] ++ good)).dispatched = [key,key] := by decide
+-- A structurally valid old journal is insufficient as a recovery authority.
+def rolledBack : Machine := ⟨[],(execute empty good).dispatched,.idle⟩
+example : rolledBack.journal.Nodup := by decide
+example : (execute rolledBack good).dispatched = [key,key] := by decide
+end Controls
+#print axioms step_preserves
+#print axioms no_duplicate_dispatch
+#print axioms old_key_rejected_after_restart
+#print axioms fresh_completes
+#print axioms new_dispatch_has_durable_reservation
+end MirroreaProofFirst.ModuleContractBoundary.DurableDispatch

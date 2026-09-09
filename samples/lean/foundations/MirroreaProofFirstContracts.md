@@ -456,3 +456,54 @@ New general image theorems use propext and Quot.sound only. Five resource-image
 mutations and four composed-image mutations each break a general proof and a
 concrete control. Fresh fifteen-module actual-source mirror passes trust=0.
 These are unreviewed LAB evidence, not production, actual-network or alpha readiness.
+
+
+DurableDispatch is a further unreviewed protocol consequence of the same restore
+consumer. It separates prepare, reservation durability, actual dispatch start,
+finish, and crashes before/after durability. The dispatch list is ghost history
+of actual starts, not data recovered by replay or a journal the retry path reads.
+General proofs preserve independently stated journal/dispatch uniqueness,
+reservation inclusion and phase discipline through arbitrary finite action lists.
+Every newly started key was already durably reserved; every old reserved key is
+rejected after restart. Fresh keys have a general four-step successful execution,
+so the guarantee is not obtained by rejecting all work. Reservation without any
+start remains possible, including an unsynchronized write surviving a crash.
+
+The protocol assumes one serialized owner, retention of synchronized journal
+entries, and no dispatched worker that outlives the modeled owner. It does not
+assert that two physical writes are atomic. The abstract unsynchronized crash
+choice permits old/new complete reservation states; malformed physical tails are
+quarantined by the reference experiment rather than claimed to refine that choice.
+Theorem scope is at-most-one dispatch start per key, not exactly-once external
+effects, response delivery, progress, or whole-state recovery. The one-owner
+boundary is local; no central manager for the entire Mirrorea system is selected.
+An independently proved no-effect/no-outstanding-action cancellation remains the
+smallest retry alternative; response loss alone cannot justify clearing history.
+
+Four mutations remove the sync reservation, forget history on crash, leave a
+started request ready to start again, or reject all begins. General statements and
+concrete controls detect each. For all-reject, the false general statement is
+fresh completion; the safety property itself can still hold. New general proofs
+use propext/Quot.sound only. They are outside both running Oracle packets.
+
+`scripts/proof_first_durable_dispatch_check.py test <existing-work-directory>`
+executes a separate nonproduction Linux reference on newly created private files.
+Initialization synchronizes files and their directory; recovery never creates a
+missing journal. Cooperative flock exclusion covers bounded strict journal
+reading, append, fsync and the local callback. A separate effect file records
+actual callback computations and is never consulted for retry. Actual SIGKILL
+prefixes, two concurrent processes and post-effect synchronization error cover
+retained/no-start, retained/started and failed-unknown outcomes. Unsafe ordering,
+rollback and removing exclusion each produce two actual callback records. Partial
+and invalid records reject; request argument conflicts and finite capacity reject.
+
+These process tests do not simulate power loss or prove fsync, kernel/filesystem
+correctness, a JSON decoder refinement, authenticated installation/currentness,
+current World/code/contract/authority binding, secret observation, remote workers,
+queue persistence or Mir source execution. Argument/key equality is not an auth
+grant. File identity and storage honesty are explicit implementation assumptions,
+not signed trust anchors. This is mechanism evidence, not a new Mir runtime, fake
+E2E, production recovery implementation or verified alpha. Local Linux man-pages
+6.7 fsync/flock were read to check the operational assumptions; advisory locking
+cannot constrain a process that ignores it, and file fsync alone is insufficient
+for initial directory-entry durability.

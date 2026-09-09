@@ -2708,5 +2708,835 @@
       "Probe project_adapter_contract selects init_avatar_hp; not generic alpha source execution",
       "Observer per-line bound does not bound unbounded mpsc queue, or prove confidentiality/cost noninterference"
     ]
+  },
+  "durable_dispatch": {
+    "base_head": "52962f805cbcefd2cd92106ca75e546f6baaaa12",
+    "scope": "Unreviewed W2 nonproduction crash/dispatch protocol and separate Linux process experiment; not Mir E2E or production recovery",
+    "kernel": {
+      "name": "final",
+      "source_sha256": "d75d2655f8498954002e724ad5b7c05e79fef3bd46590105fa8a80f6d1183bec",
+      "command": [
+        "lean",
+        "--trust=0",
+        "MirroreaProofFirstModuleContractBoundary.lean"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 3.7263986369944178,
+      "failures": [],
+      "stdout": "'MirroreaProofFirst.ModuleContractBoundary.link_exact' depends on axioms: [propext]\n'MirroreaProofFirst.ModuleContractBoundary.call_sound' depends on axioms: [propext, Classical.choice, Quot.sound]\n'MirroreaProofFirst.ModuleContractBoundary.call_checked_complete' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n'MirroreaProofFirst.ModuleContractBoundary.call_symbolic_complete' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n'MirroreaProofFirst.ModuleContractBoundary.no_authority_no_call' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n'MirroreaProofFirst.ModuleContractBoundary.call_actual_execution' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n'MirroreaProofFirst.ModuleContractBoundary.changed_context_rejected' depends on axioms: [propext]\n'MirroreaProofFirst.ModuleContractBoundary.changed_module_stamp_rejected' depends on axioms: [propext]\n'MirroreaProofFirst.ModuleContractBoundary.insert_exists' depends on axioms: [propext, Classical.choice, Quot.sound]\n'MirroreaProofFirst.ModuleContractBoundary.insert_extends' depends on axioms: [propext]\n'MirroreaProofFirst.ModuleContractBoundary.insert_wf' does not depend on any axioms\n'MirroreaProofFirst.ModuleContractBoundary.inserts_preserve' depends on axioms: [propext]\n'MirroreaProofFirst.ModuleContractBoundary.catalog_agrees' depends on axioms: [propext]\n'MirroreaProofFirst.ModuleContractBoundary.catalog_sound' depends on axioms: [propext, Classical.choice, Quot.sound]\n'MirroreaProofFirst.ModuleContractBoundary.fresh_proof_cannot_rebind' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n'MirroreaProofFirst.ModuleContractBoundary.linked_descriptor_unique' depends on axioms: [propext]\n'MirroreaProofFirst.ModuleContractBoundary.changed_descriptor_rejected' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n'MirroreaProofFirst.ModuleContractBoundary.catalog_call_preserved' depends on axioms: [propext]\n'MirroreaProofFirst.ModuleContractBoundary.insert_sequence_preserves_call' depends on axioms: [propext]\n'MirroreaProofFirst.ModuleContractBoundary.no_catalog_revives_module' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n'MirroreaProofFirst.ModuleContractBoundary.missing_catalog_entry_rejected' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n'MirroreaProofFirst.ModuleContractBoundary.CurrentAllocation.exact' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n'MirroreaProofFirst.ModuleContractBoundary.CurrentAllocation.sound' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n'MirroreaProofFirst.ModuleContractBoundary.CurrentAllocation.lawful_completes' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n'MirroreaProofFirst.ModuleContractBoundary.CurrentAllocation.current_denied' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n'MirroreaProofFirst.ModuleContractBoundary.CurrentAllocation.resource_denied' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n'MirroreaProofFirst.ModuleContractBoundary.CurrentAllocation.Once.step_exact' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.ModuleContractBoundary.CurrentAllocation.Once.committed_retained' depends on axioms: [propext,\n Quot.sound]\n'MirroreaProofFirst.ModuleContractBoundary.CurrentAllocation.Once.advance_wf' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n'MirroreaProofFirst.ModuleContractBoundary.CurrentAllocation.Once.schedule_retains' depends on axioms: [propext,\n Quot.sound]\n'MirroreaProofFirst.ModuleContractBoundary.CurrentAllocation.Once.schedule_wf' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n'MirroreaProofFirst.ModuleContractBoundary.CurrentAllocation.Once.no_second_effect' depends on axioms: [propext,\n Quot.sound]\n'MirroreaProofFirst.ModuleContractBoundary.CurrentAllocation.Once.failure_unchanged' depends on axioms: [propext]\n'MirroreaProofFirst.ModuleContractBoundary.CurrentAllocation.Once.fresh_success' depends on axioms: [propext,\n Quot.sound]\nMirroreaProofFirstModuleContractBoundary.lean:795:3: warning: try 'simp' instead of 'simpa'\n\nNote: This linter can be disabled with `set_option linter.unnecessarySimpa false`\n'MirroreaProofFirst.ModuleContractBoundary.CurrentAllocation.Reservation.retained' depends on axioms: [propext]\n'MirroreaProofFirst.ModuleContractBoundary.CurrentAllocation.Reservation.attempted_key_retained' depends on axioms: [propext]\n'MirroreaProofFirst.ModuleContractBoundary.CurrentAllocation.Reservation.schedule_retains' depends on axioms: [propext]\n'MirroreaProofFirst.ModuleContractBoundary.CurrentAllocation.Reservation.no_second_effect' depends on axioms: [propext,\n Quot.sound]\n'MirroreaProofFirst.ModuleContractBoundary.CurrentAllocation.Reservation.resource_preserved' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n'MirroreaProofFirst.ModuleContractBoundary.CurrentAllocation.Reservation.schedule_resource_preserved' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n'MirroreaProofFirst.ModuleContractBoundary.CurrentAllocation.Reservation.history_preserved' depends on axioms: [propext,\n Quot.sound]\n'MirroreaProofFirst.ModuleContractBoundary.CurrentAllocation.Reservation.schedule_history_preserved' depends on axioms: [propext,\n Quot.sound]\n'MirroreaProofFirst.ModuleContractBoundary.CurrentAllocation.Reservation.new_effect_sound' depends on axioms: [propext]\n'MirroreaProofFirst.ModuleContractBoundary.CurrentAllocation.Reservation.useful_success' depends on axioms: [propext]\n'MirroreaProofFirst.ModuleContractBoundary.CurrentAllocation.Reservation.response_loss_preserves_effect' depends on axioms: [propext]\n'MirroreaProofFirst.ModuleContractBoundary.CurrentAllocation.Reservation.Observation.low_projection' depends on axioms: [propext]\n'MirroreaProofFirst.ModuleContractBoundary.CurrentAllocation.Reservation.Observation.trace_projection' depends on axioms: [propext]\n'MirroreaProofFirst.ModuleContractBoundary.CurrentAllocation.Reservation.Observation.two_run_low_trace' depends on axioms: [propext]\n'MirroreaProofFirst.ModuleContractBoundary.CurrentAllocation.Reservation.Observation.two_run_low_state' depends on axioms: [propext]\n'MirroreaProofFirst.ModuleContractBoundary.CurrentAllocation.Reservation.Observation.next_low_result' depends on axioms: [propext]\n'MirroreaProofFirst.ModuleContractBoundary.CurrentAllocation.Reservation.Observation.pair_wf' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n'MirroreaProofFirst.ModuleContractBoundary.CurrentAllocation.Reservation.Observation.distinct_scopes_separate' depends on axioms: [propext]\n'MirroreaProofFirst.ModuleContractBoundary.CurrentAllocation.Reservation.Observation.low_current_independent' depends on axioms: [propext]\n'MirroreaProofFirst.ModuleContractBoundary.CurrentAllocation.Reservation.PrivateImage.history_exact' depends on axioms: [propext,\n Quot.sound]\n'MirroreaProofFirst.ModuleContractBoundary.CurrentAllocation.Reservation.PrivateImage.check_exact' depends on axioms: [propext,\n Quot.sound]\n'MirroreaProofFirst.ModuleContractBoundary.CurrentAllocation.Reservation.PrivateImage.roundtrip' depends on axioms: [propext,\n Quot.sound]\n'MirroreaProofFirst.ModuleContractBoundary.CurrentAllocation.Reservation.PrivateImage.encoded_valid' depends on axioms: [propext,\n Quot.sound]\n'MirroreaProofFirst.ModuleContractBoundary.CurrentAllocation.Reservation.PrivateImage.restores_encoded' depends on axioms: [propext,\n Quot.sound]\n'MirroreaProofFirst.ModuleContractBoundary.CurrentAllocation.Reservation.PrivateImage.restore_sound' depends on axioms: [propext,\n Quot.sound]\n'MirroreaProofFirst.ModuleContractBoundary.CurrentAllocation.Reservation.PrivateImage.resume_encoded' depends on axioms: [propext,\n Quot.sound]\n'MirroreaProofFirst.ModuleContractBoundary.CurrentAllocation.Reservation.PrivateImage.resumed_reserved_rejected' depends on axioms: [propext,\n Quot.sound]\n'MirroreaProofFirst.ModuleContractBoundary.DurableDispatch.step_preserves' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.ModuleContractBoundary.DurableDispatch.no_duplicate_dispatch' depends on axioms: [propext,\n Quot.sound]\n'MirroreaProofFirst.ModuleContractBoundary.DurableDispatch.old_key_rejected_after_restart' depends on axioms: [propext]\n'MirroreaProofFirst.ModuleContractBoundary.DurableDispatch.fresh_completes' depends on axioms: [propext]\n'MirroreaProofFirst.ModuleContractBoundary.DurableDispatch.new_dispatch_has_durable_reservation' depends on axioms: [propext]\n",
+      "stderr": ""
+    },
+    "mutants": [
+      {
+        "name": "SkipSync",
+        "source_sha256": "334445eec6113c809a560a9c55d263b8b0ee3097b5d6dd9046eb2809730ac025",
+        "command": [
+          "lean",
+          "--trust=0",
+          "MutantSkipSync.lean"
+        ],
+        "exit_code": 1,
+        "elapsed_seconds": 3.717807035020087,
+        "failures": [
+          {
+            "line": 1282,
+            "declaration": "theorem step_preserves (s : Machine) (a : Action) (h : WF s) : WF (step s a) := by"
+          },
+          {
+            "line": 1324,
+            "declaration": "theorem fresh_completes (s : Machine) (key : Key) (idle : s.phase = .idle)"
+          },
+          {
+            "line": 1348,
+            "declaration": "example : (execute empty (good ++ [.crash false] ++ good)).dispatched = [key] := by decide"
+          },
+          {
+            "line": 1349,
+            "declaration": "example : (execute empty [.begin key,.sync,.crash false]).journal = [key] := by decide"
+          }
+        ],
+        "stdout_sha256": "a8c25a37533dbc98908b8ce6215ed78d08c96cfbc8cddff3a245b475627575b2",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "replacement": [
+          "| .sync, .preparing key => {s with journal := key :: s.journal, phase := .ready key}",
+          "| .sync, .preparing key => {s with phase := .ready key}"
+        ]
+      },
+      {
+        "name": "ForgetOnCrash",
+        "source_sha256": "f3335b53982b1fe4db2a7ba45ea5329dbd90053e64447aec8eaff3a00706a51d",
+        "command": [
+          "lean",
+          "--trust=0",
+          "MutantForgetOnCrash.lean"
+        ],
+        "exit_code": 1,
+        "elapsed_seconds": 3.742719040979864,
+        "failures": [
+          {
+            "line": 1283,
+            "declaration": "theorem step_preserves (s : Machine) (a : Action) (h : WF s) : WF (step s a) := by"
+          },
+          {
+            "line": 1276,
+            "declaration": "theorem step_preserves (s : Machine) (a : Action) (h : WF s) : WF (step s a) := by"
+          },
+          {
+            "line": 1290,
+            "declaration": "theorem journal_retained (s : Machine) (a : Action) (key : Key)"
+          },
+          {
+            "line": 1287,
+            "declaration": "theorem journal_retained (s : Machine) (a : Action) (key : Key)"
+          },
+          {
+            "line": 1348,
+            "declaration": "example : (execute empty (good ++ [.crash false] ++ good)).dispatched = [key] := by decide"
+          },
+          {
+            "line": 1349,
+            "declaration": "example : (execute empty [.begin key,.sync,.crash false]).journal = [key] := by decide"
+          }
+        ],
+        "stdout_sha256": "d6ddaa1b083759ab25f5373f0e49a6d2ec97dafd4b5d2a0a949d06f3e84f4c2f",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "replacement": [
+          "| .crash _, _ => {s with phase := .idle}",
+          "| .crash _, _ => {s with journal := [], phase := .idle}"
+        ]
+      },
+      {
+        "name": "RepeatReady",
+        "source_sha256": "b559b63425f651eac74861498115c15bd323b3930879da82d0df547d0a10a168",
+        "command": [
+          "lean",
+          "--trust=0",
+          "MutantRepeatReady.lean"
+        ],
+        "exit_code": 1,
+        "elapsed_seconds": 3.76241110500996,
+        "failures": [
+          {
+            "line": 1276,
+            "declaration": "theorem step_preserves (s : Machine) (a : Action) (h : WF s) : WF (step s a) := by"
+          },
+          {
+            "line": 1324,
+            "declaration": "theorem fresh_completes (s : Machine) (key : Key) (idle : s.phase = .idle)"
+          },
+          {
+            "line": 1347,
+            "declaration": "example : (execute empty [.begin key,.sync,.dispatch,.dispatch]).dispatched = [key] := by decide"
+          }
+        ],
+        "stdout_sha256": "920f089ff58835d9404c3a0e899004f773a7fe8e33c766c7a1a22c4792cbedaa",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "replacement": [
+          "| .dispatch, .ready key => {s with dispatched := key :: s.dispatched, phase := .done key}",
+          "| .dispatch, .ready key => {s with dispatched := key :: s.dispatched, phase := .ready key}"
+        ]
+      },
+      {
+        "name": "RejectAll",
+        "source_sha256": "b89f54b21c50210f35408a300caa100d019c5749ebc9ea3f29898b833007468d",
+        "command": [
+          "lean",
+          "--trust=0",
+          "MutantRejectAll.lean"
+        ],
+        "exit_code": 1,
+        "elapsed_seconds": 3.635395901015727,
+        "failures": [
+          {
+            "line": 1281,
+            "declaration": "theorem step_preserves (s : Machine) (a : Action) (h : WF s) : WF (step s a) := by"
+          },
+          {
+            "line": 1289,
+            "declaration": "theorem journal_retained (s : Machine) (a : Action) (key : Key)"
+          },
+          {
+            "line": 1295,
+            "declaration": "theorem dispatched_retained (s : Machine) (a : Action) (key : Key)"
+          },
+          {
+            "line": 1324,
+            "declaration": "theorem fresh_completes (s : Machine) (key : Key) (idle : s.phase = .idle)"
+          },
+          {
+            "line": 1331,
+            "declaration": "theorem new_dispatch_has_durable_reservation (s : Machine) (a : Action)"
+          },
+          {
+            "line": 1346,
+            "declaration": "example : (execute empty good).dispatched = [key] := by decide"
+          },
+          {
+            "line": 1347,
+            "declaration": "example : (execute empty [.begin key,.sync,.dispatch,.dispatch]).dispatched = [key] := by decide"
+          },
+          {
+            "line": 1348,
+            "declaration": "example : (execute empty (good ++ [.crash false] ++ good)).dispatched = [key] := by decide"
+          },
+          {
+            "line": 1349,
+            "declaration": "example : (execute empty [.begin key,.sync,.crash false]).journal = [key] := by decide"
+          },
+          {
+            "line": 1351,
+            "declaration": "example : (execute empty ([.begin key,.crash false] ++ good)).dispatched = [key] := by decide"
+          },
+          {
+            "line": 1355,
+            "declaration": "example : (execute premature ([.crash false] ++ good)).dispatched = [key,key] := by decide"
+          },
+          {
+            "line": 1359,
+            "declaration": "example : (execute rolledBack good).dispatched = [key,key] := by decide"
+          }
+        ],
+        "stdout_sha256": "33e69f7c991bcbb8e312d70b49f2d5bf4153ce029953f5b2312ae401acf7f5d9",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "replacement": [
+          "if key \u2208 s.journal then s else {s with phase := .preparing key}",
+          "if key \u2208 s.journal then s else s"
+        ]
+      }
+    ],
+    "mutation_boundary": "RejectAll is falsified by general fresh_completes and positive execution; a safety property may still hold despite proof-script case failures. Other controls falsify retained journal or one-start invariants.",
+    "fresh_mirror": {
+      "toolchain": "Lean (version 4.29.1, x86_64-unknown-linux-gnu, commit f72c35b3f637c8c6571d353742168ab66cc22c00, Release)\n",
+      "checks": [
+        {
+          "name": "Support",
+          "command": [
+            "lean",
+            "--trust=0",
+            "-o",
+            "MirroreaProofFirstSupport.olean",
+            "MirroreaProofFirstSupport.lean"
+          ],
+          "source_sha256": "7f401632873cb3b87e0fa62d1b172af88b996b34a6d3fc62a7e61d103b41a9c3",
+          "exit_code": 0,
+          "elapsed_seconds": 0.9597440829966217,
+          "stdout": "'MirroreaProofFirst.Support.eval_correct' depends on axioms: [propext]\n'MirroreaProofFirst.Support.holds_mono' does not depend on any axioms\n'MirroreaProofFirst.Support.grounded_closed' does not depend on any axioms\n'MirroreaProofFirst.Support.grounded_least' does not depend on any axioms\n'MirroreaProofFirst.Support.ranked_sound' does not depend on any axioms\n'MirroreaProofFirst.Support.ranked_exact' does not depend on any axioms\n'MirroreaProofFirst.Support.rounds_sound' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.Support.proof_eventually' depends on axioms: [propext]\n'MirroreaProofFirst.Support.rounds_complete' depends on axioms: [propext]\n'MirroreaProofFirst.Support.rounds_iff_derivation' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.Support.allOf_correct' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.Support.anyOf_correct' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.Support.stable_exists' depends on axioms: [propext, Classical.choice, Quot.sound]\n'MirroreaProofFirst.Support.derive_exact' depends on axioms: [propext, Classical.choice, Quot.sound]\n'MirroreaProofFirst.Support.checker_exact' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.Support.checked_membership_exact' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.Support.retirement_mono' does not depend on any axioms\n'MirroreaProofFirst.Support.normalization_idempotent' does not depend on any axioms\n'MirroreaProofFirst.Support.no_root_no_ground' does not depend on any axioms\n'MirroreaProofFirst.Support.low_grounded_independent' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.Support.firstRank_spec' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.Support.generated_certificate_accepted' depends on axioms: [propext, Classical.choice, Quot.sound]\n'MirroreaProofFirst.Support.height_threshold' depends on axioms: [propext, Classical.choice, Quot.sound]\n'MirroreaProofFirst.Support.canonical_rounds' depends on axioms: [propext, Classical.choice, Quot.sound]\n'MirroreaProofFirst.Support.canonical_rank_unique' depends on axioms: [propext, Classical.choice, Quot.sound]\n'MirroreaProofFirst.Support.generated_heights' depends on axioms: [propext, Classical.choice, Quot.sound]\n'MirroreaProofFirst.Support.canonical_generated_accepted' depends on axioms: [propext, Classical.choice, Quot.sound]\n'MirroreaProofFirst.Support.canonical_checker_sound' depends on axioms: [propext, Classical.choice, Quot.sound]\n'MirroreaProofFirst.Support.snapshot_live_exact' depends on axioms: [propext, Classical.choice, Quot.sound]\n'MirroreaProofFirst.Support.snapshot_certificate_accepted' depends on axioms: [propext, Classical.choice, Quot.sound]\n'MirroreaProofFirst.Support.snapshot_checked_sound' depends on axioms: [propext, Classical.choice, Quot.sound]\n",
+          "stderr": ""
+        },
+        {
+          "name": "CurrentUse",
+          "command": [
+            "lean",
+            "--trust=0",
+            "-o",
+            "MirroreaProofFirstCurrentUse.olean",
+            "MirroreaProofFirstCurrentUse.lean"
+          ],
+          "source_sha256": "ab604c92b226182bdf84a38caaa044d6b949730891d40a02a72ad441c59f4239",
+          "exit_code": 0,
+          "elapsed_seconds": 1.823394795996137,
+          "stdout": "'MirroreaProofFirst.CurrentUse.checkClaim_exact' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.CurrentUse.checkWitness_sound' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.CurrentUse.chooseClaim_sound' depends on axioms: [propext]\n'MirroreaProofFirst.CurrentUse.chooseClaim_complete' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.CurrentUse.produce_checked' depends on axioms: [propext]\n'MirroreaProofFirst.CurrentUse.produce_complete' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.CurrentUse.revalidate_sound' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.CurrentUse.context_change_rejected' depends on axioms: [propext]\n'MirroreaProofFirst.CurrentUse.authorization_iff_produced' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.CurrentUse.no_claim_no_authorization' depends on axioms: [propext]\n'MirroreaProofFirst.CurrentUse.checkHandle_exact' depends on axioms: [propext, Classical.choice, Quot.sound]\n'MirroreaProofFirst.CurrentUse.checkUse_sound' depends on axioms: [propext, Classical.choice, Quot.sound]\n'MirroreaProofFirst.CurrentUse.checkUse_complete' depends on axioms: [propext, Classical.choice, Quot.sound]\n'MirroreaProofFirst.CurrentUse.retired_locus_rejected' depends on axioms: [propext, Classical.choice, Quot.sound]\n'MirroreaProofFirst.CurrentUse.stale_incarnation_rejected' depends on axioms: [propext]\n'MirroreaProofFirst.CurrentUse.authorize_checked' depends on axioms: [propext]\n'MirroreaProofFirst.CurrentUse.authorize_use_complete' depends on axioms: [propext, Classical.choice, Quot.sound]\n'MirroreaProofFirst.CurrentUse.tryAdmit_sound' depends on axioms: [propext, Classical.choice, Quot.sound]\n'MirroreaProofFirst.CurrentUse.tryAdmit_does_not_issue' depends on axioms: [propext]\n'MirroreaProofFirst.CurrentUse.tryAdmit_retains_history' depends on axioms: [propext]\n'MirroreaProofFirst.CurrentUse.duplicate_admission_unchanged' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.CurrentUse.retire_preserves_history' does not depend on any axioms\n'MirroreaProofFirst.CurrentUse.revoke_preserves_history' does not depend on any axioms\n'MirroreaProofFirst.CurrentUse.retire_stops_locus_use' depends on axioms: [propext, Classical.choice, Quot.sound]\n'MirroreaProofFirst.CurrentUse.tryAdmit_unique' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.CurrentUse.step_unique' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.CurrentUse.run_unique' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.CurrentUse.step_retains_history' depends on axioms: [propext]\n'MirroreaProofFirst.CurrentUse.run_retains_history' depends on axioms: [propext]\n",
+          "stderr": ""
+        },
+        {
+          "name": "Passive",
+          "command": [
+            "lean",
+            "--trust=0",
+            "-o",
+            "MirroreaProofFirstPassive.olean",
+            "MirroreaProofFirstPassive.lean"
+          ],
+          "source_sha256": "f5e3aec86542e7c844ace3993e7410eda7af041e96d0291fc836d85783d433e8",
+          "exit_code": 0,
+          "elapsed_seconds": 0.6378783580148593,
+          "stdout": "'MirroreaProofFirst.Passive.erasure' does not depend on any axioms\n'MirroreaProofFirst.Passive.lift_erases' depends on axioms: [propext]\n'MirroreaProofFirst.Passive.filter_before_retention' depends on axioms: [propext]\n'MirroreaProofFirst.Passive.retained_bound' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.Passive.no_invented_rows' depends on axioms: [propext]\n'MirroreaProofFirst.Passive.aligned_projection' depends on axioms: [propext]\n'MirroreaProofFirst.Passive.two_trace_retention' depends on axioms: [propext]\n'MirroreaProofFirst.Passive.concrete_projection' depends on axioms: [propext]\n'MirroreaProofFirst.Passive.concrete_two_run' depends on axioms: [propext]\n'MirroreaProofFirst.Passive.feedRows_exact' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.Passive.retained_exact' depends on axioms: [propext, Quot.sound]\n",
+          "stderr": ""
+        },
+        {
+          "name": "ProducerFlow",
+          "command": [
+            "lean",
+            "--trust=0",
+            "-o",
+            "MirroreaProofFirstProducerFlow.olean",
+            "MirroreaProofFirstProducerFlow.lean"
+          ],
+          "source_sha256": "fa5a585d1652bcda7ec61cc7b12442d07bdd079cda4effb1d7794cc2f1db6785",
+          "exit_code": 0,
+          "elapsed_seconds": 1.156609664001735,
+          "stdout": "'MirroreaProofFirst.ProducerFlow.infer_exact' depends on axioms: [propext]\n'MirroreaProofFirst.ProducerFlow.typed_evaluates' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.ProducerFlow.flows_exact' depends on axioms: [propext]\n'MirroreaProofFirst.ProducerFlow.eval_low' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.ProducerFlow.check_exact' depends on axioms: [propext]\n'MirroreaProofFirst.ProducerFlow.run_typed' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.ProducerFlow.confinement' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.ProducerFlow.run_noninterference' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.ProducerFlow.projected_visible' depends on axioms: [propext]\n'MirroreaProofFirst.ProducerFlow.checked_retention_noninterference' depends on axioms: [propext, Quot.sound]\n",
+          "stderr": ""
+        },
+        {
+          "name": "FallibleFlow",
+          "command": [
+            "lean",
+            "--trust=0",
+            "-o",
+            "MirroreaProofFirstFallibleFlow.olean",
+            "MirroreaProofFirstFallibleFlow.lean"
+          ],
+          "source_sha256": "a799c7b6301684ea258097993bb3ebdb9eb32e51fa24b1603542f363de0929d9",
+          "exit_code": 0,
+          "elapsed_seconds": 0.7185871769906953,
+          "stdout": "'MirroreaProofFirst.FallibleFlow.eval_typed' depends on axioms: [propext]\n'MirroreaProofFirst.FallibleFlow.step_typed' depends on axioms: [propext]\n'MirroreaProofFirst.FallibleFlow.singleton_retention' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.FallibleFlow.eval_in_range' depends on axioms: [propext]\n'MirroreaProofFirst.FallibleFlow.step_in_range' depends on axioms: [propext]\n'MirroreaProofFirst.FallibleFlow.bounded_exact' depends on axioms: [propext]\n'MirroreaProofFirst.FallibleFlow.bounded_failure' depends on axioms: [propext, Classical.choice, Quot.sound]\n'MirroreaProofFirst.FallibleFlow.eval_low' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.FallibleFlow.step_noninterference' depends on axioms: [propext, Quot.sound]\n",
+          "stderr": ""
+        },
+        {
+          "name": "ResourceBoundary",
+          "command": [
+            "lean",
+            "--trust=0",
+            "-o",
+            "MirroreaProofFirstResourceBoundary.olean",
+            "MirroreaProofFirstResourceBoundary.lean"
+          ],
+          "source_sha256": "2ac91ef290548c13d33ca8122b7a14655a15e922c0be1c5b1ab9648882bb95f9",
+          "exit_code": 0,
+          "elapsed_seconds": 1.379785739001818,
+          "stdout": "'MirroreaProofFirst.ResourceBoundary.split_exact_cover' depends on axioms: [propext, Classical.choice, Quot.sound]\n'MirroreaProofFirst.ResourceBoundary.split_disjoint_points' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.ResourceBoundary.move_exact_cover' does not depend on any axioms\n'MirroreaProofFirst.ResourceBoundary.raw_frame' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.ResourceBoundary.execute_frame' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.ResourceBoundary.execute_returned_current' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n'MirroreaProofFirst.ResourceBoundary.allocate_wf' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.ResourceBoundary.erase_wf' does not depend on any axioms\n'MirroreaProofFirst.ResourceBoundary.move_wf' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.ResourceBoundary.split_wf' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.ResourceBoundary.check_exact' depends on axioms: [propext]\n'MirroreaProofFirst.ResourceBoundary.execution_exists' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.ResourceBoundary.execute_wf' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.ResourceBoundary.run_wf' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.ResourceBoundary.raw_monotone' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.ResourceBoundary.consumed_never_current' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.ResourceBoundary.schedule_wf' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.ResourceBoundary.consumed_never_current_schedule' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.ResourceBoundary.BoundedIdentifiers.remaining_exact' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n'MirroreaProofFirst.ResourceBoundary.BoundedIdentifiers.remaining_same' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n'MirroreaProofFirst.ResourceBoundary.BoundedIdentifiers.successful_native_bounds' depends on axioms: [propext,\n Quot.sound]\n'MirroreaProofFirst.ResourceBoundary.BoundedIdentifiers.capacity_exact' depends on axioms: [propext]\n'MirroreaProofFirst.ResourceBoundary.BoundedIdentifiers.raw_within' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.ResourceBoundary.BoundedIdentifiers.runOne_exact' depends on axioms: [propext]\n'MirroreaProofFirst.ResourceBoundary.BoundedIdentifiers.exists_iff' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.ResourceBoundary.BoundedIdentifiers.preserves' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.ResourceBoundary.BoundedIdentifiers.schedule_preserves' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.ResourceBoundary.BoundedIdentifiers.schedule_old_absent' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.ResourceBoundary.BoundedIdentifiers.consumed_never_current' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.ResourceBoundary.PrivateImage.roundtrip' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.ResourceBoundary.PrivateImage.check_exact' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.ResourceBoundary.PrivateImage.decoded_wf' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.ResourceBoundary.PrivateImage.wf_implies_valid' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.ResourceBoundary.PrivateImage.check_wf_exact' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.ResourceBoundary.PrivateImage.restores_encoded' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.ResourceBoundary.PrivateImage.restore_sound' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.ResourceBoundary.PrivateImage.fits_exact' depends on axioms: [propext]\n'MirroreaProofFirst.ResourceBoundary.PrivateImage.restore_within_sound' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.ResourceBoundary.PrivateImage.restores_encoded_within' depends on axioms: [propext, Quot.sound]\n",
+          "stderr": ""
+        },
+        {
+          "name": "LocalContract",
+          "command": [
+            "lean",
+            "--trust=0",
+            "-o",
+            "MirroreaProofFirstLocalContract.olean",
+            "MirroreaProofFirstLocalContract.lean"
+          ],
+          "source_sha256": "d31352bc5027ef9f31baddc5f4fdf3c11b02624bd0287eb6ebe07b6302bfa9ef",
+          "exit_code": 0,
+          "elapsed_seconds": 0.5542886250186712,
+          "stdout": "'MirroreaProofFirst.LocalContract.eval_exact' depends on axioms: [propext]\n'MirroreaProofFirst.LocalContract.nonnegative_sound' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.LocalContract.infer_sound' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.LocalContract.infer_complete' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.LocalContract.assumptions_exact' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.LocalContract.positive_result' depends on axioms: [propext, Quot.sound]\n",
+          "stderr": ""
+        },
+        {
+          "name": "ContractExport",
+          "command": [
+            "lean",
+            "--trust=0",
+            "-o",
+            "MirroreaProofFirstContractExport.olean",
+            "MirroreaProofFirstContractExport.lean"
+          ],
+          "source_sha256": "5ed9c1a9bc612d9c0553a6027ca5a6f28c459cd7cec3b1eebb869bb9b7276cfa",
+          "exit_code": 0,
+          "elapsed_seconds": 1.1928992930043023,
+          "stdout": "'MirroreaProofFirst.ContractExport.scoped_exact' depends on axioms: [propext]\n'MirroreaProofFirst.ContractExport.common_exact' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.ContractExport.accept_sound' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.ContractExport.accept_bound' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.ContractExport.accepted_integer_length' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.ContractExport.checked_profile_complete' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.ContractExport.symbolic_profile_complete' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.ContractExport.allocate_export_wf' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.ContractExport.lawful_export_allocates' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.ContractExport.export_cannot_grant' depends on axioms: [propext]\n'MirroreaProofFirst.ContractExport.RequestAllocation.run_exact' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.ContractExport.RequestAllocation.sound' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.ContractExport.RequestAllocation.wf' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.ContractExport.RequestAllocation.denied' depends on axioms: [propext]\n'MirroreaProofFirst.ContractExport.RequestAllocation.same_principal_policy' depends on axioms: [propext]\n'MirroreaProofFirst.ContractExport.CheckedArithmetic.checked_exact' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n'MirroreaProofFirst.ContractExport.CheckedArithmetic.exact' depends on axioms: [propext, Classical.choice, Quot.sound]\n'MirroreaProofFirst.ContractExport.CheckedArithmetic.denotes_math' depends on axioms: [propext]\n'MirroreaProofFirst.ContractExport.CheckedArithmetic.sound' depends on axioms: [propext, Classical.choice, Quot.sound]\n'MirroreaProofFirst.ContractExport.CheckedArithmetic.denotes_bounds' depends on axioms: [propext]\n'MirroreaProofFirst.ContractExport.CheckedArithmetic.bounded_denotes' depends on axioms: [propext]\n'MirroreaProofFirst.ContractExport.CheckedArithmetic.success_iff_scoped_bounds' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n'MirroreaProofFirst.ContractExport.CheckedArithmetic.accepted_machine_value' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n'MirroreaProofFirst.ContractExport.CheckedArithmetic.flow_exact' depends on axioms: [propext]\n'MirroreaProofFirst.ContractExport.CheckedArithmetic.evaluate_low' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.ContractExport.CheckedArithmetic.checked_evaluate_low' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.ContractExport.CheckedAllocation.run_exact' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.ContractExport.CheckedAllocation.lawful_completes' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n'MirroreaProofFirst.ContractExport.CheckedAllocation.successful' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n",
+          "stderr": ""
+        },
+        {
+          "name": "PureFunctions",
+          "command": [
+            "lean",
+            "--trust=0",
+            "-o",
+            "MirroreaProofFirstPureFunctions.olean",
+            "MirroreaProofFirstPureFunctions.lean"
+          ],
+          "source_sha256": "d222377d63006235ab1a97aca8073757d716a55f37f19e2b4d41d59aaf370d86",
+          "exit_code": 0,
+          "elapsed_seconds": 1.1053984070022125,
+          "stdout": "'MirroreaProofFirst.PureFunctions.infer_exact' depends on axioms: [propext]\n'MirroreaProofFirst.PureFunctions.environment_lookup' depends on axioms: [propext]\n'MirroreaProofFirst.PureFunctions.evaluator_typed' depends on axioms: [propext]\n'MirroreaProofFirst.PureFunctions.execution_complete' depends on axioms: [propext, Classical.choice, Quot.sound]\n'MirroreaProofFirst.PureFunctions.execution_sound' depends on axioms: [propext]\n'MirroreaProofFirst.PureFunctions.execution_exact' depends on axioms: [propext, Classical.choice, Quot.sound]\n'MirroreaProofFirst.PureFunctions.counter_has_fuel' depends on axioms: [propext, Classical.choice, Quot.sound]\n",
+          "stderr": ""
+        },
+        {
+          "name": "FunctionContractBridge",
+          "command": [
+            "lean",
+            "--trust=0",
+            "-o",
+            "MirroreaProofFirstFunctionContractBridge.olean",
+            "MirroreaProofFirstFunctionContractBridge.lean"
+          ],
+          "source_sha256": "30d0fdebd061fda9b8ba58f837e196d2dc68d99811b6108507dc62c175bb4fa4",
+          "exit_code": 0,
+          "elapsed_seconds": 0.2843501150200609,
+          "stdout": "'MirroreaProofFirst.FunctionContractBridge.lower_typed' depends on axioms: [propext]\n'MirroreaProofFirst.FunctionContractBridge.lower_executes' depends on axioms: [propext]\n'MirroreaProofFirst.FunctionContractBridge.unary_executes' depends on axioms: [propext]\n'MirroreaProofFirst.FunctionContractBridge.accepted_code_executes' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n'MirroreaProofFirst.FunctionContractBridge.accepted_unary_executes' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n",
+          "stderr": ""
+        },
+        {
+          "name": "ModuleContractBoundary",
+          "command": [
+            "lean",
+            "--trust=0",
+            "-o",
+            "MirroreaProofFirstModuleContractBoundary.olean",
+            "MirroreaProofFirstModuleContractBoundary.lean"
+          ],
+          "source_sha256": "d75d2655f8498954002e724ad5b7c05e79fef3bd46590105fa8a80f6d1183bec",
+          "exit_code": 0,
+          "elapsed_seconds": 3.7872854790184647,
+          "stdout": "'MirroreaProofFirst.ModuleContractBoundary.link_exact' depends on axioms: [propext]\n'MirroreaProofFirst.ModuleContractBoundary.call_sound' depends on axioms: [propext, Classical.choice, Quot.sound]\n'MirroreaProofFirst.ModuleContractBoundary.call_checked_complete' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n'MirroreaProofFirst.ModuleContractBoundary.call_symbolic_complete' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n'MirroreaProofFirst.ModuleContractBoundary.no_authority_no_call' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n'MirroreaProofFirst.ModuleContractBoundary.call_actual_execution' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n'MirroreaProofFirst.ModuleContractBoundary.changed_context_rejected' depends on axioms: [propext]\n'MirroreaProofFirst.ModuleContractBoundary.changed_module_stamp_rejected' depends on axioms: [propext]\n'MirroreaProofFirst.ModuleContractBoundary.insert_exists' depends on axioms: [propext, Classical.choice, Quot.sound]\n'MirroreaProofFirst.ModuleContractBoundary.insert_extends' depends on axioms: [propext]\n'MirroreaProofFirst.ModuleContractBoundary.insert_wf' does not depend on any axioms\n'MirroreaProofFirst.ModuleContractBoundary.inserts_preserve' depends on axioms: [propext]\n'MirroreaProofFirst.ModuleContractBoundary.catalog_agrees' depends on axioms: [propext]\n'MirroreaProofFirst.ModuleContractBoundary.catalog_sound' depends on axioms: [propext, Classical.choice, Quot.sound]\n'MirroreaProofFirst.ModuleContractBoundary.fresh_proof_cannot_rebind' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n'MirroreaProofFirst.ModuleContractBoundary.linked_descriptor_unique' depends on axioms: [propext]\n'MirroreaProofFirst.ModuleContractBoundary.changed_descriptor_rejected' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n'MirroreaProofFirst.ModuleContractBoundary.catalog_call_preserved' depends on axioms: [propext]\n'MirroreaProofFirst.ModuleContractBoundary.insert_sequence_preserves_call' depends on axioms: [propext]\n'MirroreaProofFirst.ModuleContractBoundary.no_catalog_revives_module' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n'MirroreaProofFirst.ModuleContractBoundary.missing_catalog_entry_rejected' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n'MirroreaProofFirst.ModuleContractBoundary.CurrentAllocation.exact' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n'MirroreaProofFirst.ModuleContractBoundary.CurrentAllocation.sound' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n'MirroreaProofFirst.ModuleContractBoundary.CurrentAllocation.lawful_completes' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n'MirroreaProofFirst.ModuleContractBoundary.CurrentAllocation.current_denied' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n'MirroreaProofFirst.ModuleContractBoundary.CurrentAllocation.resource_denied' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n'MirroreaProofFirst.ModuleContractBoundary.CurrentAllocation.Once.step_exact' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.ModuleContractBoundary.CurrentAllocation.Once.committed_retained' depends on axioms: [propext,\n Quot.sound]\n'MirroreaProofFirst.ModuleContractBoundary.CurrentAllocation.Once.advance_wf' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n'MirroreaProofFirst.ModuleContractBoundary.CurrentAllocation.Once.schedule_retains' depends on axioms: [propext,\n Quot.sound]\n'MirroreaProofFirst.ModuleContractBoundary.CurrentAllocation.Once.schedule_wf' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n'MirroreaProofFirst.ModuleContractBoundary.CurrentAllocation.Once.no_second_effect' depends on axioms: [propext,\n Quot.sound]\n'MirroreaProofFirst.ModuleContractBoundary.CurrentAllocation.Once.failure_unchanged' depends on axioms: [propext]\n'MirroreaProofFirst.ModuleContractBoundary.CurrentAllocation.Once.fresh_success' depends on axioms: [propext,\n Quot.sound]\nMirroreaProofFirstModuleContractBoundary.lean:795:3: warning: try 'simp' instead of 'simpa'\n\nNote: This linter can be disabled with `set_option linter.unnecessarySimpa false`\n'MirroreaProofFirst.ModuleContractBoundary.CurrentAllocation.Reservation.retained' depends on axioms: [propext]\n'MirroreaProofFirst.ModuleContractBoundary.CurrentAllocation.Reservation.attempted_key_retained' depends on axioms: [propext]\n'MirroreaProofFirst.ModuleContractBoundary.CurrentAllocation.Reservation.schedule_retains' depends on axioms: [propext]\n'MirroreaProofFirst.ModuleContractBoundary.CurrentAllocation.Reservation.no_second_effect' depends on axioms: [propext,\n Quot.sound]\n'MirroreaProofFirst.ModuleContractBoundary.CurrentAllocation.Reservation.resource_preserved' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n'MirroreaProofFirst.ModuleContractBoundary.CurrentAllocation.Reservation.schedule_resource_preserved' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n'MirroreaProofFirst.ModuleContractBoundary.CurrentAllocation.Reservation.history_preserved' depends on axioms: [propext,\n Quot.sound]\n'MirroreaProofFirst.ModuleContractBoundary.CurrentAllocation.Reservation.schedule_history_preserved' depends on axioms: [propext,\n Quot.sound]\n'MirroreaProofFirst.ModuleContractBoundary.CurrentAllocation.Reservation.new_effect_sound' depends on axioms: [propext]\n'MirroreaProofFirst.ModuleContractBoundary.CurrentAllocation.Reservation.useful_success' depends on axioms: [propext]\n'MirroreaProofFirst.ModuleContractBoundary.CurrentAllocation.Reservation.response_loss_preserves_effect' depends on axioms: [propext]\n'MirroreaProofFirst.ModuleContractBoundary.CurrentAllocation.Reservation.Observation.low_projection' depends on axioms: [propext]\n'MirroreaProofFirst.ModuleContractBoundary.CurrentAllocation.Reservation.Observation.trace_projection' depends on axioms: [propext]\n'MirroreaProofFirst.ModuleContractBoundary.CurrentAllocation.Reservation.Observation.two_run_low_trace' depends on axioms: [propext]\n'MirroreaProofFirst.ModuleContractBoundary.CurrentAllocation.Reservation.Observation.two_run_low_state' depends on axioms: [propext]\n'MirroreaProofFirst.ModuleContractBoundary.CurrentAllocation.Reservation.Observation.next_low_result' depends on axioms: [propext]\n'MirroreaProofFirst.ModuleContractBoundary.CurrentAllocation.Reservation.Observation.pair_wf' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n'MirroreaProofFirst.ModuleContractBoundary.CurrentAllocation.Reservation.Observation.distinct_scopes_separate' depends on axioms: [propext]\n'MirroreaProofFirst.ModuleContractBoundary.CurrentAllocation.Reservation.Observation.low_current_independent' depends on axioms: [propext]\n'MirroreaProofFirst.ModuleContractBoundary.CurrentAllocation.Reservation.PrivateImage.history_exact' depends on axioms: [propext,\n Quot.sound]\n'MirroreaProofFirst.ModuleContractBoundary.CurrentAllocation.Reservation.PrivateImage.check_exact' depends on axioms: [propext,\n Quot.sound]\n'MirroreaProofFirst.ModuleContractBoundary.CurrentAllocation.Reservation.PrivateImage.roundtrip' depends on axioms: [propext,\n Quot.sound]\n'MirroreaProofFirst.ModuleContractBoundary.CurrentAllocation.Reservation.PrivateImage.encoded_valid' depends on axioms: [propext,\n Quot.sound]\n'MirroreaProofFirst.ModuleContractBoundary.CurrentAllocation.Reservation.PrivateImage.restores_encoded' depends on axioms: [propext,\n Quot.sound]\n'MirroreaProofFirst.ModuleContractBoundary.CurrentAllocation.Reservation.PrivateImage.restore_sound' depends on axioms: [propext,\n Quot.sound]\n'MirroreaProofFirst.ModuleContractBoundary.CurrentAllocation.Reservation.PrivateImage.resume_encoded' depends on axioms: [propext,\n Quot.sound]\n'MirroreaProofFirst.ModuleContractBoundary.CurrentAllocation.Reservation.PrivateImage.resumed_reserved_rejected' depends on axioms: [propext,\n Quot.sound]\n'MirroreaProofFirst.ModuleContractBoundary.DurableDispatch.step_preserves' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.ModuleContractBoundary.DurableDispatch.no_duplicate_dispatch' depends on axioms: [propext,\n Quot.sound]\n'MirroreaProofFirst.ModuleContractBoundary.DurableDispatch.old_key_rejected_after_restart' depends on axioms: [propext]\n'MirroreaProofFirst.ModuleContractBoundary.DurableDispatch.fresh_completes' depends on axioms: [propext]\n'MirroreaProofFirst.ModuleContractBoundary.DurableDispatch.new_dispatch_has_durable_reservation' depends on axioms: [propext]\n",
+          "stderr": ""
+        },
+        {
+          "name": "OwnerAssignment",
+          "command": [
+            "lean",
+            "--trust=0",
+            "-o",
+            "MirroreaProofFirstOwnerAssignment.olean",
+            "MirroreaProofFirstOwnerAssignment.lean"
+          ],
+          "source_sha256": "93e6549ece5ac234bdfe6852561a4c590ab3a9eafa6f301f5e15954d234e5f74",
+          "exit_code": 0,
+          "elapsed_seconds": 0.7694560750096571,
+          "stdout": "'MirroreaProofFirst.OwnerAssignment.local_exact' depends on axioms: [propext]\n'MirroreaProofFirst.OwnerAssignment.erasure_value_only' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.OwnerAssignment.foreign_changes_irrelevant' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.OwnerAssignment.run_frame' depends on axioms: [propext]\n'MirroreaProofFirst.OwnerAssignment.run_failure' depends on axioms: [propext]\n'MirroreaProofFirst.OwnerAssignment.check_exact' depends on axioms: [propext]\n'MirroreaProofFirst.OwnerAssignment.run_typed' depends on axioms: [propext]\n'MirroreaProofFirst.OwnerAssignment.run_noninterference' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.OwnerAssignment.elaborate_exact' depends on axioms: [propext]\n'MirroreaProofFirst.OwnerAssignment.generated_destination' does not depend on any axioms\n'MirroreaProofFirst.OwnerAssignment.Capture.sequence_exact' depends on axioms: [propext]\n'MirroreaProofFirst.OwnerAssignment.Capture.attempt_typed' depends on axioms: [propext]\n'MirroreaProofFirst.OwnerAssignment.Capture.attempt_frame' depends on axioms: [propext]\n'MirroreaProofFirst.OwnerAssignment.Capture.attempt_low' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.OwnerAssignment.Capture.check_exact' depends on axioms: [propext]\n'MirroreaProofFirst.OwnerAssignment.Capture.captured_typed' depends on axioms: [propext]\n'MirroreaProofFirst.OwnerAssignment.Capture.captured_low' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.OwnerAssignment.Capture.capture_then_write_low' depends on axioms: [propext, Quot.sound]\n",
+          "stderr": ""
+        },
+        {
+          "name": "ProfileGuarantees",
+          "command": [
+            "lean",
+            "--trust=0",
+            "-o",
+            "MirroreaProofFirstProfileGuarantees.olean",
+            "MirroreaProofFirstProfileGuarantees.lean"
+          ],
+          "source_sha256": "ed37618c40cf6d918bc57361828e6bf30903780ec33324c8b114bbd5a2d605b3",
+          "exit_code": 0,
+          "elapsed_seconds": 0.26102249399991706,
+          "stdout": "'MirroreaProofFirst.ProfileGuarantees.accepted_symbolic_uniform' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.ProfileGuarantees.accepted_symbolic_inhabited' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.ProfileGuarantees.checked_value_not_uniform' depends on axioms: [propext, Quot.sound]\n",
+          "stderr": ""
+        },
+        {
+          "name": "HandleValues",
+          "command": [
+            "lean",
+            "--trust=0",
+            "-o",
+            "MirroreaProofFirstHandleValues.olean",
+            "MirroreaProofFirstHandleValues.lean"
+          ],
+          "source_sha256": "fb06e2753e7182f967700347ec2e0fca6a020caa584571c02afa5dd131e89b0b",
+          "exit_code": 0,
+          "elapsed_seconds": 0.5605692169920076,
+          "stdout": "'MirroreaProofFirst.HandleValues.check_exact' depends on axioms: [propext]\n'MirroreaProofFirst.HandleValues.evaluate_exact' depends on axioms: [propext]\n'MirroreaProofFirst.HandleValues.scoped_terminates' depends on axioms: [propext]\n'MirroreaProofFirst.HandleValues.no_new_reference' depends on axioms: [propext]\n'MirroreaProofFirst.HandleValues.invoke_sound' depends on axioms: [propext, Classical.choice, Quot.sound]\n'MirroreaProofFirst.HandleValues.no_authority' depends on axioms: [propext, Classical.choice, Quot.sound]\n'MirroreaProofFirst.HandleValues.stale_module' depends on axioms: [propext, Classical.choice, Quot.sound]\n'MirroreaProofFirst.HandleValues.registered_no_authority' depends on axioms: [propext, Classical.choice, Quot.sound]\n'MirroreaProofFirst.HandleValues.registered_sound' depends on axioms: [propext, Classical.choice, Quot.sound]\n'MirroreaProofFirst.HandleValues.registered_stale' depends on axioms: [propext, Classical.choice, Quot.sound]\n",
+          "stderr": ""
+        },
+        {
+          "name": "PureHandleFunctions",
+          "command": [
+            "lean",
+            "--trust=0",
+            "-o",
+            "MirroreaProofFirstPureHandleFunctions.olean",
+            "MirroreaProofFirstPureHandleFunctions.lean"
+          ],
+          "source_sha256": "e4e1d8255fa8fb0885c5c74e87875804f0b87663b50fd026c542710757a90d74",
+          "exit_code": 0,
+          "elapsed_seconds": 2.0783420400111936,
+          "stdout": "'MirroreaProofFirst.PureHandleFunctions.invoke_sound' depends on axioms: [propext, Classical.choice, Quot.sound]\n'MirroreaProofFirst.PureHandleFunctions.no_authority' depends on axioms: [propext, Classical.choice, Quot.sound]\n'MirroreaProofFirst.PureHandleFunctions.stale_module' depends on axioms: [propext, Classical.choice, Quot.sound]\n'MirroreaProofFirst.PureHandleFunctions.carried_invokes' depends on axioms: [propext]\n'MirroreaProofFirst.PureHandleFunctions.infer_exact' depends on axioms: [propext]\n'MirroreaProofFirst.PureHandleFunctions.evaluator_typed' depends on axioms: [propext]\n'MirroreaProofFirst.PureHandleFunctions.execution_complete' depends on axioms: [propext, Classical.choice, Quot.sound]\n'MirroreaProofFirst.PureHandleFunctions.execution_sound' depends on axioms: [propext]\n'MirroreaProofFirst.PureHandleFunctions.execution_exact' depends on axioms: [propext, Classical.choice, Quot.sound]\n'MirroreaProofFirst.PureHandleFunctions.carried_typed' depends on axioms: [propext]\n'MirroreaProofFirst.PureHandleFunctions.carried_evaluates' depends on axioms: [propext]\n'MirroreaProofFirst.PureHandleFunctions.registered_no_authority' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n'MirroreaProofFirst.PureHandleFunctions.registered_sound' depends on axioms: [propext, Classical.choice, Quot.sound]\n'MirroreaProofFirst.PureHandleFunctions.registered_stale' depends on axioms: [propext, Classical.choice, Quot.sound]\n'MirroreaProofFirst.PureHandleFunctions.closed_registered_sound' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n'MirroreaProofFirst.PureHandleFunctions.closed_registered_complete' depends on axioms: [propext]\n'MirroreaProofFirst.PureHandleFunctions.closed_registered_derivation_complete' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n'MirroreaProofFirst.PureHandleFunctions.closed_registered_carried' depends on axioms: [propext]\n'MirroreaProofFirst.PureHandleFunctions.registered_carried' depends on axioms: [propext]\n'MirroreaProofFirst.PureHandleFunctions.ReferencePreservation.registered_uses_existing' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n'MirroreaProofFirst.PureHandleFunctions.ReferencePreservation.Controls.capture_bound_necessary' depends on axioms: [propext]\n'MirroreaProofFirst.PureHandleFunctions.ReferencePreservation.carried_within' depends on axioms: [propext]\n'MirroreaProofFirst.PureHandleFunctions.ReferencePreservation.no_refresh' depends on axioms: [propext]\n'MirroreaProofFirst.PureHandleFunctions.ReferencePreservation.Controls.repeated' depends on axioms: [propext]\n'MirroreaProofFirst.PureHandleFunctions.ReferencePreservation.execution_preserves' depends on axioms: [propext]\n'MirroreaProofFirst.PureHandleFunctions.ReferencePreservation.evaluator_preserves' depends on axioms: [propext]\n'MirroreaProofFirst.PureHandleFunctions.ReferencePreservation.no_new_handle' depends on axioms: [propext]\n'MirroreaProofFirst.PureHandleFunctions.IterationSelection.typed' depends on axioms: [propext]\n'MirroreaProofFirst.PureHandleFunctions.IterationSelection.same_reference_bound' depends on axioms: [propext]\n'MirroreaProofFirst.PureHandleFunctions.IterationSelection.different_call_outcomes' depends on axioms: [propext]\n'MirroreaProofFirst.PureHandleFunctions.IterationBudget.identity_iteration' depends on axioms: [propext]\n'MirroreaProofFirst.PureHandleFunctions.IterationBudget.quiet_executes' depends on axioms: [propext]\n'MirroreaProofFirst.PureHandleFunctions.IterationBudget.execution_result_unique' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n'MirroreaProofFirst.PureHandleFunctions.IterationBudget.quiet_result_unique' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n'MirroreaProofFirst.PureHandleFunctions.IterationBudget.quiet_typed' depends on axioms: [propext]\n'MirroreaProofFirst.PureHandleFunctions.Normalization.fundamental' depends on axioms: [propext]\n'MirroreaProofFirst.PureHandleFunctions.Normalization.iteration_computable' depends on axioms: [propext]\n'MirroreaProofFirst.PureHandleFunctions.Normalization.closed_executes' depends on axioms: [propext]\n'MirroreaProofFirst.PureHandleFunctions.Normalization.closed_evaluator_total' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n'MirroreaProofFirst.PureHandleFunctions.Normalization.checked_handle_total' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n'MirroreaProofFirst.PureHandleFunctions.Normalization.checked_call_eventually_exact' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n'MirroreaProofFirst.PureHandleFunctions.Normalization.unbound_never_returns' depends on axioms: [propext]\n'MirroreaProofFirst.PureHandleFunctions.Normalization.typed_value_computable' depends on axioms: [propext]\n'MirroreaProofFirst.PureHandleFunctions.Normalization.typed_environment_good' depends on axioms: [propext]\n'MirroreaProofFirst.PureHandleFunctions.Normalization.typed_environment_total' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n",
+          "stderr": ""
+        }
+      ]
+    },
+    "physical": {
+      "command": [
+        "python3",
+        "/tmp/mirrorea-proof-first-20260909-gn29zka5/durable-dispatch-physical-final-skjhpgbx/proof_first_durable_dispatch_check.py",
+        "test",
+        "/tmp/mirrorea-proof-first-20260909-gn29zka5/durable-dispatch-physical-final-skjhpgbx"
+      ],
+      "source_sha256": "9897d5846a7abf0cfdba471b078286f1146afe19eb1ed49ce18d75992733aacb",
+      "exit_code": 0,
+      "elapsed_seconds": 1.6010489809850696,
+      "stdout": "{\n  \"scope\": \"local cooperative Linux process SIGKILL; NOT power loss, auth or Mir E2E\",\n  \"case_root\": \"/tmp/mirrorea-proof-first-20260909-gn29zka5/durable-dispatch-physical-final-skjhpgbx/physical-cases-qfbagurg\",\n  \"cases\": [\n    {\n      \"case\": \"normal\",\n      \"effects\": [\n        {\n          \"argument\": 4,\n          \"computed\": 17,\n          \"key\": [\n            1,\n            2,\n            3\n          ]\n        },\n        {\n          \"argument\": 4,\n          \"computed\": 17,\n          \"key\": [\n            1,\n            2,\n            4\n          ]\n        }\n      ]\n    },\n    {\n      \"case\": \"before-write\",\n      \"effects\": [\n        {\n          \"argument\": 4,\n          \"computed\": 17,\n          \"key\": [\n            1,\n            2,\n            3\n          ]\n        }\n      ],\n      \"retry\": \"started\",\n      \"child_returncode\": -9\n    },\n    {\n      \"case\": \"partial-write\",\n      \"effects\": [],\n      \"retry\": \"invalid\",\n      \"child_returncode\": -9\n    },\n    {\n      \"case\": \"written\",\n      \"effects\": [],\n      \"retry\": \"retained\",\n      \"child_returncode\": -9\n    },\n    {\n      \"case\": \"synced\",\n      \"effects\": [],\n      \"retry\": \"retained\",\n      \"child_returncode\": -9\n    },\n    {\n      \"case\": \"effect\",\n      \"effects\": [\n        {\n          \"argument\": 4,\n          \"computed\": 17,\n          \"key\": [\n            1,\n            2,\n            3\n          ]\n        }\n      ],\n      \"retry\": \"retained\",\n      \"child_returncode\": -9\n    },\n    {\n      \"case\": \"concurrent\",\n      \"effects\": [\n        {\n          \"argument\": 4,\n          \"computed\": 17,\n          \"key\": [\n            1,\n            2,\n            3\n          ]\n        }\n      ],\n      \"outcomes\": [\n        \"retained\",\n        \"started\"\n      ]\n    },\n    {\n      \"case\": \"effect-first-counterexample\",\n      \"effects\": [\n        {\n          \"argument\": 4,\n          \"computed\": 17,\n          \"key\": [\n            1,\n            2,\n            3\n          ]\n        },\n        {\n          \"argument\": 4,\n          \"computed\": 17,\n          \"key\": [\n            1,\n            2,\n            3\n          ]\n        }\n      ]\n    },\n    {\n      \"case\": \"rollback-counterexample\",\n      \"effects\": [\n        {\n          \"argument\": 4,\n          \"computed\": 17,\n          \"key\": [\n            1,\n            2,\n            3\n          ]\n        },\n        {\n          \"argument\": 4,\n          \"computed\": 17,\n          \"key\": [\n            1,\n            2,\n            3\n          ]\n        }\n      ]\n    },\n    {\n      \"case\": \"no-lock-counterexample\",\n      \"effects\": [\n        {\n          \"argument\": 4,\n          \"computed\": 17,\n          \"key\": [\n            1,\n            2,\n            3\n          ]\n        },\n        {\n          \"argument\": 4,\n          \"computed\": 17,\n          \"key\": [\n            1,\n            2,\n            3\n          ]\n        }\n      ]\n    },\n    {\n      \"case\": \"capacity\",\n      \"effects\": [\n        {\n          \"argument\": 4,\n          \"computed\": 17,\n          \"key\": [\n            1,\n            2,\n            0\n          ]\n        },\n        {\n          \"argument\": 4,\n          \"computed\": 17,\n          \"key\": [\n            1,\n            2,\n            1\n          ]\n        },\n        {\n          \"argument\": 4,\n          \"computed\": 17,\n          \"key\": [\n            1,\n            2,\n            2\n          ]\n        },\n        {\n          \"argument\": 4,\n          \"computed\": 17,\n          \"key\": [\n            1,\n            2,\n            3\n          ]\n        },\n        {\n          \"argument\": 4,\n          \"computed\": 17,\n          \"key\": [\n            1,\n            2,\n            4\n          ]\n        },\n        {\n          \"argument\": 4,\n          \"computed\": 17,\n          \"key\": [\n            1,\n            2,\n            5\n          ]\n        },\n        {\n          \"argument\": 4,\n          \"computed\": 17,\n          \"key\": [\n            1,\n            2,\n            6\n          ]\n        },\n        {\n          \"argument\": 4,\n          \"computed\": 17,\n          \"key\": [\n            1,\n            2,\n            7\n          ]\n        },\n        {\n          \"argument\": 4,\n          \"computed\": 17,\n          \"key\": [\n            1,\n            2,\n            8\n          ]\n        },\n        {\n          \"argument\": 4,\n          \"computed\": 17,\n          \"key\": [\n            1,\n            2,\n            9\n          ]\n        },\n        {\n          \"argument\": 4,\n          \"computed\": 17,\n          \"key\": [\n            1,\n            2,\n            10\n          ]\n        },\n        {\n          \"argument\": 4,\n          \"computed\": 17,\n          \"key\": [\n            1,\n            2,\n            11\n          ]\n        },\n        {\n          \"argument\": 4,\n          \"computed\": 17,\n          \"key\": [\n            1,\n            2,\n            12\n          ]\n        },\n        {\n          \"argument\": 4,\n          \"computed\": 17,\n          \"key\": [\n            1,\n            2,\n            13\n          ]\n        },\n        {\n          \"argument\": 4,\n          \"computed\": 17,\n          \"key\": [\n            1,\n            2,\n            14\n          ]\n        },\n        {\n          \"argument\": 4,\n          \"computed\": 17,\n          \"key\": [\n            1,\n            2,\n            15\n          ]\n        }\n      ]\n    },\n    {\n      \"case\": \"missing-journal\",\n      \"effects\": []\n    },\n    {\n      \"case\": \"duplicate-field\",\n      \"effects\": []\n    },\n    {\n      \"case\": \"boolean-id\",\n      \"effects\": []\n    },\n    {\n      \"case\": \"unknown-schema\",\n      \"effects\": []\n    },\n    {\n      \"case\": \"oversized\",\n      \"effects\": []\n    },\n    {\n      \"case\": \"deep-json\",\n      \"effects\": []\n    },\n    {\n      \"case\": \"effect-sync-error\",\n      \"effects\": [\n        {\n          \"argument\": 4,\n          \"computed\": 17,\n          \"key\": [\n            1,\n            2,\n            3\n          ]\n        }\n      ]\n    }\n  ]\n}\n",
+      "stderr": ""
+    },
+    "physical_cases": [
+      {
+        "case": "normal",
+        "effects": [
+          {
+            "argument": 4,
+            "computed": 17,
+            "key": [
+              1,
+              2,
+              3
+            ]
+          },
+          {
+            "argument": 4,
+            "computed": 17,
+            "key": [
+              1,
+              2,
+              4
+            ]
+          }
+        ]
+      },
+      {
+        "case": "before-write",
+        "effects": [
+          {
+            "argument": 4,
+            "computed": 17,
+            "key": [
+              1,
+              2,
+              3
+            ]
+          }
+        ],
+        "retry": "started",
+        "child_returncode": -9
+      },
+      {
+        "case": "partial-write",
+        "effects": [],
+        "retry": "invalid",
+        "child_returncode": -9
+      },
+      {
+        "case": "written",
+        "effects": [],
+        "retry": "retained",
+        "child_returncode": -9
+      },
+      {
+        "case": "synced",
+        "effects": [],
+        "retry": "retained",
+        "child_returncode": -9
+      },
+      {
+        "case": "effect",
+        "effects": [
+          {
+            "argument": 4,
+            "computed": 17,
+            "key": [
+              1,
+              2,
+              3
+            ]
+          }
+        ],
+        "retry": "retained",
+        "child_returncode": -9
+      },
+      {
+        "case": "concurrent",
+        "effects": [
+          {
+            "argument": 4,
+            "computed": 17,
+            "key": [
+              1,
+              2,
+              3
+            ]
+          }
+        ],
+        "outcomes": [
+          "retained",
+          "started"
+        ]
+      },
+      {
+        "case": "effect-first-counterexample",
+        "effects": [
+          {
+            "argument": 4,
+            "computed": 17,
+            "key": [
+              1,
+              2,
+              3
+            ]
+          },
+          {
+            "argument": 4,
+            "computed": 17,
+            "key": [
+              1,
+              2,
+              3
+            ]
+          }
+        ]
+      },
+      {
+        "case": "rollback-counterexample",
+        "effects": [
+          {
+            "argument": 4,
+            "computed": 17,
+            "key": [
+              1,
+              2,
+              3
+            ]
+          },
+          {
+            "argument": 4,
+            "computed": 17,
+            "key": [
+              1,
+              2,
+              3
+            ]
+          }
+        ]
+      },
+      {
+        "case": "no-lock-counterexample",
+        "effects": [
+          {
+            "argument": 4,
+            "computed": 17,
+            "key": [
+              1,
+              2,
+              3
+            ]
+          },
+          {
+            "argument": 4,
+            "computed": 17,
+            "key": [
+              1,
+              2,
+              3
+            ]
+          }
+        ]
+      },
+      {
+        "case": "capacity",
+        "effects": [
+          {
+            "argument": 4,
+            "computed": 17,
+            "key": [
+              1,
+              2,
+              0
+            ]
+          },
+          {
+            "argument": 4,
+            "computed": 17,
+            "key": [
+              1,
+              2,
+              1
+            ]
+          },
+          {
+            "argument": 4,
+            "computed": 17,
+            "key": [
+              1,
+              2,
+              2
+            ]
+          },
+          {
+            "argument": 4,
+            "computed": 17,
+            "key": [
+              1,
+              2,
+              3
+            ]
+          },
+          {
+            "argument": 4,
+            "computed": 17,
+            "key": [
+              1,
+              2,
+              4
+            ]
+          },
+          {
+            "argument": 4,
+            "computed": 17,
+            "key": [
+              1,
+              2,
+              5
+            ]
+          },
+          {
+            "argument": 4,
+            "computed": 17,
+            "key": [
+              1,
+              2,
+              6
+            ]
+          },
+          {
+            "argument": 4,
+            "computed": 17,
+            "key": [
+              1,
+              2,
+              7
+            ]
+          },
+          {
+            "argument": 4,
+            "computed": 17,
+            "key": [
+              1,
+              2,
+              8
+            ]
+          },
+          {
+            "argument": 4,
+            "computed": 17,
+            "key": [
+              1,
+              2,
+              9
+            ]
+          },
+          {
+            "argument": 4,
+            "computed": 17,
+            "key": [
+              1,
+              2,
+              10
+            ]
+          },
+          {
+            "argument": 4,
+            "computed": 17,
+            "key": [
+              1,
+              2,
+              11
+            ]
+          },
+          {
+            "argument": 4,
+            "computed": 17,
+            "key": [
+              1,
+              2,
+              12
+            ]
+          },
+          {
+            "argument": 4,
+            "computed": 17,
+            "key": [
+              1,
+              2,
+              13
+            ]
+          },
+          {
+            "argument": 4,
+            "computed": 17,
+            "key": [
+              1,
+              2,
+              14
+            ]
+          },
+          {
+            "argument": 4,
+            "computed": 17,
+            "key": [
+              1,
+              2,
+              15
+            ]
+          }
+        ]
+      },
+      {
+        "case": "missing-journal",
+        "effects": []
+      },
+      {
+        "case": "duplicate-field",
+        "effects": []
+      },
+      {
+        "case": "boolean-id",
+        "effects": []
+      },
+      {
+        "case": "unknown-schema",
+        "effects": []
+      },
+      {
+        "case": "oversized",
+        "effects": []
+      },
+      {
+        "case": "deep-json",
+        "effects": []
+      },
+      {
+        "case": "effect-sync-error",
+        "effects": [
+          {
+            "argument": 4,
+            "computed": 17,
+            "key": [
+              1,
+              2,
+              3
+            ]
+          }
+        ]
+      }
+    ],
+    "physical_filesystem": "/dev/sda2 ext4 rw,relatime; root filesystem, not an external mounted workdisk",
+    "limits": [
+      "Synchronized honest journal, stable file identity, cooperative serialized owner and no dispatched worker outliving owner are explicit assumptions",
+      "SIGKILL is process failure, not power loss; no fsync implementation or decoder refinement proof",
+      "Malformed tails quarantine; not a claimed old/new-state refinement for arbitrary corruption",
+      "No authenticated current head, authority issuance, source/code/contract binding, secret observation or whole-World recovery",
+      "Dispatch count is not exactly-once effect or response delivery; retained no-start reservations may prevent progress"
+    ],
+    "failed_drafts": [
+      {
+        "name": "draft-1",
+        "stdout_sha256": "e4b69f70b70432605ef61e4f5aeee754e63b76eab3aa9fd794edaa22e8cd0dac",
+        "status": "failed elaboration, not proof evidence"
+      },
+      {
+        "name": "draft-3",
+        "stdout_sha256": "730e4fbcf8ebb28d3a7054bd1608dd338c51765c1508d7de320febd25f0f62db",
+        "status": "failed elaboration, not proof evidence"
+      }
+    ],
+    "physical_17": {
+      "command": [
+        "python3",
+        "/tmp/mirrorea-proof-first-20260909-gn29zka5/durable-dispatch-mirror-u2ao0yig/proof_first_durable_dispatch_check.py",
+        "test",
+        "/tmp/mirrorea-proof-first-20260909-gn29zka5/durable-dispatch-mirror-u2ao0yig"
+      ],
+      "source_sha256": "ba11d73b085fb225fa227ff9f603910381f2c11466d5fffb83eb8f74ecc6aa08",
+      "exit_code": 0,
+      "elapsed_seconds": 1.5280075179762207,
+      "stdout": "{\n  \"scope\": \"local cooperative Linux process SIGKILL; NOT power loss, auth or Mir E2E\",\n  \"case_root\": \"/tmp/mirrorea-proof-first-20260909-gn29zka5/durable-dispatch-mirror-u2ao0yig/physical-cases-2ee9vrv1\",\n  \"cases\": [\n    {\n      \"case\": \"normal\",\n      \"effects\": [\n        {\n          \"argument\": 4,\n          \"computed\": 17,\n          \"key\": [\n            1,\n            2,\n            3\n          ]\n        },\n        {\n          \"argument\": 4,\n          \"computed\": 17,\n          \"key\": [\n            1,\n            2,\n            4\n          ]\n        }\n      ]\n    },\n    {\n      \"case\": \"before-write\",\n      \"effects\": [\n        {\n          \"argument\": 4,\n          \"computed\": 17,\n          \"key\": [\n            1,\n            2,\n            3\n          ]\n        }\n      ],\n      \"retry\": \"started\",\n      \"child_returncode\": -9\n    },\n    {\n      \"case\": \"partial-write\",\n      \"effects\": [],\n      \"retry\": \"invalid\",\n      \"child_returncode\": -9\n    },\n    {\n      \"case\": \"written\",\n      \"effects\": [],\n      \"retry\": \"retained\",\n      \"child_returncode\": -9\n    },\n    {\n      \"case\": \"synced\",\n      \"effects\": [],\n      \"retry\": \"retained\",\n      \"child_returncode\": -9\n    },\n    {\n      \"case\": \"effect\",\n      \"effects\": [\n        {\n          \"argument\": 4,\n          \"computed\": 17,\n          \"key\": [\n            1,\n            2,\n            3\n          ]\n        }\n      ],\n      \"retry\": \"retained\",\n      \"child_returncode\": -9\n    },\n    {\n      \"case\": \"concurrent\",\n      \"effects\": [\n        {\n          \"argument\": 4,\n          \"computed\": 17,\n          \"key\": [\n            1,\n            2,\n            3\n          ]\n        }\n      ],\n      \"outcomes\": [\n        \"retained\",\n        \"started\"\n      ]\n    },\n    {\n      \"case\": \"effect-first-counterexample\",\n      \"effects\": [\n        {\n          \"argument\": 4,\n          \"computed\": 17,\n          \"key\": [\n            1,\n            2,\n            3\n          ]\n        },\n        {\n          \"argument\": 4,\n          \"computed\": 17,\n          \"key\": [\n            1,\n            2,\n            3\n          ]\n        }\n      ]\n    },\n    {\n      \"case\": \"rollback-counterexample\",\n      \"effects\": [\n        {\n          \"argument\": 4,\n          \"computed\": 17,\n          \"key\": [\n            1,\n            2,\n            3\n          ]\n        },\n        {\n          \"argument\": 4,\n          \"computed\": 17,\n          \"key\": [\n            1,\n            2,\n            3\n          ]\n        }\n      ]\n    },\n    {\n      \"case\": \"no-lock-counterexample\",\n      \"effects\": [\n        {\n          \"argument\": 4,\n          \"computed\": 17,\n          \"key\": [\n            1,\n            2,\n            3\n          ]\n        },\n        {\n          \"argument\": 4,\n          \"computed\": 17,\n          \"key\": [\n            1,\n            2,\n            3\n          ]\n        }\n      ]\n    },\n    {\n      \"case\": \"capacity\",\n      \"effects\": [\n        {\n          \"argument\": 4,\n          \"computed\": 17,\n          \"key\": [\n            1,\n            2,\n            0\n          ]\n        },\n        {\n          \"argument\": 4,\n          \"computed\": 17,\n          \"key\": [\n            1,\n            2,\n            1\n          ]\n        },\n        {\n          \"argument\": 4,\n          \"computed\": 17,\n          \"key\": [\n            1,\n            2,\n            2\n          ]\n        },\n        {\n          \"argument\": 4,\n          \"computed\": 17,\n          \"key\": [\n            1,\n            2,\n            3\n          ]\n        },\n        {\n          \"argument\": 4,\n          \"computed\": 17,\n          \"key\": [\n            1,\n            2,\n            4\n          ]\n        },\n        {\n          \"argument\": 4,\n          \"computed\": 17,\n          \"key\": [\n            1,\n            2,\n            5\n          ]\n        },\n        {\n          \"argument\": 4,\n          \"computed\": 17,\n          \"key\": [\n            1,\n            2,\n            6\n          ]\n        },\n        {\n          \"argument\": 4,\n          \"computed\": 17,\n          \"key\": [\n            1,\n            2,\n            7\n          ]\n        },\n        {\n          \"argument\": 4,\n          \"computed\": 17,\n          \"key\": [\n            1,\n            2,\n            8\n          ]\n        },\n        {\n          \"argument\": 4,\n          \"computed\": 17,\n          \"key\": [\n            1,\n            2,\n            9\n          ]\n        },\n        {\n          \"argument\": 4,\n          \"computed\": 17,\n          \"key\": [\n            1,\n            2,\n            10\n          ]\n        },\n        {\n          \"argument\": 4,\n          \"computed\": 17,\n          \"key\": [\n            1,\n            2,\n            11\n          ]\n        },\n        {\n          \"argument\": 4,\n          \"computed\": 17,\n          \"key\": [\n            1,\n            2,\n            12\n          ]\n        },\n        {\n          \"argument\": 4,\n          \"computed\": 17,\n          \"key\": [\n            1,\n            2,\n            13\n          ]\n        },\n        {\n          \"argument\": 4,\n          \"computed\": 17,\n          \"key\": [\n            1,\n            2,\n            14\n          ]\n        },\n        {\n          \"argument\": 4,\n          \"computed\": 17,\n          \"key\": [\n            1,\n            2,\n            15\n          ]\n        }\n      ]\n    },\n    {\n      \"case\": \"missing-journal\",\n      \"effects\": []\n    },\n    {\n      \"case\": \"duplicate-field\",\n      \"effects\": []\n    },\n    {\n      \"case\": \"boolean-id\",\n      \"effects\": []\n    },\n    {\n      \"case\": \"unknown-schema\",\n      \"effects\": []\n    },\n    {\n      \"case\": \"oversized\",\n      \"effects\": []\n    },\n    {\n      \"case\": \"effect-sync-error\",\n      \"effects\": [\n        {\n          \"argument\": 4,\n          \"computed\": 17,\n          \"key\": [\n            1,\n            2,\n            3\n          ]\n        }\n      ]\n    }\n  ]\n}\n",
+      "stderr": ""
+    },
+    "deep_json_test_delta": {
+      "prior_harness": {
+        "source_sha256": "9897d5846a7abf0cfdba471b078286f1146afe19eb1ed49ce18d75992733aacb",
+        "exit_code": 0
+      },
+      "status": "The new deep-JSON control already passed. An outer diagnostic expecting failure asserted incorrectly (35925a); no reference implementation bug was reproduced. Final copied reference with 18 cases passes98c620.",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
   }
 }

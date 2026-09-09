@@ -484,3 +484,45 @@ The queue issue is a static mechanism finding, not a reproduced denial-of-servic
 or a claim that the accepted fixed test child floods the queue. Child output is
 also synchronous: tokio deadlines alone do not prove passive cost noninterference.
 No production fix is adopted before its required theory/review boundary.
+
+Durable dispatch continuation, 2026-09-10 08:31 JST (same W2 consumer): explicit
+prepare/sync/dispatch/finish/crash steps replace an unexplained atomic reservation
+assumption for a small nonproduction protocol. General Lean invariants preserve
+journal and actual-start uniqueness through arbitrary finite restart schedules;
+new dispatch implies a prior durable reservation, and a fresh key completes in
+four steps. Synchronized but never-started reservations remain possible. The
+actual-start list is ghost history, not a reconstructed record used by retry.
+
+Final kernel1dbdf0 and fresh fifteen-module mirrorfc51d8 PASS; new axioms are
+propext/Quot.sound only. Four mutations each fail general statements and concrete
+controls: missing sync reservation, journal loss on crash, repeat-ready dispatch,
+and all-reject. The last is excluded by general fresh completion, not by claiming
+its safety property false. Failed draft1/draft3 elaborations remain non-evidence.
+Exact commands/hashes/axiom output/mutation replacements: W2_EXTENSION_CHECK.durable_dispatch.
+
+The separate nonproduction Linux reference performs actual private-file append,
+fsync, cooperative flock and a local callback; it never reads its effect sink to
+supply expected outcomes. Final17cases pass4379c5 and mirrored17passfc51d8. SIGKILL
+before write permits one later start; partial writes quarantine; sync-before-start
+can leave a reservation without a start; killing after the effect blocks repetition.
+Two normal processes serialize. Effect-first, rollback and lock-removal controls
+each produce two actual callback records. Bounds/schema/argument conflicts reject.
+A post-effect synchronization error yields failed-unknown and retains history.
+The script is scripts/proof_first_durable_dispatch_check.py, with artifacts beneath
+a newly created work-root subdirectory; no production or original handoff inputs.
+
+Operational assumptions remain honest synchronized storage, stable journal inode,
+cooperative exclusion, and no dispatch worker outliving the owner. Installed Linux
+man-pages6.7 fsync/flock were fully read; initial directory entry is synchronized.
+Actual filesystem is root /dev/sda2 ext4, not a mounted external workdisk. This is
+process-failure evidence, not power-loss testing, proven filesystem/JSON refinement,
+authenticated current-head recovery, source/code/contract/auth binding, secret
+observation, whole-world recovery or Mir E2E. A per-owner journal is not a selected
+central-world architecture. No Q18 policy, production contract or alpha is adopted.
+
+The final reference additionally checks bounded deeply nested JSON:18cases pass
+in a fresh source copy98c620. The previous17-case copies remain recorded. A
+separate diagnostic wrapper incorrectly expected the new negative control to fail;
+its assertion failed35925a although the reference test returned0. This is not a
+reproduced decoder bug or failed case hidden as success. No Lean source changed
+after the fresh fifteen-module check; this later delta is one negative test.

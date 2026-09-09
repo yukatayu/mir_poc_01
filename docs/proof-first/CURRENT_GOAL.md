@@ -83,3 +83,13 @@ Compare explicit finite slots with a smallest sparse-indexed alternative retaini
 heads and unique indices. Structural validity must not be promoted into history
 truth, authenticated freshness or current authority; accepted fabricated/erased
 history images are the falsifiers. Physical and whole-World recovery remain open.
+
+The current restore consumer now compares durable reservation before dispatch
+with a smallest alternative that retries only with independently established
+no-effect/no-outstanding-action evidence. The unsafe control dispatches before
+its reservation durability barrier. Model prepare, durability, dispatch, finish
+and crash prefixes separately; prove no second dispatch through arbitrary finite
+restarts and expose retained reservations without effects. A monotone honest
+journal and one serialized owner are explicit assumptions, not authenticated
+freshness or physical crash guarantees. Match this reference with a nonproduction
+local-file/two-process stop experiment; it is not production recovery or alpha.

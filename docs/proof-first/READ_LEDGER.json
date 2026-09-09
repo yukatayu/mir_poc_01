@@ -274,9 +274,9 @@
   },
   {
     "path": "samples/README.md",
-    "sha256": "0b1f19137ea59a12c0c58f097f52b5fdfe77d5197ac61ed4e84194514208952e",
-    "range": "1-298",
-    "role": "LAB source/evidence or task-authored snapshot",
+    "sha256": "3ca53ccb799ab012776ff06d65a21ed80cfc69c62d39273bdb0f20a5f751dc2b",
+    "range": "1-305",
+    "role": "Current LAB source/companion; full previous source plus sole-main authored and reviewed delta, no normative acceptance",
     "status": "full"
   },
   {
@@ -2514,9 +2514,9 @@
   },
   {
     "path": "samples/lean/README.md",
-    "sha256": "b163ffd0c94a02f28958e7d5a74d7ea0611d1895d310a500b08b91a049c2a3d6",
-    "range": "1-88",
-    "role": "LAB source/evidence or task-authored snapshot",
+    "sha256": "0c46dc8d3f621c93bf3a0eef70fb1523a7cd217acbed12531b33ce6f19cb1e5a",
+    "range": "1-103",
+    "role": "Current LAB source/companion; full previous source plus sole-main authored and reviewed delta, no normative acceptance",
     "status": "full"
   },
   {
@@ -5595,9 +5595,9 @@
   {
     "path": "specs/examples/203-current-l2-theorem-line-second-consumer-pressure-ready-proof-assistant-adapter-contract-threshold.md",
     "sha256": "79e820913a41f729dee08da88f887d71797b1c7f67d34138b1c174d07703811f",
-    "range": "",
-    "role": "LAB evidence/history/source",
-    "status": "unread"
+    "range": "1-191",
+    "role": "LAB historical notebook bridge comparison; not current authority or executable evidence",
+    "status": "full"
   },
   {
     "path": "specs/examples/88-current-l2-stage3-admit-next-step-sequencing.md",
@@ -6281,9 +6281,9 @@
   {
     "path": "specs/examples/205-current-l2-theorem-line-theorem-export-checker-pressure-ready-checker-facing-contract-threshold.md",
     "sha256": "ddf7522e2f3fd57886427ba7e9e37e8d83620db61e63cd7090f15e7ca57842b9",
-    "range": "",
-    "role": "LAB evidence/history/source",
-    "status": "unread"
+    "range": "1-192",
+    "role": "LAB historical notebook bridge comparison; not current authority or executable evidence",
+    "status": "full"
   },
   {
     "path": "specs/examples/27-current-l2-fixture-scaffold-helper.md",
@@ -6407,9 +6407,9 @@
   {
     "path": "specs/examples/201-current-l2-theorem-line-proof-hint-ready-consumer-hint-threshold.md",
     "sha256": "45815ad27e38602b44803c1bea2c1927822b28d26bce74e1ef82062282c0724c",
-    "range": "",
-    "role": "LAB evidence/history/source",
-    "status": "unread"
+    "range": "1-192",
+    "role": "LAB historical notebook bridge comparison; not current authority or executable evidence",
+    "status": "full"
   },
   {
     "path": "specs/examples/419-current-l2-first-theorem-lemma-family-wording-hardening.md",
@@ -6519,9 +6519,9 @@
   {
     "path": "specs/examples/206-current-l2-theorem-line-theorem-export-checker-contract-ready-exported-checker-payload-pressure-threshold.md",
     "sha256": "c3e9ddba0c0e0f1f0a0b39575a414d117c4248c15c64a245bab925d80ed60272",
-    "range": "",
-    "role": "LAB evidence/history/source",
-    "status": "unread"
+    "range": "1-192",
+    "role": "LAB historical notebook bridge comparison; not current authority or executable evidence",
+    "status": "full"
   },
   {
     "path": "specs/examples/335-current-l2-first-widened-authored-row-e1-actualization-ready-second-widened-authored-row-e21-actualization-comparison.md",
@@ -7534,9 +7534,9 @@
   {
     "path": "specs/examples/204-current-l2-theorem-line-proof-assistant-adapter-contract-ready-theorem-export-checker-pressure-threshold.md",
     "sha256": "0960e825d6cf2f3c2a798d742f71e5f8d152f63c2c5b42f86e32575fed0fa54e",
-    "range": "",
-    "role": "LAB evidence/history/source",
-    "status": "unread"
+    "range": "1-191",
+    "role": "LAB historical notebook bridge comparison; not current authority or executable evidence",
+    "status": "full"
   },
   {
     "path": "specs/examples/185-current-l2-theorem-line-retained-payload-body-materialization-detail-ready-retained-payload-body-materialization-payload-threshold.md",
@@ -9669,9 +9669,9 @@
   {
     "path": "specs/examples/202-current-l2-theorem-line-consumer-hint-ready-second-consumer-pressure-threshold.md",
     "sha256": "4e571fbf07ec9d76bebb674231a266178ff74eafa9b02cdf2a73d4788e020b29",
-    "range": "",
-    "role": "LAB evidence/history/source",
-    "status": "unread"
+    "range": "1-193",
+    "role": "LAB historical notebook bridge comparison; not current authority or executable evidence",
+    "status": "full"
   },
   {
     "path": "specs/examples/142-current-l2-theorem-line-compare-ready-bridge-bless-decision-threshold.md",
@@ -17144,9 +17144,9 @@
   },
   {
     "path": "scripts/README.md",
-    "sha256": "b8b887f4a75c6f61d7e0b09b2f2d3f620fee6e65fdcfe7473a00f352825243a8",
-    "range": "1-417",
-    "role": "LAB source/evidence or task-authored snapshot",
+    "sha256": "3ff3d849c51394c5992f937b5bd3057114b7147d14a0285146426b24089c3551",
+    "range": "1-434",
+    "role": "Current LAB source/companion; full previous source plus sole-main authored and reviewed delta, no normative acceptance",
     "status": "full"
   },
   {
@@ -19968,9 +19968,9 @@
   },
   {
     "path": "samples/lean/foundations/MirroreaProofFirstModuleContractBoundary.lean",
-    "sha256": "3d502d4ed0c4fd2a894c3f9cd40762fa7a7afbea94af419b855b359308b32bfe",
-    "range": "1-379",
-    "role": "full self-review original and descriptor/catalog extension; not independent review",
+    "sha256": "d75d2655f8498954002e724ad5b7c05e79fef3bd46590105fa8a80f6d1183bec",
+    "range": "1-1366",
+    "role": "Current LAB source/companion; full previous source plus sole-main authored and reviewed delta, no normative acceptance",
     "status": "full"
   },
   {
@@ -21907,9 +21907,9 @@
   },
   {
     "path": "samples/lean/foundations/MirroreaProofFirstContracts.md",
-    "sha256": "0ea9129985836e905df4f764605c35335331098d87815a02e73e6ee658da143e",
-    "range": "1-373",
-    "role": "Existing full read plus sole-main authored/reviewed reservation-effect delta; unreviewed LAB, no alpha/production/Canon adoption.",
+    "sha256": "e7738367132e340eafa659b2b547a389ca3515e01be281f32bda2e3c9a84e504",
+    "range": "1-509",
+    "role": "Current LAB source/companion; full previous source plus sole-main authored and reviewed delta, no normative acceptance",
     "status": "full"
   },
   {
@@ -21921,9 +21921,9 @@
   },
   {
     "path": "docs/proof-first/CURRENT_GOAL.md",
-    "sha256": "50e6b3df87a70ff0dbce3e369a2cd70ca163bd9ac06ea02c3b0624d17a8e9ec0",
-    "range": "1-71",
-    "role": "Existing full read plus sole-main authored/reviewed reservation-effect delta; unreviewed LAB, no alpha/production/Canon adoption.",
+    "sha256": "1972c36682044f4189037e9f320b019de8179ab152645c95207477b2352b5b91",
+    "range": "1-95",
+    "role": "Current LAB source/companion; full previous source plus sole-main authored and reviewed delta, no normative acceptance",
     "status": "full"
   },
   {
@@ -22281,6 +22281,27 @@
     "sha256": "7eebf264e618ec3a0f5f6e81016204f4d6cd570a59c9b53e109d1511020a0028",
     "range": "1-132",
     "role": "Full actual read of existing private I3 baseline dependency; not generic source/alpha or physical recovery proof; 214bba",
+    "status": "full"
+  },
+  {
+    "path": "/usr/share/man/man2/fsync.2.gz",
+    "sha256": "915671727316cf46fbd7d829afb7fdab55690ffc6247f2db7dc7a3a40c12a839",
+    "range": "1-200",
+    "role": "Installed Linux man-pages 6.7, full decompressed primary API text, operational assumption only",
+    "status": "full"
+  },
+  {
+    "path": "/usr/share/man/man2/flock.2.gz",
+    "sha256": "8d0605a0f67df11676883aa17f5b994c7483dae6334f3d9645c4731e6c07dc7e",
+    "range": "1-267",
+    "role": "Installed Linux man-pages 6.7, full decompressed primary API text, operational assumption only",
+    "status": "full"
+  },
+  {
+    "path": "scripts/proof_first_durable_dispatch_check.py",
+    "sha256": "9897d5846a7abf0cfdba471b078286f1146afe19eb1ed49ce18d75992733aacb",
+    "range": "1-313",
+    "role": "Current LAB source/companion; full previous source plus sole-main authored and reviewed delta, no normative acceptance",
     "status": "full"
   }
 ]
