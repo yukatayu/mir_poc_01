@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-09-09 22:02 JST
+最終更新: 2026-09-10 00:15 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -58,7 +58,8 @@ public/production layers remain later.
 Separate current task: user-authorized proof-first LAB research, active single goal
 W1-passive-erasure (PL1 S1/S3, theory/proof). This is not a Plan250 milestone or
 I3-4 resume. Scoped support/current-use/tracked-query/graph Lean proofs and reviews
-exist; passive exact-retention extension review completed. Source/type/dynamic
+exist; passive exact-retention and accepted mathematical producer reviews completed.
+Fallible single-assignment and general local-label proofs have scoped source review and kernel checks; abort/alias/source review is pending. Source/type/dynamic
 composition and actual implementation/alpha gates remain open. Required corpus
 reading is incomplete. Memory: `plan/proof-first-foundation-correspondence.md`;
 evidence: `docs/reports/2611-mirrorea-proof-first-w1-foundations.md`.
@@ -280,3 +281,7 @@ The authorized roadmap is paused, not blocked, stale or closed.
   checks passed at recorded cuts; Oracle reviews and source reading ongoing. M8
   observer4baseline tests passed; effective-label trusted-setup countermodel
   reproduced. No implementation refinement/alpha acceptance or I3-4 resume.
+
+- 2026-09-09 23:04 JST: Proof-first LAB: accepted producerの一般二実行証明とoracle指摘の発生有無反例を検査・統合。実M7 visibility/operand、M8 overflow結果、固定typing helperのコメント入力反例を記録。source/実装・α接続は未達。
+
+- 2026-09-10 00:15 JST: Proof-first LAB: 一般label・失敗付き代入のreview済みcutを統合し、10モジュールのcoherent kernel検査と文書検査を確認。実source結果/frameの8有限検査と2変異拒否を記録。W1継続、α未達。

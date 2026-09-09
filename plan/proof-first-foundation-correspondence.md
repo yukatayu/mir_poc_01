@@ -29,7 +29,8 @@ remain excluded. Independent reversible research can continue.
 | Current use | declarative authorization vs checker/producer; same-context checks and nonduplicating admission history | grant scope, authenticated caller, actual consumption/outcome, all mutators and current-head/recovery |
 | Tracked validation | actual read traces, monotone write history, final stamps and fixed-patch replay | atomic read/publish mechanism, prepared token origin/consumption, actual validator/source translation |
 | Finite relation graph | independent Path/Acyclic, exact checker and actual resulting graph theorem | external universe, source graph meaning, all mutators; endpoint is not every physical prefix |
-| Passive observation | finite erasure, separate two-run arithmetic, exact bounded retained-list theorem | scoped extension reviewed; producer IFC, request cuts, current authority, full-row provenance, physical resources |
+| Passive observation | finite erasure, separate two-run arithmetic, exact bounded retained-list theorem | request cuts, current authority, full-row provenance, physical resources |
+| Accepted mathematical producer | independent typing/flow characterizations, checked seq/branch low-state and exact write-list equality, actual collector composition; reviewed | ordinary-source binding/aliases, actual execution/projection, finite-word outcomes, all admission/restore paths |
 
 Lean4.29.1 trust0 checks are actual general proofs under stated premises; fixed
 controls, SMT and finite comparisons are separate. Standard logical axioms and
@@ -77,6 +78,19 @@ retention defeats hidden eviction; current M8 per-kind/latest summary requires i
 own refinement. Current-authority changes, retained-old rows, metadata and resources
 need separate obligations. No retention or revocation policy is silently selected.
 
+New consumer evidence distinguishes two front ends. Actual M7 retains the
+unannotated atk operand and generates observer_safe hp publication with no
+residual. Canon spec/02 and spec/08 define unlisted fields as private by default;
+observer_safe is not implicit public release. Exact observer/Nat-policy mapping
+and current release authorization remain distinct obligations. Actual M8 atk+1 has input-dependent overflow failure while hp
+stays fixed; observable outcomes therefore need their own dependency treatment.
+The fallible base and type/range/collector delta have completed Oracle source
+review. No runtime policy adoption follows.
+The older clean-near-end typing helper instead uses fixed theory/sample rows:
+its unchanged scratch copy returns valid/success for a comment-only three-token
+sample. That inventory result cannot supply ordinary-source semantic evidence.
+None of these probes demonstrates network delivery or reopens accepted I3-3.
+
 ## Reliance and continuation
 
 A reproducible counterexample suspends affected downstream reliance immediately.
@@ -86,3 +100,14 @@ material. Only an ADR-0043 accepted-profile falsifier reopens I3-3; an unrelated
 countermodel does not. Current permitted research needs no new owner answer.
 One report2611 accumulates the work; a reviewed integration commit/push is a
 checkpoint, not completion of the user request.
+
+
+Current continuation evidence: GeneralLabels and fixed fallible assignment now
+have completed neutral source review and coherent kernel checks, separately.
+Finite theory work is O(n³) relation/join evaluations, not a runtime bound for
+arbitrary functions. Abort/alias/source correspondence and scoped W1→W2 boundary
+are under a later Oracle review; no sequence transition has been adopted.
+The later assignment-admission and selected actual outcome/frame controls are
+unreviewed. They do not discharge source/all-entry/current-authority, observer,
+physical execution or restoration obligations. Report2611 and FOUNDATION_CHECK
+retain exact cuts; no numbered roadmap or normative state changed.

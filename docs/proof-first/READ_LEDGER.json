@@ -1512,29 +1512,8 @@
     "status": "unread"
   },
   {
-    "path": "specs/01-charter-and-decision-levels.md",
-    "sha256": "9e36a9937c19a0dcc90b10e8cf86b180fba512a9281e4e0f9e8adaebb3ffa997",
-    "range": "",
-    "role": "LAB evidence/history/source",
-    "status": "unread"
-  },
-  {
-    "path": "specs/03-layer-model.md",
-    "sha256": "eb237376c19eb8952f7663215c2647c8f6a0f65c0ffc9d59ee5d4b517bc65153",
-    "range": "",
-    "role": "LAB evidence/history/source",
-    "status": "unread"
-  },
-  {
     "path": "specs/27-spatial-portal-and-shard-extension-boundary.md",
     "sha256": "f94ab8c8c6a1b7ea7ca560a4f791a062ea91f08c8117c3d90dabaa59079e4926",
-    "range": "",
-    "role": "LAB evidence/history/source",
-    "status": "unread"
-  },
-  {
-    "path": "specs/07-typed-effects-wiring-platform.md",
-    "sha256": "60e1db08a45133ee479bd60ee38456956be3e2212327fe53155863f297d69725",
     "range": "",
     "role": "LAB evidence/history/source",
     "status": "unread"
@@ -1575,22 +1554,8 @@
     "status": "full"
   },
   {
-    "path": "specs/09-invariants-and-constraints.md",
-    "sha256": "c3a8674bc9eb3ef881168ea1acd261cd4373406b573fdfa0baf89ba6763afbac",
-    "range": "",
-    "role": "LAB evidence/history/source",
-    "status": "unread"
-  },
-  {
     "path": "specs/32-autonomous-execution-and-completion-contract.md",
     "sha256": "759672c3215fb4eb7ebe9b39174418f516e7f679fc566f0b7beae34420079b35",
-    "range": "",
-    "role": "LAB evidence/history/source",
-    "status": "unread"
-  },
-  {
-    "path": "specs/06-prismcascade-positioning.md",
-    "sha256": "c575c1f6156a35ba351e581492e94c4db17aa42eba42f5fb30018bc73c30b390",
     "range": "",
     "role": "LAB evidence/history/source",
     "status": "unread"
@@ -1745,41 +1710,6 @@
   {
     "path": "samples/full-system-v1/provider-adapter/wasm-inventory-positive/generated/provider-admission-report.json",
     "sha256": "e4f6f470fe3e24b70c6f01c6878514568a89561a53c1e05a78863c7aab5612f4",
-    "range": "",
-    "role": "LAB evidence/history/source",
-    "status": "unread"
-  },
-  {
-    "path": "samples/clean-near-end/typing/02_unauthorized_declassification_rejected.mir",
-    "sha256": "d7aa6bce272de9b40050027bf4a6c07d853e6538d4f972d16894ba6e25ffa639",
-    "range": "",
-    "role": "LAB evidence/history/source",
-    "status": "unread"
-  },
-  {
-    "path": "samples/clean-near-end/typing/01_authorized_declassification.mir",
-    "sha256": "b1ed981911deab6110993552b481ad48d604e0994785962d5d19c26193259244",
-    "range": "",
-    "role": "LAB evidence/history/source",
-    "status": "unread"
-  },
-  {
-    "path": "samples/clean-near-end/typing/04_capture_escape_rejected.mir",
-    "sha256": "be3eb3b4024dbbbd1c794f71503aa868874c4657e6ad123fad83e5c83819e6ad",
-    "range": "",
-    "role": "LAB evidence/history/source",
-    "status": "unread"
-  },
-  {
-    "path": "samples/clean-near-end/typing/03_label_flow_rejected.mir",
-    "sha256": "36c582f47d71b0748d949dbe053155f7baf61fe25899063b8e43d6b53a64d0a6",
-    "range": "",
-    "role": "LAB evidence/history/source",
-    "status": "unread"
-  },
-  {
-    "path": "samples/clean-near-end/typing/05_cost_bound_rejected.mir",
-    "sha256": "f6ff4f098a98e6b7ba92744ebf778b325408f831e46fcc51e7a17137d7d583db",
     "range": "",
     "role": "LAB evidence/history/source",
     "status": "unread"
@@ -2646,13 +2576,6 @@
     "status": "unread"
   },
   {
-    "path": "samples/lean/foundations/CurrentL2IfcSecretExamples.lean",
-    "sha256": "73920920677791a470725db58e6fa8f2f4c5c012a846c65ad3d6c88e9afe4aaf",
-    "range": "",
-    "role": "LAB evidence/history/source",
-    "status": "unread"
-  },
-  {
     "path": "samples/lean/foundations/MirTheoryV0M5SharedModel.lean",
     "sha256": "fd7e15370f5df6b1e2d48a8d194cab7fe832367ab5e51abb31d80df9ece20d87",
     "range": "",
@@ -2683,13 +2606,6 @@
   {
     "path": "samples/lean/foundations/MirTheoryV0M4MaintainedRelationProjection.md",
     "sha256": "a2fc06f3c6eccf58d2e3ff0709eecf5018d37f38b115a4a9201b43bd9efa854b",
-    "range": "",
-    "role": "LAB evidence/history/source",
-    "status": "unread"
-  },
-  {
-    "path": "samples/lean/foundations/CurrentL2IfcSecretExamples.md",
-    "sha256": "cbb07f8f75b38da38e7429104099900481c7848861eb5a1fbafd842c81a9ac97",
     "range": "",
     "role": "LAB evidence/history/source",
     "status": "unread"
@@ -2856,13 +2772,6 @@
     "status": "unread"
   },
   {
-    "path": "samples/lean/clean-near-end/02_unauthorized_declassification_rejected/README.md",
-    "sha256": "3fc56b88a01eec48e23da7d4fc48078781347dbf0af7f72833cd9402a39bd467",
-    "range": "",
-    "role": "LAB evidence/history/source",
-    "status": "unread"
-  },
-  {
     "path": "samples/full-system-v1/computational/imported-semantic-negative/shared/bad-effect.mir",
     "sha256": "07460f0a3044cef2ab03019edf86aea01e688dbd0f12f568479637eba1735925",
     "range": "",
@@ -2877,22 +2786,8 @@
     "status": "unread"
   },
   {
-    "path": "samples/lean/clean-near-end/02_unauthorized_declassification_rejected/02_unauthorized_declassification_rejected.bundle.json",
-    "sha256": "04a8a0d29d000a9827e140c0cea9289087b137b31812cb6acf40d0fb7ba751b4",
-    "range": "",
-    "role": "LAB evidence/history/source",
-    "status": "unread"
-  },
-  {
     "path": "samples/full-system-v1/computational/imported-semantic-negative/expected/run.json",
     "sha256": "0caa072388a06c964a4f8b8a96fc8bbc52adfb38160117d857ce2e74ed7ab15d",
-    "range": "",
-    "role": "LAB evidence/history/source",
-    "status": "unread"
-  },
-  {
-    "path": "samples/lean/clean-near-end/02_unauthorized_declassification_rejected/02_unauthorized_declassification_rejected.lean",
-    "sha256": "633b8100119f3ae1bdcc82fac8aee37ee8a1f05a8bc98a605cd454725e65b5ac",
     "range": "",
     "role": "LAB evidence/history/source",
     "status": "unread"
@@ -3292,27 +3187,6 @@
   {
     "path": "samples/lean/clean-near-end/02_missing_witness_rejected/02_missing_witness_rejected.lean",
     "sha256": "731cde5da692e1b2933498d267526bb3f2f33bfb7533ef37c3e2fcfd364a273a",
-    "range": "",
-    "role": "LAB evidence/history/source",
-    "status": "unread"
-  },
-  {
-    "path": "samples/lean/clean-near-end/01_authorized_declassification/README.md",
-    "sha256": "79426deef35086236d6c0a57930bed0aa83bac333674666cb8656cbabe839d41",
-    "range": "",
-    "role": "LAB evidence/history/source",
-    "status": "unread"
-  },
-  {
-    "path": "samples/lean/clean-near-end/01_authorized_declassification/01_authorized_declassification.bundle.json",
-    "sha256": "195cfd1c52f159f9d58bf1db526ff38fd72975661772b2e8f94dfa589aefc7e0",
-    "range": "",
-    "role": "LAB evidence/history/source",
-    "status": "unread"
-  },
-  {
-    "path": "samples/lean/clean-near-end/01_authorized_declassification/01_authorized_declassification.lean",
-    "sha256": "75671beceea6efe5d6505e3290e32a26f121700071d793a21a771420aa4a367b",
     "range": "",
     "role": "LAB evidence/history/source",
     "status": "unread"
@@ -5817,13 +5691,6 @@
     "status": "unread"
   },
   {
-    "path": "specs/examples/523-current-l2-source-side-ifc-authority-prototype-pair-and-representative-lean-sample-set-widening.md",
-    "sha256": "ded14a48bc2fdfc448684f3beae3714c0e135f9a9ead8517707b1adb7d169975",
-    "range": "",
-    "role": "LAB evidence/history/source",
-    "status": "unread"
-  },
-  {
     "path": "specs/examples/450-current-l2-macro5-boundary-pilot-and-framing-closeout-threshold.md",
     "sha256": "280cc0aaaa30158795942461cb5f28f8b0b09478a4c7a445ef500ff346536a0d",
     "range": "",
@@ -6295,13 +6162,6 @@
   {
     "path": "specs/examples/474-current-l2-theorem-prover-experimental-binding-preflight.md",
     "sha256": "13f2dc372e5fb076630d958257319badaf6078a254be69e16f0e67d27580ae1c",
-    "range": "",
-    "role": "LAB evidence/history/source",
-    "status": "unread"
-  },
-  {
-    "path": "specs/examples/557-current-l2-first-strong-typing-layer-finite-index-spine-default.md",
-    "sha256": "16c883027d745fc797b8d9d95cfdbc9cb201d40200ac0a4585fe673bce62a14f",
     "range": "",
     "role": "LAB evidence/history/source",
     "status": "unread"
@@ -9905,13 +9765,6 @@
     "status": "unread"
   },
   {
-    "path": "specs/08-cross-system-relations.md",
-    "sha256": "b7cccaacc625fea5f2347bea5dc86f2b054df5b855c35ff1f619841e150c3220",
-    "range": "",
-    "role": "LAB evidence/history/source",
-    "status": "unread"
-  },
-  {
     "path": "specs/15-cut-save-load-checkpoint.md",
     "sha256": "e71adbcff84c6c30807a62070623390946fa777381281c242ab1763bfcc646ad",
     "range": "",
@@ -9954,13 +9807,6 @@
     "status": "unread"
   },
   {
-    "path": "specs/05-mirrorea-fabric.md",
-    "sha256": "e1274394e8acb85f88335ffdf19e8010e67a04bcc109c226e790a74263f3cdea",
-    "range": "",
-    "role": "LAB evidence/history/source",
-    "status": "unread"
-  },
-  {
     "path": "specs/17-mirrorea-spaces-alpha-scope.md",
     "sha256": "c069d2a01f598f9691a10f3a9ff5231ef9fb1a84a266d256348ea499493766b3",
     "range": "",
@@ -9968,22 +9814,8 @@
     "status": "unread"
   },
   {
-    "path": "specs/02-system-overview.md",
-    "sha256": "410a406e0970f9b8545485c3e42a7b10eff9acf911fe6f0d2f5ec1aed471441e",
-    "range": "",
-    "role": "LAB evidence/history/source",
-    "status": "unread"
-  },
-  {
     "path": "specs/41-role-admission-and-capability-grant.md",
     "sha256": "69de7e32f05e19f0f326ae5d09801f7f627ed3e03f0d93f8433828185f49e146",
-    "range": "",
-    "role": "LAB evidence/history/source",
-    "status": "unread"
-  },
-  {
-    "path": "specs/04-mir-core.md",
-    "sha256": "bd987367429dc53b8b169fe3515ac85155736f6cd36922617c81ac38bc12d14f",
     "range": "",
     "role": "LAB evidence/history/source",
     "status": "unread"
@@ -11853,13 +11685,6 @@
   {
     "path": "plan/137-g1-obl001-artifact-identity-wrapper-preflight.md",
     "sha256": "9acd066f25d11072b2b0e9342e42ab5d88403dd5f58936c8fb886c952ff8fa20",
-    "range": "",
-    "role": "LAB evidence/history/source",
-    "status": "unread"
-  },
-  {
-    "path": "plan/177-thm005-telemetry-effect-boundary-selection.md",
-    "sha256": "a550bf79b6772537cace7d3d70ad27a7b9bd4026667c962ba60817391e617968",
     "range": "",
     "role": "LAB evidence/history/source",
     "status": "unread"
@@ -16912,13 +16737,6 @@
     "status": "unread"
   },
   {
-    "path": "docs/research_abstract/clean_near_end_typing_01.md",
-    "sha256": "cff9141dae8e6e8b2a1879c50d0fe7c3fb8f6b77c86473bc9239945d81212b87",
-    "range": "",
-    "role": "LAB evidence/history/source",
-    "status": "unread"
-  },
-  {
     "path": "docs/research_abstract/operational_product_sample_01.md",
     "sha256": "55343127167be127baf9820bcba8e4daee8b28f61c803e80e40e347637314c78",
     "range": "",
@@ -16963,13 +16781,6 @@
   {
     "path": "docs/research_abstract/phase6-compile-ready-minimal-actualization.md",
     "sha256": "fa49d1df8fe9a60ee03321b1b6c579f6fe3ded12a41ba1cd1d7cdeff8c8c5ed2",
-    "range": "",
-    "role": "LAB evidence/history/source",
-    "status": "unread"
-  },
-  {
-    "path": "docs/research_abstract/clean_near_end_typing_01_detail.md",
-    "sha256": "38add182ef264ecf309c0b24bd1be3c7e167b831af0cb28efba5ebe0b455823a",
     "range": "",
     "role": "LAB evidence/history/source",
     "status": "unread"
@@ -17103,13 +16914,6 @@
   {
     "path": "docs/research_abstract/avatar_fairy_follow_plan_01.md",
     "sha256": "e7803ccbfa74221f7515204e62ceb2a4144cbfb092bcc90053908c0aaa4fb524",
-    "range": "",
-    "role": "LAB evidence/history/source",
-    "status": "unread"
-  },
-  {
-    "path": "docs/research_abstract/hands_on_typing.md",
-    "sha256": "06d5da654f4a5e1a996d63a177e0d7a292fb912d3244d0b5b682210b2b1ddc99",
     "range": "",
     "role": "LAB evidence/history/source",
     "status": "unread"
@@ -18038,6 +17842,601 @@
     "sha256": "be567e33dbb1aba28f4381351475447361f868c410a390ffda3c78abdbeb254c",
     "range": "1-267",
     "role": "LAB historical specification, not current normative authority; full read",
+    "status": "full"
+  },
+  {
+    "path": "specs/04-mir-core.md",
+    "sha256": "bd987367429dc53b8b169fe3515ac85155736f6cd36922617c81ac38bc12d14f",
+    "range": "1-238",
+    "role": "LAB historical spec or active sample/evidence; full read, not a new semantic proof",
+    "status": "full"
+  },
+  {
+    "path": "specs/05-mirrorea-fabric.md",
+    "sha256": "e1274394e8acb85f88335ffdf19e8010e67a04bcc109c226e790a74263f3cdea",
+    "range": "1-61",
+    "role": "LAB historical spec or active sample/evidence; full read, not a new semantic proof",
+    "status": "full"
+  },
+  {
+    "path": "specs/examples/523-current-l2-source-side-ifc-authority-prototype-pair-and-representative-lean-sample-set-widening.md",
+    "sha256": "ded14a48bc2fdfc448684f3beae3714c0e135f9a9ead8517707b1adb7d169975",
+    "range": "1-65",
+    "role": "LAB historical spec or active sample/evidence; full read, not a new semantic proof",
+    "status": "full"
+  },
+  {
+    "path": "samples/clean-near-end/typing/01_authorized_declassification.mir",
+    "sha256": "b1ed981911deab6110993552b481ad48d604e0994785962d5d19c26193259244",
+    "range": "1-34",
+    "role": "LAB historical spec or active sample/evidence; full read, not a new semantic proof",
+    "status": "full"
+  },
+  {
+    "path": "samples/clean-near-end/typing/02_unauthorized_declassification_rejected.mir",
+    "sha256": "d7aa6bce272de9b40050027bf4a6c07d853e6538d4f972d16894ba6e25ffa639",
+    "range": "1-22",
+    "role": "LAB historical spec or active sample/evidence; full read, not a new semantic proof",
+    "status": "full"
+  },
+  {
+    "path": "samples/lean/clean-near-end/01_authorized_declassification/01_authorized_declassification.lean",
+    "sha256": "75671beceea6efe5d6505e3290e32a26f121700071d793a21a771420aa4a367b",
+    "range": "1-6",
+    "role": "LAB historical spec or active sample/evidence; full read, not a new semantic proof",
+    "status": "full"
+  },
+  {
+    "path": "samples/lean/clean-near-end/01_authorized_declassification/01_authorized_declassification.bundle.json",
+    "sha256": "195cfd1c52f159f9d58bf1db526ff38fd72975661772b2e8f94dfa589aefc7e0",
+    "range": "1-5",
+    "role": "LAB historical spec or active sample/evidence; full read, not a new semantic proof",
+    "status": "full"
+  },
+  {
+    "path": "samples/lean/clean-near-end/01_authorized_declassification/README.md",
+    "sha256": "79426deef35086236d6c0a57930bed0aa83bac333674666cb8656cbabe839d41",
+    "range": "1-5",
+    "role": "LAB historical spec or active sample/evidence; full read, not a new semantic proof",
+    "status": "full"
+  },
+  {
+    "path": "samples/lean/clean-near-end/02_unauthorized_declassification_rejected/02_unauthorized_declassification_rejected.lean",
+    "sha256": "633b8100119f3ae1bdcc82fac8aee37ee8a1f05a8bc98a605cd454725e65b5ac",
+    "range": "1-6",
+    "role": "LAB historical spec or active sample/evidence; full read, not a new semantic proof",
+    "status": "full"
+  },
+  {
+    "path": "samples/lean/clean-near-end/02_unauthorized_declassification_rejected/02_unauthorized_declassification_rejected.bundle.json",
+    "sha256": "04a8a0d29d000a9827e140c0cea9289087b137b31812cb6acf40d0fb7ba751b4",
+    "range": "1-5",
+    "role": "LAB historical spec or active sample/evidence; full read, not a new semantic proof",
+    "status": "full"
+  },
+  {
+    "path": "samples/lean/clean-near-end/02_unauthorized_declassification_rejected/README.md",
+    "sha256": "3fc56b88a01eec48e23da7d4fc48078781347dbf0af7f72833cd9402a39bd467",
+    "range": "1-5",
+    "role": "LAB historical spec or active sample/evidence; full read, not a new semantic proof",
+    "status": "full"
+  },
+  {
+    "path": "crates/mir-runtime/src/m8_runtime_admission.rs",
+    "sha256": "8db7ac1266929e6d89bcacf2de35ed1807faf810252fc8535d86e2a45b07a677",
+    "range": "1-2574",
+    "role": "LAB implementation, admission/owner consumer cone",
+    "status": "full"
+  },
+  {
+    "path": "crates/mir-runtime/src/m8_runtime_owner_queue.rs",
+    "sha256": "b05a005d050289f80c0f3f7c4f206a2dc12407422d24147ea0beae8ecfa21d3a",
+    "range": "1-1572",
+    "role": "LAB implementation, admission/owner consumer cone",
+    "status": "full"
+  },
+  {
+    "path": "crates/mir-runtime/src/m8_owner_budget_snapshot_tests.rs",
+    "sha256": "9270b26e996895030177cfe9281dfb9fdced1108887db252a53a6fd7d522c0be",
+    "range": "1-345",
+    "role": "LAB full consumer regression source, reading is not execution",
+    "status": "full"
+  },
+  {
+    "path": "crates/mir-runtime/tests/m8_runtime_owner_queue.rs",
+    "sha256": "4e80305d959eafb4dd409458b64cce96600d751744fb538f5f37d3aa5941cb45",
+    "range": "1-623",
+    "role": "LAB full consumer regression source, reading is not execution",
+    "status": "full"
+  },
+  {
+    "path": "plan/177-thm005-telemetry-effect-boundary-selection.md",
+    "sha256": "a550bf79b6772537cace7d3d70ad27a7b9bd4026667c962ba60817391e617968",
+    "range": "1-62",
+    "role": "LAB theory/evidence historical and helper scope, not canonical authority",
+    "status": "full"
+  },
+  {
+    "path": "specs/07-typed-effects-wiring-platform.md",
+    "sha256": "60e1db08a45133ee479bd60ee38456956be3e2212327fe53155863f297d69725",
+    "range": "1-55",
+    "role": "LAB theory/evidence historical and helper scope, not canonical authority",
+    "status": "full"
+  },
+  {
+    "path": "samples/lean/foundations/CurrentL2IfcSecretExamples.lean",
+    "sha256": "73920920677791a470725db58e6fa8f2f4c5c012a846c65ad3d6c88e9afe4aaf",
+    "range": "1-123",
+    "role": "LAB theory/evidence historical and helper scope, not canonical authority",
+    "status": "full"
+  },
+  {
+    "path": "samples/lean/foundations/CurrentL2IfcSecretExamples.md",
+    "sha256": "cbb07f8f75b38da38e7429104099900481c7848861eb5a1fbafd842c81a9ac97",
+    "range": "1-12",
+    "role": "LAB theory/evidence historical and helper scope, not canonical authority",
+    "status": "full"
+  },
+  {
+    "path": "docs/research_abstract/clean_near_end_typing_01.md",
+    "sha256": "cff9141dae8e6e8b2a1879c50d0fe7c3fb8f6b77c86473bc9239945d81212b87",
+    "range": "1-61",
+    "role": "LAB theory/evidence historical and helper scope, not canonical authority",
+    "status": "full"
+  },
+  {
+    "path": "docs/research_abstract/clean_near_end_typing_01_detail.md",
+    "sha256": "38add182ef264ecf309c0b24bd1be3c7e167b831af0cb28efba5ebe0b455823a",
+    "range": "1-599",
+    "role": "LAB theory/evidence historical and helper scope, not canonical authority",
+    "status": "full"
+  },
+  {
+    "path": "docs/research_abstract/hands_on_typing.md",
+    "sha256": "06d5da654f4a5e1a996d63a177e0d7a292fb912d3244d0b5b682210b2b1ddc99",
+    "range": "1-529",
+    "role": "LAB theory/evidence historical and helper scope, not canonical authority",
+    "status": "full"
+  },
+  {
+    "path": "crates/mir-runtime/src/clean_near_end.rs",
+    "sha256": "b86b7d1b96cf4d4b10d0fc66144553a8beb8ed60d5082ef0134039039663aa0c",
+    "range": "1-3393",
+    "role": "LAB helper/type consumer full text; fixture-dependent evidence separated from source semantics",
+    "status": "full"
+  },
+  {
+    "path": "specs/examples/557-current-l2-first-strong-typing-layer-finite-index-spine-default.md",
+    "sha256": "16c883027d745fc797b8d9d95cfdbc9cb201d40200ac0a4585fe673bce62a14f",
+    "range": "1-119",
+    "role": "LAB helper/type consumer full text; fixture-dependent evidence separated from source semantics",
+    "status": "full"
+  },
+  {
+    "path": "samples/clean-near-end/typing/03_label_flow_rejected.mir",
+    "sha256": "36c582f47d71b0748d949dbe053155f7baf61fe25899063b8e43d6b53a64d0a6",
+    "range": "1-24",
+    "role": "LAB helper/type consumer full text; fixture-dependent evidence separated from source semantics",
+    "status": "full"
+  },
+  {
+    "path": "samples/clean-near-end/typing/04_capture_escape_rejected.mir",
+    "sha256": "be3eb3b4024dbbbd1c794f71503aa868874c4657e6ad123fad83e5c83819e6ad",
+    "range": "1-21",
+    "role": "LAB helper/type consumer full text; fixture-dependent evidence separated from source semantics",
+    "status": "full"
+  },
+  {
+    "path": "samples/clean-near-end/typing/05_cost_bound_rejected.mir",
+    "sha256": "f6ff4f098a98e6b7ba92744ebf778b325408f831e46fcc51e7a17137d7d583db",
+    "range": "1-16",
+    "role": "LAB helper/type consumer full text; fixture-dependent evidence separated from source semantics",
+    "status": "full"
+  },
+  {
+    "path": "crates/mir-runtime/tests/clean_near_end_samples.rs",
+    "sha256": "f6cc37afa101e51c519c38789ffd0f01bfc57f5307ee7e143508c74cd141014a",
+    "range": "1-701",
+    "role": "Historical test/frozen working record; no reopening or current authority inferred",
+    "status": "full"
+  },
+  {
+    "path": "mirrorea_canon/working/WRK-0018-thm005-telemetry-effect-boundary.md",
+    "sha256": "b24af81fbc48130d322a79f8d9cd129b56bb4eaf247295e1b5fbba733eeda156",
+    "range": "1-49",
+    "role": "Historical test/frozen working record; no reopening or current authority inferred",
+    "status": "full"
+  },
+  {
+    "path": "crates/mirrorea-core/src/lib.rs",
+    "sha256": "916eb5dbda512cb15369dd44361e7ebc4b699799b198a45aa89b9f933355bbb2",
+    "range": "1-41",
+    "role": "LAB carrier/membership inventory substrate; shape checks are not authority or current recovery evidence",
+    "status": "full"
+  },
+  {
+    "path": "crates/mirrorea-core/src/error.rs",
+    "sha256": "af3db0ddba1014c72ef406ed73cd76fd02debb3cf8b547d8b5f6587b92a48486",
+    "range": "1-46",
+    "role": "LAB carrier/membership inventory substrate; shape checks are not authority or current recovery evidence",
+    "status": "full"
+  },
+  {
+    "path": "crates/mirrorea-core/src/layer.rs",
+    "sha256": "96ac14a60ad694f583025d8b797fd9fa8dfcdee646c2f21e29a59381d1978eb2",
+    "range": "1-65",
+    "role": "LAB carrier/membership inventory substrate; shape checks are not authority or current recovery evidence",
+    "status": "full"
+  },
+  {
+    "path": "crates/mirrorea-core/src/fabric.rs",
+    "sha256": "150e90c4e88ed1f1f98a8224dec4f513c1ea635c45c38fbf72e80c616b8a6f86",
+    "range": "1-290",
+    "role": "LAB carrier/membership inventory substrate; shape checks are not authority or current recovery evidence",
+    "status": "full"
+  },
+  {
+    "path": "crates/mirrorea-core/src/runtime.rs",
+    "sha256": "1eeb027fa1f0aef4a6c8e20fd89b51c6b1ead699849018d26d7dc24b3ede88fb",
+    "range": "1-419",
+    "role": "LAB carrier/membership inventory substrate; shape checks are not authority or current recovery evidence",
+    "status": "full"
+  },
+  {
+    "path": "specs/01-charter-and-decision-levels.md",
+    "sha256": "9e36a9937c19a0dcc90b10e8cf86b180fba512a9281e4e0f9e8adaebb3ffa997",
+    "range": "1-80",
+    "role": "LAB historical cross-system/layer/invariant memory; Canon takes precedence",
+    "status": "full"
+  },
+  {
+    "path": "specs/02-system-overview.md",
+    "sha256": "410a406e0970f9b8545485c3e42a7b10eff9acf911fe6f0d2f5ec1aed471441e",
+    "range": "1-52",
+    "role": "LAB historical cross-system/layer/invariant memory; Canon takes precedence",
+    "status": "full"
+  },
+  {
+    "path": "specs/03-layer-model.md",
+    "sha256": "eb237376c19eb8952f7663215c2647c8f6a0f65c0ffc9d59ee5d4b517bc65153",
+    "range": "1-94",
+    "role": "LAB historical cross-system/layer/invariant memory; Canon takes precedence",
+    "status": "full"
+  },
+  {
+    "path": "specs/06-prismcascade-positioning.md",
+    "sha256": "c575c1f6156a35ba351e581492e94c4db17aa42eba42f5fb30018bc73c30b390",
+    "range": "1-45",
+    "role": "LAB historical cross-system/layer/invariant memory; Canon takes precedence",
+    "status": "full"
+  },
+  {
+    "path": "specs/08-cross-system-relations.md",
+    "sha256": "b7cccaacc625fea5f2347bea5dc86f2b054df5b855c35ff1f619841e150c3220",
+    "range": "1-51",
+    "role": "LAB historical cross-system/layer/invariant memory; Canon takes precedence",
+    "status": "full"
+  },
+  {
+    "path": "specs/09-invariants-and-constraints.md",
+    "sha256": "c3a8674bc9eb3ef881168ea1acd261cd4373406b573fdfa0baf89ba6763afbac",
+    "range": "1-39",
+    "role": "LAB historical cross-system/layer/invariant memory; Canon takes precedence",
+    "status": "full"
+  },
+  {
+    "path": "specs/41-role-admission-and-capability-grant.md",
+    "sha256": "69de7e32f05e19f0f326ae5d09801f7f627ed3e03f0d93f8433828185f49e146",
+    "range": "1-215",
+    "role": "LAB historical specification; full read previous continuation",
+    "status": "full"
+  },
+  {
+    "path": "specs/15-cut-save-load-checkpoint.md",
+    "sha256": "e71adbcff84c6c30807a62070623390946fa777381281c242ab1763bfcc646ad",
+    "range": "1-225",
+    "role": "LAB historical specification; full read previous continuation",
+    "status": "full"
+  },
+  {
+    "path": "specs/43-surface-mir-v1-alpha-scope.md",
+    "sha256": "d7d9a2869cba6a245992e8952a87c03cafb4cc215b37a16fbec43e7648b2b13a",
+    "range": "1-207",
+    "role": "LAB historical computational source/checker/runtime dependency; full text read",
+    "status": "full"
+  },
+  {
+    "path": "crates/mir-ast/src/textual_alpha.rs",
+    "sha256": "130d80db002e5bda8c7b846877f11dd0adb4159230f53e2ff819a27b8dfd6d3e",
+    "range": "1-1945",
+    "role": "LAB historical computational source/checker/runtime dependency; full text read",
+    "status": "full"
+  },
+  {
+    "path": "crates/mir-semantics/src/full_system_v1/typed_ir.rs",
+    "sha256": "851a4db7882830539384a1ab87a4c9459a19f95543332701b12e9602171cf392",
+    "range": "1-283",
+    "role": "LAB historical computational source/checker/runtime dependency; full text read",
+    "status": "full"
+  },
+  {
+    "path": "crates/mir-semantics/src/full_system_v1/checker.rs",
+    "sha256": "d091226d3725c87248c98392be290b9fca338b840e16bc57edf49039dfef3b90",
+    "range": "1-2138",
+    "role": "LAB historical computational source/checker/runtime dependency; full text read",
+    "status": "full"
+  },
+  {
+    "path": "crates/mir-semantics/src/full_system_v1/interpreter.rs",
+    "sha256": "a9afff2cfa0463591ea0467d7c07866a7de342906888837ee68764b057bd0651",
+    "range": "1-1858",
+    "role": "LAB historical computational source/checker/runtime dependency; full text read",
+    "status": "full"
+  },
+  {
+    "path": "crates/mir-semantics/src/full_system_v1/adapter_policy.rs",
+    "sha256": "e96d7929e63fe1ae26c1a034fd2a36c86f877871eb16d1709ddc9b179737a2a8",
+    "range": "1-46",
+    "role": "LAB historical computational source/checker/runtime dependency; full text read",
+    "status": "full"
+  },
+  {
+    "path": "crates/mir-semantics/tests/typed_ir_interpreter.rs",
+    "sha256": "f39178e9ddc6e3971d730abd43d4bb3052aac787570b5dc3b2219f1514a7e375",
+    "range": "1-1079",
+    "role": "LAB historical computational source/checker/runtime dependency; full text read",
+    "status": "full"
+  },
+  {
+    "path": "crates/mir-semantics/tests/mir_computational_core.rs",
+    "sha256": "d7348fe6b9633a7ceff83ebef1f1d301432c2866caf433bfcf2513e993bc36da",
+    "range": "1-94",
+    "role": "LAB historical computational source/checker/runtime dependency; full text read",
+    "status": "full"
+  },
+  {
+    "path": "crates/mir-semantics/src/computational_core/mod.rs",
+    "sha256": "e826b74fdac1a05d3e09bc3daa08956b2fbabb5ef3132a212b6a88003c449211",
+    "range": "1-354",
+    "role": "LAB historical computational source/checker/runtime dependency; full text read",
+    "status": "full"
+  },
+  {
+    "path": "crates/mir-semantics/src/computational_core/value.rs",
+    "sha256": "663d12ed6eab30201858e4c151cc38a4be087a2d71da1629d9172aa47fba9bef",
+    "range": "1-32",
+    "role": "LAB historical computational source/checker/runtime dependency; full text read",
+    "status": "full"
+  },
+  {
+    "path": "crates/mir-semantics/src/computational_core/eval.rs",
+    "sha256": "050ee0c8a32508f13a01168a9ebc9fe0da19a0d0a80d3e0e1ad780c3fa5e40a5",
+    "range": "1-394",
+    "role": "LAB historical computational source/checker/runtime dependency; full text read",
+    "status": "full"
+  },
+  {
+    "path": "crates/mir-semantics/src/computational_core/ast.rs",
+    "sha256": "295821c1417fd4af886a0adb31a46aa456e9f44f0baa4e596f7a652b7d036557",
+    "range": "1-100",
+    "role": "LAB historical computational source/checker/runtime dependency; full text read",
+    "status": "full"
+  },
+  {
+    "path": "crates/mir-semantics/src/computational_core/typecheck.rs",
+    "sha256": "ddf1d069fb001facba874d0322bf7bd6a405ccb898738ef6345f24514438affc",
+    "range": "1-341",
+    "role": "LAB historical computational source/checker/runtime dependency; full text read",
+    "status": "full"
+  },
+  {
+    "path": "specs/34-textual-mir-alpha-grammar.md",
+    "sha256": "0a8b64ef4f574b09219aefa20f2bd08924b80be2963dab82c7ad293a684ba096",
+    "range": "1-236",
+    "role": "LAB historical source/computational/verification boundary; full text read",
+    "status": "full"
+  },
+  {
+    "path": "plan/53-mir-computational-core-roadmap.md",
+    "sha256": "707592a5d4d447118a8fcdb813743bcdce934276dc7b884b2e36f76a4cdf17dd",
+    "range": "1-151",
+    "role": "LAB historical source/computational/verification boundary; full text read",
+    "status": "full"
+  },
+  {
+    "path": "plan/59-textual-mir-roadmap.md",
+    "sha256": "3c1b8ba86ed26188994eea9e8bdcc40a33d1eceed9af5f5e2a0e3f4d22c81084",
+    "range": "1-81",
+    "role": "LAB historical source/computational/verification boundary; full text read",
+    "status": "full"
+  },
+  {
+    "path": "plan/60-computational-runtime-roadmap.md",
+    "sha256": "9553fd3f15cdcb5fce856b5c482fe999dbf73c88bc8b74dc13b356b21c7e9af8",
+    "range": "1-98",
+    "role": "LAB historical source/computational/verification boundary; full text read",
+    "status": "full"
+  },
+  {
+    "path": "plan/64-surface-mir-placement-roadmap.md",
+    "sha256": "fbf14ccc28af5f70f5854e5ed940ffefa817fd7c502104b00bd41a71187cf0bb",
+    "range": "1-105",
+    "role": "LAB historical source/computational/verification boundary; full text read",
+    "status": "full"
+  },
+  {
+    "path": "specs/16-runtime-package-adapter-hotplug.md",
+    "sha256": "5799f6a0b93811639c931aabe47f5e812d126b9ae2627ca04461add29ba4594d",
+    "range": "1-321",
+    "role": "LAB historical specification, mandatory corpus full text",
+    "status": "full"
+  },
+  {
+    "path": "specs/17-mirrorea-spaces-alpha-scope.md",
+    "sha256": "c069d2a01f598f9691a10f3a9ff5231ef9fb1a84a266d256348ea499493766b3",
+    "range": "1-370",
+    "role": "LAB historical specification, mandatory corpus full text",
+    "status": "full"
+  },
+  {
+    "path": "specs/24-operational-alpha05-alpha08-readiness.md",
+    "sha256": "e88867dee756aaffe1f6915c9a7f473a1b07b08d05890261bb6ba52258ce4c16",
+    "range": "1-266",
+    "role": "LAB historical specification, mandatory corpus full text",
+    "status": "full"
+  },
+  {
+    "path": "specs/18-practical-alpha1-scope.md",
+    "sha256": "7bcbe4cb536cb360033cdf47f4a26ac720e21f61f88a57b9012c15d9cb58bc3e",
+    "range": "1-538",
+    "role": "LAB historical workflow scope; not current Canon or active roadmap",
+    "status": "full"
+  },
+  {
+    "path": "specs/25-product-alpha1-public-boundary.md",
+    "sha256": "4ae314b77fee7303ab5cbbbe76df999e41ff0f4926b8f83bd851e12517d3817d",
+    "range": "1-538",
+    "role": "LAB historical workflow scope; not current Canon or active roadmap",
+    "status": "full"
+  },
+  {
+    "path": "specs/32-autonomous-execution-and-completion-contract.md",
+    "sha256": "759672c3215fb4eb7ebe9b39174418f516e7f679fc566f0b7beae34420079b35",
+    "range": "1-179",
+    "role": "LAB historical subsystem/workflow memory; no active authority or roadmap adoption",
+    "status": "full"
+  },
+  {
+    "path": "specs/33-full-system-v1-scope.md",
+    "sha256": "89c0d845bccf3807034d4524479ef23445f0d5b9dd73852857f8a3acf07739d8",
+    "range": "1-122",
+    "role": "LAB historical subsystem/workflow memory; no active authority or roadmap adoption",
+    "status": "full"
+  },
+  {
+    "path": "specs/27-spatial-portal-and-shard-extension-boundary.md",
+    "sha256": "f94ab8c8c6a1b7ea7ca560a4f791a062ea91f08c8117c3d90dabaa59079e4926",
+    "range": "1-85",
+    "role": "LAB historical subsystem memory; no current roadmap adoption",
+    "status": "full"
+  },
+  {
+    "path": "specs/29-transform-posegraph-semantics.md",
+    "sha256": "b5630636bff2e01558a786275198cb7c1044d5cdcaa2c8f1c6a6ea88cd22ef96",
+    "range": "1-191",
+    "role": "LAB historical subsystem memory; no current roadmap adoption",
+    "status": "full"
+  },
+  {
+    "path": "specs/37-posegraph-runtime-semantics.md",
+    "sha256": "74c1fe6a7b89142bd5d412f14a69cdae0ef4dd9f951ff0a5e7070c2710dead79",
+    "range": "1-108",
+    "role": "LAB historical subsystem memory; no current roadmap adoption",
+    "status": "full"
+  },
+  {
+    "path": "specs/12-decision-register.md",
+    "sha256": "4eb16d0811130d67c93f0f83b9203a53b58c165056ac7780c3cdb6c21645183f",
+    "range": "1-220",
+    "role": "LAB historical record, not active authority; spec12 read in6 complete nontruncated contiguous ranges after initial truncated attempt",
+    "status": "full"
+  },
+  {
+    "path": "specs/26-operational-product-sample-suite.md",
+    "sha256": "e2d9682868fffdc3efb26a424a779cd4aea14d07a2361c2e3c1c7f1ec0bedb28",
+    "range": "1-237",
+    "role": "LAB historical record, not active authority; spec12 read in6 complete nontruncated contiguous ranges after initial truncated attempt",
+    "status": "full"
+  },
+  {
+    "path": "specs/10-open-questions.md",
+    "sha256": "2dbf3a229855ba37a5bbdb0f954938d34c6df25cdf7669a58ebb91142cb2c7c2",
+    "range": "1-508",
+    "role": "LAB historical questions;6 full contiguous ranges, no current queue authority",
+    "status": "full"
+  },
+  {
+    "path": "specs/11-roadmap-and-workstreams.md",
+    "sha256": "56964a0b716326de97663db8f82a8f54dca1956e48650ab5de508fa22b49f79f",
+    "range": "1-1300",
+    "role": "LAB historical roadmap only; all contiguous ranges read, truncated 901-1100 attempt replaced by complete 100-line reads; no current authority",
+    "status": "full"
+  },
+  {
+    "path": "plan/39-type-system-freeze-roadmap.md",
+    "sha256": "4bdc532db3103ef70636744846a5f66593de0e5100d490a3499ce5e5bcee15c8",
+    "range": "1-131",
+    "role": "LAB historical proof boundary; read full; no current authority or new authorization",
+    "status": "full"
+  },
+  {
+    "path": "plan/48-theory-freeze-proof-obligations.md",
+    "sha256": "6b1282d676b92d41a7b0521da9706c1b31d979ec1c8aae3642082588208b4bd0",
+    "range": "1-93",
+    "role": "LAB historical proof boundary; read full; no current authority or new authorization",
+    "status": "full"
+  },
+  {
+    "path": "plan/171-theory-core-correspondence-and-disposition-checkpoint.md",
+    "sha256": "250ad16d8d5989a77ca34c8167d8b875ee4d49444d1f1ad6448fbaa5e3af700f",
+    "range": "1-81",
+    "role": "LAB historical proof boundary; read full; no current authority or new authorization",
+    "status": "full"
+  },
+  {
+    "path": "plan/181-preservation-proof-prerequisite-literature-audit.md",
+    "sha256": "ebf11f23c9d233c78a49fefc2dc14b37dddf2fe41ccfec8aa71c92bb18671812",
+    "range": "1-89",
+    "role": "LAB historical proof boundary; read full; no current authority or new authorization",
+    "status": "full"
+  },
+  {
+    "path": "plan/182-canon-core-minimality-and-proof-interface-audit.md",
+    "sha256": "8dfe765bf2a793432efad4b43b240cfac89da642a4943c0cfd59a722144f9a50",
+    "range": "1-97",
+    "role": "LAB historical proof boundary; read full; no current authority or new authorization",
+    "status": "full"
+  },
+  {
+    "path": "plan/18-type-proof-modelcheck-and-ordering-research-program.md",
+    "sha256": "235e7686c8a9c3f4605585319cbabdb439e7b6768ce7500ec497eca634557d94",
+    "range": "1-734",
+    "role": "LAB historical typed-boundary and composition requirements; complete contiguous reads; later authority supersedes historical queue",
+    "status": "full"
+  },
+  {
+    "path": "plan/199-selected-semantic-composition-and-inference-boundary.md",
+    "sha256": "a2a32ff61143d6372d94a5bd80cfb638d738e890218276c0174dd5efa6bf28c4",
+    "range": "1-308",
+    "role": "LAB historical typed-boundary and composition requirements; complete contiguous reads; later authority supersedes historical queue",
+    "status": "full"
+  },
+  {
+    "path": "plan/247-mir-theory-v0-i1plus-current-roadmap.md",
+    "sha256": "ac0e2be8f230b789ba7acc1f5e3677857bbcbf951d33511a136be984afbc72fb",
+    "range": "1-579",
+    "role": "Closed M0-M10 LAB authority/history baseline; full four contiguous reads; no successor permission",
+    "status": "full"
+  },
+  {
+    "path": "plan/220-c2b-c3-relation-state-proof-obligation-audit.md",
+    "sha256": "f7b96812358e57df95eacb683acc6f7c5a5028f1121bb11d970cf47f753daa6e",
+    "range": "1-121",
+    "role": "LAB historical contract/typing sample; full read, not proof or current source-runtime guarantee",
+    "status": "full"
+  },
+  {
+    "path": "specs/00-document-map.md",
+    "sha256": "f35d426dbf0b34cfd9b1b538d26e707ccf6025ba69b30a3955f92fb8604a03ad",
+    "range": "1-610",
+    "role": "LAB historical document index; contiguous full range after discarded truncated cat; index contents do not count referenced files read",
+    "status": "partial"
+  },
+  {
+    "path": "samples/clean-near-end/00_index_theories.mir",
+    "sha256": "c79f4a8ec98e2d5a0e6ba7171c70ce76e73cdcffa5acdb1bde04fda92be99664",
+    "range": "1-59",
+    "role": "LAB theory/capability sample declarations, not current-source runtime authority evidence",
     "status": "full"
   }
 ]

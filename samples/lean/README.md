@@ -48,6 +48,9 @@ Plan250 の I3-4 resume、正式 THM/OBL の更新、production / α受理では
 - [Current use](foundations/MirroreaProofFirstCurrentUse.md): 同一文脈の検査と admission 履歴。
 - [Tracked validation](foundations/MirroreaProofFirstTrackedValidation.md): 実際の読取りと版検査、論理的な publication。
 - [Finite graph](foundations/MirroreaProofFirstGraphValidation.md): 独立した Path / Acyclic と checker の対応。
+- [Producer flow](foundations/MirroreaProofFirstProducerFlow.md): 型付き代入・分岐の二実行保証と実際の数学的書込み列。source/runtime 接続は未証明。
+- [General labels](foundations/MirroreaProofFirstGeneralLabels.md): 非全順序のlabel理論と有限checkerの一般証明。policy採用・実行時間上限は別義務。
+- [Fallible assignment](foundations/MirroreaProofFirstFallibleFlow.md): 失敗を含む単一代入、条件付き型・範囲保存と二実行保証。
 - [Passive observation](foundations/MirroreaProofFirstPassive.md): 有限消去と、別の二実行保証。限定された数学的範囲のreview済み。
 
 これらは `current_l2_lean_sample_sync.py` の生成対象・manifest 集計外です。
@@ -64,7 +67,8 @@ version = subprocess.check_output(["lean", "--version"], text=True)
 if "version 4.29.1," not in version:
     raise SystemExit("Lean4.29.1 is required for this evidence cut")
 names = ["Support", "CurrentUse", "CurrentUseReview", "TrackedValidation",
-         "GraphValidation", "GraphReview", "Passive"]
+         "GraphValidation", "GraphReview", "Passive", "ProducerFlow",
+         "GeneralLabels", "FallibleFlow"]
 work = pathlib.Path(tempfile.mkdtemp(prefix="mir-proof-first-",
                                   dir=os.environ.get("PROOF_WORKDIR")))
 print(work, flush=True)

@@ -68,6 +68,7 @@ completed, including the narrow corrected-boundary review. Main agent performed 
 - `samples/lean/foundations/MirroreaProofFirstTrackedValidation.lean` and companion
 - `samples/lean/foundations/MirroreaProofFirstGraphReview.lean`
 - `samples/lean/foundations/MirroreaProofFirstPassive.lean` and companion
+- `samples/lean/foundations/MirroreaProofFirstProducerFlow.lean` and companion
 - `docs/proof-first/FOUNDATION_CHECK.json`, `GRAPH_VALIDATION_CHECK.json`, `TRACKED_VALIDATION_CHECK.json`, `OBSERVER_BASELINE_CHECK.json`
 - `plan/proof-first-foundation-correspondence.md`, `plan/00-index.md`
 - `Documentation.md`
@@ -227,6 +228,73 @@ not established network/M9 reachability or an accepted-profile falsifier.
 OBSERVER_BASELINE_CHECK.json retains command, source cut and exact appended test.
 Correct effective-label propagation, input-label authenticity and downstream
 scope analysis remain required; no production refinement claim is possible yet.
+
+
+Continuation after f136f5d6: full M8 admission2574, owner queue1572, private budget
+snapshot tests345 and owner queue tests623 were read. Private owner images retain
+source/expression/budget but no source information-flow certificate; structural
+restore is not current-source rechecking. This identifies preservation obligations,
+not an authenticated restore attack. The existing ordinary-source probe generates
+ObserverPublish for unannotated atk→observer_safe hp+1 with no residual. High/low
+need an explicit observer-policy mapping. Correction on Canon reread: spec/02
+and spec/08 say unlisted fields are private by default; `None` does not erase
+that meaning, while observer_safe is not public release. A new actual M8
+execution control models atk as secret and uses atk=atk+1: 0 succeeds, i64::MAX yields
+RouteUnavailable, while hp stays10 in both runs (this arithmetic source has
+no listed fields, so hp is also private by default; the log's public label is
+only its test interpretation). Main compiled a copy of
+the existing owner test source plus this test with current prebuilt libraries;
+1 passed,7 filtered, compile/run exit0. Thus equal projected write traces alone
+cannot establish confidentiality of returned failure outcomes. Public delivery
+and accepted-profile impact are not established. Exact source/commands/output are
+in OBSERVER_BASELINE_CHECK.json; its earlier M8 appended test record now restores
+the declaration accidentally omitted from the serialized excerpt. No production
+code or frozen original evidence was changed.
+
+
+The complete clean_near_end.rs3393 source was read. Its typing solver builds fixed
+SecurityLabel/authority/capture/region tables and fixed per-sample constraints;
+source validation is substring presence. A scratch copy compiled unchanged with
+CARGO_MANIFEST_DIR redirected only to scratch samples. Both the original authorized
+typing sample and a comment-only file containing its three required tokens returned
+valid/entered_evaluation/success. This is an actual countermodel to treating that
+helper output as ordinary-source checking or execution; it does not refute the
+separate M7 parser/checker or prior scoped helper inventory acceptance. Frozen
+CHECK.json and full inputs/outputs are in clean-typing-controls. No repository
+sample or helper was modified. Historical explanatory docs describing source
+finite-theory checking cannot be relied on as this task's implementation evidence.
+The general new producer checker and its direct source adapter remain separate.
+
+
+Producer-flow review mirrorea-producer-flow-inline completed (exec92018 exit0,
+question72ff28dbd198c0316a8d37a8502ba7f82319c13dd36feaf006e66426a8daceae).
+No general theorem gap found. Main retained acceptance/typed-store premises,
+qualified Safe independence (branch uses separately characterized rank), and
+added occurrence-only, raw-write cut and initial-high-row controls. The first
+mirror compile rejected module documentation before imports; moving the comment
+after imports produced fresh coherent Passive/ProducerFlow trust0 exit0 in
+producer-reviewed-9k96jdi6. General theorem bodies are unchanged; printed producer
+axioms remain propext/Quot.sound. New companion/proof and exact CHECK are integrated;
+source/runtime/current-authority/failure correspondence stays open. Review is
+source advice only, not an independent execution, signature or alpha acceptance.
+Fallible single-assignment arithmetic candidate is separately kernel-checked;
+neutral read-only review mirrorea-fallible-flow-review exec22921 is running, with
+question465625eaf397b5964e8ba938b34d1013deb5e73c8759d14062fbdd3a584683d7.
+No review result is inferred yet.
+
+GeneralLabels scratch now parameterizes a Boolean-decided preorder with bottom
+and least-upper-bound join; no linearity/antisymmetry or authority is inferred.
+General flow/checker exactness, type preservation, high-control confinement,
+low-state/write-list noninterference and actual Passive.feed composition pass
+Lean trust0. A finite four-element incomparable-label model has axiom-free laws.
+FiniteTheory's complete Fin n table loops reflect independent laws and certify
+the exact table fields. Chain positive and wrong join/bottom/reflexivity controls
+pass. A lawful collapsed order still weakens the intended security interpretation:
+policy authenticity/version binding remains separate. First broad simp failed;
+explicit simp-only corrected it and final axiom audit contains no admission.
+Scratch CHECK/log retain the current cut; it is unreviewed, unadopted and has no
+source/runtime/restore/resource guarantee. This extends the current observation
+consumer research, not an official phase or whole-project roadmap.
 
 ## What changed in understanding
 
@@ -457,12 +525,111 @@ numbered reports. Focused diff review also corrected stale sample review wording
 
 ## Commit / push status
 
-The reviewed intermediate checkpoint is prepared for an own-change commit and
-normal authorized push. This pre-commit record does not claim a SHA or remote
-parity; the result will be recorded forward in RESUME and the continuing report.
-W1 remains open, with producer-flow scratch under separate review.
+Reviewed intermediate checkpoint `f136f5d66288347043505e65cda004b169fb7241` was
+committed with --no-gpg-sign and pushed normally to origin/main. git ls-remote
+returned the exact SHA; working tree was clean immediately afterward. Subsequent
+continuation edits are task-owned. W1 remains open; producer-flow scratch is under
+separate review and was not included in that checkpoint.
 
 ## Sub-agent session close status
 
 Zero sub-agents spawned, as explicitly required. Main owns current active work.
 The three support, one current-use and original tracked-validation Oracle jobs completed. The tracked extension review completed. The graph consumer review completed; task ongoing with W1-passive-erasure.
+
+### Continuation: outcome composition and source arithmetic correspondence
+
+Fallible-flow base Oracle review completed (question SHA-256
+465625eaf397b5964e8ba938b34d1013deb5e73c8759d14062fbdd3a584683d7).
+No scoped theorem gap was identified. Main implemented and kernel-checked the
+requested exact outcome/store, conditional type preservation, initial/literal
+range preservation, singleton retention and nonempty low failure/success
+controls. The aborting-sequence and outside-range/nested-overflow countermodels
+are actual checked controls. Initial range equality transport error was fixed;
+failed elaboration is not proof evidence. GeneralLabels and this delta are under
+one read-only review, question2421976456e3b4e704364a9973cf8f77d1e159f50274db83ebe5b348d6192311;
+no production policy or merged semantics is implied.
+
+A separate scratch AbortFlow uses real first-failure abort for finite assignment
+lists. Independent declarative Safe versus executable check carries prior
+completion dependencies into the following program counter. Coherent Lean
+--trust=0 passes checker exactness, confinement, low-state/exact visible-outcome
+noninterference, type preservation, completion classification and actual passive
+retention composition. Nonempty low positive, secret failure suppressing later
+low write, and unconditional completion-bit release distinguish the boundaries.
+Not reviewed, not a production or branch/auth/existence/resource proof.
+
+Full old computational_core and textual FullSystemV1 parser/checker/interpreter
+cones and tests were read and hashed. Actual unchanged copied computational_core
+MAX+1 panics with overflow checks enabled and wraps to MIN with checks disabled;
+41->42 succeeds both. Actual existing debug textual source add_one checks but
+MAX+1 panics (caught only by the test), while41->42 succeeds. This is a numerical
+correspondence falsifier, not an accepted I3 profile, network or observer exploit.
+Exact commands, copied-source hashes and outputs are in FOUNDATION_CHECK.json.
+An initial probe refused three ambiguous rlibs, then used the exact previously
+recorded current source-probe library. No release textual build was claimed.
+
+Documentation validator97802 passed after9809 found progress header older than
+its actual dated log. Header was corrected from current clock. Plan/tasks/sample
+status mirrors still preserve open integration gates; no new official roadmap,
+Canon edit, Rust production change, extra report or additional commit/push yet.
+
+
+Canon correction: the earlier wording that unannotated atk was merely a candidate
+private interpretation was too weak. spec/02 and spec/08 explicitly define
+unlisted fields private by default. Main corrected current companions/evidence;
+raw commands, test logs and frozen Oracle packets remain unchanged. observer_safe
+is not unconditional Public, a numeric label or release authority. This correction
+does not change abstract theorem bodies, but must enter the next source-boundary
+review. No existing privacy requirement is weakened.
+
+### Continuation: reviewed labels/fallible cut and source outcome/frame controls
+
+Oracle Q2421976456e3b4e704364a9973cf8f77d1e159f50274db83ebe5b348d6192311
+completed (exec57080 exit0); main read its full answer. No scoped theorem gap
+was identified. Main adopted O(n³) relation/join **evaluation count**, not runtime
+bound for arbitrary functions, and added checked transitivity-only and overlarge
+join negative controls. GeneralLabels and FallibleFlow were mirrored separately
+with companions; fresh coherent four-module trust0 check passed. Standard axioms
+and conditional initial store/literal/policy/collector premises remain explicit.
+No production or Canon contract was promoted.
+
+A new neutral source-boundary review was sent once by main (session
+mirrorea-source-boundary, Q314b9ca87817061575b5313db3877cd7fb4fd663209e0a49283d6b311bb5d6e8,
+exec54675). It includes AbortFlow, AddressFlow, earlier actual-source finite
+expression correspondence, the Canon private-default correction, and an advisory
+question on carrying W1 implementation obligations into the direct W2 consumer.
+It is still pending; no sequencing decision is accepted from an unreturned review.
+
+While that job runs, a separate unreviewed AssignmentAdmission reference now
+checks Typed, Flows and all syntactic literal ranges, with general checker
+exactness, conditional type/range preservation, unchanged-cell frame and two-run
+noninterference. Coherent four-module trust0 check passed. Positive ordinary
+addition, private-to-low/wrong-type/out-of-range and untaken-bad-literal rejection,
+and accepted-but-fallible overflow distinguish its contract. It neither grants
+authority nor claims all typed expressions succeed.
+
+A new source-contract scratch copy extends the actual M7/M8 harness: each selected
+execution has exactly one actual OwnerWrite or DeclaredFailure terminal row,
+matched result/write payload and source reference where available. Kernel checks
+compare that outcome and values at target/read cells plus an unrelated sentinel
+with the mathematical step. Eight selected executions passed; unsupported grouping
+remains a checker rejection. This is not complete snapshot, all-run refinement,
+observer release, network or alpha evidence. Generic encoder, prebuilt libraries
+and output capture remain TCB. The later delta is outside the frozen current
+Oracle packet. Commands, outputs and hashes are retained in FOUNDATION_CHECK.json.
+
+General-label/fallible sample companions and all touched sample/command indexes
+were synchronized. plan/ correspondence and current goal retain implementation
+gates. Current-status and mandatory-corpus reading remain incomplete; no change
+to tasks sequencing or Plan250. The fresh coherent ten-module kernel check passed
+(all-reviewed-t5vvcs0f, exec58889), and documentation validation passed
+(exec99822, 1761 numbered reports). These checks do not discharge the pending
+Oracle review or production obligations.
+No additional commit/push, external publication or sub-agent session occurred.
+
+Checkpoint verification: `python3 scripts/validate_docs.py` completed with exit0
+(exec25257;1761 numbered reports), all ten current Lean source hashes match the
+recorded successful coherent kernel cut, evidence JSON parses, and focused
+`git diff --check` passed. The source-boundary Oracle session remains running.
+The reviewed producer/label/fallible source and ongoing evidence are being saved
+as an intermediate commit; this does not close W1 or the user request.

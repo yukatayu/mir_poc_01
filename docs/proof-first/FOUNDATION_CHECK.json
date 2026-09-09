@@ -252,5 +252,976 @@
     "question_sha256": "1566450593c02f35e90770c30a89e7e81f5b592084ae045d52d39d0c449d0130",
     "answer_sha256": "93cf22f145b08971ee918d69be61fe84ba8aa7512c5d1a950954477abe96cfcb",
     "disposition": "Four small snapshot corrections applied: completed review queue, pause/default-route scope, historical vs new executions, recorded pass vs rerun. No formal promotion/alpha claim found. Later producer scratch/probe excluded."
+  },
+  "clean_typing_source_correspondence_control": {
+    "command": [
+      "rustc",
+      "--edition=2024",
+      "/tmp/mirrorea-proof-first-20260909-gn29zka5/clean-typing-controls/main.rs",
+      "-L",
+      "dependency=/home/codex/dev/mir_poc_01/target/debug/deps",
+      "-o",
+      "/tmp/mirrorea-proof-first-20260909-gn29zka5/clean-typing-controls/probe",
+      "--extern",
+      "mirrorea_core=/home/codex/dev/mir_poc_01/target/debug/deps/libmirrorea_core-df28d71892f67794.rlib",
+      "--extern",
+      "serde=/home/codex/dev/mir_poc_01/target/debug/deps/libserde-4ca24ffae94fe1a2.rlib",
+      "--extern",
+      "serde_json=/home/codex/dev/mir_poc_01/target/debug/deps/libserde_json-617ca412214fb987.rlib"
+    ],
+    "env": {
+      "CARGO_MANIFEST_DIR": "/tmp/mirrorea-proof-first-20260909-gn29zka5/clean-typing-controls/crates/mir-runtime"
+    },
+    "source_sha256": "b86b7d1b96cf4d4b10d0fc66144553a8beb8ed60d5082ef0134039039663aa0c",
+    "compile_exit": 0,
+    "libs": {
+      "mirrorea_core": "/home/codex/dev/mir_poc_01/target/debug/deps/libmirrorea_core-df28d71892f67794.rlib",
+      "serde": "/home/codex/dev/mir_poc_01/target/debug/deps/libserde-4ca24ffae94fe1a2.rlib",
+      "serde_json": "/home/codex/dev/mir_poc_01/target/debug/deps/libserde_json-617ca412214fb987.rlib"
+    },
+    "original": {
+      "run_exit": 0,
+      "sample_sha256": "b1ed981911deab6110993552b481ad48d604e0994785962d5d19c26193259244",
+      "input": "module CleanNearEnd.AuthorizedDeclassification\n\nuse CleanNearEnd.IndexTheories\n\nprincipal Alice : FingerprintAuthority.Releaser\n\nresource secret_key : PrivateKey\n  label SecurityLabel.KeyMaterial\n  capture SecretKeyStore\n  lifetime Session\n\nresource public_board : Board\n  label SecurityLabel.Public\n  lifetime Session\n\ntransition release_fingerprint(actor = Alice) {\n  stage derive:\n    fp_secret <- perform derive_fingerprint(secret_key)\n      ensure label(fp_secret) = SecurityLabel.KeyMaterial\n\n  stage declassify:\n    fp_public <- declassify fp_secret\n      from SecurityLabel.KeyMaterial\n      to SecurityLabel.Public\n      using FingerprintReleasePolicy\n      requires authority(Alice) >= FingerprintAuthority.Releaser\n\n  stage publish:\n    receipt <- perform publish_fingerprint(fp_public)\n      to public_board\n      after declassify(fp_public)\n      requires witness(fp_public)\n      ensure label(fp_public) = SecurityLabel.Public\n}\n",
+      "output": "{\"built_in_terms\":[\"module\",\"index\",\"policy\",\"principal\",\"resource\",\"effect\",\"place\",\"option\",\"chain\",\"fallback\",\"lineage\",\"perform\",\"via\",\"require\",\"ensure\",\"atomic_cut\",\"transition\",\"stage\",\"publish\",\"observe\",\"handoff\",\"witness\",\"model\",\"property\"],\"checked_under\":null,\"constraints_failed\":[],\"constraints_solved\":[\"authority(Alice) >= FingerprintAuthority.Releaser\",\"declassify SecurityLabel.KeyMaterial -> SecurityLabel.Public permitted by FingerprintReleasePolicy\",\"label(fp_public) = SecurityLabel.Public\"],\"counterexample_shape\":[],\"current_owner\":null,\"entered_evaluation\":true,\"explanation\":null,\"family\":\"typing\",\"layer_signatures\":[],\"message_envelopes\":[],\"mode_constraints\":[],\"model_check_result\":null,\"property\":null,\"reason_family\":null,\"relations\":[],\"residual_obligations\":[],\"sample\":\"01_authorized_declassification\",\"source_path\":\"samples/clean-near-end/typing/01_authorized_declassification.mir\",\"static_verdict\":\"valid\",\"telemetry_rows\":[],\"term_signatures\":[{\"evidence_role\":\"source_decl\",\"kind\":\"transition\",\"name\":\"release_fingerprint\"}],\"terminal_outcome\":\"success\",\"theorem_obligations\":[\"authorized_release_preserves_public_label\"],\"user_defined_terms\":[\"SecurityLabel\",\"FingerprintAuthority\",\"FingerprintReleasePolicy\",\"Alice\"],\"visible_history\":[],\"visualization_views\":[],\"witness_core_fields\":[]}\n"
+    },
+    "comment_only": {
+      "run_exit": 0,
+      "sample_sha256": "b23adf2c057f9c3ca7f321984ceec92ef78c4218cc4b62b7531662e7ad3ef243",
+      "input": "// FingerprintReleasePolicy Releaser SecurityLabel.Public\n",
+      "output": "{\"built_in_terms\":[\"module\",\"index\",\"policy\",\"principal\",\"resource\",\"effect\",\"place\",\"option\",\"chain\",\"fallback\",\"lineage\",\"perform\",\"via\",\"require\",\"ensure\",\"atomic_cut\",\"transition\",\"stage\",\"publish\",\"observe\",\"handoff\",\"witness\",\"model\",\"property\"],\"checked_under\":null,\"constraints_failed\":[],\"constraints_solved\":[\"authority(Alice) >= FingerprintAuthority.Releaser\",\"declassify SecurityLabel.KeyMaterial -> SecurityLabel.Public permitted by FingerprintReleasePolicy\",\"label(fp_public) = SecurityLabel.Public\"],\"counterexample_shape\":[],\"current_owner\":null,\"entered_evaluation\":true,\"explanation\":null,\"family\":\"typing\",\"layer_signatures\":[],\"message_envelopes\":[],\"mode_constraints\":[],\"model_check_result\":null,\"property\":null,\"reason_family\":null,\"relations\":[],\"residual_obligations\":[],\"sample\":\"01_authorized_declassification\",\"source_path\":\"samples/clean-near-end/typing/01_authorized_declassification.mir\",\"static_verdict\":\"valid\",\"telemetry_rows\":[],\"term_signatures\":[],\"terminal_outcome\":\"success\",\"theorem_obligations\":[\"authorized_release_preserves_public_label\"],\"user_defined_terms\":[\"SecurityLabel\",\"FingerprintAuthority\",\"FingerprintReleasePolicy\",\"Alice\"],\"visible_history\":[],\"visualization_views\":[],\"witness_core_fields\":[]}\n"
+    },
+    "scope": "Scratch copy of unchanged clean_near_end.rs, compile-time manifest redirected to scratch. Original and comment-only same named sample both report valid/success. This refutes ordinary-source semantic reliance on that helper output, not actual M7 checking or prior explicitly bounded inventory evidence.",
+    "wrapper": "mod clean_near_end;\nfn main(){\n let r=clean_near_end::run_clean_near_end_sample(\"01_authorized_declassification\").unwrap();\n println!(\"{}\",clean_near_end::clean_near_end_json_value(&r));\n assert_eq!(r.static_verdict.as_deref(),Some(\"valid\"));\n assert_eq!(r.terminal_outcome.as_deref(),Some(\"success\"));\n}\n"
+  },
+  "producer_flow": {
+    "status": "scoped mathematical dependency checked and source-reviewed; implementation open",
+    "check": [
+      {
+        "command": [
+          "lean",
+          "--trust=0",
+          "-o",
+          "MirroreaProofFirstPassive.olean",
+          "MirroreaProofFirstPassive.lean"
+        ],
+        "exit": 0,
+        "sha256": "f5e3aec86542e7c844ace3993e7410eda7af041e96d0291fc836d85783d433e8",
+        "source": "samples/lean/foundations/MirroreaProofFirstPassive.lean",
+        "output": "'MirroreaProofFirst.Passive.erasure' does not depend on any axioms\n'MirroreaProofFirst.Passive.lift_erases' depends on axioms: [propext]\n'MirroreaProofFirst.Passive.filter_before_retention' depends on axioms: [propext]\n'MirroreaProofFirst.Passive.retained_bound' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.Passive.no_invented_rows' depends on axioms: [propext]\n'MirroreaProofFirst.Passive.aligned_projection' depends on axioms: [propext]\n'MirroreaProofFirst.Passive.two_trace_retention' depends on axioms: [propext]\n'MirroreaProofFirst.Passive.concrete_projection' depends on axioms: [propext]\n'MirroreaProofFirst.Passive.concrete_two_run' depends on axioms: [propext]\n'MirroreaProofFirst.Passive.feedRows_exact' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.Passive.retained_exact' depends on axioms: [propext, Quot.sound]\n"
+      },
+      {
+        "command": [
+          "lean",
+          "--trust=0",
+          "-o",
+          "MirroreaProofFirstProducerFlow.olean",
+          "MirroreaProofFirstProducerFlow.lean"
+        ],
+        "exit": 0,
+        "sha256": "fa5a585d1652bcda7ec61cc7b12442d07bdd079cda4effb1d7794cc2f1db6785",
+        "source": "samples/lean/foundations/MirroreaProofFirstProducerFlow.lean",
+        "output": "'MirroreaProofFirst.ProducerFlow.infer_exact' depends on axioms: [propext]\n'MirroreaProofFirst.ProducerFlow.typed_evaluates' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.ProducerFlow.flows_exact' depends on axioms: [propext]\n'MirroreaProofFirst.ProducerFlow.eval_low' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.ProducerFlow.check_exact' depends on axioms: [propext]\n'MirroreaProofFirst.ProducerFlow.run_typed' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.ProducerFlow.confinement' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.ProducerFlow.run_noninterference' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.ProducerFlow.projected_visible' depends on axioms: [propext]\n'MirroreaProofFirst.ProducerFlow.checked_retention_noninterference' depends on axioms: [propext, Quot.sound]\n"
+      }
+    ],
+    "oracle": {
+      "session": "mirrorea-producer-flow-inline",
+      "exec": 92018,
+      "exit": 0,
+      "question_sha256": "72ff28dbd198c0316a8d37a8502ba7f82319c13dd36feaf006e66426a8daceae",
+      "answer_sha256": "b27a1484c29c6f6ee1921223921f2991cd3d801e81264c38583a25e500afc763",
+      "limits": "Read-only source advice, no independent execution/hash verification/signature; no theorem gap found. Main verified added controls. Fallible and clean helper controls not reviewed in this packet."
+    },
+    "failed_attempt": "producer-reviewed-uyeml7_l: module doc before imports rejected; corrected header placement and fresh coherent pass.",
+    "source_delta_after_review": "Module comment, occurrence-only/cut/initial-row controls; no general theorem body change."
+  },
+  "legacy_arithmetic_correspondence_countermodels": {
+    "classification": "actual local controls, not general refinement; no production source delta",
+    "reason": "Plain Rust arithmetic differs from total mathematical Int and checked result Option models. Future source bridge must select and prove numeric failure behavior explicitly.",
+    "copied_computational_core": {
+      "source_hashes": {
+        "main.rs": "4abf60564a001306d6d36394c6cd427ead8cd025312b8e93fbbd9a0f106882a9",
+        "computational_core/mod.rs": "e826b74fdac1a05d3e09bc3daa08956b2fbabb5ef3132a212b6a88003c449211",
+        "computational_core/value.rs": "663d12ed6eab30201858e4c151cc38a4be087a2d71da1629d9172aa47fba9bef",
+        "computational_core/eval.rs": "050ee0c8a32508f13a01168a9ebc9fe0da19a0d0a80d3e0e1ad780c3fa5e40a5",
+        "computational_core/ast.rs": "295821c1417fd4af886a0adb31a46aa456e9f44f0baa4e596f7a652b7d036557",
+        "computational_core/typecheck.rs": "ddf1d069fb001facba874d0322bf7bd6a405ccb898738ef6345f24514438affc"
+      },
+      "runs": [
+        {
+          "command": [
+            "rustc",
+            "--edition=2024",
+            "-A",
+            "dead_code",
+            "-C",
+            "overflow-checks=yes",
+            "/tmp/mirrorea-proof-first-20260909-gn29zka5/arithmetic-correspondence-controls/main.rs",
+            "-o",
+            "/tmp/mirrorea-proof-first-20260909-gn29zka5/arithmetic-correspondence-controls/probe-yes"
+          ],
+          "exit": 0,
+          "output": ""
+        },
+        {
+          "command": [
+            "/tmp/mirrorea-proof-first-20260909-gn29zka5/arithmetic-correspondence-controls/probe-yes",
+            "41"
+          ],
+          "exit": 0,
+          "output": "Ok(Ok(Int64(42)))\n"
+        },
+        {
+          "command": [
+            "/tmp/mirrorea-proof-first-20260909-gn29zka5/arithmetic-correspondence-controls/probe-yes",
+            "9223372036854775807"
+          ],
+          "exit": 0,
+          "output": "Err(Any { .. })\n\nthread 'main' (1845776) panicked at /tmp/mirrorea-proof-first-20260909-gn29zka5/arithmetic-correspondence-controls/computational_core/eval.rs:235:37:\nattempt to add with overflow\nnote: run with `RUST_BACKTRACE=1` environment variable to display a backtrace\n"
+        },
+        {
+          "command": [
+            "rustc",
+            "--edition=2024",
+            "-A",
+            "dead_code",
+            "-C",
+            "overflow-checks=no",
+            "/tmp/mirrorea-proof-first-20260909-gn29zka5/arithmetic-correspondence-controls/main.rs",
+            "-o",
+            "/tmp/mirrorea-proof-first-20260909-gn29zka5/arithmetic-correspondence-controls/probe-no"
+          ],
+          "exit": 0,
+          "output": ""
+        },
+        {
+          "command": [
+            "/tmp/mirrorea-proof-first-20260909-gn29zka5/arithmetic-correspondence-controls/probe-no",
+            "41"
+          ],
+          "exit": 0,
+          "output": "Ok(Ok(Int64(42)))\n"
+        },
+        {
+          "command": [
+            "/tmp/mirrorea-proof-first-20260909-gn29zka5/arithmetic-correspondence-controls/probe-no",
+            "9223372036854775807"
+          ],
+          "exit": 0,
+          "output": "Ok(Ok(Int64(-9223372036854775808)))\n"
+        }
+      ]
+    },
+    "actual_textual_source": {
+      "library_sha256": "c508f2650ba054f7701f36d3c0d01047f8fce75cc0868729168a14fe0c36ab74",
+      "source": "module ProofFirst.Arithmetic\nfn add_one(x: Int64) -> Int64 {\n return x + 1\n}\n",
+      "wrapper": "use mir_semantics::full_system_v1::{check_textual_mir_module_path,run_textual_mir_function_path};\nfn main(){\n let p=std::env::args().nth(1).unwrap();\n let c=check_textual_mir_module_path(&p);assert!(c.accepted);println!(\"check {:?}\",c);\n for v in [41,i64::MAX]{let r=std::panic::catch_unwind(||run_textual_mir_function_path(&p,\"add_one\",v));println!(\"input {v} result {r:?}\");}\n}\n",
+      "runs": [
+        {
+          "command": [
+            "rustc",
+            "--edition=2024",
+            "/tmp/mirrorea-proof-first-20260909-gn29zka5/arithmetic-correspondence-controls/source_probe.rs",
+            "-L",
+            "dependency=/home/codex/dev/mir_poc_01/target/debug/deps",
+            "--extern",
+            "mir_semantics=/home/codex/dev/mir_poc_01/target/debug/deps/libmir_semantics-af3b614beaf8c08c.rlib",
+            "-o",
+            "/tmp/mirrorea-proof-first-20260909-gn29zka5/arithmetic-correspondence-controls/source_probe"
+          ],
+          "exit": 0,
+          "output": ""
+        },
+        {
+          "command": [
+            "/tmp/mirrorea-proof-first-20260909-gn29zka5/arithmetic-correspondence-controls/source_probe",
+            "/tmp/mirrorea-proof-first-20260909-gn29zka5/arithmetic-correspondence-controls/add.mir"
+          ],
+          "exit": 0,
+          "output": "check FullSystemV1CheckReport { accepted: true, module: Some(TypedMirModule { module_path: \"ProofFirst.Arithmetic\", imports: [], capabilities: [], records: [], effects: [], functions: [TypedFunction { function_name: \"add_one\", parameter: TypedParam { name: \"x\", param_type: Int64, span: SourceSpan { start: 29, end: 76, line: 2, column: 1 } }, output_type: Int64, body: [Return { value: TypedExpr { kind: Binary { op: Add, left: TypedExpr { kind: Variable(\"x\"), ty: Int64, span: SourceSpan { start: 69, end: 70, line: 3, column: 9 } }, right: TypedExpr { kind: IntLiteral(1), ty: Int64, span: SourceSpan { start: 73, end: 74, line: 3, column: 13 } } }, ty: Int64, span: SourceSpan { start: 69, end: 74, line: 3, column: 9 } }, span: SourceSpan { start: 62, end: 74, line: 3, column: 2 } }], span: SourceSpan { start: 29, end: 76, line: 2, column: 1 } }], transitions: [], span: SourceSpan { start: 0, end: 76, line: 1, column: 1 } }), accepted_obligations: [FullSystemV1Obligation { code: \"imports_resolved\", message: \"all direct textual Mir imports resolved to declared source modules\" }, FullSystemV1Obligation { code: \"effect_failure_rows_explicit\", message: \"every declared effect in the checked module carries an explicit failure row\" }, FullSystemV1Obligation { code: \"typed_scope_closed\", message: \"lexical scope, function signatures, and basic contract rows typecheck in the alpha checker floor\" }], residual_obligations: [FullSystemV1Obligation { code: \"ambient_effect_row_containment_not_modeled\", message: \"ambient effect row containment remains a residual obligation at the alpha checker floor\" }, FullSystemV1Obligation { code: \"ambient_failure_row_containment_not_modeled\", message: \"ambient failure row containment remains a residual obligation at the alpha checker floor\" }], diagnostics: [], final_public_api_frozen: false }\ninput 41 result Ok(FullSystemV1RunReport { surface_kind: \"full_system_v1_run_report\", source_path: \"/tmp/mirrorea-proof-first-20260909-gn29zka5/arithmetic-correspondence-controls/add.mir\", entry_function: \"add_one\", entry_kind: Function, accepted: true, outcome: Accepted, input: FullSystemV1ValueSnapshot { type_name: \"Int64\", summary: \"Int64(41)\" }, output: Some(FullSystemV1ValueSnapshot { type_name: \"Int64\", summary: \"Int64(42)\" }), check_report: FullSystemV1CheckReport { accepted: true, module: Some(TypedMirModule { module_path: \"ProofFirst.Arithmetic\", imports: [], capabilities: [], records: [], effects: [], functions: [TypedFunction { function_name: \"add_one\", parameter: TypedParam { name: \"x\", param_type: Int64, span: SourceSpan { start: 29, end: 76, line: 2, column: 1 } }, output_type: Int64, body: [Return { value: TypedExpr { kind: Binary { op: Add, left: TypedExpr { kind: Variable(\"x\"), ty: Int64, span: SourceSpan { start: 69, end: 70, line: 3, column: 9 } }, right: TypedExpr { kind: IntLiteral(1), ty: Int64, span: SourceSpan { start: 73, end: 74, line: 3, column: 13 } } }, ty: Int64, span: SourceSpan { start: 69, end: 74, line: 3, column: 9 } }, span: SourceSpan { start: 62, end: 74, line: 3, column: 2 } }], span: SourceSpan { start: 29, end: 76, line: 2, column: 1 } }], transitions: [], span: SourceSpan { start: 0, end: 76, line: 1, column: 1 } }), accepted_obligations: [FullSystemV1Obligation { code: \"imports_resolved\", message: \"all direct textual Mir imports resolved to declared source modules\" }, FullSystemV1Obligation { code: \"effect_failure_rows_explicit\", message: \"every declared effect in the checked module carries an explicit failure row\" }, FullSystemV1Obligation { code: \"typed_scope_closed\", message: \"lexical scope, function signatures, and basic contract rows typecheck in the alpha checker floor\" }], residual_obligations: [FullSystemV1Obligation { code: \"ambient_effect_row_containment_not_modeled\", message: \"ambient effect row containment remains a residual obligation at the alpha checker floor\" }, FullSystemV1Obligation { code: \"ambient_failure_row_containment_not_modeled\", message: \"ambient failure row containment remains a residual obligation at the alpha checker floor\" }], diagnostics: [], final_public_api_frozen: false }, accepted_obligations: [FullSystemV1Obligation { code: \"imports_resolved\", message: \"all direct textual Mir imports resolved to declared source modules\" }, FullSystemV1Obligation { code: \"effect_failure_rows_explicit\", message: \"every declared effect in the checked module carries an explicit failure row\" }, FullSystemV1Obligation { code: \"typed_scope_closed\", message: \"lexical scope, function signatures, and basic contract rows typecheck in the alpha checker floor\" }], residual_obligations: [FullSystemV1Obligation { code: \"ambient_effect_row_containment_not_modeled\", message: \"ambient effect row containment remains a residual obligation at the alpha checker floor\" }, FullSystemV1Obligation { code: \"ambient_failure_row_containment_not_modeled\", message: \"ambient failure row containment remains a residual obligation at the alpha checker floor\" }], diagnostics: [], runtime_rejection: None, program_module_paths: [\"ProofFirst.Arithmetic\"], compute_trace: [FullSystemV1ComputeTrace { trace_id: 1, module_path: \"ProofFirst.Arithmetic\", function_id: \"add_one\", inputs: [FullSystemV1ValueSnapshot { type_name: \"Int64\", summary: \"Int64(41)\" }], local_bindings_summary: [FullSystemV1BindingSnapshot { name: \"x\", mutable: false, type_name: \"Int64\", summary: \"Int64(41)\" }], branch_taken: [], outputs: Some(FullSystemV1ValueSnapshot { type_name: \"Int64\", summary: \"Int64(42)\" }), rejected_reason: None, events: [FullSystemV1ComputeEvent { step_id: 1, kind: \"enter\", detail: \"enter ProofFirst.Arithmetic.add_one\" }, FullSystemV1ComputeEvent { step_id: 2, kind: \"return\", detail: \"return Int64(42)\" }] }], effect_session: FullSystemV1EffectSessionState { host_input_remaining: 0, host_output: [], published_channels: [], observed_channels: [], witness_refs: [], handoff_refs: [], accepted_cuts: [], all_places_sealed: false, no_in_flight: true, no_post_cut_send: true }, observer_safe_summary: \"accepted add_one from ProofFirst.Arithmetic -> Int64(42)\", final_public_api_frozen: false })\ninput 9223372036854775807 result Err(Any { .. })\n\nthread 'main' (1846032) panicked at crates/mir-semantics/src/full_system_v1/interpreter.rs:1398:44:\nattempt to add with overflow\nnote: run with `RUST_BACKTRACE=1` environment variable to display a backtrace\n"
+        }
+      ]
+    },
+    "limits": "Copied old computational_core compiled explicitly with overflow-checks yes/no: MAX+1 panic/wrap. Existing debug textual FullSystemV1 source run: checker accepts, 41->42, MAX+1 caught panic. No release FullSystemV1, network, observer leak or accepted I3 profile falsifier claimed. Catch_unwind is test containment only."
+  },
+  "m7_m8_expression_correspondence_probe": {
+    "classification": "finite actual source/Core/M8 execution vs kernel evaluation controls; not general Rust/parser refinement or alpha E2E",
+    "scope": "Four accepted assignments x2 states; one parenthesized source rejection. Latest encoder derives candidate observation classes from actual checked schema visibility_channel: observer_safe maps low relative to a stipulated observer, None maps high/private per Canon. No field-name classification branch. This does not mint a release grant or settle all observation labels. Fixed request args; complete owner/namespace/materialized-index/field alias interning; parameter literalization only common invocation.",
+    "runtime": {
+      "env": {
+        "CARGO_MANIFEST_DIR": "/home/codex/dev/mir_poc_01/crates/mir-runtime",
+        "PROOF_OUTPUT_DIR": "/tmp/mirrorea-proof-first-20260909-gn29zka5/source-certificate"
+      },
+      "source_sha256": "6282635c4fad31b89b56df9e7eb3e99034fafc58288de5de83274a6e9b2f6ce8",
+      "runs": [
+        {
+          "command": [
+            "rustc",
+            "--test",
+            "--edition=2024",
+            "/tmp/mirrorea-proof-first-20260909-gn29zka5/source-certificate/source_controls.rs",
+            "-L",
+            "dependency=/home/codex/dev/mir_poc_01/target/debug/deps",
+            "-o",
+            "/tmp/mirrorea-proof-first-20260909-gn29zka5/source-certificate/source_controls",
+            "--extern",
+            "mir_ast=/home/codex/dev/mir_poc_01/target/debug/deps/libmir_ast-551ba76808321786.rlib",
+            "--extern",
+            "mir_semantics=/home/codex/dev/mir_poc_01/target/debug/deps/libmir_semantics-af3b614beaf8c08c.rlib",
+            "--extern",
+            "mir_runtime=/home/codex/dev/mir_poc_01/target/debug/deps/libmir_runtime-12012fa141783803.rlib"
+          ],
+          "exit": 0,
+          "output": ""
+        },
+        {
+          "command": [
+            "/tmp/mirrorea-proof-first-20260909-gn29zka5/source-certificate/source_controls",
+            "proof_first_actual_source",
+            "--nocapture"
+          ],
+          "exit": 0,
+          "output": "\nrunning 1 test\ncase=0 run=0 keys=1 alias=false result=some (.int (11)) candidate_flow=true\ncase=0 run=1 keys=1 alias=false result=some (.int (11)) candidate_flow=true\ncase=1 run=0 keys=1 alias=false result=some (.int (1)) candidate_flow=true\ncase=1 run=1 keys=1 alias=false result=none candidate_flow=true\ncase=2 run=0 keys=2 alias=false result=some (.int (1)) candidate_flow=false\ncase=2 run=1 keys=2 alias=false result=none candidate_flow=false\ncase=3 parentheses rejected by current source checker; no runtime/kernel execution claimed\ncase=4 run=0 keys=1 alias=true result=some (.int (20)) candidate_flow=true\ncase=4 run=1 keys=1 alias=true result=some (.int (20)) candidate_flow=true\ntest proof_first_actual_source_to_kernel_expression_correspondence ... ok\n\ntest result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 7 filtered out; finished in 0.01s\n\n"
+        }
+      ]
+    },
+    "initial_failure": {
+      "env": {
+        "CARGO_MANIFEST_DIR": "/home/codex/dev/mir_poc_01/crates/mir-runtime",
+        "PROOF_OUTPUT_DIR": "/tmp/mirrorea-proof-first-20260909-gn29zka5/source-certificate"
+      },
+      "source_sha256": "1fc9aa8d1f6a28c0e07f8d82f1c2154078b2f948820a91bd403a773689b79379",
+      "runs": [
+        {
+          "command": [
+            "rustc",
+            "--test",
+            "--edition=2024",
+            "/tmp/mirrorea-proof-first-20260909-gn29zka5/source-certificate/source_controls.rs",
+            "-L",
+            "dependency=/home/codex/dev/mir_poc_01/target/debug/deps",
+            "-o",
+            "/tmp/mirrorea-proof-first-20260909-gn29zka5/source-certificate/source_controls",
+            "--extern",
+            "mir_ast=/home/codex/dev/mir_poc_01/target/debug/deps/libmir_ast-551ba76808321786.rlib",
+            "--extern",
+            "mir_semantics=/home/codex/dev/mir_poc_01/target/debug/deps/libmir_semantics-af3b614beaf8c08c.rlib",
+            "--extern",
+            "mir_runtime=/home/codex/dev/mir_poc_01/target/debug/deps/libmir_runtime-12012fa141783803.rlib"
+          ],
+          "exit": 0,
+          "output": ""
+        },
+        {
+          "command": [
+            "/tmp/mirrorea-proof-first-20260909-gn29zka5/source-certificate/source_controls",
+            "proof_first_actual_source",
+            "--nocapture"
+          ],
+          "exit": 101,
+          "output": "\nrunning 1 test\ncase=0 run=0 keys=1 alias=false result=some (.int (11)) candidate_flow=true\ncase=0 run=1 keys=1 alias=false result=some (.int (11)) candidate_flow=true\ncase=1 run=0 keys=1 alias=false result=some (.int (1)) candidate_flow=true\ncase=1 run=1 keys=1 alias=false result=none candidate_flow=true\ncase=2 run=0 keys=2 alias=false result=some (.int (1)) candidate_flow=false\ncase=2 run=1 keys=2 alias=false result=none candidate_flow=false\ntest proof_first_actual_source_to_kernel_expression_correspondence ... FAILED\n\nfailures:\n\nfailures:\n    proof_first_actual_source_to_kernel_expression_correspondence\n\ntest result: FAILED. 0 passed; 1 failed; 0 ignored; 0 measured; 7 filtered out; finished in 0.00s\n\n\nthread 'proof_first_actual_source_to_kernel_expression_correspondence' (1849060) panicked at /tmp/mirrorea-proof-first-20260909-gn29zka5/source-certificate/source_controls.rs:657:93:\ncalled `Result::unwrap()` on an `Err` value: SurfaceV0PipelineDiagnostics { entries: [M7Diagnostic { kind: UnsupportedExpression, span: PipelineSourceSpan { file: \"case3.mir\", byte_start: 342, byte_end: 369, start_line: 9, start_column: 29, end_line: 9, end_column: 56 }, source_ref: SourceRef { path: \"case3.mir\", start_line: 9, start_column: 29, end_line: 9, end_column: 56 }, generated_failure_reason: None }] }\nnote: run with `RUST_BACKTRACE=1` environment variable to display a backtrace\n"
+        }
+      ]
+    },
+    "kernel": [
+      {
+        "command": [
+          "lean",
+          "--trust=0",
+          "Case0Run0.lean"
+        ],
+        "exit": 0,
+        "source_sha256": "cdc69ffc253abd56e9c4d8199003b8b0574c0cc3fa1df9fbd9848042c1a1c6ca",
+        "source": "import FallibleFlow\nopen MirroreaProofFirst ProducerFlow\ndef expression : Expr Nat := (.add (.read 0) (.lit (.int (1))))\ndef initial : Nat → Value := fun k =>\n if k = 0 then .int (10) else\n .int 0\ndef labels : Nat → Nat := fun k =>\n if k = 0 then 0 else\n 0\nexample : FallibleFlow.eval (FallibleFlow.signed 63) initial expression = some (.int (11)) := by decide\nexample : infer (fun _ => Ty.int) expression = some Ty.int := by decide\nexample : decide (rank labels expression ≤ labels 0) = true := by decide\n",
+        "output": ""
+      },
+      {
+        "command": [
+          "lean",
+          "--trust=0",
+          "Case0Run1.lean"
+        ],
+        "exit": 0,
+        "source_sha256": "cdc69ffc253abd56e9c4d8199003b8b0574c0cc3fa1df9fbd9848042c1a1c6ca",
+        "source": "import FallibleFlow\nopen MirroreaProofFirst ProducerFlow\ndef expression : Expr Nat := (.add (.read 0) (.lit (.int (1))))\ndef initial : Nat → Value := fun k =>\n if k = 0 then .int (10) else\n .int 0\ndef labels : Nat → Nat := fun k =>\n if k = 0 then 0 else\n 0\nexample : FallibleFlow.eval (FallibleFlow.signed 63) initial expression = some (.int (11)) := by decide\nexample : infer (fun _ => Ty.int) expression = some Ty.int := by decide\nexample : decide (rank labels expression ≤ labels 0) = true := by decide\n",
+        "output": ""
+      },
+      {
+        "command": [
+          "lean",
+          "--trust=0",
+          "Case1Run0.lean"
+        ],
+        "exit": 0,
+        "source_sha256": "4107d27915ae219086b354610893b4140a7a0a1536f9d306c14bcf4d38c57623",
+        "source": "import FallibleFlow\nopen MirroreaProofFirst ProducerFlow\ndef expression : Expr Nat := (.add (.read 0) (.lit (.int (1))))\ndef initial : Nat → Value := fun k =>\n if k = 0 then .int (0) else\n .int 0\ndef labels : Nat → Nat := fun k =>\n if k = 0 then 1 else\n 0\nexample : FallibleFlow.eval (FallibleFlow.signed 63) initial expression = some (.int (1)) := by decide\nexample : infer (fun _ => Ty.int) expression = some Ty.int := by decide\nexample : decide (rank labels expression ≤ labels 0) = true := by decide\n",
+        "output": ""
+      },
+      {
+        "command": [
+          "lean",
+          "--trust=0",
+          "Case1Run1.lean"
+        ],
+        "exit": 0,
+        "source_sha256": "106beef375a79435f6978aa96eb7d48ab7b60cc5288eb2aff2af4f50d4708e4e",
+        "source": "import FallibleFlow\nopen MirroreaProofFirst ProducerFlow\ndef expression : Expr Nat := (.add (.read 0) (.lit (.int (1))))\ndef initial : Nat → Value := fun k =>\n if k = 0 then .int (9223372036854775807) else\n .int 0\ndef labels : Nat → Nat := fun k =>\n if k = 0 then 1 else\n 0\nexample : FallibleFlow.eval (FallibleFlow.signed 63) initial expression = none := by decide\nexample : infer (fun _ => Ty.int) expression = some Ty.int := by decide\nexample : decide (rank labels expression ≤ labels 0) = true := by decide\n",
+        "output": ""
+      },
+      {
+        "command": [
+          "lean",
+          "--trust=0",
+          "Case2Run0.lean"
+        ],
+        "exit": 0,
+        "source_sha256": "350127bb504017f022ede3bc8cc1d224e333a0713efe350be343a96afa518faf",
+        "source": "import FallibleFlow\nopen MirroreaProofFirst ProducerFlow\ndef expression : Expr Nat := (.add (.read 1) (.lit (.int (1))))\ndef initial : Nat → Value := fun k =>\n if k = 0 then .int (10) else\n if k = 1 then .int (0) else\n .int 0\ndef labels : Nat → Nat := fun k =>\n if k = 0 then 0 else\n if k = 1 then 1 else\n 0\nexample : FallibleFlow.eval (FallibleFlow.signed 63) initial expression = some (.int (1)) := by decide\nexample : infer (fun _ => Ty.int) expression = some Ty.int := by decide\nexample : decide (rank labels expression ≤ labels 0) = false := by decide\n",
+        "output": ""
+      },
+      {
+        "command": [
+          "lean",
+          "--trust=0",
+          "Case2Run1.lean"
+        ],
+        "exit": 0,
+        "source_sha256": "14cb361501804916084b7117c807c6cb600c9d3af86a518faccd908e6cb5e3b3",
+        "source": "import FallibleFlow\nopen MirroreaProofFirst ProducerFlow\ndef expression : Expr Nat := (.add (.read 1) (.lit (.int (1))))\ndef initial : Nat → Value := fun k =>\n if k = 0 then .int (10) else\n if k = 1 then .int (9223372036854775807) else\n .int 0\ndef labels : Nat → Nat := fun k =>\n if k = 0 then 0 else\n if k = 1 then 1 else\n 0\nexample : FallibleFlow.eval (FallibleFlow.signed 63) initial expression = none := by decide\nexample : infer (fun _ => Ty.int) expression = some Ty.int := by decide\nexample : decide (rank labels expression ≤ labels 0) = false := by decide\n",
+        "output": ""
+      },
+      {
+        "command": [
+          "lean",
+          "--trust=0",
+          "Case4Run0.lean"
+        ],
+        "exit": 0,
+        "source_sha256": "2ed671d34b1a8ca385c7a90e874e392b27d1d132c69eac79a419d20a687858df",
+        "source": "import FallibleFlow\nopen MirroreaProofFirst ProducerFlow\ndef expression : Expr Nat := (.add (.read 0) (.read 0))\ndef initial : Nat → Value := fun k =>\n if k = 0 then .int (10) else\n .int 0\ndef labels : Nat → Nat := fun k =>\n if k = 0 then 0 else\n 0\nexample : FallibleFlow.eval (FallibleFlow.signed 63) initial expression = some (.int (20)) := by decide\nexample : infer (fun _ => Ty.int) expression = some Ty.int := by decide\nexample : decide (rank labels expression ≤ labels 0) = true := by decide\n",
+        "output": ""
+      },
+      {
+        "command": [
+          "lean",
+          "--trust=0",
+          "Case4Run1.lean"
+        ],
+        "exit": 0,
+        "source_sha256": "2ed671d34b1a8ca385c7a90e874e392b27d1d132c69eac79a419d20a687858df",
+        "source": "import FallibleFlow\nopen MirroreaProofFirst ProducerFlow\ndef expression : Expr Nat := (.add (.read 0) (.read 0))\ndef initial : Nat → Value := fun k =>\n if k = 0 then .int (10) else\n .int 0\ndef labels : Nat → Nat := fun k =>\n if k = 0 then 0 else\n 0\nexample : FallibleFlow.eval (FallibleFlow.signed 63) initial expression = some (.int (20)) := by decide\nexample : infer (fun _ => Ty.int) expression = some Ty.int := by decide\nexample : decide (rank labels expression ≤ labels 0) = true := by decide\n",
+        "output": ""
+      }
+    ],
+    "mutants": [
+      {
+        "command": [
+          "lean",
+          "--trust=0",
+          "DropOperand.lean"
+        ],
+        "exit": 1,
+        "source_sha256": "d8a63ad278094f1cd62d59c8560d0ebc5e5a8ff5b1ef8b86e3cb75cc6ce308b2",
+        "source": "import FallibleFlow\nopen MirroreaProofFirst ProducerFlow\ndef expression : Expr Nat := (.add (.read 0) (.lit (.int (1))))\ndef initial : Nat → Value := fun k =>\n if k = 0 then .int (10) else\n if k = 1 then .int (0) else\n .int 0\ndef labels : Nat → Nat := fun k =>\n if k = 0 then 0 else\n if k = 1 then 1 else\n 0\nexample : FallibleFlow.eval (FallibleFlow.signed 63) initial expression = some (.int (1)) := by decide\nexample : infer (fun _ => Ty.int) expression = some Ty.int := by decide\nexample : decide (rank labels expression ≤ labels 0) = false := by decide\n",
+        "output": "DropOperand.lean:12:96: error: Tactic `decide` proved that the proposition\n  FallibleFlow.eval (FallibleFlow.signed 63) initial expression = some (Value.int 1)\nis false\nDropOperand.lean:14:67: error: Tactic `decide` proved that the proposition\n  decide (rank labels expression ≤ labels 0) = false\nis false\n"
+      },
+      {
+        "command": [
+          "lean",
+          "--trust=0",
+          "ErasePrivateClass.lean"
+        ],
+        "exit": 1,
+        "source_sha256": "e23dbd172bef21b88b99fbb779a3267c1038902a71da39215a266cf3d5d46481",
+        "source": "import FallibleFlow\nopen MirroreaProofFirst ProducerFlow\ndef expression : Expr Nat := (.add (.read 1) (.lit (.int (1))))\ndef initial : Nat → Value := fun k =>\n if k = 0 then .int (10) else\n if k = 1 then .int (0) else\n .int 0\ndef labels : Nat → Nat := fun k =>\n if k = 0 then 0 else\n if k = 1 then 0 else\n 0\nexample : FallibleFlow.eval (FallibleFlow.signed 63) initial expression = some (.int (1)) := by decide\nexample : infer (fun _ => Ty.int) expression = some Ty.int := by decide\nexample : decide (rank labels expression ≤ labels 0) = false := by decide\n",
+        "output": "ErasePrivateClass.lean:14:67: error: Tactic `decide` proved that the proposition\n  decide (rank labels expression ≤ labels 0) = false\nis false\n"
+      },
+      {
+        "command": [
+          "lean",
+          "--trust=0",
+          "InventResult.lean"
+        ],
+        "exit": 1,
+        "source_sha256": "9429fc79cc791f015c473e16289305424b5a9465a45a3051dfb883f7ce0fd115",
+        "source": "import FallibleFlow\nopen MirroreaProofFirst ProducerFlow\ndef expression : Expr Nat := (.add (.read 1) (.lit (.int (1))))\ndef initial : Nat → Value := fun k =>\n if k = 0 then .int (10) else\n if k = 1 then .int (0) else\n .int 0\ndef labels : Nat → Nat := fun k =>\n if k = 0 then 0 else\n if k = 1 then 1 else\n 0\nexample : FallibleFlow.eval (FallibleFlow.signed 63) initial expression = some (.int (42)) := by decide\nexample : infer (fun _ => Ty.int) expression = some Ty.int := by decide\nexample : decide (rank labels expression ≤ labels 0) = false := by decide\n",
+        "output": "InventResult.lean:12:97: error: Tactic `decide` proved that the proposition\n  FallibleFlow.eval (FallibleFlow.signed 63) initial expression = some (Value.int 42)\nis false\n"
+      }
+    ],
+    "source_cases": {
+      "case0.mir": "module ProofFirst.Correspondence\nlocus S\nprincipal self\nprincipal target\ntype Player\nstate player[id: Player] at S { hp: Int atk: Int visible observer_safe fields (hp) }\nRole[self] at S {\n when attack(target: Player) fails (StaleMembership, MissingCapability, MissingWitness, RouteUnavailable, VisibilityDenied) {\n at S { player[target].hp = player[target].hp + 1 }\n }\n}\n",
+      "case1.mir": "module ProofFirst.Correspondence\nlocus S\nprincipal self\nprincipal target\ntype Player\nstate player[id: Player] at S { hp: Int atk: Int visible observer_safe fields (hp) }\nRole[self] at S {\n when attack(target: Player) fails (StaleMembership, MissingCapability, MissingWitness, RouteUnavailable, VisibilityDenied) {\n at S { player[self].atk = player[self].atk + 1 }\n }\n}\n",
+      "case2.mir": "module ProofFirst.Correspondence\nlocus S\nprincipal self\nprincipal target\ntype Player\nstate player[id: Player] at S { hp: Int atk: Int visible observer_safe fields (hp) }\nRole[self] at S {\n when attack(target: Player) fails (StaleMembership, MissingCapability, MissingWitness, RouteUnavailable, VisibilityDenied) {\n at S { player[target].hp = player[self].atk + 1 }\n }\n}\n",
+      "case3.mir": "module ProofFirst.Correspondence\nlocus S\nprincipal self\nprincipal target\ntype Player\nstate player[id: Player] at S { hp: Int atk: Int visible observer_safe fields (hp) }\nRole[self] at S {\n when attack(target: Player) fails (StaleMembership, MissingCapability, MissingWitness, RouteUnavailable, VisibilityDenied) {\n at S { player[target].hp = (player[target].hp + 1) - 1 }\n }\n}\n",
+      "case4.mir": "module ProofFirst.Correspondence\nlocus S\nprincipal self\nprincipal target\ntype Player\nstate player[id: Player] at S { hp: Int atk: Int visible observer_safe fields (hp) }\nRole[self] at S {\n when attack(target: Player) fails (StaleMembership, MissingCapability, MissingWitness, RouteUnavailable, VisibilityDenied) {\n at S { player[target].hp = player[self].hp + player[target].hp }\n }\n}\n"
+    },
+    "core_artifacts": {
+      "case0.core.txt": "OwnerRmwCheckedCore {\n    authority_origin_locus: \"S\",\n    owner_locus: \"S\",\n    target: TypedStateRead {\n        namespace: \"player\",\n        index: Some(\n            \"target\",\n        ),\n        field: Some(\n            \"hp\",\n        ),\n        owner_locus: \"S\",\n        value_type: \"Int\",\n        span: PipelineSourceSpan {\n            file: \"case0.mir\",\n            byte_start: 322,\n            byte_end: 339,\n            start_line: 9,\n            start_column: 9,\n            end_line: 9,\n            end_column: 26,\n        },\n    },\n    expression: TypedExpression {\n        span: PipelineSourceSpan {\n            file: \"case0.mir\",\n            byte_start: 342,\n            byte_end: 363,\n            start_line: 9,\n            start_column: 29,\n            end_line: 9,\n            end_column: 50,\n        },\n        state_reads: [\n            TypedStateRead {\n                namespace: \"player\",\n                index: Some(\n                    \"target\",\n                ),\n                field: Some(\n                    \"hp\",\n                ),\n                owner_locus: \"S\",\n                value_type: \"Int\",\n                span: PipelineSourceSpan {\n                    file: \"case0.mir\",\n                    byte_start: 342,\n                    byte_end: 359,\n                    start_line: 9,\n                    start_column: 29,\n                    end_line: 9,\n                    end_column: 46,\n                },\n            },\n        ],\n        int_literals: [\n            1,\n        ],\n        operator_chain: [\n            \"+\",\n        ],\n        tree: Binary {\n            operator: Add,\n            span: PipelineSourceSpan {\n                file: \"case0.mir\",\n                byte_start: 342,\n                byte_end: 363,\n                start_line: 9,\n                start_column: 29,\n                end_line: 9,\n                end_column: 50,\n            },\n            left: StateRead(\n                TypedStateRead {\n                    namespace: \"player\",\n                    index: Some(\n                        \"target\",\n                    ),\n                    field: Some(\n                        \"hp\",\n                    ),\n                    owner_locus: \"S\",\n                    value_type: \"Int\",\n                    span: PipelineSourceSpan {\n                        file: \"case0.mir\",\n                        byte_start: 342,\n                        byte_end: 359,\n                        start_line: 9,\n                        start_column: 29,\n                        end_line: 9,\n                        end_column: 46,\n                    },\n                },\n            ),\n            right: IntegerLiteral(\n                CheckedIntegerLiteral {\n                    value: 1,\n                    span: PipelineSourceSpan {\n                        file: \"case0.mir\",\n                        byte_start: 362,\n                        byte_end: 363,\n                        start_line: 9,\n                        start_column: 49,\n                        end_line: 9,\n                        end_column: 50,\n                    },\n                },\n            ),\n        },\n    },\n    owner_admission_budget: None,\n}\nrequest args={\"target\": \"target\"}\ncells=[(\"S\", \"player\", \"target\", \"hp\")]\n",
+      "case1.core.txt": "OwnerRmwCheckedCore {\n    authority_origin_locus: \"S\",\n    owner_locus: \"S\",\n    target: TypedStateRead {\n        namespace: \"player\",\n        index: Some(\n            \"self\",\n        ),\n        field: Some(\n            \"atk\",\n        ),\n        owner_locus: \"S\",\n        value_type: \"Int\",\n        span: PipelineSourceSpan {\n            file: \"case1.mir\",\n            byte_start: 322,\n            byte_end: 338,\n            start_line: 9,\n            start_column: 9,\n            end_line: 9,\n            end_column: 25,\n        },\n    },\n    expression: TypedExpression {\n        span: PipelineSourceSpan {\n            file: \"case1.mir\",\n            byte_start: 341,\n            byte_end: 361,\n            start_line: 9,\n            start_column: 28,\n            end_line: 9,\n            end_column: 48,\n        },\n        state_reads: [\n            TypedStateRead {\n                namespace: \"player\",\n                index: Some(\n                    \"self\",\n                ),\n                field: Some(\n                    \"atk\",\n                ),\n                owner_locus: \"S\",\n                value_type: \"Int\",\n                span: PipelineSourceSpan {\n                    file: \"case1.mir\",\n                    byte_start: 341,\n                    byte_end: 357,\n                    start_line: 9,\n                    start_column: 28,\n                    end_line: 9,\n                    end_column: 44,\n                },\n            },\n        ],\n        int_literals: [\n            1,\n        ],\n        operator_chain: [\n            \"+\",\n        ],\n        tree: Binary {\n            operator: Add,\n            span: PipelineSourceSpan {\n                file: \"case1.mir\",\n                byte_start: 341,\n                byte_end: 361,\n                start_line: 9,\n                start_column: 28,\n                end_line: 9,\n                end_column: 48,\n            },\n            left: StateRead(\n                TypedStateRead {\n                    namespace: \"player\",\n                    index: Some(\n                        \"self\",\n                    ),\n                    field: Some(\n                        \"atk\",\n                    ),\n                    owner_locus: \"S\",\n                    value_type: \"Int\",\n                    span: PipelineSourceSpan {\n                        file: \"case1.mir\",\n                        byte_start: 341,\n                        byte_end: 357,\n                        start_line: 9,\n                        start_column: 28,\n                        end_line: 9,\n                        end_column: 44,\n                    },\n                },\n            ),\n            right: IntegerLiteral(\n                CheckedIntegerLiteral {\n                    value: 1,\n                    span: PipelineSourceSpan {\n                        file: \"case1.mir\",\n                        byte_start: 360,\n                        byte_end: 361,\n                        start_line: 9,\n                        start_column: 47,\n                        end_line: 9,\n                        end_column: 48,\n                    },\n                },\n            ),\n        },\n    },\n    owner_admission_budget: None,\n}\nrequest args={\"target\": \"target\"}\ncells=[(\"S\", \"player\", \"self\", \"atk\")]\n",
+      "case2.core.txt": "OwnerRmwCheckedCore {\n    authority_origin_locus: \"S\",\n    owner_locus: \"S\",\n    target: TypedStateRead {\n        namespace: \"player\",\n        index: Some(\n            \"target\",\n        ),\n        field: Some(\n            \"hp\",\n        ),\n        owner_locus: \"S\",\n        value_type: \"Int\",\n        span: PipelineSourceSpan {\n            file: \"case2.mir\",\n            byte_start: 322,\n            byte_end: 339,\n            start_line: 9,\n            start_column: 9,\n            end_line: 9,\n            end_column: 26,\n        },\n    },\n    expression: TypedExpression {\n        span: PipelineSourceSpan {\n            file: \"case2.mir\",\n            byte_start: 342,\n            byte_end: 362,\n            start_line: 9,\n            start_column: 29,\n            end_line: 9,\n            end_column: 49,\n        },\n        state_reads: [\n            TypedStateRead {\n                namespace: \"player\",\n                index: Some(\n                    \"self\",\n                ),\n                field: Some(\n                    \"atk\",\n                ),\n                owner_locus: \"S\",\n                value_type: \"Int\",\n                span: PipelineSourceSpan {\n                    file: \"case2.mir\",\n                    byte_start: 342,\n                    byte_end: 358,\n                    start_line: 9,\n                    start_column: 29,\n                    end_line: 9,\n                    end_column: 45,\n                },\n            },\n        ],\n        int_literals: [\n            1,\n        ],\n        operator_chain: [\n            \"+\",\n        ],\n        tree: Binary {\n            operator: Add,\n            span: PipelineSourceSpan {\n                file: \"case2.mir\",\n                byte_start: 342,\n                byte_end: 362,\n                start_line: 9,\n                start_column: 29,\n                end_line: 9,\n                end_column: 49,\n            },\n            left: StateRead(\n                TypedStateRead {\n                    namespace: \"player\",\n                    index: Some(\n                        \"self\",\n                    ),\n                    field: Some(\n                        \"atk\",\n                    ),\n                    owner_locus: \"S\",\n                    value_type: \"Int\",\n                    span: PipelineSourceSpan {\n                        file: \"case2.mir\",\n                        byte_start: 342,\n                        byte_end: 358,\n                        start_line: 9,\n                        start_column: 29,\n                        end_line: 9,\n                        end_column: 45,\n                    },\n                },\n            ),\n            right: IntegerLiteral(\n                CheckedIntegerLiteral {\n                    value: 1,\n                    span: PipelineSourceSpan {\n                        file: \"case2.mir\",\n                        byte_start: 361,\n                        byte_end: 362,\n                        start_line: 9,\n                        start_column: 48,\n                        end_line: 9,\n                        end_column: 49,\n                    },\n                },\n            ),\n        },\n    },\n    owner_admission_budget: None,\n}\nrequest args={\"target\": \"target\"}\ncells=[(\"S\", \"player\", \"target\", \"hp\"), (\"S\", \"player\", \"self\", \"atk\")]\n",
+      "case4.core.txt": "OwnerRmwCheckedCore {\n    authority_origin_locus: \"S\",\n    owner_locus: \"S\",\n    target: TypedStateRead {\n        namespace: \"player\",\n        index: Some(\n            \"target\",\n        ),\n        field: Some(\n            \"hp\",\n        ),\n        owner_locus: \"S\",\n        value_type: \"Int\",\n        span: PipelineSourceSpan {\n            file: \"case4.mir\",\n            byte_start: 322,\n            byte_end: 339,\n            start_line: 9,\n            start_column: 9,\n            end_line: 9,\n            end_column: 26,\n        },\n    },\n    expression: TypedExpression {\n        span: PipelineSourceSpan {\n            file: \"case4.mir\",\n            byte_start: 342,\n            byte_end: 377,\n            start_line: 9,\n            start_column: 29,\n            end_line: 9,\n            end_column: 64,\n        },\n        state_reads: [\n            TypedStateRead {\n                namespace: \"player\",\n                index: Some(\n                    \"self\",\n                ),\n                field: Some(\n                    \"hp\",\n                ),\n                owner_locus: \"S\",\n                value_type: \"Int\",\n                span: PipelineSourceSpan {\n                    file: \"case4.mir\",\n                    byte_start: 342,\n                    byte_end: 357,\n                    start_line: 9,\n                    start_column: 29,\n                    end_line: 9,\n                    end_column: 44,\n                },\n            },\n            TypedStateRead {\n                namespace: \"player\",\n                index: Some(\n                    \"target\",\n                ),\n                field: Some(\n                    \"hp\",\n                ),\n                owner_locus: \"S\",\n                value_type: \"Int\",\n                span: PipelineSourceSpan {\n                    file: \"case4.mir\",\n                    byte_start: 360,\n                    byte_end: 377,\n                    start_line: 9,\n                    start_column: 47,\n                    end_line: 9,\n                    end_column: 64,\n                },\n            },\n        ],\n        int_literals: [],\n        operator_chain: [\n            \"+\",\n        ],\n        tree: Binary {\n            operator: Add,\n            span: PipelineSourceSpan {\n                file: \"case4.mir\",\n                byte_start: 342,\n                byte_end: 377,\n                start_line: 9,\n                start_column: 29,\n                end_line: 9,\n                end_column: 64,\n            },\n            left: StateRead(\n                TypedStateRead {\n                    namespace: \"player\",\n                    index: Some(\n                        \"self\",\n                    ),\n                    field: Some(\n                        \"hp\",\n                    ),\n                    owner_locus: \"S\",\n                    value_type: \"Int\",\n                    span: PipelineSourceSpan {\n                        file: \"case4.mir\",\n                        byte_start: 342,\n                        byte_end: 357,\n                        start_line: 9,\n                        start_column: 29,\n                        end_line: 9,\n                        end_column: 44,\n                    },\n                },\n            ),\n            right: StateRead(\n                TypedStateRead {\n                    namespace: \"player\",\n                    index: Some(\n                        \"target\",\n                    ),\n                    field: Some(\n                        \"hp\",\n                    ),\n                    owner_locus: \"S\",\n                    value_type: \"Int\",\n                    span: PipelineSourceSpan {\n                        file: \"case4.mir\",\n                        byte_start: 360,\n                        byte_end: 377,\n                        start_line: 9,\n                        start_column: 47,\n                        end_line: 9,\n                        end_column: 64,\n                    },\n                },\n            ),\n        },\n    },\n    owner_admission_budget: None,\n}\nrequest args={\"target\": \"self\"}\ncells=[(\"S\", \"player\", \"self\", \"hp\")]\n"
+    },
+    "limitations": "Copied original test helpers seed trusted current M8 authority and explicit initial state, real checked Core and queue execute. No network/observer/save/rejoin here; actual generated observer effect metadata alone is not observation. Source->Lean emitter and field-policy assignment remain TCB with hash/controls; no general source checker proof. Failure matches RouteUnavailable only for tested known-present valid-context arithmetic cases. Fixed decide equalities are finite evidence. Parenthesis failure retained, not silently treated supported.",
+    "prior_field_name_policy_run": {
+      "env": {
+        "CARGO_MANIFEST_DIR": "/home/codex/dev/mir_poc_01/crates/mir-runtime",
+        "PROOF_OUTPUT_DIR": "/tmp/mirrorea-proof-first-20260909-gn29zka5/source-certificate"
+      },
+      "source_sha256": "616afa4735785750493281a2a81be39d9251b34b1a5c28524eeb9137b5d3dd5f",
+      "runs": [
+        {
+          "command": [
+            "rustc",
+            "--test",
+            "--edition=2024",
+            "/tmp/mirrorea-proof-first-20260909-gn29zka5/source-certificate/source_controls.rs",
+            "-L",
+            "dependency=/home/codex/dev/mir_poc_01/target/debug/deps",
+            "-o",
+            "/tmp/mirrorea-proof-first-20260909-gn29zka5/source-certificate/source_controls",
+            "--extern",
+            "mir_ast=/home/codex/dev/mir_poc_01/target/debug/deps/libmir_ast-551ba76808321786.rlib",
+            "--extern",
+            "mir_semantics=/home/codex/dev/mir_poc_01/target/debug/deps/libmir_semantics-af3b614beaf8c08c.rlib",
+            "--extern",
+            "mir_runtime=/home/codex/dev/mir_poc_01/target/debug/deps/libmir_runtime-12012fa141783803.rlib"
+          ],
+          "exit": 0,
+          "output": ""
+        },
+        {
+          "command": [
+            "/tmp/mirrorea-proof-first-20260909-gn29zka5/source-certificate/source_controls",
+            "proof_first_actual_source",
+            "--nocapture"
+          ],
+          "exit": 0,
+          "output": "\nrunning 1 test\ncase=0 run=0 keys=1 alias=false result=some (.int (11)) candidate_flow=true\ncase=0 run=1 keys=1 alias=false result=some (.int (11)) candidate_flow=true\ncase=1 run=0 keys=1 alias=false result=some (.int (1)) candidate_flow=true\ncase=1 run=1 keys=1 alias=false result=none candidate_flow=true\ncase=2 run=0 keys=2 alias=false result=some (.int (1)) candidate_flow=false\ncase=2 run=1 keys=2 alias=false result=none candidate_flow=false\ncase=3 parentheses rejected by current source checker; no runtime/kernel execution claimed\ncase=4 run=0 keys=1 alias=true result=some (.int (20)) candidate_flow=true\ncase=4 run=1 keys=1 alias=true result=some (.int (20)) candidate_flow=true\ntest proof_first_actual_source_to_kernel_expression_correspondence ... ok\n\ntest result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 7 filtered out; finished in 0.00s\n\n"
+        }
+      ]
+    },
+    "limits_after_canon_correction": "Unlisted fields are normatively private by default, not merely an experimental absence of labels. observer_safe is not Public by itself. Existing M7/M8 execute the tested expression even when the additional candidate flow check rejects; the harness is nonproduction evidence, not a runtime enforcement path. Existing Lean certificate bytes unchanged after schema-derived classifier: hashes match all8 prior PASS records."
+  },
+  "unreviewed_abort_address_kernel": {
+    "abort-flow": [
+      {
+        "command": [
+          "lean",
+          "--trust=0",
+          "-o",
+          "MirroreaProofFirstPassive.olean",
+          "MirroreaProofFirstPassive.lean"
+        ],
+        "exit": 0,
+        "source_sha256": "f5e3aec86542e7c844ace3993e7410eda7af041e96d0291fc836d85783d433e8",
+        "output": "'MirroreaProofFirst.Passive.erasure' does not depend on any axioms\n'MirroreaProofFirst.Passive.lift_erases' depends on axioms: [propext]\n'MirroreaProofFirst.Passive.filter_before_retention' depends on axioms: [propext]\n'MirroreaProofFirst.Passive.retained_bound' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.Passive.no_invented_rows' depends on axioms: [propext]\n'MirroreaProofFirst.Passive.aligned_projection' depends on axioms: [propext]\n'MirroreaProofFirst.Passive.two_trace_retention' depends on axioms: [propext]\n'MirroreaProofFirst.Passive.concrete_projection' depends on axioms: [propext]\n'MirroreaProofFirst.Passive.concrete_two_run' depends on axioms: [propext]\n'MirroreaProofFirst.Passive.feedRows_exact' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.Passive.retained_exact' depends on axioms: [propext, Quot.sound]\n"
+      },
+      {
+        "command": [
+          "lean",
+          "--trust=0",
+          "-o",
+          "ProducerFlow.olean",
+          "ProducerFlow.lean"
+        ],
+        "exit": 0,
+        "source_sha256": "a33e5a0dc27018dcca16fcdf0437b89c6447be2afac890b201b17a648692044a",
+        "output": "'MirroreaProofFirst.ProducerFlow.infer_exact' depends on axioms: [propext]\n'MirroreaProofFirst.ProducerFlow.typed_evaluates' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.ProducerFlow.flows_exact' depends on axioms: [propext]\n'MirroreaProofFirst.ProducerFlow.eval_low' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.ProducerFlow.check_exact' depends on axioms: [propext]\n'MirroreaProofFirst.ProducerFlow.run_typed' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.ProducerFlow.confinement' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.ProducerFlow.run_noninterference' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.ProducerFlow.projected_visible' depends on axioms: [propext]\n'MirroreaProofFirst.ProducerFlow.checked_retention_noninterference' depends on axioms: [propext, Quot.sound]\n"
+      },
+      {
+        "command": [
+          "lean",
+          "--trust=0",
+          "-o",
+          "FallibleFlow.olean",
+          "FallibleFlow.lean"
+        ],
+        "exit": 0,
+        "source_sha256": "ceb6be981eb4106db50f45748b6b4e69eef312d22a83d285f19481d0fd6a03b0",
+        "output": "'MirroreaProofFirst.FallibleFlow.eval_typed' depends on axioms: [propext]\n'MirroreaProofFirst.FallibleFlow.step_typed' depends on axioms: [propext]\n'MirroreaProofFirst.FallibleFlow.singleton_retention' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.FallibleFlow.eval_in_range' depends on axioms: [propext]\n'MirroreaProofFirst.FallibleFlow.step_in_range' depends on axioms: [propext]\n'MirroreaProofFirst.FallibleFlow.bounded_exact' depends on axioms: [propext]\n'MirroreaProofFirst.FallibleFlow.bounded_failure' depends on axioms: [propext, Classical.choice, Quot.sound]\n'MirroreaProofFirst.FallibleFlow.eval_low' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.FallibleFlow.step_noninterference' depends on axioms: [propext, Quot.sound]\n"
+      },
+      {
+        "command": [
+          "lean",
+          "--trust=0",
+          "-o",
+          "AbortFlow.olean",
+          "AbortFlow.lean"
+        ],
+        "exit": 0,
+        "source_sha256": "60e59cf85b9eac792be532d5a151f6c308e6686849433980f71280dc9f2dd281",
+        "output": "'MirroreaProofFirst.AbortFlow.run_typed' depends on axioms: [propext]\n'MirroreaProofFirst.AbortFlow.full_trace_when_inputs_low' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.AbortFlow.completion_noninterference' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.AbortFlow.retained_noninterference' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.AbortFlow.check_exact' depends on axioms: [propext]\n'MirroreaProofFirst.AbortFlow.confinement' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.AbortFlow.noninterference' depends on axioms: [propext, Quot.sound]\n"
+      }
+    ],
+    "address-flow": [
+      {
+        "command": [
+          "lean",
+          "--trust=0",
+          "-o",
+          "MirroreaProofFirstPassive.olean",
+          "MirroreaProofFirstPassive.lean"
+        ],
+        "exit": 0,
+        "source_sha256": "f5e3aec86542e7c844ace3993e7410eda7af041e96d0291fc836d85783d433e8",
+        "output": "'MirroreaProofFirst.Passive.erasure' does not depend on any axioms\n'MirroreaProofFirst.Passive.lift_erases' depends on axioms: [propext]\n'MirroreaProofFirst.Passive.filter_before_retention' depends on axioms: [propext]\n'MirroreaProofFirst.Passive.retained_bound' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.Passive.no_invented_rows' depends on axioms: [propext]\n'MirroreaProofFirst.Passive.aligned_projection' depends on axioms: [propext]\n'MirroreaProofFirst.Passive.two_trace_retention' depends on axioms: [propext]\n'MirroreaProofFirst.Passive.concrete_projection' depends on axioms: [propext]\n'MirroreaProofFirst.Passive.concrete_two_run' depends on axioms: [propext]\n'MirroreaProofFirst.Passive.feedRows_exact' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.Passive.retained_exact' depends on axioms: [propext, Quot.sound]\n"
+      },
+      {
+        "command": [
+          "lean",
+          "--trust=0",
+          "-o",
+          "ProducerFlow.olean",
+          "ProducerFlow.lean"
+        ],
+        "exit": 0,
+        "source_sha256": "a33e5a0dc27018dcca16fcdf0437b89c6447be2afac890b201b17a648692044a",
+        "output": "'MirroreaProofFirst.ProducerFlow.infer_exact' depends on axioms: [propext]\n'MirroreaProofFirst.ProducerFlow.typed_evaluates' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.ProducerFlow.flows_exact' depends on axioms: [propext]\n'MirroreaProofFirst.ProducerFlow.eval_low' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.ProducerFlow.check_exact' depends on axioms: [propext]\n'MirroreaProofFirst.ProducerFlow.run_typed' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.ProducerFlow.confinement' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.ProducerFlow.run_noninterference' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.ProducerFlow.projected_visible' depends on axioms: [propext]\n'MirroreaProofFirst.ProducerFlow.checked_retention_noninterference' depends on axioms: [propext, Quot.sound]\n"
+      },
+      {
+        "command": [
+          "lean",
+          "--trust=0",
+          "-o",
+          "FallibleFlow.olean",
+          "FallibleFlow.lean"
+        ],
+        "exit": 0,
+        "source_sha256": "ceb6be981eb4106db50f45748b6b4e69eef312d22a83d285f19481d0fd6a03b0",
+        "output": "'MirroreaProofFirst.FallibleFlow.eval_typed' depends on axioms: [propext]\n'MirroreaProofFirst.FallibleFlow.step_typed' depends on axioms: [propext]\n'MirroreaProofFirst.FallibleFlow.singleton_retention' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.FallibleFlow.eval_in_range' depends on axioms: [propext]\n'MirroreaProofFirst.FallibleFlow.step_in_range' depends on axioms: [propext]\n'MirroreaProofFirst.FallibleFlow.bounded_exact' depends on axioms: [propext]\n'MirroreaProofFirst.FallibleFlow.bounded_failure' depends on axioms: [propext, Classical.choice, Quot.sound]\n'MirroreaProofFirst.FallibleFlow.eval_low' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.FallibleFlow.step_noninterference' depends on axioms: [propext, Quot.sound]\n"
+      },
+      {
+        "command": [
+          "lean",
+          "--trust=0",
+          "-o",
+          "AbortFlow.olean",
+          "AbortFlow.lean"
+        ],
+        "exit": 0,
+        "source_sha256": "60e59cf85b9eac792be532d5a151f6c308e6686849433980f71280dc9f2dd281",
+        "output": "'MirroreaProofFirst.AbortFlow.run_typed' depends on axioms: [propext]\n'MirroreaProofFirst.AbortFlow.full_trace_when_inputs_low' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.AbortFlow.completion_noninterference' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.AbortFlow.retained_noninterference' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.AbortFlow.check_exact' depends on axioms: [propext]\n'MirroreaProofFirst.AbortFlow.confinement' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.AbortFlow.noninterference' depends on axioms: [propext, Quot.sound]\n"
+      },
+      {
+        "command": [
+          "lean",
+          "--trust=0",
+          "-o",
+          "AddressFlow.olean",
+          "AddressFlow.lean"
+        ],
+        "exit": 0,
+        "source_sha256": "99b2cd9aeeb6fae371f051904587b038b75488e01706d6c89162544d5b861338",
+        "output": "'MirroreaProofFirst.AddressFlow.eval_commutes' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.AddressFlow.rank_commutes' depends on axioms: [propext]\n'MirroreaProofFirst.AddressFlow.infer_commutes' depends on axioms: [propext]\n'MirroreaProofFirst.AddressFlow.put_commutes' does not depend on any axioms\n'MirroreaProofFirst.AddressFlow.run_commutes' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.AddressFlow.check_commutes' depends on axioms: [propext]\n"
+      }
+    ]
+  },
+  "canon_visibility_correction": {
+    "sources": [
+      "mirrorea_canon/spec/02-surface-grammar.md",
+      "mirrorea_canon/spec/08-m7-checked-elaboration.md"
+    ],
+    "meaning": "Unlisted fields private by default; observer_safe is no implicit public release. Supersedes earlier commentary/probe interpretation, not raw historical logs/packets."
+  },
+  "reviewed_general_labels_fallible": {
+    "workspace": "/tmp/mirrorea-proof-first-20260909-gn29zka5/producer-extensions-reviewed-5056iuk1",
+    "checks": [
+      {
+        "command": [
+          "lean",
+          "--trust=0",
+          "-o",
+          "MirroreaProofFirstPassive.olean",
+          "MirroreaProofFirstPassive.lean"
+        ],
+        "exit": 0,
+        "source_sha256": "f5e3aec86542e7c844ace3993e7410eda7af041e96d0291fc836d85783d433e8",
+        "output": "'MirroreaProofFirst.Passive.erasure' does not depend on any axioms\n'MirroreaProofFirst.Passive.lift_erases' depends on axioms: [propext]\n'MirroreaProofFirst.Passive.filter_before_retention' depends on axioms: [propext]\n'MirroreaProofFirst.Passive.retained_bound' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.Passive.no_invented_rows' depends on axioms: [propext]\n'MirroreaProofFirst.Passive.aligned_projection' depends on axioms: [propext]\n'MirroreaProofFirst.Passive.two_trace_retention' depends on axioms: [propext]\n'MirroreaProofFirst.Passive.concrete_projection' depends on axioms: [propext]\n'MirroreaProofFirst.Passive.concrete_two_run' depends on axioms: [propext]\n'MirroreaProofFirst.Passive.feedRows_exact' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.Passive.retained_exact' depends on axioms: [propext, Quot.sound]\n"
+      },
+      {
+        "command": [
+          "lean",
+          "--trust=0",
+          "-o",
+          "MirroreaProofFirstProducerFlow.olean",
+          "MirroreaProofFirstProducerFlow.lean"
+        ],
+        "exit": 0,
+        "source_sha256": "fa5a585d1652bcda7ec61cc7b12442d07bdd079cda4effb1d7794cc2f1db6785",
+        "output": "'MirroreaProofFirst.ProducerFlow.infer_exact' depends on axioms: [propext]\n'MirroreaProofFirst.ProducerFlow.typed_evaluates' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.ProducerFlow.flows_exact' depends on axioms: [propext]\n'MirroreaProofFirst.ProducerFlow.eval_low' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.ProducerFlow.check_exact' depends on axioms: [propext]\n'MirroreaProofFirst.ProducerFlow.run_typed' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.ProducerFlow.confinement' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.ProducerFlow.run_noninterference' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.ProducerFlow.projected_visible' depends on axioms: [propext]\n'MirroreaProofFirst.ProducerFlow.checked_retention_noninterference' depends on axioms: [propext, Quot.sound]\n"
+      },
+      {
+        "command": [
+          "lean",
+          "--trust=0",
+          "-o",
+          "MirroreaProofFirstGeneralLabels.olean",
+          "MirroreaProofFirstGeneralLabels.lean"
+        ],
+        "exit": 0,
+        "source_sha256": "e90dd52298455f6e6c45f012bf29115d8529308fe67afeed33f705b4f2b28279",
+        "output": "'MirroreaProofFirst.GeneralLabels.flows_exact' does not depend on any axioms\n'MirroreaProofFirst.GeneralLabels.eval_low' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.GeneralLabels.check_exact' depends on axioms: [propext]\n'MirroreaProofFirst.GeneralLabels.check_exact' depends on axioms: [propext]\n'MirroreaProofFirst.GeneralLabels.run_typed' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.GeneralLabels.confinement' depends on axioms: [propext]\n'MirroreaProofFirst.GeneralLabels.run_noninterference' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.GeneralLabels.checked_retention_noninterference' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.GeneralLabels.Controls.diamond' does not depend on any axioms\n@run_noninterference : ∀ {A K : Type} [inst : DecidableEq K] {T : LabelTheory A} {G : K → Ty} {L : K → A} {pc : A}\n  {cmd : Stmt K} {level : A},\n  Safe T G L pc cmd →\n    ∀ (s t : K → Value),\n      (∀ (k : K), (s k).ty = G k) →\n        (∀ (k : K), (t k).ty = G k) →\n          LowEq T L level s t →\n            LowEq T L level (run s cmd).fst (run t cmd).fst ∧\n              visible T L level (run s cmd).snd = visible T L level (run t cmd).snd\n'MirroreaProofFirst.GeneralLabels.FiniteTheory.check_exact' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.GeneralLabels.FiniteTheory.certify' depends on axioms: [propext, Quot.sound]\n"
+      },
+      {
+        "command": [
+          "lean",
+          "--trust=0",
+          "-o",
+          "MirroreaProofFirstFallibleFlow.olean",
+          "MirroreaProofFirstFallibleFlow.lean"
+        ],
+        "exit": 0,
+        "source_sha256": "a799c7b6301684ea258097993bb3ebdb9eb32e51fa24b1603542f363de0929d9",
+        "output": "'MirroreaProofFirst.FallibleFlow.eval_typed' depends on axioms: [propext]\n'MirroreaProofFirst.FallibleFlow.step_typed' depends on axioms: [propext]\n'MirroreaProofFirst.FallibleFlow.singleton_retention' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.FallibleFlow.eval_in_range' depends on axioms: [propext]\n'MirroreaProofFirst.FallibleFlow.step_in_range' depends on axioms: [propext]\n'MirroreaProofFirst.FallibleFlow.bounded_exact' depends on axioms: [propext]\n'MirroreaProofFirst.FallibleFlow.bounded_failure' depends on axioms: [propext, Classical.choice, Quot.sound]\n'MirroreaProofFirst.FallibleFlow.eval_low' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.FallibleFlow.step_noninterference' depends on axioms: [propext, Quot.sound]\n"
+      }
+    ],
+    "oracle_question_sha256": "2421976456e3b4e704364a9973cf8f77d1e159f50274db83ebe5b348d6192311",
+    "oracle_session": "mirrorea-label-failure-delta",
+    "oracle_exec_exit": 0,
+    "disposition": "No scoped theorem gap. Main kernel verifies integrated exact cut. GeneralLabels adds independently checked transitivity-only and overlarge-join controls; no general theorem-body change. Finite-function check has O(n^3) relation/join evaluations, not bounded execution time. Fallible remains fixed invocation. Source classification correction is recorded separately; frozen packet unchanged. No production/canon/alpha acceptance."
+  },
+  "assignment_admission_unreviewed": {
+    "workspace": "/tmp/mirrorea-proof-first-20260909-gn29zka5/assignment-admission",
+    "checks": [
+      {
+        "command": [
+          "lean",
+          "--trust=0",
+          "-o",
+          "MirroreaProofFirstPassive.olean",
+          "MirroreaProofFirstPassive.lean"
+        ],
+        "exit": 0,
+        "source_sha256": "f5e3aec86542e7c844ace3993e7410eda7af041e96d0291fc836d85783d433e8",
+        "output": "'MirroreaProofFirst.Passive.erasure' does not depend on any axioms\n'MirroreaProofFirst.Passive.lift_erases' depends on axioms: [propext]\n'MirroreaProofFirst.Passive.filter_before_retention' depends on axioms: [propext]\n'MirroreaProofFirst.Passive.retained_bound' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.Passive.no_invented_rows' depends on axioms: [propext]\n'MirroreaProofFirst.Passive.aligned_projection' depends on axioms: [propext]\n'MirroreaProofFirst.Passive.two_trace_retention' depends on axioms: [propext]\n'MirroreaProofFirst.Passive.concrete_projection' depends on axioms: [propext]\n'MirroreaProofFirst.Passive.concrete_two_run' depends on axioms: [propext]\n'MirroreaProofFirst.Passive.feedRows_exact' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.Passive.retained_exact' depends on axioms: [propext, Quot.sound]\n"
+      },
+      {
+        "command": [
+          "lean",
+          "--trust=0",
+          "-o",
+          "MirroreaProofFirstProducerFlow.olean",
+          "MirroreaProofFirstProducerFlow.lean"
+        ],
+        "exit": 0,
+        "source_sha256": "fa5a585d1652bcda7ec61cc7b12442d07bdd079cda4effb1d7794cc2f1db6785",
+        "output": "'MirroreaProofFirst.ProducerFlow.infer_exact' depends on axioms: [propext]\n'MirroreaProofFirst.ProducerFlow.typed_evaluates' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.ProducerFlow.flows_exact' depends on axioms: [propext]\n'MirroreaProofFirst.ProducerFlow.eval_low' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.ProducerFlow.check_exact' depends on axioms: [propext]\n'MirroreaProofFirst.ProducerFlow.run_typed' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.ProducerFlow.confinement' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.ProducerFlow.run_noninterference' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.ProducerFlow.projected_visible' depends on axioms: [propext]\n'MirroreaProofFirst.ProducerFlow.checked_retention_noninterference' depends on axioms: [propext, Quot.sound]\n"
+      },
+      {
+        "command": [
+          "lean",
+          "--trust=0",
+          "-o",
+          "MirroreaProofFirstFallibleFlow.olean",
+          "MirroreaProofFirstFallibleFlow.lean"
+        ],
+        "exit": 0,
+        "source_sha256": "a799c7b6301684ea258097993bb3ebdb9eb32e51fa24b1603542f363de0929d9",
+        "output": "'MirroreaProofFirst.FallibleFlow.eval_typed' depends on axioms: [propext]\n'MirroreaProofFirst.FallibleFlow.step_typed' depends on axioms: [propext]\n'MirroreaProofFirst.FallibleFlow.singleton_retention' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.FallibleFlow.eval_in_range' depends on axioms: [propext]\n'MirroreaProofFirst.FallibleFlow.step_in_range' depends on axioms: [propext]\n'MirroreaProofFirst.FallibleFlow.bounded_exact' depends on axioms: [propext]\n'MirroreaProofFirst.FallibleFlow.bounded_failure' depends on axioms: [propext, Classical.choice, Quot.sound]\n'MirroreaProofFirst.FallibleFlow.eval_low' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.FallibleFlow.step_noninterference' depends on axioms: [propext, Quot.sound]\n"
+      },
+      {
+        "command": [
+          "lean",
+          "--trust=0",
+          "-o",
+          "AssignmentAdmission.olean",
+          "AssignmentAdmission.lean"
+        ],
+        "exit": 0,
+        "source_sha256": "b72e9142fb7e7ab49556721e63dbb24b251417e87ef39654cbd5ef3b564fbdf2",
+        "output": "'MirroreaProofFirst.AssignmentAdmission.literal_exact' depends on axioms: [propext]\n'MirroreaProofFirst.AssignmentAdmission.check_exact' depends on axioms: [propext]\n'MirroreaProofFirst.AssignmentAdmission.preservation' depends on axioms: [propext]\n'MirroreaProofFirst.AssignmentAdmission.frame' depends on axioms: [propext]\n'MirroreaProofFirst.AssignmentAdmission.noninterference' depends on axioms: [propext, Quot.sound]\n"
+      }
+    ],
+    "scope": "Independent Typed/Flows/LiteralsInRange admission vs Boolean checker exactness; typed/range preservation, frame and NI. No source entry/current authority/presence/resource contract; not yet reviewed."
+  },
+  "source_contract_finite_unreviewed": {
+    "workspace": "/tmp/mirrorea-proof-first-20260909-gn29zka5/source-contract",
+    "command": {
+      "source_sha256": "eed895f5ca4cdfbbde63d2c26abb9d818cdb7bef5af8410f9f03539eba15952b",
+      "env": {
+        "CARGO_MANIFEST_DIR": "/home/codex/dev/mir_poc_01/crates/mir-runtime",
+        "PROOF_OUTPUT_DIR": "/tmp/mirrorea-proof-first-20260909-gn29zka5/source-contract"
+      },
+      "runs": [
+        {
+          "command": [
+            "rustc",
+            "--test",
+            "--edition=2024",
+            "/tmp/mirrorea-proof-first-20260909-gn29zka5/source-contract/source_controls.rs",
+            "-L",
+            "dependency=/home/codex/dev/mir_poc_01/target/debug/deps",
+            "-o",
+            "/tmp/mirrorea-proof-first-20260909-gn29zka5/source-contract/source_controls",
+            "--extern",
+            "mir_ast=/home/codex/dev/mir_poc_01/target/debug/deps/libmir_ast-551ba76808321786.rlib",
+            "--extern",
+            "mir_semantics=/home/codex/dev/mir_poc_01/target/debug/deps/libmir_semantics-af3b614beaf8c08c.rlib",
+            "--extern",
+            "mir_runtime=/home/codex/dev/mir_poc_01/target/debug/deps/libmir_runtime-12012fa141783803.rlib"
+          ],
+          "exit": 0,
+          "output": ""
+        },
+        {
+          "command": [
+            "/tmp/mirrorea-proof-first-20260909-gn29zka5/source-contract/source_controls",
+            "proof_first_actual_source",
+            "--nocapture"
+          ],
+          "exit": 0,
+          "output": "\nrunning 1 test\ncase=0 run=0 keys=2 alias=false result=some (.int (11)) candidate_flow=true\ncase=0 run=1 keys=2 alias=false result=some (.int (11)) candidate_flow=true\ncase=1 run=0 keys=2 alias=false result=some (.int (1)) candidate_flow=true\ncase=1 run=1 keys=2 alias=false result=none candidate_flow=true\ncase=2 run=0 keys=3 alias=false result=some (.int (1)) candidate_flow=false\ncase=2 run=1 keys=3 alias=false result=none candidate_flow=false\ncase=3 parentheses rejected by current source checker; no runtime/kernel execution claimed\ncase=4 run=0 keys=2 alias=true result=some (.int (20)) candidate_flow=true\ncase=4 run=1 keys=2 alias=true result=some (.int (20)) candidate_flow=true\ntest proof_first_actual_source_to_kernel_expression_correspondence ... ok\n\ntest result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 7 filtered out; finished in 0.00s\n\n"
+        }
+      ]
+    },
+    "kernel_checks": [
+      {
+        "command": [
+          "lean",
+          "--trust=0",
+          "Case0Run0.lean"
+        ],
+        "exit": 0,
+        "source_sha256": "23592f4ef6223903f05c4dfba08d890105cfc2caf7abb742621880346723012e",
+        "source": "import FallibleFlow\nopen MirroreaProofFirst ProducerFlow\ndef expression : Expr Nat := (.add (.read 0) (.lit (.int (1))))\ndef initial : Nat → Value := fun k =>\n if k = 0 then .int (10) else\n if k = 1 then .int (10) else\n .int 0\ndef labels : Nat → Nat := fun k =>\n if k = 0 then 0 else\n if k = 1 then 0 else\n 0\nexample : FallibleFlow.eval (FallibleFlow.signed 63) initial expression = some (.int (11)) := by decide\nexample : infer (fun _ => Ty.int) expression = some Ty.int := by decide\nexample : decide (rank labels expression ≤ labels 0) = true := by decide\nexample : (FallibleFlow.step (FallibleFlow.signed 63) initial 0 expression).2 = (.wrote 0 (.int (11)) : FallibleFlow.Outcome Nat) := by decide\ndef observedFinal : Nat → Value := fun k =>\n if k = 0 then .int (11) else\n if k = 1 then .int (10) else\n .int 0\nexample : ∀ i : Fin 2, (FallibleFlow.step (FallibleFlow.signed 63) initial 0 expression).1 i.val = observedFinal i.val := by decide\n",
+        "output": ""
+      },
+      {
+        "command": [
+          "lean",
+          "--trust=0",
+          "Case0Run1.lean"
+        ],
+        "exit": 0,
+        "source_sha256": "23592f4ef6223903f05c4dfba08d890105cfc2caf7abb742621880346723012e",
+        "source": "import FallibleFlow\nopen MirroreaProofFirst ProducerFlow\ndef expression : Expr Nat := (.add (.read 0) (.lit (.int (1))))\ndef initial : Nat → Value := fun k =>\n if k = 0 then .int (10) else\n if k = 1 then .int (10) else\n .int 0\ndef labels : Nat → Nat := fun k =>\n if k = 0 then 0 else\n if k = 1 then 0 else\n 0\nexample : FallibleFlow.eval (FallibleFlow.signed 63) initial expression = some (.int (11)) := by decide\nexample : infer (fun _ => Ty.int) expression = some Ty.int := by decide\nexample : decide (rank labels expression ≤ labels 0) = true := by decide\nexample : (FallibleFlow.step (FallibleFlow.signed 63) initial 0 expression).2 = (.wrote 0 (.int (11)) : FallibleFlow.Outcome Nat) := by decide\ndef observedFinal : Nat → Value := fun k =>\n if k = 0 then .int (11) else\n if k = 1 then .int (10) else\n .int 0\nexample : ∀ i : Fin 2, (FallibleFlow.step (FallibleFlow.signed 63) initial 0 expression).1 i.val = observedFinal i.val := by decide\n",
+        "output": ""
+      },
+      {
+        "command": [
+          "lean",
+          "--trust=0",
+          "Case1Run0.lean"
+        ],
+        "exit": 0,
+        "source_sha256": "5ab9d4dbea1abb4e375ac596e5c0e6c22d4c98ae1b90e0c47f68c65663415f92",
+        "source": "import FallibleFlow\nopen MirroreaProofFirst ProducerFlow\ndef expression : Expr Nat := (.add (.read 0) (.lit (.int (1))))\ndef initial : Nat → Value := fun k =>\n if k = 0 then .int (0) else\n if k = 1 then .int (10) else\n .int 0\ndef labels : Nat → Nat := fun k =>\n if k = 0 then 1 else\n if k = 1 then 0 else\n 0\nexample : FallibleFlow.eval (FallibleFlow.signed 63) initial expression = some (.int (1)) := by decide\nexample : infer (fun _ => Ty.int) expression = some Ty.int := by decide\nexample : decide (rank labels expression ≤ labels 0) = true := by decide\nexample : (FallibleFlow.step (FallibleFlow.signed 63) initial 0 expression).2 = (.wrote 0 (.int (1)) : FallibleFlow.Outcome Nat) := by decide\ndef observedFinal : Nat → Value := fun k =>\n if k = 0 then .int (1) else\n if k = 1 then .int (10) else\n .int 0\nexample : ∀ i : Fin 2, (FallibleFlow.step (FallibleFlow.signed 63) initial 0 expression).1 i.val = observedFinal i.val := by decide\n",
+        "output": ""
+      },
+      {
+        "command": [
+          "lean",
+          "--trust=0",
+          "Case1Run1.lean"
+        ],
+        "exit": 0,
+        "source_sha256": "f411d25a05673e1beacf2538ff7f38667db73cb6452b72b4d73261ea6e477139",
+        "source": "import FallibleFlow\nopen MirroreaProofFirst ProducerFlow\ndef expression : Expr Nat := (.add (.read 0) (.lit (.int (1))))\ndef initial : Nat → Value := fun k =>\n if k = 0 then .int (9223372036854775807) else\n if k = 1 then .int (10) else\n .int 0\ndef labels : Nat → Nat := fun k =>\n if k = 0 then 1 else\n if k = 1 then 0 else\n 0\nexample : FallibleFlow.eval (FallibleFlow.signed 63) initial expression = none := by decide\nexample : infer (fun _ => Ty.int) expression = some Ty.int := by decide\nexample : decide (rank labels expression ≤ labels 0) = true := by decide\nexample : (FallibleFlow.step (FallibleFlow.signed 63) initial 0 expression).2 = (.failed 0 : FallibleFlow.Outcome Nat) := by decide\ndef observedFinal : Nat → Value := fun k =>\n if k = 0 then .int (9223372036854775807) else\n if k = 1 then .int (10) else\n .int 0\nexample : ∀ i : Fin 2, (FallibleFlow.step (FallibleFlow.signed 63) initial 0 expression).1 i.val = observedFinal i.val := by decide\n",
+        "output": ""
+      },
+      {
+        "command": [
+          "lean",
+          "--trust=0",
+          "Case2Run0.lean"
+        ],
+        "exit": 0,
+        "source_sha256": "f735bdb9e57a4ae7ee057ac0676d1548b2c5751779756f7d4733d38b9518cfad",
+        "source": "import FallibleFlow\nopen MirroreaProofFirst ProducerFlow\ndef expression : Expr Nat := (.add (.read 1) (.lit (.int (1))))\ndef initial : Nat → Value := fun k =>\n if k = 0 then .int (10) else\n if k = 1 then .int (0) else\n if k = 2 then .int (10) else\n .int 0\ndef labels : Nat → Nat := fun k =>\n if k = 0 then 0 else\n if k = 1 then 1 else\n if k = 2 then 0 else\n 0\nexample : FallibleFlow.eval (FallibleFlow.signed 63) initial expression = some (.int (1)) := by decide\nexample : infer (fun _ => Ty.int) expression = some Ty.int := by decide\nexample : decide (rank labels expression ≤ labels 0) = false := by decide\nexample : (FallibleFlow.step (FallibleFlow.signed 63) initial 0 expression).2 = (.wrote 0 (.int (1)) : FallibleFlow.Outcome Nat) := by decide\ndef observedFinal : Nat → Value := fun k =>\n if k = 0 then .int (1) else\n if k = 1 then .int (0) else\n if k = 2 then .int (10) else\n .int 0\nexample : ∀ i : Fin 3, (FallibleFlow.step (FallibleFlow.signed 63) initial 0 expression).1 i.val = observedFinal i.val := by decide\n",
+        "output": ""
+      },
+      {
+        "command": [
+          "lean",
+          "--trust=0",
+          "Case2Run1.lean"
+        ],
+        "exit": 0,
+        "source_sha256": "69b66363b8466bc7097edfbe52d9b28a11fbada6678d5ee0ab410fbc876693bb",
+        "source": "import FallibleFlow\nopen MirroreaProofFirst ProducerFlow\ndef expression : Expr Nat := (.add (.read 1) (.lit (.int (1))))\ndef initial : Nat → Value := fun k =>\n if k = 0 then .int (10) else\n if k = 1 then .int (9223372036854775807) else\n if k = 2 then .int (10) else\n .int 0\ndef labels : Nat → Nat := fun k =>\n if k = 0 then 0 else\n if k = 1 then 1 else\n if k = 2 then 0 else\n 0\nexample : FallibleFlow.eval (FallibleFlow.signed 63) initial expression = none := by decide\nexample : infer (fun _ => Ty.int) expression = some Ty.int := by decide\nexample : decide (rank labels expression ≤ labels 0) = false := by decide\nexample : (FallibleFlow.step (FallibleFlow.signed 63) initial 0 expression).2 = (.failed 0 : FallibleFlow.Outcome Nat) := by decide\ndef observedFinal : Nat → Value := fun k =>\n if k = 0 then .int (10) else\n if k = 1 then .int (9223372036854775807) else\n if k = 2 then .int (10) else\n .int 0\nexample : ∀ i : Fin 3, (FallibleFlow.step (FallibleFlow.signed 63) initial 0 expression).1 i.val = observedFinal i.val := by decide\n",
+        "output": ""
+      },
+      {
+        "command": [
+          "lean",
+          "--trust=0",
+          "Case4Run0.lean"
+        ],
+        "exit": 0,
+        "source_sha256": "1c5245f187c45c1db403ec3a158c29348b8d74fa5acd40a05a50c3db2ccdc794",
+        "source": "import FallibleFlow\nopen MirroreaProofFirst ProducerFlow\ndef expression : Expr Nat := (.add (.read 0) (.read 0))\ndef initial : Nat → Value := fun k =>\n if k = 0 then .int (10) else\n if k = 1 then .int (10) else\n .int 0\ndef labels : Nat → Nat := fun k =>\n if k = 0 then 0 else\n if k = 1 then 0 else\n 0\nexample : FallibleFlow.eval (FallibleFlow.signed 63) initial expression = some (.int (20)) := by decide\nexample : infer (fun _ => Ty.int) expression = some Ty.int := by decide\nexample : decide (rank labels expression ≤ labels 0) = true := by decide\nexample : (FallibleFlow.step (FallibleFlow.signed 63) initial 0 expression).2 = (.wrote 0 (.int (20)) : FallibleFlow.Outcome Nat) := by decide\ndef observedFinal : Nat → Value := fun k =>\n if k = 0 then .int (20) else\n if k = 1 then .int (10) else\n .int 0\nexample : ∀ i : Fin 2, (FallibleFlow.step (FallibleFlow.signed 63) initial 0 expression).1 i.val = observedFinal i.val := by decide\n",
+        "output": ""
+      },
+      {
+        "command": [
+          "lean",
+          "--trust=0",
+          "Case4Run1.lean"
+        ],
+        "exit": 0,
+        "source_sha256": "1c5245f187c45c1db403ec3a158c29348b8d74fa5acd40a05a50c3db2ccdc794",
+        "source": "import FallibleFlow\nopen MirroreaProofFirst ProducerFlow\ndef expression : Expr Nat := (.add (.read 0) (.read 0))\ndef initial : Nat → Value := fun k =>\n if k = 0 then .int (10) else\n if k = 1 then .int (10) else\n .int 0\ndef labels : Nat → Nat := fun k =>\n if k = 0 then 0 else\n if k = 1 then 0 else\n 0\nexample : FallibleFlow.eval (FallibleFlow.signed 63) initial expression = some (.int (20)) := by decide\nexample : infer (fun _ => Ty.int) expression = some Ty.int := by decide\nexample : decide (rank labels expression ≤ labels 0) = true := by decide\nexample : (FallibleFlow.step (FallibleFlow.signed 63) initial 0 expression).2 = (.wrote 0 (.int (20)) : FallibleFlow.Outcome Nat) := by decide\ndef observedFinal : Nat → Value := fun k =>\n if k = 0 then .int (20) else\n if k = 1 then .int (10) else\n .int 0\nexample : ∀ i : Fin 2, (FallibleFlow.step (FallibleFlow.signed 63) initial 0 expression).1 i.val = observedFinal i.val := by decide\n",
+        "output": ""
+      }
+    ],
+    "scope": "8 selected actual M7/M8 executions: actual terminal OwnerWrite/DeclaredFailure row and outcome agree; values at operand/target cells plus unrelated sentinel agree with Lean step. Not all-store/all-execution refinement, observer release, network or alpha. Source-derived policy compatibility is reported, not runtime enforced. Generic encoder and prebuilt Rust libraries remain TCB.",
+    "mutants": [
+      {
+        "command": [
+          "lean",
+          "--trust=0",
+          "InventWriteOnFailure.lean"
+        ],
+        "exit": 1,
+        "source_sha256": "2df1446f26ee78ddff166f2ad8fe6bea63ae09544b747712fa255697f712fc9d",
+        "source": "import FallibleFlow\nopen MirroreaProofFirst ProducerFlow\ndef expression : Expr Nat := (.add (.read 0) (.lit (.int (1))))\ndef initial : Nat → Value := fun k =>\n if k = 0 then .int (9223372036854775807) else\n if k = 1 then .int (10) else\n .int 0\ndef labels : Nat → Nat := fun k =>\n if k = 0 then 1 else\n if k = 1 then 0 else\n 0\nexample : FallibleFlow.eval (FallibleFlow.signed 63) initial expression = none := by decide\nexample : infer (fun _ => Ty.int) expression = some Ty.int := by decide\nexample : decide (rank labels expression ≤ labels 0) = true := by decide\nexample : (FallibleFlow.step (FallibleFlow.signed 63) initial 0 expression).2 = (.wrote 0 (.int 9223372036854775807) : FallibleFlow.Outcome Nat) := by decide\ndef observedFinal : Nat → Value := fun k =>\n if k = 0 then .int (9223372036854775807) else\n if k = 1 then .int (10) else\n .int 0\nexample : ∀ i : Fin 2, (FallibleFlow.step (FallibleFlow.signed 63) initial 0 expression).1 i.val = observedFinal i.val := by decide\n",
+        "output": "InventWriteOnFailure.lean:15:151: error: Tactic `decide` proved that the proposition\n  (FallibleFlow.step (FallibleFlow.signed 63) initial 0 expression).snd =\n    FallibleFlow.Outcome.wrote 0 (Value.int 9223372036854775807)\nis false\n"
+      },
+      {
+        "command": [
+          "lean",
+          "--trust=0",
+          "AlterUnrelatedFrame.lean"
+        ],
+        "exit": 1,
+        "source_sha256": "263f128b48ef5e5a944de878fdc883d74c9e6e2f2861b7760e1128414924477c",
+        "source": "import FallibleFlow\nopen MirroreaProofFirst ProducerFlow\ndef expression : Expr Nat := (.add (.read 0) (.lit (.int (1))))\ndef initial : Nat → Value := fun k =>\n if k = 0 then .int (10) else\n if k = 1 then .int (10) else\n .int 0\ndef labels : Nat → Nat := fun k =>\n if k = 0 then 0 else\n if k = 1 then 0 else\n 0\nexample : FallibleFlow.eval (FallibleFlow.signed 63) initial expression = some (.int (11)) := by decide\nexample : infer (fun _ => Ty.int) expression = some Ty.int := by decide\nexample : decide (rank labels expression ≤ labels 0) = true := by decide\nexample : (FallibleFlow.step (FallibleFlow.signed 63) initial 0 expression).2 = (.wrote 0 (.int (11)) : FallibleFlow.Outcome Nat) := by decide\ndef observedFinal : Nat → Value := fun k =>\n if k = 0 then .int (11) else\n if k = 1 then .int (42) else\n .int 0\nexample : ∀ i : Fin 2, (FallibleFlow.step (FallibleFlow.signed 63) initial 0 expression).1 i.val = observedFinal i.val := by decide\n",
+        "output": "AlterUnrelatedFrame.lean:20:125: error: Tactic `decide` proved that the proposition\n  ∀ (i : Fin 2), (FallibleFlow.step (FallibleFlow.signed 63) initial 0 expression).fst ↑i = observedFinal ↑i\nis false\n"
+      }
+    ]
+  },
+  "active_oracle": {
+    "question_sha256": "314b9ca87817061575b5313db3877cd7fb4fd663209e0a49283d6b311bb5d6e8",
+    "session": "mirrorea-source-boundary",
+    "exec_session": 54675,
+    "workspace": "/tmp/mirrorea-proof-first-20260909-gn29zka5/oracle-source-boundary",
+    "status": "running; same job; minimum180s checks",
+    "scope": "AbortFlow, AddressFlow, earlier finite source expression bridge, Canon private-default correction and advisory W1/W2 dependency boundary. Later assignment admission and source outcome/frame delta not in this packet."
+  },
+  "all_reviewed_kernel_cut": {
+    "workspace": "/tmp/mirrorea-proof-first-20260909-gn29zka5/all-reviewed-t5vvcs0f",
+    "version": "Lean (version 4.29.1, x86_64-unknown-linux-gnu, commit f72c35b3f637c8c6571d353742168ab66cc22c00, Release)\n",
+    "checks": [
+      {
+        "command": [
+          "lean",
+          "--trust=0",
+          "-o",
+          "MirroreaProofFirstSupport.olean",
+          "MirroreaProofFirstSupport.lean"
+        ],
+        "exit": 0,
+        "source_sha256": "7f401632873cb3b87e0fa62d1b172af88b996b34a6d3fc62a7e61d103b41a9c3",
+        "output": "'MirroreaProofFirst.Support.eval_correct' depends on axioms: [propext]\n'MirroreaProofFirst.Support.holds_mono' does not depend on any axioms\n'MirroreaProofFirst.Support.grounded_closed' does not depend on any axioms\n'MirroreaProofFirst.Support.grounded_least' does not depend on any axioms\n'MirroreaProofFirst.Support.ranked_sound' does not depend on any axioms\n'MirroreaProofFirst.Support.ranked_exact' does not depend on any axioms\n'MirroreaProofFirst.Support.rounds_sound' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.Support.proof_eventually' depends on axioms: [propext]\n'MirroreaProofFirst.Support.rounds_complete' depends on axioms: [propext]\n'MirroreaProofFirst.Support.rounds_iff_derivation' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.Support.allOf_correct' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.Support.anyOf_correct' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.Support.stable_exists' depends on axioms: [propext, Classical.choice, Quot.sound]\n'MirroreaProofFirst.Support.derive_exact' depends on axioms: [propext, Classical.choice, Quot.sound]\n'MirroreaProofFirst.Support.checker_exact' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.Support.checked_membership_exact' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.Support.retirement_mono' does not depend on any axioms\n'MirroreaProofFirst.Support.normalization_idempotent' does not depend on any axioms\n'MirroreaProofFirst.Support.no_root_no_ground' does not depend on any axioms\n'MirroreaProofFirst.Support.low_grounded_independent' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.Support.firstRank_spec' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.Support.generated_certificate_accepted' depends on axioms: [propext, Classical.choice, Quot.sound]\n'MirroreaProofFirst.Support.height_threshold' depends on axioms: [propext, Classical.choice, Quot.sound]\n'MirroreaProofFirst.Support.canonical_rounds' depends on axioms: [propext, Classical.choice, Quot.sound]\n'MirroreaProofFirst.Support.canonical_rank_unique' depends on axioms: [propext, Classical.choice, Quot.sound]\n'MirroreaProofFirst.Support.generated_heights' depends on axioms: [propext, Classical.choice, Quot.sound]\n'MirroreaProofFirst.Support.canonical_generated_accepted' depends on axioms: [propext, Classical.choice, Quot.sound]\n'MirroreaProofFirst.Support.canonical_checker_sound' depends on axioms: [propext, Classical.choice, Quot.sound]\n'MirroreaProofFirst.Support.snapshot_live_exact' depends on axioms: [propext, Classical.choice, Quot.sound]\n'MirroreaProofFirst.Support.snapshot_certificate_accepted' depends on axioms: [propext, Classical.choice, Quot.sound]\n'MirroreaProofFirst.Support.snapshot_checked_sound' depends on axioms: [propext, Classical.choice, Quot.sound]\n"
+      },
+      {
+        "command": [
+          "lean",
+          "--trust=0",
+          "-o",
+          "MirroreaProofFirstCurrentUse.olean",
+          "MirroreaProofFirstCurrentUse.lean"
+        ],
+        "exit": 0,
+        "source_sha256": "ab604c92b226182bdf84a38caaa044d6b949730891d40a02a72ad441c59f4239",
+        "output": "'MirroreaProofFirst.CurrentUse.checkClaim_exact' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.CurrentUse.checkWitness_sound' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.CurrentUse.chooseClaim_sound' depends on axioms: [propext]\n'MirroreaProofFirst.CurrentUse.chooseClaim_complete' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.CurrentUse.produce_checked' depends on axioms: [propext]\n'MirroreaProofFirst.CurrentUse.produce_complete' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.CurrentUse.revalidate_sound' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.CurrentUse.context_change_rejected' depends on axioms: [propext]\n'MirroreaProofFirst.CurrentUse.authorization_iff_produced' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.CurrentUse.no_claim_no_authorization' depends on axioms: [propext]\n'MirroreaProofFirst.CurrentUse.checkHandle_exact' depends on axioms: [propext, Classical.choice, Quot.sound]\n'MirroreaProofFirst.CurrentUse.checkUse_sound' depends on axioms: [propext, Classical.choice, Quot.sound]\n'MirroreaProofFirst.CurrentUse.checkUse_complete' depends on axioms: [propext, Classical.choice, Quot.sound]\n'MirroreaProofFirst.CurrentUse.retired_locus_rejected' depends on axioms: [propext, Classical.choice, Quot.sound]\n'MirroreaProofFirst.CurrentUse.stale_incarnation_rejected' depends on axioms: [propext]\n'MirroreaProofFirst.CurrentUse.authorize_checked' depends on axioms: [propext]\n'MirroreaProofFirst.CurrentUse.authorize_use_complete' depends on axioms: [propext, Classical.choice, Quot.sound]\n'MirroreaProofFirst.CurrentUse.tryAdmit_sound' depends on axioms: [propext, Classical.choice, Quot.sound]\n'MirroreaProofFirst.CurrentUse.tryAdmit_does_not_issue' depends on axioms: [propext]\n'MirroreaProofFirst.CurrentUse.tryAdmit_retains_history' depends on axioms: [propext]\n'MirroreaProofFirst.CurrentUse.duplicate_admission_unchanged' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.CurrentUse.retire_preserves_history' does not depend on any axioms\n'MirroreaProofFirst.CurrentUse.revoke_preserves_history' does not depend on any axioms\n'MirroreaProofFirst.CurrentUse.retire_stops_locus_use' depends on axioms: [propext, Classical.choice, Quot.sound]\n'MirroreaProofFirst.CurrentUse.tryAdmit_unique' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.CurrentUse.step_unique' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.CurrentUse.run_unique' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.CurrentUse.step_retains_history' depends on axioms: [propext]\n'MirroreaProofFirst.CurrentUse.run_retains_history' depends on axioms: [propext]\n"
+      },
+      {
+        "command": [
+          "lean",
+          "--trust=0",
+          "-o",
+          "MirroreaProofFirstCurrentUseReview.olean",
+          "MirroreaProofFirstCurrentUseReview.lean"
+        ],
+        "exit": 0,
+        "source_sha256": "333276a42c1888af8412ad8c3aa21d84be2a514626cc91f1802db2740fe0ddb2",
+        "output": ""
+      },
+      {
+        "command": [
+          "lean",
+          "--trust=0",
+          "-o",
+          "MirroreaProofFirstTrackedValidation.olean",
+          "MirroreaProofFirstTrackedValidation.lean"
+        ],
+        "exit": 0,
+        "source_sha256": "650339d6b363ee873c97e0f1e776aed0eb327981a78b5572dc0492589b20d9ff",
+        "output": "'MirroreaProofFirst.TrackedValidation.checkStamps_exact' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.TrackedValidation.checked_overlay_replay' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.TrackedValidation.checked_blind_write_unchanged' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.TrackedValidation.evaluate_exact' depends on axioms: [propext]\n'MirroreaProofFirst.TrackedValidation.tracked_reads_suffice' depends on axioms: [propext]\n'MirroreaProofFirst.TrackedValidation.equal_version_same_cell' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.TrackedValidation.validated_query_preserved' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.TrackedValidation.preparation_reachable' does not depend on any axioms\n'MirroreaProofFirst.TrackedValidation.preparation_observed' does not depend on any axioms\n'MirroreaProofFirst.TrackedValidation.preparation_origins' depends on axioms: [propext]\n'MirroreaProofFirst.TrackedValidation.interleaved_validation_sound' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.TrackedValidation.observed_replay' depends on axioms: [propext]\n'MirroreaProofFirst.TrackedValidation.observed_validation_sound' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.TrackedValidation.publish_values' does not depend on any axioms\n'MirroreaProofFirst.TrackedValidation.publish_is_writes' depends on axioms: [propext]\n'MirroreaProofFirst.TrackedValidation.commit_rechecks_result' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.TrackedValidation.writes_version_exact' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.TrackedValidation.checkStamps_no_writes' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.TrackedValidation.patch_preparation_reachable' does not depend on any axioms\n'MirroreaProofFirst.TrackedValidation.patch_preparation_origins' depends on axioms: [propext]\n'MirroreaProofFirst.TrackedValidation.patch_preparation_observed' does not depend on any axioms\n'MirroreaProofFirst.TrackedValidation.patch_observed_replay' depends on axioms: [propext]\n'MirroreaProofFirst.TrackedValidation.interleaved_patch_replay' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.TrackedValidation.patch_publication_replay' depends on axioms: [propext, Quot.sound]\n"
+      },
+      {
+        "command": [
+          "lean",
+          "--trust=0",
+          "-o",
+          "MirroreaProofFirstGraphValidation.olean",
+          "MirroreaProofFirstGraphValidation.lean"
+        ],
+        "exit": 0,
+        "source_sha256": "86d7148bc1dc7790f3925e94ddf41a0279b1a214e36bb96ff428c99f7ca0996a",
+        "output": "'MirroreaProofFirst.GraphValidation.add_preserves' does not depend on any axioms\n'MirroreaProofFirst.GraphValidation.reachable_exact' depends on axioms: [propext, Classical.choice, Quot.sound]\n'MirroreaProofFirst.GraphValidation.acyclic_subgraph' does not depend on any axioms\n'MirroreaProofFirst.GraphValidation.checkAdd_exact' depends on axioms: [propext, Classical.choice, Quot.sound]\n'MirroreaProofFirst.GraphValidation.checkAcyclic_exact' depends on axioms: [propext, Classical.choice, Quot.sound]\n'MirroreaProofFirst.GraphValidation.scan_evaluates' depends on axioms: [propext]\n'MirroreaProofFirst.GraphValidation.sampled_exact' depends on axioms: [propext]\n'MirroreaProofFirst.GraphValidation.dagQuery_exact' depends on axioms: [propext, Classical.choice, Quot.sound]\n'MirroreaProofFirst.GraphValidation.committed_graph_acyclic' depends on axioms: [propext, Classical.choice, Quot.sound]\n'MirroreaProofFirst.GraphValidation.interleaved_graph_publication' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n"
+      },
+      {
+        "command": [
+          "lean",
+          "--trust=0",
+          "-o",
+          "MirroreaProofFirstGraphReview.olean",
+          "MirroreaProofFirstGraphReview.lean"
+        ],
+        "exit": 0,
+        "source_sha256": "b4c83990f3d1b0353240c89eeebf801a9b3be7351e16acc9b3efe4543ac554d5",
+        "output": ""
+      },
+      {
+        "command": [
+          "lean",
+          "--trust=0",
+          "-o",
+          "MirroreaProofFirstPassive.olean",
+          "MirroreaProofFirstPassive.lean"
+        ],
+        "exit": 0,
+        "source_sha256": "f5e3aec86542e7c844ace3993e7410eda7af041e96d0291fc836d85783d433e8",
+        "output": "'MirroreaProofFirst.Passive.erasure' does not depend on any axioms\n'MirroreaProofFirst.Passive.lift_erases' depends on axioms: [propext]\n'MirroreaProofFirst.Passive.filter_before_retention' depends on axioms: [propext]\n'MirroreaProofFirst.Passive.retained_bound' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.Passive.no_invented_rows' depends on axioms: [propext]\n'MirroreaProofFirst.Passive.aligned_projection' depends on axioms: [propext]\n'MirroreaProofFirst.Passive.two_trace_retention' depends on axioms: [propext]\n'MirroreaProofFirst.Passive.concrete_projection' depends on axioms: [propext]\n'MirroreaProofFirst.Passive.concrete_two_run' depends on axioms: [propext]\n'MirroreaProofFirst.Passive.feedRows_exact' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.Passive.retained_exact' depends on axioms: [propext, Quot.sound]\n"
+      },
+      {
+        "command": [
+          "lean",
+          "--trust=0",
+          "-o",
+          "MirroreaProofFirstProducerFlow.olean",
+          "MirroreaProofFirstProducerFlow.lean"
+        ],
+        "exit": 0,
+        "source_sha256": "fa5a585d1652bcda7ec61cc7b12442d07bdd079cda4effb1d7794cc2f1db6785",
+        "output": "'MirroreaProofFirst.ProducerFlow.infer_exact' depends on axioms: [propext]\n'MirroreaProofFirst.ProducerFlow.typed_evaluates' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.ProducerFlow.flows_exact' depends on axioms: [propext]\n'MirroreaProofFirst.ProducerFlow.eval_low' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.ProducerFlow.check_exact' depends on axioms: [propext]\n'MirroreaProofFirst.ProducerFlow.run_typed' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.ProducerFlow.confinement' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.ProducerFlow.run_noninterference' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.ProducerFlow.projected_visible' depends on axioms: [propext]\n'MirroreaProofFirst.ProducerFlow.checked_retention_noninterference' depends on axioms: [propext, Quot.sound]\n"
+      },
+      {
+        "command": [
+          "lean",
+          "--trust=0",
+          "-o",
+          "MirroreaProofFirstGeneralLabels.olean",
+          "MirroreaProofFirstGeneralLabels.lean"
+        ],
+        "exit": 0,
+        "source_sha256": "e90dd52298455f6e6c45f012bf29115d8529308fe67afeed33f705b4f2b28279",
+        "output": "'MirroreaProofFirst.GeneralLabels.flows_exact' does not depend on any axioms\n'MirroreaProofFirst.GeneralLabels.eval_low' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.GeneralLabels.check_exact' depends on axioms: [propext]\n'MirroreaProofFirst.GeneralLabels.check_exact' depends on axioms: [propext]\n'MirroreaProofFirst.GeneralLabels.run_typed' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.GeneralLabels.confinement' depends on axioms: [propext]\n'MirroreaProofFirst.GeneralLabels.run_noninterference' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.GeneralLabels.checked_retention_noninterference' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.GeneralLabels.Controls.diamond' does not depend on any axioms\n@run_noninterference : ∀ {A K : Type} [inst : DecidableEq K] {T : LabelTheory A} {G : K → Ty} {L : K → A} {pc : A}\n  {cmd : Stmt K} {level : A},\n  Safe T G L pc cmd →\n    ∀ (s t : K → Value),\n      (∀ (k : K), (s k).ty = G k) →\n        (∀ (k : K), (t k).ty = G k) →\n          LowEq T L level s t →\n            LowEq T L level (run s cmd).fst (run t cmd).fst ∧\n              visible T L level (run s cmd).snd = visible T L level (run t cmd).snd\n'MirroreaProofFirst.GeneralLabels.FiniteTheory.check_exact' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.GeneralLabels.FiniteTheory.certify' depends on axioms: [propext, Quot.sound]\n"
+      },
+      {
+        "command": [
+          "lean",
+          "--trust=0",
+          "-o",
+          "MirroreaProofFirstFallibleFlow.olean",
+          "MirroreaProofFirstFallibleFlow.lean"
+        ],
+        "exit": 0,
+        "source_sha256": "a799c7b6301684ea258097993bb3ebdb9eb32e51fa24b1603542f363de0929d9",
+        "output": "'MirroreaProofFirst.FallibleFlow.eval_typed' depends on axioms: [propext]\n'MirroreaProofFirst.FallibleFlow.step_typed' depends on axioms: [propext]\n'MirroreaProofFirst.FallibleFlow.singleton_retention' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.FallibleFlow.eval_in_range' depends on axioms: [propext]\n'MirroreaProofFirst.FallibleFlow.step_in_range' depends on axioms: [propext]\n'MirroreaProofFirst.FallibleFlow.bounded_exact' depends on axioms: [propext]\n'MirroreaProofFirst.FallibleFlow.bounded_failure' depends on axioms: [propext, Classical.choice, Quot.sound]\n'MirroreaProofFirst.FallibleFlow.eval_low' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.FallibleFlow.step_noninterference' depends on axioms: [propext, Quot.sound]\n"
+      }
+    ]
   }
 }

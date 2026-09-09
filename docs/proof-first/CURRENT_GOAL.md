@@ -18,3 +18,24 @@ Their companions and report2611 preserve outstanding source translation,
 all-mutator/current-head/restore, authority, physical publication and resource
 obligations. W1 overall and alpha implementation gates remain open. Mandatory
 corpus reading continues; no new whole-project roadmap is adopted.
+
+## Current producer dependency
+
+Accepted finite mathematical Int/Bool assignments and branches now derive equal
+low final states and exact projected write sequences; the actual Passive.feed
+composition is checked and source-reviewed. Type/flow rules and checker are
+separate, with Safe.branch using separately characterized rank. This is not an
+ordinary-source adapter or failure/interactive/current-authority theorem. Actual
+M7 artifact and M8 overflow-outcome controls expose those correspondence tasks;
+Canon spec/02 and spec/08 make unlisted fields private by default;
+observer_safe is not an implicit public release or an automatic Nat-label mapping.
+The current direct task is outcome/dependency preservation and source binding,
+not another unconditional retention proof. Fallible single-assignment base has completed Oracle source review; requested
+type/range/collector extensions and the separate general-label checker have completed
+source review and coherent kernel checking. Their scoped companions retain all
+source/runtime/authority limits. A further aborting finite-assignment-list reference has actual kernel
+evidence for checker exactness, type preservation, low state/event equality,
+completion classification and retention. This further extension is not reviewed
+or production. Its completion dependency raises the following program counter;
+the actual secret-failure-then-public-write countermodel is rejected. Branching,
+current authority, source correspondence and resource/time behavior remain open.

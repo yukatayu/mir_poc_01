@@ -1,61 +1,14 @@
-# Sole-main proof-first continuation
-Base/HEAD7feef371bcd8dcd49f4855aeb172e631e70743bc, initially clean. All dirty
-proof/docs/scripts ours, uncommitted, no push yet. No subagents, no final at a
-component green. Overall goal active. Plan250 remains paused; new task LAB authority
-and conditional implementation are separate; no canon/production delta.
+# Resume — ongoing proof-first task, do not stop at this checkpoint
 
-Workdir /tmp/mirrorea-proof-first-20260909-gn29zka5 is root FS, NOT mountedexternal.
-Root60GiBfree, target4.4GiB, RAM12GiBavailable last measured. No cleanup/hostshare.
-Originalhandoff unchanged. Copied baseline records/report2611 retain exact results.
-
-Single semantic goal W1-passive-erasure (PL1 S1/S3 theory/proof). Pure support,
-current-use, tracked-query/graph and passive erasure/retention have actual Lean
-4.29.1 trust0 evidence and completed Oracle source reviews; production/currenthead/
-allmutator/sourceIFC/physical/recovery/alpha gates remain open. FOUNDATION_CHECK
-has latest Passive hash/log, earlier modules fresh7module cut. No sorry or Miraxiom.
-
-Oracle completed passive base exec25684 and retentiondelta exec53998, no theorem
-change; companion clarified premises, exact formula, processingorder, control
-limits. Main actual M8 trustedsetup effective-label mismatch and ordinarysource
-private-input/public-target ObserverPublish admission reproduced; neither is
-network/M9 exploit or acceptedprofilefalsifier. First in OBSERVER_BASELINE_CHECK;
-second source-flow-controls/{probe.rs,compile.log,run.log}, not yet mirrored.
-
-Final narrow integration Oracle COMPLETED mirrorea-proof-first-integratio-review,
-exec4775, packet status-final-review/, Q1566450593c02f35e90770c30a89e7e81f5b592084ae045d52d39d0c449d0130.
-It reviewed snapshots/report/evidence, not later source-flow probe; four wording
-corrections applied. New docs run exec44531 is ongoing. Respect
-LAST_CHECK_UTC >=180s; samejob,no deadlines or retriesforlatency. Pre-edit status
-review completed and corrections integrated. No signed or independentexecutionclaim.
-
-Sourcehierarchy800 PASS; docsvalidator exec72769 exit0,1761reports. Both checker
-pathstrings repair historical100%rename dd19d1ce to sub-agent-pro/old_01 handoff.
-Diffcheck passed beforelatestwording, refresh beforecommit. Finalreviewpending.
-
-Reading: exactfullhashes/ranges inREAD_LEDGER. SurfaceAST2495, pipeline4185,
-classification1345, provider354, private_snapshot1506+child64 nowFULL. Runtime
-M10reference16746/M9auth16041/M8observer698/kernel3794/authority1061 full; SYS3all5
-full. Mandatory2437corpus stillmostlyunread. No newwholeprojectplanadopted.
-
-Next: collect sameintegrationreview whenfinished; meanwhile define/check a scoped
-producer-flow dependency for ordinary expression+assignment under current observer
-goal (independent rules/checker, lowequivalence, positive and high-to-low control).
-Do not mistake targetvisibility for sourceIFC, or snapshot structural coherence
-for authentic currentcheckedfacts. Keep numeric/policy/authority assumptions
-explicit. Integrate reviewedcheckpoint/normalowncommit+push thencontinue; no new
-userpromptneeded. Keepreport2611 only, no microreports.
-
-Producer-flow scratch now has actual trust0 PASS (producer-flow/ProducerFlow.lean,
-lean.log), no sorryAx: independent Typed/infer soundcomplete+evaluationtype,
-Flows/rank exact, Safe/check exact, sequential/conditional run preserves types,
-high-control confinement, two-run lowstate+actualvisiblewrite trace equality,
-composition with Passive.feed. Int/Bool, +/-/expressionchoice, static keys and
-labels, noFFI/loops/dynamicaddresses/currentauth/finiteword failures. Controls
-nonemptypublic arithmetic with secretbranch unequalhightraces, direct/control/
-expression leaks rejected, wrongtype rejected, cancellation demonstrates only
-syntacticrelativecompleteness. Not yetOracle reviewed or copied into repo.
-shared_model.rs FULL3781 recorded; M5 finitebaseline, not productionintegration.
-
-New producer review running mirrorea-producer-flow-review, exec24943, packet
-oracle-producer-flow/, question72ff28dbd198c0316a8d37a8502ba7f82319c13dd36feaf006e66426a8daceae.
-Single submittedjob; >=180s statusguard. Keep scratch until review disposition.
+- HEAD f136f5d66288347043505e65cda004b169fb7241 pushed with exact remote parity; own continuation docs/proofs/evidence dirty, no Canon or Rust production changes. Initial baseline7feef371bcd8dcd49f4855aeb172e631e70743bc. No reset/clean/force; user forbids all subagents. Normal own commit+push authorized.
+- Sole semantic goal W1-passive-erasure, PL1 S1/S3 theory/proof; scope/requirements in CURRENT_GOAL.md. Plan250 paused; no official phase/THM/OBL promotion. Overall goal remains foundations→gated implementation→verified alpha; none is complete merely from these fragments.
+- Workspace /tmp/mirrorea-proof-first-20260909-gn29zka5 on rootFS, not external mount. /mnt/mirrorea-work absent; ~60GiB free at last check. Small scratch builds only; remeasure before heavy commands. Handoff originals immutable.
+- Exact full/range/hash read evidence in READ_LEDGER.json. Mandatory corpus largely unread; indexes/searches not fullreading, no new wholeproject roadmap adoption. Root specs01–43 exact current hashes all fully read; specs00 is1886 lines; contiguous1–610 read and ledgered partial, next611; truncated initial cat is not fullreading. New full LAB plans39/48/171/181/182; current consumer code already read. Next reading: W2 local theory/resource boundary, then mandatory corpus.
+- GeneralLabels and FallibleFlow now mirrored with companions; coherent trust0 all4PASS producer-extensions-reviewed-5056iuk1/CHECK.json, recorded FOUNDATION_CHECK. Oracle label/failure Q2421976456e3b4e704364a9973cf8f77d1e159f50274db83ebe5b348d6192311 exec57080 COMPLETED0 and full answer read. No scoped theorem gap. O(n³) relation/join evaluations, NOT runtimebound for arbitrary functions. Postreview transitivity-only/overlargejoin controls PASS. GeneralLabels/fallible separate profiles.
+- CRITICAL Canon correction: unlisted state fields are private by default. observer_safe is not implicit Public/grant/Natclass. Previous contrary interpretation corrected in prose/evidence, frozen packets/logs unchanged. Latest source encoder derives classes from checked schema, no hp/atk name-policy branch. Current runtime does not enforce candidate flow rejection.
+- ACTIVE Oracle: mirrorea-source-boundary, exec54675, Q314b9ca87817061575b5313db3877cd7fb4fd663209e0a49283d6b311bb5d6e8. Main sent once; minimum180s check LAST_CHECK_UTC and print only lines after READ_LOG_LINES. No arbitrary deadline/retry/paidfallback. Packet addresses AbortFlow+AddressFlow+earlier finite source bridge and advisory W1→W2 scoped dependency readiness. Later delta below is NOT reviewed by this packet.
+- Scratch abort-flow coherent4PASS and address-flow coherent5PASS: failure-pc propagation, completion classification, fixed alias-aware lowering/checker/run correspondence. Unreviewed until current Oracle returns. No source/runtime/all-error/currentness/observer alpha claim.
+- source-certificate: actual source→checkedCore→M8execution→8generatedLean eval/type/flow controls PASS,3mutants reject; unsupported parentheses explicitly negative. MANIFEST refreshed before frozen current Oracle packet. Encoder/library/output-capture TCB, finite controls not generalrefinement.
+- Later unreviewed delta: assignment-admission/CHECK.json coherent4PASS, independent Typed/Flows/LiteralsInRange vs Boolean check exact; state type/range/frame/NI. source-contract/COMMAND.json actual1PASS7filtered; KERNEL_CHECK8PASS checks actual terminal write/failure row and selected cells + unrelated sentinel against Lean step. Not complete snapshot or observer fidelity. Both recorded FOUNDATION_CHECK, not repo source yet.
+- Next: finish reviewed companions/readme/status sync; inspect new finite source outcome/frame controls and add discriminating mutants if needed; continue W2 consumer reading while same Oracle runs. On response, inspect/dispose findings and scope transition only if justified; keep implementation gates open. Do not final after local proof/docs/commit.
+- Latest doc validator25257 PASS after current status correction (1761 reports), coherent10-module kernel PASS all-reviewed-t5vvcs0f/exec58889; later evidence/read-ledger changes need focused diff validation. Last sourcehierarchy800PASS. No new fullworkspace/network/recovery test, no alpha claim. Report2611 accumulates22sections plus continuation; no microreports. No final Discord complete while work continues.

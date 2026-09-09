@@ -28,6 +28,7 @@ Plan250に対するowner指示は、受理済みI3-3 cut後のpauseです。I3-4
 対応は `plan/proof-first-foundation-correspondence.md`、証跡は report2611、
 再現コマンドは `samples/lean/README.md`、既読範囲は `docs/proof-first/READ_LEDGER.json`。
 M8 trusted setupでの実効label不一致を再現し、後続の観測接続義務として保持しています。
+受理済み数学的producerの二実行証明はreview済み。失敗を伴う単一代入と一般label理論も別々の限定範囲でreview・kernel検査済みです。失敗時の後続処理・別名解決・実source対応は別cutでreview中で、復元・権限境界への接続も未達です。
 sub-agentは使わず、Oracleは主担当が操作するread-only助言者です。
 I3-3 accepted; owner pause leaves no active semantic milestone。Plan 250 remains retained、
 program完了やblockedとは区別します。

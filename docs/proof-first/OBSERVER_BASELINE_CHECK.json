@@ -27,7 +27,7 @@
   },
   "warnings": 31,
   "warning_scope": "Existing featureless-library unused import/dead code warnings; not a Clippy-clean claim, full warning chunk was truncated in tool display. No Rust changes made.",
-  "storage": "Existing target reused but cargo rebuilt dependencies: target2.0GiB\u21924.4GiB, rootfree63\u219260GiB; no external mount available. No cleanup or new/mounted workdisk. Avoid additional large variant builds until storage disposition.",
+  "storage": "Existing target reused but cargo rebuilt dependencies: target2.0GiB→4.4GiB, rootfree63→60GiB; no external mount available. No cleanup or new/mounted workdisk. Avoid additional large variant builds until storage disposition.",
   "limits": "Current four existing observer tests only; no two-run secrecy, bounded pre-truncation resource use, network, restore or new-proof implementation refinement.",
   "effective_label_countermodel": {
     "command": [
@@ -68,6 +68,71 @@
     "scope": "Trusted M8 setup/API countermodel. No external/network/M9 exploit or accepted-profile falsifier established; no production fix.",
     "original_test_source": "crates/mir-runtime/tests/m8_runtime_observer.rs",
     "original_test_sha256": "ba766a87f15d7e087880c96f410900fbc7eff2c1e58b472185e7f79862a6361c",
-    "appended_test": "() {\n    let (path, source, _, _, mut runtime) = observer_runtime();\n    prepare_observable_runtime(&mut runtime);\n    let policy = observer_policy(observer_source_ref(&path, &source))\n        .with_label(EvidenceSecurityLabel::new(\"public-base\").with_class(M8SecurityClass::Public))\n        .with_relation_label_override(RELATION_NAME,\n            EvidenceSecurityLabel::new(\"private-effective\").with_class(M8SecurityClass::Private))\n        .with_relation_input_label(RELATION_NAME,\n            EvidenceSecurityLabel::new(\"private-input\").with_class(M8SecurityClass::Private));\n    let view = runtime.export_observer_view(policy).expect(\"current M8 accepts override join\");\n    let row = view.rows().redacted_subject(\"relation-lineage\")\n        .expect(\"real relation occurrence emitted\");\n    assert_eq!(row.label().security_class(), M8SecurityClass::Public);\n    println!(\"COUNTERMODEL: private relation join accepted, actual emitted relation label Public\");\n}\n"
+    "appended_test": "#[test]\nfn proof_first_effective_label_countermodel() {\n    let (path, source, _, _, mut runtime) = observer_runtime();\n    prepare_observable_runtime(&mut runtime);\n    let policy = observer_policy(observer_source_ref(&path, &source))\n        .with_label(EvidenceSecurityLabel::new(\"public-base\").with_class(M8SecurityClass::Public))\n        .with_relation_label_override(RELATION_NAME,\n            EvidenceSecurityLabel::new(\"private-effective\").with_class(M8SecurityClass::Private))\n        .with_relation_input_label(RELATION_NAME,\n            EvidenceSecurityLabel::new(\"private-input\").with_class(M8SecurityClass::Private));\n    let view = runtime.export_observer_view(policy).expect(\"current M8 accepts override join\");\n    let row = view.rows().redacted_subject(\"relation-lineage\")\n        .expect(\"real relation occurrence emitted\");\n    assert_eq!(row.label().security_class(), M8SecurityClass::Public);\n    println!(\"COUNTERMODEL: private relation join accepted, actual emitted relation label Public\");\n}\n"
+  },
+  "evidence_record_correction": "Restored omitted test declaration in appended_test from the exact executed source; no rerun or behavior change.",
+  "producer_consumer_controls": {
+    "ordinary_source": {
+      "run_output": "schema=CheckedIndexedStateSchema { name: \"player\", index_name: \"id\", index_type: \"Player\", owner_locus: \"S\", fields: [CheckedStateFieldSchema { name: \"hp\", type_name: \"Int\", visibility_channel: Some(\"observer_safe\"), source_ref: SourceRef { path: \"flow-probe.mir\", start_line: 7, start_column: 2, end_line: 7, end_column: 9 } }, CheckedStateFieldSchema { name: \"atk\", type_name: \"Int\", visibility_channel: None, source_ref: SourceRef { path: \"flow-probe.mir\", start_line: 8, start_column: 2, end_line: 8, end_column: 10 } }], source_ref: SourceRef { path: \"flow-probe.mir\", start_line: 6, start_column: 1, end_line: 10, end_column: 2 } }\ncore=OwnerRmwCheckedCore { authority_origin_locus: \"S\", owner_locus: \"S\", target: TypedStateRead { namespace: \"player\", index: Some(\"target\"), field: Some(\"hp\"), owner_locus: \"S\", value_type: \"Int\", span: PipelineSourceSpan { file: \"flow-probe.mir\", byte_start: 316, byte_end: 333, start_line: 13, start_column: 10, end_line: 13, end_column: 27 } }, expression: TypedExpression { span: PipelineSourceSpan { file: \"flow-probe.mir\", byte_start: 336, byte_end: 356, start_line: 13, start_column: 30, end_line: 13, end_column: 50 }, state_reads: [TypedStateRead { namespace: \"player\", index: Some(\"self\"), field: Some(\"atk\"), owner_locus: \"S\", value_type: \"Int\", span: PipelineSourceSpan { file: \"flow-probe.mir\", byte_start: 336, byte_end: 352, start_line: 13, start_column: 30, end_line: 13, end_column: 46 } }], int_literals: [1], operator_chain: [\"+\"], tree: Binary { operator: Add, span: PipelineSourceSpan { file: \"flow-probe.mir\", byte_start: 336, byte_end: 356, start_line: 13, start_column: 30, end_line: 13, end_column: 50 }, left: StateRead(TypedStateRead { namespace: \"player\", index: Some(\"self\"), field: Some(\"atk\"), owner_locus: \"S\", value_type: \"Int\", span: PipelineSourceSpan { file: \"flow-probe.mir\", byte_start: 336, byte_end: 352, start_line: 13, start_column: 30, end_line: 13, end_column: 46 } }), right: IntegerLiteral(CheckedIntegerLiteral { value: 1, span: PipelineSourceSpan { file: \"flow-probe.mir\", byte_start: 355, byte_end: 356, start_line: 13, start_column: 49, end_line: 13, end_column: 50 } }) } }, owner_admission_budget: None }\neffects=EffectRow { entries: [EffectEntry { kind: OwnerRequest, span: PipelineSourceSpan { file: \"flow-probe.mir\", byte_start: 316, byte_end: 356, start_line: 13, start_column: 10, end_line: 13, end_column: 50 }, source_ref: SourceRef { path: \"flow-probe.mir\", start_line: 13, start_column: 10, end_line: 13, end_column: 50 }, caller: Some(\"S\"), owner: Some(\"S\"), namespace: None, field: None, redaction_label: None, failure: None, relation: None, evaluator: None, result: None }, EffectEntry { kind: OwnerLocalRead, span: PipelineSourceSpan { file: \"flow-probe.mir\", byte_start: 316, byte_end: 356, start_line: 13, start_column: 10, end_line: 13, end_column: 50 }, source_ref: SourceRef { path: \"flow-probe.mir\", start_line: 13, start_column: 10, end_line: 13, end_column: 50 }, caller: None, owner: Some(\"S\"), namespace: Some(\"player\"), field: Some(\"hp\"), redaction_label: None, failure: None, relation: None, evaluator: None, result: None }, EffectEntry { kind: OwnerWrite, span: PipelineSourceSpan { file: \"flow-probe.mir\", byte_start: 316, byte_end: 356, start_line: 13, start_column: 10, end_line: 13, end_column: 50 }, source_ref: SourceRef { path: \"flow-probe.mir\", start_line: 13, start_column: 10, end_line: 13, end_column: 50 }, caller: None, owner: Some(\"S\"), namespace: Some(\"player\"), field: Some(\"hp\"), redaction_label: None, failure: None, relation: None, evaluator: None, result: None }, EffectEntry { kind: ObserverPublish, span: PipelineSourceSpan { file: \"flow-probe.mir\", byte_start: 316, byte_end: 356, start_line: 13, start_column: 10, end_line: 13, end_column: 50 }, source_ref: SourceRef { path: \"flow-probe.mir\", start_line: 13, start_column: 10, end_line: 13, end_column: 50 }, caller: None, owner: None, namespace: Some(\"player\"), field: Some(\"hp\"), redaction_label: Some(\"observer_safe\"), failure: Some(\"VisibilityDenied\"), relation: None, evaluator: None, result: None }] }\nresiduals=ResidualObligations { entries: [] }\n",
+      "compile_output": "",
+      "source_sha256": "d97052bb03181e99ea0b1ac0633d17602afffd383bcea77a117443379ec1c9d6",
+      "reproducer": "use mir_ast::surface_v0::FixtureSource;\nuse mir_semantics::surface_v0_pipeline::{check_and_elaborate_surface_v0,EffectKind};\nfn main(){\nlet source = r#\"module ProofFirst.Flow\nlocus S\nprincipal self\nprincipal target\ntype Player\nstate player[id: Player] at S {\n hp: Int\n atk: Int\n visible observer_safe fields (hp)\n}\nRole[self] at S {\n when attack(target: Player) fails (StaleMembership, MissingCapability, MissingWitness, RouteUnavailable, VisibilityDenied) {\n  at S { player[target].hp = player[self].atk + 1 }\n }\n}\n\"#;\nlet checked=check_and_elaborate_surface_v0(FixtureSource::new(\"flow-probe.mir\",source)).expect(\"ordinary private-input/public-target source checks\");\nlet schema=checked.static_environment().indexed_state_schema(\"player\").unwrap();\nprintln!(\"schema={schema:?}\");\nlet e=&checked.evaluations()[0];\nassert!(e.effect_row().entries().iter().any(|x|x.kind()==EffectKind::ObserverPublish));\nprintln!(\"core={:?}\",e.owner_rmw_core().unwrap());\nprintln!(\"effects={:?}\",e.effect_row());\nprintln!(\"residuals={:?}\",checked.residual_obligations());\n}\n",
+      "scope": "Actual M7 checker generates ObserverPublish from private-input/public-target arithmetic with no residual; not runtime/network disclosure or accepted-profile falsifier.",
+      "command": [
+        "rustc",
+        "--edition=2024",
+        "/tmp/mirrorea-proof-first-20260909-gn29zka5/source-flow-controls/probe.rs",
+        "-L",
+        "dependency=/home/codex/dev/mir_poc_01/target/debug/deps",
+        "-o",
+        "/tmp/mirrorea-proof-first-20260909-gn29zka5/source-flow-controls/probe",
+        "--extern",
+        "mir_ast=/home/codex/dev/mir_poc_01/target/debug/deps/libmir_ast-551ba76808321786.rlib",
+        "--extern",
+        "mir_semantics=/home/codex/dev/mir_poc_01/target/debug/deps/libmir_semantics-af3b614beaf8c08c.rlib"
+      ],
+      "compile_exit": 0,
+      "reason": "Exact command missing from initial record; unchanged reproducer rerun to preserve reproducibility.",
+      "run_command": [
+        "/tmp/mirrorea-proof-first-20260909-gn29zka5/source-flow-controls/probe"
+      ],
+      "run_exit": 0
+    },
+    "private_arithmetic_outcome": {
+      "run_output": "\nrunning 1 test\nprivate input 0: failure=false; public hp unchanged\nprivate input 9223372036854775807: failure=true; public hp unchanged\ntest proof_first_private_arithmetic_has_secret_dependent_failure_outcome ... ok\n\ntest result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 7 filtered out; finished in 0.00s\n\n",
+      "compile_output": "",
+      "command": [
+        "rustc",
+        "--test",
+        "--edition=2024",
+        "/tmp/mirrorea-proof-first-20260909-gn29zka5/owner-flow-controls/owner_controls.rs",
+        "-L",
+        "dependency=/home/codex/dev/mir_poc_01/target/debug/deps",
+        "-o",
+        "/tmp/mirrorea-proof-first-20260909-gn29zka5/owner-flow-controls/owner_controls",
+        "--extern",
+        "mir_ast=/home/codex/dev/mir_poc_01/target/debug/deps/libmir_ast-551ba76808321786.rlib",
+        "--extern",
+        "mir_semantics=/home/codex/dev/mir_poc_01/target/debug/deps/libmir_semantics-af3b614beaf8c08c.rlib",
+        "--extern",
+        "mir_runtime=/home/codex/dev/mir_poc_01/target/debug/deps/libmir_runtime-12012fa141783803.rlib"
+      ],
+      "env": {
+        "CARGO_MANIFEST_DIR": "/home/codex/dev/mir_poc_01/crates/mir-runtime"
+      },
+      "source_sha256": "e917f13bef524afc4e314cfbcb722ebf4fd5b4ab9c0b0d932c43ea6fd03ccb3d",
+      "compile_exit": 0,
+      "run_command": [
+        "/tmp/mirrorea-proof-first-20260909-gn29zka5/owner-flow-controls/owner_controls",
+        "proof_first_private_arithmetic",
+        "--nocapture"
+      ],
+      "run_exit": 0,
+      "original_test_source": "crates/mir-runtime/tests/m8_runtime_owner_queue.rs",
+      "original_test_sha256": "4e80305d959eafb4dd409458b64cce96600d751744fb538f5f37d3aa5941cb45",
+      "appended_test": "#[test]\nfn proof_first_private_arithmetic_has_secret_dependent_failure_outcome() {\n    let source = r#\"module ProofFirst.PrivateArithmetic\nlocus S\nprincipal self\nprincipal target\ntype Player\nstate player[id: Player] at S { hp: Int atk: Int }\nRole[self] at S {\n when attack(target: Player) fails (StaleMembership, MissingCapability, MissingWitness, RouteUnavailable) {\n  at S { player[self].atk = player[self].atk + 1 }\n }\n}\n\"#;\n    let checked = check_and_elaborate_surface_v0(FixtureSource::new(\"private-arithmetic.mir\", source)).unwrap();\n    assert!(checked.residual_obligations().entries().is_empty());\n    for (secret, expected_failure) in [(0, false), (i64::MAX, true)] {\n        let instance = M8Runtime::default().admit(checked.clone(), M8RuntimeAdmission::new(checked.program_identity().clone())).unwrap();\n        let mut execution = instance.into_execution(M8ExecutionSeed::new()\n            .with_int(hp_key(), 10).with_int(atk_key(), secret)\n            .with_authority_state(owner_authority_state()));\n        execution.try_enqueue(attack_request(valid_authority_use())).unwrap();\n        let result = execution.serve_next_owner(\"S\");\n        assert_eq!(result.is_err(), expected_failure);\n        assert_eq!(execution.snapshot().int(&hp_key()), Some(10));\n        if expected_failure {\n            let diagnostics = result.unwrap_err();\n            assert_eq!(diagnostics.primary().kind(), M8ServeDiagnosticKind::DeclaredFailure(M8DeclaredFailure::RouteUnavailable));\n            assert_eq!(execution.snapshot().int(&atk_key()), Some(i64::MAX));\n        } else { assert_eq!(execution.snapshot().int(&atk_key()), Some(1)); }\n        println!(\"private input {secret}: failure={expected_failure}; public hp unchanged\");\n    }\n}\n",
+      "scope": "Actual trusted M8 execution, same request/current authority and public hp, different private atk. Zero succeeds, i64::MAX produces RouteUnavailable and no write. Shows outcome channel must be covered beyond projected writes; no public delivery, observer/network exploit, or accepted-profile falsifier established."
+    },
+    "interpretation": "Canon spec/02 and spec/08 explicitly define unlisted state fields private by default: M7 atk visibility None retains that meaning. hp observer_safe is eligible for a source-bound publish obligation, not implicit Public release. Arithmetic-only source lists neither field, so both are private by default; its log calls hp public only as test interpretation. Exact observer/label-algebra/current-authority mapping and actual permitted delivery remain open. Earlier interpretation was too weak; executed source/logs remain unchanged."
   }
 }

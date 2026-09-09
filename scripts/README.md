@@ -410,7 +410,7 @@
 - future に `samples/`, `validation/`, `docs/`, `visualization/` などへ rebucket する可能性はある
 - ただし active alpha command を壊す move は、wrapper / alias なしでは行わない
 
-Proof-first current-use/tracked/graph/passive kernel checks use the manual fresh-copy
+Proof-first current-use/tracked/graph/passive/producer/general-label/fallible kernel checks use the manual fresh-copy
 commands in `samples/lean/README.md`; the support differential runner does not claim
 to cover those modules. Their actual cuts and open implementation obligations are
 recorded under `docs/proof-first/` and report2611. Documentation path inventories

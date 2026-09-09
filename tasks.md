@@ -1,6 +1,6 @@
 # Current Task Map (LAB)
 
-最終更新: 2026-09-09 22:00 JST
+最終更新: 2026-09-10 00:15 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project direction,
 theory, ADRs, conformance, and process. Everything outside it is LAB evidence,
@@ -33,7 +33,9 @@ memory: `plan/proof-first-foundation-correspondence.md`; exact goal and evidence
 `docs/proof-first/CURRENT_GOAL.md`, `docs/reports/2611-mirrorea-proof-first-w1-foundations.md`.
 Support/current-use/tracked-query/finite-graph dependencies have scoped kernel
 proofs and Oracle source reviews. Passive erasure and two-run arithmetic pass
-Lean; exact retention extension review completed. W1 overall and implementation
+Lean; exact retention and accepted mathematical producer reviews completed.
+Fallible single-assignment and general-label theory certificates have scoped
+source review and kernel checks. Abort/alias/source review remains pending. W1 overall and implementation
 gates remain open. Main works alone; no sub-agents. Oracle is readonly advice,
 not signed review, kernel execution, authority or cryptographic trust anchor.
 
@@ -48,7 +50,7 @@ local custody emits no saved image and is not distributed durable recovery.
 
 | Order | Current task work | Direct consumer / evidence gate |
 |---|---|---|
-| 1 | Retain completed passive reviews; continue typed-observer/source correspondence and M8 effective-label consumer analysis | finite erasure/collector dependency; source IFC, interaction cuts, current authority and physical resources stay explicit |
+| 1 | Retain reviewed passive/producer/label/fallible proofs; check aborting control, aliases and actual source/observer correspondence | finite erasure/collector dependency; source IFC, interaction cuts, current authority and physical resources stay explicit |
 | 2 | Continue mandatory full reading and source dependency cone; integrate scoped evidence | full/range/hash ledger; no index/grep as full read; no whole-project plan before required material |
 | 3 | Establish source expression/type/local-theory boundary consumed by dynamic composition | candidate W2; declarative/checker soundness and required relative completeness, no unsafe evidence erasure |
 | 4 | Establish source-derived construction/addition/change/removal and all-mutator preservation | candidate W3; no constant-only or trusted-control-API substitute |
@@ -98,7 +100,7 @@ supply it. This is not a reason to stop independent permitted research.
 | Question | Direct consumer / impact | Alternatives and current view |
 |---|---|---|
 | Observer effective-label mismatch | M8 trusted setup accepts Private input/override but emits Public under lower grant | establish same effective label at check/authorization/emission; no network/M9 exploit established, no fix adopted |
-| Source typing and local-theory export | ordinary computation and composition | current candidate vs smallest expressive alternative; preserve assumptions/resources/evidence version/auth context |
+| Source typing and local-theory export | ordinary computation and composition | reviewed scoped general label/join and finite law-checker proofs; preserve chosen policy, assumptions/resources/evidence version/auth context; mathematical validity is not authority |
 | Q18 prepare reservation vs commit authorization | activation/revocation and retry | preserve both policies until consequences proved and applicable acceptance met |
 | Same-instance recovery vs fresh import | identity, current head, stale non-resurrection | distinct capabilities; no fresh-import demo counted as same-instance recovery |
 | All-mutator and physical publication | invariant preservation after additions, restore, alternate executors | endpoint Lean theorem is conditional; close every actual entry path |
