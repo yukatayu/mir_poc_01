@@ -546,3 +546,78 @@ source/current-head/selected-entry limitations. No independent Oracle result is
 available; latest7c7f15 retains both running/submission-false jobs. Plans129/130
 are fully read/hash-ledgered; mandatory corpus remains incomplete. Own twelve-file
 checkpoint is ready to commit/push; this is saved research, not task acceptance.
+
+Checkpoint 53f9754109c6f07e14ac620427a5e78e18accff1 committed779572 (--no-gpg-sign),
+12files1012+/135−. Normal push534257/93531d succeeded and exact remote parity
+46a07a matched HEAD, with clean status. The user task continues; no acceptance
+or completion. Next bounded research connects the catalog entry to handle
+carriage without silently treating raw call as catalog-protected.
+
+
+2026-09-10 03:59 JST registered handle connection: direct consumer remains W2 current
+module/function invocation, under the same U/TY/SL/PT trace. Main added explicit
+invokeRegistered entries to the existing HandleValues/PureHandleFunctions
+research sources. They reuse actual evaluators and carried stamps, then call the
+catalog/current-use/contract boundary. General success includes independent
+handle execution and exact current-operation-code catalog lookup; stale and
+empty-authority rejection remain proved. Original invoke remains the weaker
+explicit candidate and its signature is preserved.
+
+A separate issue was exposed: an ill-typed application whose lambda ignores its
+argument can still evaluate to a valid handle and pass operational invocation.
+That is not source typing admission. invokeClosedRegistered therefore requires
+infer [] e = handle before using the existing evaluator. General soundness
+returns Typed plus actual execution/catalog/current-use/contract evidence.
+Relative completeness uses independent finite Executes derivation to obtain
+sufficient fuel (7cf589), not just successful-evaluator assumptions. General
+carried-handle equality and actual42/ill-typed rejection/substitution rejection
+controls pass. Open external closure environments are not silently admitted by
+this closed profile; there is no Mir parser/byte-source refinement claim.
+
+Three invalid variants—catalog bypass, closed-entry typing bypass, and replacing
+carried stamps with caller stamps—fail both obligations and concrete controls
+(094506, decisive false propositions inspected61ac4c). Fixed controls are not
+general proofs; failed mutant sorryAx logs are rejected evidence only. Final
+scratch HandleCatalog.lean/CHECK.json lives under handle-catalog-jxagx7z2.
+Mirroring split the additions into the existing two sources; isolated rebuild
+of both passed b5194d, no new interpreter/source root. Main full extension
+self-review d47e3f checked the low-level versus checked-entry distinction.
+W2_EXTENSION_CHECK retains old cuts and current hashes/axioms. All later work
+is outside the active Oracle packet and remains unreviewed. Latest a801d7 keeps
+both Oracle jobs running/submissionfalse, no answer and no duplicate.
+
+Current goal, plan correspondence, companion, progress and sample evidence row
+synchronized. Documentation.md/docs/project-status.md/tasks.md 更新不要 for this
+sub-boundary: same ten candidates/goal/blockers, no milestone close. No new
+Rust/network/persistence run or production change. Plans133/134 fully read and
+hash-ledgered. This is continued proof-first work, not W2/alpha completion.
+
+The first diff check for this mirror reported an extra EOF blank line1574bf.
+It was removed, both dependent sources rechecked84784a, and current15source
+hashes/axioms plus all3 concrete mutant failures verified819e23. This is not
+a hidden failed validation. Required Plans135–140 are now full/hash-ledgered.
+
+The same catalog consumer now has general downstream-addition consequences:
+Extends and finite insertion sequences preserve existing successful calls for a
+fixed current World/use/registry; no catalog revives a noncurrent module; missing
+current-code entries reject. Scratch5e9319 and current Module+Handle+PureHandle
+rebuildbf3bd4 pass trust0 with standard axiom audit. No new implementation or
+mutator was added for these four consequences; existing checked catalog
+operations and countermodels remain the evidence basis. This is not rollback
+protection for World, authenticated old-image handling, distributed atomicity,
+fresh import or same-instance recovery. Exact source/commands are retained in
+W2_EXTENSION_CHECK catalog_consequences. Companion/plan memory updated;
+progress.md/tasks.md/samples_progress.md 更新不要 for these same-entry consequences:
+no new command/root/readiness/goal or blocker change. Docs39803 passedefd5bd,
+1762reports; no new Rust/network/recovery execution.
+
+Final current15hash/axiom check5afe34 passed; retained capture2/catalog2/entry3
+invalid variants remain rejected and current downstream-consequence proof passes.
+Focused doc diff c12a94 preserves raw-versus-registered-versus-checked-entry scope.
+The handoff F0.3 WORKPLAN was reread in full c9d746: its W2 floor permits final-
+syntax-independent semantic examples but still requires type/resource/currentness/
+effect distinctions and scoped acceptance. No W2 close follows from the current
+component results. M10 designated-consumption and M9 private-continuation wording
+were reread ba41b0; private continuation-image state is not automatically a
+first-class effect continuation. No new lane is opened on that word match.
+This own checkpoint is ready to save; the user task continues.

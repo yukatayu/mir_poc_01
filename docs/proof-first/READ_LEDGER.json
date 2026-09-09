@@ -19986,5 +19986,103 @@
     "range": "1-229",
     "role": "LAB historical status criteria/preflight; not current task acceptance",
     "status": "full"
+  },
+  {
+    "path": "plan/131-g1-status-proposal-packet-outline.md",
+    "sha256": "278115bee79e33aad963c60f01e714daa73f60cce2052a77090e9cf04d6cab74",
+    "range": "1-225",
+    "role": "LAB historical proposal outline/dry-run, not current proof",
+    "status": "full"
+  },
+  {
+    "path": "plan/132-g1-status-evidence-readiness-dry-run.md",
+    "sha256": "eb9e560b9789ec8a77241688b099f42db754d4a10e6c40f955860e95054c5a59",
+    "range": "1-136",
+    "role": "LAB historical proposal outline/dry-run, not current proof",
+    "status": "full"
+  },
+  {
+    "path": "plan/133-g1-requested-status-options-matrix.md",
+    "sha256": "051ddf15589e81787f017e2f1feb35da2a20841afd2d8a88cdfcca9ed1ee8ce0",
+    "range": "1-193",
+    "role": "LAB historical status options/scope; not current task authority",
+    "status": "full"
+  },
+  {
+    "path": "plan/134-g1-obl020-scope-clarification-packet.md",
+    "sha256": "137db09dfda8f2cef517f4dc7c30d50a2400dc1cfbc1b05a2b4201c8f3009cce",
+    "range": "1-270",
+    "role": "LAB historical status options/scope; not current task authority",
+    "status": "full"
+  },
+  {
+    "path": "samples/lean/foundations/MirroreaProofFirstHandleValues.lean",
+    "sha256": "a8954f38b3e94749da43a2d56d141959ab72f7deb6aed3c209f1754f64d2a07c",
+    "range": "1-204",
+    "role": "original plus new registered/checked entry full self-review; not independent review",
+    "status": "full"
+  },
+  {
+    "path": "samples/lean/foundations/MirroreaProofFirstPureHandleFunctions.lean",
+    "sha256": "a0d4628916968fb550cffd44d9686bbebcca18f80205f9a1983b005fa1413641",
+    "range": "1-556",
+    "role": "original plus new registered/checked entry full self-review; not independent review",
+    "status": "full"
+  },
+  {
+    "path": "plan/135-g1-obl020-artifact-identity-wrapper-preflight.md",
+    "sha256": "2e7eeb5ffca2f21b28ca1680dab75a73595421ddba55ef68c29c7b721a91612e",
+    "range": "1-264",
+    "role": "LAB historical artifact identity/template; no new status authority",
+    "status": "full"
+  },
+  {
+    "path": "plan/136-g1-obl020-artifact-annex-template.md",
+    "sha256": "84d035617cd6e6ac115f490044af5221bd243680bd804b55a2ac5de2f19ac1b5",
+    "range": "1-253",
+    "role": "LAB historical artifact identity/template; no new status authority",
+    "status": "full"
+  },
+  {
+    "path": "plan/137-g1-obl001-artifact-identity-wrapper-preflight.md",
+    "sha256": "9acd066f25d11072b2b0e9342e42ab5d88403dd5f58936c8fb886c952ff8fa20",
+    "range": "1-270",
+    "role": "LAB historical artifact identity/template; no new status authority",
+    "status": "full"
+  },
+  {
+    "path": "plan/138-g1-obl001-artifact-annex-template.md",
+    "sha256": "16240313a21ab48395362e7697963ddb0c39fd2ce9c379e1755dcaee618701f7",
+    "range": "1-285",
+    "role": "LAB historical artifact identity/template; no new status authority",
+    "status": "full"
+  },
+  {
+    "path": "samples/lean/foundations/MirroreaProofFirstHandleValues.lean",
+    "sha256": "fb06e2753e7182f967700347ec2e0fca6a020caa584571c02afa5dd131e89b0b",
+    "range": "1-203",
+    "role": "same full-reviewed source with trailing blank removed; kernel rechecked84784a",
+    "status": "full"
+  },
+  {
+    "path": "plan/139-g1-obl021-artifact-identity-wrapper-preflight.md",
+    "sha256": "8fab683b797346b93f0f583d52d5d2e948ad5d7966f20b5876e0f0bc8dec6d12",
+    "range": "1-265",
+    "role": "LAB historical artifact/equivalence template; not proof",
+    "status": "full"
+  },
+  {
+    "path": "plan/140-g1-obl021-artifact-annex-template.md",
+    "sha256": "1e921164176fac1857981d3f20f953ab122b537c3f94511c2bcf53c1094ff9de",
+    "range": "1-310",
+    "role": "LAB historical artifact/equivalence template; not proof",
+    "status": "full"
+  },
+  {
+    "path": "samples/lean/foundations/MirroreaProofFirstModuleContractBoundary.lean",
+    "sha256": "7b6f1cc716db465b3b9d559987fa19da9c797b553597cb99fc301c6cb7a44d22",
+    "range": "1-437",
+    "role": "earlier full self-review plus authored/read downstream-addition proof; independent review pending",
+    "status": "full"
   }
 ]

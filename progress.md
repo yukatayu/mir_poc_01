@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-09-10 03:48 JST
+最終更新: 2026-09-10 03:59 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -300,3 +300,5 @@ The authorized roadmap is paused, not blocked, stale or closed.
 - 2026-09-10 03:40 JST: W2捕捉境界で独立checker対応と失敗を含む代入のframe/type/二実行命題をLean検査。未使用の秘密捕捉の失敗でも公開書込みを抑止する反例を確認し、完了依存を検査条件に保持。未review、実source/auth/network接続は未達。
 
 - 2026-09-10 03:48 JST: W2の同一証拠とdescriptorの一意性、有限容量・上書き禁止catalogの登録保存と照合をLean検査。raw callでのregistry差替え＋証拠再構成を反例として保持。認証済み台帳・head・全entry接続は未確立、後続差分未review。
+
+- 2026-09-10 03:59 JST: W2参照モデルのhandle評価を台帳付き入口へ接続し、現在性/認可とdescriptor結合をLean検査。閉じた式の型検査必須入口と有限実行からの相対完全性を追加、型検査迂回・台帳迂回・stamp再発行の3変異を拒否。実source/認証head/αは未達、未review。

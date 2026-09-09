@@ -418,3 +418,139 @@ end Controls
 #print axioms carried_typed
 #print axioms carried_evaluates
 end MirroreaProofFirst.PureHandleFunctions
+
+-- Later unreviewed registered-entry extension; old invoke remains explicit.
+namespace MirroreaProofFirst.PureHandleFunctions
+-- Pure closures/iteration are unchanged; the selected profile passes the actual
+-- returned interface to the same catalog/currentness/contract boundary.
+def invokeRegistered (fuel : Nat) (s : CurrentUse.World size)
+ (registry : ModuleContractBoundary.Registry size) (catalog : ModuleContractBoundary.Catalog)
+ (caller : CurrentUse.UseRequest size) (args : List Int) (auth : CurrentUse.Evidence)
+ (proof : ModuleContractBoundary.CallProof size) (env : List (Value size)) (e : Expr size) : Option Nat :=
+ match evaluate fuel env e with
+ | some (.handle h) => ModuleContractBoundary.catalogCall s registry catalog
+     (HandleValues.request caller h) args auth proof
+ | _ => none
+
+theorem registered_sound {fuel : Nat} {s : CurrentUse.World size}
+ {registry : ModuleContractBoundary.Registry size} {catalog : ModuleContractBoundary.Catalog}
+ {caller : CurrentUse.UseRequest size} {args : List Int} {auth : CurrentUse.Evidence}
+ {proof : ModuleContractBoundary.CallProof size} {env : List (Value size)} {e : Expr size} {out : Nat}
+ (ok : invokeRegistered fuel s registry catalog caller args auth proof env e = some out) :
+ ∃ h, Executes (.expression env e) (.handle h) ∧
+ ModuleContractBoundary.Successful s registry (HandleValues.request caller h) args proof out ∧
+ ∃ d, registry h.operation.key = some d ∧ catalog (s.records h.operation.key).code = some d := by
+ unfold invokeRegistered at ok; split at ok
+ · rename_i h he
+   exact ⟨h,execution_sound fuel _ _ he,ModuleContractBoundary.catalog_sound ok⟩
+ · contradiction
+
+theorem registered_carried (s : CurrentUse.World size) (registry : ModuleContractBoundary.Registry size)
+ (catalog : ModuleContractBoundary.Catalog) (caller : CurrentUse.UseRequest size)
+ (args : List Int) (auth : CurrentUse.Evidence) (proof : ModuleContractBoundary.CallProof size)
+ (h : HandleValues.Interface size) :
+ invokeRegistered 10 s registry catalog caller args auth proof [] (carried h) =
+ ModuleContractBoundary.catalogCall s registry catalog (HandleValues.request caller h) args auth proof := by
+ simp [invokeRegistered,carried_evaluates]
+
+theorem registered_stale (fuel : Nat) (s : CurrentUse.World size)
+ (registry : ModuleContractBoundary.Registry size) (catalog : ModuleContractBoundary.Catalog)
+ (caller : CurrentUse.UseRequest size) (args : List Int) (auth : CurrentUse.Evidence)
+ (proof : ModuleContractBoundary.CallProof size) (env : List (Value size)) (e : Expr size)
+ (stale : ∀ h, Executes (.expression env e) (.handle h) →
+   ¬ CurrentUse.CurrentHandle s .module h.moduleHandle) :
+ invokeRegistered fuel s registry catalog caller args auth proof env e = none := by
+ cases eq : invokeRegistered fuel s registry catalog caller args auth proof env e with
+ | none => rfl
+ | some out =>
+   obtain ⟨h,ev,success,_⟩ := registered_sound eq
+   exact False.elim (stale h ev success.current.2.2.1)
+
+theorem registered_no_authority (fuel : Nat) (s : CurrentUse.World size)
+ (registry : ModuleContractBoundary.Registry size) (catalog : ModuleContractBoundary.Catalog)
+ (caller : CurrentUse.UseRequest size) (args : List Int) (auth : CurrentUse.Evidence)
+ (proof : ModuleContractBoundary.CallProof size) (env : List (Value size)) (e : Expr size)
+ (empty : s.authority.issued = []) :
+ invokeRegistered fuel s registry catalog caller args auth proof env e = none := by
+ cases eq : invokeRegistered fuel s registry catalog caller args auth proof env e with
+ | none => rfl
+ | some out =>
+   obtain ⟨h,_,success,_⟩ := registered_sound eq
+   rcases success.current with ⟨_,_,_,_,_,_,_,allowed⟩
+   exact False.elim (CurrentUse.no_claim_no_authorization _ _ _ _ empty allowed)
+
+-- Closed checked-expression entry: arguments are explicit expression values,
+-- not an externally supplied untyped closure environment. No parser is claimed.
+def invokeClosedRegistered (fuel : Nat) (s : CurrentUse.World size)
+ (registry : ModuleContractBoundary.Registry size) (catalog : ModuleContractBoundary.Catalog)
+ (caller : CurrentUse.UseRequest size) (args : List Int) (auth : CurrentUse.Evidence)
+ (proof : ModuleContractBoundary.CallProof size) (e : Expr size) : Option Nat :=
+ if infer [] e = some .handle then invokeRegistered fuel s registry catalog caller args auth proof [] e else none
+
+theorem closed_registered_sound {fuel : Nat} {s : CurrentUse.World size}
+ {registry : ModuleContractBoundary.Registry size} {catalog : ModuleContractBoundary.Catalog}
+ {caller : CurrentUse.UseRequest size} {args : List Int} {auth : CurrentUse.Evidence}
+ {proof : ModuleContractBoundary.CallProof size} {e : Expr size} {out : Nat}
+ (ok : invokeClosedRegistered fuel s registry catalog caller args auth proof e = some out) :
+ Typed [] e .handle ∧ ∃ h, Executes (.expression [] e) (.handle h) ∧
+ ModuleContractBoundary.Successful s registry (HandleValues.request caller h) args proof out ∧
+ ∃ d, registry h.operation.key = some d ∧ catalog (s.records h.operation.key).code = some d := by
+ unfold invokeClosedRegistered at ok; split at ok
+ · rename_i typed
+   exact ⟨(infer_exact _ _ _).mp typed,registered_sound ok⟩
+ · contradiction
+
+theorem closed_registered_complete {fuel : Nat} {s : CurrentUse.World size}
+ {registry : ModuleContractBoundary.Registry size} {catalog : ModuleContractBoundary.Catalog}
+ {caller : CurrentUse.UseRequest size} {args : List Int} {auth : CurrentUse.Evidence}
+ {proof : ModuleContractBoundary.CallProof size} {e : Expr size} {out : Nat}
+ (typed : Typed [] e .handle)
+ (exec : invokeRegistered fuel s registry catalog caller args auth proof [] e = some out) :
+ invokeClosedRegistered fuel s registry catalog caller args auth proof e = some out := by
+ simp [invokeClosedRegistered,(infer_exact _ _ _).mpr typed,exec]
+
+-- Relative completeness uses an independent finite execution derivation, not a
+-- successful invocation as the expression evaluator's premise.
+theorem closed_registered_derivation_complete {s : CurrentUse.World size}
+ {registry : ModuleContractBoundary.Registry size} {catalog : ModuleContractBoundary.Catalog}
+ {caller : CurrentUse.UseRequest size} {args : List Int} {auth : CurrentUse.Evidence}
+ {proof : ModuleContractBoundary.CallProof size} {e : Expr size} {out : Nat}
+ {h : HandleValues.Interface size} (typed : Typed [] e .handle)
+ (exec : Executes (.expression [] e) (.handle h))
+ (accepted : ModuleContractBoundary.catalogCall s registry catalog
+   (HandleValues.request caller h) args auth proof = some out) :
+ ∃ fuel, invokeClosedRegistered fuel s registry catalog caller args auth proof e = some out := by
+ obtain ⟨fuel,ev⟩ := (execution_exact _ _).mpr exec
+ have evaluated : evaluate fuel [] e = some (.handle h) := ev
+ exact ⟨fuel,closed_registered_complete typed (by simp [invokeRegistered,evaluated,accepted])⟩
+
+theorem closed_registered_carried (s : CurrentUse.World size)
+ (registry : ModuleContractBoundary.Registry size) (catalog : ModuleContractBoundary.Catalog)
+ (caller : CurrentUse.UseRequest size) (args : List Int) (auth : CurrentUse.Evidence)
+ (proof : ModuleContractBoundary.CallProof size) (h : HandleValues.Interface size) :
+ invokeClosedRegistered 10 s registry catalog caller args auth proof (carried h) =
+ ModuleContractBoundary.catalogCall s registry catalog (HandleValues.request caller h) args auth proof := by
+ simp [invokeClosedRegistered,(infer_exact _ _ _).mpr (carried_typed h),registered_carried]
+
+namespace RegisteredControls
+open CurrentUse.Controls ModuleContractBoundary.Controls ModuleContractBoundary.DescriptorControl HandleValues.Controls
+example : invokeRegistered 10 world registry catalog CurrentUse.Controls.request [41] evidence proof [] (carried token) = some 42 := by decide
+example : invokeRegistered 10 world registry catalog CurrentUse.Controls.request [41] evidence proof [] (carried staleToken) = none := by decide
+example : invokeRegistered 10 world (fun _ => some sameValue) catalog CurrentUse.Controls.request [41] evidence refreshed [] (carried token) = none := by decide
+-- Operational invocation alone is not source typing admission.
+def illTyped : Expr 4 := .app (.lambda .int (.handle token)) (.handle token)
+example : infer [] illTyped = none := by decide
+example : invokeRegistered 10 world registry catalog CurrentUse.Controls.request [41] evidence proof [] illTyped = some 42 := by decide
+example : invokeClosedRegistered 10 world registry catalog CurrentUse.Controls.request [41] evidence proof illTyped = none := by decide
+example : invokeClosedRegistered 10 world registry catalog CurrentUse.Controls.request [41] evidence proof (carried token) = some 42 := by decide
+example : invokeClosedRegistered 10 world (fun _ => some sameValue) catalog CurrentUse.Controls.request [41] evidence refreshed (carried token) = none := by decide
+end RegisteredControls
+#print axioms registered_no_authority
+#print axioms registered_sound
+#print axioms registered_stale
+#print axioms closed_registered_sound
+#print axioms closed_registered_complete
+#print axioms closed_registered_derivation_complete
+#print axioms closed_registered_carried
+#print axioms registered_carried
+end MirroreaProofFirst.PureHandleFunctions

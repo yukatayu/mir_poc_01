@@ -141,3 +141,63 @@ end Controls
 #print axioms no_authority
 #print axioms stale_module
 end MirroreaProofFirst.HandleValues
+
+-- Later unreviewed registered-entry extension; old invoke remains explicit.
+namespace MirroreaProofFirst.HandleValues
+-- Explicit catalog profile; existing invoke remains the weaker retained candidate.
+-- Reuse the actual handle evaluator, with no second evaluation or refreshed stamp.
+def invokeRegistered (s : CurrentUse.World n) (registry : ModuleContractBoundary.Registry n)
+ (catalog : ModuleContractBoundary.Catalog) (caller : CurrentUse.UseRequest n)
+ (args : List Int) (auth : CurrentUse.Evidence) (proof : ModuleContractBoundary.CallProof n)
+ (env : List (Interface n)) (e : Expr n) : Option Nat :=
+ (evaluate env e).bind (fun h => ModuleContractBoundary.catalogCall s registry catalog
+   (request caller h) args auth proof)
+
+theorem registered_sound {s : CurrentUse.World n} {registry : ModuleContractBoundary.Registry n}
+ {catalog : ModuleContractBoundary.Catalog} {caller : CurrentUse.UseRequest n}
+ {args : List Int} {auth : CurrentUse.Evidence} {proof : ModuleContractBoundary.CallProof n}
+ {env : List (Interface n)} {e : Expr n} {out : Nat}
+ (ok : invokeRegistered s registry catalog caller args auth proof env e = some out) :
+ ∃ h, Evaluates env e h ∧
+ ModuleContractBoundary.Successful s registry (request caller h) args proof out ∧
+ ∃ d, registry h.operation.key = some d ∧ catalog (s.records h.operation.key).code = some d := by
+ cases he : evaluate env e with
+ | none => simp [invokeRegistered,he] at ok
+ | some h =>
+   have checked := ModuleContractBoundary.catalog_sound (by simpa [invokeRegistered,he] using ok)
+   exact ⟨h,(evaluate_exact _ _ _).mp he,checked⟩
+
+theorem registered_stale (s : CurrentUse.World n) (registry : ModuleContractBoundary.Registry n)
+ (catalog : ModuleContractBoundary.Catalog) (caller : CurrentUse.UseRequest n)
+ (args : List Int) (auth : CurrentUse.Evidence) (proof : ModuleContractBoundary.CallProof n)
+ (env : List (Interface n)) (e : Expr n)
+ (stale : ∀ h, Evaluates env e h → ¬ CurrentUse.CurrentHandle s .module h.moduleHandle) :
+ invokeRegistered s registry catalog caller args auth proof env e = none := by
+ cases eq : invokeRegistered s registry catalog caller args auth proof env e with
+ | none => rfl
+ | some out =>
+   obtain ⟨h,ev,success,_⟩ := registered_sound eq
+   exact False.elim (stale h ev success.current.2.2.1)
+
+theorem registered_no_authority (s : CurrentUse.World n) (registry : ModuleContractBoundary.Registry n)
+ (catalog : ModuleContractBoundary.Catalog) (caller : CurrentUse.UseRequest n)
+ (args : List Int) (auth : CurrentUse.Evidence) (proof : ModuleContractBoundary.CallProof n)
+ (env : List (Interface n)) (e : Expr n) (empty : s.authority.issued = []) :
+ invokeRegistered s registry catalog caller args auth proof env e = none := by
+ cases eq : invokeRegistered s registry catalog caller args auth proof env e with
+ | none => rfl
+ | some out =>
+   obtain ⟨h,_,success,_⟩ := registered_sound eq
+   rcases success.current with ⟨_,_,_,_,_,_,_,allowed⟩
+   exact False.elim (CurrentUse.no_claim_no_authorization _ _ _ _ empty allowed)
+
+namespace RegisteredControls
+open CurrentUse.Controls ModuleContractBoundary.Controls ModuleContractBoundary.DescriptorControl Controls
+example : invokeRegistered world registry catalog CurrentUse.Controls.request [41] evidence proof [token] pass = some 42 := by decide
+example : invokeRegistered world registry catalog CurrentUse.Controls.request [41] evidence proof [staleToken] pass = none := by decide
+example : invokeRegistered world (fun _ => some sameValue) catalog CurrentUse.Controls.request [41] evidence refreshed [token] pass = none := by decide
+end RegisteredControls
+#print axioms registered_no_authority
+#print axioms registered_sound
+#print axioms registered_stale
+end MirroreaProofFirst.HandleValues

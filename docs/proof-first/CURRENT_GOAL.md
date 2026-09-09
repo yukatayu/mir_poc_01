@@ -47,5 +47,8 @@ later extension is unreviewed and excluded from the running Oracle packet.
 The same module consumer now has a candidate finite-capacity immutable descriptor
 catalog and selected catalogCall. Raw call can accept a fresh envelope after
 trusted-registry substitution; that concrete countermodel keeps registry
-authenticity explicit. Existing handle consumers remain on raw call. No all-entry
-protection, authenticated installation or current-head/restore claim follows.
+authenticity explicit. Original invoke entries remain on raw call; explicit invokeRegistered entries
+now reuse the evaluators with catalog checking. The closed pure-expression entry
+also requires source-expression typing, with independent finite-execution relative
+completeness. No actual Mir parser refinement, all-entry protection, authenticated
+installation or current-head/restore claim follows.

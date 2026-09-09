@@ -100,10 +100,22 @@ The supplied World and Registry remain trusted. Nominal IDs do not authenticate
 the actual descriptor mapping; full module/operation stamps do not cover every
 other record revision. The later catalog candidate adds only bounded no-overwrite descriptor insertion
 and an explicitly selected catalogCall entry. General finite insertion sequences
-preserve old bindings and well-formedness; current catalog lookup rejects a
+preserve old bindings and well-formedness. For a fixed current World/use/registry,
+these insertions preserve an already successful call. Any catalog still rejects
+a module that is not current in the supplied World; a missing current-code entry
+rejects rather than substituting another descriptor. This is not World rollback
+protection or authenticated recovery. Current catalog lookup rejects a
 different descriptor even with a fresh envelope. Positive registered calls agree
-with the original boundary. The retained raw call and existing handle consumers
-still use the weaker path. A concrete raw-call control changes actual code while
+with the original boundary. The retained raw call and original invoke entries still use the weaker path.
+Later explicit invokeRegistered entries reuse each handle evaluator and select
+catalogCall. General soundness returns actual handle execution, current use,
+contract result and current-code catalog binding; stale/no-authority rejection
+is preserved. PureHandleFunctions additionally offers invokeClosedRegistered,
+which checks a closed expression has handle type before evaluation/invocation.
+Its soundness and relative completeness from independent finite execution
+derivations are checked. An ill-typed ignored argument can execute in the raw
+evaluator but is rejected by this checked entry. No raw entry is relabeled safe.
+A concrete raw-call control changes actual code while
 keeping nominal IDs and rebuilding its envelope, and succeeds with the supplied
 trusted registry. This exposes the missing integrity premise; it is not a
 production exploit or authorization bypass theorem. A catalog snapshot supplied
@@ -153,7 +165,7 @@ launch lock. A revised packet freshly kernel-checked by the main agent is runnin
 `mirrorea-w2-integrated-review` using a dedicated attached tab, preserving the
 original W1 job. Neither job has a collected result. That revised cut contains
 OwnerAssignment and the six earlier W2 modules; ProfileGuarantees, HandleValues
-and PureHandleFunctions, plus the later OwnerAssignment.Capture and ModuleContractBoundary catalog extensions, are outside that frozen cut and cannot inherit its eventual review.
+and PureHandleFunctions, plus the later capture, catalog and registered/closed-entry extensions, are outside that frozen cut and cannot inherit its eventual review.
 No independent Lean execution or signed reviewer is claimed. All ten sources
 remain unreviewed candidates. W1's pending abort/alias/source extensions are not
 premises of these new modules.

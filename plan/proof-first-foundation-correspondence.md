@@ -165,7 +165,23 @@ envelope under a substituted trusted registry can still pass raw call. Candidate
 is a finite-capacity no-overwrite descriptor catalog with general insertion
 preservation and a catalog-checked call; smallest alternative B binds actual
 descriptor content in the authority context, which would change that boundary.
-Neither is adopted. Raw/handle paths remain weaker, and authenticated installation,
+Neither is adopted. Original raw/handle invoke paths remain weaker, and authenticated installation,
 World transitions, head recovery and all-entry integration remain open. General
 proofs and overwrite/check-bypass mutants are recorded in W2_EXTENSION_CHECK;
 this later delta is excluded from the active Oracle packet.
+
+The later registered handle entries connect each existing evaluator to catalogCall
+without silently changing the original invoke contract or duplicating evaluation.
+They preserve exact carried stamps, catalog/current-use/contract binding, and
+stale/no-authority rejection. A separate checked closed-expression entry requires
+handle typing; general finite declarative execution supplies its relative
+completeness. The raw evaluator can execute an ill-typed ignored argument; this
+explicit countermodel prevents invocation safety from being mistaken for source
+type admission. Three bypass/refresh mutations are rejected. Actual Mir source,
+authenticated catalog/head and open closure-environment admission remain open.
+
+A further catalog consequence preserves successful calls across finite no-overwrite
+insertions for fixed current World/use/registry. Arbitrary catalog contents cannot
+revive a module rejected by that World; missing current-code entries fail closed.
+This does not authenticate or prevent rollback of World itself, establish a
+distributed atomic update, or equate fresh import with same-instance recovery.

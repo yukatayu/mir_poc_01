@@ -377,3 +377,61 @@ end DescriptorControl
 #print axioms linked_descriptor_unique
 #print axioms changed_descriptor_rejected
 end MirroreaProofFirst.ModuleContractBoundary
+
+-- Later unreviewed downstream-addition and stale-catalog consequences.
+namespace MirroreaProofFirst.ModuleContractBoundary
+-- Safe downstream catalog addition for a fixed current World/use/registry.
+-- This does not freeze unrelated runtime state or assert concurrent atomicity.
+theorem catalog_call_preserved {s : CurrentUse.World n} {registry : Registry n}
+ {catalog newer : Catalog} {u : CurrentUse.UseRequest n} {args : List Int}
+ {auth : CurrentUse.Evidence} {p : CallProof n} {value : Nat}
+ (extension : Extends catalog newer)
+ (ok : catalogCall s registry catalog u args auth p = some value) :
+ catalogCall s registry newer u args auth p = some value := by
+ unfold catalogCall at ok ⊢
+ split at ok
+ · rename_i h; simp_all
+ · rename_i d hd
+   split at ok
+   · rename_i registered
+     simpa [hd,extension d.codeId d registered] using ok
+   · contradiction
+
+theorem insert_sequence_preserves_call (capacity : Nat) {s : CurrentUse.World n}
+ {registry : Registry n} {catalog : Catalog} {u : CurrentUse.UseRequest n}
+ {args : List Int} {auth : CurrentUse.Evidence} {p : CallProof n} {value : Nat}
+ (ds : List Descriptor) (wf : CatalogWF capacity catalog)
+ (ok : catalogCall s registry catalog u args auth p = some value) :
+ catalogCall s registry (runInserts capacity catalog ds) u args auth p = some value :=
+ catalog_call_preserved (inserts_preserve capacity catalog ds wf).2 ok
+
+-- A catalog image cannot supply current authority/lifetime. Even arbitrary
+-- catalog contents do not revive a module rejected by the supplied current World.
+theorem no_catalog_revives_module (s : CurrentUse.World n) (registry : Registry n)
+ (catalog : Catalog) (u : CurrentUse.UseRequest n) (args : List Int)
+ (auth : CurrentUse.Evidence) (p : CallProof n)
+ (dead : ¬ CurrentUse.CurrentHandle s .module u.moduleHandle) :
+ catalogCall s registry catalog u args auth p = none := by
+ cases h : catalogCall s registry catalog u args auth p with
+ | none => rfl
+ | some value => exact False.elim (dead (catalog_sound h).1.current.2.2.1)
+
+-- Reading an older genuinely missing catalog entry fails; it never substitutes
+-- another descriptor. Authenticating that image and current World remains open.
+theorem missing_catalog_entry_rejected (s : CurrentUse.World n) (registry : Registry n)
+ (catalog : Catalog) (u : CurrentUse.UseRequest n) (args : List Int)
+ (auth : CurrentUse.Evidence) (p : CallProof n)
+ (missing : catalog (s.records u.operation.key).code = none) :
+ catalogCall s registry catalog u args auth p = none := by
+ cases h : catalogCall s registry catalog u args auth p with
+ | none => rfl
+ | some value =>
+   obtain ⟨_,d,_,found⟩ := catalog_sound h
+   rw [missing] at found
+   contradiction
+
+#print axioms catalog_call_preserved
+#print axioms insert_sequence_preserves_call
+#print axioms no_catalog_revives_module
+#print axioms missing_catalog_entry_rejected
+end MirroreaProofFirst.ModuleContractBoundary

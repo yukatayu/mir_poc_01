@@ -9,16 +9,16 @@
 - One active semantic goal W2-local-contract-resource, PL1 S1/S2 theory/proof and
   nonproduction reference. CURRENT_GOAL/Reports2611(W1)/2612(W2) own details.
   No W2/alpha close, I3-4 resume, Canon/THM/OBL/phase/public contract change.
-- Mandatory corpus incomplete. Plans73–130 full/hash-ledgered; nextPlan131.
+- Mandatory corpus incomplete. Plans73–140 full/hash-ledgered; nextPlan141.
   READ_LEDGER records real full/ranges/hashes; index reading is not referenced-file
   reading. No whole-project roadmap adoption before mandatory corpus completion.
 
 ## Git and resources
 
-- Current committed baseline b35744b73a110e031376f8439c9578f4c27f57e8 was pushed
-  and exact remote parity verified. Initial7feef371 and prior3408c4c/0047e8f8 etc
-  retained. Current own twelve-file capture/catalog/read-ledger/docs delta ready
-  to commit --no-gpg-sign and normal push. Verify status; no reset/force/clean.
+- Current committed baseline 53f9754109c6f07e14ac620427a5e78e18accff1 was pushed
+  and exact remote parity verified46a07a. Initial7feef371 and prior3408c4c/0047e8f8 etc
+  retained. Twelve-file capture/catalog/read-ledger/docs checkpoint committed779572 and
+  pushed534257/93531d; tree was clean at parity check. Verify status; no reset/force/clean.
 - Work root /tmp/mirrorea-proof-first-20260909-gn29zka5. Configured external mount
   /mnt/mirrorea-work absent. Last~60GiBfree/~12GiBRAM,target4.4GiB. Small Lean only;
   remeasure heavy work. No cleanup/host share. Handoff materials/archives unchanged.
@@ -94,11 +94,38 @@
 
 - Docs58092 failed stale progress header4f0922; corrected actualtime and retry38408
   PASSbadbba,1762reports. Focused doc diff866a03 + finalhash/diff f154d2 passed.
-  Save twelve-file own checkpoint with normal commit/push/parity, then CONTINUE.
-- Next required full readingPlan131 onward; continue actual source/capture/module
+  Checkpoint saved and parity verified; CONTINUE.
+- Next required full readingPlan141 onward; continue actual source/capture/module
   obligations, collect existing Oracle answers and dispose against frozen cuts.
   Later deltas require later review; do not infer approval from unreturned jobs.
 - No new Rust/network/recovery run; prior baselines retained Report2611. No reason
   to rerun unchanged baseline. No production implementation depends on new drafts.
 - Discord progress14699/2d122d sent~03:25JST. Next roughlyhour, not at every proof.
   No complete notification until this entire user request ends legitimately.
+
+## Latest after53f97541 checkpoint: registered handle entries
+
+- Explicit invokeRegistered in HandleValues/PureHandleFunctions reuses existing
+  evaluators with catalogCall; general actual execution + catalog/current-use/
+  contract soundness, stale/no-authority rejection. Original invoke stays weaker.
+- Pure invokeClosedRegistered additionally checks closed expression handle typing.
+  Raw evaluator accepts ill-typed ignored argument; checked entry rejects. General
+  relative completeness derives fuel from independent finite Executes, and general
+  carried-handle equality. Not actual Mir parser/open-env/physical refinement.
+- Scratch handle-catalog-jxagx7z2/HandleCatalog.lean and CHECK.json, PASS7cf589/094506.
+  Three catalog/type-check/stamp-refresh mutants have concrete false controls61ac4c.
+  Mirror handle-catalog-mirror-048b5dc0 both source rebuilds PASSb5194d; current
+  W2_EXTENSION_CHECK preserves prior cuts. Main full new-source reviewd47e3f.
+- Plan/current-goal/companion/progress/sample/report synced. Latest Oraclea801d7
+  running/submittedfalse; preserved jobs. Current own delta uncommitted; need
+  docs/hash/diff checks then continue. Required reading nextPlan141.
+
+- Latest catalog consequences: success preserved across no-overwrite insertions
+  for fixed World/use/registry; no catalog revives dead module; missing entry
+  rejects. Scratch CatalogExtension.lean/CATALOG_EXTENSION_CHECK.json under
+  handle-catalog-jxagx7z2, proof5e9319, Module+two dependent rebuilds bf3bd4PASS.
+  World rollback/authenticated recovery still open; no new mutator or production.
+- Docs39803 PASSefd5bd,1762reports. EOF blank fixed and both
+  handle files rechecked84784a; finalhash819e23 before catalog consequence.
+  Current finalhash5afe34 and focused diffc12a94 pass; save own checkpoint and continue.
+  Latest Oracle86cd69 still running/submissionfalse. Required nextPlan141.
