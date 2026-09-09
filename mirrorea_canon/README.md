@@ -15,12 +15,12 @@ open_items: []
 
 1. 本 canon は、憲章と決定(`adr/`)、形式理論(`theory/`)、言語・システム仕様(`spec/`)、適合性シナリオ(`scenarios/`)、メンタルモデル(`mental-model/`)、階層と契約(`architecture/`)、計画と運用(`plan/`)、執筆・運用規約(`meta/`)、可逆な作業仮説(`working/`)の正本を含む。
 2. 既存リポジトリ `mir_poc_01`(以下 **LAB**)は、本 canon の導入をもって**実験場・evidence 置き場**に位置づけが変わる。canon と LAB の記述が衝突する場合、常に canon が勝つ。手続きは `meta/source-hierarchy.md` に従う。
-3. canon の改定は `meta/style-guide.md` の改定手続き(提案 → owner decision → ADR / CHANGELOG 追記)で行う。ADR-0015 と ADR-0026 の owner-approved bounded programs は closed であり、Plan 247 / 249 は再開権限又は current queue ではない。PROPOSAL-037 / ADR-0034 は Mirrorea I3 Distributed Foundation bounded program を開始し、LAB Plan 250 を sole current roadmap とする。PROPOSAL-038 / ADR-0035はALIGN-1、PROPOSAL-039 / ADR-0036はALIGN-2、PROPOSAL-040 / ADR-0037はI3-0、PROPOSAL-041 / ADR-0038はI3-1、PROPOSAL-042 / ADR-0039はI3-2を受理し、PROPOSAL-043 / ADR-0040はowner instructionによるprogram resumeを記録した。I3-3のみactiveで、I3-4以降は固定順序に従いinactiveである。official I3 lifecycleは未entryである。program 外は ADR-0014 の standing L3 route、L2 promotion は owner-authenticated trust anchor 未構成のため fail-closed である(`meta/agent-instructions.md`)。
+3. canon の改定は `meta/style-guide.md` の改定手続き(提案 → owner decision → ADR / CHANGELOG 追記)で行う。ADR-0015 と ADR-0026 の owner-approved bounded programs は closed であり、Plan 247 / 249 は再開権限又は current queue ではない。PROPOSAL-037 / ADR-0034 は Mirrorea I3 Distributed Foundation bounded program を開始し、LAB Plan 250 を sole current roadmap とする。ADR-0035--0039はALIGN-1/2とI3-0/1/2を受理し、ADR-0040はowner resumeを記録した。PROPOSAL-046 / ADR-0043はI3-3を受理した。現在はowner pauseでactive semantic milestoneなし、I3-4はexplicit resumeまでinactiveである。official I3 lifecycleは未entryである。program 外は ADR-0014 の standing L3 route、L2 promotion は owner-authenticated trust anchor 未構成のため fail-closed である(`meta/agent-instructions.md`)。
 
 ## 最短の読み順
 
 - 全体像: `MAP.md` → `NORTH-STAR.md` → `DESIGN-CONSTITUTION.md` → `GLOSSARY.md`
-- 決定: `adr/README.md`(42 本の決定の一覧)
+- 決定: `adr/README.md`(43 本の決定の一覧)
 - 理論: `theory/00-overview.md` → `theory/01-mircore-v0.md` →
   `theory/13-evaluation-materialization.md` →
   `theory/14-maintained-relation-projection.md` →
@@ -48,7 +48,7 @@ open_items: []
   `spec/15-sys6-i2-conformance.md` → `plan/05-i3-entry-contract.md` →
   `plan/02-operating-model.md` →
   `LAB:plan/249-mirrorea-i2-systems-foundation-current-roadmap.md` (closed)
-- active I3 bounded program: `meta/proposals/PROPOSAL-037-mirrorea-i3-distributed-foundation.md` →
+- authorized / owner-paused I3 bounded program: `meta/proposals/PROPOSAL-037-mirrorea-i3-distributed-foundation.md` →
   `adr/ADR-0034.md` → `meta/proposals/PROPOSAL-038-align1-project-product-layer-map.md` →
   `adr/ADR-0035.md` → `meta/proposals/PROPOSAL-039-align2-browser-host-trust-boundaries.md` →
   `adr/ADR-0036.md` → `meta/proposals/PROPOSAL-040-i3-0-transport-selection.md` →
@@ -59,13 +59,15 @@ open_items: []
   `architecture/08-browser-host-security-invariants.md` →
   `plan/05-i3-entry-contract.md` →
   `LAB:plan/250-mirrorea-i3-distributed-foundation-current-roadmap.md`
+- I3-3 acceptance / current owner pause:
+  `meta/proposals/PROPOSAL-046-mirrorea-i3-3-failure-ordering.md` → `adr/ADR-0043.md` → `plan/01-phases.md`。
 - 何がいつ動くか: `plan/01-phases.md` → `plan/04-t0-g0-semantic-assertion-profile.md`
 - I3-3 owner-admission budget契約: `meta/proposals/PROPOSAL-044-i3-owner-admission-budget.md`
   → `adr/ADR-0041.md` → `spec/16-i3-owner-admission-budget.md`。
-  限定契約の選択であり、実装又はI3-3受理ではない。
+  契約選択時点では実装受理ではない。有限実装の受理はADR-0043を参照。
 - I3-3 provider failure契約: `meta/proposals/PROPOSAL-045-i3-read-only-provider-effect.md`
   → `adr/ADR-0042.md` → `spec/17-i3-read-only-provider-effect.md`。
-  独立effect grantと実host crossingの有限契約であり、実装又はI3-3受理ではない。
+  独立effect grantと実host crossingの有限契約。有限実装の受理はADR-0043を参照。
 
 各ディレクトリの `README.md` が、そのディレクトリの 1 頁要約・読み順・「ここから推論してはいけないこと」を持つ。全ファイルは YAML front matter(id / status / maturity / depends_on / summary / open_items)を持ち、`INDEX.json` が機械可読索引である。
 

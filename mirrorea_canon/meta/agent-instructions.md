@@ -2,7 +2,7 @@
 id: meta/agent-instructions
 status: L0-frozen
 maturity: draft
-depends_on: [adr/ADR-0012, adr/ADR-0014, adr/ADR-0015, adr/ADR-0026, adr/ADR-0033, adr/ADR-0034, adr/ADR-0035, adr/ADR-0036, adr/ADR-0037, adr/ADR-0038, adr/ADR-0039, adr/ADR-0040, meta/proposal-042, meta/proposal-043, arch/06-project-product-layers, arch/07-browser-host-trust-boundaries, plan/02-operating-model]
+depends_on: [adr/ADR-0012, adr/ADR-0014, adr/ADR-0015, adr/ADR-0026, adr/ADR-0033, adr/ADR-0034, adr/ADR-0035, adr/ADR-0036, adr/ADR-0037, adr/ADR-0038, adr/ADR-0039, adr/ADR-0040, meta/proposal-042, meta/proposal-043, arch/06-project-product-layers, arch/07-browser-host-trust-boundaries, plan/02-operating-model, adr/ADR-0043]
 summary: agent の読込、ADR-0040で再開したADR-0034 program、三軸/trust/private adapter/two-process acceptance、program外L3 research、review境界。
 open_items: []
 ---
@@ -22,7 +22,7 @@ open_items: []
   PROPOSAL-037 / ADR-0034はADR-0033 / plan/05をconsumeするauthorized bounded programを
   authorizeし、Plan 250をsole roadmapとする。ADR-0035はALIGN-1 three-axis map、
   ADR-0036はALIGN-2 Browser/Host trust boundary、ADR-0037はI3-0 private
-  QUIC reliable-stream adapter selectionを受理した。PROPOSAL-041 / ADR-0038でI3-1 private adapter/encoding、PROPOSAL-042 / ADR-0039でI3-2 two-process runtimeを受理し、PROPOSAL-043 / ADR-0040でowner instructionによるresumeを記録した。I3-3のみactive、I3-4以降は固定順序に従いinactiveである。program activation又はI3-0 close
+  QUIC reliable-stream adapter selectionを受理した。ADR-0038/0039でI3-1/2を受理し、ADR-0040のresume後、PROPOSAL-046 / ADR-0043でI3-3を受理した。現在はowner pauseでactive semantic milestoneなし、I3-4はexplicit resumeまでinactiveである。program activation又はI3-0 close
   自体はofficial I3 entry/exit又はpublic contract freezeではない。
 - ADR-0014 の standing route に従う L2/L3 working theory: `working/WRK-####` に
   read-only canon anchors、pinned authority cut、result class、non-effects、alternative /

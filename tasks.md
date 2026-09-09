@@ -1,6 +1,6 @@
 # Current Task Map (LAB)
 
-最終更新: 2026-09-09 07:33 JST
+最終更新: 2026-09-09 14:10 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project direction,
 theory, ADRs, conformance, and process. Everything outside it is LAB evidence,
@@ -21,7 +21,7 @@ Authority: `mirrorea_canon/adr/ADR-0034.md` and
 Execution: `plan/250-mirrorea-i3-distributed-foundation-current-roadmap.md`;
 evidence: `docs/reports/2606-mirrorea-i3-distributed-foundation-i3-3-failure-ordering.md`.
 
-**I3-3 alone is active.** Six of eleven milestones are accepted. This is a
+**I3-3 is accepted and owner-paused.** Seven of eleven milestones are accepted. This is a
 milestone count, not a workload-weighted percentage or completion forecast.
 Official I3 lifecycle remains unentered; Theory T1 and broad-I1 residuals are
 unchanged. The private selected transport is QUIC reliable stream (ADR-0037);
@@ -57,14 +57,17 @@ authorized normal v2 observation. Fresh row13 follow-up evidence passes runtime
 library413, all probe targets (ordinary43/provider20), process68, M1067,
 I2 local5/CLI8 and provider public guards5. Scoped all-target Clippy and format
 pass; independent review has no remaining P0/P1/P2. The finite provider component
-is committed/pushed at `94ad584577fadfd0b016ff798a22b84df536939f`, with clean
-HEAD/origin/main/live parity observed 2026-09-09 05:21 JST; this is not a new
+is committed/pushed at `94ad584577fadfd0b016ff798a22b84df536939f`; the row13
+membership component is committed at `f6aae7ca277690ac558a08f124e414ae2d2d35ad`, with clean
+HEAD/origin/main/live parity observed 2026-09-09 07:46 JST; this is not a new
 milestone or official lifecycle change.
 
 Row13 verifies source-derived WorldAuthority membership retirement with full-parent
 M9 and qualified restricted-child G1→G2 coverage; old-G1 CarrierAdmissionRejected
 is before owner use and LOCAL genuine M8 StaleMembership is separate. No observer
-renewal, grant mint or session authority follows. The four actual two-session fault profiles use genuine child-private assertions
+renewal, grant mint or session authority follows.
+
+Retained provider fault evidence: the four actual two-session fault profiles use genuine child-private assertions
 and generic completion, not exported provider-fault traces. The lost-result case
 receives/decodes then discards the frame before semantic admission, not wire
 packet loss. AdapterUnavailable has LOCAL injected-read/codec evidence, not
@@ -74,17 +77,23 @@ claimed.
 
 The current-to-next sequence is:
 
-1. Row13: genuine checked-operation-bound membership retirement, distinct from
-   capability revocation; preserve current-binding rejection precedence.
-2. Reuse and validate exact row15 preactivation policy and row19 redaction
-   evidence, then implement row20 process-local runtime/adapter cut admission
-   with in-flight/late-traffic falsifiers and finish ordering correspondence.
-3. Close all twenty I3-3 families, full validation and independent acceptance;
-   commit/push/parity, then stop. I3-4 requires explicit owner resume.
+1. I3-3 is accepted at source/evidence cut
+   `fe5dd972e2ddb3a513c785458a07702e4d4d99fa`, covering all twenty failure/order
+   families with workspace 1573, runtime doctests 4, format, Clippy and final
+   review P0/P1/P2=0. Preserve the finite boundary and historical ADR-0039 pause /
+   ADR-0040 resume records.
+2. Owner pause leaves no active semantic milestone. Plan 250 remains the sole
+   retained current roadmap; I3-4/I3-5/I3-6/NEXT-0 remain dependency-gated
+   inactive, and I3-4 requires explicit owner resume. Official I3 lifecycle entry
+   remains unaccepted; Browser, world semantics and public/production claims are
+   outside this cut.
+3. No further I3-3 implementation is current. Reopen only for a reproducible
+   accepted-profile falsifier or explicit owner resume; do not treat this pause as
+   blocked, stale or program close.
 
-These are direct consumers within I3-3, not extra milestones or parallel queues.
-Runtime source work and tests are separately owned; one evaluator serializes
-Cargo. Parent owns Canon interpretation, integration and acceptance.
+Retained I3-3 execution practice: component consumers were not extra milestones
+or parallel queues. Runtime source and tests had separate owners; one evaluator
+serialized Cargo. Parent retains Canon interpretation, integration and acceptance.
 
 Retained time/reply checkpoint 55f1fd7f is pushed with verified parity. It
 provides real successful/expiry reply replay rejection and initial-session
@@ -114,7 +123,7 @@ component test passes.
 | 4 | I3-0 | transport comparison and private selection | completed; Macro 6 front |
 | 5 | I3-1 | checked private codec/adapter boundary | completed; ADR-0038 |
 | 6 | I3-2 | generated-artifact real process/network runtime | completed; ADR-0039, bounded FM-5 |
-| 7 | I3-3 | twenty failure families and ordering refinement | active; Macro 3/5/6 middle, heavy |
+| 7 | I3-3 | twenty failure families and ordering refinement | accepted; owner-paused |
 | 8 | I3-4 | C-distributed gates and pressure slices | inactive; acceptance plus explicit resume required |
 | 9 | I3-5 | joined observer-safe network workflow | inactive; dependency-gated |
 | 10 | I3-6 | finite conformance and actual lifecycle close | inactive; dependency-gated |
@@ -149,9 +158,10 @@ not an addressing/governance/product specification. Reversed Library is separate
 ## user decision gates
 
 No semantic owner decision is currently required for bounded I3-3 implementation.
-At 2026-09-09 05:30 JST, measured free disk is approximately16GiB.
-The 10 GiB safety floor has no current capacity
-hold; no inferred or broadened cleanup permission is used.
+The owner approved removal of the identified `target/debug` cache; at11:57JST
+that exact cleanup recovered65G free. Source, .git and logs remain. The former
+storage decision gate is resolved and bounded-debug Cargo validation resumes;
+unrelated deletion or broader external actions are not inferred.
 The following remain mandatory escalation boundaries, not autonomous options
 to weaken the goal.
 
@@ -186,13 +196,14 @@ No new WRK/report lane without a direct consumer and bounded closure.
 - Keep finite runtime evidence distinct from Lean/general proof and lifecycle.
 - Keep source/Core/artifacts/authority separate from deployment/session/certificate.
 - Keep provisional internal representations separate from public compatibility.
-- Maintain one report (2606), one roadmap (250), one active milestone (I3-3).
-- Run resources preflight before heavy commands. The latest regression gate
-  measured approximately16GiB free at2026-09-09 05:30 JST; keep the 10 GiB safety
+- Retain one report (2606), one roadmap (250), and no active semantic milestone
+  during the owner pause; I3-4 requires explicit resume.
+- Run resources preflight before heavy commands. The final validation checkpoint
+  measured approximately63GiB free at2026-09-09 14:08 JST; keep the 10 GiB safety
   floor. No unmounted external workdir is assumed.
-- Stage 1 lint/docs/diff/secret scan and commit/push/parity are complete;
-  repeat applicable gates at the next integration. Full workspace/probe/matrix
-  gates remain at I3-3 close.
+- Final source workspace/probe/matrix, doctest, lint and format gates passed;
+  exact docs/diff/limited secret-scan and Git handoff evidence is in Report2606.
+  Repeat applicable gates only for a new authorized change.
 
 ## non-promoted references
 

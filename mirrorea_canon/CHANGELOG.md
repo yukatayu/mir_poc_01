@@ -18,6 +18,14 @@ open_items: []
 
 ## 履歴
 
+- **2026-09-09** PROPOSAL-046 / ADR-0043はsource/evidence cut
+  `fe5dd972e2ddb3a513c785458a07702e4d4d99fa`でI3-3の有限failure/retry/ordering
+  profileを受理した。20 familyと順序のactual process / LOCAL / bounded modelを
+  区別し、source authority、typed ambiguity、current-authority再検査、time/provider
+  boundary、process-local cut custodyと因果辺falsifierを保持する。Plan 250はcurrentの
+  ままowner pause、active semantic milestoneなし、I3-4はexplicit resumeまでinactive。
+  official I3 entry/exit、Theory T1、broad I1、OBL、public/production、durabilityは動かない。
+
 - **2026-09-08** PROPOSAL-045 / ADR-0042 / spec/17は、I3-3 provider failureへ
   source-derived read-only effect、独立したeffect grant、実T0/T4 host read、
   distinct typed result/failure、call-start/revocation/retentionとobserver分離の

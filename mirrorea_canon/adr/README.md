@@ -55,3 +55,4 @@ open_items: []
 | ADR-0040 | owner instructionによりADR-0034 / Plan 250を再開し、I3-3をsole active milestoneとする | L1 |
 | ADR-0041 | I3-3のsource opt-in owner admission budget、sealed gate、typed terminal failureを限定契約として選択。実装/milestone受理ではない | L1 |
 | ADR-0042 | I3-3のsource-derived read-only provider effect、独立grant、実host crossingとtyped result/failureを限定契約として選択。実装/milestone受理ではない | L1 |
+| ADR-0043 | I3-3有限failure/retry/ordering profileをcut `fe5dd972...`で受理し、Plan 250保持・active semantic milestoneなしのowner pauseを適用 | L1 |

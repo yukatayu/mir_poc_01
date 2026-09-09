@@ -1,6 +1,6 @@
 # Plan 250 — Mirrorea I3 Distributed Foundation current execution roadmap
 
-最終更新: 2026-09-09 05:16 JST
+最終更新: 2026-09-09 13:56 JST
 
 ## 役割、authority、current control state
 
@@ -51,40 +51,34 @@ roadmap/status pointer の一致を検証する。
 - resume authority: explicit owner direction, mirrored by PROPOSAL-043 /
   ADR-0040; ADR-0039 remains the immutable I3-2 acceptance/pause record
 - sole current roadmap: **Plan 250**
-- completed goals: **ALIGN-0, ALIGN-1, ALIGN-2, I3-0, I3-1, I3-2**
-- execution state: **execute through I3-3 acceptance, then owner-requested pause**
-- sole active semantic milestone: **I3-3**
-- retained runtime checkpoint: **row 11 duplicate/stale replies plus
-  row 17 / spec/16 bounded time-and-reply
-  evidence integrated at `55f1fd7f`, pushed with clean remote parity**.
-  ADR-0042/spec/17 selects the provider contract; its source/checker and
-  fail-closed legacy guards are integrated at `9e8d674a`. Exact static coverage,
-  composite verification and projection are integrated at `3862b168`, with
-  clean pushed parity. Genuine resource binding -> actual M9
-  authentication/verification and separate policy -> inactive scoped M8
-  component (Stage 2b) is integrated at `7142b205`, with clean HEAD/origin/main/
-  live parity observed `2026-09-08T19:22:07+09:00`. This is not a new milestone
-  or provider runtime activation.
-  The Stage 2b gates above remain its accepted input evidence. Current
-  Stage 2c carries exact scoped M8/M9/static data through existing SYS4/SYS5
-  inactive images, private codec and separately held expected validation.
-  Final gates pass focused13 (included in runtime375), process63, M10/I2
-  67/5/8, public guards5, actual ordinary localnet41, scoped Clippy, workspace
-  format and all-target check. Independent spec/quality reviews are P0/P1/P2
-  zero after reproduced expected-commitment/retirement repairs; the planner
-  gives conditional GO for inactive-only integration. Those gates are met:
-  Stage 2c is integrated at `a027d61b8030a903f892de2f7483ec8b64627963`,
-  with clean HEAD/origin/main/live parity observed
-  `2026-09-08T21:24:14+09:00`. The current direct consumer is actual Stage 3
-  provider runtime/host/QUIC within I3-3, not another inactive-only handoff.
-- next goal: **I3-4 (requires I3-3 acceptance and explicit owner resume)**
+- completed goals: **ALIGN-0, ALIGN-1, ALIGN-2, I3-0, I3-1, I3-2, I3-3**
+- execution state: **I3-3 accepted under ADR-0043; owner-requested pause**
+- active semantic milestone: **none**
+- accepted I3-3 source/evidence cut:
+  `fe5dd972e2ddb3a513c785458a07702e4d4d99fa` (pushed; HEAD/origin/main/live parity observed).
+  Workspace1573/1573, runtime doctests4/4, format and both warnings-denied
+  Clippy gates pass; final independent source review P0/P1/P2=0. Report2606
+  contains the exact twenty-family/order mapping and finite non-claims.
+  Seven of eleven milestones are accepted; this is not a workload percentage.
+  Canon/status integration is the final close operation, not a new active goal.
+- retained component history: time/reply `55f1fd7f`; provider source/static
+  `9e8d674a`/`3862b168`, M9/M8 admission `7142b205`, inactive handoff `a027d61b`,
+  actual provider `94ad5845`, source-declared membership `f6aae7ca`, final cut
+  custody/causality `fe5dd972`. Exact intermediate evidence stays below and in
+  Report2606; these are completed components, not a current queue.
+- storage: the historical10:10JST build abort ran no tests. Owner-authorized
+  cleanup of only `target/debug` recovered65G; the complete fresh verification
+  uses debug-symbol-free builds with assertions retained, target about2G and
+  free space about63G. Source, .git and logs were preserved.
+- next goal: **I3-4 (inactive; requires explicit owner resume)**
 - all other milestones: **ordered, inactive, and dependency-gated**
 - latest owner control (2026-09-07 18:13 JST observation): complete I3-3 with
   validation, independent review, commit/push and remote parity, then stop.
   The earlier through-NEXT-0 execution instruction is superseded only at this
   pause boundary; original program scope and fixed remaining order are unchanged.
-  I3-3 is active until accepted; afterward Plan 250 remains the authorized
-  paused roadmap with no active semantic milestone, neither blocked nor closed.
+  I3-3 is now accepted. Plan 250 remains the authorized paused roadmap with no
+  active semantic milestone, neither blocked nor closed. The product-goal pause
+  is left untouched; no automatic I3-4 activation follows.
 - Plan 247: closed M0--M10 execution record / regression baseline
 - Plan 249: closed SYS-0--SYS-7 execution record / accepted I2 baseline
 - official lifecycle at program start: theory **T1**; broad PHASE-I1
@@ -93,14 +87,14 @@ roadmap/status pointer の一致を検証する。
 - OPEN-032: **RESOLVED for this bounded program only by PROPOSAL-040 /
   ADR-0037; no public/production/platform selection follows**
 
-LAB execution estimate, `2026-09-07T13:57:42+09:00`: the parent estimates
+Historical LAB execution estimate, `2026-09-07T13:57:42+09:00`: the parent estimated
 26–52 hours of remaining continuous execution across I3-3 through NEXT-0;
 the dated per-milestone ranges are in `tasks.md`. This is a rough planning
 estimate, not measured remaining work or an acceptance deadline. The earlier
 I3-2 gate-to-gate Git timestamps span approximately ten hours, not separately
 tracked active effort. Provider/time contracts, actual-session falsifiers and
-review corrections dominate uncertainty. Six of eleven milestones are
-accepted; that count is not a workload-weighted completion metric. No scope,
+review corrections dominated uncertainty. Six of eleven milestones were then
+accepted; that historical count is not a workload-weighted completion metric. No scope,
 gate, evidence requirement or fixed ordering changes to meet an estimate.
 
 Program authorization and official lifecycle acceptance are distinct. Work in
@@ -133,7 +127,7 @@ Normative direction for this roadmap is read in the following order:
 
 LAB evidence is `progress.md`, `tasks.md`,
 `.docs/progress-task-axes.md`, closed Plan 249, and milestone Reports
-2598--2605; Report 2606 is the ongoing I3-3 record, not acceptance evidence.
+2598--2605; Report2606 records accepted finite I3-3 evidence under ADR-0043.
 If LAB wording conflicts with Canon, Canon wins. The owner direction
 supplies new program authority but does not silently rewrite an existing Canon
 semantic invariant.
@@ -309,7 +303,7 @@ and are exactly one per milestone:
 | I3-0 | `docs/reports/2603-mirrorea-i3-distributed-foundation-i3-0-transport-selection.md` | completed |
 | I3-1 | `docs/reports/2604-mirrorea-i3-distributed-foundation-i3-1-adapter-encoding.md` | completed; ADR-0038 |
 | I3-2 | `docs/reports/2605-mirrorea-i3-distributed-foundation-i3-2-two-process-runtime.md` | completed/accepted; historical pause superseded by ADR-0040 |
-| I3-3 | `docs/reports/2606-mirrorea-i3-distributed-foundation-i3-3-failure-ordering.md` | active; ongoing, not accepted |
+| I3-3 | `docs/reports/2606-mirrorea-i3-distributed-foundation-i3-3-failure-ordering.md` | accepted under ADR-0043; owner pause follows |
 | I3-4 | `docs/reports/2607-mirrorea-i3-distributed-foundation-i3-4-c-distributed-scenarios.md` | inactive |
 | I3-5 | `docs/reports/2608-mirrorea-i3-distributed-foundation-i3-5-devtools-workflow.md` | inactive |
 | I3-6 | `docs/reports/2609-mirrorea-i3-distributed-foundation-i3-6-conformance-lifecycle.md` | inactive |
@@ -879,7 +873,14 @@ hidden shared state, unsafe cleanup, or production/deployment requirement.
 Reopen for a reproducible route/owner/provenance mismatch or process boundary
 that the I3-3 fault harness cannot control deterministically.
 
-## I3-3 detailed Goal Statement — active
+## I3-3 detailed Goal Statement — completed / accepted
+
+Disposition: PROPOSAL-046 / ADR-0043 accepts the exact source/evidence cut
+`fe5dd972e2ddb3a513c785458a07702e4d4d99fa`. All twenty failure families and
+required order categories have finite classified evidence in Report2606.
+The remaining fixed milestones are inactive; I3-4 requires explicit owner
+resume. The Goal Statement and dated implementation checkpoints below retain
+the historical execution contract, not a current queue or unresolved P2 list.
 
 **Goal ID:** I3-3
 
@@ -926,7 +927,7 @@ output preserves label/authority/redaction without exposing private material.
 
 **Direct consumer:** I3-4 consumes this executable failure/order boundary for
 SCN-01/02/03/06 C-distributed cases and bounded relation/designated-result
-cross-process pressure; it remains inactive until I3-3 is accepted.
+cross-process pressure; it remains inactive until explicit owner resume.
 
 **Non-goals:** Changing the parent goal or fixed remaining milestone sequence;
 accepting I3-4 scenarios or I3-5 workflow early; official I3 entry/exit; broad
@@ -2050,12 +2051,37 @@ all-targets (library413/process68/M10conformance67/I2CLI8), probe all-targets
 Independent review has no unresolved P0/P1/P2. The new conformance runners
 return only a fieldless opaque outer error, avoiding false post-start stage
 claims or retired-observer output. Temporary diagnoses are removed.
-Report2606 pins exact commands/logs and scope. Row13 is verified and awaiting
-Git integration/parity; this does not accept row20 or whole I3-3. The fixed
-next consumer is row20 cut/order, whose implementation has not begun. A single
-bounded Oracle consultation is advisory preparation for that existing consumer,
-not a new roadmap, implementation release or general cut theorem. I3-4 remains
-inactive.
+Report2606 pins exact commands/logs and scope. Row13 is committed/pushed as
+`f6aae7ca277690ac558a08f124e414ae2d2d35ad`; clean HEAD/origin/main/live-main
+parity was observed at `2026-09-09T07:46:25+09:00`. This does not accept row20 or
+whole I3-3. The next consumer is row20 cut/order. The completed bounded Oracle
+consultation and independent source-backed planning prefer custody established
+at child bootstrap over draining/closing transport: no already-used mutable
+runtime/session pair can prove all handles are accounted for. Existing consumed
+image/start-binding inventories prevent same-cohort later lifecycle prestaging,
+but an untagged A image may belong to a cohort with an already-staged B.
+Eligibility must therefore originate from the actual whole-cohort unstaged
+launch before any handoff, not absent local tags or a sampled summary. The bounded
+implementation must own the runtime, sole session/reconnect lineage and all
+ingress/send/reservation obligations, including async cancellation, before a
+synchronous local admission and genuine later checked transition. No new ACK,
+saved image, distributed cut or general theorem follows. I3-4 remains inactive.
+
+The selected positive places the cut at requester A only after its actual
+first reply consumption. A then performs a genuine next checked source action;
+the generated request joins the separate B serve. This supplies the required
+later local transition without inventing a B-send/A-consume/B-cut edge or a new
+ACK. Whole-cohort launch qualification must survive the trusted inherited
+handoff; a generally callable constructor from one untagged local image/control
+would still admit the already-staged-sibling counterexample and is insufficient.
+The selected private implementation therefore issues a role-bound local-cut
+purpose only from the whole-cohort launch factory through the existing trusted
+inherited control. Generic ordinary controls cannot construct this custody.
+The purpose is custody provenance, not a grant or a self-authenticating proof;
+all existing exact start/peer/cohort checks remain. It adds no network edge,
+descriptor or ACK. Local obligation checks may run at either child for negative
+evidence, but the positive cut is A-local and no paired/global cut is claimed.
+Independent tests precede behavior implementation.
 
 The old fixture
 default remains0; the feature-gated source-real factory now explicitly selects
@@ -2142,9 +2168,10 @@ ownership boundary. Completed decisions and spent allowances remain retained
 history, never reset by a cut/reconnect. A positive actual ordinary round
 trip must reach this boundary and then a later checked transition; pending,
 retained-ingress, reservation and late-old-traffic cases are falsifiers.
-These are implementation/evidence obligations, not executed results or a
-new milestone. The provider component is now committed; row13 membership
-validation remains the current consumer before row20 production work.
+These are implementation/evidence obligations, not a new milestone. The
+provider and row13 membership components are committed; row20 custody and
+actual-process cut validation are now the current consumer. Factory tests
+alone do not establish the actual quiescent cut or its later transition.
 The smallest later transition is a genuine existing checked owner dispatch /
 serve, causally joined to an identity-bound committed cut-admission occurrence.
 Independent Canon-first review confirms plan/05 requires that actual retained
@@ -2152,8 +2179,8 @@ runtime/adapter boundary, not new checked-patch installation. Reject the larger
 patch-installation alternative for this finite row: it adds a consumer not
 required by the quiescence rule. The admission occurrence is evidence, never
 authority, a saved image or restore support. This selection does not waive any
-pending/ingress/ambiguity/lifecycle/late-traffic falsifier or activate row20
-implementation before the provider component closes.
+pending/ingress/ambiguity/lifecycle/late-traffic falsifier. The prerequisite
+provider and membership components closed before row20 implementation began.
 
 ## I3-4 milestone contract — inactive until I3-3 closes and owner resumes
 

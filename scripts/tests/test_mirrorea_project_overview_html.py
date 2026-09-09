@@ -10,6 +10,7 @@ HTML_PATH = REPO_ROOT / "docs" / "mirrorea-project-overview.html"
 DOCUMENTATION_PATH = REPO_ROOT / "Documentation.md"
 CANON_MAP_PATH = REPO_ROOT / "mirrorea_canon" / "MAP.md"
 CANON_ROOT_PATH = REPO_ROOT / "CANON.md"
+CURRENT_STATE_DIAGRAM_PATH = REPO_ROOT / "docs" / "diagrams" / "project-overview-current-state.mmd"
 
 
 class OverviewParser(HTMLParser):
@@ -86,10 +87,10 @@ class MirroreaProjectOverviewHtmlTests(unittest.TestCase):
             "ADR-0033 / SYS-7 I3 entry contract only",
             "PROPOSAL-037 / ADR-0034",
             "Mirrorea I3 Distributed Foundation bounded program",
-            "Plan 250がsole current roadmap",
-            "Mirrorea I3 Distributed Foundation / I3-2 accepted, I3-3 active",
-            "ALIGN-0 / ALIGN-1 / ALIGN-2 / I3-0 / I3-1 / I3-2 completed、I3-4/I3-5/I3-6/NEXT-0はdependency-gated inactive",
-            "official I3 lifecycle entryは未受理",
+            "Plan 250 remains the sole retained current roadmap",
+            "I3-3 accepted; owner pause leaves no active semantic milestone",
+            "I3-4/I3-5/I3-6/NEXT-0 remain dependency-gated inactive; I3-4 requires explicit owner resume",
+            "official I3 lifecycle entry remains unaccepted",
             "official I3 lifecycle entryとproductionは主張しません",
             "closed / SYS-3",
             "closed / SYS-4",
@@ -215,7 +216,7 @@ class MirroreaProjectOverviewHtmlTests(unittest.TestCase):
             "T1 checked untrusted Mir package",
             "package admission",
             "semantic grant",
-            "I3-2 accepted, I3-3 active",
+            "I3-3 accepted; owner pause leaves no active semantic milestone",
             "ADR-0037",
             "QUIC reliable streamをprivate provisional adapterに選択",
             "TLS-over-TCP framed reliable streamはdeferred baseline",
@@ -363,9 +364,26 @@ class MirroreaProjectOverviewHtmlTests(unittest.TestCase):
         self.assert_contains_marker(documentation, "Plan 250 sole roadmap", "Documentation I3 program status")
         self.assert_contains_marker(
             documentation,
-            "ALIGN-0--2, I3-0/I3-1 and I3-2 completed; owner resume activates I3-3 only. I3-4/I3-5/I3-6/NEXT-0 remain dependency-gated inactive.",
+            "I3-3 accepted; owner pause leaves no active semantic milestone",
             "Documentation I3 program status",
         )
+        self.assert_contains_marker(
+            documentation,
+            "Plan 250 remains the sole retained current roadmap",
+            "Documentation I3 program status",
+        )
+        self.assert_contains_marker(
+            documentation,
+            "I3-4/I3-5/I3-6/NEXT-0 remain dependency-gated inactive; I3-4 requires explicit owner resume",
+            "Documentation I3 program status",
+        )
+        self.assert_contains_marker(
+            documentation,
+            "official I3 lifecycle entry remains unaccepted",
+            "Documentation I3 lifecycle boundary",
+        )
+        self.assert_contains_marker(documentation, "ADR-0039", "Documentation I3 pause history")
+        self.assert_contains_marker(documentation, "ADR-0040", "Documentation I3 resume history")
         self.assert_contains_marker(
             documentation, "PROPOSAL-040 / ADR-0037", "Documentation I3 selection boundary"
         )
@@ -466,6 +484,20 @@ class MirroreaProjectOverviewHtmlTests(unittest.TestCase):
         self.assert_omits_marker(self.html, "I3-1がactive", "HTML stale I3-1 Japanese active")
         self.assert_omits_marker(self.html, "I3-1だけをactive", "HTML stale I3-1-only active")
         self.assert_omits_marker(documentation, "active goal はSYS-7", "Documentation stale SYS status")
+
+    def test_current_state_diagram_preserves_post_i3_3_pause_and_independent_lanes(self) -> None:
+        diagram = CURRENT_STATE_DIAGRAM_PATH.read_text(encoding="utf-8")
+
+        for marker in (
+            "I3-3 accepted; owner pause leaves no active semantic milestone",
+            "Plan 250 remains the sole retained current roadmap",
+            "I3-4/I3-5/I3-6/NEXT-0 remain dependency-gated inactive; I3-4 requires explicit owner resume",
+            "official I3 lifecycle entry remains unaccepted",
+            "subgraph Official",
+            "subgraph Semantic",
+            "subgraph Evidence",
+        ):
+            self.assert_contains_marker(diagram, marker, "current-state diagram")
 
     def test_canon_map_uses_the_current_align_frontier(self) -> None:
         canon_map = CANON_MAP_PATH.read_text(encoding="utf-8")

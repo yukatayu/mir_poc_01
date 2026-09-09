@@ -2,7 +2,7 @@
 id: spec/17-i3-read-only-provider-effect
 status: L1-fixed
 maturity: reviewed
-depends_on: [root/design-constitution, theory/02-types-effects-failures, theory/05-authority, theory/07-observation, spec/08-m7-checked-elaboration, spec/10-m9-auth-verification, spec/12-sys3-per-locus-projection, arch/07-browser-host-trust-boundaries, arch/08-browser-host-security-invariants, arch/09-i3-private-adapter, arch/10-i3-multi-process-runtime, adr/ADR-0034, adr/ADR-0042, meta/proposal-045]
+depends_on: [root/design-constitution, theory/02-types-effects-failures, theory/05-authority, theory/07-observation, spec/08-m7-checked-elaboration, spec/10-m9-auth-verification, spec/12-sys3-per-locus-projection, arch/07-browser-host-trust-boundaries, arch/08-browser-host-security-invariants, arch/09-i3-private-adapter, arch/10-i3-multi-process-runtime, adr/ADR-0034, adr/ADR-0042, meta/proposal-045, adr/ADR-0043]
 summary: I3-3 provider failureへsource-derived read-only effectと有限T0/T4境界を選択する。実装受理ではない。
 open_items: []
 ---
@@ -231,4 +231,5 @@ selected real transport and normal checked receiver, not a second fake harness.
 The required evidence is finite runtime-monitored, not a Lean/general theorem.
 Stop expansion after those consumers and independent review pass. Public
 contracts, provider registries, Browser/I5 and durability are not selected.
-I3-3 remains active; I3-4 is inactive.
+ADR-0043 accepts the finite I3-3 profile; execution is owner-paused with no
+active semantic milestone. I3-4 remains inactive until explicit resume.

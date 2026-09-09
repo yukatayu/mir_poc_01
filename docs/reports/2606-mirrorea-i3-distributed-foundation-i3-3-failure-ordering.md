@@ -1,12 +1,21 @@
-# Mirrorea I3-3 failure and ordering refinement — ongoing milestone report
+# Mirrorea I3-3 failure and ordering refinement — accepted milestone report
 
 ## Title and identifier
 
 I3-3 / Report 2606. Opened 2026-09-07 11:37 JST, obtained from
-`date --iso-8601=seconds` (`2026-09-07T11:37:54+09:00`). Status: ongoing;
-I3-3 is active and has not been accepted. This single report accumulates the
-resume, implementation, validation and eventual milestone review; no separate
-resume report is created.
+`date --iso-8601=seconds` (`2026-09-07T11:37:54+09:00`). Final acceptance record
+prepared at `2026-09-09T14:04:25+09:00`: PROPOSAL-046 / ADR-0043 accept I3-3
+at verified source cut `fe5dd972e2ddb3a513c785458a07702e4d4d99fa`.
+Plan 250 is retained under owner pause, with no active semantic milestone;
+I3-4 requires explicit owner resume. This is not whole-program completion or
+official I3 lifecycle entry. Final documentation validation and integration
+are recorded below before handoff.
+
+This single report preserves chronological component evidence. Earlier
+dated or stage-labelled active/pending/next-consumer statements describe those
+historical checkpoints, not the final queue. Final acceptance/status paragraphs
+take precedence over those historical snapshots; no separate closeout report
+is created.
 
 ## Objective
 
@@ -20,15 +29,14 @@ Latest owner execution control (recorded at `2026-09-07T18:13:00+09:00`):
 complete I3-3 with its full evidence, independent review, commit/push and
 remote parity, then stop and report. I3-4 must not activate without explicit
 owner resume. This supersedes automatic continuation only, not the original
-program scope or the 20-family/order gates. I3-3 remains active now; after
-acceptance retain Plan 250 with no active semantic milestone. The user controls
+program scope or the 20-family/order gates. Acceptance now retains Plan 250
+with no active semantic milestone. The user controls
 the goal pause; do not represent this as blocked, stale or whole-program
 completion. Independent pre-edit planner review confirms the existing
 ADR-0040/PROPOSAL-043/operating-model pause exception permits this control.
-The I3-3 acceptance record will carry the effective pause; historical ADRs are
-not rewritten now.
+ADR-0043 carries the effective pause; historical ADRs are not rewritten.
 
-Independent final control-diff review finds no P0/P1 scope inconsistency.
+Historical execution-control checkpoint: independent control-diff review found no P0/P1 scope inconsistency.
 Fresh `make docs` passes (agent configuration, 210 Canon files, 800 hierarchy
 paths, 1760 reports), as does `git diff --check`. The material owner-stop
 instruction is committed separately from the in-progress adapter delivery
@@ -488,6 +496,15 @@ stored-result/no-new-consume contracts remain preserved.
 
 ## Files changed
 
+Final docs-only acceptance adds PROPOSAL-046 / ADR-0043 and updates Canon
+changelog/index/navigation, phase/operating/entry-contract current state,
+PL-2 maturity, provider current-status reference and agent/source-hierarchy
+guidance. These normative edits accept only the recorded finite I3-3 profile
+and owner pause; they do not amend historical ADRs, theory/11, scenario gates
+or public contracts. Root entry points, Plan 250/index, five LAB snapshots,
+HTML/Mermaid overview and its regression test are synchronized in the same
+integration. The source files listed below are pinned by `fe5dd972`.
+
 Final I3-3 source delta after `f6aae7c` adds the private
 `sys5_i3_process_local_cut.rs` capsule and nested
 `sys5_i3_process_local_cut_tests.rs`; updates SYS4 dispatch, SYS5 process runtime,
@@ -747,7 +764,35 @@ CARGO_INCREMENTAL=0 CARGO_BUILD_JOBS=2 cargo test --locked -p mir-runtime --test
 
 ## Evidence / outputs / test results
 
-### Final I3-3 finite failure and ordering map — verified source, Canon close pending
+Final documentation gate observed `2026-09-09T14:24:16+09:00`: complete
+`make docs` exits0 (agent configuration,218 Canon files,800/800 hierarchy paths,
+1760 numbered report scaffolds). Final overview regression is13/13; staged
+diff check passes. Limited private-key/token/webhook filename-only scans of
+the changed and new files have no matches, not a general secret audit.
+No Rust changes occurred after the verified `fe5dd972` source cut. Root free
+space remains approximately63GiB with a2GiB reproducible target directory.
+The independent planner's documentation condition is now discharged; final
+Git handoff observes commit/push/parity before the response.
+
+Final docs-only closeout checks: overview reader tests pass13/13 after restoring
+the truthful historical I3-1/2 acceptance literal in MAP. Independent parent
+inspection additionally corrected current-vs-historical dashboard statements
+that marker tests alone did not detect. The first final `make docs` passed
+agent configuration,218-file Canon index and800-path hierarchy, then rejected
+two snapshot headers older than the newly appended14:08 evidence. Only those
+headers were synchronized to observed14:10; the complete docs command is rerun
+without disabling the check. A second pass detected the literal word
+`pending` inside a historical-review description in the project-status update
+section. Parent inspected the validator, changed only that description to
+`unfinished-review`, and directly reran its section check with no errors before
+the full rerun. The subsequent run reached the final dashboard checks and
+required a same-line Canon path on the newly checked I3-3 row. Parent added
+ADR-0043 there and directly verified checked rows, source references, snapshot
+position references and the164-line budget before the complete rerun. None of
+these repairs disables or changes the validator. Final runtime source remains
+unchanged at `fe5dd972`.
+
+### Final I3-3 finite failure and ordering map — accepted by ADR-0043
 
 The restored final source now passes the complete workspace all-target test
 command:1573 passed,0 failed,0 ignored across176 result lines (including empty
@@ -4237,15 +4282,20 @@ by this advice; provider/time remain OPEN and I3-4 remains inactive.
 
 ## Suggested next prompt
 
-Integrate the verified row13 membership component after final synchronized docs,
-commit/push/parity. Preserve its old-carrier rejection precedence and separate
-LOCAL membership classification. Reuse row15/19 evidence, then complete row20
-runtime/adapter cut obligations with actual complete custody and
-remaining ordering. Close all twenty families and whole-I3-3 validation,
-independent acceptance, commit/push/parity, then honor the owner pause.
-I3-4 remains inactive; the paused product goal is unchanged.
+Only after explicit owner resume: begin the existing Plan 250 I3-4 Goal
+Statement, using the accepted finite I3-3 fault/order profile as its regression
+floor. Execute source-derived C-distributed SCN-01/02/03/06 and the separate
+relation/designated pressure slices. Do not infer official lifecycle acceptance
+from I3-3. Until that resume, stop with no active semantic milestone and leave
+the paused product goal unchanged.
 
 ## Plan update status
+
+Final: `plan/` 更新済み. Plan 250 records seven of eleven milestones accepted,
+the exact source cut, all twenty finite failure families and ordering evidence,
+resolved local-cut causal falsifiers, and retained owner pause. Plan 00 index
+is synchronized. No new roadmap or semantic frontier was opened. Component
+updates below are historical.
 
 Provider Stage3: final evidence/review and precise non-claims are recorded;
 the smaller row13 membership consumer replaces the reversed-role sketch,
@@ -4275,6 +4325,11 @@ synchronization belongs to the status assignment.
 
 ## Documentation.md update status
 
+Final: 更新済み. Concise reader entry and HTML/Mermaid views mirror ADR-0043,
+owner pause/no active milestone, explicit-resume I3-4 and unentered official
+I3 lifecycle. Existing three-axis and lower/upper responsibility boundaries
+are retained. Earlier component updates below are historical.
+
 Provider Stage3: actual runtime/host/QUIC evidence replaces stale inactive-only
 current statements; historical cuts remain explicitly historical.
 
@@ -4301,6 +4356,11 @@ generated-contract/runtime enforcement and the unchanged workflow boundary.
 
 ## docs/project-status.md update status
 
+Final: 更新済み. I3-3 accepted, retained Plan 250 owner pause, no active
+semantic milestone, and I3-4 explicit-resume boundary replace prior current
+implementation/row20/unfinished-review statements. Component notes below are
+historical.
+
 Provider Stage3: condensed current verified capabilities, exact deferred
 claims and unchanged whole-I3-3 stop boundary; old micro-counts move to report history.
 
@@ -4321,6 +4381,11 @@ changing official lifecycle or the stop-after-I3-3 instruction.
 I3-2 accepted evidence と official I3 unentered を維持する。
 
 ## progress.md update status
+
+Final: 更新済み. Logical/user-facing/implementation axes retain their distinct
+maturity; finite I3-3 fault/order evidence is accepted without official I3
+lifecycle or public completion. The dated recent log records this closeout;
+historical component estimates and pending findings are not a current queue.
 
 Provider Stage3: verified current execution/observation replaces contradictory
 no-invocation wording; semantic/product/phase axes and remaining gates stay separate.
@@ -4354,6 +4419,12 @@ is active. All later network, provider and full-matrix requirements remain.
 
 ## tasks.md update status
 
+Final: 更新済み. Current task snapshot has no active semantic milestone;
+I3-4 is the next owner-resume point and later packages remain dependency-gated.
+No new owner decision is required for the accepted I3-3 finite design; the
+pause is execution control, not blocked/stale. Older entries below describe
+historical component synchronization.
+
 Provider Stage3: current task snapshot now separates component integration,
 membership, row15/19 reuse, cut/order and whole-milestone acceptance.
 
@@ -4380,6 +4451,11 @@ The 22:42 JST maintenance records C1/C2 as an uncommitted delta over pushed
 as the direct consumer. No new roadmap or queue is created.
 
 ## samples_progress.md update status
+
+Final: 更新済み. Actual process/network, LOCAL custody/authority and bounded
+model evidence remain separately classified. I3-3 tests are a regression floor,
+not a claim that the inactive I3-4 scenarios or I3-5 user workflow are complete.
+Sample roots and taxonomy are unchanged; no sample source was moved or deleted.
 
 Provider Stage3: real provider/ordinary probe results and current runtime gates
 are mirrored with precise fault/OS-error non-claims; no sample-root taxonomy changes.
@@ -4409,6 +4485,22 @@ The C1/C2 update now points to its actual library test command and preserves
 the no-new-network-sample/non-workflow classification.
 
 ## Reviewer findings and follow-up
+
+Final independent Canon/planner review (`i3_remaining_plan`, 2026-09-09):
+conditional GO with no P0/P1, scope overclaim or mandatory implementation gap.
+Conditions are final docs validation and commit/push/observed parity, not
+additional semantic work. Parent repaired the two minor dashboard phrases
+(accepted I3-2 input history, historical execution ownership). The review
+confirms source pin, actual/LOCAL/model separation, finite cut/provider
+non-claims, retained owner pause, inactive I3-4 and unchanged official lifecycle.
+
+Final source review: independent `c3_quality_review` reports P0/P1/P2=0 after
+the genuine receipt→cut→enqueue causality falsifier was added and both
+single-link mutations were observed RED, followed by restored focused and
+whole-workspace GREEN. The final read-only planner review checks the docs-only
+acceptance/pause delta separately; its outcome is recorded at final validation.
+Earlier component findings below are historical and do not reopen resolved
+findings without new counterevidence.
 
 Final post-recovery source disposition: P0=0/P1=0/P2=0. The reviewer inspected
 the test-only boolean queries, exact live/pending/carrier bindings, both
@@ -5231,6 +5323,19 @@ remains the explicitly reported failure, not an I3 runtime or passing gate.
 
 ## Skipped validations and reasons
 
+Final scope: all applicable final Rust workspace/selected runtime doctest,
+format/Clippy and reader/Canon documentation gates are recorded with exact
+results. No new Lean theorem or ledger statement was changed, so no fresh
+Lean `--trust=0` proof build is claimed. Existing general-theory evidence is
+retained, not promoted. The optional unrelated `test_mir_hilight_html` active
+sample-catalog failure remains known and is not repaired or counted as passing
+by this milestone. No WAN/production security, general save/restore/live patch,
+arbitrary network theorem or future I3-4 scenario acceptance is claimed.
+The earlier full-debug build was resource-aborted with no test result; only
+the successfully completed reduced-symbol build counts as final evidence.
+Historical component omissions/pending gates below do not supersede the final
+executed validation packet.
+
 Current row13 component: fresh runtime and probe all-target tests, scoped
 Clippy, format and synchronized docs gates are executed before f6aae7ca.
 Whole-workspace all-target tests/Clippy and final fault/order acceptance still
@@ -5313,6 +5418,16 @@ not skipped passes. General proof, WAN/production, durability and Browser/Host
 product realization remain outside this bounded milestone.
 
 ## Commit / push status
+
+Final source/evidence integration is committed and pushed as
+`fe5dd972e2ddb3a513c785458a07702e4d4d99fa`
+(`feat: preserve process-local cut custody and causality`); clean source-cut
+HEAD/origin/main/live-main parity was verified before these docs-only edits.
+The final acceptance integration contains PROPOSAL-046 / ADR-0043, Canon
+navigation/current control, Plan 250, this single report, LAB snapshots and
+reader regressions. Its commit/push/parity are the final handoff gate; this
+record does not fabricate its own future commit hash. Component integration
+records below are historical.
 
 Row13 is committed/pushed as `f6aae7ca277690ac558a08f124e414ae2d2d35ad`
 (`feat: reject retired owner membership across QUIC processes`). Final
@@ -5526,7 +5641,22 @@ This is the fifth source checkpoint inside I3-3, not milestone acceptance.
 
 ## Sub-agent session close status
 
-Current row20: the runtime implementer owns the bounded late-reply and cancelled
+Final handoff: status/reader synchronization and independent Canon/planner
+review are complete; full docs validation passed. All specialist assignments
+have returned, none is running or assigned I3-4 work. The following pre-Git
+description preserves the division of responsibility, not open assignments.
+
+Final component assignments are complete: production implementation and bounded
+debug fixes, separate tests, sole Cargo evaluation, independent correctness
+review and planning preflight returned their evidence. Source review has
+P0/P1/P2=0. Status/reader synchronization and the final read-only Canon/planner
+review close before Git handoff. The runtime writer's later usage-limit error
+occurred after its required work had completed and leaves no implementation
+assignment unfinished. Parent retains acceptance, integration and final Git
+verification. No agent is assigned I3-4 work. Earlier assignments below are
+historical snapshots, not current open tasks.
+
+Historical row20: the runtime implementer owns the bounded late-reply and cancelled
 I/O drivers; the host writer has frozen their shared-launcher routing, and the
 independent test author has frozen selected runner tests. The sole evaluator
 captured their initial stub REDs after the normal cut/custody packet passed.

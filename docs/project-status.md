@@ -1,16 +1,16 @@
 # Project status
 
-最終更新: 2026-09-09 07:33 JST
+最終更新: 2026-09-09 13:54 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
 `mirrorea_canon/` is LAB: evidence, history, implementation, and operational
 notes. If LAB text conflicts with canon, canon wins.
 
-Owner control: finish I3-3 through validation, independent review, commit/push
-and parity, then pause. I3-4 requires explicit owner resume. This does not
-weaken I3-3's gates, close the program or mark it blocked; I3-3 remains active
-until acceptance, after which Plan 250 is retained with no active milestone.
+Owner control: I3-3 is accepted at the finite source/evidence cut and execution
+is paused. I3-3 accepted; owner pause leaves no active semantic milestone. Plan
+250 remains the sole retained current roadmap. I3-4 requires explicit owner
+resume; this is not blocked, stale or program close.
 
 ## この文書の役割
 
@@ -36,13 +36,13 @@ closed M0--M10 finite reference baseline
 -> [x] I3-0 transport candidate evidence and private selection (completed; `mirrorea_canon/adr/ADR-0037.md`)
 -> [x] I3-1 checked private adapter/encoding boundary (completed; `mirrorea_canon/adr/ADR-0038.md`)
 -> [x] I3-2 two-or-more-process generated-artifact runtime (completed/accepted bounded evidence; `mirrorea_canon/adr/ADR-0039.md`)
--> [ ] I3-3 network failure/order refinement (active after owner resume)
+-> [x] I3-3 network failure/order refinement (accepted; owner-paused): `mirrorea_canon/adr/ADR-0043.md`
 ```
 
 Plan 247とPlan 249はclosed recordsである。PROPOSAL-037 / ADR-0034により
 Mirrorea I3 Distributed Foundation bounded programは継続中で、owner resumeによりI3-3
-のみactiveである。Plan 250がsole current roadmap、ALIGN-0 / ALIGN-1 / ALIGN-2 /
-I3-0 / I3-1 / I3-2はcompleted、I3-4/I3-5/I3-6/NEXT-0はdependency-gated inactiveである。
+I3-3 accepted; owner pause leaves no active semantic milestone。Plan 250 remains the sole retained current roadmap。ALIGN-0 / ALIGN-1 / ALIGN-2 /
+I3-0 / I3-1 / I3-2はcompleted、I3-4/I3-5/I3-6/NEXT-0 remain dependency-gated inactive; I3-4 requires explicit owner resume。
 
 ## 現在地
 
@@ -52,8 +52,8 @@ I3-0 / I3-1 / I3-2はcompleted、I3-4/I3-5/I3-6/NEXT-0はdependency-gated inacti
 | broad PHASE-I1 | **unaccepted**; OPEN-026/027とfull carrier freezeが残る | `mirrorea_canon/architecture/04-runtime-carriers.md` |
 | bounded I2 lifecycle | **official entry accepted, then official exit accepted** | `mirrorea_canon/adr/ADR-0032.md` |
 | ADR-0026 program | **SYS-0--SYS-7 closed** | `mirrorea_canon/adr/ADR-0033.md` |
-| active roadmap / goal | **Plan 250 / I3-3 active after owner resume at accepted I3-2 cut** | `plan/250-mirrorea-i3-distributed-foundation-current-roadmap.md` |
-| I3 / OPEN-032 | **bounded program current; I3-3 active and later milestones dependency-gated; lifecycle entry not official / resolved only for this program by ADR-0037** | `mirrorea_canon/adr/ADR-0037.md`, `mirrorea_canon/adr/ADR-0039.md` |
+| active roadmap / goal | **Plan 250 retained / I3-3 accepted and owner-paused** | `plan/250-mirrorea-i3-distributed-foundation-current-roadmap.md` |
+| I3 / OPEN-032 | **I3-3 accepted and owner-paused; I3-4+ dependency-gated inactive; official I3 lifecycle entry remains unaccepted** | `mirrorea_canon/adr/ADR-0043.md`, `mirrorea_canon/adr/ADR-0037.md` |
 | public/product | final grammar/CLI/API/ABI/wireもproductionも未受理 | `mirrorea_canon/adr/ADR-0033.md` |
 
 Accepted SYS-6 implementation/evidence cutは
@@ -71,14 +71,14 @@ Bをprivate selected adapterとした。Aはrejected/deferred replacement baseli
 
 ## 現在の停止線
 
-ALIGN-0 / ALIGN-1 / ALIGN-2 / I3-0 / I3-1 / I3-2 completed、owner resume後はI3-3のみactiveで、I3-4/I3-5/I3-6/NEXT-0はdependency-gated inactive。ALIGN-2 は Browser/Host/package/View/provider の責任境界を Canon 化し、BND-010..BND-016、trust tier T0–T4（Theory T0–T2 とは別）、package admission と semantic grant の分離、raw FFI 禁止、redaction と resource/termination 責任を明示した。固定順序はALIGN-0..2 → I3-0..6 → NEXT-0である。
+ALIGN-0 / ALIGN-1 / ALIGN-2 / I3-0 / I3-1 / I3-2 / I3-3 accepted; owner pause leaves no active semantic milestone。I3-4/I3-5/I3-6/NEXT-0 remain dependency-gated inactive; I3-4 requires explicit owner resume。ALIGN-2 は Browser/Host/package/View/provider の責任境界を Canon 化し、BND-010..BND-016、trust tier T0–T4（Theory T0–T2 とは別）、package admission と semantic grant の分離、raw FFI 禁止、redaction と resource/termination 責任を明示した。固定順序はALIGN-0..2 → I3-0..6 → NEXT-0である。
 ALIGN-1ではsemantic strata S0--S6、project/product PL-0--PL-6、lifecycle T0--T2 / I1--I6を独立したmany-to-many座標としてCanon化した。PL-4は責任境界のみ、PL-6は別application、satellitesは別系統である。
 ALIGN-0 acceptanceはI3 lifecycle entry、transport選定、production/public freezeを
 含まない。これらは各後段gate又はowner-reserved boundaryへ残る。
 Current authority and milestone gates are
 `mirrorea_canon/adr/ADR-0034.md` and
 `plan/250-mirrorea-i3-distributed-foundation-current-roadmap.md`.
-I3-3 is the only active promoted semantic package after explicit owner resume;
+I3-3 is accepted and owner-paused with no active semantic milestone;
 I3-4/I3-5/I3-6/NEXT-0 remain inactive pending their dependency gates. The
 accepted I3-2 source cut and remote parity are the preserved entry evidence.
 
@@ -101,14 +101,21 @@ full-parent M9 and qualified restricted-child G1→G2 coverage; old-G1
 authority follows. Unrelated relation bindings remain exact; terminal errors are
 fieldless opaque/slot-only, including wrong-kind ACK then valid publication.
 AdapterUnavailable retains LOCAL injected-read/codec evidence, not actual OS
-operational failure. The finite provider component remains committed/pushed at
-`94ad584577fadfd0b016ff798a22b84df536939f`; row20 cut/order is the next
-unimplemented consumer, then whole-milestone validation/review/parity and stop.
-I3-4 stays inactive.
+operational failure. The row13 membership component is committed/pushed at
+`f6aae7ca277690ac558a08f124e414ae2d2d35ad`; the finite provider component remains
+at `94ad584577fadfd0b016ff798a22b84df536939f`, with clean parity observed
+2026-09-09 07:46 JST. I3-3 is accepted at source/evidence cut
+`fe5dd972e2ddb3a513c785458a07702e4d4d99fa`; the finite profile covers all twenty
+failure/order families, with workspace 1573 tests, four runtime doctests, format,
+Clippy and final review P0/P1/P2=0. I3-3 accepted; owner pause leaves no active
+semantic milestone. Plan 250 remains the sole retained current roadmap.
+I3-4/I3-5/I3-6/NEXT-0 remain dependency-gated inactive; I3-4 requires explicit
+owner resume. Official I3 lifecycle entry remains unaccepted. Browser, world
+semantics and public/production claims remain outside this cut.
 Detailed edge contracts: [`mirrorea_canon/architecture/07-browser-host-trust-boundaries.md`](../mirrorea_canon/architecture/07-browser-host-trust-boundaries.md); cross-edge binding/freshness/revocation/redaction/resource rules: [`mirrorea_canon/architecture/08-browser-host-security-invariants.md`](../mirrorea_canon/architecture/08-browser-host-security-invariants.md).
-View は authoritative domain semantics を所有せず、presentation-local computation のみを許可する。View からの入力は typed command/effect request とし direct store を禁止する。I3-0 はprivate transport選定をclosedし、OPEN-032はこのbounded programだけresolvedした。I3-1とI3-2はbounded evidenceとしてclosedした。official I3 lifecycle は未entry、I3-3のみactive、I3-4/I3-5/I3-6/NEXT-0はdependency-gated inactive、I5 implementation は inactiveである。
-I3-2の最終bounded evidenceはlocalnet 12/12（repeat）、full probe 62/62、runtime default 29/29、seam 47/47、library 281/281、docs compile-fail 1/1（default/private）である。6/11 milestones acceptedであり、これは重み付き完成率ではない。FM-5 localhost evidenceであり、public workflowや100% completionは主張しない。I3-3全体は未受理。2026-09-09 05:30 JSTの測定空き容量は約16GiBで、10GiB guardに現在の容量保留はない。
-The active bounded I3 programはinternal carrierとpublic wireを分離し、route/handshake/framing/
+View は authoritative domain semantics を所有せず、presentation-local computation のみを許可する。View からの入力は typed command/effect request とし direct store を禁止する。I3-0 はprivate transport選定をclosedし、OPEN-032はこのbounded programだけresolvedした。I3-1とI3-2とI3-3はbounded evidenceとしてclosedした。official I3 lifecycle entry remains unaccepted、I3-3 accepted; owner pause leaves no active semantic milestone、I3-4/I3-5/I3-6/NEXT-0 remain dependency-gated inactive、I5 implementation は inactiveである。
+I3-2の履歴証拠はlocalnet 12/12（repeat）、full probe 62/62、runtime default 29/29、seam 47/47、library 281/281、docs compile-fail 1/1（default/private）である。現在はI3-3を含む7/11 milestones acceptedであり、これは重み付き完成率ではない。FM-5 localhost evidenceであり、public workflowや100% completionは主張しない。最終検証後の空き容量は約63GiBで、容量保留はない。
+The retained bounded I3 programはinternal carrierとpublic wireを分離し、route/handshake/framing/
 disconnect/reconnect/ambiguous delivery/duplicate/reorder/stale authority/backpressure/
 timeout/provider/redaction/patch/cut failureをtypedに扱い、network occurrencesをMir
 orderingへrefineしなければならない。hidden retry、exactly-once、hidden transactionは不可。
@@ -120,8 +127,8 @@ source-free mint、selected ST/OW divergence、stale cut/patch mutation、relati
 drift、observer leak、lower-layer conformance dependency、M10 regressionの場合だけ。
 ## オーナーの確認・判断待ち
 OPEN-032はPROPOSAL-040 / ADR-0037によりこのbounded programだけresolvedした。
-owner/userの明示的resumeによりI3-3をactivateした。これはI3-2 cutとremote parityを
-保持した再開であり、I3-4以降は前段acceptanceまでactivateしない。
+owner/userのresumeにより開始したI3-3はADR-0043で受理済みである。
+現在はowner pauseであり、I3-4は追加の明示的resumeまでactivateしない。
 このpause gateに加え、次のbounded sequence外の変更もowner decisionを必要とする。
 - public API/ABI/wire/grammar/CLI compatibility freeze;
 - production deployment、external publication、paid resource;
@@ -137,7 +144,7 @@ Authority boundaryは`mirrorea_canon/meta/agent-instructions.md`と
 | lifecycle | `mirrorea_canon/plan/01-phases.md` |
 | SYS-6 acceptance | `mirrorea_canon/adr/ADR-0032.md`, `mirrorea_canon/spec/15-sys6-i2-conformance.md` |
 | inactive I3 contract | `mirrorea_canon/adr/ADR-0033.md`, `mirrorea_canon/plan/05-i3-entry-contract.md` |
-| active bounded I3 program | `mirrorea_canon/adr/ADR-0034.md`, `plan/250-mirrorea-i3-distributed-foundation-current-roadmap.md` |
+| retained owner-paused I3 program | `mirrorea_canon/adr/ADR-0034.md`, `mirrorea_canon/adr/ADR-0043.md`, `plan/250-mirrorea-i3-distributed-foundation-current-roadmap.md` |
 | I3-0 private transport selection | `mirrorea_canon/adr/ADR-0037.md`, `docs/reports/2603-mirrorea-i3-distributed-foundation-i3-0-transport-selection.md` |
 | Browser/Host trust edges | `mirrorea_canon/architecture/07-browser-host-trust-boundaries.md` |
 | cross-edge security invariants | `mirrorea_canon/architecture/08-browser-host-security-invariants.md` |

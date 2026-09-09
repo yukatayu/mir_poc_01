@@ -18,9 +18,11 @@ the closed authority/execution record for the accepted Mir Theory v0 / I1+
 M0--M10 finite reference baseline. ADR-0026 and Plan 249 likewise record the
 now-closed Mirrorea I2 Systems Foundation SYS-0--SYS-7 program. PROPOSAL-037 /
 ADR-0034 authorize the bounded Mirrorea I3 Distributed Foundation program;
-Plan 250 is its sole current roadmap; ALIGN-0, ALIGN-1, ALIGN-2, I3-0, I3-1,
-and I3-2 are completed bounded milestones. The owner has resumed execution at
-I3-3; I3-4, I3-5, I3-6, and NEXT-0 remain inactive and dependency-gated.
+Plan 250 is its sole current roadmap; ALIGN-0--2 and I3-0--3 are completed
+bounded milestones. ADR-0043 accepts finite I3-3 at source/evidence cut
+`fe5dd972e2ddb3a513c785458a07702e4d4d99fa`. Execution is owner-paused with no
+active semantic milestone. I3-4 requires explicit owner resume; I3-5, I3-6
+and NEXT-0 remain inactive and dependency-gated.
 
 ALIGN-1 accepted the Canon three-axis map in
 `mirrorea_canon/architecture/06-project-product-layers.md`: semantic strata

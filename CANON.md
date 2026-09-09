@@ -30,8 +30,9 @@ the canon process: proposal, owner decision, ADR or file update where required,
   roadmap. PROPOSAL-038 / ADR-0035 and PROPOSAL-039 / ADR-0036 close ALIGN-1/2;
   PROPOSAL-040 / ADR-0037 close I3-0 and select QUIC reliable stream as the
   private provisional adapter. I3-1 is closed by ADR-0038 and the bounded
-  two-process runtime is closed by ADR-0039. The owner has resumed Plan 250 at
-  I3-3; I3-4, I3-5, I3-6, and NEXT-0 remain inactive and dependency-gated.
+  two-process runtime is closed by ADR-0039. ADR-0043 closes finite I3-3;
+  Plan 250 is owner-paused with no active semantic milestone. I3-4 requires
+  explicit owner resume; I3-5, I3-6 and NEXT-0 remain inactive and dependency-gated.
   TLS-over-TCP framed reliable stream remains the deferred comparison
   baseline, QUIC datagrams are excluded, and OPEN-032 is resolved only for this
   bounded program. Official I3 lifecycle entry is not implied.

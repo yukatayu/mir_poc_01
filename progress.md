@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-09-09 07:33 JST
+最終更新: 2026-09-09 14:10 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -13,13 +13,12 @@ creates no Canon, Gate, Phase, proof, lifecycle, or compatibility decision.
 Plan 247 and Plan 249 are closed execution records. PROPOSAL-037 / ADR-0034
 authorize the active bounded Mirrorea I3 Distributed Foundation program;
 Plan 250 is the sole current roadmap. ALIGN-0, ALIGN-1, ALIGN-2, I3-0 and I3-1
-are completed; I3-2 is accepted and the owner has resumed execution at I3-3. I3-4, I3-5,
-I3-6, and NEXT-0 remain inactive and dependency-gated.
+are completed; I3-2 and I3-3 are accepted, and execution is owner-paused with no
+active semantic milestone. I3-4, I3-5, I3-6, and NEXT-0 remain inactive and dependency-gated.
 
-Latest owner control: finish I3-3 through required validation, independent
-review, commit/push and parity, then pause. I3-4 requires explicit owner resume.
-Until I3-3 acceptance it remains the sole active milestone; afterward Plan 250
-is retained with no active semantic milestone, not blocked or program-closed.
+Latest owner control: I3-3 is accepted and owner-paused. Plan 250 remains the
+sole retained current roadmap; I3-4 requires explicit owner resume. This is not
+blocked, stale or program-closed.
 
 ## project axis
 
@@ -78,13 +77,18 @@ evidence, not an actual OS operational-error claim. B64+A65 is a finite bound,
 not independent B65 or global exactly-once. Supported live provider cut/export
 and public interfaces are not claimed.
 
-Finite provider component is committed/pushed at `94ad584577fadfd0b016ff798a22b84df536939f`,
-with clean HEAD/origin/main/live parity observed 2026-09-09 05:21 JST. Unrelated
+Row13 membership component is committed/pushed at `f6aae7ca277690ac558a08f124e414ae2d2d35ad`,
+with clean HEAD/origin/main/live parity observed 2026-09-09 07:46 JST. Unrelated
 relation bindings remain exact; terminal errors are fieldless opaque/slot-only,
-including wrong-kind ACK then valid publication. Row15/19 evidence reuse, row20
-cut/order and whole-I3-3 acceptance remain. Six of eleven milestones are accepted;
-I3-3 is the sole active milestone.
-Stop only after its full validation/review/commit/push/parity; I3-4 stays inactive.
+including wrong-kind ACK then valid publication. I3-3 is accepted at
+source/evidence cut `fe5dd972e2ddb3a513c785458a07702e4d4d99fa`. The finite profile
+covers all twenty failure/order families; workspace 1573, runtime doctests 4,
+format, Clippy and final review P0/P1/P2=0 are retained evidence. I3-3 accepted;
+owner pause leaves no active semantic milestone. Plan 250 remains the sole retained
+current roadmap. I3-4/I3-5/I3-6/NEXT-0 remain dependency-gated inactive; I3-4
+requires explicit owner resume. Official I3 lifecycle entry remains unaccepted.
+Browser, world semantics and public/production claims remain outside the cut. Six
+of eleven milestones are accepted; this is not a workload percentage.
 
 | Axis | Current status | Startability |
 |---|---|---|
@@ -97,9 +101,9 @@ Theory: T1
 Broad PHASE-I1: unaccepted (OPEN-026/027 + full carrier freeze)
 Official I2: entry accepted -> exit accepted (ADR-0032)
 ADR-0026 program: SYS-0--SYS-7 closed (ADR-0033)
-Active roadmap / goal: Plan 250 / I3-3 active after owner resume at accepted I3-2 cut
-Sequence: ALIGN-0 completed → ALIGN-1 completed → ALIGN-2 completed → I3-0 completed → I3-1 completed → I3-2 completed/accepted → I3-3 active → I3-4..6 → NEXT-0
-I3 bounded program current; I3-3 is the only active semantic milestone, later milestones are dependency-gated inactive; lifecycle entry not official; OPEN-032 resolved only for this program
+Active roadmap / goal: Plan 250 retained / I3-3 accepted and owner-paused
+Sequence: ALIGN-0 completed → ALIGN-1 completed → ALIGN-2 completed → I3-0 completed → I3-1 completed → I3-2 completed/accepted → I3-3 accepted/paused → I3-4..6 → NEXT-0
+I3 bounded program is owner-paused with no active semantic milestone; later milestones are dependency-gated inactive; lifecycle entry remains unaccepted; OPEN-032 resolved only for this program
 ```
 
 PROPOSAL-040 / ADR-0037 select Candidate B QUIC reliable stream
@@ -204,7 +208,7 @@ theorem, exactly-once, lock-free runtime, or public completion is claimed.
 | Class | Item | Current state |
 |---|---|---|
 | Maintenance | accepted M10/I2 regressions and docs consistency | **着手可能** |
-| Current package | I3-3 network failure/order refinement | active after explicit owner resume; consumes accepted I3-2 runtime |
+| Current package | I3-3 network failure/order refinement | accepted finite cut; owner-paused after consuming accepted I3-2 runtime |
 | Research discovery | private carrier mapping, network failures/order, C-distributed gates | fixed I3-1/I3-3/I3-4 consumers |
 | Delegated decision | OPEN-032 transport choice | resolved for this program by ADR-0037 |
 | Owner decision | public freeze or production | reserved |
@@ -220,7 +224,7 @@ theorem, exactly-once, lock-free runtime, or public completion is claimed.
 | 3 | source/checker/runtime | I2 accepted; I3-3 provider source/guard component verified | heavy | I3-3 direct consumers only |
 | 4 | executable samples | toy + conform reproducible | medium | regression |
 | 5 | theorem/model bridge | OBL-058 bounded; 059--063 runtime | heavy | class maintenance |
-| 6 | generated/distributed fabric | I3-2 actual owner runtime accepted; I3-3 failure/order active | heavy | I3-3 self-drive; later gates dependency-gated |
+| 6 | generated/distributed fabric | I3-2 actual owner runtime and I3-3 failure/order accepted | heavy | owner pause; I3-4 requires explicit resume |
 | 7 | toolchain/backend | provisional commands | heavy | no freeze |
 | 8 | applications | toy is library/sample | heavy | no Core promotion |
 
@@ -229,7 +233,7 @@ theorem, exactly-once, lock-free runtime, or public completion is claimed.
 | Feature/subsystem | Evidence status | Remaining gate | Startability |
 |---|---|---|---|
 | Mir core/runtime | finite source/check/project/dispatch assured | general/public widening | maintenance |
-| Mirrorea fabric | generated two-process owner runtime plus accepted private adapter; I3-3 active | I3-3 full failure/order matrix | **着手可能** |
+| Mirrorea fabric | generated two-process owner runtime plus accepted private adapter and I3-3 finite cut | I3-4 direct consumer after explicit resume | **後段依存** |
 | contracts/model | typed falsifiers + bounded/runtime classes | network/general proof | **後段依存** |
 | attach/detach/DAG | leave/fresh, local cut, bounded patch | durable/general evolution | **後段依存** |
 | `atomic_cut` / ordering | high-level edges, ST/OW1, bounded model | network/general memory | **後段依存** |
@@ -241,7 +245,7 @@ theorem, exactly-once, lock-free runtime, or public completion is claimed.
 
 ## current validation checkpoint
 
-I3-3 is active and unaccepted. Time/reply checkpoint 55f1fd7f is pushed;
+I3-3 is accepted and owner-paused. Time/reply checkpoint 55f1fd7f is pushed;
 its full probe 41/41 and actual replay 3/3 are retained evidence, not reruns
 of the provider component. Genuine G1-expiry→G2 rejection remains local
 binder evidence with inspected QUIC correspondence. Earlier detailed cuts,
@@ -267,15 +271,17 @@ Logs, earlier AST/M6/M7/time regressions and final docs/Git state are in Report
 partial local authorization, not an M5/Lean clean-runner registration or
 executable provider workflow. At that historical checkpoint, no host invocation, supervisor
 availability, row-18 acceptance, new Lean/general proof or I3 lifecycle is
-claimed. Remaining rows 13/15/19/20, ordering, and whole-I3-3 validation remain
-required. At2026-09-09 05:30 JST, measured free disk is approximately16GiB; the
-10 GiB guard has no current capacity hold. Older lower-disk readings remain
-historical only.
+claimed. Those then-remaining rows 13/15/19/20, ordering and whole-I3-3 validation
+are now closed by the final finite evidence packet. The10:10JST capacity abort
+is historical: owner-authorized removal of only `target/debug` recovered65G
+at11:57JST. Cargo completed with debug symbols omitted and assertions retained;
+source, .git and logs are preserved.
+The former cleanup-approval hold no longer applies.
 
 Owner clarification remains ordinary meaning -> generated distribution ->
 continually checked composition. Domain words remain library/sample vocabulary;
-finite ledger/cohort bounds are not general Mir requirements. Complete I3-3
-then stop with Plan 250 retained and I3-4 inactive.
+finite ledger/cohort bounds are not general Mir requirements. I3-3 is accepted;
+execution stops with Plan 250 retained and I3-4 inactive.
 
 ## recent log
 
@@ -432,3 +438,23 @@ then stop with Plan 250 retained and I3-4 inactive.
   gates pass with runtime413/process68 and probe provider20/ordinary43; full-parent
   M9 plus restricted-child G1→G2 and old-G1 pre-owner rejection are covered.
   Row20 cut/order and whole-I3-3 acceptance remain; no I3-4 activation.
+- 2026-09-09 09:07 JST: Row20 custody 4/4, nested 2/2 and strict-schema
+  unknown-nested repair 1/1 pass; the actual-cut probe remains RED on an opaque
+  error after the Awaiting-consumer repair. Positive, cancellation, late-old-reply,
+  custody-fault and whole-I3-3 gates remain open.
+- 2026-09-09 09:33 JST: Row20 normal actual cut GREEN 1/1 with clean shutdown
+  and no debug log; nested custody GREEN 5/5. Immediate-reply and owner-admission
+  LOCAL-reservation evidence refute the prior Awaiting assumption; late-first-reply,
+  cancellation and full I3-3 gates remain.
+- 2026-09-09 10:10 JST: Row20 normal, late-first-reply and header-read
+  cancellation paths GREEN with physical close; nested custody and LOCAL checks
+  GREEN 5/5. Stage B compilation was resource-aborted before tests, so capacity
+  recovery and one P2 causal-edge assertion remain before broader validation.
+- 2026-09-09 11:57:37 JST: Capacity recovered after the historical Stage B
+  resource abort; the causal-edge test resumes under the bounded low-memory
+  profile, with assertions retained and full gates still pending.
+- 2026-09-09 14:08 JST: I3-3 final source cut `fe5dd972` passes workspace1573,
+  runtime doctests4, format/Clippy and independent source review P0/P1/P2=0.
+  PROPOSAL-046 / ADR-0043 record finite acceptance and owner pause; Plan250 is
+  retained with no active milestone and I3-4 requires explicit resume. Final
+  reader13 and Canon/status closeout checks precede the docs integration push.

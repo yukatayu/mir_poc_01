@@ -17,13 +17,12 @@ I3 roadmap は `plan/250-mirrorea-i3-distributed-foundation-current-roadmap.md`�
 下の `plan/` 索引は時系列の LAB repository memory です。索引にある候補や過去の
 「次」は current queue を意味しません。Plan 247とPlan 249はclosed execution
 recordsである。PROPOSAL-037 / ADR-0034によりI3 bounded programがactive、Plan 250が
-sole current roadmap、ALIGN-0, ALIGN-1, ALIGN-2, I3-0, I3-1 and I3-2 completed; owner resumeによりI3-3のみactive。I3-4, I3-5, I3-6 and NEXT-0はdependency-gated inactive。older plansもhistorical
+sole retained current roadmap、ALIGN-0, ALIGN-1, ALIGN-2, I3-0, I3-1, I3-2 and I3-3 accepted; owner pause leaves no active semantic milestone。I3-4, I3-5, I3-6 and NEXT-0 remain dependency-gated inactive。older plansもhistorical
 memoryです。現在の停止線は
 `docs/project-status.md`、`progress.md`、`tasks.md` で確認します。
 
-最新のowner指示は、I3-3を検証・独立レビュー・commit/push・remote parityまで
-完了して一旦停止することです。I3-4には明示的なresumeなしで進みません。
-現在はI3-3 active、受理後はPlan 250を保持してactive milestoneなしとし、
+最新のowner指示は、受理済みI3-3 cut後にowner pauseすることです。I3-4には明示的なresumeなしで進みません。
+I3-3 accepted; owner pause leaves no active semantic milestone。Plan 250 remains retained、
 program完了やblockedとは区別します。
 
 ALIGN-2 の受理済み境界は
@@ -194,6 +193,13 @@ Mir、Mirrorea、PrismCascade、Typed-Effect Wiring Platform は関連します�
 
 ## Current program and historical LAB orientation
 
+I3-3 accepted; owner pause leaves no active semantic milestone. Plan 250 remains
+the sole retained current roadmap. I3-4/I3-5/I3-6/NEXT-0 remain dependency-gated
+inactive; I3-4 requires explicit owner resume. Official I3 lifecycle entry remains
+unaccepted. official I3 lifecycle entry remains unaccepted. ADR-0039 and ADR-0040 remain historical pause/resume records; ADR-0043
+records the current I3-3 acceptance and owner pause.
+I3-4/I3-5/I3-6/NEXT-0 remain dependency-gated inactive; I3-4 requires explicit owner resume.
+
 - official lifecycle は `T1`。M2 の semantic-assertion v3 acceptance により
   G0-D3、G0 exit、T1 entry は受理済みです。M0--M10 program は closed であり、
   frozen SCN-01..10 の有限 I1+ deterministic reference profile は M10 R5 で受理済みです。
@@ -243,7 +249,7 @@ Mir、Mirrorea、PrismCascade、Typed-Effect Wiring Platform は関連します�
   exitを適用した。PROPOSAL-036 / ADR-0033 / Canon plan 05 は transport-neutralな
   inactive I3 entry contractを記録し、SYS-7とprogramをclosedした。OPEN-026/027とfull
   carrier freezeは残り、broad PHASE-I1は未受理です。現在はPROPOSAL-037 / ADR-0034の
-  bounded programとPlan 250がcurrentでI3-3 active、program外だけがADR-0014のbounded L3 route、
+  bounded programとPlan 250がretained currentでI3-3 accepted/paused、program外だけがADR-0014のbounded L3 route、
   L2 promotionは引き続きfail-closedです。
 - reader-facing な統合図は `docs/mirrorea-project-overview.html`、短い現在地は
   `docs/project-status.md`、proof status は Canon ledger、runnable LAB evidence は
@@ -258,7 +264,7 @@ Mir、Mirrorea、PrismCascade、Typed-Effect Wiring Platform は関連します�
 | T2 | OBL-020/021/002 skeleton・G5 statement | not reopened; general T2 obligations unchanged, while SYS-2/3 add bounded OBL-058/059/060 only |
 | I1 | 単一 process reference implementation | finite deterministic reference profile accepted by M10 R5, but broad PHASE-I1 exit / public contract are not claimed |
 | I2 | process 内 multi-place | ADR-0032 accepted official entry then exit from SYS-3--SYS-6 evidence; ADR-0033 closed SYS-7/program |
-| I3 | 実 socket transport | bounded I3-2 evidence accepted; I3-3 active; I3-4..I3-6/NEXT-0 dependency-gated inactive; lifecycle entry not official |
+| I3 | 実 socket transport | bounded I3-2/I3-3 evidence accepted; owner pause; I3-4..I3-6/NEXT-0 dependency-gated inactive; lifecycle entry not official |
 | I4-I6 | 永続/patch、View、分散永続/federation | 後段 |
 
 M10 の finite acceptance は broad I1 exit や I2 entry の代用ではありません。ADR-0026 /
@@ -275,7 +281,7 @@ recordが揃ったためofficial I2 entry後exitを受理しました。broad PH
   SYS-6 implementation/evidence cut is `5429712d...`, Canon/status integration
   cut is `bcb0f767...`, and official I2 entry then exit is accepted.
 - in-progress: PROPOSAL-037 / ADR-0034 bounded I3 program; Plan 250 sole roadmap;
-  ALIGN-0--2, I3-0/I3-1 and I3-2 completed; owner resume activates I3-3 only. I3-4/I3-5/I3-6/NEXT-0 remain dependency-gated inactive.
+  ALIGN-0--2, I3-0/I3-1/I3-2/I3-3 accepted; owner pause leaves no active semantic milestone. I3-4/I3-5/I3-6/NEXT-0 remain dependency-gated inactive.
 - decisions taken: ALIGN-1 accepted the independent three-axis project/product
   map; PL-4 remains responsibility-only, PL-6 remains separate, and satellites
   remain outside the numbered product layers.
@@ -315,7 +321,7 @@ recordが揃ったためofficial I2 entry後exitを受理しました。broad PH
   Independent narrow review finds no remaining P0/P1 in the repaired slice;
   I2 regressions 5/5 + 8/8 and M10 conformance 67/67 pass. This is checkpoint
   evidence over `7580e3a`, not I3-3 acceptance or a refreshed model.
-- current I3-3 work: the pushed `30429d5` checkpoint implements ADR-0041/spec/16's
+- retained I3-3 component history: the pushed `30429d5` checkpoint implements ADR-0041/spec/16's
   source owner-admission budget, genuine expiry delivery, lost-result uncertainty
   and requester-local wait. The successor row-11 delta now rejects actual
   successful/expiry reply replay through verified QUIC session 2, preserving the
@@ -343,18 +349,26 @@ recordが揃ったためofficial I2 entry後exitを受理しました。broad PH
   source-derived WorldAuthority membership retirement with full-parent M9 and
   qualified restricted-child G1→G2 coverage; old-G1 CarrierAdmissionRejected is
   before owner use and LOCAL genuine M8 StaleMembership is separate. No observer
-  renewal, grant mint or session authority follows. The finite
-  provider component is committed/pushed at `94ad584577fadfd0b016ff798a22b84df536939f`
-  with clean HEAD/origin/main/live parity observed 2026-09-09 05:21 JST; I3-3
-  itself remains unaccepted.
+  renewal, grant mint or session authority follows. The row13 membership
+  component is now committed/pushed at `f6aae7ca277690ac558a08f124e414ae2d2d35ad`;
+  the finite provider component remains at `94ad584577fadfd0b016ff798a22b84df536939f`
+  with clean HEAD/origin/main/live parity observed 2026-09-09 07:46 JST; I3-3
+  itself was not yet accepted at that historical component checkpoint.
   Unrelated relation bindings remain exact; terminal errors are fieldless opaque/
-  slot-only, including wrong-kind ACK then valid publication. Row20 cut/order is
-  the next unimplemented consumer. Ordinary 512 KiB, semantic 64 KiB and image 8 MiB caps remain unchanged;
+  slot-only, including wrong-kind ACK then valid publication. I3-3 is accepted at
+  source/evidence cut `fe5dd972e2ddb3a513c785458a07702e4d4d99fa`; the finite
+  profile covers all twenty failure/order families, with workspace 1573, four
+  runtime doctests, format, Clippy and final review P0/P1/P2=0. I3-3 accepted;
+  owner pause leaves no active semantic milestone. Plan 250 remains the sole
+  retained current roadmap. I3-4/I3-5/I3-6/NEXT-0 remain dependency-gated
+  inactive; I3-4 requires explicit owner resume. Official I3 lifecycle entry
+  remains unaccepted. Browser, world semantics and public/production claims remain
+  outside this cut. Ordinary 512 KiB, semantic 64 KiB and image 8 MiB caps remain unchanged;
   detailed prior lifecycle and boundary evidence remains in Report2606.
-  Private M8 v2 remains provisional. No provider row-18 or whole-I3-3
-  acceptance follows.
-  All remaining I3-3 failure/order obligations stay required; I3-3 itself
-  is not accepted, and I3-4 remains inactive.
+  Private M8 v2 remains provisional; the accepted provider row-18 and whole-I3-3
+  profile are finite runtime evidence, not a public or general provider contract.
+  I3-3 is accepted at the finite source/evidence cut; I3-4 remains inactive
+  pending explicit owner resume.
 - decisions taken: the working interpretation remains ordinary meaning ->
   generated distribution -> continually checked composition. World/Avatar remain
   domain-library vocabulary, not Mir Core primitives; ledger64/coordinator/
@@ -375,7 +389,7 @@ recordが揃ったためofficial I2 entry後exitを受理しました。broad PH
   SYS-5/SYS-6 CLI/JSON/grammar are internal/provisional, the four-locus toy is
   not whole-workflow OW1, and the evidence is not a general scheduler,
   memory-model, relation-DAG, public transport, or lifecycle theorem.
-- verification status: Stage2b runtime is 362/362, including provider filtering
+- retained component verification (final source gate: workspace1573 and doctests4): Stage2b runtime is 362/362, including provider filtering
   26/26 (not additive); process integration is 63/63, M10 is 67/67, I2 local/CLI
   is 5/5 and 8/8, and public guards are 5/5. Three-crate all-target Clippy is
   warnings-clean, workspace format passes, and workspace all-target check
@@ -394,10 +408,16 @@ recordが揃ったためofficial I2 entry後exitを受理しました。broad PH
   fault traces. The lost-result case discards a received, decoded frame before
   semantic admission; it is not wire packet loss. Final row13 follow-up runtime413,
   all probe targets, process68, M10/I2 and provider guards pass, as do scoped
-  Clippy/format; review has no remaining findings. The finite provider component
-  is committed/pushed at `94ad584577fadfd0b016ff798a22b84df536939f` with parity
-  observed 2026-09-09 05:21 JST. Row13 membership successor, row15/19 evidence
-  reuse, row20 cut/order and whole-I3-3 acceptance remain tracked in Report2606
+  Clippy/format; review has no remaining findings. The row13 membership component
+  is now committed/pushed at `f6aae7ca277690ac558a08f124e414ae2d2d35ad`; the
+  finite provider component remains at `94ad584577fadfd0b016ff798a22b84df536939f` with clean
+  parity observed 2026-09-09 07:46 JST. I3-3 is accepted at source/evidence cut
+  `fe5dd972e2ddb3a513c785458a07702e4d4d99fa`; final review P0/P1/P2=0 and exact
+  finite evidence remain in Report2606. I3-3 accepted; owner pause leaves no
+  active semantic milestone. Plan 250 remains the sole retained current roadmap.
+  I3-4/I3-5/I3-6/NEXT-0 remain dependency-gated inactive; I3-4 requires explicit
+  owner resume. Official I3 lifecycle entry remains unaccepted. Browser, world
+  semantics and public/production claims remain outside the cut. Accepted row15/19 evidence reuse and whole-I3-3 acceptance are recorded in Report2606
   and Plan250. Historical micro-checkpoints stay in Report2606; no
   official lifecycle or public workflow claim follows.
 

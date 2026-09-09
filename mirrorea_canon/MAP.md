@@ -15,7 +15,7 @@ open_items: []
 NORTH-STAR (軸)
    │
    ▼
-adr/ (決定 ADR-0001..0042) ◄──── GLOSSARY (概念 CON-###)
+adr/ (決定 ADR-0001..0043) ◄──── GLOSSARY (概念 CON-###)
    │
    ▼
 DESIGN-CONSTITUTION (v0/I1+ の横断判断)
@@ -149,7 +149,7 @@ canaryでcriteria 1--7がtieし、criterion 8 implementation/library maturityと
 cross-platform maintainabilityにauditable/tested winnerがないことを確認した。最初の
 material differenceであるcriterion 10 future browser relevanceによりQUIC reliable
 streamをprivate selected adapterとした。TLS-over-TCP framed reliable streamはrejected/
-deferred replacement baseline、QUIC datagramはexcludedのままである。PROPOSAL-041 / ADR-0038でI3-1、PROPOSAL-042 / ADR-0039でI3-2をcompletedとし、PROPOSAL-043 / ADR-0040でowner instructionによるresumeを記録した。I3-3のみactive、I3-4以降は固定順序に従いinactiveである。OPEN-032はこのbounded programだけresolvedした。
+deferred replacement baseline、QUIC datagramはexcludedのままである。PROPOSAL-041 / ADR-0038でI3-1、PROPOSAL-042 / ADR-0039でI3-2をcompletedとし、ADR-0040のresume後、PROPOSAL-046 / ADR-0043でI3-3の有限failure/ordering profileを受理した。Plan 250は保持したowner pauseでactive semantic milestoneなし、I3-4はexplicit resumeまでinactiveである。OPEN-032はこのbounded programだけresolvedした。
 これはpublic wire/API freeze又はofficial I3 lifecycle entryではなく、theory T1とbroad
 I1 residualは不変である。
 

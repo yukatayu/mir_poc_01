@@ -66,7 +66,8 @@ source hierarchy; do not treat an external chat as normative state.
      plan/05 for the active Mirrorea I3 Distributed Foundation bounded program.
      Plan 250 is the sole current roadmap; PROPOSAL-038 / ADR-0035 close
      ALIGN-1, ALIGN-2 and I3-0 are completed, I3-1 is closed by ADR-0038, and
-     I3-2 is closed by ADR-0039. The owner has resumed Plan 250 at I3-3; I3-4,
+     I3-2 is closed by ADR-0039 and I3-3 by ADR-0043. Plan 250 is owner-paused
+     with no active semantic milestone; I3-4 requires explicit owner resume.
      I3-5, I3-6, and NEXT-0 remain inactive and dependency-gated. Program
      activation is not official I3 lifecycle entry; ADR-0037 selects private
      QUIC reliable stream, retains TLS/TCP as deferred baseline, and excludes
@@ -195,8 +196,9 @@ Every report should contain, in this order:
   roadmap remains a closed record/regression baseline until owner direction
   designates a successor. Older `plan/` files remain repository memory, not an
   active queue. Plan 247 and Plan 249 are closed baselines. Plan 250 is the
-  current roadmap; I3-2 is accepted and Plan 250 resumes at I3-3, with later
-  milestones dependency-gated under the owner resume.
+  current roadmap; I3-3 is accepted under ADR-0043 and execution is owner-paused
+  with no active semantic milestone. I3-4 requires explicit owner resume;
+  later milestones remain dependency-gated and inactive.
 - Do not read `docs/reports/` in bulk. Read only reports directly referenced by
   current Canon, roadmap, or status.
 - Open a new `WRK-####` only when it has a named direct consumer, reduces the

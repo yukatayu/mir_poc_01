@@ -1,6 +1,6 @@
 {
  "canon_version": "0.1.0",
- "files": 216,
+ "files": 218,
  "entries": [
   {
    "id": "root/changelog",
@@ -12,7 +12,7 @@
    "summary": "canon 自体の版履歴と改定手続きの要約。",
    "open_items": [],
    "path": "CHANGELOG.md",
-   "bytes": 33635
+   "bytes": 34266
   },
   {
    "id": "root/design-constitution",
@@ -52,7 +52,7 @@
    "summary": "知識マップ 1 枚。全域の依存図、3 種の読み筋、ID 体系。",
    "open_items": [],
    "path": "MAP.md",
-   "bytes": 31300
+   "bytes": 31374
   },
   {
    "id": "root/north-star",
@@ -74,7 +74,7 @@
    "summary": "canon の入口。正本宣言、LAB(既存 repo)との関係、読み順、版。",
    "open_items": [],
    "path": "README.md",
-   "bytes": 6243
+   "bytes": 6344
   },
   {
    "id": "adr/ADR-0001",
@@ -706,6 +706,24 @@
    "bytes": 3599
   },
   {
+   "id": "adr/ADR-0043",
+   "status": "L1-fixed",
+   "maturity": "reviewed",
+   "depends_on": [
+    "adr/ADR-0034",
+    "adr/ADR-0039",
+    "adr/ADR-0040",
+    "adr/ADR-0041",
+    "adr/ADR-0042",
+    "meta/proposal-046",
+    "plan/05-i3-entry-contract"
+   ],
+   "summary": "I3-3の有限failure・retry・ordering profileを受理し、Plan 250を保持したままowner pauseする。",
+   "open_items": [],
+   "path": "adr/ADR-0043.md",
+   "bytes": 3345
+  },
+  {
    "id": "adr/readme",
    "status": "L1-fixed",
    "maturity": "draft",
@@ -715,7 +733,7 @@
    "summary": "決定記録の一覧と読み方。LAB の決定台帳(specs/12)との関係。",
    "open_items": [],
    "path": "adr/README.md",
-   "bytes": 5651
+   "bytes": 5818
   },
   {
    "id": "arch/01-strata",
@@ -824,12 +842,13 @@
     "adr/ADR-0034",
     "adr/ADR-0035",
     "adr/ADR-0040",
-    "plan/01-phases"
+    "plan/01-phases",
+    "adr/ADR-0043"
    ],
    "summary": "semantic strata・project/product responsibility layers・lifecycle phasesを分離する三軸mapとPL-0--PL-6の責任境界。",
    "open_items": [],
    "path": "architecture/06-project-product-layers.md",
-   "bytes": 9569
+   "bytes": 9656
   },
   {
    "id": "arch/07-browser-host-trust-boundaries",
@@ -989,12 +1008,13 @@
     "meta/proposal-043",
     "arch/06-project-product-layers",
     "arch/07-browser-host-trust-boundaries",
-    "plan/02-operating-model"
+    "plan/02-operating-model",
+    "adr/ADR-0043"
    ],
    "summary": "agent の読込、ADR-0040で再開したADR-0034 program、三軸/trust/private adapter/two-process acceptance、program外L3 research、review境界。",
    "open_items": [],
    "path": "meta/agent-instructions.md",
-   "bytes": 5093
+   "bytes": 5048
   },
   {
    "id": "meta/proposal-001",
@@ -1763,6 +1783,27 @@
    "bytes": 3841
   },
   {
+   "id": "meta/proposal-046",
+   "status": "L1-fixed",
+   "maturity": "reviewed",
+   "depends_on": [
+    "meta/proposal-037",
+    "adr/ADR-0034",
+    "adr/ADR-0039",
+    "adr/ADR-0040",
+    "adr/ADR-0041",
+    "adr/ADR-0042",
+    "plan/05-i3-entry-contract",
+    "arch/10-i3-multi-process-runtime",
+    "spec/16-i3-owner-admission-budget",
+    "spec/17-i3-read-only-provider-effect"
+   ],
+   "summary": "I3-3の有限network failure・ordering evidenceを受理し、I3-4をinactiveに保ってowner pauseする。",
+   "open_items": [],
+   "path": "meta/proposals/PROPOSAL-046-mirrorea-i3-3-failure-ordering.md",
+   "bytes": 7119
+  },
+  {
    "id": "meta/source-hierarchy",
    "status": "L0-frozen",
    "maturity": "draft",
@@ -1780,12 +1821,13 @@
     "adr/ADR-0039",
     "adr/ADR-0040",
     "meta/proposal-042",
-    "meta/proposal-043"
+    "meta/proposal-043",
+    "adr/ADR-0043"
    ],
    "summary": "canon > LAB、ADR-0040で再開したADR-0034 program、accepted three-axis/trust/private adapter/two-process runtime、program外ADR-0014 routeの境界。",
    "open_items": [],
    "path": "meta/source-hierarchy.md",
-   "bytes": 4378
+   "bytes": 4359
   },
   {
    "id": "meta/style-guide",
@@ -1799,12 +1841,13 @@
     "adr/ADR-0033",
     "adr/ADR-0034",
     "adr/ADR-0039",
-    "adr/ADR-0040"
+    "adr/ADR-0040",
+    "adr/ADR-0043"
    ],
    "summary": "執筆規約。front matter schema、ID、claim、bounded program pause/resume と通常 route の改定手続き。",
    "open_items": [],
    "path": "meta/style-guide.md",
-   "bytes": 4289
+   "bytes": 4419
   },
   {
    "id": "plan/00-gates",
@@ -1850,12 +1893,13 @@
     "adr/ADR-0040",
     "meta/proposal-042",
     "meta/proposal-043",
-    "plan/04-t0-g0-semantic-assertion-profile"
+    "plan/04-t0-g0-semantic-assertion-profile",
+    "adr/ADR-0043"
    ],
-   "summary": "lifecycle T/IとS/PLを分離し、T1・I2 exit・I3-0/1/2 close・I3-3 active executionを記録する。",
+   "summary": "T/IとS/PLを分離し、T1・I2 exit・I3-3有限受理後のowner pauseを記録する。official I3は未entry。",
    "open_items": [],
    "path": "plan/01-phases.md",
-   "bytes": 15688
+   "bytes": 14997
   },
   {
    "id": "plan/02-operating-model",
@@ -1875,12 +1919,13 @@
     "adr/ADR-0039",
     "adr/ADR-0040",
     "meta/proposal-042",
-    "meta/proposal-043"
+    "meta/proposal-043",
+    "adr/ADR-0043"
    ],
    "summary": "ADR-0040で再開したADR-0034 program、三軸/trust/private adapter/two-process acceptance、program外L3 research、goal/frontier/review規律。",
    "open_items": [],
    "path": "plan/02-operating-model.md",
-   "bytes": 9682
+   "bytes": 9756
   },
   {
    "id": "plan/03-risks",
@@ -1939,12 +1984,13 @@
     "scenarios/SCN-03",
     "scenarios/SCN-06",
     "adr/ADR-0041",
-    "spec/16-i3-owner-admission-budget"
+    "spec/16-i3-owner-admission-budget",
+    "adr/ADR-0043"
    ],
-   "summary": "ADR-0034 programがconsumeするI3 goal、accepted transport/private mapping/two-process runtime、I3-3 failure/order refinementとC-distributed gates。",
+   "summary": "I3 entry contractとaccepted finite I3-3 failure/order boundary。Plan 250はowner pause、C-distributed以降はinactive。",
    "open_items": [],
    "path": "plan/05-i3-entry-contract.md",
-   "bytes": 14679
+   "bytes": 14653
   },
   {
    "id": "plan/readme",
@@ -1965,12 +2011,13 @@
     "adr/ADR-0040",
     "meta/proposal-042",
     "meta/proposal-043",
-    "plan/02-operating-model"
+    "plan/02-operating-model",
+    "adr/ADR-0043"
    ],
    "summary": "Gate/Phase、ADR-0040で再開したADR-0034 program、三軸/trust/private adapter/two-process runtime acceptance、program外ADR-0014 routeの計画読解。",
    "open_items": [],
    "path": "plan/README.md",
-   "bytes": 2123
+   "bytes": 1701
   },
   {
    "id": "scenarios/readme",
@@ -2449,12 +2496,13 @@
     "arch/10-i3-multi-process-runtime",
     "adr/ADR-0034",
     "adr/ADR-0042",
-    "meta/proposal-045"
+    "meta/proposal-045",
+    "adr/ADR-0043"
    ],
    "summary": "I3-3 provider failureへsource-derived read-only effectと有限T0/T4境界を選択する。実装受理ではない。",
    "open_items": [],
    "path": "spec/17-i3-read-only-provider-effect.md",
-   "bytes": 14951
+   "bytes": 15074
   },
   {
    "id": "spec/readme",
