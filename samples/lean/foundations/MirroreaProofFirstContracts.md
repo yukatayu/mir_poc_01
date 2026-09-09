@@ -416,3 +416,43 @@ A hash chain alone does not establish that its supplied head is current. No
 current authority is derived from a historical successful effect. Reproduction
 script, exact output and copied Python-source hashes are retained in
 W2_EXTENSION_CHECK.recovery_anchor_controls; work pointer RECOVERY_ANCHOR_CONTROLS.
+
+The later UNREVIEWED finite-image boundary makes resource restoration explicit.
+ResourceBoundary.PrivateImage stores both issuance heads and the complete finite
+list of live/absent slots, preserving released holes without renumbering. A
+separate finite entry/pair checker is equivalent to its structural judgment and,
+with exact list length, to decoded WF. Every WF state round-trips; every accepted
+restore is WF; caller-supplied handle/block ceilings additionally bound accepted
+states without rejecting encodable states that meet those bounds. Truncation,
+empty geometry, out-of-head blocks, overlapping ownership and capacity excess
+are rejected. An old valid image and a reset empty image remain accepted: local
+structural validity cannot supply freshness or prevent global rollback.
+
+Reservation.PrivateImage combines that actual resource image with the reserved
+request/effect lists. It checks resource structure, independent resource limits,
+unique lists, effect-to-reservation inclusion and history length ceilings. General
+soundness and relative completeness establish the finite structural boundary.
+Canonical encode/restore preserves the whole reference Store, and resumption runs
+the existing actual guarded schedule: arbitrary subsequent finite attempts retain
+an old reserved key and reject its repetition. A different valid request succeeds.
+This is not re-execution of external effects to reconstruct a saved state.
+
+Two decisive accepted counterexamples limit this result. Erasing BOTH histories
+is internally consistent and permits a second allocation. A fabricated matching
+reservation/effect pair over an empty resource state is also structurally valid.
+Thus HistoryWF is consistency, not truth of past effects or authenticity of ownership.
+The image contains neither the current World nor grant callbacks; subsequent calls
+still need current inputs. Whole-world support/auth/catalog restoration, trusted
+heads, bytes/codec/parser allocation budgets, physical crash persistence, concurrent
+loads, OS memory and private-image access policy are separate unmet obligations.
+No image schema, wire format, implementation contract or Q18 policy is adopted.
+
+Candidate A is the explicit finite slot image with heads and whole reference
+history. The smallest alternative is a sparse indexed image retaining the same
+heads/histories and checking unique indices; it may reduce hole storage but needs
+its own roundtrip/checker proof. Dropping holes and renumbering, omitting histories,
+or treating an image hash as freshness are unsafe controls, not viable alternatives.
+New general image theorems use propext and Quot.sound only. Five resource-image
+mutations and four composed-image mutations each break a general proof and a
+concrete control. Fresh fifteen-module actual-source mirror passes trust=0.
+These are unreviewed LAB evidence, not production, actual-network or alpha readiness.

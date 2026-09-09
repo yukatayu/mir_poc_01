@@ -1264,3 +1264,68 @@ Corrected documentation validation772e1a/7d32b9 PASS (1762 reports). No source
 changed after fresh Lean cut; final whitespace and own-file commit/push follow.
 New finite-image research remains external scratch, outside this accepted kernel
 cut: resource state roundtrip4a6e2c only, validator and counterexamples unfinished.
+
+The later UNREVIEWED finite-image boundary makes resource restoration explicit.
+ResourceBoundary.PrivateImage stores both issuance heads and the complete finite
+list of live/absent slots, preserving released holes without renumbering. A
+separate finite entry/pair checker is equivalent to its structural judgment and,
+with exact list length, to decoded WF. Every WF state round-trips; every accepted
+restore is WF; caller-supplied handle/block ceilings additionally bound accepted
+states without rejecting encodable states that meet those bounds. Truncation,
+empty geometry, out-of-head blocks, overlapping ownership and capacity excess
+are rejected. An old valid image and a reset empty image remain accepted: local
+structural validity cannot supply freshness or prevent global rollback.
+
+Reservation.PrivateImage combines that actual resource image with the reserved
+request/effect lists. It checks resource structure, independent resource limits,
+unique lists, effect-to-reservation inclusion and history length ceilings. General
+soundness and relative completeness establish the finite structural boundary.
+Canonical encode/restore preserves the whole reference Store, and resumption runs
+the existing actual guarded schedule: arbitrary subsequent finite attempts retain
+an old reserved key and reject its repetition. A different valid request succeeds.
+This is not re-execution of external effects to reconstruct a saved state.
+
+Two decisive accepted counterexamples limit this result. Erasing BOTH histories
+is internally consistent and permits a second allocation. A fabricated matching
+reservation/effect pair over an empty resource state is also structurally valid.
+Thus HistoryWF is consistency, not truth of past effects or authenticity of ownership.
+The image contains neither the current World nor grant callbacks; subsequent calls
+still need current inputs. Whole-world support/auth/catalog restoration, trusted
+heads, bytes/codec/parser allocation budgets, physical crash persistence, concurrent
+loads, OS memory and private-image access policy are separate unmet obligations.
+No image schema, wire format, implementation contract or Q18 policy is adopted.
+
+Candidate A is the explicit finite slot image with heads and whole reference
+history. The smallest alternative is a sparse indexed image retaining the same
+heads/histories and checking unique indices; it may reduce hole storage but needs
+its own roundtrip/checker proof. Dropping holes and renumbering, omitting histories,
+or treating an image hash as freshness are unsafe controls, not viable alternatives.
+New general image theorems use propext and Quot.sound only. Five resource-image
+mutations and four composed-image mutations each break a general proof and a
+concrete control. Fresh fifteen-module actual-source mirror passes trust=0.
+These are unreviewed LAB evidence, not production, actual-network or alpha readiness.
+
+Start cut b05fff72a5a020b7f805537882d090df55bef419, pushed main/remote parity854cba;
+only own RESUME metadata dirty. Main alone. Resource scratch finalc83e16/46c5a3;
+composed scratch0b4245/a2c5e9; final mirror34578f/abf336. Earlier failed drafts
+(FIRST_CHECK/CHECKER_DRAFT/COMPLETENESS_DRAFT) are retained as errors, not accepted
+proofs. No sorry/admit tactic or Mir-specific axiom added. W2_EXTENSION_CHECK keeps
+exact final sources, commands, stdout and mutation failures. Source state before
+heavy work: d30c4c58GiB free,82172112GiB available RAM; small external work-root
+copies only, no cleanup/host share or large new build.
+plan/, progress.md, samples_progress.md, CURRENT_GOAL and read ledger updated.
+Documentation.md, docs/project-status.md and tasks.md 更新不要: same active W2
+consumer/readiness/critical path; no accepted milestone or roadmap change.
+Oracle5ceb8f both running, no answer/error; neither frozen packet includes these
+extensions. Self-review only, no signed or independent acceptance. Production,
+physical network, real durable recovery, source-refinement and privacy-release
+validation remain open; existing Rust regression is not repeated for a proof-only
+delta. Focused diff/hash/axiom/docs verification and own-file commit/push follow.
+No new report, subagent or final task-complete notification.
+
+Final source self-review a290fd, exact fifteen-source hash/axiom/nine-mutant audit
+459a5d, whitespace98dd7f and documentation10707/ae4a30 PASS (1762 reports).
+No proof source changed since the checked final cut. Read metadata/continuation
+notes only afterward; commit/push follows. Main read-only Oracle bound-tab harvest
+69361 is pending, --no-recover prevents Chrome relaunch; it is not a new query,
+accepted answer, deadline or cancellation of either existing review job.

@@ -1093,3 +1093,132 @@ end Controls
 #print axioms distinct_scopes_separate
 #print axioms low_current_independent
 end MirroreaProofFirst.ModuleContractBoundary.CurrentAllocation.Reservation.Observation
+
+-- Unreviewed structural resource/history image only; no current World/grant,
+-- authenticated head, actual file codec or physical persistence implementation.
+namespace MirroreaProofFirst.ModuleContractBoundary.CurrentAllocation.Reservation.PrivateImage
+open ResourceBoundary
+abbrev RI := ResourceBoundary.PrivateImage.Image
+structure Image where
+ resources : RI
+ reserved : List CurrentUse.UseId
+ effects : List CurrentUse.UseId
+ deriving DecidableEq
+
+def encode (s : Store) : Image := ⟨ResourceBoundary.PrivateImage.encode s.resources,s.reserved,s.effects⟩
+def decode (image : Image) : Store := ⟨ResourceBoundary.PrivateImage.decode image.resources,image.reserved,image.effects⟩
+
+def historyCheck (image : Image) : Bool :=
+ decide image.reserved.Nodup && decide image.effects.Nodup &&
+ image.effects.all (fun key => decide (key ∈ image.reserved))
+
+theorem history_exact (image : Image) : historyCheck image = true ↔ HistoryWF (decode image) := by
+ simp [historyCheck,HistoryWF,decode,List.all_eq_true,and_assoc]
+
+def check (limits : BoundedIdentifiers.Limits) (historyLimit : Nat) (image : Image) : Bool :=
+ ResourceBoundary.PrivateImage.check image.resources &&
+ ResourceBoundary.PrivateImage.fits limits image.resources && historyCheck image &&
+ decide (image.reserved.length ≤ historyLimit) && decide (image.effects.length ≤ historyLimit)
+
+def Valid (limits : BoundedIdentifiers.Limits) (historyLimit : Nat) (image : Image) : Prop :=
+ ResourceBoundary.PrivateImage.Valid image.resources ∧
+ BoundedIdentifiers.Within limits (decode image).resources ∧ HistoryWF (decode image) ∧
+ image.reserved.length ≤ historyLimit ∧ image.effects.length ≤ historyLimit
+
+theorem check_exact (limits : BoundedIdentifiers.Limits) (historyLimit : Nat) (image : Image) :
+ check limits historyLimit image = true ↔ Valid limits historyLimit image := by
+ simp [check,Valid,ResourceBoundary.PrivateImage.check_exact,
+  ResourceBoundary.PrivateImage.fits_exact,history_exact,decode,and_assoc]
+
+def restore (limits : BoundedIdentifiers.Limits) (historyLimit : Nat) (image : Image) : Option Store :=
+ if check limits historyLimit image then some (decode image) else none
+
+theorem roundtrip (s : Store) (wf : WF s.resources) : decode (encode s) = s := by
+ cases s with
+ | mk resources reserved effects =>
+  simp [decode,encode,ResourceBoundary.PrivateImage.roundtrip resources wf]
+
+theorem encoded_valid (limits : BoundedIdentifiers.Limits) (historyLimit : Nat) (s : Store)
+ (wf : WF s.resources) (within : BoundedIdentifiers.Within limits s.resources)
+ (history : HistoryWF s) (reserved : s.reserved.length ≤ historyLimit)
+ (effects : s.effects.length ≤ historyLimit) : Valid limits historyLimit (encode s) := by
+ have resourceValid := (ResourceBoundary.PrivateImage.check_exact (ResourceBoundary.PrivateImage.encode s.resources)).mp
+  ((ResourceBoundary.PrivateImage.check_wf_exact (ResourceBoundary.PrivateImage.encode s.resources)).mpr
+   ⟨by simp [ResourceBoundary.PrivateImage.encode],by rw [ResourceBoundary.PrivateImage.roundtrip s.resources wf]; exact wf⟩)
+ exact ⟨resourceValid,by simpa [roundtrip s wf] using within,
+  by simpa [roundtrip s wf] using history,reserved,effects⟩
+
+theorem restores_encoded (limits : BoundedIdentifiers.Limits) (historyLimit : Nat) (s : Store)
+ (wf : WF s.resources) (within : BoundedIdentifiers.Within limits s.resources)
+ (history : HistoryWF s) (reserved : s.reserved.length ≤ historyLimit)
+ (effects : s.effects.length ≤ historyLimit) : restore limits historyLimit (encode s) = some s := by
+ have good := (check_exact _ _ _).mpr (encoded_valid limits historyLimit s wf within history reserved effects)
+ simp [restore,good,roundtrip s wf]
+
+-- Structural validity preserves bookkeeping consistency, not historical truth,
+-- authenticity, current authority, or atomic persistence of this whole image.
+theorem restore_sound (limits : BoundedIdentifiers.Limits) (historyLimit : Nat)
+ (image : Image) (s : Store) (accepted : restore limits historyLimit image = some s) :
+ WF s.resources ∧ BoundedIdentifiers.Within limits s.resources ∧ HistoryWF s ∧
+ s.reserved.length ≤ historyLimit ∧ s.effects.length ≤ historyLimit := by
+ unfold restore at accepted
+ split at accepted
+ · rename_i good
+   cases accepted
+   obtain ⟨res,within,history,reserved,effects⟩ := (check_exact _ _ _).mp good
+   exact ⟨ResourceBoundary.PrivateImage.decoded_wf image.resources res,within,history,reserved,effects⟩
+ · contradiction
+
+-- Resume the actual guarded reference transitions; no replay of external effects.
+def resume (limits : BoundedIdentifiers.Limits) (historyLimit : Nat) (image : Image)
+ (later : List (Input n)) : Option Store := (restore limits historyLimit image).map (fun s => schedule s later)
+
+theorem resume_encoded (limits : BoundedIdentifiers.Limits) (historyLimit : Nat) (s : Store)
+ (wf : WF s.resources) (within : BoundedIdentifiers.Within limits s.resources)
+ (history : HistoryWF s) (reserved : s.reserved.length ≤ historyLimit)
+ (effects : s.effects.length ≤ historyLimit) (later : List (Input n)) :
+ resume limits historyLimit (encode s) later = some (schedule s later) := by
+ simp [resume,restores_encoded limits historyLimit s wf within history reserved effects]
+
+theorem resumed_reserved_rejected (limits : BoundedIdentifiers.Limits) (historyLimit : Nat) (s : Store)
+ (wf : WF s.resources) (within : BoundedIdentifiers.Within limits s.resources)
+ (history : HistoryWF s) (reserved : s.reserved.length ≤ historyLimit)
+ (effects : s.effects.length ≤ historyLimit) (later : List (Input n))
+ (again : Invocation n) (present : again.key ∈ s.reserved) (before lost : Bool) :
+ (resume limits historyLimit (encode s) later).map (fun resumed => attempt again resumed before lost) =
+ some ⟨schedule s later,.rejected⟩ := by
+ rw [resume_encoded limits historyLimit s wf within history reserved effects later]
+ have retained := schedule_retains s later again.key present
+ simp [attempt,retained]
+
+namespace Controls
+open Once.Controls Reservation.Controls
+example : check ⟨3,3⟩ 3 (encode lost.store) = true := by decide
+example : check ⟨3,3⟩ 3 (encode stopped.store) = true := by decide
+example : (restore ⟨3,3⟩ 3 (encode lost.store)).map
+ (fun s => (attempt invocation s false false).outcome) = some .rejected := by decide
+example : (restore ⟨3,3⟩ 3 (encode lost.store)).map
+ (fun s => (attempt other s false false).store.resources.nextId) = some 2 := by decide
+example : check ⟨3,3⟩ 0 (encode lost.store) = false := by decide
+example : check ⟨3,3⟩ 3 ⟨⟨2,1,[some ⟨0,0,12,1⟩,some ⟨0,5,9,2⟩]⟩,[],[]⟩ = false := by decide
+example : check ⟨3,3⟩ 3 {encode lost.store with reserved := []} = false := by decide
+example : check ⟨3,3⟩ 3 {encode lost.store with reserved := [invocation.key,invocation.key]} = false := by decide
+example : check ⟨3,3⟩ 3 {encode lost.store with effects := [invocation.key,invocation.key]} = false := by decide
+-- Both histories can be erased consistently: authenticity is still indispensable.
+def erasedHistory : Image := {encode lost.store with reserved := [],effects := []}
+example : check ⟨3,3⟩ 3 erasedHistory = true := by decide
+example : (attempt invocation (decode erasedHistory) false false).store.resources.nextId = 2 := by decide
+-- A structurally consistent history can invent an effect absent from resources.
+def invented : Image := ⟨ResourceBoundary.PrivateImage.encode empty,[invocation.key],[invocation.key]⟩
+example : check ⟨3,3⟩ 3 invented = true := by decide
+example : (decode invented).resources.nextId = 0 ∧ (decode invented).effects = [invocation.key] := by decide
+end Controls
+#print axioms history_exact
+#print axioms check_exact
+#print axioms roundtrip
+#print axioms encoded_valid
+#print axioms restores_encoded
+#print axioms restore_sound
+#print axioms resume_encoded
+#print axioms resumed_reserved_rejected
+end MirroreaProofFirst.ModuleContractBoundary.CurrentAllocation.Reservation.PrivateImage

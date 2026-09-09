@@ -649,3 +649,195 @@ end Controls
 #print axioms schedule_old_absent
 #print axioms consumed_never_current
 end MirroreaProofFirst.ResourceBoundary.BoundedIdentifiers
+
+-- Unreviewed finite resource image. Authenticated freshness, whole-state histories,
+-- byte decoding/allocation budgets and physical crash persistence remain open.
+namespace MirroreaProofFirst.ResourceBoundary.PrivateImage
+-- LAB finite mathematical image, not a wire format or trusted recovery head.
+structure Image where
+ nextId : Nat
+ nextBlock : Nat
+ entries : List (Option Region)
+ deriving DecidableEq
+
+def encode (s : State) : Image :=
+ ⟨s.nextId,s.nextBlock,List.ofFn (fun i : Fin s.nextId => s.live i.val)⟩
+def decode (image : Image) : State :=
+ ⟨image.nextId,image.nextBlock,fun i => (image.entries[i]?).join⟩
+
+theorem outside_none (s : State) (wf : WF s) (i : Nat) (outside : s.nextId ≤ i) :
+ s.live i = none := by
+ cases e : s.live i with
+ | none => rfl
+ | some r => have h := (wf.bounded i r e).1; omega
+
+theorem roundtrip (s : State) (wf : WF s) : decode (encode s) = s := by
+ cases s with
+ | mk ni nb live =>
+  apply congrArg (State.mk ni nb)
+  funext i
+  by_cases h : i < ni
+  · simp [encode,h]
+  · have gone : live i = none := outside_none ⟨ni,nb,live⟩ wf i (by change ni ≤ i; omega)
+    simp [encode,h,gone]
+def EntryOK (image : Image) (i : Fin image.entries.length) : Prop :=
+ match image.entries[i.val] with
+ | none => True
+ | some r => r.block < image.nextBlock ∧ Nonempty r
+
+def PairOK (image : Image) (i j : Fin image.entries.length) : Prop :=
+ match image.entries[i.val], image.entries[j.val] with
+ | some a, some b => i = j ∨ Sep a b
+ | _,_ => True
+
+instance (image : Image) (i : Fin image.entries.length) : Decidable (EntryOK image i) := by
+ unfold EntryOK Nonempty; split <;> infer_instance
+instance (image : Image) (i j : Fin image.entries.length) : Decidable (PairOK image i j) := by
+ unfold PairOK Sep; split <;> infer_instance
+
+-- Independent finite structural judgment; no claim that the image is current.
+def Valid (image : Image) : Prop :=
+ image.entries.length = image.nextId ∧
+ (∀ i, EntryOK image i) ∧ (∀ i j, PairOK image i j)
+
+def check (image : Image) : Bool :=
+ decide (image.entries.length = image.nextId) &&
+ (List.finRange image.entries.length).all (fun i => decide (EntryOK image i)) &&
+ (List.finRange image.entries.length).all (fun i =>
+  (List.finRange image.entries.length).all (fun j => decide (PairOK image i j)))
+
+theorem check_exact (image : Image) : check image = true ↔ Valid image := by
+ simp [check,Valid,List.all_eq_true,and_assoc]
+
+theorem decoded_wf (image : Image) (valid : Valid image) : WF (decode image) := by
+ obtain ⟨length,entries,pairs⟩ := valid
+ constructor
+ · intro i r h
+   by_cases inside : i < image.entries.length
+   · have entry : image.entries[i] = some r := by simpa [decode,inside] using h
+     have bound := entries ⟨i,inside⟩
+     simp [EntryOK,entry] at bound
+     exact ⟨by simpa [decode,←length] using inside,bound⟩
+   · simp [decode,inside] at h
+ · intro i j a b distinct ha hb
+   have insideI : i < image.entries.length := by
+    by_cases inside : i < image.entries.length
+    · exact inside
+    · simp [decode,inside] at ha
+   have insideJ : j < image.entries.length := by
+    by_cases inside : j < image.entries.length
+    · exact inside
+    · simp [decode,inside] at hb
+   have atI : image.entries[i] = some a := by simpa [decode,insideI] using ha
+   have atJ : image.entries[j] = some b := by simpa [decode,insideJ] using hb
+   have pair := pairs ⟨i,insideI⟩ ⟨j,insideJ⟩
+   simpa [PairOK,atI,atJ,Fin.ext_iff,distinct] using pair
+
+theorem wf_implies_valid (image : Image) (length : image.entries.length = image.nextId)
+ (wf : WF (decode image)) : Valid image := by
+ refine ⟨length,?_,?_⟩
+ · intro i
+   cases entry : image.entries[i.val] with
+   | none => simp [EntryOK,entry]
+   | some r =>
+     have live : (decode image).live i.val = some r := by simp [decode,i.isLt,entry]
+     simpa [EntryOK,entry,decode] using (wf.bounded i.val r live).2
+ · intro i j
+   cases left : image.entries[i.val] with
+   | none => simp [PairOK,left]
+   | some a =>
+    cases right : image.entries[j.val] with
+    | none => simp [PairOK,right]
+    | some b =>
+     by_cases same : i = j
+     · simp [PairOK,right,same]
+     · have different : i.val ≠ j.val := fun eq => same (Fin.ext eq)
+       have liveI : (decode image).live i.val = some a := by simp [decode,i.isLt,left]
+       have liveJ : (decode image).live j.val = some b := by simp [decode,j.isLt,right]
+       have separated := wf.separated i.val j.val a b different liveI liveJ
+       simp [PairOK,left,right,separated]
+
+theorem check_wf_exact (image : Image) : check image = true ↔
+ image.entries.length = image.nextId ∧ WF (decode image) := by
+ rw [check_exact]
+ exact ⟨fun v => ⟨v.1,decoded_wf image v⟩,fun ⟨len,wf⟩ => wf_implies_valid image len wf⟩
+
+def restore (image : Image) : Option State := if check image then some (decode image) else none
+
+theorem restores_encoded (s : State) (wf : WF s) : restore (encode s) = some s := by
+ have good : check (encode s) = true := (check_wf_exact _).mpr
+  ⟨by simp [encode],by simpa [roundtrip s wf] using wf⟩
+ simp [restore,good,roundtrip s wf]
+
+theorem restore_sound (image : Image) (s : State) (accepted : restore image = some s) : WF s := by
+ unfold restore at accepted
+ split at accepted
+ · rename_i good
+   cases accepted
+   exact ((check_wf_exact _).mp good).2
+ · contradiction
+
+-- Limits are independent caller policy, not authority inferred from an image.
+def fits (limits : BoundedIdentifiers.Limits) (image : Image) : Bool :=
+ decide (image.nextId ≤ limits.handles) && decide (image.nextBlock ≤ limits.blocks)
+
+def restoreWithin (limits : BoundedIdentifiers.Limits) (image : Image) : Option State :=
+ if fits limits image then restore image else none
+
+theorem fits_exact (limits : BoundedIdentifiers.Limits) (image : Image) :
+ fits limits image = true ↔ BoundedIdentifiers.Within limits (decode image) := by
+ simp [fits,BoundedIdentifiers.Within,decode]
+
+theorem restore_within_sound (limits : BoundedIdentifiers.Limits) (image : Image) (s : State)
+ (accepted : restoreWithin limits image = some s) :
+ WF s ∧ BoundedIdentifiers.Within limits s := by
+ unfold restoreWithin at accepted
+ split at accepted
+ · rename_i budget
+   have wf := restore_sound image s accepted
+   unfold restore at accepted
+   split at accepted
+   · cases accepted; exact ⟨wf,(fits_exact _ _).mp budget⟩
+   · contradiction
+ · contradiction
+
+theorem restores_encoded_within (limits : BoundedIdentifiers.Limits) (s : State)
+ (wf : WF s) (within : BoundedIdentifiers.Within limits s) :
+ restoreWithin limits (encode s) = some s := by
+ have fit : fits limits (encode s) = true := (fits_exact _ _).mpr (by rw [roundtrip s wf]; exact within)
+ simp [restoreWithin,fit,restores_encoded s wf]
+
+namespace Controls
+open ResourceBoundary.Controls
+example : check (encode a.1) = true := by decide
+example : check (encode transferred.1) = true := by decide
+example : (restoreWithin ⟨0,0⟩ (encode a.1)).isNone = true := by decide
+example : (restoreWithin ⟨1,1⟩ (encode a.1)).isSome = true := by decide
+-- Reject truncation, out-of-head blocks, empty geometry and overlapping ownership.
+example : check ⟨1,1,[]⟩ = false := by decide
+example : check ⟨1,0,[some ⟨0,0,12,1⟩]⟩ = false := by decide
+example : check ⟨1,1,[some ⟨0,5,5,1⟩]⟩ = false := by decide
+example : check ⟨2,1,[some ⟨0,0,12,1⟩,some ⟨0,5,9,2⟩]⟩ = false := by decide
+example : (restore ⟨2,1,[some ⟨0,0,12,1⟩,some ⟨0,5,9,2⟩]⟩).isNone = true := by decide
+-- Released holes still retain the issuance head; do not renumber live entries.
+def released := erase a.1 a.2.id
+example : (encode released).entries = [none] ∧ (encode released).nextId = 1 := by decide
+example : currentCheck (decode (encode released)) 1 a.2 = false := by decide
+example : (decode (encode released)).nextId = 1 := by decide
+-- A locally well-formed old image is still accepted: freshness is a separate gate.
+example : check (encode a.1) = true ∧ currentCheck (decode (encode a.1)) 1 a.2 = true := by decide
+-- Resetting all history is structurally valid and can reuse a prior identifier.
+example : check (encode empty) = true := by decide
+example : (allocateRaw (decode (encode empty)) 1 12).2 = a.2 := by decide
+end Controls
+#print axioms roundtrip
+#print axioms check_exact
+#print axioms decoded_wf
+#print axioms wf_implies_valid
+#print axioms check_wf_exact
+#print axioms restores_encoded
+#print axioms restore_sound
+#print axioms fits_exact
+#print axioms restore_within_sound
+#print axioms restores_encoded_within
+end MirroreaProofFirst.ResourceBoundary.PrivateImage

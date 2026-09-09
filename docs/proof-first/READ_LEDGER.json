@@ -22058,5 +22058,82 @@
     "range": "1-132",
     "role": "LAB historical helper attachment/suite comparison, not current authority; full read0f8cc2",
     "status": "full"
+  },
+  {
+    "path": "samples/lean/foundations/MirroreaProofFirstResourceBoundary.lean",
+    "sha256": "2ac91ef290548c13d33ca8122b7a14655a15e922c0be1c5b1ab9648882bb95f9",
+    "range": "1-843",
+    "role": "LAB authored/self-reviewed finite private-image proof, not accepted contract",
+    "status": "full"
+  },
+  {
+    "path": "samples/lean/foundations/MirroreaProofFirstModuleContractBoundary.lean",
+    "sha256": "977c02079ae79adb617a3015099bfc9644853008fe61f2012e61d23ca78ca310",
+    "range": "1-1224",
+    "role": "LAB authored/self-reviewed finite private-image proof, not accepted contract",
+    "status": "full"
+  },
+  {
+    "path": "specs/examples/100-current-l2-stage3-request-clause-suite-first-tranche-comparison.md",
+    "sha256": "1554fef349ebabe90f55f4a921615b056ecfa6d7c01b8f800c3f9e20e454954a",
+    "range": "1-180",
+    "role": "LAB historical request suite helper/diagnostics comparison, not current authority; full read934c49",
+    "status": "full"
+  },
+  {
+    "path": "specs/examples/101-current-l2-stage3-request-clause-suite-first-tranche-actualization.md",
+    "sha256": "aeffea5bb7a17fae53b67f8bdfa836485da9fff4bc3fa503b76e1a94d7a14452",
+    "range": "1-131",
+    "role": "LAB historical request suite helper/diagnostics comparison, not current authority; full read934c49",
+    "status": "full"
+  },
+  {
+    "path": "specs/examples/102-current-l2-stage3-suite-malformed-vs-request-compare-sequencing.md",
+    "sha256": "f178d408cb209c403b1807781e11baa6bcb69ef436c3109d2d48c7e89bc00a6a",
+    "range": "1-145",
+    "role": "LAB historical request suite helper/diagnostics comparison, not current authority; full read934c49",
+    "status": "full"
+  },
+  {
+    "path": "specs/examples/103-current-l2-stage3-suite-malformed-first-pair-comparison.md",
+    "sha256": "a9c665f4e2266da8dedd9ccc0510bdc5d0d0bcf6c497751117a8fc7acc1c2274",
+    "range": "1-127",
+    "role": "LAB historical suite malformed-source comparison, not current authority; full read19c9f6",
+    "status": "full"
+  },
+  {
+    "path": "specs/examples/104-current-l2-stage3-suite-malformed-first-pair-actualization.md",
+    "sha256": "94289d2614a461932196750567aa7c2da0b9e5b2c27844fdb1c56869a9945817",
+    "range": "1-97",
+    "role": "LAB historical suite malformed-source comparison, not current authority; full read19c9f6",
+    "status": "full"
+  },
+  {
+    "path": "specs/examples/105-current-l2-stage3-missing-ensure-block-vs-request-compare-sequencing.md",
+    "sha256": "0c76e01792f376bd88cf8431d0260240ec00f1a8f144a18e5591b1736924a6ff",
+    "range": "1-122",
+    "role": "LAB historical suite malformed-source comparison, not current authority; full read19c9f6",
+    "status": "full"
+  },
+  {
+    "path": "specs/examples/106-current-l2-stage3-missing-ensure-first-tranche-actualization.md",
+    "sha256": "f7e8088a2e05ac77c4a0a587309876bc3b12d555789b7b2ea00c4ad9bc02b201",
+    "range": "1-74",
+    "role": "LAB historical request contract subset comparison, not current authority; full read3cdf0e",
+    "status": "full"
+  },
+  {
+    "path": "specs/examples/107-current-l2-stage3-suite-reopen-conditions.md",
+    "sha256": "f0ab63a78b94d7db47acd5a813b3699bc47f1e60cee71a66dacdd3775c3d2310",
+    "range": "1-168",
+    "role": "LAB historical request contract subset comparison, not current authority; full read3cdf0e",
+    "status": "full"
+  },
+  {
+    "path": "specs/examples/108-current-l2-stage3-request-contract-subset-compare-cut.md",
+    "sha256": "ab5730fc0cab3a71069a13ee613a55bf565a122881111f699818551f09ed3817",
+    "range": "1-165",
+    "role": "LAB historical request contract subset comparison, not current authority; full read3cdf0e",
+    "status": "full"
   }
 ]

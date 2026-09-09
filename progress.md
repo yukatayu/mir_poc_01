@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-09-10 07:06 JST
+最終更新: 2026-09-10 07:24 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -318,3 +318,5 @@ The authorized roadmap is paused, not blocked, stale or closed.
 - 2026-09-10 06:47 JST: W2参照で予約・効果・応答喪失を分離し、有限実行列の再実行排除と履歴整合をLean検査。実runtimeの再試行2件・重複ledger1件を再検査。実機の保存・復旧との対応証明は未達。
 
 - 2026-09-10 07:06 JST: W2資源割当の秘密干渉をID・容量失敗の反例で確認し、分離した参照状態の条件付き二実行観測一致をLean検査。同一要求の領域間二重実行も反例として保持。source/auth結合・実機分離・review未達。
+
+- 2026-09-10 07:24 JST: W2有限資源／予約・効果履歴imageの検査器と不変条件の対応、roundtrip、復元後の既存遷移・重複拒否をLean検査。9変異を反例でも検出。構造的に整合する偽履歴・巻戻しは別途真正性が必要、実機復旧/受理は未達。

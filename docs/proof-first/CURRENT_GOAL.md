@@ -75,3 +75,11 @@ conditional reference observation property and expose ID/capacity leaks, while
 keeping source/auth-bound namespaces and physical pools as unmet obligations.
 The duplicate cross-pool unscoped request is a decisive counterexample against
 adopting caller-selected partitions as an authority or global-uniqueness mechanism.
+
+The same restore-entry consumer now checks finite resource/history images before
+resuming actual reference transitions. Canonical whole-Store restoration must
+preserve issuance holes and request history; limits remain independent policy.
+Compare explicit finite slots with a smallest sparse-indexed alternative retaining
+heads and unique indices. Structural validity must not be promoted into history
+truth, authenticated freshness or current authority; accepted fabricated/erased
+history images are the falsifiers. Physical and whole-World recovery remain open.
