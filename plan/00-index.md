@@ -13,6 +13,10 @@
   `.docs/oracle-chatgpt-pro-operations.md` は、ChatGPT 5.5 Pro Extended
   Oracle browser consults の advisory review 運用を記録する。
 
+今回の task-local proof-first LAB evidence / dependency memory は
+[`proof-first-foundation-correspondence.md`](proof-first-foundation-correspondence.md)。
+別の roadmap や正式な W1/W2/W3 program ではなく、Plan250 の pause は保持します。
+
 ## 先に読む順序
 
 ADR-0015 の Mir Theory v0 / I1+ M0--M10 execution とPlan 247はclosed LAB

@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-09-09 15:52 JST
+最終更新: 2026-09-09 22:02 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -16,7 +16,7 @@ Plan 250 is the sole current roadmap. ALIGN-0, ALIGN-1, ALIGN-2, I3-0 and I3-1
 are completed; I3-2 and I3-3 are accepted, and execution is owner-paused with no
 active semantic milestone. I3-4, I3-5, I3-6, and NEXT-0 remain inactive and dependency-gated.
 
-Latest owner control: I3-3 is accepted and owner-paused. Plan 250 remains the
+Latest Plan250 owner control: I3-3 is accepted and owner-paused. Plan 250 remains the
 sole retained current roadmap; I3-4 requires explicit owner resume. This is not
 blocked, stale or program-closed.
 
@@ -54,6 +54,21 @@ C-distributed evidence after explicit resume; WAN, durability, browser and
 public/production layers remain later.
 
 ## current milestone position
+
+Separate current task: user-authorized proof-first LAB research, active single goal
+W1-passive-erasure (PL1 S1/S3, theory/proof). This is not a Plan250 milestone or
+I3-4 resume. Scoped support/current-use/tracked-query/graph Lean proofs and reviews
+exist; passive exact-retention extension review completed. Source/type/dynamic
+composition and actual implementation/alpha gates remain open. Required corpus
+reading is incomplete. Memory: `plan/proof-first-foundation-correspondence.md`;
+evidence: `docs/reports/2611-mirrorea-proof-first-w1-foundations.md`.
+
+| Task axis | Current status | Startability |
+|---|---|---|
+| 論理仕様 | general conditional Lean proofs; source IFC/current-head/all-mutator/physical bridge open | reversible research **着手可能** |
+| ユーザ向け仕様 |119requirement inputs retained; ordinary-source alpha profile not adopted | necessary source/type investigation **着手可能**; irreversible policy **要仕様確認** |
+| 実装 / 運用 | existing M8 observer4tests pass; trusted-setup effective-label mismatch reproduced; no new network/durable alpha evidence | relevant proof gates **後段依存** |
+
 
 I3-3 is accepted at source/evidence cut `fe5dd972e2ddb3a513c785458a07702e4d4d99fa`.
 The finite profile covers all twenty failure/order families; retained assurance
@@ -193,6 +208,10 @@ theorem, exactly-once, lock-free runtime, or public completion is claimed.
 
 ## macro phase map
 
+This map records the retained Plan250 program and its milestone gates. Separately
+authorized task-local LAB startability is described above; Plan250 resume
+requirements do not govern that independent research.
+
 | Macro | Focus | Current position | Weight | Self-drive |
 |---|---|---|---|---|
 | 0 | governance/repository memory | ALIGN-0--2 and I3-0--3 completed; owner pause | medium | status maintenance |
@@ -225,8 +244,9 @@ theorem, exactly-once, lock-free runtime, or public completion is claimed.
 Source/evidence cut `fe5dd972e2ddb3a513c785458a07702e4d4d99fa` is accepted by
 ADR-0043; Canon/status integration is `aafde92229bb0ff18116f38d4750a0a8f61cb069`.
 Retained source validation: workspace1573, runtime doctests4, format/Clippy and
-independent source review P0/P1/P2=0. No new Rust or Lean execution is claimed
-for this docs-only maintenance.
+independent source review P0/P1/P2=0. These I3-3 results remain source-cut evidence, not reruns for this
+synchronization. Separate LAB Lean and targeted M8 executions are recorded in
+`docs/proof-first/FOUNDATION_CHECK.json` and `docs/proof-first/OBSERVER_BASELINE_CHECK.json`.
 
 Actual process/network, LOCAL authority/codec/custody/graph and bounded-model
 evidence stay distinct. The lifecycle model explores432states/2136transitions;
@@ -235,8 +255,10 @@ observer traces. The A-local cut emits no saved image and does not implement
 save/restore, live patch, global cut or durability.
 
 Detailed historical counts and commands remain in immutable Report2606.
-Plan250 records current maintenance and resource checks: root free space about
-63GiB, current target2GiB retained, source/.git/reports/validation logs preserved.
+Earlier Plan250 maintenance recorded63GiB free and target2GiB. The current task
+M8 baseline grew target to4.4GiB; current preflight has about60GiB free and12GiB
+available RAM. Additional large variant builds await a measured storage plan;
+bounded proof/rustc work continues. Source/.git/reports/logs are preserved.
 Only ignored Python/pytest caches were cleaned under the owner's instruction.
 The authorized roadmap is paused, not blocked, stale or closed.
 
@@ -253,3 +275,8 @@ The authorized roadmap is paused, not blocked, stale or closed.
   (218 Canon / 800 hierarchy / 1760 reports), diff checks and independent planner
   review. About3MiB Python/pytest cache cleaned; source, current2GiB build cache
   and evidence retained. No Rust/Lean rerun or I3-4 activation; details in Plan250.
+
+- 2026-09-09 22:02 JST: Proof-first LAB: general support/current-use/tracked/graph and passive Lean
+  checks passed at recorded cuts; Oracle reviews and source reading ongoing. M8
+  observer4baseline tests passed; effective-label trusted-setup countermodel
+  reproduced. No implementation refinement/alpha acceptance or I3-4 resume.

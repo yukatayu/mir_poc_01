@@ -16,14 +16,15 @@
     source input, not generated output or a public contract.
   - `mirrorea-i3-owner-admission/main.mir` is the current I3-3 ordinary-source
     budget-1 test input for the existing two-process probe. It is source, not
-    a generated fixture or accepted network workflow. Bounded time/reply
-    evidence is integrated at `55f1fd7f`; full I3-3 acceptance remains open
-    (Report 2606).
+    a generated fixture. Bounded time/reply evidence is integrated at
+    `55f1fd7f`; I3-3 is accepted under ADR-0043 at `fe5dd972` (Report 2606).
+    The end-user network workflow remains a later inactive Plan250 milestone.
   - `mirrorea-i3-provider-effect/main.mir` is I3-3 ordinary source/checking
     evidence for ADR-0042/spec/17, exercised by the semantics
-    `i3_provider_effect` tests. Provider execution is unsupported at this
-    checkpoint; it is not registered in the legacy clean runner or M5/Lean
-    catalog and does not claim a runnable provider or SYS5/network workflow.
+    `i3_provider_effect` tests. Those tests establish source/checking only;
+    Report2606 separately records accepted finite source-derived provider
+    process/QUIC execution under ADR-0043. This root is not registered in the
+    legacy clean runner or M5/Lean catalog and is not a public workflow.
 - `current-l2/`
   base current-L2 source corpus
 - `lean/`
@@ -33,6 +34,13 @@
     `MirTheoryV0M3EvaluationMaterialization.lean`; `--trust=0` で個別 compile
     する。これは一般 runtime / relation / save-load proof ではない
   - `lab-statements/` は compile-check only の statement-shape drafts であり、canon OBL status movement ではない
+  - `foundations/MirroreaProofFirstSupport.lean` is task-local W1 support
+    mechanization. `MirroreaProofFirstSupportDifferential.lean` executes finite
+    comparison cases via `scripts/proof_first_support_check.py`; it is not a
+    general refinement proof or a runtime sample. CurrentUse, TrackedValidation,
+    GraphValidation and Passive companions distinguish their conditional proofs
+    from runtime/authority/IFC bridges. Reproduction: `lean/README.md`; Report2611.
+    Scoped passive base and exact-retention reviews completed; the source/observer bridge remains open.
   - `clean-near-end/` は generated theorem stub evidence
 - `alpha/`
   Mirrorea Spaces alpha-0 phase-indexed sample matrix scaffold with `.expected.json` sidecars

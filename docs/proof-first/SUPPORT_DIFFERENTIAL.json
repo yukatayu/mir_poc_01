@@ -1,0 +1,21 @@
+{
+  "status": "PASS",
+  "lean": "Lean (version 4.29.1, x86_64-unknown-linux-gnu, commit f72c35b3f637c8c6571d353742168ab66cc22c00, Release)",
+  "sources": {
+    "samples/lean/foundations/MirroreaProofFirstSupport.lean": "7f401632873cb3b87e0fa62d1b172af88b996b34a6d3fc62a7e61d103b41a9c3",
+    "samples/lean/foundations/MirroreaProofFirstSupportDifferential.lean": "912341026ee3edd3ef9ac38ad9dcc262f97b707265970766e2db0d7b856c651c",
+    "scripts/proof_first_support_check.py": "abdf058ffaeef1695a499ce0dd0d81f12259873ba9ceb88feff2db59e94dd304",
+    "sub-agent-pro/mirrorea-proof-first-handoff-v1/materials/mir_foundation_F0_3/model/support.py": "5eda79dd775df5033b90e26639a63cd7c7bd8a253c3dc290e70ea88c8dd9b86b"
+  },
+  "manifest_sha256": "c7ceb771cbf286db81aebae3251693bcaa3691543cf3814866fedb33ff7cd89f",
+  "reference_sha256": "5eda79dd775df5033b90e26639a63cd7c7bd8a253c3dc290e70ea88c8dd9b86b",
+  "differential_cases": 2744,
+  "countermodels": [
+    "cyclic residual after root withdrawal",
+    "survivor rank and low rank leak",
+    "four-node uniform eligibility separator",
+    "depth 128/129 boundary"
+  ],
+  "csv_sha256": "34da6b426ef86ce55f35803ae22d6fe07a47672472002b89b1e616a37da5ebfa",
+  "limits": "Finite Python comparison, not general Python refinement or authority/runtime proof"
+}

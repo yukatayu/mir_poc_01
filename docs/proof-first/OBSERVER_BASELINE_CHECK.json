@@ -1,0 +1,73 @@
+{
+  "status": "PASS",
+  "timestamp": "2026-09-09T12:21:24.268671+00:00",
+  "base": "7feef371bcd8dcd49f4855aeb172e631e70743bc",
+  "command": [
+    "cargo",
+    "test",
+    "--offline",
+    "--locked",
+    "-p",
+    "mir-runtime",
+    "--test",
+    "m8_runtime_observer"
+  ],
+  "exit_code": 0,
+  "tests_passed": 4,
+  "failed": 0,
+  "ignored": 0,
+  "rustc": "rustc 1.94.1 (e408947bf 2026-03-25)",
+  "sources": {
+    "crates/mir-runtime/src/m8_runtime_observer.rs": "e0cf035a8090bd5eb05f6474e0b1dbe59dc175a4de7b10672531fda9ba09a867",
+    "crates/mir-runtime/tests/m8_runtime_observer.rs": "ba766a87f15d7e087880c96f410900fbc7eff2c1e58b472185e7f79862a6361c",
+    "crates/mir-ast/tests/fixtures/surface-v0/m8_unified_local_cut_no_m9_residuals.mir": "69dcd3d0d57cf75973e238c9d7b6b80b8739995811eb0beb24d7571fddd11ef0",
+    "Cargo.toml": "5e8bdd40c929cbf4d9e149880aaa7188e327b082cfdcc89e2c153623c926ec9d",
+    "Cargo.lock": "192e45b01e613e753c3534b2833c6976a3b79a901060bea64a4e2ec7da339e5a",
+    "crates/mir-runtime/Cargo.toml": "4180e19ae625ff34d4dd7e955adfc53674af2274c2db3793a785ac2c3bcc4595"
+  },
+  "warnings": 31,
+  "warning_scope": "Existing featureless-library unused import/dead code warnings; not a Clippy-clean claim, full warning chunk was truncated in tool display. No Rust changes made.",
+  "storage": "Existing target reused but cargo rebuilt dependencies: target2.0GiB\u21924.4GiB, rootfree63\u219260GiB; no external mount available. No cleanup or new/mounted workdisk. Avoid additional large variant builds until storage disposition.",
+  "limits": "Current four existing observer tests only; no two-run secrecy, bounded pre-truncation resource use, network, restore or new-proof implementation refinement.",
+  "effective_label_countermodel": {
+    "command": [
+      "rustc",
+      "--test",
+      "--edition=2024",
+      "/tmp/mirrorea-proof-first-20260909-gn29zka5/observer-review-controls/observer_controls.rs",
+      "-L",
+      "dependency=/home/codex/dev/mir_poc_01/target/debug/deps",
+      "-o",
+      "/tmp/mirrorea-proof-first-20260909-gn29zka5/observer-review-controls/observer_controls",
+      "--extern",
+      "mir_ast=/home/codex/dev/mir_poc_01/target/debug/deps/libmir_ast-551ba76808321786.rlib",
+      "--extern",
+      "mir_semantics=/home/codex/dev/mir_poc_01/target/debug/deps/libmir_semantics-af3b614beaf8c08c.rlib",
+      "--extern",
+      "mir_runtime=/home/codex/dev/mir_poc_01/target/debug/deps/libmir_runtime-12012fa141783803.rlib"
+    ],
+    "env": {
+      "CARGO_MANIFEST_DIR": "/home/codex/dev/mir_poc_01/crates/mir-runtime"
+    },
+    "libs": {
+      "mir_ast": "/home/codex/dev/mir_poc_01/target/debug/deps/libmir_ast-551ba76808321786.rlib",
+      "mir_semantics": "/home/codex/dev/mir_poc_01/target/debug/deps/libmir_semantics-af3b614beaf8c08c.rlib",
+      "mir_runtime": "/home/codex/dev/mir_poc_01/target/debug/deps/libmir_runtime-12012fa141783803.rlib"
+    },
+    "source_sha256": "7529828abe9c110da93a04e530ad98ca3f23af34e1b5d5bc3acd8853719c87a3",
+    "compile_exit": 0,
+    "status": "countermodel reproduced",
+    "run_command": [
+      "observer_controls",
+      "proof_first_effective_label_countermodel",
+      "--nocapture"
+    ],
+    "exit_code": 0,
+    "result": "1 passed, 4 filtered out: current M8 accepts Private relation input/override with Public base and emits actual relation row Public under Restricted grant",
+    "run_output": "\nrunning 1 test\nCOUNTERMODEL: private relation join accepted, actual emitted relation label Public\ntest proof_first_effective_label_countermodel ... ok\n\ntest result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 4 filtered out; finished in 0.00s\n\n",
+    "scope": "Trusted M8 setup/API countermodel. No external/network/M9 exploit or accepted-profile falsifier established; no production fix.",
+    "original_test_source": "crates/mir-runtime/tests/m8_runtime_observer.rs",
+    "original_test_sha256": "ba766a87f15d7e087880c96f410900fbc7eff2c1e58b472185e7f79862a6361c",
+    "appended_test": "() {\n    let (path, source, _, _, mut runtime) = observer_runtime();\n    prepare_observable_runtime(&mut runtime);\n    let policy = observer_policy(observer_source_ref(&path, &source))\n        .with_label(EvidenceSecurityLabel::new(\"public-base\").with_class(M8SecurityClass::Public))\n        .with_relation_label_override(RELATION_NAME,\n            EvidenceSecurityLabel::new(\"private-effective\").with_class(M8SecurityClass::Private))\n        .with_relation_input_label(RELATION_NAME,\n            EvidenceSecurityLabel::new(\"private-input\").with_class(M8SecurityClass::Private));\n    let view = runtime.export_observer_view(policy).expect(\"current M8 accepts override join\");\n    let row = view.rows().redacted_subject(\"relation-lineage\")\n        .expect(\"real relation occurrence emitted\");\n    assert_eq!(row.label().security_class(), M8SecurityClass::Public);\n    println!(\"COUNTERMODEL: private relation join accepted, actual emitted relation label Public\");\n}\n"
+  }
+}

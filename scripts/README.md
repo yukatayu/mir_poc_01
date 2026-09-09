@@ -36,14 +36,15 @@
   probe integration tests, not a new script or public CLI. The focused command
   is `cargo test --locked -p mirrorea-i3-probe --test i3_process_localnet source_first_localnet_owner_budget -- --test-threads=1`.
   Its source is `samples/clean-near-end/mirrorea-i3-owner-admission/main.mir`;
-  bounded time/reply evidence is integrated at `55f1fd7f`; full I3-3
-  validation remains in progress (Report 2606).
+  bounded time/reply evidence is integrated at `55f1fd7f`; I3-3 is accepted
+  under ADR-0043 at `fe5dd972` (Report 2606). Plan250 remains owner-paused.
 - I3-3 provider source/checking evidence uses
   `cargo test --locked -p mir-semantics --test i3_provider_effect -- --test-threads=1`
   and `samples/clean-near-end/mirrorea-i3-provider-effect/main.mir`.
-  It is not a new script, legacy clean-runner/M5/Lean entry or provider
-  execution workflow. The separate runtime guard tests require unsupported
-  legacy execution to reject; no host call or effect grant is claimed here.
+  This focused command is not provider execution evidence. Report2606
+  separately records accepted finite source-derived provider process/QUIC
+  execution under ADR-0043. Unsupported legacy execution still rejects;
+  there is no new script, legacy clean-runner/M5/Lean entry or public workflow.
 - `practical_alpha_error_display.py`
   shared practical helper display utility that redacts repo-owned absolute path
   prefixes from failure surfaces while preserving external/temp absolute paths
@@ -322,6 +323,13 @@
 
 ### current-L2 helper / detached loop / support
 
+- `proof_first_support_check.py --work-root <existing-work-directory>`
+  task-local LAB foundation evidence: compile the support proofs with Lean
+  `--trust=0`, execute the Lean algorithm, compare live sets/ranks against a
+  hash-pinned copied F0.3 Python reference on 2744 finite inputs, and run
+  root-loss/rank-leak/depth countermodels. Outputs go to a new directory beneath
+  the requested work root; handoff originals remain read-only. This is not a
+  general Python refinement proof, current authority, or runtime alpha workflow.
 - `current_l2_*`
   current-L2 source corpus、detached validation loop、diff/export assist、Lean sync、checker support
 - `current_l2_lean_sample_sync.py`
@@ -401,3 +409,9 @@
 - いまは flat layout を維持する
 - future に `samples/`, `validation/`, `docs/`, `visualization/` などへ rebucket する可能性はある
 - ただし active alpha command を壊す move は、wrapper / alias なしでは行わない
+
+Proof-first current-use/tracked/graph/passive kernel checks use the manual fresh-copy
+commands in `samples/lean/README.md`; the support differential runner does not claim
+to cover those modules. Their actual cuts and open implementation obligations are
+recorded under `docs/proof-first/` and report2611. Documentation path inventories
+retain the historical handoff at `sub-agent-pro/old_01/mirrorea_mir_computational_core_handoff.md`.

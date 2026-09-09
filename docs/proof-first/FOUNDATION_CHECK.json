@@ -1,0 +1,256 @@
+{
+  "timestamp": "2026-09-09T12:52:58.787484+00:00",
+  "work": "/tmp/mirrorea-proof-first-20260909-gn29zka5/all-foundations-hcrw7cns",
+  "lean": "Lean (version 4.29.1, x86_64-unknown-linux-gnu, commit f72c35b3f637c8c6571d353742168ab66cc22c00, Release)",
+  "checks": [
+    {
+      "source": "samples/lean/foundations/MirroreaProofFirstSupport.lean",
+      "sha256": "7f401632873cb3b87e0fa62d1b172af88b996b34a6d3fc62a7e61d103b41a9c3",
+      "command": [
+        "lean",
+        "--trust=0",
+        "-o",
+        "MirroreaProofFirstSupport.olean",
+        "MirroreaProofFirstSupport.lean"
+      ],
+      "exit_code": 0,
+      "log": "MirroreaProofFirstSupport.lean.log",
+      "no_sorryAx_in_output": true,
+      "kernel_output": [
+        "'MirroreaProofFirst.Support.eval_correct' depends on axioms: [propext]",
+        "'MirroreaProofFirst.Support.holds_mono' does not depend on any axioms",
+        "'MirroreaProofFirst.Support.grounded_closed' does not depend on any axioms",
+        "'MirroreaProofFirst.Support.grounded_least' does not depend on any axioms",
+        "'MirroreaProofFirst.Support.ranked_sound' does not depend on any axioms",
+        "'MirroreaProofFirst.Support.ranked_exact' does not depend on any axioms",
+        "'MirroreaProofFirst.Support.rounds_sound' depends on axioms: [propext, Quot.sound]",
+        "'MirroreaProofFirst.Support.proof_eventually' depends on axioms: [propext]",
+        "'MirroreaProofFirst.Support.rounds_complete' depends on axioms: [propext]",
+        "'MirroreaProofFirst.Support.rounds_iff_derivation' depends on axioms: [propext, Quot.sound]",
+        "'MirroreaProofFirst.Support.allOf_correct' depends on axioms: [propext, Quot.sound]",
+        "'MirroreaProofFirst.Support.anyOf_correct' depends on axioms: [propext, Quot.sound]",
+        "'MirroreaProofFirst.Support.stable_exists' depends on axioms: [propext, Classical.choice, Quot.sound]",
+        "'MirroreaProofFirst.Support.derive_exact' depends on axioms: [propext, Classical.choice, Quot.sound]",
+        "'MirroreaProofFirst.Support.checker_exact' depends on axioms: [propext, Quot.sound]",
+        "'MirroreaProofFirst.Support.checked_membership_exact' depends on axioms: [propext, Quot.sound]",
+        "'MirroreaProofFirst.Support.retirement_mono' does not depend on any axioms",
+        "'MirroreaProofFirst.Support.normalization_idempotent' does not depend on any axioms",
+        "'MirroreaProofFirst.Support.no_root_no_ground' does not depend on any axioms",
+        "'MirroreaProofFirst.Support.low_grounded_independent' depends on axioms: [propext, Quot.sound]",
+        "'MirroreaProofFirst.Support.firstRank_spec' depends on axioms: [propext, Quot.sound]",
+        "'MirroreaProofFirst.Support.generated_certificate_accepted' depends on axioms: [propext, Classical.choice, Quot.sound]",
+        "'MirroreaProofFirst.Support.height_threshold' depends on axioms: [propext, Classical.choice, Quot.sound]",
+        "'MirroreaProofFirst.Support.canonical_rounds' depends on axioms: [propext, Classical.choice, Quot.sound]",
+        "'MirroreaProofFirst.Support.canonical_rank_unique' depends on axioms: [propext, Classical.choice, Quot.sound]",
+        "'MirroreaProofFirst.Support.generated_heights' depends on axioms: [propext, Classical.choice, Quot.sound]",
+        "'MirroreaProofFirst.Support.canonical_generated_accepted' depends on axioms: [propext, Classical.choice, Quot.sound]",
+        "'MirroreaProofFirst.Support.canonical_checker_sound' depends on axioms: [propext, Classical.choice, Quot.sound]",
+        "'MirroreaProofFirst.Support.snapshot_live_exact' depends on axioms: [propext, Classical.choice, Quot.sound]",
+        "'MirroreaProofFirst.Support.snapshot_certificate_accepted' depends on axioms: [propext, Classical.choice, Quot.sound]",
+        "'MirroreaProofFirst.Support.snapshot_checked_sound' depends on axioms: [propext, Classical.choice, Quot.sound]"
+      ]
+    },
+    {
+      "source": "samples/lean/foundations/MirroreaProofFirstCurrentUse.lean",
+      "sha256": "ab604c92b226182bdf84a38caaa044d6b949730891d40a02a72ad441c59f4239",
+      "command": [
+        "lean",
+        "--trust=0",
+        "-o",
+        "MirroreaProofFirstCurrentUse.olean",
+        "MirroreaProofFirstCurrentUse.lean"
+      ],
+      "exit_code": 0,
+      "log": "MirroreaProofFirstCurrentUse.lean.log",
+      "no_sorryAx_in_output": true,
+      "kernel_output": [
+        "'MirroreaProofFirst.CurrentUse.checkClaim_exact' depends on axioms: [propext, Quot.sound]",
+        "'MirroreaProofFirst.CurrentUse.checkWitness_sound' depends on axioms: [propext, Quot.sound]",
+        "'MirroreaProofFirst.CurrentUse.chooseClaim_sound' depends on axioms: [propext]",
+        "'MirroreaProofFirst.CurrentUse.chooseClaim_complete' depends on axioms: [propext, Quot.sound]",
+        "'MirroreaProofFirst.CurrentUse.produce_checked' depends on axioms: [propext]",
+        "'MirroreaProofFirst.CurrentUse.produce_complete' depends on axioms: [propext, Quot.sound]",
+        "'MirroreaProofFirst.CurrentUse.revalidate_sound' depends on axioms: [propext, Quot.sound]",
+        "'MirroreaProofFirst.CurrentUse.context_change_rejected' depends on axioms: [propext]",
+        "'MirroreaProofFirst.CurrentUse.authorization_iff_produced' depends on axioms: [propext, Quot.sound]",
+        "'MirroreaProofFirst.CurrentUse.no_claim_no_authorization' depends on axioms: [propext]",
+        "'MirroreaProofFirst.CurrentUse.checkHandle_exact' depends on axioms: [propext, Classical.choice, Quot.sound]",
+        "'MirroreaProofFirst.CurrentUse.checkUse_sound' depends on axioms: [propext, Classical.choice, Quot.sound]",
+        "'MirroreaProofFirst.CurrentUse.checkUse_complete' depends on axioms: [propext, Classical.choice, Quot.sound]",
+        "'MirroreaProofFirst.CurrentUse.retired_locus_rejected' depends on axioms: [propext, Classical.choice, Quot.sound]",
+        "'MirroreaProofFirst.CurrentUse.stale_incarnation_rejected' depends on axioms: [propext]",
+        "'MirroreaProofFirst.CurrentUse.authorize_checked' depends on axioms: [propext]",
+        "'MirroreaProofFirst.CurrentUse.authorize_use_complete' depends on axioms: [propext, Classical.choice, Quot.sound]",
+        "'MirroreaProofFirst.CurrentUse.tryAdmit_sound' depends on axioms: [propext, Classical.choice, Quot.sound]",
+        "'MirroreaProofFirst.CurrentUse.tryAdmit_does_not_issue' depends on axioms: [propext]",
+        "'MirroreaProofFirst.CurrentUse.tryAdmit_retains_history' depends on axioms: [propext]",
+        "'MirroreaProofFirst.CurrentUse.duplicate_admission_unchanged' depends on axioms: [propext, Quot.sound]",
+        "'MirroreaProofFirst.CurrentUse.retire_preserves_history' does not depend on any axioms",
+        "'MirroreaProofFirst.CurrentUse.revoke_preserves_history' does not depend on any axioms",
+        "'MirroreaProofFirst.CurrentUse.retire_stops_locus_use' depends on axioms: [propext, Classical.choice, Quot.sound]",
+        "'MirroreaProofFirst.CurrentUse.tryAdmit_unique' depends on axioms: [propext, Quot.sound]",
+        "'MirroreaProofFirst.CurrentUse.step_unique' depends on axioms: [propext, Quot.sound]",
+        "'MirroreaProofFirst.CurrentUse.run_unique' depends on axioms: [propext, Quot.sound]",
+        "'MirroreaProofFirst.CurrentUse.step_retains_history' depends on axioms: [propext]",
+        "'MirroreaProofFirst.CurrentUse.run_retains_history' depends on axioms: [propext]"
+      ]
+    },
+    {
+      "source": "samples/lean/foundations/MirroreaProofFirstCurrentUseReview.lean",
+      "sha256": "333276a42c1888af8412ad8c3aa21d84be2a514626cc91f1802db2740fe0ddb2",
+      "command": [
+        "lean",
+        "--trust=0",
+        "-o",
+        "MirroreaProofFirstCurrentUseReview.olean",
+        "MirroreaProofFirstCurrentUseReview.lean"
+      ],
+      "exit_code": 0,
+      "log": "MirroreaProofFirstCurrentUseReview.lean.log",
+      "no_sorryAx_in_output": true,
+      "kernel_output": []
+    },
+    {
+      "source": "samples/lean/foundations/MirroreaProofFirstTrackedValidation.lean",
+      "sha256": "650339d6b363ee873c97e0f1e776aed0eb327981a78b5572dc0492589b20d9ff",
+      "command": [
+        "lean",
+        "--trust=0",
+        "-o",
+        "MirroreaProofFirstTrackedValidation.olean",
+        "MirroreaProofFirstTrackedValidation.lean"
+      ],
+      "exit_code": 0,
+      "log": "MirroreaProofFirstTrackedValidation.lean.log",
+      "no_sorryAx_in_output": true,
+      "kernel_output": [
+        "'MirroreaProofFirst.TrackedValidation.checkStamps_exact' depends on axioms: [propext, Quot.sound]",
+        "'MirroreaProofFirst.TrackedValidation.checked_overlay_replay' depends on axioms: [propext, Quot.sound]",
+        "'MirroreaProofFirst.TrackedValidation.checked_blind_write_unchanged' depends on axioms: [propext, Quot.sound]",
+        "'MirroreaProofFirst.TrackedValidation.evaluate_exact' depends on axioms: [propext]",
+        "'MirroreaProofFirst.TrackedValidation.tracked_reads_suffice' depends on axioms: [propext]",
+        "'MirroreaProofFirst.TrackedValidation.equal_version_same_cell' depends on axioms: [propext, Quot.sound]",
+        "'MirroreaProofFirst.TrackedValidation.validated_query_preserved' depends on axioms: [propext, Quot.sound]",
+        "'MirroreaProofFirst.TrackedValidation.preparation_reachable' does not depend on any axioms",
+        "'MirroreaProofFirst.TrackedValidation.preparation_observed' does not depend on any axioms",
+        "'MirroreaProofFirst.TrackedValidation.preparation_origins' depends on axioms: [propext]",
+        "'MirroreaProofFirst.TrackedValidation.interleaved_validation_sound' depends on axioms: [propext, Quot.sound]",
+        "'MirroreaProofFirst.TrackedValidation.observed_replay' depends on axioms: [propext]",
+        "'MirroreaProofFirst.TrackedValidation.observed_validation_sound' depends on axioms: [propext, Quot.sound]",
+        "'MirroreaProofFirst.TrackedValidation.publish_values' does not depend on any axioms",
+        "'MirroreaProofFirst.TrackedValidation.publish_is_writes' depends on axioms: [propext]",
+        "'MirroreaProofFirst.TrackedValidation.commit_rechecks_result' depends on axioms: [propext, Quot.sound]",
+        "'MirroreaProofFirst.TrackedValidation.writes_version_exact' depends on axioms: [propext, Quot.sound]",
+        "'MirroreaProofFirst.TrackedValidation.checkStamps_no_writes' depends on axioms: [propext, Quot.sound]",
+        "'MirroreaProofFirst.TrackedValidation.patch_preparation_reachable' does not depend on any axioms",
+        "'MirroreaProofFirst.TrackedValidation.patch_preparation_origins' depends on axioms: [propext]",
+        "'MirroreaProofFirst.TrackedValidation.patch_preparation_observed' does not depend on any axioms",
+        "'MirroreaProofFirst.TrackedValidation.patch_observed_replay' depends on axioms: [propext]",
+        "'MirroreaProofFirst.TrackedValidation.interleaved_patch_replay' depends on axioms: [propext, Quot.sound]",
+        "'MirroreaProofFirst.TrackedValidation.patch_publication_replay' depends on axioms: [propext, Quot.sound]"
+      ]
+    },
+    {
+      "source": "samples/lean/foundations/MirroreaProofFirstGraphValidation.lean",
+      "sha256": "86d7148bc1dc7790f3925e94ddf41a0279b1a214e36bb96ff428c99f7ca0996a",
+      "command": [
+        "lean",
+        "--trust=0",
+        "-o",
+        "MirroreaProofFirstGraphValidation.olean",
+        "MirroreaProofFirstGraphValidation.lean"
+      ],
+      "exit_code": 0,
+      "log": "MirroreaProofFirstGraphValidation.lean.log",
+      "no_sorryAx_in_output": true,
+      "kernel_output": [
+        "'MirroreaProofFirst.GraphValidation.add_preserves' does not depend on any axioms",
+        "'MirroreaProofFirst.GraphValidation.reachable_exact' depends on axioms: [propext, Classical.choice, Quot.sound]",
+        "'MirroreaProofFirst.GraphValidation.acyclic_subgraph' does not depend on any axioms",
+        "'MirroreaProofFirst.GraphValidation.checkAdd_exact' depends on axioms: [propext, Classical.choice, Quot.sound]",
+        "'MirroreaProofFirst.GraphValidation.checkAcyclic_exact' depends on axioms: [propext, Classical.choice, Quot.sound]",
+        "'MirroreaProofFirst.GraphValidation.scan_evaluates' depends on axioms: [propext]",
+        "'MirroreaProofFirst.GraphValidation.sampled_exact' depends on axioms: [propext]",
+        "'MirroreaProofFirst.GraphValidation.dagQuery_exact' depends on axioms: [propext, Classical.choice, Quot.sound]",
+        "'MirroreaProofFirst.GraphValidation.committed_graph_acyclic' depends on axioms: [propext, Classical.choice, Quot.sound]",
+        "'MirroreaProofFirst.GraphValidation.interleaved_graph_publication' depends on axioms: [propext,",
+        " Classical.choice,",
+        " Quot.sound]"
+      ]
+    },
+    {
+      "source": "samples/lean/foundations/MirroreaProofFirstGraphReview.lean",
+      "sha256": "b4c83990f3d1b0353240c89eeebf801a9b3be7351e16acc9b3efe4543ac554d5",
+      "command": [
+        "lean",
+        "--trust=0",
+        "-o",
+        "MirroreaProofFirstGraphReview.olean",
+        "MirroreaProofFirstGraphReview.lean"
+      ],
+      "exit_code": 0,
+      "log": "MirroreaProofFirstGraphReview.lean.log",
+      "no_sorryAx_in_output": true,
+      "kernel_output": []
+    },
+    {
+      "source": "samples/lean/foundations/MirroreaProofFirstPassive.lean",
+      "sha256": "f5e3aec86542e7c844ace3993e7410eda7af041e96d0291fc836d85783d433e8",
+      "command": [
+        "lean",
+        "--trust=0",
+        "-o",
+        "MirroreaProofFirstPassive.olean",
+        "MirroreaProofFirstPassive.lean"
+      ],
+      "exit_code": 0,
+      "log": "/tmp/mirrorea-proof-first-20260909-gn29zka5/oracle-passive-extension/lean.log",
+      "no_sorryAx_in_output": true,
+      "kernel_output": [
+        "'MirroreaProofFirst.Passive.erasure' does not depend on any axioms",
+        "'MirroreaProofFirst.Passive.lift_erases' depends on axioms: [propext]",
+        "'MirroreaProofFirst.Passive.filter_before_retention' depends on axioms: [propext]",
+        "'MirroreaProofFirst.Passive.retained_bound' depends on axioms: [propext, Quot.sound]",
+        "'MirroreaProofFirst.Passive.no_invented_rows' depends on axioms: [propext]",
+        "'MirroreaProofFirst.Passive.aligned_projection' depends on axioms: [propext]",
+        "'MirroreaProofFirst.Passive.two_trace_retention' depends on axioms: [propext]",
+        "'MirroreaProofFirst.Passive.concrete_projection' depends on axioms: [propext]",
+        "'MirroreaProofFirst.Passive.concrete_two_run' depends on axioms: [propext]",
+        "'MirroreaProofFirst.Passive.feedRows_exact' depends on axioms: [propext, Quot.sound]",
+        "'MirroreaProofFirst.Passive.retained_exact' depends on axioms: [propext, Quot.sound]"
+      ],
+      "previous_cut_sha256": "9b588dbf391c72443b60cb4f05b155d23b88d25bc8cc6541a29f01c990f6ed9c",
+      "work": "/tmp/mirrorea-proof-first-20260909-gn29zka5/oracle-passive-extension"
+    }
+  ],
+  "scope": "General kernel lemmas and fixed controls. No runtime refinement, formal acceptance or alpha completion.",
+  "passive_review": {
+    "session": "mirrorea-passive-erasure-review",
+    "status": "completed base and exact-retention delta reviews; scoped mathematical dependency only",
+    "question_sha256": "056fd57d054fc3b90af3a990c3380709c517b4f4b17246454a37e61b7aef5d7d",
+    "answer_sha256": "4fd86dcce152b3fc81fb4822021d3bc14259fed60998bd77ece3d45c304274f7",
+    "main_controls": "Additional Lean controls and actual M8 label mismatch reproduced; no contradiction to original quantified claims."
+  },
+  "passive_extension_review": {
+    "session": "mirrorea-passive-retention-extension",
+    "status": "completed, exit 0",
+    "question_sha256": "2976a26c32e899e2a2ee96590f4c2b733d0e5dbeba8bfead98dce952de4b063f",
+    "answer_sha256": "c41075b7b4a8f86b9041f67ab4a44442de92e4f74694e1f3357b2de3568b03dd",
+    "disposition": "No theorem change indicated. Main made exact formula, common initial state, processing order, Aligned implication and control limits explicit. No runtime/source IFC bridge or formal acceptance."
+  },
+  "docs_validation": {
+    "command": "python3 scripts/validate_docs.py",
+    "exit_code": 0,
+    "output": "Documentation scaffold looks complete. Found 1761 numbered report(s).",
+    "at_utc": "2026-09-09T13:26:54.463808+00:00",
+    "exec_session": 44531,
+    "scope": "Rerun after integration-review corrections; inventory validation, not semantic report tests."
+  },
+  "integration_review": {
+    "session": "mirrorea-proof-first-integratio-review",
+    "exit_code": 0,
+    "question_sha256": "1566450593c02f35e90770c30a89e7e81f5b592084ae045d52d39d0c449d0130",
+    "answer_sha256": "93cf22f145b08971ee918d69be61fe84ba8aa7512c5d1a950954477abe96cfcb",
+    "disposition": "Four small snapshot corrections applied: completed review queue, pause/default-route scope, historical vs new executions, recorded pass vs rerun. No formal promotion/alpha claim found. Later producer scratch/probe excluded."
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "schema": "mirrorea-proof-first-support-cut-1",
+  "lean_version": "Lean (version 4.29.1, x86_64-unknown-linux-gnu, commit f72c35b3f637c8c6571d353742168ab66cc22c00, Release)",
+  "sources": {
+    "samples/lean/foundations/MirroreaProofFirstSupport.lean": "7f401632873cb3b87e0fa62d1b172af88b996b34a6d3fc62a7e61d103b41a9c3",
+    "samples/lean/foundations/MirroreaProofFirstSupportDifferential.lean": "912341026ee3edd3ef9ac38ad9dcc262f97b707265970766e2db0d7b856c651c",
+    "scripts/proof_first_support_check.py": "abdf058ffaeef1695a499ce0dd0d81f12259873ba9ceb88feff2db59e94dd304",
+    "sub-agent-pro/mirrorea-proof-first-handoff-v1/materials/mir_foundation_F0_3/model/support.py": "5eda79dd775df5033b90e26639a63cd7c7bd8a253c3dc290e70ea88c8dd9b86b"
+  },
+  "status": "LAB frozen candidate; not an authority or acceptance signature"
+}

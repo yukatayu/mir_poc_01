@@ -824,7 +824,7 @@ REQUIRED_PATHS: dict[str, list[str]] = {
         "sub-agent-pro/product-alpha1-001",
         "sub-agent-pro/operational-product-sample-001",
         "sub-agent-pro/full-system-completion-001",
-        "sub-agent-pro/mirrorea_mir_computational_core_handoff.md",
+        "sub-agent-pro/old_01/mirrorea_mir_computational_core_handoff.md",
     ],
 }
 

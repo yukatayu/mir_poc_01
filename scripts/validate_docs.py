@@ -731,7 +731,7 @@ REQUIRED = [
     ".docs/progress-task-axes.md",
     ".docs/continuous-task-policy.md",
     ".docs/current-l2-source-sample-authoring-policy.md",
-    "sub-agent-pro/mirrorea_mir_computational_core_handoff.md",
+    "sub-agent-pro/old_01/mirrorea_mir_computational_core_handoff.md",
     "sub-agent-pro/full-system-completion-001/20-progress-tasks-replacement-model.md",
     "mirrorea_canon/README.md",
     "mirrorea_canon/MAP.md",

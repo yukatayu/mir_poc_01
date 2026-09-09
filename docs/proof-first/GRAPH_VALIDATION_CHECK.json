@@ -1,0 +1,108 @@
+{
+  "status": "PASS",
+  "current_kernel": {
+    "status": "PASS",
+    "timestamp": "2026-09-09T12:14:25.230296+00:00",
+    "lean": "Lean (version 4.29.1, x86_64-unknown-linux-gnu, commit f72c35b3f637c8c6571d353742168ab66cc22c00, Release)",
+    "sources": {
+      "samples/lean/foundations/MirroreaProofFirstSupport.lean": "7f401632873cb3b87e0fa62d1b172af88b996b34a6d3fc62a7e61d103b41a9c3",
+      "samples/lean/foundations/MirroreaProofFirstCurrentUse.lean": "ab604c92b226182bdf84a38caaa044d6b949730891d40a02a72ad441c59f4239",
+      "samples/lean/foundations/MirroreaProofFirstCurrentUseReview.lean": "333276a42c1888af8412ad8c3aa21d84be2a514626cc91f1802db2740fe0ddb2",
+      "samples/lean/foundations/MirroreaProofFirstTrackedValidation.lean": "650339d6b363ee873c97e0f1e776aed0eb327981a78b5572dc0492589b20d9ff",
+      "samples/lean/foundations/MirroreaProofFirstGraphValidation.lean": "86d7148bc1dc7790f3925e94ddf41a0279b1a214e36bb96ff428c99f7ca0996a"
+    },
+    "checks": [
+      {
+        "command": [
+          "/home/codex/.elan/toolchains/leanprover--lean4---v4.29.1/bin/lean",
+          "--trust=0",
+          "-o",
+          "MirroreaProofFirstSupport.olean",
+          "MirroreaProofFirstSupport.lean"
+        ],
+        "exit_code": 0,
+        "log": "MirroreaProofFirstSupport.lean.log"
+      },
+      {
+        "command": [
+          "/home/codex/.elan/toolchains/leanprover--lean4---v4.29.1/bin/lean",
+          "--trust=0",
+          "-o",
+          "MirroreaProofFirstCurrentUse.olean",
+          "MirroreaProofFirstCurrentUse.lean"
+        ],
+        "exit_code": 0,
+        "log": "MirroreaProofFirstCurrentUse.lean.log"
+      },
+      {
+        "command": [
+          "/home/codex/.elan/toolchains/leanprover--lean4---v4.29.1/bin/lean",
+          "--trust=0",
+          "-o",
+          "MirroreaProofFirstCurrentUseReview.olean",
+          "MirroreaProofFirstCurrentUseReview.lean"
+        ],
+        "exit_code": 0,
+        "log": "MirroreaProofFirstCurrentUseReview.lean.log"
+      },
+      {
+        "command": [
+          "/home/codex/.elan/toolchains/leanprover--lean4---v4.29.1/bin/lean",
+          "--trust=0",
+          "-o",
+          "MirroreaProofFirstTrackedValidation.olean",
+          "MirroreaProofFirstTrackedValidation.lean"
+        ],
+        "exit_code": 0,
+        "log": "MirroreaProofFirstTrackedValidation.lean.log"
+      },
+      {
+        "command": [
+          "/home/codex/.elan/toolchains/leanprover--lean4---v4.29.1/bin/lean",
+          "--trust=0",
+          "-o",
+          "MirroreaProofFirstGraphValidation.olean",
+          "MirroreaProofFirstGraphValidation.lean"
+        ],
+        "exit_code": 0,
+        "log": "MirroreaProofFirstGraphValidation.lean.log"
+      }
+    ],
+    "work": "/tmp/mirrorea-proof-first-20260909-gn29zka5/graph-reviewed-z6pjhtja",
+    "limits": "General kernel proofs and fixed controls; logical graph publication only. No physical commit, authority/token origin, restore/dynamic-universe or Rust refinement/alpha acceptance."
+  },
+  "finite_comparison_historical_cut": {
+    "status": "PASS",
+    "finite_graphs": 512,
+    "nodes": 3,
+    "lean_proof_sha256": "b132d8f9697f20ff6514a271a92181f24ddab48f09b3c8cb126264688c3ea10a",
+    "driver_sha256": "1656c4c36e981e4fdd6aadd3abd9d23fcd2ce55a008f2e1bb1580f9ec24455b6",
+    "csv_sha256": "2d9235e24083f2391b87257f8fa9291f2d6628feb3fea932bd4db790444be989",
+    "work": "/tmp/mirrorea-proof-first-20260909-gn29zka5/tracked-final-a7l11k4t",
+    "scope": "All 512 directed Fin3 edge matrices including self-loops; Lean general checker vs copied F3 traversal applied to every present edge. Not general Python refinement or commit/network validation.",
+    "proof": "/tmp/mirrorea-proof-first-20260909-gn29zka5/tracked-final-a7l11k4t/MirroreaProofFirstGraphValidation.lean",
+    "command": [
+      "lean",
+      "--trust=0",
+      "-o",
+      "MirroreaProofFirstGraphValidation.olean",
+      "MirroreaProofFirstGraphValidation.lean"
+    ],
+    "exit_code": 0,
+    "log": "MirroreaProofFirstGraphValidation.lean.log",
+    "timestamp": "2026-09-09T12:04:18.389701+00:00"
+  },
+  "limits": "The 512 comparison ran on its recorded earlier cut; later changes only add interleaved publication proofs. No new comparison run claimed.",
+  "oracle_review": {
+    "session": "mirrorea-graph-consumer-review",
+    "status": "completed",
+    "question_sha256": "f003b985beed3a6646a500802f07fd24c6eeeb95cf97db7cbfbfdb7c591a9005",
+    "answer_sha256": "6250dca469bd75adb675d4c9fe412b2988c2bf9807e717fad42fbf9ae070a991",
+    "main_controls": "samples/lean/foundations/MirroreaProofFirstGraphReview.lean",
+    "controls_sha256": "b4c83990f3d1b0353240c89eeebf801a9b3be7351e16acc9b3efe4543ac554d5",
+    "command": "LEAN_PATH=. lean --trust=0 GraphReview.lean",
+    "cwd": "/tmp/mirrorea-proof-first-20260909-gn29zka5/graph-reviewed-z6pjhtja",
+    "exit_code": 0,
+    "scope": "pure LAB dependency only; no independent kernel execution by Oracle, no signature or normative acceptance"
+  }
+}

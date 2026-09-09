@@ -1,13 +1,13 @@
 # Project status
 
-最終更新: 2026-09-09 15:40 JST
+最終更新: 2026-09-09 22:02 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
 `mirrorea_canon/` is LAB: evidence, history, implementation, and operational
 notes. If LAB text conflicts with canon, canon wins.
 
-Owner control: I3-3 is accepted at the finite source/evidence cut and execution
+Plan250 owner control: I3-3 is accepted at the finite source/evidence cut and execution
 is paused. I3-3 accepted; owner pause leaves no active semantic milestone. Plan
 250 remains the sole retained current roadmap. I3-4 requires explicit owner
 resume; this is not blocked, stale or program close.
@@ -47,6 +47,13 @@ Plan 250 remains the sole retained current roadmap。
 I3-4/I3-5/I3-6/NEXT-0 remain dependency-gated inactive; I3-4 requires explicit owner resume。
 
 ## 現在地
+
+今回の別依頼は task-local proof-first LAB 研究と理論gate後の限定実装。
+現在の単一研究goalは W1-passive-erasure（PL1 S1/S3、theory/proof）。
+一般Leanの条件付き命題を検査し、source/実装対応、119行disposition、α統合は未達。
+M8 trusted setupの実効label不一致を実再現し、観測refinementの未解決義務とした。
+根拠は `plan/proof-first-foundation-correspondence.md`、`docs/reports/2611-mirrorea-proof-first-w1-foundations.md`。
+これは正式THM/OBL/phase更新、I3-4 resume、署名済み受理ではない。
 
 | 観点 | 状態 | 根拠 |
 |---|---|---|
@@ -104,7 +111,7 @@ Report2606; they are not current implementation tasks. No provider/session
 authority, hidden retry, exactly-once, public API or production guarantee follows.
 Detailed edge contracts: [`mirrorea_canon/architecture/07-browser-host-trust-boundaries.md`](../mirrorea_canon/architecture/07-browser-host-trust-boundaries.md); cross-edge binding/freshness/revocation/redaction/resource rules: [`mirrorea_canon/architecture/08-browser-host-security-invariants.md`](../mirrorea_canon/architecture/08-browser-host-security-invariants.md).
 View は authoritative domain semantics を所有せず、presentation-local computation のみを許可する。View からの入力は typed command/effect request とし direct store を禁止する。I3-0 はprivate transport選定をclosedし、OPEN-032はこのbounded programだけresolvedした。I3-1とI3-2とI3-3はbounded evidenceとしてclosedした。official I3 lifecycle entry remains unaccepted、I3-3 accepted; owner pause leaves no active semantic milestone、I3-4/I3-5/I3-6/NEXT-0 remain dependency-gated inactive、I5 implementation は inactiveである。
-I3-2の履歴証拠はlocalnet 12/12（repeat）、full probe 62/62、runtime default 29/29、seam 47/47、library 281/281、docs compile-fail 1/1（default/private）である。現在はI3-3を含む7/11 milestones acceptedであり、これは重み付き完成率ではない。FM-5 localhost evidenceであり、public workflowや100% completionは主張しない。最終検証後の空き容量は約63GiBで、容量保留はない。
+I3-2の履歴証拠はlocalnet 12/12（repeat）、full probe 62/62、runtime default 29/29、seam 47/47、library 281/281、docs compile-fail 1/1（default/private）である。現在はI3-3を含む7/11 milestones acceptedであり、これは重み付き完成率ではない。FM-5 localhost evidenceであり、public workflowや100% completionは主張しない。過去の最終検証後は約63GiB free。今回のM8 baseline後は約60GiB free、target4.4GiB。大きなvariant buildは測定付きstorage planまで保留し、小容量の証明・反例検査は継続する。
 The retained bounded I3 programはinternal carrierとpublic wireを分離し、route/handshake/framing/
 disconnect/reconnect/ambiguous delivery/duplicate/reorder/stale authority/backpressure/
 timeout/provider/redaction/patch/cut failureをtypedに扱い、network occurrencesをMir
@@ -118,7 +125,7 @@ drift、observer leak、lower-layer conformance dependency、M10 regressionの�
 ## オーナーの確認・判断待ち
 OPEN-032はPROPOSAL-040 / ADR-0037によりこのbounded programだけresolvedした。
 owner/userのresumeにより開始したI3-3はADR-0043で受理済みである。
-現在はowner pauseであり、I3-4は追加の明示的resumeまでactivateしない。
+Plan250はowner pauseであり、I3-4は追加の明示的resumeまでactivateしない。今回の独立した可逆LAB研究には追加回答を要しない。
 このpause gateに加え、次のbounded sequence外の変更もowner decisionを必要とする。
 - public API/ABI/wire/grammar/CLI compatibility freeze;
 - production deployment、external publication、paid resource;

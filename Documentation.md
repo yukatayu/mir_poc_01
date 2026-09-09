@@ -21,7 +21,14 @@ sole retained current roadmap、ALIGN-0, ALIGN-1, ALIGN-2, I3-0, I3-1, I3-2 and 
 memoryです。現在の停止線は
 `docs/project-status.md`、`progress.md`、`tasks.md` で確認します。
 
-最新のowner指示は、受理済みI3-3 cut後にowner pauseすることです。I3-4には明示的なresumeなしで進みません。
+Plan250に対するowner指示は、受理済みI3-3 cut後のpauseです。I3-4には明示的なresumeなしで進みません。
+今回の別の依頼は、証明先行の task-local LAB 研究と、理論gate後の限定実装です。
+現在は W1-passive-erasure（PL1 S1/S3、theory/proof）。一般 Lean 命題と有限反例を
+検査中で、source/実装refinement・α候補・正式THM/OBL受理は未達です。
+対応は `plan/proof-first-foundation-correspondence.md`、証跡は report2611、
+再現コマンドは `samples/lean/README.md`、既読範囲は `docs/proof-first/READ_LEDGER.json`。
+M8 trusted setupでの実効label不一致を再現し、後続の観測接続義務として保持しています。
+sub-agentは使わず、Oracleは主担当が操作するread-only助言者です。
 I3-3 accepted; owner pause leaves no active semantic milestone。Plan 250 remains retained、
 program完了やblockedとは区別します。
 
@@ -249,7 +256,7 @@ I3-4/I3-5/I3-6/NEXT-0 remain dependency-gated inactive; I3-4 requires explicit o
   exitを適用した。PROPOSAL-036 / ADR-0033 / Canon plan 05 は transport-neutralな
   inactive I3 entry contractを記録し、SYS-7とprogramをclosedした。OPEN-026/027とfull
   carrier freezeは残り、broad PHASE-I1は未受理です。現在はPROPOSAL-037 / ADR-0034の
-  bounded programとPlan 250がretained currentでI3-3 accepted/paused、program外だけがADR-0014のbounded L3 route、
+  bounded programとPlan 250がretained currentでI3-3 accepted/paused、program外の既定はADR-0014のbounded L3 routeです。上記の明示されたtask-local LAB委任は別に保持し、
   L2 promotionは引き続きfail-closedです。
 - reader-facing な統合図は `docs/mirrorea-project-overview.html`、短い現在地は
   `docs/project-status.md`、proof status は Canon ledger、runnable LAB evidence は

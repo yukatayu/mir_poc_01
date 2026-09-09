@@ -1,0 +1,71 @@
+{
+  "status": "PASS",
+  "timestamp": "2026-09-09T12:14:25.230296+00:00",
+  "lean": "Lean (version 4.29.1, x86_64-unknown-linux-gnu, commit f72c35b3f637c8c6571d353742168ab66cc22c00, Release)",
+  "sources": {
+    "samples/lean/foundations/MirroreaProofFirstSupport.lean": "7f401632873cb3b87e0fa62d1b172af88b996b34a6d3fc62a7e61d103b41a9c3",
+    "samples/lean/foundations/MirroreaProofFirstCurrentUse.lean": "ab604c92b226182bdf84a38caaa044d6b949730891d40a02a72ad441c59f4239",
+    "samples/lean/foundations/MirroreaProofFirstCurrentUseReview.lean": "333276a42c1888af8412ad8c3aa21d84be2a514626cc91f1802db2740fe0ddb2",
+    "samples/lean/foundations/MirroreaProofFirstTrackedValidation.lean": "650339d6b363ee873c97e0f1e776aed0eb327981a78b5572dc0492589b20d9ff",
+    "samples/lean/foundations/MirroreaProofFirstGraphValidation.lean": "86d7148bc1dc7790f3925e94ddf41a0279b1a214e36bb96ff428c99f7ca0996a"
+  },
+  "checks": [
+    {
+      "command": [
+        "/home/codex/.elan/toolchains/leanprover--lean4---v4.29.1/bin/lean",
+        "--trust=0",
+        "-o",
+        "MirroreaProofFirstSupport.olean",
+        "MirroreaProofFirstSupport.lean"
+      ],
+      "exit_code": 0,
+      "log": "MirroreaProofFirstSupport.lean.log"
+    },
+    {
+      "command": [
+        "/home/codex/.elan/toolchains/leanprover--lean4---v4.29.1/bin/lean",
+        "--trust=0",
+        "-o",
+        "MirroreaProofFirstCurrentUse.olean",
+        "MirroreaProofFirstCurrentUse.lean"
+      ],
+      "exit_code": 0,
+      "log": "MirroreaProofFirstCurrentUse.lean.log"
+    },
+    {
+      "command": [
+        "/home/codex/.elan/toolchains/leanprover--lean4---v4.29.1/bin/lean",
+        "--trust=0",
+        "-o",
+        "MirroreaProofFirstCurrentUseReview.olean",
+        "MirroreaProofFirstCurrentUseReview.lean"
+      ],
+      "exit_code": 0,
+      "log": "MirroreaProofFirstCurrentUseReview.lean.log"
+    },
+    {
+      "command": [
+        "/home/codex/.elan/toolchains/leanprover--lean4---v4.29.1/bin/lean",
+        "--trust=0",
+        "-o",
+        "MirroreaProofFirstTrackedValidation.olean",
+        "MirroreaProofFirstTrackedValidation.lean"
+      ],
+      "exit_code": 0,
+      "log": "MirroreaProofFirstTrackedValidation.lean.log"
+    },
+    {
+      "command": [
+        "/home/codex/.elan/toolchains/leanprover--lean4---v4.29.1/bin/lean",
+        "--trust=0",
+        "-o",
+        "MirroreaProofFirstGraphValidation.olean",
+        "MirroreaProofFirstGraphValidation.lean"
+      ],
+      "exit_code": 0,
+      "log": "MirroreaProofFirstGraphValidation.lean.log"
+    }
+  ],
+  "work": "/tmp/mirrorea-proof-first-20260909-gn29zka5/graph-reviewed-z6pjhtja",
+  "limits": "General kernel proofs and fixed controls; logical graph publication only. No physical commit, authority/token origin, restore/dynamic-universe or Rust refinement/alpha acceptance."
+}
