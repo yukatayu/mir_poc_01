@@ -465,3 +465,22 @@ New general image theorems use propext and Quot.sound only. Five resource-image
 mutations and four composed-image mutations each break a general proof and a
 concrete control. Fresh fifteen-module actual-source mirror passes trust=0.
 These are unreviewed LAB evidence, not production, actual-network or alpha readiness.
+
+Existing implementation correspondence, 2026-09-10 08:08 JST: the focused ordinary-source
+owner-budget localnet baseline actually ran at e22cd207: 9 PASS, 37 filtered, no
+ignored cases (a3c7bc), 55.41s total including44.03s offline Rust rebuild and11.34s
+test execution. It covers real two-exec QUIC serve/expiry, response loss, reconnect
+duplicate rejection, reply replay and observer-record corruptions. It preserves
+the existing accepted finite I3 baseline; no new W2 production connection, generic
+source execution, physical persistence or alpha acceptance follows. Exact argv,
+source hashes and stdout are in W2_EXTENSION_CHECK.source_owner_budget_localnet_regression.
+
+Full probe implementation/test/fault-type reading confirms two direct consumer
+limitations: project_adapter_contract and requester emission select init_avatar_hp
+inside a fixed two-slot deployment; the reader limits each stdout line to64KiB
+but sends into an unbounded mpsc channel. Therefore neither generic ordinary-source
+construction nor a total observation memory budget follows from this baseline.
+The queue issue is a static mechanism finding, not a reproduced denial-of-service
+or a claim that the accepted fixed test child floods the queue. Child output is
+also synchronous: tokio deadlines alone do not prove passive cost noninterference.
+No production fix is adopted before its required theory/review boundary.

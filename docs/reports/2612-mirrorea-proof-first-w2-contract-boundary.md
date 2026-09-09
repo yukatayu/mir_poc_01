@@ -1329,3 +1329,36 @@ No proof source changed since the checked final cut. Read metadata/continuation
 notes only afterward; commit/push follows. Main read-only Oracle bound-tab harvest
 69361 is pending, --no-recover prevents Chrome relaunch; it is not a new query,
 accepted answer, deadline or cancellation of either existing review job.
+
+Existing implementation correspondence, 2026-09-10 08:08 JST: the focused ordinary-source
+owner-budget localnet baseline actually ran at e22cd207: 9 PASS, 37 filtered, no
+ignored cases (a3c7bc), 55.41s total including44.03s offline Rust rebuild and11.34s
+test execution. It covers real two-exec QUIC serve/expiry, response loss, reconnect
+duplicate rejection, reply replay and observer-record corruptions. It preserves
+the existing accepted finite I3 baseline; no new W2 production connection, generic
+source execution, physical persistence or alpha acceptance follows. Exact argv,
+source hashes and stdout are in W2_EXTENSION_CHECK.source_owner_budget_localnet_regression.
+
+Full probe implementation/test/fault-type reading confirms two direct consumer
+limitations: project_adapter_contract and requester emission select init_avatar_hp
+inside a fixed two-slot deployment; the reader limits each stdout line to64KiB
+but sends into an unbounded mpsc channel. Therefore neither generic ordinary-source
+construction nor a total observation memory budget follows from this baseline.
+The queue issue is a static mechanism finding, not a reproduced denial-of-service
+or a claim that the accepted fixed test child floods the queue. Child output is
+also synchronous: tokio deadlines alone do not prove passive cost noninterference.
+No production fix is adopted before its required theory/review boundary.
+
+Same W2 report/semantic goal. plan/ and samples_progress.md updated with this
+evidence boundary; progress.md receives the actual timestamped regression log.
+Documentation.md, docs/project-status.md and tasks.md 更新不要: no accepted
+frontier, blocker replacement or milestone close. No new proof changed, so Lean
+was not rerun for this read/evidence delta. Full workspace, physical crash/recovery
+and alpha validation remain unexecuted. Main self-review only; Oracle jobs and
+read-only harvest remain pending, no external review acceptance. No sub-agents.
+Own-file whitespace/docs checks and commit/push follow; task continues.
+
+Focused evidence delta: documentation validation e319c1 PASS (1762 numbered reports).
+Oracle page-active diagnostic43c24b acknowledged on both owned targets, with no
+navigation/reload/resubmission. Latest492e67 metadata still has no confirmed prompt
+submission or answer; no review claim. Commit/push checkpoint follows self-review.

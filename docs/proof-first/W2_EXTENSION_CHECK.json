@@ -2671,5 +2671,42 @@
       ]
     },
     "status": "UNREVIEWED finite structural roundtrip/restore, not authenticated freshness, whole World recovery, physical persistence or byte codec"
+  },
+  "source_owner_budget_localnet_regression": {
+    "command": [
+      "cargo",
+      "test",
+      "--offline",
+      "--locked",
+      "-p",
+      "mirrorea-i3-probe",
+      "--test",
+      "i3_process_localnet",
+      "source_first_localnet_owner_budget",
+      "--",
+      "--test-threads=1"
+    ],
+    "head": "e22cd207425bdd39169e3f424eae4f4e05a45ed4",
+    "start": "2026-09-09T23:02:19.290399+00:00",
+    "scope": "Existing ordinary-source two-process QUIC baseline; not W2 integration or alpha acceptance",
+    "exit_code": 0,
+    "elapsed_seconds": 55.4110290450044,
+    "stdout": "\nrunning 9 tests\ntest source_first_localnet_owner_budget_expiry_is_delivered_and_consumed_at_tick_one ... ok\ntest source_first_localnet_owner_budget_expiry_lost_reply_rejects_the_exact_reconnect_duplicate ... ok\ntest source_first_localnet_owner_budget_expiry_reply_replay_on_verified_successor_is_rejected ... ok\ntest source_first_localnet_owner_budget_local_wait_falsifiers_reject_observer_evidence ... ok\ntest source_first_localnet_owner_budget_lost_reply_then_local_wait_keeps_remote_unknown ... ok\ntest source_first_localnet_owner_budget_reply_replay_on_initial_session_rejects_before_write ... ok\ntest source_first_localnet_owner_budget_serves_before_expiry ... ok\ntest source_first_localnet_owner_budget_serves_then_dropped_reply_keeps_requester_unknown ... ok\ntest source_first_localnet_owner_budget_success_reply_replay_on_verified_successor_is_rejected ... ok\n\ntest result: ok. 9 passed; 0 failed; 0 ignored; 0 measured; 37 filtered out; finished in 11.34s\n\n",
+    "stderr_sha256": "9a098446fcc2fdbc433173c11332c1eebcd197abf5ee0120cefd4aaac08cd4d7",
+    "stdout_sha256": "4f6becae04963f9104d8a5f98379df029e438542b55c7e0266f0626732c2194b",
+    "source_hashes": {
+      "crates/mirrorea-i3-probe/src/i3_process_localnet.rs": "21ac43d30ebdc0d9a42ae2bfd88e4cd6d4bea75815ad40754d94ac5383d5aa0f",
+      "crates/mirrorea-i3-probe/tests/i3_process_localnet.rs": "a35544462bca60d70f70a7276da868b6ec56c2514bd1f9f16a0c78cee3ab21bf",
+      "crates/mirrorea-i3-probe/Cargo.toml": "a2f22bcd1bff6c3e880936c7e69781e75c460317dd22f59c44aa8e2a27f10c62",
+      "Cargo.lock": "192e45b01e613e753c3534b2833c6976a3b79a901060bea64a4e2ec7da339e5a",
+      "samples/clean-near-end/mirrorea-i3-owner-admission/main.mir": "d3a322f25a16c4413f64ce318a8275f9523a4d31df5ed1b31abfa38b219c8488"
+    },
+    "build": "Offline cached dependency graph rebuilt in 44.03 seconds; actual test execution 11.34 seconds, 9 pass, 37 filtered",
+    "limits": [
+      "Existing finite fixed source-derived profile, not W2 integration",
+      "Same live owner process across reconnect; no disk restart or durable recovery",
+      "Probe project_adapter_contract selects init_avatar_hp; not generic alpha source execution",
+      "Observer per-line bound does not bound unbounded mpsc queue, or prove confidentiality/cost noninterference"
+    ]
   }
 }
