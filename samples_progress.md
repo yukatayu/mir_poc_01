@@ -1,54 +1,21 @@
 # samples_progress
 
-Last updated: 2026-09-09 13:54 JST
+Last updated: 2026-09-09 15:41 JST
 
 Current execution control: I3-3 is accepted and owner-paused with no active
 semantic milestone. Plan 250 remains retained; I3-4/I3-5/I3-6/NEXT-0 remain
 dependency-gated inactive and I3-4 requires explicit owner resume. No sample,
 program completion or official lifecycle entry claim follows.
 
-I3-3 time/reply checkpoint 55f1fd7f remains pushed evidence (probe 41/41,
-actual replay 3/3). These are retained results, not provider-component reruns.
-At pushed source/guard cut 9e8d674a, mirrorea-i3-provider-effect/main.mir is ordinary source/checking evidence
-for ADR-0042/spec/17: source suite 17/17, constructor privacy doctest 1/1,
-private unsupported guards 2/2 and public M8/M9/SYS5/M10 guards 5/5 pass.
-That source/guard cut retains runtime 334/334, process 63/63 and I2/M10 evidence.
-Its successor retains Stage2a static coverage/composite/projection evidence:
-semantics 6/17/8, privacy 1, static runtime 11. Retained Stage2b runtime is
-362/362, including provider filtering 26/26 within that total; process is
-63/63, M10 is 67/67, I2 local/CLI is 5/5 and 8/8, and public guards are 5/5.
-Three-crate all-target warnings-denied Clippy, workspace format, and workspace
-all-target check pass; workspace tests and CLI/probe Clippy are not claimed.
-Independent review is P0/P1/P2 zero after three direct tests and generic M8
-typed refusal. Static cut `3862b168` remains the Stage2a evidence cut. Accepted
-Stage2b cut `7142b205b4e2805d50ce78156de99e6feb1db37a` remains retained input;
-the accepted Stage2b source/cut is frozen. Accepted bounded Stage2c cut
-`a027d61b8030a903f892de2f7483ec8b64627963` has clean parity observed at 21:24
-JST. Stage2b and Stage2c are accepted inactive components. Stage2c retains final
-13/13 in runtime 375/375, process 63/63, ordinary localnet 41/41 and final
-review P0/P1/P2 zero; these are retained Stage2c results. The accepted Stage3 executes
-actual FD3-installed children, real QUIC and bounded host reads. After the review
-repair, runtime library413 and all probe targets pass, including provider20 and
-ordinary localnet43/process68; scoped Clippy and format pass, with no remaining review
-findings. The normal joined v2 view is separately M9-authorized. Four two-session
-fault profiles use child-private assertions and generic completion, not exported
-fault traces. The lost-result case decodes/discards a complete received frame
-before semantic admission; no wire-loss claim follows. AdapterUnavailable is
-LOCAL injected-read/codec evidence, not an actual OS operational error.
-Ordinary512 KiB, semantic64 KiB and image8 MiB caps are unchanged. Row19's exact
-image-redaction falsifier passes; live provider cut/export is not supported.
-Finite provider component `94ad584577fadfd0b016ff798a22b84df536939f` remains
-committed/pushed; row13 membership component `f6aae7ca277690ac558a08f124e414ae2d2d35ad`
-is committed with clean parity observed 2026-09-09 07:46 JST. Row13 verifies
-source-derived WorldAuthority membership retirement; I3-3 is accepted at
-source/evidence cut `fe5dd972e2ddb3a513c785458a07702e4d4d99fa`. The finite profile
-covers all twenty failure/order families; workspace 1573, runtime doctests 4,
-format, Clippy and final review P0/P1/P2=0 are retained evidence. I3-3 accepted;
-owner pause leaves no active semantic milestone. Plan 250 remains the sole retained
-current roadmap. I3-4/I3-5/I3-6/NEXT-0 remain dependency-gated inactive; I3-4
-requires explicit owner resume. Official I3 lifecycle entry remains unaccepted.
-Browser, world semantics and public/production claims remain outside the cut.
-No generic membership/anchor retirement or public claim follows.
+Detailed component counts, historical cuts and command classifications remain in
+Report 2606. Canon/status acceptance is `aafde92229bb0ff18116f38d4750a0a8f61cb069`
+(ADR-0043). The accepted I3-3 source cut is `fe5dd972e2ddb3a513c785458a07702e4d4d99fa`:
+finite twenty-family/order evidence, retained workspace 1573, runtime doctests 4,
+format, Clippy and final review P0/P1/P2=0. I3-3 accepted; owner pause leaves no
+active semantic milestone. Plan 250 remains retained; I3-4/I3-5/I3-6/NEXT-0
+remain dependency-gated inactive and I3-4 requires explicit owner resume.
+Official I3 lifecycle entry, Browser/world semantics, public/production,
+save/patch/global-cut and exported provider-fault-trace claims remain outside.
 
 Workflow focus: current-L2 runnable floor, practical alpha-1 evidence, bounded
 operational α-0.5 / α-0.8 / α-0.9 workflows, product alpha-1 release candidate,

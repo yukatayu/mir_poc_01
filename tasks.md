@@ -1,6 +1,6 @@
 # Current Task Map (LAB)
 
-最終更新: 2026-09-09 14:10 JST
+最終更新: 2026-09-09 15:41 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project direction,
 theory, ADRs, conformance, and process. Everything outside it is LAB evidence,
@@ -27,8 +27,8 @@ Official I3 lifecycle remains unentered; Theory T1 and broad-I1 residuals are
 unchanged. The private selected transport is QUIC reliable stream (ADR-0037);
 TLS/TCP remains the deferred baseline and QUIC datagrams remain excluded.
 
-Owner control: finish all I3-3 gates, independent review, commit/push and remote
-parity, then stop. Retain Plan 250 with no active semantic milestone. I3-4
+Owner control: I3-3 validation, review, commit/push and parity are complete at
+the accepted cut. Retain Plan 250 with no active semantic milestone. I3-4
 requires explicit owner resume. This pause is neither blocked nor program close.
 
 ### Accepted input history: I3-2
@@ -39,28 +39,22 @@ Source/Core/generated edges, operations, authority and results cannot be
 supplied by deployment. There is no shared remote semantic store. This is
 accepted input history, not the current I3-3 acceptance claim.
 
-### Active goal: I3-3 network failure, retry, and ordering refinement
+### Accepted goal snapshot: I3-3 network failure, retry, and ordering refinement
 
-Complete all 20 required failure families and concrete-to-Mir ordering.
-Preserve owner-local evaluation, current membership/capability/witness checks,
-source/Core/artifact provenance, redaction, explicit retry and bounded shutdown.
-Primary falsifiers: second mutation/consume, stale authority resurrection,
-false success/nonexecution, blind retry, leaked private information, or hang.
+The finite I3-3 cut completed all 20 required failure families and
+concrete-to-Mir ordering categories. It preserves owner-local evaluation,
+membership/capability/witness checks, source/Core/artifact provenance, redaction,
+explicit retry and bounded shutdown. Reopen only for a reproducible accepted-cut
+falsifier: second mutation/consume, stale authority resurrection, false
+success/nonexecution, blind retry, leaked private information, or hang.
 
-The current provider component implements ADR-0042/spec/17, building on accepted
-source/static cuts9e8d674a/3862b168, inactive M9/M8 authorization7142b205 and
-inactive process handoffa027d61. Historical counts and repairs stay in Report2606.
-
-Stage3 now runs actual FD3-installed A/B children, source-derived QUIC provider
-requests, bounded host reads, current-authority result consumption and separately
-authorized normal v2 observation. Fresh row13 follow-up evidence passes runtime
-library413, all probe targets (ordinary43/provider20), process68, M1067,
-I2 local5/CLI8 and provider public guards5. Scoped all-target Clippy and format
-pass; independent review has no remaining P0/P1/P2. The finite provider component
-is committed/pushed at `94ad584577fadfd0b016ff798a22b84df536939f`; the row13
-membership component is committed at `f6aae7ca277690ac558a08f124e414ae2d2d35ad`, with clean
-HEAD/origin/main/live parity observed 2026-09-09 07:46 JST; this is not a new
-milestone or official lifecycle change.
+The accepted source/evidence cut is `fe5dd972e2ddb3a513c785458a07702e4d4d99fa`.
+Canon/status acceptance is `aafde92229bb0ff18116f38d4750a0a8f61cb069`
+under `mirrorea_canon/adr/ADR-0043.md`.
+Workspace 1573, runtime doctests 4, format, Clippy and final review P0/P1/P2=0
+are retained assurance; exact commands, classifications and historical repairs
+remain in Report 2606. This is a finite accepted profile, not a general provider,
+Browser, world-semantics, public/production or save/patch/global-cut claim.
 
 Row13 verifies source-derived WorldAuthority membership retirement with full-parent
 M9 and qualified restricted-child G1→G2 coverage; old-G1 CarrierAdmissionRejected
@@ -143,10 +137,10 @@ as an active queue by this snapshot.
 | 0 repository memory | three-axis/current-frontier discipline maintained | snapshot maintenance |
 | 1 semantic kernel | finite I2 boundary; selected spec/17 contract | bounded I3 consumers only |
 | 2 parser-free substrate | historical evidence | maintenance, not active architecture |
-| 3 source/checker/runtime | provider source/static projection tested; actual provider execution absent | current I3-3 component |
-| 4 samples | I2 toy/conformance reproducible; provider source-only | evidence-backed expansion |
+| 3 source/checker/runtime | finite source/checker/runtime/provider profile accepted at the I3-3 cut | maintenance; no new provider/public claim |
+| 4 samples | I2 toy/conformance and finite I3-3 process/provider tests | maintenance; later workflow requires resume |
 | 5 theorem/model bridge | bounded model/runtime evidence; no new Lean claim | exact classifications |
-| 6 distributed fabric | I3-2 accepted; I3-3 failure/order incomplete | through I3-3, then pause |
+| 6 distributed fabric | I3-2 and I3-3 accepted finite profiles | owner pause; I3-4 after explicit resume |
 | 7 toolchain/backend | provisional developer commands | no public freeze |
 | 8 applications | domain/library consumers, separate from fabric | no Core promotion; later owner scope |
 
@@ -157,10 +151,10 @@ not an addressing/governance/product specification. Reversed Library is separate
 
 ## user decision gates
 
-No semantic owner decision is currently required for bounded I3-3 implementation.
+No semantic owner decision is currently required while the accepted I3-3 cut is paused.
 The owner approved removal of the identified `target/debug` cache; at11:57JST
 that exact cleanup recovered65G free. Source, .git and logs remain. The former
-storage decision gate is resolved and bounded-debug Cargo validation resumes;
+storage decision gate is resolved and bounded-debug Cargo validation completed;
 unrelated deletion or broader external actions are not inferred.
 The following remain mandatory escalation boundaries, not autonomous options
 to weaken the goal.
@@ -179,16 +173,20 @@ choices and unoptimized performance are not themselves stop conditions.
 
 ## research discovery items
 
+No I3-3 research consumer is active. Provider admission/calls, membership,
+redaction and local cut/order questions are closed at their finite accepted
+scope in ADR-0043; their historical investigation stays in Report2606.
+
 | Bounded question | Direct consumer | Required evidence / recommendation |
 |---|---|---|
-| Mixed legacy M8 and independent provider authorization | current provider Stage 2b | genuine binding, actual M9 verification/policy, retained component scope; no silent erasure or owner-grant reuse |
-| Effect invocation and release/revocation | provider Stage 3/4 | actual host call and retained typed outcome; no retry/false nonexecution |
-| Membership/redaction/cut with in-flight traffic | remaining I3-3 families | actual producer state and positive/falsifier; no distributed durability claim |
-| Concrete-to-abstract ordering | I3-3 | request/serve/result/consume and authority/cut edges, not stream order |
-| Official distributed scenarios | inactive I3-4/I3-6 | SCN-01/02/03/06 and exact source-first evidence |
+| Official distributed scenarios and pressure | inactive I3-4 | SCN-01/02/03/06 positive/falsifier; separate relation/designated pressure |
+| Observer-safe joined network workflow | inactive I3-5 | source-to-network-to-runtime joins without secrets or fabricated fault traces |
+| Finite conformance and lifecycle | inactive I3-6 | exact evidence classification, provenance and independent acceptance |
+| Durability / Browser entry boundaries | inactive NEXT-0 | contracts only; no I4/I5 implementation or public freeze |
 
-Compare at most the current smallest design and one viable alternative.
-No new WRK/report lane without a direct consumer and bounded closure.
+After explicit resume compare at most the current smallest design and one
+viable alternative. No new WRK/report lane without a direct consumer and
+bounded closure.
 
 ## maintenance tasks
 

@@ -1,6 +1,6 @@
 # Project status
 
-最終更新: 2026-09-09 13:54 JST
+最終更新: 2026-09-09 15:40 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -39,10 +39,12 @@ closed M0--M10 finite reference baseline
 -> [x] I3-3 network failure/order refinement (accepted; owner-paused): `mirrorea_canon/adr/ADR-0043.md`
 ```
 
-Plan 247とPlan 249はclosed recordsである。PROPOSAL-037 / ADR-0034により
-Mirrorea I3 Distributed Foundation bounded programは継続中で、owner resumeによりI3-3
-I3-3 accepted; owner pause leaves no active semantic milestone。Plan 250 remains the sole retained current roadmap。ALIGN-0 / ALIGN-1 / ALIGN-2 /
-I3-0 / I3-1 / I3-2はcompleted、I3-4/I3-5/I3-6/NEXT-0 remain dependency-gated inactive; I3-4 requires explicit owner resume。
+Plan 247とPlan 249はclosed recordsである。PROPOSAL-037 / ADR-0034の
+Mirrorea I3 Distributed Foundation bounded programは未完了だが、ADR-0043により
+実行は一時停止している。ALIGN-0--2 / I3-0--3の7/11 milestoneが受理済み。
+I3-3 accepted; owner pause leaves no active semantic milestone。
+Plan 250 remains the sole retained current roadmap。
+I3-4/I3-5/I3-6/NEXT-0 remain dependency-gated inactive; I3-4 requires explicit owner resume。
 
 ## 現在地
 
@@ -82,36 +84,24 @@ I3-3 is accepted and owner-paused with no active semantic milestone;
 I3-4/I3-5/I3-6/NEXT-0 remain inactive pending their dependency gates. The
 accepted I3-2 source cut and remote parity are the preserved entry evidence.
 
-Earlier delivery/reconnect/time and provider source/static/inactive cuts remain
-in Report2606 and Plan250; they are not fresh Stage3 results. The accepted
-inactive process handoff is a027d61. Stage3 now executes genuine FD3-installed
-children, real QUIC provider requests, bounded host reads and current-authority
-consumption, with separately M9-authorized normal v2 joined observation.
-Fresh row13 follow-up gates pass runtime library413, all probe targets
-(ordinary43/provider20), process68, M10/I2/guards, scoped Clippy/format and
-independent review with no remaining P0/P1/P2.
+Accepted source/evidence cut: `fe5dd972e2ddb3a513c785458a07702e4d4d99fa`.
+Accepted Canon/status integration: `aafde92229bb0ff18116f38d4750a0a8f61cb069`.
+Retained acceptance evidence: workspace1573, runtime doctests4, format/Clippy
+and independent source review P0/P1/P2=0. These are source-cut results, not
+fresh Rust runs for this documentation maintenance.
 
-Four real two-session fault profiles use child-private assertions and generic
-completion, not exported fault traces. The lost-result case receives/decodes
-then discards the frame before semantic admission; it is not wire packet loss.
-Row13 now verifies source-derived `WorldAuthority` membership retirement with
-full-parent M9 and qualified restricted-child G1→G2 coverage; old-G1
-`CarrierAdmissionRejected` remains before owner use, and LOCAL genuine M8
-`StaleMembership` is separate. No observer renewal, grant mint or session
-authority follows. Unrelated relation bindings remain exact; terminal errors are
-fieldless opaque/slot-only, including wrong-kind ACK then valid publication.
-AdapterUnavailable retains LOCAL injected-read/codec evidence, not actual OS
-operational failure. The row13 membership component is committed/pushed at
-`f6aae7ca277690ac558a08f124e414ae2d2d35ad`; the finite provider component remains
-at `94ad584577fadfd0b016ff798a22b84df536939f`, with clean parity observed
-2026-09-09 07:46 JST. I3-3 is accepted at source/evidence cut
-`fe5dd972e2ddb3a513c785458a07702e4d4d99fa`; the finite profile covers all twenty
-failure/order families, with workspace 1573 tests, four runtime doctests, format,
-Clippy and final review P0/P1/P2=0. I3-3 accepted; owner pause leaves no active
-semantic milestone. Plan 250 remains the sole retained current roadmap.
-I3-4/I3-5/I3-6/NEXT-0 remain dependency-gated inactive; I3-4 requires explicit
-owner resume. Official I3 lifecycle entry remains unaccepted. Browser, world
-semantics and public/production claims remain outside this cut.
+The finite twenty-family/order profile includes real two-process QUIC,
+ambiguity/reconnect/duplicate rejection, current membership/capability checks,
+source-declared owner admission ticks, read-only provider calls and A-local
+continuing-runtime cut custody. Actual process evidence, LOCAL checks and the
+432-state/2136-transition bounded model remain distinct. Private child fault
+assertions are not exported observer traces; injected `AdapterUnavailable`
+is LOCAL evidence. The local cut emits no saved image and does not implement
+save/restore, distributed quiescence, live patch or durable restart.
+
+Detailed component commands, falsifiers and limitations remain in immutable
+Report2606; they are not current implementation tasks. No provider/session
+authority, hidden retry, exactly-once, public API or production guarantee follows.
 Detailed edge contracts: [`mirrorea_canon/architecture/07-browser-host-trust-boundaries.md`](../mirrorea_canon/architecture/07-browser-host-trust-boundaries.md); cross-edge binding/freshness/revocation/redaction/resource rules: [`mirrorea_canon/architecture/08-browser-host-security-invariants.md`](../mirrorea_canon/architecture/08-browser-host-security-invariants.md).
 View は authoritative domain semantics を所有せず、presentation-local computation のみを許可する。View からの入力は typed command/effect request とし direct store を禁止する。I3-0 はprivate transport選定をclosedし、OPEN-032はこのbounded programだけresolvedした。I3-1とI3-2とI3-3はbounded evidenceとしてclosedした。official I3 lifecycle entry remains unaccepted、I3-3 accepted; owner pause leaves no active semantic milestone、I3-4/I3-5/I3-6/NEXT-0 remain dependency-gated inactive、I5 implementation は inactiveである。
 I3-2の履歴証拠はlocalnet 12/12（repeat）、full probe 62/62、runtime default 29/29、seam 47/47、library 281/281、docs compile-fail 1/1（default/private）である。現在はI3-3を含む7/11 milestones acceptedであり、これは重み付き完成率ではない。FM-5 localhost evidenceであり、public workflowや100% completionは主張しない。最終検証後の空き容量は約63GiBで、容量保留はない。

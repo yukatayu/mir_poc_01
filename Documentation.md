@@ -277,149 +277,34 @@ recordが揃ったためofficial I2 entry後exitを受理しました。broad PH
 
 ## Planning / status snapshot
 
-- done: SYS-0--SYS-7 and the ADR-0026 / Plan 249 program are closed. Accepted
-  SYS-6 implementation/evidence cut is `5429712d...`, Canon/status integration
-  cut is `bcb0f767...`, and official I2 entry then exit is accepted.
-- in-progress: PROPOSAL-037 / ADR-0034 bounded I3 program; Plan 250 sole roadmap;
-  ALIGN-0--2, I3-0/I3-1/I3-2/I3-3 accepted; owner pause leaves no active semantic milestone. I3-4/I3-5/I3-6/NEXT-0 remain dependency-gated inactive.
-- decisions taken: ALIGN-1 accepted the independent three-axis project/product
-  map; PL-4 remains responsibility-only, PL-6 remains separate, and satellites
-  remain outside the numbered product layers.
-- decisions taken: PROPOSAL-040 / ADR-0037 resolve OPEN-032 only for this bounded
-  program and select private QUIC reliable stream; TLS/TCP is a deferred
-  replacement baseline and QUIC datagrams remain excluded.
-- blocked/deferred: I3 lifecycle entry remains unentered. Broad PHASE-I1 exit,
-  final public API/ABI/wire/carrier freeze, production, and browser/View product
-  remain outside the accepted claim.
-- prior checkpoint `87ee2418`: authorized removal of only `target/debug/incremental`
-  restored about 18 GiB free. That slice passed full-runtime integration
-  51/51 (44.43s), evaluator owner-capacity 1/1, I3-3 filter 4/4, probe library
-  lifecycle evidence 2/2 (one filtered), selected runtime library 1/1 + 1/1
-  (old-owner withdrawal and exact-ledger different-snapshot), actual probe
-  integration 17/17, and `cargo fmt --all -- --check`. The historical
-  compiled ledger-source binary remains 49/49 in 47.70s only; it is not latest
-  source evidence. The bounded standalone model passed 3/3 tests (432 states,
-  2136 transitions) and exposed three mutant counterexamples; this is not a
-  general runtime proof.
-- prior checkpoint continued: runtime-only retry 2/2 and full same-feature library
-  285/285 (82.33s) pass. Focused two-crate all-target Clippy with `-Dwarnings`
-  also passes; model-target dead-code warnings without its private feature are
-  not a deny-lint profile. This checkpoint does not accept I3-3.
-- actual reconnect slice: the same two live OS processes consume one checked
-  receipt on the pre-write path. After owner admission and a lost reply, the
-  retry is duplicate-rejected while the requester remains pending/ambiguous;
-  it is not successful recovery. Three commitment corruptions and one binding
-  corruption reject joins; local misuse returns `LocalAttemptRejected`.
-  Fresh probe 22/22, lifecycle unit 2/2, focused deny-warnings Clippy and
-  format/diff checks pass. The full I3-3 matrix remains open.
-- prior successor slice: a genuine M9 capability successor is installed in B
-  before reconnect; late session-one traffic is rejected without owner mutation,
-  while A remains pending/unknown. G1 control completes once. Registered B ACK
-  publication, actual A-stdout tainted input, one-shot ingress and contradictory
-  terminal-observation rejection have fresh runtime 61/61, probe 29/29 and
-  feature-library 289/289 evidence; focused Clippy and format/diff pass.
-  Independent narrow review finds no remaining P0/P1 in the repaired slice;
-  I2 regressions 5/5 + 8/8 and M10 conformance 67/67 pass. This is checkpoint
-  evidence over `7580e3a`, not I3-3 acceptance or a refreshed model.
-- retained I3-3 component history: the pushed `30429d5` checkpoint implements ADR-0041/spec/16's
-  source owner-admission budget, genuine expiry delivery, lost-result uncertainty
-  and requester-local wait. The successor row-11 delta now rejects actual
-  successful/expiry reply replay through verified QUIC session 2, preserving the
-  first receipt/terminal and owner state; wrong-session replay rejects prewrite.
-  Final independent review has P0/P1/P2 zero. The bounded time/reply consumer is
-  integrated/pushed at `55f1fd7f` with clean remote parity. ADR-0042/spec/17 now
-  selects the finite provider contract. Its source/check/snapshot and explicit
-  unsupported-legacy-runtime handoff now pass source 17/17, privacy 1/1,
-  private guards 2/2 and public guards 5/5, with independent review clear.
-  Accepted inputs are source/guard `9e8d674a`, static `3862b168`, inactive
-  authorization `7142b205`, and inactive process handoff Stage2c `a027d61b`
-  (clean remote parity observed 2026-09-08 21:24 JST). Retained Stage2c evidence
-  is focused13 included in runtime375, process63, ordinary localnet41,
-  M10/I2 67/5/8, guards5, scoped Clippy/format/workspace check and independent
-  review with no remaining findings; Report2606 retains exact commands.
-  The current slice-2 provider packet is actual probe 20/20, exact guard 1/1,
-  held-S2 1/1, local execution 18/18, runtime 7/7 and control 9/9 green.
-  Four actual two-session fault profiles use genuine child-private assertions
-  with generic completion only; their fault trace is not exported. The repaired
-  held-S2 and unsupported-slot cases use shared-body generation/decoder checks.
-  The lost case decoded and discarded a complete frame before semantic admission;
-  it is not wire packet loss or a no-read result. Final row13 follow-up runtime413,
-  all probe targets, process68, M1067, I2 local5/CLI8 and provider guards5 pass;
-  scoped Clippy/format pass and review has no remaining findings. Row13 verifies
-  source-derived WorldAuthority membership retirement with full-parent M9 and
-  qualified restricted-child G1→G2 coverage; old-G1 CarrierAdmissionRejected is
-  before owner use and LOCAL genuine M8 StaleMembership is separate. No observer
-  renewal, grant mint or session authority follows. The row13 membership
-  component is now committed/pushed at `f6aae7ca277690ac558a08f124e414ae2d2d35ad`;
-  the finite provider component remains at `94ad584577fadfd0b016ff798a22b84df536939f`
-  with clean HEAD/origin/main/live parity observed 2026-09-09 07:46 JST; I3-3
-  itself was not yet accepted at that historical component checkpoint.
-  Unrelated relation bindings remain exact; terminal errors are fieldless opaque/
-  slot-only, including wrong-kind ACK then valid publication. I3-3 is accepted at
-  source/evidence cut `fe5dd972e2ddb3a513c785458a07702e4d4d99fa`; the finite
-  profile covers all twenty failure/order families, with workspace 1573, four
-  runtime doctests, format, Clippy and final review P0/P1/P2=0. I3-3 accepted;
-  owner pause leaves no active semantic milestone. Plan 250 remains the sole
-  retained current roadmap. I3-4/I3-5/I3-6/NEXT-0 remain dependency-gated
-  inactive; I3-4 requires explicit owner resume. Official I3 lifecycle entry
-  remains unaccepted. Browser, world semantics and public/production claims remain
-  outside this cut. Ordinary 512 KiB, semantic 64 KiB and image 8 MiB caps remain unchanged;
-  detailed prior lifecycle and boundary evidence remains in Report2606.
-  Private M8 v2 remains provisional; the accepted provider row-18 and whole-I3-3
-  profile are finite runtime evidence, not a public or general provider contract.
-  I3-3 is accepted at the finite source/evidence cut; I3-4 remains inactive
-  pending explicit owner resume.
-- decisions taken: the working interpretation remains ordinary meaning ->
-  generated distribution -> continually checked composition. World/Avatar remain
-  domain-library vocabulary, not Mir Core primitives; ledger64/coordinator/
-  closed-cohort finite-profile machinery are bounded evidence, not general Mir
-  requirements, and add no theory gate or roadmap item.
-- decisions taken: SYS-5 closes only the bounded local toy/devtools workflow:
-  four-locus source-derived projection, generated in-process dispatch, joined
-  observer-safe causal rows, local save/restore, one accepted designated-only
-  patch, one rejected owner-RMW patch, relation fallback/reacquire, and typed
-  auth failure.
-- decisions taken: SYS-6 accepts a downstream-only exact 22-row source-first
-  profile and applies official I2 entry then exit through ADR-0032; the command
-  itself remains non-authorizing.
-- decisions taken: SYS-7 accepts only an inactive entry contract with two
-  unselected reliable-stream candidates, transport as non-authority, complete
-  future failure/order requirements, and SCN-01/02/03/06 C-distributed gates.
-- open risks: OW1 cut/patch remains a typed `BackendIneligible` residual;
-  SYS-5/SYS-6 CLI/JSON/grammar are internal/provisional, the four-locus toy is
-  not whole-workflow OW1, and the evidence is not a general scheduler,
-  memory-model, relation-DAG, public transport, or lifecycle theorem.
-- retained component verification (final source gate: workspace1573 and doctests4): Stage2b runtime is 362/362, including provider filtering
-  26/26 (not additive); process integration is 63/63, M10 is 67/67, I2 local/CLI
-  is 5/5 and 8/8, and public guards are 5/5. Three-crate all-target Clippy is
-  warnings-clean, workspace format passes, and workspace all-target check
-  passes; workspace tests, CLI/probe Clippy and provider activation are not
-  claimed. Independent spec/quality review is P0/P1/P2 zero. Stage2b is
-  accepted as an inactive component at `7142b205`;
-  retained Stage2c final focused module/runtime is 13/13 included in 375/375
-  (362 filtered; 9.65s/88.17s), with actual ordinary localnet 41/41 (59.92s).
-  Feature-union Clippy/workspace format/check are green; workspace tests,
-  probe-all tests and provider activation are not claimed. Final independent
-  review is P0/P1/P2 zero. Stage2c is accepted inactive at the observed cut.
-  Current Stage3 actual provider probe passes20/20 and local execution/read/control
-  filters pass18/7/9. Genuine FD3-installed children execute the host/QUIC path.
-  Normal v2 observation is separately M9-authorized; four two-session fault
-  profiles use child-private assertions and generic completion, not exported
-  fault traces. The lost-result case discards a received, decoded frame before
-  semantic admission; it is not wire packet loss. Final row13 follow-up runtime413,
-  all probe targets, process68, M10/I2 and provider guards pass, as do scoped
-  Clippy/format; review has no remaining findings. The row13 membership component
-  is now committed/pushed at `f6aae7ca277690ac558a08f124e414ae2d2d35ad`; the
-  finite provider component remains at `94ad584577fadfd0b016ff798a22b84df536939f` with clean
-  parity observed 2026-09-09 07:46 JST. I3-3 is accepted at source/evidence cut
-  `fe5dd972e2ddb3a513c785458a07702e4d4d99fa`; final review P0/P1/P2=0 and exact
-  finite evidence remain in Report2606. I3-3 accepted; owner pause leaves no
-  active semantic milestone. Plan 250 remains the sole retained current roadmap.
-  I3-4/I3-5/I3-6/NEXT-0 remain dependency-gated inactive; I3-4 requires explicit
-  owner resume. Official I3 lifecycle entry remains unaccepted. Browser, world
-  semantics and public/production claims remain outside the cut. Accepted row15/19 evidence reuse and whole-I3-3 acceptance are recorded in Report2606
-  and Plan250. Historical micro-checkpoints stay in Report2606; no
-  official lifecycle or public workflow claim follows.
+Plan 250 sole roadmap; Plan 250 remains the sole retained current roadmap.
+I3-3 accepted; owner pause leaves no active semantic milestone.
+I3-4/I3-5/I3-6/NEXT-0 remain dependency-gated inactive; I3-4 requires explicit owner resume.
+official I3 lifecycle entry remains unaccepted.
+
+- Accepted source/evidence: `fe5dd972e2ddb3a513c785458a07702e4d4d99fa`.
+- Accepted Canon/status integration: `aafde92229bb0ff18116f38d4750a0a8f61cb069`,
+  recorded by `mirrorea_canon/adr/ADR-0043.md`.
+- Seven of eleven milestones are accepted; this is not a workload percentage.
+- Generated per-locus artifacts execute in real OS processes over private QUIC.
+  The finite failure/order profile covers ambiguity, explicit retry/reconnect,
+  stale/duplicate rejection, current authority, declared owner ticks, read-only
+  provider calls and A-local continuing-runtime cut custody.
+- Retained source-cut validation: workspace1573, runtime doctests4, format,
+  warnings-denied Clippy and independent source review P0/P1/P2=0.
+  These are not fresh Rust runs for the documentation cleanup.
+- Actual process evidence, LOCAL admission/codec/graph checks and the bounded
+  lifecycle model (432states/2136transitions) are separate classes. Private
+  child fault assertions are not exported observer traces. The local cut
+  produces no saved image; no save/restore/live patch/global cut, public API,
+  general theorem, Browser product or production guarantee follows.
+- I3-4 will execute C-distributed SCN-01/02/03/06 and relation/designated pressure;
+  I3-5 adds network devtools/workflow; I3-6 closes finite conformance and only
+  then may accept official I3 lifecycle; NEXT-0 writes inactive I4/I5 contracts.
+  All remain inactive under the owner pause.
+- Exact historical component counts, commands, falsifiers and limitations stay
+  in immutable `docs/reports/2606-mirrorea-i3-distributed-foundation-i3-3-failure-ordering.md`.
+  Current maintenance evidence is in Plan250; no second milestone report is made.
 
 ## Historical plan index（Plan 249を含めrepository memory、current queueではない）
 

@@ -1,6 +1,6 @@
 # Plan 250 — Mirrorea I3 Distributed Foundation current execution roadmap
 
-最終更新: 2026-09-09 13:56 JST
+最終更新: 2026-09-09 15:52 JST
 
 ## 役割、authority、current control state
 
@@ -60,7 +60,9 @@ roadmap/status pointer の一致を検証する。
   Clippy gates pass; final independent source review P0/P1/P2=0. Report2606
   contains the exact twenty-family/order mapping and finite non-claims.
   Seven of eleven milestones are accepted; this is not a workload percentage.
-  Canon/status integration is the final close operation, not a new active goal.
+  Canon/status integration completed at
+  `aafde92229bb0ff18116f38d4750a0a8f61cb069`, pushed with clean live parity
+  observed at2026-09-09 14:25 JST. This is accepted history, not a remaining goal.
 - retained component history: time/reply `55f1fd7f`; provider source/static
   `9e8d674a`/`3862b168`, M9/M8 admission `7142b205`, inactive handoff `a027d61b`,
   actual provider `94ad5845`, source-declared membership `f6aae7ca`, final cut
@@ -109,6 +111,42 @@ WRKs, PrismCascade, Typed-Effect Wiring, and upper applications are not
 parallel current queues. ADR-0014 remains the route outside this exact program.
 
 ## Source hierarchy and accepted inputs
+
+Post-acceptance maintenance, 2026-09-09 (not a milestone or resume): the owner
+requested current-status consolidation, consistency checks, push and appropriate
+cleanup. Start: clean `main`, HEAD/origin/main at accepted integration
+`aafde92229bb0ff18116f38d4750a0a8f61cb069`; source remains `fe5dd972`.
+Independent pre-edit planner review admitted only snapshot consolidation:
+remove stale active-I3-3 / six-of-eleven / provider-absent statements and point
+component history to immutable Report2606. No Canon, source, lifecycle or
+roadmap-sequence decision changes. No new report is created for metadata-only
+maintenance; the closed milestone report is not rewritten.
+
+Resource audit: `df -h .`, `lsblk -f`, `findmnt -T .`,
+`findmnt /mnt/mirrorea-work`, `free -h`, `du -sh .` and
+`du -sh target .git .cargo .lake`
+show root `/dev/sda2` ext4 (188G total,117G used,63G available),15GiB memory
+(11GiB available), repository2.1G, target2.0G and .git107M. `.cargo`/`.lake`
+are absent; `/mnt/mirrorea-work` is not mounted, so no external workdir is
+created or bulk-cleaned. Only ignored `.pytest_cache` and four Python
+`__pycache__` directories were selected after exact path/tracked-file checks;
+about3MiB of regenerable cache is removed. The2G current build cache, all
+source, historical samples/reports and `/tmp` validation/Oracle evidence stay.
+
+Fresh validation is documentation/reader/diff and independent snapshot review;
+the1573 workspace tests/four doctests remain retained source-cut evidence,
+not reruns in this maintenance. Rust/Lean/Clippy are not rerun because there
+is no source, dependency, contract or proof delta. Program and product-goal
+pause remain unchanged; I3-4 requires explicit owner resume.
+
+Final maintenance validation observed2026-09-09 15:52 JST: `make docs` exits0
+(agent configuration,218 Canon entries,800/800 hierarchy paths,1760 reports);
+overview tests13/13 and diff check pass. Independent read-only planner review
+is GO with no P0/P1; the minor T1-current/broad-I1-exit wording was corrected.
+Limited filename-only private-key/token/webhook scans found no matches, not a
+general secret audit. Only six LAB documents change. Git commit/push/live
+parity and a clean worktree are checked before user handoff; no future self-hash
+is fabricated in this record.
 
 Normative direction for this roadmap is read in the following order:
 
