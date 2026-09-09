@@ -1,9 +1,9 @@
 {
-  "timestamp": "2026-09-09T20:42:13.300834+00:00",
-  "base_head": "494571ea29d18d2080cdc18dcb520dcb676bb1c7",
+  "timestamp": "2026-09-09T20:57:38.668169+00:00",
+  "base_head": "869965f369e3170ae1954948dd3a675c7661897e",
   "scope": "UNREVIEWED W2 later extension mirror; exact fifteen dependencies, no source/network/alpha acceptance; active Oracle packet excludes three later modules",
   "toolchain": "Lean (version 4.29.1, x86_64-unknown-linux-gnu, commit f72c35b3f637c8c6571d353742168ab66cc22c00, Release)",
-  "cwd": "/tmp/mirrorea-proof-first-20260909-gn29zka5/contract-request-machine-flow-7e23fqii",
+  "cwd": "/tmp/mirrorea-proof-first-20260909-gn29zka5/bounded-allocation-mirror-fds6peqf",
   "checks": [
     {
       "source": "samples/lean/foundations/MirroreaProofFirstSupport.lean",
@@ -15,7 +15,7 @@
         "MirroreaProofFirstSupport.olean",
         "MirroreaProofFirstSupport.lean"
       ],
-      "cwd": "/tmp/mirrorea-proof-first-20260909-gn29zka5/contract-request-machine-flow-7e23fqii",
+      "cwd": "/tmp/mirrorea-proof-first-20260909-gn29zka5/bounded-allocation-mirror-fds6peqf",
       "exit_code": 0,
       "stdout": "'MirroreaProofFirst.Support.eval_correct' depends on axioms: [propext]\n'MirroreaProofFirst.Support.holds_mono' does not depend on any axioms\n'MirroreaProofFirst.Support.grounded_closed' does not depend on any axioms\n'MirroreaProofFirst.Support.grounded_least' does not depend on any axioms\n'MirroreaProofFirst.Support.ranked_sound' does not depend on any axioms\n'MirroreaProofFirst.Support.ranked_exact' does not depend on any axioms\n'MirroreaProofFirst.Support.rounds_sound' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.Support.proof_eventually' depends on axioms: [propext]\n'MirroreaProofFirst.Support.rounds_complete' depends on axioms: [propext]\n'MirroreaProofFirst.Support.rounds_iff_derivation' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.Support.allOf_correct' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.Support.anyOf_correct' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.Support.stable_exists' depends on axioms: [propext, Classical.choice, Quot.sound]\n'MirroreaProofFirst.Support.derive_exact' depends on axioms: [propext, Classical.choice, Quot.sound]\n'MirroreaProofFirst.Support.checker_exact' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.Support.checked_membership_exact' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.Support.retirement_mono' does not depend on any axioms\n'MirroreaProofFirst.Support.normalization_idempotent' does not depend on any axioms\n'MirroreaProofFirst.Support.no_root_no_ground' does not depend on any axioms\n'MirroreaProofFirst.Support.low_grounded_independent' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.Support.firstRank_spec' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.Support.generated_certificate_accepted' depends on axioms: [propext, Classical.choice, Quot.sound]\n'MirroreaProofFirst.Support.height_threshold' depends on axioms: [propext, Classical.choice, Quot.sound]\n'MirroreaProofFirst.Support.canonical_rounds' depends on axioms: [propext, Classical.choice, Quot.sound]\n'MirroreaProofFirst.Support.canonical_rank_unique' depends on axioms: [propext, Classical.choice, Quot.sound]\n'MirroreaProofFirst.Support.generated_heights' depends on axioms: [propext, Classical.choice, Quot.sound]\n'MirroreaProofFirst.Support.canonical_generated_accepted' depends on axioms: [propext, Classical.choice, Quot.sound]\n'MirroreaProofFirst.Support.canonical_checker_sound' depends on axioms: [propext, Classical.choice, Quot.sound]\n'MirroreaProofFirst.Support.snapshot_live_exact' depends on axioms: [propext, Classical.choice, Quot.sound]\n'MirroreaProofFirst.Support.snapshot_certificate_accepted' depends on axioms: [propext, Classical.choice, Quot.sound]\n'MirroreaProofFirst.Support.snapshot_checked_sound' depends on axioms: [propext, Classical.choice, Quot.sound]\n",
       "stderr": ""
@@ -30,7 +30,7 @@
         "MirroreaProofFirstCurrentUse.olean",
         "MirroreaProofFirstCurrentUse.lean"
       ],
-      "cwd": "/tmp/mirrorea-proof-first-20260909-gn29zka5/contract-request-machine-flow-7e23fqii",
+      "cwd": "/tmp/mirrorea-proof-first-20260909-gn29zka5/bounded-allocation-mirror-fds6peqf",
       "exit_code": 0,
       "stdout": "'MirroreaProofFirst.CurrentUse.checkClaim_exact' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.CurrentUse.checkWitness_sound' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.CurrentUse.chooseClaim_sound' depends on axioms: [propext]\n'MirroreaProofFirst.CurrentUse.chooseClaim_complete' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.CurrentUse.produce_checked' depends on axioms: [propext]\n'MirroreaProofFirst.CurrentUse.produce_complete' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.CurrentUse.revalidate_sound' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.CurrentUse.context_change_rejected' depends on axioms: [propext]\n'MirroreaProofFirst.CurrentUse.authorization_iff_produced' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.CurrentUse.no_claim_no_authorization' depends on axioms: [propext]\n'MirroreaProofFirst.CurrentUse.checkHandle_exact' depends on axioms: [propext, Classical.choice, Quot.sound]\n'MirroreaProofFirst.CurrentUse.checkUse_sound' depends on axioms: [propext, Classical.choice, Quot.sound]\n'MirroreaProofFirst.CurrentUse.checkUse_complete' depends on axioms: [propext, Classical.choice, Quot.sound]\n'MirroreaProofFirst.CurrentUse.retired_locus_rejected' depends on axioms: [propext, Classical.choice, Quot.sound]\n'MirroreaProofFirst.CurrentUse.stale_incarnation_rejected' depends on axioms: [propext]\n'MirroreaProofFirst.CurrentUse.authorize_checked' depends on axioms: [propext]\n'MirroreaProofFirst.CurrentUse.authorize_use_complete' depends on axioms: [propext, Classical.choice, Quot.sound]\n'MirroreaProofFirst.CurrentUse.tryAdmit_sound' depends on axioms: [propext, Classical.choice, Quot.sound]\n'MirroreaProofFirst.CurrentUse.tryAdmit_does_not_issue' depends on axioms: [propext]\n'MirroreaProofFirst.CurrentUse.tryAdmit_retains_history' depends on axioms: [propext]\n'MirroreaProofFirst.CurrentUse.duplicate_admission_unchanged' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.CurrentUse.retire_preserves_history' does not depend on any axioms\n'MirroreaProofFirst.CurrentUse.revoke_preserves_history' does not depend on any axioms\n'MirroreaProofFirst.CurrentUse.retire_stops_locus_use' depends on axioms: [propext, Classical.choice, Quot.sound]\n'MirroreaProofFirst.CurrentUse.tryAdmit_unique' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.CurrentUse.step_unique' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.CurrentUse.run_unique' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.CurrentUse.step_retains_history' depends on axioms: [propext]\n'MirroreaProofFirst.CurrentUse.run_retains_history' depends on axioms: [propext]\n",
       "stderr": ""
@@ -45,7 +45,7 @@
         "MirroreaProofFirstPassive.olean",
         "MirroreaProofFirstPassive.lean"
       ],
-      "cwd": "/tmp/mirrorea-proof-first-20260909-gn29zka5/contract-request-machine-flow-7e23fqii",
+      "cwd": "/tmp/mirrorea-proof-first-20260909-gn29zka5/bounded-allocation-mirror-fds6peqf",
       "exit_code": 0,
       "stdout": "'MirroreaProofFirst.Passive.erasure' does not depend on any axioms\n'MirroreaProofFirst.Passive.lift_erases' depends on axioms: [propext]\n'MirroreaProofFirst.Passive.filter_before_retention' depends on axioms: [propext]\n'MirroreaProofFirst.Passive.retained_bound' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.Passive.no_invented_rows' depends on axioms: [propext]\n'MirroreaProofFirst.Passive.aligned_projection' depends on axioms: [propext]\n'MirroreaProofFirst.Passive.two_trace_retention' depends on axioms: [propext]\n'MirroreaProofFirst.Passive.concrete_projection' depends on axioms: [propext]\n'MirroreaProofFirst.Passive.concrete_two_run' depends on axioms: [propext]\n'MirroreaProofFirst.Passive.feedRows_exact' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.Passive.retained_exact' depends on axioms: [propext, Quot.sound]\n",
       "stderr": ""
@@ -60,7 +60,7 @@
         "MirroreaProofFirstProducerFlow.olean",
         "MirroreaProofFirstProducerFlow.lean"
       ],
-      "cwd": "/tmp/mirrorea-proof-first-20260909-gn29zka5/contract-request-machine-flow-7e23fqii",
+      "cwd": "/tmp/mirrorea-proof-first-20260909-gn29zka5/bounded-allocation-mirror-fds6peqf",
       "exit_code": 0,
       "stdout": "'MirroreaProofFirst.ProducerFlow.infer_exact' depends on axioms: [propext]\n'MirroreaProofFirst.ProducerFlow.typed_evaluates' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.ProducerFlow.flows_exact' depends on axioms: [propext]\n'MirroreaProofFirst.ProducerFlow.eval_low' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.ProducerFlow.check_exact' depends on axioms: [propext]\n'MirroreaProofFirst.ProducerFlow.run_typed' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.ProducerFlow.confinement' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.ProducerFlow.run_noninterference' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.ProducerFlow.projected_visible' depends on axioms: [propext]\n'MirroreaProofFirst.ProducerFlow.checked_retention_noninterference' depends on axioms: [propext, Quot.sound]\n",
       "stderr": ""
@@ -75,14 +75,14 @@
         "MirroreaProofFirstFallibleFlow.olean",
         "MirroreaProofFirstFallibleFlow.lean"
       ],
-      "cwd": "/tmp/mirrorea-proof-first-20260909-gn29zka5/contract-request-machine-flow-7e23fqii",
+      "cwd": "/tmp/mirrorea-proof-first-20260909-gn29zka5/bounded-allocation-mirror-fds6peqf",
       "exit_code": 0,
       "stdout": "'MirroreaProofFirst.FallibleFlow.eval_typed' depends on axioms: [propext]\n'MirroreaProofFirst.FallibleFlow.step_typed' depends on axioms: [propext]\n'MirroreaProofFirst.FallibleFlow.singleton_retention' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.FallibleFlow.eval_in_range' depends on axioms: [propext]\n'MirroreaProofFirst.FallibleFlow.step_in_range' depends on axioms: [propext]\n'MirroreaProofFirst.FallibleFlow.bounded_exact' depends on axioms: [propext]\n'MirroreaProofFirst.FallibleFlow.bounded_failure' depends on axioms: [propext, Classical.choice, Quot.sound]\n'MirroreaProofFirst.FallibleFlow.eval_low' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.FallibleFlow.step_noninterference' depends on axioms: [propext, Quot.sound]\n",
       "stderr": ""
     },
     {
       "source": "samples/lean/foundations/MirroreaProofFirstResourceBoundary.lean",
-      "sha256": "99f45cddcd25dcf54a687a40f736ccbdae3b0a6286787e3c14b834dc89d1f317",
+      "sha256": "4594d79e21c5e4288c9bcc81e2dd5ea6c595221ebf2a4776fd20eb5e269ecf6f",
       "command": [
         "lean",
         "--trust=0",
@@ -90,9 +90,9 @@
         "MirroreaProofFirstResourceBoundary.olean",
         "MirroreaProofFirstResourceBoundary.lean"
       ],
-      "cwd": "/tmp/mirrorea-proof-first-20260909-gn29zka5/contract-request-machine-flow-7e23fqii",
+      "cwd": "/tmp/mirrorea-proof-first-20260909-gn29zka5/bounded-allocation-mirror-fds6peqf",
       "exit_code": 0,
-      "stdout": "'MirroreaProofFirst.ResourceBoundary.split_exact_cover' depends on axioms: [propext, Classical.choice, Quot.sound]\n'MirroreaProofFirst.ResourceBoundary.split_disjoint_points' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.ResourceBoundary.move_exact_cover' does not depend on any axioms\n'MirroreaProofFirst.ResourceBoundary.raw_frame' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.ResourceBoundary.execute_frame' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.ResourceBoundary.execute_returned_current' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n'MirroreaProofFirst.ResourceBoundary.allocate_wf' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.ResourceBoundary.erase_wf' does not depend on any axioms\n'MirroreaProofFirst.ResourceBoundary.move_wf' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.ResourceBoundary.split_wf' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.ResourceBoundary.check_exact' depends on axioms: [propext]\n'MirroreaProofFirst.ResourceBoundary.execution_exists' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.ResourceBoundary.execute_wf' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.ResourceBoundary.run_wf' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.ResourceBoundary.raw_monotone' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.ResourceBoundary.consumed_never_current' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.ResourceBoundary.schedule_wf' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.ResourceBoundary.consumed_never_current_schedule' depends on axioms: [propext, Quot.sound]\n",
+      "stdout": "'MirroreaProofFirst.ResourceBoundary.split_exact_cover' depends on axioms: [propext, Classical.choice, Quot.sound]\n'MirroreaProofFirst.ResourceBoundary.split_disjoint_points' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.ResourceBoundary.move_exact_cover' does not depend on any axioms\n'MirroreaProofFirst.ResourceBoundary.raw_frame' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.ResourceBoundary.execute_frame' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.ResourceBoundary.execute_returned_current' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n'MirroreaProofFirst.ResourceBoundary.allocate_wf' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.ResourceBoundary.erase_wf' does not depend on any axioms\n'MirroreaProofFirst.ResourceBoundary.move_wf' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.ResourceBoundary.split_wf' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.ResourceBoundary.check_exact' depends on axioms: [propext]\n'MirroreaProofFirst.ResourceBoundary.execution_exists' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.ResourceBoundary.execute_wf' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.ResourceBoundary.run_wf' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.ResourceBoundary.raw_monotone' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.ResourceBoundary.consumed_never_current' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.ResourceBoundary.schedule_wf' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.ResourceBoundary.consumed_never_current_schedule' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.ResourceBoundary.BoundedIdentifiers.remaining_exact' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n'MirroreaProofFirst.ResourceBoundary.BoundedIdentifiers.remaining_same' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n'MirroreaProofFirst.ResourceBoundary.BoundedIdentifiers.successful_native_bounds' depends on axioms: [propext,\n Quot.sound]\n'MirroreaProofFirst.ResourceBoundary.BoundedIdentifiers.capacity_exact' depends on axioms: [propext]\n'MirroreaProofFirst.ResourceBoundary.BoundedIdentifiers.raw_within' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.ResourceBoundary.BoundedIdentifiers.runOne_exact' depends on axioms: [propext]\n'MirroreaProofFirst.ResourceBoundary.BoundedIdentifiers.exists_iff' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.ResourceBoundary.BoundedIdentifiers.preserves' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.ResourceBoundary.BoundedIdentifiers.schedule_preserves' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.ResourceBoundary.BoundedIdentifiers.schedule_old_absent' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.ResourceBoundary.BoundedIdentifiers.consumed_never_current' depends on axioms: [propext, Quot.sound]\n",
       "stderr": ""
     },
     {
@@ -105,14 +105,14 @@
         "MirroreaProofFirstLocalContract.olean",
         "MirroreaProofFirstLocalContract.lean"
       ],
-      "cwd": "/tmp/mirrorea-proof-first-20260909-gn29zka5/contract-request-machine-flow-7e23fqii",
+      "cwd": "/tmp/mirrorea-proof-first-20260909-gn29zka5/bounded-allocation-mirror-fds6peqf",
       "exit_code": 0,
       "stdout": "'MirroreaProofFirst.LocalContract.eval_exact' depends on axioms: [propext]\n'MirroreaProofFirst.LocalContract.nonnegative_sound' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.LocalContract.infer_sound' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.LocalContract.infer_complete' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.LocalContract.assumptions_exact' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.LocalContract.positive_result' depends on axioms: [propext, Quot.sound]\n",
       "stderr": ""
     },
     {
       "source": "samples/lean/foundations/MirroreaProofFirstContractExport.lean",
-      "sha256": "4192983318bf508b06101c36883a4945e3b08fc956f867298171fd3de8f27dd4",
+      "sha256": "5ed9c1a9bc612d9c0553a6027ca5a6f28c459cd7cec3b1eebb869bb9b7276cfa",
       "command": [
         "lean",
         "--trust=0",
@@ -120,9 +120,9 @@
         "MirroreaProofFirstContractExport.olean",
         "MirroreaProofFirstContractExport.lean"
       ],
-      "cwd": "/tmp/mirrorea-proof-first-20260909-gn29zka5/contract-request-machine-flow-7e23fqii",
+      "cwd": "/tmp/mirrorea-proof-first-20260909-gn29zka5/bounded-allocation-mirror-fds6peqf",
       "exit_code": 0,
-      "stdout": "'MirroreaProofFirst.ContractExport.scoped_exact' depends on axioms: [propext]\n'MirroreaProofFirst.ContractExport.common_exact' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.ContractExport.accept_sound' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.ContractExport.accept_bound' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.ContractExport.accepted_integer_length' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.ContractExport.checked_profile_complete' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.ContractExport.symbolic_profile_complete' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.ContractExport.allocate_export_wf' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.ContractExport.lawful_export_allocates' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.ContractExport.export_cannot_grant' depends on axioms: [propext]\n'MirroreaProofFirst.ContractExport.RequestAllocation.run_exact' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.ContractExport.RequestAllocation.sound' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.ContractExport.RequestAllocation.wf' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.ContractExport.RequestAllocation.denied' depends on axioms: [propext]\n'MirroreaProofFirst.ContractExport.RequestAllocation.same_principal_policy' depends on axioms: [propext]\n'MirroreaProofFirst.ContractExport.CheckedArithmetic.checked_exact' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n'MirroreaProofFirst.ContractExport.CheckedArithmetic.exact' depends on axioms: [propext, Classical.choice, Quot.sound]\n'MirroreaProofFirst.ContractExport.CheckedArithmetic.denotes_math' depends on axioms: [propext]\n'MirroreaProofFirst.ContractExport.CheckedArithmetic.sound' depends on axioms: [propext, Classical.choice, Quot.sound]\n'MirroreaProofFirst.ContractExport.CheckedArithmetic.denotes_bounds' depends on axioms: [propext]\n'MirroreaProofFirst.ContractExport.CheckedArithmetic.bounded_denotes' depends on axioms: [propext]\n'MirroreaProofFirst.ContractExport.CheckedArithmetic.success_iff_scoped_bounds' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n'MirroreaProofFirst.ContractExport.CheckedArithmetic.accepted_machine_value' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n'MirroreaProofFirst.ContractExport.CheckedArithmetic.flow_exact' depends on axioms: [propext]\n'MirroreaProofFirst.ContractExport.CheckedArithmetic.evaluate_low' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.ContractExport.CheckedArithmetic.checked_evaluate_low' depends on axioms: [propext, Quot.sound]\n",
+      "stdout": "'MirroreaProofFirst.ContractExport.scoped_exact' depends on axioms: [propext]\n'MirroreaProofFirst.ContractExport.common_exact' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.ContractExport.accept_sound' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.ContractExport.accept_bound' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.ContractExport.accepted_integer_length' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.ContractExport.checked_profile_complete' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.ContractExport.symbolic_profile_complete' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.ContractExport.allocate_export_wf' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.ContractExport.lawful_export_allocates' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.ContractExport.export_cannot_grant' depends on axioms: [propext]\n'MirroreaProofFirst.ContractExport.RequestAllocation.run_exact' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.ContractExport.RequestAllocation.sound' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.ContractExport.RequestAllocation.wf' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.ContractExport.RequestAllocation.denied' depends on axioms: [propext]\n'MirroreaProofFirst.ContractExport.RequestAllocation.same_principal_policy' depends on axioms: [propext]\n'MirroreaProofFirst.ContractExport.CheckedArithmetic.checked_exact' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n'MirroreaProofFirst.ContractExport.CheckedArithmetic.exact' depends on axioms: [propext, Classical.choice, Quot.sound]\n'MirroreaProofFirst.ContractExport.CheckedArithmetic.denotes_math' depends on axioms: [propext]\n'MirroreaProofFirst.ContractExport.CheckedArithmetic.sound' depends on axioms: [propext, Classical.choice, Quot.sound]\n'MirroreaProofFirst.ContractExport.CheckedArithmetic.denotes_bounds' depends on axioms: [propext]\n'MirroreaProofFirst.ContractExport.CheckedArithmetic.bounded_denotes' depends on axioms: [propext]\n'MirroreaProofFirst.ContractExport.CheckedArithmetic.success_iff_scoped_bounds' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n'MirroreaProofFirst.ContractExport.CheckedArithmetic.accepted_machine_value' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n'MirroreaProofFirst.ContractExport.CheckedArithmetic.flow_exact' depends on axioms: [propext]\n'MirroreaProofFirst.ContractExport.CheckedArithmetic.evaluate_low' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.ContractExport.CheckedArithmetic.checked_evaluate_low' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.ContractExport.CheckedAllocation.run_exact' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.ContractExport.CheckedAllocation.lawful_completes' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n'MirroreaProofFirst.ContractExport.CheckedAllocation.successful' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n",
       "stderr": ""
     },
     {
@@ -135,7 +135,7 @@
         "MirroreaProofFirstPureFunctions.olean",
         "MirroreaProofFirstPureFunctions.lean"
       ],
-      "cwd": "/tmp/mirrorea-proof-first-20260909-gn29zka5/contract-request-machine-flow-7e23fqii",
+      "cwd": "/tmp/mirrorea-proof-first-20260909-gn29zka5/bounded-allocation-mirror-fds6peqf",
       "exit_code": 0,
       "stdout": "'MirroreaProofFirst.PureFunctions.infer_exact' depends on axioms: [propext]\n'MirroreaProofFirst.PureFunctions.environment_lookup' depends on axioms: [propext]\n'MirroreaProofFirst.PureFunctions.evaluator_typed' depends on axioms: [propext]\n'MirroreaProofFirst.PureFunctions.execution_complete' depends on axioms: [propext, Classical.choice, Quot.sound]\n'MirroreaProofFirst.PureFunctions.execution_sound' depends on axioms: [propext]\n'MirroreaProofFirst.PureFunctions.execution_exact' depends on axioms: [propext, Classical.choice, Quot.sound]\n'MirroreaProofFirst.PureFunctions.counter_has_fuel' depends on axioms: [propext, Classical.choice, Quot.sound]\n",
       "stderr": ""
@@ -150,7 +150,7 @@
         "MirroreaProofFirstFunctionContractBridge.olean",
         "MirroreaProofFirstFunctionContractBridge.lean"
       ],
-      "cwd": "/tmp/mirrorea-proof-first-20260909-gn29zka5/contract-request-machine-flow-7e23fqii",
+      "cwd": "/tmp/mirrorea-proof-first-20260909-gn29zka5/bounded-allocation-mirror-fds6peqf",
       "exit_code": 0,
       "stdout": "'MirroreaProofFirst.FunctionContractBridge.lower_typed' depends on axioms: [propext]\n'MirroreaProofFirst.FunctionContractBridge.lower_executes' depends on axioms: [propext]\n'MirroreaProofFirst.FunctionContractBridge.unary_executes' depends on axioms: [propext]\n'MirroreaProofFirst.FunctionContractBridge.accepted_code_executes' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n'MirroreaProofFirst.FunctionContractBridge.accepted_unary_executes' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n",
       "stderr": ""
@@ -165,7 +165,7 @@
         "MirroreaProofFirstModuleContractBoundary.olean",
         "MirroreaProofFirstModuleContractBoundary.lean"
       ],
-      "cwd": "/tmp/mirrorea-proof-first-20260909-gn29zka5/contract-request-machine-flow-7e23fqii",
+      "cwd": "/tmp/mirrorea-proof-first-20260909-gn29zka5/bounded-allocation-mirror-fds6peqf",
       "exit_code": 0,
       "stdout": "'MirroreaProofFirst.ModuleContractBoundary.link_exact' depends on axioms: [propext]\n'MirroreaProofFirst.ModuleContractBoundary.call_sound' depends on axioms: [propext, Classical.choice, Quot.sound]\n'MirroreaProofFirst.ModuleContractBoundary.call_checked_complete' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n'MirroreaProofFirst.ModuleContractBoundary.call_symbolic_complete' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n'MirroreaProofFirst.ModuleContractBoundary.no_authority_no_call' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n'MirroreaProofFirst.ModuleContractBoundary.call_actual_execution' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n'MirroreaProofFirst.ModuleContractBoundary.changed_context_rejected' depends on axioms: [propext]\n'MirroreaProofFirst.ModuleContractBoundary.changed_module_stamp_rejected' depends on axioms: [propext]\n'MirroreaProofFirst.ModuleContractBoundary.insert_exists' depends on axioms: [propext, Classical.choice, Quot.sound]\n'MirroreaProofFirst.ModuleContractBoundary.insert_extends' depends on axioms: [propext]\n'MirroreaProofFirst.ModuleContractBoundary.insert_wf' does not depend on any axioms\n'MirroreaProofFirst.ModuleContractBoundary.inserts_preserve' depends on axioms: [propext]\n'MirroreaProofFirst.ModuleContractBoundary.catalog_agrees' depends on axioms: [propext]\n'MirroreaProofFirst.ModuleContractBoundary.catalog_sound' depends on axioms: [propext, Classical.choice, Quot.sound]\n'MirroreaProofFirst.ModuleContractBoundary.fresh_proof_cannot_rebind' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n'MirroreaProofFirst.ModuleContractBoundary.linked_descriptor_unique' depends on axioms: [propext]\n'MirroreaProofFirst.ModuleContractBoundary.changed_descriptor_rejected' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n'MirroreaProofFirst.ModuleContractBoundary.catalog_call_preserved' depends on axioms: [propext]\n'MirroreaProofFirst.ModuleContractBoundary.insert_sequence_preserves_call' depends on axioms: [propext]\n'MirroreaProofFirst.ModuleContractBoundary.no_catalog_revives_module' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n'MirroreaProofFirst.ModuleContractBoundary.missing_catalog_entry_rejected' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n",
       "stderr": ""
@@ -180,7 +180,7 @@
         "MirroreaProofFirstOwnerAssignment.olean",
         "MirroreaProofFirstOwnerAssignment.lean"
       ],
-      "cwd": "/tmp/mirrorea-proof-first-20260909-gn29zka5/contract-request-machine-flow-7e23fqii",
+      "cwd": "/tmp/mirrorea-proof-first-20260909-gn29zka5/bounded-allocation-mirror-fds6peqf",
       "exit_code": 0,
       "stdout": "'MirroreaProofFirst.OwnerAssignment.local_exact' depends on axioms: [propext]\n'MirroreaProofFirst.OwnerAssignment.erasure_value_only' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.OwnerAssignment.foreign_changes_irrelevant' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.OwnerAssignment.run_frame' depends on axioms: [propext]\n'MirroreaProofFirst.OwnerAssignment.run_failure' depends on axioms: [propext]\n'MirroreaProofFirst.OwnerAssignment.check_exact' depends on axioms: [propext]\n'MirroreaProofFirst.OwnerAssignment.run_typed' depends on axioms: [propext]\n'MirroreaProofFirst.OwnerAssignment.run_noninterference' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.OwnerAssignment.elaborate_exact' depends on axioms: [propext]\n'MirroreaProofFirst.OwnerAssignment.generated_destination' does not depend on any axioms\n'MirroreaProofFirst.OwnerAssignment.Capture.sequence_exact' depends on axioms: [propext]\n'MirroreaProofFirst.OwnerAssignment.Capture.attempt_typed' depends on axioms: [propext]\n'MirroreaProofFirst.OwnerAssignment.Capture.attempt_frame' depends on axioms: [propext]\n'MirroreaProofFirst.OwnerAssignment.Capture.attempt_low' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.OwnerAssignment.Capture.check_exact' depends on axioms: [propext]\n'MirroreaProofFirst.OwnerAssignment.Capture.captured_typed' depends on axioms: [propext]\n'MirroreaProofFirst.OwnerAssignment.Capture.captured_low' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.OwnerAssignment.Capture.capture_then_write_low' depends on axioms: [propext, Quot.sound]\n",
       "stderr": ""
@@ -195,7 +195,7 @@
         "MirroreaProofFirstProfileGuarantees.olean",
         "MirroreaProofFirstProfileGuarantees.lean"
       ],
-      "cwd": "/tmp/mirrorea-proof-first-20260909-gn29zka5/contract-request-machine-flow-7e23fqii",
+      "cwd": "/tmp/mirrorea-proof-first-20260909-gn29zka5/bounded-allocation-mirror-fds6peqf",
       "exit_code": 0,
       "stdout": "'MirroreaProofFirst.ProfileGuarantees.accepted_symbolic_uniform' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.ProfileGuarantees.accepted_symbolic_inhabited' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.ProfileGuarantees.checked_value_not_uniform' depends on axioms: [propext, Quot.sound]\n",
       "stderr": ""
@@ -210,7 +210,7 @@
         "MirroreaProofFirstHandleValues.olean",
         "MirroreaProofFirstHandleValues.lean"
       ],
-      "cwd": "/tmp/mirrorea-proof-first-20260909-gn29zka5/contract-request-machine-flow-7e23fqii",
+      "cwd": "/tmp/mirrorea-proof-first-20260909-gn29zka5/bounded-allocation-mirror-fds6peqf",
       "exit_code": 0,
       "stdout": "'MirroreaProofFirst.HandleValues.check_exact' depends on axioms: [propext]\n'MirroreaProofFirst.HandleValues.evaluate_exact' depends on axioms: [propext]\n'MirroreaProofFirst.HandleValues.scoped_terminates' depends on axioms: [propext]\n'MirroreaProofFirst.HandleValues.no_new_reference' depends on axioms: [propext]\n'MirroreaProofFirst.HandleValues.invoke_sound' depends on axioms: [propext, Classical.choice, Quot.sound]\n'MirroreaProofFirst.HandleValues.no_authority' depends on axioms: [propext, Classical.choice, Quot.sound]\n'MirroreaProofFirst.HandleValues.stale_module' depends on axioms: [propext, Classical.choice, Quot.sound]\n'MirroreaProofFirst.HandleValues.registered_no_authority' depends on axioms: [propext, Classical.choice, Quot.sound]\n'MirroreaProofFirst.HandleValues.registered_sound' depends on axioms: [propext, Classical.choice, Quot.sound]\n'MirroreaProofFirst.HandleValues.registered_stale' depends on axioms: [propext, Classical.choice, Quot.sound]\n",
       "stderr": ""
@@ -225,7 +225,7 @@
         "MirroreaProofFirstPureHandleFunctions.olean",
         "MirroreaProofFirstPureHandleFunctions.lean"
       ],
-      "cwd": "/tmp/mirrorea-proof-first-20260909-gn29zka5/contract-request-machine-flow-7e23fqii",
+      "cwd": "/tmp/mirrorea-proof-first-20260909-gn29zka5/bounded-allocation-mirror-fds6peqf",
       "exit_code": 0,
       "stdout": "'MirroreaProofFirst.PureHandleFunctions.invoke_sound' depends on axioms: [propext, Classical.choice, Quot.sound]\n'MirroreaProofFirst.PureHandleFunctions.no_authority' depends on axioms: [propext, Classical.choice, Quot.sound]\n'MirroreaProofFirst.PureHandleFunctions.stale_module' depends on axioms: [propext, Classical.choice, Quot.sound]\n'MirroreaProofFirst.PureHandleFunctions.carried_invokes' depends on axioms: [propext]\n'MirroreaProofFirst.PureHandleFunctions.infer_exact' depends on axioms: [propext]\n'MirroreaProofFirst.PureHandleFunctions.evaluator_typed' depends on axioms: [propext]\n'MirroreaProofFirst.PureHandleFunctions.execution_complete' depends on axioms: [propext, Classical.choice, Quot.sound]\n'MirroreaProofFirst.PureHandleFunctions.execution_sound' depends on axioms: [propext]\n'MirroreaProofFirst.PureHandleFunctions.execution_exact' depends on axioms: [propext, Classical.choice, Quot.sound]\n'MirroreaProofFirst.PureHandleFunctions.carried_typed' depends on axioms: [propext]\n'MirroreaProofFirst.PureHandleFunctions.carried_evaluates' depends on axioms: [propext]\n'MirroreaProofFirst.PureHandleFunctions.registered_no_authority' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n'MirroreaProofFirst.PureHandleFunctions.registered_sound' depends on axioms: [propext, Classical.choice, Quot.sound]\n'MirroreaProofFirst.PureHandleFunctions.registered_stale' depends on axioms: [propext, Classical.choice, Quot.sound]\n'MirroreaProofFirst.PureHandleFunctions.closed_registered_sound' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n'MirroreaProofFirst.PureHandleFunctions.closed_registered_complete' depends on axioms: [propext]\n'MirroreaProofFirst.PureHandleFunctions.closed_registered_derivation_complete' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n'MirroreaProofFirst.PureHandleFunctions.closed_registered_carried' depends on axioms: [propext]\n'MirroreaProofFirst.PureHandleFunctions.registered_carried' depends on axioms: [propext]\n'MirroreaProofFirst.PureHandleFunctions.ReferencePreservation.registered_uses_existing' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n'MirroreaProofFirst.PureHandleFunctions.ReferencePreservation.Controls.capture_bound_necessary' depends on axioms: [propext]\n'MirroreaProofFirst.PureHandleFunctions.ReferencePreservation.carried_within' depends on axioms: [propext]\n'MirroreaProofFirst.PureHandleFunctions.ReferencePreservation.no_refresh' depends on axioms: [propext]\n'MirroreaProofFirst.PureHandleFunctions.ReferencePreservation.Controls.repeated' depends on axioms: [propext]\n'MirroreaProofFirst.PureHandleFunctions.ReferencePreservation.execution_preserves' depends on axioms: [propext]\n'MirroreaProofFirst.PureHandleFunctions.ReferencePreservation.evaluator_preserves' depends on axioms: [propext]\n'MirroreaProofFirst.PureHandleFunctions.ReferencePreservation.no_new_handle' depends on axioms: [propext]\n'MirroreaProofFirst.PureHandleFunctions.IterationSelection.typed' depends on axioms: [propext]\n'MirroreaProofFirst.PureHandleFunctions.IterationSelection.same_reference_bound' depends on axioms: [propext]\n'MirroreaProofFirst.PureHandleFunctions.IterationSelection.different_call_outcomes' depends on axioms: [propext]\n'MirroreaProofFirst.PureHandleFunctions.IterationBudget.identity_iteration' depends on axioms: [propext]\n'MirroreaProofFirst.PureHandleFunctions.IterationBudget.quiet_executes' depends on axioms: [propext]\n'MirroreaProofFirst.PureHandleFunctions.IterationBudget.execution_result_unique' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n'MirroreaProofFirst.PureHandleFunctions.IterationBudget.quiet_result_unique' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n'MirroreaProofFirst.PureHandleFunctions.IterationBudget.quiet_typed' depends on axioms: [propext]\n'MirroreaProofFirst.PureHandleFunctions.Normalization.fundamental' depends on axioms: [propext]\n'MirroreaProofFirst.PureHandleFunctions.Normalization.iteration_computable' depends on axioms: [propext]\n'MirroreaProofFirst.PureHandleFunctions.Normalization.closed_executes' depends on axioms: [propext]\n'MirroreaProofFirst.PureHandleFunctions.Normalization.closed_evaluator_total' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n'MirroreaProofFirst.PureHandleFunctions.Normalization.checked_handle_total' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n'MirroreaProofFirst.PureHandleFunctions.Normalization.checked_call_eventually_exact' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n'MirroreaProofFirst.PureHandleFunctions.Normalization.unbound_never_returns' depends on axioms: [propext]\n'MirroreaProofFirst.PureHandleFunctions.Normalization.typed_value_computable' depends on axioms: [propext]\n'MirroreaProofFirst.PureHandleFunctions.Normalization.typed_environment_good' depends on axioms: [propext]\n'MirroreaProofFirst.PureHandleFunctions.Normalization.typed_environment_total' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n",
       "stderr": ""
@@ -298,7 +298,7 @@
       "MirroreaProofFirstCurrentUse.lean": "ab604c92b226182bdf84a38caaa044d6b949730891d40a02a72ad441c59f4239"
     }
   },
-  "last_delta": "request allocation, checked arithmetic and failure-inclusive local flow; fresh fifteen-source trust=0 check e432a9; unreviewed",
+  "last_delta": "finite identifier history and checked allocation reference composition; fresh fifteen-source trust=0 check4fa406; unreviewed",
   "previous_owner_cuts": [
     {
       "source": "samples/lean/foundations/MirroreaProofFirstOwnerAssignment.lean",
@@ -1302,5 +1302,115 @@
     "exit_code": 0,
     "stdout": "'MirroreaProofFirst.ContractExport.scoped_exact' depends on axioms: [propext]\n'MirroreaProofFirst.ContractExport.common_exact' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.ContractExport.accept_sound' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.ContractExport.accept_bound' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.ContractExport.accepted_integer_length' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.ContractExport.checked_profile_complete' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.ContractExport.symbolic_profile_complete' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.ContractExport.allocate_export_wf' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.ContractExport.lawful_export_allocates' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.ContractExport.export_cannot_grant' depends on axioms: [propext]\n'MirroreaProofFirst.ContractExport.RequestAllocation.run_exact' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.ContractExport.RequestAllocation.sound' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.ContractExport.RequestAllocation.wf' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.ContractExport.RequestAllocation.denied' depends on axioms: [propext]\n'MirroreaProofFirst.ContractExport.RequestAllocation.same_principal_policy' depends on axioms: [propext]\n'MirroreaProofFirst.ContractExport.CheckedArithmetic.checked_exact' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n'MirroreaProofFirst.ContractExport.CheckedArithmetic.exact' depends on axioms: [propext, Classical.choice, Quot.sound]\n'MirroreaProofFirst.ContractExport.CheckedArithmetic.denotes_math' depends on axioms: [propext]\n'MirroreaProofFirst.ContractExport.CheckedArithmetic.sound' depends on axioms: [propext, Classical.choice, Quot.sound]\n'MirroreaProofFirst.ContractExport.CheckedArithmetic.denotes_bounds' depends on axioms: [propext]\n'MirroreaProofFirst.ContractExport.CheckedArithmetic.bounded_denotes' depends on axioms: [propext]\n'MirroreaProofFirst.ContractExport.CheckedArithmetic.success_iff_scoped_bounds' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n'MirroreaProofFirst.ContractExport.CheckedArithmetic.accepted_machine_value' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n",
     "stderr": ""
+  },
+  "previous_bounded_allocation_cuts": [
+    {
+      "source": "samples/lean/foundations/MirroreaProofFirstResourceBoundary.lean",
+      "sha256": "99f45cddcd25dcf54a687a40f736ccbdae3b0a6286787e3c14b834dc89d1f317",
+      "command": [
+        "lean",
+        "--trust=0",
+        "-o",
+        "MirroreaProofFirstResourceBoundary.olean",
+        "MirroreaProofFirstResourceBoundary.lean"
+      ],
+      "cwd": "/tmp/mirrorea-proof-first-20260909-gn29zka5/contract-request-machine-flow-7e23fqii",
+      "exit_code": 0,
+      "stdout": "'MirroreaProofFirst.ResourceBoundary.split_exact_cover' depends on axioms: [propext, Classical.choice, Quot.sound]\n'MirroreaProofFirst.ResourceBoundary.split_disjoint_points' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.ResourceBoundary.move_exact_cover' does not depend on any axioms\n'MirroreaProofFirst.ResourceBoundary.raw_frame' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.ResourceBoundary.execute_frame' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.ResourceBoundary.execute_returned_current' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n'MirroreaProofFirst.ResourceBoundary.allocate_wf' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.ResourceBoundary.erase_wf' does not depend on any axioms\n'MirroreaProofFirst.ResourceBoundary.move_wf' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.ResourceBoundary.split_wf' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.ResourceBoundary.check_exact' depends on axioms: [propext]\n'MirroreaProofFirst.ResourceBoundary.execution_exists' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.ResourceBoundary.execute_wf' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.ResourceBoundary.run_wf' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.ResourceBoundary.raw_monotone' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.ResourceBoundary.consumed_never_current' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.ResourceBoundary.schedule_wf' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.ResourceBoundary.consumed_never_current_schedule' depends on axioms: [propext, Quot.sound]\n",
+      "stderr": ""
+    },
+    {
+      "source": "samples/lean/foundations/MirroreaProofFirstContractExport.lean",
+      "sha256": "4192983318bf508b06101c36883a4945e3b08fc956f867298171fd3de8f27dd4",
+      "command": [
+        "lean",
+        "--trust=0",
+        "-o",
+        "MirroreaProofFirstContractExport.olean",
+        "MirroreaProofFirstContractExport.lean"
+      ],
+      "cwd": "/tmp/mirrorea-proof-first-20260909-gn29zka5/contract-request-machine-flow-7e23fqii",
+      "exit_code": 0,
+      "stdout": "'MirroreaProofFirst.ContractExport.scoped_exact' depends on axioms: [propext]\n'MirroreaProofFirst.ContractExport.common_exact' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.ContractExport.accept_sound' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.ContractExport.accept_bound' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.ContractExport.accepted_integer_length' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.ContractExport.checked_profile_complete' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.ContractExport.symbolic_profile_complete' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.ContractExport.allocate_export_wf' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.ContractExport.lawful_export_allocates' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.ContractExport.export_cannot_grant' depends on axioms: [propext]\n'MirroreaProofFirst.ContractExport.RequestAllocation.run_exact' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.ContractExport.RequestAllocation.sound' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.ContractExport.RequestAllocation.wf' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.ContractExport.RequestAllocation.denied' depends on axioms: [propext]\n'MirroreaProofFirst.ContractExport.RequestAllocation.same_principal_policy' depends on axioms: [propext]\n'MirroreaProofFirst.ContractExport.CheckedArithmetic.checked_exact' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n'MirroreaProofFirst.ContractExport.CheckedArithmetic.exact' depends on axioms: [propext, Classical.choice, Quot.sound]\n'MirroreaProofFirst.ContractExport.CheckedArithmetic.denotes_math' depends on axioms: [propext]\n'MirroreaProofFirst.ContractExport.CheckedArithmetic.sound' depends on axioms: [propext, Classical.choice, Quot.sound]\n'MirroreaProofFirst.ContractExport.CheckedArithmetic.denotes_bounds' depends on axioms: [propext]\n'MirroreaProofFirst.ContractExport.CheckedArithmetic.bounded_denotes' depends on axioms: [propext]\n'MirroreaProofFirst.ContractExport.CheckedArithmetic.success_iff_scoped_bounds' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n'MirroreaProofFirst.ContractExport.CheckedArithmetic.accepted_machine_value' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n'MirroreaProofFirst.ContractExport.CheckedArithmetic.flow_exact' depends on axioms: [propext]\n'MirroreaProofFirst.ContractExport.CheckedArithmetic.evaluate_low' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.ContractExport.CheckedArithmetic.checked_evaluate_low' depends on axioms: [propext, Quot.sound]\n",
+      "stderr": ""
+    }
+  ],
+  "bounded_allocation_extension": {
+    "identifier_check": {
+      "command": [
+        "lean",
+        "--trust=0",
+        "BoundedIdentifiers.lean"
+      ],
+      "cwd": "/tmp/mirrorea-proof-first-20260909-gn29zka5/bounded-resource-identifiers-3bldiy43",
+      "sha256": "c4185bab67ed06f4f1dbcdfd02828a8f96608812f0daf98637431a664ea59a94",
+      "exit_code": 0,
+      "stdout": "'MirroreaProofFirst.ResourceBoundary.BoundedIdentifiers.remaining_exact' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n'MirroreaProofFirst.ResourceBoundary.BoundedIdentifiers.remaining_same' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n'MirroreaProofFirst.ResourceBoundary.BoundedIdentifiers.successful_native_bounds' depends on axioms: [propext,\n Quot.sound]\n'MirroreaProofFirst.ResourceBoundary.BoundedIdentifiers.capacity_exact' depends on axioms: [propext]\n'MirroreaProofFirst.ResourceBoundary.BoundedIdentifiers.raw_within' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.ResourceBoundary.BoundedIdentifiers.runOne_exact' depends on axioms: [propext]\n'MirroreaProofFirst.ResourceBoundary.BoundedIdentifiers.exists_iff' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.ResourceBoundary.BoundedIdentifiers.preserves' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.ResourceBoundary.BoundedIdentifiers.schedule_preserves' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.ResourceBoundary.BoundedIdentifiers.schedule_old_absent' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.ResourceBoundary.BoundedIdentifiers.consumed_never_current' depends on axioms: [propext, Quot.sound]\n",
+      "stderr": ""
+    },
+    "identifier_mutants": [
+      {
+        "command": [
+          "lean",
+          "--trust=0",
+          "IgnoreCapacity.lean"
+        ],
+        "cwd": "/tmp/mirrorea-proof-first-20260909-gn29zka5/bounded-resource-identifiers-3bldiy43",
+        "sha256": "d11530f2ca34ec76d89ff9c965a7d2a35e2a387701c1f6c86073cc10ef2fc083",
+        "exit_code": 1,
+        "stdout": "IgnoreCapacity.lean:33:12: warning: unused variable `l`\n\nNote: This linter can be disabled with `set_option linter.unusedVariables false`\nIgnoreCapacity.lean:42:7: error: Tactic `introN` failed: There are no additional binders or `let` bindings in the goal to introduce\n\nl : Limits\npolicy : Nat → Bool\ns : State\na : Action\nout : State × List Handle\n⊢ check policy s a = true ∧ raw s a = out ↔ capacityCheck l s a = true ∧ check policy s a = true ∧ out = raw s a\nIgnoreCapacity.lean:141:94: error: Tactic `decide` proved that the proposition\n  runOne limits (fun x => true) transferred.fst (Action.split 2 transferred.snd 8) = none\nis false\n'MirroreaProofFirst.ResourceBoundary.BoundedIdentifiers.capacity_exact' depends on axioms: [propext]\n'MirroreaProofFirst.ResourceBoundary.BoundedIdentifiers.raw_within' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.ResourceBoundary.BoundedIdentifiers.runOne_exact' depends on axioms: [propext, sorryAx]\n'MirroreaProofFirst.ResourceBoundary.BoundedIdentifiers.exists_iff' depends on axioms: [propext, sorryAx, Quot.sound]\n'MirroreaProofFirst.ResourceBoundary.BoundedIdentifiers.preserves' depends on axioms: [propext, sorryAx, Quot.sound]\n'MirroreaProofFirst.ResourceBoundary.BoundedIdentifiers.schedule_preserves' depends on axioms: [propext,\n sorryAx,\n Quot.sound]\n'MirroreaProofFirst.ResourceBoundary.BoundedIdentifiers.schedule_old_absent' depends on axioms: [propext,\n sorryAx,\n Quot.sound]\n'MirroreaProofFirst.ResourceBoundary.BoundedIdentifiers.consumed_never_current' depends on axioms: [propext,\n sorryAx,\n Quot.sound]\n",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "lean",
+          "--trust=0",
+          "OneIdentifierForSplit.lean"
+        ],
+        "cwd": "/tmp/mirrorea-proof-first-20260909-gn29zka5/bounded-resource-identifiers-3bldiy43",
+        "sha256": "b0006a88f009cf620c552c9e0d0b5caa26b85eed326df6856d7d6af432b83891",
+        "exit_code": 1,
+        "stdout": "OneIdentifierForSplit.lean:24:48: error: unsolved goals\ncase split\nl : Limits\ns : State\nprincipal✝ : Nat\nhandle✝ : Handle\ncut✝ : Nat\n⊢ s.nextBlock ≤ l.blocks → (s.nextId + 1 ≤ l.handles ↔ s.nextId + 2 ≤ l.handles)\nOneIdentifierForSplit.lean:126:65: error: Tactic `decide` proved that the proposition\n  capacityCheck { handles := 2, blocks := 1 } a.fst (Action.split 1 a.snd 5) = false\nis false\n'MirroreaProofFirst.ResourceBoundary.BoundedIdentifiers.capacity_exact' depends on axioms: [propext, sorryAx]\n'MirroreaProofFirst.ResourceBoundary.BoundedIdentifiers.raw_within' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.ResourceBoundary.BoundedIdentifiers.runOne_exact' depends on axioms: [propext, sorryAx]\n'MirroreaProofFirst.ResourceBoundary.BoundedIdentifiers.exists_iff' depends on axioms: [propext, sorryAx, Quot.sound]\n'MirroreaProofFirst.ResourceBoundary.BoundedIdentifiers.preserves' depends on axioms: [propext, sorryAx, Quot.sound]\n'MirroreaProofFirst.ResourceBoundary.BoundedIdentifiers.schedule_preserves' depends on axioms: [propext,\n sorryAx,\n Quot.sound]\n'MirroreaProofFirst.ResourceBoundary.BoundedIdentifiers.schedule_old_absent' depends on axioms: [propext,\n sorryAx,\n Quot.sound]\n'MirroreaProofFirst.ResourceBoundary.BoundedIdentifiers.consumed_never_current' depends on axioms: [propext,\n sorryAx,\n Quot.sound]\n",
+        "stderr": ""
+      }
+    ],
+    "allocation_check": {
+      "command": [
+        "lean",
+        "--trust=0",
+        "CheckedAllocation.lean"
+      ],
+      "cwd": "/tmp/mirrorea-proof-first-20260909-gn29zka5/bounded-resource-identifiers-3bldiy43",
+      "sha256": "074366114012ebb6e6bf6028212190b55bd6e8b90637146931d30accf7e8eb3e",
+      "exit_code": 0,
+      "stdout": "'MirroreaProofFirst.ContractExport.CheckedAllocation.run_exact' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.ContractExport.CheckedAllocation.lawful_completes' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n'MirroreaProofFirst.ContractExport.CheckedAllocation.successful' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n",
+      "stderr": ""
+    },
+    "allocation_mutants": [
+      {
+        "command": [
+          "lean",
+          "--trust=0",
+          "SkipMachineEvaluation.lean"
+        ],
+        "cwd": "/tmp/mirrorea-proof-first-20260909-gn29zka5/bounded-resource-identifiers-3bldiy43",
+        "sha256": "93ec066efb690ef290095dbe85dceaa38149dc6ffeaf858e0055786c43b565fd",
+        "exit_code": 1,
+        "stdout": "SkipMachineEvaluation.lean:5:46: warning: unused variable `lo`\n\nNote: This linter can be disabled with `set_option linter.unusedVariables false`\nSkipMachineEvaluation.lean:5:49: warning: unused variable `hi`\n\nNote: This linter can be disabled with `set_option linter.unusedVariables false`\nSkipMachineEvaluation.lean:33:5: error: Tactic `subst` failed: did not find equation for eliminating 'z'\n\ncase some.mp\nlimits : BoundedIdentifiers.Limits\nlo hi : Int\nauthorize : State → Binding → Action → Bool\ns : State\nb : Binding\ne : Envelope\nn : Nat\nha : accept b e = some n\npos : 0 < n\nz : BoundedIdentifiers.Capacity limits s (Action.allocate b.principal n)\nhz : authorize s b (Action.allocate b.principal n) = true\n⊢ CheckedArithmetic.evaluate lo hi b.arguments b.code = some e.result ∧\n    authorize s b (Action.allocate b.principal n) = true ∧\n      BoundedIdentifiers.Capacity limits s (Action.allocate b.principal n) ∧\n        raw s (Action.allocate b.principal n) = raw s (Action.allocate b.principal n)\nSkipMachineEvaluation.lean:36:14: error: Application type mismatch: The argument\n  hz\nhas type\n  CheckedArithmetic.evaluate lo hi b.arguments b.code = some e.result\nbut is expected to have type\n  authorize s b (Action.allocate b.principal n) = true\nin the application\n  And.intro hz\nSkipMachineEvaluation.lean:36:11: error: Insufficient number of fields for `⟨...⟩` constructor: Constructor `Eq.refl` does not have explicit fields, but 4 were provided\nSkipMachineEvaluation.lean:75:88: error: Tactic `decide` proved that the proposition\n  run { handles := 1, blocks := 1 } (-5) 5 RequestAllocation.Controls.exactGrant empty b e = none\nis false\nSkipMachineEvaluation.lean:81:61: error: Tactic `decide` proved that the proposition\n  run { handles := 1, blocks := 1 } (-9223372036854775808) 9223372036854775807 (fun x x_1 x_2 => true) empty\n      cancellationBinding cancellationEnvelope =\n    none\nis false\n'MirroreaProofFirst.ContractExport.CheckedAllocation.run_exact' depends on axioms: [propext, sorryAx]\n'MirroreaProofFirst.ContractExport.CheckedAllocation.lawful_completes' depends on axioms: [propext,\n sorryAx,\n Classical.choice,\n Quot.sound]\n'MirroreaProofFirst.ContractExport.CheckedAllocation.successful' depends on axioms: [propext,\n sorryAx,\n Classical.choice,\n Quot.sound]\n",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "lean",
+          "--trust=0",
+          "SkipIdentifierCapacity.lean"
+        ],
+        "cwd": "/tmp/mirrorea-proof-first-20260909-gn29zka5/bounded-resource-identifiers-3bldiy43",
+        "sha256": "fd1e6e465bc410aade8c41061bdfe141b32e6311749b4b65e26454bf24c51be6",
+        "exit_code": 1,
+        "stdout": "SkipIdentifierCapacity.lean:5:9: warning: unused variable `limits`\n\nNote: This linter can be disabled with `set_option linter.unusedVariables false`\nSkipIdentifierCapacity.lean:34:15: error(lean.unknownIdentifier): Unknown identifier `auth`\nSkipIdentifierCapacity.lean:34:20: error: Application type mismatch: The argument\n  cap\nhas type\n  authorize s b (Action.allocate b.principal n) = true\nbut is expected to have type\n  BoundedIdentifiers.Capacity limits s (Action.allocate b.principal n)\nin the application\n  And.intro cap\nSkipIdentifierCapacity.lean:34:24: error(lean.unknownIdentifier): Unknown identifier `ho.symm`\nSkipIdentifierCapacity.lean:36:21: error: Application type mismatch: The argument\n  cap\nhas type\n  BoundedIdentifiers.Capacity limits s (Action.allocate b.principal n)\nbut is expected to have type\n  authorize s b (Action.allocate b.principal n) = true\nin the application\n  And.intro cap\nSkipIdentifierCapacity.lean:36:11: error: Insufficient number of fields for `⟨...⟩` constructor: Constructor `Eq.refl` does not have explicit fields, but 2 were provided\nSkipIdentifierCapacity.lean:29:9: warning: This simp argument is unused:\n  BoundedIdentifiers.runOne\n\nHint: Omit it from the simp argument list.\n  simp [̵B̵o̵u̵n̵d̵e̵d̵I̵d̵e̵n̵t̵i̵f̵i̵e̵r̵s̵.̵r̵u̵n̵O̵n̵e̵,̵\n  ̵ ̵ ̵ ̵ ̵ ̵e̵x̵e̵c̵u̵t̵e̵,̵R̵e̵s̵o̵u̵r̵c̵e̵B̵o̵u̵n̵d̵a̵r̵y̵.̵c̵h̵e̵c̵k̵,̵p̵o̵s̵,̵B̵o̵u̵n̵d̵e̵d̵I̵d̵e̵n̵t̵i̵f̵i̵e̵r̵s̵.̵c̵a̵p̵a̵c̵i̵t̵y̵_̵e̵x̵a̵c̵t̵]̵[̲e̲x̲e̲c̲u̲t̲e̲,̲ ̲R̲e̲s̲o̲u̲r̲c̲e̲B̲o̲u̲n̲d̲a̲r̲y̲.̲c̲h̲e̲c̲k̲,̲ ̲p̲o̲s̲,̲ ̲B̲o̲u̲n̲d̲e̲d̲I̲d̲e̲n̲t̲i̲f̲i̲e̲r̲s̲.̲c̲a̲p̲a̲c̲i̲t̲y̲_̲e̲x̲a̲c̲t̲]̲\n\nNote: This linter can be disabled with `set_option linter.unusedSimpArgs false`\nSkipIdentifierCapacity.lean:30:40: warning: This simp argument is unused:\n  BoundedIdentifiers.capacity_exact\n\nHint: Omit it from the simp argument list.\n  simp [BoundedIdentifiers.runOne, e̵x̵e̵c̵u̵t̵e̵,̵R̵e̵s̵o̵u̵r̵c̵e̵B̵o̵u̵n̵d̵a̵r̵y̵.̵c̵h̵e̵c̵k̵,̵p̵o̵s̵,̵B̵o̵u̵n̵d̵e̵d̵I̵d̵e̵n̵t̵i̵f̵i̵e̵r̵s̵.̵c̵a̵p̵a̵c̵i̵t̵y̵_̵e̵x̵a̵c̵t̵]̵e̲x̲e̲c̲u̲t̲e̲,̲ ̲R̲e̲s̲o̲u̲r̲c̲e̲B̲o̲u̲n̲d̲a̲r̲y̲.̲c̲h̲e̲c̲k̲,̲ ̲p̲o̲s̲]̲\n\nNote: This linter can be disabled with `set_option linter.unusedSimpArgs false`\nSkipIdentifierCapacity.lean:74:90: error: Tactic `decide` proved that the proposition\n  run { handles := 0, blocks := 1 } (-20) 20 RequestAllocation.Controls.exactGrant empty b e = none\nis false\n'MirroreaProofFirst.ContractExport.CheckedAllocation.run_exact' depends on axioms: [propext, sorryAx, Quot.sound]\n'MirroreaProofFirst.ContractExport.CheckedAllocation.lawful_completes' depends on axioms: [propext,\n sorryAx,\n Classical.choice,\n Quot.sound]\n'MirroreaProofFirst.ContractExport.CheckedAllocation.successful' depends on axioms: [propext,\n sorryAx,\n Classical.choice,\n Quot.sound]\n",
+        "stderr": ""
+      }
+    ]
   }
 }

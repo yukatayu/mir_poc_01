@@ -281,3 +281,27 @@ under the same supplied labels and bounds. Erasing successful payloads alone is
 insufficient: a secret square can still select some()/none. This conditional local
 property does not authenticate source labels, release a private result, constrain
 resource/time effects, or cover authorization callbacks/allocation geometry.
+
+
+The later unreviewed BoundedIdentifiers extension retains the same resource
+operations and fresh-ID history with finite handle/block identifier ceilings.
+Independent per-operation capacity rules and both addition-based and
+remaining-capacity checks are exact; the latter checks current bounds before
+subtracting. Successful operations preserve spatial WF and finite bounds, and
+arbitrary finite changing-policy schedules preserve old-handle absence. Allocation,
+move and split reject when fresh identifiers are exhausted; release can still
+succeed without resetting history. Given representable ceilings, successful next
+counters remain representable. This is not a native-arithmetic/refinement proof,
+physical memory budget, chosen ABI, availability or authenticated recovery policy.
+Resetting counters after release can restore spatial WF yet resurrect an old
+handle; the history restriction cannot be replaced by spatial WF alone.
+
+CheckedAllocation composes actual finite-interval Term evaluation, equality to the
+claimed contract result, contract checking, the independent exact-allocation
+callback and bounded resource admission. Its general exactness/soundness and
+relative completeness expose each obligation; a valid positive mathematical
+contract with overflowing intermediates does not allocate. This remains a
+nonproduction reference composition, not ordinary-source/parser/IR or network E2E
+refinement. Callback authenticity/currentness, allocation cost/geometry information
+flow, actual memory failure, physical atomicity and recovery remain open. Neither
+unbounded IDs nor recycled finite slots are silently adopted for production.

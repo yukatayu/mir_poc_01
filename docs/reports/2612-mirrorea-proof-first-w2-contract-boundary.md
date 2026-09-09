@@ -946,3 +946,73 @@ Final flow-document check95362 passed e86e3e; focused flow diff3efc16 and
 whitespace8fe215 passed. Current15 checked source hashes/axioms are verified.
 JSON evidence/ledger validation and own nine-file checkpoint follow; no production
 change or Oracle/alpha acceptance. Last Oracle a30fad remains running/no answer.
+
+### 2026-09-10 05:58 JST — finite identifier history and checked allocation composition
+
+
+The later unreviewed BoundedIdentifiers extension retains the same resource
+operations and fresh-ID history with finite handle/block identifier ceilings.
+Independent per-operation capacity rules and both addition-based and
+remaining-capacity checks are exact; the latter checks current bounds before
+subtracting. Successful operations preserve spatial WF and finite bounds, and
+arbitrary finite changing-policy schedules preserve old-handle absence. Allocation,
+move and split reject when fresh identifiers are exhausted; release can still
+succeed without resetting history. Given representable ceilings, successful next
+counters remain representable. This is not a native-arithmetic/refinement proof,
+physical memory budget, chosen ABI, availability or authenticated recovery policy.
+Resetting counters after release can restore spatial WF yet resurrect an old
+handle; the history restriction cannot be replaced by spatial WF alone.
+
+CheckedAllocation composes actual finite-interval Term evaluation, equality to the
+claimed contract result, contract checking, the independent exact-allocation
+callback and bounded resource admission. Its general exactness/soundness and
+relative completeness expose each obligation; a valid positive mathematical
+contract with overflowing intermediates does not allocate. This remains a
+nonproduction reference composition, not ordinary-source/parser/IR or network E2E
+refinement. Callback authenticity/currentness, allocation cost/geometry information
+flow, actual memory failure, physical atomicity and recovery remain open. Neither
+unbounded IDs nor recycled finite slots are silently adopted for production.
+
+Same W2 trace IDs/goal/consumer, not a new milestone or accepted profile. Candidate
+A finite exhaustion rejection is compared with B recycled slots plus independently
+authenticated generations; B requires further lifecycle/restore/wire evidence.
+Ceilings are parameters, not a selected public machine word or lifetime promise.
+
+Scratch BoundedIdentifiers initial43c508, controlsaae172, mutants2ae568 and final
+remaining-guardc35f3d passed (standard axioms only). Failed State.ext and function
+simplification drafts34019c/2d442d/57b3c2 retained, not accepted. IgnoreCapacity and
+OneIdentifierForSplit fail general proofs and concrete controls. Wrapped-counter
+control demonstrates spatial WF plus resurrected old handle after an excluded
+reset transition. The remaining-capacity predicate avoids addition in admission;
+a host must preserve the initial guard before subtraction and implement atomic
+checked updates. This does not prove a current Rust counter implementation safe.
+
+Fresh15 scratch dependency cut27042/c15931 passed with the candidate Resource
+source. CheckedAllocation final4b6a4c passed: actual interval execution→contract
+actual value→independent request gate→finite allocator. SkipMachineEvaluation and
+SkipIdentifierCapacity mutations fail proofs and concrete rejection controls,
+including accepted positive9 mathematical cancellation with overflowing product.
+Failed indentation/monadic simplification/control draftsac32d8/42346b/18ce23 remain
+rejected. No auto-sorry is accepted. Exact CHECK/ALLOCATION_CHECK/MUTANT records
+remain in bounded-resource-identifiers-3bldiy43; pointers are in RESUME.
+
+Mirrored only existing ResourceBoundary (651lines) and ContractExport (624lines),
+c13eec. Fresh15 actual-source mirror37970 running; collect before success claim.
+No production or Canon files edited, no runtime/network/restore rerun for this
+reference composition. Earlier current source multiplication panic remains open.
+No new report/framework/module; same ten unreviewed W2 sources. Plan, companion,
+sample evidence and progress updated. Documentation.md/docs/project-status.md
+更新不要: existing unreviewed summary still accurate. tasks.md 更新不要: same goal,
+readiness/order/blockers, no milestone close. No taxonomy/command changes, so
+samples/README/scripts/README 更新不要. No sub-agents. Old Oracle packets exclude
+these additions; no acceptance is inferred. Prior checkpoint869965f3 normal push
+6f1759 and remote parity86739d succeeded. Current delta uncommitted; continue.
+
+Actual-source fresh15 mirror37970 completed4fa406 PASS; exact current hashes and
+axiom audits matched. W2_EXTENSION_CHECK retains preceding two source cuts and
+new identifier/allocation proof and mutant records. Final docs60012 running;
+whitespaceb1a75e passed. No Oracle or production/alpha acceptance inferred.
+
+Final docs60012 completed PASS7a62a7. Full source delta7f1035 reviewed; no forbidden
+proof declarations91bd86; whitespaceb1a75e passed. Specs/examples70–76 fully read
+and hash-ledgered as historical LAB. Same W2 goal continues after checkpoint.

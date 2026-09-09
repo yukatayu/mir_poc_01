@@ -448,3 +448,204 @@ end Controls
 #print axioms schedule_wf
 #print axioms consumed_never_current_schedule
 end MirroreaProofFirst.ResourceBoundary
+
+-- Later unreviewed finite-capacity reference extension; no production acceptance.
+namespace MirroreaProofFirst.ResourceBoundary.BoundedIdentifiers
+structure Limits where
+ handles : Nat
+ blocks : Nat
+ deriving DecidableEq, Repr
+
+def Within (l : Limits) (s : State) : Prop :=
+ s.nextId ≤ l.handles ∧ s.nextBlock ≤ l.blocks
+
+def Capacity (l : Limits) (s : State) : Action → Prop
+ | .allocate _ _ => s.nextId+1 ≤ l.handles ∧ s.nextBlock+1 ≤ l.blocks
+ | .release _ _ => s.nextId ≤ l.handles ∧ s.nextBlock ≤ l.blocks
+ | .move _ _ _ => s.nextId+1 ≤ l.handles ∧ s.nextBlock ≤ l.blocks
+ | .split _ _ _ => s.nextId+2 ≤ l.handles ∧ s.nextBlock ≤ l.blocks
+
+def capacityCheck (l : Limits) (s : State) : Action → Bool
+ | .allocate _ _ => decide (s.nextId+1 ≤ l.handles ∧ s.nextBlock+1 ≤ l.blocks)
+ | .release _ _ => decide (s.nextId ≤ l.handles ∧ s.nextBlock ≤ l.blocks)
+ | .move _ _ _ => decide (s.nextId+1 ≤ l.handles ∧ s.nextBlock ≤ l.blocks)
+ | .split _ _ _ => decide (s.nextId+2 ≤ l.handles ∧ s.nextBlock ≤ l.blocks)
+
+theorem capacity_exact (l : Limits) (s : State) (a : Action) :
+ capacityCheck l s a = true ↔ Capacity l s a := by
+ cases a <;> simp [capacityCheck,Capacity]
+
+theorem raw_within (l : Limits) (s : State) (a : Action) :
+ Within l (raw s a).1 ↔ Capacity l s a := by
+ cases a <;> simp [Within,Capacity,raw,allocateRaw,moveRaw,splitRaw,erase,push,Nat.add_assoc]
+
+-- Arithmetic is still mathematical Nat. A host implementation must check before
+-- overflowing; computing a wrapped next counter and then comparing is unsound.
+def runOne (l : Limits) (policy : Nat → Bool) (s : State) (a : Action) :
+ Option (State × List Handle) :=
+ if capacityCheck l s a then execute policy s a else none
+
+theorem runOne_exact (l : Limits) (policy : Nat → Bool) (s : State) (a : Action)
+ (out : State × List Handle) :
+ runOne l policy s a = some out ↔
+ Capacity l s a ∧ Allowed policy s a ∧ out = raw s a := by
+ simp [runOne,execute,←capacity_exact,←check_exact]
+ intro _ _
+ exact eq_comm
+
+theorem exists_iff (l : Limits) (policy : Nat → Bool) (s : State) (a : Action) :
+ (∃ out, runOne l policy s a = some out) ↔ Capacity l s a ∧ Allowed policy s a := by
+ simp [runOne_exact]
+
+theorem preserves {l : Limits} {policy : Nat → Bool} {s : State}
+ (w : WF s) {a : Action} {out : State × List Handle}
+ (ok : runOne l policy s a = some out) : WF out.1 ∧ Within l out.1 := by
+ obtain ⟨cap,allow,rfl⟩ := (runOne_exact _ _ _ _ _).mp ok
+ exact ⟨raw_wf w allow,(raw_within _ _ _).mpr cap⟩
+
+def advance (l : Limits) (policy : Nat → Bool) (s : State) (a : Action) : State :=
+ match runOne l policy s a with
+ | none => s
+ | some out => out.1
+
+def schedule (l : Limits) (s : State) : List ((Nat → Bool) × Action) → State
+ | [] => s
+ | (p,a)::tail => schedule l (advance l p s a) tail
+
+theorem advance_preserves {l : Limits} {policy : Nat → Bool} {s : State}
+ (w : WF s) (bounded : Within l s) (a : Action) :
+ WF (advance l policy s a) ∧ Within l (advance l policy s a) := by
+ unfold advance
+ split
+ · exact ⟨w,bounded⟩
+ · rename_i out h
+   exact preserves w h
+
+theorem schedule_preserves {l : Limits} {s : State} (w : WF s) (bounded : Within l s)
+ (steps : List ((Nat → Bool) × Action)) :
+ WF (schedule l s steps) ∧ Within l (schedule l s steps) := by
+ induction steps generalizing s with
+ | nil => exact ⟨w,bounded⟩
+ | cons pair tail ih =>
+   have h := advance_preserves w bounded pair.2 (policy := pair.1)
+   exact ih h.1 h.2
+
+theorem advance_monotone (l : Limits) (policy : Nat → Bool) (s : State) (a : Action) :
+ s.nextId ≤ (advance l policy s a).nextId := by
+ unfold advance
+ split
+ · exact Nat.le_refl _
+ · rename_i out h
+   obtain ⟨_,_,rfl⟩ := (runOne_exact _ _ _ _ _).mp h
+   exact (raw_monotone s a).1
+
+theorem advance_old_absent (l : Limits) (policy : Nat → Bool) (s : State) (a : Action)
+ (i : Nat) (old : i < s.nextId) (absent : s.live i = none) :
+ (advance l policy s a).live i = none := by
+ unfold advance
+ split
+ · exact absent
+ · rename_i out h
+   obtain ⟨_,_,rfl⟩ := (runOne_exact _ _ _ _ _).mp h
+   exact raw_old_absent s a i old absent
+
+theorem schedule_old_absent (l : Limits) (s : State)
+ (steps : List ((Nat → Bool) × Action)) (i : Nat)
+ (old : i < s.nextId) (absent : s.live i = none) :
+ (schedule l s steps).live i = none := by
+ induction steps generalizing s with
+ | nil => exact absent
+ | cons pair tail ih =>
+   apply ih
+   · exact Nat.lt_of_lt_of_le old (advance_monotone l pair.1 s pair.2)
+   · exact advance_old_absent l pair.1 s pair.2 i old absent
+
+theorem consumed_never_current {l : Limits} {policy : Nat → Bool} {s : State}
+ (w : WF s) {a : Action} {out : State × List Handle}
+ (ok : runOne l policy s a = some out) {h : Handle} (hc : consumed a = some h)
+ (steps : List ((Nat → Bool) × Action)) (p : Nat) :
+ ¬ Current (schedule l out.1 steps) p h := by
+ obtain ⟨_,allow,rfl⟩ := (runOne_exact _ _ _ _ _).mp ok
+ obtain ⟨absent,old⟩ := consumed_absent w allow hc
+ have after := schedule_old_absent l (raw s a).1 steps h.id old absent
+ intro cur
+ simp [Current,after] at cur
+
+-- A host guard can avoid overflowing addition: validate the current bound before
+-- subtracting, then compare the required fresh capacity against the remainder.
+def handleNeed : Action → Nat
+ | .allocate _ _ | .move _ _ _ => 1
+ | .release _ _ => 0
+ | .split _ _ _ => 2
+def blockNeed : Action → Nat
+ | .allocate _ _ => 1
+ | _ => 0
+def remainingCheck (l : Limits) (s : State) (a : Action) : Bool :=
+ if s.nextId ≤ l.handles ∧ s.nextBlock ≤ l.blocks then
+   decide (handleNeed a ≤ l.handles-s.nextId ∧ blockNeed a ≤ l.blocks-s.nextBlock)
+ else false
+
+theorem remaining_exact (l : Limits) (s : State) (a : Action) :
+ remainingCheck l s a = true ↔ Capacity l s a := by
+ cases a <;> simp [remainingCheck,handleNeed,blockNeed,Capacity] <;> omega
+
+theorem remaining_same (l : Limits) (s : State) (a : Action) :
+ remainingCheck l s a = capacityCheck l s a := by
+ have h := (remaining_exact l s a).trans (capacity_exact l s a).symm
+ cases hr : remainingCheck l s a <;> cases hc : capacityCheck l s a <;> simp_all
+
+theorem successful_native_bounds {l : Limits} {policy : Nat → Bool} {s : State}
+ {a : Action} {out : State × List Handle} (ok : runOne l policy s a = some out)
+ (maximum : Nat) (handles : l.handles ≤ maximum) (blocks : l.blocks ≤ maximum) :
+ out.1.nextId ≤ maximum ∧ out.1.nextBlock ≤ maximum := by
+ obtain ⟨cap,_,rfl⟩ := (runOne_exact _ _ _ _ _).mp ok
+ have h := (raw_within l s a).mpr cap
+ exact ⟨Nat.le_trans h.1 handles,Nat.le_trans h.2 blocks⟩
+
+namespace Controls
+open ResourceBoundary.Controls
+def limits : Limits := ⟨4,1⟩
+example : capacityCheck ⟨2,1⟩ a.1 (.split 1 a.2 5) = false := by decide
+example : capacityCheck ⟨4,0⟩ empty (.allocate 1 12) = false := by decide
+example : capacityCheck limits empty (.allocate 1 12) = true := by decide
+example : capacityCheck limits a.1 (.split 1 a.2 5) = true := by decide
+example : capacityCheck limits halves.1 (.move 1 halves.2.2 2) = true := by decide
+example : capacityCheck limits transferred.1 (.split 2 transferred.2 8) = false := by decide
+example : capacityCheck limits transferred.1 (.release 2 transferred.2) = true := by decide
+-- Resource release does not reset the historical fresh-identifier counters.
+example : capacityCheck limits (erase transferred.1 transferred.2.id) (.allocate 2 1) = false := by decide
+example : (runOne limits aliceOnly empty (.allocate 1 12)).map
+ (fun out => out.2.map (fun h => (h.id,h.region.block,h.region.lo,h.region.hi,h.region.holder))) =
+ some [(0,0,0,12,1)] := by decide
+example : (runOne limits aliceOnly halves.1 (.move 1 halves.2.2 2)).map
+ (fun out => out.2.map (fun h => (h.id,h.region.lo,h.region.hi,h.region.holder))) =
+ some [(3,5,12,2)] := by decide
+example : runOne limits (fun _ => true) transferred.1 (.split 2 transferred.2 8) = none := by decide
+example : (runOne limits (fun _ => true) transferred.1 (.release 2 transferred.2)).map
+ (fun out => out.1.live transferred.2.id) = some none := by decide
+-- Resetting finite counters after release is an extra transition, not admitted
+-- by schedule. It can resurrect an old handle even when spatial WF holds again.
+def wrapped : State := {erase a.1 a.2.id with
+ nextId := a.1.nextId % 1, nextBlock := a.1.nextBlock % 1}
+theorem wrapped_eq_empty : wrapped = empty := by
+ simp [wrapped,erase,a,allocateRaw,push,empty,newHandle]
+ funext i
+ by_cases hi : i = 0 <;> simp [hi]
+
+example : WF (allocateRaw wrapped 1 12).1 := by
+ rw [wrapped_eq_empty]
+ exact allocate_wf empty_wf 1 12 (by decide)
+example : currentCheck (allocateRaw wrapped 1 12).1 1 a.2 = true := by decide
+end Controls
+#print axioms remaining_exact
+#print axioms remaining_same
+#print axioms successful_native_bounds
+#print axioms capacity_exact
+#print axioms raw_within
+#print axioms runOne_exact
+#print axioms exists_iff
+#print axioms preserves
+#print axioms schedule_preserves
+#print axioms schedule_old_absent
+#print axioms consumed_never_current
+end MirroreaProofFirst.ResourceBoundary.BoundedIdentifiers

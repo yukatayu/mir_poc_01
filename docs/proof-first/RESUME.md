@@ -92,3 +92,31 @@ Next: verify/checkpoint own delta; continue same W2 direct
 consumer obligations and required corpus66. Current source refinement/authenticated
 head/registry transitions/all-mutators/capture provenance/real-network/restore and
 119-row disposition remain open. Q01/Q02/Q18 and signed acceptance not bypassed.
+
+Forward checkpoint869965f369e3170ae1954948dd3a675c7661897e committed75ee64,
+pushed6f1759, remote equality86739d, clean dd1f32. No Git job pending.
+Bounded identifier research now under BOUNDED_RESOURCE_WORKDIR pointer:
+bounded-resource-identifiers-3bldiy43. c35f3d PASS includes exact all-four-operation
+capacity guard, schedule bounded WF/nonresurrection, remaining-capacity guard
+without additions, native-bound consequence. Positive/exhaustion/release controls;
+wrap-after-release can satisfy spatial WF yet resurrect stale handle. Rejected
+State.ext/function-simplification drafts retained; final no sorryAx. IgnoreCapacity
+and OneIdentifierForSplit mutants2ae568 reject with concrete failures. Still scratch,
+not production/ABI/allocator/auth/restore acceptance. BOUNDED_RESOURCE_DEPENDENCIES
+fresh15 candidate copy build running; next collect then compose actual checked
+local-contract evaluation + independent auth + finite allocation in reference
+without claiming actual-source/E2E refinement. Required corpus next68.
+
+Bounded composition final4b6a4c PASS: actual finite arithmetic + contract value +
+independent request gate + bounded allocator; skip-machine/capacity mutants fail
+concrete controls and general proofs. Failed layout/bind drafts retained. Mirrored
+ResourceBoundary651/ContractExport624, c13eec. Fresh15 mirror37970 completed4fa406
+PASS, current hashes and printed axioms checked; pointer BOUNDED_ALLOCATION_MIRROR.
+Docs/plan/progress/sample/report updated05:58JST; final docs60012 running, collect.
+Current ten own dirty files; source review/diff/JSON then normal checkpoint push.
+Required specs/examples00–69 full, next70. Keep same W2 goal; not alpha/production.
+
+Final bounded-cut verification: docs60012 completed PASS7a62a7; final source delta
+review7f1035 and whitespaceb1a75e passed, forbidden proof declarations91bd86 none.
+Current15 mirror4fa406 and hash/axiom audit8ad609 pass. Specs/examples70–76 were
+fully read (fe5893,575c64,506874) and hash-ledgered; next77. Same W2 goal.

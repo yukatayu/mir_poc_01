@@ -21666,5 +21666,103 @@
     "range": "1-158",
     "role": "LAB historical future structural-helper proposal full read; not current executable evidence or adopted W2 requirements",
     "status": "full"
+  },
+  {
+    "path": "specs/examples/66-current-l2-try-rollback-malformed-static-tranche-size.md",
+    "sha256": "d0eabd06087fe7f5faf1d7c14240cf89c282e7547acd9c110b0ae387408ca9ee",
+    "range": "1-154",
+    "role": "LAB historical full read; empty fallback and AtomicCut fallback-placement restrictions are explicitly working assumptions, not adopted core/proof-first requirements",
+    "status": "full"
+  },
+  {
+    "path": "specs/examples/67-current-l2-try-rollback-malformed-pattern-slot-selection.md",
+    "sha256": "78e07db158ab94a736965b837f7c3e09a2e3f8827f1a7713e6b1a264f6a119a1",
+    "range": "1-238",
+    "role": "LAB historical full read; empty fallback and AtomicCut fallback-placement restrictions are explicitly working assumptions, not adopted core/proof-first requirements",
+    "status": "full"
+  },
+  {
+    "path": "specs/examples/68-current-l2-try-rollback-ast-helper-first-tranche-actualization.md",
+    "sha256": "2e0bf7fa0c3d573f04ff79944248a20aeb1aae5912dc4a0ca94edf7abc344152",
+    "range": "1-247",
+    "role": "full historical document read or prior-full source plus fully authored unreviewed extension; historical implemented helper rules are not adopted proof-first core requirements",
+    "status": "full"
+  },
+  {
+    "path": "specs/examples/69-current-l2-try-rollback-second-malformed-static-tranche-comparison.md",
+    "sha256": "f91db32e95e2b688d7c4523f0ad96fff108882b5570c06b62aef415c3bff7e80",
+    "range": "1-179",
+    "role": "full historical document read or prior-full source plus fully authored unreviewed extension; historical implemented helper rules are not adopted proof-first core requirements",
+    "status": "full"
+  },
+  {
+    "path": "samples/lean/foundations/MirroreaProofFirstResourceBoundary.lean",
+    "sha256": "4594d79e21c5e4288c9bcc81e2dd5ea6c595221ebf2a4776fd20eb5e269ecf6f",
+    "range": "1-651",
+    "role": "full historical document read or prior-full source plus fully authored unreviewed extension; historical implemented helper rules are not adopted proof-first core requirements",
+    "status": "full"
+  },
+  {
+    "path": "samples/lean/foundations/MirroreaProofFirstContractExport.lean",
+    "sha256": "5ed9c1a9bc612d9c0553a6027ca5a6f28c459cd7cec3b1eebb869bb9b7276cfa",
+    "range": "1-624",
+    "role": "full historical document read or prior-full source plus fully authored unreviewed extension; historical implemented helper rules are not adopted proof-first core requirements",
+    "status": "full"
+  },
+  {
+    "path": "plan/proof-first-foundation-correspondence.md",
+    "sha256": "e9f6d5aa239a7925c504f705f6579d59fbf6ca0be557e31b2883f7b3b3ccdc3d",
+    "range": "1-307",
+    "role": "full historical document read or prior-full source plus fully authored unreviewed extension; historical implemented helper rules are not adopted proof-first core requirements",
+    "status": "full"
+  },
+  {
+    "path": "specs/examples/70-current-l2-try-rollback-first-tranche-wording-stability.md",
+    "sha256": "fad7a84eabf7a43074ba03456145024a4e30ad01ac77287e38c2ffc871233e77",
+    "range": "1-194",
+    "role": "Full historical LAB document read; no proof-first adoption inferred.",
+    "status": "full"
+  },
+  {
+    "path": "specs/examples/71-current-l2-try-rollback-first-tranche-shared-carrier-threshold-recheck.md",
+    "sha256": "3e3cab31eabf0cecd8d8af1cd8de7c8106217cafc032bd84cd90c94ae7a9b475",
+    "range": "1-182",
+    "role": "Full historical LAB document read; no proof-first adoption inferred.",
+    "status": "full"
+  },
+  {
+    "path": "specs/examples/72-current-l2-try-rollback-first-tranche-generic-public-recheck.md",
+    "sha256": "3f6a7dbdfbf59deff9686d3d95e8491321962a0716bc7d60b1841ed516eb4af8",
+    "range": "1-157",
+    "role": "Full historical LAB document read; no proof-first adoption inferred.",
+    "status": "full"
+  },
+  {
+    "path": "specs/examples/73-current-l2-first-parser-spike-staging.md",
+    "sha256": "938f782cb3185f2cdfc5f4da50832f21b7244348e60490a9e6ae412aebb614c2",
+    "range": "1-256",
+    "role": "Full historical LAB document read; no proof-first adoption inferred.",
+    "status": "full"
+  },
+  {
+    "path": "specs/examples/74-current-l2-stage1-parser-spike-entry-criteria.md",
+    "sha256": "0933fe46ccf5b9820e96eae4831c6782d60d22803d639b1c82c7f0a7339153c2",
+    "range": "1-276",
+    "role": "Full historical LAB document read; no proof-first adoption inferred.",
+    "status": "full"
+  },
+  {
+    "path": "specs/examples/75-current-l2-stage1-parser-guard-slot-handoff.md",
+    "sha256": "741f5684f386fc9130a0522b5d336e18bcdb753a207d3773f09444511264ba81",
+    "range": "1-195",
+    "role": "Full historical LAB document read; no proof-first adoption inferred.",
+    "status": "full"
+  },
+  {
+    "path": "specs/examples/76-current-l2-stage1-parser-opaque-slot-carrier-and-bridge-api.md",
+    "sha256": "a123826b6f16da31c9969b59dcb6e94daddd79f764dc5f24b6d880fd060c9e72",
+    "range": "1-235",
+    "role": "Full historical LAB document read; no proof-first adoption inferred.",
+    "status": "full"
   }
 ]

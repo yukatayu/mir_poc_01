@@ -534,3 +534,91 @@ end FlowControls
 #print axioms evaluate_low
 #print axioms checked_evaluate_low
 end MirroreaProofFirst.ContractExport.CheckedArithmetic
+
+-- Later unreviewed finite-capacity reference extension; no production acceptance.
+namespace MirroreaProofFirst.ContractExport.CheckedAllocation
+open ResourceBoundary
+
+def run (limits : BoundedIdentifiers.Limits) (lo hi : Int)
+ (authorize : State → Binding → Action → Bool)
+ (s : State) (b : Binding) (e : Envelope) : Option (State × List Handle) :=
+ (CheckedArithmetic.evaluate lo hi b.arguments b.code).bind fun z =>
+ if z = e.result then
+   match accept b e with
+   | none => none
+   | some n => BoundedIdentifiers.runOne limits (fun _ => authorize s b (.allocate b.principal n)) s (.allocate b.principal n)
+ else none
+
+theorem run_exact (limits : BoundedIdentifiers.Limits) (lo hi : Int)
+ (authorize : State → Binding → Action → Bool)
+ (s : State) (b : Binding) (e : Envelope) (out : State × List Handle) :
+ run limits lo hi authorize s b e = some out ↔
+ CheckedArithmetic.evaluate lo hi b.arguments b.code = some e.result ∧
+ ∃ n, accept b e = some n ∧ authorize s b (.allocate b.principal n) = true ∧
+ BoundedIdentifiers.Capacity limits s (.allocate b.principal n) ∧
+ out = raw s (.allocate b.principal n) := by
+ unfold run
+ rw [Option.bind_eq_some_iff]
+ cases ha : accept b e with
+ | none => simp
+ | some n =>
+   have pos := (accept_bound ha).1
+   simp [BoundedIdentifiers.runOne,
+     execute,ResourceBoundary.check,pos,BoundedIdentifiers.capacity_exact]
+   constructor
+   · rintro ⟨z,hz,he,cap,auth,ho⟩
+     subst z
+     exact ⟨hz,auth,cap,ho.symm⟩
+   · rintro ⟨hz,auth,cap,ho⟩
+     exact ⟨_,hz,rfl,cap,auth,ho.symm⟩
+
+theorem accepted_result {b : Binding} {e : Envelope} {n : Nat}
+ (accepted : accept b e = some n) : Int.ofNat n = e.result := by
+ rw [accepted_integer_length accepted]
+ exact LocalContract.denotes_eval (accept_sound accepted).common.result
+
+theorem lawful_completes {limits : BoundedIdentifiers.Limits} {lo hi : Int}
+ {authorize : State → Binding → Action → Bool} {s : State} {b : Binding} {e : Envelope} {n : Nat}
+ (accepted : accept b e = some n)
+ (bounds : CheckedArithmetic.Bounds lo hi b.arguments b.code)
+ (auth : authorize s b (.allocate b.principal n) = true)
+ (capacity : BoundedIdentifiers.Capacity limits s (.allocate b.principal n)) :
+ run limits lo hi authorize s b e = some (raw s (.allocate b.principal n)) := by
+ apply (run_exact _ _ _ _ _ _ _ _).mpr
+ have h := CheckedArithmetic.accepted_machine_value accepted bounds
+ rw [accepted_result accepted] at h
+ exact ⟨h,n,accepted,auth,capacity,rfl⟩
+
+theorem successful {limits : BoundedIdentifiers.Limits} {lo hi : Int}
+ {authorize : State → Binding → Action → Bool} {s : State} (w : WF s)
+ {b : Binding} {e : Envelope} {out : State × List Handle}
+ (ok : run limits lo hi authorize s b e = some out) :
+ ∃ n, PositiveExport b e n ∧ Int.ofNat n = e.result ∧
+ CheckedArithmetic.Denotes lo hi b.arguments b.code e.result ∧
+ authorize s b (.allocate b.principal n) = true ∧
+ WF out.1 ∧ BoundedIdentifiers.Within limits out.1 ∧
+ out = raw s (.allocate b.principal n) := by
+ obtain ⟨machine,n,accepted,auth,cap,rfl⟩ := (run_exact _ _ _ _ _ _ _ _).mp ok
+ exact ⟨n,accept_sound accepted,accepted_result accepted,
+   (CheckedArithmetic.exact _ _ _ _ _).mp machine,auth,
+   allocate_wf w _ _ (accept_bound accepted).1,
+   (BoundedIdentifiers.raw_within _ _ _).mpr cap,rfl⟩
+
+namespace Controls
+open ContractExport.Controls
+example : (run ⟨1,1⟩ (-20) 20 RequestAllocation.Controls.exactGrant empty b e).map
+ (fun out => out.2.map (fun h => (h.id,h.region.hi,h.region.holder))) = some [(0,10,1)] := by decide
+example : run ⟨0,1⟩ (-20) 20 RequestAllocation.Controls.exactGrant empty b e = none := by decide
+example : run ⟨1,1⟩ (-5) 5 RequestAllocation.Controls.exactGrant empty b e = none := by decide
+example : run ⟨1,1⟩ (-20) 20 (fun _ _ _ => false) empty b e = none := by decide
+def cancellationBinding : Binding := {b with profile := .checkedValue, code := CheckedArithmetic.Controls.wideCancellation, arguments := [4611686018427387904]}
+def cancellationEnvelope : Envelope := {e with binding := cancellationBinding,result := 9}
+example : accept cancellationBinding cancellationEnvelope = some 9 := by decide
+example : run ⟨1,1⟩ (-9223372036854775808) 9223372036854775807 (fun _ _ _ => true)
+ empty cancellationBinding cancellationEnvelope = none := by decide
+example : run ⟨1,1⟩ (-20) 20 RequestAllocation.Controls.exactGrant empty b {e with result := 11} = none := by decide
+end Controls
+#print axioms run_exact
+#print axioms lawful_completes
+#print axioms successful
+end MirroreaProofFirst.ContractExport.CheckedAllocation
