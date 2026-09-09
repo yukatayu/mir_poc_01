@@ -1,0 +1,83 @@
+{
+  "timestamp": "2026-09-09T16:43:28.987507+00:00",
+  "workdir": "/tmp/mirrorea-proof-first-20260909-gn29zka5/w2-resource-exact-3tijdip8",
+  "toolchain": "Lean (version 4.29.1, x86_64-unknown-linux-gnu, commit f72c35b3f637c8c6571d353742168ab66cc22c00, Release)\n",
+  "checks": [
+    {
+      "source": "/tmp/mirrorea-proof-first-20260909-gn29zka5/w2-resource-exact-3tijdip8/ResourceBoundary.lean",
+      "sha256": "99f45cddcd25dcf54a687a40f736ccbdae3b0a6286787e3c14b834dc89d1f317",
+      "cwd": "/tmp/mirrorea-proof-first-20260909-gn29zka5/w2-resource-exact-3tijdip8",
+      "command": [
+        "lean",
+        "--trust=0",
+        "-o",
+        "ResourceBoundary.olean",
+        "ResourceBoundary.lean"
+      ],
+      "exit_code": 0,
+      "stdout": "'MirroreaProofFirst.ResourceBoundary.split_exact_cover' depends on axioms: [propext, Classical.choice, Quot.sound]\n'MirroreaProofFirst.ResourceBoundary.split_disjoint_points' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.ResourceBoundary.move_exact_cover' does not depend on any axioms\n'MirroreaProofFirst.ResourceBoundary.raw_frame' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.ResourceBoundary.execute_frame' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.ResourceBoundary.execute_returned_current' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n'MirroreaProofFirst.ResourceBoundary.allocate_wf' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.ResourceBoundary.erase_wf' does not depend on any axioms\n'MirroreaProofFirst.ResourceBoundary.move_wf' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.ResourceBoundary.split_wf' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.ResourceBoundary.check_exact' depends on axioms: [propext]\n'MirroreaProofFirst.ResourceBoundary.execution_exists' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.ResourceBoundary.execute_wf' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.ResourceBoundary.run_wf' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.ResourceBoundary.raw_monotone' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.ResourceBoundary.consumed_never_current' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.ResourceBoundary.schedule_wf' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.ResourceBoundary.consumed_never_current_schedule' depends on axioms: [propext, Quot.sound]\n",
+      "stderr": ""
+    },
+    {
+      "source": "/tmp/mirrorea-proof-first-20260909-gn29zka5/w2-resource-exact-3tijdip8/LocalContract.lean",
+      "sha256": "3da10e6061c72ddaa59f77af82733b80f1f7321cb4699adda1230a0470412660",
+      "cwd": "/tmp/mirrorea-proof-first-20260909-gn29zka5/w2-resource-exact-3tijdip8",
+      "command": [
+        "lean",
+        "--trust=0",
+        "-o",
+        "LocalContract.olean",
+        "LocalContract.lean"
+      ],
+      "exit_code": 0,
+      "stdout": "'MirroreaProofFirst.LocalContract.eval_exact' depends on axioms: [propext]\n'MirroreaProofFirst.LocalContract.nonnegative_sound' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.LocalContract.infer_sound' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.LocalContract.infer_complete' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.LocalContract.assumptions_exact' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.LocalContract.positive_result' depends on axioms: [propext, Quot.sound]\n",
+      "stderr": ""
+    },
+    {
+      "source": "/tmp/mirrorea-proof-first-20260909-gn29zka5/w2-resource-exact-3tijdip8/ContractExport.lean",
+      "sha256": "5cda89019ec61383bf714d99e5c24af93bda73418df6235cbf119ce63323cefb",
+      "cwd": "/tmp/mirrorea-proof-first-20260909-gn29zka5/w2-resource-exact-3tijdip8",
+      "command": [
+        "lean",
+        "--trust=0",
+        "-o",
+        "ContractExport.olean",
+        "ContractExport.lean"
+      ],
+      "exit_code": 0,
+      "stdout": "'MirroreaProofFirst.ContractExport.scoped_exact' depends on axioms: [propext]\n'MirroreaProofFirst.ContractExport.common_exact' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.ContractExport.accept_sound' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.ContractExport.accept_bound' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.ContractExport.accepted_integer_length' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.ContractExport.checked_profile_complete' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.ContractExport.symbolic_profile_complete' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.ContractExport.allocate_export_wf' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.ContractExport.lawful_export_allocates' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.ContractExport.export_cannot_grant' depends on axioms: [propext]\n",
+      "stderr": ""
+    },
+    {
+      "source": "/tmp/mirrorea-proof-first-20260909-gn29zka5/w2-resource-exact-3tijdip8/PureFunctions.lean",
+      "sha256": "d222377d63006235ab1a97aca8073757d716a55f37f19e2b4d41d59aaf370d86",
+      "cwd": "/tmp/mirrorea-proof-first-20260909-gn29zka5/w2-resource-exact-3tijdip8",
+      "command": [
+        "lean",
+        "--trust=0",
+        "-o",
+        "PureFunctions.olean",
+        "PureFunctions.lean"
+      ],
+      "exit_code": 0,
+      "stdout": "'MirroreaProofFirst.PureFunctions.infer_exact' depends on axioms: [propext]\n'MirroreaProofFirst.PureFunctions.environment_lookup' depends on axioms: [propext]\n'MirroreaProofFirst.PureFunctions.evaluator_typed' depends on axioms: [propext]\n'MirroreaProofFirst.PureFunctions.execution_complete' depends on axioms: [propext, Classical.choice, Quot.sound]\n'MirroreaProofFirst.PureFunctions.execution_sound' depends on axioms: [propext]\n'MirroreaProofFirst.PureFunctions.execution_exact' depends on axioms: [propext, Classical.choice, Quot.sound]\n'MirroreaProofFirst.PureFunctions.counter_has_fuel' depends on axioms: [propext, Classical.choice, Quot.sound]\n",
+      "stderr": ""
+    },
+    {
+      "source": "/tmp/mirrorea-proof-first-20260909-gn29zka5/w2-resource-exact-3tijdip8/FunctionContractBridge.lean",
+      "sha256": "6961e689ac790acb65dbbfbc63c6e222e20af5e1cb43d314fdf48b7463e2c7b4",
+      "cwd": "/tmp/mirrorea-proof-first-20260909-gn29zka5/w2-resource-exact-3tijdip8",
+      "command": [
+        "lean",
+        "--trust=0",
+        "-o",
+        "FunctionContractBridge.olean",
+        "FunctionContractBridge.lean"
+      ],
+      "exit_code": 0,
+      "stdout": "'MirroreaProofFirst.FunctionContractBridge.lower_typed' depends on axioms: [propext]\n'MirroreaProofFirst.FunctionContractBridge.lower_executes' depends on axioms: [propext]\n'MirroreaProofFirst.FunctionContractBridge.unary_executes' depends on axioms: [propext]\n'MirroreaProofFirst.FunctionContractBridge.accepted_code_executes' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n'MirroreaProofFirst.FunctionContractBridge.accepted_unary_executes' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n",
+      "stderr": ""
+    }
+  ],
+  "scope": "unreviewed W2 integrated candidate with exact geometry/frame/returned currentness; no production refinement"
+}

@@ -1,0 +1,53 @@
+{
+  "timestamp": "2026-09-09T16:18:16.365848+00:00",
+  "toolchain": "Lean (version 4.29.1, x86_64-unknown-linux-gnu, commit f72c35b3f637c8c6571d353742168ab66cc22c00, Release)\n",
+  "checks": [
+    {
+      "source": "/tmp/mirrorea-proof-first-20260909-gn29zka5/resource-boundary/ResourceBoundary.lean",
+      "sha256": "4604f0ff0fb7f4c194cf128b0d12e72cebea49ecfde305441ae0849b50380ef5",
+      "command": [
+        "lean",
+        "--trust=0",
+        "-o",
+        "ResourceBoundary.olean",
+        "ResourceBoundary.lean"
+      ],
+      "cwd": "/tmp/mirrorea-proof-first-20260909-gn29zka5/resource-boundary",
+      "exit_code": 0,
+      "stdout": "'MirroreaProofFirst.ResourceBoundary.allocate_wf' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.ResourceBoundary.erase_wf' does not depend on any axioms\n'MirroreaProofFirst.ResourceBoundary.move_wf' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.ResourceBoundary.split_wf' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.ResourceBoundary.check_exact' depends on axioms: [propext]\n'MirroreaProofFirst.ResourceBoundary.execution_exists' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.ResourceBoundary.execute_wf' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.ResourceBoundary.run_wf' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.ResourceBoundary.raw_monotone' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.ResourceBoundary.consumed_never_current' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.ResourceBoundary.schedule_wf' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.ResourceBoundary.consumed_never_current_schedule' depends on axioms: [propext, Quot.sound]\n",
+      "stderr": ""
+    },
+    {
+      "source": "/tmp/mirrorea-proof-first-20260909-gn29zka5/resource-boundary/LocalContract.lean",
+      "sha256": "3da10e6061c72ddaa59f77af82733b80f1f7321cb4699adda1230a0470412660",
+      "command": [
+        "lean",
+        "--trust=0",
+        "-o",
+        "LocalContract.olean",
+        "LocalContract.lean"
+      ],
+      "cwd": "/tmp/mirrorea-proof-first-20260909-gn29zka5/resource-boundary",
+      "exit_code": 0,
+      "stdout": "'MirroreaProofFirst.LocalContract.eval_exact' depends on axioms: [propext]\n'MirroreaProofFirst.LocalContract.nonnegative_sound' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.LocalContract.infer_sound' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.LocalContract.infer_complete' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.LocalContract.assumptions_exact' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.LocalContract.positive_result' depends on axioms: [propext, Quot.sound]\n",
+      "stderr": ""
+    },
+    {
+      "source": "/tmp/mirrorea-proof-first-20260909-gn29zka5/resource-boundary/ContractExport.lean",
+      "sha256": "5cda89019ec61383bf714d99e5c24af93bda73418df6235cbf119ce63323cefb",
+      "command": [
+        "lean",
+        "--trust=0",
+        "-o",
+        "ContractExport.olean",
+        "ContractExport.lean"
+      ],
+      "cwd": "/tmp/mirrorea-proof-first-20260909-gn29zka5/resource-boundary",
+      "exit_code": 0,
+      "stdout": "'MirroreaProofFirst.ContractExport.scoped_exact' depends on axioms: [propext]\n'MirroreaProofFirst.ContractExport.common_exact' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.ContractExport.accept_sound' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.ContractExport.accept_bound' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.ContractExport.accepted_integer_length' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.ContractExport.checked_profile_complete' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.ContractExport.symbolic_profile_complete' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.ContractExport.allocate_export_wf' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.ContractExport.lawful_export_allocates' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.ContractExport.export_cannot_grant' depends on axioms: [propext]\n",
+      "stderr": ""
+    }
+  ],
+  "status": "unreviewed candidate including arbitrary policy-input schedules",
+  "scope": "mathematical resource and two evidence profiles; not full W2 expressive floor, arbitrary theory integration or production refinement"
+}

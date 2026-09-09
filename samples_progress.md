@@ -1,16 +1,16 @@
 # samples_progress
 
-Last updated: 2026-09-09 22:03 JST
+Last updated: 2026-09-10 01:54 JST
 
 Plan250 execution control: I3-3 is accepted and owner-paused with no active
 semantic milestone. Plan 250 remains retained; I3-4/I3-5/I3-6/NEXT-0 remain
 dependency-gated inactive and I3-4 requires explicit owner resume. No sample,
 program completion or official lifecycle entry claim follows.
 
-Separate task-authorized proof-first LAB research is active at W1-passive-erasure.
+Separate task-authorized proof-first LAB research is active at W2-local-contract-resource.
 Support/current-use/tracked-query/finite-graph and passive/accepted-producer Lean results are scoped
 foundation evidence; source/runtime refinement and the alpha candidate remain incomplete.
-See Report2611 and `docs/proof-first/CURRENT_GOAL.md`. This does not resume I3-4.
+See Report2611/2612 and `docs/proof-first/CURRENT_GOAL.md`. This does not resume I3-4.
 
 Detailed component counts, historical cuts and command classifications remain in
 Report 2606. Canon/status acceptance is `aafde92229bb0ff18116f38d4750a0a8f61cb069`
@@ -116,7 +116,8 @@ Notes:
 
 | Line | Workflow status | Reproducible command | Current evidence | Missing actualization |
 |---|---|---|---|---|
-| Proof-first W1 foundations | general conditional Lean evidence; passive, accepted producer, general labels and fallible assignment reviews completed | fresh-copy commands in `samples/lean/README.md`; `python3 scripts/proof_first_support_check.py --work-root <existing-work-directory>` for support differential | `samples/lean/foundations/MirroreaProofFirstSupport.lean`, `MirroreaProofFirstCurrentUse.lean`, `MirroreaProofFirstTrackedValidation.lean`, `MirroreaProofFirstGraphValidation.lean`, `MirroreaProofFirstPassive.lean`, `MirroreaProofFirstProducerFlow.lean`, `MirroreaProofFirstGeneralLabels.lean`, `MirroreaProofFirstFallibleFlow.lean`; exact cuts in `docs/proof-first/FOUNDATION_CHECK.json` | source/type/current-head/all-mutator/physical/authority/observation bridge and verified alpha open; finite comparison is not general implementation refinement |
+| Proof-first W1 foundations | general conditional Lean evidence; passive, accepted producer, general labels and fallible assignment reviews completed | fresh-copy commands in `samples/lean/README.md`; `python3 scripts/proof_first_support_check.py --work-root <existing-work-directory>` for support differential | `samples/lean/foundations/MirroreaProofFirstSupport.lean`, `MirroreaProofFirstCurrentUse.lean`, `MirroreaProofFirstTrackedValidation.lean`, `MirroreaProofFirstGraphValidation.lean`, `MirroreaProofFirstPassive.lean`, `MirroreaProofFirstProducerFlow.lean`, `MirroreaProofFirstGeneralLabels.lean`, `MirroreaProofFirstFallibleFlow.lean`; additional AbortFlow/AddressFlow candidates kernel-checked, Oracle review pending; exact cuts in `docs/proof-first/FOUNDATION_CHECK.json` | source/type/current-head/all-mutator/physical/authority/observation bridge and verified alpha open; finite comparison is not general implementation refinement |
+| W2 local contracts/resources/functions | unreviewed scoped general Lean evidence; not workflow-ready | fresh-copy command in `samples/lean/README.md` | six sources and definitions in `samples/lean/foundations/MirroreaProofFirstContracts.md`; `docs/proof-first/W2_INTEGRATED_CHECK.json`, Report2612 | source-level module handles/registry transitions, existing source/runtime refinement, machine resource limits, auth/current-head binding and secret observation remain open |
 | Current M8 observer baseline |4existing tests pass; actual trusted-setup label countermodel reproduced | `cargo test --offline --locked -p mir-runtime --test m8_runtime_observer` | `docs/proof-first/OBSERVER_BASELINE_CHECK.json`;31existing warnings, no Clippy-clean claim | effective-label input/authorization/emission mismatch; no proven network/M9 exploit, no producer IFC or resource guarantee |
 | α-0.5 local observable runtime | workflow-ready: local session workflow | `python3 scripts/practical_alpha05_session.py check-all --format json` | same-session carrier, typed host-I/O `AddOne`, local observe/save/load evidence, and repo-relative nested session package argv for repo-owned inputs | none within bounded α-0.5 workflow |
 | α-0.8 same-session hot-plug runtime | workflow-ready: same-session hot-plug workflow | `python3 scripts/practical_alpha08_session_hotplug.py check-all --format json` | debug/auth/rate-limit/object/avatar attach rows, lifecycle export, and repo-relative nested session package argv for repo-owned inputs | accepted detach execution / distributed ordering |

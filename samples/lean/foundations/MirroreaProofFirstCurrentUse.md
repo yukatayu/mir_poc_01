@@ -1,6 +1,6 @@
 # Proof-first current-use candidate (LAB)
 
-This is the active W1-current-use research candidate. It is not accepted Canon,
+This is a scoped W1-current-use research dependency. It is not accepted Canon,
 production behavior, a public identity format, a cryptographic authority scheme,
 or resolution of Q-18. The existing Plan250 remains paused. The direct consumers
 are typed current handles and, later, every actual execution/release boundary.

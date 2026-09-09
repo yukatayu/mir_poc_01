@@ -240,11 +240,10 @@
   },
   "docs_validation": {
     "command": "python3 scripts/validate_docs.py",
-    "exit_code": 0,
-    "output": "Documentation scaffold looks complete. Found 1761 numbered report(s).",
-    "at_utc": "2026-09-09T13:26:54.463808+00:00",
-    "exec_session": 44531,
-    "scope": "Rerun after integration-review corrections; inventory validation, not semantic report tests."
+    "exec_session": 56213,
+    "returncode": 0,
+    "stdout": "Documentation scaffold looks complete.\nFound 1761 numbered report(s).\n",
+    "scope": "mirrored AbortFlow/AddressFlow candidates and sample command/index updates; later reading-ledger additions only"
   },
   "integration_review": {
     "session": "mirrorea-proof-first-integratio-review",
@@ -1223,5 +1222,83 @@
         "output": "'MirroreaProofFirst.FallibleFlow.eval_typed' depends on axioms: [propext]\n'MirroreaProofFirst.FallibleFlow.step_typed' depends on axioms: [propext]\n'MirroreaProofFirst.FallibleFlow.singleton_retention' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.FallibleFlow.eval_in_range' depends on axioms: [propext]\n'MirroreaProofFirst.FallibleFlow.step_in_range' depends on axioms: [propext]\n'MirroreaProofFirst.FallibleFlow.bounded_exact' depends on axioms: [propext]\n'MirroreaProofFirst.FallibleFlow.bounded_failure' depends on axioms: [propext, Classical.choice, Quot.sound]\n'MirroreaProofFirst.FallibleFlow.eval_low' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.FallibleFlow.step_noninterference' depends on axioms: [propext, Quot.sound]\n"
       }
     ]
+  },
+  "abort_address_mirrored_unreviewed": {
+    "workdir": "/tmp/mirrorea-proof-first-20260909-gn29zka5/abort-address-mirrored-5tz0lz70",
+    "toolchain": "Lean (version 4.29.1, x86_64-unknown-linux-gnu, commit f72c35b3f637c8c6571d353742168ab66cc22c00, Release)\n",
+    "results": [
+      {
+        "file": "samples/lean/foundations/MirroreaProofFirstPassive.lean",
+        "sha256": "f5e3aec86542e7c844ace3993e7410eda7af041e96d0291fc836d85783d433e8",
+        "command": [
+          "lean",
+          "--trust=0",
+          "-o",
+          "MirroreaProofFirstPassive.olean",
+          "MirroreaProofFirstPassive.lean"
+        ],
+        "returncode": 0,
+        "stdout": "'MirroreaProofFirst.Passive.erasure' does not depend on any axioms\n'MirroreaProofFirst.Passive.lift_erases' depends on axioms: [propext]\n'MirroreaProofFirst.Passive.filter_before_retention' depends on axioms: [propext]\n'MirroreaProofFirst.Passive.retained_bound' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.Passive.no_invented_rows' depends on axioms: [propext]\n'MirroreaProofFirst.Passive.aligned_projection' depends on axioms: [propext]\n'MirroreaProofFirst.Passive.two_trace_retention' depends on axioms: [propext]\n'MirroreaProofFirst.Passive.concrete_projection' depends on axioms: [propext]\n'MirroreaProofFirst.Passive.concrete_two_run' depends on axioms: [propext]\n'MirroreaProofFirst.Passive.feedRows_exact' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.Passive.retained_exact' depends on axioms: [propext, Quot.sound]\n",
+        "stderr": ""
+      },
+      {
+        "file": "samples/lean/foundations/MirroreaProofFirstProducerFlow.lean",
+        "sha256": "fa5a585d1652bcda7ec61cc7b12442d07bdd079cda4effb1d7794cc2f1db6785",
+        "command": [
+          "lean",
+          "--trust=0",
+          "-o",
+          "MirroreaProofFirstProducerFlow.olean",
+          "MirroreaProofFirstProducerFlow.lean"
+        ],
+        "returncode": 0,
+        "stdout": "'MirroreaProofFirst.ProducerFlow.infer_exact' depends on axioms: [propext]\n'MirroreaProofFirst.ProducerFlow.typed_evaluates' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.ProducerFlow.flows_exact' depends on axioms: [propext]\n'MirroreaProofFirst.ProducerFlow.eval_low' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.ProducerFlow.check_exact' depends on axioms: [propext]\n'MirroreaProofFirst.ProducerFlow.run_typed' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.ProducerFlow.confinement' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.ProducerFlow.run_noninterference' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.ProducerFlow.projected_visible' depends on axioms: [propext]\n'MirroreaProofFirst.ProducerFlow.checked_retention_noninterference' depends on axioms: [propext, Quot.sound]\n",
+        "stderr": ""
+      },
+      {
+        "file": "samples/lean/foundations/MirroreaProofFirstFallibleFlow.lean",
+        "sha256": "a799c7b6301684ea258097993bb3ebdb9eb32e51fa24b1603542f363de0929d9",
+        "command": [
+          "lean",
+          "--trust=0",
+          "-o",
+          "MirroreaProofFirstFallibleFlow.olean",
+          "MirroreaProofFirstFallibleFlow.lean"
+        ],
+        "returncode": 0,
+        "stdout": "'MirroreaProofFirst.FallibleFlow.eval_typed' depends on axioms: [propext]\n'MirroreaProofFirst.FallibleFlow.step_typed' depends on axioms: [propext]\n'MirroreaProofFirst.FallibleFlow.singleton_retention' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.FallibleFlow.eval_in_range' depends on axioms: [propext]\n'MirroreaProofFirst.FallibleFlow.step_in_range' depends on axioms: [propext]\n'MirroreaProofFirst.FallibleFlow.bounded_exact' depends on axioms: [propext]\n'MirroreaProofFirst.FallibleFlow.bounded_failure' depends on axioms: [propext, Classical.choice, Quot.sound]\n'MirroreaProofFirst.FallibleFlow.eval_low' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.FallibleFlow.step_noninterference' depends on axioms: [propext, Quot.sound]\n",
+        "stderr": ""
+      },
+      {
+        "file": "samples/lean/foundations/MirroreaProofFirstAbortFlow.lean",
+        "sha256": "f26013320c80f6f16e49dfeb384474ec0b900f92ddff80dc54b33c02ed98f7ff",
+        "command": [
+          "lean",
+          "--trust=0",
+          "-o",
+          "MirroreaProofFirstAbortFlow.olean",
+          "MirroreaProofFirstAbortFlow.lean"
+        ],
+        "returncode": 0,
+        "stdout": "'MirroreaProofFirst.AbortFlow.run_typed' depends on axioms: [propext]\n'MirroreaProofFirst.AbortFlow.full_trace_when_inputs_low' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.AbortFlow.completion_noninterference' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.AbortFlow.retained_noninterference' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.AbortFlow.check_exact' depends on axioms: [propext]\n'MirroreaProofFirst.AbortFlow.confinement' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.AbortFlow.noninterference' depends on axioms: [propext, Quot.sound]\n",
+        "stderr": ""
+      },
+      {
+        "file": "samples/lean/foundations/MirroreaProofFirstAddressFlow.lean",
+        "sha256": "9aa0417669350e9f2d4a8bc2eaea9ad4cacd79237f3e1de9faf92adde1488c7e",
+        "command": [
+          "lean",
+          "--trust=0",
+          "-o",
+          "MirroreaProofFirstAddressFlow.olean",
+          "MirroreaProofFirstAddressFlow.lean"
+        ],
+        "returncode": 0,
+        "stdout": "'MirroreaProofFirst.AddressFlow.eval_commutes' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.AddressFlow.rank_commutes' depends on axioms: [propext]\n'MirroreaProofFirst.AddressFlow.infer_commutes' depends on axioms: [propext]\n'MirroreaProofFirst.AddressFlow.put_commutes' does not depend on any axioms\n'MirroreaProofFirst.AddressFlow.run_commutes' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.AddressFlow.check_commutes' depends on axioms: [propext]\n",
+        "stderr": ""
+      }
+    ],
+    "successful": true,
+    "scope": "coherent mirrored candidates; Oracle review pending"
   }
 }

@@ -38,9 +38,13 @@
     mechanization. `MirroreaProofFirstSupportDifferential.lean` executes finite
     comparison cases via `scripts/proof_first_support_check.py`; it is not a
     general refinement proof or a runtime sample. CurrentUse, TrackedValidation,
-    GraphValidation, Passive, ProducerFlow, GeneralLabels and FallibleFlow companions distinguish their conditional proofs
+    GraphValidation, Passive, ProducerFlow, GeneralLabels, FallibleFlow, AbortFlow and AddressFlow companions distinguish their conditional proofs
     from runtime/authority/IFC bridges. Reproduction: `lean/README.md`; Report2611.
     Scoped passive and accepted producer reviews completed; actual-source/outcome/observer correspondence remains open. Canon makes its unlisted operand private by default; observer_safe does not grant implicit public release.
+  - W2 resource/contract/pure-function candidates are documented in
+    `lean/foundations/MirroreaProofFirstContracts.md` and Report2612. They have
+    kernel evidence; review and existing-Mir refinement remain open. They are
+    mechanization samples, not an operational alpha workflow.
   - `clean-near-end/` は generated theorem stub evidence
 - `alpha/`
   Mirrorea Spaces alpha-0 phase-indexed sample matrix scaffold with `.expected.json` sidecars

@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-09-10 00:15 JST
+最終更新: 2026-09-10 02:21 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -56,13 +56,15 @@ public/production layers remain later.
 ## current milestone position
 
 Separate current task: user-authorized proof-first LAB research, active single goal
-W1-passive-erasure (PL1 S1/S3, theory/proof). This is not a Plan250 milestone or
+W2-local-contract-resource (PL1 S1/S2, theory/proof). This is not a Plan250 milestone or
 I3-4 resume. Scoped support/current-use/tracked-query/graph Lean proofs and reviews
 exist; passive exact-retention and accepted mathematical producer reviews completed.
 Fallible single-assignment and general local-label proofs have scoped source review and kernel checks; abort/alias/source review is pending. Source/type/dynamic
 composition and actual implementation/alpha gates remain open. Required corpus
 reading is incomplete. Memory: `plan/proof-first-foundation-correspondence.md`;
-evidence: `docs/reports/2611-mirrorea-proof-first-w1-foundations.md`.
+evidence: Reports2611/2612. W2 now has six mirrored unreviewed Lean candidates
+for resource/contract/function/current-use correspondence; source-level module handles and actual
+source/runtime refinement remain open.
 
 | Task axis | Current status | Startability |
 |---|---|---|
@@ -285,3 +287,9 @@ The authorized roadmap is paused, not blocked, stale or closed.
 - 2026-09-09 23:04 JST: Proof-first LAB: accepted producerの一般二実行証明とoracle指摘の発生有無反例を検査・統合。実M7 visibility/operand、M8 overflow結果、固定typing helperのコメント入力反例を記録。source/実装・α接続は未達。
 
 - 2026-09-10 00:15 JST: Proof-first LAB: 一般label・失敗付き代入のreview済みcutを統合し、10モジュールのcoherent kernel検査と文書検査を確認。実source結果/frameの8有限検査と2変異拒否を記録。W1継続、α未達。
+
+- 2026-09-10 01:08 JST: Proof-first LAB: W1のreview済み必要依存を保持し、単一goalをW2局所契約・資源境界へ移行。独立checker対応、区間分離保存と消費済みhandle非復活の一般Lean候補を検査。W2未review、W1後続Oracle継続、production/α未達。
+
+- 2026-09-10 01:59 JST: Proof-first LAB: W2の局所契約・高階関数/有限反復・資源保存の5候補を保存し、fresh-copy Lean検査を確認。旧handle返却/分割gap変異を拒否。別W2 Oracleを一度起動、W1は送信未確認で保持。production/α未達。
+
+- 2026-09-10 02:15 JST: W2の現在module・認可・型付き実引数と局所契約の結合を一般Leanで検査し、両profileの相対完全性を確認。registry更新・認証と実source接続は未確立、Oracle未review。

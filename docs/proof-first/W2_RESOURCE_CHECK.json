@@ -1,0 +1,15 @@
+{
+  "timestamp": "2026-09-09T16:06:20.640557+00:00",
+  "source": "/tmp/mirrorea-proof-first-20260909-gn29zka5/resource-boundary/ResourceBoundary.lean",
+  "sha256": "be181a41f7e08ce8383d36a859e257e0ffcdf8bf22ea0406ea26e0c6467f3216",
+  "command": [
+    "lean",
+    "--trust=0",
+    "/tmp/mirrorea-proof-first-20260909-gn29zka5/resource-boundary/ResourceBoundary.lean"
+  ],
+  "exit_code": 0,
+  "stdout": "'MirroreaProofFirst.ResourceBoundary.allocate_wf' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.ResourceBoundary.erase_wf' does not depend on any axioms\n'MirroreaProofFirst.ResourceBoundary.move_wf' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.ResourceBoundary.split_wf' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.ResourceBoundary.check_exact' depends on axioms: [propext]\n'MirroreaProofFirst.ResourceBoundary.execution_exists' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.ResourceBoundary.execute_wf' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.ResourceBoundary.run_wf' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.ResourceBoundary.raw_monotone' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.ResourceBoundary.consumed_never_current' depends on axioms: [propext, Quot.sound]\n",
+  "stderr": "",
+  "toolchain": "Lean (version 4.29.1, x86_64-unknown-linux-gnu, commit f72c35b3f637c8c6571d353742168ab66cc22c00, Release)\n",
+  "scope": "unreviewed nonproduction resource candidate; no source/local-contract export, restore or implementation refinement yet"
+}

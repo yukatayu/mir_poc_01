@@ -415,3 +415,13 @@ commands in `samples/lean/README.md`; the support differential runner does not c
 to cover those modules. Their actual cuts and open implementation obligations are
 recorded under `docs/proof-first/` and report2611. Documentation path inventories
 retain the historical handoff at `sub-agent-pro/old_01/mirrorea_mir_computational_core_handoff.md`.
+
+The same fresh-copy Lean command also checks the task-local AbortFlow and
+AddressFlow candidates. Their coherent kernel result is recorded separately from
+the pending source-boundary Oracle review; no runtime or alpha acceptance follows.
+
+The fresh-copy command includes the six W2 resource/contract/pure-function
+modules documented in `MirroreaProofFirstContracts.md`. Report2612 and
+`docs/proof-first/W2_INTEGRATED_CHECK.json` retain their scoped mathematical
+evidence separately from pending review and production implementation obligations.
+No additional runtime wrapper or generated evidence chain is introduced.

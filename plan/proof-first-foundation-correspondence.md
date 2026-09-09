@@ -37,10 +37,10 @@ controls, SMT and finite comparisons are separate. Standard logical axioms and
 abstract interfaces are documented beside proofs. No implementation correctness
 or official THM/OBL/lifecycle acceptance follows from a proof of this LAB model.
 
-The current single research goal is W1-passive-erasure (PL1 S1/S3 theory/proof).
-W1 overall remains open. Source/type/local-theory boundary (candidate W2) and
-source-derived dynamic composition/all-mutator preservation (candidate W3) are
-direct later consumers; their details are not adopted. Mandatory corpus reading
+The current single research goal is W2-local-contract-resource (PL1 S1/S2 theory/proof).
+Reviewed W1 dependencies support this independent nonproduction consumer; broader
+W1 source/runtime obligations remain open. W2 contract export, full expression
+floor and later W3 dynamic composition/all-mutator obligations are not accepted. Mandatory corpus reading
 is ongoing with a full/range/hash ledger. No whole-project plan is adopted while
 required material remains unread.
 
@@ -98,7 +98,7 @@ An unmet premise blocks its consumer, not the valid conditional theorem. Preserv
 old evidence cuts, record findings forward, and bind subsequent review to changed
 material. Only an ADR-0043 accepted-profile falsifier reopens I3-3; an unrelated LAB
 countermodel does not. Current permitted research needs no new owner answer.
-One report2611 accumulates the work; a reviewed integration commit/push is a
+Report2611 accumulates W1, Report2612 the substantive W2 contract/resource work; a reviewed integration commit/push is a
 checkpoint, not completion of the user request.
 
 
@@ -106,8 +106,13 @@ Current continuation evidence: GeneralLabels and fixed fallible assignment now
 have completed neutral source review and coherent kernel checks, separately.
 Finite theory work is O(n³) relation/join evaluations, not a runtime bound for
 arbitrary functions. Abort/alias/source correspondence and scoped W1→W2 boundary
-are under a later Oracle review; no sequence transition has been adopted.
+are under a later Oracle review. W2 independent resource research has now begun
+using already reviewed W1 dependencies, not those pending extensions.
+AbortFlow and AddressFlow are now retained with scoped companions in the existing
+Lean foundation root; a coherent five-module import-adapted cut passed trust0.
 The later assignment-admission and selected actual outcome/frame controls are
 unreviewed. They do not discharge source/all-entry/current-authority, observer,
 physical execution or restoration obligations. Report2611 and FOUNDATION_CHECK
 retain exact cuts; no numbered roadmap or normative state changed.
+
+W2 now retains six unreviewed candidate Lean modules: resource preservation and exact geometry/frame/returned currentness, local arithmetic certificate soundness/relative completeness, two common-contract evidence profiles, pure higher-order functions/finite iteration actual arithmetic-function result correspondence, and same-current-module/typed-arguments/authority composition for both profiles. Registry provenance and mutation remain open. Coherent original and import-adapted repo cuts pass Lean trust0; details and remaining authenticated-context/source/physical obligations are in MirroreaProofFirstContracts.md, Report2612 and W2_MIRROR_CHECK.json. No arbitrary local-theory integration or existing-source alpha capability is inferred.

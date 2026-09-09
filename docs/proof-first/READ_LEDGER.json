@@ -18428,7 +18428,7 @@
   {
     "path": "specs/00-document-map.md",
     "sha256": "f35d426dbf0b34cfd9b1b538d26e707ccf6025ba69b30a3955f92fb8604a03ad",
-    "range": "1-610",
+    "range": "1-800",
     "role": "LAB historical document index; contiguous full range after discarded truncated cat; index contents do not count referenced files read",
     "status": "partial"
   },
@@ -18437,6 +18437,1169 @@
     "sha256": "c79f4a8ec98e2d5a0e6ba7171c70ce76e73cdcffa5acdb1bde04fda92be99664",
     "range": "1-59",
     "role": "LAB theory/capability sample declarations, not current-source runtime authority evidence",
+    "status": "full"
+  },
+  {
+    "path": "specs/00-document-map.md",
+    "sha256": "f35d426dbf0b34cfd9b1b538d26e707ccf6025ba69b30a3955f92fb8604a03ad",
+    "range": "1-1886",
+    "role": "LAB historical index; all contiguous ranges fully read; initial truncated cat discarded, later 1101-1112 truncation gap reread; referenced files not thereby read",
+    "status": "full"
+  },
+  {
+    "path": "docs/research_abstract/hands_on_typing.md",
+    "sha256": "06d5da654f4a5e1a996d63a177e0d7a292fb912d3244d0b5b682210b2b1ddc99",
+    "range": "1-529",
+    "role": "LAB reader guide; full contiguous reads; broad source-checker claims not assumed given recorded comment-only helper countercontrol",
+    "status": "full"
+  },
+  {
+    "path": "docs/research_abstract/hands_on_modal.md",
+    "sha256": "ef612d1d23210171bf72ebcc6a916b081af9284af070ead4a5dce0f43a5f77dc",
+    "range": "1-225",
+    "role": "LAB sample/guide and historical helper output; full read, not actual ordinary-source semantic proof",
+    "status": "full"
+  },
+  {
+    "path": "docs/research_abstract/clean_near_end_modal_01.md",
+    "sha256": "346bfb8b3a3e8e1ce4169bdec6b7c098e2877ffc127c707446fb2094ff0d520d",
+    "range": "1-46",
+    "role": "LAB sample/guide and historical helper output; full read, not actual ordinary-source semantic proof",
+    "status": "full"
+  },
+  {
+    "path": "docs/research_abstract/clean_near_end_modal_01_detail.md",
+    "sha256": "7ea8d9415f3fac48220da532f6c2c5673f54dc9ae60a65dc88874b5eaf52ecfd",
+    "range": "1-218",
+    "role": "LAB sample/guide and historical helper output; full read, not actual ordinary-source semantic proof",
+    "status": "full"
+  },
+  {
+    "path": "samples/clean-near-end/modal/02_published_witnessed_mode_bridge.mir",
+    "sha256": "723b1e629a56550f50d73b5d4495b14293de79529f8b97eba875efb1a5a1b454",
+    "range": "1-15",
+    "role": "LAB sample/guide and historical helper output; full read, not actual ordinary-source semantic proof",
+    "status": "full"
+  },
+  {
+    "path": "samples/clean-near-end/modal/01_stage_stable_later_minimal.mir",
+    "sha256": "f73767cf6cbbc1256bdaa0b439f72dc7b93dd9affa0266022cc3844daace4895",
+    "range": "1-17",
+    "role": "LAB sample/guide and historical helper output; full read, not actual ordinary-source semantic proof",
+    "status": "full"
+  },
+  {
+    "path": "plan/14-glossary-and-boundary-rules.md",
+    "sha256": "d13090fde2c739f954b39a50e12334743eb941c199e928a065702301dadb5631",
+    "range": "1-255",
+    "role": "LAB historical boundary; full read; current Canon overrides old source-hierarchy and active-queue wording",
+    "status": "full"
+  },
+  {
+    "path": "plan/16-shared-space-membership-and-example-boundary.md",
+    "sha256": "f4ba0831238402de8a3fb391caace59703cc06be07210c195d2f5d05037b6074",
+    "range": "1-56",
+    "role": "LAB historical boundary; full read; current Canon overrides old source-hierarchy and active-queue wording",
+    "status": "full"
+  },
+  {
+    "path": "plan/30-attachpoint-detach-minimal-contract.md",
+    "sha256": "d69bb649a903f6dd32f69d3f5cbf55d9fa5119dcb042fbd1bb398d06be126650",
+    "range": "1-143",
+    "role": "LAB historical boundary; full read; current Canon overrides old source-hierarchy and active-queue wording",
+    "status": "full"
+  },
+  {
+    "path": "docs/research_abstract/phase5-small-decidable-core-and-proof-boundary.md",
+    "sha256": "d0d3685685020f83437ca5c70d064c6d68bad766d9899737c1c11287fca07c82",
+    "range": "1-46",
+    "role": "LAB historical boundary guidance, not production or general proof evidence",
+    "status": "full"
+  },
+  {
+    "path": "docs/research_abstract/typed_external_boundary_adapter_plan_01.md",
+    "sha256": "d48fc82cbd0eef80aadf8547a2cd258db461210881a21a216d13ff7e08874515",
+    "range": "1-75",
+    "role": "LAB historical boundary guidance, not production or general proof evidence",
+    "status": "full"
+  },
+  {
+    "path": "docs/hands_on/typed_external_boundary_canaries_01.md",
+    "sha256": "52807a130f6e3594f34a66079d9bbb1bf7a000abd1aa0a56c94341564ae1f670",
+    "range": "1-103",
+    "role": "LAB historical boundary guidance, not production or general proof evidence",
+    "status": "full"
+  },
+  {
+    "path": "samples/lean/foundations/CurrentL2FiniteIndexFirstLayer.lean",
+    "sha256": "dd3eeffcd5dc4ed0b90496f4b048941f6d3aede7e5142f07a8385de1581c1b64",
+    "range": "1-124",
+    "role": "LAB/handoff historical proof and boundary evidence; not current authorization or production refinement",
+    "status": "full"
+  },
+  {
+    "path": "samples/lean/foundations/CurrentL2FiniteIndexFirstLayer.md",
+    "sha256": "dd5905a24294f0b3394cfba483b3faf911a2216c6f9edac25fb17ff47c6d77a4",
+    "range": "1-12",
+    "role": "LAB/handoff historical proof and boundary evidence; not current authorization or production refinement",
+    "status": "full"
+  },
+  {
+    "path": "sub-agent-pro/mirrorea-proof-first-handoff-v1/materials/mir_foundation_F0_2/tests/test_certificates.py",
+    "sha256": "059b45c1aa74d44de9cf4fdd29ffee801421b6a25735631e1a0cc64fda2ad392",
+    "range": "1-174",
+    "role": "LAB/handoff historical proof and boundary evidence; not current authorization or production refinement",
+    "status": "full"
+  },
+  {
+    "path": "sub-agent-pro/mirrorea-proof-first-handoff-v1/materials/mir_foundation_F0_2/f01_model/resource_theory.py",
+    "sha256": "ec99c4737e6c070f7f6248fa9ae327231fd228e66ed2b804e47dc6a9c6ee89cd",
+    "range": "1-67",
+    "role": "LAB/handoff historical proof and boundary evidence; not current authorization or production refinement",
+    "status": "full"
+  },
+  {
+    "path": "plan/235-p017-x1-typed-owner-result-role-conformance-audit.md",
+    "sha256": "a3313ce3bb054671f1e9756e56949e0ba5c0b405cebbb65e870d9aaca78bc8a8",
+    "range": "1-129",
+    "role": "LAB/handoff historical proof and boundary evidence; not current authorization or production refinement",
+    "status": "full"
+  },
+  {
+    "path": "plan/whole-theory-foundation-audit-20260725.md",
+    "sha256": "68c4bc8a3ed099dad1616bb840f1b413e46f14c77876cb00b3116def34bf9306",
+    "range": "1-119",
+    "role": "LAB/handoff historical proof and boundary evidence; not current authorization or production refinement",
+    "status": "full"
+  },
+  {
+    "path": "plan/189-autonomous-theory-frontier-revalidation.md",
+    "sha256": "5f5d1992045495d72ec8bbc633fdacf48b2836885968ff29051accc9ebfd9722",
+    "range": "1-80",
+    "role": "LAB/handoff historical proof and boundary evidence; not current authorization or production refinement",
+    "status": "full"
+  },
+  {
+    "path": "plan/157-delegated-theory-research-governance.md",
+    "sha256": "7632b741e7adf51024a587aa95bfdf08cc44abe12c7894fbd70856a6561147bc",
+    "range": "1-256",
+    "role": "LAB/handoff historical proof and boundary evidence; not current authorization or production refinement",
+    "status": "full"
+  },
+  {
+    "path": "plan/173-local-predicate-constructive-decidability-selection.md",
+    "sha256": "e581b01d67552de63894248e96642a4da37e7f6f46eed52605450352fb2f7bfc",
+    "range": "1-47",
+    "role": "LAB/handoff evidence; historical lifecycle and tests are not current general proof",
+    "status": "full"
+  },
+  {
+    "path": "plan/174-local-predicate-proposition-decidability-selection.md",
+    "sha256": "a1c118468a23f793a7620a2c72318e51bed6cc343dda4c7982985390257b294c",
+    "range": "1-92",
+    "role": "LAB/handoff evidence; historical lifecycle and tests are not current general proof",
+    "status": "full"
+  },
+  {
+    "path": "plan/175-post-wrk0017-axiom-profile-disposition.md",
+    "sha256": "f28292e129806ef1d11f812aae12a75c7dd01f0dd924ca29cb61251980edaa6c",
+    "range": "1-87",
+    "role": "LAB/handoff evidence; historical lifecycle and tests are not current general proof",
+    "status": "full"
+  },
+  {
+    "path": "plan/249-mirrorea-i2-systems-foundation-current-roadmap.md",
+    "sha256": "3b659f7c7ba303d8c1580f67a4c15a8cbb74be9e614361db3a11ebbb204c17dd",
+    "range": "1-975",
+    "role": "LAB/handoff evidence; historical lifecycle and tests are not current general proof",
+    "status": "full"
+  },
+  {
+    "path": "samples/lean/foundations/CurrentL2LabelModel.lean",
+    "sha256": "d911325349cba843d1773d16aa2770559e03de2f6f9832015e595dba33144137",
+    "range": "1-62",
+    "role": "LAB/handoff evidence; historical lifecycle and tests are not current general proof",
+    "status": "full"
+  },
+  {
+    "path": "samples/lean/foundations/CurrentL2ProofSkeleton.lean",
+    "sha256": "18e85288a37dafe3d0f2814144f8de6e64a765c36d13bd0ecf0ebc28574e8b0b",
+    "range": "1-80",
+    "role": "LAB/handoff evidence; historical lifecycle and tests are not current general proof",
+    "status": "full"
+  },
+  {
+    "path": "sub-agent-pro/mirrorea-proof-first-handoff-v1/materials/mir_foundation_F0_2/tests/test_language.py",
+    "sha256": "6954c7ed5186ee8b90761de4add14c6079dae606d822c9681f20e6617032c066",
+    "range": "1-12",
+    "role": "LAB/handoff evidence; historical lifecycle and tests are not current general proof",
+    "status": "full"
+  },
+  {
+    "path": "sub-agent-pro/mirrorea-proof-first-handoff-v1/materials/mir_foundation_F0_2/tests/test_source.py",
+    "sha256": "e69966e5c7c872df43e0f4a0e7d87ff2fd2a232636df61f747281c4b59217661",
+    "range": "1-90",
+    "role": "LAB/handoff evidence; historical lifecycle and tests are not current general proof",
+    "status": "full"
+  },
+  {
+    "path": "sub-agent-pro/mirrorea-proof-first-handoff-v1/materials/mir_foundation_F0_2/f01_model/test_extension_checks.py",
+    "sha256": "9e3259f1354cf81f6b2a0e9630a26ca632a0d0abc238894f7ccf65f3d17eac5e",
+    "range": "1-131",
+    "role": "LAB/handoff evidence; historical lifecycle and tests are not current general proof",
+    "status": "full"
+  },
+  {
+    "path": "sub-agent-pro/mirrorea-proof-first-handoff-v1/materials/mir_foundation_F0_2/f01_model/test_local_theories.py",
+    "sha256": "7bd20dcbd9ba987b01f3172431a219f17eb320e7d35a0dfae2af7b75a73f0745",
+    "range": "1-60",
+    "role": "LAB/handoff evidence; historical lifecycle and tests are not current general proof",
+    "status": "full"
+  },
+  {
+    "path": "plan/29-verification-layer-widening-threshold.md",
+    "sha256": "d4301093008043a9de6ccd353a65ba5c703e5ced53c245ddd0cc92a9ecfdbbab",
+    "range": "1-206",
+    "role": "LAB historical bounded implementation and claim boundaries, not current queue",
+    "status": "full"
+  },
+  {
+    "path": "plan/57-autonomous-computational-core-master-plan.md",
+    "sha256": "7714808c09d83d9cbe50bc8b4628436dbf6682401088515410ed4551717cc32f",
+    "range": "1-549",
+    "role": "LAB historical bounded implementation and claim boundaries, not current queue",
+    "status": "full"
+  },
+  {
+    "path": "plan/58-full-system-v1-roadmap.md",
+    "sha256": "eaecf4700b8f6c73cb4dbee586983d67d40261b53c2c9939d491fe1b076c1fe0",
+    "range": "1-146",
+    "role": "LAB historical bounded implementation and claim boundaries, not current queue",
+    "status": "full"
+  },
+  {
+    "path": "plan/66-role-admission-roadmap.md",
+    "sha256": "c67a99b7c924359d594c6da25352168adc7231fd802b6e32caac438239c0d822",
+    "range": "1-74",
+    "role": "LAB historical bounded implementation and claim boundaries, not current queue",
+    "status": "full"
+  },
+  {
+    "path": "plan/68-surface-full-system-v1-roadmap.md",
+    "sha256": "3d872058116487302cb1ead9203cf9ae8a4dafc987f0c7cf2653a5793bf1154e",
+    "range": "1-154",
+    "role": "LAB historical bounded implementation and claim boundaries, not current queue",
+    "status": "full"
+  },
+  {
+    "path": "samples/current-l2/e18-malformed-missing-successor-option.txt",
+    "sha256": "26c96411d01b371e7e2827f4ea57d80a6ebaf701133256dbfb4d2e8ee4d3498c",
+    "range": "1-10",
+    "role": "LAB historical source corpus or boundary memory, no new execution claim",
+    "status": "full"
+  },
+  {
+    "path": "samples/current-l2/e20-malformed-late-capability-strengthening.txt",
+    "sha256": "92eced26c895146e247d0a162d6369fb34442cda0e7128189603df176f4fbaa8",
+    "range": "1-13",
+    "role": "LAB historical source corpus or boundary memory, no new execution claim",
+    "status": "full"
+  },
+  {
+    "path": "samples/current-l2/e14-malformed-duplicate-option-declaration.txt",
+    "sha256": "17bfc4cd965cd72d8ac04434f8070d52fc1d70e53bd6ed1bb5567bbf061bff9a",
+    "range": "1-8",
+    "role": "LAB historical source corpus or boundary memory, no new execution claim",
+    "status": "full"
+  },
+  {
+    "path": "samples/current-l2/e3-option-admit-chain.txt",
+    "sha256": "1132579d3c70c875940c526ff3a8bdef835a5d6bdc5dbf16d8ff6bcde0a6952f",
+    "range": "1-14",
+    "role": "LAB historical source corpus or boundary memory, no new execution claim",
+    "status": "full"
+  },
+  {
+    "path": "samples/current-l2/e5-underdeclared-lineage.txt",
+    "sha256": "fb98721840001465c29e51ceb3bfd27e98c86f5543eaffa1d892c8e16c617037",
+    "range": "1-12",
+    "role": "LAB historical source corpus or boundary memory, no new execution claim",
+    "status": "full"
+  },
+  {
+    "path": "samples/current-l2/e15-malformed-duplicate-chain-declaration.txt",
+    "sha256": "b8e1c318220a343f99326a2f41a5eaae67ec4b7a1bb738c7063b0fab58f54c6e",
+    "range": "1-11",
+    "role": "LAB historical source corpus or boundary memory, no new execution claim",
+    "status": "full"
+  },
+  {
+    "path": "samples/current-l2/e16-malformed-missing-chain-head-option.txt",
+    "sha256": "358e9fbf94dd84696002382210ef45eb21b831dfcb13eb2caaa4c5c68c2ae283",
+    "range": "1-9",
+    "role": "LAB historical source corpus or boundary memory, no new execution claim",
+    "status": "full"
+  },
+  {
+    "path": "samples/current-l2/e23-malformed-try-fallback-missing-fallback-body.txt",
+    "sha256": "9fe4e58308adfa5554321eff942bd74b64ac13a95f47036f87b9fc7d1efeba2e",
+    "range": "1-7",
+    "role": "LAB historical source corpus or boundary memory, no new execution claim",
+    "status": "full"
+  },
+  {
+    "path": "samples/current-l2/e19-malformed-target-mismatch.txt",
+    "sha256": "6f5f0681afb0cf0586ed96d60101af8fd2c09cd3803ab33c983efc358efb86ba",
+    "range": "1-11",
+    "role": "LAB historical source corpus or boundary memory, no new execution claim",
+    "status": "full"
+  },
+  {
+    "path": "samples/current-l2/e1-place-atomic-cut.txt",
+    "sha256": "69a24964ad6d15aee3427aaefb6b0096ab14e7b0f75a4135ab758fb00fce0dd8",
+    "range": "1-14",
+    "role": "LAB historical source corpus or boundary memory, no new execution claim",
+    "status": "full"
+  },
+  {
+    "path": "samples/current-l2/e2-try-fallback.txt",
+    "sha256": "c60617c7f59aa0d2ce1da2b8d1ee0d105a3b3068ce224d3328133f119b7c32af",
+    "range": "1-16",
+    "role": "LAB historical source corpus or boundary memory, no new execution claim",
+    "status": "full"
+  },
+  {
+    "path": "samples/current-l2/e22-try-atomic-cut-place-mismatch.txt",
+    "sha256": "a40e646902ddc0d51473bf56c81b2b0c912f25f02f8316e52451d45eb990e453",
+    "range": "1-20",
+    "role": "LAB historical source corpus or boundary memory, no new execution claim",
+    "status": "full"
+  },
+  {
+    "path": "samples/current-l2/e21-try-atomic-cut-frontier.txt",
+    "sha256": "b8087d5d9c910f03178e1a478b8cb5070b1a5ab28d435c47fc7c5476154ef6a0",
+    "range": "1-21",
+    "role": "LAB historical source corpus or boundary memory, no new execution claim",
+    "status": "full"
+  },
+  {
+    "path": "samples/current-l2/e13-malformed-capability-strengthening.txt",
+    "sha256": "b3becba4d39f2f5391947ad933a286a9b8827d2a0b562cfbd3d2a94480665258",
+    "range": "1-11",
+    "role": "LAB historical source corpus or boundary memory, no new execution claim",
+    "status": "full"
+  },
+  {
+    "path": "samples/current-l2/e12-underdeclared-target-missing.txt",
+    "sha256": "8df31f1d2415eb2f04aa7377c022ad0720249b2199671ba2cd2b95aafc43ae4a",
+    "range": "1-12",
+    "role": "LAB historical source corpus or boundary memory, no new execution claim",
+    "status": "full"
+  },
+  {
+    "path": "samples/current-l2/README.md",
+    "sha256": "c5301214b29162a1c2e60224f36b325a8e9fd289ed9121bd6df60dd4d48a5eb8",
+    "range": "1-161",
+    "role": "LAB historical source corpus or boundary memory, no new execution claim",
+    "status": "full"
+  },
+  {
+    "path": "samples/current-l2/e4-malformed-lineage.txt",
+    "sha256": "d38fef3daecb44b3e0fb175b4aae57ae9caee5cb9c8758d72cda62755b741af5",
+    "range": "1-12",
+    "role": "LAB historical source corpus or boundary memory, no new execution claim",
+    "status": "full"
+  },
+  {
+    "path": "plan/40-layer-compatibility-freeze-roadmap.md",
+    "sha256": "09012987d8f18b24d773956386c5161ad59f8ce6a170de9b679e48a37f6d1f95",
+    "range": "1-143",
+    "role": "LAB historical source corpus or boundary memory, no new execution claim",
+    "status": "full"
+  },
+  {
+    "path": "plan/41-save-load-checkpoint-roadmap.md",
+    "sha256": "5199abe9b2113e23b849bf3fa1337108410f1b1300f301a9db141a85b642a82e",
+    "range": "1-105",
+    "role": "LAB historical source corpus or boundary memory, no new execution claim",
+    "status": "full"
+  },
+  {
+    "path": "plan/32-hotplug-real-migration-rollback-boundary.md",
+    "sha256": "6dfa57b4e498f7d702a58348861f312d293307c9290bb065a432724187582614",
+    "range": "1-118",
+    "role": "LAB historical source corpus or boundary memory, no new execution claim",
+    "status": "full"
+  },
+  {
+    "path": "plan/37-post-p21-distributed-activation-ordering-family.md",
+    "sha256": "9039570efc245eec1bab6f1f249440039e8ebb5a5182f5435ee9fe04c9feac84",
+    "range": "1-141",
+    "role": "LAB historical source corpus or boundary memory, no new execution claim",
+    "status": "full"
+  },
+  {
+    "path": "samples/lean/lab-statements/README.md",
+    "sha256": "e18da444d47a5eba7031913ec2e5fbb4904dea1e5f4783a8daaa83a57d3ecf0c",
+    "range": "1-21",
+    "role": "LAB statement shape or conditional/countermodel theorem, not Canon proof discharge; full source reading only",
+    "status": "full"
+  },
+  {
+    "path": "samples/lean/lab-statements/obl001/README.md",
+    "sha256": "6b5bc6449e6fc92a966e1cfaaeebc5cff522f549665a9f4a451dfeef50d574a0",
+    "range": "1-27",
+    "role": "LAB statement shape or conditional/countermodel theorem, not Canon proof discharge; full source reading only",
+    "status": "full"
+  },
+  {
+    "path": "samples/lean/lab-statements/obl001/ResultWriteCoverageCountermodel.lean",
+    "sha256": "b4099aba75273018bd6c9cb355478064e02099f8974fa2bf5aecd9ea3fd3b23b",
+    "range": "1-86",
+    "role": "LAB statement shape or conditional/countermodel theorem, not Canon proof discharge; full source reading only",
+    "status": "full"
+  },
+  {
+    "path": "samples/lean/lab-statements/obl001/ResultWriteCoverageCountermodel.md",
+    "sha256": "c76159178bdef525f00fa598c30f1da2ffc440f4604f7391ba6f49588ccefa0e",
+    "range": "1-15",
+    "role": "LAB statement shape or conditional/countermodel theorem, not Canon proof discharge; full source reading only",
+    "status": "full"
+  },
+  {
+    "path": "samples/lean/lab-statements/obl001/THM001StatementDraft.lean",
+    "sha256": "60b53c6b7e826c2d02278b10fb1e895185c98fc3a54d6d0f27b7e8581513e4b0",
+    "range": "1-123",
+    "role": "LAB statement shape or conditional/countermodel theorem, not Canon proof discharge; full source reading only",
+    "status": "full"
+  },
+  {
+    "path": "samples/lean/lab-statements/obl001/THM001StatementDraft.md",
+    "sha256": "9eb851918a0d5fa7baaef4967a93cc79f5e2ab83490995ff23b10243ff0e282b",
+    "range": "1-44",
+    "role": "LAB statement shape or conditional/countermodel theorem, not Canon proof discharge; full source reading only",
+    "status": "full"
+  },
+  {
+    "path": "samples/lean/lab-statements/obl020/FamilywiseGlobalBoundary.lean",
+    "sha256": "811009b0d5dd3c2fa4b6b15ace1d3af117e2ef35091bfa261cb4d8f2a6f3604d",
+    "range": "1-115",
+    "role": "LAB statement shape or conditional/countermodel theorem, not Canon proof discharge; full source reading only",
+    "status": "full"
+  },
+  {
+    "path": "samples/lean/lab-statements/obl020/FamilywiseGlobalBoundary.md",
+    "sha256": "a094bc68cf35c6c640ea53c04d5de8307ef3650e30c2a1d71ba193e3f99eaba1",
+    "range": "1-20",
+    "role": "LAB statement shape or conditional/countermodel theorem, not Canon proof discharge; full source reading only",
+    "status": "full"
+  },
+  {
+    "path": "samples/lean/lab-statements/obl020/README.md",
+    "sha256": "f8b8efcb63955e4a60d0c9fcb17f9e7d9826dff56d75170ea553a0d2e65ab923",
+    "range": "1-22",
+    "role": "LAB statement shape or conditional/countermodel theorem, not Canon proof discharge; full source reading only",
+    "status": "full"
+  },
+  {
+    "path": "samples/lean/lab-statements/obl020/SameCarrierVarianceBoundary.lean",
+    "sha256": "76135520f45cb64dc9566571a12c42364a1a8c18e984320d82f8b7a57fa5222d",
+    "range": "1-125",
+    "role": "LAB statement shape or conditional/countermodel theorem, not Canon proof discharge; full source reading only",
+    "status": "full"
+  },
+  {
+    "path": "samples/lean/lab-statements/obl020/SameCarrierVarianceBoundary.md",
+    "sha256": "bd8e83c55610c1e408fd266f0ad2a579b1a0953625454206c211e49ca3ec3a2e",
+    "range": "1-17",
+    "role": "LAB statement shape or conditional/countermodel theorem, not Canon proof discharge; full source reading only",
+    "status": "full"
+  },
+  {
+    "path": "samples/lean/lab-statements/obl020/StepWFStatementDraft.lean",
+    "sha256": "7fb4e0312f07d950b23249c78537bde9c0b858cd6477ac8ddf3be3f806cfc0cb",
+    "range": "1-55",
+    "role": "LAB statement shape or conditional/countermodel theorem, not Canon proof discharge; full source reading only",
+    "status": "full"
+  },
+  {
+    "path": "samples/lean/lab-statements/obl020/StepWFStatementDraft.md",
+    "sha256": "e28f2103d06d0dff4de4dd9f018804b3808d55133d416c3e9bc04484dd700204",
+    "range": "1-43",
+    "role": "LAB statement shape or conditional/countermodel theorem, not Canon proof discharge; full source reading only",
+    "status": "full"
+  },
+  {
+    "path": "samples/lean/lab-statements/obl021/ElabDeterminismConditionalOutcomeRelation.lean",
+    "sha256": "5eb8f2702b099076ddbab874d0b96c3a6a980e190149b83b3627642beb6209ab",
+    "range": "1-107",
+    "role": "LAB statement shape or conditional/countermodel theorem, not Canon proof discharge; full source reading only",
+    "status": "full"
+  },
+  {
+    "path": "samples/lean/lab-statements/obl021/ElabDeterminismConditionalOutcomeRelation.md",
+    "sha256": "ebb6acb429b83b55c77a84788afb277c3e4b3d9d2a707adb26320b909b9e8ebf",
+    "range": "1-28",
+    "role": "LAB statement shape or conditional/countermodel theorem, not Canon proof discharge; full source reading only",
+    "status": "full"
+  },
+  {
+    "path": "samples/lean/lab-statements/obl021/ElabDeterminismOutcomeTotalityCountermodel.lean",
+    "sha256": "69f4eced7359d5c99cbace655a7231b8ebb48374cd9e0036aa20670dc6bb5c61",
+    "range": "1-78",
+    "role": "LAB statement shape or conditional/countermodel theorem, not Canon proof discharge; full source reading only",
+    "status": "full"
+  },
+  {
+    "path": "samples/lean/lab-statements/obl021/ElabDeterminismOutcomeTotalityCountermodel.md",
+    "sha256": "2614c1626ed3c6cb41f79cd3dd6cdc32974f9194bbb2fab83aa018760c9a0db7",
+    "range": "1-14",
+    "role": "LAB statement shape or conditional/countermodel theorem, not Canon proof discharge; full source reading only",
+    "status": "full"
+  },
+  {
+    "path": "samples/lean/lab-statements/obl021/ElabDeterminismProjectionExtensionalityCountermodel.lean",
+    "sha256": "31cd92b3c62b5d8bf6ece698b6431e123c4d915645f8111daacf0f0bda252000",
+    "range": "1-165",
+    "role": "LAB statement shape or conditional/countermodel theorem, not Canon proof discharge; full source reading only",
+    "status": "full"
+  },
+  {
+    "path": "samples/lean/lab-statements/obl021/ElabDeterminismProjectionExtensionalityCountermodel.md",
+    "sha256": "551fec5f6fb394cb2d53ad581e4432137a3e8045a930f5de78c6cd7a0728e4e2",
+    "range": "1-20",
+    "role": "LAB statement shape or conditional/countermodel theorem, not Canon proof discharge; full source reading only",
+    "status": "full"
+  },
+  {
+    "path": "samples/lean/lab-statements/obl021/ElabDeterminismProjectionVacuityCountermodel.lean",
+    "sha256": "5cb7a60b68bb0bdf23d8fed5f4e5acf963f162ede5d2a6161bae21b90f548098",
+    "range": "1-97",
+    "role": "LAB statement shape or conditional/countermodel theorem, not Canon proof discharge; full source reading only",
+    "status": "full"
+  },
+  {
+    "path": "samples/lean/lab-statements/obl021/ElabDeterminismProjectionVacuityCountermodel.md",
+    "sha256": "9aced87b5191b92d078d5f2426717d4d5e6ebac515ad1ef3169d39ae7596e1be",
+    "range": "1-15",
+    "role": "LAB statement shape or conditional/countermodel theorem, not Canon proof discharge; full source reading only",
+    "status": "full"
+  },
+  {
+    "path": "samples/lean/lab-statements/obl021/ElabDeterminismStatementDraft.lean",
+    "sha256": "7aa5e01caedc393326c070ffaf033a314c7849db2e734d7b03b34b6d92b6cf0a",
+    "range": "1-136",
+    "role": "LAB statement shape or conditional/countermodel theorem, not Canon proof discharge; full source reading only",
+    "status": "full"
+  },
+  {
+    "path": "samples/lean/lab-statements/obl021/ElabDeterminismStatementDraft.md",
+    "sha256": "afaab1b252ef9c8adf452c31a9449beceedf79b0f94a9d05090216576742844f",
+    "range": "1-42",
+    "role": "LAB statement shape or conditional/countermodel theorem, not Canon proof discharge; full source reading only",
+    "status": "full"
+  },
+  {
+    "path": "samples/lean/lab-statements/obl021/README.md",
+    "sha256": "50c1481d0ea1afad83c1f6e07e89f715272bac0157b478fc9d3aa7b05ae38034",
+    "range": "1-21",
+    "role": "LAB statement shape or conditional/countermodel theorem, not Canon proof discharge; full source reading only",
+    "status": "full"
+  },
+  {
+    "path": "samples/lean/lab-statements/obl024/DiagnosticSoundnessStatementDraft.lean",
+    "sha256": "9a2a040ec058518c3be097aee235d9205dba827296d8964b7dec673cfa943909",
+    "range": "1-298",
+    "role": "LAB statement shape or conditional/countermodel theorem, not Canon proof discharge; full source reading only",
+    "status": "full"
+  },
+  {
+    "path": "samples/lean/lab-statements/obl024/DiagnosticSoundnessStatementDraft.md",
+    "sha256": "903cddf6045ba02e7dbed838ef3357328bbe9897b82c5259db0b2241f852a1fb",
+    "range": "1-141",
+    "role": "LAB statement shape or conditional/countermodel theorem, not Canon proof discharge; full source reading only",
+    "status": "full"
+  },
+  {
+    "path": "samples/lean/lab-statements/obl024/README.md",
+    "sha256": "953261a62ab1b22ab96391c3351693f872cc168efc98c5fb41d654f71bc91b5b",
+    "range": "1-29",
+    "role": "LAB statement shape or conditional/countermodel theorem, not Canon proof discharge; full source reading only",
+    "status": "full"
+  },
+  {
+    "path": "samples/lean/lab-statements/obl025/README.md",
+    "sha256": "8dd2b8b6a0c73054bea8e8543d23e7c4eb57a254b6d575091af7cae6559547b3",
+    "range": "1-25",
+    "role": "LAB statement shape or conditional/countermodel theorem, not Canon proof discharge; full source reading only",
+    "status": "full"
+  },
+  {
+    "path": "samples/lean/lab-statements/obl025/RepairCompletenessStatementDraft.lean",
+    "sha256": "a2b44514c05c65e493627680ef8bb2857a28dfebd080a1a16bcfac912beaa485",
+    "range": "1-231",
+    "role": "LAB statement shape or conditional/countermodel theorem, not Canon proof discharge; full source reading only",
+    "status": "full"
+  },
+  {
+    "path": "samples/lean/lab-statements/obl025/RepairCompletenessStatementDraft.md",
+    "sha256": "fc124d70aa967dac48ffa7e6e8df032106c444a1254fd8117324f41862f6f3d3",
+    "range": "1-91",
+    "role": "LAB statement shape or conditional/countermodel theorem, not Canon proof discharge; full source reading only",
+    "status": "full"
+  },
+  {
+    "path": "plan/01-status-at-a-glance.md",
+    "sha256": "ffe4c4d51a6a9d04400a9e42efa3c5a88a96eeff75470ba5df7e4c00e93afc5d",
+    "range": "1-250",
+    "role": "LAB historical memory/source examples, not current execution evidence",
+    "status": "full",
+    "reading_note": "Initial output truncated; full contiguous rereads1-100/101-175/176-250 completed."
+  },
+  {
+    "path": "plan/02-system-overview-and-positioning.md",
+    "sha256": "91b52b6be239eb15fe7f2a39236825faccbd010284a8000f73a68303fee0c3db",
+    "range": "1-105",
+    "role": "LAB historical memory/source examples, not current execution evidence",
+    "status": "full"
+  },
+  {
+    "path": "plan/03-decision-strengths-and-boundaries.md",
+    "sha256": "56a0366ba572df8d8d9455a1e6055dacfa204a601758eda17f90f1316584c273",
+    "range": "1-111",
+    "role": "LAB historical memory/source examples, not current execution evidence",
+    "status": "full"
+  },
+  {
+    "path": "plan/04-core-semantics-current-l2.md",
+    "sha256": "0eae3feabca1049b2cfef5c77a5133e21c2b646d4b975cfb3069675ba3822502",
+    "range": "1-217",
+    "role": "LAB historical memory/source examples, not current execution evidence",
+    "status": "full"
+  },
+  {
+    "path": "plan/05-fallback-lease-and-chain-semantics.md",
+    "sha256": "c13c02c9ee169f37c911a2c5959911742f3272f5a9cef5212acd050161e7866b",
+    "range": "1-133",
+    "role": "LAB historical memory/source examples, not current execution evidence",
+    "status": "full"
+  },
+  {
+    "path": "plan/06-surface-notation-status.md",
+    "sha256": "6e5ce711c37a8dbda9870b940b6f158a9538424fc500f12a786f66311fb8cc45",
+    "range": "1-64",
+    "role": "LAB historical memory/source examples, not current execution evidence",
+    "status": "full"
+  },
+  {
+    "path": "plan/08-representative-programs-and-fixtures.md",
+    "sha256": "44b281b63a979d0b9c48fe23d67b55625f3add2f627fd0c2c1fe2f00ee8a6987",
+    "range": "1-85",
+    "role": "LAB historical memory/source examples, not current execution evidence",
+    "status": "full"
+  },
+  {
+    "path": "samples/clean-near-end/order-handoff/06_auditable_authority_witness.mir",
+    "sha256": "a1c25ae8c19d6f94f6f850fa3151ef3f54e453e44613c744ff51412a3c5c32e6",
+    "range": "1-36",
+    "role": "LAB historical memory/source examples, not current execution evidence",
+    "status": "full"
+  },
+  {
+    "path": "samples/clean-near-end/order-handoff/01_authorized_roll_publish_handoff.mir",
+    "sha256": "e315f0d00b077b2fbdc35072b0bf87b64826394d105378d9eaf37ebff9fabe60",
+    "range": "1-25",
+    "role": "LAB historical memory/source examples, not current execution evidence",
+    "status": "full"
+  },
+  {
+    "path": "samples/clean-near-end/order-handoff/02_missing_witness_rejected.mir",
+    "sha256": "ae15b997ee0b0d74405982d994bf295b3edd6582767703889dc74a83955a1190",
+    "range": "1-24",
+    "role": "LAB historical memory/source examples, not current execution evidence",
+    "status": "full"
+  },
+  {
+    "path": "samples/clean-near-end/order-handoff/03_handoff_before_publication_rejected.mir",
+    "sha256": "ab88b1dd283159b42408ed118962cc26a19afe8d311b0cfc517879afd3fe7442",
+    "range": "1-24",
+    "role": "LAB historical memory/source examples, not current execution evidence",
+    "status": "full"
+  },
+  {
+    "path": "samples/clean-near-end/order-handoff/05_delegated_rng_service.mir",
+    "sha256": "e8a2fb6e2e96c13d9bc96c3e03ab0da423e04768783d927586e827f1acdfaec6",
+    "range": "1-25",
+    "role": "LAB historical memory/source examples, not current execution evidence",
+    "status": "full"
+  },
+  {
+    "path": "samples/clean-near-end/order-handoff/04_stage_block_authorized_handoff.mir",
+    "sha256": "64285d449ec05d83331f524045440b27becc38a3bf5ac38ffe8d3578bfb8597f",
+    "range": "1-29",
+    "role": "LAB historical memory/source examples, not current execution evidence",
+    "status": "full"
+  },
+  {
+    "path": "samples/clean-near-end/model-check/03_broken_mutex_counterexample.mir",
+    "sha256": "837bea03780860d52e668faf5774573e1391ae518138c1afe2b9dbddaa566013",
+    "range": "1-26",
+    "role": "LAB historical memory/source examples, not current execution evidence",
+    "status": "full"
+  },
+  {
+    "path": "samples/clean-near-end/model-check/01_peterson_sc_pass.mir",
+    "sha256": "4f4194d1390684a0b226f8f8d47c8667ef765480afe6e7c6c943b90e013af93a",
+    "range": "1-31",
+    "role": "LAB historical memory/source examples, not current execution evidence",
+    "status": "full"
+  },
+  {
+    "path": "samples/clean-near-end/model-check/02_peterson_relaxed_counterexample.mir",
+    "sha256": "9a28aeeed3d743773d183dff54f215c54a686fc3cd359b127005a347b05bdf27",
+    "range": "1-31",
+    "role": "LAB historical memory/source examples, not current execution evidence",
+    "status": "full"
+  },
+  {
+    "path": "plan/10-roadmap-overall.md",
+    "sha256": "4a4fdb826064eba9c8f4a54b716e38f14cf29da7c8f08f54215befca873331a7",
+    "range": "1-120",
+    "role": "LAB historical roadmap/risk memory, not current queue authority; plan11 truncated middle recovered by lines40-85",
+    "status": "full"
+  },
+  {
+    "path": "plan/11-roadmap-near-term.md",
+    "sha256": "a678239ae9f28e309b4c5a824cfc9dd491d5d70d2f44bb4d5b5c89d774e89d9f",
+    "range": "1-176",
+    "role": "LAB historical roadmap/risk memory, not current queue authority; plan11 truncated middle recovered by lines40-85",
+    "status": "full"
+  },
+  {
+    "path": "plan/12-open-problems-and-risks.md",
+    "sha256": "d45d3452377ba61577537a6ee8619a36687adc0088de261068e9c93fc5748fc3",
+    "range": "1-69",
+    "role": "LAB historical roadmap/risk memory, not current queue authority; plan11 truncated middle recovered by lines40-85",
+    "status": "full"
+  },
+  {
+    "path": "plan/13-heavy-future-workstreams.md",
+    "sha256": "82eb957b450959436b9729cb04ce92f789f7b52dda61cbee594f3b21b2b3f591",
+    "range": "1-81",
+    "role": "LAB historical roadmap/risk memory, not current queue authority; plan11 truncated middle recovered by lines40-85",
+    "status": "full"
+  },
+  {
+    "path": "sub-agent-pro/mirrorea-proof-first-handoff-v1/materials/mir_foundation_F0_2/tests/test_ifc_effect.py",
+    "sha256": "910804795462163ec1337d9ac9de930c0fe46008dd77666cc22fa0597fea6d7e",
+    "range": "1-56",
+    "role": "Immutable F0.2 test source; previously copied baseline execution, not new execution",
+    "status": "full"
+  },
+  {
+    "path": "sub-agent-pro/mirrorea-proof-first-handoff-v1/materials/mir_foundation_F0_2/tests/test_transport.py",
+    "sha256": "15d4cb632c866fe87abf7404e6b5ee10418a8082ab902e4e2a14c1df68f74579",
+    "range": "1-67",
+    "role": "Immutable F0.2 test source; previously copied baseline execution, not new execution",
+    "status": "full"
+  },
+  {
+    "path": "sub-agent-pro/mirrorea-proof-first-handoff-v1/materials/mir_foundation_F0_2/tests/test_live_patch.py",
+    "sha256": "7c63b54c63d359d1b1072e31d4c79ed3f14538949832ed14b6ed7259157d1e11",
+    "range": "1-135",
+    "role": "Immutable F0.2 test source; previously copied baseline execution, not new execution",
+    "status": "full"
+  },
+  {
+    "path": "sub-agent-pro/mirrorea-proof-first-handoff-v1/materials/mir_foundation_F0_2/tests/test_faults.py",
+    "sha256": "d28df4ae099ed0b28cb5a5828ea45958399ec26fe6f73f09b3a079008be3610c",
+    "range": "1-17",
+    "role": "Immutable F0.2 test source; previously copied baseline execution, not new execution",
+    "status": "full"
+  },
+  {
+    "path": "sub-agent-pro/mirrorea-proof-first-handoff-v1/materials/mir_foundation_F0_2/tests/test_relations_restore.py",
+    "sha256": "f387d064883f18edbb1d8e5a87e011948b722d22188d38b507eefeb2bd862429",
+    "range": "1-60",
+    "role": "Immutable F0.2 test source; previously copied baseline execution, not new execution",
+    "status": "full"
+  },
+  {
+    "path": "sub-agent-pro/mirrorea-proof-first-handoff-v1/materials/mir_foundation_F0_2/tests/test_activation.py",
+    "sha256": "ca30967ce4283098751f7d804d41aa18aeed00f8db03392df8d1f90ce08bd3ca",
+    "range": "1-24",
+    "role": "Immutable F0.2 test source; previously copied baseline execution, not new execution",
+    "status": "full"
+  },
+  {
+    "path": "sub-agent-pro/mirrorea-proof-first-handoff-v1/materials/mir_foundation_F0_2/tests/test_journal.py",
+    "sha256": "2949f7b2786989ab6d3ae4941407abef507818d26de0efe102b0df7e3719af27",
+    "range": "1-39",
+    "role": "Immutable F0.2 test source; previously copied baseline execution, not new execution",
+    "status": "full"
+  },
+  {
+    "path": "plan/61-posegraph-runtime-roadmap.md",
+    "sha256": "2de132510ef13a0bb9d3c6d8127d40ca63c7c84c488131cd25a3b2e3962af4a3",
+    "range": "1-60",
+    "role": "LAB historical memory, not new current execution or queue authority",
+    "status": "full"
+  },
+  {
+    "path": "plan/62-projection-backend-roadmap.md",
+    "sha256": "d99e9ce39449fd95c51b2ebe62a04ccca30bca89f0dd6a9363792a6b6e876b06",
+    "range": "1-52",
+    "role": "LAB historical memory, not new current execution or queue authority",
+    "status": "full"
+  },
+  {
+    "path": "plan/63-engine-provider-roadmap.md",
+    "sha256": "11083cdef20f21d8dc94dc9ffeb5973e48b260109de0e4d8d0bb01d5afe7c3c6",
+    "range": "1-59",
+    "role": "LAB historical memory, not new current execution or queue authority",
+    "status": "full"
+  },
+  {
+    "path": "plan/65-indexed-state-roadmap.md",
+    "sha256": "ff1bc7d24de5c5095138f80679dcfd0d84857e356db0e0ca8e8054b85d5c82f3",
+    "range": "1-62",
+    "role": "LAB historical memory, not new current execution or queue authority",
+    "status": "full"
+  },
+  {
+    "path": "plan/67-source-patch-hotplug-roadmap.md",
+    "sha256": "6e8d3fae52332d2df9796390755f997b32b5d678b2f0569cf47b06a7880b9674",
+    "range": "1-70",
+    "role": "LAB historical memory, not new current execution or queue authority",
+    "status": "full"
+  },
+  {
+    "path": "plan/wrk-0024-scn02-read-write-snapshot-ambiguity.md",
+    "sha256": "dbd5bdf895ac34640c27a09dd051b2cebdc90db14ebd7836d1f8d9d1dc6d55f1",
+    "range": "1-82",
+    "role": "LAB historical memory, not new current execution or queue authority",
+    "status": "full"
+  },
+  {
+    "path": "plan/163-foundation-integrity-and-elaboration-outcome-audit.md",
+    "sha256": "d32f8b253976b322339fe79cdadfcdd4bfbacee0672124365ab37d6c09d7c43e",
+    "range": "1-103",
+    "role": "LAB historical memory, not new current execution or queue authority",
+    "status": "full"
+  },
+  {
+    "path": "plan/164-obl001-result-write-coverage-boundary.md",
+    "sha256": "593d25dff7541b4138cbfb6cf3090350595d8ab8ee3add9c83119cd8826515a5",
+    "range": "1-60",
+    "role": "LAB historical memory, not new current execution or queue authority",
+    "status": "full"
+  },
+  {
+    "path": "plan/20-projection-and-placement-roadmap.md",
+    "sha256": "3749f8f7c19c0f9d874b8b24e730c698207f2836adda35339ff0dd9ca8e3678a",
+    "range": "1-204",
+    "role": "LAB historical memory, not new current execution or queue authority",
+    "status": "full"
+  },
+  {
+    "path": "plan/21-hotplug-attachpoint-roadmap.md",
+    "sha256": "88a660909839fd683f315a2bb49ac27726d7150b3921c1334f8362d33db546e5",
+    "range": "1-211",
+    "role": "LAB historical memory, not new current execution or queue authority",
+    "status": "full"
+  },
+  {
+    "path": "plan/22-network-transport-roadmap.md",
+    "sha256": "1e7c5d457d57caf33daa963f0c692aff0682ac2afed68e2fa3ca8aadb93da5fd",
+    "range": "1-122",
+    "role": "LAB historical memory, not new current execution or queue authority",
+    "status": "full"
+  },
+  {
+    "path": "plan/23-compiler-backend-llvm-guardrail-roadmap.md",
+    "sha256": "0ba18fb5b0ccb9d3e83b4314a559b56326cfddb9ca89d64d0368036e23391ecb",
+    "range": "1-95",
+    "role": "LAB historical memory, not new current execution or queue authority",
+    "status": "full"
+  },
+  {
+    "path": "plan/17-research-phases-and-autonomy-gates.md",
+    "sha256": "af1c5969f8369ad3c993a2474bd7d3994992dfa8cc24d7c6767a7d45e028c6d2",
+    "range": "1-84",
+    "role": "LAB historical memory, not new current execution or queue authority",
+    "status": "full"
+  },
+  {
+    "path": "plan/19-repository-map-and-taxonomy.md",
+    "sha256": "0745bb0dc57031b32a332bd42b08ed811532f01a542c9e6ed50a01375e7747d3",
+    "range": "1-304",
+    "role": "LAB historical memory, not new current execution or queue authority",
+    "status": "full"
+  },
+  {
+    "path": "plan/24-avatar-follow-representative-slice-roadmap.md",
+    "sha256": "e0ef0c3a9ce71508b6610661dbef7872ff84933828a1b00aadb0ad03a63508a8",
+    "range": "1-135",
+    "role": "LAB historical memory, not new current execution or queue authority",
+    "status": "full"
+  },
+  {
+    "path": "plan/25-typed-external-boundary-executable-roadmap.md",
+    "sha256": "8fc0194ee4b4d89c35521f783882aba737ef79604d929621fb4f787883b0c255",
+    "range": "1-184",
+    "role": "LAB historical memory, not new current execution or queue authority",
+    "status": "full"
+  },
+  {
+    "path": "plan/07-parser-free-poc-stack.md",
+    "sha256": "13811bee2e8f336c3823f32508a5f0925184b419a59a2d2ea6ab32fb7a345a22",
+    "range": "1-664",
+    "role": "LAB historical corpus, read in full (plan07 contiguous chunks1-220/221-440/441-664); not live queue authority",
+    "status": "full"
+  },
+  {
+    "path": "plan/26-visual-debugger-viewer-roadmap.md",
+    "sha256": "ba87f0f7ef3c1eda8596af8ab14f2391e16abbcab66755af804dd3acf1d20332",
+    "range": "1-180",
+    "role": "LAB historical corpus, read in full (plan07 contiguous chunks1-220/221-440/441-664); not live queue authority",
+    "status": "full"
+  },
+  {
+    "path": "plan/27-public-api-parser-gate-roadmap.md",
+    "sha256": "5b641aba9a0dbb4f7a41ab63cd3375e95bc12514f7def94d4b2c1bddc89e798a",
+    "range": "1-255",
+    "role": "LAB historical corpus, read in full (plan07 contiguous chunks1-220/221-440/441-664); not live queue authority",
+    "status": "full"
+  },
+  {
+    "path": "plan/28-post-p18-true-user-spec-hold-option-matrix.md",
+    "sha256": "ec89bb3c3f3097ba3e8bafcad6436fc87700728bf1bed44e2a2de9d744b38b77",
+    "range": "1-142",
+    "role": "LAB historical corpus, read in full (plan07 contiguous chunks1-220/221-440/441-664); not live queue authority",
+    "status": "full"
+  },
+  {
+    "path": "plan/09-helper-stack-and-responsibility-map.md",
+    "sha256": "75ae6ec5a37f36c09727e206fddb0ff1f9fadb09211647165d936bd30d47a4b4",
+    "range": "1-1203",
+    "role": "LAB helper responsibility memory; full chunked read, not queue authority",
+    "status": "full"
+  },
+  {
+    "path": "plan/31-fairy05-visibility-return-carrier-bundling.md",
+    "sha256": "b6dea52a20d0224eb33b21cec23c6e9dbaad0f5255a130161fd1d431cf353dee",
+    "range": "1-151",
+    "role": "LAB historical helper/hotplug boundary; not current queue or implementation completion",
+    "status": "full"
+  },
+  {
+    "path": "plan/33-runtime-crate-hotplug-engine-ownership-cut.md",
+    "sha256": "8bbf2c58e2999f00442075c44229c4566d1fe404884e94b648597420246fcb66",
+    "range": "1-158",
+    "role": "LAB historical helper/hotplug boundary; not current queue or implementation completion",
+    "status": "full"
+  },
+  {
+    "path": "plan/34-runtime-crate-hotplug-carrier-admission-cut.md",
+    "sha256": "a34b2b1fdb10983137d6cf531694e21511beff8da6761eb8f5ec141477ac3a86",
+    "range": "1-195",
+    "role": "LAB historical helper/hotplug boundary; not current queue or implementation completion",
+    "status": "full"
+  },
+  {
+    "path": "plan/35-post-p20-hotplug-next-package-inventory.md",
+    "sha256": "3a76ac84b226f08d14f1392eb2d3bc20f4f06d484300bcdabc8ca0fffc1a0519",
+    "range": "1-195",
+    "role": "LAB historical helper/hotplug boundary; not current queue or implementation completion",
+    "status": "full"
+  },
+  {
+    "path": "plan/36-post-p21-rollback-durable-migration-family.md",
+    "sha256": "4cb275a73b217a56a6a00bddc76caeae50e732b5cc6cef256a28c1eecef2f914",
+    "range": "1-130",
+    "role": "LAB historical helper/hotplug boundary; not current queue or implementation completion",
+    "status": "full"
+  },
+  {
+    "path": "plan/38-post-p21-final-public-hotplug-abi-family.md",
+    "sha256": "81cc3896a5782bb62b2408a7ebd3a248e926556011246c191df3e07f75b8e354",
+    "range": "1-150",
+    "role": "LAB historical helper/hotplug boundary; not current queue or implementation completion",
+    "status": "full"
+  },
+  {
+    "path": "plan/42-runtime-package-avatar-roadmap.md",
+    "sha256": "eef44174f4b505e5813aa1769ff0b4aedbf185a67fec96eaf94f4d01b1853e6d",
+    "range": "1-128",
+    "role": "LAB historical alpha workflow, source/host distinction and excluded runtime capabilities; not current program authority",
+    "status": "full"
+  },
+  {
+    "path": "plan/43-alpha-e2e-roadmap.md",
+    "sha256": "61b2cf51256e1f1c403e8aa9261acbfebf5fc24153457aff3fccded2350633de",
+    "range": "1-234",
+    "role": "LAB historical alpha workflow, source/host distinction and excluded runtime capabilities; not current program authority",
+    "status": "full"
+  },
+  {
+    "path": "plan/44-practical-alpha1-roadmap.md",
+    "sha256": "4a02b3392e18943339cc95761921e0d87918c0c27c622871957b267669e85aaf",
+    "range": "1-538",
+    "role": "LAB historical alpha workflow, source/host distinction and excluded runtime capabilities; not current program authority",
+    "status": "full"
+  },
+  {
+    "path": "plan/45-operational-alpha05-roadmap.md",
+    "sha256": "b904542ad5bba4c156d35c63ddebc5b9552fd7600a972bd87e9a229dff7cde1b",
+    "range": "1-159",
+    "role": "LAB historical alpha workflow, source/host distinction and excluded runtime capabilities; not current program authority",
+    "status": "full"
+  },
+  {
+    "path": "plan/46-operational-alpha08-roadmap.md",
+    "sha256": "9fc67c06eb77c785231baeee8c23239e16e4b5607ffa84e18e1a9ba4e98872a7",
+    "range": "1-120",
+    "role": "LAB historical alpha workflow, source/host distinction and excluded runtime capabilities; not current program authority",
+    "status": "full"
+  },
+  {
+    "path": "plan/47-operational-alpha09-devtools-roadmap.md",
+    "sha256": "f8eb0c5810a6ef5e439638be1add25a10af3f08901960a7b5408c2feaef29096",
+    "range": "1-121",
+    "role": "LAB historical alpha workflow, source/host distinction and excluded runtime capabilities; not current program authority",
+    "status": "full"
+  },
+  {
+    "path": "plan/49-host-io-and-session-runtime-roadmap.md",
+    "sha256": "45efb94d9121413e8fbc33cfb393d29f8b74f73616ddac1b78cb95f88a990ed1",
+    "range": "1-132",
+    "role": "LAB historical alpha workflow, source/host distinction and excluded runtime capabilities; not current program authority",
+    "status": "full"
+  },
+  {
+    "path": "plan/50-product-alpha1-public-boundary-roadmap.md",
+    "sha256": "2d6be2d11ef0679790b7121b0f54fa57ed2bcd2bc32e72b4eb1c4540a3cd347a",
+    "range": "1-603",
+    "role": "LAB product/operational/backend/adapter/pose history; preserved nonclaims and source-host boundary",
+    "status": "full"
+  },
+  {
+    "path": "plan/51-operational-product-sample-roadmap.md",
+    "sha256": "52788881dfb89bc8a533234d4337c905700c69106f793970149634083c21e1d2",
+    "range": "1-237",
+    "role": "LAB product/operational/backend/adapter/pose history; preserved nonclaims and source-host boundary",
+    "status": "full"
+  },
+  {
+    "path": "plan/52-portal-spatial-world-roadmap.md",
+    "sha256": "c74c986caf856fd1e6ede3d73f758da2fcad60b1d9bf058b3a85065a1e7654c2",
+    "range": "1-145",
+    "role": "LAB product/operational/backend/adapter/pose history; preserved nonclaims and source-host boundary",
+    "status": "full"
+  },
+  {
+    "path": "plan/54-transform-posegraph-roadmap.md",
+    "sha256": "1fe874784ae2043f62d98400a3657353432c43ee76e51584e55626ec7dd3d16d",
+    "range": "1-158",
+    "role": "LAB product/operational/backend/adapter/pose history; preserved nonclaims and source-host boundary",
+    "status": "full"
+  },
+  {
+    "path": "plan/55-projection-backend-roadmap.md",
+    "sha256": "4c860c78fc36da8c5eea31a7a0d3b7fdfb4159e566fb7194d4310a9e90f8bcfc",
+    "range": "1-88",
+    "role": "LAB product/operational/backend/adapter/pose history; preserved nonclaims and source-host boundary",
+    "status": "full"
+  },
+  {
+    "path": "plan/56-engine-adapter-roadmap.md",
+    "sha256": "3add2b61cb5bb4bd85c5e9a3ae6fc54de13b3bce33b5b18e44958bf7a5d18815",
+    "range": "1-118",
+    "role": "LAB product/operational/backend/adapter/pose history; preserved nonclaims and source-host boundary",
+    "status": "full"
+  },
+  {
+    "path": "plan/69-consultation-synthesis-and-management-roadmap.md",
+    "sha256": "746eb80c7f36f8dbe0cbb172655b5f7ea42d9aa6294da803a86010943acc7613",
+    "range": "1-313",
+    "role": "LAB assignment/consequence/canon-reconciliation history; not current gate acceptance",
+    "status": "full"
+  },
+  {
+    "path": "plan/70-lab-to-canon-reconciliation-ledger.md",
+    "sha256": "5c8df450092ae9db27694ce6e0be16d8c53b144fa66a4f6db61742d233c42d16",
+    "range": "1-112",
+    "role": "LAB assignment/consequence/canon-reconciliation history; not current gate acceptance",
+    "status": "full"
+  },
+  {
+    "path": "plan/71-g1-ordinary-assignment-target.md",
+    "sha256": "f58fd4dfea1f26c99ed5cd2a7713585fde43dbece025a4a5198cabca14eefec5",
+    "range": "1-148",
+    "role": "LAB assignment/consequence/canon-reconciliation history; not current gate acceptance",
+    "status": "full"
+  },
+  {
+    "path": "plan/72-g1-scn01-scn02-static-consequence-drilldown.md",
+    "sha256": "a821d05fb706d05b7bf3162ecd8b7248ed796e48120ca2fb5c45838a2604dc2e",
+    "range": "1-136",
+    "role": "LAB assignment/consequence/canon-reconciliation history; not current gate acceptance",
+    "status": "full"
+  },
+  {
+    "path": "plan/73-g1-obl001-lean-statement-inventory.md",
+    "sha256": "08f808c8adff91641a0ca2d5b4036b2f08339bd8363abf3d4e33d5a7bdec806c",
+    "range": "1-250",
+    "role": "LAB historical repository memory; full text read, not active queue",
+    "status": "full"
+  },
+  {
+    "path": "plan/74-g1-obl001-lean-statement-draft.md",
+    "sha256": "276527fbc1dec234018e2cbb45fd649c8bbf3faab533ad29e52bd77b0945fef9",
+    "range": "1-145",
+    "role": "LAB historical repository memory; full text read, not active queue",
+    "status": "full"
+  },
+  {
+    "path": "plan/75-g1-scn-rhs-dependency-gap-evidence.md",
+    "sha256": "1593becac192f08d04de4f0a592c0d75a08c81874fa57e12b41ce126712f6c7b",
+    "range": "1-123",
+    "role": "LAB historical repository memory; full text read, not active queue",
+    "status": "full"
+  },
+  {
+    "path": "plan/76-g1-obl020-021-dependency-inventory.md",
+    "sha256": "4188230f71e39b3bbeedecf5ca1a878d8196d68804bd7ba5e2cc07ed0f2e1cf1",
+    "range": "1-262",
+    "role": "LAB historical repository memory; full text read, not active queue",
+    "status": "full"
+  },
+  {
+    "path": "plan/77-g1-obl021-lean-statement-draft.md",
+    "sha256": "05ac91d45c7aad5af02abdbd9d302b0a83f86849d2fb33689409416164da9110",
+    "range": "1-154",
+    "role": "LAB historical repository memory; full text read, not active queue",
+    "status": "full"
+  },
+  {
+    "path": "plan/78-g1-obl020-lean-statement-draft.md",
+    "sha256": "b6b9329b2f803550670d80572f334688e38955b10f4c8cec154873c4054fea35",
+    "range": "1-146",
+    "role": "LAB historical repository memory; full text read, not active queue",
+    "status": "full"
+  },
+  {
+    "path": "plan/79-g1-erow-diagnostic-alignment.md",
+    "sha256": "c2b3ffa20338c58ce619c87ebe22c8f0cbf2170781c452d7517ac451d215a85d",
+    "range": "1-152",
+    "role": "LAB historical repository memory; full text read, not active queue",
+    "status": "full"
+  },
+  {
+    "path": "plan/80-g1-diagnostic-carrier-inventory.md",
+    "sha256": "f77b1ba142876cee3f3e5a6316dfb733e0533cac31afe9635d63e6c9beb1f150",
+    "range": "1-148",
+    "role": "LAB historical repository memory; full text read, not active queue",
     "status": "full"
   }
 ]

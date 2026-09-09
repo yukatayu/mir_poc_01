@@ -18,7 +18,9 @@ The first semantic goal W1-support established positive finite support, independ
 inductive meaning, executable closure and certificate checking as a pure LAB
 dependency. W1-current-use established scoped same-context policy and current handle/support
 results; tracked-query/graph dependencies now have scoped proof/review evidence.
-W1-passive-erasure is active, before implementation adoption. Support trace U03/U04,
+W1-passive-erasure supplied scoped reviewed evidence before implementation adoption.
+The active independent research consumer is now W2-local-contract-resource (Report2612);
+W1 later abort/alias/source review and source/runtime obligations remain open. Support trace U03/U04,
 ID-02, PT04/PT05/PT11, SC05, Q05. Typed finite references and immutable supplied
 eligibility are premises, not authorization grants. Canon T1 and accepted I2/
 I3-3 evidence remain distinct from this LAB candidate. Plan250 I3-4 is not resumed.
@@ -633,3 +635,48 @@ recorded successful coherent kernel cut, evidence JSON parses, and focused
 `git diff --check` passed. The source-boundary Oracle session remains running.
 The reviewed producer/label/fallible source and ongoing evidence are being saved
 as an intermediate commit; this does not close W1 or the user request.
+
+Intermediate integration commit `3408c4cf8664d752699361d5d0a48d05781e19d3`
+was pushed normally (exec68022 exit0); exact `git ls-remote` parity passed
+(exec54075). Work continues under the same W1 goal and Oracle session.
+
+Consumer reading continuation: root LAB specs00–43 are now fully read at exact
+current hashes, including the1886-line historical map; referenced examples are
+not thereby read. Plans18/39/48/171/181/182/199/220/247 and typing/modal guides
+retain the need for separate ordinary values, linear resources, version/current
+context, effects/failures and evidence erasure. Historical modal output explicitly
+has entered_evaluation=false; typing success-shaped output remains subject to
+the already recorded comment-only helper countercontrol. Neither supplies the
+W2 ordinary-source or higher-order/resource preservation proof. No new theory
+selection or historical document rewrite follows from this reading.
+
+### Continued source-boundary integration (Oracle still pending)
+
+Mirrored AbortFlow and AddressFlow candidates into the existing task-local Lean
+foundation namespace, adapting only imports to the mirrored dependency names.
+Companions distinguish the arithmetic completion bit, fixed resolver and alias
+semantics from authorization, presence, dynamic lifecycle and actual parser/runtime
+refinement. This is candidate retention, not acceptance or production adoption.
+The README command now includes both modules; a coherent five-module kernel check
+passed at abort-address-mirrored-5tz0lz70 (exec67095, exit0). Printed axioms are
+standard propext/Quot.sound, plus the existing bounded_failure Classical.choice;
+there is no new Mir axiom. The existing source-boundary Oracle was not resent or given a deadline.
+
+Mandatory-corpus reading added the complete closed Plan249 record, Plans157,
+173–175,189,235 and the July25 whole-theory audit; their historical stop and
+acceptance statements do not replace the current task authorization or Canon.
+F0.2 source/certificate/extension tests and old finite-index proof fragments were
+read directly. Boolean authority examples and theorem-stub identity lemmas do not
+prove current authorization, unified checker soundness or linear-resource use.
+
+Documentation validation after the candidate mirrors passed (exec56213, exit0,
+1761 numbered reports); git diff --check passed. All 17 current-l2 base source
+files including its README and all 30 LAB Lean statement/countermodel files
+were read directly and hashed. They preserve distinctions between result
+coverage, per-family preservation, outcome existence, coherence and projection
+identity; none supplies the missing real implementation correspondence by
+being a compilable statement. No historical report was bulk-read.
+
+Continuation: full reading extended through LAB plans10–13,17,19–25,61–63,65,67,163/164 and WRK0024 memory; all remaining F0.2 tests were read. No new baseline execution is implied. The tracked-validation companion still described the now-completed graph/patch review as pending; its current wording and the old current-use active-goal wording were corrected against the completed source-review record. These are status corrections, not additional theorem or runtime acceptance.
+
+W2 transition: the independently scoped next resource consumer relies only on completed W1 dependencies, not pending AbortFlow/AddressFlow/source results. It now has actual nonproduction kernel definitions and transition/checker/nonresurrection proofs recorded in Report2612. W1-wide closure and pending Oracle acceptance are not claimed; the same source-boundary job is retained.

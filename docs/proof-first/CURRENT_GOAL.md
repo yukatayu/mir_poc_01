@@ -1,41 +1,30 @@
-# W1-passive-erasure — active task-local semantic goal
+# W2-local-contract-resource — active task-local semantic goal
 
-- Authority/layer/side: user-authorized reversible LAB; PL1 S1/S3 theory/proof. Plan250 remains paused; no official THM/OBL or phase change.
-- Trace: U11, OB-02/03, PT-15/18, SC-16/17/24, Q-26; OB-07/Q-27 active debug is a distinct excluded control boundary. Requirement proposals are not blanket adopted.
-- Meaning/input/output: a domain transition and finite execution interleaved with passive observation; erased domain execution, faithful bounded authorized projection. Distinguish passive erasure, two-run confidentiality, resource bounds and active-debug authorization.
-- Direct consumer: typed observer boundary and later source/runtime refinement. Current M8 readonly export tests are baseline evidence, not confidentiality proof.
-- Candidate A: domain steps independent of observer state; project authorized rows before bounded retention. Smallest B: retain mixed rows before projection. B lets hidden rows evict visible rows and is rejected by a two-run counterexample.
-- Positives: same environment/domain inputs with zero or finite arbitrary observer insertions; nonempty authorized rows; private changes retain the same low projection under explicit relational assumptions.
-- Negatives: observer changes domain state, infinite observer starvation, global occurrence index leakage, high rows evicting low rows, invented observations, secret-dependent validation result exposed publicly.
-- Required evidence: general Lean erasure/lifting, bounded faithful projection, separate relational statement with explicit assumptions and concrete witnesses/countermodels; neutral Oracle review and main disposition.
-- Acceptance/reopen: scoped pure LAB only after actual kernel/axiom audit and review. Production requires actual scheduler/resource/authority/source correspondence; reopen for any observer-dependent domain transition or unauthorized observable distinction. No zero-cost or active-debug noninterference claim.
+- Authority/layer/side: user-authorized reversible LAB, PL1 S1/S2 theory/proof and nonproduction reference. No Plan250 resume, official phase/THM/OBL change or production contract adoption.
+- Trace: U05/07/09/14/17, TY-01..08, ID-07, SL-08, PT01/02/04/05/11/12, SC03/14/17/19/24, Q03/Q19. These motivate the candidate; requirement detail is not blanket accepted.
+- Direct consumer: reusable pure arithmetic computes a positive length; an exclusive-region boundary consumes the actual certified value to allocate/split/move/release. Dynamic module composition later consumes its typed handles.
+- Inputs/output: explicit common contract and evidence identity/assumptions; current policy input; finite live resource tokens and fresh identities. Return explicit rejection or a new state and opaque ownership handle. A mathematical proof supplies no permission.
+- Preserved properties: nonempty separated intervals, unique live identities, monotone issuance, stale/duplicate consumption rejection, policy unchanged by ownership transfer. Keep value environment, resource environment, place/lifetime/version context and effect/failure obligations distinct.
+- Candidate A: checked common export contract plus dynamically checked opaque ownership handles. Smallest viable B adds static affine caller checking while retaining dynamic currentness/auth checks. Compare useful accepted examples and remaining runtime guards. Unsafe Boolean-only evidence/raw erased ownership is a negative control, not the viable alternative.
+- Positive floor: arithmetic-produced length and meaningful allocate/split/move/release without example-name dispatch; then ordinary parent assignment, explicit other-owner snapshot, recursion/iteration, first-class module handle and reusable local-contract function. This first resource consumer alone cannot close W2.
+- Counterexamples: a true arithmetic claim paired with a different actual result; copied handle consumed twice; overlapping split; transfer treated as grant; restored old allocator head; changed theory/code/contract or assumptions; constructor/restore bypass of operational checks.
+- Required proof: independent declarative judgments and checker equivalence for the chosen fragment; all declared resource operations preserve the invariant; nontrivial positive executions; typed/current boundary binding and two distinct guarantee profiles; actual Lean kernel/axiom audit and neutral Oracle source review before scoped reliance.
+- Limits: mathematical intervals, not malloc or a Core primitive; finite numbers, decoder, all production mutators, physical serialization, durability, auth issuance and information release remain separate obligations. No production increment relies on an unfinished proof.
+- Acceptance/reopen: actual general proofs, positive/negative controls and scoped review; reopen any consumer when identity/assumption/transition coverage fails. No arbitrary-theory loader, final syntax or public API selected.
 
-## Retained dependencies
+## Retained W1 evidence and open work
 
-W1 support, scoped current-use, and tracked query/finite graph endpoint dependencies
-have kernel evidence and completed Oracle source reviews with main countermodels.
-Their companions and report2611 preserve outstanding source translation,
-all-mutator/current-head/restore, authority, physical publication and resource
-obligations. W1 overall and alpha implementation gates remain open. Mandatory
-corpus reading continues; no new whole-project roadmap is adopted.
+Support, current-use, tracked validation/finite graph and passive erasure have
+actual general kernel evidence and completed source reviews, recorded in their
+companions and Report2611. These scoped dependencies suffice for this independent
+nonproduction boundary research; W1-wide source/runtime/current-head/resource
+obligations are not declared closed. The running `mirrorea-source-boundary` Oracle
+continues unchanged. Its abort/alias/finite-source extensions are unaccepted and
+not premises of this goal; collect and dispose its answer without treating waiting
+as success. Current goal is only this W2 consumer. Mandatory full reading remains
+incomplete, and no new whole-project roadmap is adopted.
 
-## Current producer dependency
-
-Accepted finite mathematical Int/Bool assignments and branches now derive equal
-low final states and exact projected write sequences; the actual Passive.feed
-composition is checked and source-reviewed. Type/flow rules and checker are
-separate, with Safe.branch using separately characterized rank. This is not an
-ordinary-source adapter or failure/interactive/current-authority theorem. Actual
-M7 artifact and M8 overflow-outcome controls expose those correspondence tasks;
-Canon spec/02 and spec/08 make unlisted fields private by default;
-observer_safe is not an implicit public release or an automatic Nat-label mapping.
-The current direct task is outcome/dependency preservation and source binding,
-not another unconditional retention proof. Fallible single-assignment base has completed Oracle source review; requested
-type/range/collector extensions and the separate general-label checker have completed
-source review and coherent kernel checking. Their scoped companions retain all
-source/runtime/authority limits. A further aborting finite-assignment-list reference has actual kernel
-evidence for checker exactness, type preservation, low state/event equality,
-completion classification and retention. This further extension is not reviewed
-or production. Its completion dependency raises the following program counter;
-the actual secret-failure-then-public-write countermodel is rejected. Branching,
-current authority, source correspondence and resource/time behavior remain open.
+Current sub-boundary evidence: ModuleContractBoundary now links both evidence
+profiles to CurrentUse, exact descriptor/stamps and typed arguments, with
+soundness and relative completeness. This is an unreviewed reference call, not
+source module syntax, authenticated registry mutation or Q18 commit policy.

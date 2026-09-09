@@ -1,6 +1,6 @@
 # Tracked validation candidate (LAB)
 
-This active W1 proof studies validation replay under tracked reads. It does not
+This scoped W1 dependency studies validation replay under tracked reads. It does not
 select ordinary Mir read consistency, transactions across owners, or Q-18.
 The direct consumer is finite support/DAG update validation, including absent
 rows and adjacency indexes. No production source has changed.
@@ -76,7 +76,8 @@ implementation/proof obligations. The first interleaving/publication/count revie
 counterexample. Main corrected the stamp-versus-commit wording and added
 repeated-read/last-only-log, false-query, duplicate-version and unlawful-history
 controls. Its missing live-overlay and graph bridge findings are addressed by
-newer proofs, still awaiting their own narrow review. See report2611 and TRACKED_VALIDATION_CHECK.json.
+newer proofs subsequently covered by the completed graph-consumer review. See
+report2611, TRACKED_VALIDATION_CHECK.json and the GraphValidation companion.
 
 The latest extension also treats a fixed patch during live preparation.
 `PatchPreparation` reads each raw Cell atomically and supplies the corresponding
@@ -88,5 +89,7 @@ captured caller mutation is not an allowed transition. This does not establish
 issued-preparation origin, blind-write conflict history for unread destinations,
 authority, physical read atomicity or publication linearization. The whole-graph
 consumer reads all destinations; no generic guarantee is inferred for other
-queries. Latest kernel evidence is recorded separately from the pending frozen
-Oracle packet; these new lemmas require narrow review before reliance.
+queries. The subsequent `mirrorea-graph-consumer-review` covered these patch and
+graph lemmas; main checked the returned controls in a coherent imported cut.
+This permits scoped mathematical dependency use only. It does not discharge
+physical publication, actual identity/current-state selection or source refinement.

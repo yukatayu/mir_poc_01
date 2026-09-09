@@ -1,6 +1,6 @@
 # Current Task Map (LAB)
 
-最終更新: 2026-09-10 00:15 JST
+最終更新: 2026-09-10 02:16 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project direction,
 theory, ADRs, conformance, and process. Everything outside it is LAB evidence,
@@ -27,16 +27,23 @@ Official I3 lifecycle entry remains unaccepted; Theory T1 and broad-I1 residuals
 are unchanged. Private QUIC reliable stream remains selected, TLS/TCP deferred,
 QUIC datagrams excluded. This task is not I3-4 resume.
 
-Separate task-local active goal: **W1-passive-erasure**, PL1 S1/S3 theory/proof.
+Separate task-local active goal: **W2-local-contract-resource**, PL1 S1/S2 theory/proof.
 The current user request supplies the limited LAB-lane authority. Dependency
 memory: `plan/proof-first-foundation-correspondence.md`; exact goal and evidence:
-`docs/proof-first/CURRENT_GOAL.md`, `docs/reports/2611-mirrorea-proof-first-w1-foundations.md`.
+`docs/proof-first/CURRENT_GOAL.md`, Reports2611/2612.
 Support/current-use/tracked-query/finite-graph dependencies have scoped kernel
 proofs and Oracle source reviews. Passive erasure and two-run arithmetic pass
 Lean; exact retention and accepted mathematical producer reviews completed.
 Fallible single-assignment and general-label theory certificates have scoped
-source review and kernel checks. Abort/alias/source review remains pending. W1 overall and implementation
-gates remain open. Main works alone; no sub-agents. Oracle is readonly advice,
+source review and kernel checks. Abort/alias/source review remains pending. W1 source/runtime and implementation
+gates remain open. Six mirrored W2 candidates have fresh kernel evidence for
+resource operations, exact geometry/frame/currentness, contract/evidence binding,
+pure higher-order functions/finite iteration, actual value correspondence and
+current-module/typed-argument/authority linking for both profiles.
+The W2 Oracle attempt failed before submission on the profile lock; no review
+was received. Source module handles/registry transitions, ordinary parent writes and
+explicit other-owner snapshots still need their own boundary connection. Main
+works alone; no sub-agents. Oracle is readonly advice,
 not signed review, kernel execution, authority or cryptographic trust anchor.
 
 Retained I3-3 source/evidence cut: `fe5dd972e2ddb3a513c785458a07702e4d4d99fa`;
@@ -50,9 +57,9 @@ local custody emits no saved image and is not distributed durable recovery.
 
 | Order | Current task work | Direct consumer / evidence gate |
 |---|---|---|
-| 1 | Retain reviewed passive/producer/label/fallible proofs; check aborting control, aliases and actual source/observer correspondence | finite erasure/collector dependency; source IFC, interaction cuts, current authority and physical resources stay explicit |
+| 1 | Review the W2 contract/resource/function candidate and discharge concrete findings | Macro1/5 early foundation; independent checker, exact resource semantics and two scoped evidence profiles; kernel PASS is not acceptance |
 | 2 | Continue mandatory full reading and source dependency cone; integrate scoped evidence | full/range/hash ledger; no index/grep as full read; no whole-project plan before required material |
-| 3 | Establish source expression/type/local-theory boundary consumed by dynamic composition | candidate W2; declarative/checker soundness and required relative completeness, no unsafe evidence erasure |
+| 3 | W2 current module handles, parent writes and explicit other-owner snapshots; connect proved function/contract fragments | same active W2 dependency; preserve value/resource/currentness/effect boundaries, no example-specific dispatch |
 | 4 | Establish source-derived construction/addition/change/removal and all-mutator preservation | candidate W3; no constant-only or trusted-control-API substitute |
 | 5 | Connect only proved dependencies through applicable forward process | later real-network/private-observation/save-recovery alpha remains unmet; no production operation |
 
@@ -67,7 +74,7 @@ inactive I4/I5 entry contracts retain their obligations. None is accepted by ali
 
 | Macro | Current evidence / maturity | Self-drive boundary |
 |---|---|---|
-| 0 repository memory | hash/range reading ledger and one accumulating W1 report | task evidence synchronization |
+| 0 repository memory | hash/range reading ledger and W1/W2 milestone reports | task evidence synchronization |
 | 1 semantic kernel | finite accepted I2/I3 baseline; separate LAB foundation proofs | reversible research; reserved contracts follow Canon |
 | 2 parser-free substrate | copied F0 models and historical helpers | counterexample/reference evidence, not production meaning |
 | 3 source/checker/runtime | accepted finite ordinary-source profile; wider composition unproved | read and prove actual next dependency before implementation |
@@ -82,7 +89,11 @@ Browser/Host responsibility contracts do not establish their operational realiza
 
 ## user decision gates
 
-No new owner answer is currently needed for the active reversible research.
+No new semantic owner answer is currently needed for the active reversible research.
+A browser-display clarification is pending because Oracle metadata has not
+confirmed W1 prompt submission and owned-tab read-only CDP commands did not return.
+The W1 job remains running; the failed W2 packet is retained without retry while
+the profile lock is held. No latency deadline. Independent research continues.
 Conditional implementation is requested, but its theory gates and any applicable
 reserved owner/Canon or signed/key acceptance must actually be met. L2 admission
 requiring an owner-authenticated trust anchor remains fail-closed; Oracle cannot
@@ -113,7 +124,8 @@ recovery alpha validation has run.
 
 ## maintenance tasks
 
-- Keep one W1 report2611; report2606 remains the closed I3-3 record. Keep exactly
+- Keep W1 report2611 for its pending extension review and W2 report2612 for actual
+  contract/resource research; report2606 remains the closed I3-3 record. Keep exactly
   one task-local semantic goal and preserve Plan250's separate pause.
 - A reproducible counterexample immediately suspends affected downstream reliance.
   An unmet premise blocks its consumer without refuting the conditional theorem.
@@ -125,7 +137,8 @@ recovery alpha validation has run.
   Clippy-clean claim. Additional large variant builds await a measured storage
   plan; bounded scratch proof/rustc work continues. No cleanup or user-file deletion.
 - Docs path inventories now follow the unchanged archived handoff; hierarchy800
-  passes. Recorded docs validation passed (exit0,1761 numbered reports); hierarchy passed800 required paths. Rerun applicable checks after subsequent validated-input changes.
+  passes. Docs validation58490 passed (1762 numbered reports) before the latest
+  module-boundary documentation edits; the synchronized cut requires validation.
 - Commit only own reviewed changes with normal authorized push. An integration
   checkpoint does not end this user request; keep RESUME current.
 
