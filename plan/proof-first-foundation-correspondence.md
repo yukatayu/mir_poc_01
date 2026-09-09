@@ -185,3 +185,15 @@ insertions for fixed current World/use/registry. Arbitrary catalog contents cann
 revive a module rejected by that World; missing current-code entries fail closed.
 This does not authenticate or prevent rollback of World itself, establish a
 distributed atomic update, or equate fresh import with same-instance recovery.
+
+The higher-order evaluator now has a general reference-preservation candidate:
+ExprWithin/ValueWithin/EnvWithin retain exact interface references in syntax,
+closure bodies and captured environments. Every independent finite execution
+preserves any such reference bound; the actual evaluator cannot manufacture a
+reference outside it. A singleton bound entails exact original stamps; multiple
+existing references may still be selected. registered_uses_existing
+connects this property to the existing catalog/current-use/contract entry.
+This neither authenticates source literals nor grants authority or proves handle
+selection confidentiality. Omitting closure code or captured environments loses
+the property; typed hidden-reference controls and actual iteration/application
+remain nontrivial witnesses. This extension is outside the pending Oracle cut.

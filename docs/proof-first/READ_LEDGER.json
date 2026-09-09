@@ -20084,5 +20084,138 @@
     "range": "1-437",
     "role": "earlier full self-review plus authored/read downstream-addition proof; independent review pending",
     "status": "full"
+  },
+  {
+    "path": "plan/141-g1-status-packet-shell-unresolved-slots.md",
+    "sha256": "6d7480d8564ae6b19d2c7479994ae535815242ae589cbf1edbc37ae8ebff0581",
+    "range": "1-355",
+    "role": "LAB historical statement-status preparation, not current authority or proof",
+    "status": "full"
+  },
+  {
+    "path": "plan/142-g1-status-packet-shell-evidence-dry-run.md",
+    "sha256": "aa9ccadec542aac88e8c7771f41a9551224a75a1861915d037f0a5be49f689cf",
+    "range": "1-175",
+    "role": "LAB historical statement-status preparation, not current authority or proof",
+    "status": "full"
+  },
+  {
+    "path": "plan/143-g1-obl021-equality-diagnostic-abstraction-decision-packet.md",
+    "sha256": "5558146266fcb86c193359e739c6273d1270be53b339b384e9793ed52006990c",
+    "range": "1-314",
+    "role": "LAB historical statement-status preparation, not current authority or proof",
+    "status": "full"
+  },
+  {
+    "path": "plan/144-g1-obl020-scope-decision-reuse-audit.md",
+    "sha256": "f1f6f1409a2c56924555749a819be0398f36c7f69102dc6acd5fba362a14f252",
+    "range": "1-240",
+    "role": "LAB historical reuse audit/wording guard; not current queue",
+    "status": "full"
+  },
+  {
+    "path": "plan/145-g1-obl001-artifact-decision-reuse-audit.md",
+    "sha256": "8d99752d546d601d3c4539ca3ec25e8b5ccdbd3831ce7506ea074e68b4532fc3",
+    "range": "1-251",
+    "role": "LAB historical reuse audit/wording guard; not current queue",
+    "status": "full"
+  },
+  {
+    "path": "plan/146-g1-obl001-explanation-boundary-guard-hardening.md",
+    "sha256": "4e095df94d16550ee3bbc7e6b8d36e69ec774011a7ba92c77c08ef629b492f85",
+    "range": "1-165",
+    "role": "LAB historical reuse audit/wording guard; not current queue",
+    "status": "full"
+  },
+  {
+    "path": "samples/lean/foundations/MirroreaProofFirstPureHandleFunctions.lean",
+    "sha256": "4ef350111e40077a7a3fc9e8c7e6d7f1b705b20432537b3e068e089963ef4256",
+    "range": "1-681",
+    "role": "prior full self-review plus authored/read reference preservation extension; independent review pending",
+    "status": "full"
+  },
+  {
+    "path": "plan/147-g1-next-line-promotion-boundary-audit.md",
+    "sha256": "7e4c5728dba0c4f344ee99c407dadde44b4b14e44873e5ee62a97a9f69f3d42e",
+    "range": "1-223",
+    "role": "LAB historical queue/storage/phase/notification/governance evidence; current user proof-first authority preserved",
+    "status": "full"
+  },
+  {
+    "path": "plan/148-storage-workdir-mountpoint-guard-hardening.md",
+    "sha256": "4573133be928b74270963fe0ccdb66d629c377372fa3ea24a98dc9c58cb372ee",
+    "range": "1-151",
+    "role": "LAB historical queue/storage/phase/notification/governance evidence; current user proof-first authority preserved",
+    "status": "full"
+  },
+  {
+    "path": "plan/149-current-phase-position-reading.md",
+    "sha256": "a1b2bf45cf0a0521ae8fd0cf9b9c3f3dbade3aaa5646d7a163d50a6bc308c9fa",
+    "range": "1-114",
+    "role": "LAB historical queue/storage/phase/notification/governance evidence; current user proof-first authority preserved",
+    "status": "full"
+  },
+  {
+    "path": "plan/150-phase-position-validator-guard.md",
+    "sha256": "63214676e52cddf84a444ea3b0beaf8fc77906032bf682cc59337727adf8e278",
+    "range": "1-88",
+    "role": "LAB historical queue/storage/phase/notification/governance evidence; current user proof-first authority preserved",
+    "status": "full"
+  },
+  {
+    "path": "plan/151-discord-webhook-secret-validator-guard.md",
+    "sha256": "eaab4ccde0a234b56c8070114aea6fc8cceef21a4af17b4ace04e8f9f7245fec",
+    "range": "1-61",
+    "role": "LAB historical queue/storage/phase/notification/governance evidence; current user proof-first authority preserved",
+    "status": "full"
+  },
+  {
+    "path": "plan/152-discord-notification-file-inputs.md",
+    "sha256": "12198f3f0dd7f3eb0522d85c461b7ee12a401ef3d8250407f5adc727a29aeabc",
+    "range": "1-68",
+    "role": "LAB historical queue/storage/phase/notification/governance evidence; current user proof-first authority preserved",
+    "status": "full"
+  },
+  {
+    "path": "plan/153-g0-closeout-evidence-and-exit-decision-packet.md",
+    "sha256": "04884e69fc96fbc1febbebd2e7bfa7695ed7118bfc5e0c06e23e3f29caa1cc05",
+    "range": "1-116",
+    "role": "LAB historical queue/storage/phase/notification/governance evidence; current user proof-first authority preserved",
+    "status": "full"
+  },
+  {
+    "path": "plan/154-project-control-cockpit.md",
+    "sha256": "1b04c6a5ecdc892b33da5975cd4531d10d0c80647c301ed486e6f626afae59c7",
+    "range": "1-192",
+    "role": "full historical LAB governance/research evidence; not current queue; no linked-report full-read credit",
+    "status": "full"
+  },
+  {
+    "path": "plan/155-t0-g0-governance-profile-proposal.md",
+    "sha256": "d19e8be3a0702c56e85b4e5e621896046638e08cd6264433a7f5919c500f036c",
+    "range": "1-71",
+    "role": "full historical LAB governance/research evidence; not current queue; no linked-report full-read credit",
+    "status": "full"
+  },
+  {
+    "path": "plan/155-t0-g0-governance-profile-evaluation.json",
+    "sha256": "0ad49fa84cd766165c5f28bee4dda9a8794f674873e072bf1919eba9027ca943",
+    "range": "1-211",
+    "role": "full historical LAB governance/research evidence; not current queue; no linked-report full-read credit",
+    "status": "full"
+  },
+  {
+    "path": "plan/156-t0-t2-research-autonomy-envelope.md",
+    "sha256": "dec0742d9ef984441b6b0b35036dcd69e0a597a7b772988359c608e80f21bab0",
+    "range": "1-1618",
+    "role": "full historical LAB governance/research evidence; not current queue; no linked-report full-read credit",
+    "status": "full"
+  },
+  {
+    "path": "plan/158-standing-bounded-autonomy.md",
+    "sha256": "df6e0a6be32f955d003a073803c635dd461e2d857dd5a743c18f040f96bb2ced",
+    "range": "1-155",
+    "role": "LAB ADR0014 operating memory; current task-specific authority preserved; no L2 acceptance",
+    "status": "full"
   }
 ]

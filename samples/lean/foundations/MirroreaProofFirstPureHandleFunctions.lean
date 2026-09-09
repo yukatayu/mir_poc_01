@@ -554,3 +554,128 @@ end RegisteredControls
 #print axioms closed_registered_carried
 #print axioms registered_carried
 end MirroreaProofFirst.PureHandleFunctions
+
+namespace MirroreaProofFirst.PureHandleFunctions.ReferencePreservation
+variable {size : Nat}
+-- P bounds existing references, not permission, currentness, or confidentiality.
+def ExprWithin (P : HandleValues.Interface size → Prop) : Expr size → Prop
+ | .handle h => P h
+ | .integer _ | .natural _ | .var _ => True
+ | .add a b | .mul a b | .app a b => ExprWithin P a ∧ ExprWithin P b
+ | .lambda _ body => ExprWithin P body
+ | .iterate _ count initial body => ExprWithin P count ∧ ExprWithin P initial ∧ ExprWithin P body
+mutual
+inductive ValueWithin (P : HandleValues.Interface size → Prop) : Value size → Prop where
+ | handle : P h → ValueWithin P (.handle h)
+ | integer : ValueWithin P (.integer z)
+ | natural : ValueWithin P (.natural n)
+ | closure : ExprWithin P body → EnvWithin P env → ValueWithin P (.closure a body env)
+inductive EnvWithin (P : HandleValues.Interface size → Prop) : List (Value size) → Prop where
+ | nil : EnvWithin P []
+ | cons : ValueWithin P v → EnvWithin P env → EnvWithin P (v::env)
+end
+def TaskWithin (P : HandleValues.Interface size → Prop) : Task size → Prop
+ | .expression env e => EnvWithin P env ∧ ExprWithin P e
+ | .iteration _ env body initial => EnvWithin P env ∧ ExprWithin P body ∧ ValueWithin P initial
+theorem lookup_within {P : HandleValues.Interface size → Prop} {env : List (Value size)}
+ (bounded : EnvWithin P env) (i : Nat) {v : Value size} (lookup : env[i]? = some v) : ValueWithin P v := by
+ induction i generalizing env with
+ | zero =>
+   cases bounded with
+   | nil => simp at lookup
+   | cons head tail => simp at lookup; subst v; exact head
+ | succ i ih =>
+   cases bounded with
+   | nil => simp at lookup
+   | cons head tail => exact ih tail (by simpa using lookup)
+theorem execution_preserves {P : HandleValues.Interface size → Prop} {task : Task size} {v : Value size}
+ (exec : Executes task v) : TaskWithin P task → ValueWithin P v := by
+ induction exec with
+ | handle => intro h; exact .handle h.2
+ | integer => intro _; exact .integer
+ | natural => intro _; exact .natural
+ | lookupValue lookup => intro h; exact lookup_within h.1 _ lookup
+ | addition => intro _; exact .integer
+ | multiply => intro _; exact .integer
+ | lambda => intro h; exact .closure h.2 h.1
+ | application fn arg body ihf iha ihb =>
+   intro h
+   have hf := ihf ⟨h.1,h.2.1⟩
+   have ha := iha ⟨h.1,h.2.2⟩
+   cases hf with
+   | closure hb he => exact ihb ⟨.cons ha he,hb⟩
+ | iteration count initial steps ihc ihi ihs =>
+   intro h
+   exact ihs ⟨h.1,h.2.2.2,ihi ⟨h.1,h.2.2.1⟩⟩
+ | zero => intro h; exact h.2.2
+ | step body steps ihb ihs =>
+   intro h
+   exact ihs ⟨h.1,h.2.1,ihb ⟨.cons h.2.2 h.1,h.2.1⟩⟩
+theorem evaluator_preserves {P : HandleValues.Interface size → Prop} {fuel : Nat}
+ {env : List (Value size)} {e : Expr size} {v : Value size}
+ (bounded : EnvWithin P env ∧ ExprWithin P e) (exec : evaluate fuel env e = some v) : ValueWithin P v :=
+ execution_preserves (execution_sound fuel (.expression env e) v exec) bounded
+theorem no_new_handle {P : HandleValues.Interface size → Prop} {fuel : Nat}
+ {env : List (Value size)} {e : Expr size} {h : HandleValues.Interface size}
+ (bounded : EnvWithin P env ∧ ExprWithin P e) (exec : evaluate fuel env e = some (.handle h)) : P h := by
+ have result := evaluator_preserves bounded exec
+ cases result with
+ | handle existing => exact existing
+theorem carried_within {P : HandleValues.Interface size → Prop} {h : HandleValues.Interface size}
+ (member : P h) : ExprWithin P (carried h) := by
+ simp [carried,twice,identity,ExprWithin,member]
+theorem no_refresh {fuel : Nat} {env : List (Value size)} {e : Expr size}
+ {original out : HandleValues.Interface size}
+ (bounded : EnvWithin (fun h => h = original) env ∧ ExprWithin (fun h => h = original) e)
+ (exec : evaluate fuel env e = some (.handle out)) : out = original := no_new_handle (P := fun h => h = original) bounded exec
+namespace Controls
+open HandleValues.Controls
+-- Neither hidden literal code nor a captured environment may be omitted from
+-- the reference bound. These are finite controls, not the general proof.
+def hidden : Expr 4 := .lambda .int (.handle staleToken)
+example : infer [] hidden = some (.arrow .int .handle) := by decide
+example : evaluate 4 [] (.app hidden (.integer 0)) = some (.handle staleToken) := by rfl
+example : ¬ ExprWithin (fun h => h = token) hidden := by
+ simp only [hidden,ExprWithin]
+ decide
+def captured : Value 4 := .closure .int (.var 1) [.handle staleToken]
+example : evaluate 4 [captured] (.app (.var 0) (.integer 0)) = some (.handle staleToken) := by rfl
+example : ¬ ValueWithin (fun h => h = token) captured := by
+ intro h
+ cases h with
+ | closure body env =>
+   cases env with
+   | cons head tail =>
+     cases head with
+     | handle eq => exact (by decide : staleToken ≠ token) eq
+theorem capture_bound_necessary : ∃ env e h, ExprWithin (fun h => h = token) e ∧
+ evaluate 4 env e = some (.handle h) ∧ h ≠ token := by
+ refine ⟨[captured],.app (.var 0) (.integer 0),staleToken,⟨trivial,trivial⟩,rfl,?_⟩
+ decide
+-- Same arbitrary reference survives genuine higher-order application and iteration.
+theorem repeated (h : HandleValues.Interface size) :
+ evaluate 12 [] (.iterate .handle (.natural 3) (carried h) (.var 0)) = some (.handle h) := by rfl
+end Controls
+theorem registered_uses_existing {P : HandleValues.Interface size → Prop} {fuel : Nat}
+ {s : CurrentUse.World size} {registry : ModuleContractBoundary.Registry size}
+ {catalog : ModuleContractBoundary.Catalog} {caller : CurrentUse.UseRequest size}
+ {args : List Int} {auth : CurrentUse.Evidence} {proof : ModuleContractBoundary.CallProof size}
+ {env : List (Value size)} {e : Expr size} {out : Nat}
+ (bounded : EnvWithin P env ∧ ExprWithin P e)
+ (ok : invokeRegistered fuel s registry catalog caller args auth proof env e = some out) :
+ ∃ h, P h ∧ Executes (.expression env e) (.handle h) ∧
+ ModuleContractBoundary.Successful s registry (HandleValues.request caller h) args proof out ∧
+ ∃ d, registry h.operation.key = some d ∧ catalog (s.records h.operation.key).code = some d := by
+ obtain ⟨h,exec,success,entry⟩ := registered_sound ok
+ have within := execution_preserves exec bounded
+ cases within with
+ | handle old => exact ⟨h,old,exec,success,entry⟩
+#print axioms registered_uses_existing
+#print axioms Controls.capture_bound_necessary
+#print axioms carried_within
+#print axioms no_refresh
+#print axioms Controls.repeated
+#print axioms execution_preserves
+#print axioms evaluator_preserves
+#print axioms no_new_handle
+end MirroreaProofFirst.PureHandleFunctions.ReferencePreservation

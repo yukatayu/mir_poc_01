@@ -621,3 +621,46 @@ component results. M10 designated-consumption and M9 private-continuation wordin
 were reread ba41b0; private continuation-image state is not automatically a
 first-class effect continuation. No new lane is opened on that word match.
 This own checkpoint is ready to save; the user task continues.
+
+Checkpoint2c2ba24e6f8fb8ea31ed40b1b4dcbe4b09ddf798 committed9c0d7d,
+pushed32340/2d5d4c; exact remote parity and clean status verified9a74d6.
+Subsequent work continues the same W2 goal.
+
+2026-09-10 04:23 JST higher-order reference preservation: main proved general preservation
+for independent Executes over closure bodies, captured environments, applications
+and iteration; actual evaluator and registered invocation inherit the bound.
+P is an arbitrary reference-set predicate, not authority or confidentiality.
+Typed hidden literal/captured-value examples return a stale reference; omitting
+the relevant input bound is insufficient. All references equal one original
+implies exact output equality, including its stamps. General arbitrary-handle
+application+iteration is a positive witness. No source literal authenticity or
+handle-selection IFC follows.
+
+Scratch ReferencePreservation.lean/REFERENCE_CHECK.json is retained under
+handle-catalog-jxagx7z2. Initial control elaboration failuref60afd was fixed648d22;
+one ill-formed parameter-changing mutant was discarded, not counted as semantic
+evidence. Final code-bound omission fails the general law and concrete false
+control; captured-environment replacement by True loses application preservation
+and admits the hidden captured reference141b5a. The main proof and concrete
+capture_bound_necessary pass d9dcef. Mirrored current source plus registered-entry
+consequence pass76b74e with trust0; reference proof uses propext, registered
+consequence also inherits standard Classical.choice/Quot.sound. No Mir axiom or
+accepted sorryAx. W2_EXTENSION_CHECK preserves old cuts and exact current record.
+
+Plan correspondence/current goal/companion/progress/sample row synchronized.
+Documentation.md/docs/project-status.md/tasks.md 更新不要: same goal, ten files,
+readiness and blockers, no milestone close. No Rust/network/restore or production
+change. Mandatory Plans141–146 full-read; no whole-project roadmap adopted.
+Oracle3e3263 both running/no answer, unchanged jobs and no new submission.
+This is self-reviewed candidate evidence, not independent review or W2 close.
+
+Docs60279 finished PASS89d7f7,1762reports; current15hash/axiom and diff08c5ee pass.
+Focused diffca37fe found the need to distinguish a singleton exact-stamp bound
+from selection among several existing references; companion/plan wording corrected.
+Plans141–156, including all1618lines of156 and historical155JSON, fully read and
+hash-ledgered. Historical queue/bridge restrictions are not silently promoted or
+used to replace this user's explicit task-local proof-first authority. No linked
+report was bulk-read. Oracle b8f9ff remains running/promptSubmittedfalse; exec
+polls5128de/50b799 return no new output. Existing jobs preserved. Progress Discord
+113df5 sent around04:26JST; no complete notification or task stop. Save checkpoint
+and continue with requiredPlan158 (157 was already fully read).

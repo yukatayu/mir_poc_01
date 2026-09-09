@@ -52,3 +52,7 @@ now reuse the evaluators with catalog checking. The closed pure-expression entry
 also requires source-expression typing, with independent finite-execution relative
 completeness. No actual Mir parser refinement, all-entry protection, authenticated
 installation or current-head/restore claim follows.
+
+Higher-order reference-bound preservation now covers closure code, captured values
+and iteration, then connects to registered invocation. This is an unreviewed
+W2 consequence, not source authenticity, handle IFC or lifecycle installation.

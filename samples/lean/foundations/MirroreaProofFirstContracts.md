@@ -176,3 +176,15 @@ outside the source tree. Exact commands, source hashes and axiom output are in
 `docs/proof-first/W2_EXTENSION_CHECK.json`. The extension record preserves the
 later cut separately; fixed controls and rejected mutations are not general
 implementation proofs.
+
+The higher-order evaluator now has a general reference-preservation candidate:
+ExprWithin/ValueWithin/EnvWithin retain exact interface references in syntax,
+closure bodies and captured environments. Every independent finite execution
+preserves any such reference bound; the actual evaluator cannot manufacture a
+reference outside it. A singleton bound entails exact original stamps; multiple
+existing references may still be selected. registered_uses_existing
+connects this property to the existing catalog/current-use/contract entry.
+This neither authenticates source literals nor grants authority or proves handle
+selection confidentiality. Omitting closure code or captured environments loses
+the property; typed hidden-reference controls and actual iteration/application
+remain nontrivial witnesses. This extension is outside the pending Oracle cut.
