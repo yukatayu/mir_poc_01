@@ -20483,5 +20483,789 @@
     "range": "1-745",
     "role": "prior full source plus authored/read execution uniqueness proof for budget discriminator",
     "status": "full"
+  },
+  {
+    "path": "plan/203-v1-r1-finite-sequence-candidate-selection.md",
+    "sha256": "6b71f5dfdc3effabaedb07427e4e6af510351c863b6bcc03996d96180a1efc5e",
+    "range": "1-130",
+    "role": "full historical LAB selection/composition; linked targets not credited; no current adoption",
+    "status": "full"
+  },
+  {
+    "path": "plan/204-wrk0034-semantic-composition-no-candidate-disposition.md",
+    "sha256": "2196c9cba680ff8f07f1f0f004910ca47d599b8507dfe3854192dd776e382266",
+    "range": "1-120",
+    "role": "full historical LAB selection/composition; linked targets not credited; no current adoption",
+    "status": "full"
+  },
+  {
+    "path": "plan/205-c7-parametric-factorization-candidate-selection.md",
+    "sha256": "c85cb43c162d1509ee9de183b4b27a0b2ee83d7188a3acdb0f84861269a52bdf",
+    "range": "1-125",
+    "role": "full historical LAB selection/composition; linked targets not credited; no current adoption",
+    "status": "full"
+  },
+  {
+    "path": "plan/206-c7-cumulative-erasure-countermodel-candidate-selection.md",
+    "sha256": "a33420ab361dda301cd6a307337495618130706750075e08b70f0675936a9025",
+    "range": "1-139",
+    "role": "full historical LAB selection/composition; linked targets not credited; no current adoption",
+    "status": "full"
+  },
+  {
+    "path": "plan/207-post-wrk0036-autonomous-frontier-disposition.md",
+    "sha256": "0f77cf106557d64e1866cb9d58f12ff7807bf0ab5db0887075ca44b0663e5a0c",
+    "range": "1-92",
+    "role": "full historical LAB selection/composition; linked targets not credited; no current adoption",
+    "status": "full"
+  },
+  {
+    "path": "plan/208-c2b-c3-value-flow-design-preparation.md",
+    "sha256": "84380a9d2f9929f4ffe5d48f4baf74083fb00cc34d30132e43c45f48f1ddef55",
+    "range": "1-111",
+    "role": "full historical LAB selection/composition; linked targets not credited; no current adoption",
+    "status": "full"
+  },
+  {
+    "path": "plan/209-c2b-c3-relation-obligation-audit.md",
+    "sha256": "9a4b57af3f1b8d9d693c76918dd733c5401989d6c6ca9fc4bb47c8483e738f36",
+    "range": "1-209",
+    "role": "full historical LAB design/fixture frontier; no linked-target credit, no current semantic adoption",
+    "status": "full"
+  },
+  {
+    "path": "plan/210-c2b-c3-family-a-b-instantiation-audit.md",
+    "sha256": "4cba73fdbb245b16bf9fdd312609401518abaae6c96273923e1bf861e1548ffe",
+    "range": "1-153",
+    "role": "full historical LAB design/fixture frontier; no linked-target credit, no current semantic adoption",
+    "status": "full"
+  },
+  {
+    "path": "plan/211-c2b-c3-b-primary-opaque-anchor-candidate-selection.md",
+    "sha256": "d072a5430cbac1df52be216921f6f0e15c3d6819175e25872cb048430654585c",
+    "range": "1-129",
+    "role": "full historical LAB design/fixture frontier; no linked-target credit, no current semantic adoption",
+    "status": "full"
+  },
+  {
+    "path": "plan/212-c2b-c3-bundled-relational-presentation-comparison-selection.md",
+    "sha256": "4485ec34a3c170dd2a249b18748d5fed35eed2852f68d5ba991df9a58ff9c5aa",
+    "range": "1-105",
+    "role": "full historical LAB design/fixture frontier; no linked-target credit, no current semantic adoption",
+    "status": "full"
+  },
+  {
+    "path": "plan/213-c2b-c3-fiberwise-relational-comparison-selection.md",
+    "sha256": "45d328257f6841049b292d3d895ac87bcb37e57b457c6bc1c4f856caa00e7a0a",
+    "range": "1-46",
+    "role": "full historical LAB design/fixture frontier; no linked-target credit, no current semantic adoption",
+    "status": "full"
+  },
+  {
+    "path": "plan/214-post-wrk0039-autonomous-frontier-disposition.md",
+    "sha256": "b6a2a3023ad617ae9624797a223699e653170d4d69cc906a6bc59ef241e1e658",
+    "range": "1-103",
+    "role": "full historical LAB design/fixture frontier; no linked-target credit, no current semantic adoption",
+    "status": "full"
+  },
+  {
+    "path": "plan/215-c2b-c3-ordinary-design-decision-packet.md",
+    "sha256": "96255bc1f30c8a3add4a7cb40066958fe4d58454b7782378cc79e76f327e4297",
+    "range": "1-267",
+    "role": "full historical LAB design/fixture frontier; no linked-target credit, no current semantic adoption",
+    "status": "full"
+  },
+  {
+    "path": "plan/216-c2b-c3-cross-boundary-compatibility-audit.md",
+    "sha256": "00649b49b2e051bca966230c25c4da07f519f8c33b51aa48f03bf1f654da00c8",
+    "range": "1-69",
+    "role": "full historical LAB design/fixture frontier; no linked-target credit, no current semantic adoption",
+    "status": "full"
+  },
+  {
+    "path": "plan/217-c2b-c3-carrier-neutral-conditional-comparison.md",
+    "sha256": "e115fa5c24024de7c641b69fde76b690581ac3a310c482dce24f466d6aa80e5e",
+    "range": "1-96",
+    "role": "full historical LAB design/fixture frontier; no linked-target credit, no current semantic adoption",
+    "status": "full"
+  },
+  {
+    "path": "plan/218-c2b-c3-first-card-source-preflight.md",
+    "sha256": "ac5fd5af5706b94334325c52ec93cc22e6f55a9ae207313552bab7878211e14b",
+    "range": "1-47",
+    "role": "full historical LAB design/fixture frontier; no linked-target credit, no current semantic adoption",
+    "status": "full"
+  },
+  {
+    "path": "plan/219-c2b-c3-minimal-semantic-residence-options.md",
+    "sha256": "a6de54c7e0022bea0716dd8231b9caf1f3ec5aa4b58df24f717f9656b15627da",
+    "range": "1-230",
+    "role": "full historical LAB design/fixture frontier; no linked-target credit, no current semantic adoption",
+    "status": "full"
+  },
+  {
+    "path": "plan/221-c2b-c3-canon-proposal-preparation.md",
+    "sha256": "9dcaca86d4b80e0c80734198f7f9010aa7f69e407ca0b570d24a9328fba01d9e",
+    "range": "1-148",
+    "role": "full historical LAB design/fixture frontier; no linked-target credit, no current semantic adoption",
+    "status": "full"
+  },
+  {
+    "path": "plan/222-p017-x1-owner-terminal-exclusivity-candidate-selection.md",
+    "sha256": "500c8b08740626acce6065c988d2062f96c67ee46725ef56b0fb620304f331a8",
+    "range": "1-77",
+    "role": "full historical LAB design/fixture frontier; no linked-target credit, no current semantic adoption",
+    "status": "full"
+  },
+  {
+    "path": "plan/223-p017-x1-owner-negative-mutation-candidate-selection.md",
+    "sha256": "d8d90a1b100ff89a560b53caa11380a87c00f0de7fdf92a62347f0a70567a8fd",
+    "range": "1-93",
+    "role": "full historical LAB design/fixture frontier; no linked-target credit, no current semantic adoption",
+    "status": "full"
+  },
+  {
+    "path": "plan/224-p017-x1-m1-adverse-mutation-candidate-selection.md",
+    "sha256": "826bb18ac0c4c80274ab13bfe5f13c7815d562534660db0b148051a8e7d1edc1",
+    "range": "1-93",
+    "role": "full historical LAB design/fixture frontier; no linked-target credit, no current semantic adoption",
+    "status": "full"
+  },
+  {
+    "path": "plan/225-post-wrk0043-fixture-frontier-disposition.md",
+    "sha256": "86918290a88915de32179067e4225d5762b05747ffb5921f2839db26314d19e6",
+    "range": "1-64",
+    "role": "full historical LAB design/fixture frontier; no linked-target credit, no current semantic adoption",
+    "status": "full"
+  },
+  {
+    "path": "plan/226-post-wrk0043-cross-lane-p0a-preflight.md",
+    "sha256": "183f6e4d1a716ae5bd0c0e1c862982c46da14083acc0941f021f7b2ab33c247a",
+    "range": "1-55",
+    "role": "full historical LAB design/proof frontier and decisions; no linked-source credit; not current adoption or rerun",
+    "status": "full"
+  },
+  {
+    "path": "plan/227-p017-x1-decision-vector-and-choice-neutral-consistency.md",
+    "sha256": "9a2c15591ccfd36f6c7258f1373025d011f2685d7a33ed818b8b63398a533d65",
+    "range": "1-324",
+    "role": "full historical LAB design/proof frontier and decisions; no linked-source credit; not current adoption or rerun",
+    "status": "full"
+  },
+  {
+    "path": "plan/228-p017-x1-minimum-coherence-candidate-selection.md",
+    "sha256": "fc4db371904ca945afded4f8287c70a8571e5ddbdb5fa1ddef79dfaf3ade4e2d",
+    "range": "1-103",
+    "role": "full historical LAB design/proof frontier and decisions; no linked-source credit; not current adoption or rerun",
+    "status": "full"
+  },
+  {
+    "path": "plan/229-post-wrk0044-no-successor-ordinary-design-boundary.md",
+    "sha256": "3634a0d2caeb3c1cd798237d99b7cde775fa4157a2bd20653f76774dd779e8c8",
+    "range": "1-105",
+    "role": "full historical LAB design/proof frontier and decisions; no linked-source credit; not current adoption or rerun",
+    "status": "full"
+  },
+  {
+    "path": "plan/230-p017-x1-first-ordinary-design-card-preflight.md",
+    "sha256": "6c0408002e6c273eacc26dd51878ced49511ae8ac4de5b3f4b488547c1630906",
+    "range": "1-186",
+    "role": "full historical LAB design/proof frontier and decisions; no linked-source credit; not current adoption or rerun",
+    "status": "full"
+  },
+  {
+    "path": "plan/231-k0-rl-factorization-preflight.md",
+    "sha256": "e36348ef753f53136f7e82392cffe0c9676bcd21a23d38f078b2ace6fd18eabd",
+    "range": "1-271",
+    "role": "full historical LAB design/proof frontier and decisions; no linked-source credit; not current adoption or rerun",
+    "status": "full"
+  },
+  {
+    "path": "plan/232-p017-x1-k0-rl-definitional-collapse-screen.md",
+    "sha256": "4a0cc3bf4e497746a17d0a69491a923e632646bfd226ff01ededaa2d0a4e7b49",
+    "range": "1-175",
+    "role": "full historical LAB design/proof frontier and decisions; no linked-source credit; not current adoption or rerun",
+    "status": "full"
+  },
+  {
+    "path": "plan/233-p017-x1-k0-b-fact-status-screen.md",
+    "sha256": "8c163ccdc8547381d5c2faf2e3525e3ff30a44d14f5c03989e10a2d007423066",
+    "range": "1-132",
+    "role": "full historical LAB design/proof frontier and decisions; no linked-source credit; not current adoption or rerun",
+    "status": "full"
+  },
+  {
+    "path": "plan/234-p017-x1-k0-terminal-success-positive-basis-card.md",
+    "sha256": "28fbf7186e9b77d56ad6260d741ebdeeec00a902eedcea60b6871facd0b7930c",
+    "range": "1-217",
+    "role": "full historical LAB design/proof frontier and decisions; no linked-source credit; not current adoption or rerun",
+    "status": "full"
+  },
+  {
+    "path": "plan/236-p017-x1-k0-owner-result-provenance-basis-and-definability-screen.md",
+    "sha256": "dbab9764d542d9ba0de5d0845ad4aedb49099b96e4485dad1716d0eaeb2211ff",
+    "range": "1-207",
+    "role": "full historical LAB design/proof frontier and decisions; no linked-source credit; not current adoption or rerun",
+    "status": "full"
+  },
+  {
+    "path": "plan/237-p017-x1-k0-owner-outstanding-positive-basis-and-pending-nonconflation-card.md",
+    "sha256": "5b3335a01b6dc4035b501b521f087f753fc3bc20b234c98f7e9360581a171e1a",
+    "range": "1-176",
+    "role": "full historical LAB design/proof frontier and decisions; no linked-source credit; not current adoption or rerun",
+    "status": "full"
+  },
+  {
+    "path": "plan/238-p017-x1-k0-terminal-failure-positive-basis-and-failure-nonconflation-card.md",
+    "sha256": "279a587c28e290d610ed382564ac454c7783a27c4655ae8275fc67a7e965945b",
+    "range": "1-127",
+    "role": "full historical LAB design/proof frontier and decisions; no linked-source credit; not current adoption or rerun",
+    "status": "full"
+  },
+  {
+    "path": "plan/239-p017-x1-k0-consulted-validation-provenance-basis-and-nonconflation-screen.md",
+    "sha256": "19839b60474788593d61e6d41925c2a7bd12476b8884ba2f926778b24a054f6a",
+    "range": "1-98",
+    "role": "full historical LAB design/proof frontier and decisions; no linked-source credit; not current adoption or rerun",
+    "status": "full"
+  },
+  {
+    "path": "plan/240-p017-x1-k0-minimum-model-hk-intake-and-fail-closed-gate.md",
+    "sha256": "1e43505a9bd8e49a24a501dba155838f3bfafd45efd11c3c1151a1b56ef8a97a",
+    "range": "1-212",
+    "role": "full historical LAB design/proof frontier and decisions; no linked-source credit; not current adoption or rerun",
+    "status": "full"
+  },
+  {
+    "path": "plan/241-p017-x1-k0-hk-rs-occurrence-accounting-preflight.md",
+    "sha256": "cfcf566d9992e45137992f0d6f7865b4e25be085aa1d38913c2b42e4277e4f14",
+    "range": "1-124",
+    "role": "full historical LAB design/proof frontier and decisions; no linked-source credit; not current adoption or rerun",
+    "status": "full"
+  },
+  {
+    "path": "plan/242-p017-x1-k0-hk-rs-integrated-conditional-candidate-selection.md",
+    "sha256": "9d5569a48c9c0fc3e38f57d51556affafca007304272cf0064eb315979b99f4f",
+    "range": "1-137",
+    "role": "full historical LAB design/proof frontier and decisions; no linked-source credit; not current adoption or rerun",
+    "status": "full"
+  },
+  {
+    "path": "plan/243-p017-x1-k0-hk-rs-l3-standing-eligibility-recheck.md",
+    "sha256": "2cf80e356f57b357d8e17e45b821e2830441a576fa7908c64ca4d1484f09c7e8",
+    "range": "1-125",
+    "role": "full historical LAB design/proof frontier and decisions; no linked-source credit; not current adoption or rerun",
+    "status": "full"
+  },
+  {
+    "path": "plan/244-p017-x1-k0-hk-rs-source-premise-falsifier-design.md",
+    "sha256": "9fa62dfbdda4e2a9d05ab6ab37f2905bf0b5c3a7f6549d650f8a6e537036dd46",
+    "range": "1-204",
+    "role": "full historical LAB design/proof frontier and decisions; no linked-source credit; not current adoption or rerun",
+    "status": "full"
+  },
+  {
+    "path": "plan/245-post-wrk0045-no-successor-ordinary-x1-handoff.md",
+    "sha256": "73c9c48b4ffa393e86af29ee767b1b93d5bd81017d14df356c3d4a991528a8da",
+    "range": "1-201",
+    "role": "full historical LAB design/proof frontier and decisions; no linked-source credit; not current adoption or rerun",
+    "status": "full"
+  },
+  {
+    "path": "plan/246-goal-first-semantic-integration-and-i1-entry.md",
+    "sha256": "a84a00905e121aa3d9b9e382ff475c666de663ab445b7329dcb5f5f24005c984",
+    "range": "1-281",
+    "role": "full historical LAB design/proof frontier and decisions; no linked-source credit; not current adoption or rerun",
+    "status": "full"
+  },
+  {
+    "path": "plan/248-t0-g0-semantic-assertion-v3-evaluation.json",
+    "sha256": "dddf57ea0d4c67736fce67340949186c6d833c8def717c8a3e1deaa7552ed815",
+    "range": "1-92",
+    "role": "full historical LAB design/proof frontier and decisions; no linked-source credit; not current adoption or rerun",
+    "status": "full"
+  },
+  {
+    "path": "plan/15-current-l2-fixture-authoring-template.md",
+    "sha256": "c0f7fd6af9be7097feddb9c0342f68a397116b5908ca2ac13af15c5a69010372",
+    "range": "1-391",
+    "role": "full historical LAB companion/harness; source semantics versus supplied host outcomes kept separate; no production or rerun claim",
+    "status": "full"
+  },
+  {
+    "path": "specs/examples/00-representative-mir-programs.md",
+    "sha256": "e8874b4dc160ec25919889c573e3f48dc5bb2c365da5e1d0317faa479a614cd7",
+    "range": "1-804",
+    "role": "full historical LAB companion/harness; source semantics versus supplied host outcomes kept separate; no production or rerun claim",
+    "status": "full"
+  },
+  {
+    "path": "specs/examples/01-current-l2-surface-syntax-candidates.md",
+    "sha256": "f06ec6780f72ec01023a698742a32ef72e88cb38973c853667241532d3fb4562",
+    "range": "1-407",
+    "role": "full historical LAB companion/harness; source semantics versus supplied host outcomes kept separate; no production or rerun claim",
+    "status": "full"
+  },
+  {
+    "path": "specs/examples/02-current-l2-ast-fixture-schema.md",
+    "sha256": "d0116a41ef84ac90047b2d4df5f792695984330d01503fa798235180c22092ae",
+    "range": "1-234",
+    "role": "full historical LAB companion/harness; source semantics versus supplied host outcomes kept separate; no production or rerun claim",
+    "status": "full"
+  },
+  {
+    "path": "specs/examples/03-current-l2-evaluation-state-schema.md",
+    "sha256": "56073c26fa1ec6fd6752429661d59e6e631247917f741b10d805e0a256c109dc",
+    "range": "1-296",
+    "role": "full historical LAB companion/harness; source semantics versus supplied host outcomes kept separate; no production or rerun claim",
+    "status": "full"
+  },
+  {
+    "path": "specs/examples/04-current-l2-step-semantics.md",
+    "sha256": "0b40ca274e179fca30c676183bfed7e21a4167f29b0af4bb9f55397d8442ee60",
+    "range": "1-389",
+    "role": "full historical LAB companion/harness; source semantics versus supplied host outcomes kept separate; no production or rerun claim",
+    "status": "full"
+  },
+  {
+    "path": "specs/examples/05-current-l2-oracle-api.md",
+    "sha256": "637b69859c10fdc26c684f246b24f817fff74a67690ed0e07d37d6045f74433e",
+    "range": "1-246",
+    "role": "full historical LAB companion/harness; source semantics versus supplied host outcomes kept separate; no production or rerun claim",
+    "status": "full"
+  },
+  {
+    "path": "specs/examples/06-current-l2-interpreter-skeleton.md",
+    "sha256": "85d70da46f1b6858faf1618f8808c00ef08f629b90dc99086292644e047d8a68",
+    "range": "1-149",
+    "role": "full historical LAB companion/harness; source semantics versus supplied host outcomes kept separate; no production or rerun claim",
+    "status": "full"
+  },
+  {
+    "path": "specs/examples/07-current-l2-host-stub-harness.md",
+    "sha256": "1948345a3eac4607645ca238471296656fe6ff3068bdbed2fdd4dc79d69d89ca",
+    "range": "1-123",
+    "role": "full historical LAB companion/harness; source semantics versus supplied host outcomes kept separate; no production or rerun claim",
+    "status": "full"
+  },
+  {
+    "path": "specs/examples/08-current-l2-host-plan-schema.md",
+    "sha256": "107e61f11db7c2f021f73065a2c1e4322e47f020eac931620e777e0587e1649a",
+    "range": "1-172",
+    "role": "full historical LAB companion/harness; source semantics versus supplied host outcomes kept separate; no production or rerun claim",
+    "status": "full"
+  },
+  {
+    "path": "specs/examples/09-current-l2-bundle-loader.md",
+    "sha256": "effb20d4d209a62e8546e47ec1c6809d72279583f2daae21d8fed1c25c7b35c4",
+    "range": "1-116",
+    "role": "full historical LAB companion/harness; source semantics versus supplied host outcomes kept separate; no production or rerun claim",
+    "status": "full"
+  },
+  {
+    "path": "plan/post-wrk0013-no-candidate-disposition.md",
+    "sha256": "2da7e0d571e1f4b382147feefe1de969bcc6c89f0d4381caeeac76845b37a9c7",
+    "range": "1-84",
+    "role": "full historical LAB no-candidate disposition; not current authority or rerun",
+    "status": "full"
+  },
+  {
+    "path": "plan/post-wrk0013-portfolio-review.md",
+    "sha256": "56ad16697f92de64718a3f9b7912dea74829aaeb1c19f109cb119b2ccc490f0a",
+    "range": "1-68",
+    "role": "full historical LAB no-candidate disposition; not current authority or rerun",
+    "status": "full"
+  },
+  {
+    "path": "plan/post-wrk0014-actual-bridge-disposition.md",
+    "sha256": "8bacebaf9c208a001529c0a99742284f8161f7aa19cba8ac78463542f72e000a",
+    "range": "1-86",
+    "role": "full historical LAB no-candidate disposition; not current authority or rerun",
+    "status": "full"
+  },
+  {
+    "path": "plan/post-wrk0014-remaining-ledger-revalidation.md",
+    "sha256": "3961193b0e5f955b3090287f9e6a65a9f5f3b684a951d0c213a28b98e31630c3",
+    "range": "1-103",
+    "role": "full historical LAB no-candidate disposition; not current authority or rerun",
+    "status": "full"
+  },
+  {
+    "path": "plan/post-wrk0015-permitted-root-no-candidate-disposition.md",
+    "sha256": "45243d13725f09a3d8d440dd74dd2e1c8affe10e01c330af6c7b4d964912c8a1",
+    "range": "1-61",
+    "role": "full historical LAB no-candidate disposition; not current authority or rerun",
+    "status": "full"
+  },
+  {
+    "path": "plan/post-wrk0023-literal-boundary-review.md",
+    "sha256": "177b5f879da8df6a3fc41b12da71d70c22e601894c02a88e1cb6de2995ef3dbc",
+    "range": "1-53",
+    "role": "full historical LAB no-candidate disposition; not current authority or rerun",
+    "status": "full"
+  },
+  {
+    "path": "plan/wrk-0001-finite-index-reproduction.md",
+    "sha256": "5155ce3de994cc92975a797a2d7ee1b7b79453ff6739a125546c26f000d23972",
+    "range": "1-73",
+    "role": "full historical LAB reproduction, countermodel or boundary; not current acceptance or rerun; linked sources not thereby read",
+    "status": "full"
+  },
+  {
+    "path": "plan/wrk-0001-pilot-checkpoint.md",
+    "sha256": "b10df940002789b72c94c4e07589ebdeb66a4b3b9398a2fd025f7863844af5aa",
+    "range": "1-73",
+    "role": "full historical LAB reproduction, countermodel or boundary; not current acceptance or rerun; linked sources not thereby read",
+    "status": "full"
+  },
+  {
+    "path": "plan/wrk-0002-projection-vacuity-countermodel.md",
+    "sha256": "382cfb7589aec6bf901b4922499f96cdeb497be9ec3cf781abb2d260b6c78890",
+    "range": "1-63",
+    "role": "full historical LAB reproduction, countermodel or boundary; not current acceptance or rerun; linked sources not thereby read",
+    "status": "full"
+  },
+  {
+    "path": "plan/wrk-0003-projection-extensionality-countermodel.md",
+    "sha256": "c1f2794f8551660f960446348833d4b1fc0f5de3e468b1f518f931deb37b8230",
+    "range": "1-69",
+    "role": "full historical LAB reproduction, countermodel or boundary; not current acceptance or rerun; linked sources not thereby read",
+    "status": "full"
+  },
+  {
+    "path": "plan/wrk-0004-outcome-totality-countermodel.md",
+    "sha256": "9b07fbf5b407f6062213f862919e5e8a4848674b017440e0f63e22e82fa96456",
+    "range": "1-59",
+    "role": "full historical LAB reproduction, countermodel or boundary; not current acceptance or rerun; linked sources not thereby read",
+    "status": "full"
+  },
+  {
+    "path": "plan/wrk-0005-conditional-outcome-relation.md",
+    "sha256": "08aee3638bd86333c4c0046faced85530b70737d811b00b6ad6463a079525a7b",
+    "range": "1-87",
+    "role": "full historical LAB reproduction, countermodel or boundary; not current acceptance or rerun; linked sources not thereby read",
+    "status": "full"
+  },
+  {
+    "path": "plan/wrk-0006-obl020-familywise-global-boundary.md",
+    "sha256": "7f4b4e0c7ba3ce2f6b8f2420d8cb664a9af9108b9d28ce51d3f904c0730c4174",
+    "range": "1-63",
+    "role": "full historical LAB reproduction, countermodel or boundary; not current acceptance or rerun; linked sources not thereby read",
+    "status": "full"
+  },
+  {
+    "path": "plan/wrk-0007-obl001-result-write-coverage.md",
+    "sha256": "3a94f2e70cd362a271b218cf93909c5180ec2bc9ccf7515a42a63242a4ee79f6",
+    "range": "1-40",
+    "role": "full historical LAB reproduction, countermodel or boundary; not current acceptance or rerun; linked sources not thereby read",
+    "status": "full"
+  },
+  {
+    "path": "plan/wrk-0008-obl027-formal-hook-attribution.md",
+    "sha256": "56711c4d18c6a3222abf07abd03da80e7c8e58352671786ade5f4d2bf9ef727c",
+    "range": "1-82",
+    "role": "full historical LAB reproduction, countermodel or boundary; not current acceptance or rerun; linked sources not thereby read",
+    "status": "full"
+  },
+  {
+    "path": "plan/wrk-0009-e5-skeleton-identity.md",
+    "sha256": "a11429333ae20ee5e8bd920ea616d310c672b92ecf8cd92b2e8d023502017fa6",
+    "range": "1-74",
+    "role": "full historical LAB reproduction, countermodel or boundary; not current acceptance or rerun; linked sources not thereby read",
+    "status": "full"
+  },
+  {
+    "path": "plan/wrk-0010-static-formal-hook-decision-attribution.md",
+    "sha256": "b59243925e9ffbdd47dcbf86e7b67fc08ac0a341b3468371b696884db888d3d0",
+    "range": "1-52",
+    "role": "full historical LAB reproduction, countermodel or boundary; not current acceptance or rerun; linked sources not thereby read",
+    "status": "full"
+  },
+  {
+    "path": "plan/wrk-0011-current-l2-final-store-directness.md",
+    "sha256": "ae6dfe0e40586cf2b4c85e18e83b8577a7a8da84ddd3e6f8638722977d498130",
+    "range": "1-82",
+    "role": "full historical LAB reproduction, countermodel or boundary; not current acceptance or rerun; linked sources not thereby read",
+    "status": "full"
+  },
+  {
+    "path": "plan/wrk-0013-pcomp03-retained-reproduction.md",
+    "sha256": "5e9f078f99570261d5c20469c2484eb5e45e3bd9c24a6cc8b866155fec3e9d75",
+    "range": "1-62",
+    "role": "full historical LAB reproduction, countermodel or boundary; not current acceptance or rerun; linked sources not thereby read",
+    "status": "full"
+  },
+  {
+    "path": "plan/wrk-0013-retained-reproduction-selection.md",
+    "sha256": "dfa0199a8f5546c82da6a42ca81f83ca202a2cd835d3a0ee7a065149bd12ba7f",
+    "range": "1-76",
+    "role": "full historical LAB reproduction, countermodel or boundary; not current acceptance or rerun; linked sources not thereby read",
+    "status": "full"
+  },
+  {
+    "path": "plan/wrk-0015-stale-grant-fence-registration-preflight.md",
+    "sha256": "80343e1a497b18f60a076fb6a9766a73ebf910b92f86f33f24ce93a3015ea7f6",
+    "range": "1-70",
+    "role": "full historical LAB reproduction, countermodel or boundary; not current acceptance or rerun; linked sources not thereby read",
+    "status": "full"
+  },
+  {
+    "path": "plan/wrk-0015-stale-grant-fence-selection.md",
+    "sha256": "e460813fcc16fc1b14b64e64a38e3b91851991053c3830247631c48f151b39b9",
+    "range": "1-79",
+    "role": "full historical LAB reproduction, countermodel or boundary; not current acceptance or rerun; linked sources not thereby read",
+    "status": "full"
+  },
+  {
+    "path": "plan/wrk-0019-pcomp03-bounds-direct-carrier.md",
+    "sha256": "28cc041f77e121df09573dfaa79cf4808aa5ca511b4bbce1e5bc57c34987828d",
+    "range": "1-52",
+    "role": "full historical LAB reproduction, countermodel or boundary; not current acceptance or rerun; linked sources not thereby read",
+    "status": "full"
+  },
+  {
+    "path": "plan/wrk-0020-option-admit-carrier-literal-audit.md",
+    "sha256": "6db9d08c49d616352c715ecfe65c2e365af864958a649fffd4cb02b58ad5b2cf",
+    "range": "1-59",
+    "role": "full historical LAB reproduction, countermodel or boundary; not current acceptance or rerun; linked sources not thereby read",
+    "status": "full"
+  },
+  {
+    "path": "plan/wrk-0021-costbudget-scalar-projection-falsifier.md",
+    "sha256": "42fe79fe60f21dfaf467dc3ead8c6724b7091daa3a2d6ea712d6aef7efc811d1",
+    "range": "1-59",
+    "role": "full historical LAB reproduction, countermodel or boundary; not current acceptance or rerun; linked sources not thereby read",
+    "status": "full"
+  },
+  {
+    "path": "plan/wrk-0022-write-cross-failure-generation-boundary-falsifier.md",
+    "sha256": "bda556db8668ce1d2501cc6706176ae5bbb33db5f1f7ce76da628b347d4fc86c",
+    "range": "1-59",
+    "role": "full historical LAB reproduction, countermodel or boundary; not current acceptance or rerun; linked sources not thereby read",
+    "status": "full"
+  },
+  {
+    "path": "plan/wrk-0023-consistent-cut-channel-state-boundary.md",
+    "sha256": "edf2678c79f1d1aacea66bcdc6596c22a18e4b9df6ab6b336926f586096b52bb",
+    "range": "1-60",
+    "role": "full historical LAB reproduction, countermodel or boundary; not current acceptance or rerun; linked sources not thereby read",
+    "status": "full"
+  },
+  {
+    "path": "plan/wrk-0027-scn08-scalar-terminal-correspondence.md",
+    "sha256": "104ba9fdbd13accaaf768204e82c623256edf83de2e0ae744723825b2aa5010b",
+    "range": "1-70",
+    "role": "full historical LAB reproduction, countermodel or boundary; not current acceptance or rerun; linked sources not thereby read",
+    "status": "full"
+  },
+  {
+    "path": "plan/wrk-0028-r0-common-cut-fact-manifest.md",
+    "sha256": "23c7668615d35f8ee82c85db8f5e73f779badeb7db57f7b94990c63a3bc8e478",
+    "range": "1-168",
+    "role": "full historical LAB reproduction, countermodel or boundary; not current acceptance or rerun; linked sources not thereby read",
+    "status": "full"
+  },
+  {
+    "path": "plan/wrk-0029-c0b-noncircular-domain-staging.md",
+    "sha256": "c5b858485953653bee5c693776e93c3fe780ef044ace5bd8ea2e49065d50c02f",
+    "range": "1-76",
+    "role": "full historical LAB reproduction, countermodel or boundary; not current acceptance or rerun; linked sources not thereby read",
+    "status": "full"
+  },
+  {
+    "path": "plan/wrk-0030-c2a-source-tagged-anti-collapse-vocabulary.md",
+    "sha256": "bf27394c0b914c51987a34d6342181e93125c4fd2abc09b9d275dd820a409721",
+    "range": "1-69",
+    "role": "full historical LAB reproduction, countermodel or boundary; not current acceptance or rerun; linked sources not thereby read",
+    "status": "full"
+  },
+  {
+    "path": "plan/wrk-0031-c0c-source-local-diagnostic-reference-audit.md",
+    "sha256": "a49570aae0dc34228f15a58e3c8e5cc4b13dfc9ea10ce3886253fb3f953ba5f8",
+    "range": "1-69",
+    "role": "full historical LAB reproduction, countermodel or boundary; not current acceptance or rerun; linked sources not thereby read",
+    "status": "full"
+  },
+  {
+    "path": "plan/wrk-0032-c5pre-ordinary-admission-issuance-guard.md",
+    "sha256": "1efcb4d5c965a72e09eca57e30410139e3b8e22534e740843992187396f89380",
+    "range": "1-78",
+    "role": "full historical LAB reproduction, countermodel or boundary; not current acceptance or rerun; linked sources not thereby read",
+    "status": "full"
+  },
+  {
+    "path": "plan/wrk-0033-v1r1-presentation-refinement.md",
+    "sha256": "6347a2b4603e485c3e040302fc69a54746a4aecf7c4180d597729688859fc4fd",
+    "range": "1-218",
+    "role": "full historical LAB reproduction, countermodel or boundary; not current acceptance or rerun; linked sources not thereby read",
+    "status": "full"
+  },
+  {
+    "path": "plan/wrk-0034-v1-r1-finite-sequence-refinement.md",
+    "sha256": "0e3eb3513f39afb241f796248737fc4a9f66665986fd32e143503991a71b820b",
+    "range": "1-245",
+    "role": "full historical LAB reproduction, countermodel or boundary; not current acceptance or rerun; linked sources not thereby read",
+    "status": "full"
+  },
+  {
+    "path": "plan/proof-first-foundation-correspondence.md",
+    "sha256": "1e9073d07f8b66b07950d748dba392c380c79d0a32807034fd9f83b9a6fc7612",
+    "range": "1-215",
+    "role": "full LAB evidence; conditional/fixture limitations retained, not rerun or linked-source read",
+    "status": "full"
+  },
+  {
+    "path": "plan/wrk-0035-c7-parametric-factorization.md",
+    "sha256": "8e27a94f876b9db33d6d30cc56b4569f83094b0cc4d17261bd680497327309a3",
+    "range": "1-142",
+    "role": "full LAB evidence; conditional/fixture limitations retained, not rerun or linked-source read",
+    "status": "full"
+  },
+  {
+    "path": "plan/wrk-0036-c7-cumulative-erasure-countermodel.md",
+    "sha256": "21f7b1ab6dc5618d9ccb4050ad0358ffb3f428a146ad0f57aee78dfc04937687",
+    "range": "1-115",
+    "role": "full LAB evidence; conditional/fixture limitations retained, not rerun or linked-source read",
+    "status": "full"
+  },
+  {
+    "path": "plan/wrk-0037-c2b-c3-b-primary-opaque-anchor-experiment.md",
+    "sha256": "839ffda0e4c01fb1dab476598b97f658a8f85e27d8ce2547ab6a8c49e8662739",
+    "range": "1-482",
+    "role": "full LAB evidence; conditional/fixture limitations retained, not rerun or linked-source read",
+    "status": "full"
+  },
+  {
+    "path": "plan/wrk-0039-c2b-c3-fiberwise-relational-presentation-experiment.md",
+    "sha256": "bfbc66cf7fea87bdebb42e0412dd9e6c9279fd8dcfd24c672ebac5150c9aa229",
+    "range": "1-746",
+    "role": "full LAB evidence; conditional/fixture limitations retained, not rerun or linked-source read",
+    "status": "full"
+  },
+  {
+    "path": "plan/wrk-0040-p017-x1-coupled-anti-collapse-countermodel.md",
+    "sha256": "857480c7f4f26c58bb607d988eeb0fa568aecfebc6ae098ac229f94b9ae04475",
+    "range": "1-208",
+    "role": "full LAB evidence; conditional/fixture limitations retained, not rerun or linked-source read",
+    "status": "full"
+  },
+  {
+    "path": "plan/wrk-0041-p017-x1-owner-terminal-exclusivity-countermodel.md",
+    "sha256": "c86cf27ac586dc322d2cd991add42949fa7e3108f7a81ec9714c7beb1e70c675",
+    "range": "1-85",
+    "role": "full LAB evidence; conditional/fixture limitations retained, not rerun or linked-source read",
+    "status": "full"
+  },
+  {
+    "path": "plan/wrk-0042-p017-x1-owner-negative-mutation-countermodel.md",
+    "sha256": "87d181913310cf69f49a659d5d232367719267f101200a21fa4b50c18d4c4aea",
+    "range": "1-86",
+    "role": "full LAB evidence; conditional/fixture limitations retained, not rerun or linked-source read",
+    "status": "full"
+  },
+  {
+    "path": "plan/wrk-0043-p017-x1-m1-adverse-mutation-countermodel.md",
+    "sha256": "0cc958ee31eb7d4ed07dda77372f4c8a4b118b88ba894b0f5d6520cdcfe53cd3",
+    "range": "1-91",
+    "role": "full LAB evidence; conditional/fixture limitations retained, not rerun or linked-source read",
+    "status": "full"
+  },
+  {
+    "path": "plan/wrk-0044-p017-x1-minimum-relation-envelope-coherence.md",
+    "sha256": "83ca22f480970bb5f63884bcb330c8d67bd90f617ec380f64962f4aefda44867",
+    "range": "1-330",
+    "role": "full LAB evidence; conditional/fixture limitations retained, not rerun or linked-source read",
+    "status": "full"
+  },
+  {
+    "path": "plan/wrk-0045-p017-x1-k0-hk-rs-asigma-conditional-trace.md",
+    "sha256": "690d67db0de7aca7182cf6dc6c74988480c0923fffc6fa687c132cd706dbba1d",
+    "range": "1-527",
+    "role": "full LAB evidence; conditional/fixture limitations retained, not rerun or linked-source read",
+    "status": "full"
+  },
+  {
+    "path": "plan/wrk-0046-p017-x1-k0-qf-ul-lift.md",
+    "sha256": "37753dbde1290c0b5e1602a60e1159a830cc31cc9fb99c9e4ff6f34e64eab7c1",
+    "range": "1-459",
+    "role": "full historical LAB conditional finite supplied-line lemma and fixture; no actual restore proof or rerun",
+    "status": "full"
+  },
+  {
+    "path": "specs/examples/10-current-l2-batch-runner.md",
+    "sha256": "ee4407887d800b70d6213439e0bbad2c7d5176ef2ee0429b892dfabc4af16b3e",
+    "range": "1-130",
+    "role": "full LAB batch discovery/expectation runner, not source/runtime semantics",
+    "status": "full"
+  },
+  {
+    "path": "samples/README.md",
+    "sha256": "9a8e6d85f869d0ab5f671bd43322d02daadb2f3d1efa5b2accd4ef39ac70d751",
+    "range": "1-302",
+    "role": "full LAB sample classification or helper selection policy; README truncated middle recovered with bounded ranges; no command rerun",
+    "status": "full"
+  },
+  {
+    "path": "specs/examples/12-current-l2-selection-profiles.md",
+    "sha256": "ed2730b29fa251fd1ed3b6141cf0df08b4bdde0607c64a09177d0944147a9268",
+    "range": "1-143",
+    "role": "full LAB sample classification or helper selection policy; README truncated middle recovered with bounded ranges; no command rerun",
+    "status": "full"
+  },
+  {
+    "path": "specs/examples/14-current-l2-profile-catalog-externalization.md",
+    "sha256": "395c3ba56a7e9e05c8db6184690bcfc9417c7c18dca49bfeb650dc7c9c75e94b",
+    "range": "1-104",
+    "role": "full LAB sample classification or helper selection policy; README truncated middle recovered with bounded ranges; no command rerun",
+    "status": "full"
+  },
+  {
+    "path": "specs/examples/13-current-l2-profile-catalog.md",
+    "sha256": "d4ce4dbbb8c9175793806a46211c3f2aa078c3330b9738e4c0d900eda9c62be1",
+    "range": "1-180",
+    "role": "full LAB sample classification or helper selection policy; README truncated middle recovered with bounded ranges; no command rerun",
+    "status": "full"
+  },
+  {
+    "path": "specs/examples/11-current-l2-selection-helper.md",
+    "sha256": "3d77e370e5ebb030e202a5d118b3978adf10a80c6bf191a9be48810449095af6",
+    "range": "1-115",
+    "role": "full LAB sample classification or helper selection policy; README truncated middle recovered with bounded ranges; no command rerun",
+    "status": "full"
+  },
+  {
+    "path": "specs/examples/15-current-l2-fallback-reconciliation-and-compact-syntax.md",
+    "sha256": "a56bb936fa61afa81fa748fa9790f4c60db392bbf97ef35c711517230ca6e9af",
+    "range": "1-373",
+    "role": "full historical LAB fallback notation or detached artifact boundary; not new semantic acceptance or rerun",
+    "status": "full"
+  },
+  {
+    "path": "specs/examples/16-current-l2-detached-trace-audit-artifact-schema.md",
+    "sha256": "7509d30b69e0deeca2e0a18c8e6a3e486d9a0e724ac8965d65e0d73c0f0cd91a",
+    "range": "1-249",
+    "role": "full historical LAB fallback notation or detached artifact boundary; not new semantic acceptance or rerun",
+    "status": "full"
+  },
+  {
+    "path": "specs/examples/17-current-l2-detached-exporter-entry-comparison.md",
+    "sha256": "fad30c9fc20b271bd71edc1abdc117ebc0acf3d43a011e92c194e632b75005ec",
+    "range": "1-147",
+    "role": "full historical LAB detached artifact placement; not current runtime observation guarantee or rerun",
+    "status": "full"
+  },
+  {
+    "path": "specs/examples/18-current-l2-bundle-first-detached-payload-context-split.md",
+    "sha256": "19053093bb931d27f426d28d582da257b779c40e94ae559c562f9ac8edb77fd3",
+    "range": "1-271",
+    "role": "full historical LAB detached artifact placement; not current runtime observation guarantee or rerun",
+    "status": "full"
+  },
+  {
+    "path": "specs/examples/19-current-l2-host-plan-coverage-failure-placement.md",
+    "sha256": "b32b17313c0d811b7702b33b74db45b5b35551dbd2e8695f1963ba4df4f870d0",
+    "range": "1-186",
+    "role": "full historical LAB detached artifact placement; not current runtime observation guarantee or rerun",
+    "status": "full"
   }
 ]

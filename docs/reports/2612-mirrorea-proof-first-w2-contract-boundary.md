@@ -708,3 +708,53 @@ No global normalization or budget sufficiency is claimed. Docs56787 finished
 PASS e4f821,1762reports. Current15hash/diff ba01d5 passed before this final
 uniqueness delta; final source record was refreshed by e5b429. Plans200–202 full
 and ledgered. Latest Oracleb489f9 both running/no answer; preserve jobs.
+
+2026-09-10 04:51 JST continuation reading: checkpoint6d5a7c74670b604a261d38ebb0cee6a682a3658a
+verified HEAD/remote parity and clean tree821548/469254/a4ef7d. Old push process
+64455 was already unavailable; remote parity was independently checked. Mandatory
+numbered Plan gaps203–246/248 and Plan15 are fully read/hash-ledgered; earlier
+220/235/247/249/250 retain prior full records. Six unnumbered post-WRK dispositions
+and specs/examples00–09 are now full. Reading a reference did not credit its
+target, and truncated output was recovered before full credit. No new global plan.
+
+The historical comparison distinguishes typed result, validation-consulted
+grounds, production grounds, receipt/pending correlation and restored consumption.
+Current W2 reference-set preservation supplies none of those missing provenance
+or restore relations. The old parser-free harness explicitly supplies predicate/
+effect outcomes through sidecars; it is not actual ordinary-source computation
+or network evidence. Its documented whole-store rollback remains a bounded LAB
+implementation explanation, not a general place-local or cross-place guarantee.
+No frozen record or historical source was changed.
+
+Only reading/continuation/report metadata changed after the checkpoint. plan/,
+Documentation.md, docs/project-status.md, progress.md, tasks.md and
+samples_progress.md 更新不要: no semantic/readiness/goal/command/sample change or
+milestone close. Lean/Rust/network/restore validators are not rerun for this
+metadata-only reading block; prior passes remain bound to their recorded cuts.
+Oracle3902ce both running/no answer/error; original jobs retained, no duplicate.
+No independent review, W2 acceptance, alpha claim or task stop follows.
+
+### 2026-09-10 05:01 JST — required LAB reading continuation
+
+- All302 current files under plan/ now have a current-hash full reading record
+  (9aaceb inventory, not a claim that every required corpus is read). WRK0001–0046
+  retained artifacts were read with their registered scope, failures and historical
+  source cuts. WRK0033/0034 truncation was recovered65efb8/55d99d.
+- WRK0040–0043 classify supplied adverse fixtures; WRK0044/0045 expose conditional
+  premises rather than proving operational authority/restore enforcement. WRK0046
+  supplies a general finite-line consequence of local spent preservation plus a
+  designated restore bridge, with a non-preserving countermodel. None substitutes
+  for all-mutator implementation preservation in this task; none was rerun here.
+- Current samples/README full read recovered truncated middle fdb1b0/c26c74.
+  specs/examples10–16 full; selection/catalog helper behavior and detached expected
+  artifacts remain distinct from ordinary-source execution and observation policy.
+- Read ModuleContractBoundary and ContractExport current source again: module
+  invocation authority and the resource allocator policy are separate inputs.
+  No production bridge or new authorization semantics adopted.
+- Oracle bb2c87 both running, no answer/error; 1cb0be check not due. Existing jobs
+  retained. No extra consultation, baseline, Lean or Rust rerun for this reading
+  metadata delta. Prior kernel/check evidence remains bound to its recorded cut.
+- plan/ 更新不要; Documentation.md 更新不要; docs/project-status.md 更新不要;
+  progress.md 更新不要; tasks.md 更新不要; samples_progress.md 更新不要:
+  same active W2 goal, readiness, commands, sample taxonomy and unresolved gates.
+  READ_LEDGER/RESUME updated only. Not milestone/user-request close.
