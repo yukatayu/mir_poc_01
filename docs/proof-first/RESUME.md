@@ -91,3 +91,27 @@
   historical/current-cut evidence as classified. Do not claim alpha from models.
 - Progress Discord113df5 sent around04:26JST; next roughlyhour or real package close.
   No complete notification until whole user request legitimately ends.
+
+- Forward checkpoint:89177592bc9293e309598de74657998f0d457657 committed3a90aa,
+  pushed76454/2fd138, parity/clean7c2a20. Current own uncommitted delta adds finite
+  IterationSelection controls: one typed expression, count0/1, same reference bound,
+  actual42/None; mismatched stamp, NOT revocation history. Mirror b2d2d4 pass.
+  Conditional secret-count/public-outcome obligation, not deployed leak/IFC theorem.
+  Later docs/checks/read-ledger pending validation. Plans159–177 gaps listed above
+  full-read/hash-ledgered; earlier163/164/171/173–175 already full. Next178.
+  Oracle58b64b still running/no answer. No pending validator or Git job.
+
+- Later IterationBudget delta: general identity iteration returns same token for
+  every Nat, but fixed fuel4 completes at0 and exhausts at3; final mirror0b239bPASS.
+  Distinct from handle selection; no cost/IFC/observer policy proof. Scratch
+  ITERATION_BUDGET_CHECK and W2_EXTENSION_CHECK retain exact cuts. Duplicate-name
+  scratch failure2f818b was corrected by checking only new namespacebbe117; old
+  IterationSelection file restored. Current pure-handle source final hash ledgered.
+  Plans178–198 gaps full/hash-ledgered, earlier181/182/189/199 full; next200.
+  Docs56787 running; no Git job. Existing Oracle jobs retained, last58b64b running.
+
+- Latest budget refinement e5b429PASS: general execution_result_unique and
+  quiet_result_unique compare derivations at common sufficient fuel; standard
+  propext/choice/Quot audited. Docs56787 finishedPASS e4f821,1762reports.
+  RequiredPlan200–202 full/hash-ledgered, next203. Seven own dirty files; final
+  hash/diff then checkpoint/save and continue. Oracleb489f9 running/no answer.

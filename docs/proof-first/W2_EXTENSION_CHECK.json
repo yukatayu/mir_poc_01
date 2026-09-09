@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-09-09T19:23:06.861026+00:00",
+  "timestamp": "2026-09-09T19:39:52.809475+00:00",
   "base_head": "0047e8f8a0fa527ceffa9bd21f77bf65b3f9e9d9",
   "scope": "UNREVIEWED W2 later extension mirror; exact fifteen dependencies, no source/network/alpha acceptance; active Oracle packet excludes three later modules",
   "toolchain": "Lean (version 4.29.1, x86_64-unknown-linux-gnu, commit f72c35b3f637c8c6571d353742168ab66cc22c00, Release)",
@@ -206,7 +206,7 @@
     },
     {
       "source": "samples/lean/foundations/MirroreaProofFirstPureHandleFunctions.lean",
-      "sha256": "4ef350111e40077a7a3fc9e8c7e6d7f1b705b20432537b3e068e089963ef4256",
+      "sha256": "f02d285e69f772b42015d1a7ef4c876b064688326a73ade1af2f167dfcc2981b",
       "command": [
         "lean",
         "--trust=0",
@@ -216,7 +216,7 @@
       ],
       "cwd": "/tmp/mirrorea-proof-first-20260909-gn29zka5/handle-catalog-mirror-048b5dc0",
       "exit_code": 0,
-      "stdout": "'MirroreaProofFirst.PureHandleFunctions.invoke_sound' depends on axioms: [propext, Classical.choice, Quot.sound]\n'MirroreaProofFirst.PureHandleFunctions.no_authority' depends on axioms: [propext, Classical.choice, Quot.sound]\n'MirroreaProofFirst.PureHandleFunctions.stale_module' depends on axioms: [propext, Classical.choice, Quot.sound]\n'MirroreaProofFirst.PureHandleFunctions.carried_invokes' depends on axioms: [propext]\n'MirroreaProofFirst.PureHandleFunctions.infer_exact' depends on axioms: [propext]\n'MirroreaProofFirst.PureHandleFunctions.evaluator_typed' depends on axioms: [propext]\n'MirroreaProofFirst.PureHandleFunctions.execution_complete' depends on axioms: [propext, Classical.choice, Quot.sound]\n'MirroreaProofFirst.PureHandleFunctions.execution_sound' depends on axioms: [propext]\n'MirroreaProofFirst.PureHandleFunctions.execution_exact' depends on axioms: [propext, Classical.choice, Quot.sound]\n'MirroreaProofFirst.PureHandleFunctions.carried_typed' depends on axioms: [propext]\n'MirroreaProofFirst.PureHandleFunctions.carried_evaluates' depends on axioms: [propext]\n'MirroreaProofFirst.PureHandleFunctions.registered_no_authority' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n'MirroreaProofFirst.PureHandleFunctions.registered_sound' depends on axioms: [propext, Classical.choice, Quot.sound]\n'MirroreaProofFirst.PureHandleFunctions.registered_stale' depends on axioms: [propext, Classical.choice, Quot.sound]\n'MirroreaProofFirst.PureHandleFunctions.closed_registered_sound' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n'MirroreaProofFirst.PureHandleFunctions.closed_registered_complete' depends on axioms: [propext]\n'MirroreaProofFirst.PureHandleFunctions.closed_registered_derivation_complete' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n'MirroreaProofFirst.PureHandleFunctions.closed_registered_carried' depends on axioms: [propext]\n'MirroreaProofFirst.PureHandleFunctions.registered_carried' depends on axioms: [propext]\n'MirroreaProofFirst.PureHandleFunctions.ReferencePreservation.registered_uses_existing' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n'MirroreaProofFirst.PureHandleFunctions.ReferencePreservation.Controls.capture_bound_necessary' depends on axioms: [propext]\n'MirroreaProofFirst.PureHandleFunctions.ReferencePreservation.carried_within' depends on axioms: [propext]\n'MirroreaProofFirst.PureHandleFunctions.ReferencePreservation.no_refresh' depends on axioms: [propext]\n'MirroreaProofFirst.PureHandleFunctions.ReferencePreservation.Controls.repeated' depends on axioms: [propext]\n'MirroreaProofFirst.PureHandleFunctions.ReferencePreservation.execution_preserves' depends on axioms: [propext]\n'MirroreaProofFirst.PureHandleFunctions.ReferencePreservation.evaluator_preserves' depends on axioms: [propext]\n'MirroreaProofFirst.PureHandleFunctions.ReferencePreservation.no_new_handle' depends on axioms: [propext]\n",
+      "stdout": "'MirroreaProofFirst.PureHandleFunctions.invoke_sound' depends on axioms: [propext, Classical.choice, Quot.sound]\n'MirroreaProofFirst.PureHandleFunctions.no_authority' depends on axioms: [propext, Classical.choice, Quot.sound]\n'MirroreaProofFirst.PureHandleFunctions.stale_module' depends on axioms: [propext, Classical.choice, Quot.sound]\n'MirroreaProofFirst.PureHandleFunctions.carried_invokes' depends on axioms: [propext]\n'MirroreaProofFirst.PureHandleFunctions.infer_exact' depends on axioms: [propext]\n'MirroreaProofFirst.PureHandleFunctions.evaluator_typed' depends on axioms: [propext]\n'MirroreaProofFirst.PureHandleFunctions.execution_complete' depends on axioms: [propext, Classical.choice, Quot.sound]\n'MirroreaProofFirst.PureHandleFunctions.execution_sound' depends on axioms: [propext]\n'MirroreaProofFirst.PureHandleFunctions.execution_exact' depends on axioms: [propext, Classical.choice, Quot.sound]\n'MirroreaProofFirst.PureHandleFunctions.carried_typed' depends on axioms: [propext]\n'MirroreaProofFirst.PureHandleFunctions.carried_evaluates' depends on axioms: [propext]\n'MirroreaProofFirst.PureHandleFunctions.registered_no_authority' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n'MirroreaProofFirst.PureHandleFunctions.registered_sound' depends on axioms: [propext, Classical.choice, Quot.sound]\n'MirroreaProofFirst.PureHandleFunctions.registered_stale' depends on axioms: [propext, Classical.choice, Quot.sound]\n'MirroreaProofFirst.PureHandleFunctions.closed_registered_sound' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n'MirroreaProofFirst.PureHandleFunctions.closed_registered_complete' depends on axioms: [propext]\n'MirroreaProofFirst.PureHandleFunctions.closed_registered_derivation_complete' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n'MirroreaProofFirst.PureHandleFunctions.closed_registered_carried' depends on axioms: [propext]\n'MirroreaProofFirst.PureHandleFunctions.registered_carried' depends on axioms: [propext]\n'MirroreaProofFirst.PureHandleFunctions.ReferencePreservation.registered_uses_existing' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n'MirroreaProofFirst.PureHandleFunctions.ReferencePreservation.Controls.capture_bound_necessary' depends on axioms: [propext]\n'MirroreaProofFirst.PureHandleFunctions.ReferencePreservation.carried_within' depends on axioms: [propext]\n'MirroreaProofFirst.PureHandleFunctions.ReferencePreservation.no_refresh' depends on axioms: [propext]\n'MirroreaProofFirst.PureHandleFunctions.ReferencePreservation.Controls.repeated' depends on axioms: [propext]\n'MirroreaProofFirst.PureHandleFunctions.ReferencePreservation.execution_preserves' depends on axioms: [propext]\n'MirroreaProofFirst.PureHandleFunctions.ReferencePreservation.evaluator_preserves' depends on axioms: [propext]\n'MirroreaProofFirst.PureHandleFunctions.ReferencePreservation.no_new_handle' depends on axioms: [propext]\n'MirroreaProofFirst.PureHandleFunctions.IterationSelection.typed' depends on axioms: [propext]\n'MirroreaProofFirst.PureHandleFunctions.IterationSelection.same_reference_bound' depends on axioms: [propext]\n'MirroreaProofFirst.PureHandleFunctions.IterationSelection.different_call_outcomes' depends on axioms: [propext]\n'MirroreaProofFirst.PureHandleFunctions.IterationBudget.identity_iteration' depends on axioms: [propext]\n'MirroreaProofFirst.PureHandleFunctions.IterationBudget.quiet_executes' depends on axioms: [propext]\n'MirroreaProofFirst.PureHandleFunctions.IterationBudget.execution_result_unique' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n'MirroreaProofFirst.PureHandleFunctions.IterationBudget.quiet_result_unique' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n'MirroreaProofFirst.PureHandleFunctions.IterationBudget.quiet_typed' depends on axioms: [propext]\n",
       "stderr": ""
     }
   ],
@@ -287,7 +287,7 @@
       "MirroreaProofFirstCurrentUse.lean": "ab604c92b226182bdf84a38caaa044d6b949730891d40a02a72ad441c59f4239"
     }
   },
-  "last_delta": "higher-order reference preservation and hidden closure/environment controls; earlier dependent module records retained",
+  "last_delta": "explicit arbitrary finite execution result uniqueness establishes quiet identity behavior, contrasted with fixed-fuel exhaustion",
   "previous_owner_cuts": [
     {
       "source": "samples/lean/foundations/MirroreaProofFirstOwnerAssignment.lean",
@@ -696,5 +696,80 @@
       }
     ],
     "draft_failures": "f60afd control/proof elaboration fixed648d22; earlier parameter-changing mutant ill-formed and discarded, not semantic evidence"
+  },
+  "previous_iteration_selection_cut": {
+    "source": "samples/lean/foundations/MirroreaProofFirstPureHandleFunctions.lean",
+    "sha256": "4ef350111e40077a7a3fc9e8c7e6d7f1b705b20432537b3e068e089963ef4256",
+    "command": [
+      "lean",
+      "--trust=0",
+      "-o",
+      "MirroreaProofFirstPureHandleFunctions.olean",
+      "MirroreaProofFirstPureHandleFunctions.lean"
+    ],
+    "cwd": "/tmp/mirrorea-proof-first-20260909-gn29zka5/handle-catalog-mirror-048b5dc0",
+    "exit_code": 0,
+    "stdout": "'MirroreaProofFirst.PureHandleFunctions.invoke_sound' depends on axioms: [propext, Classical.choice, Quot.sound]\n'MirroreaProofFirst.PureHandleFunctions.no_authority' depends on axioms: [propext, Classical.choice, Quot.sound]\n'MirroreaProofFirst.PureHandleFunctions.stale_module' depends on axioms: [propext, Classical.choice, Quot.sound]\n'MirroreaProofFirst.PureHandleFunctions.carried_invokes' depends on axioms: [propext]\n'MirroreaProofFirst.PureHandleFunctions.infer_exact' depends on axioms: [propext]\n'MirroreaProofFirst.PureHandleFunctions.evaluator_typed' depends on axioms: [propext]\n'MirroreaProofFirst.PureHandleFunctions.execution_complete' depends on axioms: [propext, Classical.choice, Quot.sound]\n'MirroreaProofFirst.PureHandleFunctions.execution_sound' depends on axioms: [propext]\n'MirroreaProofFirst.PureHandleFunctions.execution_exact' depends on axioms: [propext, Classical.choice, Quot.sound]\n'MirroreaProofFirst.PureHandleFunctions.carried_typed' depends on axioms: [propext]\n'MirroreaProofFirst.PureHandleFunctions.carried_evaluates' depends on axioms: [propext]\n'MirroreaProofFirst.PureHandleFunctions.registered_no_authority' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n'MirroreaProofFirst.PureHandleFunctions.registered_sound' depends on axioms: [propext, Classical.choice, Quot.sound]\n'MirroreaProofFirst.PureHandleFunctions.registered_stale' depends on axioms: [propext, Classical.choice, Quot.sound]\n'MirroreaProofFirst.PureHandleFunctions.closed_registered_sound' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n'MirroreaProofFirst.PureHandleFunctions.closed_registered_complete' depends on axioms: [propext]\n'MirroreaProofFirst.PureHandleFunctions.closed_registered_derivation_complete' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n'MirroreaProofFirst.PureHandleFunctions.closed_registered_carried' depends on axioms: [propext]\n'MirroreaProofFirst.PureHandleFunctions.registered_carried' depends on axioms: [propext]\n'MirroreaProofFirst.PureHandleFunctions.ReferencePreservation.registered_uses_existing' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n'MirroreaProofFirst.PureHandleFunctions.ReferencePreservation.Controls.capture_bound_necessary' depends on axioms: [propext]\n'MirroreaProofFirst.PureHandleFunctions.ReferencePreservation.carried_within' depends on axioms: [propext]\n'MirroreaProofFirst.PureHandleFunctions.ReferencePreservation.no_refresh' depends on axioms: [propext]\n'MirroreaProofFirst.PureHandleFunctions.ReferencePreservation.Controls.repeated' depends on axioms: [propext]\n'MirroreaProofFirst.PureHandleFunctions.ReferencePreservation.execution_preserves' depends on axioms: [propext]\n'MirroreaProofFirst.PureHandleFunctions.ReferencePreservation.evaluator_preserves' depends on axioms: [propext]\n'MirroreaProofFirst.PureHandleFunctions.ReferencePreservation.no_new_handle' depends on axioms: [propext]\n",
+    "stderr": ""
+  },
+  "iteration_selection": {
+    "timestamp": "2026-09-09T19:32:56.020489+00:00",
+    "base_head": "89177592bc9293e309598de74657998f0d457657",
+    "scope": "finite same-expression count-dependent handle selection/call outcome; noncurrent stamp not a revocation history; conditional privacy obligation, not deployed leak",
+    "source_sha256": "bd6d695c043c2dbe076ea3cd66dd2a0f7157fa413cee2bd778f022c9ba87a1ad",
+    "command": [
+      "lean",
+      "--trust=0",
+      "IterationSelection.lean"
+    ],
+    "cwd": "/tmp/mirrorea-proof-first-20260909-gn29zka5/handle-catalog-jxagx7z2",
+    "exit_code": 0,
+    "stdout": "'MirroreaProofFirst.PureHandleFunctions.IterationSelection.typed' depends on axioms: [propext]\n'MirroreaProofFirst.PureHandleFunctions.IterationSelection.same_reference_bound' depends on axioms: [propext]\n'MirroreaProofFirst.PureHandleFunctions.IterationSelection.different_call_outcomes' depends on axioms: [propext]\n",
+    "stderr": ""
+  },
+  "previous_iteration_budget_cut": {
+    "source": "samples/lean/foundations/MirroreaProofFirstPureHandleFunctions.lean",
+    "sha256": "1a74d7ab38d734f9d07bf00b3d132ef3d42176e8f7001c8212577ba4849d9989",
+    "command": [
+      "lean",
+      "--trust=0",
+      "-o",
+      "MirroreaProofFirstPureHandleFunctions.olean",
+      "MirroreaProofFirstPureHandleFunctions.lean"
+    ],
+    "cwd": "/tmp/mirrorea-proof-first-20260909-gn29zka5/handle-catalog-mirror-048b5dc0",
+    "exit_code": 0,
+    "stdout": "'MirroreaProofFirst.PureHandleFunctions.invoke_sound' depends on axioms: [propext, Classical.choice, Quot.sound]\n'MirroreaProofFirst.PureHandleFunctions.no_authority' depends on axioms: [propext, Classical.choice, Quot.sound]\n'MirroreaProofFirst.PureHandleFunctions.stale_module' depends on axioms: [propext, Classical.choice, Quot.sound]\n'MirroreaProofFirst.PureHandleFunctions.carried_invokes' depends on axioms: [propext]\n'MirroreaProofFirst.PureHandleFunctions.infer_exact' depends on axioms: [propext]\n'MirroreaProofFirst.PureHandleFunctions.evaluator_typed' depends on axioms: [propext]\n'MirroreaProofFirst.PureHandleFunctions.execution_complete' depends on axioms: [propext, Classical.choice, Quot.sound]\n'MirroreaProofFirst.PureHandleFunctions.execution_sound' depends on axioms: [propext]\n'MirroreaProofFirst.PureHandleFunctions.execution_exact' depends on axioms: [propext, Classical.choice, Quot.sound]\n'MirroreaProofFirst.PureHandleFunctions.carried_typed' depends on axioms: [propext]\n'MirroreaProofFirst.PureHandleFunctions.carried_evaluates' depends on axioms: [propext]\n'MirroreaProofFirst.PureHandleFunctions.registered_no_authority' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n'MirroreaProofFirst.PureHandleFunctions.registered_sound' depends on axioms: [propext, Classical.choice, Quot.sound]\n'MirroreaProofFirst.PureHandleFunctions.registered_stale' depends on axioms: [propext, Classical.choice, Quot.sound]\n'MirroreaProofFirst.PureHandleFunctions.closed_registered_sound' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n'MirroreaProofFirst.PureHandleFunctions.closed_registered_complete' depends on axioms: [propext]\n'MirroreaProofFirst.PureHandleFunctions.closed_registered_derivation_complete' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n'MirroreaProofFirst.PureHandleFunctions.closed_registered_carried' depends on axioms: [propext]\n'MirroreaProofFirst.PureHandleFunctions.registered_carried' depends on axioms: [propext]\n'MirroreaProofFirst.PureHandleFunctions.ReferencePreservation.registered_uses_existing' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n'MirroreaProofFirst.PureHandleFunctions.ReferencePreservation.Controls.capture_bound_necessary' depends on axioms: [propext]\n'MirroreaProofFirst.PureHandleFunctions.ReferencePreservation.carried_within' depends on axioms: [propext]\n'MirroreaProofFirst.PureHandleFunctions.ReferencePreservation.no_refresh' depends on axioms: [propext]\n'MirroreaProofFirst.PureHandleFunctions.ReferencePreservation.Controls.repeated' depends on axioms: [propext]\n'MirroreaProofFirst.PureHandleFunctions.ReferencePreservation.execution_preserves' depends on axioms: [propext]\n'MirroreaProofFirst.PureHandleFunctions.ReferencePreservation.evaluator_preserves' depends on axioms: [propext]\n'MirroreaProofFirst.PureHandleFunctions.ReferencePreservation.no_new_handle' depends on axioms: [propext]\n'MirroreaProofFirst.PureHandleFunctions.IterationSelection.typed' depends on axioms: [propext]\n'MirroreaProofFirst.PureHandleFunctions.IterationSelection.same_reference_bound' depends on axioms: [propext]\n'MirroreaProofFirst.PureHandleFunctions.IterationSelection.different_call_outcomes' depends on axioms: [propext]\n",
+    "stderr": ""
+  },
+  "iteration_budget": {
+    "timestamp": "2026-09-09T19:37:15.354867+00:00",
+    "scope": "general finite identity iteration versus fixed-budget completion; not a cost or confidentiality theorem",
+    "source_sha256": "f26e0fddea0c7426dbcd2e403f5584bf833884f9b7b9520eeb7094ac7553244c",
+    "dependency_cut": "current source b2d2d4 with IterationSelection",
+    "command": [
+      "lean",
+      "--trust=0",
+      "IterationBudget.lean"
+    ],
+    "cwd": "/tmp/mirrorea-proof-first-20260909-gn29zka5/handle-catalog-jxagx7z2",
+    "exit_code": 0,
+    "stdout": "'MirroreaProofFirst.PureHandleFunctions.IterationBudget.identity_iteration' depends on axioms: [propext]\n'MirroreaProofFirst.PureHandleFunctions.IterationBudget.quiet_executes' depends on axioms: [propext]\n'MirroreaProofFirst.PureHandleFunctions.IterationBudget.quiet_typed' depends on axioms: [propext]\n",
+    "stderr": ""
+  },
+  "previous_iteration_budget_uniqueness_cut": {
+    "source": "samples/lean/foundations/MirroreaProofFirstPureHandleFunctions.lean",
+    "sha256": "f485a8d900a09a9d5b36fbb5f81df7ae04fbaf3319c9a2614456aa954b90e65d",
+    "command": [
+      "lean",
+      "--trust=0",
+      "-o",
+      "MirroreaProofFirstPureHandleFunctions.olean",
+      "MirroreaProofFirstPureHandleFunctions.lean"
+    ],
+    "cwd": "/tmp/mirrorea-proof-first-20260909-gn29zka5/handle-catalog-mirror-048b5dc0",
+    "exit_code": 0,
+    "stdout": "'MirroreaProofFirst.PureHandleFunctions.invoke_sound' depends on axioms: [propext, Classical.choice, Quot.sound]\n'MirroreaProofFirst.PureHandleFunctions.no_authority' depends on axioms: [propext, Classical.choice, Quot.sound]\n'MirroreaProofFirst.PureHandleFunctions.stale_module' depends on axioms: [propext, Classical.choice, Quot.sound]\n'MirroreaProofFirst.PureHandleFunctions.carried_invokes' depends on axioms: [propext]\n'MirroreaProofFirst.PureHandleFunctions.infer_exact' depends on axioms: [propext]\n'MirroreaProofFirst.PureHandleFunctions.evaluator_typed' depends on axioms: [propext]\n'MirroreaProofFirst.PureHandleFunctions.execution_complete' depends on axioms: [propext, Classical.choice, Quot.sound]\n'MirroreaProofFirst.PureHandleFunctions.execution_sound' depends on axioms: [propext]\n'MirroreaProofFirst.PureHandleFunctions.execution_exact' depends on axioms: [propext, Classical.choice, Quot.sound]\n'MirroreaProofFirst.PureHandleFunctions.carried_typed' depends on axioms: [propext]\n'MirroreaProofFirst.PureHandleFunctions.carried_evaluates' depends on axioms: [propext]\n'MirroreaProofFirst.PureHandleFunctions.registered_no_authority' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n'MirroreaProofFirst.PureHandleFunctions.registered_sound' depends on axioms: [propext, Classical.choice, Quot.sound]\n'MirroreaProofFirst.PureHandleFunctions.registered_stale' depends on axioms: [propext, Classical.choice, Quot.sound]\n'MirroreaProofFirst.PureHandleFunctions.closed_registered_sound' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n'MirroreaProofFirst.PureHandleFunctions.closed_registered_complete' depends on axioms: [propext]\n'MirroreaProofFirst.PureHandleFunctions.closed_registered_derivation_complete' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n'MirroreaProofFirst.PureHandleFunctions.closed_registered_carried' depends on axioms: [propext]\n'MirroreaProofFirst.PureHandleFunctions.registered_carried' depends on axioms: [propext]\n'MirroreaProofFirst.PureHandleFunctions.ReferencePreservation.registered_uses_existing' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n'MirroreaProofFirst.PureHandleFunctions.ReferencePreservation.Controls.capture_bound_necessary' depends on axioms: [propext]\n'MirroreaProofFirst.PureHandleFunctions.ReferencePreservation.carried_within' depends on axioms: [propext]\n'MirroreaProofFirst.PureHandleFunctions.ReferencePreservation.no_refresh' depends on axioms: [propext]\n'MirroreaProofFirst.PureHandleFunctions.ReferencePreservation.Controls.repeated' depends on axioms: [propext]\n'MirroreaProofFirst.PureHandleFunctions.ReferencePreservation.execution_preserves' depends on axioms: [propext]\n'MirroreaProofFirst.PureHandleFunctions.ReferencePreservation.evaluator_preserves' depends on axioms: [propext]\n'MirroreaProofFirst.PureHandleFunctions.ReferencePreservation.no_new_handle' depends on axioms: [propext]\n'MirroreaProofFirst.PureHandleFunctions.IterationSelection.typed' depends on axioms: [propext]\n'MirroreaProofFirst.PureHandleFunctions.IterationSelection.same_reference_bound' depends on axioms: [propext]\n'MirroreaProofFirst.PureHandleFunctions.IterationSelection.different_call_outcomes' depends on axioms: [propext]\n'MirroreaProofFirst.PureHandleFunctions.IterationBudget.identity_iteration' depends on axioms: [propext]\n'MirroreaProofFirst.PureHandleFunctions.IterationBudget.quiet_executes' depends on axioms: [propext]\n'MirroreaProofFirst.PureHandleFunctions.IterationBudget.quiet_typed' depends on axioms: [propext]\n",
+    "stderr": ""
   }
 }

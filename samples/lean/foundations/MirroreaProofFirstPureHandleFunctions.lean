@@ -679,3 +679,67 @@ theorem registered_uses_existing {P : HandleValues.Interface size → Prop} {fue
 #print axioms evaluator_preserves
 #print axioms no_new_handle
 end MirroreaProofFirst.PureHandleFunctions.ReferencePreservation
+
+namespace MirroreaProofFirst.PureHandleFunctions.IterationSelection
+open CurrentUse.Controls ModuleContractBoundary.Controls ModuleContractBoundary.DescriptorControl HandleValues.Controls
+-- Same expression and world; only the ordinary natural argument changes.
+-- Calling that input secret and the success/failure observation public is an
+-- explicit conditional scenario, not an adopted label or observer policy.
+def selection : Expr 4 := .iterate .handle (.var 0) (.handle token) (.handle staleToken)
+theorem typed : Typed [.nat] selection .handle := (infer_exact _ _ _).mp (by decide)
+theorem zero_selects : evaluate 4 [.natural 0] selection = some (.handle token) := by rfl
+theorem one_selects : evaluate 4 [.natural 1] selection = some (.handle staleToken) := by rfl
+theorem same_reference_bound (n : Nat) :
+ ReferencePreservation.EnvWithin (fun h => h = token ∨ h = staleToken) [.natural n] ∧
+ ReferencePreservation.ExprWithin (fun h => h = token ∨ h = staleToken) selection := by
+ refine ⟨.cons .natural .nil,?_⟩
+ simp [ReferencePreservation.ExprWithin,selection]
+theorem actual_zero_call : invokeRegistered 4 world registry catalog CurrentUse.Controls.request
+ [41] evidence proof [.natural 0] selection = some 42 := by decide
+theorem actual_one_call : invokeRegistered 4 world registry catalog CurrentUse.Controls.request
+ [41] evidence proof [.natural 1] selection = none := by decide
+theorem different_call_outcomes :
+ invokeRegistered 4 world registry catalog CurrentUse.Controls.request [41] evidence proof [.natural 0] selection ≠
+ invokeRegistered 4 world registry catalog CurrentUse.Controls.request [41] evidence proof [.natural 1] selection := by
+ rw [actual_zero_call,actual_one_call]
+ decide
+-- A fixed public count does not create this two-run variation. A future label
+-- checker must retain a secret count's control/completion dependency; reference
+-- preservation and ordinary typing alone establish no such information-flow law.
+#print axioms typed
+#print axioms same_reference_bound
+#print axioms different_call_outcomes
+end MirroreaProofFirst.PureHandleFunctions.IterationSelection
+
+namespace MirroreaProofFirst.PureHandleFunctions.IterationBudget
+open CurrentUse.Controls ModuleContractBoundary.Controls ModuleContractBoundary.DescriptorControl HandleValues.Controls
+-- Separate budget channel: every finite declarative run returns the SAME token,
+-- yet a fixed evaluator budget may expose count-dependent completion.
+def quiet : Expr 4 := .iterate .handle (.var 0) (.handle token) (.var 0)
+theorem identity_iteration (n : Nat) (env : List (Value size)) (v : Value size) :
+ Executes (.iteration n env (.var 0) v) v := by
+ induction n with
+ | zero => exact .zero
+ | succ n ih => exact .step (.lookupValue rfl) ih
+theorem quiet_executes (n : Nat) : Executes (.expression [.natural n] quiet) (.handle token) :=
+ .iteration (.lookupValue rfl) .handle (identity_iteration n _ _)
+theorem execution_result_unique {task : Task size} {v w : Value size}
+ (a : Executes task v) (b : Executes task w) : v = w := by
+ obtain ⟨f,hf⟩ := execution_complete a
+ obtain ⟨g,hg⟩ := execution_complete b
+ exact Option.some.inj ((hf (max f g) (Nat.le_max_left _ _)).symm.trans
+   (hg (max f g) (Nat.le_max_right _ _)))
+theorem quiet_result_unique {n : Nat} {v : Value 4}
+ (exec : Executes (.expression [.natural n] quiet) v) : v = .handle token :=
+ execution_result_unique exec (quiet_executes n)
+theorem quiet_typed : Typed [.nat] quiet .handle := (infer_exact _ _ _).mp (by decide)
+example : invokeRegistered 4 world registry catalog CurrentUse.Controls.request
+ [41] evidence proof [.natural 0] quiet = some 42 := by decide
+example : invokeRegistered 4 world registry catalog CurrentUse.Controls.request
+ [41] evidence proof [.natural 3] quiet = none := by decide
+#print axioms identity_iteration
+#print axioms quiet_executes
+#print axioms execution_result_unique
+#print axioms quiet_result_unique
+#print axioms quiet_typed
+end MirroreaProofFirst.PureHandleFunctions.IterationBudget

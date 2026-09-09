@@ -197,3 +197,19 @@ This neither authenticates source literals nor grants authority or proves handle
 selection confidentiality. Omitting closure code or captured environments loses
 the property; typed hidden-reference controls and actual iteration/application
 remain nontrivial witnesses. This extension is outside the pending Oracle cut.
+
+A finite fixed-expression counterexample now uses a natural count to select the
+current token at zero and a noncurrent-stamp token at one. Both runs typecheck
+and preserve the same reference bound, but actual registered calls return42
+versus rejection. The noncurrent token has a mismatching revision; no revocation
+history is constructed. If the input is secret and call success is publicly
+observable, a future information-flow checker must retain this count dependency.
+This is an unreviewed conditional obligation, not a deployed disclosure, adopted
+observer policy, or general noninterference result.
+
+A separate identity-iteration example returns the same token for every natural
+count in the independent finite execution relation (general Lean proof), while
+fixed fuel4 completes at count0 and fails at count3. This distinguishes reference
+selection from budget-dependent completion. Neither semantic value equality nor
+existence of sufficient fuel proves fixed-budget success, timing, resource
+noninterference or a public failure policy.

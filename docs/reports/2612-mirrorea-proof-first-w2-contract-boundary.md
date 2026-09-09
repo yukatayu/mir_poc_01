@@ -664,3 +664,47 @@ report was bulk-read. Oracle b8f9ff remains running/promptSubmittedfalse; exec
 polls5128de/50b799 return no new output. Existing jobs preserved. Progress Discord
 113df5 sent around04:26JST; no complete notification or task stop. Save checkpoint
 and continue with requiredPlan158 (157 was already fully read).
+
+Reference checkpoint89177592bc9293e309598de74657998f0d457657 committed3a90aa,
+10files475+/121−, pushed76454/2fd138; exact remote parity and clean tree7c2a20.
+The user task continues. New finite IterationSelection uses one typed expression
+and the same World/caller/proof/catalog, varying only its ordinary Nat input.
+Count0 returns current token and actual42; count1 returns noncurrent stamp and
+actual rejection. Both retain the same reference bound. This pressures a future
+information-flow checker to retain count dependence if input is secret and
+success/failure visible. It does not establish an existing observer disclosure.
+The earlier commentary's word "revoked" was corrected: this token's revision
+is mismatched, and no actual revocation transition/history is supplied.
+Scratch IterationSelection.lean/ITERATION_SELECTION_CHECK.json and final mirrored
+source pass ec08a6/b2d2d4 trust0, propext only for the named controls. Fixed controls
+are not general proofs. W2_EXTENSION_CHECK preserves previous source cut.
+Companion/plan memory updated. Documentation.md/docs/project-status.md/progress.md/
+tasks.md/samples_progress.md 更新不要 for this same-command counterexample: no new
+root, goal, readiness or previously unknown IFC blocker. No runtime/network/restore
+change or test rerun. Oracle58b64b still running/no answer, original jobs retained.
+
+The separate IterationBudget namespace proves identity iteration returns the same
+token for every Nat count in independent finite Executes, while actual fuel4
+registered calls complete at0 and exhaust at3. General value existence/equality
+therefore does not imply fixed-budget completion privacy. Scratch bbe117 and final
+mirror0b239b pass trust0/propext; exact record in W2_EXTENSION_CHECK.iteration_budget.
+A preliminary scratch command2f818b imported the already-mirrored names and failed
+duplicate declarations; it is not evidence of invalid semantics. The original
+IterationSelection scratch bytes were restored, and the new delta was checked in
+its own scratch namespace. Reproduction of current source uses the documented
+fresh-copy whole-module command; old scratch checks bind their earlier cuts.
+No new implementation behavior, label policy or observer interface was selected.
+The same snapshot non-update reasons apply. Required Plans178–198 gaps fully read
+and hash-ledgered (earlier181/182/189/199 already full). New docs validation56787
+is still running; do not count it as a pass until collected.
+
+The budget discriminator now explicitly includes general execution_result_unique
+and quiet_result_unique. Two finite derivations are compared at a common
+sufficient fuel from existing completeness, so the same-token claim concerns
+all actual declarative outcomes, not just one chosen derivation. Final mirror
+e5b429 passes; these consequences inherit standard propext/Classical.choice/
+Quot.sound, separately from the propext-only identity-execution construction.
+No global normalization or budget sufficiency is claimed. Docs56787 finished
+PASS e4f821,1762reports. Current15hash/diff ba01d5 passed before this final
+uniqueness delta; final source record was refreshed by e5b429. Plans200–202 full
+and ledgered. Latest Oracleb489f9 both running/no answer; preserve jobs.

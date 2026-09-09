@@ -20217,5 +20217,271 @@
     "range": "1-155",
     "role": "LAB ADR0014 operating memory; current task-specific authority preserved; no L2 acceptance",
     "status": "full"
+  },
+  {
+    "path": "plan/159-wrk-evidence-commit-integrity-recut.md",
+    "sha256": "53a55035826e73ecf2813b9ae97e37f417ed59467105d5da55eb6a76f67eb5d5",
+    "range": "1-130",
+    "role": "full LAB historical evidence/selection; not current scope authority or acceptance",
+    "status": "full"
+  },
+  {
+    "path": "plan/160-obl021-statement-shape-checkpoint.md",
+    "sha256": "fca12b1f0ad46c4d9b14fa87e638855c04d0907a01c8217cec6fe2b276610ed2",
+    "range": "1-116",
+    "role": "full LAB historical evidence/selection; not current scope authority or acceptance",
+    "status": "full"
+  },
+  {
+    "path": "plan/161-post-checkpoint-candidate-triage-and-runnable-baseline.md",
+    "sha256": "7ed54af90cf1aae9199c3c147733f0b29d795cb91dbb35013885f9e1efbd7180",
+    "range": "1-175",
+    "role": "full LAB historical evidence/selection; not current scope authority or acceptance",
+    "status": "full"
+  },
+  {
+    "path": "plan/162-post-wrk0006-candidate-selection.md",
+    "sha256": "ddaab7d7d90b5aac7bec4c82623098107940a9bad4161a2b9ec2adf6c67e969b",
+    "range": "1-57",
+    "role": "full LAB historical evidence/selection; not current scope authority or acceptance",
+    "status": "full"
+  },
+  {
+    "path": "plan/165-post-wrk0007-candidate-selection.md",
+    "sha256": "a9a95c91a6a0826c6d1949e2159fb3fa2106e7fcbce0c56e0a7f78186b0ee8c3",
+    "range": "1-58",
+    "role": "full LAB historical evidence/selection; not current scope authority or acceptance",
+    "status": "full"
+  },
+  {
+    "path": "plan/166-mir-computational-baseline-directness-audit.md",
+    "sha256": "62f1b4b7a6def0f0bb6bcb3334e997170592b3f48cdf1e8e3718a05c057480bc",
+    "range": "1-72",
+    "role": "full LAB historical evidence/selection; not current scope authority or acceptance",
+    "status": "full"
+  },
+  {
+    "path": "plan/167-pcomp03-rejection-phase-cross-carrier-audit.md",
+    "sha256": "0d75bb6355d516da7b0ac2d06b7f63871ba4973703b5bd3032fb985205a2289a",
+    "range": "1-86",
+    "role": "full LAB historical evidence/selection; not current scope authority or acceptance",
+    "status": "full"
+  },
+  {
+    "path": "plan/168-wrk0009-e5-skeleton-identity-selection.md",
+    "sha256": "72d90c554d2a71bf360095a35b0d72e68128c9e30a24c50abe5c558fb94c9682",
+    "range": "1-64",
+    "role": "full LAB historical evidence/selection; not current scope authority or acceptance",
+    "status": "full"
+  },
+  {
+    "path": "plan/169-wrk0010-static-decision-attribution-selection.md",
+    "sha256": "07b52c5d04f4a3b58be959f075d82549f8d4b3da481482c0b87e4a0685a7c348",
+    "range": "1-28",
+    "role": "full LAB historical evidence/selection; not current scope authority or acceptance",
+    "status": "full"
+  },
+  {
+    "path": "plan/170-post-wrk0011-candidate-selection.md",
+    "sha256": "6c8a85b9be3e3a7bca328068f26e97d9676768db05db9acd5458d4fa1f5c952d",
+    "range": "1-85",
+    "role": "full LAB historical evidence/selection; not current scope authority or acceptance",
+    "status": "full"
+  },
+  {
+    "path": "plan/172-standing-autonomy-lane-correspondence-checkpoint.md",
+    "sha256": "d7f246b9f6fc5419ae01db539beb97a73aa2f2d3782e8f070c51ed44470afe6c",
+    "range": "1-107",
+    "role": "full LAB historical evidence/selection; not current scope authority or acceptance",
+    "status": "full"
+  },
+  {
+    "path": "plan/176-current-standing-candidate-disposition.md",
+    "sha256": "73723b64e6c5e8a314715ea3bb7919e9bbdaff1dfc12f5c9a972b2a309ae11e3",
+    "range": "1-42",
+    "role": "full LAB historical evidence/selection; not current scope authority or acceptance",
+    "status": "full"
+  },
+  {
+    "path": "plan/177-thm005-telemetry-effect-boundary-selection.md",
+    "sha256": "a550bf79b6772537cace7d3d70ad27a7b9bd4026667c962ba60817391e617968",
+    "range": "1-62",
+    "role": "full LAB historical evidence/selection; not current scope authority or acceptance",
+    "status": "full"
+  },
+  {
+    "path": "samples/lean/foundations/MirroreaProofFirstPureHandleFunctions.lean",
+    "sha256": "1a74d7ab38d734f9d07bf00b3d132ef3d42176e8f7001c8212577ba4849d9989",
+    "range": "1-712",
+    "role": "earlier full source plus authored/read same-expression iteration selection counterexample; no independent review",
+    "status": "full"
+  },
+  {
+    "path": "plan/178-post-wrk0018-candidate-rescreen.md",
+    "sha256": "b7d0e65fa4f7031669755ba430b6558b205b5a60120b23c2ee7d72f587fc943c",
+    "range": "1-90",
+    "role": "full historical LAB audit/decision/roadmap, literature claims not externally reverified; no linked-report credit",
+    "status": "full"
+  },
+  {
+    "path": "plan/179-independent-source-locus-audit.md",
+    "sha256": "1f88fcf9e8e83ba330dcb0aa0ded7768c170b3ca7219276787ecdd24a2ad39c1",
+    "range": "1-65",
+    "role": "full historical LAB audit/decision/roadmap, literature claims not externally reverified; no linked-report credit",
+    "status": "full"
+  },
+  {
+    "path": "plan/180-t1-t2-statement-identity-dependency-closure-audit.md",
+    "sha256": "80725fbf9fbdaa45f49406a5d1a7c03e2a1e25f586ad5c0dff9997a963a4a2d1",
+    "range": "1-94",
+    "role": "full historical LAB audit/decision/roadmap, literature claims not externally reverified; no linked-report credit",
+    "status": "full"
+  },
+  {
+    "path": "plan/183-transparent-cost-bound-substitutability-decision.md",
+    "sha256": "284534ba6a0192fff18f741c6be8bf1b5183445633f46f20d1199c322c27d6ca",
+    "range": "1-56",
+    "role": "full historical LAB audit/decision/roadmap, literature claims not externally reverified; no linked-report credit",
+    "status": "full"
+  },
+  {
+    "path": "plan/184-post-wrk0021-autonomous-frontier-triage.md",
+    "sha256": "d148d3d094892c52e53d4b0ccd73bf56cae13537ef0f55c44b6a918b31804ee0",
+    "range": "1-70",
+    "role": "full historical LAB audit/decision/roadmap, literature claims not externally reverified; no linked-report credit",
+    "status": "full"
+  },
+  {
+    "path": "plan/185-cost-bound-substitutability-primary-literature-audit.md",
+    "sha256": "6841fdf2a910f987f595e4b262bd88a574d710b6f2223cbae66ac1d9c343444a",
+    "range": "1-79",
+    "role": "full historical LAB audit/decision/roadmap, literature claims not externally reverified; no linked-report credit",
+    "status": "full"
+  },
+  {
+    "path": "plan/186-canonical-elaboration-trace-interface-closure-audit.md",
+    "sha256": "53b66c5d8a3ac0834e191e7c6d82ba6863383d09ce918736d5d39296949f5b72",
+    "range": "1-90",
+    "role": "full historical LAB audit/decision/roadmap, literature claims not externally reverified; no linked-report credit",
+    "status": "full"
+  },
+  {
+    "path": "plan/187-mircore-value-flow-and-occurrence-decision-packet.md",
+    "sha256": "360e9da45be15a3bcf5f2f4a638af082cb85a1b1f115661f76bcc99cd6154575",
+    "range": "1-131",
+    "role": "full historical LAB audit/decision/roadmap, literature claims not externally reverified; no linked-report credit",
+    "status": "full"
+  },
+  {
+    "path": "plan/188-parser-free-chain-closure-integrity.md",
+    "sha256": "6bdeee9ac55e3dc2ee9bad957b4729495a6c23eeb0bd39d11c0b2414c01b61c5",
+    "range": "1-86",
+    "role": "full historical LAB audit/decision/roadmap, literature claims not externally reverified; no linked-report credit",
+    "status": "full"
+  },
+  {
+    "path": "plan/190-first-unlocking-owner-disposition.md",
+    "sha256": "c2ad4ed7266b53b8958eeb2afe000d7104acf1c407a598d1f03aef525a7d5b22",
+    "range": "1-93",
+    "role": "full historical LAB audit/decision/roadmap, literature claims not externally reverified; no linked-report credit",
+    "status": "full"
+  },
+  {
+    "path": "plan/191-post-wrk0022-autonomous-frontier-triage.md",
+    "sha256": "7bc5fb496c5f79e41d70906ee6b61ff60a05d0167d288498d30b66bbe7cc6f88",
+    "range": "1-90",
+    "role": "full historical LAB audit/decision/roadmap, literature claims not externally reverified; no linked-report credit",
+    "status": "full"
+  },
+  {
+    "path": "plan/192-post-admission-request-validation-context-audit.md",
+    "sha256": "c72330e31a7c1a50680a4a860ff5121309d2db2db7ee3e2a019ecf2311be7a53",
+    "range": "1-93",
+    "role": "full historical LAB audit/decision/roadmap, literature claims not externally reverified; no linked-report credit",
+    "status": "full"
+  },
+  {
+    "path": "plan/193-post-admission-validation-context-literature-and-counterexample-memo.md",
+    "sha256": "82e36cee61cc92311dc93b373c80182d43de4524684b07d8e6f78fd6c6cb94da",
+    "range": "1-98",
+    "role": "full historical LAB audit/decision/roadmap, literature claims not externally reverified; no linked-report credit",
+    "status": "full"
+  },
+  {
+    "path": "plan/194-product-alpha1-installed-binary-replay-evidence.md",
+    "sha256": "856695c9b50755a8b152fe07862821bc5f3892b0f0ae5b2dfd9eb52275f19e7a",
+    "range": "1-69",
+    "role": "full historical LAB audit/decision/roadmap, literature claims not externally reverified; no linked-report credit",
+    "status": "full"
+  },
+  {
+    "path": "plan/195-post-proposal013-autonomous-frontier-delta-audit.md",
+    "sha256": "6ee4c70acb41f4bf31b46bbcbb1bf95fac2ea0d1dd08b57cb8739302fa6a72ff",
+    "range": "1-99",
+    "role": "full historical LAB audit/decision/roadmap, literature claims not externally reverified; no linked-report credit",
+    "status": "full"
+  },
+  {
+    "path": "plan/196-t0-t2-implementation-entry-roadmap.md",
+    "sha256": "3c5a09d1877253ca9530cc7d64448ed1e7e50b7d81506f5effc861d73d3bf63e",
+    "range": "1-447",
+    "role": "full historical LAB audit/decision/roadmap, literature claims not externally reverified; no linked-report credit",
+    "status": "full"
+  },
+  {
+    "path": "plan/197-i1-bootstrap-decision-and-readiness-audit.md",
+    "sha256": "e96d022031562e7f723f83a7c4abc7eddfbf9c117f39b8d56db4e78649bc7b35",
+    "range": "1-252",
+    "role": "full historical LAB audit/decision/roadmap, literature claims not externally reverified; no linked-report credit",
+    "status": "full"
+  },
+  {
+    "path": "plan/198-t0-g0-governance-profile-v2-evaluation.json",
+    "sha256": "cb963838aa99823f7fe3a514aa4f683ae8624cd59d81e63592c3818e5eb9567a",
+    "range": "1-65",
+    "role": "full historical LAB audit/decision/roadmap, literature claims not externally reverified; no linked-report credit",
+    "status": "full"
+  },
+  {
+    "path": "plan/198-t0-g0-governance-profile-v2.md",
+    "sha256": "7a29227b8811af743dca23dac3e2553839b1bb8011baba82cb2f8a2dc169782a",
+    "range": "1-77",
+    "role": "full historical LAB audit/decision/roadmap, literature claims not externally reverified; no linked-report credit",
+    "status": "full"
+  },
+  {
+    "path": "samples/lean/foundations/MirroreaProofFirstPureHandleFunctions.lean",
+    "sha256": "f485a8d900a09a9d5b36fbb5f81df7ae04fbaf3319c9a2614456aa954b90e65d",
+    "range": "1-734",
+    "role": "prior full reading plus authored/read iteration budget general proof and controls; not independent review",
+    "status": "full"
+  },
+  {
+    "path": "plan/200-reanchored-semantic-composition-research-plan.md",
+    "sha256": "a3647e65f7c8568577116c0ac8a0c513f570d9292216f0dc730b45d84f12ebd6",
+    "range": "1-295",
+    "role": "full historical LAB composition plan; no current adoption/linked-report credit",
+    "status": "full"
+  },
+  {
+    "path": "plan/201-c5-a2-issuance-guard-candidate-selection.md",
+    "sha256": "4a543ff38d519d218a1bedb425a70c3f67b6ba8668f925ac155abb6a67062af6",
+    "range": "1-127",
+    "role": "historical LAB admission/value-flow selection, no linked-file full-read credit",
+    "status": "full"
+  },
+  {
+    "path": "plan/202-v1-r1-presentation-refinement-candidate-selection.md",
+    "sha256": "3509613656d1618c03e6e9f6fc7d8bcdaa2ade87e0395c571d5302c9287f7e14",
+    "range": "1-139",
+    "role": "historical LAB admission/value-flow selection, no linked-file full-read credit",
+    "status": "full"
+  },
+  {
+    "path": "samples/lean/foundations/MirroreaProofFirstPureHandleFunctions.lean",
+    "sha256": "f02d285e69f772b42015d1a7ef4c876b064688326a73ade1af2f167dfcc2981b",
+    "range": "1-745",
+    "role": "prior full source plus authored/read execution uniqueness proof for budget discriminator",
+    "status": "full"
   }
 ]
