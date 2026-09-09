@@ -1016,3 +1016,107 @@ whitespaceb1a75e passed. No Oracle or production/alpha acceptance inferred.
 Final docs60012 completed PASS7a62a7. Full source delta7f1035 reviewed; no forbidden
 proof declarations91bd86; whitespaceb1a75e passed. Specs/examples70–76 fully read
 and hash-ledgered as historical LAB. Same W2 goal continues after checkpoint.
+
+### 2026-09-10 06:21 JST — current module/resource authorization composition
+
+
+The later unreviewed CurrentAllocation reference entry keeps current module use
+and resource authorization independent. Both see the same supplied World/request,
+complete carried stamps, actual descriptor/arguments and exact allocation action;
+catalog integrity, checked arithmetic, contract and finite capacity remain checked.
+General exactness, soundness and completeness relative to accepted local contracts
+and intermediate bounds are kernel-checked; denial at either authorization layer
+prevents allocation. This does not issue authority or authenticate the supplied
+joint state. Controls accept42, reject revoked/retired use, absent catalog, exhausted
+IDs and resource denial; refreshing module evidence for request10 does not reuse
+the resource grant for request9. Four skipped/substituted checks fail general
+proofs and concrete controls. A repeat of the same admitted request can allocate
+fresh handles0 and1: request deduplication is NOT provided by current authorization
+or fresh IDs. Atomic coupling of current checks, allocation and durable decision
+history is still an implementation obligation, not a resolved Q-18 protocol.
+No ordinary-source/E2E, network, save/restore, all-mutator, resource/authorization
+information-flow or alpha acceptance follows from this reference composition.
+
+Same W2 goal, PL1 S1/S2 theory/proof/reference and direct consumer. Current candidate
+checks both layers against one supplied state; smallest alternative reuses a
+module authorization as resource authority and is rejected by the denial and
+borrowed-request counterexamples. No production protocol selection or Q-18
+prepare/commit equivalence is adopted. Initial unknown lemmaaf27fa and existential
+shape990783, then control layout8defa6 failed and remain recorded; finaldbaca8 passed
+without sorryAx. Four mutations254043 fail concrete controls and general proofs.
+Existing ModuleContractBoundary extended437→605lines; full15 fresh actual-source
+mirror25760/d86cdb PASS with exact hashes and standard propext/Classical.choice/
+Quot.sound only. No new source module/framework/report. Full specs/examples77–80
+read94416e/8a68b4 as historical LAB, not a current parser contract. Prior checkpoint
+c1470a3f committed6d2e86/pushed1831d3; remote parity586bad. Current delta uncommitted.
+
+plan/ companion updated; progress.md recent log and sample evidence row updated.
+Documentation.md/docs/project-status.md/tasks.md 更新不要: same ten unreviewed W2
+sources and same active goal/blockers; no milestone close or readiness promotion.
+samples/README.md/scripts/README.md 更新不要: no taxonomy or command change.
+No runtime/network/restore rerun: only nonproduction proof extension; earlier real
+source overflow remains unresolved. Oracle jobs running659d17, no final answer,
+these additions excluded from frozen cuts. No independent signed review/subagents.
+Final docs and diff checks pending; continue current consumer research afterward.
+
+### 2026-09-10 06:26 JST — coupled allocation/history reference
+
+
+The further unreviewed Once entry couples successful CurrentAllocation effects to
+an append-only request-key history in one abstract atomic step. For arbitrary
+finite invocation sequences (including changing supplied Worlds, registries and
+grants), general proofs preserve resource WF and history uniqueness and exclude
+a second effect for an already committed key. Failed attempts leave both parts
+unchanged; fresh successful requests can allocate. Keys reuse the existing
+CurrentUse (instance, principal, request) candidate; they are not regenerated from
+changing argument/code/generation fields. A conflicting reuse is rejected, not
+served from a cached result. No public retry/error or request-ID policy is frozen.
+The raw CurrentAllocation entry still admits repeats; only this added reference
+step includes effect/history coupling. It does not acquire an authentic World or
+make two independent physical writes atomic. Resource-only crash survival permits
+repetition; history-only survival blocks the missing effect. These two concrete
+prefix counterexamples require an actual durable mechanism. History compaction,
+finite request namespace/storage exhaustion, concurrent ownership of the decision,
+recovery/fresh-import identity and history/failure information flow remain open.
+Neither Q-18 reservation versus reauthorization nor physical exactly-once delivery
+is selected or proved. Duplicate rejection returns no cached handle or authority.
+
+Same W2 goal and direct resource consumer. Candidate atomic effect/history pair
+versus smallest alternative separate writes: both crash prefixes are decisive
+counterexamples to substituting the latter. This is a bounded reference research
+result, not a new production contract or storage protocol. Scratch8bacc0 kernel
+PASS; first map-simplification5faf90 failed, correctedf55f24; no accepted sorryAx.
+IgnoreHistory/ForgetCommit/ForgetEffect mutantsd23c4d inspectedb04c4b: general
+proofs and concrete controls fail. Controls include successful42 allocation,
+repeat rejection, distinct-request success, denied-then-retry success and the two
+excluded crash-prefix states. ModuleContractBoundary now752lines, no new module.
+Fresh15 actual-source mirror11886 running; do not infer completion until collected.
+Preceding current-allocation docs82438 completed PASSd2cc93; final new-cut docs pending.
+Same documentation/sample/plan update scope and skipped production checks as above.
+Oracle remains pending3de657, no acceptance; no sub-agents or new consultation.
+
+Final current-source mirror11886 completed PASS2bc8aa; current15 hashes/axioms
+match. No current Lean job pending. Final documentation check follows.
+
+Read full sys5_i3_process_snapshot763 (7efdda/6b4106/44dfa6),
+sys5_i3_process_local_cut1203 (917009/a4fb77/b9c2ec/0c628e), and
+sys3_i3_private_snapshot2805 (b0a038 through f3ff95), hash-ledgered. The projection
+DTO carries persistence responsibility categories, not a post-execution committed
+resource/history image; private child seed restoration still needs separate trusted
+start binding. Custody guards reject active asynchronous obligations/retained ingress/
+owner reservations/pending reply but are not durable allocation/history transactions.
+No claim about uninspected downstream runtime paths. Focused existing six snapshot
+tests launched87275 under PROJECTION_SNAPSHOT_REGRESSION; collect actual result.
+Resources ff6727/5f50c3:59GiB free,12GiB RAM available; cached build, no heavy new
+workdir or cleanup. Docs98910 still pending. Discord progress4fc23c06:28JST sent;
+next roughly07:28, no completion. Oracle3aaa05 both running/no final answer.
+
+Existing snapshot regression87275 completed0ea8ca:6 PASS/392 filtered/0 ignored,
+27.36s cached lib-test build,30 warnings; exact command/stdout/stderr retained in
+W2_EXTENSION_CHECK. No actual network or effect/history persistence claim.
+Nested local-cut tests386lines fully readb2c7dc; feature-specific suite not rerun.
+Current proof delta source review78c3b4/c1e024 and whitespace8f2108 pass.
+
+Final documentation validator98910 completed PASSf9fdda. Remaining changes are
+evidence/read/continuation metadata. Final JSON/hash/diff checked before checkpoint.
+No validation/Lean/Git process pending; keep the two Oracle jobs.

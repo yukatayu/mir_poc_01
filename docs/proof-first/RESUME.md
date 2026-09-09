@@ -1,122 +1,71 @@
 # Proof-first RESUME — continuation, not closeout
 
-Updated 2026-09-10 05:45 JST. Sole main agent: user forbids ALL sub-agents/child Codex/
-delegated writers. Keep going after checkpoints. User objective remains proof-first
-foundations → gated existing implementation → verified ordinary-source real-network,
-hotplug, recovery and private-observation alpha candidate. No alpha/W2 acceptance.
+Updated 2026-09-10 06:31 JST (clock8bb195). Main alone; user forbids ALL subagents,
+child Codex and delegated writers. Do not stop at this checkpoint. Objective:
+proof-first foundation → gated existing implementation → verified ordinary-source,
+real-network/hotplug/recovery/private-observation alpha candidate. No alpha acceptance.
 
-## Current cut / active goal
+- Base HEAD c1470a3fdcf2b0da69f30c4221c1b3f7ed2d3e27: bounded allocation commit6d2e86,
+  normal push1831d3, remote equality586bad. Nine own dirty files: ModuleContractBoundary,
+  Contracts companion, W2_EXTENSION_CHECK, READ_LEDGER, RESUME, Report2612,
+  correspondence plan, progress, samples_progress. No Canon/production Rust/handoff
+  edits. Own commit --no-gpg-sign + normal push authorized; no reset/clean/force.
+- Single active goal W2-local-contract-resource, PL1 S1/S2 theory/proof/reference.
+  U05/07/09/14/17 TY01–08 ID07 SL08 PT01/02/04/05/11/12 SC03/14/17/19/24 Q03/Q19;
+  owner/capture U01/02 SL02/03 PT01/02/03 SC01/02 Q01/Q02. Direct consumer:
+  reusable computation→actual positive length→exclusive resources, preserving
+  independent current authority, code/contract binding and nonduplication.
+- Ten W2 Lean candidates remain UNREVIEWED; no production reliance, I3-4/Plan250
+  resume, THM/OBL/phase or signed acceptance. Q01/Q02/Q18 still open.
+- Current ModuleContractBoundary752lines adds CurrentAllocation and Once. General
+  exactness/soundness/relative completeness expose separate current-use and exact
+  resource grant, catalog, actual checked arithmetic and finite capacity. Borrowing
+  another invocation's grant fails. Raw CurrentAllocation permits repeat allocation;
+  Once couples effect+history in one abstract step and proves finite-schedule WF,
+  history uniqueness and no second effect for an existing key. Different request
+  succeeds, failed attempt leaves state/history unchanged. Physical resource-only
+  or history-only crash survival gives duplicate/lost effect counterexamples.
+  No real atomic mechanism, durable/authenticated joint head, all-mutators, finite
+  history capacity, network/recovery/IFC guarantee. No Q18 protocol selection.
+- Final scratchdbaca8/8bacc0 PASS; four current-gate mutants254043 and three history/
+  effect mutantsd23c4d fail both general proofs and controls. Failed drafts retained.
+  Fresh15 current source mirror11886/2bc8aa PASS, exact hashes/standard axioms checked
+  8bb195; no sorry/admit/Mir axioms0b23c7. Source diff78c3b4/c1e024 reviewed,
+  whitespace169e24 PASS. Docs98910 completed PASSf9fdda; later metadata only.
+- Existing snapshot regression87275/0ea8ca:6 PASS,392 filtered,0 ignored; cached
+  27.36s build,30 warnings. Exact command/logs in W2_EXTENSION_CHECK. Projection DTO
+  persistence responsibility plan is not post-execution effect/history state.
+  No actual network/restore rerun. Earlier source multiplication overflow still
+  open: checker accepts square/cancellation, runtime MAX/large intermediate panics.
+- No validation/Lean/Git job pending. Next: checkpoint own delta, push/verify parity,
+  then full-read sys5_i3_process_runtime.rs12168 and private QUIC2772 before claiming
+  an actual mechanism. Required corpus specs/examples next85. Keep same W2 goal.
 
-- Checkpoint base494571ea29d18d2080cdc18dcb520dcb676bb1c7, totality commitd95399 and normal
-  push202165 successful; clean253915 before latest extension. Initial baseline
-  7feef371bcd8dcd49f4855aeb172e631e70743bc. Current nine own dirty files:
-  ContractExport, Contracts companion, W2_EXTENSION_CHECK, READ_LEDGER, RESUME,
-  Report2612, plan/proof-first-foundation-correspondence, progress, samples_progress.
-  No Canon/production Rust/handoff mutation. Own commits normal push authorized;
-  --no-gpg-sign, no reset/clean/force. No Git/Lean process pending.
-- Single active semantic goal W2-local-contract-resource, PL1 S1/S2 theory/proof/
-  nonproduction reference. U05/07/09/14/17, TY01–08 ID07 SL08,
-  PT01/02/04/05/11/12 SC03/14/17/19/24 Q03/Q19. Owner/capture U01/02,
-  SL02/03 PT01/02/03 SC01/02 Q01/Q02. Direct consumer: reusable pure computation
-  → actual positive length → exclusive resources, preserving independent current
-  authority, code/contract/theory binding and nonduplicating ownership.
-- Ten W2 Lean candidates remain UNREVIEWED. Report2612/Contracts companion record
-  limits; report2611 retains prior scoped W1 and baseline evidence. No production
-  reliance, Plan250 resume, signed acceptance or THM/OBL/phase update.
+Read evidence: READ_LEDGER.json hashes/ranges authoritative; plan all302 current
+files full, specs00–43 and examples00–84 full. Newly full: sys5 process snapshot763,
+localcut1203/tests386, sys3 private snapshot2805. Large required samples/docs/source
+corpus remains unread. Index/grep never count as full read; no whole-roadmap adoption.
 
-## Latest evidence and pending command
+Workroot /tmp/mirrorea-proof-first-20260909-gn29zka5. Handoff originals immutable.
+/mnt/mirrorea-work absent/unmounted; resourceff6727/5f50c3:59GiB disk/12GiB RAM
+available. Reuse configured cached target for small checks; no cleanup/host-share.
+Pointers CURRENT_ALLOCATION_WORKDIR/MIRROR, ALLOCATION_ONCE_WORKDIR/MIRROR,
+PROJECTION_SNAPSHOT_REGRESSION retain source/commands/results. Old scratch imports
+can duplicate appended names; reproduce fresh whole modules per samples/lean/README.
 
-- PureHandleFunctions typed-environment totality was committed494571ea:
-  af22c3 whole-module PASS; no fixed-budget/currentness/auth/IFC guarantee.
-- Existing ContractExport now536lines, adds RequestAllocation and CheckedArithmetic,
-  including failure-inclusive local flow. Request exactness binds whole existing
-  Binding/exact Action/current reference State to independent trusted callback;
-  this is not full CurrentUse context, an issuer or all-mutator authorization.
-- Checked arithmetic exact independent rules, math/scope/range soundness,
-  success iff scoped inputs/all-intermediate mathematical bounds, accepted length
-  to checked value; conditional two-run Option equality. Secret square completion
-  remains observable after successful-payload erasure. No final numeric/failure/
-  label policy, cost/geometry/auth-callback IFC or actual implementation refinement.
-- Scratch108312/request, e70a96/arithmetic,38863f/flow PASS. Ignored auth/wrong length,
-  unchecked intermediate/default missing input/ignored square flow mutants rejected.
-  Failed drafts retained, no accepted sorryAx. Fresh15 whole-source trust=0 rebuild
-  e432a9 PASS. Current hashes/axioms in W2_EXTENSION_CHECK; earlier cuts preserved.
-- Actual offline/locked example builds393a60/e5566b succeed (runtime31 warnings).
-  Source checker accepts square-plus-one and cancellation; session01ccde yields10
-  at-3, but MAX square and mathematically9 cancellation exit101 multiply overflow.
-  Wrong preexisting test-harness invocation29b683 is invocation error only.
-  Exact source texts/hashes, binary hashes and outputs preserved in check record.
-- Focused318-line source delta reviewed e3db2d/3efc16; diff8fe215 PASS.
-  Docs10674 preceding cut PASS22fc04; final95362 PASS e86e3e. Last doc additions are evidence/continuation records.
-  Then final JSON/hash/diff inspection, own checkpoint normal push, continue work.
-
-## Corpus and workdirs
-
-- plan/ all302 current files full/hash-ledgered. specs/examples00–65 full; next66.
-  Large specs/samples/docs required corpus still unread; no new whole-project
-  roadmap adoption. Index/grep/links never count as full reads. READ_LEDGER records
-  hash/range; historical helper proposals/fixture comparisons are LAB, not proofs.
-- Workroot /tmp/mirrorea-proof-first-20260909-gn29zka5. Original handoff immutable;
-  copied baselines retained. /mnt/mirrorea-work absent/unmounted; last817528 root
-  59GiB free/12GiB RAM available. Existing target reused for small cached builds;
-  no cleanup/large new root workdir/host-share use. Recheck before heavy work.
-- Pointers ALLOCATION_REQUEST_WORKDIR→allocation-request-binding-fo86o09w,
-  CHECKED_ARITHMETIC_WORKDIR→checked-contract-arithmetic-npt5atdt,
-  CONTRACT_REQUEST_MACHINE_FLOW_MIRROR→latest fresh15 build. Previous mirror
-  pointers retained; old scratch imports may duplicate later appended names.
-  Reproduce fresh whole modules per samples/lean/README, not blindly old scratch.
-
-## Oracle jobs — preserve, no duplicate
-
-- Manuals already read; main alone operates. >=180s per-job status checks using
-  LAST_CHECK_UTC/READ_LOG_LINES. Lasta30fad both running/no error/no final answer.
-  No arbitrary deadline/cancel/duplicate/paid fallback or review-success inference.
-- W1 mirrorea-source-boundary, exec54675, oracle-source-boundary;
+Oracle main-operated read-only jobs: preserve both; >=180s per-job status via
+LAST_CHECK_UTC. Last3aaa05 both running/no error/no answer. No arbitrary deadline,
+duplicate/cancel/paid fallback or review-success inference.
+- W1 exec54675, oracle-source-boundary, slug mirrorea-source-boundary,
   Q314b9ca87817061575b5313db3877cd7fb4fd663209e0a49283d6b311bb5d6e8.
-  Frozen Abort/Address/earlier source only; W2 excluded.
-- Original W2 mirrorea-w2-resource-contract, exec19233 TERMINAL profile-lock error
-  before submissioncbabfe; do not poll/retry it.
-- Revised W2 mirrorea-w2-integrated-review, exec4661, oracle-w2-integrated-attach;
+- Revised W2 exec4661, oracle-w2-integrated-attach, slug mirrorea-w2-integrated-review,
   Q5dd28908150125d782d8af3a68c711d9df76790848c9bf091b185d15d8f5d6ff.
-  Frozen12 kernel14551/d73aae PASS. Excludes Profile/Handle/PureHandle and all later
-  Capture/catalog/reference/totality/request/machine/flow changes. No inherited review.
-- Browser1852807/controller1852666/port34829. Browser CDP answers, targeted ChatGPT
-  page commands have not; screenshot internal error2f56ee. Login/dialog failure
-  not proven, user browser-display question pending. Preserve jobs, do not alter
-  unrelated processes. ORACLE_ATTACH_METADATA_PATH is private; never log key/
-  cookie/WS metadata. Later delta review needed when usable, not another duplicate.
-- Discord progress ea4212~05:28JST; next roughlyhour or material package checkpoint.
-  No complete notification until this entire request legitimately ends.
+  Frozen12 includes original W2/OwnerAssignment only. ALL later extensions excluded.
+- Original W2 exec19233 terminal pre-submission profile-lock errorcbabfe; no retry.
+Browser1852807/controller1852666/port34829; CDP responds but targeted page commands
+have not. No proven auth/dialog failure. User browser-display question pending.
+Don't alter unrelated processes/profile; never print cookies/WS/key metadata.
+Oracle advice is not proof, authority, signed review or independent kernel execution.
 
-Next: verify/checkpoint own delta; continue same W2 direct
-consumer obligations and required corpus66. Current source refinement/authenticated
-head/registry transitions/all-mutators/capture provenance/real-network/restore and
-119-row disposition remain open. Q01/Q02/Q18 and signed acceptance not bypassed.
-
-Forward checkpoint869965f369e3170ae1954948dd3a675c7661897e committed75ee64,
-pushed6f1759, remote equality86739d, clean dd1f32. No Git job pending.
-Bounded identifier research now under BOUNDED_RESOURCE_WORKDIR pointer:
-bounded-resource-identifiers-3bldiy43. c35f3d PASS includes exact all-four-operation
-capacity guard, schedule bounded WF/nonresurrection, remaining-capacity guard
-without additions, native-bound consequence. Positive/exhaustion/release controls;
-wrap-after-release can satisfy spatial WF yet resurrect stale handle. Rejected
-State.ext/function-simplification drafts retained; final no sorryAx. IgnoreCapacity
-and OneIdentifierForSplit mutants2ae568 reject with concrete failures. Still scratch,
-not production/ABI/allocator/auth/restore acceptance. BOUNDED_RESOURCE_DEPENDENCIES
-fresh15 candidate copy build running; next collect then compose actual checked
-local-contract evaluation + independent auth + finite allocation in reference
-without claiming actual-source/E2E refinement. Required corpus next68.
-
-Bounded composition final4b6a4c PASS: actual finite arithmetic + contract value +
-independent request gate + bounded allocator; skip-machine/capacity mutants fail
-concrete controls and general proofs. Failed layout/bind drafts retained. Mirrored
-ResourceBoundary651/ContractExport624, c13eec. Fresh15 mirror37970 completed4fa406
-PASS, current hashes and printed axioms checked; pointer BOUNDED_ALLOCATION_MIRROR.
-Docs/plan/progress/sample/report updated05:58JST; final docs60012 running, collect.
-Current ten own dirty files; source review/diff/JSON then normal checkpoint push.
-Required specs/examples00–69 full, next70. Keep same W2 goal; not alpha/production.
-
-Final bounded-cut verification: docs60012 completed PASS7a62a7; final source delta
-review7f1035 and whitespaceb1a75e passed, forbidden proof declarations91bd86 none.
-Current15 mirror4fa406 and hash/axiom audit8ad609 pass. Specs/examples70–76 were
-fully read (fe5893,575c64,506874) and hash-ledgered; next77. Same W2 goal.
+Discord progress4fc23c06:28JST sent; next roughly07:28 or material package checkpoint.
+No complete notification until this entire request legitimately ends.

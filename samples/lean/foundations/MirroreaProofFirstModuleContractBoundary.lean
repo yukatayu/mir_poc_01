@@ -435,3 +435,318 @@ theorem missing_catalog_entry_rejected (s : CurrentUse.World n) (registry : Regi
 #print axioms no_catalog_revives_module
 #print axioms missing_catalog_entry_rejected
 end MirroreaProofFirst.ModuleContractBoundary
+
+
+-- Unreviewed reference composition. World, registry and allocation grant are
+-- independent trusted inputs; no distributed atomic snapshot or issuer is derived.
+namespace MirroreaProofFirst.ModuleContractBoundary.CurrentAllocation
+open ContractExport ResourceBoundary
+
+abbrev Grant (n : Nat) := CurrentUse.World n → CurrentUse.UseRequest n →
+ Descriptor → State → Action → Bool
+
+def run (limits : BoundedIdentifiers.Limits) (lo hi : Int)
+ (world : CurrentUse.World n) (registry : Registry n) (catalog : Catalog)
+ (u : CurrentUse.UseRequest n) (args : List Int) (auth : CurrentUse.Evidence)
+ (p : CallProof n) (grant : Grant n) (state : State) : Option (State × List Handle) :=
+ match registry u.operation.key with
+ | none => none
+ | some d =>
+   if catalog d.codeId = some d ∧ CurrentUse.checkUse world u auth = true ∧
+       linkCheck world u d args p = true then
+     CheckedAllocation.run limits lo hi
+       (fun s _ a => grant world u d s a) state (expected world u d args) p.payload
+   else none
+
+theorem exact (limits : BoundedIdentifiers.Limits) (lo hi : Int)
+ (world : CurrentUse.World n) (registry : Registry n) (catalog : Catalog)
+ (u : CurrentUse.UseRequest n) (args : List Int) (auth : CurrentUse.Evidence)
+ (p : CallProof n) (grant : Grant n) (state : State) (out : State × List Handle) :
+ run limits lo hi world registry catalog u args auth p grant state = some out ↔
+ ∃ d value, registry u.operation.key = some d ∧ catalog d.codeId = some d ∧
+ CurrentUse.checkUse world u auth = true ∧ Linked world u d args p ∧
+ CheckedArithmetic.Denotes lo hi args d.code p.payload.result ∧
+ accept (expected world u d args) p.payload = some value ∧
+ grant world u d state (.allocate u.principal value) = true ∧
+ BoundedIdentifiers.Capacity limits state (.allocate u.principal value) ∧
+ out = raw state (.allocate u.principal value) := by
+ unfold run
+ cases lookup : registry u.operation.key with
+ | none => simp
+ | some d =>
+   have guarded (condition : Prop) [Decidable condition]
+       (value : Option (State × List Handle)) :
+       (if condition then value else none) = some out ↔
+       condition ∧ value = some out := by
+     by_cases h : condition <;> simp [h]
+   simp only [Option.some.injEq]
+   rw [guarded]
+   simp only [CheckedAllocation.run_exact, expected, CheckedArithmetic.exact,
+     link_exact]
+   constructor
+   · rintro ⟨⟨registered,current,linked⟩,machine,value,accepted,granted,capacity,result⟩
+     exact ⟨d,value,rfl,registered,current,linked,machine,accepted,granted,capacity,result⟩
+   · rintro ⟨found,value,hfound,registered,current,linked,machine,accepted,granted,capacity,result⟩
+     subst found
+     exact ⟨⟨registered,current,linked⟩,machine,value,accepted,granted,capacity,result⟩
+
+-- This conclusion does not equate either authorization layer with a certificate.
+theorem sound {limits : BoundedIdentifiers.Limits} {lo hi : Int}
+ {world : CurrentUse.World n} {registry : Registry n} {catalog : Catalog}
+ {u : CurrentUse.UseRequest n} {args : List Int} {auth : CurrentUse.Evidence}
+ {p : CallProof n} {grant : Grant n} {state : State} (wf : WF state)
+ {out : State × List Handle}
+ (ok : run limits lo hi world registry catalog u args auth p grant state = some out) :
+ CurrentUse.CurrentUse world u ∧ ∃ d value,
+ registry u.operation.key = some d ∧ catalog d.codeId = some d ∧
+ Linked world u d args p ∧ PositiveExport (expected world u d args) p.payload value ∧
+ CheckedArithmetic.Denotes lo hi args d.code p.payload.result ∧
+ grant world u d state (.allocate u.principal value) = true ∧
+ WF out.1 ∧ BoundedIdentifiers.Within limits out.1 := by
+ obtain ⟨d,value,lookup,registered,current,linked,machine,accepted,granted,capacity,rfl⟩ :=
+   (exact _ _ _ _ _ _ _ _ _ _ _ _ _).mp ok
+ exact ⟨CurrentUse.checkUse_sound _ _ _ current,d,value,lookup,registered,linked,
+   accept_sound accepted,machine,granted,
+   allocate_wf wf _ _ (accept_bound accepted).1,
+   (BoundedIdentifiers.raw_within _ _ _).mpr capacity⟩
+
+theorem lawful_completes {limits : BoundedIdentifiers.Limits} {lo hi : Int}
+ {world : CurrentUse.World n} {registry : Registry n} {catalog : Catalog}
+ {u : CurrentUse.UseRequest n} {args : List Int} {p : CallProof n} {grant : Grant n}
+ {state : State} {d : Descriptor} {value : Nat}
+ (live : CurrentUse.CurrentUse world u) (lookup : registry u.operation.key = some d)
+ (registered : catalog d.codeId = some d) (linked : Linked world u d args p)
+ (accepted : accept (expected world u d args) p.payload = some value)
+ (bounds : CheckedArithmetic.Bounds lo hi args d.code)
+ (granted : grant world u d state (.allocate u.principal value) = true)
+ (capacity : BoundedIdentifiers.Capacity limits state (.allocate u.principal value)) :
+ ∃ auth, run limits lo hi world registry catalog u args auth p grant state =
+   some (raw state (.allocate u.principal value)) := by
+ obtain ⟨auth,current⟩ := CurrentUse.checkUse_complete _ _ live
+ have machine := CheckedArithmetic.accepted_machine_value accepted bounds
+ rw [CheckedAllocation.accepted_result accepted] at machine
+ refine ⟨auth,(exact _ _ _ _ _ _ _ _ _ _ _ _ _).mpr ?_⟩
+ exact ⟨d,value,lookup,registered,current,linked,
+   (CheckedArithmetic.exact _ _ _ _ _).mp machine,accepted,granted,capacity,rfl⟩
+
+theorem current_denied (limits : BoundedIdentifiers.Limits) (lo hi : Int)
+ (world : CurrentUse.World n) (registry : Registry n) (catalog : Catalog)
+ (u : CurrentUse.UseRequest n) (args : List Int) (auth : CurrentUse.Evidence)
+ (p : CallProof n) (grant : Grant n) (state : State)
+ (denied : ¬ CurrentUse.CurrentUse world u) :
+ run limits lo hi world registry catalog u args auth p grant state = none := by
+ cases h : run limits lo hi world registry catalog u args auth p grant state with
+ | none => rfl
+ | some out =>
+   obtain ⟨_,_,_,_,current,_⟩ := (exact _ _ _ _ _ _ _ _ _ _ _ _ _).mp h
+   exact False.elim (denied (CurrentUse.checkUse_sound _ _ _ current))
+
+theorem resource_denied (limits : BoundedIdentifiers.Limits) (lo hi : Int)
+ (world : CurrentUse.World n) (registry : Registry n) (catalog : Catalog)
+ (u : CurrentUse.UseRequest n) (args : List Int) (auth : CurrentUse.Evidence)
+ (p : CallProof n) (grant : Grant n) (state : State)
+ (denied : ∀ d value, grant world u d state (.allocate u.principal value) = false) :
+ run limits lo hi world registry catalog u args auth p grant state = none := by
+ cases h : run limits lo hi world registry catalog u args auth p grant state with
+ | none => rfl
+ | some out =>
+   obtain ⟨d,value,_,_,_,_,_,_,granted,_⟩ := (exact _ _ _ _ _ _ _ _ _ _ _ _ _).mp h
+   rw [denied d value] at granted
+   contradiction
+
+namespace Controls
+open ModuleContractBoundary.Controls CurrentUse.Controls
+-- This finite test grant explicitly sees the context, complete carried stamps,
+-- descriptor and requested allocation. It is not a cryptographic issuer model.
+def grant : Grant 4 := fun w u d _ action =>
+ decide (CurrentUse.currentContext w u = CurrentUse.currentContext world request ∧
+   u.moduleHandle = request.moduleHandle ∧ u.operation = request.operation ∧
+   d = descriptor ∧ action = .allocate 3 42)
+def result := (run ⟨1,1⟩ (-100) 100 world registry DescriptorControl.catalog
+ request [41] evidence proof grant empty).map
+ (fun out => out.2.map (fun h => (h.id,h.region.hi,h.region.holder)))
+example : result = some [(0,42,3)] := by decide
+example : run ⟨1,1⟩ (-100) 100 world registry DescriptorControl.catalog
+ request [41] evidence proof (fun _ _ _ _ _ => false) empty = none := by decide
+example : run ⟨1,1⟩ (-100) 100 {world with authority := {auth with revoked := [2]}}
+ registry DescriptorControl.catalog request [41] evidence proof
+ (fun _ _ _ _ _ => true) empty = none := by decide
+example : run ⟨1,1⟩ (-100) 100 retiredWorld registry DescriptorControl.catalog
+ request [41] evidence proof (fun _ _ _ _ _ => true) empty = none := by decide
+example : run ⟨1,1⟩ (-100) 100 world registry (fun _ => none)
+ request [41] evidence proof grant empty = none := by decide
+example : run ⟨0,1⟩ (-100) 100 world registry DescriptorControl.catalog
+ request [41] evidence proof grant empty = none := by decide
+-- Refresh the valid module-layer evidence for a different invocation; that
+-- does not refresh the independent resource grant for the original invocation.
+def other : CurrentUse.UseRequest 4 := {request with request := 10}
+def otherEvidence : CurrentUse.Evidence :=
+ {evidence with context := CurrentUse.currentContext world other}
+def otherProof : CallProof 4 :=
+ {proof with
+  context := CurrentUse.currentContext world other
+  payload := {proof.payload with binding := expected world other descriptor [41]}}
+example : catalogCall world registry DescriptorControl.catalog other [41] otherEvidence otherProof = some 42 := by decide
+example : run ⟨1,1⟩ (-100) 100 world registry DescriptorControl.catalog
+ other [41] otherEvidence otherProof grant empty = none := by decide
+-- Current authorization and fresh resource IDs do not supply request deduplication.
+def repeated := (run ⟨2,2⟩ (-100) 100 world registry DescriptorControl.catalog
+ request [41] evidence proof grant empty).bind fun first =>
+ (run ⟨2,2⟩ (-100) 100 world registry DescriptorControl.catalog
+ request [41] evidence proof grant first.1).map fun second =>
+ (first.2.map Handle.id,second.2.map Handle.id)
+example : repeated = some ([0],[1]) := by decide
+end Controls
+#print axioms exact
+#print axioms sound
+#print axioms lawful_completes
+#print axioms current_denied
+#print axioms resource_denied
+end MirroreaProofFirst.ModuleContractBoundary.CurrentAllocation
+
+-- Unreviewed atomic reference step; crash-prefix mechanisms remain unproved.
+
+namespace MirroreaProofFirst.ModuleContractBoundary.CurrentAllocation.Once
+open ResourceBoundary
+-- Reference inputs, not a wire format or trusted-head acquisition mechanism.
+structure Invocation (n : Nat) where
+ limits : BoundedIdentifiers.Limits
+ lo : Int
+ hi : Int
+ world : CurrentUse.World n
+ registry : Registry n
+ catalog : Catalog
+ request : CurrentUse.UseRequest n
+ arguments : List Int
+ evidence : CurrentUse.Evidence
+ proof : CallProof n
+ grant : Grant n
+
+def Invocation.key (i : Invocation n) : CurrentUse.UseId :=
+ (CurrentUse.currentContext i.world i.request).useId
+
+def Invocation.allocate (i : Invocation n) (s : State) : Option (State × List Handle) :=
+ run i.limits i.lo i.hi i.world i.registry i.catalog i.request i.arguments
+ i.evidence i.proof i.grant s
+
+structure StateWithHistory where
+ resources : State
+ committed : List CurrentUse.UseId
+
+def step (i : Invocation n) (s : StateWithHistory) : Option (StateWithHistory × List Handle) :=
+ if i.key ∈ s.committed then none else
+ (i.allocate s.resources).map fun out => (⟨out.1,i.key :: s.committed⟩,out.2)
+
+theorem step_exact (i : Invocation n) (s : StateWithHistory)
+ (out : StateWithHistory × List Handle) :
+ step i s = some out ↔ i.key ∉ s.committed ∧
+ ∃ result, i.allocate s.resources = some result ∧
+ out = (⟨result.1,i.key :: s.committed⟩,result.2) := by
+ by_cases h : i.key ∈ s.committed
+ · simp [step,h]
+ · cases allocated : i.allocate s.resources <;> simp [step,h,allocated,eq_comm]
+
+def advance (i : Invocation n) (s : StateWithHistory) : StateWithHistory :=
+ ((step i s).map Prod.fst).getD s
+
+theorem committed_retained (i : Invocation n) (s : StateWithHistory)
+ (key : CurrentUse.UseId) (present : key ∈ s.committed) :
+ key ∈ (advance i s).committed := by
+ cases h : step i s with
+ | none => simpa [advance,h] using present
+ | some out =>
+   obtain ⟨_,result,_,rfl⟩ := (step_exact _ _ _).mp h
+   simpa [advance,h] using List.mem_cons_of_mem i.key present
+
+theorem advance_wf (i : Invocation n) (s : StateWithHistory) (wf : WF s.resources)
+ (unique : s.committed.Nodup) :
+ WF (advance i s).resources ∧ (advance i s).committed.Nodup := by
+ cases h : step i s with
+ | none => simpa [advance,h] using And.intro wf unique
+ | some out =>
+   obtain ⟨fresh,result,allocated,rfl⟩ := (step_exact _ _ _).mp h
+   have preserved := (CurrentAllocation.sound wf allocated).2
+   obtain ⟨_,_,_,_,_,_,_,_,wf',_⟩ := preserved
+   simpa [advance,h,List.nodup_cons] using And.intro wf' (And.intro fresh unique)
+
+def schedule : StateWithHistory → List (Invocation n) → StateWithHistory
+ | s,[] => s
+ | s,i::rest => schedule (advance i s) rest
+
+theorem schedule_retains (s : StateWithHistory) (is : List (Invocation n))
+ (key : CurrentUse.UseId) (present : key ∈ s.committed) :
+ key ∈ (schedule s is).committed := by
+ induction is generalizing s with
+ | nil => exact present
+ | cons i is ih => exact ih _ (committed_retained i s key present)
+
+theorem schedule_wf (s : StateWithHistory) (is : List (Invocation n))
+ (wf : WF s.resources) (unique : s.committed.Nodup) :
+ WF (schedule s is).resources ∧ (schedule s is).committed.Nodup := by
+ induction is generalizing s with
+ | nil => exact ⟨wf,unique⟩
+ | cons i is ih =>
+   obtain ⟨wf',unique'⟩ := advance_wf i s wf unique
+   exact ih _ wf' unique'
+
+theorem no_second_effect {i : Invocation n} {s : StateWithHistory}
+ {out : StateWithHistory × List Handle} (success : step i s = some out)
+ (later : List (Invocation n)) (again : Invocation n) (same : again.key = i.key) :
+ step again (schedule out.1 later) = none := by
+ obtain ⟨_,result,_,rfl⟩ := (step_exact _ _ _).mp success
+ have retained := schedule_retains
+   (⟨result.1,i.key :: s.committed⟩ : StateWithHistory) later i.key (by simp)
+ simp [step,same,retained]
+
+theorem failure_unchanged (i : Invocation n) (s : StateWithHistory)
+ (failure : step i s = none) : advance i s = s := by simp [advance,failure]
+
+theorem fresh_success (i : Invocation n) (s : StateWithHistory)
+ (fresh : i.key ∉ s.committed) (allocated : i.allocate s.resources = some result) :
+ step i s = some (⟨result.1,i.key :: s.committed⟩,result.2) :=
+ (step_exact _ _ _).mpr ⟨fresh,result,allocated,rfl⟩
+
+namespace Controls
+open ModuleContractBoundary.Controls CurrentUse.Controls
+
+def invocation : Invocation 4 :=
+ {limits := ⟨3,3⟩, lo := -100, hi := 100, world := world,
+  registry := registry, catalog := DescriptorControl.catalog, request := request,
+  arguments := [41], evidence := evidence, proof := proof,
+  grant := CurrentAllocation.Controls.grant}
+def initial : StateWithHistory := ⟨empty,[]⟩
+def first := advance invocation initial
+example : first.resources.nextId = 1 ∧ first.committed = [invocation.key] := by decide
+example : step invocation first = none := by decide
+example : (schedule initial [invocation,invocation]).resources.nextId = 1 := by decide
+-- Different requests can succeed; this is not an all-rejection safety argument.
+def other : Invocation 4 :=
+ {invocation with
+  request := CurrentAllocation.Controls.other
+  evidence := CurrentAllocation.Controls.otherEvidence
+  proof := CurrentAllocation.Controls.otherProof
+  grant := fun _ _ _ _ _ => true}
+example : (schedule initial [invocation,other]).resources.nextId = 2 := by decide
+example : (schedule initial [invocation,other]).committed.length = 2 := by decide
+-- An unsuccessful attempt does not consume the logical key.
+def denied : Invocation 4 := {invocation with grant := fun _ _ _ _ _ => false}
+example : (schedule initial [denied,invocation]).resources.nextId = 1 := by decide
+example : (schedule initial [denied,invocation]).committed.length = 1 := by decide
+-- Crash-prefix models are deliberately outside the atomic step relation.
+-- Resource write surviving while the history write is lost permits repetition.
+def lostHistory : StateWithHistory := ⟨first.resources,[]⟩
+example : (advance invocation lostHistory).resources.nextId = 2 := by decide
+-- Conversely, history surviving without the effect blocks the missing allocation.
+def lostEffect : StateWithHistory := ⟨empty,first.committed⟩
+example : step invocation lostEffect = none := by decide
+example : lostEffect.resources.nextId = 0 := by decide
+end Controls
+#print axioms step_exact
+#print axioms committed_retained
+#print axioms advance_wf
+#print axioms schedule_retains
+#print axioms schedule_wf
+#print axioms no_second_effect
+#print axioms failure_unchanged
+#print axioms fresh_success
+end MirroreaProofFirst.ModuleContractBoundary.CurrentAllocation.Once

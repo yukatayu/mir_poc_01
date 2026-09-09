@@ -21764,5 +21764,117 @@
     "range": "1-235",
     "role": "Full historical LAB document read; no proof-first adoption inferred.",
     "status": "full"
+  },
+  {
+    "path": "specs/examples/77-current-l2-stage1-parser-smoke-family-working-set.md",
+    "sha256": "8ea5c7d6509e7e0f9bd700a4104fc10dc07af19c752f0fd0c41ebd34bffa2187",
+    "range": "1-148",
+    "role": "Full historical LAB read or prior full read plus fully authored current unreviewed extension.",
+    "status": "full"
+  },
+  {
+    "path": "specs/examples/78-current-l2-stage1-parser-spike-placement-and-compare-surface.md",
+    "sha256": "f75c470fdc954a9faa469ca37a5b02b1730741ee08ae59c6f8516e78413aa9ac",
+    "range": "1-197",
+    "role": "Full historical LAB read or prior full read plus fully authored current unreviewed extension.",
+    "status": "full"
+  },
+  {
+    "path": "specs/examples/79-current-l2-stage1-parser-spike-input-surface-and-helper-naming.md",
+    "sha256": "e8bd9f7a3e668477ae523cef660b7147972b6f36cd42c920c9eff91c5ad0cac2",
+    "range": "1-265",
+    "role": "Full historical LAB read or prior full read plus fully authored current unreviewed extension.",
+    "status": "full"
+  },
+  {
+    "path": "specs/examples/80-current-l2-stage1-parser-spike-first-tranche-actualization.md",
+    "sha256": "288cf46375cc1760483d25d231f0221fb81242be93a56de2193a4c1609195979",
+    "range": "1-161",
+    "role": "Full historical LAB read or prior full read plus fully authored current unreviewed extension.",
+    "status": "full"
+  },
+  {
+    "path": "samples/lean/foundations/MirroreaProofFirstModuleContractBoundary.lean",
+    "sha256": "9c89c3269f006e42c06e6b05e8d79aac3634e0bb4f0fd759ecd48c6ba88070e5",
+    "range": "1-605",
+    "role": "Full historical LAB read or prior full read plus fully authored current unreviewed extension.",
+    "status": "full"
+  },
+  {
+    "path": "plan/proof-first-foundation-correspondence.md",
+    "sha256": "21d8325addbc298b1b1399df6996b339fd678695ad97fd423e7f1dba24fd9e33",
+    "range": "1-325",
+    "role": "Full historical LAB read or prior full read plus fully authored current unreviewed extension.",
+    "status": "full"
+  },
+  {
+    "path": "specs/examples/81-current-l2-stage1-parser-spike-malformed-source-comparison.md",
+    "sha256": "794d6b819d847cd019593fa71c09734a224290f9560f62490fae377354623821",
+    "range": "1-175",
+    "role": "Full historical LAB read or prior full read plus fully authored unreviewed extension.",
+    "status": "full"
+  },
+  {
+    "path": "specs/examples/82-current-l2-stage1-parser-spike-malformed-source-first-tranche-actualization.md",
+    "sha256": "fa6e70f631fada24a57fd0c3920dab4f463b402870bf9589f5825e053a183773",
+    "range": "1-92",
+    "role": "Full historical LAB read or prior full read plus fully authored unreviewed extension.",
+    "status": "full"
+  },
+  {
+    "path": "samples/lean/foundations/MirroreaProofFirstModuleContractBoundary.lean",
+    "sha256": "7e04549d0f15b0ddf85809147873115d5723fd5d6aaf8c24f8386e370433f1e6",
+    "range": "1-752",
+    "role": "Full historical LAB read or prior full read plus fully authored unreviewed extension.",
+    "status": "full"
+  },
+  {
+    "path": "plan/proof-first-foundation-correspondence.md",
+    "sha256": "902f5c2977f0264c3391fb2fa781ac69740cbe85d3372cd5b0ab891d446481e2",
+    "range": "1-345",
+    "role": "Full historical LAB read or prior full read plus fully authored unreviewed extension.",
+    "status": "full"
+  },
+  {
+    "path": "specs/examples/83-current-l2-stage3-admit-slot-branch-comparison.md",
+    "sha256": "60b23c05d5a36c182390279613a5be1c135bd4f4a986d9edbd622c8bd80d1163",
+    "range": "1-137",
+    "role": "Full LAB source/document read; process bootstrap snapshot/custody boundary, not proof-first durable effect/history refinement.",
+    "status": "full"
+  },
+  {
+    "path": "specs/examples/84-current-l2-stage3-admit-slot-carrier-and-compare-surface.md",
+    "sha256": "1cd524289ab21bb537871bd0d035f65d94ea19768853a9255a94943d2629e44b",
+    "range": "1-261",
+    "role": "Full LAB source/document read; process bootstrap snapshot/custody boundary, not proof-first durable effect/history refinement.",
+    "status": "full"
+  },
+  {
+    "path": "crates/mir-runtime/src/sys5_i3_process_snapshot.rs",
+    "sha256": "1b7434865cb41e29623f7513ee6a4e695b00539d77b589f528fed3795c0133eb",
+    "range": "1-763",
+    "role": "Full LAB source/document read; process bootstrap snapshot/custody boundary, not proof-first durable effect/history refinement.",
+    "status": "full"
+  },
+  {
+    "path": "crates/mir-runtime/src/sys5_i3_process_local_cut.rs",
+    "sha256": "ae1a66e3535bca72d79c2002f3bf4ec701ea954c2b2128b03d4da7e0a7accd29",
+    "range": "1-1203",
+    "role": "Full LAB source/document read; process bootstrap snapshot/custody boundary, not proof-first durable effect/history refinement.",
+    "status": "full"
+  },
+  {
+    "path": "crates/mir-runtime/src/sys3_i3_private_snapshot.rs",
+    "sha256": "d86463afa750b301625f9e83d7eef7e1805a5e9029c1f326460ba1c88ba4937c",
+    "range": "1-2805",
+    "role": "Full source and nested tests read; projection DTO including persistence responsibility plan, not dynamic committed-effect recovery.",
+    "status": "full"
+  },
+  {
+    "path": "crates/mir-runtime/src/sys5_i3_process_local_cut_tests.rs",
+    "sha256": "39ceaec5521ca2969e6b5dbd22a86aec30de27da222ec740586092bf4a9bb3da",
+    "range": "1-386",
+    "role": "Full nested local custody tests read; feature-gated LOCAL evidence, not actual child/QUIC/durable recovery.",
+    "status": "full"
   }
 ]

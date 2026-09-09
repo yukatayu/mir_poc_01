@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-09-10 05:58 JST
+最終更新: 2026-09-10 06:26 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -310,3 +310,7 @@ The authorized roadmap is paused, not blocked, stale or closed.
 - 2026-09-10 05:37 JST: W2局所契約→資源確保の要求結合と有限範囲演算を参照Leanで検査。中間値境界の必要性を一般命題・変異で確認し、通常sourceの乗算overflowを実checker/実interpreterで再現。実装未修正・未review・α未達。
 
 - 2026-09-10 05:58 JST: W2有限識別子容量と非再利用履歴の保存を全4資源操作・任意有限列でLean検査し、有限演算/契約/独立認可からの確保へ参照接続。枯渇・巻戻し再生・検査迂回の反例を保持。未review、実装/実network/α接続は未達。
+
+- 2026-09-10 06:21 JST: W2参照境界の二層認可・有限割当をLean検査（fresh15 PASS）。別要求への権限流用は拒否、同一要求の重複割当は未防止という反例を記録。未受理・実機接続未達。
+
+- 2026-09-10 06:26 JST: W2参照の割当＋要求履歴を原子的に更新する場合の重複効果排除をLean検査。別々の保存では重複／欠落となる反例を確認。永続化・並行実機構は未確立。

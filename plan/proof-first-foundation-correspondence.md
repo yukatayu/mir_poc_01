@@ -305,3 +305,41 @@ nonproduction reference composition, not ordinary-source/parser/IR or network E2
 refinement. Callback authenticity/currentness, allocation cost/geometry information
 flow, actual memory failure, physical atomicity and recovery remain open. Neither
 unbounded IDs nor recycled finite slots are silently adopted for production.
+
+
+The later unreviewed CurrentAllocation reference entry keeps current module use
+and resource authorization independent. Both see the same supplied World/request,
+complete carried stamps, actual descriptor/arguments and exact allocation action;
+catalog integrity, checked arithmetic, contract and finite capacity remain checked.
+General exactness, soundness and completeness relative to accepted local contracts
+and intermediate bounds are kernel-checked; denial at either authorization layer
+prevents allocation. This does not issue authority or authenticate the supplied
+joint state. Controls accept42, reject revoked/retired use, absent catalog, exhausted
+IDs and resource denial; refreshing module evidence for request10 does not reuse
+the resource grant for request9. Four skipped/substituted checks fail general
+proofs and concrete controls. A repeat of the same admitted request can allocate
+fresh handles0 and1: request deduplication is NOT provided by current authorization
+or fresh IDs. Atomic coupling of current checks, allocation and durable decision
+history is still an implementation obligation, not a resolved Q-18 protocol.
+No ordinary-source/E2E, network, save/restore, all-mutator, resource/authorization
+information-flow or alpha acceptance follows from this reference composition.
+
+
+The further unreviewed Once entry couples successful CurrentAllocation effects to
+an append-only request-key history in one abstract atomic step. For arbitrary
+finite invocation sequences (including changing supplied Worlds, registries and
+grants), general proofs preserve resource WF and history uniqueness and exclude
+a second effect for an already committed key. Failed attempts leave both parts
+unchanged; fresh successful requests can allocate. Keys reuse the existing
+CurrentUse (instance, principal, request) candidate; they are not regenerated from
+changing argument/code/generation fields. A conflicting reuse is rejected, not
+served from a cached result. No public retry/error or request-ID policy is frozen.
+The raw CurrentAllocation entry still admits repeats; only this added reference
+step includes effect/history coupling. It does not acquire an authentic World or
+make two independent physical writes atomic. Resource-only crash survival permits
+repetition; history-only survival blocks the missing effect. These two concrete
+prefix counterexamples require an actual durable mechanism. History compaction,
+finite request namespace/storage exhaustion, concurrent ownership of the decision,
+recovery/fresh-import identity and history/failure information flow remain open.
+Neither Q-18 reservation versus reauthorization nor physical exactly-once delivery
+is selected or proved. Duplicate rejection returns no cached handle or authority.
