@@ -54,7 +54,7 @@ Plan250 の I3-4 resume、正式 THM/OBL の更新、production / α受理では
 - [Aborting sequences](foundations/MirroreaProofFirstAbortFlow.md): 失敗による後続依存と完了 bit の分離。追加候補の Oracle review は回収待ち。
 - [Reference resolution](foundations/MirroreaProofFirstAddressFlow.md): 別名を許す固定参照解決と評価・checker・実行列の対応。同じ review cut。
 - [Passive observation](foundations/MirroreaProofFirstPassive.md): 有限消去と、別の二実行保証。限定された数学的範囲のreview済み。
-- [W2 contracts/resources/functions](foundations/MirroreaProofFirstContracts.md): 資源の分割・移譲、局所契約からの値の輸出、純粋な高階関数・有限反復と実行対応。6ファイルの研究候補であり、Oracle review と既存Mirへの接続は未完了。
+- [W2 contracts/resources/functions](foundations/MirroreaProofFirstContracts.md): 資源の分割・移譲、局所契約からの値の輸出、純粋な高階関数・有限反復と実行対応。10ファイルの研究候補であり、Oracle review と既存Mirへの接続は未完了。
 
 これらは `current_l2_lean_sample_sync.py` の生成対象・manifest 集計外です。
 一般命題は Lean4.29.1 の kernel で検査し、各ファイルの `#print axioms`
@@ -73,7 +73,8 @@ names = ["Support", "CurrentUse", "CurrentUseReview", "TrackedValidation",
          "GraphValidation", "GraphReview", "Passive", "ProducerFlow",
          "GeneralLabels", "FallibleFlow", "AbortFlow", "AddressFlow",
          "ResourceBoundary", "LocalContract", "ContractExport", "PureFunctions",
-         "FunctionContractBridge", "ModuleContractBoundary"]
+         "FunctionContractBridge", "ModuleContractBoundary", "OwnerAssignment",
+         "ProfileGuarantees", "HandleValues", "PureHandleFunctions"]
 work = pathlib.Path(tempfile.mkdtemp(prefix="mir-proof-first-",
                                   dir=os.environ.get("PROOF_WORKDIR")))
 print(work, flush=True)

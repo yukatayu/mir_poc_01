@@ -420,8 +420,8 @@ The same fresh-copy Lean command also checks the task-local AbortFlow and
 AddressFlow candidates. Their coherent kernel result is recorded separately from
 the pending source-boundary Oracle review; no runtime or alpha acceptance follows.
 
-The fresh-copy command includes the six W2 resource/contract/pure-function
+The fresh-copy command includes the ten W2 resource/contract/pure-function and owner/capture/handle
 modules documented in `MirroreaProofFirstContracts.md`. Report2612 and
-`docs/proof-first/W2_INTEGRATED_CHECK.json` retain their scoped mathematical
+`docs/proof-first/W2_INTEGRATED_CHECK.json` and `W2_EXTENSION_CHECK.json` retain their scoped mathematical
 evidence separately from pending review and production implementation obligations.
 No additional runtime wrapper or generated evidence chain is introduced.

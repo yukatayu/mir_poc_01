@@ -50,7 +50,7 @@ I3-4/I3-5/I3-6/NEXT-0 remain dependency-gated inactive; I3-4 requires explicit o
 
 今回の別依頼は task-local proof-first LAB 研究と理論gate後の限定実装。
 現在の単一研究goalは W2-local-contract-resource（PL1 S1/S2、theory/proof）。
-W2の資源保存・正確な分割とframe・局所契約輸出・純粋な高階関数と有限反復・値の実行対応と現在moduleへの契約結合を6つのLean候補で機械検査（未review）。W1では一般Leanの条件付き命題を検査し、passive/accepted producer・一般label・失敗を伴う単一代入は限定範囲のsource review済み。失敗時の後続処理・別名解決・実source有限対応は別cutのreview待ち（Oracleへの送信未確認）。
+W2の資源保存・正確な分割とframe・局所契約輸出・純粋な高階関数と有限反復・値の実行対応と現在moduleへの契約結合に加え、owner/capture・非空な契約前提・高階handle受渡しを10のLean候補で機械検査（未review）。W1では一般Leanの条件付き命題を検査し、passive/accepted producer・一般label・失敗を伴う単一代入は限定範囲のsource review済み。失敗時の後続処理・別名解決・実source有限対応は別cutのreview待ち（Oracleへの送信未確認）。
 後続の代入admission・実結果/frame検査は未review。一般のsource/実装対応、119行disposition、α統合は未達。
 M8 trusted setupの実効label不一致を実再現し、観測refinementの未解決義務とした。
 根拠は `plan/proof-first-foundation-correspondence.md`、`docs/reports/2611-mirrorea-proof-first-w1-foundations.md`、`docs/reports/2612-mirrorea-proof-first-w2-contract-boundary.md`。

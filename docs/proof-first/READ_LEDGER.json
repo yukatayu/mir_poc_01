@@ -19601,5 +19601,222 @@
     "range": "1-148",
     "role": "LAB historical repository memory; full text read, not active queue",
     "status": "full"
+  },
+  {
+    "path": "plan/81-g1-obl024-statement-shape-inventory.md",
+    "sha256": "f4ec1a5c49e9ef4f6853689f03382900bcf6813acc3e2febdd7686a5adca05a1",
+    "range": "1-213",
+    "role": "LAB historical repository memory; full text read, not active queue",
+    "status": "full"
+  },
+  {
+    "path": "plan/82-g1-obl025-statement-shape-inventory.md",
+    "sha256": "a56aa6cfd5ecf45d8524ee531ce5eff09c2f6ab31a59371e796af362cc73333b",
+    "range": "1-218",
+    "role": "LAB historical repository memory; full text read, not active queue",
+    "status": "full"
+  },
+  {
+    "path": "plan/83-g1-erow-repair-payload-inventory.md",
+    "sha256": "db047df2012116721c8a44848abe6feeee7b3925222e609faefa7a1189a1c0a2",
+    "range": "1-200",
+    "role": "LAB historical repository memory; full text read, not active queue",
+    "status": "full"
+  },
+  {
+    "path": "plan/84-g1-erow-carrier-only-diagnostic-detail-prototype.md",
+    "sha256": "58701d60e6251cebf5de66ad8792ab7d9c1d0ea2f4cdf1b3413bf1967e8538de",
+    "range": "1-131",
+    "role": "LAB historical repository memory; full text read, not active queue",
+    "status": "full"
+  },
+  {
+    "path": "plan/85-g1-erow-carrier-precondition-hardening.md",
+    "sha256": "d105d12e24212fbe3bcfcf34c5bbfd6011b18d42d071e2bf63c9cc32c4cb0c39",
+    "range": "1-157",
+    "role": "LAB historical repository memory; full text read, not active queue",
+    "status": "full"
+  },
+  {
+    "path": "plan/86-g1-erow002-visibility-repair-carrier-prototype.md",
+    "sha256": "f24700df90e31fdb67c7fd8e31a6d972a509a590e53587dbd0e65a588d56aa3b",
+    "range": "1-140",
+    "role": "LAB historical repository memory; full text read, not active queue",
+    "status": "full"
+  },
+  {
+    "path": "plan/87-g1-obl025-lean-statement-draft.md",
+    "sha256": "1eff36cabad9dc709787fce4b76b13bd3250e5bbf83cd53a04c765a2ad3aa630",
+    "range": "1-216",
+    "role": "LAB historical repository memory; full text read, not active queue",
+    "status": "full"
+  },
+  {
+    "path": "plan/88-g1-erow-repair-shape-inventory.md",
+    "sha256": "707107d4166efc987579b91917259c0289ffb41dc5b87190737521b225174a20",
+    "range": "1-231",
+    "role": "LAB historical repository memory; full text read, not active queue",
+    "status": "full"
+  },
+  {
+    "path": "plan/89-g1-erow001-non-visibility-singleton-fixture.md",
+    "sha256": "1ce7434730ab73533cd7f9035a61ef9df81e533f2e97279a9bdf9a65989d85fc",
+    "range": "1-150",
+    "role": "LAB repository memory; traceability index does not credit referenced files",
+    "status": "full"
+  },
+  {
+    "path": "plan/90-source-traceability.md",
+    "sha256": "7423157e25cf92e6b83e59dd8b492f700730542782c76733943489a642ef0861",
+    "range": "1-124",
+    "role": "LAB repository memory; traceability index does not credit referenced files",
+    "status": "full"
+  },
+  {
+    "path": "plan/91-maintenance-rules.md",
+    "sha256": "1766fb41854c8a6ecbe957c456276b8ab44c462b1d758acce6a0b422f2887ad6",
+    "range": "1-192",
+    "role": "LAB repository memory; traceability index does not credit referenced files",
+    "status": "full"
+  },
+  {
+    "path": "plan/92-g1-erow001-base-singleton-fixture-closure.md",
+    "sha256": "6c6ec6df38e48c8e88679393c529b23da2e4b29a89158286b5234e4ef76a8ce4",
+    "range": "1-149",
+    "role": "LAB repository memory; traceability index does not credit referenced files",
+    "status": "full"
+  },
+  {
+    "path": "plan/93-g1-erow001-singleton-repair-assumption.md",
+    "sha256": "6f7f7d62511f44cedabbaafa45f757ad91ed4cbb13e77a10ba38a8f0e337aa38",
+    "range": "1-209",
+    "role": "LAB historical diagnostics/repair memory, not current proof-first authority",
+    "status": "full"
+  },
+  {
+    "path": "plan/94-g1-erow001-singleton-repair-prototype.md",
+    "sha256": "8e8ea9ed4ce72212110f0b55665db7c4bdfd82fb763ea61913088e7f6333eafa",
+    "range": "1-172",
+    "role": "LAB historical diagnostics/repair memory, not current proof-first authority",
+    "status": "full"
+  },
+  {
+    "path": "plan/95-g1-erow-mixed-multi-repair-decomposition-inventory.md",
+    "sha256": "3e5a0e3445e77417f3f35f3b47ba4bd9b826193e575fd5cd526d275f5b49661c",
+    "range": "1-267",
+    "role": "LAB historical diagnostics/repair memory, not current proof-first authority",
+    "status": "full"
+  },
+  {
+    "path": "plan/96-g1-erow-set-insertion-bundle-payload-inventory.md",
+    "sha256": "41a8904a7cdb6b919ce67a472b5856abdbde655f43de5121617c31b9c28b7760",
+    "range": "1-376",
+    "role": "LAB historical diagnostics/repair memory, not current proof-first authority",
+    "status": "full"
+  },
+  {
+    "path": "plan/97-g1-erow07-set-insertion-gate-review.md",
+    "sha256": "4e15caddc8005cb9d01843943da9e3f80b3177ea08616c4794931206f6f00441",
+    "range": "1-261",
+    "role": "LAB historical exact repair scope; not proof-first acceptance",
+    "status": "full"
+  },
+  {
+    "path": "plan/98-g1-erow04-mixed-visibility-branch-inventory.md",
+    "sha256": "e619bf568c89ab4927099593266cbd852ab2a20beb2c327d3218cd3d145b5165",
+    "range": "1-298",
+    "role": "LAB historical exact repair scope; not proof-first acceptance",
+    "status": "full"
+  },
+  {
+    "path": "plan/99-g1-erow07-set-insertion-executable-preflight.md",
+    "sha256": "d3e2d8e03d50145f0efdb3f0e7b6ebd04ef1f57542767c5d320a61ff6fbbcaed",
+    "range": "1-375",
+    "role": "LAB historical exact repair scope; not proof-first acceptance",
+    "status": "full"
+  },
+  {
+    "path": "plan/100-g1-erow07-set-insertion-assumption-acceptance.md",
+    "sha256": "f0c2b7df52764f802bc84babab55820aaa09c99eef4192db0b76e23bd6206f02",
+    "range": "1-384",
+    "role": "LAB historical exact repair scope; not proof-first acceptance",
+    "status": "full"
+  },
+  {
+    "path": "plan/101-g1-erow07-set-insertion-payload-model-design.md",
+    "sha256": "c1ecd40274131da256c214e84c0436bbcdf99a44b54b1775a87c1d54f6e68a39",
+    "range": "1-377",
+    "role": "LAB historical exact repair scope; not proof-first acceptance",
+    "status": "full"
+  },
+  {
+    "path": "plan/102-g1-erow07-set-insertion-executable-payload-prototype.md",
+    "sha256": "2b59a7072eae3ca136bd188823f4a2a30ceaa6f7010353bbd9a635313eb24847",
+    "range": "1-248",
+    "role": "LAB historical exact repair scope; not proof-first acceptance",
+    "status": "full"
+  },
+  {
+    "path": "plan/103-g1-erow07-set-insertion-negative-guard-hardening.md",
+    "sha256": "6d4e9544d635ff7232ed447d0ca5322415acadc766ff95ed1b48e955764e27fd",
+    "range": "1-201",
+    "role": "LAB exact diagnostic guard history; not new runtime example-specific semantics",
+    "status": "full"
+  },
+  {
+    "path": "plan/104-g1-erow07-set-insertion-row-identity-guard-hardening.md",
+    "sha256": "3785f2f204d63493bca479b4532806ec8f9ea8ebeeb28e722aba1c18894aa81c",
+    "range": "1-176",
+    "role": "LAB exact diagnostic guard history; not new runtime example-specific semantics",
+    "status": "full"
+  },
+  {
+    "path": "plan/105-g1-erow07-set-insertion-exact-locus-guard-hardening.md",
+    "sha256": "ab13eec39ad4050b2c427b19098032972d39a53fe25674299681446c93a33180",
+    "range": "1-201",
+    "role": "LAB exact diagnostic guard history; not new runtime example-specific semantics",
+    "status": "full"
+  },
+  {
+    "path": "plan/106-g1-erow07-child-bundle-partial-exclusion-fixtures.md",
+    "sha256": "ea31c757dc2d08fb1976a193cbac6a9c525b50682fac41c05a4f10695d349f34",
+    "range": "1-177",
+    "role": "LAB exact diagnostic guard history; not new runtime example-specific semantics",
+    "status": "full"
+  },
+  {
+    "path": "plan/107-g1-erow04-mixed-visibility-payload-model-preflight.md",
+    "sha256": "c2e41f5ef1451ce5a56c8e52f53f530c03eb9544d1c60ec9836053ab84e9ecb0",
+    "range": "1-300",
+    "role": "LAB historical branch-local versus whole-gap coverage",
+    "status": "full"
+  },
+  {
+    "path": "plan/108-g1-obl025-branch-local-noncoverage-refinement.md",
+    "sha256": "7f564bcf2d0610285cea1a6b34570cd29f9719f13098e3c943b194d164a8d35c",
+    "range": "1-209",
+    "role": "LAB historical branch-local versus whole-gap coverage",
+    "status": "full"
+  },
+  {
+    "path": "samples/lean/foundations/MirroreaProofFirstProfileGuarantees.lean",
+    "sha256": "ed37618c40cf6d918bc57361828e6bf30903780ec33324c8b114bbd5a2d605b3",
+    "range": "1-43",
+    "role": "own UNREVIEWED W2 source full self-review after mirror",
+    "status": "full"
+  },
+  {
+    "path": "samples/lean/foundations/MirroreaProofFirstHandleValues.lean",
+    "sha256": "3aa61e701f7e4a7e4f1e3956b2ba08da23210ef35e7d304ae72ec43ba9d1421f",
+    "range": "1-143",
+    "role": "own UNREVIEWED W2 source full self-review after mirror",
+    "status": "full"
+  },
+  {
+    "path": "samples/lean/foundations/MirroreaProofFirstPureHandleFunctions.lean",
+    "sha256": "9b641985790aa183c41f8a6b1d5f8208672301ae644ab1aa43400dacc0d73c13",
+    "range": "1-420",
+    "role": "own UNREVIEWED W2 source full self-review after mirror",
+    "status": "full"
   }
 ]

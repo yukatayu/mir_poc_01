@@ -53,7 +53,7 @@ continues and its eventual readiness advice will be checked, not presumed.
 ## Files changed
 
 CURRENT_GOAL and current snapshots/correspondence; this report;
-the four W2 check records; six candidate Lean sources and one companion under
+the W2 check records; ten candidate Lean sources and one companion under
 samples/lean/foundations. Mirroring preserves their unreviewed LAB status.
 
 - `docs/project-status.md`
@@ -66,11 +66,16 @@ samples/lean/foundations. Mirroring preserves their unreviewed LAB status.
 - `docs/proof-first/W2_CONTRACT_CHECK.json`
 - `docs/proof-first/W2_INTEGRATED_CHECK.json`
 - `docs/proof-first/W2_MIRROR_CHECK.json`
+- `docs/proof-first/W2_EXTENSION_CHECK.json`
 - `samples/lean/foundations/MirroreaProofFirstResourceBoundary.lean`
 - `samples/lean/foundations/MirroreaProofFirstLocalContract.lean`
 - `samples/lean/foundations/MirroreaProofFirstContractExport.lean`
 - `samples/lean/foundations/MirroreaProofFirstPureFunctions.lean`
 - `samples/lean/foundations/MirroreaProofFirstFunctionContractBridge.lean`
+- `samples/lean/foundations/MirroreaProofFirstOwnerAssignment.lean`
+- `samples/lean/foundations/MirroreaProofFirstProfileGuarantees.lean`
+- `samples/lean/foundations/MirroreaProofFirstHandleValues.lean`
+- `samples/lean/foundations/MirroreaProofFirstPureHandleFunctions.lean`
 - `samples/lean/foundations/MirroreaProofFirstContracts.md`
 - `samples/README.md`, `samples/lean/README.md`, `scripts/README.md`
 - `plan/proof-first-foundation-correspondence.md`
@@ -117,8 +122,10 @@ entries, physical atomicity and failure/secret disclosure remain open.
 ## Suggested next prompt
 
 Continue independent scoped proof/counterexample research and required reading.
-Retain the running W1 Oracle job; W2 failed before submission on the shared profile lock.
-Do not treat that attempt as a review; resolve the actual blocker before retrying.
+Retain both running Oracle jobs: original W1 and revised W2 integrated review.
+The first W2 attempt failed before submission on the shared profile lock; its
+actual-error retry uses the strict dedicated-tab attach route recorded below.
+Neither invocation is a collected review. Do not duplicate or cancel either job.
 A browser-display clarification is pending after read-only CDP diagnostics; it
 does not authorize resetting jobs and does not block independent local research.
 
@@ -322,3 +329,117 @@ match successful kernel records. Main focused diff review preserves the
 unreviewed/TCB/source-network boundaries; no Oracle result is substituted.
 Browser-level CDP responds and reports the owned ChatGPT page attached, while
 page-level reads remain unresolved. No job reset, cancellation or repeat submit.
+
+Intermediate checkpoint0047e8f8a0fa527ceffa9bd21f77bf65b3f9e9d9 committed
+with --no-gpg-sign (3f98d9), pushed normally (15075/81926b), and exact remote
+parity plus clean tree confirmed (47723/9d0bd8). This saves unreviewed research;
+W2, the alpha target and the user request remain open. Main continues the
+owner-assignment/snapshot dependency in small scratch, using only reviewed
+FallibleFlow/ProducerFlow/Passive premises.
+
+Actual lock-error recovery: browser-level CDP and a newly created disposable blank
+page respond (48b9a9), while the existing W1 page does not. Installed CLI/source
+inspection identified its strict dedicated-tab attach mode. Task-only private
+DevTools attach metadata enables discovery without changing the original profile,
+copying cookies/keys, resetting W1, or launching another Chrome. A revised W2
+packet was frozen and all12 Lean dependencies passed14551/d73aae. One retry was
+launched as mirrorea-w2-integrated-review (exec4661), question hash
+5dd28908150125d782d8af3a68c711d9df76790848c9bf091b185d15d8f5d6ff.
+This follows an actual terminal pre-submission error, not a latency deadline.
+The original W1 remains retained. No submission/answer/review is inferred yet.
+The later OwnerAssignment source compares owner-local live inputs and explicit
+frozen values; it proves scoped checker/elaborator correspondence and exposes
+value-preserving literalization as insufficient for two-run confidentiality.
+Capture provenance/authority/labels, current references and actual source/queue
+integration remain open. Scratch notes/checks are frozen into this review packet.
+
+Later independent scratch ProfileGuarantees.lean: accepted symbolic evidence
+implies UniformPositive for every valuation satisfying the explicit assumptions;
+a checked positive invocation need not have that property. Both the general
+implication and a checked-value counterexample pass Lean (ae2e10/6ae867), using
+only standard propext/Quot.sound. This makes the guarantee quantification explicit,
+not merely two proof-checking methods. It remains later than the frozen Oracle
+packet and cannot inherit that packet's future review. It neither establishes an
+arbitrary theory loader nor closes first-class source module/capture obligations.
+
+
+Later HandleValues scratch adds a finite single-sort binding language for module
+interface values. Scoped/check equivalence, independent Evaluates/evaluator
+correspondence, termination for scoped bindings, and no introduction of references
+outside supplied environment/source constants pass Lean4.29.1 trust0. Calling the
+result retains its module/operation stamps and the caller's separate subject,
+request and arguments, then uses the actual current contract checker. General
+call soundness, no-issued-authority rejection and stale-module rejection pass.
+The positive binding passes a handle and returns42; retired/stale handles and
+empty authority reject. A fresh caller proof cannot silently replace a carried
+stale module stamp. Two deliberate mutations (discard carried stamp / bypass
+call boundary) fail both their general obligations and concrete rejection controls.
+Exact source/hash/axioms and mutant logs are in module-contract/HANDLE_CHECK.json
+under the retained task work root (valid a5a671; mutants36551/4a1e0e, inspected559a43).
+An earlier termination-index elaboration failed5d2a74, then was corrected; it is
+not counted as proof. No authored sorry/admit or Mir-specific axiom was added.
+This is UNREVIEWED and later than the active W2 packet. It is a binding fragment,
+not full higher-order module composition, parser support, secret-dependent handle
+selection, source lifecycle construction or real communication. Registry/world
+provenance and physical invocation remain separate unmet obligations. No W2 or
+alpha closure, production change, new sample root or global roadmap is inferred.
+Plans89–96 are now fully read and hash-ledgered; their indexes do not credit
+referenced source/report files. Existing samples_progress.md commands remain
+accurate for the six mirrored candidates; this later scratch is not promoted
+into that active reproducible sample set.
+
+
+The later PureHandleFunctions scratch extends the pure closure/iteration candidate
+with a distinct interface-handle value/type at arbitrary finite universe size.
+Independent Typed/infer correspondence, successful evaluator type preservation,
+and finite declarative execution/evaluator soundness and relative completeness
+pass again for this extended language. A higher-order twice(identity) function
+carries every supplied interface unchanged (general theorem), and invocation of
+that returned handle equals the current contract boundary call. General call
+soundness, no-authority and stale-module rejection hold; concrete controls return42,
+reject stale/retired modules and handle arithmetic, and iterate the reference value.
+Exact source2ebd3ca2e2ec81e3ea02db283466fd774ea0b27582d391d0b40f6a8fcf25dcc5
+and trust0/axioms are in module-contract/PURE_HANDLE_CHECK.json (70648/35a934).
+Initial draft type-application/binder errors were corrected before successful
+kernel checking; no failed draft is credited. This separate research extension
+has not replaced the committed PureFunctions or its frozen review packet. It
+makes no existing-source conservativity/refinement, closure shipping, handle IFC,
+linear resource duplication, authority issuance or network/lifecycle claim.
+The two binding models are exploratory source-boundary evidence, not two new
+production interpreters or an adopted public grammar.
+ProfileGuarantees additionally proves that accepted symbolic contracts have a
+satisfying valuation supplied by their actual accepted invocation; their uniform
+conditional guarantee is not vacuous through contradictory assumptions. Updated
+PROFILE_CHECK retains the earlier cut and records new PASSbc49f2. All these later
+results remain unreviewed and outside the active Oracle packet.
+
+
+Additional readonly browser diagnosis: owned Chrome processes are present in
+sleeping/event-wait states (6a32bf), not proof of failure. X11 owned-window lookup
+found no window and the Chrome environment did not expose DISPLAY; no unrelated
+window or desktop was captured. A dedicated diagnostic CDP session targeting only
+the revised W2 page received actual Internal error on Page.captureScreenshot and
+was detached (2f56ee). Browser-level target/window reads still return an attached
+ChatGPT page and normal1300x743 window (97480b). These diagnostics do not show a
+login state, do not classify the Oracle job as terminal, and do not authorize
+reloading, cancellation or duplicate submission. No screenshot/private contents
+were saved or sent. Main keeps both jobs and the pending user display clarification.
+
+
+2026-09-10 03:19 JST extension mirror: OwnerAssignment, ProfileGuarantees, HandleValues and
+PureHandleFunctions now join the existing foundation root as unreviewed research;
+only the last source's HandleValues import module name changed. A fresh isolated
+fifteen-module dependency build passed every --trust=0 command (97457/a38973),
+with exact hashes/axioms in W2_EXTENSION_CHECK.json. The original active Oracle
+packet remains frozen and excludes the three later modules. The reproduction
+command and samples/README, scripts/README, samples_progress, Documentation,
+project-status, progress and tasks snapshots are synchronized. No new sample
+root, runtime wrapper, Canon promotion, production change or milestone closure.
+
+Documentation validator13830 completed exit0 (907a64),1762 numbered reports.
+Latest source-comment correction was rechecked65597/45a9a3; all15 source hashes
+match the recorded kernel cut. Main full new-source/focused-diff inspection
+preserves the separate typing/currentness/authority and unreviewed boundaries.
+Companion table/wording fixes do not promote the candidate. No new Rust or network
+run is claimed. A best-effort Discord progress notification sent14699/2d122d;
+this user request continues, with both Oracle jobs retained.

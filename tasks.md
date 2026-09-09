@@ -1,6 +1,6 @@
 # Current Task Map (LAB)
 
-最終更新: 2026-09-10 02:16 JST
+最終更新: 2026-09-10 03:19 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project direction,
 theory, ADRs, conformance, and process. Everything outside it is LAB evidence,
@@ -36,12 +36,17 @@ proofs and Oracle source reviews. Passive erasure and two-run arithmetic pass
 Lean; exact retention and accepted mathematical producer reviews completed.
 Fallible single-assignment and general-label theory certificates have scoped
 source review and kernel checks. Abort/alias/source review remains pending. W1 source/runtime and implementation
-gates remain open. Six mirrored W2 candidates have fresh kernel evidence for
+gates remain open. Ten mirrored W2 candidates have fresh kernel evidence for
 resource operations, exact geometry/frame/currentness, contract/evidence binding,
 pure higher-order functions/finite iteration, actual value correspondence and
-current-module/typed-argument/authority linking for both profiles.
-The W2 Oracle attempt failed before submission on the profile lock; no review
-was received. Source module handles/registry transitions, ordinary parent writes and
+current-module/typed-argument/authority linking for both profiles. Later evidence
+adds owner-local assignment with explicit captures, an unsafe label-erasure
+counterexample, nonvacuous uniform symbolic guarantees, and higher-order interface
+carriage followed by current invocation. Fresh fifteen-module dependencies pass;
+all W2 candidates remain unreviewed, with later deltas outside the active packet.
+The first W2 Oracle attempt failed before submission on the profile lock. A
+revised twelve-dependency cut is now in a dedicated-tab retry after verified
+attach-path repair; submission/answer is not yet confirmed. Source module handles/registry transitions, ordinary parent writes and
 explicit other-owner snapshots still need their own boundary connection. Main
 works alone; no sub-agents. Oracle is readonly advice,
 not signed review, kernel execution, authority or cryptographic trust anchor.
@@ -92,8 +97,10 @@ Browser/Host responsibility contracts do not establish their operational realiza
 No new semantic owner answer is currently needed for the active reversible research.
 A browser-display clarification is pending because Oracle metadata has not
 confirmed W1 prompt submission and owned-tab read-only CDP commands did not return.
-The W1 job remains running; the failed W2 packet is retained without retry while
-the profile lock is held. No latency deadline. Independent research continues.
+The W1 job remains running. The failed W2 packet is retained; a revised cut was
+retried once using the supported strict dedicated-tab attach path after a new-tab
+diagnostic passed. No original job/profile was reset. No latency deadline;
+independent research continues while actual review evidence is pending.
 Conditional implementation is requested, but its theory gates and any applicable
 reserved owner/Canon or signed/key acceptance must actually be met. L2 admission
 requiring an owner-authenticated trust anchor remains fail-closed; Oracle cannot
@@ -137,8 +144,8 @@ recovery alpha validation has run.
   Clippy-clean claim. Additional large variant builds await a measured storage
   plan; bounded scratch proof/rustc work continues. No cleanup or user-file deletion.
 - Docs path inventories now follow the unchanged archived handoff; hierarchy800
-  passes. Docs validation58490 passed (1762 numbered reports) before the latest
-  module-boundary documentation edits; the synchronized cut requires validation.
+  passes. Docs validation13830 passed (1762 numbered reports) with the extension
+  mirror; final source-comment/hash and focused diff inspection are recorded.
 - Commit only own reviewed changes with normal authorized push. An integration
   checkpoint does not end this user request; keep RESUME current.
 

@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-09-10 02:21 JST
+最終更新: 2026-09-10 03:19 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -62,8 +62,9 @@ exist; passive exact-retention and accepted mathematical producer reviews comple
 Fallible single-assignment and general local-label proofs have scoped source review and kernel checks; abort/alias/source review is pending. Source/type/dynamic
 composition and actual implementation/alpha gates remain open. Required corpus
 reading is incomplete. Memory: `plan/proof-first-foundation-correspondence.md`;
-evidence: Reports2611/2612. W2 now has six mirrored unreviewed Lean candidates
-for resource/contract/function/current-use correspondence; source-level module handles and actual
+evidence: Reports2611/2612. W2 now has ten mirrored unreviewed Lean candidates
+for resource/contract/function/current-use correspondence, explicit captures and
+higher-order interface carriage; source-level module handles and actual
 source/runtime refinement remain open.
 
 | Task axis | Current status | Startability |
@@ -293,3 +294,5 @@ The authorized roadmap is paused, not blocked, stale or closed.
 - 2026-09-10 01:59 JST: Proof-first LAB: W2の局所契約・高階関数/有限反復・資源保存の5候補を保存し、fresh-copy Lean検査を確認。旧handle返却/分割gap変異を拒否。別W2 Oracleを一度起動、W1は送信未確認で保持。production/α未達。
 
 - 2026-09-10 02:15 JST: W2の現在module・認可・型付き実引数と局所契約の結合を一般Leanで検査し、両profileの相対完全性を確認。registry更新・認証と実source接続は未確立、Oracle未review。
+
+- 2026-09-10 03:19 JST: W2後続4候補を未受理LABとして保存。全15依存のfresh-copy Lean検査が通り、秘密値の定数化反例・非空な契約前提・高階handle受渡し後の現在性/認可を確認。Oracle既存2job継続、実source/network/α未達。

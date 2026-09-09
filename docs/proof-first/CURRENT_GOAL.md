@@ -28,3 +28,11 @@ Current sub-boundary evidence: ModuleContractBoundary now links both evidence
 profiles to CurrentUse, exact descriptor/stamps and typed arguments, with
 soundness and relative completeness. This is an unreviewed reference call, not
 source module syntax, authenticated registry mutation or Q18 commit policy.
+
+Later unreviewed work-root evidence adds OwnerAssignment (owner-local live reads
+versus explicitly captured values and a label-erasure counterexample),
+ProfileGuarantees (uniform symbolic guarantee with an actual satisfying input),
+HandleValues and PureHandleFunctions (bound/higher-order reference carriage with
+current invocation). These satisfy parts of the semantic example floor; actual
+source capture provenance, source module/lifecycle elaboration, physical execution
+and neutral review remain unmet. No sub-goal or W2/alpha acceptance is inferred.

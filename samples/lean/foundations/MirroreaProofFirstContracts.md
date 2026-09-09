@@ -1,6 +1,6 @@
 # W2 local contract and resource boundary — unreviewed LAB candidate
 
-These six sources are task-local mathematical research, not production meaning,
+These ten sources are task-local mathematical research, not production meaning,
 formal THM/OBL acceptance, a Plan250 resume, or a verified α candidate. The current
 consumer is reusable arithmetic producing the actual positive length consumed by
 an exclusive-region allocator. Report2612 records the work and review status.
@@ -14,14 +14,21 @@ an exclusive-region allocator. Report2612 records the work and review status.
 | `MirroreaProofFirstContractExport.lean` | Structural binding and scope checks; independent Common/check correspondence; positive-result and exact Int-to-Nat export; two evidence profiles' scoped completeness; same allocator consumes the accepted result and cannot grant denied authority |
 | `MirroreaProofFirstPureFunctions.lean` | Annotated Int/Nat/lambda/application/iteration calculus; independent typing/inference equivalence; closure/environment typing; successful-evaluation preservation; separate finite execution derivations and fuel evaluator correspondence |
 | `MirroreaProofFirstFunctionContractBridge.lean` | Structural arithmetic lowering into that calculus; typing and actual execution correspondence; closed unary function execution and accepted export value correspondence |
-
 | `MirroreaProofFirstModuleContractBoundary.lean` | CurrentUse plus exact descriptor/code/contract/arity/typed-argument linking; independent Successful/call soundness; both profiles’ relative completeness; accepted actual execution; absence of authority and changed context/stamps reject |
+| `MirroreaProofFirstOwnerAssignment.lean` | Separate live/frozen environments, independent locality/admission/elaboration checkers; frame/type/conditional two-run preservation; exact owner routing and value-preserving label-erasure counterexample |
+| `MirroreaProofFirstProfileGuarantees.lean` | Symbolic acceptance implies positivity for every hypothesis-satisfying valuation; actual accepted inputs witness satisfiable hypotheses; checked-value positivity alone is weaker |
+| `MirroreaProofFirstHandleValues.lean` | Finite interface binding, independent scoped/evaluation relations, scoped termination, no new references; carried stamps retain current-use and authority checks |
+| `MirroreaProofFirstPureHandleFunctions.lean` | Separate pure higher-order handle extension at arbitrary finite size; rechecked type and execution correspondence; general unchanged-handle carriage and actual current invocation |
 
 The import order is ResourceBoundary, LocalContract, ContractExport,
 PureFunctions, FunctionContractBridge, then ModuleContractBoundary (also importing
-CurrentUse and its Support dependency). Namespaces remain
+CurrentUse and its Support dependency). OwnerAssignment additionally imports
+FallibleFlow/ProducerFlow/Passive; ProfileGuarantees follows ContractExport;
+HandleValues follows ModuleContractBoundary; PureHandleFunctions follows
+HandleValues. Original candidates and their frozen review cuts are retained. Namespaces remain
 `MirroreaProofFirst.ResourceBoundary`, `LocalContract`, `ContractExport`,
-`PureFunctions`, `FunctionContractBridge`, and `ModuleContractBoundary`. The repo mirror changes only import
+`PureFunctions`, `FunctionContractBridge`, `ModuleContractBoundary`,
+`OwnerAssignment`, `ProfileGuarantees`, `HandleValues` and `PureHandleFunctions`. The repo mirror changes only import
 module names from the frozen scratch cut; no claim depends on filename identity.
 
 ## Meaning and nonvacuity
@@ -103,20 +110,37 @@ and arguments cannot become public merely because a contract is proved.
 
 No existing Mir parser, checked Core, real network, persistence, source-level
 configuration creation, or first-class current module handle is refined by these
-six files. Ordinary parent assignment and explicit other-owner snapshots remain
-separate W2 consumers. Candidate A uses dynamic opaque-handle checks; smallest
+ten files. OwnerAssignment now models ordinary writes to imported base state
+and explicitly captured values, with separate value/type/label environments.
+Capture authentication, authorization, selection labels and metadata provenance
+remain unmet premises. Its literalization counterexample preserves values but
+changes the generated program with secret input and leaks through a low write;
+it does not contradict a fixed-program noninterference theorem.
+HandleValues/PureHandleFunctions model carrying interface references, not
+source-level lifecycle construction or effectful closure shipping. They do not
+extend duplication permission to owned regions or effect continuations. The
+separate extended calculus is research, with no claimed refinement of the old
+parser or conservative implementation replacement.
+
+Candidate A uses dynamic opaque-handle checks; smallest
 viable B adds affine caller checking while retaining currentness/auth. Neither is
 adopted as a final source contract here.
 
 ## Review and reproduction
 
-The main launched read-only Oracle `mirrorea-w2-resource-contract` once with the
-frozen five-file cut. The invocation failed before submission because the shared
-profile lock remained held by the W1 job; no answer was received and no retry has
-been sent. No independent Lean execution or signed reviewer is claimed. The earlier W1 abort/alias/source consultation is
-separate and its pending extensions are not premises of this candidate. The sixth
-module boundary was added afterwards and was not in that frozen five-file packet.
+The first W2 Oracle invocation failed before submission on the shared-profile
+launch lock. A revised packet freshly kernel-checked by the main agent is running as
+`mirrorea-w2-integrated-review` using a dedicated attached tab, preserving the
+original W1 job. Neither job has a collected result. That revised cut contains
+OwnerAssignment and the six earlier W2 modules; ProfileGuarantees, HandleValues
+and PureHandleFunctions are later and cannot inherit its eventual review.
+No independent Lean execution or signed reviewer is claimed. All ten sources
+remain unreviewed candidates. W1's pending abort/alias/source extensions are not
+premises of these new modules.
 
 Use the fresh-copy command in `samples/lean/README.md`; it writes compiler outputs
 outside the source tree. Exact commands, source hashes and axiom output are in
-`docs/proof-first/W2_INTEGRATED_CHECK.json` and the subsequent mirror record.
+`docs/proof-first/W2_INTEGRATED_CHECK.json`, the subsequent mirror record and
+`docs/proof-first/W2_EXTENSION_CHECK.json`. The extension record preserves the
+later cut separately; fixed controls and rejected mutations are not general
+implementation proofs.
