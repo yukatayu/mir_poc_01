@@ -1,0 +1,9 @@
+unsat
+((proof
+(let (($x35 (not currentRevoked)))
+(let (($x29 (not (or snapshotRevoked currentRevoked))))
+(let ((@x30 (asserted $x29)))
+(let ((@x31 (not-or-elim @x30 $x35)))
+(let ((@x27 (asserted currentRevoked)))
+(unit-resolution @x27 @x31 false))))))))
+

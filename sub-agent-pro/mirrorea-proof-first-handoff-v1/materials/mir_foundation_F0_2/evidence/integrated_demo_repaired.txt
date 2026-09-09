@@ -1,0 +1,53 @@
+{
+  "profile": "source/certificate/actor/patch/fresh-import integrated; journal tested as separate actual-file adapter",
+  "source_inputs": [
+    "positive.mirx",
+    "pool.mirx",
+    "client.mirx"
+  ],
+  "proof_does_not_grant": "AuthorityDenied",
+  "bridge_partial_precondition": {
+    "client_identity": "bb3b4e724d2172799eb343417f4b5dbf73d93343273e9ed5840750c8665e0f73",
+    "producer_identity": "0d10a7247c14c93dd192cba8cf4a20c65e98bcf48778701e3c199c6077a2625f",
+    "consumer_identity": "fead0a70d56052e75d3b88344cee84d1668a8b118531ca10c15ca48aaa42bc25",
+    "variable": "n",
+    "established_requirement": {
+      "terms": [
+        [
+          [],
+          "-1"
+        ],
+        [
+          [
+            "n"
+          ],
+          "1"
+        ]
+      ]
+    },
+    "consequence": {
+      "rule": "premise",
+      "args": [
+        0
+      ]
+    }
+  },
+  "first_result": 4,
+  "state_before_patch": {
+    "free": 12
+  },
+  "prepared_fence": [
+    "free"
+  ],
+  "unrelated_result": 49,
+  "state_after_patch": {
+    "free": 20
+  },
+  "fresh_grants_initially_empty": true,
+  "restored_code_result": 3,
+  "actual_file_journal": {
+    "recovered_value": 5,
+    "replayed_result": 5,
+    "journal_bytes": 135
+  }
+}

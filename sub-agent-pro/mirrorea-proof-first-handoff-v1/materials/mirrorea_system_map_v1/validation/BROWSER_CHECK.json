@@ -1,0 +1,12 @@
+{
+  "passed": true,
+  "type": "offline-document-browser-check",
+  "requirement_cards": 119,
+  "fallback_search_matches": 5,
+  "auth_group_matches": 8,
+  "internal_link_opens_record": true,
+  "mobile_document_overflow": false,
+  "external_requests_on_load": [],
+  "javascript_errors": [],
+  "note": "HTML表示・検索・内部リンクの確認。Mirの実装試験・理論検証ではない。"
+}

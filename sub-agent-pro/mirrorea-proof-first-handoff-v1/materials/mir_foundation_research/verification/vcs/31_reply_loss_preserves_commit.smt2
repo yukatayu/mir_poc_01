@@ -1,0 +1,8 @@
+(set-option :timeout 10000)
+(set-option :produce-proofs true)
+(declare-const x Int)
+(declare-const delta Int)
+(declare-const delivered Bool)
+(assert (not (= (ite delivered (+ x delta) (+ x delta)) (+ x delta))))
+(check-sat-using (then (using-params simplify :som true) smt))
+(get-proof)

@@ -1,0 +1,23 @@
+unsat
+((set-logic ALL)
+(proof
+(let ((?x29 (+ x y)))
+(let ((?x27 (- y d)))
+(let ((?x25 (+ x d)))
+(let ((?x28 (+ ?x25 ?x27)))
+(let (($x30 (= ?x28 ?x29)))
+(let (($x31 (not $x30)))
+(let (($x62 (= $x31 false)))
+(let ((@x61 (rewrite (= (not true) false))))
+(let (($x57 (not true)))
+(let (($x58 (= $x31 $x57)))
+(let (($x55 (= $x30 true)))
+(let ((@x54 (rewrite (= (= ?x29 ?x29) true))))
+(let (($x49 (= ?x29 ?x29)))
+(let (($x50 (= $x30 $x49)))
+(let ((@x37 (rewrite (= ?x27 (+ y (* (- 1) d))))))
+(let ((@x70 (trans (monotonicity @x37 (= ?x28 (+ ?x25 (+ y (* (- 1) d))))) (rewrite (= (+ ?x25 (+ y (* (- 1) d))) ?x29)) $x30)))
+(let ((@x74 (trans (monotonicity (trans (monotonicity @x70 $x50) @x54 $x55) $x58) @x61 $x62)))
+(let ((@x32 (asserted $x31)))
+(mp @x32 @x74 false)))))))))))))))))))))
+

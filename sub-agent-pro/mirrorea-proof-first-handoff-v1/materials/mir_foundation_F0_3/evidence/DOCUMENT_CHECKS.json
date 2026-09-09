@@ -1,0 +1,33 @@
+{
+  "requirement_rows": 119,
+  "decision_rows": 30,
+  "theorem_rows": 24,
+  "master_approval_preserved": true,
+  "missing_internal_links": 0,
+  "self_contained_runtime_assets": true,
+  "render_mode": "set_content; file URL navigation disallowed by this browser policy",
+  "python_syntax_files": 16,
+  "mathematical_proofs_validated_by_this_script": false,
+  "browser": [
+    {
+      "viewport": "desktop",
+      "width": 1400,
+      "height": 1000,
+      "horizontal_overflow": false,
+      "page_errors": [],
+      "exact_id_search_count": 1,
+      "auth_filter_count": 8,
+      "W5_filter_count": 27
+    },
+    {
+      "viewport": "mobile",
+      "width": 390,
+      "height": 844,
+      "horizontal_overflow": false,
+      "page_errors": [],
+      "exact_id_search_count": 1,
+      "auth_filter_count": 8,
+      "W5_filter_count": 27
+    }
+  ]
+}

@@ -1,0 +1,11 @@
+sat
+(
+  (define-fun oldver () Int
+    0)
+  (define-fun oldinc () Int
+    1)
+  (define-fun newinc () Int
+    0)
+  (define-fun newver () Int
+    0)
+)

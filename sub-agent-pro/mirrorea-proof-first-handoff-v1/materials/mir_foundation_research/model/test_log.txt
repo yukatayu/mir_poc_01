@@ -1,0 +1,54 @@
+test_channel_state_is_send_without_receive (__main__.CutAndModal.test_channel_state_is_send_without_receive) ... ok
+test_closed_cut (__main__.CutAndModal.test_closed_cut) ... ok
+test_current_revocation_cannot_be_restored_away (__main__.CutAndModal.test_current_revocation_cannot_be_restored_away) ... ok
+test_history_fact_is_not_current_fact (__main__.CutAndModal.test_history_fact_is_not_current_fact) ... ok
+test_modal_stability_rule (__main__.CutAndModal.test_modal_stability_rule) ... ok
+test_branch_mismatch_rejected (__main__.Expressions.test_branch_mismatch_rejected) ... ok
+test_cross_owner_rejected_not_silently_compiled (__main__.Expressions.test_cross_owner_rejected_not_silently_compiled) ... ok
+test_generated_edges_follow_owner_not_caller_authority (__main__.Expressions.test_generated_edges_follow_owner_not_caller_authority) ... ok
+test_generated_expression_corpus (__main__.Expressions.test_generated_expression_corpus) ... ok
+test_implicit_flow_rejected (__main__.Expressions.test_implicit_flow_rejected) ... ok
+test_literals_do_not_confuse_bool_and_integer (__main__.Expressions.test_literals_do_not_confuse_bool_and_integer) ... ok
+test_local_operation_needs_no_network_edge (__main__.Expressions.test_local_operation_needs_no_network_edge) ... ok
+test_product_and_let (__main__.Expressions.test_product_and_let) ... ok
+test_unbound_rejected (__main__.Expressions.test_unbound_rejected) ... ok
+test_all_four_node_directed_graphs (__main__.GraphsAndFallback.test_all_four_node_directed_graphs) ... ok
+test_all_small_fallback_chains (__main__.GraphsAndFallback.test_all_small_fallback_chains) ... ok
+test_descendant_closed_removal (__main__.GraphsAndFallback.test_descendant_closed_removal) ... ok
+test_exhaustion_is_sticky_within_lineage (__main__.GraphsAndFallback.test_exhaustion_is_sticky_within_lineage) ... ok
+test_flatten_associativity (__main__.GraphsAndFallback.test_flatten_associativity) ... ok
+test_multiple_roots (__main__.GraphsAndFallback.test_multiple_roots) ... ok
+test_no_automatic_repromotion (__main__.GraphsAndFallback.test_no_automatic_repromotion) ... ok
+test_self_cycle_rejected (__main__.GraphsAndFallback.test_self_cycle_rejected) ... ok
+test_unknown_graph_endpoint_rejected (__main__.GraphsAndFallback.test_unknown_graph_endpoint_rejected) ... ok
+test_addition_does_not_mint_grants (__main__.RuntimeAndEvolution.test_addition_does_not_mint_grants) ... ok
+test_bad_patch_is_nonmutating (__main__.RuntimeAndEvolution.test_bad_patch_is_nonmutating) ... ok
+test_bounded_all_protocol_schedules (__main__.RuntimeAndEvolution.test_bounded_all_protocol_schedules) ... ok
+test_checked_code_does_not_supply_authority (__main__.RuntimeAndEvolution.test_checked_code_does_not_supply_authority) ... ok
+test_cycle_in_new_dependencies_rejected (__main__.RuntimeAndEvolution.test_cycle_in_new_dependencies_rejected) ... ok
+test_detach_removes_dependents_and_old_grants (__main__.RuntimeAndEvolution.test_detach_removes_dependents_and_old_grants) ... ok
+test_duplicates_do_not_execute_twice (__main__.RuntimeAndEvolution.test_duplicates_do_not_execute_twice) ... ok
+test_erasing_dedup_is_a_real_counterexample (__main__.RuntimeAndEvolution.test_erasing_dedup_is_a_real_counterexample) ... ok
+test_leave_rejoin_does_not_resurrect_grant (__main__.RuntimeAndEvolution.test_leave_rejoin_does_not_resurrect_grant) ... ok
+test_lost_reply_keeps_ambiguity_and_blocks_affected_patch (__main__.RuntimeAndEvolution.test_lost_reply_keeps_ambiguity_and_blocks_affected_patch) ... ok
+test_patch_does_not_silently_strengthen_precondition (__main__.RuntimeAndEvolution.test_patch_does_not_silently_strengthen_precondition) ... ok
+test_patch_requires_its_own_authority (__main__.RuntimeAndEvolution.test_patch_requires_its_own_authority) ... ok
+test_post_service_revocation_does_not_undo_write (__main__.RuntimeAndEvolution.test_post_service_revocation_does_not_undo_write) ... ok
+test_private_snapshot_needs_release_clearance (__main__.RuntimeAndEvolution.test_private_snapshot_needs_release_clearance) ... ok
+test_recreated_cell_does_not_reuse_incarnation (__main__.RuntimeAndEvolution.test_recreated_cell_does_not_reuse_incarnation) ... ok
+test_reparent_accepts_valid_dag (__main__.RuntimeAndEvolution.test_reparent_accepts_valid_dag) ... ok
+test_reparent_rejects_cycle (__main__.RuntimeAndEvolution.test_reparent_rejects_cycle) ... ok
+test_request_splicing_is_rejected (__main__.RuntimeAndEvolution.test_request_splicing_is_rejected) ... ok
+test_revocation_before_service_prevents_write (__main__.RuntimeAndEvolution.test_revocation_before_service_prevents_write) ... ok
+test_snapshot_then_cross_owner_assignment (__main__.RuntimeAndEvolution.test_snapshot_then_cross_owner_assignment) ... ok
+test_stale_patch_scope_rejected (__main__.RuntimeAndEvolution.test_stale_patch_scope_rejected) ... ok
+test_two_owner_updates_not_stale (__main__.RuntimeAndEvolution.test_two_owner_updates_not_stale) ... ok
+test_typed_patch_changes_actual_behavior (__main__.RuntimeAndEvolution.test_typed_patch_changes_actual_behavior) ... ok
+test_unbounded_schematic_addition_exercised_100_times (__main__.RuntimeAndEvolution.test_unbounded_schematic_addition_exercised_100_times) ... ok
+test_unknown_request_is_not_admitted (__main__.RuntimeAndEvolution.test_unknown_request_is_not_admitted) ... ok
+test_unrelated_activity_does_not_stale_patch (__main__.RuntimeAndEvolution.test_unrelated_activity_does_not_stale_patch) ... ok
+
+----------------------------------------------------------------------
+Ran 49 tests in 0.645s
+
+OK

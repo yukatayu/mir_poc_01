@@ -1,0 +1,88 @@
+{
+  "sources": [
+    {
+      "id": "S1",
+      "title": "Interaction Trees: Representing Recursive and Impure Programs in Coq",
+      "authors": "Li-yao Xia et al.",
+      "year": 2020,
+      "url": "https://arxiv.org/abs/1906.00046",
+      "use": "Recursive effectful behavior, handlers/continuations, compiler correspondence as prior work. The package does not claim to use the verified ITree library."
+    },
+    {
+      "id": "S2",
+      "title": "Consensus on Transaction Commit",
+      "authors": "Jim Gray; Leslie Lamport",
+      "year": 2004,
+      "url": "https://arxiv.org/abs/cs/0408036",
+      "use": "Explicit transaction-commit model and blocking of ordinary two-phase commit. The custom finite protocol is separately defined and checked."
+    },
+    {
+      "id": "S3",
+      "title": "Dynamic Choreographies: Theory And Implementation",
+      "authors": "Mila Dalla Preda et al.",
+      "year": 2017,
+      "url": "https://arxiv.org/abs/1611.09067",
+      "use": "Prior work on generated distributed programs and safe updates, not a proof of Mir."
+    },
+    {
+      "id": "S4",
+      "title": "Normalization for multimodal type theory",
+      "authors": "Daniel Gratzer",
+      "year": 2026,
+      "url": "https://lmcs.episciences.org/17744",
+      "use": "Normalization/type-checking relative to mode theory; optional research family, not adopted or implemented here."
+    },
+    {
+      "id": "S5",
+      "title": "Typechecking: A Typechecker for STLC",
+      "authors": "Software Foundations contributors",
+      "year": null,
+      "url": "https://softwarefoundations.cis.upenn.edu/plf-current/Typechecking.html",
+      "use": "Distinguishing declarative typing, algorithmic soundness and relative completeness."
+    },
+    {
+      "id": "S6",
+      "title": "Proof-Carrying Code",
+      "authors": "George C. Necula",
+      "year": 1997,
+      "url": "https://doi.org/10.1145/263699.263712",
+      "primary_project_page": "https://www.cs.cmu.edu/~fox/pcc.html",
+      "access_note": "Publisher page unavailable during one fetch; primary project description and bibliographic metadata consulted. No claim of full paper review in this stage.",
+      "use": "Proof producer/consumer separation and checking source-associated evidence."
+    },
+    {
+      "id": "S7",
+      "title": "Proof Logs",
+      "authors": "Z3 project",
+      "year": null,
+      "url": "https://microsoft.github.io/z3guide/programming/Proof%20Logs/",
+      "use": "Distinguish SMT proof output from independently checked full metatheory."
+    },
+    {
+      "id": "R1",
+      "title": "mirrorea_canon/NORTH-STAR.md",
+      "repository": "yukatayu/mir_poc_01",
+      "commit": "f6aae7ca277690ac558a08f124e414ae2d2d35ad",
+      "url": "https://github.com/yukatayu/mir_poc_01/blob/f6aae7ca277690ac558a08f124e414ae2d2d35ad/mirrorea_canon/NORTH-STAR.md",
+      "use": "Pinned scope comparison; not changed or accepted by this research."
+    },
+    {
+      "id": "R2",
+      "title": "mirrorea_canon/theory/11-metatheory-ledger.md",
+      "repository": "yukatayu/mir_poc_01",
+      "commit": "f6aae7ca277690ac558a08f124e414ae2d2d35ad",
+      "url": "https://github.com/yukatayu/mir_poc_01/blob/f6aae7ca277690ac558a08f124e414ae2d2d35ad/mirrorea_canon/theory/11-metatheory-ledger.md",
+      "use": "Pinned scope comparison; not changed or accepted by this research."
+    },
+    {
+      "id": "R3",
+      "title": "mirrorea_canon/theory/08-patch-hotplug.md",
+      "repository": "yukatayu/mir_poc_01",
+      "commit": "f6aae7ca277690ac558a08f124e414ae2d2d35ad",
+      "url": "https://github.com/yukatayu/mir_poc_01/blob/f6aae7ca277690ac558a08f124e414ae2d2d35ad/mirrorea_canon/theory/08-patch-hotplug.md",
+      "use": "Pinned scope comparison; not changed or accepted by this research."
+    }
+  ],
+  "access_date": "2026-09-09",
+  "source_scope": "Primary metadata/abstracts and HTML sources plus pinned repository chapters. Source-specific mathematical results are not assumed to transfer to Mir without a correspondence proof."
+}

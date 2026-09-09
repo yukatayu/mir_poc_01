@@ -1,0 +1,233 @@
+{
+  "notice": "Task work units, not official I/T phases. One active semantic goal. W8 is horizon-only. Entries are obligations, not proof/adoption results.",
+  "workstreams": [
+    {
+      "id": "W0",
+      "title": "現場と入力の照合",
+      "depends_on": [],
+      "side": "validation/planning",
+      "layers": [
+        "all"
+      ],
+      "scope": "operational prerequisite, not a new semantic phase",
+      "produce": [
+        "原本hash確認",
+        "現場baseline/dirty/権限",
+        "全体読取り台帳",
+        "要件/Q/profile対応",
+        "初期oracleレビュー"
+      ],
+      "exit": [
+        "受理済みと候補と未読の区別",
+        "最初の基礎の直接consumerが決定"
+      ],
+      "active_by_default": true
+    },
+    {
+      "id": "W1",
+      "title": "統合核の機械検証",
+      "depends_on": [
+        "W0"
+      ],
+      "side": "theory/proof",
+      "layers": [
+        "PL-1",
+        "S1",
+        "S3"
+      ],
+      "produce": [
+        "帰納的supportと証拠checker",
+        "同一κの認可と現在性",
+        "tracked validation",
+        "受動観測の消去",
+        "前提/TCB/定理依存"
+      ],
+      "exit": [
+        "主要な一般命題のkernel確認",
+        "宣言的定義と具体checkerの対応",
+        "正例と反例の独立観点レビュー"
+      ]
+    },
+    {
+      "id": "W2",
+      "title": "表現力と局所理論境界",
+      "depends_on": [
+        "W1"
+      ],
+      "side": "theory/proof",
+      "layers": [
+        "PL-1",
+        "S0",
+        "S1",
+        "S3"
+      ],
+      "produce": [
+        "値/計算/handle/継続の型規則",
+        "必要な高階・refinement/依存型的な仕様",
+        "局所理論exportと境界",
+        "宣言的規則とchecker/elaborator"
+      ],
+      "exit": [
+        "必要な通常sourceを表現",
+        "健全性と相対完全性",
+        "異種保証の接続と不正消去拒否"
+      ]
+    },
+    {
+      "id": "W3",
+      "title": "動的構成と多グラフ",
+      "depends_on": [
+        "W1",
+        "W2"
+      ],
+      "side": "theory/proof/reference",
+      "layers": [
+        "PL-1",
+        "S0",
+        "S1",
+        "S3"
+      ],
+      "produce": [
+        "定義とinstance/module/patch境界",
+        "source-derived追加/撤去/reparent/交換",
+        "参照とfallbackの統合",
+        "受理後の保存と局所影響"
+      ],
+      "exit": [
+        "A/B/Cへの基礎とA/Cへの追加を通常sourceで記述",
+        "全mutator/失効/退出/結果使用の保存",
+        "Q-18等の政策差を保持"
+      ]
+    },
+    {
+      "id": "W4",
+      "title": "実分散への対応",
+      "depends_on": [
+        "W1",
+        "W3"
+      ],
+      "side": "implementation/refinement/validation",
+      "layers": [
+        "PL-1",
+        "PL-2",
+        "PL-0",
+        "S4",
+        "S6"
+      ],
+      "produce": [
+        "具体/抽象の対応",
+        "Rust/QUIC/queue/memory境界",
+        "I3-4/5/6との対応",
+        "source-to-runtime観測"
+      ],
+      "exit": [
+        "実processとtransportの正例/反例",
+        "過去I3-3のregression維持",
+        "新しい条件の迂回経路を拒否"
+      ]
+    },
+    {
+      "id": "W5",
+      "title": "全成分の永続化と更新",
+      "depends_on": [
+        "W3",
+        "W4"
+      ],
+      "side": "theory/proof/implementation",
+      "layers": [
+        "PL-1",
+        "PL-2",
+        "PL-0"
+      ],
+      "produce": [
+        "全component保存manifest",
+        "実journal/復旧",
+        "更新/失効の直列化",
+        "pending/prepared/external-unknownの扱い"
+      ],
+      "exit": [
+        "実終了/再起動の正例/反例",
+        "現在head/非復活の根拠",
+        "2PC予約とcurrent認可を混同しない"
+      ]
+    },
+    {
+      "id": "W6",
+      "title": "秘密を含む観測とdebug",
+      "depends_on": [
+        "W1",
+        "W3",
+        "W4"
+      ],
+      "side": "theory/proof/implementation",
+      "layers": [
+        "PL-1",
+        "PL-2",
+        "PL-3",
+        "S2",
+        "S3",
+        "S6"
+      ],
+      "produce": [
+        "忠実性/受動消去/二実行保証",
+        "情報流を保つ実装条件",
+        "観測資源",
+        "能動debugの認可境界"
+      ],
+      "exit": [
+        "秘密差分と観測有無を別に検査",
+        "profileに対する機械証明",
+        "資源と意味の境界を測定"
+      ]
+    },
+    {
+      "id": "W7",
+      "title": "検証済みα候補の統合",
+      "depends_on": [
+        "W2",
+        "W5",
+        "W6"
+      ],
+      "side": "integration/validation",
+      "layers": [
+        "PL-1",
+        "PL-2",
+        "PL-3",
+        "limited PL-4/5"
+      ],
+      "produce": [
+        "通常sourceの構築/参加入口",
+        "Mir内logicとView/input",
+        "安全なheadless/participant",
+        "SC-24とα-1～8の実統合"
+      ],
+      "exit": [
+        "一つの実システムで正例/反例を再現",
+        "新しい作者と構成の再利用",
+        "要件と証拠/未保証の対応",
+        "最終oracleレビュー"
+      ]
+    },
+    {
+      "id": "W8",
+      "title": "開放性と長期World-Web",
+      "depends_on": [
+        "W7"
+      ],
+      "side": "future research/product",
+      "layers": [
+        "PL-4",
+        "PL-5"
+      ],
+      "produce": [
+        "独立管理と相互運用",
+        "公開/発見/連合",
+        "長期回収と版互換"
+      ],
+      "exit": [
+        "別管理・別版の接続が全内部共有を要求しない"
+      ],
+      "in_current_execution": false
+    }
+  ]
+}

@@ -1,0 +1,9 @@
+unsat
+((proof
+(let ((?x34 (+ n (* (- 1) k))))
+(let (($x35 (>= ?x34 0)))
+(let (($x43 (not $x35)))
+(let ((@x45 (mp (asserted (not (>= (- n k) 0))) (rewrite (= (not (>= (- n k) 0)) $x43)) $x43)))
+(let ((@x38 (mp (asserted (>= n k)) (rewrite (= (>= n k) $x35)) $x35)))
+(unit-resolution @x38 @x45 false))))))))
+

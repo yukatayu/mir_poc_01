@@ -1,0 +1,15 @@
+test_local_named_result_cannot_replace_logical_return (tests.test_certificates.CertificateCaptureRegression.test_local_named_result_cannot_replace_logical_return) ... FAIL
+
+======================================================================
+FAIL: test_local_named_result_cannot_replace_logical_return (tests.test_certificates.CertificateCaptureRegression.test_local_named_result_cannot_replace_logical_return)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/mnt/data/mir_foundation_F0_2/tests/test_certificates.py", line 89, in test_local_named_result_cannot_replace_logical_return
+    with self.assertRaises(CertificateError):produce_evidence(op,{},Poly.var('result')-1)
+         ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^
+AssertionError: CertificateError not raised
+
+----------------------------------------------------------------------
+Ran 1 test in 0.002s
+
+FAILED (failures=1)

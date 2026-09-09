@@ -1,0 +1,7 @@
+sat
+(
+  (define-fun shadow () Int
+    (- 1))
+  (define-fun now () Int
+    0)
+)

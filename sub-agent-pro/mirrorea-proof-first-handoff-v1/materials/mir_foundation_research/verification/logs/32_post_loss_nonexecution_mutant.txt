@@ -1,0 +1,9 @@
+sat
+(
+  (define-fun after () Int
+    0)
+  (define-fun received () Bool
+    false)
+  (define-fun before () Int
+    (- 1))
+)

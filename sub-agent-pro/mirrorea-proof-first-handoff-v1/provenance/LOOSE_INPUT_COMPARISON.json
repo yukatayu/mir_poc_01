@@ -1,0 +1,122 @@
+[
+  {
+    "path": "mir_foundation_research/FOUNDATION.md",
+    "matches_archive": true,
+    "sha256": "0d357fc3b4396a5ef3eb7cf2603f870aaeb425af5c6bdd917957fbc642889876"
+  },
+  {
+    "path": "mir_foundation_research/VALIDATION.md",
+    "matches_archive": true,
+    "sha256": "12ea35b4294a683a4dae4389ebee5e63dd6cc71d216f0d59dce3eda206a44346"
+  },
+  {
+    "path": "mir_foundation_research/theory/THEOREM_LEDGER.md",
+    "matches_archive": true,
+    "sha256": "d404ff0e83a17970bff3a65c9229c80157c2b425cc1a0737debc1930bdc8b4e0"
+  },
+  {
+    "path": "mir_foundation_F0_2/FOUNDATION.md",
+    "matches_archive": true,
+    "sha256": "cdae246b43ef9a33784de284de8c0a361e4e727c161f37341cd8c99e5c825621"
+  },
+  {
+    "path": "mir_foundation_F0_2/IMPLEMENTATION_PATH.md",
+    "matches_archive": true,
+    "sha256": "9b1a9c5bfe3bfa3adff8497e0b73b2769c8d6f03dc2e22f236b1e95fedf10efc"
+  },
+  {
+    "path": "mir_foundation_F0_2/AUDIT.md",
+    "matches_archive": true,
+    "sha256": "8e05b71b8cbedbac0f12125261d6d7844e5d41d73d2ab36666a6b9be7d574da7"
+  },
+  {
+    "path": "mir_foundation_F0_2/VALIDATION.md",
+    "matches_archive": true,
+    "sha256": "df48b41932de8a5052b324a28c7fc9a98d21f9875b2acf6a5e54caf405dbec3f"
+  },
+  {
+    "path": "mir_foundation_F0_2/theory/THEOREM_LEDGER.md",
+    "matches_archive": true,
+    "sha256": "2a3bb6bd433fa4e147d70fd73af599c252b403a665586ed642fb42fb8cdd7df3"
+  },
+  {
+    "path": "mir_foundation_F0_2/theory/PROOFS.md",
+    "matches_archive": true,
+    "sha256": "f95eb4bfd543515d945db6baf0bc7d140970ce2d5c02c1d9ca0d4d814b36d1e6"
+  },
+  {
+    "path": "mir_foundation_F0_2/evidence/INTEGRATED_DEMO.json",
+    "matches_archive": true,
+    "sha256": "0ae3ade1197d60b5f1be705033c5b3b140c3437aeb84f8cfe81040ff555f224a"
+  },
+  {
+    "path": "mir_foundation_F0_3/FOUNDATION.md",
+    "matches_archive": true,
+    "sha256": "b34fb179296b7031997e3bf864504cd3605df947caf64a514f2706c191e53c01"
+  },
+  {
+    "path": "mir_foundation_F0_3/REQUIREMENT_TRACE.md",
+    "matches_archive": true,
+    "sha256": "f9dc03ac9e95459b91a1b8c148d5dc14846796bc797e444cbb86d107c42b0bb1"
+  },
+  {
+    "path": "mir_foundation_F0_3/WORKPLAN.md",
+    "matches_archive": true,
+    "sha256": "fcd7a69238c793130c9b8a256cca3697fae6391d8f9472520b151d9fdd578972"
+  },
+  {
+    "path": "mir_foundation_F0_3/AUDIT.md",
+    "matches_archive": true,
+    "sha256": "261e00fc776fb296ce2f03e272a04cb7b7e6362ad7ec145bf83b4c2275f178f1"
+  },
+  {
+    "path": "mir_foundation_F0_3/DECISION_DISPOSITIONS.md",
+    "matches_archive": true,
+    "sha256": "6d7e3f55f507c20f54bd93c719f0c42308f3ee8ea446704af4ed2804b9ff15e1"
+  },
+  {
+    "path": "mir_foundation_F0_3/REPORT.html",
+    "matches_archive": true,
+    "sha256": "64495a24b7db934082dc484f6b6f66df0902ceb6159839eb1ee777ddd51f91a9"
+  },
+  {
+    "path": "mir_foundation_F0_3/VALIDATION.md",
+    "matches_archive": true,
+    "sha256": "aa96e614f927a9222e0e4d793e3681f62b86e3cd05cf70f66bdcd6d6d5f9c0c5"
+  },
+  {
+    "path": "mir_foundation_F0_3/theory/THEOREM_LEDGER.md",
+    "matches_archive": true,
+    "sha256": "b6c7d01792be52a55d020f8ebe2fbaefeeb54c4d344536e8b9d14f58440e49c5"
+  },
+  {
+    "path": "mir_foundation_F0_3/theory/PROOFS.md",
+    "matches_archive": true,
+    "sha256": "7d9fa1da1ccb796c8b6c0574b256e1942b4f62cff252696db28ecadfd4793f42"
+  },
+  {
+    "path": "mir_foundation_F0_3/evidence/INTEGRATED_DEMO.json",
+    "matches_archive": true,
+    "sha256": "926edf11458061c204243e48c2a9a7007f20a470006ce249369beed9f3a5b890"
+  },
+  {
+    "path": "mirrorea_system_map_v1/MASTER.md",
+    "matches_archive": true,
+    "sha256": "2effa831d5f8b850a1803f5b957f768152998fe3a2e5af0dbfc47f88fe4d0d82"
+  },
+  {
+    "path": "mirrorea_system_map_v1/MASTER.html",
+    "matches_archive": true,
+    "sha256": "e2c46fa521f6d3e278321bb771770fd8a65c539451a7c623ba58fc4c0b911bc8"
+  },
+  {
+    "path": "mirrorea_system_map_v1/VALIDATION.md",
+    "matches_archive": true,
+    "sha256": "775b1c73ab5d9fc6b5bc315b86ae92f03bfc091d58f812cf3d27ca4fa0fcce9c"
+  },
+  {
+    "path": "mirrorea_system_map_v1/requirements.json",
+    "matches_archive": true,
+    "sha256": "b16c4d3086552323b808925269dbcb73c2007ef1eea6fb55ba4008dcfd0e501c"
+  }
+]

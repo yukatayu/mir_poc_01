@@ -1,0 +1,9 @@
+sat
+(
+  (define-fun old () Int
+    1)
+  (define-fun new () Int
+    0)
+  (define-fun histmax () Int
+    1)
+)

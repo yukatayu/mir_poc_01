@@ -1,0 +1,7 @@
+(set-option :timeout 10000)
+(set-option :produce-proofs true)
+(declare-const uses Int)
+(assert (= uses 2))
+(assert (not (<= uses 1)))
+(check-sat-using (then (using-params simplify :som true) smt))
+(get-model)

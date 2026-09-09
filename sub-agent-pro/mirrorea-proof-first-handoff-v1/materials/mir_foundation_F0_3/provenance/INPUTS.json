@@ -1,0 +1,41 @@
+{
+  "repository_ref": "19a6decfbea0815b7b4265e8fadfb399270aaed2",
+  "checked_repository_sources": [
+    "branch main metadata",
+    "mirrorea_canon/adr/ADR-0043.md"
+  ],
+  "repository_modified": false,
+  "scope": "Related inputs and selected existing source read; not whole-repository audit.",
+  "inputs": [
+    {
+      "filename": "mir_foundation_research_F0_1.zip",
+      "bytes": 163397,
+      "sha256": "94c707b7ae7952f635520b7ae298a3cb6c5587bb9a88250fae6cedd394ac4354",
+      "role": "user-supplied prior artifact; immutable comparison input"
+    },
+    {
+      "filename": "mir_foundation_research_F0_2.zip",
+      "bytes": 381427,
+      "sha256": "272b9e44552baf14c4858a60ce7e551662769d11a84f0b878cefaa7963732b29",
+      "role": "user-supplied prior artifact; immutable comparison input"
+    },
+    {
+      "filename": "mirrorea_system_map_v1.zip",
+      "bytes": 838419,
+      "sha256": "e81d281eed0cd076efa6a2863ab7ecf3781b38d30fa3dcc6196d7717735914ad",
+      "role": "user-supplied prior artifact; immutable comparison input"
+    },
+    {
+      "filename": "base/language.py",
+      "source": "F0.2/model/language.py",
+      "sha256": "780c4b9d8c506947c956ad9291292f2f8b8d330a96b965cc2494b2a45e57582a",
+      "byte_identical": true
+    },
+    {
+      "filename": "base/certificates.py",
+      "source": "F0.2/model/certificates.py",
+      "sha256": "85cb5f8ff5b088d349355a7a1792400cd76b24090c33eef514331dfbab598031",
+      "byte_identical": true
+    }
+  ]
+}

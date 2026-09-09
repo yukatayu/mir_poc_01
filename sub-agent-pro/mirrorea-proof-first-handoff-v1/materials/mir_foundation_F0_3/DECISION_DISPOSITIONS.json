@@ -1,0 +1,536 @@
+{
+  "version": "F0.3",
+  "decisions": [
+    {
+      "id": "Q-01",
+      "title": "通常readの一貫性",
+      "question": "一式内・一作用内・継続する関係で、同じ状態版を共有する範囲はどこか。",
+      "options": "参照ごとのsnapshot／式単位の整合read／維持された関係／明示的複数profile",
+      "f02_choice": "参照ごとのowner snapshot。最終既定ではない。",
+      "resolve_before": "SL-02の意味とcompiler定理を固定する前",
+      "status": "未決／正式採用前に確認",
+      "authority": "目的・政策はowner判断、技術上の候補比較と証拠は研究側が準備",
+      "owner_approved": false,
+      "F0_3_profile": "F0.2の参照ごとのowner snapshotを継承する有限profile。",
+      "research_disposition": "式/関係単位の整合readを表す契約を比較し、暗黙分散transactionにしない。",
+      "next_work_units": [
+        "W2"
+      ],
+      "decision_status": "candidate-profile-only; final adoption unresolved"
+    },
+    {
+      "id": "Q-02",
+      "title": "ownerと共同状態",
+      "question": "単一owner直列化をどこまで基本にし、複数ownerの関係をどの契約で扱うか。",
+      "options": "単一論理owner＋複製実現／資源移送／明示transaction等。物理的な対等性と別",
+      "f02_choice": "有限owner body。一般多owner不変条件は対象外。",
+      "resolve_before": "共同更新・複製を含む言語断片の受理前",
+      "status": "未決／正式採用前に確認",
+      "authority": "目的・政策はowner判断、技術上の候補比較と証拠は研究側が準備",
+      "owner_approved": false,
+      "F0_3_profile": "抽象ownerの局所原子的更新。物理的唯一サーバを要求しない。",
+      "research_disposition": "論理ownerの実現と多owner invariantを別に定義する。",
+      "next_work_units": [
+        "W2",
+        "W4"
+      ],
+      "decision_status": "candidate-profile-only; final adoption unresolved"
+    },
+    {
+      "id": "Q-03",
+      "title": "αに必要な言語の表現力",
+      "question": "高階closure、first-class reference/module、generics等のどこまでが必要か。",
+      "options": "代表的なreuse/参加/handle例から選ぶ。全機能を先に要求しない",
+      "f02_choice": "第一階関数・再帰・同locusのfuture。一般instance化は未実装。",
+      "resolve_before": "αソースコーパスと基礎断片の選択時",
+      "status": "未決／正式採用前に確認",
+      "authority": "目的・政策はowner判断、技術上の候補比較と証拠は研究側が準備",
+      "owner_approved": false,
+      "F0_3_profile": "第一階の一部CFGのみ。F0.3 VMはspawn/join未対応。",
+      "research_disposition": "純粋高階値・計算型・affine handleの最小正例と型規則を作る。",
+      "next_work_units": [
+        "W2"
+      ],
+      "decision_status": "candidate-profile-only; final adoption unresolved"
+    },
+    {
+      "id": "Q-04",
+      "title": "数値モデル",
+      "question": "整数幅・overflow・float・丸め・文字列の意味をどのprofileで扱うか。",
+      "options": "checked機械整数／数学整数＋資源契約／用途別float等",
+      "f02_choice": "数学的整数とBool。",
+      "resolve_before": "backend意味保存の受理前",
+      "status": "未決／正式採用前に確認",
+      "authority": "目的・政策はowner判断、技術上の候補比較と証拠は研究側が準備",
+      "owner_approved": false,
+      "F0_3_profile": "数学的IntとBool。認可ctxではBool/Intを区別する。",
+      "research_disposition": "Int64/float/textへの意味とoverflowを決める。",
+      "next_work_units": [
+        "W2"
+      ],
+      "decision_status": "candidate-profile-only; final adoption unresolved"
+    },
+    {
+      "id": "Q-05",
+      "title": "親が複数の場合と退出",
+      "question": "存在/admissionの親は全て必須か、代替候補か。退出後に何が存続するか。",
+      "options": "AND依存／明示OR依存／独立root。グラフごとに意味を定める",
+      "f02_choice": "一般的な多層admission DAGは未実装。",
+      "resolve_before": "存在・参加・撤去規則の確定前",
+      "status": "未決／正式採用前に確認",
+      "authority": "目的・政策はowner判断、技術上の候補比較と証拠は研究側が準備",
+      "owner_approved": false,
+      "F0_3_profile": "positive all/anyと最小不動点。same-kind DAG条件は別に維持。",
+      "research_disposition": "ORと集団生成の使い方、局所証拠の十分性を利用例で確認する。",
+      "next_work_units": [
+        "W1",
+        "W3"
+      ],
+      "decision_status": "candidate-profile-only; final adoption unresolved"
+    },
+    {
+      "id": "Q-06",
+      "title": "fallbackと再取得の表層",
+      "question": "同lineage単調性を保った上で、再取得をどこまで宣言から生成するか。",
+      "options": "手動要求／条件付き宣言からfresh取得／用途別",
+      "f02_choice": "単調cursorと別lineage。認可の統合は不足。",
+      "resolve_before": "通常参照と参加の統合前",
+      "status": "未決／正式採用前に確認",
+      "authority": "目的・政策はowner判断、技術上の候補比較と証拠は研究側が準備",
+      "owner_approved": false,
+      "F0_3_profile": "reacquireは別認可の明示操作。新claim生成だけでは復帰しない。",
+      "research_disposition": "宣言から再取得操作を生成するsurfaceを検討する。",
+      "next_work_units": [
+        "W3"
+      ],
+      "decision_status": "candidate-profile-only; final adoption unresolved"
+    },
+    {
+      "id": "Q-07",
+      "title": "参照・識別・履歴",
+      "question": "live handleと永続的な引用・版指定をどの抽象で分けるか。",
+      "options": "型区別／操作区別／共通識別子＋使用契約。URL形式は未選択",
+      "f02_choice": "一般の参照・address体系なし。",
+      "resolve_before": "persistentな構成の同一性を公開する前",
+      "status": "未決／正式採用前に確認",
+      "authority": "目的・政策はowner判断、技術上の候補比較と証拠は研究側が準備",
+      "owner_approved": false,
+      "F0_3_profile": "instance/name/incarnation/revisionを区別。live結果のみ厳格再検査。",
+      "research_disposition": "historical ref/snapshot/first-class handle契約を分ける。",
+      "next_work_units": [
+        "W2",
+        "W8"
+      ],
+      "decision_status": "candidate-profile-only; final adoption unresolved"
+    },
+    {
+      "id": "Q-08",
+      "title": "循環と遅延",
+      "question": "関係評価で許すDAG断片と時間越しのfeedbackをどう分けるか。",
+      "options": "瞬間DAG＋明示delay等。call graphやnetwork graphへ制約を拡大しない",
+      "f02_choice": "affineな有限関係DAG。",
+      "resolve_before": "関係構成の一般化前",
+      "status": "未決／正式採用前に確認",
+      "authority": "目的・政策はowner判断、技術上の候補比較と証拠は研究側が準備",
+      "owner_approved": false,
+      "F0_3_profile": "同kindと関係計算はDAG、cross-kind根拠は帰納的closure。",
+      "research_disposition": "許された時間feedbackの意味とcache/表示境界を比較する。",
+      "next_work_units": [
+        "W3"
+      ],
+      "decision_status": "candidate-profile-only; final adoption unresolved"
+    },
+    {
+      "id": "Q-09",
+      "title": "時間・締切の意味",
+      "question": "clock供給元、精度、起点、deadlineとleaseの意味は何か。",
+      "options": "論理時刻／host clock契約／時刻域間の対応",
+      "f02_choice": "一般時間体系は未統合。Canonのowner budgetも限定契約。",
+      "resolve_before": "同期・非同期・leaseを跨ぐ保証前",
+      "status": "未決／正式採用前に確認",
+      "authority": "目的・政策はowner判断、技術上の候補比較と証拠は研究側が準備",
+      "owner_approved": false,
+      "F0_3_profile": "presentation contextは一致する外部tagで、実clock保証なし。",
+      "research_disposition": "logical time・deadline・clock/leaseの前提を閉じる。",
+      "next_work_units": [
+        "W3",
+        "W4"
+      ],
+      "decision_status": "candidate-profile-only; final adoption unresolved"
+    },
+    {
+      "id": "Q-10",
+      "title": "提示と近似",
+      "question": "許される誤差・sample欠落・整合frontierを何とするか。",
+      "options": "用途別profile、公開される誤差契約。全domain共通値は決めない",
+      "f02_choice": "正確な有理affine評価、一般rendererなし。",
+      "resolve_before": "Viewの受入れ前",
+      "status": "未決／正式採用前に確認",
+      "authority": "目的・政策はowner判断、技術上の候補比較と証拠は研究側が準備",
+      "owner_approved": false,
+      "F0_3_profile": "関係式は正確な整数演算のみ。",
+      "research_disposition": "誤差とapproximationを権限/失敗/表示のどこで明示するか定義する。",
+      "next_work_units": [
+        "W3",
+        "W7"
+      ],
+      "decision_status": "candidate-profile-only; final adoption unresolved"
+    },
+    {
+      "id": "Q-11",
+      "title": "retryと結果保持",
+      "question": "どの操作で再送・保持結果返却・重複拒否を許し、どこまで保持するか。",
+      "options": "操作別明示policy。exactly-onceを一律には置かない",
+      "f02_choice": "state-onlyで保持結果を返す経路。Canon全操作へ適用しない。",
+      "resolve_before": "通信と忘却の受理前",
+      "status": "未決／正式採用前に確認",
+      "authority": "目的・政策はowner判断、技術上の候補比較と証拠は研究側が準備",
+      "owner_approved": false,
+      "F0_3_profile": "同一runtimeのrequestは重複serve拒否。結果使用は別に現在性検査。",
+      "research_disposition": "操作別retryとtombstone回収を永続化条件に結びつける。",
+      "next_work_units": [
+        "W4",
+        "W5"
+      ],
+      "decision_status": "candidate-profile-only; final adoption unresolved"
+    },
+    {
+      "id": "Q-12",
+      "title": "取消しとquiescence",
+      "question": "結果不明・非停止の処理を持つ場合、親の終了やpatchをどう扱うか。",
+      "options": "待機／確認付き取消し／旧世代隔離／明示的な中断結果",
+      "f02_choice": "未確定要求は保守的に待つ。一般取消しは未完成。",
+      "resolve_before": "activity/patchの利用条件確定前",
+      "status": "未決／正式採用前に確認",
+      "authority": "目的・政策はowner判断、技術上の候補比較と証拠は研究側が準備",
+      "owner_approved": false,
+      "F0_3_profile": "一般的cancel/補償は未統合。",
+      "research_disposition": "取り消す対象と既実行効果の非巻戻しを型にする。",
+      "next_work_units": [
+        "W2",
+        "W4"
+      ],
+      "decision_status": "candidate-profile-only; final adoption unresolved"
+    },
+    {
+      "id": "Q-13",
+      "title": "故障下の進行",
+      "question": "どのネットワーク・障害・復旧条件で完了を約束するか。",
+      "options": "管理されたLAN／crash recovery／partition下blocking許容等",
+      "f02_choice": "2PC型候補。coordinator不在ならblocking可能。",
+      "resolve_before": "分散activationの方式選択前",
+      "status": "未決／正式採用前に確認",
+      "authority": "目的・政策はowner判断、技術上の候補比較と証拠は研究側が準備",
+      "owner_approved": false,
+      "F0_3_profile": "任意有限prefixの安全性のみ。",
+      "research_disposition": "公平性、連結性、復旧条件ごとの進行性を宣言する。",
+      "next_work_units": [
+        "W4"
+      ],
+      "decision_status": "candidate-profile-only; final adoption unresolved"
+    },
+    {
+      "id": "Q-14",
+      "title": "効果と継続の拡張",
+      "question": "one-shot/multi-shot、handler順序、捕捉と再開をどこまで認めるか。",
+      "options": "必要例から選択し、所有・取消し・保存と同時検討",
+      "f02_choice": "一般handler loaderなし。要求と継続のモデル。",
+      "resolve_before": "効果言語の拡張API前",
+      "status": "未決／正式採用前に確認",
+      "authority": "目的・政策はowner判断、技術上の候補比較と証拠は研究側が準備",
+      "owner_approved": false,
+      "F0_3_profile": "sourceからのrequest/resumeを使うが、一般handler変更は未定義。",
+      "research_disposition": "再開権の回数・所有・保存を計算型へ接続する。",
+      "next_work_units": [
+        "W2"
+      ],
+      "decision_status": "candidate-profile-only; final adoption unresolved"
+    },
+    {
+      "id": "Q-15",
+      "title": "補償が必要な外界",
+      "question": "αはどの外部効果を許すか。補償の失敗をどこへ返すか。",
+      "options": "read-only／冪等操作／補償付き操作を段階化",
+      "f02_choice": "Started後の不明性を保持する保守的モデル。",
+      "resolve_before": "外部provider受入れ前",
+      "status": "未決／正式採用前に確認",
+      "authority": "目的・政策はowner判断、技術上の候補比較と証拠は研究側が準備",
+      "owner_approved": false,
+      "F0_3_profile": "外部effectはF0.3 Kernelに未搭載。",
+      "research_disposition": "F0.2のunknown-startモデルと現在性・完全snapshotの接続を研究する。",
+      "next_work_units": [
+        "W4",
+        "W5"
+      ],
+      "decision_status": "candidate-profile-only; final adoption unresolved"
+    },
+    {
+      "id": "Q-16",
+      "title": "認証・policyの合成",
+      "question": "層の順序・scope・選言・失敗の優先順位・主体変換をどう扱うか。",
+      "options": "同じ要求に対する明示AND／限定選言／検証された変換",
+      "f02_choice": "単純なissuer/grantで一般層合成なし。",
+      "resolve_before": "AU-02/AU-05の基礎成立前",
+      "status": "未決／正式採用前に確認",
+      "authority": "目的・政策はowner判断、技術上の候補比較と証拠は研究側が準備",
+      "owner_approved": false,
+      "F0_3_profile": "同じtyped κを全leafへ渡すnonempty all/explicit any。",
+      "research_disposition": "任意policy transformerの順序・委譲・issuer trustを選択profileごとに証明する。",
+      "next_work_units": [
+        "W1",
+        "W8"
+      ],
+      "decision_status": "candidate-profile-only; final adoption unresolved"
+    },
+    {
+      "id": "Q-17",
+      "title": "対等性と信頼域",
+      "question": "独立したissuerと管理主体は、どの範囲で相互に認めるか。",
+      "options": "局所root、明示委譲、federation等。唯一の世界管理者は前提にしない",
+      "f02_choice": "trusted issuerを仮定。",
+      "resolve_before": "bootstrap・跨組織接続・連合前",
+      "status": "未決／正式採用前に確認",
+      "authority": "目的・政策はowner判断、技術上の候補比較と証拠は研究側が準備",
+      "owner_approved": false,
+      "F0_3_profile": "ideal trusted issued records。cryptographyやByzantine hostを検証していない。",
+      "research_disposition": "guest/host/controlplaneのTCBと信頼翻訳を決める。",
+      "next_work_units": [
+        "W4",
+        "W7",
+        "W8"
+      ],
+      "decision_status": "candidate-profile-only; final adoption unresolved"
+    },
+    {
+      "id": "Q-18",
+      "title": "失効とprepared patch",
+      "question": "準備後の権限失効を即時有効にするか、限定予約を解決まで保持するか。",
+      "options": "即時失効とcommitを直列化／明示的な権限予約／契約別",
+      "f02_choice": "準備からdecisionまでの権限予約候補。Canonへの採用ではない。",
+      "resolve_before": "分散patchを正式採用する前",
+      "status": "未決／正式採用前に確認",
+      "authority": "目的・政策はowner判断、技術上の候補比較と証拠は研究側が準備",
+      "owner_approved": false,
+      "F0_3_profile": "F0.3 reparentはcommit時再検査。F0.2の準備後予約を採用しない。",
+      "research_disposition": "strict invalidationと予約方式の違いをowner判断の対象に残す。",
+      "next_work_units": [
+        "W3",
+        "W5"
+      ],
+      "decision_status": "candidate-profile-only; final adoption unresolved"
+    },
+    {
+      "id": "Q-19",
+      "title": "理論拡張の受理方式",
+      "question": "何を共通kernelで検査し、どこに新しいlogicを許すか。",
+      "options": "既存証拠言語へ翻訳／検証済み解釈／明示trusted拡張。混同しない",
+      "f02_choice": "多項式certificateのみ具体化。依存型/MTTは未採用。",
+      "resolve_before": "TY-02～06を基礎として使う前",
+      "status": "未決／正式採用前に確認",
+      "authority": "目的・政策はowner判断、技術上の候補比較と証拠は研究側が準備",
+      "owner_approved": false,
+      "F0_3_profile": "多項式/closure/labelの既知検査器だけ。",
+      "research_disposition": "依存型/様相の局所理論adapterとsound bridgeを機械化する。",
+      "next_work_units": [
+        "W1",
+        "W2"
+      ],
+      "decision_status": "candidate-profile-only; final adoption unresolved"
+    },
+    {
+      "id": "Q-20",
+      "title": "save/loadの連続性",
+      "question": "同session復旧、fresh import、隔離replayをどこまでαへ含めるか。",
+      "options": "用途と現在の制御状態の参照方法を先に決める",
+      "f02_choice": "actorのfresh importと限定journal。全成分live resumeなし。",
+      "resolve_before": "αの永続化受入れ前",
+      "status": "未決／正式採用前に確認",
+      "authority": "目的・政策はowner判断、技術上の候補比較と証拠は研究側が準備",
+      "owner_approved": false,
+      "F0_3_profile": "現在headに基づくsame-instance全image replay。",
+      "research_disposition": "fresh import/過去分岐/実full resumeの意味とscopeを別に選択する。",
+      "next_work_units": [
+        "W5"
+      ],
+      "decision_status": "candidate-profile-only; final adoption unresolved"
+    },
+    {
+      "id": "Q-21",
+      "title": "互換性と旧版の寿命",
+      "question": "何を後方互換として約束し、非互換更新をどう接続先へ通知・承認するか。",
+      "options": "意味/ソース/wire/ABI/証拠を別version化。永遠互換は既定にしない",
+      "f02_choice": "基本署名と限定成功契約の保存。",
+      "resolve_before": "公開境界または長期更新の採用前",
+      "status": "未決／正式採用前に確認",
+      "authority": "目的・政策はowner判断、技術上の候補比較と証拠は研究側が準備",
+      "owner_approved": false,
+      "F0_3_profile": "同schema/signatureとTotalBody非弱化。",
+      "research_disposition": "契約変更とversion coexistence、受入れ側の合意を定義する。",
+      "next_work_units": [
+        "W3",
+        "W5"
+      ],
+      "decision_status": "candidate-profile-only; final adoption unresolved"
+    },
+    {
+      "id": "Q-22",
+      "title": "基礎の証拠水準",
+      "question": "どの命題を機械証明し、どこを明示TCB・検査・試験で残すか。",
+      "options": "重要境界の機械化＋独立レビューを推奨。全将来機能の一括証明は不要",
+      "f02_choice": "手証明、独自checker、有限探索。全文Lean/Rocq未検査。",
+      "resolve_before": "基礎成立の受理前",
+      "status": "未決／正式採用前に確認",
+      "authority": "目的・政策はowner判断、技術上の候補比較と証拠は研究側が準備",
+      "owner_approved": false,
+      "F0_3_profile": "24手証明、95tests、有限探索。Lean等の一般機械証明なし。",
+      "research_disposition": "基礎受理は独立確認・機械化・実装対応の対象範囲で判定する。",
+      "next_work_units": [
+        "W1",
+        "W4"
+      ],
+      "decision_status": "candidate-profile-only; final adoption unresolved"
+    },
+    {
+      "id": "Q-23",
+      "title": "αのhot-plug範囲",
+      "question": "追加・交換・撤去・移行・再配置のどれを最初の一貫した利用経路で保証するか。",
+      "options": "追加と撤去を含む最小範囲を候補にし、高度な無停止移行は独立に決める",
+      "f02_choice": "追加・交換・限定移行。patch DAGは未統合。",
+      "resolve_before": "α受入れ仕様の固定前",
+      "status": "未決／正式採用前に確認",
+      "authority": "目的・政策はowner判断、技術上の候補比較と証拠は研究側が準備",
+      "owner_approved": false,
+      "F0_3_profile": "動的node/source追加・退役・reparent・同schema交換。",
+      "research_disposition": "実αで必要な追加/撤去/状態移行をSC-24へ明示する。",
+      "next_work_units": [
+        "W3",
+        "W7"
+      ],
+      "decision_status": "candidate-profile-only; final adoption unresolved"
+    },
+    {
+      "id": "Q-24",
+      "title": "影響範囲の算出",
+      "question": "構造依存や論理的な否定条件を、どの方式でsoundに追跡するか。",
+      "options": "完全なread/meta footprint／rank証拠／保守的再検査等",
+      "f02_choice": "完全D/Wとstampを前提にした限定モデル。",
+      "resolve_before": "局所更新の保存定理を受理する前",
+      "status": "未決／正式採用前に確認",
+      "authority": "目的・政策はowner判断、技術上の候補比較と証拠は研究側が準備",
+      "owner_approved": false,
+      "F0_3_profile": "完全tracked reads、absence、versioned index、incarnation。",
+      "research_disposition": "影響閉包の差分化と分散validation原子性の実現を検証する。",
+      "next_work_units": [
+        "W3",
+        "W4"
+      ],
+      "decision_status": "candidate-profile-only; final adoption unresolved"
+    },
+    {
+      "id": "Q-25",
+      "title": "保持・圧縮・削除",
+      "question": "古い結果・証拠・tombstone・codeを、何を残して削除するか。",
+      "options": "用途別retentionとdurableな再実行防止根拠",
+      "f02_choice": "forget floorあり。ackや全storage compactionの統合なし。",
+      "resolve_before": "長期継続/永続化の受入れ前",
+      "status": "未決／正式採用前に確認",
+      "authority": "目的・政策はowner判断、技術上の候補比較と証拠は研究側が準備",
+      "owner_approved": false,
+      "F0_3_profile": "古いrecords/journalは保持。",
+      "research_disposition": "根拠/ログ/claim/requestの安全な忘却条件はまだ選ばない。",
+      "next_work_units": [
+        "W5",
+        "W8"
+      ],
+      "decision_status": "candidate-profile-only; final adoption unresolved"
+    },
+    {
+      "id": "Q-26",
+      "title": "観測の対象モデル",
+      "question": "非干渉の観測者・見えるchannel・schedule・時刻・資源・停止性をどう定義するか。",
+      "options": "値/低trace/metadata/time等を段階化し、未対象経路を明示する",
+      "f02_choice": "public actor＋別の両実行終了を仮定する逐次IFC。",
+      "resolve_before": "privateなαデバッグの受入れ前",
+      "status": "未決／正式採用前に確認",
+      "authority": "目的・政策はowner判断、技術上の候補比較と証拠は研究側が準備",
+      "owner_approved": false,
+      "F0_3_profile": "固定labels、同low control/schedule、filter後buffer。",
+      "research_disposition": "dynamic IFC・timing/termination/存在の脅威モデルを別に選ぶ。",
+      "next_work_units": [
+        "W6"
+      ],
+      "decision_status": "candidate-profile-only; final adoption unresolved"
+    },
+    {
+      "id": "Q-27",
+      "title": "能動デバッグ",
+      "question": "breakpointや巻戻しは局所/全体のどこを止め、何を再実行するか。",
+      "options": "受動inspectを基礎、step・replayは明示制御として範囲選択",
+      "f02_choice": "一般debuggerなし。",
+      "resolve_before": "デバッグ制御UIを実装する前",
+      "status": "未決／正式採用前に確認",
+      "authority": "目的・政策はowner判断、技術上の候補比較と証拠は研究側が準備",
+      "owner_approved": false,
+      "F0_3_profile": "受動observeのみ。active debuggerなし。",
+      "research_disposition": "stop/edit/rollbackを別の認可された操作にする。",
+      "next_work_units": [
+        "W6",
+        "W7"
+      ],
+      "decision_status": "candidate-profile-only; final adoption unresolved"
+    },
+    {
+      "id": "Q-28",
+      "title": "host脅威モデルと実装対象",
+      "question": "trusted host、悪意あるguest、native provider等のどこを保証するか。",
+      "options": "管理host上の隔離guest等から開始可能。悪意あるhost耐性は別問題",
+      "f02_choice": "Pythonモデルとtrusted adapter前提。",
+      "resolve_before": "安全な参加環境の受理前",
+      "status": "未決／正式採用前に確認",
+      "authority": "目的・政策はowner判断、技術上の候補比較と証拠は研究側が準備",
+      "owner_approved": false,
+      "F0_3_profile": "trusted Python host、guestはtyped APIに限定。",
+      "research_disposition": "sandbox、quota、provider isolationと実host前提を定義する。",
+      "next_work_units": [
+        "W7"
+      ],
+      "decision_status": "candidate-profile-only; final adoption unresolved"
+    },
+    {
+      "id": "Q-29",
+      "title": "ネットワーク越し構築の最小体験",
+      "question": "参加先の指定、構成の公開/追加、source編集、承認の入口を何とするか。",
+      "options": "CLI/テキストUI＋最小View等。最終URL/GUI/registryは固定しない",
+      "f02_choice": "一回のモデル例。継続的な構築環境は未実装。",
+      "resolve_before": "αの利用者シナリオを受理する前",
+      "status": "未決／正式採用前に確認",
+      "authority": "目的・政策はowner判断、技術上の候補比較と証拠は研究側が準備",
+      "owner_approved": false,
+      "F0_3_profile": "再現用CLIと静的HTML。製品UIではない。",
+      "research_disposition": "最小の構築/参加/診断経路とheadless APIを同じ検査に結ぶ。",
+      "next_work_units": [
+        "W7"
+      ],
+      "decision_status": "candidate-profile-only; final adoption unresolved"
+    },
+    {
+      "id": "Q-30",
+      "title": "性能と規模の数値",
+      "question": "初期利用で何人・何台・何操作/秒・どの停止時間を必要とするか。",
+      "options": "実際の利用コーパスと機器を選んで値を決める",
+      "f02_choice": "一般的な性能保証はなし。",
+      "resolve_before": "性能を含むα出荷判断前",
+      "status": "未決／正式採用前に確認",
+      "authority": "目的・政策はowner判断、技術上の候補比較と証拠は研究側が準備",
+      "owner_approved": false,
+      "F0_3_profile": "性能値を目標として捏造しない。今回の時間は測定記録だけ。",
+      "research_disposition": "対象機器とnetwork条件で検査/観測/実行の予算を決める。",
+      "next_work_units": [
+        "W4",
+        "W6",
+        "W7"
+      ],
+      "decision_status": "candidate-profile-only; final adoption unresolved"
+    }
+  ]
+}

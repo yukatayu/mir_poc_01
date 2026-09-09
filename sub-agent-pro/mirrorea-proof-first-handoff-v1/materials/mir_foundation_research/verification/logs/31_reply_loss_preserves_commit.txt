@@ -1,0 +1,9 @@
+unsat
+((proof
+(let ((?x26 (+ x delta)))
+(let (($x28 (= (ite delivered ?x26 ?x26) ?x26)))
+(let (($x29 (not $x28)))
+(let ((@x39 (trans (monotonicity (rewrite $x28) (= $x28 (= ?x26 ?x26))) (rewrite (= (= ?x26 ?x26) true)) (= $x28 true))))
+(let ((@x46 (trans (monotonicity @x39 (= $x29 (not true))) (rewrite (= (not true) false)) (= $x29 false))))
+(mp (asserted $x29) @x46 false))))))))
+

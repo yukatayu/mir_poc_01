@@ -1,0 +1,9 @@
+unsat
+((proof
+(let (($x39 (>= x (- 1))))
+(let (($x44 (not $x39)))
+(let ((@x32 (mp (asserted (not (>= (+ x 1) 0))) (rewrite (= (not (>= (+ x 1) 0)) $x44)) $x44)))
+(let (($x25 (>= x 0)))
+(let ((@x26 (asserted $x25)))
+(unit-resolution ((_ th-lemma arith farkas 1 1) (or $x39 (not $x25))) @x26 @x32 false))))))))
+

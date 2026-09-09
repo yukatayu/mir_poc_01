@@ -1,0 +1,429 @@
+[
+  {
+    "id": "01_store_frame",
+    "title": "A write preserves all different cells",
+    "file": "01_store_frame.smt2",
+    "expected": "unsat",
+    "category": "symbolic-lemma"
+  },
+  {
+    "id": "02_store_readback",
+    "title": "A write is read back at its own location",
+    "file": "02_store_readback.smt2",
+    "expected": "unsat",
+    "category": "symbolic-lemma"
+  },
+  {
+    "id": "03_independent_writes",
+    "title": "Independent constant writes commute",
+    "file": "03_independent_writes.smt2",
+    "expected": "unsat",
+    "category": "symbolic-lemma"
+  },
+  {
+    "id": "04_independent_rmw",
+    "title": "Disjoint self-dependent affine RMWs commute",
+    "file": "04_independent_rmw.smt2",
+    "expected": "unsat",
+    "category": "symbolic-lemma"
+  },
+  {
+    "id": "05_rmw_serial",
+    "title": "Sequential owner RMW is not two stale blind writes",
+    "file": "05_rmw_serial.smt2",
+    "expected": "unsat",
+    "category": "symbolic-lemma"
+  },
+  {
+    "id": "06_stale_blind_write_mutant",
+    "title": "Counterexample: requester-side stale value loses a write",
+    "file": "06_stale_blind_write_mutant.smt2",
+    "expected": "sat",
+    "category": "counterexample"
+  },
+  {
+    "id": "07_projection_other_owner",
+    "title": "One owner update does not alter another owner projection",
+    "file": "07_projection_other_owner.smt2",
+    "expected": "unsat",
+    "category": "symbolic-lemma"
+  },
+  {
+    "id": "08_projection_same_owner",
+    "title": "Projection and one-owner state update commute",
+    "file": "08_projection_same_owner.smt2",
+    "expected": "unsat",
+    "category": "symbolic-lemma"
+  },
+  {
+    "id": "09_interval_add",
+    "title": "Integer refinement: interval addition is sound",
+    "file": "09_interval_add.smt2",
+    "expected": "unsat",
+    "category": "symbolic-lemma"
+  },
+  {
+    "id": "10_interval_sub",
+    "title": "Integer refinement: interval subtraction is sound",
+    "file": "10_interval_sub.smt2",
+    "expected": "unsat",
+    "category": "symbolic-lemma"
+  },
+  {
+    "id": "11_absolute_value_contract",
+    "title": "Concrete refined module: absolute value returns a nonnegative integer",
+    "file": "11_absolute_value_contract.smt2",
+    "expected": "unsat",
+    "category": "symbolic-lemma"
+  },
+  {
+    "id": "12_cross_contract_composition",
+    "title": "Second module safely consumes the exported nonnegative fact",
+    "file": "12_cross_contract_composition.smt2",
+    "expected": "unsat",
+    "category": "symbolic-lemma"
+  },
+  {
+    "id": "13_guarded_decrement",
+    "title": "Actual arithmetic invariant for a guarded decrement",
+    "file": "13_guarded_decrement.smt2",
+    "expected": "unsat",
+    "category": "symbolic-lemma"
+  },
+  {
+    "id": "14_guarded_decrement_mutant",
+    "title": "Counterexample: removing the semantic precondition",
+    "file": "14_guarded_decrement_mutant.smt2",
+    "expected": "sat",
+    "category": "counterexample"
+  },
+  {
+    "id": "15_rank_path_step",
+    "title": "Induction step: strict rank along a nonempty dependency path",
+    "file": "15_rank_path_step.smt2",
+    "expected": "unsat",
+    "category": "induction-step"
+  },
+  {
+    "id": "16_rank_no_cycle",
+    "title": "A strict rank cannot return to its start",
+    "file": "16_rank_no_cycle.smt2",
+    "expected": "unsat",
+    "category": "symbolic-lemma"
+  },
+  {
+    "id": "17_closed_removal",
+    "title": "Removing a forward-closed dependent set preserves live-parent closure",
+    "file": "17_closed_removal.smt2",
+    "expected": "unsat",
+    "category": "symbolic-lemma"
+  },
+  {
+    "id": "18_max_history_mutant",
+    "title": "Counterexample to the old position <= history maximum wording",
+    "file": "18_max_history_mutant.smt2",
+    "expected": "sat",
+    "category": "counterexample"
+  },
+  {
+    "id": "19_fallback_search_step",
+    "title": "Induction step for the first valid suffix search",
+    "file": "19_fallback_search_step.smt2",
+    "expected": "unsat",
+    "category": "induction-step"
+  },
+  {
+    "id": "20_fallback_totality_step",
+    "title": "Induction step: a valid suffix endpoint prevents exhaustion",
+    "file": "20_fallback_totality_step.smt2",
+    "expected": "unsat",
+    "category": "induction-step"
+  },
+  {
+    "id": "21_fallback_lineage_order",
+    "title": "New lineage advances lexicographic (epoch,cursor) order",
+    "file": "21_fallback_lineage_order.smt2",
+    "expected": "unsat",
+    "category": "symbolic-lemma"
+  },
+  {
+    "id": "22_chain_flatten_assoc",
+    "title": "Pure ordered fallback flattening associativity",
+    "file": "22_chain_flatten_assoc.smt2",
+    "expected": "unsat",
+    "category": "symbolic-lemma"
+  },
+  {
+    "id": "23_ancestor_not_authority",
+    "title": "Counterexample: live ancestor alone does not imply valid access",
+    "file": "23_ancestor_not_authority.smt2",
+    "expected": "sat",
+    "category": "counterexample"
+  },
+  {
+    "id": "24_revoked_epoch",
+    "title": "A retired grant epoch is not valid after a strictly later epoch",
+    "file": "24_revoked_epoch.smt2",
+    "expected": "unsat",
+    "category": "symbolic-lemma"
+  },
+  {
+    "id": "25_aba_cell_handle",
+    "title": "Re-created identifier cannot validate the retired incarnation",
+    "file": "25_aba_cell_handle.smt2",
+    "expected": "unsat",
+    "category": "symbolic-lemma"
+  },
+  {
+    "id": "26_tombstone_union",
+    "title": "Restore union cannot erase current revocation",
+    "file": "26_tombstone_union.smt2",
+    "expected": "unsat",
+    "category": "symbolic-lemma"
+  },
+  {
+    "id": "27_proof_not_grant",
+    "title": "A proof result alone cannot pass a separately gated authority check",
+    "file": "27_proof_not_grant.smt2",
+    "expected": "unsat",
+    "category": "symbolic-lemma"
+  },
+  {
+    "id": "28_auth_conjunction",
+    "title": "all_of requires every authority branch",
+    "file": "28_auth_conjunction.smt2",
+    "expected": "unsat",
+    "category": "symbolic-lemma"
+  },
+  {
+    "id": "29_auth_or_mutant",
+    "title": "Counterexample: any_of silently substituted for all_of",
+    "file": "29_auth_or_mutant.smt2",
+    "expected": "sat",
+    "category": "counterexample"
+  },
+  {
+    "id": "30_no_double_commit",
+    "title": "Induction step: seen flag and count preserve at-most-once commit",
+    "file": "30_no_double_commit.smt2",
+    "expected": "unsat",
+    "category": "induction-step"
+  },
+  {
+    "id": "31_reply_loss_preserves_commit",
+    "title": "Lost reply does not undo an already committed state transition",
+    "file": "31_reply_loss_preserves_commit.smt2",
+    "expected": "unsat",
+    "category": "symbolic-lemma"
+  },
+  {
+    "id": "32_post_loss_nonexecution_mutant",
+    "title": "Counterexample: no reply is not a proof of no execution",
+    "file": "32_post_loss_nonexecution_mutant.smt2",
+    "expected": "sat",
+    "category": "counterexample"
+  },
+  {
+    "id": "33_freshness_locality",
+    "title": "Changes outside a certificate read footprint do not stale its version",
+    "file": "33_freshness_locality.smt2",
+    "expected": "unsat",
+    "category": "symbolic-lemma"
+  },
+  {
+    "id": "34_versioned_fact",
+    "title": "Changing a state cell with a generation increment invalidates the old stamp",
+    "file": "34_versioned_fact.smt2",
+    "expected": "unsat",
+    "category": "symbolic-lemma"
+  },
+  {
+    "id": "35_historical_fact_mutant",
+    "title": "Counterexample: a historical read fact is not a current-state assertion",
+    "file": "35_historical_fact_mutant.smt2",
+    "expected": "sat",
+    "category": "counterexample"
+  },
+  {
+    "id": "36_contract_replacement",
+    "title": "Explicit contract weakening/post-strengthening preserves clients",
+    "file": "36_contract_replacement.smt2",
+    "expected": "unsat",
+    "category": "symbolic-lemma"
+  },
+  {
+    "id": "37_precondition_strengthening_mutant",
+    "title": "Counterexample: transparent replacement strengthens the precondition",
+    "file": "37_precondition_strengthening_mutant.smt2",
+    "expected": "sat",
+    "category": "counterexample"
+  },
+  {
+    "id": "38_effect_row_subset_transitive",
+    "title": "Per-effect containment composes",
+    "file": "38_effect_row_subset_transitive.smt2",
+    "expected": "unsat",
+    "category": "symbolic-lemma"
+  },
+  {
+    "id": "39_value_migration",
+    "title": "Actual state migration preserves nonnegative invariant",
+    "file": "39_value_migration.smt2",
+    "expected": "unsat",
+    "category": "symbolic-lemma"
+  },
+  {
+    "id": "40_patch_outside_frame",
+    "title": "A migrated cell leaves outside observations unchanged",
+    "file": "40_patch_outside_frame.smt2",
+    "expected": "unsat",
+    "category": "symbolic-lemma"
+  },
+  {
+    "id": "41_pc_join",
+    "title": "No-write-down forces both branch and value dependencies below target",
+    "file": "41_pc_join.smt2",
+    "expected": "unsat",
+    "category": "symbolic-lemma"
+  },
+  {
+    "id": "42_implicit_flow_mutant",
+    "title": "Counterexample: checking values but ignoring secret branch control",
+    "file": "42_implicit_flow_mutant.smt2",
+    "expected": "sat",
+    "category": "counterexample"
+  },
+  {
+    "id": "43_low_expression_add",
+    "title": "Two-run expression step: equal public inputs have equal sums",
+    "file": "43_low_expression_add.smt2",
+    "expected": "unsat",
+    "category": "induction-step"
+  },
+  {
+    "id": "44_low_expression_conditional",
+    "title": "Two-run expression step: equal condition selects equal results",
+    "file": "44_low_expression_conditional.smt2",
+    "expected": "unsat",
+    "category": "induction-step"
+  },
+  {
+    "id": "45_snapshot_receive_send",
+    "title": "Closed cut with send->receive cannot contain an orphan receive",
+    "file": "45_snapshot_receive_send.smt2",
+    "expected": "unsat",
+    "category": "symbolic-lemma"
+  },
+  {
+    "id": "46_channel_not_orphan_repair",
+    "title": "Counterexample: channel membership cannot repair orphan receive",
+    "file": "46_channel_not_orphan_repair.smt2",
+    "expected": "sat",
+    "category": "counterexample"
+  },
+  {
+    "id": "47_snapshot_inflight",
+    "title": "In-flight channel entry is sent but not yet received in the cut",
+    "file": "47_snapshot_inflight.smt2",
+    "expected": "unsat",
+    "category": "symbolic-lemma"
+  },
+  {
+    "id": "48_replay_prefix_revocation",
+    "title": "Current revocation remains valid even if historical snapshot lacks it",
+    "file": "48_replay_prefix_revocation.smt2",
+    "expected": "unsat",
+    "category": "symbolic-lemma"
+  },
+  {
+    "id": "49_restore_old_grant_mutant",
+    "title": "Counterexample: restoring only old authorization resurrects a grant",
+    "file": "49_restore_old_grant_mutant.smt2",
+    "expected": "sat",
+    "category": "counterexample"
+  },
+  {
+    "id": "50_rely_stable_read",
+    "title": "Concrete modal instance: unrelated state update preserves a stable predicate",
+    "file": "50_rely_stable_read.smt2",
+    "expected": "unsat",
+    "category": "symbolic-lemma"
+  },
+  {
+    "id": "51_disjoint_token_allocation",
+    "title": "A freshly allocated region cannot alias an existing owned region",
+    "file": "51_disjoint_token_allocation.smt2",
+    "expected": "unsat",
+    "category": "symbolic-lemma"
+  },
+  {
+    "id": "52_linear_token_split_mutant",
+    "title": "Counterexample: erasing ownership permits duplicate use",
+    "file": "52_linear_token_split_mutant.smt2",
+    "expected": "sat",
+    "category": "counterexample"
+  },
+  {
+    "id": "53_while_sum_preservation",
+    "title": "Annotated loop sum invariant: total+n(n+1)/2 stays constant",
+    "file": "53_while_sum_preservation.smt2",
+    "expected": "unsat",
+    "category": "symbolic-lemma"
+  },
+  {
+    "id": "54_while_sum_exit",
+    "title": "Annotated loop invariant entails its exit postcondition",
+    "file": "54_while_sum_exit.smt2",
+    "expected": "unsat",
+    "category": "symbolic-lemma"
+  },
+  {
+    "id": "55_while_variant",
+    "title": "The selected loop has a decreasing nonnegative variant",
+    "file": "55_while_variant.smt2",
+    "expected": "unsat",
+    "category": "symbolic-lemma"
+  },
+  {
+    "id": "56_i64_refinement_guard",
+    "title": "Optional implementation bridge: range guard makes integer addition representable",
+    "file": "56_i64_refinement_guard.smt2",
+    "expected": "unsat",
+    "category": "symbolic-lemma"
+  },
+  {
+    "id": "57_checkpoint_raise",
+    "title": "Lower-bound propagation stays below every satisfying completion",
+    "file": "57_checkpoint_raise.smt2",
+    "expected": "unsat",
+    "category": "induction-step"
+  },
+  {
+    "id": "58_checkpoint_overflow_contradiction",
+    "title": "A forced lower bound beyond the checkpoint ceiling excludes all completions",
+    "file": "58_checkpoint_overflow_contradiction.smt2",
+    "expected": "unsat",
+    "category": "symbolic-lemma"
+  },
+  {
+    "id": "59_checkpoint_Z_cycle",
+    "title": "The concrete two-message Z cycle excludes the middle A checkpoint",
+    "file": "59_checkpoint_Z_cycle.smt2",
+    "expected": "unsat",
+    "category": "symbolic-lemma"
+  },
+  {
+    "id": "60_region_split_disjoint",
+    "title": "The two pieces of an interior region split are disjoint",
+    "file": "60_region_split_disjoint.smt2",
+    "expected": "unsat",
+    "category": "symbolic-lemma"
+  },
+  {
+    "id": "61_region_split_positive_cover",
+    "title": "Interior split preserves positive sizes and the total extent",
+    "file": "61_region_split_positive_cover.smt2",
+    "expected": "unsat",
+    "category": "symbolic-lemma"
+  }
+]

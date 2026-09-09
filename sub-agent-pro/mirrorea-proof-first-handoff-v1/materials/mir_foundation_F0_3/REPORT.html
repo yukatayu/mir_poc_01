@@ -1,0 +1,1199 @@
+<!doctype html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="color-scheme" content="light"><title>Mirrorea 基礎理論と実装への接続 F0.3</title><style>
+:root{font-family:system-ui,-apple-system,"Noto Sans CJK JP","Yu Gothic",sans-serif;color:#1d1d1d;background:#fff;font-size:16px;line-height:1.85}
+*{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:1rem}body{margin:0}a{color:inherit;text-decoration-thickness:1px;text-underline-offset:3px}a:hover{text-decoration-thickness:2px}
+nav{position:fixed;inset:0 auto 0 0;width:208px;border-right:1px solid #ddd;padding:30px 20px;overflow:auto;background:#f8f8f8}nav .brand{font-size:18px;font-weight:700;margin-bottom:24px}nav a{display:block;font-size:14px;padding:8px 6px;text-decoration:none}nav a:hover{background:#eee}
+main{margin-left:208px;max-width:1240px;padding:48px 56px 100px}header{padding-bottom:24px;border-bottom:2px solid #333}h1{font-size:31px;line-height:1.45;letter-spacing:.01em;margin:0 0 20px}h2{font-size:25px;line-height:1.5;margin-top:52px;padding-top:10px}h3{font-size:21px;line-height:1.5;margin-top:38px}h4{font-size:18px;line-height:1.6;margin-top:28px}p{margin:16px 0}section{padding:8px 0 30px;border-bottom:1px solid #ddd}section>h2:first-child{margin-top:30px}strong{font-weight:700}code,pre{font-family:ui-monospace,SFMono-Regular,Consolas,monospace;font-size:.88em}code{overflow-wrap:anywhere}pre{background:#f6f6f6;padding:18px;overflow:auto;line-height:1.65;border-left:3px solid #777}pre code{white-space:pre}blockquote{border-left:3px solid #888;margin:20px 0;padding:2px 18px;color:#444}table{width:100%;border-collapse:collapse;font-size:14px;line-height:1.65}th,td{padding:11px 13px;vertical-align:top;text-align:left;border-bottom:1px solid #ddd;min-width:100px;overflow-wrap:anywhere}th{background:#f3f3f3;font-weight:700}td:first-child{min-width:90px}tr:last-child td{border-bottom:1px solid #bbb}.table-scroll{overflow:auto;margin:24px 0;max-width:100%}a.source{font-size:.85em;color:#555;white-space:nowrap}.filters{display:flex;gap:16px;flex-wrap:wrap;align-items:flex-end}.filters label{font-size:13px;display:flex;flex-direction:column;gap:4px}.filters label:first-child{flex:1;min-width:210px}input,select{font:inherit;border:1px solid #aaa;border-radius:0;padding:9px 10px;background:#fff;color:#111;max-width:100%}#count{font-size:14px;color:#555}.requirement{border-top:1px solid #ddd;padding:10px 0}.requirement summary{cursor:pointer;font-weight:600;line-height:1.6;padding:8px 0}.id{display:inline-block;min-width:65px;font-family:ui-monospace,monospace;font-size:13px;color:#555}.origin{font-size:12px;font-weight:400;margin-left:8px;color:#666}dl{margin:8px 0 22px;padding-left:24px}dt{font-size:13px;font-weight:700;color:#555;margin:18px 0 4px}dd{margin:0}.requirement[hidden]{display:none}.note{font-size:14px;color:#555}.toclink{display:inline-block;margin-right:18px}
+@media(max-width:800px){nav{position:static;width:auto;border-right:0;border-bottom:1px solid #ccc;padding:16px;display:flex;gap:7px;flex-wrap:wrap}nav .brand{width:100%;margin:0 0 6px}nav a{padding:4px 6px;font-size:13px}main{margin:0;padding:28px 20px 64px}h1{font-size:26px}h2{font-size:23px}h3{font-size:20px}.table-scroll{margin:18px 0}th,td{padding:9px 10px;min-width:145px}pre{padding:13px}dl{padding-left:12px}}
+@media print{nav,.filters,#count{display:none}main{margin:0;max-width:none;padding:0}html{font-size:10pt}a{text-decoration:none}section{break-before:auto}h2,h3,h4{break-after:avoid}.requirement{display:block!important}.table-scroll,pre{overflow:visible}pre{white-space:pre-wrap}table{font-size:9pt}}
+</style></head><body><nav aria-label="目次"><div class="brand">Mirrorea · F0.3</div><a href="#foundation">全体像</a><a href="#proofs">定義と証明</a><a href="#plan">実装計画</a><a href="#ledger">命題台帳</a><a href="#requirements">119要件</a><a href="#decisions">30の判断</a><a href="#audit">反例・修正</a><a href="#validation">検査記録</a><a href="#sources">出典</a></nav><main><header><h1>Mirroreaの基礎理論と実装への接続</h1><p>構成・証拠・現在性を結ぶF0.3研究候補。定義、手証明、実行モデル、反例と、要件に対応する実装計画を収録しています。</p><p class="note">24項目の手証明・98件の新規テスト。全文の証明支援系による検証、独立レビュー、実Rust／QUICへの対応は未完です。全119要件の受理やCanonの変更を表すものではありません。</p><p><a class="toclink" href="#foundation">到達点を読む</a><a class="toclink" href="#proofs">証明を読む</a><a class="toclink" href="#plan">実装の順序を読む</a></p></header><section id="foundation" aria-label="全体像と到達点"><h2 id="foundation-h0">基礎の全体像と到達点</h2>
+<h3 id="foundation-h1">結論と到達範囲</h3>
+<p>F0.3では、別々に存在していた存在・参加・moduleのDAG、現在認可、guarded reference、関係評価、source-boundな契約証拠、未完了要求、更新準備、観測、snapshotを、一つの抽象状態へ接続した。中心は<strong>「定義や証拠が存在すること」と「現在の文脈で使ってよいこと」を分け、その対応を全ての使用点で維持すること</strong>である。</p>
+<p>24項目の命題と手証明、具体的な有限アルゴリズムと独立certificate checker、通常ソースに由来する統合実行、720通りの制御操作の順序検査、故意に弱めた実装に対する反例、実際に見つけた欠落の修正を含む。</p>
+<p>ただし、全119要件の充足、任意の理論の局所導入、完全な依存型、一般的な分散観測の非干渉、実Rust/QUICや物理的永続化までを証明したものではない。選択した抽象制御profileの設計と実装経路は具体化したが、全体を「あとは実装だけ」と認定する段階ではない。</p>
+<p>新しい文法、唯一のowner方式、共通の大域時計、全世界の中央認可者、特定のrendererを採用していない。WorldやAvatar等は最小語彙ではない。全体要件表は要件の提案、F0.xは研究候補、現行Canonはリポジトリの正本として分離する。</p>
+<h3 id="foundation-h2">1. 最終目標を保持する設計</h3>
+<p>目的は、意味のある通常のコードから配置と連携を導き、その計算環境へ、将来未知の構成を追加・変更・撤去できることである。並列計算、薄いclient、Web的な処理、仮想空間、SNSは、その原則を試す利用領域である。今回の整数の例を最終言語の表現力としない。</p>
+<p>必要な統一は「すべてを同じデータ構造にすること」ではない。統一すべきなのは、どのsourceがどの意味を定め、どの保証と権限に基づいて使用し、変更時にどの依存が影響を受けるかである。境界を越えるたびに別の手書き業務logicを作るのではなく、意味を保持した成果物と証拠を渡す。</p>
+<p>共通基礎を次の責任に分ける。</p>
+<div class="table-scroll" tabindex="0"><table>
+<thead>
+<tr>
+<th>責任</th>
+<th>定めるもの</th>
+<th>他の責任へ押し付けないもの</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>計算の意味</td>
+<td>値、状態、関係、作用、失敗、継続</td>
+<td>transport都合の成功・失敗・権限</td>
+</tr>
+<tr>
+<td>保証の意味</td>
+<td>契約、不変条件、理論前提、証拠</td>
+<td>数学的な証拠からの権限生成</td>
+</tr>
+<tr>
+<td>現在の使用</td>
+<td>主体、依存、版、policy、失効、寿命</td>
+<td>過去の証拠が現在も使えるという推測</td>
+</tr>
+<tr>
+<td>構成の変更</td>
+<td>追加、交換、reparent、撤去、再取得</td>
+<td>部分適用や無断の前提変更</td>
+</tr>
+<tr>
+<td>実現と観測</td>
+<td>実行step対応、現在性の維持、許可射影</td>
+<td>単一実行の検査を情報流保証と見なすこと</td>
+</tr>
+</tbody>
+</table></div>
+<p>この分離は全てを中央計算機へ置く指示ではない。参照モデルの一つの状態は、分散実装を比較するための抽象仕様である。</p>
+<h3 id="foundation-h3">2. 前提と証拠の区別</h3>
+<p>比較基準は、要件表v1とF0.1/F0.2の添付成果物、及びリポジトリの <code>19a6decfbea0815b7b4265e8fadfb399270aaed2</code> である。現行ADR-0043はI3-3の有限受理とowner pauseを記録し、一般的な証明やI3全体の受理とは分けている。<a class="source" href="#sources">[S1,S2]</a></p>
+<p>F0.3ではリポジトリ、Canon、THM/OBL、Plan 250を変更していない。既存実装の全件監査でもない。F0.2の二つの基礎ファイルは無変更で再利用し、baselineの153テスト、F0.1の69テストを新たに再実行した。これを新しい一般証明と数えない。</p>
+<p>信頼するものは、数学的整数と有限集合の意味、checked sourceを扱う参照compilerと証拠checker、明示したissuer/control root、抽象的な原子的commit、完全record列の現在head、型付きsampleを提供する境界である。Pythonのprivate名称やdeepcopyはsandboxではない。checkpoint/recoverや内部presentation取得もtrusted supervisor用APIであり、guestへ無条件に公開するAPIではない。悪意あるguestがPython object内部を書き換えられる環境は保証対象外である。</p>
+<h3 id="foundation-h4">3. 現在性の帰納的意味</h3>
+<p>存在条件、参加の前提、module依存、現在のaccess権を、型の異なるrecordと正のsupport式で扱う。必要な全親はall、明示的な代替はanyとして書く。「親が複数」という説明から、一律ANDまたはORを推測しない。</p>
+<p>現在利用可能な集合を、空集合から繰り返し導出する最小不動点として定義した。純粋な自己循環は、利用可能である根拠にはならない。</p>
+<pre><code>member が module を必要とする
+module が access を必要とする
+access が同じ member を必要とする
+</code></pre>
+<p>この構成は、個々のkind内部のDAGが壊れていなくても、根拠がなく利用不能になる。全てを合併したグラフを無条件にDAGにするのではなく、帰納的な正当化を要求する。</p>
+<p>一方、循環の外に有効な代替rootがあるなら、anyの一枝を使って構成を開始できる。帰納的rankと、そのrankより低い前提だけを使う証明を取り出せる。</p>
+<h4 id="foundation-h5">3.1 証拠生成と検査を分けた</h4>
+<p><code>derive</code>は利用可能集合とrankを生成する。<code>check_closure</code>はderiveを呼ばず、rank付きの有限導出と、導出可能な対象を落としていない閉包条件を検査する。この二条件により、偽の自己正当化と、全拒否による空の「安全性」の双方を排除する。</p>
+<p>この算法について、任意の有限入力に対する終了・健全性・帰納的導出に対する完全性を手証明した。三記録・七種類の式・八種類のeligibilityからなる2,744入力を、全てのpre-fixed pointの共通部分という独立な判定と照合した。有限検査の件数を一般証明の根拠にしてはいない。実装はFormula深さ128という資源上の入力profileを持つ。数学上の任意有限式に対する定理と、budget内の実装対応を分けており、この値を最終言語の制約にはしていない。</p>
+<h4 id="foundation-h6">3.2 存在を失うことと、記録を消すことは違う</h4>
+<p>依存先や権限が失効しても、過去のdefinition、証拠、結果が偽になるわけではない。現在のlive使用が不可能になる。保存された引用や履歴は、live handleの権利とは別に扱える。</p>
+<p>F0.3は無効recordをtombstoneとして残す。長期の回収や圧縮まで実現したわけではない。同名の再生成にはfresh incarnationを与え、古い参照の行き先を勝手に変えない。</p>
+<h3 id="foundation-h7">4. 多層認可と局所証拠</h3>
+<h4 id="foundation-h8">4.1 同じκについて検査する</h4>
+<p>認可の文脈を、主体、member世代、action、target、instance、request、arguments、code、contractの組として保持する。複数issuerの必要条件は、この同じκを使って検査する。</p>
+<p>ある層がaliceを認証し、別の層がbobに権限があると言っても、合成した許可にはならない。別の引数や古いcodeに対する結果も使用しない。選言は明示されたbranchだけで成立し、どのclaimを使ったかを保持する。</p>
+<p>policyの静的な適合性と、現在の要求に対する評価は別である。既存のCedarの文書も、この分離とschema変更後の再検証を説明している。<a class="source" href="#sources">[S6]</a> F0.3のpolicyは小さなall/any言語であり、CedarやSecPALを実装したものではない。</p>
+<h4 id="foundation-h9">4.2 探索や検証が権限を発行しない</h4>
+<p>証拠checkerは、ソースから得た数学的な義務を検査する。認可は、独立に信頼したrootが発行したclaimを用いる。source、proof、通信接続、module名がissuerになる経路はない。</p>
+<p>claimの発行処理を <code>admin_claim</code> 等の明示的なtrusted boundaryへ分けた。これは暗号認証の代用品を完成させたものではなく、どの条件を認証実装へ要求するかを特定したものである。</p>
+<h4 id="foundation-h10">4.3 失効からfallbackまでが同じ状態遷移に入る</h4>
+<p>anchorへのaccessを、現在の認可証拠と、anchor/memberの存在条件を持つrecordとして作る。認可が失効したら、そのaccessはeligibleではなくなる。正規化によりlive集合が変わり、それを候補としていたbindingが後段へ進む。</p>
+<p>anchorそのものが消えなくても、権利の消失でaccessを失える。逆にsampleが欠けても、認可と存在を変更しないのでsemantic fallbackは起きない。fresh claimとfresh accessを得ても、既存bindingは勝手に前段へ戻らない。独立した再取得権限を使う操作が、新lineageで候補を設定し直す。</p>
+<p>以前の別モデルにあったpermissionのboolをこの経路では使わず、現在のpolicy/claimを実際に検査する。</p>
+<h3 id="foundation-h11">5. 通常のコードと契約</h3>
+<p>F0.2のsource compilerを再利用し、第一階の通常コードからgenerated request siteを得る。F0.3の統合経路で実行する継続は、const、局所計算、条件、jump、call/return、request/resultである。F0.2にあるspawn/joinはF0.3の統合VMでは未対応として拒否し、拡張済みと数えない。</p>
+<p>sourceに書かれたowner操作を受理するとき、その型、owner、全読み書き集合、現在policy、invariantと証拠を束縛する。普通のclientは、生成済みの命令位置からだけ要求を発行し、外から新しい辺やowner操作を注入できない。</p>
+<p>保護した状態の全mutatorが不変条件を保存しなければならない。新しいmodule、operation交換、復元でも、この契約を失わない。F0.3はF0.2の <code>verify_contract</code> が扱える証拠をそのまま信用せず、TotalBodyの期待前提を受入れ側で固定して照合する。</p>
+<p>これは完全な依存型ではない。<code>Int</code>や<code>Bool</code>に加えて多項式的な状態・結果の性質を証明する具体的なprofileである。完全な依存型、一般の所有handle、様相型のsource導入を済んだものにしない。</p>
+<h4 id="foundation-h12">5.1 不変の証拠をどこまで使えるか</h4>
+<p>コードについての定理は、対応するcode/contract/theory identityに対して真である。現在の状態についての事実は、その値の版か、環境干渉に対する保存証明が必要である。現在の使用許可は、さらにpolicyやmemberの世代に依存する。</p>
+<p>この三つを、同じ「verified」flagで扱わない。使う側がどの種類の根拠を必要とするかを識別し、失効した場合はその使用だけを止める。</p>
+<h3 id="foundation-h13">6. 型付き多グラフとpatch</h3>
+<p>同kindの存在/admission/moduleのDAGと、関係計算のDAGを別に検査する。異kindをまたぐ根拠は、最小不動点で定義した現在性へ接続する。</p>
+<p>構成の追加・退役・reparentは、今回の参照では型付きのtrusted control APIから与える。通常ソースからこのlifecycle操作を生成する完全なpatch/module文法を作ったわけではない。F0.2のsourceから実行するのは通常の計算とowner作用であり、ここは区別する。</p>
+<p>一般的なmodule packageの依存バージョン解決までを実装していない。F0.3のmodule DAGは、instanceの必要条件と有効性を扱う小さな意味である。意味版や公開互換性を伴う独立package接続には追加の契約が要る。</p>
+<h4 id="foundation-h14">6.1 準備時の検査を使ってよい条件</h4>
+<p>準備したpatchは、変更内容、提出主体、読んだrecordのstamp、現在の認可文脈へ封印する。commitは、その封印とread stampと現在権限を、同じ制御遷移で確認する。</p>
+<p>不在lookupもreadである。「対象がない」「この到達経路がない」という確認を記録しないと、別の変更で否定された事実を見落とす。集合queryは、version付きindex recordを通す必要がある。検査の外側で勝手に全件scanしたことを、安全な局所footprintと呼ばない。同一keyの再読取りで版が変わった場合も、中断しなければならない。最後の版で古いreadを上書きする不具合を、値変更とABAの反例によって修正した。</p>
+<p>reparentの具体的な探索では、新parentから前提をたどり、対象へ戻る経路がないことを確認する。探索中に読んだrecordをcommit時に再照合する。現在使っているOR枝だけではなく、cycleを作り得る全枝を扱う。</p>
+<h4 id="foundation-h15">6.2 prepared権限の選択を、F0.2から無断継承しない</h4>
+<p>F0.2の複数参加者patchは、準備後の権限予約を認める一候補だった。F0.3の制御編集は、commit時の現在認可を再検査し、準備後に失効したら拒否する別候補である。Q-18は未決であり、この違いを隠さない。</p>
+<p>厳密な即時失効と、通信分断下で予約を解決し続ける可用性は、同じ保証ではない。どの権限をどの点で固定するかを、patchの契約として選ぶ必要がある。</p>
+<h4 id="foundation-h16">6.3 分散実現は別の証明境界</h4>
+<p>F0.3の制御commitは抽象的に原子的である。これを、必要な参加者と影響範囲のlocal fence、権限の直列化、commit recordで実現し、その各stepが本意味へ対応することを示す。</p>
+<p>F0.2の二相コミット型モデルを、そのまま厳密現在認可のF0.3へ貼ることはできない。失効の効力点をそろえる必要がある。二相コミットが故障で待機し得ることは、既存のtransaction-commit研究でも明確である。<a class="source" href="#sources">[S7]</a></p>
+<h3 id="foundation-h17">7. 過去の実行と現在の結果使用</h3>
+<p>要求はsource、κ、依存先、policy証拠へ結びつける。serve前に現在性と権限を再検査し、許可されたownerだけが値を変更する。結果が返る前に失効しても、既に起きた変更を「未実行」へ戻さない。</p>
+<p>結果をliveな継続へ消費する時点にも、利用側module、member、全live依存、code/contract、policyを検査する。ここは実際の反例で不足が見つかった。最初のモデルは、moduleが退出した継続へ結果を消費できた。修正後はReleaseDeniedを残し、過去のServed事実とstoreは保持する。</p>
+<p>これは、snapshot値を将来も読めるかという別の問いとは区別する。本候補のlive-resultは保守的である。独立した履歴参照や公開済みの値に別の意味を与えることは、将来の拡張として可能である。</p>
+<h3 id="foundation-h18">8. 関係と提示の統合</h3>
+<p>関係は、binding、整数定数、加算、整数倍、別関係への参照から構成する。保持した関係DAGを、同じpresentation contextで許可されたsampleに対して評価する。途中の共有部分はmemo化できる。</p>
+<p>関係の値を得るために、ownerが毎回絶対値を送る方式へ置き換えていない。projectionは現在のobserver権限を検査し、labelが許す範囲の構造だけを評価する。値が欠けた場合、PresentationGapとsemantic unavailableを区別する。</p>
+<p>この関係言語は整数の例であり、一般のpose、誤差、補間、実時刻モデルではない。配置と提示の責任を試すための候補であって、VR物理法則をCoreへ入れたものではない。</p>
+<h3 id="foundation-h19">9. 正しい観測と非干渉</h3>
+<p>今回、三つの要求を分離した。</p>
+<div class="table-scroll" tabindex="0"><table>
+<thead>
+<tr>
+<th>要求</th>
+<th>F0.3で具体化した範囲</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>忠実性</td>
+<td>実際のstate change、live変化、fallback、要求の確定/拒否/消費から記録を作る。</td>
+</tr>
+<tr>
+<td>受動観測の非干渉</td>
+<td>観測bufferはdomain状態の外に置き、pullがdomain値や次のstepを変更しない。</td>
+</tr>
+<tr>
+<td>情報流</td>
+<td>静的なlabel境界で、低いsupport・policy・操作が高い値や可用性へ依存しないprofileを検査する。</td>
+</tr>
+</tbody>
+</table></div>
+<p>特に、書く対象が秘密なら、値を読まなくても、その対象の有効性で成功・失敗が変わる。初期モデルではこのacknowledgmentのlabelが低くなった。書込み対象の存在も依存へ含めて修正した。</p>
+<p>有限bufferでは、全履歴を先に切り詰めてから秘密行を消すと、秘密行によって公開行が消えたことが見える。許可された射影を先に作り、その後にbufferへ入れる。これは論理的な保持順序の条件であり、productionで無制限の履歴を持つ指示ではない。</p>
+<p>二実行の証明は、低いcatalogueと低い制御入力が一致する条件を持つ。任意のpolicy変更、declassification、秘密に依存するscheduler、物理timing、CPU競合を解決したとはしない。動的な情報流では、policyの意味そのものを精密に選ぶ必要がある。<a class="source" href="#sources">[S4,S5]</a></p>
+<h3 id="foundation-h20">10. 保存と復元</h3>
+<p>今回の同instance復旧は、checkpointと現在の確定headまでの完全suffixを照合する。古いsnapshotの提出者が、どのheadを現在とみなすかを決めてはいけない。</p>
+<p>snapshotはnodes、live/rank、member対応、sourcesとcompiled code、契約証拠、auth、access、binding、関係式、requests、activities、準備済みpatch、events、observer grantsを含む。未知の成分をDataへ付け足したまま保存しようとすると拒否する。外部に新しいcomponentを持った拡張を自動的に発見できるという意味ではない。拡張受理時にmanifestを更新する義務がある。</p>
+<p>復元では操作を再実行せず、確定済みのstate recordを再構成する。失効後のsuffixがあるのに古いsnapshotだけを渡すと拒否する。pending要求やprepared patchも復元され、現在の認可で後続の使用を拒否できる。</p>
+<p>これは完全なin-memory commit imageを使った参照である。外部device状態、全provider呼出し、実diskの故障、複製、永続headの防御を完成したものではない。F0.1のZ-path/completion算法は、その上で必要な依存情報が完全に収集できた場合の別部品として維持する。</p>
+<h3 id="foundation-h21">11. 今回の統合実行</h3>
+<p>実行例は <code>examples/integrated.py</code> と三つのsource fileから再現できる。XをA/B/C上の基礎構成とし、YをA/Cに依存して追加する。Service、Client、Baseのsourceは別々に検査する。Serviceのstateには多項式不変条件の証拠を付ける。認可は二issuerの同一κに対する条件である。</p>
+<div class="table-scroll" tabindex="0"><table>
+<thead>
+<tr>
+<th>操作</th>
+<th>実際の結果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>生成された要求を認可して実行する</td>
+<td>stockが10から7になり、結果7を得る。</td>
+</tr>
+<tr>
+<td>sampleを渡さずに関係を表示する</td>
+<td>PresentationGapで、bindingは変わらない。</td>
+</tr>
+<tr>
+<td>pending要求とprepared reparentを保存する</td>
+<td>両方がcheckpointに入る。</td>
+</tr>
+<tr>
+<td>操作権限を失効し、参照先memberを退役し、編集権限を失効する</td>
+<td>access/live/fallbackと現在の使用条件が同じ状態で変わる。</td>
+</tr>
+<tr>
+<td>古いsnapshotだけを現在のheadへ復元する</td>
+<td>MissingCommittedSuffixで拒否する。</td>
+</tr>
+<tr>
+<td>正しいsuffixを含めて復元する</td>
+<td>pendingとpreparedを保持し、使用とcommitを現在の認可で拒否する。</td>
+</tr>
+<tr>
+<td>関係のfallbackを表示する</td>
+<td>cursor 1、代替sampleから13を得る。</td>
+</tr>
+<tr>
+<td>影響しないBaseの処理を実行する</td>
+<td>7を得る。</td>
+</tr>
+<tr>
+<td>新しいmember/anchor/accessを作る</td>
+<td>既存bindingはまだ戻らない。</td>
+</tr>
+<tr>
+<td>現在の再取得権限で新候補へ再取得する</td>
+<td>lineage 1、cursor 0になる。</td>
+</tr>
+<tr>
+<td>受動観測を繰り返し、秘密の記録を追加する</td>
+<td>domain状態は変わらず、公開bufferも秘密行で押し出されない。</td>
+</tr>
+</tbody>
+</table></div>
+<p>これはネットワークsocketを用いる実運用ではなく、locus別のsourceを持つ共通の抽象状態である。システム要件表のSC-24全体を達成したとはしない。並列handler、実host、完全な理論plugin、active debugger等は、この実行にない。</p>
+<h3 id="foundation-h22">12. 実行による検査と反例</h3>
+<p>新規98テストはすべて成功した。F0.2の153、F0.1の69テストも再実行した。supportの2,744入力を全pre-fixed pointの独立評価と照合し、同じ入力に対する独立rank checkerも実行した。</p>
+<p>一つのsource由来pending要求について、serve、操作失効、access失効、module退役、consume、observeを各一回ずつ行う全720順序、4,320 stepを検査した。これはその有限な入力の全探索であり、無限実行や一般的な公平性の証明ではない。</p>
+<p>六つの意図的な弱化実装は、それぞれ対応する振る舞いのassertionで失敗した。加えて、今回の実装で実際に見つかった結果消費の欠落、acknowledgmentのlabel不足、PythonのBool/Int等値の混同、反復readでのstamp上書き、anchor revisionの再構成不足、checkpointとprepared deltaでの型消去的な比較を、REDログを残して修正した。詳細はAUDIT.mdにある。</p>
+<p>新しいSMT結果の件数を積み増して全体証明と見せることはしていない。今回はこの接続に関する一般の手証明と、独立certificate検査・有限探索へ集中した。Lean導入はできず、全文の機械検証は行っていない。</p>
+<h3 id="foundation-h23">13. 計算コアの全体像</h3>
+<p>制御構成を扱う本章の状態と、通常の計算を表すコアを分離する。後者は、値、内部step、型付き効果要求と継続を持ち、再帰を許す構造が候補になる。これを、全てのイベントをsourceへ露出させる理由にしない。</p>
+<p>Interaction Treesは再帰・不純な計算とhandlerを余帰納的に扱う既存の実現例である。<a class="source" href="#sources">[S8]</a> そのライブラリの定理を利用するなら、Mirの効果・継続・状態・失敗をどう解釈するかを具体的に示す必要がある。</p>
+<p>表現力のために一般の再帰を認めても、型レベルや証拠checkerの停止性まで無制限にしてよいわけではない。型判断、証拠探索、証拠検査、runtime計算を分ける。局所的な依存型/様相の導入は、既知の体系を採用すれば自動でMir全体が正しくなる問題でもない。MTTの正規化結果は条件を満たすmode theoryの上で得られるものであり、runtimeの権限や更新の意味を代わりに定義しない。<a class="source" href="#sources">[S9]</a></p>
+<h3 id="foundation-h24">14. 実装方針</h3>
+<p>次の設計基準を推奨する。ただし正式なCanon採用ではない。</p>
+<p><strong>小さい検査境界。</strong> 証拠を作るtool、control操作を提案するtool、currentnessを検査するkernelを分ける。候補のsourceから必要条件を再生成し、提出証拠側が前提を変えられないようにする。</p>
+<p><strong>状態ごとの責任。</strong> member、policy、instance、codeの版を一つの世代番号に潰さない。代わりに、使用点が必要とする組を正確に束縛する。</p>
+<p><strong>派生状態は再構成可能にする。</strong> live/rank、relation projection、観測viewは、明示された意味recordから派生させる。派生viewを新しい権限や確定stateの正本にしない。</p>
+<p><strong>未知の拡張は、保存と観測も含めて受理する。</strong> runtimeだけが動いても、snapshotへ入らず、情報labelも扱われないcomponentは、完成した拡張ではない。</p>
+<p><strong>局所化を証明してから最適化する。</strong> 影響を受けないrecordを固定したまま検査できるかを先に示す。observer bufferも共通の無制限queueではなく、policyと資源境界に従って分ける。</p>
+<p><strong>移植は明示的に許可された別作業。</strong> F0.3をそのままRustへ翻訳して正しいとしない。対応点、guard、TCB、代表反例、性能条件を選び、受理されたI3-3の挙動を壊さないことを確認する。</p>
+<h3 id="foundation-h25">15. 全体要件に対する判定</h3>
+<p>今回の成果は、ID、AU、EV、SV、OB、CT/TYの一部の接続を進めた。119要件は <code>REQUIREMENT_TRACE.json</code> で追跡し、完了flagを立てていない。各要件について、本成果で具体化した範囲と、なお残る受入れ条件を記載した。</p>
+<p>現行のactorVM、プログラミング体験、高階handle、型拡張、一般handler、cancel、multi-owner invariant、storage/transportの実現、動的な秘密policy、sandboxとViewが同じ程度に完成したとはしない。</p>
+<p>全体の道筋は、責任と依存が見えるという意味では具体化した。一方、全面実装へ移ってよいという判定には、基礎の機械化、必要な表現力の実証、使用する失効/復旧/観測profileの選択、実装との対応が必要である。次の段階をWORKPLAN.mdに定める。</p>
+<h3 id="foundation-h26">16. 研究としての判断</h3>
+<p>目標を単純な分散フレームワークへ縮小する必要はない。ただし、将来の全要求を一つの未分化な型体系へ詰め込む方向も適切ではない。</p>
+<p>有望なのは、<strong>計算の意味、局所的な保証、現在の使用条件、動的な構成、観測と復元を、少数の明示的な接続規則で結ぶこと</strong>である。その接続を今回のprofileで実装・検査したため、何を次に証明し、どこを既存実装へ接続するかは、以前より具体的になった。</p>
+<p>ただし、24の手証明と98テストがあることだけから、基礎の完全性と全体の安全性を認定しない。研究候補の各前提を量化された命題へ残し、実装と独立レビューでその対応を閉じることが必要である。</p>
+<p>出典はSOURCES.md、証明はtheory/PROOFS.md、各証拠の範囲はtheory/THEOREM_LEDGER.json、実際の再実行条件はVALIDATION.mdを参照する。</p>
+</section><section id="proofs" aria-label="定義と24の手証明"><h2 id="proofs-h0">Mirroreaの構成・証拠・現在性を結ぶ基礎理論</h2>
+<h3 id="proofs-h1">0. 対象と証拠の位置</h3>
+<p>F0.3は、全体要件表の119要件をすべて充足した宣言ではない。存在、参加、モジュール、関係、局所証拠、認可、要求、更新準備、観測、復元を、共通の抽象状態の遷移として接続する研究候補である。以下の証明は人手記述であり、Lean/Rocq/Isabelleによる検査を経ていない。有限探索と実行試験は別の証拠として示す。</p>
+<p>数学的な量化の対象は、各時点で有限な記録集合、任意の有限長の式・policy・実行prefixである。参照実装のFormula入力には深さ128以下の明示budgetがあり、実装checkerとの完全性対応はこの資源profile内に限定する。budget外の入力はFormulaBudgetOrShapeとして拒否する。数学上の導出規則や最小不動点の定理自体には128という定数を入れない。将来の全主体や全moduleを事前列挙する必要はない。長期の資源回収、物理的な無停止性、任意の悪意あるhostは保証しない。</p>
+<p>参照実装は <code>model/support.py</code>、<code>model/policy.py</code>、<code>model/transactions.py</code>、<code>model/kernel.py</code> にある。<code>base/language.py</code> と <code>base/certificates.py</code> はF0.2から無変更で取り込んだ。引き継いだコンパイラ・多項式checkerの健全性は、F0.2の手証明と同じ信頼範囲に留まる。</p>
+<h3 id="proofs-h2">1. 基本定義</h3>
+<h4 id="proofs-h3">1.1 同一性と型付き記録</h4>
+<p>記録の値の一致は型を保つ構造等値であり、BoolのTrueとIntの1を同一視しない。この規則は認可κだけでなく、prepared deltaとcheckpointの照合にも適用する。記録の識別は <code>k=(namespace,name,incarnation)</code> とする。namespaceは参照モデルでは整数labelを含む。別incarnationは別対象である。構造改変のrevisionと状態値のversionはincarnationから独立する。数学上は非負整数で、wraparoundは認めない。</p>
+<p>記録kindはlocus、member、module、state、relation、anchor、access、theoryの区別を持つ。これらは業務のWorld/Avatar等ではない。完全な最終Core語彙の選択でもない。</p>
+<p>状態Sは少なくとも、宣言N、活性条件E、support式Φ、導出されたlive集合L、現在のmember対応、値store、checked sourceとoperation、契約証拠、policy/claims/失効、関係/binding、要求/結果/継続、更新準備、観測可能な意味記録を持つ。固定されたData manifestは、これらの全fieldを列挙する。観測者のローカルbufferはSの外へ分ける。</p>
+<h4 id="proofs-h4">1.2 Support式</h4>
+<pre><code>φ ::= ⊤ | ⊥ | ref(k) | all(φ1,...,φm) | any(φ1,...,φm)
+</code></pre>
+<p>意味は通常の正の論理式で、<code>all()</code>は真、<code>any()</code>は偽である。これはsupport式の規則であり、認可policyでは空の枝や無条件Topを受理しない。<code>deps(φ)</code>は全branchに現れる参照の集合である。式に否定や arbitrary source predicateを入れていない。失効はeligible集合を変更する入力として扱う。</p>
+<p><code>E(S)</code>はenabledな記録から、現在のpolicy照合に失敗したaccess記録を除いた集合である。accessの照合は署名を推論で作るのではなく、既に発行されたclaimと現在のissuer epoch・policy版・要求文脈を検査する。member自身のlive条件はsupport式に残すので、権限からmember、memberから同じ権限を相互に正当化することはない。</p>
+<pre><code>L0 = ∅
+L(i+1) = Li ∪ { n∈E | ⟦Φ(n)⟧Li = true }
+Live(S) = 最初の不動点
+</code></pre>
+<p>liveでないことは、コードや記録の論理的矛盾とは限らない。未充足の参加条件、失効、循環だけで根拠を作ろうとする構成も含む。履歴としての定義や証明は保持できる。</p>
+<h4 id="proofs-h5">1.3 グラフの区別</h4>
+<p>同kindの構造依存辺は、前提から従属先へ向ける。それぞれの宣言された存在・member・module等のグラフではDAG条件を検査する。一方、異kindをまたぐsupportは最小不動点の帰納的根拠で扱う。ORで外部根拠を得る場合まで、一律の全体グラフ非循環性で禁止しない。</p>
+<p>関係式の計算依存DAGは別に検査する。関数再帰、ループ、物理的なネットワーク、相互の引用をすべてDAGにする条件ではない。</p>
+<h4 id="proofs-h6">1.4 情報label</h4>
+<p>参照モデルは有限入力中に現れる非負整数を全順序labelとして使う。証明の正のsupportに関する部分は、任意の順序の下方閉集合へ一般化できる。値の機密性と構造の存在を一つのlabelへまとめた保守的profileである。分離する拡張は別の義務である。</p>
+<p>support辺、関係依存辺、全fallback候補について、前提label ≤ 従属結果labelを必要とする。選択済みbranchだけではなく、選択を変え得る候補も含む。owner作用のlabelは読み値、書込み対象の存在、module/locus、policyをすべて支配する。書込み先がそれより低い場合は拒否する。</p>
+<h4 id="proofs-h7">1.5 認可文脈</h4>
+<pre><code>κ = (principal, member-incarnation, action, target, instance,
+     request, arguments, code, contract)
+</code></pre>
+<p>policyは名前付き必要条件の非空all/明示anyである。各leafはissuer、predicate、現在のepoch、同じprincipal/member、action/targetのscope、情報labelを照合する。証拠にはκ、policy版、使ったclaim、選んだbranchを残す。</p>
+<p>claimは信頼境界が発行した理想的な記録である。暗号認証・鍵管理の正しさを証明したのではない。policy checkerは発行済み集合との一致を確認する。証明checker、source、transportはclaimを発行できない。</p>
+<h4 id="proofs-h8">1.6 局所的な契約</h4>
+<p>F0.2の多項式証拠について、実sourceから再生成した検証条件とevidenceを照合する。<code>Partial</code>は成功した場合の保存、<code>TotalBody</code>は選択した有限owner bodyが既定前提から失敗せず返ることを表す。後者はnetwork、認可、資源、環境の可用性を無条件に保証しない。</p>
+<p>今回のadapterはTotalBodyの外部前提を空に固定する。証拠の中にある任意の前提を勝手に採用しない。追加前提を導入する将来の境界では、提出側と独立に、source契約から期待前提を生成し、実行点で満たす義務がある。</p>
+<p>同じownerで保護した不変条件を、全mutatorと交換後のmutatorが保存しなければならない。別ownerの可変状態をその不変条件へ直接混ぜることは今回のprofile外である。</p>
+<h4 id="proofs-h9">1.7 観測と状態遷移</h4>
+<p>authoritativeな一歩は、(a)現在の前提を検査し、(b)必要な有限計算と変更を行い、(c)liveとfallbackを正規化し、(d)実際の変化から意味記録を生成する。拒否時には候補状態を公開しない。</p>
+<p><code>_wf</code>は防御的な実行検査でもあるが、以下の手証明で「WFを事後に検査したから正しい」だけを根拠にはしない。各caseが何を読み、どの前提により保存するかを列挙する。例外時に全拒否できることと、有用な正例を受理できることも区別する。</p>
+<p>受動観測のpullは、現在のobserver権限で許された意味記録を先に射影し、その後にobserver自身の有限bufferへ格納する。Sや次のdomain stepの選択は書き換えない。物理CPU時間がゼロという主張ではない。</p>
+<h3 id="proofs-h10">2. Supportと現在性</h3>
+<h4 id="proofs-h11">F3-01 正の単調性と有限停止</h4>
+<p><strong>命題。</strong> Φが上記の正の式でNが有限なら、X⊆Yに対して ⟦φ⟧X⇒⟦φ⟧Y。deriveは高々|N|回の真の集合増大の後に停止する。</p>
+<p><strong>証明。</strong> 式の構造に関する帰納法。refの場合は集合包含、allは各子の帰納法、anyは成立した一枝の帰納法、定数は直ちに従う。反復は前の集合をunionするので減らない。停止しない一回は新しい元を最低一つ追加する。追加済み元は再追加しないので、真の増大は|N|回を超えない。∎</p>
+<h4 id="proofs-h12">F3-02 帰納的根拠に関する健全性と完全性</h4>
+<p><strong>命題。</strong> live(n)を「n∈E、かつΦ(n)のrefを先行する有限導出で満たす」という帰納規則で定義すると、deriveが返す集合は、その有限導出を持つ元とちょうど一致する。</p>
+<p><strong>証明。</strong> 反復iで新たに入った元は、反復i-1までの元のみから式を満たす。iに関する帰納法で有限導出を構成する。逆に導出の木の高さについて帰納法を使う。有限個の子の導出がある段階までに得られれば、親の式はその段階で真になり、次の反復で親が入る。従って全有限導出が最終集合へ含まれる。∎</p>
+<p>これは任意のMirプログラムの完全検証ではない。選択した有限support言語の完全性である。</p>
+<h4 id="proofs-h13">F3-03 独立certificate checkerの健全性・完全性</h4>
+<p><strong>検査規則。</strong> 提出物は集合Cと、Cだけをdomainに持つ自然数rank ρである。(1)C⊆E、(2)各n∈CについてΦ(n)がrankの小さい参照だけで成立、(3)各n∈E\CについてΦ(n)がCで偽、を検査する。加えて、Topのheight=-1、Bottom=∞、refのheight=rank、all=max、any=minとしてρ(n)=1+height(Φ(n))を検査する。</p>
+<p><strong>命題。</strong> 合格するCは最小不動点であり、rankは同期反復で初めて追加される段階に一致する。deriveの出力は必ず合格する。</p>
+<p><strong>証明。</strong> rankに関する強い帰納法で、(2)からCの全元に有限導出がある。F3-02よりC⊆L。条件(3)はCがeligibleな含意に閉じていることを表す。L0⊆C、Li⊆Cなら、次に追加される元も(3)によりC内なのでL⊆C。集合が一致する。height方程式は、allでは全前提がそろう最も遅い段階、anyでは一枝がそろう最も早い段階を与える。根を0としてrankの帰納法から最初の追加段階と一致する。deriveはその段階を記録しているので全条件を満たす。∎</p>
+<p><code>check_closure</code>はderiveを呼ばない。循環した自己証拠と、全部拒否して導出可能な根を落とす証拠の双方を拒否する。</p>
+<h4 id="proofs-h14">F3-04 退役の単調性と正規化の冪等性</h4>
+<p><strong>命題。</strong> 宣言とsupportが同じでE'⊆EならL(E')⊆L(E)。同一構成を二度正規化してもlive、rank、fallback cursorは変わらない。</p>
+<p><strong>証明。</strong> 各反復の集合包含をiに関する帰納法で示す。E'に許された追加はEでも許される。正規化は固定したE,Φから同じ最小不動点と最小rankを得る。cursorは現在位置以後の最初のlive候補か末尾へ移り、二回目にはその位置の条件が変わらない。∎</p>
+<p>新しいincarnationや明示的なreparent等でEやΦが増える場合は、単調退役の前提の外である。それでも既存bindingのcursorは勝手に後退しない。</p>
+<h4 id="proofs-h15">F3-05 低いsupportの独立性</h4>
+<p><strong>命題。</strong> Bがlabelの下方閉集合で、B内の記録のsupport参照はすべてB内、かつB内のeligibilityはB内の制御事実だけで決まるとする。このとき <code>Live(S)∩B = Live(S|B)</code>。</p>
+<p><strong>証明。</strong> 各反復iについてLi∩Bと制限系のLiが一致することを示す。i=0は空。B内の式はB外を参照しないので、前反復の一致から同じ真偽を得る。eligibilityも一致しているため、次の追加集合が一致する。有限停止後の等式を得る。∎</p>
+<p>このため、秘密の親の存在を公開childの条件に使ったり、秘密claimの有無で公開policyを成立させたりすることを、型/label境界で禁止する。値だけの情報流検査では足りない。</p>
+<h3 id="proofs-h16">3. 認可と局所証拠</h3>
+<h4 id="proofs-h17">F3-06 同一文脈のpolicy合成</h4>
+<p><strong>命題。</strong> <code>evaluate(policy,κ,claims)</code>が返す証拠は、同一κについて、そのpolicyの全all枝または明示したany枝を、真正な現在claimで満たす。有限な提出claim集合に関して、満たす証拠が存在するならevaluateは一つ返す。</p>
+<p><strong>証明。</strong> leafでは、発行済み表との全record一致、非失効、issuer epoch、principal/member、action/target、labelを明示的に確認する。allの場合は同じκを全再帰呼出しへ渡すので、異なる主体・要求を混ぜない。anyは順に各枝を検査して最初の成功を返す。どの枝にも成功がなければ導出はない。有限な式と候補集合なので停止し、構造帰納法で健全性と完全性を得る。∎</p>
+<p>これは認可の論理的判定であり、署名方式やissuerを信頼すべきかの証明ではない。任意のpolicy transformer、委譲論理、第三者pluginは対象外である。</p>
+<h4 id="proofs-h18">F3-07 過去の証拠と現在の使用</h4>
+<p><strong>命題。</strong> 証拠に記録したκのどれか、policyの版、使ったclaimの有効性が変われば、旧証拠は無条件には使用できない。正確な再検査が成功した場合だけ、同じ使用条件が現在も成立する。</p>
+<p><strong>証明。</strong> κとpolicy版は全項目の等値で比較する。その際、比較先のcode/対象revision等は現在の状態から構成する。証拠に格納した過去のκをそのまま比較先にも渡すことでは、現在性の検査にならない。anchor accessは現在の構造revisionを再構成し、古いrevisionで得たaccessを同じ対象へ無断で使用しない。使用claimを現在の表から取り直し、F3-06を再実行する。全結果とbranch証拠を比較するので、古い根拠を別の根拠へ無断で置き換えない。memberの現在対応とlive条件は使用境界でも確認する。検証器はこの処理でclaim表を書かないため、数学的な証拠を権限へ変換しない。∎</p>
+<p>別の新claimで同じoperationを行うことは、新しい要求として可能である。これは過去の要求やaccessを自動で再有効化する規則ではない。</p>
+<h4 id="proofs-h19">F3-08 ソース束縛の契約受理</h4>
+<p><strong>命題。</strong> F0.2の選択した証拠checkerの健全性を前提とする。sourceから作ったOperation、その不変条件I、所定の強さPartial/TotalBodyについて証拠を照合したなら、異なるコード、勝手に加えた前提、弱い保証の証拠では、その契約を受理しない。</p>
+<p><strong>証明。</strong> 検証条件を実Operationから再生成し、Operation identity、invariant hash、契約種別、期待前提を比較してから証拠木を検査する。TotalBodyの場合、このprofileの期待前提は空である。証拠に書かれた前提を期待側へコピーしない。交換時はTotalBodyからPartialへ落とさない。従って証拠の対象と受入れ対象は一致する。checkerの手証明から、その一致する対象の部分/全body正当性を得る。∎</p>
+<p>有限hashを数学的な同一性と無条件に同一視しない。仕様上は完全な構造一致を要求し、実装のhashはcollisionがないことと完全record確認の境界を持つ。</p>
+<h4 id="proofs-h20">F3-09 全mutatorによる不変条件保存</h4>
+<p><strong>命題。</strong> 初期storeがIを満たし、Iで保護したowner状態を書く全operationがF3-08でI保存を確認され、書込みが正確なowner transitionを通るとする。型付き成功・失敗・再送・認可拒否・正当な同schema交換を任意の有限回行ってもIは保存される。</p>
+<p><strong>証明。</strong> 実行長の帰納法。成功するowner bodyでは、事前のIと契約証明から返されたstoreのIを得る。評価が失敗した場合はlocal copyを公開せず、元のstoreを保つ。拒否・再送・policy変更は保護storeを書かない。コード交換ではstoreを保ち、新writerの証拠を先に検査する。元のIが次の成功の前提になる。未検証writerを追加する経路はadmissionで拒否する。∎</p>
+<p>異なるownerの同時不変条件はこの命題からは出ない。rely/guarantee、資源移送、必要な共同確定について別の検証を要する。</p>
+<h3 id="proofs-h21">4. 参照・要求・構成</h3>
+<h4 id="proofs-h22">F3-10 正規化された多グラフの保存</h4>
+<p><strong>命題。</strong> 宣言参照の閉包、同kindのDAG、関係DAG、labelの向き、値の型、invariant、正確なmember対応をWFとする。宣言追加、退役、検査済みreparent、policy/claim更新、sourceに基づくowner実行の各受理遷移はWFを保つ。</p>
+<p><strong>証明。</strong> 新宣言では、未知参照を拒否し、同kindのDAGをKahn法で検査する。終了時に全頂点を除去できたこととcycle不在の同値は、入次数0頂点が存在する有限DAGの帰納法による。関係計算の辺も別に同様に検査する。label条件と値型を検査する。reparentでは変更後の辺に同じ検査を適用する。退役/policy失効は辺を新設せず、F3-04の再導出で利用可能性を下げる。owner遷移は構造を変えず、F3-09で型とIを保つ。各場合にnormalizeがF3-02/03の同じliveを生成し、次のF3-11でbindingを正規化する。現在memberを交換する場合は旧incarnationを退役させ、fresh keyだけを対応表に置く。∎</p>
+<p>循環検査の成功を、影響範囲の小さい分散実装が既に存在する証明とはしない。現在は抽象的な制御遷移である。</p>
+<h4 id="proofs-h23">F3-11 認可失効を含むfallbackとfresh reacquire</h4>
+<p><strong>命題。</strong> 候補列c0..cm-1とcursor pについて、normalize後にはp≤mであり、p&lt;mならcp∈Liveである。同一lineageでpは減らない。accessのpolicy/claimが失効したなら、anchorの物理的存在を保ったまま、そのaccessを使わない候補へ進む。</p>
+<p><strong>証明。</strong> normalizeは現在pから非live候補を飛ばすwhileだけを使う。高々m-p回で停止する。失効accessはeligibleから除かれ、そのaccessを要求する導出はF3-02により消える。従ってselected accessが失効すればwhileが進む。sampleの有無はEやnormalizeの入力に含まれないので欠測では変化しない。reacquireだけが新lineageを作ってp=0から選び直す。その遷移には独立した現在認可と候補型・label検査が必要である。新しいclaimや同名anchorの生成だけでは、旧candidate keyもcursorも変えない。∎</p>
+<h4 id="proofs-h24">F3-12 認可付き関係DAGの純粋射影</h4>
+<p><strong>命題。</strong> 検査済みの有限関係DAG、現在liveなbinding、全依存sampleについて一致したpresentation contextとlineageがあるなら、memo化した評価と、同じDAGを展開した再帰評価は一致する。評価はSを変更しない。必要sampleが欠ければPresentationGapであり、semantic fallbackは起こらない。</p>
+<p><strong>証明。</strong> トポロジカル順序に関する帰納法。bindingのleafでは現在のselected anchor/accessとsample headerが一致して同じ整数を得る。const、加算、整数倍は同じ子の値から同じ結果を得る。共有子をmemo化しても決定的な値は同じである。unknown/stale sampleは値として採用されない。コードはstore/Bindingを変更せず、memoは関数ローカルに限る。F3-05と全候補のlabel上界により、許可された投影の可用性が隠れた高い候補に依存しないprofileを構成できる。∎</p>
+<p>presentation contextは物理的な世界共通frame番号ではない。この命題は実時計の同期や近似誤差を証明していない。</p>
+<h4 id="proofs-h25">F3-13 一つの要求の一回の状態確定</h4>
+<p><strong>命題。</strong> request IDとκが保持され、Pendingからだけserveできる遷移では、同じ要求によるowner storeの変更は高々一回である。</p>
+<p><strong>証明。</strong> 最初の成功でstoreとServed決定を同じ抽象遷移で保持する。以後statusはPendingではなく、重複要求はowner評価前に拒否する。失敗はRejectedを保持する。消費/ReleaseDeniedへ進んでもPendingへ戻す遷移はない。journal復元についてはF3-19がこの決定を保つ。∎</p>
+<p>これは配送保証ではない。送られたが失われた要求の完了や、実外部効果のexactly-onceを主張しない。</p>
+<h4 id="proofs-h26">F3-14 live結果の使用は、過去の成功とは別に検査する</h4>
+<p><strong>命題。</strong> service後にmember、使用依存module、policy等が失効した場合、過去のstate changeを消さず、liveな継続への結果の消費を拒否できる。</p>
+<p><strong>証明。</strong> serveは現在性と権限を先に検査し、成功したら結果と意味記録を残す。consumeでは改めてmemberの現在対応、要求に束縛した全live依存、現在code/contract、policy証拠を検査する。失敗するとReleaseDeniedへ進み、store/Served履歴を戻さない。正常消費はPending continuationを一度だけ外すので二度消費しない。∎</p>
+<p>これはlive-resultという保守的な結果profileである。失効後も独立したsnapshot値を読むprofileには、別の公開契約が必要である。静的な数学的命題まで失効で偽になるとはしていない。</p>
+<h3 id="proofs-h27">5. 追跡された更新検査</h3>
+<h4 id="proofs-h28">F3-15 検査read traceの再生補題</h4>
+<p><strong>前提。</strong> 検査Vは決定的・停止し、状態を直接参照せず、キー取得APIだけを通る。APIは成功したlookupだけでなく不在lookupも記録する。同一keyの反復読取りが異なるstampを観測した場合は、その検査を中断する。最後のstampで過去の読取りを上書きしてはいけない。各(value, stamp)取得は同じrecordの原子的な読取りである。集合queryはversion付きindex recordの読取りとして実装し、更新側はそのindexを維持する。</p>
+<p><strong>命題。</strong> Vがdelta Δの検査中に読んだ各keyの完全な値とstampが別状態でも同じで、blind write先のstampも同じなら、Vは同じ読取り列と判定を返す。</p>
+<p><strong>証明。</strong> Vの実行ステップを帰納する。純粋な計算は同じ入力から同じ結果を返す。次のlookup keyは一致する過去の計算から選ばれ、記録されたstamp/値が一致しているので同じ結果になる。不在も一つの値であり同様。従って途中で新しいbranchやkeyへ逸れず、同じ終端へ到達する。∎</p>
+<p>stampから値の一致を導くには、すべての変更がstampを増やし、削除してもその世代を忘れないことが必要である。queryをguestが独自に未記録scanする場合、この補題は適用できない。</p>
+<h4 id="proofs-h29">F3-16 現在認可付きOCCの保存</h4>
+<p><strong>命題。</strong> prepareの結果を、変更内容・read stamp・提出主体へ封印する。commitがその封印、全read/blind-write stamp、現在の使用権限を同じ制御遷移で確認してから、まさに検査したdeltaを適用するなら、prepareで検証した性質をcommit時にも利用できる。</p>
+<p><strong>証明。</strong> 変更内容の差し替えは封印の不一致になる。状態の差はF3-15の条件で排除されるので、現在状態でもVの判定は同じ。認可はVの過去の判定から推論せず、commit時の別の前提として成立する。その後に別操作が割り込まないため、まさに検査した状態遷移を適用できる。∎</p>
+<p>これはグローバルに全実行を止める設計ではない。抽象的な一歩に必要なread/write範囲だけを、実装で原子的に照合する義務を指定する。実装がその義務を満たす証明は別である。</p>
+<h4 id="proofs-h30">F3-17 reparentの局所検査</h4>
+<p><strong>命題。</strong> 対象nの新しい親から、同kindのsupportを逆向きにたどり、nへ到達しないことを確認する。読んだ全記録のrevisionとn自身をcommitで照合すれば、同kindのDAG性を壊さないreparentを適用できる。</p>
+<p><strong>証明。</strong> 変更される辺は新親→nだけである。新cycleがあれば、必ずその辺の一つを含み、新親からsupportの逆向き探索でnへ到達する。全枝を探索するため、現在ORで使われていない辺も見落とさない。探索した記録のrevisionが一致すれば経路は変わらない。未探索の新記録だけで新しい到達経路を作るには、探索済み記録の出辺を書き換える必要があり、そのrevision照合で拒否される。認可はF3-16の使用時条件で別に確認する。∎</p>
+<p>異kind循環のrootなし構成はF3-02で利用不能になる。reparentのためにすべてのグラフを同じDAGへ潰してはいない。</p>
+<h4 id="proofs-h31">F3-18 独立変更の可換性と適用範囲</h4>
+<p><strong>命題。</strong> 変更A,Bの全read集合D、write集合Wについて、WA∩(DB∪WB)=∅、WB∩(DA∪WA)=∅であり、権限と検査に影響するrecordもその集合に含まれるとする。両変更は互いの準備をstaleにせず、domain recordの最終結果は可換である。</p>
+<p><strong>証明。</strong> 各変更は他方が読む値・stampを変えないのでF3-15が適用できる。write集合は交わらず、各writeの計算入力も変わらないから最終record mapは一致する。観測上の順序やaudit列の順番が同じとはしていない。因果的に独立な変更として、domain内容を比較する命題である。∎</p>
+<p>変更辺の端点が異なるだけでは前提を満たさない。b→c,d→aがあるときa→bとc→dを別々に検査すると、合成後だけcycleになる。この反例は実行試験に含む。</p>
+<h3 id="proofs-h32">6. 復元と観測</h3>
+<h4 id="proofs-h33">F3-19 現在の確定prefixに基づく全成分復元</h4>
+<p><strong>前提。</strong> manifestがこのprofileの全authoritative成分を列挙し、各commitは同じ順序の完全recordをdurableに保持する。現在の確定headはsnapshot提出者から独立に信頼される。hashを使う実現ではchain integrityの暗号前提を明示する。</p>
+<p><strong>命題。</strong> 正当なcheckpointと、その後の現在headまで欠けないrecord列を検査して復元すると、現在のauthoritative状態と同じ状態を得る。過去のsnapshotだけで失効、消費済み要求、更新準備、関係lineageを巻き戻さない。</p>
+<p><strong>証明。</strong> checkpointは発行時の完全状態と一致する。各suffix recordは直前digestに結びつき、その位置の完全commit状態を持つので、prefix長に関する帰納法でそのcommitと一致する。末尾が独立に保持されたheadに一致しなければ拒否する。復元はコードや外部操作を再実行せず、記録された状態を再構成する。manifestの欠落や未知成分は受理しない。∎</p>
+<p>このモデルは各commitの完全なin-memory imageを持つ。実ファイルのincremental log、power failure、replica合意、back-up管理、外部device状態まで検証済みではない。現在のheadをtrustedに得られないオフラインloadは、この命題の適用外であり、fresh import等の別意味が必要である。</p>
+<h4 id="proofs-h34">F3-20 受動観測の消去同値</h4>
+<p><strong>命題。</strong> 観測付き状態(S,O)において、domain stepはSだけを読み(S',O)へ進み、observeはSを変えず(S,O')へ進むとする。任意の有限実行からobserve stepを消すと、元と同じSの列とdomain outcomeを持つ実行が得られる。逆に任意のdomain実行へ有限個のobserveを挿入できる。</p>
+<p><strong>証明。</strong> 実行長の帰納法。domain stepはO非依存なので消去後にも同じstepが可能。observe stepではSが変わらず、その一歩を省ける。逆方向も同じ非依存性により挿入可能。失効したobserverの拒否もSを書かない。∎</p>
+<p>これは物理時間ゼロでも、observerを無限に優先するschedulerの下での進行保証でもない。無限実行については、domainの公平性をobserverの有無から独立に保つ必要がある。breakpoint/rollbackはこのobserve遷移に入れない。</p>
+<h4 id="proofs-h35">F3-21 固定label境界での二実行非干渉</h4>
+<p><strong>対象profile。</strong> 公開catalogue、低いmodule/source、policyと低い入力が同じ二状態を比較する。高い値は異なってよい。低い状態へ影響するcontrol操作は同じものを対応させる。高い操作は、低いcatalogue・issuer epoch・principal slotを変更せず、label検査を満たすものだけである。per-label counterとobserver bufferを使い、physical timing、allocation、global log位置、secret-dependent terminationは観測しない。</p>
+<p><strong>命題。</strong> 同じ低い操作scheduleと低い入力に対して、任意の有限prefixで、低いrecordと低い意味記録列が一致する。高い内部stepは低い射影でstutterする。</p>
+<p><strong>証明。</strong> F3-05により低いlive導出が一致する。低いpolicyは高いclaimを使えず、同じ低いκの結果が一致する。低いowner操作の潜在的な読み値、guard、書込み先の存在はすべて低く、同じchecked sourceから同じ結果/失敗を得る。高い操作はwrite-downを禁止され、低いrecordを変えない。関係の全候補と式依存もlabelで閉じている。高いeventsはfilterで消え、per-label IDは低いIDをずらさない。低い値を返す高いcontinuationのtaintを落とさない。各caseの局所保存から、対応した有限scheduleの帰納法で結論を得る。∎</p>
+<p>任意の高い管理操作、labelの変更、動的declassification、観測policyの秘密依存変更、scheduler covert channelについての一般定理ではない。この制限は明示的な未解決事項である。permissionとprohibitionを含む一般的な動的情報流は、既存研究でも複数の意味を区別している。<a class="source" href="#sources">[S4]</a></p>
+<h4 id="proofs-h36">F3-22 許可射影と有限保持の順序</h4>
+<p><strong>命題。</strong> <code>safe=filter_allowed(H)</code>を先に計算し、その後に<code>last_k(safe)</code>を取るなら、高いイベントの挿入だけで保持される低い最後k件は変わらない。逆の順序では一般に成立しない。</p>
+<p><strong>証明。</strong> 高い挿入はfilter後の列を変えないので、その同じ列にlast_kを適用した結果も同じ。反例としてH=[low]、k=1へhighを末尾挿入すると、先にlast_kを取る実装は[high]から空列を返し、元の[low]と異なる。∎</p>
+<p>完全履歴を無制限に保持すべきという要件ではない。productionでは、許可された単位の独立queue/retentionと課金を実現する必要がある。</p>
+<h3 id="proofs-h37">7. 全体と拡張</h3>
+<h4 id="proofs-h38">F3-23 任意の有限回の合成保存</h4>
+<p><strong>命題。</strong> 本章の受理規則を通るsource追加、owner実行、構造変更、認可変更、fallback、正当なcode交換、checkpoint復元の有限列は、初期WFからWFと、各使用点の現在性を保存する。拒否された候補は、新しい権限・値・利用可能性を部分的に残さない。</p>
+<p><strong>証明。</strong> 基底はbootstrapの明示検査。帰納stepはF3-06～19の各該当caseとF3-10の再正規化を用いる。権限変化で過去の数学的証明を偽にする必要はなく、使用時にF3-07/14がその適用可能性を改めて判断する。新たなsourceやnodeも同じ規則へ入り、次のstepの前提を満たす。個々の事後WF検査だけでなく、値変更はF3-09、graph変更は具体的なcycle/label検査、認可は現在のclaim照合、復元は正当なprefixを根拠とする。∎</p>
+<p>この有限prefix安全性は、有用な正例をすべて受理すること、無限拡張の物理資源、永久故障での進行を保証しない。正例・拒否例を含む統合実行を別の受入れ条件にする。</p>
+<h4 id="proofs-h39">F3-24 実現への条件付き接続義務</h4>
+<p><strong>条件付き命題。</strong> 具体実行Cと本抽象状態Sの対応Rについて、各具体stepが、同じ公開効果を持つ有限個の抽象stepまたはsilent stepへ対応し、対応Rを保つとする。初期対応があれば、任意の有限具体traceの公開効果は抽象traceに含まれる。</p>
+<p><strong>証明。</strong> 具体step数の帰納法で、各stepの対応する抽象列を連結する。初期対応と各step後のRが次の接続を保証する。∎</p>
+<p>これは必要な接続条件であり、Rust/QUICに対する前提をこの成果でdischargeしてはいない。また、この一実行refinementだけからF3-21を移してはならない。機密性には二状態の低同値を保つstep対応が、進行性には無限silent stutterを排除する条件が別に必要である。並行システムのsecurity-preserving refinementについても、この追加の問題は一次研究で扱われている。<a class="source" href="#sources">[S5]</a></p>
+<h3 id="proofs-h40">8. 条件付きの理論拡張契約</h3>
+<p>共通の意味モデルBに対する契約Cを公開する局所理論Tは、(a)使用する仮定、(b)ソース/契約/理論版への結びつけ、(c)Bへ解釈したCの健全性、(d)値/資源の境界変換、(e)残余義務、を提供する。任意の理論Tがこの条件を自動で満たすという定理ではない。</p>
+<p>F0.3は、多項式証拠、現在supportのrank証拠、label境界の三種類について、異なる判定を同じκと対象へ結びつけている。算術の真理、liveの現在性、許可という三つを一つの命題に混ぜない。完全な依存型、様相型、任意handler、所有resourceを消去する変換の一般的な証明は残る。</p>
+<p>既存の理論adapterを異種の反応的言語へ接続するPiCoreの方針は、この境界を具体化する参考になる。ただし、同研究の成果をF0.3の未証明部分として流用しない。<a class="source" href="#sources">[S3]</a></p>
+<h3 id="proofs-h41">9. 証明から導く実装上の責任</h3>
+<p>最小不動点を毎回世界全体で同期計算する必要がある、とは定理から導かれない。参照モデルは一つの意味的な比較器である。productionでは、影響閉包の差分更新、現在のclaim/policyのview、版付きの索引、受動観測の独立buffer等で実現し、それが同じ意味を保つことを示す。</p>
+<p>同様に、原子的なreparent検査をPythonのglobal lockで行うことと、全インターネットに唯一の権限者を置くことは別である。独立instance同士の接続は、公開した契約の対応と、必要な相互認証・根拠の伝播を持つ新しいboundaryになる。未知の体系を既定で信用したり、世界全体の単一コンパイルを必須にしたりしない。</p>
+<p>この研究候補は、19a6decfbea0815b7b4265e8fadfb399270aaed2のCanonを変更しない。I3-3の有限受理とpauseをそのまま保持し、既存の定理台帳を自動的に解消済みにしない。<a class="source" href="#sources">[S1,S2]</a></p>
+<p>出典の詳細は <code>SOURCES.md</code> を参照する。</p>
+</section><section id="plan" aria-label="実装への計画"><h2 id="plan-h0">理論の受理から実装へ接続する計画</h2>
+<h3 id="plan-h1">1. 計画の扱い</h3>
+<p>これは研究候補と受入れ条件の提案であり、Plan 250に代わる自動実行命令ではない。I3-3の有限受理を保持し、I3-4を勝手に再開しない。F0.3の実装をそのまま本番Coreへ採用する指示でもない。</p>
+<p>「次に依存する基礎は先に閉じる」を原則にする。ただし、基礎の反例を得るための限定実装は止めない。研究の出口は、候補一覧の拡大ではなく、定義・定理・反例・具体的な実装境界である。</p>
+<h3 id="plan-h2">2. 推奨する全体設計</h3>
+<h4 id="plan-h3">2.1 値と計算を分けた小さい意味コア</h4>
+<p>最終構文とは別に、純粋な値、型付きの計算、参照する環境、現在の使用条件を分ける。再帰を許すruntime計算の全域性と、型検査/証拠検査の停止性を同じ要求にしない。</p>
+<p>最初に比較する型構成候補は、基本値、積/和、名前付き再帰データ、純粋な高階関数、計算型、現在性を持つhandle、必要な有限index/refinementである。ネットワーク越しの任意closureを一度に許すのではなく、純粋で閉じた値の移動、instance interfaceへのhandle、効果ful closureの使用条件を分ける。</p>
+<p>これは「高階や依存型を永久に除外する」選択ではない。SL-08/TY-05を、具体的な利用例と型規則を備えた独立の研究対象として取り込むための案である。完全な依存型や様相を、単にF0.3のrecordへ別fieldを追加して導入したとしない。</p>
+<h4 id="plan-h4">2.2 現在性を共有する、別々の判断</h4>
+<p>型判断、局所的な証拠、現在認可、live依存、結果の消費、保存可能性が、同じ対象・世代・source・契約を参照する。これらを一つの巨大な型の中へ平坦化するのではなく、正確な文脈を共有して別々に検査する。</p>
+<p>F0.3のsupport closureは、このうち構成の使用可能性を扱う。一般の数学的な命題やデータの意味を、単なるlive/nonliveへ還元しない。型/契約の証明は、どの環境で成立するかを別に保持する。</p>
+<h4 id="plan-h5">2.3 純粋な射影と実行admission</h4>
+<p>sourceからのprogram/interface/code/edge生成は、実際のcredentialを持たない段階でも調べられる。生成物は実行権限ではない。実際のadmissionとuseでは、現在のpolicyと根拠を検査する。</p>
+<p>これにより、開発者は権限なしでも構造や未解決義務を理解でき、管理者はコードを勝手に書き換えずに許可を決められる。内部記録の閲覧は別の情報公開policyに従う。</p>
+<h4 id="plan-h6">2.4 実装と理論の責任を逆流させない</h4>
+<p>通信adapterの制約をCoreの正しさとして定義しない。逆に、意味上要求した原子性やfenceを「下位が実現する」とだけ書いて済ませない。各adapterの入口で、何の版・権限・scopeを保持し、どのstepで検査/確定/記録するかを明示する。</p>
+<h3 id="plan-h7">3. 研究と実装の依存順</h3>
+<p>以下のWは作業単位案であり、既存T/Iの新しい公式phaseではない。各作業は文書だけのclosed宣言を認めない。</p>
+<div class="table-scroll" tabindex="0"><table>
+<thead>
+<tr>
+<th>単位</th>
+<th>主対象</th>
+<th>先行条件</th>
+<th>主な成果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>W1</td>
+<td>基礎の形式化と独立確認</td>
+<td>要件表とF0.3の選択範囲を照合</td>
+<td>support/policy/currentness/OCC/観測の機械化、反例、前提台帳</td>
+</tr>
+<tr>
+<td>W2</td>
+<td>通常の表現と型・証拠境界</td>
+<td>W1の識別・現在性・境界判断</td>
+<td>最小の高階/handle/refinement規則、宣言的体系とchecker対応</td>
+</tr>
+<tr>
+<td>W3</td>
+<td>参加・存在・patch・関係の統合</td>
+<td>W1, W2の必要部分</td>
+<td>動的instanceの追加/撤去/更新と全グラフ保存</td>
+</tr>
+<tr>
+<td>W4</td>
+<td>分散実行への意味保存</td>
+<td>W1/W3の使用点と線形化点、I3-3成果</td>
+<td>実Rust/QUICへの対応、I3-4/5/6の不足を明示して接続</td>
+</tr>
+<tr>
+<td>W5</td>
+<td>全成分の永続化と進化</td>
+<td>W3/W4、外部効果の採用profile</td>
+<td>実保存形式、全成分manifest、復旧・失効・patchの整合</td>
+</tr>
+<tr>
+<td>W6</td>
+<td>秘密を含む観測と能動debugの分離</td>
+<td>W1、W3/W4の実trace、脅威モデル</td>
+<td>二実行保証、受動非干渉、資源境界、操作としてのdebug</td>
+</tr>
+<tr>
+<td>W7</td>
+<td>安全な参加環境とαの最小構築経路</td>
+<td>W2〜W6の採用範囲</td>
+<td>Mir内logic、View/FFI、継続参加、構築、SC-24の実統合</td>
+</tr>
+<tr>
+<td>W8</td>
+<td>独立管理・公開・連合への拡張</td>
+<td>α受理とその契約</td>
+<td>別管理主体と別版の接続、信頼翻訳、長期回収、WW要件</td>
+</tr>
+</tbody>
+</table></div>
+<p>W5とW6の理論研究は依存境界があれば並行できる。すべてをW7のUI実装後まで待たせない。I3-4の実行例がW4の反例や仕様圧力に必要なら、限定して使えるが、F0.3の研究結果を自動採用してから動かす順序にはしない。</p>
+<h3 id="plan-h8">4. 各作業の具体的な完了条件</h3>
+<h4 id="plan-h9">W1：基礎を「紙の主張」から検査可能な成果へ</h4>
+<p>F3-01〜07、15〜18、20〜22を最初の機械化対象にする。式、rank certificate、policy evidence、type-sensitiveなκ、記録stamp、観測の消去を明確なデータとして定義し、証明対象にする。</p>
+<p>単にPythonのif文を写すのではなく、宣言的な導出関係、checkerの健全性/完全性、遷移による保存を分ける。特に正しい導出をすべて落とすcheckerが通らないこと、証拠の型や対象が混ざらないことを否定例で示す。</p>
+<p><strong>出口：</strong> 機械検証のtoolchain/version・全コマンド・axiom/未証明の前提が明確で、少なくともsupport、policy/current-use、tracked validation、passive erasureについて一般の定義に対する証明を検査できる。手証明しかないものはそのまま残件にする。証明数ではなく対象範囲で判定する。</p>
+<h4 id="plan-h10">W2：表現力を証明のために削りすぎない</h4>
+<p>少なくとも、通常の親への代入、他ownerのsnapshotを使う計算、再帰/反復、first-class handleによるmodule接続、局所理論の契約を持つ再利用関数を、最終構文に依存しない意味例で定める。</p>
+<p>型規律の候補では、値環境Γ、資源環境Δ、場所/寿命/版の環境Ψ、効果rowと失敗row、残余義務を分ける。純粋な高階関数と、再開権を消費するeffect continuationは同じ複製可能な値にしない。</p>
+<p><strong>出口：</strong> 決めた正例がad-hoc helper無しに表現でき、宣言的な型付けに対するchecker/elaboratorの健全性と相対完全性が示される。依存型的な主張を局所導入する場合、外側の通常コードへの型消去・資源保護・証拠の版を説明する。少なくとも二つの異なる保証profileを同じboundaryで接続する。</p>
+<p>任意の数学的に正しいprogramを自動認識することは出口条件にしない。契約を証明できる正例や必要なアノテーションは、その前に仕様として固定する。</p>
+<h4 id="plan-h11">W3：全グラフと動的合成</h4>
+<p>定義とinstance、package依存とlive依存、関係DAGと状態の存在DAGを区別する。現在のtyped control APIで与えているlifecycle操作を、通常sourceのmodule/patch宣言とelaborationへ接続する。型付きcontrol APIがあることだけを、source-level構築言語の完成に数えない。F0.3の最小不動点とrank検査を、選択したhandleとmodule境界へ接続する。new/retire/reparentを、単なるrecord操作ではなくtyped lifecycle operationとする。</p>
+<p>初期の推薦は、複数親をall/anyで明示し、未rootの循環は利用不能の診断とする方式である。DAG自身を保つべき関係は別に検査する。原子性を必要とする部分はscopeを公開し、global controlを暗黙に要求しない。</p>
+<p><strong>出口：</strong> A/B/Cの基礎構成へA/Cの追加構成を設置できる。依存先の退出、認可失効、code交換が、参照の現在性・fallback・証拠・進行中要求へ正しく伝わる。対応する正しい追加/交換/撤去が実際に受理され、全拒否ではない。</p>
+<h4 id="plan-h12">W4：実分散への接続</h4>
+<p>既存I3-3の実通信成果を維持する。F0.3のDataを同じstructとして実装する必要はない。必要な観測関数と対応関係を定め、特に次を照合する。</p>
+<div class="table-scroll" tabindex="0"><table>
+<thead>
+<tr>
+<th>意味上の境界</th>
+<th>実装で示すこと</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>current context</td>
+<td>request/contract/code/instance/memberの照合とtyped equality</td>
+</tr>
+<tr>
+<td>use-time authorization</td>
+<td>queue投入時だけでなくowner serve・結果release時の判定</td>
+</tr>
+<tr>
+<td>live support</td>
+<td>retire/reparent/policy更新に対する派生状態の更新と古い利用の拒否</td>
+</tr>
+<tr>
+<td>state/decision commit</td>
+<td>応答喪失後も二度の状態変更を行わない記録</td>
+</tr>
+<tr>
+<td>generated site</td>
+<td>helperやdeploymentが意味上の辺・結果を作っていないこと</td>
+</tr>
+<tr>
+<td>observer projection</td>
+<td>event内容・数・順序・redactionを出す根拠</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>出口：</strong> 実processとselected transportで、typed currentnessと失効/退役の順序を検査できる。有限な実行証拠と一般的なrefinement証明を区別する。弱いメモリ順序、lock、queueへの前提を明示する。機密性を移す場合は、単一trace保存だけで代用しない。</p>
+<h4 id="plan-h13">W5：保存と更新の実現</h4>
+<p>snapshotの意味を先に区別する。推薦は、(a)現在の確定状態へ戻るsame-instance recovery、(b)現在権限を再受理するfresh import、(c)隔離された過去の検査、を別の操作として提示すること。用途に応じて初期profileを選ぶ。</p>
+<p>same-instance recoveryは、現在headをsnapshot提出者と独立に確立する必要がある。実装は完全imageでもlogでもよいが、全component、未完了効果、patch状態、証拠依存、消費記録を覆うこと。未対応componentがあれば、保存を成功と呼ばない。</p>
+<p><strong>出口：</strong> process終了・再起動を含む実経路で、権限失効・退役・pending・prepared状態の前後を再現し、double mutation/古い使用の復活を拒否する。backupや失効記録が丸ごと過去へ戻る脅威を、hashを付けたことだけで解決したとしない。</p>
+<p>二相コミット型patchを採る場合は、準備済みの権限を予約するのか、commit時の現在権限へ再照合するのかを統一する。安全性と可用性を別々に宣言する。</p>
+<h4 id="plan-h14">W6：観測・デバッグと秘密</h4>
+<p>初期の推薦は、静的labelで値・構造・policy情報を保護し、権限失効は今後のreleaseを止める方式である。過去に見た情報を消したことにしない。秘密に応じたpolicy自体の変更やdeclassificationは別の契約とする。</p>
+<p><strong>出口：</strong> 低入力が同じ二実行について、private値やhigh処理の違いが、許されない値・存在・失敗・件数へ現れないprofileを定義・証明する。観測有無の消去比較と、秘密値を変える比較を別試験にする。buffer/queue/CPUの資源を分離し、過剰観測でdomainを止めない条件を測定する。</p>
+<p>breakpoint、巻戻し、状態書換えは認可されたcontrol operationである。受動観測の定理をそのまま適用せず、何を停止・再実行するかを明示する。</p>
+<h4 id="plan-h15">W7：αの利用能力</h4>
+<p>普通のMir sourceから、構築・参加・操作・関係・観測・追加/交換/撤去・保存/復旧が一つの経路になることを受理する。特定のゲームやWorldをCoreへ追加して達成したとはしない。</p>
+<p><strong>出口：</strong> 要件表のα-1〜α-8の採用範囲について、別の作者が新しい構成を記述し、network越しに利用できる。SC-24は同じidentity/契約/状態を持つ実システム上で再現する。privateデータを使う観測比較、失効や退出の反例、host/FFIの迂回拒否を含む。</p>
+<p>最初のrendererは一つでもよい。継続構築のUIがCLIかGUIかは能力の問題と分ける。ただし、内部runtimeの呼出しを作者が手順ごとに手で組み立てることを、完成した構築入口としない。</p>
+<h4 id="plan-h16">W8：遠期の開放性</h4>
+<p>独立管理者、複数の信頼域、版違いの接続、識別と参照、公開/発見、持続するlink、長期回収を扱う。ここではWWW全体を一つの閉じたMir programとして再コンパイルする前提を置かない。</p>
+<p><strong>出口：</strong> 別々に管理・更新した二つの構成が、内部source全体を共有せず、契約と必要な証拠/認可の下で接続できる。片側の更新が他方の同時更新を暗黙要求しない。共通の基礎は、業務上のあらゆる内容の真偽を判定する役割ではない。</p>
+<h3 id="plan-h17">5. 方式選択をどう扱うか</h3>
+<div class="table-scroll" tabindex="0"><table>
+<thead>
+<tr>
+<th>論点</th>
+<th>推薦または候補</th>
+<th>選択に伴う制約</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>複数親</td>
+<td>明示all/any、根拠は帰納的closure</td>
+<td>arbitrary否定を同じ式へ入れない。</td>
+</tr>
+<tr>
+<td>認可の合成</td>
+<td>全必要条件を同じκで評価、anyは明示branch</td>
+<td>任意の主体変換/委譲は別契約。</td>
+</tr>
+<tr>
+<td>型/証明拡張</td>
+<td>共通契約へ証拠をexportし、小さな検査境界を置く</td>
+<td>任意checkerの成功boolを信用しない。</td>
+</tr>
+<tr>
+<td>失効</td>
+<td>使用時に現在性を確認</td>
+<td>準備後予約とは両立条件を明示する。</td>
+</tr>
+<tr>
+<td>影響範囲</td>
+<td>read traceとabsence/index versionを追跡</td>
+<td>未記録scanでは保証できない。</td>
+</tr>
+<tr>
+<td>観測</td>
+<td>許可射影の後に保持、domainと資源を分離</td>
+<td>物理時間ゼロは主張しない。</td>
+</tr>
+<tr>
+<td>復元</td>
+<td>current-head recoveryとfresh importを分離</td>
+<td>信頼できるheadがなければ現行権限の復活防止は別手段が必要。</td>
+</tr>
+<tr>
+<td>数値/高速sample</td>
+<td>数学的モデルと有限精度実装を別に対応づける</td>
+<td>Int64/float/誤差を文法の細部として扱わない。</td>
+</tr>
+</tbody>
+</table></div>
+<p>これらは研究上の推奨であり、既にownerが最終採用した選択ではない。30の元のQは <code>DECISION_DISPOSITIONS.json</code> で維持する。</p>
+<h3 id="plan-h18">6. 移植の順序と変更を受理する条件</h3>
+<p>第一に、F0.3のcontrol識別・policy evidence・support certificate・component registryを、既存のどのcarrier/検査点へ対応づけるかを記述する。実装を先に変更してから、意味を合わせない。</p>
+<p>第二に、I3-3の受理済みの経路に対し、新しい使用条件が必要なprofileだけを明示的に追加する。旧sourceの意味を黙って変えない。新profileを実行できない経路は、義務を消すのでなく拒否する。</p>
+<p>第三に、実行と失敗の両方でsource/Core/artifact/実occurrenceの対応を確認する。derived live集合やobserver viewから権限を再生成する経路は作らない。</p>
+<p>第四に、目的の新例を普通のsourceで追加できることを確認する。試験helperに期待値やoperation固有の分岐を入れた場合は、その成果を一般的な言語能力として数えない。</p>
+<p>第五に、正しい変更を拒否しすぎないかを確認する。保守的な拒否が初期profileに必要でも、拒否理由、必要な注釈、次に広げる条件を明示する。</p>
+<h3 id="plan-h19">7. 完了をどこで宣言するか</h3>
+<p>「この基礎については次の実装に依存してよい」と言うための最低条件は、対象の宣言的意味、受理アルゴリズム、量化された保証、代表的な正例、反例、TCB、実装との接続義務がそろっていることである。</p>
+<p>F0.3はこのうち、選択したcontrol/現在性profileの定義・手証明・実行反例・接続条件を揃えた。未達なのは、必要な機械化、全体の表現力、使用する実装のrefinement、追加profileの秘密/進行/保存の保証である。</p>
+<p>既存のI3-4へすぐ進むか、W1/W2の一部を先に閉じるかは、次の実装が何を前提とするかで決める。全一般理論が完成するまで何も実験しない方式でも、実装件数だけを増やす方式でもない。</p>
+<h3 id="plan-h20">8. 研究運営</h3>
+<p>一つの研究課題には、目的に結びついた反例、候補となる定義、証明すべき命題、現在の証拠、未解消の前提を対応づける。作者と最終受理の根拠は分ける。同じAIがコードと証明を書いたことは独立確認ではない。</p>
+<p>研究結果のIDは公式THM/OBLを上書きしない。新しい定理を既存台帳へ取り込む場合、対象の定義と量化範囲を比較した上で、どの義務を実際に解消するかを別に判断する。</p>
+<p>カレンダー上の日付や所要時間の数字を、未計測の研究の完了保証として置かない。完了時点は上記の能力と証拠で定義する。最終目標は、その判断を選別する基準として維持する。</p>
+</section><section id="ledger" aria-label="命題の範囲"><h2 id="ledger-h0">F0.3 命題・証拠台帳</h2>
+<p>24項目は、量化範囲と前提を持つ手証明である。機械検証・独立レビュー済みとはしない。最後の接続命題は、実装がstep対応を満たすことを未解消の前提として持つ。</p>
+<div class="table-scroll" tabindex="0"><table>
+<thead>
+<tr>
+<th>ID</th>
+<th>命題</th>
+<th>対象範囲</th>
+<th>残る境界</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>F3-01</td>
+<td>正の単調性と有限停止</td>
+<td>任意の有限な正のsupport式と有限record集合</td>
+<td>任意のsource述語や否定を含む条件の完全性ではない。</td>
+</tr>
+<tr>
+<td>F3-02</td>
+<td>帰納的根拠に関する健全性と完全性</td>
+<td>正のsupportの帰納的な有限導出</td>
+<td>共同循環をcoinductiveな存在根拠として許す方式は選ばない。</td>
+</tr>
+<tr>
+<td>F3-03</td>
+<td>独立certificate checkerの健全性・完全性</td>
+<td>独立rank/closure証拠検査</td>
+<td>任意の理論pluginの証拠検査ではない。</td>
+</tr>
+<tr>
+<td>F3-04</td>
+<td>退役の単調性と正規化の冪等性</td>
+<td>同じ宣言でeligible集合を減らす退役</td>
+<td>新incarnationや宣言拡張は別の遷移。</td>
+</tr>
+<tr>
+<td>F3-05</td>
+<td>低いsupportの独立性</td>
+<td>下方閉label範囲と局所eligibility</td>
+<td>high制御でlowのpolicy/identityを変更する場合は対象外。</td>
+</tr>
+<tr>
+<td>F3-06</td>
+<td>同一文脈のpolicy合成</td>
+<td>有限claim集合、名前付きleaf、非空all/any</td>
+<td>暗号認証・一般の委譲・policy transformerではない。</td>
+</tr>
+<tr>
+<td>F3-07</td>
+<td>過去の証拠と現在の使用</td>
+<td>正確なκと現在policy/issuer/claim</td>
+<td>過去の数学的命題を失効で偽とする意味ではない。</td>
+</tr>
+<tr>
+<td>F3-08</td>
+<td>ソース束縛の契約受理</td>
+<td>F0.2の多項式証拠と今回のsource adapter</td>
+<td>F0.2 checker健全性は引継ぎ前提。任意の証明言語ではない。</td>
+</tr>
+<tr>
+<td>F3-09</td>
+<td>全mutatorによる不変条件保存</td>
+<td>同owner、同schema、全mutatorに同じ不変条件</td>
+<td>多owner不変条件・一般的な資源移行は未証明。</td>
+</tr>
+<tr>
+<td>F3-10</td>
+<td>正規化された多グラフの保存</td>
+<td>今回の宣言追加・退役・reparent・policy変更・owner遷移</td>
+<td>実際の分散制御プロトコルの線形化は別。</td>
+</tr>
+<tr>
+<td>F3-11</td>
+<td>認可失効を含むfallbackとfresh reacquire</td>
+<td>任意有限候補列、live access、同lineage cursor</td>
+<td>最終候補の到達性や権限が必ずあるとはしない。</td>
+</tr>
+<tr>
+<td>F3-12</td>
+<td>認可付き関係DAGの純粋射影</td>
+<td>有限整数affine関係DAGと型付きsample</td>
+<td>sampleの物理的真実性・暗号provenance・実時計同期は前提外。</td>
+</tr>
+<tr>
+<td>F3-13</td>
+<td>一つの要求の一回の状態確定</td>
+<td>保持された同request IDとPendingからの一回遷移</td>
+<td>外部効果exactly-once・global deliveryではない。</td>
+</tr>
+<tr>
+<td>F3-14</td>
+<td>live結果の使用は、過去の成功とは別に検査する</td>
+<td>live-result profileの現在member/module/依存/権限</td>
+<td>snapshot値を独立契約で保持する別profileは未実装。</td>
+</tr>
+<tr>
+<td>F3-15</td>
+<td>検査read traceの再生補題</td>
+<td>停止し決定的なvalidator、完全なtracked lookup</td>
+<td>未追跡query・clock・外部I/Oを参照するvalidatorには適用しない。</td>
+</tr>
+<tr>
+<td>F3-16</td>
+<td>現在認可付きOCCの保存</td>
+<td>発行済みdelta封印、全read/write stamp、現在権限</td>
+<td>抽象制御の原子性を実現する分散adapterは別義務。</td>
+</tr>
+<tr>
+<td>F3-17</td>
+<td>reparentの局所検査</td>
+<td>同kind DAGの全枝DFS、tracked revision</td>
+<td>全cross-kindグラフをDAGにはしない。</td>
+</tr>
+<tr>
+<td>F3-18</td>
+<td>独立変更の可換性と適用範囲</td>
+<td>完全なfootprintが独立な二変更</td>
+<td>domain recordの可換性でありaudit順序の一致ではない。</td>
+</tr>
+<tr>
+<td>F3-19</td>
+<td>現在の確定prefixに基づく全成分復元</td>
+<td>完全manifest・完全journal・独立に信頼された現head</td>
+<td>in-memory image model。物理storage・オフラインcurrentnessは未証明。</td>
+</tr>
+<tr>
+<td>F3-20</td>
+<td>受動観測の消去同値</td>
+<td>観測stateがdomain実行の入力にならない遷移系</td>
+<td>物理ゼロコスト・任意scheduler・能動debugは対象外。</td>
+</tr>
+<tr>
+<td>F3-21</td>
+<td>固定label境界での二実行非干渉</td>
+<td>固定label・同じlow制御・同じlow scheduleの二実行</td>
+<td>任意の動的declassification、high管理、time/covert channelは未証明。</td>
+</tr>
+<tr>
+<td>F3-22</td>
+<td>許可射影と有限保持の順序</td>
+<td>許可filter後に有限last-kを保持</td>
+<td>全履歴無制限保存や本番負荷の保証ではない。</td>
+</tr>
+<tr>
+<td>F3-23</td>
+<td>任意の有限回の合成保存</td>
+<td>選択したF0.3各遷移の任意有限合成</td>
+<td>全Mir機能・無限資源・一般的な進行性は出ない。</td>
+</tr>
+<tr>
+<td>F3-24</td>
+<td>実現への条件付き接続義務</td>
+<td>具体と抽象のstep対応が別に成立する場合</td>
+<td>Rust/QUICの対応前提は未解消。機密性と進行性は追加義務。</td>
+</tr>
+</tbody>
+</table></div>
+<p>一般証明の本文は <code>PROOFS.md</code>、実行した証拠は <code>../VALIDATION.md</code> にある。F0.2から取り込んだcompilerとcertificate checkerは無変更であり、それらの証明をF0.3の新しい証明件数へ重複計上しない。</p>
+</section><section id="requirements"><h2>119要件との対応</h2><p>どの行も、全要件の受理済み宣言ではありません。今回の限定的な根拠と、なお残る受入れ条件を並べています。</p><div class="filters"><label>検索<input id="q" type="search" placeholder="要件ID・DAG・観測・依存型など"></label><label>領域<select id="group"><option value="">全領域</option><option>AX</option><option>SL</option><option>ID</option><option>RL</option><option>DS</option><option>EF</option><option>AU</option><option>TY</option><option>CT</option><option>VF</option><option>EV</option><option>SV</option><option>OB</option><option>HS</option><option>OP</option><option>WW</option><option>MG</option></select></label><label>作業単位<select id="work"><option value="">すべて</option><option>W1</option><option>W2</option><option>W3</option><option>W4</option><option>W5</option><option>W6</option><option>W7</option><option>W8</option></select></label></div><p id="count" aria-live="polite"></p><details class="requirement" id="req-AX-01" data-group="AX" data-work="W1 W7 W8" data-search="AX-01 意味を一次資料にする システム内部の操作・通信・配置別成果物は、検査済みソースと明示契約から導く。 原則を維持し、domain名を含まないsource・構成・現在性の境界を定義した。 最終利用領域の十分性・ownerによる採用は未判定。 同じ意図を異なる配置で実行し、生成辺と結果を元の記述へ対応づける。 deploymentが未宣言の操作・辺・権限を追加する候補を拒否する。 この要件を解消する新規定理はありません。 W1 / W7 / W8"><summary><span class="id">AX-01</span> 意味を一次資料にする <span class="origin">U</span></summary><dl><dt>元の要求</dt><dd>システム内部の操作・通信・配置別成果物は、検査済みソースと明示契約から導く。</dd><dt>今回の根拠</dt><dd>原則を維持し、domain名を含まないsource・構成・現在性の境界を定義した。</dd><dt>未完の部分</dt><dd>最終利用領域の十分性・ownerによる採用は未判定。</dd><dt>正例の出口</dt><dd>同じ意図を異なる配置で実行し、生成辺と結果を元の記述へ対応づける。</dd><dt>反例の出口</dt><dd>deploymentが未宣言の操作・辺・権限を追加する候補を拒否する。</dd><dt>関連する手証明</dt><dd>この要件を解消する新規定理はありません。</dd><dt>次の作業</dt><dd>W1 / W7 / W8</dd></dl></details><details class="requirement" id="req-AX-02" data-group="AX" data-work="W1 W7 W8" data-search="AX-02 具体物をCoreへ埋め込まない World、Avatar、Room、Page、SNS等はlibrary/applicationとして表現し、一般的な構成原理を変更しない。 原則を維持し、domain名を含まないsource・構成・現在性の境界を定義した。 最終利用領域の十分性・ownerによる採用は未判定。 異なる二つのdomainを同じCoreと検査経路で表す。 domain名に一致した場合だけ動くruntime分岐を合格証拠にしない。 この要件を解消する新規定理はありません。 W1 / W7 / W8"><summary><span class="id">AX-02</span> 具体物をCoreへ埋め込まない <span class="origin">U</span></summary><dl><dt>元の要求</dt><dd>World、Avatar、Room、Page、SNS等はlibrary/applicationとして表現し、一般的な構成原理を変更しない。</dd><dt>今回の根拠</dt><dd>原則を維持し、domain名を含まないsource・構成・現在性の境界を定義した。</dd><dt>未完の部分</dt><dd>最終利用領域の十分性・ownerによる採用は未判定。</dd><dt>正例の出口</dt><dd>異なる二つのdomainを同じCoreと検査経路で表す。</dd><dt>反例の出口</dt><dd>domain名に一致した場合だけ動くruntime分岐を合格証拠にしない。</dd><dt>関連する手証明</dt><dd>この要件を解消する新規定理はありません。</dd><dt>次の作業</dt><dd>W1 / W7 / W8</dd></dl></details><details class="requirement" id="req-AX-03" data-group="AX" data-work="W1 W7 W8" data-search="AX-03 将来を閉じない有限構成 各時点の資源は有限でよいが、将来の参加者・module・用途・更新回数を言語の意味として固定列挙しない。 原則を維持し、domain名を含まないsource・構成・現在性の境界を定義した。 最終利用領域の十分性・ownerによる採用は未判定。 新規instanceと新操作をコード変更なしの実行基盤へ追加する。 固定test名や固定cohortだけを一般的拡張性の証拠にしない。 この要件を解消する新規定理はありません。 W1 / W7 / W8"><summary><span class="id">AX-03</span> 将来を閉じない有限構成 <span class="origin">U</span></summary><dl><dt>元の要求</dt><dd>各時点の資源は有限でよいが、将来の参加者・module・用途・更新回数を言語の意味として固定列挙しない。</dd><dt>今回の根拠</dt><dd>原則を維持し、domain名を含まないsource・構成・現在性の境界を定義した。</dd><dt>未完の部分</dt><dd>最終利用領域の十分性・ownerによる採用は未判定。</dd><dt>正例の出口</dt><dd>新規instanceと新操作をコード変更なしの実行基盤へ追加する。</dd><dt>反例の出口</dt><dd>固定test名や固定cohortだけを一般的拡張性の証拠にしない。</dd><dt>関連する手証明</dt><dd>この要件を解消する新規定理はありません。</dd><dt>次の作業</dt><dd>W1 / W7 / W8</dd></dl></details><details class="requirement" id="req-AX-04" data-group="AX" data-work="W1 W7 W8" data-search="AX-04 原則と実現プロファイルを区別する 有限モデルの定数、同期方式、owner body制限等を最終的な法則へ自動昇格させない。 原則を維持し、domain名を含まないsource・構成・現在性の境界を定義した。 最終利用領域の十分性・ownerによる採用は未判定。 各制約を不変条件・候補選択・実験上限・host前提へ分類する。 2PC、公開専用、固定anchor数等を合意なく必須要件とする変更を止める。 この要件を解消する新規定理はありません。 W1 / W7 / W8"><summary><span class="id">AX-04</span> 原則と実現プロファイルを区別する <span class="origin">D</span></summary><dl><dt>元の要求</dt><dd>有限モデルの定数、同期方式、owner body制限等を最終的な法則へ自動昇格させない。</dd><dt>今回の根拠</dt><dd>原則を維持し、domain名を含まないsource・構成・現在性の境界を定義した。</dd><dt>未完の部分</dt><dd>最終利用領域の十分性・ownerによる採用は未判定。</dd><dt>正例の出口</dt><dd>各制約を不変条件・候補選択・実験上限・host前提へ分類する。</dd><dt>反例の出口</dt><dd>2PC、公開専用、固定anchor数等を合意なく必須要件とする変更を止める。</dd><dt>関連する手証明</dt><dd>この要件を解消する新規定理はありません。</dd><dt>次の作業</dt><dd>W1 / W7 / W8</dd></dl></details><details class="requirement" id="req-AX-05" data-group="AX" data-work="W1 W7 W8" data-search="AX-05 研究・α・遠期目標を分離する 基礎の検証、使えるα、開放的な長期基盤の受理対象を区別する。 原則を維持し、domain名を含まないsource・構成・現在性の境界を定義した。 最終利用領域の十分性・ownerによる採用は未判定。 各成果がどの利用能力と保証に寄与するかを記録する。 有限conformanceやphase番号をα完成・WWW完成に読み替えない。 この要件を解消する新規定理はありません。 W1 / W7 / W8"><summary><span class="id">AX-05</span> 研究・α・遠期目標を分離する <span class="origin">U</span></summary><dl><dt>元の要求</dt><dd>基礎の検証、使えるα、開放的な長期基盤の受理対象を区別する。</dd><dt>今回の根拠</dt><dd>原則を維持し、domain名を含まないsource・構成・現在性の境界を定義した。</dd><dt>未完の部分</dt><dd>最終利用領域の十分性・ownerによる採用は未判定。</dd><dt>正例の出口</dt><dd>各成果がどの利用能力と保証に寄与するかを記録する。</dd><dt>反例の出口</dt><dd>有限conformanceやphase番号をα完成・WWW完成に読み替えない。</dd><dt>関連する手証明</dt><dd>この要件を解消する新規定理はありません。</dd><dt>次の作業</dt><dd>W1 / W7 / W8</dd></dl></details><details class="requirement" id="req-AX-06" data-group="AX" data-work="W1 W7 W8" data-search="AX-06 使いやすさと安全性を同時に評価する 全拒否で安全性を達成したことにせず、必要な正例が通常の記述で表せることを必須とする。 原則を維持し、domain名を含まないsource・構成・現在性の境界を定義した。 最終利用領域の十分性・ownerによる採用は未判定。 独立した作者が通常ソースだけで代表能力を再構成する。 拒否ケースだけで受入れを完了させない。 この要件を解消する新規定理はありません。 W1 / W7 / W8"><summary><span class="id">AX-06</span> 使いやすさと安全性を同時に評価する <span class="origin">U</span></summary><dl><dt>元の要求</dt><dd>全拒否で安全性を達成したことにせず、必要な正例が通常の記述で表せることを必須とする。</dd><dt>今回の根拠</dt><dd>原則を維持し、domain名を含まないsource・構成・現在性の境界を定義した。</dd><dt>未完の部分</dt><dd>最終利用領域の十分性・ownerによる採用は未判定。</dd><dt>正例の出口</dt><dd>独立した作者が通常ソースだけで代表能力を再構成する。</dd><dt>反例の出口</dt><dd>拒否ケースだけで受入れを完了させない。</dd><dt>関連する手証明</dt><dd>この要件を解消する新規定理はありません。</dd><dt>次の作業</dt><dd>W1 / W7 / W8</dd></dl></details><details class="requirement" id="req-SL-01" data-group="SL" data-work="W2" data-search="SL-01 普通の計算と再利用 関数、条件、反復、必要なデータ構造と抽象化によってdomain logicをMir内で記述する。 F0.2のsource/compilerを無変更で使い、現在性と証拠のadapterへ接続した。 新しい型表現力・診断完全性・public grammarは追加していない。 算術例以外の状態機械・集約・再利用moduleをsourceから実行する。 不足を黙ってrendererや例専用native helperへ逃がさない。 この要件を解消する新規定理はありません。 W2"><summary><span class="id">SL-01</span> 普通の計算と再利用 <span class="origin">U</span></summary><dl><dt>元の要求</dt><dd>関数、条件、反復、必要なデータ構造と抽象化によってdomain logicをMir内で記述する。</dd><dt>今回の根拠</dt><dd>F0.2のsource/compilerを無変更で使い、現在性と証拠のadapterへ接続した。</dd><dt>未完の部分</dt><dd>新しい型表現力・診断完全性・public grammarは追加していない。</dd><dt>正例の出口</dt><dd>算術例以外の状態機械・集約・再利用moduleをsourceから実行する。</dd><dt>反例の出口</dt><dd>不足を黙ってrendererや例専用native helperへ逃がさない。</dd><dt>関連する手証明</dt><dd>この要件を解消する新規定理はありません。</dd><dt>次の作業</dt><dd>W2</dd></dl></details><details class="requirement" id="req-SL-02" data-group="SL" data-work="W2" data-search="SL-02 読みの意味と透過性 通常の参照表記を保ちつつ、依存・版・鮮度・待機・失敗を定義する。意味を変える読取方式は明示または妥当な既定として公開する。 F0.2のowner-local snapshotという候補を継承した。 読取り整合性を最終既定に採用する決定はしていない。 同じsnapshot値の再利用、逐次read、関係の遅延評価の差を例で説明・検査する。 変化する二readを無条件に純粋式として最適化しない。 F3-08 W2"><summary><span class="id">SL-02</span> 読みの意味と透過性 <span class="origin">U</span></summary><dl><dt>元の要求</dt><dd>通常の参照表記を保ちつつ、依存・版・鮮度・待機・失敗を定義する。意味を変える読取方式は明示または妥当な既定として公開する。</dd><dt>今回の根拠</dt><dd>F0.2のowner-local snapshotという候補を継承した。</dd><dt>未完の部分</dt><dd>読取り整合性を最終既定に採用する決定はしていない。</dd><dt>正例の出口</dt><dd>同じsnapshot値の再利用、逐次read、関係の遅延評価の差を例で説明・検査する。</dd><dt>反例の出口</dt><dd>変化する二readを無条件に純粋式として最適化しない。</dd><dt>関連する手証明</dt><dd>F3-08</dd><dt>次の作業</dt><dd>W2</dd></dl></details><details class="requirement" id="req-SL-03" data-group="SL" data-work="W4" data-search="SL-03 代入の意味保存 普通の代入は必要なowner処理へ翻訳し、同owner RMWの可変readを要求元の古い値へ移さない。 通常sourceから生成したRMWを、現在のmember/module/policy照合後に実行する。 実際のper-locus binary/QUICへのrefinementが残る。 二つの減算要求が、選択した直列化契約どおりに累積する。 同owner RMWを古いsnapshotによるblind writeに変えない。 F3-09、F3-13、F3-14 W4"><summary><span class="id">SL-03</span> 代入の意味保存 <span class="origin">U</span></summary><dl><dt>元の要求</dt><dd>普通の代入は必要なowner処理へ翻訳し、同owner RMWの可変readを要求元の古い値へ移さない。</dd><dt>今回の根拠</dt><dd>通常sourceから生成したRMWを、現在のmember/module/policy照合後に実行する。</dd><dt>未完の部分</dt><dd>実際のper-locus binary/QUICへのrefinementが残る。</dd><dt>正例の出口</dt><dd>二つの減算要求が、選択した直列化契約どおりに累積する。</dd><dt>反例の出口</dt><dd>同owner RMWを古いsnapshotによるblind writeに変えない。</dd><dt>関連する手証明</dt><dd>F3-09、F3-13、F3-14</dd><dt>次の作業</dt><dd>W4</dd></dl></details><details class="requirement" id="req-SL-04" data-group="SL" data-work="W2" data-search="SL-04 複数ownerを含む式 別ownerの入力に必要なsnapshot・依存・共同更新の意味を要求し、未指定の大域原子性を作らない。 F0.2のsource/compilerを無変更で使い、現在性と証拠のadapterへ接続した。 新しい型表現力・診断完全性・public grammarは追加していない。 最小の宣言で不変入力を取得して別owner計算へ渡せる。 通信の手書きを唯一の解にせず、曖昧な同時性は理由付きで差し戻す。 この要件を解消する新規定理はありません。 W2"><summary><span class="id">SL-04</span> 複数ownerを含む式 <span class="origin">D</span></summary><dl><dt>元の要求</dt><dd>別ownerの入力に必要なsnapshot・依存・共同更新の意味を要求し、未指定の大域原子性を作らない。</dd><dt>今回の根拠</dt><dd>F0.2のsource/compilerを無変更で使い、現在性と証拠のadapterへ接続した。</dd><dt>未完の部分</dt><dd>新しい型表現力・診断完全性・public grammarは追加していない。</dd><dt>正例の出口</dt><dd>最小の宣言で不変入力を取得して別owner計算へ渡せる。</dd><dt>反例の出口</dt><dd>通信の手書きを唯一の解にせず、曖昧な同時性は理由付きで差し戻す。</dd><dt>関連する手証明</dt><dd>この要件を解消する新規定理はありません。</dd><dt>次の作業</dt><dd>W2</dd></dl></details><details class="requirement" id="req-SL-05" data-group="SL" data-work="W2 W3" data-search="SL-05 意味上のイベントと表層の分離 domain入力、Core効果、実行occurrence、通信frame、観測行を区別し、通常操作から内部処理を導く。 要求IDや認可証拠は内部で生成する。sourceにsend/receiveを追加していない。 構成の生成・認可指定の最終source表記は未選択。 普通の代入から生成処理をdevtoolsでたどる。 メッセージIDや内部Eventを通常sourceの必須APIにしない。 F3-06、F3-07、F3-13 W2 / W3"><summary><span class="id">SL-05</span> 意味上のイベントと表層の分離 <span class="origin">U</span></summary><dl><dt>元の要求</dt><dd>domain入力、Core効果、実行occurrence、通信frame、観測行を区別し、通常操作から内部処理を導く。</dd><dt>今回の根拠</dt><dd>要求IDや認可証拠は内部で生成する。sourceにsend/receiveを追加していない。</dd><dt>未完の部分</dt><dd>構成の生成・認可指定の最終source表記は未選択。</dd><dt>正例の出口</dt><dd>普通の代入から生成処理をdevtoolsでたどる。</dd><dt>反例の出口</dt><dd>メッセージIDや内部Eventを通常sourceの必須APIにしない。</dd><dt>関連する手証明</dt><dd>F3-06、F3-07、F3-13</dd><dt>次の作業</dt><dd>W2 / W3</dd></dl></details><details class="requirement" id="req-SL-06" data-group="SL" data-work="W2 W6" data-search="SL-06 アノテーションと診断 型推論の補助と意味選択の宣言を区別し、必要な注釈、失敗理由、修正範囲を提示する。 有限typed diagnosticを返すが、ソースに戻る完全な診断体系は構築していない。 拒否理由の機密性とユーザ修正可能性を含めて統合する。 未指定のread policyや寿命違反をsource位置と条件付きで説明する。 Unknownを安全・危険のどちらかへ偽装せず、内部IDだけを返さない。 この要件を解消する新規定理はありません。 W2 / W6"><summary><span class="id">SL-06</span> アノテーションと診断 <span class="origin">U</span></summary><dl><dt>元の要求</dt><dd>型推論の補助と意味選択の宣言を区別し、必要な注釈、失敗理由、修正範囲を提示する。</dd><dt>今回の根拠</dt><dd>有限typed diagnosticを返すが、ソースに戻る完全な診断体系は構築していない。</dd><dt>未完の部分</dt><dd>拒否理由の機密性とユーザ修正可能性を含めて統合する。</dd><dt>正例の出口</dt><dd>未指定のread policyや寿命違反をsource位置と条件付きで説明する。</dd><dt>反例の出口</dt><dd>Unknownを安全・危険のどちらかへ偽装せず、内部IDだけを返さない。</dd><dt>関連する手証明</dt><dd>この要件を解消する新規定理はありません。</dd><dt>次の作業</dt><dd>W2 / W6</dd></dl></details><details class="requirement" id="req-SL-07" data-group="SL" data-work="W2" data-search="SL-07 数値・文字列・等価性の意味 数学的整数と機械整数、overflow、浮動小数、NaN、変換、文字列等の対象profileを明示する。 数学的Int/Boolのprofileを継承し、κのTrueと1を区別した。 Int64 overflow、float、文字列、比較意味は採用前に定義が必要。 境界値と異なるbackendで、定義した結果・失敗の一致を確認する。 数学的整数の証明を無条件にInt64/Floatへ流用しない。 F3-07 W2"><summary><span class="id">SL-07</span> 数値・文字列・等価性の意味 <span class="origin">D</span></summary><dl><dt>元の要求</dt><dd>数学的整数と機械整数、overflow、浮動小数、NaN、変換、文字列等の対象profileを明示する。</dd><dt>今回の根拠</dt><dd>数学的Int/Boolのprofileを継承し、κのTrueと1を区別した。</dd><dt>未完の部分</dt><dd>Int64 overflow、float、文字列、比較意味は採用前に定義が必要。</dd><dt>正例の出口</dt><dd>境界値と異なるbackendで、定義した結果・失敗の一致を確認する。</dd><dt>反例の出口</dt><dd>数学的整数の証明を無条件にInt64/Floatへ流用しない。</dd><dt>関連する手証明</dt><dd>F3-07</dd><dt>次の作業</dt><dd>W2</dd></dl></details><details class="requirement" id="req-SL-08" data-group="SL" data-work="W2" data-search="SL-08 関数やhandleの表現力境界 高階関数、closure、first-class reference/module instanceの必要範囲を能力例から定め、captureの効果・寿命・権限を検査する。 第一階compilerの一部を利用している。 closure、affine handle、module instanceを値として渡す型体系は未実装。 少なくとも必要な再利用例を、安全なhandleまたは同等の抽象で構成する。 第一階prototypeが動いたことだけで表現力の充足を宣言しない。 この要件を解消する新規定理はありません。 W2"><summary><span class="id">SL-08</span> 関数やhandleの表現力境界 <span class="origin">D</span></summary><dl><dt>元の要求</dt><dd>高階関数、closure、first-class reference/module instanceの必要範囲を能力例から定め、captureの効果・寿命・権限を検査する。</dd><dt>今回の根拠</dt><dd>第一階compilerの一部を利用している。</dd><dt>未完の部分</dt><dd>closure、affine handle、module instanceを値として渡す型体系は未実装。</dd><dt>正例の出口</dt><dd>少なくとも必要な再利用例を、安全なhandleまたは同等の抽象で構成する。</dd><dt>反例の出口</dt><dd>第一階prototypeが動いたことだけで表現力の充足を宣言しない。</dd><dt>関連する手証明</dt><dd>この要件を解消する新規定理はありません。</dd><dt>次の作業</dt><dd>W2</dd></dl></details><details class="requirement" id="req-ID-01" data-group="ID" data-work="W1 W2 W3" data-search="ID-01 定義・instance・世代・版の区別 名前、コード定義、実体、incarnation、state version、contract version、physical locationを混同しない。 存在/member/module/accessを同一のpositive support closureと世代へ接続した。 第一級resource handleと分散した生成・撤去の実装対応が残る。 同名で再生成した対象へ古い要求・証拠・patchが流用されない。 版番号だけの一致によるABA誤受理を拒否する。 F3-01、F3-02、F3-03、F3-04、F3-10、F3-11 W1 / W2 / W3"><summary><span class="id">ID-01</span> 定義・instance・世代・版の区別 <span class="origin">D</span></summary><dl><dt>元の要求</dt><dd>名前、コード定義、実体、incarnation、state version、contract version、physical locationを混同しない。</dd><dt>今回の根拠</dt><dd>存在/member/module/accessを同一のpositive support closureと世代へ接続した。</dd><dt>未完の部分</dt><dd>第一級resource handleと分散した生成・撤去の実装対応が残る。</dd><dt>正例の出口</dt><dd>同名で再生成した対象へ古い要求・証拠・patchが流用されない。</dd><dt>反例の出口</dt><dd>版番号だけの一致によるABA誤受理を拒否する。</dd><dt>関連する手証明</dt><dd>F3-01、F3-02、F3-03、F3-04、F3-10、F3-11</dd><dt>次の作業</dt><dd>W1 / W2 / W3</dd></dl></details><details class="requirement" id="req-ID-02" data-group="ID" data-work="W1 W2 W3" data-search="ID-02 存在DAGと独立対象 親が有効に存在することを子の存在条件とする関係と、独立対象を表現する。複数親の条件は別途選ぶ。 存在/member/module/accessを同一のpositive support closureと世代へ接続した。 第一級resource handleと分散した生成・撤去の実装対応が残る。 共有親、複数root、子孫撤去を型・実行・観測で整合させる。 ネットワーク一時切断を意味上の死亡と無条件に同一視しない。 F3-01、F3-02、F3-03、F3-04、F3-10、F3-11 W1 / W2 / W3"><summary><span class="id">ID-02</span> 存在DAGと独立対象 <span class="origin">U</span></summary><dl><dt>元の要求</dt><dd>親が有効に存在することを子の存在条件とする関係と、独立対象を表現する。複数親の条件は別途選ぶ。</dd><dt>今回の根拠</dt><dd>存在/member/module/accessを同一のpositive support closureと世代へ接続した。</dd><dt>未完の部分</dt><dd>第一級resource handleと分散した生成・撤去の実装対応が残る。</dd><dt>正例の出口</dt><dd>共有親、複数root、子孫撤去を型・実行・観測で整合させる。</dd><dt>反例の出口</dt><dd>ネットワーク一時切断を意味上の死亡と無条件に同一視しない。</dd><dt>関連する手証明</dt><dd>F3-01、F3-02、F3-03、F3-04、F3-10、F3-11</dd><dt>次の作業</dt><dd>W1 / W2 / W3</dd></dl></details><details class="requirement" id="req-ID-03" data-group="ID" data-work="W3" data-search="ID-03 reparentと退出の遷移 親変更・退出を認可された遷移とし、依存参照、未完了処理、公開bindingを整合させる。 tracked reparent・現在認可・同kind DAG検査・退役closureを実装した。 全種類の資源撤去と分散commitは別の義務。 子を生かす変更と閉包撤去を、それぞれ契約どおりに実行する。 循環、宙に浮く子、失効権限での再接続を拒否する。 F3-04、F3-10、F3-16、F3-17 W3"><summary><span class="id">ID-03</span> reparentと退出の遷移 <span class="origin">U</span></summary><dl><dt>元の要求</dt><dd>親変更・退出を認可された遷移とし、依存参照、未完了処理、公開bindingを整合させる。</dd><dt>今回の根拠</dt><dd>tracked reparent・現在認可・同kind DAG検査・退役closureを実装した。</dd><dt>未完の部分</dt><dd>全種類の資源撤去と分散commitは別の義務。</dd><dt>正例の出口</dt><dd>子を生かす変更と閉包撤去を、それぞれ契約どおりに実行する。</dd><dt>反例の出口</dt><dd>循環、宙に浮く子、失効権限での再接続を拒否する。</dd><dt>関連する手証明</dt><dd>F3-04、F3-10、F3-16、F3-17</dd><dt>次の作業</dt><dd>W3</dd></dl></details><details class="requirement" id="req-ID-04" data-group="ID" data-work="W2 W3" data-search="ID-04 短命な参照とfallback 長命側へ帰着する宣言を、型・関係・寿命・権限が適合する候補列として扱う。 短命anchorへのauthorized access失効とfallbackを同じclosureへ接続した。 参照型の一般的な安全性と最終候補の可用性は未保証。 他参加者が退出しても、許された代替関係または定義された失敗へ進む。 祖先であることだけを型・到達性・書込権限の証明にしない。 F3-11、F3-12 W2 / W3"><summary><span class="id">ID-04</span> 短命な参照とfallback <span class="origin">U</span></summary><dl><dt>元の要求</dt><dd>長命側へ帰着する宣言を、型・関係・寿命・権限が適合する候補列として扱う。</dd><dt>今回の根拠</dt><dd>短命anchorへのauthorized access失効とfallbackを同じclosureへ接続した。</dd><dt>未完の部分</dt><dd>参照型の一般的な安全性と最終候補の可用性は未保証。</dd><dt>正例の出口</dt><dd>他参加者が退出しても、許された代替関係または定義された失敗へ進む。</dd><dt>反例の出口</dt><dd>祖先であることだけを型・到達性・書込権限の証明にしない。</dd><dt>関連する手証明</dt><dd>F3-11、F3-12</dd><dt>次の作業</dt><dd>W2 / W3</dd></dl></details><details class="requirement" id="req-ID-05" data-group="ID" data-work="W3" data-search="ID-05 再取得と単調性の範囲 現在Canonの同lineage単調fallbackを保持する範囲と、新lineage再取得の条件を明示する。自動生成は可能でも無根拠に復活しない。 新member/anchor/accessを作るだけではcursorを戻さず、現在認可付きreacquireで新lineageを作る。 自動再取得の宣言的source表記は未選択。 正当な再参加でfreshな参照へ切り替え、過去を残す。 旧epochの復活やsample復帰だけでの意味上再昇格を拒否する。 F3-07、F3-11 W3"><summary><span class="id">ID-05</span> 再取得と単調性の範囲 <span class="origin">D</span></summary><dl><dt>元の要求</dt><dd>現在Canonの同lineage単調fallbackを保持する範囲と、新lineage再取得の条件を明示する。自動生成は可能でも無根拠に復活しない。</dd><dt>今回の根拠</dt><dd>新member/anchor/accessを作るだけではcursorを戻さず、現在認可付きreacquireで新lineageを作る。</dd><dt>未完の部分</dt><dd>自動再取得の宣言的source表記は未選択。</dd><dt>正例の出口</dt><dd>正当な再参加でfreshな参照へ切り替え、過去を残す。</dd><dt>反例の出口</dt><dd>旧epochの復活やsample復帰だけでの意味上再昇格を拒否する。</dd><dt>関連する手証明</dt><dd>F3-07、F3-11</dd><dt>次の作業</dt><dd>W3</dd></dl></details><details class="requirement" id="req-ID-06" data-group="ID" data-work="W2 W8" data-search="ID-06 参照・権利・snapshot・引用の区別 liveな使用可能参照と不変snapshot、資源権利、過去の対象を指す識別を区別する。 過去の成功と現在のlive結果使用を区別し、退役moduleへのconsumeを拒否する。 永続引用や独立snapshot値のfirst-class contractは未実装。 退出済み対象の履歴を、現在のアクセス権なしで許可範囲内から参照する。 過去の引用先をfallback先へ黙って差し替えない。 F3-14 W2 / W8"><summary><span class="id">ID-06</span> 参照・権利・snapshot・引用の区別 <span class="origin">D</span></summary><dl><dt>元の要求</dt><dd>liveな使用可能参照と不変snapshot、資源権利、過去の対象を指す識別を区別する。</dd><dt>今回の根拠</dt><dd>過去の成功と現在のlive結果使用を区別し、退役moduleへのconsumeを拒否する。</dd><dt>未完の部分</dt><dd>永続引用や独立snapshot値のfirst-class contractは未実装。</dd><dt>正例の出口</dt><dd>退出済み対象の履歴を、現在のアクセス権なしで許可範囲内から参照する。</dd><dt>反例の出口</dt><dd>過去の引用先をfallback先へ黙って差し替えない。</dd><dt>関連する手証明</dt><dd>F3-14</dd><dt>次の作業</dt><dd>W2 / W8</dd></dl></details><details class="requirement" id="req-ID-07" data-group="ID" data-work="W2" data-search="ID-07 所有・alias・資源handle 局所理論から外へ出る所有条件を、型、opaque handle、動的検査、隔離のいずれかで維持する。 F0.1の所有token例は資産として保持するが、F0.3へ統合していない。 線形資源と通常値の受渡し・型消去の保証が必要。 分割・移送・解放を契約で扱い、内部の分離論理を全callerへ要求しない。 raw handle化による複製・二重解放・use-after-retireを許さない。 この要件を解消する新規定理はありません。 W2"><summary><span class="id">ID-07</span> 所有・alias・資源handle <span class="origin">U</span></summary><dl><dt>元の要求</dt><dd>局所理論から外へ出る所有条件を、型、opaque handle、動的検査、隔離のいずれかで維持する。</dd><dt>今回の根拠</dt><dd>F0.1の所有token例は資産として保持するが、F0.3へ統合していない。</dd><dt>未完の部分</dt><dd>線形資源と通常値の受渡し・型消去の保証が必要。</dd><dt>正例の出口</dt><dd>分割・移送・解放を契約で扱い、内部の分離論理を全callerへ要求しない。</dd><dt>反例の出口</dt><dd>raw handle化による複製・二重解放・use-after-retireを許さない。</dd><dt>関連する手証明</dt><dd>この要件を解消する新規定理はありません。</dd><dt>次の作業</dt><dd>W2</dd></dl></details><details class="requirement" id="req-ID-08" data-group="ID" data-work="W1 W3" data-search="ID-08 DAG間の整合条件 存在・関係・admission・patch・因果の対応を同一構成の不変条件で扱う。 存在/member/module/access/関係/要求/prepared patchを同じDataに置き、相互失効を実行した。 全種類のpatch DAGと実分散activation・型handleを含む統合は残る。 退出→binding無効化→fallback→patch再検査→観測の連鎖が整合する。 各DAG単独の非循環性だけで起動可能性・全体保存を宣言しない。 F3-02、F3-04、F3-10、F3-11、F3-14、F3-19、F3-23 W1 / W3"><summary><span class="id">ID-08</span> DAG間の整合条件 <span class="origin">D</span></summary><dl><dt>元の要求</dt><dd>存在・関係・admission・patch・因果の対応を同一構成の不変条件で扱う。</dd><dt>今回の根拠</dt><dd>存在/member/module/access/関係/要求/prepared patchを同じDataに置き、相互失効を実行した。</dd><dt>未完の部分</dt><dd>全種類のpatch DAGと実分散activation・型handleを含む統合は残る。</dd><dt>正例の出口</dt><dd>退出→binding無効化→fallback→patch再検査→観測の連鎖が整合する。</dd><dt>反例の出口</dt><dd>各DAG単独の非循環性だけで起動可能性・全体保存を宣言しない。</dd><dt>関連する手証明</dt><dd>F3-02、F3-04、F3-10、F3-11、F3-14、F3-19、F3-23</dd><dt>次の作業</dt><dd>W1 / W3</dd></dl></details><details class="requirement" id="req-RL-01" data-group="RL" data-work="W3 W6" data-search="RL-01 関係を意味の対象として保持 owner-heldな関係定義とconsumer側評価を分け、共有依存を可能な限り保持する。 整数affine関係DAG、認可access、fallback、読取り専用のprojectionを接続した。 物理sampleの保証・designated evaluation・一般の時間/近似は未統合。 同じanchor/contextから同じ関係結果を得ることを照合する。 都合よく絶対値streamへ潰し、寿命・権限・共有構造を失わない。 F3-11、F3-12 W3 / W6"><summary><span class="id">RL-01</span> 関係を意味の対象として保持 <span class="origin">U</span></summary><dl><dt>元の要求</dt><dd>owner-heldな関係定義とconsumer側評価を分け、共有依存を可能な限り保持する。</dd><dt>今回の根拠</dt><dd>整数affine関係DAG、認可access、fallback、読取り専用のprojectionを接続した。</dd><dt>未完の部分</dt><dd>物理sampleの保証・designated evaluation・一般の時間/近似は未統合。</dd><dt>正例の出口</dt><dd>同じanchor/contextから同じ関係結果を得ることを照合する。</dd><dt>反例の出口</dt><dd>都合よく絶対値streamへ潰し、寿命・権限・共有構造を失わない。</dd><dt>関連する手証明</dt><dd>F3-11、F3-12</dd><dt>次の作業</dt><dd>W3 / W6</dd></dl></details><details class="requirement" id="req-RL-02" data-group="RL" data-work="W3 W6" data-search="RL-02 関係DAGと時間越し循環 瞬間的な導出依存の循環と、遅延付きfeedbackや関数再帰を区別する。許容profileの制約を定義する。 整数affine関係DAG、認可access、fallback、読取り専用のprojectionを接続した。 物理sampleの保証・designated evaluation・一般の時間/近似は未統合。 遅延を持つ反復は表せる一方、不正な瞬間循環を検出する。 全グラフを一律DAGとして必要な再帰まで禁止しない。 F3-11、F3-12 W3 / W6"><summary><span class="id">RL-02</span> 関係DAGと時間越し循環 <span class="origin">D</span></summary><dl><dt>元の要求</dt><dd>瞬間的な導出依存の循環と、遅延付きfeedbackや関数再帰を区別する。許容profileの制約を定義する。</dd><dt>今回の根拠</dt><dd>整数affine関係DAG、認可access、fallback、読取り専用のprojectionを接続した。</dd><dt>未完の部分</dt><dd>物理sampleの保証・designated evaluation・一般の時間/近似は未統合。</dd><dt>正例の出口</dt><dd>遅延を持つ反復は表せる一方、不正な瞬間循環を検出する。</dd><dt>反例の出口</dt><dd>全グラフを一律DAGとして必要な再帰まで禁止しない。</dd><dt>関連する手証明</dt><dd>F3-11、F3-12</dd><dt>次の作業</dt><dd>W3 / W6</dd></dl></details><details class="requirement" id="req-RL-03" data-group="RL" data-work="W3 W6" data-search="RL-03 評価場所と具体化の分離 value/state/relation/computation、owner、evaluator、trigger、materializationを区別する。 整数affine関係DAG、認可access、fallback、読取り専用のprojectionを接続した。 物理sampleの保証・designated evaluation・一般の時間/近似は未統合。 純粋な表示計算を手元で行い、確定判断は宣言した場所・版へ結びつく。 計算場所が変わっただけで所有・権限が増えない。 F3-11、F3-12 W3 / W6"><summary><span class="id">RL-03</span> 評価場所と具体化の分離 <span class="origin">U</span></summary><dl><dt>元の要求</dt><dd>value/state/relation/computation、owner、evaluator、trigger、materializationを区別する。</dd><dt>今回の根拠</dt><dd>整数affine関係DAG、認可access、fallback、読取り専用のprojectionを接続した。</dd><dt>未完の部分</dt><dd>物理sampleの保証・designated evaluation・一般の時間/近似は未統合。</dd><dt>正例の出口</dt><dd>純粋な表示計算を手元で行い、確定判断は宣言した場所・版へ結びつく。</dd><dt>反例の出口</dt><dd>計算場所が変わっただけで所有・権限が増えない。</dd><dt>関連する手証明</dt><dd>F3-11、F3-12</dd><dt>次の作業</dt><dd>W3 / W6</dd></dl></details><details class="requirement" id="req-RL-04" data-group="RL" data-work="W3 W4" data-search="RL-04 指定評価・結果の消費 指定判断の入力frontier・結果版・消費者・公開条件を保持し、利用側の再計算と区別する。 designated evaluatorは既存repo/F0.1の資産で、F0.3に追加統合していない。 不変結果、frontier、consumptionを現行support/contextへ接続する。 重複結果は対応する操作の契約どおりに扱う。 旧版や別consumerの結果を現在の権威ある状態として使わない。 この要件を解消する新規定理はありません。 W3 / W4"><summary><span class="id">RL-04</span> 指定評価・結果の消費 <span class="origin">D</span></summary><dl><dt>元の要求</dt><dd>指定判断の入力frontier・結果版・消費者・公開条件を保持し、利用側の再計算と区別する。</dd><dt>今回の根拠</dt><dd>designated evaluatorは既存repo/F0.1の資産で、F0.3に追加統合していない。</dd><dt>未完の部分</dt><dd>不変結果、frontier、consumptionを現行support/contextへ接続する。</dd><dt>正例の出口</dt><dd>重複結果は対応する操作の契約どおりに扱う。</dd><dt>反例の出口</dt><dd>旧版や別consumerの結果を現在の権威ある状態として使わない。</dd><dt>関連する手証明</dt><dd>この要件を解消する新規定理はありません。</dd><dt>次の作業</dt><dd>W3 / W4</dd></dl></details><details class="requirement" id="req-RL-05" data-group="RL" data-work="W3 W4" data-search="RL-05 時間と同期・非同期の契約 因果順序、論理tick、実時間、締切、leaseを区別し、異なる時間域を明示契約で接続する。 一致したpresentation contextをsample受入れの前提にした。 clock精度・deadline・lease・高頻度streamの時間モデルは未統合。 deadlineの起点・適用点・満了後の状態を一意に説明できる。 owner待ち時間をend-to-end deadlineや全体clockと呼ばない。 この要件を解消する新規定理はありません。 W3 / W4"><summary><span class="id">RL-05</span> 時間と同期・非同期の契約 <span class="origin">U</span></summary><dl><dt>元の要求</dt><dd>因果順序、論理tick、実時間、締切、leaseを区別し、異なる時間域を明示契約で接続する。</dd><dt>今回の根拠</dt><dd>一致したpresentation contextをsample受入れの前提にした。</dd><dt>未完の部分</dt><dd>clock精度・deadline・lease・高頻度streamの時間モデルは未統合。</dd><dt>正例の出口</dt><dd>deadlineの起点・適用点・満了後の状態を一意に説明できる。</dd><dt>反例の出口</dt><dd>owner待ち時間をend-to-end deadlineや全体clockと呼ばない。</dd><dt>関連する手証明</dt><dd>この要件を解消する新規定理はありません。</dd><dt>次の作業</dt><dd>W3 / W4</dd></dl></details><details class="requirement" id="req-RL-06" data-group="RL" data-work="W3 W6" data-search="RL-06 高頻度提示と意味の分離 sample不足・遅延・補間・予測は提示上の処理とし、意味上の退出・fallbackを勝手に起こさない。 整数affine関係DAG、認可access、fallback、読取り専用のprojectionを接続した。 物理sampleの保証・designated evaluation・一般の時間/近似は未統合。 同一の許容frontier/epochで複数anchorを評価する。 不整合sampleを混ぜた表示や欠測によるowner state変更を拒否する。 F3-11、F3-12 W3 / W6"><summary><span class="id">RL-06</span> 高頻度提示と意味の分離 <span class="origin">U</span></summary><dl><dt>元の要求</dt><dd>sample不足・遅延・補間・予測は提示上の処理とし、意味上の退出・fallbackを勝手に起こさない。</dd><dt>今回の根拠</dt><dd>整数affine関係DAG、認可access、fallback、読取り専用のprojectionを接続した。</dd><dt>未完の部分</dt><dd>物理sampleの保証・designated evaluation・一般の時間/近似は未統合。</dd><dt>正例の出口</dt><dd>同一の許容frontier/epochで複数anchorを評価する。</dd><dt>反例の出口</dt><dd>不整合sampleを混ぜた表示や欠測によるowner state変更を拒否する。</dd><dt>関連する手証明</dt><dd>F3-11、F3-12</dd><dt>次の作業</dt><dd>W3 / W6</dd></dl></details><details class="requirement" id="req-RL-07" data-group="RL" data-work="W3 W7" data-search="RL-07 近似と誤差の契約 近似計算・数値変換・単位・座標変換を、意味と許容誤差へ対応づける。 整数の正確なrelation評価のみを選んだ。 誤差境界・補間・approximation contractは別の理論が必要。 明示した誤差内の表示代替を使い、必要な確定判断は正確に扱う。 観測上の近似を無断でゲーム等の確定結果に用いない。 この要件を解消する新規定理はありません。 W3 / W7"><summary><span class="id">RL-07</span> 近似と誤差の契約 <span class="origin">D</span></summary><dl><dt>元の要求</dt><dd>近似計算・数値変換・単位・座標変換を、意味と許容誤差へ対応づける。</dd><dt>今回の根拠</dt><dd>整数の正確なrelation評価のみを選んだ。</dd><dt>未完の部分</dt><dd>誤差境界・補間・approximation contractは別の理論が必要。</dd><dt>正例の出口</dt><dd>明示した誤差内の表示代替を使い、必要な確定判断は正確に扱う。</dd><dt>反例の出口</dt><dd>観測上の近似を無断でゲーム等の確定結果に用いない。</dd><dt>関連する手証明</dt><dd>この要件を解消する新規定理はありません。</dd><dt>次の作業</dt><dd>W3 / W7</dd></dl></details><details class="requirement" id="req-DS-01" data-group="DS" data-work="W4" data-search="DS-01 配置と通信の由来 checked sourceから生成した辺と成果物だけを実行し、物理配置はその実現に限定する。 F0.2 compilerが作る2本のrequest/outcome edgeを実行し、手書きrouteで意味を補っていない。 locus配置の実プロセス化は既存I3系と対応させる必要がある。 thread/process/nodeごとの選択profileで同じ意味上の結果を示す。 手書きroute・期待値lookup・共有storeによる偽の分散を拒否する。 F3-13、F3-24 W4"><summary><span class="id">DS-01</span> 配置と通信の由来 <span class="origin">U</span></summary><dl><dt>元の要求</dt><dd>checked sourceから生成した辺と成果物だけを実行し、物理配置はその実現に限定する。</dd><dt>今回の根拠</dt><dd>F0.2 compilerが作る2本のrequest/outcome edgeを実行し、手書きrouteで意味を補っていない。</dd><dt>未完の部分</dt><dd>locus配置の実プロセス化は既存I3系と対応させる必要がある。</dd><dt>正例の出口</dt><dd>thread/process/nodeごとの選択profileで同じ意味上の結果を示す。</dd><dt>反例の出口</dt><dd>手書きroute・期待値lookup・共有storeによる偽の分散を拒否する。</dd><dt>関連する手証明</dt><dd>F3-13、F3-24</dd><dt>次の作業</dt><dd>W4</dd></dl></details><details class="requirement" id="req-DS-02" data-group="DS" data-work="W4" data-search="DS-02 因果・並行・memory order 依存・同期・競合・許された並行性を定義し、通信stream順やCPU実行順で代用しない。 異なる操作順と意味記録を検査し、実stream順を意味の根拠にしていない。 一般のhappens-before graphと実memory order対応は未証明。 独立作用は並行可能で、必要な順序は全backendで保存する。 単独FIFOや単独race-freeを分散全体の意味保存と呼ばない。 F3-24 W4"><summary><span class="id">DS-02</span> 因果・並行・memory order <span class="origin">U</span></summary><dl><dt>元の要求</dt><dd>依存・同期・競合・許された並行性を定義し、通信stream順やCPU実行順で代用しない。</dd><dt>今回の根拠</dt><dd>異なる操作順と意味記録を検査し、実stream順を意味の根拠にしていない。</dd><dt>未完の部分</dt><dd>一般のhappens-before graphと実memory order対応は未証明。</dd><dt>正例の出口</dt><dd>独立作用は並行可能で、必要な順序は全backendで保存する。</dd><dt>反例の出口</dt><dd>単独FIFOや単独race-freeを分散全体の意味保存と呼ばない。</dd><dt>関連する手証明</dt><dd>F3-24</dd><dt>次の作業</dt><dd>W4</dd></dl></details><details class="requirement" id="req-DS-03" data-group="DS" data-work="W4 W5" data-search="DS-03 要求の同一性と結果の状態 意図した要求、配送attempt、owner決定、結果受領、消費を別に保持する。 Pending/Served/Rejected/Consumed/ReleaseDeniedを保持し、live消費前提を再検査する。 外部effectや任意continuationへの一般化は残る。 受理前拒否・確定成功・確定失敗・remote-unknownを区別する。 応答不在を未実行、部分実行を全体rollbackと表示しない。 F3-07、F3-13、F3-14、F3-19 W4 / W5"><summary><span class="id">DS-03</span> 要求の同一性と結果の状態 <span class="origin">D</span></summary><dl><dt>元の要求</dt><dd>意図した要求、配送attempt、owner決定、結果受領、消費を別に保持する。</dd><dt>今回の根拠</dt><dd>Pending/Served/Rejected/Consumed/ReleaseDeniedを保持し、live消費前提を再検査する。</dd><dt>未完の部分</dt><dd>外部effectや任意continuationへの一般化は残る。</dd><dt>正例の出口</dt><dd>受理前拒否・確定成功・確定失敗・remote-unknownを区別する。</dd><dt>反例の出口</dt><dd>応答不在を未実行、部分実行を全体rollbackと表示しない。</dd><dt>関連する手証明</dt><dd>F3-07、F3-13、F3-14、F3-19</dd><dt>次の作業</dt><dd>W4 / W5</dd></dl></details><details class="requirement" id="req-DS-04" data-group="DS" data-work="W5" data-search="DS-04 再試行・重複・忘却 操作別の重複契約、現在権限、記録保持期間、forget後の再実行禁止を定義する。 保持requestの重複serveを拒否し、復元で消費済みを戻さない。 永続的なGC後の古い要求拒否、再試行方式の選択は未完。 同じ作用の再送と新しい作用を区別し、保持結果または明示拒否を返す。 connection変更でrequest identityや消費済み状態をリセットしない。 F3-13、F3-19 W5"><summary><span class="id">DS-04</span> 再試行・重複・忘却 <span class="origin">D</span></summary><dl><dt>元の要求</dt><dd>操作別の重複契約、現在権限、記録保持期間、forget後の再実行禁止を定義する。</dd><dt>今回の根拠</dt><dd>保持requestの重複serveを拒否し、復元で消費済みを戻さない。</dd><dt>未完の部分</dt><dd>永続的なGC後の古い要求拒否、再試行方式の選択は未完。</dd><dt>正例の出口</dt><dd>同じ作用の再送と新しい作用を区別し、保持結果または明示拒否を返す。</dd><dt>反例の出口</dt><dd>connection変更でrequest identityや消費済み状態をリセットしない。</dd><dt>関連する手証明</dt><dd>F3-13、F3-19</dd><dt>次の作業</dt><dd>W5</dd></dl></details><details class="requirement" id="req-DS-05" data-group="DS" data-work="W2 W4" data-search="DS-05 継続・並列子処理・取消し 継続・子処理・join・失敗伝播・取消しの意味を定義する。未確定作用の取消しは未実行証明ではない。 first-order call/returnとrequest待ちを動かす。 F0.2にあるspawn/joinはF0.3 VM未対応で明示拒否。一般cancelも未統合。 親が未回収の子失敗を黙って無視せず、取消しの到達点を記録する。 資源回収のために処理済みの履歴を消さない。 この要件を解消する新規定理はありません。 W2 / W4"><summary><span class="id">DS-05</span> 継続・並列子処理・取消し <span class="origin">D</span></summary><dl><dt>元の要求</dt><dd>継続・子処理・join・失敗伝播・取消しの意味を定義する。未確定作用の取消しは未実行証明ではない。</dd><dt>今回の根拠</dt><dd>first-order call/returnとrequest待ちを動かす。</dd><dt>未完の部分</dt><dd>F0.2にあるspawn/joinはF0.3 VM未対応で明示拒否。一般cancelも未統合。</dd><dt>正例の出口</dt><dd>親が未回収の子失敗を黙って無視せず、取消しの到達点を記録する。</dd><dt>反例の出口</dt><dd>資源回収のために処理済みの履歴を消さない。</dd><dt>関連する手証明</dt><dd>この要件を解消する新規定理はありません。</dd><dt>次の作業</dt><dd>W2 / W4</dd></dl></details><details class="requirement" id="req-DS-06" data-group="DS" data-work="W4" data-search="DS-06 条件付きの進行性 安全性、完了可能な経路の存在、公平な全実行での終了、無停止可用性を分ける。 有限prefix安全性と、拒否・待機を区別している。 全公平実行の進行、永久故障時の可用性は証明していない。 採用profileの配送・復旧・公平性前提の下で正当要求が進む。 一つの成功runから、すべての障害下のlivenessを主張しない。 F3-23、F3-24 W4"><summary><span class="id">DS-06</span> 条件付きの進行性 <span class="origin">D</span></summary><dl><dt>元の要求</dt><dd>安全性、完了可能な経路の存在、公平な全実行での終了、無停止可用性を分ける。</dd><dt>今回の根拠</dt><dd>有限prefix安全性と、拒否・待機を区別している。</dd><dt>未完の部分</dt><dd>全公平実行の進行、永久故障時の可用性は証明していない。</dd><dt>正例の出口</dt><dd>採用profileの配送・復旧・公平性前提の下で正当要求が進む。</dd><dt>反例の出口</dt><dd>一つの成功runから、すべての障害下のlivenessを主張しない。</dd><dt>関連する手証明</dt><dd>F3-23、F3-24</dd><dt>次の作業</dt><dd>W4</dd></dl></details><details class="requirement" id="req-DS-07" data-group="DS" data-work="W2 W4" data-search="DS-07 複数ownerの不変条件 各owner局所の証明と、資源移送等の共同不変条件を区別し、必要な干渉規律を定義する。 同owner不変条件のみに限定することを明示した。 複数ownerのrely/guarantee・資源移送・共同確定が必要。 明示契約の下で残量移送等を行い、全体の保存を示す。 各ownerの非負性だけで合計保存を主張しない。 この要件を解消する新規定理はありません。 W2 / W4"><summary><span class="id">DS-07</span> 複数ownerの不変条件 <span class="origin">D</span></summary><dl><dt>元の要求</dt><dd>各owner局所の証明と、資源移送等の共同不変条件を区別し、必要な干渉規律を定義する。</dd><dt>今回の根拠</dt><dd>同owner不変条件のみに限定することを明示した。</dd><dt>未完の部分</dt><dd>複数ownerのrely/guarantee・資源移送・共同確定が必要。</dd><dt>正例の出口</dt><dd>明示契約の下で残量移送等を行い、全体の保存を示す。</dd><dt>反例の出口</dt><dd>各ownerの非負性だけで合計保存を主張しない。</dd><dt>関連する手証明</dt><dd>この要件を解消する新規定理はありません。</dd><dt>次の作業</dt><dd>W2 / W4</dd></dl></details><details class="requirement" id="req-DS-08" data-group="DS" data-work="W4 W7" data-search="DS-08 容量・隔離と失敗の全経路 queue・frame・継続・retentionの容量を入場前に検査し、malformed/stale/late入力を正しい段階で拒否する。 研究用driveの明示step budgetはある。 本番queue/CPU/通信/履歴の資源拘束を保証するものではない。 容量境界、部分配送、再接続、失効の正例・反例を同じ経路で実行する。 unbounded buffer、秘密を含む生例外、失敗時の部分的な意味操作を許さない。 この要件を解消する新規定理はありません。 W4 / W7"><summary><span class="id">DS-08</span> 容量・隔離と失敗の全経路 <span class="origin">D</span></summary><dl><dt>元の要求</dt><dd>queue・frame・継続・retentionの容量を入場前に検査し、malformed/stale/late入力を正しい段階で拒否する。</dd><dt>今回の根拠</dt><dd>研究用driveの明示step budgetはある。</dd><dt>未完の部分</dt><dd>本番queue/CPU/通信/履歴の資源拘束を保証するものではない。</dd><dt>正例の出口</dt><dd>容量境界、部分配送、再接続、失効の正例・反例を同じ経路で実行する。</dd><dt>反例の出口</dt><dd>unbounded buffer、秘密を含む生例外、失敗時の部分的な意味操作を許さない。</dd><dt>関連する手証明</dt><dd>この要件を解消する新規定理はありません。</dd><dt>次の作業</dt><dd>W4 / W7</dd></dl></details><details class="requirement" id="req-EF-01" data-group="EF" data-work="W2 W4 W5" data-search="EF-01 型付き効果と継続 効果の署名、結果・失敗、handlerの責任、継続の使用回数・寿命を定義する。 効果ful computationと外界結果を分ける実装境界を計画に置いた。 外部providerはF0.3 Kernelに未搭載。一般handler・補償は研究が残る。 純粋計算・状態・外部作用を同じ記述経路から区別して実行する。 handlerが任意回継続を再開し、線形資源や作用を複製しない。 この要件を解消する新規定理はありません。 W2 / W4 / W5"><summary><span class="id">EF-01</span> 型付き効果と継続 <span class="origin">U</span></summary><dl><dt>元の要求</dt><dd>効果の署名、結果・失敗、handlerの責任、継続の使用回数・寿命を定義する。</dd><dt>今回の根拠</dt><dd>効果ful computationと外界結果を分ける実装境界を計画に置いた。</dd><dt>未完の部分</dt><dd>外部providerはF0.3 Kernelに未搭載。一般handler・補償は研究が残る。</dd><dt>正例の出口</dt><dd>純粋計算・状態・外部作用を同じ記述経路から区別して実行する。</dd><dt>反例の出口</dt><dd>handlerが任意回継続を再開し、線形資源や作用を複製しない。</dd><dt>関連する手証明</dt><dd>この要件を解消する新規定理はありません。</dd><dt>次の作業</dt><dd>W2 / W4 / W5</dd></dl></details><details class="requirement" id="req-EF-02" data-group="EF" data-work="W2 W4 W5" data-search="EF-02 handlerの合成・交換 handlerの適用範囲・順序・捕捉範囲と契約保存条件を定める。 効果ful computationと外界結果を分ける実装境界を計画に置いた。 外部providerはF0.3 Kernelに未搭載。一般handler・補償は研究が残る。 ログ用または検証用handlerの追加で守るべき意味を保存する。 証拠層の追加が新しいruntime effectや権限を生まない。 この要件を解消する新規定理はありません。 W2 / W4 / W5"><summary><span class="id">EF-02</span> handlerの合成・交換 <span class="origin">U</span></summary><dl><dt>元の要求</dt><dd>handlerの適用範囲・順序・捕捉範囲と契約保存条件を定める。</dd><dt>今回の根拠</dt><dd>効果ful computationと外界結果を分ける実装境界を計画に置いた。</dd><dt>未完の部分</dt><dd>外部providerはF0.3 Kernelに未搭載。一般handler・補償は研究が残る。</dd><dt>正例の出口</dt><dd>ログ用または検証用handlerの追加で守るべき意味を保存する。</dd><dt>反例の出口</dt><dd>証拠層の追加が新しいruntime effectや権限を生まない。</dd><dt>関連する手証明</dt><dd>この要件を解消する新規定理はありません。</dd><dt>次の作業</dt><dd>W2 / W4 / W5</dd></dl></details><details class="requirement" id="req-EF-03" data-group="EF" data-work="W2 W4 W5" data-search="EF-03 providerの型と権限の境界 外部資源への要求、実行許可、物理呼出し、結果検査、公開許可を分ける。 効果ful computationと外界結果を分ける実装境界を計画に置いた。 外部providerはF0.3 Kernelに未搭載。一般handler・補償は研究が残る。 正当な入力から実I/O結果を得て、欠損・不正値・権限失効を区別する。 provider名、FFI成功、署名や接続だけでgrantを生成しない。 この要件を解消する新規定理はありません。 W2 / W4 / W5"><summary><span class="id">EF-03</span> providerの型と権限の境界 <span class="origin">U</span></summary><dl><dt>元の要求</dt><dd>外部資源への要求、実行許可、物理呼出し、結果検査、公開許可を分ける。</dd><dt>今回の根拠</dt><dd>効果ful computationと外界結果を分ける実装境界を計画に置いた。</dd><dt>未完の部分</dt><dd>外部providerはF0.3 Kernelに未搭載。一般handler・補償は研究が残る。</dd><dt>正例の出口</dt><dd>正当な入力から実I/O結果を得て、欠損・不正値・権限失効を区別する。</dd><dt>反例の出口</dt><dd>provider名、FFI成功、署名や接続だけでgrantを生成しない。</dd><dt>関連する手証明</dt><dd>この要件を解消する新規定理はありません。</dd><dt>次の作業</dt><dd>W2 / W4 / W5</dd></dl></details><details class="requirement" id="req-EF-04" data-group="EF" data-work="W2 W4 W5" data-search="EF-04 外界作用と不確定な完了 外部作用の開始記録、物理完了、結果記録を区別し、crashによる不確定性を保持する。 効果ful computationと外界結果を分ける実装境界を計画に置いた。 外部providerはF0.3 Kernelに未搭載。一般handler・補償は研究が残る。 効果前後で同じ保存状態になる反例に対し、無根拠な再実行をしない。 state journalの高々一回保証を、そのまま任意外部I/Oへ拡張しない。 この要件を解消する新規定理はありません。 W2 / W4 / W5"><summary><span class="id">EF-04</span> 外界作用と不確定な完了 <span class="origin">D</span></summary><dl><dt>元の要求</dt><dd>外部作用の開始記録、物理完了、結果記録を区別し、crashによる不確定性を保持する。</dd><dt>今回の根拠</dt><dd>効果ful computationと外界結果を分ける実装境界を計画に置いた。</dd><dt>未完の部分</dt><dd>外部providerはF0.3 Kernelに未搭載。一般handler・補償は研究が残る。</dd><dt>正例の出口</dt><dd>効果前後で同じ保存状態になる反例に対し、無根拠な再実行をしない。</dd><dt>反例の出口</dt><dd>state journalの高々一回保証を、そのまま任意外部I/Oへ拡張しない。</dd><dt>関連する手証明</dt><dd>この要件を解消する新規定理はありません。</dd><dt>次の作業</dt><dd>W2 / W4 / W5</dd></dl></details><details class="requirement" id="req-EF-05" data-group="EF" data-work="W2 W4 W5" data-search="EF-05 乱数・時刻・近似の供給 外部非決定性を入力・効果・記録へ結びつけ、確定判断と提示上の再計算を分ける。 効果ful computationと外界結果を分ける実装境界を計画に置いた。 外部providerはF0.3 Kernelに未搭載。一般handler・補償は研究が残る。 同じ記録を使うreplayと、現在の新しい乱数要求を区別する。 再生時に外界を再実行して過去と違う結果を確定しない。 この要件を解消する新規定理はありません。 W2 / W4 / W5"><summary><span class="id">EF-05</span> 乱数・時刻・近似の供給 <span class="origin">D</span></summary><dl><dt>元の要求</dt><dd>外部非決定性を入力・効果・記録へ結びつけ、確定判断と提示上の再計算を分ける。</dd><dt>今回の根拠</dt><dd>効果ful computationと外界結果を分ける実装境界を計画に置いた。</dd><dt>未完の部分</dt><dd>外部providerはF0.3 Kernelに未搭載。一般handler・補償は研究が残る。</dd><dt>正例の出口</dt><dd>同じ記録を使うreplayと、現在の新しい乱数要求を区別する。</dd><dt>反例の出口</dt><dd>再生時に外界を再実行して過去と違う結果を確定しない。</dd><dt>関連する手証明</dt><dd>この要件を解消する新規定理はありません。</dd><dt>次の作業</dt><dd>W2 / W4 / W5</dd></dl></details><details class="requirement" id="req-EF-06" data-group="EF" data-work="W2 W4 W5" data-search="EF-06 補償はrollbackと同義ではない 外部化済みの作用に対する補償は別の作用として、失敗・権限・履歴を持たせる。 効果ful computationと外界結果を分ける実装境界を計画に置いた。 外部providerはF0.3 Kernelに未搭載。一般handler・補償は研究が残る。 補償成功/失敗を表示し、元の出来事を消さない。 補償が予定されたことを全体原子性の証拠にしない。 この要件を解消する新規定理はありません。 W2 / W4 / W5"><summary><span class="id">EF-06</span> 補償はrollbackと同義ではない <span class="origin">D</span></summary><dl><dt>元の要求</dt><dd>外部化済みの作用に対する補償は別の作用として、失敗・権限・履歴を持たせる。</dd><dt>今回の根拠</dt><dd>効果ful computationと外界結果を分ける実装境界を計画に置いた。</dd><dt>未完の部分</dt><dd>外部providerはF0.3 Kernelに未搭載。一般handler・補償は研究が残る。</dd><dt>正例の出口</dt><dd>補償成功/失敗を表示し、元の出来事を消さない。</dd><dt>反例の出口</dt><dd>補償が予定されたことを全体原子性の証拠にしない。</dd><dt>関連する手証明</dt><dd>この要件を解消する新規定理はありません。</dd><dt>次の作業</dt><dd>W2 / W4 / W5</dd></dl></details><details class="requirement" id="req-AU-01" data-group="AU" data-work="W1 W3 W8" data-search="AU-01 認証・認可・検証の分離 資格情報→主体の主張、信頼・admission→使用許可、形式証拠→性質の確認を別の判断として扱う。 ideal issued claimによる非空all/any、同一κ、失効後の使用再検査を実装した。 暗号認証・任意ポリシー変換・委譲・独立信頼domainの一般化は未完。 正しい証明があるが権限がない要求と、権限はあるが証明不足の要求を区別する。 certificate、proof、role、process、routeを単独のgrantと扱わない。 F3-06、F3-07 W1 / W3 / W8"><summary><span class="id">AU-01</span> 認証・認可・検証の分離 <span class="origin">U</span></summary><dl><dt>元の要求</dt><dd>資格情報→主体の主張、信頼・admission→使用許可、形式証拠→性質の確認を別の判断として扱う。</dd><dt>今回の根拠</dt><dd>ideal issued claimによる非空all/any、同一κ、失効後の使用再検査を実装した。</dd><dt>未完の部分</dt><dd>暗号認証・任意ポリシー変換・委譲・独立信頼domainの一般化は未完。</dd><dt>正例の出口</dt><dd>正しい証明があるが権限がない要求と、権限はあるが証明不足の要求を区別する。</dd><dt>反例の出口</dt><dd>certificate、proof、role、process、routeを単独のgrantと扱わない。</dd><dt>関連する手証明</dt><dd>F3-06、F3-07</dd><dt>次の作業</dt><dd>W1 / W3 / W8</dd></dl></details><details class="requirement" id="req-AU-02" data-group="AU" data-work="W1 W3 W8" data-search="AU-02 複数認証・policy層の合成 層のscope、順序、AND/選言、failure、主体と対象の対応を契約化する。 ideal issued claimによる非空all/any、同一κ、失効後の使用再検査を実装した。 暗号認証・任意ポリシー変換・委譲・独立信頼domainの一般化は未完。 複数層が同じ要求・主体・policy世代を検査し、正当な複合認証を通す。 違う主体や古い世代への二つの許可を合成しない。 F3-06、F3-07 W1 / W3 / W8"><summary><span class="id">AU-02</span> 複数認証・policy層の合成 <span class="origin">U</span></summary><dl><dt>元の要求</dt><dd>層のscope、順序、AND/選言、failure、主体と対象の対応を契約化する。</dd><dt>今回の根拠</dt><dd>ideal issued claimによる非空all/any、同一κ、失効後の使用再検査を実装した。</dd><dt>未完の部分</dt><dd>暗号認証・任意ポリシー変換・委譲・独立信頼domainの一般化は未完。</dd><dt>正例の出口</dt><dd>複数層が同じ要求・主体・policy世代を検査し、正当な複合認証を通す。</dd><dt>反例の出口</dt><dd>違う主体や古い世代への二つの許可を合成しない。</dd><dt>関連する手証明</dt><dd>F3-06、F3-07</dd><dt>次の作業</dt><dd>W1 / W3 / W8</dd></dl></details><details class="requirement" id="req-AU-03" data-group="AU" data-work="W3 W8" data-search="AU-03 admission依存と複数の管理主体 locusの論理的な参加依存を物理network topologyから分ける。独立rootと複数parent条件を定義する。 member/locus/moduleの帰納的な参加根拠とrootなし循環を区別する。 各外部domainの信頼rootと発行policyを実認証へ対応させる必要がある。 親退出時に子の参加状態・要求処理を一貫して更新する。 対等なノードを世界全体の唯一の管理者への所属へ強制しない。 F3-01、F3-02、F3-03、F3-06 W3 / W8"><summary><span class="id">AU-03</span> admission依存と複数の管理主体 <span class="origin">U</span></summary><dl><dt>元の要求</dt><dd>locusの論理的な参加依存を物理network topologyから分ける。独立rootと複数parent条件を定義する。</dd><dt>今回の根拠</dt><dd>member/locus/moduleの帰納的な参加根拠とrootなし循環を区別する。</dd><dt>未完の部分</dt><dd>各外部domainの信頼rootと発行policyを実認証へ対応させる必要がある。</dd><dt>正例の出口</dt><dd>親退出時に子の参加状態・要求処理を一貫して更新する。</dd><dt>反例の出口</dt><dd>対等なノードを世界全体の唯一の管理者への所属へ強制しない。</dd><dt>関連する手証明</dt><dd>F3-01、F3-02、F3-03、F3-06</dd><dt>次の作業</dt><dd>W3 / W8</dd></dl></details><details class="requirement" id="req-AU-04" data-group="AU" data-work="W1 W3 W8" data-search="AU-04 使用時再検査と失効 grant、委譲、incarnation、policy版を使用点で照合し、queued/in-flightの失効結果を定義する。 ideal issued claimによる非空all/any、同一κ、失効後の使用再検査を実装した。 暗号認証・任意ポリシー変換・委譲・独立信頼domainの一般化は未完。 実行前失効と実行後失効を区別し、後者の過去の事実を残す。 再接続や古いsnapshotから失効権限を復活させない。 F3-06、F3-07 W1 / W3 / W8"><summary><span class="id">AU-04</span> 使用時再検査と失効 <span class="origin">U</span></summary><dl><dt>元の要求</dt><dd>grant、委譲、incarnation、policy版を使用点で照合し、queued/in-flightの失効結果を定義する。</dd><dt>今回の根拠</dt><dd>ideal issued claimによる非空all/any、同一κ、失効後の使用再検査を実装した。</dd><dt>未完の部分</dt><dd>暗号認証・任意ポリシー変換・委譲・独立信頼domainの一般化は未完。</dd><dt>正例の出口</dt><dd>実行前失効と実行後失効を区別し、後者の過去の事実を残す。</dd><dt>反例の出口</dt><dd>再接続や古いsnapshotから失効権限を復活させない。</dd><dt>関連する手証明</dt><dd>F3-06、F3-07</dd><dt>次の作業</dt><dd>W1 / W3 / W8</dd></dl></details><details class="requirement" id="req-AU-05" data-group="AU" data-work="W3" data-search="AU-05 層の追加・削除・交換 透明な契約保存と非透明なContractUpdateを区別し、切替え中の要求と証拠を扱う。 policy successor後に古い証拠を拒否し、準備済みreparentも使用時再検査する。 一般policy transformerの透明性・互換性を自動判定する体系ではない。 条件を強める認証層を、現在の接続契約を更新した上で導入する。 互換性を装って成功範囲・必要権限・失敗を無断変更しない。 F3-06、F3-07、F3-16 W3"><summary><span class="id">AU-05</span> 層の追加・削除・交換 <span class="origin">U</span></summary><dl><dt>元の要求</dt><dd>透明な契約保存と非透明なContractUpdateを区別し、切替え中の要求と証拠を扱う。</dd><dt>今回の根拠</dt><dd>policy successor後に古い証拠を拒否し、準備済みreparentも使用時再検査する。</dd><dt>未完の部分</dt><dd>一般policy transformerの透明性・互換性を自動判定する体系ではない。</dd><dt>正例の出口</dt><dd>条件を強める認証層を、現在の接続契約を更新した上で導入する。</dd><dt>反例の出口</dt><dd>互換性を装って成功範囲・必要権限・失敗を無断変更しない。</dd><dt>関連する手証明</dt><dd>F3-06、F3-07、F3-16</dd><dt>次の作業</dt><dd>W3</dd></dl></details><details class="requirement" id="req-AU-06" data-group="AU" data-work="W1 W8" data-search="AU-06 認証・認可モジュールの形式保証 ポリシーの意味、導出手順、証拠の出所、仮定、健全性の保証範囲を記述して検査する。 非空all/anyの有限policyについて健全性・相対完全性の手証明と実装を用意した。 任意authmoduleの形式検証、暗号の安全性、sandboxは対象外。 不正な主体変換・委譲の増幅を反例にして検査する。 自分を管理者とする局所公理を外の信頼判断へ持ち込ませない。 F3-06、F3-07 W1 / W8"><summary><span class="id">AU-06</span> 認証・認可モジュールの形式保証 <span class="origin">U</span></summary><dl><dt>元の要求</dt><dd>ポリシーの意味、導出手順、証拠の出所、仮定、健全性の保証範囲を記述して検査する。</dd><dt>今回の根拠</dt><dd>非空all/anyの有限policyについて健全性・相対完全性の手証明と実装を用意した。</dd><dt>未完の部分</dt><dd>任意authmoduleの形式検証、暗号の安全性、sandboxは対象外。</dd><dt>正例の出口</dt><dd>不正な主体変換・委譲の増幅を反例にして検査する。</dd><dt>反例の出口</dt><dd>自分を管理者とする局所公理を外の信頼判断へ持ち込ませない。</dd><dt>関連する手証明</dt><dd>F3-06、F3-07</dd><dt>次の作業</dt><dd>W1 / W8</dd></dl></details><details class="requirement" id="req-AU-07" data-group="AU" data-work="W8" data-search="AU-07 信頼域間の対応と委譲 主体namespace、発行者、audience、委譲深度、再委譲、失効を接続契約へ載せる。 claimのscope照合はある。 再委譲・権限の減衰・委譲cycle・別domainとの合成は未モデル化。 異なる発行元でも明示した信頼範囲で接続できる。 同じ名前やadminという文字列だけで権限を対応づけない。 この要件を解消する新規定理はありません。 W8"><summary><span class="id">AU-07</span> 信頼域間の対応と委譲 <span class="origin">D</span></summary><dl><dt>元の要求</dt><dd>主体namespace、発行者、audience、委譲深度、再委譲、失効を接続契約へ載せる。</dd><dt>今回の根拠</dt><dd>claimのscope照合はある。</dd><dt>未完の部分</dt><dd>再委譲・権限の減衰・委譲cycle・別domainとの合成は未モデル化。</dd><dt>正例の出口</dt><dd>異なる発行元でも明示した信頼範囲で接続できる。</dd><dt>反例の出口</dt><dd>同じ名前やadminという文字列だけで権限を対応づけない。</dd><dt>関連する手証明</dt><dd>この要件を解消する新規定理はありません。</dd><dt>次の作業</dt><dd>W8</dd></dl></details><details class="requirement" id="req-AU-08" data-group="AU" data-work="W8" data-search="AU-08 初期信頼と鍵・制御の世代交代 bootstrapの根拠、issuer/鍵の更新、制御状態の復旧・退役を明示する。 issuer epochの退役をideal recordとして扱う。 鍵移行・root交代・cryptographic freshnessは未実装。 管理手段の更新後に旧鍵と現権限の関係を説明できる。 古い制御snapshotだけから現在の失効が分かると仮定しない。 F3-07 W8"><summary><span class="id">AU-08</span> 初期信頼と鍵・制御の世代交代 <span class="origin">D</span></summary><dl><dt>元の要求</dt><dd>bootstrapの根拠、issuer/鍵の更新、制御状態の復旧・退役を明示する。</dd><dt>今回の根拠</dt><dd>issuer epochの退役をideal recordとして扱う。</dd><dt>未完の部分</dt><dd>鍵移行・root交代・cryptographic freshnessは未実装。</dd><dt>正例の出口</dt><dd>管理手段の更新後に旧鍵と現権限の関係を説明できる。</dd><dt>反例の出口</dt><dd>古い制御snapshotだけから現在の失効が分かると仮定しない。</dd><dt>関連する手証明</dt><dd>F3-07</dd><dt>次の作業</dt><dd>W8</dd></dl></details><details class="requirement" id="req-TY-01" data-group="TY" data-work="W1 W2" data-search="TY-01 基礎型の宣言的・実行的対応 型体系、algorithmic checker、runtime型安全性を別命題として定義し、対象断片と注釈条件を明示する。 sourceに束縛した多項式証拠、support rank証拠、label判断を別々の線として照合した。 完全な依存型・様相型・任意理論loaderは存在しない。 有効な注釈付き正例は受理され、実行時の値は型と一致する。 検査器の終了とprogramの終了を混同しない。 F3-03、F3-07、F3-08 W1 / W2"><summary><span class="id">TY-01</span> 基礎型の宣言的・実行的対応 <span class="origin">U</span></summary><dl><dt>元の要求</dt><dd>型体系、algorithmic checker、runtime型安全性を別命題として定義し、対象断片と注釈条件を明示する。</dd><dt>今回の根拠</dt><dd>sourceに束縛した多項式証拠、support rank証拠、label判断を別々の線として照合した。</dd><dt>未完の部分</dt><dd>完全な依存型・様相型・任意理論loaderは存在しない。</dd><dt>正例の出口</dt><dd>有効な注釈付き正例は受理され、実行時の値は型と一致する。</dd><dt>反例の出口</dt><dd>検査器の終了とprogramの終了を混同しない。</dd><dt>関連する手証明</dt><dd>F3-03、F3-07、F3-08</dd><dt>次の作業</dt><dd>W1 / W2</dd></dl></details><details class="requirement" id="req-TY-02" data-group="TY" data-work="W2" data-search="TY-02 理論の局所導入と前提管理 module/regionごとの理論が、前提・規則・意味対応・公開契約・証拠検査方法を持つ。 局所算術証拠とsupport証拠の別checkerを共通対象へ結びつけた。 moduleごとの任意理論loaderのメタ言語は作っていない。 二つの異なる規律を使うmoduleを同じ実行意味へ接続する。 任意の公理・矛盾した仮定を共通kernelへ無検査で追加しない。 F3-03、F3-08 W2"><summary><span class="id">TY-02</span> 理論の局所導入と前提管理 <span class="origin">U</span></summary><dl><dt>元の要求</dt><dd>module/regionごとの理論が、前提・規則・意味対応・公開契約・証拠検査方法を持つ。</dd><dt>今回の根拠</dt><dd>局所算術証拠とsupport証拠の別checkerを共通対象へ結びつけた。</dd><dt>未完の部分</dt><dd>moduleごとの任意理論loaderのメタ言語は作っていない。</dd><dt>正例の出口</dt><dd>二つの異なる規律を使うmoduleを同じ実行意味へ接続する。</dd><dt>反例の出口</dt><dd>任意の公理・矛盾した仮定を共通kernelへ無検査で追加しない。</dd><dt>関連する手証明</dt><dd>F3-03、F3-08</dd><dt>次の作業</dt><dd>W2</dd></dl></details><details class="requirement" id="req-TY-03" data-group="TY" data-work="W1 W2" data-search="TY-03 検証手段と意味拡張の区別 solver/tacticの追加、仕様言語の追加、実行する新構文や効果の追加を区別する。 sourceに束縛した多項式証拠、support rank証拠、label判断を別々の線として照合した。 完全な依存型・様相型・任意理論loaderは存在しない。 新しい探索器は既存の証拠検査へ出力でき、実行意味を変えない。 verifier pluginを理由にprojection・Core操作・権限を再定義しない。 F3-03、F3-07、F3-08 W1 / W2"><summary><span class="id">TY-03</span> 検証手段と意味拡張の区別 <span class="origin">U</span></summary><dl><dt>元の要求</dt><dd>solver/tacticの追加、仕様言語の追加、実行する新構文や効果の追加を区別する。</dd><dt>今回の根拠</dt><dd>sourceに束縛した多項式証拠、support rank証拠、label判断を別々の線として照合した。</dd><dt>未完の部分</dt><dd>完全な依存型・様相型・任意理論loaderは存在しない。</dd><dt>正例の出口</dt><dd>新しい探索器は既存の証拠検査へ出力でき、実行意味を変えない。</dd><dt>反例の出口</dt><dd>verifier pluginを理由にprojection・Core操作・権限を再定義しない。</dd><dt>関連する手証明</dt><dd>F3-03、F3-07、F3-08</dd><dt>次の作業</dt><dd>W1 / W2</dd></dl></details><details class="requirement" id="req-TY-04" data-group="TY" data-work="W2" data-search="TY-04 異なる局所理論の境界 値・資源・前提・効果の共通契約か、検証済み翻訳を通じて接続する。 不変値を伴う契約とsource identityを共有し、証明を権限へ変換しない。 異種logicの一般翻訳とaffine資源boundaryは未証明。 強い内部証明の結果を、必要な部分だけ外部契約として利用する。 所有権・寿命・非公開条件を弱い型へ消去して迂回しない。 F3-07、F3-08、F3-09 W2"><summary><span class="id">TY-04</span> 異なる局所理論の境界 <span class="origin">U</span></summary><dl><dt>元の要求</dt><dd>値・資源・前提・効果の共通契約か、検証済み翻訳を通じて接続する。</dd><dt>今回の根拠</dt><dd>不変値を伴う契約とsource identityを共有し、証明を権限へ変換しない。</dd><dt>未完の部分</dt><dd>異種logicの一般翻訳とaffine資源boundaryは未証明。</dd><dt>正例の出口</dt><dd>強い内部証明の結果を、必要な部分だけ外部契約として利用する。</dd><dt>反例の出口</dt><dd>所有権・寿命・非公開条件を弱い型へ消去して迂回しない。</dd><dt>関連する手証明</dt><dd>F3-07、F3-08、F3-09</dd><dt>次の作業</dt><dd>W2</dd></dl></details><details class="requirement" id="req-TY-05" data-group="TY" data-work="W2" data-search="TY-05 refinement・依存型的仕様 値依存の型・仕様の必要範囲を定め、実行コードと論理項の束縛・型等価性・除去条件を明確にする。 多項式refinementの証明をF0.2から継承する。 依存型そのものや一般的な型レベル計算を導入したとはしない。 長さや範囲等の証拠を同じ値の利用条件へ接続する。 refinement証拠が一つあることを一般依存型体系の完成と数えない。 F3-08 W2"><summary><span class="id">TY-05</span> refinement・依存型的仕様 <span class="origin">U</span></summary><dl><dt>元の要求</dt><dd>値依存の型・仕様の必要範囲を定め、実行コードと論理項の束縛・型等価性・除去条件を明確にする。</dd><dt>今回の根拠</dt><dd>多項式refinementの証明をF0.2から継承する。</dd><dt>未完の部分</dt><dd>依存型そのものや一般的な型レベル計算を導入したとはしない。</dd><dt>正例の出口</dt><dd>長さや範囲等の証拠を同じ値の利用条件へ接続する。</dd><dt>反例の出口</dt><dd>refinement証拠が一つあることを一般依存型体系の完成と数えない。</dd><dt>関連する手証明</dt><dd>F3-08</dd><dt>次の作業</dt><dd>W2</dd></dl></details><details class="requirement" id="req-TY-06" data-group="TY" data-work="W2" data-search="TY-06 様相と環境の対応 stage/place/time/stability等の各modeの解釈と相互作用を定義し、必要な場所だけで利用できる。 F0.1の環境安定性の様相例を参照する。 MTTや一般の様相型checkerはF0.3未搭載。 環境が守る範囲でstableな値を再利用し、その範囲外patchで再検査する。 論理的laterを一packet後、stableを失効後も永久有効と解釈しない。 この要件を解消する新規定理はありません。 W2"><summary><span class="id">TY-06</span> 様相と環境の対応 <span class="origin">U</span></summary><dl><dt>元の要求</dt><dd>stage/place/time/stability等の各modeの解釈と相互作用を定義し、必要な場所だけで利用できる。</dd><dt>今回の根拠</dt><dd>F0.1の環境安定性の様相例を参照する。</dd><dt>未完の部分</dt><dd>MTTや一般の様相型checkerはF0.3未搭載。</dd><dt>正例の出口</dt><dd>環境が守る範囲でstableな値を再利用し、その範囲外patchで再検査する。</dd><dt>反例の出口</dt><dd>論理的laterを一packet後、stableを失効後も永久有効と解釈しない。</dd><dt>関連する手証明</dt><dd>この要件を解消する新規定理はありません。</dd><dt>次の作業</dt><dd>W2</dd></dl></details><details class="requirement" id="req-TY-07" data-group="TY" data-work="W1 W2" data-search="TY-07 証拠の使用可能性と版 証拠の命題、code/contract/theory identity、環境前提と現在の適用可能性を追跡する。 code/contract/member/instance/request/argsとpolicy版を照合し、過去の証拠と現在使用を分けた。 任意理論版変更の証明移送は今後の義務。 探索器を外しても有効な証明は再検査でき、前提変更は影響範囲を特定する。 証明ツールの削除を命題の失効と同一視しない一方、旧証拠を新版へ流用しない。 F3-07、F3-08、F3-14 W1 / W2"><summary><span class="id">TY-07</span> 証拠の使用可能性と版 <span class="origin">D</span></summary><dl><dt>元の要求</dt><dd>証拠の命題、code/contract/theory identity、環境前提と現在の適用可能性を追跡する。</dd><dt>今回の根拠</dt><dd>code/contract/member/instance/request/argsとpolicy版を照合し、過去の証拠と現在使用を分けた。</dd><dt>未完の部分</dt><dd>任意理論版変更の証明移送は今後の義務。</dd><dt>正例の出口</dt><dd>探索器を外しても有効な証明は再検査でき、前提変更は影響範囲を特定する。</dd><dt>反例の出口</dt><dd>証明ツールの削除を命題の失効と同一視しない一方、旧証拠を新版へ流用しない。</dd><dt>関連する手証明</dt><dd>F3-07、F3-08、F3-14</dd><dt>次の作業</dt><dd>W1 / W2</dd></dl></details><details class="requirement" id="req-TY-08" data-group="TY" data-work="W7" data-search="TY-08 理論実行の隔離と決定可能部分 拡張の検査・探索にも資源制限を置き、決定可能範囲、提出証拠の検査、Unknownを区別する。 checkerの責任とkernelからの分離を記述する。 CPU/memory sandbox付き第三者checker実行は未実装。 停止しない探索器が他の正常な検査・実行を巻き込まない。 任意理論の健全性を万能に自動判定できると要求しない。 この要件を解消する新規定理はありません。 W7"><summary><span class="id">TY-08</span> 理論実行の隔離と決定可能部分 <span class="origin">D</span></summary><dl><dt>元の要求</dt><dd>拡張の検査・探索にも資源制限を置き、決定可能範囲、提出証拠の検査、Unknownを区別する。</dd><dt>今回の根拠</dt><dd>checkerの責任とkernelからの分離を記述する。</dd><dt>未完の部分</dt><dd>CPU/memory sandbox付き第三者checker実行は未実装。</dd><dt>正例の出口</dt><dd>停止しない探索器が他の正常な検査・実行を巻き込まない。</dd><dt>反例の出口</dt><dd>任意理論の健全性を万能に自動判定できると要求しない。</dd><dt>関連する手証明</dt><dd>この要件を解消する新規定理はありません。</dd><dt>次の作業</dt><dd>W7</dd></dl></details><details class="requirement" id="req-CT-01" data-group="CT" data-work="W2 W3" data-search="CT-01 契約の語彙と監視範囲 入出力、pre/post、効果、失敗、権限、観測、寿命、資源を契約として分ける。runtime検査可能性も区別する。 Partial/TotalBodyと全mutator不変条件を現在のコードに結びつけた。 一般の契約論理・多owner rely/guarantee・契約変更合意は未完。 値条件は入口検査し、履歴や将来の条件は証明・monitor・仮定として明示する。 assertだけで任意の履歴/未来性質が保証されるとしない。 F3-08、F3-09 W2 / W3"><summary><span class="id">CT-01</span> 契約の語彙と監視範囲 <span class="origin">U</span></summary><dl><dt>元の要求</dt><dd>入出力、pre/post、効果、失敗、権限、観測、寿命、資源を契約として分ける。runtime検査可能性も区別する。</dd><dt>今回の根拠</dt><dd>Partial/TotalBodyと全mutator不変条件を現在のコードに結びつけた。</dd><dt>未完の部分</dt><dd>一般の契約論理・多owner rely/guarantee・契約変更合意は未完。</dd><dt>正例の出口</dt><dd>値条件は入口検査し、履歴や将来の条件は証明・monitor・仮定として明示する。</dd><dt>反例の出口</dt><dd>assertだけで任意の履歴/未来性質が保証されるとしない。</dd><dt>関連する手証明</dt><dd>F3-08、F3-09</dd><dt>次の作業</dt><dd>W2 / W3</dd></dl></details><details class="requirement" id="req-CT-02" data-group="CT" data-work="W2 W3" data-search="CT-02 証拠と実ソースの束縛 検証条件は受入側が実ソースと契約から導き、名前capture・別AST・仮定差込みを防ぐ。 Partial/TotalBodyと全mutator不変条件を現在のコードに結びつけた。 一般の契約論理・多owner rely/guarantee・契約変更合意は未完。 実source改変で証拠が拒否され、衛生的な束縛を維持する。 solverのpassフラグや自作の前提集合を成功証拠にしない。 F3-08、F3-09 W2 / W3"><summary><span class="id">CT-02</span> 証拠と実ソースの束縛 <span class="origin">D</span></summary><dl><dt>元の要求</dt><dd>検証条件は受入側が実ソースと契約から導き、名前capture・別AST・仮定差込みを防ぐ。</dd><dt>今回の根拠</dt><dd>Partial/TotalBodyと全mutator不変条件を現在のコードに結びつけた。</dd><dt>未完の部分</dt><dd>一般の契約論理・多owner rely/guarantee・契約変更合意は未完。</dd><dt>正例の出口</dt><dd>実source改変で証拠が拒否され、衛生的な束縛を維持する。</dd><dt>反例の出口</dt><dd>solverのpassフラグや自作の前提集合を成功証拠にしない。</dd><dt>関連する手証明</dt><dd>F3-08、F3-09</dd><dt>次の作業</dt><dd>W2 / W3</dd></dl></details><details class="requirement" id="req-CT-03" data-group="CT" data-work="W2 W3" data-search="CT-03 全mutatorと環境干渉の閉包 不変条件に作用する全writer、handler、patch、import、外界経路に保存義務を課す。 Partial/TotalBodyと全mutator不変条件を現在のコードに結びつけた。 一般の契約論理・多owner rely/guarantee・契約変更合意は未完。 後から追加した普通のcodeも同じ保護条件を守る。 検証済み関数だけ拘束し、別操作から保護状態を書かせない。 F3-08、F3-09 W2 / W3"><summary><span class="id">CT-03</span> 全mutatorと環境干渉の閉包 <span class="origin">D</span></summary><dl><dt>元の要求</dt><dd>不変条件に作用する全writer、handler、patch、import、外界経路に保存義務を課す。</dd><dt>今回の根拠</dt><dd>Partial/TotalBodyと全mutator不変条件を現在のコードに結びつけた。</dd><dt>未完の部分</dt><dd>一般の契約論理・多owner rely/guarantee・契約変更合意は未完。</dd><dt>正例の出口</dt><dd>後から追加した普通のcodeも同じ保護条件を守る。</dd><dt>反例の出口</dt><dd>検証済み関数だけ拘束し、別操作から保護状態を書かせない。</dd><dt>関連する手証明</dt><dd>F3-08、F3-09</dd><dt>次の作業</dt><dd>W2 / W3</dd></dl></details><details class="requirement" id="req-CT-04" data-group="CT" data-work="W2 W3" data-search="CT-04 部分正当性と成功範囲 成功時保証、bodyの全域性、資源/権限/配送に関する可用性を別に定める。 Partial/TotalBodyと全mutator不変条件を現在のコードに結びつけた。 一般の契約論理・多owner rely/guarantee・契約変更合意は未完。 全整数で成功した操作の交換で、新しいguardによる失敗を検出する。 全拒否でもpostが真という空虚な成功を実用性達成としない。 F3-08、F3-09 W2 / W3"><summary><span class="id">CT-04</span> 部分正当性と成功範囲 <span class="origin">D</span></summary><dl><dt>元の要求</dt><dd>成功時保証、bodyの全域性、資源/権限/配送に関する可用性を別に定める。</dd><dt>今回の根拠</dt><dd>Partial/TotalBodyと全mutator不変条件を現在のコードに結びつけた。</dd><dt>未完の部分</dt><dd>一般の契約論理・多owner rely/guarantee・契約変更合意は未完。</dd><dt>正例の出口</dt><dd>全整数で成功した操作の交換で、新しいguardによる失敗を検出する。</dd><dt>反例の出口</dt><dd>全拒否でもpostが真という空虚な成功を実用性達成としない。</dd><dt>関連する手証明</dt><dd>F3-08、F3-09</dd><dt>次の作業</dt><dd>W2 / W3</dd></dl></details><details class="requirement" id="req-CT-05" data-group="CT" data-work="W2 W3" data-search="CT-05 互換性と明示的な破壊的更新 表現・意味の互換、source互換、wire互換、成功範囲、情報公開条件を区別し、非互換なら別契約の更新手順にする。 同schema/sig交換でTotalBodyをPartialへ暗黙弱化しない。 表現全体のbehavioral subtyping、外部client同意付き契約変更は未完。 body交換と契約変更を別に受理し、利用側の版も検査する。 同じ型署名だけで任意置換を認めず、永久後方互換も無断で要求しない。 F3-08、F3-09 W2 / W3"><summary><span class="id">CT-05</span> 互換性と明示的な破壊的更新 <span class="origin">U</span></summary><dl><dt>元の要求</dt><dd>表現・意味の互換、source互換、wire互換、成功範囲、情報公開条件を区別し、非互換なら別契約の更新手順にする。</dd><dt>今回の根拠</dt><dd>同schema/sig交換でTotalBodyをPartialへ暗黙弱化しない。</dd><dt>未完の部分</dt><dd>表現全体のbehavioral subtyping、外部client同意付き契約変更は未完。</dd><dt>正例の出口</dt><dd>body交換と契約変更を別に受理し、利用側の版も検査する。</dd><dt>反例の出口</dt><dd>同じ型署名だけで任意置換を認めず、永久後方互換も無断で要求しない。</dd><dt>関連する手証明</dt><dd>F3-08、F3-09</dd><dt>次の作業</dt><dd>W2 / W3</dd></dl></details><details class="requirement" id="req-VF-01" data-group="VF" data-work="W1 W4" data-search="VF-01 保証対象と前提の明示 定理ごとに言語断片、trace、構成、敵対者、host前提、結論を明記する。 24の対象限定手証明、独立rank checker、一般化と有限実行の区別を用意した。 証明支援系の機械化、別の研究者のレビュー、実Rust対応は未完。 対象を変えたときに未適用となる証拠を自動または明示的に特定する。 有限試験やT1/I3の番号を一般健全性の証明としない。 F3-01、F3-02、F3-03、F3-23、F3-24 W1 / W4"><summary><span class="id">VF-01</span> 保証対象と前提の明示 <span class="origin">U</span></summary><dl><dt>元の要求</dt><dd>定理ごとに言語断片、trace、構成、敵対者、host前提、結論を明記する。</dd><dt>今回の根拠</dt><dd>24の対象限定手証明、独立rank checker、一般化と有限実行の区別を用意した。</dd><dt>未完の部分</dt><dd>証明支援系の機械化、別の研究者のレビュー、実Rust対応は未完。</dd><dt>正例の出口</dt><dd>対象を変えたときに未適用となる証拠を自動または明示的に特定する。</dd><dt>反例の出口</dt><dd>有限試験やT1/I3の番号を一般健全性の証明としない。</dd><dt>関連する手証明</dt><dd>F3-01、F3-02、F3-03、F3-23、F3-24</dd><dt>次の作業</dt><dd>W1 / W4</dd></dl></details><details class="requirement" id="req-VF-02" data-group="VF" data-work="W1 W2" data-search="VF-02 相対完全性と表現力の別検査 宣言体系に対する検査・elaborationの完全性と、本来必要な使用例を表現できることを別に確認する。 正のsupportと有限policyに健全性・完全性、rankの独立checkerを与えた。 一般Mir表現の十分性と型付け完全性にはF0.2以上の成果を主張しない。 注釈付きの必要な正例が受理され、型導出との対応を示す。 弱すぎる宣言体系への完全性を、目的全体の充足と呼ばない。 F3-01、F3-02、F3-03、F3-06 W1 / W2"><summary><span class="id">VF-02</span> 相対完全性と表現力の別検査 <span class="origin">U</span></summary><dl><dt>元の要求</dt><dd>宣言体系に対する検査・elaborationの完全性と、本来必要な使用例を表現できることを別に確認する。</dd><dt>今回の根拠</dt><dd>正のsupportと有限policyに健全性・完全性、rankの独立checkerを与えた。</dd><dt>未完の部分</dt><dd>一般Mir表現の十分性と型付け完全性にはF0.2以上の成果を主張しない。</dd><dt>正例の出口</dt><dd>注釈付きの必要な正例が受理され、型導出との対応を示す。</dd><dt>反例の出口</dt><dd>弱すぎる宣言体系への完全性を、目的全体の充足と呼ばない。</dd><dt>関連する手証明</dt><dd>F3-01、F3-02、F3-03、F3-06</dd><dt>次の作業</dt><dd>W1 / W2</dd></dl></details><details class="requirement" id="req-VF-03" data-group="VF" data-work="W1 W4" data-search="VF-03 証明生成・検査・信頼の分離 未信頼探索、証明項検査、trusted実装、axiom、bounded checkを分類して記録する。 24の対象限定手証明、独立rank checker、一般化と有限実行の区別を用意した。 証明支援系の機械化、別の研究者のレビュー、実Rust対応は未完。 証拠改変を小さなcheckerで拒否し、axiom依存と実行versionを出力する。 独自checkerのテスト成功をchecker全体の機械証明に読み替えない。 F3-01、F3-02、F3-03、F3-23、F3-24 W1 / W4"><summary><span class="id">VF-03</span> 証明生成・検査・信頼の分離 <span class="origin">D</span></summary><dl><dt>元の要求</dt><dd>未信頼探索、証明項検査、trusted実装、axiom、bounded checkを分類して記録する。</dd><dt>今回の根拠</dt><dd>24の対象限定手証明、独立rank checker、一般化と有限実行の区別を用意した。</dd><dt>未完の部分</dt><dd>証明支援系の機械化、別の研究者のレビュー、実Rust対応は未完。</dd><dt>正例の出口</dt><dd>証拠改変を小さなcheckerで拒否し、axiom依存と実行versionを出力する。</dd><dt>反例の出口</dt><dd>独自checkerのテスト成功をchecker全体の機械証明に読み替えない。</dd><dt>関連する手証明</dt><dd>F3-01、F3-02、F3-03、F3-23、F3-24</dd><dt>次の作業</dt><dd>W1 / W4</dd></dl></details><details class="requirement" id="req-VF-04" data-group="VF" data-work="W1 W4" data-search="VF-04 合成の保証を独立に示す 成分単独の定理に加え、接続する前提が保たれることを同じ実行構成について示す。 24の対象限定手証明、独立rank checker、一般化と有限実行の区別を用意した。 証明支援系の機械化、別の研究者のレビュー、実Rust対応は未完。 退出・失効・patch・saveが重なる統合反例を処理する。 未定義のSafePluginや完全なfootprintを仮定しただけで全体完成としない。 F3-01、F3-02、F3-03、F3-23、F3-24 W1 / W4"><summary><span class="id">VF-04</span> 合成の保証を独立に示す <span class="origin">U</span></summary><dl><dt>元の要求</dt><dd>成分単独の定理に加え、接続する前提が保たれることを同じ実行構成について示す。</dd><dt>今回の根拠</dt><dd>24の対象限定手証明、独立rank checker、一般化と有限実行の区別を用意した。</dd><dt>未完の部分</dt><dd>証明支援系の機械化、別の研究者のレビュー、実Rust対応は未完。</dd><dt>正例の出口</dt><dd>退出・失効・patch・saveが重なる統合反例を処理する。</dd><dt>反例の出口</dt><dd>未定義のSafePluginや完全なfootprintを仮定しただけで全体完成としない。</dd><dt>関連する手証明</dt><dd>F3-01、F3-02、F3-03、F3-23、F3-24</dd><dt>次の作業</dt><dd>W1 / W4</dd></dl></details><details class="requirement" id="req-VF-05" data-group="VF" data-work="W4" data-search="VF-05 実装への意味保存 parser/checker/VC/projector/runtime/codec/hostの保証連鎖と未証明TCBを明示する。 step対応で有限traceを移す条件付き命題を明示した。 Rust/QUICがその前提を満たす証明はない。 abstract/model/実backendの関係を検証し、対応の切れ目を示す。 モデルが正しいことから実Rust/QUIC/FSの正しさを推論しない。 F3-24 W4"><summary><span class="id">VF-05</span> 実装への意味保存 <span class="origin">U</span></summary><dl><dt>元の要求</dt><dd>parser/checker/VC/projector/runtime/codec/hostの保証連鎖と未証明TCBを明示する。</dd><dt>今回の根拠</dt><dd>step対応で有限traceを移す条件付き命題を明示した。</dd><dt>未完の部分</dt><dd>Rust/QUICがその前提を満たす証明はない。</dd><dt>正例の出口</dt><dd>abstract/model/実backendの関係を検証し、対応の切れ目を示す。</dd><dt>反例の出口</dt><dd>モデルが正しいことから実Rust/QUIC/FSの正しさを推論しない。</dd><dt>関連する手証明</dt><dd>F3-24</dd><dt>次の作業</dt><dd>W4</dd></dl></details><details class="requirement" id="req-VF-06" data-group="VF" data-work="W1 W4" data-search="VF-06 反例と改変検査 正例・反例・検証条件を対象ごとに対応づけ、想定した不具合の注入で検査が失敗することを確認する。 実際の複数の研究モデル不具合を修正し、6つの意図的弱化で反例を再現した。 既存Mirコードの不具合数や第三者レビュー成果には数えない。 guard除去や世代省略が具体的な反例になる。 harnessが期待ラベルを出すだけでcoverageを得たと扱わない。 この要件を解消する新規定理はありません。 W1 / W4"><summary><span class="id">VF-06</span> 反例と改変検査 <span class="origin">D</span></summary><dl><dt>元の要求</dt><dd>正例・反例・検証条件を対象ごとに対応づけ、想定した不具合の注入で検査が失敗することを確認する。</dd><dt>今回の根拠</dt><dd>実際の複数の研究モデル不具合を修正し、6つの意図的弱化で反例を再現した。</dd><dt>未完の部分</dt><dd>既存Mirコードの不具合数や第三者レビュー成果には数えない。</dd><dt>正例の出口</dt><dd>guard除去や世代省略が具体的な反例になる。</dd><dt>反例の出口</dt><dd>harnessが期待ラベルを出すだけでcoverageを得たと扱わない。</dd><dt>関連する手証明</dt><dd>この要件を解消する新規定理はありません。</dd><dt>次の作業</dt><dd>W1 / W4</dd></dl></details><details class="requirement" id="req-VF-07" data-group="VF" data-work="W1" data-search="VF-07 証明と仕様意図の独立レビュー 機械検査だけでなく、命題が必要な意味を述べるか、独立した観点からレビューする。 独立レビューを受入れ条件へ置いた。 今回の手証明と実装を別の研究者がレビューした事実はない。 反例、手証明、実装対応、目的への適合を区別して受理する。 同じ作者のモデル/実装/期待値の一致だけで十分としない。 この要件を解消する新規定理はありません。 W1"><summary><span class="id">VF-07</span> 証明と仕様意図の独立レビュー <span class="origin">D</span></summary><dl><dt>元の要求</dt><dd>機械検査だけでなく、命題が必要な意味を述べるか、独立した観点からレビューする。</dd><dt>今回の根拠</dt><dd>独立レビューを受入れ条件へ置いた。</dd><dt>未完の部分</dt><dd>今回の手証明と実装を別の研究者がレビューした事実はない。</dd><dt>正例の出口</dt><dd>反例、手証明、実装対応、目的への適合を区別して受理する。</dd><dt>反例の出口</dt><dd>同じ作者のモデル/実装/期待値の一致だけで十分としない。</dd><dt>関連する手証明</dt><dd>この要件を解消する新規定理はありません。</dd><dt>次の作業</dt><dd>W1</dd></dl></details><details class="requirement" id="req-EV-01" data-group="EV" data-work="W3 W4 W5" data-search="EV-01 静的合成と動的合成 起動時と稼働中のmodule instance追加を同じ契約原理で扱い、状態・履歴・in-flightによる差を定義する。 動的module/source追加・退役・reparentと現在認可・pending使用を同じモデルに置いた。 実多owner activation、状態schema migration、一般patch言語は未完。 A/B/Cの構成へA/Cに展開される別の構成を追加する。 ログイン相当の追加を、式の定数変更だけで達成済みとしない。 F3-10、F3-15、F3-16、F3-17、F3-18、F3-23 W3 / W4 / W5"><summary><span class="id">EV-01</span> 静的合成と動的合成 <span class="origin">U</span></summary><dl><dt>元の要求</dt><dd>起動時と稼働中のmodule instance追加を同じ契約原理で扱い、状態・履歴・in-flightによる差を定義する。</dd><dt>今回の根拠</dt><dd>動的module/source追加・退役・reparentと現在認可・pending使用を同じモデルに置いた。</dd><dt>未完の部分</dt><dd>実多owner activation、状態schema migration、一般patch言語は未完。</dd><dt>正例の出口</dt><dd>A/B/Cの構成へA/Cに展開される別の構成を追加する。</dd><dt>反例の出口</dt><dd>ログイン相当の追加を、式の定数変更だけで達成済みとしない。</dd><dt>関連する手証明</dt><dd>F3-10、F3-15、F3-16、F3-17、F3-18、F3-23</dd><dt>次の作業</dt><dd>W3 / W4 / W5</dd></dl></details><details class="requirement" id="req-EV-02" data-group="EV" data-work="W3" data-search="EV-02 patch依存DAGのライフサイクル 提供/要求契約、instance、依存先の版、推移的撤去、再検証をpatch graphで扱う。 module-kind DAGと動的supportを参照に用いる。 package版の解決、任意module handle、分散patch依存の全lifecycleは未完。 依存先の更新で影響する下流だけを再検査する。 一つのpatchの2PC成功を、patch間DAGの完成と数えない。 F3-10、F3-17 W3"><summary><span class="id">EV-02</span> patch依存DAGのライフサイクル <span class="origin">U</span></summary><dl><dt>元の要求</dt><dd>提供/要求契約、instance、依存先の版、推移的撤去、再検証をpatch graphで扱う。</dd><dt>今回の根拠</dt><dd>module-kind DAGと動的supportを参照に用いる。</dd><dt>未完の部分</dt><dd>package版の解決、任意module handle、分散patch依存の全lifecycleは未完。</dd><dt>正例の出口</dt><dd>依存先の更新で影響する下流だけを再検査する。</dd><dt>反例の出口</dt><dd>一つのpatchの2PC成功を、patch間DAGの完成と数えない。</dd><dt>関連する手証明</dt><dd>F3-10、F3-17</dd><dt>次の作業</dt><dd>W3</dd></dl></details><details class="requirement" id="req-EV-03" data-group="EV" data-work="W3 W5" data-search="EV-03 変更種類の区別 追加、本体交換、状態/schema移行、reparent、撤去、再配置、契約・理論・policy変更を区別する。 宣言とsource追加・退役・reparent・同schemaコード交換を実装した。 一般schema migrationはF0.2の別モデルから未統合。 αが対応する各種類に正例・拒否条件を与える。 すべてをhot reloadという一語で同じ安全条件へまとめない。 F3-09、F3-10、F3-16、F3-17 W3 / W5"><summary><span class="id">EV-03</span> 変更種類の区別 <span class="origin">U</span></summary><dl><dt>元の要求</dt><dd>追加、本体交換、状態/schema移行、reparent、撤去、再配置、契約・理論・policy変更を区別する。</dd><dt>今回の根拠</dt><dd>宣言とsource追加・退役・reparent・同schemaコード交換を実装した。</dd><dt>未完の部分</dt><dd>一般schema migrationはF0.2の別モデルから未統合。</dd><dt>正例の出口</dt><dd>αが対応する各種類に正例・拒否条件を与える。</dd><dt>反例の出口</dt><dd>すべてをhot reloadという一語で同じ安全条件へまとめない。</dd><dt>関連する手証明</dt><dd>F3-09、F3-10、F3-16、F3-17</dd><dt>次の作業</dt><dd>W3 / W5</dd></dl></details><details class="requirement" id="req-EV-04" data-group="EV" data-work="W3 W4 W5" data-search="EV-04 検査・認可・activation 候補検査、必要権限、互換性、適用点を分け、拒否は許された監査情報以外を変えない。 動的module/source追加・退役・reparentと現在認可・pending使用を同じモデルに置いた。 実多owner activation、状態schema migration、一般patch言語は未完。 有効な更新は通り、拒否候補は既存状態・権限を保持する。 evalや生書換えによる別経路を作らない。 F3-10、F3-15、F3-16、F3-17、F3-18、F3-23 W3 / W4 / W5"><summary><span class="id">EV-04</span> 検査・認可・activation <span class="origin">U</span></summary><dl><dt>元の要求</dt><dd>候補検査、必要権限、互換性、適用点を分け、拒否は許された監査情報以外を変えない。</dd><dt>今回の根拠</dt><dd>動的module/source追加・退役・reparentと現在認可・pending使用を同じモデルに置いた。</dd><dt>未完の部分</dt><dd>実多owner activation、状態schema migration、一般patch言語は未完。</dd><dt>正例の出口</dt><dd>有効な更新は通り、拒否候補は既存状態・権限を保持する。</dd><dt>反例の出口</dt><dd>evalや生書換えによる別経路を作らない。</dd><dt>関連する手証明</dt><dd>F3-10、F3-15、F3-16、F3-17、F3-18、F3-23</dd><dt>次の作業</dt><dd>W3 / W4 / W5</dd></dl></details><details class="requirement" id="req-EV-05" data-group="EV" data-work="W3 W4 W5" data-search="EV-05 依存stampと影響範囲 値だけでなく世代・契約・権限・構造の否定情報まで含む検査依存を追跡する。 動的module/source追加・退役・reparentと現在認可・pending使用を同じモデルに置いた。 実多owner activation、状態schema migration、一般patch言語は未完。 独立範囲の更新は両立し、二patchでのみ生じる循環を検出する。 変更端点が別であるだけでpatch独立性を結論しない。 F3-10、F3-15、F3-16、F3-17、F3-18、F3-23 W3 / W4 / W5"><summary><span class="id">EV-05</span> 依存stampと影響範囲 <span class="origin">D</span></summary><dl><dt>元の要求</dt><dd>値だけでなく世代・契約・権限・構造の否定情報まで含む検査依存を追跡する。</dd><dt>今回の根拠</dt><dd>動的module/source追加・退役・reparentと現在認可・pending使用を同じモデルに置いた。</dd><dt>未完の部分</dt><dd>実多owner activation、状態schema migration、一般patch言語は未完。</dd><dt>正例の出口</dt><dd>独立範囲の更新は両立し、二patchでのみ生じる循環を検出する。</dd><dt>反例の出口</dt><dd>変更端点が別であるだけでpatch独立性を結論しない。</dd><dt>関連する手証明</dt><dd>F3-10、F3-15、F3-16、F3-17、F3-18、F3-23</dd><dt>次の作業</dt><dd>W3 / W4 / W5</dd></dl></details><details class="requirement" id="req-EV-06" data-group="EV" data-work="W3 W4" data-search="EV-06 局所停止と未完了処理 必要な範囲だけを停止し、old code/continuation/requestの扱いとfence所有を定義する。 同schema code交換は選択したquiescent条件で行う。reparentはtracked current-use。 分散fenceと処理中継続のgeneral migrationは未実装。 影響外の計算が継続し、他patchのAbortは自分のfenceだけを解放する。 結果不明の要求を未実行として強制的に捨てない。 この要件を解消する新規定理はありません。 W3 / W4"><summary><span class="id">EV-06</span> 局所停止と未完了処理 <span class="origin">D</span></summary><dl><dt>元の要求</dt><dd>必要な範囲だけを停止し、old code/continuation/requestの扱いとfence所有を定義する。</dd><dt>今回の根拠</dt><dd>同schema code交換は選択したquiescent条件で行う。reparentはtracked current-use。</dd><dt>未完の部分</dt><dd>分散fenceと処理中継続のgeneral migrationは未実装。</dd><dt>正例の出口</dt><dd>影響外の計算が継続し、他patchのAbortは自分のfenceだけを解放する。</dd><dt>反例の出口</dt><dd>結果不明の要求を未実行として強制的に捨てない。</dd><dt>関連する手証明</dt><dd>この要件を解消する新規定理はありません。</dd><dt>次の作業</dt><dd>W3 / W4</dd></dl></details><details class="requirement" id="req-EV-07" data-group="EV" data-work="W4 W5" data-search="EV-07 分散activationと障害 確定・適用・観測・版付き参照の更新を区別し、障害時の停止・復旧条件を契約化する。 F0.2の2PCモデルは別資産として保持する。 F0.3 strict-currentnessを2PC/保存へ統合した保証はない。 一部適用とcrash/recoverでも旧状態の不正公開が起きない。 応答timeoutを合意済みAbortと同一視しない。 この要件を解消する新規定理はありません。 W4 / W5"><summary><span class="id">EV-07</span> 分散activationと障害 <span class="origin">U</span></summary><dl><dt>元の要求</dt><dd>確定・適用・観測・版付き参照の更新を区別し、障害時の停止・復旧条件を契約化する。</dd><dt>今回の根拠</dt><dd>F0.2の2PCモデルは別資産として保持する。</dd><dt>未完の部分</dt><dd>F0.3 strict-currentnessを2PC/保存へ統合した保証はない。</dd><dt>正例の出口</dt><dd>一部適用とcrash/recoverでも旧状態の不正公開が起きない。</dd><dt>反例の出口</dt><dd>応答timeoutを合意済みAbortと同一視しない。</dd><dt>関連する手証明</dt><dd>この要件を解消する新規定理はありません。</dd><dt>次の作業</dt><dd>W4 / W5</dd></dl></details><details class="requirement" id="req-EV-08" data-group="EV" data-work="W3 W5" data-search="EV-08 保証・理論・policyの更新 依存する証拠と現在の適用条件を更新範囲へ含め、保存する保証と変更する保証を区別する。 無断のTotalBody弱化を拒否する。 正当な契約変更、旧version保持、利用者合意は新しい義務。 新しい理論/契約で再検査しても、無関係な証拠を不必要に失効させない。 古い証明を新版へ使う、数学的証明をgrantとして再利用する経路を拒否する。 F3-08 W3 / W5"><summary><span class="id">EV-08</span> 保証・理論・policyの更新 <span class="origin">U</span></summary><dl><dt>元の要求</dt><dd>依存する証拠と現在の適用条件を更新範囲へ含め、保存する保証と変更する保証を区別する。</dd><dt>今回の根拠</dt><dd>無断のTotalBody弱化を拒否する。</dd><dt>未完の部分</dt><dd>正当な契約変更、旧version保持、利用者合意は新しい義務。</dd><dt>正例の出口</dt><dd>新しい理論/契約で再検査しても、無関係な証拠を不必要に失効させない。</dd><dt>反例の出口</dt><dd>古い証明を新版へ使う、数学的証明をgrantとして再利用する経路を拒否する。</dd><dt>関連する手証明</dt><dd>F3-08</dd><dt>次の作業</dt><dd>W3 / W5</dd></dl></details><details class="requirement" id="req-EV-09" data-group="EV" data-work="W5 W8" data-search="EV-09 撤去・廃止・回収と継続性 無限拡張を追加だけと解釈せず、依存・未完了・履歴を保って廃止・回収できる条件を作る。 退役recordは保持する。 履歴/claim/tombstoneを安全に忘れる長期GCは未実装。 正当な下流移行後に旧版を回収する。 永遠に旧版を保持することを無条件の解とせず、早すぎる削除も拒否する。 この要件を解消する新規定理はありません。 W5 / W8"><summary><span class="id">EV-09</span> 撤去・廃止・回収と継続性 <span class="origin">U</span></summary><dl><dt>元の要求</dt><dd>無限拡張を追加だけと解釈せず、依存・未完了・履歴を保って廃止・回収できる条件を作る。</dd><dt>今回の根拠</dt><dd>退役recordは保持する。</dd><dt>未完の部分</dt><dd>履歴/claim/tombstoneを安全に忘れる長期GCは未実装。</dd><dt>正例の出口</dt><dd>正当な下流移行後に旧版を回収する。</dd><dt>反例の出口</dt><dd>永遠に旧版を保持することを無条件の解とせず、早すぎる削除も拒否する。</dd><dt>関連する手証明</dt><dd>この要件を解消する新規定理はありません。</dd><dt>次の作業</dt><dd>W5 / W8</dd></dl></details><details class="requirement" id="req-EV-10" data-group="EV" data-work="W3 W4 W5" data-search="EV-10 任意有限回の進化 対応する実行・更新・復旧が同じ基礎不変条件を保つことから、任意有限prefixへの保存を示す。 動的module/source追加・退役・reparentと現在認可・pending使用を同じモデルに置いた。 実多owner activation、状態schema migration、一般patch言語は未完。 新しい構成を繰り返し追加・変更しても意味の定義を継ぎ足さない。 finite回安全を、全未来の更新が必ず受理されることや無限資源と同一視しない。 F3-10、F3-15、F3-16、F3-17、F3-18、F3-23 W3 / W4 / W5"><summary><span class="id">EV-10</span> 任意有限回の進化 <span class="origin">D</span></summary><dl><dt>元の要求</dt><dd>対応する実行・更新・復旧が同じ基礎不変条件を保つことから、任意有限prefixへの保存を示す。</dd><dt>今回の根拠</dt><dd>動的module/source追加・退役・reparentと現在認可・pending使用を同じモデルに置いた。</dd><dt>未完の部分</dt><dd>実多owner activation、状態schema migration、一般patch言語は未完。</dd><dt>正例の出口</dt><dd>新しい構成を繰り返し追加・変更しても意味の定義を継ぎ足さない。</dd><dt>反例の出口</dt><dd>finite回安全を、全未来の更新が必ず受理されることや無限資源と同一視しない。</dd><dt>関連する手証明</dt><dd>F3-10、F3-15、F3-16、F3-17、F3-18、F3-23</dd><dt>次の作業</dt><dd>W3 / W4 / W5</dd></dl></details><details class="requirement" id="req-SV-01" data-group="SV" data-work="W5" data-search="SV-01 cutとchannel state 受信を含むcutは対応送信を含み、未受信の送信をchannel状態として保持する。 F0.1の有限consistent-cut/Z-pathアルゴリズムを保持する。 分散全成分から入力を完全に抽出する証明は未統合。 完全な依存入力について整合するcheckpoint組を選ぶ。 receiveだけ含むcutをchannel stateで救済したとしない。 この要件を解消する新規定理はありません。 W5"><summary><span class="id">SV-01</span> cutとchannel state <span class="origin">U</span></summary><dl><dt>元の要求</dt><dd>受信を含むcutは対応送信を含み、未受信の送信をchannel状態として保持する。</dd><dt>今回の根拠</dt><dd>F0.1の有限consistent-cut/Z-pathアルゴリズムを保持する。</dd><dt>未完の部分</dt><dd>分散全成分から入力を完全に抽出する証明は未統合。</dd><dt>正例の出口</dt><dd>完全な依存入力について整合するcheckpoint組を選ぶ。</dd><dt>反例の出口</dt><dd>receiveだけ含むcutをchannel stateで救済したとしない。</dd><dt>関連する手証明</dt><dd>この要件を解消する新規定理はありません。</dd><dt>次の作業</dt><dd>W5</dd></dl></details><details class="requirement" id="req-SV-02" data-group="SV" data-work="W5" data-search="SV-02 状態・決定・継続の永続化 状態差分、要求決定、消費、継続、コード版をcrash境界で一貫して保持する。 全Data manifestと完全journal、信頼した現在headを使うsame-instance復元を置いた。 実storage・未知成分・外部効果状態・distributed durabilityは対象外。 記録後応答前crashでも二度の作用/再開を起こさない。 実FSの保証をモデルの原子的writeから推論しない。 F3-19 W5"><summary><span class="id">SV-02</span> 状態・決定・継続の永続化 <span class="origin">D</span></summary><dl><dt>元の要求</dt><dd>状態差分、要求決定、消費、継続、コード版をcrash境界で一貫して保持する。</dd><dt>今回の根拠</dt><dd>全Data manifestと完全journal、信頼した現在headを使うsame-instance復元を置いた。</dd><dt>未完の部分</dt><dd>実storage・未知成分・外部効果状態・distributed durabilityは対象外。</dd><dt>正例の出口</dt><dd>記録後応答前crashでも二度の作用/再開を起こさない。</dd><dt>反例の出口</dt><dd>実FSの保証をモデルの原子的writeから推論しない。</dd><dt>関連する手証明</dt><dd>F3-19</dd><dt>次の作業</dt><dd>W5</dd></dl></details><details class="requirement" id="req-SV-03" data-group="SV" data-work="W5" data-search="SV-03 全componentのcheckpoint参加 関係・権限・証拠・provider・patch準備・ingress等を含むcomponent台帳と保存契約を持つ。 全Data manifestと完全journal、信頼した現在headを使うsame-instance復元を置いた。 実storage・未知成分・外部効果状態・distributed durabilityは対象外。 未対応componentがある場合、完全saveを拒否するか制限を明示する。 actorだけの保存を全世界の保存と呼ばない。 F3-19 W5"><summary><span class="id">SV-03</span> 全componentのcheckpoint参加 <span class="origin">D</span></summary><dl><dt>元の要求</dt><dd>関係・権限・証拠・provider・patch準備・ingress等を含むcomponent台帳と保存契約を持つ。</dd><dt>今回の根拠</dt><dd>全Data manifestと完全journal、信頼した現在headを使うsame-instance復元を置いた。</dd><dt>未完の部分</dt><dd>実storage・未知成分・外部効果状態・distributed durabilityは対象外。</dd><dt>正例の出口</dt><dd>未対応componentがある場合、完全saveを拒否するか制限を明示する。</dd><dt>反例の出口</dt><dd>actorだけの保存を全世界の保存と呼ばない。</dd><dt>関連する手証明</dt><dd>F3-19</dd><dt>次の作業</dt><dd>W5</dd></dl></details><details class="requirement" id="req-SV-04" data-group="SV" data-work="W5" data-search="SV-04 現在世界への復帰とfresh import crash recovery、現sessionへのload、新instanceへのimport、隔離replayを別操作として定義する。 same-instance復元を現在の独立headに束縛する。F0.2のfresh importとは区別した。 そのheadが得られないoffline復旧を同じ保証にしない。 fresh importで新たに認可し、現world復帰では現在の失効を保持する。 古いsnapshotだけから現在権限を再構成したとしない。 F3-19 W5"><summary><span class="id">SV-04</span> 現在世界への復帰とfresh import <span class="origin">U</span></summary><dl><dt>元の要求</dt><dd>crash recovery、現sessionへのload、新instanceへのimport、隔離replayを別操作として定義する。</dd><dt>今回の根拠</dt><dd>same-instance復元を現在の独立headに束縛する。F0.2のfresh importとは区別した。</dd><dt>未完の部分</dt><dd>そのheadが得られないoffline復旧を同じ保証にしない。</dd><dt>正例の出口</dt><dd>fresh importで新たに認可し、現world復帰では現在の失効を保持する。</dd><dt>反例の出口</dt><dd>古いsnapshotだけから現在権限を再構成したとしない。</dd><dt>関連する手証明</dt><dd>F3-19</dd><dt>次の作業</dt><dd>W5</dd></dl></details><details class="requirement" id="req-SV-05" data-group="SV" data-work="W5" data-search="SV-05 Z-pathと依存収集 Z-cycleの問題を因果DAGの循環と混同せず、判定入力に必要な全依存の収集範囲を保証する。 F0.1のcheckpoint completion/Z-pathの手証明とテストを再実行した。 F0.3から分散checkpoint抽出する一般対応は未実装。 有限完全入力では判定の健全性・完全性を示し、未収集依存はUnknownとする。 checkpointが未保存なだけの拒否をすべてZ-cycleと呼ばない。 この要件を解消する新規定理はありません。 W5"><summary><span class="id">SV-05</span> Z-pathと依存収集 <span class="origin">U</span></summary><dl><dt>元の要求</dt><dd>Z-cycleの問題を因果DAGの循環と混同せず、判定入力に必要な全依存の収集範囲を保証する。</dd><dt>今回の根拠</dt><dd>F0.1のcheckpoint completion/Z-pathの手証明とテストを再実行した。</dd><dt>未完の部分</dt><dd>F0.3から分散checkpoint抽出する一般対応は未実装。</dd><dt>正例の出口</dt><dd>有限完全入力では判定の健全性・完全性を示し、未収集依存はUnknownとする。</dd><dt>反例の出口</dt><dd>checkpointが未保存なだけの拒否をすべてZ-cycleと呼ばない。</dd><dt>関連する手証明</dt><dd>この要件を解消する新規定理はありません。</dd><dt>次の作業</dt><dd>W5</dd></dl></details><details class="requirement" id="req-SV-06" data-group="SV" data-work="W5 W8" data-search="SV-06 retention・忘却・圧縮 台帳、tombstone、証拠、結果cacheの回収条件と、旧要求を再実行しない根拠を定義する。 完全image journalとrecordを全保持するモデル。 安全な圧縮・回収・stale reject継続の方式は未完成。 durableなfloorや同等の根拠を残し、古い結果を捨てても安全性を維持する。 ackの真正性・現在性を確認せずforget権限を与えない。 この要件を解消する新規定理はありません。 W5 / W8"><summary><span class="id">SV-06</span> retention・忘却・圧縮 <span class="origin">D</span></summary><dl><dt>元の要求</dt><dd>台帳、tombstone、証拠、結果cacheの回収条件と、旧要求を再実行しない根拠を定義する。</dd><dt>今回の根拠</dt><dd>完全image journalとrecordを全保持するモデル。</dd><dt>未完の部分</dt><dd>安全な圧縮・回収・stale reject継続の方式は未完成。</dd><dt>正例の出口</dt><dd>durableなfloorや同等の根拠を残し、古い結果を捨てても安全性を維持する。</dd><dt>反例の出口</dt><dd>ackの真正性・現在性を確認せずforget権限を与えない。</dd><dt>関連する手証明</dt><dd>この要件を解消する新規定理はありません。</dd><dt>次の作業</dt><dd>W5 / W8</dd></dl></details><details class="requirement" id="req-SV-07" data-group="SV" data-work="W5" data-search="SV-07 archiveの真正性と検証可能な復元 データが型に合うこと、元のarchiveであること、現在へ適用してよいことを区別する。 現在headまでの認可/失効/要求/準備/関係状態を一緒に復元する。 外部identity/鍵/委譲の復元はtrusted-boundary仮定。 改変archiveを拒否する経路と、正当に新規作成されたimportの経路を区別する。 hashや型検査だけで発行元・履歴の真正性を証明したとしない。 F3-07、F3-19 W5"><summary><span class="id">SV-07</span> archiveの真正性と検証可能な復元 <span class="origin">D</span></summary><dl><dt>元の要求</dt><dd>データが型に合うこと、元のarchiveであること、現在へ適用してよいことを区別する。</dd><dt>今回の根拠</dt><dd>現在headまでの認可/失効/要求/準備/関係状態を一緒に復元する。</dd><dt>未完の部分</dt><dd>外部identity/鍵/委譲の復元はtrusted-boundary仮定。</dd><dt>正例の出口</dt><dd>改変archiveを拒否する経路と、正当に新規作成されたimportの経路を区別する。</dd><dt>反例の出口</dt><dd>hashや型検査だけで発行元・履歴の真正性を証明したとしない。</dd><dt>関連する手証明</dt><dd>F3-07、F3-19</dd><dt>次の作業</dt><dd>W5</dd></dl></details><details class="requirement" id="req-OB-01" data-group="OB" data-work="W6" data-search="OB-01 観測の忠実性 source→Core→artifact→request→実行→結果→表示の対応を保持する。観測された因果だけを示す。 意味記録、観測消去、固定labelの二実行条件、filter後の保持を接続した。 任意動的IFC・物理timing・資源隔離・能動debugは未証明。 成功・失敗・保留が元の操作と実際の記録に対応する。 期待JSONや便利な全順序から出来事/因果を捏造しない。 F3-05、F3-20、F3-21、F3-22 W6"><summary><span class="id">OB-01</span> 観測の忠実性 <span class="origin">U</span></summary><dl><dt>元の要求</dt><dd>source→Core→artifact→request→実行→結果→表示の対応を保持する。観測された因果だけを示す。</dd><dt>今回の根拠</dt><dd>意味記録、観測消去、固定labelの二実行条件、filter後の保持を接続した。</dd><dt>未完の部分</dt><dd>任意動的IFC・物理timing・資源隔離・能動debugは未証明。</dd><dt>正例の出口</dt><dd>成功・失敗・保留が元の操作と実際の記録に対応する。</dd><dt>反例の出口</dt><dd>期待JSONや便利な全順序から出来事/因果を捏造しない。</dd><dt>関連する手証明</dt><dd>F3-05、F3-20、F3-21、F3-22</dd><dt>次の作業</dt><dd>W6</dd></dl></details><details class="requirement" id="req-OB-02" data-group="OB" data-work="W6" data-search="OB-02 観測による意味の非干渉 受動観測の有無で対象の意味が変わらないことを、観測を除いたtraceと環境条件を定義して示す。 意味記録、観測消去、固定labelの二実行条件、filter後の保持を接続した。 任意動的IFC・物理timing・資源隔離・能動debugは未証明。 観測ON/OFFで指定した同値関係が保たれる。 read-onlyなAPIだけで非干渉を証明済みとしない。 F3-05、F3-20、F3-21、F3-22 W6"><summary><span class="id">OB-02</span> 観測による意味の非干渉 <span class="origin">U</span></summary><dl><dt>元の要求</dt><dd>受動観測の有無で対象の意味が変わらないことを、観測を除いたtraceと環境条件を定義して示す。</dd><dt>今回の根拠</dt><dd>意味記録、観測消去、固定labelの二実行条件、filter後の保持を接続した。</dd><dt>未完の部分</dt><dd>任意動的IFC・物理timing・資源隔離・能動debugは未証明。</dd><dt>正例の出口</dt><dd>観測ON/OFFで指定した同値関係が保たれる。</dd><dt>反例の出口</dt><dd>read-onlyなAPIだけで非干渉を証明済みとしない。</dd><dt>関連する手証明</dt><dd>F3-05、F3-20、F3-21、F3-22</dd><dt>次の作業</dt><dd>W6</dd></dl></details><details class="requirement" id="req-OB-03" data-group="OB" data-work="W6" data-search="OB-03 情報流の非干渉 値・存在・理由・件数・依存参照・時刻のうち何を保護するかを明示し、二実行の関係として扱う。 固定label・同じlow制御/scheduleの限定profileで二実行非干渉を記述・試験した。 一般の動的IFC、time、allocation、secret-dependent policy変化は未証明。 secret変更で許されないlow観測差が出ないことを対象profileで示す。 単一trace refinementやpublic-only試験からprivate全体系へ一般化しない。 F3-05、F3-21、F3-22 W6"><summary><span class="id">OB-03</span> 情報流の非干渉 <span class="origin">U</span></summary><dl><dt>元の要求</dt><dd>値・存在・理由・件数・依存参照・時刻のうち何を保護するかを明示し、二実行の関係として扱う。</dd><dt>今回の根拠</dt><dd>固定label・同じlow制御/scheduleの限定profileで二実行非干渉を記述・試験した。</dd><dt>未完の部分</dt><dd>一般の動的IFC、time、allocation、secret-dependent policy変化は未証明。</dd><dt>正例の出口</dt><dd>secret変更で許されないlow観測差が出ないことを対象profileで示す。</dd><dt>反例の出口</dt><dd>単一trace refinementやpublic-only試験からprivate全体系へ一般化しない。</dd><dt>関連する手証明</dt><dd>F3-05、F3-21、F3-22</dd><dt>次の作業</dt><dd>W6</dd></dl></details><details class="requirement" id="req-OB-04" data-group="OB" data-work="W6" data-search="OB-04 観測者の現在権限 observer主体、label、redaction、retention、失効、rateを実行の権限と別に検査する。 意味記録、観測消去、固定labelの二実行条件、filter後の保持を接続した。 任意動的IFC・物理timing・資源隔離・能動debugは未証明。 実行権限のある主体が、必ずしも全debug情報を読めないことを確認する。 診断理由やsource pathを経由して資格情報・private値を漏らさない。 F3-05、F3-20、F3-21、F3-22 W6"><summary><span class="id">OB-04</span> 観測者の現在権限 <span class="origin">U</span></summary><dl><dt>元の要求</dt><dd>observer主体、label、redaction、retention、失効、rateを実行の権限と別に検査する。</dd><dt>今回の根拠</dt><dd>意味記録、観測消去、固定labelの二実行条件、filter後の保持を接続した。</dd><dt>未完の部分</dt><dd>任意動的IFC・物理timing・資源隔離・能動debugは未証明。</dd><dt>正例の出口</dt><dd>実行権限のある主体が、必ずしも全debug情報を読めないことを確認する。</dd><dt>反例の出口</dt><dd>診断理由やsource pathを経由して資格情報・private値を漏らさない。</dd><dt>関連する手証明</dt><dd>F3-05、F3-20、F3-21、F3-22</dd><dt>次の作業</dt><dd>W6</dd></dl></details><details class="requirement" id="req-OB-05" data-group="OB" data-work="W6" data-search="OB-05 資源と時間への観測干渉 観測負荷の予算、drop/要約、backpressureと進行性の契約を定義する。物理的ゼロ負荷とは言わない。 許可filter後に有限bufferへ保持し、high trafficによるlow行退去を防いだ。 全履歴・CPU時間を含む実資源隔離は未実装。 遅いviewerや大量観測要求でも、指定した対象側の資源境界を守る。 無制限loggingで停止した対象を非干渉と呼ばない。 F3-22 W6"><summary><span class="id">OB-05</span> 資源と時間への観測干渉 <span class="origin">D</span></summary><dl><dt>元の要求</dt><dd>観測負荷の予算、drop/要約、backpressureと進行性の契約を定義する。物理的ゼロ負荷とは言わない。</dd><dt>今回の根拠</dt><dd>許可filter後に有限bufferへ保持し、high trafficによるlow行退去を防いだ。</dd><dt>未完の部分</dt><dd>全履歴・CPU時間を含む実資源隔離は未実装。</dd><dt>正例の出口</dt><dd>遅いviewerや大量観測要求でも、指定した対象側の資源境界を守る。</dd><dt>反例の出口</dt><dd>無制限loggingで停止した対象を非干渉と呼ばない。</dd><dt>関連する手証明</dt><dd>F3-22</dd><dt>次の作業</dt><dd>W6</dd></dl></details><details class="requirement" id="req-OB-06" data-group="OB" data-work="W6" data-search="OB-06 不確定・欠測・非公開の表示 未発生、未到達、不明、記録欠落、非公開、推定を区別する。 意味記録、観測消去、固定labelの二実行条件、filter後の保持を接続した。 任意動的IFC・物理timing・資源隔離・能動debugは未証明。 lost replyをremote-unknownとし、後から確定記録へ正しく接続する。 表示されないことを事象がない証拠としない。 F3-05、F3-20、F3-21、F3-22 W6"><summary><span class="id">OB-06</span> 不確定・欠測・非公開の表示 <span class="origin">D</span></summary><dl><dt>元の要求</dt><dd>未発生、未到達、不明、記録欠落、非公開、推定を区別する。</dd><dt>今回の根拠</dt><dd>意味記録、観測消去、固定labelの二実行条件、filter後の保持を接続した。</dd><dt>未完の部分</dt><dd>任意動的IFC・物理timing・資源隔離・能動debugは未証明。</dd><dt>正例の出口</dt><dd>lost replyをremote-unknownとし、後から確定記録へ正しく接続する。</dd><dt>反例の出口</dt><dd>表示されないことを事象がない証拠としない。</dd><dt>関連する手証明</dt><dd>F3-05、F3-20、F3-21、F3-22</dd><dt>次の作業</dt><dd>W6</dd></dl></details><details class="requirement" id="req-OB-07" data-group="OB" data-work="W6 W7" data-search="OB-07 デバッグ制御と受動観測 breakpoint、step、状態変更、巻戻しは別の認可された制御効果とし、停止範囲と影響を示す。 active debugをobserveから分離する設計だけを示す。 breakpoint、state edit、rollbackの認可と実装は未搭載。 一部を停止した際に他locusの進行・timeoutへの影響を説明する。 能動操作を観測だから無害と扱わない。 この要件を解消する新規定理はありません。 W6 / W7"><summary><span class="id">OB-07</span> デバッグ制御と受動観測 <span class="origin">U</span></summary><dl><dt>元の要求</dt><dd>breakpoint、step、状態変更、巻戻しは別の認可された制御効果とし、停止範囲と影響を示す。</dd><dt>今回の根拠</dt><dd>active debugをobserveから分離する設計だけを示す。</dd><dt>未完の部分</dt><dd>breakpoint、state edit、rollbackの認可と実装は未搭載。</dd><dt>正例の出口</dt><dd>一部を停止した際に他locusの進行・timeoutへの影響を説明する。</dd><dt>反例の出口</dt><dd>能動操作を観測だから無害と扱わない。</dd><dt>関連する手証明</dt><dd>この要件を解消する新規定理はありません。</dd><dt>次の作業</dt><dd>W6 / W7</dd></dl></details><details class="requirement" id="req-OB-08" data-group="OB" data-work="W6" data-search="OB-08 局所理論と多層認証の説明 何をどの理論で、どの前提・policyで受理したかを、人間向けに段階表示する。 rank witness、policy branch、source siteを説明資料として保持する。 公開するときの完全なdiagnostic prose/schemaは別仕事。 拒否の原因をsource・契約・理論・issuer・世代へたどる。 証明済み/許可済み/実行済みを一つの緑表示に統合しない。 F3-03、F3-06、F3-07 W6"><summary><span class="id">OB-08</span> 局所理論と多層認証の説明 <span class="origin">D</span></summary><dl><dt>元の要求</dt><dd>何をどの理論で、どの前提・policyで受理したかを、人間向けに段階表示する。</dd><dt>今回の根拠</dt><dd>rank witness、policy branch、source siteを説明資料として保持する。</dd><dt>未完の部分</dt><dd>公開するときの完全なdiagnostic prose/schemaは別仕事。</dd><dt>正例の出口</dt><dd>拒否の原因をsource・契約・理論・issuer・世代へたどる。</dd><dt>反例の出口</dt><dd>証明済み/許可済み/実行済みを一つの緑表示に統合しない。</dd><dt>関連する手証明</dt><dd>F3-03、F3-06、F3-07</dd><dt>次の作業</dt><dd>W6</dd></dl></details><details class="requirement" id="req-HS-01" data-group="HS" data-work="W7" data-search="HS-01 package受入れと実行許可 source/artifact/proofの一致、要求資源、publisher情報、実行許可を別に検査してinstanceを起動する。 Mir意味・View・provider・sandboxを区別する境界を計画へ具体化した。 Browser/headless参加製品、renderer、safe package実装はない。 署名ありでも未許可の効果は実行できず、適合packageだけ起動する。 package署名を任意FFIや全データへの許可にしない。 この要件を解消する新規定理はありません。 W7"><summary><span class="id">HS-01</span> package受入れと実行許可 <span class="origin">U</span></summary><dl><dt>元の要求</dt><dd>source/artifact/proofの一致、要求資源、publisher情報、実行許可を別に検査してinstanceを起動する。</dd><dt>今回の根拠</dt><dd>Mir意味・View・provider・sandboxを区別する境界を計画へ具体化した。</dd><dt>未完の部分</dt><dd>Browser/headless参加製品、renderer、safe package実装はない。</dd><dt>正例の出口</dt><dd>署名ありでも未許可の効果は実行できず、適合packageだけ起動する。</dd><dt>反例の出口</dt><dd>package署名を任意FFIや全データへの許可にしない。</dd><dt>関連する手証明</dt><dd>この要件を解消する新規定理はありません。</dd><dt>次の作業</dt><dd>W7</dd></dl></details><details class="requirement" id="req-HS-02" data-group="HS" data-work="W7" data-search="HS-02 sandboxとhost境界 悪意あるpackage・証拠生成器・native pluginの脅威範囲と隔離・終了・資源制限を定義する。 Mir意味・View・provider・sandboxを区別する境界を計画へ具体化した。 Browser/headless参加製品、renderer、safe package実装はない。 無限loop/大量allocation/不正I/Oを対象profileで抑止する。 Pythonのopaque表現やtrusted fixtureを敵対native codeへの防壁と呼ばない。 この要件を解消する新規定理はありません。 W7"><summary><span class="id">HS-02</span> sandboxとhost境界 <span class="origin">D</span></summary><dl><dt>元の要求</dt><dd>悪意あるpackage・証拠生成器・native pluginの脅威範囲と隔離・終了・資源制限を定義する。</dd><dt>今回の根拠</dt><dd>Mir意味・View・provider・sandboxを区別する境界を計画へ具体化した。</dd><dt>未完の部分</dt><dd>Browser/headless参加製品、renderer、safe package実装はない。</dd><dt>正例の出口</dt><dd>無限loop/大量allocation/不正I/Oを対象profileで抑止する。</dd><dt>反例の出口</dt><dd>Pythonのopaque表現やtrusted fixtureを敵対native codeへの防壁と呼ばない。</dd><dt>関連する手証明</dt><dd>この要件を解消する新規定理はありません。</dd><dt>次の作業</dt><dd>W7</dd></dl></details><details class="requirement" id="req-HS-03" data-group="HS" data-work="W7" data-search="HS-03 Mir内のdomain意味 ゲーム等の確定ロジックはMirまたはその明示された効果契約で定義し、rendererへ無断委譲しない。 Mir意味・View・provider・sandboxを区別する境界を計画へ具体化した。 Browser/headless参加製品、renderer、safe package実装はない。 headlessでも同じdomain判断と状態遷移を実行する。 描画側だけでHPや関係ownerを書き換えない。 この要件を解消する新規定理はありません。 W7"><summary><span class="id">HS-03</span> Mir内のdomain意味 <span class="origin">U</span></summary><dl><dt>元の要求</dt><dd>ゲーム等の確定ロジックはMirまたはその明示された効果契約で定義し、rendererへ無断委譲しない。</dd><dt>今回の根拠</dt><dd>Mir意味・View・provider・sandboxを区別する境界を計画へ具体化した。</dd><dt>未完の部分</dt><dd>Browser/headless参加製品、renderer、safe package実装はない。</dd><dt>正例の出口</dt><dd>headlessでも同じdomain判断と状態遷移を実行する。</dd><dt>反例の出口</dt><dd>描画側だけでHPや関係ownerを書き換えない。</dd><dt>関連する手証明</dt><dd>この要件を解消する新規定理はありません。</dd><dt>次の作業</dt><dd>W7</dd></dl></details><details class="requirement" id="req-HS-04" data-group="HS" data-work="W7" data-search="HS-04 Viewと入力の双方向境界 runtime→observer-safe projection→Viewと、input→typed request→Mirを定義する。 Mir意味・View・provider・sandboxを区別する境界を計画へ具体化した。 Browser/headless参加製品、renderer、safe package実装はない。 二つのViewまたは表示有無で同じ認可された操作を実行する。 Viewのローカル値を型・権限検査なしに確定状態へ入れない。 この要件を解消する新規定理はありません。 W7"><summary><span class="id">HS-04</span> Viewと入力の双方向境界 <span class="origin">U</span></summary><dl><dt>元の要求</dt><dd>runtime→observer-safe projection→Viewと、input→typed request→Mirを定義する。</dd><dt>今回の根拠</dt><dd>Mir意味・View・provider・sandboxを区別する境界を計画へ具体化した。</dd><dt>未完の部分</dt><dd>Browser/headless参加製品、renderer、safe package実装はない。</dd><dt>正例の出口</dt><dd>二つのViewまたは表示有無で同じ認可された操作を実行する。</dd><dt>反例の出口</dt><dd>Viewのローカル値を型・権限検査なしに確定状態へ入れない。</dd><dt>関連する手証明</dt><dd>この要件を解消する新規定理はありません。</dd><dt>次の作業</dt><dd>W7</dd></dl></details><details class="requirement" id="req-HS-05" data-group="HS" data-work="W7" data-search="HS-05 表示用計算とprovider結果 補間・IK・表示座標等の提示ローカル計算と、外部計算結果をMirへ採用する判断を分ける。 Mir意味・View・provider・sandboxを区別する境界を計画へ具体化した。 Browser/headless参加製品、renderer、safe package実装はない。 外部計算を利用しても、型/版/結果/失敗をMir側で検査する。 外部実装の利用を禁止しすぎて全計算を自作させず、権威も渡さない。 この要件を解消する新規定理はありません。 W7"><summary><span class="id">HS-05</span> 表示用計算とprovider結果 <span class="origin">U</span></summary><dl><dt>元の要求</dt><dd>補間・IK・表示座標等の提示ローカル計算と、外部計算結果をMirへ採用する判断を分ける。</dd><dt>今回の根拠</dt><dd>Mir意味・View・provider・sandboxを区別する境界を計画へ具体化した。</dd><dt>未完の部分</dt><dd>Browser/headless参加製品、renderer、safe package実装はない。</dd><dt>正例の出口</dt><dd>外部計算を利用しても、型/版/結果/失敗をMir側で検査する。</dd><dt>反例の出口</dt><dd>外部実装の利用を禁止しすぎて全計算を自作させず、権威も渡さない。</dd><dt>関連する手証明</dt><dd>この要件を解消する新規定理はありません。</dd><dt>次の作業</dt><dd>W7</dd></dl></details><details class="requirement" id="req-HS-06" data-group="HS" data-work="W7" data-search="HS-06 継続的な参加と最小構築UI 起動後の操作、参加・退出、構成追加、適合した更新、状態観測を一つの利用経路にする。 Mir意味・View・provider・sandboxを区別する境界を計画へ具体化した。 Browser/headless参加製品、renderer、safe package実装はない。 ネットワーク越しの参加者がソース由来の構成を追加し、別参加者が利用する。 固定probeを一回実行して終了する経路を利用環境の完成としない。 この要件を解消する新規定理はありません。 W7"><summary><span class="id">HS-06</span> 継続的な参加と最小構築UI <span class="origin">U</span></summary><dl><dt>元の要求</dt><dd>起動後の操作、参加・退出、構成追加、適合した更新、状態観測を一つの利用経路にする。</dd><dt>今回の根拠</dt><dd>Mir意味・View・provider・sandboxを区別する境界を計画へ具体化した。</dd><dt>未完の部分</dt><dd>Browser/headless参加製品、renderer、safe package実装はない。</dd><dt>正例の出口</dt><dd>ネットワーク越しの参加者がソース由来の構成を追加し、別参加者が利用する。</dd><dt>反例の出口</dt><dd>固定probeを一回実行して終了する経路を利用環境の完成としない。</dd><dt>関連する手証明</dt><dd>この要件を解消する新規定理はありません。</dd><dt>次の作業</dt><dd>W7</dd></dl></details><details class="requirement" id="req-OP-01" data-group="OP" data-work="W4 W5 W6 W7" data-search="OP-01 検査前後の資源課金 parse/decode/proof/queue/trace/storage/実行の各資源に、受入前の上限検査と責任主体を与える。 資源を意味上の失敗と前提に分け、再現可能な研究実行を用意した。 本番quota・長期GC・性能基準・OS故障モデルは未実装。 過大入力を無制限確保の前に拒否し、他instanceの予算を守る。 実行本体だけにquotaを置いて証拠検査・loggingを無制限にしない。 この要件を解消する新規定理はありません。 W4 / W5 / W6 / W7"><summary><span class="id">OP-01</span> 検査前後の資源課金 <span class="origin">D</span></summary><dl><dt>元の要求</dt><dd>parse/decode/proof/queue/trace/storage/実行の各資源に、受入前の上限検査と責任主体を与える。</dd><dt>今回の根拠</dt><dd>資源を意味上の失敗と前提に分け、再現可能な研究実行を用意した。</dd><dt>未完の部分</dt><dd>本番quota・長期GC・性能基準・OS故障モデルは未実装。</dd><dt>正例の出口</dt><dd>過大入力を無制限確保の前に拒否し、他instanceの予算を守る。</dd><dt>反例の出口</dt><dd>実行本体だけにquotaを置いて証拠検査・loggingを無制限にしない。</dd><dt>関連する手証明</dt><dd>この要件を解消する新規定理はありません。</dd><dt>次の作業</dt><dd>W4 / W5 / W6 / W7</dd></dl></details><details class="requirement" id="req-OP-02" data-group="OP" data-work="W4 W5 W6 W7" data-search="OP-02 長期的な資源回収 proof cache、履歴、旧code、snapshot、tombstoneのretentionと回収を寿命・再送条件へ結びつける。 資源を意味上の失敗と前提に分け、再現可能な研究実行を用意した。 本番quota・長期GC・性能基準・OS故障モデルは未実装。 所定の長期試験で資源増加の根拠と回収可能部分を確認する。 メモリcache回収だけでjournalの無期限上界を保証したとしない。 この要件を解消する新規定理はありません。 W4 / W5 / W6 / W7"><summary><span class="id">OP-02</span> 長期的な資源回収 <span class="origin">D</span></summary><dl><dt>元の要求</dt><dd>proof cache、履歴、旧code、snapshot、tombstoneのretentionと回収を寿命・再送条件へ結びつける。</dd><dt>今回の根拠</dt><dd>資源を意味上の失敗と前提に分け、再現可能な研究実行を用意した。</dd><dt>未完の部分</dt><dd>本番quota・長期GC・性能基準・OS故障モデルは未実装。</dd><dt>正例の出口</dt><dd>所定の長期試験で資源増加の根拠と回収可能部分を確認する。</dd><dt>反例の出口</dt><dd>メモリcache回収だけでjournalの無期限上界を保証したとしない。</dd><dt>関連する手証明</dt><dd>この要件を解消する新規定理はありません。</dd><dt>次の作業</dt><dd>W4 / W5 / W6 / W7</dd></dl></details><details class="requirement" id="req-OP-03" data-group="OP" data-work="W4 W5 W6 W7" data-search="OP-03 可用性と性能のprofile 利用例ごとのlatency、frame/更新頻度、検査時間、人数、停止許容、復旧時間の目標を決定前に記録する。 資源を意味上の失敗と前提に分け、再現可能な研究実行を用意した。 本番quota・長期GC・性能基準・OS故障モデルは未実装。 決めた機器・負荷・障害条件で測定し、保証と実測を分離する。 根拠なく60fpsや世界規模の台数を必須値として固定しない。 この要件を解消する新規定理はありません。 W4 / W5 / W6 / W7"><summary><span class="id">OP-03</span> 可用性と性能のprofile <span class="origin">D</span></summary><dl><dt>元の要求</dt><dd>利用例ごとのlatency、frame/更新頻度、検査時間、人数、停止許容、復旧時間の目標を決定前に記録する。</dd><dt>今回の根拠</dt><dd>資源を意味上の失敗と前提に分け、再現可能な研究実行を用意した。</dd><dt>未完の部分</dt><dd>本番quota・長期GC・性能基準・OS故障モデルは未実装。</dd><dt>正例の出口</dt><dd>決めた機器・負荷・障害条件で測定し、保証と実測を分離する。</dd><dt>反例の出口</dt><dd>根拠なく60fpsや世界規模の台数を必須値として固定しない。</dd><dt>関連する手証明</dt><dd>この要件を解消する新規定理はありません。</dd><dt>次の作業</dt><dd>W4 / W5 / W6 / W7</dd></dl></details><details class="requirement" id="req-OP-04" data-group="OP" data-work="W4 W5 W6 W7" data-search="OP-04 異常終了と現実のhost前提 crash、disk full、書込み成否不明、鍵失効、時刻のずれを型付き状態へ接続する。 資源を意味上の失敗と前提に分け、再現可能な研究実行を用意した。 本番quota・長期GC・性能基準・OS故障モデルは未実装。 不確定なjournal writerは再検査なしに継続せず、秘密を含まない診断を返す。 fsyncのモデルをあらゆるstorage装置への物理保証としない。 この要件を解消する新規定理はありません。 W4 / W5 / W6 / W7"><summary><span class="id">OP-04</span> 異常終了と現実のhost前提 <span class="origin">D</span></summary><dl><dt>元の要求</dt><dd>crash、disk full、書込み成否不明、鍵失効、時刻のずれを型付き状態へ接続する。</dd><dt>今回の根拠</dt><dd>資源を意味上の失敗と前提に分け、再現可能な研究実行を用意した。</dd><dt>未完の部分</dt><dd>本番quota・長期GC・性能基準・OS故障モデルは未実装。</dd><dt>正例の出口</dt><dd>不確定なjournal writerは再検査なしに継続せず、秘密を含まない診断を返す。</dd><dt>反例の出口</dt><dd>fsyncのモデルをあらゆるstorage装置への物理保証としない。</dd><dt>関連する手証明</dt><dd>この要件を解消する新規定理はありません。</dd><dt>次の作業</dt><dd>W4 / W5 / W6 / W7</dd></dl></details><details class="requirement" id="req-OP-05" data-group="OP" data-work="W7" data-search="OP-05 再現と診断の最小運用 環境・version・manifest・起動/終了・隔離された試験データ・再実行手順を保存する。 完全offline runner、入力版、command、log、hashを成果物に含める。 実product distributionやmultiOS supportの受理ではない。 clean checkoutから起動・故障・終了・回収を再現する。 localの隠れた状態や未記録の手操作がなければ成功しない経路を受理しない。 この要件を解消する新規定理はありません。 W7"><summary><span class="id">OP-05</span> 再現と診断の最小運用 <span class="origin">D</span></summary><dl><dt>元の要求</dt><dd>環境・version・manifest・起動/終了・隔離された試験データ・再実行手順を保存する。</dd><dt>今回の根拠</dt><dd>完全offline runner、入力版、command、log、hashを成果物に含める。</dd><dt>未完の部分</dt><dd>実product distributionやmultiOS supportの受理ではない。</dd><dt>正例の出口</dt><dd>clean checkoutから起動・故障・終了・回収を再現する。</dd><dt>反例の出口</dt><dd>localの隠れた状態や未記録の手操作がなければ成功しない経路を受理しない。</dd><dt>関連する手証明</dt><dd>この要件を解消する新規定理はありません。</dd><dt>次の作業</dt><dd>W7</dd></dl></details><details class="requirement" id="req-WW-01" data-group="WW" data-work="W8" data-search="WW-01 独立した管理・更新と接続 独立に作成・運用・更新した構成を、全内部sourceの一括統合なしに契約で接続する。 単一の抽象制御モデルを世界全体の中央管理要求にしないことを明記した。 独立domainの接続、リンク/公開/発見/連合は設計と実証が残る。 異なる版・管理主体の適合moduleが接続できる。 全世界同時更新や唯一のrootを無断で前提化しない。 この要件を解消する新規定理はありません。 W8"><summary><span class="id">WW-01</span> 独立した管理・更新と接続 <span class="origin">U</span></summary><dl><dt>元の要求</dt><dd>独立に作成・運用・更新した構成を、全内部sourceの一括統合なしに契約で接続する。</dd><dt>今回の根拠</dt><dd>単一の抽象制御モデルを世界全体の中央管理要求にしないことを明記した。</dd><dt>未完の部分</dt><dd>独立domainの接続、リンク/公開/発見/連合は設計と実証が残る。</dd><dt>正例の出口</dt><dd>異なる版・管理主体の適合moduleが接続できる。</dd><dt>反例の出口</dt><dd>全世界同時更新や唯一のrootを無断で前提化しない。</dd><dt>関連する手証明</dt><dd>この要件を解消する新規定理はありません。</dd><dt>次の作業</dt><dd>W8</dd></dl></details><details class="requirement" id="req-WW-02" data-group="WW" data-work="W8" data-search="WW-02 識別・address・link・表現 資源の同一性、位置、取得、View、引用、利用権限を分けて定義する。 単一の抽象制御モデルを世界全体の中央管理要求にしないことを明記した。 独立domainの接続、リンク/公開/発見/連合は設計と実証が残る。 対象の表示や配置が変わっても、選んだ識別契約を維持する。 識別子の文字列から権限や内容形式を勝手に推論しない。 この要件を解消する新規定理はありません。 W8"><summary><span class="id">WW-02</span> 識別・address・link・表現 <span class="origin">D</span></summary><dl><dt>元の要求</dt><dd>資源の同一性、位置、取得、View、引用、利用権限を分けて定義する。</dd><dt>今回の根拠</dt><dd>単一の抽象制御モデルを世界全体の中央管理要求にしないことを明記した。</dd><dt>未完の部分</dt><dd>独立domainの接続、リンク/公開/発見/連合は設計と実証が残る。</dd><dt>正例の出口</dt><dd>対象の表示や配置が変わっても、選んだ識別契約を維持する。</dd><dt>反例の出口</dt><dd>識別子の文字列から権限や内容形式を勝手に推論しない。</dd><dt>関連する手証明</dt><dd>この要件を解消する新規定理はありません。</dd><dt>次の作業</dt><dd>W8</dd></dl></details><details class="requirement" id="req-WW-03" data-group="WW" data-work="W8" data-search="WW-03 未知の拡張の安全な扱い 必要な保証が理解できない場合の非実行・限定閲覧・説明を、契約単位で定義する。 単一の抽象制御モデルを世界全体の中央管理要求にしないことを明記した。 独立domainの接続、リンク/公開/発見/連合は設計と実証が残る。 古い参加環境でも、安全なデータ部分を読める範囲を示す。 未知のcritical fieldを無視して実行する、または一律全体を壊す設計にしない。 この要件を解消する新規定理はありません。 W8"><summary><span class="id">WW-03</span> 未知の拡張の安全な扱い <span class="origin">D</span></summary><dl><dt>元の要求</dt><dd>必要な保証が理解できない場合の非実行・限定閲覧・説明を、契約単位で定義する。</dd><dt>今回の根拠</dt><dd>単一の抽象制御モデルを世界全体の中央管理要求にしないことを明記した。</dd><dt>未完の部分</dt><dd>独立domainの接続、リンク/公開/発見/連合は設計と実証が残る。</dd><dt>正例の出口</dt><dd>古い参加環境でも、安全なデータ部分を読める範囲を示す。</dd><dt>反例の出口</dt><dd>未知のcritical fieldを無視して実行する、または一律全体を壊す設計にしない。</dd><dt>関連する手証明</dt><dd>この要件を解消する新規定理はありません。</dd><dt>次の作業</dt><dd>W8</dd></dl></details><details class="requirement" id="req-WW-04" data-group="WW" data-work="W8" data-search="WW-04 既存システムとの接続 既存Webや外部serviceを明示的な保証境界で接続し、未検証部分を残余として示す。 単一の抽象制御モデルを世界全体の中央管理要求にしないことを明記した。 独立domainの接続、リンク/公開/発見/連合は設計と実証が残る。 型付きwrapperで移行途上の構成を扱い、失敗・情報公開を区別する。 wrapperを置いただけで外部実装全体が形式保証されたと呼ばない。 この要件を解消する新規定理はありません。 W8"><summary><span class="id">WW-04</span> 既存システムとの接続 <span class="origin">D</span></summary><dl><dt>元の要求</dt><dd>既存Webや外部serviceを明示的な保証境界で接続し、未検証部分を残余として示す。</dd><dt>今回の根拠</dt><dd>単一の抽象制御モデルを世界全体の中央管理要求にしないことを明記した。</dd><dt>未完の部分</dt><dd>独立domainの接続、リンク/公開/発見/連合は設計と実証が残る。</dd><dt>正例の出口</dt><dd>型付きwrapperで移行途上の構成を扱い、失敗・情報公開を区別する。</dd><dt>反例の出口</dt><dd>wrapperを置いただけで外部実装全体が形式保証されたと呼ばない。</dd><dt>関連する手証明</dt><dd>この要件を解消する新規定理はありません。</dd><dt>次の作業</dt><dd>W8</dd></dl></details><details class="requirement" id="req-WW-05" data-group="WW" data-work="W8" data-search="WW-05 発見・公開・連合の責任 誰が何を公開し、どう発見・信頼・接続するかを上位責任として定義する。具体registry/market/governanceは未選択とする。 単一の抽象制御モデルを世界全体の中央管理要求にしないことを明記した。 独立domainの接続、リンク/公開/発見/連合は設計と実証が残る。 少なくとも選択した小規模範囲で、公開先と実行権限を分けて運用する。 SNS・図書館・市場の製品機能をCoreやαの必須機構へ混入させない。 この要件を解消する新規定理はありません。 W8"><summary><span class="id">WW-05</span> 発見・公開・連合の責任 <span class="origin">D</span></summary><dl><dt>元の要求</dt><dd>誰が何を公開し、どう発見・信頼・接続するかを上位責任として定義する。具体registry/market/governanceは未選択とする。</dd><dt>今回の根拠</dt><dd>単一の抽象制御モデルを世界全体の中央管理要求にしないことを明記した。</dd><dt>未完の部分</dt><dd>独立domainの接続、リンク/公開/発見/連合は設計と実証が残る。</dd><dt>正例の出口</dt><dd>少なくとも選択した小規模範囲で、公開先と実行権限を分けて運用する。</dd><dt>反例の出口</dt><dd>SNS・図書館・市場の製品機能をCoreやαの必須機構へ混入させない。</dd><dt>関連する手証明</dt><dd>この要件を解消する新規定理はありません。</dd><dt>次の作業</dt><dd>W8</dd></dl></details><details class="requirement" id="req-WW-06" data-group="WW" data-work="W8" data-search="WW-06 内容の真偽と操作の正しさ 基盤が保証する由来・版・作用・契約と、文章/知識/価値判断の真偽を分ける。 単一の抽象制御モデルを世界全体の中央管理要求にしないことを明記した。 独立domainの接続、リンク/公開/発見/連合は設計と実証が残る。 仮説や創作をそのまま内容として保持し、取扱いの保証を表示する。 一つの世界認識の理論への同意を、すべての情報利用に強制しない。 この要件を解消する新規定理はありません。 W8"><summary><span class="id">WW-06</span> 内容の真偽と操作の正しさ <span class="origin">D</span></summary><dl><dt>元の要求</dt><dd>基盤が保証する由来・版・作用・契約と、文章/知識/価値判断の真偽を分ける。</dd><dt>今回の根拠</dt><dd>単一の抽象制御モデルを世界全体の中央管理要求にしないことを明記した。</dd><dt>未完の部分</dt><dd>独立domainの接続、リンク/公開/発見/連合は設計と実証が残る。</dd><dt>正例の出口</dt><dd>仮説や創作をそのまま内容として保持し、取扱いの保証を表示する。</dd><dt>反例の出口</dt><dd>一つの世界認識の理論への同意を、すべての情報利用に強制しない。</dd><dt>関連する手証明</dt><dd>この要件を解消する新規定理はありません。</dd><dt>次の作業</dt><dd>W8</dd></dl></details><details class="requirement" id="req-MG-01" data-group="MG" data-work="W1 W7" data-search="MG-01 要件の根拠と未決を保持 明示要求、導出要件、既存Canon、研究候補、未決の政策を混ぜずIDで管理する。 全要件と候補・証拠・残件を対応づけ、既存Canonの受理へ昇格させない。 全体alphaの達成とowner採用は未判定。 すべての項目に由来・受理条件・責任境界・関連証拠を持たせる。 提案をユーザー承認済みや実装済みに自動昇格させない。 この要件を解消する新規定理はありません。 W1 / W7"><summary><span class="id">MG-01</span> 要件の根拠と未決を保持 <span class="origin">U</span></summary><dl><dt>元の要求</dt><dd>明示要求、導出要件、既存Canon、研究候補、未決の政策を混ぜずIDで管理する。</dd><dt>今回の根拠</dt><dd>全要件と候補・証拠・残件を対応づけ、既存Canonの受理へ昇格させない。</dd><dt>未完の部分</dt><dd>全体alphaの達成とowner採用は未判定。</dd><dt>正例の出口</dt><dd>すべての項目に由来・受理条件・責任境界・関連証拠を持たせる。</dd><dt>反例の出口</dt><dd>提案をユーザー承認済みや実装済みに自動昇格させない。</dd><dt>関連する手証明</dt><dd>この要件を解消する新規定理はありません。</dd><dt>次の作業</dt><dd>W1 / W7</dd></dl></details><details class="requirement" id="req-MG-02" data-group="MG" data-work="W7" data-search="MG-02 αの統合受入れ 構築・参加・操作・観測・更新・復元を一つの実行系で確認し、未対応profileを明記する。 SC-24に相当する相互作用の一部を同じkernelで実行した。 実network・UI・任意local theory・全componentを含むαのSC-24は未完。 別作者・別端末相当から通常sourceで一貫した手順を再現する。 単独demoの合算、I5という名前、テスト総数でα完成を宣言しない。 F3-23 W7"><summary><span class="id">MG-02</span> αの統合受入れ <span class="origin">U</span></summary><dl><dt>元の要求</dt><dd>構築・参加・操作・観測・更新・復元を一つの実行系で確認し、未対応profileを明記する。</dd><dt>今回の根拠</dt><dd>SC-24に相当する相互作用の一部を同じkernelで実行した。</dd><dt>未完の部分</dt><dd>実network・UI・任意local theory・全componentを含むαのSC-24は未完。</dd><dt>正例の出口</dt><dd>別作者・別端末相当から通常sourceで一貫した手順を再現する。</dd><dt>反例の出口</dt><dd>単独demoの合算、I5という名前、テスト総数でα完成を宣言しない。</dd><dt>関連する手証明</dt><dd>F3-23</dd><dt>次の作業</dt><dd>W7</dd></dl></details><details class="requirement" id="req-MG-03" data-group="MG" data-work="W1 W7" data-search="MG-03 次に依存する基礎を先に閉じる 上位の不可逆設計を広げる前に、その範囲が依存する表現力・健全性・合成・観測条件を検証する。 全要件と候補・証拠・残件を対応づけ、既存Canonの受理へ昇格させない。 全体alphaの達成とowner採用は未判定。 必要な正例と一般命題が成立した限定profileを明示して次へ渡す。 全未来の理論を待つことにも、未証明を完成基盤として使うことにも流れない。 この要件を解消する新規定理はありません。 W1 / W7"><summary><span class="id">MG-03</span> 次に依存する基礎を先に閉じる <span class="origin">U</span></summary><dl><dt>元の要求</dt><dd>上位の不可逆設計を広げる前に、その範囲が依存する表現力・健全性・合成・観測条件を検証する。</dd><dt>今回の根拠</dt><dd>全要件と候補・証拠・残件を対応づけ、既存Canonの受理へ昇格させない。</dd><dt>未完の部分</dt><dd>全体alphaの達成とowner採用は未判定。</dd><dt>正例の出口</dt><dd>必要な正例と一般命題が成立した限定profileを明示して次へ渡す。</dd><dt>反例の出口</dt><dd>全未来の理論を待つことにも、未証明を完成基盤として使うことにも流れない。</dd><dt>関連する手証明</dt><dd>この要件を解消する新規定理はありません。</dd><dt>次の作業</dt><dd>W1 / W7</dd></dl></details><details class="requirement" id="req-MG-04" data-group="MG" data-work="W1 W7" data-search="MG-04 証拠のidentityと追試 commit、input、定理statement、tool/環境、命題範囲、反例を対応づける。 全要件と候補・証拠・残件を対応づけ、既存Canonの受理へ昇格させない。 全体alphaの達成とowner採用は未判定。 同じ成果を追試でき、未実行や失敗ログも区別する。 モデル試験をproof、コンパイルをテスト、手証明を機械証明と表示しない。 この要件を解消する新規定理はありません。 W1 / W7"><summary><span class="id">MG-04</span> 証拠のidentityと追試 <span class="origin">D</span></summary><dl><dt>元の要求</dt><dd>commit、input、定理statement、tool/環境、命題範囲、反例を対応づける。</dd><dt>今回の根拠</dt><dd>全要件と候補・証拠・残件を対応づけ、既存Canonの受理へ昇格させない。</dd><dt>未完の部分</dt><dd>全体alphaの達成とowner採用は未判定。</dd><dt>正例の出口</dt><dd>同じ成果を追試でき、未実行や失敗ログも区別する。</dd><dt>反例の出口</dt><dd>モデル試験をproof、コンパイルをテスト、手証明を機械証明と表示しない。</dd><dt>関連する手証明</dt><dd>この要件を解消する新規定理はありません。</dd><dt>次の作業</dt><dd>W1 / W7</dd></dl></details><details class="requirement" id="req-MG-05" data-group="MG" data-work="W1 W7" data-search="MG-05 完了・保留・再開の判定 能力・理論・実装の各受理と、ownerの進行許可を別に記録する。 全要件と候補・証拠・残件を対応づけ、既存Canonの受理へ昇格させない。 全体alphaの達成とowner採用は未判定。 I3-3の受理を保持したままI3-4前で全体を再評価する。 今回の整理だけでCanon、THM/OBL、current queueを変更しない。 この要件を解消する新規定理はありません。 W1 / W7"><summary><span class="id">MG-05</span> 完了・保留・再開の判定 <span class="origin">U</span></summary><dl><dt>元の要求</dt><dd>能力・理論・実装の各受理と、ownerの進行許可を別に記録する。</dd><dt>今回の根拠</dt><dd>全要件と候補・証拠・残件を対応づけ、既存Canonの受理へ昇格させない。</dd><dt>未完の部分</dt><dd>全体alphaの達成とowner採用は未判定。</dd><dt>正例の出口</dt><dd>I3-3の受理を保持したままI3-4前で全体を再評価する。</dd><dt>反例の出口</dt><dd>今回の整理だけでCanon、THM/OBL、current queueを変更しない。</dd><dt>関連する手証明</dt><dd>この要件を解消する新規定理はありません。</dd><dt>次の作業</dt><dd>W1 / W7</dd></dl></details><details class="requirement" id="req-MG-06" data-group="MG" data-work="W1" data-search="MG-06 研究成果の単位 研究の各区切りは定義・証明・反例・実装対応の改善として評価し、文書やphase数だけで進歩を測らない。 定義・手証明・実行model・実反例・traceを作成した。 件数を完成率にしない。機械化と独立受理が必要。 未解決だった具体的命題か判断が、新しい検証可能な成果で前進する。 研究上の核心をnamed laterに送り続け、有限例だけ増やすことを防ぐ。 F3-23 W1"><summary><span class="id">MG-06</span> 研究成果の単位 <span class="origin">D</span></summary><dl><dt>元の要求</dt><dd>研究の各区切りは定義・証明・反例・実装対応の改善として評価し、文書やphase数だけで進歩を測らない。</dd><dt>今回の根拠</dt><dd>定義・手証明・実行model・実反例・traceを作成した。</dd><dt>未完の部分</dt><dd>件数を完成率にしない。機械化と独立受理が必要。</dd><dt>正例の出口</dt><dd>未解決だった具体的命題か判断が、新しい検証可能な成果で前進する。</dd><dt>反例の出口</dt><dd>研究上の核心をnamed laterに送り続け、有限例だけ増やすことを防ぐ。</dd><dt>関連する手証明</dt><dd>F3-23</dd><dt>次の作業</dt><dd>W1</dd></dl></details></section><section id="audit" aria-label="反例と修正"><h2 id="audit-h0">反例・修正・検査範囲</h2>
+<h3 id="audit-h1">実際に見つかった問題</h3>
+<p>以下はF0.3の新しい研究実装の問題であり、GitHubの既存Mir実装に同じ問題があると確認したものではない。</p>
+<h4 id="audit-h2">A1. deep copyした証拠のPython object等値</h4>
+<p>最初のsnapshot照合はdataclass全体の通常等値を使っていた。内部ASTにPython object identityが含まれるため、同じ意味内容をdeep copyしたcheckpointを拒否した。最初の51テストで3 failure・2 errorとなった。意味recordの構造的なcanonical表現を比較するよう修正した。</p>
+<p>これは不正な受理ではなく、正しいcheckpointを受理できない問題である。<code>evidence/first_run.log</code>と<code>second_run.log</code>を保持する。</p>
+<h4 id="audit-h3">A2. 退出した構成へのlive結果の消費</h4>
+<p>serveの後に利用側moduleが退役しても、consumeがmemberとpolicyしか見ていなかったため、結果をConsumedへできた。<code>review_retired_consumer_RED.log</code>に実際の <code>Consumed != ReleaseDenied</code> を保持した。consumeで利用側moduleと要求に束縛した全live依存を再検査するよう修正した。過去のstore変更とServed事実は消さない。</p>
+<p>この修正はlive-result profileの選択に対応する。歴史的snapshot値の別契約を禁止するものではない。</p>
+<h4 id="audit-h4">A3. 書込み対象の存在からの情報流</h4>
+<p>秘密のcellへ定数を書き、公開の0を返す操作を、右辺のreadだけから低いlabelと判定していた。対象の存在/有効性によってacknowledgmentが変わるため不十分だった。<code>review_write_target_label_RED.log</code>に実際の <code>0 != 1</code> を保持し、write targetも潜在依存へ加えて修正した。</p>
+<p>現モデルは値と構造のlabelを一つにした保守的profileである。より許容的なwrite-upを導入するなら、公開された構造の存在条件と秘密値を別にモデル化する必要がある。</p>
+<h4 id="audit-h5">A4. 型付き引数とPythonのBool/Int等値</h4>
+<p>Pythonでは <code>(True,) == (1,)</code> なので、通常のdataclass等値だけではκの型付き引数を正確に比較できなかった。<code>review_typed_context_RED.log</code>は、誤った再検査が例外を返さなかった記録である。型を含む構造等値を使うよう修正した。</p>
+<p>これは、数学上のtyped equalityを実装言語の <code>==</code> と無条件に同一視しない必要性を示す。</p>
+<h4 id="audit-h6">A5. 準備中の反復readによる古いstampの消去</h4>
+<p>同じkeyを複数回読むと、Viewは最後のstampで前のstampを上書きしていた。二つのlookup間に外部更新が入る実現へ広げると、前の値を使った判定の根拠を消せる。<code>review_repeat_read_RED.log</code>に、異なる値への更新とABAの二つの実失敗を保存した。最初のstampと異なる再読取りは<code>UnstablePreparationRead</code>で検査を中断するよう修正した。</p>
+<p>実験はViewのlookup間へ明示的にStore.writeを入れており、実threadレースを実行したものではない。各(value, stamp)の取得とStore.write自体の原子性は、参照モデルの前提として残る。実装側で同期せず二つのdictを読むことを許す保証ではない。</p>
+<h4 id="audit-h7">A6. anchorの現在revisionを再構成していないaccess検査</h4>
+<p>access証拠のκにはanchorの構造revisionが含まれていたが、再検査に過去のκ自身を再び渡していた。そのため、同じanchorをreparentしても旧revisionのaccessがliveのままになった。<code>review_access_revision_RED.log</code>に実際の失敗を保持した。現在のanchor revisionを再構成して比較し、このprofileでは古いaccessを無効にするよう修正した。</p>
+<p>これは「κを束縛している」という表現だけでは足りず、使用点が現在の比較対象を構成している必要を示す。すべての変更で必ず権利を失わせる最終仕様を採用したものではない。今回選んだrevision-bound access契約に合わせた修正である。</p>
+<h4 id="audit-h8">A7. 構造化したcheckpoint／prepared deltaでも型を失った等値</h4>
+<p>κだけを型付き比較に直しても、別の封印境界に通常のPython等値が残っていた。checkpoint内のactivity引数<code>1</code>を<code>True</code>へ置き換えた場合と、準備済みdeltaの書込み値<code>1</code>を<code>True</code>へ置き換えた場合が、いずれも誤って受理された。<code>review_snapshot_typed_equality_RED.log</code>と<code>review_prepared_typed_equality_RED.log</code>に実際の失敗を保存した。</p>
+<p><code>model/identity.py</code>へ型を保つ構造等値を分離し、認可文脈だけでなくcheckpointのcanonical record、prepared delta、reparent封印にも同じ規則を適用した。ASTの正しいdeepcopyを拒否しないため、checkpointはcanonical表現を型付きで比較する。これは別の攻撃対象を扱う安全な任意Python deserializerではない。</p>
+<h3 id="audit-h9">設計時に確認して入れたguard</h3>
+<p>次は破れた実行を記録してから修正したとは主張しない。adapter作成時の照合で気づき、負例を追加した条件である。</p>
+<ul>
+<li>TotalBody証拠の前提を証拠提出側から取り込まず、受入れ側の期待前提と比較する。</li>
+<li>TotalBodyからPartialへの無断の弱化を交換時に拒否する。</li>
+<li>現在のdurable headをsnapshot提出側が過去の値へ指定できないようにする。</li>
+<li>checkpoint対象のDataに未宣言fieldがあれば成功として保存しない。</li>
+<li>high claimの発行件数がlow claim IDを変えないよう、counterをlabelで分ける。</li>
+</ul>
+<h3 id="audit-h10">故意に弱めた実装の反例</h3>
+<p><code>verification/run_mutants.py</code>は、六つの変更をそれぞれ隔離copyへ適用してテストする。全て、対応する単一の振る舞いassertionで失敗した。構文エラーや未定義APIを反例として数えていない。</p>
+<div class="table-scroll" tabindex="0"><table>
+<thead>
+<tr>
+<th>弱化</th>
+<th>観測された破れ</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>policyの主体/member束縛を除く</td>
+<td>aliceのidentityとbobのpermissionを合成できる。</td>
+</tr>
+<tr>
+<td>serveでの現在認可の再検査を除く</td>
+<td>発行後に失効した要求がstateを変更する。</td>
+</tr>
+<tr>
+<td>許可射影の前に観測bufferを切る</td>
+<td>high行だけの追加で公開行が押し出される。</td>
+</tr>
+<tr>
+<td>accessの現在性再検査を除く</td>
+<td>権限失効後もprimary accessがliveのままになる。</td>
+</tr>
+<tr>
+<td>support certificateの閉包条件を除く</td>
+<td>導出可能なrootまで落とした全拒否証拠を受理する。</td>
+</tr>
+<tr>
+<td>不在lookupを追跡しない</td>
+<td>不在条件が変更されても準備済み検査を使用できる。</td>
+</tr>
+</tbody>
+</table></div>
+<p>詳細は <code>evidence/MUTANTS.json</code> と各logにある。これは意図的に挿入した反例であり、修正前の既存リポジトリの欠陥数ではない。</p>
+<h3 id="audit-h11">有限順序検査</h3>
+<p>同じsource-derived pending requestに対して、serve、operation revocation、access revocation、module retirement、consume、observeを各一度だけ行う全720順序を実行した。4,320 stepには、型付きで拒否された操作も含む。各prefixでgraph/currentness/invariantを検査し、owner stateの変更は高々一度、fallback cursorは同lineageで非減少であることを確認した。</p>
+<p>この実験は任意回のretry、任意人数、任意のfault、一般的fairnessを全探索したものではない。一般の主張は <code>theory/PROOFS.md</code> の前提付き手証明と分ける。</p>
+<h3 id="audit-h12">入力資源profile</h3>
+<p>Formulaの参照実装には深さ128以下の明示budgetがある。数学上の最小不動点・帰納的導出の定理は任意の有限式について述べるが、checkerとの実装対応はbudget内に限定する。これは全体言語の最終制約ではない。通常のPythonメモリ/stackやhostの可用性も理想的な数学的計算と区別する。</p>
+<h3 id="audit-h13">残る監査上の限界</h3>
+<p>独立した第三者レビュー、全文の証明kernelによる機械検証、Rust/QUICコードの監査、guest sandbox、物理的storage障害、任意の動的情報流は行っていない。</p>
+<p>参照実装の公開Python objectへhostからアクセスできることを、安全な本番APIだと扱わない。攻撃者に許される操作は、本文で定義したtyped boundaryである。型封印や暗号的束縛をproductionでどのように実現するかは、別の実装義務である。</p>
+</section><section id="validation" aria-label="検査記録"><h2 id="validation-h0">検証記録</h2>
+<h3 id="validation-h1">最終実行</h3>
+<p>再現入口は <code>python run_all.py --baselines /path/to/input_baselines</code>。実行環境と実コマンドは <code>evidence/RUN_MANIFEST.json</code> に保存した。計測秒数は今回の実行記録であり、未来の工数見積りや性能目標ではない。</p>
+<div class="table-scroll" tabindex="0"><table>
+<thead>
+<tr>
+<th>対象</th>
+<th style="text-align:right">結果</th>
+<th>根拠</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>F0.3の新規unit tests</td>
+<td style="text-align:right">98/98成功</td>
+<td>evidence/run_tests.log</td>
+</tr>
+<tr>
+<td>F0.2 baseline unit tests</td>
+<td style="text-align:right">153/153成功</td>
+<td>evidence/run_baseline_F0_2.log</td>
+</tr>
+<tr>
+<td>F0.1 baseline unit tests</td>
+<td style="text-align:right">69/69成功</td>
+<td>evidence/run_baseline_F0_1.log</td>
+</tr>
+<tr>
+<td>統合例</td>
+<td style="text-align:right">成功</td>
+<td>evidence/INTEGRATED_DEMO.json</td>
+</tr>
+<tr>
+<td>六操作の順序探索</td>
+<td style="text-align:right">720/720順序</td>
+<td>evidence/INTERLEAVINGS.json</td>
+</tr>
+<tr>
+<td>意図的に弱めたモデル</td>
+<td style="text-align:right">6/6で狙った振る舞いの反例</td>
+<td>evidence/MUTANTS.json</td>
+</tr>
+<tr>
+<td>Python構文検査</td>
+<td style="text-align:right">成功</td>
+<td>evidence/run_syntax.log</td>
+</tr>
+</tbody>
+</table></div>
+<p>98件の内部では、三記録・七候補式・八eligible集合の2,744入力を、全pre-fixed pointの共通部分による独立計算と照合した。同じ2,744入力をrank certificate checkerでも検査した。これを5,488の独立モデルや一般証明に読み替えない。</p>
+<p>順序探索は、同じsource-generated pending要求に対して、serve・operation失効・access失効・module退役・consume・observeを各一度行う全順列である。4,320の実行又は型付き拒否stepを含む。全prefixでモデルの状態条件を検査した。任意のmessage故障や無限scheduleを探索したわけではない。</p>
+<h3 id="validation-h2">一般命題との関係</h3>
+<p>24項目は手証明である。Lean/Rocq/Isabelleによる一般的な機械検証は今回行っていない。F3-24の実Rust/QUICへの対応前提も解消していない。F0.2のcompiler/certificate checkerを無変更で利用することは、それらのメタ理論を新たに証明したことではない。</p>
+<p>実装Formulaは深さ128の明示資源profileを持つ。数学上の有限式の定理と、この入力範囲内での実装対応を区別する。</p>
+<p>今回の新規SMT入力・UNSAT/SATの加算はない。F0.1/F0.2の旧SMTファイルを今回再実行したとは主張しない。再実行したbaselineは上記unit suitesである。</p>
+<h3 id="validation-h3">反例の分類</h3>
+<p><code>AUDIT.md</code> のA1〜A7は今回の研究実装で見つけた問題である。deepcopy等値のfalse rejection、退出後のlive消費、write targetの情報label、Bool/Intの等値、反復readでのstamp上書きを区別した。対応するREDのlogを保持する。</p>
+<p>六mutantは意図的に弱めた実装であり、実際の既存Mir不具合や自然に発見した欠陥の件数ではない。構文エラー・未定義APIは検出成功に数えていない。</p>
+<h3 id="validation-h4">文書と由来の検査</h3>
+<p><code>verification/build_ledgers.py</code> により24命題、119要件、30未決事項を生成した。全要件は元の未受理状態を保持し、限定的な今回の寄与と残件を記載した。既存のCanonや正式な受理を更新しない。</p>
+<p><code>provenance/INPUTS.json</code> に元ZIP・要件JSON・再利用ファイルのSHA-256と比較結果を置く。<code>SHA256SUMS.json</code> は配布時の各ファイルを記録する。再実行によってlogは更新されるため、再実行後のhashが配布時と変わること自体は異常ではない。</p>
+<p>HTMLのDOM・リンク・描画の検査は <code>evidence/DOCUMENT_CHECKS.json</code> に記録する。これは文書構造の検査であり、要件の完全性や理論の健全性を証明するものではない。</p>
+<h3 id="validation-h5">未実行・非保証</h3>
+<p>独立した第三者レビュー、実Rust/QUICの新規試験、実network/プロセス障害、physical durability、第三者guest sandbox、任意局所理論、任意動的情報流、αのSC-24全体の受入れは今回の実行結果に含まれない。</p>
+<p>参照モデルのobserver消去は論理的なdomain遷移についての性質であり、CPU時間やメモリ負荷がゼロという意味ではない。全image journalは完全性を確認するための抽象実現であり、本番設計として無制限保存を採用したわけではない。</p>
+</section><section id="decisions" aria-label="30の未決事項"><h2 id="decisions-h0">30の未決事項の扱い</h2>
+<p>今回の研究profileで試した選択を、最終設計の採用と区別する。既に説明された目的を再質問する台帳ではない。次の定義・実装の直接の前提になった判断から解く。</p>
+<div class="table-scroll" tabindex="0"><table>
+<thead>
+<tr>
+<th>ID</th>
+<th>問い</th>
+<th>今回の候補</th>
+<th>次の検討</th>
+<th>担当</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Q-01</td>
+<td>通常readの一貫性</td>
+<td>F0.2の参照ごとのowner snapshotを継承する有限profile。</td>
+<td>式/関係単位の整合readを表す契約を比較し、暗黙分散transactionにしない。</td>
+<td>W2</td>
+</tr>
+<tr>
+<td>Q-02</td>
+<td>ownerと共同状態</td>
+<td>抽象ownerの局所原子的更新。物理的唯一サーバを要求しない。</td>
+<td>論理ownerの実現と多owner invariantを別に定義する。</td>
+<td>W2 / W4</td>
+</tr>
+<tr>
+<td>Q-03</td>
+<td>αに必要な言語の表現力</td>
+<td>第一階の一部CFGのみ。F0.3 VMはspawn/join未対応。</td>
+<td>純粋高階値・計算型・affine handleの最小正例と型規則を作る。</td>
+<td>W2</td>
+</tr>
+<tr>
+<td>Q-04</td>
+<td>数値モデル</td>
+<td>数学的IntとBool。認可ctxではBool/Intを区別する。</td>
+<td>Int64/float/textへの意味とoverflowを決める。</td>
+<td>W2</td>
+</tr>
+<tr>
+<td>Q-05</td>
+<td>親が複数の場合と退出</td>
+<td>positive all/anyと最小不動点。same-kind DAG条件は別に維持。</td>
+<td>ORと集団生成の使い方、局所証拠の十分性を利用例で確認する。</td>
+<td>W1 / W3</td>
+</tr>
+<tr>
+<td>Q-06</td>
+<td>fallbackと再取得の表層</td>
+<td>reacquireは別認可の明示操作。新claim生成だけでは復帰しない。</td>
+<td>宣言から再取得操作を生成するsurfaceを検討する。</td>
+<td>W3</td>
+</tr>
+<tr>
+<td>Q-07</td>
+<td>参照・識別・履歴</td>
+<td>instance/name/incarnation/revisionを区別。live結果のみ厳格再検査。</td>
+<td>historical ref/snapshot/first-class handle契約を分ける。</td>
+<td>W2 / W8</td>
+</tr>
+<tr>
+<td>Q-08</td>
+<td>循環と遅延</td>
+<td>同kindと関係計算はDAG、cross-kind根拠は帰納的closure。</td>
+<td>許された時間feedbackの意味とcache/表示境界を比較する。</td>
+<td>W3</td>
+</tr>
+<tr>
+<td>Q-09</td>
+<td>時間・締切の意味</td>
+<td>presentation contextは一致する外部tagで、実clock保証なし。</td>
+<td>logical time・deadline・clock/leaseの前提を閉じる。</td>
+<td>W3 / W4</td>
+</tr>
+<tr>
+<td>Q-10</td>
+<td>提示と近似</td>
+<td>関係式は正確な整数演算のみ。</td>
+<td>誤差とapproximationを権限/失敗/表示のどこで明示するか定義する。</td>
+<td>W3 / W7</td>
+</tr>
+<tr>
+<td>Q-11</td>
+<td>retryと結果保持</td>
+<td>同一runtimeのrequestは重複serve拒否。結果使用は別に現在性検査。</td>
+<td>操作別retryとtombstone回収を永続化条件に結びつける。</td>
+<td>W4 / W5</td>
+</tr>
+<tr>
+<td>Q-12</td>
+<td>取消しとquiescence</td>
+<td>一般的cancel/補償は未統合。</td>
+<td>取り消す対象と既実行効果の非巻戻しを型にする。</td>
+<td>W2 / W4</td>
+</tr>
+<tr>
+<td>Q-13</td>
+<td>故障下の進行</td>
+<td>任意有限prefixの安全性のみ。</td>
+<td>公平性、連結性、復旧条件ごとの進行性を宣言する。</td>
+<td>W4</td>
+</tr>
+<tr>
+<td>Q-14</td>
+<td>効果と継続の拡張</td>
+<td>sourceからのrequest/resumeを使うが、一般handler変更は未定義。</td>
+<td>再開権の回数・所有・保存を計算型へ接続する。</td>
+<td>W2</td>
+</tr>
+<tr>
+<td>Q-15</td>
+<td>補償が必要な外界</td>
+<td>外部effectはF0.3 Kernelに未搭載。</td>
+<td>F0.2のunknown-startモデルと現在性・完全snapshotの接続を研究する。</td>
+<td>W4 / W5</td>
+</tr>
+<tr>
+<td>Q-16</td>
+<td>認証・policyの合成</td>
+<td>同じtyped κを全leafへ渡すnonempty all/explicit any。</td>
+<td>任意policy transformerの順序・委譲・issuer trustを選択profileごとに証明する。</td>
+<td>W1 / W8</td>
+</tr>
+<tr>
+<td>Q-17</td>
+<td>対等性と信頼域</td>
+<td>ideal trusted issued records。cryptographyやByzantine hostを検証していない。</td>
+<td>guest/host/controlplaneのTCBと信頼翻訳を決める。</td>
+<td>W4 / W7 / W8</td>
+</tr>
+<tr>
+<td>Q-18</td>
+<td>失効とprepared patch</td>
+<td>F0.3 reparentはcommit時再検査。F0.2の準備後予約を採用しない。</td>
+<td>strict invalidationと予約方式の違いをowner判断の対象に残す。</td>
+<td>W3 / W5</td>
+</tr>
+<tr>
+<td>Q-19</td>
+<td>理論拡張の受理方式</td>
+<td>多項式/closure/labelの既知検査器だけ。</td>
+<td>依存型/様相の局所理論adapterとsound bridgeを機械化する。</td>
+<td>W1 / W2</td>
+</tr>
+<tr>
+<td>Q-20</td>
+<td>save/loadの連続性</td>
+<td>現在headに基づくsame-instance全image replay。</td>
+<td>fresh import/過去分岐/実full resumeの意味とscopeを別に選択する。</td>
+<td>W5</td>
+</tr>
+<tr>
+<td>Q-21</td>
+<td>互換性と旧版の寿命</td>
+<td>同schema/signatureとTotalBody非弱化。</td>
+<td>契約変更とversion coexistence、受入れ側の合意を定義する。</td>
+<td>W3 / W5</td>
+</tr>
+<tr>
+<td>Q-22</td>
+<td>基礎の証拠水準</td>
+<td>24手証明、95tests、有限探索。Lean等の一般機械証明なし。</td>
+<td>基礎受理は独立確認・機械化・実装対応の対象範囲で判定する。</td>
+<td>W1 / W4</td>
+</tr>
+<tr>
+<td>Q-23</td>
+<td>αのhot-plug範囲</td>
+<td>動的node/source追加・退役・reparent・同schema交換。</td>
+<td>実αで必要な追加/撤去/状態移行をSC-24へ明示する。</td>
+<td>W3 / W7</td>
+</tr>
+<tr>
+<td>Q-24</td>
+<td>影響範囲の算出</td>
+<td>完全tracked reads、absence、versioned index、incarnation。</td>
+<td>影響閉包の差分化と分散validation原子性の実現を検証する。</td>
+<td>W3 / W4</td>
+</tr>
+<tr>
+<td>Q-25</td>
+<td>保持・圧縮・削除</td>
+<td>古いrecords/journalは保持。</td>
+<td>根拠/ログ/claim/requestの安全な忘却条件はまだ選ばない。</td>
+<td>W5 / W8</td>
+</tr>
+<tr>
+<td>Q-26</td>
+<td>観測の対象モデル</td>
+<td>固定labels、同low control/schedule、filter後buffer。</td>
+<td>dynamic IFC・timing/termination/存在の脅威モデルを別に選ぶ。</td>
+<td>W6</td>
+</tr>
+<tr>
+<td>Q-27</td>
+<td>能動デバッグ</td>
+<td>受動observeのみ。active debuggerなし。</td>
+<td>stop/edit/rollbackを別の認可された操作にする。</td>
+<td>W6 / W7</td>
+</tr>
+<tr>
+<td>Q-28</td>
+<td>host脅威モデルと実装対象</td>
+<td>trusted Python host、guestはtyped APIに限定。</td>
+<td>sandbox、quota、provider isolationと実host前提を定義する。</td>
+<td>W7</td>
+</tr>
+<tr>
+<td>Q-29</td>
+<td>ネットワーク越し構築の最小体験</td>
+<td>再現用CLIと静的HTML。製品UIではない。</td>
+<td>最小の構築/参加/診断経路とheadless APIを同じ検査に結ぶ。</td>
+<td>W7</td>
+</tr>
+<tr>
+<td>Q-30</td>
+<td>性能と規模の数値</td>
+<td>性能値を目標として捏造しない。今回の時間は測定記録だけ。</td>
+<td>対象機器とnetwork条件で検査/観測/実行の予算を決める。</td>
+<td>W4 / W6 / W7</td>
+</tr>
+</tbody>
+</table></div>
+</section><section id="sources" aria-label="出典と参照範囲"><h2 id="sources-h0">出典と参照範囲</h2>
+<p>本文の[Sx]は以下を指す。外部研究は設計と証明対象の比較に使用しており、そこでの定理がF0.3のコードについて成立するとみなしていない。</p>
+<div class="table-scroll" tabindex="0"><table>
+<thead>
+<tr>
+<th>ID</th>
+<th>一次資料・版</th>
+<th>参照した範囲と使い方</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>S1</td>
+<td>yukatayu/mir_poc_01, commit <code>19a6decfbea0815b7b4265e8fadfb399270aaed2</code>, 2026-09-09. <a href="https://github.com/yukatayu/mir_poc_01/commit/19a6decfbea0815b7b4265e8fadfb399270aaed2">https://github.com/yukatayu/mir_poc_01/commit/19a6decfbea0815b7b4265e8fadfb399270aaed2</a></td>
+<td>GitHub connectorでbranch metadataを確認。現在の基準版。全repositoryを監査したという意味ではない。</td>
+</tr>
+<tr>
+<td>S2</td>
+<td>同版 <code>mirrorea_canon/adr/ADR-0043.md</code>. <a href="https://github.com/yukatayu/mir_poc_01/blob/19a6decfbea0815b7b4265e8fadfb399270aaed2/mirrorea_canon/adr/ADR-0043.md">https://github.com/yukatayu/mir_poc_01/blob/19a6decfbea0815b7b4265e8fadfb399270aaed2/mirrorea_canon/adr/ADR-0043.md</a></td>
+<td>本文全体。I3-3の有限受理とpause、非宣言。</td>
+</tr>
+<tr>
+<td>S3</td>
+<td>Yongwang Zhao, David Sanan. <em>Rely-guarantee Reasoning about Concurrent Reactive Systems: The PiCore Framework, Languages Integration and Applications</em>, arXiv:2309.09148v1, 2023. <a href="https://arxiv.org/abs/2309.09148">https://arxiv.org/abs/2309.09148</a></td>
+<td>abstractと書誌を確認。異なる反応的言語のrely/guarantee adapterを比較する位置づけ。詳細定理をF0.3へ移植したものではない。</td>
+</tr>
+<tr>
+<td>S4</td>
+<td>Sebastian Eggert, Ron van der Meyden. <em>Dynamic Intransitive Noninterference Revisited</em>, arXiv:1601.05187v1, 2016. <a href="https://arxiv.org/html/1601.05187v1">https://arxiv.org/html/1601.05187v1</a></td>
+<td>abstract、導入、§2のモデル・観測・policy、動的意味の説明。permissionとprohibition、観測モデルを分ける必要性。全文の全証明を精査したという主張ではない。</td>
+</tr>
+<tr>
+<td>S5</td>
+<td>Huan Sun et al. <em>Generalized Security-Preserving Refinement for Concurrent Systems</em>, arXiv:2511.06862v1, 2025. <a href="https://arxiv.org/abs/2511.06862">https://arxiv.org/abs/2511.06862</a></td>
+<td>abstract。並行システムの情報流を保つrefinementを、単一traceの対応と混同しないための比較。</td>
+</tr>
+<tr>
+<td>S6</td>
+<td>Cedar Policy Language Reference Guide. <em>Policy validation</em>. <a href="https://docs.cedarpolicy.com/policies/validation.html">https://docs.cedarpolicy.com/policies/validation.html</a></td>
+<td>validationとauthorization evaluationの区別、schema変更と再検査。F0.3がCedar実装という意味ではない。</td>
+</tr>
+<tr>
+<td>S7</td>
+<td>Jim Gray, Leslie Lamport. <em>Consensus on Transaction Commit</em>, arXiv:cs/0408036. <a href="https://arxiv.org/abs/cs/0408036">https://arxiv.org/abs/cs/0408036</a></td>
+<td>abstract、書誌。transaction commitの安全性・可用性の条件を明示する背景。</td>
+</tr>
+<tr>
+<td>S8</td>
+<td>Li-yao Xia et al. <em>Interaction Trees: Representing Recursive and Impure Programs in Coq</em>, arXiv:1906.00046v2 / POPL 2020. <a href="https://arxiv.org/abs/1906.00046">https://arxiv.org/abs/1906.00046</a></td>
+<td>abstract。再帰とeffect handlerを表す候補carrier。Coq libraryをF0.3へ導入してはいない。</td>
+</tr>
+<tr>
+<td>S9</td>
+<td>Daniel Gratzer. <em>Normalization for multimodal type theory</em>, arXiv:2301.11842v4, 2026-03-14 / LMCS 22(1), 2026. <a href="https://arxiv.org/abs/2301.11842">https://arxiv.org/abs/2301.11842</a></td>
+<td>abstractと版履歴。mode theoryに対する正規化・型検査の条件を、Mirのruntime保証から分ける。</td>
+</tr>
+<tr>
+<td>S10</td>
+<td>添付 <code>mirrorea_system_map_v1/MASTER.md</code>, <code>requirements.json</code></td>
+<td>全体要件、30判断、保証とシナリオ、αの能力。提案であり自動承認ではない。</td>
+</tr>
+<tr>
+<td>S11</td>
+<td>添付 F0.1/F0.2研究成果、各FOUNDATION/PROOFS/ledgerおよびコード</td>
+<td>既存研究候補。コード再利用はbase/の二ファイル。新旧の命題を加算して全体証明としない。</td>
+</tr>
+</tbody>
+</table></div>
+<p>照合日は2026-09-09。一次資料のabstractだけを読んだものと、本文の該当箇所を読んだものを区別した。研究課題を先行論文が解決済みであるとの推定や、未知の全先行研究を調べ尽くしたとの主張はしていない。</p>
+</section></main><script>
+const q=document.getElementById('q'),g=document.getElementById('group'),w=document.getElementById('work');
+function filter(){let n=0;const term=q.value.trim().toLocaleLowerCase();document.querySelectorAll('.requirement').forEach(e=>{const ok=(!g.value||e.dataset.group===g.value)&&(!w.value||e.dataset.work.split(' ').includes(w.value))&&(!term||e.dataset.search.toLocaleLowerCase().includes(term));e.hidden=!ok;if(ok)n++;});document.getElementById('count').textContent=`表示 ${n} / 119要件（達成数ではありません）`;}
+[q,g,w].forEach(e=>e.addEventListener('input',filter));filter();
+window.addEventListener('hashchange',()=>{let e=document.getElementById(decodeURIComponent(location.hash.slice(1)));if(e&&e.tagName==='DETAILS'){e.hidden=false;e.open=true;}});
+</script></body></html>

@@ -1,0 +1,222 @@
+[
+  {
+    "id": "01_store_frame",
+    "title": "A write preserves all different cells",
+    "file": "01_store_frame.smt2",
+    "expected": "unsat",
+    "category": "symbolic-lemma",
+    "actual": "unsat",
+    "passed": true,
+    "solver": "4.13.3.0",
+    "input_sha256": "10e550c63bba2177b1d781b0ef34fef7fa0dc1ed0aa06a53b94ff3d270051079"
+  },
+  {
+    "id": "02_store_readback",
+    "title": "A write is read back at its own location",
+    "file": "02_store_readback.smt2",
+    "expected": "unsat",
+    "category": "symbolic-lemma",
+    "actual": "unsat",
+    "passed": true,
+    "solver": "4.13.3.0",
+    "input_sha256": "046ea6ceefd6e157e40ef94243d30546f31cde6bae958182f5bb8f1f6d388e81"
+  },
+  {
+    "id": "03_independent_writes",
+    "title": "Independent constant writes commute",
+    "file": "03_independent_writes.smt2",
+    "expected": "unsat",
+    "category": "symbolic-lemma",
+    "actual": "unsat",
+    "passed": true,
+    "solver": "4.13.3.0",
+    "input_sha256": "3b5b0be172bc330e0b98437a7262709ab8ba018d973dccf8a19adf27342f18b9"
+  },
+  {
+    "id": "04_independent_rmw",
+    "title": "Disjoint self-dependent affine RMWs commute",
+    "file": "04_independent_rmw.smt2",
+    "expected": "unsat",
+    "category": "symbolic-lemma",
+    "actual": "unsat",
+    "passed": true,
+    "solver": "4.13.3.0",
+    "input_sha256": "bed95cbe6360c64876b37b51fdc0845bad8ea81b3b9b72c33ecdef8cd0852f67"
+  },
+  {
+    "id": "05_rmw_serial",
+    "title": "Sequential owner RMW is not two stale blind writes",
+    "file": "05_rmw_serial.smt2",
+    "expected": "unsat",
+    "category": "symbolic-lemma",
+    "actual": "unsat",
+    "passed": true,
+    "solver": "4.13.3.0",
+    "input_sha256": "957ac5a16ba9e1c70744013b07b6ada61c578277fe9f49b0dfc32dfe09bc76d4"
+  },
+  {
+    "id": "06_stale_blind_write_mutant",
+    "title": "Counterexample: requester-side stale value loses a write",
+    "file": "06_stale_blind_write_mutant.smt2",
+    "expected": "sat",
+    "category": "counterexample",
+    "actual": "sat",
+    "passed": true,
+    "solver": "4.13.3.0",
+    "input_sha256": "4b23f3d3b04b38ded68d09d719886c2ea6404315dbfe935a5032637515fc2414"
+  },
+  {
+    "id": "07_projection_other_owner",
+    "title": "One owner update does not alter another owner projection",
+    "file": "07_projection_other_owner.smt2",
+    "expected": "unsat",
+    "category": "symbolic-lemma",
+    "actual": "unsat",
+    "passed": true,
+    "solver": "4.13.3.0",
+    "input_sha256": "1bb0f5da4a94256470d146faa19f70dbdd422f89f857616fcccbe36394f90410"
+  },
+  {
+    "id": "08_projection_same_owner",
+    "title": "Projection and one-owner state update commute",
+    "file": "08_projection_same_owner.smt2",
+    "expected": "unsat",
+    "category": "symbolic-lemma",
+    "actual": "unsat",
+    "passed": true,
+    "solver": "4.13.3.0",
+    "input_sha256": "639e68404650168eb40382415892caccc38c26d944cbfd80718edd646f4e4c06"
+  },
+  {
+    "id": "09_interval_add",
+    "title": "Integer refinement: interval addition is sound",
+    "file": "09_interval_add.smt2",
+    "expected": "unsat",
+    "category": "symbolic-lemma",
+    "actual": "unsat",
+    "passed": true,
+    "solver": "4.13.3.0",
+    "input_sha256": "30643db23553892ce2b18b4290a1e849884a256bb5f7ce62c783eaa35e7c4a67"
+  },
+  {
+    "id": "10_interval_sub",
+    "title": "Integer refinement: interval subtraction is sound",
+    "file": "10_interval_sub.smt2",
+    "expected": "unsat",
+    "category": "symbolic-lemma",
+    "actual": "unsat",
+    "passed": true,
+    "solver": "4.13.3.0",
+    "input_sha256": "faf4b5ad8ab2c559678150fdb6f8b5f053fa61d066d88ace55d43995823609a7"
+  },
+  {
+    "id": "11_absolute_value_contract",
+    "title": "Concrete refined module: absolute value returns a nonnegative integer",
+    "file": "11_absolute_value_contract.smt2",
+    "expected": "unsat",
+    "category": "symbolic-lemma",
+    "actual": "unsat",
+    "passed": true,
+    "solver": "4.13.3.0",
+    "input_sha256": "2cc2663d419b6be94f4d7b180a1c72ea9bad3ab70a70eff67eb7b2f73899da99"
+  },
+  {
+    "id": "12_cross_contract_composition",
+    "title": "Second module safely consumes the exported nonnegative fact",
+    "file": "12_cross_contract_composition.smt2",
+    "expected": "unsat",
+    "category": "symbolic-lemma",
+    "actual": "unsat",
+    "passed": true,
+    "solver": "4.13.3.0",
+    "input_sha256": "b773712cb649c0f94ab0b3503136c9da58b5ecb8313306ed8a570b7f9e71f7ed"
+  },
+  {
+    "id": "13_guarded_decrement",
+    "title": "Actual arithmetic invariant for a guarded decrement",
+    "file": "13_guarded_decrement.smt2",
+    "expected": "unsat",
+    "category": "symbolic-lemma",
+    "actual": "unsat",
+    "passed": true,
+    "solver": "4.13.3.0",
+    "input_sha256": "ec531af8a063d425600baa10e7b5231ff92b2c118626095aa7f3a14086686535"
+  },
+  {
+    "id": "14_guarded_decrement_mutant",
+    "title": "Counterexample: removing the semantic precondition",
+    "file": "14_guarded_decrement_mutant.smt2",
+    "expected": "sat",
+    "category": "counterexample",
+    "actual": "sat",
+    "passed": true,
+    "solver": "4.13.3.0",
+    "input_sha256": "6c57b0683ab8ff79eb3d7d644bf2423dfbb8224aa7ab599535012632f43d5b8b"
+  },
+  {
+    "id": "15_rank_path_step",
+    "title": "Induction step: strict rank along a nonempty dependency path",
+    "file": "15_rank_path_step.smt2",
+    "expected": "unsat",
+    "category": "induction-step",
+    "actual": "unsat",
+    "passed": true,
+    "solver": "4.13.3.0",
+    "input_sha256": "16e5998bd0f089177dd7075edae5a9e482ef0c13691072fa352774c70278b3ed"
+  },
+  {
+    "id": "16_rank_no_cycle",
+    "title": "A strict rank cannot return to its start",
+    "file": "16_rank_no_cycle.smt2",
+    "expected": "unsat",
+    "category": "symbolic-lemma",
+    "actual": "unsat",
+    "passed": true,
+    "solver": "4.13.3.0",
+    "input_sha256": "6dcbb7e6ac5265b45206776a407b725d3180b6d49ab8c8a614294070a132b722"
+  },
+  {
+    "id": "17_closed_removal",
+    "title": "Removing a forward-closed dependent set preserves live-parent closure",
+    "file": "17_closed_removal.smt2",
+    "expected": "unsat",
+    "category": "symbolic-lemma",
+    "actual": "unsat",
+    "passed": true,
+    "solver": "4.13.3.0",
+    "input_sha256": "82186eb7a244390f86491cbb52b43256366cff89018281bf65d0c7a4e2db2300"
+  },
+  {
+    "id": "18_max_history_mutant",
+    "title": "Counterexample to the old position <= history maximum wording",
+    "file": "18_max_history_mutant.smt2",
+    "expected": "sat",
+    "category": "counterexample",
+    "actual": "sat",
+    "passed": true,
+    "solver": "4.13.3.0",
+    "input_sha256": "59d6ceec76b36c70dedba2d27beedd23183eaf1fc892d2b57c75a56775488a20"
+  },
+  {
+    "id": "19_fallback_search_step",
+    "title": "Induction step for the first valid suffix search",
+    "file": "19_fallback_search_step.smt2",
+    "expected": "unsat",
+    "category": "induction-step",
+    "actual": "unsat",
+    "passed": true,
+    "solver": "4.13.3.0",
+    "input_sha256": "e0eea7be72f67e848a3e2cc38fec11380c11b8329b805a86c9120e9e36d9b6b7"
+  },
+  {
+    "id": "20_fallback_totality_step",
+    "title": "Induction step: a valid suffix endpoint prevents exhaustion",
+    "file": "20_fallback_totality_step.smt2",
+    "expected": "unsat",
+    "category": "induction-step",
+    "actual": "unsat",
+    "passed": true,
+    "solver": "4.13.3.0",
+    "input_sha256": "ab73ec5302ca85dca90b76e075593506cfe664e74c91291ae1e1682b321a4d55"
+  }
+]

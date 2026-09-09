@@ -1,0 +1,159 @@
+{
+  "repo_commit": "aafde92229bb0ff18116f38d4750a0a8f61cb069",
+  "files": [
+    {
+      "path": "mir_foundation_research/FOUNDATION.md",
+      "bytes": 80942,
+      "sha256": "0d357fc3b4396a5ef3eb7cf2603f870aaeb425af5c6bdd917957fbc642889876",
+      "review_scope": "提供物の同一性記録。本文/台帳/経路は要件照合。proofとcodeの全件再監査・test再実行を意味しない。"
+    },
+    {
+      "path": "mir_foundation_research/theory/THEOREM_LEDGER.md",
+      "bytes": 7421,
+      "sha256": "d404ff0e83a17970bff3a65c9229c80157c2b425cc1a0737debc1930bdc8b4e0",
+      "review_scope": "提供物の同一性記録。本文/台帳/経路は要件照合。proofとcodeの全件再監査・test再実行を意味しない。"
+    },
+    {
+      "path": "mir_foundation_F0_2/FOUNDATION.md",
+      "bytes": 45516,
+      "sha256": "cdae246b43ef9a33784de284de8c0a361e4e727c161f37341cd8c99e5c825621",
+      "review_scope": "提供物の同一性記録。本文/台帳/経路は要件照合。proofとcodeの全件再監査・test再実行を意味しない。"
+    },
+    {
+      "path": "mir_foundation_F0_2/IMPLEMENTATION_PATH.md",
+      "bytes": 9254,
+      "sha256": "9b1a9c5bfe3bfa3adff8497e0b73b2769c8d6f03dc2e22f236b1e95fedf10efc",
+      "review_scope": "提供物の同一性記録。本文/台帳/経路は要件照合。proofとcodeの全件再監査・test再実行を意味しない。"
+    },
+    {
+      "path": "mir_foundation_F0_2/theory/THEOREM_LEDGER.md",
+      "bytes": 7061,
+      "sha256": "2a3bb6bd433fa4e147d70fd73af599c252b403a665586ed642fb42fb8cdd7df3",
+      "review_scope": "提供物の同一性記録。本文/台帳/経路は要件照合。proofとcodeの全件再監査・test再実行を意味しない。"
+    },
+    {
+      "path": "mir_foundation_F0_2/VALIDATION.md",
+      "bytes": 5026,
+      "sha256": "df48b41932de8a5052b324a28c7fc9a98d21f9875b2acf6a5e54caf405dbec3f",
+      "review_scope": "提供物の同一性記録。本文/台帳/経路は要件照合。proofとcodeの全件再監査・test再実行を意味しない。"
+    },
+    {
+      "path": "mir_foundation_F0_2/AUDIT.md",
+      "bytes": 7257,
+      "sha256": "8e05b71b8cbedbac0f12125261d6d7844e5d41d73d2ab36666a6b9be7d574da7",
+      "review_scope": "提供物の同一性記録。本文/台帳/経路は要件照合。proofとcodeの全件再監査・test再実行を意味しない。"
+    },
+    {
+      "path": "mir_foundation_F0_2/theory/PROOFS.md",
+      "bytes": 47093,
+      "sha256": "f95eb4bfd543515d945db6baf0bc7d140970ce2d5c02c1d9ca0d4d814b36d1e6",
+      "review_scope": "提供物の同一性記録。本文/台帳/経路は要件照合。proofとcodeの全件再監査・test再実行を意味しない。"
+    },
+    {
+      "path": "mir_foundation_F0_2/evidence/INTEGRATED_DEMO.json",
+      "bytes": 4637,
+      "sha256": "0ae3ade1197d60b5f1be705033c5b3b140c3437aeb84f8cfe81040ff555f224a",
+      "review_scope": "提供物の同一性記録。本文/台帳/経路は要件照合。proofとcodeの全件再監査・test再実行を意味しない。"
+    },
+    {
+      "path": "mir_foundation_research_F0_1.zip",
+      "bytes": 163397,
+      "sha256": "94c707b7ae7952f635520b7ae298a3cb6c5587bb9a88250fae6cedd394ac4354",
+      "review_scope": "提供物の同一性記録。本文/台帳/経路は要件照合。proofとcodeの全件再監査・test再実行を意味しない。"
+    },
+    {
+      "path": "mir_foundation_research_F0_2.zip",
+      "bytes": 381427,
+      "sha256": "272b9e44552baf14c4858a60ce7e551662769d11a84f0b878cefaa7963732b29",
+      "review_scope": "提供物の同一性記録。本文/台帳/経路は要件照合。proofとcodeの全件再監査・test再実行を意味しない。"
+    }
+  ],
+  "sources": {
+    "R1": {
+      "title": "Mirrorea NORTH-STAR",
+      "url": "https://github.com/yukatayu/mir_poc_01/blob/aafde92229bb0ff18116f38d4750a0a8f61cb069/mirrorea_canon/NORTH-STAR.md",
+      "scope": "目的・非軸。今回全文確認。"
+    },
+    "R2": {
+      "title": "Mirrorea Design Constitution",
+      "url": "https://github.com/yukatayu/mir_poc_01/blob/aafde92229bb0ff18116f38d4750a0a8f61cb069/mirrorea_canon/DESIGN-CONSTITUTION.md",
+      "scope": "責任分離・型・観測・更新・有限性。今回全文確認。"
+    },
+    "R3": {
+      "title": "Canon plan/01-phases",
+      "url": "https://github.com/yukatayu/mir_poc_01/blob/aafde92229bb0ff18116f38d4750a0a8f61cb069/mirrorea_canon/plan/01-phases.md",
+      "scope": "今回1–100行を確認。I3-3有限受理・停止、T1、I4–I6の概略。"
+    },
+    "R4": {
+      "title": "ADR-0043 — I3-3 finite failure/ordering acceptance",
+      "url": "https://github.com/yukatayu/mir_poc_01/blob/aafde92229bb0ff18116f38d4750a0a8f61cb069/mirrorea_canon/adr/ADR-0043.md",
+      "scope": "今回全文確認。受理対象と非宣言。テスト結果は記録を参照し、本整理では再実行していない。"
+    },
+    "R5": {
+      "title": "architecture/06-project-product-layers",
+      "url": "https://github.com/yukatayu/mir_poc_01/blob/aafde92229bb0ff18116f38d4750a0a8f61cb069/mirrorea_canon/architecture/06-project-product-layers.md",
+      "scope": "今回全文確認。S/PL/T-Iの区別、PL-4の未設計、satellite境界。"
+    },
+    "R6": {
+      "title": "theory/11-metatheory-ledger",
+      "url": "https://github.com/yukatayu/mir_poc_01/blob/aafde92229bb0ff18116f38d4750a0a8f61cb069/mirrorea_canon/theory/11-metatheory-ledger.md",
+      "scope": "今回冒頭の一般義務と有限証拠を確認。全文監査ではない。"
+    },
+    "R7": {
+      "title": "theory/02-types-effects-failures",
+      "url": "https://github.com/yukatayu/mir_poc_01/blob/aafde92229bb0ff18116f38d4750a0a8f61cb069/mirrorea_canon/theory/02-types-effects-failures.md",
+      "scope": "今回全文確認。Contractとverifierの分離、有限型断片。"
+    },
+    "F1": {
+      "title": "基礎理論研究 F0.1",
+      "local": "../mir_foundation_research/FOUNDATION.md",
+      "scope": "提供された本文・命題台帳。独立した研究候補でありCanonではない。"
+    },
+    "F2": {
+      "title": "基礎理論研究 F0.2",
+      "local": "../mir_foundation_F0_2/FOUNDATION.md",
+      "scope": "本文・命題台帳・IMPLEMENTATION_PATH・VALIDATIONを今回確認。手証明と限定モデルの記録。新たな証明監査・再実行はしていない。"
+    },
+    "W1": {
+      "title": "W3C, Architecture of the World Wide Web, Volume One (2004)",
+      "url": "https://www.w3.org/TR/webarch/",
+      "scope": "識別・相互作用・表現の分離、参照と取得の区別。Mirへの採用決定ではない。"
+    },
+    "W2": {
+      "title": "Dunfield and Krishnaswami, Complete and Easy Bidirectional Typechecking for Higher-Rank Polymorphism (2013)",
+      "url": "https://arxiv.org/abs/1306.6032",
+      "scope": "宣言的体系とアルゴリズム、アノテーション、相対的な完全性の参照。"
+    },
+    "W3": {
+      "title": "Gray and Lamport, Consensus on Transaction Commit (2004)",
+      "url": "https://arxiv.org/abs/cs/0408036",
+      "scope": "commit安全性とblockingの区別。2PCの採用を要求しない。"
+    },
+    "W4": {
+      "title": "Gratzer, Normalization for multimodal type theory (LMCS 2026)",
+      "url": "https://lmcs.episciences.org/17744",
+      "scope": "基礎mode theoryに依存する型検査の性質。MTTの採用決定ではない。"
+    },
+    "W5": {
+      "title": "seL4, What the Proofs Assume",
+      "url": "https://sel4.systems/Verification/assumptions.html",
+      "scope": "形式的保証と物理的前提、情報経路の対象範囲。seL4の利用は要求しない。"
+    },
+    "W6": {
+      "title": "Xia et al., Interaction Trees (POPL 2020)",
+      "url": "https://arxiv.org/abs/1906.00046",
+      "scope": "再帰・効果・継続と変換の意味。ITreesの採用決定ではない。"
+    },
+    "W7": {
+      "title": "Becker, Fournet, Gordon, SecPAL: Design and semantics of a decentralized authorization language (2010)",
+      "url": "https://journals.sagepub.com/doi/abs/10.3233/JCS-2009-0364",
+      "scope": "認可論理・委譲・失効。型検証や認証そのものと区別する参考。"
+    },
+    "W8": {
+      "title": "Abate, Busi, Tsampas, Fully Abstract and Robust Compilation and How to Reconcile the Two, Abstractly (2020)",
+      "url": "https://arxiv.org/abs/2006.14969",
+      "scope": "contextual equivalenceとrobustなhyperproperty保存の区別。すべてをα必須定理にしない。"
+    }
+  },
+  "read_scope": "会話中の明示要求、指定された関連提供文書、今回確認した主要Canonと一次文献。全repository通読ではない。"
+}

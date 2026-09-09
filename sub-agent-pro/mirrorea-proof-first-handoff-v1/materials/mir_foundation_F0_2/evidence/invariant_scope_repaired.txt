@@ -1,0 +1,24 @@
+test_owner_certificate_cannot_claim_another_owners_state (tests.test_certificates.InvariantScopeRegression.test_owner_certificate_cannot_claim_another_owners_state) ... ERROR
+
+======================================================================
+ERROR: test_owner_certificate_cannot_claim_another_owners_state (tests.test_certificates.InvariantScopeRegression.test_owner_certificate_cannot_claim_another_owners_state)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/mnt/data/mir_foundation_F0_2/tests/test_certificates.py", line 108, in test_owner_certificate_cannot_claim_another_owners_state
+    with self.assertRaisesRegex(CertificateError,'InvariantOwnerScope'):e.protect_owner('A',inv,{op.sig.name:(ev,None)})
+                                                                        ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/data/mir_foundation_F0_2/model/engine.py", line 231, in protect_owner
+    if any(p.value(s.state)<0 for p in invariants.values()):raise CertificateError('InitialInvariantViolation')
+       ~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/data/mir_foundation_F0_2/model/engine.py", line 231, in <genexpr>
+    if any(p.value(s.state)<0 for p in invariants.values()):raise CertificateError('InitialInvariantViolation')
+           ~~~~~~~^^^^^^^^^
+  File "/mnt/data/mir_foundation_F0_2/model/certificates.py", line 50, in value
+    for v in m:c*=env[v]
+                  ~~~^^^
+KeyError: 'b'
+
+----------------------------------------------------------------------
+Ran 1 test in 0.004s
+
+FAILED (errors=1)

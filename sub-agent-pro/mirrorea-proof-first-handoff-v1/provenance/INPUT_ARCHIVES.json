@@ -1,0 +1,26 @@
+[
+  {
+    "archive": "mir_foundation_research_F0_1.zip",
+    "sha256": "94c707b7ae7952f635520b7ae298a3cb6c5587bb9a88250fae6cedd394ac4354",
+    "files": 165,
+    "uncompressed_bytes": 390494
+  },
+  {
+    "archive": "mir_foundation_research_F0_2.zip",
+    "sha256": "272b9e44552baf14c4858a60ce7e551662769d11a84f0b878cefaa7963732b29",
+    "files": 356,
+    "uncompressed_bytes": 1023283
+  },
+  {
+    "archive": "mir_foundation_research_F0_3.zip",
+    "sha256": "326df7269dca4a97ef7c662757552712305d4860d855b5c7a08343f1becaafbc",
+    "files": 80,
+    "uncompressed_bytes": 1633131
+  },
+  {
+    "archive": "mirrorea_system_map_v1.zip",
+    "sha256": "e81d281eed0cd076efa6a2863ab7ecf3781b38d30fa3dcc6196d7717735914ad",
+    "files": 13,
+    "uncompressed_bytes": 1466082
+  }
+]

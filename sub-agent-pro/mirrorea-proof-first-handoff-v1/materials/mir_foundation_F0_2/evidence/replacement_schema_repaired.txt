@@ -1,0 +1,15 @@
+test_same_signature_does_not_authorize_state_type_change (tests.test_live_patch.ReplacementSchemaRegression.test_same_signature_does_not_authorize_state_type_change) ... FAIL
+
+======================================================================
+FAIL: test_same_signature_does_not_authorize_state_type_change (tests.test_live_patch.ReplacementSchemaRegression.test_same_signature_does_not_authorize_state_type_change)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/mnt/data/mir_foundation_F0_2/tests/test_live_patch.py", line 71, in test_same_signature_does_not_authorize_state_type_change
+    with self.assertRaisesRegex(StaticError,'ReplacementSchemaMismatch'):e.replace_operation('admin',new,'M.f')
+         ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: StaticError not raised
+
+----------------------------------------------------------------------
+Ran 1 test in 0.002s
+
+FAILED (failures=1)

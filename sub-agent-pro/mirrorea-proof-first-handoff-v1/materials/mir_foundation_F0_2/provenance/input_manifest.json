@@ -1,0 +1,30 @@
+{
+  "project": "Mir Foundation F0.2 independent research",
+  "session_date": "2026-09-09",
+  "prior_research_repository_cut": "a027d61b8030a903f892de2f7483ec8b64627963",
+  "comparison_repository_cut": "f6aae7ca277690ac558a08f124e414ae2d2d35ad",
+  "repository_writes": false,
+  "complete_repository_audit": false,
+  "inputs": [
+    {
+      "path": "/mnt/data/mir_foundation_research_F0_1.zip",
+      "bytes": 163397,
+      "sha256": "94c707b7ae7952f635520b7ae298a3cb6c5587bb9a88250fae6cedd394ac4354"
+    },
+    {
+      "path": "/mnt/data/mir_foundation_research/FOUNDATION.md",
+      "bytes": 80942,
+      "sha256": "0d357fc3b4396a5ef3eb7cf2603f870aaeb425af5c6bdd917957fbc642889876"
+    },
+    {
+      "path": "/mnt/data/mir_foundation_research/VALIDATION.md",
+      "bytes": 6774,
+      "sha256": "12ea35b4294a683a4dae4389ebee5e63dd6cc71d216f0d59dce3eda206a44346"
+    },
+    {
+      "path": "/mnt/data/mir_foundation_research/theory/THEOREM_LEDGER.md",
+      "bytes": 7421,
+      "sha256": "d404ff0e83a17970bff3a65c9229c80157c2b425cc1a0737debc1930bdc8b4e0"
+    }
+  ]
+}

@@ -1,0 +1,7 @@
+from Positive import positive
+from Pool import allocate_size
+
+@task("Client")
+def allocate_positive(x: int) -> int:
+    n: int = positive(x)
+    return allocate_size(n)

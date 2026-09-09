@@ -1,0 +1,7 @@
+sat
+(
+  (define-fun secret1 () Bool
+    true)
+  (define-fun secret2 () Bool
+    false)
+)

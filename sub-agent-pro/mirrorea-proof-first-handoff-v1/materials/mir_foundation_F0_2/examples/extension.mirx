@@ -1,0 +1,8 @@
+from Counter import take
+bonus: Cell["C", int] = 0
+
+@task("A")
+def run_bonus(n: int) -> int:
+    observed: int = take(n)
+    bonus = observed + 100
+    return bonus

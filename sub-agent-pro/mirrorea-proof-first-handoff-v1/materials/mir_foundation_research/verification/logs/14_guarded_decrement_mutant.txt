@@ -1,0 +1,7 @@
+sat
+(
+  (define-fun k () Int
+    1)
+  (define-fun n () Int
+    0)
+)

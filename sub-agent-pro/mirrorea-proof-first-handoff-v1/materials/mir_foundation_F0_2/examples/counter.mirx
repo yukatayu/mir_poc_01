@@ -1,0 +1,38 @@
+stock: Cell["B", int] = 10
+
+@owner("B")
+def take(amount: int) -> int:
+    assert 0 <= amount
+    assert amount <= stock
+    stock = stock - amount
+    return stock
+
+@task("A")
+def session(n: int) -> int:
+    total: int = 0
+    i: int = 0
+    while i < n:
+        value: int = take(1)
+        total = total + value
+        i = i + 1
+    return total
+
+@task("A")
+def direct() -> int:
+    stock = stock + 2
+    return stock
+
+@task("A")
+def triangle(n: int) -> int:
+    if n <= 0:
+        return 0
+    else:
+        return n + triangle(n - 1)
+
+@task("A")
+def parallel(n: int) -> int:
+    left = spawn(triangle, n)
+    right = spawn(triangle, n + 1)
+    x: int = join(left)
+    y: int = join(right)
+    return x + y

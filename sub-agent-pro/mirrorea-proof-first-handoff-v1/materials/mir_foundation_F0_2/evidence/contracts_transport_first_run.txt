@@ -1,0 +1,46 @@
+test_bad_mutator_cannot_get_proof (tests.test_certificates.Certificates.test_bad_mutator_cannot_get_proof) ... ok
+test_certificate_rules_by_exhaustive_evaluation (tests.test_certificates.Certificates.test_certificate_rules_by_exhaustive_evaluation) ... ok
+test_code_hash_splicing_rejected (tests.test_certificates.Certificates.test_code_hash_splicing_rejected) ... ok
+test_equality_hypothesis_not_unconditional (tests.test_certificates.Certificates.test_equality_hypothesis_not_unconditional) ... ok
+test_every_mutator_must_be_proved (tests.test_certificates.Certificates.test_every_mutator_must_be_proved) ... ok
+test_evidence_does_not_grant (tests.test_certificates.Certificates.test_evidence_does_not_grant) ... ok
+test_invariant_requires_initial_model (tests.test_certificates.Certificates.test_invariant_requires_initial_model) ... ok
+test_invariant_substitution_rejected (tests.test_certificates.Certificates.test_invariant_substitution_rejected) ... ok
+test_local_post_does_not_prove_capacity (tests.test_certificates.Certificates.test_local_post_does_not_prove_capacity) ... ok
+test_missing_branch_rejected (tests.test_certificates.Certificates.test_missing_branch_rejected) ... ok
+test_negative_constant_rejected (tests.test_certificates.Certificates.test_negative_constant_rejected) ... ok
+test_no_arbitrary_axiom (tests.test_certificates.Certificates.test_no_arbitrary_axiom) ... ok
+test_noncanonical_polynomial_rejected (tests.test_certificates.Certificates.test_noncanonical_polynomial_rejected) ... ok
+test_normalizer_merges_permuted_monomials (tests.test_certificates.Certificates.test_normalizer_merges_permuted_monomials) ... ok
+test_pool_invariant_and_result (tests.test_certificates.Certificates.test_pool_invariant_and_result) ... ok
+test_positive_square (tests.test_certificates.Certificates.test_positive_square) ... ok
+test_proof_and_network_composition (tests.test_certificates.Certificates.test_proof_and_network_composition) ... ok
+test_reassigned_value_not_covered_by_old_fact (tests.test_certificates.Certificates.test_reassigned_value_not_covered_by_old_fact) ... ok
+test_ring_normalization (tests.test_certificates.Certificates.test_ring_normalization) ... ok
+test_source_bound_logical_call_bridge (tests.test_certificates.Certificates.test_source_bound_logical_call_bridge) ... ok
+test_source_vcs_all_branches (tests.test_certificates.Certificates.test_source_vcs_all_branches) ... ok
+test_total_node_budget (tests.test_certificates.Certificates.test_total_node_budget) ... ok
+test_wrong_conclusion (tests.test_certificates.Certificates.test_wrong_conclusion) ... ok
+test_addition_does_not_grant (tests.test_transport.Transport.test_addition_does_not_grant) ... ok
+test_addition_then_authorized_use_and_recovery (tests.test_transport.Transport.test_addition_then_authorized_use_and_recovery) ... ok
+test_changed_request_rejected_before_write (tests.test_transport.Transport.test_changed_request_rejected_before_write) ... ok
+test_client_resume_uses_same_continuation (tests.test_transport.Transport.test_client_resume_uses_same_continuation) ... ok
+test_crash_after_commit (tests.test_transport.Transport.test_crash_after_commit) ... ok
+test_crash_before_commit (tests.test_transport.Transport.test_crash_before_commit) ... ok
+test_duplicate_no_second_mutation (tests.test_transport.Transport.test_duplicate_no_second_mutation) ... ok
+test_explicit_replay_after_loss (tests.test_transport.Transport.test_explicit_replay_after_loss) ... ok
+test_fabricated_response_rejected (tests.test_transport.Transport.test_fabricated_response_rejected) ... ok
+test_loss_is_unknown_not_failure (tests.test_transport.Transport.test_loss_is_unknown_not_failure) ... ok
+test_outside_activity_runs_while_owner_frozen (tests.test_transport.Transport.test_outside_activity_runs_while_owner_frozen) ... ok
+test_requester_cannot_supply_code (tests.test_transport.Transport.test_requester_cannot_supply_code) ... ok
+test_revoke_after_service_does_not_undo (tests.test_transport.Transport.test_revoke_after_service_does_not_undo) ... ok
+test_revoke_before_service (tests.test_transport.Transport.test_revoke_before_service) ... ok
+test_settled_replacement_continues (tests.test_transport.Transport.test_settled_replacement_continues) ... ok
+test_two_clients_scheduling_and_duplicates (tests.test_transport.Transport.test_two_clients_scheduling_and_duplicates) ... ok
+test_unauthorized_patch_no_mutation (tests.test_transport.Transport.test_unauthorized_patch_no_mutation) ... ok
+test_unsettled_request_blocks_replacement (tests.test_transport.Transport.test_unsettled_request_blocks_replacement) ... ok
+
+----------------------------------------------------------------------
+Ran 41 tests in 0.115s
+
+OK

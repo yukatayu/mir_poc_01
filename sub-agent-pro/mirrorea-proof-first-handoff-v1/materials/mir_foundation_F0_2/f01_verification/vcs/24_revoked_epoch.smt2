@@ -1,0 +1,8 @@
+(set-option :timeout 10000)
+(set-option :produce-proofs true)
+(declare-const g Int)
+(declare-const current Int)
+(assert (< g current))
+(assert (not (not (= g current))))
+(check-sat-using (then (using-params simplify :som true) smt))
+(get-proof)

@@ -1,0 +1,9 @@
+unsat
+((proof
+(let ((?x29 (seq.++ a (seq.++ b c))))
+(let (($x30 (= (seq.++ (seq.++ a b) c) ?x29)))
+(let (($x31 (not $x30)))
+(let ((@x40 (trans (monotonicity (rewrite $x30) (= $x30 (= ?x29 ?x29))) (rewrite (= (= ?x29 ?x29) true)) (= $x30 true))))
+(let ((@x47 (trans (monotonicity @x40 (= $x31 (not true))) (rewrite (= (not true) false)) (= $x31 false))))
+(mp (asserted $x31) @x47 false))))))))
+

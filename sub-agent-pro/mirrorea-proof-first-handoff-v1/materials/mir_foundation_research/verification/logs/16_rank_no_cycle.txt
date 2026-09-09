@@ -1,0 +1,10 @@
+unsat
+((proof
+(let ((@x39 (rewrite (= (not true) false))))
+(let ((@x37 (monotonicity (rewrite (= (<= a a) true)) (= (not (<= a a)) (not true)))))
+(let ((@x41 (trans @x37 @x39 (= (not (<= a a)) false))))
+(let ((@x43 (trans (rewrite (= (< a a) (not (<= a a)))) @x41 (= (< a a) false))))
+(let ((@x50 (trans (monotonicity @x43 (= (not (< a a)) (not false))) (rewrite (= (not false) true)) (= (not (< a a)) true))))
+(let ((@x54 (trans (monotonicity @x50 (= (not (not (< a a))) (not true))) @x39 (= (not (not (< a a))) false))))
+(mp (asserted (not (not (< a a)))) @x54 false)))))))))
+

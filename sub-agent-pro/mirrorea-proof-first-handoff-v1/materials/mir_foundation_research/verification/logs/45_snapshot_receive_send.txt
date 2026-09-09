@@ -1,0 +1,11 @@
+unsat
+((proof
+(let (($x32 (not sendIn)))
+(let (($x33 (and recvIn $x32)))
+(let ((@x39 (mp (asserted (not (not $x33))) (rewrite (= (not (not $x33)) $x33)) $x33)))
+(let ((@x40 (and-elim @x39 recvIn)))
+(let ((@x41 (and-elim @x39 $x32)))
+(let (($x28 (or sendIn (not recvIn))))
+(let ((@x31 (mp (asserted (=> recvIn sendIn)) (rewrite (= (=> recvIn sendIn) $x28)) $x28)))
+(unit-resolution @x31 @x41 @x40 false))))))))))
+

@@ -1,0 +1,15 @@
+unsat
+((proof
+(let (($x91 (= (+ (* 2 total) n (* n n)) goal)))
+(let (($x98 (not $x91)))
+(let (($x81 (not (= (+ (* 2 (+ total n)) (* (- n 1) n)) goal))))
+(let ((@x82 (asserted $x81)))
+(let ((@x94 (rewrite (= (= (+ (* 2 total) (* n (+ n 1))) goal) $x91))))
+(let ((?x30 (+ n 1)))
+(let ((?x31 (* n ?x30)))
+(let ((?x29 (* 2 total)))
+(let ((?x32 (+ ?x29 ?x31)))
+(let (($x34 (= ?x32 goal)))
+(let ((@x35 (asserted $x34)))
+(unit-resolution (mp @x35 @x94 $x91) (mp @x82 (rewrite (= $x81 $x98)) $x98) false))))))))))))))
+

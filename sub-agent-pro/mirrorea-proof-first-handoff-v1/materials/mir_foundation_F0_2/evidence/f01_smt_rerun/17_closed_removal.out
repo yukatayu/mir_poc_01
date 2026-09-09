@@ -1,0 +1,22 @@
+unsat
+((proof
+(let (($x41 (not dc)))
+(let (($x42 (and lc $x41)))
+(let (($x51 (not (or (not $x42) (and lp (not dp))))))
+(let ((@x49 (mp (asserted (not (=> $x42 (and lp (not dp))))) (rewrite (= (not (=> $x42 (and lp (not dp)))) $x51)) $x51)))
+(let ((@x50 (not-or-elim @x49 $x42)))
+(let ((@x53 (and-elim @x50 lc)))
+(let (($x28 (or lp (not lc))))
+(let ((@x31 (mp (asserted (=> lc lp)) (rewrite (= (=> lc lp) $x28)) $x28)))
+(let (($x36 (not dp)))
+(let ((@x55 (and-elim @x50 $x41)))
+(let (($x37 (or dc $x36)))
+(let ((@x40 (mp (asserted (=> dp dc)) (rewrite (= (=> dp dc) $x37)) $x37)))
+(let (($x59 (or dp (not lp))))
+(let ((@x65 (monotonicity (rewrite (= (and lp $x36) (not $x59))) (= (not (and lp $x36)) (not (not $x59))))))
+(let ((@x69 (trans @x65 (rewrite (= (not (not $x59)) $x59)) (= (not (and lp $x36)) $x59))))
+(let (($x43 (and lp $x36)))
+(let (($x56 (not $x43)))
+(let ((@x57 (not-or-elim @x49 $x56)))
+(unit-resolution (mp @x57 @x69 $x59) (unit-resolution @x40 @x55 $x36) (unit-resolution @x31 @x53 lp) false)))))))))))))))))))))
+

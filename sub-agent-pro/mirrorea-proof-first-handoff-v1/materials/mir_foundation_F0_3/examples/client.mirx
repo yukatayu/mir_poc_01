@@ -1,0 +1,5 @@
+from Service import use
+
+@task("A")
+def run(n: int) -> int:
+    return use(n)

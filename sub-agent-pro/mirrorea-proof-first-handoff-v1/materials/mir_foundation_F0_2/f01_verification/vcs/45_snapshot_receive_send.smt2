@@ -1,0 +1,8 @@
+(set-option :timeout 10000)
+(set-option :produce-proofs true)
+(declare-const sendIn Bool)
+(declare-const recvIn Bool)
+(assert (=> recvIn sendIn))
+(assert (not (not (and recvIn (not sendIn)))))
+(check-sat-using (then (using-params simplify :som true) smt))
+(get-proof)

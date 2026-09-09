@@ -1,0 +1,11 @@
+count: Cell["B", int] = 0
+
+@owner("B")
+def increment(n: int) -> int:
+    assert 0 <= n
+    count = count + n
+    return count
+
+@task("A")
+def run(n: int) -> int:
+    return increment(n)

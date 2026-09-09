@@ -1,0 +1,9 @@
+sat
+(
+  (define-fun hp () Int
+    100)
+  (define-fun b () Int
+    10)
+  (define-fun a () Int
+    10)
+)

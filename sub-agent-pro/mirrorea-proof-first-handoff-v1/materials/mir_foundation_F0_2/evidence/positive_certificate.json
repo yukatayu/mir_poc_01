@@ -1,0 +1,1 @@
+{"contract":"01dc10320407d98f9583a4173b33ede7110db1459a88bd3a5e44eee189eca4a6","invariants":"4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945","operation":"0d10a7247c14c93dd192cba8cf4a20c65e98bcf48778701e3c199c6077a2625f","proofs":[[["sum",["premise",0],["nonnegative_constant","1"]]],[["premise",0]]]}

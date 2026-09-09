@@ -1,0 +1,6 @@
+57_checkpoint_raise: unsat (PASS)
+58_checkpoint_overflow_contradiction: unsat (PASS)
+59_checkpoint_Z_cycle: unsat (PASS)
+60_region_split_disjoint: unsat (PASS)
+61_region_split_positive_cover: unsat (PASS)
+5/5 expected results

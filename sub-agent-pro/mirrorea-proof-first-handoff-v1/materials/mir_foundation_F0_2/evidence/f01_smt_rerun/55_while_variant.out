@@ -1,0 +1,11 @@
+unsat
+((proof
+(let (($x59 (>= n 1)))
+(let (($x91 (not $x59)))
+(let (($x37 (not (and (>= (- n 1) 0) (< (- n 1) n)))))
+(let ((@x56 (mp (asserted $x37) (rewrite (= $x37 $x91)) $x91)))
+(let (($x27 (<= n 0)))
+(let (($x28 (not $x27)))
+(let ((@x31 (mp (asserted (> n 0)) (rewrite (= (> n 0) $x28)) $x28)))
+(unit-resolution ((_ th-lemma arith farkas 1 1) (or $x27 $x59)) @x31 @x56 false))))))))))
+

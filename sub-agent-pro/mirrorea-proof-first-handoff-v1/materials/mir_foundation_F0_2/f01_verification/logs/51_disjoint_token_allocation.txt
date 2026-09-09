@@ -1,0 +1,8 @@
+unsat
+((proof
+(let (($x27 (= old fresh)))
+(let ((@x36 (mp (asserted (not (not $x27))) (rewrite (= (not (not $x27)) $x27)) $x27)))
+(let (($x28 (not $x27)))
+(let ((@x31 (mp (asserted (and (distinct old fresh) true)) (rewrite (= (and (distinct old fresh) true) $x28)) $x28)))
+(unit-resolution @x31 @x36 false)))))))
+

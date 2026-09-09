@@ -1,0 +1,7 @@
+sat
+(
+  (define-fun h () Bool
+    false)
+  (define-fun out () Int
+    0)
+)

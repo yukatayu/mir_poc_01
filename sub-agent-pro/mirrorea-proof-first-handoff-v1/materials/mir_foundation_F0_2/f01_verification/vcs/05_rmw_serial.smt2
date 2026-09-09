@@ -1,0 +1,8 @@
+(set-option :timeout 10000)
+(set-option :produce-proofs true)
+(declare-const hp Int)
+(declare-const a Int)
+(declare-const b Int)
+(assert (not (= (- (- hp a) b) (- hp (+ a b)))))
+(check-sat-using (then (using-params simplify :som true) smt))
+(get-proof)

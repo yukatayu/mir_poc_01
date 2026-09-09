@@ -1,0 +1,567 @@
+{
+  "profile": "integrated semantic-control reference; no actual network/host isolation claim",
+  "repository_ref": "19a6decfbea0815b7b4265e8fadfb399270aaed2",
+  "source_generated_edges": [
+    {
+      "site": [
+        "Client.run",
+        1
+      ],
+      "source_line": 5,
+      "operation": "Service.use",
+      "from": "A",
+      "to": "C",
+      "contract": "17ba03ea3917dbf2a5291b341d4564981dc4c6716b9aa7196cac9542493ede4e",
+      "directions": [
+        "request",
+        "outcome"
+      ]
+    },
+    {
+      "site": [
+        "Base.run",
+        1
+      ],
+      "source_line": 11,
+      "operation": "Base.increment",
+      "from": "A",
+      "to": "B",
+      "contract": "8825d8ee693ee7a653f61dc906a99003c0af73c55c570eb33208c0458fa487e5",
+      "directions": [
+        "request",
+        "outcome"
+      ]
+    }
+  ],
+  "first_result": 7,
+  "gap": "PresentationGap",
+  "initial_relation": 9,
+  "old_snapshot_without_suffix": "MissingCommittedSuffix",
+  "restored_components": [
+    "instance",
+    "nodes",
+    "live",
+    "rank",
+    "names",
+    "memberships",
+    "cells",
+    "programs",
+    "modules",
+    "locus_bindings",
+    "operations",
+    "accesses",
+    "bindings",
+    "relations",
+    "preparations",
+    "requests",
+    "activities",
+    "counters",
+    "auth",
+    "events",
+    "observer_grants"
+  ],
+  "pending_after_restore": "Pending",
+  "revoked_request": "ReleaseDenied",
+  "no_second_mutation": true,
+  "revoked_patch_commit": "PolicyDenied",
+  "fallback_cursor": 1,
+  "fallback_projection": 13,
+  "unrelated_owner_result": 7,
+  "before_explicit_reacquire": 1,
+  "after_explicit_reacquire": {
+    "cursor": 0,
+    "lineage": 1
+  },
+  "passive_erasure": true,
+  "filter_before_retention": true,
+  "live_count": 23,
+  "events": [
+    {
+      "label": 0,
+      "kind": "Declare",
+      "payload": [
+        "0:A@1",
+        "locus"
+      ]
+    },
+    {
+      "label": 0,
+      "kind": "BecameLive",
+      "payload": [
+        "0:A@1"
+      ]
+    },
+    {
+      "label": 0,
+      "kind": "Declare",
+      "payload": [
+        "0:B@1",
+        "locus"
+      ]
+    },
+    {
+      "label": 0,
+      "kind": "BecameLive",
+      "payload": [
+        "0:B@1"
+      ]
+    },
+    {
+      "label": 0,
+      "kind": "Declare",
+      "payload": [
+        "0:C@1",
+        "locus"
+      ]
+    },
+    {
+      "label": 0,
+      "kind": "BecameLive",
+      "payload": [
+        "0:C@1"
+      ]
+    },
+    {
+      "label": 0,
+      "kind": "Declare",
+      "payload": [
+        "0:X@1",
+        "module"
+      ]
+    },
+    {
+      "label": 0,
+      "kind": "BecameLive",
+      "payload": [
+        "0:X@1"
+      ]
+    },
+    {
+      "label": 0,
+      "kind": "Declare",
+      "payload": [
+        "0:alice@1",
+        "member"
+      ]
+    },
+    {
+      "label": 0,
+      "kind": "BecameLive",
+      "payload": [
+        "0:alice@1"
+      ]
+    },
+    {
+      "label": 0,
+      "kind": "Declare",
+      "payload": [
+        "0:viewer@1",
+        "member"
+      ]
+    },
+    {
+      "label": 0,
+      "kind": "BecameLive",
+      "payload": [
+        "0:viewer@1"
+      ]
+    },
+    {
+      "label": 0,
+      "kind": "Declare",
+      "payload": [
+        "0:remote@1",
+        "member"
+      ]
+    },
+    {
+      "label": 0,
+      "kind": "BecameLive",
+      "payload": [
+        "0:remote@1"
+      ]
+    },
+    {
+      "label": 0,
+      "kind": "Declare",
+      "payload": [
+        "0:Y@1",
+        "module"
+      ]
+    },
+    {
+      "label": 0,
+      "kind": "BecameLive",
+      "payload": [
+        "0:Y@1"
+      ]
+    },
+    {
+      "label": 0,
+      "kind": "Declare",
+      "payload": [
+        "0:AlternativeBase@1",
+        "module"
+      ]
+    },
+    {
+      "label": 0,
+      "kind": "BecameLive",
+      "payload": [
+        "0:AlternativeBase@1"
+      ]
+    },
+    {
+      "label": 0,
+      "kind": "PolicyRevision",
+      "payload": [
+        "operate",
+        0
+      ]
+    },
+    {
+      "label": 0,
+      "kind": "PolicyRevision",
+      "payload": [
+        "patch",
+        0
+      ]
+    },
+    {
+      "label": 0,
+      "kind": "PolicyRevision",
+      "payload": [
+        "anchor",
+        0
+      ]
+    },
+    {
+      "label": 0,
+      "kind": "PolicyRevision",
+      "payload": [
+        "reacquire",
+        0
+      ]
+    },
+    {
+      "label": 0,
+      "kind": "Install",
+      "payload": [
+        "Service",
+        "0:Y@1"
+      ]
+    },
+    {
+      "label": 0,
+      "kind": "BecameLive",
+      "payload": [
+        "0:Service.stock@1"
+      ]
+    },
+    {
+      "label": 0,
+      "kind": "Install",
+      "payload": [
+        "Client",
+        "0:Y@1"
+      ]
+    },
+    {
+      "label": 0,
+      "kind": "Install",
+      "payload": [
+        "Base",
+        "0:X@1"
+      ]
+    },
+    {
+      "label": 0,
+      "kind": "BecameLive",
+      "payload": [
+        "0:Base.count@1"
+      ]
+    },
+    {
+      "label": 0,
+      "kind": "Declare",
+      "payload": [
+        "0:remote-anchor@1",
+        "anchor"
+      ]
+    },
+    {
+      "label": 0,
+      "kind": "BecameLive",
+      "payload": [
+        "0:remote-anchor@1"
+      ]
+    },
+    {
+      "label": 0,
+      "kind": "Declare",
+      "payload": [
+        "0:local-anchor@1",
+        "anchor"
+      ]
+    },
+    {
+      "label": 0,
+      "kind": "BecameLive",
+      "payload": [
+        "0:local-anchor@1"
+      ]
+    },
+    {
+      "label": 0,
+      "kind": "AccessAdmitted",
+      "payload": [
+        "0:access.0:remote-anchor@1.alice@1",
+        "0:remote-anchor@1"
+      ]
+    },
+    {
+      "label": 0,
+      "kind": "BecameLive",
+      "payload": [
+        "0:access.0:remote-anchor@1.alice@1"
+      ]
+    },
+    {
+      "label": 0,
+      "kind": "Bind",
+      "payload": [
+        "0:follow@1"
+      ]
+    },
+    {
+      "label": 0,
+      "kind": "BecameLive",
+      "payload": [
+        "0:follow@1"
+      ]
+    },
+    {
+      "label": 0,
+      "kind": "DerivedRelation",
+      "payload": [
+        "0:offset@1"
+      ]
+    },
+    {
+      "label": 0,
+      "kind": "BecameLive",
+      "payload": [
+        "0:offset@1"
+      ]
+    },
+    {
+      "label": 0,
+      "kind": "Request",
+      "payload": [
+        "0:alice:request:1",
+        "Service.use"
+      ]
+    },
+    {
+      "label": 0,
+      "kind": "Served",
+      "payload": [
+        "0:alice:request:1",
+        "Service.use"
+      ]
+    },
+    {
+      "label": 0,
+      "kind": "Consumed",
+      "payload": [
+        "0:alice:request:1",
+        "Value"
+      ]
+    },
+    {
+      "label": 0,
+      "kind": "TaskReturn",
+      "payload": [
+        "0:alice:activity:1",
+        7
+      ]
+    },
+    {
+      "label": 0,
+      "kind": "Request",
+      "payload": [
+        "0:alice:request:2",
+        "Service.use"
+      ]
+    },
+    {
+      "label": 0,
+      "kind": "PrepareReparent",
+      "payload": [
+        "0:alice:patch:1",
+        "0:Y@1"
+      ]
+    },
+    {
+      "label": 0,
+      "kind": "Revoke",
+      "payload": [
+        "0:owner:1"
+      ]
+    },
+    {
+      "label": 0,
+      "kind": "Retire",
+      "payload": [
+        "0:remote@1"
+      ]
+    },
+    {
+      "label": 0,
+      "kind": "BecameInactive",
+      "payload": [
+        "0:access.0:remote-anchor@1.alice@1"
+      ]
+    },
+    {
+      "label": 0,
+      "kind": "BecameInactive",
+      "payload": [
+        "0:remote-anchor@1"
+      ]
+    },
+    {
+      "label": 0,
+      "kind": "BecameInactive",
+      "payload": [
+        "0:remote@1"
+      ]
+    },
+    {
+      "label": 0,
+      "kind": "SemanticFallback",
+      "payload": [
+        "0:follow@1",
+        0,
+        0,
+        1
+      ]
+    },
+    {
+      "label": 0,
+      "kind": "Revoke",
+      "payload": [
+        "0:owner:3"
+      ]
+    },
+    {
+      "label": 0,
+      "kind": "Rejected",
+      "payload": [
+        "0:alice:request:2",
+        "PolicyDenied"
+      ]
+    },
+    {
+      "label": 0,
+      "kind": "ReleaseDenied",
+      "payload": [
+        "0:alice:request:2",
+        "PolicyDenied"
+      ]
+    },
+    {
+      "label": 0,
+      "kind": "Request",
+      "payload": [
+        "0:alice:request:3",
+        "Base.increment"
+      ]
+    },
+    {
+      "label": 0,
+      "kind": "Served",
+      "payload": [
+        "0:alice:request:3",
+        "Base.increment"
+      ]
+    },
+    {
+      "label": 0,
+      "kind": "Consumed",
+      "payload": [
+        "0:alice:request:3",
+        "Value"
+      ]
+    },
+    {
+      "label": 0,
+      "kind": "TaskReturn",
+      "payload": [
+        "0:alice:activity:3",
+        7
+      ]
+    },
+    {
+      "label": 0,
+      "kind": "Declare",
+      "payload": [
+        "0:remote@2",
+        "member"
+      ]
+    },
+    {
+      "label": 0,
+      "kind": "BecameLive",
+      "payload": [
+        "0:remote@2"
+      ]
+    },
+    {
+      "label": 0,
+      "kind": "Declare",
+      "payload": [
+        "0:remote-anchor@2",
+        "anchor"
+      ]
+    },
+    {
+      "label": 0,
+      "kind": "BecameLive",
+      "payload": [
+        "0:remote-anchor@2"
+      ]
+    },
+    {
+      "label": 0,
+      "kind": "AccessAdmitted",
+      "payload": [
+        "0:access.0:remote-anchor@2.alice@1",
+        "0:remote-anchor@2"
+      ]
+    },
+    {
+      "label": 0,
+      "kind": "BecameLive",
+      "payload": [
+        "0:access.0:remote-anchor@2.alice@1"
+      ]
+    },
+    {
+      "label": 0,
+      "kind": "Reacquire",
+      "payload": [
+        "0:follow@1",
+        1
+      ]
+    }
+  ],
+  "research_assumptions": [
+    "atomic semantic control transitions",
+    "trusted issued claims and roots, no cryptographic identity proof",
+    "static label lattice, no silent relabel/declassification",
+    "trusted current durable tip with complete in-memory records",
+    "polynomial checker TCB retained from F0.2",
+    "passive observation has independent scheduling/storage; no physical zero-cost claim"
+  ]
+}

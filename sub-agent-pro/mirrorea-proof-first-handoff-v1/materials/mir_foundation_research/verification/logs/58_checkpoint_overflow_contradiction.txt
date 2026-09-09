@@ -1,0 +1,10 @@
+unsat
+((proof
+(let (($x31 (<= (+ b (* (- 1) d)) 0)))
+(let ((@x34 (mp (asserted (<= b d)) (rewrite (= (<= b d) $x31)) $x31)))
+(let (($x51 (not (<= (+ b (* (- 1) upper)) 0))))
+(let ((@x49 (mp (asserted (not (<= b upper))) (rewrite (= (not (<= b upper)) $x51)) $x51)))
+(let (($x40 (<= (+ d (* (- 1) upper)) 0)))
+(let ((@x43 (mp (asserted (<= d upper)) (rewrite (= (<= d upper) $x40)) $x40)))
+((_ th-lemma arith farkas 1 -1 1) @x43 @x49 @x34 false)))))))))
+

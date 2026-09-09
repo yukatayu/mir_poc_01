@@ -1,0 +1,8 @@
+(set-option :timeout 10000)
+(set-option :produce-proofs true)
+(declare-const s (Array Int Int))
+(declare-const x Int)
+(declare-const v Int)
+(assert (not (= (select (store s x v) x) v)))
+(check-sat-using (then (using-params simplify :som true) smt))
+(get-proof)

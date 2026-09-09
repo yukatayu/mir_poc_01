@@ -1,0 +1,23 @@
+{
+  "created_utc": "2026-09-09T09:29:38.475957+00:00",
+  "checks": {
+    "single_author_and_subagent_prohibition": true,
+    "oracle_parent_owned": true,
+    "oracle_180_second_cadence": true,
+    "oracle_no_latency_restart": true,
+    "no_blanket_research_adoption": true,
+    "theory_before_production": true,
+    "actual_kernel_and_axioms": true,
+    "scope_not_all_future_world_web": true,
+    "119_requirement_trace": true,
+    "preserves_live_work": true,
+    "correct_install_path": true,
+    "cold_context_packet": true,
+    "no_fake_proof_or_e2e": true,
+    "layer_and_side_tracking": true,
+    "resume_and_explicit_stops": true,
+    "outside_prompt_matches": true
+  },
+  "passed": true,
+  "scope": "presence/cross-file consistency checks, not a proof of prompt completeness or future autonomous success"
+}

@@ -1,0 +1,14 @@
+unsat
+((set-logic ALL)
+(proof
+(let ((?x24 (* x x)))
+(let (($x34 (>= ?x24 0)))
+(let (($x35 (not $x34)))
+(let ((@x38 (rewrite (= (not (<= 0 ?x24)) $x35))))
+(let (($x29 (not (<= 0 ?x24))))
+(let ((@x31 (rewrite (= (< ?x24 0) $x29))))
+(let (($x26 (< ?x24 0)))
+(let ((@x27 (asserted $x26)))
+(let ((@x43 (mp (mp (mp @x27 @x31 $x29) (rewrite (= $x29 $x29)) $x29) @x38 $x35)))
+(unit-resolution ((_ th-lemma arith) $x34) @x43 false))))))))))))
+

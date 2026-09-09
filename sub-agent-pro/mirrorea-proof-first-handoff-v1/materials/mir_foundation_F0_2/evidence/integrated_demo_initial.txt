@@ -1,0 +1,4 @@
+Traceback (most recent call last):
+  File "/mnt/data/mir_foundation_F0_2/examples/run_integrated.py", line 9, in <module>
+    from model.snapshot import capture,restore_as_fresh,FreshInstanceAuthority
+ImportError: cannot import name 'FreshInstanceAuthority' from 'model.snapshot' (/mnt/data/mir_foundation_F0_2/model/snapshot.py)

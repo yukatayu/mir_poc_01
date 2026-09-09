@@ -1,0 +1,36 @@
+test_abort_leaves_original_visible_after_release (tests.test_activation.Activation.test_abort_leaves_original_visible_after_release) ... ok
+test_committed_but_uninformed_participant_is_blocked (tests.test_activation.Activation.test_committed_but_uninformed_participant_is_blocked) ... ok
+test_coordinator_loss_does_not_choose_a_decision (tests.test_activation.Activation.test_coordinator_loss_does_not_choose_a_decision) ... ok
+test_each_reachable_state_has_recovery_completion (tests.test_activation.Activation.test_each_reachable_state_has_recovery_completion) ... ok
+test_exhaustive_one_to_three_participants (tests.test_activation.Activation.test_exhaustive_one_to_three_participants) ... ok
+test_mutant_unilateral_timeout (tests.test_activation.Activation.test_mutant_unilateral_timeout) ... ok
+test_mutant_volatile_decision (tests.test_activation.Activation.test_mutant_volatile_decision) ... ok
+test_mutant_volatile_preparation (tests.test_activation.Activation.test_mutant_volatile_preparation) ... ok
+test_after_append_crash_no_double_execution (tests.test_journal.JournalTests.test_after_append_crash_no_double_execution) ... ok
+test_before_append_crash_does_not_commit (tests.test_journal.JournalTests.test_before_append_crash_does_not_commit) ... ok
+test_complete_corruption_rejected (tests.test_journal.JournalTests.test_complete_corruption_rejected) ... ok
+test_each_torn_suffix_is_not_a_commit (tests.test_journal.JournalTests.test_each_torn_suffix_is_not_a_commit) ... ok
+test_floor_survives_restart (tests.test_journal.JournalTests.test_floor_survives_restart) ... ok
+test_oversized_before_allocation (tests.test_journal.JournalTests.test_oversized_before_allocation) ... ok
+test_real_file_reopen_and_replay (tests.test_journal.JournalTests.test_real_file_reopen_and_replay) ... ok
+test_request_identity_collision (tests.test_journal.JournalTests.test_request_identity_collision) ... ok
+test_truncated_tail_repaired_before_append (tests.test_journal.JournalTests.test_truncated_tail_repaired_before_append) ... ok
+test_unsettled_prefix_cannot_be_forgotten (tests.test_journal.JournalTests.test_unsettled_prefix_cannot_be_forgotten) ... ok
+test_cycle_rejected (tests.test_relations_restore.RelationsAndRestore.test_cycle_rejected) ... ok
+test_fresh_import_data_no_old_authority (tests.test_relations_restore.RelationsAndRestore.test_fresh_import_data_no_old_authority) ... ok
+test_fresh_import_readmit_then_use (tests.test_relations_restore.RelationsAndRestore.test_fresh_import_readmit_then_use) ... ok
+test_fresh_reacquire_separate_authority (tests.test_relations_restore.RelationsAndRestore.test_fresh_reacquire_separate_authority) ... ok
+test_gap_does_not_change_semantic_binding (tests.test_relations_restore.RelationsAndRestore.test_gap_does_not_change_semantic_binding) ... ok
+test_high_sample_not_released (tests.test_relations_restore.RelationsAndRestore.test_high_sample_not_released) ... ok
+test_incoherent_frontier_rejected (tests.test_relations_restore.RelationsAndRestore.test_incoherent_frontier_rejected) ... ok
+test_invalidation_advances_but_does_not_promote (tests.test_relations_restore.RelationsAndRestore.test_invalidation_advances_but_does_not_promote) ... ok
+test_shared_relation_late_evaluation (tests.test_relations_restore.RelationsAndRestore.test_shared_relation_late_evaluation) ... ok
+test_snapshot_invalid_type_rejected_before_activation (tests.test_relations_restore.RelationsAndRestore.test_snapshot_invalid_type_rejected_before_activation) ... ok
+test_snapshot_rechecks_strong_invariant (tests.test_relations_restore.RelationsAndRestore.test_snapshot_rechecks_strong_invariant) ... ok
+test_snapshot_requires_quiescence (tests.test_relations_restore.RelationsAndRestore.test_snapshot_requires_quiescence) ... ok
+test_stale_anchor_rejected_without_silent_change (tests.test_relations_restore.RelationsAndRestore.test_stale_anchor_rejected_without_silent_change) ... ok
+
+----------------------------------------------------------------------
+Ran 31 tests in 0.390s
+
+OK

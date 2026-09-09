@@ -1,0 +1,8 @@
+(set-option :timeout 10000)
+(set-option :produce-proofs true)
+(declare-const a Bool)
+(declare-const b Bool)
+(assert (and a b))
+(assert (not (and a b)))
+(check-sat-using (then (using-params simplify :som true) smt))
+(get-proof)

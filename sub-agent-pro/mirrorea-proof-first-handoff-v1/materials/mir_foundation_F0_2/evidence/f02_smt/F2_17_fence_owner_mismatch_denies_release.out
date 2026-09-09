@@ -1,0 +1,9 @@
+unsat
+((set-logic ALL)
+(proof
+(let (($x27 (= held acting)))
+(let ((@x32 (asserted $x27)))
+(let (($x28 (not $x27)))
+(let ((@x31 (mp (asserted (and (distinct held acting) true)) (rewrite (= (and (distinct held acting) true) $x28)) $x28)))
+(unit-resolution @x31 @x32 false)))))))
+

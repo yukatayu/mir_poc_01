@@ -1,0 +1,14 @@
+test_checked_module_alone_does_not_issue_grant (__main__.Extensions.test_checked_module_alone_does_not_issue_grant) ... ok
+test_detach_and_reinstall_does_not_revive_old_grant (__main__.Extensions.test_detach_and_reinstall_does_not_revive_old_grant) ... ok
+test_disjoint_added_edge_endpoints_do_not_ensure_acyclic_union (__main__.Extensions.test_disjoint_added_edge_endpoints_do_not_ensure_acyclic_union) ... ok
+test_invalid_operation_leaves_no_partial_added_state (__main__.Extensions.test_invalid_operation_leaves_no_partial_added_state) ... ok
+test_one_module_generates_different_locus_operations (__main__.Extensions.test_one_module_generates_different_locus_operations) ... ok
+test_shadowing_is_rejected_without_mutation (__main__.Extensions.test_shadowing_is_rejected_without_mutation) ... ok
+test_stale_full_graph_does_not_overwrite_unrelated_patch (__main__.Extensions.test_stale_full_graph_does_not_overwrite_unrelated_patch) ... ok
+test_stale_patch_stamp_rejects_recreated_same_name_and_value_version (__main__.Extensions.test_stale_patch_stamp_rejects_recreated_same_name_and_value_version) ... ok
+test_unrelated_pending_request_need_not_stop_addition (__main__.Extensions.test_unrelated_pending_request_need_not_stop_addition) ... ok
+
+----------------------------------------------------------------------
+Ran 9 tests in 0.002s
+
+OK

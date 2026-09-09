@@ -1,0 +1,76 @@
+{
+  "created_utc": "2026-09-09T09:24:42.831080+00:00",
+  "python": "3.13.5 (main, Jul 15 2026, 20:25:40) [GCC 14.2.0]",
+  "platform": "Linux-6.18.35-x86_64-with-glibc2.41",
+  "passed": true,
+  "runs": [
+    {
+      "package": "F0.1",
+      "command": [
+        "/opt/pyvenv/bin/python",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "model",
+        "-v"
+      ],
+      "working_copy": "/mnt/data/_mir_handoff_build/rerun_work/mir_foundation_research",
+      "started_utc": "2026-09-09T09:24:37.444007+00:00",
+      "elapsed_seconds": 1.338,
+      "exit_code": 0,
+      "test_count": 69,
+      "log": "F0_1.log",
+      "log_sha256": "329b6723942f8cb82372f45cf3ddce4a3ddc118fbef278deffca401e897e11bd",
+      "passed": true
+    },
+    {
+      "package": "F0.2",
+      "command": [
+        "/opt/pyvenv/bin/python",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests",
+        "-v"
+      ],
+      "working_copy": "/mnt/data/_mir_handoff_build/rerun_work/mir_foundation_F0_2",
+      "started_utc": "2026-09-09T09:24:38.802510+00:00",
+      "elapsed_seconds": 1.43,
+      "exit_code": 0,
+      "test_count": 153,
+      "log": "F0_2.log",
+      "log_sha256": "68c36db37aa6d69b02036232ae5c4d8c5f02d27d8dc21efedd380136cd5a78db",
+      "passed": true
+    },
+    {
+      "package": "F0.3",
+      "command": [
+        "/opt/pyvenv/bin/python",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests",
+        "-v"
+      ],
+      "working_copy": "/mnt/data/_mir_handoff_build/rerun_work/mir_foundation_F0_3",
+      "started_utc": "2026-09-09T09:24:40.238503+00:00",
+      "elapsed_seconds": 2.592,
+      "exit_code": 0,
+      "test_count": 98,
+      "log": "F0_3.log",
+      "log_sha256": "363353f5b5a7c7531780be9cde55e2cb5c618e2f3e862b1c63e01bd7042afce6",
+      "passed": true
+    }
+  ],
+  "not_executed": [
+    "SMT inputs",
+    "Lean/Rocq proofs",
+    "live target repository tests",
+    "oracle",
+    "actual network or storage integration"
+  ],
+  "scope": "fresh inherited unit-suite reproduction; no new research theorem or independent review"
+}

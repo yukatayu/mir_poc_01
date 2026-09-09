@@ -1,0 +1,22 @@
+unsat
+((proof
+(let ((?x34 (+ fresh (* (- 1) old))))
+(let (($x35 (<= ?x34 0)))
+(let (($x66 (not (or (not $x35) (not (>= ?x34 0))))))
+(let (($x56 (>= ?x34 0)))
+(let (($x61 (and $x56 $x35)))
+(let (($x51 (>= old fresh)))
+(let (($x52 (<= old fresh)))
+(let (($x53 (and $x52 $x51)))
+(let ((@x63 (monotonicity (rewrite (= $x52 $x56)) (rewrite (= $x51 $x35)) (= $x53 $x61))))
+(let ((@x72 (trans (rewrite (= (= old fresh) $x53)) (trans @x63 (rewrite (= $x61 $x66)) (= $x53 $x66)) (= (= old fresh) $x66))))
+(let (($x42 (= old fresh)))
+(let ((@x48 (mp (asserted (not (not $x42))) (rewrite (= (not (not $x42)) $x42)) $x42)))
+(let (($x38 (not $x35)))
+(let ((@x41 (rewrite (= (not (<= fresh old)) $x38))))
+(let (($x28 (not (<= fresh old))))
+(let ((@x30 (rewrite (= (> fresh old) $x28))))
+(let (($x25 (> fresh old)))
+(let ((@x26 (asserted $x25)))
+(unit-resolution (mp (mp @x26 @x30 $x28) @x41 $x38) (not-or-elim (mp @x48 @x72 $x66) $x35) false)))))))))))))))))))))
+

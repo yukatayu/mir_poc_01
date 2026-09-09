@@ -1,0 +1,6 @@
+test_append_error_after_possible_durable_write_requires_reopen (tests.test_faults.JournalUncertainError.test_append_error_after_possible_durable_write_requires_reopen) ... ok
+
+----------------------------------------------------------------------
+Ran 1 test in 0.027s
+
+OK

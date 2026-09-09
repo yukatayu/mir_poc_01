@@ -1,0 +1,8 @@
+(set-option :timeout 10000)
+(set-option :produce-proofs true)
+(declare-const old Int)
+(declare-const fresh Int)
+(assert (distinct old fresh))
+(assert (not (not (= old fresh))))
+(check-sat-using (then (using-params simplify :som true) smt))
+(get-proof)

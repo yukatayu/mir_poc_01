@@ -1,0 +1,8 @@
+(set-option :timeout 10000)
+(set-option :produce-proofs true)
+(declare-const a (Seq Int))
+(declare-const b (Seq Int))
+(declare-const c (Seq Int))
+(assert (not (= (seq.++ (seq.++ a b) c) (seq.++ a (seq.++ b c)))))
+(check-sat-using (then (using-params simplify :som true) smt))
+(get-proof)

@@ -1,0 +1,8 @@
+unsat
+((proof
+(let ((@x34 (monotonicity (rewrite (= (select (store s x v) x) v)) (= (= (select (store s x v) x) v) (= v v)))))
+(let ((@x38 (trans @x34 (rewrite (= (= v v) true)) (= (= (select (store s x v) x) v) true))))
+(let ((@x41 (monotonicity @x38 (= (not (= (select (store s x v) x) v)) (not true)))))
+(let ((@x45 (trans @x41 (rewrite (= (not true) false)) (= (not (= (select (store s x v) x) v)) false))))
+(mp (asserted (not (= (select (store s x v) x) v))) @x45 false)))))))
+

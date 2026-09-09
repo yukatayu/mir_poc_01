@@ -1,0 +1,48 @@
+test_all_owner_writes_staged_on_failure (tests.test_source.Source.test_all_owner_writes_staged_on_failure) ... ok
+test_argument_annotations (tests.test_source.Source.test_argument_annotations) ... ok
+test_bool_is_not_int (tests.test_source.Source.test_bool_is_not_int) ... ok
+test_cross_owner_operand_needs_snapshot (tests.test_source.Source.test_cross_owner_operand_needs_snapshot) ... ok
+test_deployment_does_not_grant (tests.test_source.Source.test_deployment_does_not_grant) ... ok
+test_direct_assignment_is_owner_rmw (tests.test_source.Source.test_direct_assignment_is_owner_rmw) ... ok
+test_early_branch_return (tests.test_source.Source.test_early_branch_return) ... ok
+test_forged_permit_rejected (tests.test_source.Source.test_forged_permit_rejected) ... ok
+test_independent_import_and_link (tests.test_source.Source.test_independent_import_and_link) ... ok
+test_loop_and_source_map (tests.test_source.Source.test_loop_and_source_map) ... ok
+test_loop_differential (tests.test_source.Source.test_loop_differential) ... ok
+test_multiple_assignments_on_one_line (tests.test_source.Source.test_multiple_assignments_on_one_line) ... FAIL
+test_mutual_recursion (tests.test_source.Source.test_mutual_recursion) ... ok
+test_no_arbitrary_host_code (tests.test_source.Source.test_no_arbitrary_host_code) ... ok
+test_no_shared_mutable_frame_between_spawn (tests.test_source.Source.test_no_shared_mutable_frame_between_spawn) ... ok
+test_owner_loop_rejected (tests.test_source.Source.test_owner_loop_rejected) ... ok
+test_possibly_unbound_branch (tests.test_source.Source.test_possibly_unbound_branch) ... ok
+test_random_expression_cfg_differential (tests.test_source.Source.test_random_expression_cfg_differential) ... ok
+test_recursive_stack (tests.test_source.Source.test_recursive_stack) ... ok
+test_signature_includes_effects (tests.test_source.Source.test_signature_includes_effects) ... ok
+test_source_artifact_tampering_not_used (tests.test_source.Source.test_source_artifact_tampering_not_used) ... ok
+test_structured_parallel (tests.test_source.Source.test_structured_parallel) ... ok
+test_unjoined_child_failure_is_not_silent_success (tests.test_source.Source.test_unjoined_child_failure_is_not_silent_success) ... FAIL
+test_unreachable_suffix_is_not_emitted (tests.test_source.Source.test_unreachable_suffix_is_not_emitted) ... ok
+test_while_does_not_define_after_zero_iterations (tests.test_source.Source.test_while_does_not_define_after_zero_iterations) ... ok
+
+======================================================================
+FAIL: test_multiple_assignments_on_one_line (tests.test_source.Source.test_multiple_assignments_on_one_line)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/mnt/data/mir_foundation_F0_2/tests/test_source.py", line 25, in test_multiple_assignments_on_one_line
+    e,f=run(p,'main');self.assertEqual(f.result,13)
+                      ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+AssertionError: 14 != 13
+
+======================================================================
+FAIL: test_unjoined_child_failure_is_not_silent_success (tests.test_source.Source.test_unjoined_child_failure_is_not_silent_success)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/mnt/data/mir_foundation_F0_2/tests/test_source.py", line 75, in test_unjoined_child_failure_is_not_silent_success
+    e,f=run(parse_check_compile(s),'main');self.assertEqual(f.failure,'PreconditionFailed')
+                                           ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: None != 'PreconditionFailed'
+
+----------------------------------------------------------------------
+Ran 25 tests in 0.911s
+
+FAILED (failures=2)

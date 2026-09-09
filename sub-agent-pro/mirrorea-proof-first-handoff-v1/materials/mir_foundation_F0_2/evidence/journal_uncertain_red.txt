@@ -1,0 +1,15 @@
+test_append_error_after_possible_durable_write_requires_reopen (tests.test_faults.JournalUncertainError.test_append_error_after_possible_durable_write_requires_reopen) ... FAIL
+
+======================================================================
+FAIL: test_append_error_after_possible_durable_write_requires_reopen (tests.test_faults.JournalUncertainError.test_append_error_after_possible_durable_write_requires_reopen)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/mnt/data/mir_foundation_F0_2/tests/test_faults.py", line 16, in test_append_error_after_possible_durable_write_requires_reopen
+    with self.assertRaisesRegex(RuntimeError,'ReopenAfterCrash'):cell.add('i',1,5)
+         ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: RuntimeError not raised
+
+----------------------------------------------------------------------
+Ran 1 test in 0.035s
+
+FAILED (failures=1)

@@ -1,0 +1,81 @@
+{
+  "repository": "yukatayu/mir_poc_01",
+  "pinned_commit": "a027d61b8030a903f892de2f7483ec8b64627963",
+  "read_all_repository_files": false,
+  "excluded": "docs/reports",
+  "repository_modified": false,
+  "entries": [
+    {
+      "id": "R1",
+      "path": "mirrorea_canon/NORTH-STAR.md",
+      "blob_sha": "b049bc41d81007b33e6d53d76d35e7c372b7844d",
+      "reading_scope": "full current-turn connector read",
+      "url": "https://github.com/yukatayu/mir_poc_01/blob/a027d61b8030a903f892de2f7483ec8b64627963/mirrorea_canon/NORTH-STAR.md"
+    },
+    {
+      "id": "R2",
+      "path": "mirrorea_canon/theory/01-mircore-v0.md",
+      "blob_sha": "b64460a6ad197bc88bedaed4aaa79245b97a0353",
+      "reading_scope": "retained conversation excerpts, not whole repository audit",
+      "url": "https://github.com/yukatayu/mir_poc_01/blob/a027d61b8030a903f892de2f7483ec8b64627963/mirrorea_canon/theory/01-mircore-v0.md"
+    },
+    {
+      "id": "R3",
+      "path": "mirrorea_canon/theory/04-ordering-and-cuts.md",
+      "blob_sha": "b582c6173fdf53c487c2a349d45629731c87c8bc",
+      "reading_scope": "full current-turn connector read",
+      "url": "https://github.com/yukatayu/mir_poc_01/blob/a027d61b8030a903f892de2f7483ec8b64627963/mirrorea_canon/theory/04-ordering-and-cuts.md"
+    },
+    {
+      "id": "R4",
+      "path": "mirrorea_canon/theory/06-existence-fallback.md",
+      "blob_sha": "873185d1b64b1a83ee0d63825205207435664d21",
+      "reading_scope": "full current-turn connector read",
+      "url": "https://github.com/yukatayu/mir_poc_01/blob/a027d61b8030a903f892de2f7483ec8b64627963/mirrorea_canon/theory/06-existence-fallback.md"
+    },
+    {
+      "id": "R5",
+      "path": "specs/examples/475-current-l2-principal-theory-spine-and-lean-first-proof-roadmap.md",
+      "blob_sha": "d166958320cf147f56c83a6ad8d1a0a717e2fc71",
+      "reading_scope": "current-turn lines 1-190 plus retained earlier content; LAB history, not Canon adoption",
+      "url": "https://github.com/yukatayu/mir_poc_01/blob/a027d61b8030a903f892de2f7483ec8b64627963/specs/examples/475-current-l2-principal-theory-spine-and-lean-first-proof-roadmap.md"
+    },
+    {
+      "id": "R6",
+      "path": "mirrorea_canon/theory/11-metatheory-ledger.md",
+      "blob_sha": "cc2480260a224001c21f9d0f96a8b16c2068f94d",
+      "reading_scope": "current-turn lines 1-85 and earlier retained context",
+      "url": "https://github.com/yukatayu/mir_poc_01/blob/a027d61b8030a903f892de2f7483ec8b64627963/mirrorea_canon/theory/11-metatheory-ledger.md"
+    },
+    {
+      "id": "R7",
+      "path": "mirrorea_canon/theory/08-patch-hotplug.md",
+      "blob_sha": "6fd78e1d30b04d6fdfea922ad5018a0a538c3543",
+      "reading_scope": "retained conversation full text",
+      "url": "https://github.com/yukatayu/mir_poc_01/blob/a027d61b8030a903f892de2f7483ec8b64627963/mirrorea_canon/theory/08-patch-hotplug.md"
+    },
+    {
+      "id": "R8a",
+      "path": "mirrorea_canon/theory/02-types-effects-failures.md",
+      "blob_sha": "a74ce2d48a158fc076406c5a9f4e1e078ae0f57e",
+      "reading_scope": "retained conversation full text",
+      "url": "https://github.com/yukatayu/mir_poc_01/blob/a027d61b8030a903f892de2f7483ec8b64627963/mirrorea_canon/theory/02-types-effects-failures.md"
+    },
+    {
+      "id": "R8b",
+      "path": "mirrorea_canon/theory/18-m9-auth-verification.md",
+      "blob_sha": "6b3aed0757dec86de61410f4024d68afecac8f24",
+      "reading_scope": "retained conversation full text",
+      "url": "https://github.com/yukatayu/mir_poc_01/blob/a027d61b8030a903f892de2f7483ec8b64627963/mirrorea_canon/theory/18-m9-auth-verification.md"
+    },
+    {
+      "id": "R9",
+      "path": "mirrorea_canon/DESIGN-CONSTITUTION.md",
+      "blob_sha": "6f7209889c072c2aa5ade81299282945e8a718c0",
+      "reading_scope": "retained conversation full text",
+      "url": "https://github.com/yukatayu/mir_poc_01/blob/a027d61b8030a903f892de2f7483ec8b64627963/mirrorea_canon/DESIGN-CONSTITUTION.md"
+    }
+  ],
+  "external_source_scope": "See FOUNDATION.md section 15. Some sources were accessed only through primary-source abstracts or official descriptions, not full paper proofs.",
+  "unverified": "No claim of a complete literature review, repository audit, or independent proof review."
+}

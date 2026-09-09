@@ -1,0 +1,14 @@
+unsat
+((proof
+(let ((@x48 (asserted pOld)))
+(let (($x28 (or pNew (not pOld))))
+(let ((@x31 (mp (asserted (=> pOld pNew)) (rewrite (= (=> pOld pNew) $x28)) $x28)))
+(let (($x36 (not qNew)))
+(let (($x49 (not qOld)))
+(let ((@x50 (asserted $x49)))
+(let (($x37 (or qOld $x36)))
+(let ((@x40 (mp (asserted (=> qNew qOld)) (rewrite (= (=> qNew qOld) $x37)) $x37)))
+(let (($x44 (or qNew (not pNew))))
+(let ((@x47 (mp (asserted (=> pNew qNew)) (rewrite (= (=> pNew qNew) $x44)) $x44)))
+(unit-resolution @x47 (unit-resolution @x40 @x50 $x36) (unit-resolution @x31 @x48 pNew) false)))))))))))))
+

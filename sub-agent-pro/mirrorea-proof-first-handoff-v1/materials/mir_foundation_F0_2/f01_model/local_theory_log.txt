@@ -1,0 +1,11 @@
+test_double_release_rejected (__main__.LocalTheories.test_double_release_rejected) ... ok
+test_interval_export_consumed_by_resource_theory (__main__.LocalTheories.test_interval_export_consumed_by_resource_theory) ... ok
+test_modal_contract_tracks_the_rely_boundary (__main__.LocalTheories.test_modal_contract_tracks_the_rely_boundary) ... ok
+test_move_is_not_new_holder_policy_grant (__main__.LocalTheories.test_move_is_not_new_holder_policy_grant) ... ok
+test_positive_proof_does_not_grant_allocation (__main__.LocalTheories.test_positive_proof_does_not_grant_allocation) ... ok
+test_split_is_disjoint_and_consumes_old_token (__main__.LocalTheories.test_split_is_disjoint_and_consumes_old_token) ... ok
+
+----------------------------------------------------------------------
+Ran 6 tests in 0.034s
+
+OK

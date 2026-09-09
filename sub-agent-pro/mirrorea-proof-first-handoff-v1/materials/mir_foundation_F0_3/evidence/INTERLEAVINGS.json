@@ -1,0 +1,62 @@
+{
+  "actions": [
+    "serve",
+    "revoke-operation",
+    "revoke-access",
+    "retire-module",
+    "consume",
+    "observe"
+  ],
+  "orders": 720,
+  "executed_or_rejected_steps": 4320,
+  "terminal_counts": {
+    "('ReleaseDenied', 7)": 120,
+    "('Consumed', 7)": 60,
+    "('ReleaseDenied', 10)": 180,
+    "('Rejected', 10)": 300,
+    "('Served', 7)": 60
+  },
+  "representative_orders": {
+    "('ReleaseDenied', 7)": [
+      "serve",
+      "revoke-operation",
+      "revoke-access",
+      "retire-module",
+      "consume",
+      "observe"
+    ],
+    "('Consumed', 7)": [
+      "serve",
+      "revoke-access",
+      "consume",
+      "revoke-operation",
+      "retire-module",
+      "observe"
+    ],
+    "('ReleaseDenied', 10)": [
+      "revoke-operation",
+      "serve",
+      "revoke-access",
+      "retire-module",
+      "consume",
+      "observe"
+    ],
+    "('Rejected', 10)": [
+      "revoke-operation",
+      "revoke-access",
+      "retire-module",
+      "consume",
+      "serve",
+      "observe"
+    ],
+    "('Served', 7)": [
+      "revoke-access",
+      "consume",
+      "serve",
+      "revoke-operation",
+      "retire-module",
+      "observe"
+    ]
+  },
+  "scope": "one pending source-generated request; six commands each exactly once; no fairness or general schedule theorem"
+}

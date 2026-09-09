@@ -1,0 +1,107 @@
+{
+  "python": "3.13.5 (main, Jul 15 2026, 20:25:40) [GCC 14.2.0]",
+  "platform": "Linux-6.18.35-x86_64-with-glibc2.41",
+  "jobs": [
+    {
+      "name": "syntax",
+      "command": [
+        "/opt/pyvenv/bin/python",
+        "-m",
+        "compileall",
+        "-q",
+        "model",
+        "base",
+        "tests",
+        "examples",
+        "verification"
+      ],
+      "cwd": "/mnt/data/mir_foundation_F0_3",
+      "returncode": 0,
+      "elapsed_seconds": 0.631186,
+      "log": "evidence/run_syntax.log"
+    },
+    {
+      "name": "tests",
+      "command": [
+        "/opt/pyvenv/bin/python",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests",
+        "-v"
+      ],
+      "cwd": "/mnt/data/mir_foundation_F0_3",
+      "returncode": 0,
+      "elapsed_seconds": 2.483043,
+      "log": "evidence/run_tests.log"
+    },
+    {
+      "name": "integration",
+      "command": [
+        "/opt/pyvenv/bin/python",
+        "examples/integrated.py"
+      ],
+      "cwd": "/mnt/data/mir_foundation_F0_3",
+      "returncode": 0,
+      "elapsed_seconds": 1.005831,
+      "log": "evidence/run_integration.log"
+    },
+    {
+      "name": "orders",
+      "command": [
+        "/opt/pyvenv/bin/python",
+        "verification/explore_interactions.py"
+      ],
+      "cwd": "/mnt/data/mir_foundation_F0_3",
+      "returncode": 0,
+      "elapsed_seconds": 19.353185,
+      "log": "evidence/run_orders.log"
+    },
+    {
+      "name": "mutants",
+      "command": [
+        "/opt/pyvenv/bin/python",
+        "verification/run_mutants.py"
+      ],
+      "cwd": "/mnt/data/mir_foundation_F0_3",
+      "returncode": 0,
+      "elapsed_seconds": 4.980511,
+      "log": "evidence/run_mutants.log"
+    },
+    {
+      "name": "baseline_F0_1",
+      "command": [
+        "/opt/pyvenv/bin/python",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "model",
+        "-v"
+      ],
+      "cwd": "/mnt/data/input_baselines/mir_foundation_research",
+      "returncode": 0,
+      "elapsed_seconds": 1.465765,
+      "log": "evidence/run_baseline_F0_1.log"
+    },
+    {
+      "name": "baseline_F0_2",
+      "command": [
+        "/opt/pyvenv/bin/python",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests",
+        "-v"
+      ],
+      "cwd": "/mnt/data/input_baselines/mir_foundation_F0_2",
+      "returncode": 0,
+      "elapsed_seconds": 1.434178,
+      "log": "evidence/run_baseline_F0_2.log"
+    }
+  ],
+  "passed": true,
+  "scope": "execution tests, bounded model orders and deliberate falsifiers; not proof-assistant verification"
+}

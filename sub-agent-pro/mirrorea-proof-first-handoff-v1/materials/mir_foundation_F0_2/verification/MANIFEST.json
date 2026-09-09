@@ -1,0 +1,112 @@
+[
+  {
+    "file": "F2_01_square_nonnegative.smt2",
+    "expected": "unsat",
+    "category": "forall-input arithmetic VC"
+  },
+  {
+    "file": "F2_02_positive_result.smt2",
+    "expected": "unsat",
+    "category": "forall-input arithmetic VC"
+  },
+  {
+    "file": "F2_03_owner_resource_preserved.smt2",
+    "expected": "unsat",
+    "category": "forall-input owner VC"
+  },
+  {
+    "file": "F2_04_strengthened_assert_counterexample.smt2",
+    "expected": "sat",
+    "category": "deliberate counterexample"
+  },
+  {
+    "file": "F2_05_result_capture_counterexample.smt2",
+    "expected": "sat",
+    "category": "deliberate counterexample"
+  },
+  {
+    "file": "F2_06_certificate_product_rule.smt2",
+    "expected": "unsat",
+    "category": "forall-input certificate-rule VC"
+  },
+  {
+    "file": "F2_07_certificate_equality_multiple.smt2",
+    "expected": "unsat",
+    "category": "forall-input certificate-rule VC"
+  },
+  {
+    "file": "F2_08_sequential_rmw.smt2",
+    "expected": "unsat",
+    "category": "forall-input operation VC"
+  },
+  {
+    "file": "F2_09_blind_write_counterexample.smt2",
+    "expected": "sat",
+    "category": "deliberate counterexample"
+  },
+  {
+    "file": "F2_10_prefix_retirement_fence.smt2",
+    "expected": "unsat",
+    "category": "forall-input epoch/floor VC"
+  },
+  {
+    "file": "F2_11_binding_stamp_reuse_counterexample.smt2",
+    "expected": "sat",
+    "category": "deliberate counterexample"
+  },
+  {
+    "file": "F2_12_full_stamp_no_revival.smt2",
+    "expected": "unsat",
+    "category": "forall-input epoch/floor VC"
+  },
+  {
+    "file": "F2_13_migration_conservation.smt2",
+    "expected": "unsat",
+    "category": "forall-input migration VC"
+  },
+  {
+    "file": "F2_14_local_patch_commuting.smt2",
+    "expected": "unsat",
+    "category": "forall-input migration VC"
+  },
+  {
+    "file": "F2_15_committed_prepared_or_new_not_old.smt2",
+    "expected": "unsat",
+    "category": "finite-phase invariant VC"
+  },
+  {
+    "file": "F2_16_abort_does_not_have_new.smt2",
+    "expected": "unsat",
+    "category": "finite-phase invariant VC"
+  },
+  {
+    "file": "F2_17_fence_owner_mismatch_denies_release.smt2",
+    "expected": "unsat",
+    "category": "symbolic lock VC"
+  },
+  {
+    "file": "F2_18_post_install_shadow_counterexample.smt2",
+    "expected": "sat",
+    "category": "deliberate counterexample"
+  },
+  {
+    "file": "F2_19_high_pc_cannot_low_write.smt2",
+    "expected": "unsat",
+    "category": "forall-input label VC"
+  },
+  {
+    "file": "F2_20_definition_label_cannot_erased.smt2",
+    "expected": "unsat",
+    "category": "forall-input label VC"
+  },
+  {
+    "file": "F2_21_trace_inclusion_not_noninterference.smt2",
+    "expected": "sat",
+    "category": "deliberate counterexample"
+  },
+  {
+    "file": "F2_22_waiting_version_unchanged_under_frame.smt2",
+    "expected": "unsat",
+    "category": "symbolic dependency VC"
+  }
+]

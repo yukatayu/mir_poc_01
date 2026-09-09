@@ -1,0 +1,23 @@
+unsat
+((proof
+(let (($x65 (>= (+ a (* (- 1) c)) 0)))
+(let (($x61 (<= c a)))
+(let ((@x64 (rewrite (= (< a c) (not $x61)))))
+(let ((@x88 (trans (monotonicity @x64 (= (not (< a c)) (not (not $x61)))) (rewrite (= (not (not $x61)) $x61)) (= (not (< a c)) $x61))))
+(let (($x58 (< a c)))
+(let (($x59 (not $x58)))
+(let ((@x60 (asserted $x59)))
+(let (($x38 (not (>= (+ a (* (- 1) b)) 0))))
+(let ((@x41 (rewrite (= (not (<= b a)) $x38))))
+(let (($x28 (not (<= b a))))
+(let ((@x30 (rewrite (= (< a b) $x28))))
+(let (($x25 (< a b)))
+(let ((@x26 (asserted $x25)))
+(let (($x54 (not (>= (+ b (* (- 1) c)) 0))))
+(let ((@x57 (rewrite (= (not (<= c b)) $x54))))
+(let (($x46 (not (<= c b))))
+(let ((@x48 (rewrite (= (< b c) $x46))))
+(let (($x43 (< b c)))
+(let ((@x44 (asserted $x43)))
+((_ th-lemma arith farkas 1 1 1) (mp (mp @x44 @x48 $x46) @x57 $x54) (mp (mp @x26 @x30 $x28) @x41 $x38) (mp (mp @x60 @x88 $x61) (rewrite (= $x61 $x65)) $x65) false))))))))))))))))))))))
+

@@ -1,0 +1,178 @@
+[
+  {
+    "id": "41_pc_join",
+    "title": "No-write-down forces both branch and value dependencies below target",
+    "file": "41_pc_join.smt2",
+    "expected": "unsat",
+    "category": "symbolic-lemma",
+    "actual": "unsat",
+    "passed": true,
+    "solver": "4.13.3.0",
+    "input_sha256": "0a870e2dd2890b6b0e711757bb93e3ceebd83c67b03ced74cebf4cefdd588236"
+  },
+  {
+    "id": "42_implicit_flow_mutant",
+    "title": "Counterexample: checking values but ignoring secret branch control",
+    "file": "42_implicit_flow_mutant.smt2",
+    "expected": "sat",
+    "category": "counterexample",
+    "actual": "sat",
+    "passed": true,
+    "solver": "4.13.3.0",
+    "input_sha256": "b7cd39b1aca412889650fb3fe4c6e4ccf3aceed1a41e86bb415f32dcfe8d72de"
+  },
+  {
+    "id": "43_low_expression_add",
+    "title": "Two-run expression step: equal public inputs have equal sums",
+    "file": "43_low_expression_add.smt2",
+    "expected": "unsat",
+    "category": "induction-step",
+    "actual": "unsat",
+    "passed": true,
+    "solver": "4.13.3.0",
+    "input_sha256": "6c9772ae999f6e3e3c503c5ad0208774a30850877b8928db22c6a44d504194bd"
+  },
+  {
+    "id": "44_low_expression_conditional",
+    "title": "Two-run expression step: equal condition selects equal results",
+    "file": "44_low_expression_conditional.smt2",
+    "expected": "unsat",
+    "category": "induction-step",
+    "actual": "unsat",
+    "passed": true,
+    "solver": "4.13.3.0",
+    "input_sha256": "87800db0300bf7e1d9a6c5610a9684471bef65451ccc9b9116e5fa5dd975ec61"
+  },
+  {
+    "id": "45_snapshot_receive_send",
+    "title": "Closed cut with send->receive cannot contain an orphan receive",
+    "file": "45_snapshot_receive_send.smt2",
+    "expected": "unsat",
+    "category": "symbolic-lemma",
+    "actual": "unsat",
+    "passed": true,
+    "solver": "4.13.3.0",
+    "input_sha256": "6ccc9dc478274c705e74c319edbb97174c860c1552f4536bb9ac9c1ad34dbd7a"
+  },
+  {
+    "id": "46_channel_not_orphan_repair",
+    "title": "Counterexample: channel membership cannot repair orphan receive",
+    "file": "46_channel_not_orphan_repair.smt2",
+    "expected": "sat",
+    "category": "counterexample",
+    "actual": "sat",
+    "passed": true,
+    "solver": "4.13.3.0",
+    "input_sha256": "5f9de4fc34a4c9b1d14b036236ce1c620f5032ef5470fe6159e6d6be379799df"
+  },
+  {
+    "id": "47_snapshot_inflight",
+    "title": "In-flight channel entry is sent but not yet received in the cut",
+    "file": "47_snapshot_inflight.smt2",
+    "expected": "unsat",
+    "category": "symbolic-lemma",
+    "actual": "unsat",
+    "passed": true,
+    "solver": "4.13.3.0",
+    "input_sha256": "6128f31bd5cb03ad6878ac369aa231eea76b4533df31ac83b6e6c78357deb215"
+  },
+  {
+    "id": "48_replay_prefix_revocation",
+    "title": "Current revocation remains valid even if historical snapshot lacks it",
+    "file": "48_replay_prefix_revocation.smt2",
+    "expected": "unsat",
+    "category": "symbolic-lemma",
+    "actual": "unsat",
+    "passed": true,
+    "solver": "4.13.3.0",
+    "input_sha256": "018d78c109f19dfb8e60e589e36a691da30fd492a118ab42b84462f793c28198"
+  },
+  {
+    "id": "49_restore_old_grant_mutant",
+    "title": "Counterexample: restoring only old authorization resurrects a grant",
+    "file": "49_restore_old_grant_mutant.smt2",
+    "expected": "sat",
+    "category": "counterexample",
+    "actual": "sat",
+    "passed": true,
+    "solver": "4.13.3.0",
+    "input_sha256": "6c1be53cfd6eef4c45753cff72cbc3a36a4e1a7d7714eb83e563d1c217a16836"
+  },
+  {
+    "id": "50_rely_stable_read",
+    "title": "Concrete modal instance: unrelated state update preserves a stable predicate",
+    "file": "50_rely_stable_read.smt2",
+    "expected": "unsat",
+    "category": "symbolic-lemma",
+    "actual": "unsat",
+    "passed": true,
+    "solver": "4.13.3.0",
+    "input_sha256": "1f38ad5b03324c873f4b920ab30d27c9cca49de565b2f64dcbf27aa0532bc862"
+  },
+  {
+    "id": "51_disjoint_token_allocation",
+    "title": "A freshly allocated region cannot alias an existing owned region",
+    "file": "51_disjoint_token_allocation.smt2",
+    "expected": "unsat",
+    "category": "symbolic-lemma",
+    "actual": "unsat",
+    "passed": true,
+    "solver": "4.13.3.0",
+    "input_sha256": "0c40960b1158091ea2c9dd3afa4ebf411b9c819024756e85319e4b67dae9b461"
+  },
+  {
+    "id": "52_linear_token_split_mutant",
+    "title": "Counterexample: erasing ownership permits duplicate use",
+    "file": "52_linear_token_split_mutant.smt2",
+    "expected": "sat",
+    "category": "counterexample",
+    "actual": "sat",
+    "passed": true,
+    "solver": "4.13.3.0",
+    "input_sha256": "473b6106372a6abb789f132cc990156be6d6f4fe7dcb62add8ae887e6ee3ccb1"
+  },
+  {
+    "id": "53_while_sum_preservation",
+    "title": "Annotated loop sum invariant: total+n(n+1)/2 stays constant",
+    "file": "53_while_sum_preservation.smt2",
+    "expected": "unsat",
+    "category": "symbolic-lemma",
+    "actual": "unsat",
+    "passed": true,
+    "solver": "4.13.3.0",
+    "input_sha256": "1190f9a85ac469ad1e8d042e8806983f27b03276ea5d8d711ea1857c774be217"
+  },
+  {
+    "id": "54_while_sum_exit",
+    "title": "Annotated loop invariant entails its exit postcondition",
+    "file": "54_while_sum_exit.smt2",
+    "expected": "unsat",
+    "category": "symbolic-lemma",
+    "actual": "unsat",
+    "passed": true,
+    "solver": "4.13.3.0",
+    "input_sha256": "d4f60cc725e1865ff0cf46a31d5919db93ff5a80af8ebefa1c0a96daafbde0ae"
+  },
+  {
+    "id": "55_while_variant",
+    "title": "The selected loop has a decreasing nonnegative variant",
+    "file": "55_while_variant.smt2",
+    "expected": "unsat",
+    "category": "symbolic-lemma",
+    "actual": "unsat",
+    "passed": true,
+    "solver": "4.13.3.0",
+    "input_sha256": "b396b42ac23f029dbccc663c51c677a6fe5029aa9d0163e7fcb8ea5e91839e6d"
+  },
+  {
+    "id": "56_i64_refinement_guard",
+    "title": "Optional implementation bridge: range guard makes integer addition representable",
+    "file": "56_i64_refinement_guard.smt2",
+    "expected": "unsat",
+    "category": "symbolic-lemma",
+    "actual": "unsat",
+    "passed": true,
+    "solver": "4.13.3.0",
+    "input_sha256": "f073faf147f2bdd261a660be5f6d33b404cbbd24ee93da6d48d0e3bd873f0eb8"
+  }
+]

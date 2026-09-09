@@ -1,0 +1,30 @@
+{
+  "archives": {
+    "files": 4,
+    "bytes": 2007082
+  },
+  "materials": {
+    "files": 619,
+    "bytes": 4935162
+  },
+  "context": {
+    "files": 4,
+    "bytes": 17414
+  },
+  "protocols": {
+    "files": 6,
+    "bytes": 22719
+  },
+  "templates": {
+    "files": 8,
+    "bytes": 6798
+  },
+  "tools": {
+    "files": 5,
+    "bytes": 19555
+  },
+  "validation": {
+    "files": 8,
+    "bytes": 54352
+  }
+}

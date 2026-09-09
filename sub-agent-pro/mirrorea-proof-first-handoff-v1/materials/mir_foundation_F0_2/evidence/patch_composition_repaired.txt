@@ -1,0 +1,18 @@
+test_abort_of_unprepared_patch_does_not_release_another_patch_fence (tests.test_live_patch.CompositionalPatchRegressions.test_abort_of_unprepared_patch_does_not_release_another_patch_fence) ... ok
+test_completed_patch_abstraction_does_not_override_later_owner_execution (tests.test_live_patch.CompositionalPatchRegressions.test_completed_patch_abstraction_does_not_override_later_owner_execution) ... ok
+test_checked_migration_then_ordinary_code (tests.test_live_patch.LivePatchTests.test_checked_migration_then_ordinary_code) ... ok
+test_coordinator_crash_after_decision_preserves_fences (tests.test_live_patch.LivePatchTests.test_coordinator_crash_after_decision_preserves_fences) ... ok
+test_invalid_migration_rejected_before_fence (tests.test_live_patch.LivePatchTests.test_invalid_migration_rejected_before_fence) ... ok
+test_old_request_issued_while_frozen_is_not_new_generation (tests.test_live_patch.LivePatchTests.test_old_request_issued_while_frozen_is_not_new_generation) ... ok
+test_partial_install_cannot_expose_old_participant (tests.test_live_patch.LivePatchTests.test_partial_install_cannot_expose_old_participant) ... ok
+test_reserved_authority_not_silently_retroactively_revoked (tests.test_live_patch.LivePatchTests.test_reserved_authority_not_silently_retroactively_revoked) ... ok
+test_same_owner_protected_migration_requires_certificate (tests.test_live_patch.LivePatchTests.test_same_owner_protected_migration_requires_certificate) ... ok
+test_snapshot_preserves_replaced_code_not_only_data (tests.test_live_patch.LivePatchTests.test_snapshot_preserves_replaced_code_not_only_data) ... ok
+test_unrelated_activity_progresses_during_fence (tests.test_live_patch.LivePatchTests.test_unrelated_activity_progresses_during_fence) ... ok
+test_version_change_invalidates_prepared_candidate (tests.test_live_patch.LivePatchTests.test_version_change_invalidates_prepared_candidate) ... ok
+test_same_signature_does_not_authorize_state_type_change (tests.test_live_patch.ReplacementSchemaRegression.test_same_signature_does_not_authorize_state_type_change) ... ok
+
+----------------------------------------------------------------------
+Ran 13 tests in 0.033s
+
+OK

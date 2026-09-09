@@ -1,0 +1,13 @@
+unsat
+((proof
+(let (($x25 (and a b)))
+(let ((@x26 (asserted $x25)))
+(let ((@x28 (and-elim @x26 b)))
+(let ((@x27 (and-elim @x26 a)))
+(let (($x33 (or (not a) (not b))))
+(let ((@x39 (monotonicity (rewrite (= $x25 (not $x33))) (= (not $x25) (not (not $x33))))))
+(let (($x29 (not $x25)))
+(let ((@x30 (asserted $x29)))
+(let ((@x44 (mp @x30 (trans @x39 (rewrite (= (not (not $x33)) $x33)) (= $x29 $x33)) $x33)))
+(unit-resolution @x44 @x27 @x28 false))))))))))))
+

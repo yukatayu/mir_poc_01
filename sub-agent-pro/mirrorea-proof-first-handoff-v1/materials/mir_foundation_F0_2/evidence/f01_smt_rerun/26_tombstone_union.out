@@ -1,0 +1,9 @@
+unsat
+((proof
+(let (($x25 (select current x)))
+(let (($x34 (not $x25)))
+(let (($x30 (not (or (select old x) $x25))))
+(let ((@x31 (asserted $x30)))
+(let ((@x26 (asserted $x25)))
+(unit-resolution @x26 (not-or-elim @x31 $x34) false))))))))
+

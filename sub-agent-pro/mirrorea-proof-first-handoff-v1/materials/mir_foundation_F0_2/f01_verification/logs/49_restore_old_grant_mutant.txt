@@ -1,0 +1,7 @@
+sat
+(
+  (define-fun currentRevoked () Bool
+    true)
+  (define-fun snapshotRevoked () Bool
+    false)
+)

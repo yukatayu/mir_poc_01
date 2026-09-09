@@ -1,0 +1,9 @@
+sat
+(
+  (define-fun recvIn () Bool
+    true)
+  (define-fun sendIn () Bool
+    false)
+  (define-fun channel () Bool
+    true)
+)

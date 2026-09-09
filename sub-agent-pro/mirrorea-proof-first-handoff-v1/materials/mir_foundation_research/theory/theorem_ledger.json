@@ -1,0 +1,386 @@
+[
+  {
+    "id": "T01",
+    "title": "式の型検査の終了・健全性・完全性",
+    "section": "3.3",
+    "status": "written-proof-not-proof-assistant-checked",
+    "scope": "任意の有限な一階式・型付き環境。宣言的な正規形判定への相対完全性。",
+    "assumptions_and_limits": "型のjoin計算が定義され、環境と構文が整っていること。",
+    "smt_helpers": [],
+    "execution_evidence": "model/test_core.py"
+  },
+  {
+    "id": "T02",
+    "title": "純粋式の決定性・全域性・型安全性",
+    "section": "3.3",
+    "status": "written-proof-not-proof-assistant-checked",
+    "scope": "数学的整数・Bool・有限積。一般再帰、通信、Int64除外。",
+    "assumptions_and_limits": "T01の型付き入力。",
+    "smt_helpers": [],
+    "execution_evidence": "model/test_core.py"
+  },
+  {
+    "id": "T03",
+    "title": "構文上の読取集合に関するframe性",
+    "section": "3.3",
+    "status": "written-proof-not-proof-assistant-checked",
+    "scope": "依存集合上で同じ状態、同じ局所環境。",
+    "assumptions_and_limits": "隠れた外部入力・副作用がないこと。",
+    "smt_helpers": [
+      "01_store_frame.smt2",
+      "03_independent_writes.smt2",
+      "04_independent_rmw.smt2"
+    ],
+    "execution_evidence": "model/test_core.py"
+  },
+  {
+    "id": "T04",
+    "title": "式のlow非干渉",
+    "section": "3.3",
+    "status": "written-proof-not-proof-assistant-checked",
+    "scope": "固定schemaの値結果のみ。タイミング・transcript除外。",
+    "assumptions_and_limits": "低labelの入力が一致し、式の結果labelがobserver以下。",
+    "smt_helpers": [
+      "41_pc_join.smt2",
+      "42_implicit_flow_mutant.smt2",
+      "43_low_expression_add.smt2",
+      "44_low_expression_conditional.smt2"
+    ],
+    "execution_evidence": "model/test_core.py"
+  },
+  {
+    "id": "T05",
+    "title": "owner側代入の型・frame・生成先",
+    "section": "4.1",
+    "status": "written-proof-not-proof-assistant-checked",
+    "scope": "一つの同owner RMW。別ownerは不変snapshot境界。",
+    "assumptions_and_limits": "使用時権限はT12。実通信との対応は別。",
+    "smt_helpers": [
+      "01_store_frame.smt2",
+      "02_store_readback.smt2",
+      "03_independent_writes.smt2",
+      "04_independent_rmw.smt2",
+      "05_rmw_serial.smt2",
+      "06_stale_blind_write_mutant.smt2",
+      "07_projection_other_owner.smt2",
+      "08_projection_same_owner.smt2"
+    ],
+    "execution_evidence": "model/test_core.py"
+  },
+  {
+    "id": "T06",
+    "title": "ループなしcommandのwlp正確性",
+    "section": "4.2",
+    "status": "written-proof-not-proof-assistant-checked",
+    "scope": "孤立した型付きcommand、意味的predicate。",
+    "assumptions_and_limits": "外部干渉なし。SMTの全predicate判定を主張しない。",
+    "smt_helpers": [],
+    "execution_evidence": "手証明のみ"
+  },
+  {
+    "id": "T07",
+    "title": "while不変条件とvariant",
+    "section": "4.2",
+    "status": "written-proof-not-proof-assistant-checked",
+    "scope": "partial correctness、終了するbodyとvariantによる条件付きtermination。",
+    "assumptions_and_limits": "assertionは各ループ境界で成立。並行干渉は別。",
+    "smt_helpers": [
+      "53_while_sum_preservation.smt2",
+      "54_while_sum_exit.smt2",
+      "55_while_variant.smt2"
+    ],
+    "execution_evidence": "verification/vcs/"
+  },
+  {
+    "id": "T08",
+    "title": "区間refinementと正の整数契約",
+    "section": "5.2",
+    "status": "written-proof-not-proof-assistant-checked",
+    "scope": "整数の加減算、abs、外部へ出すn>0。",
+    "assumptions_and_limits": "数学的整数。境界の値が同じこと。",
+    "smt_helpers": [
+      "09_interval_add.smt2",
+      "10_interval_sub.smt2",
+      "11_absolute_value_contract.smt2",
+      "12_cross_contract_composition.smt2",
+      "13_guarded_decrement.smt2",
+      "14_guarded_decrement_mutant.smt2"
+    ],
+    "execution_evidence": "model/test_local_theories.py"
+  },
+  {
+    "id": "T09",
+    "title": "排他的領域tokenの分離と消費",
+    "section": "5.3",
+    "status": "written-proof-not-proof-assistant-checked",
+    "scope": "allocate/split/move/releaseの抽象有限モデル。",
+    "assumptions_and_limits": "fresh block/token、現在policy、原子的遷移。malloc証明ではない。",
+    "smt_helpers": [
+      "51_disjoint_token_allocation.smt2",
+      "52_linear_token_split_mutant.smt2",
+      "60_region_split_disjoint.smt2",
+      "61_region_split_positive_cover.smt2"
+    ],
+    "execution_evidence": "model/test_local_theories.py"
+  },
+  {
+    "id": "T10",
+    "title": "環境安定性modalityの導入・使用・保存",
+    "section": "5.4",
+    "status": "written-proof-not-proof-assistant-checked",
+    "scope": "定義したR*上のBox。MTT全体ではない。",
+    "assumptions_and_limits": "実際の環境遷移がRに含まれること。",
+    "smt_helpers": [
+      "50_rely_stable_read.smt2"
+    ],
+    "execution_evidence": "model/test_local_theories.py"
+  },
+  {
+    "id": "T11",
+    "title": "異なる局所理論の契約合成",
+    "section": "5.5",
+    "status": "written-proof-not-proof-assistant-checked",
+    "scope": "契約に対応したM1/M2、安定した境界前提。",
+    "assumptions_and_limits": "局所契約の意味対応は各実例の証明。任意pluginの検査器ではない。",
+    "smt_helpers": [
+      "12_cross_contract_composition.smt2"
+    ],
+    "execution_evidence": "model/test_local_theories.py"
+  },
+  {
+    "id": "T12",
+    "title": "現在権限と退役世代の使用拒否",
+    "section": "6.2",
+    "status": "written-proof-not-proof-assistant-checked",
+    "scope": "明示的な信頼境界と原子的owner使用検査。",
+    "assumptions_and_limits": "暗号・hostの真正性は理想化。古い値の存在と使用を分離。",
+    "smt_helpers": [
+      "24_revoked_epoch.smt2",
+      "25_aba_cell_handle.smt2",
+      "26_tombstone_union.smt2",
+      "27_proof_not_grant.smt2",
+      "28_auth_conjunction.smt2",
+      "29_auth_or_mutant.smt2"
+    ],
+    "execution_evidence": "model/test_core.py"
+  },
+  {
+    "id": "T13",
+    "title": "要求keyごとの高々一回のmutation",
+    "section": "6.2",
+    "status": "written-proof-not-proof-assistant-checked",
+    "scope": "任意有限履歴、key非再利用、台帳非削除。",
+    "assumptions_and_limits": "writeと決定記録が原子的。crash途中・exactly-once除外。",
+    "smt_helpers": [
+      "30_no_double_commit.smt2",
+      "31_reply_loss_preserves_commit.smt2",
+      "32_post_loss_nonexecution_mutant.smt2"
+    ],
+    "execution_evidence": "model/test_core.py"
+  },
+  {
+    "id": "T14",
+    "title": "理想化輸送に対する有限trace refinement",
+    "section": "6.3",
+    "status": "written-proof-not-proof-assistant-checked",
+    "scope": "抽象非同期ソース機械とコピー/遅延/破棄を持つモデル。",
+    "assumptions_and_limits": "理想的な発行照合、同じservice規則。Rust/QUIC証明ではない。",
+    "smt_helpers": [],
+    "execution_evidence": "model/test_core.py"
+  },
+  {
+    "id": "T15",
+    "title": "条件付き進行",
+    "section": "6.3",
+    "status": "written-proof-not-proof-assistant-checked",
+    "scope": "一つの要求の最終配送とservice/consume。",
+    "assumptions_and_limits": "公平性、必要配送、有限資源、権限/版/対象の安定。",
+    "smt_helpers": [],
+    "execution_evidence": "手証明のみ"
+  },
+  {
+    "id": "T16",
+    "title": "有限DAGと自然数rankの同値",
+    "section": "7.1",
+    "status": "written-proof-not-proof-assistant-checked",
+    "scope": "任意有限有向graph、初期単一root不要。",
+    "assumptions_and_limits": "辺の意味はgraphごとに区別。",
+    "smt_helpers": [
+      "15_rank_path_step.smt2",
+      "16_rank_no_cycle.smt2"
+    ],
+    "execution_evidence": "model/test_core.py"
+  },
+  {
+    "id": "T17",
+    "title": "pure fallback正規化の結合則",
+    "section": "7.2",
+    "status": "written-proof-not-proof-assistant-checked",
+    "scope": "副作用のないguard、同じ文脈、左からの候補順序。",
+    "assumptions_and_limits": "試行effect/rollbackの一般結合則ではない。",
+    "smt_helpers": [
+      "22_chain_flatten_assoc.smt2"
+    ],
+    "execution_evidence": "model/test_core.py"
+  },
+  {
+    "id": "T18",
+    "title": "fallback単調性・選択妥当性・条件付きtotality",
+    "section": "7.3",
+    "status": "written-proof-not-proof-assistant-checked",
+    "scope": "任意有限chain、nを枯渇とするcursor。",
+    "assumptions_and_limits": "有効性は現在の一貫した判定。reacquireは別lineage。",
+    "smt_helpers": [
+      "18_max_history_mutant.smt2",
+      "19_fallback_search_step.smt2",
+      "20_fallback_totality_step.smt2",
+      "21_fallback_lineage_order.smt2",
+      "23_ancestor_not_authority.smt2"
+    ],
+    "execution_evidence": "model/test_core.py"
+  },
+  {
+    "id": "T19",
+    "title": "checked state/operation追加の保存",
+    "section": "8.3",
+    "status": "written-proof-not-proof-assistant-checked",
+    "scope": "任意有限候補全体を先に検査した後の原子的追加。",
+    "assumptions_and_limits": "既存意味の非変更、新世代、grantの別発行。",
+    "smt_helpers": [
+      "01_store_frame.smt2",
+      "15_rank_path_step.smt2",
+      "16_rank_no_cycle.smt2",
+      "40_patch_outside_frame.smt2"
+    ],
+    "execution_evidence": "model/test_extension_checks.py"
+  },
+  {
+    "id": "T20",
+    "title": "コード交換と利用側契約の保存",
+    "section": "8.4",
+    "status": "written-proof-not-proof-assistant-checked",
+    "scope": "基本型契約と、別に証明した強い置換契約を区別。",
+    "assumptions_and_limits": "局所quiescenceと現在の完全依存stamp。任意migrationは未実装。",
+    "smt_helpers": [
+      "36_contract_replacement.smt2",
+      "37_precondition_strengthening_mutant.smt2",
+      "38_effect_row_subset_transitive.smt2",
+      "39_value_migration.smt2",
+      "40_patch_outside_frame.smt2"
+    ],
+    "execution_evidence": "model/test_core.py"
+  },
+  {
+    "id": "T21",
+    "title": "閉包撤去・reparentの保存",
+    "section": "8.5",
+    "status": "written-proof-not-proof-assistant-checked",
+    "scope": "子孫閉包、関連operationの退役、exact DAG再検査。",
+    "assumptions_and_limits": "一般owner migrationではない。",
+    "smt_helpers": [
+      "17_closed_removal.smt2",
+      "25_aba_cell_handle.smt2",
+      "26_tombstone_union.smt2"
+    ],
+    "execution_evidence": "model/test_core.py"
+  },
+  {
+    "id": "T22",
+    "title": "局所安定性と独立patchの可換性",
+    "section": "8.6",
+    "status": "written-proof-not-proof-assistant-checked",
+    "scope": "完全なread/write/meta/authority/freshness footprint。",
+    "assumptions_and_limits": "端点だけのdisjointでは不足。多owner原子性は未実現。",
+    "smt_helpers": [
+      "03_independent_writes.smt2",
+      "04_independent_rmw.smt2",
+      "33_freshness_locality.smt2",
+      "34_versioned_fact.smt2",
+      "35_historical_fact_mutant.smt2",
+      "40_patch_outside_frame.smt2"
+    ],
+    "execution_evidence": "model/test_extension_checks.py"
+  },
+  {
+    "id": "T23",
+    "title": "任意の有限回の継続進化",
+    "section": "8.6",
+    "status": "written-proof-not-proof-assistant-checked",
+    "scope": "上記保存規則からの履歴長帰納法。",
+    "assumptions_and_limits": "追加した全拡張が対応する保存義務を満たすこと。liveness別。",
+    "smt_helpers": [],
+    "execution_evidence": "model/test_core.py; model/test_extension_checks.py"
+  },
+  {
+    "id": "T24",
+    "title": "最小checkpoint completion",
+    "section": "9.3",
+    "status": "written-proof-not-proof-assistant-checked",
+    "scope": "任意有限の完全な閾値入力に対する終了/健全/完全/最小。",
+    "assumptions_and_limits": "未知messageのない依存入力。実storageなし。",
+    "smt_helpers": [
+      "57_checkpoint_raise.smt2",
+      "58_checkpoint_overflow_contradiction.smt2",
+      "59_checkpoint_Z_cycle.smt2"
+    ],
+    "execution_evidence": "model/test_checkpoints.py"
+  },
+  {
+    "id": "T25",
+    "title": "固定checkpoint間のZ-path特徴づけ",
+    "section": "9.4",
+    "status": "written-proof-not-proof-assistant-checked",
+    "scope": "最終checkpointがそろう有限horizon。Z-cycleは単一固定の場合。",
+    "assumptions_and_limits": "既知結果の有限モデルでの再導出。実OBL-014受理なし。",
+    "smt_helpers": [
+      "59_checkpoint_Z_cycle.smt2"
+    ],
+    "execution_evidence": "model/test_checkpoints.py"
+  },
+  {
+    "id": "T26",
+    "title": "cutの再生一意性",
+    "section": "10.1",
+    "status": "written-proof-not-proof-assistant-checked",
+    "scope": "比較不能な出来事の交換で結果が変わらない場合。",
+    "assumptions_and_limits": "全競合が追跡され、交換の有効性も保存。実I/Oは再実行しない。",
+    "smt_helpers": [
+      "03_independent_writes.smt2",
+      "04_independent_rmw.smt2",
+      "45_snapshot_receive_send.smt2",
+      "46_channel_not_orphan_repair.smt2",
+      "47_snapshot_inflight.smt2"
+    ],
+    "execution_evidence": "手証明とSMT補助条件"
+  },
+  {
+    "id": "T27",
+    "title": "現在制御を保持した復元のno-stale-use",
+    "section": "10.2",
+    "status": "written-proof-not-proof-assistant-checked",
+    "scope": "失効集合和・現在世代・use-time guardによる拒否。",
+    "assumptions_and_limits": "現在の制御状態の取得を仮定。完全Load/durability定理ではない。",
+    "smt_helpers": [
+      "24_revoked_epoch.smt2",
+      "25_aba_cell_handle.smt2",
+      "26_tombstone_union.smt2",
+      "48_replay_prefix_revocation.smt2",
+      "49_restore_old_grant_mutant.smt2"
+    ],
+    "execution_evidence": "model/test_core.py"
+  },
+  {
+    "id": "T28",
+    "title": "固定schemaの観測値非干渉",
+    "section": "11.1",
+    "status": "written-proof-not-proof-assistant-checked",
+    "scope": "fieldの存在条件と値がlowである有限snapshot。",
+    "assumptions_and_limits": "同schema/observer policy。全trace・時刻・行数は除外。",
+    "smt_helpers": [
+      "41_pc_join.smt2",
+      "43_low_expression_add.smt2",
+      "44_low_expression_conditional.smt2"
+    ],
+    "execution_evidence": "式レベルのテストからの手証明"
+  }
+]

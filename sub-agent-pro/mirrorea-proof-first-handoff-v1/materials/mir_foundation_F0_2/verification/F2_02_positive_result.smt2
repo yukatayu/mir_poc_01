@@ -1,0 +1,8 @@
+(set-option :produce-proofs true)
+(set-option :produce-models true)
+(set-option :timeout 15000)
+(set-logic ALL)
+(declare-const x Int)
+(assert (< (+ (ite (< x 0) (- x) x) 1) 1))
+(check-sat)
+(get-proof)

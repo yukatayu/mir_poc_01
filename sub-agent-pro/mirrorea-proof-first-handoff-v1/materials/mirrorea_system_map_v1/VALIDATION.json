@@ -1,0 +1,43 @@
+{
+  "kind": "document-internal-structure-check",
+  "passed": true,
+  "counts": {
+    "requirements": 119,
+    "groups": 17,
+    "user_intents": 18,
+    "decisions": 30,
+    "proof_targets": 18,
+    "scenarios": 24,
+    "goals": 7,
+    "risks": 14
+  },
+  "origin_counts": {
+    "U": 66,
+    "D": 53
+  },
+  "coverage": {
+    "explicit_intents": 18,
+    "requirements_with_scenarios": 119,
+    "referenced_decisions": 30,
+    "referenced_assurance_targets": 18
+  },
+  "co_design_components": [
+    [
+      "CT-05",
+      "EV-04"
+    ],
+    [
+      "ID-07",
+      "TY-04"
+    ]
+  ],
+  "co_design_note": "論点参照の相互依存であり、実行順や循環論法の受理ではない。本文第11節参照。",
+  "errors": [],
+  "does_not_establish": [
+    "requirements completeness for all future uses",
+    "project theoretical soundness",
+    "F0.x proof verification",
+    "project test execution",
+    "Canon adoption"
+  ]
+}

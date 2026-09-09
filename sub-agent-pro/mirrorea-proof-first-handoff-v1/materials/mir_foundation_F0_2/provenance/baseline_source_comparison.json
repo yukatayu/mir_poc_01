@@ -1,0 +1,274 @@
+[
+  {
+    "path": "f01_model/checkpoints.py",
+    "same_as_F01": true
+  },
+  {
+    "path": "f01_model/core.py",
+    "same_as_F01": true
+  },
+  {
+    "path": "f01_model/resource_theory.py",
+    "same_as_F01": true
+  },
+  {
+    "path": "f01_model/test_checkpoints.py",
+    "same_as_F01": true
+  },
+  {
+    "path": "f01_model/test_core.py",
+    "same_as_F01": true
+  },
+  {
+    "path": "f01_model/test_extension_checks.py",
+    "same_as_F01": true
+  },
+  {
+    "path": "f01_model/test_local_theories.py",
+    "same_as_F01": true
+  },
+  {
+    "path": "f01_verification/vcs/01_store_frame.smt2",
+    "same_as_F01": true
+  },
+  {
+    "path": "f01_verification/vcs/02_store_readback.smt2",
+    "same_as_F01": true
+  },
+  {
+    "path": "f01_verification/vcs/03_independent_writes.smt2",
+    "same_as_F01": true
+  },
+  {
+    "path": "f01_verification/vcs/04_independent_rmw.smt2",
+    "same_as_F01": true
+  },
+  {
+    "path": "f01_verification/vcs/05_rmw_serial.smt2",
+    "same_as_F01": true
+  },
+  {
+    "path": "f01_verification/vcs/06_stale_blind_write_mutant.smt2",
+    "same_as_F01": true
+  },
+  {
+    "path": "f01_verification/vcs/07_projection_other_owner.smt2",
+    "same_as_F01": true
+  },
+  {
+    "path": "f01_verification/vcs/08_projection_same_owner.smt2",
+    "same_as_F01": true
+  },
+  {
+    "path": "f01_verification/vcs/09_interval_add.smt2",
+    "same_as_F01": true
+  },
+  {
+    "path": "f01_verification/vcs/10_interval_sub.smt2",
+    "same_as_F01": true
+  },
+  {
+    "path": "f01_verification/vcs/11_absolute_value_contract.smt2",
+    "same_as_F01": true
+  },
+  {
+    "path": "f01_verification/vcs/12_cross_contract_composition.smt2",
+    "same_as_F01": true
+  },
+  {
+    "path": "f01_verification/vcs/13_guarded_decrement.smt2",
+    "same_as_F01": true
+  },
+  {
+    "path": "f01_verification/vcs/14_guarded_decrement_mutant.smt2",
+    "same_as_F01": true
+  },
+  {
+    "path": "f01_verification/vcs/15_rank_path_step.smt2",
+    "same_as_F01": true
+  },
+  {
+    "path": "f01_verification/vcs/16_rank_no_cycle.smt2",
+    "same_as_F01": true
+  },
+  {
+    "path": "f01_verification/vcs/17_closed_removal.smt2",
+    "same_as_F01": true
+  },
+  {
+    "path": "f01_verification/vcs/18_max_history_mutant.smt2",
+    "same_as_F01": true
+  },
+  {
+    "path": "f01_verification/vcs/19_fallback_search_step.smt2",
+    "same_as_F01": true
+  },
+  {
+    "path": "f01_verification/vcs/20_fallback_totality_step.smt2",
+    "same_as_F01": true
+  },
+  {
+    "path": "f01_verification/vcs/21_fallback_lineage_order.smt2",
+    "same_as_F01": true
+  },
+  {
+    "path": "f01_verification/vcs/22_chain_flatten_assoc.smt2",
+    "same_as_F01": true
+  },
+  {
+    "path": "f01_verification/vcs/23_ancestor_not_authority.smt2",
+    "same_as_F01": true
+  },
+  {
+    "path": "f01_verification/vcs/24_revoked_epoch.smt2",
+    "same_as_F01": true
+  },
+  {
+    "path": "f01_verification/vcs/25_aba_cell_handle.smt2",
+    "same_as_F01": true
+  },
+  {
+    "path": "f01_verification/vcs/26_tombstone_union.smt2",
+    "same_as_F01": true
+  },
+  {
+    "path": "f01_verification/vcs/27_proof_not_grant.smt2",
+    "same_as_F01": true
+  },
+  {
+    "path": "f01_verification/vcs/28_auth_conjunction.smt2",
+    "same_as_F01": true
+  },
+  {
+    "path": "f01_verification/vcs/29_auth_or_mutant.smt2",
+    "same_as_F01": true
+  },
+  {
+    "path": "f01_verification/vcs/30_no_double_commit.smt2",
+    "same_as_F01": true
+  },
+  {
+    "path": "f01_verification/vcs/31_reply_loss_preserves_commit.smt2",
+    "same_as_F01": true
+  },
+  {
+    "path": "f01_verification/vcs/32_post_loss_nonexecution_mutant.smt2",
+    "same_as_F01": true
+  },
+  {
+    "path": "f01_verification/vcs/33_freshness_locality.smt2",
+    "same_as_F01": true
+  },
+  {
+    "path": "f01_verification/vcs/34_versioned_fact.smt2",
+    "same_as_F01": true
+  },
+  {
+    "path": "f01_verification/vcs/35_historical_fact_mutant.smt2",
+    "same_as_F01": true
+  },
+  {
+    "path": "f01_verification/vcs/36_contract_replacement.smt2",
+    "same_as_F01": true
+  },
+  {
+    "path": "f01_verification/vcs/37_precondition_strengthening_mutant.smt2",
+    "same_as_F01": true
+  },
+  {
+    "path": "f01_verification/vcs/38_effect_row_subset_transitive.smt2",
+    "same_as_F01": true
+  },
+  {
+    "path": "f01_verification/vcs/39_value_migration.smt2",
+    "same_as_F01": true
+  },
+  {
+    "path": "f01_verification/vcs/40_patch_outside_frame.smt2",
+    "same_as_F01": true
+  },
+  {
+    "path": "f01_verification/vcs/41_pc_join.smt2",
+    "same_as_F01": true
+  },
+  {
+    "path": "f01_verification/vcs/42_implicit_flow_mutant.smt2",
+    "same_as_F01": true
+  },
+  {
+    "path": "f01_verification/vcs/43_low_expression_add.smt2",
+    "same_as_F01": true
+  },
+  {
+    "path": "f01_verification/vcs/44_low_expression_conditional.smt2",
+    "same_as_F01": true
+  },
+  {
+    "path": "f01_verification/vcs/45_snapshot_receive_send.smt2",
+    "same_as_F01": true
+  },
+  {
+    "path": "f01_verification/vcs/46_channel_not_orphan_repair.smt2",
+    "same_as_F01": true
+  },
+  {
+    "path": "f01_verification/vcs/47_snapshot_inflight.smt2",
+    "same_as_F01": true
+  },
+  {
+    "path": "f01_verification/vcs/48_replay_prefix_revocation.smt2",
+    "same_as_F01": true
+  },
+  {
+    "path": "f01_verification/vcs/49_restore_old_grant_mutant.smt2",
+    "same_as_F01": true
+  },
+  {
+    "path": "f01_verification/vcs/50_rely_stable_read.smt2",
+    "same_as_F01": true
+  },
+  {
+    "path": "f01_verification/vcs/51_disjoint_token_allocation.smt2",
+    "same_as_F01": true
+  },
+  {
+    "path": "f01_verification/vcs/52_linear_token_split_mutant.smt2",
+    "same_as_F01": true
+  },
+  {
+    "path": "f01_verification/vcs/53_while_sum_preservation.smt2",
+    "same_as_F01": true
+  },
+  {
+    "path": "f01_verification/vcs/54_while_sum_exit.smt2",
+    "same_as_F01": true
+  },
+  {
+    "path": "f01_verification/vcs/55_while_variant.smt2",
+    "same_as_F01": true
+  },
+  {
+    "path": "f01_verification/vcs/56_i64_refinement_guard.smt2",
+    "same_as_F01": true
+  },
+  {
+    "path": "f01_verification/vcs/57_checkpoint_raise.smt2",
+    "same_as_F01": true
+  },
+  {
+    "path": "f01_verification/vcs/58_checkpoint_overflow_contradiction.smt2",
+    "same_as_F01": true
+  },
+  {
+    "path": "f01_verification/vcs/59_checkpoint_Z_cycle.smt2",
+    "same_as_F01": true
+  },
+  {
+    "path": "f01_verification/vcs/60_region_split_disjoint.smt2",
+    "same_as_F01": true
+  },
+  {
+    "path": "f01_verification/vcs/61_region_split_positive_cover.smt2",
+    "same_as_F01": true
+  }
+]

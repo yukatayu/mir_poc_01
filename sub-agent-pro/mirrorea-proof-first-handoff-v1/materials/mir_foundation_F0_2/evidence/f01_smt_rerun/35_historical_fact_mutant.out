@@ -1,0 +1,7 @@
+sat
+(
+  (define-fun sample () Int
+    1)
+  (define-fun now () Int
+    2)
+)

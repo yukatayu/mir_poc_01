@@ -1,0 +1,8 @@
+stock: Cell["C", int] = 10
+
+@owner("C")
+def use(n: int) -> int:
+    assert 0 <= n
+    assert n <= stock
+    stock = stock - n
+    return stock

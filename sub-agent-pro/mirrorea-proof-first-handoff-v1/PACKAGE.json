@@ -1,0 +1,27 @@
+{
+  "schema": "mirrorea.handoff.v1",
+  "package": "mirrorea-proof-first-handoff-v1",
+  "created_date_jst": "2026-09-09",
+  "target_repository": "yukatayu/mir_poc_01",
+  "baseline_commit": "19a6decfbea0815b7b4265e8fadfb399270aaed2",
+  "repository_status_observed": "I3-3 accepted under ADR-0043; Plan 250 retained, no active semantic milestone; I3-4 requires explicit resume; theory T1",
+  "target_installation": "sub-agent-pro/mirrorea-proof-first-handoff-v1",
+  "agent_policy": {
+    "main_authors": 1,
+    "sub_agents": "forbidden",
+    "oracle": "advisory, cold context, read-only, parent-operated",
+    "oracle_poll_seconds": 180,
+    "oracle_walltime_limit": null
+  },
+  "authority": "research materials are not Canon and do not by themselves approve any requirement, theory, phase or production behavior",
+  "terminal_scope": "proof-first development through a verified selected alpha candidate, not general World-Web/public-production completion",
+  "materials_policy": "byte-preserved original archives plus extracted original files; perform new runs only in working copies",
+  "not_done_here": [
+    "No repository edits",
+    "No new mathematical proof",
+    "No Lean/Rocq verification",
+    "No oracle invocation",
+    "No full repository audit",
+    "No public deployment"
+  ]
+}

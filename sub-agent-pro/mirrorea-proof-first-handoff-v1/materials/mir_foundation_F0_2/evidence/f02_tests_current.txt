@@ -1,0 +1,103 @@
+======================================================================
+ERROR: test_export_cannot_silently_lose_guarantee (test_certificates.ExportEvolution.test_export_cannot_silently_lose_guarantee)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/mnt/data/mir_foundation_F0_2/tests/test_certificates.py", line 120, in setUp
+    self.p=example('positive.mirx','Positive');self.e=Engine([self.p]);self.e.patch_principals.add('admin');self.op=self.e.ops['Positive.positive'];self.post=Poly.var('result')-1;self.ev=produce_evidence(self.op,{},self.post);self.e.register_export(self.op.sig.name,self.ev,self.post)
+                                                                                                                                                                                                                                  ^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'Engine' object has no attribute 'register_export'
+
+======================================================================
+ERROR: test_export_survives_fresh_restore_via_recheck (test_certificates.ExportEvolution.test_export_survives_fresh_restore_via_recheck)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/mnt/data/mir_foundation_F0_2/tests/test_certificates.py", line 120, in setUp
+    self.p=example('positive.mirx','Positive');self.e=Engine([self.p]);self.e.patch_principals.add('admin');self.op=self.e.ops['Positive.positive'];self.post=Poly.var('result')-1;self.ev=produce_evidence(self.op,{},self.post);self.e.register_export(self.op.sig.name,self.ev,self.post)
+                                                                                                                                                                                                                                  ^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'Engine' object has no attribute 'register_export'
+
+======================================================================
+ERROR: test_same_contract_new_proof_allows_new_body (test_certificates.ExportEvolution.test_same_contract_new_proof_allows_new_body)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/mnt/data/mir_foundation_F0_2/tests/test_certificates.py", line 120, in setUp
+    self.p=example('positive.mirx','Positive');self.e=Engine([self.p]);self.e.patch_principals.add('admin');self.op=self.e.ops['Positive.positive'];self.post=Poly.var('result')-1;self.ev=produce_evidence(self.op,{},self.post);self.e.register_export(self.op.sig.name,self.ev,self.post)
+                                                                                                                                                                                                                                  ^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'Engine' object has no attribute 'register_export'
+
+======================================================================
+ERROR: test_untrusted_link_rechecks_source_but_never_issues_grant (test_certificates.ExportEvolution.test_untrusted_link_rechecks_source_but_never_issues_grant)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/mnt/data/mir_foundation_F0_2/tests/test_certificates.py", line 120, in setUp
+    self.p=example('positive.mirx','Positive');self.e=Engine([self.p]);self.e.patch_principals.add('admin');self.op=self.e.ops['Positive.positive'];self.post=Poly.var('result')-1;self.ev=produce_evidence(self.op,{},self.post);self.e.register_export(self.op.sig.name,self.ev,self.post)
+                                                                                                                                                                                                                                  ^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'Engine' object has no attribute 'register_export'
+
+======================================================================
+ERROR: test_wrong_conclusion_cannot_replace_export (test_certificates.ExportEvolution.test_wrong_conclusion_cannot_replace_export)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/mnt/data/mir_foundation_F0_2/tests/test_certificates.py", line 120, in setUp
+    self.p=example('positive.mirx','Positive');self.e=Engine([self.p]);self.e.patch_principals.add('admin');self.op=self.e.ops['Positive.positive'];self.post=Poly.var('result')-1;self.ev=produce_evidence(self.op,{},self.post);self.e.register_export(self.op.sig.name,self.ev,self.post)
+                                                                                                                                                                                                                                  ^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'Engine' object has no attribute 'register_export'
+
+======================================================================
+ERROR: test_owner_certificate_cannot_claim_another_owners_state (test_certificates.InvariantScopeRegression.test_owner_certificate_cannot_claim_another_owners_state)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/mnt/data/mir_foundation_F0_2/tests/test_certificates.py", line 108, in test_owner_certificate_cannot_claim_another_owners_state
+    with self.assertRaisesRegex(CertificateError,'InvariantOwnerScope'):e.protect_owner('A',inv,{op.sig.name:(ev,None)})
+                                                                        ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/data/mir_foundation_F0_2/model/engine.py", line 231, in protect_owner
+    if any(p.value(s.state)<0 for p in invariants.values()):raise CertificateError('InitialInvariantViolation')
+       ~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/data/mir_foundation_F0_2/model/engine.py", line 231, in <genexpr>
+    if any(p.value(s.state)<0 for p in invariants.values()):raise CertificateError('InitialInvariantViolation')
+           ~~~~~~~^^^^^^^^^
+  File "/mnt/data/mir_foundation_F0_2/model/certificates.py", line 50, in value
+    for v in m:c*=env[v]
+                  ~~~^^^
+KeyError: 'b'
+
+======================================================================
+ERROR: test_new_body_preserves_total_contract (test_certificates.TotalityAndEvolution.test_new_body_preserves_total_contract)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/mnt/data/mir_foundation_F0_2/tests/test_certificates.py", line 149, in test_new_body_preserves_total_contract
+    p=example('positive.mirx','Positive');e=Engine([p]);e.patch_principals.add('admin');op=e.ops['Positive.positive'];post=Poly.var('result')-1;e.register_export(op.sig.name,produce_total_evidence(op,{},post),post)
+                                                                                                                                                ^^^^^^^^^^^^^^^^^
+AttributeError: 'Engine' object has no attribute 'register_export'
+
+======================================================================
+ERROR: test_silent_precondition_strengthening_rejected (test_certificates.TotalityAndEvolution.test_silent_precondition_strengthening_rejected)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/mnt/data/mir_foundation_F0_2/tests/test_certificates.py", line 145, in test_silent_precondition_strengthening_rejected
+    p=example('positive.mirx','Positive');e=Engine([p]);e.patch_principals.add('admin');op=e.ops['Positive.positive'];post=Poly.var('result')-1;ev=produce_total_evidence(op,{},post);e.register_export(op.sig.name,ev,post)
+                                                                                                                                                                                      ^^^^^^^^^^^^^^^^^
+AttributeError: 'Engine' object has no attribute 'register_export'
+
+======================================================================
+ERROR: test_private_relation_definition_is_not_public_because_anchors_are (test_relations_restore.RelationPolicyComposition.test_private_relation_definition_is_not_public_because_anchors_are)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/mnt/data/mir_foundation_F0_2/tests/test_relations_restore.py", line 58, in test_private_relation_definition_is_not_public_because_anchors_are
+    a=Anchor('A',1);r=RelationSystem({'root':Binding((a,),1)},{'offset':Add(Ref('root'),K(100))},{'offset':1})
+                      ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: RelationSystem.__init__() takes 3 positional arguments but 4 were given
+
+======================================================================
+FAIL: test_same_signature_does_not_authorize_state_type_change (test_live_patch.ReplacementSchemaRegression.test_same_signature_does_not_authorize_state_type_change)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/mnt/data/mir_foundation_F0_2/tests/test_live_patch.py", line 71, in test_same_signature_does_not_authorize_state_type_change
+    with self.assertRaisesRegex(StaticError,'ReplacementSchemaMismatch'):e.replace_operation('admin',new,'M.f')
+         ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: StaticError not raised
+
+----------------------------------------------------------------------
+Ran 141 tests in 1.376s
+
+FAILED (failures=1, errors=9)

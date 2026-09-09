@@ -1,0 +1,9 @@
+unsat
+((proof
+(let ((?x28 (store (select s l) x v)))
+(let (($x31 (= (select (store s l ?x28) l) ?x28)))
+(let (($x32 (not $x31)))
+(let ((@x41 (trans (monotonicity (rewrite $x31) (= $x31 (= ?x28 ?x28))) (rewrite (= (= ?x28 ?x28) true)) (= $x31 true))))
+(let ((@x48 (trans (monotonicity @x41 (= $x32 (not true))) (rewrite (= (not true) false)) (= $x32 false))))
+(mp (asserted $x32) @x48 false))))))))
+

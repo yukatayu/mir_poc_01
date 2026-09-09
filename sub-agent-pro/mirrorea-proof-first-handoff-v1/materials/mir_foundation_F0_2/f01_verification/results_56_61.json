@@ -1,0 +1,57 @@
+[
+  {
+    "id": "57_checkpoint_raise",
+    "title": "Lower-bound propagation stays below every satisfying completion",
+    "file": "57_checkpoint_raise.smt2",
+    "expected": "unsat",
+    "category": "induction-step",
+    "actual": "unsat",
+    "passed": true,
+    "solver": "4.13.3.0",
+    "input_sha256": "c15e70764bbf3730b8188f10e975d3fc981c5b2452ba72df4db73046d98ee02b"
+  },
+  {
+    "id": "58_checkpoint_overflow_contradiction",
+    "title": "A forced lower bound beyond the checkpoint ceiling excludes all completions",
+    "file": "58_checkpoint_overflow_contradiction.smt2",
+    "expected": "unsat",
+    "category": "symbolic-lemma",
+    "actual": "unsat",
+    "passed": true,
+    "solver": "4.13.3.0",
+    "input_sha256": "c72fe42a8c6ec364087677ef522d136b539f01f0a84b6db326a3ec85b70fc893"
+  },
+  {
+    "id": "59_checkpoint_Z_cycle",
+    "title": "The concrete two-message Z cycle excludes the middle A checkpoint",
+    "file": "59_checkpoint_Z_cycle.smt2",
+    "expected": "unsat",
+    "category": "symbolic-lemma",
+    "actual": "unsat",
+    "passed": true,
+    "solver": "4.13.3.0",
+    "input_sha256": "02b21515d4ccce2bb4d17618d9171c25e7cf3d6b4af0151b46791fac19ac9012"
+  },
+  {
+    "id": "60_region_split_disjoint",
+    "title": "The two pieces of an interior region split are disjoint",
+    "file": "60_region_split_disjoint.smt2",
+    "expected": "unsat",
+    "category": "symbolic-lemma",
+    "actual": "unsat",
+    "passed": true,
+    "solver": "4.13.3.0",
+    "input_sha256": "f40063feea9cfa33a34ff4a81125a52d47e325710835110bbae14010c9592788"
+  },
+  {
+    "id": "61_region_split_positive_cover",
+    "title": "Interior split preserves positive sizes and the total extent",
+    "file": "61_region_split_positive_cover.smt2",
+    "expected": "unsat",
+    "category": "symbolic-lemma",
+    "actual": "unsat",
+    "passed": true,
+    "solver": "4.13.3.0",
+    "input_sha256": "383748e3153e6dfdce2bd4ad9781115065f7bc8e354b42c8c7c5ee5922345ee7"
+  }
+]

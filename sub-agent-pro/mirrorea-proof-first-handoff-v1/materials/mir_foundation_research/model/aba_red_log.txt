@@ -1,0 +1,17 @@
+F
+======================================================================
+FAIL: test_stale_patch_stamp_rejects_recreated_same_name_and_value_version (test_extension_checks.Extensions.test_stale_patch_stamp_rejects_recreated_same_name_and_value_version)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/mnt/data/mir_foundation_research/model/test_extension_checks.py", line 97, in test_stale_patch_stamp_rejects_recreated_same_name_and_value_version
+    self.assertEqual(c.replace_operation('operator', replacement, stale), 'StalePreparation')
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 'Activated' != 'StalePreparation'
+- Activated
++ StalePreparation
+
+
+----------------------------------------------------------------------
+Ran 1 test in 0.002s
+
+FAILED (failures=1)

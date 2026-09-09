@@ -1,0 +1,19 @@
+unsat
+((proof
+(let ((?x27 (+ x y)))
+(let (($x43 (<= ?x27 9223372036854775807)))
+(let ((@x44 (asserted $x43)))
+(let (($x36 (>= ?x27 (- 9223372036854775808))))
+(let ((@x38 (rewrite (= (<= (- 9223372036854775808) ?x27) $x36))))
+(let (($x33 (<= (- 9223372036854775808) ?x27)))
+(let ((?x24 (- 9223372036854775808)))
+(let (($x28 (<= ?x24 ?x27)))
+(let ((@x29 (asserted $x28)))
+(let (($x63 (or (not $x36) (not $x43))))
+(let ((@x69 (monotonicity (rewrite (= (and $x36 $x43) (not $x63))) (= (not (and $x36 $x43)) (not (not $x63))))))
+(let ((@x73 (trans @x69 (rewrite (= (not (not $x63)) $x63)) (= (not (and $x36 $x43)) $x63))))
+(let (($x50 (and $x36 $x43)))
+(let (($x49 (not $x50)))
+(let ((@x52 (mp (asserted (not (and (>= ?x27 ?x24) $x43))) (rewrite (= (not (and (>= ?x27 ?x24) $x43)) $x49)) $x49)))
+(unit-resolution (mp @x52 @x73 $x63) (mp (mp @x29 (rewrite (= $x28 $x33)) $x33) @x38 $x36) @x44 false))))))))))))))))))
+

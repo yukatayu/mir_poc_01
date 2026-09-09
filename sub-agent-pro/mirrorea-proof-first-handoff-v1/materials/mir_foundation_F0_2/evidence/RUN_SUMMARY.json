@@ -1,0 +1,84 @@
+{
+  "schema": "mir-foundation-research-f02-validation-1",
+  "time_utc": "2026-09-09T03:00:57.249221+00:00",
+  "python": "3.13.5 (main, Jul 15 2026, 20:25:40) [GCC 14.2.0]",
+  "platform": "Linux-6.18.35-x86_64-with-glibc2.41",
+  "checks": [
+    {
+      "command": [
+        "/opt/pyvenv/bin/python3",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests",
+        "-v"
+      ],
+      "cwd": ".",
+      "exit_code": 0,
+      "test_count": 153,
+      "log": "evidence/f02_final_tests.txt"
+    },
+    {
+      "command": [
+        "/opt/pyvenv/bin/python3",
+        "-m",
+        "unittest",
+        "discover",
+        "-v"
+      ],
+      "cwd": "f01_model",
+      "exit_code": 0,
+      "test_count": 69,
+      "log": "evidence/f01_final_tests.txt"
+    },
+    {
+      "command": [
+        "/opt/pyvenv/bin/python3",
+        "-m",
+        "compileall",
+        "-q",
+        "model",
+        "tests",
+        "examples"
+      ],
+      "cwd": ".",
+      "exit_code": 0,
+      "test_count": null,
+      "log": "evidence/compileall.txt"
+    },
+    {
+      "command": [
+        "/opt/pyvenv/bin/python3",
+        "examples/run_integrated.py"
+      ],
+      "cwd": ".",
+      "exit_code": 0,
+      "test_count": null,
+      "log": "evidence/integrated_demo.txt"
+    },
+    {
+      "command": [
+        "/opt/pyvenv/bin/python3",
+        "examples/run_activation.py"
+      ],
+      "cwd": ".",
+      "exit_code": 0,
+      "test_count": null,
+      "log": "evidence/activation_final.txt"
+    },
+    {
+      "command": [
+        "/opt/pyvenv/bin/python3",
+        "verification/check_smt.py"
+      ],
+      "cwd": ".",
+      "exit_code": 0,
+      "test_count": null,
+      "log": "evidence/smt_final.txt"
+    }
+  ],
+  "smt": "executed",
+  "all_executed_commands_pass": true,
+  "proof_status": "general claims have hand proofs; no Lean/Rocq execution or independent kernel validation of Z3 proofs"
+}

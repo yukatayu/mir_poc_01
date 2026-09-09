@@ -1,0 +1,4 @@
+Traceback (most recent call last):
+  File "/mnt/data/mir_foundation_F0_2/verification/check_smt.py", line 7, in <module>
+    from z3_runner import solve,version
+ImportError: cannot import name 'solve' from 'z3_runner' (/mnt/data/mir_foundation_F0_2/f01_verification/z3_runner.py)

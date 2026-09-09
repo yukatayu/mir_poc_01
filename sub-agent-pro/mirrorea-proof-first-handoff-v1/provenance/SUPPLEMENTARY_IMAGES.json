@@ -1,0 +1,12 @@
+[
+  {
+    "path": "materials/supplementary_images/overview_desktop.png",
+    "sha256": "fbdb32594620a4f5c0047c36d7d49d38dec6674a0d29e9924c5b8aab7672e2aa",
+    "role": "historical overview screenshot, not normative requirements"
+  },
+  {
+    "path": "materials/supplementary_images/overview_mobile.png",
+    "sha256": "ee6dc8d0ab02053acab4eb7aead95a50072154e3bb8df5e738d2e7d8be300593",
+    "role": "historical overview screenshot, not normative requirements"
+  }
+]

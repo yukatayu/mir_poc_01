@@ -1,0 +1,34 @@
+{
+  "expressions": {
+    "checked": 4008,
+    "valid": 1414,
+    "invalid": 2594,
+    "low_two_run_checks": 1246
+  },
+  "graphs": {
+    "nodes": 4,
+    "checked": 4096,
+    "acyclic": 543,
+    "cyclic": 3553
+  },
+  "fallback": {
+    "max_length": 6,
+    "cases": 769
+  },
+  "protocol_schedules": {
+    "actions": 5,
+    "length": 5,
+    "cases": 3125,
+    "no_crash_no_byzantine": true
+  },
+  "evolution_demo": {
+    "successive_additions_tested": 100,
+    "fixed_final_limit_in_model": false
+  },
+  "unit_tests": {
+    "run": 49,
+    "failures": 0,
+    "errors": 0,
+    "successful": true
+  }
+}

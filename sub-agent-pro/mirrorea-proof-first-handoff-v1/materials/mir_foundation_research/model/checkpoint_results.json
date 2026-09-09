@@ -1,0 +1,12 @@
+{
+  "Z_path_systems": 8192,
+  "Z_path_conflicts": 2604,
+  "systems": 5184,
+  "no_completion": 1378,
+  "least_completion": 3806,
+  "candidate_vectors_per_system": 9,
+  "tests": 5,
+  "failures": 0,
+  "errors": 0,
+  "successful": true
+}

@@ -1,0 +1,8 @@
+free: Cell["PoolOwner", int] = 16
+
+@owner("PoolOwner")
+def allocate_size(n: int) -> int:
+    assert 0 < n
+    assert n <= free
+    free = free - n
+    return n

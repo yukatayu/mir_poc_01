@@ -1,0 +1,222 @@
+[
+  {
+    "id": "21_fallback_lineage_order",
+    "title": "New lineage advances lexicographic (epoch,cursor) order",
+    "file": "21_fallback_lineage_order.smt2",
+    "expected": "unsat",
+    "category": "symbolic-lemma",
+    "actual": "unsat",
+    "passed": true,
+    "solver": "4.13.3.0",
+    "input_sha256": "9e1b2359047a72a4f9fe134de7ae7a80880708c192be8a8b7d615c4452fe7582"
+  },
+  {
+    "id": "22_chain_flatten_assoc",
+    "title": "Pure ordered fallback flattening associativity",
+    "file": "22_chain_flatten_assoc.smt2",
+    "expected": "unsat",
+    "category": "symbolic-lemma",
+    "actual": "unsat",
+    "passed": true,
+    "solver": "4.13.3.0",
+    "input_sha256": "d1fcf174c06a7507bdd337b6d2a4f42ad96a64cc53fbd157376e1f85de9e5c23"
+  },
+  {
+    "id": "23_ancestor_not_authority",
+    "title": "Counterexample: live ancestor alone does not imply valid access",
+    "file": "23_ancestor_not_authority.smt2",
+    "expected": "sat",
+    "category": "counterexample",
+    "actual": "sat",
+    "passed": true,
+    "solver": "4.13.3.0",
+    "input_sha256": "e452e31d6cfc75532e1e2c54f0b632bfe92d29827cd58840ea1b10f73f479649"
+  },
+  {
+    "id": "24_revoked_epoch",
+    "title": "A retired grant epoch is not valid after a strictly later epoch",
+    "file": "24_revoked_epoch.smt2",
+    "expected": "unsat",
+    "category": "symbolic-lemma",
+    "actual": "unsat",
+    "passed": true,
+    "solver": "4.13.3.0",
+    "input_sha256": "ac85b66f8a2e0f5eb88b58c392f9d4264c381a389b2ddd21d7747cdfb4c03cc5"
+  },
+  {
+    "id": "25_aba_cell_handle",
+    "title": "Re-created identifier cannot validate the retired incarnation",
+    "file": "25_aba_cell_handle.smt2",
+    "expected": "unsat",
+    "category": "symbolic-lemma",
+    "actual": "unsat",
+    "passed": true,
+    "solver": "4.13.3.0",
+    "input_sha256": "5139449f5cf756ea68afe455fe913444a094738da58eb675b81584378d2bb5ba"
+  },
+  {
+    "id": "26_tombstone_union",
+    "title": "Restore union cannot erase current revocation",
+    "file": "26_tombstone_union.smt2",
+    "expected": "unsat",
+    "category": "symbolic-lemma",
+    "actual": "unsat",
+    "passed": true,
+    "solver": "4.13.3.0",
+    "input_sha256": "04f30f77467addf1d29ac0b9b41eda91b8cea2d6d1f33d733e66a566e7e99cc3"
+  },
+  {
+    "id": "27_proof_not_grant",
+    "title": "A proof result alone cannot pass a separately gated authority check",
+    "file": "27_proof_not_grant.smt2",
+    "expected": "unsat",
+    "category": "symbolic-lemma",
+    "actual": "unsat",
+    "passed": true,
+    "solver": "4.13.3.0",
+    "input_sha256": "01a41da091ed5f52e20d0d53acbfc9e57775f8a74c41971ae697c3d83d6807d0"
+  },
+  {
+    "id": "28_auth_conjunction",
+    "title": "all_of requires every authority branch",
+    "file": "28_auth_conjunction.smt2",
+    "expected": "unsat",
+    "category": "symbolic-lemma",
+    "actual": "unsat",
+    "passed": true,
+    "solver": "4.13.3.0",
+    "input_sha256": "c78416f8ae74fcf7d48be724a830ce0b07ef1206fc4230155d8581e2f4f682d3"
+  },
+  {
+    "id": "29_auth_or_mutant",
+    "title": "Counterexample: any_of silently substituted for all_of",
+    "file": "29_auth_or_mutant.smt2",
+    "expected": "sat",
+    "category": "counterexample",
+    "actual": "sat",
+    "passed": true,
+    "solver": "4.13.3.0",
+    "input_sha256": "91923d97645cf1f3fed76397d8b9c664cd7f815e0cda1103a7bdf5526b7ab8e3"
+  },
+  {
+    "id": "30_no_double_commit",
+    "title": "Induction step: seen flag and count preserve at-most-once commit",
+    "file": "30_no_double_commit.smt2",
+    "expected": "unsat",
+    "category": "induction-step",
+    "actual": "unsat",
+    "passed": true,
+    "solver": "4.13.3.0",
+    "input_sha256": "98b4ac6345bf2308a0486708128474f34e3b7905f2a661a6f2e1dc49a72ace3e"
+  },
+  {
+    "id": "31_reply_loss_preserves_commit",
+    "title": "Lost reply does not undo an already committed state transition",
+    "file": "31_reply_loss_preserves_commit.smt2",
+    "expected": "unsat",
+    "category": "symbolic-lemma",
+    "actual": "unsat",
+    "passed": true,
+    "solver": "4.13.3.0",
+    "input_sha256": "2aa45e4faf8a4c48be7971d0f4619a3e06610d72324411ae5651011d13713859"
+  },
+  {
+    "id": "32_post_loss_nonexecution_mutant",
+    "title": "Counterexample: no reply is not a proof of no execution",
+    "file": "32_post_loss_nonexecution_mutant.smt2",
+    "expected": "sat",
+    "category": "counterexample",
+    "actual": "sat",
+    "passed": true,
+    "solver": "4.13.3.0",
+    "input_sha256": "fb757902e84c22aa1f59cc4c1931b0f32a3ca7b64467b7cdac74d1994232a2b3"
+  },
+  {
+    "id": "33_freshness_locality",
+    "title": "Changes outside a certificate read footprint do not stale its version",
+    "file": "33_freshness_locality.smt2",
+    "expected": "unsat",
+    "category": "symbolic-lemma",
+    "actual": "unsat",
+    "passed": true,
+    "solver": "4.13.3.0",
+    "input_sha256": "3b5982a21743e91ed2333cc4e298a9f5d49cac0a066676933310b2d01e3895b2"
+  },
+  {
+    "id": "34_versioned_fact",
+    "title": "Changing a state cell with a generation increment invalidates the old stamp",
+    "file": "34_versioned_fact.smt2",
+    "expected": "unsat",
+    "category": "symbolic-lemma",
+    "actual": "unsat",
+    "passed": true,
+    "solver": "4.13.3.0",
+    "input_sha256": "06ceb72b06f62161dd2e700f056d2b1598ee65011e49f59c5de10438ecbc014c"
+  },
+  {
+    "id": "35_historical_fact_mutant",
+    "title": "Counterexample: a historical read fact is not a current-state assertion",
+    "file": "35_historical_fact_mutant.smt2",
+    "expected": "sat",
+    "category": "counterexample",
+    "actual": "sat",
+    "passed": true,
+    "solver": "4.13.3.0",
+    "input_sha256": "9886eecc44adb55b4917455f45d4e765b71b0b1d62b847a666ca1b427e38ce9b"
+  },
+  {
+    "id": "36_contract_replacement",
+    "title": "Explicit contract weakening/post-strengthening preserves clients",
+    "file": "36_contract_replacement.smt2",
+    "expected": "unsat",
+    "category": "symbolic-lemma",
+    "actual": "unsat",
+    "passed": true,
+    "solver": "4.13.3.0",
+    "input_sha256": "41c6afb6e4f529a98174b207f22c21d60673e44c1eee01f5a751e0a3cb5113d9"
+  },
+  {
+    "id": "37_precondition_strengthening_mutant",
+    "title": "Counterexample: transparent replacement strengthens the precondition",
+    "file": "37_precondition_strengthening_mutant.smt2",
+    "expected": "sat",
+    "category": "counterexample",
+    "actual": "sat",
+    "passed": true,
+    "solver": "4.13.3.0",
+    "input_sha256": "8bd053c4c75509c529a636ea8cdacaf4b771001fc4e47aa07169553620b833e6"
+  },
+  {
+    "id": "38_effect_row_subset_transitive",
+    "title": "Per-effect containment composes",
+    "file": "38_effect_row_subset_transitive.smt2",
+    "expected": "unsat",
+    "category": "symbolic-lemma",
+    "actual": "unsat",
+    "passed": true,
+    "solver": "4.13.3.0",
+    "input_sha256": "f884783b0bbc4ce5b2df5f753ecbc41428a8e168fdbf77e570ff991a4979c80a"
+  },
+  {
+    "id": "39_value_migration",
+    "title": "Actual state migration preserves nonnegative invariant",
+    "file": "39_value_migration.smt2",
+    "expected": "unsat",
+    "category": "symbolic-lemma",
+    "actual": "unsat",
+    "passed": true,
+    "solver": "4.13.3.0",
+    "input_sha256": "a2a450b6a6a4fdb849ca9c9e683ef599c8286d0a26f8eb7571b20b3c24e64e61"
+  },
+  {
+    "id": "40_patch_outside_frame",
+    "title": "A migrated cell leaves outside observations unchanged",
+    "file": "40_patch_outside_frame.smt2",
+    "expected": "unsat",
+    "category": "symbolic-lemma",
+    "actual": "unsat",
+    "passed": true,
+    "solver": "4.13.3.0",
+    "input_sha256": "df1858d38298c9ee296b60fcb8bc87f04ced3b2c2f91b17cd7ccf5838e6b04a6"
+  }
+]

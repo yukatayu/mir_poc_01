@@ -1,0 +1,7 @@
+(set-option :timeout 10000)
+(set-option :produce-proofs true)
+(declare-const n Int)
+(assert (> n 0))
+(assert (not (and (>= (- n 1) 0) (< (- n 1) n))))
+(check-sat-using (then (using-params simplify :som true) smt))
+(get-proof)

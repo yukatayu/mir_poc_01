@@ -1,0 +1,5 @@
+sat
+(
+  (define-fun uses () Int
+    2)
+)

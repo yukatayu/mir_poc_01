@@ -1,0 +1,3197 @@
+{
+  "notice": "Lossless ID cross-reference of all 119 requirements. Work assignment is provisional; no implied approval.",
+  "requirements": [
+    {
+      "id": "AX-01",
+      "title": "意味を一次資料にする",
+      "origin": "U",
+      "user_refs": [
+        "U01",
+        "U02"
+      ],
+      "work_units": [
+        "W1",
+        "W7",
+        "W8"
+      ],
+      "proof_targets": [
+        "PT-01",
+        "PT-17"
+      ],
+      "scenarios": [
+        "SC-01",
+        "SC-23"
+      ],
+      "decisions": [],
+      "requirements_accepted": false,
+      "proof_or_implementation_complete": false,
+      "baseline_contribution": "原則を維持し、domain名を含まないsource・構成・現在性の境界を定義した。",
+      "remaining": "最終利用領域の十分性・ownerによる採用は未判定。"
+    },
+    {
+      "id": "AX-02",
+      "title": "具体物をCoreへ埋め込まない",
+      "origin": "U",
+      "user_refs": [
+        "U08",
+        "U13",
+        "U16"
+      ],
+      "work_units": [
+        "W1",
+        "W7",
+        "W8"
+      ],
+      "proof_targets": [
+        "PT-01",
+        "PT-17"
+      ],
+      "scenarios": [
+        "SC-01",
+        "SC-23"
+      ],
+      "decisions": [],
+      "requirements_accepted": false,
+      "proof_or_implementation_complete": false,
+      "baseline_contribution": "原則を維持し、domain名を含まないsource・構成・現在性の境界を定義した。",
+      "remaining": "最終利用領域の十分性・ownerによる採用は未判定。"
+    },
+    {
+      "id": "AX-03",
+      "title": "将来を閉じない有限構成",
+      "origin": "U",
+      "user_refs": [
+        "U12",
+        "U14"
+      ],
+      "work_units": [
+        "W1",
+        "W7",
+        "W8"
+      ],
+      "proof_targets": [
+        "PT-01",
+        "PT-17"
+      ],
+      "scenarios": [
+        "SC-01",
+        "SC-23"
+      ],
+      "decisions": [],
+      "requirements_accepted": false,
+      "proof_or_implementation_complete": false,
+      "baseline_contribution": "原則を維持し、domain名を含まないsource・構成・現在性の境界を定義した。",
+      "remaining": "最終利用領域の十分性・ownerによる採用は未判定。"
+    },
+    {
+      "id": "AX-04",
+      "title": "原則と実現プロファイルを区別する",
+      "origin": "D",
+      "user_refs": [
+        "U17",
+        "U18"
+      ],
+      "work_units": [
+        "W1",
+        "W7",
+        "W8"
+      ],
+      "proof_targets": [
+        "PT-01",
+        "PT-17"
+      ],
+      "scenarios": [
+        "SC-01",
+        "SC-23"
+      ],
+      "decisions": [],
+      "requirements_accepted": false,
+      "proof_or_implementation_complete": false,
+      "baseline_contribution": "原則を維持し、domain名を含まないsource・構成・現在性の境界を定義した。",
+      "remaining": "最終利用領域の十分性・ownerによる採用は未判定。"
+    },
+    {
+      "id": "AX-05",
+      "title": "研究・α・遠期目標を分離する",
+      "origin": "U",
+      "user_refs": [
+        "U13",
+        "U15",
+        "U17"
+      ],
+      "work_units": [
+        "W1",
+        "W7",
+        "W8"
+      ],
+      "proof_targets": [
+        "PT-01",
+        "PT-17"
+      ],
+      "scenarios": [
+        "SC-01",
+        "SC-23"
+      ],
+      "decisions": [],
+      "requirements_accepted": false,
+      "proof_or_implementation_complete": false,
+      "baseline_contribution": "原則を維持し、domain名を含まないsource・構成・現在性の境界を定義した。",
+      "remaining": "最終利用領域の十分性・ownerによる採用は未判定。"
+    },
+    {
+      "id": "AX-06",
+      "title": "使いやすさと安全性を同時に評価する",
+      "origin": "U",
+      "user_refs": [
+        "U02",
+        "U05",
+        "U17"
+      ],
+      "work_units": [
+        "W1",
+        "W7",
+        "W8"
+      ],
+      "proof_targets": [
+        "PT-01",
+        "PT-17"
+      ],
+      "scenarios": [
+        "SC-01",
+        "SC-23"
+      ],
+      "decisions": [],
+      "requirements_accepted": false,
+      "proof_or_implementation_complete": false,
+      "baseline_contribution": "原則を維持し、domain名を含まないsource・構成・現在性の境界を定義した。",
+      "remaining": "最終利用領域の十分性・ownerによる採用は未判定。"
+    },
+    {
+      "id": "SL-01",
+      "title": "普通の計算と再利用",
+      "origin": "U",
+      "user_refs": [
+        "U02",
+        "U08"
+      ],
+      "work_units": [
+        "W2"
+      ],
+      "proof_targets": [
+        "PT-01",
+        "PT-02",
+        "PT-03"
+      ],
+      "scenarios": [
+        "SC-01",
+        "SC-08",
+        "SC-20"
+      ],
+      "decisions": [
+        "Q-03"
+      ],
+      "requirements_accepted": false,
+      "proof_or_implementation_complete": false,
+      "baseline_contribution": "F0.2のsource/compilerを無変更で使い、現在性と証拠のadapterへ接続した。",
+      "remaining": "新しい型表現力・診断完全性・public grammarは追加していない。"
+    },
+    {
+      "id": "SL-02",
+      "title": "読みの意味と透過性",
+      "origin": "U",
+      "user_refs": [
+        "U02"
+      ],
+      "work_units": [
+        "W2"
+      ],
+      "proof_targets": [
+        "PT-01",
+        "PT-02",
+        "PT-03"
+      ],
+      "scenarios": [
+        "SC-02"
+      ],
+      "decisions": [
+        "Q-01"
+      ],
+      "requirements_accepted": false,
+      "proof_or_implementation_complete": false,
+      "baseline_contribution": "F0.2のowner-local snapshotという候補を継承した。",
+      "remaining": "読取り整合性を最終既定に採用する決定はしていない。"
+    },
+    {
+      "id": "SL-03",
+      "title": "代入の意味保存",
+      "origin": "U",
+      "user_refs": [
+        "U02"
+      ],
+      "work_units": [
+        "W4"
+      ],
+      "proof_targets": [
+        "PT-01",
+        "PT-02",
+        "PT-03"
+      ],
+      "scenarios": [
+        "SC-01"
+      ],
+      "decisions": [],
+      "requirements_accepted": false,
+      "proof_or_implementation_complete": false,
+      "baseline_contribution": "通常sourceから生成したRMWを、現在のmember/module/policy照合後に実行する。",
+      "remaining": "実際のper-locus binary/QUICへのrefinementが残る。"
+    },
+    {
+      "id": "SL-04",
+      "title": "複数ownerを含む式",
+      "origin": "D",
+      "user_refs": [
+        "U01",
+        "U02"
+      ],
+      "work_units": [
+        "W2"
+      ],
+      "proof_targets": [
+        "PT-01",
+        "PT-02",
+        "PT-03"
+      ],
+      "scenarios": [
+        "SC-02"
+      ],
+      "decisions": [
+        "Q-02"
+      ],
+      "requirements_accepted": false,
+      "proof_or_implementation_complete": false,
+      "baseline_contribution": "F0.2のsource/compilerを無変更で使い、現在性と証拠のadapterへ接続した。",
+      "remaining": "新しい型表現力・診断完全性・public grammarは追加していない。"
+    },
+    {
+      "id": "SL-05",
+      "title": "意味上のイベントと表層の分離",
+      "origin": "U",
+      "user_refs": [
+        "U09",
+        "U16"
+      ],
+      "work_units": [
+        "W2",
+        "W3"
+      ],
+      "proof_targets": [
+        "PT-01",
+        "PT-02",
+        "PT-03"
+      ],
+      "scenarios": [
+        "SC-01"
+      ],
+      "decisions": [],
+      "requirements_accepted": false,
+      "proof_or_implementation_complete": false,
+      "baseline_contribution": "要求IDや認可証拠は内部で生成する。sourceにsend/receiveを追加していない。",
+      "remaining": "構成の生成・認可指定の最終source表記は未選択。"
+    },
+    {
+      "id": "SL-06",
+      "title": "アノテーションと診断",
+      "origin": "U",
+      "user_refs": [
+        "U05",
+        "U17"
+      ],
+      "work_units": [
+        "W2",
+        "W6"
+      ],
+      "proof_targets": [
+        "PT-01",
+        "PT-02",
+        "PT-03"
+      ],
+      "scenarios": [
+        "SC-02"
+      ],
+      "decisions": [
+        "Q-01",
+        "Q-03"
+      ],
+      "requirements_accepted": false,
+      "proof_or_implementation_complete": false,
+      "baseline_contribution": "有限typed diagnosticを返すが、ソースに戻る完全な診断体系は構築していない。",
+      "remaining": "拒否理由の機密性とユーザ修正可能性を含めて統合する。"
+    },
+    {
+      "id": "SL-07",
+      "title": "数値・文字列・等価性の意味",
+      "origin": "D",
+      "user_refs": [
+        "U08",
+        "U17"
+      ],
+      "work_units": [
+        "W2"
+      ],
+      "proof_targets": [
+        "PT-01",
+        "PT-02",
+        "PT-03"
+      ],
+      "scenarios": [
+        "SC-02"
+      ],
+      "decisions": [
+        "Q-04"
+      ],
+      "requirements_accepted": false,
+      "proof_or_implementation_complete": false,
+      "baseline_contribution": "数学的Int/Boolのprofileを継承し、κのTrueと1を区別した。",
+      "remaining": "Int64 overflow、float、文字列、比較意味は採用前に定義が必要。"
+    },
+    {
+      "id": "SL-08",
+      "title": "関数やhandleの表現力境界",
+      "origin": "D",
+      "user_refs": [
+        "U07",
+        "U08",
+        "U14"
+      ],
+      "work_units": [
+        "W2"
+      ],
+      "proof_targets": [
+        "PT-01",
+        "PT-02",
+        "PT-03"
+      ],
+      "scenarios": [
+        "SC-02"
+      ],
+      "decisions": [
+        "Q-03"
+      ],
+      "requirements_accepted": false,
+      "proof_or_implementation_complete": false,
+      "baseline_contribution": "第一階compilerの一部を利用している。",
+      "remaining": "closure、affine handle、module instanceを値として渡す型体系は未実装。"
+    },
+    {
+      "id": "ID-01",
+      "title": "定義・instance・世代・版の区別",
+      "origin": "D",
+      "user_refs": [
+        "U03",
+        "U04",
+        "U14"
+      ],
+      "work_units": [
+        "W1",
+        "W2",
+        "W3"
+      ],
+      "proof_targets": [
+        "PT-04",
+        "PT-05",
+        "PT-11"
+      ],
+      "scenarios": [
+        "SC-05"
+      ],
+      "decisions": [],
+      "requirements_accepted": false,
+      "proof_or_implementation_complete": false,
+      "baseline_contribution": "存在/member/module/accessを同一のpositive support closureと世代へ接続した。",
+      "remaining": "第一級resource handleと分散した生成・撤去の実装対応が残る。"
+    },
+    {
+      "id": "ID-02",
+      "title": "存在DAGと独立対象",
+      "origin": "U",
+      "user_refs": [
+        "U03",
+        "U04"
+      ],
+      "work_units": [
+        "W1",
+        "W2",
+        "W3"
+      ],
+      "proof_targets": [
+        "PT-04",
+        "PT-05",
+        "PT-11"
+      ],
+      "scenarios": [
+        "SC-05"
+      ],
+      "decisions": [
+        "Q-05"
+      ],
+      "requirements_accepted": false,
+      "proof_or_implementation_complete": false,
+      "baseline_contribution": "存在/member/module/accessを同一のpositive support closureと世代へ接続した。",
+      "remaining": "第一級resource handleと分散した生成・撤去の実装対応が残る。"
+    },
+    {
+      "id": "ID-03",
+      "title": "reparentと退出の遷移",
+      "origin": "U",
+      "user_refs": [
+        "U04"
+      ],
+      "work_units": [
+        "W3"
+      ],
+      "proof_targets": [
+        "PT-04",
+        "PT-05",
+        "PT-11"
+      ],
+      "scenarios": [
+        "SC-05"
+      ],
+      "decisions": [
+        "Q-05"
+      ],
+      "requirements_accepted": false,
+      "proof_or_implementation_complete": false,
+      "baseline_contribution": "tracked reparent・現在認可・同kind DAG検査・退役closureを実装した。",
+      "remaining": "全種類の資源撤去と分散commitは別の義務。"
+    },
+    {
+      "id": "ID-04",
+      "title": "短命な参照とfallback",
+      "origin": "U",
+      "user_refs": [
+        "U03"
+      ],
+      "work_units": [
+        "W2",
+        "W3"
+      ],
+      "proof_targets": [
+        "PT-04",
+        "PT-05",
+        "PT-11"
+      ],
+      "scenarios": [
+        "SC-05"
+      ],
+      "decisions": [],
+      "requirements_accepted": false,
+      "proof_or_implementation_complete": false,
+      "baseline_contribution": "短命anchorへのauthorized access失効とfallbackを同じclosureへ接続した。",
+      "remaining": "参照型の一般的な安全性と最終候補の可用性は未保証。"
+    },
+    {
+      "id": "ID-05",
+      "title": "再取得と単調性の範囲",
+      "origin": "D",
+      "user_refs": [
+        "U03",
+        "U05"
+      ],
+      "work_units": [
+        "W3"
+      ],
+      "proof_targets": [
+        "PT-04",
+        "PT-05",
+        "PT-11"
+      ],
+      "scenarios": [
+        "SC-05"
+      ],
+      "decisions": [
+        "Q-06"
+      ],
+      "requirements_accepted": false,
+      "proof_or_implementation_complete": false,
+      "baseline_contribution": "新member/anchor/accessを作るだけではcursorを戻さず、現在認可付きreacquireで新lineageを作る。",
+      "remaining": "自動再取得の宣言的source表記は未選択。"
+    },
+    {
+      "id": "ID-06",
+      "title": "参照・権利・snapshot・引用の区別",
+      "origin": "D",
+      "user_refs": [
+        "U03",
+        "U13"
+      ],
+      "work_units": [
+        "W2",
+        "W8"
+      ],
+      "proof_targets": [
+        "PT-04",
+        "PT-05",
+        "PT-11"
+      ],
+      "scenarios": [
+        "SC-05",
+        "SC-22"
+      ],
+      "decisions": [
+        "Q-07"
+      ],
+      "requirements_accepted": false,
+      "proof_or_implementation_complete": false,
+      "baseline_contribution": "過去の成功と現在のlive結果使用を区別し、退役moduleへのconsumeを拒否する。",
+      "remaining": "永続引用や独立snapshot値のfirst-class contractは未実装。"
+    },
+    {
+      "id": "ID-07",
+      "title": "所有・alias・資源handle",
+      "origin": "U",
+      "user_refs": [
+        "U07"
+      ],
+      "work_units": [
+        "W2"
+      ],
+      "proof_targets": [
+        "PT-04",
+        "PT-05",
+        "PT-11"
+      ],
+      "scenarios": [
+        "SC-03",
+        "SC-05",
+        "SC-09"
+      ],
+      "decisions": [
+        "Q-03"
+      ],
+      "requirements_accepted": false,
+      "proof_or_implementation_complete": false,
+      "baseline_contribution": "F0.1の所有token例は資産として保持するが、F0.3へ統合していない。",
+      "remaining": "線形資源と通常値の受渡し・型消去の保証が必要。"
+    },
+    {
+      "id": "ID-08",
+      "title": "DAG間の整合条件",
+      "origin": "D",
+      "user_refs": [
+        "U04",
+        "U17"
+      ],
+      "work_units": [
+        "W1",
+        "W3"
+      ],
+      "proof_targets": [
+        "PT-04",
+        "PT-05",
+        "PT-11"
+      ],
+      "scenarios": [
+        "SC-05",
+        "SC-11",
+        "SC-13",
+        "SC-24"
+      ],
+      "decisions": [],
+      "requirements_accepted": false,
+      "proof_or_implementation_complete": false,
+      "baseline_contribution": "存在/member/module/access/関係/要求/prepared patchを同じDataに置き、相互失効を実行した。",
+      "remaining": "全種類のpatch DAGと実分散activation・型handleを含む統合は残る。"
+    },
+    {
+      "id": "RL-01",
+      "title": "関係を意味の対象として保持",
+      "origin": "U",
+      "user_refs": [
+        "U03",
+        "U08"
+      ],
+      "work_units": [
+        "W3",
+        "W6"
+      ],
+      "proof_targets": [
+        "PT-05",
+        "PT-06",
+        "PT-15"
+      ],
+      "scenarios": [
+        "SC-05"
+      ],
+      "decisions": [],
+      "requirements_accepted": false,
+      "proof_or_implementation_complete": false,
+      "baseline_contribution": "整数affine関係DAG、認可access、fallback、読取り専用のprojectionを接続した。",
+      "remaining": "物理sampleの保証・designated evaluation・一般の時間/近似は未統合。"
+    },
+    {
+      "id": "RL-02",
+      "title": "関係DAGと時間越し循環",
+      "origin": "D",
+      "user_refs": [
+        "U04",
+        "U09"
+      ],
+      "work_units": [
+        "W3",
+        "W6"
+      ],
+      "proof_targets": [
+        "PT-05",
+        "PT-06",
+        "PT-15"
+      ],
+      "scenarios": [
+        "SC-05"
+      ],
+      "decisions": [
+        "Q-08"
+      ],
+      "requirements_accepted": false,
+      "proof_or_implementation_complete": false,
+      "baseline_contribution": "整数affine関係DAG、認可access、fallback、読取り専用のprojectionを接続した。",
+      "remaining": "物理sampleの保証・designated evaluation・一般の時間/近似は未統合。"
+    },
+    {
+      "id": "RL-03",
+      "title": "評価場所と具体化の分離",
+      "origin": "U",
+      "user_refs": [
+        "U01",
+        "U08"
+      ],
+      "work_units": [
+        "W3",
+        "W6"
+      ],
+      "proof_targets": [
+        "PT-05",
+        "PT-06",
+        "PT-15"
+      ],
+      "scenarios": [
+        "SC-06"
+      ],
+      "decisions": [],
+      "requirements_accepted": false,
+      "proof_or_implementation_complete": false,
+      "baseline_contribution": "整数affine関係DAG、認可access、fallback、読取り専用のprojectionを接続した。",
+      "remaining": "物理sampleの保証・designated evaluation・一般の時間/近似は未統合。"
+    },
+    {
+      "id": "RL-04",
+      "title": "指定評価・結果の消費",
+      "origin": "D",
+      "user_refs": [
+        "U01",
+        "U09"
+      ],
+      "work_units": [
+        "W3",
+        "W4"
+      ],
+      "proof_targets": [
+        "PT-05",
+        "PT-06",
+        "PT-15"
+      ],
+      "scenarios": [
+        "SC-06"
+      ],
+      "decisions": [],
+      "requirements_accepted": false,
+      "proof_or_implementation_complete": false,
+      "baseline_contribution": "designated evaluatorは既存repo/F0.1の資産で、F0.3に追加統合していない。",
+      "remaining": "不変結果、frontier、consumptionを現行support/contextへ接続する。"
+    },
+    {
+      "id": "RL-05",
+      "title": "時間と同期・非同期の契約",
+      "origin": "U",
+      "user_refs": [
+        "U09",
+        "U10",
+        "U12"
+      ],
+      "work_units": [
+        "W3",
+        "W4"
+      ],
+      "proof_targets": [
+        "PT-05",
+        "PT-06",
+        "PT-15"
+      ],
+      "scenarios": [
+        "SC-06"
+      ],
+      "decisions": [
+        "Q-09"
+      ],
+      "requirements_accepted": false,
+      "proof_or_implementation_complete": false,
+      "baseline_contribution": "一致したpresentation contextをsample受入れの前提にした。",
+      "remaining": "clock精度・deadline・lease・高頻度streamの時間モデルは未統合。"
+    },
+    {
+      "id": "RL-06",
+      "title": "高頻度提示と意味の分離",
+      "origin": "U",
+      "user_refs": [
+        "U08",
+        "U11"
+      ],
+      "work_units": [
+        "W3",
+        "W6"
+      ],
+      "proof_targets": [
+        "PT-05",
+        "PT-06",
+        "PT-15"
+      ],
+      "scenarios": [
+        "SC-05",
+        "SC-06"
+      ],
+      "decisions": [
+        "Q-10"
+      ],
+      "requirements_accepted": false,
+      "proof_or_implementation_complete": false,
+      "baseline_contribution": "整数affine関係DAG、認可access、fallback、読取り専用のprojectionを接続した。",
+      "remaining": "物理sampleの保証・designated evaluation・一般の時間/近似は未統合。"
+    },
+    {
+      "id": "RL-07",
+      "title": "近似と誤差の契約",
+      "origin": "D",
+      "user_refs": [
+        "U08",
+        "U17"
+      ],
+      "work_units": [
+        "W3",
+        "W7"
+      ],
+      "proof_targets": [
+        "PT-05",
+        "PT-06",
+        "PT-15"
+      ],
+      "scenarios": [
+        "SC-06"
+      ],
+      "decisions": [
+        "Q-10"
+      ],
+      "requirements_accepted": false,
+      "proof_or_implementation_complete": false,
+      "baseline_contribution": "整数の正確なrelation評価のみを選んだ。",
+      "remaining": "誤差境界・補間・approximation contractは別の理論が必要。"
+    },
+    {
+      "id": "DS-01",
+      "title": "配置と通信の由来",
+      "origin": "U",
+      "user_refs": [
+        "U01",
+        "U12"
+      ],
+      "work_units": [
+        "W4"
+      ],
+      "proof_targets": [
+        "PT-03",
+        "PT-07",
+        "PT-08"
+      ],
+      "scenarios": [
+        "SC-01"
+      ],
+      "decisions": [],
+      "requirements_accepted": false,
+      "proof_or_implementation_complete": false,
+      "baseline_contribution": "F0.2 compilerが作る2本のrequest/outcome edgeを実行し、手書きrouteで意味を補っていない。",
+      "remaining": "locus配置の実プロセス化は既存I3系と対応させる必要がある。"
+    },
+    {
+      "id": "DS-02",
+      "title": "因果・並行・memory order",
+      "origin": "U",
+      "user_refs": [
+        "U04",
+        "U09"
+      ],
+      "work_units": [
+        "W4"
+      ],
+      "proof_targets": [
+        "PT-03",
+        "PT-07",
+        "PT-08"
+      ],
+      "scenarios": [
+        "SC-07"
+      ],
+      "decisions": [
+        "Q-02"
+      ],
+      "requirements_accepted": false,
+      "proof_or_implementation_complete": false,
+      "baseline_contribution": "異なる操作順と意味記録を検査し、実stream順を意味の根拠にしていない。",
+      "remaining": "一般のhappens-before graphと実memory order対応は未証明。"
+    },
+    {
+      "id": "DS-03",
+      "title": "要求の同一性と結果の状態",
+      "origin": "D",
+      "user_refs": [
+        "U09",
+        "U11"
+      ],
+      "work_units": [
+        "W4",
+        "W5"
+      ],
+      "proof_targets": [
+        "PT-03",
+        "PT-07",
+        "PT-08"
+      ],
+      "scenarios": [
+        "SC-07"
+      ],
+      "decisions": [],
+      "requirements_accepted": false,
+      "proof_or_implementation_complete": false,
+      "baseline_contribution": "Pending/Served/Rejected/Consumed/ReleaseDeniedを保持し、live消費前提を再検査する。",
+      "remaining": "外部effectや任意continuationへの一般化は残る。"
+    },
+    {
+      "id": "DS-04",
+      "title": "再試行・重複・忘却",
+      "origin": "D",
+      "user_refs": [
+        "U09",
+        "U14"
+      ],
+      "work_units": [
+        "W5"
+      ],
+      "proof_targets": [
+        "PT-03",
+        "PT-07",
+        "PT-08"
+      ],
+      "scenarios": [
+        "SC-07"
+      ],
+      "decisions": [
+        "Q-11"
+      ],
+      "requirements_accepted": false,
+      "proof_or_implementation_complete": false,
+      "baseline_contribution": "保持requestの重複serveを拒否し、復元で消費済みを戻さない。",
+      "remaining": "永続的なGC後の古い要求拒否、再試行方式の選択は未完。"
+    },
+    {
+      "id": "DS-05",
+      "title": "継続・並列子処理・取消し",
+      "origin": "D",
+      "user_refs": [
+        "U08",
+        "U09",
+        "U12"
+      ],
+      "work_units": [
+        "W2",
+        "W4"
+      ],
+      "proof_targets": [
+        "PT-03",
+        "PT-07",
+        "PT-08"
+      ],
+      "scenarios": [
+        "SC-08"
+      ],
+      "decisions": [
+        "Q-12"
+      ],
+      "requirements_accepted": false,
+      "proof_or_implementation_complete": false,
+      "baseline_contribution": "first-order call/returnとrequest待ちを動かす。",
+      "remaining": "F0.2にあるspawn/joinはF0.3 VM未対応で明示拒否。一般cancelも未統合。"
+    },
+    {
+      "id": "DS-06",
+      "title": "条件付きの進行性",
+      "origin": "D",
+      "user_refs": [
+        "U12",
+        "U14",
+        "U17"
+      ],
+      "work_units": [
+        "W4"
+      ],
+      "proof_targets": [
+        "PT-03",
+        "PT-07",
+        "PT-08"
+      ],
+      "scenarios": [
+        "SC-08"
+      ],
+      "decisions": [
+        "Q-13"
+      ],
+      "requirements_accepted": false,
+      "proof_or_implementation_complete": false,
+      "baseline_contribution": "有限prefix安全性と、拒否・待機を区別している。",
+      "remaining": "全公平実行の進行、永久故障時の可用性は証明していない。"
+    },
+    {
+      "id": "DS-07",
+      "title": "複数ownerの不変条件",
+      "origin": "D",
+      "user_refs": [
+        "U07",
+        "U12"
+      ],
+      "work_units": [
+        "W2",
+        "W4"
+      ],
+      "proof_targets": [
+        "PT-03",
+        "PT-07",
+        "PT-08"
+      ],
+      "scenarios": [
+        "SC-09"
+      ],
+      "decisions": [
+        "Q-02"
+      ],
+      "requirements_accepted": false,
+      "proof_or_implementation_complete": false,
+      "baseline_contribution": "同owner不変条件のみに限定することを明示した。",
+      "remaining": "複数ownerのrely/guarantee・資源移送・共同確定が必要。"
+    },
+    {
+      "id": "DS-08",
+      "title": "容量・隔離と失敗の全経路",
+      "origin": "D",
+      "user_refs": [
+        "U09",
+        "U11"
+      ],
+      "work_units": [
+        "W4",
+        "W7"
+      ],
+      "proof_targets": [
+        "PT-03",
+        "PT-07",
+        "PT-08"
+      ],
+      "scenarios": [
+        "SC-07"
+      ],
+      "decisions": [],
+      "requirements_accepted": false,
+      "proof_or_implementation_complete": false,
+      "baseline_contribution": "研究用driveの明示step budgetはある。",
+      "remaining": "本番queue/CPU/通信/履歴の資源拘束を保証するものではない。"
+    },
+    {
+      "id": "EF-01",
+      "title": "型付き効果と継続",
+      "origin": "U",
+      "user_refs": [
+        "U09"
+      ],
+      "work_units": [
+        "W2",
+        "W4",
+        "W5"
+      ],
+      "proof_targets": [
+        "PT-09",
+        "PT-03"
+      ],
+      "scenarios": [
+        "SC-10"
+      ],
+      "decisions": [
+        "Q-14"
+      ],
+      "requirements_accepted": false,
+      "proof_or_implementation_complete": false,
+      "baseline_contribution": "効果ful computationと外界結果を分ける実装境界を計画に置いた。",
+      "remaining": "外部providerはF0.3 Kernelに未搭載。一般handler・補償は研究が残る。"
+    },
+    {
+      "id": "EF-02",
+      "title": "handlerの合成・交換",
+      "origin": "U",
+      "user_refs": [
+        "U09",
+        "U14"
+      ],
+      "work_units": [
+        "W2",
+        "W4",
+        "W5"
+      ],
+      "proof_targets": [
+        "PT-09",
+        "PT-03"
+      ],
+      "scenarios": [
+        "SC-10"
+      ],
+      "decisions": [
+        "Q-14"
+      ],
+      "requirements_accepted": false,
+      "proof_or_implementation_complete": false,
+      "baseline_contribution": "効果ful computationと外界結果を分ける実装境界を計画に置いた。",
+      "remaining": "外部providerはF0.3 Kernelに未搭載。一般handler・補償は研究が残る。"
+    },
+    {
+      "id": "EF-03",
+      "title": "providerの型と権限の境界",
+      "origin": "U",
+      "user_refs": [
+        "U08",
+        "U09"
+      ],
+      "work_units": [
+        "W2",
+        "W4",
+        "W5"
+      ],
+      "proof_targets": [
+        "PT-09",
+        "PT-03"
+      ],
+      "scenarios": [
+        "SC-10"
+      ],
+      "decisions": [],
+      "requirements_accepted": false,
+      "proof_or_implementation_complete": false,
+      "baseline_contribution": "効果ful computationと外界結果を分ける実装境界を計画に置いた。",
+      "remaining": "外部providerはF0.3 Kernelに未搭載。一般handler・補償は研究が残る。"
+    },
+    {
+      "id": "EF-04",
+      "title": "外界作用と不確定な完了",
+      "origin": "D",
+      "user_refs": [
+        "U09",
+        "U10"
+      ],
+      "work_units": [
+        "W2",
+        "W4",
+        "W5"
+      ],
+      "proof_targets": [
+        "PT-09",
+        "PT-03"
+      ],
+      "scenarios": [
+        "SC-10",
+        "SC-14",
+        "SC-18"
+      ],
+      "decisions": [],
+      "requirements_accepted": false,
+      "proof_or_implementation_complete": false,
+      "baseline_contribution": "効果ful computationと外界結果を分ける実装境界を計画に置いた。",
+      "remaining": "外部providerはF0.3 Kernelに未搭載。一般handler・補償は研究が残る。"
+    },
+    {
+      "id": "EF-05",
+      "title": "乱数・時刻・近似の供給",
+      "origin": "D",
+      "user_refs": [
+        "U08",
+        "U09"
+      ],
+      "work_units": [
+        "W2",
+        "W4",
+        "W5"
+      ],
+      "proof_targets": [
+        "PT-09",
+        "PT-03"
+      ],
+      "scenarios": [
+        "SC-10"
+      ],
+      "decisions": [],
+      "requirements_accepted": false,
+      "proof_or_implementation_complete": false,
+      "baseline_contribution": "効果ful computationと外界結果を分ける実装境界を計画に置いた。",
+      "remaining": "外部providerはF0.3 Kernelに未搭載。一般handler・補償は研究が残る。"
+    },
+    {
+      "id": "EF-06",
+      "title": "補償はrollbackと同義ではない",
+      "origin": "D",
+      "user_refs": [
+        "U09",
+        "U10"
+      ],
+      "work_units": [
+        "W2",
+        "W4",
+        "W5"
+      ],
+      "proof_targets": [
+        "PT-09",
+        "PT-03"
+      ],
+      "scenarios": [
+        "SC-10"
+      ],
+      "decisions": [
+        "Q-15"
+      ],
+      "requirements_accepted": false,
+      "proof_or_implementation_complete": false,
+      "baseline_contribution": "効果ful computationと外界結果を分ける実装境界を計画に置いた。",
+      "remaining": "外部providerはF0.3 Kernelに未搭載。一般handler・補償は研究が残る。"
+    },
+    {
+      "id": "AU-01",
+      "title": "認証・認可・検証の分離",
+      "origin": "U",
+      "user_refs": [
+        "U06",
+        "U07"
+      ],
+      "work_units": [
+        "W1",
+        "W3",
+        "W8"
+      ],
+      "proof_targets": [
+        "PT-10",
+        "PT-11"
+      ],
+      "scenarios": [
+        "SC-04",
+        "SC-19"
+      ],
+      "decisions": [],
+      "requirements_accepted": false,
+      "proof_or_implementation_complete": false,
+      "baseline_contribution": "ideal issued claimによる非空all/any、同一κ、失効後の使用再検査を実装した。",
+      "remaining": "暗号認証・任意ポリシー変換・委譲・独立信頼domainの一般化は未完。"
+    },
+    {
+      "id": "AU-02",
+      "title": "複数認証・policy層の合成",
+      "origin": "U",
+      "user_refs": [
+        "U06"
+      ],
+      "work_units": [
+        "W1",
+        "W3",
+        "W8"
+      ],
+      "proof_targets": [
+        "PT-10",
+        "PT-11"
+      ],
+      "scenarios": [
+        "SC-04",
+        "SC-24"
+      ],
+      "decisions": [
+        "Q-16"
+      ],
+      "requirements_accepted": false,
+      "proof_or_implementation_complete": false,
+      "baseline_contribution": "ideal issued claimによる非空all/any、同一κ、失効後の使用再検査を実装した。",
+      "remaining": "暗号認証・任意ポリシー変換・委譲・独立信頼domainの一般化は未完。"
+    },
+    {
+      "id": "AU-03",
+      "title": "admission依存と複数の管理主体",
+      "origin": "U",
+      "user_refs": [
+        "U04",
+        "U12"
+      ],
+      "work_units": [
+        "W3",
+        "W8"
+      ],
+      "proof_targets": [
+        "PT-10",
+        "PT-11"
+      ],
+      "scenarios": [
+        "SC-04",
+        "SC-05"
+      ],
+      "decisions": [
+        "Q-05",
+        "Q-17"
+      ],
+      "requirements_accepted": false,
+      "proof_or_implementation_complete": false,
+      "baseline_contribution": "member/locus/moduleの帰納的な参加根拠とrootなし循環を区別する。",
+      "remaining": "各外部domainの信頼rootと発行policyを実認証へ対応させる必要がある。"
+    },
+    {
+      "id": "AU-04",
+      "title": "使用時再検査と失効",
+      "origin": "U",
+      "user_refs": [
+        "U06",
+        "U14"
+      ],
+      "work_units": [
+        "W1",
+        "W3",
+        "W8"
+      ],
+      "proof_targets": [
+        "PT-10",
+        "PT-11"
+      ],
+      "scenarios": [
+        "SC-04",
+        "SC-07"
+      ],
+      "decisions": [
+        "Q-18"
+      ],
+      "requirements_accepted": false,
+      "proof_or_implementation_complete": false,
+      "baseline_contribution": "ideal issued claimによる非空all/any、同一κ、失効後の使用再検査を実装した。",
+      "remaining": "暗号認証・任意ポリシー変換・委譲・独立信頼domainの一般化は未完。"
+    },
+    {
+      "id": "AU-05",
+      "title": "層の追加・削除・交換",
+      "origin": "U",
+      "user_refs": [
+        "U06",
+        "U14"
+      ],
+      "work_units": [
+        "W3"
+      ],
+      "proof_targets": [
+        "PT-10",
+        "PT-11"
+      ],
+      "scenarios": [
+        "SC-04"
+      ],
+      "decisions": [
+        "Q-16",
+        "Q-18"
+      ],
+      "requirements_accepted": false,
+      "proof_or_implementation_complete": false,
+      "baseline_contribution": "policy successor後に古い証拠を拒否し、準備済みreparentも使用時再検査する。",
+      "remaining": "一般policy transformerの透明性・互換性を自動判定する体系ではない。"
+    },
+    {
+      "id": "AU-06",
+      "title": "認証・認可モジュールの形式保証",
+      "origin": "U",
+      "user_refs": [
+        "U06"
+      ],
+      "work_units": [
+        "W1",
+        "W8"
+      ],
+      "proof_targets": [
+        "PT-10",
+        "PT-11"
+      ],
+      "scenarios": [
+        "SC-04"
+      ],
+      "decisions": [],
+      "requirements_accepted": false,
+      "proof_or_implementation_complete": false,
+      "baseline_contribution": "非空all/anyの有限policyについて健全性・相対完全性の手証明と実装を用意した。",
+      "remaining": "任意authmoduleの形式検証、暗号の安全性、sandboxは対象外。"
+    },
+    {
+      "id": "AU-07",
+      "title": "信頼域間の対応と委譲",
+      "origin": "D",
+      "user_refs": [
+        "U06",
+        "U12",
+        "U13"
+      ],
+      "work_units": [
+        "W8"
+      ],
+      "proof_targets": [
+        "PT-10",
+        "PT-11"
+      ],
+      "scenarios": [
+        "SC-04",
+        "SC-22"
+      ],
+      "decisions": [
+        "Q-17"
+      ],
+      "requirements_accepted": false,
+      "proof_or_implementation_complete": false,
+      "baseline_contribution": "claimのscope照合はある。",
+      "remaining": "再委譲・権限の減衰・委譲cycle・別domainとの合成は未モデル化。"
+    },
+    {
+      "id": "AU-08",
+      "title": "初期信頼と鍵・制御の世代交代",
+      "origin": "D",
+      "user_refs": [
+        "U06",
+        "U14"
+      ],
+      "work_units": [
+        "W8"
+      ],
+      "proof_targets": [
+        "PT-10",
+        "PT-11"
+      ],
+      "scenarios": [
+        "SC-04"
+      ],
+      "decisions": [
+        "Q-17",
+        "Q-20"
+      ],
+      "requirements_accepted": false,
+      "proof_or_implementation_complete": false,
+      "baseline_contribution": "issuer epochの退役をideal recordとして扱う。",
+      "remaining": "鍵移行・root交代・cryptographic freshnessは未実装。"
+    },
+    {
+      "id": "TY-01",
+      "title": "基礎型の宣言的・実行的対応",
+      "origin": "U",
+      "user_refs": [
+        "U05",
+        "U17"
+      ],
+      "work_units": [
+        "W1",
+        "W2"
+      ],
+      "proof_targets": [
+        "PT-01",
+        "PT-02",
+        "PT-12"
+      ],
+      "scenarios": [
+        "SC-02",
+        "SC-03"
+      ],
+      "decisions": [],
+      "requirements_accepted": false,
+      "proof_or_implementation_complete": false,
+      "baseline_contribution": "sourceに束縛した多項式証拠、support rank証拠、label判断を別々の線として照合した。",
+      "remaining": "完全な依存型・様相型・任意理論loaderは存在しない。"
+    },
+    {
+      "id": "TY-02",
+      "title": "理論の局所導入と前提管理",
+      "origin": "U",
+      "user_refs": [
+        "U07"
+      ],
+      "work_units": [
+        "W2"
+      ],
+      "proof_targets": [
+        "PT-01",
+        "PT-02",
+        "PT-12"
+      ],
+      "scenarios": [
+        "SC-03"
+      ],
+      "decisions": [
+        "Q-19"
+      ],
+      "requirements_accepted": false,
+      "proof_or_implementation_complete": false,
+      "baseline_contribution": "局所算術証拠とsupport証拠の別checkerを共通対象へ結びつけた。",
+      "remaining": "moduleごとの任意理論loaderのメタ言語は作っていない。"
+    },
+    {
+      "id": "TY-03",
+      "title": "検証手段と意味拡張の区別",
+      "origin": "U",
+      "user_refs": [
+        "U07",
+        "U09"
+      ],
+      "work_units": [
+        "W1",
+        "W2"
+      ],
+      "proof_targets": [
+        "PT-01",
+        "PT-02",
+        "PT-12"
+      ],
+      "scenarios": [
+        "SC-03"
+      ],
+      "decisions": [],
+      "requirements_accepted": false,
+      "proof_or_implementation_complete": false,
+      "baseline_contribution": "sourceに束縛した多項式証拠、support rank証拠、label判断を別々の線として照合した。",
+      "remaining": "完全な依存型・様相型・任意理論loaderは存在しない。"
+    },
+    {
+      "id": "TY-04",
+      "title": "異なる局所理論の境界",
+      "origin": "U",
+      "user_refs": [
+        "U07"
+      ],
+      "work_units": [
+        "W2"
+      ],
+      "proof_targets": [
+        "PT-01",
+        "PT-02",
+        "PT-12"
+      ],
+      "scenarios": [
+        "SC-03",
+        "SC-24"
+      ],
+      "decisions": [],
+      "requirements_accepted": false,
+      "proof_or_implementation_complete": false,
+      "baseline_contribution": "不変値を伴う契約とsource identityを共有し、証明を権限へ変換しない。",
+      "remaining": "異種logicの一般翻訳とaffine資源boundaryは未証明。"
+    },
+    {
+      "id": "TY-05",
+      "title": "refinement・依存型的仕様",
+      "origin": "U",
+      "user_refs": [
+        "U05",
+        "U07"
+      ],
+      "work_units": [
+        "W2"
+      ],
+      "proof_targets": [
+        "PT-01",
+        "PT-02",
+        "PT-12"
+      ],
+      "scenarios": [
+        "SC-03"
+      ],
+      "decisions": [
+        "Q-19"
+      ],
+      "requirements_accepted": false,
+      "proof_or_implementation_complete": false,
+      "baseline_contribution": "多項式refinementの証明をF0.2から継承する。",
+      "remaining": "依存型そのものや一般的な型レベル計算を導入したとはしない。"
+    },
+    {
+      "id": "TY-06",
+      "title": "様相と環境の対応",
+      "origin": "U",
+      "user_refs": [
+        "U07",
+        "U09"
+      ],
+      "work_units": [
+        "W2"
+      ],
+      "proof_targets": [
+        "PT-01",
+        "PT-02",
+        "PT-12"
+      ],
+      "scenarios": [
+        "SC-03"
+      ],
+      "decisions": [
+        "Q-19"
+      ],
+      "requirements_accepted": false,
+      "proof_or_implementation_complete": false,
+      "baseline_contribution": "F0.1の環境安定性の様相例を参照する。",
+      "remaining": "MTTや一般の様相型checkerはF0.3未搭載。"
+    },
+    {
+      "id": "TY-07",
+      "title": "証拠の使用可能性と版",
+      "origin": "D",
+      "user_refs": [
+        "U07",
+        "U14"
+      ],
+      "work_units": [
+        "W1",
+        "W2"
+      ],
+      "proof_targets": [
+        "PT-01",
+        "PT-02",
+        "PT-12"
+      ],
+      "scenarios": [
+        "SC-03",
+        "SC-14",
+        "SC-17"
+      ],
+      "decisions": [],
+      "requirements_accepted": false,
+      "proof_or_implementation_complete": false,
+      "baseline_contribution": "code/contract/member/instance/request/argsとpolicy版を照合し、過去の証拠と現在使用を分けた。",
+      "remaining": "任意理論版変更の証明移送は今後の義務。"
+    },
+    {
+      "id": "TY-08",
+      "title": "理論実行の隔離と決定可能部分",
+      "origin": "D",
+      "user_refs": [
+        "U07",
+        "U17"
+      ],
+      "work_units": [
+        "W7"
+      ],
+      "proof_targets": [
+        "PT-01",
+        "PT-02",
+        "PT-12"
+      ],
+      "scenarios": [
+        "SC-03",
+        "SC-19"
+      ],
+      "decisions": [
+        "Q-19"
+      ],
+      "requirements_accepted": false,
+      "proof_or_implementation_complete": false,
+      "baseline_contribution": "checkerの責任とkernelからの分離を記述する。",
+      "remaining": "CPU/memory sandbox付き第三者checker実行は未実装。"
+    },
+    {
+      "id": "CT-01",
+      "title": "契約の語彙と監視範囲",
+      "origin": "U",
+      "user_refs": [
+        "U05",
+        "U07"
+      ],
+      "work_units": [
+        "W2",
+        "W3"
+      ],
+      "proof_targets": [
+        "PT-12",
+        "PT-13"
+      ],
+      "scenarios": [
+        "SC-03"
+      ],
+      "decisions": [],
+      "requirements_accepted": false,
+      "proof_or_implementation_complete": false,
+      "baseline_contribution": "Partial/TotalBodyと全mutator不変条件を現在のコードに結びつけた。",
+      "remaining": "一般の契約論理・多owner rely/guarantee・契約変更合意は未完。"
+    },
+    {
+      "id": "CT-02",
+      "title": "証拠と実ソースの束縛",
+      "origin": "D",
+      "user_refs": [
+        "U05",
+        "U17"
+      ],
+      "work_units": [
+        "W2",
+        "W3"
+      ],
+      "proof_targets": [
+        "PT-12",
+        "PT-13"
+      ],
+      "scenarios": [
+        "SC-03"
+      ],
+      "decisions": [],
+      "requirements_accepted": false,
+      "proof_or_implementation_complete": false,
+      "baseline_contribution": "Partial/TotalBodyと全mutator不変条件を現在のコードに結びつけた。",
+      "remaining": "一般の契約論理・多owner rely/guarantee・契約変更合意は未完。"
+    },
+    {
+      "id": "CT-03",
+      "title": "全mutatorと環境干渉の閉包",
+      "origin": "D",
+      "user_refs": [
+        "U07",
+        "U14"
+      ],
+      "work_units": [
+        "W2",
+        "W3"
+      ],
+      "proof_targets": [
+        "PT-12",
+        "PT-13"
+      ],
+      "scenarios": [
+        "SC-03",
+        "SC-09"
+      ],
+      "decisions": [],
+      "requirements_accepted": false,
+      "proof_or_implementation_complete": false,
+      "baseline_contribution": "Partial/TotalBodyと全mutator不変条件を現在のコードに結びつけた。",
+      "remaining": "一般の契約論理・多owner rely/guarantee・契約変更合意は未完。"
+    },
+    {
+      "id": "CT-04",
+      "title": "部分正当性と成功範囲",
+      "origin": "D",
+      "user_refs": [
+        "U05",
+        "U17"
+      ],
+      "work_units": [
+        "W2",
+        "W3"
+      ],
+      "proof_targets": [
+        "PT-12",
+        "PT-13"
+      ],
+      "scenarios": [
+        "SC-03"
+      ],
+      "decisions": [],
+      "requirements_accepted": false,
+      "proof_or_implementation_complete": false,
+      "baseline_contribution": "Partial/TotalBodyと全mutator不変条件を現在のコードに結びつけた。",
+      "remaining": "一般の契約論理・多owner rely/guarantee・契約変更合意は未完。"
+    },
+    {
+      "id": "CT-05",
+      "title": "互換性と明示的な破壊的更新",
+      "origin": "U",
+      "user_refs": [
+        "U14"
+      ],
+      "work_units": [
+        "W2",
+        "W3"
+      ],
+      "proof_targets": [
+        "PT-12",
+        "PT-13"
+      ],
+      "scenarios": [
+        "SC-03",
+        "SC-12",
+        "SC-22"
+      ],
+      "decisions": [
+        "Q-21"
+      ],
+      "requirements_accepted": false,
+      "proof_or_implementation_complete": false,
+      "baseline_contribution": "同schema/sig交換でTotalBodyをPartialへ暗黙弱化しない。",
+      "remaining": "表現全体のbehavioral subtyping、外部client同意付き契約変更は未完。"
+    },
+    {
+      "id": "VF-01",
+      "title": "保証対象と前提の明示",
+      "origin": "U",
+      "user_refs": [
+        "U05",
+        "U17"
+      ],
+      "work_units": [
+        "W1",
+        "W4"
+      ],
+      "proof_targets": [
+        "PT-01",
+        "PT-02",
+        "PT-17",
+        "PT-18"
+      ],
+      "scenarios": [
+        "SC-02",
+        "SC-23"
+      ],
+      "decisions": [],
+      "requirements_accepted": false,
+      "proof_or_implementation_complete": false,
+      "baseline_contribution": "24の対象限定手証明、独立rank checker、一般化と有限実行の区別を用意した。",
+      "remaining": "証明支援系の機械化、別の研究者のレビュー、実Rust対応は未完。"
+    },
+    {
+      "id": "VF-02",
+      "title": "相対完全性と表現力の別検査",
+      "origin": "U",
+      "user_refs": [
+        "U05",
+        "U17"
+      ],
+      "work_units": [
+        "W1",
+        "W2"
+      ],
+      "proof_targets": [
+        "PT-01",
+        "PT-02",
+        "PT-17",
+        "PT-18"
+      ],
+      "scenarios": [
+        "SC-02",
+        "SC-15",
+        "SC-23"
+      ],
+      "decisions": [],
+      "requirements_accepted": false,
+      "proof_or_implementation_complete": false,
+      "baseline_contribution": "正のsupportと有限policyに健全性・完全性、rankの独立checkerを与えた。",
+      "remaining": "一般Mir表現の十分性と型付け完全性にはF0.2以上の成果を主張しない。"
+    },
+    {
+      "id": "VF-03",
+      "title": "証明生成・検査・信頼の分離",
+      "origin": "D",
+      "user_refs": [
+        "U05",
+        "U07"
+      ],
+      "work_units": [
+        "W1",
+        "W4"
+      ],
+      "proof_targets": [
+        "PT-01",
+        "PT-02",
+        "PT-17",
+        "PT-18"
+      ],
+      "scenarios": [
+        "SC-03",
+        "SC-23"
+      ],
+      "decisions": [],
+      "requirements_accepted": false,
+      "proof_or_implementation_complete": false,
+      "baseline_contribution": "24の対象限定手証明、独立rank checker、一般化と有限実行の区別を用意した。",
+      "remaining": "証明支援系の機械化、別の研究者のレビュー、実Rust対応は未完。"
+    },
+    {
+      "id": "VF-04",
+      "title": "合成の保証を独立に示す",
+      "origin": "U",
+      "user_refs": [
+        "U04",
+        "U17"
+      ],
+      "work_units": [
+        "W1",
+        "W4"
+      ],
+      "proof_targets": [
+        "PT-01",
+        "PT-02",
+        "PT-17",
+        "PT-18"
+      ],
+      "scenarios": [
+        "SC-13",
+        "SC-23"
+      ],
+      "decisions": [],
+      "requirements_accepted": false,
+      "proof_or_implementation_complete": false,
+      "baseline_contribution": "24の対象限定手証明、独立rank checker、一般化と有限実行の区別を用意した。",
+      "remaining": "証明支援系の機械化、別の研究者のレビュー、実Rust対応は未完。"
+    },
+    {
+      "id": "VF-05",
+      "title": "実装への意味保存",
+      "origin": "U",
+      "user_refs": [
+        "U01",
+        "U17"
+      ],
+      "work_units": [
+        "W4"
+      ],
+      "proof_targets": [
+        "PT-01",
+        "PT-02",
+        "PT-17",
+        "PT-18"
+      ],
+      "scenarios": [
+        "SC-23"
+      ],
+      "decisions": [],
+      "requirements_accepted": false,
+      "proof_or_implementation_complete": false,
+      "baseline_contribution": "step対応で有限traceを移す条件付き命題を明示した。",
+      "remaining": "Rust/QUICがその前提を満たす証明はない。"
+    },
+    {
+      "id": "VF-06",
+      "title": "反例と改変検査",
+      "origin": "D",
+      "user_refs": [
+        "U17"
+      ],
+      "work_units": [
+        "W1",
+        "W4"
+      ],
+      "proof_targets": [
+        "PT-01",
+        "PT-02",
+        "PT-17",
+        "PT-18"
+      ],
+      "scenarios": [
+        "SC-23"
+      ],
+      "decisions": [],
+      "requirements_accepted": false,
+      "proof_or_implementation_complete": false,
+      "baseline_contribution": "実際の複数の研究モデル不具合を修正し、6つの意図的弱化で反例を再現した。",
+      "remaining": "既存Mirコードの不具合数や第三者レビュー成果には数えない。"
+    },
+    {
+      "id": "VF-07",
+      "title": "証明と仕様意図の独立レビュー",
+      "origin": "D",
+      "user_refs": [
+        "U17",
+        "U18"
+      ],
+      "work_units": [
+        "W1"
+      ],
+      "proof_targets": [
+        "PT-01",
+        "PT-02",
+        "PT-17",
+        "PT-18"
+      ],
+      "scenarios": [
+        "SC-03",
+        "SC-23"
+      ],
+      "decisions": [
+        "Q-22"
+      ],
+      "requirements_accepted": false,
+      "proof_or_implementation_complete": false,
+      "baseline_contribution": "独立レビューを受入れ条件へ置いた。",
+      "remaining": "今回の手証明と実装を別の研究者がレビューした事実はない。"
+    },
+    {
+      "id": "EV-01",
+      "title": "静的合成と動的合成",
+      "origin": "U",
+      "user_refs": [
+        "U04",
+        "U14"
+      ],
+      "work_units": [
+        "W3",
+        "W4",
+        "W5"
+      ],
+      "proof_targets": [
+        "PT-04",
+        "PT-11",
+        "PT-13",
+        "PT-14"
+      ],
+      "scenarios": [
+        "SC-11",
+        "SC-24"
+      ],
+      "decisions": [],
+      "requirements_accepted": false,
+      "proof_or_implementation_complete": false,
+      "baseline_contribution": "動的module/source追加・退役・reparentと現在認可・pending使用を同じモデルに置いた。",
+      "remaining": "実多owner activation、状態schema migration、一般patch言語は未完。"
+    },
+    {
+      "id": "EV-02",
+      "title": "patch依存DAGのライフサイクル",
+      "origin": "U",
+      "user_refs": [
+        "U04"
+      ],
+      "work_units": [
+        "W3"
+      ],
+      "proof_targets": [
+        "PT-04",
+        "PT-11",
+        "PT-13",
+        "PT-14"
+      ],
+      "scenarios": [
+        "SC-11"
+      ],
+      "decisions": [],
+      "requirements_accepted": false,
+      "proof_or_implementation_complete": false,
+      "baseline_contribution": "module-kind DAGと動的supportを参照に用いる。",
+      "remaining": "package版の解決、任意module handle、分散patch依存の全lifecycleは未完。"
+    },
+    {
+      "id": "EV-03",
+      "title": "変更種類の区別",
+      "origin": "U",
+      "user_refs": [
+        "U14"
+      ],
+      "work_units": [
+        "W3",
+        "W5"
+      ],
+      "proof_targets": [
+        "PT-04",
+        "PT-11",
+        "PT-13",
+        "PT-14"
+      ],
+      "scenarios": [
+        "SC-11"
+      ],
+      "decisions": [
+        "Q-23"
+      ],
+      "requirements_accepted": false,
+      "proof_or_implementation_complete": false,
+      "baseline_contribution": "宣言とsource追加・退役・reparent・同schemaコード交換を実装した。",
+      "remaining": "一般schema migrationはF0.2の別モデルから未統合。"
+    },
+    {
+      "id": "EV-04",
+      "title": "検査・認可・activation",
+      "origin": "U",
+      "user_refs": [
+        "U14"
+      ],
+      "work_units": [
+        "W3",
+        "W4",
+        "W5"
+      ],
+      "proof_targets": [
+        "PT-04",
+        "PT-11",
+        "PT-13",
+        "PT-14"
+      ],
+      "scenarios": [
+        "SC-12"
+      ],
+      "decisions": [],
+      "requirements_accepted": false,
+      "proof_or_implementation_complete": false,
+      "baseline_contribution": "動的module/source追加・退役・reparentと現在認可・pending使用を同じモデルに置いた。",
+      "remaining": "実多owner activation、状態schema migration、一般patch言語は未完。"
+    },
+    {
+      "id": "EV-05",
+      "title": "依存stampと影響範囲",
+      "origin": "D",
+      "user_refs": [
+        "U14",
+        "U17"
+      ],
+      "work_units": [
+        "W3",
+        "W4",
+        "W5"
+      ],
+      "proof_targets": [
+        "PT-04",
+        "PT-11",
+        "PT-13",
+        "PT-14"
+      ],
+      "scenarios": [
+        "SC-12",
+        "SC-13"
+      ],
+      "decisions": [
+        "Q-24"
+      ],
+      "requirements_accepted": false,
+      "proof_or_implementation_complete": false,
+      "baseline_contribution": "動的module/source追加・退役・reparentと現在認可・pending使用を同じモデルに置いた。",
+      "remaining": "実多owner activation、状態schema migration、一般patch言語は未完。"
+    },
+    {
+      "id": "EV-06",
+      "title": "局所停止と未完了処理",
+      "origin": "D",
+      "user_refs": [
+        "U14"
+      ],
+      "work_units": [
+        "W3",
+        "W4"
+      ],
+      "proof_targets": [
+        "PT-04",
+        "PT-11",
+        "PT-13",
+        "PT-14"
+      ],
+      "scenarios": [
+        "SC-12"
+      ],
+      "decisions": [
+        "Q-12",
+        "Q-23"
+      ],
+      "requirements_accepted": false,
+      "proof_or_implementation_complete": false,
+      "baseline_contribution": "同schema code交換は選択したquiescent条件で行う。reparentはtracked current-use。",
+      "remaining": "分散fenceと処理中継続のgeneral migrationは未実装。"
+    },
+    {
+      "id": "EV-07",
+      "title": "分散activationと障害",
+      "origin": "U",
+      "user_refs": [
+        "U04",
+        "U14"
+      ],
+      "work_units": [
+        "W4",
+        "W5"
+      ],
+      "proof_targets": [
+        "PT-04",
+        "PT-11",
+        "PT-13",
+        "PT-14"
+      ],
+      "scenarios": [
+        "SC-12",
+        "SC-14"
+      ],
+      "decisions": [
+        "Q-13",
+        "Q-18"
+      ],
+      "requirements_accepted": false,
+      "proof_or_implementation_complete": false,
+      "baseline_contribution": "F0.2の2PCモデルは別資産として保持する。",
+      "remaining": "F0.3 strict-currentnessを2PC/保存へ統合した保証はない。"
+    },
+    {
+      "id": "EV-08",
+      "title": "保証・理論・policyの更新",
+      "origin": "U",
+      "user_refs": [
+        "U06",
+        "U07",
+        "U14"
+      ],
+      "work_units": [
+        "W3",
+        "W5"
+      ],
+      "proof_targets": [
+        "PT-04",
+        "PT-11",
+        "PT-13",
+        "PT-14"
+      ],
+      "scenarios": [
+        "SC-04"
+      ],
+      "decisions": [],
+      "requirements_accepted": false,
+      "proof_or_implementation_complete": false,
+      "baseline_contribution": "無断のTotalBody弱化を拒否する。",
+      "remaining": "正当な契約変更、旧version保持、利用者合意は新しい義務。"
+    },
+    {
+      "id": "EV-09",
+      "title": "撤去・廃止・回収と継続性",
+      "origin": "U",
+      "user_refs": [
+        "U14"
+      ],
+      "work_units": [
+        "W5",
+        "W8"
+      ],
+      "proof_targets": [
+        "PT-04",
+        "PT-11",
+        "PT-13",
+        "PT-14"
+      ],
+      "scenarios": [
+        "SC-11",
+        "SC-21"
+      ],
+      "decisions": [
+        "Q-21",
+        "Q-25"
+      ],
+      "requirements_accepted": false,
+      "proof_or_implementation_complete": false,
+      "baseline_contribution": "退役recordは保持する。",
+      "remaining": "履歴/claim/tombstoneを安全に忘れる長期GCは未実装。"
+    },
+    {
+      "id": "EV-10",
+      "title": "任意有限回の進化",
+      "origin": "D",
+      "user_refs": [
+        "U14",
+        "U17"
+      ],
+      "work_units": [
+        "W3",
+        "W4",
+        "W5"
+      ],
+      "proof_targets": [
+        "PT-04",
+        "PT-11",
+        "PT-13",
+        "PT-14"
+      ],
+      "scenarios": [
+        "SC-12"
+      ],
+      "decisions": [],
+      "requirements_accepted": false,
+      "proof_or_implementation_complete": false,
+      "baseline_contribution": "動的module/source追加・退役・reparentと現在認可・pending使用を同じモデルに置いた。",
+      "remaining": "実多owner activation、状態schema migration、一般patch言語は未完。"
+    },
+    {
+      "id": "SV-01",
+      "title": "cutとchannel state",
+      "origin": "U",
+      "user_refs": [
+        "U10"
+      ],
+      "work_units": [
+        "W5"
+      ],
+      "proof_targets": [
+        "PT-14",
+        "PT-16"
+      ],
+      "scenarios": [
+        "SC-14",
+        "SC-15"
+      ],
+      "decisions": [],
+      "requirements_accepted": false,
+      "proof_or_implementation_complete": false,
+      "baseline_contribution": "F0.1の有限consistent-cut/Z-pathアルゴリズムを保持する。",
+      "remaining": "分散全成分から入力を完全に抽出する証明は未統合。"
+    },
+    {
+      "id": "SV-02",
+      "title": "状態・決定・継続の永続化",
+      "origin": "D",
+      "user_refs": [
+        "U10",
+        "U14"
+      ],
+      "work_units": [
+        "W5"
+      ],
+      "proof_targets": [
+        "PT-14",
+        "PT-16"
+      ],
+      "scenarios": [
+        "SC-14"
+      ],
+      "decisions": [],
+      "requirements_accepted": false,
+      "proof_or_implementation_complete": false,
+      "baseline_contribution": "全Data manifestと完全journal、信頼した現在headを使うsame-instance復元を置いた。",
+      "remaining": "実storage・未知成分・外部効果状態・distributed durabilityは対象外。"
+    },
+    {
+      "id": "SV-03",
+      "title": "全componentのcheckpoint参加",
+      "origin": "D",
+      "user_refs": [
+        "U10",
+        "U17"
+      ],
+      "work_units": [
+        "W5"
+      ],
+      "proof_targets": [
+        "PT-14",
+        "PT-16"
+      ],
+      "scenarios": [
+        "SC-14",
+        "SC-24"
+      ],
+      "decisions": [],
+      "requirements_accepted": false,
+      "proof_or_implementation_complete": false,
+      "baseline_contribution": "全Data manifestと完全journal、信頼した現在headを使うsame-instance復元を置いた。",
+      "remaining": "実storage・未知成分・外部効果状態・distributed durabilityは対象外。"
+    },
+    {
+      "id": "SV-04",
+      "title": "現在世界への復帰とfresh import",
+      "origin": "U",
+      "user_refs": [
+        "U10",
+        "U14"
+      ],
+      "work_units": [
+        "W5"
+      ],
+      "proof_targets": [
+        "PT-14",
+        "PT-16"
+      ],
+      "scenarios": [
+        "SC-14",
+        "SC-18"
+      ],
+      "decisions": [
+        "Q-20"
+      ],
+      "requirements_accepted": false,
+      "proof_or_implementation_complete": false,
+      "baseline_contribution": "same-instance復元を現在の独立headに束縛する。F0.2のfresh importとは区別した。",
+      "remaining": "そのheadが得られないoffline復旧を同じ保証にしない。"
+    },
+    {
+      "id": "SV-05",
+      "title": "Z-pathと依存収集",
+      "origin": "U",
+      "user_refs": [
+        "U10"
+      ],
+      "work_units": [
+        "W5"
+      ],
+      "proof_targets": [
+        "PT-14",
+        "PT-16"
+      ],
+      "scenarios": [
+        "SC-14",
+        "SC-15"
+      ],
+      "decisions": [],
+      "requirements_accepted": false,
+      "proof_or_implementation_complete": false,
+      "baseline_contribution": "F0.1のcheckpoint completion/Z-pathの手証明とテストを再実行した。",
+      "remaining": "F0.3から分散checkpoint抽出する一般対応は未実装。"
+    },
+    {
+      "id": "SV-06",
+      "title": "retention・忘却・圧縮",
+      "origin": "D",
+      "user_refs": [
+        "U10",
+        "U14"
+      ],
+      "work_units": [
+        "W5",
+        "W8"
+      ],
+      "proof_targets": [
+        "PT-14",
+        "PT-16"
+      ],
+      "scenarios": [
+        "SC-14",
+        "SC-21"
+      ],
+      "decisions": [
+        "Q-25"
+      ],
+      "requirements_accepted": false,
+      "proof_or_implementation_complete": false,
+      "baseline_contribution": "完全image journalとrecordを全保持するモデル。",
+      "remaining": "安全な圧縮・回収・stale reject継続の方式は未完成。"
+    },
+    {
+      "id": "SV-07",
+      "title": "archiveの真正性と検証可能な復元",
+      "origin": "D",
+      "user_refs": [
+        "U10",
+        "U11"
+      ],
+      "work_units": [
+        "W5"
+      ],
+      "proof_targets": [
+        "PT-14",
+        "PT-16"
+      ],
+      "scenarios": [
+        "SC-14"
+      ],
+      "decisions": [
+        "Q-20"
+      ],
+      "requirements_accepted": false,
+      "proof_or_implementation_complete": false,
+      "baseline_contribution": "現在headまでの認可/失効/要求/準備/関係状態を一緒に復元する。",
+      "remaining": "外部identity/鍵/委譲の復元はtrusted-boundary仮定。"
+    },
+    {
+      "id": "OB-01",
+      "title": "観測の忠実性",
+      "origin": "U",
+      "user_refs": [
+        "U11"
+      ],
+      "work_units": [
+        "W6"
+      ],
+      "proof_targets": [
+        "PT-15",
+        "PT-18"
+      ],
+      "scenarios": [
+        "SC-16",
+        "SC-20",
+        "SC-24"
+      ],
+      "decisions": [],
+      "requirements_accepted": false,
+      "proof_or_implementation_complete": false,
+      "baseline_contribution": "意味記録、観測消去、固定labelの二実行条件、filter後の保持を接続した。",
+      "remaining": "任意動的IFC・物理timing・資源隔離・能動debugは未証明。"
+    },
+    {
+      "id": "OB-02",
+      "title": "観測による意味の非干渉",
+      "origin": "U",
+      "user_refs": [
+        "U11"
+      ],
+      "work_units": [
+        "W6"
+      ],
+      "proof_targets": [
+        "PT-15",
+        "PT-18"
+      ],
+      "scenarios": [
+        "SC-16",
+        "SC-24"
+      ],
+      "decisions": [
+        "Q-26"
+      ],
+      "requirements_accepted": false,
+      "proof_or_implementation_complete": false,
+      "baseline_contribution": "意味記録、観測消去、固定labelの二実行条件、filter後の保持を接続した。",
+      "remaining": "任意動的IFC・物理timing・資源隔離・能動debugは未証明。"
+    },
+    {
+      "id": "OB-03",
+      "title": "情報流の非干渉",
+      "origin": "U",
+      "user_refs": [
+        "U11"
+      ],
+      "work_units": [
+        "W6"
+      ],
+      "proof_targets": [
+        "PT-15",
+        "PT-18"
+      ],
+      "scenarios": [
+        "SC-17",
+        "SC-24"
+      ],
+      "decisions": [
+        "Q-26"
+      ],
+      "requirements_accepted": false,
+      "proof_or_implementation_complete": false,
+      "baseline_contribution": "固定label・同じlow制御/scheduleの限定profileで二実行非干渉を記述・試験した。",
+      "remaining": "一般の動的IFC、time、allocation、secret-dependent policy変化は未証明。"
+    },
+    {
+      "id": "OB-04",
+      "title": "観測者の現在権限",
+      "origin": "U",
+      "user_refs": [
+        "U06",
+        "U11"
+      ],
+      "work_units": [
+        "W6"
+      ],
+      "proof_targets": [
+        "PT-15",
+        "PT-18"
+      ],
+      "scenarios": [
+        "SC-17"
+      ],
+      "decisions": [],
+      "requirements_accepted": false,
+      "proof_or_implementation_complete": false,
+      "baseline_contribution": "意味記録、観測消去、固定labelの二実行条件、filter後の保持を接続した。",
+      "remaining": "任意動的IFC・物理timing・資源隔離・能動debugは未証明。"
+    },
+    {
+      "id": "OB-05",
+      "title": "資源と時間への観測干渉",
+      "origin": "D",
+      "user_refs": [
+        "U11",
+        "U17"
+      ],
+      "work_units": [
+        "W6"
+      ],
+      "proof_targets": [
+        "PT-15",
+        "PT-18"
+      ],
+      "scenarios": [
+        "SC-16"
+      ],
+      "decisions": [
+        "Q-26"
+      ],
+      "requirements_accepted": false,
+      "proof_or_implementation_complete": false,
+      "baseline_contribution": "許可filter後に有限bufferへ保持し、high trafficによるlow行退去を防いだ。",
+      "remaining": "全履歴・CPU時間を含む実資源隔離は未実装。"
+    },
+    {
+      "id": "OB-06",
+      "title": "不確定・欠測・非公開の表示",
+      "origin": "D",
+      "user_refs": [
+        "U11"
+      ],
+      "work_units": [
+        "W6"
+      ],
+      "proof_targets": [
+        "PT-15",
+        "PT-18"
+      ],
+      "scenarios": [
+        "SC-16"
+      ],
+      "decisions": [],
+      "requirements_accepted": false,
+      "proof_or_implementation_complete": false,
+      "baseline_contribution": "意味記録、観測消去、固定labelの二実行条件、filter後の保持を接続した。",
+      "remaining": "任意動的IFC・物理timing・資源隔離・能動debugは未証明。"
+    },
+    {
+      "id": "OB-07",
+      "title": "デバッグ制御と受動観測",
+      "origin": "U",
+      "user_refs": [
+        "U11"
+      ],
+      "work_units": [
+        "W6",
+        "W7"
+      ],
+      "proof_targets": [
+        "PT-15",
+        "PT-18"
+      ],
+      "scenarios": [
+        "SC-18"
+      ],
+      "decisions": [
+        "Q-27"
+      ],
+      "requirements_accepted": false,
+      "proof_or_implementation_complete": false,
+      "baseline_contribution": "active debugをobserveから分離する設計だけを示す。",
+      "remaining": "breakpoint、state edit、rollbackの認可と実装は未搭載。"
+    },
+    {
+      "id": "OB-08",
+      "title": "局所理論と多層認証の説明",
+      "origin": "D",
+      "user_refs": [
+        "U06",
+        "U07",
+        "U11"
+      ],
+      "work_units": [
+        "W6"
+      ],
+      "proof_targets": [
+        "PT-15",
+        "PT-18"
+      ],
+      "scenarios": [
+        "SC-04",
+        "SC-17"
+      ],
+      "decisions": [],
+      "requirements_accepted": false,
+      "proof_or_implementation_complete": false,
+      "baseline_contribution": "rank witness、policy branch、source siteを説明資料として保持する。",
+      "remaining": "公開するときの完全なdiagnostic prose/schemaは別仕事。"
+    },
+    {
+      "id": "HS-01",
+      "title": "package受入れと実行許可",
+      "origin": "U",
+      "user_refs": [
+        "U08"
+      ],
+      "work_units": [
+        "W7"
+      ],
+      "proof_targets": [
+        "PT-09",
+        "PT-15",
+        "PT-18"
+      ],
+      "scenarios": [
+        "SC-19",
+        "SC-20"
+      ],
+      "decisions": [],
+      "requirements_accepted": false,
+      "proof_or_implementation_complete": false,
+      "baseline_contribution": "Mir意味・View・provider・sandboxを区別する境界を計画へ具体化した。",
+      "remaining": "Browser/headless参加製品、renderer、safe package実装はない。"
+    },
+    {
+      "id": "HS-02",
+      "title": "sandboxとhost境界",
+      "origin": "D",
+      "user_refs": [
+        "U08",
+        "U17"
+      ],
+      "work_units": [
+        "W7"
+      ],
+      "proof_targets": [
+        "PT-09",
+        "PT-15",
+        "PT-18"
+      ],
+      "scenarios": [
+        "SC-19",
+        "SC-20"
+      ],
+      "decisions": [
+        "Q-28"
+      ],
+      "requirements_accepted": false,
+      "proof_or_implementation_complete": false,
+      "baseline_contribution": "Mir意味・View・provider・sandboxを区別する境界を計画へ具体化した。",
+      "remaining": "Browser/headless参加製品、renderer、safe package実装はない。"
+    },
+    {
+      "id": "HS-03",
+      "title": "Mir内のdomain意味",
+      "origin": "U",
+      "user_refs": [
+        "U08",
+        "U16"
+      ],
+      "work_units": [
+        "W7"
+      ],
+      "proof_targets": [
+        "PT-09",
+        "PT-15",
+        "PT-18"
+      ],
+      "scenarios": [
+        "SC-01",
+        "SC-20"
+      ],
+      "decisions": [],
+      "requirements_accepted": false,
+      "proof_or_implementation_complete": false,
+      "baseline_contribution": "Mir意味・View・provider・sandboxを区別する境界を計画へ具体化した。",
+      "remaining": "Browser/headless参加製品、renderer、safe package実装はない。"
+    },
+    {
+      "id": "HS-04",
+      "title": "Viewと入力の双方向境界",
+      "origin": "U",
+      "user_refs": [
+        "U08",
+        "U11"
+      ],
+      "work_units": [
+        "W7"
+      ],
+      "proof_targets": [
+        "PT-09",
+        "PT-15",
+        "PT-18"
+      ],
+      "scenarios": [
+        "SC-20"
+      ],
+      "decisions": [],
+      "requirements_accepted": false,
+      "proof_or_implementation_complete": false,
+      "baseline_contribution": "Mir意味・View・provider・sandboxを区別する境界を計画へ具体化した。",
+      "remaining": "Browser/headless参加製品、renderer、safe package実装はない。"
+    },
+    {
+      "id": "HS-05",
+      "title": "表示用計算とprovider結果",
+      "origin": "U",
+      "user_refs": [
+        "U08",
+        "U09"
+      ],
+      "work_units": [
+        "W7"
+      ],
+      "proof_targets": [
+        "PT-09",
+        "PT-15",
+        "PT-18"
+      ],
+      "scenarios": [
+        "SC-10",
+        "SC-20"
+      ],
+      "decisions": [
+        "Q-10"
+      ],
+      "requirements_accepted": false,
+      "proof_or_implementation_complete": false,
+      "baseline_contribution": "Mir意味・View・provider・sandboxを区別する境界を計画へ具体化した。",
+      "remaining": "Browser/headless参加製品、renderer、safe package実装はない。"
+    },
+    {
+      "id": "HS-06",
+      "title": "継続的な参加と最小構築UI",
+      "origin": "U",
+      "user_refs": [
+        "U08",
+        "U15"
+      ],
+      "work_units": [
+        "W7"
+      ],
+      "proof_targets": [
+        "PT-09",
+        "PT-15",
+        "PT-18"
+      ],
+      "scenarios": [
+        "SC-20",
+        "SC-24"
+      ],
+      "decisions": [
+        "Q-29"
+      ],
+      "requirements_accepted": false,
+      "proof_or_implementation_complete": false,
+      "baseline_contribution": "Mir意味・View・provider・sandboxを区別する境界を計画へ具体化した。",
+      "remaining": "Browser/headless参加製品、renderer、safe package実装はない。"
+    },
+    {
+      "id": "OP-01",
+      "title": "検査前後の資源課金",
+      "origin": "D",
+      "user_refs": [
+        "U11",
+        "U14",
+        "U17"
+      ],
+      "work_units": [
+        "W4",
+        "W5",
+        "W6",
+        "W7"
+      ],
+      "proof_targets": [
+        "PT-08",
+        "PT-18"
+      ],
+      "scenarios": [
+        "SC-08",
+        "SC-19",
+        "SC-21"
+      ],
+      "decisions": [],
+      "requirements_accepted": false,
+      "proof_or_implementation_complete": false,
+      "baseline_contribution": "資源を意味上の失敗と前提に分け、再現可能な研究実行を用意した。",
+      "remaining": "本番quota・長期GC・性能基準・OS故障モデルは未実装。"
+    },
+    {
+      "id": "OP-02",
+      "title": "長期的な資源回収",
+      "origin": "D",
+      "user_refs": [
+        "U14"
+      ],
+      "work_units": [
+        "W4",
+        "W5",
+        "W6",
+        "W7"
+      ],
+      "proof_targets": [
+        "PT-08",
+        "PT-18"
+      ],
+      "scenarios": [
+        "SC-21"
+      ],
+      "decisions": [
+        "Q-25"
+      ],
+      "requirements_accepted": false,
+      "proof_or_implementation_complete": false,
+      "baseline_contribution": "資源を意味上の失敗と前提に分け、再現可能な研究実行を用意した。",
+      "remaining": "本番quota・長期GC・性能基準・OS故障モデルは未実装。"
+    },
+    {
+      "id": "OP-03",
+      "title": "可用性と性能のprofile",
+      "origin": "D",
+      "user_refs": [
+        "U12",
+        "U15"
+      ],
+      "work_units": [
+        "W4",
+        "W5",
+        "W6",
+        "W7"
+      ],
+      "proof_targets": [
+        "PT-08",
+        "PT-18"
+      ],
+      "scenarios": [
+        "SC-21"
+      ],
+      "decisions": [
+        "Q-30"
+      ],
+      "requirements_accepted": false,
+      "proof_or_implementation_complete": false,
+      "baseline_contribution": "資源を意味上の失敗と前提に分け、再現可能な研究実行を用意した。",
+      "remaining": "本番quota・長期GC・性能基準・OS故障モデルは未実装。"
+    },
+    {
+      "id": "OP-04",
+      "title": "異常終了と現実のhost前提",
+      "origin": "D",
+      "user_refs": [
+        "U10",
+        "U17"
+      ],
+      "work_units": [
+        "W4",
+        "W5",
+        "W6",
+        "W7"
+      ],
+      "proof_targets": [
+        "PT-08",
+        "PT-18"
+      ],
+      "scenarios": [
+        "SC-21"
+      ],
+      "decisions": [],
+      "requirements_accepted": false,
+      "proof_or_implementation_complete": false,
+      "baseline_contribution": "資源を意味上の失敗と前提に分け、再現可能な研究実行を用意した。",
+      "remaining": "本番quota・長期GC・性能基準・OS故障モデルは未実装。"
+    },
+    {
+      "id": "OP-05",
+      "title": "再現と診断の最小運用",
+      "origin": "D",
+      "user_refs": [
+        "U11",
+        "U15"
+      ],
+      "work_units": [
+        "W7"
+      ],
+      "proof_targets": [
+        "PT-08",
+        "PT-18"
+      ],
+      "scenarios": [
+        "SC-21"
+      ],
+      "decisions": [],
+      "requirements_accepted": false,
+      "proof_or_implementation_complete": false,
+      "baseline_contribution": "完全offline runner、入力版、command、log、hashを成果物に含める。",
+      "remaining": "実product distributionやmultiOS supportの受理ではない。"
+    },
+    {
+      "id": "WW-01",
+      "title": "独立した管理・更新と接続",
+      "origin": "U",
+      "user_refs": [
+        "U12",
+        "U13",
+        "U14"
+      ],
+      "work_units": [
+        "W8"
+      ],
+      "proof_targets": [
+        "PT-12",
+        "PT-17"
+      ],
+      "scenarios": [
+        "SC-22"
+      ],
+      "decisions": [
+        "Q-17"
+      ],
+      "requirements_accepted": false,
+      "proof_or_implementation_complete": false,
+      "baseline_contribution": "単一の抽象制御モデルを世界全体の中央管理要求にしないことを明記した。",
+      "remaining": "独立domainの接続、リンク/公開/発見/連合は設計と実証が残る。"
+    },
+    {
+      "id": "WW-02",
+      "title": "識別・address・link・表現",
+      "origin": "D",
+      "user_refs": [
+        "U13"
+      ],
+      "work_units": [
+        "W8"
+      ],
+      "proof_targets": [
+        "PT-12",
+        "PT-17"
+      ],
+      "scenarios": [
+        "SC-22"
+      ],
+      "decisions": [
+        "Q-07",
+        "Q-29"
+      ],
+      "requirements_accepted": false,
+      "proof_or_implementation_complete": false,
+      "baseline_contribution": "単一の抽象制御モデルを世界全体の中央管理要求にしないことを明記した。",
+      "remaining": "独立domainの接続、リンク/公開/発見/連合は設計と実証が残る。"
+    },
+    {
+      "id": "WW-03",
+      "title": "未知の拡張の安全な扱い",
+      "origin": "D",
+      "user_refs": [
+        "U07",
+        "U13",
+        "U14"
+      ],
+      "work_units": [
+        "W8"
+      ],
+      "proof_targets": [
+        "PT-12",
+        "PT-17"
+      ],
+      "scenarios": [
+        "SC-22"
+      ],
+      "decisions": [
+        "Q-21"
+      ],
+      "requirements_accepted": false,
+      "proof_or_implementation_complete": false,
+      "baseline_contribution": "単一の抽象制御モデルを世界全体の中央管理要求にしないことを明記した。",
+      "remaining": "独立domainの接続、リンク/公開/発見/連合は設計と実証が残る。"
+    },
+    {
+      "id": "WW-04",
+      "title": "既存システムとの接続",
+      "origin": "D",
+      "user_refs": [
+        "U12",
+        "U13"
+      ],
+      "work_units": [
+        "W8"
+      ],
+      "proof_targets": [
+        "PT-12",
+        "PT-17"
+      ],
+      "scenarios": [
+        "SC-22"
+      ],
+      "decisions": [],
+      "requirements_accepted": false,
+      "proof_or_implementation_complete": false,
+      "baseline_contribution": "単一の抽象制御モデルを世界全体の中央管理要求にしないことを明記した。",
+      "remaining": "独立domainの接続、リンク/公開/発見/連合は設計と実証が残る。"
+    },
+    {
+      "id": "WW-05",
+      "title": "発見・公開・連合の責任",
+      "origin": "D",
+      "user_refs": [
+        "U13"
+      ],
+      "work_units": [
+        "W8"
+      ],
+      "proof_targets": [
+        "PT-12",
+        "PT-17"
+      ],
+      "scenarios": [
+        "SC-22"
+      ],
+      "decisions": [
+        "Q-29"
+      ],
+      "requirements_accepted": false,
+      "proof_or_implementation_complete": false,
+      "baseline_contribution": "単一の抽象制御モデルを世界全体の中央管理要求にしないことを明記した。",
+      "remaining": "独立domainの接続、リンク/公開/発見/連合は設計と実証が残る。"
+    },
+    {
+      "id": "WW-06",
+      "title": "内容の真偽と操作の正しさ",
+      "origin": "D",
+      "user_refs": [
+        "U13",
+        "U17"
+      ],
+      "work_units": [
+        "W8"
+      ],
+      "proof_targets": [
+        "PT-12",
+        "PT-17"
+      ],
+      "scenarios": [
+        "SC-22"
+      ],
+      "decisions": [],
+      "requirements_accepted": false,
+      "proof_or_implementation_complete": false,
+      "baseline_contribution": "単一の抽象制御モデルを世界全体の中央管理要求にしないことを明記した。",
+      "remaining": "独立domainの接続、リンク/公開/発見/連合は設計と実証が残る。"
+    },
+    {
+      "id": "MG-01",
+      "title": "要件の根拠と未決を保持",
+      "origin": "U",
+      "user_refs": [
+        "U17",
+        "U18"
+      ],
+      "work_units": [
+        "W1",
+        "W7"
+      ],
+      "proof_targets": [
+        "PT-17",
+        "PT-18"
+      ],
+      "scenarios": [
+        "SC-23"
+      ],
+      "decisions": [],
+      "requirements_accepted": false,
+      "proof_or_implementation_complete": false,
+      "baseline_contribution": "全要件と候補・証拠・残件を対応づけ、既存Canonの受理へ昇格させない。",
+      "remaining": "全体alphaの達成とowner採用は未判定。"
+    },
+    {
+      "id": "MG-02",
+      "title": "αの統合受入れ",
+      "origin": "U",
+      "user_refs": [
+        "U15"
+      ],
+      "work_units": [
+        "W7"
+      ],
+      "proof_targets": [
+        "PT-17",
+        "PT-18"
+      ],
+      "scenarios": [
+        "SC-23",
+        "SC-24"
+      ],
+      "decisions": [],
+      "requirements_accepted": false,
+      "proof_or_implementation_complete": false,
+      "baseline_contribution": "SC-24に相当する相互作用の一部を同じkernelで実行した。",
+      "remaining": "実network・UI・任意local theory・全componentを含むαのSC-24は未完。"
+    },
+    {
+      "id": "MG-03",
+      "title": "次に依存する基礎を先に閉じる",
+      "origin": "U",
+      "user_refs": [
+        "U17",
+        "U18"
+      ],
+      "work_units": [
+        "W1",
+        "W7"
+      ],
+      "proof_targets": [
+        "PT-17",
+        "PT-18"
+      ],
+      "scenarios": [
+        "SC-23"
+      ],
+      "decisions": [],
+      "requirements_accepted": false,
+      "proof_or_implementation_complete": false,
+      "baseline_contribution": "全要件と候補・証拠・残件を対応づけ、既存Canonの受理へ昇格させない。",
+      "remaining": "全体alphaの達成とowner採用は未判定。"
+    },
+    {
+      "id": "MG-04",
+      "title": "証拠のidentityと追試",
+      "origin": "D",
+      "user_refs": [
+        "U17"
+      ],
+      "work_units": [
+        "W1",
+        "W7"
+      ],
+      "proof_targets": [
+        "PT-17",
+        "PT-18"
+      ],
+      "scenarios": [
+        "SC-23"
+      ],
+      "decisions": [],
+      "requirements_accepted": false,
+      "proof_or_implementation_complete": false,
+      "baseline_contribution": "全要件と候補・証拠・残件を対応づけ、既存Canonの受理へ昇格させない。",
+      "remaining": "全体alphaの達成とowner採用は未判定。"
+    },
+    {
+      "id": "MG-05",
+      "title": "完了・保留・再開の判定",
+      "origin": "U",
+      "user_refs": [
+        "U18"
+      ],
+      "work_units": [
+        "W1",
+        "W7"
+      ],
+      "proof_targets": [
+        "PT-17",
+        "PT-18"
+      ],
+      "scenarios": [
+        "SC-23"
+      ],
+      "decisions": [],
+      "requirements_accepted": false,
+      "proof_or_implementation_complete": false,
+      "baseline_contribution": "全要件と候補・証拠・残件を対応づけ、既存Canonの受理へ昇格させない。",
+      "remaining": "全体alphaの達成とowner採用は未判定。"
+    },
+    {
+      "id": "MG-06",
+      "title": "研究成果の単位",
+      "origin": "D",
+      "user_refs": [
+        "U17",
+        "U18"
+      ],
+      "work_units": [
+        "W1"
+      ],
+      "proof_targets": [
+        "PT-17",
+        "PT-18"
+      ],
+      "scenarios": [
+        "SC-23"
+      ],
+      "decisions": [],
+      "requirements_accepted": false,
+      "proof_or_implementation_complete": false,
+      "baseline_contribution": "定義・手証明・実行model・実反例・traceを作成した。",
+      "remaining": "件数を完成率にしない。機械化と独立受理が必要。"
+    }
+  ]
+}

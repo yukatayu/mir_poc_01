@@ -1,0 +1,489 @@
+======================================================================
+ERROR: test_all_owner_writes_staged_on_failure (tests.test_source.Source.test_all_owner_writes_staged_on_failure)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/mnt/data/mir_foundation_F0_2/tests/test_source.py", line 72, in test_all_owner_writes_staged_on_failure
+    e,f=run(parse_check_compile(s),'main');self.assertEqual(e.state()['x'],10);self.assertEqual(f.failure,'PreconditionFailed')
+        ~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/data/mir_foundation_F0_2/tests/test_source.py", line 11, in run
+    fid=e.spawn(p.name+'.'+name,args);e.run();e.assert_invariants();return e,e.fibers[fid]
+                                      ~~~~~^^
+  File "/mnt/data/mir_foundation_F0_2/model/engine.py", line 221, in run
+    changed=self.deliver_request() or changed;changed=self.deliver_response() or changed
+            ~~~~~~~~~~~~~~~~~~~~^^
+  File "/mnt/data/mir_foundation_F0_2/model/engine.py", line 192, in deliver_request
+    shard=self.shards[op.sig.owner];before=len(shard.log);out=shard.service(r,self.auth,self.issued,crash_at)
+                                                              ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/data/mir_foundation_F0_2/model/engine.py", line 69, in service
+    if op.identity!=r.code_hash or op.sig.identity!=r.contract_hash or self.op_versions[r.operation]!=r.binding_epoch:
+                                                                       ^^^^^^^^^^^^^^^^
+AttributeError: 'Shard' object has no attribute 'op_versions'. Did you mean: 'operations'?
+
+======================================================================
+ERROR: test_cross_owner_operand_needs_snapshot (tests.test_source.Source.test_cross_owner_operand_needs_snapshot)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/mnt/data/mir_foundation_F0_2/tests/test_source.py", line 38, in test_cross_owner_operand_needs_snapshot
+    p=parse_check_compile(s.replace('    x = x + y','    v:int = y\n    x = x + v'));self.assertEqual(run(p,'main')[1].result,12)
+                                                                                                      ~~~^^^^^^^^^^
+  File "/mnt/data/mir_foundation_F0_2/tests/test_source.py", line 11, in run
+    fid=e.spawn(p.name+'.'+name,args);e.run();e.assert_invariants();return e,e.fibers[fid]
+                                      ~~~~~^^
+  File "/mnt/data/mir_foundation_F0_2/model/engine.py", line 221, in run
+    changed=self.deliver_request() or changed;changed=self.deliver_response() or changed
+            ~~~~~~~~~~~~~~~~~~~~^^
+  File "/mnt/data/mir_foundation_F0_2/model/engine.py", line 192, in deliver_request
+    shard=self.shards[op.sig.owner];before=len(shard.log);out=shard.service(r,self.auth,self.issued,crash_at)
+                                                              ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/data/mir_foundation_F0_2/model/engine.py", line 69, in service
+    if op.identity!=r.code_hash or op.sig.identity!=r.contract_hash or self.op_versions[r.operation]!=r.binding_epoch:
+                                                                       ^^^^^^^^^^^^^^^^
+AttributeError: 'Shard' object has no attribute 'op_versions'. Did you mean: 'operations'?
+
+======================================================================
+ERROR: test_deployment_does_not_grant (tests.test_source.Source.test_deployment_does_not_grant)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/mnt/data/mir_foundation_F0_2/tests/test_source.py", line 53, in test_deployment_does_not_grant
+    p=example('counter.mirx','Counter');e,f=run(p,'session',(1,),False);self.assertEqual(f.failure,'AuthorityDenied');self.assertEqual(e.state()['stock'],10)
+                                            ~~~^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/data/mir_foundation_F0_2/tests/test_source.py", line 11, in run
+    fid=e.spawn(p.name+'.'+name,args);e.run();e.assert_invariants();return e,e.fibers[fid]
+                                      ~~~~~^^
+  File "/mnt/data/mir_foundation_F0_2/model/engine.py", line 221, in run
+    changed=self.deliver_request() or changed;changed=self.deliver_response() or changed
+            ~~~~~~~~~~~~~~~~~~~~^^
+  File "/mnt/data/mir_foundation_F0_2/model/engine.py", line 192, in deliver_request
+    shard=self.shards[op.sig.owner];before=len(shard.log);out=shard.service(r,self.auth,self.issued,crash_at)
+                                                              ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/data/mir_foundation_F0_2/model/engine.py", line 69, in service
+    if op.identity!=r.code_hash or op.sig.identity!=r.contract_hash or self.op_versions[r.operation]!=r.binding_epoch:
+                                                                       ^^^^^^^^^^^^^^^^
+AttributeError: 'Shard' object has no attribute 'op_versions'. Did you mean: 'operations'?
+
+======================================================================
+ERROR: test_direct_assignment_is_owner_rmw (tests.test_source.Source.test_direct_assignment_is_owner_rmw)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/mnt/data/mir_foundation_F0_2/tests/test_source.py", line 21, in test_direct_assignment_is_owner_rmw
+    p=example('counter.mirx','Counter');e,f=run(p,'direct');self.assertEqual(f.result,12)
+                                            ~~~^^^^^^^^^^^^
+  File "/mnt/data/mir_foundation_F0_2/tests/test_source.py", line 11, in run
+    fid=e.spawn(p.name+'.'+name,args);e.run();e.assert_invariants();return e,e.fibers[fid]
+                                      ~~~~~^^
+  File "/mnt/data/mir_foundation_F0_2/model/engine.py", line 221, in run
+    changed=self.deliver_request() or changed;changed=self.deliver_response() or changed
+            ~~~~~~~~~~~~~~~~~~~~^^
+  File "/mnt/data/mir_foundation_F0_2/model/engine.py", line 192, in deliver_request
+    shard=self.shards[op.sig.owner];before=len(shard.log);out=shard.service(r,self.auth,self.issued,crash_at)
+                                                              ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/data/mir_foundation_F0_2/model/engine.py", line 69, in service
+    if op.identity!=r.code_hash or op.sig.identity!=r.contract_hash or self.op_versions[r.operation]!=r.binding_epoch:
+                                                                       ^^^^^^^^^^^^^^^^
+AttributeError: 'Shard' object has no attribute 'op_versions'. Did you mean: 'operations'?
+
+======================================================================
+ERROR: test_independent_import_and_link (tests.test_source.Source.test_independent_import_and_link)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/mnt/data/mir_foundation_F0_2/tests/test_source.py", line 69, in test_independent_import_and_link
+    e=Engine([pool,positive,c]);e.grant_all('alice');fid=e.spawn('Client.allocate_positive',(-3,));e.run();self.assertEqual(e.fibers[fid].result,4);self.assertEqual(e.state()['free'],12)
+                                                                                                   ~~~~~^^
+  File "/mnt/data/mir_foundation_F0_2/model/engine.py", line 221, in run
+    changed=self.deliver_request() or changed;changed=self.deliver_response() or changed
+            ~~~~~~~~~~~~~~~~~~~~^^
+  File "/mnt/data/mir_foundation_F0_2/model/engine.py", line 192, in deliver_request
+    shard=self.shards[op.sig.owner];before=len(shard.log);out=shard.service(r,self.auth,self.issued,crash_at)
+                                                              ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/data/mir_foundation_F0_2/model/engine.py", line 69, in service
+    if op.identity!=r.code_hash or op.sig.identity!=r.contract_hash or self.op_versions[r.operation]!=r.binding_epoch:
+                                                                       ^^^^^^^^^^^^^^^^
+AttributeError: 'Shard' object has no attribute 'op_versions'. Did you mean: 'operations'?
+
+======================================================================
+ERROR: test_loop_and_source_map (tests.test_source.Source.test_loop_and_source_map)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/mnt/data/mir_foundation_F0_2/tests/test_source.py", line 14, in test_loop_and_source_map
+    p=example('counter.mirx','Counter');e,f=run(p,'session',(4,));self.assertEqual((f.result,e.state()['stock']),(30,6))
+                                            ~~~^^^^^^^^^^^^^^^^^^
+  File "/mnt/data/mir_foundation_F0_2/tests/test_source.py", line 11, in run
+    fid=e.spawn(p.name+'.'+name,args);e.run();e.assert_invariants();return e,e.fibers[fid]
+                                      ~~~~~^^
+  File "/mnt/data/mir_foundation_F0_2/model/engine.py", line 221, in run
+    changed=self.deliver_request() or changed;changed=self.deliver_response() or changed
+            ~~~~~~~~~~~~~~~~~~~~^^
+  File "/mnt/data/mir_foundation_F0_2/model/engine.py", line 192, in deliver_request
+    shard=self.shards[op.sig.owner];before=len(shard.log);out=shard.service(r,self.auth,self.issued,crash_at)
+                                                              ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/data/mir_foundation_F0_2/model/engine.py", line 69, in service
+    if op.identity!=r.code_hash or op.sig.identity!=r.contract_hash or self.op_versions[r.operation]!=r.binding_epoch:
+                                                                       ^^^^^^^^^^^^^^^^
+AttributeError: 'Shard' object has no attribute 'op_versions'. Did you mean: 'operations'?
+
+======================================================================
+ERROR: test_loop_differential (tests.test_source.Source.test_loop_differential)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/mnt/data/mir_foundation_F0_2/tests/test_source.py", line 90, in test_loop_differential
+    state={'stock':10};want=interpret_activity(p,'session',(n,),p.operations,state);e,f=run(p,'session',(n,));self.assertEqual((f.result,e.state()),(want,state))
+                                                                                        ~~~^^^^^^^^^^^^^^^^^^
+  File "/mnt/data/mir_foundation_F0_2/tests/test_source.py", line 11, in run
+    fid=e.spawn(p.name+'.'+name,args);e.run();e.assert_invariants();return e,e.fibers[fid]
+                                      ~~~~~^^
+  File "/mnt/data/mir_foundation_F0_2/model/engine.py", line 221, in run
+    changed=self.deliver_request() or changed;changed=self.deliver_response() or changed
+            ~~~~~~~~~~~~~~~~~~~~^^
+  File "/mnt/data/mir_foundation_F0_2/model/engine.py", line 192, in deliver_request
+    shard=self.shards[op.sig.owner];before=len(shard.log);out=shard.service(r,self.auth,self.issued,crash_at)
+                                                              ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/data/mir_foundation_F0_2/model/engine.py", line 69, in service
+    if op.identity!=r.code_hash or op.sig.identity!=r.contract_hash or self.op_versions[r.operation]!=r.binding_epoch:
+                                                                       ^^^^^^^^^^^^^^^^
+AttributeError: 'Shard' object has no attribute 'op_versions'. Did you mean: 'operations'?
+
+======================================================================
+ERROR: test_multiple_assignments_on_one_line (tests.test_source.Source.test_multiple_assignments_on_one_line)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/mnt/data/mir_foundation_F0_2/tests/test_source.py", line 25, in test_multiple_assignments_on_one_line
+    e,f=run(p,'main');self.assertEqual(f.result,13)
+        ~~~^^^^^^^^^^
+  File "/mnt/data/mir_foundation_F0_2/tests/test_source.py", line 11, in run
+    fid=e.spawn(p.name+'.'+name,args);e.run();e.assert_invariants();return e,e.fibers[fid]
+                                      ~~~~~^^
+  File "/mnt/data/mir_foundation_F0_2/model/engine.py", line 221, in run
+    changed=self.deliver_request() or changed;changed=self.deliver_response() or changed
+            ~~~~~~~~~~~~~~~~~~~~^^
+  File "/mnt/data/mir_foundation_F0_2/model/engine.py", line 192, in deliver_request
+    shard=self.shards[op.sig.owner];before=len(shard.log);out=shard.service(r,self.auth,self.issued,crash_at)
+                                                              ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/data/mir_foundation_F0_2/model/engine.py", line 69, in service
+    if op.identity!=r.code_hash or op.sig.identity!=r.contract_hash or self.op_versions[r.operation]!=r.binding_epoch:
+                                                                       ^^^^^^^^^^^^^^^^
+AttributeError: 'Shard' object has no attribute 'op_versions'. Did you mean: 'operations'?
+
+======================================================================
+ERROR: test_unjoined_child_failure_is_not_silent_success (tests.test_source.Source.test_unjoined_child_failure_is_not_silent_success)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/mnt/data/mir_foundation_F0_2/tests/test_source.py", line 75, in test_unjoined_child_failure_is_not_silent_success
+    e,f=run(parse_check_compile(s),'main');self.assertEqual(f.failure,'PreconditionFailed')
+        ~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/data/mir_foundation_F0_2/tests/test_source.py", line 11, in run
+    fid=e.spawn(p.name+'.'+name,args);e.run();e.assert_invariants();return e,e.fibers[fid]
+                                      ~~~~~^^
+  File "/mnt/data/mir_foundation_F0_2/model/engine.py", line 221, in run
+    changed=self.deliver_request() or changed;changed=self.deliver_response() or changed
+            ~~~~~~~~~~~~~~~~~~~~^^
+  File "/mnt/data/mir_foundation_F0_2/model/engine.py", line 192, in deliver_request
+    shard=self.shards[op.sig.owner];before=len(shard.log);out=shard.service(r,self.auth,self.issued,crash_at)
+                                                              ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/data/mir_foundation_F0_2/model/engine.py", line 69, in service
+    if op.identity!=r.code_hash or op.sig.identity!=r.contract_hash or self.op_versions[r.operation]!=r.binding_epoch:
+                                                                       ^^^^^^^^^^^^^^^^
+AttributeError: 'Shard' object has no attribute 'op_versions'. Did you mean: 'operations'?
+
+======================================================================
+ERROR: test_addition_does_not_grant (tests.test_transport.Transport.test_addition_does_not_grant)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/mnt/data/mir_foundation_F0_2/tests/test_transport.py", line 46, in test_addition_does_not_grant
+    p,e,f=self.make();e.run();q=parse_check_compile((ROOT/'examples/extension.mirx').read_text(),'Extension',{'Counter.take':p.operations['Counter.take'].sig});e.patch_principals.add('admin');e.install_addition('admin',q);g=e.spawn('Extension.run_bonus',(1,));e.run();self.assertEqual(e.fibers[g].failure,'AuthorityDenied');self.assertEqual(e.state()['bonus'],0)
+                      ~~~~~^^
+  File "/mnt/data/mir_foundation_F0_2/model/engine.py", line 221, in run
+    changed=self.deliver_request() or changed;changed=self.deliver_response() or changed
+            ~~~~~~~~~~~~~~~~~~~~^^
+  File "/mnt/data/mir_foundation_F0_2/model/engine.py", line 192, in deliver_request
+    shard=self.shards[op.sig.owner];before=len(shard.log);out=shard.service(r,self.auth,self.issued,crash_at)
+                                                              ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/data/mir_foundation_F0_2/model/engine.py", line 69, in service
+    if op.identity!=r.code_hash or op.sig.identity!=r.contract_hash or self.op_versions[r.operation]!=r.binding_epoch:
+                                                                       ^^^^^^^^^^^^^^^^
+AttributeError: 'Shard' object has no attribute 'op_versions'. Did you mean: 'operations'?
+
+======================================================================
+ERROR: test_addition_then_authorized_use_and_recovery (tests.test_transport.Transport.test_addition_then_authorized_use_and_recovery)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/mnt/data/mir_foundation_F0_2/tests/test_transport.py", line 48, in test_addition_then_authorized_use_and_recovery
+    p,e,f=self.make();e.run();q=parse_check_compile((ROOT/'examples/extension.mirx').read_text(),'Extension',{'Counter.take':p.operations['Counter.take'].sig});e.patch_principals.add('admin');e.install_addition('admin',q);e.grant_all('alice');g=e.spawn('Extension.run_bonus',(1,));e.run();self.assertEqual(e.fibers[g].result,108);before=e.state();e.recover_owner('B');e.recover_owner('C');self.assertEqual(e.state(),before)
+                      ~~~~~^^
+  File "/mnt/data/mir_foundation_F0_2/model/engine.py", line 221, in run
+    changed=self.deliver_request() or changed;changed=self.deliver_response() or changed
+            ~~~~~~~~~~~~~~~~~~~~^^
+  File "/mnt/data/mir_foundation_F0_2/model/engine.py", line 192, in deliver_request
+    shard=self.shards[op.sig.owner];before=len(shard.log);out=shard.service(r,self.auth,self.issued,crash_at)
+                                                              ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/data/mir_foundation_F0_2/model/engine.py", line 69, in service
+    if op.identity!=r.code_hash or op.sig.identity!=r.contract_hash or self.op_versions[r.operation]!=r.binding_epoch:
+                                                                       ^^^^^^^^^^^^^^^^
+AttributeError: 'Shard' object has no attribute 'op_versions'. Did you mean: 'operations'?
+
+======================================================================
+ERROR: test_client_resume_uses_same_continuation (tests.test_transport.Transport.test_client_resume_uses_same_continuation)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/mnt/data/mir_foundation_F0_2/tests/test_transport.py", line 28, in test_client_resume_uses_same_continuation
+    p,e,f=self.make();r=self.issue(e,f);e.deliver_request();e.crash_resume_fiber(f);e.deliver_response();e.run();self.assertEqual(e.fibers[f].result,9);e.assert_invariants()
+                                        ~~~~~~~~~~~~~~~~~^^
+  File "/mnt/data/mir_foundation_F0_2/model/engine.py", line 192, in deliver_request
+    shard=self.shards[op.sig.owner];before=len(shard.log);out=shard.service(r,self.auth,self.issued,crash_at)
+                                                              ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/data/mir_foundation_F0_2/model/engine.py", line 69, in service
+    if op.identity!=r.code_hash or op.sig.identity!=r.contract_hash or self.op_versions[r.operation]!=r.binding_epoch:
+                                                                       ^^^^^^^^^^^^^^^^
+AttributeError: 'Shard' object has no attribute 'op_versions'. Did you mean: 'operations'?
+
+======================================================================
+ERROR: test_crash_after_commit (tests.test_transport.Transport.test_crash_after_commit)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/mnt/data/mir_foundation_F0_2/tests/test_transport.py", line 26, in test_crash_after_commit
+    p,e,f=self.make();r=self.issue(e,f);e.deliver_request(crash_at='after_commit');e.recover_owner('B');self.assertEqual(e.state()['stock'],9);e.resend(r.key);e.run();self.assertEqual(e.state()['stock'],9);e.assert_invariants()
+                                        ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/data/mir_foundation_F0_2/model/engine.py", line 192, in deliver_request
+    shard=self.shards[op.sig.owner];before=len(shard.log);out=shard.service(r,self.auth,self.issued,crash_at)
+                                                              ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/data/mir_foundation_F0_2/model/engine.py", line 69, in service
+    if op.identity!=r.code_hash or op.sig.identity!=r.contract_hash or self.op_versions[r.operation]!=r.binding_epoch:
+                                                                       ^^^^^^^^^^^^^^^^
+AttributeError: 'Shard' object has no attribute 'op_versions'. Did you mean: 'operations'?
+
+======================================================================
+ERROR: test_crash_before_commit (tests.test_transport.Transport.test_crash_before_commit)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/mnt/data/mir_foundation_F0_2/tests/test_transport.py", line 24, in test_crash_before_commit
+    p,e,f=self.make();r=self.issue(e,f);e.deliver_request(crash_at='before_commit');e.recover_owner('B');self.assertEqual(e.state()['stock'],10);e.resend(r.key);e.run();self.assertEqual(e.state()['stock'],9)
+                                        ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/data/mir_foundation_F0_2/model/engine.py", line 192, in deliver_request
+    shard=self.shards[op.sig.owner];before=len(shard.log);out=shard.service(r,self.auth,self.issued,crash_at)
+                                                              ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/data/mir_foundation_F0_2/model/engine.py", line 69, in service
+    if op.identity!=r.code_hash or op.sig.identity!=r.contract_hash or self.op_versions[r.operation]!=r.binding_epoch:
+                                                                       ^^^^^^^^^^^^^^^^
+AttributeError: 'Shard' object has no attribute 'op_versions'. Did you mean: 'operations'?
+
+======================================================================
+ERROR: test_duplicate_no_second_mutation (tests.test_transport.Transport.test_duplicate_no_second_mutation)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/mnt/data/mir_foundation_F0_2/tests/test_transport.py", line 16, in test_duplicate_no_second_mutation
+    p,e,f=self.make();r=self.issue(e,f);e.deliver_request(duplicate=True);e.deliver_request();e.deliver_response(duplicate=True);e.deliver_response();e.run();e.assert_invariants();self.assertEqual(e.state()['stock'],9);self.assertEqual(len(e.shards['B'].log),1)
+                                        ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+  File "/mnt/data/mir_foundation_F0_2/model/engine.py", line 192, in deliver_request
+    shard=self.shards[op.sig.owner];before=len(shard.log);out=shard.service(r,self.auth,self.issued,crash_at)
+                                                              ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/data/mir_foundation_F0_2/model/engine.py", line 69, in service
+    if op.identity!=r.code_hash or op.sig.identity!=r.contract_hash or self.op_versions[r.operation]!=r.binding_epoch:
+                                                                       ^^^^^^^^^^^^^^^^
+AttributeError: 'Shard' object has no attribute 'op_versions'. Did you mean: 'operations'?
+
+======================================================================
+ERROR: test_explicit_replay_after_loss (tests.test_transport.Transport.test_explicit_replay_after_loss)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/mnt/data/mir_foundation_F0_2/tests/test_transport.py", line 22, in test_explicit_replay_after_loss
+    p,e,f=self.make();r=self.issue(e,f);e.deliver_request();e.responses.clear();e.resend(r.key);e.run();self.assertEqual(e.state()['stock'],9);self.assertEqual(e.fibers[f].result,9)
+                                        ~~~~~~~~~~~~~~~~~^^
+  File "/mnt/data/mir_foundation_F0_2/model/engine.py", line 192, in deliver_request
+    shard=self.shards[op.sig.owner];before=len(shard.log);out=shard.service(r,self.auth,self.issued,crash_at)
+                                                              ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/data/mir_foundation_F0_2/model/engine.py", line 69, in service
+    if op.identity!=r.code_hash or op.sig.identity!=r.contract_hash or self.op_versions[r.operation]!=r.binding_epoch:
+                                                                       ^^^^^^^^^^^^^^^^
+AttributeError: 'Shard' object has no attribute 'op_versions'. Did you mean: 'operations'?
+
+======================================================================
+ERROR: test_loss_is_unknown_not_failure (tests.test_transport.Transport.test_loss_is_unknown_not_failure)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/mnt/data/mir_foundation_F0_2/tests/test_transport.py", line 18, in test_loss_is_unknown_not_failure
+    p,e,f=self.make();r=self.issue(e,f);e.deliver_request();e.responses.clear()
+                                        ~~~~~~~~~~~~~~~~~^^
+  File "/mnt/data/mir_foundation_F0_2/model/engine.py", line 192, in deliver_request
+    shard=self.shards[op.sig.owner];before=len(shard.log);out=shard.service(r,self.auth,self.issued,crash_at)
+                                                              ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/data/mir_foundation_F0_2/model/engine.py", line 69, in service
+    if op.identity!=r.code_hash or op.sig.identity!=r.contract_hash or self.op_versions[r.operation]!=r.binding_epoch:
+                                                                       ^^^^^^^^^^^^^^^^
+AttributeError: 'Shard' object has no attribute 'op_versions'. Did you mean: 'operations'?
+
+======================================================================
+ERROR: test_outside_activity_runs_while_owner_frozen (tests.test_transport.Transport.test_outside_activity_runs_while_owner_frozen)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/mnt/data/mir_foundation_F0_2/tests/test_transport.py", line 54, in test_outside_activity_runs_while_owner_frozen
+    p,e,f=self.make();r=self.issue(e,f);e.shards['B'].frozen.add('stock');e.deliver_request();pure=e.spawn('Counter.triangle',(8,))
+                                                                          ~~~~~~~~~~~~~~~~~^^
+  File "/mnt/data/mir_foundation_F0_2/model/engine.py", line 192, in deliver_request
+    shard=self.shards[op.sig.owner];before=len(shard.log);out=shard.service(r,self.auth,self.issued,crash_at)
+                                                              ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/data/mir_foundation_F0_2/model/engine.py", line 69, in service
+    if op.identity!=r.code_hash or op.sig.identity!=r.contract_hash or self.op_versions[r.operation]!=r.binding_epoch:
+                                                                       ^^^^^^^^^^^^^^^^
+AttributeError: 'Shard' object has no attribute 'op_versions'. Did you mean: 'operations'?
+
+======================================================================
+ERROR: test_revoke_after_service_does_not_undo (tests.test_transport.Transport.test_revoke_after_service_does_not_undo)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/mnt/data/mir_foundation_F0_2/tests/test_transport.py", line 32, in test_revoke_after_service_does_not_undo
+    p,e,f=self.make();r=self.issue(e,f);e.deliver_request();e.auth.revoke(r.permit);e.deliver_response();self.assertEqual(e.state()['stock'],9);self.assertIsNotNone(e.fibers[f].waiting);self.assertIsNone(e.fibers[f].failure)
+                                        ~~~~~~~~~~~~~~~~~^^
+  File "/mnt/data/mir_foundation_F0_2/model/engine.py", line 192, in deliver_request
+    shard=self.shards[op.sig.owner];before=len(shard.log);out=shard.service(r,self.auth,self.issued,crash_at)
+                                                              ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/data/mir_foundation_F0_2/model/engine.py", line 69, in service
+    if op.identity!=r.code_hash or op.sig.identity!=r.contract_hash or self.op_versions[r.operation]!=r.binding_epoch:
+                                                                       ^^^^^^^^^^^^^^^^
+AttributeError: 'Shard' object has no attribute 'op_versions'. Did you mean: 'operations'?
+
+======================================================================
+ERROR: test_revoke_before_service (tests.test_transport.Transport.test_revoke_before_service)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/mnt/data/mir_foundation_F0_2/tests/test_transport.py", line 30, in test_revoke_before_service
+    p,e,f=self.make();r=self.issue(e,f);e.auth.revoke(r.permit);e.run();self.assertEqual(e.state()['stock'],10);self.assertEqual(e.fibers[f].failure,'AuthorityDenied')
+                                                                ~~~~~^^
+  File "/mnt/data/mir_foundation_F0_2/model/engine.py", line 221, in run
+    changed=self.deliver_request() or changed;changed=self.deliver_response() or changed
+            ~~~~~~~~~~~~~~~~~~~~^^
+  File "/mnt/data/mir_foundation_F0_2/model/engine.py", line 192, in deliver_request
+    shard=self.shards[op.sig.owner];before=len(shard.log);out=shard.service(r,self.auth,self.issued,crash_at)
+                                                              ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/data/mir_foundation_F0_2/model/engine.py", line 69, in service
+    if op.identity!=r.code_hash or op.sig.identity!=r.contract_hash or self.op_versions[r.operation]!=r.binding_epoch:
+                                                                       ^^^^^^^^^^^^^^^^
+AttributeError: 'Shard' object has no attribute 'op_versions'. Did you mean: 'operations'?
+
+======================================================================
+ERROR: test_settled_replacement_continues (tests.test_transport.Transport.test_settled_replacement_continues)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/mnt/data/mir_foundation_F0_2/tests/test_transport.py", line 44, in test_settled_replacement_continues
+    p,e,f=self.make();e.run();e.patch_principals.add('admin');q=parse_check_compile(p.source.replace('stock = stock - amount','stock = stock - amount + 0'),'Counter');e.replace_operation('admin',q,'Counter.take');f2=e.spawn('Counter.session',(1,));e.run();self.assertEqual(e.fibers[f2].result,8)
+                      ~~~~~^^
+  File "/mnt/data/mir_foundation_F0_2/model/engine.py", line 221, in run
+    changed=self.deliver_request() or changed;changed=self.deliver_response() or changed
+            ~~~~~~~~~~~~~~~~~~~~^^
+  File "/mnt/data/mir_foundation_F0_2/model/engine.py", line 192, in deliver_request
+    shard=self.shards[op.sig.owner];before=len(shard.log);out=shard.service(r,self.auth,self.issued,crash_at)
+                                                              ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/data/mir_foundation_F0_2/model/engine.py", line 69, in service
+    if op.identity!=r.code_hash or op.sig.identity!=r.contract_hash or self.op_versions[r.operation]!=r.binding_epoch:
+                                                                       ^^^^^^^^^^^^^^^^
+AttributeError: 'Shard' object has no attribute 'op_versions'. Did you mean: 'operations'?
+
+======================================================================
+ERROR: test_two_clients_scheduling_and_duplicates (tests.test_transport.Transport.test_two_clients_scheduling_and_duplicates)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/mnt/data/mir_foundation_F0_2/tests/test_transport.py", line 63, in test_two_clients_scheduling_and_duplicates
+    if e.requests:e.deliver_request(rng.randrange(len(e.requests)),duplicate=rng.randrange(5)==0)
+                  ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/data/mir_foundation_F0_2/model/engine.py", line 192, in deliver_request
+    shard=self.shards[op.sig.owner];before=len(shard.log);out=shard.service(r,self.auth,self.issued,crash_at)
+                                                              ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/data/mir_foundation_F0_2/model/engine.py", line 69, in service
+    if op.identity!=r.code_hash or op.sig.identity!=r.contract_hash or self.op_versions[r.operation]!=r.binding_epoch:
+                                                                       ^^^^^^^^^^^^^^^^
+AttributeError: 'Shard' object has no attribute 'op_versions'. Did you mean: 'operations'?
+
+======================================================================
+ERROR: test_fresh_import_data_no_old_authority (tests.test_relations_restore.RelationsAndRestore.test_fresh_import_data_no_old_authority)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/mnt/data/mir_foundation_F0_2/tests/test_relations_restore.py", line 44, in test_fresh_import_data_no_old_authority
+    e=self.make_engine();s=capture(e);r=restore_as_fresh(s,InstanceAuthority());self.assertEqual(r.state(),e.state());self.assertNotEqual(r.run_id,e.run_id);self.assertFalse(r.auth.issued);self.assertFalse(r.issued);self.assertFalse(r.patch_principals)
+  File "/mnt/data/mir_foundation_F0_2/tests/test_relations_restore.py", line 39, in make_engine
+    p=parse_check_compile((ROOT/'examples/counter.mirx').read_text(),'Counter');e=Engine([p]);e.grant_all('alice');fid=e.spawn('Counter.session',(2,));e.run();return e
+                                                                                                                                                       ~~~~~^^
+  File "/mnt/data/mir_foundation_F0_2/model/engine.py", line 221, in run
+    changed=self.deliver_request() or changed;changed=self.deliver_response() or changed
+            ~~~~~~~~~~~~~~~~~~~~^^
+  File "/mnt/data/mir_foundation_F0_2/model/engine.py", line 192, in deliver_request
+    shard=self.shards[op.sig.owner];before=len(shard.log);out=shard.service(r,self.auth,self.issued,crash_at)
+                                                              ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/data/mir_foundation_F0_2/model/engine.py", line 69, in service
+    if op.identity!=r.code_hash or op.sig.identity!=r.contract_hash or self.op_versions[r.operation]!=r.binding_epoch:
+                                                                       ^^^^^^^^^^^^^^^^
+AttributeError: 'Shard' object has no attribute 'op_versions'. Did you mean: 'operations'?
+
+======================================================================
+ERROR: test_fresh_import_readmit_then_use (tests.test_relations_restore.RelationsAndRestore.test_fresh_import_readmit_then_use)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/mnt/data/mir_foundation_F0_2/tests/test_relations_restore.py", line 47, in test_fresh_import_readmit_then_use
+    e=self.make_engine();r=restore_as_fresh(capture(e),InstanceAuthority());r.grant_all('alice');f=r.spawn('Counter.session',(1,));r.run();self.assertEqual(r.fibers[f].result,7)
+  File "/mnt/data/mir_foundation_F0_2/tests/test_relations_restore.py", line 39, in make_engine
+    p=parse_check_compile((ROOT/'examples/counter.mirx').read_text(),'Counter');e=Engine([p]);e.grant_all('alice');fid=e.spawn('Counter.session',(2,));e.run();return e
+                                                                                                                                                       ~~~~~^^
+  File "/mnt/data/mir_foundation_F0_2/model/engine.py", line 221, in run
+    changed=self.deliver_request() or changed;changed=self.deliver_response() or changed
+            ~~~~~~~~~~~~~~~~~~~~^^
+  File "/mnt/data/mir_foundation_F0_2/model/engine.py", line 192, in deliver_request
+    shard=self.shards[op.sig.owner];before=len(shard.log);out=shard.service(r,self.auth,self.issued,crash_at)
+                                                              ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/data/mir_foundation_F0_2/model/engine.py", line 69, in service
+    if op.identity!=r.code_hash or op.sig.identity!=r.contract_hash or self.op_versions[r.operation]!=r.binding_epoch:
+                                                                       ^^^^^^^^^^^^^^^^
+AttributeError: 'Shard' object has no attribute 'op_versions'. Did you mean: 'operations'?
+
+======================================================================
+ERROR: test_snapshot_invalid_type_rejected_before_activation (tests.test_relations_restore.RelationsAndRestore.test_snapshot_invalid_type_rejected_before_activation)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/mnt/data/mir_foundation_F0_2/tests/test_relations_restore.py", line 49, in test_snapshot_invalid_type_rejected_before_activation
+    e=self.make_engine();s=capture(e);s.values['stock']=False;a=InstanceAuthority()
+  File "/mnt/data/mir_foundation_F0_2/tests/test_relations_restore.py", line 39, in make_engine
+    p=parse_check_compile((ROOT/'examples/counter.mirx').read_text(),'Counter');e=Engine([p]);e.grant_all('alice');fid=e.spawn('Counter.session',(2,));e.run();return e
+                                                                                                                                                       ~~~~~^^
+  File "/mnt/data/mir_foundation_F0_2/model/engine.py", line 221, in run
+    changed=self.deliver_request() or changed;changed=self.deliver_response() or changed
+            ~~~~~~~~~~~~~~~~~~~~^^
+  File "/mnt/data/mir_foundation_F0_2/model/engine.py", line 192, in deliver_request
+    shard=self.shards[op.sig.owner];before=len(shard.log);out=shard.service(r,self.auth,self.issued,crash_at)
+                                                              ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/data/mir_foundation_F0_2/model/engine.py", line 69, in service
+    if op.identity!=r.code_hash or op.sig.identity!=r.contract_hash or self.op_versions[r.operation]!=r.binding_epoch:
+                                                                       ^^^^^^^^^^^^^^^^
+AttributeError: 'Shard' object has no attribute 'op_versions'. Did you mean: 'operations'?
+
+======================================================================
+ERROR: test_snapshot_rechecks_strong_invariant (tests.test_relations_restore.RelationsAndRestore.test_snapshot_rechecks_strong_invariant)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/mnt/data/mir_foundation_F0_2/tests/test_relations_restore.py", line 53, in test_snapshot_rechecks_strong_invariant
+    p=parse_check_compile((ROOT/'examples/pool.mirx').read_text(),'Pool');e=Engine([p]);op=e.ops['Pool.allocate_size'];inv={'nonnegative':Poly.var('free')};post=Poly.var('result')-1;ev=produce_evidence(op,inv,post);e.protect_owner('PoolOwner',inv,{op.sig.name:(ev,post)});s=capture(e);s.values['free']=-1
+                                                                                                                                                                                                                                                                                  ~~~~~~~^^^
+  File "/mnt/data/mir_foundation_F0_2/model/snapshot.py", line 29, in capture
+    return Snapshot(e.run_id,copy.deepcopy(e.programs),copy.deepcopy(e.state()),copy.deepcopy(e.protected),copy.deepcopy(e.trace),copy.deepcopy(e.code_updates))
+                                                                                                                                                ^^^^^^^^^^^^^^
+AttributeError: 'Engine' object has no attribute 'code_updates'
+
+======================================================================
+ERROR: test_snapshot_requires_quiescence (tests.test_relations_restore.RelationsAndRestore.test_snapshot_requires_quiescence)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/mnt/data/mir_foundation_F0_2/tests/test_relations_restore.py", line 41, in test_snapshot_requires_quiescence
+    e=self.make_engine();e.spawn('Counter.session',(1,))
+  File "/mnt/data/mir_foundation_F0_2/tests/test_relations_restore.py", line 39, in make_engine
+    p=parse_check_compile((ROOT/'examples/counter.mirx').read_text(),'Counter');e=Engine([p]);e.grant_all('alice');fid=e.spawn('Counter.session',(2,));e.run();return e
+                                                                                                                                                       ~~~~~^^
+  File "/mnt/data/mir_foundation_F0_2/model/engine.py", line 221, in run
+    changed=self.deliver_request() or changed;changed=self.deliver_response() or changed
+            ~~~~~~~~~~~~~~~~~~~~^^
+  File "/mnt/data/mir_foundation_F0_2/model/engine.py", line 192, in deliver_request
+    shard=self.shards[op.sig.owner];before=len(shard.log);out=shard.service(r,self.auth,self.issued,crash_at)
+                                                              ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/data/mir_foundation_F0_2/model/engine.py", line 69, in service
+    if op.identity!=r.code_hash or op.sig.identity!=r.contract_hash or self.op_versions[r.operation]!=r.binding_epoch:
+                                                                       ^^^^^^^^^^^^^^^^
+AttributeError: 'Shard' object has no attribute 'op_versions'. Did you mean: 'operations'?
+
+----------------------------------------------------------------------
+Ran 56 tests in 0.892s
+
+FAILED (errors=27)

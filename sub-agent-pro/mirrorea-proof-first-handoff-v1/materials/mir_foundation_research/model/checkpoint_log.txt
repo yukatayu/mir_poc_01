@@ -1,0 +1,10 @@
+test_Z_cycle_with_acyclic_event_order (__main__.Checkpoints.test_Z_cycle_with_acyclic_event_order) ... ok
+test_Z_path_equivalence_independent_graph_search (__main__.Checkpoints.test_Z_path_equivalence_independent_graph_search) ... ok
+test_all_small_completion_systems (__main__.Checkpoints.test_all_small_completion_systems) ... ok
+test_initial_and_later_checkpoints_are_usable (__main__.Checkpoints.test_initial_and_later_checkpoints_are_usable) ... ok
+test_missing_sender_checkpoint_rejected (__main__.Checkpoints.test_missing_sender_checkpoint_rejected) ... ok
+
+----------------------------------------------------------------------
+Ran 5 tests in 0.160s
+
+OK

@@ -1,0 +1,15 @@
+test_mutated_ast_is_not_source_authority (tests.test_certificates.BridgeSourceBindingRegression.test_mutated_ast_is_not_source_authority) ... FAIL
+
+======================================================================
+FAIL: test_mutated_ast_is_not_source_authority (tests.test_certificates.BridgeSourceBindingRegression.test_mutated_ast_is_not_source_authority)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/mnt/data/mir_foundation_F0_2/tests/test_certificates.py", line 116, in test_mutated_ast_is_not_source_authority
+    with self.assertRaises(CertificateError):prove_call_chain(bad,'allocate_positive',op,ev,post,pool.operations['Pool.allocate_size'],Poly.var('n')-1,C('premise',0))
+         ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^
+AssertionError: CertificateError not raised
+
+----------------------------------------------------------------------
+Ran 1 test in 0.004s
+
+FAILED (failures=1)

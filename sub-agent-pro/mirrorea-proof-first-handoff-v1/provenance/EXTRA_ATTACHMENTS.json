@@ -1,0 +1,17 @@
+[
+  {
+    "path": "materials/coverage_audit_attachment/mir_foundation_F0_2/model/engine.py",
+    "sha256": "dbd9e415531cd4025f12ccd10c2943913a2cc011b7c8d097fc9751d09b073263",
+    "matches_archived_original": true
+  },
+  {
+    "path": "materials/coverage_audit_attachment/mir_foundation_F0_2/model/relations.py",
+    "sha256": "bb2c262ef5969587e083bb00c4e1f078d5d71994c74474a5f7e89e8b40038062",
+    "matches_archived_original": true
+  },
+  {
+    "path": "materials/coverage_audit_attachment/mir_foundation_F0_2/model/ifc.py",
+    "sha256": "83dc836f3a03aa635b3027070f6ed59bb856ad69c7edf46cd6ea5d3f8269ce5d",
+    "matches_archived_original": true
+  }
+]

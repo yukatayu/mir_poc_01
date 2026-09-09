@@ -1,0 +1,23 @@
+unsat
+((proof
+(let (($x76 (not true)))
+(let ((?x28 (+ a b)))
+(let ((?x29 (- hp ?x28)))
+(let ((?x25 (- hp a)))
+(let ((?x27 (- ?x25 b)))
+(let (($x30 (= ?x27 ?x29)))
+(let (($x31 (not $x30)))
+(let ((?x41 (* (- 1) b)))
+(let ((?x34 (* (- 1) a)))
+(let ((?x47 (+ hp ?x34 ?x41)))
+(let (($x68 (= ?x47 ?x47)))
+(let ((@x61 (monotonicity (rewrite (= (* (- 1) ?x28) (+ ?x34 ?x41))) (= (+ hp (* (- 1) ?x28)) (+ hp (+ ?x34 ?x41))))))
+(let ((@x65 (trans @x61 (rewrite (= (+ hp (+ ?x34 ?x41)) ?x47)) (= (+ hp (* (- 1) ?x28)) ?x47))))
+(let ((@x67 (trans (rewrite (= ?x29 (+ hp (* (- 1) ?x28)))) @x65 (= ?x29 ?x47))))
+(let ((@x49 (rewrite (= (+ (+ hp ?x34) ?x41) ?x47))))
+(let ((@x40 (monotonicity (rewrite (= ?x25 (+ hp ?x34))) (= ?x27 (- (+ hp ?x34) b)))))
+(let ((@x46 (trans @x40 (rewrite (= (- (+ hp ?x34) b) (+ (+ hp ?x34) ?x41))) (= ?x27 (+ (+ hp ?x34) ?x41)))))
+(let ((@x75 (trans (monotonicity (trans @x46 @x49 (= ?x27 ?x47)) @x67 (= $x30 $x68)) (rewrite (= $x68 true)) (= $x30 true))))
+(let ((@x82 (trans (monotonicity @x75 (= $x31 $x76)) (rewrite (= $x76 false)) (= $x31 false))))
+(mp (asserted $x31) @x82 false))))))))))))))))))))))
+

@@ -1,0 +1,7 @@
+sat
+(
+  (define-fun local_result () Int
+    10)
+  (define-fun returned () Int
+    (- 1))
+)

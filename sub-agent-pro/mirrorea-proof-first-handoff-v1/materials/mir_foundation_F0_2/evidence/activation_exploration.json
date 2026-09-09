@@ -1,0 +1,70 @@
+[
+  {
+    "participants": 1,
+    "states": 56,
+    "transitions": 134,
+    "safe": true,
+    "counterexample": null
+  },
+  {
+    "participants": 2,
+    "states": 656,
+    "transitions": 2356,
+    "safe": true,
+    "counterexample": null
+  },
+  {
+    "participants": 3,
+    "states": 9056,
+    "transitions": 43900,
+    "safe": true,
+    "counterexample": null
+  },
+  {
+    "participants": 2,
+    "states": 112,
+    "transitions": 214,
+    "safe": false,
+    "counterexample": [
+      "prepare0",
+      "vote0",
+      "timeout-unfreeze0"
+    ],
+    "violations": [
+      "vote-without-durable-preparation"
+    ],
+    "state": "State(decision='Undecided', phase=(0, 0), votes=1, known=('Undecided', 'Undecided'), down=0)"
+  },
+  {
+    "participants": 2,
+    "states": 205,
+    "transitions": 441,
+    "safe": false,
+    "counterexample": [
+      "prepare0",
+      "vote0",
+      "crash0",
+      "recover0"
+    ],
+    "violations": [
+      "vote-without-durable-preparation"
+    ],
+    "state": "State(decision='Undecided', phase=(0, 0), votes=1, known=('Undecided', 'Undecided'), down=0)"
+  },
+  {
+    "participants": 2,
+    "states": 164,
+    "transitions": 333,
+    "safe": false,
+    "counterexample": [
+      "decide-abort",
+      "learn0",
+      "crash2",
+      "recover2"
+    ],
+    "violations": [
+      "contradictory-learned-decision"
+    ],
+    "state": "State(decision='Undecided', phase=(0, 0), votes=0, known=('Abort', 'Undecided'), down=0)"
+  }
+]

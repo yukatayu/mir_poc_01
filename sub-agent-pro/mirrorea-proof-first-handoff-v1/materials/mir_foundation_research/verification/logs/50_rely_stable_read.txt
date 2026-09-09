@@ -1,0 +1,16 @@
+unsat
+((proof
+(let ((?x33 (select s cfg)))
+(let (($x58 (<= (+ ?x33 (* (- 1) (select (store s other v) cfg))) 0)))
+(let ((?x39 (select (store s other v) cfg)))
+(let (($x54 (= ?x33 ?x39)))
+(let (($x27 (= cfg other)))
+(let (($x28 (not $x27)))
+(let ((@x31 (mp (asserted (and (distinct cfg other) true)) (rewrite (= (and (distinct cfg other) true) $x28)) $x28)))
+(let ((@x66 (unit-resolution ((_ th-lemma arith triangle-eq) (or (not $x54) $x58)) (unit-resolution ((_ th-lemma array) (or $x27 $x54)) @x31 $x54) $x58)))
+(let (($x41 (not (>= ?x39 0))))
+(let ((@x42 (asserted $x41)))
+(let (($x35 (>= ?x33 0)))
+(let ((@x36 (asserted $x35)))
+((_ th-lemma arith) @x36 @x42 @x66 false)))))))))))))))
+

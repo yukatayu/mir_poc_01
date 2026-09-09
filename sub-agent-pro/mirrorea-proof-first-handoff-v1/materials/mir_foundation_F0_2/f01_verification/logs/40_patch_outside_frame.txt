@@ -1,0 +1,14 @@
+unsat
+((proof
+(let ((?x38 (select s y)))
+(let ((?x43 (select (store s x (+ 1 (select s x))) y)))
+(let (($x46 (= ?x43 ?x38)))
+(let (($x59 (= ?x38 ?x43)))
+(let (($x27 (= x y)))
+(let (($x28 (not $x27)))
+(let ((@x31 (mp (asserted (and (distinct x y) true)) (rewrite (= (and (distinct x y) true) $x28)) $x28)))
+(let (($x44 (not $x46)))
+(let (($x40 (not (= (select (store s x (+ (select s x) 1)) y) ?x38))))
+(let ((@x48 (mp (asserted $x40) (rewrite (= $x40 $x44)) $x44)))
+(unit-resolution @x48 (symm (unit-resolution ((_ th-lemma array) (or $x27 $x59)) @x31 $x59) $x46) false)))))))))))))
+

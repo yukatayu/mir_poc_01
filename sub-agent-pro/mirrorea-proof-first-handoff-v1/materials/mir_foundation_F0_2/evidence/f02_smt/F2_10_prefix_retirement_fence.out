@@ -1,0 +1,18 @@
+unsat
+((set-logic ALL)
+(proof
+(let (($x35 (<= (+ seq (* (- 1) old)) 0)))
+(let (($x25 (<= seq old)))
+(let (($x28 (> seq new)))
+(let (($x27 (<= old new)))
+(let (($x29 (and $x25 $x27 $x28)))
+(let ((@x30 (asserted $x29)))
+(let ((@x70 (mp (mp (and-elim @x30 $x25) (rewrite (= $x25 $x25)) $x25) (rewrite (= $x25 $x35)) $x35)))
+(let (($x51 (not (<= (+ seq (* (- 1) new)) 0))))
+(let ((@x54 (rewrite (= (not (<= seq new)) $x51))))
+(let (($x44 (not (<= seq new))))
+(let ((@x67 (mp (mp (and-elim @x30 $x28) (rewrite (= $x28 $x44)) $x44) (rewrite (= $x44 $x44)) $x44)))
+(let (($x40 (<= (+ old (* (- 1) new)) 0)))
+(let ((@x73 (mp (mp (and-elim @x30 $x27) (rewrite (= $x27 $x27)) $x27) (rewrite (= $x27 $x40)) $x40)))
+((_ th-lemma arith farkas 1 -1 1) @x73 (mp @x67 @x54 $x51) @x70 false))))))))))))))))
+

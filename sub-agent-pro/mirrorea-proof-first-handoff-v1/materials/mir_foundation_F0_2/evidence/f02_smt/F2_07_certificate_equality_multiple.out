@@ -1,0 +1,20 @@
+unsat
+((set-logic ALL)
+(proof
+(let (($x77 (>= h 0.0)))
+(let (($x35 (= h 0.0)))
+(let ((?x25 (to_real 0)))
+(let (($x26 (= h ?x25)))
+(let ((?x28 (* h r)))
+(let (($x29 (< ?x28 ?x25)))
+(let (($x30 (and $x26 $x29)))
+(let ((@x31 (asserted $x30)))
+(let ((@x46 (mp (and-elim @x31 $x26) (rewrite (= $x26 $x35)) $x35)))
+(let (($x84 (<= h 0.0)))
+(let (($x49 (>= ?x28 0.0)))
+(let (($x50 (not $x49)))
+(let ((@x53 (rewrite (= (not (<= 0.0 ?x28)) $x50))))
+(let (($x42 (not (<= 0.0 ?x28))))
+(let ((@x59 (trans (monotonicity (rewrite (= ?x25 0.0)) (= $x29 (< ?x28 0.0))) (rewrite (= (< ?x28 0.0) $x42)) (= $x29 $x42))))
+(unit-resolution ((_ th-lemma arith) (or $x49 (not $x77) (not $x84))) (mp (mp (and-elim @x31 $x29) @x59 $x42) @x53 $x50) (unit-resolution ((_ th-lemma arith triangle-eq) (or (not $x35) $x84)) @x46 $x84) (unit-resolution ((_ th-lemma arith triangle-eq) (or (not $x35) $x77)) @x46 $x77) false))))))))))))))))))
+

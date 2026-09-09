@@ -1,0 +1,35 @@
+test_local_named_result_cannot_replace_logical_return (tests.test_certificates.CertificateCaptureRegression.test_local_named_result_cannot_replace_logical_return) ... ok
+test_arbitrary_rule_rejected_before_verification (tests.test_certificates.CertificateSerialization.test_arbitrary_rule_rejected_before_verification) ... ok
+test_bad_identity_not_proof (tests.test_certificates.CertificateSerialization.test_bad_identity_not_proof) ... ok
+test_duplicate_fields_rejected (tests.test_certificates.CertificateSerialization.test_duplicate_fields_rejected) ... ok
+test_noncanonical_fraction_rejected (tests.test_certificates.CertificateSerialization.test_noncanonical_fraction_rejected) ... ok
+test_oversize_before_parse (tests.test_certificates.CertificateSerialization.test_oversize_before_parse) ... ok
+test_roundtrip_then_check_not_just_deserialize (tests.test_certificates.CertificateSerialization.test_roundtrip_then_check_not_just_deserialize) ... ok
+test_bad_mutator_cannot_get_proof (tests.test_certificates.Certificates.test_bad_mutator_cannot_get_proof) ... ok
+test_certificate_rules_by_exhaustive_evaluation (tests.test_certificates.Certificates.test_certificate_rules_by_exhaustive_evaluation) ... ok
+test_code_hash_splicing_rejected (tests.test_certificates.Certificates.test_code_hash_splicing_rejected) ... ok
+test_equality_hypothesis_not_unconditional (tests.test_certificates.Certificates.test_equality_hypothesis_not_unconditional) ... ok
+test_every_mutator_must_be_proved (tests.test_certificates.Certificates.test_every_mutator_must_be_proved) ... ok
+test_evidence_does_not_grant (tests.test_certificates.Certificates.test_evidence_does_not_grant) ... ok
+test_invariant_requires_initial_model (tests.test_certificates.Certificates.test_invariant_requires_initial_model) ... ok
+test_invariant_substitution_rejected (tests.test_certificates.Certificates.test_invariant_substitution_rejected) ... ok
+test_local_post_does_not_prove_capacity (tests.test_certificates.Certificates.test_local_post_does_not_prove_capacity) ... ok
+test_missing_branch_rejected (tests.test_certificates.Certificates.test_missing_branch_rejected) ... ok
+test_negative_constant_rejected (tests.test_certificates.Certificates.test_negative_constant_rejected) ... ok
+test_no_arbitrary_axiom (tests.test_certificates.Certificates.test_no_arbitrary_axiom) ... ok
+test_noncanonical_polynomial_rejected (tests.test_certificates.Certificates.test_noncanonical_polynomial_rejected) ... ok
+test_normalizer_merges_permuted_monomials (tests.test_certificates.Certificates.test_normalizer_merges_permuted_monomials) ... ok
+test_pool_invariant_and_result (tests.test_certificates.Certificates.test_pool_invariant_and_result) ... ok
+test_positive_square (tests.test_certificates.Certificates.test_positive_square) ... ok
+test_proof_and_network_composition (tests.test_certificates.Certificates.test_proof_and_network_composition) ... ok
+test_reassigned_value_not_covered_by_old_fact (tests.test_certificates.Certificates.test_reassigned_value_not_covered_by_old_fact) ... ok
+test_ring_normalization (tests.test_certificates.Certificates.test_ring_normalization) ... ok
+test_source_bound_logical_call_bridge (tests.test_certificates.Certificates.test_source_bound_logical_call_bridge) ... ok
+test_source_vcs_all_branches (tests.test_certificates.Certificates.test_source_vcs_all_branches) ... ok
+test_total_node_budget (tests.test_certificates.Certificates.test_total_node_budget) ... ok
+test_wrong_conclusion (tests.test_certificates.Certificates.test_wrong_conclusion) ... ok
+
+----------------------------------------------------------------------
+Ran 30 tests in 0.048s
+
+OK

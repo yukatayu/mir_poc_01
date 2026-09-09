@@ -1,0 +1,25 @@
+test_abort_of_unprepared_patch_does_not_release_another_patch_fence (tests.test_live_patch.CompositionalPatchRegressions.test_abort_of_unprepared_patch_does_not_release_another_patch_fence) ... FAIL
+test_completed_patch_abstraction_does_not_override_later_owner_execution (tests.test_live_patch.CompositionalPatchRegressions.test_completed_patch_abstraction_does_not_override_later_owner_execution) ... FAIL
+
+======================================================================
+FAIL: test_abort_of_unprepared_patch_does_not_release_another_patch_fence (tests.test_live_patch.CompositionalPatchRegressions.test_abort_of_unprepared_patch_does_not_release_another_patch_fence)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/mnt/data/mir_foundation_F0_2/tests/test_live_patch.py", line 79, in test_abort_of_unprepared_patch_does_not_release_another_patch_fence
+    self.assertIn('x',e.shards['A'].frozen)
+    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 'x' not found in set()
+
+======================================================================
+FAIL: test_completed_patch_abstraction_does_not_override_later_owner_execution (tests.test_live_patch.CompositionalPatchRegressions.test_completed_patch_abstraction_does_not_override_later_owner_execution)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/mnt/data/mir_foundation_F0_2/tests/test_live_patch.py", line 87, in test_completed_patch_abstraction_does_not_override_later_owner_execution
+    self.assertEqual(p.semantic_values()['x'],13)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 12 != 13
+
+----------------------------------------------------------------------
+Ran 2 tests in 0.005s
+
+FAILED (failures=2)

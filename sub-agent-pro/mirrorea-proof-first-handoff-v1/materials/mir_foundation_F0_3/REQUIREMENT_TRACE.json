@@ -1,0 +1,3694 @@
+{
+  "version": "F0.3",
+  "input_requirements_sha256": "b16c4d3086552323b808925269dbcb73c2007ef1eea6fb55ba4008dcfd0e501c",
+  "notice": "Every master requirement remains unaccepted as a complete requirement. Entries record scoped contributions and unclosed obligations, not percent completion.",
+  "requirements": [
+    {
+      "id": "AX-01",
+      "title": "意味を一次資料にする",
+      "origin": "U",
+      "statement": "システム内部の操作・通信・配置別成果物は、検査済みソースと明示契約から導く。",
+      "acceptance_positive": "同じ意図を異なる配置で実行し、生成辺と結果を元の記述へ対応づける。",
+      "acceptance_negative": "deploymentが未宣言の操作・辺・権限を追加する候補を拒否する。",
+      "master_acceptance_status": "本書の統合要件としては未判定。限定証拠の存在と別に評価する。",
+      "requirement_completed": false,
+      "owner_approved": false,
+      "F0_3_evidence_class": "baseline-or-design-connection",
+      "F0_3_result": "原則を維持し、domain名を含まないsource・構成・現在性の境界を定義した。",
+      "remaining": "最終利用領域の十分性・ownerによる採用は未判定。",
+      "next_work_units": [
+        "W1",
+        "W7",
+        "W8"
+      ],
+      "theorems": [],
+      "decision_refs": [],
+      "master_proof_targets": [
+        "PT-01",
+        "PT-17"
+      ],
+      "master_scenarios": [
+        "SC-01",
+        "SC-23"
+      ]
+    },
+    {
+      "id": "AX-02",
+      "title": "具体物をCoreへ埋め込まない",
+      "origin": "U",
+      "statement": "World、Avatar、Room、Page、SNS等はlibrary/applicationとして表現し、一般的な構成原理を変更しない。",
+      "acceptance_positive": "異なる二つのdomainを同じCoreと検査経路で表す。",
+      "acceptance_negative": "domain名に一致した場合だけ動くruntime分岐を合格証拠にしない。",
+      "master_acceptance_status": "本書の統合要件としては未判定。限定証拠の存在と別に評価する。",
+      "requirement_completed": false,
+      "owner_approved": false,
+      "F0_3_evidence_class": "baseline-or-design-connection",
+      "F0_3_result": "原則を維持し、domain名を含まないsource・構成・現在性の境界を定義した。",
+      "remaining": "最終利用領域の十分性・ownerによる採用は未判定。",
+      "next_work_units": [
+        "W1",
+        "W7",
+        "W8"
+      ],
+      "theorems": [],
+      "decision_refs": [],
+      "master_proof_targets": [
+        "PT-01",
+        "PT-17"
+      ],
+      "master_scenarios": [
+        "SC-01",
+        "SC-23"
+      ]
+    },
+    {
+      "id": "AX-03",
+      "title": "将来を閉じない有限構成",
+      "origin": "U",
+      "statement": "各時点の資源は有限でよいが、将来の参加者・module・用途・更新回数を言語の意味として固定列挙しない。",
+      "acceptance_positive": "新規instanceと新操作をコード変更なしの実行基盤へ追加する。",
+      "acceptance_negative": "固定test名や固定cohortだけを一般的拡張性の証拠にしない。",
+      "master_acceptance_status": "本書の統合要件としては未判定。限定証拠の存在と別に評価する。",
+      "requirement_completed": false,
+      "owner_approved": false,
+      "F0_3_evidence_class": "baseline-or-design-connection",
+      "F0_3_result": "原則を維持し、domain名を含まないsource・構成・現在性の境界を定義した。",
+      "remaining": "最終利用領域の十分性・ownerによる採用は未判定。",
+      "next_work_units": [
+        "W1",
+        "W7",
+        "W8"
+      ],
+      "theorems": [],
+      "decision_refs": [],
+      "master_proof_targets": [
+        "PT-01",
+        "PT-17"
+      ],
+      "master_scenarios": [
+        "SC-01",
+        "SC-23"
+      ]
+    },
+    {
+      "id": "AX-04",
+      "title": "原則と実現プロファイルを区別する",
+      "origin": "D",
+      "statement": "有限モデルの定数、同期方式、owner body制限等を最終的な法則へ自動昇格させない。",
+      "acceptance_positive": "各制約を不変条件・候補選択・実験上限・host前提へ分類する。",
+      "acceptance_negative": "2PC、公開専用、固定anchor数等を合意なく必須要件とする変更を止める。",
+      "master_acceptance_status": "本書の統合要件としては未判定。限定証拠の存在と別に評価する。",
+      "requirement_completed": false,
+      "owner_approved": false,
+      "F0_3_evidence_class": "baseline-or-design-connection",
+      "F0_3_result": "原則を維持し、domain名を含まないsource・構成・現在性の境界を定義した。",
+      "remaining": "最終利用領域の十分性・ownerによる採用は未判定。",
+      "next_work_units": [
+        "W1",
+        "W7",
+        "W8"
+      ],
+      "theorems": [],
+      "decision_refs": [],
+      "master_proof_targets": [
+        "PT-01",
+        "PT-17"
+      ],
+      "master_scenarios": [
+        "SC-01",
+        "SC-23"
+      ]
+    },
+    {
+      "id": "AX-05",
+      "title": "研究・α・遠期目標を分離する",
+      "origin": "U",
+      "statement": "基礎の検証、使えるα、開放的な長期基盤の受理対象を区別する。",
+      "acceptance_positive": "各成果がどの利用能力と保証に寄与するかを記録する。",
+      "acceptance_negative": "有限conformanceやphase番号をα完成・WWW完成に読み替えない。",
+      "master_acceptance_status": "本書の統合要件としては未判定。限定証拠の存在と別に評価する。",
+      "requirement_completed": false,
+      "owner_approved": false,
+      "F0_3_evidence_class": "baseline-or-design-connection",
+      "F0_3_result": "原則を維持し、domain名を含まないsource・構成・現在性の境界を定義した。",
+      "remaining": "最終利用領域の十分性・ownerによる採用は未判定。",
+      "next_work_units": [
+        "W1",
+        "W7",
+        "W8"
+      ],
+      "theorems": [],
+      "decision_refs": [],
+      "master_proof_targets": [
+        "PT-01",
+        "PT-17"
+      ],
+      "master_scenarios": [
+        "SC-01",
+        "SC-23"
+      ]
+    },
+    {
+      "id": "AX-06",
+      "title": "使いやすさと安全性を同時に評価する",
+      "origin": "U",
+      "statement": "全拒否で安全性を達成したことにせず、必要な正例が通常の記述で表せることを必須とする。",
+      "acceptance_positive": "独立した作者が通常ソースだけで代表能力を再構成する。",
+      "acceptance_negative": "拒否ケースだけで受入れを完了させない。",
+      "master_acceptance_status": "本書の統合要件としては未判定。限定証拠の存在と別に評価する。",
+      "requirement_completed": false,
+      "owner_approved": false,
+      "F0_3_evidence_class": "baseline-or-design-connection",
+      "F0_3_result": "原則を維持し、domain名を含まないsource・構成・現在性の境界を定義した。",
+      "remaining": "最終利用領域の十分性・ownerによる採用は未判定。",
+      "next_work_units": [
+        "W1",
+        "W7",
+        "W8"
+      ],
+      "theorems": [],
+      "decision_refs": [],
+      "master_proof_targets": [
+        "PT-01",
+        "PT-17"
+      ],
+      "master_scenarios": [
+        "SC-01",
+        "SC-23"
+      ]
+    },
+    {
+      "id": "SL-01",
+      "title": "普通の計算と再利用",
+      "origin": "U",
+      "statement": "関数、条件、反復、必要なデータ構造と抽象化によってdomain logicをMir内で記述する。",
+      "acceptance_positive": "算術例以外の状態機械・集約・再利用moduleをsourceから実行する。",
+      "acceptance_negative": "不足を黙ってrendererや例専用native helperへ逃がさない。",
+      "master_acceptance_status": "本書の統合要件としては未判定。限定証拠の存在と別に評価する。",
+      "requirement_completed": false,
+      "owner_approved": false,
+      "F0_3_evidence_class": "baseline-or-design-connection",
+      "F0_3_result": "F0.2のsource/compilerを無変更で使い、現在性と証拠のadapterへ接続した。",
+      "remaining": "新しい型表現力・診断完全性・public grammarは追加していない。",
+      "next_work_units": [
+        "W2"
+      ],
+      "theorems": [],
+      "decision_refs": [
+        "Q-03"
+      ],
+      "master_proof_targets": [
+        "PT-01",
+        "PT-02",
+        "PT-03"
+      ],
+      "master_scenarios": [
+        "SC-01",
+        "SC-08",
+        "SC-20"
+      ]
+    },
+    {
+      "id": "SL-02",
+      "title": "読みの意味と透過性",
+      "origin": "U",
+      "statement": "通常の参照表記を保ちつつ、依存・版・鮮度・待機・失敗を定義する。意味を変える読取方式は明示または妥当な既定として公開する。",
+      "acceptance_positive": "同じsnapshot値の再利用、逐次read、関係の遅延評価の差を例で説明・検査する。",
+      "acceptance_negative": "変化する二readを無条件に純粋式として最適化しない。",
+      "master_acceptance_status": "本書の統合要件としては未判定。限定証拠の存在と別に評価する。",
+      "requirement_completed": false,
+      "owner_approved": false,
+      "F0_3_evidence_class": "baseline-or-design-connection",
+      "F0_3_result": "F0.2のowner-local snapshotという候補を継承した。",
+      "remaining": "読取り整合性を最終既定に採用する決定はしていない。",
+      "next_work_units": [
+        "W2"
+      ],
+      "theorems": [
+        "F3-08"
+      ],
+      "decision_refs": [
+        "Q-01"
+      ],
+      "master_proof_targets": [
+        "PT-01",
+        "PT-02",
+        "PT-03"
+      ],
+      "master_scenarios": [
+        "SC-02"
+      ]
+    },
+    {
+      "id": "SL-03",
+      "title": "代入の意味保存",
+      "origin": "U",
+      "statement": "普通の代入は必要なowner処理へ翻訳し、同owner RMWの可変readを要求元の古い値へ移さない。",
+      "acceptance_positive": "二つの減算要求が、選択した直列化契約どおりに累積する。",
+      "acceptance_negative": "同owner RMWを古いsnapshotによるblind writeに変えない。",
+      "master_acceptance_status": "本書の統合要件としては未判定。限定証拠の存在と別に評価する。",
+      "requirement_completed": false,
+      "owner_approved": false,
+      "F0_3_evidence_class": "hand-proof-or-executable-selected-profile",
+      "F0_3_result": "通常sourceから生成したRMWを、現在のmember/module/policy照合後に実行する。",
+      "remaining": "実際のper-locus binary/QUICへのrefinementが残る。",
+      "next_work_units": [
+        "W4"
+      ],
+      "theorems": [
+        "F3-09",
+        "F3-13",
+        "F3-14"
+      ],
+      "decision_refs": [],
+      "master_proof_targets": [
+        "PT-01",
+        "PT-02",
+        "PT-03"
+      ],
+      "master_scenarios": [
+        "SC-01"
+      ]
+    },
+    {
+      "id": "SL-04",
+      "title": "複数ownerを含む式",
+      "origin": "D",
+      "statement": "別ownerの入力に必要なsnapshot・依存・共同更新の意味を要求し、未指定の大域原子性を作らない。",
+      "acceptance_positive": "最小の宣言で不変入力を取得して別owner計算へ渡せる。",
+      "acceptance_negative": "通信の手書きを唯一の解にせず、曖昧な同時性は理由付きで差し戻す。",
+      "master_acceptance_status": "本書の統合要件としては未判定。限定証拠の存在と別に評価する。",
+      "requirement_completed": false,
+      "owner_approved": false,
+      "F0_3_evidence_class": "baseline-or-design-connection",
+      "F0_3_result": "F0.2のsource/compilerを無変更で使い、現在性と証拠のadapterへ接続した。",
+      "remaining": "新しい型表現力・診断完全性・public grammarは追加していない。",
+      "next_work_units": [
+        "W2"
+      ],
+      "theorems": [],
+      "decision_refs": [
+        "Q-02"
+      ],
+      "master_proof_targets": [
+        "PT-01",
+        "PT-02",
+        "PT-03"
+      ],
+      "master_scenarios": [
+        "SC-02"
+      ]
+    },
+    {
+      "id": "SL-05",
+      "title": "意味上のイベントと表層の分離",
+      "origin": "U",
+      "statement": "domain入力、Core効果、実行occurrence、通信frame、観測行を区別し、通常操作から内部処理を導く。",
+      "acceptance_positive": "普通の代入から生成処理をdevtoolsでたどる。",
+      "acceptance_negative": "メッセージIDや内部Eventを通常sourceの必須APIにしない。",
+      "master_acceptance_status": "本書の統合要件としては未判定。限定証拠の存在と別に評価する。",
+      "requirement_completed": false,
+      "owner_approved": false,
+      "F0_3_evidence_class": "hand-proof-or-executable-selected-profile",
+      "F0_3_result": "要求IDや認可証拠は内部で生成する。sourceにsend/receiveを追加していない。",
+      "remaining": "構成の生成・認可指定の最終source表記は未選択。",
+      "next_work_units": [
+        "W2",
+        "W3"
+      ],
+      "theorems": [
+        "F3-06",
+        "F3-07",
+        "F3-13"
+      ],
+      "decision_refs": [],
+      "master_proof_targets": [
+        "PT-01",
+        "PT-02",
+        "PT-03"
+      ],
+      "master_scenarios": [
+        "SC-01"
+      ]
+    },
+    {
+      "id": "SL-06",
+      "title": "アノテーションと診断",
+      "origin": "U",
+      "statement": "型推論の補助と意味選択の宣言を区別し、必要な注釈、失敗理由、修正範囲を提示する。",
+      "acceptance_positive": "未指定のread policyや寿命違反をsource位置と条件付きで説明する。",
+      "acceptance_negative": "Unknownを安全・危険のどちらかへ偽装せず、内部IDだけを返さない。",
+      "master_acceptance_status": "本書の統合要件としては未判定。限定証拠の存在と別に評価する。",
+      "requirement_completed": false,
+      "owner_approved": false,
+      "F0_3_evidence_class": "explicit-open-design-obligation",
+      "F0_3_result": "有限typed diagnosticを返すが、ソースに戻る完全な診断体系は構築していない。",
+      "remaining": "拒否理由の機密性とユーザ修正可能性を含めて統合する。",
+      "next_work_units": [
+        "W2",
+        "W6"
+      ],
+      "theorems": [],
+      "decision_refs": [
+        "Q-01",
+        "Q-03"
+      ],
+      "master_proof_targets": [
+        "PT-01",
+        "PT-02",
+        "PT-03"
+      ],
+      "master_scenarios": [
+        "SC-02"
+      ]
+    },
+    {
+      "id": "SL-07",
+      "title": "数値・文字列・等価性の意味",
+      "origin": "D",
+      "statement": "数学的整数と機械整数、overflow、浮動小数、NaN、変換、文字列等の対象profileを明示する。",
+      "acceptance_positive": "境界値と異なるbackendで、定義した結果・失敗の一致を確認する。",
+      "acceptance_negative": "数学的整数の証明を無条件にInt64/Floatへ流用しない。",
+      "master_acceptance_status": "本書の統合要件としては未判定。限定証拠の存在と別に評価する。",
+      "requirement_completed": false,
+      "owner_approved": false,
+      "F0_3_evidence_class": "baseline-or-design-connection",
+      "F0_3_result": "数学的Int/Boolのprofileを継承し、κのTrueと1を区別した。",
+      "remaining": "Int64 overflow、float、文字列、比較意味は採用前に定義が必要。",
+      "next_work_units": [
+        "W2"
+      ],
+      "theorems": [
+        "F3-07"
+      ],
+      "decision_refs": [
+        "Q-04"
+      ],
+      "master_proof_targets": [
+        "PT-01",
+        "PT-02",
+        "PT-03"
+      ],
+      "master_scenarios": [
+        "SC-02"
+      ]
+    },
+    {
+      "id": "SL-08",
+      "title": "関数やhandleの表現力境界",
+      "origin": "D",
+      "statement": "高階関数、closure、first-class reference/module instanceの必要範囲を能力例から定め、captureの効果・寿命・権限を検査する。",
+      "acceptance_positive": "少なくとも必要な再利用例を、安全なhandleまたは同等の抽象で構成する。",
+      "acceptance_negative": "第一階prototypeが動いたことだけで表現力の充足を宣言しない。",
+      "master_acceptance_status": "本書の統合要件としては未判定。限定証拠の存在と別に評価する。",
+      "requirement_completed": false,
+      "owner_approved": false,
+      "F0_3_evidence_class": "explicit-open-design-obligation",
+      "F0_3_result": "第一階compilerの一部を利用している。",
+      "remaining": "closure、affine handle、module instanceを値として渡す型体系は未実装。",
+      "next_work_units": [
+        "W2"
+      ],
+      "theorems": [],
+      "decision_refs": [
+        "Q-03"
+      ],
+      "master_proof_targets": [
+        "PT-01",
+        "PT-02",
+        "PT-03"
+      ],
+      "master_scenarios": [
+        "SC-02"
+      ]
+    },
+    {
+      "id": "ID-01",
+      "title": "定義・instance・世代・版の区別",
+      "origin": "D",
+      "statement": "名前、コード定義、実体、incarnation、state version、contract version、physical locationを混同しない。",
+      "acceptance_positive": "同名で再生成した対象へ古い要求・証拠・patchが流用されない。",
+      "acceptance_negative": "版番号だけの一致によるABA誤受理を拒否する。",
+      "master_acceptance_status": "本書の統合要件としては未判定。限定証拠の存在と別に評価する。",
+      "requirement_completed": false,
+      "owner_approved": false,
+      "F0_3_evidence_class": "hand-proof-or-executable-selected-profile",
+      "F0_3_result": "存在/member/module/accessを同一のpositive support closureと世代へ接続した。",
+      "remaining": "第一級resource handleと分散した生成・撤去の実装対応が残る。",
+      "next_work_units": [
+        "W1",
+        "W2",
+        "W3"
+      ],
+      "theorems": [
+        "F3-01",
+        "F3-02",
+        "F3-03",
+        "F3-04",
+        "F3-10",
+        "F3-11"
+      ],
+      "decision_refs": [],
+      "master_proof_targets": [
+        "PT-04",
+        "PT-05",
+        "PT-11"
+      ],
+      "master_scenarios": [
+        "SC-05"
+      ]
+    },
+    {
+      "id": "ID-02",
+      "title": "存在DAGと独立対象",
+      "origin": "U",
+      "statement": "親が有効に存在することを子の存在条件とする関係と、独立対象を表現する。複数親の条件は別途選ぶ。",
+      "acceptance_positive": "共有親、複数root、子孫撤去を型・実行・観測で整合させる。",
+      "acceptance_negative": "ネットワーク一時切断を意味上の死亡と無条件に同一視しない。",
+      "master_acceptance_status": "本書の統合要件としては未判定。限定証拠の存在と別に評価する。",
+      "requirement_completed": false,
+      "owner_approved": false,
+      "F0_3_evidence_class": "hand-proof-or-executable-selected-profile",
+      "F0_3_result": "存在/member/module/accessを同一のpositive support closureと世代へ接続した。",
+      "remaining": "第一級resource handleと分散した生成・撤去の実装対応が残る。",
+      "next_work_units": [
+        "W1",
+        "W2",
+        "W3"
+      ],
+      "theorems": [
+        "F3-01",
+        "F3-02",
+        "F3-03",
+        "F3-04",
+        "F3-10",
+        "F3-11"
+      ],
+      "decision_refs": [
+        "Q-05"
+      ],
+      "master_proof_targets": [
+        "PT-04",
+        "PT-05",
+        "PT-11"
+      ],
+      "master_scenarios": [
+        "SC-05"
+      ]
+    },
+    {
+      "id": "ID-03",
+      "title": "reparentと退出の遷移",
+      "origin": "U",
+      "statement": "親変更・退出を認可された遷移とし、依存参照、未完了処理、公開bindingを整合させる。",
+      "acceptance_positive": "子を生かす変更と閉包撤去を、それぞれ契約どおりに実行する。",
+      "acceptance_negative": "循環、宙に浮く子、失効権限での再接続を拒否する。",
+      "master_acceptance_status": "本書の統合要件としては未判定。限定証拠の存在と別に評価する。",
+      "requirement_completed": false,
+      "owner_approved": false,
+      "F0_3_evidence_class": "hand-proof-or-executable-selected-profile",
+      "F0_3_result": "tracked reparent・現在認可・同kind DAG検査・退役closureを実装した。",
+      "remaining": "全種類の資源撤去と分散commitは別の義務。",
+      "next_work_units": [
+        "W3"
+      ],
+      "theorems": [
+        "F3-04",
+        "F3-10",
+        "F3-16",
+        "F3-17"
+      ],
+      "decision_refs": [
+        "Q-05"
+      ],
+      "master_proof_targets": [
+        "PT-04",
+        "PT-05",
+        "PT-11"
+      ],
+      "master_scenarios": [
+        "SC-05"
+      ]
+    },
+    {
+      "id": "ID-04",
+      "title": "短命な参照とfallback",
+      "origin": "U",
+      "statement": "長命側へ帰着する宣言を、型・関係・寿命・権限が適合する候補列として扱う。",
+      "acceptance_positive": "他参加者が退出しても、許された代替関係または定義された失敗へ進む。",
+      "acceptance_negative": "祖先であることだけを型・到達性・書込権限の証明にしない。",
+      "master_acceptance_status": "本書の統合要件としては未判定。限定証拠の存在と別に評価する。",
+      "requirement_completed": false,
+      "owner_approved": false,
+      "F0_3_evidence_class": "hand-proof-or-executable-selected-profile",
+      "F0_3_result": "短命anchorへのauthorized access失効とfallbackを同じclosureへ接続した。",
+      "remaining": "参照型の一般的な安全性と最終候補の可用性は未保証。",
+      "next_work_units": [
+        "W2",
+        "W3"
+      ],
+      "theorems": [
+        "F3-11",
+        "F3-12"
+      ],
+      "decision_refs": [],
+      "master_proof_targets": [
+        "PT-04",
+        "PT-05",
+        "PT-11"
+      ],
+      "master_scenarios": [
+        "SC-05"
+      ]
+    },
+    {
+      "id": "ID-05",
+      "title": "再取得と単調性の範囲",
+      "origin": "D",
+      "statement": "現在Canonの同lineage単調fallbackを保持する範囲と、新lineage再取得の条件を明示する。自動生成は可能でも無根拠に復活しない。",
+      "acceptance_positive": "正当な再参加でfreshな参照へ切り替え、過去を残す。",
+      "acceptance_negative": "旧epochの復活やsample復帰だけでの意味上再昇格を拒否する。",
+      "master_acceptance_status": "本書の統合要件としては未判定。限定証拠の存在と別に評価する。",
+      "requirement_completed": false,
+      "owner_approved": false,
+      "F0_3_evidence_class": "hand-proof-or-executable-selected-profile",
+      "F0_3_result": "新member/anchor/accessを作るだけではcursorを戻さず、現在認可付きreacquireで新lineageを作る。",
+      "remaining": "自動再取得の宣言的source表記は未選択。",
+      "next_work_units": [
+        "W3"
+      ],
+      "theorems": [
+        "F3-07",
+        "F3-11"
+      ],
+      "decision_refs": [
+        "Q-06"
+      ],
+      "master_proof_targets": [
+        "PT-04",
+        "PT-05",
+        "PT-11"
+      ],
+      "master_scenarios": [
+        "SC-05"
+      ]
+    },
+    {
+      "id": "ID-06",
+      "title": "参照・権利・snapshot・引用の区別",
+      "origin": "D",
+      "statement": "liveな使用可能参照と不変snapshot、資源権利、過去の対象を指す識別を区別する。",
+      "acceptance_positive": "退出済み対象の履歴を、現在のアクセス権なしで許可範囲内から参照する。",
+      "acceptance_negative": "過去の引用先をfallback先へ黙って差し替えない。",
+      "master_acceptance_status": "本書の統合要件としては未判定。限定証拠の存在と別に評価する。",
+      "requirement_completed": false,
+      "owner_approved": false,
+      "F0_3_evidence_class": "hand-proof-or-executable-selected-profile",
+      "F0_3_result": "過去の成功と現在のlive結果使用を区別し、退役moduleへのconsumeを拒否する。",
+      "remaining": "永続引用や独立snapshot値のfirst-class contractは未実装。",
+      "next_work_units": [
+        "W2",
+        "W8"
+      ],
+      "theorems": [
+        "F3-14"
+      ],
+      "decision_refs": [
+        "Q-07"
+      ],
+      "master_proof_targets": [
+        "PT-04",
+        "PT-05",
+        "PT-11"
+      ],
+      "master_scenarios": [
+        "SC-05",
+        "SC-22"
+      ]
+    },
+    {
+      "id": "ID-07",
+      "title": "所有・alias・資源handle",
+      "origin": "U",
+      "statement": "局所理論から外へ出る所有条件を、型、opaque handle、動的検査、隔離のいずれかで維持する。",
+      "acceptance_positive": "分割・移送・解放を契約で扱い、内部の分離論理を全callerへ要求しない。",
+      "acceptance_negative": "raw handle化による複製・二重解放・use-after-retireを許さない。",
+      "master_acceptance_status": "本書の統合要件としては未判定。限定証拠の存在と別に評価する。",
+      "requirement_completed": false,
+      "owner_approved": false,
+      "F0_3_evidence_class": "explicit-open-design-obligation",
+      "F0_3_result": "F0.1の所有token例は資産として保持するが、F0.3へ統合していない。",
+      "remaining": "線形資源と通常値の受渡し・型消去の保証が必要。",
+      "next_work_units": [
+        "W2"
+      ],
+      "theorems": [],
+      "decision_refs": [
+        "Q-03"
+      ],
+      "master_proof_targets": [
+        "PT-04",
+        "PT-05",
+        "PT-11"
+      ],
+      "master_scenarios": [
+        "SC-03",
+        "SC-05",
+        "SC-09"
+      ]
+    },
+    {
+      "id": "ID-08",
+      "title": "DAG間の整合条件",
+      "origin": "D",
+      "statement": "存在・関係・admission・patch・因果の対応を同一構成の不変条件で扱う。",
+      "acceptance_positive": "退出→binding無効化→fallback→patch再検査→観測の連鎖が整合する。",
+      "acceptance_negative": "各DAG単独の非循環性だけで起動可能性・全体保存を宣言しない。",
+      "master_acceptance_status": "本書の統合要件としては未判定。限定証拠の存在と別に評価する。",
+      "requirement_completed": false,
+      "owner_approved": false,
+      "F0_3_evidence_class": "hand-proof-or-executable-selected-profile",
+      "F0_3_result": "存在/member/module/access/関係/要求/prepared patchを同じDataに置き、相互失効を実行した。",
+      "remaining": "全種類のpatch DAGと実分散activation・型handleを含む統合は残る。",
+      "next_work_units": [
+        "W1",
+        "W3"
+      ],
+      "theorems": [
+        "F3-02",
+        "F3-04",
+        "F3-10",
+        "F3-11",
+        "F3-14",
+        "F3-19",
+        "F3-23"
+      ],
+      "decision_refs": [],
+      "master_proof_targets": [
+        "PT-04",
+        "PT-05",
+        "PT-11"
+      ],
+      "master_scenarios": [
+        "SC-05",
+        "SC-11",
+        "SC-13",
+        "SC-24"
+      ]
+    },
+    {
+      "id": "RL-01",
+      "title": "関係を意味の対象として保持",
+      "origin": "U",
+      "statement": "owner-heldな関係定義とconsumer側評価を分け、共有依存を可能な限り保持する。",
+      "acceptance_positive": "同じanchor/contextから同じ関係結果を得ることを照合する。",
+      "acceptance_negative": "都合よく絶対値streamへ潰し、寿命・権限・共有構造を失わない。",
+      "master_acceptance_status": "本書の統合要件としては未判定。限定証拠の存在と別に評価する。",
+      "requirement_completed": false,
+      "owner_approved": false,
+      "F0_3_evidence_class": "hand-proof-or-executable-selected-profile",
+      "F0_3_result": "整数affine関係DAG、認可access、fallback、読取り専用のprojectionを接続した。",
+      "remaining": "物理sampleの保証・designated evaluation・一般の時間/近似は未統合。",
+      "next_work_units": [
+        "W3",
+        "W6"
+      ],
+      "theorems": [
+        "F3-11",
+        "F3-12"
+      ],
+      "decision_refs": [],
+      "master_proof_targets": [
+        "PT-05",
+        "PT-06",
+        "PT-15"
+      ],
+      "master_scenarios": [
+        "SC-05"
+      ]
+    },
+    {
+      "id": "RL-02",
+      "title": "関係DAGと時間越し循環",
+      "origin": "D",
+      "statement": "瞬間的な導出依存の循環と、遅延付きfeedbackや関数再帰を区別する。許容profileの制約を定義する。",
+      "acceptance_positive": "遅延を持つ反復は表せる一方、不正な瞬間循環を検出する。",
+      "acceptance_negative": "全グラフを一律DAGとして必要な再帰まで禁止しない。",
+      "master_acceptance_status": "本書の統合要件としては未判定。限定証拠の存在と別に評価する。",
+      "requirement_completed": false,
+      "owner_approved": false,
+      "F0_3_evidence_class": "hand-proof-or-executable-selected-profile",
+      "F0_3_result": "整数affine関係DAG、認可access、fallback、読取り専用のprojectionを接続した。",
+      "remaining": "物理sampleの保証・designated evaluation・一般の時間/近似は未統合。",
+      "next_work_units": [
+        "W3",
+        "W6"
+      ],
+      "theorems": [
+        "F3-11",
+        "F3-12"
+      ],
+      "decision_refs": [
+        "Q-08"
+      ],
+      "master_proof_targets": [
+        "PT-05",
+        "PT-06",
+        "PT-15"
+      ],
+      "master_scenarios": [
+        "SC-05"
+      ]
+    },
+    {
+      "id": "RL-03",
+      "title": "評価場所と具体化の分離",
+      "origin": "U",
+      "statement": "value/state/relation/computation、owner、evaluator、trigger、materializationを区別する。",
+      "acceptance_positive": "純粋な表示計算を手元で行い、確定判断は宣言した場所・版へ結びつく。",
+      "acceptance_negative": "計算場所が変わっただけで所有・権限が増えない。",
+      "master_acceptance_status": "本書の統合要件としては未判定。限定証拠の存在と別に評価する。",
+      "requirement_completed": false,
+      "owner_approved": false,
+      "F0_3_evidence_class": "hand-proof-or-executable-selected-profile",
+      "F0_3_result": "整数affine関係DAG、認可access、fallback、読取り専用のprojectionを接続した。",
+      "remaining": "物理sampleの保証・designated evaluation・一般の時間/近似は未統合。",
+      "next_work_units": [
+        "W3",
+        "W6"
+      ],
+      "theorems": [
+        "F3-11",
+        "F3-12"
+      ],
+      "decision_refs": [],
+      "master_proof_targets": [
+        "PT-05",
+        "PT-06",
+        "PT-15"
+      ],
+      "master_scenarios": [
+        "SC-06"
+      ]
+    },
+    {
+      "id": "RL-04",
+      "title": "指定評価・結果の消費",
+      "origin": "D",
+      "statement": "指定判断の入力frontier・結果版・消費者・公開条件を保持し、利用側の再計算と区別する。",
+      "acceptance_positive": "重複結果は対応する操作の契約どおりに扱う。",
+      "acceptance_negative": "旧版や別consumerの結果を現在の権威ある状態として使わない。",
+      "master_acceptance_status": "本書の統合要件としては未判定。限定証拠の存在と別に評価する。",
+      "requirement_completed": false,
+      "owner_approved": false,
+      "F0_3_evidence_class": "explicit-open-design-obligation",
+      "F0_3_result": "designated evaluatorは既存repo/F0.1の資産で、F0.3に追加統合していない。",
+      "remaining": "不変結果、frontier、consumptionを現行support/contextへ接続する。",
+      "next_work_units": [
+        "W3",
+        "W4"
+      ],
+      "theorems": [],
+      "decision_refs": [],
+      "master_proof_targets": [
+        "PT-05",
+        "PT-06",
+        "PT-15"
+      ],
+      "master_scenarios": [
+        "SC-06"
+      ]
+    },
+    {
+      "id": "RL-05",
+      "title": "時間と同期・非同期の契約",
+      "origin": "U",
+      "statement": "因果順序、論理tick、実時間、締切、leaseを区別し、異なる時間域を明示契約で接続する。",
+      "acceptance_positive": "deadlineの起点・適用点・満了後の状態を一意に説明できる。",
+      "acceptance_negative": "owner待ち時間をend-to-end deadlineや全体clockと呼ばない。",
+      "master_acceptance_status": "本書の統合要件としては未判定。限定証拠の存在と別に評価する。",
+      "requirement_completed": false,
+      "owner_approved": false,
+      "F0_3_evidence_class": "explicit-open-design-obligation",
+      "F0_3_result": "一致したpresentation contextをsample受入れの前提にした。",
+      "remaining": "clock精度・deadline・lease・高頻度streamの時間モデルは未統合。",
+      "next_work_units": [
+        "W3",
+        "W4"
+      ],
+      "theorems": [],
+      "decision_refs": [
+        "Q-09"
+      ],
+      "master_proof_targets": [
+        "PT-05",
+        "PT-06",
+        "PT-15"
+      ],
+      "master_scenarios": [
+        "SC-06"
+      ]
+    },
+    {
+      "id": "RL-06",
+      "title": "高頻度提示と意味の分離",
+      "origin": "U",
+      "statement": "sample不足・遅延・補間・予測は提示上の処理とし、意味上の退出・fallbackを勝手に起こさない。",
+      "acceptance_positive": "同一の許容frontier/epochで複数anchorを評価する。",
+      "acceptance_negative": "不整合sampleを混ぜた表示や欠測によるowner state変更を拒否する。",
+      "master_acceptance_status": "本書の統合要件としては未判定。限定証拠の存在と別に評価する。",
+      "requirement_completed": false,
+      "owner_approved": false,
+      "F0_3_evidence_class": "hand-proof-or-executable-selected-profile",
+      "F0_3_result": "整数affine関係DAG、認可access、fallback、読取り専用のprojectionを接続した。",
+      "remaining": "物理sampleの保証・designated evaluation・一般の時間/近似は未統合。",
+      "next_work_units": [
+        "W3",
+        "W6"
+      ],
+      "theorems": [
+        "F3-11",
+        "F3-12"
+      ],
+      "decision_refs": [
+        "Q-10"
+      ],
+      "master_proof_targets": [
+        "PT-05",
+        "PT-06",
+        "PT-15"
+      ],
+      "master_scenarios": [
+        "SC-05",
+        "SC-06"
+      ]
+    },
+    {
+      "id": "RL-07",
+      "title": "近似と誤差の契約",
+      "origin": "D",
+      "statement": "近似計算・数値変換・単位・座標変換を、意味と許容誤差へ対応づける。",
+      "acceptance_positive": "明示した誤差内の表示代替を使い、必要な確定判断は正確に扱う。",
+      "acceptance_negative": "観測上の近似を無断でゲーム等の確定結果に用いない。",
+      "master_acceptance_status": "本書の統合要件としては未判定。限定証拠の存在と別に評価する。",
+      "requirement_completed": false,
+      "owner_approved": false,
+      "F0_3_evidence_class": "explicit-open-design-obligation",
+      "F0_3_result": "整数の正確なrelation評価のみを選んだ。",
+      "remaining": "誤差境界・補間・approximation contractは別の理論が必要。",
+      "next_work_units": [
+        "W3",
+        "W7"
+      ],
+      "theorems": [],
+      "decision_refs": [
+        "Q-10"
+      ],
+      "master_proof_targets": [
+        "PT-05",
+        "PT-06",
+        "PT-15"
+      ],
+      "master_scenarios": [
+        "SC-06"
+      ]
+    },
+    {
+      "id": "DS-01",
+      "title": "配置と通信の由来",
+      "origin": "U",
+      "statement": "checked sourceから生成した辺と成果物だけを実行し、物理配置はその実現に限定する。",
+      "acceptance_positive": "thread/process/nodeごとの選択profileで同じ意味上の結果を示す。",
+      "acceptance_negative": "手書きroute・期待値lookup・共有storeによる偽の分散を拒否する。",
+      "master_acceptance_status": "本書の統合要件としては未判定。限定証拠の存在と別に評価する。",
+      "requirement_completed": false,
+      "owner_approved": false,
+      "F0_3_evidence_class": "hand-proof-or-executable-selected-profile",
+      "F0_3_result": "F0.2 compilerが作る2本のrequest/outcome edgeを実行し、手書きrouteで意味を補っていない。",
+      "remaining": "locus配置の実プロセス化は既存I3系と対応させる必要がある。",
+      "next_work_units": [
+        "W4"
+      ],
+      "theorems": [
+        "F3-13",
+        "F3-24"
+      ],
+      "decision_refs": [],
+      "master_proof_targets": [
+        "PT-03",
+        "PT-07",
+        "PT-08"
+      ],
+      "master_scenarios": [
+        "SC-01"
+      ]
+    },
+    {
+      "id": "DS-02",
+      "title": "因果・並行・memory order",
+      "origin": "U",
+      "statement": "依存・同期・競合・許された並行性を定義し、通信stream順やCPU実行順で代用しない。",
+      "acceptance_positive": "独立作用は並行可能で、必要な順序は全backendで保存する。",
+      "acceptance_negative": "単独FIFOや単独race-freeを分散全体の意味保存と呼ばない。",
+      "master_acceptance_status": "本書の統合要件としては未判定。限定証拠の存在と別に評価する。",
+      "requirement_completed": false,
+      "owner_approved": false,
+      "F0_3_evidence_class": "baseline-or-design-connection",
+      "F0_3_result": "異なる操作順と意味記録を検査し、実stream順を意味の根拠にしていない。",
+      "remaining": "一般のhappens-before graphと実memory order対応は未証明。",
+      "next_work_units": [
+        "W4"
+      ],
+      "theorems": [
+        "F3-24"
+      ],
+      "decision_refs": [
+        "Q-02"
+      ],
+      "master_proof_targets": [
+        "PT-03",
+        "PT-07",
+        "PT-08"
+      ],
+      "master_scenarios": [
+        "SC-07"
+      ]
+    },
+    {
+      "id": "DS-03",
+      "title": "要求の同一性と結果の状態",
+      "origin": "D",
+      "statement": "意図した要求、配送attempt、owner決定、結果受領、消費を別に保持する。",
+      "acceptance_positive": "受理前拒否・確定成功・確定失敗・remote-unknownを区別する。",
+      "acceptance_negative": "応答不在を未実行、部分実行を全体rollbackと表示しない。",
+      "master_acceptance_status": "本書の統合要件としては未判定。限定証拠の存在と別に評価する。",
+      "requirement_completed": false,
+      "owner_approved": false,
+      "F0_3_evidence_class": "hand-proof-or-executable-selected-profile",
+      "F0_3_result": "Pending/Served/Rejected/Consumed/ReleaseDeniedを保持し、live消費前提を再検査する。",
+      "remaining": "外部effectや任意continuationへの一般化は残る。",
+      "next_work_units": [
+        "W4",
+        "W5"
+      ],
+      "theorems": [
+        "F3-07",
+        "F3-13",
+        "F3-14",
+        "F3-19"
+      ],
+      "decision_refs": [],
+      "master_proof_targets": [
+        "PT-03",
+        "PT-07",
+        "PT-08"
+      ],
+      "master_scenarios": [
+        "SC-07"
+      ]
+    },
+    {
+      "id": "DS-04",
+      "title": "再試行・重複・忘却",
+      "origin": "D",
+      "statement": "操作別の重複契約、現在権限、記録保持期間、forget後の再実行禁止を定義する。",
+      "acceptance_positive": "同じ作用の再送と新しい作用を区別し、保持結果または明示拒否を返す。",
+      "acceptance_negative": "connection変更でrequest identityや消費済み状態をリセットしない。",
+      "master_acceptance_status": "本書の統合要件としては未判定。限定証拠の存在と別に評価する。",
+      "requirement_completed": false,
+      "owner_approved": false,
+      "F0_3_evidence_class": "hand-proof-or-executable-selected-profile",
+      "F0_3_result": "保持requestの重複serveを拒否し、復元で消費済みを戻さない。",
+      "remaining": "永続的なGC後の古い要求拒否、再試行方式の選択は未完。",
+      "next_work_units": [
+        "W5"
+      ],
+      "theorems": [
+        "F3-13",
+        "F3-19"
+      ],
+      "decision_refs": [
+        "Q-11"
+      ],
+      "master_proof_targets": [
+        "PT-03",
+        "PT-07",
+        "PT-08"
+      ],
+      "master_scenarios": [
+        "SC-07"
+      ]
+    },
+    {
+      "id": "DS-05",
+      "title": "継続・並列子処理・取消し",
+      "origin": "D",
+      "statement": "継続・子処理・join・失敗伝播・取消しの意味を定義する。未確定作用の取消しは未実行証明ではない。",
+      "acceptance_positive": "親が未回収の子失敗を黙って無視せず、取消しの到達点を記録する。",
+      "acceptance_negative": "資源回収のために処理済みの履歴を消さない。",
+      "master_acceptance_status": "本書の統合要件としては未判定。限定証拠の存在と別に評価する。",
+      "requirement_completed": false,
+      "owner_approved": false,
+      "F0_3_evidence_class": "baseline-or-design-connection",
+      "F0_3_result": "first-order call/returnとrequest待ちを動かす。",
+      "remaining": "F0.2にあるspawn/joinはF0.3 VM未対応で明示拒否。一般cancelも未統合。",
+      "next_work_units": [
+        "W2",
+        "W4"
+      ],
+      "theorems": [],
+      "decision_refs": [
+        "Q-12"
+      ],
+      "master_proof_targets": [
+        "PT-03",
+        "PT-07",
+        "PT-08"
+      ],
+      "master_scenarios": [
+        "SC-08"
+      ]
+    },
+    {
+      "id": "DS-06",
+      "title": "条件付きの進行性",
+      "origin": "D",
+      "statement": "安全性、完了可能な経路の存在、公平な全実行での終了、無停止可用性を分ける。",
+      "acceptance_positive": "採用profileの配送・復旧・公平性前提の下で正当要求が進む。",
+      "acceptance_negative": "一つの成功runから、すべての障害下のlivenessを主張しない。",
+      "master_acceptance_status": "本書の統合要件としては未判定。限定証拠の存在と別に評価する。",
+      "requirement_completed": false,
+      "owner_approved": false,
+      "F0_3_evidence_class": "explicit-open-design-obligation",
+      "F0_3_result": "有限prefix安全性と、拒否・待機を区別している。",
+      "remaining": "全公平実行の進行、永久故障時の可用性は証明していない。",
+      "next_work_units": [
+        "W4"
+      ],
+      "theorems": [
+        "F3-23",
+        "F3-24"
+      ],
+      "decision_refs": [
+        "Q-13"
+      ],
+      "master_proof_targets": [
+        "PT-03",
+        "PT-07",
+        "PT-08"
+      ],
+      "master_scenarios": [
+        "SC-08"
+      ]
+    },
+    {
+      "id": "DS-07",
+      "title": "複数ownerの不変条件",
+      "origin": "D",
+      "statement": "各owner局所の証明と、資源移送等の共同不変条件を区別し、必要な干渉規律を定義する。",
+      "acceptance_positive": "明示契約の下で残量移送等を行い、全体の保存を示す。",
+      "acceptance_negative": "各ownerの非負性だけで合計保存を主張しない。",
+      "master_acceptance_status": "本書の統合要件としては未判定。限定証拠の存在と別に評価する。",
+      "requirement_completed": false,
+      "owner_approved": false,
+      "F0_3_evidence_class": "explicit-open-design-obligation",
+      "F0_3_result": "同owner不変条件のみに限定することを明示した。",
+      "remaining": "複数ownerのrely/guarantee・資源移送・共同確定が必要。",
+      "next_work_units": [
+        "W2",
+        "W4"
+      ],
+      "theorems": [],
+      "decision_refs": [
+        "Q-02"
+      ],
+      "master_proof_targets": [
+        "PT-03",
+        "PT-07",
+        "PT-08"
+      ],
+      "master_scenarios": [
+        "SC-09"
+      ]
+    },
+    {
+      "id": "DS-08",
+      "title": "容量・隔離と失敗の全経路",
+      "origin": "D",
+      "statement": "queue・frame・継続・retentionの容量を入場前に検査し、malformed/stale/late入力を正しい段階で拒否する。",
+      "acceptance_positive": "容量境界、部分配送、再接続、失効の正例・反例を同じ経路で実行する。",
+      "acceptance_negative": "unbounded buffer、秘密を含む生例外、失敗時の部分的な意味操作を許さない。",
+      "master_acceptance_status": "本書の統合要件としては未判定。限定証拠の存在と別に評価する。",
+      "requirement_completed": false,
+      "owner_approved": false,
+      "F0_3_evidence_class": "explicit-open-design-obligation",
+      "F0_3_result": "研究用driveの明示step budgetはある。",
+      "remaining": "本番queue/CPU/通信/履歴の資源拘束を保証するものではない。",
+      "next_work_units": [
+        "W4",
+        "W7"
+      ],
+      "theorems": [],
+      "decision_refs": [],
+      "master_proof_targets": [
+        "PT-03",
+        "PT-07",
+        "PT-08"
+      ],
+      "master_scenarios": [
+        "SC-07"
+      ]
+    },
+    {
+      "id": "EF-01",
+      "title": "型付き効果と継続",
+      "origin": "U",
+      "statement": "効果の署名、結果・失敗、handlerの責任、継続の使用回数・寿命を定義する。",
+      "acceptance_positive": "純粋計算・状態・外部作用を同じ記述経路から区別して実行する。",
+      "acceptance_negative": "handlerが任意回継続を再開し、線形資源や作用を複製しない。",
+      "master_acceptance_status": "本書の統合要件としては未判定。限定証拠の存在と別に評価する。",
+      "requirement_completed": false,
+      "owner_approved": false,
+      "F0_3_evidence_class": "explicit-open-design-obligation",
+      "F0_3_result": "効果ful computationと外界結果を分ける実装境界を計画に置いた。",
+      "remaining": "外部providerはF0.3 Kernelに未搭載。一般handler・補償は研究が残る。",
+      "next_work_units": [
+        "W2",
+        "W4",
+        "W5"
+      ],
+      "theorems": [],
+      "decision_refs": [
+        "Q-14"
+      ],
+      "master_proof_targets": [
+        "PT-09",
+        "PT-03"
+      ],
+      "master_scenarios": [
+        "SC-10"
+      ]
+    },
+    {
+      "id": "EF-02",
+      "title": "handlerの合成・交換",
+      "origin": "U",
+      "statement": "handlerの適用範囲・順序・捕捉範囲と契約保存条件を定める。",
+      "acceptance_positive": "ログ用または検証用handlerの追加で守るべき意味を保存する。",
+      "acceptance_negative": "証拠層の追加が新しいruntime effectや権限を生まない。",
+      "master_acceptance_status": "本書の統合要件としては未判定。限定証拠の存在と別に評価する。",
+      "requirement_completed": false,
+      "owner_approved": false,
+      "F0_3_evidence_class": "explicit-open-design-obligation",
+      "F0_3_result": "効果ful computationと外界結果を分ける実装境界を計画に置いた。",
+      "remaining": "外部providerはF0.3 Kernelに未搭載。一般handler・補償は研究が残る。",
+      "next_work_units": [
+        "W2",
+        "W4",
+        "W5"
+      ],
+      "theorems": [],
+      "decision_refs": [
+        "Q-14"
+      ],
+      "master_proof_targets": [
+        "PT-09",
+        "PT-03"
+      ],
+      "master_scenarios": [
+        "SC-10"
+      ]
+    },
+    {
+      "id": "EF-03",
+      "title": "providerの型と権限の境界",
+      "origin": "U",
+      "statement": "外部資源への要求、実行許可、物理呼出し、結果検査、公開許可を分ける。",
+      "acceptance_positive": "正当な入力から実I/O結果を得て、欠損・不正値・権限失効を区別する。",
+      "acceptance_negative": "provider名、FFI成功、署名や接続だけでgrantを生成しない。",
+      "master_acceptance_status": "本書の統合要件としては未判定。限定証拠の存在と別に評価する。",
+      "requirement_completed": false,
+      "owner_approved": false,
+      "F0_3_evidence_class": "explicit-open-design-obligation",
+      "F0_3_result": "効果ful computationと外界結果を分ける実装境界を計画に置いた。",
+      "remaining": "外部providerはF0.3 Kernelに未搭載。一般handler・補償は研究が残る。",
+      "next_work_units": [
+        "W2",
+        "W4",
+        "W5"
+      ],
+      "theorems": [],
+      "decision_refs": [],
+      "master_proof_targets": [
+        "PT-09",
+        "PT-03"
+      ],
+      "master_scenarios": [
+        "SC-10"
+      ]
+    },
+    {
+      "id": "EF-04",
+      "title": "外界作用と不確定な完了",
+      "origin": "D",
+      "statement": "外部作用の開始記録、物理完了、結果記録を区別し、crashによる不確定性を保持する。",
+      "acceptance_positive": "効果前後で同じ保存状態になる反例に対し、無根拠な再実行をしない。",
+      "acceptance_negative": "state journalの高々一回保証を、そのまま任意外部I/Oへ拡張しない。",
+      "master_acceptance_status": "本書の統合要件としては未判定。限定証拠の存在と別に評価する。",
+      "requirement_completed": false,
+      "owner_approved": false,
+      "F0_3_evidence_class": "explicit-open-design-obligation",
+      "F0_3_result": "効果ful computationと外界結果を分ける実装境界を計画に置いた。",
+      "remaining": "外部providerはF0.3 Kernelに未搭載。一般handler・補償は研究が残る。",
+      "next_work_units": [
+        "W2",
+        "W4",
+        "W5"
+      ],
+      "theorems": [],
+      "decision_refs": [],
+      "master_proof_targets": [
+        "PT-09",
+        "PT-03"
+      ],
+      "master_scenarios": [
+        "SC-10",
+        "SC-14",
+        "SC-18"
+      ]
+    },
+    {
+      "id": "EF-05",
+      "title": "乱数・時刻・近似の供給",
+      "origin": "D",
+      "statement": "外部非決定性を入力・効果・記録へ結びつけ、確定判断と提示上の再計算を分ける。",
+      "acceptance_positive": "同じ記録を使うreplayと、現在の新しい乱数要求を区別する。",
+      "acceptance_negative": "再生時に外界を再実行して過去と違う結果を確定しない。",
+      "master_acceptance_status": "本書の統合要件としては未判定。限定証拠の存在と別に評価する。",
+      "requirement_completed": false,
+      "owner_approved": false,
+      "F0_3_evidence_class": "explicit-open-design-obligation",
+      "F0_3_result": "効果ful computationと外界結果を分ける実装境界を計画に置いた。",
+      "remaining": "外部providerはF0.3 Kernelに未搭載。一般handler・補償は研究が残る。",
+      "next_work_units": [
+        "W2",
+        "W4",
+        "W5"
+      ],
+      "theorems": [],
+      "decision_refs": [],
+      "master_proof_targets": [
+        "PT-09",
+        "PT-03"
+      ],
+      "master_scenarios": [
+        "SC-10"
+      ]
+    },
+    {
+      "id": "EF-06",
+      "title": "補償はrollbackと同義ではない",
+      "origin": "D",
+      "statement": "外部化済みの作用に対する補償は別の作用として、失敗・権限・履歴を持たせる。",
+      "acceptance_positive": "補償成功/失敗を表示し、元の出来事を消さない。",
+      "acceptance_negative": "補償が予定されたことを全体原子性の証拠にしない。",
+      "master_acceptance_status": "本書の統合要件としては未判定。限定証拠の存在と別に評価する。",
+      "requirement_completed": false,
+      "owner_approved": false,
+      "F0_3_evidence_class": "explicit-open-design-obligation",
+      "F0_3_result": "効果ful computationと外界結果を分ける実装境界を計画に置いた。",
+      "remaining": "外部providerはF0.3 Kernelに未搭載。一般handler・補償は研究が残る。",
+      "next_work_units": [
+        "W2",
+        "W4",
+        "W5"
+      ],
+      "theorems": [],
+      "decision_refs": [
+        "Q-15"
+      ],
+      "master_proof_targets": [
+        "PT-09",
+        "PT-03"
+      ],
+      "master_scenarios": [
+        "SC-10"
+      ]
+    },
+    {
+      "id": "AU-01",
+      "title": "認証・認可・検証の分離",
+      "origin": "U",
+      "statement": "資格情報→主体の主張、信頼・admission→使用許可、形式証拠→性質の確認を別の判断として扱う。",
+      "acceptance_positive": "正しい証明があるが権限がない要求と、権限はあるが証明不足の要求を区別する。",
+      "acceptance_negative": "certificate、proof、role、process、routeを単独のgrantと扱わない。",
+      "master_acceptance_status": "本書の統合要件としては未判定。限定証拠の存在と別に評価する。",
+      "requirement_completed": false,
+      "owner_approved": false,
+      "F0_3_evidence_class": "hand-proof-or-executable-selected-profile",
+      "F0_3_result": "ideal issued claimによる非空all/any、同一κ、失効後の使用再検査を実装した。",
+      "remaining": "暗号認証・任意ポリシー変換・委譲・独立信頼domainの一般化は未完。",
+      "next_work_units": [
+        "W1",
+        "W3",
+        "W8"
+      ],
+      "theorems": [
+        "F3-06",
+        "F3-07"
+      ],
+      "decision_refs": [],
+      "master_proof_targets": [
+        "PT-10",
+        "PT-11"
+      ],
+      "master_scenarios": [
+        "SC-04",
+        "SC-19"
+      ]
+    },
+    {
+      "id": "AU-02",
+      "title": "複数認証・policy層の合成",
+      "origin": "U",
+      "statement": "層のscope、順序、AND/選言、failure、主体と対象の対応を契約化する。",
+      "acceptance_positive": "複数層が同じ要求・主体・policy世代を検査し、正当な複合認証を通す。",
+      "acceptance_negative": "違う主体や古い世代への二つの許可を合成しない。",
+      "master_acceptance_status": "本書の統合要件としては未判定。限定証拠の存在と別に評価する。",
+      "requirement_completed": false,
+      "owner_approved": false,
+      "F0_3_evidence_class": "hand-proof-or-executable-selected-profile",
+      "F0_3_result": "ideal issued claimによる非空all/any、同一κ、失効後の使用再検査を実装した。",
+      "remaining": "暗号認証・任意ポリシー変換・委譲・独立信頼domainの一般化は未完。",
+      "next_work_units": [
+        "W1",
+        "W3",
+        "W8"
+      ],
+      "theorems": [
+        "F3-06",
+        "F3-07"
+      ],
+      "decision_refs": [
+        "Q-16"
+      ],
+      "master_proof_targets": [
+        "PT-10",
+        "PT-11"
+      ],
+      "master_scenarios": [
+        "SC-04",
+        "SC-24"
+      ]
+    },
+    {
+      "id": "AU-03",
+      "title": "admission依存と複数の管理主体",
+      "origin": "U",
+      "statement": "locusの論理的な参加依存を物理network topologyから分ける。独立rootと複数parent条件を定義する。",
+      "acceptance_positive": "親退出時に子の参加状態・要求処理を一貫して更新する。",
+      "acceptance_negative": "対等なノードを世界全体の唯一の管理者への所属へ強制しない。",
+      "master_acceptance_status": "本書の統合要件としては未判定。限定証拠の存在と別に評価する。",
+      "requirement_completed": false,
+      "owner_approved": false,
+      "F0_3_evidence_class": "hand-proof-or-executable-selected-profile",
+      "F0_3_result": "member/locus/moduleの帰納的な参加根拠とrootなし循環を区別する。",
+      "remaining": "各外部domainの信頼rootと発行policyを実認証へ対応させる必要がある。",
+      "next_work_units": [
+        "W3",
+        "W8"
+      ],
+      "theorems": [
+        "F3-01",
+        "F3-02",
+        "F3-03",
+        "F3-06"
+      ],
+      "decision_refs": [
+        "Q-05",
+        "Q-17"
+      ],
+      "master_proof_targets": [
+        "PT-10",
+        "PT-11"
+      ],
+      "master_scenarios": [
+        "SC-04",
+        "SC-05"
+      ]
+    },
+    {
+      "id": "AU-04",
+      "title": "使用時再検査と失効",
+      "origin": "U",
+      "statement": "grant、委譲、incarnation、policy版を使用点で照合し、queued/in-flightの失効結果を定義する。",
+      "acceptance_positive": "実行前失効と実行後失効を区別し、後者の過去の事実を残す。",
+      "acceptance_negative": "再接続や古いsnapshotから失効権限を復活させない。",
+      "master_acceptance_status": "本書の統合要件としては未判定。限定証拠の存在と別に評価する。",
+      "requirement_completed": false,
+      "owner_approved": false,
+      "F0_3_evidence_class": "hand-proof-or-executable-selected-profile",
+      "F0_3_result": "ideal issued claimによる非空all/any、同一κ、失効後の使用再検査を実装した。",
+      "remaining": "暗号認証・任意ポリシー変換・委譲・独立信頼domainの一般化は未完。",
+      "next_work_units": [
+        "W1",
+        "W3",
+        "W8"
+      ],
+      "theorems": [
+        "F3-06",
+        "F3-07"
+      ],
+      "decision_refs": [
+        "Q-18"
+      ],
+      "master_proof_targets": [
+        "PT-10",
+        "PT-11"
+      ],
+      "master_scenarios": [
+        "SC-04",
+        "SC-07"
+      ]
+    },
+    {
+      "id": "AU-05",
+      "title": "層の追加・削除・交換",
+      "origin": "U",
+      "statement": "透明な契約保存と非透明なContractUpdateを区別し、切替え中の要求と証拠を扱う。",
+      "acceptance_positive": "条件を強める認証層を、現在の接続契約を更新した上で導入する。",
+      "acceptance_negative": "互換性を装って成功範囲・必要権限・失敗を無断変更しない。",
+      "master_acceptance_status": "本書の統合要件としては未判定。限定証拠の存在と別に評価する。",
+      "requirement_completed": false,
+      "owner_approved": false,
+      "F0_3_evidence_class": "hand-proof-or-executable-selected-profile",
+      "F0_3_result": "policy successor後に古い証拠を拒否し、準備済みreparentも使用時再検査する。",
+      "remaining": "一般policy transformerの透明性・互換性を自動判定する体系ではない。",
+      "next_work_units": [
+        "W3"
+      ],
+      "theorems": [
+        "F3-06",
+        "F3-07",
+        "F3-16"
+      ],
+      "decision_refs": [
+        "Q-16",
+        "Q-18"
+      ],
+      "master_proof_targets": [
+        "PT-10",
+        "PT-11"
+      ],
+      "master_scenarios": [
+        "SC-04"
+      ]
+    },
+    {
+      "id": "AU-06",
+      "title": "認証・認可モジュールの形式保証",
+      "origin": "U",
+      "statement": "ポリシーの意味、導出手順、証拠の出所、仮定、健全性の保証範囲を記述して検査する。",
+      "acceptance_positive": "不正な主体変換・委譲の増幅を反例にして検査する。",
+      "acceptance_negative": "自分を管理者とする局所公理を外の信頼判断へ持ち込ませない。",
+      "master_acceptance_status": "本書の統合要件としては未判定。限定証拠の存在と別に評価する。",
+      "requirement_completed": false,
+      "owner_approved": false,
+      "F0_3_evidence_class": "hand-proof-or-executable-selected-profile",
+      "F0_3_result": "非空all/anyの有限policyについて健全性・相対完全性の手証明と実装を用意した。",
+      "remaining": "任意authmoduleの形式検証、暗号の安全性、sandboxは対象外。",
+      "next_work_units": [
+        "W1",
+        "W8"
+      ],
+      "theorems": [
+        "F3-06",
+        "F3-07"
+      ],
+      "decision_refs": [],
+      "master_proof_targets": [
+        "PT-10",
+        "PT-11"
+      ],
+      "master_scenarios": [
+        "SC-04"
+      ]
+    },
+    {
+      "id": "AU-07",
+      "title": "信頼域間の対応と委譲",
+      "origin": "D",
+      "statement": "主体namespace、発行者、audience、委譲深度、再委譲、失効を接続契約へ載せる。",
+      "acceptance_positive": "異なる発行元でも明示した信頼範囲で接続できる。",
+      "acceptance_negative": "同じ名前やadminという文字列だけで権限を対応づけない。",
+      "master_acceptance_status": "本書の統合要件としては未判定。限定証拠の存在と別に評価する。",
+      "requirement_completed": false,
+      "owner_approved": false,
+      "F0_3_evidence_class": "explicit-open-design-obligation",
+      "F0_3_result": "claimのscope照合はある。",
+      "remaining": "再委譲・権限の減衰・委譲cycle・別domainとの合成は未モデル化。",
+      "next_work_units": [
+        "W8"
+      ],
+      "theorems": [],
+      "decision_refs": [
+        "Q-17"
+      ],
+      "master_proof_targets": [
+        "PT-10",
+        "PT-11"
+      ],
+      "master_scenarios": [
+        "SC-04",
+        "SC-22"
+      ]
+    },
+    {
+      "id": "AU-08",
+      "title": "初期信頼と鍵・制御の世代交代",
+      "origin": "D",
+      "statement": "bootstrapの根拠、issuer/鍵の更新、制御状態の復旧・退役を明示する。",
+      "acceptance_positive": "管理手段の更新後に旧鍵と現権限の関係を説明できる。",
+      "acceptance_negative": "古い制御snapshotだけから現在の失効が分かると仮定しない。",
+      "master_acceptance_status": "本書の統合要件としては未判定。限定証拠の存在と別に評価する。",
+      "requirement_completed": false,
+      "owner_approved": false,
+      "F0_3_evidence_class": "baseline-or-design-connection",
+      "F0_3_result": "issuer epochの退役をideal recordとして扱う。",
+      "remaining": "鍵移行・root交代・cryptographic freshnessは未実装。",
+      "next_work_units": [
+        "W8"
+      ],
+      "theorems": [
+        "F3-07"
+      ],
+      "decision_refs": [
+        "Q-17",
+        "Q-20"
+      ],
+      "master_proof_targets": [
+        "PT-10",
+        "PT-11"
+      ],
+      "master_scenarios": [
+        "SC-04"
+      ]
+    },
+    {
+      "id": "TY-01",
+      "title": "基礎型の宣言的・実行的対応",
+      "origin": "U",
+      "statement": "型体系、algorithmic checker、runtime型安全性を別命題として定義し、対象断片と注釈条件を明示する。",
+      "acceptance_positive": "有効な注釈付き正例は受理され、実行時の値は型と一致する。",
+      "acceptance_negative": "検査器の終了とprogramの終了を混同しない。",
+      "master_acceptance_status": "本書の統合要件としては未判定。限定証拠の存在と別に評価する。",
+      "requirement_completed": false,
+      "owner_approved": false,
+      "F0_3_evidence_class": "baseline-or-design-connection",
+      "F0_3_result": "sourceに束縛した多項式証拠、support rank証拠、label判断を別々の線として照合した。",
+      "remaining": "完全な依存型・様相型・任意理論loaderは存在しない。",
+      "next_work_units": [
+        "W1",
+        "W2"
+      ],
+      "theorems": [
+        "F3-03",
+        "F3-07",
+        "F3-08"
+      ],
+      "decision_refs": [],
+      "master_proof_targets": [
+        "PT-01",
+        "PT-02",
+        "PT-12"
+      ],
+      "master_scenarios": [
+        "SC-02",
+        "SC-03"
+      ]
+    },
+    {
+      "id": "TY-02",
+      "title": "理論の局所導入と前提管理",
+      "origin": "U",
+      "statement": "module/regionごとの理論が、前提・規則・意味対応・公開契約・証拠検査方法を持つ。",
+      "acceptance_positive": "二つの異なる規律を使うmoduleを同じ実行意味へ接続する。",
+      "acceptance_negative": "任意の公理・矛盾した仮定を共通kernelへ無検査で追加しない。",
+      "master_acceptance_status": "本書の統合要件としては未判定。限定証拠の存在と別に評価する。",
+      "requirement_completed": false,
+      "owner_approved": false,
+      "F0_3_evidence_class": "baseline-or-design-connection",
+      "F0_3_result": "局所算術証拠とsupport証拠の別checkerを共通対象へ結びつけた。",
+      "remaining": "moduleごとの任意理論loaderのメタ言語は作っていない。",
+      "next_work_units": [
+        "W2"
+      ],
+      "theorems": [
+        "F3-03",
+        "F3-08"
+      ],
+      "decision_refs": [
+        "Q-19"
+      ],
+      "master_proof_targets": [
+        "PT-01",
+        "PT-02",
+        "PT-12"
+      ],
+      "master_scenarios": [
+        "SC-03"
+      ]
+    },
+    {
+      "id": "TY-03",
+      "title": "検証手段と意味拡張の区別",
+      "origin": "U",
+      "statement": "solver/tacticの追加、仕様言語の追加、実行する新構文や効果の追加を区別する。",
+      "acceptance_positive": "新しい探索器は既存の証拠検査へ出力でき、実行意味を変えない。",
+      "acceptance_negative": "verifier pluginを理由にprojection・Core操作・権限を再定義しない。",
+      "master_acceptance_status": "本書の統合要件としては未判定。限定証拠の存在と別に評価する。",
+      "requirement_completed": false,
+      "owner_approved": false,
+      "F0_3_evidence_class": "baseline-or-design-connection",
+      "F0_3_result": "sourceに束縛した多項式証拠、support rank証拠、label判断を別々の線として照合した。",
+      "remaining": "完全な依存型・様相型・任意理論loaderは存在しない。",
+      "next_work_units": [
+        "W1",
+        "W2"
+      ],
+      "theorems": [
+        "F3-03",
+        "F3-07",
+        "F3-08"
+      ],
+      "decision_refs": [],
+      "master_proof_targets": [
+        "PT-01",
+        "PT-02",
+        "PT-12"
+      ],
+      "master_scenarios": [
+        "SC-03"
+      ]
+    },
+    {
+      "id": "TY-04",
+      "title": "異なる局所理論の境界",
+      "origin": "U",
+      "statement": "値・資源・前提・効果の共通契約か、検証済み翻訳を通じて接続する。",
+      "acceptance_positive": "強い内部証明の結果を、必要な部分だけ外部契約として利用する。",
+      "acceptance_negative": "所有権・寿命・非公開条件を弱い型へ消去して迂回しない。",
+      "master_acceptance_status": "本書の統合要件としては未判定。限定証拠の存在と別に評価する。",
+      "requirement_completed": false,
+      "owner_approved": false,
+      "F0_3_evidence_class": "hand-proof-or-executable-selected-profile",
+      "F0_3_result": "不変値を伴う契約とsource identityを共有し、証明を権限へ変換しない。",
+      "remaining": "異種logicの一般翻訳とaffine資源boundaryは未証明。",
+      "next_work_units": [
+        "W2"
+      ],
+      "theorems": [
+        "F3-07",
+        "F3-08",
+        "F3-09"
+      ],
+      "decision_refs": [],
+      "master_proof_targets": [
+        "PT-01",
+        "PT-02",
+        "PT-12"
+      ],
+      "master_scenarios": [
+        "SC-03",
+        "SC-24"
+      ]
+    },
+    {
+      "id": "TY-05",
+      "title": "refinement・依存型的仕様",
+      "origin": "U",
+      "statement": "値依存の型・仕様の必要範囲を定め、実行コードと論理項の束縛・型等価性・除去条件を明確にする。",
+      "acceptance_positive": "長さや範囲等の証拠を同じ値の利用条件へ接続する。",
+      "acceptance_negative": "refinement証拠が一つあることを一般依存型体系の完成と数えない。",
+      "master_acceptance_status": "本書の統合要件としては未判定。限定証拠の存在と別に評価する。",
+      "requirement_completed": false,
+      "owner_approved": false,
+      "F0_3_evidence_class": "baseline-or-design-connection",
+      "F0_3_result": "多項式refinementの証明をF0.2から継承する。",
+      "remaining": "依存型そのものや一般的な型レベル計算を導入したとはしない。",
+      "next_work_units": [
+        "W2"
+      ],
+      "theorems": [
+        "F3-08"
+      ],
+      "decision_refs": [
+        "Q-19"
+      ],
+      "master_proof_targets": [
+        "PT-01",
+        "PT-02",
+        "PT-12"
+      ],
+      "master_scenarios": [
+        "SC-03"
+      ]
+    },
+    {
+      "id": "TY-06",
+      "title": "様相と環境の対応",
+      "origin": "U",
+      "statement": "stage/place/time/stability等の各modeの解釈と相互作用を定義し、必要な場所だけで利用できる。",
+      "acceptance_positive": "環境が守る範囲でstableな値を再利用し、その範囲外patchで再検査する。",
+      "acceptance_negative": "論理的laterを一packet後、stableを失効後も永久有効と解釈しない。",
+      "master_acceptance_status": "本書の統合要件としては未判定。限定証拠の存在と別に評価する。",
+      "requirement_completed": false,
+      "owner_approved": false,
+      "F0_3_evidence_class": "baseline-or-design-connection",
+      "F0_3_result": "F0.1の環境安定性の様相例を参照する。",
+      "remaining": "MTTや一般の様相型checkerはF0.3未搭載。",
+      "next_work_units": [
+        "W2"
+      ],
+      "theorems": [],
+      "decision_refs": [
+        "Q-19"
+      ],
+      "master_proof_targets": [
+        "PT-01",
+        "PT-02",
+        "PT-12"
+      ],
+      "master_scenarios": [
+        "SC-03"
+      ]
+    },
+    {
+      "id": "TY-07",
+      "title": "証拠の使用可能性と版",
+      "origin": "D",
+      "statement": "証拠の命題、code/contract/theory identity、環境前提と現在の適用可能性を追跡する。",
+      "acceptance_positive": "探索器を外しても有効な証明は再検査でき、前提変更は影響範囲を特定する。",
+      "acceptance_negative": "証明ツールの削除を命題の失効と同一視しない一方、旧証拠を新版へ流用しない。",
+      "master_acceptance_status": "本書の統合要件としては未判定。限定証拠の存在と別に評価する。",
+      "requirement_completed": false,
+      "owner_approved": false,
+      "F0_3_evidence_class": "hand-proof-or-executable-selected-profile",
+      "F0_3_result": "code/contract/member/instance/request/argsとpolicy版を照合し、過去の証拠と現在使用を分けた。",
+      "remaining": "任意理論版変更の証明移送は今後の義務。",
+      "next_work_units": [
+        "W1",
+        "W2"
+      ],
+      "theorems": [
+        "F3-07",
+        "F3-08",
+        "F3-14"
+      ],
+      "decision_refs": [],
+      "master_proof_targets": [
+        "PT-01",
+        "PT-02",
+        "PT-12"
+      ],
+      "master_scenarios": [
+        "SC-03",
+        "SC-14",
+        "SC-17"
+      ]
+    },
+    {
+      "id": "TY-08",
+      "title": "理論実行の隔離と決定可能部分",
+      "origin": "D",
+      "statement": "拡張の検査・探索にも資源制限を置き、決定可能範囲、提出証拠の検査、Unknownを区別する。",
+      "acceptance_positive": "停止しない探索器が他の正常な検査・実行を巻き込まない。",
+      "acceptance_negative": "任意理論の健全性を万能に自動判定できると要求しない。",
+      "master_acceptance_status": "本書の統合要件としては未判定。限定証拠の存在と別に評価する。",
+      "requirement_completed": false,
+      "owner_approved": false,
+      "F0_3_evidence_class": "explicit-open-design-obligation",
+      "F0_3_result": "checkerの責任とkernelからの分離を記述する。",
+      "remaining": "CPU/memory sandbox付き第三者checker実行は未実装。",
+      "next_work_units": [
+        "W7"
+      ],
+      "theorems": [],
+      "decision_refs": [
+        "Q-19"
+      ],
+      "master_proof_targets": [
+        "PT-01",
+        "PT-02",
+        "PT-12"
+      ],
+      "master_scenarios": [
+        "SC-03",
+        "SC-19"
+      ]
+    },
+    {
+      "id": "CT-01",
+      "title": "契約の語彙と監視範囲",
+      "origin": "U",
+      "statement": "入出力、pre/post、効果、失敗、権限、観測、寿命、資源を契約として分ける。runtime検査可能性も区別する。",
+      "acceptance_positive": "値条件は入口検査し、履歴や将来の条件は証明・monitor・仮定として明示する。",
+      "acceptance_negative": "assertだけで任意の履歴/未来性質が保証されるとしない。",
+      "master_acceptance_status": "本書の統合要件としては未判定。限定証拠の存在と別に評価する。",
+      "requirement_completed": false,
+      "owner_approved": false,
+      "F0_3_evidence_class": "hand-proof-or-executable-selected-profile",
+      "F0_3_result": "Partial/TotalBodyと全mutator不変条件を現在のコードに結びつけた。",
+      "remaining": "一般の契約論理・多owner rely/guarantee・契約変更合意は未完。",
+      "next_work_units": [
+        "W2",
+        "W3"
+      ],
+      "theorems": [
+        "F3-08",
+        "F3-09"
+      ],
+      "decision_refs": [],
+      "master_proof_targets": [
+        "PT-12",
+        "PT-13"
+      ],
+      "master_scenarios": [
+        "SC-03"
+      ]
+    },
+    {
+      "id": "CT-02",
+      "title": "証拠と実ソースの束縛",
+      "origin": "D",
+      "statement": "検証条件は受入側が実ソースと契約から導き、名前capture・別AST・仮定差込みを防ぐ。",
+      "acceptance_positive": "実source改変で証拠が拒否され、衛生的な束縛を維持する。",
+      "acceptance_negative": "solverのpassフラグや自作の前提集合を成功証拠にしない。",
+      "master_acceptance_status": "本書の統合要件としては未判定。限定証拠の存在と別に評価する。",
+      "requirement_completed": false,
+      "owner_approved": false,
+      "F0_3_evidence_class": "hand-proof-or-executable-selected-profile",
+      "F0_3_result": "Partial/TotalBodyと全mutator不変条件を現在のコードに結びつけた。",
+      "remaining": "一般の契約論理・多owner rely/guarantee・契約変更合意は未完。",
+      "next_work_units": [
+        "W2",
+        "W3"
+      ],
+      "theorems": [
+        "F3-08",
+        "F3-09"
+      ],
+      "decision_refs": [],
+      "master_proof_targets": [
+        "PT-12",
+        "PT-13"
+      ],
+      "master_scenarios": [
+        "SC-03"
+      ]
+    },
+    {
+      "id": "CT-03",
+      "title": "全mutatorと環境干渉の閉包",
+      "origin": "D",
+      "statement": "不変条件に作用する全writer、handler、patch、import、外界経路に保存義務を課す。",
+      "acceptance_positive": "後から追加した普通のcodeも同じ保護条件を守る。",
+      "acceptance_negative": "検証済み関数だけ拘束し、別操作から保護状態を書かせない。",
+      "master_acceptance_status": "本書の統合要件としては未判定。限定証拠の存在と別に評価する。",
+      "requirement_completed": false,
+      "owner_approved": false,
+      "F0_3_evidence_class": "hand-proof-or-executable-selected-profile",
+      "F0_3_result": "Partial/TotalBodyと全mutator不変条件を現在のコードに結びつけた。",
+      "remaining": "一般の契約論理・多owner rely/guarantee・契約変更合意は未完。",
+      "next_work_units": [
+        "W2",
+        "W3"
+      ],
+      "theorems": [
+        "F3-08",
+        "F3-09"
+      ],
+      "decision_refs": [],
+      "master_proof_targets": [
+        "PT-12",
+        "PT-13"
+      ],
+      "master_scenarios": [
+        "SC-03",
+        "SC-09"
+      ]
+    },
+    {
+      "id": "CT-04",
+      "title": "部分正当性と成功範囲",
+      "origin": "D",
+      "statement": "成功時保証、bodyの全域性、資源/権限/配送に関する可用性を別に定める。",
+      "acceptance_positive": "全整数で成功した操作の交換で、新しいguardによる失敗を検出する。",
+      "acceptance_negative": "全拒否でもpostが真という空虚な成功を実用性達成としない。",
+      "master_acceptance_status": "本書の統合要件としては未判定。限定証拠の存在と別に評価する。",
+      "requirement_completed": false,
+      "owner_approved": false,
+      "F0_3_evidence_class": "hand-proof-or-executable-selected-profile",
+      "F0_3_result": "Partial/TotalBodyと全mutator不変条件を現在のコードに結びつけた。",
+      "remaining": "一般の契約論理・多owner rely/guarantee・契約変更合意は未完。",
+      "next_work_units": [
+        "W2",
+        "W3"
+      ],
+      "theorems": [
+        "F3-08",
+        "F3-09"
+      ],
+      "decision_refs": [],
+      "master_proof_targets": [
+        "PT-12",
+        "PT-13"
+      ],
+      "master_scenarios": [
+        "SC-03"
+      ]
+    },
+    {
+      "id": "CT-05",
+      "title": "互換性と明示的な破壊的更新",
+      "origin": "U",
+      "statement": "表現・意味の互換、source互換、wire互換、成功範囲、情報公開条件を区別し、非互換なら別契約の更新手順にする。",
+      "acceptance_positive": "body交換と契約変更を別に受理し、利用側の版も検査する。",
+      "acceptance_negative": "同じ型署名だけで任意置換を認めず、永久後方互換も無断で要求しない。",
+      "master_acceptance_status": "本書の統合要件としては未判定。限定証拠の存在と別に評価する。",
+      "requirement_completed": false,
+      "owner_approved": false,
+      "F0_3_evidence_class": "hand-proof-or-executable-selected-profile",
+      "F0_3_result": "同schema/sig交換でTotalBodyをPartialへ暗黙弱化しない。",
+      "remaining": "表現全体のbehavioral subtyping、外部client同意付き契約変更は未完。",
+      "next_work_units": [
+        "W2",
+        "W3"
+      ],
+      "theorems": [
+        "F3-08",
+        "F3-09"
+      ],
+      "decision_refs": [
+        "Q-21"
+      ],
+      "master_proof_targets": [
+        "PT-12",
+        "PT-13"
+      ],
+      "master_scenarios": [
+        "SC-03",
+        "SC-12",
+        "SC-22"
+      ]
+    },
+    {
+      "id": "VF-01",
+      "title": "保証対象と前提の明示",
+      "origin": "U",
+      "statement": "定理ごとに言語断片、trace、構成、敵対者、host前提、結論を明記する。",
+      "acceptance_positive": "対象を変えたときに未適用となる証拠を自動または明示的に特定する。",
+      "acceptance_negative": "有限試験やT1/I3の番号を一般健全性の証明としない。",
+      "master_acceptance_status": "本書の統合要件としては未判定。限定証拠の存在と別に評価する。",
+      "requirement_completed": false,
+      "owner_approved": false,
+      "F0_3_evidence_class": "hand-proof-or-executable-selected-profile",
+      "F0_3_result": "24の対象限定手証明、独立rank checker、一般化と有限実行の区別を用意した。",
+      "remaining": "証明支援系の機械化、別の研究者のレビュー、実Rust対応は未完。",
+      "next_work_units": [
+        "W1",
+        "W4"
+      ],
+      "theorems": [
+        "F3-01",
+        "F3-02",
+        "F3-03",
+        "F3-23",
+        "F3-24"
+      ],
+      "decision_refs": [],
+      "master_proof_targets": [
+        "PT-01",
+        "PT-02",
+        "PT-17",
+        "PT-18"
+      ],
+      "master_scenarios": [
+        "SC-02",
+        "SC-23"
+      ]
+    },
+    {
+      "id": "VF-02",
+      "title": "相対完全性と表現力の別検査",
+      "origin": "U",
+      "statement": "宣言体系に対する検査・elaborationの完全性と、本来必要な使用例を表現できることを別に確認する。",
+      "acceptance_positive": "注釈付きの必要な正例が受理され、型導出との対応を示す。",
+      "acceptance_negative": "弱すぎる宣言体系への完全性を、目的全体の充足と呼ばない。",
+      "master_acceptance_status": "本書の統合要件としては未判定。限定証拠の存在と別に評価する。",
+      "requirement_completed": false,
+      "owner_approved": false,
+      "F0_3_evidence_class": "hand-proof-or-executable-selected-profile",
+      "F0_3_result": "正のsupportと有限policyに健全性・完全性、rankの独立checkerを与えた。",
+      "remaining": "一般Mir表現の十分性と型付け完全性にはF0.2以上の成果を主張しない。",
+      "next_work_units": [
+        "W1",
+        "W2"
+      ],
+      "theorems": [
+        "F3-01",
+        "F3-02",
+        "F3-03",
+        "F3-06"
+      ],
+      "decision_refs": [],
+      "master_proof_targets": [
+        "PT-01",
+        "PT-02",
+        "PT-17",
+        "PT-18"
+      ],
+      "master_scenarios": [
+        "SC-02",
+        "SC-15",
+        "SC-23"
+      ]
+    },
+    {
+      "id": "VF-03",
+      "title": "証明生成・検査・信頼の分離",
+      "origin": "D",
+      "statement": "未信頼探索、証明項検査、trusted実装、axiom、bounded checkを分類して記録する。",
+      "acceptance_positive": "証拠改変を小さなcheckerで拒否し、axiom依存と実行versionを出力する。",
+      "acceptance_negative": "独自checkerのテスト成功をchecker全体の機械証明に読み替えない。",
+      "master_acceptance_status": "本書の統合要件としては未判定。限定証拠の存在と別に評価する。",
+      "requirement_completed": false,
+      "owner_approved": false,
+      "F0_3_evidence_class": "hand-proof-or-executable-selected-profile",
+      "F0_3_result": "24の対象限定手証明、独立rank checker、一般化と有限実行の区別を用意した。",
+      "remaining": "証明支援系の機械化、別の研究者のレビュー、実Rust対応は未完。",
+      "next_work_units": [
+        "W1",
+        "W4"
+      ],
+      "theorems": [
+        "F3-01",
+        "F3-02",
+        "F3-03",
+        "F3-23",
+        "F3-24"
+      ],
+      "decision_refs": [],
+      "master_proof_targets": [
+        "PT-01",
+        "PT-02",
+        "PT-17",
+        "PT-18"
+      ],
+      "master_scenarios": [
+        "SC-03",
+        "SC-23"
+      ]
+    },
+    {
+      "id": "VF-04",
+      "title": "合成の保証を独立に示す",
+      "origin": "U",
+      "statement": "成分単独の定理に加え、接続する前提が保たれることを同じ実行構成について示す。",
+      "acceptance_positive": "退出・失効・patch・saveが重なる統合反例を処理する。",
+      "acceptance_negative": "未定義のSafePluginや完全なfootprintを仮定しただけで全体完成としない。",
+      "master_acceptance_status": "本書の統合要件としては未判定。限定証拠の存在と別に評価する。",
+      "requirement_completed": false,
+      "owner_approved": false,
+      "F0_3_evidence_class": "hand-proof-or-executable-selected-profile",
+      "F0_3_result": "24の対象限定手証明、独立rank checker、一般化と有限実行の区別を用意した。",
+      "remaining": "証明支援系の機械化、別の研究者のレビュー、実Rust対応は未完。",
+      "next_work_units": [
+        "W1",
+        "W4"
+      ],
+      "theorems": [
+        "F3-01",
+        "F3-02",
+        "F3-03",
+        "F3-23",
+        "F3-24"
+      ],
+      "decision_refs": [],
+      "master_proof_targets": [
+        "PT-01",
+        "PT-02",
+        "PT-17",
+        "PT-18"
+      ],
+      "master_scenarios": [
+        "SC-13",
+        "SC-23"
+      ]
+    },
+    {
+      "id": "VF-05",
+      "title": "実装への意味保存",
+      "origin": "U",
+      "statement": "parser/checker/VC/projector/runtime/codec/hostの保証連鎖と未証明TCBを明示する。",
+      "acceptance_positive": "abstract/model/実backendの関係を検証し、対応の切れ目を示す。",
+      "acceptance_negative": "モデルが正しいことから実Rust/QUIC/FSの正しさを推論しない。",
+      "master_acceptance_status": "本書の統合要件としては未判定。限定証拠の存在と別に評価する。",
+      "requirement_completed": false,
+      "owner_approved": false,
+      "F0_3_evidence_class": "explicit-open-design-obligation",
+      "F0_3_result": "step対応で有限traceを移す条件付き命題を明示した。",
+      "remaining": "Rust/QUICがその前提を満たす証明はない。",
+      "next_work_units": [
+        "W4"
+      ],
+      "theorems": [
+        "F3-24"
+      ],
+      "decision_refs": [],
+      "master_proof_targets": [
+        "PT-01",
+        "PT-02",
+        "PT-17",
+        "PT-18"
+      ],
+      "master_scenarios": [
+        "SC-23"
+      ]
+    },
+    {
+      "id": "VF-06",
+      "title": "反例と改変検査",
+      "origin": "D",
+      "statement": "正例・反例・検証条件を対象ごとに対応づけ、想定した不具合の注入で検査が失敗することを確認する。",
+      "acceptance_positive": "guard除去や世代省略が具体的な反例になる。",
+      "acceptance_negative": "harnessが期待ラベルを出すだけでcoverageを得たと扱わない。",
+      "master_acceptance_status": "本書の統合要件としては未判定。限定証拠の存在と別に評価する。",
+      "requirement_completed": false,
+      "owner_approved": false,
+      "F0_3_evidence_class": "hand-proof-or-executable-selected-profile",
+      "F0_3_result": "実際の複数の研究モデル不具合を修正し、6つの意図的弱化で反例を再現した。",
+      "remaining": "既存Mirコードの不具合数や第三者レビュー成果には数えない。",
+      "next_work_units": [
+        "W1",
+        "W4"
+      ],
+      "theorems": [],
+      "decision_refs": [],
+      "master_proof_targets": [
+        "PT-01",
+        "PT-02",
+        "PT-17",
+        "PT-18"
+      ],
+      "master_scenarios": [
+        "SC-23"
+      ]
+    },
+    {
+      "id": "VF-07",
+      "title": "証明と仕様意図の独立レビュー",
+      "origin": "D",
+      "statement": "機械検査だけでなく、命題が必要な意味を述べるか、独立した観点からレビューする。",
+      "acceptance_positive": "反例、手証明、実装対応、目的への適合を区別して受理する。",
+      "acceptance_negative": "同じ作者のモデル/実装/期待値の一致だけで十分としない。",
+      "master_acceptance_status": "本書の統合要件としては未判定。限定証拠の存在と別に評価する。",
+      "requirement_completed": false,
+      "owner_approved": false,
+      "F0_3_evidence_class": "explicit-open-design-obligation",
+      "F0_3_result": "独立レビューを受入れ条件へ置いた。",
+      "remaining": "今回の手証明と実装を別の研究者がレビューした事実はない。",
+      "next_work_units": [
+        "W1"
+      ],
+      "theorems": [],
+      "decision_refs": [
+        "Q-22"
+      ],
+      "master_proof_targets": [
+        "PT-01",
+        "PT-02",
+        "PT-17",
+        "PT-18"
+      ],
+      "master_scenarios": [
+        "SC-03",
+        "SC-23"
+      ]
+    },
+    {
+      "id": "EV-01",
+      "title": "静的合成と動的合成",
+      "origin": "U",
+      "statement": "起動時と稼働中のmodule instance追加を同じ契約原理で扱い、状態・履歴・in-flightによる差を定義する。",
+      "acceptance_positive": "A/B/Cの構成へA/Cに展開される別の構成を追加する。",
+      "acceptance_negative": "ログイン相当の追加を、式の定数変更だけで達成済みとしない。",
+      "master_acceptance_status": "本書の統合要件としては未判定。限定証拠の存在と別に評価する。",
+      "requirement_completed": false,
+      "owner_approved": false,
+      "F0_3_evidence_class": "hand-proof-or-executable-selected-profile",
+      "F0_3_result": "動的module/source追加・退役・reparentと現在認可・pending使用を同じモデルに置いた。",
+      "remaining": "実多owner activation、状態schema migration、一般patch言語は未完。",
+      "next_work_units": [
+        "W3",
+        "W4",
+        "W5"
+      ],
+      "theorems": [
+        "F3-10",
+        "F3-15",
+        "F3-16",
+        "F3-17",
+        "F3-18",
+        "F3-23"
+      ],
+      "decision_refs": [],
+      "master_proof_targets": [
+        "PT-04",
+        "PT-11",
+        "PT-13",
+        "PT-14"
+      ],
+      "master_scenarios": [
+        "SC-11",
+        "SC-24"
+      ]
+    },
+    {
+      "id": "EV-02",
+      "title": "patch依存DAGのライフサイクル",
+      "origin": "U",
+      "statement": "提供/要求契約、instance、依存先の版、推移的撤去、再検証をpatch graphで扱う。",
+      "acceptance_positive": "依存先の更新で影響する下流だけを再検査する。",
+      "acceptance_negative": "一つのpatchの2PC成功を、patch間DAGの完成と数えない。",
+      "master_acceptance_status": "本書の統合要件としては未判定。限定証拠の存在と別に評価する。",
+      "requirement_completed": false,
+      "owner_approved": false,
+      "F0_3_evidence_class": "hand-proof-or-executable-selected-profile",
+      "F0_3_result": "module-kind DAGと動的supportを参照に用いる。",
+      "remaining": "package版の解決、任意module handle、分散patch依存の全lifecycleは未完。",
+      "next_work_units": [
+        "W3"
+      ],
+      "theorems": [
+        "F3-10",
+        "F3-17"
+      ],
+      "decision_refs": [],
+      "master_proof_targets": [
+        "PT-04",
+        "PT-11",
+        "PT-13",
+        "PT-14"
+      ],
+      "master_scenarios": [
+        "SC-11"
+      ]
+    },
+    {
+      "id": "EV-03",
+      "title": "変更種類の区別",
+      "origin": "U",
+      "statement": "追加、本体交換、状態/schema移行、reparent、撤去、再配置、契約・理論・policy変更を区別する。",
+      "acceptance_positive": "αが対応する各種類に正例・拒否条件を与える。",
+      "acceptance_negative": "すべてをhot reloadという一語で同じ安全条件へまとめない。",
+      "master_acceptance_status": "本書の統合要件としては未判定。限定証拠の存在と別に評価する。",
+      "requirement_completed": false,
+      "owner_approved": false,
+      "F0_3_evidence_class": "hand-proof-or-executable-selected-profile",
+      "F0_3_result": "宣言とsource追加・退役・reparent・同schemaコード交換を実装した。",
+      "remaining": "一般schema migrationはF0.2の別モデルから未統合。",
+      "next_work_units": [
+        "W3",
+        "W5"
+      ],
+      "theorems": [
+        "F3-09",
+        "F3-10",
+        "F3-16",
+        "F3-17"
+      ],
+      "decision_refs": [
+        "Q-23"
+      ],
+      "master_proof_targets": [
+        "PT-04",
+        "PT-11",
+        "PT-13",
+        "PT-14"
+      ],
+      "master_scenarios": [
+        "SC-11"
+      ]
+    },
+    {
+      "id": "EV-04",
+      "title": "検査・認可・activation",
+      "origin": "U",
+      "statement": "候補検査、必要権限、互換性、適用点を分け、拒否は許された監査情報以外を変えない。",
+      "acceptance_positive": "有効な更新は通り、拒否候補は既存状態・権限を保持する。",
+      "acceptance_negative": "evalや生書換えによる別経路を作らない。",
+      "master_acceptance_status": "本書の統合要件としては未判定。限定証拠の存在と別に評価する。",
+      "requirement_completed": false,
+      "owner_approved": false,
+      "F0_3_evidence_class": "hand-proof-or-executable-selected-profile",
+      "F0_3_result": "動的module/source追加・退役・reparentと現在認可・pending使用を同じモデルに置いた。",
+      "remaining": "実多owner activation、状態schema migration、一般patch言語は未完。",
+      "next_work_units": [
+        "W3",
+        "W4",
+        "W5"
+      ],
+      "theorems": [
+        "F3-10",
+        "F3-15",
+        "F3-16",
+        "F3-17",
+        "F3-18",
+        "F3-23"
+      ],
+      "decision_refs": [],
+      "master_proof_targets": [
+        "PT-04",
+        "PT-11",
+        "PT-13",
+        "PT-14"
+      ],
+      "master_scenarios": [
+        "SC-12"
+      ]
+    },
+    {
+      "id": "EV-05",
+      "title": "依存stampと影響範囲",
+      "origin": "D",
+      "statement": "値だけでなく世代・契約・権限・構造の否定情報まで含む検査依存を追跡する。",
+      "acceptance_positive": "独立範囲の更新は両立し、二patchでのみ生じる循環を検出する。",
+      "acceptance_negative": "変更端点が別であるだけでpatch独立性を結論しない。",
+      "master_acceptance_status": "本書の統合要件としては未判定。限定証拠の存在と別に評価する。",
+      "requirement_completed": false,
+      "owner_approved": false,
+      "F0_3_evidence_class": "hand-proof-or-executable-selected-profile",
+      "F0_3_result": "動的module/source追加・退役・reparentと現在認可・pending使用を同じモデルに置いた。",
+      "remaining": "実多owner activation、状態schema migration、一般patch言語は未完。",
+      "next_work_units": [
+        "W3",
+        "W4",
+        "W5"
+      ],
+      "theorems": [
+        "F3-10",
+        "F3-15",
+        "F3-16",
+        "F3-17",
+        "F3-18",
+        "F3-23"
+      ],
+      "decision_refs": [
+        "Q-24"
+      ],
+      "master_proof_targets": [
+        "PT-04",
+        "PT-11",
+        "PT-13",
+        "PT-14"
+      ],
+      "master_scenarios": [
+        "SC-12",
+        "SC-13"
+      ]
+    },
+    {
+      "id": "EV-06",
+      "title": "局所停止と未完了処理",
+      "origin": "D",
+      "statement": "必要な範囲だけを停止し、old code/continuation/requestの扱いとfence所有を定義する。",
+      "acceptance_positive": "影響外の計算が継続し、他patchのAbortは自分のfenceだけを解放する。",
+      "acceptance_negative": "結果不明の要求を未実行として強制的に捨てない。",
+      "master_acceptance_status": "本書の統合要件としては未判定。限定証拠の存在と別に評価する。",
+      "requirement_completed": false,
+      "owner_approved": false,
+      "F0_3_evidence_class": "baseline-or-design-connection",
+      "F0_3_result": "同schema code交換は選択したquiescent条件で行う。reparentはtracked current-use。",
+      "remaining": "分散fenceと処理中継続のgeneral migrationは未実装。",
+      "next_work_units": [
+        "W3",
+        "W4"
+      ],
+      "theorems": [],
+      "decision_refs": [
+        "Q-12",
+        "Q-23"
+      ],
+      "master_proof_targets": [
+        "PT-04",
+        "PT-11",
+        "PT-13",
+        "PT-14"
+      ],
+      "master_scenarios": [
+        "SC-12"
+      ]
+    },
+    {
+      "id": "EV-07",
+      "title": "分散activationと障害",
+      "origin": "U",
+      "statement": "確定・適用・観測・版付き参照の更新を区別し、障害時の停止・復旧条件を契約化する。",
+      "acceptance_positive": "一部適用とcrash/recoverでも旧状態の不正公開が起きない。",
+      "acceptance_negative": "応答timeoutを合意済みAbortと同一視しない。",
+      "master_acceptance_status": "本書の統合要件としては未判定。限定証拠の存在と別に評価する。",
+      "requirement_completed": false,
+      "owner_approved": false,
+      "F0_3_evidence_class": "baseline-or-design-connection",
+      "F0_3_result": "F0.2の2PCモデルは別資産として保持する。",
+      "remaining": "F0.3 strict-currentnessを2PC/保存へ統合した保証はない。",
+      "next_work_units": [
+        "W4",
+        "W5"
+      ],
+      "theorems": [],
+      "decision_refs": [
+        "Q-13",
+        "Q-18"
+      ],
+      "master_proof_targets": [
+        "PT-04",
+        "PT-11",
+        "PT-13",
+        "PT-14"
+      ],
+      "master_scenarios": [
+        "SC-12",
+        "SC-14"
+      ]
+    },
+    {
+      "id": "EV-08",
+      "title": "保証・理論・policyの更新",
+      "origin": "U",
+      "statement": "依存する証拠と現在の適用条件を更新範囲へ含め、保存する保証と変更する保証を区別する。",
+      "acceptance_positive": "新しい理論/契約で再検査しても、無関係な証拠を不必要に失効させない。",
+      "acceptance_negative": "古い証明を新版へ使う、数学的証明をgrantとして再利用する経路を拒否する。",
+      "master_acceptance_status": "本書の統合要件としては未判定。限定証拠の存在と別に評価する。",
+      "requirement_completed": false,
+      "owner_approved": false,
+      "F0_3_evidence_class": "baseline-or-design-connection",
+      "F0_3_result": "無断のTotalBody弱化を拒否する。",
+      "remaining": "正当な契約変更、旧version保持、利用者合意は新しい義務。",
+      "next_work_units": [
+        "W3",
+        "W5"
+      ],
+      "theorems": [
+        "F3-08"
+      ],
+      "decision_refs": [],
+      "master_proof_targets": [
+        "PT-04",
+        "PT-11",
+        "PT-13",
+        "PT-14"
+      ],
+      "master_scenarios": [
+        "SC-04"
+      ]
+    },
+    {
+      "id": "EV-09",
+      "title": "撤去・廃止・回収と継続性",
+      "origin": "U",
+      "statement": "無限拡張を追加だけと解釈せず、依存・未完了・履歴を保って廃止・回収できる条件を作る。",
+      "acceptance_positive": "正当な下流移行後に旧版を回収する。",
+      "acceptance_negative": "永遠に旧版を保持することを無条件の解とせず、早すぎる削除も拒否する。",
+      "master_acceptance_status": "本書の統合要件としては未判定。限定証拠の存在と別に評価する。",
+      "requirement_completed": false,
+      "owner_approved": false,
+      "F0_3_evidence_class": "explicit-open-design-obligation",
+      "F0_3_result": "退役recordは保持する。",
+      "remaining": "履歴/claim/tombstoneを安全に忘れる長期GCは未実装。",
+      "next_work_units": [
+        "W5",
+        "W8"
+      ],
+      "theorems": [],
+      "decision_refs": [
+        "Q-21",
+        "Q-25"
+      ],
+      "master_proof_targets": [
+        "PT-04",
+        "PT-11",
+        "PT-13",
+        "PT-14"
+      ],
+      "master_scenarios": [
+        "SC-11",
+        "SC-21"
+      ]
+    },
+    {
+      "id": "EV-10",
+      "title": "任意有限回の進化",
+      "origin": "D",
+      "statement": "対応する実行・更新・復旧が同じ基礎不変条件を保つことから、任意有限prefixへの保存を示す。",
+      "acceptance_positive": "新しい構成を繰り返し追加・変更しても意味の定義を継ぎ足さない。",
+      "acceptance_negative": "finite回安全を、全未来の更新が必ず受理されることや無限資源と同一視しない。",
+      "master_acceptance_status": "本書の統合要件としては未判定。限定証拠の存在と別に評価する。",
+      "requirement_completed": false,
+      "owner_approved": false,
+      "F0_3_evidence_class": "hand-proof-or-executable-selected-profile",
+      "F0_3_result": "動的module/source追加・退役・reparentと現在認可・pending使用を同じモデルに置いた。",
+      "remaining": "実多owner activation、状態schema migration、一般patch言語は未完。",
+      "next_work_units": [
+        "W3",
+        "W4",
+        "W5"
+      ],
+      "theorems": [
+        "F3-10",
+        "F3-15",
+        "F3-16",
+        "F3-17",
+        "F3-18",
+        "F3-23"
+      ],
+      "decision_refs": [],
+      "master_proof_targets": [
+        "PT-04",
+        "PT-11",
+        "PT-13",
+        "PT-14"
+      ],
+      "master_scenarios": [
+        "SC-12"
+      ]
+    },
+    {
+      "id": "SV-01",
+      "title": "cutとchannel state",
+      "origin": "U",
+      "statement": "受信を含むcutは対応送信を含み、未受信の送信をchannel状態として保持する。",
+      "acceptance_positive": "完全な依存入力について整合するcheckpoint組を選ぶ。",
+      "acceptance_negative": "receiveだけ含むcutをchannel stateで救済したとしない。",
+      "master_acceptance_status": "本書の統合要件としては未判定。限定証拠の存在と別に評価する。",
+      "requirement_completed": false,
+      "owner_approved": false,
+      "F0_3_evidence_class": "baseline-or-design-connection",
+      "F0_3_result": "F0.1の有限consistent-cut/Z-pathアルゴリズムを保持する。",
+      "remaining": "分散全成分から入力を完全に抽出する証明は未統合。",
+      "next_work_units": [
+        "W5"
+      ],
+      "theorems": [],
+      "decision_refs": [],
+      "master_proof_targets": [
+        "PT-14",
+        "PT-16"
+      ],
+      "master_scenarios": [
+        "SC-14",
+        "SC-15"
+      ]
+    },
+    {
+      "id": "SV-02",
+      "title": "状態・決定・継続の永続化",
+      "origin": "D",
+      "statement": "状態差分、要求決定、消費、継続、コード版をcrash境界で一貫して保持する。",
+      "acceptance_positive": "記録後応答前crashでも二度の作用/再開を起こさない。",
+      "acceptance_negative": "実FSの保証をモデルの原子的writeから推論しない。",
+      "master_acceptance_status": "本書の統合要件としては未判定。限定証拠の存在と別に評価する。",
+      "requirement_completed": false,
+      "owner_approved": false,
+      "F0_3_evidence_class": "hand-proof-or-executable-selected-profile",
+      "F0_3_result": "全Data manifestと完全journal、信頼した現在headを使うsame-instance復元を置いた。",
+      "remaining": "実storage・未知成分・外部効果状態・distributed durabilityは対象外。",
+      "next_work_units": [
+        "W5"
+      ],
+      "theorems": [
+        "F3-19"
+      ],
+      "decision_refs": [],
+      "master_proof_targets": [
+        "PT-14",
+        "PT-16"
+      ],
+      "master_scenarios": [
+        "SC-14"
+      ]
+    },
+    {
+      "id": "SV-03",
+      "title": "全componentのcheckpoint参加",
+      "origin": "D",
+      "statement": "関係・権限・証拠・provider・patch準備・ingress等を含むcomponent台帳と保存契約を持つ。",
+      "acceptance_positive": "未対応componentがある場合、完全saveを拒否するか制限を明示する。",
+      "acceptance_negative": "actorだけの保存を全世界の保存と呼ばない。",
+      "master_acceptance_status": "本書の統合要件としては未判定。限定証拠の存在と別に評価する。",
+      "requirement_completed": false,
+      "owner_approved": false,
+      "F0_3_evidence_class": "hand-proof-or-executable-selected-profile",
+      "F0_3_result": "全Data manifestと完全journal、信頼した現在headを使うsame-instance復元を置いた。",
+      "remaining": "実storage・未知成分・外部効果状態・distributed durabilityは対象外。",
+      "next_work_units": [
+        "W5"
+      ],
+      "theorems": [
+        "F3-19"
+      ],
+      "decision_refs": [],
+      "master_proof_targets": [
+        "PT-14",
+        "PT-16"
+      ],
+      "master_scenarios": [
+        "SC-14",
+        "SC-24"
+      ]
+    },
+    {
+      "id": "SV-04",
+      "title": "現在世界への復帰とfresh import",
+      "origin": "U",
+      "statement": "crash recovery、現sessionへのload、新instanceへのimport、隔離replayを別操作として定義する。",
+      "acceptance_positive": "fresh importで新たに認可し、現world復帰では現在の失効を保持する。",
+      "acceptance_negative": "古いsnapshotだけから現在権限を再構成したとしない。",
+      "master_acceptance_status": "本書の統合要件としては未判定。限定証拠の存在と別に評価する。",
+      "requirement_completed": false,
+      "owner_approved": false,
+      "F0_3_evidence_class": "hand-proof-or-executable-selected-profile",
+      "F0_3_result": "same-instance復元を現在の独立headに束縛する。F0.2のfresh importとは区別した。",
+      "remaining": "そのheadが得られないoffline復旧を同じ保証にしない。",
+      "next_work_units": [
+        "W5"
+      ],
+      "theorems": [
+        "F3-19"
+      ],
+      "decision_refs": [
+        "Q-20"
+      ],
+      "master_proof_targets": [
+        "PT-14",
+        "PT-16"
+      ],
+      "master_scenarios": [
+        "SC-14",
+        "SC-18"
+      ]
+    },
+    {
+      "id": "SV-05",
+      "title": "Z-pathと依存収集",
+      "origin": "U",
+      "statement": "Z-cycleの問題を因果DAGの循環と混同せず、判定入力に必要な全依存の収集範囲を保証する。",
+      "acceptance_positive": "有限完全入力では判定の健全性・完全性を示し、未収集依存はUnknownとする。",
+      "acceptance_negative": "checkpointが未保存なだけの拒否をすべてZ-cycleと呼ばない。",
+      "master_acceptance_status": "本書の統合要件としては未判定。限定証拠の存在と別に評価する。",
+      "requirement_completed": false,
+      "owner_approved": false,
+      "F0_3_evidence_class": "baseline-or-design-connection",
+      "F0_3_result": "F0.1のcheckpoint completion/Z-pathの手証明とテストを再実行した。",
+      "remaining": "F0.3から分散checkpoint抽出する一般対応は未実装。",
+      "next_work_units": [
+        "W5"
+      ],
+      "theorems": [],
+      "decision_refs": [],
+      "master_proof_targets": [
+        "PT-14",
+        "PT-16"
+      ],
+      "master_scenarios": [
+        "SC-14",
+        "SC-15"
+      ]
+    },
+    {
+      "id": "SV-06",
+      "title": "retention・忘却・圧縮",
+      "origin": "D",
+      "statement": "台帳、tombstone、証拠、結果cacheの回収条件と、旧要求を再実行しない根拠を定義する。",
+      "acceptance_positive": "durableなfloorや同等の根拠を残し、古い結果を捨てても安全性を維持する。",
+      "acceptance_negative": "ackの真正性・現在性を確認せずforget権限を与えない。",
+      "master_acceptance_status": "本書の統合要件としては未判定。限定証拠の存在と別に評価する。",
+      "requirement_completed": false,
+      "owner_approved": false,
+      "F0_3_evidence_class": "explicit-open-design-obligation",
+      "F0_3_result": "完全image journalとrecordを全保持するモデル。",
+      "remaining": "安全な圧縮・回収・stale reject継続の方式は未完成。",
+      "next_work_units": [
+        "W5",
+        "W8"
+      ],
+      "theorems": [],
+      "decision_refs": [
+        "Q-25"
+      ],
+      "master_proof_targets": [
+        "PT-14",
+        "PT-16"
+      ],
+      "master_scenarios": [
+        "SC-14",
+        "SC-21"
+      ]
+    },
+    {
+      "id": "SV-07",
+      "title": "archiveの真正性と検証可能な復元",
+      "origin": "D",
+      "statement": "データが型に合うこと、元のarchiveであること、現在へ適用してよいことを区別する。",
+      "acceptance_positive": "改変archiveを拒否する経路と、正当に新規作成されたimportの経路を区別する。",
+      "acceptance_negative": "hashや型検査だけで発行元・履歴の真正性を証明したとしない。",
+      "master_acceptance_status": "本書の統合要件としては未判定。限定証拠の存在と別に評価する。",
+      "requirement_completed": false,
+      "owner_approved": false,
+      "F0_3_evidence_class": "hand-proof-or-executable-selected-profile",
+      "F0_3_result": "現在headまでの認可/失効/要求/準備/関係状態を一緒に復元する。",
+      "remaining": "外部identity/鍵/委譲の復元はtrusted-boundary仮定。",
+      "next_work_units": [
+        "W5"
+      ],
+      "theorems": [
+        "F3-07",
+        "F3-19"
+      ],
+      "decision_refs": [
+        "Q-20"
+      ],
+      "master_proof_targets": [
+        "PT-14",
+        "PT-16"
+      ],
+      "master_scenarios": [
+        "SC-14"
+      ]
+    },
+    {
+      "id": "OB-01",
+      "title": "観測の忠実性",
+      "origin": "U",
+      "statement": "source→Core→artifact→request→実行→結果→表示の対応を保持する。観測された因果だけを示す。",
+      "acceptance_positive": "成功・失敗・保留が元の操作と実際の記録に対応する。",
+      "acceptance_negative": "期待JSONや便利な全順序から出来事/因果を捏造しない。",
+      "master_acceptance_status": "本書の統合要件としては未判定。限定証拠の存在と別に評価する。",
+      "requirement_completed": false,
+      "owner_approved": false,
+      "F0_3_evidence_class": "hand-proof-or-executable-selected-profile",
+      "F0_3_result": "意味記録、観測消去、固定labelの二実行条件、filter後の保持を接続した。",
+      "remaining": "任意動的IFC・物理timing・資源隔離・能動debugは未証明。",
+      "next_work_units": [
+        "W6"
+      ],
+      "theorems": [
+        "F3-05",
+        "F3-20",
+        "F3-21",
+        "F3-22"
+      ],
+      "decision_refs": [],
+      "master_proof_targets": [
+        "PT-15",
+        "PT-18"
+      ],
+      "master_scenarios": [
+        "SC-16",
+        "SC-20",
+        "SC-24"
+      ]
+    },
+    {
+      "id": "OB-02",
+      "title": "観測による意味の非干渉",
+      "origin": "U",
+      "statement": "受動観測の有無で対象の意味が変わらないことを、観測を除いたtraceと環境条件を定義して示す。",
+      "acceptance_positive": "観測ON/OFFで指定した同値関係が保たれる。",
+      "acceptance_negative": "read-onlyなAPIだけで非干渉を証明済みとしない。",
+      "master_acceptance_status": "本書の統合要件としては未判定。限定証拠の存在と別に評価する。",
+      "requirement_completed": false,
+      "owner_approved": false,
+      "F0_3_evidence_class": "hand-proof-or-executable-selected-profile",
+      "F0_3_result": "意味記録、観測消去、固定labelの二実行条件、filter後の保持を接続した。",
+      "remaining": "任意動的IFC・物理timing・資源隔離・能動debugは未証明。",
+      "next_work_units": [
+        "W6"
+      ],
+      "theorems": [
+        "F3-05",
+        "F3-20",
+        "F3-21",
+        "F3-22"
+      ],
+      "decision_refs": [
+        "Q-26"
+      ],
+      "master_proof_targets": [
+        "PT-15",
+        "PT-18"
+      ],
+      "master_scenarios": [
+        "SC-16",
+        "SC-24"
+      ]
+    },
+    {
+      "id": "OB-03",
+      "title": "情報流の非干渉",
+      "origin": "U",
+      "statement": "値・存在・理由・件数・依存参照・時刻のうち何を保護するかを明示し、二実行の関係として扱う。",
+      "acceptance_positive": "secret変更で許されないlow観測差が出ないことを対象profileで示す。",
+      "acceptance_negative": "単一trace refinementやpublic-only試験からprivate全体系へ一般化しない。",
+      "master_acceptance_status": "本書の統合要件としては未判定。限定証拠の存在と別に評価する。",
+      "requirement_completed": false,
+      "owner_approved": false,
+      "F0_3_evidence_class": "hand-proof-or-executable-selected-profile",
+      "F0_3_result": "固定label・同じlow制御/scheduleの限定profileで二実行非干渉を記述・試験した。",
+      "remaining": "一般の動的IFC、time、allocation、secret-dependent policy変化は未証明。",
+      "next_work_units": [
+        "W6"
+      ],
+      "theorems": [
+        "F3-05",
+        "F3-21",
+        "F3-22"
+      ],
+      "decision_refs": [
+        "Q-26"
+      ],
+      "master_proof_targets": [
+        "PT-15",
+        "PT-18"
+      ],
+      "master_scenarios": [
+        "SC-17",
+        "SC-24"
+      ]
+    },
+    {
+      "id": "OB-04",
+      "title": "観測者の現在権限",
+      "origin": "U",
+      "statement": "observer主体、label、redaction、retention、失効、rateを実行の権限と別に検査する。",
+      "acceptance_positive": "実行権限のある主体が、必ずしも全debug情報を読めないことを確認する。",
+      "acceptance_negative": "診断理由やsource pathを経由して資格情報・private値を漏らさない。",
+      "master_acceptance_status": "本書の統合要件としては未判定。限定証拠の存在と別に評価する。",
+      "requirement_completed": false,
+      "owner_approved": false,
+      "F0_3_evidence_class": "hand-proof-or-executable-selected-profile",
+      "F0_3_result": "意味記録、観測消去、固定labelの二実行条件、filter後の保持を接続した。",
+      "remaining": "任意動的IFC・物理timing・資源隔離・能動debugは未証明。",
+      "next_work_units": [
+        "W6"
+      ],
+      "theorems": [
+        "F3-05",
+        "F3-20",
+        "F3-21",
+        "F3-22"
+      ],
+      "decision_refs": [],
+      "master_proof_targets": [
+        "PT-15",
+        "PT-18"
+      ],
+      "master_scenarios": [
+        "SC-17"
+      ]
+    },
+    {
+      "id": "OB-05",
+      "title": "資源と時間への観測干渉",
+      "origin": "D",
+      "statement": "観測負荷の予算、drop/要約、backpressureと進行性の契約を定義する。物理的ゼロ負荷とは言わない。",
+      "acceptance_positive": "遅いviewerや大量観測要求でも、指定した対象側の資源境界を守る。",
+      "acceptance_negative": "無制限loggingで停止した対象を非干渉と呼ばない。",
+      "master_acceptance_status": "本書の統合要件としては未判定。限定証拠の存在と別に評価する。",
+      "requirement_completed": false,
+      "owner_approved": false,
+      "F0_3_evidence_class": "hand-proof-or-executable-selected-profile",
+      "F0_3_result": "許可filter後に有限bufferへ保持し、high trafficによるlow行退去を防いだ。",
+      "remaining": "全履歴・CPU時間を含む実資源隔離は未実装。",
+      "next_work_units": [
+        "W6"
+      ],
+      "theorems": [
+        "F3-22"
+      ],
+      "decision_refs": [
+        "Q-26"
+      ],
+      "master_proof_targets": [
+        "PT-15",
+        "PT-18"
+      ],
+      "master_scenarios": [
+        "SC-16"
+      ]
+    },
+    {
+      "id": "OB-06",
+      "title": "不確定・欠測・非公開の表示",
+      "origin": "D",
+      "statement": "未発生、未到達、不明、記録欠落、非公開、推定を区別する。",
+      "acceptance_positive": "lost replyをremote-unknownとし、後から確定記録へ正しく接続する。",
+      "acceptance_negative": "表示されないことを事象がない証拠としない。",
+      "master_acceptance_status": "本書の統合要件としては未判定。限定証拠の存在と別に評価する。",
+      "requirement_completed": false,
+      "owner_approved": false,
+      "F0_3_evidence_class": "hand-proof-or-executable-selected-profile",
+      "F0_3_result": "意味記録、観測消去、固定labelの二実行条件、filter後の保持を接続した。",
+      "remaining": "任意動的IFC・物理timing・資源隔離・能動debugは未証明。",
+      "next_work_units": [
+        "W6"
+      ],
+      "theorems": [
+        "F3-05",
+        "F3-20",
+        "F3-21",
+        "F3-22"
+      ],
+      "decision_refs": [],
+      "master_proof_targets": [
+        "PT-15",
+        "PT-18"
+      ],
+      "master_scenarios": [
+        "SC-16"
+      ]
+    },
+    {
+      "id": "OB-07",
+      "title": "デバッグ制御と受動観測",
+      "origin": "U",
+      "statement": "breakpoint、step、状態変更、巻戻しは別の認可された制御効果とし、停止範囲と影響を示す。",
+      "acceptance_positive": "一部を停止した際に他locusの進行・timeoutへの影響を説明する。",
+      "acceptance_negative": "能動操作を観測だから無害と扱わない。",
+      "master_acceptance_status": "本書の統合要件としては未判定。限定証拠の存在と別に評価する。",
+      "requirement_completed": false,
+      "owner_approved": false,
+      "F0_3_evidence_class": "explicit-open-design-obligation",
+      "F0_3_result": "active debugをobserveから分離する設計だけを示す。",
+      "remaining": "breakpoint、state edit、rollbackの認可と実装は未搭載。",
+      "next_work_units": [
+        "W6",
+        "W7"
+      ],
+      "theorems": [],
+      "decision_refs": [
+        "Q-27"
+      ],
+      "master_proof_targets": [
+        "PT-15",
+        "PT-18"
+      ],
+      "master_scenarios": [
+        "SC-18"
+      ]
+    },
+    {
+      "id": "OB-08",
+      "title": "局所理論と多層認証の説明",
+      "origin": "D",
+      "statement": "何をどの理論で、どの前提・policyで受理したかを、人間向けに段階表示する。",
+      "acceptance_positive": "拒否の原因をsource・契約・理論・issuer・世代へたどる。",
+      "acceptance_negative": "証明済み/許可済み/実行済みを一つの緑表示に統合しない。",
+      "master_acceptance_status": "本書の統合要件としては未判定。限定証拠の存在と別に評価する。",
+      "requirement_completed": false,
+      "owner_approved": false,
+      "F0_3_evidence_class": "hand-proof-or-executable-selected-profile",
+      "F0_3_result": "rank witness、policy branch、source siteを説明資料として保持する。",
+      "remaining": "公開するときの完全なdiagnostic prose/schemaは別仕事。",
+      "next_work_units": [
+        "W6"
+      ],
+      "theorems": [
+        "F3-03",
+        "F3-06",
+        "F3-07"
+      ],
+      "decision_refs": [],
+      "master_proof_targets": [
+        "PT-15",
+        "PT-18"
+      ],
+      "master_scenarios": [
+        "SC-04",
+        "SC-17"
+      ]
+    },
+    {
+      "id": "HS-01",
+      "title": "package受入れと実行許可",
+      "origin": "U",
+      "statement": "source/artifact/proofの一致、要求資源、publisher情報、実行許可を別に検査してinstanceを起動する。",
+      "acceptance_positive": "署名ありでも未許可の効果は実行できず、適合packageだけ起動する。",
+      "acceptance_negative": "package署名を任意FFIや全データへの許可にしない。",
+      "master_acceptance_status": "本書の統合要件としては未判定。限定証拠の存在と別に評価する。",
+      "requirement_completed": false,
+      "owner_approved": false,
+      "F0_3_evidence_class": "explicit-open-design-obligation",
+      "F0_3_result": "Mir意味・View・provider・sandboxを区別する境界を計画へ具体化した。",
+      "remaining": "Browser/headless参加製品、renderer、safe package実装はない。",
+      "next_work_units": [
+        "W7"
+      ],
+      "theorems": [],
+      "decision_refs": [],
+      "master_proof_targets": [
+        "PT-09",
+        "PT-15",
+        "PT-18"
+      ],
+      "master_scenarios": [
+        "SC-19",
+        "SC-20"
+      ]
+    },
+    {
+      "id": "HS-02",
+      "title": "sandboxとhost境界",
+      "origin": "D",
+      "statement": "悪意あるpackage・証拠生成器・native pluginの脅威範囲と隔離・終了・資源制限を定義する。",
+      "acceptance_positive": "無限loop/大量allocation/不正I/Oを対象profileで抑止する。",
+      "acceptance_negative": "Pythonのopaque表現やtrusted fixtureを敵対native codeへの防壁と呼ばない。",
+      "master_acceptance_status": "本書の統合要件としては未判定。限定証拠の存在と別に評価する。",
+      "requirement_completed": false,
+      "owner_approved": false,
+      "F0_3_evidence_class": "explicit-open-design-obligation",
+      "F0_3_result": "Mir意味・View・provider・sandboxを区別する境界を計画へ具体化した。",
+      "remaining": "Browser/headless参加製品、renderer、safe package実装はない。",
+      "next_work_units": [
+        "W7"
+      ],
+      "theorems": [],
+      "decision_refs": [
+        "Q-28"
+      ],
+      "master_proof_targets": [
+        "PT-09",
+        "PT-15",
+        "PT-18"
+      ],
+      "master_scenarios": [
+        "SC-19",
+        "SC-20"
+      ]
+    },
+    {
+      "id": "HS-03",
+      "title": "Mir内のdomain意味",
+      "origin": "U",
+      "statement": "ゲーム等の確定ロジックはMirまたはその明示された効果契約で定義し、rendererへ無断委譲しない。",
+      "acceptance_positive": "headlessでも同じdomain判断と状態遷移を実行する。",
+      "acceptance_negative": "描画側だけでHPや関係ownerを書き換えない。",
+      "master_acceptance_status": "本書の統合要件としては未判定。限定証拠の存在と別に評価する。",
+      "requirement_completed": false,
+      "owner_approved": false,
+      "F0_3_evidence_class": "explicit-open-design-obligation",
+      "F0_3_result": "Mir意味・View・provider・sandboxを区別する境界を計画へ具体化した。",
+      "remaining": "Browser/headless参加製品、renderer、safe package実装はない。",
+      "next_work_units": [
+        "W7"
+      ],
+      "theorems": [],
+      "decision_refs": [],
+      "master_proof_targets": [
+        "PT-09",
+        "PT-15",
+        "PT-18"
+      ],
+      "master_scenarios": [
+        "SC-01",
+        "SC-20"
+      ]
+    },
+    {
+      "id": "HS-04",
+      "title": "Viewと入力の双方向境界",
+      "origin": "U",
+      "statement": "runtime→observer-safe projection→Viewと、input→typed request→Mirを定義する。",
+      "acceptance_positive": "二つのViewまたは表示有無で同じ認可された操作を実行する。",
+      "acceptance_negative": "Viewのローカル値を型・権限検査なしに確定状態へ入れない。",
+      "master_acceptance_status": "本書の統合要件としては未判定。限定証拠の存在と別に評価する。",
+      "requirement_completed": false,
+      "owner_approved": false,
+      "F0_3_evidence_class": "explicit-open-design-obligation",
+      "F0_3_result": "Mir意味・View・provider・sandboxを区別する境界を計画へ具体化した。",
+      "remaining": "Browser/headless参加製品、renderer、safe package実装はない。",
+      "next_work_units": [
+        "W7"
+      ],
+      "theorems": [],
+      "decision_refs": [],
+      "master_proof_targets": [
+        "PT-09",
+        "PT-15",
+        "PT-18"
+      ],
+      "master_scenarios": [
+        "SC-20"
+      ]
+    },
+    {
+      "id": "HS-05",
+      "title": "表示用計算とprovider結果",
+      "origin": "U",
+      "statement": "補間・IK・表示座標等の提示ローカル計算と、外部計算結果をMirへ採用する判断を分ける。",
+      "acceptance_positive": "外部計算を利用しても、型/版/結果/失敗をMir側で検査する。",
+      "acceptance_negative": "外部実装の利用を禁止しすぎて全計算を自作させず、権威も渡さない。",
+      "master_acceptance_status": "本書の統合要件としては未判定。限定証拠の存在と別に評価する。",
+      "requirement_completed": false,
+      "owner_approved": false,
+      "F0_3_evidence_class": "explicit-open-design-obligation",
+      "F0_3_result": "Mir意味・View・provider・sandboxを区別する境界を計画へ具体化した。",
+      "remaining": "Browser/headless参加製品、renderer、safe package実装はない。",
+      "next_work_units": [
+        "W7"
+      ],
+      "theorems": [],
+      "decision_refs": [
+        "Q-10"
+      ],
+      "master_proof_targets": [
+        "PT-09",
+        "PT-15",
+        "PT-18"
+      ],
+      "master_scenarios": [
+        "SC-10",
+        "SC-20"
+      ]
+    },
+    {
+      "id": "HS-06",
+      "title": "継続的な参加と最小構築UI",
+      "origin": "U",
+      "statement": "起動後の操作、参加・退出、構成追加、適合した更新、状態観測を一つの利用経路にする。",
+      "acceptance_positive": "ネットワーク越しの参加者がソース由来の構成を追加し、別参加者が利用する。",
+      "acceptance_negative": "固定probeを一回実行して終了する経路を利用環境の完成としない。",
+      "master_acceptance_status": "本書の統合要件としては未判定。限定証拠の存在と別に評価する。",
+      "requirement_completed": false,
+      "owner_approved": false,
+      "F0_3_evidence_class": "explicit-open-design-obligation",
+      "F0_3_result": "Mir意味・View・provider・sandboxを区別する境界を計画へ具体化した。",
+      "remaining": "Browser/headless参加製品、renderer、safe package実装はない。",
+      "next_work_units": [
+        "W7"
+      ],
+      "theorems": [],
+      "decision_refs": [
+        "Q-29"
+      ],
+      "master_proof_targets": [
+        "PT-09",
+        "PT-15",
+        "PT-18"
+      ],
+      "master_scenarios": [
+        "SC-20",
+        "SC-24"
+      ]
+    },
+    {
+      "id": "OP-01",
+      "title": "検査前後の資源課金",
+      "origin": "D",
+      "statement": "parse/decode/proof/queue/trace/storage/実行の各資源に、受入前の上限検査と責任主体を与える。",
+      "acceptance_positive": "過大入力を無制限確保の前に拒否し、他instanceの予算を守る。",
+      "acceptance_negative": "実行本体だけにquotaを置いて証拠検査・loggingを無制限にしない。",
+      "master_acceptance_status": "本書の統合要件としては未判定。限定証拠の存在と別に評価する。",
+      "requirement_completed": false,
+      "owner_approved": false,
+      "F0_3_evidence_class": "explicit-open-design-obligation",
+      "F0_3_result": "資源を意味上の失敗と前提に分け、再現可能な研究実行を用意した。",
+      "remaining": "本番quota・長期GC・性能基準・OS故障モデルは未実装。",
+      "next_work_units": [
+        "W4",
+        "W5",
+        "W6",
+        "W7"
+      ],
+      "theorems": [],
+      "decision_refs": [],
+      "master_proof_targets": [
+        "PT-08",
+        "PT-18"
+      ],
+      "master_scenarios": [
+        "SC-08",
+        "SC-19",
+        "SC-21"
+      ]
+    },
+    {
+      "id": "OP-02",
+      "title": "長期的な資源回収",
+      "origin": "D",
+      "statement": "proof cache、履歴、旧code、snapshot、tombstoneのretentionと回収を寿命・再送条件へ結びつける。",
+      "acceptance_positive": "所定の長期試験で資源増加の根拠と回収可能部分を確認する。",
+      "acceptance_negative": "メモリcache回収だけでjournalの無期限上界を保証したとしない。",
+      "master_acceptance_status": "本書の統合要件としては未判定。限定証拠の存在と別に評価する。",
+      "requirement_completed": false,
+      "owner_approved": false,
+      "F0_3_evidence_class": "explicit-open-design-obligation",
+      "F0_3_result": "資源を意味上の失敗と前提に分け、再現可能な研究実行を用意した。",
+      "remaining": "本番quota・長期GC・性能基準・OS故障モデルは未実装。",
+      "next_work_units": [
+        "W4",
+        "W5",
+        "W6",
+        "W7"
+      ],
+      "theorems": [],
+      "decision_refs": [
+        "Q-25"
+      ],
+      "master_proof_targets": [
+        "PT-08",
+        "PT-18"
+      ],
+      "master_scenarios": [
+        "SC-21"
+      ]
+    },
+    {
+      "id": "OP-03",
+      "title": "可用性と性能のprofile",
+      "origin": "D",
+      "statement": "利用例ごとのlatency、frame/更新頻度、検査時間、人数、停止許容、復旧時間の目標を決定前に記録する。",
+      "acceptance_positive": "決めた機器・負荷・障害条件で測定し、保証と実測を分離する。",
+      "acceptance_negative": "根拠なく60fpsや世界規模の台数を必須値として固定しない。",
+      "master_acceptance_status": "本書の統合要件としては未判定。限定証拠の存在と別に評価する。",
+      "requirement_completed": false,
+      "owner_approved": false,
+      "F0_3_evidence_class": "explicit-open-design-obligation",
+      "F0_3_result": "資源を意味上の失敗と前提に分け、再現可能な研究実行を用意した。",
+      "remaining": "本番quota・長期GC・性能基準・OS故障モデルは未実装。",
+      "next_work_units": [
+        "W4",
+        "W5",
+        "W6",
+        "W7"
+      ],
+      "theorems": [],
+      "decision_refs": [
+        "Q-30"
+      ],
+      "master_proof_targets": [
+        "PT-08",
+        "PT-18"
+      ],
+      "master_scenarios": [
+        "SC-21"
+      ]
+    },
+    {
+      "id": "OP-04",
+      "title": "異常終了と現実のhost前提",
+      "origin": "D",
+      "statement": "crash、disk full、書込み成否不明、鍵失効、時刻のずれを型付き状態へ接続する。",
+      "acceptance_positive": "不確定なjournal writerは再検査なしに継続せず、秘密を含まない診断を返す。",
+      "acceptance_negative": "fsyncのモデルをあらゆるstorage装置への物理保証としない。",
+      "master_acceptance_status": "本書の統合要件としては未判定。限定証拠の存在と別に評価する。",
+      "requirement_completed": false,
+      "owner_approved": false,
+      "F0_3_evidence_class": "explicit-open-design-obligation",
+      "F0_3_result": "資源を意味上の失敗と前提に分け、再現可能な研究実行を用意した。",
+      "remaining": "本番quota・長期GC・性能基準・OS故障モデルは未実装。",
+      "next_work_units": [
+        "W4",
+        "W5",
+        "W6",
+        "W7"
+      ],
+      "theorems": [],
+      "decision_refs": [],
+      "master_proof_targets": [
+        "PT-08",
+        "PT-18"
+      ],
+      "master_scenarios": [
+        "SC-21"
+      ]
+    },
+    {
+      "id": "OP-05",
+      "title": "再現と診断の最小運用",
+      "origin": "D",
+      "statement": "環境・version・manifest・起動/終了・隔離された試験データ・再実行手順を保存する。",
+      "acceptance_positive": "clean checkoutから起動・故障・終了・回収を再現する。",
+      "acceptance_negative": "localの隠れた状態や未記録の手操作がなければ成功しない経路を受理しない。",
+      "master_acceptance_status": "本書の統合要件としては未判定。限定証拠の存在と別に評価する。",
+      "requirement_completed": false,
+      "owner_approved": false,
+      "F0_3_evidence_class": "hand-proof-or-executable-selected-profile",
+      "F0_3_result": "完全offline runner、入力版、command、log、hashを成果物に含める。",
+      "remaining": "実product distributionやmultiOS supportの受理ではない。",
+      "next_work_units": [
+        "W7"
+      ],
+      "theorems": [],
+      "decision_refs": [],
+      "master_proof_targets": [
+        "PT-08",
+        "PT-18"
+      ],
+      "master_scenarios": [
+        "SC-21"
+      ]
+    },
+    {
+      "id": "WW-01",
+      "title": "独立した管理・更新と接続",
+      "origin": "U",
+      "statement": "独立に作成・運用・更新した構成を、全内部sourceの一括統合なしに契約で接続する。",
+      "acceptance_positive": "異なる版・管理主体の適合moduleが接続できる。",
+      "acceptance_negative": "全世界同時更新や唯一のrootを無断で前提化しない。",
+      "master_acceptance_status": "本書の統合要件としては未判定。限定証拠の存在と別に評価する。",
+      "requirement_completed": false,
+      "owner_approved": false,
+      "F0_3_evidence_class": "explicit-open-design-obligation",
+      "F0_3_result": "単一の抽象制御モデルを世界全体の中央管理要求にしないことを明記した。",
+      "remaining": "独立domainの接続、リンク/公開/発見/連合は設計と実証が残る。",
+      "next_work_units": [
+        "W8"
+      ],
+      "theorems": [],
+      "decision_refs": [
+        "Q-17"
+      ],
+      "master_proof_targets": [
+        "PT-12",
+        "PT-17"
+      ],
+      "master_scenarios": [
+        "SC-22"
+      ]
+    },
+    {
+      "id": "WW-02",
+      "title": "識別・address・link・表現",
+      "origin": "D",
+      "statement": "資源の同一性、位置、取得、View、引用、利用権限を分けて定義する。",
+      "acceptance_positive": "対象の表示や配置が変わっても、選んだ識別契約を維持する。",
+      "acceptance_negative": "識別子の文字列から権限や内容形式を勝手に推論しない。",
+      "master_acceptance_status": "本書の統合要件としては未判定。限定証拠の存在と別に評価する。",
+      "requirement_completed": false,
+      "owner_approved": false,
+      "F0_3_evidence_class": "explicit-open-design-obligation",
+      "F0_3_result": "単一の抽象制御モデルを世界全体の中央管理要求にしないことを明記した。",
+      "remaining": "独立domainの接続、リンク/公開/発見/連合は設計と実証が残る。",
+      "next_work_units": [
+        "W8"
+      ],
+      "theorems": [],
+      "decision_refs": [
+        "Q-07",
+        "Q-29"
+      ],
+      "master_proof_targets": [
+        "PT-12",
+        "PT-17"
+      ],
+      "master_scenarios": [
+        "SC-22"
+      ]
+    },
+    {
+      "id": "WW-03",
+      "title": "未知の拡張の安全な扱い",
+      "origin": "D",
+      "statement": "必要な保証が理解できない場合の非実行・限定閲覧・説明を、契約単位で定義する。",
+      "acceptance_positive": "古い参加環境でも、安全なデータ部分を読める範囲を示す。",
+      "acceptance_negative": "未知のcritical fieldを無視して実行する、または一律全体を壊す設計にしない。",
+      "master_acceptance_status": "本書の統合要件としては未判定。限定証拠の存在と別に評価する。",
+      "requirement_completed": false,
+      "owner_approved": false,
+      "F0_3_evidence_class": "explicit-open-design-obligation",
+      "F0_3_result": "単一の抽象制御モデルを世界全体の中央管理要求にしないことを明記した。",
+      "remaining": "独立domainの接続、リンク/公開/発見/連合は設計と実証が残る。",
+      "next_work_units": [
+        "W8"
+      ],
+      "theorems": [],
+      "decision_refs": [
+        "Q-21"
+      ],
+      "master_proof_targets": [
+        "PT-12",
+        "PT-17"
+      ],
+      "master_scenarios": [
+        "SC-22"
+      ]
+    },
+    {
+      "id": "WW-04",
+      "title": "既存システムとの接続",
+      "origin": "D",
+      "statement": "既存Webや外部serviceを明示的な保証境界で接続し、未検証部分を残余として示す。",
+      "acceptance_positive": "型付きwrapperで移行途上の構成を扱い、失敗・情報公開を区別する。",
+      "acceptance_negative": "wrapperを置いただけで外部実装全体が形式保証されたと呼ばない。",
+      "master_acceptance_status": "本書の統合要件としては未判定。限定証拠の存在と別に評価する。",
+      "requirement_completed": false,
+      "owner_approved": false,
+      "F0_3_evidence_class": "explicit-open-design-obligation",
+      "F0_3_result": "単一の抽象制御モデルを世界全体の中央管理要求にしないことを明記した。",
+      "remaining": "独立domainの接続、リンク/公開/発見/連合は設計と実証が残る。",
+      "next_work_units": [
+        "W8"
+      ],
+      "theorems": [],
+      "decision_refs": [],
+      "master_proof_targets": [
+        "PT-12",
+        "PT-17"
+      ],
+      "master_scenarios": [
+        "SC-22"
+      ]
+    },
+    {
+      "id": "WW-05",
+      "title": "発見・公開・連合の責任",
+      "origin": "D",
+      "statement": "誰が何を公開し、どう発見・信頼・接続するかを上位責任として定義する。具体registry/market/governanceは未選択とする。",
+      "acceptance_positive": "少なくとも選択した小規模範囲で、公開先と実行権限を分けて運用する。",
+      "acceptance_negative": "SNS・図書館・市場の製品機能をCoreやαの必須機構へ混入させない。",
+      "master_acceptance_status": "本書の統合要件としては未判定。限定証拠の存在と別に評価する。",
+      "requirement_completed": false,
+      "owner_approved": false,
+      "F0_3_evidence_class": "explicit-open-design-obligation",
+      "F0_3_result": "単一の抽象制御モデルを世界全体の中央管理要求にしないことを明記した。",
+      "remaining": "独立domainの接続、リンク/公開/発見/連合は設計と実証が残る。",
+      "next_work_units": [
+        "W8"
+      ],
+      "theorems": [],
+      "decision_refs": [
+        "Q-29"
+      ],
+      "master_proof_targets": [
+        "PT-12",
+        "PT-17"
+      ],
+      "master_scenarios": [
+        "SC-22"
+      ]
+    },
+    {
+      "id": "WW-06",
+      "title": "内容の真偽と操作の正しさ",
+      "origin": "D",
+      "statement": "基盤が保証する由来・版・作用・契約と、文章/知識/価値判断の真偽を分ける。",
+      "acceptance_positive": "仮説や創作をそのまま内容として保持し、取扱いの保証を表示する。",
+      "acceptance_negative": "一つの世界認識の理論への同意を、すべての情報利用に強制しない。",
+      "master_acceptance_status": "本書の統合要件としては未判定。限定証拠の存在と別に評価する。",
+      "requirement_completed": false,
+      "owner_approved": false,
+      "F0_3_evidence_class": "explicit-open-design-obligation",
+      "F0_3_result": "単一の抽象制御モデルを世界全体の中央管理要求にしないことを明記した。",
+      "remaining": "独立domainの接続、リンク/公開/発見/連合は設計と実証が残る。",
+      "next_work_units": [
+        "W8"
+      ],
+      "theorems": [],
+      "decision_refs": [],
+      "master_proof_targets": [
+        "PT-12",
+        "PT-17"
+      ],
+      "master_scenarios": [
+        "SC-22"
+      ]
+    },
+    {
+      "id": "MG-01",
+      "title": "要件の根拠と未決を保持",
+      "origin": "U",
+      "statement": "明示要求、導出要件、既存Canon、研究候補、未決の政策を混ぜずIDで管理する。",
+      "acceptance_positive": "すべての項目に由来・受理条件・責任境界・関連証拠を持たせる。",
+      "acceptance_negative": "提案をユーザー承認済みや実装済みに自動昇格させない。",
+      "master_acceptance_status": "本書の統合要件としては未判定。限定証拠の存在と別に評価する。",
+      "requirement_completed": false,
+      "owner_approved": false,
+      "F0_3_evidence_class": "baseline-or-design-connection",
+      "F0_3_result": "全要件と候補・証拠・残件を対応づけ、既存Canonの受理へ昇格させない。",
+      "remaining": "全体alphaの達成とowner採用は未判定。",
+      "next_work_units": [
+        "W1",
+        "W7"
+      ],
+      "theorems": [],
+      "decision_refs": [],
+      "master_proof_targets": [
+        "PT-17",
+        "PT-18"
+      ],
+      "master_scenarios": [
+        "SC-23"
+      ]
+    },
+    {
+      "id": "MG-02",
+      "title": "αの統合受入れ",
+      "origin": "U",
+      "statement": "構築・参加・操作・観測・更新・復元を一つの実行系で確認し、未対応profileを明記する。",
+      "acceptance_positive": "別作者・別端末相当から通常sourceで一貫した手順を再現する。",
+      "acceptance_negative": "単独demoの合算、I5という名前、テスト総数でα完成を宣言しない。",
+      "master_acceptance_status": "本書の統合要件としては未判定。限定証拠の存在と別に評価する。",
+      "requirement_completed": false,
+      "owner_approved": false,
+      "F0_3_evidence_class": "baseline-or-design-connection",
+      "F0_3_result": "SC-24に相当する相互作用の一部を同じkernelで実行した。",
+      "remaining": "実network・UI・任意local theory・全componentを含むαのSC-24は未完。",
+      "next_work_units": [
+        "W7"
+      ],
+      "theorems": [
+        "F3-23"
+      ],
+      "decision_refs": [],
+      "master_proof_targets": [
+        "PT-17",
+        "PT-18"
+      ],
+      "master_scenarios": [
+        "SC-23",
+        "SC-24"
+      ]
+    },
+    {
+      "id": "MG-03",
+      "title": "次に依存する基礎を先に閉じる",
+      "origin": "U",
+      "statement": "上位の不可逆設計を広げる前に、その範囲が依存する表現力・健全性・合成・観測条件を検証する。",
+      "acceptance_positive": "必要な正例と一般命題が成立した限定profileを明示して次へ渡す。",
+      "acceptance_negative": "全未来の理論を待つことにも、未証明を完成基盤として使うことにも流れない。",
+      "master_acceptance_status": "本書の統合要件としては未判定。限定証拠の存在と別に評価する。",
+      "requirement_completed": false,
+      "owner_approved": false,
+      "F0_3_evidence_class": "baseline-or-design-connection",
+      "F0_3_result": "全要件と候補・証拠・残件を対応づけ、既存Canonの受理へ昇格させない。",
+      "remaining": "全体alphaの達成とowner採用は未判定。",
+      "next_work_units": [
+        "W1",
+        "W7"
+      ],
+      "theorems": [],
+      "decision_refs": [],
+      "master_proof_targets": [
+        "PT-17",
+        "PT-18"
+      ],
+      "master_scenarios": [
+        "SC-23"
+      ]
+    },
+    {
+      "id": "MG-04",
+      "title": "証拠のidentityと追試",
+      "origin": "D",
+      "statement": "commit、input、定理statement、tool/環境、命題範囲、反例を対応づける。",
+      "acceptance_positive": "同じ成果を追試でき、未実行や失敗ログも区別する。",
+      "acceptance_negative": "モデル試験をproof、コンパイルをテスト、手証明を機械証明と表示しない。",
+      "master_acceptance_status": "本書の統合要件としては未判定。限定証拠の存在と別に評価する。",
+      "requirement_completed": false,
+      "owner_approved": false,
+      "F0_3_evidence_class": "baseline-or-design-connection",
+      "F0_3_result": "全要件と候補・証拠・残件を対応づけ、既存Canonの受理へ昇格させない。",
+      "remaining": "全体alphaの達成とowner採用は未判定。",
+      "next_work_units": [
+        "W1",
+        "W7"
+      ],
+      "theorems": [],
+      "decision_refs": [],
+      "master_proof_targets": [
+        "PT-17",
+        "PT-18"
+      ],
+      "master_scenarios": [
+        "SC-23"
+      ]
+    },
+    {
+      "id": "MG-05",
+      "title": "完了・保留・再開の判定",
+      "origin": "U",
+      "statement": "能力・理論・実装の各受理と、ownerの進行許可を別に記録する。",
+      "acceptance_positive": "I3-3の受理を保持したままI3-4前で全体を再評価する。",
+      "acceptance_negative": "今回の整理だけでCanon、THM/OBL、current queueを変更しない。",
+      "master_acceptance_status": "本書の統合要件としては未判定。限定証拠の存在と別に評価する。",
+      "requirement_completed": false,
+      "owner_approved": false,
+      "F0_3_evidence_class": "baseline-or-design-connection",
+      "F0_3_result": "全要件と候補・証拠・残件を対応づけ、既存Canonの受理へ昇格させない。",
+      "remaining": "全体alphaの達成とowner採用は未判定。",
+      "next_work_units": [
+        "W1",
+        "W7"
+      ],
+      "theorems": [],
+      "decision_refs": [],
+      "master_proof_targets": [
+        "PT-17",
+        "PT-18"
+      ],
+      "master_scenarios": [
+        "SC-23"
+      ]
+    },
+    {
+      "id": "MG-06",
+      "title": "研究成果の単位",
+      "origin": "D",
+      "statement": "研究の各区切りは定義・証明・反例・実装対応の改善として評価し、文書やphase数だけで進歩を測らない。",
+      "acceptance_positive": "未解決だった具体的命題か判断が、新しい検証可能な成果で前進する。",
+      "acceptance_negative": "研究上の核心をnamed laterに送り続け、有限例だけ増やすことを防ぐ。",
+      "master_acceptance_status": "本書の統合要件としては未判定。限定証拠の存在と別に評価する。",
+      "requirement_completed": false,
+      "owner_approved": false,
+      "F0_3_evidence_class": "hand-proof-or-executable-selected-profile",
+      "F0_3_result": "定義・手証明・実行model・実反例・traceを作成した。",
+      "remaining": "件数を完成率にしない。機械化と独立受理が必要。",
+      "next_work_units": [
+        "W1"
+      ],
+      "theorems": [
+        "F3-23"
+      ],
+      "decision_refs": [],
+      "master_proof_targets": [
+        "PT-17",
+        "PT-18"
+      ],
+      "master_scenarios": [
+        "SC-23"
+      ]
+    }
+  ]
+}

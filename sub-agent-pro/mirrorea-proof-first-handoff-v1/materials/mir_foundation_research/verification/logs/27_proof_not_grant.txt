@@ -1,0 +1,9 @@
+unsat
+((proof
+(let (($x29 (and proof grant live)))
+(let ((@x35 (mp (asserted (not (not $x29))) (rewrite (= (not (not $x29)) $x29)) $x29)))
+(let ((@x37 (and-elim @x35 grant)))
+(let (($x26 (not grant)))
+(let ((@x27 (asserted $x26)))
+(unit-resolution @x27 @x37 false))))))))
+
