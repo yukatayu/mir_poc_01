@@ -209,3 +209,171 @@ end Controls
 #print axioms changed_context_rejected
 #print axioms changed_module_stamp_rejected
 end MirroreaProofFirst.ModuleContractBoundary
+
+-- Later unreviewed descriptor/catalog extension; excluded from frozen Oracle input.
+namespace MirroreaProofFirst.ModuleContractBoundary
+-- Descriptor uniqueness for one fixed use and proof, not authentic registry issuance.
+theorem linked_descriptor_unique {s : CurrentUse.World n} {u : CurrentUse.UseRequest n}
+ {args : List Int} {p : CallProof n} {a b : Descriptor}
+ (la : Linked s u a args p) (lb : Linked s u b args p)
+ (binding : expected s u a args = expected s u b args) : a = b := by
+ have hc := la.code.trans lb.code.symm
+ have ht := la.contract.trans lb.contract.symm
+ have hn := la.arity.symm.trans lb.arity
+ cases a; cases b
+ simp_all only [expected,ContractExport.Binding.mk.injEq]
+
+-- A previously successful proof cannot be rebound to another descriptor even if
+-- nominal IDs and the actual result happen to remain equal. A freshly constructed
+-- proof is a different question; no registry mutation authorization is inferred.
+theorem changed_descriptor_rejected {s : CurrentUse.World n} {oldRegistry newRegistry : Registry n}
+ {u : CurrentUse.UseRequest n} {args : List Int} {auth newAuth : CurrentUse.Evidence}
+ {p : CallProof n} {value : Nat} {old new : Descriptor}
+ (accepted : call s oldRegistry u args auth p = some value)
+ (oldLookup : oldRegistry u.operation.key = some old)
+ (newLookup : newRegistry u.operation.key = some new) (different : old ≠ new) :
+ call s newRegistry u args newAuth p = none := by
+ cases h : call s newRegistry u args newAuth p with
+ | none => rfl
+ | some v =>
+   obtain ⟨a,ha,la,ea⟩ := (call_sound accepted).descriptor
+   obtain ⟨b,hb,lb,eb⟩ := (call_sound h).descriptor
+   have ae : a = old := Option.some.inj (ha.symm.trans oldLookup)
+   have be : b = new := Option.some.inj (hb.symm.trans newLookup)
+   subst a; subst b
+   exact False.elim (different (linked_descriptor_unique la lb
+     (ea.common.binding.symm.trans eb.common.binding)))
+
+-- A finite-capacity immutable descriptor catalog is a reversible candidate for
+-- the registry integrity premise. It is not an authenticated head or installer.
+abbrev Catalog := Nat → Option Descriptor
+def CatalogWF (capacity : Nat) (c : Catalog) : Prop :=
+ ∀ key d, c key = some d → key < capacity ∧ d.codeId = key
+
+def InsertAllowed (capacity : Nat) (c : Catalog) (d : Descriptor) : Prop :=
+ d.codeId < capacity ∧ c d.codeId = none
+
+def insert (capacity : Nat) (c : Catalog) (d : Descriptor) : Option Catalog :=
+ if d.codeId < capacity ∧ c d.codeId = none then
+   some (fun key => if key = d.codeId then some d else c key)
+ else none
+
+def Extends (c c' : Catalog) : Prop := ∀ key d, c key = some d → c' key = some d
+
+theorem insert_exists (capacity : Nat) (c : Catalog) (d : Descriptor) :
+ (∃ c', insert capacity c d = some c') ↔ InsertAllowed capacity c d := by
+ simp only [insert,InsertAllowed]; split <;> simp_all
+
+theorem insert_extends {capacity : Nat} {c c' : Catalog} {d : Descriptor}
+ (ok : insert capacity c d = some c') : Extends c c' := by
+ unfold insert at ok; split at ok
+ · rename_i h; cases ok
+   intro key old present
+   have different : key ≠ d.codeId := by
+     intro eq; subst key; rw [h.2] at present; contradiction
+   simp [different,present]
+ · contradiction
+
+theorem insert_wf {capacity : Nat} {c c' : Catalog} {d : Descriptor}
+ (wf : CatalogWF capacity c) (ok : insert capacity c d = some c') : CatalogWF capacity c' := by
+ unfold insert at ok; split at ok
+ · rename_i h; cases ok
+   intro key found present; dsimp at present; split at present
+   · rename_i eq; cases present; exact ⟨eq ▸ h.1,eq.symm⟩
+   · exact wf key found present
+ · contradiction
+
+def runInserts (capacity : Nat) : Catalog → List Descriptor → Catalog
+ | c,[] => c
+ | c,d::rest => runInserts capacity ((insert capacity c d).getD c) rest
+
+theorem inserts_preserve (capacity : Nat) (c : Catalog) (ds : List Descriptor)
+ (wf : CatalogWF capacity c) :
+ CatalogWF capacity (runInserts capacity c ds) ∧ Extends c (runInserts capacity c ds) := by
+ induction ds generalizing c with
+ | nil => exact ⟨wf,fun _ _ h => h⟩
+ | cons d ds ih =>
+   cases step : insert capacity c d with
+   | none => simpa [runInserts,step] using ih c wf
+   | some c' =>
+     obtain ⟨wf',extension⟩ := ih c' (insert_wf wf step)
+     refine ⟨by simpa [runInserts,step] using wf',?_⟩
+     intro key old present
+     simpa [runInserts,step] using extension key old (insert_extends step key old present)
+
+-- This selected entry checks the immutable catalog entry; a fresh envelope
+-- cannot substitute code under the same nominal identity at this boundary.
+-- Raw call and existing handle consumers remain the explicitly weaker path.
+def catalogCall (s : CurrentUse.World n) (registry : Registry n) (catalog : Catalog)
+ (u : CurrentUse.UseRequest n) (args : List Int) (auth : CurrentUse.Evidence) (p : CallProof n) : Option Nat :=
+ match registry u.operation.key with
+ | none => none
+ | some d => if catalog d.codeId = some d then call s registry u args auth p else none
+
+theorem catalog_agrees {s : CurrentUse.World n} {registry : Registry n} {catalog : Catalog}
+ {u : CurrentUse.UseRequest n} {args : List Int} {auth : CurrentUse.Evidence}
+ {p : CallProof n} {d : Descriptor} (lookup : registry u.operation.key = some d)
+ (registered : catalog d.codeId = some d) :
+ catalogCall s registry catalog u args auth p = call s registry u args auth p := by
+ simp [catalogCall,lookup,registered]
+
+theorem catalog_sound {s : CurrentUse.World n} {registry : Registry n} {catalog : Catalog}
+ {u : CurrentUse.UseRequest n} {args : List Int} {auth : CurrentUse.Evidence}
+ {p : CallProof n} {value : Nat} (ok : catalogCall s registry catalog u args auth p = some value) :
+ Successful s registry u args p value ∧
+ ∃ d, registry u.operation.key = some d ∧ catalog (s.records u.operation.key).code = some d := by
+ unfold catalogCall at ok; split at ok
+ · contradiction
+ · rename_i d hd; split at ok
+   · rename_i hc
+     have success := call_sound ok
+     obtain ⟨found,hfound,linked,exported⟩ := success.descriptor
+     have eq : found = d := Option.some.inj (hfound.symm.trans hd)
+     subst found
+     exact ⟨success,d,hd,linked.code ▸ hc⟩
+   · contradiction
+
+theorem fresh_proof_cannot_rebind {s : CurrentUse.World n} {registry : Registry n} {catalog : Catalog}
+ {u : CurrentUse.UseRequest n} {args : List Int} {auth : CurrentUse.Evidence}
+ {p : CallProof n} {old new : Descriptor}
+ (oldBinding : catalog (s.records u.operation.key).code = some old)
+ (lookup : registry u.operation.key = some new) (different : old ≠ new) :
+ catalogCall s registry catalog u args auth p = none := by
+ cases h : catalogCall s registry catalog u args auth p with
+ | none => rfl
+ | some value =>
+   obtain ⟨_,d,hd,hc⟩ := catalog_sound h
+   have eq : d = new := Option.some.inj (hd.symm.trans lookup)
+   subst d
+   exact False.elim (different (Option.some.inj (oldBinding.symm.trans hc)))
+
+namespace DescriptorControl
+open Controls CurrentUse.Controls
+-- Different code with the same value at this invocation still cannot borrow the
+-- old proof. Refreshing the envelope under the same trusted registry/auth inputs
+-- is deliberately not prohibited by this limited boundary model.
+def sameValue : Descriptor := {descriptor with code := .add (.integer 1) (.input 0)}
+example : sameValue ≠ descriptor := by decide
+example : LocalContract.eval (FunctionContractBridge.argumentInput [41]) sameValue.code = 42 := by decide
+example : call world (fun _ => some sameValue) request [41] evidence proof = none := by decide
+def refreshed : CallProof 4 := {proof with payload :=
+ {proof.payload with binding := expected world request sameValue [41]}}
+example : call world (fun _ => some sameValue) request [41] evidence refreshed = some 42 := by decide
+def catalog : Catalog := fun id => if id = 100 then some descriptor else none
+example : catalogCall world registry catalog request [41] evidence proof = some 42 := by decide
+example : catalogCall world (fun _ => some sameValue) catalog request [41] evidence refreshed = none := by decide
+example : insert 101 catalog sameValue = none := by
+ simp [insert,catalog,sameValue,descriptor]
+example : (insert 101 (fun _ => none) descriptor).isSome = true := by decide
+example : (insert 100 (fun _ => none) descriptor).isSome = false := by decide
+end DescriptorControl
+#print axioms insert_exists
+#print axioms insert_extends
+#print axioms insert_wf
+#print axioms inserts_preserve
+#print axioms catalog_agrees
+#print axioms catalog_sound
+#print axioms fresh_proof_cannot_rebind
+#print axioms linked_descriptor_unique
+#print axioms changed_descriptor_rejected
+end MirroreaProofFirst.ModuleContractBoundary

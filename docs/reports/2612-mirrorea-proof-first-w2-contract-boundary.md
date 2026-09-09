@@ -443,3 +443,106 @@ preserves the separate typing/currentness/authority and unreviewed boundaries.
 Companion table/wording fixes do not promote the candidate. No new Rust or network
 run is claimed. A best-effort Discord progress notification sent14699/2d122d;
 this user request continues, with both Oracle jobs retained.
+
+Intermediate checkpoint b35744b73a110e031376f8439c9578f4c27f57e8 committed
+--no-gpg-sign (e46fb3),19files1742+/156−. Normal push87346/d902d7 succeeded;
+ls-remote69459/2f31e2 equals HEAD and tree was clean7f6fdd. This records only
+unreviewed LAB candidates; the user task continues with full reading/source
+boundary research and retained Oracle jobs. No acceptance or alpha completion.
+
+
+2026-09-10 03:40 JST capture-boundary extension: direct consumer is OwnerAssignment's explicit
+frozen input (U07/U17, TY/SL/observation obligations within the same W2 goal).
+Main defined independent capture/sequence judgments and Boolean checkers, actual
+per-slot evaluation, and one capture followed by ordinary assignment. The
+per-slot valuations do not require a global shared snapshot. General captured
+typing/low equivalence and failure-inclusive sequence frame/type/two-run projected
+outcome preservation pass Lean4.29.1 trust0 (87692c; final9ec404, mirror e03909).
+Standard propext/Quot.sound only for these printed theorems; no Mir axiom.
+An initial proof draft left one hidden-result branch unsolved (e047cc); explicit
+attempt_key resolved it (8ee30a). Failed elaboration is not credited.
+
+The decisive negative case is secret inputs (i64::MAX-1)/i64::MAX under checked signed-64-bit
+arithmetic: input+1 succeeds/fails, causing the same public constant-write body
+to write/fail although it never reads the capture. Their public projections
+differ. Requiring capture-label <= target-label keeps that completion dependency.
+The independent sequence checker accepts a high-target positive case and rejects
+the unsafe low-target case. Mutations dropping capture-PC or completion checks
+fail both correspondence and concrete rejection controls (9ec404). Fixed decide
+cases are counter/positive controls, not the general theorems.
+
+Candidate A retains explicit capture metadata/control/completion flow; smallest
+alternative B would delay or separate the operation so capture failure cannot
+control its low result, requiring an explicit different source dependency. No
+implicit snapshot or Q18 policy was selected. Actual M7 CheckedEvaluationParameter
+(name/type/source_ref) and ParameterRead(name/span), and M8 string-to-i64 argument
+evaluation were inspected (21934e/ca16ee); these fields do not carry the modeled
+labels/provenance. No actual deployed leak or source refinement is inferred.
+Capture authentication, authority, event-selection/presence/timing, physical
+read valuations and source elaboration remain implementation/proof obligations.
+
+The extension is appended to the existing OwnerAssignment source, keeping ten
+W2 files and one companion. W2_EXTENSION_CHECK preserves the original Owner cut
+and current isolated rebuild plus scratch mutation records. The original frozen
+Oracle packet is unchanged; this later delta has no review. Existing two Oracle
+jobs still report running/submission false (ca16ee); original exec polling
+586125/f94d58 returned no output and retained the sessions. No resend/cancellation.
+Plan correspondence, progress/current goal and sample evidence row updated;
+Documentation.md/docs/project-status.md/tasks.md 更新不要 for this sub-boundary:
+the same W2 active goal, blockers and ten-source unreviewed status remain accurate.
+No new reproduction command/root, production edit or Rust/network/recovery run.
+Required Plans111–122 reading is full/hash-ledgered; corpus remains incomplete.
+This is ongoing work; no W2/alpha completion, commit or push yet for this delta.
+
+Validation58092/4f0922 rejected a stale progress header after the new log line.
+The header was updated from actual local time before retry; the failed command
+is not credited as passing. Capture controls now use i64::MAX-1 / i64::MAX,
+with all literals in range and checked signed63 arithmetic. Current mirror hash
+93e6549ece5ac234bdfe6852561a4c590ab3a9eafa6f301f5e15954d234e5f74 and
+two concrete checker mutation rejections pass8704a6; general claims unchanged.
+
+
+2026-09-10 03:48 JST descriptor/catalog sub-boundary: general descriptor uniqueness under one
+fixed use/proof and old-proof rejection under descriptor replacement pass Lean
+(0b5e9e/194f6a). A concrete same-value changed arithmetic tree rejects the old
+envelope but accepts a rebuilt envelope under the same nominal-ID authority
+context and supplied substituted registry. This is a countermodel to assuming
+registry integrity from proof/current-use validity; no deployed exploit is inferred.
+
+Candidate A: finite-capacity immutable descriptor catalog, no deletion/overwrite
+in its insertion transition language. Independent InsertAllowed/execution-existence,
+WF and old-binding preservation hold for arbitrary finite insertion sequences.
+A selected catalogCall retains Successful and exact current operation-code catalog
+lookup, agrees with raw call for registered descriptors, and rejects a different
+descriptor even with a fresh proof. Capacity acceptance/rejection, actual42,
+replacement rejection and two invalid mutants (overwrite/catalog-check bypass)
+were checked (e0efe4). The overwrite mutant also reduces its concrete rejection
+control to False; the bypass mutant's rejection control is false. Invalid
+elaborator sorryAx outputs are never credited. Standard propext/Quot.sound/
+Classical.choice where printed; no Mir-specific axiom.
+
+Smallest alternative B would bind actual descriptor contents into the authority
+context. That affects the authority boundary and is not adopted. Candidate A
+still requires authenticated catalog/head acquisition, installer authorization,
+World record/code/revision transitions, storage and recovery. Raw call remains
+explicitly weaker; HandleValues/PureHandleFunctions still invoke raw call. No
+all-entry protection, production change or global catalog semantics is claimed.
+
+Main mirrored the extension into the existing ModuleContractBoundary source and
+rechecked it plus both dependent handle modules in an isolated copy (c4c959),
+all pass. Fifteen current records in W2_EXTENSION_CHECK preserve prior cuts and
+new dependency results. The frozen Oracle packet is unchanged and this delta is
+unreviewed. Full extension self-review00c25b checked the selected-entry limitation.
+Correspondence, current goal, companion, progress and sample evidence row updated;
+Documentation wording now distinguishes original fresh dependencies from later
+cone rebuilds. docs/project-status.md/tasks.md 更新不要: same active goal/blockers,
+no milestone close or roadmap change. No Rust/network/recovery run; no new root.
+This sub-boundary continues the user task and does not close W2 or alpha.
+
+Docs retry38408 passed (badbba),1762 numbered reports. Final current fifteen
+source hashes/axiom logs and both pairs of rejected mutations were checked
+(f154d2); diff check passed. Main focused doc diff review866a03 retained all
+source/current-head/selected-entry limitations. No independent Oracle result is
+available; latest7c7f15 retains both running/submission-false jobs. Plans129/130
+are fully read/hash-ledgered; mandatory corpus remains incomplete. Own twelve-file
+checkpoint is ready to commit/push; this is saved research, not task acceptance.

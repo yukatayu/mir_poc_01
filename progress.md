@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-09-10 03:19 JST
+最終更新: 2026-09-10 03:48 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -64,7 +64,7 @@ composition and actual implementation/alpha gates remain open. Required corpus
 reading is incomplete. Memory: `plan/proof-first-foundation-correspondence.md`;
 evidence: Reports2611/2612. W2 now has ten mirrored unreviewed Lean candidates
 for resource/contract/function/current-use correspondence, explicit captures and
-higher-order interface carriage; source-level module handles and actual
+higher-order interface carriage, including failure-aware capture continuation; source-level module handles and actual
 source/runtime refinement remain open.
 
 | Task axis | Current status | Startability |
@@ -296,3 +296,7 @@ The authorized roadmap is paused, not blocked, stale or closed.
 - 2026-09-10 02:15 JST: W2の現在module・認可・型付き実引数と局所契約の結合を一般Leanで検査し、両profileの相対完全性を確認。registry更新・認証と実source接続は未確立、Oracle未review。
 
 - 2026-09-10 03:19 JST: W2後続4候補を未受理LABとして保存。全15依存のfresh-copy Lean検査が通り、秘密値の定数化反例・非空な契約前提・高階handle受渡し後の現在性/認可を確認。Oracle既存2job継続、実source/network/α未達。
+
+- 2026-09-10 03:40 JST: W2捕捉境界で独立checker対応と失敗を含む代入のframe/type/二実行命題をLean検査。未使用の秘密捕捉の失敗でも公開書込みを抑止する反例を確認し、完了依存を検査条件に保持。未review、実source/auth/network接続は未達。
+
+- 2026-09-10 03:48 JST: W2の同一証拠とdescriptorの一意性、有限容量・上書き禁止catalogの登録保存と照合をLean検査。raw callでのregistry差替え＋証拠再構成を反例として保持。認証済み台帳・head・全entry接続は未確立、後続差分未review。

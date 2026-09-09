@@ -1,124 +1,104 @@
 # RESUME — ongoing proof-first task, not completion
 
-## Current objective and authority
+## Authority and current objective
 
-- Sole main only; NO subagents/child Codex/parallel writers. Oracle readonly advice
-  is operated by main. Overall active goal: foundations→proof-gated existing
-  implementation→real-network/hotplug/save-recovery/private-observation alpha.
-- One semantic goal W2-local-contract-resource, PL1 S1/S2 theory/proof/reference.
-  CURRENT_GOAL, Reports2611(W1)/2612(W2) and task-local correspondence own details.
-  No W2/alpha closure, I3-4 resume, Canon/THM/OBL/phase/public contract change.
-- Mandatory corpus incomplete. Plans73–108 now fully read/hash-ledgered. Full
-  index reading does not credit its referenced files. READ_LEDGER stores real
-  ranges/hashes; no whole-project roadmap adoption before required reading.
-- Keep going after checkpoints. No final/Discord complete at a component proof,
-  reading or commit. Independent authorized research continues while reviews wait.
+- Sole main only: NO subagents, child Codex, parallel LLM writers. Oracle readonly
+  advice is operated by main. Keep going after checkpoints, no final/complete.
+- User objective foundations→proof-gated existing implementation→real-network,
+  hotplug, save/recovery and private observation verified alpha candidate.
+- One active semantic goal W2-local-contract-resource, PL1 S1/S2 theory/proof and
+  nonproduction reference. CURRENT_GOAL/Reports2611(W1)/2612(W2) own details.
+  No W2/alpha close, I3-4 resume, Canon/THM/OBL/phase/public contract change.
+- Mandatory corpus incomplete. Plans73–130 full/hash-ledgered; nextPlan131.
+  READ_LEDGER records real full/ranges/hashes; index reading is not referenced-file
+  reading. No whole-project roadmap adoption before mandatory corpus completion.
 
-## Git, resources and evidence locations
+## Git and resources
 
-- HEAD0047e8f8a0fa527ceffa9bd21f77bf65b3f9e9d9 was committed --no-gpg-sign,
-  normal pushed and exact remote parity/clean state verified47723/9d0bd8.
-  Initial base7feef371; prior3408c4c/f136f5d retained. Current changes are own
-  four new Lean mirrors/check record, docs/status/read ledger. Verify fresh status.
-  Own normal commit/push authorized; no reset/force/clean or external publication.
-- Work root /tmp/mirrorea-proof-first-20260909-gn29zka5, root filesystem;
-  /mnt/mirrorea-work absent/unmounted. Last~60GiB free/~12GiB RAM available,
-  target4.4GiB. Small Lean scratch only; remeasure heavy work. No cleanup/host share.
-  Handoff materials/archives are immutable; baselines ran only in copied workdirs.
-- Ten W2 sources in samples/lean/foundations, MirroreaProofFirst prefix:
-  ResourceBoundary,LocalContract,ContractExport,PureFunctions,FunctionContractBridge,
-  ModuleContractBoundary,OwnerAssignment,ProfileGuarantees,HandleValues,
-  PureHandleFunctions. One Contracts.md companion, reproduction in lean/README.
-- W2_EXTENSION_CHECK.json records fresh15dependencies all PASS97457/a38973,
-  Lean4.29.1 --trust=0; standard propext/Quot/Classical.choice only where printed,
-  no Mir axiom/sorry/admit. A final interface-comment correction rechecks only
-  PureHandleFunctions and updates its hash. Check record complete before commit.
-  Existing six-source/historical checks retain their exact earlier cuts.
+- Current committed baseline b35744b73a110e031376f8439c9578f4c27f57e8 was pushed
+  and exact remote parity verified. Initial7feef371 and prior3408c4c/0047e8f8 etc
+  retained. Current own twelve-file capture/catalog/read-ledger/docs delta ready
+  to commit --no-gpg-sign and normal push. Verify status; no reset/force/clean.
+- Work root /tmp/mirrorea-proof-first-20260909-gn29zka5. Configured external mount
+  /mnt/mirrorea-work absent. Last~60GiBfree/~12GiBRAM,target4.4GiB. Small Lean only;
+  remeasure heavy work. No cleanup/host share. Handoff materials/archives unchanged.
 
-## Current proof scope and limits
+## Ten W2 sources and current evidence
 
-- Resource independent separation/WF, checked operations and policy schedules,
-  exact geometry/frame/currentness and consumed nonresurrection. Arithmetic
-  declarative/checker correspondence and actual positive exports. Pure closure/
-  iteration typing and finite execution correspondence. Current module call
-  binds exact stamps/descriptor/arity/integer args/auth and both profiles.
-- OwnerAssignment: separate live/frozen values/types/labels; locality forbids
-  foreign live reads in all branches, explicit frozen values remain fixed.
-  General frame/type/conditional two-run and independent static elaboration.
-  Same source with secret snapshots3/4, unsafe literalization, both checks pass
-  but low writes differ; general value-preservation alone does not justify this
-  transform. Generated code varies; not a refutation of fixed-program NI.
-- ProfileGuarantees: symbolic acceptance gives uniform positivity under explicit
-  hypotheses and actual accepted input witnesses satisfiability. Checked-value
-  positivity at one invocation is weaker. Not arbitrary theory loading.
-- HandleValues: finite single-sort binding/check/evaluation, scoped termination,
-  no new references; exact carried stamps used at current call. Two invalid
-  mutations discard carried stamps / bypass checks fail general and fixed
-  controls (36551/4a1e0e, inspected559a43). Fresh caller proof cannot refresh stale
-  carried reference. Original scratch HANDLE_CHECK preserved in extension record.
-- PureHandleFunctions: separate unreviewed pure calculus extension at arbitrary
-  finite size, with interface values through higher-order closures and iteration.
-  Type/evaluator/declarative correspondence rechecked; general carried-evaluates
-  and carried-invokes; success42/stale/retired/type rejection controls. Scratch
-  PURE_HANDLE_CHECK70648/35a934 retained; current mirror changes import/comment.
-- All W2 candidates UNREVIEWED. PureHandleFunctions has not replaced original
-  PureFunctions. No existing-source conservativity/refinement, actual capture
-  provenance/auth/selection-label integrity, closure shipping, handle IFC,
-  lifecycle/registry transition, physical atomicity/current head/restore or
-  source/network integration is established. Values/linear resources remain
-  distinct. Mathematical positivity never authorizes public release.
-- CRITICAL Canon: unlisted fields PRIVATE; observer_safe is not Public/grant/
-  Nat-class. Earlier M8 trusted-setup label countermodel retained, no network
-  exploit inferred. Source M7 parameter fields lack capture labels/provenance;
-  that is an obligation, not proof of an actual disclosure.
+- samples/lean/foundations/MirroreaProofFirst{ResourceBoundary,LocalContract,
+  ContractExport,PureFunctions,FunctionContractBridge,ModuleContractBoundary,
+  OwnerAssignment,ProfileGuarantees,HandleValues,PureHandleFunctions}.lean.
+  One Contracts.md companion; reproduction samples/lean/README. All UNREVIEWED.
+- Resource exact separation/geometry/frame/consumption; actual arithmetic contract
+  export and two profiles; pure higher-order/iteration typing and finite execution;
+  exact current-module typed arguments/auth context. ProfileGuarantees additionally
+  witnesses satisfiable accepted assumptions. PureHandleFunctions is a separate
+  research extension, not a proven conservative replacement of existing source.
+- OwnerAssignment original separates owner-local live reads and explicit frozen
+  values/types/labels; ordinary imported-base write uses general owner routing.
+  Value-preserving secret literalization changes generated code and leaks; it
+  does not refute fixed-program noninterference.
+- NEW Capture namespace: independent Allowed/SequenceAllowed/checkers, per-slot
+  actual read valuations (no common capture cut), captured type/low preservation.
+  One capture→assignment includes actual failure, with general frame/type/two-run
+  projected-outcome preservation. Completion dependency must flow to target.
+  i64::MAX-1/MAX capture +1 controls public constant-write success/failure even
+  when captured value unused. Dropping PC/completion checks concretely fails.
+  Final capture mirror PASS8704a6; current Owner SHA
+  93e6549ece5ac234bdfe6852561a4c590ab3a9eafa6f301f5e15954d234e5f74.
+- NEW ModuleContractBoundary descriptor/catalog: fixed successful proof uniquely
+  binds exact descriptor. Raw call can accept a rebuilt envelope after a trusted
+  registry substitution with same nominal IDs/actual result. Candidate catalog
+  uses finite capacity, no overwrite/deletion in insertion language. General
+  WF/old-binding preservation for finite inserts, catalog-call soundness/agreement
+  and fresh-proof replacement rejection. Two overwrite/bypass mutants fail e0efe4.
+  Raw call and existing handle consumers remain weaker, NOT all-entry protected.
+- Current15record hashes/axiom logs verified f154d2. Lean4.29.1 --trust=0; standard
+  propext/Quot/Classical.choice where printed, no Mir axiom/sorry/admit. Failed
+  mutant/draft elaborator sorryAx is rejected evidence, never an accepted proof.
+  W2_EXTENSION_CHECK preserves original cuts plus current dependency rebuilds.
+- Workdirs: capture-boundary-airbr56e/CHECK.json and DESCRIPTOR_CHECK.json retain
+  source/mutation cuts. CAPTURE_MIRROR and CATALOG_MIRROR pointer files in workroot.
+  catalog-mirror-nisfsu2v rebuilt Module+HandleValues+PureHandleFunctions PASSc4c959.
+- Missing: actual source refinement/capture metadata authenticity, auth issuance,
+  event selection/presence/timing, catalog installer/current-head/World transitions,
+  all-entry enforcement, concurrency/physical atomicity, persistence and network.
+  M7 parameter name/type/span and M8 string→i64 fields lack modeled capture metadata;
+  this is an obligation, not proof of a deployed disclosure.
+- Canon unlisted fields PRIVATE. observer_safe is not Public/release/grant/class0.
+  Mathematical positivity or proof validity never authorizes information release.
 
-## Oracle — preserve each original job
+## Oracle — preserve the original jobs
 
-Status cadence ≥180s per job; use LAST_CHECK_UTC/READ_LOG_LINES, print new lines
-only. No deadline/cancel/duplicate because slow, no paid fallback. Latest327e70:
-W1 and revised W2 running/errorNone/promptSubmitted=false, no answers.
+- ≥180s between per-job checks, use LAST_CHECK_UTC/READ_LOG_LINES and only new logs.
+  No latency deadline/cancel/duplicate/paid fallback. Latest7c7f15 both running,
+  errorNone, promptSubmittedfalse, no answer. exec polls586125/f94d58 no output.
+- W1: mirrorea-source-boundary, exec54675, oracle-source-boundary;
+  Q314b9ca87817061575b5313db3877cd7fb4fd663209e0a49283d6b311bb5d6e8.
+  Frozen Abort/Address/earlier finite-source cut; later W2 excluded.
+- Original W2 mirrorea-w2-resource-contract, exec19233 TERMINAL exit1cbabfe,
+  actual installed300s profile-lock error before submission. Do not poll/retry it.
+- Revised W2 mirrorea-w2-integrated-review, exec4661, oracle-w2-integrated-attach;
+  Q5dd28908150125d782d8af3a68c711d9df76790848c9bf091b185d15d8f5d6ff.
+  Frozen12module cut (6originalW2+originalOwner+5deps), kernel14551/d73aaePASS.
+  Excludes later Profile/Handle/PureHandle and NEW Capture/catalog extensions.
+  Strict --browser-attach-running dedicated-tab path; actualmodelgpt-6-astra.
+- BrowserPID1852807/controller1852666/port34829. Browser-level CDP responds; only
+  disposable blank-page diagnostic worked and was closed. ChatGPT page commands
+  did not respond; screenshot Internal error2f56ee, no image saved. No login/dialog
+  proven. User async browser-display clarification pending. No reload/cancel.
+  Private task-only DevTools metadata pointer ORACLE_ATTACH_METADATA_PATH stays
+  in workroot; NEVER log/commit/attach metadata, WS endpoints, cookies/keys.
 
-1. W1 mirrorea-source-boundary, exec54675, oracle-source-boundary.
-   Q314b9ca87817061575b5313db3877cd7fb4fd663209e0a49283d6b311bb5d6e8.
-   Frozen Abort/Address/earlier finite-source cut. Later W2 not included.
-   BrowserPID1852807/controller1852666/port34829. No cancellation/reload.
-2. Original W2 mirrorea-w2-resource-contract, exec19233 TERMINAL exit1cbabfe.
-   Qa12dea8199a65171b07052f79a872b8bb50d760b329aeef7a933440fdc8bf0cd.
-   Actual installed300s profile launch-lock error, before submission. No review;
-   do not poll finished job. Prepared other packets were NEVER sent.
-3. Revised W2 mirrorea-w2-integrated-review, exec4661 RUNNING;
-   oracle-w2-integrated-attach. Q
-   5dd28908150125d782d8af3a68c711d9df76790848c9bf091b185d15d8f5d6ff.
-   Frozen12modules: original6W2+OwnerAssignment+5reviewed dependencies, all fresh
-   kernel PASS14551/d73aae. ProfileGuarantees/HandleValues/PureHandleFunctions
-   are later, outside packet; cannot inherit its eventual review.
-   One actual-error retry uses verified strict dedicated-tab --browser-attach-running
-   path, not ordinary remote fallback. Actual installed model gpt-6-astra.
+## Next commands / retained checks
 
-Browser-level CDP responds; fresh disposable blank page worked and only that page
-was closed. Existing ChatGPT page-level commands do not respond. Supported strict
-attach discovery uses task-only private DevTools metadata under .config; pointer
-ORACLE_ATTACH_METADATA_PATH is in work root. NEVER commit/attach its contents,
-WS endpoint, cookies or keys. Original profile unchanged; no lock removal.
-Further readonly diagnostics: own processes sleeping/event waits; owned X11 window
-not found and no DISPLAY in Chrome environment. W2 Page.captureScreenshot returned
-Internal error; only diagnostic attachment detached2f56ee, no screenshot saved.
-Browser target/window query97480b still reports attached ChatGPT/normal1300x743.
-No login/dialog state proven. User async browser-display clarification remains
-pending. Do not mistake these diagnostics for Oracle terminal failure.
-
-## Immediate next commands/work
-
-- Docs validator13830 PASS907a64,1762reports. Last source-comment correction
-  rechecked65597/45a9a3 and updated W2_EXTENSION_CHECK. Main source/diff review
-  complete; staging/final hash check and commit/push are next. No new Rust/network.
-- Complete current mirror self-review, update report/RESUME with actual results,
-  commit/push own reviewed LAB checkpoint, then CONTINUE the task.
-- Collect both running Oracle answers only when actually available. Dispose
-  against frozen cuts; request later delta review only after earlier result.
-- Continue mandatory reading from Plan107 onward and scoped source/capture/module
-  connection obligations; no frozen-approval inference or runtime wrapper alpha.
-- Baseline F0/SMT/Rust M8observer4PASS are retained Report2611 evidence; no repeat
-  baseline or full workspace/network/recovery validation since source unchanged.
-- Discord progress14699/2d122d sent around03:25JST; do not send another for
-  roughly an hour unless an authorized package boundary. No complete.
+- Docs58092 failed stale progress header4f0922; corrected actualtime and retry38408
+  PASSbadbba,1762reports. Focused doc diff866a03 + finalhash/diff f154d2 passed.
+  Save twelve-file own checkpoint with normal commit/push/parity, then CONTINUE.
+- Next required full readingPlan131 onward; continue actual source/capture/module
+  obligations, collect existing Oracle answers and dispose against frozen cuts.
+  Later deltas require later review; do not infer approval from unreturned jobs.
+- No new Rust/network/recovery run; prior baselines retained Report2611. No reason
+  to rerun unchanged baseline. No production implementation depends on new drafts.
+- Discord progress14699/2d122d sent~03:25JST. Next roughlyhour, not at every proof.
+  No complete notification until this entire user request ends legitimately.

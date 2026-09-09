@@ -288,3 +288,196 @@ end Controls
 #print axioms generated_destination
 
 end MirroreaProofFirst.OwnerAssignment
+
+-- Later unreviewed capture extension; excluded from the frozen Oracle packet.
+namespace MirroreaProofFirst.OwnerAssignment.Capture
+open ProducerFlow
+variable {I J K : Type}
+
+-- Fixed capture expressions, not unlabelled deserialized argument strings.
+-- These judgments do not authenticate metadata or choose a distributed cut.
+structure Allowed (G : I → Ty) (L : I → Nat) (pc : Nat)
+ (e : Expr I) (t : Ty) (label : Nat) : Prop where
+ typed : Typed G e t
+ flow : Flows L label e
+ control : pc ≤ label
+
+def check (G : I → Ty) (L : I → Nat) (pc : Nat)
+ (e : Expr I) (t : Ty) (label : Nat) : Bool :=
+ decide (infer G e = some t ∧ rank L e ≤ label ∧ pc ≤ label)
+
+theorem check_exact (G : I → Ty) (L : I → Nat) (pc : Nat)
+ (e : Expr I) (t : Ty) (label : Nat) :
+ check G L pc e t label = true ↔ Allowed G L pc e t label := by
+ simp only [check,decide_eq_true_eq,infer_exact,flows_exact]
+ exact ⟨fun ⟨ht,hf,hp⟩ => ⟨ht,hf,hp⟩,fun h => ⟨h.typed,h.flow,h.control⟩⟩
+
+-- Each slot uses its own read valuation; captures need not share a global cut.
+-- Each captured slot records an actual successful evaluation. No claim of atomic
+-- multi-slot capture, termination, presence confidentiality or authority is made.
+def Captured (ops : FallibleFlow.Arithmetic) (env : J → I → Value)
+ (source : J → Expr I) (values : J → Value) : Prop :=
+ ∀ j, FallibleFlow.eval ops (env j) (source j) = some (values j)
+
+theorem captured_typed (ops : FallibleFlow.Arithmetic)
+ {G : I → Ty} {SG : J → Ty} {env : J → I → Value} {source : J → Expr I} {values : J → Value}
+ (typedEnv : ∀ j i, (env j i).ty = G i)
+ (typedSource : ∀ j, Typed G (source j) (SG j))
+ (actual : Captured ops env source values) : ∀ j, (values j).ty = SG j := by
+ intro j
+ exact FallibleFlow.eval_typed (typedSource j) ops (env j) (typedEnv j) (values j) (actual j)
+
+theorem captured_low (ops : FallibleFlow.Arithmetic)
+ {L : I → Nat} {SL : J → Nat} {level : Nat} {env env' : J → I → Value}
+ {source : J → Expr I} {values values' : J → Value}
+ (low : ∀ j, LowEq L level (env j) (env' j))
+ (flow : ∀ j, rank L (source j) ≤ SL j)
+ (actual : Captured ops env source values) (actual' : Captured ops env' source values') :
+ LowEq SL level values values' := by
+ intro j hj
+ have same := FallibleFlow.eval_low ops (low j) (source j) (Nat.le_trans (flow j) hj)
+ rw [actual j,actual' j] at same
+ exact Option.some.inj same
+
+-- Compose source-side capture preservation with destination-side ordinary write.
+-- Successful captures on both sides are explicit; observable capture failure and
+-- secret-dependent selection require their own event/control boundary.
+theorem capture_then_write_low [DecidableEq K] (ops : FallibleFlow.Arithmetic)
+ {IL : I → Nat} {L : K → Nat} {SL : J → Nat} {level : Nat}
+ {env env' : J → I → Value} {s t : K → Value} {source : J → Expr I}
+ {values values' : J → Value}
+ (inputLow : ∀ j, LowEq IL level (env j) (env' j)) (liveLow : LowEq L level s t)
+ (captureFlow : ∀ j, rank IL (source j) ≤ SL j)
+ (actual : Captured ops env source values) (actual' : Captured ops env' source values')
+ (target : K) (e : Expr (Ref K J)) (writeFlow : rank (classes L SL) e ≤ L target) :
+ LowEq L level (run ops s values target e).1 (run ops t values' target e).1 ∧
+ FallibleFlow.project L level (run ops s values target e).2 =
+ FallibleFlow.project L level (run ops t values' target e).2 :=
+ run_noninterference ops liveLow (captured_low ops inputLow captureFlow actual actual')
+ target e writeFlow
+
+-- One explicit capture followed by a dependent operation. Failure is an actual
+-- failed destination operation, not a success-conditioned omission from the trace.
+def attempt [DecidableEq K] (ops : FallibleFlow.Arithmetic) (input : I → Value)
+ (live : K → Value) (target : K) (source : Expr I) (body : Expr (Ref K Unit)) :
+ (K → Value) × FallibleFlow.Outcome K :=
+ match FallibleFlow.eval ops input source with
+ | none => (live,.failed target)
+ | some v => run ops live (fun _ => v) target body
+
+theorem attempt_frame [DecidableEq K] (ops : FallibleFlow.Arithmetic)
+ (input : I → Value) (live : K → Value) (target : K)
+ (source : Expr I) (body : Expr (Ref K Unit)) (k : K) (hne : k ≠ target) :
+ (attempt ops input live target source body).1 k = live k := by
+ unfold attempt; split
+ · rfl
+ · exact run_frame _ _ _ _ _ _ hne
+
+theorem attempt_key [DecidableEq K] (ops : FallibleFlow.Arithmetic)
+ (input : I → Value) (live : K → Value) (target : K)
+ (source : Expr I) (body : Expr (Ref K Unit)) :
+ (attempt ops input live target source body).2.key = target := by
+ unfold attempt; split
+ · rfl
+ · unfold run; split <;> rfl
+
+structure SequenceAllowed (owner : K → Nat) (G : K → Ty) (IG : I → Ty)
+ (L : K → Nat) (IL : I → Nat) (pc capturePC : Nat) (target : K)
+ (source : Expr I) (body : Expr (Ref K Unit)) (captureTy : Ty) (label : Nat) : Prop where
+ capture : Allowed IG IL capturePC source captureTy label
+ body : Admissible owner G (fun (_ : Unit) => captureTy) L (fun _ => label) pc target body
+ completion : label ≤ L target
+
+def sequenceCheck (owner : K → Nat) (G : K → Ty) (IG : I → Ty)
+ (L : K → Nat) (IL : I → Nat) (pc capturePC : Nat) (target : K)
+ (source : Expr I) (body : Expr (Ref K Unit)) (captureTy : Ty) (label : Nat) : Bool :=
+ check IG IL capturePC source captureTy label &&
+ OwnerAssignment.check owner G (fun (_ : Unit) => captureTy) L (fun _ => label) pc target body &&
+ decide (label ≤ L target)
+
+theorem sequence_exact (owner : K → Nat) (G : K → Ty) (IG : I → Ty)
+ (L : K → Nat) (IL : I → Nat) (pc capturePC : Nat) (target : K)
+ (source : Expr I) (body : Expr (Ref K Unit)) (captureTy : Ty) (label : Nat) :
+ sequenceCheck owner G IG L IL pc capturePC target source body captureTy label = true ↔
+ SequenceAllowed owner G IG L IL pc capturePC target source body captureTy label := by
+ simp only [sequenceCheck,Bool.and_eq_true,check_exact,OwnerAssignment.check_exact,decide_eq_true_eq]
+ exact ⟨fun ⟨⟨hc,hb⟩,hf⟩ => ⟨hc,hb,hf⟩,fun h => ⟨⟨h.capture,h.body⟩,h.completion⟩⟩
+
+theorem attempt_typed [DecidableEq K] (ops : FallibleFlow.Arithmetic)
+ {G : K → Ty} {IG : I → Ty} {input : I → Value} {live : K → Value}
+ (inputTyped : ∀ i, (input i).ty = IG i) (liveTyped : ∀ k, (live k).ty = G k)
+ (target : K) (source : Expr I) (body : Expr (Ref K Unit)) (captureTy : Ty)
+ (sourceTyped : Typed IG source captureTy)
+ (bodyTyped : Typed (types G (fun (_ : Unit) => captureTy)) body (G target)) :
+ ∀ k, ((attempt ops input live target source body).1 k).ty = G k := by
+ unfold attempt; split
+ · exact liveTyped
+ · rename_i v hv
+   exact run_typed ops live (fun _ => v) liveTyped
+     (fun _ => FallibleFlow.eval_typed sourceTyped ops input inputTyped v hv) target body bodyTyped
+
+theorem attempt_low [DecidableEq K] (ops : FallibleFlow.Arithmetic)
+ {IL : I → Nat} {L : K → Nat} {label level : Nat}
+ {input input' : I → Value} {live live' : K → Value}
+ (inputLow : LowEq IL level input input') (liveLow : LowEq L level live live')
+ (target : K) (source : Expr I) (body : Expr (Ref K Unit))
+ (captureFlow : rank IL source ≤ label) (completionFlow : label ≤ L target)
+ (bodyFlow : rank (classes L (fun (_ : Unit) => label)) body ≤ L target) :
+ LowEq L level (attempt ops input live target source body).1
+   (attempt ops input' live' target source body).1 ∧
+ FallibleFlow.project L level (attempt ops input live target source body).2 =
+ FallibleFlow.project L level (attempt ops input' live' target source body).2 := by
+ by_cases visible : L target ≤ level
+ · have ev := FallibleFlow.eval_low ops inputLow source
+     (Nat.le_trans captureFlow (Nat.le_trans completionFlow visible))
+   simp only [attempt,ev]
+   split
+   · exact ⟨liveLow,rfl⟩
+   · exact run_noninterference ops liveLow (fun _ _ => rfl) target body bodyFlow
+ · constructor
+   · intro k hk
+     have different : k ≠ target := by intro eq; subst k; exact visible hk
+     rw [attempt_frame _ _ _ _ _ _ _ different,attempt_frame _ _ _ _ _ _ _ different]
+     exact liveLow k hk
+   · simp [FallibleFlow.project,attempt_key,visible]
+
+namespace FailureControl
+abbrev Key := Fin 1
+def input (v : Int) (_ : Key) : Value := .int v
+def live (_ : Key) : Value := .int 10
+def source : Expr Key := .add (.read 0) (.lit (.int 1))
+def body : Expr (Ref Key Unit) := .lit (.int 11)
+-- Secret-dependent overflow controls whether even an unused capture allows a
+-- public write. Checking only body rank misses this completion dependency.
+example : LowEq (fun (_ : Key) => 1) 0 (input 9223372036854775806) (input 9223372036854775807) := by
+ intro k h; contradiction
+example : rank (classes (fun (_ : Key) => 0) (fun (_ : Unit) => 1)) body = 0 := by decide
+example : (attempt (FallibleFlow.signed 63) (input 9223372036854775806) live 0 source body).2 =
+ .wrote 0 (.int 11) := by decide
+example : (attempt (FallibleFlow.signed 63) (input 9223372036854775807) live 0 source body).2 =
+ .failed 0 := by decide
+example : FallibleFlow.project (fun (_ : Key) => 0) 0
+ (attempt (FallibleFlow.signed 63) (input 9223372036854775806) live 0 source body).2 ≠
+ FallibleFlow.project (fun (_ : Key) => 0) 0
+ (attempt (FallibleFlow.signed 63) (input 9223372036854775807) live 0 source body).2 := by decide
+example : sequenceCheck (fun (_ : Key) => 10) (fun _ => .int) (fun _ => .int)
+ (fun _ => 0) (fun _ => 1) 0 0 0 source body .int 1 = false := by decide
+example : sequenceCheck (fun (_ : Key) => 10) (fun _ => .int) (fun _ => .int)
+ (fun _ => 1) (fun _ => 1) 0 0 0 source body .int 1 = true := by decide
+end FailureControl
+
+-- Control cannot be discarded even for a constant captured expression.
+example : check (fun (_ : Fin 1) => .int) (fun _ => 0) 1 (.lit (.int 3)) .int 0 = false := by decide
+example : check (fun (_ : Fin 1) => .int) (fun _ => 0) 1 (.lit (.int 3)) .int 1 = true := by decide
+example : check (fun (_ : Fin 1) => .int) (fun _ => 1) 0 (.read 0) .int 0 = false := by decide
+example : check (fun (_ : Fin 1) => .int) (fun _ => 1) 0 (.read 0) .int 1 = true := by decide
+
+#print axioms sequence_exact
+#print axioms attempt_typed
+#print axioms attempt_frame
+#print axioms attempt_low
+#print axioms check_exact
+#print axioms captured_typed
+#print axioms captured_low
+#print axioms capture_then_write_low
+end MirroreaProofFirst.OwnerAssignment.Capture

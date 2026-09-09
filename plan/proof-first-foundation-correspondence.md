@@ -115,9 +115,9 @@ unreviewed. They do not discharge source/all-entry/current-authority, observer,
 physical execution or restoration obligations. Report2611 and FOUNDATION_CHECK
 retain exact cuts; no numbered roadmap or normative state changed.
 
-W2 now retains six unreviewed candidate Lean modules: resource preservation and exact geometry/frame/returned currentness, local arithmetic certificate soundness/relative completeness, two common-contract evidence profiles, pure higher-order functions/finite iteration actual arithmetic-function result correspondence, and same-current-module/typed-arguments/authority composition for both profiles. Registry provenance and mutation remain open. Coherent original and import-adapted repo cuts pass Lean trust0; details and remaining authenticated-context/source/physical obligations are in MirroreaProofFirstContracts.md, Report2612 and W2_MIRROR_CHECK.json. No arbitrary local-theory integration or existing-source alpha capability is inferred.
+The earlier W2 cut retained six unreviewed candidate Lean modules: resource preservation and exact geometry/frame/returned currentness, local arithmetic certificate soundness/relative completeness, two common-contract evidence profiles, pure higher-order functions/finite iteration actual arithmetic-function result correspondence, and same-current-module/typed-arguments/authority composition for both profiles. Registry provenance and mutation remain open. Coherent original and import-adapted repo cuts pass Lean trust0; details and remaining authenticated-context/source/physical obligations are in MirroreaProofFirstContracts.md, Report2612 and W2_MIRROR_CHECK.json. No arbitrary local-theory integration or existing-source alpha capability is inferred.
 
-Later W2 scratch, not an adopted source contract: OwnerAssignment separates live
+Later W2 candidates, now mirrored with the original six as ten unreviewed sources, not an adopted source contract: OwnerAssignment separates live
 owner reads from explicit frozen value/type/label environments, with independent
 locality/check and static source-operation/elaboration correspondence. Ordinary
 imported-base assignment uses the same rule and schema-derived route. Capture
@@ -132,7 +132,7 @@ with no answer or acceptance inferred. No new global roadmap or Q01/Q02/Q18
 policy decision follows.
 
 
-W2 later HandleValues scratch: finite first-class interface-reference bindings
+W2 later HandleValues candidate: finite first-class interface-reference bindings
 preserve the carried module/operation stamps; current invocation still requires
 independent authority and contract checking. General scoped termination and
 no-new-reference results exclude all-reject and implicit reissuance shortcuts.
@@ -140,9 +140,32 @@ A stale carried stamp cannot be replaced with the caller's current one. This is
 unreviewed evidence after the active Oracle cut, not a source module/lifecycle
 language or a W2 acceptance. Exact evidence remains in Report2612 and RESUME.
 
-The subsequent unreviewed PureHandleFunctions scratch places those interface
+The subsequent unreviewed PureHandleFunctions candidate places those interface
 values in the pure higher-order closure/iteration language at arbitrary finite
 universe size, with rechecked type and execution correspondence and a general
 carried-handle/current-invocation equality. Original committed PureFunctions and
 frozen Oracle inputs remain unchanged. This is not an adopted source grammar,
 existing-source refinement, effectful closure shipping or information release.
+
+The later OwnerAssignment.Capture extension closes a scoped mathematical gap:
+per-slot actual capture evaluations preserve types and low equivalence without
+requiring one shared capture cut. For one capture followed by assignment, an
+independent SequenceAllowed/check correspondence includes capture control and
+completion-flow bounds. General failure-inclusive frame/type/two-run results
+pass Lean; ignoring completion flow leaks secret-dependent overflow through a
+public write even when the captured value is unused. Both checker mutations
+are rejected. Actual M7 parameter metadata and M8 string arguments still lack
+the modeled capture provenance/labels in those fields; this is an implementation
+obligation, not an inferred deployed disclosure. This extension remains outside
+the active frozen Oracle cut. No new roadmap or source semantics is adopted.
+
+Descriptor integrity is now explicit in the same unreviewed ModuleContractBoundary
+source: one fixed successful proof determines the exact descriptor; a fresh
+envelope under a substituted trusted registry can still pass raw call. Candidate A
+is a finite-capacity no-overwrite descriptor catalog with general insertion
+preservation and a catalog-checked call; smallest alternative B binds actual
+descriptor content in the authority context, which would change that boundary.
+Neither is adopted. Raw/handle paths remain weaker, and authenticated installation,
+World transitions, head recovery and all-entry integration remain open. General
+proofs and overwrite/check-bypass mutants are recorded in W2_EXTENSION_CHECK;
+this later delta is excluded from the active Oracle packet.

@@ -19818,5 +19818,173 @@
     "range": "1-420",
     "role": "own UNREVIEWED W2 source full self-review after mirror",
     "status": "full"
+  },
+  {
+    "path": "plan/109-g1-obl024-lean-statement-draft.md",
+    "sha256": "1ac9e30d5058977c027f29efbd6fdd71883161f6870e3ff660247a52f603bbb6",
+    "range": "1-247",
+    "role": "LAB statement shape/report-local carrier, not proof or actual replay",
+    "status": "full"
+  },
+  {
+    "path": "plan/110-g1-obl024-executable-projection-carrier.md",
+    "sha256": "3e64261344aa58daa250e42119a1d5f18a169de934c1ad82058d339472626cd8",
+    "range": "1-167",
+    "role": "LAB statement shape/report-local carrier, not proof or actual replay",
+    "status": "full"
+  },
+  {
+    "path": "plan/111-g1-obl024-projection-rust-fixture-guards.md",
+    "sha256": "8685dca427f30be59e40d8d2f824c2b99a9c92ef8a88439e38c226fed2e3a1df",
+    "range": "1-97",
+    "role": "LAB historical triage/ordinary-source evidence; not current proof-first authority",
+    "status": "full"
+  },
+  {
+    "path": "plan/112-g1-obl024-replay-vocabulary-preflight.md",
+    "sha256": "b59739298baef6725829a65436e5e72108c6f560b6c4a5bfee66da59c4f0b98e",
+    "range": "1-200",
+    "role": "LAB historical triage/ordinary-source evidence; not current proof-first authority",
+    "status": "full"
+  },
+  {
+    "path": "plan/113-g1-obl024-lean-replay-vocabulary-refinement.md",
+    "sha256": "5546968f3c7ff8044e0da15e48cefec00624a24390ef310e1b46ca3b1d479812",
+    "range": "1-136",
+    "role": "LAB historical triage/ordinary-source evidence; not current proof-first authority",
+    "status": "full"
+  },
+  {
+    "path": "plan/114-g1-obl024-lean-association-vocabulary-refinement.md",
+    "sha256": "acaf8b8dac5e3d850c05ecafdf0e539d41282e822e9442bab46571fdc248ec16",
+    "range": "1-168",
+    "role": "LAB historical triage/ordinary-source evidence; not current proof-first authority",
+    "status": "full"
+  },
+  {
+    "path": "plan/115-g1-obl024-association-guard-hardening.md",
+    "sha256": "fd4a3bd2b87a0b164ae9331196a15097ecb27ece29a1a0713ac3b7d67cbe1773",
+    "range": "1-102",
+    "role": "LAB historical triage/ordinary-source evidence; not current proof-first authority",
+    "status": "full"
+  },
+  {
+    "path": "plan/116-g1-obl025-repair-completeness-guard-hardening.md",
+    "sha256": "4383101ca9446bab2c7d14be86134f8a19610f4df80df809a1a86174deca1dae",
+    "range": "1-118",
+    "role": "LAB historical triage/ordinary-source evidence; not current proof-first authority",
+    "status": "full"
+  },
+  {
+    "path": "plan/117-g1-obl001-020-021-statement-guard-hardening.md",
+    "sha256": "3cb3907c5097b252dc09d29137444989b5d2ee4afcc95c4afb91f99848b2a219",
+    "range": "1-139",
+    "role": "LAB historical triage/ordinary-source evidence; not current proof-first authority",
+    "status": "full"
+  },
+  {
+    "path": "plan/118-g0-g1-ordinary-assignment-claim-family-drilldown.md",
+    "sha256": "2c2c7c9190249da02a101bf32fe0646d0b16590b5e39323b04d1b0b61ca46a66",
+    "range": "1-180",
+    "role": "LAB historical triage/ordinary-source evidence; not current proof-first authority",
+    "status": "full"
+  },
+  {
+    "path": "plan/119-g0-remaining-claim-family-drilldown-priority.md",
+    "sha256": "973fd13503b5934f2c7b0c8ceaca8cc99f3a1150dbbb0dcdcf3e1e797b9a477d",
+    "range": "1-137",
+    "role": "LAB historical triage/ordinary-source evidence; not current proof-first authority",
+    "status": "full"
+  },
+  {
+    "path": "plan/120-repo-triage-recut-matrix.md",
+    "sha256": "324b27ede3faa17ce1159dc93b249ede07fafa66da014ff49c4189369b15ec35",
+    "range": "1-153",
+    "role": "LAB historical triage/ordinary-source evidence; not current proof-first authority",
+    "status": "full"
+  },
+  {
+    "path": "plan/121-g1-minimal-vertical-slice-candidate-map.md",
+    "sha256": "898830626ddbe37f05230abdf73dbe5754382987b47ae1c9fb1d8d15954e5c94",
+    "range": "1-232",
+    "role": "LAB historical static slice; not current acceptance",
+    "status": "full"
+  },
+  {
+    "path": "plan/122-g1-scn-exact-static-slice-manifest.md",
+    "sha256": "02724718795c453b23e3c11c2a7eef5fd75657c7c75c781792dc5255a2874743",
+    "range": "1-193",
+    "role": "LAB historical static slice; not current acceptance",
+    "status": "full"
+  },
+  {
+    "path": "plan/123-g1-scn01-visibility-negative-actualization.md",
+    "sha256": "e20870f0d6c71202f8a1cfb3cd4dd4cd1e092055285303ac2c87fc196cdae5aa",
+    "range": "1-134",
+    "role": "LAB historical static evidence/predicate audit, not general proof",
+    "status": "full"
+  },
+  {
+    "path": "plan/124-g1-obl001-boundary-audit.md",
+    "sha256": "1997cac0d468427b7e0a4870350708c06c8f34f6d6be2e806bcb7c3c9229123c",
+    "range": "1-151",
+    "role": "LAB historical static evidence/predicate audit, not general proof",
+    "status": "full"
+  },
+  {
+    "path": "samples/lean/foundations/MirroreaProofFirstOwnerAssignment.lean",
+    "sha256": "93e6549ece5ac234bdfe6852561a4c590ab3a9eafa6f301f5e15954d234e5f74",
+    "range": "1-483",
+    "role": "full self-review original plus capture extension; integer-boundary control edit separately reviewed",
+    "status": "full"
+  },
+  {
+    "path": "plan/125-g1-scn02-direct-local-write-blocker-review.md",
+    "sha256": "1e0d5234204204d90b464cc09179bc9afcf3bff8d4354acf606eb72cc56de53f",
+    "range": "1-171",
+    "role": "LAB historical G1 support/acceptance boundaries; not current authority",
+    "status": "full"
+  },
+  {
+    "path": "plan/126-g1-obl020-021-boundary-audit-and-obl021-guard-hardening.md",
+    "sha256": "bb52f36f846e80cfdaffd8d6b24ef8d033fb5b878306f96a4a14a2f84e195561",
+    "range": "1-149",
+    "role": "LAB historical G1 support/acceptance boundaries; not current authority",
+    "status": "full"
+  },
+  {
+    "path": "plan/127-g1-ordinary-assignment-bridge-readiness-nonreadiness-map.md",
+    "sha256": "1d2da7d3260a95d883047ae829605b4cb68690b848ae2bb3a9435a99bda898ce",
+    "range": "1-199",
+    "role": "LAB historical G1 support/acceptance boundaries; not current authority",
+    "status": "full"
+  },
+  {
+    "path": "plan/128-g1-bridge-handoff-blocker-ledger.md",
+    "sha256": "d44456e5d3e0d696b1762c013834d6b550ee4defd5eae2cd7ec43d1aee5068b1",
+    "range": "1-161",
+    "role": "LAB historical G1 support/acceptance boundaries; not current authority",
+    "status": "full"
+  },
+  {
+    "path": "samples/lean/foundations/MirroreaProofFirstModuleContractBoundary.lean",
+    "sha256": "3d502d4ed0c4fd2a894c3f9cd40762fa7a7afbea94af419b855b359308b32bfe",
+    "range": "1-379",
+    "role": "full self-review original and descriptor/catalog extension; not independent review",
+    "status": "full"
+  },
+  {
+    "path": "plan/129-g1-acceptance-packet-preflight.md",
+    "sha256": "5e8ad2d25516991b9984af272fb51fd639e1ddf465b1dee9c46c0d30f0b04c3e",
+    "range": "1-181",
+    "role": "LAB historical status criteria/preflight; not current task acceptance",
+    "status": "full"
+  },
+  {
+    "path": "plan/130-g1-obl-statement-status-completion-criteria-inventory.md",
+    "sha256": "85791bb895740d752f13a24616ce28eee953b9b6904ea7686b401e98dd781db5",
+    "range": "1-229",
+    "role": "LAB historical status criteria/preflight; not current task acceptance",
+    "status": "full"
   }
 ]

@@ -36,3 +36,16 @@ HandleValues and PureHandleFunctions (bound/higher-order reference carriage with
 current invocation). These satisfy parts of the semantic example floor; actual
 source capture provenance, source module/lifecycle elaboration, physical execution
 and neutral review remain unmet. No sub-goal or W2/alpha acceptance is inferred.
+
+Later OwnerAssignment.Capture evidence separates per-slot capture values from a
+shared snapshot and proves failure-aware single-capture/assignment composition.
+Its independent checker retains control and completion dependencies; an unused
+secret capture can still suppress a public write on overflow. Actual source
+metadata/authenticity and event-selection/presence policies remain open; this
+later extension is unreviewed and excluded from the running Oracle packet.
+
+The same module consumer now has a candidate finite-capacity immutable descriptor
+catalog and selected catalogCall. Raw call can accept a fresh envelope after
+trusted-registry substitution; that concrete countermodel keeps registry
+authenticity explicit. Existing handle consumers remain on raw call. No all-entry
+protection, authenticated installation or current-head/restore claim follows.

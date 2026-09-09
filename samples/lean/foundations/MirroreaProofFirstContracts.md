@@ -14,8 +14,8 @@ an exclusive-region allocator. Report2612 records the work and review status.
 | `MirroreaProofFirstContractExport.lean` | Structural binding and scope checks; independent Common/check correspondence; positive-result and exact Int-to-Nat export; two evidence profiles' scoped completeness; same allocator consumes the accepted result and cannot grant denied authority |
 | `MirroreaProofFirstPureFunctions.lean` | Annotated Int/Nat/lambda/application/iteration calculus; independent typing/inference equivalence; closure/environment typing; successful-evaluation preservation; separate finite execution derivations and fuel evaluator correspondence |
 | `MirroreaProofFirstFunctionContractBridge.lean` | Structural arithmetic lowering into that calculus; typing and actual execution correspondence; closed unary function execution and accepted export value correspondence |
-| `MirroreaProofFirstModuleContractBoundary.lean` | CurrentUse plus exact descriptor/code/contract/arity/typed-argument linking; independent Successful/call soundness; both profiles’ relative completeness; accepted actual execution; absence of authority and changed context/stamps reject |
-| `MirroreaProofFirstOwnerAssignment.lean` | Separate live/frozen environments, independent locality/admission/elaboration checkers; frame/type/conditional two-run preservation; exact owner routing and value-preserving label-erasure counterexample |
+| `MirroreaProofFirstModuleContractBoundary.lean` | CurrentUse plus exact descriptor/code/contract/arity/typed-argument linking; independent Successful/call soundness; both profiles’ relative completeness; accepted actual execution; absence of authority and changed context/stamps reject; later same-proof descriptor uniqueness and immutable bounded catalog preservation/checking |
+| `MirroreaProofFirstOwnerAssignment.lean` | Separate live/frozen environments, independent locality/admission/elaboration checkers; frame/type/conditional two-run preservation; exact owner routing and value-preserving label-erasure counterexample; later capture/check correspondence, per-slot captured typing/low equivalence, and single-capture failure-aware continuation preservation |
 | `MirroreaProofFirstProfileGuarantees.lean` | Symbolic acceptance implies positivity for every hypothesis-satisfying valuation; actual accepted inputs witness satisfiable hypotheses; checked-value positivity alone is weaker |
 | `MirroreaProofFirstHandleValues.lean` | Finite interface binding, independent scoped/evaluation relations, scoped termination, no new references; carried stamps retain current-use and authority checks |
 | `MirroreaProofFirstPureHandleFunctions.lean` | Separate pure higher-order handle extension at arbitrary finite size; rechecked type and execution correspondence; general unchanged-handle carriage and actual current invocation |
@@ -28,8 +28,8 @@ HandleValues follows ModuleContractBoundary; PureHandleFunctions follows
 HandleValues. Original candidates and their frozen review cuts are retained. Namespaces remain
 `MirroreaProofFirst.ResourceBoundary`, `LocalContract`, `ContractExport`,
 `PureFunctions`, `FunctionContractBridge`, `ModuleContractBoundary`,
-`OwnerAssignment`, `ProfileGuarantees`, `HandleValues` and `PureHandleFunctions`. The repo mirror changes only import
-module names from the frozen scratch cut; no claim depends on filename identity.
+`OwnerAssignment`, `ProfileGuarantees`, `HandleValues` and `PureHandleFunctions`. Original mirrors adapt import module names; later capture/catalog extensions
+are separate unreviewed deltas. No claim depends on filename identity.
 
 ## Meaning and nonvacuity
 
@@ -98,7 +98,17 @@ mutant checks.
 
 The supplied World and Registry remain trusted. Nominal IDs do not authenticate
 the actual descriptor mapping; full module/operation stamps do not cover every
-other record revision. No registry install/update/retire protocol, caller proof
+other record revision. The later catalog candidate adds only bounded no-overwrite descriptor insertion
+and an explicitly selected catalogCall entry. General finite insertion sequences
+preserve old bindings and well-formedness; current catalog lookup rejects a
+different descriptor even with a fresh envelope. Positive registered calls agree
+with the original boundary. The retained raw call and existing handle consumers
+still use the weaker path. A concrete raw-call control changes actual code while
+keeping nominal IDs and rebuilding its envelope, and succeeds with the supplied
+trusted registry. This exposes the missing integrity premise; it is not a
+production exploit or authorization bypass theorem. A catalog snapshot supplied
+by an attacker or restored from an old head remains outside the protection.
+No authenticated registry install/update/retire protocol, caller proof
 possession, current-head acquisition, all-entry preservation, serialization,
 restore/import or concurrent publication is established. A proof cannot issue auth.
 
@@ -112,8 +122,18 @@ No existing Mir parser, checked Core, real network, persistence, source-level
 configuration creation, or first-class current module handle is refined by these
 ten files. OwnerAssignment now models ordinary writes to imported base state
 and explicitly captured values, with separate value/type/label environments.
-Capture authentication, authorization, selection labels and metadata provenance
-remain unmet premises. Its literalization counterexample preserves values but
+Capture authentication, authorization and metadata provenance remain unmet premises.
+The later Capture namespace checks expression type, data flow and capture control
+label. Separate per-slot read valuations avoid imposing a shared capture cut.
+A single explicit capture followed by assignment includes actual capture failure;
+its checker additionally bounds the completion dependency by the target label.
+General frame, type and two-run projected-outcome preservation hold for that
+composition. Ignoring this completion dependency allows secret-dependent overflow
+to suppress an otherwise public constant write; the concrete counterexample and
+two rejected checker mutations are retained. Arbitrary event selection, capture
+presence/timing, source metadata authenticity and concurrent capture realization
+are still open. This does not silently add snapshot semantics to ordinary reads.
+Its literalization counterexample preserves values but
 changes the generated program with secret input and leaks through a low write;
 it does not contradict a fixed-program noninterference theorem.
 HandleValues/PureHandleFunctions model carrying interface references, not
@@ -133,7 +153,7 @@ launch lock. A revised packet freshly kernel-checked by the main agent is runnin
 `mirrorea-w2-integrated-review` using a dedicated attached tab, preserving the
 original W1 job. Neither job has a collected result. That revised cut contains
 OwnerAssignment and the six earlier W2 modules; ProfileGuarantees, HandleValues
-and PureHandleFunctions are later and cannot inherit its eventual review.
+and PureHandleFunctions, plus the later OwnerAssignment.Capture and ModuleContractBoundary catalog extensions, are outside that frozen cut and cannot inherit its eventual review.
 No independent Lean execution or signed reviewer is claimed. All ten sources
 remain unreviewed candidates. W1's pending abort/alias/source extensions are not
 premises of these new modules.
