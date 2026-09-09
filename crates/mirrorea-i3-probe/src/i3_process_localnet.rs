@@ -31,6 +31,12 @@ use mir_runtime::{
         Sys5I3ProviderChildRole, Sys5I3ProviderLaunchError, Sys5I3ProviderLaunchErrorKind,
         Sys5I3ProviderTerminalOutcomeClass, Sys5I3TrustedProviderLocalnetControl,
         Sys5I3UntrustedProviderTerminalAuditObserverViewCandidate,
+        drive_i3_process_local_cut_late_reply_after_cut_owner_child_from_inherited,
+        drive_i3_process_local_cut_late_reply_after_cut_requester_child_from_inherited,
+        drive_i3_process_local_cut_owner_child_from_inherited,
+        drive_i3_process_local_cut_partial_receive_cancel_and_close_owner_child_from_inherited,
+        drive_i3_process_local_cut_partial_receive_cancel_and_close_requester_child_from_inherited,
+        drive_i3_process_local_cut_requester_child_from_inherited,
     },
     sys5_local_slice::{Sys5I3AdapterCarrierContract, Sys5SourceInput, build_project},
 };
@@ -371,6 +377,18 @@ pub struct I3OwnerMembershipSuccessorLocalnetConformanceRun {
 #[doc(hidden)]
 #[derive(Clone, Copy, Debug, Eq, PartialEq)]
 pub struct I3OwnerMembershipSuccessorLocalnetConformanceError;
+
+/// Opaque completion of the fixed source-real requester-local-cut route.
+/// It exposes no source, value, state, result, custody, or transition facts.
+#[doc(hidden)]
+pub struct I3ProcessLocalCutAdmissionConformanceRun {
+    _private: (),
+}
+
+/// Opaque non-success for the fixed source-real requester-local-cut route.
+#[doc(hidden)]
+#[derive(Clone, Copy, Debug, Eq, PartialEq)]
+pub struct I3ProcessLocalCutAdmissionConformanceError;
 
 #[derive(Clone, Copy, Debug, Eq, PartialEq)]
 enum PrivateProviderTerminalExpectation {
@@ -2522,6 +2540,9 @@ struct PrivateChildControl {
     // authority-bearing membership field: B must still validate the distinct
     // typed membership lifecycle embedded in its trusted runtime control.
     owner_membership_successor_profile: Option<PrivateOwnerMembershipSuccessorConformanceProfile>,
+    // A sealed no-input Row20 route selector. The runtime-owned inherited
+    // control remains the sole source of its process-local-cut custody.
+    process_local_cut_admission_profile: Option<PrivateProcessLocalCutAdmissionProfile>,
     adapter_delivery_profile: Option<I3LocalnetAdapterDeliveryProfile>,
     // A negative-only candidate-shaped ACK frame for A's actual stdout route.
     // It cannot be decoded to an installed receipt or offered to the
@@ -2647,6 +2668,16 @@ enum PrivateOwnerMembershipSuccessorConformanceProfile {
     RetainedG1AfterInstalledSuccessor,
 }
 
+/// The one fixed Row20 route. It selects no source, value, custody, state,
+/// result, or local-cut transition; those stay in the inherited runtime frame.
+#[derive(Clone, Copy, Debug, Eq, PartialEq, Serialize, Deserialize)]
+#[serde(rename_all = "snake_case")]
+enum PrivateProcessLocalCutAdmissionProfile {
+    CanonicalSource,
+    LateReplyAfterCut,
+    PartialReceiveCancelAndClose,
+}
+
 /// The trusted descriptor is still untrusted input from the child process's
 /// perspective.  Reject duplicate top-level members before deserializing the
 /// finite control DTO; `serde_json::Value` alone would silently apply
@@ -2761,6 +2792,12 @@ enum PrivateChildEvent {
     /// slot: retirement removes the ordinary ContractUpdate/observer lineage,
     /// so no semantic fault, trace, ACK, membership, or counter is exported.
     OwnerMembershipSuccessorConformanceCompleted {
+        slot: I3LocalnetChildSlot,
+    },
+    /// Generic terminal marker for the fixed source-real local-cut route.
+    /// The runtime owns all source, custody, and transition checks; the probe
+    /// transports only the child slot after the opaque driver succeeds.
+    ProcessLocalCutAdmissionConformanceCompleted {
         slot: I3LocalnetChildSlot,
     },
     Rejected {
@@ -3316,6 +3353,7 @@ impl PrivateChildEvent {
                 | Self::ProviderTerminalObservationConformanceCompleted { .. }
                 | Self::ProviderNetworkConformanceCompleted { .. }
                 | Self::OwnerMembershipSuccessorConformanceCompleted { .. }
+                | Self::ProcessLocalCutAdmissionConformanceCompleted { .. }
                 | Self::Rejected { .. }
                 | Self::HandledDeliveryFault { .. }
                 | Self::AdapterDeliveryFault { .. }
@@ -3348,6 +3386,7 @@ impl PrivateChildEvent {
             | Self::ProviderTerminalObservationConformanceCompleted { .. }
             | Self::ProviderNetworkConformanceCompleted { .. }
             | Self::OwnerMembershipSuccessorConformanceCompleted { .. }
+            | Self::ProcessLocalCutAdmissionConformanceCompleted { .. }
             | Self::Rejected { .. }
             | Self::AdapterDeliveryFault { .. }
             | Self::LateIngress { .. }
@@ -3368,6 +3407,7 @@ impl PrivateChildEvent {
             | Self::ProviderTerminalObservationConformanceCompleted { .. }
             | Self::ProviderNetworkConformanceCompleted { .. }
             | Self::OwnerMembershipSuccessorConformanceCompleted { .. }
+            | Self::ProcessLocalCutAdmissionConformanceCompleted { .. }
             | Self::Rejected { .. }
             | Self::AdapterDeliveryFault { .. }
             | Self::LateIngress { .. }
@@ -3407,6 +3447,7 @@ impl PrivateChildEvent {
             | Self::ProviderTerminalObservationConformanceCompleted { .. }
             | Self::ProviderNetworkConformanceCompleted { .. }
             | Self::OwnerMembershipSuccessorConformanceCompleted { .. }
+            | Self::ProcessLocalCutAdmissionConformanceCompleted { .. }
             | Self::UnknownLifecycleFailure { .. } => None,
         }
     }
@@ -3583,6 +3624,7 @@ impl PrivateChildEvent {
             | Self::ProviderTerminalObservationConformanceCompleted { .. }
             | Self::ProviderNetworkConformanceCompleted { .. }
             | Self::OwnerMembershipSuccessorConformanceCompleted { .. }
+            | Self::ProcessLocalCutAdmissionConformanceCompleted { .. }
             | Self::UnknownLifecycleFailure { .. } => None,
         }
     }
@@ -3970,6 +4012,206 @@ pub fn run_i3_source_real_g1_carrier_after_owner_membership_successor_localnet()
     )
 }
 
+/// Runs the fixed source-real requester-local-cut route. The runtime issues
+/// both child bootstraps only after validating the complete unstaged cohort;
+/// the probe then retains its existing supervisor and physical QUIC setup.
+#[doc(hidden)]
+pub fn run_i3_source_real_process_local_cut_admission_localnet()
+-> Result<I3ProcessLocalCutAdmissionConformanceRun, I3ProcessLocalCutAdmissionConformanceError> {
+    run_i3_source_real_process_local_cut_admission_with_profile(
+        PrivateProcessLocalCutAdmissionProfile::CanonicalSource,
+    )
+}
+
+/// Runs the fixed source-real late-reply-after-cut conformance route.
+#[doc(hidden)]
+pub fn run_i3_source_real_process_local_cut_late_reply_localnet()
+-> Result<I3ProcessLocalCutAdmissionConformanceRun, I3ProcessLocalCutAdmissionConformanceError> {
+    run_i3_source_real_process_local_cut_admission_with_profile(
+        PrivateProcessLocalCutAdmissionProfile::LateReplyAfterCut,
+    )
+}
+
+/// Runs the fixed source-real partial-receive/cancel/close conformance route.
+#[doc(hidden)]
+pub fn run_i3_source_real_process_local_cut_cancelled_io_localnet()
+-> Result<I3ProcessLocalCutAdmissionConformanceRun, I3ProcessLocalCutAdmissionConformanceError> {
+    run_i3_source_real_process_local_cut_admission_with_profile(
+        PrivateProcessLocalCutAdmissionProfile::PartialReceiveCancelAndClose,
+    )
+}
+
+fn run_i3_source_real_process_local_cut_admission_with_profile(
+    profile: PrivateProcessLocalCutAdmissionProfile,
+) -> Result<I3ProcessLocalCutAdmissionConformanceRun, I3ProcessLocalCutAdmissionConformanceError> {
+    let source_path = Path::new(env!("CARGO_MANIFEST_DIR"))
+        .join("../..")
+        .join(ACTIVE_I2_LOGICAL_SOURCE_PATH);
+    let source =
+        fs::read_to_string(&source_path).map_err(|_| I3ProcessLocalCutAdmissionConformanceError)?;
+    let project = build_project(Sys5SourceInput::inline(
+        logical_source_path(&source_path),
+        source,
+    ))
+    .map_err(|_| I3ProcessLocalCutAdmissionConformanceError)?;
+    let deployment = Sys5I3Deployment::from_checked_project(
+        &project,
+        [
+            Sys5I3DeploymentSlot::new(PROCESS_A_SLOT, "127.0.0.1:0", PROCESS_A_LOCI),
+            Sys5I3DeploymentSlot::new(PROCESS_B_SLOT, "127.0.0.1:0", PROCESS_B_LOCI),
+        ],
+    )
+    .map_err(|_| I3ProcessLocalCutAdmissionConformanceError)?;
+    let mut cohort = Sys5I3ProcessCohort::from_checked_project(&project, &deployment)
+        .map_err(|_| I3ProcessLocalCutAdmissionConformanceError)?;
+    let codec = Sys5I3PrivateProcessCodec::private_provisional_v1();
+    let credentials =
+        generate_run_credentials().map_err(|_| I3ProcessLocalCutAdmissionConformanceError)?;
+    let run_ref = fresh_run_ref(
+        cohort.observer_safe_summary().cohort_occurrence_ref(),
+        &credentials.process_a.spki_ref,
+        &credentials.process_b.spki_ref,
+    );
+    let mut launch = cohort
+        .take_i3_process_local_cut_launch(
+            &codec,
+            &run_ref,
+            &credentials.process_a.spki_ref,
+            &credentials.process_b.spki_ref,
+        )
+        .map_err(|_| I3ProcessLocalCutAdmissionConformanceError)?;
+    let (owner_image, owner_control) = launch
+        .take_owner_bootstrap()
+        .and_then(|bootstrap| bootstrap.into_private_child_frames())
+        .map_err(|_| I3ProcessLocalCutAdmissionConformanceError)?
+        .into_image_and_trusted_control_frames();
+    let (requester_image, requester_control) = launch
+        .take_requester_bootstrap()
+        .and_then(|bootstrap| bootstrap.into_private_child_frames())
+        .map_err(|_| I3ProcessLocalCutAdmissionConformanceError)?
+        .into_image_and_trusted_control_frames();
+
+    let deadline = Duration::from_secs(15);
+    let lifecycle_started = Instant::now();
+    let main_deadline = lifecycle_started + deadline;
+    let mut supervisor = LocalnetSupervisor {
+        lifecycle_started,
+        deadline: main_deadline,
+        total_lifecycle_deadline: main_deadline + Duration::from_secs(1),
+        natural_reaper_exhausted: false,
+        zero_exit_reap_observed_at: None,
+        zero_exit_reap_observation_elapsed: None,
+        zero_exit_reap_observed_within_deadline: false,
+        children: Vec::new(),
+        provider_launch: None,
+    };
+    let execution = (|| -> Result<I3ProcessLocalCutAdmissionConformanceRun, ()> {
+        let owner_child = PrivateChildControl {
+            slot: I3LocalnetChildSlot::ProcessB,
+            endpoint: None,
+            trusted_runtime_control: owner_control,
+            ca_der: credentials.ca_der.clone(),
+            leaf_cert_der: credentials.process_b.certificate_der,
+            leaf_key_der: credentials.process_b.private_key_der,
+            inject_bad_preface: false,
+            stall_bootstrap: false,
+            stall_cleanup: false,
+            setup_failure_during_stall: false,
+            terminal_lifecycle_falsifier: PrivateChildTerminalLifecycleFalsifier::None,
+            emit_request_before_wrong_peer_rejection: false,
+            fault_profile: None,
+            fault_audit_falsifier: None,
+            requester_local_wait_profile: None,
+            requester_local_wait_falsifier: None,
+            retry_profile: None,
+            retry_falsifier: None,
+            retry_audit_falsifier: None,
+            owner_admission_drive_profile: None,
+            owner_reply_replay_profile: None,
+            owner_reply_replay_falsifier: None,
+            late_ingress_profile: None,
+            late_ingress_falsifier: None,
+            owner_membership_successor_profile: None,
+            process_local_cut_admission_profile: Some(profile),
+            adapter_delivery_profile: None,
+            tainted_owner_lifecycle_ack_candidate: None,
+            timeout_millis: deadline.as_millis().try_into().unwrap_or(u64::MAX),
+        };
+        let process_b = supervisor
+            .spawn(I3LocalnetChildSlot::ProcessB, owner_image, owner_child)
+            .map_err(|_| ())?;
+        let endpoint = match supervisor.next_event(process_b) {
+            Ok(PrivateChildEvent::Ready { endpoint }) if is_loopback_endpoint(&endpoint) => {
+                endpoint
+            }
+            _ => return Err(()),
+        };
+        let requester_child = PrivateChildControl {
+            slot: I3LocalnetChildSlot::ProcessA,
+            endpoint: Some(endpoint.clone()),
+            trusted_runtime_control: requester_control,
+            ca_der: credentials.ca_der,
+            leaf_cert_der: credentials.process_a.certificate_der,
+            leaf_key_der: credentials.process_a.private_key_der,
+            inject_bad_preface: false,
+            stall_bootstrap: false,
+            stall_cleanup: false,
+            setup_failure_during_stall: false,
+            terminal_lifecycle_falsifier: PrivateChildTerminalLifecycleFalsifier::None,
+            emit_request_before_wrong_peer_rejection: false,
+            fault_profile: None,
+            fault_audit_falsifier: None,
+            requester_local_wait_profile: None,
+            requester_local_wait_falsifier: None,
+            retry_profile: None,
+            retry_falsifier: None,
+            retry_audit_falsifier: None,
+            owner_admission_drive_profile: None,
+            owner_reply_replay_profile: None,
+            owner_reply_replay_falsifier: None,
+            late_ingress_profile: None,
+            late_ingress_falsifier: None,
+            owner_membership_successor_profile: None,
+            process_local_cut_admission_profile: Some(profile),
+            adapter_delivery_profile: None,
+            tainted_owner_lifecycle_ack_candidate: None,
+            timeout_millis: deadline.as_millis().try_into().unwrap_or(u64::MAX),
+        };
+        let process_a = supervisor
+            .spawn(
+                I3LocalnetChildSlot::ProcessA,
+                requester_image,
+                requester_child,
+            )
+            .map_err(|_| ())?;
+        let requester_terminal = supervisor.next_event(process_a).map_err(|_| ())?;
+        let owner_terminal = supervisor.next_event(process_b).map_err(|_| ())?;
+        process_local_cut_admission_conformance_completed(
+            requester_terminal,
+            I3LocalnetChildSlot::ProcessA,
+        )
+        .and_then(|_| {
+            process_local_cut_admission_conformance_completed(
+                owner_terminal,
+                I3LocalnetChildSlot::ProcessB,
+            )
+        })
+        .map_err(|_| ())?;
+        if !supervisor.wait_for_natural_exits()
+            || !supervisor.zero_exit_reap_observed_within_deadline()
+            || !verify_actual_ready_endpoint_rebind(&endpoint)
+        {
+            return Err(());
+        }
+        Ok(I3ProcessLocalCutAdmissionConformanceRun { _private: () })
+    })();
+    let cleanup_succeeded = supervisor.cleanup_after_failure();
+    match execution {
+        Ok(completion) if cleanup_succeeded => Ok(completion),
+        Ok(_) | Err(()) => Err(I3ProcessLocalCutAdmissionConformanceError),
+    }
+}
+
 /// Parent-only Row13 orchestration. It deliberately shares the existing
 /// supervisor, image/control framing, absolute deadline, reaper reserve, and
 /// two real QUIC children. This is not a second launcher or a semantic
@@ -4106,6 +4348,7 @@ fn run_i3_source_real_owner_membership_successor_conformance(
             late_ingress_profile: None,
             late_ingress_falsifier: None,
             owner_membership_successor_profile: Some(profile),
+            process_local_cut_admission_profile: None,
             adapter_delivery_profile: None,
             tainted_owner_lifecycle_ack_candidate: None,
             timeout_millis: deadline.as_millis().try_into().unwrap_or(u64::MAX),
@@ -4170,6 +4413,7 @@ fn run_i3_source_real_owner_membership_successor_conformance(
             late_ingress_profile: None,
             late_ingress_falsifier: None,
             owner_membership_successor_profile: Some(profile),
+            process_local_cut_admission_profile: None,
             adapter_delivery_profile: None,
             tainted_owner_lifecycle_ack_candidate: None,
             timeout_millis: deadline.as_millis().try_into().unwrap_or(u64::MAX),
@@ -4947,6 +5191,7 @@ fn run_swapped_pair_falsifier(
         late_ingress_profile: None,
         late_ingress_falsifier: None,
         owner_membership_successor_profile: None,
+        process_local_cut_admission_profile: None,
         adapter_delivery_profile: None,
         tainted_owner_lifecycle_ack_candidate: None,
         timeout_millis: deadline.as_millis().try_into().unwrap_or(u64::MAX),
@@ -4979,6 +5224,7 @@ fn run_swapped_pair_falsifier(
         late_ingress_profile: None,
         late_ingress_falsifier: None,
         owner_membership_successor_profile: None,
+        process_local_cut_admission_profile: None,
         adapter_delivery_profile: None,
         tainted_owner_lifecycle_ack_candidate: None,
         timeout_millis: deadline.as_millis().try_into().unwrap_or(u64::MAX),
@@ -5309,6 +5555,7 @@ fn run_positive_or_peer_falsifier(
         late_ingress_profile,
         late_ingress_falsifier,
         owner_membership_successor_profile: None,
+        process_local_cut_admission_profile: None,
         adapter_delivery_profile,
         tainted_owner_lifecycle_ack_candidate: None,
         timeout_millis: deadline.as_millis().try_into().unwrap_or(u64::MAX),
@@ -5417,6 +5664,7 @@ fn run_positive_or_peer_falsifier(
         late_ingress_profile,
         late_ingress_falsifier,
         owner_membership_successor_profile: None,
+        process_local_cut_admission_profile: None,
         adapter_delivery_profile,
         tainted_owner_lifecycle_ack_candidate: requester_stdout_tainted_ack_candidate,
         timeout_millis: deadline.as_millis().try_into().unwrap_or(u64::MAX),
@@ -9102,6 +9350,24 @@ fn owner_membership_successor_conformance_completed(
     Ok(())
 }
 
+/// Correlate Row20's runtime-owned conformance only with the physical slot.
+/// Source actions, the local-cut custody capsule, and both owner transitions
+/// remain inside the opaque child driver.
+fn process_local_cut_admission_conformance_completed(
+    event: PrivateChildEvent,
+    slot: I3LocalnetChildSlot,
+) -> Result<(), ()> {
+    let PrivateChildEvent::ProcessLocalCutAdmissionConformanceCompleted { slot: event_slot } =
+        event
+    else {
+        return Err(());
+    };
+    if event_slot != slot {
+        return Err(());
+    }
+    Ok(())
+}
+
 /// The fixed source-real path has exactly one request. Its M9-gated views
 /// retain actual first-slot send reservation/completion and complete-receive
 /// facts on their local endpoint. The join proves each local chain against the
@@ -9504,6 +9770,9 @@ fn run_private_localnet_child_inner(fixed_slot: I3LocalnetChildSlot) -> Result<(
         return Err(());
     }
     let codec = Sys5I3PrivateProcessCodec::private_provisional_v1();
+    if control.process_local_cut_admission_profile.is_some() {
+        return run_private_process_local_cut_child_inner(fixed_slot, image, control, &codec);
+    }
     let runtime_control = codec
         .decode_trusted_localnet_control(&control.trusted_runtime_control)
         .map_err(|_| ())?;
@@ -9628,6 +9897,200 @@ fn run_private_localnet_child_inner(fixed_slot: I3LocalnetChildSlot) -> Result<(
             }
         }
     })
+}
+
+fn run_private_process_local_cut_child_inner(
+    fixed_slot: I3LocalnetChildSlot,
+    image_frame: Vec<u8>,
+    control: PrivateChildControl,
+    codec: &Sys5I3PrivateProcessCodec,
+) -> Result<(), ()> {
+    if !process_local_cut_control_is_exact(&control, fixed_slot) {
+        return Err(());
+    }
+    let timeout = Duration::from_millis(control.timeout_millis);
+    let tokio_runtime = tokio::runtime::Builder::new_current_thread()
+        .enable_all()
+        .build()
+        .map_err(|_| ())?;
+    tokio_runtime.block_on(async move {
+        match fixed_slot {
+            I3LocalnetChildSlot::ProcessA => {
+                run_process_local_cut_requester_child(codec, image_frame, control, timeout).await
+            }
+            I3LocalnetChildSlot::ProcessB => {
+                run_process_local_cut_owner_child(codec, image_frame, control, timeout).await
+            }
+        }
+    })
+}
+
+fn process_local_cut_control_is_exact(
+    control: &PrivateChildControl,
+    fixed_slot: I3LocalnetChildSlot,
+) -> bool {
+    control.slot == fixed_slot
+        && matches!(
+            control.process_local_cut_admission_profile,
+            Some(
+                PrivateProcessLocalCutAdmissionProfile::CanonicalSource
+                    | PrivateProcessLocalCutAdmissionProfile::LateReplyAfterCut
+                    | PrivateProcessLocalCutAdmissionProfile::PartialReceiveCancelAndClose
+            )
+        )
+        && !control.inject_bad_preface
+        && !control.stall_bootstrap
+        && !control.stall_cleanup
+        && !control.setup_failure_during_stall
+        && control.terminal_lifecycle_falsifier == PrivateChildTerminalLifecycleFalsifier::None
+        && !control.emit_request_before_wrong_peer_rejection
+        && control.fault_profile.is_none()
+        && control.fault_audit_falsifier.is_none()
+        && control.requester_local_wait_profile.is_none()
+        && control.requester_local_wait_falsifier.is_none()
+        && control.retry_profile.is_none()
+        && control.retry_falsifier.is_none()
+        && control.retry_audit_falsifier.is_none()
+        && control.owner_admission_drive_profile.is_none()
+        && control.owner_reply_replay_profile.is_none()
+        && control.owner_reply_replay_falsifier.is_none()
+        && control.late_ingress_profile.is_none()
+        && control.late_ingress_falsifier.is_none()
+        && control.owner_membership_successor_profile.is_none()
+        && control.adapter_delivery_profile.is_none()
+        && control.tainted_owner_lifecycle_ack_candidate.is_none()
+        && !control.trusted_runtime_control.is_empty()
+        && control.timeout_millis > 0
+        && control.timeout_millis <= 15_000
+}
+
+async fn run_process_local_cut_owner_child(
+    codec: &Sys5I3PrivateProcessCodec,
+    image_frame: Vec<u8>,
+    control: PrivateChildControl,
+    timeout: Duration,
+) -> Result<(), ()> {
+    if control.endpoint.is_some() {
+        return Err(());
+    }
+    install_ring()?;
+    let (server_config, _transport_evidence) = server_config(&control)?;
+    let endpoint =
+        Endpoint::server(server_config, SocketAddr::from(([127, 0, 0, 1], 0))).map_err(|_| ())?;
+    let endpoint_address = endpoint.local_addr().map_err(|_| ())?.to_string();
+    emit_child_event(&PrivateChildEvent::Ready {
+        endpoint: endpoint_address,
+    })
+    .map_err(|_| ())?;
+    let result = tokio::time::timeout(timeout, async {
+        let connecting = endpoint.accept().await.ok_or(())?;
+        let connection = connecting.await.map_err(|_| ())?;
+        match control.process_local_cut_admission_profile.ok_or(())? {
+            PrivateProcessLocalCutAdmissionProfile::CanonicalSource => {
+                drive_i3_process_local_cut_owner_child_from_inherited(
+                    codec,
+                    image_frame,
+                    control.trusted_runtime_control,
+                    connection,
+                )
+                .await
+            }
+            PrivateProcessLocalCutAdmissionProfile::LateReplyAfterCut => {
+                drive_i3_process_local_cut_late_reply_after_cut_owner_child_from_inherited(
+                    codec,
+                    image_frame,
+                    control.trusted_runtime_control,
+                    connection,
+                )
+                .await
+            }
+            PrivateProcessLocalCutAdmissionProfile::PartialReceiveCancelAndClose => {
+                drive_i3_process_local_cut_partial_receive_cancel_and_close_owner_child_from_inherited(
+                    codec,
+                    image_frame,
+                    control.trusted_runtime_control,
+                    connection,
+                )
+                .await
+            }
+        }
+        .map_err(|_| ())?;
+        emit_child_event(
+            &PrivateChildEvent::ProcessLocalCutAdmissionConformanceCompleted {
+                slot: I3LocalnetChildSlot::ProcessB,
+            },
+        )
+        .map_err(|_| ())
+    })
+    .await;
+    endpoint.close(0_u32.into(), b"completed");
+    let _ = tokio::time::timeout(Duration::from_secs(1), endpoint.wait_idle()).await;
+    result.map_err(|_| ())?
+}
+
+async fn run_process_local_cut_requester_child(
+    codec: &Sys5I3PrivateProcessCodec,
+    image_frame: Vec<u8>,
+    control: PrivateChildControl,
+    timeout: Duration,
+) -> Result<(), ()> {
+    let endpoint_address = control
+        .endpoint
+        .as_deref()
+        .ok_or(())?
+        .parse::<SocketAddr>()
+        .map_err(|_| ())?;
+    install_ring()?;
+    let mut endpoint = Endpoint::client(SocketAddr::from(([127, 0, 0, 1], 0))).map_err(|_| ())?;
+    let (client_config, _transport_evidence) = client_config(&control)?;
+    endpoint.set_default_client_config(client_config);
+    let result = tokio::time::timeout(timeout, async {
+        let connection = endpoint
+            .connect(endpoint_address, "localhost")
+            .map_err(|_| ())?
+            .await
+            .map_err(|_| ())?;
+        match control.process_local_cut_admission_profile.ok_or(())? {
+            PrivateProcessLocalCutAdmissionProfile::CanonicalSource => {
+                drive_i3_process_local_cut_requester_child_from_inherited(
+                    codec,
+                    image_frame,
+                    control.trusted_runtime_control,
+                    connection,
+                )
+                .await
+            }
+            PrivateProcessLocalCutAdmissionProfile::LateReplyAfterCut => {
+                drive_i3_process_local_cut_late_reply_after_cut_requester_child_from_inherited(
+                    codec,
+                    image_frame,
+                    control.trusted_runtime_control,
+                    connection,
+                )
+                .await
+            }
+            PrivateProcessLocalCutAdmissionProfile::PartialReceiveCancelAndClose => {
+                drive_i3_process_local_cut_partial_receive_cancel_and_close_requester_child_from_inherited(
+                    codec,
+                    image_frame,
+                    control.trusted_runtime_control,
+                    connection,
+                )
+                .await
+            }
+        }
+        .map_err(|_| ())?;
+        emit_child_event(
+            &PrivateChildEvent::ProcessLocalCutAdmissionConformanceCompleted {
+                slot: I3LocalnetChildSlot::ProcessA,
+            },
+        )
+        .map_err(|_| ())
+    })
+    .await;
+    endpoint.close(0_u32.into(), b"completed");
+    let _ = tokio::time::timeout(Duration::from_secs(1), endpoint.wait_idle()).await;
+    result.map_err(|_| ())?
 }
 
 fn read_tainted_image() -> io::Result<Vec<u8>> {

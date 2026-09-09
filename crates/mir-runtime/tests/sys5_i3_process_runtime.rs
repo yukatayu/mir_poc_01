@@ -296,6 +296,64 @@ fn private_process_json_frame(value: &Value) -> Vec<u8> {
     frame
 }
 
+#[test]
+#[cfg(all(feature = "i3-private-quic", feature = "i3-process-test-seams"))]
+fn i3_3_cut_purpose_nested_unknown_member_is_rejected_by_trusted_control_codec() {
+    // LOCAL strict-codec evidence. The baseline control is issued only by a
+    // genuine cut launch; the mutation changes one nested purpose member and
+    // preserves the existing exact private frame encoding.
+    let project = build_once(CANONICAL_SOURCE);
+    let deployment = two_nonempty_slots(&project);
+    let codec = Sys5I3PrivateProcessCodec::private_provisional_v1();
+    let mut cohort = single_coordinator_cohort(&project, &deployment);
+    let mut launch = cohort
+        .take_i3_process_local_cut_launch(
+            &codec,
+            "i3-3-cut-purpose-nested-unknown-member",
+            "requester-spki:i3-3-cut-purpose-nested-unknown-member",
+            "owner-spki:i3-3-cut-purpose-nested-unknown-member",
+        )
+        .expect("the genuine fresh cohort issues one requester cut control");
+    let (_image_frame, genuine_control_frame) = launch
+        .take_requester_bootstrap()
+        .expect("the genuine requester cut bootstrap remains one-use custody material")
+        .into_private_child_frames()
+        .expect("the issued requester bootstrap contains the paired control frame")
+        .into_image_and_trusted_control_frames();
+    codec
+        .decode_trusted_localnet_control(&genuine_control_frame)
+        .expect("the untouched factory-issued requester control decodes before one-field mutation");
+
+    let mut candidate = private_process_json(&genuine_control_frame, "/purpose/process_local_cut");
+    let purpose = candidate
+        .pointer_mut("/purpose/process_local_cut")
+        .and_then(Value::as_object_mut)
+        .expect("the genuine cut control retains the nested ProcessLocalCut purpose object");
+    assert_eq!(
+        purpose.get("role").and_then(Value::as_str),
+        Some("requester"),
+        "the requester bootstrap selects its exact role before nested-purpose mutation"
+    );
+    assert!(
+        purpose.get("unexpected_test_member").is_none(),
+        "the untouched factory-issued nested purpose has no test mutation member"
+    );
+    purpose.insert("unexpected_test_member".to_owned(), Value::Bool(true));
+    let mutated_control_frame = private_process_json_frame(&candidate);
+
+    let rejection = match codec.decode_trusted_localnet_control(&mutated_control_frame) {
+        Ok(_) => panic!(
+            "a nested unknown ProcessLocalCut member must fail closed at the trusted-control codec boundary"
+        ),
+        Err(error) => error,
+    };
+    assert_eq!(
+        rejection.kind(),
+        Sys5I3PrivateProcessCodecErrorKind::Malformed,
+        "the nested-purpose mutation is semantic malformed control, not a framing failure"
+    );
+}
+
 #[cfg(all(unix, feature = "i3-process-test-seams"))]
 fn private_owner_lifecycle_ack_v2_json(frame: &[u8]) -> Value {
     assert!(

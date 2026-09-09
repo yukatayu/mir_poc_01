@@ -27,11 +27,11 @@ use super::sys5_i3_process_runtime::{
     Sys5I3InstalledProviderChildRuntime, Sys5I3LocalnetControlErrorKind, Sys5I3LocalnetPeerPreface,
     Sys5I3OriginalOwnerRequestAttemptKind, Sys5I3OriginalOwnerRequestPending,
     Sys5I3PrivateProcessCodec, Sys5I3PrivateProviderTransportOccurrence,
-    Sys5I3PrivateProviderTransportOccurrenceKind, Sys5I3ProcessMessage, Sys5I3ProcessRuntime,
-    Sys5I3ProcessRuntimeError, Sys5I3ProcessRuntimeErrorKind, Sys5I3ProviderConsumeReceipt,
-    Sys5I3ProviderLocalnetPeerPreface, Sys5I3ProviderRequestCarrier, Sys5I3ProviderResultCarrier,
-    Sys5I3TrustedLocalnetControl, Sys5I3TrustedProviderLocalnetControl,
-    Sys5I3UntrustedProcessMessage, strict_json_value,
+    Sys5I3PrivateProviderTransportOccurrenceKind, Sys5I3ProcessLocalCutControlRole,
+    Sys5I3ProcessMessage, Sys5I3ProcessRuntime, Sys5I3ProcessRuntimeError,
+    Sys5I3ProcessRuntimeErrorKind, Sys5I3ProviderConsumeReceipt, Sys5I3ProviderLocalnetPeerPreface,
+    Sys5I3ProviderRequestCarrier, Sys5I3ProviderResultCarrier, Sys5I3TrustedLocalnetControl,
+    Sys5I3TrustedProviderLocalnetControl, Sys5I3UntrustedProcessMessage, strict_json_value,
 };
 
 const MAX_PRIVATE_QUIC_BLOB_BYTES: usize = 64 * 1024;
@@ -457,6 +457,20 @@ pub struct Sys5I3PrivateQuicGeneratedReplyReplayCandidate {
     original_send_delivery: Sys5I3PrivateQuicDeliveryEvidence,
 }
 
+/// One adapter-retained Row20 first Reply. It is created only after the
+/// verified owner session has fully written that reply, stays bound to that
+/// physical Quinn connection, and is consumed only by the fixed late-reply
+/// conformance path. It is neither a generic replay right nor an authority.
+#[cfg(feature = "i3-process-test-seams")]
+pub(crate) struct Sys5I3PrivateQuicProcessLocalCutRetainedOwnerReply {
+    body: Vec<u8>,
+    first_request_identity_ref: String,
+    cohort_provenance_ref: String,
+    control_binding: Sys5I3LocalnetPeerPreface,
+    connection_stable_id: usize,
+    session_attempt_generation: u8,
+}
+
 /// Observer-safe evidence from the one retained initial Reply write and its
 /// one actual successor-session replay write.  The adapter returns this only
 /// after the replay write completes; it exports neither the retained bytes
@@ -576,6 +590,9 @@ impl Sys5I3PrivateQuicSession {
         connection: Connection,
         control: Sys5I3TrustedLocalnetControl,
     ) -> Result<Self, Sys5I3PrivateQuicError> {
+        if !control.has_ordinary_purpose() {
+            return Err(Sys5I3PrivateQuicError::LocalAttemptRejected);
+        }
         verify_exact_peer_spki(&connection, control.expected_peer_spki_ref())?;
         let (send, receive) = connection
             .open_bi()
@@ -602,6 +619,9 @@ impl Sys5I3PrivateQuicSession {
         connection: Connection,
         control: Sys5I3TrustedLocalnetControl,
     ) -> Result<Self, Sys5I3PrivateQuicError> {
+        if !control.has_ordinary_purpose() {
+            return Err(Sys5I3PrivateQuicError::LocalAttemptRejected);
+        }
         verify_exact_peer_spki(&connection, control.expected_peer_spki_ref())?;
         let (send, receive) = connection
             .accept_bi()
@@ -618,6 +638,66 @@ impl Sys5I3PrivateQuicSession {
             next_network_occurrence: 0,
             pending_ingress_permit: Sys5I3PrivateQuicPendingIngressPermit::Unacquired,
             #[cfg(feature = "i3-process-test-seams")]
+            generated_reply_replay_candidate_issued: false,
+        })
+    }
+
+    /// Row20's custody path owns its first stream from bootstrap.  Unlike
+    /// the ordinary constructor it accepts only the factory-issued purpose
+    /// for the named child role; it still performs the same peer-SPKI check
+    /// and opens no caller-supplied stream.
+    #[cfg(feature = "i3-process-test-seams")]
+    pub(crate) async fn connect_process_local_cut(
+        connection: Connection,
+        control: Sys5I3TrustedLocalnetControl,
+    ) -> Result<Self, Sys5I3PrivateQuicError> {
+        if !control.has_process_local_cut_purpose(Sys5I3ProcessLocalCutControlRole::Requester) {
+            return Err(Sys5I3PrivateQuicError::LocalAttemptRejected);
+        }
+        verify_exact_peer_spki(&connection, control.expected_peer_spki_ref())?;
+        let (send, receive) = connection
+            .open_bi()
+            .await
+            .map_err(|_| Sys5I3PrivateQuicError::FrameRejected)?;
+        Ok(Self {
+            connection,
+            send,
+            receive,
+            control: PrivateQuicControl::Ordinary(control),
+            peer_spki_verified: true,
+            peer_preface_verified: false,
+            session_attempt_generation: 1,
+            next_network_occurrence: 0,
+            pending_ingress_permit: Sys5I3PrivateQuicPendingIngressPermit::Unacquired,
+            generated_reply_replay_candidate_issued: false,
+        })
+    }
+
+    /// Server-side counterpart of `connect_process_local_cut`.  The exact
+    /// owner purpose is checked before accepting the owned bidi stream.
+    #[cfg(feature = "i3-process-test-seams")]
+    pub(crate) async fn accept_process_local_cut(
+        connection: Connection,
+        control: Sys5I3TrustedLocalnetControl,
+    ) -> Result<Self, Sys5I3PrivateQuicError> {
+        if !control.has_process_local_cut_purpose(Sys5I3ProcessLocalCutControlRole::Owner) {
+            return Err(Sys5I3PrivateQuicError::LocalAttemptRejected);
+        }
+        verify_exact_peer_spki(&connection, control.expected_peer_spki_ref())?;
+        let (send, receive) = connection
+            .accept_bi()
+            .await
+            .map_err(|_| Sys5I3PrivateQuicError::FrameRejected)?;
+        Ok(Self {
+            connection,
+            send,
+            receive,
+            control: PrivateQuicControl::Ordinary(control),
+            peer_spki_verified: true,
+            peer_preface_verified: false,
+            session_attempt_generation: 1,
+            next_network_occurrence: 0,
+            pending_ingress_permit: Sys5I3PrivateQuicPendingIngressPermit::Unacquired,
             generated_reply_replay_candidate_issued: false,
         })
     }
@@ -711,8 +791,26 @@ impl Sys5I3PrivateQuicSession {
         &self,
     ) -> Result<&Sys5I3TrustedLocalnetControl, Sys5I3PrivateQuicError> {
         match &self.control {
-            PrivateQuicControl::Ordinary(control) => Ok(control),
+            PrivateQuicControl::Ordinary(control) if control.has_ordinary_purpose() => Ok(control),
             PrivateQuicControl::Provider(_) => Err(Sys5I3PrivateQuicError::LocalAttemptRejected),
+            PrivateQuicControl::Ordinary(_) => Err(Sys5I3PrivateQuicError::LocalAttemptRejected),
+        }
+    }
+
+    #[cfg(feature = "i3-process-test-seams")]
+    fn require_process_local_cut_control(
+        &self,
+        role: Sys5I3ProcessLocalCutControlRole,
+    ) -> Result<&Sys5I3TrustedLocalnetControl, Sys5I3PrivateQuicError> {
+        match &self.control {
+            PrivateQuicControl::Ordinary(control)
+                if control.has_process_local_cut_purpose(role) =>
+            {
+                Ok(control)
+            }
+            PrivateQuicControl::Provider(_) | PrivateQuicControl::Ordinary(_) => {
+                Err(Sys5I3PrivateQuicError::LocalAttemptRejected)
+            }
         }
     }
 
@@ -761,6 +859,23 @@ impl Sys5I3PrivateQuicSession {
             ));
         }
         if self.session_attempt_generation != required_session_attempt_generation {
+            return Err(Sys5I3PrivateQuicError::LocalAttemptRejected);
+        }
+        Ok(())
+    }
+
+    #[cfg(feature = "i3-process-test-seams")]
+    fn require_verified_process_local_cut_session(
+        &self,
+        role: Sys5I3ProcessLocalCutControlRole,
+    ) -> Result<(), Sys5I3PrivateQuicError> {
+        self.require_process_local_cut_control(role)?;
+        if !self.peer_spki_verified || !self.peer_preface_verified {
+            return Err(Sys5I3PrivateQuicError::peer_binding_rejected(
+                self.control.expected_peer_spki_ref(),
+            ));
+        }
+        if self.session_attempt_generation != 1 {
             return Err(Sys5I3PrivateQuicError::LocalAttemptRejected);
         }
         Ok(())
@@ -1224,6 +1339,84 @@ impl Sys5I3PrivateQuicSession {
         Ok(evidence)
     }
 
+    /// Row20 owner-side reply delivery.  It reuses the ordinary bounded
+    /// carrier encoding and write path but is reachable only from the
+    /// factory-issued owner custody session.
+    #[cfg(feature = "i3-process-test-seams")]
+    pub(crate) async fn send_process_local_cut_generated_message(
+        &mut self,
+        message: Sys5I3ProcessMessage,
+    ) -> Result<Sys5I3PrivateQuicDeliveryEvidence, Sys5I3PrivateQuicError> {
+        self.require_verified_process_local_cut_session(Sys5I3ProcessLocalCutControlRole::Owner)?;
+        let encoded = Self::encode_generated_message(message)?;
+        let (body, evidence) = self.reserve_generated_message_delivery(encoded)?;
+        self.write_blob(&body).await?;
+        Ok(evidence)
+    }
+
+    /// Sends the genuine first owner Reply and retains its exact encoded body
+    /// only for the one fixed same-session late-reply conformance path.
+    #[cfg(feature = "i3-process-test-seams")]
+    pub(crate) async fn send_process_local_cut_generated_reply_and_retain_for_late_admission(
+        &mut self,
+        message: Sys5I3ProcessMessage,
+    ) -> Result<Sys5I3PrivateQuicProcessLocalCutRetainedOwnerReply, Sys5I3PrivateQuicError> {
+        self.require_verified_process_local_cut_session(Sys5I3ProcessLocalCutControlRole::Owner)?;
+        let first_request_identity_ref = message.semantic_request_identity_ref().to_string();
+        let cohort_provenance_ref = message.cohort_provenance_ref().to_string();
+        if message.linked_request_identity_ref() != Some(first_request_identity_ref.as_str()) {
+            return Err(Sys5I3PrivateQuicError::LocalAttemptRejected);
+        }
+        let control_binding = self
+            .require_process_local_cut_control(Sys5I3ProcessLocalCutControlRole::Owner)?
+            .localnet_preface()
+            .clone();
+        if control_binding.cohort_provenance_ref() != cohort_provenance_ref.as_str() {
+            return Err(Sys5I3PrivateQuicError::LocalAttemptRejected);
+        }
+        let encoded = Self::encode_generated_message(message)?;
+        let (body, _) = self.reserve_generated_message_delivery(encoded)?;
+        self.write_blob(&body).await?;
+        Ok(Sys5I3PrivateQuicProcessLocalCutRetainedOwnerReply {
+            body,
+            first_request_identity_ref,
+            cohort_provenance_ref,
+            control_binding,
+            connection_stable_id: self.connection.stable_id(),
+            session_attempt_generation: self.session_attempt_generation,
+        })
+    }
+
+    /// Writes the one retained Row20 first Reply only after the same owner
+    /// runtime has genuinely admitted and served a distinct later request.
+    #[cfg(feature = "i3-process-test-seams")]
+    pub(crate) async fn send_retained_process_local_cut_reply_after_later_admission(
+        &mut self,
+        runtime: &Sys5I3ProcessRuntime,
+        retained: Sys5I3PrivateQuicProcessLocalCutRetainedOwnerReply,
+        second_reply: &Sys5I3ProcessMessage,
+    ) -> Result<(), Sys5I3PrivateQuicError> {
+        self.require_verified_process_local_cut_session(Sys5I3ProcessLocalCutControlRole::Owner)?;
+        let control_binding = self
+            .require_process_local_cut_control(Sys5I3ProcessLocalCutControlRole::Owner)?
+            .localnet_preface();
+        if retained.connection_stable_id != self.connection.stable_id()
+            || retained.session_attempt_generation != self.session_attempt_generation
+            || retained.control_binding != control_binding.clone()
+            || retained.cohort_provenance_ref.as_str() != control_binding.cohort_provenance_ref()
+            || retained.cohort_provenance_ref.as_str() != second_reply.cohort_provenance_ref()
+            || !runtime.validates_i3_process_local_cut_late_reply_after_second_admission(
+                &retained.first_request_identity_ref,
+                second_reply,
+            )
+        {
+            return Err(Sys5I3PrivateQuicError::LocalAttemptRejected);
+        }
+        let carrier_ref = carrier_ref(&retained.body);
+        self.reserve_network_occurrence_ref("send", &carrier_ref)?;
+        self.write_blob(&retained.body).await
+    }
+
     /// Test-only source-first replay falsifier.  It retains exactly one
     /// generated Reply only after the verified initial session completed the
     /// full bounded stream write.  Callers provide neither bytes nor a
@@ -1353,6 +1546,49 @@ impl Sys5I3PrivateQuicSession {
         .await
     }
 
+    /// Send one exact source-emitted requester request from the Row20
+    /// custody session.  The retained runtime pending handle and the normal
+    /// authorization/attempt accounting remain the only write authority.
+    #[cfg(feature = "i3-process-test-seams")]
+    pub(crate) async fn send_process_local_cut_original_owner_request(
+        &mut self,
+        runtime: &mut Sys5I3ProcessRuntime,
+        pending: &Sys5I3OriginalOwnerRequestPending,
+    ) -> Result<Sys5I3PrivateQuicDeliveryEvidence, Sys5I3PrivateQuicError> {
+        self.require_verified_process_local_cut_session(
+            Sys5I3ProcessLocalCutControlRole::Requester,
+        )?;
+        self.send_original_owner_request_attempt(
+            runtime,
+            pending,
+            Sys5I3OriginalOwnerRequestAttemptKind::InitialDelivery,
+            1,
+        )
+        .await
+    }
+
+    /// Begins the fixed cancellation conformance request by writing only the
+    /// exact authorized frame length.  The normal authorization, attempt,
+    /// occurrence, and runtime-commit sequence remains unchanged; only the
+    /// physical body write is deliberately left unavailable to the peer.
+    #[cfg(feature = "i3-process-test-seams")]
+    pub(crate) async fn send_process_local_cut_original_owner_request_length_prefix_then_hold(
+        &mut self,
+        runtime: &mut Sys5I3ProcessRuntime,
+        pending: &Sys5I3OriginalOwnerRequestPending,
+    ) -> Result<Sys5I3PrivateQuicDeliveryEvidence, Sys5I3PrivateQuicError> {
+        self.require_verified_process_local_cut_session(
+            Sys5I3ProcessLocalCutControlRole::Requester,
+        )?;
+        self.send_original_owner_request_attempt_length_prefix_then_hold(
+            runtime,
+            pending,
+            Sys5I3OriginalOwnerRequestAttemptKind::InitialDelivery,
+            1,
+        )
+        .await
+    }
+
     /// Retry the unchanged original request only after its control has moved
     /// through `Sys5I3PrivateQuicReconnect` into the fixed second session.
     /// The retry is an attempt outcome, never a replacement request/result.
@@ -1390,6 +1626,40 @@ impl Sys5I3PrivateQuicSession {
                 self.control.expected_peer_spki_ref(),
             ));
         }
+        self.receive_and_admit_generated_message_inner(runtime)
+            .await
+    }
+
+    /// Direct admission of a later Row20 requester message.  The first
+    /// owner ingress uses the retained-ingress path below; this method is
+    /// only available after the same owned session has already verified its
+    /// factory-issued owner purpose.
+    #[cfg(feature = "i3-process-test-seams")]
+    pub(crate) async fn receive_and_admit_process_local_cut_generated_message(
+        &mut self,
+        runtime: &mut Sys5I3ProcessRuntime,
+    ) -> Result<
+        (
+            Option<Sys5I3ProcessMessage>,
+            Sys5I3PrivateQuicDeliveryEvidence,
+        ),
+        Sys5I3PrivateQuicError,
+    > {
+        self.require_verified_process_local_cut_session(Sys5I3ProcessLocalCutControlRole::Owner)?;
+        self.receive_and_admit_generated_message_inner(runtime)
+            .await
+    }
+
+    async fn receive_and_admit_generated_message_inner(
+        &mut self,
+        runtime: &mut Sys5I3ProcessRuntime,
+    ) -> Result<
+        (
+            Option<Sys5I3ProcessMessage>,
+            Sys5I3PrivateQuicDeliveryEvidence,
+        ),
+        Sys5I3PrivateQuicError,
+    > {
         let bytes = self.read_blob().await?;
         let candidate_commitment_ref = self.candidate_commitment_ref_for_frame(&bytes);
         let network_occurrence_ref =
@@ -1397,9 +1667,6 @@ impl Sys5I3PrivateQuicSession {
         let candidate = Sys5I3PrivateProcessCodec::private_provisional_v1()
             .decode_untrusted_message(&bytes)
             .map_err(|_| Sys5I3PrivateQuicError::CodecRejected)?;
-        // These private parses must succeed before semantic mutation.  Their
-        // values are retained only on success; a rejection below reports the
-        // run-scoped commitment instead of any candidate provenance.
         let lineage = carrier_lineage(&bytes)?;
         let manifest = candidate.observer_safe_manifest();
         let admitted = runtime
@@ -1450,8 +1717,57 @@ impl Sys5I3PrivateQuicSession {
         if self.session_attempt_generation != 1 {
             return Err(Sys5I3PrivateQuicError::LocalAttemptRejected);
         }
+        self.receive_complete_pending_ingress_inner().await
+    }
+
+    /// Reserve and retain the Row20 owner's first complete ingress before
+    /// semantic admission.  Reservation occurs before the physical read, so
+    /// an error or cancellation cannot make the received frame acquirable a
+    /// second time.
+    #[cfg(feature = "i3-process-test-seams")]
+    pub(crate) async fn receive_complete_process_local_cut_pending_ingress(
+        &mut self,
+    ) -> Result<Sys5I3PrivateQuicPendingIngress, Sys5I3PrivateQuicError> {
+        self.require_verified_process_local_cut_session(Sys5I3ProcessLocalCutControlRole::Owner)?;
+        self.receive_complete_pending_ingress_inner().await
+    }
+
+    /// Exercises the fixed cancellation boundary after a real requester has
+    /// written an exact frame header.  It reserves ingress before awaiting,
+    /// proves that the body read is still pending, then drops that read while
+    /// preserving the reserved permit.  No body bytes are decoded, admitted,
+    /// or claimed as received.
+    #[cfg(feature = "i3-process-test-seams")]
+    pub(crate) async fn cancel_process_local_cut_pending_ingress_after_complete_header(
+        &mut self,
+    ) -> Result<(), Sys5I3PrivateQuicError> {
+        self.require_verified_process_local_cut_session(Sys5I3ProcessLocalCutControlRole::Owner)?;
+        self.pending_ingress_permit.reserve_acquisition()?;
+        let body_len = self.read_blob_header().await?;
+        self.read_blob_body_once_must_be_pending(body_len).await
+    }
+
+    /// True only for a verified factory-issued custody session whose retained
+    /// ingress permit has not entered acquisition.  This is a local custody
+    /// guard, not a transport-liveness or peer-quiescence claim.
+    #[cfg(feature = "i3-process-test-seams")]
+    pub(crate) fn has_unacquired_verified_process_local_cut_custody(
+        &self,
+        role: Sys5I3ProcessLocalCutControlRole,
+    ) -> bool {
+        self.require_verified_process_local_cut_session(role)
+            .is_ok()
+            && matches!(
+                &self.pending_ingress_permit,
+                Sys5I3PrivateQuicPendingIngressPermit::Unacquired
+            )
+    }
+
+    async fn receive_complete_pending_ingress_inner(
+        &mut self,
+    ) -> Result<Sys5I3PrivateQuicPendingIngress, Sys5I3PrivateQuicError> {
         // Reserve before the first await so cancellation, partial reads, and
-        // codec failure cannot reopen this session-one acquisition.
+        // codec failure cannot reopen this one ingress acquisition.
         self.pending_ingress_permit.reserve_acquisition()?;
         let bytes = self.read_blob().await?;
         let candidate_commitment_ref = self.candidate_commitment_ref_for_frame(&bytes);
@@ -1462,14 +1778,17 @@ impl Sys5I3PrivateQuicSession {
             .map_err(|_| Sys5I3PrivateQuicError::CodecRejected)?;
         self.pending_ingress_permit
             .complete_acquisition(&network_occurrence_ref)?;
+        let control_binding = match &self.control {
+            PrivateQuicControl::Ordinary(control) => control.localnet_preface(),
+            PrivateQuicControl::Provider(_) => {
+                return Err(Sys5I3PrivateQuicError::LocalAttemptRejected);
+            }
+        };
         Ok(Sys5I3PrivateQuicPendingIngress {
             bytes,
             candidate,
             session_attempt_generation: self.session_attempt_generation,
-            // This is the existing trusted transport control rendered as its
-            // exact preface binding.  It is retained opaquely and compared
-            // only by the adapter on session two; it conveys no authority.
-            control_binding: self.require_ordinary_control()?.localnet_preface(),
+            control_binding,
             candidate_commitment_ref,
             network_occurrence_ref,
         })
@@ -1506,8 +1825,48 @@ impl Sys5I3PrivateQuicSession {
         ) {
             return Err(Sys5I3PrivateQuicError::LocalAttemptRejected);
         }
-        // The exact inherited permit is consumed before semantic handoff.
-        // A runtime rejection therefore cannot reopen or replace this ingress.
+        self.admit_pending_ingress_inner(runtime, pending)
+    }
+
+    /// Consume the one first-session ingress held by the Row20 owner.  This
+    /// preserves the adapter's original reservation/complete/consume state
+    /// machine but compares the same-session factory-issued control binding
+    /// instead of permitting a generic reconnect promotion.
+    #[cfg(feature = "i3-process-test-seams")]
+    pub(crate) fn admit_process_local_cut_pending_ingress(
+        &mut self,
+        runtime: &mut Sys5I3ProcessRuntime,
+        pending: Sys5I3PrivateQuicPendingIngress,
+    ) -> Result<
+        (
+            Option<Sys5I3ProcessMessage>,
+            Sys5I3PrivateQuicDeliveryEvidence,
+        ),
+        Sys5I3PrivateQuicError,
+    > {
+        self.require_verified_process_local_cut_session(Sys5I3ProcessLocalCutControlRole::Owner)?;
+        let control_binding = self
+            .require_process_local_cut_control(Sys5I3ProcessLocalCutControlRole::Owner)?
+            .localnet_preface();
+        if pending.session_attempt_generation != self.session_attempt_generation
+            || pending.control_binding != control_binding
+        {
+            return Err(Sys5I3PrivateQuicError::LocalAttemptRejected);
+        }
+        self.admit_pending_ingress_inner(runtime, pending)
+    }
+
+    fn admit_pending_ingress_inner(
+        &mut self,
+        runtime: &mut Sys5I3ProcessRuntime,
+        pending: Sys5I3PrivateQuicPendingIngress,
+    ) -> Result<
+        (
+            Option<Sys5I3ProcessMessage>,
+            Sys5I3PrivateQuicDeliveryEvidence,
+        ),
+        Sys5I3PrivateQuicError,
+    > {
         self.pending_ingress_permit
             .consume_completed(&pending.network_occurrence_ref)?;
         let Sys5I3PrivateQuicPendingIngress {
@@ -1518,9 +1877,6 @@ impl Sys5I3PrivateQuicSession {
             candidate_commitment_ref,
             network_occurrence_ref,
         } = pending;
-        // Keep all decoded lineage local until the runtime has bound this
-        // candidate to its current sealed image.  Any rejection below returns
-        // neither the manifest nor carrier provenance.
         let admitted = runtime
             .admit_decoded_process_message(candidate)
             .map_err(|error| Sys5I3PrivateQuicError::SemanticRejected {
@@ -1530,9 +1886,6 @@ impl Sys5I3PrivateQuicSession {
                     network_occurrence_ref: network_occurrence_ref.clone(),
                 },
             })?;
-        // The retained bytes are re-decoded only after successful semantic
-        // admission so the pending value never exports candidate lineage.
-        // This is not a second ingress or admission path.
         let lineage = carrier_lineage(&bytes)?;
         let manifest = Sys5I3PrivateProcessCodec::private_provisional_v1()
             .decode_untrusted_message(&bytes)
@@ -1587,6 +1940,46 @@ impl Sys5I3PrivateQuicSession {
             .receive_and_admit_original_owner_reply_inner(runtime, &pending)
             .await;
         match result {
+            Ok((admitted, delivery)) => match admitted {
+                Sys5I3PrivateQuicAdmittedOriginalOwnerReply::Receipt(receipt) => {
+                    Sys5I3PrivateQuicOriginalOwnerReplyOutcome::Consumed {
+                        receipt: Box::new(receipt),
+                        delivery,
+                    }
+                }
+                Sys5I3PrivateQuicAdmittedOriginalOwnerReply::TerminalFailureConsumed(terminal) => {
+                    Sys5I3PrivateQuicOriginalOwnerReplyOutcome::TerminalFailureConsumed {
+                        terminal: Box::new(terminal),
+                        delivery,
+                    }
+                }
+            },
+            Err(error) => Sys5I3PrivateQuicOriginalOwnerReplyOutcome::Pending { pending, error },
+        }
+    }
+
+    /// Receive one requester-local reply through the factory-issued Row20
+    /// custody session.  It uses the ordinary exact pending/receipt path;
+    /// only the control-purpose gate differs.
+    #[cfg(feature = "i3-process-test-seams")]
+    pub(crate) async fn receive_and_admit_process_local_cut_original_owner_reply(
+        &mut self,
+        runtime: &mut Sys5I3ProcessRuntime,
+        pending: Sys5I3OriginalOwnerRequestPending,
+    ) -> Sys5I3PrivateQuicOriginalOwnerReplyOutcome {
+        if self
+            .require_verified_process_local_cut_session(Sys5I3ProcessLocalCutControlRole::Requester)
+            .is_err()
+        {
+            return Sys5I3PrivateQuicOriginalOwnerReplyOutcome::Pending {
+                pending,
+                error: Sys5I3PrivateQuicError::LocalAttemptRejected,
+            };
+        }
+        match self
+            .receive_and_admit_original_owner_reply_inner(runtime, &pending)
+            .await
+        {
             Ok((admitted, delivery)) => match admitted {
                 Sys5I3PrivateQuicAdmittedOriginalOwnerReply::Receipt(receipt) => {
                     Sys5I3PrivateQuicOriginalOwnerReplyOutcome::Consumed {
@@ -1687,6 +2080,18 @@ impl Sys5I3PrivateQuicSession {
     }
 
     #[cfg(feature = "i3-process-test-seams")]
+    async fn write_blob_length_prefix_only(
+        &mut self,
+        body: &[u8],
+    ) -> Result<(), Sys5I3PrivateQuicError> {
+        let prefix = private_quic_blob_prefix(body)?;
+        self.send
+            .write_all(&prefix)
+            .await
+            .map_err(|_| Sys5I3PrivateQuicError::FrameRejected)
+    }
+
+    #[cfg(feature = "i3-process-test-seams")]
     async fn write_complete_blob_in_two_writes(
         &mut self,
         body: &[u8],
@@ -1740,21 +2145,54 @@ impl Sys5I3PrivateQuicSession {
     }
 
     async fn read_blob(&mut self) -> Result<Vec<u8>, Sys5I3PrivateQuicError> {
+        let length = self.read_blob_header().await?;
+        self.read_blob_body(length).await
+    }
+
+    /// Reads and bounds only the wire length prefix.  Callers which do not
+    /// subsequently acquire a body must not infer a decoded frame or an
+    /// admitted ingress from this physical framing step.
+    async fn read_blob_header(&mut self) -> Result<usize, Sys5I3PrivateQuicError> {
         let mut prefix = [0_u8; 4];
         self.receive
             .read_exact(&mut prefix)
             .await
             .map_err(|_| Sys5I3PrivateQuicError::FrameRejected)?;
-        let length = u32::from_be_bytes(prefix) as usize;
-        if length > MAX_PRIVATE_QUIC_BLOB_BYTES {
-            return Err(Sys5I3PrivateQuicError::FrameRejected);
-        }
+        private_quic_blob_body_len(prefix)
+    }
+
+    async fn read_blob_body(&mut self, length: usize) -> Result<Vec<u8>, Sys5I3PrivateQuicError> {
         let mut body = vec![0; length];
         self.receive
             .read_exact(&mut body)
             .await
             .map_err(|_| Sys5I3PrivateQuicError::FrameRejected)?;
         Ok(body)
+    }
+
+    /// Polls a real body read exactly once after a complete header.  A ready
+    /// result, whether success or error, is not cancellation evidence.
+    #[cfg(feature = "i3-process-test-seams")]
+    async fn read_blob_body_once_must_be_pending(
+        &mut self,
+        length: usize,
+    ) -> Result<(), Sys5I3PrivateQuicError> {
+        let was_pending = {
+            let mut body = vec![0; length];
+            let mut body_read = std::pin::pin!(self.receive.read_exact(&mut body));
+            std::future::poll_fn(|context| {
+                match std::future::Future::poll(body_read.as_mut(), context) {
+                    std::task::Poll::Pending => std::task::Poll::Ready(true),
+                    std::task::Poll::Ready(_) => std::task::Poll::Ready(false),
+                }
+            })
+            .await
+        };
+        if was_pending {
+            Ok(())
+        } else {
+            Err(Sys5I3PrivateQuicError::LocalAttemptRejected)
+        }
     }
 
     /// Read either one complete bounded blob or a clean stream FIN before the
@@ -1770,16 +2208,8 @@ impl Sys5I3PrivateQuicSession {
             Err(ReadExactError::FinishedEarly(0)) => return Ok(None),
             Err(_) => return Err(Sys5I3PrivateQuicError::FrameRejected),
         }
-        let length = u32::from_be_bytes(prefix) as usize;
-        if length > MAX_PRIVATE_QUIC_BLOB_BYTES {
-            return Err(Sys5I3PrivateQuicError::FrameRejected);
-        }
-        let mut body = vec![0; length];
-        self.receive
-            .read_exact(&mut body)
-            .await
-            .map_err(|_| Sys5I3PrivateQuicError::FrameRejected)?;
-        Ok(Some(body))
+        let length = private_quic_blob_body_len(prefix)?;
+        self.read_blob_body(length).await.map(Some)
     }
 
     async fn send_original_owner_request_attempt(
@@ -1789,6 +2219,40 @@ impl Sys5I3PrivateQuicSession {
         kind: Sys5I3OriginalOwnerRequestAttemptKind,
         required_session_attempt_generation: u8,
     ) -> Result<Sys5I3PrivateQuicDeliveryEvidence, Sys5I3PrivateQuicError> {
+        let (bytes, evidence) = self.prepare_original_owner_request_attempt(
+            runtime,
+            pending,
+            kind,
+            required_session_attempt_generation,
+        )?;
+        self.write_blob(&bytes).await?;
+        Ok(evidence)
+    }
+
+    async fn send_original_owner_request_attempt_length_prefix_then_hold(
+        &mut self,
+        runtime: &mut Sys5I3ProcessRuntime,
+        pending: &Sys5I3OriginalOwnerRequestPending,
+        kind: Sys5I3OriginalOwnerRequestAttemptKind,
+        required_session_attempt_generation: u8,
+    ) -> Result<Sys5I3PrivateQuicDeliveryEvidence, Sys5I3PrivateQuicError> {
+        let (bytes, evidence) = self.prepare_original_owner_request_attempt(
+            runtime,
+            pending,
+            kind,
+            required_session_attempt_generation,
+        )?;
+        self.write_blob_length_prefix_only(&bytes).await?;
+        Ok(evidence)
+    }
+
+    fn prepare_original_owner_request_attempt(
+        &mut self,
+        runtime: &mut Sys5I3ProcessRuntime,
+        pending: &Sys5I3OriginalOwnerRequestPending,
+        kind: Sys5I3OriginalOwnerRequestAttemptKind,
+        required_session_attempt_generation: u8,
+    ) -> Result<(Vec<u8>, Sys5I3PrivateQuicDeliveryEvidence), Sys5I3PrivateQuicError> {
         if !self.peer_spki_verified || !self.peer_preface_verified {
             return Err(Sys5I3PrivateQuicError::peer_binding_rejected(
                 self.control.expected_peer_spki_ref(),
@@ -1808,23 +2272,25 @@ impl Sys5I3PrivateQuicSession {
         runtime
             .commit_authorized_original_owner_request_attempt(&authorization)
             .map_err(Sys5I3PrivateQuicError::OriginalRequestAttemptRejected)?;
-        self.write_blob(bytes).await?;
-        Ok(Sys5I3PrivateQuicDeliveryEvidence {
-            carrier_ref,
-            candidate_commitment_ref,
-            semantic_request_identity_ref: authorization
-                .semantic_request_identity_ref()
-                .to_string(),
-            linked_request_identity_ref: None,
-            source_ref: lineage.source_ref,
-            core_ref: lineage.core_ref,
-            source_artifact_ref: lineage.source_artifact_ref,
-            target_artifact_ref: lineage.target_artifact_ref,
-            edge_ref: lineage.edge_ref,
-            network_occurrence_ref,
-            #[cfg(feature = "i3-process-test-seams")]
-            generated_frame_write_observation: None,
-        })
+        Ok((
+            bytes.to_vec(),
+            Sys5I3PrivateQuicDeliveryEvidence {
+                carrier_ref,
+                candidate_commitment_ref,
+                semantic_request_identity_ref: authorization
+                    .semantic_request_identity_ref()
+                    .to_string(),
+                linked_request_identity_ref: None,
+                source_ref: lineage.source_ref,
+                core_ref: lineage.core_ref,
+                source_artifact_ref: lineage.source_artifact_ref,
+                target_artifact_ref: lineage.target_artifact_ref,
+                edge_ref: lineage.edge_ref,
+                network_occurrence_ref,
+                #[cfg(feature = "i3-process-test-seams")]
+                generated_frame_write_observation: None,
+            },
+        ))
     }
 
     async fn receive_and_admit_original_owner_reply_inner(
@@ -1981,7 +2447,8 @@ impl Sys5I3PrivateQuicReconnect {
             next_network_occurrence,
             pending_ingress_permit,
         } = self;
-        if matches!(&control, PrivateQuicControl::Provider(_)) {
+        if !matches!(&control, PrivateQuicControl::Ordinary(control) if control.has_ordinary_purpose())
+        {
             return Err(Sys5I3PrivateQuicError::LocalAttemptRejected);
         }
         let session_attempt_generation =
@@ -2018,7 +2485,8 @@ impl Sys5I3PrivateQuicReconnect {
             next_network_occurrence,
             pending_ingress_permit,
         } = self;
-        if matches!(&control, PrivateQuicControl::Provider(_)) {
+        if !matches!(&control, PrivateQuicControl::Ordinary(control) if control.has_ordinary_purpose())
+        {
             return Err(Sys5I3PrivateQuicError::LocalAttemptRejected);
         }
         let session_attempt_generation =
@@ -2160,6 +2628,14 @@ fn private_quic_blob_prefix(body: &[u8]) -> Result<[u8; 4], Sys5I3PrivateQuicErr
     Ok(u32::try_from(body.len())
         .map_err(|_| Sys5I3PrivateQuicError::FrameRejected)?
         .to_be_bytes())
+}
+
+fn private_quic_blob_body_len(prefix: [u8; 4]) -> Result<usize, Sys5I3PrivateQuicError> {
+    let length = u32::from_be_bytes(prefix) as usize;
+    if length > MAX_PRIVATE_QUIC_BLOB_BYTES {
+        return Err(Sys5I3PrivateQuicError::FrameRejected);
+    }
+    Ok(length)
 }
 
 fn carrier_ref(bytes: &[u8]) -> String {

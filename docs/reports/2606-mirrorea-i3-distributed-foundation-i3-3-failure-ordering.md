@@ -157,6 +157,79 @@ scripts/validate_docs.py. Historical plans/reports are evidence, not authority.
 
 ## Actions taken
 
+Row13 is integrated at `f6aae7ca277690ac558a08f124e414ae2d2d35ad` with clean
+HEAD/origin/main/live-main parity observed `2026-09-09T07:46:25+09:00`.
+Row20 now follows within I3-3. Parent/planner/mapper constrain its admission
+boundary to custody from child bootstrap, not an already-used runtime/session
+pair. Existing consuming image/start-binding inventories already prevent later
+same-cohort capability/membership prestaging; their independently bound initial
+control/image validation is the candidate reuse path, not a sampled lifecycle
+summary or new authority field. Independent planner supplies the exact
+counterexample to local-tag-only eligibility: A remains untagged when B was
+already prestaged. The actual whole-cohort launch must establish no existing
+stage before handoff, as well as preventing future stages. Production API
+preparation precedes separately authored falsifiers. The selected positive cuts
+at requester A after actual first reply consumption, then performs a genuine
+next checked source action at A whose generated request joins B's later serve.
+An owner-B cut after merely sending the first reply would not establish the
+desired consumption predecessor without an additional edge; no new ACK is
+introduced to make that alternative work. Subsequent actual positive and
+LOCAL custody evidence is recorded below; row20 acceptance remains pending
+its actual fault packet, regressions and independent review.
+
+Parent selects the whole-cohort factory's role-bound private local-cut purpose
+on the existing trusted inherited-control path. A capsule rejects generic
+ordinary controls and starts its own runtime/session before handles can escape.
+The purpose is custody provenance, not a semantic grant or independent proof;
+the existing exact source/cohort/start/peer checks remain. No new descriptor or
+ACK is introduced, and the private representation remains non-public. Both
+roles can exercise their own local guard falsifiers; the actual positive is
+only A-local, not a global cut. Production authors may prepare minimal stubs;
+independent RED tests must execute before behavior implementation is released.
+
+The existing outer child-control profile may select the fixed driver, but
+cannot issue custody eligibility. The inner factory-issued purpose and exact
+control validation remain mandatory even when that outer selector is set.
+Parent retains this existing supervisor route over adding a new argv/spawn
+route; neither source, authority, generation nor expected result comes from
+the selector. An ordinary inner control must still reject at the cut driver.
+
+Before the first actual capsule gate, parent source review finds an
+implementation deviation: calling existing `LocalFabric::save_local_cut`
+materializes lower-layer snapshots, and that save path captures queues rather
+than enforcing `is_quiescent_for_checked_patch`. The candidate's outbox count
+alone therefore does not establish the selected full local boundary. Parent
+requires the actual SYS4 queue/backend predicate plus retained process/adapter
+obligations, an identity-bound admission record including the live runtime
+instance, and a causal binding to the next genuine A source action. No saved
+image, lower-layer snapshot substitution or mere `Option::is_some` completion
+check is accepted. This correction occurs before any real-process cut success
+or component acceptance is claimed.
+
+The next read-only planner checkpoint bounds the remaining falsifier packet:
+actual partial-receive cancellation and genuine old-reply delivery across the
+local cut, one representative started-send failure, LOCAL genuine owner
+reservation/token-instance checks, and custody escape exclusion. Successful
+reconnect is not required for this finite cut profile. Final source inspection
+finds that cut purpose rejects generic reconnect and the sealed capsule exposes
+no consuming reconnect path to the production drivers. That defensive refusal
+is source-inspected, not an executed genuine-session refusal test: the earlier
+planned test requirement is superseded by this narrower custody contract, not
+reported as passing coverage. Actual cancellation below checks retention and
+non-quiescence on the supported path; successful cut reconnect and preservation
+through an artificially exposed consuming refusal are not claimed. Completed source histories are
+retained. No new save/restore, checked-patch installation, provider cut or G2
+cut support is admitted merely to increase coverage. Negatives must reach the
+intended obligation guard, not pass only because an initial round trip never
+completed. Direct consumer remains row20 then whole-I3-3 regression/review.
+
+Independent order inventory maps the remaining required edges to existing
+actual local/network or bounded-model evidence, freshly rerun in xL6AvO.
+No additional direct I3-3 implementation gap beyond row20 is identified.
+Rows15/19, publish/observe and fallback/later-access evidence remain LOCAL;
+cross-process relation/designated pressure stays inactive I3-4 work. The bounded
+cut/save-race model alone does not close row20's actual process/adapter boundary.
+
 Current row13 integration closes its runtime/test/review loop before the
 pending row20 consumer. Genuine membership withdrawal is separate from
 capability revocation and ordinary initial admission. The final review adds
@@ -415,7 +488,20 @@ stored-result/no-new-consume contracts remain preserved.
 
 ## Files changed
 
-Current Stage 3 working changes are in the runtime provider composite, M9
+Final I3-3 source delta after `f6aae7c` adds the private
+`sys5_i3_process_local_cut.rs` capsule and nested
+`sys5_i3_process_local_cut_tests.rs`; updates SYS4 dispatch, SYS5 process runtime,
+private QUIC adapter and runtime lib registration; adds
+`tests/i3_local_cut_custody.rs` and the trusted-control strictness test in the
+existing process-runtime integration target; and extends the existing probe
+process-localnet/lib/test files with three actual cut/fault paths. The final
+review follow-up adds only cfg(test) boolean retained-causality queries in
+SYS4/SYS5 and one nested genuine-source test. No production trace getter,
+package/module/wire API or semantic authority constructor is added by that
+follow-up. The current roadmap, this single report and the five LAB snapshots
+are synchronized; future Canon acceptance is separately gated on final tests.
+
+Earlier Stage 3 working changes were in the runtime provider composite, M9
 authority, SYS4 dispatch, SYS5 process runtime and lib registration; existing
 probe process-localnet/lib modules; new private
 `crates/mir-runtime/src/sys5_i3_provider_execution_tests.rs`; and the local
@@ -515,6 +601,28 @@ integration test, plus Plan 250, this report and five current LAB snapshots.
 It changes no Canon rule, theory ledger or official lifecycle.
 
 ## Commands run
+
+The capacity-recovered final verification packet uses the same command-local
+environment throughout: `CARGO_PROFILE_DEV_DEBUG=0 CARGO_PROFILE_TEST_DEBUG=0
+CARGO_INCREMENTAL=0 CARGO_BUILD_JOBS=2`, with Cargo `--locked` and serial test
+bodies. Only debug symbols are omitted. Before final source acceptance the
+packet must include the genuine causal test's baseline/mutation/restored runs,
+workspace regression, selected runtime/probe coverage, fmt/Clippy and runtime
+doctests. `make docs` was freshly run after the capacity recovery and passed
+agent configuration,216 Canon files,800/800 hierarchy paths and1760 reports;
+this is a pre-acceptance checkpoint and must be rerun after Canon integration.
+
+Row20 initial executed RED:
+`CARGO_INCREMENTAL=0 CARGO_BUILD_JOBS=2 cargo test --locked -p mirrorea-i3-probe --test i3_process_localnet source_real_requester_local_cut_admission_preserves_later_checked_owner_transition -- --exact --test-threads=1`.
+Log: `/tmp/c3-i3-3-row20-probe-initial-red-20260909.g2NvXb/cargo.log`.
+
+Row20 LOCAL factory RED:
+`CARGO_INCREMENTAL=0 CARGO_BUILD_JOBS=2 cargo test --locked -p mir-runtime --test i3_local_cut_custody --features i3-private-quic,i3-process-test-seams -- --test-threads=1`.
+Log: `/tmp/c3-i3-3-row20-local-initial-red-20260909.wtiW1Q/cargo.log`.
+
+Row20 factory/purpose packet: repeat that exact LOCAL target, then
+`CARGO_INCREMENTAL=0 CARGO_BUILD_JOBS=2 cargo test --locked -p mir-runtime --lib --features i3-private-quic,i3-process-test-seams sys5_i3_process_local_cut_tests -- --test-threads=1`.
+Logs: `/tmp/c3-i3-3-row20-factory-purpose-20260909.XXUmvR/{01-factory,02-nested-red}.log`.
 
 Final row13 review-followup packet, with `CARGO_INCREMENTAL=0`,
 `CARGO_BUILD_JOBS=2`, locked dependencies and a10GiB free-space floor before
@@ -638,6 +746,425 @@ CARGO_INCREMENTAL=0 CARGO_BUILD_JOBS=2 cargo test --locked -p mir-runtime --test
 ```
 
 ## Evidence / outputs / test results
+
+### Final I3-3 finite failure and ordering map — verified source, Canon close pending
+
+The restored final source now passes the complete workspace all-target test
+command:1573 passed,0 failed,0 ignored across176 result lines (including empty
+targets),6m53.20s. Included counts are runtime library419, process-runtime69,
+M10 conformance67, ordinary process network46 and provider network20; these
+are subsets of1573, not additional independent totals. The runtime library
+includes all six LOCAL cut tests and the integration floor includes all four
+custody tests. Log:
+`/tmp/c3-i3-3-causal-restored-20260909.Wo4K6I/02-workspace-all-targets.log`.
+Workspace feature unification through the probe enables both
+`i3-private-quic` and `i3-process-test-seams`; this supplies the selected runtime
+and probe coverage without duplicating their entire suites as separate runs.
+Fresh runtime doctests pass4/4, format passes, and both workspace and selected
+runtime/probe feature-union all-target Clippy pass with warnings denied.
+The latter is cache-fresh (0.14s), not a second independent compilation. The
+whole quality packet is in the same directory. Target footprint is2.0G and
+free space67,014,283,264 bytes. Canon/status integration remains separate.
+
+Independent narrow re-review returns P0=0/P1=0/P2=0: both actual removed-edge
+falsifiers and the restored causal test close the prior P2. Its approval is
+conditional on all broad gates, final docs and commit/push parity; it does not
+promote any public/production or later-milestone claim. Parent also reran the
+current overview reader suite:12/12 passed before its final pause-state update.
+A filename-only scan of the changed source/report for private-key delimiters,
+common GitHub/OpenAI token forms and Discord webhook URLs found no matches;
+this is a limited pattern check, not a general secret-audit guarantee.
+
+Capacity recovery at `2026-09-09T11:57:37+09:00`: the owner explicitly approved
+deleting the previously identified `target/debug` build cache and requested
+autonomous completion through I3-3. After checking the resolved exact path,
+Git exclusion and absence of running Cargo/rustc, parent removed only
+`/home/codex/dev/mir_poc_01/target/debug` with non-forced recursive removal.
+The forced-form command was rejected by the execution tool and performed no
+deletion; the non-forced removal completed successfully. Free space is now65G,
+root usage64%, and the remaining target directory is16K. Source, .git and all
+test logs remain. Deleted binaries/cache can be regenerated, not undeleted.
+Fresh verification commands consistently set `CARGO_PROFILE_DEV_DEBUG=0` and
+`CARGO_PROFILE_TEST_DEBUG=0`, alongside jobs2/incremental0. These omit debug
+symbols, not debug assertions or normal test/dev optimization checks. No
+Cargo.toml/profile, dependency, semantic or public-contract change is made.
+The storage hold below is historical; remaining causal-edge and full-regression
+gates resume under the same I3-3 objective, with no I3-4 or product-goal change.
+
+Resource checkpoint at `2026-09-09T10:10:52+09:00`: Stage B
+`CARGO_INCREMENTAL=0 CARGO_BUILD_JOBS=2 cargo test --locked --workspace
+--all-targets -- --test-threads=1` started with15,167,930,368 bytes free but
+generated approximately14.6 GB while compiling. The evaluator terminated its
+specific Cargo process by SIGTERM after1m39.84s when capacity collapsed;
+post-run free space was546,717,696 bytes, and no test-result lines were reached.
+This is a resource-aborted command, neither a passing nor failing test suite.
+Log: `/tmp/c3-i3-3-stageb-workspace-20260909.w01oXd/01-workspace-all-targets.log`;
+the adjacent `.time` records signal15 and maxRSS2,892,676 KB.
+No Cargo/rustc from that run remained at the final read-only process check.
+No file was deleted and no follow-on heavy command was started.
+
+Storage audit: `df -h . /tmp` reports root188G, used178G, available521M;
+`du -sh .` reports65G for the repository including its ignored build output;
+`du -sh target .git .cargo .lake` reports target64G and .git104M, with no
+repo-local .cargo/.lake; target/debug/deps60G, examples3.3G, build89M and
+fingerprints47M. `lsblk -f` and `findmnt /mnt/mirrorea-work` establish no
+configured external workdir mount; only the root disk and unrelated boot/snap
+mounts are present. `free -h` reports about12GiB available memory and11GiB
+free swap; memory is not the immediate blocker. `git ls-files target/debug`
+is empty and `git check-ignore target/debug` confirms the debug directory is
+ignored build output. Its cleanup still requires explicit owner confirmation;
+user-managed housekeeping is not deletion authority. A future cache rebuild
+should bound debug-artifact growth, rather than rerun this command unchanged
+after freeing only a few GB. Source, reports, logs and .git are not proposed
+cleanup targets. Milestone acceptance, final commits and product-goal status
+are unchanged while capacity recovery awaits direction.
+
+Direct consumer: I3-3 acceptance review and inactive I3-4's regression floor.
+Blocker reduced: replace the historical partial reconciliation below with an
+explicit mapping of all twenty Canon plan/05 failure families to producers,
+positive/falsifier tests, evidence classes and finite non-claims.
+Acceptance use: the final regression logs above and the pinned source cut
+support the subsequent Canon acceptance; the table itself does not activate
+a milestone or official lifecycle.
+
+`PROCESS` below means `crates/mirrorea-i3-probe/tests/i3_process_localnet.rs`;
+`PROVIDER` means the adjacent `i3_provider_process_localnet.rs`; `QUIC` and
+`FRAME` mean the adjacent `quic_static_adapter.rs` and `frame_contract.rs`.
+`RUNTIME` means `crates/mir-runtime/tests/sys5_i3_process_runtime.rs`.
+Actual process evidence uses generated source artifacts, the selected private
+QUIC reliable stream, supervised OS children and natural exit/reap checks.
+LOCAL means the real source/runtime/codec boundary exercised in one process,
+not an actual network schedule. Both are `runtime-monitored`; bounded models
+are separately `model-checked-bounded`. Test source alone is not execution.
+There is no new Lean proof, general network theorem, public wire or lifecycle
+entry claim in this map.
+
+| Canon family | Positive and representative falsifier / producer | Exact scope and non-claim |
+|---|---|---|
+| 1 Route / endpoint | PROCESS `source_first_localnet_executes_one_remote_owner_round_trip_across_two_reaped_children`; `i3_3_endpoint_closed_before_connect_is_explicit_unavailable_without_semantic_admission` | Actual two-process bounded endpoint refusal; no WAN partition/fairness model or invented semantic route. |
+| 2 Handshake / peer admission | Same genuine round trip; PROCESS `ca_signed_wrong_spki_reply_peer_preserves_requester_pending_store_counter_and_occurrence_state` | Actual selected peer rejection and retained requester state; certificate/session identity is not semantic authority. |
+| 3 Target locus / owner / operation | Source-derived round trip; QUIC `selected_quic_tampered_target_reaches_actual_ingress_but_never_retargets_receiver_lookup` | Actual-process positive plus real-QUIC-adapter ingress negative. No separate full two-child negative for every target field. |
+| 4 Provenance | Source-derived round trip; QUIC `selected_quic_same_family_private_ingress_substitution_never_admits_a_different_sender_edge`; PROCESS `i3_3_malformed_owner_audit_contract_is_rejected_without_validated_remote_evidence` | Adapter sender-edge binding and process audit-contract rejection; no source-free grant, public wire or general provenance theorem. |
+| 5 Split / partial input | PROCESS `i3_3_complete_generated_request_in_two_application_writes_preserves_the_exact_source_bound_round_trip`; `i3_3_truncated_generated_request_frame_is_rejected_before_decode_or_admission` | Actual two-process complete-split positive and truncated negative; no partial semantic admission. Selected application writes, not arbitrary packet fragmentation. |
+| 6 Malformed / truncated / oversized | Normal and complete-split paths; actual truncated PROCESS test above; FRAME `incomplete_malformed_and_unknown_version_frames_are_typed_without_admission` and `oversized_prefix_is_rejected_before_any_body_bytes_arrive` | Actual truncated stream plus LOCAL decoder/length/version variants. Each parser variant is not mislabeled a distinct subprocess run. |
+| 7 Disconnect before admission | Normal path; PROCESS `i3_3_disconnect_before_request_carrier_write_is_unavailable_without_remote_admission` | Actual before-carrier-write loss, zero remote semantic admission; not a guarantee for every cancellation point. |
+| 8 Disconnect after admission / ambiguity | Normal path; PROCESS `i3_3_disconnect_after_remote_admission_is_request_bound_ambiguity_not_false_success` | Actual admitted request with unknown delivery/result, joined to original identity. No inference of nonmutation after admission, false success or blind retry. |
+| 9 Reconnect / new session | PROCESS `i3_3_reconnect_before_initial_carrier_write_reuses_the_original_request_once`; `i3_3_late_session_one_ingress_after_b_installs_g2_is_carrier_admission_rejected` | Actual distinct verified sessions with retained request/ingress binding; no migration theorem, session-derived authority or supported local-cut reconnect. |
+| 10 Duplicate request | The preceding pre-write reconnect completes one source request; PROCESS `i3_3_reconnect_after_owner_admission_retains_requester_unknown_and_rejects_the_exact_duplicate` | Actual same-identity duplicate and retained ambiguity, supplemented by bounded lifecycle model. No global exactly-once or automatic retry. |
+| 11 Duplicate / stale result or receipt | PROCESS `source_real_requester_local_cut_admission_preserves_later_checked_owner_transition`; `source_real_requester_local_cut_rejects_late_first_reply_before_consuming_the_second` | Actual same-session genuine first reply replayed while the genuine second request remains pending; rejects `OriginalRequestPendingRejected`, preserves first receipt and then consumes the real second reply. Private in-child assertions, not exported network trace or a general replay theorem. |
+| 12 Cross-session / control-data ordering | PROCESS `i3_3_late_session_one_ingress_under_g1_is_admitted_once_after_verified_session_two`; corresponding installed-G2 rejection above | Actual retained old ingress admits under unchanged authority and rejects under current successor binding. Selected two-session schedule, not arbitrary cross-stream order. |
+| 13 Membership / epoch / incarnation | PROCESS `source_real_unretired_g1_owner_membership_path_completes_member_successor_conformance`; `source_real_g1_owner_carrier_against_installed_g2_completes_member_successor_conformance`; LOCAL `i3_3_source_declared_owner_membership_successor_makes_the_retained_g1_use_stale` in `src/m9_auth_verification_i3_tests.rs` | Genuine source-declared retirement. Actual network diagnostic is `CarrierAdmissionRejected`; LOCAL current M9 use is `StaleMembership`. No regrant, observer renewal or arbitrary incarnation protocol. |
+| 14 Capability / witness | Actual G1 positive and genuine capability-successor old-ingress rejection above; LOCAL `i3_old_owner_carrier_after_m9_withdrawal_rejects_at_lineage_binding_without_a_new_use_audit` in `src/sys4_dispatch.rs`; `provider_local_m9_retirements_preserve_typed_executor_host_failures`, `provider_local_after_reserve_retirements_retain_only_rejected_before_call`, `provider_local_after_call_retirement_retains_outcome_without_release` in `src/sys5_i3_provider_execution_tests.rs` | Actual carrier binding precedes later pure authority checks; LOCAL genuine `MissingCapability` / `MissingWitness` remain classified separately. No claim that a network witness fault reaches a diagnostic which binding precedence prevents. |
+| 15 Auth / policy | `tests/sys5_i3_admission_policy.rs`: `i3_admission_policy_missing_auth_discharge_rejects_before_m9_and_preserves_accepted_project` and `i3_admission_policy_unknown_auth_discharge_rejects_before_m9_and_preserves_accepted_project`; both include genuine admission/start controls | LOCAL pre-issuance policy rejection preserves accepted project and subsequent genuine admission. Not dynamic network policy revocation. |
+| 16 Backpressure / capacity | RUNTIME `i3_3_owner_duplicate_ledger_rejects_capacity_without_evicting_prior_source_requests`; `i3_3_requester_pending_ledger_rejects_the_65th_unresolved_source_request_without_eviction` | Genuine source request ledger entries through the bound, then next request rejection without eviction. LOCAL bounded capacity, not network saturation, file-descriptor exhaustion or performance evidence. |
+| 17 Timeout / lease / clock | PROCESS `source_first_localnet_owner_budget_serves_before_expiry`, `source_first_localnet_owner_budget_expiry_is_delivered_and_consumed_at_tick_one`, `source_first_localnet_owner_budget_lost_reply_then_local_wait_keeps_remote_unknown`, `source_first_localnet_owner_budget_local_wait_falsifiers_reject_observer_evidence`; LOCAL `i3_owner_admission_budget_equal_backward_and_foreign_clock_controls_leave_the_awaiting_record_unchanged` | Actual source-declared checked owner ticks and typed expiry / retained ambiguity; LOCAL invalid clock controls. Host child-reaper deadline is not semantic expiry; no real-time or WAN liveness theorem. |
+| 18 Provider failure | PROVIDER `source_real_provider_two_process_round_trip_uses_supervised_quic`, `source_real_value_41_provider_fixture_completes_with_a_safe_present_terminal`; absent, noncanonical-integer, 33-byte and directory source fixtures exercise NotFound / InvalidResult / PolicyDenied; held-result, sent-result-lost, duplicate-delivery and post-call-effect-retirement profiles exercise retention | Actual finite typed provider request/result/failure and retained outcomes. Normal v2 observer export is distinguished from private fault conformance assertions. No general FFI/browser/package/provider ABI or durability claim. |
+| 19 Visibility / redaction | RUNTIME `g2_private_image_decoder_rejects_non_reference_only_carrier_contract_before_candidate_start` includes genuine image positive; PROVIDER normal positive and `source_real_observer_retired_before_preflight_completes_only_the_fixed_conformance_route`, `source_real_observer_retired_after_projection_before_commit_completes_only_the_fixed_conformance_route`, `source_real_observer_repeat_export_completes_only_the_fixed_conformance_route` | LOCAL image redaction mismatch plus actual bounded observer export refusal/one-use behavior. No observer-grant renewal or public trace from private fault routes. |
+| 20 Cut / patch / save with traffic | Three PROCESS `source_real_requester_local_cut_*` profiles; nested `sys5_i3_process_local_cut_tests` genuine pending, owner reservation, wrong role, token instance, missing-session and causal-chain checks; custody integration and codec/privacy gates | Actual A-local first receipt → admission → later genuine source transition, actual late reply, actual header/body-read cancellation and physical close. LOCAL custody/guard/graph evidence is separate; removing either retained causal edge is detected, then restored behavior passes. No saved image, restart, patch installation, distributed cut, RESET_STREAM, observed body-write failure or successful cut reconnect. |
+
+Row11 additionally retains actual PROCESS
+`source_first_localnet_owner_budget_success_reply_replay_on_verified_successor_is_rejected`,
+`source_first_localnet_owner_budget_expiry_reply_replay_on_verified_successor_is_rejected`
+and the pre-write control
+`source_first_localnet_owner_budget_reply_replay_on_initial_session_rejects_before_write`.
+The verified successor session does not authorize a second consume of either
+the genuine successful reply or the genuine declared-expiry reply. These are
+distinct from row20's same-session late-first-reply schedule.
+The genuine LOCAL stale-generation case is
+`i3_g1_declared_expiry_bytes_reject_after_an_unrelated_g2_revocation_without_requester_component_mutation`
+in `src/sys4_dispatch_tests.rs`; it is not a separate actual network schedule.
+
+Row18's independent signed-value positive is PROVIDER
+`source_real_value_negative_7_provider_fixture_completes_with_a_safe_present_terminal`;
+the normal/default and explicitly named41 positives are not counted as distinct
+value variation. LOCAL injected-read/codec `AdapterUnavailable` evidence remains
+LOCAL, including
+`provider_result_codec_preserves_injected_adapter_unavailable_candidate_without_claiming_host_failure`
+in `src/sys5_i3_provider_execution_tests.rs`; it is not an actual B-host OS error.
+
+Provider row18 exact fault test names reside in PROVIDER:
+`source_real_declared_target_absent_provider_fixture_completes_with_not_found_terminal`,
+`source_real_noncanonical_integer_provider_fixture_retains_safe_invalid_result_terminal`,
+`source_real_33_byte_provider_fixture_retains_safe_invalid_result_terminal`,
+`source_real_directory_provider_fixture_retains_safe_policy_denied_terminal`,
+`source_real_held_result_first_send_on_second_session_completes_network_conformance`,
+`source_real_sent_result_lost_before_consume_completes_network_conformance`,
+`source_real_duplicate_provider_delivery_on_second_session_completes_network_conformance`,
+`source_real_post_call_effect_retirement_before_held_result_send_completes_network_conformance`.
+These are finite source/control schedules, not additional domain primitives.
+
+| Required abstract order | Concrete evidence and retained limit |
+|---|---|
+| Eligibility → request → send → complete receive → admission → authority revalidation → serve/write → result → receipt | Normal PROCESS and split positive preserve checked source/Core/artifact/carrier/request provenance. Actual observations do not turn connection or queue order into authority. Bounded `missing_owner_request_serve_edge_reports_serve_without_request` falsifies the abstract missing edge. |
+| Same-owner coherence / reads-from | Retained owner runtime floor and bounded `missing_same_owner_coherence_edge_reports_rmw_reads_from_break`; general or cross-process SCN-02 acceptance remains inactive I3-4 work. |
+| Reconnect / duplicate / ambiguous retention | Actual rows8–12 plus `i3_3_candidate_b_bounded_request_lifecycle_preserves_ledger_authority_and_ambiguity_invariants`; explicit initial/retry identity and current binding, not stream order across sessions or globally exactly-once. |
+| Grant / revoke / witness → use | Actual current-successor rejection, LOCAL `authority_generation_revoke_after_enqueue_blocks_serve_and_reverse_order_preserves_result`, bounded `missing_witness_create_use_edge_reports_stale_lineage_without_rejected_mutation` and `missing_capability_grant_use_edge_reports_mismatched_lineage_without_rejected_mutation`. |
+| Membership installation / verdict → dependent use | Genuine owner installation → qualified ACK → parent publication, and installation → retained old-carrier rejection are two branches; no invented publication → rejection edge. RUNTIME `i3_3_qualified_membership_successor_installs_acknowledges_and_publishes_g2` and `i3_3_genuine_capability_ack_cannot_complete_source_declared_membership_successor` bind the distinction. |
+| Admission verdict → activation | Row15 LOCAL genuine admission controls and pre-M9 missing/unknown discharge rejection. No transport peer verification substituted for admission. |
+| Publish → observe | LOCAL `relation_endpoint_causality_preserves_publish_dispatch_receive_observe_serve_dependencies`, bounded `missing_publish_observe_edge_reports_stale_observation`; cross-process relation pressure is inactive I3-4, not claimed here. |
+| Fallback → later access | LOCAL `relation_fallback_publication_causally_precedes_viewerc_later_serve`; no arbitrary relation DAG or distributed relation pressure claim. |
+| Local cut quiescence → later transition | Row20 actual receipt/cut/later genuine transition and retained-obligation falsifiers, plus the genuine LOCAL retained-chain assertion and its two removed-edge mutation REDs/restored GREEN. Historical bounded `missing_cut_save_quiescence_edge_reports_save_mutation_race` is supplemental, not a substitute for that actual runtime correspondence or evidence of save/patch execution. |
+
+Frozen-candidate Stage A has passed format, four runtime doctests (one positive,
+three compile-fail privacy/API exclusions), default workspace all-target Clippy
+and selected runtime/probe feature-union all-target Clippy. The initial Clippy
+run failed only at the observed private eight-argument helper; grouping its
+ordered pair of existing purposes into a tuple removes that lint without a
+public API, version, authority or behavior change. Exact logs are
+`/tmp/c3-i3-3-stagea-20260909.3fEi7c/02-runtime-doc.log` and
+`/tmp/c3-i3-3-stagea-retry-20260909.fn3skV/` (fresh format and both Clippy gates).
+The selected-feature Clippy command was cache-fresh (0.15s); it is not a second
+independent compilation. Final workspace regressions, the causal-edge test
+follow-up, independent review disposition, docs gates and accepted Git cuts
+remain pending here. Earlier row20 detailed packets below preserve actual
+RED/GREEN chronology and distinguish setup/stub failures from semantic evidence.
+
+### Row20 execution chronology
+
+The final P2 follow-up is the actual nested test
+`i3_3_genuine_post_cut_followup_retains_the_receipt_admission_enqueue_causality`.
+Its cfg(test), crate-private boolean query reads both retained graph links
+without exposing occurrence references or constructors. The genuine LOCAL
+fixture produces the first receipt, live runtime-bound admission and later
+checked `init_avatar_hp` request; it does not substitute fabricated events or
+claim actual QUIC execution.
+
+The cold baseline selects exactly1 test and passes (418 filtered),69.01s,
+target335M and68,804,108,288 bytes free:
+`/tmp/c3-i3-3-causal-baseline-20260909.yO77Xx/01-causal-baseline.log`.
+Removing only receipt→admission `causality.record` produces1 behavioral failure
+at the retained-chain assertion, with compilation and fixture successful,
+35.83s: `/tmp/c3-i3-3-causal-mutant1-20260909.TMpGFS/01-mutant1.log`.
+Restoring that record and removing only admission→enqueue gives the same
+intended1 behavioral failure,29.54s:
+`/tmp/c3-i3-3-causal-mutant2-20260909.3UDdoY/01-mutant2.log`.
+Both original production records were then restored and parent-inspected in
+their exact functions. A temporary patch-context collision during restoration
+was caught and corrected before any Cargo run; it supplies no test evidence.
+The restored positive passes exactly1 test (418 filtered),34.06s:
+`/tmp/c3-i3-3-causal-restored-20260909.Wo4K6I/01-restored-focused.log`.
+Thus both removed-edge falsifiers and the restored behavior are executed;
+whole-workspace regression and independent narrow re-review remain separate
+gates, not inferred from these focused results.
+
+Row20's initial probe compiles and executes exactly one test, failing its
+positive `.expect` on the fieldless pre-spawn stub error (exit101,1 failed,
+43 filtered;5.61s command elapsed). This is the intended TDD RED, not an actual
+network failure or positive cut evidence. Post-command free space is
+15,461,748,736 bytes. Host integration and runtime declaration/stub work follow;
+runtime behavior remains gated on separately authored local guard RED tests.
+
+The first LOCAL factory packet then compiles and executes all3 tests, with
+3 intended body failures/0 filtered (exit101,29.97s command/0.90s bodies).
+Fresh launch receives `Unsupported`; genuine capability- and membership-staged
+B/untagged-A cases receive `Unsupported` instead of `StagedLifecycle`.
+These are declaration-stub REDs, not exercised guard evidence. Four dead-code
+warnings remain in the incomplete module; no Clippy success is claimed.
+Post-command free space is15,247,876,096 bytes. Factory/control-purpose and host
+integration work is released after these REDs. A fresh empty capsule is not
+substituted for the selected actual first-receipt/cut/later-transition positive.
+
+The factory/purpose implementation now passes all3 LOCAL tests (30.34s
+command/1.27s bodies). The two registered nested tests execute and fail at
+their still-unsupported genuine capsule-pair bootstrap, before their later
+cut assertions (exit101,2 failed/413 filtered,30.20s command/1.30s bodies).
+This is a bootstrap-stage RED, not an exercised cut falsifier. The new private
+trusted-control v2 purpose is factory-issued custody provenance; ordinary
+start/connect/reconnect reject that purpose. Four incomplete-module warnings
+remain, including role visibility; no Clippy pass is claimed. Post-packet free
+space is15,233,699,840 bytes. The actual capsule/child workflow implementation
+is released after these gates; no real-process cut positive is green yet.
+
+The next capsule packet is compiler-blocked, not a test-body result:
+`/tmp/c3-i3-3-row20-capsule-green-20260909.KWbtZs/01-custody.log` records
+E0015 at `sys5_i3_process_runtime.rs:1681` (derived enum equality in an
+unnecessarily `const` helper), exit101,13.08s and no executed tests.
+Post-command free space is15,618,994,176 bytes. The bounded repair removes
+only that helper's `const`; the same custody/nested/actual-process packet
+must be rerun. No positive or fault evidence is inferred from this failure.
+
+The repaired packet `/tmp/c3-i3-3-row20-capsule-rerun-20260909.RVEn4a/`
+executes custody4/4 and nested local-cut2/2 successfully (`01-custody.log`,
+`02-nested.log`; command37.76s/37.49s, nested413 filtered). The exact actual
+probe then compiles but fails its positive expectation with the opaque outer
+error (`03-probe.log`;1 failed/43 filtered, exit101,38.85s command/1.33s
+body). That error identifies no internal stage; it is neither an intended
+network fault nor evidence that a particular private assertion ran. The
+evaluator stops, and runtime/host authors receive bounded diagnosis ownership.
+Unused `Unsupported`/`PendingOutbound` variants still warn; no Clippy pass is
+claimed. Post-packet free space is15,201,308,672 bytes. No actual-process cut
+positive or row20 completion is accepted.
+
+An initial source-diagnosis hypothesis points to conditional owner-admission
+driving: a budgeted checked request can enter `Awaiting` and return `None`,
+then the established host flow uses its runtime-derived opaque driver and
+`drive_next_owner_admission` for the checked serve. Parent releases reuse of
+that conditional producer with cumulative histories/counts, but later LOCAL
+execution disproves its attribution to the canonical cut probe: the ordinary
+canonical source is unbudgeted and returns an immediate genuine reply. The
+conditional helper is therefore not the cause of that observed probe failure.
+Reservation evidence needs the explicit existing checked budgeted-source
+variant, not an assumption or an injected ledger state. No synthetic reply,
+new clock policy or new authority is added.
+
+Separately, the genuine issued-control strictness falsifier reaches its
+intended body RED:
+`/tmp/c3-i3-3-row20-strict-purpose-red-20260909.0IYAA7/cargo.log`,
+`i3_3_cut_purpose_nested_unknown_member_is_rejected_by_trusted_control_codec`,
+1 failed/68 filtered, exit101,2.00s command/0.73s body. The valid baseline
+decodes, but an added unknown member inside the cut-purpose variant is
+accepted. This isolates nested schema strictness, not a malformed frame.
+The narrow enum `deny_unknown_fields` repair is released; its GREEN rerun
+remains required. Post-command free space is15,197,028,352 bytes.
+
+The narrow-fix packet `/tmp/c3-i3-3-row20-narrowfix-green-20260909.qVjZSi/`
+confirms strictness1/1 GREEN (`01-strictness.log`,68 filtered,36.68s
+command/0.73s body), but the actual cut probe remains1 failed/43 filtered
+(`02-probe.log`,exit101,40.48s command/1.38s body). The opaque error still
+exposes no internal stage. The added conditional Awaiting consumer does not
+establish a cause of the observed canonical-source probe failure.
+Parent requires temporary fixed, non-secret stage diagnostics before further
+behavior changes; raw control/source/state and public error expansion remain
+prohibited. Post-packet free space is15,189,975,040 bytes.
+
+The fixed-label diagnostic run
+`/tmp/c3-i3-3-row20-probe-stage-diagnostic-20260909.WWH9Pr/cargo.log`
+executes the exact probe with `--nocapture`:1 failed/43 filtered, exit101,
+39.20s command/1.27s body. B reaches bootstrap, transport, first ingress,
+first admission/reply, second ingress/reply and completion. A reaches
+bootstrap, transport, first request, first reply/cut, second request and
+second reply, but has no completion marker. This narrows the remaining
+failure to A's final receive/consume path; it does not identify a transport
+error kind or establish full workflow success. Post-command free space is
+15,188,484,096 bytes. Only14 fixed allowlisted stage names are captured;
+temporary instrumentation must be removed after diagnosis.
+
+Source comparison finds the cut driver lacks the established final-stream
+lifecycle: ordinary B finishes its write half and waits for physical peer
+closure before closing, whereas cut B returned immediately after writing its
+last reply and its host closed the endpoint while A was still receiving.
+Parent verifies the existing adapter APIs and releases the same physical
+coordination after the second request/reply only. A must consume its actual
+final reply before closing; B's wait remains bounded by the existing child
+deadline and is not a semantic receipt or new acknowledgment. A successful
+rerun is still required before treating this as the observed cause's repair.
+
+Independent LOCAL tests are also corrected before reliance: a source-complete
+but sessionless test pair cannot stand in for an eligible custody capsule.
+The genuine runtime primitive supplies the LOCAL token-instance falsifier;
+the capsule itself must reject missing-session admission after a genuine
+LOCAL round trip. Repeated capsule admission will be checked in the actual
+QUIC driver. No dummy session, raw getter or used-runtime constructor is added.
+
+The terminal-lifecycle repair reaches actual-process GREEN:
+`/tmp/c3-i3-3-row20-finaldrain-20260909.TLYUKo/01-probe.log` records the exact
+cut probe1/1 passed,43 filtered, exit0,40.13s command/1.28s body, with both A
+and B fixed completion markers observed. This executes first receipt, local
+admission, genuine second request/owner serve/final receipt and clean child
+completion in the selected route. It corroborates the lifecycle repair but
+does not retroactively observe a specific former adapter error kind. A new
+declaration-only `SessionUnavailable` warning remains pending its intended
+LOCAL RED/guard repair; full row20 faults, regression and review remain open.
+Post-command free space is15,183,286,272 bytes.
+
+The following nested-five packet (`TLYUKo/02-nested-five.log`) is2 passed/
+3 failed/413 filtered, exit101,42.05s command/5.13s bodies. All three failures
+stop at a shared fixture assumption that the unbudgeted canonical source
+would return `None`/Awaiting; it actually produces a reply. The intended
+missing-session and token-instance assertions are not reached. Parent requires
+the ordinary receipt helper to consume its actual reply, and the reservation
+test to build the existing explicit budgeted source through normal checking
+and projection. Production must not be changed to force the mistaken fixture
+expectation. Post-command free space is15,182,835,712 bytes.
+
+After separating the genuine ordinary and budgeted source fixtures,
+`/tmp/c3-i3-3-row20-nested-fixture-red-20260909.xfrmF0/cargo.log` reaches
+4 passed/1 failed/413 filtered, exit101,41.62s command/6.16s bodies. The only
+failure is `i3_3_local_completed_round_trip_without_a_live_session_rejects_cut`:
+a genuine receipt-complete but sessionless capsule incorrectly commits.
+The exact reservation, initial-receipt and wrong-runtime-token checks now
+execute successfully; none is classified as QUIC evidence. Parent releases
+the narrow missing-session guard only after this body RED. Stale unused test
+reexport/helper warnings remain for removal. Post-command free space is
+15,178,694,656 bytes; no cleanup occurred.
+
+The missing-session repair is GREEN in
+`/tmp/c3-i3-3-row20-missing-session-green-20260909.HalyS0/`: nested5/5
+(`01-nested-five.log`,413 filtered,41.91s command/6.18s bodies), followed by
+the exact actual cut probe1/1 (`02-probe.log`,43 filtered,39.76s
+command/1.33s body). Temporary runtime/host diagnostic machinery is removed;
+the actual driver also checks repeated admission after its real first cut.
+Final free space is15,178,633,216 bytes. This is the baseline positive and
+LOCAL custody packet, not completion of late-traffic/cancellation evidence.
+
+For the remaining actual faults, parent chooses two fixed variants of the
+existing outer driver-profile enum: late first reply after cut, and partial
+I/O cancellation/physical close. The canonical positive remains separately runnable.
+This is preferred over adding new private token/test APIs merely to obtain a
+selected RED test. One shared launcher retains the same whole-cohort factory,
+supervisor, inner custody purpose and opaque completions. There is no new
+trusted-purpose field, descriptor, acknowledgment, retry or authority input.
+The adapter retains the actual first reply opaquely; its later replay checks
+the genuine second reply and retained owner history, not a new authority token.
+Each new no-input runner first receives a separately authored selected RED,
+then the actual driver must execute its specific private falsifier assertions.
+
+Both selected fault-runner stub REDs execute in
+`/tmp/c3-i3-3-row20-fault-red-20260909.OPkmSl/`: late first reply
+(`01-late-first-reply.log`,1 failed/45 filtered,exit101,37.66s) and cancelled
+I/O (`02-cancelled-io.log`,1 failed/45 filtered,exit101,0.07s). Each fails its
+opaque positive conformance expectation before launch. These are TDD runner
+REDs, not actual network faults, cancellations or replay evidence. Parent
+releases the actual fixed drivers and shared launcher only after these tests.
+Final free space is15,176,339,456 bytes.
+
+Late-reply actual evidence is GREEN in
+`/tmp/c3-i3-3-row20-latefault-green-20260909.sodj0I/`: the exact late-first-reply
+probe1/1 (`01-late-first-reply.log`,45 filtered,40.43s command/1.33s body),
+then canonical cut regression1/1 (`02-canonical.log`,45 filtered,1.37s
+command/1.30s body). The adapter retains the actual first reply within the
+same physical/control/cohort binding and writes it after the genuine second
+owner admission/serve. A accepts only the specific old-reply rejection while
+preserving its exact second pending request and first receipt; the genuine
+second reply then consumes normally. These are actual QUIC/private runtime
+assertions, not an exported observer trace or general replay theorem.
+Cancellation is not run in this packet and remains under implementation.
+Final free space is15,175,131,136 bytes.
+
+The cancellation candidate is bounded to an actual source-generated request
+header write, actual complete-header receive, one pending body read that is
+dropped, acquisition reuse rejection, retained requester pending state and
+physical connection closure. It does not claim RESET_STREAM, an observed body
+write error, body bytes decoded/admitted, or a semantic acknowledgment. Parent
+renames the private route and driver symbols to `PartialReceiveCancelAndClose`
+before validation rather than retaining a misleading reset name. B must show
+zero semantic admissions/tombstones/serves/writes/outbox carriers, and A must
+retain the exact original pending identity and initial-attempt state. The
+specific session guard also checks verified role/purpose and the unacquired
+adapter permit; its whole-profile positive and cancellation regressions remain
+required. No successful cut-profile reconnect is introduced.
+
+The read-only provider-boundary map confirms two different claims must remain
+separate. Cut-launch preflight rejects provider tags/non-ordinary seeds before
+consuming any image/binding. But genuine provider construction produces a
+distinct private inactive-provider cohort, with no cut-launch method or
+provider-to-ordinary conversion. Consequently that defensive factory branch
+has source-path/type-boundary review, not a direct source-real exercised
+`UnsupportedProviderProfile` test. Existing
+`i3_provider_composite_ordinary_process_start_is_rejected_before_local_fabric`
+is an adjacent genuine ordinary-start rejection, not direct cut-factory
+coverage. Parent rejects adding a raw cohort assembly merely to manufacture
+that test. Ordinary cut launches still use genuine checked ordinary cohorts.
+
+The final focused cancellation packet is GREEN in
+`/tmp/c3-i3-3-row20-cancel-green-20260909.e1lEuo/`: exact cancellation1/1
+(`01-cancelled-io.log`,45 filtered,37.68s command/1.46s body), all three
+actual cut profiles3/3 (`02-probe-three.log`,43 filtered,3.99s), then nested
+LOCAL custody5/5 (`03-nested-five.log`,413 filtered,39.72s command/6.17s
+bodies). The repeated cancellation within the three-profile filter is not
+counted as independent evidence. Final free space is15,170,019,328 bytes.
+Row20's focused implementation packet is ready for broad regression, quality
+gates and independent semantic/security review, not yet milestone acceptance.
 
 The final row13 packet
 `/tmp/c3-i3-3-row13-followup-20260909.xL6AvO/` is GREEN: same-cohort/reader
@@ -2754,7 +3281,7 @@ publication remains incomplete, without rollback or hidden retry. This is a
 bounded implementation decision and test contract, not executed evidence,
 Byzantine-kernel resistance, public protocol, durability, or a new theorem.
 
-Current coverage reconciliation at `7580e3a` separates already executed slices
+Historical coverage reconciliation at `7580e3a` separates then-executed slices
 from candidate tests and missing interactions. The row numbers follow Canon
 plan/05's 20 rows; this table does not accept a row or substitute test existence
 for execution. Its direct consumer is the remaining I3-3 test assignment.
@@ -3883,6 +4410,38 @@ the no-new-network-sample/non-workflow classification.
 
 ## Reviewer findings and follow-up
 
+Final post-recovery source disposition: P0=0/P1=0/P2=0. The reviewer inspected
+the test-only boolean queries, exact live/pending/carrier bindings, both
+behavioral removed-edge failures and the restored positive, and accepts the
+finite source component. The full1573-test workspace and all fresh quality
+gates subsequently pass. Parent accepts this source/evidence for integration;
+the following earlier P2/capacity checkpoint is historical. Canon/status
+acceptance and final push/parity are still separate gates at this source cut.
+
+Pre-recovery frozen-row20 independent source review (2026-09-09) returned P0=0,
+P1=0, P2=1. The remaining evidence gate is direct retained-graph reachability
+from the genuine initial receipt through cut admission to the genuine later
+source enqueue. Removing the relevant `causality.record` would leave the
+current three actual probes green; static correctness is not a falsifier.
+The test author and production owner independently identify a minimal LOCAL
+test using the genuine first-receipt fixture and real runtime-bound token,
+with narrow internal boolean-only queries across existing private boundaries.
+No raw occurrence getter, fake event, public constructor or new authority is
+needed. The proposed test is
+`i3_3_genuine_post_cut_followup_causally_reaches_its_live_admission`;
+it is not yet written or executed because the Stage B capacity abort prevents
+its RED/GREEN validation. A production/test patch must remain separately owned.
+
+The reviewer resolves the earlier reconnect wording concern: the sealed
+capsule has no consuming reconnect route, and the generic purpose rejection
+is now explicitly source-inspected, not claimed as executed refusal evidence.
+No additional semantic/security defect is found in whole-cohort preflight,
+strict purpose decoding, ordinary-path exclusion, live runtime/session/ingress
+custody, unresolved/reserved/async obligations, late-reply pending preservation,
+header cancellation, source-real later transition, retained M9 histories or
+opaque child terminals. This review is not whole-I3-3 acceptance: the P2 test,
+resource-aborted workspace regression, final docs and Git parity remain open.
+
 Row13 final independent review (`c3_quality_review`) reports P0/P1/P2=0 after
 two resolved P2 findings. First, wrong-kind ACK rejection now proves the same
 membership cohort, registered reader and B UnixStream subsequently complete
@@ -4672,6 +5231,14 @@ remains the explicitly reported failure, not an I3 runtime or passing gate.
 
 ## Skipped validations and reasons
 
+Current row13 component: fresh runtime and probe all-target tests, scoped
+Clippy, format and synchronized docs gates are executed before f6aae7ca.
+Whole-workspace all-target tests/Clippy and final fault/order acceptance still
+follow row20. Row20 now has the actual normal cut probe and five LOCAL custody
+tests green in HalyS0; its two additional actual fault profiles are still under
+implementation. No fresh whole-I3-3 acceptance or new Lean/general cut theorem
+is claimed. The paragraphs below retain earlier component validation boundaries.
+
 Provider Stage3: fresh full runtime library, all probe targets, affected
 process/I2/M10/guard regressions, scoped Clippy/format are executed. Other
 runtime all-target cases retain the immediately pre-P2 run; the repair touches
@@ -4746,6 +5313,16 @@ not skipped passes. General proof, WAN/production, durability and Browser/Host
 product realization remain outside this bounded milestone.
 
 ## Commit / push status
+
+Row13 is committed/pushed as `f6aae7ca277690ac558a08f124e414ae2d2d35ad`
+(`feat: reject retired owner membership across QUIC processes`). Final
+synchronized `make docs` passes (216 Canon entries,800/800 hierarchy,
+1760-report scaffold); `git diff --check` passes and a limited filename-only
+private-key/token/webhook pattern scan reports no match. This is not a general
+secret audit. Clean HEAD/origin/main/live-main parity is observed at
+`2026-09-09T07:46:25+09:00`. Seventeen task-owned files are integrated, with no
+user source changes or additional cleanup. This component is not whole-I3-3
+acceptance. The following row13 integration paragraph is historical pre-commit.
 
 Row13 runtime/probe all-target gates, format, scoped Clippy and independent
 review are green in the final follow-up packet. Seventeen task-owned tracked
@@ -4949,12 +5526,15 @@ This is the fifth source checkpoint inside I3-3, not milestone acceptance.
 
 ## Sub-agent session close status
 
-Current row13: production and test authors, evaluator, status writer and
-independent reviewer have completed their bounded work. Parent owns final
-integration and Git. The planner's row20 Oracle consultation is complete;
-source-backed custody planning remains advisory while row13 is integrated.
-Contexts are retained for the remaining I3-3 work. No row13 implementation or
-review remains pending; row20 is not implemented or accepted.
+Current row20: the runtime implementer owns the bounded late-reply and cancelled
+I/O drivers; the host writer has frozen their shared-launcher routing, and the
+independent test author has frozen selected runner tests. The sole evaluator
+captured their initial stub REDs after the normal cut/custody packet passed.
+The LAB snapshot writer synchronizes the five status views. Parent retains
+normative integration, acceptance and Git. Row13 is committed with no remaining
+component review; row20 and whole-I3-3 independent review remain pending.
+The completed Oracle/planner advice is advisory; agent contexts are retained
+for this same milestone, not I3-4.
 
 Historical provider Stage 3 pre-final-gate checkpoint: independent planner, mapper and Oracle have returned
 bounded advisory results. The actual provider full probe20 and runtime

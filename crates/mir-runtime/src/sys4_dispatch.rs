@@ -6596,6 +6596,30 @@ pub(crate) struct FabricSubmission {
     origin_locus: String,
     target_locus: String,
 }
+
+/// One continuing-runtime Row20 admission occurrence.  It is neither a
+/// snapshot nor a restore capability: the caller can only retain it by value
+/// to bind one later checked source action to the same live fabric instance.
+#[derive(Debug, Clone, PartialEq, Eq)]
+pub(crate) struct Sys4I3ProcessLocalCutAdmission {
+    occurrence_id: String,
+    initial_receipt_occurrence_id: String,
+    runtime_binding_ref: String,
+    runtime_instance: u64,
+}
+
+impl Sys4I3ProcessLocalCutAdmission {
+    pub(crate) fn matches_runtime(&self, runtime_binding_ref: &str, runtime_instance: u64) -> bool {
+        !self.occurrence_id.is_empty()
+            && !self.initial_receipt_occurrence_id.is_empty()
+            && self.runtime_binding_ref == runtime_binding_ref
+            && self.runtime_instance == runtime_instance
+    }
+
+    fn occurrence_id(&self) -> &str {
+        &self.occurrence_id
+    }
+}
 impl FabricSubmission {
     pub(crate) fn request_id(&self) -> &str {
         &self.request_id
@@ -13130,6 +13154,109 @@ impl LocalFabric {
             runtime.incoming_mailbox.pending.is_empty()
                 && runtime.outgoing_mailbox.pending.is_empty()
         }) && !self.backend.has_pending_owner_requests()
+    }
+
+    /// Admit one Row20 process-local continuation boundary without creating a
+    /// cut snapshot or restore material.  The exact first requester receipt,
+    /// runtime binding, and runtime instance are retained only to bind the
+    /// immediately later source action in this continuing fabric history.
+    pub(crate) fn admit_i3_process_local_cut(
+        &mut self,
+        initial_receipt_occurrence_id: &str,
+        runtime_binding_ref: &str,
+        runtime_instance: u64,
+    ) -> Sys4Result<Sys4I3ProcessLocalCutAdmission> {
+        if initial_receipt_occurrence_id.is_empty()
+            || runtime_binding_ref.is_empty()
+            || runtime_instance == 0
+            || !self.is_quiescent_for_checked_patch()
+        {
+            return Err(Sys4DispatchDiagnostics::one(
+                Sys4DiagnosticKind::BackendIneligible,
+            ));
+        }
+        let occurrence_id = self.next_mailbox_token("i3-process-local-cut-admission")?;
+        self.causality.record(
+            occurrence_id.clone(),
+            vec![initial_receipt_occurrence_id.to_string()],
+        );
+        Ok(Sys4I3ProcessLocalCutAdmission {
+            occurrence_id,
+            initial_receipt_occurrence_id: initial_receipt_occurrence_id.to_string(),
+            runtime_binding_ref: runtime_binding_ref.to_string(),
+            runtime_instance,
+        })
+    }
+
+    /// Join one freshly generated source owner request to a retained Row20
+    /// admission occurrence.  The generated outbox envelope remains the
+    /// source of truth; this adds its real enqueue occurrence as a causal
+    /// successor and does not manufacture a carrier, route, or authority.
+    pub(crate) fn bind_i3_process_local_cut_followup(
+        &mut self,
+        submission: &FabricSubmission,
+        admission: &Sys4I3ProcessLocalCutAdmission,
+        runtime_binding_ref: &str,
+        runtime_instance: u64,
+    ) -> Sys4Result<()> {
+        if !admission.matches_runtime(runtime_binding_ref, runtime_instance)
+            || submission.envelope_id.is_empty()
+            || submission.origin_locus.is_empty()
+        {
+            return Err(Sys4DispatchDiagnostics::one(
+                Sys4DiagnosticKind::CarrierProvenanceMismatch,
+            ));
+        }
+        let envelope = self
+            .loci
+            .get(&submission.origin_locus)
+            .and_then(|runtime| {
+                runtime
+                    .outgoing_mailbox
+                    .pending
+                    .iter()
+                    .find(|envelope| envelope.envelope_id == submission.envelope_id)
+            })
+            .ok_or_else(|| Sys4DispatchDiagnostics::one(Sys4DiagnosticKind::UnavailableEnvelope))?;
+        if envelope.request_id != submission.request_id
+            || envelope.carrier_id != submission.carrier_id
+            || envelope.operation_id != submission.operation_id
+            || envelope.source_locus != submission.origin_locus
+            || envelope.target_locus != submission.target_locus
+            || envelope.mailbox_enqueue_occurrence_id.is_empty()
+            || !self
+                .causality
+                .contains_occurrence(&envelope.mailbox_enqueue_occurrence_id)
+        {
+            return Err(Sys4DispatchDiagnostics::one(
+                Sys4DiagnosticKind::CarrierProvenanceMismatch,
+            ));
+        }
+        self.causality.record(
+            envelope.mailbox_enqueue_occurrence_id.clone(),
+            vec![admission.occurrence_id().to_string()],
+        );
+        Ok(())
+    }
+
+    /// Test-only retained-graph check for the complete Row20 causal chain.
+    /// Both occurrence identifiers stay inside SYS4; callers supply only the
+    /// genuine typed admission and generated carrier.
+    #[cfg(test)]
+    pub(crate) fn test_only_i3_process_local_cut_followup_causally_reaches_admission(
+        &self,
+        admission: &Sys4I3ProcessLocalCutAdmission,
+        carrier: &Sys4ProcessCarrier,
+    ) -> bool {
+        carrier.edge_kind() == CommunicationEdgeKind::OwnerRequest
+            && self.causality.reaches(
+                admission.occurrence_id(),
+                &admission.initial_receipt_occurrence_id,
+            )
+            && self.causality.reaches(
+                &carrier.envelope.mailbox_enqueue_occurrence_id,
+                admission.occurrence_id(),
+            )
     }
 
     fn clone_for_checked_patch(&self) -> Result<Self, Sys4DiagnosticKind> {

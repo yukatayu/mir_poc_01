@@ -82,6 +82,11 @@ pub(crate) mod sys4_dispatch;
 #[cfg(feature = "i3-private-quic")]
 #[doc(hidden)]
 pub mod sys5_i3_private_quic;
+/// Private Row20 process-local cut custody seam. It is feature-gated and
+/// deliberately exposes no general process/session attachment route.
+#[cfg(all(feature = "i3-private-quic", feature = "i3-process-test-seams"))]
+#[doc(hidden)]
+pub(crate) mod sys5_i3_process_local_cut;
 #[doc(hidden)]
 pub mod sys5_i3_process_runtime;
 /// Provisional, non-executing SYS-5 build/project facade.

@@ -42,6 +42,9 @@ use mirrorea_i3_probe::{
     run_i3_process_localnet,
     run_i3_source_real_g1_carrier_after_owner_membership_successor_localnet,
     run_i3_source_real_owner_membership_successor_positive_localnet,
+    run_i3_source_real_process_local_cut_admission_localnet,
+    run_i3_source_real_process_local_cut_cancelled_io_localnet,
+    run_i3_source_real_process_local_cut_late_reply_localnet,
 };
 
 const ACTIVE_I2_SOURCE: &str = concat!(
@@ -3651,5 +3654,26 @@ fn source_real_unretired_g1_owner_membership_path_completes_member_successor_con
 fn source_real_g1_owner_carrier_against_installed_g2_completes_member_successor_conformance() {
     let _completion = run_i3_source_real_g1_carrier_after_owner_membership_successor_localnet().expect(
         "the real G1 carrier is rejected before B owner admission under installed G2, then completes only its fixed opaque two-process conformance",
+    );
+}
+
+#[test]
+fn source_real_requester_local_cut_admission_preserves_later_checked_owner_transition() {
+    let _completion = run_i3_source_real_process_local_cut_admission_localnet().expect(
+        "the fixed opaque two-process conformance completes only after the first ordinary round trip, requester-local cut admission, and later checked owner transition",
+    );
+}
+
+#[test]
+fn source_real_requester_local_cut_rejects_late_first_reply_before_consuming_the_second() {
+    let _completion = run_i3_source_real_process_local_cut_late_reply_localnet().expect(
+        "the fixed opaque two-process conformance completes only after a retained first reply is rejected while the genuine second request remains pending and then consumes its normal reply",
+    );
+}
+
+#[test]
+fn source_real_requester_local_cut_cancelled_io_retains_its_custody_obligation() {
+    let _completion = run_i3_source_real_process_local_cut_cancelled_io_localnet().expect(
+        "the fixed opaque two-process conformance completes only after the selected physical partial-receive cancellation remains fail-closed without reopening local-cut custody",
     );
 }

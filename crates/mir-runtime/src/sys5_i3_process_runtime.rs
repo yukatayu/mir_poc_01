@@ -58,6 +58,19 @@ pub use provider_runtime::{
     Sys5I3ProviderTerminalAuditCounts, Sys5I3ProviderTerminalAuditRow,
     Sys5I3ProviderTerminalOutcomeClass, Sys5I3UntrustedProviderTerminalAuditObserverViewCandidate,
 };
+
+#[cfg(all(feature = "i3-private-quic", feature = "i3-process-test-seams"))]
+pub use crate::sys5_i3_process_local_cut::{
+    Sys5I3ProcessLocalCutChildBootstrap, Sys5I3ProcessLocalCutChildCompletion,
+    Sys5I3ProcessLocalCutChildFrames, Sys5I3ProcessLocalCutError, Sys5I3ProcessLocalCutLaunch,
+    Sys5I3ProcessLocalCutLaunchError, Sys5I3ProcessLocalCutLaunchErrorKind,
+    drive_i3_process_local_cut_late_reply_after_cut_owner_child_from_inherited,
+    drive_i3_process_local_cut_late_reply_after_cut_requester_child_from_inherited,
+    drive_i3_process_local_cut_owner_child_from_inherited,
+    drive_i3_process_local_cut_partial_receive_cancel_and_close_owner_child_from_inherited,
+    drive_i3_process_local_cut_partial_receive_cancel_and_close_requester_child_from_inherited,
+    drive_i3_process_local_cut_requester_child_from_inherited,
+};
 #[cfg(feature = "i3-process-test-seams")]
 pub use provider_runtime::{
     Sys5I3ProviderFixtureAssertionCompletion, Sys5I3ProviderLedgerTestFacts,
@@ -116,7 +129,8 @@ use crate::{
         Sys4I3InstalledOwnerCapabilitySuccessorReceipt,
         Sys4I3InstalledSourceDeclaredOwnerMembershipSuccessorReceipt,
         Sys4I3OwnerRequestRevalidationFailure, Sys4I3PendingOwnerRequestBinding,
-        Sys4I3PrivateProcessCarrierSnapshot, Sys4I3RestrictedOwnerCapabilitySuccessor,
+        Sys4I3PrivateProcessCarrierSnapshot, Sys4I3ProcessLocalCutAdmission,
+        Sys4I3RestrictedOwnerCapabilitySuccessor,
         Sys4I3RestrictedSourceDeclaredOwnerMembershipSuccessor, Sys4I3ValidatedOwnerReply,
         Sys4InactiveProviderAdmission, Sys4InactiveProviderRestrictedAdmission,
         Sys4InstalledProviderLocalFabric, Sys4ProcessCarrier,
@@ -1509,6 +1523,22 @@ impl std::fmt::Debug for Sys5I3ExpectedStartBinding {
 /// an image byte stream is never sufficient to start a process or to bind a
 /// transport peer.  This is private/provisional evidence, not a package,
 /// process, wire, or certificate ABI.
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize, Deserialize)]
+#[serde(rename_all = "snake_case", deny_unknown_fields)]
+enum Sys5I3TrustedLocalnetControlPurpose {
+    Ordinary,
+    ProcessLocalCut {
+        role: Sys5I3ProcessLocalCutControlRole,
+    },
+}
+
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize, Deserialize)]
+#[serde(rename_all = "snake_case")]
+pub(crate) enum Sys5I3ProcessLocalCutControlRole {
+    Requester,
+    Owner,
+}
+
 #[doc(hidden)]
 pub struct Sys5I3TrustedLocalnetControl {
     expected_start_binding: Sys5I3ExpectedStartBinding,
@@ -1521,6 +1551,7 @@ pub struct Sys5I3TrustedLocalnetControl {
     peer_checked_program_ref: String,
     peer_projection_ref: String,
     peer_cohort_provenance_ref: String,
+    purpose: Sys5I3TrustedLocalnetControlPurpose,
 }
 
 impl std::fmt::Debug for Sys5I3TrustedLocalnetControl {
@@ -1635,6 +1666,21 @@ impl Sys5I3LocalnetControlError {
 }
 
 impl Sys5I3TrustedLocalnetControl {
+    pub(crate) const fn has_ordinary_purpose(&self) -> bool {
+        matches!(self.purpose, Sys5I3TrustedLocalnetControlPurpose::Ordinary)
+    }
+
+    pub(crate) fn has_process_local_cut_purpose(
+        &self,
+        role: Sys5I3ProcessLocalCutControlRole,
+    ) -> bool {
+        matches!(
+            self.purpose,
+            Sys5I3TrustedLocalnetControlPurpose::ProcessLocalCut { role: actual }
+                if actual == role
+        )
+    }
+
     pub fn local_slot_name(&self) -> &str {
         &self.local_slot_name
     }
@@ -5401,6 +5447,244 @@ impl Sys5I3ProcessCohort {
             Sys5I3ProcessRuntimeError::new(Sys5I3ProcessRuntimeErrorKind::ProcessImageAlreadyTaken)
         })
     }
+
+    /// Consume one complete, ordinary A/B cohort into the Row20 private
+    /// custody launch. The entire cohort is checked before either image or
+    /// binding is taken, so an already staged sibling cannot be hidden behind
+    /// an otherwise ordinary local bootstrap.
+    #[cfg(all(feature = "i3-private-quic", feature = "i3-process-test-seams"))]
+    #[doc(hidden)]
+    pub fn take_i3_process_local_cut_launch(
+        &mut self,
+        codec: &Sys5I3PrivateProcessCodec,
+        run_ref: &str,
+        requester_spki_ref: &str,
+        owner_spki_ref: &str,
+    ) -> Result<Sys5I3ProcessLocalCutLaunch, Sys5I3ProcessLocalCutLaunchError> {
+        const REQUESTER_SLOT: &str = "process-a";
+        const OWNER_SLOT: &str = "process-b";
+
+        self.validate_i3_process_local_cut_launch_inventory(
+            run_ref,
+            requester_spki_ref,
+            owner_spki_ref,
+            REQUESTER_SLOT,
+            OWNER_SLOT,
+        )?;
+
+        // This is the commitment point. Preflight above borrows every
+        // source-held value; only after it passes do we consume bindings and
+        // images. No failure path recreates a bootstrap or a lifecycle stage.
+        let requester_binding = self
+            .parent_held_expected_start_binding(REQUESTER_SLOT)
+            .map_err(|_| {
+                Sys5I3ProcessLocalCutLaunchError::new(
+                    Sys5I3ProcessLocalCutLaunchErrorKind::BootstrapAlreadyTaken,
+                )
+            })?;
+        let owner_binding = self
+            .parent_held_expected_start_binding(OWNER_SLOT)
+            .map_err(|_| {
+                Sys5I3ProcessLocalCutLaunchError::new(
+                    Sys5I3ProcessLocalCutLaunchErrorKind::BootstrapAlreadyTaken,
+                )
+            })?;
+        let (requester_control, owner_control) = codec
+            .split_trusted_localnet_controls_with_purposes(
+                run_ref,
+                requester_binding,
+                requester_spki_ref,
+                owner_binding,
+                owner_spki_ref,
+                (
+                    Sys5I3TrustedLocalnetControlPurpose::ProcessLocalCut {
+                        role: Sys5I3ProcessLocalCutControlRole::Requester,
+                    },
+                    Sys5I3TrustedLocalnetControlPurpose::ProcessLocalCut {
+                        role: Sys5I3ProcessLocalCutControlRole::Owner,
+                    },
+                ),
+            )
+            .map_err(|_| {
+                Sys5I3ProcessLocalCutLaunchError::new(
+                    Sys5I3ProcessLocalCutLaunchErrorKind::StartBindingMismatch,
+                )
+            })?;
+        let requester_image = self.take_process_image(REQUESTER_SLOT).map_err(|_| {
+            Sys5I3ProcessLocalCutLaunchError::new(
+                Sys5I3ProcessLocalCutLaunchErrorKind::BootstrapAlreadyTaken,
+            )
+        })?;
+        let owner_image = self.take_process_image(OWNER_SLOT).map_err(|_| {
+            Sys5I3ProcessLocalCutLaunchError::new(
+                Sys5I3ProcessLocalCutLaunchErrorKind::BootstrapAlreadyTaken,
+            )
+        })?;
+        let requester_image_frame = codec.encode_image(requester_image).map_err(|_| {
+            Sys5I3ProcessLocalCutLaunchError::new(
+                Sys5I3ProcessLocalCutLaunchErrorKind::StartBindingMismatch,
+            )
+        })?;
+        let owner_image_frame = codec.encode_image(owner_image).map_err(|_| {
+            Sys5I3ProcessLocalCutLaunchError::new(
+                Sys5I3ProcessLocalCutLaunchErrorKind::StartBindingMismatch,
+            )
+        })?;
+        let requester_control_frame = codec
+            .encode_trusted_localnet_control(requester_control)
+            .map_err(|_| {
+                Sys5I3ProcessLocalCutLaunchError::new(
+                    Sys5I3ProcessLocalCutLaunchErrorKind::StartBindingMismatch,
+                )
+            })?;
+        let owner_control_frame = codec
+            .encode_trusted_localnet_control(owner_control)
+            .map_err(|_| {
+                Sys5I3ProcessLocalCutLaunchError::new(
+                    Sys5I3ProcessLocalCutLaunchErrorKind::StartBindingMismatch,
+                )
+            })?;
+        Ok(Sys5I3ProcessLocalCutLaunch::from_issued_frames(
+            requester_image_frame,
+            requester_control_frame,
+            owner_image_frame,
+            owner_control_frame,
+        ))
+    }
+
+    #[cfg(all(feature = "i3-private-quic", feature = "i3-process-test-seams"))]
+    fn validate_i3_process_local_cut_launch_inventory(
+        &self,
+        run_ref: &str,
+        requester_spki_ref: &str,
+        owner_spki_ref: &str,
+        requester_slot: &str,
+        owner_slot: &str,
+    ) -> Result<(), Sys5I3ProcessLocalCutLaunchError> {
+        let reject = |kind| -> Result<(), Sys5I3ProcessLocalCutLaunchError> {
+            Err(Sys5I3ProcessLocalCutLaunchError::new(kind))
+        };
+        if run_ref.is_empty()
+            || requester_spki_ref.is_empty()
+            || owner_spki_ref.is_empty()
+            || requester_spki_ref == owner_spki_ref
+        {
+            return reject(Sys5I3ProcessLocalCutLaunchErrorKind::StartBindingMismatch);
+        }
+        if self.lifecycle_publication_outcome
+            != Some(Sys5I3LifecyclePublicationOutcome::NoPrestageSelected)
+            || self.prestage_run_ref.is_some()
+        {
+            return reject(Sys5I3ProcessLocalCutLaunchErrorKind::StagedLifecycle);
+        }
+        #[cfg(all(unix, feature = "i3-process-test-seams"))]
+        if self.pending_owner_lifecycle_ack_registration.is_some()
+            || self
+                .pending_owner_lifecycle_stage_identity_binding_ref
+                .is_some()
+            || self
+                .pending_source_declared_owner_membership_lifecycle_ack_registration
+                .is_some()
+            || self
+                .pending_source_declared_owner_membership_lifecycle_stage_identity_binding_ref
+                .is_some()
+        {
+            return reject(Sys5I3ProcessLocalCutLaunchErrorKind::StagedLifecycle);
+        }
+        if self.images.len() != 2
+            || self.expected_start_bindings.len() != 2
+            || !self.images.contains_key(requester_slot)
+            || !self.images.contains_key(owner_slot)
+            || !self.expected_start_bindings.contains_key(requester_slot)
+            || !self.expected_start_bindings.contains_key(owner_slot)
+        {
+            return reject(Sys5I3ProcessLocalCutLaunchErrorKind::CohortInventoryIncomplete);
+        }
+        let Some(Some(requester_image)) = self.images.get(requester_slot) else {
+            return reject(if self.images.contains_key(requester_slot) {
+                Sys5I3ProcessLocalCutLaunchErrorKind::BootstrapAlreadyTaken
+            } else {
+                Sys5I3ProcessLocalCutLaunchErrorKind::CohortInventoryIncomplete
+            });
+        };
+        let Some(Some(owner_image)) = self.images.get(owner_slot) else {
+            return reject(if self.images.contains_key(owner_slot) {
+                Sys5I3ProcessLocalCutLaunchErrorKind::BootstrapAlreadyTaken
+            } else {
+                Sys5I3ProcessLocalCutLaunchErrorKind::CohortInventoryIncomplete
+            });
+        };
+        let Some(Some(requester_binding)) = self.expected_start_bindings.get(requester_slot) else {
+            return reject(
+                if self.expected_start_bindings.contains_key(requester_slot) {
+                    Sys5I3ProcessLocalCutLaunchErrorKind::BootstrapAlreadyTaken
+                } else {
+                    Sys5I3ProcessLocalCutLaunchErrorKind::CohortInventoryIncomplete
+                },
+            );
+        };
+        let Some(Some(owner_binding)) = self.expected_start_bindings.get(owner_slot) else {
+            return reject(if self.expected_start_bindings.contains_key(owner_slot) {
+                Sys5I3ProcessLocalCutLaunchErrorKind::BootstrapAlreadyTaken
+            } else {
+                Sys5I3ProcessLocalCutLaunchErrorKind::CohortInventoryIncomplete
+            });
+        };
+
+        let requester_loci = BTreeSet::from(["ParticipantA".to_string(), "ViewerC".to_string()]);
+        let owner_loci = BTreeSet::from(["ParticipantB".to_string(), "WorldAuthority".to_string()]);
+        if requester_image.assigned_loci != requester_loci
+            || owner_image.assigned_loci != owner_loci
+            || requester_binding.assigned_loci != requester_image.assigned_loci
+            || owner_binding.assigned_loci != owner_image.assigned_loci
+        {
+            return reject(Sys5I3ProcessLocalCutLaunchErrorKind::CohortInventoryIncomplete);
+        }
+        if requester_image.inactive_provider.is_some()
+            || owner_image.inactive_provider.is_some()
+            || requester_binding.inactive_provider.is_some()
+            || owner_binding.inactive_provider.is_some()
+            || requester_image.private_runtime_seed.ordinary().is_none()
+            || owner_image.private_runtime_seed.ordinary().is_none()
+        {
+            return reject(Sys5I3ProcessLocalCutLaunchErrorKind::UnsupportedProviderProfile);
+        }
+        let Some(requester_seed) = requester_image.private_runtime_seed.ordinary() else {
+            return reject(Sys5I3ProcessLocalCutLaunchErrorKind::UnsupportedProviderProfile);
+        };
+        let Some(owner_seed) = owner_image.private_runtime_seed.ordinary() else {
+            return reject(Sys5I3ProcessLocalCutLaunchErrorKind::UnsupportedProviderProfile);
+        };
+        if requester_seed
+            .prestaged_owner_capability_lifecycle
+            .is_some()
+            || requester_seed
+                .prestaged_source_declared_owner_membership_lifecycle
+                .is_some()
+            || owner_seed.prestaged_owner_capability_lifecycle.is_some()
+            || owner_seed
+                .prestaged_source_declared_owner_membership_lifecycle
+                .is_some()
+            || requester_binding
+                .expected_owner_capability_lifecycle
+                .is_some()
+            || requester_binding
+                .expected_source_declared_owner_membership_lifecycle
+                .is_some()
+            || owner_binding.expected_owner_capability_lifecycle.is_some()
+            || owner_binding
+                .expected_source_declared_owner_membership_lifecycle
+                .is_some()
+        {
+            return reject(Sys5I3ProcessLocalCutLaunchErrorKind::StagedLifecycle);
+        }
+        if requester_binding.validate_image(requester_image).is_err()
+            || owner_binding.validate_image(owner_image).is_err()
+        {
+            return reject(Sys5I3ProcessLocalCutLaunchErrorKind::StartBindingMismatch);
+        }
+        Ok(())
+    }
 }
 
 #[cfg(all(unix, feature = "i3-process-test-seams"))]
@@ -6463,6 +6747,10 @@ impl Sys5I3ProcessMessage {
         self.linked_request_identity_ref.as_deref()
     }
 
+    pub(crate) fn cohort_provenance_ref(&self) -> &str {
+        &self.cohort_provenance_ref
+    }
+
     pub const fn is_observer_safe_typed_result_or_receipt(&self) -> bool {
         matches!(self.kind, Sys5I3ProcessMessageKind::Receipt)
     }
@@ -7125,6 +7413,7 @@ impl PrivateProviderChildControlSnapshotSizeMetrics {
 #[serde(deny_unknown_fields)]
 struct PrivateTrustedLocalnetControlSnapshot {
     version: u64,
+    purpose: Sys5I3TrustedLocalnetControlPurpose,
     expected_start_binding: PrivateExpectedStartBindingSnapshot,
     run_ref: String,
     local_slot_name: String,
@@ -7137,7 +7426,10 @@ struct PrivateTrustedLocalnetControlSnapshot {
     peer_cohort_provenance_ref: String,
 }
 
-const PRIVATE_TRUSTED_LOCALNET_CONTROL_VERSION: u64 = 1;
+// Version two adds the required, non-authorizing bootstrap purpose.  This is
+// private trusted-control framing, so version one is intentionally not
+// reinterpreted as an ordinary or process-local-cut control.
+const PRIVATE_TRUSTED_LOCALNET_CONTROL_VERSION: u64 = 2;
 
 /// Parse one untrusted JSON value without normalizing duplicate object keys.
 /// `serde_json::Value` otherwise accepts duplicate members with last-write
@@ -7837,6 +8129,35 @@ impl Sys5I3PrivateProcessCodec {
         (Sys5I3TrustedLocalnetControl, Sys5I3TrustedLocalnetControl),
         Sys5I3LocalnetControlError,
     > {
+        self.split_trusted_localnet_controls_with_purposes(
+            run_ref,
+            first,
+            first_spki_ref,
+            second,
+            second_spki_ref,
+            (
+                Sys5I3TrustedLocalnetControlPurpose::Ordinary,
+                Sys5I3TrustedLocalnetControlPurpose::Ordinary,
+            ),
+        )
+    }
+
+    fn split_trusted_localnet_controls_with_purposes(
+        &self,
+        run_ref: impl Into<String>,
+        first: Sys5I3ExpectedStartBinding,
+        first_spki_ref: impl Into<String>,
+        second: Sys5I3ExpectedStartBinding,
+        second_spki_ref: impl Into<String>,
+        purposes: (
+            Sys5I3TrustedLocalnetControlPurpose,
+            Sys5I3TrustedLocalnetControlPurpose,
+        ),
+    ) -> Result<
+        (Sys5I3TrustedLocalnetControl, Sys5I3TrustedLocalnetControl),
+        Sys5I3LocalnetControlError,
+    > {
+        let (first_purpose, second_purpose) = purposes;
         let run_ref = run_ref.into();
         let first_spki_ref = first_spki_ref.into();
         let second_spki_ref = second_spki_ref.into();
@@ -7862,6 +8183,7 @@ impl Sys5I3PrivateProcessCodec {
             peer_projection_ref: second.projection_ref.clone(),
             peer_cohort_provenance_ref: second.cohort_provenance_ref.clone(),
             expected_start_binding: first,
+            purpose: first_purpose,
         };
         let second_control = Sys5I3TrustedLocalnetControl {
             run_ref,
@@ -7883,6 +8205,7 @@ impl Sys5I3PrivateProcessCodec {
                 .cohort_provenance_ref
                 .clone(),
             expected_start_binding: second,
+            purpose: second_purpose,
         };
         Ok((first_control, second_control))
     }
@@ -7897,6 +8220,7 @@ impl Sys5I3PrivateProcessCodec {
     ) -> Result<Vec<u8>, Sys5I3PrivateProcessCodecError> {
         let snapshot = PrivateTrustedLocalnetControlSnapshot {
             version: PRIVATE_TRUSTED_LOCALNET_CONTROL_VERSION,
+            purpose: control.purpose,
             expected_start_binding: (&control.expected_start_binding).into(),
             run_ref: control.run_ref,
             local_slot_name: control.local_slot_name,
@@ -7965,6 +8289,7 @@ impl Sys5I3PrivateProcessCodec {
             peer_checked_program_ref: snapshot.peer_checked_program_ref,
             peer_projection_ref: snapshot.peer_projection_ref,
             peer_cohort_provenance_ref: snapshot.peer_cohort_provenance_ref,
+            purpose: snapshot.purpose,
         })
     }
 
@@ -8125,6 +8450,25 @@ impl Sys5I3PrivateProcessCodec {
         control: Sys5I3TrustedLocalnetControl,
     ) -> Result<(Sys5I3ProcessRuntime, Sys5I3TrustedLocalnetControl), Sys5I3LocalnetControlError>
     {
+        self.validate_and_start_image_with_control_purpose(
+            image,
+            control,
+            Sys5I3TrustedLocalnetControlPurpose::Ordinary,
+        )
+    }
+
+    fn validate_and_start_image_with_control_purpose(
+        &self,
+        image: Sys5I3UntrustedProcessImage,
+        control: Sys5I3TrustedLocalnetControl,
+        expected_purpose: Sys5I3TrustedLocalnetControlPurpose,
+    ) -> Result<(Sys5I3ProcessRuntime, Sys5I3TrustedLocalnetControl), Sys5I3LocalnetControlError>
+    {
+        if control.purpose != expected_purpose {
+            return Err(Sys5I3LocalnetControlError::new(
+                Sys5I3LocalnetControlErrorKind::StartBindingRejected,
+            ));
+        }
         control
             .expected_start_binding
             .validate_image(&image.image)
@@ -8137,6 +8481,20 @@ impl Sys5I3PrivateProcessCodec {
             Sys5I3LocalnetControlError::new(Sys5I3LocalnetControlErrorKind::StartBindingRejected)
         })?;
         Ok((runtime, control))
+    }
+
+    pub(crate) fn validate_and_start_image_with_process_local_cut_control(
+        &self,
+        image: Sys5I3UntrustedProcessImage,
+        control: Sys5I3TrustedLocalnetControl,
+        role: Sys5I3ProcessLocalCutControlRole,
+    ) -> Result<(Sys5I3ProcessRuntime, Sys5I3TrustedLocalnetControl), Sys5I3LocalnetControlError>
+    {
+        self.validate_and_start_image_with_control_purpose(
+            image,
+            control,
+            Sys5I3TrustedLocalnetControlPurpose::ProcessLocalCut { role },
+        )
     }
 
     /// The only child bootstrap path that may transfer a pre-staged owner
@@ -8156,6 +8514,11 @@ impl Sys5I3PrivateProcessCodec {
         ),
         Sys5I3LocalnetControlError,
     > {
+        if !control.has_ordinary_purpose() {
+            return Err(Sys5I3LocalnetControlError::new(
+                Sys5I3LocalnetControlErrorKind::StartBindingRejected,
+            ));
+        }
         control
             .expected_start_binding
             .validate_image(&image.image)
@@ -8231,6 +8594,11 @@ impl Sys5I3PrivateProcessCodec {
         ),
         Sys5I3LocalnetControlError,
     > {
+        if !control.has_ordinary_purpose() {
+            return Err(Sys5I3LocalnetControlError::new(
+                Sys5I3LocalnetControlErrorKind::StartBindingRejected,
+            ));
+        }
         control
             .expected_start_binding
             .validate_image(&image.image)
@@ -8911,6 +9279,26 @@ pub struct Sys5I3ProcessRuntime {
     reject_next_owner_admission_after_reservation: bool,
 }
 
+/// Crate-private Row20 continuation token. It retains one actual SYS-4
+/// admission occurrence bound to this live runtime instance; it is neither a
+/// snapshot nor a restore or authority token.
+pub(crate) struct Sys5I3ProcessLocalCutAdmissionToken {
+    sys4_admission: Sys4I3ProcessLocalCutAdmission,
+    runtime_binding_ref: String,
+    runtime_instance: u64,
+}
+
+impl Sys5I3ProcessLocalCutAdmissionToken {
+    fn matches_runtime(&self, runtime: &Sys5I3ProcessRuntime) -> bool {
+        self.runtime_binding_ref == runtime.local_store_identity_ref
+            && self.runtime_instance == runtime.owner_admission_runtime_instance
+            && self.sys4_admission.matches_runtime(
+                &runtime.local_store_identity_ref,
+                runtime.owner_admission_runtime_instance,
+            )
+    }
+}
+
 impl std::fmt::Debug for Sys5I3ProcessRuntime {
     fn fmt(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         formatter
@@ -9129,6 +9517,188 @@ impl Sys5I3ProcessRuntime {
         self.semantic_occurrences.clone()
     }
 
+    /// Commit the requester-local Row20 admission only after one real owner
+    /// reply has been consumed by this freshly started runtime. The retained
+    /// SYS-4 occurrence is bound to that receipt and exact runtime identity;
+    /// it is not supplied by a launcher, transport, or observer.
+    ///
+    /// This is crate-private because the Row20 custody capsule owns the
+    /// admission token. It intentionally creates no snapshot or restore
+    /// material and exposes no fabric/session handle to its caller.
+    pub(crate) fn commit_i3_process_local_cut_after_initial_receipt(
+        &mut self,
+    ) -> Result<Sys5I3ProcessLocalCutAdmissionToken, Sys5I3ProcessRuntimeError> {
+        if !self.pending_outbound_owner_requests.is_empty()
+            || self.accepted_inbound_receipt_count != 1
+            || self.semantic_occurrences.requester_local_receipts.len() != 1
+            || self.accepted_inbound_declared_owner_failure_count != 0
+            || !self.requester_terminal_declared_owner_failures.is_empty()
+            || self
+                .fabric
+                .i3_process_outbox_summary()
+                .pending_carrier_count()
+                != 0
+        {
+            return Err(Sys5I3ProcessRuntimeError::new(
+                Sys5I3ProcessRuntimeErrorKind::RuntimeBootstrapRejected,
+            ));
+        }
+        let Some((_request_identity_ref, receipt_occurrence_ref)) = self
+            .semantic_occurrences
+            .requester_local_receipts
+            .iter()
+            .next()
+        else {
+            return Err(Sys5I3ProcessRuntimeError::new(
+                Sys5I3ProcessRuntimeErrorKind::RuntimeBootstrapRejected,
+            ));
+        };
+        let sys4_admission = self
+            .fabric
+            .admit_i3_process_local_cut(
+                receipt_occurrence_ref,
+                &self.local_store_identity_ref,
+                self.owner_admission_runtime_instance,
+            )
+            .map_err(|_| {
+                Sys5I3ProcessRuntimeError::new(
+                    Sys5I3ProcessRuntimeErrorKind::RuntimeBootstrapRejected,
+                )
+            })?;
+        Ok(Sys5I3ProcessLocalCutAdmissionToken {
+            sys4_admission,
+            runtime_binding_ref: self.local_store_identity_ref.clone(),
+            runtime_instance: self.owner_admission_runtime_instance,
+        })
+    }
+
+    /// Crate-private exact state check for the Row20 owner-side custody
+    /// guard.  It deliberately reads the real bounded duplicate/admission
+    /// ledger rather than accepting a test flag or observer count.
+    pub(crate) fn has_i3_owner_admission_reservation(&self) -> bool {
+        self.inbound_owner_request_tombstones
+            .values()
+            .any(|record| {
+                matches!(
+                    record.tombstone.phase,
+                    Sys5I3InboundOwnerRequestTombstonePhase::Reserved
+                        | Sys5I3InboundOwnerRequestTombstonePhase::Awaiting
+                        | Sys5I3InboundOwnerRequestTombstonePhase::ServeReserved
+                        | Sys5I3InboundOwnerRequestTombstonePhase::Ambiguous
+                )
+            })
+    }
+
+    /// Checks the fixed Row20 late-reply ordering against the owner runtime's
+    /// existing bounded request and serve history. This neither creates an
+    /// admission nor grants a delivery right.
+    pub(crate) fn validates_i3_process_local_cut_late_reply_after_second_admission(
+        &self,
+        first_request_identity_ref: &str,
+        second_reply: &Sys5I3ProcessMessage,
+    ) -> bool {
+        let second_request_identity_ref = second_reply.semantic_request_identity_ref();
+        if !matches!(second_reply.kind, Sys5I3ProcessMessageKind::Reply)
+            || second_reply.carrier.is_none()
+            || second_request_identity_ref == first_request_identity_ref
+            || second_reply.linked_request_identity_ref() != Some(second_request_identity_ref)
+            || second_reply.cohort_provenance_ref != self.cohort_ref
+            || self.inbound_owner_request_tombstones.len() != 2
+            || self.served_owner_request_count != 2
+            || self.local_authoritative_mutation_count != 2
+            || self.semantic_occurrences.owner_serve_linearizations.len() != 2
+            || self.semantic_occurrences.actual_owner_writes.len() != 2
+        {
+            return false;
+        }
+        [first_request_identity_ref, second_request_identity_ref]
+            .into_iter()
+            .all(|request_identity_ref| {
+                self.inbound_owner_request_tombstones
+                    .get(request_identity_ref)
+                    .is_some_and(|record| {
+                        record.tombstone.phase == Sys5I3InboundOwnerRequestTombstonePhase::Received
+                    })
+                    && self
+                        .semantic_occurrences
+                        .owner_serve_linearizations
+                        .contains_key(request_identity_ref)
+                    && self
+                        .semantic_occurrences
+                        .actual_owner_writes
+                        .contains_key(request_identity_ref)
+            })
+    }
+
+    /// Checks that the fixed Row20 requester still retains exactly its later
+    /// original pending operation after rejecting an old decoded reply.
+    pub(crate) fn preserves_i3_process_local_cut_later_pending_after_old_reply_rejection(
+        &self,
+        pending: &Sys5I3OriginalOwnerRequestPending,
+    ) -> bool {
+        self.pending_outbound_owner_requests.len() == 1
+            && self.accepted_inbound_receipt_count == 1
+            && self.semantic_occurrences.requester_local_receipts.len() == 1
+            && self.accepted_inbound_declared_owner_failure_count == 0
+            && self.requester_terminal_declared_owner_failures.is_empty()
+            && self
+                .pending_outbound_owner_requests
+                .get(pending.semantic_request_identity_ref())
+                .is_some_and(|record| {
+                    record.pending_handle_issued
+                        && record.pending_token_ref == pending.runtime_token_ref
+                })
+    }
+
+    /// Checks the fixed Row20 partial-frame cancellation state without
+    /// exporting a carrier or treating a physical header as semantic ingress.
+    /// The requester retains the exact started original pending handle, but
+    /// has consumed no reply and produced no terminal outcome.
+    pub(crate) fn preserves_i3_process_local_cut_cancelled_initial_pending(
+        &self,
+        pending: &Sys5I3OriginalOwnerRequestPending,
+    ) -> bool {
+        self.pending_outbound_owner_requests.len() == 1
+            && self.accepted_inbound_receipt_count == 0
+            && self
+                .semantic_occurrences
+                .requester_local_receipts
+                .is_empty()
+            && self.accepted_inbound_declared_owner_failure_count == 0
+            && self.requester_terminal_declared_owner_failures.is_empty()
+            && self
+                .pending_outbound_owner_requests
+                .get(pending.semantic_request_identity_ref())
+                .is_some_and(|record| {
+                    record.pending_handle_issued
+                        && record.pending_token_ref == pending.runtime_token_ref
+                        && record.started_attempts == 1
+                        && record.last_started_attempt_kind
+                            == Some(Sys5I3OriginalOwnerRequestAttemptKind::InitialDelivery)
+                })
+    }
+
+    /// Checks that a Row20 partial-frame cancellation reached no owner
+    /// semantic admission, serve, or authoritative write. It intentionally
+    /// records no body, carrier, or transport detail.
+    pub(crate) fn validates_i3_process_local_cut_cancelled_owner_state(&self) -> bool {
+        self.inbound_owner_request_tombstones.is_empty()
+            && self.served_owner_request_count == 0
+            && self.local_authoritative_mutation_count == 0
+            && self
+                .semantic_occurrences
+                .owner_serve_linearizations
+                .is_empty()
+            && self.semantic_occurrences.actual_owner_writes.is_empty()
+            && self.accepted_inbound_receipt_count == 0
+            && self.accepted_inbound_declared_owner_failure_count == 0
+            && self
+                .fabric
+                .i3_process_outbox_summary()
+                .pending_carrier_count()
+                == 0
+    }
+
     pub fn observer_safe_outbox_summary(&self) -> Sys5I3ObserverSafeOutboxSummary {
         let summary = self.fabric.i3_process_outbox_summary();
         Sys5I3ObserverSafeOutboxSummary {
@@ -9301,6 +9871,78 @@ impl Sys5I3ProcessRuntime {
             }
             Sys5I3OwnerAdmissionResolution::DeclaredOwnerFailure(message) => Ok(Some(*message)),
         }
+    }
+
+    /// Resolve the one already-admitted owner request in the Row20 custody
+    /// path. The caller cannot name a request or a driver: an inline reply
+    /// remains accepted from the normal admission core, while an `Awaiting`
+    /// entry must use the existing exact runtime-bound owner driver. The
+    /// checks are cumulative so the second source action cannot be mistaken
+    /// for a second initial admission.
+    pub(crate) fn resolve_i3_process_local_cut_owner_admission(
+        &mut self,
+        received: Option<Sys5I3ProcessMessage>,
+    ) -> Result<Sys5I3ProcessMessage, Sys5I3ProcessRuntimeError> {
+        let Some(reply) = received else {
+            let before_admission = self.observer_safe_owner_admission_summary();
+            let before_runtime = self.observer_safe_runtime_summary();
+            let before_tombstones = self.observer_safe_inbound_owner_request_tombstone_count();
+            if before_admission.awaiting_count() != 1
+                || before_admission.expired_count() != 0
+                || before_admission.rejected_before_serve_count() != 0
+                || before_admission.serve_reserved_count() != 0
+                || before_tombstones == 0
+            {
+                return Err(Sys5I3ProcessRuntimeError::new(
+                    Sys5I3ProcessRuntimeErrorKind::RuntimeBootstrapRejected,
+                ));
+            }
+            let expected_serves = before_runtime
+                .served_owner_request_count()
+                .checked_add(1)
+                .ok_or_else(|| {
+                    Sys5I3ProcessRuntimeError::new(
+                        Sys5I3ProcessRuntimeErrorKind::RuntimeBootstrapRejected,
+                    )
+                })?;
+            let expected_writes = before_runtime
+                .actual_owner_write_count()
+                .checked_add(1)
+                .ok_or_else(|| {
+                    Sys5I3ProcessRuntimeError::new(
+                        Sys5I3ProcessRuntimeErrorKind::RuntimeBootstrapRejected,
+                    )
+                })?;
+            let drivers = self.i3_admitted_owner_admission_host_drivers();
+            let [driver] = drivers.as_slice() else {
+                return Err(Sys5I3ProcessRuntimeError::new(
+                    Sys5I3ProcessRuntimeErrorKind::RuntimeBootstrapRejected,
+                ));
+            };
+            let reply = self
+                .drive_next_owner_admission(driver, None)?
+                .ok_or_else(|| {
+                    Sys5I3ProcessRuntimeError::new(
+                        Sys5I3ProcessRuntimeErrorKind::RuntimeBootstrapRejected,
+                    )
+                })?;
+            let after_admission = self.observer_safe_owner_admission_summary();
+            let after_runtime = self.observer_safe_runtime_summary();
+            if after_admission.awaiting_count() != 0
+                || after_admission.expired_count() != 0
+                || after_admission.rejected_before_serve_count() != 0
+                || after_admission.serve_reserved_count() != 0
+                || self.observer_safe_inbound_owner_request_tombstone_count() != before_tombstones
+                || after_runtime.served_owner_request_count() != expected_serves
+                || after_runtime.actual_owner_write_count() != expected_writes
+            {
+                return Err(Sys5I3ProcessRuntimeError::new(
+                    Sys5I3ProcessRuntimeErrorKind::RuntimeBootstrapRejected,
+                ));
+            }
+            return Ok(reply);
+        };
+        Ok(reply)
     }
 
     /// Advance exactly one checked owner/domain clock.  This does not choose
@@ -9543,6 +10185,30 @@ impl Sys5I3ProcessRuntime {
         &mut self,
         operation_id: &str,
     ) -> Result<Sys5I3ProcessMessage, Sys5I3ProcessRuntimeError> {
+        self.emit_generated_owner_request_with_process_local_cut(operation_id, None)
+    }
+
+    /// Emit one later checked source action only when the supplied Row20
+    /// admission still names this exact live requester runtime.  The common
+    /// source/carrier path below remains unchanged for ordinary callers.
+    pub(crate) fn emit_generated_owner_request_after_process_local_cut(
+        &mut self,
+        operation_id: &str,
+        admission: &Sys5I3ProcessLocalCutAdmissionToken,
+    ) -> Result<Sys5I3ProcessMessage, Sys5I3ProcessRuntimeError> {
+        self.emit_generated_owner_request_with_process_local_cut(operation_id, Some(admission))
+    }
+
+    fn emit_generated_owner_request_with_process_local_cut(
+        &mut self,
+        operation_id: &str,
+        admission: Option<&Sys5I3ProcessLocalCutAdmissionToken>,
+    ) -> Result<Sys5I3ProcessMessage, Sys5I3ProcessRuntimeError> {
+        if admission.is_some_and(|admission| !admission.matches_runtime(self)) {
+            return Err(Sys5I3ProcessRuntimeError::new(
+                Sys5I3ProcessRuntimeErrorKind::CarrierAdmissionRejected,
+            ));
+        }
         if self.pending_outbound_owner_requests.len() >= MAX_OUTBOUND_OWNER_REQUEST_PENDING {
             return Err(Sys5I3ProcessRuntimeError::new(
                 Sys5I3ProcessRuntimeErrorKind::OutboundRequestLedgerExhausted,
@@ -9563,6 +10229,20 @@ impl Sys5I3ProcessRuntime {
                     Sys5I3ProcessRuntimeErrorKind::NoGeneratedOwnerRequest,
                 )
             })?;
+        if let Some(admission) = admission {
+            self.fabric
+                .bind_i3_process_local_cut_followup(
+                    &submission,
+                    &admission.sys4_admission,
+                    &self.local_store_identity_ref,
+                    self.owner_admission_runtime_instance,
+                )
+                .map_err(|_| {
+                    Sys5I3ProcessRuntimeError::new(
+                        Sys5I3ProcessRuntimeErrorKind::NoGeneratedOwnerRequest,
+                    )
+                })?;
+        }
         #[cfg(feature = "i3-process-test-seams")]
         if self.reject_next_outbound_extraction {
             self.reject_next_outbound_extraction = false;
@@ -9632,6 +10312,47 @@ impl Sys5I3ProcessRuntime {
             cohort_provenance_ref: self.cohort_ref.clone(),
             identity_basis: Sys5I3ObserverSafeSemanticRequestIdentityBasis,
         })
+    }
+
+    /// Test-only retained-graph assertion for the Row20 requirement that the
+    /// genuine post-cut source action is causally downstream of this live
+    /// runtime's admission. It exposes neither occurrence references nor a
+    /// way to construct a token, carrier, or semantic transition.
+    #[cfg(test)]
+    pub(crate) fn test_only_i3_process_local_cut_followup_causally_reaches(
+        &self,
+        admission: &Sys5I3ProcessLocalCutAdmissionToken,
+        followup: &Sys5I3ProcessMessage,
+    ) -> bool {
+        if !admission.matches_runtime(self)
+            || !matches!(followup.kind, Sys5I3ProcessMessageKind::Request)
+            || followup.linked_request_identity_ref.is_some()
+            || followup.cohort_provenance_ref != self.cohort_ref
+        {
+            return false;
+        }
+        let Some(carrier) = followup.carrier.as_ref() else {
+            return false;
+        };
+        if !self
+            .pending_outbound_owner_requests
+            .get(&followup.semantic_request_identity_ref)
+            .is_some_and(|record| {
+                record.exact_carrier.envelope_id() == carrier.envelope_id()
+                    && record.pending.semantic_request_identity_ref(
+                        &self.parent_checked_program_ref,
+                        &self.projection_ref,
+                        &self.cohort_ref,
+                    ) == followup.semantic_request_identity_ref
+            })
+        {
+            return false;
+        }
+        self.fabric
+            .test_only_i3_process_local_cut_followup_causally_reaches_admission(
+                &admission.sys4_admission,
+                carrier,
+            )
     }
 
     /// Consume one source-emitted request message into the private retry
