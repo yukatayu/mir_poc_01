@@ -507,3 +507,34 @@ E2E, production recovery implementation or verified alpha. Local Linux man-pages
 6.7 fsync/flock were read to check the operational assumptions; advisory locking
 cannot constrain a process that ignores it, and file fsync alone is insufficient
 for initial directory-entry durability.
+
+
+CurrentPolicyFrame is a later unreviewed consequence for the same restored-call
+consumer. It reuses CurrentUse's existing issued-claim/witness/policy checkers.
+The actual submitted witness determines its used claim IDs. General proofs show
+that a successful witness uses no revoked claim, revoking any used claim rejects
+that witness, and revoking an unused claim preserves its exact Boolean result
+when policy, context, issued records and issuer epochs remain unchanged. The
+same properties hold for the existing CurrentUse.revoke/checkUse path, which
+changes only the revocation list. These are conditional module-layer frame
+properties, not arbitrary-authority-update or global availability theorems.
+
+An explicit alternative-policy control has a valid fresh right-branch witness
+after its old left-branch claim is revoked; the old witness still rejects. The
+checker does not silently substitute a newly produced proof. A separate actual
+CurrentAllocation control retains a valid module-use witness after an unused
+claim is revoked but rejects at the independently supplied resource grant. Thus
+module-layer preservation cannot be promoted into whole-call authorization.
+Neither constructing a proof nor knowing that another branch is authorized
+issues a claim or chooses which operation a caller is permitted to perform.
+
+Skipping revocation and omitting the right conjunct's used-claim dependency each
+break a required general statement and a concrete control. General evidence uses
+propext/Quot.sound only. Coarse global invalidation is a smaller conservative
+alternative with weaker reuse; no policy or generation-update strategy is adopted.
+Current World/issuer acquisition, source/code/contract/authenticity binding,
+restored-history truth, grant-layer dependence, physical check/use atomicity,
+secret-observation safety and Q18 prepared-patch reservation semantics remain
+open. In particular, Once.Invocation contains a World and grant: replaying that
+stored input cannot itself establish that either is current. No production or
+public contract changed, and this delta is outside both pending Oracle packets.

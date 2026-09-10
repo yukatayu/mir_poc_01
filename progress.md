@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-09-10 08:31 JST
+最終更新: 2026-09-10 08:59 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -324,3 +324,5 @@ The authorized roadmap is paused, not blocked, stale or closed.
 - 2026-09-10 08:08 JST: 通常source由来の実二process QUIC回帰9件が通過。期限・応答喪失・再接続重複・観測改変を確認。固定operation/配置と観測queue容量の接続義務を明記し、W2統合・実機復旧・α受理とは区別。
 
 - 2026-09-10 08:31 JST: W2予約の同期前後を分けた一般Lean証明と4変異、参照実process停止・並行・失敗18ケースを確認。15モジュールfresh検査通過。電源断・真正性・Mir実装へのrefinement・reviewは未達。
+
+- 2026-09-10 08:59 JST: W2呼出し依存のwitness使用claim失効拒否／未使用claim失効の保存則をLean検査し、2変異を反例で検出。別resource grantは拒否可能。15モジュールfresh検査通過、現在権限の取得・Q18・reviewは未達。

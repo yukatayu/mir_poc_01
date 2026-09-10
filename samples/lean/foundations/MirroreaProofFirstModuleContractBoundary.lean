@@ -1364,3 +1364,145 @@ end Controls
 #print axioms fresh_completes
 #print axioms new_dispatch_has_durable_reservation
 end MirroreaProofFirst.ModuleContractBoundary.DurableDispatch
+
+
+-- Unreviewed current-policy consequence for the W2 restore/call consumer.
+-- Authority acquisition, Q18 reservations and caller identity are not supplied.
+namespace MirroreaProofFirst.ModuleContractBoundary.CurrentPolicyFrame
+open CurrentUse
+
+def used : Witness → List Nat
+ | .leaf c => [c.id]
+ | .both l r => used l ++ used r
+ | .left w => used w
+ | .right w => used w
+
+def revokeAuthority (a : Authority) (id : Nat) : Authority :=
+ {a with revoked := id :: a.revoked}
+
+theorem claim_frame (a : Authority) (κ : Context) (label : Nat)
+ (need : Need) (c : Claim) (id : Nat) (unrelated : c.id ≠ id) :
+ checkClaim (revokeAuthority a id) κ label need c = checkClaim a κ label need c := by
+ simp [checkClaim,revokeAuthority,unrelated,eq_comm]
+
+theorem witness_frame (a : Authority) (κ : Context) (label : Nat)
+ (p : PolicyExpr) (w : Witness) (id : Nat) (unrelated : id ∉ used w) :
+ checkWitness (revokeAuthority a id) κ label p w = checkWitness a κ label p w := by
+ induction p generalizing w with
+ | leaf n =>
+   cases w <;> simp only [checkWitness]
+   case leaf c =>
+     exact claim_frame _ _ _ _ _ _ (by simpa [used,eq_comm] using unrelated)
+ | both p q hp hq =>
+   cases w <;> simp only [checkWitness]
+   case both l r =>
+     have h : id ∉ used l ∧ id ∉ used r := by simpa [used] using unrelated
+     rw [hp l h.1,hq r h.2]
+ | either p q hp hq =>
+   cases w <;> simp only [checkWitness]
+   case left w => exact hp w unrelated
+   case right w => exact hq w unrelated
+
+theorem used_claims_current (a : Authority) (κ : Context) (label : Nat)
+ (p : PolicyExpr) (w : Witness) (checked : checkWitness a κ label p w = true) :
+ ∀ id ∈ used w, id ∉ a.revoked := by
+ induction p generalizing w with
+ | leaf n =>
+   cases w <;> simp only [checkWitness, Bool.false_eq_true] at checked
+   case leaf c =>
+     have h := (checkClaim_exact a κ label n c).mp checked
+     simpa [used] using h.2.1
+ | both p q hp hq =>
+   cases w <;> simp only [checkWitness, Bool.false_eq_true, Bool.and_eq_true] at checked
+   case both l r =>
+     intro id mem
+     rcases List.mem_append.mp mem with hl | hr
+     · exact hp l checked.1 id hl
+     · exact hq r checked.2 id hr
+ | either p q hp hq =>
+   cases w <;> simp only [checkWitness, Bool.false_eq_true] at checked
+   case left w => exact hp w checked
+   case right w => exact hq w checked
+
+theorem used_revocation_rejected (a : Authority) (κ : Context) (label : Nat)
+ (p : PolicyExpr) (w : Witness) (id : Nat) (present : id ∈ used w) :
+ checkWitness (revokeAuthority a id) κ label p w = false := by
+ cases h : checkWitness (revokeAuthority a id) κ label p w with
+ | false => rfl
+ | true =>
+   have absent := used_claims_current (revokeAuthority a id) κ label p w h id present
+   exact False.elim (absent (by simp [revokeAuthority]))
+
+theorem revalidation_frame (a : Authority) (p : Policy) (κ : Context)
+ (e : Evidence) (id : Nat) (unrelated : id ∉ used e.witness) :
+ revalidate (revokeAuthority a id) p κ e = revalidate a p κ e := by
+ simp only [revalidate,witness_frame a κ p.label p.expression e.witness id unrelated]
+
+theorem revoked_witness_not_revalidated (a : Authority) (p : Policy) (κ : Context)
+ (e : Evidence) (id : Nat) (present : id ∈ used e.witness) :
+ revalidate (revokeAuthority a id) p κ e = false := by
+ simp [revalidate,used_revocation_rejected a κ p.label p.expression e.witness id present]
+
+
+theorem current_use_frame (m : CurrentUse.Machine n) (u : UseRequest n)
+ (e : Evidence) (id : Nat) (unrelated : id ∉ used e.witness) :
+ checkUse (CurrentUse.revoke m id).world u e = checkUse m.world u e := by
+ have frame :
+   revalidate (CurrentUse.revoke m id).world.authority
+     ((CurrentUse.revoke m id).world.policies u.operation.key)
+     (currentContext (CurrentUse.revoke m id).world u) e =
+   revalidate m.world.authority (m.world.policies u.operation.key)
+     (currentContext m.world u) e :=
+   revalidation_frame m.world.authority (m.world.policies u.operation.key)
+     (currentContext m.world u) e id unrelated
+ unfold checkUse
+ rw [frame]
+ rfl
+
+theorem current_use_revoked_witness (m : CurrentUse.Machine n) (u : UseRequest n)
+ (e : Evidence) (id : Nat) (present : id ∈ used e.witness) :
+ checkUse (CurrentUse.revoke m id).world u e = false := by
+ have rejected := used_revocation_rejected m.world.authority (currentContext m.world u)
+   (m.world.policies u.operation.key).label (m.world.policies u.operation.key).expression
+   e.witness id present
+ simp only [revokeAuthority,currentContext] at rejected
+ simp [CurrentUse.revoke,checkUse,checkHandle,currentContext,revalidate,rejected]
+
+namespace Controls
+open CurrentUse.Controls
+def choicePolicy : Policy :=
+ {policy with expression := .either (.leaf ⟨10,11⟩) (.leaf ⟨20,22⟩)}
+def leftEvidence : Evidence := {evidence with witness := .left (.leaf claimA)}
+def current := currentContext world request
+example : revalidate auth choicePolicy current leftEvidence = true := by decide
+example : revalidate (revokeAuthority auth 99) choicePolicy current leftEvidence = true := by decide
+example : revalidate (revokeAuthority auth 2) choicePolicy current leftEvidence = true := by decide
+example : revalidate (revokeAuthority auth 1) choicePolicy current leftEvidence = false := by decide
+-- A different freshly produced branch can succeed; revalidation must not swap it in.
+example : produce (revokeAuthority auth 1) current 0 choicePolicy.expression =
+ some (.right (.leaf claimB)) := by decide
+example : revalidate (revokeAuthority auth 1) choicePolicy current
+ {leftEvidence with witness := .right (.leaf claimB)} = true := by decide
+example : used evidence.witness = [1,2] := by decide
+example : revalidate (revokeAuthority auth 2) policy current evidence = false := by decide
+
+-- This frame belongs to the module-layer witness, not every other policy layer.
+def guardedResource : CurrentAllocation.Grant 4 :=
+ fun w _ _ _ _ => decide (w.authority.revoked = [])
+def unrelatedWorld : World 4 := {world with authority := revokeAuthority auth 99}
+example : checkUse unrelatedWorld request evidence = true := by decide
+example : (CurrentAllocation.run ⟨1,1⟩ (-100) 100 world
+ ModuleContractBoundary.Controls.registry DescriptorControl.catalog request [41]
+ evidence ModuleContractBoundary.Controls.proof guardedResource ResourceBoundary.empty).isSome = true := by decide
+example : CurrentAllocation.run ⟨1,1⟩ (-100) 100 unrelatedWorld
+ ModuleContractBoundary.Controls.registry DescriptorControl.catalog request [41]
+ evidence ModuleContractBoundary.Controls.proof guardedResource ResourceBoundary.empty = none := by decide
+end Controls
+#print axioms witness_frame
+#print axioms used_claims_current
+#print axioms used_revocation_rejected
+#print axioms revalidation_frame
+#print axioms revoked_witness_not_revalidated
+#print axioms current_use_frame
+#print axioms current_use_revoked_witness
+end MirroreaProofFirst.ModuleContractBoundary.CurrentPolicyFrame

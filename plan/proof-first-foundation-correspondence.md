@@ -526,3 +526,16 @@ separate diagnostic wrapper incorrectly expected the new negative control to fai
 its assertion failed35925a although the reference test returned0. This is not a
 reproduced decoder bug or failed case hidden as success. No Lean source changed
 after the fresh fifteen-module check; this later delta is one negative test.
+
+Current-policy witness frame, 2026-09-10 08:59 JST, same W2 consumer: existing
+CurrentUse checks now have additional unreviewed general used-claim rejection
+and unused-claim preservation evidence. This holds when revocation changes only
+the list and context/policy/issued records/epochs stay fixed; it is not blanket
+preservation under arbitrary authority changes. A valid fresh alternative branch
+does not make a revoked submitted witness valid. A separate resource grant can
+still deny while the module-use witness remains valid. Coarse global invalidation
+is a more conservative alternative with weaker reuse, not a selected new policy.
+Two mutations fail required general properties and concrete controls; new axioms
+propext/Quot.sound only, final15-source mirror6c0a86 PASS. Current authority/head
+acquisition, source provenance, physical atomicity, grant-layer dependence and
+Q18 remain open. Stored Invocation's World/grant are not fresh merely by replay.

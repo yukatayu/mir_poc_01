@@ -93,3 +93,12 @@ restarts and expose retained reservations without effects. A monotone honest
 journal and one serialized owner are explicit assumptions, not authenticated
 freshness or physical crash guarantees. Match this reference with a nonproduction
 local-file/two-process stop experiment; it is not production recovery or alpha.
+
+Same restore consumer, next scoped proof obligation: submitted witnesses must be
+checked against current authority. Revoking a used claim must invalidate that
+witness even if another policy branch is currently authorized; revoking an unused
+claim may preserve it when context/policy/issuer epochs are unchanged. Compare
+precise witness dependence with coarse global invalidation, without choosing Q18
+prepared-patch reservation semantics. Reuse existing policy/checker definitions;
+prove frame and used-claim rejection, positive alternative-branch controls, and
+mutant falsification. Current authority acquisition and production remain open.

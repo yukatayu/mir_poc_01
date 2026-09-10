@@ -72,6 +72,7 @@ samples/lean/foundations. Mirroring preserves their unreviewed LAB status.
 - `samples/lean/foundations/MirroreaProofFirstContractExport.lean`
 - `samples/lean/foundations/MirroreaProofFirstPureFunctions.lean`
 - `samples/lean/foundations/MirroreaProofFirstFunctionContractBridge.lean`
+- `samples/lean/foundations/MirroreaProofFirstModuleContractBoundary.lean`
 - `samples/lean/foundations/MirroreaProofFirstOwnerAssignment.lean`
 - `samples/lean/foundations/MirroreaProofFirstProfileGuarantees.lean`
 - `samples/lean/foundations/MirroreaProofFirstHandleValues.lean`
@@ -1423,3 +1424,39 @@ reference sourcec063a6/2ebd2e self-reviewed; current source hashes and unchanged
 prior JSON evidence957eb3 PASS. Documentation45add7 PASS (1762 numbered reports).
 Only continuation/report metadata afterward. No new Oracle answer or formal
 acceptance; normal own-file commit/push follows and the user task continues.
+
+Current-policy continuation, 2026-09-10 08:56 JST, same W2 restore/call consumer:
+CurrentPolicyFrame in ModuleContractBoundary reuses the existing CurrentUse
+checker. Submitted-witness dependencies yield general used-claim rejection and
+unused-claim frame properties, including the existing World revoke/checkUse path.
+Policy/context/issued records/issuer epochs stay fixed in this operation. A
+currently valid alternative proof does not rescue the submitted revoked witness.
+A concrete second-layer grant denial remains possible despite module-use frame
+preservation, so the two authorization layers are not collapsed.
+
+Final kernel/mutation2cb62e PASS: two skipped-revocation/omitted-right-dependency
+mutants fail general statements and concrete controls. New axioms only
+propext/Quot.sound. Draft2/3 rewrite/elaboration failures are not accepted proofs;
+final world-level proof951b5d passed before the frozen mutant cut. Fresh mirror
+subsequently passed6c0a86. No production, Q18 policy or authenticated-current
+head acquisition is supplied. Stored Once.Invocation includes World/grant and
+cannot supply currentness merely by being replayed.
+
+Fresh fifteen-source mirror6c0a86 PASS; W2_EXTENSION_CHECK.authority_witness_frame
+stores the final commands/hashes/axioms and two mutant replacements/results.
+plan/, current goal, proof companion, read ledger, progress.md and
+samples_progress.md updated. Documentation.md / docs/project-status.md / tasks.md
+更新不要: no accepted frontier, milestone close or blocker replacement.
+samples/README.md / samples/lean/README.md / scripts/README.md 更新不要: same
+existing proof file and reproduction command, no sample/script taxonomy change.
+Rust/full22-source/physical reference checks not rerun for this proof-only delta;
+the fresh fifteen-source dependency cone was checked and the previous18-case
+reference source is unchanged. Main self-review only; Oracle remains pending,
+no signed or independent proof execution claimed. Own-file checks and normal
+commit/push follow; no sub-agents and no stopping at this checkpoint.
+
+Documentation5c180b PASS1762. Oracle terminal failures collected after the proof
+check: W1 Chrome window closed (052af1), W2 remote Chrome lost (48450c), both
+exit1 and logs report disconnect before conversation creation (aa989b). Read-only
+harvest40392d exit1, undefined webSocketDebuggerUrl. No answer, no review success,
+no latency-based cancellation. Earlier pending statements are historical.

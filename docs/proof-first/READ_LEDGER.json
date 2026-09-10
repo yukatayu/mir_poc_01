@@ -7177,9 +7177,9 @@
   {
     "path": "specs/examples/209-current-l2-theorem-line-checker-result-materialization-family-ready-actual-checker-result-payload-threshold.md",
     "sha256": "da7fd3ad5ac8b248778b5168744f00ac2e3762dfcbb651d074a1bd6b96670eb1",
-    "range": "",
-    "role": "LAB evidence/history/source",
-    "status": "unread"
+    "range": "1-198",
+    "role": "LAB historical notebook bridge comparison; not current authority or executable evidence",
+    "status": "full"
   },
   {
     "path": "specs/examples/477-current-l2-delegated-rng-service-practical-actualization.md",
@@ -8920,9 +8920,9 @@
   {
     "path": "specs/examples/207-current-l2-theorem-line-theorem-export-checker-payload-pressure-ready-actual-exported-checker-payload-threshold.md",
     "sha256": "190f311df261c2b1895045dcb4a19968ea77d5699d1a889b730d22275641145b",
-    "range": "",
-    "role": "LAB evidence/history/source",
-    "status": "unread"
+    "range": "1-192",
+    "role": "LAB historical notebook bridge comparison; not current authority or executable evidence",
+    "status": "full"
   },
   {
     "path": "specs/examples/500-current-l2-theorem-result-object-route-actual-adoption.md",
@@ -9249,9 +9249,9 @@
   {
     "path": "specs/examples/208-current-l2-theorem-line-actual-exported-checker-payload-ready-checker-result-materialization-family-threshold.md",
     "sha256": "55b5412d2918d5cb03d722fab2fcf56b9b6a8f32a55ad87ddda8e541ba4c3d9f",
-    "range": "",
-    "role": "LAB evidence/history/source",
-    "status": "unread"
+    "range": "1-193",
+    "role": "LAB historical notebook bridge comparison; not current authority or executable evidence",
+    "status": "full"
   },
   {
     "path": "specs/examples/467-current-l2-problem2-actual-adoption-package-and-authoritative-room-default-profile.md",
@@ -16305,9 +16305,9 @@
   {
     "path": "docs/hands_on/public_api_parser_gate_01.md",
     "sha256": "766d6f47fcdea5e9f86df276993204808cd1f80f51597b7abda79714ce04988e",
-    "range": "",
-    "role": "LAB evidence/history/source",
-    "status": "unread"
+    "range": "1-65",
+    "role": "LAB historical post-P18/P21 boundary memory, not current authority; previews do not establish durable recovery/order/public ABI",
+    "status": "full"
   },
   {
     "path": "docs/hands_on/practical_alpha1_product_preview_01.md",
@@ -16333,9 +16333,9 @@
   {
     "path": "docs/hands_on/post_p21_rollback_durable_migration_family_01.md",
     "sha256": "a40355240655c38d8623103920d21a7b65a3ce00887a61a09b510a7a3c6262b1",
-    "range": "",
-    "role": "LAB evidence/history/source",
-    "status": "unread"
+    "range": "1-46",
+    "role": "LAB historical post-P18/P21 boundary memory, not current authority; previews do not establish durable recovery/order/public ABI",
+    "status": "full"
   },
   {
     "path": "docs/hands_on/verification_layer_widening_threshold_01.md",
@@ -16431,9 +16431,9 @@
   {
     "path": "docs/hands_on/post_p21_distributed_activation_ordering_family_01.md",
     "sha256": "0123ebd613d4724e5c366b183714c1d93c2908f80a48a9573e0bec3cef4d0767",
-    "range": "",
-    "role": "LAB evidence/history/source",
-    "status": "unread"
+    "range": "1-46",
+    "role": "LAB historical post-P18/P21 boundary memory, not current authority; previews do not establish durable recovery/order/public ABI",
+    "status": "full"
   },
   {
     "path": "docs/hands_on/fairy05_visibility_return_carrier_bundling_01.md",
@@ -16459,9 +16459,9 @@
   {
     "path": "docs/hands_on/surface_mir_alpha_01.md",
     "sha256": "1b52479263ea16d58ac29feeff90cef0e8cb68e1d4c149e4d75630fdafcfbad3",
-    "range": "",
-    "role": "LAB evidence/history/source",
-    "status": "unread"
+    "range": "1-161",
+    "role": "LAB source/companion or historical authoring floor; full read or sole-main authored delta; not normative acceptance or alpha integration",
+    "status": "full"
   },
   {
     "path": "docs/hands_on/runtime_crate_hotplug_carrier_admission_cut_01.md",
@@ -16480,9 +16480,9 @@
   {
     "path": "docs/hands_on/operational_package_authoring_01.md",
     "sha256": "e408309bedd72c615fede07beee5438157ae6984241e69ed35c6f2cf6a126ee0",
-    "range": "",
-    "role": "LAB evidence/history/source",
-    "status": "unread"
+    "range": "1-187",
+    "role": "LAB source/companion or historical authoring floor; full read or sole-main authored delta; not normative acceptance or alpha integration",
+    "status": "full"
   },
   {
     "path": "docs/hands_on/operational_portal_shard_starter_boundary_01.md",
@@ -16753,9 +16753,9 @@
   {
     "path": "docs/research_abstract/post_p21_distributed_activation_ordering_family_01.md",
     "sha256": "a48db1efe3931e57332cdb7267af826f29cd0e679ff9562cee0696067bce71c4",
-    "range": "",
-    "role": "LAB evidence/history/source",
-    "status": "unread"
+    "range": "1-55",
+    "role": "LAB historical post-P18/P21 boundary memory, not current authority; previews do not establish durable recovery/order/public ABI",
+    "status": "full"
   },
   {
     "path": "docs/research_abstract/fairy05_visibility_return_carrier_bundling_01.md",
@@ -16795,9 +16795,9 @@
   {
     "path": "docs/research_abstract/surface_mir_alpha_01.md",
     "sha256": "c849ae04703a415e0fa383104dee6142bad428ce9052a69dff3f4418f40925a2",
-    "range": "",
-    "role": "LAB evidence/history/source",
-    "status": "unread"
+    "range": "1-180",
+    "role": "LAB source/companion or historical authoring floor; full read or sole-main authored delta; not normative acceptance or alpha integration",
+    "status": "full"
   },
   {
     "path": "docs/research_abstract/phase3-parser-boundary-and-first-checker-cut.md",
@@ -16830,9 +16830,9 @@
   {
     "path": "docs/research_abstract/public_api_parser_gate_plan_01.md",
     "sha256": "0ac163ca8a452e09cf56d7672364ae2163f3a72ee541186182c828e68819e81e",
-    "range": "",
-    "role": "LAB evidence/history/source",
-    "status": "unread"
+    "range": "1-61",
+    "role": "LAB historical post-P18/P21 boundary memory, not current authority; previews do not establish durable recovery/order/public ABI",
+    "status": "full"
   },
   {
     "path": "docs/research_abstract/visual_debugger_viewer_plan_01.md",
@@ -16872,9 +16872,9 @@
   {
     "path": "docs/research_abstract/operational_package_authoring_01.md",
     "sha256": "cea132fda3a25d594e59347b21b9d202e954b0397ff94c2e35189659b98021d1",
-    "range": "",
-    "role": "LAB evidence/history/source",
-    "status": "unread"
+    "range": "1-36",
+    "role": "LAB source/companion or historical authoring floor; full read or sole-main authored delta; not normative acceptance or alpha integration",
+    "status": "full"
   },
   {
     "path": "docs/research_abstract/phase4-shared-space-membership-and-practical-room-boundary.md",
@@ -16991,9 +16991,9 @@
   {
     "path": "docs/research_abstract/post_p21_rollback_durable_migration_family_01.md",
     "sha256": "f697f054f51cc0980aadf0f8de590815df4fcb26220246cf7fa88cea35aec75f",
-    "range": "",
-    "role": "LAB evidence/history/source",
-    "status": "unread"
+    "range": "1-48",
+    "role": "LAB historical post-P18/P21 boundary memory, not current authority; previews do not establish durable recovery/order/public ABI",
+    "status": "full"
   },
   {
     "path": "docs/research_abstract/old/2026-04-22-pre-clean-near-end/static_analysis_01.md",
@@ -19968,9 +19968,9 @@
   },
   {
     "path": "samples/lean/foundations/MirroreaProofFirstModuleContractBoundary.lean",
-    "sha256": "d75d2655f8498954002e724ad5b7c05e79fef3bd46590105fa8a80f6d1183bec",
-    "range": "1-1366",
-    "role": "Current LAB source/companion; full previous source plus sole-main authored and reviewed delta, no normative acceptance",
+    "sha256": "c462feaccf48836b99227065316fae628af964ec06d96d2d62b8e3c97713453e",
+    "range": "1-1508",
+    "role": "LAB source/companion or historical authoring floor; full read or sole-main authored delta; not normative acceptance or alpha integration",
     "status": "full"
   },
   {
@@ -21907,9 +21907,9 @@
   },
   {
     "path": "samples/lean/foundations/MirroreaProofFirstContracts.md",
-    "sha256": "e7738367132e340eafa659b2b547a389ca3515e01be281f32bda2e3c9a84e504",
-    "range": "1-509",
-    "role": "Current LAB source/companion; full previous source plus sole-main authored and reviewed delta, no normative acceptance",
+    "sha256": "27f3d9a7a31e3ba91da1b912206f5b26ddea2f10dcf40f3bb540042b2322aee6",
+    "range": "1-540",
+    "role": "LAB source/companion or historical authoring floor; full read or sole-main authored delta; not normative acceptance or alpha integration",
     "status": "full"
   },
   {
@@ -21921,9 +21921,9 @@
   },
   {
     "path": "docs/proof-first/CURRENT_GOAL.md",
-    "sha256": "1972c36682044f4189037e9f320b019de8179ab152645c95207477b2352b5b91",
-    "range": "1-95",
-    "role": "Current LAB source/companion; full previous source plus sole-main authored and reviewed delta, no normative acceptance",
+    "sha256": "f72fcfded9d197062503b8978187fca28e7888822e94433107971a455dfea8a9",
+    "range": "1-104",
+    "role": "LAB source/companion or historical authoring floor; full read or sole-main authored delta; not normative acceptance or alpha integration",
     "status": "full"
   },
   {
