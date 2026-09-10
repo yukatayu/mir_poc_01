@@ -1,6 +1,6 @@
 # Current Task Map (LAB)
 
-最終更新: 2026-09-10 20:16 JST
+最終更新: 2026-09-10 20:27 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source. Everything outside
 `mirrorea_canon/` is LAB. If LAB conflicts with canon, canon wins. This file is a
@@ -22,7 +22,7 @@ Canon anchor: `mirrorea_canon/adr/ADR-0043.md`; retained roadmap:
 `plan/250-mirrorea-i3-distributed-foundation-current-roadmap.md`.
 
 Owner scope is W2 completion then STOP. The selected finite W2 theory/proof floor
-is now checked and reviewed, with final record/Git integration in progress.
+is now checked and reviewed, and committed/pushed with verified parity. W2 is complete; STOP.
 No W3 or alpha task is an active autonomous queue. Main works alone; no subagents.
 This task does not accept all119 detailed requirements or an alpha profile.
 PL1 S0–S3 research integrates into existing LAB Lean namespaces and test/docs roots;
@@ -58,8 +58,7 @@ source-driven installation or general production source/runtime refinement follo
 
 ## ordered self-driven packages
 
-Only final record/Git verification remains authorized in this run; after it,
-STOP with no active semantic package. Do not silently resume Plan250 or W3.
+This W2 run is complete. STOP with no active semantic package. Do not silently resume Plan250 or W3.
 The earlier overall120–300h /15–25% estimates were provisional historical planning,
 not measured acceptance. Later estimates require fresh assessment when requested.
 
@@ -67,7 +66,7 @@ not measured acceptance. Later estimates require fresh assessment when requested
 |---|---|---|
 | W0 reading / macro0 | required global corpus incomplete; depended-on cone read | future reading only on resumed scope; no new whole-repo plan adopted |
 | W1 foundations / macro1/5 early | scoped dependencies checked/reviewed; unrelated source extensions open | reopen only needed extension and its frozen review |
-| W2 expressions/local theory / macro1/5 early-middle | selected finite research floor verified and reviewed; Git closeout | stop after integration |
+| W2 expressions/local theory / macro1/5 early-middle | selected finite research floor verified, reviewed and integrated | owner STOP; no active continuation |
 | W3 dynamic source composition / macro1/3 middle | source-driven add/change/remove not integrated | user request plus dependency/profile audit |
 | W4 distributed runtime / macro3/6 middle | existing finite QUIC baseline | after required theory/implementation contracts |
 | W5 recovery / macro3/6 later | structural images and journal experiments | authentic head, complete mutators and physical mechanism unresolved |

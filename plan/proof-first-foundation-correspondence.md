@@ -655,6 +655,6 @@ This is task-local theory/proof closure, not production/Canon/alpha acceptance.
 Fuel abstraction, supplied context/metadata authenticity, one private frame/history,
 mathematical resources and finite contract profiles remain explicit. Earlier
 auxiliary journal/image/runtime controls are not silently promoted.
-Final documentation/Git integration precedes the owner-requested STOP. W3 requires
+Final documentation and proof integration passed; owner-requested STOP now applies. W3 requires
 a new request; Plan250 remains paused. Global reading and unrelated W1 extensions
 remain incomplete. No new roadmap or119-detail proposal is adopted.

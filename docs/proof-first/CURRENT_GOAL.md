@@ -1,4 +1,4 @@
-# W2-local-contract-resource — active task-local semantic goal
+# W2-local-contract-resource — completed finite LAB result
 
 **Latest owner stop boundary:** complete W2 with its actual proof/review/integration
 gates, then stop. Do not proceed to W3 or alpha integration. User cleared the old goal; main created the W2-only automatic goal on 2026-09-10 09:46 JST.
@@ -26,8 +26,9 @@ Oracle answer8ae839a7daad795e4f13928561b44ea0b8517b965e65d2d4d51bf32052706cad
 identifies no further essential repair for that retained item. Main verified
 constructors, semantic denial, budget separation and same-output integration.
 
-Remaining task: final documentation validation and Git integration; then mark the
-W2-only goal complete and STOP. No next active semantic goal is authorized here.
+Final documentation validation passed and proof cut2760e17d was committed/pushed
+with verified parity. W2 is complete at this finite LAB boundary; STOP.
+No next active semantic goal is authorized here.
 No full-source/runtime refinement, machine quota, authenticated current context,
 transferable continuation, full resource-effect confidentiality, recovery or alpha
 completion is implied. The selected profile is one private finite frame within

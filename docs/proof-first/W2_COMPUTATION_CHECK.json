@@ -1,5 +1,5 @@
 {
-  "status": "W2 finite theory/proof LAB result reviewed and locally verified; closeout integration in progress; no production/Canon acceptance",
+  "status": "W2 selected finite theory/proof LAB scope complete; owner-requested STOP; no production/Canon/alpha acceptance",
   "source_sha256": "64e28d5f7898aebaaf49dcd016335ab87d5fd53688f55d4bd7d924e8672e374d",
   "fresh_dependency_build": {
     "version": "Lean (version 4.29.1, x86_64-unknown-linux-gnu, commit f72c35b3f637c8c6571d353742168ab66cc22c00, Release)\n",
@@ -3121,6 +3121,11 @@
       "log_sha256": "35adb6855fb8840e61f25616e01af257a9a28c9f09d0182de2143dd0ace674fd",
       "failed_predecessor": "2531 exit1: missing standard notice; corrected and rerun"
     },
-    "git": "pending"
+    "git": {
+      "proof_commit": "2760e17d7afc2385553fc65ca7813b0fd752a7ab",
+      "push": "origin/main succeeded d87553",
+      "parity": "0/0 and clean fa7c69",
+      "receipt": "final owner-stop status recorded after verified proof push; containing receipt commit remains in Git history"
+    }
   }
 }

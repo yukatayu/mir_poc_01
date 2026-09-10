@@ -1,6 +1,6 @@
 # Project status
 
-最終更新: 2026-09-10 20:14 JST
+最終更新: 2026-09-10 20:27 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -52,7 +52,7 @@ I3-4/I3-5/I3-6/NEXT-0 remain dependency-gated inactive; I3-4 requires explicit o
 W2-local-contract-resource（PL1 S0–S3、theory/proof）の有限な研究成果を検証・review済み。
 局所契約・高階handle・資源を計算列と捕捉した継続へ接続し、24本のLean検査と18変異検査が通過。
 最後の操作／認可文脈の対応を含め、選択した範囲の必須review指摘に対応済みです。
-記録・Gitの確定後にW2で停止します。単一フレーム・数学的資源・供給されたcurrent文脈の制限を保持し、source/runtime対応・α統合・正式受理は未達です。
+W2の有限な研究scopeを完了し、owner指示に従い停止しています。単一フレーム・数学的資源・供給されたcurrent文脈の制限を保持し、source/runtime対応・α統合・正式受理は未達です。
 W1のpassive/accepted producer・一般label・失敗を伴う単一代入は限定review済み。後続source cutはChromeエラー後のreview未完了。119行dispositionは元のU/D・承認区分を保持して作成済みですが、要件を一括受理・実証したものではありません。
 M8 trusted setupの実効label不一致を実再現し、観測refinementの未解決義務とした。
 根拠は `plan/proof-first-foundation-correspondence.md`、`docs/reports/2611-mirrorea-proof-first-w1-foundations.md`、`docs/reports/2612-mirrorea-proof-first-w2-contract-boundary.md`。

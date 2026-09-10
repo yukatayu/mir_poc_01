@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-09-10 20:14 JST
+最終更新: 2026-09-10 20:27 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -59,7 +59,7 @@ Latest owner stop boundary: finish W2 with actual review/integration gates, then
 stop. W3 and alpha integration are deferred beyond this run.
 
 Separate task-local W2 theory/proof result is now reviewed and locally verified
-(PL1 S0–S3). Final record/Git integration is in progress; stop after W2. This is
+(PL1 S0–S3). The finite W2 scope is complete and owner-paused here; no active semantic goal. This is
 not a Plan250 milestone, I3-4 resume or formal THM/OBL promotion.
 Scoped W1 dependencies retain their original boundaries; unrelated abort/alias/
 source extensions and the whole mandatory corpus remain incomplete. No new
@@ -356,3 +356,5 @@ The authorized roadmap is paused, not blocked, stale or closed.
 - 2026-09-10 20:00 JST: W2の独立実行規則を操作ごとの文脈に束縛し、すり替え拒否を証明。fresh24/変異18通過、限定Oracle送信、W2未完了。
 
 - 2026-09-10 20:14 JST: W2有限profileの最終操作／認可文脈reviewを回収・検査。24依存のkernel検査・18変異・文書検査が通過。記録/Git確定後にowner指定のW2停止、W3/αへは進まない。
+
+- 2026-09-10 20:27 JST: W2有限研究scope完了。最終文書再検査1762report通過、proof cut2760e17dを通常pushしparity0/0確認。owner指定の停止へ移行、W3/α未着手。

@@ -26,7 +26,7 @@ Plan250に対するowner指示は、受理済みI3-3 cut後のpauseです。I3-4
 W2-local-contract-resource（PL1 S0–S3、theory/proof）の有限な研究成果を検証・review済みです。
 局所契約・高階handle・資源を実際の計算列と捕捉した継続へ接続し、24本のLean検査と18変異検査が通過。
 最後の操作／認可文脈の対応もreviewを回収し、必須修正は残っていません。
-現在は記録・Gitの最終確定中で、W2完了後に停止します。source/runtime対応・α候補・正式THM/OBL受理は未達です。
+W2の有限な研究scopeを完了し、owner指示に従い停止しています。source/runtime対応・α候補・正式THM/OBL受理は未達です。
 対応は `plan/proof-first-foundation-correspondence.md`、証跡は report2611（W1）/report2612（W2）、
 再現コマンドは `samples/lean/README.md`、既読範囲は `docs/proof-first/READ_LEDGER.json`。
 M8 trusted setupでの実効label不一致を再現し、後続の観測接続義務として保持しています。
