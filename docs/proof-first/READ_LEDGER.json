@@ -22527,5 +22527,572 @@
     "range": "1-140",
     "role": "Existing actual parser example full read b77359, before offline build; unrelated final ls error does not erase the completed file read",
     "status": "full"
+  },
+  {
+    "path": "specs/examples/214-current-l2-theorem-line-checker-verdict-transport-family-ready-checker-verdict-transport-carrier-detail-threshold.md",
+    "sha256": "616761ac7059e9d63cd1d0267b13dfeda04446c3b51cdf59decbfea3dca56f74",
+    "range": "1-198",
+    "role": "Historical LAB sketch; full text b1db6b; not current authority or actual transport; corrected earlier registration guard that matched unread inventory row",
+    "status": "full"
+  },
+  {
+    "path": "specs/examples/215-current-l2-theorem-line-checker-verdict-transport-carrier-detail-ready-checker-verdict-transport-payload-threshold.md",
+    "sha256": "2e7f96b8e863fc798d7881428993f06a6cec69832e8ad454c25a667048df2f13",
+    "range": "1-198",
+    "role": "Historical LAB sketch; full text e27865; not current authority or actual transport; corrected earlier registration guard that matched unread inventory row",
+    "status": "full"
+  },
+  {
+    "path": "specs/examples/105-current-l2-stage3-missing-ensure-vs-request-compare-sequencing.md",
+    "sha256": "46bd553401e8d0c98505a3d4efdf06f1663a678c7815db028c3e3daa690251be",
+    "range": "1-127",
+    "role": "Historical LAB full text9cb62e; discovered second105 filename during path/hash full-status audit; not current sequencing authority",
+    "status": "full"
+  },
+  {
+    "path": "specs/examples/216-current-l2-theorem-line-checker-verdict-transport-payload-ready-checker-verdict-transport-receipt-threshold.md",
+    "sha256": "c4a0e09c2a5c9261e78b9c3a75db00b109ca1af96f5105cc63fe3b945f9026c1",
+    "range": "1-198",
+    "role": "LAB historical example",
+    "status": "full"
+  },
+  {
+    "path": "specs/examples/217-current-l2-theorem-line-checker-verdict-transport-receipt-ready-checker-verdict-transport-channel-body-threshold.md",
+    "sha256": "376b278516c3b52a5f2b1b55a955071053c7f2d24247cd1e4146b6ba1475b728",
+    "range": "1-198",
+    "role": "LAB historical example",
+    "status": "full"
+  },
+  {
+    "path": "specs/examples/218-current-l2-theorem-line-checker-verdict-transport-channel-body-ready-low-level-memory-order-family-threshold.md",
+    "sha256": "68ea41be4f89fe18eee8233bc25b5654fab612cb8e6ffba04064c4ea940758b6",
+    "range": "1-267",
+    "role": "LAB historical example",
+    "status": "full"
+  },
+  {
+    "path": "specs/examples/219-current-l2-theorem-line-checker-verdict-transport-channel-body-ready-higher-level-async-control-family-comparison.md",
+    "sha256": "c0e0f9b12688ad3c12a3be4a148b9b8e4c8a4b48b95aeee7aa42a034cfd2c54a",
+    "range": "1-210",
+    "role": "LAB historical example",
+    "status": "full"
+  },
+  {
+    "path": "samples/lean/foundations/MirroreaProofFirstResourceComputations.lean",
+    "sha256": "64e28d5f7898aebaaf49dcd016335ab87d5fd53688f55d4bd7d924e8672e374d",
+    "range": "1-1995",
+    "role": "W2 candidate source; sole-main full read/authorship and kernel/mutation review",
+    "status": "full"
+  },
+  {
+    "path": "samples/lean/foundations/MirroreaProofFirstResourceComputationScopeControls.lean",
+    "sha256": "e3f4718a346039dcb56f8a618ed4d82f33da46e6f88826617ea22b1d6873c5c2",
+    "range": "1-19",
+    "role": "W2 candidate source; sole-main full read/authorship and kernel/mutation review",
+    "status": "full"
+  },
+  {
+    "path": "scripts/proof_first_resource_computation_check.py",
+    "sha256": "29c1b0a25e93ba62e02bc92c2a9e63e0c844baa697d159056d3be388265a3b3f",
+    "range": "1-99",
+    "role": "W2 candidate source; sole-main full read/authorship and kernel/mutation review",
+    "status": "full"
+  },
+  {
+    "path": "specs/examples/220-current-l2-theorem-line-higher-level-async-control-family-ready-authority-serial-transition-family-threshold.md",
+    "sha256": "b9890e6a1fdf83f066c8e4c3e613692bc483096bbb0c09c62e9fdc1211f088e8",
+    "range": "1-156",
+    "role": "LAB historical example full read; no adoption",
+    "status": "full"
+  },
+  {
+    "path": "specs/examples/221-current-l2-theorem-line-authority-serial-transition-family-ready-authority-serial-transition-contract-comparison.md",
+    "sha256": "ed7e9bcac7732243d3270a033942b7dbe9358f8498831892dfa22dcd9f9f4e42",
+    "range": "1-142",
+    "role": "LAB historical example full read; no adoption",
+    "status": "full"
+  },
+  {
+    "path": "specs/examples/222-current-l2-theorem-line-authority-serial-transition-contract-ready-minimal-authority-serial-contract-threshold.md",
+    "sha256": "d74e166992b29cb37164c033689fe4ea78c7767aa5b030a55903e3934a8a67d6",
+    "range": "1-145",
+    "role": "LAB historical example full read; no adoption",
+    "status": "full"
+  },
+  {
+    "path": "samples/lean/foundations/MirroreaProofFirstResourceComputations.lean",
+    "sha256": "3f3d3425bf9e6432c4de20a5c7d49fa09754edf8d7fb781f7da65da4ed0e3d84",
+    "range": "1-2708",
+    "role": "W2 sole-main full authorship/read and kernel/mutation inspection",
+    "status": "full"
+  },
+  {
+    "path": "samples/lean/foundations/MirroreaProofFirstResourceComputationScopeControls.lean",
+    "sha256": "f4ab67b831e43baa72d754aac36bcc2373373a81a0aff521c3a0c6fcdad7ba8c",
+    "range": "1-151",
+    "role": "W2 sole-main full authorship/read and kernel/mutation inspection",
+    "status": "full"
+  },
+  {
+    "path": "scripts/proof_first_resource_computation_check.py",
+    "sha256": "9de7ea56a3c9cddc03f10639531a23bc74689aa1f273695b40cf7d761f176576",
+    "range": "1-104",
+    "role": "W2 sole-main full authorship/read and kernel/mutation inspection",
+    "status": "full"
+  },
+  {
+    "path": "specs/examples/223-current-l2-theorem-line-minimal-authority-serial-contract-ready-authority-serial-row-detail-comparison.md",
+    "sha256": "ee3fc335a51b88c8ffbdc959d7120adf50f6f2f1d3e6d8f529392c9815dbad67",
+    "range": "1-136",
+    "role": "LAB historical example full read; no normative adoption",
+    "status": "full"
+  },
+  {
+    "path": "specs/examples/224-current-l2-theorem-line-authority-serial-row-detail-ready-authority-owner-ref-threshold.md",
+    "sha256": "78c174ff1a7c563a5980b64eccaf0e44a4d0537643bb0c3295981a86dc9f17b8",
+    "range": "1-132",
+    "role": "LAB historical example full read; no normative adoption",
+    "status": "full"
+  },
+  {
+    "path": "specs/examples/225-current-l2-theorem-line-authority-owner-ref-ready-authority-transition-stage-family-comparison.md",
+    "sha256": "8957c5060ae5c9acdf7f447d8a695aac1e725a36ffc4a88c6c7315894c95aed4",
+    "range": "1-128",
+    "role": "LAB historical example full read; no normative adoption",
+    "status": "full"
+  },
+  {
+    "path": "specs/examples/226-current-l2-theorem-line-authority-transition-stage-family-ready-minimal-authority-transition-stage-family-threshold.md",
+    "sha256": "8eca5099f801f554606b084a30a87dc9ad99767e5dc09f7130143e8809c9e28d",
+    "range": "1-133",
+    "role": "LAB historical example full read; no normative adoption",
+    "status": "full"
+  },
+  {
+    "path": "specs/examples/227-current-l2-theorem-line-minimal-authority-transition-stage-family-ready-authority-transition-stage-sequence-shape-comparison.md",
+    "sha256": "cf72bb2ff876641297e211632572b25596ce140ba83626324ef339a7ab9bb8ed",
+    "range": "1-127",
+    "role": "LAB historical example full read; no normative adoption",
+    "status": "full"
+  },
+  {
+    "path": "specs/examples/228-current-l2-theorem-line-authority-transition-stage-sequence-shape-ready-minimal-authority-transition-stage-sequence-threshold.md",
+    "sha256": "2e588e293b0b241b1c7508f05183f5e21686b8fea053db6b448ad68858826be2",
+    "range": "1-133",
+    "role": "LAB historical example full read; no normative adoption",
+    "status": "full"
+  },
+  {
+    "path": "specs/examples/229-current-l2-theorem-line-minimal-authority-transition-stage-sequence-ready-stage-local-obligation-family-comparison.md",
+    "sha256": "fb7e7ae5a61048118ad521445a37034b03be78605a01dc614bc472a54bcc3eb0",
+    "range": "1-128",
+    "role": "LAB historical example full read; no normative adoption",
+    "status": "full"
+  },
+  {
+    "path": "specs/examples/230-current-l2-theorem-line-stage-local-obligation-family-ready-minimal-authority-stage-local-obligation-family-threshold.md",
+    "sha256": "2505e23ab59970efa723da01909ef6a060345ca6052edc202624e6cb04c2f1e7",
+    "range": "1-135",
+    "role": "LAB historical example full read; no normative adoption",
+    "status": "full"
+  },
+  {
+    "path": "specs/examples/231-current-l2-theorem-line-minimal-authority-stage-local-obligation-family-ready-stage-local-obligation-row-detail-comparison.md",
+    "sha256": "11ddbc13c14a5973d40f03d413088c6f91fb778d2609ab6de2df2d22b9298438",
+    "range": "1-132",
+    "role": "LAB historical example full read; no normative adoption",
+    "status": "full"
+  },
+  {
+    "path": "specs/examples/232-current-l2-theorem-line-stage-local-obligation-row-detail-ready-minimal-authority-stage-local-obligation-row-detail-threshold.md",
+    "sha256": "ff4aaf96fdc33aeab0bb6d690805e805833eb5d224654ca2f981d8ffab0b1bd0",
+    "range": "1-140",
+    "role": "LAB historical example full read; no normative adoption",
+    "status": "full"
+  },
+  {
+    "path": "specs/examples/233-current-l2-theorem-line-minimal-authority-stage-local-obligation-row-detail-ready-authority-handoff-epoch-ref-comparison.md",
+    "sha256": "8a75c5acb15699caf46b14fca39461c3a65c3cfdfb84fb6d8073cc2575049127",
+    "range": "1-127",
+    "role": "LAB historical example full read; no normative adoption",
+    "status": "full"
+  },
+  {
+    "path": "specs/examples/234-current-l2-theorem-line-authority-handoff-epoch-ref-ready-minimal-authority-handoff-epoch-ref-threshold.md",
+    "sha256": "715f0e40c99a9456615c8a70e364e65b7c75ff56aca37dc653506f3e279ca671",
+    "range": "1-133",
+    "role": "LAB historical example full read; no normative adoption",
+    "status": "full"
+  },
+  {
+    "path": "specs/examples/235-current-l2-theorem-line-minimal-authority-handoff-epoch-ref-ready-witness-aware-handoff-family-comparison.md",
+    "sha256": "273683263100d77e8076d2e255e4c6766144f800f8ad6159e53d66edc3d963c4",
+    "range": "1-123",
+    "role": "LAB historical example full read; no normative adoption",
+    "status": "full"
+  },
+  {
+    "path": "specs/examples/236-current-l2-theorem-line-witness-aware-handoff-family-ready-minimal-witness-aware-handoff-family-threshold.md",
+    "sha256": "920638666ed7d8270b21033b14ee503571d5eb7c2f87bbb550dd2ccf5b647a72",
+    "range": "1-129",
+    "role": "LAB historical example full read; no normative adoption",
+    "status": "full"
+  },
+  {
+    "path": "specs/examples/237-current-l2-theorem-line-minimal-witness-aware-handoff-family-ready-handoff-witness-row-detail-comparison.md",
+    "sha256": "f906d05509b98b7727f046391bb2f7696247d496a83e0511a645860d87563fd9",
+    "range": "1-124",
+    "role": "LAB historical example full read; no normative adoption",
+    "status": "full"
+  },
+  {
+    "path": "specs/examples/238-current-l2-theorem-line-handoff-witness-row-detail-ready-minimal-handoff-witness-row-detail-threshold.md",
+    "sha256": "f19ab104171868a25ff1dad7b883d6e38d6723bf65112e18bb19b2dccc4c7b88",
+    "range": "1-130",
+    "role": "LAB historical example full read; no normative adoption",
+    "status": "full"
+  },
+  {
+    "path": "specs/examples/239-current-l2-theorem-line-minimal-handoff-witness-row-detail-ready-replay-attachment-ref-comparison.md",
+    "sha256": "fa924ae885453a0b65989321f832d7489234e4be489f0aba88ebe66659cf3d94",
+    "range": "1-126",
+    "role": "LAB historical example full read; no normative adoption",
+    "status": "full"
+  },
+  {
+    "path": "specs/examples/240-current-l2-theorem-line-replay-attachment-ref-ready-minimal-replay-attachment-ref-threshold.md",
+    "sha256": "9f39a4a205d5c2d432256931290cdfabc051996138ba08c7fd2fcde76188db8b",
+    "range": "1-129",
+    "role": "LAB historical example full read; no normative adoption",
+    "status": "full"
+  },
+  {
+    "path": "specs/examples/241-current-l2-theorem-line-minimal-replay-attachment-ref-ready-handoff-payload-ref-comparison.md",
+    "sha256": "bc6366379e47d528a7023763f05b64bb972639aca97a1f72e83c7123349ebb4f",
+    "range": "1-115",
+    "role": "LAB historical example full read; no normative adoption",
+    "status": "full"
+  },
+  {
+    "path": "specs/examples/242-current-l2-theorem-line-handoff-payload-ref-ready-minimal-handoff-payload-ref-threshold.md",
+    "sha256": "98c5410ca9b34d8cb634f600819d1659f2239f7306caa8d58fc4bb1c8ed1c1ee",
+    "range": "1-117",
+    "role": "LAB historical example full read; no normative adoption",
+    "status": "full"
+  },
+  {
+    "path": "specs/examples/243-current-l2-theorem-line-minimal-handoff-payload-ref-ready-handoff-carrier-detail-comparison.md",
+    "sha256": "846496cc6b2f292232469f783c920a4254d18c943f9a927c83d2200856413a4c",
+    "range": "1-116",
+    "role": "LAB historical example full read; no normative adoption",
+    "status": "full"
+  },
+  {
+    "path": "specs/examples/244-current-l2-theorem-line-handoff-carrier-detail-ready-minimal-handoff-carrier-detail-threshold.md",
+    "sha256": "80b38dff4c85aee4114d78e1c746742b505e296d6d84039afe74e353b3a45ba4",
+    "range": "1-119",
+    "role": "LAB historical example full read; no normative adoption",
+    "status": "full"
+  },
+  {
+    "path": "specs/examples/245-current-l2-theorem-line-minimal-handoff-carrier-detail-ready-handoff-transport-family-comparison.md",
+    "sha256": "a431c7bf7152f9aa709282be56aeaefe7f2f1d43e757fe1d2952fda18e1fb0f0",
+    "range": "1-118",
+    "role": "LAB historical example full read; no normative adoption",
+    "status": "full"
+  },
+  {
+    "path": "specs/examples/246-current-l2-theorem-line-handoff-transport-family-ready-minimal-handoff-transport-family-threshold.md",
+    "sha256": "aa21a681c5c4c76f8ee85270d151b82c054390d29fddd7319cdbdcc12d32aaa8",
+    "range": "1-122",
+    "role": "LAB historical example full read; no normative adoption",
+    "status": "full"
+  },
+  {
+    "path": "specs/examples/247-current-l2-theorem-line-minimal-handoff-transport-family-ready-handoff-transport-carrier-detail-comparison.md",
+    "sha256": "8229539a8ef77b730b84f6c408ef08f978b2dae187557f8692719e8bff7b0f38",
+    "range": "1-118",
+    "role": "LAB historical example full read; no normative adoption",
+    "status": "full"
+  },
+  {
+    "path": "specs/examples/248-current-l2-theorem-line-handoff-transport-carrier-detail-ready-minimal-handoff-transport-carrier-detail-threshold.md",
+    "sha256": "7ab45d0ed8f7eb3697ed97233b1dd58a267a2b4caeedc4d28844af0294696fa2",
+    "range": "1-121",
+    "role": "LAB historical example full read; no normative adoption",
+    "status": "full"
+  },
+  {
+    "path": "specs/examples/249-current-l2-theorem-line-minimal-handoff-transport-carrier-detail-ready-handoff-transport-payload-comparison.md",
+    "sha256": "ef68a2acf5e929a9a72c1e75f93e2c22593c6f05325519a84dc16bd281541375",
+    "range": "1-117",
+    "role": "LAB historical example full read; no normative adoption",
+    "status": "full"
+  },
+  {
+    "path": "specs/examples/250-current-l2-theorem-line-handoff-transport-payload-ready-minimal-handoff-transport-payload-threshold.md",
+    "sha256": "97b43ce8c33996ddc7254f5685be2f5d33127d08f3d70306c11bb195d0d64ba8",
+    "range": "1-119",
+    "role": "LAB historical example full read; no normative adoption",
+    "status": "full"
+  },
+  {
+    "path": "specs/examples/251-current-l2-theorem-line-minimal-handoff-transport-payload-ready-handoff-transport-receipt-comparison.md",
+    "sha256": "5c16da9d25dcb112074c6e046521c17ce2a1718387d39c776d875f8e2efbec44",
+    "range": "1-118",
+    "role": "LAB historical example full read; no normative adoption",
+    "status": "full"
+  },
+  {
+    "path": "specs/examples/252-current-l2-theorem-line-handoff-transport-receipt-ready-minimal-handoff-transport-receipt-threshold.md",
+    "sha256": "370a8e606ab9447725edc45168fe6a5377b2410668684056e56cdfc4c8030351",
+    "range": "1-120",
+    "role": "LAB historical example full read; no normative adoption",
+    "status": "full"
+  },
+  {
+    "path": "specs/examples/253-current-l2-theorem-line-minimal-handoff-transport-receipt-ready-handoff-transport-channel-body-comparison.md",
+    "sha256": "516440fb45e2f05a47ecb020dd13c0410db74bf079cebfc7691499662d902c24",
+    "range": "1-119",
+    "role": "LAB historical example full read; no normative adoption",
+    "status": "full"
+  },
+  {
+    "path": "specs/examples/254-current-l2-theorem-line-handoff-transport-channel-body-ready-minimal-handoff-transport-channel-body-threshold.md",
+    "sha256": "086d856a806a749cf9af115f20703ba0557354c4d9f886336fbbeb5204458ceb",
+    "range": "1-121",
+    "role": "LAB historical example full read; no normative adoption",
+    "status": "full"
+  },
+  {
+    "path": "specs/examples/255-current-l2-theorem-line-minimal-handoff-transport-channel-body-ready-low-level-memory-order-family-threshold.md",
+    "sha256": "7a66aafcd1f050ba7d9195aee73db5e43b91230a81234596ca856e2d5bbe4f25",
+    "range": "1-265",
+    "role": "LAB historical example full read; 256tail/257/258 reread after output truncation; no normative adoption",
+    "status": "full"
+  },
+  {
+    "path": "specs/examples/256-current-l2-small-decidable-core-ready-checker-cluster-matrix-comparison.md",
+    "sha256": "d62f567eb085e76332229b7da525d0cc96649bdcd49d03312d62748e348c2782",
+    "range": "1-241",
+    "role": "LAB historical example full read; 256tail/257/258 reread after output truncation; no normative adoption",
+    "status": "full"
+  },
+  {
+    "path": "specs/examples/257-current-l2-checker-cluster-matrix-ready-minimal-checker-cluster-row-threshold.md",
+    "sha256": "73b5567da0268915b1ede5853eab0014b3ddc22930e106c8f4a57ef248cc6672",
+    "range": "1-222",
+    "role": "LAB historical example full read; 256tail/257/258 reread after output truncation; no normative adoption",
+    "status": "full"
+  },
+  {
+    "path": "specs/examples/258-current-l2-minimal-checker-cluster-row-ready-checker-cluster-fixture-evidence-attachment-comparison.md",
+    "sha256": "10b76caae048323e127ffbb438c8538ba677c026c492fd3dbf5f97c093e3eb46",
+    "range": "1-201",
+    "role": "LAB historical example full read; 256tail/257/258 reread after output truncation; no normative adoption",
+    "status": "full"
+  },
+  {
+    "path": "specs/examples/259-current-l2-checker-cluster-fixture-evidence-attachment-ready-typed-reason-family-hint-threshold.md",
+    "sha256": "ea4b7c03b8cc3706a9ae51eefb14ee799f1a0dfac9ffa64e0a12e0b892b3da47",
+    "range": "1-208",
+    "role": "LAB historical example full read; 256tail/257/258 reread after output truncation; no normative adoption",
+    "status": "full"
+  },
+  {
+    "path": "specs/examples/260-current-l2-typed-reason-family-hint-ready-checker-cluster-hint-bundle-shape-comparison.md",
+    "sha256": "6c955cec74303ca72a11c8dae551b6c3bcf10887e5c9d5831fded40bd8e15245",
+    "range": "1-188",
+    "role": "LAB historical example full read; 256tail/257/258 reread after output truncation; no normative adoption",
+    "status": "full"
+  },
+  {
+    "path": "specs/examples/261-current-l2-checker-cluster-hint-bundle-shape-ready-typed-family-coverage-state-threshold.md",
+    "sha256": "46fd5c47d98eb7f558c79187abb536a5236dae989aedb8257b7fddf5f1874e10",
+    "range": "1-177",
+    "role": "LAB historical example full read; no normative adoption",
+    "status": "full"
+  },
+  {
+    "path": "specs/examples/262-current-l2-typed-family-coverage-state-ready-supported-kind-summary-threshold.md",
+    "sha256": "70e85ff236c78cdab838d32ced8f6e1eaefa6fc3683d0388656e79de571bd86a",
+    "range": "1-210",
+    "role": "LAB historical example full read; no normative adoption",
+    "status": "full"
+  },
+  {
+    "path": "specs/examples/263-current-l2-supported-kind-summary-ready-actual-checker-payload-family-comparison.md",
+    "sha256": "88668a9b9da08d98e39b55a7ecd3fdaf6c736a07d6e0cd99ce6989ae7fa0a4a6",
+    "range": "1-168",
+    "role": "LAB historical example full read; no normative adoption",
+    "status": "full"
+  },
+  {
+    "path": "specs/examples/264-current-l2-actual-checker-payload-family-ready-minimal-checker-payload-family-threshold.md",
+    "sha256": "7b06236ab5667b40f4e6572828418ca1e46dfbef508b9d04a124f7dd79601893",
+    "range": "1-193",
+    "role": "LAB historical example full read; no normative adoption",
+    "status": "full"
+  },
+  {
+    "path": "specs/examples/265-current-l2-minimal-checker-payload-family-ready-checker-payload-row-family-comparison.md",
+    "sha256": "d05b9ad0435511aadc8c2ccc1ae78a154a362067680d3e2df5fd6351abc04131",
+    "range": "1-183",
+    "role": "LAB historical example full read; no normative adoption",
+    "status": "full"
+  },
+  {
+    "path": "specs/examples/266-current-l2-checker-payload-row-family-ready-minimal-checker-payload-row-family-threshold.md",
+    "sha256": "76d4fccabe89dea7bea0b6ebdb5dee90b8965fe1f51e213188e56114c88bd110",
+    "range": "1-133",
+    "role": "LAB historical example full read; no normative adoption",
+    "status": "full"
+  },
+  {
+    "path": "specs/examples/267-current-l2-minimal-checker-payload-row-family-ready-checker-payload-row-detail-comparison.md",
+    "sha256": "90a28604a2db36f4ff40662b3425d4f28f77db6353226ab9e1ffb9f8d9c8ffd7",
+    "range": "1-169",
+    "role": "LAB historical example full read; no normative adoption",
+    "status": "full"
+  },
+  {
+    "path": "specs/examples/268-current-l2-checker-payload-row-detail-ready-minimal-checker-payload-row-detail-threshold.md",
+    "sha256": "ea30d7f973e37fe2a08a10f3286f6cbd5099c14e2208a526be56964cb88f685c",
+    "range": "1-136",
+    "role": "LAB historical example full read; no normative adoption",
+    "status": "full"
+  },
+  {
+    "path": "specs/examples/269-current-l2-minimal-checker-payload-row-detail-ready-checker-payload-row-body-comparison.md",
+    "sha256": "96756e6b41930f96231edfba1008a78ec72c4ef74a89078741d54f2d1e6a8375",
+    "range": "1-198",
+    "role": "LAB historical example full read; no normative adoption",
+    "status": "full"
+  },
+  {
+    "path": "specs/examples/270-current-l2-checker-payload-row-body-ready-minimal-checker-payload-row-body-threshold.md",
+    "sha256": "183305b07e234649ac3b3c396c152204b75019dc12fef322451254cdd7a6ec68",
+    "range": "1-138",
+    "role": "LAB historical example full read; no normative adoption",
+    "status": "full"
+  },
+  {
+    "path": "samples/lean/foundations/MirroreaProofFirstResourceComputations.lean",
+    "sha256": "10da3728bb18ff21d3db4272f37a5cf5d93cd752186a9ad9ad640e4561cb1f59",
+    "range": "1-2978",
+    "role": "sole-main full authorship/read; exact control-context proof and mutation integration",
+    "status": "full"
+  },
+  {
+    "path": "scripts/proof_first_resource_computation_check.py",
+    "sha256": "c23290620d7ebbe8f679dc86feb22f7a8e603b421176eb4739eceaa944bf6b2a",
+    "range": "1-106",
+    "role": "sole-main full authorship/read; exact control-context proof and mutation integration",
+    "status": "full"
+  },
+  {
+    "path": "specs/examples/271-current-l2-minimal-checker-payload-row-body-ready-checker-payload-supported-kind-summary-comparison.md",
+    "sha256": "20b9fa204ec985ac9c2f13a0c04a4f18819ceb3be75797991f64f593b6b37cb2",
+    "range": "1-205",
+    "role": "LAB historical example full read; no normative adoption",
+    "status": "full"
+  },
+  {
+    "path": "specs/examples/272-current-l2-checker-payload-supported-kind-summary-ready-minimal-checker-payload-supported-kind-summary-threshold.md",
+    "sha256": "cf0db5118c1780fd138621c4d6bcc8dafe4b239d5f961ed8c99f227ab9aad1c8",
+    "range": "1-167",
+    "role": "LAB historical example full read; no normative adoption",
+    "status": "full"
+  },
+  {
+    "path": "specs/examples/273-current-l2-minimal-checker-payload-supported-kind-summary-ready-public-checker-payload-schema-comparison.md",
+    "sha256": "c780387253c31abdc1c91f0a98cb101d715545c9eb158ce29e26ee513ea4de31",
+    "range": "1-181",
+    "role": "LAB historical example full read; no normative adoption",
+    "status": "full"
+  },
+  {
+    "path": "specs/examples/274-current-l2-public-checker-payload-schema-ready-minimal-public-checker-payload-schema-threshold.md",
+    "sha256": "c1cbecdb8e03655bb4598c45db2e71ebe029b3790d69167858b67c51bdacdb4e",
+    "range": "1-149",
+    "role": "LAB historical example full read; no normative adoption",
+    "status": "full"
+  },
+  {
+    "path": "specs/examples/275-current-l2-minimal-public-checker-payload-schema-ready-public-checker-api-comparison.md",
+    "sha256": "6d938117c93cfdfeee0d83d21e50d3f9ff6c9b6b56ea1e0db5831878e4342785",
+    "range": "1-183",
+    "role": "LAB historical example full read; no normative adoption",
+    "status": "full"
+  },
+  {
+    "path": "specs/examples/276-current-l2-public-checker-api-ready-minimal-public-checker-api-threshold.md",
+    "sha256": "9639b3bd0d781a409559b589d7ada190c88f5685b2cedd8d229da0f7dbd17830",
+    "range": "1-156",
+    "role": "LAB historical example full read; no normative adoption",
+    "status": "full"
+  },
+  {
+    "path": "specs/examples/277-current-l2-minimal-public-checker-api-ready-public-checker-entry-criteria-comparison.md",
+    "sha256": "49a33fcd9b60af4715b147b594bc04aadc95b1de2df3c6a91275f051419fea2e",
+    "range": "1-180",
+    "role": "LAB historical example full read; no normative adoption",
+    "status": "full"
+  },
+  {
+    "path": "specs/examples/278-current-l2-public-checker-entry-criteria-ready-minimal-public-checker-entry-criteria-threshold.md",
+    "sha256": "ff5fbf4f5e9e085f7c95947ed0d55bb3e1dc5e6de3b71fbd460aa9225c716a32",
+    "range": "1-152",
+    "role": "LAB historical example full read; no normative adoption",
+    "status": "full"
+  },
+  {
+    "path": "specs/examples/279-current-l2-minimal-public-checker-entry-criteria-ready-public-checker-command-surface-comparison.md",
+    "sha256": "dab58c7f8d868ccfad400869b41310764141311f6047e640e0d31833e866338e",
+    "range": "1-199",
+    "role": "LAB historical example full read; no normative adoption",
+    "status": "full"
+  },
+  {
+    "path": "specs/examples/280-current-l2-public-checker-command-surface-ready-minimal-public-checker-command-surface-threshold.md",
+    "sha256": "e80e56f5d42884e5ad9622b17084fcc70b69900b805e63febb841901ebc9e605",
+    "range": "1-154",
+    "role": "LAB historical example full read; no normative adoption",
+    "status": "full"
+  },
+  {
+    "path": "specs/examples/281-current-l2-minimal-public-checker-command-surface-ready-shared-output-contract-comparison.md",
+    "sha256": "38f506b904a2b3eeff79013535d895ad7fd9eb8c3a7a5d81756db36a281d1259",
+    "range": "1-193",
+    "role": "LAB historical example full read; no normative adoption",
+    "status": "full"
+  },
+  {
+    "path": "specs/examples/282-current-l2-shared-output-contract-ready-minimal-shared-output-contract-threshold.md",
+    "sha256": "b6277fcae63b959aa782ce570766752e5bd769e42fe42c307132e2ee5b994ea8",
+    "range": "1-163",
+    "role": "LAB historical example full read; no normative adoption",
+    "status": "full"
+  },
+  {
+    "path": "samples/lean/foundations/MirroreaProofFirstResourceComputations.md",
+    "sha256": "715bc55bbe3016a390ae34fd789b865e50cb63b1454912163bbdf4bc89487617",
+    "range": "1-173",
+    "role": "sole-main read/authored final review disposition or checked harness; no normative adoption",
+    "status": "full"
+  },
+  {
+    "path": "samples/lean/foundations/MirroreaProofFirstContracts.md",
+    "sha256": "801bd5024aed682c2156160d0cfc2585100018d777e301174e380f230a36ea40",
+    "range": "1-672",
+    "role": "sole-main read/authored final review disposition or checked harness; no normative adoption",
+    "status": "full"
+  },
+  {
+    "path": "scripts/proof_first_resource_computation_check.py",
+    "sha256": "c23290620d7ebbe8f679dc86feb22f7a8e603b421176eb4739eceaa944bf6b2a",
+    "range": "1-106",
+    "role": "sole-main read/authored final review disposition or checked harness; no normative adoption",
+    "status": "full"
   }
 ]

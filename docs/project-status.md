@@ -1,6 +1,6 @@
 # Project status
 
-最終更新: 2026-09-10 01:59 JST
+最終更新: 2026-09-10 20:14 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -49,9 +49,11 @@ I3-4/I3-5/I3-6/NEXT-0 remain dependency-gated inactive; I3-4 requires explicit o
 ## 現在地
 
 今回の別依頼は task-local proof-first LAB 研究と理論gate後の限定実装。
-現在の単一研究goalは W2-local-contract-resource（PL1 S1/S2、theory/proof）。
-W2の資源保存・正確な分割とframe・局所契約輸出・純粋な高階関数と有限反復・値の実行対応と現在moduleへの契約結合に加え、owner/capture・非空な契約前提・高階handle受渡しを10のLean候補で機械検査（未review）。W1では一般Leanの条件付き命題を検査し、passive/accepted producer・一般label・失敗を伴う単一代入は限定範囲のsource review済み。失敗時の後続処理・別名解決・実source有限対応は別cutのreview待ち（Oracleへの送信未確認）。
-後続の代入admission・実結果/frame検査は未review。一般のsource/実装対応、119行disposition、α統合は未達。
+W2-local-contract-resource（PL1 S0–S3、theory/proof）の有限な研究成果を検証・review済み。
+局所契約・高階handle・資源を計算列と捕捉した継続へ接続し、24本のLean検査と18変異検査が通過。
+最後の操作／認可文脈の対応を含め、選択した範囲の必須review指摘に対応済みです。
+記録・Gitの確定後にW2で停止します。単一フレーム・数学的資源・供給されたcurrent文脈の制限を保持し、source/runtime対応・α統合・正式受理は未達です。
+W1のpassive/accepted producer・一般label・失敗を伴う単一代入は限定review済み。後続source cutはChromeエラー後のreview未完了。119行dispositionは元のU/D・承認区分を保持して作成済みですが、要件を一括受理・実証したものではありません。
 M8 trusted setupの実効label不一致を実再現し、観測refinementの未解決義務とした。
 根拠は `plan/proof-first-foundation-correspondence.md`、`docs/reports/2611-mirrorea-proof-first-w1-foundations.md`、`docs/reports/2612-mirrorea-proof-first-w2-contract-boundary.md`。
 これは正式THM/OBL/phase更新、I3-4 resume、署名済み受理ではない。

@@ -1,9 +1,20 @@
-# W2 local contract and resource boundary — unreviewed LAB candidate
+# W2 local contract and resource boundary — LAB evidence
 
 These ten sources are task-local mathematical research, not production meaning,
 formal THM/OBL acceptance, a Plan250 resume, or a verified α candidate. The current
 consumer is reusable arithmetic producing the actual positive length consumed by
 an exclusive-region allocator. Report2612 records the work and review status.
+
+## Current review disposition
+
+The selected finite W2 composition is now locally checked and reviewed; see
+`MirroreaProofFirstResourceComputations.md` and Report2612. Earlier dated/limited
+claims below remain historical component descriptions, not a blanket review of
+every side experiment. The selected result connects values, current calls, rights,
+failures and captured pending frames; no source/runtime or formal acceptance follows.
+Normalization and named elaboration are later extensions beyond the initial
+pure-function result described below. Durable dispatch and image experiments
+remain scoped auxiliary evidence, not an integrated W2 production guarantee.
 
 ## Sources and dependency boundary
 

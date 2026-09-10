@@ -1,6 +1,6 @@
 {
   "schema": "proof-first-requirement-dispositions-v1",
-  "timestamp": "2026-09-10T00:11:15.698084+00:00",
+  "timestamp": "2026-09-10T10:28:21.830732+00:00",
   "base_head": "46bc662aedb3596ba344d2289c4b83e7f80a1c3c",
   "authority": "LAB task evidence only. U intent is retained; D and detailed acceptance criteria are not blanket approved. No alpha profile adopted. No row is a system-level acceptance.",
   "source_path": "sub-agent-pro/mirrorea-proof-first-handoff-v1/materials/mirrorea_system_map_v1/requirements.json",
@@ -161,6 +161,11 @@
     ],
     "oracle": [
       "docs/reports/2612-mirrorea-proof-first-w2-contract-boundary.md"
+    ],
+    "computation_candidate": [
+      "samples/lean/foundations/MirroreaProofFirstResourceComputations.lean",
+      "samples/lean/foundations/MirroreaProofFirstResourceComputationScopeControls.lean",
+      "docs/proof-first/W2_COMPUTATION_CHECK.json#control_context_repair"
     ]
   },
   "requirements": [
@@ -583,9 +588,10 @@
       "adopted": false,
       "demonstrated_requirement": false,
       "evidence_groups": [
-        "pure"
+        "pure",
+        "computation_candidate"
       ],
-      "remaining_boundary": "Typed pure handles/functions have general normalization and boundary checks; effectful captures and source/runtime correspondence remain open."
+      "remaining_boundary": "Typed pure functions/handles and finite one-shot effect continuations have locally checked general composition proofs and completed scoped reviews. General effectful higher-order source/runtime refinement and transferable continuations remain open."
     },
     {
       "id": "ID-01",
@@ -797,7 +803,8 @@
       "adopted": false,
       "demonstrated_requirement": false,
       "evidence_groups": [
-        "resource"
+        "resource",
+        "computation_candidate"
       ],
       "remaining_boundary": "General allocate/move/split/release preservation and opaque checked handles; integration with arbitrary local theories remains open."
     },
@@ -1720,7 +1727,8 @@
       "demonstrated_requirement": false,
       "evidence_groups": [
         "pure",
-        "proofs"
+        "proofs",
+        "computation_candidate"
       ],
       "remaining_boundary": "Independent declarative and algorithmic rules with preservation for selected fragments; actual full language runtime safety remains open."
     },
@@ -1809,7 +1817,8 @@
       "demonstrated_requirement": false,
       "evidence_groups": [
         "contract",
-        "resource"
+        "resource",
+        "computation_candidate"
       ],
       "remaining_boundary": "Candidate verified contract exports and resource checks compose for selected interfaces; unrestricted cross-theory translation is not proved."
     },
@@ -1840,7 +1849,8 @@
       "adopted": false,
       "demonstrated_requirement": false,
       "evidence_groups": [
-        "contract"
+        "contract",
+        "computation_candidate"
       ],
       "remaining_boundary": "Candidate value-dependent propositions tied to checked code; no final dependent type/equality/erasure system adopted."
     },
@@ -1901,7 +1911,8 @@
       "demonstrated_requirement": false,
       "evidence_groups": [
         "current",
-        "contract"
+        "contract",
+        "computation_candidate"
       ],
       "remaining_boundary": "Code/contract/context identity checked at call; saved context alone does not establish current applicability."
     },
@@ -1934,7 +1945,8 @@
       "demonstrated_requirement": false,
       "evidence_groups": [
         "pure",
-        "resource"
+        "resource",
+        "computation_candidate"
       ],
       "remaining_boundary": "Finite bounded execution and decidable candidate checking; adversarial solver isolation and general Unknown handling remain open."
     },

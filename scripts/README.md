@@ -436,8 +436,16 @@ The same fresh-copy Lean command also checks the task-local AbortFlow and
 AddressFlow candidates. Their coherent kernel result is recorded separately from
 the pending source-boundary Oracle review; no runtime or alpha acceptance follows.
 
-The fresh-copy command includes the ten W2 resource/contract/pure-function and owner/capture/handle
+The fresh-copy command includes W2 resource/contract/pure-function and owner/capture/handle
 modules documented in `MirroreaProofFirstContracts.md`. Report2612 and
 `docs/proof-first/W2_INTEGRATED_CHECK.json` and `W2_EXTENSION_CHECK.json` retain their scoped mathematical
-evidence separately from pending review and production implementation obligations.
+evidence separately from production implementation obligations; the selected finite
+composition review is complete, without blanket acceptance of auxiliary experiments.
 No additional runtime wrapper or generated evidence chain is introduced.
+
+W2 computation/continuation mutation controls use
+`python3 scripts/proof_first_resource_computation_check.py --lean-path <compiled-proof-directory> --work-root <existing-external-directory>`.
+Run the fresh-copy Lean command first. Eighteen code mutations must fail at named
+general theorems after a passing baseline; logs stay in a new external directory.
+Scope and limits: `samples/lean/foundations/MirroreaProofFirstResourceComputations.md`.
+This is a proof test harness, not a runtime wrapper or alpha workflow.

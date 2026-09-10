@@ -2,7 +2,7 @@
 
 - Date: 2026-09-10 01:08 JST
 - Author: sole main Codex; no sub-agents
-- Status: ongoing nonproduction LAB research, no acceptance
+- Status: selected finite W2 theory/proof result locally verified and reviewed; final Git closeout in progress; no formal acceptance
 
 ## Objective
 
@@ -1702,3 +1702,242 @@ Final post-edit documentation validation86831 returned e6763c PASS (1762 reports
 focused diff/whitespace checks pass. Source proof cut remains unchanged89f1be22.
 Current Oracle live handle15e1b3 and status78be1e08:20:34UTC confirm a submitted,
 verified-model job still running. No final response or W2 review acceptance yet.
+
+## Computation and continuation proof checkpoint — 2026-09-10T18:34:41+09:00
+The completed repaired-scope Oracle review identified B1 false global ServiceTyped,
+B2 missing actual composition, B3 lost prefix/residual and B4 missing captured
+continuation. Its answer and disposition remain in the prior frozen workdir.
+New external ResourceComputations candidate SHA
+64e28d5f7898aebaaf49dcd016335ab87d5fd53688f55d4bd7d924e8672e374d
+connects selected interface/argument to actual current allocation and semantic UseId,
+realized resource Delta, independent unbounded Transition/Runs, typed finite programs,
+exact effects/rights on failure, captured lexical/pending frames, arbitrary control
+schedule typing/retirement, mixed resource/request nonrevival and classified rows.
+Fresh16-file Lean4.29.1 build completed exit0 (exec70996 collected c2d376);
+all11 targeted mutants rejected (RESOURCE_MUTANTS.json all_controls true).
+Fresh evidence: /tmp/mirrorea-proof-first-20260909-gn29zka5/resource-computation-fresh-tx52nfkr/RESULTS.json.
+Only standard propext/Classical.choice/Quot.sound in audited candidate; no Mir axioms.
+Not production, W2 acceptance or source/network completion. Generic resource ops
+remain mathematical/unbounded; single-frame private continuation, current-context
+acquisition, physical serialization, token transport and persistence are not proved.
+Delta Oracle sent once: mirrorea-w2-computation-delta, exec46136, started
+2026-09-10T09:33:13.705465+00:00; packet /tmp/mirrorea-proof-first-20260909-gn29zka5/oracle-w2-computation-delta-orysnjzl; QUESTION hash
+48394c984388abf3a25a0c48c8ff77a3cee1ba391f423bcb6a3440a9c72f0b90; manifest hash 5b154dac1d671c32b030caa700b1c063ab402874cf080ec2e5117d2f64a9843a.
+Dry-run compact188037tokens. No normal-latency resend; >=180s status intervals.
+Next: review own candidate/source obligations and prepare LAB mirror while waiting;
+collect same Oracle, investigate material findings, then W2-only integration audit.
+Current snapshots updated forward; prior dated failures remain historical.
+User ETA: 6–12 active hours plus Oracle wait, low-confidence, no deadline imposed.
+
+Validation limits: no new Rust/network run for this external Lean-only delta.
+No production/Canon edit, no sub-agent or signed independent acceptance.
+Commit/push pending; current changes are main-owned. Documentation.md,
+docs/project-status.md and samples_progress.md require reconsideration when the
+candidate is mirrored; no new executable repo sample is claimed at this checkpoint.
+
+## Delta review recovered — 2026-09-10T09:50:00.907776+00:00
+
+Oracle mirrorea-w2-computatio-delta exited0; answer SHA `56d25b6f0cc6dc7c64330f822af3bec87f2cda776e2665dc2a7addcb60efc1b8`.
+The main read the full answer and retains its advice as unaccepted findings.
+B1–B4 are materially repaired on the chosen path; dynamic affine A is viable,
+static B is optional. Remaining W2 obligations are independent pointwise rights
+postconditions, flattened two-profile boundary success, arbitrary-control semantic
+prefix correspondence and checked capture metadata realization. These are not
+deferred to W3. No contradiction of a stated theorem was identified.
+Post-freeze scheduler history/resource retirement/exact trace laws and distinct
+occurrence/lexical-shadow controls were checked locally, not by this review.
+History-free allocation helpers, supplied-context authenticity, literal split cuts,
+mathematical bounds and physical single-history assumptions remain explicit limits.
+Documented fresh-copy command passed24files (one preexisting simpa warning);
+mirrored mutation harness passed11controls. Documentation validation passed1762
+reports (54c2f4). New proof-only additions require their own recorded source hashes.
+No new Rust/network validation; no production delta, sub-agent or signature.
+
+Checkpoint 2026-09-10T19:00:19+09:00
+
+## Capture-to-computation adapter: bounded design and checks
+
+Scope: same W2/PL1 theory consumer; no new semantic goal, production contract,
+label inference, authenticated remote acquisition or W3 installation. The first
+Oracle countermodel erases capture labels while preserving integer3. Compare
+A, an immutable declaration plus checked value/continuation carrier, with B,
+passing only the integer. B is rejected by the existing secret/public equal-value
+and secret-overflow completion controls. A preserves the exact source expression,
+source types/labels, control label, capture label and consumer completion label.
+The adapter runs the existing capture checker and evaluator, then prepends the
+actual captured integer to the pure lexical environment and starts the existing
+computation. It does not synthesize authority; the current module context still
+arrives independently at every actual operation. All adapter outcomes retain the
+declaration; metadata rejection/capture failure start no resource computation.
+All subsequent wrapper controls retain metadata and respect its admission guard.
+This is an initial-computation adapter, not restoration or transferable continuation.
+
+- [x] Read capture Allowed/Captured/SequenceAllowed/checker and failure semantics;
+  compare the equal-value erasure falsifier with full metadata retention.
+- [ ] External finite reference: independent admissibility/realization and checker
+  correspondence; actual capture value -> EnvTyped/Good and successful consumer.
+- [ ] Prove metadata, completion-label and state retention on success/failure and
+  arbitrary wrapper controls; show public/secret same3 differ at the guard.
+- [ ] Add successful foreign-capture allocation, capture-overflow rejection and
+  metadata-erasure/lowered-completion mutations; inspect general axiom output.
+- [ ] Integrate only the validated reference into the existing W2 namespace,
+  record profile limits and seek the scoped final-cut Oracle review.
+
+Main only; the user's standing proof-first authorization supplies this reversible
+research scope. Skill planning is kept in this one milestone report rather than
+creating a new project/lane/report or requesting repeated design approval.
+
+## Four composition repairs — 2026-09-10 19:23 JST
+
+Current nonproduction source SHA 3f3d3425bf9e6432c4de20a5c7d49fa09754edf8d7fb781f7da65da4ed0e3d84. Independent profile-indexed
+success (with existential suitable evidence, not assumed acceptance), pointwise
+untouched/returned/consumed rights, actual mixed-control semantic prefix/status,
+and checked capture metadata/value entry now connect to the same consumer.
+Fresh24-file Lean4.29.1 trust0 check exits0; axioms only propext, Classical.choice,
+Quot.sound; no sorryAx. Final16 mutation controls each fail a designated general
+theorem, baseline passes. Exact logs/hashes in W2_COMPUTATION_CHECK.final_composition.
+The captured same3 public/secret, two actual profiles/interfaces, two-right release,
+and budget/capture/resume/changed-grant controls are fixed reductions, not general
+proofs. Mathematical resources, private single-frame history, supplied authentic
+context/metadata, literal split/receiver and no complete resource-effect IFC remain
+limits. No new production/Rust/network claim. W2 remains active.
+Final scoped Oracle packet /tmp/mirrorea-proof-first-20260909-gn29zka5/oracle-w2-composition-review-1d0dldik
+sent once, exec89507, dry-run168214tokens. No final answer yet; no signed acceptance.
+Continue W2-only review disposition and integration, then stop before W3.
+
+## W2 floor audit for the final composition review (candidate, not closeout)
+
+| W2 obligation / direct example | Concrete definition and general evidence | Remaining boundary |
+|---|---|---|
+| Values, functions and finite iteration | PureHandleFunctions Typed/infer_exact, Executes/evaluator correspondence, normalization and typed_environment_total; NamedElaboration check_exact/checked_execution_total | Typed initial environment and mathematical arithmetic; no arbitrary effect recursion or complete Rust higher-order support |
+| First-class interfaces | Actual pure expression selects interface/argument; Source.select_sound/complete and request_fields pin the consumer request | Current registry/catalog authenticity supplied; source module installation is W3 |
+| Ordinary parent assignment | OwnerAssignment Local/local_exact, run_frame/run_failure/run_typed, Elaborates/elaborate_exact and generated_destination | Existing source/runtime refinement is separate; no implicit foreign-owner snapshot |
+| Explicit foreign capture | Existing Capture.Allowed/check_exact plus CaptureAdapter.enter_exact/value_retained/captured_schedule use actual evaluated capture | Supplied metadata is assumed authentic; initial entry, not image import/recovery |
+| Local refinement/dependent-like export | Common binding and result contract depend on actual code/arguments/versions/assumptions; ProfileConsumer independent premises imply actual allocation and profile-specific guarantee | Two finite profiles, not arbitrary local-theory loading or general effectful closure refinement |
+| Heterogeneous guarantees without erasure | checked-value positivity versus symbolic uniform positivity in the same allocation consumer; suitable-certificate existence distinguished from submitted-certificate validity | No proof-to-authority conversion; independent grant required |
+| Resource context | Realized Delta and independent pointwise untouched/consumed/returned laws for actual resource operations, shared fresh request history | Dynamically affine finite profile; mathematical split/transfer, no whole-program machine quota |
+| Computation typing and relative completeness | Independent CommandTyped/ProgramTyped versus infer; Semantics.Transition/Runs versus bounded driver, eventual sufficient fuel | Valid environment required; successful authorization and arbitrary scheduler liveness not implied |
+| Captured one-shot continuation | Actual lexical/pending frame, private affine identity, capture removes runnable phase, resume consumes identity | One frame within one authoritative history; copying/restoring a whole old configuration is outside theorem |
+| Effects/failures/residual obligations | Prefix.Executed/Realizes/Status, checked_schedule, exact rights trace and event-kind prefix through arbitrary mixed controls | Budget stop is not semantic denial; coarse boundaryDenied does not identify a policy layer |
+| Negative and nonvacuous controls | Actual distinct interfaces/two profiles, distinct same-value occurrences, lexical shadow after resume, changed-grant residual, two rights, equal-value public/secret capture;16 targeted mutations | Fixed controls are not general proofs or runtime/network conformance |
+
+The original workstream's W2 exit language remains unchanged. This table is an
+inspection map, not a declaration that the final reviewer must accept the finite
+profile. Any necessary missing source expressiveness or semantic composition
+finding reopens the affected row before W2 closure. All119 original requirement
+rows retain their U/D and adoption/demonstration distinctions; this W2 table does
+not mark whole requirements or alpha1–8 demonstrated.
+
+Current review session was normalized by the CLI to
+`mirrorea-w2-compositio-review` (exec89507). The observed log shows browser-slot
+acquisition, not yet a recovered final answer. Main retains the same job and
+checks at least180seconds apart. No browser settings changes or resends here.
+
+Continuation snapshot compressed at 2026-09-10T19:29:38.612709+09:00; previous427-line record retained outside repo at /tmp/mirrorea-proof-first-20260909-gn29zka5/RESUME_before_20260910_composition_compaction.md, SHA9796b08d35e0807caba8acf0f1176c4caab5782763141f9179b60f5e2ea0adbb. Current RESUME now identifies only live job and next steps; historical proofs/failures remain in this report/Git. No past decision changed.
+
+## Composition Oracle recovered — 2026-09-10T10:44:32.747806+00:00
+
+Answer SHA 925f048b79c3b2d13c7131471278250df98e373218862a065193c0cc93615962. Full read d4b0b9, exec89507 exit0 collected8c2035.3.1/3.2/limited3.4 established as advice;3.3 still loses the exact control-context association in its existential independent predicate. Actual tick/act use correct supplied context; this is a statement-strength gap, not a demonstrated runtime bug. Retain as W2 blocker and prove a control-indexed independent relation; do not require static-affine B or advance W3. Fixture wording qualification: selected operation3/4 are distinct, but within each fixed profile registry returns the same descriptor; outputs5/17 distinguish profiles. No heterogeneous-fixed-registry control was run. Suitable-certificate success does not include Good; compose Good separately for safety. Admission remains modular over independently verified lower checkers.
+
+## Control/context correspondence repair — 2026-09-10T19:57:46.527713+09:00
+
+The new ControlIndexed.Step directly indexes every tick by its supplied context.
+Structural capture/resume/retry/idle rules do not call the scheduler. Scheduled
+composes ordered controls, and schedule_sound checks the concrete scheduler.
+The older prefix/status properties follow by scheduled_forget. The generic
+denied_tick_position theorem and context_substitution_rejected rule out the
+review's allowing-result/denying-control countermodel. checked_control_schedule
+and captured_control_schedule connect the stronger relation to the same prior
+consumer. Semantic outcomes abstract reference fuel; the budget predicate remains
+operational and does not establish an authorization outcome. No fuel-exact iff or
+arbitrary-schedule liveness is claimed.
+External draft10 passed1c0308 after retained syntax/elaboration/projection drafts;
+combined fresh24 trust0 build8197fa passes with only standard printed axioms.
+Current source10da3728bb18ff21d3db4272f37a5cf5d93cd752186a9ad9ad640e4561cb1f59.
+First fresh-copy extractor failed before Lean because README uses a bash heredoc,
+not a python fence; PREPARE_ERROR retained, corrected actual command then passed.
+The first18-mutant run failed at a duplicate capture-mutation needle after new
+independent rules repeated the same record text. Both new context mutations had
+already failed the intended general act_sound theorem. Root cause is test-target
+ambiguity, not a Lean acceptance. The corrected needle targets the implementation's
+some-result constructor only; all18 locations are unique. Fresh whole-suite rerun
+27673 in mir-resource-mutants-yuq2l0ju remains running; no all18 success claim yet.
+Oracle narrow control/context packet is prepared but NOT sent until that result.
+No production/Canon change or W3 work.
+
+Control/context checkpoint 2026-09-10T20:00:03.878288+09:00: combined source SHA10da3728bb18ff21d3db4272f37a5cf5d93cd752186a9ad9ad640e4561cb1f59,
+fresh24 trust0 PASS8197fa and all18 mutation controls PASS2948d8, including both
+context substitutions rejected at act_sound. Failed partial predecessor retained;
+no reuse of its suite result. Narrow Oracle submitted once, exec19774, requested
+slug mirrorea-w2-control-context, packet /tmp/mirrorea-proof-first-20260909-gn29zka5/oracle-w2-control-review-w32iyu7w; dryrun80183tokens/10files.
+Oracle active; main must collect/dispose, not stop or proceed W3. Updated current
+snapshots, companion, scripts/samples dashboards and evidence registry without
+adopting119requirements or changing Canon. Revised provisional ETA1–2hours,
+depending on Oracle wait/new findings, not a deadline.
+
+Current-checkpoint validation 2026-09-10T11:09:30.681432+00:00: docs validator exits0 fb9cda (1762 report scaffold, d5a61e). Frozen three review files still match their manifest; all24 source hashes and18 mutation results match the current source.119 original intent/approval/adoption/demonstration fields are unchanged. Full mandatory example reading advanced271–276; corpus remains incomplete, no new whole-repo plan adopted. Live Oracle session observed as mirrorea-w2-control-context, still streaming; no resend.
+
+## Final W2 review disposition and finite research close — 2026-09-10 20:16 JST
+
+Final Oracle mirrorea-w2-control-context completed exit0 (fadb64); full answer
+read1e759a, SHA8ae839a7daad795e4f13928561b44ea0b8517b965e65d2d4d51bf32052706cad.
+Source stayed10da3728bb18ff21d3db4272f37a5cf5d93cd752186a9ad9ad640e4561cb1f59.
+Main agrees after inspecting the independent Step/Scheduled constructors,
+allocation_denied/denied_tick_position, scheduler soundness and integrated results.
+No further essential repair was identified for the retained context-indexing item.
+The existing W2 floor audit above is now discharged for the selected finite profile,
+with its explicit limitations, not as a whole-language or product acceptance.
+The earlier unchecked capture checklist is superseded by actual CaptureAdapter
+proofs and controls; old plans/failures are retained, not rewritten as successes.
+
+A remains the dynamically affine finite consumer. Optional static-affine B and
+an internal retained context receipt are not necessary for this research floor.
+The one-way relation deliberately admits abstract completed outcomes at inadequate
+fuel; a zero-fuel literal is a counterexample to a fuel-exact converse. Concrete
+soundness, same-context budget pause and sufficient-fuel semantic completeness
+remain separate. An old context supplied as the new control is not authenticated
+by these theorems. A constant-false allocation grant does not deny all pure or
+resource operations. Final configurations carry no context receipt.
+
+Capture success binds the actual evaluated value and retains declaration metadata;
+Good/typing follow only when their separate initial/program premises are supplied.
+Within a fixed profile both selector keys map to the same descriptor; outputs5/17
+compare profiles, not heterogeneous registry entries. No full resource-effect IFC,
+computed split/receiver language, arbitrary theory loader, serialized continuation,
+physical rollback protection or production refinement is claimed.
+
+General results and TCB:24 fresh dependencies pass Lean4.29.1 --trust=0, printed
+axioms only propext/Classical.choice/Quot.sound, no sorry/admit/Mir-specific axiom.
+The kernel/toolchain/import/source integrity and authentic supplied context/metadata
+are explicit trust boundaries. The18 mutations include context substitution,
+wrong request/argument, rights/history loss, frame duplication/erasure, residual/
+effect/failure loss and capture metadata/completion erasure. Each mutation fails
+at a designated general theorem; this sensitivity is not exhaustive mutation
+completeness. The semantic no-advance proof supplies actual general exclusion.
+Failed drafts and partial-suite failures remain failures in external records.
+
+Current implementation integration is the existing LAB proof namespace, documented
+fresh-copy command and external-workdir mutation harness. There is no production
+increment or new runtime/network claim. Earlier actual source/QUIC/journal evidence
+remains at its recorded cut; historical1573tests were not rerun or used as a target.
+The final review did not execute Lean, inspect omitted imports anew or authenticate
+hashes; main performed those local checks. No signed reviewer is invented.
+
+119 requirement rows preserve source identities/U/D/approval/adoption/demonstration;
+related evidence in seven rows does not demonstrate the entire requirement. W0
+whole-corpus reading is incomplete; depended-on source/test/formal cone is read,
+and no new whole-repository plan or119-detail adoption is made. Q18, genuine
+current-head acquisition, production arithmetic, recovery and observation remain
+explicit future dependencies. User narrowed this run to W2; W3/alpha is not begun.
+
+Maintenance: plan correspondence, Documentation.md, project-status, progress,
+tasks (whole snapshot), samples_progress and both sample/script indexes are updated.
+Current goal/RESUME/evidence/requirement registry point to this selected cut.
+No normative statement or official THM/OBL/phase was changed. Sub-agent sessions:
+none ever used. Final docs validation and commit/push outcomes follow below.
+
+Closeout documentation check2531 exited1 (2900ff/c99c4d): the rewritten tasks snapshot retained the source hierarchy semantically but omitted the validator-required literal Canon notice fragments. Restored the standard notice; this failed check is not counted as success. Rerun follows, with no Lean/source change.
+
+Targeted docs self-check also moved the canonical/retained-roadmap citations into the required current-package section of tasks.md. Heading order and snapshot_position_source_errors pass7d5ba4. Final full rerun34000 remains the decisive docs check. No validator rule was weakened.
+
+Final documentation rerun34000 exits0 (4648c3), scaffold1762 reports (73a07b). Staged diff checkeda8a6 passes; frozen source/answer and119 provenance auditae4a56 passes. No Lean/source changes since the fresh24/18-mutant evidence, so no redundant source rerun. Only final Git receipt/status synchronization remains.

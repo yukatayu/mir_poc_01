@@ -23,12 +23,14 @@ memoryです。現在の停止線は
 
 Plan250に対するowner指示は、受理済みI3-3 cut後のpauseです。I3-4には明示的なresumeなしで進みません。
 今回の別の依頼は、証明先行の task-local LAB 研究と、理論gate後の限定実装です。
-現在は W2-local-contract-resource（PL1 S1/S2、theory/proof）。一般 Lean 命題と有限反例を
-検査中です。W2の10候補は局所契約・資源・owner/capture・高階handle受渡しを含み、15依存のkernel evidenceと後続差分の依存cone再検査がありますが未reviewです。source/実装refinement・α候補・正式THM/OBL受理は未達です。
+W2-local-contract-resource（PL1 S0–S3、theory/proof）の有限な研究成果を検証・review済みです。
+局所契約・高階handle・資源を実際の計算列と捕捉した継続へ接続し、24本のLean検査と18変異検査が通過。
+最後の操作／認可文脈の対応もreviewを回収し、必須修正は残っていません。
+現在は記録・Gitの最終確定中で、W2完了後に停止します。source/runtime対応・α候補・正式THM/OBL受理は未達です。
 対応は `plan/proof-first-foundation-correspondence.md`、証跡は report2611（W1）/report2612（W2）、
 再現コマンドは `samples/lean/README.md`、既読範囲は `docs/proof-first/READ_LEDGER.json`。
 M8 trusted setupでの実効label不一致を再現し、後続の観測接続義務として保持しています。
-受理済み数学的producerの二実行証明はreview済み。失敗を伴う単一代入と一般label理論も別々の限定範囲でreview・kernel検査済みです。失敗時の後続処理・別名解決・実source対応は別cutのreview待ち（Oracleへの送信未確認）で、復元・権限境界への接続も未達です。
+受理済み数学的producerの二実行証明はreview済み。失敗を伴う単一代入と一般label理論も別々の限定範囲でreview・kernel検査済みです。失敗時の後続処理・別名解決・実source対応は別cutのreview未完了（過去jobはChromeエラー）で、復元・権限境界への接続も未達です。
 sub-agentは使わず、Oracleは主担当が操作するread-only助言者です。
 I3-3 accepted; owner pause leaves no active semantic milestone。Plan 250 remains retained、
 program完了やblockedとは区別します。

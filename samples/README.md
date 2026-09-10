@@ -52,8 +52,11 @@
     refinement or network E2E.
   - W2 resource/contract/pure-function and owner/capture/handle candidates are documented in
     `lean/foundations/MirroreaProofFirstContracts.md` and Report2612. They have
-    kernel evidence; review and existing-Mir refinement remain open. They are
+    kernel evidence; the selected finite composition is reviewed, while existing-Mir refinement remains open. They are
     mechanization samples, not an operational alpha workflow.
+    `lean/foundations/MirroreaProofFirstResourceComputations.md` adds actual
+    resource computations/captured frames and their scope counterexamples;
+    the final control/context delta review is completed.
   - `clean-near-end/` は generated theorem stub evidence
 - `alpha/`
   Mirrorea Spaces alpha-0 phase-indexed sample matrix scaffold with `.expected.json` sidecars

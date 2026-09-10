@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-09-10 17:11 JST
+最終更新: 2026-09-10 20:14 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -58,20 +58,24 @@ public/production layers remain later.
 Latest owner stop boundary: finish W2 with actual review/integration gates, then
 stop. W3 and alpha integration are deferred beyond this run.
 
-Separate current task: user-authorized proof-first LAB research, active single goal
-W2-local-contract-resource (PL1 S1/S2, theory/proof). This is not a Plan250 milestone or
-I3-4 resume. Scoped support/current-use/tracked-query/graph Lean proofs and reviews
-exist; passive exact-retention and accepted mathematical producer reviews completed.
-Fallible single-assignment and general local-label proofs have scoped source review and kernel checks; abort/alias/source review is pending. Source/type/dynamic
-composition and actual implementation/alpha gates remain open. Required corpus
-reading is incomplete. Memory: `plan/proof-first-foundation-correspondence.md`;
-evidence: Reports2611/2612. W2 now has ten mirrored unreviewed Lean candidates
-for resource/contract/function/current-use correspondence, explicit captures and
-higher-order interface carriage, including failure-aware capture continuation; source-level module handles and actual
-source/runtime refinement remain open. The explicit computation/continuation floor
-now has external affine checking and failure-aware attempt evidence. Static slots
-can still alias one semantic request; actual current-context/resource binding is
-unmet. The repaired-browser W2 review is running, with no collected answer.
+Separate task-local W2 theory/proof result is now reviewed and locally verified
+(PL1 S0–S3). Final record/Git integration is in progress; stop after W2. This is
+not a Plan250 milestone, I3-4 resume or formal THM/OBL promotion.
+Scoped W1 dependencies retain their original boundaries; unrelated abort/alias/
+source extensions and the whole mandatory corpus remain incomplete. No new
+whole-repository roadmap is adopted. Memory: `plan/proof-first-foundation-correspondence.md`;
+evidence: Reports2611/2612 and W2_COMPUTATION_CHECK.json.
+
+The selected finite composition connects actual interface/argument evaluation,
+current authorized allocation, resource Delta/history, typed computations and
+captured pending frames. Independent rules/checkers, sufficient-fuel completeness,
+pointwise rights, effects/failures and per-control context correspondence have
+fresh24-file Lean4.29.1 trust0 evidence and18 mutation controls. The final Oracle
+review retained no essential repair for its exact delta; main checked its advice.
+Oracle is not proof or signed acceptance. Single-frame history, mathematical
+resources, supplied authentic current context/metadata and finite contract
+profiles remain assumptions. Production source/runtime/physical realization,
+full resource-effect confidentiality and alpha integration remain open.
 
 | Task axis | Current status | Startability |
 |---|---|---|
@@ -344,3 +348,11 @@ The authorized roadmap is paused, not blocked, stale or closed.
 - 2026-09-10 10:38 JST — W2 named lexical checker/elaborator and current-call reduction pass fresh15 Lean; actual-parser higher-order reference controls pass, existing runtime gap retained; helper failure propagation repaired and fault-tested. Review open; stop after W2.
 
 - 2026-09-10 17:11 JST — W2 continuation audit: checked affine rules and failure-preserving attempt prefixes; semantic-request alias counterexample remains open. Oracle repair pause honored, one frozen W2 review restarted; no W2 acceptance.
+
+- 2026-09-10 18:34 JST: W2計算・継続の新規候補を依存16本で機械検証、11変異を検出。差分Oracle送信、W2受理・統合は継続中。
+
+- 2026-09-10 19:23 JST: W2四接続を同じ計算へ機械検証。fresh24/変異16を検査し、最終差分Oracleを送信。W2未完了・W3へ進まない。
+
+- 2026-09-10 20:00 JST: W2の独立実行規則を操作ごとの文脈に束縛し、すり替え拒否を証明。fresh24/変異18通過、限定Oracle送信、W2未完了。
+
+- 2026-09-10 20:14 JST: W2有限profileの最終操作／認可文脈reviewを回収・検査。24依存のkernel検査・18変異・文書検査が通過。記録/Git確定後にowner指定のW2停止、W3/αへは進まない。

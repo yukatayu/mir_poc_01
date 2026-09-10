@@ -599,3 +599,62 @@ boundary is unmet, as are stateful provider/failure/re-entry rules. This is evid
 for the same W2 consumer, not W3 scope or a selected final computation calculus.
 The restarted neutral W2 review includes the earlier scratch cut with these limits
 explicit. No external signature or Canon acceptance is inferred from Oracle advice.
+
+## W2 computation connection candidate — 2026-09-10 18:34 JST
+
+The old repaired-browser review completed with B1–B4 findings; the successor
+external ResourceComputations binds actual selected values/handles/current use,
+realized Delta, failure-preserving finite sequences and captured one-shot frames.
+Independent semantics/checkers, sufficiently-fueled completeness, exact rights/effect
+prefixes and mixed resource/request/token retirement have fresh16-module Lean
+checks plus11 mutation controls. This is a candidate, not W2 acceptance.
+Single active/suspended frame and mathematical resource operations are explicit
+limits; no whole-program capacity, authentic currentness or physical persistence
+claim. Compare this dynamic affine Delta with a smallest static affine extension
+retaining the same guards. Scoped delta Oracle is running; source-level expressive
+floor and remaining necessary W2 connections are under review. W2 closes only
+with actual proof/review/integration evidence; owner requests stopping there.
+
+## Four composition repairs — 2026-09-10 19:23 JST
+
+Current nonproduction source SHA 3f3d3425bf9e6432c4de20a5c7d49fa09754edf8d7fb781f7da65da4ed0e3d84. Independent profile-indexed
+success (with existential suitable evidence, not assumed acceptance), pointwise
+untouched/returned/consumed rights, actual mixed-control semantic prefix/status,
+and checked capture metadata/value entry now connect to the same consumer.
+Fresh24-file Lean4.29.1 trust0 check exits0; axioms only propext, Classical.choice,
+Quot.sound; no sorryAx. Final16 mutation controls each fail a designated general
+theorem, baseline passes. Exact logs/hashes in W2_COMPUTATION_CHECK.final_composition.
+The captured same3 public/secret, two actual profiles/interfaces, two-right release,
+and budget/capture/resume/changed-grant controls are fixed reductions, not general
+proofs. Mathematical resources, private single-frame history, supplied authentic
+context/metadata, literal split/receiver and no complete resource-effect IFC remain
+limits. No new production/Rust/network claim. W2 remains active.
+Final scoped Oracle packet /tmp/mirrorea-proof-first-20260909-gn29zka5/oracle-w2-composition-review-1d0dldik
+sent once, exec89507, dry-run168214tokens. No final answer yet; no signed acceptance.
+Continue W2-only review disposition and integration, then stop before W3.
+
+Control/context checkpoint 2026-09-10T20:00:03.878288+09:00: combined source SHA10da3728bb18ff21d3db4272f37a5cf5d93cd752186a9ad9ad640e4561cb1f59,
+fresh24 trust0 PASS8197fa and all18 mutation controls PASS2948d8, including both
+context substitutions rejected at act_sound. Failed partial predecessor retained;
+no reuse of its suite result. Narrow Oracle submitted once, exec19774, requested
+slug mirrorea-w2-control-context, packet /tmp/mirrorea-proof-first-20260909-gn29zka5/oracle-w2-control-review-w32iyu7w; dryrun80183tokens/10files.
+Oracle active; main must collect/dispose, not stop or proceed W3. Updated current
+snapshots, companion, scripts/samples dashboards and evidence registry without
+adopting119requirements or changing Canon. Revised provisional ETA1–2hours,
+depending on Oracle wait/new findings, not a deadline.
+
+### W2 final finite research disposition — 2026-09-10 20:16 JST
+
+The exact-control/context review is recovered and main-dispositioned (answer
+8ae839a7daad795e4f13928561b44ea0b8517b965e65d2d4d51bf32052706cad).
+No essential repair remains for the selected finite W2 floor: actual values/handles,
+local exports, dynamic rights, computation typing, residual failures/effects and
+private captured pending frames have independent rules and checked correspondence.
+Fresh24 Lean4.29.1 trust0 and18 mutation controls pin source10da3728bb18ff21d3db4272f37a5cf5d93cd752186a9ad9ad640e4561cb1f59.
+This is task-local theory/proof closure, not production/Canon/alpha acceptance.
+Fuel abstraction, supplied context/metadata authenticity, one private frame/history,
+mathematical resources and finite contract profiles remain explicit. Earlier
+auxiliary journal/image/runtime controls are not silently promoted.
+Final documentation/Git integration precedes the owner-requested STOP. W3 requires
+a new request; Plan250 remains paused. Global reading and unrelated W1 extensions
+remain incomplete. No new roadmap or119-detail proposal is adopted.
