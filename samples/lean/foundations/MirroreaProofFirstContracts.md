@@ -574,3 +574,41 @@ step, not a composed durable physical protocol. No current-head acquisition,
 source provenance, all-mutator closure, confidentiality, arbitrary local theory,
 Q18 prepared-patch policy or production implementation follows. These extensions
 are outside both frozen Oracle review packets.
+
+
+### Ordinary multiplication and local certificates (unreviewed W2)
+
+ProductNormalization recursively recognizes structurally identical pure factors.
+Its independent Normalizes relation is equivalent to the executable normalizer.
+General proofs preserve mathematical evaluation, scope, checked evaluation
+including every intermediate overflow/missing-input failure, and the independent
+checked Denotes judgment. No new Core square primitive or source annotation is
+introduced. The smaller alternative retains multiplication and checks the actual
+positive result at each invocation; it does not promise uniform nonnegativity.
+
+Four wrong-normalizer controls expose lost input checks, squaring unequal factors,
+erased intermediate overflow and all-input rejection. The intermediate example
+has in-range leaves and final mathematical value17, but its product144 exceeds127.
+Standard logical axioms are individually printed; no Mir axiom/sorry/admit is used.
+The fifteen-module affected cone passed in a fresh copy; the sharpened final
+control was additionally compiled at its final hash.
+
+`scripts/proof_first_function_contract_check.py --workdir <new-directory> --lean-path <compiled-proof-directory>`
+runs the existing LAB full_system_v1 checker/runtime on five generated ordinary
+source functions, including renamed and nested expressions. It exports the actual
+checked return expression and checks the actual runtime result in Lean, together
+with scope, a mismatched-result rejection and applicable symbolic certificates.
+Seven additional export controls reject unsupported source and mutated checked IR.
+Build the existing binaries with `cargo build --offline --locked -p mir-semantics --example full_system_v1_check`
+and `cargo build --offline --locked -p mir-runtime --example mir_full_system_v1_session`
+if needed; compile the proof dependencies as in `samples/lean/README.md`.
+The helper requires a new external directory and does not overwrite old evidence.
+
+This is finite correspondence evidence, not a general Rust parser/runtime/exporter
+refinement or Mir network E2E. The exporter accepts only a single unary Int64
+return expression built from literals, its bound input, addition and multiplication.
+Other statements/operators reject in this bridge even if the existing Mir checker
+accepts them. The parser, JSON exporter, binary provenance and execution capture
+remain TCB obligations. Existing overflow panic is not fixed by these proofs.
+Higher-order source elaboration, module lifecycle, authenticated current context,
+all-entry closure and Oracle review remain open; no W2-wide acceptance follows.

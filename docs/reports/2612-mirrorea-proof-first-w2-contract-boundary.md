@@ -1552,3 +1552,49 @@ Chrome-close error2d7c56; W2 owned-tab job remains running without an answer.
 
 Final documentation validation78866 returned c1a26c: scaffold complete,1762
 numbered reports. This validates snapshot scaffolding, not W2 semantics/review.
+
+Ordinary-function continuation, same W2 consumer at 2026-09-10 09:58 JST: independent
+ProductNormalization relation/checker exactness and mathematical, checked-intermediate,
+scope and Denotes correspondence passed8e1940. Four deliberately bad normalizers
+were falsified8c90d8/2a4de5. Sharpened overflow control keeps all leaves in range;
+final mathematical17 cannot hide intermediate144 outside[-128,127]. Fresh15 proof
+cone81238f passed; final sharpened ContractExport control77873c also passed.
+
+Actual existing LAB checker/runtime ran five ordinary unary functions including
+renamed variables/functions, shifted/nested self-products and a linear checkedValue
+alternative. First generated Lean draft e114b5 used infer in the wrong direction;
+retained failed artifact, then checked actual certificates c3022b/2812f8. Seven
+unsupported-source/mutated-IR negatives a9614e passed. Reproducible helper
+scripts/proof_first_function_contract_check.py passed77873c in a new external
+workdir; subsequent formatting e58fd9 preserved its Python AST exactly. Outputs
+include actual source/checker/runtime and Lean results, not expected fake E2E.
+All relevant evidence is in W2_EXTENSION_CHECK.ordinary_function_normalization.
+
+Source/helper/companion changes are nonproduction LAB. Parser, JSON exporter,
+binary/capture and numerical-runtime refinement remain TCB/unproved bridges.
+The existing actual overflow panic remains unfixed. Unary return/add/multiply is
+an explicit partial bridge, not the entire required W2 source floor. Higher-order
+source and review gates remain. Both frozen Oracle packets exclude this delta;
+W2 owned-tab job still running29b513 with its Chrome debug HTTP200, no answer.
+W1 second recovery has actual Chrome-close error, no recovered review.
+
+plan/ updated; scripts/README.md, samples/README.md, samples_progress.md updated
+for the new evidence command without adding an active sample root. progress.md
+and tasks.md updated for the same W2 direct consumer and owner stop boundary.
+Documentation.md and docs/project-status.md update unnecessary: accepted Canon
+program/phase and public workflow unchanged. No Canon/THM/OBL or production change.
+No new full Rust/QUIC rerun: production source unchanged, actual selected binaries
+and five real executions hashed. Documentation validation and final own-diff review
+pending. Prior checkpointed3d98ea committed355a6d/pushed4d58b3/parity7cc22f;
+this normalization increment not yet committed/pushed. No sub-agents used.
+
+Documentation validation42424 returned ff25c8 PASS (1762 numbered reports).
+Own proof diffb5d3e3 and final15-source/helper-hash/old-evidence audit2f3279 PASS.
+One preliminary alias source49f5d6 omitted the existing mandatory let colon and
+failed parsing; it is not evidence that a well-typed higher-order source failed.
+Inspected existing AST type and call-resolution codeef2831: arrow types/function
+values are not in that checked IR, while direct calls resolve named declarations.
+Next independent LAB named-binder elaboration will target existing PureHandleFunctions,
+without selecting final grammar or changing production. W1 error recovery eadad8
+now uses one new exact owned tab and unchanged frozen19-file packet, exec88911;
+running W2 job90793 retained. No response/review acceptance yet.

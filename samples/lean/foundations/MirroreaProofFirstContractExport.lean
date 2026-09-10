@@ -622,3 +622,56 @@ end Controls
 #print axioms lawful_completes
 #print axioms successful
 end MirroreaProofFirst.ContractExport.CheckedAllocation
+
+namespace MirroreaProofFirst.ContractExport.ProductNormalization
+open LocalContract LocalContract.ProductNormalization CheckedArithmetic
+
+theorem checked_evaluation_preserved (lo hi : Int) (args : List Int) (e : Term) :
+ evaluate lo hi args (normalize e) = evaluate lo hi args e := by
+ induction e with
+ | input i => rfl
+ | integer z => rfl
+ | add a b ha hb => simp [normalize,evaluate,ha,hb]
+ | square a ha => simp [normalize,evaluate,ha]
+ | mul a b ha hb =>
+   by_cases eq : normalize a = normalize b
+   · have same : evaluate lo hi args a = evaluate lo hi args b := by
+       rw [← ha,← hb,eq]
+     simp only [normalize,eq,ite_true,evaluate,hb,same]
+     cases evaluate lo hi args b <;> rfl
+   · simp [normalize,eq,evaluate,ha,hb]
+
+theorem scope_preserved (n : Nat) (e : Term) :
+ scopeCheck n (normalize e) = scopeCheck n e := by
+ induction e with
+ | input i => rfl
+ | integer z => rfl
+ | add a b ha hb => simp [normalize,scopeCheck,ha,hb]
+ | square a ha => simp [normalize,scopeCheck,ha]
+ | mul a b ha hb =>
+   by_cases eq : normalize a = normalize b
+   · have same : scopeCheck n a = scopeCheck n b := by rw [← ha,← hb,eq]
+     simp [normalize,eq,scopeCheck,hb,same]
+   · simp [normalize,eq,scopeCheck,ha,hb]
+
+theorem scoped_preserved (n : Nat) (e : Term) :
+ Scoped n (normalize e) ↔ Scoped n e := by
+ rw [← scoped_exact,scope_preserved,scoped_exact]
+
+theorem denotes_preserved (lo hi : Int) (args : List Int) (e : Term) (z : Int) :
+ Denotes lo hi args (normalize e) z ↔ Denotes lo hi args e z := by
+ rw [← CheckedArithmetic.exact,checked_evaluation_preserved,CheckedArithmetic.exact]
+
+namespace Controls
+example : evaluate (-128) 127 [-3] (normalize (positiveTerm (.mul (.input 0) (.input 0)))) = some 10 := by decide
+example : evaluate (-128) 127 [12] (normalize (positiveTerm (.mul (.input 0) (.input 0)))) = none := by decide
+example : evaluate (-128) 127 [] (normalize (.mul (.input 0) (.input 0))) = none := by decide
+-- Mathematical final value 17 and in-range leaves do not hide intermediate 144.
+example : evaluate (-128) 127 [12] (normalize (.add (.mul (.input 0) (.input 0)) (.integer (-127)))) = none := by decide
+example : scopeCheck 1 (normalize (.mul (.input 0) (.input 1))) = false := by decide
+end Controls
+#print axioms scope_preserved
+#print axioms scoped_preserved
+#print axioms denotes_preserved
+#print axioms checked_evaluation_preserved
+end MirroreaProofFirst.ContractExport.ProductNormalization

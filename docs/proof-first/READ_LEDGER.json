@@ -22380,5 +22380,82 @@
     "range": "1-123",
     "role": "Previously full read plus main-authored actual Oracle-error status correction",
     "status": "full"
+  },
+  {
+    "path": "specs/examples/213-current-l2-theorem-line-checker-verdict-witness-family-ready-checker-verdict-transport-family-threshold.md",
+    "sha256": "ee096e8f0f293c296e9820ca0282d2c918f038d8d463ce817e0d2ca65cfd531b",
+    "range": "1-199",
+    "role": "Mandatory historical LAB full text4d9e3e; transport-family marker is docs-only sketch, not runtime/checker/authority adoption",
+    "status": "full"
+  },
+  {
+    "path": "tasks.md",
+    "sha256": "96280b7e980aa1f47ee4e3e91acb30a8cbe1b4149e5b18ca0e0f660cc1fdb1c2",
+    "range": "1-161",
+    "role": "Previously full read plus sole-main authored/reviewed ordinary-function normalization and evidence-command delta",
+    "status": "full"
+  },
+  {
+    "path": "progress.md",
+    "sha256": "0e391af382afbc2dd910c32f785ef7cb3c86a621e1ae95343b668158cb8824df",
+    "range": "1-339",
+    "role": "Previously full read plus sole-main authored/reviewed ordinary-function normalization and evidence-command delta",
+    "status": "full"
+  },
+  {
+    "path": "samples/README.md",
+    "sha256": "7dc551b5e898a0e180602cbe77a6d2daa450076439576d37ee5a9a696b728280",
+    "range": "1-309",
+    "role": "Previously full read plus sole-main authored/reviewed ordinary-function normalization and evidence-command delta",
+    "status": "full"
+  },
+  {
+    "path": "scripts/README.md",
+    "sha256": "e55a912dd04e81f30784182a2cde28c64fa5400763f78f9ff6bab5bce97bd09b",
+    "range": "1-440",
+    "role": "Previously full read plus sole-main authored/reviewed ordinary-function normalization and evidence-command delta",
+    "status": "full"
+  },
+  {
+    "path": "samples_progress.md",
+    "sha256": "a437dc6f35559a67a9a9eafa049df5007732a1202e423adc0cbbfd9e682033e0",
+    "range": "1-425",
+    "role": "Previously full read plus sole-main authored/reviewed ordinary-function normalization and evidence-command delta",
+    "status": "full"
+  },
+  {
+    "path": "samples/lean/foundations/MirroreaProofFirstContracts.md",
+    "sha256": "962435e4057a71e7e48c3cec5bce153ca7abe0e0214da6b5281425481ac45343",
+    "range": "1-614",
+    "role": "Previously full read plus sole-main authored/reviewed ordinary-function normalization and evidence-command delta",
+    "status": "full"
+  },
+  {
+    "path": "samples/lean/foundations/MirroreaProofFirstLocalContract.lean",
+    "sha256": "fee77a064074b3687d05a5a890b2ddd031a429dc2290829eaf27c516269a8980",
+    "range": "1-219",
+    "role": "Previously full read plus sole-main authored/reviewed ordinary-function normalization and evidence-command delta",
+    "status": "full"
+  },
+  {
+    "path": "samples/lean/foundations/MirroreaProofFirstContractExport.lean",
+    "sha256": "ec8ca4f801e30a00670fc51efe1ea448750cbc57dffdca29d9aa8ceb2ccb8d98",
+    "range": "1-677",
+    "role": "Previously full read plus sole-main authored/reviewed ordinary-function normalization and evidence-command delta",
+    "status": "full"
+  },
+  {
+    "path": "scripts/proof_first_function_contract_check.py",
+    "sha256": "7ec9b1d8c90465be4f09ee7f6fa1883439a0f888f466750c2eab49c43ed7f3e2",
+    "range": "1-120",
+    "role": "Previously full read plus sole-main authored/reviewed ordinary-function normalization and evidence-command delta",
+    "status": "full"
+  },
+  {
+    "path": "docs/proof-first/CURRENT_GOAL.md",
+    "sha256": "296f0ae8dcde0dd16bb0974f47b5887999a470728dd61aa91d39486b883aff58",
+    "range": "1-132",
+    "role": "Full previous goal plus main-authored named lexical elaboration direct consumer",
+    "status": "full"
   }
 ]

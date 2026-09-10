@@ -144,3 +144,76 @@ end Controls
 #print axioms assumptions_exact
 #print axioms positive_result
 end MirroreaProofFirst.LocalContract
+
+-- Nonproduction bridge for pure arithmetic; not source/authentication provenance.
+namespace MirroreaProofFirst.LocalContract.ProductNormalization
+
+def normalize : Term → Term
+ | .input i => .input i
+ | .integer z => .integer z
+ | .add a b => .add (normalize a) (normalize b)
+ | .square a => .square (normalize a)
+ | .mul a b =>
+   let x := normalize a
+   let y := normalize b
+   if x = y then .square x else .mul x y
+
+inductive Normalizes : Term → Term → Prop where
+ | input (i) : Normalizes (.input i) (.input i)
+ | integer (z) : Normalizes (.integer z) (.integer z)
+ | add {a b x y} : Normalizes a x → Normalizes b y → Normalizes (.add a b) (.add x y)
+ | square {a x} : Normalizes a x → Normalizes (.square a) (.square x)
+ | same {a b x} : Normalizes a x → Normalizes b x → Normalizes (.mul a b) (.square x)
+ | different {a b x y} : Normalizes a x → Normalizes b y → x ≠ y →
+     Normalizes (.mul a b) (.mul x y)
+
+theorem normalizes_sound {a b : Term} (h : Normalizes a b) : normalize a = b := by
+ induction h <;> simp_all [normalize]
+
+theorem normalizes_complete (a : Term) : Normalizes a (normalize a) := by
+ induction a with
+ | input i => exact .input i
+ | integer z => exact .integer z
+ | add a b ha hb => exact .add ha hb
+ | square a ha => exact .square ha
+ | mul a b ha hb =>
+   by_cases eq : normalize a = normalize b
+   · simpa [normalize,eq] using Normalizes.same (eq ▸ ha) hb
+   · simpa [normalize,eq] using Normalizes.different ha hb eq
+
+theorem normalization_exact (a b : Term) : normalize a = b ↔ Normalizes a b := by
+ constructor
+ · intro h; rw [← h]; exact normalizes_complete a
+ · exact normalizes_sound
+
+theorem evaluation_preserved (input : Nat → Int) (a : Term) :
+ eval input (normalize a) = eval input a := by
+ induction a with
+ | input i => rfl
+ | integer z => rfl
+ | add a b ha hb => simp [normalize,eval,ha,hb]
+ | square a ha => simp [normalize,eval,ha]
+ | mul a b ha hb =>
+   by_cases eq : normalize a = normalize b
+   · have same : eval input a = eval input b := by rw [← ha,← hb,eq]
+     simp [normalize,eq,eval,hb,same]
+   · simp [normalize,eq,eval,ha,hb]
+
+theorem self_product (a : Term) : normalize (.mul a a) = .square (normalize a) := by
+ simp [normalize]
+
+theorem self_product_certificate (a : Term) :
+ check [] (normalize (.mul a a)) (.square (normalize a)) = true := by
+ simp [self_product,check,infer]
+
+namespace Controls
+example : normalize (.mul (.integer 3) (.integer 4)) = .mul (.integer 3) (.integer 4) := by decide
+example : eval (fun _ => -3) (normalize (positiveTerm (.mul (.input 0) (.input 0)))) = 10 := by decide
+example : check [] (normalize (.mul (.input 0) (.input 0))) (.square (.input 0)) = true := by decide
+example : check [] (normalize (.mul (.input 0) (.input 1))) (.square (.input 0)) = false := by decide
+end Controls
+#print axioms normalization_exact
+#print axioms evaluation_preserved
+#print axioms self_product
+#print axioms self_product_certificate
+end MirroreaProofFirst.LocalContract.ProductNormalization

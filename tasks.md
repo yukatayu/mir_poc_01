@@ -1,6 +1,6 @@
 # Current Task Map (LAB)
 
-最終更新: 2026-09-10 09:46 JST
+最終更新: 2026-09-10 09:58 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project direction,
 theory, ADRs, conformance, and process. Everything outside `mirrorea_canon/` is LAB
@@ -53,11 +53,14 @@ A separate nonproduction Linux journal experiment passes18cases including actual
 SIGKILL/concurrency and deliberate duplicate-dispatch controls. It is not Mir E2E,
 power-loss proof, authenticated recovery or a production backend.
 
-Current next dependency: restored call data must not smuggle an old World, registry,
-catalog, grant or capacity policy into execution. Separate saved request/evidence
-from supplied execution context; reject absent/revoked context and retain useful
-current success. Acquiring authentic current context, atomic check/use and Q18
-remain separate unmet obligations. This extends the same W2 consumer.
+Current dependency: connect the necessary ordinary-source expression floor to
+local-contract and higher-order/handle rules. Structural self-product normalization
+now preserves mathematical/checked evaluation and scope; five actual LAB source
+executions and seven export negatives pass. The bridge is unary pure return/add/
+multiply only, not general source elaboration. Existing restored-call evidence
+separates saved data from supplied context; authentic context acquisition, physical
+check/use and Q18 remain open. Oracle review and higher-order source correspondence
+still block W2 close. W3 remains outside this run.
 
 ## ordered self-driven packages
 
@@ -146,8 +149,8 @@ forced duplicate or paid fallback. No new answer or review acceptance obtained.
 - Latest resource preflight: root ext4 about55GiB free,12GiB RAM available;
   /mnt/mirrorea-work is absent/unmounted. Small outside-repo copies use root storage;
   no heavy new build, cleanup, host-share use or disposable-source deletion.
-- Own commit46bc662a pushed with verified parity. New trace/status and scratch
-  restored-context proof are not yet accepted/committed. Keep RESUME exact.
+- Own commit46bc662a pushed with verified parity. Restored-context proof and trace committed/pushed as ed3d98ea; new ordinary-
+  function normalization/source evidence remains unreviewed and uncommitted. Keep RESUME exact.
 - Continue authorized work after checkpoints; no sub-agent, final-alpha claim,
   stale-reference concealment or skipped validation reported as success.
 

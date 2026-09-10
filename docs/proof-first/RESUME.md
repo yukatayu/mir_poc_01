@@ -1,130 +1,89 @@
-# Proof-first continuation — sole main
+# Proof-first continuation — sole main, W2 then stop
 
-User forbids ALL subagents/child Codex/delegation. None used. LATEST OWNER STEERING: stop after W2 is actually complete, including required
-proofs/counterexamples/Oracle review/integration/records. Do not proceed to W3 or
-alpha integration. User cleared the old goal. Main created the W2-only automatic goal on 2026-09-10 09:46 JST. Continue to actual W2 close, then stop. Do not final at a micro-checkpoint. Sole semantic goal W2-local-contract-resource,
-PL1 S1/S2 theory/proof/nonproduction reference. No W2/alpha acceptance, production
-increment, Plan250/I3-4 resume, Canon or THM/OBL change. Original handoff immutable.
+User forbids ALL subagents/child Codex/delegation. None used. User cleared the old
+alpha automatic goal; create_goal succeeded on2026-09-10 09:45 JST for actual W2
+proof/counterexample/review/integration/records completion, then STOP. Do not
+proceed W3 or alpha, do not close on a micro-proof. Goal active, no token budget.
+Canon accepted I3-3/ADR0043 and owner-paused Plan250 unchanged. LAB only; no
+THM/OBL/state promotion, public syntax/API or production increment accepted.
 
-HEAD46bc662aedb3596ba344d2289c4b83e7f80a1c3c committed6ab25b,
-pushed0c2fb8, parity11361b. Parent882a04df1af025d3b136b09935def1f615543fa2.
-Current own dirty: RestoredCall proof/evidence/companion,119-row requirement trace,
-status/task/plan/report/reading/continuation. No unrelated dirty files at baseline.
-Documentation validation78866 passed c1a26c (1762 numbered reports) after four
-recorded snapshot notice/timestamp/headings/reference failures. Main source diff
-76e1a8 and proof/119hash checks479c79 PASS. Next: focused own-diff/hash review,
-normal commit/push/parity, then continue ordinary-source contract consumer.
-No final or complete notification at this checkpoint.
+HEADed3d98ea5a97f43f5ff04ff8b2090158eaf1ffdb (RestoredCall+119trace), committed
+355a6d, pushed4d58b3, parity7cc22f. Earlier46bc662a CurrentPolicyFrame,
+882a04df DurableDispatch,52962f80 actual QUIC baseline, e22cd207 image checks.
+Baseline had no unrelated dirty. Current own dirty: ordinary-function normalization
+proof/helper/evidence/companion, reading/status/report/continuation. Next: commit
+own checked increment, normal push/parity; continue named binding below. No reset/
+clean/force, use commit --no-gpg-sign. Handoffmaterials/archives immutable.
 
-Latest RestoredCall: existing ModuleContractBoundary now1647lines. Saved request/
-arguments/evidence/proof separated from supplied World/registry/catalog/grant/
-bounds. Missing context rejects. General original-call correspondence, successful
-current-use/resource preservation, revoked witness/grant/history rejection and
-failure nonmutation; controls useful current/distinct success plus stale context.
-07fd4a final kernel,7f808f final+three mutants,fcfee4 concrete false controls;
-d8657c fresh15 actual-source PASS. Draft1 record indentation and draft2 simp lookup
-failed; retained, no accepted sorryAx. Standard propext/choice/Quot.sound only.
-Authentic current acquisition, byte image, state/history validation, physical
-Once/durable composition, all-mutator/source/IFC/Q18 remain open. Caller-supplied
-old context still cannot be ruled out by a parameter named current.
+Current semantic goal W2-local-contract-resource, PL1 S1/S2 proof/reference. Actual
+W2 exit still needs necessary ordinary-source expressive floor and scoped Oracle
+review; unary arithmetic is only a bridge. CURRENT_GOAL.md has precise obligations.
+Current proof results: LocalContract.ProductNormalization independent relation/
+normalizer exactness; mathematical evaluation, scope and checked-intermediate
+failure/Denotes preservation. 8e1940 PASS, fresh15-source81238f PASS, sharpened
+final in-range-leaf overflow control77873c PASS. Four wrong-normalizer concrete
+controls2a4de5 rejected. Standard propext/choice/Quot.sound as individually printed;
+no source sorry/admit/Mir axiom. Finite controls are not general proofs.
 
-Previous committed CurrentPolicyFrame: used-claim rejection, unused-claim frame
-with context/policy/issued/epoch fixed. Alternative witness branch cannot rescue
-revoked submitted witness; independent grant can still deny.15source+2mutants PASS.
-DurableDispatch: separate prepare/sync/dispatch/finish/crash; arbitrary finite
-restart preservation, no duplicate starts and useful fresh completion;4mutants.
-Separate Linux reference18cases actual SIGKILL/concurrent callbacks/fsync/flock;
-not Mir E2E/power loss/decoder refinement/current-head or exactly-once proof.
-Resource/history images preserve declared invariants; erased/fabricated history
-counterexamples show structural validity is not truth/currentness.
+scripts/proof_first_function_contract_check.py is new nonproduction evidence:
+existing actual LAB checker/runtime→five generated ordinary unary source returns→
+Lean exact result/scope/certificate checks; seven export negatives. Final77873c
+PASS, Python formattinge58fd9 AST-preserving. First bridge e114b5 wrong infer
+direction failed; retained draft, then corrected. Unary Int64 add/multiply only;
+parser/JSON/exporter/binary/runtime capture remain TCB, no general Rust refinement,
+Mir E2E or overflow-panic fix. Actual alias probe49f5d6 omitted required let colon;
+parse failure is not higher-order semantic counterevidence. Existing AST/typed IR
+and call codeef2831 lack arrow/function values; direct calls use declarations.
 
-W2_EXTENSION_CHECK retains prior evidence plus restored_call_context. Original
-source/QUIC9actualprocess a3c7bc, snapshot6/retry2/ledger1/owner27 recorded cuts
-remain; no new full Rust workspace or production delta. Existing source overflow
-panic and trusted observer-label mismatch remain unfixed pending proof/review.
+W2_EXTENSION_CHECK.ordinary_function_normalization retains all evidence/failure
+and final hashes. All prior keys unchanged;15 final source/helper hashes and no
+accepted sorryAx audited2f3279. Proof diffb5d3e3 and whitespace PASS. Docs42424
+PASSff25c8 (1762 numbered reports). Report2612 current; no new report. Plan/tasks/
+progress/sample/scripts docs updated; Documentation.md/project-status unchanged
+because accepted phase/workflow unchanged. No new full Rust/physical/QUIC run;
+actual retained source9QUIC/snapshot6/retry2/ledger1/owner27 cuts remain in evidence.
 
-Workroot /tmp/mirrorea-proof-first-20260909-gn29zka5. Pointers:
-RESTORED_CALL_CONTEXT_WORKDIR → restored-call-context-56mid38d
-RESTORED_CALL_CONTEXT_MIRROR → read pointer for fresh15 copy
-AUTHORITY_WITNESS_FRAME_WORKDIR/MIRROR, DURABLE_DISPATCH_WORKDIR/MIRROR,
-DURABLE_DISPATCH_PHYSICAL_FINAL, SOURCE_OWNER_BUDGET_LOCALNET,
-RESOURCE_PRIVATE_IMAGE_WORKDIR/MIRROR, RESERVATION_PRIVATE_IMAGE_WORKDIR/MIRROR,
-RECOVERY_ANCHOR_CONTROLS. No rerun of preserved successful cut without new need.
-Root ext4 about55GiB free,12GiB available RAM; external mount absent. Small outside-
-repo copies on root only; no heavy build/cleanup/host-share delivery.
+Workroot /tmp/mirrorea-proof-first-20260909-gn29zka5; external mount absent.
+Root55GiB free/RAM12GiB available09:50; small fresh copies only, no heavy build,
+cleanup/host-share. Pointers ORDINARY_FUNCTION_CONTRACT_WORKDIR (scratch proof/
+failed drafts/mutants), ORDINARY_FUNCTION_CONTRACT_MIRROR (fresh15 plus finalcontrol),
+ORDINARY_FUNCTION_SOURCE_FINAL (actual reproducible helper output). Earlier
+RESTORED_CALL_CONTEXT_WORKDIR/MIRROR and other evidence pointers retained.
 
-119-row REQUIREMENT_DISPOSITIONS.json new: immutable input hash and every row
-hash/U-D/approval/Q/PT/SC retained;30Q/18PT/24SC/alpha1–8 IDs. No row accepted,
-no alpha profile adopted.02b2a0 validates identity/flags/references; first draft
-missing source-evidence path corrected to FOUNDATION_CHECK. Original119 fields
-refresh e7088f/d6ce2d/f96308/4d6486; not full re-read of every acceptance field.
-User requested percentage/ETA: answered in commentary about15–25% rough workload,
-remaining120–300active hours (5–13continuous days or3–8weeks at8h/day), not measured
-acceptance or promise. Estimates and current W2 location in tasks/plan/progress.
-Re-estimate after W2 review and actual W3 source addition/removal. Keep all
-original goals; final publication and W8 World-Web excluded from this task.
+NEXT RESEARCH: NAMED_FUNCTION_ELABORATION_WORKDIR points to
+named-function-elaboration-_9qbs2df, copied15 sources/oleans, SCOPE.md only.
+No named-elaboration proof written yet. Named lexical terms should elaborate to
+existing PureHandleFunctions Expr using nearest bound name, typed lambda/let/app/
+iteration; independent elaboration relation plus existing Core typing soundness/
+relative completeness. Compare named source with positional Core indices, not a
+new final grammar/global registry-shadowing policy. Preserve handle binding/current
+invoke boundary. This is same W2 consumer, not W3 module installation.
 
-READ_LEDGER: plans302full, specs00–43/examples00–212full(next213);211re-readbe90a0
-because combineda7c42a truncated its middle.210/212 full visible. Historical
-notebook field sketches are not runtime/kernel/authority. Full probe main13781/
-tests3679/fault1206/lib132; process runtime12168/privateQUIC2772/owner3098;
-semantic snapshot1506/provider64; scriptsREADME427. Mandatory corpus still large
-unread; index/grep not full reading. No docs/reports bulk reads. No new roadmap.
+119-row REQUIREMENT_DISPOSITIONS retains source-row hashes, U/D/originalapproval,
+30Q/18PT/24SC/alpha1–8. All adopted/demonstrated flags false. Estimates15–25% and
+120–300h were subjective full-alpha horizon, now deferred afterW2; not measured
+acceptance/119 pass rate. No alpha profile selected.
+Reading: all302plans, specs00–43/examples00–213 full; next214. Many mandatory
+examples/docs/samples unread. READ_LEDGER hashes distinguish full/partial/inventory.
+Do not bulk read docs/reports. New whole-project roadmap has not been adopted.
 
-Oracle: user confirms Chrome crash and explicitly permits appropriate resends.
-No normal-running latency retry, cancellation or deadline. Main operates alone;
-advice is not kernel execution, owner key, signature or acceptance.
-OriginalW1 exec54675 and revisedW2exec4661 terminated exit1 on Chrome disconnect
-before conversation creation (052af1/48450c/aa989b). Harvest69361 exit1 undefined
-webSocketDebuggerUrl40392d. FirstW2exec19233 old profile-lock terminal, no polling.
-First W1 recovery89339 also actual Chrome-close exit1 (68a882/05cdce).
-CURRENT W1: exec15282, slug mirrorea-source-restart-second, launched2df5f0;
-root pointerORACLE_SOURCE_SECOND_RECOVERY. Latest2afe02 at00:24:56UTC running,
-noerror/promptSubmittedfalse/noanswer. Packet remains original W1 frozen cut,
-Q314b9ca87817061575b5313db3877cd7fb4fd663209e0a49283d6b311bb5d6e8.
-W2 preflight01c32f rejected before send; recovery73324 then errored at local
-attach-metadata discovery (2039b3/e86052), no prompt. Inspected installed
-attachRunning/index/chromeLifecycle/liveTabs. Plain remote fallback can pick the
-first target, so did not use it. Created own new target and used explicit
---remote-chrome plus --browser-tab ID, supported exact target path. This may scan
-tabs but performs no new prompt on W1 or unrelated page.
-CURRENT W2: exec90793, slug mirrorea-contract-owned-tab-recovery, launched2d9cd5;
-pointerORACLE_W2_OWNED_TAB_RECOVERY;START/HASHES/OWNED_TARGET outside repo.
-Q5dd28908150125d782d8af3a68c711d9df76790848c9bf091b185d15d8f5d6ff.
-Not yet confirmedsubmitted/noanswer. Later W2 proofs are OUTSIDE its frozen12
-module packet. First status after>=180s per LAST_CHECK_UTC. Do not expose cookies,
-WS/profile/config or unrelated tab contents; no paid fallback or global config edit.
+Oracle: user confirms Chrome crashes and permits appropriate actual-error resends.
+No latency duplicate/cancel/deadline or paid fallback. Main operates only; advice
+is not kernel/signature/owner authority. All original failed jobs retained.
+Original W1 and revisedW2 Chrome-close; W1 first/second recovery also Chrome-close.
+W2 attach-metadata recovery failed before send; explicit own-tab replacement runs.
+CURRENT W2 exec90793 slug mirrorea-contract-owned-tab-recovery; pointer
+ORACLE_W2_OWNED_TAB_RECOVERY. Latest29b513 at00:56:47UTC running/noanswer/debugHTTP200.
+Frozen question5dd28908150125d782d8af3a68c711d9df76790848c9bf091b185d15d8f5d6ff,
+12 original modules; EXCLUDES all later W2 extensions/normalization.
+CURRENT W1 exec88911 slug mirrorea-source-owned-tab-recovery, launcheadad8
+in NEW exact owned remote tab after preceding statuserror; W2 untouched. Pointer
+ORACLE_SOURCE_OWNED_TAB_RECOVERY; new START/HASHES/OWNED_TARGET/log outside repo.
+Frozen19file question314b9ca87817061575b5313db3877cd7fb4fd663209e0a49283d6b311bb5d6e8.
+Check each after>=180s according to LAST_CHECK_UTC. No prompt/answer confirmed.
+Old W1 exec15282 has error log2d7c56 though a6fb78 still yielded process. Do not
+cancel unrelated tabs/change profile/config or expose cookies/WS/secrets. Installed
+strict browser-tab path and both manuals already read; no need repeated diagnosis.
 
-Discord progressf08c5e sent08:34JST; next roughly09:34/natural checkpoint. No
-complete until user request legitimately ends. Continue after checkpoint.
-
-Latest Oracle: W1a4464d at00:29:47UTC running/notconfirmedsubmitted; W2owned-tab85a857 at00:33:37UTC running/submissionunknown/noanswer. Both jobs retained.
-
-New outside-repo W2 source-function consumer scratch only:
-ORDINARY_FUNCTION_CONTRACT_WORKDIR → ordinary-function-contract-266ncfpo.
-SCOPE.md compares preserving generic unary Int64 return expression/structural
-self-product normalization against the existing per-call checkedValue profile
-(retain literal multiplication); no Core square primitive or source annotation. No production
-or accepted M7 replacement. Existing textual_alpha/full_system_v1 is LAB.
-LocalContract.ProductNormalization has independent relation/executable normalizer,
-general exactness/evaluation preservation and self-product certificate. Draft1
-kernel0cdb83 PASS with one unused simp warning; not yet mutants/fresh mirror or
-checked-intermediate equivalence, not yet mirrored. Next proof: preserve existing
-CheckedArithmetic.evaluate including overflow/missing input, then actual ordinary
-source/checked-IR finite correspondence. Never call finite bridge general Rust
-refinement or source-driven dynamic construction.
-Discord8cd1d6 skipped within3600s; previous actual send08:34 remains last.
-
-Latest source-function scratch: NORMALIZATION_DRAFT2.json 8e1940 passed both
-LocalContract/ContractExport with independent normalization relation, mathematical
-and checked-intermediate evaluation, scope and declarative checked correspondence.
-Four deliberate wrong-normalizer controls8c90d8 rejected concretely. Actual existing
-LAB checker/runtime executed five ordinary source functions (renaming, shifted,
-nested and linear alternative); generated finite Lean value/scope/certificate
-checks passed c3022b. First bridge draft e114b5 confused infer input direction;
-retained ACTUAL_SOURCE_BRIDGE_DRAFT1.json, corrected actual certificate checking.
-These remain outside repo, not reviewed/mirrored; no general Rust refinement or
-source dynamic construction. Next: finite negative bridge controls, full affected
-fresh-source cone and frozen narrow review. Do not overwrite existing evidence.
-Latest W2 Oracle645952 running, no answer; preserve90793. W1 log2d7c56 actual
-Chrome-close error, exec15282 still not collected (a6fb78 yielded session).
+Discord actual progressdce5e6 sent09:52 JST. Next aboutonehour/naturalcheckpoint;
+complete onlywhen stopping at actualW2 close. No final response at this checkpoint.

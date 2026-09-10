@@ -121,3 +121,12 @@ ones. Compare explicit fresh-context attachment with reusing the old Invocation;
 the latter is a negative control. Reuse existing run/checker and prove rejection,
 state preservation and nontrivial current success. Acquiring an authentic current
 context remains an external unmet obligation; this is not Q18 patch acceptance.
+
+Same W2 source-expression consumer now has structural product normalization and
+finite actual unary source evidence. Next: named lexical elaboration into existing
+PureHandleFunctions, retaining higher-order/handle/typed-let/iteration binding.
+Compare explicit named binders with positional Core indices; keep final parser
+syntax and global registry shadowing policy unselected. Independent elaboration
+rules and existing Core typing must match the executable elaborator/checker.
+This closes a source-binding obligation, not source-driven module installation,
+current authority acquisition or W2-wide acceptance; Oracle review remains open.

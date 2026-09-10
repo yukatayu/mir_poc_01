@@ -337,6 +337,12 @@
   effects, not expected JSON; it is not Mir E2E, power-loss proof, authenticated
   recovery or an adopted persistence backend. Outputs remain under the supplied
   work root; production and handoff originals are not inputs.
+- `proof_first_function_contract_check.py --workdir <new-directory> --lean-path <compiled-proof-directory>`
+  nonproduction finite ordinary-function bridge. Uses actual existing LAB
+  checker/runtime output and emits Lean value/scope/certificate controls; includes
+  unsupported-source and mutated-IR rejection. Workdir must be new. It is neither
+  an alternate executor nor general source refinement, network E2E or alpha.
+  Dependencies and TCB: `samples/lean/foundations/MirroreaProofFirstContracts.md`.
 - `current_l2_*`
   current-L2 source corpus、detached validation loop、diff/export assist、Lean sync、checker support
 - `current_l2_lean_sample_sync.py`

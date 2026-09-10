@@ -44,6 +44,10 @@
   - W2's separate local process-crash reference uses
     `python3 scripts/proof_first_durable_dispatch_check.py test <existing-work-directory>`.
     It is nonproduction mechanism evidence, not a new active Mir sample or E2E.
+  - W2's ordinary-function bridge uses
+    `python3 scripts/proof_first_function_contract_check.py --workdir <new-directory> --lean-path <compiled-proof-directory>`.
+    It generates external finite evidence from actual LAB source/checker/runtime;
+    it is not a new active source root, general refinement or network E2E.
   - W2 resource/contract/pure-function and owner/capture/handle candidates are documented in
     `lean/foundations/MirroreaProofFirstContracts.md` and Report2612. They have
     kernel evidence; review and existing-Mir refinement remain open. They are

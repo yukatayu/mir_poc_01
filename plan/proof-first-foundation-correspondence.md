@@ -565,3 +565,12 @@ calls preserve stated resource conditions. Old Invocation still accepts its old
 context, so authentic current acquisition is explicitly unresolved. This is not
 actual save/load, a byte format or Q18 policy, and does not validate arbitrary
 resource/history input. Three mutants detect revocation/grant erasure/all-rejection.
+
+Owner execution boundary: the old automatic alpha goal was cleared and replaced
+with W2 completion followed by stop. W3–W7 are future horizon, not this run's queue.
+The W2 ordinary-function consumer now preserves general arithmetic/scope/checked
+failure through structural self-product normalization; actual LAB source/checker/
+runtime finite correspondence and malformed export controls pass. Compare uniform
+symbolic certificates with the smaller per-invocation checkedValue profile. No
+Core primitive, final syntax or general source refinement is selected. Higher-order
+source elaboration and review remain direct W2 gates. This is the same report2612.
