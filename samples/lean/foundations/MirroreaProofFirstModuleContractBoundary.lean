@@ -1506,3 +1506,142 @@ end Controls
 #print axioms current_use_frame
 #print axioms current_use_revoked_witness
 end MirroreaProofFirst.ModuleContractBoundary.CurrentPolicyFrame
+
+-- Unreviewed restored-call boundary. Current-context acquisition is NOT modeled.
+namespace MirroreaProofFirst.ModuleContractBoundary.CurrentAllocation.RestoredCall
+open ResourceBoundary
+structure SavedCall (n : Nat) where
+ request : CurrentUse.UseRequest n
+ arguments : List Int
+ evidence : CurrentUse.Evidence
+ proof : CallProof n
+
+-- Supplied by the execution boundary, never deserialized from SavedCall.
+structure ExecutionContext (n : Nat) where
+ limits : BoundedIdentifiers.Limits
+ lo : Int
+ hi : Int
+ world : CurrentUse.World n
+ registry : Registry n
+ catalog : Catalog
+ grant : Grant n
+
+def save (i : Once.Invocation n) : SavedCall n :=
+ ⟨i.request,i.arguments,i.evidence,i.proof⟩
+def contextOf (i : Once.Invocation n) : ExecutionContext n :=
+ ⟨i.limits,i.lo,i.hi,i.world,i.registry,i.catalog,i.grant⟩
+def attach (c : ExecutionContext n) (s : SavedCall n) : Once.Invocation n :=
+ {limits := c.limits, lo := c.lo, hi := c.hi, world := c.world,
+  registry := c.registry, catalog := c.catalog, grant := c.grant,
+  request := s.request, arguments := s.arguments, evidence := s.evidence, proof := s.proof}
+
+def resume (c : Option (ExecutionContext n)) (s : SavedCall n)
+ (state : Once.StateWithHistory) : Option (Once.StateWithHistory × List Handle) :=
+ c.bind fun current => Once.step (attach current s) state
+
+def advance (c : Option (ExecutionContext n)) (s : SavedCall n)
+ (state : Once.StateWithHistory) : Once.StateWithHistory :=
+ ((resume c s state).map Prod.fst).getD state
+
+theorem missing_context_rejects (s : SavedCall n) (state : Once.StateWithHistory) :
+ resume none s state = none := rfl
+
+theorem attach_current (c : ExecutionContext n) (s : SavedCall n) :
+ (attach c s).world = c.world ∧ (attach c s).registry = c.registry ∧
+ (attach c s).catalog = c.catalog ∧ (attach c s).grant = c.grant := by
+ exact ⟨rfl,rfl,rfl,rfl⟩
+
+theorem roundtrip (i : Once.Invocation n) : attach (contextOf i) (save i) = i := by
+ cases i; rfl
+
+-- Relative behavior includes every successful original call, not all-rejection safety.
+theorem resumes_original (i : Once.Invocation n) (state : Once.StateWithHistory) :
+ resume (some (contextOf i)) (save i) state = Once.step i state := by
+ simp [resume,roundtrip]
+
+-- A successful boundary uses the supplied context and the actual resource state.
+theorem success_current {c : ExecutionContext n} {s : SavedCall n}
+ {state : Once.StateWithHistory} {out : Once.StateWithHistory × List Handle}
+ (wf : WF state.resources) (ok : resume (some c) s state = some out) :
+ CurrentUse.CurrentUse c.world s.request ∧ WF out.1.resources ∧
+ BoundedIdentifiers.Within c.limits out.1.resources := by
+ obtain ⟨fresh,result,allocated,rfl⟩ := (Once.step_exact _ _ _).mp ok
+ obtain ⟨current,d,value,lookup,registered,linked,positive,bounds,granted,wf',within⟩ :=
+   CurrentAllocation.sound wf allocated
+ exact ⟨current,wf',within⟩
+
+theorem submitted_witness_rejected (c : ExecutionContext n) (s : SavedCall n)
+ (state : Once.StateWithHistory)
+ (denied : CurrentUse.checkUse c.world s.request s.evidence = false) :
+ resume (some c) s state = none := by
+ have allocated : (attach c s).allocate state.resources = none := by
+   unfold Once.Invocation.allocate CurrentAllocation.run
+   cases lookup : c.registry s.request.operation.key <;> simp [attach,denied,lookup]
+ simp [resume,Once.step,allocated]
+
+theorem resource_grant_rejected (c : ExecutionContext n) (s : SavedCall n)
+ (state : Once.StateWithHistory)
+ (denied : ∀ d value, c.grant c.world s.request d state.resources
+   (.allocate s.request.principal value) = false) :
+ resume (some c) s state = none := by
+ have allocated : (attach c s).allocate state.resources = none :=
+   CurrentAllocation.resource_denied _ _ _ _ _ _ _ _ _ _ _ _ denied
+ simp [resume,Once.step,allocated]
+
+theorem used_revocation_rejects (c : ExecutionContext n) (s : SavedCall n)
+ (state : Once.StateWithHistory) (id : Nat)
+ (used : id ∈ CurrentPolicyFrame.used s.evidence.witness) :
+ resume (some {c with world := (CurrentUse.revoke ⟨c.world,[]⟩ id).world}) s state = none :=
+ submitted_witness_rejected _ _ _
+   (CurrentPolicyFrame.current_use_revoked_witness ⟨c.world,[]⟩ s.request s.evidence id used)
+
+theorem advance_preserves (c : Option (ExecutionContext n)) (s : SavedCall n)
+ (state : Once.StateWithHistory) (wf : WF state.resources)
+ (unique : state.committed.Nodup) :
+ WF (advance c s state).resources ∧ (advance c s state).committed.Nodup := by
+ cases c with
+ | none => exact ⟨wf,unique⟩
+ | some c => exact Once.advance_wf (attach c s) state wf unique
+
+theorem retained_key_rejects (c : ExecutionContext n) (s : SavedCall n)
+ (state : Once.StateWithHistory) (seen : (attach c s).key ∈ state.committed) :
+ resume (some c) s state = none := by simp [resume,Once.step,seen]
+
+theorem failure_unchanged (c : Option (ExecutionContext n)) (s : SavedCall n)
+ (state : Once.StateWithHistory) (failed : resume c s state = none) :
+ advance c s state = state := by simp [advance,failed]
+
+namespace Controls
+abbrev old := Once.Controls.invocation
+abbrev initial := Once.Controls.initial
+def saved := save old
+def current := contextOf old
+def revoked : ExecutionContext 4 :=
+ {current with world := (CurrentUse.revoke ⟨current.world,[]⟩ 1).world}
+def denied : ExecutionContext 4 := {current with grant := fun _ _ _ _ _ => false}
+def emptyRegistry : ExecutionContext 4 := {current with registry := fun _ => none}
+def exhausted : ExecutionContext 4 := {current with limits := ⟨0,0⟩}
+example : (resume (some current) saved initial).isSome = true := by decide
+example : resume none saved initial = none := by decide
+example : resume (some revoked) saved initial = none := by decide
+example : resume (some denied) saved initial = none := by decide
+example : resume (some emptyRegistry) saved initial = none := by decide
+example : resume (some exhausted) saved initial = none := by decide
+example : advance (some revoked) saved initial = initial := by rfl
+-- The old Invocation still executes if a caller reuses its saved context.
+-- This counterexample is precisely why obtaining current input is a separate duty.
+example : (Once.step old initial).isSome = true ∧
+ resume (some revoked) saved initial = none := by decide
+example : (resume (some (contextOf Once.Controls.other)) (save Once.Controls.other)
+ (advance (some current) saved initial)).isSome = true := by decide
+example : resume (some current) saved (advance (some current) saved initial) = none := by decide
+end Controls
+#print axioms resumes_original
+#print axioms success_current
+#print axioms submitted_witness_rejected
+#print axioms resource_grant_rejected
+#print axioms used_revocation_rejects
+#print axioms advance_preserves
+#print axioms retained_key_rejects
+#print axioms failure_unchanged
+end MirroreaProofFirst.ModuleContractBoundary.CurrentAllocation.RestoredCall

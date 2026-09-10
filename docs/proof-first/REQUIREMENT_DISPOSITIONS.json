@@ -1,0 +1,3715 @@
+{
+  "schema": "proof-first-requirement-dispositions-v1",
+  "timestamp": "2026-09-10T00:11:15.698084+00:00",
+  "base_head": "46bc662aedb3596ba344d2289c4b83e7f80a1c3c",
+  "authority": "LAB task evidence only. U intent is retained; D and detailed acceptance criteria are not blanket approved. No alpha profile adopted. No row is a system-level acceptance.",
+  "source_path": "sub-agent-pro/mirrorea-proof-first-handoff-v1/materials/mirrorea_system_map_v1/requirements.json",
+  "source_sha256": "b16c4d3086552323b808925269dbcb73c2007ef1eea6fb55ba4008dcfd0e501c",
+  "source_counts": {
+    "requirements": 119,
+    "decisions": 30,
+    "proof_targets": 18,
+    "scenarios": 24,
+    "alpha_conditions": 8
+  },
+  "source_ids": {
+    "decisions": [
+      "Q-01",
+      "Q-02",
+      "Q-03",
+      "Q-04",
+      "Q-05",
+      "Q-06",
+      "Q-07",
+      "Q-08",
+      "Q-09",
+      "Q-10",
+      "Q-11",
+      "Q-12",
+      "Q-13",
+      "Q-14",
+      "Q-15",
+      "Q-16",
+      "Q-17",
+      "Q-18",
+      "Q-19",
+      "Q-20",
+      "Q-21",
+      "Q-22",
+      "Q-23",
+      "Q-24",
+      "Q-25",
+      "Q-26",
+      "Q-27",
+      "Q-28",
+      "Q-29",
+      "Q-30"
+    ],
+    "proof_targets": [
+      "PT-01",
+      "PT-02",
+      "PT-03",
+      "PT-04",
+      "PT-05",
+      "PT-06",
+      "PT-07",
+      "PT-08",
+      "PT-09",
+      "PT-10",
+      "PT-11",
+      "PT-12",
+      "PT-13",
+      "PT-14",
+      "PT-15",
+      "PT-16",
+      "PT-17",
+      "PT-18"
+    ],
+    "scenarios": [
+      "SC-01",
+      "SC-02",
+      "SC-03",
+      "SC-04",
+      "SC-05",
+      "SC-06",
+      "SC-07",
+      "SC-08",
+      "SC-09",
+      "SC-10",
+      "SC-11",
+      "SC-12",
+      "SC-13",
+      "SC-14",
+      "SC-15",
+      "SC-16",
+      "SC-17",
+      "SC-18",
+      "SC-19",
+      "SC-20",
+      "SC-21",
+      "SC-22",
+      "SC-23",
+      "SC-24"
+    ],
+    "alpha_conditions": [
+      "α-1",
+      "α-2",
+      "α-3",
+      "α-4",
+      "α-5",
+      "α-6",
+      "α-7",
+      "α-8"
+    ]
+  },
+  "evidence_groups": {
+    "source": [
+      "docs/proof-first/FOUNDATION_CHECK.json"
+    ],
+    "network": [
+      "docs/proof-first/W2_EXTENSION_CHECK.json#source_owner_budget_localnet_regression"
+    ],
+    "resource": [
+      "samples/lean/foundations/MirroreaProofFirstResourceBoundary.lean"
+    ],
+    "current": [
+      "samples/lean/foundations/MirroreaProofFirstCurrentUse.lean"
+    ],
+    "frame": [
+      "docs/proof-first/W2_EXTENSION_CHECK.json#authority_witness_frame"
+    ],
+    "contract": [
+      "samples/lean/foundations/MirroreaProofFirstLocalContract.lean",
+      "samples/lean/foundations/MirroreaProofFirstModuleContractBoundary.lean"
+    ],
+    "pure": [
+      "samples/lean/foundations/MirroreaProofFirstPureHandleFunctions.lean"
+    ],
+    "owner": [
+      "samples/lean/foundations/MirroreaProofFirstOwnerAssignment.lean"
+    ],
+    "numeric": [
+      "docs/proof-first/W2_EXTENSION_CHECK.json",
+      "samples/lean/foundations/MirroreaProofFirstOwnerAssignment.lean"
+    ],
+    "support": [
+      "samples/lean/foundations/MirroreaProofFirstSupport.lean"
+    ],
+    "images": [
+      "docs/proof-first/W2_EXTENSION_CHECK.json#private_images",
+      "docs/proof-first/W2_EXTENSION_CHECK.json#recovery_anchor_controls"
+    ],
+    "dispatch": [
+      "docs/proof-first/W2_EXTENSION_CHECK.json#durable_dispatch",
+      "scripts/proof_first_durable_dispatch_check.py"
+    ],
+    "passive": [
+      "samples/lean/foundations/MirroreaProofFirstPassive.lean",
+      "docs/reports/2612-mirrorea-proof-first-w2-contract-boundary.md"
+    ],
+    "allocation_ifc": [
+      "docs/proof-first/W2_EXTENSION_CHECK.json#allocation_observation"
+    ],
+    "proofs": [
+      "docs/proof-first/W2_EXTENSION_CHECK.json",
+      "samples/lean/foundations/MirroreaProofFirstContracts.md"
+    ],
+    "records": [
+      "docs/proof-first/RESUME.md",
+      "docs/proof-first/READ_LEDGER.json",
+      "plan/proof-first-foundation-correspondence.md"
+    ],
+    "oracle": [
+      "docs/reports/2612-mirrorea-proof-first-w2-contract-boundary.md"
+    ]
+  },
+  "requirements": [
+    {
+      "id": "AX-01",
+      "title": "意味を一次資料にする",
+      "origin": "U",
+      "user_refs": [
+        "U01",
+        "U02"
+      ],
+      "explicit_intent": true,
+      "source_approved": false,
+      "source_acceptance_spec_approved": false,
+      "source_row_sha256": "52ad196b978795ecd295b4318703134c3cdc6f9276f83f9fb5eac34f04cb6860",
+      "decisions": [],
+      "proof_targets": [
+        "PT-01",
+        "PT-17"
+      ],
+      "scenarios": [
+        "SC-01",
+        "SC-23"
+      ],
+      "task_disposition": "related-scoped-evidence; requirement-not-accepted",
+      "adopted": false,
+      "demonstrated_requirement": false,
+      "evidence_groups": [
+        "source"
+      ],
+      "remaining_boundary": "Eight finite source/Core executions and existing fixed-profile QUIC are related evidence; general source-to-all-artifact derivation remains open."
+    },
+    {
+      "id": "AX-02",
+      "title": "具体物をCoreへ埋め込まない",
+      "origin": "U",
+      "user_refs": [
+        "U08",
+        "U13",
+        "U16"
+      ],
+      "explicit_intent": true,
+      "source_approved": false,
+      "source_acceptance_spec_approved": false,
+      "source_row_sha256": "28ab7a966f5c3a21b8ee4d4aabb94d4dfdb20b33866bfdb8154d520081da7a94",
+      "decisions": [],
+      "proof_targets": [
+        "PT-01",
+        "PT-17"
+      ],
+      "scenarios": [
+        "SC-01",
+        "SC-23"
+      ],
+      "task_disposition": "related-scoped-evidence; requirement-not-accepted",
+      "adopted": false,
+      "demonstrated_requirement": false,
+      "evidence_groups": [
+        "source"
+      ],
+      "remaining_boundary": "No domain primitive added. Existing probe selects init_avatar_hp; generic independent-domain construction remains open."
+    },
+    {
+      "id": "AX-03",
+      "title": "将来を閉じない有限構成",
+      "origin": "U",
+      "user_refs": [
+        "U12",
+        "U14"
+      ],
+      "explicit_intent": true,
+      "source_approved": false,
+      "source_acceptance_spec_approved": false,
+      "source_row_sha256": "772046b29b13dca0a7524e41e81b3692865d71bbb68b4062e942c3fb04894fe7",
+      "decisions": [],
+      "proof_targets": [
+        "PT-01",
+        "PT-17"
+      ],
+      "scenarios": [
+        "SC-01",
+        "SC-23"
+      ],
+      "task_disposition": "related-scoped-evidence; requirement-not-accepted",
+      "adopted": false,
+      "demonstrated_requirement": false,
+      "evidence_groups": [
+        "resource"
+      ],
+      "remaining_boundary": "Arbitrary finite allocation schedules with explicit budgets are proved; dynamic source construction and safe long-term reclamation remain open."
+    },
+    {
+      "id": "AX-04",
+      "title": "原則と実現プロファイルを区別する",
+      "origin": "D",
+      "user_refs": [
+        "U17",
+        "U18"
+      ],
+      "explicit_intent": false,
+      "source_approved": false,
+      "source_acceptance_spec_approved": false,
+      "source_row_sha256": "58e72f06c8d701ace08b6d0e729b4badbd3055929f9cd96054a71ab2708e5d8a",
+      "decisions": [],
+      "proof_targets": [
+        "PT-01",
+        "PT-17"
+      ],
+      "scenarios": [
+        "SC-01",
+        "SC-23"
+      ],
+      "task_disposition": "related-scoped-evidence; requirement-not-accepted",
+      "adopted": false,
+      "demonstrated_requirement": false,
+      "evidence_groups": [
+        "records"
+      ],
+      "remaining_boundary": "Finite model and internal candidate bounds are recorded separately; no final profile adopted."
+    },
+    {
+      "id": "AX-05",
+      "title": "研究・α・遠期目標を分離する",
+      "origin": "U",
+      "user_refs": [
+        "U13",
+        "U15",
+        "U17"
+      ],
+      "explicit_intent": true,
+      "source_approved": false,
+      "source_acceptance_spec_approved": false,
+      "source_row_sha256": "57f79d9af6650da5ec6c08b9c4f6ac3603b56a9c51b7b6a07bce4498ceadebae",
+      "decisions": [],
+      "proof_targets": [
+        "PT-01",
+        "PT-17"
+      ],
+      "scenarios": [
+        "SC-01",
+        "SC-23"
+      ],
+      "task_disposition": "related-scoped-evidence; requirement-not-accepted",
+      "adopted": false,
+      "demonstrated_requirement": false,
+      "evidence_groups": [
+        "records"
+      ],
+      "remaining_boundary": "LAB proof/reference evidence, existing accepted layers and alpha/product acceptance remain distinct."
+    },
+    {
+      "id": "AX-06",
+      "title": "使いやすさと安全性を同時に評価する",
+      "origin": "U",
+      "user_refs": [
+        "U02",
+        "U05",
+        "U17"
+      ],
+      "explicit_intent": true,
+      "source_approved": false,
+      "source_acceptance_spec_approved": false,
+      "source_row_sha256": "5a53ef14837faf6e08d9074438d849c507cfab4dad3b169f2eb31122f21b9b1e",
+      "decisions": [],
+      "proof_targets": [
+        "PT-01",
+        "PT-17"
+      ],
+      "scenarios": [
+        "SC-01",
+        "SC-23"
+      ],
+      "task_disposition": "related-scoped-evidence; requirement-not-accepted",
+      "adopted": false,
+      "demonstrated_requirement": false,
+      "evidence_groups": [
+        "proofs"
+      ],
+      "remaining_boundary": "Positive controls and RejectAll mutation distinguish safety from usable success; required full ordinary-source corpus remains open."
+    },
+    {
+      "id": "SL-01",
+      "title": "普通の計算と再利用",
+      "origin": "U",
+      "user_refs": [
+        "U02",
+        "U08"
+      ],
+      "explicit_intent": true,
+      "source_approved": false,
+      "source_acceptance_spec_approved": false,
+      "source_row_sha256": "01051e05046d5318b16e732015cb3f6ffbaae9f58688f07163979b3fdd8daa83",
+      "decisions": [
+        "Q-03"
+      ],
+      "proof_targets": [
+        "PT-01",
+        "PT-02",
+        "PT-03"
+      ],
+      "scenarios": [
+        "SC-01",
+        "SC-08",
+        "SC-20"
+      ],
+      "task_disposition": "related-scoped-evidence; requirement-not-accepted",
+      "adopted": false,
+      "demonstrated_requirement": false,
+      "evidence_groups": [
+        "pure"
+      ],
+      "remaining_boundary": "Typed pure higher-order functions/iteration have normalization evidence. Ordinary-source coverage of this fragment and needed data structures remains open."
+    },
+    {
+      "id": "SL-02",
+      "title": "読みの意味と透過性",
+      "origin": "U",
+      "user_refs": [
+        "U02"
+      ],
+      "explicit_intent": true,
+      "source_approved": false,
+      "source_acceptance_spec_approved": false,
+      "source_row_sha256": "704347a34d48e47f9ce57b08eea941ba75118592d1a7d5e3c46c465bfd475ba7",
+      "decisions": [
+        "Q-01"
+      ],
+      "proof_targets": [
+        "PT-01",
+        "PT-02",
+        "PT-03"
+      ],
+      "scenarios": [
+        "SC-02"
+      ],
+      "task_disposition": "related-scoped-evidence; requirement-not-accepted",
+      "adopted": false,
+      "demonstrated_requirement": false,
+      "evidence_groups": [
+        "owner"
+      ],
+      "remaining_boundary": "Owner-live read versus explicit capture is modeled; no implicit snapshot or multi-owner transaction selected. Q-01 remains open."
+    },
+    {
+      "id": "SL-03",
+      "title": "代入の意味保存",
+      "origin": "U",
+      "user_refs": [
+        "U02"
+      ],
+      "explicit_intent": true,
+      "source_approved": false,
+      "source_acceptance_spec_approved": false,
+      "source_row_sha256": "e676dc35151a95a7d4a137058504dffecefe0c1bfc73ee694debabf7df0304e7",
+      "decisions": [],
+      "proof_targets": [
+        "PT-01",
+        "PT-02",
+        "PT-03"
+      ],
+      "scenarios": [
+        "SC-01"
+      ],
+      "task_disposition": "related-scoped-evidence; requirement-not-accepted",
+      "adopted": false,
+      "demonstrated_requirement": false,
+      "evidence_groups": [
+        "source"
+      ],
+      "remaining_boundary": "Actual checked owner RMW finite correspondence plus owner-assignment model; no general Rust refinement proof."
+    },
+    {
+      "id": "SL-04",
+      "title": "複数ownerを含む式",
+      "origin": "D",
+      "user_refs": [
+        "U01",
+        "U02"
+      ],
+      "explicit_intent": false,
+      "source_approved": false,
+      "source_acceptance_spec_approved": false,
+      "source_row_sha256": "fcc228bad5fbd8ba2882722b7cc5ebdade8fe18bbc4aa778d99b494898b6bcb1",
+      "decisions": [
+        "Q-02"
+      ],
+      "proof_targets": [
+        "PT-01",
+        "PT-02",
+        "PT-03"
+      ],
+      "scenarios": [
+        "SC-02"
+      ],
+      "task_disposition": "related-scoped-evidence; requirement-not-accepted",
+      "adopted": false,
+      "demonstrated_requirement": false,
+      "evidence_groups": [
+        "owner"
+      ],
+      "remaining_boundary": "Explicit captured reads expose stale/capture failure effects; joint-owner semantics is not chosen."
+    },
+    {
+      "id": "SL-05",
+      "title": "意味上のイベントと表層の分離",
+      "origin": "U",
+      "user_refs": [
+        "U09",
+        "U16"
+      ],
+      "explicit_intent": true,
+      "source_approved": false,
+      "source_acceptance_spec_approved": false,
+      "source_row_sha256": "4df6f058ec71335203d57999f9e88144df185f1c9d843bfd690f2d3f303df15a",
+      "decisions": [],
+      "proof_targets": [
+        "PT-01",
+        "PT-02",
+        "PT-03"
+      ],
+      "scenarios": [
+        "SC-01"
+      ],
+      "task_disposition": "related-scoped-evidence; requirement-not-accepted",
+      "adopted": false,
+      "demonstrated_requirement": false,
+      "evidence_groups": [
+        "source"
+      ],
+      "remaining_boundary": "Actual request/serve/result occurrence paths were traced in the fixed probe; no general source-generated dynamic composition."
+    },
+    {
+      "id": "SL-06",
+      "title": "アノテーションと診断",
+      "origin": "U",
+      "user_refs": [
+        "U05",
+        "U17"
+      ],
+      "explicit_intent": true,
+      "source_approved": false,
+      "source_acceptance_spec_approved": false,
+      "source_row_sha256": "00e394a596acf394319abefe8faacf44441b0bd0a6d0d1d6afbe3b3a574582ff",
+      "decisions": [
+        "Q-01",
+        "Q-03"
+      ],
+      "proof_targets": [
+        "PT-01",
+        "PT-02",
+        "PT-03"
+      ],
+      "scenarios": [
+        "SC-02"
+      ],
+      "task_disposition": "related-scoped-evidence; requirement-not-accepted",
+      "adopted": false,
+      "demonstrated_requirement": false,
+      "evidence_groups": [
+        "source"
+      ],
+      "remaining_boundary": "Existing checker rejection is recorded; complete annotation/diagnostic usability profile is not established."
+    },
+    {
+      "id": "SL-07",
+      "title": "数値・文字列・等価性の意味",
+      "origin": "D",
+      "user_refs": [
+        "U08",
+        "U17"
+      ],
+      "explicit_intent": false,
+      "source_approved": false,
+      "source_acceptance_spec_approved": false,
+      "source_row_sha256": "f5dcfa524419e924931008be33d7e549a8d7b55090c4eee80d956c15ee75b83d",
+      "decisions": [
+        "Q-04"
+      ],
+      "proof_targets": [
+        "PT-01",
+        "PT-02",
+        "PT-03"
+      ],
+      "scenarios": [
+        "SC-02"
+      ],
+      "task_disposition": "related-scoped-evidence; requirement-not-accepted",
+      "adopted": false,
+      "demonstrated_requirement": false,
+      "evidence_groups": [
+        "numeric"
+      ],
+      "remaining_boundary": "Checked-intermediate arithmetic is proved for a candidate integer fragment. Actual Rust overflow panic reproduced; final numeric/string/float profile and implementation connection remain open."
+    },
+    {
+      "id": "SL-08",
+      "title": "関数やhandleの表現力境界",
+      "origin": "D",
+      "user_refs": [
+        "U07",
+        "U08",
+        "U14"
+      ],
+      "explicit_intent": false,
+      "source_approved": false,
+      "source_acceptance_spec_approved": false,
+      "source_row_sha256": "88152f566af7171d4a5cf46055fb54cd1efa692d19bafa110982655897ea4bb7",
+      "decisions": [
+        "Q-03"
+      ],
+      "proof_targets": [
+        "PT-01",
+        "PT-02",
+        "PT-03"
+      ],
+      "scenarios": [
+        "SC-02"
+      ],
+      "task_disposition": "related-scoped-evidence; requirement-not-accepted",
+      "adopted": false,
+      "demonstrated_requirement": false,
+      "evidence_groups": [
+        "pure"
+      ],
+      "remaining_boundary": "Typed pure handles/functions have general normalization and boundary checks; effectful captures and source/runtime correspondence remain open."
+    },
+    {
+      "id": "ID-01",
+      "title": "定義・instance・世代・版の区別",
+      "origin": "D",
+      "user_refs": [
+        "U03",
+        "U04",
+        "U14"
+      ],
+      "explicit_intent": false,
+      "source_approved": false,
+      "source_acceptance_spec_approved": false,
+      "source_row_sha256": "18c615becdb8c4284d179422f1ff27303ef8bcc3836bbdc0ac915fea89c6f496",
+      "decisions": [],
+      "proof_targets": [
+        "PT-04",
+        "PT-05",
+        "PT-11"
+      ],
+      "scenarios": [
+        "SC-05"
+      ],
+      "task_disposition": "related-scoped-evidence; requirement-not-accepted",
+      "adopted": false,
+      "demonstrated_requirement": false,
+      "evidence_groups": [
+        "current"
+      ],
+      "remaining_boundary": "Code/contract/generation/context distinctions are explicit in current-use candidate; final identity encoding is not selected."
+    },
+    {
+      "id": "ID-02",
+      "title": "存在DAGと独立対象",
+      "origin": "U",
+      "user_refs": [
+        "U03",
+        "U04"
+      ],
+      "explicit_intent": true,
+      "source_approved": false,
+      "source_acceptance_spec_approved": false,
+      "source_row_sha256": "c238d927c204dcc217f4222590e9661d449f64f763df9848d28814e284eaa469",
+      "decisions": [
+        "Q-05"
+      ],
+      "proof_targets": [
+        "PT-04",
+        "PT-05",
+        "PT-11"
+      ],
+      "scenarios": [
+        "SC-05"
+      ],
+      "task_disposition": "related-scoped-evidence; requirement-not-accepted",
+      "adopted": false,
+      "demonstrated_requirement": false,
+      "evidence_groups": [
+        "support"
+      ],
+      "remaining_boundary": "Typed support closure is separate from individual DAGs; integration with all live runtime instances remains open."
+    },
+    {
+      "id": "ID-03",
+      "title": "reparentと退出の遷移",
+      "origin": "U",
+      "user_refs": [
+        "U04"
+      ],
+      "explicit_intent": true,
+      "source_approved": false,
+      "source_acceptance_spec_approved": false,
+      "source_row_sha256": "436419a13544b656ee1fe81f1b233a3808ec6b132de63f22c8688a5c27d78a7d",
+      "decisions": [
+        "Q-05"
+      ],
+      "proof_targets": [
+        "PT-04",
+        "PT-05",
+        "PT-11"
+      ],
+      "scenarios": [
+        "SC-05"
+      ],
+      "task_disposition": "related-scoped-evidence; requirement-not-accepted",
+      "adopted": false,
+      "demonstrated_requirement": false,
+      "evidence_groups": [
+        "support"
+      ],
+      "remaining_boundary": "Candidate support/liveness transitions are related; source reparent with in-flight/binding closure not demonstrated."
+    },
+    {
+      "id": "ID-04",
+      "title": "短命な参照とfallback",
+      "origin": "U",
+      "user_refs": [
+        "U03"
+      ],
+      "explicit_intent": true,
+      "source_approved": false,
+      "source_acceptance_spec_approved": false,
+      "source_row_sha256": "f757c3a341797102421a5102ed179e1f0646ad307ad620399fdc59b248197ad4",
+      "decisions": [],
+      "proof_targets": [
+        "PT-04",
+        "PT-05",
+        "PT-11"
+      ],
+      "scenarios": [
+        "SC-05"
+      ],
+      "task_disposition": "related-scoped-evidence; requirement-not-accepted",
+      "adopted": false,
+      "demonstrated_requirement": false,
+      "evidence_groups": [
+        "current"
+      ],
+      "remaining_boundary": "Current-use rejects stale handles; full fallback candidate selection and authorization/lifetime composition remain open."
+    },
+    {
+      "id": "ID-05",
+      "title": "再取得と単調性の範囲",
+      "origin": "D",
+      "user_refs": [
+        "U03",
+        "U05"
+      ],
+      "explicit_intent": false,
+      "source_approved": false,
+      "source_acceptance_spec_approved": false,
+      "source_row_sha256": "fe66bc9a1810e7449e724d242a0e6649515d5f67d19fdfa118717148151ae296",
+      "decisions": [
+        "Q-06"
+      ],
+      "proof_targets": [
+        "PT-04",
+        "PT-05",
+        "PT-11"
+      ],
+      "scenarios": [
+        "SC-05"
+      ],
+      "task_disposition": "related-scoped-evidence; requirement-not-accepted",
+      "adopted": false,
+      "demonstrated_requirement": false,
+      "evidence_groups": [
+        "resource"
+      ],
+      "remaining_boundary": "Generational resource handles do not resurrect on release/reallocation within the model; new-lineage reacquisition is not established."
+    },
+    {
+      "id": "ID-06",
+      "title": "参照・権利・snapshot・引用の区別",
+      "origin": "D",
+      "user_refs": [
+        "U03",
+        "U13"
+      ],
+      "explicit_intent": false,
+      "source_approved": false,
+      "source_acceptance_spec_approved": false,
+      "source_row_sha256": "1eb464b7717efe5a6791e2d5f35593ffde5d9b9f2ba7b8e444ae6dda71965543",
+      "decisions": [
+        "Q-07"
+      ],
+      "proof_targets": [
+        "PT-04",
+        "PT-05",
+        "PT-11"
+      ],
+      "scenarios": [
+        "SC-05",
+        "SC-22"
+      ],
+      "task_disposition": "related-scoped-evidence; requirement-not-accepted",
+      "adopted": false,
+      "demonstrated_requirement": false,
+      "evidence_groups": [
+        "images"
+      ],
+      "remaining_boundary": "Structural image and current usable handle are distinct; valid old images are not authenticated fresh state."
+    },
+    {
+      "id": "ID-07",
+      "title": "所有・alias・資源handle",
+      "origin": "U",
+      "user_refs": [
+        "U07"
+      ],
+      "explicit_intent": true,
+      "source_approved": false,
+      "source_acceptance_spec_approved": false,
+      "source_row_sha256": "57efbc2d0e980faead2eaae3246968ab043802c6a41996e37e03e8b216588556",
+      "decisions": [
+        "Q-03"
+      ],
+      "proof_targets": [
+        "PT-04",
+        "PT-05",
+        "PT-11"
+      ],
+      "scenarios": [
+        "SC-03",
+        "SC-05",
+        "SC-09"
+      ],
+      "task_disposition": "related-scoped-evidence; requirement-not-accepted",
+      "adopted": false,
+      "demonstrated_requirement": false,
+      "evidence_groups": [
+        "resource"
+      ],
+      "remaining_boundary": "General allocate/move/split/release preservation and opaque checked handles; integration with arbitrary local theories remains open."
+    },
+    {
+      "id": "ID-08",
+      "title": "DAG間の整合条件",
+      "origin": "D",
+      "user_refs": [
+        "U04",
+        "U17"
+      ],
+      "explicit_intent": false,
+      "source_approved": false,
+      "source_acceptance_spec_approved": false,
+      "source_row_sha256": "80f80afa02adf77df8787fa57a12f7f51133104d0c90478701577e978121d6cc",
+      "decisions": [],
+      "proof_targets": [
+        "PT-04",
+        "PT-05",
+        "PT-11"
+      ],
+      "scenarios": [
+        "SC-05",
+        "SC-11",
+        "SC-13",
+        "SC-24"
+      ],
+      "task_disposition": "related-scoped-evidence; requirement-not-accepted",
+      "adopted": false,
+      "demonstrated_requirement": false,
+      "evidence_groups": [
+        "support"
+      ],
+      "remaining_boundary": "Cross-kind least support is not a global DAG. Whole runtime transition closure is not established."
+    },
+    {
+      "id": "RL-01",
+      "title": "関係を意味の対象として保持",
+      "origin": "U",
+      "user_refs": [
+        "U03",
+        "U08"
+      ],
+      "explicit_intent": true,
+      "source_approved": false,
+      "source_acceptance_spec_approved": false,
+      "source_row_sha256": "52432b09ef9cccdad2ea44ed7f2ff30e2ce86c272ab38fef775b30c7dd4debfd",
+      "decisions": [],
+      "proof_targets": [
+        "PT-05",
+        "PT-06",
+        "PT-15"
+      ],
+      "scenarios": [
+        "SC-05"
+      ],
+      "task_disposition": "open; no integrated task evidence",
+      "adopted": false,
+      "demonstrated_requirement": false,
+      "evidence_groups": [],
+      "remaining_boundary": "Owner-held relation and shared consumer evaluation are not integrated into the current W2 fragment."
+    },
+    {
+      "id": "RL-02",
+      "title": "関係DAGと時間越し循環",
+      "origin": "D",
+      "user_refs": [
+        "U04",
+        "U09"
+      ],
+      "explicit_intent": false,
+      "source_approved": false,
+      "source_acceptance_spec_approved": false,
+      "source_row_sha256": "c53512f8f94ed616d44997c261065a512e8e19d0a302b455a9c32d20f2d45385",
+      "decisions": [
+        "Q-08"
+      ],
+      "proof_targets": [
+        "PT-05",
+        "PT-06",
+        "PT-15"
+      ],
+      "scenarios": [
+        "SC-05"
+      ],
+      "task_disposition": "related-scoped-evidence; requirement-not-accepted",
+      "adopted": false,
+      "demonstrated_requirement": false,
+      "evidence_groups": [
+        "support"
+      ],
+      "remaining_boundary": "Support closure is not a proof of relation feedback/recursion semantics; relation profile remains open."
+    },
+    {
+      "id": "RL-03",
+      "title": "評価場所と具体化の分離",
+      "origin": "U",
+      "user_refs": [
+        "U01",
+        "U08"
+      ],
+      "explicit_intent": true,
+      "source_approved": false,
+      "source_acceptance_spec_approved": false,
+      "source_row_sha256": "f5e9dc3242ce73bc94278b582cfc6cf6677f5814ec027979d1116bb6ad0691f3",
+      "decisions": [],
+      "proof_targets": [
+        "PT-05",
+        "PT-06",
+        "PT-15"
+      ],
+      "scenarios": [
+        "SC-06"
+      ],
+      "task_disposition": "related-scoped-evidence; requirement-not-accepted",
+      "adopted": false,
+      "demonstrated_requirement": false,
+      "evidence_groups": [
+        "owner"
+      ],
+      "remaining_boundary": "Owner/evaluator distinction is modeled for assignment; general maintained relation/materialization is open."
+    },
+    {
+      "id": "RL-04",
+      "title": "指定評価・結果の消費",
+      "origin": "D",
+      "user_refs": [
+        "U01",
+        "U09"
+      ],
+      "explicit_intent": false,
+      "source_approved": false,
+      "source_acceptance_spec_approved": false,
+      "source_row_sha256": "62e6c05f6d514d9cfd8649bb8bebd8e329046dbfba64aba85d189ed63dbad1d6",
+      "decisions": [],
+      "proof_targets": [
+        "PT-05",
+        "PT-06",
+        "PT-15"
+      ],
+      "scenarios": [
+        "SC-06"
+      ],
+      "task_disposition": "open; no integrated task evidence",
+      "adopted": false,
+      "demonstrated_requirement": false,
+      "evidence_groups": [],
+      "remaining_boundary": "Versioned relation result/publication contract is not supplied by current W2 proofs."
+    },
+    {
+      "id": "RL-05",
+      "title": "時間と同期・非同期の契約",
+      "origin": "U",
+      "user_refs": [
+        "U09",
+        "U10",
+        "U12"
+      ],
+      "explicit_intent": true,
+      "source_approved": false,
+      "source_acceptance_spec_approved": false,
+      "source_row_sha256": "a1ffde61f3ec8a094bd767dcf9764ebf51a3a9f937ec368065cbea1c1ed16f60",
+      "decisions": [
+        "Q-09"
+      ],
+      "proof_targets": [
+        "PT-05",
+        "PT-06",
+        "PT-15"
+      ],
+      "scenarios": [
+        "SC-06"
+      ],
+      "task_disposition": "related-scoped-evidence; requirement-not-accepted",
+      "adopted": false,
+      "demonstrated_requirement": false,
+      "evidence_groups": [
+        "network"
+      ],
+      "remaining_boundary": "Existing owner-budget QUIC cases exercise deadline/attempt distinctions; general clock-domain/lease contract remains open."
+    },
+    {
+      "id": "RL-06",
+      "title": "高頻度提示と意味の分離",
+      "origin": "U",
+      "user_refs": [
+        "U08",
+        "U11"
+      ],
+      "explicit_intent": true,
+      "source_approved": false,
+      "source_acceptance_spec_approved": false,
+      "source_row_sha256": "40b16b78e98c3c926f2782a18d23d18a4111c87f05fa32d9e2f93d65d165c983",
+      "decisions": [
+        "Q-10"
+      ],
+      "proof_targets": [
+        "PT-05",
+        "PT-06",
+        "PT-15"
+      ],
+      "scenarios": [
+        "SC-05",
+        "SC-06"
+      ],
+      "task_disposition": "open; no integrated task evidence",
+      "adopted": false,
+      "demonstrated_requirement": false,
+      "evidence_groups": [],
+      "remaining_boundary": "No presentation interpolation policy or continuity guarantee adopted."
+    },
+    {
+      "id": "RL-07",
+      "title": "近似と誤差の契約",
+      "origin": "D",
+      "user_refs": [
+        "U08",
+        "U17"
+      ],
+      "explicit_intent": false,
+      "source_approved": false,
+      "source_acceptance_spec_approved": false,
+      "source_row_sha256": "b0f3347ee62d62f1f7b27edd9f402ef74c2a1d28192ba7c8442d64a36a59a9ea",
+      "decisions": [
+        "Q-10"
+      ],
+      "proof_targets": [
+        "PT-05",
+        "PT-06",
+        "PT-15"
+      ],
+      "scenarios": [
+        "SC-06"
+      ],
+      "task_disposition": "open; no integrated task evidence",
+      "adopted": false,
+      "demonstrated_requirement": false,
+      "evidence_groups": [],
+      "remaining_boundary": "Approximation, units and coordinate conversion profile remains unselected."
+    },
+    {
+      "id": "DS-01",
+      "title": "配置と通信の由来",
+      "origin": "U",
+      "user_refs": [
+        "U01",
+        "U12"
+      ],
+      "explicit_intent": true,
+      "source_approved": false,
+      "source_acceptance_spec_approved": false,
+      "source_row_sha256": "cf3464b78141a0d9569195e7781cbcfd418c71930b5df75044be1210d2b7d087",
+      "decisions": [],
+      "proof_targets": [
+        "PT-03",
+        "PT-07",
+        "PT-08"
+      ],
+      "scenarios": [
+        "SC-01"
+      ],
+      "task_disposition": "related-scoped-evidence; requirement-not-accepted",
+      "adopted": false,
+      "demonstrated_requirement": false,
+      "evidence_groups": [
+        "source",
+        "network"
+      ],
+      "remaining_boundary": "Finite source correspondence and actual fixed-profile QUIC; general projector/runtime/codec refinement remains open."
+    },
+    {
+      "id": "DS-02",
+      "title": "因果・並行・memory order",
+      "origin": "U",
+      "user_refs": [
+        "U04",
+        "U09"
+      ],
+      "explicit_intent": true,
+      "source_approved": false,
+      "source_acceptance_spec_approved": false,
+      "source_row_sha256": "b5d91e5a49df48f4b11956148a47dd6c611e3755e3d488a1434779dccbfe589f",
+      "decisions": [
+        "Q-02"
+      ],
+      "proof_targets": [
+        "PT-03",
+        "PT-07",
+        "PT-08"
+      ],
+      "scenarios": [
+        "SC-07"
+      ],
+      "task_disposition": "related-scoped-evidence; requirement-not-accepted",
+      "adopted": false,
+      "demonstrated_requirement": false,
+      "evidence_groups": [
+        "network"
+      ],
+      "remaining_boundary": "QUIC stream ordering is not semantic memory-order evidence; higher-level concurrency profile remains open."
+    },
+    {
+      "id": "DS-03",
+      "title": "要求の同一性と結果の状態",
+      "origin": "D",
+      "user_refs": [
+        "U09",
+        "U11"
+      ],
+      "explicit_intent": false,
+      "source_approved": false,
+      "source_acceptance_spec_approved": false,
+      "source_row_sha256": "3dff7301cd5e94e7729575c015d187ac809f14198d46e45b8a6d8be4b60a7b00",
+      "decisions": [],
+      "proof_targets": [
+        "PT-03",
+        "PT-07",
+        "PT-08"
+      ],
+      "scenarios": [
+        "SC-07"
+      ],
+      "task_disposition": "related-scoped-evidence; requirement-not-accepted",
+      "adopted": false,
+      "demonstrated_requirement": false,
+      "evidence_groups": [
+        "dispatch"
+      ],
+      "remaining_boundary": "Reservation, actual effect and acknowledgement are separated; durable remote result/consumption binding remains open."
+    },
+    {
+      "id": "DS-04",
+      "title": "再試行・重複・忘却",
+      "origin": "D",
+      "user_refs": [
+        "U09",
+        "U14"
+      ],
+      "explicit_intent": false,
+      "source_approved": false,
+      "source_acceptance_spec_approved": false,
+      "source_row_sha256": "ac90240a3f0578f96af040cf4ed01fd6b72fdef00e840bc0eedb1831b7360d16",
+      "decisions": [
+        "Q-11"
+      ],
+      "proof_targets": [
+        "PT-03",
+        "PT-07",
+        "PT-08"
+      ],
+      "scenarios": [
+        "SC-07"
+      ],
+      "task_disposition": "related-scoped-evidence; requirement-not-accepted",
+      "adopted": false,
+      "demonstrated_requirement": false,
+      "evidence_groups": [
+        "dispatch"
+      ],
+      "remaining_boundary": "General no-second-dispatch under retained history; rollback/forget controls duplicate. Current authority and safe history reclamation remain open."
+    },
+    {
+      "id": "DS-05",
+      "title": "継続・並列子処理・取消し",
+      "origin": "D",
+      "user_refs": [
+        "U08",
+        "U09",
+        "U12"
+      ],
+      "explicit_intent": false,
+      "source_approved": false,
+      "source_acceptance_spec_approved": false,
+      "source_row_sha256": "5aec5f8e6c6c02432e4e941580d4a5aba855c90a389a8bf2320e6036b9278158",
+      "decisions": [
+        "Q-12"
+      ],
+      "proof_targets": [
+        "PT-03",
+        "PT-07",
+        "PT-08"
+      ],
+      "scenarios": [
+        "SC-08"
+      ],
+      "task_disposition": "open; no integrated task evidence",
+      "adopted": false,
+      "demonstrated_requirement": false,
+      "evidence_groups": [],
+      "remaining_boundary": "Spawn/join, continuation failure and cancellation remain unintegrated; no cancellation-as-nonexecution claim."
+    },
+    {
+      "id": "DS-06",
+      "title": "条件付きの進行性",
+      "origin": "D",
+      "user_refs": [
+        "U12",
+        "U14",
+        "U17"
+      ],
+      "explicit_intent": false,
+      "source_approved": false,
+      "source_acceptance_spec_approved": false,
+      "source_row_sha256": "3f8c21f8051cfa062b3d2fd7d5e0aadc686272f55be2f623ac75f69cd068624b",
+      "decisions": [
+        "Q-13"
+      ],
+      "proof_targets": [
+        "PT-03",
+        "PT-07",
+        "PT-08"
+      ],
+      "scenarios": [
+        "SC-08"
+      ],
+      "task_disposition": "related-scoped-evidence; requirement-not-accepted",
+      "adopted": false,
+      "demonstrated_requirement": false,
+      "evidence_groups": [
+        "dispatch",
+        "pure"
+      ],
+      "remaining_boundary": "Fresh dispatch completion and pure normalization are conditional; fair distributed termination or availability is not proved."
+    },
+    {
+      "id": "DS-07",
+      "title": "複数ownerの不変条件",
+      "origin": "D",
+      "user_refs": [
+        "U07",
+        "U12"
+      ],
+      "explicit_intent": false,
+      "source_approved": false,
+      "source_acceptance_spec_approved": false,
+      "source_row_sha256": "9757d3c31794d8093afbf35c9957f1072e59e689f9bb032e8ed5faae778739ba",
+      "decisions": [
+        "Q-02"
+      ],
+      "proof_targets": [
+        "PT-03",
+        "PT-07",
+        "PT-08"
+      ],
+      "scenarios": [
+        "SC-09"
+      ],
+      "task_disposition": "related-scoped-evidence; requirement-not-accepted",
+      "adopted": false,
+      "demonstrated_requirement": false,
+      "evidence_groups": [
+        "resource"
+      ],
+      "remaining_boundary": "Local move/split invariant is not a distributed multi-owner transfer protocol."
+    },
+    {
+      "id": "DS-08",
+      "title": "容量・隔離と失敗の全経路",
+      "origin": "D",
+      "user_refs": [
+        "U09",
+        "U11"
+      ],
+      "explicit_intent": false,
+      "source_approved": false,
+      "source_acceptance_spec_approved": false,
+      "source_row_sha256": "b0c16eb5416fcd1e593bb305ebf46838d12912e6b3b8f1dc794116d0d82e5920",
+      "decisions": [],
+      "proof_targets": [
+        "PT-03",
+        "PT-07",
+        "PT-08"
+      ],
+      "scenarios": [
+        "SC-07"
+      ],
+      "task_disposition": "related-scoped-evidence; requirement-not-accepted",
+      "adopted": false,
+      "demonstrated_requirement": false,
+      "evidence_groups": [
+        "network",
+        "dispatch"
+      ],
+      "remaining_boundary": "Bounded reference journal and existing admission rejection; probe stdout queue is unbounded, so complete capacity closure is not established."
+    },
+    {
+      "id": "EF-01",
+      "title": "型付き効果と継続",
+      "origin": "U",
+      "user_refs": [
+        "U09"
+      ],
+      "explicit_intent": true,
+      "source_approved": false,
+      "source_acceptance_spec_approved": false,
+      "source_row_sha256": "36976a4e684499f3ee4120ebb932fb542ed5be731a8cd3c351b7344b6e40fe91",
+      "decisions": [
+        "Q-14"
+      ],
+      "proof_targets": [
+        "PT-09",
+        "PT-03"
+      ],
+      "scenarios": [
+        "SC-10"
+      ],
+      "task_disposition": "open; no integrated task evidence",
+      "adopted": false,
+      "demonstrated_requirement": false,
+      "evidence_groups": [],
+      "remaining_boundary": "Existing typed provider boundary was read; general continuation lifetime/use-count theory remains open."
+    },
+    {
+      "id": "EF-02",
+      "title": "handlerの合成・交換",
+      "origin": "U",
+      "user_refs": [
+        "U09",
+        "U14"
+      ],
+      "explicit_intent": true,
+      "source_approved": false,
+      "source_acceptance_spec_approved": false,
+      "source_row_sha256": "b5753f5322d6fb487d630ed1b54de75bb66d87a51e4b02460188dc31f072adce",
+      "decisions": [
+        "Q-14"
+      ],
+      "proof_targets": [
+        "PT-09",
+        "PT-03"
+      ],
+      "scenarios": [
+        "SC-10"
+      ],
+      "task_disposition": "open; no integrated task evidence",
+      "adopted": false,
+      "demonstrated_requirement": false,
+      "evidence_groups": [],
+      "remaining_boundary": "Handler composition/exchange theory is not integrated."
+    },
+    {
+      "id": "EF-03",
+      "title": "providerの型と権限の境界",
+      "origin": "U",
+      "user_refs": [
+        "U08",
+        "U09"
+      ],
+      "explicit_intent": true,
+      "source_approved": false,
+      "source_acceptance_spec_approved": false,
+      "source_row_sha256": "448a1fc8ea59385b6e4b487539019648fe98a6d9d523a17b98c57e5e32a4c1ca",
+      "decisions": [],
+      "proof_targets": [
+        "PT-09",
+        "PT-03"
+      ],
+      "scenarios": [
+        "SC-10"
+      ],
+      "task_disposition": "related-scoped-evidence; requirement-not-accepted",
+      "adopted": false,
+      "demonstrated_requirement": false,
+      "evidence_groups": [
+        "network"
+      ],
+      "remaining_boundary": "Provider authorization, invocation and outcome are distinct in existing fixed profile; general provider refinement remains open."
+    },
+    {
+      "id": "EF-04",
+      "title": "外界作用と不確定な完了",
+      "origin": "D",
+      "user_refs": [
+        "U09",
+        "U10"
+      ],
+      "explicit_intent": false,
+      "source_approved": false,
+      "source_acceptance_spec_approved": false,
+      "source_row_sha256": "0a41fb893edff8f020cfcf0a470511bad4f90be341d0b9179b2e992399454bce",
+      "decisions": [],
+      "proof_targets": [
+        "PT-09",
+        "PT-03"
+      ],
+      "scenarios": [
+        "SC-10",
+        "SC-14",
+        "SC-18"
+      ],
+      "task_disposition": "related-scoped-evidence; requirement-not-accepted",
+      "adopted": false,
+      "demonstrated_requirement": false,
+      "evidence_groups": [
+        "dispatch"
+      ],
+      "remaining_boundary": "Durable-reservation-before-callback and unknown-after-effect controls; external remote effect atomicity is not proved."
+    },
+    {
+      "id": "EF-05",
+      "title": "乱数・時刻・近似の供給",
+      "origin": "D",
+      "user_refs": [
+        "U08",
+        "U09"
+      ],
+      "explicit_intent": false,
+      "source_approved": false,
+      "source_acceptance_spec_approved": false,
+      "source_row_sha256": "f7cc690187ff11e1cd27a74e1777299c7068810127f7ab8bcfcfec84e370ba5d",
+      "decisions": [],
+      "proof_targets": [
+        "PT-09",
+        "PT-03"
+      ],
+      "scenarios": [
+        "SC-10"
+      ],
+      "task_disposition": "open; no integrated task evidence",
+      "adopted": false,
+      "demonstrated_requirement": false,
+      "evidence_groups": [],
+      "remaining_boundary": "No general nondeterministic input/recording or approximation profile adopted."
+    },
+    {
+      "id": "EF-06",
+      "title": "補償はrollbackと同義ではない",
+      "origin": "D",
+      "user_refs": [
+        "U09",
+        "U10"
+      ],
+      "explicit_intent": false,
+      "source_approved": false,
+      "source_acceptance_spec_approved": false,
+      "source_row_sha256": "0d1f2b27f27c5dc4d9feec1aae14bf83d94a5dc8c97bffb9a6afc4a39c012a48",
+      "decisions": [
+        "Q-15"
+      ],
+      "proof_targets": [
+        "PT-09",
+        "PT-03"
+      ],
+      "scenarios": [
+        "SC-10"
+      ],
+      "task_disposition": "open; no integrated task evidence",
+      "adopted": false,
+      "demonstrated_requirement": false,
+      "evidence_groups": [],
+      "remaining_boundary": "No compensation protocol proved or implemented; rollback is not inferred."
+    },
+    {
+      "id": "AU-01",
+      "title": "認証・認可・検証の分離",
+      "origin": "U",
+      "user_refs": [
+        "U06",
+        "U07"
+      ],
+      "explicit_intent": true,
+      "source_approved": false,
+      "source_acceptance_spec_approved": false,
+      "source_row_sha256": "8229070b36538408240b220db952d9623a256df901d6a32ce085cc8fb2d1bbbb",
+      "decisions": [],
+      "proof_targets": [
+        "PT-10",
+        "PT-11"
+      ],
+      "scenarios": [
+        "SC-04",
+        "SC-19"
+      ],
+      "task_disposition": "related-scoped-evidence; requirement-not-accepted",
+      "adopted": false,
+      "demonstrated_requirement": false,
+      "evidence_groups": [
+        "current"
+      ],
+      "remaining_boundary": "Proof validity and module/resource authority remain separate; no cryptographic authentication theorem."
+    },
+    {
+      "id": "AU-02",
+      "title": "複数認証・policy層の合成",
+      "origin": "U",
+      "user_refs": [
+        "U06"
+      ],
+      "explicit_intent": true,
+      "source_approved": false,
+      "source_acceptance_spec_approved": false,
+      "source_row_sha256": "7c11b3ad5a555339c5b130743726f7511b605a1c406112324028f9bedb93df41",
+      "decisions": [
+        "Q-16"
+      ],
+      "proof_targets": [
+        "PT-10",
+        "PT-11"
+      ],
+      "scenarios": [
+        "SC-04",
+        "SC-24"
+      ],
+      "task_disposition": "related-scoped-evidence; requirement-not-accepted",
+      "adopted": false,
+      "demonstrated_requirement": false,
+      "evidence_groups": [
+        "current",
+        "frame"
+      ],
+      "remaining_boundary": "Same request/context and independent resource grant checks; witness-frame counterexample shows one layer cannot authorize the whole call."
+    },
+    {
+      "id": "AU-03",
+      "title": "admission依存と複数の管理主体",
+      "origin": "U",
+      "user_refs": [
+        "U04",
+        "U12"
+      ],
+      "explicit_intent": true,
+      "source_approved": false,
+      "source_acceptance_spec_approved": false,
+      "source_row_sha256": "71c85bfb46485c2aa340faf9bfb1af49c75469543b1a3516ab5470a0e44ef9f2",
+      "decisions": [
+        "Q-05",
+        "Q-17"
+      ],
+      "proof_targets": [
+        "PT-10",
+        "PT-11"
+      ],
+      "scenarios": [
+        "SC-04",
+        "SC-05"
+      ],
+      "task_disposition": "related-scoped-evidence; requirement-not-accepted",
+      "adopted": false,
+      "demonstrated_requirement": false,
+      "evidence_groups": [
+        "support"
+      ],
+      "remaining_boundary": "Locus support is separate from transport topology; actual multi-root/multi-parent admission integration remains open."
+    },
+    {
+      "id": "AU-04",
+      "title": "使用時再検査と失効",
+      "origin": "U",
+      "user_refs": [
+        "U06",
+        "U14"
+      ],
+      "explicit_intent": true,
+      "source_approved": false,
+      "source_acceptance_spec_approved": false,
+      "source_row_sha256": "9939769d445429e7223753e2fa896a059265e793a1491677630b48c8fa6a165e",
+      "decisions": [
+        "Q-18"
+      ],
+      "proof_targets": [
+        "PT-10",
+        "PT-11"
+      ],
+      "scenarios": [
+        "SC-04",
+        "SC-07"
+      ],
+      "task_disposition": "related-scoped-evidence; requirement-not-accepted",
+      "adopted": false,
+      "demonstrated_requirement": false,
+      "evidence_groups": [
+        "current",
+        "frame"
+      ],
+      "remaining_boundary": "Used witness revocation rejects, unrelated revocation preserves only fixed context/policy inputs; live authority acquisition and queued physical race remain open."
+    },
+    {
+      "id": "AU-05",
+      "title": "層の追加・削除・交換",
+      "origin": "U",
+      "user_refs": [
+        "U06",
+        "U14"
+      ],
+      "explicit_intent": true,
+      "source_approved": false,
+      "source_acceptance_spec_approved": false,
+      "source_row_sha256": "2c6f1a64eac7508d1517d358870e055905c479bb7e337d6df13b27e7251372ab",
+      "decisions": [
+        "Q-16",
+        "Q-18"
+      ],
+      "proof_targets": [
+        "PT-10",
+        "PT-11"
+      ],
+      "scenarios": [
+        "SC-04"
+      ],
+      "task_disposition": "related-scoped-evidence; requirement-not-accepted",
+      "adopted": false,
+      "demonstrated_requirement": false,
+      "evidence_groups": [
+        "current"
+      ],
+      "remaining_boundary": "Contract/context changes invalidate candidate evidence; transparent/nontransparent live module exchange is not implemented."
+    },
+    {
+      "id": "AU-06",
+      "title": "認証・認可モジュールの形式保証",
+      "origin": "U",
+      "user_refs": [
+        "U06"
+      ],
+      "explicit_intent": true,
+      "source_approved": false,
+      "source_acceptance_spec_approved": false,
+      "source_row_sha256": "3f7a9aa15e4e0e4264e9ae1b075889d82ae93688b9cb58602a9547d2bd515821",
+      "decisions": [],
+      "proof_targets": [
+        "PT-10",
+        "PT-11"
+      ],
+      "scenarios": [
+        "SC-04"
+      ],
+      "task_disposition": "related-scoped-evidence; requirement-not-accepted",
+      "adopted": false,
+      "demonstrated_requirement": false,
+      "evidence_groups": [
+        "current"
+      ],
+      "remaining_boundary": "Independent declarative/algorithmic witness checks and exactness for bounded expression language; not arbitrary authentication module soundness."
+    },
+    {
+      "id": "AU-07",
+      "title": "信頼域間の対応と委譲",
+      "origin": "D",
+      "user_refs": [
+        "U06",
+        "U12",
+        "U13"
+      ],
+      "explicit_intent": false,
+      "source_approved": false,
+      "source_acceptance_spec_approved": false,
+      "source_row_sha256": "ee7c0050b555effeaa1785d78fc99770380dd2a448b971cde8d81c2f259645c4",
+      "decisions": [
+        "Q-17"
+      ],
+      "proof_targets": [
+        "PT-10",
+        "PT-11"
+      ],
+      "scenarios": [
+        "SC-04",
+        "SC-22"
+      ],
+      "task_disposition": "open; no integrated task evidence",
+      "adopted": false,
+      "demonstrated_requirement": false,
+      "evidence_groups": [],
+      "remaining_boundary": "Cross-trust-domain identity/delegation contract remains unselected."
+    },
+    {
+      "id": "AU-08",
+      "title": "初期信頼と鍵・制御の世代交代",
+      "origin": "D",
+      "user_refs": [
+        "U06",
+        "U14"
+      ],
+      "explicit_intent": false,
+      "source_approved": false,
+      "source_acceptance_spec_approved": false,
+      "source_row_sha256": "516b946a2f00658b8a31f7bb707e25568c1dc4f7f1f5c865d092c113a24e6cda",
+      "decisions": [
+        "Q-17",
+        "Q-20"
+      ],
+      "proof_targets": [
+        "PT-10",
+        "PT-11"
+      ],
+      "scenarios": [
+        "SC-04"
+      ],
+      "task_disposition": "related-scoped-evidence; requirement-not-accepted",
+      "adopted": false,
+      "demonstrated_requirement": false,
+      "evidence_groups": [
+        "images"
+      ],
+      "remaining_boundary": "Recovery-anchor counterexample demonstrates trusted current head cannot be synthesized from a valid image; owner keys/bootstrap/retirement remain open."
+    },
+    {
+      "id": "TY-01",
+      "title": "基礎型の宣言的・実行的対応",
+      "origin": "U",
+      "user_refs": [
+        "U05",
+        "U17"
+      ],
+      "explicit_intent": true,
+      "source_approved": false,
+      "source_acceptance_spec_approved": false,
+      "source_row_sha256": "6476852ffe9e5ab62c4cd0e2d722e10caed589bdb0f5a38bb4bcd80f7dd1ebff",
+      "decisions": [],
+      "proof_targets": [
+        "PT-01",
+        "PT-02",
+        "PT-12"
+      ],
+      "scenarios": [
+        "SC-02",
+        "SC-03"
+      ],
+      "task_disposition": "related-scoped-evidence; requirement-not-accepted",
+      "adopted": false,
+      "demonstrated_requirement": false,
+      "evidence_groups": [
+        "pure",
+        "proofs"
+      ],
+      "remaining_boundary": "Independent declarative and algorithmic rules with preservation for selected fragments; actual full language runtime safety remains open."
+    },
+    {
+      "id": "TY-02",
+      "title": "理論の局所導入と前提管理",
+      "origin": "U",
+      "user_refs": [
+        "U07"
+      ],
+      "explicit_intent": true,
+      "source_approved": false,
+      "source_acceptance_spec_approved": false,
+      "source_row_sha256": "0ae44ba744be8f0f625c76ce71de32f8c9270b22eab9c23e252a4d451a5afaa6",
+      "decisions": [
+        "Q-19"
+      ],
+      "proof_targets": [
+        "PT-01",
+        "PT-02",
+        "PT-12"
+      ],
+      "scenarios": [
+        "SC-03"
+      ],
+      "task_disposition": "related-scoped-evidence; requirement-not-accepted",
+      "adopted": false,
+      "demonstrated_requirement": false,
+      "evidence_groups": [
+        "contract"
+      ],
+      "remaining_boundary": "Candidate local theory interface makes premises/code/contract explicit; arbitrary local theory integration remains open."
+    },
+    {
+      "id": "TY-03",
+      "title": "検証手段と意味拡張の区別",
+      "origin": "U",
+      "user_refs": [
+        "U07",
+        "U09"
+      ],
+      "explicit_intent": true,
+      "source_approved": false,
+      "source_acceptance_spec_approved": false,
+      "source_row_sha256": "389e34ee28cb008efe40094ce0bc3e1bc5359c96d7975bb6b2a7fe03fbf08f5f",
+      "decisions": [],
+      "proof_targets": [
+        "PT-01",
+        "PT-02",
+        "PT-12"
+      ],
+      "scenarios": [
+        "SC-03"
+      ],
+      "task_disposition": "related-scoped-evidence; requirement-not-accepted",
+      "adopted": false,
+      "demonstrated_requirement": false,
+      "evidence_groups": [
+        "contract"
+      ],
+      "remaining_boundary": "Checker evidence is distinct from semantics extension; no new production syntax/effect added."
+    },
+    {
+      "id": "TY-04",
+      "title": "異なる局所理論の境界",
+      "origin": "U",
+      "user_refs": [
+        "U07"
+      ],
+      "explicit_intent": true,
+      "source_approved": false,
+      "source_acceptance_spec_approved": false,
+      "source_row_sha256": "cd0cf8fecdb33a45bebb472eec326470d4e997e0df7027580431644ef634fbcc",
+      "decisions": [],
+      "proof_targets": [
+        "PT-01",
+        "PT-02",
+        "PT-12"
+      ],
+      "scenarios": [
+        "SC-03",
+        "SC-24"
+      ],
+      "task_disposition": "related-scoped-evidence; requirement-not-accepted",
+      "adopted": false,
+      "demonstrated_requirement": false,
+      "evidence_groups": [
+        "contract",
+        "resource"
+      ],
+      "remaining_boundary": "Candidate verified contract exports and resource checks compose for selected interfaces; unrestricted cross-theory translation is not proved."
+    },
+    {
+      "id": "TY-05",
+      "title": "refinement・依存型的仕様",
+      "origin": "U",
+      "user_refs": [
+        "U05",
+        "U07"
+      ],
+      "explicit_intent": true,
+      "source_approved": false,
+      "source_acceptance_spec_approved": false,
+      "source_row_sha256": "699107329ed00c7fe1416912a90837edbdb0bdd990b332870a9ed9126580d494",
+      "decisions": [
+        "Q-19"
+      ],
+      "proof_targets": [
+        "PT-01",
+        "PT-02",
+        "PT-12"
+      ],
+      "scenarios": [
+        "SC-03"
+      ],
+      "task_disposition": "related-scoped-evidence; requirement-not-accepted",
+      "adopted": false,
+      "demonstrated_requirement": false,
+      "evidence_groups": [
+        "contract"
+      ],
+      "remaining_boundary": "Candidate value-dependent propositions tied to checked code; no final dependent type/equality/erasure system adopted."
+    },
+    {
+      "id": "TY-06",
+      "title": "様相と環境の対応",
+      "origin": "U",
+      "user_refs": [
+        "U07",
+        "U09"
+      ],
+      "explicit_intent": true,
+      "source_approved": false,
+      "source_acceptance_spec_approved": false,
+      "source_row_sha256": "aab1ddb5c63bc92daac100b58d95256c4613959a69b621ebcce2d4083f706438",
+      "decisions": [
+        "Q-19"
+      ],
+      "proof_targets": [
+        "PT-01",
+        "PT-02",
+        "PT-12"
+      ],
+      "scenarios": [
+        "SC-03"
+      ],
+      "task_disposition": "open; no integrated task evidence",
+      "adopted": false,
+      "demonstrated_requirement": false,
+      "evidence_groups": [],
+      "remaining_boundary": "General stage/place/time/stability modes are not integrated."
+    },
+    {
+      "id": "TY-07",
+      "title": "証拠の使用可能性と版",
+      "origin": "D",
+      "user_refs": [
+        "U07",
+        "U14"
+      ],
+      "explicit_intent": false,
+      "source_approved": false,
+      "source_acceptance_spec_approved": false,
+      "source_row_sha256": "e2ed561c7d5da0254a266039be68a4139f1bbef81e688deea16b1c4badf11911",
+      "decisions": [],
+      "proof_targets": [
+        "PT-01",
+        "PT-02",
+        "PT-12"
+      ],
+      "scenarios": [
+        "SC-03",
+        "SC-14",
+        "SC-17"
+      ],
+      "task_disposition": "related-scoped-evidence; requirement-not-accepted",
+      "adopted": false,
+      "demonstrated_requirement": false,
+      "evidence_groups": [
+        "current",
+        "contract"
+      ],
+      "remaining_boundary": "Code/contract/context identity checked at call; saved context alone does not establish current applicability."
+    },
+    {
+      "id": "TY-08",
+      "title": "理論実行の隔離と決定可能部分",
+      "origin": "D",
+      "user_refs": [
+        "U07",
+        "U17"
+      ],
+      "explicit_intent": false,
+      "source_approved": false,
+      "source_acceptance_spec_approved": false,
+      "source_row_sha256": "d9cc1fb93a72e55dd0e12e3b2a74b21cc7da8827d7212d600f720f0757cc5fa2",
+      "decisions": [
+        "Q-19"
+      ],
+      "proof_targets": [
+        "PT-01",
+        "PT-02",
+        "PT-12"
+      ],
+      "scenarios": [
+        "SC-03",
+        "SC-19"
+      ],
+      "task_disposition": "related-scoped-evidence; requirement-not-accepted",
+      "adopted": false,
+      "demonstrated_requirement": false,
+      "evidence_groups": [
+        "pure",
+        "resource"
+      ],
+      "remaining_boundary": "Finite bounded execution and decidable candidate checking; adversarial solver isolation and general Unknown handling remain open."
+    },
+    {
+      "id": "CT-01",
+      "title": "契約の語彙と監視範囲",
+      "origin": "U",
+      "user_refs": [
+        "U05",
+        "U07"
+      ],
+      "explicit_intent": true,
+      "source_approved": false,
+      "source_acceptance_spec_approved": false,
+      "source_row_sha256": "e92ca0e345e1dc5bb85febfb32bef792c991c01ff8e4c74da9dacc7a8dee8fa9",
+      "decisions": [],
+      "proof_targets": [
+        "PT-12",
+        "PT-13"
+      ],
+      "scenarios": [
+        "SC-03"
+      ],
+      "task_disposition": "related-scoped-evidence; requirement-not-accepted",
+      "adopted": false,
+      "demonstrated_requirement": false,
+      "evidence_groups": [
+        "contract"
+      ],
+      "remaining_boundary": "Candidate contract clauses and success conditions are separated; full failure/observation/lifetime vocabulary remains open."
+    },
+    {
+      "id": "CT-02",
+      "title": "証拠と実ソースの束縛",
+      "origin": "D",
+      "user_refs": [
+        "U05",
+        "U17"
+      ],
+      "explicit_intent": false,
+      "source_approved": false,
+      "source_acceptance_spec_approved": false,
+      "source_row_sha256": "f5a62ee5546fe907dfe602ecde0fbd6a27f859b2f63f79e63327a84431077cf1",
+      "decisions": [],
+      "proof_targets": [
+        "PT-12",
+        "PT-13"
+      ],
+      "scenarios": [
+        "SC-03"
+      ],
+      "task_disposition": "related-scoped-evidence; requirement-not-accepted",
+      "adopted": false,
+      "demonstrated_requirement": false,
+      "evidence_groups": [
+        "contract",
+        "source"
+      ],
+      "remaining_boundary": "Candidate checker binds actual expression and descriptors, plus finite actual-source evidence; general parser/VC provenance remains TCB."
+    },
+    {
+      "id": "CT-03",
+      "title": "全mutatorと環境干渉の閉包",
+      "origin": "D",
+      "user_refs": [
+        "U07",
+        "U14"
+      ],
+      "explicit_intent": false,
+      "source_approved": false,
+      "source_acceptance_spec_approved": false,
+      "source_row_sha256": "8f59757eace9c4ef1dd66bcb063e13bdd859547a514faf76099da3e3b52b8e40",
+      "decisions": [],
+      "proof_targets": [
+        "PT-12",
+        "PT-13"
+      ],
+      "scenarios": [
+        "SC-03",
+        "SC-09"
+      ],
+      "task_disposition": "related-scoped-evidence; requirement-not-accepted",
+      "adopted": false,
+      "demonstrated_requirement": false,
+      "evidence_groups": [
+        "resource",
+        "images"
+      ],
+      "remaining_boundary": "All listed candidate resource mutators/image decoders checked; whole repository writer/provider/patch closure is not proved."
+    },
+    {
+      "id": "CT-04",
+      "title": "部分正当性と成功範囲",
+      "origin": "D",
+      "user_refs": [
+        "U05",
+        "U17"
+      ],
+      "explicit_intent": false,
+      "source_approved": false,
+      "source_acceptance_spec_approved": false,
+      "source_row_sha256": "0b337f984179546c9b72c07cfa1b8881ca402c226365db2e6fbd59554c630afb",
+      "decisions": [],
+      "proof_targets": [
+        "PT-12",
+        "PT-13"
+      ],
+      "scenarios": [
+        "SC-03"
+      ],
+      "task_disposition": "related-scoped-evidence; requirement-not-accepted",
+      "adopted": false,
+      "demonstrated_requirement": false,
+      "evidence_groups": [
+        "pure",
+        "contract"
+      ],
+      "remaining_boundary": "Pure normalization and successful call postconditions are distinct from authority/capacity/network availability."
+    },
+    {
+      "id": "CT-05",
+      "title": "互換性と明示的な破壊的更新",
+      "origin": "U",
+      "user_refs": [
+        "U14"
+      ],
+      "explicit_intent": true,
+      "source_approved": false,
+      "source_acceptance_spec_approved": false,
+      "source_row_sha256": "e94096a3ea342542b9cc52dbb1c4ae3e282fd9bfb0a4ad4a01dc2afb8d5ab8c3",
+      "decisions": [
+        "Q-21"
+      ],
+      "proof_targets": [
+        "PT-12",
+        "PT-13"
+      ],
+      "scenarios": [
+        "SC-03",
+        "SC-12",
+        "SC-22"
+      ],
+      "task_disposition": "related-scoped-evidence; requirement-not-accepted",
+      "adopted": false,
+      "demonstrated_requirement": false,
+      "evidence_groups": [
+        "contract"
+      ],
+      "remaining_boundary": "Candidate code/contract identity and compatibility evidence; no public API/ABI/wire compatibility adoption."
+    },
+    {
+      "id": "VF-01",
+      "title": "保証対象と前提の明示",
+      "origin": "U",
+      "user_refs": [
+        "U05",
+        "U17"
+      ],
+      "explicit_intent": true,
+      "source_approved": false,
+      "source_acceptance_spec_approved": false,
+      "source_row_sha256": "25b5abde374e24ddc2d15cd9904ae1a50a3b5d1cdccbbce44d4b99b7b9bbd0e8",
+      "decisions": [],
+      "proof_targets": [
+        "PT-01",
+        "PT-02",
+        "PT-17",
+        "PT-18"
+      ],
+      "scenarios": [
+        "SC-02",
+        "SC-23"
+      ],
+      "task_disposition": "related-scoped-evidence; requirement-not-accepted",
+      "adopted": false,
+      "demonstrated_requirement": false,
+      "evidence_groups": [
+        "records"
+      ],
+      "remaining_boundary": "Scopes/assumptions/axioms retained per proof cut; does not close all 18 system guarantees."
+    },
+    {
+      "id": "VF-02",
+      "title": "相対完全性と表現力の別検査",
+      "origin": "U",
+      "user_refs": [
+        "U05",
+        "U17"
+      ],
+      "explicit_intent": true,
+      "source_approved": false,
+      "source_acceptance_spec_approved": false,
+      "source_row_sha256": "4579547653c7d0a2110f978534bea8b92d9904bccd76b36586c5d50f693fa5d3",
+      "decisions": [],
+      "proof_targets": [
+        "PT-01",
+        "PT-02",
+        "PT-17",
+        "PT-18"
+      ],
+      "scenarios": [
+        "SC-02",
+        "SC-15",
+        "SC-23"
+      ],
+      "task_disposition": "related-scoped-evidence; requirement-not-accepted",
+      "adopted": false,
+      "demonstrated_requirement": false,
+      "evidence_groups": [
+        "proofs"
+      ],
+      "remaining_boundary": "General relative exactness and positive/counterexample controls for selected fragments; all required source use cases remain open."
+    },
+    {
+      "id": "VF-03",
+      "title": "証明生成・検査・信頼の分離",
+      "origin": "D",
+      "user_refs": [
+        "U05",
+        "U07"
+      ],
+      "explicit_intent": false,
+      "source_approved": false,
+      "source_acceptance_spec_approved": false,
+      "source_row_sha256": "fa92dc126a82cfecbdabb70144cfa4bd9d22289a6dbf847a616d0e7d290dc30d",
+      "decisions": [],
+      "proof_targets": [
+        "PT-01",
+        "PT-02",
+        "PT-17",
+        "PT-18"
+      ],
+      "scenarios": [
+        "SC-03",
+        "SC-23"
+      ],
+      "task_disposition": "related-scoped-evidence; requirement-not-accepted",
+      "adopted": false,
+      "demonstrated_requirement": false,
+      "evidence_groups": [
+        "proofs"
+      ],
+      "remaining_boundary": "Lean4.29.1 trust0, axiom output, finite controls and mutations separately recorded; no custom theorem axiom or sorry accepted."
+    },
+    {
+      "id": "VF-04",
+      "title": "合成の保証を独立に示す",
+      "origin": "U",
+      "user_refs": [
+        "U04",
+        "U17"
+      ],
+      "explicit_intent": true,
+      "source_approved": false,
+      "source_acceptance_spec_approved": false,
+      "source_row_sha256": "7a30ec427618ad678bfa4aa4dbd98d45677d69fa4b060582101fdc50151f7def",
+      "decisions": [],
+      "proof_targets": [
+        "PT-01",
+        "PT-02",
+        "PT-17",
+        "PT-18"
+      ],
+      "scenarios": [
+        "SC-13",
+        "SC-23"
+      ],
+      "task_disposition": "related-scoped-evidence; requirement-not-accepted",
+      "adopted": false,
+      "demonstrated_requirement": false,
+      "evidence_groups": [
+        "contract"
+      ],
+      "remaining_boundary": "Several candidate boundaries are composed in one reference execution; whole-system composition remains open."
+    },
+    {
+      "id": "VF-05",
+      "title": "実装への意味保存",
+      "origin": "U",
+      "user_refs": [
+        "U01",
+        "U17"
+      ],
+      "explicit_intent": true,
+      "source_approved": false,
+      "source_acceptance_spec_approved": false,
+      "source_row_sha256": "b4f6e24a1dee86a073103000b7c8950845aaf453d6446c8b9af8020049857f48",
+      "decisions": [],
+      "proof_targets": [
+        "PT-01",
+        "PT-02",
+        "PT-17",
+        "PT-18"
+      ],
+      "scenarios": [
+        "SC-23"
+      ],
+      "task_disposition": "related-scoped-evidence; requirement-not-accepted",
+      "adopted": false,
+      "demonstrated_requirement": false,
+      "evidence_groups": [
+        "source"
+      ],
+      "remaining_boundary": "Finite actual-source result certificates; parser/checker/projector/runtime/codec/host remain unproved TCB links."
+    },
+    {
+      "id": "VF-06",
+      "title": "反例と改変検査",
+      "origin": "D",
+      "user_refs": [
+        "U17"
+      ],
+      "explicit_intent": false,
+      "source_approved": false,
+      "source_acceptance_spec_approved": false,
+      "source_row_sha256": "342b1e41e23d7a951a5d6247de9f1c7933f716eb5743ce4d1cce08b3cb58c121",
+      "decisions": [],
+      "proof_targets": [
+        "PT-01",
+        "PT-02",
+        "PT-17",
+        "PT-18"
+      ],
+      "scenarios": [
+        "SC-23"
+      ],
+      "task_disposition": "related-scoped-evidence; requirement-not-accepted",
+      "adopted": false,
+      "demonstrated_requirement": false,
+      "evidence_groups": [
+        "proofs"
+      ],
+      "remaining_boundary": "Mutants fail required general claims and concrete controls; these scoped checks are not all-system fault coverage."
+    },
+    {
+      "id": "VF-07",
+      "title": "証明と仕様意図の独立レビュー",
+      "origin": "D",
+      "user_refs": [
+        "U17",
+        "U18"
+      ],
+      "explicit_intent": false,
+      "source_approved": false,
+      "source_acceptance_spec_approved": false,
+      "source_row_sha256": "59d417f239424a2575b30d1ec9bf1d8598ad8cfc38f0df47e75efcb6864d9d86",
+      "decisions": [
+        "Q-22"
+      ],
+      "proof_targets": [
+        "PT-01",
+        "PT-02",
+        "PT-17",
+        "PT-18"
+      ],
+      "scenarios": [
+        "SC-03",
+        "SC-23"
+      ],
+      "task_disposition": "related-scoped-evidence; requirement-not-accepted",
+      "adopted": false,
+      "demonstrated_requirement": false,
+      "evidence_groups": [
+        "oracle"
+      ],
+      "remaining_boundary": "Independent Oracle review has not returned; failed original sessions retained and one actual-error recovery attempt active."
+    },
+    {
+      "id": "EV-01",
+      "title": "静的合成と動的合成",
+      "origin": "U",
+      "user_refs": [
+        "U04",
+        "U14"
+      ],
+      "explicit_intent": true,
+      "source_approved": false,
+      "source_acceptance_spec_approved": false,
+      "source_row_sha256": "a5f1ce16c248822050186f4ebbd5d6b9150a2b0d0ea1963c11fb84811c01690e",
+      "decisions": [],
+      "proof_targets": [
+        "PT-04",
+        "PT-11",
+        "PT-13",
+        "PT-14"
+      ],
+      "scenarios": [
+        "SC-11",
+        "SC-24"
+      ],
+      "task_disposition": "related-scoped-evidence; requirement-not-accepted",
+      "adopted": false,
+      "demonstrated_requirement": false,
+      "evidence_groups": [
+        "contract"
+      ],
+      "remaining_boundary": "Candidate module insertions preserve registry conditions; ordinary-source live construction with history/in-flight state remains open."
+    },
+    {
+      "id": "EV-02",
+      "title": "patch依存DAGのライフサイクル",
+      "origin": "U",
+      "user_refs": [
+        "U04"
+      ],
+      "explicit_intent": true,
+      "source_approved": false,
+      "source_acceptance_spec_approved": false,
+      "source_row_sha256": "2f4a0a1b1f922fd53617897b03eddbb1d24c3fb59e2908a6ddeeaa54e027054a",
+      "decisions": [],
+      "proof_targets": [
+        "PT-04",
+        "PT-11",
+        "PT-13",
+        "PT-14"
+      ],
+      "scenarios": [
+        "SC-11"
+      ],
+      "task_disposition": "related-scoped-evidence; requirement-not-accepted",
+      "adopted": false,
+      "demonstrated_requirement": false,
+      "evidence_groups": [
+        "support"
+      ],
+      "remaining_boundary": "Candidate dependency/support evidence; not source-driven patch graph lifecycle implementation."
+    },
+    {
+      "id": "EV-03",
+      "title": "変更種類の区別",
+      "origin": "U",
+      "user_refs": [
+        "U14"
+      ],
+      "explicit_intent": true,
+      "source_approved": false,
+      "source_acceptance_spec_approved": false,
+      "source_row_sha256": "09fe5617d7bb438a7fcc84a7147542b0d276c6a117d4774e051b719068653c99",
+      "decisions": [
+        "Q-23"
+      ],
+      "proof_targets": [
+        "PT-04",
+        "PT-11",
+        "PT-13",
+        "PT-14"
+      ],
+      "scenarios": [
+        "SC-11"
+      ],
+      "task_disposition": "open; no integrated task evidence",
+      "adopted": false,
+      "demonstrated_requirement": false,
+      "evidence_groups": [],
+      "remaining_boundary": "Change classes remain distinct; no unified migration/relocation/update implementation adopted."
+    },
+    {
+      "id": "EV-04",
+      "title": "検査・認可・activation",
+      "origin": "U",
+      "user_refs": [
+        "U14"
+      ],
+      "explicit_intent": true,
+      "source_approved": false,
+      "source_acceptance_spec_approved": false,
+      "source_row_sha256": "d1fdc3b449c60c913ed460ec0bb5175e7ab1e7b73fb380edd3b20ea7a4dac579",
+      "decisions": [],
+      "proof_targets": [
+        "PT-04",
+        "PT-11",
+        "PT-13",
+        "PT-14"
+      ],
+      "scenarios": [
+        "SC-12"
+      ],
+      "task_disposition": "related-scoped-evidence; requirement-not-accepted",
+      "adopted": false,
+      "demonstrated_requirement": false,
+      "evidence_groups": [
+        "current"
+      ],
+      "remaining_boundary": "Candidate checked authorization precedes atomic model use; physical activation/Q-18 reservation versus commit reauthorization remains unresolved."
+    },
+    {
+      "id": "EV-05",
+      "title": "依存stampと影響範囲",
+      "origin": "D",
+      "user_refs": [
+        "U14",
+        "U17"
+      ],
+      "explicit_intent": false,
+      "source_approved": false,
+      "source_acceptance_spec_approved": false,
+      "source_row_sha256": "dc5dc42eaa7b05303b1018b0d8c7ebbc013e32919f763b779912d03d045401f3",
+      "decisions": [
+        "Q-24"
+      ],
+      "proof_targets": [
+        "PT-04",
+        "PT-11",
+        "PT-13",
+        "PT-14"
+      ],
+      "scenarios": [
+        "SC-12",
+        "SC-13"
+      ],
+      "task_disposition": "related-scoped-evidence; requirement-not-accepted",
+      "adopted": false,
+      "demonstrated_requirement": false,
+      "evidence_groups": [
+        "current",
+        "contract"
+      ],
+      "remaining_boundary": "Candidate evidence identity and tracked dependencies include more than values; whole actual mutator stamp closure remains open."
+    },
+    {
+      "id": "EV-06",
+      "title": "局所停止と未完了処理",
+      "origin": "D",
+      "user_refs": [
+        "U14"
+      ],
+      "explicit_intent": false,
+      "source_approved": false,
+      "source_acceptance_spec_approved": false,
+      "source_row_sha256": "f09725d92d66759c4883938631a030ebdc449ec1885787a027fde9f5397e6bd8",
+      "decisions": [
+        "Q-12",
+        "Q-23"
+      ],
+      "proof_targets": [
+        "PT-04",
+        "PT-11",
+        "PT-13",
+        "PT-14"
+      ],
+      "scenarios": [
+        "SC-12"
+      ],
+      "task_disposition": "open; no integrated task evidence",
+      "adopted": false,
+      "demonstrated_requirement": false,
+      "evidence_groups": [],
+      "remaining_boundary": "Scoped quiescence and old continuation/fence ownership remain unintegrated."
+    },
+    {
+      "id": "EV-07",
+      "title": "分散activationと障害",
+      "origin": "U",
+      "user_refs": [
+        "U04",
+        "U14"
+      ],
+      "explicit_intent": true,
+      "source_approved": false,
+      "source_acceptance_spec_approved": false,
+      "source_row_sha256": "dba183835d98dec52d19f6799a41a40ffd726eedf0ed376176a122620f473c92",
+      "decisions": [
+        "Q-13",
+        "Q-18"
+      ],
+      "proof_targets": [
+        "PT-04",
+        "PT-11",
+        "PT-13",
+        "PT-14"
+      ],
+      "scenarios": [
+        "SC-12",
+        "SC-14"
+      ],
+      "task_disposition": "related-scoped-evidence; requirement-not-accepted",
+      "adopted": false,
+      "demonstrated_requirement": false,
+      "evidence_groups": [
+        "dispatch"
+      ],
+      "remaining_boundary": "Local durable dispatch is not distributed activation/recovery; distributed agreement protocol remains open."
+    },
+    {
+      "id": "EV-08",
+      "title": "保証・理論・policyの更新",
+      "origin": "U",
+      "user_refs": [
+        "U06",
+        "U07",
+        "U14"
+      ],
+      "explicit_intent": true,
+      "source_approved": false,
+      "source_acceptance_spec_approved": false,
+      "source_row_sha256": "c32b2cd8c35286a04eee255a39c80d6f7244b750973769c21b72accf52913cf4",
+      "decisions": [],
+      "proof_targets": [
+        "PT-04",
+        "PT-11",
+        "PT-13",
+        "PT-14"
+      ],
+      "scenarios": [
+        "SC-04"
+      ],
+      "task_disposition": "related-scoped-evidence; requirement-not-accepted",
+      "adopted": false,
+      "demonstrated_requirement": false,
+      "evidence_groups": [
+        "current",
+        "frame"
+      ],
+      "remaining_boundary": "Evidence invalidation/revalidation scoped to existing policy model; full live theory/policy replacement remains open."
+    },
+    {
+      "id": "EV-09",
+      "title": "撤去・廃止・回収と継続性",
+      "origin": "U",
+      "user_refs": [
+        "U14"
+      ],
+      "explicit_intent": true,
+      "source_approved": false,
+      "source_acceptance_spec_approved": false,
+      "source_row_sha256": "9176142e2a3a8a1fea70d64f1d7179e874bf995c56aefdf349e97942d2ce2f2b",
+      "decisions": [
+        "Q-21",
+        "Q-25"
+      ],
+      "proof_targets": [
+        "PT-04",
+        "PT-11",
+        "PT-13",
+        "PT-14"
+      ],
+      "scenarios": [
+        "SC-11",
+        "SC-21"
+      ],
+      "task_disposition": "related-scoped-evidence; requirement-not-accepted",
+      "adopted": false,
+      "demonstrated_requirement": false,
+      "evidence_groups": [
+        "resource"
+      ],
+      "remaining_boundary": "Released resource slots handled; safe old code/history/request reclamation and source withdrawal remain open."
+    },
+    {
+      "id": "EV-10",
+      "title": "任意有限回の進化",
+      "origin": "D",
+      "user_refs": [
+        "U14",
+        "U17"
+      ],
+      "explicit_intent": false,
+      "source_approved": false,
+      "source_acceptance_spec_approved": false,
+      "source_row_sha256": "3d9b35f47eac47abcc514d1288f730b8a044999779594de6f4d9dac007125b73",
+      "decisions": [],
+      "proof_targets": [
+        "PT-04",
+        "PT-11",
+        "PT-13",
+        "PT-14"
+      ],
+      "scenarios": [
+        "SC-12"
+      ],
+      "task_disposition": "related-scoped-evidence; requirement-not-accepted",
+      "adopted": false,
+      "demonstrated_requirement": false,
+      "evidence_groups": [
+        "support",
+        "resource",
+        "dispatch"
+      ],
+      "remaining_boundary": "General finite prefixes for separate listed machines; not one theorem over all execute/update/recovery paths."
+    },
+    {
+      "id": "SV-01",
+      "title": "cutとchannel state",
+      "origin": "U",
+      "user_refs": [
+        "U10"
+      ],
+      "explicit_intent": true,
+      "source_approved": false,
+      "source_acceptance_spec_approved": false,
+      "source_row_sha256": "c44730f464ea66135bee7fe9a40415ef50cb9e07fb64febff7a00c1da1afb124",
+      "decisions": [],
+      "proof_targets": [
+        "PT-14",
+        "PT-16"
+      ],
+      "scenarios": [
+        "SC-14",
+        "SC-15"
+      ],
+      "task_disposition": "related-scoped-evidence; requirement-not-accepted",
+      "adopted": false,
+      "demonstrated_requirement": false,
+      "evidence_groups": [
+        "images"
+      ],
+      "remaining_boundary": "Existing local-cut/snapshot tests and candidate image checks; no complete distributed channel checkpoint composition."
+    },
+    {
+      "id": "SV-02",
+      "title": "状態・決定・継続の永続化",
+      "origin": "D",
+      "user_refs": [
+        "U10",
+        "U14"
+      ],
+      "explicit_intent": false,
+      "source_approved": false,
+      "source_acceptance_spec_approved": false,
+      "source_row_sha256": "07d02284a1fd76733b16cc18ea75e9ee69431705e957dd9c2991937c72a152da",
+      "decisions": [],
+      "proof_targets": [
+        "PT-14",
+        "PT-16"
+      ],
+      "scenarios": [
+        "SC-14"
+      ],
+      "task_disposition": "related-scoped-evidence; requirement-not-accepted",
+      "adopted": false,
+      "demonstrated_requirement": false,
+      "evidence_groups": [
+        "images",
+        "dispatch"
+      ],
+      "remaining_boundary": "Resource/history image and synced reservation controls; whole-state/code/continuation atomic persistence remains open."
+    },
+    {
+      "id": "SV-03",
+      "title": "全componentのcheckpoint参加",
+      "origin": "D",
+      "user_refs": [
+        "U10",
+        "U17"
+      ],
+      "explicit_intent": false,
+      "source_approved": false,
+      "source_acceptance_spec_approved": false,
+      "source_row_sha256": "9d0025b336c129a172dddc2c4b6ca70fec75ae35c39a5ecdadd1fe015c1636ba",
+      "decisions": [],
+      "proof_targets": [
+        "PT-14",
+        "PT-16"
+      ],
+      "scenarios": [
+        "SC-14",
+        "SC-24"
+      ],
+      "task_disposition": "related-scoped-evidence; requirement-not-accepted",
+      "adopted": false,
+      "demonstrated_requirement": false,
+      "evidence_groups": [
+        "images"
+      ],
+      "remaining_boundary": "F0.3 complete-image model rerun is finite evidence; all real runtime components do not yet participate in durable recovery."
+    },
+    {
+      "id": "SV-04",
+      "title": "現在世界への復帰とfresh import",
+      "origin": "U",
+      "user_refs": [
+        "U10",
+        "U14"
+      ],
+      "explicit_intent": true,
+      "source_approved": false,
+      "source_acceptance_spec_approved": false,
+      "source_row_sha256": "bae42504b07f199ec509ef7bf7d3e603263c496745499ac8420eb4ce750a34cc",
+      "decisions": [
+        "Q-20"
+      ],
+      "proof_targets": [
+        "PT-14",
+        "PT-16"
+      ],
+      "scenarios": [
+        "SC-14",
+        "SC-18"
+      ],
+      "task_disposition": "related-scoped-evidence; requirement-not-accepted",
+      "adopted": false,
+      "demonstrated_requirement": false,
+      "evidence_groups": [
+        "images"
+      ],
+      "remaining_boundary": "Fresh import, same-instance recovery and replay distinguished; old trusted-state injection is not actual safe recovery."
+    },
+    {
+      "id": "SV-05",
+      "title": "Z-pathと依存収集",
+      "origin": "U",
+      "user_refs": [
+        "U10"
+      ],
+      "explicit_intent": true,
+      "source_approved": false,
+      "source_acceptance_spec_approved": false,
+      "source_row_sha256": "6229f5366b1702eda05f89c0dc30e44b14837b3d4b8aed562d8c614ea12082bc",
+      "decisions": [],
+      "proof_targets": [
+        "PT-14",
+        "PT-16"
+      ],
+      "scenarios": [
+        "SC-14",
+        "SC-15"
+      ],
+      "task_disposition": "open; no integrated task evidence",
+      "adopted": false,
+      "demonstrated_requirement": false,
+      "evidence_groups": [],
+      "remaining_boundary": "No new system-level Z-path/dependency-collection theorem in this W2 cut."
+    },
+    {
+      "id": "SV-06",
+      "title": "retention・忘却・圧縮",
+      "origin": "D",
+      "user_refs": [
+        "U10",
+        "U14"
+      ],
+      "explicit_intent": false,
+      "source_approved": false,
+      "source_acceptance_spec_approved": false,
+      "source_row_sha256": "23b2733ea52885bdd40b79f545f4ecadd25c18bea4ebcbb782800af88e3cc6eb",
+      "decisions": [
+        "Q-25"
+      ],
+      "proof_targets": [
+        "PT-14",
+        "PT-16"
+      ],
+      "scenarios": [
+        "SC-14",
+        "SC-21"
+      ],
+      "task_disposition": "related-scoped-evidence; requirement-not-accepted",
+      "adopted": false,
+      "demonstrated_requirement": false,
+      "evidence_groups": [
+        "dispatch"
+      ],
+      "remaining_boundary": "Retained old key rejects; clearing/rolling back history duplicates. Safe forgetting/compaction not supplied."
+    },
+    {
+      "id": "SV-07",
+      "title": "archiveの真正性と検証可能な復元",
+      "origin": "D",
+      "user_refs": [
+        "U10",
+        "U11"
+      ],
+      "explicit_intent": false,
+      "source_approved": false,
+      "source_acceptance_spec_approved": false,
+      "source_row_sha256": "45897b1d4c6468bf4920ee36f534b0ea28daf41c5d1072996f5c19b6316f5a87",
+      "decisions": [
+        "Q-20"
+      ],
+      "proof_targets": [
+        "PT-14",
+        "PT-16"
+      ],
+      "scenarios": [
+        "SC-14"
+      ],
+      "task_disposition": "related-scoped-evidence; requirement-not-accepted",
+      "adopted": false,
+      "demonstrated_requirement": false,
+      "evidence_groups": [
+        "images"
+      ],
+      "remaining_boundary": "General structural image decoding and explicit stale/forged-history counterexamples; authenticity/current authority requires separate trust anchor."
+    },
+    {
+      "id": "OB-01",
+      "title": "観測の忠実性",
+      "origin": "U",
+      "user_refs": [
+        "U11"
+      ],
+      "explicit_intent": true,
+      "source_approved": false,
+      "source_acceptance_spec_approved": false,
+      "source_row_sha256": "b21e356d227a149c26e400ab96cce08ef4fa3ed6f95e302b6e28f8d887c2ba3d",
+      "decisions": [],
+      "proof_targets": [
+        "PT-15",
+        "PT-18"
+      ],
+      "scenarios": [
+        "SC-16",
+        "SC-20",
+        "SC-24"
+      ],
+      "task_disposition": "related-scoped-evidence; requirement-not-accepted",
+      "adopted": false,
+      "demonstrated_requirement": false,
+      "evidence_groups": [
+        "source",
+        "network"
+      ],
+      "remaining_boundary": "Actual source/Core/request/result paths examined; finite correspondence is not full general observer refinement."
+    },
+    {
+      "id": "OB-02",
+      "title": "観測による意味の非干渉",
+      "origin": "U",
+      "user_refs": [
+        "U11"
+      ],
+      "explicit_intent": true,
+      "source_approved": false,
+      "source_acceptance_spec_approved": false,
+      "source_row_sha256": "9f95a09763c4528ca750eaf723218183ed14faf5a6d5b1db846b7571fb11df34",
+      "decisions": [
+        "Q-26"
+      ],
+      "proof_targets": [
+        "PT-15",
+        "PT-18"
+      ],
+      "scenarios": [
+        "SC-16",
+        "SC-24"
+      ],
+      "task_disposition": "related-scoped-evidence; requirement-not-accepted",
+      "adopted": false,
+      "demonstrated_requirement": false,
+      "evidence_groups": [
+        "passive"
+      ],
+      "remaining_boundary": "Conditional passive erasure theorem; actual blocking stdout/unbounded queue prevents inferring runtime cost noninterference."
+    },
+    {
+      "id": "OB-03",
+      "title": "情報流の非干渉",
+      "origin": "U",
+      "user_refs": [
+        "U11"
+      ],
+      "explicit_intent": true,
+      "source_approved": false,
+      "source_acceptance_spec_approved": false,
+      "source_row_sha256": "8004aee8b2c801316f8b44a9d1980a410ba8702cafdd81ade449bccbd0b821c3",
+      "decisions": [
+        "Q-26"
+      ],
+      "proof_targets": [
+        "PT-15",
+        "PT-18"
+      ],
+      "scenarios": [
+        "SC-17",
+        "SC-24"
+      ],
+      "task_disposition": "related-scoped-evidence; requirement-not-accepted",
+      "adopted": false,
+      "demonstrated_requirement": false,
+      "evidence_groups": [
+        "passive",
+        "allocation_ifc"
+      ],
+      "remaining_boundary": "General two-run relations for selected static-label models; shared allocation ID/capacity leaks are counterexamples. Full timing/presence/auth context confidentiality remains open."
+    },
+    {
+      "id": "OB-04",
+      "title": "観測者の現在権限",
+      "origin": "U",
+      "user_refs": [
+        "U06",
+        "U11"
+      ],
+      "explicit_intent": true,
+      "source_approved": false,
+      "source_acceptance_spec_approved": false,
+      "source_row_sha256": "0cbb9ab61d1560a8ff1451fe85b328a2d65ca248cfaaacbd47d665e9375c3090",
+      "decisions": [],
+      "proof_targets": [
+        "PT-15",
+        "PT-18"
+      ],
+      "scenarios": [
+        "SC-17"
+      ],
+      "task_disposition": "related-scoped-evidence; requirement-not-accepted",
+      "adopted": false,
+      "demonstrated_requirement": false,
+      "evidence_groups": [
+        "current",
+        "passive"
+      ],
+      "remaining_boundary": "Label/authority separation retained; source observer_safe is not current publication permission or implemented dynamic release policy."
+    },
+    {
+      "id": "OB-05",
+      "title": "資源と時間への観測干渉",
+      "origin": "D",
+      "user_refs": [
+        "U11",
+        "U17"
+      ],
+      "explicit_intent": false,
+      "source_approved": false,
+      "source_acceptance_spec_approved": false,
+      "source_row_sha256": "481381bbc84e8541c4e2cdcfbbbf4b720e7f5613ec051aa14430e651d4feeff7",
+      "decisions": [
+        "Q-26"
+      ],
+      "proof_targets": [
+        "PT-15",
+        "PT-18"
+      ],
+      "scenarios": [
+        "SC-16"
+      ],
+      "task_disposition": "related-scoped-evidence; requirement-not-accepted",
+      "adopted": false,
+      "demonstrated_requirement": false,
+      "evidence_groups": [
+        "network",
+        "passive"
+      ],
+      "remaining_boundary": "Lossy abstract retention does not establish bounded actual observer pipeline; unbounded probe channel/blocking output are unresolved."
+    },
+    {
+      "id": "OB-06",
+      "title": "不確定・欠測・非公開の表示",
+      "origin": "D",
+      "user_refs": [
+        "U11"
+      ],
+      "explicit_intent": false,
+      "source_approved": false,
+      "source_acceptance_spec_approved": false,
+      "source_row_sha256": "bfade82f4bb4855a31a1e9944cb3b954b7ba3ca5e5ed7ec374907124d3281a67",
+      "decisions": [],
+      "proof_targets": [
+        "PT-15",
+        "PT-18"
+      ],
+      "scenarios": [
+        "SC-16"
+      ],
+      "task_disposition": "related-scoped-evidence; requirement-not-accepted",
+      "adopted": false,
+      "demonstrated_requirement": false,
+      "evidence_groups": [
+        "dispatch",
+        "network"
+      ],
+      "remaining_boundary": "Unknown/unacknowledged distinguished in model and actual retry cases; complete user-facing display taxonomy not implemented."
+    },
+    {
+      "id": "OB-07",
+      "title": "デバッグ制御と受動観測",
+      "origin": "U",
+      "user_refs": [
+        "U11"
+      ],
+      "explicit_intent": true,
+      "source_approved": false,
+      "source_acceptance_spec_approved": false,
+      "source_row_sha256": "162bcead2c4b4a9cf6f41dfb2c4319f403a63172ef6b9ae7d727aa51f3121c75",
+      "decisions": [
+        "Q-27"
+      ],
+      "proof_targets": [
+        "PT-15",
+        "PT-18"
+      ],
+      "scenarios": [
+        "SC-18"
+      ],
+      "task_disposition": "open; no integrated task evidence",
+      "adopted": false,
+      "demonstrated_requirement": false,
+      "evidence_groups": [],
+      "remaining_boundary": "Active debug authorization is distinct and unintegrated; passive proof does not authorize it."
+    },
+    {
+      "id": "OB-08",
+      "title": "局所理論と多層認証の説明",
+      "origin": "D",
+      "user_refs": [
+        "U06",
+        "U07",
+        "U11"
+      ],
+      "explicit_intent": false,
+      "source_approved": false,
+      "source_acceptance_spec_approved": false,
+      "source_row_sha256": "089cacdb3b9e94bc589c35bb394f453a5ed52feffa877da4ff05230870d625cf",
+      "decisions": [],
+      "proof_targets": [
+        "PT-15",
+        "PT-18"
+      ],
+      "scenarios": [
+        "SC-04",
+        "SC-17"
+      ],
+      "task_disposition": "open; no integrated task evidence",
+      "adopted": false,
+      "demonstrated_requirement": false,
+      "evidence_groups": [],
+      "remaining_boundary": "Proof/evidence records are not an implemented end-user theory/policy explanation surface."
+    },
+    {
+      "id": "HS-01",
+      "title": "package受入れと実行許可",
+      "origin": "U",
+      "user_refs": [
+        "U08"
+      ],
+      "explicit_intent": true,
+      "source_approved": false,
+      "source_acceptance_spec_approved": false,
+      "source_row_sha256": "c6806d016c4d30936d036d59b20dc1677533ed3f78a50203ffb41151e04f85a0",
+      "decisions": [],
+      "proof_targets": [
+        "PT-09",
+        "PT-15",
+        "PT-18"
+      ],
+      "scenarios": [
+        "SC-19",
+        "SC-20"
+      ],
+      "task_disposition": "related-scoped-evidence; requirement-not-accepted",
+      "adopted": false,
+      "demonstrated_requirement": false,
+      "evidence_groups": [
+        "contract"
+      ],
+      "remaining_boundary": "Candidate module code/contract binding; signed publisher/package admission and operational launch integration remain open."
+    },
+    {
+      "id": "HS-02",
+      "title": "sandboxとhost境界",
+      "origin": "D",
+      "user_refs": [
+        "U08",
+        "U17"
+      ],
+      "explicit_intent": false,
+      "source_approved": false,
+      "source_acceptance_spec_approved": false,
+      "source_row_sha256": "428b5d848b024e0071019e165d6b6822865a13b135a77cd7ee1f4b992cd85b38",
+      "decisions": [
+        "Q-28"
+      ],
+      "proof_targets": [
+        "PT-09",
+        "PT-15",
+        "PT-18"
+      ],
+      "scenarios": [
+        "SC-19",
+        "SC-20"
+      ],
+      "task_disposition": "open; no integrated task evidence",
+      "adopted": false,
+      "demonstrated_requirement": false,
+      "evidence_groups": [],
+      "remaining_boundary": "No adversarial package/native sandbox guarantee established."
+    },
+    {
+      "id": "HS-03",
+      "title": "Mir内のdomain意味",
+      "origin": "U",
+      "user_refs": [
+        "U08",
+        "U16"
+      ],
+      "explicit_intent": true,
+      "source_approved": false,
+      "source_acceptance_spec_approved": false,
+      "source_row_sha256": "a48150f870bdd1a1559888f11ce97207dcb033c35906657b3d4b75b1695d701f",
+      "decisions": [],
+      "proof_targets": [
+        "PT-09",
+        "PT-15",
+        "PT-18"
+      ],
+      "scenarios": [
+        "SC-01",
+        "SC-20"
+      ],
+      "task_disposition": "related-scoped-evidence; requirement-not-accepted",
+      "adopted": false,
+      "demonstrated_requirement": false,
+      "evidence_groups": [
+        "source"
+      ],
+      "remaining_boundary": "Existing ordinary Mir arithmetic executes in runtime; full selected domain logic/corpus not established."
+    },
+    {
+      "id": "HS-04",
+      "title": "Viewと入力の双方向境界",
+      "origin": "U",
+      "user_refs": [
+        "U08",
+        "U11"
+      ],
+      "explicit_intent": true,
+      "source_approved": false,
+      "source_acceptance_spec_approved": false,
+      "source_row_sha256": "76d71fa79dc49e2a6cb256193dc7d48ce7b9c68ce5d197eac6cb0bbd6ad16115",
+      "decisions": [],
+      "proof_targets": [
+        "PT-09",
+        "PT-15",
+        "PT-18"
+      ],
+      "scenarios": [
+        "SC-20"
+      ],
+      "task_disposition": "related-scoped-evidence; requirement-not-accepted",
+      "adopted": false,
+      "demonstrated_requirement": false,
+      "evidence_groups": [
+        "network"
+      ],
+      "remaining_boundary": "Fixed probe input/request and output exist; general authorized View/input composition remains open."
+    },
+    {
+      "id": "HS-05",
+      "title": "表示用計算とprovider結果",
+      "origin": "U",
+      "user_refs": [
+        "U08",
+        "U09"
+      ],
+      "explicit_intent": true,
+      "source_approved": false,
+      "source_acceptance_spec_approved": false,
+      "source_row_sha256": "1149ab28b1b45a2d5b1c92626a3ffd9f706b6c4caf6fdf88ab416a67e365ff69",
+      "decisions": [
+        "Q-10"
+      ],
+      "proof_targets": [
+        "PT-09",
+        "PT-15",
+        "PT-18"
+      ],
+      "scenarios": [
+        "SC-10",
+        "SC-20"
+      ],
+      "task_disposition": "open; no integrated task evidence",
+      "adopted": false,
+      "demonstrated_requirement": false,
+      "evidence_groups": [],
+      "remaining_boundary": "No integrated View/provider-result acceptance profile selected."
+    },
+    {
+      "id": "HS-06",
+      "title": "継続的な参加と最小構築UI",
+      "origin": "U",
+      "user_refs": [
+        "U08",
+        "U15"
+      ],
+      "explicit_intent": true,
+      "source_approved": false,
+      "source_acceptance_spec_approved": false,
+      "source_row_sha256": "9e9edf48be7bdbdf604a714898da499cecb25594a1c488238603ac782fe89e0a",
+      "decisions": [
+        "Q-29"
+      ],
+      "proof_targets": [
+        "PT-09",
+        "PT-15",
+        "PT-18"
+      ],
+      "scenarios": [
+        "SC-20",
+        "SC-24"
+      ],
+      "task_disposition": "open; no integrated task evidence",
+      "adopted": false,
+      "demonstrated_requirement": false,
+      "evidence_groups": [],
+      "remaining_boundary": "One continuous source-driven construction/participation/update/observation path not achieved."
+    },
+    {
+      "id": "OP-01",
+      "title": "検査前後の資源課金",
+      "origin": "D",
+      "user_refs": [
+        "U11",
+        "U14",
+        "U17"
+      ],
+      "explicit_intent": false,
+      "source_approved": false,
+      "source_acceptance_spec_approved": false,
+      "source_row_sha256": "662e6eb4d6c5437d95cadc807f39a6d4aece53fa9ed93ac5cc9fb92a14e42bf6",
+      "decisions": [],
+      "proof_targets": [
+        "PT-08",
+        "PT-18"
+      ],
+      "scenarios": [
+        "SC-08",
+        "SC-19",
+        "SC-21"
+      ],
+      "task_disposition": "related-scoped-evidence; requirement-not-accepted",
+      "adopted": false,
+      "demonstrated_requirement": false,
+      "evidence_groups": [
+        "dispatch",
+        "resource"
+      ],
+      "remaining_boundary": "Reference journal and finite resource budgets checked; all parser/proof/queue/storage paths not closed."
+    },
+    {
+      "id": "OP-02",
+      "title": "長期的な資源回収",
+      "origin": "D",
+      "user_refs": [
+        "U14"
+      ],
+      "explicit_intent": false,
+      "source_approved": false,
+      "source_acceptance_spec_approved": false,
+      "source_row_sha256": "e8139302eebbff9a1702392dd35b6fb13250b787f845b12468ba6fb66bdd3eeb",
+      "decisions": [
+        "Q-25"
+      ],
+      "proof_targets": [
+        "PT-08",
+        "PT-18"
+      ],
+      "scenarios": [
+        "SC-21"
+      ],
+      "task_disposition": "related-scoped-evidence; requirement-not-accepted",
+      "adopted": false,
+      "demonstrated_requirement": false,
+      "evidence_groups": [
+        "dispatch"
+      ],
+      "remaining_boundary": "No safe history/code/proof-cache reclamation design accepted."
+    },
+    {
+      "id": "OP-03",
+      "title": "可用性と性能のprofile",
+      "origin": "D",
+      "user_refs": [
+        "U12",
+        "U15"
+      ],
+      "explicit_intent": false,
+      "source_approved": false,
+      "source_acceptance_spec_approved": false,
+      "source_row_sha256": "678a226130a6ed867c1a880265541739d204191add2b2fcc7ceb04843a47918d",
+      "decisions": [
+        "Q-30"
+      ],
+      "proof_targets": [
+        "PT-08",
+        "PT-18"
+      ],
+      "scenarios": [
+        "SC-21"
+      ],
+      "task_disposition": "open; no integrated task evidence",
+      "adopted": false,
+      "demonstrated_requirement": false,
+      "evidence_groups": [],
+      "remaining_boundary": "Performance/availability alpha targets remain unselected; no numerical target invented."
+    },
+    {
+      "id": "OP-04",
+      "title": "異常終了と現実のhost前提",
+      "origin": "D",
+      "user_refs": [
+        "U10",
+        "U17"
+      ],
+      "explicit_intent": false,
+      "source_approved": false,
+      "source_acceptance_spec_approved": false,
+      "source_row_sha256": "7debe4e0b019a5b9f7c1445d40af490632591b6db7e21a438a398d95bbfe684a",
+      "decisions": [],
+      "proof_targets": [
+        "PT-08",
+        "PT-18"
+      ],
+      "scenarios": [
+        "SC-21"
+      ],
+      "task_disposition": "related-scoped-evidence; requirement-not-accepted",
+      "adopted": false,
+      "demonstrated_requirement": false,
+      "evidence_groups": [
+        "dispatch"
+      ],
+      "remaining_boundary": "Actual child SIGKILL and injected post-effect fsync error preserve unknown outcome; power loss/disk-full/keys/clocks not comprehensively tested."
+    },
+    {
+      "id": "OP-05",
+      "title": "再現と診断の最小運用",
+      "origin": "D",
+      "user_refs": [
+        "U11",
+        "U15"
+      ],
+      "explicit_intent": false,
+      "source_approved": false,
+      "source_acceptance_spec_approved": false,
+      "source_row_sha256": "38ab26077ea13ad4a1fda09375ce22cabeacef77b0cc74a10215412e71f80ebd",
+      "decisions": [],
+      "proof_targets": [
+        "PT-08",
+        "PT-18"
+      ],
+      "scenarios": [
+        "SC-21"
+      ],
+      "task_disposition": "related-scoped-evidence; requirement-not-accepted",
+      "adopted": false,
+      "demonstrated_requirement": false,
+      "evidence_groups": [
+        "records"
+      ],
+      "remaining_boundary": "Per-cut commands/hashes/toolchain and external-workdir evidence retained; operational alpha reproduction not achieved."
+    },
+    {
+      "id": "WW-01",
+      "title": "独立した管理・更新と接続",
+      "origin": "U",
+      "user_refs": [
+        "U12",
+        "U13",
+        "U14"
+      ],
+      "explicit_intent": true,
+      "source_approved": false,
+      "source_acceptance_spec_approved": false,
+      "source_row_sha256": "49145a23826bab4441bbbf7d728c337512d439bc1526ea58ff1742a3ec7da834",
+      "decisions": [
+        "Q-17"
+      ],
+      "proof_targets": [
+        "PT-12",
+        "PT-17"
+      ],
+      "scenarios": [
+        "SC-22"
+      ],
+      "task_disposition": "related-scoped-evidence; requirement-not-accepted",
+      "adopted": false,
+      "demonstrated_requirement": false,
+      "evidence_groups": [
+        "contract"
+      ],
+      "remaining_boundary": "Candidate separate module contract linking; independently operated network configurations not demonstrated."
+    },
+    {
+      "id": "WW-02",
+      "title": "識別・address・link・表現",
+      "origin": "D",
+      "user_refs": [
+        "U13"
+      ],
+      "explicit_intent": false,
+      "source_approved": false,
+      "source_acceptance_spec_approved": false,
+      "source_row_sha256": "919894e8b94aa1df6e6c57847e69e1fdb0da9b6f51e9c97c455f4fe5ff1e4b35",
+      "decisions": [
+        "Q-07",
+        "Q-29"
+      ],
+      "proof_targets": [
+        "PT-12",
+        "PT-17"
+      ],
+      "scenarios": [
+        "SC-22"
+      ],
+      "task_disposition": "open; no integrated task evidence",
+      "adopted": false,
+      "demonstrated_requirement": false,
+      "evidence_groups": [],
+      "remaining_boundary": "Global addressing/discovery/link profile remains unselected; not silently added to current alpha scope."
+    },
+    {
+      "id": "WW-03",
+      "title": "未知の拡張の安全な扱い",
+      "origin": "D",
+      "user_refs": [
+        "U07",
+        "U13",
+        "U14"
+      ],
+      "explicit_intent": false,
+      "source_approved": false,
+      "source_acceptance_spec_approved": false,
+      "source_row_sha256": "0adfdbbbda94bcaf9dce4b90aba4c07179a8fdc518b0d6f20da5ddd67d00c36c",
+      "decisions": [
+        "Q-21"
+      ],
+      "proof_targets": [
+        "PT-12",
+        "PT-17"
+      ],
+      "scenarios": [
+        "SC-22"
+      ],
+      "task_disposition": "related-scoped-evidence; requirement-not-accepted",
+      "adopted": false,
+      "demonstrated_requirement": false,
+      "evidence_groups": [
+        "contract"
+      ],
+      "remaining_boundary": "Candidate unknown/mismatched contract fails closed; limited viewing/explanation product flow remains open."
+    },
+    {
+      "id": "WW-04",
+      "title": "既存システムとの接続",
+      "origin": "D",
+      "user_refs": [
+        "U12",
+        "U13"
+      ],
+      "explicit_intent": false,
+      "source_approved": false,
+      "source_acceptance_spec_approved": false,
+      "source_row_sha256": "f191593e7ffcae6dd38dd49a05474a738e3e7ad139d87f0f3310a9ccd58c5def",
+      "decisions": [],
+      "proof_targets": [
+        "PT-12",
+        "PT-17"
+      ],
+      "scenarios": [
+        "SC-22"
+      ],
+      "task_disposition": "open; no integrated task evidence",
+      "adopted": false,
+      "demonstrated_requirement": false,
+      "evidence_groups": [],
+      "remaining_boundary": "Existing-Web bridge not integrated; final alpha inclusion remains a profile decision."
+    },
+    {
+      "id": "WW-05",
+      "title": "発見・公開・連合の責任",
+      "origin": "D",
+      "user_refs": [
+        "U13"
+      ],
+      "explicit_intent": false,
+      "source_approved": false,
+      "source_acceptance_spec_approved": false,
+      "source_row_sha256": "d4251241c097c086d1c17e1d25d2fa81621c73f276a7aef717d6a201a2444f0b",
+      "decisions": [
+        "Q-29"
+      ],
+      "proof_targets": [
+        "PT-12",
+        "PT-17"
+      ],
+      "scenarios": [
+        "SC-22"
+      ],
+      "task_disposition": "open; no integrated task evidence",
+      "adopted": false,
+      "demonstrated_requirement": false,
+      "evidence_groups": [],
+      "remaining_boundary": "Publication/federation/governance is unselected and outside delegated public write authority."
+    },
+    {
+      "id": "WW-06",
+      "title": "内容の真偽と操作の正しさ",
+      "origin": "D",
+      "user_refs": [
+        "U13",
+        "U17"
+      ],
+      "explicit_intent": false,
+      "source_approved": false,
+      "source_acceptance_spec_approved": false,
+      "source_row_sha256": "46c104ce26ad814289d3e682dc18988ec6f6f1474a8549ad9501d7d2d7f8152b",
+      "decisions": [],
+      "proof_targets": [
+        "PT-12",
+        "PT-17"
+      ],
+      "scenarios": [
+        "SC-22"
+      ],
+      "task_disposition": "related-scoped-evidence; requirement-not-accepted",
+      "adopted": false,
+      "demonstrated_requirement": false,
+      "evidence_groups": [
+        "records"
+      ],
+      "remaining_boundary": "Contract/effect correctness is not truth of arbitrary content; no content truth guarantee made."
+    },
+    {
+      "id": "MG-01",
+      "title": "要件の根拠と未決を保持",
+      "origin": "U",
+      "user_refs": [
+        "U17",
+        "U18"
+      ],
+      "explicit_intent": true,
+      "source_approved": false,
+      "source_acceptance_spec_approved": false,
+      "source_row_sha256": "3177322ed70fc6aa502436466f4743dedb5d454724de6aad41dcba41dba16da3",
+      "decisions": [],
+      "proof_targets": [
+        "PT-17",
+        "PT-18"
+      ],
+      "scenarios": [
+        "SC-23"
+      ],
+      "task_disposition": "related-scoped-evidence; requirement-not-accepted",
+      "adopted": false,
+      "demonstrated_requirement": false,
+      "evidence_groups": [
+        "records"
+      ],
+      "remaining_boundary": "All119 original identities/U-D/approval metadata retained with scoped evidence; this ledger does not approve derived acceptance criteria."
+    },
+    {
+      "id": "MG-02",
+      "title": "αの統合受入れ",
+      "origin": "U",
+      "user_refs": [
+        "U15"
+      ],
+      "explicit_intent": true,
+      "source_approved": false,
+      "source_acceptance_spec_approved": false,
+      "source_row_sha256": "b77b924f59bc02dba4941ec82db17991e1f68e6d84b337cb5ba2e1db0baee594",
+      "decisions": [],
+      "proof_targets": [
+        "PT-17",
+        "PT-18"
+      ],
+      "scenarios": [
+        "SC-23",
+        "SC-24"
+      ],
+      "task_disposition": "open; no integrated task evidence",
+      "adopted": false,
+      "demonstrated_requirement": false,
+      "evidence_groups": [],
+      "remaining_boundary": "Alpha1–8 are retained, not satisfied. No single integrated construction/network/hotplug/save/observation candidate yet."
+    },
+    {
+      "id": "MG-03",
+      "title": "次に依存する基礎を先に閉じる",
+      "origin": "U",
+      "user_refs": [
+        "U17",
+        "U18"
+      ],
+      "explicit_intent": true,
+      "source_approved": false,
+      "source_acceptance_spec_approved": false,
+      "source_row_sha256": "12e414417ce7cafaeb39221a02e7805e35b2f461adb5114e7ebb1b5c937fc69c",
+      "decisions": [],
+      "proof_targets": [
+        "PT-17",
+        "PT-18"
+      ],
+      "scenarios": [
+        "SC-23"
+      ],
+      "task_disposition": "related-scoped-evidence; requirement-not-accepted",
+      "adopted": false,
+      "demonstrated_requirement": false,
+      "evidence_groups": [
+        "records"
+      ],
+      "remaining_boundary": "Same W2 theory gate; no production increment premised on unaccepted foundations."
+    },
+    {
+      "id": "MG-04",
+      "title": "証拠のidentityと追試",
+      "origin": "D",
+      "user_refs": [
+        "U17"
+      ],
+      "explicit_intent": false,
+      "source_approved": false,
+      "source_acceptance_spec_approved": false,
+      "source_row_sha256": "6dfc41cc1e6a5227bd207a0e0431cfc27bc23c26a1e77c6f485a0fc21ee90cac",
+      "decisions": [],
+      "proof_targets": [
+        "PT-17",
+        "PT-18"
+      ],
+      "scenarios": [
+        "SC-23"
+      ],
+      "task_disposition": "related-scoped-evidence; requirement-not-accepted",
+      "adopted": false,
+      "demonstrated_requirement": false,
+      "evidence_groups": [
+        "records"
+      ],
+      "remaining_boundary": "Frozen input/source hashes, commands, axioms and mutations retained; no old test count used as target."
+    },
+    {
+      "id": "MG-05",
+      "title": "完了・保留・再開の判定",
+      "origin": "U",
+      "user_refs": [
+        "U18"
+      ],
+      "explicit_intent": true,
+      "source_approved": false,
+      "source_acceptance_spec_approved": false,
+      "source_row_sha256": "d73da9bf3f584bbca081f0034a273db104d012c213f25d081f8804cec0a68c4c",
+      "decisions": [],
+      "proof_targets": [
+        "PT-17",
+        "PT-18"
+      ],
+      "scenarios": [
+        "SC-23"
+      ],
+      "task_disposition": "related-scoped-evidence; requirement-not-accepted",
+      "adopted": false,
+      "demonstrated_requirement": false,
+      "evidence_groups": [
+        "records"
+      ],
+      "remaining_boundary": "Candidate/local evidence and owner/formal acceptance remain distinct; no Plan250 automatic resume."
+    },
+    {
+      "id": "MG-06",
+      "title": "研究成果の単位",
+      "origin": "D",
+      "user_refs": [
+        "U17",
+        "U18"
+      ],
+      "explicit_intent": false,
+      "source_approved": false,
+      "source_acceptance_spec_approved": false,
+      "source_row_sha256": "22400caf6caa8cc8a1166e85c64d505e3df29e6a9fdc5fdae3419c631c4f8182",
+      "decisions": [],
+      "proof_targets": [
+        "PT-17",
+        "PT-18"
+      ],
+      "scenarios": [
+        "SC-23"
+      ],
+      "task_disposition": "related-scoped-evidence; requirement-not-accepted",
+      "adopted": false,
+      "demonstrated_requirement": false,
+      "evidence_groups": [
+        "proofs"
+      ],
+      "remaining_boundary": "General definitions/proofs and decisive counterexamples recorded in one W2 report; this matrix itself is not a semantic milestone."
+    }
+  ]
+}

@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-09-10 08:59 JST
+最終更新: 2026-09-10 09:40 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -55,6 +55,9 @@ public/production layers remain later.
 
 ## current milestone position
 
+Latest owner stop boundary: finish W2 with actual review/integration gates, then
+stop. W3 and alpha integration are deferred beyond this run.
+
 Separate current task: user-authorized proof-first LAB research, active single goal
 W2-local-contract-resource (PL1 S1/S2, theory/proof). This is not a Plan250 milestone or
 I3-4 resume. Scoped support/current-use/tracked-query/graph Lean proofs and reviews
@@ -70,8 +73,8 @@ source/runtime refinement remain open.
 | Task axis | Current status | Startability |
 |---|---|---|
 | 論理仕様 | general conditional Lean proofs; source IFC/current-head/all-mutator/physical bridge open | reversible research **着手可能** |
-| ユーザ向け仕様 |119requirement inputs retained; ordinary-source alpha profile not adopted | necessary source/type investigation **着手可能**; irreversible policy **要仕様確認** |
-| 実装 / 運用 | existing M8 observer4tests pass; trusted-setup effective-label mismatch reproduced; no new network/durable alpha evidence | relevant proof gates **後段依存** |
+| ユーザ向け仕様 |119-row task disposition registry retains U/D and nonacceptance; ordinary-source alpha profile not adopted | necessary source/type investigation **着手可能**; irreversible policy **要仕様確認** |
+| 実装 / 運用 | actual existing QUIC regression9 and local journal experiment18 pass at recorded cuts; no integrated network/durable alpha | relevant proof gates **後段依存** |
 
 
 I3-3 is accepted at source/evidence cut `fe5dd972e2ddb3a513c785458a07702e4d4d99fa`.
@@ -326,3 +329,9 @@ The authorized roadmap is paused, not blocked, stale or closed.
 - 2026-09-10 08:31 JST: W2予約の同期前後を分けた一般Lean証明と4変異、参照実process停止・並行・失敗18ケースを確認。15モジュールfresh検査通過。電源断・真正性・Mir実装へのrefinement・reviewは未達。
 
 - 2026-09-10 08:59 JST: W2呼出し依存のwitness使用claim失効拒否／未使用claim失効の保存則をLean検査し、2変異を反例で検出。別resource grantは拒否可能。15モジュールfresh検査通過、現在権限の取得・Q18・reviewは未達。
+
+- 2026-09-10 09:20 JST: User-requested overall estimate recorded as provisional120–300active hours remaining, workload position15–25%, not acceptance.119-row task trace preserves original flags and remaining boundaries. Oracle Chrome failures confirmed by user; appropriate actual-error resends authorized. Same W2 goal, no new roadmap/alpha adoption.
+
+- 2026-09-10 09:24 JST: W2 saved-call/current-context separation kernel and3mutants pass; original successful call preserved, used revocation/resource denial rejected. Actual context acquisition/state-image/physical composition remain open. Same unreviewed W2 consumer.
+
+- 2026-09-10 09:40 JST: Owner narrows current run to W2 completion then stop; old alpha automatic goal awaits user clear and W2-only recreation. W3+ remains deferred; no formal phase changed.

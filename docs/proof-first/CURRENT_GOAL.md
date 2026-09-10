@@ -1,5 +1,8 @@
 # W2-local-contract-resource — active task-local semantic goal
 
+**Latest owner stop boundary:** complete W2 with its actual proof/review/integration
+gates, then stop. Do not proceed to W3 or alpha integration. User cleared the old goal; main created the W2-only automatic goal on 2026-09-10 09:46 JST.
+
 - Authority/layer/side: user-authorized reversible LAB, PL1 S1/S2 theory/proof and nonproduction reference. No Plan250 resume, official phase/THM/OBL change or production contract adoption.
 - Trace: U05/07/09/14/17, TY-01..08, ID-07, SL-08, PT01/02/04/05/11/12, SC03/14/17/19/24, Q03/Q19. These motivate the candidate; requirement detail is not blanket accepted.
 - Direct consumer: reusable pure arithmetic computes a positive length; an exclusive-region boundary consumes the actual certified value to allocate/split/move/release. Dynamic module composition later consumes its typed handles.
@@ -18,8 +21,10 @@ Support, current-use, tracked validation/finite graph and passive erasure have
 actual general kernel evidence and completed source reviews, recorded in their
 companions and Report2611. These scoped dependencies suffice for this independent
 nonproduction boundary research; W1-wide source/runtime/current-head/resource
-obligations are not declared closed. The running `mirrorea-source-boundary` Oracle
-continues unchanged. Its abort/alias/finite-source extensions are unaccepted and
+obligations are not declared closed. The original `mirrorea-source-boundary` Oracle exited on Chrome disconnect
+before conversation creation. One frozen-packet actual-error recovery attempt
+`mirrorea-source-restart-second` also records a Chrome-close error; no answer
+has been collected. Its abort/alias/finite-source extensions are unaccepted and
 not premises of this goal; collect and dispose its answer without treating waiting
 as success. Current goal is only this W2 consumer. Mandatory full reading remains
 incomplete, and no new whole-project roadmap is adopted.
@@ -102,3 +107,17 @@ precise witness dependence with coarse global invalidation, without choosing Q18
 prepared-patch reservation semantics. Reuse existing policy/checker definitions;
 prove frame and used-claim rejection, positive alternative-branch controls, and
 mutant falsification. Current authority acquisition and production remain open.
+
+Task-level trace registry: REQUIREMENT_DISPOSITIONS.json preserves all119 source
+rows by identity/content hash, U/D and original approval fields, Q/PT/SC mappings,
+and the30/18/24/8 decision/guarantee/scenario/alpha identifiers. Related evidence is
+not requirement acceptance. Current profile remains unselected, not silently
+narrowed to the proven fragments.
+
+Same restored-call consumer: separate stored request/evidence from the execution
+context (World/registry/catalog/grant/bounds). An unavailable current context must
+reject; a supplied changed authority/resource grant must not be replaced by saved
+ones. Compare explicit fresh-context attachment with reusing the old Invocation;
+the latter is a negative control. Reuse existing run/checker and prove rejection,
+state preservation and nontrivial current success. Acquiring an authentic current
+context remains an external unmet obligation; this is not Q18 patch acceptance.

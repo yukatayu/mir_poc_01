@@ -5665,9 +5665,9 @@
   {
     "path": "specs/examples/211-current-l2-theorem-line-checker-verdict-carrier-detail-ready-checker-verdict-payload-family-threshold.md",
     "sha256": "a5038c0b18f95f498a8ee5a32f2d0d1792b995b226d1b48941b1c191b5b004dd",
-    "range": "",
-    "role": "LAB evidence/history/source",
-    "status": "unread"
+    "range": "1-199",
+    "role": "LAB historical proof-notebook carrier/payload/witness sketch, not current proof or authority",
+    "status": "full"
   },
   {
     "path": "specs/examples/152-current-l2-theorem-line-emitter-linked-consumer-adapter-threshold.md",
@@ -6050,9 +6050,9 @@
   {
     "path": "specs/examples/210-current-l2-theorem-line-actual-checker-result-payload-ready-checker-verdict-carrier-detail-threshold.md",
     "sha256": "739419cd39b92778f227b92c79efc3b5d5e7fad85e4f2ab37b8f01c1eade4ded",
-    "range": "",
-    "role": "LAB evidence/history/source",
-    "status": "unread"
+    "range": "1-198",
+    "role": "LAB historical proof-notebook carrier/payload/witness sketch, not current proof or authority",
+    "status": "full"
   },
   {
     "path": "specs/examples/282-current-l2-shared-output-contract-ready-minimal-shared-output-contract-threshold.md",
@@ -6890,9 +6890,9 @@
   {
     "path": "specs/examples/212-current-l2-theorem-line-checker-verdict-payload-family-ready-checker-verdict-witness-family-threshold.md",
     "sha256": "833e505ee05db87d124e4bbe527b69cc96073e20a8ab24c6c4c51715d5fb7ee2",
-    "range": "",
-    "role": "LAB evidence/history/source",
-    "status": "unread"
+    "range": "1-199",
+    "role": "LAB historical proof-notebook carrier/payload/witness sketch, not current proof or authority",
+    "status": "full"
   },
   {
     "path": "specs/examples/507-current-l2-model-check-final-public-contract-reopen-threshold.md",
@@ -22302,6 +22302,83 @@
     "sha256": "9897d5846a7abf0cfdba471b078286f1146afe19eb1ed49ce18d75992733aacb",
     "range": "1-313",
     "role": "Current LAB source/companion; full previous source plus sole-main authored and reviewed delta, no normative acceptance",
+    "status": "full"
+  },
+  {
+    "path": "samples/lean/foundations/MirroreaProofFirstModuleContractBoundary.lean",
+    "sha256": "ed45f5d36a540f3dfdf30cec12f9bcbe71bd2035aa8b679d63558da011e42f85",
+    "range": "1-1647",
+    "role": "LAB task proof/companion/status, previously read plus sole-main authored delta",
+    "status": "full"
+  },
+  {
+    "path": "samples/lean/foundations/MirroreaProofFirstContracts.md",
+    "sha256": "78359825d4a61cdbbec6e86c4a4a1b3844407ccad54c78a21e086ac95bb5a122",
+    "range": "1-576",
+    "role": "LAB task proof/companion/status, previously read plus sole-main authored delta",
+    "status": "full"
+  },
+  {
+    "path": "docs/proof-first/CURRENT_GOAL.md",
+    "sha256": "46e64a2288510ec77a084582dc1aa893134209cb337ec3b7faa4d1ce71fdae28",
+    "range": "1-119",
+    "role": "LAB task proof/companion/status, previously read plus sole-main authored delta",
+    "status": "full"
+  },
+  {
+    "path": "tasks.md",
+    "sha256": "4245d25f671a38434603adf31b7d27b1ce5924040957df9d11b11108a0f044fa",
+    "range": "1-120",
+    "role": "LAB task proof/companion/status, previously read plus sole-main authored delta",
+    "status": "full"
+  },
+  {
+    "path": "tasks.md",
+    "sha256": "0c94df82169bac8ee33702d78f7f64c9c1836d13e79138c02125de60e4ff8868",
+    "range": "1-126",
+    "role": "LAB task status/goal fully main-authored after full prior reading",
+    "status": "full"
+  },
+  {
+    "path": "docs/proof-first/CURRENT_GOAL.md",
+    "sha256": "a2d22b950826530db64f38792b5c7d5e8a7929ab81fb6dfdd78b334264a91a91",
+    "range": "1-120",
+    "role": "LAB task status/goal fully main-authored after full prior reading",
+    "status": "full"
+  },
+  {
+    "path": "tasks.md",
+    "sha256": "92e8ea65929bbf8d791176b9b94a7184d6958f6046f02a37507e1212e832e2e5",
+    "range": "1-126",
+    "role": "LAB task snapshot; full main-authored rewrite and exact Canon notice correction",
+    "status": "full"
+  },
+  {
+    "path": "tasks.md",
+    "sha256": "dbfb14742d028d9fbc7ead1ae4f352c2f65f7b7b8e219d42a891043fe46f9953",
+    "range": "1-157",
+    "role": "Full previously read/main-authored snapshot plus inspected W2-only goal and source-reference corrections",
+    "status": "full"
+  },
+  {
+    "path": "docs/proof-first/CURRENT_GOAL.md",
+    "sha256": "911fc1b9130c770038e5472e8e12ce2d853d9030b075f84a44cc1ccab73654f1",
+    "range": "1-123",
+    "role": "Full previously read/main-authored snapshot plus inspected W2-only goal and source-reference corrections",
+    "status": "full"
+  },
+  {
+    "path": "tasks.md",
+    "sha256": "8c7bd9c3afcef90f1bd87828cd92b9706bff7f94c919ffa55b15a4f79993303e",
+    "range": "1-158",
+    "role": "Previously full read plus main-authored actual Oracle-error status correction",
+    "status": "full"
+  },
+  {
+    "path": "docs/proof-first/CURRENT_GOAL.md",
+    "sha256": "6211f0d487a40831e216a9caf55f8889d07411fac40438657d9f98e2604c8904",
+    "range": "1-123",
+    "role": "Previously full read plus main-authored actual Oracle-error status correction",
     "status": "full"
   }
 ]

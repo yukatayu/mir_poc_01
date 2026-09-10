@@ -1460,3 +1460,95 @@ check: W1 Chrome window closed (052af1), W2 remote Chrome lost (48450c), both
 exit1 and logs report disconnect before conversation creation (aa989b). Read-only
 harvest40392d exit1, undefined webSocketDebuggerUrl. No answer, no review success,
 no latency-based cancellation. Earlier pending statements are historical.
+
+Requirement trace maintenance: all119 rows retained in
+`docs/proof-first/REQUIREMENT_DISPOSITIONS.json`, keyed by immutable original row
+hash with U/D, user intent, approval flags and Q/PT/SC. Original30 decisions,
+18 guarantee targets,24 scenarios and alpha1–8 identifiers retained. Each row
+states related scoped evidence and remaining boundary, or explicit open/no
+integrated evidence. No row or derived acceptance specification is accepted.
+02b2a0 checks119 identity/order/flags/mappings and all referenced paths/JSON keys.
+The first draft guessed a nonexistent SOURCE_CORRESPONDENCE_CHECK path; the
+validation detected it and the correct existing FOUNDATION_CHECK was substituted.
+This administrative registry is not semantic progress or a new milestone report.
+plan/current goal/RESUME updated; other dashboards retain the same unmet W2/alpha
+frontier. No code/test/sample taxonomy changed by this registry.
+
+Original Chrome-disconnect errors were confirmed in terminal metadata3bdbfb.
+One actual-error W1 recovery was launched4c2d91 as mirrorea-source-error-recovery,
+exec89339, same frozen packet/question after hash verification. No time-based
+resend or forced duplicate. 3352e5 at00:11:31UTC running, no error, no confirmed
+submission and no answer. RevisedW2 has not been resent. A future answer covers
+only the frozen W1 cut. New later W2 evidence remains unreviewed.
+
+User status question: Canon README/ADR0043/phase plus progress/tasks and handoff
+workstreams were rechecked. Answer locates current task in W2 and distinguishes
+existing finite network capability from new proof-first alpha integration. A
+low-confidence remaining-effort estimate120–300h and rough workload15–25% are
+recorded as hypotheses, not requirement acceptance, elapsed-time promise or new
+roadmap. tasks.md fully rewritten to current snapshot; progress and plan memory
+synchronized. No planner sub-agent: explicitly forbidden by the user. This is
+snapshot maintenance and advisory estimation, not normative phase recut.
+Documentation.md/docs/project-status.md/samples_progress.md更新不要 for this
+status-only delta: existing capability/sample commands unchanged. Lean scratch
+restored-call boundary is still under validation, separate from these estimates.
+User confirms Chrome crash and requests appropriate resends. First W1 recovery
+exit1 collected05cdce; second launched2df5f0 exec15282. W2 resend attempt01c32f
+failed its running-browser preflight before any Oracle send. No response accepted.
+
+Restored-call context continuation at 2026-09-10 09:24 JST, same W2 direct consumer:
+SavedCall carries only request/arguments/evidence/proof; ExecutionContext is a
+separate supplied input. Existing Once/allocation checks are reused. General
+successful-original correspondence, current success/resource preservation,
+submitted revoked witness rejection, independent grant rejection, history guard
+and failure nonmutation pass final07fd4a/7f808f. Missing/revoked/denied/registry/
+capacity and distinct/repeated request controls are actual reductions. Three
+mutants yield decisive false controlsfcfee4; general correspondence/rejection
+proofs also fail. Draft1 syntax and draft2 simplification failures are recorded;
+automatic error-recovery sorryAx output belongs only to rejected compiler runs,
+not source axioms or accepted proofs. Final source contains no sorry/admit/axiom.
+
+Fresh15 actual-source mirror is recorded in W2_EXTENSION_CHECK.restored_call_context.
+The old-context invocation remains a positive counterexample against automatic
+currentness: the new parameter cannot authenticate itself either. No serialized
+SavedCall, whole-state restore checker, physical durable/refinement, Q18, source
+provenance or independent Oracle review is claimed. Rust/physical reference/full22
+commands not rerun: their sources are unchanged; affected15-module cone checked.
+Companion/goal/plan/progress/trace/reading ledger updated; same sample file/command
+and taxonomy. No new report, Canon/THM/OBL changes or sub-agent.
+
+Documentation validation4582a5 initially failed: rewritten tasks.md abbreviated
+the mandatory Canon notice. Restored the exact source-hierarchy notice; validation
+is rerun, not counted successful until returned. No code/proof changed.
+W2 attach-metadata recovery failed2039b3 before prompt submission. After reading
+the installed strict target path, one newly owned tab was created and exact-ID
+remote attachment launched2d9cd5 as mirrorea-contract-owned-tab-recovery exec90793.
+W1 second recovery remains intact. Both frozen questions remain unchanged.
+
+Second docs check7eee5b failed the progress header09:20 versus new log09:24
+freshness rule. Header synchronized with actual command time; rerun required.
+Self-review76e1a8 and prior-evidence/15-source/119-row hash validation479c79 PASS.
+No production source or proof changed after the fresh kernel check.
+
+Latest owner steering narrows this execution to W2 completion, then stop for
+usage-limit adjustment. No W3 continuation or alpha integration is authorized in
+this run after W2 closes. User will clear the old alpha automatic goal; main may
+then create the W2-only goal. No old goal falsely marked complete to change text.
+The earlier120–300h estimate described the now-deferred full-alpha horizon, not
+the new stop boundary. W2 remains active with actual review gates unmet.
+
+Third docs check06c948 detected renamed mandatory task-map headings. Read the
+actual validator heading/order contract, restored its eight sections and checked
+order. First diagnostic import7e4350 lacked sys.modules registration and failed
+before assertions; the corrected diagnostic passed. Full validation32170 runs
+independently. Current W2-stop boundary is mirrored; W3–W7 are future horizon only.
+
+Fourth docs check6ccca6 found missing backticked existing Canon/plan source paths
+in the rewritten current-position section. Added ADR-0043 and retained Plan250
+references; validation78866 is pending. User actually cleared the old automatic
+goal; create_goal succeeded for W2-only completion and stop (0444cd actual time).
+No W3 execution follows this goal. W1 second recovery now records another actual
+Chrome-close error2d7c56; W2 owned-tab job remains running without an answer.
+
+Final documentation validation78866 returned c1a26c: scaffold complete,1762
+numbered reports. This validates snapshot scaffolding, not W2 semantics/review.

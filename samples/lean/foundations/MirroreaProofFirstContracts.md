@@ -538,3 +538,39 @@ secret-observation safety and Q18 prepared-patch reservation semantics remain
 open. In particular, Once.Invocation contains a World and grant: replaying that
 stored input cannot itself establish that either is current. No production or
 public contract changed, and this delta is outside both pending Oracle packets.
+
+
+### Saved call data and supplied execution context (unreviewed W2)
+
+RestoredCall separates request/arguments/evidence/contract proof from the supplied
+World, registry, immutable catalog, resource grant and bounds. No ExecutionContext
+is reconstructed from SavedCall. Missing context rejects; the existing allocation
+checker is reused at the same resource state. A successful original invocation
+is reproduced when the same context is deliberately supplied, so rejection safety
+is not obtained by removing all useful calls.
+
+General theorems establish success against the supplied World, resource invariant
+and bounds preservation from a well-formed input, used-witness revocation rejection,
+independent resource-grant rejection, retained-key rejection and unchanged state
+on failure. Controls cover current success, absent context, revoked claim, denied
+grant, absent registry, zero capacity, a second distinct request and repeated key.
+The old Invocation still executes with its old World after the comparison context
+has been revoked: context acquisition must therefore be authentic/current outside
+this model. Supplying old context to the new function also cannot be prevented by
+these types alone. This is a stated unmet obligation, not an authority minted by
+proof validity or a currentness guarantee from a parameter name.
+
+Final kernel and three mutants passed the expected checks: erased revocation and
+bypassed grant each fail a concrete rejection control and general boundary laws;
+RejectAll fails original-call correspondence and positive controls. Axioms are
+standard propext/Classical.choice/Quot.sound as individually printed. Failed draft1
+record syntax and draft2 rewrite proof are retained as failures; no incomplete
+proof is accepted. Fresh15 actual-source imports were kernel-checked.
+
+SavedCall is a logical projection, not a serialized image or wire format. resume
+assumes an already valid StateWithHistory; it does not replace the independent
+image checker or establish authentic history. It uses the existing atomic Once
+step, not a composed durable physical protocol. No current-head acquisition,
+source provenance, all-mutator closure, confidentiality, arbitrary local theory,
+Q18 prepared-patch policy or production implementation follows. These extensions
+are outside both frozen Oracle review packets.

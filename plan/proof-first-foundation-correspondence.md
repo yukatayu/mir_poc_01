@@ -539,3 +539,29 @@ Two mutations fail required general properties and concrete controls; new axioms
 propext/Quot.sound only, final15-source mirror6c0a86 PASS. Current authority/head
 acquisition, source provenance, physical atomicity, grant-layer dependence and
 Q18 remain open. Stored Invocation's World/grant are not fresh merely by replay.
+
+119-row task trace now resides in docs/proof-first/REQUIREMENT_DISPOSITIONS.json.
+It preserves original U/D and approval metadata plus Q/PT/SC/alpha identifiers;
+scoped proof/reference/regression evidence is separated from whole-requirement
+acceptance. No alpha profile or new roadmap is adopted. Both original pending
+Oracle jobs actually failed on Chrome disconnect before conversation creation;
+one same-packet W1 actual-error recovery is active, without a recovered answer.
+
+User-requested provisional effort view (2026-09-10 09:20 JST): about15–25% of the work toward
+this task's verified alpha candidate, not a measured pass rate or accepted
+requirements. Remaining W0reading8–20h, W1extension4–12h, W2boundary12–30h,
+W3dynamic-source24–60h, W4runtime16–40h, W5recovery24–60h,
+W6private-observation16–40h, W7integration16–40h; rounded120–300active hours.
+Excludes external waits; foundational counterexamples can exceed the upper end.
+These are main-agent planning hypotheses, not an independently reviewed new
+roadmap or owner-approved technical profile. Re-estimate after W2 review and first
+W3 ordinary-source addition/removal. User confirms Chrome crash and allows
+appropriate actual-error resends; no normal-running latency retry.
+
+Restored-call input separation now has unreviewed kernel evidence: saved logical
+request/evidence is attached to supplied World/registry/catalog/grant/bounds;
+missing or denied current inputs reject, useful original calls remain, successful
+calls preserve stated resource conditions. Old Invocation still accepts its old
+context, so authentic current acquisition is explicitly unresolved. This is not
+actual save/load, a byte format or Q18 policy, and does not validate arbitrary
+resource/history input. Three mutants detect revocation/grant erasure/all-rejection.
