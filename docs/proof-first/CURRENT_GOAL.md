@@ -131,3 +131,11 @@ parser syntax and global registry shadowing policy unselected. Independent elabo
 rules and existing Core typing must match the executable elaborator/checker.
 This closes a source-binding obligation, not source-driven module installation,
 current authority acquisition or W2-wide acceptance; Oracle review remains open.
+
+Current W2 continuation audit: explicit computation/continuation rules cannot be
+replaced by absence from pure Value. External AffineResumptions candidate proves
+static checker correspondence and retained failure-aware attempts. Current decisive
+counterexample: two static slots can alias one semantic context. Next connection
+must bind consumable identities and signatures to the existing current module/
+resource call; copying pure declaration data must not mint another resume right.
+No production reliance or whole-W2 closure. The repaired Oracle review is pending.

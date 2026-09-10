@@ -1,6 +1,6 @@
 # Current Task Map (LAB)
 
-最終更新: 2026-09-10 10:39 JST
+最終更新: 2026-09-10 17:11 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project direction,
 theory, ADRs, conformance, and process. Everything outside `mirrorea_canon/` is LAB
@@ -59,8 +59,12 @@ fueled totality and the independently authorized current call. Actual parsed
 higher-order source has bounded Lean-reference controls; existing runtime support
 remains absent. Source/type-environment provenance, finite-machine/failure mapping
 and the larger expressive floor must be classified explicitly before W2 closure.
-Do not expand to W3 module installation. Both owned-tab Oracle jobs are pending;
-new extensions remain outside their frozen packets and require their own review.
+Do not expand to W3 module installation. The explicit continuation floor now has
+external affine computation/checker and failure-aware attempt proofs, but distinct
+slots can alias one semantic request. Binding consumable rights/signatures to the
+actual current module/resource call is the immediate technical blocker. This is
+not a claim that an effect thunk or fields alone supplies full continuation semantics.
+A repaired-browser whole-W2 review is running; no final answer collected.
 
 ## ordered self-driven packages
 
@@ -111,24 +115,21 @@ L2 promotion requiring an owner-authenticated trust anchor remains fail-closed;
 Oracle is not such an anchor. Domain vocabulary remains library-level; Mirrorea,
 Typed-Effect, PrismCascade and upper applications remain separable.
 
-User confirmed Oracle Chrome had crashed and explicitly permits appropriate
-resends. Original W1 and revisedW2 terminated on Chrome disconnect before
-conversation creation. First W1 recovery also ended with actual Chrome-close error;
-second W1 recovery mirrorea-source-restart-second also records Chrome-close
-error2d7c56. The same packet was resent to one new exact owned tab as
-mirrorea-source-owned-tab-recovery (exec88911); no answer yet.
-W2 resend first rejected absent running browser, then its attach-metadata lookup
-failed before submission. After inspecting the supported exact-tab path, a new
-owned target was created and mirrorea-contract-owned-tab-recovery (exec90793)
-launched; no recovered answer.
-Preserve all frozen packets/logs; check at least180s apart; no latency cancellation,
-forced duplicate or paid fallback. No new answer or review acceptance obtained.
+User permitted appropriate actual-error resends, paused work to repair Oracle,
+then explicitly resumed. Both old owned-tab jobs exited with Oracle error1 and no
+answer. The replacement mirrorea-w2-repaired-scope-review (exec53779) uses a frozen
+committed source cut plus a separately identified external continuation candidate.
+Its current state is running; GPT-6 Pro model selection and prompt submission
+are verified. The final answer is not yet available. Check at least180s apart and retain the same job;
+no normal-latency restart, global profile/settings edit, forced duplicate or paid
+fallback. Oracle advice remains independent review input, not signed acceptance.
 
 ## research discovery items
 
 | Question | Impact / alternatives / current view |
 |---|---|
 | Ordinary-source expressive floor | prove owner-local/captured semantics and connect actual source; no example-name runtime expansion or trusted-control-only construction |
+| Continuation binding | separate Gamma/Delta/Psi and failure-aware attempts; static slot uniqueness permits semantic aliases; compare semantic-key consumption with checked injective bindings before actual provider reliance |
 | Current context and Q18 | old saved context versus freshly authenticated context; prepared authority reservation versus commit reauthorization remains unresolved |
 | All-mutator/current-head closure | list actual entry/import/restore/provider/update paths; structural image validity cannot establish authenticity/freshness |
 | Private observation | actual trusted setup effective-label mismatch and allocation ID/capacity leaks; preserve label/current authorization and budget pipeline; no network exploit inferred solely from local controls |
@@ -145,13 +146,13 @@ forced duplicate or paid fallback. No new answer or review acceptance obtained.
   reports. Report2606 and accepted I3-3 records remain immutable.
 - Reproducible counterexamples suspend the affected consumer. Missing premises
   constrain reliance without automatically refuting a conditional theorem.
-- Corpus inventory/grep is not full reading. Plans302 and specs00–43/examples00–212
+- Corpus inventory/grep is not full reading. Plans302 and specs00–43/examples00–215
   read; many examples/docs/samples remain. No docs/reports bulk reading.
 - Latest resource preflight: root ext4 about55GiB free,12GiB RAM available;
   /mnt/mirrorea-work is absent/unmounted. Small outside-repo copies use root storage;
   no heavy new build, cleanup, host-share use or disposable-source deletion.
-- Own commitb83a8111 (normalization/source bridge) pushed with verified parity.
-  New named-elaboration/helper evidence remains unreviewed and uncommitted. Keep RESUME exact.
+- Own commit89f1be22 (named elaboration/helper) pushed successfully.
+  Continuation scratch and forward audit notes remain unreviewed; keep RESUME exact.
 - Continue authorized work after checkpoints; no sub-agent, final-alpha claim,
   stale-reference concealment or skipped validation reported as success.
 

@@ -1645,3 +1645,60 @@ close while its required review is uncollected. Owner stop after W2 remains acti
 Final docs79659 PASS7a3306,1762 numbered reports. Whitespace and final15-source/
 helper-hash/prior-evidence audit a25aa4 PASS. No later source edits. All fault
 injection results remain separate from successful actual kernel/runtime evidence.
+
+W2 continuation boundary audit, 2026-09-10 17:10 JST: F0.3 WORKPLAN section4 and workstreams.json
+explicitly require computation/continuation rules, not merely exclusion from pure
+Value. External AFFINE_RESUMPTIONS_WORKDIR now holds AffineResumptions.lean,
+source hashf70ea7cf92a9d5b4bed7ee1570bc39e361fdd5e55a39fbbfb0a2626b2251c52c. General declarative
+computation typing/checker equivalence, separate affine permission flow, exact
+signature/effect/failure retention and conditional successful execution typing
+passed DRAFT11 b699b4. Later-denial control rejects the initial Option driver as a
+failure/retry implementation: it loses the prior call record. Successor runAttempt
+retains attempted rights on denial; all_attempts_once, actual-prefix correspondence
+and first-computation attempt retention pass. Standard propext/Quot.sound only.
+These are frozen external nonproduction candidates, not additional accepted Mir
+semantics. Five static mutants6ad89d and three attempt mutants5569aa were rejected;
+failed drafts retained, including missing implicit binder/syntax/Decidable issues.
+
+A material remaining counterexample is now executable: two distinct slots with
+the same declared signature/context pass static checking and record the context
+twice. Slot uniqueness is not semantic request uniqueness. The signature's Nat
+context/code/contract/generation labels are not yet bound to CurrentUse.Context
+or a saved call; service typing does not establish admission, effect meaning or
+current authority. No real resource provider, serial re-entry/recovery or runtime
+failure classification is connected. Keep this as the current W2 continuation
+blocker; do not solve it by renaming a thunk or adding fields alone.
+
+User requested a repair pause, which was honored without another Oracle send,
+then explicitly resumed. Old owned-tab jobs returned Oracle exit1 e4483a/c14bc0;
+metadata error0afed9 and dead old endpoint6a757e are actual failure evidence.
+Both manuals were refreshed72b4a0/6254e1 and local help6a6288 checked after repair.
+W2 replacement mirrorea-w2-repaired-scope-review launched adfae7 (exec53779),
+packet question hash8d3f5e34c4d55a7707dd99dd02038d7d795116060c532cf7d8148bbe133ea9e2.
+Twenty frozen files are bundled text, approximately162275 input tokens in dryrun8676f5;
+packet includes committed89f1be22 and separate uncommitted Affine DRAFT8. Later
+DRAFT9–11 prefix/alias consequences are excluded and need explicit disposition.
+No API fallback, arbitrary deadline, force retry, settings/profile/installed-code
+edit, or sub-agent. Latest status e0c65a running/noanswer at08:08:58UTC; model
+selection and prompt submission are not yet confirmed. Ordinary proof-source
+checkpoint89f1be22 was committed/pushed successfully1a4c66 before these forward notes.
+
+plan/ correspondence and current-goal/resume notes updated for this same W2
+consumer. progress.md and tasks.md updated for the concrete continuation blocker and repaired
+review state; no new roadmap or estimate adopted. Documentation.md/project-status/
+samples_progress updates unnecessary: accepted phase, runnable repo command, source
+workflow and owner stop boundary unchanged. No new report/sample root or
+production implementation. Existing source proofs were not changed or rerun;
+new scratch Lean checks and counterexamples are the actual evidence. Documentation
+scaffold/diff validation pending; no task completion, W2 acceptance or W3 work.
+
+Browser metadata85f4e7 confirms promptSubmitted=true and 6Pro verified selection
+at08:06:01.944UTC. Later status9d055e08:16:05UTC remains running/noanswer; this is
+a live submitted review, not a pre-submit UI stall. Original documentation command
+19589 returned708178 PASS1762. It overlapped snapshot edits, so final post-edit
+scaffold validation remains necessary. Own focused diff reviewed98423e/408250.
+
+Final post-edit documentation validation86831 returned e6763c PASS (1762 reports);
+focused diff/whitespace checks pass. Source proof cut remains unchanged89f1be22.
+Current Oracle live handle15e1b3 and status78be1e08:20:34UTC confirm a submitted,
+verified-model job still running. No final response or W2 review acceptance yet.

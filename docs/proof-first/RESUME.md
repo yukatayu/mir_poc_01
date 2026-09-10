@@ -157,3 +157,84 @@ still blocks W2 close. Source/type/provenance and math-vs-machine limits explici
 No active command other than retained Oracle jobs. Most recent statuses e38a50
 01:33:55UTC running/noanswer both. Async user question pending: whether Chrome
 restart is complete/ChatGPT usable; do not treat elapsed time as an answer.
+
+LATEST 2026-09-10 11:04 JST: named increment committed89f1be22 and push1a4c66
+succeeded, git clean e94e1d before this forward resume note. User reports Chrome
+Aw Snap SIGILL and asks whether internal settings were changed. Answer: main did
+not edit chrome://flags/Preferences, global Oracle config or installed Oracle code.
+Existing wrapper supplies launch flags (buildChromeFlags read3fb175); no causal
+claim about SIGILL. Global config mtime predates task. Chrome still present:
+earlier exact executable-name filter missed packed argv, corrected5dbaf8. Both
+owned job metadata remain running/noanswer at02:01:50UTC; logs contain no captured
+crash term931a5d. User-reported crash is real evidence, not model-latency failure.
+No profile/settings workaround, browser kill or new submission performed. Async
+user question now asks notification when restart yields usable ChatGPT. Preserve
+jobs90793/88911 and >=180s status cadence. Diagnostic record external
+CHROME_SIGILL_DIAGNOSTIC.json. No browser credentials/profile contents in packet.
+
+Verified source cut frozen ce312a: ORACLE_W2_FINAL_CUT points to
+oracle-w2-final-cut-teiqvu1v under existing external workroot. All15 source hashes
+match their actual fresh trust=0 kernel runs; final helper hash matches as well.
+QUESTION.md d97948 hash416adce421f317295389c6e51fb2f376f60df6a79691ae1eb963ea4eef5d7167;
+19 frozen files457122bytes; HASHES.json includes source manifest/evidence/question.
+NOT SUBMITTED. Neutral whole-W2 floor review requests minimum counterexamples,
+Gamma/Delta/Psi/effect connection adequacy, source direction, mathematical machine
+boundary, independent rules, and distinguishes later implementation obligations
+from actual W2 blockers. No earlier packet covers this cut and no earlier Oracle
+endorsement assumed. On usable browser confirmation inspect existing jobs before
+any error-based recovery; do not duplicate healthy submitted requests. Need review
+answer and resolved findings before W2 close; no W3/alpha work. Next practical
+command: validate frozen hashes and wrapper supported input budget/help before
+submission; keep original jobs/pointers and record failure/replacement honestly.
+
+Final-cut preview ed6fe3 succeeded in browser dry-run (~155404 tokens); no model request or browser launch. Actual send must retain intended inline/owned-tab flags and recheck input budget; dry-run default bundled18files. Read ledger now includes example214 full b1db6b; next215. Resume and ledger have own uncommitted forward notes; source proof cut remains89f1be22. No W2 completion claim.
+
+LATEST 2026-09-10 17:13 JST: User repair pause honored; now explicitly resumed. Old owned jobs
+88911/90793 terminal Oracle exit1 e4483a/c14bc0, metadataerror0afed9 and old endpoint
+dead6a757e. Both manuals refreshed72b4a0/6254e1; localhelp6a6288 and wrappers26b782/
+cbbb9a checked. NEW Oracle exec53779 launched adfae7, slug
+mirrorea-w2-repaired-scope-review. Pointer ORACLE_W2_REPAIRED_REVIEW ->
+oracle-w2-repaired-review-e55i23h2. Hash question
+8d3f5e34c4d55a7707dd99dd02038d7d795116060c532cf7d8148bbe133ea9e2.
+20 files bundled into text (~162275tokens), no API/force/deadline/settings edit.
+IMPORTANT85f4e7: runtime.promptSubmitted=true, 6Pro selection VERIFIED, already-
+selected, captured08:06:01.944UTC. This is a real submitted job. Keep it, no resend.
+Latest status941f2f08:12:00UTC running/noanswer. Check after>=180s LAST_CHECK_UTC.
+
+External AFFINE_RESUMPTIONS_WORKDIR -> affine-resumptions-aa08mv2k contains
+AffineResumptions.lean and frozen exact11 copy (not new repo source). DRAFT8 passed
+629698 and is in Oracle packet; DRAFT11 b699b4 adds actual-attempt-prefix,
+checked-prefix and first-computation retention plus semantic-alias counterexample.
+Latest sha f70ea7cf92a9d5b4bed7ee1570bc39e361fdd5e55a39fbbfb0a2626b2251c52c.
+General checker/rules, slot resource flow, exact signatures/rows, successful typed
+execution, failure-aware no-double-attempts pass; propext/Quot.sound only.
+Five static mutants6ad89d and three attempt mutants5569aa rejected. Failed drafts
+retained (initial implicit binders/layout, Value lacksDecidableEq use rfl,
+reservedidentifierprefix). No accepted sorry/admit. Scope SCOPE.md.
+Real falsifiers: Option success-only driver loses earlier calls on later denial;
+runAttempt retains consumed rights/attempts. More important, two slots can alias
+same semantic context; static slot uniqueness is not request uniqueness. Signatures
+use uninterpreted Nat context, not actual CurrentUse.Context/UseId. Generic Service
+has no state/current-resource/auth binding. DO NOT count this as W2 closure or
+full continuation implementation. Oracle prompt explicitly asks whether it is
+only an inadequate command/thunk fragment and smallest actual consumer connection.
+A possible successor would consume semantic UseId and bind full Context at boundary;
+not implemented/selected. Wait for review on this concrete disputed connection,
+not an excuse to add unrelated features. Later DRAFT9–11 excluded from frozen send.
+
+Same report/plan/currentgoal forward notes00de43; tasks full snapshot rewritten and
+progress updated1ee344 for actual continuation blocker and repair status. Codeproof
+HEAD still89f1be22 (pushed1a4c66); only forward docs dirty. Documentation baseline
+exec19589 was accidentally started by validate_docs.py --help (script runs checks),
+still running6eef32, collect before a final check after doc edits. No broadRust/
+QUICrerun warranted, originalproofcone unchanged. Required reading nextexample215.
+Stop after actual W2 review/proof/integration closure, not this scratch proof.
+
+Post-edit docs86831 e6763c PASS1762; initialdocs19589 708178 PASS. Final own docs
+notes ready to checkpoint, proofsource unchanged89f1be22. Oracle live handle53779
+15e1b3 retained, status78be1e08:20:34UTC running/submitted/modelverified/noanswer.
+External W2_CLOSURE_AUDIT.json has eight requirement/evidence/gap rows; no closure.
+Example215 refreshed e27865, next216; ledger already contains same source hash.
+Existing Once.no_second_effect d52968 already handles same semantic key through
+different Invocation after arbitrary retained schedules: reuse it for continuation
+binding rather than inventing another effect-deduplication mechanism.

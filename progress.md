@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-09-10 10:38 JST
+最終更新: 2026-09-10 17:11 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -68,7 +68,10 @@ reading is incomplete. Memory: `plan/proof-first-foundation-correspondence.md`;
 evidence: Reports2611/2612. W2 now has ten mirrored unreviewed Lean candidates
 for resource/contract/function/current-use correspondence, explicit captures and
 higher-order interface carriage, including failure-aware capture continuation; source-level module handles and actual
-source/runtime refinement remain open.
+source/runtime refinement remain open. The explicit computation/continuation floor
+now has external affine checking and failure-aware attempt evidence. Static slots
+can still alias one semantic request; actual current-context/resource binding is
+unmet. The repaired-browser W2 review is running, with no collected answer.
 
 | Task axis | Current status | Startability |
 |---|---|---|
@@ -339,3 +342,5 @@ The authorized roadmap is paused, not blocked, stale or closed.
 - 2026-09-10 09:58 JST — W2 ordinary-function normalization preserves checked failure/scope in Lean; five actual LAB source controls and seven export negatives pass. Higher-order source/review gates remain; stop after W2.
 
 - 2026-09-10 10:38 JST — W2 named lexical checker/elaborator and current-call reduction pass fresh15 Lean; actual-parser higher-order reference controls pass, existing runtime gap retained; helper failure propagation repaired and fault-tested. Review open; stop after W2.
+
+- 2026-09-10 17:11 JST — W2 continuation audit: checked affine rules and failure-preserving attempt prefixes; semantic-request alias counterexample remains open. Oracle repair pause honored, one frozen W2 review restarted; no W2 acceptance.

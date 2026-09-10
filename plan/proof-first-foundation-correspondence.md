@@ -587,3 +587,15 @@ still rejects the example. Mathematical reference and finite Int64 controls rema
 separate from machine semantics. Review is pending; no new final grammar/phase or
 W2 closure. A weaker syntax-error negative and optimized-Python validation-exit
 bug were found, corrected and retained forward as evidence, not rewritten away.
+
+W2 explicit continuation floor remains a real blocker. A nonproduction external
+candidate separates pure values from affine resumption slots and proves checker
+correspondence, exact effect/failure/context obligations and single-use slot flow.
+A failure-aware driver retains actual attempted resumptions; the old Option driver
+loses prior history on later denial and is an unsafe control. Distinct slots can
+still alias one semantic context: slot uniqueness is not request uniqueness.
+Binding signatures/permissions to actual CurrentUse and the checked module/resource
+boundary is unmet, as are stateful provider/failure/re-entry rules. This is evidence
+for the same W2 consumer, not W3 scope or a selected final computation calculus.
+The restarted neutral W2 review includes the earlier scratch cut with these limits
+explicit. No external signature or Canon acceptance is inferred from Oracle advice.
