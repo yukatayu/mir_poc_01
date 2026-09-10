@@ -47,7 +47,9 @@
   - W2's ordinary-function bridge uses
     `python3 scripts/proof_first_function_contract_check.py --workdir <new-directory> --lean-path <compiled-proof-directory>`.
     It generates external finite evidence from actual LAB source/checker/runtime;
-    it is not a new active source root, general refinement or network E2E.
+    named higher-order cases use the actual parser and a Lean reference, with existing
+    runtime support still absent. It is not a new active source root, general
+    refinement or network E2E.
   - W2 resource/contract/pure-function and owner/capture/handle candidates are documented in
     `lean/foundations/MirroreaProofFirstContracts.md` and Report2612. They have
     kernel evidence; review and existing-Mir refinement remain open. They are

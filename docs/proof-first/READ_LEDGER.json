@@ -22457,5 +22457,75 @@
     "range": "1-132",
     "role": "Full previous goal plus main-authored named lexical elaboration direct consumer",
     "status": "full"
+  },
+  {
+    "path": "samples/lean/foundations/MirroreaProofFirstPureHandleFunctions.lean",
+    "sha256": "ec98f54f674144d22f38874cb2763614387b1c36e53658d78ec4dbe23b2f2c0c",
+    "range": "1-1146",
+    "role": "Full previous source plus sole-main authored/inspected named elaboration, evidence helper, fault-propagation and snapshot delta; helper ed76f9/f57b05 plus explicit correction",
+    "status": "full"
+  },
+  {
+    "path": "scripts/proof_first_function_contract_check.py",
+    "sha256": "6106801c061007452e1797d58b9976080136112e15d4edc82ce1c5a8d09eb1fb",
+    "range": "1-228",
+    "role": "Full previous source plus sole-main authored/inspected named elaboration, evidence helper, fault-propagation and snapshot delta; helper ed76f9/f57b05 plus explicit correction",
+    "status": "full"
+  },
+  {
+    "path": "samples/lean/foundations/MirroreaProofFirstContracts.md",
+    "sha256": "c5f4ed8890102c0a189f23b52342303f1e8d72a624f81465093166104a708b96",
+    "range": "1-661",
+    "role": "Full previous source plus sole-main authored/inspected named elaboration, evidence helper, fault-propagation and snapshot delta; helper ed76f9/f57b05 plus explicit correction",
+    "status": "full"
+  },
+  {
+    "path": "docs/proof-first/CURRENT_GOAL.md",
+    "sha256": "7c9ea0109b9dbc728a2c6bc3c76aadad190437a68aae4f1e34defb19e5d7d7cb",
+    "range": "1-133",
+    "role": "Full previous source plus sole-main authored/inspected named elaboration, evidence helper, fault-propagation and snapshot delta; helper ed76f9/f57b05 plus explicit correction",
+    "status": "full"
+  },
+  {
+    "path": "tasks.md",
+    "sha256": "80ee0f5f3a1279aa7432d85d609741ac1da6d3054b9152e898bb56558667ea37",
+    "range": "1-162",
+    "role": "Full previous source plus sole-main authored/inspected named elaboration, evidence helper, fault-propagation and snapshot delta; helper ed76f9/f57b05 plus explicit correction",
+    "status": "full"
+  },
+  {
+    "path": "progress.md",
+    "sha256": "101271fc8f37dffed5304f4db1522f36a938d2b24182dc4d106cb559af670b92",
+    "range": "1-341",
+    "role": "Full previous source plus sole-main authored/inspected named elaboration, evidence helper, fault-propagation and snapshot delta; helper ed76f9/f57b05 plus explicit correction",
+    "status": "full"
+  },
+  {
+    "path": "samples/README.md",
+    "sha256": "b7dfa0565930b653deaa2fb43e153591d10c5baa1b3d607c932b6a2b656c360d",
+    "range": "1-311",
+    "role": "Full previous source plus sole-main authored/inspected named elaboration, evidence helper, fault-propagation and snapshot delta; helper ed76f9/f57b05 plus explicit correction",
+    "status": "full"
+  },
+  {
+    "path": "scripts/README.md",
+    "sha256": "f17ccf112920f3bf0558013a08f3be9af3921b11db20bc4c9f1593fa17521504",
+    "range": "1-443",
+    "role": "Full previous source plus sole-main authored/inspected named elaboration, evidence helper, fault-propagation and snapshot delta; helper ed76f9/f57b05 plus explicit correction",
+    "status": "full"
+  },
+  {
+    "path": "samples_progress.md",
+    "sha256": "e5f9955171512b24c221ebc0dd36db8b1220c4b82feea418a9e3fb86ac5f1f3b",
+    "range": "1-425",
+    "role": "Full previous source plus sole-main authored/inspected named elaboration, evidence helper, fault-propagation and snapshot delta; helper ed76f9/f57b05 plus explicit correction",
+    "status": "full"
+  },
+  {
+    "path": "crates/mir-ast/examples/textual_mir_alpha_parse.rs",
+    "sha256": "94fe7502c07ea159dd9bc7c14e830c3b5e67e745c7b88b72dbff24d48dc843d1",
+    "range": "1-140",
+    "role": "Existing actual parser example full read b77359, before offline build; unrelated final ls error does not erase the completed file read",
+    "status": "full"
   }
 ]

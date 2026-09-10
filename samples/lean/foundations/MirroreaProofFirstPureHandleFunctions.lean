@@ -915,3 +915,232 @@ theorem typed_environment_total {env : List (Value size)} {G : List Ty}
 #print axioms typed_environment_good
 #print axioms typed_environment_total
 end MirroreaProofFirst.PureHandleFunctions.Normalization
+
+-- Later unreviewed named lexical AST candidate; no final text grammar.
+namespace MirroreaProofFirst.PureHandleFunctions.NamedElaboration
+variable {size : Nat}
+
+def resolve (names : List String) (name : String) : Option Nat :=
+ match names with
+ | [] => none
+ | head :: tail => if name = head then some 0 else (resolve tail name).map Nat.succ
+
+inductive Resolves : List String → String → Nat → Prop where
+ | here {name tail} : Resolves (name :: tail) name 0
+ | there {head tail name i} : name ≠ head → Resolves tail name i → Resolves (head :: tail) name (i+1)
+
+theorem resolves_sound {names name i} (h : Resolves names name i) : resolve names name = some i := by
+ induction h <;> simp_all [resolve]
+
+theorem resolves_complete (names : List String) (name : String) (i : Nat)
+ (h : resolve names name = some i) : Resolves names name i := by
+ induction names generalizing i with
+ | nil => simp [resolve] at h
+ | cons head tail ih =>
+   by_cases eq : name = head
+   · subst head; simp [resolve] at h; subst i; exact .here
+   · cases ht : resolve tail name with
+     | none => simp [resolve,eq,ht] at h
+     | some j =>
+       simp [resolve,eq,ht] at h
+       subst i
+       exact .there eq (ih j ht)
+
+theorem resolve_exact (names : List String) (name : String) (i : Nat) :
+ resolve names name = some i ↔ Resolves names name i :=
+ ⟨resolves_complete names name i,resolves_sound⟩
+
+inductive Source (size : Nat) where
+ | handle (h : HandleValues.Interface size)
+ | integer (z : Int)
+ | natural (n : Nat)
+ | var (name : String)
+ | add (a b : Source size)
+ | mul (a b : Source size)
+ | lambda (name : String) (parameter : Ty) (body : Source size)
+ | app (fn argument : Source size)
+ | letIn (name : String) (type : Ty) (value body : Source size)
+ | iterate (name : String) (type : Ty) (count initial body : Source size)
+ deriving DecidableEq, Repr
+
+def elaborate (names : List String) : Source size → Option (Expr size)
+ | .handle h => some (.handle h)
+ | .integer z => some (.integer z)
+ | .natural n => some (.natural n)
+ | .var name => (resolve names name).map Expr.var
+ | .add a b => do return .add (← elaborate names a) (← elaborate names b)
+ | .mul a b => do return .mul (← elaborate names a) (← elaborate names b)
+ | .lambda name t body => (elaborate (name :: names) body).map (.lambda t)
+ | .app fn arg => do return .app (← elaborate names fn) (← elaborate names arg)
+ | .letIn name t value body => do
+   let v ← elaborate names value
+   let b ← elaborate (name :: names) body
+   return .app (.lambda t b) v
+ | .iterate name t count initial body => do
+   let n ← elaborate names count
+   let v ← elaborate names initial
+   let b ← elaborate (name :: names) body
+   return .iterate t n v b
+
+-- Independent syntax-directed relation. No checker success or evaluator result
+-- is a constructor premise. Source is a lexical AST, not a final text grammar.
+inductive Elaborates : List String → Source size → Expr size → Prop where
+ | handle {names h} : Elaborates names (.handle h) (.handle h)
+ | integer {names z} : Elaborates names (.integer z) (.integer z)
+ | natural {names n} : Elaborates names (.natural n) (.natural n)
+ | var {names name i} : Resolves names name i → Elaborates names (.var name) (.var i)
+ | add {names a b x y} : Elaborates names a x → Elaborates names b y → Elaborates names (.add a b) (.add x y)
+ | mul {names a b x y} : Elaborates names a x → Elaborates names b y → Elaborates names (.mul a b) (.mul x y)
+ | lambda {names name t body b} : Elaborates (name :: names) body b → Elaborates names (.lambda name t body) (.lambda t b)
+ | app {names fn arg f a} : Elaborates names fn f → Elaborates names arg a → Elaborates names (.app fn arg) (.app f a)
+ | letIn {names name t value body v b} : Elaborates names value v → Elaborates (name :: names) body b →
+     Elaborates names (.letIn name t value body) (.app (.lambda t b) v)
+ | iterate {names name t count initial body n v b} : Elaborates names count n → Elaborates names initial v →
+     Elaborates (name :: names) body b → Elaborates names (.iterate name t count initial body) (.iterate t n v b)
+
+theorem elaborates_sound {names source} {core : Expr size} (h : Elaborates names source core) :
+ elaborate names source = some core := by
+ induction h <;> simp_all [elaborate]
+ exact resolves_sound ‹Resolves _ _ _›
+
+theorem elaborates_complete (names : List String) (source : Source size) (core : Expr size)
+ (h : elaborate names source = some core) : Elaborates names source core := by
+ induction source generalizing names core with
+ | handle v => cases h; exact .handle
+ | integer z => cases h; exact .integer
+ | natural n => cases h; exact .natural
+ | var name =>
+   cases hr : resolve names name <;> simp [elaborate,hr] at h
+   cases h; exact .var (resolves_complete _ _ _ hr)
+ | add a b ha hb =>
+   cases ea : elaborate names a <;> cases eb : elaborate names b <;> simp [elaborate,ea,eb] at h
+   cases h; exact .add (ha _ _ ea) (hb _ _ eb)
+ | mul a b ha hb =>
+   cases ea : elaborate names a <;> cases eb : elaborate names b <;> simp [elaborate,ea,eb] at h
+   cases h; exact .mul (ha _ _ ea) (hb _ _ eb)
+ | lambda name t body ih =>
+   cases eb : elaborate (name :: names) body <;> simp [elaborate,eb] at h
+   cases h; exact .lambda (ih _ _ eb)
+ | app fn arg hf ha =>
+   cases ef : elaborate names fn <;> cases ea : elaborate names arg <;> simp [elaborate,ef,ea] at h
+   cases h; exact .app (hf _ _ ef) (ha _ _ ea)
+ | letIn name t value body hv hb =>
+   cases ev : elaborate names value <;> cases eb : elaborate (name :: names) body <;> simp [elaborate,ev,eb] at h
+   cases h; exact .letIn (hv _ _ ev) (hb _ _ eb)
+ | iterate name t count initial body hn hv hb =>
+   cases en : elaborate names count <;> cases ev : elaborate names initial <;>
+     cases eb : elaborate (name :: names) body <;> simp [elaborate,en,ev,eb] at h
+   cases h; exact .iterate (hn _ _ en) (hv _ _ ev) (hb _ _ eb)
+
+theorem elaborate_exact (names : List String) (source : Source size) (core : Expr size) :
+ elaborate names source = some core ↔ Elaborates names source core :=
+ ⟨elaborates_complete names source core,elaborates_sound⟩
+
+abbrev Context := List (String × Ty)
+
+def check (context : Context) (source : Source size) : Option (Expr size × Ty) := do
+ let core ← elaborate (context.map Prod.fst) source
+ let type ← infer (context.map Prod.snd) core
+ return (core,type)
+
+theorem check_exact (context : Context) (source : Source size) (core : Expr size) (t : Ty) :
+ check context source = some (core,t) ↔
+   Elaborates (context.map Prod.fst) source core ∧ Typed (context.map Prod.snd) core t := by
+ constructor
+ · intro h
+   cases ec : elaborate (context.map Prod.fst) source <;> simp [check,ec] at h
+   rename_i c
+   cases et : infer (context.map Prod.snd) c <;> simp [et] at h
+   obtain ⟨rfl,rfl⟩ := h
+   exact ⟨elaborates_complete _ _ _ ec,(infer_exact _ _ _).mp et⟩
+ · rintro ⟨he,ht⟩
+   simp [check,elaborates_sound he,typed_infer ht]
+
+theorem checked_execution_typed {context : Context} {source : Source size} {core t env out fuel}
+ (checked : check context source = some (core,t))
+ (typed : EnvTyped env (context.map Prod.snd)) (run : evaluate fuel env core = some out) :
+ HasType out t :=
+ (evaluator_typed fuel).1 typed ((check_exact _ _ _ _).mp checked).2 run
+
+theorem checked_execution_total {context : Context} {source : Source size} {core t env}
+ (checked : check context source = some (core,t)) (typed : EnvTyped env (context.map Prod.snd)) :
+ ∃ out minimum, HasType out t ∧ ∀ fuel, minimum ≤ fuel → evaluate fuel env core = some out :=
+ Normalization.typed_environment_total typed ((check_exact _ _ _ _).mp checked).2
+
+def invoke (fuel : Nat) (s : CurrentUse.World size)
+ (registry : ModuleContractBoundary.Registry size) (catalog : ModuleContractBoundary.Catalog)
+ (caller : CurrentUse.UseRequest size) (args : List Int) (auth : CurrentUse.Evidence)
+ (proof : ModuleContractBoundary.CallProof size) (source : Source size) : Option Nat :=
+ match check [] source with
+ | some (core,.handle) => invokeClosedRegistered fuel s registry catalog caller args auth proof core
+ | _ => none
+
+theorem invoke_checked {fuel : Nat} {s : CurrentUse.World size}
+ {registry : ModuleContractBoundary.Registry size} {catalog : ModuleContractBoundary.Catalog}
+ {caller : CurrentUse.UseRequest size} {args : List Int} {auth : CurrentUse.Evidence}
+ {proof : ModuleContractBoundary.CallProof size} {source : Source size} {out : Nat}
+ (ok : invoke fuel s registry catalog caller args auth proof source = some out) :
+ ∃ core, Elaborates [] source core ∧ Typed [] core .handle ∧
+   invokeClosedRegistered fuel s registry catalog caller args auth proof core = some out := by
+ unfold invoke at ok
+ split at ok
+ · rename_i core checked
+   have h := (check_exact [] source core .handle).mp checked
+   exact ⟨core,h.1,h.2,ok⟩
+ · contradiction
+
+theorem invoke_eventually_exact {source : Source size} {core : Expr size}
+ (checked : check [] source = some (core,.handle))
+ (s : CurrentUse.World size) (registry : ModuleContractBoundary.Registry size)
+ (catalog : ModuleContractBoundary.Catalog) (caller : CurrentUse.UseRequest size)
+ (args : List Int) (auth : CurrentUse.Evidence) (proof : ModuleContractBoundary.CallProof size) :
+ ∃ h minimum, Executes (.expression [] core) (.handle h) ∧
+   ∀ fuel, minimum ≤ fuel → invoke fuel s registry catalog caller args auth proof source =
+     ModuleContractBoundary.catalogCall s registry catalog (HandleValues.request caller h) args auth proof := by
+ have ht := ((check_exact [] source core .handle).mp checked).2
+ obtain ⟨h,minimum,run,exactly⟩ := Normalization.checked_call_eventually_exact (typed_infer ht) s registry catalog caller args auth proof
+ refine ⟨h,minimum,run,?_⟩
+ intro fuel enough
+ simpa [invoke,checked] using exactly fuel enough
+
+def integerResult (fuel : Nat) (source : Source size) : Option Int := do
+ let (core,_) ← check [] source
+ match evaluate fuel [] core with
+ | some (.integer z) => some z
+ | _ => none
+
+namespace Controls
+def shadow : Source 0 := .letIn "x" .int (.integer 3) (.letIn "x" .int (.integer 8) (.var "x"))
+def captured : Source 0 := .letIn "offset" .int (.integer 3)
+ (.letIn "f" (.arrow .int .int) (.lambda "x" .int (.add (.var "x") (.var "offset")))
+   (.letIn "offset" .int (.integer 100) (.app (.var "f") (.integer 4))))
+def higherOrder : Source 0 := .app
+ (.lambda "f" (.arrow .int .int) (.app (.var "f") (.integer 4)))
+ (.lambda "x" .int (.mul (.var "x") (.var "x")))
+def loop : Source 0 := .iterate "n" .int (.natural 3) (.integer 1) (.add (.var "n") (.integer 2))
+example : resolve ["x","x"] "x" = some 0 := by decide
+example : integerResult 30 shadow = some 8 := by decide
+example : integerResult 30 captured = some 7 := by decide
+example : integerResult 30 higherOrder = some 16 := by decide
+example : integerResult 30 loop = some 7 := by decide
+example : check [] (Source.var (size:=0) "missing") = none := by decide
+example : check [] (Source.app (size:=0) (.integer 1) (.integer 2)) = none := by decide
+example : check [] (Source.letIn (size:=0) "x" .nat (.integer 1) (.var "x")) = none := by decide
+-- Let initializer remains outside its own new binding.
+example : check [] (Source.letIn (size:=0) "x" .int (.var "x") (.var "x")) = none := by decide
+example (h : HandleValues.Interface size) :
+ elaborate [] (.letIn "h" .handle (.handle h) (.var "h")) =
+ some (.app (.lambda .handle (.var 0)) (.handle h)) := by
+ simp [elaborate,resolve]
+example : check [] (Source.letIn (size:=0) "y" .int (.integer 99)
+ (.letIn "x" .int (.var "x") (.var "x"))) = none := by decide
+end Controls
+#print axioms invoke_checked
+#print axioms invoke_eventually_exact
+#print axioms check_exact
+#print axioms checked_execution_typed
+#print axioms checked_execution_total
+#print axioms elaborate_exact
+#print axioms resolve_exact
+#print axioms elaborates_sound
+end MirroreaProofFirst.PureHandleFunctions.NamedElaboration

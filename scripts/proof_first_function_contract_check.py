@@ -36,11 +36,13 @@ def export(report, entry):
 
 def negative_controls(p, checker, valid_report):
     records = []
-    for name, body in [('subtraction', 'return x - 1'), ('local_binding', 'let y = x\n  return y'), ('wrong_type', 'return true')]:
+    for name, body in [('subtraction', 'return x - 1'), ('local_binding', 'let y: Int64 = x\n  return y'), ('wrong_type', 'return true')]:
         src = p / (name + '.mir')
         src.write_text('module ProofFirst.Negative\n\nfn compute(x: Int64) -> Int64 {\n  ' + body + '\n}\n')
         c = invoke([checker, src, '--format', 'json'])
         report = json.loads(c['stdout'])
+        if name in ('subtraction', 'local_binding') and not report['accepted']:
+            raise AssertionError('control must reach the checked-IR export boundary')
         try:
             export(report, 'compute')
         except ValueError as error:
@@ -66,6 +68,103 @@ def negative_controls(p, checker, valid_report):
             raise AssertionError('invalid IR accepted')
     return records
 
+def named_quote(name):
+    return json.dumps(name, ensure_ascii=False)
+
+def named_render_type(value):
+    if value in ('int', 'nat', 'handle'):
+        return '.' + value
+    if isinstance(value, tuple) and len(value) == 2:
+        return '(.arrow ' + named_render_type(value[0]) + ' ' + named_render_type(value[1]) + ')'
+    raise ValueError('unsupported type-environment entry')
+
+def named_type_of(ast, aliases):
+    if ast == 'Int64':
+        return '.int'
+    if ast == 'UInt64':
+        return '.nat'
+    if isinstance(ast, dict) and set(ast) == {'Named'}:
+        return named_render_type(aliases[ast['Named']])
+    raise ValueError('outside supported types')
+
+def named_expression(ast):
+    kind = ast['kind']
+    if set(kind) == {'IntLiteral'}:
+        return '(.integer (' + str(kind['IntLiteral']) + '))'
+    if set(kind) == {'Variable'}:
+        return '(.var ' + named_quote(kind['Variable']) + ')'
+    if set(kind) == {'Binary'}:
+        b = kind['Binary']
+        op = {'Add': 'add', 'Mul': 'mul'}[b['op']]
+        return '(.' + op + ' ' + named_expression(b['left']) + ' ' + named_expression(b['right']) + ')'
+    if set(kind) == {'Call'}:
+        c = kind['Call']
+        if len(c['arguments']) != 1:
+            raise ValueError('unary call only')
+        return '(.app ' + named_expression(c['callee']) + ' ' + named_expression(c['arguments'][0]) + ')'
+    raise ValueError('outside pure expression fragment')
+
+def named_body(statements, aliases):
+    if len(statements) == 1 and set(statements[0]) == {'Return'}:
+        return named_expression(statements[0]['Return']['value'])
+    if len(statements) > 1 and set(statements[0]) == {'Let'}:
+        b = statements[0]['Let']
+        if b['mutable']:
+            raise ValueError('mutable local outside pure bridge')
+        return '(.letIn ' + named_quote(b['name']) + ' ' + named_type_of(b['ty'], aliases) + ' ' + named_expression(b['value']) + ' ' + named_body(statements[1:], aliases) + ')'
+    raise ValueError('outside typed-let/return fragment')
+
+def named_module(report, aliases, entry, arg):
+    if not report['accepted']:
+        raise ValueError('parser rejected')
+    ast = report['module']
+    if any((ast[k] for k in ['imports', 'capabilities', 'effects', 'records', 'transitions'])):
+        raise ValueError('non-function module item')
+    functions = []
+    for item in ast['items']:
+        if set(item) != {'Function'}:
+            raise ValueError('non-function item')
+        functions.append(item['Function'])
+    names = [f['function_name'] for f in functions]
+    if len(set(names)) != len(names):
+        raise ValueError('duplicate module definition')
+    if entry not in names:
+        raise ValueError('missing entry')
+    result = '(.app (.var ' + named_quote(entry) + ') (.integer (' + str(arg) + ')))'
+    for f in reversed(functions):
+        a = named_type_of(f['input_type'], aliases)
+        b = named_type_of(f['output_type'], aliases)
+        value = '(.lambda ' + named_quote(f['parameter_name']) + ' ' + a + ' ' + named_body(f['body'], aliases) + ')'
+        result = '(.letIn ' + named_quote(f['function_name']) + ' (.arrow ' + a + ' ' + b + ') ' + value + ' ' + result + ')'
+    return result
+
+def named_controls(workdir, parser_binary, checker_binary, lean_path):
+    base = 'module ProofFirst.HigherOrder\nfn square(x: Int64) -> Int64 { return x * x }\nfn apply(f: UnaryInt) -> Int64 { return f(4) }\nfn main(x: Int64) -> Int64 {\n  let selected: UnaryInt = square\n  return apply(selected) + x\n}\n'
+    returned = 'module ProofFirst.Returned\nfn square(x: Int64) -> Int64 { return x * x }\nfn identity(f: UnaryInt) -> UnaryInt { return f }\nfn main(x: Int64) -> Int64 { return identity(square)(x) }\n'
+    cases = [('base', base, {'UnaryInt': ('int', 'int')}, 'main', 19), ('renamed', base.replace('square', 'transform').replace('apply', 'consume').replace('main', 'launch').replace('UnaryInt', 'Procedure'), {'Procedure': ('int', 'int')}, 'launch', 19), ('returned', returned, {'UnaryInt': ('int', 'int')}, 'main', 9), ('wrong_result_type', base.replace('fn square(x: Int64) -> Int64', 'fn square(x: Int64) -> UInt64'), {'UnaryInt': ('int', 'int')}, 'main', None), ('wrong_type_environment', base, {'UnaryInt': 'nat'}, 'main', None), ('unbound', base.replace('apply(selected) + x', 'apply(selected) + missing'), {'UnaryInt': ('int', 'int')}, 'main', None)]
+    records = []
+    for name, source, aliases, entry, expected in cases:
+        source_file = workdir / ('named_' + name + '.mir')
+        source_file.write_text(source)
+        parsed = invoke([parser_binary, source_file, '--format', 'json'])
+        if parsed['exit_code'] != 0:
+            raise AssertionError(parsed)
+        program = named_module(json.loads(parsed['stdout']), aliases, entry, 3)
+        lean = 'import MirroreaProofFirstPureHandleFunctions\nopen MirroreaProofFirst.PureHandleFunctions.NamedElaboration\ndef program : Source 0 := ' + program + '\n'
+        if expected is None:
+            lean += 'example : check [] program = none := by decide\n#eval (check [] program).isSome\n'
+        else:
+            lean += f'example : integerResult 200 program = some {expected} := by decide\n#eval integerResult 200 program\n'
+        lean_file = workdir / ('Named_' + name + '.lean')
+        lean_file.write_text(lean)
+        command = ['lean', '--trust=0', lean_file.name]
+        result = subprocess.run(command, cwd=workdir, env=dict(os.environ, LEAN_PATH=str(lean_path)), capture_output=True, text=True)
+        records.append(dict(name=name, source_text=source, type_environment=aliases, parser=parsed, lean_source=lean, kernel_command=command, kernel_exit=result.returncode, kernel_stdout=result.stdout, kernel_stderr=result.stderr))
+        if result.returncode != 0:
+            raise AssertionError(records[-1])
+    comparison = invoke([checker_binary, workdir / 'named_base.mir', '--format', 'json'])
+    return dict(classification='Actual existing parser to named Lean reference; mathematical integer model, not existing runtime support or general Int64 refinement. Type-name environment is supplied, not a Core primitive or authority.', parser_sha256=hashlib.sha256(parser_binary.read_bytes()).hexdigest(), cases=records, existing_checker_comparison=comparison)
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--workdir', type=Path, required=True)
@@ -73,15 +172,17 @@ def main():
     repo = Path(__file__).resolve().parents[1]
     parser.add_argument('--checker', type=Path, default=repo / 'target/debug/examples/full_system_v1_check')
     parser.add_argument('--runner', type=Path, default=repo / 'target/debug/examples/mir_full_system_v1_session')
+    parser.add_argument('--parser', type=Path, default=repo / 'target/debug/examples/textual_mir_alpha_parse')
     args = parser.parse_args()
     p = args.workdir.resolve()
     lean_path = args.lean_path.resolve()
     check = args.checker.resolve()
     run = args.runner.resolve()
+    parser_binary = args.parser.resolve()
     if not (lean_path / 'MirroreaProofFirstContractExport.olean').is_file():
         parser.error('--lean-path requires the compiled proof dependency cone')
-    if not check.is_file() or not run.is_file():
-        parser.error('build the existing LAB checker and runner first')
+    if not check.is_file() or not run.is_file() or (not parser_binary.is_file()):
+        parser.error('build the existing LAB parser, checker and runner first')
     p.mkdir(parents=False, exist_ok=False)
     cases = [('square', 'first', 'x', 'x * x + 1', -3, True), ('renamed', 'unrelated_name', 'value', 'value * value + 1', -3, True), ('shifted', 'shift', 'y', '(y + 2) * (y + 2) + 1', -3, True), ('nested', 'fourth', 'n', '(n * n) * (n * n) + 1', -2, True), ('linear', 'scale', 'z', 'z * 3 + 1', 2, False)]
     records = []
@@ -90,18 +191,23 @@ def main():
         src = p / (name + '.mir')
         src.write_text('module ProofFirst.Functions\n\nfn ' + entry + '(' + param + ': Int64) -> Int64 {\n  return ' + body + '\n}\n')
         c = invoke([check, src, '--format', 'json'])
-        assert c['exit_code'] == 0, c
+        if not c['exit_code'] == 0:
+            raise AssertionError(c)
         ir = json.loads(c['stdout'])
         t = export(ir, entry)
         r = invoke([run, src, '--entry', entry, '--input', str(arg), '--format', 'json'])
-        assert r['exit_code'] == 0, r
+        if not r['exit_code'] == 0:
+            raise AssertionError(r)
         actual = json.loads(r['stdout'])['runtime']
-        assert actual['accepted']
+        if not actual['accepted']:
+            raise AssertionError("validation failed: actual['accepted']")
         out = actual['output']['summary']
         m = re.fullmatch('Int64\\((-?\\d+)\\)', out)
-        assert m, out
+        if not m:
+            raise AssertionError(out)
         z = int(m[1])
-        assert z > 0
+        if not z > 0:
+            raise AssertionError('validation failed: z > 0')
         lean += [f'def {name} : Term := {t}', f'example : CheckedArithmetic.evaluate (-9223372036854775808) 9223372036854775807 [{arg}] (normalize {name}) = some {z} := by decide', f'example : scopeCheck 1 (normalize {name}) = true := by decide', f'example : CheckedArithmetic.evaluate (-9223372036854775808) 9223372036854775807 [{arg}] (normalize {name}) ≠ some {z + 1} := by decide']
         if symbolic:
             lean += [f'example : (match normalize {name} with | .add (.square a) (.integer 1) => check [] (normalize {name}) (.add (.square a) (.integer 1)) | _ => false) = true := by decide']
@@ -111,10 +217,12 @@ def main():
     f.write_text('\n'.join(lean) + '\n')
     k = subprocess.run(['lean', '--trust=0', f.name], cwd=p, env=dict(os.environ, LEAN_PATH=str(lean_path)), capture_output=True, text=True)
     negatives = negative_controls(p, check, json.loads(records[0]['checker']['stdout']))
-    result = dict(negative_controls=negatives, classification='Finite real-source/checker/runtime correspondence; JSON exporter and parser/runtime are TCB, no general Rust refinement or Mir E2E', binary_hashes={str(x): hashlib.sha256(x.read_bytes()).hexdigest() for x in [check, run]}, cases=records, kernel=dict(exit_code=k.returncode, stdout=k.stdout, stderr=k.stderr))
+    named = named_controls(p, parser_binary, check, lean_path)
+    result = dict(named_reference=named, negative_controls=negatives, classification='Finite real-source/checker/runtime correspondence; JSON exporter and parser/runtime are TCB, no general Rust refinement or Mir E2E', binary_hashes={str(x): hashlib.sha256(x.read_bytes()).hexdigest() for x in [check, run]}, cases=records, kernel=dict(exit_code=k.returncode, stdout=k.stdout, stderr=k.stderr))
     (p / 'ACTUAL_SOURCE_BRIDGE.json').write_text(json.dumps(result, indent=2))
-    print('cases', len(records), 'kernel', k.returncode)
+    print('existing-runtime cases', len(records), 'named-reference cases', len(named['cases']), 'kernel', k.returncode)
     print(k.stdout)
-    assert k.returncode == 0
+    if not k.returncode == 0:
+        raise AssertionError('validation failed: k.returncode == 0')
 if __name__ == '__main__':
     main()

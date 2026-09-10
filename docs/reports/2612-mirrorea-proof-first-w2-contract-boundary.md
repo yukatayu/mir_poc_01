@@ -1598,3 +1598,50 @@ Next independent LAB named-binder elaboration will target existing PureHandleFun
 without selecting final grammar or changing production. W1 error recovery eadad8
 now uses one new exact owned tab and unchanged frozen19-file packet, exec88911;
 running W2 job90793 retained. No response/review acceptance yet.
+
+Named lexical continuation at 2026-09-10 10:39 JST, same W2 consumer: independent nearest-name
+resolution/elaboration relations, check_exact with existing Core typing, general
+typed execution/totality, named invocation admission and eventual existing current
+catalog-call equality passedbb5621. Lexical capture/shadow, higher-order/iteration
+and typed/unbound/self-initializer controls pass. Four full-source mutants813d4a
+fail general statements and concrete controls. Failed initial var-case proofac8625
+retained; later successful drafts removed unused simp warnings. Standard logical
+axioms only, no accepted sorry/admit/Mir axiom. Actual PureHandleFunctions source
+now includes the namespace; fresh15 sources7570ee pass.
+
+Actual parser built offline/locked16acff, source accepted e308af, then generic
+AST encoding and named reference produced19 (3230c0). Six source cases14ea43
+include renamed identifiers/type aliases, returned functions, wrong result/type
+environment and unbound-variable controls. Existing checker comparison7deec8
+rejects the example; production unchanged. Aliases are supplied transparent
+structural types only; imported nominal/refinement provenance/version/assumptions
+remain obligations. Mathematical Core does not establish general Int64/UInt64
+semantics. Ordered nonrecursive immutable-let source is a partial probe; general
+mutable/effect/import/lifecycle source is not claimed implemented. Direct named
+interpretation is the viable alternative; author-written indices are not.
+
+Self-reviewed helpered76f9/f57b05 found the earlier local-binding negative stopped
+at a missing mandatory colon. Corrected it to an actually checked source and
+required that it reach the intended export boundary. Prior evidence stays intact.
+A separate explicit compiler-exit fault with PYTHONOPTIMIZE=1 exposed a real helper
+failure: exit0 despite kernel exit1 (22f698). Replaced removable assertions with
+explicit failure propagation. The same injected fault now returns exit1; actual
+parser/checker/runtime/Lean checks pass with optimization enabled7d4fa4. This
+fault-injection result is not a proof failure or a fake successful E2E. No broader
+production interpreter fix is claimed. W2_EXTENSION_CHECK.named_lexical_elaboration
+retains final hashes, fresh cone, source controls and failures.
+
+Samples/scripts/companion, plan, progress and tasks updated for the same command;
+no new active root or report. Documentation.md/project-status updates unnecessary:
+accepted Canon/I3-3/workflow unchanged. No new full Rust or QUIC test: source
+unchanged; actual parser/checker/runtime examples executed. Docs validation and
+final diff audit pending. Previousb83a8111 committed889429/pushedbe12f1/parity36e5b2;
+new named increment uncommitted/unreviewed. No sub-agents used.
+Oracle both owned-tab jobs remain running/noanswer e38a50 at01:33:55UTC; one owned
+Runtime.evaluate diagnostic had no reply02ed68. Its diagnostic timeout is not an
+Oracle job error/deadline; no cancellation, duplicate or paid fallback. W2 cannot
+close while its required review is uncollected. Owner stop after W2 remains active.
+
+Final docs79659 PASS7a3306,1762 numbered reports. Whitespace and final15-source/
+helper-hash/prior-evidence audit a25aa4 PASS. No later source edits. All fault
+injection results remain separate from successful actual kernel/runtime evidence.

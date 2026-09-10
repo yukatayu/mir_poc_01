@@ -7,13 +7,11 @@ proceed W3 or alpha, do not close on a micro-proof. Goal active, no token budget
 Canon accepted I3-3/ADR0043 and owner-paused Plan250 unchanged. LAB only; no
 THM/OBL/state promotion, public syntax/API or production increment accepted.
 
-HEADed3d98ea5a97f43f5ff04ff8b2090158eaf1ffdb (RestoredCall+119trace), committed
-355a6d, pushed4d58b3, parity7cc22f. Earlier46bc662a CurrentPolicyFrame,
+HEADb83a8111e9ebbd40db2de78454a8cc6869c8fce6 (ordinary normalization/source bridge),
+committed889429, pushedbe12f1, parity36e5b2. Parented3d98ea RestoredCall+119trace. Earlier46bc662a CurrentPolicyFrame,
 882a04df DurableDispatch,52962f80 actual QUIC baseline, e22cd207 image checks.
-Baseline had no unrelated dirty. Current own dirty: ordinary-function normalization
-proof/helper/evidence/companion, reading/status/report/continuation. Next: commit
-own checked increment, normal push/parity; continue named binding below. No reset/
-clean/force, use commit --no-gpg-sign. Handoffmaterials/archives immutable.
+Baseline had no unrelated dirty. Current own dirty: this continuation only; named source theory remains in outside
+workdir. No reset/clean/force; use commit --no-gpg-sign. Handoff originals immutable.
 
 Current semantic goal W2-local-contract-resource, PL1 S1/S2 proof/reference. Actual
 W2 exit still needs necessary ordinary-source expressive floor and scoped Oracle
@@ -52,10 +50,11 @@ RESTORED_CALL_CONTEXT_WORKDIR/MIRROR and other evidence pointers retained.
 
 NEXT RESEARCH: NAMED_FUNCTION_ELABORATION_WORKDIR points to
 named-function-elaboration-_9qbs2df, copied15 sources/oleans, SCOPE.md only.
-No named-elaboration proof written yet. Named lexical terms should elaborate to
+NamedElaboration.lean now contains actual general proofs; details below. Named lexical terms should elaborate to
 existing PureHandleFunctions Expr using nearest bound name, typed lambda/let/app/
 iteration; independent elaboration relation plus existing Core typing soundness/
-relative completeness. Compare named source with positional Core indices, not a
+relative completeness. Compare lowering named source to existing Core against directly interpreting
+named closure environments; author-written indices are a rejected control. No
 new final grammar/global registry-shadowing policy. Preserve handle binding/current
 invoke boundary. This is same W2 consumer, not W3 module installation.
 
@@ -87,3 +86,74 @@ strict browser-tab path and both manuals already read; no need repeated diagnosi
 
 Discord actual progressdce5e6 sent09:52 JST. Next aboutonehour/naturalcheckpoint;
 complete onlywhen stopping at actualW2 close. No final response at this checkpoint.
+
+NamedElaboration scratch DRAFT4 bb5621 PASS: resolve_exact nearest-name relation;
+elaborate_exact independent syntax-directed relation for handle/int/nat/var/add/
+mul/lambda/app/typed-let/finite-iterate; check_exact couples that relation with
+existing Core Typed; execution type preservation and general typed-environment
+totality; invocation reduces to existing checked/current catalogCall after enough
+fuel, preserving separate auth/resource predicates. Actual lexical capture7,
+shadow8,higher-order16,iteration7 controls and unknown/mistyped/self-initializer
+rejections pass. DRAFT1 ac8625 var-case proof failure retained (generated sorryAx
+only in failed kernel output); DRAFT2a5361d and3b4f3a7 PASS; unused simp removed
+in4. Four whole-file mutants813d4a fail both general laws and concrete controls:
+outer-first lookup, omitted lambda binder, self-scoped initializer, RejectAllNamed.
+Not yet mirrored/fresh cone/review/real-text parser. Next inspect/freeze proof,
+connect named AST to actual source without prematurely selecting final syntax;
+keep current-source higher-order gaps explicit. Do not call lexical AST a text
+parser or a new completed Mir source workflow. Updated goal remains W2-only.
+Oracle both running/noanswer7cecd5 at01:09:07UTC; check>=180s fromLAST_CHECK_UTC.
+Both exact owned tabs retained. a73d47 onlynot-due check, no newstatus fetched.
+
+Named actual-source bridge: existing parser example built offline/locked16acff
+(no production source edits). Real parser accepted higher_order.mir e308af.
+encode_actual_ast.py generically maps ordered nonrecursive functions, immutable
+annotated lets, calls/add/mul and supplied named-type environment to Source.
+It has no example-name dispatch. ActualNamedSource kernel/eval3230c0 returned19.
+Further SOURCE_CASES.json14ea43: base/renamed19, returned function9; wrong declared
+result type, wrong supplied type environment, unbound name rejected. Existing
+full_system_v1 checker still rejects source7deec8; this is parser→Lean reference,
+not new existing-runtime support. Numeric model is mathematical; finite examples
+are bounded but no general Int64/UInt64 refinement claimed. Missing/unsupported
+syntax/types and forward/recursive definitions remain outside this partial bridge.
+W2 minimum examples are syntax-independent in F0.3 WORKPLAN section4 (refreshed
+2efcdd); do not infer whole-W2 completion from this finite text bridge.
+
+Named proof is now appended to actual PureHandleFunctions.lean (ef2d74), no new
+proof module/sample root. Existing scripts/proof_first_function_contract_check.py
+extended with generic named AST encoder and six named source/reference controls,
+--parser dependency; helper stdout still reports first five existing-runtime cases
+but named_reference output explicitly separates reference execution. Fresh15 plus
+updated helper command RUNNING exec52288 (bf4802); collect it. Pointer
+NAMED_FUNCTION_ELABORATION_MIRROR / NAMED_FUNCTION_SOURCE_FINAL. New helper/code/
+evidence/docs not yet reviewed or recorded in W2_EXTENSION_CHECK. No new commit
+sinceb83a8111. Next collect52288, inspect new helper, source hashes, update same
+companion/report/plan/status/docs, validate and checkpoint. Prepare frozen review
+only after source cut verified; both running packets exclude all these additions.
+
+Oraclelatest a26c6d01:24:35UTC both running/noanswer. Earlierc0d719 own target IDs
+present. One read-only own-tab diagnostic02ed68: Runtime.evaluate(1+1) had no reply
+within10s; this is NOT an Oracle-job failure/deadline. Backend HTTP responds but
+renderer/CDP execution is unconfirmed. Installed liveTabs source6a57f9 sequentially
+inspects targets; no global tool/profile edit or cancellation. Retain normal jobs.
+
+LATEST current named increment verified: fresh15 plus expanded helper7570ee PASS;
+self-reviewed helpered76f9/f57b05. Found/fixed local-binding test missing colon
+(previous case was only parser rejection), now actual checker acceptance followed
+by intended export rejection. Deliberate compiler failure under PYTHONOPTIMIZE=1
+was incorrectly helper exit0 (22f698); explicit failure propagation fixes it to
+exit1. Actual compiler/runtime/parser under same optimization PASS7d4fa4, all
+5existing-runtime/6named-reference/7export controls. Faults are not real proof runs.
+Pointer FUNCTION_HELPER_FAILURE_PROPAGATION keepsRED/GREEN/REAL_FINAL. Pointer
+NAMED_FUNCTION_SOURCE_CORRECTED is accepted final helper artifact; earlier
+NAMED_FUNCTION_SOURCE_FINAL is retained pre-correction evidence. Source proof
+unchanged after15-module check. W2_EXTENSION_CHECK.named_lexical_elaboration now
+contains all evidence/current hashes; earlier keys/byte-prefix retained42e238.
+Docs79659 PASS7a3306 (1762), final hashes/whitespace/prior evidence a25aa4 PASS.
+Companion, plan/tasks/progress/sample/scripts docs synchronized; read ledger updated.
+Next: commit own named increment, push/parity, freeze W2 review cut and remaining
+obligation summary. Do not continue adding unrelated features; required review
+still blocks W2 close. Source/type/provenance and math-vs-machine limits explicit.
+No active command other than retained Oracle jobs. Most recent statuses e38a50
+01:33:55UTC running/noanswer both. Async user question pending: whether Chrome
+restart is complete/ChatGPT usable; do not treat elapsed time as an answer.

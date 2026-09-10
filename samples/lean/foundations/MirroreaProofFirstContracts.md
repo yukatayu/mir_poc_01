@@ -612,3 +612,50 @@ accepts them. The parser, JSON exporter, binary provenance and execution capture
 remain TCB obligations. Existing overflow panic is not fixed by these proofs.
 Higher-order source elaboration, module lifecycle, authenticated current context,
 all-entry closure and Oracle review remain open; no W2-wide acceptance follows.
+
+
+### Named lexical functions (unreviewed W2)
+
+PureHandleFunctions.NamedElaboration adds a named lexical AST, not a final text
+parser. Resolves specifies nearest binding independently of resolve; Elaborates
+specifies variables, pure operators, typed lambdas/application/lets and finite
+iteration independently of elaborate. check_exact equates actual admission with
+that declarative elaboration and existing Core Typed. General proofs retain
+execution types and sufficiently-fueled totality for typed environments. A named
+handle-selection call reduces to the existing checked current catalog call; it
+cannot manufacture authority or bypass the separate invocation conditions.
+
+Lexical shadow/capture, higher-order application and finite iteration have useful
+results; unbound/mistyped/self-initializing declarations reject. Four whole-source
+mutations expose outer-first lookup, a dropped lambda binder, a self-scoped let
+initializer and RejectAll. The viable alternative is direct evaluation in named
+closure environments; it needs another evaluator/type/current-call connection,
+whereas this candidate reuses the proved Core. Author-written indices are a
+rejected control, not the viable source alternative.
+
+The existing function evidence helper now also runs textual_mir_alpha_parse and
+encodes its actual function/immutable-let/call AST to this named reference. Build
+that existing example using `cargo build --offline --locked -p mir-ast --example textual_mir_alpha_parse`.
+Six finite controls include renamed functions/types, returned functions and
+wrong output type/type environment/unbound-name rejection. Existing-runtime
+controls and named-reference controls are separately recorded. The existing
+full_system_v1 checker still rejects the new higher-order example: no production
+runtime capability or general parser/encoder/Int64 refinement is claimed.
+
+The supplied type-name environment denotes transparent structural aliases only
+(e.g. an arbitrary name for int→int), not imported nominal brands, refinements,
+proof assumptions or permissions. Its future import/version binding is unresolved.
+Ordered nonrecursive declarations and immutable lets are a partial source probe;
+imports, effects, mutable statements and unsupported types/operators reject.
+Core integers/naturals are mathematical. The concrete examples are bounded, but
+a general higher-order finite-machine arithmetic/failure connection is open.
+No arbitrary local theory, effect-continuation duplication, public syntax, W2-wide
+acceptance, module installation or alpha workflow follows.
+
+Self-review found two helper issues and retained their earlier evidence. The old
+local-binding negative omitted a mandatory colon and failed parsing; the corrected
+case now passes the actual checker and fails at the intended export boundary.
+A deliberate compiler-exit injection under PYTHONOPTIMIZE=1 exposed assertions
+being removed: helper exit0 despite kernel exit1. Explicit failure propagation now
+returns exit1 for that control, and real parser/checker/runtime/kernel checks pass
+under the same optimization setting. The injected failure is not a Lean proof run.

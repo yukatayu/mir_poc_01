@@ -574,3 +574,16 @@ runtime finite correspondence and malformed export controls pass. Compare unifor
 symbolic certificates with the smaller per-invocation checkedValue profile. No
 Core primitive, final syntax or general source refinement is selected. Higher-order
 source elaboration and review remain direct W2 gates. This is the same report2612.
+
+W2 named lexical candidate now has independent resolution/elaboration relations,
+checker correspondence, typed execution/totality and existing current-call reduction.
+This bridges names to the established positional Core; direct named-environment
+interpretation is the viable alternative. Real existing parser output feeds a
+partial reference for higher-order/returned functions and typed lets. Transparent
+structural type aliases are supplied outside source; imported/versioned nominal/
+refinement environments are unsupported and require their own provenance,
+assumption and version checks. Existing runtime
+still rejects the example. Mathematical reference and finite Int64 controls remain
+separate from machine semantics. Review is pending; no new final grammar/phase or
+W2 closure. A weaker syntax-error negative and optimized-Python validation-exit
+bug were found, corrected and retained forward as evidence, not rewritten away.

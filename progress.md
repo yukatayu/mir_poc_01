@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-09-10 09:58 JST
+最終更新: 2026-09-10 10:38 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -337,3 +337,5 @@ The authorized roadmap is paused, not blocked, stale or closed.
 - 2026-09-10 09:40 JST: Owner narrows current run to W2 completion then stop; old alpha automatic goal awaits user clear and W2-only recreation. W3+ remains deferred; no formal phase changed.
 
 - 2026-09-10 09:58 JST — W2 ordinary-function normalization preserves checked failure/scope in Lean; five actual LAB source controls and seven export negatives pass. Higher-order source/review gates remain; stop after W2.
+
+- 2026-09-10 10:38 JST — W2 named lexical checker/elaborator and current-call reduction pass fresh15 Lean; actual-parser higher-order reference controls pass, existing runtime gap retained; helper failure propagation repaired and fault-tested. Review open; stop after W2.

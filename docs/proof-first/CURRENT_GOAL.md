@@ -125,8 +125,9 @@ context remains an external unmet obligation; this is not Q18 patch acceptance.
 Same W2 source-expression consumer now has structural product normalization and
 finite actual unary source evidence. Next: named lexical elaboration into existing
 PureHandleFunctions, retaining higher-order/handle/typed-let/iteration binding.
-Compare explicit named binders with positional Core indices; keep final parser
-syntax and global registry shadowing policy unselected. Independent elaboration
+Compare lowering named binders to existing Core with a direct named-environment
+interpreter; author-written positional indices are a rejected control. Keep final
+parser syntax and global registry shadowing policy unselected. Independent elaboration
 rules and existing Core typing must match the executable elaborator/checker.
 This closes a source-binding obligation, not source-driven module installation,
 current authority acquisition or W2-wide acceptance; Oracle review remains open.

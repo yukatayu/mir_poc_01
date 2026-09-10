@@ -1,6 +1,6 @@
 # Current Task Map (LAB)
 
-最終更新: 2026-09-10 09:58 JST
+最終更新: 2026-09-10 10:39 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project direction,
 theory, ADRs, conformance, and process. Everything outside `mirrorea_canon/` is LAB
@@ -53,14 +53,14 @@ A separate nonproduction Linux journal experiment passes18cases including actual
 SIGKILL/concurrency and deliberate duplicate-dispatch controls. It is not Mir E2E,
 power-loss proof, authenticated recovery or a production backend.
 
-Current dependency: connect the necessary ordinary-source expression floor to
-local-contract and higher-order/handle rules. Structural self-product normalization
-now preserves mathematical/checked evaluation and scope; five actual LAB source
-executions and seven export negatives pass. The bridge is unary pure return/add/
-multiply only, not general source elaboration. Existing restored-call evidence
-separates saved data from supplied context; authentic context acquisition, physical
-check/use and Q18 remain open. Oracle review and higher-order source correspondence
-still block W2 close. W3 remains outside this run.
+Current dependency: finish the W2 expressive/type/evidence boundary and review.
+Named lexical elaboration/checking now preserves existing Core types, sufficiently-
+fueled totality and the independently authorized current call. Actual parsed
+higher-order source has bounded Lean-reference controls; existing runtime support
+remains absent. Source/type-environment provenance, finite-machine/failure mapping
+and the larger expressive floor must be classified explicitly before W2 closure.
+Do not expand to W3 module installation. Both owned-tab Oracle jobs are pending;
+new extensions remain outside their frozen packets and require their own review.
 
 ## ordered self-driven packages
 
@@ -115,7 +115,8 @@ User confirmed Oracle Chrome had crashed and explicitly permits appropriate
 resends. Original W1 and revisedW2 terminated on Chrome disconnect before
 conversation creation. First W1 recovery also ended with actual Chrome-close error;
 second W1 recovery mirrorea-source-restart-second also records Chrome-close
-error2d7c56; its exec15282 has not yet returned.
+error2d7c56. The same packet was resent to one new exact owned tab as
+mirrorea-source-owned-tab-recovery (exec88911); no answer yet.
 W2 resend first rejected absent running browser, then its attach-metadata lookup
 failed before submission. After inspecting the supported exact-tab path, a new
 owned target was created and mirrorea-contract-owned-tab-recovery (exec90793)
@@ -149,8 +150,8 @@ forced duplicate or paid fallback. No new answer or review acceptance obtained.
 - Latest resource preflight: root ext4 about55GiB free,12GiB RAM available;
   /mnt/mirrorea-work is absent/unmounted. Small outside-repo copies use root storage;
   no heavy new build, cleanup, host-share use or disposable-source deletion.
-- Own commit46bc662a pushed with verified parity. Restored-context proof and trace committed/pushed as ed3d98ea; new ordinary-
-  function normalization/source evidence remains unreviewed and uncommitted. Keep RESUME exact.
+- Own commitb83a8111 (normalization/source bridge) pushed with verified parity.
+  New named-elaboration/helper evidence remains unreviewed and uncommitted. Keep RESUME exact.
 - Continue authorized work after checkpoints; no sub-agent, final-alpha claim,
   stale-reference concealment or skipped validation reported as success.
 

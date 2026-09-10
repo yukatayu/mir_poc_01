@@ -340,7 +340,10 @@
 - `proof_first_function_contract_check.py --workdir <new-directory> --lean-path <compiled-proof-directory>`
   nonproduction finite ordinary-function bridge. Uses actual existing LAB
   checker/runtime output and emits Lean value/scope/certificate controls; includes
-  unsupported-source and mutated-IR rejection. Workdir must be new. It is neither
+  unsupported-source and mutated-IR rejection. It also runs actual parsed higher-
+  order source through the named Lean reference with supplied structural type aliases;
+  this does not add support to the existing runtime. Build the existing textual
+  parser example too. Workdir must be new. It is neither
   an alternate executor nor general source refinement, network E2E or alpha.
   Dependencies and TCB: `samples/lean/foundations/MirroreaProofFirstContracts.md`.
 - `current_l2_*`
