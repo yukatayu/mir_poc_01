@@ -23,12 +23,13 @@ memoryです。現在の停止線は
 
 Plan250に対するowner指示は、受理済みI3-3 cut後のpauseです。I3-4には明示的なresumeなしで進みません。
 今回の別の依頼は、証明先行の task-local LAB 研究と、理論gate後の限定実装です。
-W2-local-contract-resource（PL1 S0–S3、theory/proof）の有限な研究成果を検証・review済みです。
-局所契約・高階handle・資源を実際の計算列と捕捉した継続へ接続し、24本のLean検査と18変異検査が通過。
-最後の操作／認可文脈の対応もreviewを回収し、必須修正は残っていません。
-W2の有限な研究scopeを完了し、owner指示に従い停止しています。source/runtime対応・α候補・正式THM/OBL受理は未達です。
-対応は `plan/proof-first-foundation-correspondence.md`、証跡は report2611（W1）/report2612（W2）、
-再現コマンドは `samples/lean/README.md`、既読範囲は `docs/proof-first/READ_LEDGER.json`。
+W2の有限な研究成果は検証・review・Git統合済みで保持しています。
+2026-09-12のowner依頼により、単一goalをW3動的構成（PL1 S0/S1/S3、theory/proof/reference）へ設定しました。
+名前付きカタログ・領域拡張・個別DAG・既存current-use・局所影響・候補選択の11依存をLeanで検査し、19変異の拒否を確認しました。
+entry／証明コードOracleを回収し、負の検査を修正。対象1716宣言の公理監査と追加反例が通過。通常sourceが作る同じ対象への全lifecycle・fallback・pending/result接続は未達で、W3を継続中です。
+W3完了後に停止します。W4以降・α統合・Plan250/I3-4を自動resumeせず、正式THM/OBL受理も更新していません。
+対応は `plan/proof-first-foundation-correspondence.md`、現在の証跡はreport2613、W1/W2の履歴はreport2611/2612です。
+既読範囲は `docs/proof-first/READ_LEDGER.json` に記録し、未読と部分読了を区別しています。
 M8 trusted setupでの実効label不一致を再現し、後続の観測接続義務として保持しています。
 受理済み数学的producerの二実行証明はreview済み。失敗を伴う単一代入と一般label理論も別々の限定範囲でreview・kernel検査済みです。失敗時の後続処理・別名解決・実source対応は別cutのreview未完了（過去jobはChromeエラー）で、復元・権限境界への接続も未達です。
 sub-agentは使わず、Oracleは主担当が操作するread-only助言者です。

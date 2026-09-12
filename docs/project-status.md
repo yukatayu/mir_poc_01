@@ -1,6 +1,6 @@
 # Project status
 
-最終更新: 2026-09-10 20:27 JST
+最終更新: 2026-09-12 20:58 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -49,10 +49,13 @@ I3-4/I3-5/I3-6/NEXT-0 remain dependency-gated inactive; I3-4 requires explicit o
 ## 現在地
 
 今回の別依頼は task-local proof-first LAB 研究と理論gate後の限定実装。
-W2-local-contract-resource（PL1 S0–S3、theory/proof）の有限な研究成果を検証・review済み。
-局所契約・高階handle・資源を計算列と捕捉した継続へ接続し、24本のLean検査と18変異検査が通過。
-最後の操作／認可文脈の対応を含め、選択した範囲の必須review指摘に対応済みです。
-W2の有限な研究scopeを完了し、owner指示に従い停止しています。単一フレーム・数学的資源・供給されたcurrent文脈の制限を保持し、source/runtime対応・α統合・正式受理は未達です。
+W2の有限な研究成果は検証・review・Git統合済みで保持しています。
+2026-09-12のowner依頼により、単一goalをW3動的構成（PL1 S0/S1/S3、theory/proof/reference）へ設定しました。
+名前付きカタログ・領域拡張・個別DAG・既存current-use・局所影響・候補選択の11依存をLeanで検査し、19変異の拒否を確認しました。
+entry／証明コードOracleを回収し、負の検査を修正。対象1716宣言の公理監査と追加反例が通過。通常sourceが作る同じ対象への全lifecycle・fallback・pending/result接続は未達で、W3を継続中です。
+W3完了後に停止します。W4以降・α統合・Plan250/I3-4を自動resumeせず、正式THM/OBL受理も更新していません。
+対応は `plan/proof-first-foundation-correspondence.md`、現在の証跡はreport2613、W1/W2の履歴はreport2611/2612です。
+既読範囲は `docs/proof-first/READ_LEDGER.json` に記録し、未読と部分読了を区別しています。
 W1のpassive/accepted producer・一般label・失敗を伴う単一代入は限定review済み。後続source cutはChromeエラー後のreview未完了。119行dispositionは元のU/D・承認区分を保持して作成済みですが、要件を一括受理・実証したものではありません。
 M8 trusted setupの実効label不一致を実再現し、観測refinementの未解決義務とした。
 根拠は `plan/proof-first-foundation-correspondence.md`、`docs/reports/2611-mirrorea-proof-first-w1-foundations.md`、`docs/reports/2612-mirrorea-proof-first-w2-contract-boundary.md`。

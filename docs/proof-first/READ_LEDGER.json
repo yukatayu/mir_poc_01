@@ -23094,5 +23094,306 @@
     "range": "1-106",
     "role": "sole-main read/authored final review disposition or checked harness; no normative adoption",
     "status": "full"
+  },
+  {
+    "path": "crates/mir-runtime/tests/source_patch_hotplug.rs",
+    "sha256": "bbc4bc8d417ea84e57a0696df1339761f1de38913b8933e07349b793d8baa9ad",
+    "range": "1-176",
+    "role": "W3 sole-main full dependency read; no normative adoption",
+    "status": "full"
+  },
+  {
+    "path": "crates/mir-runtime/src/surface_source_patch_hotplug.rs",
+    "sha256": "d149531e14c2037019527ed91ebdd30852c525bd510d83de5dcbc3ec02d84c35",
+    "range": "1-561",
+    "role": "W3 sole-main full dependency read; no normative adoption",
+    "status": "full"
+  },
+  {
+    "path": "samples/lean/foundations/MirroreaProofFirstGraphValidation.lean",
+    "sha256": "86d7148bc1dc7790f3925e94ddf41a0279b1a214e36bb96ff428c99f7ca0996a",
+    "range": "1-260",
+    "role": "W3 sole-main full dependency read; no normative adoption",
+    "status": "full"
+  },
+  {
+    "path": "samples/lean/foundations/MirroreaProofFirstCurrentUse.md",
+    "sha256": "8fc4b3def2b75ed65c8ff1f2b98e13ec1d94a3a35ae5e09415d15646c3a37781",
+    "range": "1-142",
+    "role": "W3 sole-main full dependency read; no normative adoption",
+    "status": "full"
+  },
+  {
+    "path": "tasks.md",
+    "sha256": "32b96b66de864a21dd93f232d540f28704f78b4cb11b26210cf3b426c763b56a",
+    "range": "1-112",
+    "role": "W3 sole-main dependency/status read or authored; no normative adoption",
+    "status": "full"
+  },
+  {
+    "path": "progress.md",
+    "sha256": "38f229e7a25db089cbb1910776febee9e25133d4221159a8fe1339ed1e13b1d1",
+    "range": "1-365",
+    "role": "W3 sole-main dependency/status read or authored; no normative adoption",
+    "status": "full"
+  },
+  {
+    "path": "docs/project-status.md",
+    "sha256": "75436afd79410853177d50fe4070296aa15162655bacb578d71c635cb38afed9",
+    "range": "1-167",
+    "role": "W3 sole-main dependency/status read or authored; no normative adoption",
+    "status": "full"
+  },
+  {
+    "path": "Documentation.md",
+    "sha256": "58987e2626ad7bc7c2725680cd5cbf1328c59171e21523b213664690d01a69ba",
+    "range": "1-175 read; introduction edited",
+    "role": "W3 sole-main dependency/status read or authored; no normative adoption",
+    "status": "partial"
+  },
+  {
+    "path": "plan/proof-first-foundation-correspondence.md",
+    "sha256": "8b706c96e130a1d5827182885f7677e744ada17d63d6bf6e38b8d484aa4c2d1c",
+    "range": "1-110 read; current goal and forward entry authored",
+    "role": "W3 sole-main dependency/status read or authored; no normative adoption",
+    "status": "partial"
+  },
+  {
+    "path": ".docs/progress-task-axes.md",
+    "sha256": "b19cb774cd02cb10ee95a3b0a56f2a69af06c7948ec4431044c0bc50f828496a",
+    "range": "1-99",
+    "role": "W3 sole-main dependency/status read or authored; no normative adoption",
+    "status": "full"
+  },
+  {
+    "path": "sub-agent-pro/mirrorea-proof-first-handoff-v1/materials/mir_foundation_F0_3/WORKPLAN.md",
+    "sha256": "fcd7a69238c793130c9b8a256cca3697fae6391d8f9472520b151d9fdd578972",
+    "range": "1-168",
+    "role": "W3 sole-main dependency/status read or authored; no normative adoption",
+    "status": "full"
+  },
+  {
+    "path": "scripts/proof_first_function_contract_check.py",
+    "sha256": "6106801c061007452e1797d58b9976080136112e15d4edc82ce1c5a8d09eb1fb",
+    "range": "1-228",
+    "role": "W3 sole-main dependency/status read or authored; no normative adoption",
+    "status": "full"
+  },
+  {
+    "path": "samples/lean/foundations/MirroreaProofFirstDynamicSupport.lean",
+    "sha256": "ae88eb5b48bfe2667c3f1b68d18d0ef52685e929e6e008ca74cf29ded213912a",
+    "range": "1-131",
+    "role": "sole-main W3 read/authored candidate and checked import adaptation; no normative adoption",
+    "status": "full"
+  },
+  {
+    "path": "samples/lean/foundations/MirroreaProofFirstDynamicGraphs.lean",
+    "sha256": "fe38909c5f98a37f0ebb45879044c662552330c96694a09a0549da6a8187e0ce",
+    "range": "1-106",
+    "role": "sole-main W3 read/authored candidate and checked import adaptation; no normative adoption",
+    "status": "full"
+  },
+  {
+    "path": "samples/lean/foundations/MirroreaProofFirstDynamicIdentity.lean",
+    "sha256": "f215bb61570fb35f7ee5ab8d1e518f5a27d5222316af72ad2734638b2bba656a",
+    "range": "1-125",
+    "role": "sole-main W3 read/authored candidate and checked import adaptation; no normative adoption",
+    "status": "full"
+  },
+  {
+    "path": "samples/lean/foundations/MirroreaProofFirstSupportImpact.lean",
+    "sha256": "1ec2ed879d32f80c7ce3372191a3bcd2b3217e4a507b927271a74b86770fc557",
+    "range": "1-101",
+    "role": "sole-main W3 read/authored candidate and checked import adaptation; no normative adoption",
+    "status": "full"
+  },
+  {
+    "path": "samples/lean/foundations/MirroreaProofFirstCurrentChoice.lean",
+    "sha256": "0661937f955f8360eaeab38521f2e4931fc9ed5cc54b53b390434271187f7e64",
+    "range": "1-193",
+    "role": "sole-main W3 read/authored candidate and checked import adaptation; no normative adoption",
+    "status": "full"
+  },
+  {
+    "path": "samples/lean/foundations/MirroreaProofFirstNamedCatalog.lean",
+    "sha256": "9d0afa1931338425f2b188381119d12ffdddd796c37d0d60714d7568687d5c4e",
+    "range": "1-250",
+    "role": "sole-main W3 read/authored candidate and checked import adaptation; no normative adoption",
+    "status": "full"
+  },
+  {
+    "path": "samples/lean/foundations/MirroreaProofFirstDynamicScopeControls.lean",
+    "sha256": "5439736b469368659157fda72683250629bc5dcac243bf2268238a4bf2c7f6da",
+    "range": "1-55",
+    "role": "sole-main W3 read/authored candidate and checked import adaptation; no normative adoption",
+    "status": "full"
+  },
+  {
+    "path": "samples/lean/foundations/MirroreaProofFirstDynamicComposition.md",
+    "sha256": "4e4d16d26cf4af9badcaba955b05da587b6a93e6369b872e19302ef34ce4a425",
+    "range": "1-128",
+    "role": "sole-main W3 read/authored candidate and checked import adaptation; no normative adoption",
+    "status": "full"
+  },
+  {
+    "path": "scripts/proof_first_dynamic_composition_check.py",
+    "sha256": "42c4794a8d1dd65a2f1d0c16233b073f3f0ac572817f0e8724ca82ca74290010",
+    "range": "1-115",
+    "role": "sole-main W3 read/authored candidate and checked import adaptation; no normative adoption",
+    "status": "full"
+  },
+  {
+    "path": "samples/lean/README.md",
+    "sha256": "b4fbe14a705350ca2ec5a918430878efebc99113aa96daff1698a985c9411237",
+    "range": "1-112",
+    "role": "sole-main W3 read/authored candidate and checked import adaptation; no normative adoption",
+    "status": "full"
+  },
+  {
+    "path": "mirrorea_canon/theory/14-maintained-relation-projection.md",
+    "sha256": "7f205a4477317bbff13db84f1b64cf72ef1f834551d439001aae1a5163d31368",
+    "range": "1-166",
+    "role": "sole-main W3 read/authored candidate and checked import adaptation; no normative adoption",
+    "status": "full"
+  },
+  {
+    "path": "mirrorea_canon/adr/ADR-0004.md",
+    "sha256": "091857f2df95d01552ec75c0d1fc2b223658bc4512cca4dc814d5e88c2095731",
+    "range": "1-18",
+    "role": "sole-main W3 read/authored candidate and checked import adaptation; no normative adoption",
+    "status": "full"
+  },
+  {
+    "path": "docs/proof-first/CURRENT_GOAL.md",
+    "sha256": "f4e53fcb2401867b25b7b5fe6cdb34274c3e46b533aef9ba0954d256d64257b3",
+    "range": "1-41",
+    "role": "sole-main complete read/authored W3 current dependency-review correction, no normative adoption",
+    "status": "full"
+  },
+  {
+    "path": "docs/proof-first/RESUME.md",
+    "sha256": "ce78bf7deac39c6b14eb65c9f07d1563620aed2e585e773665fca9abc495c606",
+    "range": "1-75",
+    "role": "sole-main complete read/authored W3 current dependency-review correction, no normative adoption",
+    "status": "full"
+  },
+  {
+    "path": "docs/reports/2613-mirrorea-proof-first-w3-dynamic-composition.md",
+    "sha256": "4fec7c4d0a59417b0deef83ca75c6baa098513558c9d68db6f3ac42d6422c603",
+    "range": "1-269",
+    "role": "sole-main complete read/authored W3 current dependency-review correction, no normative adoption",
+    "status": "full"
+  },
+  {
+    "path": "tasks.md",
+    "sha256": "aeed01a115741d37bfe31987c6d7b7d32d64c514dd66eb45a8ed340d0242eed6",
+    "range": "1-123",
+    "role": "sole-main complete read/authored W3 current dependency-review correction, no normative adoption",
+    "status": "full"
+  },
+  {
+    "path": "samples/lean/foundations/MirroreaProofFirstNamedCatalog.lean",
+    "sha256": "62fe82b10c9264bc4d8fe72a405bcfa9f396d959c82ed9ecdac3304b28a068ec",
+    "range": "1-268",
+    "role": "sole-main complete read/authored W3 current dependency-review correction, no normative adoption",
+    "status": "full"
+  },
+  {
+    "path": "samples/lean/foundations/MirroreaProofFirstDynamicScopeControls.lean",
+    "sha256": "56e9211376491c113fa151f8663007ce3d598f42e92fe70ab2c8e316e3cdfe88",
+    "range": "1-86",
+    "role": "sole-main complete read/authored W3 current dependency-review correction, no normative adoption",
+    "status": "full"
+  },
+  {
+    "path": "samples/lean/foundations/MirroreaProofFirstDynamicComposition.md",
+    "sha256": "c5dec055801aaed7fd254ac1266950804d8c91e9016fe804ac6ca31cf0eba9fe",
+    "range": "1-140",
+    "role": "sole-main complete read/authored W3 current dependency-review correction, no normative adoption",
+    "status": "full"
+  },
+  {
+    "path": "scripts/proof_first_dynamic_composition_check.py",
+    "sha256": "bf2938baad9850ae4754f7e64bedb05e33603dc4d58fe8ff06763a628e920435",
+    "range": "1-169",
+    "role": "sole-main complete read/authored W3 current dependency-review correction, no normative adoption",
+    "status": "full"
+  },
+  {
+    "path": "/tmp/mirrorea-w3-20260912-1_kv7wfk/lifecycle/InstancePrograms.lean",
+    "sha256": "75a2b20be7ebb4bf339570c561b843c5aa847c1555d953fec335e967f4154ba5",
+    "range": "1-131",
+    "role": "sole-main authored/read external nonproduction W3 reference candidate, actual successful kernel cut",
+    "status": "full"
+  },
+  {
+    "path": "/tmp/mirrorea-w3-20260912-1_kv7wfk/lifecycle/InstanceState.lean",
+    "sha256": "006ee1df0e3ed6d53b9c491c3bc49fd6d1fcf3c1e411821613cc426b7dce0120",
+    "range": "1-322",
+    "role": "sole-main authored/read external nonproduction W3 reference candidate, actual successful kernel cut",
+    "status": "full"
+  },
+  {
+    "path": "/home/codex/.elan/toolchains/leanprover--lean4---v4.29.1/src/lean/Lean/Util/CollectAxioms.lean",
+    "sha256": "fe0ba1a33981c94719c9bd203227d1f300da8b2a70e2a2c67255071a0b60218b",
+    "range": "1-51",
+    "role": "local primary toolchain implementation for declaration audit; full read f0fe68",
+    "status": "full"
+  },
+  {
+    "path": "tasks.md",
+    "sha256": "1737a06b3c6185631ffc7c1cdcb3b26f142c4662f3d1cec8cc178cc6363e31d3",
+    "range": "1-135",
+    "role": "sole-main full read/authored W3 reference and final first-dependency review receipts",
+    "status": "full"
+  },
+  {
+    "path": "docs/proof-first/CURRENT_GOAL.md",
+    "sha256": "05aa4fde5615ea92fc45374ba645b414a36ec5c769edadef0d65c7e72563192b",
+    "range": "1-41",
+    "role": "sole-main full read/authored W3 reference and final first-dependency review receipts",
+    "status": "full"
+  },
+  {
+    "path": "docs/proof-first/RESUME.md",
+    "sha256": "7e270b7229b425c41794937d0011995c28cee5ec6ae0eafd7a77803117d415ad",
+    "range": "1-100",
+    "role": "sole-main full read/authored W3 reference and final first-dependency review receipts",
+    "status": "full"
+  },
+  {
+    "path": "docs/reports/2613-mirrorea-proof-first-w3-dynamic-composition.md",
+    "sha256": "cc97db446f9a5f1d04512ad579a65decdb45d8c4600138e263a6cb5fe15421d0",
+    "range": "1-284",
+    "role": "sole-main full read/authored W3 reference and final first-dependency review receipts",
+    "status": "full"
+  },
+  {
+    "path": "scripts/proof_first_dynamic_composition_check.py",
+    "sha256": "f7e5d7a21616ff1a0f4f136563329bcbeb2d15434c4a09c34022822a4d589d16",
+    "range": "1-185",
+    "role": "sole-main full read/authored W3 reference and final first-dependency review receipts",
+    "status": "full"
+  },
+  {
+    "path": "samples/lean/foundations/MirroreaProofFirstDynamicComposition.md",
+    "sha256": "d32e3182ae8069ea4d264ca91e0e02e6a761a768fcccf253fa04e904db995e0b",
+    "range": "1-143",
+    "role": "sole-main full read/authored W3 reference and final first-dependency review receipts",
+    "status": "full"
+  },
+  {
+    "path": "/tmp/mirrorea-w3-20260912-1_kv7wfk/lifecycle/InstanceState.lean",
+    "sha256": "61e559704b8c1899166b9950261c461289bdc350bc5de3798bdfdf40b94a6bf1",
+    "range": "1-519",
+    "role": "sole-main full read/authored W3 reference and final first-dependency review receipts",
+    "status": "full"
+  },
+  {
+    "path": "/home/codex/.agents/skills/superpowers/receiving-code-review/SKILL.md",
+    "sha256": "c9382e92b8f32363566068ecfed19d3b2651eaf40d3942b24840f839dedfc406",
+    "range": "1-213",
+    "role": "sole-main full read/authored W3 reference and final first-dependency review receipts",
+    "status": "full"
   }
 ]

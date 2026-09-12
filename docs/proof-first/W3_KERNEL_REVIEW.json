@@ -1,0 +1,46 @@
+{
+  "session": "mirrorea-w3-growth-kernel",
+  "exit_code": 0,
+  "model_evidence": {
+    "requested": "6Pro",
+    "resolved": "6Pro",
+    "verified": true
+  },
+  "answer_sha256": "7335ceb4c7af709dbae5c7352bd5a81b19b73f5044b60907e9108b51a1b5b7bd",
+  "question_sha256": "b610db5bfc5ea96b7a79641e3288ab851ff0542447627d840234d6c75f5aa9c6",
+  "disposition_sha256": "053855ab6ac02075363fca6583c1937eeb23dc1c80b472d602956c5bc74a0452",
+  "packet_dir": "/tmp/mirrorea-w3-20260912-1_kv7wfk/oracle-w3-kernel",
+  "classification": "static material dependency review, not source/lifecycle or W3 acceptance",
+  "read_tools": [
+    "f21c51",
+    "51fce7",
+    "38ff65"
+  ],
+  "terminal_tool": "82d5d6",
+  "corrected_kernel_result": "/tmp/mirrorea-w3-20260912-1_kv7wfk/mir-w3-dynamic-yydemoq4/RESULT.json",
+  "remaining": [
+    "actual source to same records and fresh metadata",
+    "all lifecycle/auth/reacquire/result consumers",
+    "final material consumer review"
+  ],
+  "audit_delta_review": {
+    "session": "mirrorea-w3-audit-correction",
+    "exit_code": 0,
+    "model_evidence": {
+      "requested": "6Pro",
+      "resolved": "6Pro",
+      "verified": true
+    },
+    "answer_sha256": "1d5fc8fef8a81188f07d05526aaa5e9e0e7d4eeb3568b7f80cb8b4c42979e141",
+    "question_sha256": "224979cf826e5180b1aaa0f38dbd1e9cb177fda136dc31851ceae3b33a9babd4",
+    "packet_sha256": "73e55d5cb1212f8bd05f32dd53ad6f3a65d8243699fb1041dd13b72f4980b1cf",
+    "disposition_sha256": "ba2b483194bef8ef94bba52bf5b0c3292fde44cdda153280ce6bc0f569b844af",
+    "terminal_tool": "7c9f2a",
+    "read_tools": [
+      "def12d",
+      "073bb9"
+    ],
+    "classification": "narrow static correction review; no blocking theory repair identified, predicate specificity improvement locally verified; not W3 acceptance",
+    "post_review_run": "/tmp/mirrorea-w3-20260912-1_kv7wfk/mir-w3-dynamic-kxaffa4p/RESULT.json"
+  }
+}

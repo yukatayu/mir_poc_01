@@ -37,12 +37,12 @@ controls, SMT and finite comparisons are separate. Standard logical axioms and
 abstract interfaces are documented beside proofs. No implementation correctness
 or official THM/OBL/lifecycle acceptance follows from a proof of this LAB model.
 
-The current single research goal is W2-local-contract-resource (PL1 S1/S2 theory/proof).
-Reviewed W1 dependencies support this independent nonproduction consumer; broader
-W1 source/runtime obligations remain open. W2 contract export, full expression
-floor and later W3 dynamic composition/all-mutator obligations are not accepted. Mandatory corpus reading
-is ongoing with a full/range/hash ledger. No whole-project plan is adopted while
-required material remains unread.
+Current task-local goal, updated2026-09-12: W3 dynamic composition, sole main,
+PL1 S0/S1/S3 theory/proof/reference. W2's finite research scope was closed and
+pushed; the owner explicitly requested W3 afterwards. Stop after W3. The evidence
+entries below retain their historical order and original unreviewed/active states;
+they are not parallel current goals. Report2613 is the one current W3 report.
+The mandatory reading corpus remains incomplete; no whole-project plan adopted.
 
 ## Relation to Plan250 and requested alpha
 
@@ -658,3 +658,75 @@ auxiliary journal/image/runtime controls are not silently promoted.
 Final documentation and proof integration passed; owner-requested STOP now applies. W3 requires
 a new request; Plan250 remains paused. Global reading and unrelated W1 extensions
 remain incomplete. No new roadmap or119-detail proposal is adopted.
+
+## W3 entry and first dependency — 2026-09-12 20:08 JST
+
+Owner requested W3 with the same proof-first/no-subagent constraints. Initial
+comparison is A: dynamic finite slots with exact embedding and full-domain checks,
+versus B: stable identity keys in an explicitly finite catalog. A remains a
+reversible reference carrier; no final identity/wire or global controller chosen.
+
+Actual new general Lean candidates prove support preservation for unchanged
+closed old inputs, per-kind old/new DAG acyclicity equivalence, exact old W1
+record/handle/context/checkUse preservation, and conservative local impact from
+all syntactic support dependencies. Insertion issues no authority; the later
+material review distinguishes already issued numeric-target grants. Initial
+failed proof drafts are retained; current four baselines and12 targeted mutations
+pass. No source/catalog/all-mutator or alpha theorem follows from these lemmas.
+
+Oracle mirrorea-w3-entry-growth completed once in14m44s; full response and main
+disposition are pinned by W3_ENTRY_CHECK.json. Oracle found the missing consumer:
+actual checked source must create/edit the same identities used by support,
+graphs, fallback and pending/result use. Main reproduced dead-node rank changes,
+nonidentity handle permutation, old-domain scan omission, stale inflationary
+retirement and missing-alternative enabling. New proofs were not part of this
+entry packet; final material consumer review remains required.
+
+Next consumer: explicit finite definition/instance/catalog realization and typed
+source lifecycle transitions. Reuse the existing parser/normal expressions and
+W1/W2 boundaries where their premises are actually established. The inspected
+surface_source_patch_hotplug helper sets its mutation flag from report creation
+and generates capability references; its report is not actual lifecycle state or
+authority evidence. Existing accepted-profile claims are not reopened by that
+observation. Preserve Q18 reservation versus commit-time reauthorization as
+separate contracts. W3 closes only on its source/lifecycle/fallback/result floor;
+physical W4–W6 and alpha/W7 remain inactive in this run.
+
+## W3 material dependency review and next consumer — 2026-09-12 20:58 JST
+
+Oracle mirrorea-w3-growth-kernel completed18m04s with a static review of the actual
+11-module cut and19-mutant harness. Its answer and main disposition are pinned by
+W3_KERNEL_REVIEW.json. No literal general theorem counterexample was found; the
+absence-eligibility mutation still left missing_unusable true via bottom. Main
+retargeted it to missing_eligibility_false and added the discriminating control.
+The declaration audit now traverses every imported target-module declaration,
+including private/unused ones;1716 pass the three-logical-axiom allowlist, and an
+unused private choice-dependent definition is rejected with choice excluded.
+Fresh11/19 passes95d8c4. Mutation rejection is proof-script rejection at designated
+general theorem ranges, not a claim of19 independent semantic falsifications.
+
+Already-issued future numeric targets, fresh search after witness revocation,
+module-revision omission from W1 context, and checked-catalog provenance are
+reproduced controls/explicit consumer obligations. Saved evidence/handles must
+remain exact; a new current offer must not masquerade as old-witness validation.
+The reviewed first dependency does not close these lifecycle obligations.
+
+External InstancePrograms/InstanceState candidates connect checked Int64 bodies
+to explicitly finite input/output contracts, immutable definitions and distinct
+instances. Exchange proves old contract input coverage and output bounds. Actual
+append, per-instance retirement, cycle-checked reparent, definition replacement
+and support recomputation have structural preservation proofs/finite controls.
+They are unreviewed nonproduction research, not an auth-closed machine or source
+construction. Candidate A uses explicit finite input lists/result intervals;
+smallest alternative B is a sound symbolic contract plugin for a wider domain.
+A is a temporary decidable reference profile, not the final local theory universe
+or silent restriction of Int64. Source declarations must carry the chosen domain.
+No production/Canon/public decision or W4+ activation occurs.
+
+Narrow correction review completed8m28s (mirrorea-w3-audit-correction). No blocking
+theory repair found; main strengthened the low-severity negative-control predicate
+to require the actual private root and Classical.choice, plus positive/synthetic
+controls. Fresh11/19/1716 audit passesdf6040. This closes the first dependency
+review corrections within their scope, not the material source/lifecycle review.
+No live Oracle remains. One progress notification c7b88b was sent while work
+continues; it was not a W3 completion notification.

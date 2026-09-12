@@ -1,16 +1,24 @@
 # samples_progress
 
-Last updated: 2026-09-10 10:38 JST
+Last updated: 2026-09-12 21:24 JST
 
 Plan250 execution control: I3-3 is accepted and owner-paused with no active
 semantic milestone. Plan 250 remains retained; I3-4/I3-5/I3-6/NEXT-0 remain
 dependency-gated inactive and I3-4 requires explicit owner resume. No sample,
 program completion or official lifecycle entry claim follows.
 
-Separate task-authorized proof-first LAB research is active at W2-local-contract-resource.
-Support/current-use/tracked-query/finite-graph and passive/accepted-producer Lean results are scoped
-foundation evidence; source/runtime refinement and the alpha candidate remain incomplete.
-See Report2611/2612 and `docs/proof-first/CURRENT_GOAL.md`. This does not resume I3-4.
+Separate task-authorized proof-first LAB research is active at W3 dynamic composition.
+W2 finite closure is retained. W3 named catalog elaboration, dynamic support/per-kind
+DAG, old current-use, local impact and current-choice dependencies have fresh11-file
+kernel and19 mutation evidence. Source/lifecycle/static fallback/pending-result
+integration and final material consumer review remain open. The dependency
+review is recovered; corrected mutation and1716-declaration axiom audit pass. See Report2613 and
+`lean/foundations/MirroreaProofFirstDynamicComposition.md` under samples/.
+This does not resume I3-4 or complete W3/alpha.
+
+| W3 evidence | Reproduction | Remaining gate |
+|---|---|---|
+| Named/dynamic finite foundation candidates | `python3 scripts/proof_first_dynamic_composition_check.py --work-root /tmp` | same-source definition/instance/all-mutator/fallback/result consumer, final review |
 
 Detailed component counts, historical cuts and command classifications remain in
 Report 2606. Canon/status acceptance is `aafde92229bb0ff18116f38d4750a0a8f61cb069`

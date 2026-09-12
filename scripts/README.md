@@ -6,6 +6,11 @@
 
 ### front-door checks and active runners
 
+- `proof_first_dynamic_composition_check.py`
+  W3 task-local LAB候補の11依存を外部fresh copyでLean4.29.1 trust0検査し、19変異を指定した一般命題で拒否する。
+  `python3 scripts/proof_first_dynamic_composition_check.py --work-root /tmp`。
+  結果は新しい外部workdirのRESULT.jsonへ保存。source/lifecycle完成・α受理ではない。
+
 - `check_source_hierarchy.py`
   required root docs / canon entry docs / specs / plan / support directory が存在するかを見る structural check。current line では `CANON.md`、`mirrorea_canon/` entry files、`specs/13..43`、registered numbered `plan/` catalog と source-traceability / maintenance rules、Surface Mir guides、Surface parser / indexed-state / elaboration / role-admission / source-patch / devtools / operational-source scripts/tests、Full System V1 / Surface active sample roots、`samples/alpha/`、Product Alpha demo entry files、`docs/hands_on/`、`docs/research_abstract/`、`sub-agent-pro/alpha-0/`、`sub-agent-pro/alpha-1/`、`sub-agent-pro/product-alpha1-001/`、`sub-agent-pro/operational-product-sample-001/`、`sub-agent-pro/full-system-completion-001/` も structural presence の対象に入る。文書内容、stale wording、normative consistency、report template completeness は判定しない。
 - `validate_agent_configs.py`

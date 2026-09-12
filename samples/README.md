@@ -57,6 +57,10 @@
     `lean/foundations/MirroreaProofFirstResourceComputations.md` adds actual
     resource computations/captured frames and their scope counterexamples;
     the final control/context delta review is completed.
+  - W3の動的catalog/support/個別DAG/current-use候補は
+    `lean/foundations/MirroreaProofFirstDynamicComposition.md` とReport2613に記録。
+    `python3 scripts/proof_first_dynamic_composition_check.py --work-root /tmp`
+    で外部コピーのkernel/変異を検査する。source/lifecycleの完成ではない。
   - `clean-near-end/` は generated theorem stub evidence
 - `alpha/`
   Mirrorea Spaces alpha-0 phase-indexed sample matrix scaffold with `.expected.json` sidecars
@@ -105,7 +109,7 @@
   - `role-admission/` is actualized by `P-SURF-05` as report-level role admission and capability grant evidence for `ROLE-01..04`
   - the same helper validates role claim, join admission request, accepted verdict, admission witness, capability grant, missing-grant write rejection, stale membership rejection, and optional package/runtime hash metadata without treating role claim or hash binding as authority
   - `source-patch/` is actualized by `P-SURF-06` as source patch hot-plug pipeline evidence for `PATCH-01..04`
-  - the same helper validates parse/typecheck/elaborate/compatibility/admission, HotPlugRequest, HotPlugVerdict, Core IR diff, activation_cut, no-direct-eval, accepted mutation, and rejected-without-mutation rows
+  - the same helper validates parse/typecheck/elaborate/compatibility/admission, HotPlugRequest, HotPlugVerdict, Core IR diff, activation_cut and no-direct-eval report rows; its mutation flag records activation-report creation, not actual runtime mutation or independent authority validation
   - `devtools/` is actualized by `P-SURF-08` as static observer-safe devtools diagnostics evidence for `DEV-01..02`
   - the same helper validates Surface source, generated Core IR, semantic-checker-backed indexed-state map, generated communication, role/admission, redacted patch lifecycle, source-span panels, and private-field diagnostics without claiming final viewer/telemetry ABI
   - `world-core/`, `membership-chat/`, `sugoroku-world/`, `portal-worldlink/`, `two-shard-hard-boundary/`, and `gradient-observation/` are actualized by `P-SURF-07` as source operational evidence for `E2E-SURF-01..12`

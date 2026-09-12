@@ -1,0 +1,26 @@
+{
+  "session": "mirrorea-w3-entry-growth",
+  "exit_code": 0,
+  "model_evidence": {
+    "requested": "6Pro",
+    "resolved": "6Pro",
+    "verified": true
+  },
+  "answer_sha256": "2ba6955bb727b85596cc355b2c0c92634f6f0053baef37759b5ba1c56b60db92",
+  "question_sha256": "a8121e915cadb4b2b96fac6772a5cc76093bb67d221deafc23418fcc9076139a",
+  "disposition_sha256": "0218ab4f2a68d88622fee6fb9fd993b6ca0aab5c0c8a0565d333292811019096",
+  "packet_dir": "/tmp/mirrorea-w3-20260912-1_kv7wfk/oracle-w3-entry",
+  "classification": "entry/dependency advisory, not final source review or acceptance",
+  "read_tools": [
+    "de372e",
+    "7867a7",
+    "b2377e"
+  ],
+  "review_controls": {
+    "file": "EntryReviewControls.lean",
+    "sha256": "3913a192002b3646bfd3e87b5f52d140866e482a13d977b8cfce0adf899f1696",
+    "exit": 0,
+    "stdout": ""
+  },
+  "mutation_result": "/tmp/mirrorea-w3-20260912-1_kv7wfk/growth/mutation-run-1/RESULT.json"
+}

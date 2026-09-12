@@ -58,6 +58,12 @@ Plan250 の I3-4 resume、正式 THM/OBL の更新、production / α受理では
 
 - [W2 computations/continuations](foundations/MirroreaProofFirstResourceComputations.md): 実際のcurrent allocation、資源Delta、失敗後の残余、捕捉した継続と型保存。有限profileの差分Oracle review済み。production/αの受理ではない。
 
+- [W3 dynamic composition dependencies](foundations/MirroreaProofFirstDynamicComposition.md): named catalog elaboration、動的support/個別DAG、既存handle/current-use、局所影響とcurrent choice。kernel/変異検査済みの候補であり、source/lifecycle/fallback統合・最終reviewは継続中です。
+
+W3の依存だけを外部fresh copyで再検査するコマンドは
+`python3 scripts/proof_first_dynamic_composition_check.py --work-root /tmp` です。
+11依存と19変異を検査し、結果の保存先を表示します。
+
 これらは `current_l2_lean_sample_sync.py` の生成対象・manifest 集計外です。
 一般命題は Lean4.29.1 の kernel で検査し、各ファイルの `#print axioms`
 で前提を確認します。固定 `#guard` と有限 differential は一般証明ではありません。

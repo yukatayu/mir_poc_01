@@ -1,0 +1,618 @@
+{
+  "classification": "W3 active dependency checkpoint, not lifecycle/source completion or final Oracle review",
+  "workdir": "/tmp/mirrorea-w3-20260912-1_kv7wfk/mir-w3-dynamic-kxaffa4p",
+  "result_sha256": "f9cf0c5696d325695129cec9d3bd570dcc53254b3ff190fbb831426337f35314",
+  "harness_sha256": "f7e5d7a21616ff1a0f4f136563329bcbeb2d15434c4a09c34022822a4d589d16",
+  "command": [
+    "python3",
+    "scripts/proof_first_dynamic_composition_check.py",
+    "--work-root",
+    "/tmp/mirrorea-w3-20260912-1_kv7wfk"
+  ],
+  "exit_code": 0,
+  "tool_result": "df6040",
+  "lean_version": "Lean (version 4.29.1, x86_64-unknown-linux-gnu, commit f72c35b3f637c8c6571d353742168ab66cc22c00, Release)\n",
+  "baselines": [
+    {
+      "module": "Support",
+      "command": [
+        "lean",
+        "--trust=0",
+        "-o",
+        "MirroreaProofFirstSupport.olean",
+        "MirroreaProofFirstSupport.lean"
+      ],
+      "exit": 0,
+      "sha256": "7f401632873cb3b87e0fa62d1b172af88b996b34a6d3fc62a7e61d103b41a9c3",
+      "stdout": "'MirroreaProofFirst.Support.eval_correct' depends on axioms: [propext]\n'MirroreaProofFirst.Support.holds_mono' does not depend on any axioms\n'MirroreaProofFirst.Support.grounded_closed' does not depend on any axioms\n'MirroreaProofFirst.Support.grounded_least' does not depend on any axioms\n'MirroreaProofFirst.Support.ranked_sound' does not depend on any axioms\n'MirroreaProofFirst.Support.ranked_exact' does not depend on any axioms\n'MirroreaProofFirst.Support.rounds_sound' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.Support.proof_eventually' depends on axioms: [propext]\n'MirroreaProofFirst.Support.rounds_complete' depends on axioms: [propext]\n'MirroreaProofFirst.Support.rounds_iff_derivation' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.Support.allOf_correct' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.Support.anyOf_correct' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.Support.stable_exists' depends on axioms: [propext, Classical.choice, Quot.sound]\n'MirroreaProofFirst.Support.derive_exact' depends on axioms: [propext, Classical.choice, Quot.sound]\n'MirroreaProofFirst.Support.checker_exact' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.Support.checked_membership_exact' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.Support.retirement_mono' does not depend on any axioms\n'MirroreaProofFirst.Support.normalization_idempotent' does not depend on any axioms\n'MirroreaProofFirst.Support.no_root_no_ground' does not depend on any axioms\n'MirroreaProofFirst.Support.low_grounded_independent' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.Support.firstRank_spec' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.Support.generated_certificate_accepted' depends on axioms: [propext, Classical.choice, Quot.sound]\n'MirroreaProofFirst.Support.height_threshold' depends on axioms: [propext, Classical.choice, Quot.sound]\n'MirroreaProofFirst.Support.canonical_rounds' depends on axioms: [propext, Classical.choice, Quot.sound]\n'MirroreaProofFirst.Support.canonical_rank_unique' depends on axioms: [propext, Classical.choice, Quot.sound]\n'MirroreaProofFirst.Support.generated_heights' depends on axioms: [propext, Classical.choice, Quot.sound]\n'MirroreaProofFirst.Support.canonical_generated_accepted' depends on axioms: [propext, Classical.choice, Quot.sound]\n'MirroreaProofFirst.Support.canonical_checker_sound' depends on axioms: [propext, Classical.choice, Quot.sound]\n'MirroreaProofFirst.Support.snapshot_live_exact' depends on axioms: [propext, Classical.choice, Quot.sound]\n'MirroreaProofFirst.Support.snapshot_certificate_accepted' depends on axioms: [propext, Classical.choice, Quot.sound]\n'MirroreaProofFirst.Support.snapshot_checked_sound' depends on axioms: [propext, Classical.choice, Quot.sound]\n",
+      "stderr": ""
+    },
+    {
+      "module": "CurrentUse",
+      "command": [
+        "lean",
+        "--trust=0",
+        "-o",
+        "MirroreaProofFirstCurrentUse.olean",
+        "MirroreaProofFirstCurrentUse.lean"
+      ],
+      "exit": 0,
+      "sha256": "ab604c92b226182bdf84a38caaa044d6b949730891d40a02a72ad441c59f4239",
+      "stdout": "'MirroreaProofFirst.CurrentUse.checkClaim_exact' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.CurrentUse.checkWitness_sound' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.CurrentUse.chooseClaim_sound' depends on axioms: [propext]\n'MirroreaProofFirst.CurrentUse.chooseClaim_complete' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.CurrentUse.produce_checked' depends on axioms: [propext]\n'MirroreaProofFirst.CurrentUse.produce_complete' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.CurrentUse.revalidate_sound' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.CurrentUse.context_change_rejected' depends on axioms: [propext]\n'MirroreaProofFirst.CurrentUse.authorization_iff_produced' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.CurrentUse.no_claim_no_authorization' depends on axioms: [propext]\n'MirroreaProofFirst.CurrentUse.checkHandle_exact' depends on axioms: [propext, Classical.choice, Quot.sound]\n'MirroreaProofFirst.CurrentUse.checkUse_sound' depends on axioms: [propext, Classical.choice, Quot.sound]\n'MirroreaProofFirst.CurrentUse.checkUse_complete' depends on axioms: [propext, Classical.choice, Quot.sound]\n'MirroreaProofFirst.CurrentUse.retired_locus_rejected' depends on axioms: [propext, Classical.choice, Quot.sound]\n'MirroreaProofFirst.CurrentUse.stale_incarnation_rejected' depends on axioms: [propext]\n'MirroreaProofFirst.CurrentUse.authorize_checked' depends on axioms: [propext]\n'MirroreaProofFirst.CurrentUse.authorize_use_complete' depends on axioms: [propext, Classical.choice, Quot.sound]\n'MirroreaProofFirst.CurrentUse.tryAdmit_sound' depends on axioms: [propext, Classical.choice, Quot.sound]\n'MirroreaProofFirst.CurrentUse.tryAdmit_does_not_issue' depends on axioms: [propext]\n'MirroreaProofFirst.CurrentUse.tryAdmit_retains_history' depends on axioms: [propext]\n'MirroreaProofFirst.CurrentUse.duplicate_admission_unchanged' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.CurrentUse.retire_preserves_history' does not depend on any axioms\n'MirroreaProofFirst.CurrentUse.revoke_preserves_history' does not depend on any axioms\n'MirroreaProofFirst.CurrentUse.retire_stops_locus_use' depends on axioms: [propext, Classical.choice, Quot.sound]\n'MirroreaProofFirst.CurrentUse.tryAdmit_unique' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.CurrentUse.step_unique' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.CurrentUse.run_unique' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.CurrentUse.step_retains_history' depends on axioms: [propext]\n'MirroreaProofFirst.CurrentUse.run_retains_history' depends on axioms: [propext]\n",
+      "stderr": ""
+    },
+    {
+      "module": "TrackedValidation",
+      "command": [
+        "lean",
+        "--trust=0",
+        "-o",
+        "MirroreaProofFirstTrackedValidation.olean",
+        "MirroreaProofFirstTrackedValidation.lean"
+      ],
+      "exit": 0,
+      "sha256": "650339d6b363ee873c97e0f1e776aed0eb327981a78b5572dc0492589b20d9ff",
+      "stdout": "'MirroreaProofFirst.TrackedValidation.checkStamps_exact' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.TrackedValidation.checked_overlay_replay' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.TrackedValidation.checked_blind_write_unchanged' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.TrackedValidation.evaluate_exact' depends on axioms: [propext]\n'MirroreaProofFirst.TrackedValidation.tracked_reads_suffice' depends on axioms: [propext]\n'MirroreaProofFirst.TrackedValidation.equal_version_same_cell' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.TrackedValidation.validated_query_preserved' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.TrackedValidation.preparation_reachable' does not depend on any axioms\n'MirroreaProofFirst.TrackedValidation.preparation_observed' does not depend on any axioms\n'MirroreaProofFirst.TrackedValidation.preparation_origins' depends on axioms: [propext]\n'MirroreaProofFirst.TrackedValidation.interleaved_validation_sound' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.TrackedValidation.observed_replay' depends on axioms: [propext]\n'MirroreaProofFirst.TrackedValidation.observed_validation_sound' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.TrackedValidation.publish_values' does not depend on any axioms\n'MirroreaProofFirst.TrackedValidation.publish_is_writes' depends on axioms: [propext]\n'MirroreaProofFirst.TrackedValidation.commit_rechecks_result' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.TrackedValidation.writes_version_exact' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.TrackedValidation.checkStamps_no_writes' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.TrackedValidation.patch_preparation_reachable' does not depend on any axioms\n'MirroreaProofFirst.TrackedValidation.patch_preparation_origins' depends on axioms: [propext]\n'MirroreaProofFirst.TrackedValidation.patch_preparation_observed' does not depend on any axioms\n'MirroreaProofFirst.TrackedValidation.patch_observed_replay' depends on axioms: [propext]\n'MirroreaProofFirst.TrackedValidation.interleaved_patch_replay' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.TrackedValidation.patch_publication_replay' depends on axioms: [propext, Quot.sound]\n",
+      "stderr": ""
+    },
+    {
+      "module": "GraphValidation",
+      "command": [
+        "lean",
+        "--trust=0",
+        "-o",
+        "MirroreaProofFirstGraphValidation.olean",
+        "MirroreaProofFirstGraphValidation.lean"
+      ],
+      "exit": 0,
+      "sha256": "86d7148bc1dc7790f3925e94ddf41a0279b1a214e36bb96ff428c99f7ca0996a",
+      "stdout": "'MirroreaProofFirst.GraphValidation.add_preserves' does not depend on any axioms\n'MirroreaProofFirst.GraphValidation.reachable_exact' depends on axioms: [propext, Classical.choice, Quot.sound]\n'MirroreaProofFirst.GraphValidation.acyclic_subgraph' does not depend on any axioms\n'MirroreaProofFirst.GraphValidation.checkAdd_exact' depends on axioms: [propext, Classical.choice, Quot.sound]\n'MirroreaProofFirst.GraphValidation.checkAcyclic_exact' depends on axioms: [propext, Classical.choice, Quot.sound]\n'MirroreaProofFirst.GraphValidation.scan_evaluates' depends on axioms: [propext]\n'MirroreaProofFirst.GraphValidation.sampled_exact' depends on axioms: [propext]\n'MirroreaProofFirst.GraphValidation.dagQuery_exact' depends on axioms: [propext, Classical.choice, Quot.sound]\n'MirroreaProofFirst.GraphValidation.committed_graph_acyclic' depends on axioms: [propext, Classical.choice, Quot.sound]\n'MirroreaProofFirst.GraphValidation.interleaved_graph_publication' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n",
+      "stderr": ""
+    },
+    {
+      "module": "DynamicSupport",
+      "command": [
+        "lean",
+        "--trust=0",
+        "-o",
+        "MirroreaProofFirstDynamicSupport.olean",
+        "MirroreaProofFirstDynamicSupport.lean"
+      ],
+      "exit": 0,
+      "sha256": "ae88eb5b48bfe2667c3f1b68d18d0ef52685e929e6e008ca74cf29ded213912a",
+      "stdout": "'MirroreaProofFirst.Growth.eval_map' depends on axioms: [propext]\n'MirroreaProofFirst.Growth.rounds_embedding' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.Growth.grounded_embedding' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.Growth.left_injective' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.Growth.append_preserves_grounded' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.Growth.append_preserves_computed_live' depends on axioms: [propext, Classical.choice, Quot.sound]\n'MirroreaProofFirst.Growth.append_certificate_checked' depends on axioms: [propext, Classical.choice, Quot.sound]\n'MirroreaProofFirst.Growth.append_checked_old_exact' depends on axioms: [propext, Classical.choice, Quot.sound]\n",
+      "stderr": ""
+    },
+    {
+      "module": "DynamicGraphs",
+      "command": [
+        "lean",
+        "--trust=0",
+        "-o",
+        "MirroreaProofFirstDynamicGraphs.olean",
+        "MirroreaProofFirstDynamicGraphs.lean"
+      ],
+      "exit": 0,
+      "sha256": "fe38909c5f98a37f0ebb45879044c662552330c96694a09a0549da6a8187e0ce",
+      "stdout": "'MirroreaProofFirst.GraphGrowth.path_from_old' does not depend on any axioms\n'MirroreaProofFirst.GraphGrowth.path_between_new' does not depend on any axioms\n'MirroreaProofFirst.GraphGrowth.downstream_acyclic' does not depend on any axioms\n'MirroreaProofFirst.GraphGrowth.downstream_acyclic_exact' does not depend on any axioms\n'MirroreaProofFirst.GraphGrowth.each_kind_preserved' does not depend on any axioms\n",
+      "stderr": ""
+    },
+    {
+      "module": "DynamicIdentity",
+      "command": [
+        "lean",
+        "--trust=0",
+        "-o",
+        "MirroreaProofFirstDynamicIdentity.olean",
+        "MirroreaProofFirstDynamicIdentity.lean"
+      ],
+      "exit": 0,
+      "sha256": "f215bb61570fb35f7ee5ab8d1e518f5a27d5222316af72ad2734638b2bba656a",
+      "stdout": "'MirroreaProofFirst.IdentityGrowth.grow_checkHandle' depends on axioms: [propext, Classical.choice, Quot.sound]\n'MirroreaProofFirst.IdentityGrowth.grow_currentHandle' depends on axioms: [propext, Classical.choice, Quot.sound]\n'MirroreaProofFirst.IdentityGrowth.grow_context' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.IdentityGrowth.grow_checkUse' depends on axioms: [propext, Classical.choice, Quot.sound]\n'MirroreaProofFirst.IdentityGrowth.grow_locator' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.IdentityGrowth.mapHandle_injective' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.IdentityGrowth.grow_authority' depends on axioms: [propext, Quot.sound]\n",
+      "stderr": ""
+    },
+    {
+      "module": "SupportImpact",
+      "command": [
+        "lean",
+        "--trust=0",
+        "-o",
+        "MirroreaProofFirstSupportImpact.olean",
+        "MirroreaProofFirstSupportImpact.lean"
+      ],
+      "exit": 0,
+      "sha256": "1ec2ed879d32f80c7ce3372191a3bcd2b3217e4a507b927271a74b86770fc557",
+      "stdout": "'MirroreaProofFirst.LocalImpact.only_refs' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.LocalImpact.unaffected_closed' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.LocalImpact.unaffected_grounded' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.LocalImpact.affected_exact' depends on axioms: [propext, Classical.choice, Quot.sound]\n'MirroreaProofFirst.LocalImpact.unaffected_computed' depends on axioms: [propext, Classical.choice, Quot.sound]\n",
+      "stderr": ""
+    },
+    {
+      "module": "CurrentChoice",
+      "command": [
+        "lean",
+        "--trust=0",
+        "-o",
+        "MirroreaProofFirstCurrentChoice.olean",
+        "MirroreaProofFirstCurrentChoice.lean"
+      ],
+      "exit": 0,
+      "sha256": "0661937f955f8360eaeab38521f2e4931fc9ed5cc54b53b390434271187f7e64",
+      "stdout": "'MirroreaProofFirst.CurrentChoice.offer_sound' depends on axioms: [propext, Classical.choice, Quot.sound]\n'MirroreaProofFirst.CurrentChoice.offer_complete' depends on axioms: [propext, Classical.choice, Quot.sound]\n'MirroreaProofFirst.CurrentChoice.pick_sound' depends on axioms: [propext, Classical.choice, Quot.sound]\n'MirroreaProofFirst.CurrentChoice.pick_complete' depends on axioms: [propext, Classical.choice, Quot.sound]\n'MirroreaProofFirst.CurrentChoice.resolve_monotone' depends on axioms: [propext]\n'MirroreaProofFirst.CurrentChoice.resolve_lineage' depends on axioms: [propext]\n'MirroreaProofFirst.CurrentChoice.resolve_bound' depends on axioms: [propext, Classical.choice, Quot.sound]\n'MirroreaProofFirst.CurrentChoice.resolve_current' depends on axioms: [propext, Classical.choice, Quot.sound]\n'MirroreaProofFirst.CurrentChoice.grow_offer' depends on axioms: [propext, Classical.choice, Quot.sound]\n'MirroreaProofFirst.CurrentChoice.grow_pick' depends on axioms: [propext, Classical.choice, Quot.sound]\n'MirroreaProofFirst.CurrentChoice.grow_resolve_position' depends on axioms: [propext, Classical.choice, Quot.sound]\n",
+      "stderr": ""
+    },
+    {
+      "module": "NamedCatalog",
+      "command": [
+        "lean",
+        "--trust=0",
+        "-o",
+        "MirroreaProofFirstNamedCatalog.olean",
+        "MirroreaProofFirstNamedCatalog.lean"
+      ],
+      "exit": 0,
+      "sha256": "62fe82b10c9264bc4d8fe72a405bcfa9f396d959c82ed9ecdac3304b28a068ec",
+      "stdout": "'MirroreaProofFirst.NamedCatalog.lookup_exact' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.NamedCatalog.uniqueNames_exact' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.NamedCatalog.compile_sound' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.NamedCatalog.compile_complete' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.NamedCatalog.Elaborates.retains' depends on axioms: [propext]\n'MirroreaProofFirst.NamedCatalog.checked_elaboration' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.NamedCatalog.check_exact' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.NamedCatalog.compile_embedding' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.NamedCatalog.grow_compiled_old' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.NamedCatalog.grow_live_old' depends on axioms: [propext, Classical.choice, Quot.sound]\n'MirroreaProofFirst.NamedCatalog.checked_named_grounded' depends on axioms: [propext, Classical.choice, Quot.sound]\n'MirroreaProofFirst.NamedCatalog.missing_eligibility_false' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.NamedCatalog.missing_unusable' depends on axioms: [propext, Quot.sound]\n",
+      "stderr": ""
+    },
+    {
+      "module": "DynamicScopeControls",
+      "command": [
+        "lean",
+        "--trust=0",
+        "-o",
+        "MirroreaProofFirstDynamicScopeControls.olean",
+        "MirroreaProofFirstDynamicScopeControls.lean"
+      ],
+      "exit": 0,
+      "sha256": "56e9211376491c113fa151f8663007ce3d598f42e92fe70ab2c8e316e3cdfe88",
+      "stdout": "",
+      "stderr": ""
+    }
+  ],
+  "mutations": [
+    {
+      "name": "growth_ref_erasure",
+      "module": "DynamicSupport",
+      "theorem": "eval_map",
+      "range": [
+        15,
+        26
+      ],
+      "rejected_at_theorem": true,
+      "old": "| .ref k => .ref (embed k)",
+      "new": "| .ref k => .top",
+      "command": [
+        "lean",
+        "--trust=0",
+        "growth_ref_erasure.lean"
+      ],
+      "exit": 1,
+      "stdout": "growth_ref_erasure.lean:11:8: warning: unused variable `k`\n\nNote: This linter can be disabled with `set_option linter.unusedVariables false`\ngrowth_ref_erasure.lean:20:12: error: Tactic `rfl` failed: The left-hand side\n  eval available (mapFormula embed (Formula.ref k))\nis not definitionally equal to the right-hand side\n  eval (fun k => available (embed k)) (Formula.ref k)\n\ncase ref\nK L : Type\nembed : K \u2192 L\navailable : L \u2192 Bool\nk : K\n\u22a2 eval available (mapFormula embed (Formula.ref k)) = eval (fun k => available (embed k)) (Formula.ref k)\n'MirroreaProofFirst.Growth.eval_map' depends on axioms: [propext, sorryAx]\n'MirroreaProofFirst.Growth.rounds_embedding' depends on axioms: [propext, sorryAx, Quot.sound]\n'MirroreaProofFirst.Growth.grounded_embedding' depends on axioms: [propext, sorryAx, Quot.sound]\n'MirroreaProofFirst.Growth.left_injective' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.Growth.append_preserves_grounded' depends on axioms: [propext, sorryAx, Quot.sound]\n'MirroreaProofFirst.Growth.append_preserves_computed_live' depends on axioms: [propext,\n sorryAx,\n Classical.choice,\n Quot.sound]\n'MirroreaProofFirst.Growth.append_certificate_checked' depends on axioms: [propext, Classical.choice, Quot.sound]\n'MirroreaProofFirst.Growth.append_checked_old_exact' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]\n",
+      "stderr": "",
+      "sha256": "2cd8b2a485e576857fd47f1d97791aeb67fc8571c766e21511cd0f3acb238f69"
+    },
+    {
+      "name": "growth_old_formula",
+      "module": "DynamicSupport",
+      "theorem": "append_forms",
+      "range": [
+        64,
+        69
+      ],
+      "rejected_at_theorem": true,
+      "old": "then mapFormula (left n m) (old.forms \u27e8k.val,h\u27e9)",
+      "new": "then .either (mapFormula (left n m) (old.forms \u27e8k.val,h\u27e9)) .top",
+      "command": [
+        "lean",
+        "--trust=0",
+        "growth_old_formula.lean"
+      ],
+      "exit": 1,
+      "stdout": "growth_old_formula.lean:66:89: error: unsolved goals\nn m : Nat\nold : Snapshot n\nforms : Fin m \u2192 Formula (Fin (n + m))\neligible : Fin m \u2192 Bool\nk : Fin n\n\u22a2 (mapFormula (left n m) (old.forms k)).either Formula.top = mapFormula (left n m) (old.forms k)\n'MirroreaProofFirst.Growth.eval_map' depends on axioms: [propext]\n'MirroreaProofFirst.Growth.rounds_embedding' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.Growth.grounded_embedding' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.Growth.left_injective' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.Growth.append_preserves_grounded' depends on axioms: [propext, sorryAx, Quot.sound]\n'MirroreaProofFirst.Growth.append_preserves_computed_live' depends on axioms: [propext,\n sorryAx,\n Classical.choice,\n Quot.sound]\n'MirroreaProofFirst.Growth.append_certificate_checked' depends on axioms: [propext, Classical.choice, Quot.sound]\n'MirroreaProofFirst.Growth.append_checked_old_exact' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]\n",
+      "stderr": "",
+      "sha256": "e498569da6e26642a37f55983eb0228091baeeda3fec7d4abbba9da5d0cada82"
+    },
+    {
+      "name": "growth_old_eligibility",
+      "module": "DynamicSupport",
+      "theorem": "append_eligible",
+      "range": [
+        69,
+        74
+      ],
+      "rejected_at_theorem": true,
+      "old": "then old.eligible \u27e8k.val,h\u27e9",
+      "new": "then true",
+      "command": [
+        "lean",
+        "--trust=0",
+        "growth_old_eligibility.lean"
+      ],
+      "exit": 1,
+      "stdout": "growth_old_eligibility.lean:71:71: error: unsolved goals\nn m : Nat\nold : Snapshot n\nforms : Fin m \u2192 Formula (Fin (n + m))\neligible : Fin m \u2192 Bool\nk : Fin n\n\u22a2 old.eligible k = true\n'MirroreaProofFirst.Growth.eval_map' depends on axioms: [propext]\n'MirroreaProofFirst.Growth.rounds_embedding' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.Growth.grounded_embedding' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.Growth.left_injective' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.Growth.append_preserves_grounded' depends on axioms: [propext, sorryAx, Quot.sound]\n'MirroreaProofFirst.Growth.append_preserves_computed_live' depends on axioms: [propext,\n sorryAx,\n Classical.choice,\n Quot.sound]\n'MirroreaProofFirst.Growth.append_certificate_checked' depends on axioms: [propext, Classical.choice, Quot.sound]\n'MirroreaProofFirst.Growth.append_checked_old_exact' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]\n",
+      "stderr": "",
+      "sha256": "15f5448d9b89e3bb4d566c5d55f7a4fbbebc70e518ddb102c5f340e0675ed8b9"
+    },
+    {
+      "name": "old_to_new_edge",
+      "module": "DynamicGraphs",
+      "theorem": "path_from_old",
+      "range": [
+        15,
+        27
+      ],
+      "rejected_at_theorem": true,
+      "old": "| .inl _, .inr _ => False",
+      "new": "| .inl _, .inr _ => True",
+      "command": [
+        "lean",
+        "--trust=0",
+        "old_to_new_edge.lean"
+      ],
+      "exit": 1,
+      "stdout": "old_to_new_edge.lean:25:32: error: Application type mismatch: The argument\n  edge\nhas type\n  downstream old fresh uses (Sum.inl b) (Sum.inr c)\nbut is expected to have type\n  False\nin the application\n  False.elim edge\nold_to_new_edge.lean:39:32: error: Application type mismatch: The argument\n  edge\nhas type\n  downstream old fresh uses (Sum.inl c) (Sum.inr b)\nbut is expected to have type\n  False\nin the application\n  False.elim edge\nold_to_new_edge.lean:52:32: error: Application type mismatch: The argument\n  edge\nhas type\n  downstream old fresh uses (Sum.inl a) (Sum.inr b)\nbut is expected to have type\n  False\nin the application\n  False.elim edge\n'MirroreaProofFirst.GraphGrowth.path_from_old' depends on axioms: [sorryAx]\n'MirroreaProofFirst.GraphGrowth.path_between_new' depends on axioms: [sorryAx]\n'MirroreaProofFirst.GraphGrowth.downstream_acyclic' depends on axioms: [sorryAx]\n'MirroreaProofFirst.GraphGrowth.downstream_acyclic_exact' depends on axioms: [sorryAx]\n'MirroreaProofFirst.GraphGrowth.each_kind_preserved' depends on axioms: [sorryAx]\n",
+      "stderr": "",
+      "sha256": "95a8e9dab7c70e0c3827f381e1067c225d5a6ee584427f79bdcee5afda0dd076"
+    },
+    {
+      "name": "new_graph_erased",
+      "module": "DynamicGraphs",
+      "theorem": "lift_new_path",
+      "range": [
+        66,
+        73
+      ],
+      "rejected_at_theorem": true,
+      "old": "| .inr a, .inr b => fresh a b",
+      "new": "| .inr a, .inr b => False",
+      "command": [
+        "lean",
+        "--trust=0",
+        "new_graph_erased.lean"
+      ],
+      "exit": 1,
+      "stdout": "new_graph_erased.lean:8:37: warning: unused variable `fresh`\n\nNote: This linter can be disabled with `set_option linter.unusedVariables false`\nnew_graph_erased.lean:13:9: warning: unused variable `a`\n\nNote: This linter can be disabled with `set_option linter.unusedVariables false`\nnew_graph_erased.lean:13:17: warning: unused variable `b`\n\nNote: This linter can be disabled with `set_option linter.unusedVariables false`\nnew_graph_erased.lean:40:43: error: Application type mismatch: The argument\n  edge\nhas type\n  downstream old fresh uses (Sum.inr c) (Sum.inr b)\nbut is expected to have type\n  fresh c b\nin the application\n  Path.step (ih a c hx rfl) edge\nnew_graph_erased.lean:58:28: error: Application type mismatch: The argument\n  edge\nhas type\n  downstream old fresh uses (Sum.inr a) (Sum.inr b)\nbut is expected to have type\n  fresh a b\nin the application\n  hn a b edge\nnew_graph_erased.lean:70:34: error: Application type mismatch: The argument\n  e\nhas type\n  fresh y\u271d z\u271d\nbut is expected to have type\n  downstream old fresh uses (Sum.inr y\u271d) (Sum.inr z\u271d)\nin the application\n  Path.step ih e\nnew_graph_erased.lean:78:47: error: Application type mismatch: The argument\n  edge\nhas type\n  fresh a b\nbut is expected to have type\n  downstream old fresh uses (Sum.inr a) (Sum.inr b)\nin the application\n  h (Sum.inr a) (Sum.inr b) edge\n'MirroreaProofFirst.GraphGrowth.path_from_old' does not depend on any axioms\n'MirroreaProofFirst.GraphGrowth.path_between_new' depends on axioms: [sorryAx]\n'MirroreaProofFirst.GraphGrowth.downstream_acyclic' depends on axioms: [sorryAx]\n'MirroreaProofFirst.GraphGrowth.downstream_acyclic_exact' depends on axioms: [sorryAx]\n'MirroreaProofFirst.GraphGrowth.each_kind_preserved' depends on axioms: [sorryAx]\n",
+      "stderr": "",
+      "sha256": "ed714508fe651b928998c6b5eab679d2fd9789e29bbda65e3660a86a2bac6c9f"
+    },
+    {
+      "name": "old_code_changed",
+      "module": "DynamicIdentity",
+      "theorem": "grow_context",
+      "range": [
+        61,
+        65
+      ],
+      "rejected_at_theorem": true,
+      "old": "code := r.code,",
+      "new": "code := r.code + 1,",
+      "command": [
+        "lean",
+        "--trust=0",
+        "old_code_changed.lean"
+      ],
+      "exit": 1,
+      "stdout": "old_code_changed.lean:62:71: error: unsolved goals\nn m : Nat\ns : World n\na : Addition n m\nu : UseRequest n\n\u22a2 False\nold_code_changed.lean:107:0: error: Expression\n  checkUse added oldRequest evidence\ndid not evaluate to `true`\n'MirroreaProofFirst.IdentityGrowth.grow_checkHandle' depends on axioms: [propext, Classical.choice, Quot.sound]\n'MirroreaProofFirst.IdentityGrowth.grow_currentHandle' depends on axioms: [propext, Classical.choice, Quot.sound]\n'MirroreaProofFirst.IdentityGrowth.grow_context' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]\n'MirroreaProofFirst.IdentityGrowth.grow_checkUse' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]\n'MirroreaProofFirst.IdentityGrowth.grow_locator' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.IdentityGrowth.mapHandle_injective' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.IdentityGrowth.grow_authority' depends on axioms: [propext, Quot.sound]\n",
+      "stderr": "",
+      "sha256": "caced80a350c8f27c23a0604e4161e8838c51f5e616690c7a0a1ac5942b35675"
+    },
+    {
+      "name": "handle_identity_changed",
+      "module": "DynamicIdentity",
+      "theorem": "grow_checkHandle",
+      "range": [
+        47,
+        56
+      ],
+      "rejected_at_theorem": true,
+      "old": "\u27e8h.instanceId,left n m h.key,h.identity\u27e9",
+      "new": "\u27e8h.instanceId,left n m h.key,{h.identity with incarnation := h.identity.incarnation + 1}\u27e9",
+      "command": [
+        "lean",
+        "--trust=0",
+        "handle_identity_changed.lean"
+      ],
+      "exit": 1,
+      "stdout": "handle_identity_changed.lean:52:2: error: Type mismatch\n  congrArg\n    (fun b =>\n      decide (h.instanceId = s.instanceId) && decide (h.identity = (s.records h.key).identity) &&\n          decide (h.identity.kind = kind) &&\n        b)\n    (append_preserves_computed_live s.support a.forms a.eligible h.key)\nhas type\n  (decide (h.instanceId = s.instanceId) && decide (h.identity = (s.records h.key).identity) &&\n        decide (h.identity.kind = kind) &&\n      Support.snapshotLive (append s.support a.forms a.eligible) (left n m h.key)) =\n    (decide (h.instanceId = s.instanceId) && decide (h.identity = (s.records h.key).identity) &&\n        decide (h.identity.kind = kind) &&\n      Support.snapshotLive s.support h.key)\nbut is expected to have type\n  (decide (h.instanceId = s.instanceId) &&\n          decide\n            ({ kind := h.identity.kind, incarnation := h.identity.incarnation + 1, revision := h.identity.revision } =\n              (s.records h.key).identity) &&\n        decide (h.identity.kind = kind) &&\n      Support.snapshotLive (grow s a).support (left n m h.key)) =\n    (decide (h.instanceId = s.instanceId) && decide (h.identity = (s.records h.key).identity) &&\n        decide (h.identity.kind = kind) &&\n      Support.snapshotLive s.support h.key)\nhandle_identity_changed.lean:82:0: error: Not a definitional equality: the left-hand side\n  locator (mapHandle m h)\nis not definitionally equal to the right-hand side\n  locator h\nhandle_identity_changed.lean:82:77: error: Type mismatch\n  rfl\nhas type\n  ?m.8 = ?m.8\nbut is expected to have type\n  locator (mapHandle m h) = locator h\nhandle_identity_changed.lean:91:30: error: Tactic `subst` failed: invalid equality proof, it is not of the form (x = t) or (t = x)\n  { kind := ar.kind, incarnation := ar.incarnation + 1, revision := ar.revision } =\n    { kind := br.kind, incarnation := br.incarnation + 1, revision := br.revision }\n\ncase mk.mk\nn m ai : Nat\nak : Fin n\nar br : RecordIdentity\nright\u271d :\n  { kind := ar.kind, incarnation := ar.incarnation + 1, revision := ar.revision } =\n    { kind := br.kind, incarnation := br.incarnation + 1, revision := br.revision }\n\u22a2 { instanceId := ai, key := ak, identity := ar } = { instanceId := ai, key := ak, identity := br }\nhandle_identity_changed.lean:107:0: error: Expression\n  checkUse added oldRequest evidence\ndid not evaluate to `true`\nhandle_identity_changed.lean:115:0: error: Expression\n  decide (locator oldRequest.operation = locator request.operation)\ndid not evaluate to `true`\n'MirroreaProofFirst.IdentityGrowth.grow_checkHandle' depends on axioms: [propext, sorryAx, Quot.sound]\n'MirroreaProofFirst.IdentityGrowth.grow_currentHandle' depends on axioms: [propext,\n sorryAx,\n Classical.choice,\n Quot.sound]\n'MirroreaProofFirst.IdentityGrowth.grow_context' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.IdentityGrowth.grow_checkUse' depends on axioms: [propext, sorryAx, Quot.sound]\n'MirroreaProofFirst.IdentityGrowth.grow_locator' depends on axioms: [propext, sorryAx, Quot.sound]\n'MirroreaProofFirst.IdentityGrowth.mapHandle_injective' depends on axioms: [propext, sorryAx, Quot.sound]\n'MirroreaProofFirst.IdentityGrowth.grow_authority' depends on axioms: [propext, Quot.sound]\n",
+      "stderr": "",
+      "sha256": "d60a9d62ab06a39d61621410be465f5a4446916a49b57256b0c9b0525ccdbeca"
+    },
+    {
+      "name": "authority_changed",
+      "module": "DynamicIdentity",
+      "theorem": "grow_authority",
+      "range": [
+        95,
+        98
+      ],
+      "rejected_at_theorem": true,
+      "old": "authority := s.authority, policies :=",
+      "new": "authority := {s.authority with revoked := 999 :: s.authority.revoked}, policies :=",
+      "command": [
+        "lean",
+        "--trust=0",
+        "authority_changed.lean"
+      ],
+      "exit": 1,
+      "stdout": "authority_changed.lean:75:2: error: Tactic `rfl` failed: The left-hand side\n  checkHandle s RecordKind.member u.member && checkHandle s RecordKind.locus u.locus &&\n              checkHandle s RecordKind.module u.moduleHandle &&\n            checkHandle s RecordKind.operation u.operation &&\n          decide ((s.records u.member.key).principal = u.principal) &&\n        decide ((s.records u.operation.key).home = u.locus.key) &&\n      decide ((s.records u.operation.key).moduleKey = u.moduleHandle.key) &&\n    revalidate (grow s a).authority (s.policies u.operation.key) (currentContext s u) e\nis not definitionally equal to the right-hand side\n  checkHandle s RecordKind.member u.member && checkHandle s RecordKind.locus u.locus &&\n              checkHandle s RecordKind.module u.moduleHandle &&\n            checkHandle s RecordKind.operation u.operation &&\n          decide ((s.records u.member.key).principal = u.principal) &&\n        decide ((s.records u.operation.key).home = u.locus.key) &&\n      decide ((s.records u.operation.key).moduleKey = u.moduleHandle.key) &&\n    revalidate s.authority (s.policies u.operation.key) (currentContext s u) e\n\nn m : Nat\ns : World n\na : Addition n m\nu : UseRequest n\ne : Evidence\n\u22a2 (checkHandle s RecordKind.member u.member && checkHandle s RecordKind.locus u.locus &&\n                checkHandle s RecordKind.module u.moduleHandle &&\n              checkHandle s RecordKind.operation u.operation &&\n            decide ((s.records u.member.key).principal = u.principal) &&\n          decide ((s.records u.operation.key).home = u.locus.key) &&\n        decide ((s.records u.operation.key).moduleKey = u.moduleHandle.key) &&\n      revalidate (grow s a).authority (s.policies u.operation.key) (currentContext s u) e) =\n    (checkHandle s RecordKind.member u.member && checkHandle s RecordKind.locus u.locus &&\n                checkHandle s RecordKind.module u.moduleHandle &&\n              checkHandle s RecordKind.operation u.operation &&\n            decide ((s.records u.member.key).principal = u.principal) &&\n          decide ((s.records u.operation.key).home = u.locus.key) &&\n        decide ((s.records u.operation.key).moduleKey = u.moduleHandle.key) &&\n      revalidate s.authority (s.policies u.operation.key) (currentContext s u) e)\nauthority_changed.lean:95:0: error: Not a definitional equality: the left-hand side\n  (grow s a).authority\nis not definitionally equal to the right-hand side\n  s.authority\nauthority_changed.lean:96:42: error: Type mismatch\n  rfl\nhas type\n  ?m.9 = ?m.9\nbut is expected to have type\n  (grow s a).authority = s.authority\n'MirroreaProofFirst.IdentityGrowth.grow_checkHandle' depends on axioms: [propext, Classical.choice, Quot.sound]\n'MirroreaProofFirst.IdentityGrowth.grow_currentHandle' depends on axioms: [propext, Classical.choice, Quot.sound]\n'MirroreaProofFirst.IdentityGrowth.grow_context' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.IdentityGrowth.grow_checkUse' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]\n'MirroreaProofFirst.IdentityGrowth.grow_locator' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.IdentityGrowth.mapHandle_injective' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.IdentityGrowth.grow_authority' depends on axioms: [propext, sorryAx, Quot.sound]\n",
+      "stderr": "",
+      "sha256": "c04cead4887ac3fcf7248329a5550a3933a007047dbbd0e4f2bba2d85db138a6"
+    },
+    {
+      "name": "principal_substitution",
+      "module": "DynamicIdentity",
+      "theorem": "grow_context",
+      "range": [
+        61,
+        65
+      ],
+      "rejected_at_theorem": true,
+      "old": "\u27e8u.principal,mapHandle m u.member",
+      "new": "\u27e8u.principal + 1,mapHandle m u.member",
+      "command": [
+        "lean",
+        "--trust=0",
+        "principal_substitution.lean"
+      ],
+      "exit": 1,
+      "stdout": "principal_substitution.lean:62:71: error: unsolved goals\nn m : Nat\ns : World n\na : Addition n m\nu : UseRequest n\n\u22a2 False\nprincipal_substitution.lean:75:2: error: Tactic `rfl` failed: The left-hand side\n  checkHandle s RecordKind.member u.member && checkHandle s RecordKind.locus u.locus &&\n              checkHandle s RecordKind.module u.moduleHandle &&\n            checkHandle s RecordKind.operation u.operation &&\n          decide ((s.records u.member.key).principal = u.principal + 1) &&\n        decide ((s.records u.operation.key).home = u.locus.key) &&\n      decide ((s.records u.operation.key).moduleKey = u.moduleHandle.key) &&\n    revalidate (grow s a).authority (s.policies u.operation.key) (currentContext s u) e\nis not definitionally equal to the right-hand side\n  checkHandle s RecordKind.member u.member && checkHandle s RecordKind.locus u.locus &&\n              checkHandle s RecordKind.module u.moduleHandle &&\n            checkHandle s RecordKind.operation u.operation &&\n          decide ((s.records u.member.key).principal = u.principal) &&\n        decide ((s.records u.operation.key).home = u.locus.key) &&\n      decide ((s.records u.operation.key).moduleKey = u.moduleHandle.key) &&\n    revalidate s.authority (s.policies u.operation.key) (currentContext s u) e\n\nn m : Nat\ns : World n\na : Addition n m\nu : UseRequest n\ne : Evidence\n\u22a2 (checkHandle s RecordKind.member u.member && checkHandle s RecordKind.locus u.locus &&\n                checkHandle s RecordKind.module u.moduleHandle &&\n              checkHandle s RecordKind.operation u.operation &&\n            decide ((s.records u.member.key).principal = u.principal + 1) &&\n          decide ((s.records u.operation.key).home = u.locus.key) &&\n        decide ((s.records u.operation.key).moduleKey = u.moduleHandle.key) &&\n      revalidate (grow s a).authority (s.policies u.operation.key) (currentContext s u) e) =\n    (checkHandle s RecordKind.member u.member && checkHandle s RecordKind.locus u.locus &&\n                checkHandle s RecordKind.module u.moduleHandle &&\n              checkHandle s RecordKind.operation u.operation &&\n            decide ((s.records u.member.key).principal = u.principal) &&\n          decide ((s.records u.operation.key).home = u.locus.key) &&\n        decide ((s.records u.operation.key).moduleKey = u.moduleHandle.key) &&\n      revalidate s.authority (s.policies u.operation.key) (currentContext s u) e)\nprincipal_substitution.lean:107:0: error: Expression\n  checkUse added oldRequest evidence\ndid not evaluate to `true`\n'MirroreaProofFirst.IdentityGrowth.grow_checkHandle' depends on axioms: [propext, Classical.choice, Quot.sound]\n'MirroreaProofFirst.IdentityGrowth.grow_currentHandle' depends on axioms: [propext, Classical.choice, Quot.sound]\n'MirroreaProofFirst.IdentityGrowth.grow_context' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]\n'MirroreaProofFirst.IdentityGrowth.grow_checkUse' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]\n'MirroreaProofFirst.IdentityGrowth.grow_locator' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.IdentityGrowth.mapHandle_injective' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.IdentityGrowth.grow_authority' depends on axioms: [propext, Quot.sound]\n",
+      "stderr": "",
+      "sha256": "526a2a0bbc0320044485e7b41ac6f47cf2feb465e2c4415ff6223a2818cd1ac2"
+    },
+    {
+      "name": "unused_branch_omitted",
+      "module": "SupportImpact",
+      "theorem": "only_refs",
+      "range": [
+        14,
+        23
+      ],
+      "rejected_at_theorem": true,
+      "old": "| .both p q | .either p q => refs p ++ refs q",
+      "new": "| .both p q => refs p ++ refs q\n  | .either p q => refs p",
+      "command": [
+        "lean",
+        "--trust=0",
+        "unused_branch_omitted.lean"
+      ],
+      "exit": 1,
+      "stdout": "unused_branch_omitted.lean:12:14: warning: unused variable `q`\n\nNote: This linter can be disabled with `set_option linter.unusedVariables false`\nunused_branch_omitted.lean:21:21: error: unsolved goals\ncase either\nK : Type\nP : K \u2192 Prop\np q : Formula K\nhp : Only P p \u2194 \u2200 (k : K), k \u2208 refs p \u2192 P k\nhq : Only P q \u2194 \u2200 (k : K), k \u2208 refs q \u2192 P k\n\u22a2 (\u2200 (k : K), k \u2208 refs p \u2192 P k) \u2192 \u2200 (k : K), k \u2208 refs q \u2192 P k\nunused_branch_omitted.lean:21:46: warning: This simp argument is unused:\n  List.mem_append\n\nHint: Omit it from the simp argument list.\n  simp [\u0335O\u0335n\u0335l\u0335y\u0335,\u0335r\u0335e\u0335f\u0335s\u0335,\u0335h\u0335p\u0335,\u0335h\u0335q\u0335,\u0335L\u0335i\u0335s\u0335t\u0335.\u0335m\u0335e\u0335m\u0335_\u0335a\u0335p\u0335p\u0335e\u0335n\u0335d\u0335,\u0335o\u0335r\u0335_\u0335i\u0335m\u0335p\u0335,\u0335f\u0335o\u0335r\u0335a\u0335l\u0335l\u0335_\u0335a\u0335n\u0335d\u0335]\u0335[\u0332O\u0332n\u0332l\u0332y\u0332,\u0332 \u0332r\u0332e\u0332f\u0332s\u0332,\u0332 \u0332h\u0332p\u0332,\u0332 \u0332h\u0332q\u0332,\u0332 \u0332o\u0332r\u0332_\u0332i\u0332m\u0332p\u0332,\u0332 \u0332f\u0332o\u0332r\u0332a\u0332l\u0332l\u0332_\u0332a\u0332n\u0332d\u0332]\u0332\n\nNote: This linter can be disabled with `set_option linter.unusedSimpArgs false`\nunused_branch_omitted.lean:21:62: warning: This simp argument is unused:\n  or_imp\n\nHint: Omit it from the simp argument list.\n  simp [\u0335O\u0335n\u0335l\u0335y\u0335,\u0335r\u0335e\u0335f\u0335s\u0335,\u0335h\u0335p\u0335,\u0335h\u0335q\u0335,\u0335L\u0335i\u0335s\u0335t\u0335.\u0335m\u0335e\u0335m\u0335_\u0335a\u0335p\u0335p\u0335e\u0335n\u0335d\u0335,\u0335o\u0335r\u0335_\u0335i\u0335m\u0335p\u0335,\u0335f\u0335o\u0335r\u0335a\u0335l\u0335l\u0335_\u0335a\u0335n\u0335d\u0335]\u0335[\u0332O\u0332n\u0332l\u0332y\u0332,\u0332 \u0332r\u0332e\u0332f\u0332s\u0332,\u0332 \u0332h\u0332p\u0332,\u0332 \u0332h\u0332q\u0332,\u0332 \u0332L\u0332i\u0332s\u0332t\u0332.\u0332m\u0332e\u0332m\u0332_\u0332a\u0332p\u0332p\u0332e\u0332n\u0332d\u0332,\u0332 \u0332f\u0332o\u0332r\u0332a\u0332l\u0332l\u0332_\u0332a\u0332n\u0332d\u0332]\u0332\n\nNote: This linter can be disabled with `set_option linter.unusedSimpArgs false`\nunused_branch_omitted.lean:21:69: warning: This simp argument is unused:\n  forall_and\n\nHint: Omit it from the simp argument list.\n  simp [\u0335O\u0335n\u0335l\u0335y\u0335,\u0335r\u0335e\u0335f\u0335s\u0335,\u0335h\u0335p\u0335,\u0335h\u0335q\u0335,\u0335L\u0335i\u0335s\u0335t\u0335.\u0335m\u0335e\u0335m\u0335_\u0335a\u0335p\u0335p\u0335e\u0335n\u0335d\u0335,\u0335o\u0335r\u0335_\u0335i\u0335m\u0335p\u0335,\u0335f\u0335o\u0335r\u0335a\u0335l\u0335l\u0335_\u0335a\u0335n\u0335d\u0335]\u0335[\u0332O\u0332n\u0332l\u0332y\u0332,\u0332 \u0332r\u0332e\u0332f\u0332s\u0332,\u0332 \u0332h\u0332p\u0332,\u0332 \u0332h\u0332q\u0332,\u0332 \u0332L\u0332i\u0332s\u0332t\u0332.\u0332m\u0332e\u0332m\u0332_\u0332a\u0332p\u0332p\u0332e\u0332n\u0332d\u0332,\u0332 \u0332o\u0332r\u0332_\u0332i\u0332m\u0332p\u0332]\u0332\n\nNote: This linter can be disabled with `set_option linter.unusedSimpArgs false`\nunused_branch_omitted.lean:86:0: error: Expression\n  affected forms (fun k => k == 2) 0\ndid not evaluate to `true`\n'MirroreaProofFirst.LocalImpact.only_refs' depends on axioms: [propext, sorryAx, Quot.sound]\n'MirroreaProofFirst.LocalImpact.unaffected_closed' depends on axioms: [propext, sorryAx, Quot.sound]\n'MirroreaProofFirst.LocalImpact.unaffected_grounded' depends on axioms: [propext, sorryAx, Quot.sound]\n'MirroreaProofFirst.LocalImpact.affected_exact' depends on axioms: [propext, Classical.choice, Quot.sound]\n'MirroreaProofFirst.LocalImpact.unaffected_computed' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]\n",
+      "stderr": "",
+      "sha256": "f38c535a82e7a581631e27be8d0f310e6fa34592e506d0d1a5107944561ffaed"
+    },
+    {
+      "name": "impact_direction_reversed",
+      "module": "SupportImpact",
+      "theorem": "affected_exact",
+      "range": [
+        61,
+        69
+      ],
+      "rejected_at_theorem": true,
+      "old": "reachable (dependencyBool forms) k j",
+      "new": "reachable (dependencyBool forms) j k",
+      "command": [
+        "lean",
+        "--trust=0",
+        "impact_direction_reversed.lean"
+      ],
+      "exit": 1,
+      "stdout": "impact_direction_reversed.lean:62:100: error: unsolved goals\nn : Nat\nforms : Fin n \u2192 Formula (Fin n)\nchanged : Fin n \u2192 Bool\nk : Fin n\nedgeEq : (fun x y => dependencyBool forms x y = true) = dependency forms\n\u22a2 (\u2203 x, changed x = true \u2227 Path (dependency forms) x k) \u2194 \u2203 j, changed j = true \u2227 Path (dependency forms) k j\nimpact_direction_reversed.lean:85:0: error: Expression\n  affected forms (fun k => k == 2) 0\ndid not evaluate to `true`\n'MirroreaProofFirst.LocalImpact.only_refs' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.LocalImpact.unaffected_closed' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.LocalImpact.unaffected_grounded' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.LocalImpact.affected_exact' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]\n'MirroreaProofFirst.LocalImpact.unaffected_computed' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]\n",
+      "stderr": "",
+      "sha256": "919ad1050710a0aef03d39a72333dff30264cd1cd6878b40562eed3e96aca213"
+    },
+    {
+      "name": "all_impact_omitted",
+      "module": "SupportImpact",
+      "theorem": "affected_exact",
+      "range": [
+        61,
+        69
+      ],
+      "rejected_at_theorem": true,
+      "old": "changed j && reachable",
+      "new": "false && reachable",
+      "command": [
+        "lean",
+        "--trust=0",
+        "all_impact_omitted.lean"
+      ],
+      "exit": 1,
+      "stdout": "all_impact_omitted.lean:57:48: warning: unused variable `changed`\n\nNote: This linter can be disabled with `set_option linter.unusedVariables false`\nall_impact_omitted.lean:62:100: error: unsolved goals\nn : Nat\nforms : Fin n \u2192 Formula (Fin n)\nchanged : Fin n \u2192 Bool\nk : Fin n\nedgeEq : (fun x y => dependencyBool forms x y = true) = dependency forms\n\u22a2 \u2200 (x : Fin n), changed x = true \u2192 \u00acPath (dependency forms) k x\nall_impact_omitted.lean:85:0: error: Expression\n  affected forms (fun k => k == 2) 0\ndid not evaluate to `true`\n'MirroreaProofFirst.LocalImpact.only_refs' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.LocalImpact.unaffected_closed' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.LocalImpact.unaffected_grounded' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.LocalImpact.affected_exact' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]\n'MirroreaProofFirst.LocalImpact.unaffected_computed' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]\n",
+      "stderr": "",
+      "sha256": "55b92da30fb6e53a95f089ee9e5d54629b6888762c5ee0536ea5479309cff082"
+    },
+    {
+      "name": "choice_unchecked",
+      "module": "CurrentChoice",
+      "theorem": "offer_sound",
+      "range": [
+        14,
+        23
+      ],
+      "rejected_at_theorem": true,
+      "old": "if checkUse s u e then some e else none",
+      "new": "if true then some e else none",
+      "command": [
+        "lean",
+        "--trust=0",
+        "choice_unchecked.lean"
+      ],
+      "exit": 1,
+      "stdout": "choice_unchecked.lean:20:43: error: Tactic `assumption` failed\n\nn : Nat\ne : Evidence\ns : World n\nu : UseRequest n\nx\u271d : Option Evidence\nh\u271d : true = true\nheq\u271d : authorize s.authority (s.policies u.operation.key) (currentContext s u) = some e\n\u22a2 checkUse s u ?m.135 = true\nchoice_unchecked.lean:20:47: error: Tactic `assumption` failed\n\nn : Nat\ne : Evidence\ns : World n\nu : UseRequest n\nx\u271d : Option Evidence\nh\u271d : true = true\nheq\u271d : authorize s.authority (s.policies u.operation.key) (currentContext s u) = some e\n\u22a2 checkUse s u e = true\nchoice_unchecked.lean:26:29: warning: This simp argument is unused:\n  hc\n\nHint: Omit it from the simp argument list.\n  simp [\u0335o\u0335f\u0335f\u0335e\u0335r\u0335,\u0335h\u0335a\u0335,\u0335h\u0335c\u0335]\u0335[\u0332o\u0332f\u0332f\u0332e\u0332r\u0332,\u0332 \u0332h\u0332a\u0332]\u0332\n\nNote: This linter can be disabled with `set_option linter.unusedSimpArgs false`\nchoice_unchecked.lean:138:2: error: 'change' tactic failed, pattern\n  (match authorize s.authority (s.policies u.operation.key) (currentContext s u) with\n    | none => none\n    | some e => if checkUse (IdentityGrowth.grow s a) (IdentityGrowth.mapRequest m u) e = true then some e else none) =\n    ?m.27\nis not definitionally equal to target\n  (match authorize (IdentityGrowth.grow s a).authority (s.policies u.operation.key) (currentContext s u) with\n    | none => none\n    | some e => if True then some e else none) =\n    match authorize s.authority (s.policies u.operation.key) (currentContext s u) with\n    | none => none\n    | some e => if True then some e else none\nchoice_unchecked.lean:173:0: error: Expression\n  decide ((resolve world cursor).fst.position = 1)\ndid not evaluate to `true`\nchoice_unchecked.lean:175:0: error: Expression\n  decide ((resolve retiredWorld (resolve world cursor).fst).fst.position = 2)\ndid not evaluate to `true`\nchoice_unchecked.lean:178:0: error: Expression\n  (resolve world (resolve retiredWorld (resolve world cursor).fst).fst).snd.isNone\ndid not evaluate to `true`\n'MirroreaProofFirst.CurrentChoice.offer_sound' depends on axioms: [propext, sorryAx]\n'MirroreaProofFirst.CurrentChoice.offer_complete' depends on axioms: [propext, Classical.choice, Quot.sound]\n'MirroreaProofFirst.CurrentChoice.pick_sound' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]\n'MirroreaProofFirst.CurrentChoice.pick_complete' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]\n'MirroreaProofFirst.CurrentChoice.resolve_monotone' depends on axioms: [propext]\n'MirroreaProofFirst.CurrentChoice.resolve_lineage' depends on axioms: [propext]\n'MirroreaProofFirst.CurrentChoice.resolve_bound' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]\n'MirroreaProofFirst.CurrentChoice.resolve_current' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]\n'MirroreaProofFirst.CurrentChoice.grow_offer' depends on axioms: [propext, sorryAx, Quot.sound]\n'MirroreaProofFirst.CurrentChoice.grow_pick' depends on axioms: [propext, sorryAx, Quot.sound]\n'MirroreaProofFirst.CurrentChoice.grow_resolve_position' depends on axioms: [propext, sorryAx, Quot.sound]\n",
+      "stderr": "",
+      "sha256": "ceaddad99cf9282af539135de5a4b3cf6200e5028243c9170d1bdd4a7d47e519"
+    },
+    {
+      "name": "cursor_rewind",
+      "module": "CurrentChoice",
+      "theorem": "resolve_monotone",
+      "range": [
+        103,
+        110
+      ],
+      "rejected_at_theorem": true,
+      "old": "position := c.position+j",
+      "new": "position := 0",
+      "command": [
+        "lean",
+        "--trust=0",
+        "cursor_rewind.lean"
+      ],
+      "exit": 1,
+      "stdout": "cursor_rewind.lean:101:10: warning: unused variable `j`\n\nNote: This linter can be disabled with `set_option linter.unusedVariables false`\ncursor_rewind.lean:108:4: error: Type mismatch\n  Nat.le_add_right ?m.50 ?m.51\nhas type\n  ?m.50 \u2264 ?m.50 + ?m.51\nbut is expected to have type\n  c.position \u2264 ({ options := c.options, position := 0, lineage := c.lineage }, some (u\u271d, e\u271d)).fst.position\ncursor_rewind.lean:129:10: error: No goals to be solved\ncursor_rewind.lean:173:0: error: Expression\n  decide ((resolve world cursor).fst.position = 1)\ndid not evaluate to `true`\n'MirroreaProofFirst.CurrentChoice.offer_sound' depends on axioms: [propext, Classical.choice, Quot.sound]\n'MirroreaProofFirst.CurrentChoice.offer_complete' depends on axioms: [propext, Classical.choice, Quot.sound]\n'MirroreaProofFirst.CurrentChoice.pick_sound' depends on axioms: [propext, Classical.choice, Quot.sound]\n'MirroreaProofFirst.CurrentChoice.pick_complete' depends on axioms: [propext, Classical.choice, Quot.sound]\n'MirroreaProofFirst.CurrentChoice.resolve_monotone' depends on axioms: [propext, sorryAx]\n'MirroreaProofFirst.CurrentChoice.resolve_lineage' depends on axioms: [propext]\n'MirroreaProofFirst.CurrentChoice.resolve_bound' depends on axioms: [propext, sorryAx, Quot.sound]\n'MirroreaProofFirst.CurrentChoice.resolve_current' depends on axioms: [propext, Classical.choice, Quot.sound]\n'MirroreaProofFirst.CurrentChoice.grow_offer' depends on axioms: [propext, Classical.choice, Quot.sound]\n'MirroreaProofFirst.CurrentChoice.grow_pick' depends on axioms: [propext, Classical.choice, Quot.sound]\n'MirroreaProofFirst.CurrentChoice.grow_resolve_position' depends on axioms: [propext, Classical.choice, Quot.sound]\n",
+      "stderr": "",
+      "sha256": "2699fb35c8f9c395dc89b0c8bb8c82e6d880ca671dc62bef757cf4582300d19e"
+    },
+    {
+      "name": "choice_wrong_index",
+      "module": "CurrentChoice",
+      "theorem": "pick_sound",
+      "range": [
+        60,
+        82
+      ],
+      "rejected_at_theorem": true,
+      "old": "(j+1,v,e)",
+      "new": "(j,v,e)",
+      "command": [
+        "lean",
+        "--trust=0",
+        "choice_wrong_index.lean"
+      ],
+      "exit": 1,
+      "stdout": "choice_wrong_index.lean:80:15: error: Application type mismatch: The argument\n  First.tail ((offer_none_iff s v).mp hv) hf\nhas type\n  First s (v :: vs) (k + 1) w\nbut is expected to have type\n  First s (v :: vs) k w\nin the application\n  And.intro (First.tail ((offer_none_iff s v).mp hv) hf)\nchoice_wrong_index.lean:89:13: error: unsolved goals\nn\u271d : Nat\ns : World n\u271d\nus\u271d : List (UseRequest n\u271d)\nj\u271d : Nat\nu\u271d u : UseRequest n\u271d\nus : List (UseRequest n\u271d)\nj : Nat\nv : UseRequest n\u271d\nhu : \u00acCurrentUse s u\nh : First s us j v\ne : Evidence\nhe : pick s us = some (j, v, e)\n\u22a2 False\nchoice_wrong_index.lean:173:0: error: Expression\n  decide ((resolve world cursor).fst.position = 1)\ndid not evaluate to `true`\n'MirroreaProofFirst.CurrentChoice.offer_sound' depends on axioms: [propext, Classical.choice, Quot.sound]\n'MirroreaProofFirst.CurrentChoice.offer_complete' depends on axioms: [propext, Classical.choice, Quot.sound]\n'MirroreaProofFirst.CurrentChoice.pick_sound' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]\n'MirroreaProofFirst.CurrentChoice.pick_complete' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]\n'MirroreaProofFirst.CurrentChoice.resolve_monotone' depends on axioms: [propext]\n'MirroreaProofFirst.CurrentChoice.resolve_lineage' depends on axioms: [propext]\n'MirroreaProofFirst.CurrentChoice.resolve_bound' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]\n'MirroreaProofFirst.CurrentChoice.resolve_current' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]\n'MirroreaProofFirst.CurrentChoice.grow_offer' depends on axioms: [propext, Classical.choice, Quot.sound]\n'MirroreaProofFirst.CurrentChoice.grow_pick' depends on axioms: [propext, Classical.choice, Quot.sound]\n'MirroreaProofFirst.CurrentChoice.grow_resolve_position' depends on axioms: [propext, Classical.choice, Quot.sound]\n",
+      "stderr": "",
+      "sha256": "aab7900ad1f55d8403f0e77979fcff24c965e1bb90c7ea32c539f19fa2ac01ec"
+    },
+    {
+      "name": "name_alias_accepted",
+      "module": "NamedCatalog",
+      "theorem": "checked_unique",
+      "range": [
+        121,
+        125
+      ],
+      "rejected_at_theorem": true,
+      "old": "uniqueNames c.names && (List.finRange n).all",
+      "new": "true && (List.finRange n).all",
+      "command": [
+        "lean",
+        "--trust=0",
+        "name_alias_accepted.lean"
+      ],
+      "exit": 1,
+      "stdout": "name_alias_accepted.lean:123:39: error: Application type mismatch: The argument\n  h.left\nhas type\n  True\nbut is expected to have type\n  uniqueNames c.names = true\nin the application\n  (uniqueNames_exact c.names).mp h.left\nname_alias_accepted.lean:144:12: error: Application type mismatch: The argument\n  (uniqueNames_exact c.names).mpr unique\nhas type\n  uniqueNames c.names = true\nbut is expected to have type\n  True\nin the application\n  And.intro ((uniqueNames_exact c.names).mpr unique)\nname_alias_accepted.lean:236:0: error: Expression\n  !check (grow base (fun x => a) (fun x => Formula.top) fun x => true)\ndid not evaluate to `true`\nname_alias_accepted.lean:250:0: error: Expression\n  !check aliasing\ndid not evaluate to `true`\n'MirroreaProofFirst.NamedCatalog.lookup_exact' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.NamedCatalog.uniqueNames_exact' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.NamedCatalog.compile_sound' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.NamedCatalog.compile_complete' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.NamedCatalog.Elaborates.retains' depends on axioms: [propext]\n'MirroreaProofFirst.NamedCatalog.checked_elaboration' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.NamedCatalog.check_exact' depends on axioms: [propext, sorryAx, Quot.sound]\n'MirroreaProofFirst.NamedCatalog.compile_embedding' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.NamedCatalog.grow_compiled_old' depends on axioms: [propext, sorryAx, Quot.sound]\n'MirroreaProofFirst.NamedCatalog.grow_live_old' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]\n'MirroreaProofFirst.NamedCatalog.checked_named_grounded' depends on axioms: [propext,\n sorryAx,\n Classical.choice,\n Quot.sound]\n'MirroreaProofFirst.NamedCatalog.missing_eligibility_false' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.NamedCatalog.missing_unusable' depends on axioms: [propext, Quot.sound]\n",
+      "stderr": "",
+      "sha256": "368d04ab35aa9a40463bc6faeb14eccd4a2a5fd3af1fc631b316566294c825da"
+    },
+    {
+      "name": "missing_name_as_root",
+      "module": "NamedCatalog",
+      "theorem": "compile_sound",
+      "range": [
+        60,
+        86
+      ],
+      "rejected_at_theorem": true,
+      "old": "| .ref name => (lookup names name).map .ref",
+      "new": "| .ref name => some .top",
+      "command": [
+        "lean",
+        "--trust=0",
+        "missing_name_as_root.lean"
+      ],
+      "exit": 1,
+      "stdout": "missing_name_as_root.lean:48:9: warning: unused variable `name`\n\nNote: This linter can be disabled with `set_option linter.unusedVariables false`\nmissing_name_as_root.lean:68:11: error: unsolved goals\ncase ref.none\nn : Nat\nnames : Fin n \u2192 Name\nname : Name\ncore : Formula (Fin n)\nfound : lookup names name = none\nh : Formula.top = core\n\u22a2 Elaborates names (Formula.ref name) core\nmissing_name_as_root.lean:72:6: error: Type mismatch\n  Elaborates.reference (lookup_sound names found)\nhas type\n  Elaborates names (Formula.ref name) (Formula.ref k)\nbut is expected to have type\n  Elaborates names (Formula.ref name) Formula.top\nmissing_name_as_root.lean:68:20: warning: This simp argument is unused:\n  found\n\nHint: Omit it from the simp argument list.\n  simp [\u0335f\u0335o\u0335u\u0335n\u0335d\u0335]\u0335 \u0335at h\n\nNote: This linter can be disabled with `set_option linter.unusedSimpArgs false`\nmissing_name_as_root.lean:70:17: warning: This simp argument is unused:\n  found\n\nHint: Omit it from the simp argument list.\n  simp only [f\u0335o\u0335u\u0335n\u0335d\u0335,\u0335Option.map_some, \u0332Option.some.injEq] at h\n\nNote: This linter can be disabled with `set_option linter.unusedSimpArgs false`\nmissing_name_as_root.lean:70:23: warning: This simp argument is unused:\n  Option.map_some\n\nHint: Omit it from the simp argument list.\n  simp only [\u0335f\u0335o\u0335u\u0335n\u0335d\u0335,\u0335O\u0335p\u0335t\u0335i\u0335o\u0335n\u0335.\u0335m\u0335a\u0335p\u0335_\u0335s\u0335o\u0335m\u0335e\u0335,\u0335O\u0335p\u0335t\u0335i\u0335o\u0335n\u0335.\u0335s\u0335o\u0335m\u0335e\u0335.\u0335i\u0335n\u0335j\u0335E\u0335q\u0335]\u0335[\u0332f\u0332o\u0332u\u0332n\u0332d\u0332,\u0332 \u0332O\u0332p\u0332t\u0332i\u0332o\u0332n\u0332.\u0332s\u0332o\u0332m\u0332e\u0332.\u0332i\u0332n\u0332j\u0332E\u0332q\u0332]\u0332 at h\n\nNote: This linter can be disabled with `set_option linter.unusedSimpArgs false`\nmissing_name_as_root.lean:91:17: error: unsolved goals\ncase reference\nn : Nat\nsource : Formula Name\ncore : Formula (Fin n)\nnames : Fin n \u2192 Name\nunique : Function.Injective names\nk\u271d : Fin n\nname\u271d : Name\nhe : names k\u271d = name\u271d\n\u22a2 False\nmissing_name_as_root.lean:91:34: warning: This simp argument is unused:\n  (lookup_exact names unique).mpr he\n\nHint: Omit it from the simp argument list.\n  simp [compile,\u0335(\u0335l\u0335o\u0335o\u0335k\u0335u\u0335p\u0335_\u0335e\u0335x\u0335a\u0335c\u0335t\u0335 \u0335n\u0335a\u0335m\u0335e\u0335s\u0335 \u0335u\u0335n\u0335i\u0335q\u0335u\u0335e\u0335)\u0335.\u0335m\u0335p\u0335r\u0335 \u0335h\u0335e\u0335]\n\nNote: This linter can be disabled with `set_option linter.unusedSimpArgs false`\nmissing_name_as_root.lean:237:0: error: Expression\n  !check (grow base (fun x => b) (fun x => Formula.ref unknown) fun x => true)\ndid not evaluate to `true`\nmissing_name_as_root.lean:244:0: error: Expression\n  !check unresolved\ndid not evaluate to `true`\nmissing_name_as_root.lean:246:0: error: Expression\n  !snapshotLive (snapshot unresolved) 0\ndid not evaluate to `true`\n'MirroreaProofFirst.NamedCatalog.lookup_exact' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.NamedCatalog.uniqueNames_exact' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.NamedCatalog.compile_sound' depends on axioms: [propext, sorryAx, Quot.sound]\n'MirroreaProofFirst.NamedCatalog.compile_complete' depends on axioms: [propext, sorryAx, Quot.sound]\n'MirroreaProofFirst.NamedCatalog.Elaborates.retains' depends on axioms: [propext]\n'MirroreaProofFirst.NamedCatalog.checked_elaboration' depends on axioms: [propext, sorryAx, Quot.sound]\n'MirroreaProofFirst.NamedCatalog.check_exact' depends on axioms: [propext, sorryAx, Quot.sound]\n'MirroreaProofFirst.NamedCatalog.compile_embedding' depends on axioms: [propext, sorryAx, Quot.sound]\n'MirroreaProofFirst.NamedCatalog.grow_compiled_old' depends on axioms: [propext, sorryAx, Quot.sound]\n'MirroreaProofFirst.NamedCatalog.grow_live_old' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]\n'MirroreaProofFirst.NamedCatalog.checked_named_grounded' depends on axioms: [propext,\n sorryAx,\n Classical.choice,\n Quot.sound]\n'MirroreaProofFirst.NamedCatalog.missing_eligibility_false' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.NamedCatalog.missing_unusable' depends on axioms: [propext, Quot.sound]\n",
+      "stderr": "",
+      "sha256": "cfd1ef46498c837ea6b1de3a2d6ca1880eacfdde97cf352353ef0cc0ec1458d5"
+    },
+    {
+      "name": "alternative_as_conjunction",
+      "module": "NamedCatalog",
+      "theorem": "compile_sound",
+      "range": [
+        60,
+        86
+      ],
+      "rejected_at_theorem": true,
+      "old": "| .either p q => do return .either (\u2190 compile names p) (\u2190 compile names q)",
+      "new": "| .either p q => do return .both (\u2190 compile names p) (\u2190 compile names q)",
+      "command": [
+        "lean",
+        "--trust=0",
+        "alternative_as_conjunction.lean"
+      ],
+      "exit": 1,
+      "stdout": "alternative_as_conjunction.lean:84:6: error: Type mismatch\n  Elaborates.either (hp ep) (hq eq)\nhas type\n  Elaborates names (p.either q) (cp.either cq)\nbut is expected to have type\n  Elaborates names (p.either q) (cp.both cq)\nalternative_as_conjunction.lean:93:21: error: unsolved goals\ncase either\nn : Nat\nsource : Formula Name\ncore : Formula (Fin n)\nnames : Fin n \u2192 Name\nunique : Function.Injective names\np\u271d : Formula Name\ncp\u271d : Formula (Fin n)\nq\u271d : Formula Name\ncq\u271d : Formula (Fin n)\na\u271d\u00b9 : Elaborates names p\u271d cp\u271d\na\u271d : Elaborates names q\u271d cq\u271d\nhp : compile names p\u271d = some cp\u271d\nhq : compile names q\u271d = some cq\u271d\n\u22a2 False\n'MirroreaProofFirst.NamedCatalog.lookup_exact' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.NamedCatalog.uniqueNames_exact' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.NamedCatalog.compile_sound' depends on axioms: [propext, sorryAx, Quot.sound]\n'MirroreaProofFirst.NamedCatalog.compile_complete' depends on axioms: [propext, sorryAx, Quot.sound]\n'MirroreaProofFirst.NamedCatalog.Elaborates.retains' depends on axioms: [propext]\n'MirroreaProofFirst.NamedCatalog.checked_elaboration' depends on axioms: [propext, sorryAx, Quot.sound]\n'MirroreaProofFirst.NamedCatalog.check_exact' depends on axioms: [propext, sorryAx, Quot.sound]\n'MirroreaProofFirst.NamedCatalog.compile_embedding' depends on axioms: [propext, sorryAx, Quot.sound]\n'MirroreaProofFirst.NamedCatalog.grow_compiled_old' depends on axioms: [propext, sorryAx, Quot.sound]\n'MirroreaProofFirst.NamedCatalog.grow_live_old' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]\n'MirroreaProofFirst.NamedCatalog.checked_named_grounded' depends on axioms: [propext,\n sorryAx,\n Classical.choice,\n Quot.sound]\n'MirroreaProofFirst.NamedCatalog.missing_eligibility_false' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.NamedCatalog.missing_unusable' depends on axioms: [propext, Quot.sound]\n",
+      "stderr": "",
+      "sha256": "f2c9d095d7a996ab4a363f16d7efc41f1b51c2b7fef9ee1fdc9ed613d7079d06"
+    },
+    {
+      "name": "absent_eligibility",
+      "module": "NamedCatalog",
+      "theorem": "missing_eligibility_false",
+      "range": [
+        181,
+        185
+      ],
+      "rejected_at_theorem": true,
+      "old": "match lookup c.names name with | some k => c.eligible k | none => false",
+      "new": "match lookup c.names name with | some k => c.eligible k | none => true",
+      "command": [
+        "lean",
+        "--trust=0",
+        "absent_eligibility.lean"
+      ],
+      "exit": 1,
+      "stdout": "absent_eligibility.lean:182:36: error: unsolved goals\nn : Nat\nname : Name\nc : Catalog n\nabsent : \u2200 (k : Fin n), c.names k \u2260 name\n\u22a2 False\nabsent_eligibility.lean:189:2: error: Type mismatch: After simplification, term\n  h.left\n has type\n  True\nbut is expected to have type\n  False\nabsent_eligibility.lean:240:0: error: Expression\n  decide (namedEligible base unknown = false)\ndid not evaluate to `true`\n'MirroreaProofFirst.NamedCatalog.lookup_exact' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.NamedCatalog.uniqueNames_exact' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.NamedCatalog.compile_sound' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.NamedCatalog.compile_complete' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.NamedCatalog.Elaborates.retains' depends on axioms: [propext]\n'MirroreaProofFirst.NamedCatalog.checked_elaboration' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.NamedCatalog.check_exact' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.NamedCatalog.compile_embedding' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.NamedCatalog.grow_compiled_old' depends on axioms: [propext, Quot.sound]\n'MirroreaProofFirst.NamedCatalog.grow_live_old' depends on axioms: [propext, Classical.choice, Quot.sound]\n'MirroreaProofFirst.NamedCatalog.checked_named_grounded' depends on axioms: [propext, Classical.choice, Quot.sound]\n'MirroreaProofFirst.NamedCatalog.missing_eligibility_false' depends on axioms: [propext, sorryAx, Quot.sound]\n'MirroreaProofFirst.NamedCatalog.missing_unusable' depends on axioms: [propext, sorryAx, Quot.sound]\n",
+      "stderr": "",
+      "sha256": "fe7cf754021e4d0ea7259edfb5e5779c775a221be11fb954723273b84e61161f"
+    }
+  ],
+  "declaration_audit": {
+    "command": [
+      "lean",
+      "--trust=0",
+      "DeclarationAudit.lean"
+    ],
+    "exit": 0,
+    "stdout": "AXIOM_AUDIT_OK MirroreaProofFirstSupport 251\nAXIOM_AUDIT_OK MirroreaProofFirstCurrentUse 766\nAXIOM_AUDIT_OK MirroreaProofFirstTrackedValidation 226\nAXIOM_AUDIT_OK MirroreaProofFirstGraphValidation 77\nAXIOM_AUDIT_OK MirroreaProofFirstDynamicSupport 42\nAXIOM_AUDIT_OK MirroreaProofFirstDynamicGraphs 12\nAXIOM_AUDIT_OK MirroreaProofFirstDynamicIdentity 53\nAXIOM_AUDIT_OK MirroreaProofFirstSupportImpact 52\nAXIOM_AUDIT_OK MirroreaProofFirstCurrentChoice 82\nAXIOM_AUDIT_OK MirroreaProofFirstNamedCatalog 128\nAXIOM_AUDIT_OK MirroreaProofFirstDynamicScopeControls 27\n",
+    "stderr": "",
+    "sha256": "cbddfa4408216db7397bf853e859369996187735e352067bb4cbb3b4aafefd6b"
+  },
+  "audit_control": {
+    "command": [
+      "lean",
+      "--trust=0",
+      "PrivateAuditControl.lean"
+    ],
+    "exit": 1,
+    "stdout": "PrivateAuditControl.lean:5:0: error: AXIOM_AUDIT_REJECT _private.MirroreaProofFirstAuditPrivateControl.0.unusedChoice: Classical.choice\n",
+    "stderr": "",
+    "sha256": "968821afe4d0fa002d086a13a6a5e6a0914bdb97e5ac212b64a12e217ce098b6"
+  },
+  "supersedes_evidence_only": {
+    "workdir": "/tmp/mirrorea-w3-20260912-1_kv7wfk/mir-w3-dynamic-osnj2edr",
+    "result_sha256": "be4d6de06cfc467987cf908329fb8c442d9ef97a97ea1613295a52bc1d794142",
+    "reason": "Oracle A1 mutation retarget, A2 full imported declaration audit, additional integration controls; original successful execution retained as historical"
+  },
+  "audit_control_positive": {
+    "command": [
+      "lean",
+      "--trust=0",
+      "PrivateAuditPositive.lean"
+    ],
+    "exit": 0,
+    "stdout": "AXIOM_AUDIT_OK MirroreaProofFirstAuditPrivateControl 1\n",
+    "stderr": "",
+    "sha256": "4de32dc0aa8a0ddbeebd61b2a2857a4c73194f699cbf9e3574cd18c44b13ee36"
+  },
+  "audit_predicate_controls": "exact diagnostic accepted; zero exit, wrong axiom, wrong declaration and unrelated error rejected",
+  "prior_runs": [
+    {
+      "workdir": "/tmp/mirrorea-w3-20260912-1_kv7wfk/mir-w3-dynamic-yydemoq4",
+      "result_sha256": "1ec4e2831e6dd6d2b89caed353c68a10fc4ba1b48d8e6275adbef86c3f3e05fa",
+      "tool_result": "95d8c4"
+    }
+  ]
+}

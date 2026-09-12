@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-09-10 20:27 JST
+最終更新: 2026-09-12 20:58 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -55,27 +55,38 @@ public/production layers remain later.
 
 ## current milestone position
 
-Latest owner stop boundary: finish W2 with actual review/integration gates, then
-stop. W3 and alpha integration are deferred beyond this run.
+The owner explicitly requested W3 on2026-09-12, under the prior single-main and
+proof-first rules. W3 dynamic composition is the sole task-local active goal
+(PL1 S0/S1/S3 theory/proof/reference). Stop after W3; W4+ and alpha are not this
+run's autonomous queue. Plan250 remains separately paused after I3-3.
 
-Separate task-local W2 theory/proof result is now reviewed and locally verified
-(PL1 S0–S3). The finite W2 scope is complete and owner-paused here; no active semantic goal. This is
-not a Plan250 milestone, I3-4 resume or formal THM/OBL promotion.
-Scoped W1 dependencies retain their original boundaries; unrelated abort/alias/
-source extensions and the whole mandatory corpus remain incomplete. No new
-whole-repository roadmap is adopted. Memory: `plan/proof-first-foundation-correspondence.md`;
-evidence: Reports2611/2612 and W2_COMPUTATION_CHECK.json.
+W2's finite checked/reviewed result and committed/pushed cut remain preserved:
+24-file kernel/18-mutation evidence, one private captured frame/history,
+mathematical resources and supplied authentic context/metadata. This is not a
+whole-language source/runtime or machine-quota guarantee.
 
-The selected finite composition connects actual interface/argument evaluation,
-current authorized allocation, resource Delta/history, typed computations and
-captured pending frames. Independent rules/checkers, sufficient-fuel completeness,
-pointwise rights, effects/failures and per-control context correspondence have
-fresh24-file Lean4.29.1 trust0 evidence and18 mutation controls. The final Oracle
-review retained no essential repair for its exact delta; main checked its advice.
-Oracle is not proof or signed acceptance. Single-frame history, mathematical
-resources, supplied authentic current context/metadata and finite contract
-profiles remain assumptions. Production source/runtime/physical realization,
-full resource-effect confidentiality and alpha integration remain open.
+W3 dependencies are mirrored under samples/lean/foundations: named catalog
+elaboration, dynamic support, per-kind DAG, old current use, support impact and
+current choice. The corrected fresh11-file/19-mutation run passes. A full imported
+module declaration audit checks1716 declarations, including private/unused ones,
+against the three logical axioms. Entry and material dependency Oracle answers
+are recovered and dispositioned; an insensitive mutation target was corrected.
+No grant is issued by insertion, but an already issued numeric-target grant may
+be applicable after insertion. The controls distinguish these claims.
+
+The next external reference candidate separates immutable function definitions
+from instances, explicitly finite input/output contracts and checked Int64
+intermediates. Its structural insertion/retirement/reparent/replacement proofs
+pass, with two instances of one definition and one-instance retirement/exchange.
+This candidate has no completed source elaborator or authorization/result binding.
+The parser authoring probe establishes syntax only. Source/all-mutator/static
+fallback/pending/result and final material consumer review remain open.
+
+Scoped W1 dependencies retain their boundaries. The whole mandatory corpus
+remains incomplete;1004 previous full reads match current hashes,12 changed
+files were excluded from reuse at startup. No new whole-project roadmap adopted.
+Memory: `plan/proof-first-foundation-correspondence.md`; evidence: Report2613,
+`docs/proof-first/W3_ENTRY_CHECK.json` and preserved Reports2611/2612.
 
 | Task axis | Current status | Startability |
 |---|---|---|
@@ -358,3 +369,7 @@ The authorized roadmap is paused, not blocked, stale or closed.
 - 2026-09-10 20:14 JST: W2有限profileの最終操作／認可文脈reviewを回収・検査。24依存のkernel検査・18変異・文書検査が通過。記録/Git確定後にowner指定のW2停止、W3/αへは進まない。
 
 - 2026-09-10 20:27 JST: W2有限研究scope完了。最終文書再検査1762report通過、proof cut2760e17dを通常pushしparity0/0確認。owner指定の停止へ移行、W3/α未着手。
+
+- 2026-09-12 20:08 JST: W3をowner指示で開始。supportの領域拡張・個別DAG・既存handle/current-use保存・局所影響を一般Leanで検査し、12変異とentry Oracle反例を確認。source/lifecycle接続は継続中、W4/αへ進まない。
+
+- 2026-09-12 20:58 JST: W3証明コードOracleを回収し、負の検査と公理監査を修正。fresh11依存/19変異/1716宣言監査通過。定義とinstanceの外部参照候補を作成、source・認可・保存済み参照の接続へ継続。
