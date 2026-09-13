@@ -1,4 +1,5 @@
 import MirroreaProofFirstInvocationBoundary
+import MirroreaProofFirstReferenceCancellationBoundary
 
 namespace MirroreaProofFirst.CompositionMachine
 open CurrentUse WorldProjection CompositionCore InvocationBoundary
@@ -9,6 +10,7 @@ inductive Occurrence where
   | management (context : ManagementEntry.Context) (created : Option Nat)
   | requested (ticket : Ticket)
   | result (ticket : Ticket) (value : Int)
+  | cancelled (permit : ReferenceCancellationBoundary.Permit)
   | authorityHead (generation : Nat)
   deriving DecidableEq, Repr
 
@@ -164,6 +166,83 @@ theorem no_double_consume (m : Machine p a) (t : Ticket) (value : Int) (other : 
     (same : ticketId other = ticketId t) : finish (consume m t value) other otherValue = none := by
   simp [finish,finishCheck,consume,same]
 
+-- Cancellation is a real terminal occurrence of a pure pending invocation.
+-- It consumes both the original request and an independently fresh cancel id.
+-- Neither saved invocation authorization nor successful result checking is
+-- required; current cancellation authorization is checked in its own boundary.
+def cancelCheck (m : Machine p a) (member : Fin a) (place : Fin p) (principal id : Nat)
+    (t : Ticket) (permit : ReferenceCancellationBoundary.Permit) : Bool :=
+  m.pending.contains t && !m.system.used.contains (ticketId t) &&
+    fresh m (ManagementEntry.useId m.system principal id) &&
+    ReferenceCancellationBoundary.check m.system m.events.length t member place principal id permit
+
+def abandon (m : Machine p a) (t : Ticket) (principal id : Nat)
+    (permit : ReferenceCancellationBoundary.Permit) : Machine p a :=
+  {system := {m.system with
+     serial := m.system.serial+1,
+     used := ticketId t :: ManagementEntry.useId m.system principal id :: m.system.used},
+   pending := m.pending.filter (fun other => decide (ticketId other ≠ ticketId t)),
+   events := .cancelled permit :: m.events}
+
+def cancel (m : Machine p a) (member : Fin a) (place : Fin p) (principal id : Nat)
+    (t : Ticket) (permit : ReferenceCancellationBoundary.Permit) : Option (Machine p a) :=
+  if cancelCheck m member place principal id t permit then some (abandon m t principal id permit) else none
+
+theorem cancel_parts (m : Machine p a) (member : Fin a) (place : Fin p) (principal id : Nat)
+    (t : Ticket) (permit : ReferenceCancellationBoundary.Permit) (next : Machine p a)
+    (accepted : cancel m member place principal id t permit = some next) :
+    t ∈ m.pending ∧ ticketId t ∉ m.system.used ∧
+      fresh m (ManagementEntry.useId m.system principal id) = true ∧
+      ReferenceCancellationBoundary.Submitted m.system m.events.length t member place principal id permit ∧
+      next = abandon m t principal id permit := by
+  unfold cancel at accepted
+  split at accepted
+  · rename_i checked
+    have parts : t ∈ m.pending ∧ ticketId t ∉ m.system.used ∧
+        fresh m (ManagementEntry.useId m.system principal id) = true ∧
+        ReferenceCancellationBoundary.Submitted m.system m.events.length t member place principal id permit := by
+      simpa [cancelCheck,ReferenceCancellationBoundary.check_exact,and_assoc] using checked
+    exact ⟨parts.1,parts.2.1,parts.2.2.1,parts.2.2.2,(Option.some.inj accepted).symm⟩
+  · cases accepted
+
+theorem cancel_preserves (m : Machine p a) (member : Fin a) (place : Fin p) (principal id : Nat)
+    (t : Ticket) (permit : ReferenceCancellationBoundary.Permit) (next : Machine p a)
+    (valid : Invariant m) (accepted : cancel m member place principal id t permit = some next) : Invariant next := by
+  obtain ⟨pending,unused,fresh,_,rfl⟩ := cancel_parts _ _ _ _ _ _ _ _ accepted
+  have free := (fresh_exact _ _).mp fresh
+  have distinct : ticketId t ≠ ManagementEntry.useId m.system principal id := by
+    intro same
+    exact free.2 (same ▸ List.mem_map.mpr ⟨t,pending,rfl⟩)
+  refine ⟨⟨valid.1.1,?_⟩,?_,?_⟩
+  · exact List.nodup_cons.mpr ⟨by simpa using And.intro distinct unused,List.nodup_cons.mpr ⟨free.1,valid.1.2⟩⟩
+  · exact List.Nodup.sublist ((List.filter_sublist).map ticketId) valid.2.1
+  · intro other member
+    have mem : other ∈ m.pending ∧ ticketId other ≠ ticketId t := by simpa [abandon] using member
+    have notCancel : ticketId other ≠ ManagementEntry.useId m.system principal id := by
+      intro same
+      exact free.2 (same ▸ List.mem_map.mpr ⟨other,mem.1,rfl⟩)
+    simp only [abandon,List.mem_cons,not_or]
+    exact ⟨mem.2,notCancel,valid.2.2 other mem.1⟩
+
+theorem cancel_complete (m : Machine p a) (member : Fin a) (place : Fin p) (principal id : Nat)
+    (t : Ticket) (permit : ReferenceCancellationBoundary.Permit)
+    (pending : t ∈ m.pending) (unused : ticketId t ∉ m.system.used)
+    (free : fresh m (ManagementEntry.useId m.system principal id) = true)
+    (allowed : ReferenceCancellationBoundary.Submitted m.system m.events.length t member place principal id permit) :
+    cancel m member place principal id t permit = some (abandon m t principal id permit) := by
+  simp [cancel,cancelCheck,pending,unused,free,(ReferenceCancellationBoundary.check_exact _ _ _ _ _ _ _ _).mpr allowed]
+
+theorem cancelled_cannot_finish (m : Machine p a) (t other : Ticket) (principal id : Nat)
+    (permit : ReferenceCancellationBoundary.Permit) (value : Int) (same : ticketId other = ticketId t) :
+    finish (abandon m t principal id permit) other value = none := by
+  simp [finish,finishCheck,abandon,same]
+
+theorem finished_cannot_cancel (m : Machine p a) (t other : Ticket) (value : Int)
+    (member : Fin a) (place : Fin p) (principal id : Nat) (permit : ReferenceCancellationBoundary.Permit)
+    (same : ticketId other = ticketId t) :
+    cancel (consume m t value) member place principal id other permit = none := by
+  simp [cancel,cancelCheck,consume,same]
+
 -- This continues the saved source request without minting a different witness.
 def resume (m : Machine p a) (t : Ticket) : Option (Machine p a × Int) := do
   let value ← execute t
@@ -192,6 +271,10 @@ def pending := start initial 0 2 7 20 1 2
   {m.system.view with authority := {m.system.view.authority with revoked := [10]}}) t).isNone
 end Controls
 
+#print axioms cancel_preserves
+#print axioms cancel_complete
+#print axioms cancelled_cannot_finish
+#print axioms finished_cannot_cancel
 #print axioms manage_preserves
 #print axioms start_preserves
 #print axioms finish_preserves

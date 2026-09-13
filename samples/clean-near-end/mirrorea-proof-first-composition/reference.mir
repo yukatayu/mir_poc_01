@@ -1,0 +1,83 @@
+module ProofFirst.ReferenceSource
+capability CompositionControl
+effect register(arg0: UnaryInt, arg1: IntList, arg2: Int64, arg3: Int64) {
+  requires CompositionControl
+  output result: DefinitionId
+  failure Rejected
+}
+effect extend(arg0: DefinitionId, arg1: UnaryInt, arg2: IntList, arg3: Int64, arg4: Int64) {
+  requires CompositionControl
+  output result: DefinitionId
+  failure Rejected
+}
+effect instantiate(arg0: DefinitionId, arg1: Placements) {
+  requires CompositionControl
+  output result: InstanceCallable
+  failure Rejected
+}
+effect retire(arg0: InstanceCallable) {
+  requires CompositionControl
+  output result: Unit
+  failure Rejected
+}
+effect reparent(arg0: InstanceCallable, arg1: InstanceCallable) {
+  requires CompositionControl
+  output result: Unit
+  failure Rejected
+}
+effect exchange(arg0: InstanceCallable, arg1: DefinitionId) {
+  requires CompositionControl
+  output result: Unit
+  failure Rejected
+}
+effect leave(arg0: Place) {
+  requires CompositionControl
+  output result: Unit
+  failure Rejected
+}
+effect join(arg0: Place) {
+  requires CompositionControl
+  output result: Unit
+  failure Rejected
+}
+fn score(x: Int64) -> Int64 {
+  let square: Int64 = x * x
+  return square + 1
+}
+fn scoreNext(x: Int64) -> Int64 {
+  return x * x + 2
+}
+effect reference(arg0: InstanceCallable, arg1: InstanceCallables, arg2: Text, arg3: BoolList, arg4: IntList) {
+  requires CompositionControl
+  output result: ReferenceCallable
+  failure Rejected
+}
+effect reacquire(arg0: ReferenceCallable) {
+  requires CompositionControl
+  output result: Unit
+  failure Rejected
+}
+effect release(arg0: ReferenceCallable) {
+  requires CompositionControl
+  output result: Unit
+  failure Rejected
+}
+transition build at A requires CompositionControl {
+  initial <- perform register(score, [0, 1, 2, 3], 1, 100) via lifecycle
+  base <- perform instantiate(initial, ["A", "B", "C"]) via lifecycle
+  extra <- perform instantiate(initial, ["A", "C"]) via lifecycle
+  linked <- perform reparent(extra, base) via lifecycle
+  route <- perform reference(base, [extra, base], "score", [true], [100, 100]) via lifecycle
+  let alias: ReferenceCallable = route
+  let mut count: Int64 = 2
+  count = count + 1
+  first <- alias(count)
+  next <- perform extend(initial, scoreNext, [0, 1, 2, 3], 1, 100) via lifecycle
+  exchanged <- perform exchange(extra, next) via lifecycle
+  afterExchange <- alias(count)
+  fresh <- perform reacquire(route) via lifecycle
+  afterReacquire <- alias(count)
+  retired <- perform retire(extra) via lifecycle
+  afterRetire <- alias(count)
+  done <- perform release(route) via lifecycle
+}

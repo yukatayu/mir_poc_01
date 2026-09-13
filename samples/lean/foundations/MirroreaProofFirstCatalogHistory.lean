@@ -186,6 +186,7 @@ inductive Transition : CompositionMachine.Machine p a → CompositionMachine.Mac
   | request : CompositionMachine.start s member place principal requestId key argument = some (next,ticket) → Transition s next
   | result : CompositionMachine.finish s ticket value = some next → Transition s next
   | authority : Transition s (CompositionMachine.authorityHead s view)
+  | cancellation : CompositionMachine.cancel s member place principal requestId ticket permit = some next → Transition s next
 
 inductive Reached : CompositionMachine.Machine p a → CompositionMachine.Machine p a → Prop where
   | refl : Reached s s
@@ -212,6 +213,9 @@ theorem transition_catalog (s next : CompositionMachine.Machine p a)
   | result accepted =>
       obtain ⟨_,_,_,eq⟩ := CompositionMachine.finish_parts _ _ _ _ accepted
       subst next
+      exact ⟨valid,extends_refl _⟩
+  | cancellation accepted =>
+      obtain ⟨_,_,_,_,rfl⟩ := CompositionMachine.cancel_parts _ _ _ _ _ _ _ _ accepted
       exact ⟨valid,extends_refl _⟩
   | authority => exact ⟨valid,extends_refl _⟩
 
@@ -240,6 +244,9 @@ theorem transition_cut (s next : CompositionMachine.Machine p a) (step : Transit
       obtain ⟨_,_,_,eq⟩ := CompositionMachine.finish_parts _ _ _ _ accepted
       subst next
       simp [CompositionMachine.consume]
+  | cancellation accepted =>
+      obtain ⟨_,_,_,_,rfl⟩ := CompositionMachine.cancel_parts _ _ _ _ _ _ _ _ accepted
+      simp [CompositionMachine.abandon]
   | authority => simp [CompositionMachine.authorityHead,ManagementEntry.installAuthorityHead]
 
 theorem reached_cut (s next : CompositionMachine.Machine p a) (path : Reached s next) :
