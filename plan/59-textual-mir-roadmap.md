@@ -79,3 +79,19 @@ python3 scripts/full_system_v1_samples.py check-all --format json
 - Do not freeze final grammar.
 - Do not treat parser-free representative `.mir` sketches as executable source.
 - Do not make `package.mir.json` the final language.
+
+## W3 private parser boundary correction (LAB, 2026-09-13)
+
+Forward implementation evidence in Report2613; no final grammar/public API freeze.
+Effect-body requires/output/failure members are singleton in this private parser:
+a repeated member now rejects at its second source occurrence instead of silently
+overwriting an earlier annotation. Lists within one requires/failure member remain.
+The signed Int64 minimum literal is recognized before its positive magnitude would
+overflow; ordinary other negations retain the unary AST. Values outside signed
+Int64 still reject. Parser tests cover duplicate annotation erasure, both endpoints,
+leading zeroes and out-of-range literals; mir-ast all-targets passes at recorded cut.
+SourceSpan start/end in this lexer count Unicode scalar positions (source.chars),
+not UTF8bytes. The W3 source adapter converts using the exact original source before
+emitting its private byte-origin metadata. This is not a global SourceSpan ABI change.
+The W3 adapter additionally rejects ambiguous module-function/local-binding collisions;
+that restriction does not settle the final language namespace policy.

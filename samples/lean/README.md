@@ -64,6 +64,11 @@ W3の依存だけを外部fresh copyで再検査するコマンドは
 `python3 scripts/proof_first_dynamic_composition_check.py --work-root /tmp` です。
 11依存と19変異を検査し、結果の保存先を表示します。
 
+W3の通常sourceから実構成machineまでの候補は
+`python3 scripts/proof_first_composition_source_check.py --work-root /tmp` で検査します。
+Rust parserを外部buildし、source由来の値・操作・private write/producer履歴を同じ状態から得ます。
+動的fallback／再取得と最終reviewは未完了で、W3完成ではありません。
+
 これらは `current_l2_lean_sample_sync.py` の生成対象・manifest 集計外です。
 一般命題は Lean4.29.1 の kernel で検査し、各ファイルの `#print axioms`
 で前提を確認します。固定 `#guard` と有限 differential は一般証明ではありません。

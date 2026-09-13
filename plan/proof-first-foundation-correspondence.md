@@ -730,3 +730,33 @@ controls. Fresh11/19/1716 audit passesdf6040. This closes the first dependency
 review corrections within their scope, not the material source/lifecycle review.
 No live Oracle remains. One progress notification c7b88b was sent while work
 continues; it was not a W3 completion notification.
+
+## W3 forward source/history checkpoint — 2026-09-13T23:01:08.666238+09:00
+
+LAB fact update within the same W3 goal, not a new roadmap or Canon decision.
+The actual source path now registers finite-contract code, creates ABC/AC instances,
+executes ordinary assignment/calls, reparents/exchanges/retires using one shared
+state, authority and result boundary. SourceFunction's general strict-lowering
+proof is now the actual lowering implementation; type/environment/machine,
+latest source-write value/producer history, request allocation and retained result
+contract proofs pass. Complete current33module/5165declaration axiom audit passes.
+The fifth Oracle's source counterexamples were reproduced and frontend boundaries
+repaired; parser all-targets and source controls pass. Report2613 keeps exact hashes,
+failures/resource evidence and remaining questions. These new proofs await material
+review and coherent repository mirroring; dynamic fallback/reacquire remains the
+main consumer. No public observation/IFC, physical network, durable restore,
+full source grammar or independent signed acceptance follows. W3 remains active;
+W4+ and Plan250/I3-4 remain inactive. The old24–60hour estimate was uncalibrated;
+owner-facing current remaining estimate8–16active hours plus Oracle latency has
+low confidence and imposes no Oracle deadline.
+
+### W3 source consumer checkpoint — 2026-09-13 23:47 JST
+
+LAB only. The actual parser/source/Lean composition consumer is now mirrored in
+existing roots, with fresh reproduction in W3_SOURCE_CHECK.json. General source
+read/producer/locator/allocation and saved-result proofs supplement the previous
+checkpoint. Dynamic owner fallback and final material review remain open; a
+reproduced late malformed-edge masking case will be repaired before that consumer.
+No Plan250, Canon, THM/OBL or policy acceptance changes. Five substantive Oracle
+reviews recovered; the sixth yielded only a Preview and failed same-session harvest,
+so a single recovery submission uses the same frozen technical cut.

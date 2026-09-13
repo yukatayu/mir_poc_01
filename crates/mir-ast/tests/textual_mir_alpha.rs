@@ -213,3 +213,60 @@ fn dup(x: Int64) -> Int64 {
         vec!["ambiguous_import_resolution"]
     );
 }
+
+#[test]
+fn duplicate_effect_members_cannot_erase_earlier_annotations() {
+    for (member, first, second) in [
+        (
+            "requires",
+            "requires MissingCapability",
+            "requires CompositionControl",
+        ),
+        (
+            "output",
+            "output result: Int64",
+            "output result: DefinitionId",
+        ),
+        ("failure", "failure SilentLoss", "failure Rejected"),
+    ] {
+        let source =
+            format!("module Duplicate.Member\neffect action {{\n  {first}\n  {second}\n}}\n");
+        let errors = parse_textual_mir_module(&source)
+            .expect_err("duplicate singleton members must not overwrite earlier source");
+        assert_eq!(diagnostic_codes(&errors), vec!["duplicate_effect_member"]);
+        assert_eq!(
+            errors[0].span.line, 4,
+            "the second {member} must be identified"
+        );
+        assert!(errors[0].message.contains(member));
+    }
+}
+
+#[test]
+fn textual_integer_literals_include_the_negative_int64_endpoint() {
+    for (literal, expected) in [
+        ("-9223372036854775808", i64::MIN),
+        ("-0009223372036854775808", i64::MIN),
+        ("9223372036854775807", i64::MAX),
+    ] {
+        let source = format!(
+            "module Integer.Bounds\nfn value(x: Int64) -> Int64 {{\n  return {literal}\n}}\n"
+        );
+        let module = parse_textual_mir_module(&source).expect("signed endpoint must parse");
+        let AstTopLevel::Function(function) = &module.items[0] else {
+            panic!("function")
+        };
+        let AstStmt::Return { value, .. } = &function.body[0] else {
+            panic!("return")
+        };
+        assert_eq!(value.kind, AstExprKind::IntLiteral(expected));
+        assert_eq!(&source[value.span.start..value.span.end], literal);
+    }
+    for literal in ["9223372036854775808", "-9223372036854775809"] {
+        let source = format!(
+            "module Integer.Bounds\nfn value(x: Int64) -> Int64 {{\n  return {literal}\n}}\n"
+        );
+        let errors = parse_textual_mir_module(&source).expect_err("outside Int64 must reject");
+        assert_eq!(diagnostic_codes(&errors), vec!["invalid_integer_literal"]);
+    }
+}

@@ -53,10 +53,10 @@ Grounded meaning agrees with the named dependency declarations. Insertion's
 old formula mapping is proved from the actual compiler and preserved names,
 not supplied as a conclusion about live sets.
 
-That catalog is still a model input. There is no theorem yet that an existing
-Mir parser, a lifecycle loader, an imported image or another executor supplies
-all actual installed definitions/instances and their exact metadata to it.
-There is no final wire format, authentic namespace allocator or global catalog.
+The named catalog above remains a separate model input. The source consumer below
+now constructs actual definitions/instances and projects their own metadata through
+WorldProjection. It does not establish an imported-image or alternate-executor
+boundary, a final wire format, an authentic namespace allocator or a global catalog.
 
 ## Reference choice and remaining fallback floor
 
@@ -133,11 +133,72 @@ mutations. Exact commands, hashes and results are in its `RESULT.json`;
 the pinned invocation is `docs/proof-first/W3_DYNAMIC_CHECK.json`.
 This cut is outside the generated Lean manifest; no `.olean` is committed.
 
-Next, the same checked ordinary source must create definition/instance records
-on A/B/C and new A/C composition, then perform accepted retire/reparent/compatible
-exchange. All selected mutators/entries must preserve their actual invariant,
-and exact reference/fallback/pending/result behavior must consume those records.
-The inspected old surface source-patch helper creates activation reports and
-capability-reference strings; its mutation flag is not actual state mutation or
-authorization evidence. No fixture or constant-only patch can close this gap.
-Q18 commit reauthorization and explicit prepared reservation remain distinct.
+The checked source consumer below now creates and mutates those records. The
+remaining direct consumer is a maintained binding with owner-authorized semantic
+fallback and explicit fresh reacquire, consumed by the same source/result path.
+The old surface source-patch helper remains report evidence rather than actual
+lifecycle mutation or authority. Q18 commit reauthorization and prepared reservation
+remain distinct.
+
+## Actual source/lifecycle consumer (W3 candidate, final review pending)
+
+`MirroreaProofFirst*.lean` additions in the same foundation directory:
+
+| Suffixes | Actual definitions and general results |
+|---|---|
+| InstancePrograms, InstanceState, CompositionCore | Checked Int64 definition and retained contract; distinct growing instances, parent/definition graphs and support; seven declarative mutation rules versus the exact elaborator/checker |
+| WorldProjection, ManagementEntry | The same instance records generate support and four-handle identities; structural payload/current-cut authorization with separate current actor and no duplicated request application |
+| InvocationBoundary, InvocationContract, CompositionMachine, SavedInvocation | Exact saved argument/code/evidence and current result use; actual delivered values satisfy current and retained contracts; pending/used preservation; unrelated growth preserves saved use, selected change/revocation rejects |
+| CatalogHistory, CatalogCounterexamples | All selected mutations preserve predecessor refinement and inhabited interfaces; old immutable definitions persist; fully drained admission and unrelated-fork boundaries stay explicit |
+| SourceAuthoring, SourceTypes, SourcePreservation, SourceTyping | Named statements execute the actual machine; independent declarative typing versus checker; type/environment and machine preservation |
+| SourcePureLowering, SourceFunction | General strict named AST lowering with rejection preserved, including unused overflowing lets; used by the actual source adapter |
+| SourceExecution, SourceFrame, SourceWriteHistory, SourceReadNames | Actual successful source writes, last successful rejection prefix, unchanged other bindings, latest value alignment and exactly one matching earlier producer per source-local read |
+| SourceCompletion, SourceAllocation, SourceLocators, SourceHistory, SourceHistoryControls | Fresh generated IDs, no late bind loss after accepted typed control/start, retained record bounds and Int64 bounds, actual execution-to-catalog history; injected malformed histories/locators/counters rejected |
+| FallbackStatic, FallbackStaticControls | Arbitrary finite flat-chain static floor, exact checker/declarative correspondence, actual parent dominance and late malformed-edge preservation; dynamic owner binding, invalidation and reacquire remain open |
+
+Run the source consumer with:
+
+```bash
+python3 scripts/proof_first_composition_source_check.py --work-root /tmp
+```
+
+Input: `samples/clean-near-end/mirrorea-proof-first-composition/main.mir`.
+The runner builds the actual Rust parser, structurally serializes its AST, invokes
+Lean's proved strict function compiler, and runs checked statements against the
+same growing state. Definitions and instances are not supplied by expected JSON.
+The typed provider declarations are the private lifecycle boundary; normal calls,
+lets and assignment do not ask the programmer for witnesses, receipts or IDs.
+The explicit genesis provides logical authority; source declarations do not issue it.
+
+Additional TCB: the Rust lexer/parser and Python structural AST serialization are
+not mechanically refined to source text; their concrete counterexamples/regressions
+are tested. Lean's kernel/toolchain, all three standard logical axioms where used,
+local honest/current authority head, execution harness/filesystem and sequential
+publication are explicit assumptions. There are no Mir-specific axioms or admitted
+proofs. The whole imported declaration audit also includes unused/private declarations
+and generated proof applications to the actual sample. Declaration counts are audit
+coverage, not completion metrics.
+
+Finite contract inputs are explicit profile annotations. The pure compiler proves
+value/rejection equivalence, not cost, effect or time equivalence. Source histories
+cover transition-local named reads/writes; they do not supply public observations,
+all internal support/auth reads, confidentiality or resource noninterference.
+Record existence is distinct from current usability. The current actor must remain
+admitted; a fully drained realm has no implicit rejoin authority. Logical cut identity
+is proved along one reached history, not across arbitrary forks. External authority
+head authenticity, physical atomicity, durable images and restart remain later gates.
+
+The static fallback candidate uses equal exported contracts as a reversible private
+profile; compatible unequal contracts are outside that profile. Saved invocation is
+not a maintained reference. CurrentChoice may produce new evidence when searched,
+so it cannot by itself implement a saved selected-option guard. Owner-binding
+mutation authority, selected-option permission and actual-argument call permission
+must remain distinct. Final fallback/source integration and material review remain
+open; this source checkpoint is not W3 acceptance or completion.
+
+Diagnostic correction: the whole-chain checker combines static outcomes so an
+early outsideProfile does not conceal a later malformed/underdeclared edge.
+An independent MalformedLinks judgment and checkShape_malformed theorem preserve
+a later complete-floor malformed edge. The old masking behavior is rejected at
+combine_malformed_right in a targeted proof-script mutation; it is not an additional
+general proof. Mixed-error priority remains a private diagnostic convention.

@@ -15,15 +15,24 @@ AFTER W3 closure or the stated genuine boundaries; W4+ and Plan250/I3-4 inactive
   W7 alpha integration, Canon THM/OBL/phase and final/public API acceptance.
 - A: append-only finite catalogs/stable old slots. B: incarnation-keyed finite map.
   Compare actual coverage/absence/fresh rows; neither final identity or controller.
-- Current kernel cut: seven W3 modules plus four prior dependencies pass; corrected
-  19 proof-script mutations and1716-declaration axiom audit passdf6040.
-- Oracle entry and material dependency review are terminal/dispositioned. No live
-  job. Main repaired the mutation target/audit and reproduced fresh-target, saved
-  witness versus fresh search, module-revision and unchecked-catalog controls.
-- Direct next consumer: external InstancePrograms/InstanceState have checked
-  bounded arithmetic contracts and actual structural instance insertion/retire/
-  reparent/replacement. Definition≠instance; sibling retirement and real code
-  replacement are positive controls. These are not yet an auth-closed/source path.
+- Current evidence: committed dependency checkpoint9d754603; mirrored same-state
+  lifecycle/source/history candidate. Actual Rust parser -> named source AST ->
+  Lean-proved strict function lowering -> typed statements -> SAME management,
+  invocation and result machine executes12 source statements. Nine adverse source
+  cases and12 frontend controls pass at recorded cuts. These are reference evidence.
+- Main-operated Oracle: five substantive consultations terminal and dispositioned; two fallback captures unusable; exact-target/question-bound job active. Latest
+  source review found byte-origin/duplicate-effect/name/negative-number issues;
+  reproduced and repaired. No Canon/signature/owner approval inferred.
+- Direct next consumer: actual maintained reference/fallback owner binding,
+  monotone degradation and explicit new-lineage reacquire. Static finite-chain
+  acceptance exactness is proved; late complete-floor malformed edges now have a general diagnostic
+  preservation theorem and a discriminating mutation control. Runtime/source fallback integration remains open.
+- General source properties now checked: strict AST lowering including rejection,
+  machine/type preservation, actual writes/prefix history/value-producer agreement,
+  producer uniqueness, fresh automatically allocated IDs, synchronous start/result
+  completion, delivered value satisfies retained contract. Current39-module audit
+  covers5339 owned declarations, standard3logical axioms only. This is not a proof
+  of the Rust lexer/Python structural AST serializer, distributed execution or IFC.
 - Contract candidate A: explicit nonempty finite input list/result interval with
   checked Int64 intermediates. B: independently sound symbolic contract plugin.
   The finite list is explicit profile input, not an implicit Int64 restriction.
@@ -38,4 +47,4 @@ AFTER W3 closure or the stated genuine boundaries; W4+ and Plan250/I3-4 inactive
 
 Mappings to REQ/U/PT/SC/Q and historical failures are in Report2613.119 original
 rows/dispositions remain unchanged. No blanket adoption or new whole-repo plan.
-Updated 2026-09-12T20:59:51.254618+09:00
+Updated 2026-09-13T23:47:37.159917+09:00

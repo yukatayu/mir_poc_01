@@ -26,7 +26,7 @@ Plan250に対するowner指示は、受理済みI3-3 cut後のpauseです。I3-4
 W2の有限な研究成果は検証・review・Git統合済みで保持しています。
 2026-09-12のowner依頼により、単一goalをW3動的構成（PL1 S0/S1/S3、theory/proof/reference）へ設定しました。
 名前付きカタログ・領域拡張・個別DAG・既存current-use・局所影響・候補選択の11依存をLeanで検査し、19変異の拒否を確認しました。
-entry／証明コードOracleを回収し、負の検査を修正。対象1716宣言の公理監査と追加反例が通過。通常sourceが作る同じ対象への全lifecycle・fallback・pending/result接続は未達で、W3を継続中です。
+W3の通常sourceから同じ状態・認可・実計算への構築／追加／交換／撤去を、既存sample／Lean／scriptsへ接続しました。`scripts/proof_first_composition_source_check.py` のfresh検査で、型・履歴・自動ID・保持契約・locatorの一般証明と全宣言監査が通過。source Oracleの指摘を再現・修正済みです。動的fallback／再取得、最終review・統合が残り、W3を継続中です。
 W3完了後に停止します。W4以降・α統合・Plan250/I3-4を自動resumeせず、正式THM/OBL受理も更新していません。
 対応は `plan/proof-first-foundation-correspondence.md`、現在の証跡はreport2613、W1/W2の履歴はreport2611/2612です。
 既読範囲は `docs/proof-first/READ_LEDGER.json` に記録し、未読と部分読了を区別しています。

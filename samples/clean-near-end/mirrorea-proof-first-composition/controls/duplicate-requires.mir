@@ -1,0 +1,64 @@
+module ProofFirst.DynamicSource
+capability CompositionControl
+effect register(arg0: UnaryInt, arg1: IntList, arg2: Int64, arg3: Int64) {
+  requires MissingCapability
+  requires CompositionControl
+  output result: DefinitionId
+  failure Rejected
+}
+effect extend(arg0: DefinitionId, arg1: UnaryInt, arg2: IntList, arg3: Int64, arg4: Int64) {
+  requires CompositionControl
+  output result: DefinitionId
+  failure Rejected
+}
+effect instantiate(arg0: DefinitionId, arg1: Placements) {
+  requires CompositionControl
+  output result: InstanceCallable
+  failure Rejected
+}
+effect retire(arg0: InstanceCallable) {
+  requires CompositionControl
+  output result: Unit
+  failure Rejected
+}
+effect reparent(arg0: InstanceCallable, arg1: InstanceCallable) {
+  requires CompositionControl
+  output result: Unit
+  failure Rejected
+}
+effect exchange(arg0: InstanceCallable, arg1: DefinitionId) {
+  requires CompositionControl
+  output result: Unit
+  failure Rejected
+}
+effect leave(arg0: Place) {
+  requires CompositionControl
+  output result: Unit
+  failure Rejected
+}
+effect join(arg0: Place) {
+  requires CompositionControl
+  output result: Unit
+  failure Rejected
+}
+fn score(x: Int64) -> Int64 {
+  let square: Int64 = x * x
+  return square + 1
+}
+fn scoreNext(x: Int64) -> Int64 {
+  return x * x + 2
+}
+transition build at A requires CompositionControl {
+  initial <- perform register(score, [0, 1, 2, 3], 1, 100) via lifecycle
+  base <- perform instantiate(initial, ["A", "B", "C"]) via lifecycle
+  extra <- perform instantiate(initial, ["A", "C"]) via lifecycle
+  let count: Int64 = 2
+  before <- extra(count)
+  linked <- perform reparent(extra, base) via lifecycle
+  next <- perform extend(initial, scoreNext, [0, 1, 2, 3], 1, 100) via lifecycle
+  exchanged <- perform exchange(extra, next) via lifecycle
+  after <- extra(count)
+  baseResult <- base(count)
+  retired <- perform retire(extra) via lifecycle
+  finalResult <- base(count)
+}

@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-09-12 20:58 JST
+最終更新: 2026-09-14 00:10 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -74,13 +74,20 @@ are recovered and dispositioned; an insensitive mutation target was corrected.
 No grant is issued by insertion, but an already issued numeric-target grant may
 be applicable after insertion. The controls distinguish these claims.
 
-The next external reference candidate separates immutable function definitions
-from instances, explicitly finite input/output contracts and checked Int64
-intermediates. Its structural insertion/retirement/reparent/replacement proofs
-pass, with two instances of one definition and one-instance retirement/exchange.
-This candidate has no completed source elaborator or authorization/result binding.
-The parser authoring probe establishes syntax only. Source/all-mutator/static
-fallback/pending/result and final material consumer review remain open.
+The W3 source/reference consumer is now mirrored in the existing sample, Lean
+and script roots. Its actual Rust parser -> named strict lowering -> typed source
+-> SAME configuration/authority/arithmetic machine path passes fresh reproduction:
+12 source statements,9 adverse source cases,12 frontend cases and39-module
+all-declaration audit (5339 owned declarations, standard3 axioms only). General
+proofs cover type/machine/catalog, value/producer history, allocation, locators,
+retained contracts and saved pending-use behavior. Reproduce with
+`python3 scripts/proof_first_composition_source_check.py --work-root /tmp`.
+
+Five substantive Oracle reviews are terminal/dispositioned. Two fallback capture attempts were unusable (Preview placeholder, then wrong
+conversation). A new question-bound review is active; capture verifies the original
+target and full question, and this invocation disables automatic reattach. Dynamic owner binding/fallback,
+final material review and W3 closure remain open.
+No W3 completion or source/network/IFC/alpha operational promotion follows.
 
 Scoped W1 dependencies retain their boundaries. The whole mandatory corpus
 remains incomplete;1004 previous full reads match current hashes,12 changed
@@ -373,3 +380,7 @@ The authorized roadmap is paused, not blocked, stale or closed.
 - 2026-09-12 20:08 JST: W3をowner指示で開始。supportの領域拡張・個別DAG・既存handle/current-use保存・局所影響を一般Leanで検査し、12変異とentry Oracle反例を確認。source/lifecycle接続は継続中、W4/αへ進まない。
 
 - 2026-09-12 20:58 JST: W3証明コードOracleを回収し、負の検査と公理監査を修正。fresh11依存/19変異/1716宣言監査通過。定義とinstanceの外部参照候補を作成、source・認可・保存済み参照の接続へ継続。
+
+- 2026-09-13 23:01 JST — W3 actual source/history: strict lowering, write/value provenance, fresh request allocation and retained result contract proofs pass; source Oracle counterexamples repaired,33-module audit passed. Dynamic fallback remains open (Report2613).
+
+- 2026-09-13 23:47 JST: W3 source／履歴／locatorの一般証明を同じ実行へ接続し、repoからfresh再現・全宣言監査を通過。動的fallbackと最終reviewは継続。

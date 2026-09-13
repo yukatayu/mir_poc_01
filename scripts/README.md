@@ -6,6 +6,13 @@
 
 ### front-door checks and active runners
 
+- `proof_first_composition_source_check.py`
+  W3 source/lifecycle候補を実Rust parserから同じLean machineへ接続する検査。
+  `python3 scripts/proof_first_composition_source_check.py --work-root /tmp`。
+  入力は `samples/clean-near-end/mirrorea-proof-first-composition/`、adapterは
+  `proof_first_composition_source.py`、case runnerは `tests/proof_first_composition_*_cases.py`。
+  成果物は外部workdir、動的fallbackと最終reviewは未完了。
+
 - `proof_first_dynamic_composition_check.py`
   W3 task-local LAB候補の11依存を外部fresh copyでLean4.29.1 trust0検査し、19変異を指定した一般命題で拒否する。
   `python3 scripts/proof_first_dynamic_composition_check.py --work-root /tmp`。

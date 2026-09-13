@@ -23395,5 +23395,278 @@
     "range": "1-213",
     "role": "sole-main full read/authored W3 reference and final first-dependency review receipts",
     "status": "full"
+  },
+  {
+    "path": "crates/mir-ast/examples/textual_mir_alpha_parse.rs",
+    "sha256": "94fe7502c07ea159dd9bc7c14e830c3b5e67e745c7b88b72dbff24d48dc843d1",
+    "range": "1-140",
+    "role": "sole-main full read/authored W3 actual parser interface and world-layout reference dependency",
+    "status": "full"
+  },
+  {
+    "path": "/tmp/mirrorea-w3-20260912-1_kv7wfk/lifecycle/WorldProjection.lean",
+    "sha256": "ec73e797bd48b0cb55c0b9ad5468e18b6078710c6f72004796ec00e21186386f",
+    "range": "1-159",
+    "role": "sole-main full read/authored W3 actual parser interface and world-layout reference dependency",
+    "status": "full"
+  },
+  {
+    "path": "samples/lean/foundations/MirroreaProofFirstCurrentChoice.lean",
+    "sha256": "0661937f955f8360eaeab38521f2e4931fc9ed5cc54b53b390434271187f7e64",
+    "range": "1-177",
+    "role": "W3 direct-consumer reread; actual output only",
+    "status": "full"
+  },
+  {
+    "path": "samples/lean/foundations/MirroreaProofFirstSupport.lean",
+    "sha256": "7f401632873cb3b87e0fa62d1b172af88b996b34a6d3fc62a7e61d103b41a9c3",
+    "range": "1-125",
+    "role": "W3 direct-consumer reread; actual output only",
+    "status": "partial"
+  },
+  {
+    "path": "/tmp/mirrorea-w3-20260912-1_kv7wfk/lifecycle/InstancePrograms.lean",
+    "sha256": "75a2b20be7ebb4bf339570c561b843c5aa847c1555d953fec335e967f4154ba5",
+    "range": "1-122",
+    "role": "W3 direct-consumer reread; actual output only",
+    "status": "full"
+  },
+  {
+    "path": "mirrorea_canon/theory/06-existence-fallback.md",
+    "sha256": "ab654dc4a83242b3465771750d6e1447a36eb2dff4bd8a7a2021ed421fc83967",
+    "range": "1-103",
+    "role": "W3 direct consumer / read-only review; complete actual output",
+    "status": "full"
+  },
+  {
+    "path": "/tmp/mirrorea-w3-20260912-1_kv7wfk/oracle-w3-management/ANSWER.md",
+    "sha256": "2fc20a8ab517dfea3aa61f73e29784d1b77ca267e4602f0d7c4b2e18f7904b1f",
+    "range": "1-282",
+    "role": "W3 direct consumer / read-only review; complete actual output",
+    "status": "full"
+  },
+  {
+    "path": "/tmp/mirrorea-w3-20260912-1_kv7wfk/lifecycle/SourceTypes.lean",
+    "sha256": "74fbf6f79aa6b43c31a9c9084817f60c6ef484726a798ef8ae80fe508fe449d0",
+    "range": "1-186",
+    "role": "W3 direct consumer/full source read",
+    "status": "full"
+  },
+  {
+    "path": "/tmp/mirrorea-w3-20260912-1_kv7wfk/lifecycle/SourcePreservation.lean",
+    "sha256": "18987c0faf8a7a7be636a4e3aaa2646dfa23356635641eb71848f72fb5b193d1",
+    "range": "1-198",
+    "role": "W3 direct consumer/full source read",
+    "status": "full"
+  },
+  {
+    "path": "/tmp/mirrorea-w3-20260912-1_kv7wfk/lifecycle/SourcePureLowering.lean",
+    "sha256": "dd1a92e418a421f45d89cac560d838e2768520bccb8736b5c030d821155d241b",
+    "range": "1-55",
+    "role": "W3 direct consumer/full source read",
+    "status": "full"
+  },
+  {
+    "path": "/tmp/mirrorea-w3-20260912-1_kv7wfk/lifecycle/CompositionMachine.lean",
+    "sha256": "b9c8af7641b2371898ae2fdd2b0ea4daa3c19a30b557b62184e1a1492a72d2da",
+    "range": "1-201",
+    "role": "W3 direct consumer/full source read",
+    "status": "full"
+  },
+  {
+    "path": "/tmp/mirrorea-w3-20260912-1_kv7wfk/lifecycle/CompositionCore.lean",
+    "sha256": "faa203c58a1e5ef38380fe2cd1a3d9a299255a39530bbb75db9bdb22a35894b3",
+    "range": "1-315",
+    "role": "W3 direct consumer/full source read",
+    "status": "full"
+  },
+  {
+    "path": "/tmp/mirrorea-w3-20260912-1_kv7wfk/lifecycle/InstancePrograms.lean",
+    "sha256": "853d3d2f2773394ae5ee1f8b319fee4b0370ce6fd2ea6c3b37742ddfa98f0e98",
+    "range": "1-143",
+    "role": "W3 direct consumer/full source read",
+    "status": "full"
+  },
+  {
+    "path": "mirrorea_canon/theory/06-existence-fallback.md",
+    "sha256": "ab654dc4a83242b3465771750d6e1447a36eb2dff4bd8a7a2021ed421fc83967",
+    "range": "1-103",
+    "role": "W3 current consumer read; 334154 full",
+    "status": "full"
+  },
+  {
+    "path": "mirrorea_canon/theory/14-maintained-relation-projection.md",
+    "sha256": "7f205a4477317bbff13db84f1b64cf72ef1f834551d439001aae1a5163d31368",
+    "range": "1-166",
+    "role": "W3 current consumer read; c4026e full",
+    "status": "full"
+  },
+  {
+    "path": "samples/lean/foundations/MirroreaProofFirstCurrentChoice.lean",
+    "sha256": "0661937f955f8360eaeab38521f2e4931fc9ed5cc54b53b390434271187f7e64",
+    "range": "1-193",
+    "role": "W3 current consumer read; 7a5311 full",
+    "status": "full"
+  },
+  {
+    "path": ".docs/oracle-chatgpt-pro-operations.md",
+    "sha256": "ca6bc821b6d52f112956540e6c14965d1e10c099128a43975dcc63d9f4ecf7c9",
+    "range": "1-172",
+    "role": "W3 current consumer read; 3049ef full",
+    "status": "full"
+  },
+  {
+    "path": "/home/codex/.codex/docs/oracle-chatgpt-pro.md",
+    "sha256": "f482a8dcef56b8ad7529f8ce17e1cc39f96fe4a48ec7289f90cd216d9124d4e7",
+    "range": "1-269",
+    "role": "W3 current consumer read; 048a0e full",
+    "status": "full"
+  },
+  {
+    "path": "sub-agent-pro/mirrorea-proof-first-handoff-v1/templates/ORACLE_QUESTION.md",
+    "sha256": "6b45e2acdb877acc8da568e7f0efcee7becd83aecee1cb302c9b4c808ba9d502",
+    "range": "1-42",
+    "role": "W3 current consumer read; ab1367 full",
+    "status": "full"
+  },
+  {
+    "path": "/tmp/mirrorea-w3-20260912-1_kv7wfk/lifecycle/FallbackStatic.lean",
+    "sha256": "059c1f0a0926ca168f3e7b366db488f0e2e73c9f0652c06e082059f897b9c0d9",
+    "range": "1-209",
+    "role": "W3 current consumer read; 6c5cf4 full",
+    "status": "full"
+  },
+  {
+    "path": "/tmp/mirrorea-w3-20260912-1_kv7wfk/lifecycle/SourceTypes.lean",
+    "sha256": "74fbf6f79aa6b43c31a9c9084817f60c6ef484726a798ef8ae80fe508fe449d0",
+    "range": "1-186",
+    "role": "W3 current consumer read; 832ecc full",
+    "status": "full"
+  },
+  {
+    "path": "/tmp/mirrorea-w3-20260912-1_kv7wfk/lifecycle/SourceTyping.lean",
+    "sha256": "802d03539cd2785f66a2a31a2a559b8c349b304d16289c76087dafc81e26d97b",
+    "range": "1-230",
+    "role": "W3 current consumer read; 0564ac full",
+    "status": "full"
+  },
+  {
+    "path": "/tmp/mirrorea-w3-20260912-1_kv7wfk/lifecycle/SourcePreservation.lean",
+    "sha256": "18987c0faf8a7a7be636a4e3aaa2646dfa23356635641eb71848f72fb5b193d1",
+    "range": "1-198",
+    "role": "W3 current consumer read; d7a1f9 full",
+    "status": "full"
+  },
+  {
+    "path": "/tmp/mirrorea-w3-20260912-1_kv7wfk/lifecycle/InvocationBoundary.lean",
+    "sha256": "aa99a087b673d9fbaf02229032080c38cf5a2f19d5f03437de1374f3dd511e40",
+    "range": "1-205",
+    "role": "W3 current consumer read; 751cda full",
+    "status": "full"
+  },
+  {
+    "path": "/tmp/mirrorea-w3-20260912-1_kv7wfk/lifecycle/SourcePureLowering.lean",
+    "sha256": "dd1a92e418a421f45d89cac560d838e2768520bccb8736b5c030d821155d241b",
+    "range": "1-55",
+    "role": "W3 current consumer read; 5a22ed full",
+    "status": "full"
+  },
+  {
+    "path": "crates/mir-ast/src/textual_alpha.rs",
+    "sha256": "5639201e007bb9dcb13576fe7f52244b23b7e9be8dd2fca866faa1659a047d9e",
+    "range": "parse_effect/parse_prefix_expr current diff",
+    "role": "W3 frontend repair; old full read130d80db + current authored/reviewed delta, not new whole-file read",
+    "status": "partial"
+  },
+  {
+    "path": "samples/lean/foundations/MirroreaProofFirstManagementEntry.lean",
+    "sha256": "094771815b4e52b3c6f91e5f8eed6acd930d078c299d486b43689a2de062f1e9",
+    "range": "1-304",
+    "role": "W3 LAB full local read; normalized import names preserve reviewed external file content",
+    "status": "full"
+  },
+  {
+    "path": "samples/lean/foundations/MirroreaProofFirstInvocationBoundary.lean",
+    "sha256": "6533e15f61d9bb2aa1259dcad0f0ce1564b308cbf4df39ef0a85c0ed9247f0ed",
+    "range": "1-205",
+    "role": "W3 LAB full local read; normalized import names preserve reviewed external file content",
+    "status": "full"
+  },
+  {
+    "path": "samples/lean/foundations/MirroreaProofFirstWorldProjection.lean",
+    "sha256": "ddaa69751cbab498274f7a32c14050e1cd68f04930c133b46762bfc50036f6ac",
+    "range": "1-339",
+    "role": "W3 LAB full local read; normalized import names preserve reviewed external file content",
+    "status": "full"
+  },
+  {
+    "path": "samples/lean/foundations/MirroreaProofFirstSourceLocators.lean",
+    "sha256": "91119319b81769799647d0dced8b664d2f90ee0056cf3902341333ab59493258",
+    "range": "1-335",
+    "role": "W3 LAB full local read; normalized import names preserve reviewed external file content",
+    "status": "full"
+  },
+  {
+    "path": "samples/lean/foundations/MirroreaProofFirstSourceWriteHistory.lean",
+    "sha256": "606b6ccb4884f940965318386f2c6bcfda8d33a04483fdff3d5e9253afaae849",
+    "range": "1-117",
+    "role": "W3 LAB full local read; normalized import names preserve reviewed external file content",
+    "status": "full"
+  },
+  {
+    "path": "samples/lean/foundations/MirroreaProofFirstSourceFunction.lean",
+    "sha256": "0bb8677807ff1a7119b3844cfb1cb0af896b00c543c937ab9e4416ddb948c1a8",
+    "range": "1-112",
+    "role": "W3 LAB full local read; normalized import names preserve reviewed external file content",
+    "status": "full"
+  },
+  {
+    "path": "samples/lean/foundations/MirroreaProofFirstFallbackStatic.lean",
+    "sha256": "0e1b80edc63825f7ac9c458e9949a8517b7496c5ac989dc30511def0c55afc6b",
+    "range": "1-209",
+    "role": "W3 LAB full local read; normalized import names preserve reviewed external file content",
+    "status": "full"
+  },
+  {
+    "path": "samples/lean/foundations/MirroreaProofFirstFallbackStaticControls.lean",
+    "sha256": "e51b70b813500f37cf802674a3be3e1ba413e7255e154ea2d11ca1599a7a1b25",
+    "range": "1-50",
+    "role": "W3 LAB full local read; normalized import names preserve reviewed external file content",
+    "status": "full"
+  },
+  {
+    "path": "samples/lean/foundations/MirroreaProofFirstSourceExecution.lean",
+    "sha256": "ccb4595c79239832599938e4545637cd2df50557fee498992d45129ac1461057",
+    "range": "1-289",
+    "role": "W3 LAB full local read; normalized import names preserve reviewed external file content",
+    "status": "full"
+  },
+  {
+    "path": "scripts/proof_first_composition_source_check.py",
+    "sha256": "5238fcbdc06f17b624fff868609b7460038aad432c8d4816f0b5e7a5b2a82c55",
+    "range": "1-145",
+    "role": "W3 authored full content in this task; not preexisting mandatory-corpus completion",
+    "status": "authored"
+  },
+  {
+    "path": "samples/clean-near-end/mirrorea-proof-first-composition/README.md",
+    "sha256": "124644949a306b3db5103233d5fd59a4c370b33c833b10577b9c69ca4d14abda",
+    "range": "1-44",
+    "role": "W3 authored full content in this task; not preexisting mandatory-corpus completion",
+    "status": "authored"
+  },
+  {
+    "path": "samples/lean/foundations/MirroreaProofFirstFallbackStatic.lean",
+    "sha256": "4d62d99e7047efedc18d0aee028bb247ecbe1d365524a57782539058c3f9dffb",
+    "range": "1-262",
+    "role": "W3 full authored diagnostic delta over previously read source; not mandatory-corpus completion",
+    "status": "authored"
+  },
+  {
+    "path": "samples/lean/foundations/MirroreaProofFirstFallbackStaticControls.lean",
+    "sha256": "36293d11d7f239e711cb33682999e734ed25a649c4a8f56333ea100bf14285c4",
+    "range": "1-62",
+    "role": "W3 full authored diagnostic delta over previously read source; not mandatory-corpus completion",
+    "status": "authored"
   }
 ]

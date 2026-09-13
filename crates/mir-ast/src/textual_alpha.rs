@@ -949,15 +949,30 @@ impl Parser {
         )?;
         self.skip_newlines();
         let mut required_capabilities = Vec::new();
+        let mut requires_seen = false;
         let mut output = None;
         let mut failure_row = Vec::new();
+        let mut failure_seen = false;
         while !self.check(&TokenKind::RightBrace) {
             match self.peek_kind() {
                 TokenKind::Keyword(Keyword::Requires) => {
+                    if requires_seen {
+                        return Err(self.error_here(
+                            "duplicate_effect_member",
+                            "effect body contains a second requires member",
+                        ));
+                    }
+                    requires_seen = true;
                     self.advance();
                     required_capabilities = self.parse_identifier_list()?;
                 }
                 TokenKind::Keyword(Keyword::Output) => {
+                    if output.is_some() {
+                        return Err(self.error_here(
+                            "duplicate_effect_member",
+                            "effect body contains a second output member",
+                        ));
+                    }
                     let output_start = self.advance().span;
                     let name = self.parse_identifier()?;
                     self.expect(
@@ -973,6 +988,13 @@ impl Parser {
                     });
                 }
                 TokenKind::Keyword(Keyword::Failure) => {
+                    if failure_seen {
+                        return Err(self.error_here(
+                            "duplicate_effect_member",
+                            "effect body contains a second failure member",
+                        ));
+                    }
+                    failure_seen = true;
                     self.advance();
                     failure_row = self.parse_identifier_list()?;
                 }
@@ -1466,6 +1488,18 @@ impl Parser {
             }
             TokenKind::Minus => {
                 let start = self.advance().span;
+                // The magnitude of Int64::MIN does not fit a positive Int64.
+                // Recognize that signed literal before parsing the operand;
+                // other negative expressions keep the ordinary unary AST.
+                if let TokenKind::Integer(text) = self.peek_kind() {
+                    if text.parse::<u64>() == Ok(1_u64 << 63) {
+                        let end = self.advance().span;
+                        return Ok(AstExpr::new(
+                            AstExprKind::IntLiteral(i64::MIN),
+                            span_from(start, end),
+                        ));
+                    }
+                }
                 let expr = self.parse_expr(6)?;
                 let span = span_from(start, expr.span.clone());
                 Ok(AstExpr::new(

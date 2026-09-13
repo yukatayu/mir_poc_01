@@ -1,135 +1,136 @@
 # Current Task Map (LAB)
 
-最終更新: 2026-09-12 21:01 JST
+最終更新: 2026-09-14 00:10 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source. Everything outside
-`mirrorea_canon/` is LAB. If LAB conflicts with canon, canon wins. This file is a
-current snapshot, not a phase/theorem/policy acceptance or a replacement roadmap.
+`mirrorea_canon/` is LAB; if LAB text conflicts with canon, canon wins.
+This snapshot is not roadmap/phase/theorem/policy acceptance.
 
 ## document role
 
-Plan250 remains the sole Canon-authorized bounded-program roadmap, paused after
-I3-3 under ADR-0043. I3-4 requires explicit owner resume; I3-5/I3-6/NEXT-0 remain
-inactive. Plan247/249 are closed baselines. Theory T1, official I2 exit and broad
-I1 residuals remain. Private QUIC streams selected; TCP deferred; datagrams excluded.
+Plan250 remains the sole Canon-authorized bounded-program roadmap, owner-paused
+after I3-3 under ADR-0043. I3-4 needs explicit resume; I3-5/I3-6/NEXT-0 inactive.
+Plan247/249 are closed history. Theory T1 and broad I1 residuals remain. Private
+QUIC streams selected; TCP deferred, datagrams excluded. These facts are unchanged.
 
 ## current promoted package
 
-The owner explicitly requested W3 on2026-09-12 with previous precautions. The
-single active task-local goal is W3 dynamic composition: PL1 S0/S1/S3,
-theory/proof/reference. Stop after W3. W4+, alpha and Plan250/I3-4 are not resumed.
-Main alone; no subagents. Oracle is a main-operated read-only adviser, not a
-signature or owner authority. Reversible internal research is authorized; no
-blanket adoption of119 requirements, public profile or F0 candidates.
+The owner requested W3 on2026-09-12, sole main, no subagents, proof-first and no
+sorry/admit. Exactly one task-local semantic goal: W3 dynamic composition,
+PL1 S0/S1/S3 theory/proof/nonproduction reference. Stop after W3; W4+/alpha and
+Plan250/I3-4 are not automatically resumed. Oracle is a main-operated read-only
+adviser, never a signature/owner decision. Reversible bounded internal research
+is authorized; no blanket adoption of119 detailed requirements or final profile.
 
-Canon baseline: `mirrorea_canon/adr/ADR-0043.md`; the separate owner task does not
-resume its paused successor.
+References: `mirrorea_canon/adr/ADR-0043.md`;
+`docs/proof-first/CURRENT_GOAL.md` and `docs/proof-first/RESUME.md`;
+Report2613; `plan/proof-first-foundation-correspondence.md`. Previous milestone
+Reports2611/2612 and W2 committed/pushed cut161be3f9 remain closed history.
 
-References: `docs/proof-first/CURRENT_GOAL.md`, `docs/proof-first/RESUME.md`,
-`docs/proof-first/W3_ENTRY_CHECK.json`, `docs/proof-first/W3_KERNEL_REVIEW.json`,
-Report2613 and
-`plan/proof-first-foundation-correspondence.md`.
+## evidence and current consumer
 
-## current evidence and direct consumer
+Committed W3 dependency cut9d754603 preserves11 Lean files/19 proof-script
+mutation controls and1716-declaration audit. These establish dynamic support,
+separate DAGs, named catalog elaboration and current-use/impact dependency facts.
 
-W2 remains complete at its finite scope and committed/pushed cut161be3f9:
-24-file kernel and18 targeted mutations; exact lexical/affine computations,
-one private captured frame/history, mathematical resources, supplied authentic
-current context and capture metadata. No machine quota or general source/runtime
-refinement follows. Reports2611/2612 remain closed historical evidence.
+The mirrored lifecycle candidate now connects actual Rust source parsing to strict
+named-function lowering in Lean, typed statements and the SAME configuration,
+authority, request and actual arithmetic result machine. ABC base/AC addition,
+ordinary assignment, invocation, reparent, code exchange and retirement execute.
+No example-name branches, expected-result trace splice or automatic authority
+issuance. Source/control declarations require explicit preexisting logical grants.
 
-W3 mirrored dependencies have actual general Lean4.29.1 trust0 results: named
-catalog elaboration, finite support growth, per-kind DAG, old current use,
-conservative impact and current choice. Corrected11-file/19-mutation evidence
-passes, with1716 declarations checked against the logical-axiom allowlist.
-Both Oracle reviews are recovered/dispositioned. Mutation rejection is proof-
-script rejection at the specified theorem, not19 semantic falsification proofs.
+General proofs now include all selected source statement machine/type preservation,
+strict pure-let lowering including rejection, actual latest-write/value/producer
+alignment and uniqueness, automatic request-ID freshness, exact creation results,
+synchronous start/result completion and delivered retained-interface contract.
+Reachable catalogs add predecessor refinement/interface inhabitation, immutable
+old definitions and same-cut identity along ONE history. Current39-module audit
+covers5339 owned declarations with only3 standard logical axioms. Actual12-statement
+source,9 adverse source cases and12 frontend cases pass at recorded cuts.
 
-External reference InstancePrograms/InstanceState now check actual Int64 code
-against an explicitly finite input/output contract, distinguish immutable
-function definitions from instances, and prove structural insertion/retirement/
-reparent/replacement preservation. Two instances, sibling retirement, support
-propagation, cycle refusal and one-instance code exchange are positive/negative
-controls. These are unreviewed candidates; actual source and auth/result bindings
-are still required. The existing parser authoring probe establishes syntax only.
-
-The direct consumer must make the same checked source define and instantiate
-new objects, then carry their exact identities through graph/support checks,
-current authorization, fallback, pending requests and consumed results.
-The inspected old source-patch helper generates activation reports/capability
-references. That output cannot substitute for actual authorized state mutation.
+Five substantive Oracle consultations are terminal/dispositioned. Two fallback capture attempts were unusable: a Preview placeholder and a wrong-
+conversation capture after automatic reattach. A new exact-target/question-bound
+review job is active, with unsafe automatic reattach disabled for this invocation. Latest source review
+found byte-origin conversion, duplicate effect annotation erasure, ambiguous
+names and signed-number gaps; main reproduced and repaired them. Rust mir-ast
+all-targets passes. New general proofs and the later fallback work need material
+review before W3 closes. Reference artifacts are now mirrored under existing roots, with a fresh actual-parser
+reproduction via scripts/proof_first_composition_source_check.py. Final review remains open.
 
 ## ordered self-driven packages
 
-Exactly one semantic goal is active. The rows below are dependencies inside W3,
-not independently promoted lanes. Initial historical W3 estimate24–60 active
-hours is uncalibrated for this cut; re-estimate after the first actual source
-creation/edit path, with Oracle review latency kept separate. No deadline is
-imposed on a normally running Oracle job.
-
-| W3 dependency / macro position | Evidence and next gate | Startability |
+| Dependency / macro position | Current evidence and remaining gate | Startability |
 |---|---|---|
-| Dynamic catalog / macro1/5 early | catalog and structural instance operations checked; definition registration/history and fresh metadata correspondence needed | 着手可能 |
-| Typed source lifecycle / macro1/3 middle | existing parser/body cone available; source-derived create/retire/reparent/exchange not connected | after required realization proofs |
-| Reference and pending/result / macro1/5 middle | W1/W2 current checks reusable within premises; full current-state and lineage adapter needed | direct W3 consumer |
-| All transitions and integration / macro3/5 end | positive and adverse source cases, mutation inventory, frozen material Oracle review and Git | dependency-gated |
-| W0 mandatory reading / macro0 | plans302/specs00–43/examples00–282 read; broader corpus incomplete | continue required cone and sequential corpus; no index-as-full |
+| Source/history / macro1/3 middle | actual path, locator/read coverage and saved-ticket/branch/injected-history controls pass; final material review remains | 着手可能 |
+| Maintained reference / macro1/5 middle | static finite-chain declaration/checker, real-parent terminal lifetime proved; owner binding, degradation, explicit new-lineage reacquire, pending/result and all-mutator integration pending | current direct consumer, 着手可能 |
+| Final integration / macro3/5 end | source/history candidate mirrored and freshly checked; fallback integration, material review,119 dispositions and own normal Git remain | 後段依存 |
+| Mandatory corpus / macro0 | plans302/specs00–43/examples00–282 historical full reads; broader corpus incomplete | read necessary cone and continue ledger; indexes are not full reads |
 
-W3 exit retains A/B/C base and newly authored A/C composition, one definition
-with independently live instances, accepted actual edits, per-kind DAG plus
-cross-kind support, semantic fallback/reacquire, invalidated and unaffected
-pending/result uses, and explicit Q18 policy separation. No all-reject or
-constant-only/fixture success. Physical W4/W5/W6 and alpha/W7 are outside this run.
+Owner-facing estimate at this checkpoint:8–16 remaining active hours plus Oracle
+latency, low confidence (source/history2–4, reference4–8, integration2–4). This is
+an estimate, not a completion promise or timeout. Earlier24–60h total estimate
+was uncalibrated. Healthy Oracle jobs have no arbitrary deadline.
+
+W3 exit retains actual authored ABC/AC composition, independent live instances,
+accepted edits, distinct DAG/support facts, semantic fallback/reacquire and
+invalidated/unaffected pending result use. No all-reject or constant-only success.
+Physical W4 networking, W5 durable restore, W6 confidentiality and W7alpha remain
+separate future dependencies.
 
 ## self-driven macro phase reading
 
-Finite theory and reference checks are evidence. Existing Mir source/runtime,
-Mirrorea fabric, Typed-Effect providers, PrismCascade and upper applications
-remain separate maturity axes. W3 first lemmas do not upgrade their operational
-workflow readiness or claim product/public100%.
+Mir source/checker, Mirrorea fabric, typed-effect providers, PrismCascade and
+upper applications retain separate maturity axes. Reference/helper evidence is
+not public operational100%. Secret observation requires distinct two-run secrecy,
+passive noninterference, fidelity/resource and active-debug authorization proofs.
 
 ## user decision gates
 
-No extra owner answer is currently needed for reversible W3 research.
-Q18 commit reauthorization versus separately authorized prepared reservation
-remains a policy distinction, not a permission granted by proving either model.
-Public API/ABI/wire freeze, privacy/authority weakening, publication, production,
-paid fallback and owner-managed signed acceptance remain outside delegation.
-L2 promotion stays fail-closed without the owner-authenticated trust anchor.
-Both W3 Oracle jobs are terminal; no live job, no healthy-job cancellation or resend.
+No new owner answer is currently required for reversible W3 work. Fallback
+implementation choices must compare the current candidate and smallest alternative
+with explicit falsifiers, preserving Canon semantics and authority boundaries.
+No planner/subagent review is invented; separate-view reviews use main-run Oracle.
+
+
+Owner-reserved: L0/L1 changes, public API/ABI/wire freeze, privacy/authority
+weakening, publication/production/billing, owner-managed key and signed acceptance.
+L2 promotion remains fail-closed without owner-authenticated trust anchor.
 
 ## research discovery items
 
-| Question | Impact / alternatives / current view |
+| Research question | Impact / current alternatives and view |
 |---|---|
-| Catalog representation | finite slots with coherent embeddings versus stable keys in a complete finite catalog; slots remain internal, exact identity and absence/index coverage required |
-| Definition vs instance | one definition/multiple instances; retirement cannot silently erase siblings or the definition |
-| Edit and compatibility | downstream insertion versus guarded reparent/exchange; same signature alone is insufficient, preserve selected success contract |
-| Context and pending use | derive current context from actual lifecycle state versus unsupported supplied snapshot; retain exact tick/request/code/contract/consumption binding |
-| Fallback | full static lineage floor and monotone selection versus explicit new-lineage reacquire; presentation loss cannot drive semantic changes |
-| Q18 | compare immediate commit reauthorization and explicit scoped reservation; do not silently merge |
-| Physical/runtime/recovery | W3 logical currentness does not establish distributed atomicity, current head or durable restart; later scopes remain open |
-| Secret observation | distinct two-run secrecy/passive noninterference/faithfulness/resource/debug obligations; no public-only substitution |
+| Static error priority | repaired whole-chain masking; acceptance exactness and late malformed-edge preservation proved; independent mutation rejects the former behavior |
+| Fallback timing | eager normalization on semantic state changes versus lazy normalization before use; both must record degradation before access and preserve it across later call failure |
+| Binding validity | saved exact witness and owner/option identity versus fresh witness search; same option must not silently refresh on revocation, earlier options require explicit new lineage |
+| Lifetime floor | real parent relation can change on reparent; every binding-aware mutation must preserve/check the admitted floor, not assume a static global DAG |
+| Contract profile | equal finite exported contracts initially versus sound compatible plugin; unequal compatibility must be outside-profile, not falsely labeled Canon contradiction |
+| History/recovery | local monotone cut identity only within one history; unrelated forks and same-instance recovery need later mechanism, not fresh-import equivalence |
+| Q18 | immediate current reauthorization versus separately authorized prepared reservation remain distinct policies; proving either grants no authority |
 
 ## maintenance tasks
 
-One current milestone report2613 accumulates W3. Preserve all119 U/D/adoption/
-demonstration distinctions,30Q/18PT/24SC/alpha1–8. Whole-corpus reading remains
-incomplete. Startup1004 prior full reads were hash-equal; changed files excluded.
-Read-only entry and code reviews used frozen11file/19file packets. Main checked
-the answers, repaired audit/control issues and ran added counterexamples. Narrow
-audit-delta review is recovered; its diagnostic-specificity improvement is
-locally verified. New material consumer review is still required.
+One milestone report2613 accumulates evidence and failures. Preserve119 U/D/adoption/
+demonstration distinctions,30Q/18PT/24SC/alpha1–8. Global reading incomplete; no new
+whole-project plan is adopted. Snapshot maintenance follows actual source evidence.
 
-Startup root free50GiB/RAM available12GiB; /mnt/mirrorea-work absent. Small
-external workdir copies only. No cache deletion, host-share use, original handoff
-mutation, subagent or Chrome setting changes. Own normal commit/push only;
-no reset/clean/force. No W3 commit yet. W3 goal remains active.
+Resource check: root49GiB free, RAM12GiB available; external mount absent. Small
+external workdir /tmp/mirrorea-w3-20260912-1_kv7wfk; sequential child processes,
+Lean/Cargo4GiB address-space limit, Cargo jobs1/incremental0. A concrete proof type
+conversion hit that bound, then the same proof applied without eager conversion
+passed. Failed/interrupted logs are retained, never successful evidence. No cache
+cleanup, host-share use, original-handoff mutation, subagent or Chrome changes.
+
+W3 dependency checkpoint9d754603 is committed/pushed with recorded parity. Current
+source parser/tests, mirrored source/Lean/script files and docs are own dirty work
+pending a source/history checkpoint commit. No force/reset/clean. W3 goal ACTIVE;
+no final completion notification until the authorized W3 scope is finished.
 
 ## non-promoted references
 
-F0.1/F0.2/F0.3 remain candidate/history, not a feature inclusion chain.
-W2 finite closure and W3 dependencies do not promote unrelated experiments,
-unreviewed source extensions, Canon phases/THM/OBL, signed acceptance, final
-public contracts or alpha readiness. External InstancePrograms/InstanceState
-are the next unreviewed reference consumer, not a second active semantic goal.
+F0.1/F0.2/F0.3 remain candidate/history rather than a feature inclusion chain.
+The W2 finite closure and W3 source checkpoint do not promote arbitrary higher-order
+source, import/recovery implementations, new Canon phases/THM/OBL, signed acceptance,
+public contracts or alpha readiness. Dynamic fallback remains within the same W3
+goal; it is not an independent promoted lane.

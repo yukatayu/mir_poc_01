@@ -1,0 +1,679 @@
+{
+  "classification": "W3 source/history dependency checkpoint, not W3 completion; fallback and final material review remain open",
+  "command": "python3 scripts/proof_first_composition_source_check.py --work-root <existing-external-directory>",
+  "workdir": "/tmp/mirrorea-w3-20260912-1_kv7wfk/mir-w3-source-eheyvx4u",
+  "result_sha256": "718b9652b502da278fa3f81939983895d44b9f4ef9f790d63571df3d35e9cddf",
+  "manifest_sha256": "d02c8f3a5ddec0a447f098b6f344d727349d09b89747a35f888251b93b1bcb01",
+  "audit_log_sha256": "7e5dbc1e15fed49e2515b0d9fcbfab47ef7a154a21e48100fe25ad022315e747",
+  "audit_modules": 39,
+  "owned_declarations": 5339,
+  "result": {
+    "classification": "W3 source/lifecycle reference candidate; dynamic fallback and final review open",
+    "started": "2026-09-13T14:54:24.926333+00:00",
+    "workdir": "/tmp/mirrorea-w3-20260912-1_kv7wfk/mir-w3-source-eheyvx4u",
+    "lean_version": "Lean (version 4.29.1, x86_64-unknown-linux-gnu, commit f72c35b3f637c8c6571d353742168ab66cc22c00, Release)\n",
+    "rlimit_as": 4294967296,
+    "commands": [
+      {
+        "command": [
+          "cargo",
+          "build",
+          "--locked",
+          "--offline",
+          "-p",
+          "mir-ast",
+          "--example",
+          "textual_mir_alpha_parse",
+          "-j",
+          "1"
+        ],
+        "cwd": "/home/codex/dev/mir_poc_01",
+        "exit": 0,
+        "log": "parser-build.log",
+        "log_sha256": "13d93f3ce62ee7c90218adaf7f30c4791deb7a2e9b889e1cef68804e1bf58ff8"
+      },
+      {
+        "command": [
+          "lean",
+          "--trust=0",
+          "-o",
+          "MirroreaProofFirstResourceBoundary.olean",
+          "MirroreaProofFirstResourceBoundary.lean"
+        ],
+        "cwd": "/tmp/mirrorea-w3-20260912-1_kv7wfk/mir-w3-source-eheyvx4u",
+        "exit": 0,
+        "log": "MirroreaProofFirstResourceBoundary.log",
+        "log_sha256": "77bab84ab7a63a2c3c796ddf169fbb4c5403c33adfe4d203245fe16693d41cc9"
+      },
+      {
+        "command": [
+          "lean",
+          "--trust=0",
+          "-o",
+          "MirroreaProofFirstLocalContract.olean",
+          "MirroreaProofFirstLocalContract.lean"
+        ],
+        "cwd": "/tmp/mirrorea-w3-20260912-1_kv7wfk/mir-w3-source-eheyvx4u",
+        "exit": 0,
+        "log": "MirroreaProofFirstLocalContract.log",
+        "log_sha256": "70560dd926398ef0ecb051b13d797a4547da965473bc5533ff90d0162f052343"
+      },
+      {
+        "command": [
+          "lean",
+          "--trust=0",
+          "-o",
+          "MirroreaProofFirstContractExport.olean",
+          "MirroreaProofFirstContractExport.lean"
+        ],
+        "cwd": "/tmp/mirrorea-w3-20260912-1_kv7wfk/mir-w3-source-eheyvx4u",
+        "exit": 0,
+        "log": "MirroreaProofFirstContractExport.log",
+        "log_sha256": "3dca49649d678d73102f6832fae680f4271aec3e673a54dfe7144f06f6d40794"
+      },
+      {
+        "command": [
+          "lean",
+          "--trust=0",
+          "-o",
+          "MirroreaProofFirstInstancePrograms.olean",
+          "MirroreaProofFirstInstancePrograms.lean"
+        ],
+        "cwd": "/tmp/mirrorea-w3-20260912-1_kv7wfk/mir-w3-source-eheyvx4u",
+        "exit": 0,
+        "log": "MirroreaProofFirstInstancePrograms.log",
+        "log_sha256": "2d485a8b54752b446c51f1798e75c7d308550db80ed286621a3760323897af63"
+      },
+      {
+        "command": [
+          "lean",
+          "--trust=0",
+          "-o",
+          "MirroreaProofFirstSupport.olean",
+          "MirroreaProofFirstSupport.lean"
+        ],
+        "cwd": "/tmp/mirrorea-w3-20260912-1_kv7wfk/mir-w3-source-eheyvx4u",
+        "exit": 0,
+        "log": "MirroreaProofFirstSupport.log",
+        "log_sha256": "092d20b4970a48c9e3ad3ffdb04a9d78bd4f49c5b9027002dc419f3f611d27df"
+      },
+      {
+        "command": [
+          "lean",
+          "--trust=0",
+          "-o",
+          "MirroreaProofFirstDynamicSupport.olean",
+          "MirroreaProofFirstDynamicSupport.lean"
+        ],
+        "cwd": "/tmp/mirrorea-w3-20260912-1_kv7wfk/mir-w3-source-eheyvx4u",
+        "exit": 0,
+        "log": "MirroreaProofFirstDynamicSupport.log",
+        "log_sha256": "aca3a853c81653c4004751ae1cc9cfb34177837233d21295d23f1e602518ba06"
+      },
+      {
+        "command": [
+          "lean",
+          "--trust=0",
+          "-o",
+          "MirroreaProofFirstCurrentUse.olean",
+          "MirroreaProofFirstCurrentUse.lean"
+        ],
+        "cwd": "/tmp/mirrorea-w3-20260912-1_kv7wfk/mir-w3-source-eheyvx4u",
+        "exit": 0,
+        "log": "MirroreaProofFirstCurrentUse.log",
+        "log_sha256": "5f00d1b304e5ecf7777894fedef901ef6479a5c0c199b7d298a34be638316161"
+      },
+      {
+        "command": [
+          "lean",
+          "--trust=0",
+          "-o",
+          "MirroreaProofFirstDynamicIdentity.olean",
+          "MirroreaProofFirstDynamicIdentity.lean"
+        ],
+        "cwd": "/tmp/mirrorea-w3-20260912-1_kv7wfk/mir-w3-source-eheyvx4u",
+        "exit": 0,
+        "log": "MirroreaProofFirstDynamicIdentity.log",
+        "log_sha256": "e383a859e84ba821cc1571c4de402029b39449716d45e49ce39432b3f6ce16f8"
+      },
+      {
+        "command": [
+          "lean",
+          "--trust=0",
+          "-o",
+          "MirroreaProofFirstTrackedValidation.olean",
+          "MirroreaProofFirstTrackedValidation.lean"
+        ],
+        "cwd": "/tmp/mirrorea-w3-20260912-1_kv7wfk/mir-w3-source-eheyvx4u",
+        "exit": 0,
+        "log": "MirroreaProofFirstTrackedValidation.log",
+        "log_sha256": "fae912dbfd58dc97548fba0c2d94fed5342c8fb820fca858629578eb8758aedb"
+      },
+      {
+        "command": [
+          "lean",
+          "--trust=0",
+          "-o",
+          "MirroreaProofFirstGraphValidation.olean",
+          "MirroreaProofFirstGraphValidation.lean"
+        ],
+        "cwd": "/tmp/mirrorea-w3-20260912-1_kv7wfk/mir-w3-source-eheyvx4u",
+        "exit": 0,
+        "log": "MirroreaProofFirstGraphValidation.log",
+        "log_sha256": "4aeac8172426b631d080b2dedf9406dc66bff6ce855c37e1797bc52fd5c83d92"
+      },
+      {
+        "command": [
+          "lean",
+          "--trust=0",
+          "-o",
+          "MirroreaProofFirstDynamicGraphs.olean",
+          "MirroreaProofFirstDynamicGraphs.lean"
+        ],
+        "cwd": "/tmp/mirrorea-w3-20260912-1_kv7wfk/mir-w3-source-eheyvx4u",
+        "exit": 0,
+        "log": "MirroreaProofFirstDynamicGraphs.log",
+        "log_sha256": "057b2675c80c1c052ebc0f77cce29f070e61e866e57a178ddd0cdf31a0159cde"
+      },
+      {
+        "command": [
+          "lean",
+          "--trust=0",
+          "-o",
+          "MirroreaProofFirstInstanceState.olean",
+          "MirroreaProofFirstInstanceState.lean"
+        ],
+        "cwd": "/tmp/mirrorea-w3-20260912-1_kv7wfk/mir-w3-source-eheyvx4u",
+        "exit": 0,
+        "log": "MirroreaProofFirstInstanceState.log",
+        "log_sha256": "8d4faaea6efcb89288433a7d966aa0d11c39a544c803a53d65ee29b8a83a9cb7"
+      },
+      {
+        "command": [
+          "lean",
+          "--trust=0",
+          "-o",
+          "MirroreaProofFirstWorldProjection.olean",
+          "MirroreaProofFirstWorldProjection.lean"
+        ],
+        "cwd": "/tmp/mirrorea-w3-20260912-1_kv7wfk/mir-w3-source-eheyvx4u",
+        "exit": 0,
+        "log": "MirroreaProofFirstWorldProjection.log",
+        "log_sha256": "f3dbff7edfd7f8a80dd174f0152ac32c9a42d806eaf9997c0a59cfd49546d4ec"
+      },
+      {
+        "command": [
+          "lean",
+          "--trust=0",
+          "-o",
+          "MirroreaProofFirstCompositionCore.olean",
+          "MirroreaProofFirstCompositionCore.lean"
+        ],
+        "cwd": "/tmp/mirrorea-w3-20260912-1_kv7wfk/mir-w3-source-eheyvx4u",
+        "exit": 0,
+        "log": "MirroreaProofFirstCompositionCore.log",
+        "log_sha256": "9190cfd2297e63a59bd545c97c83da31ebaa3242e126a4d6b20d000b08f22102"
+      },
+      {
+        "command": [
+          "lean",
+          "--trust=0",
+          "-o",
+          "MirroreaProofFirstManagementEntry.olean",
+          "MirroreaProofFirstManagementEntry.lean"
+        ],
+        "cwd": "/tmp/mirrorea-w3-20260912-1_kv7wfk/mir-w3-source-eheyvx4u",
+        "exit": 0,
+        "log": "MirroreaProofFirstManagementEntry.log",
+        "log_sha256": "c898f12a3fc8bc7d81cff10ee564a0327b36f60316f82eb79780b14c28cfd9fc"
+      },
+      {
+        "command": [
+          "lean",
+          "--trust=0",
+          "-o",
+          "MirroreaProofFirstInvocationBoundary.olean",
+          "MirroreaProofFirstInvocationBoundary.lean"
+        ],
+        "cwd": "/tmp/mirrorea-w3-20260912-1_kv7wfk/mir-w3-source-eheyvx4u",
+        "exit": 0,
+        "log": "MirroreaProofFirstInvocationBoundary.log",
+        "log_sha256": "096ed309d55fa56e9df9d64a2aeaa3fd655cbbd0734a31717015ca772ec85d93"
+      },
+      {
+        "command": [
+          "lean",
+          "--trust=0",
+          "-o",
+          "MirroreaProofFirstCompositionMachine.olean",
+          "MirroreaProofFirstCompositionMachine.lean"
+        ],
+        "cwd": "/tmp/mirrorea-w3-20260912-1_kv7wfk/mir-w3-source-eheyvx4u",
+        "exit": 0,
+        "log": "MirroreaProofFirstCompositionMachine.log",
+        "log_sha256": "058405f5eb31b7dc775810a69bad9c550490eecd27f4cf7cd5253dc72265217e"
+      },
+      {
+        "command": [
+          "lean",
+          "--trust=0",
+          "-o",
+          "MirroreaProofFirstSourceAuthoring.olean",
+          "MirroreaProofFirstSourceAuthoring.lean"
+        ],
+        "cwd": "/tmp/mirrorea-w3-20260912-1_kv7wfk/mir-w3-source-eheyvx4u",
+        "exit": 0,
+        "log": "MirroreaProofFirstSourceAuthoring.log",
+        "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "command": [
+          "lean",
+          "--trust=0",
+          "-o",
+          "MirroreaProofFirstSourceTypes.olean",
+          "MirroreaProofFirstSourceTypes.lean"
+        ],
+        "cwd": "/tmp/mirrorea-w3-20260912-1_kv7wfk/mir-w3-source-eheyvx4u",
+        "exit": 0,
+        "log": "MirroreaProofFirstSourceTypes.log",
+        "log_sha256": "7b4ea183df99a8cff5657d93d9c9d433ff0b6bac13f598f52e35fde84154caba"
+      },
+      {
+        "command": [
+          "lean",
+          "--trust=0",
+          "-o",
+          "MirroreaProofFirstSourcePreservation.olean",
+          "MirroreaProofFirstSourcePreservation.lean"
+        ],
+        "cwd": "/tmp/mirrorea-w3-20260912-1_kv7wfk/mir-w3-source-eheyvx4u",
+        "exit": 0,
+        "log": "MirroreaProofFirstSourcePreservation.log",
+        "log_sha256": "6571d7119fedc146e8599ea1a41b45be2cad036e1e49d455f33e08c3415c90d5"
+      },
+      {
+        "command": [
+          "lean",
+          "--trust=0",
+          "-o",
+          "MirroreaProofFirstSourceTyping.olean",
+          "MirroreaProofFirstSourceTyping.lean"
+        ],
+        "cwd": "/tmp/mirrorea-w3-20260912-1_kv7wfk/mir-w3-source-eheyvx4u",
+        "exit": 0,
+        "log": "MirroreaProofFirstSourceTyping.log",
+        "log_sha256": "71d7d823b572c2eec427846703f445cfa20e92e3d1ecc965ad14716196e61e40"
+      },
+      {
+        "command": [
+          "lean",
+          "--trust=0",
+          "-o",
+          "MirroreaProofFirstSourceExecution.olean",
+          "MirroreaProofFirstSourceExecution.lean"
+        ],
+        "cwd": "/tmp/mirrorea-w3-20260912-1_kv7wfk/mir-w3-source-eheyvx4u",
+        "exit": 0,
+        "log": "MirroreaProofFirstSourceExecution.log",
+        "log_sha256": "71dae6223bbaea5528c200f9f435499b43cdbcbb0e5a73b086c3a9ed7feca2a2"
+      },
+      {
+        "command": [
+          "lean",
+          "--trust=0",
+          "-o",
+          "MirroreaProofFirstSourceFrame.olean",
+          "MirroreaProofFirstSourceFrame.lean"
+        ],
+        "cwd": "/tmp/mirrorea-w3-20260912-1_kv7wfk/mir-w3-source-eheyvx4u",
+        "exit": 0,
+        "log": "MirroreaProofFirstSourceFrame.log",
+        "log_sha256": "9b029447258fee86a0f0a39084dfeab4304c4cff992ca6394c59caa9fed45aa1"
+      },
+      {
+        "command": [
+          "lean",
+          "--trust=0",
+          "-o",
+          "MirroreaProofFirstCatalogHistory.olean",
+          "MirroreaProofFirstCatalogHistory.lean"
+        ],
+        "cwd": "/tmp/mirrorea-w3-20260912-1_kv7wfk/mir-w3-source-eheyvx4u",
+        "exit": 0,
+        "log": "MirroreaProofFirstCatalogHistory.log",
+        "log_sha256": "d1a07313004ad2624fd0d8ba209be1154a9955b05d813bbe8192e4011962db2b"
+      },
+      {
+        "command": [
+          "lean",
+          "--trust=0",
+          "-o",
+          "MirroreaProofFirstInvocationContract.olean",
+          "MirroreaProofFirstInvocationContract.lean"
+        ],
+        "cwd": "/tmp/mirrorea-w3-20260912-1_kv7wfk/mir-w3-source-eheyvx4u",
+        "exit": 0,
+        "log": "MirroreaProofFirstInvocationContract.log",
+        "log_sha256": "57b41eb763663182620654cc26458ae803731f8de06112fb6cf256459a6c711e"
+      },
+      {
+        "command": [
+          "lean",
+          "--trust=0",
+          "-o",
+          "MirroreaProofFirstSourceCompletion.olean",
+          "MirroreaProofFirstSourceCompletion.lean"
+        ],
+        "cwd": "/tmp/mirrorea-w3-20260912-1_kv7wfk/mir-w3-source-eheyvx4u",
+        "exit": 0,
+        "log": "MirroreaProofFirstSourceCompletion.log",
+        "log_sha256": "6d60dac786d1f3ce437d99ab23bfe3a0423e6b53adb7e60d0405abe280364917"
+      },
+      {
+        "command": [
+          "lean",
+          "--trust=0",
+          "-o",
+          "MirroreaProofFirstSourceAllocation.olean",
+          "MirroreaProofFirstSourceAllocation.lean"
+        ],
+        "cwd": "/tmp/mirrorea-w3-20260912-1_kv7wfk/mir-w3-source-eheyvx4u",
+        "exit": 0,
+        "log": "MirroreaProofFirstSourceAllocation.log",
+        "log_sha256": "49fa6b4467be10a9086a830ad5a6ac8133854f334134506217f7c8412be1a62d"
+      },
+      {
+        "command": [
+          "lean",
+          "--trust=0",
+          "-o",
+          "MirroreaProofFirstSourceHistory.olean",
+          "MirroreaProofFirstSourceHistory.lean"
+        ],
+        "cwd": "/tmp/mirrorea-w3-20260912-1_kv7wfk/mir-w3-source-eheyvx4u",
+        "exit": 0,
+        "log": "MirroreaProofFirstSourceHistory.log",
+        "log_sha256": "e6ba8766e32d252298a40c9f5ab8d47e94cebdbff890a39d80573084806166ff"
+      },
+      {
+        "command": [
+          "lean",
+          "--trust=0",
+          "-o",
+          "MirroreaProofFirstSourceLocators.olean",
+          "MirroreaProofFirstSourceLocators.lean"
+        ],
+        "cwd": "/tmp/mirrorea-w3-20260912-1_kv7wfk/mir-w3-source-eheyvx4u",
+        "exit": 0,
+        "log": "MirroreaProofFirstSourceLocators.log",
+        "log_sha256": "4b3817ed2f6d2f31ab34f0d3e1de6f984d71c78c8cf141c9aa7f81a280cb9210"
+      },
+      {
+        "command": [
+          "lean",
+          "--trust=0",
+          "-o",
+          "MirroreaProofFirstSourceWriteHistory.olean",
+          "MirroreaProofFirstSourceWriteHistory.lean"
+        ],
+        "cwd": "/tmp/mirrorea-w3-20260912-1_kv7wfk/mir-w3-source-eheyvx4u",
+        "exit": 0,
+        "log": "MirroreaProofFirstSourceWriteHistory.log",
+        "log_sha256": "1d1b77a98497b6a2a4b130a02dc5e0212f3cd736e783ffcb50faa305fc66dde7"
+      },
+      {
+        "command": [
+          "lean",
+          "--trust=0",
+          "-o",
+          "MirroreaProofFirstSourceReadNames.olean",
+          "MirroreaProofFirstSourceReadNames.lean"
+        ],
+        "cwd": "/tmp/mirrorea-w3-20260912-1_kv7wfk/mir-w3-source-eheyvx4u",
+        "exit": 0,
+        "log": "MirroreaProofFirstSourceReadNames.log",
+        "log_sha256": "2d91b918ed5e1232b750632bc556d564c6d37e4c6cba0df868178a0bccba68f3"
+      },
+      {
+        "command": [
+          "lean",
+          "--trust=0",
+          "-o",
+          "MirroreaProofFirstSourcePureLowering.olean",
+          "MirroreaProofFirstSourcePureLowering.lean"
+        ],
+        "cwd": "/tmp/mirrorea-w3-20260912-1_kv7wfk/mir-w3-source-eheyvx4u",
+        "exit": 0,
+        "log": "MirroreaProofFirstSourcePureLowering.log",
+        "log_sha256": "abed70fd42738efe061dc8f608e5e746971a8fb45e4af3e04ae34f8a914e5e4a"
+      },
+      {
+        "command": [
+          "lean",
+          "--trust=0",
+          "-o",
+          "MirroreaProofFirstSourceFunction.olean",
+          "MirroreaProofFirstSourceFunction.lean"
+        ],
+        "cwd": "/tmp/mirrorea-w3-20260912-1_kv7wfk/mir-w3-source-eheyvx4u",
+        "exit": 0,
+        "log": "MirroreaProofFirstSourceFunction.log",
+        "log_sha256": "02343e613267bcd402d2d7577928f8f794b7419fdd762a837f4bae720f7eb0e4"
+      },
+      {
+        "command": [
+          "lean",
+          "--trust=0",
+          "-o",
+          "MirroreaProofFirstFallbackStatic.olean",
+          "MirroreaProofFirstFallbackStatic.lean"
+        ],
+        "cwd": "/tmp/mirrorea-w3-20260912-1_kv7wfk/mir-w3-source-eheyvx4u",
+        "exit": 0,
+        "log": "MirroreaProofFirstFallbackStatic.log",
+        "log_sha256": "8c71d94a095143a4d61397e39850cbfdbf64eee1aff365e4f52b72da67dfb8cc"
+      },
+      {
+        "command": [
+          "lean",
+          "--trust=0",
+          "-o",
+          "MirroreaProofFirstFallbackStaticControls.olean",
+          "MirroreaProofFirstFallbackStaticControls.lean"
+        ],
+        "cwd": "/tmp/mirrorea-w3-20260912-1_kv7wfk/mir-w3-source-eheyvx4u",
+        "exit": 0,
+        "log": "MirroreaProofFirstFallbackStaticControls.log",
+        "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "command": [
+          "lean",
+          "--trust=0",
+          "-o",
+          "MirroreaProofFirstSourceHistoryControls.olean",
+          "MirroreaProofFirstSourceHistoryControls.lean"
+        ],
+        "cwd": "/tmp/mirrorea-w3-20260912-1_kv7wfk/mir-w3-source-eheyvx4u",
+        "exit": 0,
+        "log": "MirroreaProofFirstSourceHistoryControls.log",
+        "log_sha256": "0f3ed6b605118ee40e2c4691b54f2a6f37000df3a5795e6a154f90df16dcca2a"
+      },
+      {
+        "command": [
+          "lean",
+          "--trust=0",
+          "-o",
+          "MirroreaProofFirstSavedInvocation.olean",
+          "MirroreaProofFirstSavedInvocation.lean"
+        ],
+        "cwd": "/tmp/mirrorea-w3-20260912-1_kv7wfk/mir-w3-source-eheyvx4u",
+        "exit": 0,
+        "log": "MirroreaProofFirstSavedInvocation.log",
+        "log_sha256": "8be499f3df9f188bb2d20241459b0d85408ffa76b23475bde7a03a6d06077053"
+      },
+      {
+        "command": [
+          "lean",
+          "--trust=0",
+          "-o",
+          "MirroreaProofFirstCatalogCounterexamples.olean",
+          "MirroreaProofFirstCatalogCounterexamples.lean"
+        ],
+        "cwd": "/tmp/mirrorea-w3-20260912-1_kv7wfk/mir-w3-source-eheyvx4u",
+        "exit": 0,
+        "log": "MirroreaProofFirstCatalogCounterexamples.log",
+        "log_sha256": "a865ce7b4ab3eb451465a91524c125032f209ef1f852189d83edfae6d5f27739"
+      },
+      {
+        "command": [
+          "python3",
+          "proof_first_composition_source.py"
+        ],
+        "cwd": "/tmp/mirrorea-w3-20260912-1_kv7wfk/mir-w3-source-eheyvx4u",
+        "exit": 0,
+        "log": "proof_first_composition_source.py.log",
+        "log_sha256": "1cf06f6be8494eb0c49ba92ac34f1092469685881577e97fb8551937ce0b9d68"
+      },
+      {
+        "command": [
+          "python3",
+          "proof_first_composition_source_cases.py"
+        ],
+        "cwd": "/tmp/mirrorea-w3-20260912-1_kv7wfk/mir-w3-source-eheyvx4u",
+        "exit": 0,
+        "log": "proof_first_composition_source_cases.py.log",
+        "log_sha256": "19691298010b05d6e4853e8d80a0484a744b2db1c0e212ca6d07ddac10049c98"
+      },
+      {
+        "command": [
+          "python3",
+          "proof_first_composition_frontend_cases.py"
+        ],
+        "cwd": "/tmp/mirrorea-w3-20260912-1_kv7wfk/mir-w3-source-eheyvx4u",
+        "exit": 0,
+        "log": "proof_first_composition_frontend_cases.py.log",
+        "log_sha256": "2a8ced9d7352de87ae4bb73e02a425c2147895916df30b2d23691b7f68e73698"
+      },
+      {
+        "command": [
+          "lean",
+          "--trust=0",
+          "-o",
+          "ActualComposition.olean",
+          "ActualComposition.lean"
+        ],
+        "cwd": "/tmp/mirrorea-w3-20260912-1_kv7wfk/mir-w3-source-eheyvx4u",
+        "exit": 0,
+        "log": "ActualComposition-compiled.log",
+        "log_sha256": "9c2a8d83a1b3e02d82c95d4c4a2d16577f1a1af9d923739f2d0492cfb3cd2b56"
+      },
+      {
+        "command": [
+          "lean",
+          "--trust=0",
+          "CompleteAudit.lean"
+        ],
+        "cwd": "/tmp/mirrorea-w3-20260912-1_kv7wfk/mir-w3-source-eheyvx4u",
+        "exit": 0,
+        "log": "CompleteAudit.log",
+        "log_sha256": "7e5dbc1e15fed49e2515b0d9fcbfab47ef7a154a21e48100fe25ad022315e747"
+      }
+    ],
+    "status": "passed",
+    "parser_sha256": "7712ec1bce758c5c8d3da53dce037aff2f2b009da044fcebf11db796bbb6c519",
+    "audit_modules": 39,
+    "owned_declarations": 5339,
+    "finished": "2026-09-13T14:55:32.283841+00:00"
+  },
+  "inputs": {
+    "MirroreaProofFirstCatalogCounterexamples.lean": "cce8638b28bcd7a7431388ae791852feea24a3c87500b39376e53b1cf3619c20",
+    "MirroreaProofFirstCatalogHistory.lean": "ea5afec6960aba68777a628068fb0b992a08ace46fa2f6d83c86bea43667d069",
+    "MirroreaProofFirstCompositionCore.lean": "e5b20c98450d2edd5361e25d0f64b665e645537286d5a70bdb07f120367bb467",
+    "MirroreaProofFirstCompositionMachine.lean": "9ea738b8f7986af14294b181f574810f54db44c801cc2d90b0221b4326301e1e",
+    "MirroreaProofFirstContractExport.lean": "ec8ca4f801e30a00670fc51efe1ea448750cbc57dffdca29d9aa8ceb2ccb8d98",
+    "MirroreaProofFirstCurrentUse.lean": "ab604c92b226182bdf84a38caaa044d6b949730891d40a02a72ad441c59f4239",
+    "MirroreaProofFirstDynamicGraphs.lean": "fe38909c5f98a37f0ebb45879044c662552330c96694a09a0549da6a8187e0ce",
+    "MirroreaProofFirstDynamicIdentity.lean": "f215bb61570fb35f7ee5ab8d1e518f5a27d5222316af72ad2734638b2bba656a",
+    "MirroreaProofFirstDynamicSupport.lean": "ae88eb5b48bfe2667c3f1b68d18d0ef52685e929e6e008ca74cf29ded213912a",
+    "MirroreaProofFirstFallbackStatic.lean": "4d62d99e7047efedc18d0aee028bb247ecbe1d365524a57782539058c3f9dffb",
+    "MirroreaProofFirstFallbackStaticControls.lean": "36293d11d7f239e711cb33682999e734ed25a649c4a8f56333ea100bf14285c4",
+    "MirroreaProofFirstGraphValidation.lean": "86d7148bc1dc7790f3925e94ddf41a0279b1a214e36bb96ff428c99f7ca0996a",
+    "MirroreaProofFirstInstancePrograms.lean": "853d3d2f2773394ae5ee1f8b319fee4b0370ce6fd2ea6c3b37742ddfa98f0e98",
+    "MirroreaProofFirstInstanceState.lean": "e5eadb4d88c8c68634523f4fca801dcc83c278e8739adef37487b21de39a23d6",
+    "MirroreaProofFirstInvocationBoundary.lean": "6533e15f61d9bb2aa1259dcad0f0ce1564b308cbf4df39ef0a85c0ed9247f0ed",
+    "MirroreaProofFirstInvocationContract.lean": "4de3790ec80c12b7ba507edc00ad5360e6fae322603f7b8fbd198876e047d82a",
+    "MirroreaProofFirstLocalContract.lean": "fee77a064074b3687d05a5a890b2ddd031a429dc2290829eaf27c516269a8980",
+    "MirroreaProofFirstManagementEntry.lean": "094771815b4e52b3c6f91e5f8eed6acd930d078c299d486b43689a2de062f1e9",
+    "MirroreaProofFirstResourceBoundary.lean": "2ac91ef290548c13d33ca8122b7a14655a15e922c0be1c5b1ab9648882bb95f9",
+    "MirroreaProofFirstSavedInvocation.lean": "65a9e88a728019d58e613b9841faa6d501d118cc80b0105feed0f74f3b032b40",
+    "MirroreaProofFirstSourceAllocation.lean": "50a584703795d278043e46672434887351baaef5ae37627012d9a8b1729974d5",
+    "MirroreaProofFirstSourceAuthoring.lean": "9fe76ea886f177d2ea7124b95a3f8b9761153900ee3556d3628b9a5393380980",
+    "MirroreaProofFirstSourceCompletion.lean": "e4267e201eba03df55c4389d0a5ac3e9e250aeef62164850e1af6175923b92db",
+    "MirroreaProofFirstSourceExecution.lean": "ccb4595c79239832599938e4545637cd2df50557fee498992d45129ac1461057",
+    "MirroreaProofFirstSourceFrame.lean": "0913d0d99a9346be23744a15fd091a2f07246500c2a7ea78b51fcd1de8e048af",
+    "MirroreaProofFirstSourceFunction.lean": "0bb8677807ff1a7119b3844cfb1cb0af896b00c543c937ab9e4416ddb948c1a8",
+    "MirroreaProofFirstSourceHistory.lean": "474da37b05782c7f752aeedb0c63cac9fe41ba7c08062cf42cc60a9929a2a0c4",
+    "MirroreaProofFirstSourceHistoryControls.lean": "49aaba606faabce8eb6a6e4732e71d2dae57239ab89431a1064fafecab5f2678",
+    "MirroreaProofFirstSourceLocators.lean": "91119319b81769799647d0dced8b664d2f90ee0056cf3902341333ab59493258",
+    "MirroreaProofFirstSourcePreservation.lean": "8c72278489b2a33ef71c6d2bc3fe75c6479c460300ef6ae2b87b578537db803e",
+    "MirroreaProofFirstSourcePureLowering.lean": "da95ee4dc7e3a1f50b0d7505146ed7511323fa6dbb5511b71755b2e52200372e",
+    "MirroreaProofFirstSourceReadNames.lean": "951d2cde8e01c45698523150f9f590a48022bc67d8811f680bb8d2fa055d73ca",
+    "MirroreaProofFirstSourceTypes.lean": "ed73209f64663c07443b25b3de0cd8d498c01b5fee0e3dae14acca5237eed38d",
+    "MirroreaProofFirstSourceTyping.lean": "f40992f5f5f5425bb9ee01c480b6e270d76c72f962e137cae173d54d19669ec8",
+    "MirroreaProofFirstSourceWriteHistory.lean": "606b6ccb4884f940965318386f2c6bcfda8d33a04483fdff3d5e9253afaae849",
+    "MirroreaProofFirstSupport.lean": "7f401632873cb3b87e0fa62d1b172af88b996b34a6d3fc62a7e61d103b41a9c3",
+    "MirroreaProofFirstTrackedValidation.lean": "650339d6b363ee873c97e0f1e776aed0eb327981a78b5572dc0492589b20d9ff",
+    "MirroreaProofFirstWorldProjection.lean": "ddaa69751cbab498274f7a32c14050e1cd68f04930c133b46762bfc50036f6ac",
+    "controls/duplicate-failure.mir": "6260b646be542accf350cc8ae62debd5d9647bc4e9d5779a4ec734c62a7ecc69",
+    "controls/duplicate-output.mir": "353b910536f12232b4ecad24d9fef42921a10cabe653b35d54d4461fc85a64b9",
+    "controls/duplicate-requires.mir": "b606e8ce1bf6a94187a09f99647cd128836e8590ca5a8126f01247b56c989363",
+    "controls/namespace-collision.mir": "e3689c79b04eb4781eff7719393020b2d4aa05db0f1e610a38e31be0253aeb0c",
+    "controls/unicode.mir": "d31f60daa95527230cd64c88ec096f2255e332db7b4428df98ed403dff091518",
+    "controls/unused-unbound-function.mir": "4aac474745ada1d8c7826e4d9bb116991f6477527ba57a186ebca998b565bf86",
+    "main.mir": "c987565d5f9a803f6bfb643d2d9ebd7d939ba9865dfc71243e4353734a7a2cbd",
+    "proof_first_composition_frontend_cases.py": "77e7a9687fabbc9e28bd6f79a8c47efa0133a859b8bdd7ead848408ce4956f04",
+    "proof_first_composition_source.py": "6172d49546f9fef65161a62b9db58a7432ca31309412d4e08a90dbba7e451ee5",
+    "proof_first_composition_source_cases.py": "f3f0ce570ccb80cf498963e7acee0370f62da62c0edfb335e1eda7c0afe65ee9",
+    "repo:Cargo.lock": "192e45b01e613e753c3534b2833c6976a3b79a901060bea64a4e2ec7da339e5a",
+    "repo:crates/mir-ast/Cargo.toml": "d182b3bbce13a1794d38f781ba8e77412eead97faf88266b853f5dde5b1201bd",
+    "repo:crates/mir-ast/src/textual_alpha.rs": "5639201e007bb9dcb13576fe7f52244b23b7e9be8dd2fca866faa1659a047d9e",
+    "repo:crates/mir-ast/examples/textual_mir_alpha_parse.rs": "94fe7502c07ea159dd9bc7c14e830c3b5e67e745c7b88b72dbff24d48dc843d1"
+  },
+  "prior_source_checkpoint": {
+    "workdir": "/tmp/mirrorea-w3-20260912-1_kv7wfk/mir-w3-source-vcs2jbf2",
+    "result_sha256": "8405b756c4b4008ee5ee71f5b2d69263173fd1c654d58ee1a01edf78e96e77ad",
+    "manifest_sha256": "c0fa40ff6b0331cc892d03fc599125ae1b7b40d40c4defadfe0b3bd60db109f4"
+  },
+  "diagnostic_mutation": {
+    "exit": 1,
+    "sha256": "d099da1d1aca5a5a7ab6564be1cf5c330d36feae355dbc033df1cb5d62a02a5c",
+    "target": "combine_malformed_right",
+    "range": [
+      93,
+      99
+    ],
+    "error_lines": [
+      96
+    ],
+    "rejected_at_target": true,
+    "classification": "proof-script regression discriminator; failed mutant is not a successful proof"
+  },
+  "parser_final_tests": {
+    "command": [
+      "cargo",
+      "test",
+      "--locked",
+      "--offline",
+      "-p",
+      "mir-ast",
+      "--test",
+      "textual_mir_alpha",
+      "-j",
+      "1"
+    ],
+    "exit": 0,
+    "test_sha256": "cf6e93b31e701846bd60893bc170536a4a5efe1ef867c39a71a3f309cbb88660"
+  }
+}

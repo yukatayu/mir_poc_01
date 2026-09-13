@@ -1,6 +1,6 @@
 # Project status
 
-最終更新: 2026-09-12 20:58 JST
+最終更新: 2026-09-14 00:10 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -52,7 +52,7 @@ I3-4/I3-5/I3-6/NEXT-0 remain dependency-gated inactive; I3-4 requires explicit o
 W2の有限な研究成果は検証・review・Git統合済みで保持しています。
 2026-09-12のowner依頼により、単一goalをW3動的構成（PL1 S0/S1/S3、theory/proof/reference）へ設定しました。
 名前付きカタログ・領域拡張・個別DAG・既存current-use・局所影響・候補選択の11依存をLeanで検査し、19変異の拒否を確認しました。
-entry／証明コードOracleを回収し、負の検査を修正。対象1716宣言の公理監査と追加反例が通過。通常sourceが作る同じ対象への全lifecycle・fallback・pending/result接続は未達で、W3を継続中です。
+W3 source/lifecycle候補を既存sample／Lean／scriptsへ接続し、実parserからのfresh検査が通過しました。値・producer履歴・自動ID・locatorと保持契約の一般証明を含みます。動的fallback／再取得、最終material reviewは継続中です。
 W3完了後に停止します。W4以降・α統合・Plan250/I3-4を自動resumeせず、正式THM/OBL受理も更新していません。
 対応は `plan/proof-first-foundation-correspondence.md`、現在の証跡はreport2613、W1/W2の履歴はreport2611/2612です。
 既読範囲は `docs/proof-first/READ_LEDGER.json` に記録し、未読と部分読了を区別しています。
