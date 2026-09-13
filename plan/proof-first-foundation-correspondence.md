@@ -760,3 +760,85 @@ reproduced late malformed-edge masking case will be repaired before that consume
 No Plan250, Canon, THM/OBL or policy acceptance changes. Five substantive Oracle
 reviews recovered; the sixth yielded only a Preview and failed same-session harvest,
 so a single recovery submission uses the same frozen technical cut.
+
+## W3 maintained reference/session integration — 2026-09-13T20:26:12.004149+00:00
+
+Forward LAB facts, no new roadmap or Canon decision. The same actual Rust parser
+and named checked source now construct maintained references, ordinary aliases/
+assignment/calls, semantic fallback, fresh-epoch reacquire and release, alongside
+ABC/AC creation, reparent, compatible exchange and retirement. Complete actual
+source can be followed by a separately parsed addition; failed source can be
+cancelled under current independent authority and replaced after checking actual
+current values. Missing failed outputs never become fabricated values.
+
+Generic Reference proofs tie selected/holding origins to actual owner occurrences,
+source origins to exact ordered event kinds/counts, and successful dependencies to
+actual earlier name/value/ordinal writes. Every selected engine/source/session
+entry preserves its specified invariant. Program.place and complete prior source
+partitions/archives survive admitted continuations; no populated-state relaunch.
+Checked authority successor retains tombstones/issued records and strictly newer
+generation; all future session paths reject old invocation results after a new
+head. The broader SourceTrace relation still admits unsafe helper heads and is not
+mistaken for Session conformance. Authentic current publication/namespace ownership
+remain explicit TCB.
+
+Provisional H continuing-hold and C current-cancellation rights stay separate from
+one-shot owner mutation, selected access and invocation. H2 acquisition entitlement
+and C2 originating abort entitlement remain policy alternatives, not equivalent or
+Canon-adopted. Every new authority generation conservatively invalidates old H/
+invocation guards. Cancellation can expire unrelated logical leases; reacquire
+changes lineage without renewing deadlines. Retained floor constraints last until
+authorized release. No unconditional repair, external rollback or physical race
+claim. Q18 reservation/current reauthorization remain distinct.
+
+New files are mirrored under existing sample/Lean/scripts roots. The fresh runner
+scripts/proof_first_reference_source_check.py builds the real locked/offline parser,
+freezes all proof/adaptor inputs and audits the actual original/repair/addition
+consumers, including private/unused declarations. Integrated75module/9030decl,
+32source cases and5designated-proof weakening checks passed; final exact full-case
+identity/filter classification refinement is being rechecked. Ten main-operated
+Oracle reviews recovered; latest substantive review found only default consumer
+and reproducibility gates, now being addressed. Final narrow review, regression,
+119row current dispositions and own Git remain before W3 task closure.
+
+No whole-repo reading completion, W4/5/6/7 activation, alpha/production/private-wire
+adoption or THM/OBL/phase promotion. W3 remains the sole task-local goal and stops
+on its scoped closure; Plan250/I3-4 retains owner pause.
+
+## W3 finite candidate close — 2026-09-14 06:12 JST
+
+Forward LAB record; previous dated checkpoints remain historical facts. W3 is
+closed within its finite theory/proof/reference profile. Source/evidence commit
+81f82a0b47b828ba999f9d32348adbd47b6b3441 is normally pushed with exact remote parity. No
+new semantic package is active; W4+ and Plan250/I3-4 are not resumed.
+
+The actual source-to-checked-machine path supports ABC base/AC addition, distinct
+definitions/instances/graphs/support, reparent/exchange/retirement, owned reference
+fallback/reacquire/release, current C cancellation and separately parsed same-state
+continuation/repair. Failed/expired repair produces no result and retains the old
+source archive. Generic all-entry preservation and checker/elaborator results are
+actual kernel evidence; fixed examples and mutations remain separate controls.
+
+Final runner:76modules/9055owned declarations,32source cases,13integrity/consumer
+negatives,5proof-weakening controls. Original source40module and dynamic11/19
+regressions pass. Manifestbd7af23035a560f1f41f8ec30ef7c5af3589bb8102b2c8e708670613ac40b189,
+Lean4.29.1 trust0, only propext/Classical.choice/Quot.sound; no Mir axioms or holes.
+Source/case/harness hashes and failures are in W3_REFERENCE_CHECK and Report2613.
+
+Twelve advisory reviews are recovered. Final review finds no further material
+defect after actual Session consumer/full-suite/verified-byte handoff corrections.
+Required-name checks are not an independent expected-type/owner verifier; the
+actual generated declarations supply current witnesses. Hash comparisons are at
+recorded points, not an atomic filesystem snapshot. Exclusive workdir ownership
+covers initial capture, compiler artifacts and after-last-check publication/use.
+Thirteen helper-copy negatives are not full-parent fault injection. These are
+explicit execution TCB limits, not covert broader guarantees.
+
+All119 requirement identities/U-D/approval flags and30Q/18PT/24SC/alpha1–8 are
+retained with scoped dispositions; none is automatically accepted as a whole
+system requirement. H/H2, C/C2 and Q18 remain different policies. Authenticated
+current heads, initial namespace isolation, complete retained history and physical
+atomicity/ordering remain implementation obligations. Actual network, durable
+restart, secret observation, general source/plugin profiles and alpha integration
+are not delivered by W3. The wider read corpus remains incomplete (next historical
+example293); no full reading or whole-roadmap adoption is inferred.

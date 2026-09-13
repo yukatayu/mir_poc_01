@@ -24,10 +24,33 @@ assignment, leave/rejoin, retirement, overflow, duplicate-binding and renamed-co
 cases are generated in the external work directory by the case runner. The
 assertions inspect the actual machine reached from each parsed source.
 
-The selected private source profile has one transition, typed lifecycle provider
+`reference.mir` adds an owner-held reference with an explicitly declared fallback
+chain, immutable alias, ordinary invocation, explicit reacquisition and release.
+Its main execution uses the checked session boundary. Run this extension with:
+
+```bash
+python3 scripts/proof_first_reference_source_check.py --work-root /tmp
+```
+
+The command freshly builds the actual parser and complete proof import cone,
+runs the main source and adverse cases, audits all owned declarations, and checks
+designated-theorem weakening controls. In the printed external directory,
+`CURRENT_RUN` locates actual value/write/event logs; `CURRENT_CASES` locates each
+real parsed source variant. Three cases supply a separately parsed repair/addition
+block to the same running session and retain its previous source archive. These
+are local source execution evidence; no expected JSON is used as runtime output.
+Generated-consumer receipt hashes are compared before the same verified bytes
+are frozen, and originals/frozen files/audit source/manifest are rechecked at the
+end. Integrity negatives use copies of actual generated consumers. Compare the
+printed work directory's `MANIFEST.json` SHA256 with the `frozen_manifest` entry in
+`docs/proof-first/W3_REFERENCE_CHECK.json` for exact source-cut reproduction.
+A generic passing result verifies the captured candidate. Honest receipts and
+exclusive work-directory ownership remain execution assumptions.
+
+The selected private source profile has one transition per admitted block, typed lifecycle provider
 declarations, unary Int64 arithmetic/strict immutable function lets, explicit
-finite input contracts and a represented locus list. Dynamic source bindings and
-fallback/reacquire are still being connected. Extra imports, arbitrary higher-order
+finite input contracts and a represented locus list. Dynamic source bindings,
+fallback and reacquire are implemented in the finite reference. Extra imports, arbitrary higher-order
 source, general contract plugins and write-through references are not implemented
 by this adapter. W2's separate proofs do not imply these implementation features.
 
@@ -38,7 +61,17 @@ current-reauthorization profile, separate from Q-18 prepared reservation.
 
 This is nonproduction in-memory reference execution and mechanization evidence.
 It does not run physical nodes or transport, persist/recover a realm, implement
-confidential observation, or close W3/alpha. It is outside the legacy clean-runner
+confidential observation, or complete alpha. W3 is closed as this finite reference candidate. It is outside the legacy clean-runner
 and generated Lean manifests. General results and TCB are documented in
 `samples/lean/foundations/MirroreaProofFirstDynamicComposition.md`; Report2613
-retains the review findings, failed development runs and remaining gates.
+retains the review findings, failed development runs, final checks and scope limits.
+The final source/evidence cut81f82a0b is committed and normally pushed.
+
+The provisional authority profile retains issued records/revocation tombstones
+and strictly increases head generation. An unrelated head change also invalidates
+old held references and pending invocation evidence. Cancellation needs its own
+current claim; it records termination without creating a result or promising
+remote nonexecution. Reacquisition does not renew absolute logical lease deadlines.
+Cancellation may expire another request's lease even though its record survives.
+These limits are exercised by the adverse cases, including a failed source repair.
+H/C policy alternatives and Q-18 reservation remain distinct and unadopted in Canon.

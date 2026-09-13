@@ -23668,5 +23668,117 @@
     "range": "1-62",
     "role": "W3 full authored diagnostic delta over previously read source; not mandatory-corpus completion",
     "status": "authored"
+  },
+  {
+    "path": "specs/examples/283-current-l2-minimal-shared-output-contract-ready-public-checker-boundary-comparison.md",
+    "sha256": "260cb8a82e82486b1c579ebfe80d1b2a083f380379f634c8e49d711963f03607",
+    "range": "1-169",
+    "role": "LAB historical example full read fa58b2; no normative adoption",
+    "status": "full"
+  },
+  {
+    "path": "specs/examples/284-current-l2-public-checker-boundary-ready-minimal-public-checker-boundary-threshold.md",
+    "sha256": "eabf8a930c6e7c2f888906eabd8ce49f8d6794aaa5df7298555d0a0c77616a1d",
+    "range": "1-140",
+    "role": "LAB historical example full read 4c4978; no normative adoption",
+    "status": "full"
+  },
+  {
+    "path": "specs/examples/285-current-l2-minimal-public-checker-boundary-ready-verifier-handoff-surface-comparison.md",
+    "sha256": "01bf19f38ed10f22824bf94af2c7d9e7b52cd6a08476d9527bd2f3529398d189",
+    "range": "1-188",
+    "role": "LAB historical example full read f59e3a; no normative adoption",
+    "status": "full"
+  },
+  {
+    "path": "specs/examples/286-current-l2-verifier-handoff-surface-ready-minimal-verifier-handoff-surface-threshold.md",
+    "sha256": "4c5a7272a88bdfcec64ae0f2e888eff88d339a6858240b380b0d61988d117eca",
+    "range": "1-143",
+    "role": "LAB historical example full read 1b9156 (previous context full read retained in RESUME); no normative adoption",
+    "status": "full"
+  },
+  {
+    "path": "specs/examples/287-current-l2-minimal-verifier-handoff-surface-ready-minimal-parser-subset-freeze-comparison.md",
+    "sha256": "31238b1e9796d6384bf22190f9bd971ef7441ffb1004acf642bb7ed7cc21cf98",
+    "range": "1-184",
+    "role": "LAB historical example full read e30518; no normative adoption",
+    "status": "full"
+  },
+  {
+    "path": "specs/examples/288-current-l2-minimal-parser-subset-freeze-ready-minimal-parser-subset-freeze-threshold.md",
+    "sha256": "48be7de0237147a14bda1e8a8dee3a6698908e8b600b8d30317eacac6d37abda",
+    "range": "1-167",
+    "role": "LAB historical example full read c45423; no normative adoption",
+    "status": "full"
+  },
+  {
+    "path": "specs/examples/289-current-l2-minimal-parser-subset-freeze-ready-parser-to-checker-reconnect-freeze-comparison.md",
+    "sha256": "6bc1e4b9cb266056e066daa5f46f8db412b90392ad85fd1da37af9861ffd72ed",
+    "range": "1-157",
+    "role": "LAB historical example full read 5d423b; no normative adoption",
+    "status": "full"
+  },
+  {
+    "path": "specs/examples/290-current-l2-parser-to-checker-reconnect-freeze-ready-minimal-parser-to-checker-reconnect-freeze-threshold.md",
+    "sha256": "0eec7d7f636ef1d2922e4eebe9b58692e1db059e3a7973ba84ff26254d116160",
+    "range": "1-159",
+    "role": "LAB historical example full read 0b714a; no normative adoption",
+    "status": "full"
+  },
+  {
+    "path": "specs/examples/291-current-l2-parser-to-checker-reconnect-freeze-ready-phase1-semantics-closeout-comparison.md",
+    "sha256": "73aecd09f3f6e79c2b1ad1dce125f4cdf50d07fdb91293b193fbd29136b712f5",
+    "range": "1-197",
+    "role": "LAB historical example full read fb555a; no normative adoption",
+    "status": "full"
+  },
+  {
+    "path": "samples/lean/foundations/MirroreaProofFirstReferenceAuthority.lean",
+    "sha256": "24eba9de0f7ace2ffcb2ae2a56a8ba75d1e9bb74e5cae0cda4b8ba5e54a94f39",
+    "range": "1-336",
+    "role": "full source read 7519d5; not external review or normative adoption",
+    "status": "full"
+  },
+  {
+    "path": "samples/lean/foundations/MirroreaProofFirstReferenceSession.lean",
+    "sha256": "445de39b10272781d61a1f8e51ab38893830e68e282b926b810d849c35825c64",
+    "range": "1-476",
+    "role": "full source read 78c28b; not external review or normative adoption",
+    "status": "full"
+  },
+  {
+    "path": "samples/lean/foundations/MirroreaProofFirstReferenceContinuation.lean",
+    "sha256": "df1fd195c8e4eacc65c0fd2b082d559e0c93041a3b510fa7245c7d03179ba347",
+    "range": "1-235",
+    "role": "full source read 0ee070; not external review or normative adoption",
+    "status": "full"
+  },
+  {
+    "path": "samples/lean/foundations/MirroreaProofFirstReferenceCancellationControls.lean",
+    "sha256": "5408b4601cb084df02faf0aedb68b548928d4bac9b8ca846bbfd7b32fdf9dea3",
+    "range": "1-93",
+    "role": "full source read 0ea466 + inspected patch50aacb; not external review or normative adoption",
+    "status": "full"
+  },
+  {
+    "path": "scripts/tests/proof_first_reference_integrity_cases.py",
+    "sha256": "b0d33ddfb90238a3f4afa290d97dae0632561f818281d30cc9dd5cf6566ab175",
+    "range": "1-122",
+    "role": "full current source read 996101 and local focused review; not independent or normative acceptance",
+    "status": "full"
+  },
+  {
+    "path": "scripts/proof_first_reference_source_check.py",
+    "sha256": "7bb416354699d61ec3d40bdf6ebc053f41b4162250a1f5128ddc340eafdfad18",
+    "range": "1-268",
+    "role": "full current source read e5d0cc and local focused review; not independent or normative acceptance",
+    "status": "full"
+  },
+  {
+    "path": "specs/examples/292-current-l2-phase1-semantics-closeout-ready-minimal-phase1-semantics-closeout-threshold.md",
+    "sha256": "425fcac30053ff257df32577197ce8cc4aad2c41f2eb68ceede7622460fc6d8d",
+    "range": "1-179",
+    "role": "historical LAB full read ed596b; old closeout naming/bridge not current authority or W3 evidence",
+    "status": "full"
   }
 ]

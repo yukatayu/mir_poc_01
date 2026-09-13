@@ -1,6 +1,6 @@
 # Project status
 
-最終更新: 2026-09-14 00:10 JST
+最終更新: 2026-09-14 06:12 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -52,8 +52,8 @@ I3-4/I3-5/I3-6/NEXT-0 remain dependency-gated inactive; I3-4 requires explicit o
 W2の有限な研究成果は検証・review・Git統合済みで保持しています。
 2026-09-12のowner依頼により、単一goalをW3動的構成（PL1 S0/S1/S3、theory/proof/reference）へ設定しました。
 名前付きカタログ・領域拡張・個別DAG・既存current-use・局所影響・候補選択の11依存をLeanで検査し、19変異の拒否を確認しました。
-W3 source/lifecycle候補を既存sample／Lean／scriptsへ接続し、実parserからのfresh検査が通過しました。値・producer履歴・自動ID・locatorと保持契約の一般証明を含みます。動的fallback／再取得、最終material reviewは継続中です。
-W3完了後に停止します。W4以降・α統合・Plan250/I3-4を自動resumeせず、正式THM/OBL受理も更新していません。
+W3は有限の研究・参照実装候補として検証・review・source統合を完了しました。通常sourceからの構築・変更・保持参照・fallback／再取得・取消し・同じSessionへの追加／修復を接続しています。Lean4.29.1で76moduleの全所有宣言を監査し、通常source32件・検証手順の反例13件・証明弱化5件を検査しました。12回のOracleレビューを回収し、最終指摘の保証範囲も記録済みです。再現commandは `python3 scripts/proof_first_reference_source_check.py --work-root /tmp`。source/evidence cutは `81f82a0b` で通常push済みです。
+このW3で作業を止めます。実network・永続復旧・秘密観測・α統合は未達で、W4以降・Plan250/I3-4を自動resumeせず、正式THM/OBL受理も更新していません。
 対応は `plan/proof-first-foundation-correspondence.md`、現在の証跡はreport2613、W1/W2の履歴はreport2611/2612です。
 既読範囲は `docs/proof-first/READ_LEDGER.json` に記録し、未読と部分読了を区別しています。
 W1のpassive/accepted producer・一般label・失敗を伴う単一代入は限定review済み。後続source cutはChromeエラー後のreview未完了。119行dispositionは元のU/D・承認区分を保持して作成済みですが、要件を一括受理・実証したものではありません。

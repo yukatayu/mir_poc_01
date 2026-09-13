@@ -1,7 +1,7 @@
 {
   "schema": "proof-first-requirement-dispositions-v1",
-  "timestamp": "2026-09-10T10:28:21.830732+00:00",
-  "base_head": "46bc662aedb3596ba344d2289c4b83e7f80a1c3c",
+  "timestamp": "2026-09-13T20:21:35.168685+00:00",
+  "base_head": "878966768a8323bef5026dec90c9251cc6e3bb98",
   "authority": "LAB task evidence only. U intent is retained; D and detailed acceptance criteria are not blanket approved. No alpha profile adopted. No row is a system-level acceptance.",
   "source_path": "sub-agent-pro/mirrorea-proof-first-handoff-v1/materials/mirrorea_system_map_v1/requirements.json",
   "source_sha256": "b16c4d3086552323b808925269dbcb73c2007ef1eea6fb55ba4008dcfd0e501c",
@@ -166,6 +166,22 @@
       "samples/lean/foundations/MirroreaProofFirstResourceComputations.lean",
       "samples/lean/foundations/MirroreaProofFirstResourceComputationScopeControls.lean",
       "docs/proof-first/W2_COMPUTATION_CHECK.json#control_context_repair"
+    ],
+    "w3_source": [
+      "samples/clean-near-end/mirrorea-proof-first-composition/reference.mir",
+      "scripts/proof_first_reference_source_check.py",
+      "docs/reports/2613-mirrorea-proof-first-w3-dynamic-composition.md"
+    ],
+    "w3_dynamic": [
+      "samples/lean/foundations/MirroreaProofFirstDynamicComposition.md",
+      "docs/proof-first/W3_DYNAMIC_CHECK.json"
+    ],
+    "w3_reference": [
+      "samples/lean/foundations/MirroreaProofFirstReferenceSession.lean",
+      "samples/lean/foundations/MirroreaProofFirstReferenceExecution.lean",
+      "samples/lean/foundations/MirroreaProofFirstReferenceAuthority.lean",
+      "samples/lean/foundations/MirroreaProofFirstReferenceSourceReads.lean",
+      "docs/proof-first/W3_REFERENCE_CHECK.json"
     ]
   },
   "requirements": [
@@ -196,7 +212,18 @@
       "evidence_groups": [
         "source"
       ],
-      "remaining_boundary": "Eight finite source/Core executions and existing fixed-profile QUIC are related evidence; general source-to-all-artifact derivation remains open."
+      "remaining_boundary": "Actual ordinary source builds/mutates the same local checked configuration. Source-to-all distributed artifacts remains W4 and later.",
+      "previous_w2_remaining_boundary": "Eight finite source/Core executions and existing fixed-profile QUIC are related evidence; general source-to-all-artifact derivation remains open.",
+      "w3_disposition": {
+        "classification": "related-scoped-evidence",
+        "system_requirement_accepted": false,
+        "evidence_groups": [
+          "w3_source",
+          "w3_dynamic",
+          "w3_reference"
+        ],
+        "boundary": "Actual ordinary source builds/mutates the same local checked configuration. Source-to-all distributed artifacts remains W4 and later."
+      }
     },
     {
       "id": "AX-02",
@@ -226,7 +253,18 @@
       "evidence_groups": [
         "source"
       ],
-      "remaining_boundary": "No domain primitive added. Existing probe selects init_avatar_hp; generic independent-domain construction remains open."
+      "remaining_boundary": "Mir arithmetic and typed lifecycle providers use generic definitions/instances; no World/Avatar Core primitive added. Full independent domain library corpus remains open.",
+      "previous_w2_remaining_boundary": "No domain primitive added. Existing probe selects init_avatar_hp; generic independent-domain construction remains open.",
+      "w3_disposition": {
+        "classification": "related-scoped-evidence",
+        "system_requirement_accepted": false,
+        "evidence_groups": [
+          "w3_source",
+          "w3_dynamic",
+          "w3_reference"
+        ],
+        "boundary": "Mir arithmetic and typed lifecycle providers use generic definitions/instances; no World/Avatar Core primitive added. Full independent domain library corpus remains open."
+      }
     },
     {
       "id": "AX-03",
@@ -255,7 +293,18 @@
       "evidence_groups": [
         "resource"
       ],
-      "remaining_boundary": "Arbitrary finite allocation schedules with explicit budgets are proved; dynamic source construction and safe long-term reclamation remain open."
+      "remaining_boundary": "Arbitrary finite catalog growth and retained old support/identity proofs; ordinary ABC/AC source demonstrated. Long-term reclamation/physical capacity remain open.",
+      "previous_w2_remaining_boundary": "Arbitrary finite allocation schedules with explicit budgets are proved; dynamic source construction and safe long-term reclamation remain open.",
+      "w3_disposition": {
+        "classification": "related-scoped-evidence",
+        "system_requirement_accepted": false,
+        "evidence_groups": [
+          "w3_source",
+          "w3_dynamic",
+          "w3_reference"
+        ],
+        "boundary": "Arbitrary finite catalog growth and retained old support/identity proofs; ordinary ABC/AC source demonstrated. Long-term reclamation/physical capacity remain open."
+      }
     },
     {
       "id": "AX-04",
@@ -284,7 +333,18 @@
       "evidence_groups": [
         "records"
       ],
-      "remaining_boundary": "Finite model and internal candidate bounds are recorded separately; no final profile adopted."
+      "remaining_boundary": "Finite nonproduction H/C/head/source profile and alternatives remain explicit; no final profile adopted.",
+      "previous_w2_remaining_boundary": "Finite model and internal candidate bounds are recorded separately; no final profile adopted.",
+      "w3_disposition": {
+        "classification": "related-scoped-evidence",
+        "system_requirement_accepted": false,
+        "evidence_groups": [
+          "w3_source",
+          "w3_dynamic",
+          "w3_reference"
+        ],
+        "boundary": "Finite nonproduction H/C/head/source profile and alternatives remain explicit; no final profile adopted."
+      }
     },
     {
       "id": "AX-05",
@@ -314,7 +374,18 @@
       "evidence_groups": [
         "records"
       ],
-      "remaining_boundary": "LAB proof/reference evidence, existing accepted layers and alpha/product acceptance remain distinct."
+      "remaining_boundary": "W3 candidate, Canon acceptance, alpha and public product remain distinct.",
+      "previous_w2_remaining_boundary": "LAB proof/reference evidence, existing accepted layers and alpha/product acceptance remain distinct.",
+      "w3_disposition": {
+        "classification": "related-scoped-evidence",
+        "system_requirement_accepted": false,
+        "evidence_groups": [
+          "w3_source",
+          "w3_dynamic",
+          "w3_reference"
+        ],
+        "boundary": "W3 candidate, Canon acceptance, alpha and public product remain distinct."
+      }
     },
     {
       "id": "AX-06",
@@ -344,7 +415,18 @@
       "evidence_groups": [
         "proofs"
       ],
-      "remaining_boundary": "Positive controls and RejectAll mutation distinguish safety from usable success; required full ordinary-source corpus remains open."
+      "remaining_boundary": "Positive ordinary-source and failed repair/denial controls plus proof-script weakening checks. Wider user-facing corpus/usability remains open.",
+      "previous_w2_remaining_boundary": "Positive controls and RejectAll mutation distinguish safety from usable success; required full ordinary-source corpus remains open.",
+      "w3_disposition": {
+        "classification": "related-scoped-evidence",
+        "system_requirement_accepted": false,
+        "evidence_groups": [
+          "w3_source",
+          "w3_dynamic",
+          "w3_reference"
+        ],
+        "boundary": "Positive ordinary-source and failed repair/denial controls plus proof-script weakening checks. Wider user-facing corpus/usability remains open."
+      }
     },
     {
       "id": "SL-01",
@@ -377,7 +459,18 @@
       "evidence_groups": [
         "pure"
       ],
-      "remaining_boundary": "Typed pure higher-order functions/iteration have normalization evidence. Ordinary-source coverage of this fragment and needed data structures remains open."
+      "remaining_boundary": "Actual unary Int64 functions, strict immutable lets, ordinary mutable source assignment and alias calls. General data structures/higher-order runtime composition remain outside W3 profile.",
+      "previous_w2_remaining_boundary": "Typed pure higher-order functions/iteration have normalization evidence. Ordinary-source coverage of this fragment and needed data structures remains open.",
+      "w3_disposition": {
+        "classification": "related-scoped-evidence",
+        "system_requirement_accepted": false,
+        "evidence_groups": [
+          "w3_source",
+          "w3_dynamic",
+          "w3_reference"
+        ],
+        "boundary": "Actual unary Int64 functions, strict immutable lets, ordinary mutable source assignment and alias calls. General data structures/higher-order runtime composition remain outside W3 profile."
+      }
     },
     {
       "id": "SL-02",
@@ -407,7 +500,18 @@
       "evidence_groups": [
         "owner"
       ],
-      "remaining_boundary": "Owner-live read versus explicit capture is modeled; no implicit snapshot or multi-owner transaction selected. Q-01 remains open."
+      "remaining_boundary": "Transition-local read provenance from actual earlier writes is proved. No implicit snapshot or multi-owner transaction; remote read semantics remains a separate boundary.",
+      "previous_w2_remaining_boundary": "Owner-live read versus explicit capture is modeled; no implicit snapshot or multi-owner transaction selected. Q-01 remains open.",
+      "w3_disposition": {
+        "classification": "related-scoped-evidence",
+        "system_requirement_accepted": false,
+        "evidence_groups": [
+          "w3_source",
+          "w3_dynamic",
+          "w3_reference"
+        ],
+        "boundary": "Transition-local read provenance from actual earlier writes is proved. No implicit snapshot or multi-owner transaction; remote read semantics remains a separate boundary."
+      }
     },
     {
       "id": "SL-03",
@@ -435,7 +539,18 @@
       "evidence_groups": [
         "source"
       ],
-      "remaining_boundary": "Actual checked owner RMW finite correspondence plus owner-assignment model; no general Rust refinement proof."
+      "remaining_boundary": "Actual checked source assignment preserves current value/producer and failure prefixes in the local reference. General distributed Rust refinement remains open.",
+      "previous_w2_remaining_boundary": "Actual checked owner RMW finite correspondence plus owner-assignment model; no general Rust refinement proof.",
+      "w3_disposition": {
+        "classification": "related-scoped-evidence",
+        "system_requirement_accepted": false,
+        "evidence_groups": [
+          "w3_source",
+          "w3_dynamic",
+          "w3_reference"
+        ],
+        "boundary": "Actual checked source assignment preserves current value/producer and failure prefixes in the local reference. General distributed Rust refinement remains open."
+      }
     },
     {
       "id": "SL-04",
@@ -466,7 +581,14 @@
       "evidence_groups": [
         "owner"
       ],
-      "remaining_boundary": "Explicit captured reads expose stale/capture failure effects; joint-owner semantics is not chosen."
+      "remaining_boundary": "Explicit captured reads expose stale/capture failure effects; joint-owner semantics is not chosen.",
+      "previous_w2_remaining_boundary": "Explicit captured reads expose stale/capture failure effects; joint-owner semantics is not chosen.",
+      "w3_disposition": {
+        "classification": "no-new-w3-discharge",
+        "system_requirement_accepted": false,
+        "evidence_groups": [],
+        "boundary": "Preserved earlier evidence and boundary; this W3 finite source/reference cut adds no discharge of this requirement."
+      }
     },
     {
       "id": "SL-05",
@@ -495,7 +617,18 @@
       "evidence_groups": [
         "source"
       ],
-      "remaining_boundary": "Actual request/serve/result occurrence paths were traced in the fixed probe; no general source-generated dynamic composition."
+      "remaining_boundary": "Source generates real management/request/result/reference/cancellation occurrences and IDs; exact ordered origin mapping proved. General generated network artifacts remain W4.",
+      "previous_w2_remaining_boundary": "Actual request/serve/result occurrence paths were traced in the fixed probe; no general source-generated dynamic composition.",
+      "w3_disposition": {
+        "classification": "related-scoped-evidence",
+        "system_requirement_accepted": false,
+        "evidence_groups": [
+          "w3_source",
+          "w3_dynamic",
+          "w3_reference"
+        ],
+        "boundary": "Source generates real management/request/result/reference/cancellation occurrences and IDs; exact ordered origin mapping proved. General generated network artifacts remain W4."
+      }
     },
     {
       "id": "SL-06",
@@ -527,7 +660,18 @@
       "evidence_groups": [
         "source"
       ],
-      "remaining_boundary": "Existing checker rejection is recorded; complete annotation/diagnostic usability profile is not established."
+      "remaining_boundary": "Finite provider/placement/lineage/contract annotations checked; source diagnostics distinguish typing, elaboration and dynamic failure. General diagnostic UX remains open.",
+      "previous_w2_remaining_boundary": "Existing checker rejection is recorded; complete annotation/diagnostic usability profile is not established.",
+      "w3_disposition": {
+        "classification": "related-scoped-evidence",
+        "system_requirement_accepted": false,
+        "evidence_groups": [
+          "w3_source",
+          "w3_dynamic",
+          "w3_reference"
+        ],
+        "boundary": "Finite provider/placement/lineage/contract annotations checked; source diagnostics distinguish typing, elaboration and dynamic failure. General diagnostic UX remains open."
+      }
     },
     {
       "id": "SL-07",
@@ -558,7 +702,18 @@
       "evidence_groups": [
         "numeric"
       ],
-      "remaining_boundary": "Checked-intermediate arithmetic is proved for a candidate integer fragment. Actual Rust overflow panic reproduced; final numeric/string/float profile and implementation connection remain open."
+      "remaining_boundary": "Actual finite unary Int64 strict intermediate arithmetic and UTF8 byte-origin controls. General strings/equality/floats and whole Rust numerical refinement remain open.",
+      "previous_w2_remaining_boundary": "Checked-intermediate arithmetic is proved for a candidate integer fragment. Actual Rust overflow panic reproduced; final numeric/string/float profile and implementation connection remain open.",
+      "w3_disposition": {
+        "classification": "related-scoped-evidence",
+        "system_requirement_accepted": false,
+        "evidence_groups": [
+          "w3_source",
+          "w3_dynamic",
+          "w3_reference"
+        ],
+        "boundary": "Actual finite unary Int64 strict intermediate arithmetic and UTF8 byte-origin controls. General strings/equality/floats and whole Rust numerical refinement remain open."
+      }
     },
     {
       "id": "SL-08",
@@ -591,7 +746,14 @@
         "pure",
         "computation_candidate"
       ],
-      "remaining_boundary": "Typed pure functions/handles and finite one-shot effect continuations have locally checked general composition proofs and completed scoped reviews. General effectful higher-order source/runtime refinement and transferable continuations remain open."
+      "remaining_boundary": "Typed pure functions/handles and finite one-shot effect continuations have locally checked general composition proofs and completed scoped reviews. General effectful higher-order source/runtime refinement and transferable continuations remain open.",
+      "previous_w2_remaining_boundary": "Typed pure functions/handles and finite one-shot effect continuations have locally checked general composition proofs and completed scoped reviews. General effectful higher-order source/runtime refinement and transferable continuations remain open.",
+      "w3_disposition": {
+        "classification": "no-new-w3-discharge",
+        "system_requirement_accepted": false,
+        "evidence_groups": [],
+        "boundary": "Preserved earlier evidence and boundary; this W3 finite source/reference cut adds no discharge of this requirement."
+      }
     },
     {
       "id": "ID-01",
@@ -621,7 +783,18 @@
       "evidence_groups": [
         "current"
       ],
-      "remaining_boundary": "Code/contract/generation/context distinctions are explicit in current-use candidate; final identity encoding is not selected."
+      "remaining_boundary": "Separate immutable definitions, growing instances, binding epochs and authority generations in one machine; no public identity encoding or cross-root uniqueness theorem.",
+      "previous_w2_remaining_boundary": "Code/contract/generation/context distinctions are explicit in current-use candidate; final identity encoding is not selected.",
+      "w3_disposition": {
+        "classification": "related-scoped-evidence",
+        "system_requirement_accepted": false,
+        "evidence_groups": [
+          "w3_source",
+          "w3_dynamic",
+          "w3_reference"
+        ],
+        "boundary": "Separate immutable definitions, growing instances, binding epochs and authority generations in one machine; no public identity encoding or cross-root uniqueness theorem."
+      }
     },
     {
       "id": "ID-02",
@@ -652,7 +825,18 @@
       "evidence_groups": [
         "support"
       ],
-      "remaining_boundary": "Typed support closure is separate from individual DAGs; integration with all live runtime instances remains open."
+      "remaining_boundary": "Distinct instance/parent/definition graphs and cross-kind least support with all selected mutators. Whole distributed instance integration remains W4.",
+      "previous_w2_remaining_boundary": "Typed support closure is separate from individual DAGs; integration with all live runtime instances remains open.",
+      "w3_disposition": {
+        "classification": "related-scoped-evidence",
+        "system_requirement_accepted": false,
+        "evidence_groups": [
+          "w3_source",
+          "w3_dynamic",
+          "w3_reference"
+        ],
+        "boundary": "Distinct instance/parent/definition graphs and cross-kind least support with all selected mutators. Whole distributed instance integration remains W4."
+      }
     },
     {
       "id": "ID-03",
@@ -682,7 +866,18 @@
       "evidence_groups": [
         "support"
       ],
-      "remaining_boundary": "Candidate support/liveness transitions are related; source reparent with in-flight/binding closure not demonstrated."
+      "remaining_boundary": "Source reparent/leave/rejoin and protected pending-result controls; same-machine preservation. Physical exits/distributed races remain W4.",
+      "previous_w2_remaining_boundary": "Candidate support/liveness transitions are related; source reparent with in-flight/binding closure not demonstrated.",
+      "w3_disposition": {
+        "classification": "related-scoped-evidence",
+        "system_requirement_accepted": false,
+        "evidence_groups": [
+          "w3_source",
+          "w3_dynamic",
+          "w3_reference"
+        ],
+        "boundary": "Source reparent/leave/rejoin and protected pending-result controls; same-machine preservation. Physical exits/distributed races remain W4."
+      }
     },
     {
       "id": "ID-04",
@@ -710,7 +905,18 @@
       "evidence_groups": [
         "current"
       ],
-      "remaining_boundary": "Current-use rejects stale handles; full fallback candidate selection and authorization/lifetime composition remain open."
+      "remaining_boundary": "Actual maintained reference, declared finite fallback chain, owner/access/H/call guards and continuous history. General relation catalog/lifetime policy remains unadopted.",
+      "previous_w2_remaining_boundary": "Current-use rejects stale handles; full fallback candidate selection and authorization/lifetime composition remain open.",
+      "w3_disposition": {
+        "classification": "related-scoped-evidence",
+        "system_requirement_accepted": false,
+        "evidence_groups": [
+          "w3_source",
+          "w3_dynamic",
+          "w3_reference"
+        ],
+        "boundary": "Actual maintained reference, declared finite fallback chain, owner/access/H/call guards and continuous history. General relation catalog/lifetime policy remains unadopted."
+      }
     },
     {
       "id": "ID-05",
@@ -741,7 +947,18 @@
       "evidence_groups": [
         "resource"
       ],
-      "remaining_boundary": "Generational resource handles do not resurrect on release/reallocation within the model; new-lineage reacquisition is not established."
+      "remaining_boundary": "Same-epoch monotone fallback and explicit new-epoch reacquire; old protection cannot revive after historical loss. Reacquire does not renew absolute leases.",
+      "previous_w2_remaining_boundary": "Generational resource handles do not resurrect on release/reallocation within the model; new-lineage reacquisition is not established.",
+      "w3_disposition": {
+        "classification": "related-scoped-evidence",
+        "system_requirement_accepted": false,
+        "evidence_groups": [
+          "w3_source",
+          "w3_dynamic",
+          "w3_reference"
+        ],
+        "boundary": "Same-epoch monotone fallback and explicit new-epoch reacquire; old protection cannot revive after historical loss. Reacquire does not renew absolute leases."
+      }
     },
     {
       "id": "ID-06",
@@ -773,7 +990,18 @@
       "evidence_groups": [
         "images"
       ],
-      "remaining_boundary": "Structural image and current usable handle are distinct; valid old images are not authenticated fresh state."
+      "remaining_boundary": "Current bindings, historical origins, aliases and pending facts distinguished. No populated restore/snapshot/quotation implementation admitted.",
+      "previous_w2_remaining_boundary": "Structural image and current usable handle are distinct; valid old images are not authenticated fresh state.",
+      "w3_disposition": {
+        "classification": "related-scoped-evidence",
+        "system_requirement_accepted": false,
+        "evidence_groups": [
+          "w3_source",
+          "w3_dynamic",
+          "w3_reference"
+        ],
+        "boundary": "Current bindings, historical origins, aliases and pending facts distinguished. No populated restore/snapshot/quotation implementation admitted."
+      }
     },
     {
       "id": "ID-07",
@@ -806,7 +1034,18 @@
         "resource",
         "computation_candidate"
       ],
-      "remaining_boundary": "General allocate/move/split/release preservation and opaque checked handles; integration with arbitrary local theories remains open."
+      "remaining_boundary": "Immutable aliases share the binding; current owner release and classification guards are independent. General resource/local-theory ownership integration remains open.",
+      "previous_w2_remaining_boundary": "General allocate/move/split/release preservation and opaque checked handles; integration with arbitrary local theories remains open.",
+      "w3_disposition": {
+        "classification": "related-scoped-evidence",
+        "system_requirement_accepted": false,
+        "evidence_groups": [
+          "w3_source",
+          "w3_dynamic",
+          "w3_reference"
+        ],
+        "boundary": "Immutable aliases share the binding; current owner release and classification guards are independent. General resource/local-theory ownership integration remains open."
+      }
     },
     {
       "id": "ID-08",
@@ -838,7 +1077,18 @@
       "evidence_groups": [
         "support"
       ],
-      "remaining_boundary": "Cross-kind least support is not a global DAG. Whole runtime transition closure is not established."
+      "remaining_boundary": "Every selected mutation checks the real retained floors, separate DAGs and support; no one-world DAG. Distributed/global writer closure remains open.",
+      "previous_w2_remaining_boundary": "Cross-kind least support is not a global DAG. Whole runtime transition closure is not established.",
+      "w3_disposition": {
+        "classification": "related-scoped-evidence",
+        "system_requirement_accepted": false,
+        "evidence_groups": [
+          "w3_source",
+          "w3_dynamic",
+          "w3_reference"
+        ],
+        "boundary": "Every selected mutation checks the real retained floors, separate DAGs and support; no one-world DAG. Distributed/global writer closure remains open."
+      }
     },
     {
       "id": "RL-01",
@@ -865,7 +1115,18 @@
       "adopted": false,
       "demonstrated_requirement": false,
       "evidence_groups": [],
-      "remaining_boundary": "Owner-held relation and shared consumer evaluation are not integrated into the current W2 fragment."
+      "remaining_boundary": "Finite owner-held reference and actual semantic fallback integrated. General reactive relation/materialization semantics remains outside this W3 profile.",
+      "previous_w2_remaining_boundary": "Owner-held relation and shared consumer evaluation are not integrated into the current W2 fragment.",
+      "w3_disposition": {
+        "classification": "related-scoped-evidence",
+        "system_requirement_accepted": false,
+        "evidence_groups": [
+          "w3_source",
+          "w3_dynamic",
+          "w3_reference"
+        ],
+        "boundary": "Finite owner-held reference and actual semantic fallback integrated. General reactive relation/materialization semantics remains outside this W3 profile."
+      }
     },
     {
       "id": "RL-02",
@@ -896,7 +1157,18 @@
       "evidence_groups": [
         "support"
       ],
-      "remaining_boundary": "Support closure is not a proof of relation feedback/recursion semantics; relation profile remains open."
+      "remaining_boundary": "Per-kind DAG and cross-kind support proofs retained; no general temporal feedback/recursive relation theory.",
+      "previous_w2_remaining_boundary": "Support closure is not a proof of relation feedback/recursion semantics; relation profile remains open.",
+      "w3_disposition": {
+        "classification": "related-scoped-evidence",
+        "system_requirement_accepted": false,
+        "evidence_groups": [
+          "w3_source",
+          "w3_dynamic",
+          "w3_reference"
+        ],
+        "boundary": "Per-kind DAG and cross-kind support proofs retained; no general temporal feedback/recursive relation theory."
+      }
     },
     {
       "id": "RL-03",
@@ -925,7 +1197,18 @@
       "evidence_groups": [
         "owner"
       ],
-      "remaining_boundary": "Owner/evaluator distinction is modeled for assignment; general maintained relation/materialization is open."
+      "remaining_boundary": "Parsed execution place is retained in admitted Session; evaluation uses actual Mir body. Distributed evaluator/materializer placement remains W4.",
+      "previous_w2_remaining_boundary": "Owner/evaluator distinction is modeled for assignment; general maintained relation/materialization is open.",
+      "w3_disposition": {
+        "classification": "related-scoped-evidence",
+        "system_requirement_accepted": false,
+        "evidence_groups": [
+          "w3_source",
+          "w3_dynamic",
+          "w3_reference"
+        ],
+        "boundary": "Parsed execution place is retained in admitted Session; evaluation uses actual Mir body. Distributed evaluator/materializer placement remains W4."
+      }
     },
     {
       "id": "RL-04",
@@ -952,7 +1235,14 @@
       "adopted": false,
       "demonstrated_requirement": false,
       "evidence_groups": [],
-      "remaining_boundary": "Versioned relation result/publication contract is not supplied by current W2 proofs."
+      "remaining_boundary": "Versioned relation result/publication contract is not supplied by current W2 proofs.",
+      "previous_w2_remaining_boundary": "Versioned relation result/publication contract is not supplied by current W2 proofs.",
+      "w3_disposition": {
+        "classification": "no-new-w3-discharge",
+        "system_requirement_accepted": false,
+        "evidence_groups": [],
+        "boundary": "Preserved earlier evidence and boundary; this W3 finite source/reference cut adds no discharge of this requirement."
+      }
     },
     {
       "id": "RL-05",
@@ -984,7 +1274,18 @@
       "evidence_groups": [
         "network"
       ],
-      "remaining_boundary": "Existing owner-budget QUIC cases exercise deadline/attempt distinctions; general clock-domain/lease contract remains open."
+      "remaining_boundary": "Logical serial/absolute lease effects, including cancellation expiry, tested. Physical clocks/fairness and clock-domain contract remain open.",
+      "previous_w2_remaining_boundary": "Existing owner-budget QUIC cases exercise deadline/attempt distinctions; general clock-domain/lease contract remains open.",
+      "w3_disposition": {
+        "classification": "related-scoped-evidence",
+        "system_requirement_accepted": false,
+        "evidence_groups": [
+          "w3_source",
+          "w3_dynamic",
+          "w3_reference"
+        ],
+        "boundary": "Logical serial/absolute lease effects, including cancellation expiry, tested. Physical clocks/fairness and clock-domain contract remain open."
+      }
     },
     {
       "id": "RL-06",
@@ -1014,7 +1315,14 @@
       "adopted": false,
       "demonstrated_requirement": false,
       "evidence_groups": [],
-      "remaining_boundary": "No presentation interpolation policy or continuity guarantee adopted."
+      "remaining_boundary": "No presentation interpolation policy or continuity guarantee adopted.",
+      "previous_w2_remaining_boundary": "No presentation interpolation policy or continuity guarantee adopted.",
+      "w3_disposition": {
+        "classification": "no-new-w3-discharge",
+        "system_requirement_accepted": false,
+        "evidence_groups": [],
+        "boundary": "Preserved earlier evidence and boundary; this W3 finite source/reference cut adds no discharge of this requirement."
+      }
     },
     {
       "id": "RL-07",
@@ -1043,7 +1351,14 @@
       "adopted": false,
       "demonstrated_requirement": false,
       "evidence_groups": [],
-      "remaining_boundary": "Approximation, units and coordinate conversion profile remains unselected."
+      "remaining_boundary": "Approximation, units and coordinate conversion profile remains unselected.",
+      "previous_w2_remaining_boundary": "Approximation, units and coordinate conversion profile remains unselected.",
+      "w3_disposition": {
+        "classification": "no-new-w3-discharge",
+        "system_requirement_accepted": false,
+        "evidence_groups": [],
+        "boundary": "Preserved earlier evidence and boundary; this W3 finite source/reference cut adds no discharge of this requirement."
+      }
     },
     {
       "id": "DS-01",
@@ -1073,7 +1388,18 @@
         "source",
         "network"
       ],
-      "remaining_boundary": "Finite source correspondence and actual fixed-profile QUIC; general projector/runtime/codec refinement remains open."
+      "remaining_boundary": "Source-authored ABC base/AC addition and stored transition placement demonstrated locally. Projector/transport realization and physical correspondence remain W4.",
+      "previous_w2_remaining_boundary": "Finite source correspondence and actual fixed-profile QUIC; general projector/runtime/codec refinement remains open.",
+      "w3_disposition": {
+        "classification": "related-scoped-evidence",
+        "system_requirement_accepted": false,
+        "evidence_groups": [
+          "w3_source",
+          "w3_dynamic",
+          "w3_reference"
+        ],
+        "boundary": "Source-authored ABC base/AC addition and stored transition placement demonstrated locally. Projector/transport realization and physical correspondence remain W4."
+      }
     },
     {
       "id": "DS-02",
@@ -1104,7 +1430,14 @@
       "evidence_groups": [
         "network"
       ],
-      "remaining_boundary": "QUIC stream ordering is not semantic memory-order evidence; higher-level concurrency profile remains open."
+      "remaining_boundary": "QUIC stream ordering is not semantic memory-order evidence; higher-level concurrency profile remains open.",
+      "previous_w2_remaining_boundary": "QUIC stream ordering is not semantic memory-order evidence; higher-level concurrency profile remains open.",
+      "w3_disposition": {
+        "classification": "no-new-w3-discharge",
+        "system_requirement_accepted": false,
+        "evidence_groups": [],
+        "boundary": "Preserved earlier evidence and boundary; this W3 finite source/reference cut adds no discharge of this requirement."
+      }
     },
     {
       "id": "DS-03",
@@ -1133,7 +1466,18 @@
       "evidence_groups": [
         "dispatch"
       ],
-      "remaining_boundary": "Reservation, actual effect and acknowledgement are separated; durable remote result/consumption binding remains open."
+      "remaining_boundary": "Full pending classification, actual result/cancellation terminal occurrences and fresh auto IDs. Durable remote outcome knowledge remains W4/W5.",
+      "previous_w2_remaining_boundary": "Reservation, actual effect and acknowledgement are separated; durable remote result/consumption binding remains open.",
+      "w3_disposition": {
+        "classification": "related-scoped-evidence",
+        "system_requirement_accepted": false,
+        "evidence_groups": [
+          "w3_source",
+          "w3_dynamic",
+          "w3_reference"
+        ],
+        "boundary": "Full pending classification, actual result/cancellation terminal occurrences and fresh auto IDs. Durable remote outcome knowledge remains W4/W5."
+      }
     },
     {
       "id": "DS-04",
@@ -1164,7 +1508,18 @@
       "evidence_groups": [
         "dispatch"
       ],
-      "remaining_boundary": "General no-second-dispatch under retained history; rollback/forget controls duplicate. Current authority and safe history reclamation remain open."
+      "remaining_boundary": "All admitted future reference/session paths preserve terminal IDs and reject repeated result/cancel. Physical retry and safe forgetting remain open.",
+      "previous_w2_remaining_boundary": "General no-second-dispatch under retained history; rollback/forget controls duplicate. Current authority and safe history reclamation remain open.",
+      "w3_disposition": {
+        "classification": "related-scoped-evidence",
+        "system_requirement_accepted": false,
+        "evidence_groups": [
+          "w3_source",
+          "w3_dynamic",
+          "w3_reference"
+        ],
+        "boundary": "All admitted future reference/session paths preserve terminal IDs and reject repeated result/cancel. Physical retry and safe forgetting remain open."
+      }
     },
     {
       "id": "DS-05",
@@ -1194,7 +1549,18 @@
       "adopted": false,
       "demonstrated_requirement": false,
       "evidence_groups": [],
-      "remaining_boundary": "Spawn/join, continuation failure and cancellation remain unintegrated; no cancellation-as-nonexecution claim."
+      "remaining_boundary": "Single pending source continuation, authorized cancellation and retained repair/residual/archive integrated; spawn/join and parallel source/external effects remain deferred.",
+      "previous_w2_remaining_boundary": "Spawn/join, continuation failure and cancellation remain unintegrated; no cancellation-as-nonexecution claim.",
+      "w3_disposition": {
+        "classification": "related-scoped-evidence",
+        "system_requirement_accepted": false,
+        "evidence_groups": [
+          "w3_source",
+          "w3_dynamic",
+          "w3_reference"
+        ],
+        "boundary": "Single pending source continuation, authorized cancellation and retained repair/residual/archive integrated; spawn/join and parallel source/external effects remain deferred."
+      }
     },
     {
       "id": "DS-06",
@@ -1227,7 +1593,14 @@
         "dispatch",
         "pure"
       ],
-      "remaining_boundary": "Fresh dispatch completion and pure normalization are conditional; fair distributed termination or availability is not proved."
+      "remaining_boundary": "Fresh dispatch completion and pure normalization are conditional; fair distributed termination or availability is not proved.",
+      "previous_w2_remaining_boundary": "Fresh dispatch completion and pure normalization are conditional; fair distributed termination or availability is not proved.",
+      "w3_disposition": {
+        "classification": "no-new-w3-discharge",
+        "system_requirement_accepted": false,
+        "evidence_groups": [],
+        "boundary": "Preserved earlier evidence and boundary; this W3 finite source/reference cut adds no discharge of this requirement."
+      }
     },
     {
       "id": "DS-07",
@@ -1258,7 +1631,14 @@
       "evidence_groups": [
         "resource"
       ],
-      "remaining_boundary": "Local move/split invariant is not a distributed multi-owner transfer protocol."
+      "remaining_boundary": "Local move/split invariant is not a distributed multi-owner transfer protocol.",
+      "previous_w2_remaining_boundary": "Local move/split invariant is not a distributed multi-owner transfer protocol.",
+      "w3_disposition": {
+        "classification": "no-new-w3-discharge",
+        "system_requirement_accepted": false,
+        "evidence_groups": [],
+        "boundary": "Preserved earlier evidence and boundary; this W3 finite source/reference cut adds no discharge of this requirement."
+      }
     },
     {
       "id": "DS-08",
@@ -1288,7 +1668,14 @@
         "network",
         "dispatch"
       ],
-      "remaining_boundary": "Bounded reference journal and existing admission rejection; probe stdout queue is unbounded, so complete capacity closure is not established."
+      "remaining_boundary": "Bounded reference journal and existing admission rejection; probe stdout queue is unbounded, so complete capacity closure is not established.",
+      "previous_w2_remaining_boundary": "Bounded reference journal and existing admission rejection; probe stdout queue is unbounded, so complete capacity closure is not established.",
+      "w3_disposition": {
+        "classification": "no-new-w3-discharge",
+        "system_requirement_accepted": false,
+        "evidence_groups": [],
+        "boundary": "Preserved earlier evidence and boundary; this W3 finite source/reference cut adds no discharge of this requirement."
+      }
     },
     {
       "id": "EF-01",
@@ -1315,7 +1702,14 @@
       "adopted": false,
       "demonstrated_requirement": false,
       "evidence_groups": [],
-      "remaining_boundary": "Existing typed provider boundary was read; general continuation lifetime/use-count theory remains open."
+      "remaining_boundary": "Existing typed provider boundary was read; general continuation lifetime/use-count theory remains open.",
+      "previous_w2_remaining_boundary": "Existing typed provider boundary was read; general continuation lifetime/use-count theory remains open.",
+      "w3_disposition": {
+        "classification": "no-new-w3-discharge",
+        "system_requirement_accepted": false,
+        "evidence_groups": [],
+        "boundary": "Preserved earlier evidence and boundary; this W3 finite source/reference cut adds no discharge of this requirement."
+      }
     },
     {
       "id": "EF-02",
@@ -1343,7 +1737,14 @@
       "adopted": false,
       "demonstrated_requirement": false,
       "evidence_groups": [],
-      "remaining_boundary": "Handler composition/exchange theory is not integrated."
+      "remaining_boundary": "Handler composition/exchange theory is not integrated.",
+      "previous_w2_remaining_boundary": "Handler composition/exchange theory is not integrated.",
+      "w3_disposition": {
+        "classification": "no-new-w3-discharge",
+        "system_requirement_accepted": false,
+        "evidence_groups": [],
+        "boundary": "Preserved earlier evidence and boundary; this W3 finite source/reference cut adds no discharge of this requirement."
+      }
     },
     {
       "id": "EF-03",
@@ -1371,7 +1772,18 @@
       "evidence_groups": [
         "network"
       ],
-      "remaining_boundary": "Provider authorization, invocation and outcome are distinct in existing fixed profile; general provider refinement remains open."
+      "remaining_boundary": "Typed lifecycle declarations and separate current grants; no source-issued authority. General effectful provider refinement remains open.",
+      "previous_w2_remaining_boundary": "Provider authorization, invocation and outcome are distinct in existing fixed profile; general provider refinement remains open.",
+      "w3_disposition": {
+        "classification": "related-scoped-evidence",
+        "system_requirement_accepted": false,
+        "evidence_groups": [
+          "w3_source",
+          "w3_dynamic",
+          "w3_reference"
+        ],
+        "boundary": "Typed lifecycle declarations and separate current grants; no source-issued authority. General effectful provider refinement remains open."
+      }
     },
     {
       "id": "EF-04",
@@ -1401,7 +1813,14 @@
       "evidence_groups": [
         "dispatch"
       ],
-      "remaining_boundary": "Durable-reservation-before-callback and unknown-after-effect controls; external remote effect atomicity is not proved."
+      "remaining_boundary": "Durable-reservation-before-callback and unknown-after-effect controls; external remote effect atomicity is not proved.",
+      "previous_w2_remaining_boundary": "Durable-reservation-before-callback and unknown-after-effect controls; external remote effect atomicity is not proved.",
+      "w3_disposition": {
+        "classification": "no-new-w3-discharge",
+        "system_requirement_accepted": false,
+        "evidence_groups": [],
+        "boundary": "Preserved earlier evidence and boundary; this W3 finite source/reference cut adds no discharge of this requirement."
+      }
     },
     {
       "id": "EF-05",
@@ -1427,7 +1846,14 @@
       "adopted": false,
       "demonstrated_requirement": false,
       "evidence_groups": [],
-      "remaining_boundary": "No general nondeterministic input/recording or approximation profile adopted."
+      "remaining_boundary": "No general nondeterministic input/recording or approximation profile adopted.",
+      "previous_w2_remaining_boundary": "No general nondeterministic input/recording or approximation profile adopted.",
+      "w3_disposition": {
+        "classification": "no-new-w3-discharge",
+        "system_requirement_accepted": false,
+        "evidence_groups": [],
+        "boundary": "Preserved earlier evidence and boundary; this W3 finite source/reference cut adds no discharge of this requirement."
+      }
     },
     {
       "id": "EF-06",
@@ -1455,7 +1881,14 @@
       "adopted": false,
       "demonstrated_requirement": false,
       "evidence_groups": [],
-      "remaining_boundary": "No compensation protocol proved or implemented; rollback is not inferred."
+      "remaining_boundary": "No compensation protocol proved or implemented; rollback is not inferred.",
+      "previous_w2_remaining_boundary": "No compensation protocol proved or implemented; rollback is not inferred.",
+      "w3_disposition": {
+        "classification": "no-new-w3-discharge",
+        "system_requirement_accepted": false,
+        "evidence_groups": [],
+        "boundary": "Preserved earlier evidence and boundary; this W3 finite source/reference cut adds no discharge of this requirement."
+      }
     },
     {
       "id": "AU-01",
@@ -1484,7 +1917,18 @@
       "evidence_groups": [
         "current"
       ],
-      "remaining_boundary": "Proof validity and module/resource authority remain separate; no cryptographic authentication theorem."
+      "remaining_boundary": "Proof, selected access, H, owner mutation, invocation and C are distinct checks; no cryptographic authentication theorem.",
+      "previous_w2_remaining_boundary": "Proof validity and module/resource authority remain separate; no cryptographic authentication theorem.",
+      "w3_disposition": {
+        "classification": "related-scoped-evidence",
+        "system_requirement_accepted": false,
+        "evidence_groups": [
+          "w3_source",
+          "w3_dynamic",
+          "w3_reference"
+        ],
+        "boundary": "Proof, selected access, H, owner mutation, invocation and C are distinct checks; no cryptographic authentication theorem."
+      }
     },
     {
       "id": "AU-02",
@@ -1515,7 +1959,18 @@
         "current",
         "frame"
       ],
-      "remaining_boundary": "Same request/context and independent resource grant checks; witness-frame counterexample shows one layer cannot authorize the whole call."
+      "remaining_boundary": "Full same-use payload/context/classification is bound in the selected finite layers. General independently managed policy composition remains open.",
+      "previous_w2_remaining_boundary": "Same request/context and independent resource grant checks; witness-frame counterexample shows one layer cannot authorize the whole call.",
+      "w3_disposition": {
+        "classification": "related-scoped-evidence",
+        "system_requirement_accepted": false,
+        "evidence_groups": [
+          "w3_source",
+          "w3_dynamic",
+          "w3_reference"
+        ],
+        "boundary": "Full same-use payload/context/classification is bound in the selected finite layers. General independently managed policy composition remains open."
+      }
     },
     {
       "id": "AU-03",
@@ -1547,7 +2002,14 @@
       "evidence_groups": [
         "support"
       ],
-      "remaining_boundary": "Locus support is separate from transport topology; actual multi-root/multi-parent admission integration remains open."
+      "remaining_boundary": "Locus support is separate from transport topology; actual multi-root/multi-parent admission integration remains open.",
+      "previous_w2_remaining_boundary": "Locus support is separate from transport topology; actual multi-root/multi-parent admission integration remains open.",
+      "w3_disposition": {
+        "classification": "no-new-w3-discharge",
+        "system_requirement_accepted": false,
+        "evidence_groups": [],
+        "boundary": "Preserved earlier evidence and boundary; this W3 finite source/reference cut adds no discharge of this requirement."
+      }
     },
     {
       "id": "AU-04",
@@ -1579,7 +2041,18 @@
         "current",
         "frame"
       ],
-      "remaining_boundary": "Used witness revocation rejects, unrelated revocation preserves only fixed context/policy inputs; live authority acquisition and queued physical race remain open."
+      "remaining_boundary": "Checked monotone head history, retained tombstones/claims, old-result nonreturn and current C. Authentic current-head agreement and physical races remain open.",
+      "previous_w2_remaining_boundary": "Used witness revocation rejects, unrelated revocation preserves only fixed context/policy inputs; live authority acquisition and queued physical race remain open.",
+      "w3_disposition": {
+        "classification": "related-scoped-evidence",
+        "system_requirement_accepted": false,
+        "evidence_groups": [
+          "w3_source",
+          "w3_dynamic",
+          "w3_reference"
+        ],
+        "boundary": "Checked monotone head history, retained tombstones/claims, old-result nonreturn and current C. Authentic current-head agreement and physical races remain open."
+      }
     },
     {
       "id": "AU-05",
@@ -1610,7 +2083,18 @@
       "evidence_groups": [
         "current"
       ],
-      "remaining_boundary": "Contract/context changes invalidate candidate evidence; transparent/nontransparent live module exchange is not implemented."
+      "remaining_boundary": "Checked immutable code extension/current replacement and generation invalidation; arbitrary live auth-module replacement remains open.",
+      "previous_w2_remaining_boundary": "Contract/context changes invalidate candidate evidence; transparent/nontransparent live module exchange is not implemented.",
+      "w3_disposition": {
+        "classification": "related-scoped-evidence",
+        "system_requirement_accepted": false,
+        "evidence_groups": [
+          "w3_source",
+          "w3_dynamic",
+          "w3_reference"
+        ],
+        "boundary": "Checked immutable code extension/current replacement and generation invalidation; arbitrary live auth-module replacement remains open."
+      }
     },
     {
       "id": "AU-06",
@@ -1637,7 +2121,18 @@
       "evidence_groups": [
         "current"
       ],
-      "remaining_boundary": "Independent declarative/algorithmic witness checks and exactness for bounded expression language; not arbitrary authentication module soundness."
+      "remaining_boundary": "Independent declarative/algorithmic exactness for finite current-use/head rules; not arbitrary authentication-module soundness.",
+      "previous_w2_remaining_boundary": "Independent declarative/algorithmic witness checks and exactness for bounded expression language; not arbitrary authentication module soundness.",
+      "w3_disposition": {
+        "classification": "related-scoped-evidence",
+        "system_requirement_accepted": false,
+        "evidence_groups": [
+          "w3_source",
+          "w3_dynamic",
+          "w3_reference"
+        ],
+        "boundary": "Independent declarative/algorithmic exactness for finite current-use/head rules; not arbitrary authentication-module soundness."
+      }
     },
     {
       "id": "AU-07",
@@ -1667,7 +2162,14 @@
       "adopted": false,
       "demonstrated_requirement": false,
       "evidence_groups": [],
-      "remaining_boundary": "Cross-trust-domain identity/delegation contract remains unselected."
+      "remaining_boundary": "Cross-trust-domain identity/delegation contract remains unselected.",
+      "previous_w2_remaining_boundary": "Cross-trust-domain identity/delegation contract remains unselected.",
+      "w3_disposition": {
+        "classification": "no-new-w3-discharge",
+        "system_requirement_accepted": false,
+        "evidence_groups": [],
+        "boundary": "Preserved earlier evidence and boundary; this W3 finite source/reference cut adds no discharge of this requirement."
+      }
     },
     {
       "id": "AU-08",
@@ -1698,7 +2200,14 @@
       "evidence_groups": [
         "images"
       ],
-      "remaining_boundary": "Recovery-anchor counterexample demonstrates trusted current head cannot be synthesized from a valid image; owner keys/bootstrap/retirement remain open."
+      "remaining_boundary": "Recovery-anchor counterexample demonstrates trusted current head cannot be synthesized from a valid image; owner keys/bootstrap/retirement remain open.",
+      "previous_w2_remaining_boundary": "Recovery-anchor counterexample demonstrates trusted current head cannot be synthesized from a valid image; owner keys/bootstrap/retirement remain open.",
+      "w3_disposition": {
+        "classification": "no-new-w3-discharge",
+        "system_requirement_accepted": false,
+        "evidence_groups": [],
+        "boundary": "Preserved earlier evidence and boundary; this W3 finite source/reference cut adds no discharge of this requirement."
+      }
     },
     {
       "id": "TY-01",
@@ -1730,7 +2239,18 @@
         "proofs",
         "computation_candidate"
       ],
-      "remaining_boundary": "Independent declarative and algorithmic rules with preservation for selected fragments; actual full language runtime safety remains open."
+      "remaining_boundary": "Selected source/plan/session rules have independent checker/elaborator correspondence and preservation; full language runtime safety remains open.",
+      "previous_w2_remaining_boundary": "Independent declarative and algorithmic rules with preservation for selected fragments; actual full language runtime safety remains open.",
+      "w3_disposition": {
+        "classification": "related-scoped-evidence",
+        "system_requirement_accepted": false,
+        "evidence_groups": [
+          "w3_source",
+          "w3_dynamic",
+          "w3_reference"
+        ],
+        "boundary": "Selected source/plan/session rules have independent checker/elaborator correspondence and preservation; full language runtime safety remains open."
+      }
     },
     {
       "id": "TY-02",
@@ -1760,7 +2280,14 @@
       "evidence_groups": [
         "contract"
       ],
-      "remaining_boundary": "Candidate local theory interface makes premises/code/contract explicit; arbitrary local theory integration remains open."
+      "remaining_boundary": "Candidate local theory interface makes premises/code/contract explicit; arbitrary local theory integration remains open.",
+      "previous_w2_remaining_boundary": "Candidate local theory interface makes premises/code/contract explicit; arbitrary local theory integration remains open.",
+      "w3_disposition": {
+        "classification": "no-new-w3-discharge",
+        "system_requirement_accepted": false,
+        "evidence_groups": [],
+        "boundary": "Preserved earlier evidence and boundary; this W3 finite source/reference cut adds no discharge of this requirement."
+      }
     },
     {
       "id": "TY-03",
@@ -1789,7 +2316,14 @@
       "evidence_groups": [
         "contract"
       ],
-      "remaining_boundary": "Checker evidence is distinct from semantics extension; no new production syntax/effect added."
+      "remaining_boundary": "Checker evidence is distinct from semantics extension; no new production syntax/effect added.",
+      "previous_w2_remaining_boundary": "Checker evidence is distinct from semantics extension; no new production syntax/effect added.",
+      "w3_disposition": {
+        "classification": "no-new-w3-discharge",
+        "system_requirement_accepted": false,
+        "evidence_groups": [],
+        "boundary": "Preserved earlier evidence and boundary; this W3 finite source/reference cut adds no discharge of this requirement."
+      }
     },
     {
       "id": "TY-04",
@@ -1820,7 +2354,14 @@
         "resource",
         "computation_candidate"
       ],
-      "remaining_boundary": "Candidate verified contract exports and resource checks compose for selected interfaces; unrestricted cross-theory translation is not proved."
+      "remaining_boundary": "Candidate verified contract exports and resource checks compose for selected interfaces; unrestricted cross-theory translation is not proved.",
+      "previous_w2_remaining_boundary": "Candidate verified contract exports and resource checks compose for selected interfaces; unrestricted cross-theory translation is not proved.",
+      "w3_disposition": {
+        "classification": "no-new-w3-discharge",
+        "system_requirement_accepted": false,
+        "evidence_groups": [],
+        "boundary": "Preserved earlier evidence and boundary; this W3 finite source/reference cut adds no discharge of this requirement."
+      }
     },
     {
       "id": "TY-05",
@@ -1852,7 +2393,14 @@
         "contract",
         "computation_candidate"
       ],
-      "remaining_boundary": "Candidate value-dependent propositions tied to checked code; no final dependent type/equality/erasure system adopted."
+      "remaining_boundary": "Candidate value-dependent propositions tied to checked code; no final dependent type/equality/erasure system adopted.",
+      "previous_w2_remaining_boundary": "Candidate value-dependent propositions tied to checked code; no final dependent type/equality/erasure system adopted.",
+      "w3_disposition": {
+        "classification": "no-new-w3-discharge",
+        "system_requirement_accepted": false,
+        "evidence_groups": [],
+        "boundary": "Preserved earlier evidence and boundary; this W3 finite source/reference cut adds no discharge of this requirement."
+      }
     },
     {
       "id": "TY-06",
@@ -1881,7 +2429,14 @@
       "adopted": false,
       "demonstrated_requirement": false,
       "evidence_groups": [],
-      "remaining_boundary": "General stage/place/time/stability modes are not integrated."
+      "remaining_boundary": "General stage/place/time/stability modes are not integrated.",
+      "previous_w2_remaining_boundary": "General stage/place/time/stability modes are not integrated.",
+      "w3_disposition": {
+        "classification": "no-new-w3-discharge",
+        "system_requirement_accepted": false,
+        "evidence_groups": [],
+        "boundary": "Preserved earlier evidence and boundary; this W3 finite source/reference cut adds no discharge of this requirement."
+      }
     },
     {
       "id": "TY-07",
@@ -1914,7 +2469,18 @@
         "contract",
         "computation_candidate"
       ],
-      "remaining_boundary": "Code/contract/context identity checked at call; saved context alone does not establish current applicability."
+      "remaining_boundary": "Current exact code/contract/context and original binding/hold evidence tied to actual history. External authentic evidence acquisition remains TCB.",
+      "previous_w2_remaining_boundary": "Code/contract/context identity checked at call; saved context alone does not establish current applicability.",
+      "w3_disposition": {
+        "classification": "related-scoped-evidence",
+        "system_requirement_accepted": false,
+        "evidence_groups": [
+          "w3_source",
+          "w3_dynamic",
+          "w3_reference"
+        ],
+        "boundary": "Current exact code/contract/context and original binding/hold evidence tied to actual history. External authentic evidence acquisition remains TCB."
+      }
     },
     {
       "id": "TY-08",
@@ -1948,7 +2514,14 @@
         "resource",
         "computation_candidate"
       ],
-      "remaining_boundary": "Finite bounded execution and decidable candidate checking; adversarial solver isolation and general Unknown handling remain open."
+      "remaining_boundary": "Finite bounded execution and decidable candidate checking; adversarial solver isolation and general Unknown handling remain open.",
+      "previous_w2_remaining_boundary": "Finite bounded execution and decidable candidate checking; adversarial solver isolation and general Unknown handling remain open.",
+      "w3_disposition": {
+        "classification": "no-new-w3-discharge",
+        "system_requirement_accepted": false,
+        "evidence_groups": [],
+        "boundary": "Preserved earlier evidence and boundary; this W3 finite source/reference cut adds no discharge of this requirement."
+      }
     },
     {
       "id": "CT-01",
@@ -1976,7 +2549,14 @@
       "evidence_groups": [
         "contract"
       ],
-      "remaining_boundary": "Candidate contract clauses and success conditions are separated; full failure/observation/lifetime vocabulary remains open."
+      "remaining_boundary": "Candidate contract clauses and success conditions are separated; full failure/observation/lifetime vocabulary remains open.",
+      "previous_w2_remaining_boundary": "Candidate contract clauses and success conditions are separated; full failure/observation/lifetime vocabulary remains open.",
+      "w3_disposition": {
+        "classification": "no-new-w3-discharge",
+        "system_requirement_accepted": false,
+        "evidence_groups": [],
+        "boundary": "Preserved earlier evidence and boundary; this W3 finite source/reference cut adds no discharge of this requirement."
+      }
     },
     {
       "id": "CT-02",
@@ -2005,7 +2585,18 @@
         "contract",
         "source"
       ],
-      "remaining_boundary": "Candidate checker binds actual expression and descriptors, plus finite actual-source evidence; general parser/VC provenance remains TCB."
+      "remaining_boundary": "Actual parser AST feeds checked source and proof applications; full decoded source/byte positions retained. Parser/adapter are explicit unproved refinement TCB.",
+      "previous_w2_remaining_boundary": "Candidate checker binds actual expression and descriptors, plus finite actual-source evidence; general parser/VC provenance remains TCB.",
+      "w3_disposition": {
+        "classification": "related-scoped-evidence",
+        "system_requirement_accepted": false,
+        "evidence_groups": [
+          "w3_source",
+          "w3_dynamic",
+          "w3_reference"
+        ],
+        "boundary": "Actual parser AST feeds checked source and proof applications; full decoded source/byte positions retained. Parser/adapter are explicit unproved refinement TCB."
+      }
     },
     {
       "id": "CT-03",
@@ -2035,7 +2626,18 @@
         "resource",
         "images"
       ],
-      "remaining_boundary": "All listed candidate resource mutators/image decoders checked; whole repository writer/provider/patch closure is not proved."
+      "remaining_boundary": "Every admitted source/session/reference engine entry covered, including head/cancel/control/repair/addition. Whole repository and restore/provider writers remain outside scope.",
+      "previous_w2_remaining_boundary": "All listed candidate resource mutators/image decoders checked; whole repository writer/provider/patch closure is not proved.",
+      "w3_disposition": {
+        "classification": "related-scoped-evidence",
+        "system_requirement_accepted": false,
+        "evidence_groups": [
+          "w3_source",
+          "w3_dynamic",
+          "w3_reference"
+        ],
+        "boundary": "Every admitted source/session/reference engine entry covered, including head/cancel/control/repair/addition. Whole repository and restore/provider writers remain outside scope."
+      }
     },
     {
       "id": "CT-04",
@@ -2064,7 +2666,18 @@
         "pure",
         "contract"
       ],
-      "remaining_boundary": "Pure normalization and successful call postconditions are distinct from authority/capacity/network availability."
+      "remaining_boundary": "Successful finite computation and possible fresh repair distinguished from authority/lease/capacity/network availability; expired repair remains failed.",
+      "previous_w2_remaining_boundary": "Pure normalization and successful call postconditions are distinct from authority/capacity/network availability.",
+      "w3_disposition": {
+        "classification": "related-scoped-evidence",
+        "system_requirement_accepted": false,
+        "evidence_groups": [
+          "w3_source",
+          "w3_dynamic",
+          "w3_reference"
+        ],
+        "boundary": "Successful finite computation and possible fresh repair distinguished from authority/lease/capacity/network availability; expired repair remains failed."
+      }
     },
     {
       "id": "CT-05",
@@ -2095,7 +2708,18 @@
       "evidence_groups": [
         "contract"
       ],
-      "remaining_boundary": "Candidate code/contract identity and compatibility evidence; no public API/ABI/wire compatibility adoption."
+      "remaining_boundary": "Actual finite contract-compatible code exchange and retained floors. Equal fallback interfaces are provisional; public API/ABI/wire unadopted.",
+      "previous_w2_remaining_boundary": "Candidate code/contract identity and compatibility evidence; no public API/ABI/wire compatibility adoption.",
+      "w3_disposition": {
+        "classification": "related-scoped-evidence",
+        "system_requirement_accepted": false,
+        "evidence_groups": [
+          "w3_source",
+          "w3_dynamic",
+          "w3_reference"
+        ],
+        "boundary": "Actual finite contract-compatible code exchange and retained floors. Equal fallback interfaces are provisional; public API/ABI/wire unadopted."
+      }
     },
     {
       "id": "VF-01",
@@ -2126,7 +2750,18 @@
       "evidence_groups": [
         "records"
       ],
-      "remaining_boundary": "Scopes/assumptions/axioms retained per proof cut; does not close all 18 system guarantees."
+      "remaining_boundary": "General theorem premises/standard axioms/TCB retained; no system-level acceptance of all18 targets.",
+      "previous_w2_remaining_boundary": "Scopes/assumptions/axioms retained per proof cut; does not close all 18 system guarantees.",
+      "w3_disposition": {
+        "classification": "related-scoped-evidence",
+        "system_requirement_accepted": false,
+        "evidence_groups": [
+          "w3_source",
+          "w3_dynamic",
+          "w3_reference"
+        ],
+        "boundary": "General theorem premises/standard axioms/TCB retained; no system-level acceptance of all18 targets."
+      }
     },
     {
       "id": "VF-02",
@@ -2158,7 +2793,18 @@
       "evidence_groups": [
         "proofs"
       ],
-      "remaining_boundary": "General relative exactness and positive/counterexample controls for selected fragments; all required source use cases remain open."
+      "remaining_boundary": "Independent exactness and positive/typed counterexample controls in finite W3 source/reference/session. Whole source and alpha expression floor remains open.",
+      "previous_w2_remaining_boundary": "General relative exactness and positive/counterexample controls for selected fragments; all required source use cases remain open.",
+      "w3_disposition": {
+        "classification": "related-scoped-evidence",
+        "system_requirement_accepted": false,
+        "evidence_groups": [
+          "w3_source",
+          "w3_dynamic",
+          "w3_reference"
+        ],
+        "boundary": "Independent exactness and positive/typed counterexample controls in finite W3 source/reference/session. Whole source and alpha expression floor remains open."
+      }
     },
     {
       "id": "VF-03",
@@ -2189,7 +2835,18 @@
       "evidence_groups": [
         "proofs"
       ],
-      "remaining_boundary": "Lean4.29.1 trust0, axiom output, finite controls and mutations separately recorded; no custom theorem axiom or sorry accepted."
+      "remaining_boundary": "Fresh Lean4.29.1 trust0/all-owned axiom audit; fixed controls and weakening tests kept separate. No Mir-specific axioms or accepted proof holes.",
+      "previous_w2_remaining_boundary": "Lean4.29.1 trust0, axiom output, finite controls and mutations separately recorded; no custom theorem axiom or sorry accepted.",
+      "w3_disposition": {
+        "classification": "related-scoped-evidence",
+        "system_requirement_accepted": false,
+        "evidence_groups": [
+          "w3_source",
+          "w3_dynamic",
+          "w3_reference"
+        ],
+        "boundary": "Fresh Lean4.29.1 trust0/all-owned axiom audit; fixed controls and weakening tests kept separate. No Mir-specific axioms or accepted proof holes."
+      }
     },
     {
       "id": "VF-04",
@@ -2220,7 +2877,18 @@
       "evidence_groups": [
         "contract"
       ],
-      "remaining_boundary": "Several candidate boundaries are composed in one reference execution; whole-system composition remains open."
+      "remaining_boundary": "Same source/engine/session composes history/currentness/reference/pending/provenance. Whole physical system composition remains W4-W7.",
+      "previous_w2_remaining_boundary": "Several candidate boundaries are composed in one reference execution; whole-system composition remains open.",
+      "w3_disposition": {
+        "classification": "related-scoped-evidence",
+        "system_requirement_accepted": false,
+        "evidence_groups": [
+          "w3_source",
+          "w3_dynamic",
+          "w3_reference"
+        ],
+        "boundary": "Same source/engine/session composes history/currentness/reference/pending/provenance. Whole physical system composition remains W4-W7."
+      }
     },
     {
       "id": "VF-05",
@@ -2250,7 +2918,18 @@
       "evidence_groups": [
         "source"
       ],
-      "remaining_boundary": "Finite actual-source result certificates; parser/checker/projector/runtime/codec/host remain unproved TCB links."
+      "remaining_boundary": "Actual Rust parsing and generated source proof consumers; parser/adapter and physical execution remain explicit TCB/refinement gaps.",
+      "previous_w2_remaining_boundary": "Finite actual-source result certificates; parser/checker/projector/runtime/codec/host remain unproved TCB links.",
+      "w3_disposition": {
+        "classification": "related-scoped-evidence",
+        "system_requirement_accepted": false,
+        "evidence_groups": [
+          "w3_source",
+          "w3_dynamic",
+          "w3_reference"
+        ],
+        "boundary": "Actual Rust parsing and generated source proof consumers; parser/adapter and physical execution remain explicit TCB/refinement gaps."
+      }
     },
     {
       "id": "VF-06",
@@ -2279,7 +2958,18 @@
       "evidence_groups": [
         "proofs"
       ],
-      "remaining_boundary": "Mutants fail required general claims and concrete controls; these scoped checks are not all-system fault coverage."
+      "remaining_boundary": "Decisive rollback/lease/erasure/failed repair controls and designated-proof weakening tests; no all-system coverage claim.",
+      "previous_w2_remaining_boundary": "Mutants fail required general claims and concrete controls; these scoped checks are not all-system fault coverage.",
+      "w3_disposition": {
+        "classification": "related-scoped-evidence",
+        "system_requirement_accepted": false,
+        "evidence_groups": [
+          "w3_source",
+          "w3_dynamic",
+          "w3_reference"
+        ],
+        "boundary": "Decisive rollback/lease/erasure/failed repair controls and designated-proof weakening tests; no all-system coverage claim."
+      }
     },
     {
       "id": "VF-07",
@@ -2312,7 +3002,18 @@
       "evidence_groups": [
         "oracle"
       ],
-      "remaining_boundary": "Independent Oracle review has not returned; failed original sessions retained and one actual-error recovery attempt active."
+      "remaining_boundary": "Ten substantive main-operated Oracle reviews recovered and locally dispositioned; final narrow integration review pending. Oracle neither executed proofs nor supplied owner signatures.",
+      "previous_w2_remaining_boundary": "Independent Oracle review has not returned; failed original sessions retained and one actual-error recovery attempt active.",
+      "w3_disposition": {
+        "classification": "related-scoped-evidence",
+        "system_requirement_accepted": false,
+        "evidence_groups": [
+          "w3_source",
+          "w3_dynamic",
+          "w3_reference"
+        ],
+        "boundary": "Ten substantive main-operated Oracle reviews recovered and locally dispositioned; final narrow integration review pending. Oracle neither executed proofs nor supplied owner signatures."
+      }
     },
     {
       "id": "EV-01",
@@ -2343,7 +3044,18 @@
       "evidence_groups": [
         "contract"
       ],
-      "remaining_boundary": "Candidate module insertions preserve registry conditions; ordinary-source live construction with history/in-flight state remains open."
+      "remaining_boundary": "Actual initial source followed by separately parsed source addition on the same session; existing archive/state retained. Physical hot-plug remains W4.",
+      "previous_w2_remaining_boundary": "Candidate module insertions preserve registry conditions; ordinary-source live construction with history/in-flight state remains open.",
+      "w3_disposition": {
+        "classification": "related-scoped-evidence",
+        "system_requirement_accepted": false,
+        "evidence_groups": [
+          "w3_source",
+          "w3_dynamic",
+          "w3_reference"
+        ],
+        "boundary": "Actual initial source followed by separately parsed source addition on the same session; existing archive/state retained. Physical hot-plug remains W4."
+      }
     },
     {
       "id": "EV-02",
@@ -2372,7 +3084,18 @@
       "evidence_groups": [
         "support"
       ],
-      "remaining_boundary": "Candidate dependency/support evidence; not source-driven patch graph lifecycle implementation."
+      "remaining_boundary": "Immutable definition predecessor and instance/lifetime dependencies checked separately. General package/patch lifecycle and public compatibility remain open.",
+      "previous_w2_remaining_boundary": "Candidate dependency/support evidence; not source-driven patch graph lifecycle implementation.",
+      "w3_disposition": {
+        "classification": "related-scoped-evidence",
+        "system_requirement_accepted": false,
+        "evidence_groups": [
+          "w3_source",
+          "w3_dynamic",
+          "w3_reference"
+        ],
+        "boundary": "Immutable definition predecessor and instance/lifetime dependencies checked separately. General package/patch lifecycle and public compatibility remain open."
+      }
     },
     {
       "id": "EV-03",
@@ -2401,7 +3124,18 @@
       "adopted": false,
       "demonstrated_requirement": false,
       "evidence_groups": [],
-      "remaining_boundary": "Change classes remain distinct; no unified migration/relocation/update implementation adopted."
+      "remaining_boundary": "Addition/reparent/retirement/code exchange/head/cancel/repair remain distinct operations; migration/relocation not inferred.",
+      "previous_w2_remaining_boundary": "Change classes remain distinct; no unified migration/relocation/update implementation adopted.",
+      "w3_disposition": {
+        "classification": "related-scoped-evidence",
+        "system_requirement_accepted": false,
+        "evidence_groups": [
+          "w3_source",
+          "w3_dynamic",
+          "w3_reference"
+        ],
+        "boundary": "Addition/reparent/retirement/code exchange/head/cancel/repair remain distinct operations; migration/relocation not inferred."
+      }
     },
     {
       "id": "EV-04",
@@ -2430,7 +3164,18 @@
       "evidence_groups": [
         "current"
       ],
-      "remaining_boundary": "Candidate checked authorization precedes atomic model use; physical activation/Q-18 reservation versus commit reauthorization remains unresolved."
+      "remaining_boundary": "Independent checker/current authorization precedes atomic reference commit; physical activation and Q18 reservation/commit distinction remain open.",
+      "previous_w2_remaining_boundary": "Candidate checked authorization precedes atomic model use; physical activation/Q-18 reservation versus commit reauthorization remains unresolved.",
+      "w3_disposition": {
+        "classification": "related-scoped-evidence",
+        "system_requirement_accepted": false,
+        "evidence_groups": [
+          "w3_source",
+          "w3_dynamic",
+          "w3_reference"
+        ],
+        "boundary": "Independent checker/current authorization precedes atomic reference commit; physical activation and Q18 reservation/commit distinction remain open."
+      }
     },
     {
       "id": "EV-05",
@@ -2464,7 +3209,18 @@
         "current",
         "contract"
       ],
-      "remaining_boundary": "Candidate evidence identity and tracked dependencies include more than values; whole actual mutator stamp closure remains open."
+      "remaining_boundary": "Full captured stamps, source origins and conservative support-impact proofs. Physical incremental recomputation/observer fidelity remain separate.",
+      "previous_w2_remaining_boundary": "Candidate evidence identity and tracked dependencies include more than values; whole actual mutator stamp closure remains open.",
+      "w3_disposition": {
+        "classification": "related-scoped-evidence",
+        "system_requirement_accepted": false,
+        "evidence_groups": [
+          "w3_source",
+          "w3_dynamic",
+          "w3_reference"
+        ],
+        "boundary": "Full captured stamps, source origins and conservative support-impact proofs. Physical incremental recomputation/observer fidelity remain separate."
+      }
     },
     {
       "id": "EV-06",
@@ -2494,7 +3250,18 @@
       "adopted": false,
       "demonstrated_requirement": false,
       "evidence_groups": [],
-      "remaining_boundary": "Scoped quiescence and old continuation/fence ownership remain unintegrated."
+      "remaining_boundary": "Single source pending classification and exact failed/residual/cancel repair history preserved. Distributed quiescence and multiple-source concurrency remain open.",
+      "previous_w2_remaining_boundary": "Scoped quiescence and old continuation/fence ownership remain unintegrated.",
+      "w3_disposition": {
+        "classification": "related-scoped-evidence",
+        "system_requirement_accepted": false,
+        "evidence_groups": [
+          "w3_source",
+          "w3_dynamic",
+          "w3_reference"
+        ],
+        "boundary": "Single source pending classification and exact failed/residual/cancel repair history preserved. Distributed quiescence and multiple-source concurrency remain open."
+      }
     },
     {
       "id": "EV-07",
@@ -2528,7 +3295,14 @@
       "evidence_groups": [
         "dispatch"
       ],
-      "remaining_boundary": "Local durable dispatch is not distributed activation/recovery; distributed agreement protocol remains open."
+      "remaining_boundary": "Local durable dispatch is not distributed activation/recovery; distributed agreement protocol remains open.",
+      "previous_w2_remaining_boundary": "Local durable dispatch is not distributed activation/recovery; distributed agreement protocol remains open.",
+      "w3_disposition": {
+        "classification": "no-new-w3-discharge",
+        "system_requirement_accepted": false,
+        "evidence_groups": [],
+        "boundary": "Preserved earlier evidence and boundary; this W3 finite source/reference cut adds no discharge of this requirement."
+      }
     },
     {
       "id": "EV-08",
@@ -2560,7 +3334,18 @@
         "current",
         "frame"
       ],
-      "remaining_boundary": "Evidence invalidation/revalidation scoped to existing policy model; full live theory/policy replacement remains open."
+      "remaining_boundary": "Current generation/claim/member succession is checked; arbitrary local-theory/policy module replacement remains open.",
+      "previous_w2_remaining_boundary": "Evidence invalidation/revalidation scoped to existing policy model; full live theory/policy replacement remains open.",
+      "w3_disposition": {
+        "classification": "related-scoped-evidence",
+        "system_requirement_accepted": false,
+        "evidence_groups": [
+          "w3_source",
+          "w3_dynamic",
+          "w3_reference"
+        ],
+        "boundary": "Current generation/claim/member succession is checked; arbitrary local-theory/policy module replacement remains open."
+      }
     },
     {
       "id": "EV-09",
@@ -2593,7 +3378,18 @@
       "evidence_groups": [
         "resource"
       ],
-      "remaining_boundary": "Released resource slots handled; safe old code/history/request reclamation and source withdrawal remain open."
+      "remaining_boundary": "Source retirement and authorized dead-binding release execute; old records/history are retained. Safe garbage collection and long-lived withdrawal remain open.",
+      "previous_w2_remaining_boundary": "Released resource slots handled; safe old code/history/request reclamation and source withdrawal remain open.",
+      "w3_disposition": {
+        "classification": "related-scoped-evidence",
+        "system_requirement_accepted": false,
+        "evidence_groups": [
+          "w3_source",
+          "w3_dynamic",
+          "w3_reference"
+        ],
+        "boundary": "Source retirement and authorized dead-binding release execute; old records/history are retained. Safe garbage collection and long-lived withdrawal remain open."
+      }
     },
     {
       "id": "EV-10",
@@ -2625,7 +3421,18 @@
         "resource",
         "dispatch"
       ],
-      "remaining_boundary": "General finite prefixes for separate listed machines; not one theorem over all execute/update/recovery paths."
+      "remaining_boundary": "General finite admitted source/session/reference histories cover represented edits/head/result/cancel; no restore/physical-global execution theorem.",
+      "previous_w2_remaining_boundary": "General finite prefixes for separate listed machines; not one theorem over all execute/update/recovery paths.",
+      "w3_disposition": {
+        "classification": "related-scoped-evidence",
+        "system_requirement_accepted": false,
+        "evidence_groups": [
+          "w3_source",
+          "w3_dynamic",
+          "w3_reference"
+        ],
+        "boundary": "General finite admitted source/session/reference histories cover represented edits/head/result/cancel; no restore/physical-global execution theorem."
+      }
     },
     {
       "id": "SV-01",
@@ -2653,7 +3460,14 @@
       "evidence_groups": [
         "images"
       ],
-      "remaining_boundary": "Existing local-cut/snapshot tests and candidate image checks; no complete distributed channel checkpoint composition."
+      "remaining_boundary": "Existing local-cut/snapshot tests and candidate image checks; no complete distributed channel checkpoint composition.",
+      "previous_w2_remaining_boundary": "Existing local-cut/snapshot tests and candidate image checks; no complete distributed channel checkpoint composition.",
+      "w3_disposition": {
+        "classification": "no-new-w3-discharge",
+        "system_requirement_accepted": false,
+        "evidence_groups": [],
+        "boundary": "Preserved earlier evidence and boundary; this W3 finite source/reference cut adds no discharge of this requirement."
+      }
     },
     {
       "id": "SV-02",
@@ -2682,7 +3496,14 @@
         "images",
         "dispatch"
       ],
-      "remaining_boundary": "Resource/history image and synced reservation controls; whole-state/code/continuation atomic persistence remains open."
+      "remaining_boundary": "Resource/history image and synced reservation controls; whole-state/code/continuation atomic persistence remains open.",
+      "previous_w2_remaining_boundary": "Resource/history image and synced reservation controls; whole-state/code/continuation atomic persistence remains open.",
+      "w3_disposition": {
+        "classification": "no-new-w3-discharge",
+        "system_requirement_accepted": false,
+        "evidence_groups": [],
+        "boundary": "Preserved earlier evidence and boundary; this W3 finite source/reference cut adds no discharge of this requirement."
+      }
     },
     {
       "id": "SV-03",
@@ -2711,7 +3532,14 @@
       "evidence_groups": [
         "images"
       ],
-      "remaining_boundary": "F0.3 complete-image model rerun is finite evidence; all real runtime components do not yet participate in durable recovery."
+      "remaining_boundary": "F0.3 complete-image model rerun is finite evidence; all real runtime components do not yet participate in durable recovery.",
+      "previous_w2_remaining_boundary": "F0.3 complete-image model rerun is finite evidence; all real runtime components do not yet participate in durable recovery.",
+      "w3_disposition": {
+        "classification": "no-new-w3-discharge",
+        "system_requirement_accepted": false,
+        "evidence_groups": [],
+        "boundary": "Preserved earlier evidence and boundary; this W3 finite source/reference cut adds no discharge of this requirement."
+      }
     },
     {
       "id": "SV-04",
@@ -2742,7 +3570,14 @@
       "evidence_groups": [
         "images"
       ],
-      "remaining_boundary": "Fresh import, same-instance recovery and replay distinguished; old trusted-state injection is not actual safe recovery."
+      "remaining_boundary": "Fresh import, same-instance recovery and replay distinguished; old trusted-state injection is not actual safe recovery.",
+      "previous_w2_remaining_boundary": "Fresh import, same-instance recovery and replay distinguished; old trusted-state injection is not actual safe recovery.",
+      "w3_disposition": {
+        "classification": "no-new-w3-discharge",
+        "system_requirement_accepted": false,
+        "evidence_groups": [],
+        "boundary": "Preserved earlier evidence and boundary; this W3 finite source/reference cut adds no discharge of this requirement."
+      }
     },
     {
       "id": "SV-05",
@@ -2768,7 +3603,14 @@
       "adopted": false,
       "demonstrated_requirement": false,
       "evidence_groups": [],
-      "remaining_boundary": "No new system-level Z-path/dependency-collection theorem in this W2 cut."
+      "remaining_boundary": "No new system-level Z-path/dependency-collection theorem in this W2 cut.",
+      "previous_w2_remaining_boundary": "No new system-level Z-path/dependency-collection theorem in this W2 cut.",
+      "w3_disposition": {
+        "classification": "no-new-w3-discharge",
+        "system_requirement_accepted": false,
+        "evidence_groups": [],
+        "boundary": "Preserved earlier evidence and boundary; this W3 finite source/reference cut adds no discharge of this requirement."
+      }
     },
     {
       "id": "SV-06",
@@ -2799,7 +3641,14 @@
       "evidence_groups": [
         "dispatch"
       ],
-      "remaining_boundary": "Retained old key rejects; clearing/rolling back history duplicates. Safe forgetting/compaction not supplied."
+      "remaining_boundary": "Retained old key rejects; clearing/rolling back history duplicates. Safe forgetting/compaction not supplied.",
+      "previous_w2_remaining_boundary": "Retained old key rejects; clearing/rolling back history duplicates. Safe forgetting/compaction not supplied.",
+      "w3_disposition": {
+        "classification": "no-new-w3-discharge",
+        "system_requirement_accepted": false,
+        "evidence_groups": [],
+        "boundary": "Preserved earlier evidence and boundary; this W3 finite source/reference cut adds no discharge of this requirement."
+      }
     },
     {
       "id": "SV-07",
@@ -2829,7 +3678,14 @@
       "evidence_groups": [
         "images"
       ],
-      "remaining_boundary": "General structural image decoding and explicit stale/forged-history counterexamples; authenticity/current authority requires separate trust anchor."
+      "remaining_boundary": "General structural image decoding and explicit stale/forged-history counterexamples; authenticity/current authority requires separate trust anchor.",
+      "previous_w2_remaining_boundary": "General structural image decoding and explicit stale/forged-history counterexamples; authenticity/current authority requires separate trust anchor.",
+      "w3_disposition": {
+        "classification": "no-new-w3-discharge",
+        "system_requirement_accepted": false,
+        "evidence_groups": [],
+        "boundary": "Preserved earlier evidence and boundary; this W3 finite source/reference cut adds no discharge of this requirement."
+      }
     },
     {
       "id": "OB-01",
@@ -2859,7 +3715,18 @@
         "source",
         "network"
       ],
-      "remaining_boundary": "Actual source/Core/request/result paths examined; finite correspondence is not full general observer refinement."
+      "remaining_boundary": "Exact private source occurrence mapping and earlier write producer evidence; authorized public observer/refinement remains W6.",
+      "previous_w2_remaining_boundary": "Actual source/Core/request/result paths examined; finite correspondence is not full general observer refinement.",
+      "w3_disposition": {
+        "classification": "related-scoped-evidence",
+        "system_requirement_accepted": false,
+        "evidence_groups": [
+          "w3_source",
+          "w3_dynamic",
+          "w3_reference"
+        ],
+        "boundary": "Exact private source occurrence mapping and earlier write producer evidence; authorized public observer/refinement remains W6."
+      }
     },
     {
       "id": "OB-02",
@@ -2889,7 +3756,14 @@
       "evidence_groups": [
         "passive"
       ],
-      "remaining_boundary": "Conditional passive erasure theorem; actual blocking stdout/unbounded queue prevents inferring runtime cost noninterference."
+      "remaining_boundary": "Conditional passive erasure theorem; actual blocking stdout/unbounded queue prevents inferring runtime cost noninterference.",
+      "previous_w2_remaining_boundary": "Conditional passive erasure theorem; actual blocking stdout/unbounded queue prevents inferring runtime cost noninterference.",
+      "w3_disposition": {
+        "classification": "no-new-w3-discharge",
+        "system_requirement_accepted": false,
+        "evidence_groups": [],
+        "boundary": "Preserved earlier evidence and boundary; this W3 finite source/reference cut adds no discharge of this requirement."
+      }
     },
     {
       "id": "OB-03",
@@ -2920,7 +3794,14 @@
         "passive",
         "allocation_ifc"
       ],
-      "remaining_boundary": "General two-run relations for selected static-label models; shared allocation ID/capacity leaks are counterexamples. Full timing/presence/auth context confidentiality remains open."
+      "remaining_boundary": "General two-run relations for selected static-label models; shared allocation ID/capacity leaks are counterexamples. Full timing/presence/auth context confidentiality remains open.",
+      "previous_w2_remaining_boundary": "General two-run relations for selected static-label models; shared allocation ID/capacity leaks are counterexamples. Full timing/presence/auth context confidentiality remains open.",
+      "w3_disposition": {
+        "classification": "no-new-w3-discharge",
+        "system_requirement_accepted": false,
+        "evidence_groups": [],
+        "boundary": "Preserved earlier evidence and boundary; this W3 finite source/reference cut adds no discharge of this requirement."
+      }
     },
     {
       "id": "OB-04",
@@ -2949,7 +3830,14 @@
         "current",
         "passive"
       ],
-      "remaining_boundary": "Label/authority separation retained; source observer_safe is not current publication permission or implemented dynamic release policy."
+      "remaining_boundary": "Label/authority separation retained; source observer_safe is not current publication permission or implemented dynamic release policy.",
+      "previous_w2_remaining_boundary": "Label/authority separation retained; source observer_safe is not current publication permission or implemented dynamic release policy.",
+      "w3_disposition": {
+        "classification": "no-new-w3-discharge",
+        "system_requirement_accepted": false,
+        "evidence_groups": [],
+        "boundary": "Preserved earlier evidence and boundary; this W3 finite source/reference cut adds no discharge of this requirement."
+      }
     },
     {
       "id": "OB-05",
@@ -2980,7 +3868,14 @@
         "network",
         "passive"
       ],
-      "remaining_boundary": "Lossy abstract retention does not establish bounded actual observer pipeline; unbounded probe channel/blocking output are unresolved."
+      "remaining_boundary": "Lossy abstract retention does not establish bounded actual observer pipeline; unbounded probe channel/blocking output are unresolved.",
+      "previous_w2_remaining_boundary": "Lossy abstract retention does not establish bounded actual observer pipeline; unbounded probe channel/blocking output are unresolved.",
+      "w3_disposition": {
+        "classification": "no-new-w3-discharge",
+        "system_requirement_accepted": false,
+        "evidence_groups": [],
+        "boundary": "Preserved earlier evidence and boundary; this W3 finite source/reference cut adds no discharge of this requirement."
+      }
     },
     {
       "id": "OB-06",
@@ -3008,7 +3903,14 @@
         "dispatch",
         "network"
       ],
-      "remaining_boundary": "Unknown/unacknowledged distinguished in model and actual retry cases; complete user-facing display taxonomy not implemented."
+      "remaining_boundary": "Unknown/unacknowledged distinguished in model and actual retry cases; complete user-facing display taxonomy not implemented.",
+      "previous_w2_remaining_boundary": "Unknown/unacknowledged distinguished in model and actual retry cases; complete user-facing display taxonomy not implemented.",
+      "w3_disposition": {
+        "classification": "no-new-w3-discharge",
+        "system_requirement_accepted": false,
+        "evidence_groups": [],
+        "boundary": "Preserved earlier evidence and boundary; this W3 finite source/reference cut adds no discharge of this requirement."
+      }
     },
     {
       "id": "OB-07",
@@ -3035,7 +3937,14 @@
       "adopted": false,
       "demonstrated_requirement": false,
       "evidence_groups": [],
-      "remaining_boundary": "Active debug authorization is distinct and unintegrated; passive proof does not authorize it."
+      "remaining_boundary": "Active debug authorization is distinct and unintegrated; passive proof does not authorize it.",
+      "previous_w2_remaining_boundary": "Active debug authorization is distinct and unintegrated; passive proof does not authorize it.",
+      "w3_disposition": {
+        "classification": "no-new-w3-discharge",
+        "system_requirement_accepted": false,
+        "evidence_groups": [],
+        "boundary": "Preserved earlier evidence and boundary; this W3 finite source/reference cut adds no discharge of this requirement."
+      }
     },
     {
       "id": "OB-08",
@@ -3063,7 +3972,14 @@
       "adopted": false,
       "demonstrated_requirement": false,
       "evidence_groups": [],
-      "remaining_boundary": "Proof/evidence records are not an implemented end-user theory/policy explanation surface."
+      "remaining_boundary": "Proof/evidence records are not an implemented end-user theory/policy explanation surface.",
+      "previous_w2_remaining_boundary": "Proof/evidence records are not an implemented end-user theory/policy explanation surface.",
+      "w3_disposition": {
+        "classification": "no-new-w3-discharge",
+        "system_requirement_accepted": false,
+        "evidence_groups": [],
+        "boundary": "Preserved earlier evidence and boundary; this W3 finite source/reference cut adds no discharge of this requirement."
+      }
     },
     {
       "id": "HS-01",
@@ -3092,7 +4008,14 @@
       "evidence_groups": [
         "contract"
       ],
-      "remaining_boundary": "Candidate module code/contract binding; signed publisher/package admission and operational launch integration remain open."
+      "remaining_boundary": "Candidate module code/contract binding; signed publisher/package admission and operational launch integration remain open.",
+      "previous_w2_remaining_boundary": "Candidate module code/contract binding; signed publisher/package admission and operational launch integration remain open.",
+      "w3_disposition": {
+        "classification": "no-new-w3-discharge",
+        "system_requirement_accepted": false,
+        "evidence_groups": [],
+        "boundary": "Preserved earlier evidence and boundary; this W3 finite source/reference cut adds no discharge of this requirement."
+      }
     },
     {
       "id": "HS-02",
@@ -3122,7 +4045,14 @@
       "adopted": false,
       "demonstrated_requirement": false,
       "evidence_groups": [],
-      "remaining_boundary": "No adversarial package/native sandbox guarantee established."
+      "remaining_boundary": "No adversarial package/native sandbox guarantee established.",
+      "previous_w2_remaining_boundary": "No adversarial package/native sandbox guarantee established.",
+      "w3_disposition": {
+        "classification": "no-new-w3-discharge",
+        "system_requirement_accepted": false,
+        "evidence_groups": [],
+        "boundary": "Preserved earlier evidence and boundary; this W3 finite source/reference cut adds no discharge of this requirement."
+      }
     },
     {
       "id": "HS-03",
@@ -3152,7 +4082,18 @@
       "evidence_groups": [
         "source"
       ],
-      "remaining_boundary": "Existing ordinary Mir arithmetic executes in runtime; full selected domain logic/corpus not established."
+      "remaining_boundary": "Real Mir function bodies determine actual arithmetic results; domain-specific example branches absent. Full domain/library corpus remains open.",
+      "previous_w2_remaining_boundary": "Existing ordinary Mir arithmetic executes in runtime; full selected domain logic/corpus not established.",
+      "w3_disposition": {
+        "classification": "related-scoped-evidence",
+        "system_requirement_accepted": false,
+        "evidence_groups": [
+          "w3_source",
+          "w3_dynamic",
+          "w3_reference"
+        ],
+        "boundary": "Real Mir function bodies determine actual arithmetic results; domain-specific example branches absent. Full domain/library corpus remains open."
+      }
     },
     {
       "id": "HS-04",
@@ -3181,7 +4122,14 @@
       "evidence_groups": [
         "network"
       ],
-      "remaining_boundary": "Fixed probe input/request and output exist; general authorized View/input composition remains open."
+      "remaining_boundary": "Fixed probe input/request and output exist; general authorized View/input composition remains open.",
+      "previous_w2_remaining_boundary": "Fixed probe input/request and output exist; general authorized View/input composition remains open.",
+      "w3_disposition": {
+        "classification": "no-new-w3-discharge",
+        "system_requirement_accepted": false,
+        "evidence_groups": [],
+        "boundary": "Preserved earlier evidence and boundary; this W3 finite source/reference cut adds no discharge of this requirement."
+      }
     },
     {
       "id": "HS-05",
@@ -3211,7 +4159,14 @@
       "adopted": false,
       "demonstrated_requirement": false,
       "evidence_groups": [],
-      "remaining_boundary": "No integrated View/provider-result acceptance profile selected."
+      "remaining_boundary": "No integrated View/provider-result acceptance profile selected.",
+      "previous_w2_remaining_boundary": "No integrated View/provider-result acceptance profile selected.",
+      "w3_disposition": {
+        "classification": "no-new-w3-discharge",
+        "system_requirement_accepted": false,
+        "evidence_groups": [],
+        "boundary": "Preserved earlier evidence and boundary; this W3 finite source/reference cut adds no discharge of this requirement."
+      }
     },
     {
       "id": "HS-06",
@@ -3241,7 +4196,14 @@
       "adopted": false,
       "demonstrated_requirement": false,
       "evidence_groups": [],
-      "remaining_boundary": "One continuous source-driven construction/participation/update/observation path not achieved."
+      "remaining_boundary": "One continuous source-driven construction/participation/update/observation path not achieved.",
+      "previous_w2_remaining_boundary": "One continuous source-driven construction/participation/update/observation path not achieved.",
+      "w3_disposition": {
+        "classification": "no-new-w3-discharge",
+        "system_requirement_accepted": false,
+        "evidence_groups": [],
+        "boundary": "Preserved earlier evidence and boundary; this W3 finite source/reference cut adds no discharge of this requirement."
+      }
     },
     {
       "id": "OP-01",
@@ -3273,7 +4235,14 @@
         "dispatch",
         "resource"
       ],
-      "remaining_boundary": "Reference journal and finite resource budgets checked; all parser/proof/queue/storage paths not closed."
+      "remaining_boundary": "Reference journal and finite resource budgets checked; all parser/proof/queue/storage paths not closed.",
+      "previous_w2_remaining_boundary": "Reference journal and finite resource budgets checked; all parser/proof/queue/storage paths not closed.",
+      "w3_disposition": {
+        "classification": "no-new-w3-discharge",
+        "system_requirement_accepted": false,
+        "evidence_groups": [],
+        "boundary": "Preserved earlier evidence and boundary; this W3 finite source/reference cut adds no discharge of this requirement."
+      }
     },
     {
       "id": "OP-02",
@@ -3302,7 +4271,14 @@
       "evidence_groups": [
         "dispatch"
       ],
-      "remaining_boundary": "No safe history/code/proof-cache reclamation design accepted."
+      "remaining_boundary": "No safe history/code/proof-cache reclamation design accepted.",
+      "previous_w2_remaining_boundary": "No safe history/code/proof-cache reclamation design accepted.",
+      "w3_disposition": {
+        "classification": "no-new-w3-discharge",
+        "system_requirement_accepted": false,
+        "evidence_groups": [],
+        "boundary": "Preserved earlier evidence and boundary; this W3 finite source/reference cut adds no discharge of this requirement."
+      }
     },
     {
       "id": "OP-03",
@@ -3330,7 +4306,14 @@
       "adopted": false,
       "demonstrated_requirement": false,
       "evidence_groups": [],
-      "remaining_boundary": "Performance/availability alpha targets remain unselected; no numerical target invented."
+      "remaining_boundary": "Performance/availability alpha targets remain unselected; no numerical target invented.",
+      "previous_w2_remaining_boundary": "Performance/availability alpha targets remain unselected; no numerical target invented.",
+      "w3_disposition": {
+        "classification": "no-new-w3-discharge",
+        "system_requirement_accepted": false,
+        "evidence_groups": [],
+        "boundary": "Preserved earlier evidence and boundary; this W3 finite source/reference cut adds no discharge of this requirement."
+      }
     },
     {
       "id": "OP-04",
@@ -3358,7 +4341,14 @@
       "evidence_groups": [
         "dispatch"
       ],
-      "remaining_boundary": "Actual child SIGKILL and injected post-effect fsync error preserve unknown outcome; power loss/disk-full/keys/clocks not comprehensively tested."
+      "remaining_boundary": "Actual child SIGKILL and injected post-effect fsync error preserve unknown outcome; power loss/disk-full/keys/clocks not comprehensively tested.",
+      "previous_w2_remaining_boundary": "Actual child SIGKILL and injected post-effect fsync error preserve unknown outcome; power loss/disk-full/keys/clocks not comprehensively tested.",
+      "w3_disposition": {
+        "classification": "no-new-w3-discharge",
+        "system_requirement_accepted": false,
+        "evidence_groups": [],
+        "boundary": "Preserved earlier evidence and boundary; this W3 finite source/reference cut adds no discharge of this requirement."
+      }
     },
     {
       "id": "OP-05",
@@ -3386,7 +4376,18 @@
       "evidence_groups": [
         "records"
       ],
-      "remaining_boundary": "Per-cut commands/hashes/toolchain and external-workdir evidence retained; operational alpha reproduction not achieved."
+      "remaining_boundary": "Relocatable fresh parser/Lean/actual-source runner under integration validation; no operational alpha reproduction yet.",
+      "previous_w2_remaining_boundary": "Per-cut commands/hashes/toolchain and external-workdir evidence retained; operational alpha reproduction not achieved.",
+      "w3_disposition": {
+        "classification": "related-scoped-evidence",
+        "system_requirement_accepted": false,
+        "evidence_groups": [
+          "w3_source",
+          "w3_dynamic",
+          "w3_reference"
+        ],
+        "boundary": "Relocatable fresh parser/Lean/actual-source runner under integration validation; no operational alpha reproduction yet."
+      }
     },
     {
       "id": "WW-01",
@@ -3417,7 +4418,14 @@
       "evidence_groups": [
         "contract"
       ],
-      "remaining_boundary": "Candidate separate module contract linking; independently operated network configurations not demonstrated."
+      "remaining_boundary": "Candidate separate module contract linking; independently operated network configurations not demonstrated.",
+      "previous_w2_remaining_boundary": "Candidate separate module contract linking; independently operated network configurations not demonstrated.",
+      "w3_disposition": {
+        "classification": "no-new-w3-discharge",
+        "system_requirement_accepted": false,
+        "evidence_groups": [],
+        "boundary": "Preserved earlier evidence and boundary; this W3 finite source/reference cut adds no discharge of this requirement."
+      }
     },
     {
       "id": "WW-02",
@@ -3445,7 +4453,14 @@
       "adopted": false,
       "demonstrated_requirement": false,
       "evidence_groups": [],
-      "remaining_boundary": "Global addressing/discovery/link profile remains unselected; not silently added to current alpha scope."
+      "remaining_boundary": "Global addressing/discovery/link profile remains unselected; not silently added to current alpha scope.",
+      "previous_w2_remaining_boundary": "Global addressing/discovery/link profile remains unselected; not silently added to current alpha scope.",
+      "w3_disposition": {
+        "classification": "no-new-w3-discharge",
+        "system_requirement_accepted": false,
+        "evidence_groups": [],
+        "boundary": "Preserved earlier evidence and boundary; this W3 finite source/reference cut adds no discharge of this requirement."
+      }
     },
     {
       "id": "WW-03",
@@ -3476,7 +4491,14 @@
       "evidence_groups": [
         "contract"
       ],
-      "remaining_boundary": "Candidate unknown/mismatched contract fails closed; limited viewing/explanation product flow remains open."
+      "remaining_boundary": "Candidate unknown/mismatched contract fails closed; limited viewing/explanation product flow remains open.",
+      "previous_w2_remaining_boundary": "Candidate unknown/mismatched contract fails closed; limited viewing/explanation product flow remains open.",
+      "w3_disposition": {
+        "classification": "no-new-w3-discharge",
+        "system_requirement_accepted": false,
+        "evidence_groups": [],
+        "boundary": "Preserved earlier evidence and boundary; this W3 finite source/reference cut adds no discharge of this requirement."
+      }
     },
     {
       "id": "WW-04",
@@ -3502,7 +4524,14 @@
       "adopted": false,
       "demonstrated_requirement": false,
       "evidence_groups": [],
-      "remaining_boundary": "Existing-Web bridge not integrated; final alpha inclusion remains a profile decision."
+      "remaining_boundary": "Existing-Web bridge not integrated; final alpha inclusion remains a profile decision.",
+      "previous_w2_remaining_boundary": "Existing-Web bridge not integrated; final alpha inclusion remains a profile decision.",
+      "w3_disposition": {
+        "classification": "no-new-w3-discharge",
+        "system_requirement_accepted": false,
+        "evidence_groups": [],
+        "boundary": "Preserved earlier evidence and boundary; this W3 finite source/reference cut adds no discharge of this requirement."
+      }
     },
     {
       "id": "WW-05",
@@ -3529,7 +4558,14 @@
       "adopted": false,
       "demonstrated_requirement": false,
       "evidence_groups": [],
-      "remaining_boundary": "Publication/federation/governance is unselected and outside delegated public write authority."
+      "remaining_boundary": "Publication/federation/governance is unselected and outside delegated public write authority.",
+      "previous_w2_remaining_boundary": "Publication/federation/governance is unselected and outside delegated public write authority.",
+      "w3_disposition": {
+        "classification": "no-new-w3-discharge",
+        "system_requirement_accepted": false,
+        "evidence_groups": [],
+        "boundary": "Preserved earlier evidence and boundary; this W3 finite source/reference cut adds no discharge of this requirement."
+      }
     },
     {
       "id": "WW-06",
@@ -3557,7 +4593,14 @@
       "evidence_groups": [
         "records"
       ],
-      "remaining_boundary": "Contract/effect correctness is not truth of arbitrary content; no content truth guarantee made."
+      "remaining_boundary": "Contract/effect correctness is not truth of arbitrary content; no content truth guarantee made.",
+      "previous_w2_remaining_boundary": "Contract/effect correctness is not truth of arbitrary content; no content truth guarantee made.",
+      "w3_disposition": {
+        "classification": "no-new-w3-discharge",
+        "system_requirement_accepted": false,
+        "evidence_groups": [],
+        "boundary": "Preserved earlier evidence and boundary; this W3 finite source/reference cut adds no discharge of this requirement."
+      }
     },
     {
       "id": "MG-01",
@@ -3585,7 +4628,18 @@
       "evidence_groups": [
         "records"
       ],
-      "remaining_boundary": "All119 original identities/U-D/approval metadata retained with scoped evidence; this ledger does not approve derived acceptance criteria."
+      "remaining_boundary": "All119 original identities/U-D/approval metadata retained with per-W3 evidence disposition; no blanket detailed acceptance.",
+      "previous_w2_remaining_boundary": "All119 original identities/U-D/approval metadata retained with scoped evidence; this ledger does not approve derived acceptance criteria.",
+      "w3_disposition": {
+        "classification": "related-scoped-evidence",
+        "system_requirement_accepted": false,
+        "evidence_groups": [
+          "w3_source",
+          "w3_dynamic",
+          "w3_reference"
+        ],
+        "boundary": "All119 original identities/U-D/approval metadata retained with per-W3 evidence disposition; no blanket detailed acceptance."
+      }
     },
     {
       "id": "MG-02",
@@ -3611,7 +4665,14 @@
       "adopted": false,
       "demonstrated_requirement": false,
       "evidence_groups": [],
-      "remaining_boundary": "Alpha1–8 are retained, not satisfied. No single integrated construction/network/hotplug/save/observation candidate yet."
+      "remaining_boundary": "Alpha1–8 are retained, not satisfied. No single integrated construction/network/hotplug/save/observation candidate yet.",
+      "previous_w2_remaining_boundary": "Alpha1–8 are retained, not satisfied. No single integrated construction/network/hotplug/save/observation candidate yet.",
+      "w3_disposition": {
+        "classification": "no-new-w3-discharge",
+        "system_requirement_accepted": false,
+        "evidence_groups": [],
+        "boundary": "Preserved earlier evidence and boundary; this W3 finite source/reference cut adds no discharge of this requirement."
+      }
     },
     {
       "id": "MG-03",
@@ -3639,7 +4700,18 @@
       "evidence_groups": [
         "records"
       ],
-      "remaining_boundary": "Same W2 theory gate; no production increment premised on unaccepted foundations."
+      "remaining_boundary": "One W3 theory/reference consumer; only checked foundations mirrored, no production increment premised on unaccepted foundations.",
+      "previous_w2_remaining_boundary": "Same W2 theory gate; no production increment premised on unaccepted foundations.",
+      "w3_disposition": {
+        "classification": "related-scoped-evidence",
+        "system_requirement_accepted": false,
+        "evidence_groups": [
+          "w3_source",
+          "w3_dynamic",
+          "w3_reference"
+        ],
+        "boundary": "One W3 theory/reference consumer; only checked foundations mirrored, no production increment premised on unaccepted foundations."
+      }
     },
     {
       "id": "MG-04",
@@ -3666,7 +4738,18 @@
       "evidence_groups": [
         "records"
       ],
-      "remaining_boundary": "Frozen input/source hashes, commands, axioms and mutations retained; no old test count used as target."
+      "remaining_boundary": "Frozen sources, full owned-declaration audit, commands/hashes and actual source cases retained; failed development runs excluded.",
+      "previous_w2_remaining_boundary": "Frozen input/source hashes, commands, axioms and mutations retained; no old test count used as target.",
+      "w3_disposition": {
+        "classification": "related-scoped-evidence",
+        "system_requirement_accepted": false,
+        "evidence_groups": [
+          "w3_source",
+          "w3_dynamic",
+          "w3_reference"
+        ],
+        "boundary": "Frozen sources, full owned-declaration audit, commands/hashes and actual source cases retained; failed development runs excluded."
+      }
     },
     {
       "id": "MG-05",
@@ -3693,7 +4776,18 @@
       "evidence_groups": [
         "records"
       ],
-      "remaining_boundary": "Candidate/local evidence and owner/formal acceptance remain distinct; no Plan250 automatic resume."
+      "remaining_boundary": "W3 remains active pending integration/review/Git, then owner-requested stop. Canon/Plan250/I3-4 state unchanged.",
+      "previous_w2_remaining_boundary": "Candidate/local evidence and owner/formal acceptance remain distinct; no Plan250 automatic resume.",
+      "w3_disposition": {
+        "classification": "related-scoped-evidence",
+        "system_requirement_accepted": false,
+        "evidence_groups": [
+          "w3_source",
+          "w3_dynamic",
+          "w3_reference"
+        ],
+        "boundary": "W3 remains active pending integration/review/Git, then owner-requested stop. Canon/Plan250/I3-4 state unchanged."
+      }
     },
     {
       "id": "MG-06",
@@ -3721,7 +4815,18 @@
       "evidence_groups": [
         "proofs"
       ],
-      "remaining_boundary": "General definitions/proofs and decisive counterexamples recorded in one W2 report; this matrix itself is not a semantic milestone."
+      "remaining_boundary": "One W3 milestone report2613 accumulates real definitions/proofs/counterexamples and integration; matrix is evidence indexing, not a semantic milestone.",
+      "previous_w2_remaining_boundary": "General definitions/proofs and decisive counterexamples recorded in one W2 report; this matrix itself is not a semantic milestone.",
+      "w3_disposition": {
+        "classification": "related-scoped-evidence",
+        "system_requirement_accepted": false,
+        "evidence_groups": [
+          "w3_source",
+          "w3_dynamic",
+          "w3_reference"
+        ],
+        "boundary": "One W3 milestone report2613 accumulates real definitions/proofs/counterexamples and integration; matrix is evidence indexing, not a semantic milestone."
+      }
     }
   ]
 }

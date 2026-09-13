@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-09-14 00:10 JST
+最終更新: 2026-09-14 06:12 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -56,9 +56,9 @@ public/production layers remain later.
 ## current milestone position
 
 The owner explicitly requested W3 on2026-09-12, under the prior single-main and
-proof-first rules. W3 dynamic composition is the sole task-local active goal
-(PL1 S0/S1/S3 theory/proof/reference). Stop after W3; W4+ and alpha are not this
-run's autonomous queue. Plan250 remains separately paused after I3-3.
+proof-first rules. W3 dynamic composition is closed as a finite
+PL1 S0/S1/S3 theory/proof/reference candidate. This request stops here; W4+ and
+alpha are not an active autonomous queue. Plan250 remains separately paused after I3-3.
 
 W2's finite checked/reviewed result and committed/pushed cut remain preserved:
 24-file kernel/18-mutation evidence, one private captured frame/history,
@@ -74,20 +74,26 @@ are recovered and dispositioned; an insensitive mutation target was corrected.
 No grant is issued by insertion, but an already issued numeric-target grant may
 be applicable after insertion. The controls distinguish these claims.
 
-The W3 source/reference consumer is now mirrored in the existing sample, Lean
-and script roots. Its actual Rust parser -> named strict lowering -> typed source
--> SAME configuration/authority/arithmetic machine path passes fresh reproduction:
-12 source statements,9 adverse source cases,12 frontend cases and39-module
-all-declaration audit (5339 owned declarations, standard3 axioms only). General
-proofs cover type/machine/catalog, value/producer history, allocation, locators,
-retained contracts and saved pending-use behavior. Reproduce with
-`python3 scripts/proof_first_composition_source_check.py --work-root /tmp`.
+The maintained-reference/session extension is integrated at81f82a0b, normally
+pushed with exact remote parity. Actual17statement source builds ABC/AC, performs
+ordinary assignment/alias calls, fallback/reacquire/release and supports separately
+parsed same-session additions/repairs. Generic proofs cover admitted engine/source/
+session entries, current/historical authority, exact pending/result use, actual
+origins/read producers, parsed placement, source partitions and retained archives.
+Fresh76module/9055owned-declaration audit,32actualsource controls,13integrity/consumer
+negatives and5proof-weakening controls pass; original source and dynamic regressions
+pass. Reproduce with `python3 scripts/proof_first_reference_source_check.py --work-root /tmp`.
+Counts describe this finite evidence, not total requirement completion.
 
-Five substantive Oracle reviews are terminal/dispositioned. Two fallback capture attempts were unusable (Preview placeholder, then wrong
-conversation). A new question-bound review is active; capture verifies the original
-target and full question, and this invocation disables automatic reattach. Dynamic owner binding/fallback,
-final material review and W3 closure remain open.
-No W3 completion or source/network/IFC/alpha operational promotion follows.
+Twelve substantive Oracle reviews are recovered/dispositioned. Actual Session
+consumer, complete fresh recipe and generated-byte handoff findings were corrected.
+The last review substantiates no further material defect, with explicit limits:
+name checks alone do not assert witness types/ownership; honest exclusive workdir
+ownership covers capture, compiler artifacts and final publication. Helper-copy
+controls are not full parent fault injection. H/C policy alternatives and Q18
+remain distinct, conditional and unadopted. W3 candidate closure is separate from
+physical distribution, durable restoration, secret observation, alpha or Canon
+acceptance. No next semantic package or Plan250 resume is selected.
 
 Scoped W1 dependencies retain their boundaries. The whole mandatory corpus
 remains incomplete;1004 previous full reads match current hashes,12 changed
@@ -384,3 +390,7 @@ The authorized roadmap is paused, not blocked, stale or closed.
 - 2026-09-13 23:01 JST — W3 actual source/history: strict lowering, write/value provenance, fresh request allocation and retained result contract proofs pass; source Oracle counterexamples repaired,33-module audit passed. Dynamic fallback remains open (Report2613).
 
 - 2026-09-13 23:47 JST: W3 source／履歴／locatorの一般証明を同じ実行へ接続し、repoからfresh再現・全宣言監査を通過。動的fallbackと最終reviewは継続。
+
+- 2026-09-14 05:26 JST: W3保持参照／current head／source継続・由来を一般証明へ接続し、repoからfresh75module／source32／変異5を検査。最新Oracleのconsumer／完全suite指摘を修正中、最終統合へ継続。
+
+- 2026-09-14 06:12 JST: W3有限候補をclose。通常source／同一Session／全対象entryの証明、fresh76module監査、source32・手順反例13・弱化5・回帰・最終Oracleを確認。source81f82a0bを通常pushし、W4以降を開始せず停止。

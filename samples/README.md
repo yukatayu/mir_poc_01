@@ -9,7 +9,9 @@
   - `mirrorea-proof-first-composition/` はW3通常sourceの非production参照実行。
     実parserと同じLean構成machineを外部コピーで検査する。
     `python3 scripts/proof_first_composition_source_check.py --work-root /tmp`。
-    legacy clean runner／生成Lean manifest外で、動的fallbackと最終reviewは継続中。
+    保持参照・fallback・再取得・取消し・継続の `reference.mir` は
+    `python3 scripts/proof_first_reference_source_check.py --work-root /tmp`。
+    legacy clean runner／生成Lean manifest外。W3の有限候補として検証・review済み。
   - `mirrorea-i2-local-toy/` is the accepted SYS-5 four-locus local toy
     workflow root. It uses one ordinary `.mir` source plus two source patches
     and is exercised through `mir project-loci`, `mir run-local`, and

@@ -1,72 +1,51 @@
-# Resume — W3 ACTIVE, sole main
+# W3 RESUME — 2026-09-14 06:15 JST
 
-Updated 2026-09-14T00:10:34.189907+09:00. Continue until W3 completion, then stop. Existing goal active;
-no token budget. NO SUBAGENTS/sorry/admit/custom axioms. W4+/Plan250-I3-4 inactive.
-Startup161be3f9 clean; HEAD/origin9d7546032dc4891bae2a96c3e1a67fb89fd42011.
-Own dirty source/parser/tests/docs plus28 new Lean modules, source sample and runner.
-No Canon/original handoff/owner-key/public/production changes. Own normal commit
---no-gpg-sign and push authorized. No force/reset/clean. Report2613 only.
+W3 finite theory/proof/reference candidate CLOSED. Sole main; NO SUBAGENTS used.
+No active successor. User scope stops after W3; W4+ and Plan250/I3-4 NOT resumed.
+No Canon/THM/OBL/phase, policy, public API/wire or alpha acceptance.
 
-CURRENT layer PL1 S0/S1/S3 theory/proof/nonproduction reference. Source/history
-consumer now MIRRORED under samples/lean/foundations/MirroreaProofFirst*.lean,
-samples/clean-near-end/mirrorea-proof-first-composition and scripts/proof_first_composition_source*.
-Fresh repo reproduction PASS490f9e/28f4e9, W3_SOURCE_CHECK.json:38 proof modules,
-actual main12statements,9 adverse source cases,12 frontend cases,39 audited modules
-including actual sample/5339 owned declarations, standard3 axioms only. Source
-Locators draft4 PASSa1be4f closes all10statement bounds; earlierfailed363302 retained.
-New general source lowering/history/producer/locator/allocation/retained-contract
-proofs await final material review. Do not mark W3 closed at this component result.
+Baseline before W3:161be3f9a46df7cf279a3da136d565b4c373a21a, clean.
+Prior source:878966768a8323bef5026dec90c9251cc6e3bb98.
+Final source/evidence:81f82a0b47b828ba999f9d32348adbd47b6b3441, commitdf49ec/push5c7bfc,
+remote main53a2e1 exactly matches. Final docs are the commit containing this file;
+verify actual HEAD/remote/status on any new session. Original user dirt was absent;
+only own changes were staged. No reset/clean/force or handoff-original edits.
 
-External root /tmp/mirrorea-w3-20260912-1_kv7wfk (pointer /tmp/mirrorea-w3-current-workdir).
-lifecycle/ retains drafts and pre-mirror working models; repo is latest normalized
-source. Fresh final repo copy mir-w3-source-eheyvx4u (prior vcs2jbf2 retained). Failed first repo copy
-mir-w3-source-m4bai38z unknown SourceAuthoring import; fixed first generated import.
-Earlier fresh-source-kayjas79 passes prior normalization and same proof content.
-Heavy builds remain external, sequential Lean/Cargo4GiB RLIMIT_AS, jobs1/incremental0.
-Root49GiBfree/RAM11GiBavailable at latest audit; externalmount absent. No cleanup.
-OOMguard caught4GiB allocation-proof conversion panic earlier; inferred proof type
-retains same term/proposition and passes. No hostOOM claim; no Oracle memory limit.
+Final evidence:docs/proof-first/W3_REFERENCE_CHECK.json; Report2613 and
+samples/lean/foundations/MirroreaProofFirstDynamicComposition.md. Original W1/W2
+and prior W3 results retained, failed runs not reclassified. Final063bc3/7395e7
+workdir:/tmp/mirrorea-w3-20260912-1_kv7wfk/mir-w3-reference-_k1ehmfw.
+76modules/9055owned declarations,32real-source cases,13integrity/consumer negatives,
+5designated-proof mutants; source40/5472 and dynamic11/19 regressions also pass.
+Final make docs9b58dc passed (Canon index/hierarchy/scaffold); no live compiler.
+Lean4.29.1/f72c35b3 --trust=0, only propext/Classical.choice/Quot.sound, no Mir axioms
+or sorry/admit. Manifestbd7af23035a560f1f41f8ec30ef7c5af3589bb8102b2c8e708670613ac40b189.
+Reproduce:python3 scripts/proof_first_reference_source_check.py --work-root /tmp
+Compare printed MANIFEST SHA with registry for exact candidate identity.
 
-LIVE Oracle mirrorea-w3-fallback-bound sent ONCE5eaac8, exec14138.
-Directory oracle-w3-fallback-bound; START/COMMAND/MANIFEST/RUN/LAST_CHECK/EXIT.
-Questionb4effaa0fe273bcb8eff7b530949cc195e39c1ed40d1eb1efb54d9350f0deeb4,
-manifest03da3cbd9f897902ebcb1f4c097cd2bd4ce96ccb30224f67487a3f319e325fa7.
-Invocation disables browser auto-reattach/recheck, keeps original browser/tab.
-After ≥180s use node <external-root>/oracle_exact_capture.mjs <packet-dir>:
-exact target + full normalized question must match BEFORE returning assistant text.
-No navigation, browser settings/global wrapper edits or paid fallback. Original
-command capture timeout is not job failure; preserve same tab and continue ≥180s.
-Design job6 captured Preview only; recovery job7 captured unrelated conversation.
-Both are NOT REVIEW. DO NOT read/quote/commit/attach the unrelated ANSWER/HARVEST or
-transcript. RECEIPT marks wrong capture; gatecc94f1 rejects wrong question. Only
-five substantive reviews remain recovered/dispositioned (entry/kernel/audit/management/source).
+All12 substantive Oracle reviews recovered. Last mir-w3-integrity-delta:
+questionc7e69b560f14135dc0ca7adf6e18f766edf224daf2ebdaca27168ac9647e2d2b,
+packetmanifest769d3a4979fdb976db89a2da1f5ae2840c0e92c7742d85a7afaf9196e2f42bbc,
+exactcapturef443b6/fullreadf9d185/wrapper84bb42. No live job to poll or resend.
+Advice is not proof/signature/owner adoption. Earlier unbound wrong-conversation
+capture files must not be read/copied as relevant advice. No Chrome config change.
 
-NEXT: preserve own source checkpoint (not
-W3 closure); then actual dynamic fallback. Reproduced
-counterexampledd32e8 in lifecycle/FallbackClassificationBefore.lean: early
-outsideProfile hides later malformed edge. First syntaxfailure5d34d1 retained.
-Repaired whole-chain combination, independent MalformedLinks judgment and
-checkShape_malformed PASS79fa97, controls3c7d3e. Old masking mutant rejected at
-combine_malformed_right2f62ec. Mirrored and fresh full proof/source audit28f4e9
-5339 declarations passes. Full make docs now PASS0e25f0 after notice/headings/source-reference fixes; source
-checks28f4e9 and parser8testsfadf43 pass. Git checkpoint not yet committed.
-Oracle review may clarify other issues; inspect complete answer and disposition.
+Selected TCB: actual Rust parser/Python adapter, honest subprocesses/receipts,
+exclusive workdir through first capture/compiler artifacts/final publication,
+authentic current heads/claims, isolated fresh namespace, complete retained history,
+sequential atomic publication. #check names alone do not assert types/ownership;
+actual generated declarations are checked. Digest checks are at comparison points,
+not an atomic snapshot. H/H2, C/C2 and Q18 remain separate/unadopted policies.
+No physical network, durable same-instance restart, secret observation, liveness,
+general higher-order source/plugin or alpha claim. Source has one pending call.
 
-Fallback candidate A lazy owner processing before access versus B eager owner
-processing at mutation. Missing current owner authority => NO binding mutation.
-Saved option guard ≠ owner authority ≠ actual-argument invocation permission;
-no dummyargument Ticket for reference authorization. No implicit same-option
-witness refresh. Strict later index/degradation, explicit fresh epoch/lineage
-reacquire only rewind. Updated state/degrade prefix survives later call failure.
-Static floor reparent rejection is tentative/reviewed question, not accepted policy.
-Transient invalidity/recovery between accesses may distinguish A/B; audit it.
-No dynamic binding implementation yet. Current sourceValue/Statement still lacks
-maintained reference; do not substitute trustedAPI-only construction for source.
+READ_LEDGER3397 entries, next historical example293; global corpus incomplete.
+Indexes/grep/authored files are not full reads.119identity/U-D/approval dispositions,
+30Q/18PT/24SC/alpha1–8 retained, no blanket acceptance. Only LAB correspondence
+updated; no new whole-repo plan. Configured/mnt/mirrorea-work absent; small/tmp
+copies, serial4GiB Lean/Cargo children, no cache deletion or host-share use.
 
-Remaining W3: same-state/source owner binding, degradation/reacquire, allmutator
-staticfloor and pending/current-result closure, meaningful counterexamples,
-final material Oracle review, regressions/119dispositions/docs/Git. Original119
-rows intact, globalmandatoryreading incomplete nextlegacy283; no new globalplan.
-Q18 reservation vs currentreauth separate; fully drained admission/forks/durability/
-physicalnetwork/privacy not implicitly solved. RESUME and Report2613 preserve prior
-proof details and failures. Discordbegin388710 only, lastprogress13e093, no complete.
+Next commands for a new explicit task: git status --short; git rev-parse HEAD;
+git ls-remote origin refs/heads/main (separate commands). Do not rerun baseline or
+consultation merely because context was compacted. An explicit W4 request can
+activate its own goal while retaining Canon owner resume and authority boundaries.

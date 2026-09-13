@@ -58,7 +58,7 @@ Plan250 の I3-4 resume、正式 THM/OBL の更新、production / α受理では
 
 - [W2 computations/continuations](foundations/MirroreaProofFirstResourceComputations.md): 実際のcurrent allocation、資源Delta、失敗後の残余、捕捉した継続と型保存。有限profileの差分Oracle review済み。production/αの受理ではない。
 
-- [W3 dynamic composition dependencies](foundations/MirroreaProofFirstDynamicComposition.md): named catalog elaboration、動的support/個別DAG、既存handle/current-use、局所影響とcurrent choice。kernel/変異検査済みの候補であり、source/lifecycle/fallback統合・最終reviewは継続中です。
+- [W3 dynamic composition dependencies](foundations/MirroreaProofFirstDynamicComposition.md): named catalog elaboration、動的support/個別DAG、既存handle/current-use、保持参照とsource/sessionを接続した有限候補。kernel/変異検査・通常source接続・最終reviewを経た有限候補です。
 
 W3の依存だけを外部fresh copyで再検査するコマンドは
 `python3 scripts/proof_first_dynamic_composition_check.py --work-root /tmp` です。
@@ -67,7 +67,10 @@ W3の依存だけを外部fresh copyで再検査するコマンドは
 W3の通常sourceから実構成machineまでの候補は
 `python3 scripts/proof_first_composition_source_check.py --work-root /tmp` で検査します。
 Rust parserを外部buildし、source由来の値・操作・private write/producer履歴を同じ状態から得ます。
-動的fallback／再取得と最終reviewは未完了で、W3完成ではありません。
+保持参照・fallback／再取得・取消し・source継続の追加候補は
+`python3 scripts/proof_first_reference_source_check.py --work-root /tmp` です。
+独立checkerとの対応、全対象entryの保存、actual event/source由来、単調authority履歴を
+一般証明へ接続しています。W3の有限候補を検証・review・source統合済みです。実network／永続復旧／秘密観測／α受理は別です。
 
 これらは `current_l2_lean_sample_sync.py` の生成対象・manifest 集計外です。
 一般命題は Lean4.29.1 の kernel で検査し、各ファイルの `#print axioms`

@@ -1,28 +1,27 @@
 # samples_progress
 
-Last updated: 2026-09-14 00:10 JST
+Last updated: 2026-09-14 06:12 JST
 
 Plan250 execution control: I3-3 is accepted and owner-paused with no active
 semantic milestone. Plan 250 remains retained; I3-4/I3-5/I3-6/NEXT-0 remain
 dependency-gated inactive and I3-4 requires explicit owner resume. No sample,
 program completion or official lifecycle entry claim follows.
 
-Separate task-authorized proof-first LAB research is active at W3 dynamic composition.
-W2 finite closure is retained. Committed W3 dependency checkpoint9d754603 has
-fresh11-file kernel/19 mutation/1716-declaration audit evidence. The source/history
-candidate is now mirrored under existing sample/Lean/scripts roots. Fresh actual
-Rust parser execution passes12 main statements,9 source cases and12 frontend cases;
-39-module/5339-owned-declaration audit includes general locator/read/ID/history
-and retained-contract proofs. Five substantive Oracle reviews are recovered; two
-fallback captures were unusable and a question-bound review job is active. Dynamic fallback/reacquire,
-final material review remain open.
-No I3-4 resume, W3 completion, public workflow or alpha promotion follows.
+Task-authorized W3 is closed as a finite theory/reference candidate, retaining
+W1/W2 evidence. Actual source builds ABC/AC, computes assignment/alias calls,
+maintains fallback/reacquire/release and continues or repairs the same Session.
+Fresh76module/9055owned audit,32source controls,13integrity/consumer negatives and5
+proof-weakening controls pass. Twelve Oracle reviews are recovered/dispositioned;
+source/evidence81f82a0b is normally pushed. This is local in-memory evidence, not
+physical nodes, durable restore, confidential observation, alpha or Canon promotion.
+No W4+ task or Plan250/I3-4 resume is active.
 
-| W3 evidence | Reproduction | Remaining gate |
+| W3 evidence | Reproduction | Remaining boundary |
 |---|---|---|
-| Committed named/dynamic finite foundations | `python3 scripts/proof_first_dynamic_composition_check.py --work-root /tmp` | full source/reference/all-mutator integration |
-| Source/history reference candidate (not an alpha workflow) | `python3 scripts/proof_first_composition_source_check.py --work-root /tmp`; `samples/clean-near-end/mirrorea-proof-first-composition/main.mir` | dynamic fallback/reacquire, final material review |
-| Private LAB parser boundary regressions | `cargo test --locked --offline -p mir-ast --all-targets` | source adapter is a limited research consumer, not final grammar |
+| Dynamic finite foundations | `python3 scripts/proof_first_dynamic_composition_check.py --work-root /tmp` | checked11module/19mutant cut; physical refinement later |
+| Original source/history regression | `python3 scripts/proof_first_composition_source_check.py --work-root /tmp`; sample `main.mir` | regression after cancellation extension passed; local finite source profile |
+| Maintained reference/source sessions | `python3 scripts/proof_first_reference_source_check.py --work-root /tmp`; sample `reference.mir` | candidate checked/reviewed; authentic current heads, complete history and exclusive workdir are assumptions |
+| Parser boundary | `cargo test --locked --offline -p mir-ast --all-targets` | earlier W3 parser cut tested; no later Rust change; finite private adapter, not final grammar |
 
 Detailed component counts, historical cuts and command classifications remain in
 Report 2606. Canon/status acceptance is `aafde92229bb0ff18116f38d4750a0a8f61cb069`

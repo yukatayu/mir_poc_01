@@ -1,8 +1,8 @@
 {
   "schema": "proof-first-w3-reference-check-v1",
-  "timestamp": "2026-09-13T21:03:43.368214+00:00",
+  "timestamp": "2026-09-14T06:15:50.756787+09:00",
   "base_head": "878966768a8323bef5026dec90c9251cc6e3bb98",
-  "classification": "finite nonproduction W3 candidate validated and reviewed; Git integration pending; no Canon or alpha acceptance",
+  "classification": "closed finite nonproduction W3 research/reference candidate; no Canon or alpha acceptance",
   "invocation": [
     "env",
     "MIR_W3_CASE_FILTER=no-such-case",
@@ -2668,7 +2668,11 @@
     "proof_targets": 18,
     "scenarios": 24,
     "alpha_conditions": 8,
-    "no_adoption_flags_raised": true
+    "no_adoption_flags_raised": true,
+    "latest_tool_receipt": "d76fad",
+    "read_ledger_entries": 3397,
+    "next_historical_unread": "specs/examples/293*",
+    "global_corpus_complete": false
   },
   "prior_integrated": [
     {
@@ -8509,9 +8513,9 @@
   ],
   "documentation_check": {
     "command": "make docs",
-    "terminal_tool": "f77a22",
+    "terminal_tool": "9b58dc",
     "status": "passed",
-    "note": "source/evidence integration checkpoint; final documentation transaction checked separately"
+    "note": "final W3 close documents, after source/evidence integration81f82a0b"
   },
   "post_review_packet_delta": {
     "classification": "receipt label and one outside-string trailing space only; case/runner AST equal to reviewed packet; no generated source/semantics/checker/audit change",
@@ -8521,5 +8525,13 @@
     "reviewed_manifest": "c96290996027452e44040654e14cf1ade13124128458e896bfe061e95bd37444",
     "final_manifest": "bd7af23035a560f1f41f8ec30ef7c5af3589bb8102b2c8e708670613ac40b189",
     "fresh_validation": "mir-w3-reference-_k1ehmfw"
+  },
+  "git": {
+    "source_evidence_commit": "81f82a0b47b828ba999f9d32348adbd47b6b3441",
+    "commit_tool": "df49ec",
+    "normal_push_tool": "5c7bfc",
+    "remote_parity_tool": "53a2e1",
+    "remote_ref": "origin/main",
+    "documentation_transaction": "commit containing this close record; final HEAD/remote check performed before task completion"
   }
 }

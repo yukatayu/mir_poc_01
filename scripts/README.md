@@ -11,7 +11,19 @@
   `python3 scripts/proof_first_composition_source_check.py --work-root /tmp`。
   入力は `samples/clean-near-end/mirrorea-proof-first-composition/`、adapterは
   `proof_first_composition_source.py`、case runnerは `tests/proof_first_composition_*_cases.py`。
-  成果物は外部workdir、動的fallbackと最終reviewは未完了。
+  成果物は外部workdir。maintained referenceの追加検査は次のcommand。
+
+- `proof_first_reference_source_check.py`
+  W3の通常sourceと保持参照・fallback・再取得・取消し・継続を同じmachineで検査。
+  `python3 scripts/proof_first_reference_source_check.py --work-root /tmp`。
+  入力は上記sampleの `reference.mir`、adapterは `proof_first_reference_source.py`、
+  case／変異runnerは `tests/proof_first_reference_*.py`。実Rust parserと全Lean依存を
+  fresh構築し、全所有宣言を監査する。producerのhashと同一byteの受け渡し、
+  記録した入力・生成consumer・audit・manifestの終了時一致も検査する。
+  `tests/proof_first_reference_integrity_cases.py` は実生成物のコピーで差し替えと
+  Session証明の欠落を拒否し、`tests/proof_first_reference_gate_cases.py` はmetadataだけの
+  負例を扱う。どちらも新しい意味論の証明／E2Eではない。非productionの有限候補で、
+  検証・review済み。実network／復旧／秘密観測の受理ではない。
 
 - `proof_first_dynamic_composition_check.py`
   W3 task-local LAB候補の11依存を外部fresh copyでLean4.29.1 trust0検査し、19変異を指定した一般命題で拒否する。
