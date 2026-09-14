@@ -1,6 +1,6 @@
 # samples_progress
 
-Last updated: 2026-09-14 06:12 JST
+Last updated: 2026-09-14 12:53 JST
 
 Plan250 execution control: I3-3 is accepted and owner-paused with no active
 semantic milestone. Plan 250 remains retained; I3-4/I3-5/I3-6/NEXT-0 remain
@@ -14,7 +14,13 @@ Fresh76module/9055owned audit,32source controls,13integrity/consumer negatives a
 proof-weakening controls pass. Twelve Oracle reviews are recovered/dispositioned;
 source/evidence81f82a0b is normally pushed. This is local in-memory evidence, not
 physical nodes, durable restore, confidential observation, alpha or Canon promotion.
-No W4+ task or Plan250/I3-4 resume is active.
+Owner has now activated W4 only. Its publication/value/outcome/use-interval
+model is mirrored and fresh-integrated with the reference checker's
+`--with-publication`:92modules/10119owned declarations,32source/13integrity controls,
+5reference+8publication proof mutants. Existing I3 process/QUIC46case baseline
+also passes. These are distinct component/model and prior network evidence;
+new actual-source physical refinement remains open. Six reviews are recovered; the closed source/publication evaluator and
+explicit-result response are kernel-checked and reviewed. The seventh reviews external finite owner-image/qualified residual candidates, which are not in this fresh runner (Report2614). W5+ and Plan250/I3-4 remain inactive.
 
 | W3 evidence | Reproduction | Remaining boundary |
 |---|---|---|
@@ -435,3 +441,5 @@ python3 scripts/operational_product_samples.py check-all --format json
 | 2026-05-07 10:22-12:03 JST | `P-OPS-20..25` queue and scope hardening | pass | distribution, room-chat, portal/shard starter, Sugoroku, and widening-queue scope blocks were added or narrowed |
 | 2026-05-06 21:12-2026-05-07 09:57 JST | `P-OPS-01..19` operational suite and adoption probe | pass | operational suite roots, starter docs, backend inventory, installed-binary probe, and shipped surface were actualized or narrowed |
 | 2026-05-05 | `P-A1-25..31` product alpha-1 release-candidate line | pass | product alpha boundary, CLI/schema, runtime, save/load, transport/devtools, native bundle, and release check were actualized |
+
+W4 external checkpoint (2026-09-14 12:15 JST): provisional typed allocation qualifier is now parsed from actual Mir source;17statements/4local-model replies10/10/11/10 and source negatives pass. General Session partition/identity/source invariants remain external; the sixth review is recovered. Later residual typing/finite owner-image proofs and14parser controls pass; seventh review is active. These files are not active sample roots or a reproduced Rust/network workflow. Report2614 retains exact paths and evidence.

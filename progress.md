@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-09-14 06:12 JST
+最終更新: 2026-09-14 12:53 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -55,10 +55,22 @@ public/production layers remain later.
 
 ## current milestone position
 
-The owner explicitly requested W3 on2026-09-12, under the prior single-main and
-proof-first rules. W3 dynamic composition is closed as a finite
-PL1 S0/S1/S3 theory/proof/reference candidate. This request stops here; W4+ and
-alpha are not an active autonomous queue. Plan250 remains separately paused after I3-3.
+The owner explicitly requested W4 after W3 closed. W4 physical refinement is the
+sole task-local goal, PL1/PL2/PL0 S4/S6, with one main and no subagents. Stop after
+W4; W5+/alpha are not active. Plan250 remains separately paused after I3-3.
+
+| W4 axis | Current evidence | Remaining gate / startability |
+|---|---|---|
+| Logical specification | fresh92module audit; closed source/publication commands, explicit results, outcome/ordinal/rootedness proofs | 着手可能: participant projection, actual owner provenance, finite representation and narrow review |
+| User-facing specification | unchanged actual-parser17statement source executes through the local protocol model; authority/configuration are distinct | 後段依存: actual generated owner execution, source/result/observation correspondence |
+| Implementation / operation | current W3 baseline and existing I3 actualprocess/QUIC46cases pass; no new Rust behavior | 後段依存: bounded internal implementation after corresponding theory gate, all-entry and actual fault regression |
+
+The model's publication revisions do not replace authority generations. Complete
+source pending/history persists across publication; local active validation/use
+intervals must finish before acknowledging freeze. Authentic messages, complete
+participant coverage and real serialization remain obligations, not proved by the
+model. Six Oracle reviews are recovered; the original-declaration adapter defect is reproduced and repaired. A seventh review covers finite owner representation, typed residual preservation and the physical cut. External actual-source qualification and all-entry logical identity/partition proofs pass; current caller admission and real owner ancestry remain. Report2614
+accumulates results; no component count implies W4 completion.
 
 W2's finite checked/reviewed result and committed/pushed cut remain preserved:
 24-file kernel/18-mutation evidence, one private captured frame/history,
@@ -98,7 +110,7 @@ acceptance. No next semantic package or Plan250 resume is selected.
 Scoped W1 dependencies retain their boundaries. The whole mandatory corpus
 remains incomplete;1004 previous full reads match current hashes,12 changed
 files were excluded from reuse at startup. No new whole-project roadmap adopted.
-Memory: `plan/proof-first-foundation-correspondence.md`; evidence: Report2613,
+Memory: `plan/proof-first-foundation-correspondence.md`; current evidence: Report2614; W3 history: Report2613,
 `docs/proof-first/W3_ENTRY_CHECK.json` and preserved Reports2611/2612.
 
 | Task axis | Current status | Startability |
@@ -394,3 +406,15 @@ The authorized roadmap is paused, not blocked, stale or closed.
 - 2026-09-14 05:26 JST: W3保持参照／current head／source継続・由来を一般証明へ接続し、repoからfresh75module／source32／変異5を検査。最新Oracleのconsumer／完全suite指摘を修正中、最終統合へ継続。
 
 - 2026-09-14 06:12 JST: W3有限候補をclose。通常source／同一Session／全対象entryの証明、fresh76module監査、source32・手順反例13・弱化5・回帰・最終Oracleを確認。source81f82a0bを通常pushし、W4以降を開始せず停止。
+
+- 2026-09-14 09:21 JST: W4をowner依頼で開始。W3追試と既存実process/QUIC46件を確認。公開状態・Session・使用区間の一般証明、通常sourceの局所モデル、具体的弱化反例を検査し、Oracle差分reviewへ。実装gateは継続中。
+
+- 2026-09-14 10:07 JST — W4公開値/返り値/使用区間と一般の正常公開手順をfresh統合検査（87modules/9887owned、source/反例/audit通過）。実owner/source対応は未完了、差分Oracle review継続。Report2614。
+
+- 2026-09-14 10:45 JST: W4の公開経路にも明示的な結果受取りを適用し、待機tickの迂回反例と拒否・通常sourceの正例を確認。fresh92module/10119owned、source32・整合性13・弱化5+8が通過。実owner/配置対応は継続中。
+
+- 2026-09-14 11:27 JST: W4の閉じた公開経路の第4回Oracleを回収。実sourceの配置反例、明示配置の一般Lean対応と参照・取消しの不整合を確認。外部候補は未採用、実source/Core/owner接続を継続。
+
+- 2026-09-14 12:15 JST: W4外部候補で実sourceの配置指定・参照別名・交換/fallback/再取得/解放を接続し、17文/4結果と一般Session保存を検査。caller退出後の開始を現在性の反例として保持、第6回Oracle継続。実network統合は未達。
+
+- 2026-09-14 12:53 JST: W4の元source宣言解決の反例を修正し、14件の実parser検査を通過。全7入口の残余型・待機継続と有限ownerデータの一般対応証明・所有宣言監査を確認。第7回Oracle開始、実network接続は継続中。

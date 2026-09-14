@@ -60,6 +60,8 @@ Plan250 の I3-4 resume、正式 THM/OBL の更新、production / α受理では
 
 - [W3 dynamic composition dependencies](foundations/MirroreaProofFirstDynamicComposition.md): named catalog elaboration、動的support/個別DAG、既存handle/current-use、保持参照とsource/sessionを接続した有限候補。kernel/変異検査・通常source接続・最終reviewを経た有限候補です。
 
+- [W4 publication dependency](foundations/MirroreaProofFirstPublication.md): 公開値・使用区間・返り値、明示的な結果受取りと待機中の代替完了経路の拒否、非空有限cohortの正常公開手順。reference checkerに `--with-publication` を付けて検査する。物理通信・owner実行との対応は未完了。
+
 W3の依存だけを外部fresh copyで再検査するコマンドは
 `python3 scripts/proof_first_dynamic_composition_check.py --work-root /tmp` です。
 11依存と19変異を検査し、結果の保存先を表示します。

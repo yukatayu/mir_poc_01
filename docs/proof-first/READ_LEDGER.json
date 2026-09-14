@@ -23780,5 +23780,313 @@
     "range": "1-179",
     "role": "historical LAB full read ed596b; old closeout naming/bridge not current authority or W3 evidence",
     "status": "full"
+  },
+  {
+    "path": "plan/proof-first-foundation-correspondence.md",
+    "sha256": "c1d7d85fed3eae34c5f58888b5777cfdf2f521099a7fdc4bfa759cf9bd634533",
+    "range": "1-844",
+    "role": "full current read: prior1-155 plus70635f/c12b48/f8068d/bbb32a/c629cb; historical statuses preserved",
+    "status": "full"
+  },
+  {
+    "path": "samples_progress.md",
+    "sha256": "7f4b0ae9f4580391997ce8dbae03783beebc0642fa252e7d4ba2f9c9036e29d5",
+    "range": "1-437",
+    "role": "full aggregate current read:3d7264,98e11d initial111-143,3bb245,5ee3a5,435e65,91ea03 initial276-299,5a0eb4,70678c,2d0189,4e4fde,f1249d; truncated gaps reread",
+    "status": "full"
+  },
+  {
+    "path": "docs/project-status.md",
+    "sha256": "29b782f6f4f63afa5cd36745a2765ad9ba0165aa9e23c189e387bfc6331771b5",
+    "range": "1-167",
+    "role": "full current read c35542 plusa5a4b8 current section",
+    "status": "full"
+  },
+  {
+    "path": "progress.md",
+    "sha256": "8b071a1a81ffe61d79a827cf4232fc5984da0aab1a7113493584b73e11517c6e",
+    "range": "1-396",
+    "role": "full current read9c3fbd/f11121/90f864 plus40c430 current section",
+    "status": "full"
+  },
+  {
+    "path": "tasks.md",
+    "sha256": "6e8e49486e1686d04d1bbdbe5d1eb33f131c140a2de3912af34b50a82c332b00",
+    "range": "1-114",
+    "role": "full current readf61817 plusbe0168 current section",
+    "status": "full"
+  },
+  {
+    "path": "Documentation.md",
+    "sha256": "8487da3897ff5a510361731b72c1e3a32dc30013b3ed646c2efc4cd179521106",
+    "range": "1-521 (aggregate reads; verify exact truncated coverage before full reuse)",
+    "role": "7e340d/6981d2/6e2484 truncated; gaps9aa360/ba4934/702211; final446-end67700c and current1-803d4250",
+    "status": "partial"
+  },
+  {
+    "path": "samples/lean/foundations/MirroreaProofFirstInvocationBoundary.lean",
+    "sha256": "6533e15f61d9bb2aa1259dcad0f0ce1564b308cbf4df39ef0a85c0ed9247f0ed",
+    "range": "1-205",
+    "role": "full current source7fb958; same-view replacement rejection checked against actual definitions",
+    "status": "full"
+  },
+  {
+    "path": "samples/lean/foundations/MirroreaProofFirstReferenceExecution.lean",
+    "sha256": "2a0fd53eb81388c8dbb861cc26db6037872cc9dffc80bc4ec60dd862ded38d5d",
+    "range": "1-210",
+    "role": "current consumer partial source9661c2; not a full new read",
+    "status": "partial"
+  },
+  {
+    "path": "samples/lean/foundations/MirroreaProofFirstReferenceContinuation.lean",
+    "sha256": "df1fd195c8e4eacc65c0fd2b082d559e0c93041a3b510fa7245c7d03179ba347",
+    "range": "1-135",
+    "role": "current executable Session entriesab4eb9; remaining prior-hash read separate",
+    "status": "partial"
+  },
+  {
+    "path": "samples/lean/foundations/MirroreaProofFirstReferenceSource.lean",
+    "sha256": "973ab39e829a28aae6663d7ad922d719c345372319ce83bdcaf1e769cc2c9fd2",
+    "range": "80-135",
+    "role": "actual waiting/pending/origin fieldsb7c6d4",
+    "status": "partial"
+  },
+  {
+    "path": "sub-agent-pro/mirrorea-proof-first-handoff-v1/protocols/READING.md",
+    "sha256": "843b992777ac47c0b72823b77c9a9bb603ab3c58d529ec8e6841818d6dde5f30",
+    "range": "1-31",
+    "role": "full reread58410d; no change to handoff",
+    "status": "full"
+  },
+  {
+    "path": "sub-agent-pro/mirrorea-proof-first-handoff-v1/templates/ORACLE_QUESTION.md",
+    "sha256": "6b45e2acdb877acc8da568e7f0efcee7becd83aecee1cb302c9b4c808ba9d502",
+    "range": "1-42",
+    "role": "full reread1dbc9b for neutral material cut review",
+    "status": "full"
+  },
+  {
+    "path": "/tmp/mirrorea-w4-20260914-a3e0bpks/mir-w3-reference-ztqpxt8e/ActualReference.lean",
+    "sha256": "8bc404a76afe79d257fafa3ba8e3633aa065ea70292804f27d71801c79b938ad",
+    "range": "1-73, lossless literal-interned display",
+    "role": "9a508e:17 byte-identical embedded source literals read once in decoded form; remaining entire file displayed; expansion equality mechanically checked. Actual generated source, not hand-written fixture.",
+    "status": "equivalent-copy"
+  },
+  {
+    "path": "scripts/proof_first_reference_source_check.py",
+    "sha256": "7bb416354699d61ec3d40bdf6ebc053f41b4162250a1f5128ddc340eafdfad18",
+    "range": "1-268",
+    "role": "f6e554/755832 full PRE-EDIT runner; optional publication changes later",
+    "status": "full"
+  },
+  {
+    "path": "sub-agent-pro/mirrorea-proof-first-handoff-v1/workstreams.json",
+    "sha256": "419c088a35650cd95f3bf5cc1fce256b555dea488f9cd4f3c8ca32338a328286",
+    "range": "entire parsed JSON",
+    "role": "4d7455 all workstreams displayed, output below limit",
+    "status": "full"
+  },
+  {
+    "path": "samples/clean-near-end/mirrorea-proof-first-composition/reference.mir",
+    "sha256": "3ca4d045182d68db2528e7b0127a95ca67bbb29f901f618b2430541d0c328ebd",
+    "range": "entire file",
+    "role": "303139 source content, normal assignment and dynamic compositions",
+    "status": "full"
+  },
+  {
+    "path": "samples/lean/foundations/MirroreaProofFirstReferenceCancellation.lean",
+    "sha256": "f9bd0888b1a7a9748d99076fe18d6dd1d409f856b84eff73b35251db0c934dcd",
+    "range": "1-32",
+    "role": "e73fb1 actual shared Pending namespace, partial only",
+    "status": "partial"
+  },
+  {
+    "path": "crates/mir-runtime/src/sys4_dispatch.rs",
+    "sha256": "459a15d63302f844776aaeda1c351bc654bf00395a1e995e93e3bf38fc46f4da",
+    "range": "12530-12690",
+    "role": "ba41f3 exact pending reply and current owner-lineage gate, partial only",
+    "status": "partial"
+  },
+  {
+    "path": "crates/mir-runtime/src/sys5_i3_private_quic.rs",
+    "sha256": "317c59d2266e692238132483234fd22f236ede4f2cdb1f4304889a5545f3e924",
+    "range": "2290-2455",
+    "role": "fa1cd7 exact original reply transport await/admission, partial only",
+    "status": "partial"
+  },
+  {
+    "path": "specs/examples/293-current-l2-phase1-semantics-closeout-ready-phase2-parser-free-poc-closeout-comparison.md",
+    "sha256": "9c867aee069c65d159972cbc6ec27cd691dc4803a432d53a3be1d451a6231d14",
+    "range": "entire file",
+    "role": "0ba035 full historical LAB example; compare-only parser-free closeout does not supply W4 network evidence/authority",
+    "status": "full"
+  },
+  {
+    "path": "specs/examples/294-current-l2-phase2-parser-free-poc-closeout-ready-minimal-phase2-parser-free-poc-closeout-threshold.md",
+    "sha256": "babb3f6dc3c496ec6e15e50e3474c3a0c12b8ec887710a46ec2b73a843f13477",
+    "range": "entire file",
+    "role": "c6faa2 full historical LAB example; old phase/closeout queue is not current W4 authority",
+    "status": "full"
+  },
+  {
+    "path": "specs/examples/295-current-l2-phase2-parser-free-poc-closeout-ready-phase4-shared-space-self-driven-closeout-comparison.md",
+    "sha256": "10bd90d79331e728b0de4ea990408cfac02989663e178eeb2cb642618355911d",
+    "range": "entire file",
+    "role": "af3901 full historical LAB example; old phase/closeout queue is not current W4 authority",
+    "status": "full"
+  },
+  {
+    "path": "specs/examples/296-current-l2-phase4-shared-space-self-driven-closeout-ready-minimal-phase4-shared-space-self-driven-closeout-threshold.md",
+    "sha256": "117677351683383778f8556ad3bbc76e9c5f070751cae3bb172d0dea425723f0",
+    "range": "entire file",
+    "role": "8232bb full historical LAB example; old phase/closeout queue is not current W4 authority",
+    "status": "full"
+  },
+  {
+    "path": "scripts/proof_first_reference_source.py",
+    "sha256": "f5da2c0e2dd2e45676d7743fda36382b61127b8b57ac07e5f0ed26910d44125e",
+    "range": "1-132;133-end",
+    "role": "2f151a/54e86f full actual parser-to-reference adapter; does not execute remote owner",
+    "status": "full"
+  },
+  {
+    "path": "specs/examples/297-current-l2-phase4-shared-space-self-driven-closeout-ready-phase5-proof-protocol-runtime-policy-handoff-closeout-comparison.md",
+    "sha256": "2f98748e2157c4b8973ab91298bfdcfd636be1eb821f5cea7827328ebbd6d51b",
+    "range": "entire file",
+    "role": "f39c3b historical LAB docs-only verifier stop line; not current W4 or mechanical proof",
+    "status": "full"
+  },
+  {
+    "path": "crates/mir-semantics/src/full_system_v1/mod.rs",
+    "sha256": "4173ae2bafd4c5cb769089cc5e248663962182a0b6ea10aa68788cb64bebc5cd",
+    "range": "entire file",
+    "role": "58b88f full25",
+    "status": "full"
+  },
+  {
+    "path": "crates/mir-runtime/src/sys5_local_slice.rs",
+    "sha256": "64f0b09065d3f0eceb415d12b8c4b7aff622a7f05f5e0ad1b36520e3972157e3",
+    "range": "8120-8200",
+    "role": "292bd8 actual source build/check/projected topology; partial",
+    "status": "partial"
+  },
+  {
+    "path": "crates/mir-semantics/src/full_system_v1/checker.rs",
+    "sha256": "d091226d3725c87248c98392be290b9fca338b840e16bc57edf49039dfef3b90",
+    "range": "1332-1425",
+    "role": "6410b9 direct function resolution; earlier truncated output not full",
+    "status": "partial"
+  },
+  {
+    "path": "crates/mir-semantics/src/full_system_v1/interpreter.rs",
+    "sha256": "a9afff2cfa0463591ea0467d7c07866a7de342906888837ee68764b057bd0651",
+    "range": "1380-1465",
+    "role": "6410b9 arithmetic unchecked Rust operations; partial, no runtime outcome executed",
+    "status": "partial"
+  },
+  {
+    "path": "samples/lean/foundations/MirroreaProofFirstReferenceAccess.lean",
+    "sha256": "f57b200ec44a1c22655be438d81033357798799afe0fad3840c8e1a5b4f8f5f1",
+    "range": "1-133",
+    "role": "0cebfb exact submitted WitnessMeaning, partial current read",
+    "status": "partial"
+  },
+  {
+    "path": "samples/lean/foundations/MirroreaProofFirstInstancePrograms.lean",
+    "sha256": "853d3d2f2773394ae5ee1f8b319fee4b0370ce6fd2ea6c3b37742ddfa98f0e98",
+    "range": "1-92",
+    "role": "cf2ae1 existing W3 checked Int64 arithmetic; not unbounded execution profile",
+    "status": "partial"
+  },
+  {
+    "path": "crates/mir-semantics/src/full_system_v1/projection.rs",
+    "sha256": "ed50bfaa27f19b765bb0196e554b4fce26a6821ba11930dfa48d7dcfa3f0c75a",
+    "range": "1-1360",
+    "role": "9713d6/309cab/37c839/5f3d65/be3bf4/5a7e7b full current source inventory",
+    "status": "full"
+  },
+  {
+    "path": "crates/mir-semantics/src/surface_to_core_elaboration.rs",
+    "sha256": "24cbf2ce168ee3d0f38fb4bc0586f7819273bb289b85bb3a4a1d2e1f20fcf80d",
+    "range": "1-1624",
+    "role": "47d0cf/7d96eb/be3bf4/c11ca1/e16ad8/6a7291/292be9 full LAB legacy elaborator inventory",
+    "status": "full"
+  },
+  {
+    "path": "specs/examples/298-current-l2-phase5-proof-protocol-runtime-policy-handoff-closeout-ready-minimal-phase5-proof-protocol-runtime-policy-handoff-closeout-threshold.md",
+    "sha256": "bbb75c21c0ebfbd30f02d98533cf2066438e974dbac2e45e298714e6bb9b79c2",
+    "range": "1-150",
+    "role": "af298d full historical LAB; not current queue/authority",
+    "status": "full"
+  },
+  {
+    "path": "specs/examples/299-current-l2-phase5-proof-protocol-runtime-policy-handoff-closeout-ready-phase6-actual-parser-ast-carrier-first-tranche-comparison.md",
+    "sha256": "7778c25e7a5a902b175d7835e70e8edac1cdf8ec625fa7c3b85ced454989e218",
+    "range": "1-166",
+    "role": "fce679 full historical LAB; not current queue/authority",
+    "status": "full"
+  },
+  {
+    "path": "/tmp/mirrorea-w4-20260914-a3e0bpks/oracle-w4-placement/BOUND_ANSWER.txt",
+    "sha256": "8f684bb89e26b4010abfcca91c97a8f1665eb47fe73afff86eaeca71acd821cd",
+    "range": "full",
+    "role": "W4 direct consumer or read-only advisory; a602d9/bd476e",
+    "status": "full"
+  },
+  {
+    "path": "specs/examples/300-current-l2-phase6-actual-parser-ast-carrier-first-tranche-ready-minimal-phase6-actual-parser-ast-carrier-first-tranche-threshold.md",
+    "sha256": "0c89cfb685b515744d1246a468d4a34613ba7a78fb83ee87d86577af30d75af5",
+    "range": "1-156",
+    "role": "W4 direct consumer or historical mandatory corpus; 625b2f/1ea13e",
+    "status": "full"
+  },
+  {
+    "path": "/tmp/mirrorea-w4-20260914-a3e0bpks/MirroreaProofFirstQualifiedSource.lean",
+    "sha256": "40cdcadd61cba4f94a99f30503f46ea81f2438361fd3f45c6a03656131049db7",
+    "range": "1-288",
+    "role": "W4 direct consumer or historical mandatory corpus; f24ef1",
+    "status": "full"
+  },
+  {
+    "path": "/tmp/mirrorea-w4-20260914-a3e0bpks/MirroreaProofFirstQualifiedSession.lean",
+    "sha256": "723e22cc5c746649ab738927a73918bc095c6bb4e76732aa074678132303f60f",
+    "range": "1-332",
+    "role": "W4 direct consumer; full current ranges1-175 and176-332 read",
+    "status": "full"
+  },
+  {
+    "path": "/tmp/mirrorea-w4-20260914-a3e0bpks/qualified_source_adapter.py",
+    "sha256": "2bd4c428608a0fb6ae2d4df7717daa5817bd51006c7e1041ca6e139020d3e29a",
+    "range": "1-130",
+    "role": "W4 direct consumer or historical mandatory corpus; fc443e",
+    "status": "full"
+  },
+  {
+    "path": "specs/examples/301-current-l2-phase6-actual-parser-ast-carrier-first-tranche-ready-phase6-actual-checker-runtime-skeleton-first-tranche-comparison.md",
+    "sha256": "48a09c49d70ea58ab1dcbbba0482aff8f918ee798c5ce3a2fcdcb16a8d542b27",
+    "range": "full",
+    "role": "historical mandatory LAB corpus413b96, not current authority",
+    "status": "full"
+  },
+  {
+    "path": "/tmp/mirrorea-w4-20260914-a3e0bpks/MirroreaProofFirstOwnerImage.lean",
+    "sha256": "d32fe41bcd0370b8d18b76f800a6e77328da1a603019d489dad1e8ab39aea52c",
+    "range": "full",
+    "role": "W4 direct finite owner representation102b5e",
+    "status": "full"
+  },
+  {
+    "path": "/tmp/mirrorea-w4-20260914-a3e0bpks/MirroreaProofFirstQualifiedSession.lean",
+    "sha256": "83e5604795ccf25eb27f61b58cbe03318b5c8a5584a3e72c9bf4051ab454105d",
+    "range": "360-end",
+    "role": "new residual proof delta cc7d47; earlier1-395 full254911",
+    "status": "partial"
+  },
+  {
+    "path": "/tmp/mirrorea-w4-20260914-a3e0bpks/oracle_exact_capture.mjs",
+    "sha256": "aab1d11d85a986df13dfa2829fb8784575df4575c2ba835e73d54085acf08af4",
+    "range": "full",
+    "role": "exact read-only bound capture db710f",
+    "status": "full"
   }
 ]

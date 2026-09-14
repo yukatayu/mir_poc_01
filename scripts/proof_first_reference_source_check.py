@@ -90,6 +90,8 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--work-root', type=Path, required=True,
                         help='existing directory outside the repository')
+    parser.add_argument('--with-publication', action='store_true',
+                        help='also check the nonproduction W4 publication model; no network claim')
     args = parser.parse_args()
     repo = Path(__file__).resolve().parents[1]
     work_root = args.work_root.resolve()
@@ -106,6 +108,9 @@ def main():
     modules, visiting = [], set()
 
     def visit(name):
+        if args.with_publication and name == 'ActualReference':
+            # This dependency is produced from the freshly built parser below.
+            return
         if name in modules:
             return
         if name in visiting:
@@ -125,6 +130,13 @@ def main():
         raise ValueError('no reference proof modules')
     for name in roots + ['MirroreaProofFirstSourceFunction']:
         visit(name)
+    reference_module_count = len(modules)
+    if args.with_publication:
+        publication_roots = sorted(p.stem for p in foundation.glob('MirroreaProofFirstPublication*.lean'))
+        if not publication_roots:
+            raise ValueError('no publication proof modules')
+        for name in publication_roots + ['MirroreaProofFirstReceivedResultControls']:
+            visit(name)
     source_scripts = ['scripts/proof_first_composition_source.py',
                       'scripts/proof_first_composition_source_check.py',
                       'scripts/proof_first_reference_source_check.py',
@@ -132,6 +144,8 @@ def main():
                       'scripts/tests/proof_first_reference_source_cases.py',
                       'scripts/tests/proof_first_reference_integrity_cases.py',
                       'scripts/tests/proof_first_reference_mutants.py']
+    if args.with_publication:
+        source_scripts.append('scripts/tests/proof_first_publication_mutants.py')
     for name in source_scripts:
         shutil.copy2(repo / name, work / Path(name).name)
     shutil.copy2(repo / 'samples/clean-near-end/mirrorea-proof-first-composition/reference.mir',
@@ -150,6 +164,9 @@ def main():
                   status='running', started=datetime.datetime.now(datetime.timezone.utc).isoformat(),
                   workdir=str(work), lean_version=version, rlimit_as=4 * 1024**3,
                   manifest_sha256=sha(work / 'MANIFEST.json'), reference_modules=len(roots), commands=[])
+    if args.with_publication:
+        result['classification'] = 'W3 reference plus W4 LAB publication model; no physical/distributed/durable claim'
+        result['publication_status'] = 'running'
     env = dict(os.environ, LEAN_PATH=str(work), CARGO_BUILD_JOBS='1', CARGO_INCREMENTAL='0',
                CARGO_TARGET_DIR=str(work / 'cargo-target'),
                MIR_PROOF_FIRST_PARSER=str(work / 'cargo-target/debug/examples/textual_mir_alpha_parse'))
@@ -182,7 +199,7 @@ def main():
         run(['cargo', 'build', '--locked', '--offline', '-p', 'mir-ast', '--example',
              'textual_mir_alpha_parse', '-j', '1'], 'parser-build.log', repo)
         result['parser_sha256'] = sha(Path(env['MIR_PROOF_FIRST_PARSER']))
-        for name in modules:
+        for name in modules[:reference_module_count]:
             run(['lean', '--trust=0', '-o', name + '.olean', name + '.lean'], name + '.log')
         print('Fresh proof modules:', len(modules), flush=True)
         run(['python3', 'proof_first_reference_source.py'], 'actual-source.log')
@@ -227,6 +244,27 @@ def main():
         result['generated_consumers'] = generated
         for name in consumers:
             run(['lean', '--trust=0', '-o', name + '.olean', name + '.lean'], name + '-compiled.log')
+        if args.with_publication:
+            for name in modules[reference_module_count:]:
+                run(['lean', '--trust=0', '-o', name + '.olean', name + '.lean'], name + '.log')
+            for stem, module, namespace in [
+                    ('Source', 'PublicationSourceControls', 'PublicationSourceControl'),
+                    ('Outcome', 'PublicationOutcomeControls', 'PublicationOutcomeControls'),
+                    ('Received', 'ReceivedResultControls', 'ReceivedResultControls'),
+                    ('Execution', 'PublicationExecutionControls', 'PublicationExecutionControls'),
+                    ('Projection', 'PublicationProjectionControls', 'PublicationProjectionControls')]:
+                driver = work / ('RunPublication' + stem + '.lean')
+                driver.write_text('import MirroreaProofFirst' + module + '\n'
+                                  'def main := MirroreaProofFirst.' + namespace + '.main\n'
+                                  '#print axioms main\n')
+                seal(driver)
+                run(['lean', '--trust=0', '--run', driver.name], driver.stem + '.log')
+            run(['python3', 'proof_first_publication_mutants.py'], 'publication-mutants.log')
+            publication_mutants = json.loads(seal(work / 'publication-mutants/RESULT.json'))
+            if len(publication_mutants) != 8 or not all(row['rejected_at_theorem'] for row in publication_mutants):
+                raise ValueError('publication mutation controls incomplete')
+            result['publication_modules'] = modules[reference_module_count:]
+            result['publication_proof_mutants'] = len(publication_mutants)
         audited = modules + consumers
         (work / 'CompleteAudit.lean').write_text(audit_source(audited) + CONSUMER_CHECKS)
         seal(work / 'CompleteAudit.lean')
@@ -255,6 +293,8 @@ def main():
                                          for path, value in integrity.items()}
         result.update(status='passed', audit_modules=len(counts),
                       owned_declarations=sum(int(count) for _, count in counts))
+        if args.with_publication:
+            result['publication_status'] = 'passed local model only'
     except Exception as error:
         result.update(status='failed', error=str(error))
         raise

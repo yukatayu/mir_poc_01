@@ -67,6 +67,10 @@
     `lean/foundations/MirroreaProofFirstDynamicComposition.md` とReport2613に記録。
     `python3 scripts/proof_first_dynamic_composition_check.py --work-root /tmp`
     で外部コピーのkernel/変異を検査する。source/lifecycleの完成ではない。
+  - W4の公開状態・使用区間・返り値・明示的な結果受取りのモデルは
+    `lean/foundations/MirroreaProofFirstPublication.md` に定義・TCB・限界を記録。
+    reference checkerの `--with-publication` で再構築する成分証拠であり、
+    実networkの新機能やW4完了、公開sample rootの追加ではない。
   - `clean-near-end/` は generated theorem stub evidence
 - `alpha/`
   Mirrorea Spaces alpha-0 phase-indexed sample matrix scaffold with `.expected.json` sidecars

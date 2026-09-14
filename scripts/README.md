@@ -24,6 +24,11 @@
   Session証明の欠落を拒否し、`tests/proof_first_reference_gate_cases.py` はmetadataだけの
   負例を扱う。どちらも新しい意味論の証明／E2Eではない。非productionの有限候補で、
   検証・review済み。実network／復旧／秘密観測の受理ではない。
+  W4の公開状態・使用区間・返り値・明示的な結果受取り・有限公開手順のモデルを追加検査する場合は
+  `--with-publication` を付ける。全依存と実生成sourceをfresh構築し、
+  `tests/proof_first_publication_mutants.py` と全所有宣言の監査も実行する。
+  [対象と未接続義務](../samples/lean/foundations/MirroreaProofFirstPublication.md)
+  を参照。これはW4の一成分であり、新しい実network workflowではない。
 
 - `proof_first_dynamic_composition_check.py`
   W3 task-local LAB候補の11依存を外部fresh copyでLean4.29.1 trust0検査し、19変異を指定した一般命題で拒否する。

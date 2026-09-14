@@ -1,0 +1,637 @@
+{
+  "schema": "proof-first-w4-check-v1",
+  "timestamp": "2026-09-14T03:13:34.839295+00:00",
+  "base_head": "5d7c13a821c912d14c347775e23493a77f790768",
+  "status": "active nonproduction research; no W4 or Canon acceptance",
+  "work_root": "/tmp/mirrorea-w4-20260914-a3e0bpks",
+  "publication_component": {
+    "modules": {
+      "MirroreaProofFirstPublication": "a03f12a4cb9d6a4935d6c8bc86d0e19e27e738766dffdf7c87d1d6492257aef6",
+      "MirroreaProofFirstPublicationPayload": "b882204fafde4b9cc4ef09cb1c8800cd95f4d842eb3cb56cfd542abc35d8d9ed",
+      "MirroreaProofFirstPublicationSession": "fd430442f0d530ed7c1496ec0a13f0a4615488dffc56c065a05a11354c19fa80",
+      "MirroreaProofFirstPublicationUse": "f3c4b61f13b03f1d7765ba64de2be92284f0297055c7174f89cdd6fa8594dacb",
+      "PublicationControls": "ebe679fbbde0b8fe6eb2fb8f83f86242ce189357211c454fc399ca53a25469a6",
+      "PublicationCounterexamples": "cb210c62b8cd73e685e21a616f1e94c9da0aae8433ec4d51239efca042576648",
+      "PublicationUseControls": "6969e72ad5ddc2c6b3d79a96fefd59ee773b6e23dfb4bd025e789bc79532af93",
+      "PublicationSourceControl": "6334cc895a4c9e5f4029dfb9f0536079d589740562ceab83428d7c4772191c77"
+    },
+    "audit_sha256": "c06ce65780efaa90961ddd4c284af3de866370d27f00c0f9c571fe64a9a5bec5",
+    "audit_log_sha256": "78118ea4d60feb3b598c1fc007195e0c6dc7fff692aa57b6fa21f9c2e27bf89f",
+    "audit_exit": 0,
+    "source_consumer": "8bc404a76afe79d257fafa3ba8e3633aa065ea70292804f27d71801c79b938ad",
+    "scope": "external nonproduction protocol model, not Rust/network gate",
+    "audit_log": "PUBLICATION_FULL_AUDIT_HEAD.log"
+  },
+  "owned_declarations": 569,
+  "axiom_allowlist": [
+    "propext",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "source_model": {
+    "command": [
+      "lean",
+      "--trust=0",
+      "-o",
+      "PublicationSourceControl.olean",
+      "--run",
+      "PublicationSourceControl.lean"
+    ],
+    "log": "PUBLICATION_SOURCE_HEAD.log",
+    "log_sha256": "4c815172e46de9629614d3aacab3d324480db5025c404ddef90a4bbb6024d740",
+    "exit_code": 0,
+    "scope": "actual generated W3 source in local protocol model only; not network",
+    "positive": "17statements/35rounds/3modeledparticipants, full compared source values/writes/origins/events/pending/partitions",
+    "head_control": "protocol revision1 and authority generation7; fresh source succeeds; eligible old pending result rejected after publication with pending retained"
+  },
+  "i3_existing_baseline": {
+    "command": [
+      "cargo",
+      "test",
+      "--locked",
+      "--offline",
+      "-j",
+      "1",
+      "-p",
+      "mirrorea-i3-probe",
+      "--test",
+      "i3_process_localnet",
+      "--",
+      "--test-threads=1"
+    ],
+    "started_utc": "2026-09-13T23:41:49.475841+00:00",
+    "cache_strategy": "reuse existing target; no new target or profile flags; single build/test worker,4GiB address-space cap",
+    "exit_code": 0,
+    "finished_utc": "2026-09-13T23:43:38.667527+00:00"
+  },
+  "oracle_entry": {
+    "session": "mir-w4-head-publicatio",
+    "requested_session": "mir-w4-head-publication",
+    "submitted_once": true,
+    "wrapper_exit": 0,
+    "wrapper_tool": "28ea87",
+    "capture_tool": "73e017",
+    "capture_utc": "2026-09-13T23:46:35.493Z",
+    "prompt_matches": true,
+    "user_count": 1,
+    "assistant_count": 1,
+    "stop_exists": false,
+    "answer_file": "BOUND_ANSWER.txt",
+    "answer_file_sha256": "d8942a595e9428718221eaeee23a59275ab7d07793d2e42bfd92256cd7cd668f",
+    "raw_answer_sha256": "2b8dd3263dfbe989903a782279efbbc36185846773a4e5e2f7be3540b90c7592",
+    "advisory_only": true
+  },
+  "oracle_material": {
+    "session": "mir-w4-payload-cut",
+    "state": "complete advisory, local disposition recorded",
+    "submission_tool": "220858",
+    "exec_session": 83456,
+    "question_sha256": "f79f482156b1ffee25a7ac703fe1f6850a546ddf137ffd92e2b62e42da2881e9",
+    "manifest_sha256": "657015b0b7a2d44b67a0e1a18992e481867020429900be08fe217b34a61b671d",
+    "last_check": "2026-09-14T00:30:54.328Z exact prompt bound final",
+    "receipt": {
+      "session": "mir-w4-payload-cut",
+      "submitted_once": true,
+      "wrapper_exit": 0,
+      "wrapper_tool": "6ed467",
+      "capture_tool": "1e996c",
+      "capture_utc": "2026-09-14T00:30:54.328Z",
+      "prompt_matches": true,
+      "user_count": 1,
+      "assistant_count": 1,
+      "stop_exists": false,
+      "answer_file": "BOUND_ANSWER.txt",
+      "answer_file_sha256": "0b2a5383ced790a9dac1b26872ec643ad8d62e4ad0fb6b04c71598332b01fd6c",
+      "raw_answer_sha256": "14eee671a1755277da8d0d3bee6d90e3cb5ad5aee19f7f45401d954413255d79",
+      "advisory_only": true,
+      "full_read_tools": [
+        "984298",
+        "12a747",
+        "4cb24e"
+      ]
+    }
+  },
+  "open": [
+    "physical message/image origin and namespace",
+    "complete nonempty source-derived participant coverage",
+    "actual serialized entry/permit/completion coverage",
+    "actual source-generated owner computation/mutation",
+    "bounded resource/overflow discipline",
+    "physical source/network/observation refinement",
+    "required review and integration",
+    "outcome-preserving entry refinement",
+    "general reachable settled normal-round existence",
+    "owner completion/publication linearization without circular wait"
+  ],
+  "nonclaims": [
+    "W4 complete",
+    "real-network implementation of new model",
+    "W5 recovery",
+    "W6 confidentiality",
+    "owner policy approval",
+    "Plan250 I3-4/5/6 acceptance"
+  ],
+  "integrated_publication": {
+    "status": "passed local model only",
+    "workdir": "/tmp/mirrorea-w4-20260914-a3e0bpks/mir-w3-reference-6ef1eymu",
+    "result_sha256": "0858875c5986290ad2de412fe321c962d6a1aa22edd915ce08039abc18d7c28c",
+    "manifest_sha256": "48f1fcc03569f7fc38376a0cbbda478b003784cd0d9ae81fe4a2c6e5ebf02744",
+    "command": [
+      "python3",
+      "scripts/proof_first_reference_source_check.py",
+      "--work-root",
+      "/tmp/mirrorea-w4-20260914-a3e0bpks",
+      "--with-publication"
+    ],
+    "exit_code": 0,
+    "audit_modules": 87,
+    "owned_declarations": 9887,
+    "publication_owned_declarations": 832,
+    "source_cases": 32,
+    "integrity_controls": 13,
+    "reference_proof_mutants": 5,
+    "publication_proof_mutants": 5,
+    "integration_terminal": "ef7676",
+    "model_control_logs": "13ae03",
+    "full_audit_counts": "e7b270",
+    "mirror_manifest_sha256": "92d1c654d19cfacf464b2905da0887f87e06afffe2b93ad2d3db4be7e814b357",
+    "scope": "fresh actual parser/reference plus local publication model; no physical refinement acceptance"
+  },
+  "new_received_result": {
+    "location": "/tmp/mirrorea-w4-20260914-a3e0bpks/MirroreaProofFirstReceivedResult.lean",
+    "status": "integrated in 92-module cut and reviewed; old external receipt retained as history",
+    "last_proof_log": "RECEIVED_RESULT_SCHEDULER.log",
+    "tool": "489337",
+    "control_tool": "f59162",
+    "audit_tool": "1d2d6f"
+  },
+  "oracle_result": {
+    "session": "mir-w4-result-cut",
+    "wrapper_exit": 0,
+    "wrapper_evidence": "d7de99",
+    "final_capture": {
+      "promptMatches": true,
+      "userCount": 1,
+      "stopExists": false,
+      "assistantCount": 1,
+      "time": "2026-09-14T01:27:53.577Z",
+      "questionSha256": "5ecf2882a3c0086debc7739b962f97305500648cd5180cad51b60c51f80bb9a6",
+      "exactTargetSha256": "c6102203e90ad9fe90dee19a00e255e2669b41a0b90495ef69e425a53a3719eb",
+      "answerBytes": 33470,
+      "answerSha256": "2f3b92210a7d1031fbbbae35b2b2ce85114d1761d3807d34cd71522abd1a7316",
+      "substantiveCandidate": true,
+      "savedCandidate": true
+    },
+    "answer_file_sha256": "f331a7573dae74783fde5f23dda04d6b1a8b86da040cd04ec609f46e3922d7a3",
+    "full_read_evidence": [
+      "8e3673",
+      "9a3ed6",
+      "6edf15"
+    ],
+    "classification": "read-only advisory; no proof, owner approval, signature or physical acceptance"
+  },
+  "docs_validation": {
+    "exit": 0,
+    "tool": "248bca",
+    "receipt": "DOCS_CHECK_RECOVERY.json",
+    "scope": "after fourth Oracle recovery; predates subsequent source placement entries"
+  },
+  "projection_counterexample": {
+    "source": "/tmp/mirrorea-w4-20260914-a3e0bpks/PublicationProjectionControls.lean",
+    "log": "PUBLICATION_PROJECTION_CONTROLS_SECOND.log",
+    "tool": "daafb8",
+    "status": "actual-source local unsafe comparator reproduced; not admitted protocol or I3 defect",
+    "consequence": "saved whole-Session control overwrites later ordinary count assignment/write"
+  },
+  "closed_execution": {
+    "status": "fresh integrated local model passed and fourth advisory reviewed; physical refinement open",
+    "commands": [
+      "lean --trust=0 -o MirroreaProofFirstPublicationExecution.olean MirroreaProofFirstPublicationExecution.lean",
+      "lean --trust=0 -o PublicationExecutionControls.olean --run PublicationExecutionControls.lean",
+      "lean --trust=0 PublicationExecutionAudit.lean"
+    ],
+    "logs": {
+      "PUBLICATION_EXECUTION_REACHED.log": "897940175bd4478004e519947669d89a3a18cafe7efde5eec139783a795e8467",
+      "PUBLICATION_EXECUTION_CONTROLS_FINAL.log": "2342c525865a2565a98b104c528f999e85610f9f3afcd5d08c3510a7f707375a",
+      "PUBLICATION_EXECUTION_AUDIT.log": "2f7594e57a27769aebc3edd2740c3d010cfaaa47d9a575cc87fb5fb4836b198a"
+    },
+    "facts": [
+      "waiting source write implies explicit arrival including publication",
+      "command/result/ordinal retained",
+      "rooted source and empty-root ordinal uniqueness",
+      "independently admitted entry admits normal finite publication"
+    ],
+    "scope": "pure local reference only; no actual owner provenance or mutable receiver proof",
+    "fresh_exec": 85093,
+    "integration": {
+      "workdir": "/tmp/mirrorea-w4-20260914-a3e0bpks/mir-w3-reference-383x5yb2",
+      "status": "passed",
+      "audit_modules": 92,
+      "owned_declarations": 10119,
+      "manifest_sha256": "719a4051d6aec6b8fabdac658c0ba1c5786ae747a68f5ae1153a1fa8c4e4fc18",
+      "source_cases": 32,
+      "integrity_controls": 13,
+      "weakening_controls": 5,
+      "publication_proof_mutants": 8,
+      "finished": "2026-09-14T01:42:49.192906+00:00"
+    }
+  },
+  "oracle_execution": {
+    "status": "complete advisory; local disposition recorded",
+    "session": "mir-w4-execution",
+    "exec": 53193,
+    "started_utc": "2026-09-14T01:47:54.795732+00:00",
+    "started_epoch": 1789350474.7957501,
+    "question_sha256": "a25e6df76320122be5d8d3b5ae27d3ee1662961a5e5d6999645f1b8ac32810c6",
+    "manifest_sha256": "6a49a68a8d860525bedc595247e945de0c26ccd07440d02db30b741746c15272",
+    "last_capture": "cdb360 at2026-09-14T01:58:13.194Z prompt exact, stop true, no assistant",
+    "resend": false,
+    "receipt": {
+      "session": "mir-w4-execution",
+      "submitted_once": true,
+      "wrapper_exit": 0,
+      "wrapper_evidence": "c4feb6",
+      "final_capture": {
+        "promptMatches": true,
+        "userCount": 1,
+        "stopExists": false,
+        "assistantCount": 1,
+        "time": "2026-09-14T02:05:45.967Z",
+        "questionSha256": "a25e6df76320122be5d8d3b5ae27d3ee1662961a5e5d6999645f1b8ac32810c6",
+        "exactTargetSha256": "5e3098b153e7ceba2a9d4d5bd3a124484c5ad7d4b45f4babcfa6bc26eb4befb8",
+        "answerBytes": 30900,
+        "answerSha256": "1a2f9b3b10f4fc58413919abac7a8835c196846e519c361a3da5b9f9d9d7c728",
+        "substantiveCandidate": true,
+        "savedCandidate": true
+      },
+      "answer_file_sha256": "584f0b56c57e6d37924efbc43703c0d7361577095a7b3c5c3cd5a6cca591dc96",
+      "full_read_evidence": [
+        "7854a6",
+        "23a6fb",
+        "d3e20b"
+      ],
+      "classification": "read-only advisory; no kernel execution, owner approval, signature or physical acceptance"
+    }
+  },
+  "owner_projection_external": {
+    "status": "external proof/control/audit passed and fifth advisory reviewed; not mirrored or physically refined",
+    "sources": [
+      "MirroreaProofFirstOwnerProjection.lean",
+      "OwnerProjectionControls.lean"
+    ],
+    "proof": "bf4ed6",
+    "controls": "f3985e",
+    "audit": "56e0f4",
+    "owned": [
+      36,
+      9
+    ],
+    "scope": "unary owner admission sufficient input; not authorized disclosure/finite codec/real owner execution or reference-result full protection"
+  },
+  "existing_rust_checker_gap": {
+    "command": [
+      "cargo",
+      "run",
+      "--locked",
+      "--offline",
+      "-j",
+      "1",
+      "-p",
+      "mir-semantics",
+      "--example",
+      "full_system_v1_check",
+      "--",
+      "--format",
+      "json",
+      "samples/clean-near-end/mirrorea-proof-first-composition/reference.mir"
+    ],
+    "exit": 2,
+    "started": "2026-09-14T01:56:53.099580+00:00",
+    "finished": "2026-09-14T01:56:59.841377+00:00",
+    "classification": "actual existing checker capability inventory, not required W4 acceptance or backend fix",
+    "evidence": "9a578b/bffbea",
+    "accepted": false,
+    "diagnostics": {
+      "unknown_type": 50,
+      "unbound_variable": 2,
+      "function_not_declared": 4
+    },
+    "interpretation": "actual source rejected by existing full_system_v1 checker; parser/Lean W3 success is not this Rust checked Core"
+  },
+  "oracle_placement": {
+    "session": "mir-w4-placement",
+    "started_utc": "2026-09-14T02:23:32.287914+00:00",
+    "started_epoch": 1789352612.287931,
+    "question_sha256": "59bc91ffb4d93b309c3fccfd6cc3a88a709c2a7d6e58ae76b826cc6e2902156c",
+    "manifest_sha256": "b8768457d70e5f4db70aa7d77ea27c67cbbfa54269363867d12496ede3e8c5e2",
+    "submitted_once": true,
+    "status": "complete advisory; fully read and dispositioned",
+    "receipt": {
+      "session": "mir-w4-placement",
+      "submitted_once": true,
+      "wrapper_exit": 0,
+      "wrapper_evidence": "336273",
+      "capture_evidence": "0a47a5",
+      "final_capture": {
+        "promptMatches": true,
+        "userCount": 1,
+        "stopExists": false,
+        "assistantCount": 1,
+        "time": "2026-09-14T02:38:30.112Z",
+        "questionSha256": "59bc91ffb4d93b309c3fccfd6cc3a88a709c2a7d6e58ae76b826cc6e2902156c",
+        "exactTargetSha256": "0d31148dc6f3c23fbcfbe37c3a9185faedfb81ca808023d01cccecff13c047b3",
+        "answerBytes": 30694,
+        "answerSha256": "de777d14494908b88b1d6df8eeac11703c4e125b9d8d867f3fae8283de3e5fef",
+        "substantiveCandidate": true,
+        "savedCandidate": true
+      },
+      "answer_file_sha256": "8f684bb89e26b4010abfcca91c97a8f1665eb47fe73afff86eaeca71acd821cd",
+      "full_read_evidence": [
+        "a602d9",
+        "bd476e"
+      ],
+      "classification": "read-only advisory, no kernel replay, owner acceptance or physical proof"
+    }
+  },
+  "source_placement_external": {
+    "status": "kernel/audit/control pass; call-only candidate insufficient for reference/cancellation, not adopted source/runtime contract",
+    "proof": "SOURCE_PLACEMENT_COORDINATES_FOURTH.log",
+    "proof_tool": "97d296",
+    "audit_tool": "32269e",
+    "owned": 108,
+    "control_owned": 10,
+    "controls": "2fd105/fcd051",
+    "reference_comparison": "7d4702",
+    "placement_source_pair": "679830",
+    "location": "/tmp/mirrorea-w4-20260914-a3e0bpks",
+    "next": "coherent source/Core/Session placement and physical owner/caller join"
+  },
+  "received_ticket_external": {
+    "status": "proof/control pass; inspected in sixth Oracle review, still external and not physical",
+    "proof": "RECEIVED_TICKET_SECOND.log",
+    "proof_tool": "2955af",
+    "audit": "RECEIVED_TICKET_AUDIT.log",
+    "audit_tool": "936c6d",
+    "owned": 8,
+    "control_owned": 10,
+    "scope": "receiver ticket/value only; private saved binding retained, no owner ancestry or full source Session/new wire claim"
+  },
+  "oracle_qualified": {
+    "status": "completed, fully read and locally dispositioned",
+    "exec_session": 4671,
+    "start": {
+      "session": "mir-w4-qualified",
+      "started_utc": "2026-09-14T03:06:42.532464+00:00",
+      "started_epoch": 1789355202.532481,
+      "submitted_once": true,
+      "question_sha256": "afececcfd0303907e75ce15a6b92a084e70bb75fd5352cd4113f88dfcea98c1b",
+      "manifest_sha256": "097701797d51eb7265b97516bd17ef22846624474ee0ce6c0c4a889b1d549f8d"
+    },
+    "last_capture": "773231 2026-09-14T03:11:17.709Z prompt bound, stop true, no assistant",
+    "receipt": {
+      "session": "mir-w4-qualified",
+      "submitted_once": true,
+      "wrapper_exit": 0,
+      "wrapper_evidence": "ef3eba",
+      "capture_evidence": "9eae72",
+      "final_capture": {
+        "promptMatches": true,
+        "userCount": 1,
+        "stopExists": false,
+        "assistantCount": 1,
+        "time": "2026-09-14T03:26:14.906Z",
+        "questionSha256": "afececcfd0303907e75ce15a6b92a084e70bb75fd5352cd4113f88dfcea98c1b",
+        "exactTargetSha256": "b2a2ecc231e0801e7adea9cc7900e218b7eb18b23a6c22d360fd5bbe62f72ff2",
+        "answerBytes": 26161,
+        "answerSha256": "684c1ad11243a6e9ad1cfdc41b6610a4c994305ce8e78530f43d596873bf3124",
+        "substantiveCandidate": true,
+        "savedCandidate": true
+      },
+      "answer_file_sha256": "628c765cf2d6869c6e97a028df25959a6f5038756acf74b5fc7642be59ff2cc5",
+      "full_read_evidence": [
+        "59494c",
+        "d6cd43"
+      ],
+      "classification": "read-only source-inspection advice; no fresh kernel replay, signed review or acceptance"
+    }
+  },
+  "qualified_source_external": {
+    "status": "general model proofs/control pass, sixth review recovered; external original declaration defect repaired; no physical gate",
+    "location": "/tmp/mirrorea-w4-20260914-a3e0bpks",
+    "sources": {
+      "MirroreaProofFirstQualifiedSource.lean": "40cdcadd61cba4f94a99f30503f46ea81f2438361fd3f45c6a03656131049db7",
+      "MirroreaProofFirstQualifiedSession.lean": "723e22cc5c746649ab738927a73918bc095c6bb4e76732aa074678132303f60f",
+      "qualified_source_adapter.py": "2bd4c428608a0fb6ae2d4df7717daa5817bd51006c7e1041ca6e139020d3e29a"
+    },
+    "proof_tool": "44c851",
+    "audit_tool": "16af03",
+    "owned": {
+      "ReceivedTicket": 8,
+      "QualifiedSource": 210,
+      "QualifiedSession": 167,
+      "OwnerProjection": 36,
+      "ParsedQualified": 11
+    },
+    "actual_source": {
+      "classification": "actual parser/source local qualified Session model; no network/physical custody",
+      "command": [
+        "lean",
+        "--trust=0",
+        "-o",
+        "ParsedQualified.olean",
+        "--run",
+        "ParsedQualified.lean"
+      ],
+      "time": "2026-09-14T02:54:39.827174+00:00",
+      "parser_exit": 0,
+      "lean_exit": 0,
+      "source": "f98a376cb6d2159080bb8a40a348d053a8916919f86d0e1c18bcc774c4be2c6b",
+      "generated": "57f65a1abbf5231ccef04b3c211e4f3a2e46eef0fab854c5c335d09da4b6f275",
+      "adapter": "2bd4c428608a0fb6ae2d4df7717daa5817bd51006c7e1041ca6e139020d3e29a",
+      "parser": "7712ec1bce758c5c8d3da53dce037aff2f2b009da044fcebf11db796bbb6c519",
+      "log": "7bd30b15bc473a3861a81c33e4dd5e2a1c972b0a016b1425866a2caadff05507",
+      "source_statements": 17,
+      "caller": 0
+    },
+    "source_cases": "f6020a five actual parser/adapter negatives and renamed UTF8 positive",
+    "admitted_session_controls": "576753 caller-left counterexample and independently authorized C cancellation",
+    "open": [
+      "physical activation/custody/currentness",
+      "tag/value lineage invariant over all entries",
+      "qualified evaluator/publication lift",
+      "finite codec and actual owner occurrence",
+      "fresh mirrored integration"
+    ],
+    "declaration_repair": {
+      "before": "32b79c",
+      "after": "ef4b0b",
+      "controls": {
+        "classification": "actual parser/admission and byte-token controls; not general parser proof or network evidence",
+        "adapter_sha256": "345daa6f14a5702787f9b1dba52deb97bd0b0026a514b949a846f1c3df3f4296",
+        "parser_sha256": "7712ec1bce758c5c8d3da53dce037aff2f2b009da044fcebf11db796bbb6c519",
+        "cases": [
+          {
+            "name": "unchanged",
+            "accepted_items": 17,
+            "byte_spans_checked": false
+          },
+          {
+            "name": "undeclared-original",
+            "rejected": "original provider operation undeclared"
+          },
+          {
+            "name": "both-original-first",
+            "accepted_items": 17,
+            "byte_spans_checked": false
+          },
+          {
+            "name": "both-qualified-first",
+            "accepted_items": 17,
+            "byte_spans_checked": false
+          },
+          {
+            "name": "qualified-only",
+            "accepted_items": 17,
+            "byte_spans_checked": false
+          },
+          {
+            "name": "undeclared-qualified",
+            "rejected": "original provider operation undeclared"
+          },
+          {
+            "name": "original-wrong-arity",
+            "rejected": "original provider operation arity mismatch"
+          },
+          {
+            "name": "original-wrong-boundary",
+            "rejected": "original provider operation boundary mismatch"
+          },
+          {
+            "name": "utf8-spans",
+            "accepted_items": 17,
+            "byte_spans_checked": true
+          },
+          {
+            "name": "prior-unknown-place",
+            "rejected": "unknown represented locus"
+          },
+          {
+            "name": "prior-nonliteral-place",
+            "rejected": "unknown represented locus"
+          },
+          {
+            "name": "prior-wrong-place-type",
+            "rejected": "qualified provider signature/capability/failure mismatch"
+          },
+          {
+            "name": "prior-missing-place-arg",
+            "rejected": "original provider operation arity mismatch"
+          },
+          {
+            "name": "prior-wrong-boundary",
+            "rejected": "original provider operation boundary mismatch"
+          }
+        ]
+      }
+    },
+    "current_typing": {
+      "source_proof": "3fce87",
+      "session_proof": "ef3f35",
+      "audit": "3373f0",
+      "owned_source": 225,
+      "owned_session": 191,
+      "controls_owned": 21,
+      "property": "all7entries residual types, pending source site and fresh binder; no tag ancestry/physical actor theorem"
+    }
+  },
+  "authority_image_external": {
+    "status": "external general proofs/finite controls/all-owned audit passed; after sixth freeze, unreviewed",
+    "proof": "972594",
+    "scope": "finite issued-issuer epoch rows; no currentness/authority/disclosure/codec inference",
+    "audit_tool": "d18e2e",
+    "owned": 54,
+    "control_owned": 5
+  },
+  "docs_qualified": {
+    "exit": 1,
+    "evidence": "c37dd6",
+    "failure": "samples_progress header older than latest timestamp",
+    "repair": "header synchronized to existing12:15JST; final rerun owed"
+  },
+  "oracle_owner_image": {
+    "status": "running single submission",
+    "exec_session": 21081,
+    "start": {
+      "session": "mir-w4-owner-image",
+      "started_utc": "2026-09-14T03:50:54.645145+00:00",
+      "started_epoch": 1789357854.64516,
+      "submitted_once": true,
+      "question_sha256": "ba5617df6b7db387f9f1cdc2f402c94a09a6db259afcb4201a758151e6e93c0c",
+      "manifest_sha256": "ae7089694100627b1fc76a9c24dfcea6725df7f04b56c93a8cd0c692b312e383"
+    },
+    "packet": "/tmp/mirrorea-w4-20260914-a3e0bpks/oracle-w4-owner-image",
+    "dry_run": "4afa4e browser gpt-6-astra40files144923tokens",
+    "early_capture_attempt": "bef031 interval guard refused at61seconds; no browser read, no job failure or retry",
+    "last_capture": "b154cf 2026-09-14T04:01:41.566Z exact prompt bound, still generating"
+  },
+  "owner_image_external": {
+    "status": "general kernel/controls/all-owned audit pass; frozen seventh review running",
+    "proof": "4191e5",
+    "full_read": "102b5e",
+    "controls_audit": "3373f0",
+    "owned": 101,
+    "control_owned": 6,
+    "source_sha256": "d32fe41bcd0370b8d18b76f800a6e77328da1a603019d489dad1e8ab39aea52c",
+    "scope": "finite full support/config plus issued epochs and bounded policy domain; exact owner check/serve and held-publication relation; no disclosure/auth/current install/codec/physical proof"
+  },
+  "docs_owner_image": {
+    "command": [
+      "python3",
+      "scripts/validate_docs.py"
+    ],
+    "start": "2026-09-14T03:54:12.709694+00:00",
+    "scope": "finite publication checkpoint and external owner-image/residual status, no W4 acceptance",
+    "exit": 0,
+    "finish": "2026-09-14T03:58:12.377657+00:00",
+    "evidence": "5d2fa3"
+  },
+  "reviewed_checkpoint_identity": {
+    "evidence": "e6f9f2/d2768e",
+    "scope": "all16mirrored proof/control modules exactly equal reviewed frozen cuts; runner/mutants/proofs equal passing fresh92manifest",
+    "post_check_whitespace": {
+      "initial_staged_check": "732059 rejected3extraEOFblanklines",
+      "repair_check": "97d9fa all3Leancompilepass and stageddiffcheckpass",
+      "files": [
+        {
+          "file": "samples/lean/foundations/MirroreaProofFirstPublicationExecutionControls.lean",
+          "before": "ffb24f2ca74cdae905e2bbb2fba92fe01a85137cc5bc27ffc23ccd058bc61b7d",
+          "after": "33817923a9f2875ba35180ce9893b5d7f6bde8b152d326578972e9e8a579ed46",
+          "change": "trailing blank EOF line only",
+          "lean_exit": 0
+        },
+        {
+          "file": "samples/lean/foundations/MirroreaProofFirstPublicationProjectionControls.lean",
+          "before": "d39b82e0684e9764083b6666ddbcc4d2038a60d92afef3c4312c219f074dd8e0",
+          "after": "7dbdf2ef84f7e041044c9da767d287c31e360a7cf056f5bdea89e34ea0017b8b",
+          "change": "trailing blank EOF line only",
+          "lean_exit": 0
+        },
+        {
+          "file": "samples/lean/foundations/MirroreaProofFirstReceivedResultControls.lean",
+          "before": "0c98b4dd7d103a009f744ab1a5c6eb6c3308150b9de8eeceeabb8ef87bbe63f8",
+          "after": "f22bec85357a260a4630801b7eb96fcb45c697feda1d21789b196c987ae91386",
+          "change": "trailing blank EOF line only",
+          "lean_exit": 0
+        }
+      ]
+    }
+  },
+  "owner_codec_external": {
+    "status": "external nonproduction codec compiles and actual-source controls pass; after seventh packet freeze, not reviewed",
+    "proof_of_general_inverse": false,
+    "compile": "d600e5",
+    "controls": "9e0de7",
+    "image_bytes": 3144,
+    "scope": "finite JSON shape only; no currentness/auth/disclosure/framing/depth/physical proof"
+  }
+}

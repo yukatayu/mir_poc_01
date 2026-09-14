@@ -37,12 +37,12 @@ controls, SMT and finite comparisons are separate. Standard logical axioms and
 abstract interfaces are documented beside proofs. No implementation correctness
 or official THM/OBL/lifecycle acceptance follows from a proof of this LAB model.
 
-Current task-local goal, updated2026-09-12: W3 dynamic composition, sole main,
-PL1 S0/S1/S3 theory/proof/reference. W2's finite research scope was closed and
-pushed; the owner explicitly requested W3 afterwards. Stop after W3. The evidence
-entries below retain their historical order and original unreviewed/active states;
-they are not parallel current goals. Report2613 is the one current W3 report.
-The mandatory reading corpus remains incomplete; no whole-project plan adopted.
+Current task-local goal, updated 2026-09-14 09:21 JST: W4 physical refinement, sole main,
+PL1/PL2/PL0 S4/S6, theory/refinement before bounded implementation. Owner explicitly
+requested W4 after W3 closure; stop after W4. Reports2611/2612/2613 and their
+original dated active/unreviewed/stop records remain history, not parallel goals.
+Report2614 is the one current milestone report. The mandatory reading corpus
+remains incomplete; no whole-project plan adopted.
 
 ## Relation to Plan250 and requested alpha
 
@@ -842,3 +842,73 @@ atomicity/ordering remain implementation obligations. Actual network, durable
 restart, secret observation, general source/plugin profiles and alpha integration
 are not delivered by W3. The wider read corpus remains incomplete (next historical
 example293); no full reading or whole-roadmap adoption is inferred.
+
+## W4 publication dependency checkpoint — 2026-09-14 09:21 JST
+
+Owner-authorized LAB only; W3 source81f82a0b and final5d7c13a8 retained. Fresh W3
+baseline repeats76modules/9055owned/32source/13integrity/5mutants with unchanged
+manifest. Existing actual-process/private-QUIC integration target passes46cases;
+that baseline is not new W4 capability or full regression closure.
+
+External nonproduction Publication/Payload/Session/Use candidates now distinguish
+protocol revision, authority generation and full configuration. Independent
+checks/relations, arbitrary finite-history invariants, whole enabled-cache
+agreement, actual W3 Session entry correspondence and explicit held-use intervals
+are kernel-checked. Publication requires every required participant's maintained
+freeze; active local intervals must finish before freeze acknowledgement. Source
+pending calls are retained, not drained or cancelled by administrative machinery.
+The exact current eight-module audit covers569owned declarations, only the three
+standard logical axioms including inherited W3 choice, no Mir axioms or holes.
+
+The actual-parser-generated17statement W3 program runs through35 local model
+rounds at three modeled endpoints with unchanged values/writes/origins/history.
+A generation7 head at protocol revision1 admits useful source and rejects an old
+previously eligible result while retaining pending. This is model evidence only;
+it neither copies the model into production nor supplies remote owner execution.
+Four guard/effect weakenings yield concrete stale-enabled traces. Removing only
+an installation floor instead disables an otherwise open endpoint: the independent
+use fence still blocks old use. Proof-script rejection and these traces differ.
+
+Candidate A remains a finite-cohort barrier with full-state refinement target;
+owner-only publication B permits an unnotified stale caller in the abstract.
+No accepted I3 defect is claimed. Authentic packet/image provenance, exact
+realm/cohort and complete participant coverage, actual lock/queue/permit coverage,
+source-generated owner execution, finite memory/overflow and observations remain
+unclosed implementation obligations. Full Session journal images are a proof
+model, not a shared-store substitute for communication or a global authority.
+Entry Oracle is recovered/dispositioned; material proof cut mir-w4-payload-cut is
+pending. No W4 closure, Canon promotion, Q18/H/C policy adoption, W5+ activation
+or I3-4/5/6 acceptance follows. Report2614 records exact commands/hashes and failures.
+
+## W4 closed publication entry — 2026-09-14 10:45 JST
+
+Oracle3 result-cut review identified a waiting-tick bypass through the old local
+publication evaluator. It was independently reproduced, not relabelled as an I3
+defect. PublicationExecution now has one source/received-result command relation
+for both scheduling and publication: waiting source writes require explicit
+arrival. Exact result/command/generated ordinal and rooted source are preserved;
+empty-root ordinal uniqueness and positive normal publication are general proofs.
+Fresh92module/10119owned audit,32source/13integrity,5reference+8publication mutants
+pass (manifest719a4051d6aec6b8fabdac658c0ba1c5786ae747a68f5ae1153a1fa8c4e4fc18).
+These remain local models; new response needs narrow review and physical mapping.
+
+The actual-source projection counterexample prepares a full state at count2,
+allows an ordinary count3 write, then loses it on stale prepared-state install.
+Protected proposing-actor preparation and commit-time current evaluation remain
+small technical comparisons; no whole-state replication/implicit snapshot is
+adopted. W3 reference.mir currently drives its calls at A. Existing accepted I3
+source has real cross-locus generated owner writes. Their meaningful source/Core/
+placement correspondence must be explicit before counting a W4 network bridge.
+Current scope/policies/Canon/I3 pause unchanged; next direct consumer is owner
+projection and real source-generated execution, not another unrelated framework.
+
+
+W4 forward checkpoint 2026-09-14 11:27 JST: closed source/publication outcome review4 recovered; no internal counterexample within its admitted-history premises, physical owner ancestry remains owed. Actual parsed source with C-only placement rejects a call at A; A/C permits A, so an implementation must not silently route the former. External SourcePlacement proves independent checked lowering, exact captured operation locus/source/dependencies and source provenance, but call-only annotation fails existing A-bound reference normalization and caller-A cancellation of C tickets. Coherent original C acquisition/call and separately authorized C cancellation pass only as a manually placed local comparator. OwnerProjection proves sufficient unary admission input factoring with exact submitted witness; no disclosure/codec/physical permission follows. Fifth frozen Oracle reviews these candidates. The actual existing Rust checker rejects W3 instance/reference types and function-valued alias calls; both W3 lowering route A and I3 provider route B still need a proved source/Core embedding. No new grammar, authority policy, roadmap, production contract or phase state adopted.
+
+### W4 forward evidence — 2026-09-14 12:15 JST
+
+LAB candidate only. Fifth Oracle review identified caller custody/currentness and coherent reference lifecycle as the direct consumer. External QualifiedSource/QualifiedSession now preserve explicit allocation intent through aliases and all original operation guards; actual Rust-parser input with provisional referenceAt(...,Place) drives17source statements and4explicit local-model receipts. General all-entry source/partition/fixed Actor preservation is checked. An admitted caller-A leave still permits C initiation, so fixed identity is not current activation permission. Sixth Oracle packet reviews this exact distinction and two provisional physical routes (Rust semantic refinement versus checked Lean evaluator with Rust/QUIC boundary). Neither route, library spelling, disclosure or policy is adopted. Existing finite publication proofs and I3-3 regression remain independent evidence; W4 actual network/owner lineage remains open. W5+/Plan250 pause unchanged.
+
+### W4 forward evidence — 2026-09-14 12:53 JST
+
+Sixth review found an original-declaration adapter bug; actual source reproduced2undeclared instantiate calls admitted after instantiateAt declaration lowering. Resolving every original Perform before desugaring repairs it;14actual parser controls pass, including both declaration orders and independent UTF8 byte/token checks. General QualifiedSession residual typing and fresh pending binder preservation now cover all7entries. Function-free finite OwnerImage retains full structural support and exact submitted witness/code/contract checks; generic held publication interval implies equality with current published owner evaluation under the representation premises. Currentness/disclosure/codec/custody remain physical obligations, not consequences of roundtrip. Seventh frozen review compares a conditional bounded publisher/private-activation/owner-image cut and Rust versus Lean-worker experimental implementation. No physical route, authority policy, official phase or public contract has been adopted. A per-(realm,principal) request uniqueness condition alone must not be mistaken for shared composition-state coherence across multiple private activations; that remains an explicit partition/profile obligation.
