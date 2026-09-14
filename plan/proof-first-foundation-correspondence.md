@@ -1004,3 +1004,56 @@ LAB forward 2026-09-15 03:02 JST: W4 resource consumer is separated into owner r
 2026-09-15 03:27 JST — W4のowner/codec/resource一般証明を既存sampleへ統合し、fresh133module・137module監査/14148所有宣言、通常source32・整合性13・弱化5+8を検査。Oracle20回収、source開始と所有者の全使用区間・実Rust/QUIC対応は継続中。
 
 レビュー済みowner/codec/resourceの45ファイルを既存Lean sampleへ移し、`python3 scripts/proof_first_reference_source_check.py --work-root /tmp --with-owner-boundary` でfresh再構築しました。133moduleの構築、137module/14148所有宣言の公理監査、通常source32・整合性13・弱化5+8が通っています。公開componentの過去92module結果は履歴であり、現在の`--with-publication`は追加されたPublication依存も発見します。native entrypointと新しいsource/owner管理候補は外部workdirのままです。第20回Oracleは回収済みで、予約後の割込み・開始中の取消し・Python入力/再初期化・必須監査対応の指摘を検証しています。実processの通常C/A継続と全bytes照合は成功していますが、全経路の排他管理・物理namespace・既存Rust/Core/QUIC接続とW4全体の受理は未完了です。
+
+
+2026-09-15 05:37 JST — forward W4 LAB resource consumer, no roadmap/Canon promotion.
+Oracle23 is recovered and individually dispositioned. Its new premises are
+outstanding initialization debt, payment of the next unpaid occurrence, and fit
+of the complete funded input. SourceFundingFrame now derives whole vector/input
+byte/fuel/digit/text bounds and readable actual model-computed arrivals under an
+independent pre-reservation carrier profile. SourceFundingQuery proves truthful
+remaining-cost and head-match questions, passivity and whole every-reply readability.
+These are private metadata, not ordinary-read snapshots or public-safe observation.
+
+The source110 native query worker/audit passes. Source-only C/A playback inserts
+2585 real queries each while preserving all391 old actual replies; these tests use
+historical supplied credit vectors, not new owner authority. A new real4process
+counter has demand18/remaining18, then repeated initialize refusal1 spends to17.
+The guarded candidate refuses that extra request before ownerIO, permits actual
+head freeze12, retains its pending payment, rejects intervening public mutations,
+and accepts the actual notification with demand17/remaining17. Ordinary C/A still
+complete20writes/26publications/5results. Full query/owner byte replay pending.
+A test used a nonexistent A input path once; retained failure, then selected the
+exact A continuation from its previous receipt and passed. No semantic workaround.
+
+Current candidate compares head-matched payment plus slack-only extras with a
+more expressive order-independent paid-occurrence ledger. Retain initialization
+debt via an enforced actual initialization prelude; new general arithmetic proves
+each paid first-init and slack-only extra preserve debt plus suffix cost. The
+prefix algebra does not cover arbitrary off-head paid obligations. These additions
+are after Oracle23 freeze and remain unreviewed; current authority/physical namespace,
+all-entry physical refinement and existing Rust/Core/privateQUIC remain OPEN.
+
+
+#### W4 forward failure-domain checkpoint — 2026-09-15 06:41 JST
+
+Oracle24 is recovered; Oracle25 reviews the frozen known-refusal, typed validation
+and complete-carrier consumer repair. Current C/A full actual-byte replay passes;
+these runs do not cover the old552 wrapper controls. Known source-entry refusal
+before owner IO preserves the live whole state; unknown IO and contradictory paid
+notification retire. Current versus smallest alternative is this narrow recovery
+of a known unexecuted request versus the old uniform retirement. This provisional
+private failure profile does not choose Q18 cancellation or authority policy.
+Funding is not promised after charged failure/retirement. General work/init and
+computed-carrier proofs pass; post25 administrative notification proofs construct
+real model operations but still require independently established owner phase
+conditions. Those conditions remain a direct physical-refinement obligation.
+No source/Core/QUIC, namespace/current admission, Canon or public contract promotion.
+Detailed commands, failures and exact cuts remain in Report2614/W4_CHECK.
+
+
+#### W4 publication-order forward evidence — 2026-09-15 07:09 JST
+
+追加した13個の非production証明候補は、既存runnerで146moduleのfresh構築・150module/14574所有宣言の公理監査とsource/反例検査を通過しました。Oracleは第26回まで回収し、実処理と通知・同じrecordを使う完全carrier証明・通信から内部記録確定までの例外処理を限定review済みです。一時的な配布待ちでの拒否後に同じ構成で値10を計算する実正例も確認しました。その後、次の通常書込みと先行freezeが旧構成のinstallを妨げる実反例を発見し、ownerごとの配布順序ガードを検査しています。現在のC/A実行と全bytes照合は通過しましたが、新ガードと部分的な世代条件の証明は未reviewです。全経路のsource/owner対応、物理namespace・現在の認証認可・既存Rust/Core/privateQUIC接続とW4全体の受理は未完了です。
+
+Current reversible candidate: retain next source staging but require this owner’s current installation before a future freeze. Smallest alternative: forbid all next source staging until every installation completes. The per-owner candidate preserves more independent progress; it is externally tested and partly formalized, not adopted as a public ordering contract. Whole phase/custody correspondence remains the direct consumer. Oracle26 only covers the earlier IO/record-composition cut.

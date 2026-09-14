@@ -267,6 +267,8 @@ Actual W4 Rust/network/continuation integration, remaining I3-3 regression targe
 
 ## Commit / push status
 
+Forward 2026-09-14T18:43:52.368794+00:00: reviewed45file owner proof mirror and runner/status61paths committed96746e206b9e52504c80548e9dc9fe6f4b3eff54 (cc3574), normal push522bb8, remote exact36ad93. Later source-credit/work-interval/coordinator remains external and W4 active.
+
 Reviewed publication checkpoint ab316353 committed/pushed with exact remote parity (8b9562/ff82f2/d0fb35); later evidence/status changes are own dirty work. Baseline clean5d7c13a8 preserved. Future own commits use --no-gpg-sign and normal push; no force/reset/clean.
 
 ## Sub-agent session close status
@@ -631,3 +633,266 @@ Forward 2026-09-14T18:02:15.637249+00:00: Oracle19 COMPLETE4930ce, wrapperexit0;
 New same-goal resource consumer:6049b2 ACTUAL ordinarysource9publications then owner1credit lets sourceenter0 but reserve16; no ticket-specific terminal association, normal processEOF is not sourcecompletion. OwnerCreditCustody a14df4/70a1fe prove exact all-command response credit tracking, declarative claim/check equivalence, phase-local restrictions and all local mutator invariants (standardaxioms only). FIRSTac64a5/SECOND228f3f failed proofs retained and never used downstream. Original native proxy allowed cancel after enter (8d8a01) and duplicate fresh constructor (8406bd); phase/copy/serialization/fresh-registry guards now checked in actual processes042794. Native1credit guard leaves original waiting source unentered,2credit produces actual10 and sourcefinish parks exact result. This does not include sourcearrival/subsequentpublication or fullsource completion. The local entered notification still requires real source-event binding; no arbitrary API caller/raw-pipe custody theorem. No new auth/priority/cancel/Q18 policy is adopted. Oracle19 independently identifies drive()'s extra activefreeze probe and laterallownerfreeze/install costs, which the bare2credit theorem does not pay.
 
 Same11own dirtydocs, no newcommit/push or Canon/THM/OBL/phase status. SYS4 fullreadprefix now1-6120, suffix12170-end; middle still unread. Heavyprocesses serial4GiB, priorfree42GiB/RAM10GiB. Quota45% last17:04Z; next>=18:04:38Z. All newproof/consumer code remains external pending material review and reproducible integration.
+
+
+### Forward evidence — immutable work inputs and source-prefix owner funding (2026-09-14T19:30:16.115559+00:00)
+
+Oracle21 final recovered e4e085/5bd42b; advisory read-only, synthetic probes only, no independent Lean/native execution. Main confirmed two real native falsifiers:859e49 transmittedfreeze2/capturedfreeze3 with mutable input (normalEOF0), and4f5a54 three-credit reserve6/reentrantfreeze2/probe16, no production. Exact immutable bytes at exposed/view/writer/Peer boundaries and capture of the exact transmitted frame now close the alias. A private work-active guard closes same-thread publicentry while internal RLock helpers remain nested. First guard placement failed68afb0 and was retained before correctionc64768; no passing claim for that cut. Fixed actual three-credit work produces and sends sourcefinish while owner/source/invoke reentries add0frames. That test intentionally stops before unfunded suffix; kill/reap is expected, not normalEOF or OOM. Immutable directnative97b1df normalEOF0 records exact OSwrite/capture equality and preIO rejection of bytearray/memoryview/bytes-subclass.
+
+Previous Oracle question overstated wrongscope cohort evidence: directnative branch existed but factory path SKIPPED it; unitplaceholder negative did not substitute. Forward correction: fixed C/A552localrefusal attempts each include5actual produced-envelope scope-onlymutations; all refuse locally with0frames. Counts are repeatedpatterns, not generalproofs. Improved lostreplyc64768 checks all4views andinvoke inside still-live context before teardown; noframes. Removing immediate retirement while keeping teardownretirement now fails the controlef100c. Concurrentfinite native14b76d verifies public command waits through ownerreserve/probe/compute/sourcefinish; normalprogram finishes.
+
+Fixed C/A complete real privatepipes each20writes/26publications/5actualvalues[10,10,11,10,10], final3continuationcompleted/0remaining, all4EOF0. Whole actualbytes/model/argv/finalimage/composite224e61 and independently selectedreaderef100c pass. Newimmutable replay-attempts/cohort_fixed_1/RESULT.json SHA9cd965098817302152395872da6791f14d335f583bbc46f902c85929f5d05a6a. No binary changes, oldreceipts preserved; source105f29a1262... andowner102b6ccced2... remain current. No Rust/Core/QUIC/general Python refinement or physicaladmission inference.
+
+New external Lean generalproofs: OwnerPublicationBudgetf56522 derives two-credit idlefreeze/install, actual image checker/current/newrevision premises explicit. PublicationOwnerBudget94e9f8 projects costs from the actual certifiedsuffix and guards candidate adoption; exactchecker/relativecompleteness/refusalunchanged/existingInvariant preservation. OwnerFundingCursor34b7ea accounts completed-but-unnotified prefix, one notification consumption and slack-only extra debit; arithmetic does not create actualreceipt/auth. Standardaxioms only, failures retained, no sorry/admit/Miraxiom. Cursor is after Oracle22 freeze. Actualfivecredit countera4a8cf gives6/2/produced/12/7/16. New finite originalsource/owner prefix replayd05b69 derives43remainingcommands costing[8,8,8]: realcountercredit[493,493,2] is refused by newpureguard BEFOREadoption; realfunded[493,493,490] preservesacceptedoutput, and exact-derived funding alsoaccepts. Firstlookup a1495c failed missing native SourceCapacityWorker import path; correctedsearchpath samefile passed. This is a finite purecandidate application to actual captured prefixes, not a new nativeguard or general simulation. Physical currentcredit binding, initialownerinit, administrativebudget theft and truthful completions/all-entry closure still OPEN.
+
+Oracle22 mir-w4-immutable-budget single submitted7db7e6 at19:21:04.881009Z; wrapper60138,34frozenfiles188855B, Q9077e0a07b26dc05387ba71e3f270c4c80d3c3ebe4cc52155d6e895f010ca1f5, manifest74184757c8491f38b3ef190c80cd6860e8925fb9ac329552225e54b89ac1d495. cf0c32 exactquestion normalgenerating19:27:46Z, noresend/deadline. NewCursor/actualfundingcaptured afterfreeze remainunreviewed. Weekly42% at19:07:23Z, next>=20:07:23Z peruser; onlyown telemetry, not goaltokens.
+
+Current six ownstatus/docs followups remain dirty atHEAD96746e20; reviewed45filemirror already normallypushed/parity36ad93. No newcommit/push yet, Canon/THM/OBL/119dispositions unchanged, no subagents. Same W4 goal remains incomplete; next actualcredit/sourcefunding coupling before existing Rust/Core/privateQUIC. This update's fullstatus/plan/docs validation remains pending; no micro-report added.
+
+
+### Forward evidence — preflight custody and native owner-funding entry (2026-09-14T20:04:57.771413+00:00)
+
+Oracle22 final59d752/2cacbc, wrapper248f29, found preflag premise-acquisition and ordinarysource request/reply reentry gaps; no false displayedLean theorem, synthetic/inmemoryreview only. Main ACTUAL e7108f: preflight3 then callbackinit1, enter/reserve6/probe16. Main ACTUAL611fbd: completeimmutable tick/launch frames emitted inthatorder but capturedreverse and repliesmisassociated. New atomicnonreentrant publicentrygate acquired beforepremises underouterRLock spans allpublicsource/owner/invoke operations. Firstobsoletefinally causedAttributeError64d0a4/0e7cb9; failedsource/3receipts retained; fixed0ac20a/8b962b passesbothpositions plusafterreserve. Same3credit actualwork produces/finishes, localreentry0frames; ordinarysourcefullrun all4EOF0. Gate remainsprivatecustody, notanownerpolicy.
+
+SourceFundingInput has fullboundedcreditvector+actualsourceinput, reservesinitialownerinit1 plusactualcertifiedsuffixcost BEFOREnative sourceadoption, exactrelativeadmission/refusal/sourceInvariant andwholeeveryreplyreadability47f249. Failedproofsa92422/472ba7 retained. SourceFundingWorker new108native/12982ownedaudit07c28f (source0f115816...; sameowner102b6ccced2...) andfreshsource-funding-first / source-funding-owner-consumer explicitattempts pass. Typedactualvectors builtfromretainedownerCreditWriters underentrygate. Current C/A26e3f2 actualcomplete20writes/26pubs/5resultsall4EOF0; fullrawtypedsource/owner/argv/finalimage/composite/391vectorjoins each0f20b2, fixedreader+3offlinevectornegativesfb6b4b. Requiredresultsource_funded_1 SHAa67ad0687e09a88b77d4973e9391278cdf9c83c86c6f8804027d7e6317228eb7. Oldhelper-boundevidence remainsimmutablehistory afternewbuild/audit/replayselectors.
+
+Actualfivecreditb41a9a nowgets nativeprofileRefused2 atarrival133 withreal493/493/2, retains exactpriorprojection published9/announced9. Productionalreadyexists; intendedfullrunfailed/killreap, no normalEOF/recovery/completeclaim. Directnewsourcecarrier9f61a5 rejects missing/short/outofrangevector withdecodeexit1; zeroquota preservesNone thenfullquota permitslaunch, source-onlynotactualownerbalanceauthority.
+
+OwnerFundingCursor nowincludespartialheadmicrodebits andslack arithmetic33507e, afternative108build; earlierfrozencursor/nativenewproofcounts separate. FIRST7337bf faileddebitbinder retained. Physicaloccurrence/actualcredit/entrycorrespondence stillopen: extra publicadministrativecommands canstillstealreservedfunds, and latesourcerefusaldoesnotrepairthem. Oracle23singleaf2ad3 at19:53:19Z, mir-w4-source-funding wrapper88284,41files263776B Q7661bb15e642d5eabd30465e234f5f60100aee84c3c626064015f31662e55758 manifest23d0b9ddd01a7ad0e78f6c703e024af614bc4312350df8ab1a41241a85aa14d4; d560f8 normalgenerating20:02:05Z. No duplicate/deadline.
+
+Laterunreviewed SourceFundingQuery5c572b/401b59 generalproof: passiveactualretainedplanquery, perownerdemand<=1536, wholequeryNat13bytes, dependentrequest/replycodec keepsoldsourceframingunchanged, sourcequota nonincreaseandInvariantpreservation. FailedFIRSTcc41e9/SECOND8793b5 retained; no nativequeryworker orpaymentconsumer yet. Costs canrevealprivatesourcebehavior; thisisprivilegedcontrolmetadata, notpublicobservernoninterference. Nextcompare occurrence-matchedpendingpayments withgeneratedwholepublication custody; no technicalcandidate becomesauthpolicy orprodcontract.
+
+Mandatoryhistorical322/323fullyread e17ad2/ea5e29, ledger9d674c, next324; source/Core/privateQUIC/macrogates unchanged. SameHEAD96746e20, sevenownLABdocsdirty, no newcommit/push/Canon/THM/OBL/119acceptance. Latest41GiBfree/9.6GiBavailable108b30, no cleanup; quota42%at19:07Z, next>=20:07:23Z. Currentdocs validation/statusplan synchronization pending; W4 incomplete.
+
+
+2026-09-15 05:37 JST — forward resource/query checkpoint (sole main, W4 not closed).
+Oracle23 exact final852262 and wrapper7afd39exit0 recovered; full1ae7f4. Main
+dispositions saved with exact answer/packet hashes in its RECEIPT.json. It ran
+synthetic Python/110949scalar checks, no Lean/native/rawstream replay. New
+initialization debt, head-order payment and whole wrapped-input fit premises are
+confirmed from source; no false general theorem was established by that review.
+
+SourceFundingFrame general vector/carrier framing and independent ticket-profile
+receipt progress pass7626c3/1d8223, then whole query/head inputs0c839e. Four initial
+proof attempts failed syntax/definitional/simp recursion; all saved, no downstream
+use. SourceFundingQuery head truthfulness/passivity/every-reply readability passes
+e8eebf; prior HEAD_FIRST/SECOND failed and retained. OwnerFundingCursor explicit
+initialization debt, paid initialization, slack-only extra and zero-slack refusal
+pass8e7644 after1f0079failed Bool simplification. This later debt extension was not
+in the frozen native110 build and is not covered by its audit.
+
+Native query build753b35exit0, source-query-native-_lfuy6jq binary43d47758...;
+auditc5e011exit0 with110modules/13161owned, standard axioms only. Real source-only
+C/A playback24f705 inserts2585 queries each and preserves all391 old native replies,
+with normalEOF0; vectors are historical supplied data, not new owner balances.
+Real source+3owner counterafb9c5 starts at actual18/18, then unnecessary initialize
+refusal1 spends to17. Repaired81809c refuses before ownerIO, requiredfreeze12 pays1,
+blocks other public mutations while pending, then accepts actual notification at
+17/17. Both are intentional prefixes, not whole source completion or recovery.
+Current guarded C/A complete20writes/26pubs/5values; first A invocationbef2b9 used
+wrong missing path and is retained as SOURCE_QUERY_GUARDED_A_BAD_PATH_FAILED.json.
+A rerunf31ff6 selects and hashes the real earlier A continuation; no source change.
+Complete raw-byte query/source/owner replay now92555 running, not yet a pass.
+
+New query metadata, prelude/payment guard and framing/debt proofs are post23,
+unreviewed nonproduction candidates. Compare head payment plus slack-only extras
+with an order-independent ledger; source-presence does not clear init debt, and
+freeze-origin for acknowledgement is not a second numeric payment. Unknown IO
+retires, no refund. Existing Rust/Core/privateQUIC/current authority/namespace
+remain OPEN. No Canon/THM/OBL/public wire/key or119disposition change. No subagents.
+Snapshots and relevant LAB plan updated; samples_progress update not yet needed
+because no new repo runnable entry or sample promotion. Current docs validation
+pending after this update; own LAB docs dirty, no new commit/push. Weekly check
+10942f20:09UTC has fresh61%used/39%remaining; next>=21:09UTC. Earlier quota rows are
+historical, not fresh readings. Resourcea3e0bpks4GiB serial policy unchanged.
+
+
+### Forward evidence — actual paid occurrence consumer (2026-09-14T21:08:22.488657+00:00)
+
+Complete query/source/owner raw-byte replayd7b264 passes bothC/A; RESULT
+source_query_guarded_1 SHAe268a6df9b9c38bf56524e21fdd09d0ccc6f6f701efbb17bb836de9c484f7c31.
+Eachsource712actualinputs=1bootstrap+391execution+159cost+161headqueries. Final
+actualcreditsC459/459/444,A456/459/447. Independentreader5ca691 passesrequired
+selection andrejectswrongsource-mode; actualcopiedcost18->17/headtrue->false
+replymutants01f883 failfulltypedLeanreplay, originalsunchanged. These currentC/A
+runs didnotrepeat older552boundarywrapper anddo notinherititscontrolcounts.
+
+Actualentrycontrols cd65bf coverall3creditreads×3publicreentries, incomplete
+initializationafter0/1/2owners, extraslack, zero-slack off-head refusal, wrongpending
+notification andactualnextheadadvance. All4EOF0; intentionalprefix. Firsttest
+691e73usedwrongannouncedrevision; savedfailure, thenfixedtestinputonly. Docsvalidator
+f0cfebfailedstaleprogressheader; actualtimestampcbe336fix anddcd517retry exit0.
+SourceFundingPreservation SECONDfd735c constructsacceptedheadnotification and
+fundedtailfromcertifiedpathandmatchedpayment; FIRST96b6d9failedimplicitarguments
+retained. This ispostnative110proof, notincludedinitsfrozenaudit.
+
+Oracle24 single86b189 at20:54:27Z, mir-w4-funding-custody wrapper18063,
+question3500c4613a03290137459a95be31f601d0c8fb0d3157aae0525563a070551f3f,
+manifest1e68190054a956545650cf6992c954f171a6688cfca065aad5ab3b44cfaef4b5.
+Latestactuala97512 at21:04:30Z normalgenerating, no duplicate. Earlyattempt2f1a4e
+at20:56:22 wasblockedby180sguard BEFOREbrowserread; actualcapturesrespectspacing.
+
+Afterthatpacketfreeze, SourceFundingWork FOURTH862f02 provesactualmodel
+reserve6/probe2/produce + exactpaidvector/sourcefinishaccepted/fundedtail from
+independentinitialownerpremises, actualsource-helddispatch andcertifiedsourcepath.
+Itsownerresponseprofileisderivedfromthatpathandstoredcontext, notassumedcompleted
+work. INIT_FIRST211901 additionallyconstructsfreshinitialize10fromsource-certified
+image+freshrevision0+firstdebt, preservingotherowners'debt. Standardaxioms only.
+FIRST958198missingimportpath andSECONDe8e01c source/ownerAssignment+syntaxfailure
+retained; THIRD416005passedbeforestrongerprofilederivation. Currentproof
+SHAabbcddfb640e273954e5325777e9bd13370937fa2d0af5edf8328be73386a50b.
+These areseparatepostnative/post24proofs, not Oracle24-reviewed ornative110coverage.
+
+Currentquerynative exact3creditcounterc7e768 obtainsrealreserve6/probe2/produce
+andsourcefinish0withtargetbalance0. Subsequentresult-dependentnewplanisprofile-
+refused2 withunchangedpublished9/announced9; actualvector493/493/0. This is a
+positivework-prefixandnegativefutureadmission, notwholeprogram/recovery; expected
+negativecleanupkills/reapschildren, notnormalEOF/OOM. SourceQueryThreeCredit
+receiptsretainactualbytes andsourcefinishassertion, noinventedresult.
+
+Pendinglost-reply controls injectlossAFTERrealnativeacceptedreply iscaptured.
+owner81be58actual12 andsourcea41d9eactual0 thenall5publicentriesrejectretired
+with0newframes. Both intentionalprefixes finishnormalEOF0. Firstsourcetest
+matchedunwrappedinputagainstactualcarrieranddidnotinjectloss; failedreceipt
+COHORT_PENDING_LOSS_SOURCE_FIRST_FAILED retained. Fixedmatcherdecodesexisting
+carrieronly; no cohort/nativeimplementationchange. Not durable/same-instance recovery.
+
+Mandatoryhistorical324–326 fullread4f8302/562707 andledger2029ef; next327.
+No Canon/THM/OBL/phase/119disposition orsamplepromotion. W4 source/Core/QUIC and
+all-entry physical/currentauthority/namespace correspondence remainOPEN. Same
+96746e20HEAD; ownLABdocsdirty, no newcommit/push. Latestquota39%at20:09UTC,
+nextcheck>=21:09UTC; no laterreading invented. Resourcesfc61bf41GiBdisk/
+8.9GiBavailableRAM; serialLean4GiBAS/core0. No subagents/Chromechanges/cleanup.
+
+
+### Forward evidence — refusal boundaries and actual administrative consumer (2026-09-15 06:41 JST)
+
+Oracle24 was recovered in full (664ca2/28d8ef; wrapper14a8f3 exit0). Its answer
+file SHA is dd9a5ade00aba316c4d69ad4defb1353711558533bc38c80c1977dc7ea2f169a;
+its RECEIPT.json records individual dispositions. Its Python/finite-carrier checks
+are not Lean/native replay. Matching-head syntax is insufficient to prove owner
+enabledness. Funding claims now explicitly cover continuing contexts and matched
+successful work, not resources after process death, retirement or charged failure.
+
+A real capacity101 source refuses work entry before any owner IO. Before repair
+414692 retired the coordinator; after4d477c the known refusal releases the staged
+lease, preserves the complete source state and leaves the coordinator usable.
+This behavior applies only to the queried profile. The first control cde98d used
+an incorrect zero-based bootstrap index; its failed producer/receipt are retained.
+Head-query Boolean validation and contradictory paid-notification refusal now
+retire immediately. The malformed-delivery controls027069/e28b33 keep real native
+bytes separate from locally corrupted bytes; they violate the truthful-output
+premise and are not claims that the native worker emitted a false typed reply.
+Current coordinator SHA: e10c7f3df7f4f9d3579e774fe28fcd5bd06d180fca04696143b62dece51d31fb.
+
+Current real C/A continuation048e5a completes20writes/26publications/5values each,
+with all4 normal EOF/exit0. Complete raw replayd5da16/7c603e passes both cases;
+source_query_repaired_1 RESULT SHA:
+c87331f020b6863e481bea64be603225585fa519d1b1b95c76fab67358f3199d.
+Each source has712actual inputs: bootstrap1/execution391/cost159/head161.
+Required readerc20240 passes and rejects wrong source mode. These tests do not
+inherit the older552 boundary-control count. Off-head success8a4457 confirms
+real freeze12 and install7 can recur as exact-funded heads, followed by actual
+notification0. This is an intentional first-publication prefix, not completion.
+
+SourceFundingWork now includes actual computed-receipt fit through the complete
+two-Sum carrier, using an independent stronger pre-result bound (+25/+7), and
+known-refusal full-state framing. REFUSAL_FIRST3f0444 checks all7 named general
+theorems; SHA5fa9c1b0bcd99900186fda4eef595f32af795f1177252d4a5a482c90dcf2ee14.
+These later proofs are separate from the frozen110-module native audit.
+
+Oracle25 was submitted once79da47 at21:26:27.971872Z, session
+mir-w4-failure-domain/wrapper3929. Q9f3dbb60d51a94e05128b4944bc373e1b298b85fbe260dd62a6357637c3a6b02,
+manifestd4dd58e7c26e8ba3beea89159677c4089be7397739f2d8d4caaebe3be245e13d.
+The exact browser capture3e173a at21:37:14.617Z is normally generating; no duplicate
+or deadline. Next capture is at least180seconds later. No oracle advice is proof,
+owner approval, authenticated acceptance or a substitute reviewer identity.
+
+Post25 external SourceFundingAdministration constructs actual model freeze12/
+install7 and the corresponding accepted source notification. Source image validity
+comes from the old certified path; the proof includes exact repeat installation.
+It still requires owner idle/fence/revision/image correspondence independently.
+It does not obtain these facts from a head query or claim all reachable physical
+states preserve them. FIRST2181b2/e4078e failed unresolved implicit endpoint
+parameters and is retained, without downstream use. SECOND464db1 and THIRD972ad8
+pass Lean4.29.1 --trust=0 -j1, standard axioms only. Current five-theorem source
+SHA98a28379b95223174b0bdf23ac05a0b140adf41d6df6d2618ec58b599e0c5ea9.
+
+Current status/Documentation/plan/report are synchronized without adopting a new
+roadmap or promoting Canon/THM/OBL/119dispositions. Mandatory history through330
+is read; checker partial re-reads do not replace its previously recorded full cut.
+samples_progress update is not yet required: no new repository runnable entry or
+sample promotion. Formal candidate mirror inventory has11 new files and107
+unchanged dependencies; no files copied yet, failed variants excluded. Current
+post25 administration file is additional unreviewed work. No new Rust code,
+commit or push since96746e20. Validation after this snapshot is pending.
+Latest weekly reading37%remaining at21:10:18Z; next check>=22:10:18Z. No subagents,
+Chrome changes, cleanup or invented parity. W4 remains active/incomplete.
+
+
+### Forward evidence — IO commitment and publication-order counter (2026-09-15 07:09 JST)
+
+Oracle25 final bb10cc/def1c9 was fully read13f091/6a5818. Main receipt79d3cd
+records its synthetic-peer limits. Actual native interruption controls085085
+reproduced all three IO-return/bookkeeping windows. Repairffca44 (KeyboardInterrupt)
+andd5f271 (RuntimeError) retires all5 public entries with0extraframes at each site.
+Native replies remain unchanged; one-shot host injection is not hostile-interpreter
+security or repeated interruption during cleanup. Known source refusal remains
+nonfatal only after its complete framed cancellation. Productive controla6790b
+refuses tick/enter1 at publication9 with ownersinstalled8/8/8, then performs the
+real required installations and produces10/finish0 in the same context. Normal
+post-IO C/A32df2e both complete20writes/26publications/5values, all4EOF0.
+
+SourceFundingCheckedWork SECOND67fd6d constructs one model computation record for
+work, exact paid vector/finish and full checked-arrival readability. FIRST9dc3f0
+used a nonexistent capacity lemma and failed, retained without downstream use.
+SourceFundingAdministration THIRD972ad8 constructs actual freeze/install plus
+matching source notification. Thirteen candidate modules were copied a8dbcc into
+the existing Lean sample root and runner. Fresh109733/0d149e at
+/tmp/mir-w3-reference-numr_4eq passes146compiled/150audit/14574owned declarations,
+162commands all0, source32/integrity13/weakening5+8. RESULT SHA
+48c76c01ef6ac6d29866430c1d0d802a2ee005371818ebbb183db6be8c26931b.
+No native/source-owner physical workflow is silently added by this proof mirror.
+
+Oracle26 submittedonce0b1d7b21:54:48Z, mir-w4-commit-interval, Q
+51ec95ae590940de642d2682329bc258f5f1d1284d245fa70d43c49968d77ded,
+manifest128335a6127593c6b1e8c7de3afd6d7de80afb3a3e770fc1c0b739a911f1d57d.
+Final27486d/wrapper1291aaexit0 fullyread29bbae/3e189f. It checked attachments,
+ASTs and diff/receipt consistency only; no native, synthetic-peer or Lean run.
+It found no additional in-domain IO/record-composition defect, but no-reply owner
+rejection followed source queries. Actual before124d9f has1source/0ownerframes;
+move-before-query repair is being checked. The first edit asserted a globally
+unique guard where a private helper has the same line; no source edit occurred,
+and the resulting failed after-test7640e8 is retained. Public-method-scoped edit
+then places the guard before queries; no completed after result is claimed here.
+An attempted22:04:38 capture8f2bd7 was blocked by the180s guard before browser IO;
+actual captures respect the spacing. Both Oracle sessions are fully recovered.
+
+After26's packet freeze, main found an actual permitted phase counterc99b14:
+publication1 is not yet installed; ordinary next tick/stage is accepted with
+published1/announced2; off-head ownerfreeze2 returns12; still-required install1
+returns14 and retires. The earlier waiting-ticket prefix test did not cover this
+ready-source state. This is a real native counterexample to general head enabledness,
+not a false typed reply or proof of credit theft. Repaired9c9aa8 rejects that future
+freeze before IO until this owner's current installation notification. Next source
+write remains accepted, and the target can advance before the other owners finish;
+both rounds complete. FIRST4d62ab used a pair decoder on a flat vector and failed;
+source/receipt saved, actual vector shape corrected. Current phase cut accb7f90...
+passes normal C/A8f1edd and full replaye4c6de, requiredreader092b78; RESULT SHA
+c4a074b3452aa09a43ef046f44b48dd9a5246b2ddafd7f276d4d22bfe8d940c5.
+
+Post26 external OwnerPhaseCustody THIRD2107cb checks7 projection laws and a general
+unguarded-freeze debt counter, SHA7f849b2bc056c631a3731d2d90699d2c15b3470126c0bc9998e342233802f322.
+FIRST572f81 lacked arithmetic projections/type binding; SECOND519ec2 lacked
+explicit endpoint parameters. Both retained and excluded. These laws cover
+freeze/announcement/publication/installation/registration projections, not the
+whole actual source/owner relation or invocation enabledness. This file and new
+phase guard remain external/unreviewed; the fresh150-module mirror predates them.
+
+Existing plan/status/sample mirrors updated; same sample roots and oneReport2614.
+Mandatory history331 fullyread d44fdb, next332. Docs validation7b0a60 running;
+no skip/timeout promoted. No new commit/push yet; HEAD96746e20, only own changes.
+No Canon/THM/OBL/119acceptance or W5/I3-4 activation. Weekly37% last21:10:18UTC;
+next>=22:10:18UTC. W4 remains active and incomplete.
+
+2026-09-14T22:13:12.634601+00:00 — integration check: all13 mirrored sources and runner match the freshly validated copies; no semantic delta after146/150/14574 pass. No-reply after6fdb3c now confirms0source/0ownerframes/live. Latest quota614cf0 is35% at22:11:33UTC, next>=23:11:33UTC; continueW4. Docs/source-hierarchy check751aa4 passed before final snapshot edits; final check starts now. This own conditional-proof candidate is prepared for commit/normalpush, neither W4 close nor adoption of the later unreviewed phaseguard. No subagents or skipped required formal checks.

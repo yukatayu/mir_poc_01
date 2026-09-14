@@ -1,6 +1,6 @@
 # Project status
 
-最終更新: 2026-09-15 03:27 JST
+最終更新: 2026-09-15 07:09 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -53,7 +53,7 @@ W2の有限な研究成果は検証・review・Git統合済みで保持してい
 2026-09-14のowner依頼により、単一goalをW4実分散対応（PL1/PL2/PL0 S4/S6、theory/refinement先行）へ設定しました。W3の有限候補を保持し、W4完了で停止します。
 名前付きカタログ・領域拡張・個別DAG・既存current-use・局所影響・候補選択の11依存をLeanで検査し、19変異の拒否を確認しました。
 W3は有限の研究・参照実装候補として検証・review・source統合を完了しました。通常sourceからの構築・変更・保持参照・fallback／再取得・取消し・同じSessionへの追加／修復を接続しています。Lean4.29.1で76moduleの全所有宣言を監査し、通常source32件・検証手順の反例13件・証明弱化5件を検査しました。12回のOracleレビューを回収し、最終指摘の保証範囲も記録済みです。再現commandは `python3 scripts/proof_first_reference_source_check.py --work-root /tmp`。source/evidence cutは `81f82a0b` で通常push済みです。
-W4はsourceと所有者processの接続を検証中です。レビュー済みowner/codec/resourceの45ファイルを既存Lean sampleへ移し、`python3 scripts/proof_first_reference_source_check.py --work-root /tmp --with-owner-boundary` でfresh再構築しました。133moduleの構築、137module/14148所有宣言の公理監査、通常source32・整合性13・弱化5+8が通っています。公開componentの過去92module結果は履歴であり、現在の`--with-publication`は追加されたPublication依存も発見します。native entrypointと新しいsource/owner管理候補は外部workdirのままです。第20回Oracleは回収済みで、予約後の割込み・開始中の取消し・Python入力/再初期化・必須監査対応の指摘を検証しています。実processの通常C/A継続と全bytes照合は成功していますが、全経路の排他管理・物理namespace・既存Rust/Core/QUIC接続とW4全体の受理は未完了です。 Report2614/RESUME/W4_CHECKに証拠を保持しています。ab316353以後の今回のrepo差分はcommit前です。W5以降とPlan250/I3-4はinactiveです。
+W4はsourceと所有者processの接続を検証中です。追加した13個の非production証明候補は、既存runnerで146moduleのfresh構築・150module/14574所有宣言の公理監査とsource/反例検査を通過しました。Oracleは第26回まで回収し、実処理と通知・同じrecordを使う完全carrier証明・通信から内部記録確定までの例外処理を限定review済みです。一時的な配布待ちでの拒否後に同じ構成で値10を計算する実正例も確認しました。その後、次の通常書込みと先行freezeが旧構成のinstallを妨げる実反例を発見し、ownerごとの配布順序ガードを検査しています。現在のC/A実行と全bytes照合は通過しましたが、新ガードと部分的な世代条件の証明は未reviewです。全経路のsource/owner対応、物理namespace・現在の認証認可・既存Rust/Core/privateQUIC接続とW4全体の受理は未完了です。
 対応は `plan/proof-first-foundation-correspondence.md`、現在の証跡はreport2614、W1/W2/W3の履歴はreport2611/2612/2613です。
 既読範囲は `docs/proof-first/READ_LEDGER.json` に記録し、未読と部分読了を区別しています。
 W1のpassive/accepted producer・一般label・失敗を伴う単一代入は限定review済み。W1補助source cutのreview未完了は、後のW3有限source候補のreview完了とは別に保持します。119行dispositionは元のU/D・承認区分を保持して作成済みですが、要件を一括受理・実証したものではありません。

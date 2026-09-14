@@ -1,6 +1,6 @@
 {
   "schema": "proof-first-w4-check-v1",
-  "timestamp": "2026-09-14T18:27:32.306279+00:00",
+  "timestamp": "2026-09-14T20:37:57.218589+00:00",
   "base_head": "5d7c13a821c912d14c347775e23493a77f790768",
   "status": "active nonproduction research; no W4 or Canon acceptance",
   "work_root": "/tmp/mirrorea-w4-20260914-a3e0bpks",
@@ -662,11 +662,11 @@
     "scope": "finite JSON shape only; no currentness/auth/disclosure/framing/depth/physical proof"
   },
   "git_checkpoint": {
-    "commit": "ab316353f6ac8bb64c15705b50cf1fcca763be7e",
-    "commit_evidence": "8b9562",
-    "push": "ff82f2",
-    "remote_parity": "d0fb35",
-    "classification": "reviewed publication component checkpoint; W4 continues"
+    "commit": "96746e206b9e52504c80548e9dc9fe6f4b3eff54",
+    "commit_evidence": "cc3574",
+    "push": "522bb8",
+    "remote_parity": "36ad93",
+    "classification": "reviewed owner proof mirror; W4 continues; external source/work custody excluded"
   },
   "owner_native_component": {
     "timestamp": "2026-09-14 13:29 JST",
@@ -1181,8 +1181,8 @@
     "nonclaim": "no durable commit/recovery/liveness/authenticated provenance"
   },
   "docs_validation_current": {
-    "status": "passed_before_latest_forward_append",
-    "evidence": "19cb44 exit0 (ORACLE18_DOCS_CHECK.json/log),1764reports; accidental --help37771 also ran validator20ce45 exit0, not an independent test count"
+    "status": "passed_before_later_work_checkpoint",
+    "evidence": "c26695 exit0 OWNER_MIRROR_DOCS_CHECK.log1764reports; focuseddiffbbe016/stagedcheckea23c1"
   },
   "oracle_custody_retry": {
     "session": "mir-w4-custody-retry",
@@ -3299,18 +3299,17 @@
     }
   },
   "weekly_quota_latest": {
-    "path": "/tmp/mirrorea-w4-20260914-a3e0bpks/QUOTA_CHECK_1804.json",
-    "sha256": "6d9f8880cfd302bbf3af7ac3b77f21fa93f3423472c724e307d69decc2ea6868",
-    "result": {
-      "checked_at": "2026-09-14T18:06:42.126872+00:00",
-      "weekly": {
-        "event_at": "2026-09-14T18:06:14.967Z",
-        "used_percent": 57.0,
-        "remaining_percent": 43.0,
+    "checked_at": "2026-09-14T20:09:03.753545+00:00",
+    "weekly": {
+      "event_timestamp": "2026-09-14T20:08:45.318Z",
+      "window": "primary",
+      "rate_limit": {
+        "used_percent": 61.0,
         "window_minutes": 10080,
         "resets_at": 1789814580
       }
-    }
+    },
+    "next_check_not_before": "2026-09-14T21:09:03.753545Z"
   },
   "oracle18_followup": {
     "active_eof": "984dda actualcounter, nativeEOFguardbuild9cebd2/audit55e409, b014c5 nonzero expectedincomplete; no implicitabandon/compute",
@@ -3509,7 +3508,7 @@
       "manifest_sha256": "c5c435869b7b85474dae86dd9afc3a1467462306aefb24a829652650ae418ea2"
     },
     "command": "python3 scripts/proof_first_reference_source_check.py --work-root /tmp/mirrorea-w4-20260914-a3e0bpks --with-owner-boundary",
-    "git": "uncommitted checkpoint pending focused diff/docs checks"
+    "git": "committed/pushed 96746e206b9e52504c80548e9dc9fe6f4b3eff54"
   },
   "source_credit_entry_external": {
     "proof": "876676 second elaboration exit0; general exact checker/declarative admission, productive entry, actual pending correlation, no cancel, funding and local invariant",
@@ -3519,5 +3518,681 @@
     "native": "C3751c0/A bce4ff actual4process20writes26publications5results; whole397sourceinputs each plus allowner replayedfbe5; selected reader1705de",
     "replay_sha256": "7bc7bc28bb478068881ee4247b4dcf35d18df61c4decc793e1d95278fdab4649",
     "classification": "external unreviewed reference coordinator; current proof mirror excludes it"
+  },
+  "oracle_work_interval": {
+    "session": "mir-w4-work-interval",
+    "status": "final answer recovered; advisory only",
+    "wrapper": {
+      "started": "2026-09-14T18:49:26.559502+00:00",
+      "finished": "2026-09-14T19:04:55.181162+00:00",
+      "exit": 0
+    },
+    "question_sha256": "90bf89f08a3e20b615657dcece6ff4b04de23fd92a5f7c88ce5fcc157afe8a56",
+    "manifest_sha256": "923533739565a0b662b89072a093a75942bd6052ffd115d6eeec06adfaec59fd",
+    "bound_answer_sha256": "6c83b99a4dbe24ff96d3971c26cf9f5d62ed30d309cef1da9a348e0226b0883f",
+    "main_dispositions": [
+      {
+        "finding": "mutable validation/transmission/capture ownership",
+        "disposition": "adopted after actual native capture mismatch859e49; exact bytes at public/writer/Peer and exact retained frame; immutable native97b1df and C/A complete byte replay224e61"
+      },
+      {
+        "finding": "RLock same-thread reentry",
+        "disposition": "adopted after actual reserve6/reentry2/probe16 counter4f5a54; private phase guard; first misplaced invoke guard failed68afb0 retained; fixed c64768 actual minimum3credits produced/finished and rejects owner/source/invoke with zero frames"
+      },
+      {
+        "finding": "cohort wrong-scope test skipped",
+        "disposition": "previous question overstated evidence; forward corrected: original direct-path native wrongscope remained but cohort path did not execute it; fixed boundary actually mutates scope only after produced response5times per C/A, local zero-frame refusal"
+      },
+      {
+        "finding": "loss test runs after teardown",
+        "disposition": "improved to test all views/invoke while context still open; actual loss c64768; mutant without immediate retirement rejectedef100c"
+      },
+      {
+        "finding": "typed reply, actual credit/process and source/Core/auth/funding premises",
+        "disposition": "retained OPEN, not inferred from pure theorem; new publication owner-budget candidate separately awaits review"
+      }
+    ],
+    "evidence": {
+      "COHORT_MUTABLE_CAPTURE_COUNTER.json": "6d5ad3e11d1fc5575141033a486c0a80f4d013163c15cc074f31ca8139c6a039",
+      "COHORT_REENTRY_BEFORE_CONTROL.json": "ea990666bae2f4b92f6490a41cb093c8fb15d236c098e52c45c3663a5d7f32d7",
+      "COHORT_REENTRY_AFTER_CONTROL.json": "8cb927d05adb9dc2bf8efa74f9d891677088492633fd586859f4ccee92129f08",
+      "IMMUTABLE_CAPTURE_CHECK.json": "33d12f9702b1008595eae7afa679d95ae5703cd002d5702301bfd3505449273c",
+      "COHORT_LOST_REPLY_FIXED_CONTROL.json": "e808a632e2e4aef27440fff23ca02ee6bd7df5580d2eb3d3183ee3644794ca69",
+      "COHORT_LOSS_SENSITIVITY_CHECK.json": "ddb37b2120c2ab4b42acddfc28a658a912ede11dd1f9ea9125c3d8dd99e6c456",
+      "COHORT_FIXED_REPLAY_SELECTION_CHECK.json": "de0520750235036f436fefab4eec59750f3d73edefc64f7c26e636921d71b72c"
+    }
+  },
+  "work_cohort_repair": {
+    "status": "external reference cut; proof/Python correspondence and complete lifetime funding remain open",
+    "artifacts": {
+      "COHORT_MUTABLE_CAPTURE_COUNTER.json": {
+        "path": "/tmp/mirrorea-w4-20260914-a3e0bpks/COHORT_MUTABLE_CAPTURE_COUNTER.json",
+        "sha256": "6d5ad3e11d1fc5575141033a486c0a80f4d013163c15cc074f31ca8139c6a039"
+      },
+      "COHORT_REENTRY_BEFORE_CONTROL.json": {
+        "path": "/tmp/mirrorea-w4-20260914-a3e0bpks/COHORT_REENTRY_BEFORE_CONTROL.json",
+        "sha256": "ea990666bae2f4b92f6490a41cb093c8fb15d236c098e52c45c3663a5d7f32d7"
+      },
+      "COHORT_REENTRY_AFTER_CONTROL.json": {
+        "path": "/tmp/mirrorea-w4-20260914-a3e0bpks/COHORT_REENTRY_AFTER_CONTROL.json",
+        "sha256": "8cb927d05adb9dc2bf8efa74f9d891677088492633fd586859f4ccee92129f08"
+      },
+      "IMMUTABLE_CAPTURE_CHECK.json": {
+        "path": "/tmp/mirrorea-w4-20260914-a3e0bpks/IMMUTABLE_CAPTURE_CHECK.json",
+        "sha256": "33d12f9702b1008595eae7afa679d95ae5703cd002d5702301bfd3505449273c"
+      },
+      "COHORT_LOST_REPLY_FIXED_CONTROL.json": {
+        "path": "/tmp/mirrorea-w4-20260914-a3e0bpks/COHORT_LOST_REPLY_FIXED_CONTROL.json",
+        "sha256": "e808a632e2e4aef27440fff23ca02ee6bd7df5580d2eb3d3183ee3644794ca69"
+      },
+      "COHORT_LOSS_SENSITIVITY_CHECK.json": {
+        "path": "/tmp/mirrorea-w4-20260914-a3e0bpks/COHORT_LOSS_SENSITIVITY_CHECK.json",
+        "sha256": "ddb37b2120c2ab4b42acddfc28a658a912ede11dd1f9ea9125c3d8dd99e6c456"
+      },
+      "COHORT_CONCURRENT_FIXED_CONTROL.json": {
+        "path": "/tmp/mirrorea-w4-20260914-a3e0bpks/COHORT_CONCURRENT_FIXED_CONTROL.json",
+        "sha256": "a7a33aff1b16f6891983d9410963356f1c139e1a6b577b1322123047582aafad"
+      },
+      "COHORT_FIXED_REPLAY_SELECTION_CHECK.json": {
+        "path": "/tmp/mirrorea-w4-20260914-a3e0bpks/COHORT_FIXED_REPLAY_SELECTION_CHECK.json",
+        "sha256": "de0520750235036f436fefab4eec59750f3d73edefc64f7c26e636921d71b72c"
+      },
+      "COHORT_BOUNDARY_FIXED_CHECK.json": {
+        "path": "/tmp/mirrorea-w4-20260914-a3e0bpks/COHORT_BOUNDARY_FIXED_CHECK.json",
+        "sha256": "28f00d9aaa6f1f1381f0a6d1fa01debb58f1d7743d6081084374b6989d626f47"
+      },
+      "COHORT_BOUNDARY_FIXED_A_CHECK.json": {
+        "path": "/tmp/mirrorea-w4-20260914-a3e0bpks/COHORT_BOUNDARY_FIXED_A_CHECK.json",
+        "sha256": "2eecc25c7a17a7fadec0ce0f91e1aad1cd16978420f12158af610dcde7fdcd2b"
+      }
+    },
+    "replay": {
+      "path": "/tmp/mirrorea-w4-20260914-a3e0bpks/replay-attempts/cohort_fixed_1/RESULT.json",
+      "sha256": "9cd965098817302152395872da6791f14d335f583bbc46f902c85929f5d05a6a"
+    },
+    "failed_first_guard_edit": "68afb0 wrong method occurrence; retained source_owner_cohort.ORACLE21_FIRST_FAILED.py and COHORT_REENTRY_AFTER_FIRST_FAILED_RUN.json; not used as passing evidence"
+  },
+  "owner_funding_external": {
+    "time": "2026-09-14T19:26:31.482945+00:00",
+    "proofs": {
+      "SourceCreditEntry": {
+        "source": "/tmp/mirrorea-w4-20260914-a3e0bpks/MirroreaProofFirstSourceCreditEntry.lean",
+        "sha256": "29289d086401101d5e4e0922fefbb96f89ac8cc9edcc87fe8213c253e0e2866f",
+        "log": "/tmp/mirrorea-w4-20260914-a3e0bpks/SourceCreditEntry-SECOND.log",
+        "log_sha256": "9f38ec008e432710e5d069523b5d0f4b2bade3b1d2da2b9e642445e7a062a929",
+        "status": "Lean command passed, printed axioms standard only",
+        "mechanism": "general quantified theorem bodies checked by Lean4.29.1 --trust=0 -j1, no fixed-case result counted as proof"
+      },
+      "OwnerWorkInterval": {
+        "source": "/tmp/mirrorea-w4-20260914-a3e0bpks/MirroreaProofFirstOwnerWorkInterval.lean",
+        "sha256": "b74d45ffb1d4650a328061f551bf586bddd512c9942324ffcbdb4765bae407cb",
+        "log": "/tmp/mirrorea-w4-20260914-a3e0bpks/OwnerWorkInterval-SOURCE_JOIN_SECOND.log",
+        "log_sha256": "af510743e02370d0dcc24e02dc0318c4525e0744e2998c918ae544f920095330",
+        "status": "Lean command passed, printed axioms standard only",
+        "mechanism": "general quantified theorem bodies checked by Lean4.29.1 --trust=0 -j1, no fixed-case result counted as proof"
+      },
+      "OwnerPublicationBudget": {
+        "source": "/tmp/mirrorea-w4-20260914-a3e0bpks/MirroreaProofFirstOwnerPublicationBudget.lean",
+        "sha256": "4907e5394528c73030c077933376e9ff535570ddac3fd714dfdd566536e9228c",
+        "log": "/tmp/mirrorea-w4-20260914-a3e0bpks/OwnerPublicationBudget-SECOND.log",
+        "log_sha256": "4ac6bbfc5034ba84b00277ab0ac15567e6a78ab1987c7db14b415c223eaf33b6",
+        "status": "Lean command passed, printed axioms standard only",
+        "mechanism": "general quantified theorem bodies checked by Lean4.29.1 --trust=0 -j1, no fixed-case result counted as proof"
+      },
+      "PublicationOwnerBudget": {
+        "source": "/tmp/mirrorea-w4-20260914-a3e0bpks/MirroreaProofFirstPublicationOwnerBudget.lean",
+        "sha256": "f4eba839e32156ad7252990e9d3f63c7d9d78de4323b522e9220a7113b874c9f",
+        "log": "/tmp/mirrorea-w4-20260914-a3e0bpks/PublicationOwnerBudget-SECOND.log",
+        "log_sha256": "497b0b61d02ca8d01216ea797aa79dcb817f8e1974ca84cfc5f48f835a802abc",
+        "status": "Lean command passed, printed axioms standard only",
+        "mechanism": "general quantified theorem bodies checked by Lean4.29.1 --trust=0 -j1, no fixed-case result counted as proof"
+      },
+      "OwnerFundingCursor": {
+        "source": "/tmp/mirrorea-w4-20260914-a3e0bpks/MirroreaProofFirstOwnerFundingCursor.lean",
+        "sha256": "4d35fee253797e41242969d98a51b13d11664410473aff4cdfc9630d5b6cec81",
+        "log": "/tmp/mirrorea-w4-20260914-a3e0bpks/OwnerFundingCursor-FIRST.log",
+        "log_sha256": "c2f5270428507e9e0e4ce8feb8b84cce6c01d54cb7d190dfd99513013411627b",
+        "status": "Lean command passed, printed axioms standard only",
+        "mechanism": "general quantified theorem bodies checked by Lean4.29.1 --trust=0 -j1, no fixed-case result counted as proof"
+      }
+    },
+    "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "scope": "external nonproduction modules; not Python/OS correctness, physical identity, whole source availability or downstream production acceptance",
+    "review": "Oracle22 includes all except later OwnerFundingCursor; pending; cursor needs next review",
+    "actual_capture_discriminator": {
+      "source": "/tmp/mirrorea-w4-20260914-a3e0bpks/OwnerFundingCaptured.lean",
+      "source_sha256": "c0f1f1ad96ab2cd7e90151888b41007a800479cea817f28d05c4f9aea4c308e8",
+      "inputs": "/tmp/mirrorea-w4-20260914-a3e0bpks/OWNER_FUNDING_CAPTURE_INPUTS.json",
+      "log": "/tmp/mirrorea-w4-20260914-a3e0bpks/OwnerFundingCaptured-SECOND.log",
+      "log_sha256": "011ad2b4a83f04b4a5ea92a6205fe6168e980d1cecbc8a63c50101539408e9a8",
+      "scope": "finite actual-byte source/owner prefix replay and new pure candidate funding check, not new native funding endpoint",
+      "observed": "actual remaining [493,493,2] refuses 43-command suffix costs[8,8,8]; actual funded [493,493,490] accepts identical source result; exact derived credits also accept",
+      "first_failed": "a1495c missing SourceCapacityWorker import path; corrected native artifact search path, no proof/source change"
+    }
+  },
+  "oracle_immutable_budget": {
+    "status": "complete advisory; main findings reproduced and bounded repairs checked",
+    "receipt": {
+      "path": "/tmp/mirrorea-w4-20260914-a3e0bpks/oracle-w4-immutable-budget/RECEIPT.json",
+      "sha256": "7dc47f5a541e9c14dcd6939ee61060253c83e52018336673ffffe658d9c13da7"
+    }
+  },
+  "source_funding_native": {
+    "status": "external reference component; no continuous all-entry funding or W4 acceptance",
+    "build": {
+      "path": "/tmp/mirrorea-w4-20260914-a3e0bpks/SOURCE_FUNDING_NATIVE_BUILD.json",
+      "sha256": "10e28ee33bebad25e266f25808c4912568b3ecd46cb921f286ad61926a2f1cdc"
+    },
+    "binary_sha256": "0f1158168cf7c7a8140606f1ee9dca127ea16e23659127326610dae6d49d1d67",
+    "source_audit": {
+      "path": "/tmp/mirrorea-w4-20260914-a3e0bpks/source-funding-native-70d8jujz/audit-attempts/source-funding-first/RESULT.json",
+      "sha256": "6e64bbe5be4752740cd5fa5f6545923742bb6b41392a11a47f87ee18f10464f7"
+    },
+    "source_modules": 108,
+    "source_owned": 12982,
+    "owner_audit": {
+      "path": "/tmp/mirrorea-w4-20260914-a3e0bpks/owner-budget-native-4j1ct2g0/audit-attempts/source-funding-owner-consumer/RESULT.json",
+      "sha256": "829deffb79045159cb93f3e4c84c70af46f0d303b392aa2ec61290ba8d609e59"
+    },
+    "complete_run": {
+      "path": "/tmp/mirrorea-w4-20260914-a3e0bpks/replay-attempts/source_funded_1/RESULT.json",
+      "sha256": "a67ad0687e09a88b77d4973e9391278cdf9c83c86c6f8804027d7e6317228eb7"
+    },
+    "required_reader_and_vector_controls": {
+      "path": "/tmp/mirrorea-w4-20260914-a3e0bpks/SOURCE_FUNDED_REPLAY_SELECTION_CHECK.json",
+      "sha256": "c4959b8c4e090a50a4ff958a4aeb62933952d35331f4120a4920224d7102e9fc"
+    },
+    "entry_controls": {
+      "path": "/tmp/mirrorea-w4-20260914-a3e0bpks/SOURCE_FUNDING_ENTRY_CHECK.json",
+      "sha256": "98741b07512a4e12da63c24a1ebf84ecc06e9d1af5d42d56e530a46bb2561da6"
+    },
+    "actual_refused_counter": {
+      "path": "/tmp/mirrorea-w4-20260914-a3e0bpks/SOURCE_FUNDED_FIVE_CREDIT_CHECK.json",
+      "sha256": "81d7cf31479b13431f826640d41708ff05fe80adc71afb224d430019217b3660"
+    },
+    "notes": "C/A each20writes26pubs5values all4EOF0;391actual credit-vector joins each; actualremaining[493,493,2] native refusal2 keeps published/announced9; supplied vector source-only entry controls are not physical credit authority"
+  },
+  "public_entry_gate": {
+    "status": "atomic nonreentrant gate acquired before mutable premises, under outerRLock",
+    "source": {
+      "path": "/tmp/mirrorea-w4-20260914-a3e0bpks/source_owner_cohort.py",
+      "sha256": "e0e99a7071a80f85b6478bebbde83ef0b17877d6dcf8beb63d3806ed665f3246"
+    },
+    "controls": {
+      "COHORT_PREFLIGHT_REENTRY_BEFORE_CONTROL.json": {
+        "path": "/tmp/mirrorea-w4-20260914-a3e0bpks/COHORT_PREFLIGHT_REENTRY_BEFORE_CONTROL.json",
+        "sha256": "b857f77a4aea7e65d4b63b54dee43d8a2843928e317d74903bb39ced4224d628"
+      },
+      "COHORT_PREFLIGHT_REENTRY_AFTER_CONTROL.json": {
+        "path": "/tmp/mirrorea-w4-20260914-a3e0bpks/COHORT_PREFLIGHT_REENTRY_AFTER_CONTROL.json",
+        "sha256": "835005a37b49139933f08ddf3ec255e9e2c356a7a671536df892b9809be56ff8"
+      },
+      "COHORT_SOURCE_REENTRY_BEFORE_CONTROL.json": {
+        "path": "/tmp/mirrorea-w4-20260914-a3e0bpks/COHORT_SOURCE_REENTRY_BEFORE_CONTROL.json",
+        "sha256": "cf8fae28426bcdf05613590bca48ef80128607fed639bf49bcefbca58559fd5f"
+      },
+      "COHORT_SOURCE_REENTRY_AFTER_CONTROL.json": {
+        "path": "/tmp/mirrorea-w4-20260914-a3e0bpks/COHORT_SOURCE_REENTRY_AFTER_CONTROL.json",
+        "sha256": "857d9fb48176679c84823fc275917143453aab02d4b56abc4fe832d1aafe8bc2"
+      },
+      "COHORT_ENTRY_GATE_REENTRY_AFTER_CONTROL.json": {
+        "path": "/tmp/mirrorea-w4-20260914-a3e0bpks/COHORT_ENTRY_GATE_REENTRY_AFTER_CONTROL.json",
+        "sha256": "8e51fe5435edb1f6848215ac9c8ecfd6ec422b250ec22121f31caf70d8481f1c"
+      }
+    },
+    "failed_first": "64d0a4/0e7cb9 retained obsolete work_active finally caused AttributeError; source/three receipts .ENTRY_GATE_FIRST_FAILED retained; fixed before passing 0ac20a/8b962b"
+  },
+  "source_funding_post_native_proofs": {
+    "partial_cursor": {
+      "source": {
+        "path": "/tmp/mirrorea-w4-20260914-a3e0bpks/MirroreaProofFirstOwnerFundingCursor.lean",
+        "sha256": "6a26c18c6bd463f43e57ca998229bb2fd21de13a4c2fa4b4f240ec4b3e2ac5a2"
+      },
+      "log": {
+        "path": "/tmp/mirrorea-w4-20260914-a3e0bpks/OwnerFundingCursor-PARTIAL_SECOND.log",
+        "sha256": "b6a9c674cbcaef9696802409a5a1a7337da70fbec061950942894ea7ec35c45e"
+      },
+      "status": "general arithmetic checked; physical recipe/occurrence relation not supplied; afternative108build"
+    },
+    "query": {
+      "source": {
+        "path": "/tmp/mirrorea-w4-20260914-a3e0bpks/MirroreaProofFirstSourceFundingQuery.lean",
+        "sha256": "a3f837143746423b2e8cf48b7b717b3a8eef478bd110bc96173b8828460f1676"
+      },
+      "log": {
+        "path": "/tmp/mirrorea-w4-20260914-a3e0bpks/SourceFundingQuery-CARRIER_FIRST.log",
+        "sha256": "f2c0ca8b8bb3a87c74235e5d2deb6ba30a83266bafa144bfc2bd4fd0bf3bff17"
+      },
+      "status": "general passive model/faithful cost<=1536/whole13byte readableNat and request-dependent fullreply proof; no native queryworker yet; afterOracle23freeze"
+    },
+    "failures": "partialFIRST7337bf debit binder; queryFIRSTcc41e9 binder/SECOND8793b5 unfinishedle goals; retained, never downstream; THIRD5c572b and querycarrier401b59 passed"
+  },
+  "oracle_source_funding": {
+    "status": "normal pending",
+    "session": "mir-w4-source-funding",
+    "wrapper_session": 88284,
+    "packet": "/tmp/mirrorea-w4-20260914-a3e0bpks/oracle-w4-source-funding",
+    "start": {
+      "started": "2026-09-14T19:53:19.980908+00:00",
+      "session": "mir-w4-source-funding",
+      "question_sha256": "7661bb15e642d5eabd30465e234f5f60100aee84c3c626064015f31662e55758",
+      "manifest_sha256": "23d0b9ddd01a7ad0e78f6c703e024af614bc4312350df8ab1a41241a85aa14d4",
+      "mode": "single-shot browser read-only advisory; no imposed deadline"
+    },
+    "last_capture": "2026-09-14T20:02:05.158Z",
+    "postfreeze_unreviewed": [
+      "SourceFundingQuery"
+    ],
+    "final_receipt": {
+      "path": "/tmp/mirrorea-w4-20260914-a3e0bpks/oracle-w4-source-funding/RECEIPT.json",
+      "sha256": "590ee493b77603afdefc02961d34ba5afe2e0716ee89ceef9ec28d623ee20657",
+      "status": "final collected and main dispositioned; no live Oracle"
+    }
+  },
+  "source_query_guard_followup": {
+    "time": "2026-09-14T20:37:57.218589+00:00",
+    "proofs": {
+      "SourceFundingQuery": {
+        "source": "/tmp/mirrorea-w4-20260914-a3e0bpks/MirroreaProofFirstSourceFundingQuery.lean",
+        "sha256": "e90730f8dd20f7e213abda587943cc41a5608b63981a85fd20f0ef702cf92d08",
+        "log": "/tmp/mirrorea-w4-20260914-a3e0bpks/SourceFundingQuery-HEAD_THIRD.log",
+        "log_sha256": "58fe0a73dc8677f0bb95972f16bf3aa90de03a23244a6bf76ababcf9c04ae4d0",
+        "status": "general Lean success; standard axioms only; postOracle23",
+        "scope": "conditional proof; not actual OS/Python/authority correctness"
+      },
+      "SourceFundingFrame": {
+        "source": "/tmp/mirrorea-w4-20260914-a3e0bpks/MirroreaProofFirstSourceFundingFrame.lean",
+        "sha256": "c24b6ff5043afd064be5befde9a9a5eab4b7cb5eaa4a8fd56f4112381dd554e0",
+        "log": "/tmp/mirrorea-w4-20260914-a3e0bpks/SourceFundingFrame-HEAD_SECOND.log",
+        "log_sha256": "d42d618d339c68200f08af7ce7d610dd61619c3efed03c6bea3d1c9462d44b37",
+        "status": "general Lean success; standard axioms only; postOracle23",
+        "scope": "conditional proof; not actual OS/Python/authority correctness"
+      },
+      "OwnerFundingCursor": {
+        "source": "/tmp/mirrorea-w4-20260914-a3e0bpks/MirroreaProofFirstOwnerFundingCursor.lean",
+        "sha256": "13a68a971962823a6605273bb6aaef7a4d1b2a5b40787dd4cf4cb398bd77fabe",
+        "log": "/tmp/mirrorea-w4-20260914-a3e0bpks/OwnerFundingCursor-INIT_SECOND.log",
+        "log_sha256": "5f31be3c6c749db0412e11ba92ddd50afc32da16bcc1ce83c8ade573f827db8d",
+        "status": "general Lean success; standard axioms only; postOracle23",
+        "scope": "conditional proof; not actual OS/Python/authority correctness"
+      }
+    },
+    "build": "/tmp/mirrorea-w4-20260914-a3e0bpks/SOURCE_QUERY_NATIVE_BUILD.json",
+    "build_sha256": "2754768fbc10f121d87933ae5121e06b6135518f28fc4aa3b9e6561bdb691585",
+    "binary_sha256": "43d47758e80c3ad716a3ec76085ea0a7210e2c576bd56bc89caabdcce408bd2b",
+    "audit": {
+      "path": "/tmp/mirrorea-w4-20260914-a3e0bpks/source-query-native-_lfuy6jq/audit-attempts/source-query-first/RESULT.json",
+      "sha256": "fb23f10a19101c2d20f8d51b1a976a086493497a8ff7e8a0817910c2a29f15c9",
+      "result": {
+        "schema": "private-native-audit-attempt-v1",
+        "attempt": "source-query-first",
+        "status": "passed",
+        "started": "2026-09-14T20:23:31.534263+00:00",
+        "build": "/tmp/mirrorea-w4-20260914-a3e0bpks/source-query-native-_lfuy6jq",
+        "build_receipt_sha256": "2754768fbc10f121d87933ae5121e06b6135518f28fc4aa3b9e6561bdb691585",
+        "binary_sha256": "43d47758e80c3ad716a3ec76085ea0a7210e2c576bd56bc89caabdcce408bd2b",
+        "helper_sha256": "826ca0ed00a456c8a857b0588a4e4f00e2c6afe0581896f2d31d24df8ef1d835",
+        "command": [
+          "/home/codex/.elan/toolchains/leanprover--lean4---v4.29.1/bin/lean",
+          "--trust=0",
+          "-j1",
+          "/tmp/mirrorea-w4-20260914-a3e0bpks/source-query-native-_lfuy6jq/audit-attempts/source-query-first/Audit.lean"
+        ],
+        "template_sha256": "59e7c1a1c935af7fbd4950876ee79c975057494d2177af71425197c4258f7808",
+        "audit_sha256": "4ca3e5a9ca8f5e05352ebb95f250c592b01b92b3ec0745523c12f61a967e5457",
+        "exit": 0,
+        "expected_modules": 110,
+        "modules": 110,
+        "owned": 13161,
+        "allowed_logical_axioms": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "mir_specific_axioms": [],
+        "log_sha256": "fdbead8e24f51af9341e80b07cdfa3790d455e3c74d598bcc19d8bdcfee8ecc8",
+        "finished": "2026-09-14T20:25:11.424881+00:00"
+      }
+    },
+    "native_cursor_cut": "partial prefix before later initialization-debt extension; never claim native audit covers that extension",
+    "cohort_sha256": "3beac8135949a7929871056c387ccdb14341da25bfed3a130c7b898b66cdb4ad",
+    "actual_controls": {
+      "SOURCE_QUERY_C_CHECK.json": {
+        "path": "/tmp/mirrorea-w4-20260914-a3e0bpks/SOURCE_QUERY_C_CHECK.json",
+        "sha256": "5da1c089b5841603b996a480f75be85d2beaa4f4ef0305991c90a4360fb2f2fe"
+      },
+      "SOURCE_QUERY_A_CHECK.json": {
+        "path": "/tmp/mirrorea-w4-20260914-a3e0bpks/SOURCE_QUERY_A_CHECK.json",
+        "sha256": "3b44a20966aa166e110d151e826c8a90af983dfaa726ac9c60050f33ec68e30a"
+      },
+      "COHORT_ZERO_SLACK_BEFORE_CHECK.json": {
+        "path": "/tmp/mirrorea-w4-20260914-a3e0bpks/COHORT_ZERO_SLACK_BEFORE_CHECK.json",
+        "sha256": "e67fc1caed374187f456e5efb31235fcb5274db9525fae01c6bcfdf52be5faef"
+      },
+      "COHORT_ZERO_SLACK_AFTER_CHECK.json": {
+        "path": "/tmp/mirrorea-w4-20260914-a3e0bpks/COHORT_ZERO_SLACK_AFTER_CHECK.json",
+        "sha256": "67043f21194e89a6f138bab3a419243a26f90148c7831c5a59abcc320217e6d8"
+      },
+      "SOURCE_QUERY_GUARDED_C_CHECK.json": {
+        "path": "/tmp/mirrorea-w4-20260914-a3e0bpks/SOURCE_QUERY_GUARDED_C_CHECK.json",
+        "sha256": "eefae90bf3db1a6392faf562d66dd67c3cf22279f3815dbfebec7793e56806af"
+      },
+      "SOURCE_QUERY_GUARDED_A_CHECK.json": {
+        "path": "/tmp/mirrorea-w4-20260914-a3e0bpks/SOURCE_QUERY_GUARDED_A_CHECK.json",
+        "sha256": "9e9016fff6896e71964be80e90b01e71cd12dda8a163f431d25810a1a9c2feed"
+      },
+      "SOURCE_QUERY_GUARDED_A_BAD_PATH_FAILED.json": {
+        "path": "/tmp/mirrorea-w4-20260914-a3e0bpks/SOURCE_QUERY_GUARDED_A_BAD_PATH_FAILED.json",
+        "sha256": "0d53e70a0195efbd6d89bfb3cf6b22fe8b8f397428fd0dc319acecf7a2b60fd9"
+      }
+    },
+    "replay": "source_query_guarded_1 running, session92555; no success yet",
+    "pending": [
+      "initialization/vector-read/off-head controls",
+      "complete physical funding relation",
+      "material review",
+      "existing Rust/Core/privateQUIC"
+    ],
+    "no_live_oracle": true
+  },
+  "source_query_custody_checkpoint": {
+    "timestamp": "2026-09-14T20:55:47.021652+00:00",
+    "full_replay": "d7b264 exit0",
+    "replay_sha256": "e268a6df9b9c38bf56524e21fdd09d0ccc6f6f701efbb17bb836de9c484f7c31",
+    "reader": "5ca691 pass plus wrong source mode rejected",
+    "query_mutants": "01f883 actual copies cost18->17/headtrue->false rejected; originals intact",
+    "entries": "cd65bf actual finite prefix pass; first wrong-revision691e73 failure retained",
+    "preservation": "SECONDfd735c pass; FIRST96b6d9 failed retained; postnative110 separate proof",
+    "docs": "retry40673/dcd517 exit0 after f0cfeb stale-header failure and cbe336 timestamp fix",
+    "oracle24": {
+      "started": "2026-09-14T20:54:27.605157+00:00",
+      "session": "mir-w4-funding-custody",
+      "question_sha256": "3500c4613a03290137459a95be31f601d0c8fb0d3157aae0525563a070551f3f",
+      "manifest_sha256": "1e68190054a956545650cf6992c954f171a6688cfca065aad5ab3b44cfaef4b5",
+      "mode": "single-shot browser read-only advisory; no imposed deadline"
+    },
+    "oracle_wrapper_session": 18063,
+    "next_oracle_capture_at_or_after": "2026-09-14T20:57:27Z",
+    "quota_next_at_or_after": "2026-09-14T21:09:03Z",
+    "production_gate": "all-entry physical/currentauth/Core/QUIC/recovery remains open"
+  },
+  "source_query_post24_work_consumer": {
+    "time": "2026-09-14T21:05:12.012000+00:00",
+    "scope": "post frozenOracle24 cut; no current review or native audit coverage claimed",
+    "work_proof": {
+      "file": "/tmp/mirrorea-w4-20260914-a3e0bpks/MirroreaProofFirstSourceFundingWork.lean",
+      "sha256": "abbcddfb640e273954e5325777e9bd13370937fa2d0af5edf8328be73386a50b",
+      "validation": "FOURTH862f02 exit0 onlystandardaxioms",
+      "failed": "FIRST958198 missing import search path; SECONDe8e01c wrong source/ownerAssignment and syntax; THIRD416005 passed before removing independent profile premise",
+      "result": "actual model reserve6/probe2/compute, exact paidVector sourcefinish accepted and tailfunding; profile derived from current certified dispatch",
+      "limit": "physical all-entry/source-owner namespace/exclusion/currentauthorization remain obligations",
+      "initialization": "INIT_FIRST211901 exit0 standardaxioms; source-certified image enables actual fresh owner initialization10 and discharges exactly its pending debt, freshsource revision0 explicit"
+    },
+    "native_three_credit": {
+      "result": "c7e768 passed expected actual refusal",
+      "receipt": "SOURCE_QUERY_THREE_CREDIT_CHECK.json",
+      "facts": "reserve6/probe2/produced/sourcefinish accepted at exact3credits then0; future result-dependent plan refused unchanged",
+      "cleanup": "negative experiment killed/reaped, no normalEOF or sourcecompletion claim"
+    },
+    "pending_loss": "owner81be58 and sourcea41d9e passactualsuccess-thenlostreply: all5publicentriesretired0frames; intentionalprefixnormalEOF; firstsourcewrongwrappermatcherretained"
+  },
+  "latest_weekly_quota": {
+    "checked_at": "2026-09-14T22:11:33.032856+00:00",
+    "weekly": {
+      "observed_at": "2026-09-14T22:11:13.560Z",
+      "window_minutes": 10080,
+      "used_percent": 65.0,
+      "remaining_percent": 35.0,
+      "resets_at": 1789814580
+    },
+    "next_check_at_or_after": "2026-09-14T23:11:33.032856+00:00",
+    "status": "observed own-session event"
+  },
+  "next_weekly_quota_check_at_or_after": "2026-09-14T23:11:33.032856+00:00",
+  "oracle24_dispositions": {
+    "session": "mir-w4-funding-custody",
+    "collected": "2026-09-14T21:09:46.653081+00:00",
+    "exact_capture": "664ca2",
+    "wrapper": "14a8f3 exit0",
+    "question_sha256": "3500c4613a03290137459a95be31f601d0c8fb0d3157aae0525563a070551f3f",
+    "manifest_sha256": "1e68190054a956545650cf6992c954f171a6688cfca065aad5ab3b44cfaef4b5",
+    "answer_sha256": "dd9a5ade00aba316c4d69ad4defb1353711558533bc38c80c1977dc7ea2f169a",
+    "full_read": "28d8ef",
+    "review_limits": "unchanged Python functions with abstract peers15checks,1040finitecarrierchecks; no Lean/native/Rust/rawcapture execution",
+    "dispositions": [
+      {
+        "finding": "pending refusal rawordinal retainedstale",
+        "status": "accepted technical conditional inconsistency; native fullpaidpremises imply acceptance",
+        "next": "explicit immediatefailstop on unexpectedmatchingnotification refusal; no retryabilityclaim"
+      },
+      {
+        "finding": "matchinghead chargednonsuccess mayleave retiredsuffixunfunded",
+        "status": "accepted live/success-domain limitation; no native in-premise counter",
+        "next": "actualoffhead-success/repeatedheadtight controls and localenablednessproof; do not imply fundingafterdeath/failure"
+      },
+      {
+        "finding": "knownpreowner sourceenterrefusalretires",
+        "status": "accepted technical separation needed for reversible privateprofile preserving knownstate",
+        "next": "actualnativecounter beforelocalizedrefusal recovery; generalfullstate refusalframing lemma"
+      },
+      {
+        "finding": "boolheadreplyvalidationoutside fatalboundary",
+        "status": "accepted invalidIO consistencyrepair; outside truthfulnativeoutputTCB",
+        "next": "actualsuccessfulnativequeryreply localcorruption control before/after; puttypedvalidationinside fatalboundary"
+      },
+      {
+        "finding": "completecheckedcarrier computation corollary missing",
+        "status": "accepted generalcomposition gap alreadylocallyidentified",
+        "next": "strongpre-resultprofile to samecomputedrecord checkedInput WireFits; not inferfromoldWireFits"
+      },
+      {
+        "finding": "successfulfunding/prelude/query/replayconditionalargument intact",
+        "status": "accepted limitedindependentreview; notprooforacceptance"
+      }
+    ]
+  },
+  "oracle24_repair_checkpoint": {
+    "time": "2026-09-14T21:19:49.201181+00:00",
+    "source_funding_work_sha256": "5fa9c1b0bcd99900186fda4eef595f32af795f1177252d4a5a482c90dcf2ee14",
+    "proofs": "CARRIER_FIRST0f9527 all6generalproofs; REFUSAL_FIRST3f0444 addswholeinternalstateframing; onlystandardaxioms",
+    "cohort_sha256": "e10c7f3df7f4f9d3579e774fe28fcd5bd06d180fca04696143b62dece51d31fb",
+    "delta": "typed head validation inside fatalboundary; requiredpendingnotification refusal immediatelyfatal; knownpreownerentry refusal recoverable ONLYnewqueriedprofile",
+    "old_cohort": "source_owner_cohort.PRE_ORACLE24.py",
+    "native_known_refusal": "414692 before actualsourcecapacity101/status2/0ownerframes retires; after4d477c remainsliveunchanged, repeatedknownrefusal0ownerframes; bothnormalEOF intentionalprefix",
+    "failed_test": "cde98d bootstrapindex0 assumption; actualPeer starts1; FIRST_FAILED saved thencorrectedinputselector",
+    "typed_reply_faults": "027069 before actualsuccess + explicitlocallycorrupteddelivery; e28b33 after bothimmediatelyretire0frames; notnativebadtypedresponse or in-premise semanticcounter",
+    "current_unreviewed": "guardrepairs, sourceWorkproofs and newnativecontrols require narrowreview25; no newproduction/nativebinary/Canon change",
+    "remaining": "offheadsuccess/repeatedtight-head control, localenabledness preservation, refreshednormalC/A/fullrawreplay, review and boundedmirror",
+    "offhead": "8a4457 actualsuccessfuloffhead freeze/install then repeatedhead18->17/17->16, normalEOF prefix",
+    "current_normal": "048e5a C/A complete20writes26pubs5actualresults all4EOF0, cohort e10c7f3df7f4f9d3579e774fe28fcd5bd06d180fca04696143b62dece51d31fb",
+    "current_replay": "d5da16/7c603e source_query_repaired_1 fullrawPASS",
+    "current_reader": {
+      "positive": {
+        "path": "/tmp/mirrorea-w4-20260914-a3e0bpks/replay-attempts/source_query_repaired_1/RESULT.json",
+        "attempt": "source_query_repaired_1",
+        "sha256": "c87331f020b6863e481bea64be603225585fa519d1b1b95c76fab67358f3199d"
+      },
+      "wrong_mode_rejected": true,
+      "scope": "independent required selection, not producer echo; unchanged replay driver"
+    }
+  },
+  "oracle25_start": {
+    "started": "2026-09-14T21:26:27.971872+00:00",
+    "session": "mir-w4-failure-domain",
+    "question_sha256": "9f3dbb60d51a94e05128b4944bc373e1b298b85fbe260dd62a6357637c3a6b02",
+    "manifest_sha256": "d4dd58e7c26e8ba3beea89159677c4089be7397739f2d8d4caaebe3be245e13d",
+    "mode": "single-shot browser read-only advisory; no imposed deadline"
+  },
+  "oracle25_last_capture": {
+    "time": "2026-09-14T21:37:14.617Z",
+    "tool": "3e173a",
+    "status": "normal generating; exact question; user1 assistant0 stoptrue",
+    "wrapper_session": 3929,
+    "next_capture_at_or_after": "2026-09-14T21:40:15Z"
+  },
+  "source_administration_post25": {
+    "first": {
+      "time": "2026-09-14T21:37:06.421341+00:00",
+      "exit": 1,
+      "source_sha256": "1e00db5e948511d1c7071d0be7fa17e7b80ae5e1c3e0925caee06de84a153848",
+      "log": "/tmp/mirrorea-w4-20260914-a3e0bpks/SOURCE_ADMIN_FIRST.log",
+      "log_sha256": "45fcb5d8c38a0a8653e325632511045b51b8fcffa29d21922702b109a237dbba",
+      "scope": "post-Oracle25-freeze external general proof, not native audit or reviewed integration"
+    },
+    "second": {
+      "time": "2026-09-14T21:37:35.373176+00:00",
+      "exit": 0,
+      "source_sha256": "54a9a1e31c2b02cd838779d96ace82944b3a1dd56abbab9d337af6bc7f055bba",
+      "log": "/tmp/mirrorea-w4-20260914-a3e0bpks/SOURCE_ADMIN_SECOND.log",
+      "log_sha256": "7a93d99555209b8438ab06f1d80153b9e6c938c4e76bfa0344a12174db804c15",
+      "scope": "post-Oracle25-freeze external general proof, not native audit or reviewed integration"
+    },
+    "third": {
+      "time": "2026-09-14T21:38:29.613306+00:00",
+      "exit": 0,
+      "source_sha256": "98a28379b95223174b0bdf23ac05a0b140adf41d6df6d2618ec58b599e0c5ea9",
+      "log": "/tmp/mirrorea-w4-20260914-a3e0bpks/SOURCE_ADMIN_THIRD.log",
+      "log_sha256": "2c388f19fb584f85edf5f5ade23e7275f4c1541776f580aba67817b2e1a76a32",
+      "scope": "post-Oracle25-freeze external general proof, not native audit or reviewed integration"
+    },
+    "status": "five general theorems kernel-checked; post25 freeze and unreviewed; no physical all-entry invariant claim",
+    "direct_consumer": "construct actual freeze/install, including exact reinstallation, plus matched source notification from certified old suffix and independent owner phase conditions"
+  },
+  "last_snapshot_sync": "2026-09-14T21:41:07.206641+00:00",
+  "oracle26_final": {
+    "session": "mir-w4-commit-interval",
+    "collected": "2026-09-14T22:09:37.415914+00:00",
+    "exact_capture": "27486d",
+    "wrapper": "1291aa exit0",
+    "question_sha256": "51ec95ae590940de642d2682329bc258f5f1d1284d245fa70d43c49968d77ded",
+    "manifest_sha256": "128335a6127593c6b1e8c7de3afd6d7de80afb3a3e770fc1c0b739a911f1d57d",
+    "answer_sha256": "618020fbe0aa29b7c0d02a56ccaa2d19e8ea5c4097d4575b59c5b82e4c3a9b6b",
+    "full_read": [
+      "29bbae",
+      "3e189f"
+    ],
+    "limits": "attachment42hash checks,7Python AST parsing and reverse diff/receipt consistency only; no module execution, native/Lean/Rust/rawstream run",
+    "dispositions": [
+      {
+        "finding": "IO-to-commit and same-record/admin composition match stated conditional scope",
+        "status": "accepted narrow advisory review; not full phase/auth/namespace proof"
+      },
+      {
+        "finding": "owner no-reply guard follows read-only source queries",
+        "status": "accepted exact all-IO ordering discrepancy; actual before1source/0owner frames; moving guard before queried branch, after-control pending"
+      },
+      {
+        "finding": "private leased scheduling exemption overridden by public fatal region",
+        "status": "no in-domain public path demonstrated; preserve narrower claims, not all pre-IO exceptions remain live"
+      },
+      {
+        "finding": "all-entry physical phase/currentness still open",
+        "status": "confirmed; main independently found actual next-write/future-freeze/prior-install counter after packet freeze; new guard and partial phase laws unreviewed"
+      }
+    ]
+  },
+  "oracle25_final": {
+    "session": "mir-w4-failure-domain",
+    "collected": "2026-09-14T21:44:37.518657+00:00",
+    "exact_capture": "bb10cc",
+    "wrapper": "def1c9 exit0",
+    "question_sha256": "9f3dbb60d51a94e05128b4944bc373e1b298b85fbe260dd62a6357637c3a6b02",
+    "manifest_sha256": "d4dd58e7c26e8ba3beea89159677c4089be7397739f2d8d4caaebe3be245e13d",
+    "answer_sha256": "bef01efcec59cfe02b747598528e2bb60e86d20dea2a48b7964649812fa5b8ef",
+    "full_read": [
+      "13f091",
+      "6a5818"
+    ],
+    "review_limits": "48 manifest entries verified; 9 Python sections parsed; synthetic peers23 nominal,3 interruption,1 exact-funding control. No Lean/native/Rust/raw capture execution. Initial review harness syntax failure corrected, not repository failure.",
+    "dispositions": [
+      {
+        "finding": "post-IO-to-bookkeeping KeyboardInterrupt windows in owner/source/invoke",
+        "status": "accepted conditional host-fault gap inside open Python/OS correspondence; actual native control in progress",
+        "next": "protect IO through bookkeeping; retain narrow known pre-owner refusal; no arbitrary repeated interrupt guarantee"
+      },
+      {
+        "finding": "synchronous refusal/carrier/work/init repairs survive available controls",
+        "status": "accepted narrow advisory review, not proof or native acceptance"
+      },
+      {
+        "finding": "combined checked work should bind SAME constructed record",
+        "status": "accepted missing composition consumer, direct deterministic transition bridge needed"
+      },
+      {
+        "finding": "one-credit intermediate/repeated installation lemma plus phase-sensitive reachable relation",
+        "status": "endpoint lemma independently completed post25 as SourceFundingAdministration; actual global phase correspondence remains OPEN",
+        "next": "native attempt to advance source before final install plus general source/owner phase preservation"
+      },
+      {
+        "finding": "known refusal should be followed by actual productive continuation",
+        "status": "accepted useful positive strengthening; capacity101 test only repeated known refusal",
+        "next": "find reachable temporarily disabled entry, then ordinary administrative prerequisites and actual work"
+      },
+      {
+        "finding": "retaining known unchanged context and interruption domain are owner value decisions",
+        "status": "no new owner-reserved public choice adopted: user already delegates reversible private technical profiles preserving continued use. Keep current versus uniform-retirement alternative explicitly provisional; external/public authority/failure policy remains reserved"
+      }
+    ]
+  },
+  "live_oracle": null,
+  "funding_mirror_expansion": {
+    "result": "/tmp/mir-w3-reference-numr_4eq/RESULT.json",
+    "sha256": "48c76c01ef6ac6d29866430c1d0d802a2ee005371818ebbb183db6be8c26931b",
+    "status": "passed",
+    "commands": 162,
+    "audit_modules": 150,
+    "owned_declarations": 14574,
+    "proof_status": "general candidate proof model only; physical all-entry source/owner phase correspondence still open",
+    "copied_modules": 13,
+    "compiled_modules": 146
+  },
+  "post_io_interval": {
+    "cohort_sha256": "d35438cb86a93f20f3afdf85dc275944f5dab09f9eee38e20595c83728df0415",
+    "before": "085085",
+    "after_keyboard": "ffca44",
+    "after_runtime": "d5f271",
+    "productive_refusal": "a6790b",
+    "normal_C_A": "32df2e",
+    "scope": "actual native fault/positive prefixes and normal continuations; no full all-entry model relation"
+  },
+  "owner_phase_counter": {
+    "before": "/tmp/mirrorea-w4-20260914-a3e0bpks/COHORT_NEXT_ROUND_FENCE_BEFORE_CHECK.json",
+    "before_tool": "c99b14",
+    "after": "/tmp/mirrorea-w4-20260914-a3e0bpks/COHORT_NEXT_ROUND_FENCE_AFTER_CHECK.json",
+    "after_tool": "9c9aa8",
+    "first_failed_vector_decoder": "4d62ab; wrong product decoder used on flat vector, saved PHASE_FIRST_FAILED source/receipt",
+    "counter": "ordinary stage2 accepted before install1; actual off-head freeze2=12 then required install1=14; context retires",
+    "repair": "only permit future owner freeze after its current source installation notification; next source write and other owners remain independent",
+    "cohort_phase_sha256": "accb7f90671e0e13a482bc57d43a8635d7d8829183f8be18d3354fa22ecfcf44",
+    "review": "post26 freeze, UNREVIEWED",
+    "partial_proof": {
+      "time": "2026-09-14T22:05:25.637563+00:00",
+      "exit": 0,
+      "source_sha256": "7f849b2bc056c631a3731d2d90699d2c15b3470126c0bc9998e342233802f322",
+      "log": "/tmp/mirrorea-w4-20260914-a3e0bpks/OWNER_PHASE_THIRD.log",
+      "log_sha256": "35f27fecc8294936bb527a2c19c468ed137efaa3ae49910653aa504c29413fff",
+      "scope": "post-Oracle26 external partial phase laws; not whole reachable source/owner relation"
+    },
+    "proof_limits": "seven projection laws, not whole reachable source/owner invariant or invocation enabledness",
+    "replay": {
+      "positive": {
+        "path": "/tmp/mirrorea-w4-20260914-a3e0bpks/replay-attempts/source_phase_guard_1/RESULT.json",
+        "attempt": "source_phase_guard_1",
+        "sha256": "c4a074b3452aa09a43ef046f44b48dd9a5246b2ddafd7f276d4d22bfe8d940c5"
+      },
+      "wrong_mode_rejected": true,
+      "scope": "independent required selection; current per-owner guard normal C/A actual byte replay, no general Python refinement"
+    }
+  },
+  "oracle26_capture_spacing_note": "8f2bd7 at22:04:38 was refused by180s guard before browser access; actualcaptures21:58:46,22:01:51,22:05:33",
+  "oracle26_no_reply_repair": {
+    "before": "124d9f",
+    "after": "6fdb3c",
+    "current_cohort_sha256": "efc83d5e946c701be837fee6b4dad834b46f2e4473642e05dbaba503f583a3fa",
+    "status": "0source/0ownerframes; context remains live; first failed edit/test retained"
   }
 }

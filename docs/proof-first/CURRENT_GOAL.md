@@ -1,74 +1,65 @@
 # W4 physical refinement — active
 
-Owner scope: W4 through verified candidate completion, then stop. Sole main;
-no subagents. W5+ and separately paused Plan250/I3-4 remain inactive.
-Stop also at a safe checkpoint around30% weekly quota remaining. Check fresh
-weekly metadata at natural checkpoints >=1h apart; unknown/stale is unknown,
-and goal token totals are not quota. No credit purchase or account change.
+Owner scope: verified W4 candidate completion, then stop. Sole main, NO subagents.
+W5+ and separately paused Plan250/I3-4 inactive. Approximate safe stop near30%
+weekly remaining; checks>=1h. Latest35%22:11:33UTC, next>=23:11:33UTC.
 
-PL1/PL2/PL0 S4/S6, theory/refinement before dependent implementation.
+PL1/PL2/PL0 S4/S6; theory/refinement before dependent implementation.
 REQ DS01/02/03/04/08 AU01/04/05/08 VF04/05; PT03/11/14 SC04/07 Q18.
-All119 requirement dispositions and accepted W1–W3/I3-3 are preserved.
-This LAB request does not promote Canon THM/OBL or grant public/production authority.
+Preserve all119 dispositions and accepted W1–W3/I3-3. No Canon THM/OBL/phase promotion.
 
-Meaning/input/output: ordinary checked source plus an independently authorized
-context -> generated per-locus execution/communication and truthful scoped traces.
-Preserve exact pending/continuation, source history, current generations,
-nonduplicating reservation/production, no stale reopening or fabricated event.
-Read dependencies, writes as events, distinct DAG/support/locus/lifetime layers,
-local theories versus authority, and initiation versus receive/cancel remain separate.
+Meaning/input/output: ordinary checked source and independently authorized context
+-> generated locus work/communication and truthful scoped traces. Preserve exact
+pending/source history, current generations, nonduplicating reserve/production,
+and complete proof/resource/auth context. Reads are dependencies, writes events;
+lifetime/support/DAG/participation/causality and observation/auth remain distinct.
 
-Current evidence: source105module/12913owned and owner101module/12450owned native
-builds are audited with only standard logical axioms. Whole codec wrapper bounds,
-responseCheck exactness, all-entry active-profile preservation, every-reply
-readability and independent admitted/fresh/room/rooted roundtrip progress pass
-Lean4.29.1 trust0. No source sorry/admit/Mir axioms/eval! or failed elaboration is
-used as dependent evidence. Int64 is already checked at every W3 arithmetic node.
+ONE direct consumer: actual owner resources AND owner state must correspond to
+its certified source suffix across every public entry and completed-but-unnotified
+work. Then connect established meaning to existing Rust/Core/projector/runtime/
+privateQUIC. No programmer-written receipt or communication API is introduced.
 
-Source105 plus prior owner95 has17actual four-process cohorts with complete
-byte/argv/final-image replay. Source105 plus guarded owner101 has2actual C/A
-four-process continuations (20writes/26publications/5results each) and full-byte
-replay. New owner also has4direct protocol processes/34commands, all bytes replayed.
-Waiting/cancelled/retired/parked cases are distinct from completed source.
-Private pipes/capture custody are explicit experimental assumptions, not QUIC,
-cryptographic provenance, persistence or confidential observation.
+Earlier45file owner/codec/resource mirror at96746e20 is normally pushed/parity.
+The new13-module conditional proof candidate passes the existing fresh runner:
+146compiled/150audit/14574owned;162commands all0; source32/integrity13/mutants5+8.
+The SAME constructed model work record now carries paid finish and complete
+checked-arrival readability. Actual initialization and freeze/install notifications
+are constructed from certified old source and independent owner conditions.
+No source sorry/admit/Mir axioms; all successful audits use standard logical axioms.
+Native110 source and102 owner are separate older frozen cuts, not audits of later proofs.
 
-Decisive counters: lost install acknowledgement; large ordinary source growth;
-partial-round extra budget; historical notification false rejection; actual
-scope2^128 owner response unreadable after readable commands. Their bounded
-repairs have proof/native evidence. Two independently launched owners can still
-reuse the same caller-supplied scope/ordinal: physical namespace uniqueness and
-origin are OPEN. Equal owner image does not establish private continuation equality.
+Oracle1–26 collected/dispositioned. The latest reviewed IO-to-commit boundary
+retires after one-shot interruptions before bookkeeping; narrow known pre-owner
+source refusal stays live after full-state framing and staged lease cancellation.
+Actual three-site before/after faults, productive refusal then result10/finish0,
+and normalC/A continuations pass. Oracle26's no-reply ordering discrepancy is
+reproduced and repaired:0source/0ownerframes, retained usable context.
 
-Direct consumer now: authentic namespace/admission, exclusive private actor state,
-all constructor/clone/restore/alternate executor paths, finite owner command-budget
-closure, then exact existing Rust checked Core/projector/runtime/privateQUIC.
-The current ordinary W3 source is accepted by its actual parser/Lean boundary;
-the existing full Rust checker rejects the provisional reference fragment.
-Do not call it existing Rust checked Core or join expected JSON to fake E2E.
+Decisive current counter: before installing publication1, an ordinary next write
+is accepted with announced2; off-head nativefreeze2 succeeds, then still-required
+nativeinstall1 refuses14. This is permitted actual history, not a false reply.
+Current provisional repair requires THIS owner's current installation notification
+before its future freeze. The next source write remains accepted, the target can
+advance before other owners, and both rounds complete. Smallest alternative:
+block all next source staging until every prior installation completes.
+Current repair preserves more independent progress; it is external/unreviewed.
+Seven external phase projection laws pass, but do NOT establish the whole actual
+reachable source/owner relation or invocation enabledness. No proof mirror includes them.
 
-Current versus smallest alternative: owner pre-reservation/pre-compute profile
-checks close the direct input counter left by source-only conditional checks.
-No computation is run then rolled back into a refusal; reserve/history are retained.
-For the next origin consumer, compare authentic endpoint/namespace binding with
-raw caller-chosen numeric scope, whose duplication is already reproduced.
-No new allocator/key/authority policy is adopted by this comparison.
-Q18/H/H2/C/C2, fresh import versus same-instance recovery, secret observation and
-active debug authorization retain their separate gates.
+Current phase-cut C/A20writes/26publications/5values and full raw replay pass;
+required independent selection rejects wrong mode. No historical552-control count
+is inherited. Funding covers continuing contexts plus matched partial/pending
+payment; failed or terminated native suffixes are not promised to remain funded.
+TCB includes selected verified artifacts, truthful typed outputs, sole fresh
+private-pipe supervisor, Python/compiler/runtime/OS. Queries reveal privileged
+metadata; they do not authorize use or prove public observation safety.
 
-Review: Oracle1–20 are collected, with material findings recorded and the
-original11 failed capture kept distinct. Budget owner102 EOF guard, direct1542
-inputs and ordinary C/A whole-byte replays pass. New OwnerCreditCustody has
-all-command exact resource monitoring and local phase invariants; its physical
-source-enter notification, exclusive writer/all-entry origin and full source
-continuation funding remain OPEN. Bare2credit progress covers reserve/compute
-only. Oracle remains advice, never proof, a signature or owner authority.
+Remaining: all mutator/constructor/alternate-entry correspondence, phase-sensitive
+owner state, physical namespace and current authentic admission. Existing Rust
+checker rejects the provisional fragment accepted by parser+Lean. No current
+source/Core/QUIC integration, whole W4 acceptance or secret observation/recovery
+claim. W5/W6, fresh import versus same-instance recovery and Q18 remain separate.
 
-Resume/acceptance: general proof and independent positive/counter evidence before
-production consumer; real source/Core/network/owner/trace correspondence, relevant
-faults and119dispositions, required review, reproducible integration and own Git
-verification before W4 close. Owner values/keys/public wire remain reserved.
-Report2614, W4_CHECK and RESUME hold exact paths/hashes/failures/live sessions.
-Reviewed45file owner/codec/resource proof mirror and fresh133compiled/137audit
-module checks pass; native entrypoints and new credit/source custody stay external.
-This new repo checkpoint is not yet committed; ab316353 remains pushed baseline.
+Acceptance: close necessary general proof/positive/counter/review gates, then
+actual source/Core/network/owner/trace correspondence, faults and119dispositions,
+reproducible integration and ownGit. Report2614/W4_CHECK/RESUME retain exact cuts.

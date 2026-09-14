@@ -1,6 +1,6 @@
 # Current Task Map (LAB)
 
-最終更新: 2026-09-15 03:27 JST
+最終更新: 2026-09-15 07:09 JST
 
 **Canon notice:** `mirrorea_canon/` is normative. Everything outside
 `mirrorea_canon/` is LAB; if LAB conflicts with canon, canon wins. This snapshot
@@ -27,83 +27,35 @@ does not change that accepted baseline or the Plan250 pause.
 
 ## evidence and current consumer
 
-レビュー済みowner/codec/resourceの45ファイルを既存Lean sampleへ移し、`python3 scripts/proof_first_reference_source_check.py --work-root /tmp --with-owner-boundary` でfresh再構築しました。133moduleの構築、137module/14148所有宣言の公理監査、通常source32・整合性13・弱化5+8が通っています。公開componentの過去92module結果は履歴であり、現在の`--with-publication`は追加されたPublication依存も発見します。native entrypointと新しいsource/owner管理候補は外部workdirのままです。第20回Oracleは回収済みで、予約後の割込み・開始中の取消し・Python入力/再初期化・必須監査対応の指摘を検証しています。実processの通常C/A継続と全bytes照合は成功していますが、全経路の排他管理・物理namespace・既存Rust/Core/QUIC接続とW4全体の受理は未完了です。
+追加した13個の非production証明候補は、既存runnerで146moduleのfresh構築・150module/14574所有宣言の公理監査とsource/反例検査を通過しました。Oracleは第26回まで回収し、実処理と通知・同じrecordを使う完全carrier証明・通信から内部記録確定までの例外処理を限定review済みです。一時的な配布待ちでの拒否後に同じ構成で値10を計算する実正例も確認しました。その後、次の通常書込みと先行freezeが旧構成のinstallを妨げる実反例を発見し、ownerごとの配布順序ガードを検査しています。現在のC/A実行と全bytes照合は通過しましたが、新ガードと部分的な世代条件の証明は未reviewです。全経路のsource/owner対応、物理namespace・現在の認証認可・既存Rust/Core/privateQUIC接続とW4全体の受理は未完了です。
 
-W3source81f82a0b/final5d7c13a8 retained, committed/pushed. Fresh76module9055owned,
-32source/13integrity/5mutants repeat the baseline. Existing I3 actual-process/
-private-QUIC46cases pass; this is prior regression, not new W4 functionality.
-Reviewed mirrored publication componentab316353 is normally pushed with exact
-remote parity. Fresh92module10119owned/source32/integrity13/mutants5+8 pass.
-17statement source model preserves17writes/21private replies and explicit arrival.
+Earlier W3source81f82a0b/final5d7c13a8 and I3 actual-process/privateQUIC46case
+regressions are retained. Typed private byte/tree codecs preserve the full source,
+proof/resource/auth context, receipt and owner image. Current-source generations,
+reserved keys, actual production and recipient readability have separate general
+proofs. Exact private output/capture and public-call exclusion repairs have real
+counterexamples and passing native controls. None authenticates a physical namespace
+or establishes same-instance recovery. The existing full Rust checker rejects the
+provisional reference fragment; that consumer remains dependency-gated.
 
-Twenty W4 Oracle reviews are collected; findings are dispositioned with follow-up still active; original11 question-bound capture failed and the same frozen packet retry completed. Post-review
-inventory/ordinal proofs and launcher repairs have passed local verification. Original
-source-declaration adapter defect, waiting-tick computed-reply bypass and
-call-only placement failure are reproduced and repaired within their recorded
-cuts. Provisional source referenceAt/alias intent and all7qualified entries
-preserve source/type/private-reference invariants. CallerA may still leave and
-initiate qualifiedC work in the old candidate: fixed identity is not current activation.
-The new immutable incarnation guard rejects old source initiation after locus or
-member rejoin, with all7entry positives and exact saved-continuation preservation.
-It is a reviewed reversible local model, not authenticated native custody.
-Compact source bytes retain all documents/byte offsets/placement (actual24187bytes);
-general canonical/checker proofs and malformed/type-negative controls pass.
-Finite explicit bootstrap rules must preserve policy for future configuration;
-capturing only existing owner-image records cannot supply that meaning.
-
-Finite OwnerImage/AuthorityImage preserve exact submitted witness/code/contract,
-full support and old checker meaning; no disclosure/current-install/future-policy
-restoration follows. Concrete Tree/UInt8 codecs have general inverse/canonical
-laws. OwnerValidity is exact for the existing configuration invariant and
-OwnerEvaluator has general successful-execution/rejection/totality statements.
-Independent operational byte/fuel/digit/text/record bounds remain explicit.
-
-Old24node profile-fitting graph input exits-9 after about10elapsed seconds;
-this is consistent with configured CPU10, not a measurement proving cause.
-GraphTable proves the same separate version/parent DAG decisions using tables,
-without prohibiting grounded support cycles.65module native8992owned audit,
-25process/3actual-parser-source/4IO checks pass; same24nodes0.095s and64nodes3.341s.
-This is finite evidence, not a worst-case or confidentiality guarantee.
-
-OwnerReservation retains a key before compute, blocks active install, preserves
-ambiguity after abandon, and retains actual decision before output. Arbitrary
-permitted paths cannot reserve/complete computation of the same key twice;
-this does not count physical dispatch starts. Fresh-rooted inventory connects
-successful reservation to constructive production and preserves unique ordinals.
-Fresh-only initial namespace is not recovery. OwnerReceipt constructs source consumption from
-current image/actual production/private pending/protection/invariant, while a
-forged typed tuple remains a counterexample to inferring authenticated origin.
-The stateful native experiment79module10186owned audit passes. Five actual
-process transcripts and five IO faults pass. Actual parser request → actual
-836byte reply → original source first=10 once is checked; equal-valued wrong
-request refused. This new driver is after the tenth packet freeze and remains
-reviewed/external through Oracle11. Post-repair5protocol/5IO and actual source receiver pass.
-Cleanup failure retains the primary exception and exact child handle; failed
-cleanup is never called successful reaping. CPU10 covers the entire persistent
-process lifetime. It is not QUIC, authenticated custody or whole-system E2E.
-
-Guarded publication now composes one native source publisher and three actual
-owner endpoints:26publications/20source writes/5owner productions, with actual
-freeze/install acknowledgements. Generic routing derives from ticket.place;
-C/A continuation variants use identical binaries. Complete native byte traces
-replay against checked evaluators, with95module audits. Repeated full cohorts
-still reproduce the same scope/ordinal, so physical namespace admission remains
-open. Oracle12 is collected and dispositioned for this immutable cut. A later lost-install-ack counterexample
-has a general exact-image/revision confirmation repair and actual process positive/
-negative evidence; its audit/replay and Oracle13 review are collected. Post13 capacity/suffix/prefix refinements now have general proofs and actual growth/quota/C/A native controls; the successor103-module audit and9cohort exact replays pass; Oracle15 is recovered; source-reply readability proofs/native104module controls pass. The current105source/12913owned audit and17actual source+51owner whole-byte/argv replays pass. Oracle16 F1/F2/F3 repairs have general proofs and native/checker regressions. Oracle17 is collected; actual required-audit/aggregate/finalizer counters and repairs pass. Oracle18/19 are collected. Budgetowner102 has explicit successful audit,3direct processes/1542inputs and C/A exact-byte continuations. Active EOF and short frames are classified as incomplete failures. New sole-writer credit monitoring and local claim/enter/cancel invariants pass Lean; actual one-credit source admission counter and two-credit parked-result control expose the next consumer. Two credits do not fund the driver diagnostic or subsequent publication; full continuation resource custody remains OPEN. Direct old95owner scope2^128 still gives an actual unreadable reply; the successor pre-reservation/checker agreement, all-entry preservation, every-reply readability and independent ordinary roundtrip progress pass Lean (bfaf05), with finite controls17bd6e. Its owner101/12450owned audit, direct4process34inputs and C/A2four-process continuation full-byte replays pass; physical namespace/custody and material consumer review remain open.
-This is privileged-pipe evidence; authenticated ingress and existing Rust/QUIC
-source/Core embedding remain the direct consumer. W4 is active, W5+ unchanged.
+Current guard candidate: require all actual owner initializations before another
+source operation; account a matching next obligation's actual payment until its
+source notification; permit unrelated administrative debit only from slack. A
+native source cost/head query supplies metadata, never permission or a receipt.
+The smallest alternative is an order-independent paid-occurrence ledger, requiring
+additional correspondence through replanning. This is a reversible private resource
+profile, not a public grammar/wire or an authority/revocation policy adoption.
 
 ## ordered self-driven packages
 
 | Dependency / macro position | Current consumer / remaining gate | Startability / rough remaining estimate |
 |---|---|---|
 | W3 reference / macro1/3/5 finite cut | source/proofs/review/Git retained | closed candidate; no production/Canon promotion |
-| W4 owner boundary / macro2/3 early | guarded4process publication exercised; authenticated origin, scope and exclusive custody still open | 着手可能; provisional2–6h owner/resources +6–16h custody/history |
+| W4 owner boundary / macro2/3 early | actual zero-slack guard and4process continuation pass; known-refusal/complete-carrier repair and actual paid notification consumer under review; physical all-entry join open | 着手可能; provisional2–6h owner/resources +6–16h custody/history |
 | W4 runtime connection / macro2/3 middle | actual generated owners/configuration/privateQUIC implement established meaning | 後段依存; provisional10–24h after theory gate |
 | W4 faults/integration / macro2/3 close | actual network positive/negative/observation,119dispositions/review/ownGit | 後段依存; provisional6–14h |
 | W5/W6/W7 / later | same-instance recovery, secret observation/resources, integrated alpha | 後段依存; outside this request |
-| Mandatory corpus / macro0 | hash/full-reading ledger, still incomplete | 着手可能; next mandatory ledger entry322 |
+| Mandatory corpus / macro0 | hash/full-reading ledger, still incomplete | 着手可能; next mandatory ledger entry332 |
 
 Latest user-facing estimate remains24–60active hours, low confidence. It is not
 an Oracle deadline, requirements percentage or permission to omit a gate.
@@ -145,13 +97,13 @@ retirement choice actually requires owner values; do not infer approval.
 
 Keep one Report2614; closed Reports2611–2613 unchanged. Synchronize existing
 plan/status/sample dashboards and119dispositions as evidence changes. No new
-sample root/taxonomy/roadmap has been adopted. Own11status/plan/ledger/report
-files are dirty; new code/native artifacts remain external pending reviewed
-integration. Ordinary no-GPGcommit/push follows review; no reset/clean/force.
-External mount absent;43GiB root free/11GiB RAM available, serial4GiBchildren,
-existing build cache reused. Oracle CLI dry-run unexpectedly auto-pruned8older
-sessions; subsequent invocation explicitly disables retention pruning. No
-manual cleanup, host-share placement or Chrome setting change was performed.
+sample root/taxonomy/roadmap has been adopted. Current own LAB status/plan/ledger/report followups are dirty; later native/query
+and credit-guard code remains external pending review and integration. The earlier
+reviewed45file proof mirror is committed/pushed at96746e20 with remote parity.
+No Canon, public contract or Rust implementation edit. Serial4GiBchildren;
+latest measured41GiB root free/8.9GiB RAM available; no external work mount.
+No cleanup or Chrome settings change. Weekly quota is checked >=1h apart;
+35%remaining observed22:11:33UTC, next>=23:11:33UTC, approximate safe stop near30%.
 
 ## non-promoted references
 

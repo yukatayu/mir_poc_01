@@ -183,4 +183,46 @@ obligations. Two owner credits cover the adjacent reserve/compute pair; an
 intervening diagnostic or later all-participant freeze/install needs additional
 resources. Waiting with a parked actual result is not source completion.
 Oracle reviews through19 examined the corresponding cuts; evidence and limits
-are recorded in Report2614. Oracle20 reviewed the resource-custody successor; its outstanding findings and later fixes remain external.
+are recorded in Report2614. Oracle20–25 reviewed successive resource-custody cuts; exact findings, repairs and their evidence limits are retained in Report2614.
+
+
+## Source suffix funding and actual work consumer
+
+The next nonproduction proof sources are included in `--with-owner-boundary`.
+Fresh validation of this expanded cut passes146compiled/150audit modules and
+14574owned declarations; the prior133compiled/137audit result belongs to the
+earlier45-file mirror. Report2614 records the exact new result.
+
+`PublicationOwnerBudget` projects per-owner cost from the actual certified source
+suffix. `SourceFundingInput` checks the complete current vector before adopting
+an otherwise accepted source state. `OwnerFundingCursor` distinguishes unpaid
+initialization, partial work payment and a completed head awaiting notification.
+`SourceFundingQuery` proves the actual cost/head replies are faithful and passive;
+they confer no authority and are privileged source metadata.
+`SourceFundingFrame` bounds the whole vector and the two-Sum checked carrier.
+
+`OwnerCreditCustody` accounts all typed native model replies, including charged
+refusals and uncharged budget refusal. `SourceCreditEntry` separates a staged
+local lease from actual accepted source entry. `OwnerWorkInterval` constructs
+reserve/probe/produce under independent old owner conditions.
+`SourceFundingPreservation` constructs accepted matching notification from the
+certified suffix and an exact paid vector; no successful source step is assumed.
+`SourceFundingWork` composes this with actual model work, initial image admission,
+complete checked-arrival bounds and known-refusal full-state preservation.
+`SourceFundingAdministration` additionally constructs freeze/install plus source
+notification, including exact repeated installation. `SourceFundingCheckedWork`
+uses the SAME computation record for work, paid finish and complete-carrier
+readability. The latter two were inspected in Oracle26 under their stated premises; no
+whole physical phase/namespace/authentication conclusion follows.
+
+Remaining premises are substantive: native owner state must match the vector,
+source dispatch, current image/fence, admitted ticket and rooted reservation
+history; relevant inventory and carrier space must remain available. These
+proofs do not derive those conditions from a cost/head query, guarantee all
+physical interleavings, or preserve funding after charged failure/termination.
+The whole Python-to-model relation and phase-sensitive owner/source reachability
+remain open. Oracle25's post-IO interruption finding has actual before/after
+native controls, recorded separately from these mathematical proofs.
+Native entrypoints and the coordinator still run from the external workdir.
+No Rust/Core/QUIC, new sample root, Canon status or public failure-policy change
+is implied by importing these proof modules.

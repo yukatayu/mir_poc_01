@@ -6302,9 +6302,9 @@
   {
     "path": "specs/examples/326-current-l2-source-sample-authoring-bless-regression-policy-ready-minimal-source-sample-authoring-bless-regression-policy-threshold.md",
     "sha256": "a90ae85e480608b8eea543fba6bf042a7f1dd65b2f8a057f76a88fddcc58fa45",
-    "range": "",
-    "role": "LAB evidence/history/source",
-    "status": "unread"
+    "range": "all",
+    "role": "562707 historical LAB full read; authored/deferred ladder and repo-local bless boundaries, not current Core/network/production acceptance",
+    "status": "full"
   },
   {
     "path": "specs/examples/569-current-l2-order-handoff-source-surface-artifact-route-tightening.md",
@@ -6491,9 +6491,9 @@
   {
     "path": "specs/examples/325-current-l2-verification-ladder-wiring-ready-source-sample-authoring-bless-regression-policy-comparison.md",
     "sha256": "d2e62be3e1afcec9da0fa5288b6e30077aad34d5e1bb4c30bd67a1b46b208ed1",
-    "range": "",
-    "role": "LAB evidence/history/source",
-    "status": "unread"
+    "range": "all",
+    "role": "4f8302 historical LAB full read; authored/deferred ladder and repo-local bless boundaries, not current Core/network/production acceptance",
+    "status": "full"
   },
   {
     "path": "specs/examples/556-current-l2-phase6-parser-second-tranche-attached-slot-and-predicate-fragment-first-package-threshold-helper-mirror.md",
@@ -6876,9 +6876,9 @@
   {
     "path": "specs/examples/328-current-l2-theorem-first-concrete-tool-pilot-ready-minimal-theorem-first-concrete-tool-pilot-threshold.md",
     "sha256": "717086318ada126372d9d5e08a5aaac2389e7bbca87558fb0b45eb855bb87754",
-    "range": "",
-    "role": "LAB evidence/history/source",
-    "status": "unread"
+    "range": "all",
+    "role": "8836f2 historical LAB full read; human proof-notebook review units are not actual mechanization or current production authority",
+    "status": "full"
   },
   {
     "path": "specs/examples/212-current-l2-theorem-line-checker-verdict-payload-family-ready-checker-verdict-witness-family-threshold.md",
@@ -6981,9 +6981,9 @@
   {
     "path": "specs/examples/329-current-l2-theorem-first-concrete-tool-pilot-ready-deferred-authored-row-widen-sequencing-comparison.md",
     "sha256": "838825081aa8b93109ff8ca3a7a6b5957d9556137a774a96e662d76f01cacd96",
-    "range": "",
-    "role": "LAB evidence/history/source",
-    "status": "unread"
+    "range": "all",
+    "role": "710d9a historical LAB full read; sequencing/authoring status is not concrete-source or machine-proof acceptance",
+    "status": "full"
   },
   {
     "path": "specs/examples/358-current-l2-mirrorea-shared-space-docs-first-re-entry-ready-minimal-mirrorea-shared-space-docs-first-re-entry-threshold.md",
@@ -7226,9 +7226,9 @@
   {
     "path": "specs/examples/327-current-l2-source-sample-authoring-bless-regression-policy-ready-theorem-first-concrete-tool-pilot-comparison.md",
     "sha256": "e98625d99a6e4ed65205c50736c706a474e157ed83d9bd93eac87dee6231f043",
-    "range": "",
-    "role": "LAB evidence/history/source",
-    "status": "unread"
+    "range": "all",
+    "role": "8836f2 historical LAB full read; human proof-notebook review units are not actual mechanization or current production authority",
+    "status": "full"
   },
   {
     "path": "specs/examples/551-current-l2-phase5-proof-protocol-runtime-policy-handoff-closeout-threshold-helper-mirror.md",
@@ -7359,9 +7359,9 @@
   {
     "path": "specs/examples/330-current-l2-deferred-authored-row-widen-sequencing-ready-minimal-deferred-authored-row-widen-sequencing-threshold.md",
     "sha256": "12ce66dead4c205c3c5c4e6de7d3933c53f7f6ce87952a5531d4088f4ba98950",
-    "range": "",
-    "role": "LAB evidence/history/source",
-    "status": "unread"
+    "range": "all",
+    "role": "159888 historical LAB full read; sequencing/authoring status is not concrete-source or machine-proof acceptance",
+    "status": "full"
   },
   {
     "path": "specs/examples/32-current-l2-static-gate-artifact-loop.md",
@@ -7653,9 +7653,9 @@
   {
     "path": "specs/examples/324-current-l2-verification-ladder-wiring-ready-minimal-verification-ladder-wiring-threshold.md",
     "sha256": "dac3dedbd4f77b254792650f8c7affd831276ce32a82bd69d04718a63274372f",
-    "range": "",
-    "role": "LAB evidence/history/source",
-    "status": "unread"
+    "range": "all",
+    "role": "4f8302 historical LAB full read; authored/deferred ladder and repo-local bless boundaries, not current Core/network/production acceptance",
+    "status": "full"
   },
   {
     "path": "specs/examples/136-current-l2-theorem-line-notebook-bridge-artifact-threshold.md",
@@ -8584,13 +8584,6 @@
   {
     "path": "specs/examples/454-current-l2-artifact-preview-and-underdeclared-source-gap-note.md",
     "sha256": "145af16ff83dd5c80c87cee7dd0874bacf9e11f8cdce842e2bf7b929e73b8388",
-    "range": "",
-    "role": "LAB evidence/history/source",
-    "status": "unread"
-  },
-  {
-    "path": "specs/examples/331-current-l2-deferred-authored-row-widen-sequencing-ready-proof-notebook-bridge-sketch-reopen-ordering-comparison.md",
-    "sha256": "2df909b0531e49ae3d292f9dd02397f2821db728936acfd53a4adf310fa990a5",
     "range": "",
     "role": "LAB evidence/history/source",
     "status": "unread"
@@ -18135,7 +18128,7 @@
     "path": "crates/mir-semantics/src/full_system_v1/typed_ir.rs",
     "sha256": "851a4db7882830539384a1ab87a4c9459a19f95543332701b12e9602171cf392",
     "range": "1-283",
-    "role": "LAB historical computational source/checker/runtime dependency; full text read",
+    "role": "7bbb64 W4 read-only future Core consumer inventory; no type/authority/implementation contract adopted",
     "status": "full"
   },
   {
@@ -25598,5 +25591,26 @@
     "range": "1-17803",
     "status": "read",
     "role": "Full file completed by recorded chunks and previously read12170-17803. Actual source-derived dispatch, sealed separate authority, ST-only clone/restore versus OW1 failclosed, exact event provenance and process-carrier boundaries. No Rust edit."
+  },
+  {
+    "path": "specs/examples/322-current-l2-syntax-backed-sample-runner-first-cut-ready-minimal-syntax-backed-sample-runner-first-cut-threshold.md",
+    "sha256": "df9046e842543c386385fef1f1ef118ad4349da81be2721153930abced828d60",
+    "range": "all",
+    "status": "full",
+    "role": "e17ad2 historical LAB full read; helper runner/reached-stage claims remain historical, not current source/Core/QUIC acceptance"
+  },
+  {
+    "path": "specs/examples/323-current-l2-syntax-backed-sample-runner-first-cut-ready-verification-ladder-wiring-comparison.md",
+    "sha256": "869bb36dbf80c7fd64f2728d7ceb8819fe7f17cc06201fdad5a49c15da7d6ae4",
+    "range": "all",
+    "status": "full",
+    "role": "ea5e29 historical LAB full read; helper runner/reached-stage claims remain historical, not current source/Core/QUIC acceptance"
+  },
+  {
+    "path": "specs/examples/331-current-l2-deferred-authored-row-widen-sequencing-ready-proof-notebook-bridge-sketch-reopen-ordering-comparison.md",
+    "sha256": "2df909b0531e49ae3d292f9dd02397f2821db728936acfd53a4adf310fa990a5",
+    "range": "all",
+    "status": "full",
+    "role": "d44fdb historical LAB notebook ordering; not machine proof or current queue"
   }
 ]

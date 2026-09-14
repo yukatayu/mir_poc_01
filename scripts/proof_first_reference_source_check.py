@@ -142,7 +142,9 @@ def main():
         for name in publication_roots + ['MirroreaProofFirstReceivedResultControls']:
             visit(name)
         if args.with_owner_boundary:
-            for name in ['MirroreaProofFirstOwnerEndpointBudget', 'MirroreaProofFirstRoutedOwner']:
+            for name in ['MirroreaProofFirstOwnerEndpointBudget', 'MirroreaProofFirstRoutedOwner',
+                         'MirroreaProofFirstSourceFundingAdministration',
+                         'MirroreaProofFirstSourceFundingCheckedWork']:
                 visit(name)
     source_scripts = ['scripts/proof_first_composition_source.py',
                       'scripts/proof_first_composition_source_check.py',
