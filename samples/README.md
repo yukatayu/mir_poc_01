@@ -326,3 +326,11 @@ cargo test -p mirrorea-cli --test surface_mir_cli -- --nocapture
 - active sample は silent delete せず、archive へ移す
 - generated artifact と source sample を混ぜない
 - heavy disposable generated artifact は repo root ではなく external workdir を優先する
+
+
+W4のqualified owner・codec・応答profile・完了用処理枠の一般証明は、既存の
+`proof_first_reference_source_check.py` に `--with-owner-boundary` を付けて
+fresh検査する（`--with-publication` を含む）。既存のW3 source検査と所有宣言監査を
+再実行する仕組みであり、native worker／QUIC／権限の発行／W4完了を意味しない。
+定義と未接続条件は [MirroreaProofFirstPublication.md](lean/foundations/MirroreaProofFirstPublication.md)、今回の結果はReport2614に記録する。
+active rootの追加や移動はない。

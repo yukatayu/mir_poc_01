@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-09-14 12:53 JST
+最終更新: 2026-09-15 03:27 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -59,18 +59,30 @@ The owner explicitly requested W4 after W3 closed. W4 physical refinement is the
 sole task-local goal, PL1/PL2/PL0 S4/S6, with one main and no subagents. Stop after
 W4; W5+/alpha are not active. Plan250 remains separately paused after I3-3.
 
+レビュー済みowner/codec/resourceの45ファイルを既存Lean sampleへ移し、`python3 scripts/proof_first_reference_source_check.py --work-root /tmp --with-owner-boundary` でfresh再構築しました。133moduleの構築、137module/14148所有宣言の公理監査、通常source32・整合性13・弱化5+8が通っています。公開componentの過去92module結果は履歴であり、現在の`--with-publication`は追加されたPublication依存も発見します。native entrypointと新しいsource/owner管理候補は外部workdirのままです。第20回Oracleは回収済みで、予約後の割込み・開始中の取消し・Python入力/再初期化・必須監査対応の指摘を検証しています。実processの通常C/A継続と全bytes照合は成功していますが、全経路の排他管理・物理namespace・既存Rust/Core/QUIC接続とW4全体の受理は未完了です。
+
 | W4 axis | Current evidence | Remaining gate / startability |
 |---|---|---|
-| Logical specification | fresh92module audit; closed source/publication commands, explicit results, outcome/ordinal/rootedness proofs | 着手可能: participant projection, actual owner provenance, finite representation and narrow review |
+| Logical specification | fresh92module audit; closed source/publication commands, explicit results, outcome/ordinal/rootedness proofs | 着手可能: actual owner provenance, private custody/current admission and stateful physical correspondence |
 | User-facing specification | unchanged actual-parser17statement source executes through the local protocol model; authority/configuration are distinct | 後段依存: actual generated owner execution, source/result/observation correspondence |
-| Implementation / operation | current W3 baseline and existing I3 actualprocess/QUIC46cases pass; no new Rust behavior | 後段依存: bounded internal implementation after corresponding theory gate, all-entry and actual fault regression |
+| Implementation / operation | W3 and existing I3 QUIC46cases pass; external graph evaluator25process/3source/4IO and stateful79module native5transcript/5IO controls pass; actual response consumes original source binder once; no new Rust behavior | 後段依存: bounded internal implementation after corresponding theory gate, all-entry and actual fault regression |
 
 The model's publication revisions do not replace authority generations. Complete
 source pending/history persists across publication; local active validation/use
 intervals must finish before acknowledging freeze. Authentic messages, complete
 participant coverage and real serialization remain obligations, not proved by the
-model. Six Oracle reviews are recovered; the original-declaration adapter defect is reproduced and repaired. A seventh review covers finite owner representation, typed residual preservation and the physical cut. External actual-source qualification and all-entry logical identity/partition proofs pass; current caller admission and real owner ancestry remain. Report2614
-accumulates results; no component count implies W4 completion.
+model. Nineteen Oracle reviews are recovered; original11 exact-question capture failed and the identical packet retry completed; post-review inventory/ordinal/launcher repairs are locally verified; the original-declaration adapter defect is reproduced and repaired. The seventh distinguishes finite data from authentic installation/history; the eighth identifies operational payload/framing/resources and result correlation gaps, now recorded with concrete stack failures and repairs. External actual-source qualification and all-entry logical identity/partition proofs pass; current caller admission and real owner ancestry remain. Report2614
+accumulates results; no component count implies W4 completion. Compact source
+input retains all documents/byte offsets/placement with general codec/checker laws and
+actual17statement controls (24KB). Fixed source/owner native processes now run
+those statements and a3statement nonempty continuation. Guarded publication now
+runs one publisher plus three owner processes,26publications/20writes/5productions,
+with actual endpoint acks, generic routing and source-selected C/A placement.
+Complete actual byte traces replay in Lean; both native95module audits pass.
+Oracle12 is collected for that cut. Lost-install-ack recovery has a later exact confirmation
+repair with general proofs and actual retry/refusal controls; Oracle13 is collected. The new private capacity driver retains completion slots through refusals and checks local source prefixes before adoption. Actual4process growth/refusal/shorter continuation and quota/C/A controls pass; Oracle14 is recovered. The successor103-module/12682-declaration audit and9actual cohorts with9source/27owner full byte replays pass, with explicit complete/waiting/cancelled/retired outcomes. Oracle15 is recovered. Source-reply readability proofs,104module audit and native boundary controls pass. The current105source/12913owned audit and17actual source+51owner whole-byte/argv replays pass. Oracle16 F1/F2/F3 repairs have general proofs and native/checker regressions. Oracle17 is collected; actual required-audit/aggregate/finalizer counters and repairs pass. Oracle18/19 are collected. Budgetowner102 has explicit successful audit,3direct processes/1542inputs and C/A exact-byte continuations. Active EOF and short frames are classified as incomplete failures. New sole-writer credit monitoring and local claim/enter/cancel invariants pass Lean; actual one-credit source admission counter and two-credit parked-result control expose the next consumer. Two credits do not fund the driver diagnostic or subsequent publication; full continuation resource custody remains OPEN. Direct old95owner scope2^128 still gives an actual unreadable reply; the successor pre-reservation/checker agreement, all-entry preservation, every-reply readability and independent ordinary roundtrip progress pass Lean (bfaf05), with finite controls17bd6e. Owner101/12450owned audit, direct4process34inputs and C/A whole-byte replay pass. Completion-credit native evidence is now available; authenticated physical coupling and reproducible integration remain open.
+Scope duplication remains an actual native falsifier, so authenticated publication
+and physical exclusive custody stay open. This is privileged-pipe evidence, not QUIC.
 
 W2's finite checked/reviewed result and committed/pushed cut remain preserved:
 24-file kernel/18-mutation evidence, one private captured frame/history,
@@ -418,3 +430,29 @@ The authorized roadmap is paused, not blocked, stale or closed.
 - 2026-09-14 12:15 JST: W4外部候補で実sourceの配置指定・参照別名・交換/fallback/再取得/解放を接続し、17文/4結果と一般Session保存を検査。caller退出後の開始を現在性の反例として保持、第6回Oracle継続。実network統合は未達。
 
 - 2026-09-14 12:53 JST: W4の元source宣言解決の反例を修正し、14件の実parser検査を通過。全7入口の残余型・待機継続と有限ownerデータの一般対応証明・所有宣言監査を確認。第7回Oracle開始、実network接続は継続中。
+
+- 2026-09-14 13:29 JST: W4構成妥当性と所有側の成功・拒否を一般証明し、固定workerのnative buildと16実process検査を確認。第7回Oracleを回収、出版証明componentのpush/parity済み。codec一般対応と実network統合は継続中。
+
+- 2026-09-14 15:27 JST: W4具体codecの一般証明と入力反例修正を検査。表で共有する依存計算の意味一致、native25件・source変更3件・IO障害4件が通過。第8回Oracle回収済み、実network／実行履歴の統合は継続中。
+
+- 2026-09-14 16:38 JST: W4状態を保持するnative所有者の79module監査、5操作列・5IO障害を検査。実parserから実応答を経て元sourceのfirst=10へ一度だけ書込む部品接続が通過。第10回Oracle差分レビュー中、現在の参加／認証／QUIC接続は継続。
+
+- 2026-09-14 16:58 JST: W4第10回Oracleを回収。正しい初期履歴からの予約→計算成立・通番一意性をLean検査し、起動直後の例外修正後に5操作列・5IO障害・実bytesからsourceへの書込を再検査。物理的な一度だけの起動、private状態管理とQUIC統合は継続。
+
+2026-09-14 19:11 JST — W4 guarded4process publication and C/A source continuations pass; complete traces replay, lost-install-ack counterexample/repair retained, authenticated scope/QUIC gate and Oracle12 remain open.
+
+2026-09-14 21:51 JST — W4 private容量driverの完了手順保持とsource採用前検査を一般証明。実4processで容量拒否後の追加source、quota/retry/EOF、通常C/Aを検査。新cut監査・replay・reviewと認証されたRust/QUIC接続は未完了。
+
+2026-09-14 23:24 JST — W4 lifecycle条件を補強し、103module監査・9実4process構成・9source/27owner全bytes照合を検査。Oracle15継続、受信数値上限の実反例に対する一般readability証明を補強中。認証されたRust/QUIC統合は未完了。
+
+2026-09-14 23:58 JST — W4の受信可能性と残り手順の一般証明、104module監査、順序変更・権限・容量・不正frameの実機検査を実施。実記録から起動引数を束縛した全bytes再照合を継続中。Oracle15回収、Rust/QUIC統合は未完了。
+
+2026-09-15 00:48 JST — W4 Oracle16回収、部分配布時の予算と過去通知の実反例を確認し、一般証明・検査側回帰を修正。全13構成の束縛再照合済み、owner応答profileを全入口へ接続中。Rust/QUIC統合は継続。
+
+2026-09-15 01:18 JST — W4 source105module監査と17source/51ownerの実bytes照合を完了。直接owner入力の受信不能反例を実機再現し、全命令の保存・全応答の受信可能性・予約から結果への進行を一般証明。新owner実行物とOracle17の検証を継続、Rust/QUIC統合は未達。
+
+2026-09-15 02:07 JST — W4所有者の完了用処理枠を一般証明し反例2種類をモデル検査。監査attemptと実行/実験結果の区別を修正し、実監査と全bytes再照合を確認。Oracle18差分レビューを開始、W4未完了。
+
+2026-09-15 03:02 JST — W4第19回Oracle回収。owner102監査・直接/通常C/A全bytesを保持し、source開始前の処理枠不足を実再現。残量追跡と局所確保を一般証明し実processを検査、継続全体の資源とRust/QUIC統合は未完了。
+
+2026-09-15 03:27 JST — W4のowner/codec/resource一般証明を既存sampleへ統合し、fresh133module・137module監査/14148所有宣言、通常source32・整合性13・弱化5+8を検査。Oracle20回収、source開始と所有者の全使用区間・実Rust/QUIC対応は継続中。

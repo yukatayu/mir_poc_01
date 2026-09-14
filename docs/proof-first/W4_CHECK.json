@@ -1,6 +1,6 @@
 {
   "schema": "proof-first-w4-check-v1",
-  "timestamp": "2026-09-14T03:13:34.839295+00:00",
+  "timestamp": "2026-09-14T18:27:32.306279+00:00",
   "base_head": "5d7c13a821c912d14c347775e23493a77f790768",
   "status": "active nonproduction research; no W4 or Canon acceptance",
   "work_root": "/tmp/mirrorea-w4-20260914-a3e0bpks",
@@ -545,7 +545,7 @@
     }
   },
   "authority_image_external": {
-    "status": "external general proofs/finite controls/all-owned audit passed; after sixth freeze, unreviewed",
+    "status": "external general proofs/controls audited; seventh review completed and dispositioned",
     "proof": "972594",
     "scope": "finite issued-issuer epoch rows; no currentness/authority/disclosure/codec inference",
     "audit_tool": "d18e2e",
@@ -559,7 +559,7 @@
     "repair": "header synchronized to existing12:15JST; final rerun owed"
   },
   "oracle_owner_image": {
-    "status": "running single submission",
+    "status": "completed, fully read and dispositioned",
     "exec_session": 21081,
     "start": {
       "session": "mir-w4-owner-image",
@@ -572,10 +572,37 @@
     "packet": "/tmp/mirrorea-w4-20260914-a3e0bpks/oracle-w4-owner-image",
     "dry_run": "4afa4e browser gpt-6-astra40files144923tokens",
     "early_capture_attempt": "bef031 interval guard refused at61seconds; no browser read, no job failure or retry",
-    "last_capture": "b154cf 2026-09-14T04:01:41.566Z exact prompt bound, still generating"
+    "last_capture": "b154cf 2026-09-14T04:01:41.566Z exact prompt bound, still generating",
+    "receipt": {
+      "session": "mir-w4-owner-image",
+      "submitted_once": true,
+      "wrapper_exit": 0,
+      "wrapper_evidence": "5c8f71",
+      "capture_evidence": "b2dfb0",
+      "final_capture": {
+        "promptMatches": true,
+        "userCount": 1,
+        "stopExists": false,
+        "assistantCount": 1,
+        "time": "2026-09-14T04:05:30.841Z",
+        "questionSha256": "ba5617df6b7db387f9f1cdc2f402c94a09a6db259afcb4201a758151e6e93c0c",
+        "exactTargetSha256": "c74e48736174e39f6b48b3b33fd3aee2a8d80d85e2ab4218a03c5b042b5125eb",
+        "answerBytes": 32907,
+        "answerSha256": "934b56d30ce36abc369855a4eee62f90b2b79d801be0633c056bbef85197fdb9",
+        "substantiveCandidate": true,
+        "savedCandidate": true
+      },
+      "answer_file_sha256": "b47832ba67532323d47a6a68c5faebe98757c752deee748f667e46cce794e2e4",
+      "full_read_evidence": [
+        "499c9c",
+        "19c520",
+        "8ddc21"
+      ],
+      "classification": "read-only inspection, no fresh replay/signature/acceptance"
+    }
   },
   "owner_image_external": {
-    "status": "general kernel/controls/all-owned audit pass; frozen seventh review running",
+    "status": "external general proofs/controls audited; seventh review completed and dispositioned",
     "proof": "4191e5",
     "full_read": "102b5e",
     "controls_audit": "3373f0",
@@ -633,5 +660,2864 @@
     "controls": "9e0de7",
     "image_bytes": 3144,
     "scope": "finite JSON shape only; no currentness/auth/disclosure/framing/depth/physical proof"
+  },
+  "git_checkpoint": {
+    "commit": "ab316353f6ac8bb64c15705b50cf1fcca763be7e",
+    "commit_evidence": "8b9562",
+    "push": "ff82f2",
+    "remote_parity": "d0fb35",
+    "classification": "reviewed publication component checkpoint; W4 continues"
+  },
+  "owner_native_component": {
+    "timestamp": "2026-09-14 13:29 JST",
+    "validity_proofs": [
+      "6406f8",
+      "3bc52d"
+    ],
+    "invalid_image_reproduced": "d81fdc",
+    "controls": "1bc312",
+    "evaluator_proofs": "3fe1a2",
+    "build_evidence": "aabef8",
+    "build_receipt": "/tmp/mirrorea-w4-20260914-a3e0bpks/OWNER_NATIVE_BUILD.json",
+    "binary_sha256": "7c3ad154390a4dd99963bc1ed6d0df5d677b7e0a3c99feccdc7ff4704f8fd11c",
+    "process_checks": "60a379",
+    "process_receipt": "/tmp/mirrorea-w4-20260914-a3e0bpks/OWNER_WORKER_PROCESS_CHECK.json",
+    "process_cases": 16,
+    "review_status": "after Oracle7 freeze; not yet reviewed",
+    "scope": "external fixed one-request component, no installation/replay/continuation/QUIC or general codec law",
+    "axiom_audit": {
+      "evidence": "e1dd67",
+      "modules": 54,
+      "owned": 8391,
+      "counts": {
+        "MirroreaProofFirstResourceBoundary": 441,
+        "MirroreaProofFirstLocalContract": 304,
+        "MirroreaProofFirstContractExport": 291,
+        "MirroreaProofFirstInstancePrograms": 106,
+        "MirroreaProofFirstSupport": 251,
+        "MirroreaProofFirstDynamicSupport": 42,
+        "MirroreaProofFirstCurrentUse": 766,
+        "MirroreaProofFirstDynamicIdentity": 53,
+        "MirroreaProofFirstTrackedValidation": 226,
+        "MirroreaProofFirstGraphValidation": 77,
+        "MirroreaProofFirstDynamicGraphs": 12,
+        "MirroreaProofFirstInstanceState": 210,
+        "MirroreaProofFirstWorldProjection": 222,
+        "MirroreaProofFirstCompositionCore": 398,
+        "MirroreaProofFirstManagementEntry": 136,
+        "MirroreaProofFirstInvocationBoundary": 100,
+        "MirroreaProofFirstReferenceCancellationBoundary": 101,
+        "MirroreaProofFirstCompositionMachine": 149,
+        "MirroreaProofFirstCatalogHistory": 80,
+        "MirroreaProofFirstFallbackStatic": 280,
+        "MirroreaProofFirstReferenceAccess": 177,
+        "MirroreaProofFirstReferenceAccessHistory": 44,
+        "MirroreaProofFirstReferenceSelection": 66,
+        "MirroreaProofFirstReferenceHolding": 183,
+        "MirroreaProofFirstReferenceOwner": 182,
+        "MirroreaProofFirstReferenceCancellation": 64,
+        "MirroreaProofFirstReferenceStore": 116,
+        "MirroreaProofFirstReferenceCoherence": 50,
+        "MirroreaProofFirstReferenceMutation": 176,
+        "MirroreaProofFirstReferenceResult": 29,
+        "MirroreaProofFirstReferenceTrace": 46,
+        "MirroreaProofFirstReferenceExecution": 156,
+        "MirroreaProofFirstSourceAuthoring": 328,
+        "MirroreaProofFirstSourceTypes": 206,
+        "MirroreaProofFirstSourcePreservation": 41,
+        "MirroreaProofFirstSourceTyping": 31,
+        "MirroreaProofFirstReferenceSourceData": 417,
+        "MirroreaProofFirstSourceExecution": 256,
+        "MirroreaProofFirstSourceFrame": 10,
+        "MirroreaProofFirstInvocationContract": 1,
+        "MirroreaProofFirstSourceCompletion": 23,
+        "MirroreaProofFirstSourceAllocation": 22,
+        "MirroreaProofFirstReferenceAllocation": 16,
+        "MirroreaProofFirstReferenceSource": 660,
+        "MirroreaProofFirstOwnerProjection": 36,
+        "MirroreaProofFirstAuthorityImage": 54,
+        "MirroreaProofFirstPublication": 136,
+        "MirroreaProofFirstPublicationPayload": 152,
+        "MirroreaProofFirstPublicationUse": 119,
+        "MirroreaProofFirstOwnerImage": 101,
+        "OwnerImageCodec": 114,
+        "MirroreaProofFirstOwnerValidity": 16,
+        "MirroreaProofFirstOwnerEvaluator": 95,
+        "OwnerWorker": 23
+      },
+      "standard_only": true,
+      "scope": "owned code/proof declarations, not proof of partial JSON/native/runtime semantics"
+    }
+  },
+  "owner_total_codec_experiment": {
+    "status": "external concrete structural and actual byte codecs; general inverse/canonical/evaluator laws pass",
+    "base_proof": "eeb270",
+    "term_definition_proof": "26e4f7",
+    "scope": "actual UInt8 request/result codecs; bounded decoder completeness conditional on explicit treeCost fit; no IO/auth/currentness proof",
+    "reviewed": false,
+    "full_image_request_proof": "a46346",
+    "controls": "5b0305",
+    "full_audit": "47f341",
+    "owned": 499,
+    "modules": 6,
+    "byte_nat_proofs": "1dcd7e",
+    "byte_tree_proofs": [
+      "194219",
+      "9e513e"
+    ],
+    "byte_packet_proofs": [
+      "62782f",
+      "9e513e"
+    ],
+    "byte_controls": "7ee401"
+  },
+  "owner_byte_native_component": {
+    "timestamp": "2026-09-14T05:20:08.224506+00:00",
+    "build": "be8f41",
+    "receipt": "/tmp/mirrorea-w4-20260914-a3e0bpks/OWNER_BYTE_NATIVE_BUILD.json",
+    "binary_sha256": "1ba8a5b7e99a65f907d8a5d0d47b7a82cbea36d9720d48bf22bc0c2711f3b473",
+    "source_export": "226c29/2ef3ea",
+    "source_cost": 191,
+    "fuel": 256,
+    "process_checks": "8a90d0",
+    "process_cases": 22,
+    "source_variants": "564e0c",
+    "source_values": [
+      5,
+      7,
+      2
+    ],
+    "audit": "910aa1",
+    "owned": 8859,
+    "module_counts": {
+      "MirroreaProofFirstOwnerCodecTree": 144,
+      "MirroreaProofFirstResourceBoundary": 441,
+      "MirroreaProofFirstLocalContract": 304,
+      "MirroreaProofFirstContractExport": 291,
+      "MirroreaProofFirstInstancePrograms": 106,
+      "MirroreaProofFirstSupport": 251,
+      "MirroreaProofFirstDynamicSupport": 42,
+      "MirroreaProofFirstCurrentUse": 766,
+      "MirroreaProofFirstDynamicIdentity": 53,
+      "MirroreaProofFirstTrackedValidation": 226,
+      "MirroreaProofFirstGraphValidation": 77,
+      "MirroreaProofFirstDynamicGraphs": 12,
+      "MirroreaProofFirstInstanceState": 210,
+      "MirroreaProofFirstWorldProjection": 222,
+      "MirroreaProofFirstCompositionCore": 398,
+      "MirroreaProofFirstManagementEntry": 136,
+      "MirroreaProofFirstInvocationBoundary": 100,
+      "MirroreaProofFirstReferenceCancellationBoundary": 101,
+      "MirroreaProofFirstCompositionMachine": 149,
+      "MirroreaProofFirstCatalogHistory": 80,
+      "MirroreaProofFirstFallbackStatic": 280,
+      "MirroreaProofFirstReferenceAccess": 177,
+      "MirroreaProofFirstReferenceAccessHistory": 44,
+      "MirroreaProofFirstReferenceSelection": 66,
+      "MirroreaProofFirstReferenceHolding": 183,
+      "MirroreaProofFirstReferenceOwner": 182,
+      "MirroreaProofFirstReferenceCancellation": 64,
+      "MirroreaProofFirstReferenceStore": 116,
+      "MirroreaProofFirstReferenceCoherence": 50,
+      "MirroreaProofFirstReferenceMutation": 176,
+      "MirroreaProofFirstReferenceResult": 29,
+      "MirroreaProofFirstReferenceTrace": 46,
+      "MirroreaProofFirstReferenceExecution": 156,
+      "MirroreaProofFirstSourceAuthoring": 328,
+      "MirroreaProofFirstSourceTypes": 206,
+      "MirroreaProofFirstSourcePreservation": 41,
+      "MirroreaProofFirstSourceTyping": 31,
+      "MirroreaProofFirstReferenceSourceData": 417,
+      "MirroreaProofFirstSourceExecution": 256,
+      "MirroreaProofFirstSourceFrame": 10,
+      "MirroreaProofFirstInvocationContract": 1,
+      "MirroreaProofFirstSourceCompletion": 23,
+      "MirroreaProofFirstSourceAllocation": 22,
+      "MirroreaProofFirstReferenceAllocation": 16,
+      "MirroreaProofFirstReferenceSource": 660,
+      "MirroreaProofFirstOwnerProjection": 36,
+      "MirroreaProofFirstAuthorityImage": 54,
+      "MirroreaProofFirstPublication": 136,
+      "MirroreaProofFirstPublicationPayload": 152,
+      "MirroreaProofFirstPublicationUse": 119,
+      "MirroreaProofFirstOwnerImage": 101,
+      "MirroreaProofFirstOwnerValidity": 16,
+      "MirroreaProofFirstOwnerCodeCodec": 59,
+      "MirroreaProofFirstOwnerRecordCodecs": 42,
+      "MirroreaProofFirstOwnerTreeCodecs": 117,
+      "MirroreaProofFirstOwnerEvaluator": 95,
+      "MirroreaProofFirstOwnerFullCodec": 30,
+      "MirroreaProofFirstOwnerByteCodec": 52,
+      "MirroreaProofFirstOwnerTreeBytes": 123,
+      "MirroreaProofFirstOwnerPacketCodec": 24,
+      "OwnerByteWorker": 14
+    },
+    "scope": "fixed data-only one-request native process; no installation/occurrence/QUIC/source continuation or admission/disclosure grant",
+    "review": "frozen eighth Oracle pending"
+  },
+  "oracle_owner_bytes": {
+    "status": "completed-collected-dispositioned",
+    "receipt": {
+      "session": "mir-w4-owner-bytes",
+      "submitted_once": true,
+      "wrapper_exit": 0,
+      "wrapper_evidence": "ba98b2",
+      "capture_evidence": "4271f0",
+      "final_capture": {
+        "promptMatches": true,
+        "userCount": 1,
+        "stopExists": false,
+        "assistantCount": 1,
+        "time": "2026-09-14T05:28:32.665Z",
+        "questionSha256": "db9587391b03aa71ccd4b556bf85b6a34ee2acc2e25fe376e379f502fc1c8ab4",
+        "exactTargetSha256": "4983c22da8ed97830beab84c6af547e831b073f6e1aeaccff643d4f9da9cd21c",
+        "answerBytes": 26934,
+        "answerSha256": "25fcd0dbf95270e943c441026a4313340c5bfcfb7d900258e57c5713d68e2ab8",
+        "substantiveCandidate": true,
+        "savedCandidate": true
+      },
+      "full_read": [
+        "3a2980",
+        "0486bf"
+      ],
+      "classification": "read-only source inspection; no replay/signature/owner acceptance",
+      "answer_file_sha256": "69c93d05c742b963daec173f0fd5ddaf4609199f8911feff783305b4afd96615"
+    },
+    "question_sha256": "db9587391b03aa71ccd4b556bf85b6a34ee2acc2e25fe376e379f502fc1c8ab4",
+    "manifest_sha256": "d02ff941ff07ddb15493cc0fdd68ab4894f82babcc781206124ee7dc789f52b3"
+  },
+  "publication_image_external": {
+    "status": "external proved, post-Oracle8 unreviewed",
+    "proof_evidence": [
+      "680626",
+      "54f4de",
+      "b199e1",
+      "6026a6"
+    ],
+    "controls": "a6a974",
+    "scope": "image-only transition simulation; all7private qualified entries and retained results; rooted preservation and normal publication"
+  },
+  "owner_bounded_successor": {
+    "scope": "external nonproduction; post-Oracle8 unreviewed",
+    "proof_evidence": [
+      "f4cec2",
+      "f36e1a",
+      "ef07a3"
+    ],
+    "native_build": "4475a7",
+    "native_sha256": "22634dc05779462755c64a0affd69e567dc8a31ad52f3bda25436077d75ed6d8",
+    "process25": "f73422",
+    "source3": "37406a/26760d",
+    "io4": "6f4efb/4e6c4b",
+    "old_stack_failures": [
+      "64fef4",
+      "e24260/5032aa"
+    ],
+    "support_cost_comparison": "4fdd4f",
+    "nonclaims": [
+      "network",
+      "current authenticated install",
+      "occurrence/replay ledger",
+      "private result consumption",
+      "general resource liveness",
+      "timing confidentiality"
+    ],
+    "native_audit": {
+      "evidence": "ab89bf",
+      "modules": 64,
+      "owned": 8979,
+      "status": "passed",
+      "allowlist": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    }
+  },
+  "oracle_bound_publication": {
+    "status": "completed",
+    "session": "mir-w4-bound-publicatio",
+    "submission": "649d84",
+    "question_sha256": "25bcde90077939c93eb8762a8497d9aae307c6ba69986a692d169f44d3b11c20",
+    "manifest_sha256": "ac1ecefdb5262b1518d1217fab0ffb6ea330bd671ab4429a2b197bf9afbe1fa5",
+    "packet": "/tmp/mirrorea-w4-20260914-a3e0bpks/oracle-w4-bound-publication",
+    "requested_slug": "mir-w4-bound-publication",
+    "submitted_once": true,
+    "wrapper_exit": 0,
+    "wrapper_evidence": "013c25",
+    "session_metadata_evidence": "7baa1f",
+    "prompt_exact_match": true,
+    "final_time": "2026-09-14T06:43:46.108Z",
+    "answer_sha256": "f66e2259fd9bc780ec9fab0776ec08f8458d9d920363970fc02d9b7b37043a9f",
+    "answer_bytes": 22923,
+    "full_read": [
+      "3e9f6f",
+      "75119e"
+    ],
+    "capture_note": "bfcadd exact CDP target already closed after successful completion; used completed wrapper answer with exact prompt-bound metadata, no resend",
+    "classification": "read-only source inspection; incomplete dependency cut and no independent replay/signature/acceptance"
+  },
+  "owner_history_external": {
+    "scope": "postOracle9freeze pure state/receiver model, unreviewed; not native occurrence/provenance",
+    "proof": [
+      "9cc1e2",
+      "611482",
+      "ecfd6e"
+    ],
+    "controls": [
+      "1fd040",
+      "9ba386"
+    ],
+    "owned_audit": {
+      "evidence": "cd830d",
+      "OwnerOccurrence": 115,
+      "OwnerReceipt": 46,
+      "ReceiptControls": 9
+    },
+    "nonclaims": [
+      "native reservation before compute",
+      "authenticated sender/occurrence",
+      "same-instance restart",
+      "nonce allocator nonreuse"
+    ],
+    "counterexamples": [
+      "install-clears-records reexecutes same identity",
+      "forged matching tuple accepted with empty owner ledger"
+    ],
+    "native_counter_boundary": {
+      "evidence": "8768c7/e2c4d1/6ab030",
+      "scope": "actual AtomicU64 boundary litmus, not 2^64 real-cohort execution or accepted-profile defect",
+      "pending": "checked allocator refinement before W4 nonreuse claim"
+    }
+  },
+  "post_oracle9": {
+    "scope": "external nonproduction delta; not covered by frozen Oracle9",
+    "launcher_cleanup": {
+      "old_failure": "c4dc2d",
+      "fixed_inspection": "0511e8",
+      "fixed_write_and_block": "fea003",
+      "regressions": [
+        "538bb5",
+        "b4a2e9",
+        "0c7171"
+      ]
+    },
+    "operational_inputs": {
+      "evidence": "95a822",
+      "cases": 4,
+      "boundary": "mathematically admitted 2^128 ID exceeds digit budget; declared 2^127 dimensions rejected without declared-size allocation"
+    },
+    "graph_cost": {
+      "old": "16486c",
+      "profile_fitting_nodes": 24,
+      "cpu_limit_seconds": 10,
+      "exit": -9,
+      "response_bytes": 0,
+      "general_table_equality": "82317d",
+      "evaluator_history_compilation": "02810b",
+      "native_build": {
+        "status": "passed",
+        "evidence": "dfad23",
+        "binary": "/tmp/mirrorea-w4-20260914-a3e0bpks/owner-graph-native-rsnnsr4p/owner-graph-worker",
+        "binary_sha256": "378864a7be809b66123670db8eefe63a6453998b452e67f44be6fd9523569f2a",
+        "audit": "dab0a4",
+        "modules": 65,
+        "owned": 8992,
+        "same_chain_pass": "0c7c21",
+        "limits_control": "7479ef/4d3e24",
+        "regressions": "7e8ff3/c59163"
+      }
+    },
+    "qualified_history": {
+      "general_ordinals": "05fa8c",
+      "controls": "4db553",
+      "all_seven_entries": true,
+      "forged_initial_history": "ordinals [1,1]; excluded by empty-root premise"
+    },
+    "repeated_history_controls": "4db553",
+    "constructive_receipt": {
+      "general_proof": "fa707d",
+      "failed_tactic": "7d2c84",
+      "meaning": "independent current image + actual owner production + private pending/protection/invariant constructs receipt consumption; no receive-success premise"
+    },
+    "reservation": {
+      "general_path_proofs": "cf05d1",
+      "controls": "77edcf",
+      "audit": "c024b3",
+      "audit_modules": 4,
+      "audit_owned": 505,
+      "scope": "pure serial reserve/compute/install/abandon paths; native custody and fresh authenticated namespace still owed",
+      "first_failed_script": "5a506e"
+    }
+  },
+  "docs_validation_latest": {
+    "status": "failed_header_corrected_rerun_pending",
+    "evidence": "7d39a6",
+    "cause": "progress header23:23 older than new recent log23:24",
+    "corrected": "2026-09-14 23:29 JST"
+  },
+  "oracle_reservation": {
+    "session": "mir-w4-reservatio",
+    "started_utc": "2026-09-14T07:20:21.435276+00:00",
+    "started_epoch": 1789370421.4352887,
+    "submitted_once": true,
+    "question_sha256": "671332688f0aec51a4118e5d080270d42c388f59d3437d1bef3eff3236a16160",
+    "manifest_sha256": "53358aa1468199dbef85f379ce135e9b25e8fea04974a8a4a87c8784066c88c1",
+    "retention": "--retain-hours 0; previous dry-run unexpectedly reported default pruning8older sessions; no task-side cleanup",
+    "status": "completed",
+    "exec_session": null,
+    "submission": "9cb996",
+    "dry_run": "c20baf",
+    "packet": "/tmp/mirrorea-w4-20260914-a3e0bpks/oracle-w4-reservation",
+    "requested_slug": "mir-w4-reservation",
+    "session_correction": "5521b6 actual wrapper Session; requested slug was truncated, failed lookup4b9963 made no browser read",
+    "last_exact_capture": "final exact reply recovered77dc83; no pending job",
+    "completed_at": "2026-09-14T07:37:19.422Z",
+    "wrapper_exit": 0,
+    "wrapper_evidence": "c8ee9f",
+    "metadata_evidence": "f263ff",
+    "prompt_exact_match": true,
+    "answer_sha256": "316dd5f6f75db6cdaaf812cd2f41ad6c4e72580626b94c74f6f0ccb0de508d5c",
+    "answer_bytes": 24419,
+    "full_read": [
+      "8e4362",
+      "aa6aa7"
+    ],
+    "late_capture": "6d8e7f target closed after successful completion, not browser failure/resend",
+    "limits": "source inspection only; no independent replay/signature/acceptance",
+    "disposition": "/tmp/mirrorea-w4-20260914-a3e0bpks/oracle-w4-reservation/DISPOSITION.md"
+  },
+  "owner_stateful_native_external": {
+    "review": "developed after Oracle10 freeze; not reviewed",
+    "driver_steps": "e4f398",
+    "build": "ea87b2",
+    "binary": "/tmp/mirrorea-w4-20260914-a3e0bpks/owner-reservation-native-1llx9q9r/owner-reservation-worker",
+    "binary_sha256": "421b375715cb82b5f61068726fb099236d871c5b427f8bec2286c10a22fe1adb",
+    "modules": 79,
+    "audit_owned": 10186,
+    "audit": "d21f4e",
+    "actual_source_input": "3a9747",
+    "five_native_transcripts": "97bbeb",
+    "actual_response_source_join": "66b584",
+    "five_io_faults": "1022d4",
+    "scope": "actual parser->persistent native owner->836byte actual reply->original source binder; no network/authenticated current image/private physical custody/restore claim",
+    "failed_scripts": [
+      "7f38e0",
+      "eeb40d",
+      "013e2a"
+    ]
+  },
+  "post_oracle10": {
+    "rooted_inventory_progress": "1065ab",
+    "ordinals_dependency_compiles": "ebfae7 recovered four completed logs",
+    "axioms": [
+      "propext",
+      "Quot.sound",
+      "Classical.choice"
+    ],
+    "clock_gap_failure": "6ac05c",
+    "launcher_fixes": "45c8c8/fe5ab7",
+    "protocol_io": "a9b626 5+5 passed",
+    "actual_receiver": "4d4f5e exit0",
+    "bad_receiver_command": "df2465 extra --run exits64; preserved failed command",
+    "regression_receipt": "/tmp/mirrorea-w4-20260914-a3e0bpks/OWNER_RESERVATION_POST10_REGRESSION.json",
+    "graph_identity_link": "/tmp/mirrorea-w4-20260914-a3e0bpks/OWNER_GRAPH_LIMIT_IDENTITY_LINK.json",
+    "nonclaims": [
+      "completed computation is not physical dispatch count",
+      "cleanup OS failure is explicit, not successful reclamation",
+      "CPU10 entire persistent lifetime, timings elapsed only",
+      "no actual QUIC/authenticated source custody/recovery"
+    ]
+  },
+  "oracle_custody": {
+    "session": "mir-w4-custody",
+    "requested_slug": "mir-w4-custody",
+    "started_utc": "2026-09-14T08:13:00.258913+00:00",
+    "started_epoch": 1789373580.2589297,
+    "submitted_once": true,
+    "question_sha256": "a839cde1a28c591465770a65e0f93d2da665c633b8e242202f7e93294ba50cdd",
+    "manifest_sha256": "bb11bf98a92c0683d1db890a3bcdc310ff07dba778937a2a72dd7c278ac8a449",
+    "retention": "--retain-hours 0, including dry run",
+    "status": "failed_question_bound_capture; response rejected",
+    "exec_session": 53793,
+    "submission": "f2cfc8",
+    "dry_run": "f929c3",
+    "packet": "/tmp/mirrorea-w4-20260914-a3e0bpks/oracle-w4-custody",
+    "first_status_not_before": "2026-09-14T08:16:00.258913Z",
+    "latest_capture": "a3d2cd 2026-09-14T08:31:47.692Z exact matched/generating",
+    "failure_receipt": "/tmp/mirrorea-w4-20260914-a3e0bpks/oracle-w4-custody/FAILED_CAPTURE.json"
+  },
+  "qualified_custody_external": {
+    "module": "/tmp/mirrorea-w4-20260914-a3e0bpks/MirroreaProofFirstQualifiedCustody.lean",
+    "scope": "finite reversible initiation-incarnation/custody candidate, not physical origin or resumed policy",
+    "proof": "b0815b declarative exactness/rooted private state/pending retention; standard axioms",
+    "controls": "638f4e all7 local entry forms, leave/rejoin, member reincarnation, unrelated generation and separate cancellation",
+    "private_erasure_counterexample": "12e01d general minimal-invariant erasure plus actual invented-binder acceptance",
+    "all_owned": "a6cf07 six changed/consumer modules702owned; transitive standard-only audit",
+    "review": "Oracle11 pending",
+    "production": "none"
+  },
+  "source_codec_external": {
+    "module": "/tmp/mirrorea-w4-20260914-a3e0bpks/MirroreaProofFirstSourceCodec.lean",
+    "general": "f30002,087599; standard logic axioms only",
+    "controls": "60352d actual17statement/source-document/index/canonical/type controls",
+    "original_bytes": 345360,
+    "compact_bytes": 24187,
+    "treeFuel": 60,
+    "review": "after Oracle11 freeze; unreviewed",
+    "nonclaims": [
+      "source-to-AST fidelity remains independent",
+      "no physical source custody or authentication",
+      "no populated private-state import",
+      "no whole-pipeline resource/liveness theorem"
+    ],
+    "bounded": "53a2c6 general sound/complete with explicit resource premises;7a854a actual positive/old short-name refusal"
+  },
+  "native_owner_phase_faults": {
+    "receipt": "/tmp/mirrorea-w4-20260914-a3e0bpks/OWNER_NATIVE_PHASE_FAULTS_FIXED.json",
+    "result": "2259e7/747414 PASS two exact process cuts",
+    "failed_first": "35dbc9 GDB run resets argv; no target cut",
+    "mapping": "next state retained in owned temporary before output; loop carrier updates after successful output",
+    "nonclaim": "no durable commit/recovery/liveness/authenticated provenance"
+  },
+  "docs_validation_current": {
+    "status": "passed_before_latest_forward_append",
+    "evidence": "19cb44 exit0 (ORACLE18_DOCS_CHECK.json/log),1764reports; accidental --help37771 also ran validator20ce45 exit0, not an independent test count"
+  },
+  "oracle_custody_retry": {
+    "session": "mir-w4-custody-retry",
+    "started_utc": "2026-09-14T08:38:05.622775+00:00",
+    "started_epoch": 1789375085.6227868,
+    "submitted_once": true,
+    "question_sha256": "a839cde1a28c591465770a65e0f93d2da665c633b8e242202f7e93294ba50cdd",
+    "manifest_sha256": "bb11bf98a92c0683d1db890a3bcdc310ff07dba778937a2a72dd7c278ac8a449",
+    "retry_of": "mir-w4-custody",
+    "reason": "question-bound capture failed after wrapper auto-reattach; same frozen packet",
+    "retention": "--retain-hours 0",
+    "recovery": "main exact-target capture, no automatic navigation or expiry for model job",
+    "status": "completed; inspected/dispositioned, no independent replay/signature",
+    "exec_session": 41208,
+    "submission": "2ea382",
+    "latest_capture": "e64838 08:41:53.526Z",
+    "completed": "2026-09-14T08:54:43.175Z",
+    "answer_sha256": "83aca27f019253c00b8731bed679331d28029e87b60eb68fce58cb443458a2ab",
+    "receipt": "/tmp/mirrorea-w4-20260914-a3e0bpks/oracle-w4-custody-retry/RECEIPT.json",
+    "disposition": "/tmp/mirrorea-w4-20260914-a3e0bpks/oracle-w4-custody-retry/DISPOSITION.md"
+  },
+  "source_native_external": {
+    "build": "/tmp/mirrorea-w4-20260914-a3e0bpks/SOURCE_NATIVE_BUILD.json",
+    "build_result": "e8254a",
+    "binary_sha256": "3931b751aaf51acccbf87460a0ddc0f4ddcd05702393c64c99a6d22b193f1db9",
+    "audit": "a4c08f 86modules11427owned standard only",
+    "driver_proof": "32713f/50b8fb",
+    "model_controls": "4e8bc5",
+    "actual_two_process": "44ad29",
+    "actual_nonempty_continuation": "c6a485/201dba",
+    "actual_replay": "1928f0 source38/owner16 captured commands",
+    "scope": "privileged-pipe component, no QUIC/namespace/source origin/public observer/recovery guarantee",
+    "review": "after Oracle11 freeze, pending later delta review"
+  },
+  "physical_boundary_counterexamples": {
+    "result": "a6651e actual native older head/new revision and repeated scope",
+    "receipt": "/tmp/mirrorea-w4-20260914-a3e0bpks/SOURCE_OWNER_BOUNDARY_COUNTEREXAMPLES.json",
+    "not_claimed": "conditional model theorems are not falsified; stronger physical correspondence is absent"
+  },
+  "qualified_receipt_publication": {
+    "updated": "2026-09-14T09:30:24.556390+00:00",
+    "receipt_general": "143bf2 standard axioms only; failed scripts retained",
+    "guarded_publication_general": "57584b standard axioms only",
+    "controls": "fe649a actual17+3source /5prior native receipts /20writes /26publications local model",
+    "input_general": "c0c824 scope/revision/ticket retained internally; raw receive refused; codec/driver in progress",
+    "physical": "not yet native publisher/QUIC/authenticated origin/exclusive namespace"
+  },
+  "guarded_native_publication": {
+    "updated": "2026-09-14T09:43:39.056939+00:00",
+    "publisher_build": "f7524e 95modules SHA9cefa05608269c16594e56771d167e0d43332f5d9235edeb993b6f1ad9ed5262",
+    "publisher_audit": "007be0 95modules11978owned standard only",
+    "input_codec_driver": "2f40bf passed",
+    "endpoint_general": "2553c4 standard only; FIRST failed scripts retained",
+    "endpoint_build": "c00e53 95modules SHAe0f45dbe29e4683ff5cc9a816e40aaf0e97a606679dfb9cef6a13516d2398861",
+    "four_process": "45e53f PASS publisher397frames/owners53+53+68commands,26publications20writes5actual productions",
+    "receipt": "/tmp/mirrorea-w4-20260914-a3e0bpks/PUBLICATION_PROCESS_CHECK.json",
+    "audit_replay_session": "25634 collected28b232 pass",
+    "boundary": "trusted private pipes; no QUIC/physical scope exclusivity/malicious supervisor resistance/durable recovery",
+    "review": "post11 material delta pending freeze/review",
+    "endpoint_audit": "28b232 95modules11962owned standard only",
+    "generic_routing": "36329f generic ticket-derived target/per-owner ordinals; original C and alternate A source both PASS same binaries",
+    "final_replay": "179429 all four final generic/alternate source+endpoint trace replays pass",
+    "cross_cohort_counterexample": "508ba4: two actual independent four-process cohorts with same assignedscope811 yield identical first4productionenvelopes; no new runs, no physical namespace nonreuse guarantee"
+  },
+  "oracle_live_publication": {
+    "session": "mir-w4-live-publicatio",
+    "started_utc": "2026-09-14T09:50:42.693953+00:00",
+    "started_epoch": 1789379442.6939669,
+    "submitted_once": true,
+    "question_sha256": "464b1998c54f35548cd25fd16b7fad041b6d59ac6d77e8d80b77fa388196ff39",
+    "manifest_sha256": "f9dcbbbab87339fe70b867ba8db637276212612374e332372591a24bbf637191",
+    "files": 53,
+    "retention": "--retain-hours 0",
+    "recovery": "no automatic reattachment/navigation; main exact-target question-bound capture >=180s; no model deadline",
+    "exec_session": 32717,
+    "submission": "ac9795",
+    "status": "running; no status capture yet",
+    "first_capture_not_before": "2026-09-14T09:53:43Z",
+    "requested_session": "mir-w4-live-publication",
+    "latest_capture": "9acfdf 09:54:13.069Z exact question/generating",
+    "next_capture_not_before": "2026-09-14T09:57:14Z",
+    "first_capture_correction": "bf8060 ENOENT before browser access; wrapper41c02a supplied actual truncated session; no resubmit",
+    "collected": {
+      "session": "mir-w4-live-publicatio",
+      "requested_session": "mir-w4-live-publication",
+      "status": "collected",
+      "question_sha256": "464b1998c54f35548cd25fd16b7fad041b6d59ac6d77e8d80b77fa388196ff39",
+      "answer_file_sha256": "e1d3e82c22c1401075d9271fe100c7a3f919c5a87951dcf2f048d7a119f17ba5",
+      "exact_capture": "a0f845",
+      "wrapper_exit": "208417 exit0",
+      "full_read": [
+        "b79157 lines1-185",
+        "a62844 lines186-380"
+      ],
+      "time": "2026-09-14T10:20:32.286031+00:00",
+      "acceptance": false
+    },
+    "disposition": "/tmp/mirrorea-w4-20260914-a3e0bpks/oracle-w4-live-publication/DISPOSITION.json"
+  },
+  "lost_install_ack": {
+    "old_counterexample": "PUBLICATION_LOST_ACK_CHECK.json",
+    "general_proof": "OwnerEndpoint-ACK-SECOND.log",
+    "proof_result": "passed 550cbb",
+    "native_build": "ENDPOINT_CONFIRM_NATIVE_BUILD.json",
+    "actual_retry": "PUBLICATION_CONFIRM_ACK_CHECK.json",
+    "retry_result": "passed 6b9101",
+    "source_variants": "PUBLICATION_CONFIRM_PROCESS_CHECK.json / PUBLICATION_CONFIRM_PROCESS_OWNER_A_CHECK.json passed578c1e",
+    "audit_replay": "audit95modules11979owned standard-only485b77/ff8585; all6actualbyte replays PASS74bece after retained compiler-field failures",
+    "oracle_cut": "after12freeze; narrow review pending",
+    "retained_fail": "PUBLICATION_CONFIRM_ACK_CHECK_FAILED_ADJACENT_IMAGE.json 593958 test assumption"
+  },
+  "source_output_capacity": {
+    "actual_source_inputs": "source-output-growth/IDENTITY.json",
+    "input_result": "8 actual Rust programs/17.5KB each passedf2c009",
+    "actual_counterexample": "SOURCE_OUTPUT_GROWTH_CHECK.json 8ef53e/413eb2;7writes then all3owners frozen15 before publisher exit1 with explicit output bound error",
+    "publisher_only_proof": "PublicationCapacity-THIRD.log pass6b29b2/735fe2",
+    "publisher_only_controls": "PublicationCapacityControls-FIRST.log passc597ad:14+26+26 accepted stages, eighth growth denied before announcing,10vs11command quota",
+    "endpoint_extension_proof": "MirroreaProofFirstPublicationCapacity-ENDPOINT_PROFILE.log c933e7 pass",
+    "endpoint_extract_and_controls": "passed1231ae: general endpoint/held extraction plus14growth/26C/26A controls",
+    "nonclaims": [
+      "No native publisher has this guard yet",
+      "No owner command quota or CPU/physical origin proof",
+      "F2/F6/F7 product-state and real QUIC remain open"
+    ],
+    "review": "afterOracle12freeze; materialdelta review pending",
+    "outer_cleanup": {
+      "result": "68e9da exact primary/handle retained through real outer growth handler, read/validation/receipt faults, sibling nested cleanup",
+      "classification": "injected fault test, no child launched; not network/E2E"
+    }
+  },
+  "oracle_capacity": {
+    "session": "mir-w4-capacity",
+    "started_utc": "2026-09-14T10:43:19.216595+00:00",
+    "started_epoch": 1789382599.216595,
+    "submitted_once": true,
+    "question_sha256": "41c0211a4e72484ea7e1b9465194232daa46944f5feb92a9e265f4b079b2a751",
+    "manifest_sha256": "a1e1cbc42ce0df23b781ba99ae91e979c316bd581c47152770896f85bab3ced0",
+    "retention": "--retain-hours 0",
+    "recovery": "main exact-target capture >=180s; no reattachment/navigation/model deadline",
+    "job": "exec3614 pending; no resubmission",
+    "status": "collected",
+    "collected_at": "2026-09-14T12:47:09.907304+00:00",
+    "receipt": "/tmp/mirrorea-w4-20260914-a3e0bpks/oracle-w4-capacity/RECEIPT.json",
+    "full_read": [
+      "d15c5d",
+      "2882ea"
+    ],
+    "disposition": "/tmp/mirrorea-w4-20260914-a3e0bpks/oracle-w4-capacity/DISPOSITION.json"
+  },
+  "composite_capture": {
+    "status": "passedbdda4f",
+    "receipt": "PUBLICATION_COMPOSITE_CAPTURE_CHECK.json",
+    "scope": "571actualexchanges each C/A;78installs/acks,5dispatch/arrival,26publications;5offlineedge mutants each refused",
+    "controls": "oldimage/oldround/wrongendpoint/ordinal/finish-before-production",
+    "nonclaim": "not runtime origin, authenticated namespace or general physical proof",
+    "post13_repair": {
+      "positive": "24e739 two actual ordered captures pass eight falsifiers each",
+      "scope": "finite stream/edge/projection framing and terminal cohort closure; same-cut per-input semantic replay still needed for new native captures"
+    }
+  },
+  "ordinal_scope": {
+    "proof": "ReceiptOrdinalDiscriminator.lean/log",
+    "status": "passedc5a051; generic receipt/arrival ignoreordinal; actual producer history joins check it"
+  },
+  "capacity_driver_external": {
+    "time": "2026-09-14T12:47:09.907304+00:00",
+    "status": "general proofs/native4process/102module audit/exact capture replay and recapture equality passed; Oracle14 pending",
+    "general": [
+      "678774 assigned-realm BoundSequence",
+      "4841e4 planPrefix_sound",
+      "c1d486 adoption_schedule_suspends/reserved_head_admitted",
+      "977882 transitionFast_exact/preserves"
+    ],
+    "logical_axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "mir_specific_axioms": [],
+    "counterexamples": [
+      "2b7b43 refused-launch completion starvation",
+      "381afb actual512th response followed by exit1",
+      "ea2170 composite alias/command/prefix false acceptance",
+      "addf94 ready residual replacement correctly refused; now pre-adoption check"
+    ],
+    "positive": [
+      "52ed0f actual-source growth refusal before adoption, shorter continuation8th write",
+      "8ae6c7 two ordered C/A actual source projection replays passed; later unrelated growth-control type error preserved as failed command"
+    ],
+    "native_failures": [
+      "209ce1 slow native ended at3writes10CPU experiment",
+      "6eb171 fast native ended after6writes,source zombie9.98CPU seconds; otherowners0.02seconds explicitly reaped"
+    ],
+    "limits_note": "Successful-transition quota differs from received-request count/CPU. Native source now readsEOF; no CPU availability claim. Frame+assignedrealm+retainedsuffix general guarantees only. No production/QUIC/authentic namespace admission.",
+    "native_build": "/tmp/mirrorea-w4-20260914-a3e0bpks/CAPACITY_NATIVE_BUILD.json",
+    "native_audit": "/tmp/mirrorea-w4-20260914-a3e0bpks/CAPACITY_NATIVE_AUDIT.json",
+    "native_binary_sha256": "d8edb79fe4b5d04d195b0cd78ea68b46a6095608e4276a6df96b96951ffa60ca",
+    "replay": "/tmp/mirrorea-w4-20260914-a3e0bpks/CAPACITY_CAPTURE_REPLAY_CHECK.json",
+    "evidence": [
+      "86eb97 finalgrowth/quota",
+      "c2830d normalC/A",
+      "6b7209 all102modules12586owned",
+      "40e5ce full4source/12owner byte/preflight replay",
+      "03a39b finalrecapture wholebyte equality transfer",
+      "3048b8 crossstream closure+8mutants eachC/A"
+    ]
+  },
+  "oracle_suffix": {
+    "session": "mir-w4-suffix",
+    "started_utc": "2026-09-14T13:05:37.886299+00:00",
+    "started_epoch": 1789391137.8863177,
+    "question_sha256": "760e5f8f7c7bc6bd00f06ab9ad8e9d6717bfee9e1131b871e4314581fa1a9bd4",
+    "manifest_sha256": "fec584d82406dc92872ab059117c95e309492645940468a4417cc39290f1d835",
+    "status": "pending",
+    "wrapper_exec": 66167,
+    "packet": "/tmp/mirrorea-w4-20260914-a3e0bpks/oracle-w4-suffix",
+    "first_capture": "165c95 2026-09-14T13:08:57.527Z exact question true generating",
+    "next_capture_not_before": "2026-09-14T13:11:58Z",
+    "authority": false
+  },
+  "oracle14_lifecycle_delta": {
+    "updated": "2026-09-14T13:50:00.247637+00:00",
+    "review": {
+      "session": "mir-w4-suffix",
+      "state": "complete_exact_question_bound",
+      "receipt": "/tmp/mirrorea-w4-20260914-a3e0bpks/oracle-w4-suffix/RECEIPT.json",
+      "findings": "tracked, not all resolved"
+    },
+    "actual_counters": [
+      "6bc6dd 101credit enter/finish",
+      "973067 113credit arrival/ready residual",
+      "e8e6ec leave profile refusal",
+      "c76126 disable profile refusal",
+      "a46a1b refresh profile refusal"
+    ],
+    "general_successor": "18d3c0 PublicationLifecycle-SIXTH.log PASS; no-held/active-ready-finished at zero, exact checker, real replan, fast equivalence and allentry preservation standard axioms only",
+    "prior_four_source_replay": "91ffdb PASS 396/396/167/526inputs; byte agreement with stronger model, not new native execution",
+    "capture_regression": "58b308 PASS normalC/A 8mutants each; assigned argv/rawfailure/outcome checks repaired",
+    "cleanup": "abf016 repeated evidence failures and exact handles pass; injected only",
+    "generic_cache": "be3469 transitive-context selection falsifier; repair pending; 83ffc1 actual99origins no sourceclosure mismatch",
+    "pending": "local boundary controls76661; new native and complete dependency-context build/audit; digit/input boundary; materialdeltaOracle; actual Rust/QUIC custody"
+  },
+  "lifecycle_native_external": {
+    "status": "passed",
+    "time": "2026-09-14T14:17:31.833083+00:00",
+    "source_streams": 9,
+    "owner_streams": 27,
+    "exact_source_build": "/tmp/mirrorea-w4-20260914-a3e0bpks/capacity-native-629e7nyr",
+    "source_binary_sha256": "aad0db8d3a6e265dacefa21ae674ed38c19bf9aa1bcb3c76aa91959c7640df99",
+    "audit": {
+      "time": "2026-09-14T14:03:05.546404+00:00",
+      "build": "/tmp/mirrorea-w4-20260914-a3e0bpks/capacity-native-629e7nyr",
+      "command": [
+        "lean",
+        "--trust=0",
+        "-j1",
+        "CapacityNativeAudit.lean"
+      ],
+      "exit": 0,
+      "expected_modules": 103,
+      "modules": 103,
+      "owned": 12682,
+      "binary_sha256": "aad0db8d3a6e265dacefa21ae674ed38c19bf9aa1bcb3c76aa91959c7640df99",
+      "audit_sha256": "b0b68e6397897706f2bbb5037b89037e28845d9835fcfa195f805b8130c0a9b5",
+      "log_sha256": "42ae4d30aebfb6c994f0ca6154a8e187f4836e59ece8c4e50a1ab27d9f4a1e1c",
+      "allowed_logical_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "mir_specific_axioms": [],
+      "status": "passed"
+    },
+    "replay_source_sha256": "958b3b7456cc77365cd4aaaadc3a747fc6fd0b942b1d012724ee17d2b5f3292e",
+    "replay_log_sha256": "6c0ca26e7e2b61b34b1c81e87f2988ecb5af92f95179f323271ee51425348ea4",
+    "cases": [
+      {
+        "receipt": "LIFECYCLE_NORMAL_C_CHECK.json",
+        "root": "/tmp/mirrorea-w4-20260914-a3e0bpks/publication-process-syfn7k05",
+        "outcome": "source_complete"
+      },
+      {
+        "receipt": "LIFECYCLE_NORMAL_A_CHECK.json",
+        "root": "/tmp/mirrorea-w4-20260914-a3e0bpks/publication-process-rwdqrapu",
+        "outcome": "source_complete"
+      },
+      {
+        "receipt": "CAPACITY_PROCESS_GROWTH_CHECK.json",
+        "root": "/tmp/mirrorea-w4-20260914-a3e0bpks/capacity-process-growth-sckdmjsc",
+        "outcome": "source_complete"
+      },
+      {
+        "receipt": "CAPACITY_PROCESS_QUOTA_CHECK.json",
+        "root": "/tmp/mirrorea-w4-20260914-a3e0bpks/capacity-process-quota-p9j3ccag",
+        "outcome": "source_complete"
+      },
+      {
+        "receipt": "SOURCE_GUARD_LOCUS_CHECK.json",
+        "root": "/tmp/mirrorea-w4-20260914-a3e0bpks/source-guard-locus-jg4et_21",
+        "outcome": "retired_activation"
+      },
+      {
+        "receipt": "SOURCE_GUARD_MEMBER_CHECK.json",
+        "root": "/tmp/mirrorea-w4-20260914-a3e0bpks/source-guard-member-fat04ffx",
+        "outcome": "retired_activation"
+      },
+      {
+        "receipt": "SOURCE_GUARD_LATE_RESULT_CHECK.json",
+        "root": "/tmp/mirrorea-w4-20260914-a3e0bpks/source-guard-late_result-472qqca4",
+        "outcome": "source_complete"
+      },
+      {
+        "receipt": "LIFECYCLE_BOUNDARY_101_CHECK.json",
+        "root": "/tmp/mirrorea-w4-20260914-a3e0bpks/lifecycle-boundary-101-qgiui6bz",
+        "outcome": "waiting"
+      },
+      {
+        "receipt": "LIFECYCLE_BOUNDARY_113_CHECK.json",
+        "root": "/tmp/mirrorea-w4-20260914-a3e0bpks/lifecycle-boundary-113-tt28pau3",
+        "outcome": "cancelled"
+      }
+    ],
+    "classification": "finite complete actual-byte replay plus separate composite/capture EOF checks; no generic physical simulation or origin proof",
+    "failed_first_log_retained": "/tmp/mirrorea-w4-20260914-a3e0bpks/capacity-native-629e7nyr/LifecycleCapturedReplay-FIRST.log"
+  },
+  "oracle_lifecycle": {
+    "status": "complete_exact_question_bound",
+    "start": {
+      "session": "mir-w4-lifecycle",
+      "started_utc": "2026-09-14T14:15:15.271104+00:00",
+      "started_epoch": 1789395315.2711232,
+      "question_sha256": "4b2022354859c8930e4a2d0efb9ae73a817d3118360e76bca87b255838cb9d61",
+      "manifest_sha256": "09c773d4dd99b1e3780a892a2fcb54e6a10082c576565ccd60205ffea8a31f9f"
+    },
+    "wrapper_session": 23445,
+    "last_capture": "bcbad9 at2026-09-14T14:23:04.399Z",
+    "receipt": {
+      "session": "mir-w4-lifecycle",
+      "state": "complete_exact_question_bound",
+      "question_sha256": "4b2022354859c8930e4a2d0efb9ae73a817d3118360e76bca87b255838cb9d61",
+      "answer_file_sha256": "f22f2a5d796576263c88ad4396434735c431f53e09498911ba2df1b8d8ea90f4",
+      "capture": "d0d3b5 2026-09-14T14:41:42.303Z",
+      "wrapper": "edfd2a exit0; finished14:36:18Z",
+      "full_read": [
+        "64c20d lines1-210",
+        "a1237a lines211-450"
+      ],
+      "kind": "read-only advice, no kernel/native rebuild, no signed acceptance"
+    },
+    "disposition": "/tmp/mirrorea-w4-20260914-a3e0bpks/oracle-w4-lifecycle/DISPOSITION.md"
+  },
+  "readability_candidate": {
+    "status": "source_reply_general_proofs_and_native_controls_passed_owner_edge_closure_open",
+    "module": "/tmp/mirrorea-w4-20260914-a3e0bpks/MirroreaProofFirstPublicationReadability.lean",
+    "evidence": [
+      "193bc3",
+      "51fa07"
+    ],
+    "actual_counter": "0002e6",
+    "owner_scope_cap_adopted": false,
+    "logs": [
+      {
+        "path": "/tmp/mirrorea-w4-20260914-a3e0bpks/PublicationReadability-THIRD.log",
+        "sha256": "f4b6c087fc9df6d71838460ac96192cb43f873b8f5e4748d9ddf0fd4745971d1"
+      },
+      {
+        "path": "/tmp/mirrorea-w4-20260914-a3e0bpks/MirroreaProofFirstPublicationCapacity-READABILITY-SECOND.log",
+        "sha256": "0baf912b78f10da881b7fa05554ec9566d8cb8fed4240ecf8e8582aa799d917a"
+      },
+      {
+        "path": "/tmp/mirrorea-w4-20260914-a3e0bpks/MirroreaProofFirstPublicationCapacityDriver-READABILITY-SECOND.log",
+        "sha256": "1f10e38979180e9e8156ca3c521dd5e1af4163a95090da305c59a504bf016f4f"
+      },
+      {
+        "path": "/tmp/mirrorea-w4-20260914-a3e0bpks/MirroreaProofFirstPublicationLifecycle-READABILITY-SECOND.log",
+        "sha256": "1effe5a6fc5ecc2c574e49bd29f34820ba1b9a340f90e7ca05c218e51de19941"
+      }
+    ],
+    "optimized_audit": {
+      "time": "2026-09-14T14:45:00.486190+00:00",
+      "build": "/tmp/mirrorea-w4-20260914-a3e0bpks/capacity-native-ro5zkhdz",
+      "command": [
+        "lean",
+        "--trust=0",
+        "-j1",
+        "CapacityNativeAudit.lean"
+      ],
+      "exit": 0,
+      "expected_modules": 104,
+      "modules": 104,
+      "owned": 12753,
+      "binary_sha256": "6bfed502ec9a017bfa52fe04fbcb987312d5ab647302802d273066c420e0f310",
+      "audit_sha256": "575fda846a779977a0ff140fbecf0a1967f43b3c79e3c0a4e6e05ae8786354a1",
+      "log_sha256": "6683b8861acda7621c5dab3eb238764036440d421c7335265b4236a8dc2bed94",
+      "allowed_logical_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "mir_specific_axioms": [],
+      "status": "passed"
+    },
+    "optimized_native_cases": [
+      {
+        "case": "scope129",
+        "command": [
+          "/usr/bin/python3",
+          "source_scope_readability_check.py"
+        ],
+        "exit": 0,
+        "log": "/tmp/mirrorea-w4-20260914-a3e0bpks/READABILITY_REUSE_NATIVE_SCOPE129.log",
+        "time": "2026-09-14T14:42:15.131366+00:00"
+      },
+      {
+        "case": "scope128",
+        "command": [
+          "/usr/bin/python3",
+          "source_guard_process_check.py",
+          "late_result",
+          "170141183460469231731687303715884105728"
+        ],
+        "exit": 0,
+        "log": "/tmp/mirrorea-w4-20260914-a3e0bpks/READABILITY_REUSE_NATIVE_SCOPE128.log",
+        "time": "2026-09-14T14:42:17.917287+00:00"
+      },
+      {
+        "case": "locus",
+        "command": [
+          "/usr/bin/python3",
+          "source_guard_process_check.py",
+          "locus"
+        ],
+        "exit": 0,
+        "log": "/tmp/mirrorea-w4-20260914-a3e0bpks/READABILITY_REUSE_NATIVE_LOCUS.log",
+        "time": "2026-09-14T14:42:20.124839+00:00"
+      },
+      {
+        "case": "member",
+        "command": [
+          "/usr/bin/python3",
+          "source_guard_process_check.py",
+          "member"
+        ],
+        "exit": 0,
+        "log": "/tmp/mirrorea-w4-20260914-a3e0bpks/READABILITY_REUSE_NATIVE_MEMBER.log",
+        "time": "2026-09-14T14:42:22.376923+00:00"
+      },
+      {
+        "case": "late_result",
+        "command": [
+          "/usr/bin/python3",
+          "source_guard_process_check.py",
+          "late_result"
+        ],
+        "exit": 0,
+        "log": "/tmp/mirrorea-w4-20260914-a3e0bpks/READABILITY_REUSE_NATIVE_LATE_RESULT.log",
+        "time": "2026-09-14T14:42:25.251415+00:00"
+      },
+      {
+        "case": "quota101",
+        "command": [
+          "/usr/bin/python3",
+          "source_lifecycle_boundary_check.py",
+          "101"
+        ],
+        "exit": 0,
+        "log": "/tmp/mirrorea-w4-20260914-a3e0bpks/READABILITY_REUSE_NATIVE_QUOTA101.log",
+        "time": "2026-09-14T14:42:27.220422+00:00"
+      },
+      {
+        "case": "quota113",
+        "command": [
+          "/usr/bin/python3",
+          "source_lifecycle_boundary_check.py",
+          "113"
+        ],
+        "exit": 0,
+        "log": "/tmp/mirrorea-w4-20260914-a3e0bpks/READABILITY_REUSE_NATIVE_QUOTA113.log",
+        "time": "2026-09-14T14:42:30.002706+00:00"
+      },
+      {
+        "case": "quota",
+        "command": [
+          "/usr/bin/python3",
+          "capacity_process_check.py",
+          "quota"
+        ],
+        "exit": 0,
+        "log": "/tmp/mirrorea-w4-20260914-a3e0bpks/READABILITY_REUSE_NATIVE_QUOTA.log",
+        "time": "2026-09-14T14:42:40.665569+00:00"
+      },
+      {
+        "case": "framing",
+        "command": [
+          "/usr/bin/python3",
+          "source_framing_fault_check.py"
+        ],
+        "exit": 0,
+        "log": "/tmp/mirrorea-w4-20260914-a3e0bpks/READABILITY_REUSE_NATIVE_FRAMING.log",
+        "time": "2026-09-14T14:42:40.877383+00:00"
+      },
+      {
+        "case": "normal_C",
+        "command": [
+          "/usr/bin/python3",
+          "-c",
+          "import publication_process_check as h; h.main(continuation_root=h.work/'source-continuation',result_name='READABILITY_NORMAL_C_CHECK.json',owner_build_name='ENDPOINT_CONFIRM_NATIVE_BUILD.json',source_build_name='CAPACITY_NATIVE_BUILD.json',source_capacity=512)"
+        ],
+        "exit": 0,
+        "log": "/tmp/mirrorea-w4-20260914-a3e0bpks/READABILITY_REUSE_NATIVE_NORMAL_C.log",
+        "time": "2026-09-14T14:42:47.846503+00:00"
+      },
+      {
+        "case": "normal_A",
+        "command": [
+          "/usr/bin/python3",
+          "-c",
+          "import publication_process_check as h; h.main(continuation_root=h.work/'source-continuation-owner-a',result_name='READABILITY_NORMAL_A_CHECK.json',owner_build_name='ENDPOINT_CONFIRM_NATIVE_BUILD.json',source_build_name='CAPACITY_NATIVE_BUILD.json',source_capacity=512)"
+        ],
+        "exit": 0,
+        "log": "/tmp/mirrorea-w4-20260914-a3e0bpks/READABILITY_REUSE_NATIVE_NORMAL_A.log",
+        "time": "2026-09-14T14:42:54.798255+00:00"
+      }
+    ],
+    "growth": {
+      "state": "passed",
+      "root": "capacity-process-growth-qdl8rbo5",
+      "tool": "7557ce/54ecb6"
+    },
+    "earlier_cpu_failure": {
+      "receipt": "READABILITY_GROWTH_FIRST_FAILURE.json",
+      "binary": "b848ee64a84fbe699164dc82c8e9ed248e5e9ef59f25e785c6ff77260e8d5a84",
+      "cpu_seconds": 9.97,
+      "exit": -9,
+      "classification": "consistent with whole-process10CPU limit; not OOM inference"
+    },
+    "limits_unchanged": true,
+    "owner_terminal_and_arrival_readability": "OPEN"
+  },
+  "source_framing_faults": {
+    "root": "/tmp/mirrorea-w4-20260914-a3e0bpks/source-framing-2wnjawmy",
+    "state": "passed",
+    "started": "2026-09-14T14:24:46.558610+00:00",
+    "binary_sha256": "aad0db8d3a6e265dacefa21ae674ed38c19bf9aa1bcb3c76aa91959c7640df99",
+    "driver_sha256": "36c7f86270a0fc81d566f9d5f8b61255eb29c59c0a04b6649af6d07b577b604e",
+    "scope": "Actual EOF/protocol-fault distinction for the private source worker.\n\nThese inputs are raw framing tests, not accepted semantic requests. A protocol\nfault retires this process. No restart, same-instance recovery or public wire\ncontract is inferred. Uses the already bounded main-owned child launcher.\n",
+    "cases": [
+      {
+        "pid": 3131710,
+        "exit": 0,
+        "classification": "exited",
+        "effective_limits": [
+          "Max cpu time              10                   10                   seconds   ",
+          "Max core file size        0                    0                    bytes     ",
+          "Max address space         4294967296           4294967296           bytes     "
+        ],
+        "wall_seconds": 15,
+        "name": "bootstrap_eof",
+        "input_sha256": "7217c733fb2b893eb0727ec14c02a4a0513cd7bcd3e92b5a2dca08569a12eb50",
+        "output_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "expected_exit": 0,
+        "expected_error": null,
+        "passed": true
+      },
+      {
+        "pid": 3131722,
+        "exit": 0,
+        "classification": "exited",
+        "effective_limits": [
+          "Max cpu time              10                   10                   seconds   ",
+          "Max core file size        0                    0                    bytes     ",
+          "Max address space         4294967296           4294967296           bytes     "
+        ],
+        "wall_seconds": 15,
+        "name": "zeroquota_typed_refusal_then_eof",
+        "input_sha256": "ddf655667cded5da895ba8a9aaef2f87a992963e68f2756eb805436d06ef0a83",
+        "output_sha256": "0939b94b969192159a20ca63663291efe74e5968e7efb80a4ea9f8c4b590590a",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "expected_exit": 0,
+        "expected_error": null,
+        "passed": true
+      },
+      {
+        "pid": 3131745,
+        "exit": 1,
+        "classification": "exited",
+        "effective_limits": [
+          "Max cpu time              10                   10                   seconds   ",
+          "Max core file size        0                    0                    bytes     ",
+          "Max address space         4294967296           4294967296           bytes     "
+        ],
+        "wall_seconds": 15,
+        "name": "zeroquota_empty_complete_frame",
+        "input_sha256": "ac2e2087020b350040de431e1fc4129ad3a3df674249425c0f19582f3c7b45f3",
+        "output_sha256": "0939b94b969192159a20ca63663291efe74e5968e7efb80a4ea9f8c4b590590a",
+        "stderr_sha256": "93bc4dd512f7b36c74b2704cd62f3faa89c4da675dbdd96bf6b70d5992aaee94",
+        "expected_exit": 1,
+        "expected_error": "invalid source input",
+        "passed": true
+      },
+      {
+        "pid": 3131765,
+        "exit": 1,
+        "classification": "exited",
+        "effective_limits": [
+          "Max cpu time              10                   10                   seconds   ",
+          "Max core file size        0                    0                    bytes     ",
+          "Max address space         4294967296           4294967296           bytes     "
+        ],
+        "wall_seconds": 15,
+        "name": "zeroquota_unknown_complete_tree",
+        "input_sha256": "d19dea0bab6aef461c26c4b3db35e6c388ab0e41708a8e9758fb69d19701645b",
+        "output_sha256": "0939b94b969192159a20ca63663291efe74e5968e7efb80a4ea9f8c4b590590a",
+        "stderr_sha256": "93bc4dd512f7b36c74b2704cd62f3faa89c4da675dbdd96bf6b70d5992aaee94",
+        "expected_exit": 1,
+        "expected_error": "invalid source input",
+        "passed": true
+      },
+      {
+        "pid": 3131786,
+        "exit": 1,
+        "classification": "exited",
+        "effective_limits": [
+          "Max cpu time              10                   10                   seconds   ",
+          "Max core file size        0                    0                    bytes     ",
+          "Max address space         4294967296           4294967296           bytes     "
+        ],
+        "wall_seconds": 15,
+        "name": "zeroquota_partial_header_eof",
+        "input_sha256": "64b3e5d453efa9d48ef9e1f8ca16e6e466e9ab6962fdc5e2cec9d21d37e0ad46",
+        "output_sha256": "0939b94b969192159a20ca63663291efe74e5968e7efb80a4ea9f8c4b590590a",
+        "stderr_sha256": "9d64e73b8bb39acc5928017c82674e6932910a26a95d86a49b17709f713662c2",
+        "expected_exit": 1,
+        "expected_error": "short frame",
+        "passed": true
+      },
+      {
+        "pid": 3131803,
+        "exit": 1,
+        "classification": "exited",
+        "effective_limits": [
+          "Max cpu time              10                   10                   seconds   ",
+          "Max core file size        0                    0                    bytes     ",
+          "Max address space         4294967296           4294967296           bytes     "
+        ],
+        "wall_seconds": 15,
+        "name": "zeroquota_partial_body_eof",
+        "input_sha256": "c2187a72fd5a4dc2a552df75b15612e78328454db25a9f59b697ff430bd26521",
+        "output_sha256": "0939b94b969192159a20ca63663291efe74e5968e7efb80a4ea9f8c4b590590a",
+        "stderr_sha256": "9d64e73b8bb39acc5928017c82674e6932910a26a95d86a49b17709f713662c2",
+        "expected_exit": 1,
+        "expected_error": "short frame",
+        "passed": true
+      },
+      {
+        "pid": 3131821,
+        "exit": 1,
+        "classification": "exited",
+        "effective_limits": [
+          "Max cpu time              10                   10                   seconds   ",
+          "Max core file size        0                    0                    bytes     ",
+          "Max address space         4294967296           4294967296           bytes     "
+        ],
+        "wall_seconds": 15,
+        "name": "zeroquota_oversized_header",
+        "input_sha256": "88c0bd2bb7a5b150a886b7cc5c96b49aa5aa19d62fb52568e2e82e27191b2da0",
+        "output_sha256": "0939b94b969192159a20ca63663291efe74e5968e7efb80a4ea9f8c4b590590a",
+        "stderr_sha256": "9b247eaa994f3fc24c185994a76724dc6e89f3342b49055793905db90aa0ed1b",
+        "expected_exit": 1,
+        "expected_error": "oversized frame",
+        "passed": true
+      }
+    ],
+    "finished": "2026-09-14T14:24:46.744294+00:00"
+  },
+  "oracle15_followup": {
+    "status": "general_proof_audit_native_bound_capture_passed_review16_running",
+    "time": "2026-09-14T14:54:23.741327+00:00",
+    "permutation_model_counter": "ab6aac original F1 accepted; nine residual steps independently certified; current driver refused",
+    "permutation_native_counter": [
+      "79623d F1 first",
+      "0158a7 interleaved freeze/ack"
+    ],
+    "residual_proofs": "LifecycleResidual-SECOND.log d996cf PASS; no schedule-success premise in residual_admitted; FIRST failed elaboration retained, never consumed",
+    "compiler_selection": "10c15d real Lean/C artifact; absolute same-installation drivers and allowlisted env, selected compiler dependency parser",
+    "helper_counters": "52f0ab all4 reproduced",
+    "helper_repairs": "b1bc90 four discriminator repairs; d79fb4 cleanup regression",
+    "fresh_build": {
+      "build": "/tmp/mirrorea-w4-20260914-a3e0bpks/capacity-native-v1fam2_9",
+      "binary_sha256": "d4e798d38e547155792c072b28cfd0de6505eda4fedfed369fdddc0ffe330776",
+      "cache_context_version": 3
+    },
+    "remaining": [
+      "102 parked dispatch distinct from Quiet/cohort terminal",
+      "actual receipt argv to replay binding",
+      "owner-result output/arrival profile",
+      "material-delta oracle",
+      "authentic Rust/QUIC integration"
+    ],
+    "audit": {
+      "time": "2026-09-14T14:54:00.742087+00:00",
+      "build": "/tmp/mirrorea-w4-20260914-a3e0bpks/capacity-native-v1fam2_9",
+      "command": [
+        "lean",
+        "--trust=0",
+        "-j1",
+        "CapacityNativeAudit.lean"
+      ],
+      "exit": 0,
+      "expected_modules": 104,
+      "modules": 104,
+      "owned": 12774,
+      "binary_sha256": "d4e798d38e547155792c072b28cfd0de6505eda4fedfed369fdddc0ffe330776",
+      "audit_sha256": "575fda846a779977a0ff140fbecf0a1967f43b3c79e3c0a4e6e05ae8786354a1",
+      "log_sha256": "a68e0acd4017143c91cfeb3a136ecbb3a5b206b10d6f2adbe5e6b76b478e039c",
+      "allowed_logical_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "mir_specific_axioms": [],
+      "status": "passed"
+    },
+    "bound_replay": {
+      "status": "passed",
+      "exit": 0,
+      "time": "2026-09-14T14:58:45.781713+00:00",
+      "build": "/tmp/mirrorea-w4-20260914-a3e0bpks/capacity-native-v1fam2_9",
+      "source_binary_sha256": "d4e798d38e547155792c072b28cfd0de6505eda4fedfed369fdddc0ffe330776",
+      "replay_sha256": "8985f25c88134777155e80911b005b79a9a4a6c25df2a06c41580ab532b0039c",
+      "manifest_sha256": "2a13c9b93a02b0bb6ed5341d2990d63407ebcac6c34fc5fc7851813f645d69bd",
+      "log_sha256": "5ba5e107940e294105b37ee68d08826d5649e77d74644d825cc84315c6ba061c",
+      "cohorts": [
+        {
+          "receipt": "RESIDUAL_NORMAL_C_CHECK.json",
+          "receipt_sha256": "4e0866d47e110cf173d33a0ea839bdb11537a47c9e044cb56082668b2872a87d",
+          "outcome": "source_complete",
+          "root": "/tmp/mirrorea-w4-20260914-a3e0bpks/publication-process-ct64pzwt",
+          "source_numeric_arguments": [
+            91,
+            3,
+            1,
+            0,
+            0,
+            7,
+            811,
+            512
+          ],
+          "source_inputs": 397,
+          "owner_parameters": [
+            {
+              "endpoint": "owner0",
+              "numeric_arguments": [
+                91,
+                3,
+                1,
+                0,
+                811,
+                8
+              ],
+              "inputs": 53
+            },
+            {
+              "endpoint": "owner1",
+              "numeric_arguments": [
+                91,
+                3,
+                1,
+                1,
+                811,
+                8
+              ],
+              "inputs": 53
+            },
+            {
+              "endpoint": "owner2",
+              "numeric_arguments": [
+                91,
+                3,
+                1,
+                2,
+                811,
+                8
+              ],
+              "inputs": 68
+            }
+          ],
+          "composite": {
+            "installs": 78,
+            "freeze_acks": 78,
+            "dispatches": 5,
+            "arrivals": 5,
+            "publishes": 26
+          }
+        },
+        {
+          "receipt": "RESIDUAL_NORMAL_A_CHECK.json",
+          "receipt_sha256": "72453e4d345dc03716f534b4792aec0addec4a0f3cb77a1ac9f26578b2ca770b",
+          "outcome": "source_complete",
+          "root": "/tmp/mirrorea-w4-20260914-a3e0bpks/publication-process-ogly9wad",
+          "source_numeric_arguments": [
+            91,
+            3,
+            1,
+            0,
+            0,
+            7,
+            811,
+            512
+          ],
+          "source_inputs": 397,
+          "owner_parameters": [
+            {
+              "endpoint": "owner0",
+              "numeric_arguments": [
+                91,
+                3,
+                1,
+                0,
+                811,
+                8
+              ],
+              "inputs": 56
+            },
+            {
+              "endpoint": "owner1",
+              "numeric_arguments": [
+                91,
+                3,
+                1,
+                1,
+                811,
+                8
+              ],
+              "inputs": 53
+            },
+            {
+              "endpoint": "owner2",
+              "numeric_arguments": [
+                91,
+                3,
+                1,
+                2,
+                811,
+                8
+              ],
+              "inputs": 65
+            }
+          ],
+          "composite": {
+            "installs": 78,
+            "freeze_acks": 78,
+            "dispatches": 5,
+            "arrivals": 5,
+            "publishes": 26
+          }
+        },
+        {
+          "receipt": "CAPACITY_PROCESS_GROWTH_CHECK.json",
+          "receipt_sha256": "923c74ac7d08e06be1828e3af19b6d35960770bd57906899f92e62f3f0b1ed07",
+          "outcome": "source_complete",
+          "root": "/tmp/mirrorea-w4-20260914-a3e0bpks/capacity-process-growth-yzsftizh",
+          "source_numeric_arguments": [
+            91,
+            3,
+            1,
+            0,
+            0,
+            7,
+            939,
+            512
+          ],
+          "source_inputs": 168,
+          "owner_parameters": [
+            {
+              "endpoint": "owner0",
+              "numeric_arguments": [
+                91,
+                3,
+                1,
+                0,
+                939,
+                8
+              ],
+              "inputs": 31
+            },
+            {
+              "endpoint": "owner1",
+              "numeric_arguments": [
+                91,
+                3,
+                1,
+                1,
+                939,
+                8
+              ],
+              "inputs": 31
+            },
+            {
+              "endpoint": "owner2",
+              "numeric_arguments": [
+                91,
+                3,
+                1,
+                2,
+                939,
+                8
+              ],
+              "inputs": 31
+            }
+          ],
+          "composite": {
+            "installs": 45,
+            "freeze_acks": 45,
+            "dispatches": 0,
+            "arrivals": 0,
+            "publishes": 15
+          }
+        },
+        {
+          "receipt": "CAPACITY_PROCESS_QUOTA_CHECK.json",
+          "receipt_sha256": "ddf236053e20258343de74ed0289789d4d0b83c0ce0181659951f1adfc7a16e0",
+          "outcome": "source_complete",
+          "root": "/tmp/mirrorea-w4-20260914-a3e0bpks/capacity-process-quota-0y3q0pep",
+          "source_numeric_arguments": [
+            91,
+            3,
+            1,
+            0,
+            0,
+            7,
+            939,
+            12
+          ],
+          "source_inputs": 527,
+          "owner_parameters": [
+            {
+              "endpoint": "owner0",
+              "numeric_arguments": [
+                91,
+                3,
+                1,
+                0,
+                939,
+                8
+              ],
+              "inputs": 3
+            },
+            {
+              "endpoint": "owner1",
+              "numeric_arguments": [
+                91,
+                3,
+                1,
+                1,
+                939,
+                8
+              ],
+              "inputs": 3
+            },
+            {
+              "endpoint": "owner2",
+              "numeric_arguments": [
+                91,
+                3,
+                1,
+                2,
+                939,
+                8
+              ],
+              "inputs": 3
+            }
+          ],
+          "composite": {
+            "installs": 3,
+            "freeze_acks": 3,
+            "dispatches": 0,
+            "arrivals": 0,
+            "publishes": 1
+          }
+        },
+        {
+          "receipt": "SOURCE_GUARD_LOCUS_CHECK.json",
+          "receipt_sha256": "78664cfcb8493ec29555d21ec64795714b570a4de9a9b85467444976dc980b1b",
+          "outcome": "retired_activation",
+          "root": "/tmp/mirrorea-w4-20260914-a3e0bpks/source-guard-locus-g4ntuuah",
+          "source_numeric_arguments": [
+            91,
+            3,
+            1,
+            0,
+            0,
+            7,
+            947,
+            512
+          ],
+          "source_inputs": 115,
+          "owner_parameters": [
+            {
+              "endpoint": "owner0",
+              "numeric_arguments": [
+                91,
+                3,
+                1,
+                0,
+                947,
+                8
+              ],
+              "inputs": 21
+            },
+            {
+              "endpoint": "owner1",
+              "numeric_arguments": [
+                91,
+                3,
+                1,
+                1,
+                947,
+                8
+              ],
+              "inputs": 21
+            },
+            {
+              "endpoint": "owner2",
+              "numeric_arguments": [
+                91,
+                3,
+                1,
+                2,
+                947,
+                8
+              ],
+              "inputs": 21
+            }
+          ],
+          "composite": {
+            "installs": 30,
+            "freeze_acks": 30,
+            "dispatches": 0,
+            "arrivals": 0,
+            "publishes": 10
+          }
+        },
+        {
+          "receipt": "SOURCE_GUARD_MEMBER_CHECK.json",
+          "receipt_sha256": "4003b12b59679b0e4e9c4b1fa26597e13eeede15cae957b2d108ed0938d69d7d",
+          "outcome": "retired_activation",
+          "root": "/tmp/mirrorea-w4-20260914-a3e0bpks/source-guard-member-1n9x057h",
+          "source_numeric_arguments": [
+            91,
+            3,
+            1,
+            0,
+            0,
+            7,
+            947,
+            512
+          ],
+          "source_inputs": 115,
+          "owner_parameters": [
+            {
+              "endpoint": "owner0",
+              "numeric_arguments": [
+                91,
+                3,
+                1,
+                0,
+                947,
+                8
+              ],
+              "inputs": 21
+            },
+            {
+              "endpoint": "owner1",
+              "numeric_arguments": [
+                91,
+                3,
+                1,
+                1,
+                947,
+                8
+              ],
+              "inputs": 21
+            },
+            {
+              "endpoint": "owner2",
+              "numeric_arguments": [
+                91,
+                3,
+                1,
+                2,
+                947,
+                8
+              ],
+              "inputs": 21
+            }
+          ],
+          "composite": {
+            "installs": 30,
+            "freeze_acks": 30,
+            "dispatches": 0,
+            "arrivals": 0,
+            "publishes": 10
+          }
+        },
+        {
+          "receipt": "SOURCE_GUARD_LATE_RESULT_CHECK.json",
+          "receipt_sha256": "93fe074d78d69315dda6325f9ec3c8a9cf04b16074aff40552c84af0cc51bd53",
+          "outcome": "source_complete",
+          "root": "/tmp/mirrorea-w4-20260914-a3e0bpks/source-guard-late_result-1irrihou",
+          "source_numeric_arguments": [
+            91,
+            3,
+            1,
+            0,
+            0,
+            7,
+            947,
+            512
+          ],
+          "source_inputs": 148,
+          "owner_parameters": [
+            {
+              "endpoint": "owner0",
+              "numeric_arguments": [
+                91,
+                3,
+                1,
+                0,
+                947,
+                8
+              ],
+              "inputs": 27
+            },
+            {
+              "endpoint": "owner1",
+              "numeric_arguments": [
+                91,
+                3,
+                1,
+                1,
+                947,
+                8
+              ],
+              "inputs": 27
+            },
+            {
+              "endpoint": "owner2",
+              "numeric_arguments": [
+                91,
+                3,
+                1,
+                2,
+                947,
+                8
+              ],
+              "inputs": 29
+            }
+          ],
+          "composite": {
+            "installs": 39,
+            "freeze_acks": 39,
+            "dispatches": 1,
+            "arrivals": 0,
+            "publishes": 13
+          }
+        },
+        {
+          "receipt": "SOURCE_GUARD_LATE_RESULT_SCOPE_128BITS_CHECK.json",
+          "receipt_sha256": "d0c76d5f1046ff6edf44b16653327e7bb9a613fe37491692e662bef30b5f747f",
+          "outcome": "source_complete",
+          "root": "/tmp/mirrorea-w4-20260914-a3e0bpks/source-guard-late_result-l2u5tj24",
+          "source_numeric_arguments": [
+            91,
+            3,
+            1,
+            0,
+            0,
+            7,
+            170141183460469231731687303715884105728,
+            512
+          ],
+          "source_inputs": 148,
+          "owner_parameters": [
+            {
+              "endpoint": "owner0",
+              "numeric_arguments": [
+                91,
+                3,
+                1,
+                0,
+                170141183460469231731687303715884105728,
+                8
+              ],
+              "inputs": 27
+            },
+            {
+              "endpoint": "owner1",
+              "numeric_arguments": [
+                91,
+                3,
+                1,
+                1,
+                170141183460469231731687303715884105728,
+                8
+              ],
+              "inputs": 27
+            },
+            {
+              "endpoint": "owner2",
+              "numeric_arguments": [
+                91,
+                3,
+                1,
+                2,
+                170141183460469231731687303715884105728,
+                8
+              ],
+              "inputs": 29
+            }
+          ],
+          "composite": {
+            "installs": 39,
+            "freeze_acks": 39,
+            "dispatches": 1,
+            "arrivals": 0,
+            "publishes": 13
+          }
+        },
+        {
+          "receipt": "LIFECYCLE_BOUNDARY_101_CHECK.json",
+          "receipt_sha256": "f42c05ee2d33c298d0bdaf9cdd62dc563f652a69479ba3b920e3b11967da71b1",
+          "outcome": "waiting",
+          "root": "/tmp/mirrorea-w4-20260914-a3e0bpks/lifecycle-boundary-101-ncon4ebl",
+          "source_numeric_arguments": [
+            91,
+            3,
+            1,
+            0,
+            0,
+            7,
+            953,
+            101
+          ],
+          "source_inputs": 102,
+          "owner_parameters": [
+            {
+              "endpoint": "owner0",
+              "numeric_arguments": [
+                91,
+                3,
+                1,
+                0,
+                953,
+                8
+              ],
+              "inputs": 19
+            },
+            {
+              "endpoint": "owner1",
+              "numeric_arguments": [
+                91,
+                3,
+                1,
+                1,
+                953,
+                8
+              ],
+              "inputs": 19
+            },
+            {
+              "endpoint": "owner2",
+              "numeric_arguments": [
+                91,
+                3,
+                1,
+                2,
+                953,
+                8
+              ],
+              "inputs": 19
+            }
+          ],
+          "composite": {
+            "installs": 27,
+            "freeze_acks": 27,
+            "dispatches": 0,
+            "arrivals": 0,
+            "publishes": 9
+          }
+        },
+        {
+          "receipt": "LIFECYCLE_BOUNDARY_102_CHECK.json",
+          "receipt_sha256": "fcfabfcdbe1c6c51c4ca7abbb32dd8ebbb9a5ff31b83f10fd09aa5606215caff",
+          "outcome": "parked_after_terminal",
+          "root": "/tmp/mirrorea-w4-20260914-a3e0bpks/lifecycle-boundary-102-nwrpds5g",
+          "source_numeric_arguments": [
+            91,
+            3,
+            1,
+            0,
+            0,
+            7,
+            953,
+            102
+          ],
+          "source_inputs": 104,
+          "owner_parameters": [
+            {
+              "endpoint": "owner0",
+              "numeric_arguments": [
+                91,
+                3,
+                1,
+                0,
+                953,
+                8
+              ],
+              "inputs": 19
+            },
+            {
+              "endpoint": "owner1",
+              "numeric_arguments": [
+                91,
+                3,
+                1,
+                1,
+                953,
+                8
+              ],
+              "inputs": 19
+            },
+            {
+              "endpoint": "owner2",
+              "numeric_arguments": [
+                91,
+                3,
+                1,
+                2,
+                953,
+                8
+              ],
+              "inputs": 21
+            }
+          ],
+          "composite": {
+            "installs": 27,
+            "freeze_acks": 27,
+            "dispatches": 1,
+            "arrivals": 0,
+            "publishes": 9,
+            "parked_actual_results": 1
+          }
+        },
+        {
+          "receipt": "LIFECYCLE_BOUNDARY_113_CHECK.json",
+          "receipt_sha256": "94689246b962e95f2832be418b32f4b2f66e5c0e159afdd34217c8f4ed50bdf1",
+          "outcome": "cancelled",
+          "root": "/tmp/mirrorea-w4-20260914-a3e0bpks/lifecycle-boundary-113-245sng23",
+          "source_numeric_arguments": [
+            91,
+            3,
+            1,
+            0,
+            0,
+            7,
+            953,
+            113
+          ],
+          "source_inputs": 116,
+          "owner_parameters": [
+            {
+              "endpoint": "owner0",
+              "numeric_arguments": [
+                91,
+                3,
+                1,
+                0,
+                953,
+                8
+              ],
+              "inputs": 21
+            },
+            {
+              "endpoint": "owner1",
+              "numeric_arguments": [
+                91,
+                3,
+                1,
+                1,
+                953,
+                8
+              ],
+              "inputs": 21
+            },
+            {
+              "endpoint": "owner2",
+              "numeric_arguments": [
+                91,
+                3,
+                1,
+                2,
+                953,
+                8
+              ],
+              "inputs": 23
+            }
+          ],
+          "composite": {
+            "installs": 30,
+            "freeze_acks": 30,
+            "dispatches": 1,
+            "arrivals": 0,
+            "publishes": 10
+          }
+        },
+        {
+          "receipt": "SOURCE_PERMUTATION_F1_FIRST_ACCEPTED_CHECK.json",
+          "receipt_sha256": "97926975518f68390dfa73fb3dd7aa7c184fa0e84f53ac3a5d9826314eff4edb",
+          "outcome": "source_complete",
+          "root": "/tmp/mirrorea-w4-20260914-a3e0bpks/source-permutation-f1_first-r7gkmgg3",
+          "source_numeric_arguments": [
+            91,
+            3,
+            1,
+            0,
+            0,
+            7,
+            939,
+            12
+          ],
+          "source_inputs": 13,
+          "owner_parameters": [
+            {
+              "endpoint": "owner0",
+              "numeric_arguments": [
+                91,
+                3,
+                1,
+                0,
+                939,
+                8
+              ],
+              "inputs": 3
+            },
+            {
+              "endpoint": "owner1",
+              "numeric_arguments": [
+                91,
+                3,
+                1,
+                1,
+                939,
+                8
+              ],
+              "inputs": 3
+            },
+            {
+              "endpoint": "owner2",
+              "numeric_arguments": [
+                91,
+                3,
+                1,
+                2,
+                939,
+                8
+              ],
+              "inputs": 3
+            }
+          ],
+          "composite": {
+            "installs": 3,
+            "freeze_acks": 3,
+            "dispatches": 0,
+            "arrivals": 0,
+            "publishes": 1
+          }
+        },
+        {
+          "receipt": "SOURCE_PERMUTATION_INTERLEAVED_ACCEPTED_CHECK.json",
+          "receipt_sha256": "a20cb7a3d55cdb8ae97f9eca4d277a389c61ea2ad2150030eb61c6b5b18d0224",
+          "outcome": "source_complete",
+          "root": "/tmp/mirrorea-w4-20260914-a3e0bpks/source-permutation-interleaved-lg1xrvwa",
+          "source_numeric_arguments": [
+            91,
+            3,
+            1,
+            0,
+            0,
+            7,
+            939,
+            12
+          ],
+          "source_inputs": 13,
+          "owner_parameters": [
+            {
+              "endpoint": "owner0",
+              "numeric_arguments": [
+                91,
+                3,
+                1,
+                0,
+                939,
+                8
+              ],
+              "inputs": 3
+            },
+            {
+              "endpoint": "owner1",
+              "numeric_arguments": [
+                91,
+                3,
+                1,
+                1,
+                939,
+                8
+              ],
+              "inputs": 3
+            },
+            {
+              "endpoint": "owner2",
+              "numeric_arguments": [
+                91,
+                3,
+                1,
+                2,
+                939,
+                8
+              ],
+              "inputs": 3
+            }
+          ],
+          "composite": {
+            "installs": 3,
+            "freeze_acks": 3,
+            "dispatches": 0,
+            "arrivals": 0,
+            "publishes": 1
+          }
+        }
+      ],
+      "limits": "finite actual-byte/cross-stream conjunction; not general physical simulation, signed origin, Python or OS correctness"
+    }
+  },
+  "oracle_readable_residual": {
+    "status": "complete_exact_answer_followup_in_progress",
+    "start": {
+      "session": "mir-w4-readable-residual",
+      "started_utc": "2026-09-14T15:03:27.709876+00:00",
+      "started_epoch": 1789398207.7098908,
+      "question_sha256": "d7678d5f8bc0abb141bd4ac3949f8323689d4fbe7256209ca84a03337bef472f",
+      "manifest_sha256": "d79c639774eae2762cf6568f5eaccc9375b142be4469d8b0b6eb5db1f807cf21"
+    },
+    "wrapper": 80938,
+    "answer_sha256": "f0f3b8a0f4b7ec62cbfc2263218c0deb3c97eeb66e2bb1367b8f81d103ecbf91"
+  },
+  "owner_response_profile": {
+    "status": "general_proofs_source_native105_audit_and17cohort_replay_passed_direct_owner_open",
+    "timestamp": "2026-09-14T16:09:40.011500+00:00",
+    "source": "/tmp/mirrorea-w4-20260914-a3e0bpks/MirroreaProofFirstOwnerResponseProfile.lean",
+    "sha256": "8a9038953c81f2d0fec281cc0a1cc53be392a842ff190405c74dd7abe0530aa6",
+    "log": "/tmp/mirrorea-w4-20260914-a3e0bpks/OwnerResponseProfile-FOURTEENTH.log",
+    "log_sha256": "39221d380c5aa17592d3846d4fb562e32b525fb97bb35c971cd851ce2bbe3dd7",
+    "evidence": "0bf972/499ad8/2065b9/641085",
+    "scope": "W3 Int64 and rooted ordinal<64; explicit response profile checker equivalence; whole owner reply and source arrival bounded exact decode; constructive rooted reservation to readable computation",
+    "profile": "scope/revision <2^128; ticket bytes+373 <=65536; ticket treeCost+24 <=256; ticket digit128/text256. Conservative sufficient profile, not all-decodable-value completeness.",
+    "tcb": "standard propext/Classical.choice/Quot.sound only; native/compiler/physical custody/recipient Python parser separate",
+    "failed_logs": [
+      "OwnerResponseProfile-SEVENTH.log",
+      "OwnerResponseProfile-NINTH.log",
+      "OwnerResponseProfile-ELEVENTH.log"
+    ],
+    "review": "Oracle17 mir-w4-owner-profile submitted once d9e65b; pending",
+    "consumer_status": "105modules/12913owned standard-only audit85c8a3; current-source17+owner51 exact-byte streams cb16a3/1f784d PASS; direct owner profile still open",
+    "native_build": "/tmp/mirrorea-w4-20260914-a3e0bpks/CAPACITY_NATIVE_BUILD.json",
+    "native_binary_sha256": "f29a12626635050f0be21a60ef54931dc87a261f5823c2bdd777828c13f98f2b",
+    "remaining": "Direct standalone owner endpoint still relies on the source dispatch profile; owner-side active response profile guard/all-entry proof and actual byte correspondence remain before unconditional owner-emission claim. Owner command budget and authenticated namespace separate.",
+    "audit": {
+      "path": "/tmp/mirrorea-w4-20260914-a3e0bpks/CAPACITY_NATIVE_AUDIT.json",
+      "sha256": "c2edd5ee64c1f9715deeddcba5e2172b0c073fa41c9c3fe9e7669e3c46129ed8"
+    },
+    "replay": {
+      "path": "/tmp/mirrorea-w4-20260914-a3e0bpks/BOUND_CAPTURE_REPLAY_CHECK.json",
+      "sha256": "67eb75c3c9f7530d47daf7bbf9375950d987d53cdc211eea21f31f933cbe032c"
+    },
+    "native_cases": {
+      "path": "/tmp/mirrorea-w4-20260914-a3e0bpks/OWNER_PROFILE_NATIVE_CASES.json",
+      "sha256": "11bfc28328e403e30a2695812994642d63f1a31335180e16b42431c252220b34"
+    },
+    "normal_A_failure": "First wrong continuation path failed514f8a; FIRST_FAILURE and original log retained. Only A rerun with actual path passed1f0fa6. No semantics change.",
+    "direct_owner_counter": {
+      "model": "2b68a0 expected Lean1; three readable inputs, produced10 with scope2^128 is unreadable",
+      "actual": {
+        "path": "/tmp/mirrorea-w4-20260914-a3e0bpks/OWNER_DIRECT_PROFILE_COUNTER_CHECK.json",
+        "sha256": "5d3ea5a37f9ec120199a9e3bb275d61e61248ccad6c456416c20208e828f53af"
+      },
+      "evidence": "fa5280; old95 owner exit0 EOF; recipient bad number"
+    }
+  },
+  "oracle16_followup": {
+    "timestamp": "2026-09-14T15:39:20.165966+00:00",
+    "F1": {
+      "counter": "/tmp/mirrorea-w4-20260914-a3e0bpks/ORACLE16_FINALIZER_COUNTERS.json",
+      "real_lean_replay_regression": "/tmp/mirrorea-w4-20260914-a3e0bpks/ORACLE16_FINALIZATION_CHECK.json",
+      "build_finalizer": "actual105build cfbb13 and audit85c8a3 closed stdout exit0; replay full17 cb16a3 exit0"
+    },
+    "F2": {
+      "model": "PartialRoundEnterCounter-FIRST.log PASS e2b5f1",
+      "native": "SOURCE_PARTIAL_ROUND_COUNTER_CHECK.json PASS1d3958/2af51e",
+      "repair": "general released_path_admitted b9144d; exact-budget model36f9f8; actual4process positive85c8a3/182bca; full-byte replay cb16a3 passes"
+    },
+    "F3": {
+      "native_counter": "ORACLE16_HISTORICAL_NATIVE_COUNTERS.json PASS726480",
+      "general_proof": "PublicationNotifications-FIRST f6dcf8 PASS standard axioms only",
+      "checker_repair": "3old+13prior+2mutants2ead87 PASS; current105 three native histories514f8a pass; fullbyte replay cb16a3",
+      "repair": "general historical proof f6dcf8;3actual old-notification captures+13prior cohorts+2mutants pass2ead87"
+    }
+  },
+  "oracle_owner_profile": {
+    "started": "2026-09-14T16:07:54.207672+00:00",
+    "session": "mir-w4-owner-profile",
+    "question_sha256": "2c117d07c747463787831b1b6d36674b13f6a409c2781256376b76ef693fa379",
+    "manifest_sha256": "0f25274834eab3302efbd2214bfbd51419b2db11bce62ea5cb09f8e78c3bf1bb",
+    "single_submission": true,
+    "status": "complete_exact_question_bound",
+    "wrapper_session": 79798,
+    "submission_evidence": "d9e65b",
+    "packet": "/tmp/mirrorea-w4-20260914-a3e0bpks/oracle-w4-owner-profile",
+    "dry_run": "bb1798 exit0;46files552875bytes;~203304tokens",
+    "next_capture_not_before": "2026-09-14T16:10:54.207672Z",
+    "role": "read-only advice; not proof, owner decision or signed review",
+    "last_exact_capture": "465b0a16:39:38Z FINAL; no repoll",
+    "receipt": {
+      "session": "mir-w4-owner-profile",
+      "status": "complete_exact_question_bound",
+      "wrapper": "98866c exit0",
+      "finished": "2026-09-14T16:28:55.537836+00:00",
+      "capture": "465b0a at16:39:38.202Z",
+      "question_sha256": "2c117d07c747463787831b1b6d36674b13f6a409c2781256376b76ef693fa379",
+      "answer_file_sha256": "73a9fbdb4857e93aeff560f426d072229f3e0e181189db776061cc91d1175df2",
+      "capture_content_sha256": "d93e0617a25391fdd74a64ce8606da26fd97f7bc1d35dab8510d6bb8f3f3eab5",
+      "full_read": [
+        "f242b7 1-230",
+        "019b8b 231-end"
+      ],
+      "read_only": true,
+      "proof_or_authority": false
+    }
+  },
+  "owner_endpoint_profile": {
+    "time": "2026-09-14T16:18:36.682711+00:00",
+    "source": "/tmp/mirrorea-w4-20260914-a3e0bpks/MirroreaProofFirstOwnerEndpointProfile.lean",
+    "sha256": "62009921a071c7131dc2dc910ebe24bcb026bcec48229ec94b9331d4162098df",
+    "general_proof": "FOURTH bfaf05 PASS; standard logical axioms only; check_exact, preserves/rooted_profile, every_reply_readable, enabled_roundtrip",
+    "counter": "2b68a0 expected failure and fa5280 actual oldowner exit0/EOF unreadable scope2^128",
+    "controls": "SECOND17bd6e PASS; FIRSTa89e76 incorrect expected14/2 retained (old fence unchanged after refusedfreeze), implementation unchanged",
+    "native": "439558/db25bd PASS101module owner-profile-native-gzac6rpx; only two changed modules recompiled with context3 matching imports",
+    "failed_elaborations": [
+      "FIRST31cd32 explicit-binder inference failure",
+      "THIRDebad07 explicit p/a inference failure"
+    ],
+    "review": "after frozen Oracle17; separate material consumer review pending",
+    "remaining": "finite owner command budget; physical exclusive namespace/admission; Rust/Core/QUIC binding",
+    "native_binary_sha256": "8e53a6e0dfe343d325f4ea1d78b7a7bcd772af40425bc3179dd82631522bf8de",
+    "audit": "543728/966e4e PASS101modules/12450owned; standard axioms only",
+    "direct_native": "966e4e PASS4actual processes/34commands; current owner scope129 refuses before reservation/compute; ordinary/scope128/abandon controls",
+    "direct_replay": "f77f63/81159a PASS all34actual framed inputs/replies with exact startup parameters",
+    "source_consumer": "d62b3b/361a00/81159a PASS2actual four-process C/A normal source continuations and full byte/image composite replay; source105 plus owner101",
+    "replay_log_sha256": "0cfd256371d8526be6601a746e06ed06a4adc236fb8da7c57c0b0d9985ea1c9f",
+    "direct_replay_log_sha256": "151b2cda659e93011c8dfbde5d905185ff3a06c5f56c40a23232a486d4675709",
+    "helper_limit": "explicit guarded-owner replay validates both audited frozen roots and matching shared dependency/recipe context; Python and capture custody remain TCB",
+    "executed_helper_original": "4ada18 byte-identical recovery of native-first script b668f826b97b0f773c713f4dc388d3c34b1aa1b2a8f709cd76125b25fdd7072a preserved .NATIVE_FIRST after adding separate replay entry"
+  },
+  "oracle17_followup": {
+    "F1": "full standalone composite actualC/A counter2204dd; repaired rerun56074 pending",
+    "F2": "isolated unchanged helper exception counter8b450c; immutable required attempt repair pending",
+    "F3": "Oracle synthetic partial-checker mutation; actual full-pipeline discriminator pending",
+    "F4": "response/profile/path proofs no refutation; direct-owner post-freeze consumer review/routed nonadmission distinction remains",
+    "resolved_forward": {
+      "time": "2026-09-14T17:07:25.381617+00:00",
+      "F1": {
+        "path": "/tmp/mirrorea-w4-20260914-a3e0bpks/ORACLE17_COMPOSITE_FINALIZER_REPAIRED_CHECK.json",
+        "sha256": "71144c0cf47054f868e908a40bdd6949914d884e1291069d512cfefbf2130354",
+        "result": {
+          "time": "2026-09-14T16:47:07.783139+00:00",
+          "producer_exit": 0,
+          "result_exists": true,
+          "result_sha256": "bebe6f7191c34f418e475f0fe0683e8e589c42a80f3ce1c9a19a4193be7abdbc",
+          "same_actual_results": true,
+          "scope": "full standalone composite checker on actual C/A captures, closed diagnostic stdout"
+        }
+      },
+      "F2_attempt_control": {
+        "path": "/tmp/mirrorea-w4-20260914-a3e0bpks/ORACLE17_AUDIT_ATTEMPT_CONTROL_CHECK.json",
+        "sha256": "099657274029ed66605ffdf2dae02d5d821fc1b4acdaf560d9fed82f72b1b753",
+        "result": {
+          "root": "/tmp/mirrorea-w4-20260914-a3e0bpks/oracle17-audit-attempt-control-64mv47i7",
+          "scope": "Isolated exception accounting discriminator, no Lean/native success claim.",
+          "time": "2026-09-14T16:56:42.243937+00:00",
+          "producer_exit": 1,
+          "unchanged_old_receipt": true,
+          "old_log_still_matches": true,
+          "failed_attempt_status": "failed",
+          "missing_compiler": true,
+          "rejected": {
+            "failed_required": "ValueError: audit attempt did not pass",
+            "missing_required": "FileNotFoundError: [Errno 2] No such file or directory: '/tmp/mirrorea-w4-20260914-a3e0bpks/oracle17-audit-attempt-control-64mv47i7/build/audit-attempts/never-started/RESULT.json'",
+            "historical_implicit": "KeyError: 'attempt'"
+          },
+          "helper_sha256": "072abbb4be257859fca4f98672f6f5d03fbb0d76105bbf9cd05395541e29e367"
+        }
+      },
+      "F2_positive_replay": {
+        "path": "/tmp/mirrorea-w4-20260914-a3e0bpks/Oracle17AttemptBoundReplay_CHECK.json",
+        "sha256": "663573f227dc07aa5a72a5f368da491bcf2ad4e999f36b22dcf6a423b663839e",
+        "result": {
+          "status": "passed",
+          "exit": 0,
+          "time": "2026-09-14T17:02:17.143458+00:00",
+          "build": "/tmp/mirrorea-w4-20260914-a3e0bpks/capacity-native-wuivkoko",
+          "source_binary_sha256": "f29a12626635050f0be21a60ef54931dc87a261f5823c2bdd777828c13f98f2b",
+          "owner_binary_sha256": "8e53a6e0dfe343d325f4ea1d78b7a7bcd772af40425bc3179dd82631522bf8de",
+          "owner_model": "OwnerEndpointProfile",
+          "replay_sha256": "1680b538fdc63fd5ccc20ee665bc8e497d740d26ad0cbb7d27ab59b31138ad8e",
+          "manifest_sha256": "dc9d3e6a664d49600f86f839823c1c19dee58ffd283ce4d3f9691bfc515e3d91",
+          "log_sha256": "0cfd256371d8526be6601a746e06ed06a4adc236fb8da7c57c0b0d9985ea1c9f",
+          "cohorts": [
+            {
+              "receipt": "GUARDED_OWNER_NORMAL_C_CHECK.json",
+              "receipt_sha256": "a1d5361a5dacd423cde3352af7e130d40ea0db550f8466482ddd53123f46dadf",
+              "outcome": "source_complete",
+              "root": "/tmp/mirrorea-w4-20260914-a3e0bpks/publication-process-6sajp2k9",
+              "source_numeric_arguments": [
+                91,
+                3,
+                1,
+                0,
+                0,
+                7,
+                811,
+                512
+              ],
+              "source_inputs": 397,
+              "owner_parameters": [
+                {
+                  "endpoint": "owner0",
+                  "numeric_arguments": [
+                    91,
+                    3,
+                    1,
+                    0,
+                    811,
+                    8
+                  ],
+                  "inputs": 53
+                },
+                {
+                  "endpoint": "owner1",
+                  "numeric_arguments": [
+                    91,
+                    3,
+                    1,
+                    1,
+                    811,
+                    8
+                  ],
+                  "inputs": 53
+                },
+                {
+                  "endpoint": "owner2",
+                  "numeric_arguments": [
+                    91,
+                    3,
+                    1,
+                    2,
+                    811,
+                    8
+                  ],
+                  "inputs": 68
+                }
+              ],
+              "composite": {
+                "installs": 78,
+                "freeze_acks": 78,
+                "dispatches": 5,
+                "arrivals": 5,
+                "publishes": 26
+              }
+            },
+            {
+              "receipt": "GUARDED_OWNER_NORMAL_A_CHECK.json",
+              "receipt_sha256": "86f6e2013b6a1ac0c0e4458ef748d07a7b389901e5e4ff803c50d2272b498027",
+              "outcome": "source_complete",
+              "root": "/tmp/mirrorea-w4-20260914-a3e0bpks/publication-process-c_5etsz8",
+              "source_numeric_arguments": [
+                91,
+                3,
+                1,
+                0,
+                0,
+                7,
+                811,
+                512
+              ],
+              "source_inputs": 397,
+              "owner_parameters": [
+                {
+                  "endpoint": "owner0",
+                  "numeric_arguments": [
+                    91,
+                    3,
+                    1,
+                    0,
+                    811,
+                    8
+                  ],
+                  "inputs": 56
+                },
+                {
+                  "endpoint": "owner1",
+                  "numeric_arguments": [
+                    91,
+                    3,
+                    1,
+                    1,
+                    811,
+                    8
+                  ],
+                  "inputs": 53
+                },
+                {
+                  "endpoint": "owner2",
+                  "numeric_arguments": [
+                    91,
+                    3,
+                    1,
+                    2,
+                    811,
+                    8
+                  ],
+                  "inputs": 65
+                }
+              ],
+              "composite": {
+                "installs": 78,
+                "freeze_acks": 78,
+                "dispatches": 5,
+                "arrivals": 5,
+                "publishes": 26
+              }
+            }
+          ],
+          "source_audit_attempt": {
+            "path": "/tmp/mirrorea-w4-20260914-a3e0bpks/capacity-native-wuivkoko/audit-attempts/oracle17-explicit-source-1/RESULT.json",
+            "sha256": "046408bba8d0d471f47a548a8b016ac6d58b18353529a5ebfc1675ec34e45d95",
+            "attempt": "oracle17-explicit-source-1"
+          },
+          "owner_audit_attempt": {
+            "path": "/tmp/mirrorea-w4-20260914-a3e0bpks/owner-profile-native-gzac6rpx/audit-attempts/oracle17-explicit-owner-1/RESULT.json",
+            "sha256": "8dc9b239e8d10c4848cdf51d6afb98cbf9677efdc20ba5e230a20499658ccfa8",
+            "attempt": "oracle17-explicit-owner-1"
+          },
+          "limits": "finite actual-byte/cross-stream conjunction; not general physical simulation, signed origin, Python or OS correctness"
+        }
+      },
+      "F2_aggregate_counter": {
+        "path": "/tmp/mirrorea-w4-20260914-a3e0bpks/ORACLE17_HISTORICAL_AGGREGATE_COUNTER_CHECK.json",
+        "sha256": "ebcbf9a69209155f915f46bb3a911f9dbdd173862740e0ac319e467d2fefc087",
+        "result": {
+          "time": "2026-09-14T16:57:30.275045+00:00",
+          "exit": 1,
+          "stored_state": "passed",
+          "scope": "Actual current native four-process historical ack run; save destination only redirected to preserve old evidence; final counter expectation intentionally fails"
+        }
+      },
+      "F2_aggregate_repair": {
+        "path": "/tmp/mirrorea-w4-20260914-a3e0bpks/ORACLE17_HISTORICAL_AGGREGATE_REPAIRED_CHECK.json",
+        "sha256": "ca3bfabd1fa7e5fc5f99ca9a1f4fc0155706e631bf6aa95bc17d142ef99ad900",
+        "result": {
+          "time": "2026-09-14T16:58:14.323984+00:00",
+          "exit": 1,
+          "stored_state": "failed",
+          "execution_status": "passed",
+          "experiment_status": "failed",
+          "scope": "Actual four-process native success + intentionally failing final discriminator; only receipt destination redirected"
+        }
+      },
+      "F2_aggregate_positive": {
+        "path": "/tmp/mirrorea-w4-20260914-a3e0bpks/ORACLE17_HISTORICAL_AGGREGATE_POSITIVE_CHECK.json",
+        "sha256": "091444f77595294a3019ccb322f379514a86dc63d02e069ee12318bc2e119e61",
+        "result": {
+          "time": "2026-09-14T17:01:19.375112+00:00",
+          "exit": 0,
+          "state": "passed",
+          "execution": "passed",
+          "experiment": "passed",
+          "composite": {
+            "installs": 3,
+            "freeze_acks": 4,
+            "dispatches": 0,
+            "arrivals": 0,
+            "publishes": 1,
+            "historical_notifications": 1
+          }
+        }
+      },
+      "F3_partial_counter": {
+        "path": "/tmp/mirrorea-w4-20260914-a3e0bpks/ORACLE17_HISTORICAL_FENCE_MUTANT_CHECK.json",
+        "sha256": "07f3a51531f67fd6aeb8d555b9a0179271139deab3616892dc999c871d781200",
+        "result": {
+          "time": "2026-09-14T16:59:01.945653+00:00",
+          "scope": "Offline alteration of copied actual bytes; never a new native execution.",
+          "receipt": "/tmp/mirrorea-w4-20260914-a3e0bpks/ORACLE17_HISTORICAL_FENCE_MUTANT_RECEIPT.json",
+          "changed_source_index": 14,
+          "original_reply_sha256": "94f9c0465046fb7308ededa573b99b2b4a2303c6f1e476026b51e52f52d7c5f9",
+          "mutated_reply_sha256": "1b180606672ddde0ce217e936c24e61ffc2c4fa924baf021da1fabb4ec7b33fc",
+          "field": "fence[0]",
+          "before": 1,
+          "after": 2,
+          "partial_join_accepted": {
+            "installs": 3,
+            "freeze_acks": 4,
+            "dispatches": 0,
+            "arrivals": 0,
+            "publishes": 1,
+            "historical_notifications": 1
+          }
+        }
+      },
+      "F3_full_rejection": {
+        "path": "/tmp/mirrorea-w4-20260914-a3e0bpks/Oracle17HistoricalFenceMutant_CHECK.json",
+        "sha256": "b24b6d3c4a98a4de777311395f0c6cfc3ac0323d2beca582550f9543d565022a",
+        "result": {
+          "status": "failed",
+          "exit": 1,
+          "time": "2026-09-14T16:59:21.559457+00:00",
+          "build": "/tmp/mirrorea-w4-20260914-a3e0bpks/capacity-native-wuivkoko",
+          "source_binary_sha256": "f29a12626635050f0be21a60ef54931dc87a261f5823c2bdd777828c13f98f2b",
+          "owner_binary_sha256": "1525daab81850a59161ed2a20c0b3c13dcf6c4af4761826ee4f445a5a3ac4aa9",
+          "owner_model": "OwnerEndpoint",
+          "replay_sha256": "84aed02088016bb3f9c52bbe00abf61145c7f24d4d74ec8dfa5070422f38ad9e",
+          "manifest_sha256": "d6e5f4f981822277e989cea4e308c6cf8d76fb26138c914c88761559b062a303",
+          "log_sha256": "756b12d010d897c9fa116637f5b7a9a7eebd84d2d89a5f4696d395f8992ecdc5",
+          "cohorts": [
+            {
+              "receipt": "ORACLE17_HISTORICAL_FENCE_MUTANT_RECEIPT.json",
+              "receipt_sha256": "d181168f273c18b71b60b7358cbdc8cee4fd1e66192042f534506ae941f9daf5",
+              "outcome": "source_complete",
+              "root": "/tmp/mirrorea-w4-20260914-a3e0bpks/oracle17-historical-mutation-vgiy3_12/capture",
+              "source_numeric_arguments": [
+                91,
+                3,
+                1,
+                0,
+                0,
+                7,
+                939,
+                13
+              ],
+              "source_inputs": 14,
+              "owner_parameters": [
+                {
+                  "endpoint": "owner0",
+                  "numeric_arguments": [
+                    91,
+                    3,
+                    1,
+                    0,
+                    939,
+                    8
+                  ],
+                  "inputs": 3
+                },
+                {
+                  "endpoint": "owner1",
+                  "numeric_arguments": [
+                    91,
+                    3,
+                    1,
+                    1,
+                    939,
+                    8
+                  ],
+                  "inputs": 3
+                },
+                {
+                  "endpoint": "owner2",
+                  "numeric_arguments": [
+                    91,
+                    3,
+                    1,
+                    2,
+                    939,
+                    8
+                  ],
+                  "inputs": 3
+                }
+              ],
+              "composite": {
+                "installs": 3,
+                "freeze_acks": 4,
+                "dispatches": 0,
+                "arrivals": 0,
+                "publishes": 1,
+                "historical_notifications": 1
+              }
+            }
+          ],
+          "source_audit_attempt": {
+            "path": "/tmp/mirrorea-w4-20260914-a3e0bpks/capacity-native-wuivkoko/audit-attempts/oracle17-explicit-source-1/RESULT.json",
+            "sha256": "046408bba8d0d471f47a548a8b016ac6d58b18353529a5ebfc1675ec34e45d95",
+            "attempt": "oracle17-explicit-source-1"
+          },
+          "owner_audit_attempt": null,
+          "limits": "finite actual-byte/cross-stream conjunction; not general physical simulation, signed origin, Python or OS correctness"
+        }
+      },
+      "F3_disposition": "Keep partial cross-stream join + required complete captured-byte Lean replay; offline mutation not new native execution"
+    }
+  },
+  "owner_budget": {
+    "status": "external_theory_partial_gate_no_native_consumer",
+    "counters": [
+      "OWNER_BUDGET_COUNTER_CHECK.json ed6434",
+      "OWNER_BUDGET_NONTERMINAL_COUNTER_CHECK.json a48fff"
+    ],
+    "scope": "512th reservation or last nonterminal consumes completion slot then worker exit1; genuine old101 native counter, not OOM",
+    "proposal": "structural pre-compute cost1/2 reserves one terminal slot; minimal alternative last-reserve-only refuses fails nonterminal counter; budget refusals retain credits; existing profile refusals after funded calls still spend one credit",
+    "proof": "FOURTH4a3210 PASS general preservation/rooted/zero-credit idle; FIRST6cb5cb SECONDcf52d5 THIRD6a0409 failed elaboration retained; positive roundtrip/readability/controls pending",
+    "native": "none; fixed-loop101 remains current",
+    "remaining": "explicit resource/fault assumptions, total normal progress, source/owner coupled budget accounting, review",
+    "completion_proof": {
+      "status": "kernel_passed",
+      "source_sha256": "355c8457e73e27d05c2e971aaff5df02f857bbdbd8e998bf116e336f73133681",
+      "evidence": "802157 general module exit0; every-reply/independent enabled_roundtrip included, standard logical axioms only",
+      "controls": "6e8b25 exit0; FIRST2afaf9 failed dotted initial identifier, no evaluation used",
+      "consumer": {
+        "path": "/tmp/mirrorea-w4-20260914-a3e0bpks/OWNER_BUDGET_WORKER_ELAB_CHECK.json",
+        "sha256": "c7d528fa7ca8a8032ddf6fa1508dd7ce7992af76bb812b342493e8a7448eb70a",
+        "result": {
+          "time": "2026-09-14T17:01:36.873080+00:00",
+          "exit": 0,
+          "source_sha256": "e58222307760a961f02dce0264c06f2e5f99f3add8c9f4477c32e25a83d61428",
+          "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "scope": "private IO consumer elaboration; no budget native process yet"
+        }
+      },
+      "native": "not yet built or run; no owner-budget adoption/acceptance"
+    },
+    "native_forward": {
+      "time": "2026-09-14T17:17:45.428094+00:00",
+      "build": "ac06d0 exit0,102modules; newBudgetproof/worker only rebuilt",
+      "binary_sha256": "60ffb79261cbf5d7b62906325c1ac2e4071b5485eaa4835064361613c51cd112",
+      "audit": "9b2d87 exit0,12554owned standardaxioms",
+      "native": "f9737b/2c1960 PASS 2realprocess514inputs each, EOF0; second actual10",
+      "replay": {
+        "status": "passed",
+        "exit": 0,
+        "command": [
+          "/home/codex/.elan/toolchains/leanprover--lean4---v4.29.1/bin/lean",
+          "--trust=0",
+          "-j1",
+          "OwnerBudgetDirectReplay.lean"
+        ],
+        "audit_attempt": {
+          "path": "/tmp/mirrorea-w4-20260914-a3e0bpks/owner-budget-native-ivu6i8b5/audit-attempts/owner-budget-first/RESULT.json",
+          "sha256": "e44f3fa9c1135f570b1c65f039e42ed5e0562291efba8d486f6f0dd7dc780a28",
+          "attempt": "owner-budget-first"
+        },
+        "cases": 2,
+        "inputs": 1028,
+        "binary_sha256": "60ffb79261cbf5d7b62906325c1ac2e4071b5485eaa4835064361613c51cd112",
+        "receipt_sha256": "a5132545e994a0ddd0252fddc390c20420ae9867a3058dbf801bd4c2bcc6d8b3",
+        "source_sha256": "b5fbcc041ce3dc062bfec489d2a78676d0c9592a98402748d0b4f4a73f479215",
+        "manifest_sha256": "83598f737f1dc0c07a46ded2dbfdac7d97b764aef29472bfe5ca0f33d39cd728",
+        "log_sha256": "a7a55cb0d81420865b888e4eb0a4d7aeabe556f1504d364f72d3d71be155b9e7",
+        "scope": "Actual finite direct protocol frames and bounded reference evaluator; not authenticated origin, general IO simulation or source E2E"
+      },
+      "review_scope": "Worker/proof unchanged from18 freeze. Postfreeze build/audit mode selector and shared direct replay helper delta not in packet; record for narrow review. Source/owner coupled resources remain open."
+    }
+  },
+  "oracle_credit_attempt": {
+    "started": "2026-09-14T17:05:27.717014+00:00",
+    "slug": "mir-w4-credit-attempt",
+    "question_sha256": "e4e1fa986aa1e199a56cb3377d51d11a0a46298ef934e97ad514519b33a1de16",
+    "manifest_sha256": "0636782a49ac5b55c48c44f8e9a0f6fc784f476df1dd953433ef0c0f2f0b8dfc",
+    "status": "complete_exact_question_bound",
+    "normal_poll_min_seconds": 180,
+    "packet": "/tmp/mirrorea-w4-20260914-a3e0bpks/oracle-w4-credit-attempt",
+    "wrapper_session": 27409,
+    "submission_evidence": "ac1f99",
+    "dry_evidence": "e68a2d exit0;50files382350bytes;146260estimated tokens",
+    "next_capture_not_before": "2026-09-14T17:08:27.717014Z",
+    "role": "read-only advice, no proof/authority/signature",
+    "last_capture": "d3bb54 2026-09-14T17:17:01.520Z promptmatchestrue/stoptrue/noanswer",
+    "receipt": {
+      "status": "complete_exact_question_bound",
+      "session": "mir-w4-credit-attempt",
+      "capture": "32dc64",
+      "content_sha256": "5e13ec0e9354b40a9ab152f9432c9304b3ae26184e5615593e2dbc029892155a",
+      "answer_file_sha256": "7ed3c7e41a71196d89ba65bcecbe116986d58186b5e27a586b383f6586287743",
+      "full_read": [
+        "4015ac 1-220",
+        "3cab5e 221-end"
+      ],
+      "wrapper": {
+        "started": "2026-09-14T17:05:27.717014+00:00",
+        "finished": "2026-09-14T17:21:21.075486+00:00",
+        "exit": 0
+      },
+      "wrapper_collection": "f0f706 exit0",
+      "role": "read-only advice, not proof/authority/signature"
+    }
+  },
+  "weekly_quota_latest": {
+    "path": "/tmp/mirrorea-w4-20260914-a3e0bpks/QUOTA_CHECK_1804.json",
+    "sha256": "6d9f8880cfd302bbf3af7ac3b77f21fa93f3423472c724e307d69decc2ea6868",
+    "result": {
+      "checked_at": "2026-09-14T18:06:42.126872+00:00",
+      "weekly": {
+        "event_at": "2026-09-14T18:06:14.967Z",
+        "used_percent": 57.0,
+        "remaining_percent": 43.0,
+        "window_minutes": 10080,
+        "resets_at": 1789814580
+      }
+    }
+  },
+  "oracle18_followup": {
+    "active_eof": "984dda actualcounter, nativeEOFguardbuild9cebd2/audit55e409, b014c5 nonzero expectedincomplete; no implicitabandon/compute",
+    "owner_build": {
+      "build": "/tmp/mirrorea-w4-20260914-a3e0bpks/owner-budget-native-4j1ct2g0",
+      "binary_sha256": "b6ccced29d262ec8da76df28592028f4d4c0ba356ebefad966c551cdc620ecef",
+      "status": "passed"
+    },
+    "direct_regression": "3f0e09 native3successfulchildren; combinedcommandfailedmissingplaceholderauditpath. Correct selectedpath3d21c2 replay passes1542inputs, no native repeat",
+    "direct_audit_selection": {
+      "time": "2026-09-14T17:32:21.428422+00:00",
+      "controls": [
+        {
+          "selection": "omitted",
+          "exit": 2
+        },
+        {
+          "selection": "missing",
+          "exit": 1
+        },
+        {
+          "selection": "failed",
+          "exit": 1
+        }
+      ],
+      "positive": "3d21c2 actual budget102 three-case whole-byte replay; old direct success remains history",
+      "scope": "Full direct replay entry refuses before Lean when required selected audit absent/failed; no native rerun"
+    },
+    "legacy_explicit_audit": "df8b9e actual full counter then274e0e now allocated failedrun, unsupportedexplicitowner selection rejected",
+    "aggregate_counter": {
+      "time": "2026-09-14T17:25:56.046670+00:00",
+      "exit": 1,
+      "prior_result_unchanged": true,
+      "prior_result_sha256": "21b5bc9a19194d53495a1b490219534bfffb016f22a2ee787632de4604888df4",
+      "scope": "Actual complete producer early validation failure; old conventional result persists, no current success or downstream bypass claimed"
+    },
+    "required_run_control": {
+      "time": "2026-09-14T17:31:47.513194+00:00",
+      "exit": 1,
+      "new_status": "failed",
+      "old_unchanged": true,
+      "rejected": {
+        "failed_new": "AssertionError: required replay not completed or wrong selections",
+        "missing_new": "FileNotFoundError: [Errno 2] No such file or directory: '/tmp/mirrorea-w4-20260914-a3e0bpks/replay-attempts/never_allocated/RESULT.json'",
+        "wrong_historical_run": "AssertionError: required replay location"
+      },
+      "scope": "Actual full producer early missing audit, uniquely selected failed/missing runs and old result; no new Lean/native run"
+    },
+    "positive_selection": {
+      "time": "2026-09-14T17:34:38.382106+00:00",
+      "positive": {
+        "path": "/tmp/mirrorea-w4-20260914-a3e0bpks/replay-attempts/legacy_positive_1/RESULT.json",
+        "attempt": "legacy_positive_1",
+        "sha256": "c598e8d954028f1b6484671402cdd7a3886f0efc4032f15015460427a57ac794"
+      },
+      "wrong_required_selection_rejected": "required replay not completed or wrong selections",
+      "scope": "Actual successful full legacy-capture replay selected by exact unique run and independently supplied audit/case request"
+    },
+    "normal_c_a": {
+      "time": "2026-09-14T17:35:17.606163+00:00",
+      "binding": {
+        "path": "/tmp/mirrorea-w4-20260914-a3e0bpks/replay-attempts/budget_normal_1/RESULT.json",
+        "attempt": "budget_normal_1",
+        "sha256": "6e18f4c121c4b9a83afbf22bf56332e524c8797e2fb963f7808b7fb4460f6f19"
+      },
+      "owner_model": "OwnerEndpointBudget",
+      "cohorts": 2,
+      "source_inputs": [
+        397,
+        397
+      ],
+      "log_sha256": "0cfd256371d8526be6601a746e06ed06a4adc236fb8da7c57c0b0d9985ea1c9f",
+      "scope": "Exact actual C/A source105 and EOF-guarded budgetowner102 conjunction with explicit selected run/audits; not general admission/custody/network theorem"
+    },
+    "native_startup_counter": "6f7076 nativeold95cap65exit64; offlinechangedargvwholemodelpassed7974f7; startup preflight nowrefused5f45c0",
+    "remaining": "Source-enter/owner-resource coupling, physicalnamespace/custody, Rust/Core/QUIC, reproducible integration. Direct aggregate attempt identity still legacy naming; root/main validates actualcurrentreceipt+tool exit, not generalized required-run producer claim."
+  },
+  "routed_owner": {
+    "source_sha256": "6a88a1e2b2d0b614e08f5653587cdc0d647f78079b235c62fb829a55eff35009",
+    "kernel": "1c2abe exit0 standardaxioms; generated_profile/generated_guard/generated_funded_roundtrip",
+    "scope": "conditional response-context join from source StateFits/actual enter and independent stored-context/fresh/current/admitted/room/credits>=2; not proof physical binding/ownerresourceadmission or actual source completion"
+  },
+  "oracle_eof_run": {
+    "started": "2026-09-14T17:40:39.164322+00:00",
+    "session": "mir-w4-eof-run",
+    "question_sha256": "72cdb0e416d6238754ac9f856f70fea730140052cbeed7ca272d036b695c3d18",
+    "manifest_sha256": "662e3ba75d313d42643c3ba5ac68792c90e05c9cdba6b4888c2c00af9ebc5f81",
+    "status": "complete",
+    "normal_poll_min_seconds": 180,
+    "packet": "/tmp/mirrorea-w4-20260914-a3e0bpks/oracle-w4-eof-run",
+    "dry_evidence": "4fa78c exit0;37files205535bytes;65010estimatedtokens",
+    "role": "read-only material-delta advice, not proof/acceptance",
+    "receipt": {
+      "status": "complete",
+      "session": "mir-w4-eof-run",
+      "exact_capture": "4930ce",
+      "read_evidence": [
+        "a58a94 full1-205",
+        "f3aa9f full206-end"
+      ],
+      "question_sha256": "72cdb0e416d6238754ac9f856f70fea730140052cbeed7ca272d036b695c3d18",
+      "answer_sha256": "0fd21903b840111c819fa8c1e70ab2c3ac503f6e782e32db238c96095aad91d2",
+      "wrapper": {
+        "started": "2026-09-14T17:40:39.164322+00:00",
+        "finished": "2026-09-14T17:53:01.033504+00:00",
+        "exit": 0
+      },
+      "scope": "read-only independent material review; no Lean/native execution by Oracle; not authority or signature"
+    },
+    "disposition": {
+      "time": "2026-09-14T18:02:15.637249+00:00",
+      "findings": [
+        {
+          "id": "resource-consumer",
+          "status": "open",
+          "evidence": "Actual1credit source-enter/reserve16 counter6049b2 now reproduced. Bare2credit reserve-compute native positive9b81fd; no following publication/source completion claim. Oracle notes diagnostic active-freeze probe adds one, next publication needs freeze+install at all owners. Current source/owner resource coupling still conditional."
+        },
+        {
+          "id": "direct-argument-normalization",
+          "status": "repaired_narrow_gate",
+          "evidence": "b491aa actualnative +8 and fullwidth8 rejected64; 0_8 accepted0, so ASCII restriction is a narrower provisional private argv profile. Old Pythonint normalizes float8.75 too.6f405f full current direct entry rejects four mutations before generating Lean; ASCII8 reaches existing immutable artifact guard. Not a new complete altered replay."
+        },
+        {
+          "id": "native-ignored-audit",
+          "status": "repaired",
+          "evidence": "Oracle exact CLI sentinel counter, not main native reproduction. b491aa actual current CLI both native modes rejects unsupported --audit before work."
+        },
+        {
+          "id": "EOF",
+          "status": "reviewed_and_reader_verified",
+          "evidence": "SourceWorkerSupport full943fc9 distinguishes boundaryEOF from truncation;6f405f actual newowner cleanEOF0 vs oneheaderbyte/partialpayload1(short frame). ActiveEOF counter/repair retained separately."
+        },
+        {
+          "id": "required-run-reader",
+          "status": "local_call_verified_outer_workflow_open",
+          "evidence": "Main validate_run calls and checks102c43/771abf exist as commands/receipts; no saved reusable outer reader supplied. Need reproducible integration. Whole selected bound replay had no found bypass; direct conventional summaries have narrower custody contract."
+        }
+      ],
+      "non_adoption": "No new owner cancellation/resource priority/authorization policy; temporary serialized reference writer uses existing sole-pipe scope. All-entry physical source/owner custody and independent namespace not proved."
+    }
+  },
+  "owner_credit_custody": {
+    "time": "2026-09-14T18:02:15.637249+00:00",
+    "scope": "sole-writer exact credit monitor and phase-separated local custody; physical source-enter notification and all raw-entry ownership remain assumptions/open",
+    "source_sha256": "de609cc6f93937eacfc12a547752830c45d7eaa975e1e4de3dad5bd46d542a7a",
+    "proof": "70a1fe PHASE_FIRST exit0 standardaxioms; priora14df4 general monitor also passed; FIRST/SECOND FAILED no downstream use",
+    "counter": "6049b2 actual source enter with1credit→owner16;8d8a01 cancel-after-enter counter for unphased helper;8406bd duplicate fresh writer constructor counter",
+    "native": "Phase-proxy042794; finalfunded sourcecap102 real runfc6281, whole2cohort byte/argv/idle/coupling replayeb5826 PASS. Guardedwaiting source101inputs and fundedparkedsource103inputs; exact local required reader verify_credit_custody_run.py passed. Bare2creditowner has zero remaining and actualresult10; does not receive result or continue source.",
+    "helpers": [
+      "owner_credit_writer.py",
+      "source_owner_credit_check.py"
+    ],
+    "remaining": "Real source enter must go through retained-custody protocol, no bare notification-as-proof; full continuation resources and namespace/source/Core/QUIC integration not closed"
+  },
+  "oracle_credit_custody": {
+    "started": "2026-09-14T18:06:40.913239+00:00",
+    "session": "mir-w4-credit-custody",
+    "question_sha256": "c2db747a124ed992baa91089f4bce7899e7f050a8a2bc9a952befae321254e70",
+    "manifest_sha256": "f427b108f104a2bffb0e4ce03e792533238af032c6383c304b6d7282a29a92f4",
+    "status": "collected",
+    "normal_poll_min_seconds": 180,
+    "wrapper_session": 96349,
+    "dry": "7c5651 exit0;34files281878bytes71455estimatedtokens",
+    "first_capture_no_earlier": "2026-09-14T18:09:40.913239Z",
+    "captured": "2026-09-14T18:22:22.070Z",
+    "content_sha256": "70eff71e394b00f3edfac5b1f243ccd98b5a722c5ec4cf965eef3769acf611fb",
+    "answer_file_sha256": "0b0e6002ccaec6f679b64a66ff93ebbbe76f037c09e2bd8db0a04e82f0141315",
+    "wrapper_exit": 0,
+    "wrapper_finished": "2026-09-14T18:19:53.015475+00:00",
+    "full_read": "91b2a7",
+    "findings": {
+      "transaction": "lease ends at reserve; actual interference counter underway, full work interval OPEN",
+      "inflight": "source send and cancellation must share exclusion; external SourceCreditEntry/custody candidate now created, not in this review",
+      "domain": "None and repeated __init__ loopholes; simple checks repaired, full typed Python decoder remains an explicit trusted-native premise",
+      "reader": "actual copied RESULT null-audits accepted c5f60f; nonnull/mode/path binding repaired and new whole C/A replay edfbe5 plus three negatives1705de pass"
+    },
+    "failed_early_capture": "fa5521 interval guard refused before browser read; no resend"
+  },
+  "repo_owner_proof_mirror": {
+    "manifest": "/tmp/mirrorea-w4-20260914-a3e0bpks/REPO_OWNER_PROOF_MIRROR.json",
+    "files": 45,
+    "classification": "exact reviewed proof/support source, budget/Routed; native entrypoints and unreviewed CreditCustody excluded",
+    "fresh_run": {
+      "result": "/tmp/mirrorea-w4-20260914-a3e0bpks/mir-w3-reference-rkm583l3/RESULT.json",
+      "sha256": "6718ddb13cc7b87b9d045410b652e48674bcb0dd261ae209eeb540651793e0c3",
+      "status": "passed",
+      "finished": "2026-09-14T18:13:28.456298+00:00",
+      "compiled_modules": 133,
+      "audit_modules": 137,
+      "owned_declarations": 14148,
+      "source_cases": 32,
+      "integrity_controls": 13,
+      "weakening_controls": 5,
+      "publication_proof_mutants": 8,
+      "all_149_commands_exit_zero": true,
+      "manifest_sha256": "c5c435869b7b85474dae86dd9afc3a1467462306aefb24a829652650ae418ea2"
+    },
+    "command": "python3 scripts/proof_first_reference_source_check.py --work-root /tmp/mirrorea-w4-20260914-a3e0bpks --with-owner-boundary",
+    "git": "uncommitted checkpoint pending focused diff/docs checks"
+  },
+  "source_credit_entry_external": {
+    "proof": "876676 second elaboration exit0; general exact checker/declarative admission, productive entry, actual pending correlation, no cancel, funding and local invariant",
+    "source_sha256": "29289d086401101d5e4e0922fefbb96f89ac8cc9edcc87fe8213c253e0e2866f",
+    "failed": "c86a50 FIRST elaboration failed; preserved, no downstream use",
+    "nonclaims": "IPC atomicity, physical namespace, all terminal/publication notification origins and whole source resource sufficiency remain open",
+    "native": "C3751c0/A bce4ff actual4process20writes26publications5results; whole397sourceinputs each plus allowner replayedfbe5; selected reader1705de",
+    "replay_sha256": "7bc7bc28bb478068881ee4247b4dcf35d18df61c4decc793e1d95278fdab4649",
+    "classification": "external unreviewed reference coordinator; current proof mirror excludes it"
   }
 }

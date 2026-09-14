@@ -478,3 +478,11 @@ Run the fresh-copy Lean command first. Eighteen code mutations must fail at name
 general theorems after a passing baseline; logs stay in a new external directory.
 Scope and limits: `samples/lean/foundations/MirroreaProofFirstResourceComputations.md`.
 This is a proof test harness, not a runtime wrapper or alpha workflow.
+
+
+W4のqualified owner・codec・応答profile・完了用処理枠の一般証明は、既存の
+`proof_first_reference_source_check.py` に `--with-owner-boundary` を付けて
+fresh検査する（`--with-publication` を含む）。既存のW3 source検査と所有宣言監査を
+再実行する仕組みであり、native worker／QUIC／権限の発行／W4完了を意味しない。
+定義と未接続条件は [MirroreaProofFirstPublication.md](../samples/lean/foundations/MirroreaProofFirstPublication.md)、今回の結果はReport2614に記録する。
+active rootの追加や移動はない。

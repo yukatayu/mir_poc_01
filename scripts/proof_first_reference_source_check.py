@@ -92,7 +92,11 @@ def main():
                         help='existing directory outside the repository')
     parser.add_argument('--with-publication', action='store_true',
                         help='also check the nonproduction W4 publication model; no network claim')
+    parser.add_argument('--with-owner-boundary', action='store_true',
+                        help='also check W4 qualified owner/codec/resource proofs; implies publication, no native/network claim')
     args = parser.parse_args()
+    if args.with_owner_boundary:
+        args.with_publication = True
     repo = Path(__file__).resolve().parents[1]
     work_root = args.work_root.resolve()
     if not work_root.is_dir() or work_root.is_relative_to(repo):
@@ -137,6 +141,9 @@ def main():
             raise ValueError('no publication proof modules')
         for name in publication_roots + ['MirroreaProofFirstReceivedResultControls']:
             visit(name)
+        if args.with_owner_boundary:
+            for name in ['MirroreaProofFirstOwnerEndpointBudget', 'MirroreaProofFirstRoutedOwner']:
+                visit(name)
     source_scripts = ['scripts/proof_first_composition_source.py',
                       'scripts/proof_first_composition_source_check.py',
                       'scripts/proof_first_reference_source_check.py',
@@ -167,6 +174,9 @@ def main():
     if args.with_publication:
         result['classification'] = 'W3 reference plus W4 LAB publication model; no physical/distributed/durable claim'
         result['publication_status'] = 'running'
+    if args.with_owner_boundary:
+        result['classification'] = 'W3 reference plus W4 qualified owner/codec/resource proof model; no native/distributed/durable claim'
+        result['owner_boundary_status'] = 'running'
     env = dict(os.environ, LEAN_PATH=str(work), CARGO_BUILD_JOBS='1', CARGO_INCREMENTAL='0',
                CARGO_TARGET_DIR=str(work / 'cargo-target'),
                MIR_PROOF_FIRST_PARSER=str(work / 'cargo-target/debug/examples/textual_mir_alpha_parse'))
@@ -295,6 +305,8 @@ def main():
                       owned_declarations=sum(int(count) for _, count in counts))
         if args.with_publication:
             result['publication_status'] = 'passed local model only'
+        if args.with_owner_boundary:
+            result['owner_boundary_status'] = 'passed general model proofs; native resource/source custody remains separate'
     except Exception as error:
         result.update(status='failed', error=str(error))
         raise

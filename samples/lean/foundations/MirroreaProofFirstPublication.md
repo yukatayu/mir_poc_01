@@ -128,3 +128,59 @@ subsequent outcome/progress/received-result additions. The third exposed the
 waiting-tick composition bypass, verified locally. The new closed execution
 response and projection counterexample were reviewed by the fourth Oracle. The actual source/Core/owner join remains open. Oracle is advisory,
 not an executed proof, owner decision or cryptographic reviewer signature.
+
+
+## Qualified owner and bounded response extension
+
+The later W4 general proof cone is now mirrored here as LAB mechanization
+source. The earlier publication model and its accepted evidence remain intact.
+`QualifiedSource`, `QualifiedSession` and `QualifiedCustody` distinguish
+incarnation/current activation from stable caller identity and retained pending
+continuations. `OwnerImage`/`AuthorityImage`, the tree/byte codecs and their
+checker equivalences preserve the finite data and evidence bindings. They do
+not make an arbitrary imported image authoritative.
+
+`OwnerOccurrence`/`OwnerReservation` distinguish retained keys, active work and
+actual computed records. `OwnerEndpoint` adds current publication fences and
+exact same-image installation confirmation; it does not establish publisher
+identity. `OwnerResponseProfile` bounds whole encoded responses and arrivals,
+using the existing checked Int64 result and finite ordinal/profile premises.
+`OwnerEndpointProfile` checks those premises before reservation/computation and
+proves preservation, every-reply readability and a non-refusal roundtrip from
+independent current/admitted/fresh/room/rooted/profile assumptions.
+
+`OwnerEndpointBudget` preserves a final completion credit: commands that create
+or retain active work require two credits, but a funded transition spends one.
+Its budget refusal spends none. Initialization, install/reconfirmation, freeze,
+reserve, compute and abandon are all covered. Exhausted states are idle; a
+funded admitted reservation followed immediately by computation is enabled.
+`PublicationCapacity` and `PublicationLifecycle` separately retain a checked
+source publication suffix and bound the actual source replies and owner images.
+`RoutedOwner` derives the owner response guard from a generated source dispatch
+and equality with the recipient's stored context. Funding, authority, image
+identity and physical custody are separate premises.
+
+Use the existing fresh-parser/fresh-proof runner:
+
+```bash
+python3 scripts/proof_first_reference_source_check.py --work-root /tmp --with-owner-boundary
+```
+
+This implies `--with-publication`, adds the budget and routed-owner proof roots,
+and audits all owned declarations. `--with-publication` also discovers the
+new publication proof dependencies. The default W3 command keeps its original
+scope. The runner's source controls still target its W3 fragment; this flag does
+not introduce the external qualified-source adapter or claim the full Rust
+checker accepts that provisional syntax. Native worker entrypoints, raw captures
+and the new credit-custody proxy with remaining review findings are outside this mirrored
+cut. No network/process test is silently implied by a proof-run success.
+
+The new profile adds finite encoding and semantic-credit guarantees, with
+Lean4.29.1 and the same standard logical axioms as above. The supplied native
+worker/OS, sole pipe writer, fresh namespace, faithful source notification,
+authenticated current context and complete continuation funding remain physical
+obligations. Two owner credits cover the adjacent reserve/compute pair; an
+intervening diagnostic or later all-participant freeze/install needs additional
+resources. Waiting with a parked actual result is not source completion.
+Oracle reviews through19 examined the corresponding cuts; evidence and limits
+are recorded in Report2614. Oracle20 reviewed the resource-custody successor; its outstanding findings and later fixes remain external.
