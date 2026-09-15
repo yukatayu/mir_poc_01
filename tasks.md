@@ -1,6 +1,6 @@
 # Current Task Map (LAB)
 
-最終更新: 2026-09-15 07:09 JST
+最終更新: 2026-09-15 09:01 JST
 
 **Canon notice:** `mirrorea_canon/` is normative. Everything outside
 `mirrorea_canon/` is LAB; if LAB conflicts with canon, canon wins. This snapshot
@@ -27,31 +27,20 @@ does not change that accepted baseline or the Plan250 pause.
 
 ## evidence and current consumer
 
-追加した13個の非production証明候補は、既存runnerで146moduleのfresh構築・150module/14574所有宣言の公理監査とsource/反例検査を通過しました。Oracleは第26回まで回収し、実処理と通知・同じrecordを使う完全carrier証明・通信から内部記録確定までの例外処理を限定review済みです。一時的な配布待ちでの拒否後に同じ構成で値10を計算する実正例も確認しました。その後、次の通常書込みと先行freezeが旧構成のinstallを妨げる実反例を発見し、ownerごとの配布順序ガードを検査しています。現在のC/A実行と全bytes照合は通過しましたが、新ガードと部分的な世代条件の証明は未reviewです。全経路のsource/owner対応、物理namespace・現在の認証認可・既存Rust/Core/privateQUIC接続とW4全体の受理は未完了です。
+通常sourceとownerの同じ実行履歴について、通知前の世代差、現在値、設置の成立条件を一般証明へ接続しました。7追加proofを含むfresh検査は153source module・157module/14916所有宣言監査、169command全成功です。第31回Oracleまで回収し、設置成功だけではidleを導けないこと、供給された予算と全owner実残量の一致が別義務であることを確認しました。通常sourceのC/A通信全bytes照合に加え、書込みの重なりと設置済み未通知の再確認を実通信の途中状態まで再検査しました。容量1ではsourceが開始を受理した後にownerが予約を拒否する実反例が残っています。現在の直接consumerは、過去の設置事実から現在の登録・実owner世代を結ぶ証明、全公開経路のidle・予約容量・freshness・実予算の対応です。既存Rust/Core/privateQUIC・認証認可・物理namespaceの接続とW4全体の受理は未完了です。
 
-Earlier W3source81f82a0b/final5d7c13a8 and I3 actual-process/privateQUIC46case
-regressions are retained. Typed private byte/tree codecs preserve the full source,
-proof/resource/auth context, receipt and owner image. Current-source generations,
-reserved keys, actual production and recipient readability have separate general
-proofs. Exact private output/capture and public-call exclusion repairs have real
-counterexamples and passing native controls. None authenticates a physical namespace
-or establishes same-instance recovery. The existing full Rust checker rejects the
-provisional reference fragment; that consumer remains dependency-gated.
-
-Current guard candidate: require all actual owner initializations before another
-source operation; account a matching next obligation's actual payment until its
-source notification; permit unrelated administrative debit only from slack. A
-native source cost/head query supplies metadata, never permission or a receipt.
-The smallest alternative is an order-independent paid-occurrence ledger, requiring
-additional correspondence through replanning. This is a reversible private resource
-profile, not a public grammar/wire or an authority/revocation policy adoption.
+Current reversible comparison: certified-head physical future advance versus explicit
+physical-prelude reservation across source replans. Underlying source staging remains
+unchanged; wrapper scheduling traces are not equivalent. All public-entry exclusion,
+actual reply monitoring and pending notification bindings are separate from auth.
+A global staging barrier was researched and not adopted.
 
 ## ordered self-driven packages
 
 | Dependency / macro position | Current consumer / remaining gate | Startability / rough remaining estimate |
 |---|---|---|
 | W3 reference / macro1/3/5 finite cut | source/proofs/review/Git retained | closed candidate; no production/Canon promotion |
-| W4 owner boundary / macro2/3 early | actual zero-slack guard and4process continuation pass; known-refusal/complete-carrier repair and actual paid notification consumer under review; physical all-entry join open | 着手可能; provisional2–6h owner/resources +6–16h custody/history |
+| W4 owner boundary / macro2/3 early | same-history floor/image and constructive installation pass; registration/idle/room/full actual funding join open | 着手可能; provisional6–18h for remaining foundation/custody work |
 | W4 runtime connection / macro2/3 middle | actual generated owners/configuration/privateQUIC implement established meaning | 後段依存; provisional10–24h after theory gate |
 | W4 faults/integration / macro2/3 close | actual network positive/negative/observation,119dispositions/review/ownGit | 後段依存; provisional6–14h |
 | W5/W6/W7 / later | same-instance recovery, secret observation/resources, integrated alpha | 後段依存; outside this request |
@@ -88,7 +77,7 @@ retirement choice actually requires owner values; do not infer approval.
 | Private source state | exact prepared base under exclusive actor custody versus commit-time reevaluation; equal owner image is insufficient for private state equality |
 | Source admission | fixed caller/member/principal fails leave/rejoin/current admission; source initiation/adoption and prepared receive/cancel need distinct predicates |
 | Actual provenance | codec scope/ticket/value does not establish authenticated owner production; bind real endpoint/cohort/record and private pending |
-| Resources | finite bounds/exhaustion, checked allocator/no reuse, retained reservations; no timeout reopening or silent history eviction |
+| Resources | actual capacity1 entry-before-reserve refusal; derive room/freshness and full actual credits before source admission; no constant-only repair, timeout reopening or silent history eviction |
 | Driver failures | reserved→compute→record→output with namespace termination versus forgetting the request after one-shot failure; no stored-result replay |
 | Runtime embedding | W3 ordinary reference source differs from old I3surface_v0; actual source/Core/edge/transport correspondence must be proved, not expected-JSON joined |
 | Recovery / policy | fresh cohort is not same-instance recovery; finite image cannot restore arbitrary future policy; Q18 remains conditional |
@@ -97,13 +86,13 @@ retirement choice actually requires owner values; do not infer approval.
 
 Keep one Report2614; closed Reports2611–2613 unchanged. Synchronize existing
 plan/status/sample dashboards and119dispositions as evidence changes. No new
-sample root/taxonomy/roadmap has been adopted. Current own LAB status/plan/ledger/report followups are dirty; later native/query
-and credit-guard code remains external pending review and integration. The earlier
-reviewed45file proof mirror is committed/pushed at96746e20 with remote parity.
-No Canon, public contract or Rust implementation edit. Serial4GiBchildren;
-latest measured41GiB root free/8.9GiB RAM available; no external work mount.
-No cleanup or Chrome settings change. Weekly quota is checked >=1h apart;
-35%remaining observed22:11:33UTC, next>=23:11:33UTC, approximate safe stop near30%.
+sample root/taxonomy/roadmap has been adopted. Prior13-module proof integration
+is committed/pushed7732d188 with remote parity. Seven additional LAB proof files,
+runner and status mirrors are own dirty work; no Rust/Canon production changes.
+Serial4GiB children; measured40GiB root free/7.0GiB RAM available; no external
+work mount, cleanup or Chrome settings change. Latest weekly remaining34%
+at23:12:01UTC (checked23:12:18); next check>=2026-09-15T00:12:18UTC. Approximate
+safe stop near30%, checks>=1h. Oracle1–31 and fresh7 verification are collected. Work continues on the remaining actual-state and resource consumer.
 
 ## non-promoted references
 

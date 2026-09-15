@@ -896,3 +896,196 @@ No Canon/THM/OBL/119acceptance or W5/I3-4 activation. Weekly37% last21:10:18UTC;
 next>=22:10:18UTC. W4 remains active and incomplete.
 
 2026-09-14T22:13:12.634601+00:00 — integration check: all13 mirrored sources and runner match the freshly validated copies; no semantic delta after146/150/14574 pass. No-reply after6fdb3c now confirms0source/0ownerframes/live. Latest quota614cf0 is35% at22:11:33UTC, next>=23:11:33UTC; continueW4. Docs/source-hierarchy check751aa4 passed before final snapshot edits; final check starts now. This own conditional-proof candidate is prepared for commit/normalpush, neither W4 close nor adoption of the later unreviewed phaseguard. No subagents or skipped required formal checks.
+
+
+### 2026-09-14T22:36:37.559959+00:00 — actual owner monitoring and second phase counter
+
+The fresh13proof/runner candidate was committed as7732d188 (55e25b), normal-pushed
+492483 and verified remote parity/clean ca7def; final docs validation41fdd3/01f450
+passed. No phase/W4/Canon acceptance follows from this conditional proof mirror.
+
+Main actual-native waiting prefixaa5baa shows sourcepub9 with target2/current9;
+stagecancel accepted0 announces10 while committedpending remains. Off-head actual
+freeze10 returns12; sourceenter accepts0/headfinishquerytrue, then actualreserve14
+retires. No fake native reply. This is different from earlierREADY/debt counter.
+Guard78cef7 consults actual retained successful freezes before generatedenter;
+refusal emits0frames and same context completes cancellation publication/install10.
+Current19970858... fullC/A normalcontinuations982b93 andrawreplay1eceaa pass;
+independent requiredreader9e5420 rejectswrongmode. RESULT0227f5629f9c255eb1f99b7af4841d3b8a215ab600c1017dbd9bc270b1421c7f.
+
+Oracle27 mir-w4-phase-custody submittedonceb7570e at22:22:47UTC; final5c29c4,
+wrapperdd3136exit0, fullread5d76f2/485534. Its independent conditional waiting-update
+counter matches the main's later actual cancellation witness. It correctly limits
+Phase to projections, distinguishes historical install facts from current usability,
+and flags unvalidated owner-slot arguments. It inspected28attachmenthashes/6AST/
+reversedpatch only, no kernel/native/test execution, missing imports listed. No
+independent signedreview/authority/acceptance. Old27packet does not cover newrepair
+or monitors. Pollguard deniedd37865/760a2f beforebrowserread; actualreads spaced>=180s.
+
+New external OwnerFenceMonitor proves actual endpoint/profile/budget transitions,
+ALL-command traces and successful-freeze evidence monitor exactly;11general lemmas
+THIRD6f96fa. OwnerImageMonitor similarly tracks completeimage/revision and couples
+it with the SAMEtrace fence monitor. Its executable usability checker is equivalent
+to actual owner revision/image/fence correspondence;11generallemmas THIRD1f1116.
+These remove a need to assume tracked ownerstate is truthful. They are not whole
+source/physical-current-authority preservation, and are not yet repo-mirrored or
+reviewed. A failed generic max lemma name and failed retained-equality step are
+preserved; no failed elaboration placeholder counted as proof. Standardaxioms only.
+
+No production/Rust/Canon or public policy changed; native artifactsunchanged.
+W4continues on actual owner entry/constructor correspondence; W5/I3-4inactive.
+Only currentW4_CHECK/RESUME/report forward evidence updated here; same plan/status
+milestone remainsactive, no taxonomy/sample readiness/119disposition promotion.
+No subagents. Weekly35% at22:11:33UTC, checks>=1h; safe stopnear30 stillpending.
+
+
+### 2026-09-14T23:28:58.142619+00:00 — joint floor history and exact installation confirmation
+
+通常sourceから動く4process参照実装について、ownerの実際のimage・世代と、sourceの残り手順との対応を検証中です。観測から実owner状態を導く一般証明と世代通知の対応を追加し、fresh150module構築・154module/14770所有宣言監査、source32・整合性13・弱化5+8を通過しました。旧版installを必須にするガードが再計画後に進行を妨げる実反例を確認し、sourceの次の要求に従ってfuture freezeを進める候補へ変更しました。通常source・通信全bytes照合・余裕のない予算での設置再確認が通っています。第29回Oracleまで回収済み。通知前の途中状態を含む共同履歴の8一般定理もLean検査済みで、追加fresh検査と第30回reviewを実行中です。全経路のimage・idle・資源・現在の認証認可・物理namespaceと既存Rust/Core/privateQUIC接続、W4全体の受理は未完了です。
+
+Own baseline7732d188 is normally pushed/parity; five new proof sources, existing
+runner and current docs are now dirty, all LAB. No Rust/Canon/handoff change.
+Four-module fresh run252a7b passes150compiled/154audit/14770owned,166commands all0;
+RESULTc461120dd0a73ea5e3c047ba12f0e5e08656ed108c6325110d71b071bd963cc2.
+No native or whole-physical conclusion follows. The new eight-theorem joint floor
+fileSIXTH522827 has standard axioms only; first/second/fourth/fifth elaboration
+failures are retained and excluded. THIRD six-theorem cut89edaf passed, then the
+constructive consumer was added. New fresh runner session49310 is still RUNNING.
+
+Oracle28 finalae7389/full57513d/8b1c16 disposition: monitor/gate currentness scoped;
+phase-prelude resources/sourcequota/order remain separate. Actual wrong-slot6d6a2c
+and constructor1e183f sixmismatches0children/frozenargs are independently verified;
+image-monitor currentC/A and fullreplay7fde042… are historical before head guard.
+Actual replanning countera34af8 leaves owner0B=D18; old registration guard blocks
+both necessary freeze2 and unbudgeted oldinstall1. Head-only candidate971614 skips
+oldinstall1 and completes pub/install2 (host89f5cb differs only diagnostic wording).
+Global staging barrier04df14 and14general NoOverlap laws1e4086 remain unadopted.
+
+Current43c9b1…/writer86d88c… C/A and full raw replay065264 pass. Independent
+requiredreaderade482 accepts RESULT99ae81ccbd17bbea0eb4325e6145573d363fd8c6e42cb99f309268dcf570cab0,
+rejectswrongmode. Old packet29's RUNNING text remains accurate at its freeze time.
+Oracle29 final7b1663/wrapper121dfeexit0, full84f1a1/a48615/9398c3; questionc172ad…,
+manifest331930… with exact full hashes inW4_CHECK. Static27hashes/AST/patch only,
+no supplied tests/Lean/native/replay executed. No continuing view-only advancing
+freeze bypass found; actual probe bypassesheadquery but requires busy2 orretires.
+Retained facts are repeatable evidence, not linear payment events or credit refunds.
+Wrapper schedules change, underlying source transition rules remain. No public
+priority/immediate-revocation/authority policy or signed acceptance is inferred.
+
+New actual confirmation129105: offheadowner1install7 unnotified,492legitimate
+initialize1 debits, then owner1requiredhead atB=D17; exact7 consumesonecredit,
+four unrelated pending entries rejected0IO, matching notice succeeds. Finalpub1;
+old truthful install notice source0/publicationunchanged/noownerIO. All4normalEOF0.
+Strict overlap0b56ba accepts nextwrite and completesbothrounds; it fixes the old
+stale early-advance comment and fails if required overlap is refused. These two
+new traces have not been fully replayed; native captures remain retained. No
+claim source semantic quota is tight or future source program completed in them.
+
+SourceOwnerFloor defines actual joint source/owner events with explicit pending
+freeze; proves source numerical reachability, successful-freeze history and
+actualfloor=max(logicalfloor,pendingrevision). Clean equality/upper/lower bounds
+follow. Positive funded_head_freeze derives the previous independent floor bound
+and constructs actual-model12 plus accepted source notice and restored Runs.
+Idle/source certification/credits/target binding remain independent; full vector
+actuality, core/image/registration, reserved-key freshness, capacity, auth and host
+call-graph refinement are separate. Pending installation is floor-framing; work
+includes its actual failed-freeze probe. No general success follows from head
+query or this projection alone. New file mirrored as LAB, pending fresh/review.
+
+Oracle30 submittedonce466f7b23:25:21Z, wrapper67429, mir-w4-joint-floor;
+Qd560aa418cfb1986ba8522cbbdda27e15bf520b8344ff70ac44b87ffc9e136a2,
+manifest45d049092d68a85b27d2fddc649c51c16d2c61a0b43917ce44f0134243d8a7fb.
+Firstcapture>=23:28:22UTC, no arbitrarydeadline/retry. An earlier attemptdf9240
+to capture29 too soon was blocked beforebrowserread; actualcaptures spaced>=180s.
+
+plan/Documentation/project-status/progress/tasks/samples_progress and sample/script
+explanations synchronized. No new report/root/taxonomy,119dispositions unchanged.
+Mandatory full corpus remains incomplete, ledger331/next332; indexes and truncated
+outputs not counted as full reads. Resource7550c3:40GiBdisk/7.0GiBRAMavailable,
+serial4GiB children; no OOM/Chrome changes/cleanup. Weeklybe44b0 observed34% at
+23:12:01UTC, checked23:12:18; next>=00:12:18UTC. Latest estimate24–60activehours,
+low confidence, not an oracle deadline or proof of fraction completed.
+No W4 completion or required native Rust/QUIC tests skipped as successful. Own
+checkpoint commit/push and final docs validation pending. No subagent sessions.
+
+
+### 2026-09-15T00:01:51.523408+00:00 — joint current image, constructive installation and actual capacity counter
+
+通常sourceとownerの同じ実行履歴について、通知前の世代差、現在値、設置の成立条件を一般証明へ接続しました。7追加proofを含むfresh検査は153source module・157module/14916所有宣言監査、169command全成功です。第31回Oracleまで回収し、設置成功だけではidleを導けないこと、供給された予算と全owner実残量の一致が別義務であることを確認しました。通常sourceのC/A通信全bytes照合に加え、書込みの重なりと設置済み未通知の再確認を実通信の途中状態まで再検査しました。容量1ではsourceが開始を受理した後にownerが予約を拒否する実反例が残っています。現在の直接consumerは、過去の設置事実から現在の登録・実owner世代を結ぶ証明、全公開経路のidle・予約容量・freshness・実予算の対応です。既存Rust/Core/privateQUIC・認証認可・物理namespaceの接続とW4全体の受理は未完了です。
+
+Baseline main7732d188; seven new Lean modules plus runner/current docs are own
+changes. No Rust/Canon/handoff-original or other user work changed. The earlier
+five-module run completed71ae33/ba5094 as151compiled/155audit/14850owned, RESULT
+4bfd321dadb947e9fb0bd10a95858392fd9549232fd62856408f9a1f2db6028c. Historical
+shared-capacity proof and all failed drafts remain external and unchanged.
+
+Current SourceOwnerFloor uses capacity(i); SourceCurrentFrame proves actual
+current-value framing or strictly newer publication; SourceOwnerImage derives
+core revision<=publication and exact complete image at equality from the SAME
+actual joint history. Independent declarative image guard and checker agree.
+Constructive funded_head_install derives physical fence/older-or-exact image
+from logical head plus that history, then constructs actual-model install7 and
+accepted source notice. It retains records/reservations and requires independent
+idle, complete target state/credit, certified lifecycle and covered supplied vector.
+SourceOwnerImage10 INSTALL_SECOND86eb43 passes; prior implicit-binder/draft failures
+remain excluded. No proof holes or Mir axioms. Full source hashes inW4_CHECK.
+
+Fresh800be1/25c917 RESULT /tmp/mir-w3-reference-nb1v8p7n/RESULT.json SHA
+2647fd9337e25afbd05282ec97c48c2789828a82800e835a45d7f5ea4c395c99 passes
+153source+4generated compiled/157audited/14916owned,169commandsall0/source32/
+integrity13/weakening5+8. e5cae4 checks final logs, generated artifacts and seven
+repo proof hashes against the fresh manifest. Two unchanged proof baselines pass;
+three designated semantic mutants fail the general image/pending invariant
+(af3e4c). Fixed controls are not substituted for general proofs. Lean4.29.1
+--trust=0; axiom allowlist propext/Classical.choice/Quot.sound. Native binaries
+remain old separately audited source110/owner102; they do not inherit this audit.
+
+Oracle30 finala759ee/wrapper84adf5exit0: literal8 floor claims not falsified;
+heterogeneous factory parameters required per-owner capacities; source/current
+projection is not whole lifecycle; supplied credits are not the actual vector;
+registration/image/idle stronger claims not established. New capacity vector and
+image proof respond; registration/idle remain open. Oracle31 mir-w4-joint-image
+submittedonce89935623:43:44Z, Q67f709527075057483efd521acbe4680a886d702b7c8c3b7c14061268d485ec1,
+manifest8c711b6bc3b4a402ff82a07edbd124dbd745166963bb5e01afd384f164c7f6c5.
+Finalaaf255/4e428ewrapperexit0 finished23:56:31Z, read15af6f/4dc38b. Static32hashes/
+6AST/6patchhunks/log consistency only; no supplied programs/Lean/native/replay.
+No literal false/circular8/3/10 claim found. It reiterates active-owner install7
+confirmation, missing retained-install registration proof, full lifecycle/vector
+binding and separate reservation-room obligation. Advice is not proof/signature/
+owner authorization. Source snapshot equality after old notice does not preserve
+source quota; that notice consumes one source command.
+
+Strict heterogeneous8/9/10 confirmation5d7e8c requires actual offheadinstall7,
+492extra init1debits then headowner1B=D17/confirmation7/credit16, five pending
+mutators0IO including truthful same-kind wrong-targetnotice, matching notification
+accepted and oldtruthfulnotice status0. All4normalEOF0. Ordinary-source overlap
+0b56ba requires the nextwrite to succeed and both publications/installations to
+complete; no refused-write path is counted positive. New ready-prefix raw
+replayabd59b/abc654 passes all actual bytes/argv, not complete programs.
+RESULT0f6056d12aa715c1004e07c2dc58d54a60a63bc9ee5699ecef1da5d1451f1d66,
+requiredreadere5cae4 rejects wrong source mode. First18c695 failed before replay
+on missing descriptive publisher_reply_codec. Original receipt/captures preserved;
+new attempt explicitly derives codec from selected audited native mode. First
+reader control2af970 expected ValueError but actual assertion raised; corrected
+catch e5cae4, no replay rerun. Old fullC/A replay99ae81… remains separate history.
+
+Postpacket capacity1 actual probe44744a: source accepted0 atpublished13/held and
+dispatch present, owner2 reserve returned exhausted5. Normal invocation failed,
+not a passed continuation. Receipt2fa63ddbfa600d2cd4b239c2da686f43da8fa42359c4cc4cefaad5d0559903d1.
+All4children were killed by known helper cleanup after exception (-9); pre-reap
+sleeping states/CPU and finally path inspectedafd3d3/f56f97. No normalEOF or OOM
+claim. This is a concrete room obligation, not a falsifier of the conditional
+image/credit proofs. No constant increase/history eviction or capacity fix made.
+Next consumer remains retained installation/monotone core, public-boundary idle,
+then actual freshness/room/full lifecycle and vector correspondence.
+
+plan/Documentation/project-status/progress/tasks/samples_progress and existing
+sample/script notes updated. No new report/root/taxonomy.119dispositions and
+acceptedW1–W3/I3-3 unchanged; W5+/Plan250/I3-4 inactive. Full reading ledger331,
+next332; mandatory corpus incomplete. Final docs validation and own focused Git
+commit/normalpush pending. No subagents or required skipped check labeled success.
+Latest quota34% at23:12UTC; nextcheck>=00:12:18UTC. W4 is still incomplete.
+
+2026-09-15T00:06:49.436653+00:00 — capacity-only forward control19587a/4ce209/53853c changes only owner2 capacity8→0. Same source/binaries/other owner8/8/sourcequota512: actual sourceenter0 atpub9 (source frame241), thenowner2reserve5 (frame20). Four subsequent public views (source tick/invoke, owner initialize/freeze) reject cohort retired with0 additional frames before cleanup. Original invocation remains failed; rawreceiptfaceb81a1533945dfe80e2e886f8a4a827a52b3a92754b99ffc213043e6a768d; all4 supervised cleanup -9, notnormalEOF. No runtime edit or capacity fix. This instantiates Oracle31’s discriminator and verifies the continuing boundary fails closed. Further reading69198f/7870d7 finds unrestricted OwnerReservation.install can change revision arbitrarily; monotone core must be proved at actual worker/endpoint/profile/budget transitions whose installation guard requires a strict increase, not from the broader reservation Step alone. No new theorem claimed. Resource95bbc8/3885e9:40GiBdisk/11GiBRAMavailable.
+
+2026-09-15T00:08:02.192092+00:00 — documentation/source-hierarchy validation eb5b09/6f3fcd exits0,1764 reports. Seven mirrored proofs match fresh manifest and reviewed cut; main read/checked exact floor/image/source cases and runner root. No semantic source change after fresh result. Preparing own21path conditional LAB commit and normal push; W4 remains incomplete.

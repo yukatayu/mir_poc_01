@@ -1,6 +1,6 @@
 {
   "schema": "proof-first-w4-check-v1",
-  "timestamp": "2026-09-14T20:37:57.218589+00:00",
+  "timestamp": "2026-09-14T23:28:58.142619+00:00",
   "base_head": "5d7c13a821c912d14c347775e23493a77f790768",
   "status": "active nonproduction research; no W4 or Canon acceptance",
   "work_root": "/tmp/mirrorea-w4-20260914-a3e0bpks",
@@ -1181,8 +1181,14 @@
     "nonclaim": "no durable commit/recovery/liveness/authenticated provenance"
   },
   "docs_validation_current": {
-    "status": "passed_before_later_work_checkpoint",
-    "evidence": "c26695 exit0 OWNER_MIRROR_DOCS_CHECK.log1764reports; focuseddiffbbe016/stagedcheckea23c1"
+    "status": "passed",
+    "command": "python3 scripts/validate_docs.py",
+    "exit": 0,
+    "collection": "eb5b09",
+    "log": "/tmp/mirrorea-w4-20260914-a3e0bpks/JOINT_IMAGE_DOCS_FINAL.log",
+    "log_sha256": "9411ce6df198430b0df20ebab3882faf2425318d3ed1ee85e5f11ed17175a116",
+    "reports": 1764,
+    "scope": "current proof and snapshot docs; post-run evidence/status bookkeeping separately diff-checked"
   },
   "oracle_custody_retry": {
     "session": "mir-w4-custody-retry",
@@ -3941,18 +3947,13 @@
     "pending_loss": "owner81be58 and sourcea41d9e passactualsuccess-thenlostreply: all5publicentriesretired0frames; intentionalprefixnormalEOF; firstsourcewrongwrappermatcherretained"
   },
   "latest_weekly_quota": {
-    "checked_at": "2026-09-14T22:11:33.032856+00:00",
-    "weekly": {
-      "observed_at": "2026-09-14T22:11:13.560Z",
-      "window_minutes": 10080,
-      "used_percent": 65.0,
-      "remaining_percent": 35.0,
-      "resets_at": 1789814580
-    },
-    "next_check_at_or_after": "2026-09-14T23:11:33.032856+00:00",
-    "status": "observed own-session event"
+    "checked_at": "2026-09-14T23:12:18.289006Z",
+    "observed_at": "2026-09-14T23:12:01.581Z",
+    "remaining_percent": 34,
+    "window_minutes": 10080,
+    "receipt": "/tmp/mirrorea-w4-20260914-a3e0bpks/QUOTA_CHECK_2312.json"
   },
-  "next_weekly_quota_check_at_or_after": "2026-09-14T23:11:33.032856+00:00",
+  "next_weekly_quota_check_at_or_after": "2026-09-15T00:12:18.289006Z",
   "oracle24_dispositions": {
     "session": "mir-w4-funding-custody",
     "collected": "2026-09-14T21:09:46.653081+00:00",
@@ -4062,7 +4063,7 @@
     "status": "five general theorems kernel-checked; post25 freeze and unreviewed; no physical all-entry invariant claim",
     "direct_consumer": "construct actual freeze/install, including exact reinstallation, plus matched source notification from certified old suffix and independent owner phase conditions"
   },
-  "last_snapshot_sync": "2026-09-14T21:41:07.206641+00:00",
+  "last_snapshot_sync": "2026-09-15T00:01:51.523408+00:00",
   "oracle26_final": {
     "session": "mir-w4-commit-interval",
     "collected": "2026-09-14T22:09:37.415914+00:00",
@@ -4194,5 +4195,541 @@
     "after": "6fdb3c",
     "current_cohort_sha256": "efc83d5e946c701be837fee6b4dad834b46f2e4473642e05dbaba503f583a3fa",
     "status": "0source/0ownerframes; context remains live; first failed edit/test retained"
+  },
+  "oracle27_final": {
+    "session": "mir-w4-phase-custody",
+    "question_sha256": "8fb0c0bb47c78340cbc5100c9a745e4b57ed05a0f7084253cab62f131249e420",
+    "manifest_sha256": "9964b7ce8a1cf62c4c63662707dd8b3e3ff2f689b1b906bb718ef4516676a96b",
+    "answer_file_sha256": "007bcc01a66177253718a1a490db57104379d4f86323815086baa150597ff39d",
+    "wrapper": {
+      "exit": 0,
+      "finished": "2026-09-14T22:33:35.216737+00:00"
+    },
+    "final_capture": "5c29c4",
+    "full_read": [
+      "5d76f2",
+      "485534"
+    ],
+    "limits": "28 manifest hashes,6 Python AST,patch reversal only; no Lean/native/module/test execution; missing dependencies explicit",
+    "dispositions": {
+      "offhead_waiting": "main independently reproduced aa5baa with actual cancel stage9->10, owner2freeze12, sourceenter0/reserve14; repaired78cef7 zeroIO and same-context cancellation completes10",
+      "phase_scope": "accepted as partial projection only; no registration-to-physical-currentness inference",
+      "constructor_assignment": "actual discriminator afcbc3 running; not yet a counter until collected",
+      "current_projection": "new main all-command fence/image monitors are outside review27; next delta review required",
+      "global_barrier": "insufficient for waiting-state off-head gap; no public policy adopted"
+    }
+  },
+  "funding_mirror_git": {
+    "head": "7732d188149f5994f7011ff8ec6448c8c3ef76cb",
+    "commit": "55e25b",
+    "push": "492483",
+    "parity": "ca7def",
+    "dirty_at_parity": "clean",
+    "final_docs": "01f450/41fdd3 exit0,1764reports"
+  },
+  "pending_phase_counter": {
+    "before": "/tmp/mirrorea-w4-20260914-a3e0bpks/COHORT_PENDING_PHASE_BEFORE_CHECK.json",
+    "before_sha256": "d95535589ff55314bf84fbf96672092eaf254d4f1d7e8e1302ee65884df7c9f8",
+    "after": "/tmp/mirrorea-w4-20260914-a3e0bpks/COHORT_PENDING_PHASE_AFTER_CHECK.json",
+    "after_sha256": "847fd83da90805c8a320c6c2447fa29b7bf95225f651c7b6ad8526a8738868f7",
+    "current_cohort_sha256": "19970858e7b41babf3f8f08f89242ed8144a0f72ef453613d0328176020fdcf2",
+    "status": "actual before/after; external unreviewed",
+    "native_replay_reader": {
+      "positive": {
+        "path": "/tmp/mirrorea-w4-20260914-a3e0bpks/replay-attempts/source_fence_monitor_1/RESULT.json",
+        "attempt": "source_fence_monitor_1",
+        "sha256": "0227f5629f9c255eb1f99b7af4841d3b8a215ab600c1017dbd9bc270b1421c7f"
+      },
+      "wrong_mode_rejected": true,
+      "scope": "independent required selection; actual-freeze guard C/A bytes, not general physical simulation"
+    }
+  },
+  "actual_owner_monitors": {
+    "OWNER_FENCE_THIRD.json": {
+      "time": "2026-09-14T22:28:18.063225+00:00",
+      "exit": 0,
+      "source_sha256": "36f5a10459d49f03cbea37abfc714d72817fd1d2c68975543966b69db194268f",
+      "log": "/tmp/mirrorea-w4-20260914-a3e0bpks/OWNER_FENCE_THIRD.log",
+      "log_sha256": "7a426b4e7e97c69081620ceecb92098660c8eae140ef8f497c1b4e72226e8266",
+      "scope": "general all-command actual budget-owner fence tracking; not whole source-owner relation"
+    },
+    "OWNER_IMAGE_PROJECTION_THIRD.json": {
+      "time": "2026-09-14T22:33:43.760489+00:00",
+      "exit": 0,
+      "source_sha256": "a65f238288314c7140eddb72ca274d00c1a9e34b92434a66c1bbd8f54d4a0b99",
+      "log": "/tmp/mirrorea-w4-20260914-a3e0bpks/OWNER_IMAGE_PROJECTION_THIRD.log",
+      "log_sha256": "d2342b7af8a2b8cb8ead4e1e168239d5169612a7383c8e67025e659d2c5a1fa0",
+      "scope": "general all-command actual budget-owner image/revision tracking; not whole source-owner relation"
+    },
+    "limits": "external new general all-command projection/trace checks; not yet fresh repo audit, Python formal refinement, physical namespace/current auth or W4 acceptance"
+  },
+  "observed_owner_host": {
+    "cohort_sha256": "f0057d803d1f5008d0704216aac20e5ae013738c5ffa4a9c654bc7599fbf884c",
+    "writer_sha256": "86d88c568a3941d47b32447e626ad8b643ac5e91f9ab4912289da9a0f7b9376c",
+    "source_owner_gate": {
+      "time": "2026-09-14T22:41:15.870136+00:00",
+      "exit": 0,
+      "source_sha256": "40d939056452fa49d643aa817562c55f1da7556140d204dea37e5c9cb180bb57",
+      "log": "/tmp/mirrorea-w4-20260914-a3e0bpks/SOURCE_OWNER_GATE_SECOND.log",
+      "log_sha256": "de59c98314e145e4b08b340672923b19d1e5737b8c08a4e5bc2976b61a92a399",
+      "scope": "source-enter logical gate plus actual owner monitor; no authentication or whole liveness theorem"
+    },
+    "regression_checks": [
+      {
+        "test": "/tmp/mirrorea-w4-20260914-a3e0bpks/image_monitor_cohort_next_round_fence_check.py",
+        "source_test_sha256": "b27d7443c349dfcfaf075f0c959df0ed9975154bf799535701af1c6027ac14c4",
+        "exit": 0
+      },
+      {
+        "test": "/tmp/mirrorea-w4-20260914-a3e0bpks/image_monitor_cohort_pending_phase_check.py",
+        "source_test_sha256": "7ab5f975355f91e587e3c2b4cae00ac9bf351eaf8f7c1156481866527da7964a",
+        "exit": 0
+      },
+      {
+        "test": "/tmp/mirrorea-w4-20260914-a3e0bpks/image_monitor_cohort_refusal_then_work_check.py",
+        "source_test_sha256": "9960964c20c40ea3629885c3b2128ca91eaeb74c42ec60b6820b86e7b424af9f",
+        "exit": 0
+      },
+      {
+        "test": "/tmp/mirrorea-w4-20260914-a3e0bpks/image_monitor_cohort_missing_reply_check.py",
+        "source_test_sha256": "8801c6766628f1b5694d84682457ebce5c2ff1785300b419938548ef8ff75634",
+        "exit": 0
+      },
+      {
+        "test": "/tmp/mirrorea-w4-20260914-a3e0bpks/run_image_monitor_continuations.py",
+        "exit": 0
+      }
+    ],
+    "replay_reader": {
+      "positive": {
+        "path": "/tmp/mirrorea-w4-20260914-a3e0bpks/replay-attempts/source_image_monitor_1/RESULT.json",
+        "attempt": "source_image_monitor_1",
+        "sha256": "7fde042046e272d120d6983b12afa31012444bf22562d6a7e1e83f8c5ed8fe36"
+      },
+      "wrong_mode_rejected": true
+    },
+    "constructor_negative": {
+      "state": "passed",
+      "scope": "Reject a mismatched startup slot before any child process/capture exists.\nThen the same selected artifacts run a valid ordinary source continuation.\n",
+      "cohort_sha256": "98591100443bfdb50cf3487374c59a9407a4a00918dd99ade18e8c5328b13364",
+      "test_sha256": "f7bab7632c80f3dfb7b3b62b573ec8d02ca34e80a295e9e3e41e2cdfe3959b2d",
+      "started": "2026-09-14T22:38:07.910001+00:00",
+      "cases": [
+        {
+          "case": "wrong_place",
+          "new_native_processes": 0,
+          "capture_files": 0
+        },
+        {
+          "case": "wrong_realm",
+          "new_native_processes": 0,
+          "capture_files": 0
+        },
+        {
+          "case": "wrong_places",
+          "new_native_processes": 0,
+          "capture_files": 0
+        },
+        {
+          "case": "wrong_members",
+          "new_native_processes": 0,
+          "capture_files": 0
+        },
+        {
+          "case": "wrong_scope",
+          "new_native_processes": 0,
+          "capture_files": 0
+        },
+        {
+          "case": "wrong_capacity",
+          "new_native_processes": 0,
+          "capture_files": 0
+        }
+      ],
+      "immutable_launch_arguments": true,
+      "finished": "2026-09-14T22:38:07.911754+00:00"
+    },
+    "replanned_debt_counter": "/tmp/mirrorea-w4-20260914-a3e0bpks/COHORT_REPLANNED_DEBT_CHECK.json",
+    "status": "external delta under Oracle28; physical future prelude funding remains open"
+  },
+  "oracle28_final": {
+    "session": "mir-w4-observed-owner",
+    "question_sha256": "05cb5528a740e94bd256862543a15a5ee62ca87fe0c0e7d807a293df851480fa",
+    "manifest_sha256": "a93ec5f336db24cab4f6c905b0de017ada8832fee19d44bc4825e16186193055",
+    "answer_file_sha256": "a0f070ffbd44e15a6dd0f23e43e1c83e4a69070e77a960c9cf0255a0ea354e23",
+    "wrapper": {
+      "exit": 0,
+      "finished": "2026-09-14T22:59:45.547258+00:00"
+    },
+    "final_capture": "ae7389",
+    "full_read": [
+      "57513d",
+      "8b1c16"
+    ],
+    "limits": "manifest/Python AST/patch inspection only; no Lean/native/test execution",
+    "dispositions": {
+      "currentness": "no in-premise defect found; actual-image/floor monitor and source-enter consumer remain scoped",
+      "replan": "actual counter confirmed; simple extraownercredit insufficient withoutsourcequota/ordering/paidnotification",
+      "diagnostic": "changed beyond to differs in newheadcandidate",
+      "staging_barrier": "researchalternative tested andNoOverlap mechanized, NOT adopted; avoid newdelayofauthority/control staging",
+      "head_freeze": "new smaller alternative preserves source stage/arrival admission and uses existing paidhead discipline; post28 separate reviewrequired",
+      "remaining": "whole physical source/owner history, actual assignment binding, idle/fresh/room/profile/currentauth/nativecodecprojection remain distinct"
+    }
+  },
+  "oracle29_final": {
+    "session": "mir-w4-head-freeze",
+    "question_sha256": "c172ad5ae7e0a07aaf9e58f2d0bdf0eb9218fb5d247ed03c015ab6a9aadd1df7",
+    "manifest_sha256": "33193035600529e98c44a1e9a12e2c39342941a8d8227795c3c255cf1ff39188",
+    "answer_file_sha256": "ff270080b88b5d3ef3f99d4d8cebb8f635e2a976e74802ad1bf84bf3367ae443",
+    "wrapper": {
+      "exit": 0,
+      "finished": "2026-09-14T23:18:06.313744+00:00"
+    },
+    "final_capture": "7b1663",
+    "full_read": [
+      "84f1a1",
+      "a48615",
+      "9398c3"
+    ],
+    "limits": "27 manifest hashes, static source/AST/patch inspection; no supplied code, Lean, native tests or raw replay executed",
+    "dispositions": {
+      "head_guard": "no continuing view-only query-profile bypass established; no universal prefix enabledness claim",
+      "probe": "actual generated future-freeze probe bypasses head query but requires busy2 or retires; explicit failedFreeze case in new floor relation",
+      "old_facts": "truthful repeatable facts, not linear occurrence credits or refunds",
+      "prelude": "exhibited oldinstall1 prerequisite removed; B=D witness binds owner0 only, not tight source quota",
+      "confirmation": "new actual offhead install1 then at-head exact confirmation B1=D1=17 passed129105; four pending mutators rejected0IO, oldfact source0 accepted unchanged0ownerIO",
+      "test_narrative": "strict successor test fixes stale comment and makes rejected ordinary overlap a failure; old positive receipt remains historical",
+      "authority": "private source transition rules unchanged; wrapper schedules/credit histories differ; no external timing/revocation/priority contract adopted",
+      "next": "joint history deriving currentness, head enablement, idle/fresh/capacity and assignment; new floor proof separate review"
+    }
+  },
+  "owner_monitor_mirror_fresh": {
+    "path": "/tmp/mir-w3-reference-t6u7bbch/RESULT.json",
+    "sha256": "c461120dd0a73ea5e3c047ba12f0e5e08656ed108c6325110d71b071bd963cc2",
+    "compiled": 150,
+    "audit_modules": 154,
+    "owned_declarations": 14770,
+    "commands": 166,
+    "all_exit_zero": true,
+    "source_cases": 32,
+    "integrity_controls": 13,
+    "weakening_controls": 5,
+    "publication_proof_mutants": 8,
+    "scope": "four monitor/gate/fence modules, excluding later SourceOwnerFloor"
+  },
+  "joint_floor_candidate": {
+    "source_sha256": "4b2a6c729c05d23c57ceef1153e83d3caa2cba17ec8b48cc8e960dd25d7251ed",
+    "external_kernel_receipt": {
+      "time": "2026-09-14T23:19:55.913032+00:00",
+      "exit": 0,
+      "source_sha256": "4b2a6c729c05d23c57ceef1153e83d3caa2cba17ec8b48cc8e960dd25d7251ed",
+      "log": "/tmp/mirrorea-w4-20260914-a3e0bpks/SOURCE_OWNER_FLOOR_SIXTH.log",
+      "log_sha256": "ec616651d8def26ec8283393a529de31328b6f75b7a8d0015b0ec8c29af09987",
+      "scope": "actual joint source/owner floor projection with explicit pending state; host refinement and image/idle/funding/auth separate"
+    },
+    "general_theorems": 8,
+    "fresh_integration": {
+      "path": "/tmp/mir-w3-reference-wvjvf08i/RESULT.json",
+      "sha256": "4bfd321dadb947e9fb0bd10a95858392fd9549232fd62856408f9a1f2db6028c",
+      "status": "passed",
+      "compiled": 151,
+      "audit_modules": 155,
+      "owned_declarations": 14850,
+      "commands": 167,
+      "all_exit_zero": true,
+      "scope": "shared-capacity SourceOwnerFloor8 plus earlier4module mirror; vector/image successor excluded"
+    },
+    "oracle": "collected30; historical shared-capacity cut",
+    "scope": "one actual joint history, floor projection and conditional constructive freeze; no whole-host/image/idle/auth/funding acceptance",
+    "superseded_by": "joint_image_candidate per-owner capacity"
+  },
+  "head_freeze_candidate": {
+    "cohort_sha256": "43c9b1c1a49e4edaaa5ba4a9d20652ba27b3aac21de867707e155dbd4a42eccd",
+    "writer_sha256": "86d88c568a3941d47b32447e626ad8b643ac5e91f9ab4912289da9a0f7b9376c",
+    "replay_reader": {
+      "positive": {
+        "path": "/tmp/mirrorea-w4-20260914-a3e0bpks/replay-attempts/source_head_freeze_1/RESULT.json",
+        "attempt": "source_head_freeze_1",
+        "sha256": "99ae81ccbd17bbea0eb4325e6145573d363fd8c6e42cb99f309268dcf570cab0"
+      },
+      "wrong_mode_rejected": true,
+      "negative": "required replay not completed or wrong selections"
+    },
+    "confirmation_receipt": {
+      "path": "/tmp/mirrorea-w4-20260914-a3e0bpks/COHORT_HEAD_CONFIRMATION_CHECK.json",
+      "sha256": "f68e86a603bdf1a12758b9e701736f5a6e853fca70b741b2f7a20bbfe9ebaa77",
+      "main_result": "129105 B1=D1=17; exact7 then paidnotice;4pendingrejections0IO;oldfactsource0/noownerIO"
+    },
+    "strict_overlap_receipt": {
+      "path": "/tmp/mirrorea-w4-20260914-a3e0bpks/COHORT_HEAD_FREEZE_OVERLAP_STRICT_CHECK.json",
+      "sha256": "87a197b5adc004a256d20dce8c957521e1cc2c1198f6378b192a0a0c7095308a",
+      "main_result": "0b56ba ordinarynextwrite0/bothroundscomplete"
+    },
+    "scope": "external nonproduction query-factory views; static review29; no public timing/policy adoption"
+  },
+  "oracle30_final": {
+    "session": "mir-w4-joint-floor",
+    "question_sha256": "d560aa418cfb1986ba8522cbbdda27e15bf520b8344ff70ac44b87ffc9e136a2",
+    "manifest_sha256": "45d049092d68a85b27d2fddc649c51c16d2c61a0b43917ce44f0134243d8a7fb",
+    "answer_file_sha256": "51bb4b95418a36a6ca7f9db4a8aa3aa8425e496ecfe6e1d81f6effde57219bbe",
+    "wrapper": {
+      "exit": 0,
+      "finished": "2026-09-14T23:35:49.710213+00:00"
+    },
+    "final_capture": "a759ee",
+    "full_read": [
+      "1d1028",
+      "2a157e",
+      "ba9056"
+    ],
+    "limits": "26 manifest hashes/static sources/AST; no supplied programs, Lean/native/tests/replay executed",
+    "dispositions": {
+      "literal_eight": "no in-scope theorem falsifier or circular-success premise found; full-host coverage remains open",
+      "pending": "upper bound only when clear; arbitrary paid futurefreeze may remain nonclear withoutsourceannouncement",
+      "physical_bindings": "whole actual lifecycle state includes suffix/quota, not only source projection; all other owner credits must matchactualvector",
+      "capacity": "commoncapacity does not cover factory8/9/etc; generalized to per-owner vector in new cut rather than constrain acceptedfactory",
+      "registration": "broad source install lacksretainedphysicalfactguard; R<=core is not claimed; nextfulljointstep needs thatguard",
+      "image": "broad ownerinit permitsindependentlyvalidwrongimage; newimageguard andjointcompatibleproof address this scope",
+      "test": "newheterogeneousconfirmation requiresoldfactstatus0 andtests same-kind wrong-target truthfulnotification whilepending; passed5d7e8c",
+      "advice": "read-only advice not acceptance/proof/signature/ownerdecision"
+    }
+  },
+  "oracle31_final": {
+    "session": "mir-w4-joint-image",
+    "question_sha256": "67f709527075057483efd521acbe4680a886d702b7c8c3b7c14061268d485ec1",
+    "manifest_sha256": "8c711b6bc3b4a402ff82a07edbd124dbd745166963bb5e01afd384f164c7f6c5",
+    "answer_file_sha256": "d8f84e95a6797d58613effac3118efffc0fe17873882a5c294f0a60f97c606cb",
+    "wrapper": {
+      "exit": 0,
+      "finished": "2026-09-14T23:56:31.616763+00:00",
+      "collection": "4e428e"
+    },
+    "final_capture": "aaf255",
+    "full_read": [
+      "15af6f",
+      "4dc38b"
+    ],
+    "limits": "static32manifest hashes/6AST/6patch hunks/log consistency; no supplied Lean/native/test/replay execution",
+    "dispositions": {
+      "literal_theorems": "no false/circular claim found in generalized8floor+3frame+10image theorems; advisory only",
+      "capacity_vector": "each transition and history uses target capacity; fixed vector does not cover replacement/capacity changes",
+      "source_frame": "actual successful PublicationInput steps; rejected native requests/queries/initial launch still need stuttering/binding lift",
+      "image": "actual SAMEhistory floor/core/image invariant; absent owner is not initialization/existence; Python snapshot/codec binding remains separate",
+      "install": "constructive freeze/install consumers retain independent idle/actual target state/certified suffix/covered supplied vector; install7 can confirm while active in broader model",
+      "registration": "source install without retained actual event still breaks registration<=core; host checks existing facts but model must capture them and monotone core history",
+      "funding": "supplied coverage is not full actual vector; full lifecycle includes quota and suffix, not just source projection",
+      "test": "8/9/10 parameter test does not exhaust reservation limits; repeated truthful source notice consumes source quota despite unchanged snapshot",
+      "next": "retained install plus monotone core; public interval idle; capacity-only admission discriminator",
+      "main_forward_evidence": "capacity1 actual failure was found after packet freeze; fresh7 and raw prefix replay were run locally after freeze, not reviewed as executions",
+      "advice": "read-only advice, not proof/acceptance/signature/owner authority"
+    }
+  },
+  "joint_image_candidate": {
+    "fresh": {
+      "path": "/tmp/mir-w3-reference-nb1v8p7n/RESULT.json",
+      "sha256": "2647fd9337e25afbd05282ec97c48c2789828a82800e835a45d7f5ea4c395c99",
+      "audit_modules": 157,
+      "owned_declarations": 14916,
+      "commands": 169,
+      "all_exit_zero": true,
+      "source_cases": 32,
+      "integrity_controls": 13,
+      "weakening_controls": 5,
+      "publication_proof_mutants": 8,
+      "proof_sha256": {
+        "MirroreaProofFirstOwnerFenceMonitor.lean": "36f5a10459d49f03cbea37abfc714d72817fd1d2c68975543966b69db194268f",
+        "MirroreaProofFirstOwnerImageMonitor.lean": "a65f238288314c7140eddb72ca274d00c1a9e34b92434a66c1bbd8f54d4a0b99",
+        "MirroreaProofFirstSourceOwnerGate.lean": "40d939056452fa49d643aa817562c55f1da7556140d204dea37e5c9cb180bb57",
+        "MirroreaProofFirstSourceOwnerFence.lean": "47e13af420ee5ac3967613e918679f5e70ea6cb2d802dbacd48e4a86f28a99f5",
+        "MirroreaProofFirstSourceOwnerFloor.lean": "d14c98542053067ae80d40fcc4ecae9fecedcb54cd7aa1df600bba4bc56937a2",
+        "MirroreaProofFirstSourceCurrentFrame.lean": "0747c1bd8d3891e5d95c91db99d70a8d2efa6ce7abefb937741a1a452db57a8e",
+        "MirroreaProofFirstSourceOwnerImage.lean": "34f0a7c7a2bf6957767fdbfbe2ee758b8fee7b33ea6ec2544b743152a7e874d3"
+      },
+      "finished": "2026-09-14T23:49:59.987955+00:00",
+      "scope": "fresh general model audit; not native physical projection or W4 completion",
+      "compiled_source_modules": 153,
+      "compiled_including_generated": 157
+    },
+    "review": "oracle31_final",
+    "scope": "same actual joint source/owner floor/core/image; constructive head freeze and install, independent idle/certification/target binding/supplied credits",
+    "still_open": [
+      "retained actual install -> registration<=current actual core",
+      "public idle intervals",
+      "freshness/reservation room",
+      "full lifecycle identity including suffix/quota",
+      "all actual owner balances",
+      "host/native call graph/current authority/namespace",
+      "existing Rust/Core/privateQUIC"
+    ],
+    "weakening": {
+      "status": "passed",
+      "time": "2026-09-14T23:49:52.583746+00:00",
+      "root": "/tmp/mirrorea-w4-20260914-a3e0bpks/owner-state-weakening-7ylsm_81",
+      "lean": "/home/codex/.elan/toolchains/leanprover--lean4---v4.29.1/bin/lean",
+      "imports": "/tmp/mir-w3-reference-nb1v8p7n",
+      "memory_bytes": 4294967296,
+      "rows": [
+        {
+          "name": "ImageBaseline",
+          "module": "SourceOwnerImage",
+          "exit": 0,
+          "source_sha256": "34f0a7c7a2bf6957767fdbfbe2ee758b8fee7b33ea6ec2544b743152a7e874d3",
+          "log_sha256": "83a0ff87dc1beedb5ce7500b9bef46a68b69b3b9d272e9e0802ace59144f18e6"
+        },
+        {
+          "name": "FloorBaseline",
+          "module": "SourceOwnerFloor",
+          "exit": 0,
+          "source_sha256": "d14c98542053067ae80d40fcc4ecae9fecedcb54cd7aa1df600bba4bc56937a2",
+          "log_sha256": "ec616651d8def26ec8283393a529de31328b6f75b7a8d0015b0ec8c29af09987"
+        },
+        {
+          "name": "DropInitialImageGuard",
+          "module": "SourceOwnerImage",
+          "exit": 1,
+          "source_sha256": "40ec7facbf9739db9436f6aefe56f3559706baa92bc2c48f11d3019b0a0a5cf5",
+          "log_sha256": "a353f7f118e9579fce7a5e49ada17b277b8d138398aa81d1540c8a649f472721",
+          "expected_general_theorem": "owner_observation_preserves",
+          "designated_failure": true
+        },
+        {
+          "name": "DropInstallImageGuard",
+          "module": "SourceOwnerImage",
+          "exit": 1,
+          "source_sha256": "c43868b81a60d875e4eec6a6170179909f624a9a8f4de7c89f479e08c96216e6",
+          "log_sha256": "afa618ecd35fb7df953a7bdc26115d635784f02418153e7bc138c4ad60cfad11",
+          "expected_general_theorem": "owner_observation_preserves",
+          "designated_failure": true
+        },
+        {
+          "name": "ErasePendingFreeze",
+          "module": "SourceOwnerFloor",
+          "exit": 1,
+          "source_sha256": "fa1cdea10cbda2167ab1c960176d27cf0ac40bb77aef4d2b74c6617eecccedb8",
+          "log_sha256": "631d38873558f2e008f4a5dae90ab14a0ac8578cd362411be9b3d166843f1a78",
+          "expected_general_theorem": "reached_invariant",
+          "designated_failure": true
+        }
+      ],
+      "scope": "general proof weakening controls, not runtime tests or proofs by finite examples"
+    },
+    "prefix_replay": {
+      "reader": {
+        "path": "/tmp/mirrorea-w4-20260914-a3e0bpks/replay-attempts/source_head_prefix_2/RESULT.json",
+        "attempt": "source_head_prefix_2",
+        "sha256": "0f6056d12aa715c1004e07c2dc58d54a60a63bc9ee5699ecef1da5d1451f1d66"
+      },
+      "wrong_mode_refused": "required replay not completed or wrong selections",
+      "cohorts": [
+        {
+          "receipt": "COHORT_HEAD_CONFIRMATION_HETEROGENEOUS_CHECK.json",
+          "outcome": "ready_prefix",
+          "source_inputs": 524,
+          "composite": {
+            "installs": 4,
+            "freeze_acks": 3,
+            "dispatches": 0,
+            "arrivals": 0,
+            "publishes": 1
+          },
+          "credit_binding": {
+            "bound_source_requests": 13,
+            "final_owner_credits": [
+              509,
+              16,
+              509
+            ],
+            "readonly_queries": {
+              "amount": 503,
+              "head": 7
+            }
+          }
+        },
+        {
+          "receipt": "COHORT_HEAD_FREEZE_OVERLAP_STRICT_CHECK.json",
+          "outcome": "ready_prefix",
+          "source_inputs": 55,
+          "composite": {
+            "installs": 6,
+            "freeze_acks": 6,
+            "dispatches": 0,
+            "arrivals": 0,
+            "publishes": 2
+          },
+          "credit_binding": {
+            "bound_source_requests": 23,
+            "final_owner_credits": [
+              507,
+              507,
+              507
+            ],
+            "readonly_queries": {
+              "amount": 17,
+              "head": 14
+            }
+          }
+        }
+      ]
+    },
+    "prefix_failed_attempt": {
+      "attempt": "source_head_prefix_1",
+      "error": "missing publisher_reply_codec in separately written receipt",
+      "repair": "derive descriptive codec from explicitly selected audited native mode; preserve original captures and receipt; newattempt2 passed",
+      "reader_first_control": "2af970 caught ValueError but actual required-selection refusal is AssertionError; corrected e5cae4, no new replay"
+    },
+    "capacity_counter": {
+      "path": "/tmp/mirrorea-w4-20260914-a3e0bpks/SOURCE_QUERY_CAPACITY_ONE_C_CHECK.json",
+      "sha256": "2fa63ddbfa600d2cd4b239c2da686f43da8fa42359c4cc4cefaad5d0559903d1",
+      "owner_capacity": 1,
+      "source_status": 0,
+      "published": 13,
+      "held": true,
+      "dispatch": true,
+      "owner": 2,
+      "owner_reserve_reply": 5,
+      "normal_run": "failed",
+      "eof": "not normal; known supervisor cleanup reaped all4 with -9 after exception, not evidence of OOM",
+      "scope": "postpacket actual counter; no capacity repair claimed"
+    },
+    "capacity_zero_retirement": {
+      "time": "2026-09-15T00:04:53.952534+00:00",
+      "status": "expected capacity counter and retired-view check passed",
+      "normal_run_state": "failed",
+      "normal_run_error": "ValueError: owner refused generated reservation",
+      "actual_capacities": [
+        "8",
+        "8",
+        "0"
+      ],
+      "evidence": {
+        "actual_source_entry": {
+          "status": 0,
+          "published": 9,
+          "held": true,
+          "dispatch": true,
+          "index": 241
+        },
+        "actual_owner_reserve": {
+          "endpoint": "owner2",
+          "reply_code": 5,
+          "index": 20
+        },
+        "retired_zero_io": [
+          "source_tick",
+          "invoke_pending",
+          "owner_initialize",
+          "owner_freeze"
+        ]
+      },
+      "raw_receipt_sha256": "faceb81a1533945dfe80e2e886f8a4a827a52b3a92754b99ffc213043e6a768d",
+      "reaped": {
+        "source": -9,
+        "owner0": -9,
+        "owner1": -9,
+        "owner2": -9
+      },
+      "limits": "known exception cleanup; no normal EOF/full continuation or room fix"
+    },
+    "git": "prepared own21path conditional LAB checkpoint; commit/push/parity recorded after command"
   }
 }

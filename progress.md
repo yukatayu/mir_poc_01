@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-09-15 07:09 JST
+最終更新: 2026-09-15 09:01 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -59,11 +59,11 @@ The owner explicitly requested W4 after W3 closed. W4 physical refinement is the
 sole task-local goal, PL1/PL2/PL0 S4/S6, with one main and no subagents. Stop after
 W4; W5+/alpha are not active. Plan250 remains separately paused after I3-3.
 
-追加した13個の非production証明候補は、既存runnerで146moduleのfresh構築・150module/14574所有宣言の公理監査とsource/反例検査を通過しました。Oracleは第26回まで回収し、実処理と通知・同じrecordを使う完全carrier証明・通信から内部記録確定までの例外処理を限定review済みです。一時的な配布待ちでの拒否後に同じ構成で値10を計算する実正例も確認しました。その後、次の通常書込みと先行freezeが旧構成のinstallを妨げる実反例を発見し、ownerごとの配布順序ガードを検査しています。現在のC/A実行と全bytes照合は通過しましたが、新ガードと部分的な世代条件の証明は未reviewです。全経路のsource/owner対応、物理namespace・現在の認証認可・既存Rust/Core/privateQUIC接続とW4全体の受理は未完了です。
+通常sourceとownerの同じ実行履歴について、通知前の世代差、現在値、設置の成立条件を一般証明へ接続しました。7追加proofを含むfresh検査は153source module・157module/14916所有宣言監査、169command全成功です。第31回Oracleまで回収し、設置成功だけではidleを導けないこと、供給された予算と全owner実残量の一致が別義務であることを確認しました。通常sourceのC/A通信全bytes照合に加え、書込みの重なりと設置済み未通知の再確認を実通信の途中状態まで再検査しました。容量1ではsourceが開始を受理した後にownerが予約を拒否する実反例が残っています。現在の直接consumerは、過去の設置事実から現在の登録・実owner世代を結ぶ証明、全公開経路のidle・予約容量・freshness・実予算の対応です。既存Rust/Core/privateQUIC・認証認可・物理namespaceの接続とW4全体の受理は未完了です。
 
 | W4 axis | Current evidence | Remaining gate / startability |
 |---|---|---|
-| Logical specification | reviewed conditional owner/source proofs and fresh150module audit; later external phase projection laws | 着手可能: actual owner provenance, private custody/current admission and stateful physical correspondence |
+| Logical specification | same-history floor/image and constructive installation proofs; fresh157module audit; registration/idle/resources remain open | 着手可能: actual owner provenance, private custody/current admission and stateful physical correspondence |
 | User-facing specification | actual-parser17statement source plus3statement continuation executes on four private-pipe processes; authority/configuration remain distinct | 後段依存: actual generated owner execution, source/result/observation correspondence |
 | Implementation / operation | W3 and prior I3 QUIC46case regressions retained; current source110/owner102 native C/A and zero-slack discriminator pass; full query/source/owner replay passed; no new Rust behavior | 後段依存: bounded internal implementation after corresponding theory gate, all-entry and actual fault regression |
 
@@ -456,3 +456,7 @@ The authorized roadmap is paused, not blocked, stale or closed.
 2026-09-15 05:37 JST — W4: 実source費用照会・全入力framingを一般証明し、110module native監査を確認。18枠の零余裕で不要な消費を送信前に拒否し、必要なfreeze/通知は進行。通常C/Aを検査、全bytes照合と全経路の対応を継続。
 
 2026-09-15 06:41 JST — W4: 現行C/Aの全bytes照合と必須reader検査が通過。既知source拒否の全状態保存と実owner処理からの通知を一般証明し、失敗境界の実反例を修正。Oracle25継続、Rust/Core/QUIC接続は未完了。
+
+- 2026-09-15 08:28 JST: W4実ownerの観測・通知対応をfresh154module監査。再計画時の旧install前提を実反例で棄却し、次要求に従う候補とB=D17設置再確認を検査。共同履歴8一般定理のfresh/reviewとRust/QUIC接続は継続。
+
+- 2026-09-15 09:01 JST: W4共同履歴の世代・image・設置一般証明をfresh監査しOracle31回収。実通信prefix2件の全bytes照合と容量1の実予約拒否を記録。全経路の登録・idle・容量・実予算対応とRust/QUIC接続は未完。

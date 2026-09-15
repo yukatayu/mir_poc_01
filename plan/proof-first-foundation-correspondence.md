@@ -1057,3 +1057,34 @@ Detailed commands, failures and exact cuts remain in Report2614/W4_CHECK.
 追加した13個の非production証明候補は、既存runnerで146moduleのfresh構築・150module/14574所有宣言の公理監査とsource/反例検査を通過しました。Oracleは第26回まで回収し、実処理と通知・同じrecordを使う完全carrier証明・通信から内部記録確定までの例外処理を限定review済みです。一時的な配布待ちでの拒否後に同じ構成で値10を計算する実正例も確認しました。その後、次の通常書込みと先行freezeが旧構成のinstallを妨げる実反例を発見し、ownerごとの配布順序ガードを検査しています。現在のC/A実行と全bytes照合は通過しましたが、新ガードと部分的な世代条件の証明は未reviewです。全経路のsource/owner対応、物理namespace・現在の認証認可・既存Rust/Core/privateQUIC接続とW4全体の受理は未完了です。
 
 Current reversible candidate: retain next source staging but require this owner’s current installation before a future freeze. Smallest alternative: forbid all next source staging until every installation completes. The per-owner candidate preserves more independent progress; it is externally tested and partly formalized, not adopted as a public ordering contract. Whole phase/custody correspondence remains the direct consumer. Oracle26 only covers the earlier IO/record-composition cut.
+
+
+### 2026-09-14T23:28:58.142619+00:00 — W4 joint owner state correspondence
+
+通常sourceから動く4process参照実装について、ownerの実際のimage・世代と、sourceの残り手順との対応を検証中です。観測から実owner状態を導く一般証明と世代通知の対応を追加し、fresh150module構築・154module/14770所有宣言監査、source32・整合性13・弱化5+8を通過しました。旧版installを必須にするガードが再計画後に進行を妨げる実反例を確認し、sourceの次の要求に従ってfuture freezeを進める候補へ変更しました。通常source・通信全bytes照合・余裕のない予算での設置再確認が通っています。第29回Oracleまで回収済み。通知前の途中状態を含む共同履歴の8一般定理もLean検査済みで、追加fresh検査と第30回reviewを実行中です。全経路のimage・idle・資源・現在の認証認可・物理namespaceと既存Rust/Core/privateQUIC接続、W4全体の受理は未完了です。
+
+The earlier per-owner registration prerequisite is superseded as a candidate by
+certified-head physical future advance; the B=D18 actual replan counter defeats
+the former. Compare only explicit physical-prelude reservation versus the current
+head constraint. The global staging barrier remains unadopted research history.
+Underlying source rules are unchanged; wrapper schedules/credit histories differ.
+Oracle29 found no continuing exposed-view bypass, but no whole enabledness proof.
+New pending-state joint floor induction and constructive freeze consumer are under
+Oracle30; idle/core/image/registration/freshness/room/physical namespace remain
+independent. No Plan250 resume, public timing/revocation contract or phase promotion.
+
+
+### 2026-09-15T00:01:51.523408+00:00 — W4 same-history image and reservation-room boundary (LAB)
+
+通常sourceとownerの同じ実行履歴について、通知前の世代差、現在値、設置の成立条件を一般証明へ接続しました。7追加proofを含むfresh検査は153source module・157module/14916所有宣言監査、169command全成功です。第31回Oracleまで回収し、設置成功だけではidleを導けないこと、供給された予算と全owner実残量の一致が別義務であることを確認しました。通常sourceのC/A通信全bytes照合に加え、書込みの重なりと設置済み未通知の再確認を実通信の途中状態まで再検査しました。容量1ではsourceが開始を受理した後にownerが予約を拒否する実反例が残っています。現在の直接consumerは、過去の設置事実から現在の登録・実owner世代を結ぶ証明、全公開経路のidle・予約容量・freshness・実予算の対応です。既存Rust/Core/privateQUIC・認証認可・物理namespaceの接続とW4全体の受理は未完了です。
+
+Current candidate remains certified-head physical advance, compared with explicit
+physical-prelude reservation across replans. Per-owner capacities are now modeled
+without narrowing the existing factory. Neither scheduling choice establishes
+room/freshness; the actual capacity1 counter stays open. No source staging barrier
+or owner/public policy change is adopted. The next registration proof must join
+retained actual successful installation with nondecreasing actual core revision;
+absence has a separate zero-registration case. The following idle proof is about
+continuing public boundaries, not every internal state. Exact install confirmation
+is not an idle witness. Source quota and whole actual credits stay distinct.
+Oracle30/31 are advice only; no Canon theorem/phase/119 disposition promotion.

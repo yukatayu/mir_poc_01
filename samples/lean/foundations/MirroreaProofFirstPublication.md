@@ -189,7 +189,7 @@ are recorded in Report2614. Oracle20–25 reviewed successive resource-custody c
 ## Source suffix funding and actual work consumer
 
 The next nonproduction proof sources are included in `--with-owner-boundary`.
-Fresh validation of this expanded cut passes146compiled/150audit modules and
+The earlier13-module expansion passed146compiled/150audit modules and
 14574owned declarations; the prior133compiled/137audit result belongs to the
 earlier45-file mirror. Report2614 records the exact new result.
 
@@ -226,3 +226,70 @@ native controls, recorded separately from these mathematical proofs.
 Native entrypoints and the coordinator still run from the external workdir.
 No Rust/Core/QUIC, new sample root, Canon status or public failure-policy change
 is implied by importing these proof modules.
+
+
+## Actual owner observations and pending freeze history
+
+`OwnerFenceMonitor` and `OwnerImageMonitor` derive the actual complete image,
+revision and fence from actual endpoint/profile/budget transitions, using one
+owner history. `SourceOwnerGate` derives actual currentness from checked
+observations plus an accepted source entry; it does not issue authority or prove
+freshness, room or idleness. `SourceOwnerFence` proves every source command's
+fence projection and exact future-freeze head matching. The four-module addition
+passed fresh150compiled/154audit/14770owned with the command above.
+
+The next LAB candidate `SourceOwnerFloor` includes an explicit paid-but-unnotified
+freeze state in one joint source/owner history. It derives floor equality at
+continuing boundaries and published<=actual floor<=announced. Its positive
+consumer constructs freeze12 and the accepted source notification from certified
+source, covered credits and an independently idle matching owner. Other entries
+of the supplied credit vector still require actual whole-vector custody; the
+floor theorem does not prove image/registration/idle/auth/resource preservation.
+Its eight general theorems now use per-owner capacity parameters. The previous
+five-module fresh integration passed151compiled/155audit/14850owned declarations;
+Oracle30 is collected. That historical audit does not cover the later image cut.
+
+The selected external experiment permits future physical advance at the certified
+source head, retains the matching notification at a fixed ordinal and excludes
+unrelated operations until it is accepted. It preserves underlying source command
+rules; physical schedules and credit histories differ. The generated busy-freeze
+probe is a separate non-advancing case. No global source staging barrier, public
+timing contract, authority priority or immediate revocation rule is adopted.
+Actual exact-install confirmation at owner B=D17 and rejection of four unrelated
+pending entries pass, along with ordinary C/A and complete-byte replay. Oracle29
+reviewed these boundaries before the new joint-floor proof; Report2614 records
+that distinction and the required next core/image/registration obligations.
+
+
+`SourceCurrentFrame` proves that each accepted actual source step either preserves
+complete current source and published revision, or strictly advances publication.
+It derives an accepted installation's revision=published=logical fence.
+`SourceOwnerImage` separates declarative image conditions from their exact checker,
+projects into the SAME floor history, and derives actual core revision<=published
+and equality=>complete current image. Its constructive head-install consumer
+produces native-model install7 (fresh install or exact confirmation) and accepted
+paid notification, retaining reservations/production history. Idleness, matching
+actual target state, certified lifecycle and supplied-vector coverage are explicit
+premises; neither desired successful operation is a premise.
+
+The seven-module expansion passed fresh153 source modules plus four generated
+consumers,157 audit modules/14916 owned declarations,169 commands all0, source32,
+integrity13 and weakening5+8. Separate two-baseline/three-semantic-weakening controls
+reject deletion of either image guard or the pending freeze record. Standard
+axioms are propext/Classical.choice/Quot.sound only; failed drafts are excluded.
+Oracle31 statically reviewed the new8/3/10 theorem cut; it did not run Lean/native.
+
+Retained installation facts must still imply registration<=current actual core
+through monotone history. Public-boundary idle, fresh reservation keys/room and
+whole native lifecycle/all-owner credit binding remain separate. An actual owner
+capacity1 run accepted source entry then returned exhausted5 on reservation; it
+failed and cleanup reaped children, not normal EOF. Currentness is insufficient
+for admission progress. Exact install7 itself can confirm an active owner in the
+broader model; the constructive theorem keeps its independent idle premise.
+
+The strict source-overlap and heterogeneous8/9/10 exact-confirmation traces pass
+complete actual-byte/argv replay as ready prefixes, not completed programs.
+Confirmation checks five unrelated pending mutators emit0IO, including a truthful
+same-kind wrong-target notification. Repeating an old truthful notification
+consumes source quota although its projected publication snapshot is unchanged.
+No native/QUIC/authority/alpha completion is inferred.

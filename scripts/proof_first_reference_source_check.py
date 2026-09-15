@@ -144,7 +144,8 @@ def main():
         if args.with_owner_boundary:
             for name in ['MirroreaProofFirstOwnerEndpointBudget', 'MirroreaProofFirstRoutedOwner',
                          'MirroreaProofFirstSourceFundingAdministration',
-                         'MirroreaProofFirstSourceFundingCheckedWork']:
+                         'MirroreaProofFirstSourceFundingCheckedWork',
+                         'MirroreaProofFirstSourceOwnerImage']:
                 visit(name)
     source_scripts = ['scripts/proof_first_composition_source.py',
                       'scripts/proof_first_composition_source_check.py',
