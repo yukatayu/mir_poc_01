@@ -1182,13 +1182,13 @@
   },
   "docs_validation_current": {
     "status": "passed",
-    "command": "python3 scripts/validate_docs.py",
     "exit": 0,
-    "collection": "eb5b09",
-    "log": "/tmp/mirrorea-w4-20260914-a3e0bpks/JOINT_IMAGE_DOCS_FINAL.log",
+    "command": "python3 scripts/validate_docs.py",
+    "collection": "d20d4c",
+    "log": "/tmp/mirrorea-w4-20260914-a3e0bpks/QUOTA_PAUSE_DOCS_FINAL.log",
     "log_sha256": "9411ce6df198430b0df20ebab3882faf2425318d3ed1ee85e5f11ed17175a116",
     "reports": 1764,
-    "scope": "current proof and snapshot docs; post-run evidence/status bookkeeping separately diff-checked"
+    "scope": "final pause snapshot; seven proof sources unchanged; final result/Git bookkeeping separately diff-checked"
   },
   "oracle_custody_retry": {
     "session": "mir-w4-custody-retry",
@@ -3947,13 +3947,18 @@
     "pending_loss": "owner81be58 and sourcea41d9e passactualsuccess-thenlostreply: all5publicentriesretired0frames; intentionalprefixnormalEOF; firstsourcewrongwrappermatcherretained"
   },
   "latest_weekly_quota": {
-    "checked_at": "2026-09-14T23:12:18.289006Z",
-    "observed_at": "2026-09-14T23:12:01.581Z",
-    "remaining_percent": 34,
-    "window_minutes": 10080,
-    "receipt": "/tmp/mirrorea-w4-20260914-a3e0bpks/QUOTA_CHECK_2312.json"
+    "checked": "2026-09-15T00:12:47.396296+00:00",
+    "weekly": {
+      "event_time": "2026-09-15T00:12:18.314Z",
+      "window": "primary",
+      "used_percent": 68.0,
+      "window_minutes": 10080,
+      "resets_at": 1789814580
+    },
+    "remaining_percent": 32.0,
+    "source": "own rollout token_count.rate_limits; no account or conversation data exposed"
   },
-  "next_weekly_quota_check_at_or_after": "2026-09-15T00:12:18.289006Z",
+  "next_weekly_quota_check_at_or_after": "2026-09-15T01:12:47.396296+00:00",
   "oracle24_dispositions": {
     "session": "mir-w4-funding-custody",
     "collected": "2026-09-14T21:09:46.653081+00:00",
@@ -4730,6 +4735,56 @@
       },
       "limits": "known exception cleanup; no normal EOF/full continuation or room fix"
     },
-    "git": "prepared own21path conditional LAB checkpoint; commit/push/parity recorded after command"
+    "git": {
+      "head": "41705e810094049f9c871bdfb55b40894255fe68",
+      "commit": "58ba67",
+      "push": "2609c6/46b907 exit0",
+      "pre_remote_check_clean": "eed792",
+      "manifest_sha256": "980e55ab3c8ce50d4eab3d387636dfa3cd5c87aa1f7300b674f015cff8028e36",
+      "classification": "conditional LAB proof checkpoint; not W4 close",
+      "remote_parity": {
+        "tool": "ce90d3",
+        "main": "41705e810094049f9c871bdfb55b40894255fe68",
+        "matches": true
+      }
+    }
+  },
+  "owner_revision_history_external": {
+    "second": {
+      "time": "2026-09-15T00:10:01.478464+00:00",
+      "exit": 0,
+      "source_sha256": "c50080de22f70b64faa76d797da2c3743db5d6a23190695c087f9d448992af4a",
+      "log": "/tmp/mirrorea-w4-20260914-a3e0bpks/OWNER_REVISION_HISTORY_SECOND.log",
+      "log_sha256": "d4ac52cc5247682481ba3e730b5d198d063d35a32fdbe5b6c1f93343084addca",
+      "scope": "actual owner revision monotonicity only; no retained-install source/registration lift yet"
+    },
+    "first": {
+      "exit": 1,
+      "tool": "79d8fe",
+      "reason": "unfinished reflexive goal, invalid Bool lemma projection, missing explicit parameters; compiler placeholders not accepted"
+    },
+    "general_theorems": 4,
+    "scope": "actual worker/endpoint/profile/budget transitions preserve presence and nondecreasing core revision; no broad OwnerReservation.Step monotonicity claim",
+    "status": "external kernel pass e5b23b; not Oracle-reviewed/mirrored or connected to retained installation/registration"
+  },
+  "task_pause": {
+    "time": "2026-09-15T00:14:29.951927+00:00",
+    "reason": "owner requested convenient stop near30% weekly remaining; actual32%",
+    "workstream": "W4 incomplete",
+    "checkpoint": "41705e810094049f9c871bdfb55b40894255fe68 normalpush/parity",
+    "next": "retained actual installation history + actual core monotonicity -> source registration bound; public idle/room/freshness/full funding thereafter",
+    "oracle": "all31collected, no livejob",
+    "goal_api": "preexisting blocked; not reclassified complete and not pause cause",
+    "final_snapshot_checks": {
+      "status": "passed",
+      "exit": 0,
+      "command": "python3 scripts/validate_docs.py",
+      "collection": "d20d4c",
+      "log": "/tmp/mirrorea-w4-20260914-a3e0bpks/QUOTA_PAUSE_DOCS_FINAL.log",
+      "log_sha256": "9411ce6df198430b0df20ebab3882faf2425318d3ed1ee85e5f11ed17175a116",
+      "reports": 1764,
+      "scope": "final pause snapshot; seven proof sources unchanged; final result/Git bookkeeping separately diff-checked"
+    },
+    "final_git_receipt": "/tmp/mirrorea-w4-20260914-a3e0bpks/QUOTA_PAUSE_GIT.json"
   }
 }

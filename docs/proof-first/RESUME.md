@@ -1,18 +1,26 @@
-# W4 resume — sole main
+# W4 resume — quota pause, incomplete; sole main
 
 Owner request: W4 verified candidate then stop. NO SUBAGENTS. W5+ and paused
-Plan250/I3-4 inactive. User permits approximate safe stop near30% weekly remaining,
-checks>=1h. Last34% at2026-09-14T23:12:01UTC, checked23:12:18; next>=2026-09-15T00:12:18UTC.
-Read only own rollout token_count.rate_limits window10080, last8MiB:
+Plan250/I3-4 inactive. CURRENT PAUSE follows owner instruction to stop conveniently
+near30% weekly quota. Actual32% (used68/window10080) at2026-09-15T00:12:18.314Z,
+checked00:12:47.396Z54bee5 (>1h apart), QUOTA_CHECK_0012.json. Stop after final
+bookkeeping/normalpush at reviewed proof checkpoint. W4 is NOT complete.
+On resume keep same semantic goal/evidence; do not rerun Oracle/baselines without
+delta. Next quota check>=2026-09-15T01:12:47.396Z. Read only own rollout last8MiB
+of token_count.rate_limits, no account/other conversation records:
 /home/codex/.codex/sessions/2026/09/09/rollout-2026-09-09T18-50-39-01a08593-9de1-78e0-a166-b3c6cfba6a07.jsonl.
-No stale/missing metric called current. Existing goal API says blocked despite
-runnable authorized work; do not fakecomplete/reset. Latest estimate24–60activeh,
-low confidence: foundation6–18/runtime10–24/integration6–14, not deadlines.
+Existing goal API says blocked from earlier although research is runnable; do not
+fakecomplete/reset. This pause is for user-requested quota management, not an
+unmet authority or tool gate. Last estimate24–60activeh lowconfidence beforefull
+Rust/Core/QUIC connection; no deadline or percentage-completion claim.
 
-Repo /home/codex/dev/mir_poc_01 main HEAD7732d188149f5994f7011ff8ec6448c8c3ef76cb,
-previous normalpush/parity clean. Current own21paths: seven new Leanproofs,
-runner,13current docs/status paths (git status --short is authoritative).
-No Rust/Canon/handoff originals/userwork/reset/clean/force changes. No newcommit yet.
+Repo /home/codex/dev/mir_poc_01; verified proof baseline41705e810094049f9c871bdfb55b40894255fe68.
+The current HEAD is its subsequent pause-metadata commit; use git rev-parse HEAD
+and task-local QUOTA_PAUSE_GIT.json for that identity.
+Seven-proof own21path checkpoint committed58ba67 and normalpush46b907. Clean
+eed792 before postcommit evidence/RESUME edits; remote parity ce90d3 equals41705e810094049f9c871bdfb55b40894255fe68.
+No Rust/Canon/handoff originals/userwork/reset/clean/force changes. Pause snapshot is a separate nine-document change after that committed candidate;
+use git status --short and QUOTA_PAUSE_GIT.json for the final bookkeeping commit.
 Workroot /tmp/mirrorea-w4-20260914-a3e0bpks; pointer /tmp/mirrorea-w4-current-workdir.
 No external mount;7550c3 measured40GiBdisk/7.0GiBavailableRAM. SerialLean4GiBAS/core0,
 Lean4.29.1 --trust=0 -j1. Native4GiBAS/10CPUwholelife/15wall; no Chrome changes/OOM.
@@ -110,13 +118,31 @@ rawfaceb81a1533945dfe80e2e886f8a4a827a52b3a92754b99ffc213043e6a768d; normalrunFA
 Reading69198f/7870d7: OwnerReservation.Step has unrestrictedinstall, so core
 monotonicity needsactualworker guard revision>old, thenendpoint/profile/budget.
 Actual support path samples/lean/foundations/OwnerReservationWorkerSupport.lean.
-No newproofclaimed; resource40GiBdisk/11GiBavailable at00:05UTC.
+At that read no newproof was claimed; subsequent four-proof result is below.
+Resource40GiBdisk/11GiBavailable at00:05UTC.
 
-NEXT: focused exactsource review and ownGit checkpoint; docs passed.
+New external OwnerRevisionHistory4generaltheorems worker_mono/endpoint_mono/
+profile_mono/budget_mono PASS e5b23b, sourcec50080de22f70b64faa76d797da2c3743db5d6a23190695c087f9d448992af4a;
+OWNER_REVISION_HISTORY_SECOND.json/log, standardaxioms only. Initial79d8fe failed
+elaboration, savedFIRST_FAILED, excluded; no sourceproofholes. Next directconsumer
+addsretainedactualinstallationhistory then registration<=currentcore. Fourlemma
+candidate is notOracle-reviewed/mirrored/jointregistration proof. No liveprocess.
+
+NEXT ON OWNER RESUME: retained-install history consumer below. Current pause is
+quota management. All required seven-proof/model/actual-capture/doc checks passed;
+newer4monotonicity proofs remain external. Final pause snapshot validation PASSED d20d4c/bc4e06 (1764 reports). Final Git
+receipt is task-local QUOTA_PAUSE_GIT.json; W4_CHECK/report record this handoff.
+
 Then currentconsumer retained-install proof: add same-history observation membership
 and actualcore monotonicity tosource installation, deriveR<=core withabsentzero case.
 Publicidle mustfollowactualadmin plusentiregeneratedinterval, notinstall7alone.
 Room/freshness needsactualreservationcapacity+retainedkeys atsourceentry; preflight
 roomalone maynotfundwholecertifiedsuffix. Do notsilentlyincreaseconstant/evictkeys.
-No componentGREEN calledW4done. Ifnextquota is near30%, save clean checkpoint and
-honorownerpause; otherwisecontinue currentW4 goal withoutnewpermission.
+No componentGREEN calledW4done. Current quota pause stays until owner resumes.
+
+The 00:12:18 initial quota command0d7dd5 was rejected by its one-hour guard before
+reading data (milliseconds early); actual54bee5 read at00:12:47. No frequent quota
+reads or Oracle retries. No liveOracle/native/Lean or documentation-validation jobs remain at pause.
+Final result/Git bookkeeping is the only post-validation edit, diff-checked.
+
+First read command on resume: `cat /tmp/mirrorea-w4-20260914-a3e0bpks/MirroreaProofFirstOwnerRevisionHistory.lean` then compare the actual install-fact guard in `source_owner_cohort_head_freeze.py` with the new same-history relation.

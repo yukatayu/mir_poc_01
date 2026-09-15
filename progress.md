@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-09-15 09:01 JST
+最終更新: 2026-09-15 09:14 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -58,6 +58,8 @@ public/production layers remain later.
 The owner explicitly requested W4 after W3 closed. W4 physical refinement is the
 sole task-local goal, PL1/PL2/PL0 S4/S6, with one main and no subagents. Stop after
 W4; W5+/alpha are not active. Plan250 remains separately paused after I3-3.
+
+週間残量32%を2026-09-15 09:12 JSTに確認したため、owner指定の「30%程度で切りのよい所」に従い検証済みproof checkpointで一時停止します。W4は未完了で、次は保持された実設置事実と現在のowner世代・source登録の対応です。
 
 通常sourceとownerの同じ実行履歴について、通知前の世代差、現在値、設置の成立条件を一般証明へ接続しました。7追加proofを含むfresh検査は153source module・157module/14916所有宣言監査、169command全成功です。第31回Oracleまで回収し、設置成功だけではidleを導けないこと、供給された予算と全owner実残量の一致が別義務であることを確認しました。通常sourceのC/A通信全bytes照合に加え、書込みの重なりと設置済み未通知の再確認を実通信の途中状態まで再検査しました。容量1ではsourceが開始を受理した後にownerが予約を拒否する実反例が残っています。現在の直接consumerは、過去の設置事実から現在の登録・実owner世代を結ぶ証明、全公開経路のidle・予約容量・freshness・実予算の対応です。既存Rust/Core/privateQUIC・認証認可・物理namespaceの接続とW4全体の受理は未完了です。
 
@@ -460,3 +462,5 @@ The authorized roadmap is paused, not blocked, stale or closed.
 - 2026-09-15 08:28 JST: W4実ownerの観測・通知対応をfresh154module監査。再計画時の旧install前提を実反例で棄却し、次要求に従う候補とB=D17設置再確認を検査。共同履歴8一般定理のfresh/reviewとRust/QUIC接続は継続。
 
 - 2026-09-15 09:01 JST: W4共同履歴の世代・image・設置一般証明をfresh監査しOracle31回収。実通信prefix2件の全bytes照合と容量1の実予約拒否を記録。全経路の登録・idle・容量・実予算対応とRust/QUIC接続は未完。
+
+- 2026-09-15 09:14 JST: W4の同一履歴proof候補41705e81を通常push・parity確認。全31Oracle回収、容量0の開始後拒否と退役4操作0IOを検査。週間残量32%によりowner指定の区切りで一時停止、W4未完。

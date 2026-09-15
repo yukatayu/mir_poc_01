@@ -28,6 +28,7 @@ W2の有限な研究成果は検証・review・Git統合済みで保持してい
 名前付きカタログ・領域拡張・個別DAG・既存current-use・局所影響・候補選択の11依存をLeanで検査し、19変異の拒否を確認しました。
 W3は有限の研究・参照実装候補として検証・review・source統合を完了しました。通常sourceからの構築・変更・保持参照・fallback／再取得・取消し・同じSessionへの追加／修復を接続しています。Lean4.29.1で76moduleの全所有宣言を監査し、通常source32件・検証手順の反例13件・証明弱化5件を検査しました。12回のOracleレビューを回収し、最終指摘の保証範囲も記録済みです。再現commandは `python3 scripts/proof_first_reference_source_check.py --work-root /tmp`。source/evidence cutは `81f82a0b` で通常push済みです。
 W4はsourceと所有者processの接続を検証中です。通常sourceとownerの同じ実行履歴について、通知前の世代差、現在値、設置の成立条件を一般証明へ接続しました。7追加proofを含むfresh検査は153source module・157module/14916所有宣言監査、169command全成功です。第31回Oracleまで回収し、設置成功だけではidleを導けないこと、供給された予算と全owner実残量の一致が別義務であることを確認しました。通常sourceのC/A通信全bytes照合に加え、書込みの重なりと設置済み未通知の再確認を実通信の途中状態まで再検査しました。容量1ではsourceが開始を受理した後にownerが予約を拒否する実反例が残っています。現在の直接consumerは、過去の設置事実から現在の登録・実owner世代を結ぶ証明、全公開経路のidle・予約容量・freshness・実予算の対応です。既存Rust/Core/privateQUIC・認証認可・物理namespaceの接続とW4全体の受理は未完了です。
+週間残量32%を2026-09-15 09:12 JSTに確認したため、owner指定の「30%程度で切りのよい所」に従い検証済みproof checkpointで一時停止します。W4は未完了で、次は保持された実設置事実と現在のowner世代・source登録の対応です。
 対応は `plan/proof-first-foundation-correspondence.md`、現在の証跡はreport2614、W1/W2/W3の履歴はreport2611/2612/2613です。
 既読範囲は `docs/proof-first/READ_LEDGER.json` に記録し、未読と部分読了を区別しています。
 M8 trusted setupでの実効label不一致を再現し、後続の観測接続義務として保持しています。

@@ -1,9 +1,11 @@
-# W4 physical refinement — active
+# W4 physical refinement — quota pause; incomplete
 
 Owner scope: verified W4 candidate completion, then stop; sole main, NO subagents.
-W5+ and separately paused Plan250/I3-4 inactive. Approximate safe stop near30%
-weekly remaining; checks>=1h. Latest34% at23:12:01UTC, checked23:12:18;
-next check>=2026-09-15T00:12:18UTC. No goal reset/fakecompletion.
+W5+ and separately paused Plan250/I3-4 inactive. Owner asked for a convenient
+pause near30% weekly remaining. Actual32% at2026-09-15T00:12:18.314Z, checked
+00:12:47.396Z (54bee5, >1h after prior check). Pause at reviewed proof checkpoint;
+W4 is NOT complete. Next quota check>=2026-09-15T01:12:47.396Z when resumed.
+No goal reset/fakecompletion; API's earlier blocked state is not this pause reason.
 
 PL1/PL2/PL0 S4/S6; theory/refinement before dependent implementation.
 REQ DS01/02/03/04/08 AU01/04/05/08 VF04/05; PT03/11/14 SC04/07 Q18.
@@ -20,8 +22,9 @@ and owner history across all public entries and completed-unnotified operations.
 Then connect established meaning to existing Rust/Core/projector/privateQUIC.
 No handwritten source communication API or domain core primitive is introduced.
 
-Current13 funding/admin/work proof mirror is committed/pushed7732d188 with parity.
-Seven further LAB monitor/fence/floor/image proof modules pass fresh153 source
+Prior13 funding/admin/work proof mirror is committed/pushed7732d188. Seven-proof
+successor41705e810094049f9c871bdfb55b40894255fe68 is committed/pushed with parity.
+These seven LAB monitor/fence/floor/image proof modules pass fresh153 source
 modules plus four generated consumers,157audit/14916owned declarations,169commands
 all0/source32/integrity13/weakening5+8. Separate three semantic weakening controls
 fail at the designated general theorem. No source sorry/admit/Miraxiom.
@@ -64,3 +67,10 @@ Acceptance: close the required general proof, constructive positive, counterexam
 and review gates, then actual source/Core/network/owner/trace correspondence,
 focused faults/regressions,119dispositions and ownGit. Report2614/W4_CHECK/RESUME
 retain exact cuts. W5/W6, recovery kinds and Q18 remain separate.
+
+Resume: complete retained actual installation history using the external checked
+OwnerRevisionHistory4 monotonicity lemmas (e5b23b), then public-boundary idle and
+actual reservation freshness/room/full lifecycle/vector binding. The four lemmas
+are not Oracle-reviewed/mirrored or a registration proof. Capacity0 forward run
+changes only owner2 capacity: enter0 then exhausted5; four retired views0IO.
+All31Oracle answers collected; no live job. Preserve same goal and evidence.

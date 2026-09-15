@@ -1,6 +1,6 @@
 # Current Task Map (LAB)
 
-最終更新: 2026-09-15 09:01 JST
+最終更新: 2026-09-15 09:14 JST
 
 **Canon notice:** `mirrorea_canon/` is normative. Everything outside
 `mirrorea_canon/` is LAB; if LAB conflicts with canon, canon wins. This snapshot
@@ -15,7 +15,11 @@ streams selected; TCP deferred, datagrams excluded. No Canon change here.
 
 ## current promoted package
 
-Owner-requested W4 through completion, then stop. PL1/PL2/PL0 S4/S6; sole main,
+Owner-requested W4 through completion, then stop.
+
+週間残量32%を2026-09-15 09:12 JSTに確認したため、owner指定の「30%程度で切りのよい所」に従い検証済みproof checkpointで一時停止します。W4は未完了で、次は保持された実設置事実と現在のowner世代・source登録の対応です。
+
+PL1/PL2/PL0 S4/S6; sole main,
 no subagents, source sorry/admit or Mir axioms. W3 is a closed finite candidate;
 W5+/alpha and Plan250/I3-4 are not automatically resumed. Oracle is read-only
 advice, not proof, owner approval or signed independent acceptance.
@@ -87,12 +91,19 @@ retirement choice actually requires owner values; do not infer approval.
 Keep one Report2614; closed Reports2611–2613 unchanged. Synchronize existing
 plan/status/sample dashboards and119dispositions as evidence changes. No new
 sample root/taxonomy/roadmap has been adopted. Prior13-module proof integration
-is committed/pushed7732d188 with remote parity. Seven additional LAB proof files,
-runner and status mirrors are own dirty work; no Rust/Canon production changes.
+is committed/pushed7732d188; seven-proof successor41705e81 is also normally pushed
+with remote parity. Current final pause/status bookkeeping is separate; no
+Rust/Canon production changes.
 Serial4GiB children; measured40GiB root free/7.0GiB RAM available; no external
-work mount, cleanup or Chrome settings change. Latest weekly remaining34%
-at23:12:01UTC (checked23:12:18); next check>=2026-09-15T00:12:18UTC. Approximate
-safe stop near30%, checks>=1h. Oracle1–31 and fresh7 verification are collected. Work continues on the remaining actual-state and resource consumer.
+work mount, cleanup or Chrome settings change. Actual weekly remaining32% at
+2026-09-15T00:12:18.314UTC, checked00:12:47.396UTC (>1h after last check). Owner's
+approximate near30% pause is applied at this reviewed proof checkpoint. W4 remains
+incomplete; technical work is resumable without new policy decisions. Next quota
+check>=01:12:47UTC on resume. Oracle1–31 collected; no review/native job remains.
+External OwnerRevisionHistory4 general monotonicity proofs pass but are not yet
+reviewed/mirrored or joined to retained installation/source registration. Preserve
+that next consumer, rather than restarting foundation or re-running old baselines.
+
 
 ## non-promoted references
 
