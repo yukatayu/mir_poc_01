@@ -145,7 +145,7 @@ def main():
             for name in ['MirroreaProofFirstOwnerEndpointBudget', 'MirroreaProofFirstRoutedOwner',
                          'MirroreaProofFirstSourceFundingAdministration',
                          'MirroreaProofFirstSourceFundingCheckedWork',
-                         'MirroreaProofFirstSourceOwnerImage']:
+                         'MirroreaProofFirstSourceRegistration']:
                 visit(name)
     source_scripts = ['scripts/proof_first_composition_source.py',
                       'scripts/proof_first_composition_source_check.py',

@@ -1,6 +1,6 @@
 # Current Task Map (LAB)
 
-最終更新: 2026-09-15 09:14 JST
+最終更新: 2026-09-22 20:20 JST
 
 **Canon notice:** `mirrorea_canon/` is normative. Everything outside
 `mirrorea_canon/` is LAB; if LAB conflicts with canon, canon wins. This snapshot
@@ -17,7 +17,7 @@ streams selected; TCP deferred, datagrams excluded. No Canon change here.
 
 Owner-requested W4 through completion, then stop.
 
-週間残量32%を2026-09-15 09:12 JSTに確認したため、owner指定の「30%程度で切りのよい所」に従い検証済みproof checkpointで一時停止します。W4は未完了で、次は保持された実設置事実と現在のowner世代・source登録の対応です。
+2026-09-22にW4を再開。旧一時領域の消失を記録し、永続的な外部workdirで再構築・実process再実行を完了しました。失われた過去の生記録と今回の新しい記録を区別しています。週間残量70%（11:00:27 UTCのevent、11:00:57 UTCに確認）、次回は12:00:57 UTC以降。
 
 PL1/PL2/PL0 S4/S6; sole main,
 no subagents, source sorry/admit or Mir axioms. W3 is a closed finite candidate;
@@ -31,7 +31,7 @@ does not change that accepted baseline or the Plan250 pause.
 
 ## evidence and current consumer
 
-通常sourceとownerの同じ実行履歴について、通知前の世代差、現在値、設置の成立条件を一般証明へ接続しました。7追加proofを含むfresh検査は153source module・157module/14916所有宣言監査、169command全成功です。第31回Oracleまで回収し、設置成功だけではidleを導けないこと、供給された予算と全owner実残量の一致が別義務であることを確認しました。通常sourceのC/A通信全bytes照合に加え、書込みの重なりと設置済み未通知の再確認を実通信の途中状態まで再検査しました。容量1ではsourceが開始を受理した後にownerが予約を拒否する実反例が残っています。現在の直接consumerは、過去の設置事実から現在の登録・実owner世代を結ぶ証明、全公開経路のidle・予約容量・freshness・実予算の対応です。既存Rust/Core/privateQUIC・認証認可・物理namespaceの接続とW4全体の受理は未完了です。
+W4は、通常sourceと実ownerの状態・資源を同じ履歴から対応付ける段階です。登録世代・imageと全owner残量を結ぶ一般証明を既存Lean検査へ統合し、fresh160module・15055所有宣言の監査が通りました。第33回Oracleまで回収済みです。正の世代へ進む全前提つきモデル例と、新しいC/A実4process記録の全bytes・全owner残量・結果到着・最終imageの照合も成功しました。公開操作完了時のidleは外部モデルで証明済みですが、全実装経路との対応、予約容量・freshness、その後の既存Rust/Core/privateQUIC接続は未完了です。
 
 Current reversible comparison: certified-head physical future advance versus explicit
 physical-prelude reservation across source replans. Underlying source staging remains
@@ -44,11 +44,11 @@ A global staging barrier was researched and not adopted.
 | Dependency / macro position | Current consumer / remaining gate | Startability / rough remaining estimate |
 |---|---|---|
 | W3 reference / macro1/3/5 finite cut | source/proofs/review/Git retained | closed candidate; no production/Canon promotion |
-| W4 owner boundary / macro2/3 early | same-history floor/image and constructive installation pass; registration/idle/room/full actual funding join open | 着手可能; provisional6–18h for remaining foundation/custody work |
+| W4 owner boundary / macro2/3 early | registration/full-model balance proofs integrated; external public-boundary idle passes; all-entry binding/room/full physical funding open | 着手可能; provisional6–18h for remaining foundation/custody work |
 | W4 runtime connection / macro2/3 middle | actual generated owners/configuration/privateQUIC implement established meaning | 後段依存; provisional10–24h after theory gate |
 | W4 faults/integration / macro2/3 close | actual network positive/negative/observation,119dispositions/review/ownGit | 後段依存; provisional6–14h |
 | W5/W6/W7 / later | same-instance recovery, secret observation/resources, integrated alpha | 後段依存; outside this request |
-| Mandatory corpus / macro0 | hash/full-reading ledger, still incomplete | 着手可能; next mandatory ledger entry332 |
+| Mandatory corpus / macro0 | hash/full-reading ledger, still incomplete | 着手可能; next mandatory ledger entry333 |
 
 Latest user-facing estimate remains24–60active hours, low confidence. It is not
 an Oracle deadline, requirements percentage or permission to omit a gate.
@@ -94,15 +94,13 @@ sample root/taxonomy/roadmap has been adopted. Prior13-module proof integration
 is committed/pushed7732d188; seven-proof successor41705e81 is also normally pushed
 with remote parity. Current final pause/status bookkeeping is separate; no
 Rust/Canon production changes.
-Serial4GiB children; measured40GiB root free/7.0GiB RAM available; no external
-work mount, cleanup or Chrome settings change. Actual weekly remaining32% at
-2026-09-15T00:12:18.314UTC, checked00:12:47.396UTC (>1h after last check). Owner's
-approximate near30% pause is applied at this reviewed proof checkpoint. W4 remains
-incomplete; technical work is resumable without new policy decisions. Next quota
-check>=01:12:47UTC on resume. Oracle1–31 collected; no review/native job remains.
-External OwnerRevisionHistory4 general monotonicity proofs pass but are not yet
-reviewed/mirrored or joined to retained installation/source registration. Preserve
-that next consumer, rather than restarting foundation or re-running old baselines.
+Lean/buildは直列で通常4GiB AS、固定例のkernel計算だけ6GiB AS上限を使用。
+root46GiB空き・利用可能RAM11GiBを確認。外部mount、cleanup、Chrome設定変更なし。
+週間残量70%、次回>=12:00:57UTC。W4 goalはactive、Oracle1–33全回収、live jobなし。
+新しいnative C/A・全bytes/全残量照合は今回の証拠。古い失われた生記録とは区別する。
+3proof追加のfresh統合は156source/160audit/15055owned、172command全0。
+公開境界モデルと記録照合helperは外部の研究候補で、全Python経路やRust/QUICの
+受理ではない。現在の自己差分を検査・commit/通常pushしてから研究を継続する。
 
 
 ## non-promoted references

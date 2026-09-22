@@ -1091,3 +1091,54 @@ Oracle30/31 are advice only; no Canon theorem/phase/119 disposition promotion.
 
 
 2026-09-15T00:14:29.951927+00:00 — Operational pause only: 週間残量32%を2026-09-15 09:12 JSTに確認したため、owner指定の「30%程度で切りのよい所」に従い検証済みproof checkpointで一時停止します。W4は未完了で、次は保持された実設置事実と現在のowner世代・source登録の対応です。 No roadmap/Canon/semantic recut. Seven-proof checkpoint41705e81 is normally pushed/parity. New external actual-owner revision monotonicity4proofs pass e5b23b but remain unreviewed and unmirrored; retain them as the next registration consumer dependency. All31Oracle collected; no resubmission required.
+
+
+### W4 retained installation candidate and artifact-loss resumption — 2026-09-22T09:49:53.733779+00:00
+
+Same owner-authorized W4 LAB goal resumed; no roadmap/Canon/phase recut. Old temporary native builds/raw captures are absent; historical results are retained as history. Selected host/writer recovered byte-exact; committed proof runner freshly passes157module14916owned/169commands. New external actual-revision/history/registration proofs (4+5+13) and129owned audit connect retained install observations to current owner revision, then derive actual image/fence/currentness at accepted source entry from the SAME joint history. The constructive installation consumer and two weakening controls reject missing evidence and all-rejection. Oracle32 mir-w4-install-history reviews the frozen delta; not accepted or mirrored yet.
+
+Current candidate derives the relation from history; smallest alternative retains independent currentness preflight and may safely refuse but does not prove plan progress. Initialization10 maps native revision0 against Python's recorded currentpub; the selected initialization prelude still needs its explicit pub0 proof. Public idle, reserved room/freshness, all actual credit vector and full native lifecycle remain open, followed by existing Rust/Core/privateQUIC. Cold native reconstruction uses no vanished cache and makes no historical binary parity claim. Report2614/W4_CHECK/RESUME retain failures, exact proof hashes, liveOracle and reconstruction state;119dispositions unchanged.
+
+
+### Oracle32 and fresh native reproduction — 2026-09-22T10:19:41.958706+00:00
+
+Oracle32 mir-w4-install-history returned09:57:21UTC, wrapperexit0, collected
+10:01:24UTC. Exact meta prompt matches frozen QUESTION (62d2c23f...); manifest
+e48a6c05..., answer fba9ecf2.... Static advisory only; it ran no Lean/native.
+It found no counterexample to literal conditional registration/currentness,
+confirmed same-history composition, and separated idle, whole-vector binding,
+room/freshness, public-call/pending and meaningful positive inhabitation.
+Main checked initialization0 via existing continuing_floor bound (smaller than
+adding all-initialized restrictions to Runs); the strengthened alternative is
+preserved in prelude/ but not selected. New CreditsAt/actual funded consumer
+passes5b08e0, source95f672be..., no sorryAx. Proof-carrying replay583a4a passes;
+closed parser-derived register prefix and strict model install run passdf7027.
+The full certified/funded premise witness is still running; not counted done.
+Mutation compiler failure is sensitivity evidence, not by itself semantic
+non-vacuity. Public idle/room/native lifecycle remains the direct consumer.
+
+Fresh cold native build230commands all0,110source/102owner modules and complete
+owned-declaration audits. Binary source1ac959e8..., ownerfd471a03..., new recipe
+and manifest in W4_CHECK native_rebuild_20260922; no old-binary identity claim.
+Fresh parser input regeneration94bb9c passes, including two true source-written
+instantiateAt/reparent/invocation continuations. Initial restoration of an old
+pre-repair SourceInputControls failed; original failure preserved, its historical
+old-generation receipt refusal/proof repair reapplied and verified. No production
+semantics changed. Actual source+3owners C/A bb8ecf/78952a each20writes/26pubs,
+values[10,10,11,10,10], all exit0 andstdoutEOF. Receipts399fb562.../2572fb66... and
+all raw frames persist under new workroot. Exact full byte/model replay still
+needs reconstruction; these runs do not establish QUIC/secrecy/recovery/alpha.
+
+Current quota73% event09:59:39Z/checked10:00:05Z, next>=11:00:05Z. Resources
+47GiB disk/10GiB available RAM, swap788KiB. No live Oracle or browser changes.
+Current own LAB changes remain uncommitted; no new push/parity claim. Mandatory
+reading corpus331,next332 still incomplete. No Canon/119/THM/OBL/phase changes.
+
+
+### Registration integration and next public boundary — 2026-09-22T11:20:04.027578+00:00
+
+Oracle33（静的助言）を回収。初期化記録0とsource publicationの一致は既存floor履歴から導出され、全owner残量との結合も条件付き一般定理として支持された。credits_owner_paid単体は自然数の切捨て減算を結ぶ構造補題であり、正の消費はfunded installの実遷移・coverageが与える。閉じた正例は全consumer前提を満たし世代0→1へ進むが、点で構成したlogical driverをnativeのmetered lifetimeと呼ばない。設置観測を全て忘れる反例モデルにはfreeze記録が残る。
+
+レビュー済み3proofを既存sample/runnerへ追加し、fresh156source/160audit/15055owned、172command全0、source32/integrity13/weakening5+8を確認（RESULT3468ff14...）。Canonical THM/OBL/phaseと119dispositionは変更しない。外部モデルでは公開OUTER gate所有操作の完了時idleを一般証明し、raw reserveを公開すると破れることと、独立したadmitted/fresh/room/fundingから実3操作Workを構成する命題が通った。モデルの全Python経路対応は未受理。管理操作の拒否も実budget遷移として扱い、pre-IO拒否と区別する。途中の再入拒否はouter完了境界ではない。pending payment状態をidleの根拠にしない。
+
+今回のC/A実記録は各886入力・712source/174ownerに対して全reply bytes、391回の全owner残量、320query、5entry/5production、既存設置/freeze事実、最終完全imageを同じglobal順で照合できた。最終source残量215。別ownerの残量詐称・query reply変更・computeとfinishのglobal順変更はそれぞれ拒否される。これは有限の実記録検査と改変controlであり、Python/OSの一般simulationや新しい実network実行ではない。容量0/1の反例は維持。次は公開境界の物理対応、予約freshness/roomと全lifetime funding、その後Rust/Core/privateQUIC。

@@ -142,6 +142,41 @@ Rust/Core acceptance inferred from the separate W3 parser+Lean adapter.
 
 Exact fresh result: mir-w3-reference-rkm583l3/RESULT.json SHA6718ddb13cc7b87b9d045410b652e48674bcb0dd261ae209eeb540651793e0c3; all149commands exit0, Lean4.29.1 trust0, only standard axioms. No new Rust/Canon or native executable entrypoint. SYS4 dispatch full17803lines now read; corpus still incomplete, next322. Resource c3592f/f65c4b:42GiBdiskfree/10GiBRAMavailable, serial4GiB limits retained.
 
+
+### Oracle32 and fresh native reproduction — 2026-09-22T10:19:41.958706+00:00
+
+Oracle32 mir-w4-install-history returned09:57:21UTC, wrapperexit0, collected
+10:01:24UTC. Exact meta prompt matches frozen QUESTION (62d2c23f...); manifest
+e48a6c05..., answer fba9ecf2.... Static advisory only; it ran no Lean/native.
+It found no counterexample to literal conditional registration/currentness,
+confirmed same-history composition, and separated idle, whole-vector binding,
+room/freshness, public-call/pending and meaningful positive inhabitation.
+Main checked initialization0 via existing continuing_floor bound (smaller than
+adding all-initialized restrictions to Runs); the strengthened alternative is
+preserved in prelude/ but not selected. New CreditsAt/actual funded consumer
+passes5b08e0, source95f672be..., no sorryAx. Proof-carrying replay583a4a passes;
+closed parser-derived register prefix and strict model install run passdf7027.
+The full certified/funded premise witness is still running; not counted done.
+Mutation compiler failure is sensitivity evidence, not by itself semantic
+non-vacuity. Public idle/room/native lifecycle remains the direct consumer.
+
+Fresh cold native build230commands all0,110source/102owner modules and complete
+owned-declaration audits. Binary source1ac959e8..., ownerfd471a03..., new recipe
+and manifest in W4_CHECK native_rebuild_20260922; no old-binary identity claim.
+Fresh parser input regeneration94bb9c passes, including two true source-written
+instantiateAt/reparent/invocation continuations. Initial restoration of an old
+pre-repair SourceInputControls failed; original failure preserved, its historical
+old-generation receipt refusal/proof repair reapplied and verified. No production
+semantics changed. Actual source+3owners C/A bb8ecf/78952a each20writes/26pubs,
+values[10,10,11,10,10], all exit0 andstdoutEOF. Receipts399fb562.../2572fb66... and
+all raw frames persist under new workroot. Exact full byte/model replay still
+needs reconstruction; these runs do not establish QUIC/secrecy/recovery/alpha.
+
+Current quota73% event09:59:39Z/checked10:00:05Z, next>=11:00:05Z. Resources
+47GiB disk/10GiB available RAM, swap788KiB. No live Oracle or browser changes.
+Current own LAB changes remain uncommitted; no new push/parity claim. Mandatory
+reading corpus331,next332 still incomplete. No Canon/119/THM/OBL/phase changes.
+
 ## What changed in understanding
 
 Existing I3-3 B-local successor plus parent acknowledgement/publication is not automatically a realization of W3 strict realm-wide currentness. This is a new consumer obligation, not a reproduced defect against accepted I3-3. Monotone endpoint fences and retained acknowledgement origin permit an explicit small arithmetic invariant without putting the desired result into State or transition premises. Matching a generation does not yet match a head payload or authenticate its issuer.
@@ -1125,3 +1160,52 @@ or replaced with larger constants. Existing Rust/Core/privateQUIC integration,
 authnamespace and overall W4 remain open; estimated24–60activeh is lowconfidence.
 
 2026-09-15T00:20:47.334797+00:00 — final pause snapshot validation d20d4c/bc4e06 exits0 (1764 reports); prior postcommit snapshot dfaed9/53eaba also passed before final pause edits. Final9document bookkeeping is diff-checked; all seven reviewed sources match the committed/fresh cut (4b0537). No liveOracle/native/Lean/validation jobs remain. This following bookkeeping commit records pause/evidence only; exact final commit/normalpush/remote parity and clean-state result are stored in /tmp/mirrorea-w4-20260914-a3e0bpks/QUOTA_PAUSE_GIT.json and reported to the owner after execution. No W4 completion or unrun dependent test is claimed.
+
+
+### Forward recovery and resumption — 2026-09-22T09:28:05.928902+00:00
+
+Owner resumed same W4 goal; cleanHEAD05157f4e. Old external /tmp workroot and freshbuild/rawcaptures/nativebinaries are absent. Prior successes remain historical, not current replayable raw evidence. No cause (OOM/reboot/cleanup) is inferred from absence. New bounded external workroot /home/codex/.local/state/mirrorea-proof-first/w4-20260922, root47GiBfree/12GiBRAMavailable, no externalmount/cleanup/Chrome edit. Own tool-history literal/string-transform recovery yields exact reviewed host43c9b1.../writer86d88c... and pending revisionproofc50080de...; no historical shell/Oracle/Git jobs re-executed. Recovered revision source passes freshd3cd99 with same logd4ac52... and standardaxioms only. Existing committed fullrunner newly passes1d06e6,153source/157audit14916owned169commands all0/source32/integrity13/weakening5+8, RESULTd43dd5afcb918a478d5dea525b69aed0689e6f35a7492ecea6a9e6609d339b93. No new native/network execution or W4 closure.
+
+Source-owned work still needed: retained installation/registration, public idle, room/freshness and full native lifecycle/actual vector; Rust/Core/privateQUIC remains downstream. Selectednative reproduction harness/build/input recovery continues; oldrawreceipts not synthesized. CurrentOracle1–31 all historically collected, no livejob; newreview only on materialdelta. Weekly76% at08:59UTC, next>=09:59:07UTC, convenient near30%pause remains ownerrequested. Currentgoal/RESUME/W4_CHECK/progress/tasks are updated; further plan/sample mirrors and docs validation pending. No Canon/THM/OBL/119disposition change, no subagents. No newcommit/push yet.
+
+
+### Retained installation history consumer — 2026-09-22T09:46:25.204273+00:00
+
+New external OwnerInstallationHistory5 and SourceRegistration13 general laws pass6ce71b/ff075a/c128e5; recovered OwnerRevisionHistory4 passesd3cd99. Current3module all-owned audit129(13+28+88) standardaxioms only ed9105/e6213b. SourceRegistration b2161b88f0385ca4ceab68fbf73774fc284142b01b2ccc232e40602516597e4a derives logical registration<=actual core from retained native success history, projects SAME history to prior image/floor laws, and derives actual current image/revision/fence for an initialized owner at accepted source entry. Explicit existence remains necessary: fresh numerical zero gate with absentowner is a generalcounter. Constructive funded_head_install yields actual-model7 and admitted source notice without assuming successful operations; idle and actualtarget/suppliedfunding premises remain independent. No claim of all actual credit vector, reserved-room, auth or wholePython/native callgraph correspondence.
+
+Actual semantic controls41f8f7: removeinstallmembership breaks source_preserves; discardALLfacts passes historysafety but fails constructive funded_head_install. Initial proof failures d5f9ec (Nat.le_trans syntax),1b9df5 (revision name collision),1fdab2 (binder/parser),4ded05 (mechanical Runs.source rename) were retained and repaired, not accepted or imported downstream. No source sorry/admit/Miraxiom.
+
+Oracle32 submittedonce37933f at09:41:51.056210Z, sessionmir-w4-install-history, wrapper85949/PID325060, Q62d2c23fcc06dde758201e4007b1999582b33346109641c0bec3313188ca357f manifest e48a6c05259ddb7ae1d75ad8af21162ec75001d594c86b7a5bf2e78e38bbc492. Drycef58231files256182B. Firstcheckee38df at09:44:53.991782Z PIDalive/noexit; next>=09:47:54Z. No time-basedresend/jobdeadline. Attachments explicitly distinguish vanished old rawcaptures from freshkernelruns. Main current reread identifies initialization correspondence still needing proof: hostrecords currentpub on10, modelrecords0; selected sourceprelude must establish currentpub0 beforeinitialization. Frozenreviewcut remains unchanged; next technical consumer, not silentpremise. Nativeharness/build/input reconstruction continues from own literalpatch/commands without executing old jobs.
+
+2026-09-22T09:49:53.733779+00:00 — Existing plan/Documentation/project-status/progress/tasks/samples_progress current snapshots synchronized for resumption, actual artifact loss and external registration proof/review state. Sample roots/taxonomy/commands unchanged; new native rebuild is not yet validation. Mandatory fullreading ledger next332 unchanged. No Canon/THM/OBL/phase/119disposition change. Documentation validation running next; own commit/push pending.
+
+
+### 2026-09-22T10:53:57.555136+00:00 — constructive registration repair delta
+
+General replay six relative-completeness laws now pass eba890 after failed type/dependent-match elaborations (retained, never accepted). RegistrationNoFacts proves arbitrary finite all-observation-forgotten model keeps every registration0; positive generation is unreachable, not just a failed compiler mutant. Actual Rust-parser-generated register source inhabits all premises of funded_head_install_actual and proves actual model core/source registration0→1 with history[1,0]. Standard kernel certificate8d9821 and funded witness9e2f2e pass; no normal waiting-entry or full physical-source-lifetime claim. Full nine-module297owned audit19af30 allows only standard3 axioms. Five general/model modules account for249; four fixed-example modules48 are explicitly inhabitation evidence, not general theorems.
+
+Earlier4GiB AS fixed-proof failures remained bad_alloc and were not called OOM-killer evidence or success. A serial6GiB proof-only cap allowed the stock decide +kernel certificate (peak5494692KiB) and funded witness(2052608KiB). Experimental proof-producing CBV also passed but is not the selected import; no private-tool adapter is needed. Runtime limits/capacity/contracts were unchanged. No current Lean/native job; Oracle33 runs asynchronously.
+
+Oracle33 submitted once4ea201 at10:52:32.597314UTC, sessionmir-w4-registration-delta, wrapper24800/PID570426, questioncd0c89318ef3bdd9a789bc612ddef1f29e52044cd72bbe0c31bfc767deb0db6d, manifest42f786f44f276e229f7d0fee4ab0eb8aed980a6de20f1931b7ad839f50a92523. Dry378491 passed44frozenfiles361684B plusmanifest,113783estimatedtokens. Nextcheck>=10:55:33UTC; no job deadline/retry. Independent advisory delta review covers initialization correspondence, actual full balance binding, nonvacuity and next public-boundary idle consumer. Pending review is not accepted.
+
+Next authorized work: public admin/source/query/refusal/retirement and expanded reserve/probe/compute work inventory; derive continuing public-boundary idle rather than assume it from lease absence or clearpending. Room/freshness, full actual funding/lifecycle, exactnewcapture replay and Rust/Core/privateQUIC remain open. W4 incomplete; Canon/119dispositions unchanged, no subagents. Existing milestone report reused; own commit/push pending.
+
+First status363639/ccb3a5 at10:57:04.601638UTC finds wrapper alive, response streaming; actual normalizedsessionmir-w4-registrati-delta (requestedslugmir-w4-registration-delta). Retain samejob, nextcheck>=11:00:05UTC. No retry.
+
+
+### 2026-09-22T11:20:04.027578+00:00 — reviewed LAB proof integration and new actual-capture conjunction
+
+Oracle33 completed11:02:23.994731UTC, collected482e56/00b671/26feb2; actualsessionmir-w4-registrati-delta, answerSHAa0b09b14fe9de1338cf27b8e5e6455effa5f307e2569f076332b7be17c5bf9a6, exactprompt verified. No liveOracle. Main accepts initialization/full-vector repair within literal premises, records truncated-debit and p1/emptytail/point-driver/successor-identity limits, narrows replay wording and installation-only forgetting scope. No oracle acceptance or native execution is inferred.
+
+3reviewed LAB proof sources mirrored884a1c; existingowner-boundary runner root consumesSourceRegistration. Fresh7323dc/3a9cf9/5f3e9c passes156source/160audit15055owned172commands all0,source32/integrity13/weakening5+8. RESULT3468ff141960e91c9cd1d1dca5a8eaae054202d2dc3d3beaf64dee557481bd8a; workspaceW/mir-w3-reference-f8m092p9. Source/parser rebuilt; no oldolean or cachedparser success substituted. Native entrypoints/trace helpers remain external. Existingreadme/sample/script docs updated without newroot/taxonomy.
+
+Newgeneric readonly JointCapturedReplay compiles284d55 and runs3168e6 over actual C/A freshcaptures. Each886events includes712source and174owner inputs; fullreplybytes,global balancevector on391execute requests,320privatequeries,5entries/productions,observedinstall/freeze/arrival and final completeimage agree. FinalsourceRemaining215. All rawbytes/receipts/binaries checked against frozenhashes before/after. Logd911e6aadaeaf15da4a644d53719554f08e4262baef0772196376182b386be10. Three adversarial COPIES21f2eb reject off-target falsebalance,queryreply mutation,compute/finish crossstreamreordering(log64af44a4...). They are not newphysical runs. No generalPython/OS/auth/networkproofclaim.
+
+PublicOwnerBoundary12general lemmas pass9c8cb5: actualadmin including debit-bearing refusals preservesidle, actualproducedcompute restoresidle, expandedreserve/probe/compute Work has independent constructive premises, raw reserve6 makesownerbusy and contradictsidle. Continuing OUTER gate-owning boundaries only; reentrant failedentry duringwork is notoutercompletion. Retirement does notassertphysicalidle orrollback. Correspondence of allPythonbranches andpendingordinal/projections stillOPEN. Externalonly; all-ownedaudit running44476 atthisparagraph.
+
+plan/Documentation/project-status/progress/tasks(fullsnapshot)/samples_progress synchronized. Corpus332,next333; readledger continues. NoCanon/THM/OBL/119disposition change, no subagents. Quota91f55670%event11:00:27Zchecked11:00:57Z, next>=12:00:57Z. Own18pathdiff/docsvalidation/commit-normalpush pending; W4active. W4network/Rust/I3regressions not re-run in this proof-only integration and not counted asnewsuccess.
+
+Public-boundary expanded all-owned audit7b2fcc now passes349declarations across10external modules; public-boundary52owned includes12general laws. No liveLean/native/Oracle. Documentation/diff validation next, own checkpoint remains pending.
+
+
+2026-09-22T11:27:25.673511+00:00 — Checkpoint validation: validate_docs.py passed7ec203 (1764 reports); check_source_hierarchy.py passed8416be (800/800); git diff --check passed54f79f. Focused source/runner/doc diff review and frozen-source equalityf2a6ac confirm all3mirrored proofs match both Oracle33 packet and fresh integrated run. Own18paths only, Canon unchanged. Checkpoint commit and normal push are next; no success presumed. Public-boundary correspondence work continues, W4 not complete.

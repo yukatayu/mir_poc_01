@@ -279,8 +279,8 @@ reject deletion of either image guard or the pending freeze record. Standard
 axioms are propext/Classical.choice/Quot.sound only; failed drafts are excluded.
 Oracle31 statically reviewed the new8/3/10 theorem cut; it did not run Lean/native.
 
-Retained installation facts must still imply registration<=current actual core
-through monotone history. Public-boundary idle, fresh reservation keys/room and
+The following registration extension derives registration<=current actual core
+from retained installation facts through actual guarded transition history. Public-boundary idle, fresh reservation keys/room and
 whole native lifecycle/all-owner credit binding remain separate. An actual owner
 capacity1 run accepted source entry then returned exhausted5 on reservation; it
 failed and cleanup reaped children, not normal EOF. Currentness is insufficient
@@ -293,3 +293,38 @@ Confirmation checks five unrelated pending mutators emit0IO, including a truthfu
 same-kind wrong-target notification. Repeating an old truthful notification
 consumes source quota although its projected publication snapshot is unchanged.
 No native/QUIC/authority/alpha completion is inferred.
+
+
+## Retained installation and source registration
+
+`OwnerRevisionHistory` proves actual initialized-owner preservation and monotone
+core revisions through worker/endpoint/profile/budget transitions. The broader
+abstract reservation installation rule is not used as a monotonicity premise.
+`OwnerInstallationHistory` retains successful initialization/install observations
+and proves each recorded revision remains below the actual current core.
+`SourceRegistration` uses the same joint source/owner history as the prior image
+and floor results, adding a declarative install-membership guard and exact checker.
+Registration<=actual core, together with image/floor bounds, derives actual current
+image/revision/fence at an open source gate for a present owner. Initial numeric
+zero equality is insufficient when the owner has not yet been initialized.
+
+Successful initialization implies an absent old owner; the existing clear-boundary
+floor bound then forces source publication0. This derives the host/monitor revision
+record agreement without assuming a stronger initialization-prelude history.
+`CreditsAt` binds every supplied-vector coordinate to actual modeled credits. Its
+structural decrement lemma alone does not assert a positive debit at zero; the
+funded install consumer supplies coverage and the actual successful transition.
+The strengthened consumer constructs actual install7 and accepted source notice,
+retaining the full after-vector correspondence and actual suffix coverage.
+
+Oracle32/33 statically reviewed these conditional claims. A separate external
+closed parser-derived positive inhabits all consumer premises and reaches actual
+model revision/registration0→1. Its logical driver is constructed at the chosen
+head, not a metered native lifetime; the fixed test is not a general proof or a
+normal waiting-entry result. A semantic control that forgets all INSTALLATION
+observations proves positive registration unreachable; freeze records remain.
+Fresh integration passes156source/160audit/15055owned declarations and172
+commands, with32source/13integrity/5+8weakening controls; Report2614 pins the cut.
+Public outer-boundary idle, raw reserve exclusion, reserved-key freshness/room,
+whole source-driver/credit lifetime and Python/bytes/Rust/Core/QUIC correspondence
+remain separate gates. No Canon theorem status or public contract is promoted.

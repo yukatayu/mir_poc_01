@@ -1,6 +1,6 @@
 # samples_progress
 
-Last updated: 2026-09-15 07:09 JST
+Last updated: 2026-09-22 20:20 JST
 
 Plan250 execution control: I3-3 is accepted and owner-paused with no active
 semantic milestone. Plan 250 remains retained; I3-4/I3-5/I3-6/NEXT-0 remain
@@ -21,7 +21,7 @@ model is mirrored and fresh-integrated with the reference checker's
 also passes. These are distinct component/model and prior network evidence;
 new actual-source physical refinement remains open. The current105source/12913owned audit and17actual source+51owner whole-byte/argv replays pass. Oracle16 F1/F2/F3 repairs have general proofs and native/checker regressions. Oracle17 is collected; actual required-audit/aggregate/finalizer counters and repairs pass. Oracle18/19 are collected. Budgetowner102 has explicit successful audit,3direct processes/1542inputs and C/A exact-byte continuations. Active EOF and short frames are classified as incomplete failures. New sole-writer credit monitoring and local claim/enter/cancel invariants pass Lean; actual one-credit source admission counter and two-credit parked-result control expose the next consumer. Two credits do not fund the driver diagnostic or subsequent publication; full continuation resource custody remains OPEN. Direct old95owner scope2^128 still gives an actual unreadable reply; the successor pre-reservation/checker agreement, all-entry preservation, every-reply readability and independent ordinary roundtrip progress pass Lean (bfaf05), with finite controls17bd6e. Owner101/12450owned audit, direct4process34inputs and C/A whole-byte replay pass. Completion-credit native evidence is now available; authenticated physical coupling and reproducible integration remain open. The historical92module result predates the reviewed45file mirror; the new --with-owner-boundary workflow passes133compiled/137audit modules and14148owned declarations. Native entrypoints and the new credit-custody coordinator remain external (Report2614). W5+ and Plan250/I3-4 remain inactive.
 
-通常sourceとownerの同じ実行履歴について、通知前の世代差、現在値、設置の成立条件を一般証明へ接続しました。7追加proofを含むfresh検査は153source module・157module/14916所有宣言監査、169command全成功です。第31回Oracleまで回収し、設置成功だけではidleを導けないこと、供給された予算と全owner実残量の一致が別義務であることを確認しました。通常sourceのC/A通信全bytes照合に加え、書込みの重なりと設置済み未通知の再確認を実通信の途中状態まで再検査しました。容量1ではsourceが開始を受理した後にownerが予約を拒否する実反例が残っています。現在の直接consumerは、過去の設置事実から現在の登録・実owner世代を結ぶ証明、全公開経路のidle・予約容量・freshness・実予算の対応です。既存Rust/Core/privateQUIC・認証認可・物理namespaceの接続とW4全体の受理は未完了です。 再現commandは `python3 scripts/proof_first_reference_source_check.py --work-root /tmp --with-owner-boundary`。nativeと新coordinatorは外部workdirの非production実験で、active sample rootやtaxonomyの変更はありません。
+W4は、通常sourceと実ownerの状態・資源を同じ履歴から対応付ける段階です。登録世代・imageと全owner残量を結ぶ一般証明を既存Lean検査へ統合し、fresh160module・15055所有宣言の監査が通りました。第33回Oracleまで回収済みです。正の世代へ進む全前提つきモデル例と、新しいC/A実4process記録の全bytes・全owner残量・結果到着・最終imageの照合も成功しました。公開操作完了時のidleは外部モデルで証明済みですが、全実装経路との対応、予約容量・freshness、その後の既存Rust/Core/privateQUIC接続は未完了です。
 
 | W3 evidence | Reproduction | Remaining boundary |
 |---|---|---|

@@ -486,3 +486,7 @@ fresh検査する（`--with-publication` を含む）。既存のW3 source検査
 再実行する仕組みであり、native worker／QUIC／権限の発行／W4完了を意味しない。
 定義と未接続条件は [MirroreaProofFirstPublication.md](../samples/lean/foundations/MirroreaProofFirstPublication.md)、今回の結果はReport2614に記録する。
 active rootの追加や移動はない。
+
+同じowner-boundary検査には、保持された設置事実・実owner世代の単調性・source登録との対応も含む。
+初期化時の記録一致と全ownerのモデル残量に結び付いた設置consumerを一般証明する。
+公開操作の全経路、予約容量・freshness、実通信との対応は別の未完了条件である。

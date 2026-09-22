@@ -1,11 +1,13 @@
-# W4 physical refinement — quota pause; incomplete
+# W4 physical refinement — resumed; incomplete
 
 Owner scope: verified W4 candidate completion, then stop; sole main, NO subagents.
-W5+ and separately paused Plan250/I3-4 inactive. Owner asked for a convenient
-pause near30% weekly remaining. Actual32% at2026-09-15T00:12:18.314Z, checked
-00:12:47.396Z (54bee5, >1h after prior check). Pause at reviewed proof checkpoint;
-W4 is NOT complete. Next quota check>=2026-09-15T01:12:47.396Z when resumed.
-No goal reset/fakecompletion; API's earlier blocked state is not this pause reason.
+W5+ and separately paused Plan250/I3-4 inactive. Owner resumed on2026-09-22.
+Weekly70% remaining event11:00:27Z/checked11:00:57Z; next>=12:00:57Z.
+Pause conveniently near30% as requested; goal remains active, no scope reset.
+Old temporary artifacts remain absent/historical. New persistent external
+workroot rebuilt committed proofs and both native closures; C/A4process cases
+freshly pass, all EOF/exit0; full newbyte/global-balance replay passes.
+Oracle1–33 collected; no liveOracle. See RESUME/W4_CHECK.
 
 PL1/PL2/PL0 S4/S6; theory/refinement before dependent implementation.
 REQ DS01/02/03/04/08 AU01/04/05/08 VF04/05; PT03/11/14 SC04/07 Q18.
@@ -29,10 +31,13 @@ modules plus four generated consumers,157audit/14916owned declarations,169comman
 all0/source32/integrity13/weakening5+8. Separate three semantic weakening controls
 fail at the designated general theorem. No source sorry/admit/Miraxiom.
 Same-history floor/current-image and constructive freeze/install consumers are
-checked; retained install-to-current registration, public idle, freshness/room,
-full native lifecycle and all-owner credit binding remain OPEN. Oracle1–31 are
+checked. Three reviewed actual revision/installation/registration modules are
+now mirrored: fresh156source/160audit15055owned172commands0. Initialization0 and
+full actual-model balance transfer follow from the same history. Public idle,
+freshness/room and full native lifecycle/funding correspondence remain OPEN. Oracle1–33 are
 collected, static advisory reviews, not independent kernel runs or acceptance.
-Native110source/102owner binaries remain separate older audited cuts.
+Fresh110source/102owner binaries are rebuilt and exercised; they remain separate
+from the reference general proof closures and from Rust/QUIC.
 
 Decisive counter: source replans at pub1/ann2/allreg0; actual extra initialization
 spends only slack until owner0 B=D18. Old registration guard blocks required
@@ -43,7 +48,9 @@ Smallest alternative: explicitly reserve physical preludes across replans,
 including source quota, owner credits and ordering. The global staging barrier
 was researched but NOT adopted. Public scheduling/revocation policy stays reserved.
 
-Actual C/A20writes/26pubs/5values and complete-byte/argv replay pass at43c9b1….
+New C/A20writes/26pubs/5values pass whole-byte/global-vector replay at43c9b1….
+The following strict-overlap/confirmation/capacity evidence is historical; its old
+rawcaptures were lost and are not represented as newly executed here.
 Exact repeated current installation succeeds at owner1 B=D17 with capacities
 8/9/10; pending blocks five unrelated entries0IO. Old truthful notification accepts0
 without owner debit but DOES consume source quota. Strict overlap and confirmation
@@ -68,9 +75,10 @@ and review gates, then actual source/Core/network/owner/trace correspondence,
 focused faults/regressions,119dispositions and ownGit. Report2614/W4_CHECK/RESUME
 retain exact cuts. W5/W6, recovery kinds and Q18 remain separate.
 
-Resume: complete retained actual installation history using the external checked
-OwnerRevisionHistory4 monotonicity lemmas (e5b23b), then public-boundary idle and
-actual reservation freshness/room/full lifecycle/vector binding. The four lemmas
-are not Oracle-reviewed/mirrored or a registration proof. Capacity0 forward run
-changes only owner2 capacity: enter0 then exhausted5; four retired views0IO.
-All31Oracle answers collected; no live job. Preserve same goal and evidence.
+Resume: reviewed registration delta is integrated and freshly checked. External
+PublicOwnerBoundary12 laws derive continuing OUTER gate-owning boundary idle,
+construct actual three-operation Work from independent premises, and expose raw
+reserve as a general counter. External package349owned audit passes; allPython
+branch mapping remains open. Next consume actual public boundary/reentry/refusal
+traces, then reserved-key freshness/room/full lifecycle and vector custody.
+No liveOracle/Lean/native; own18path checkpoint commit/push pending. W4active.
