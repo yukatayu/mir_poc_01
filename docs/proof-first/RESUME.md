@@ -1,69 +1,35 @@
-# W4 resume — 2026-09-22T11:22:02.267069+00:00, ACTIVE/incomplete
+# W4 RESUME — quota checkpoint, incomplete
+Updated 2026-09-23T06:34:00.435498+00:00. SOLE MAIN / NO SUBAGENTS. Preserve the same unlimited W4 goal; final bookkeeping then `paused`, never `complete`. User requested approximately30%weekly remaining at a convenient checkpoint. Latest33% at2026-09-23T06:14:34UTC; next check no earlier07:14:34UTC. Continue only when user resumes; existing technical delegation persists.
 
-Owner scope W4 verified candidate then stop; NO subagents/W5+/I3-4.
-HEAD05157f4e8029090b2d8682b91a6de66594f07ae2 main; own18paths dirty incl3newLAB
-proofs. No newcommit/push YET. Preserve Canon/119dispositions/originalmaterials.
-W=/home/codex/.local/state/mirrorea-proof-first/w4-20260922 persistentoutsideRepo.
-Old/tmpworkroot ABSENT; historicraws/builds do not exist. Nocleanup/Chromeedit.
+## Repository and authority
 
-INTEGRATED reviewed3proofs now samples/lean/foundations:
-OwnerRevisionHistoryc50080de...4laws;OwnerInstallationHistorye5b1080e...5;
-SourceRegistration95f672be...20. Existingowner-boundary runner rootSourceRegistration.
-Fresh source156/audit160/owned15055/172commands all0,source32/integrity13/weakening5+8.
-Result W/mir-w3-reference-f8m092p9/RESULT.json
-SHA3468ff141960e91c9cd1d1dca5a8eaae054202d2dc3d3beaf64dee557481bd8a,
-3a9cf9/5f3e9c. Earlier153/157/14916 baseline remainsprior freshhistory, notcurrentcut.
-NoCanonTHM/OBL/phasepromotion. Ownsample/script/guides updated, existingroots.
+BaseHEAD `dfd93f4b07842adc2a3e9855708549e2d7dae51e`, branch `main`; exact origin parity checked before this11-file LAB checkpoint. Five own dirty evidence docs existed at restart; six current status/plan mirrors were additionally synchronized. No user dirty file was reset/cleaned. Final checkpoint commit/push receipt is external `QUOTA_PAUSE_GIT.json` under W below; current HEAD identifies the checkpoint. If that receipt is absent, final Git step is incomplete. Do not infer parity.
 
-Oracle1–33 allcollected; NO liveOracle. Oracle33actualsessionmir-w4-registrati-delta
-(requestedmir-w4-registration-delta), completed11:02:23.994731UTCexit0,
-QUESTIONcd0c8931.../MANIFEST42f786f4.../ANSWERa0b09b14fe9de1338cf27b8e5e6455effa5f307e2569f076332b7be17c5bf9a6.
-Exactpromptverified receipt26feb2, answerfull00b671. Staticadvisorysupports7lawdelta;
-corrected: credits_owner_paid structural0-1 truncation notpositiveconsumption;
-positivepointdriver512 notmeteredlifetime; p1emptytail/separate successorlimits;
-NoFacts forgetsINSTALLrecords butkeepsfreezefacts. Adminrefusalcancharge; PRE-IO
-rejectionframes. Failedreentryduringwork notanouterboundary; pendingpaymentcan
-beidle butisnotidleevidence. Do notresendoldquestions.
+W=`/home/codex/.local/state/mirrorea-proof-first/w4-20260922` (persistent external workdir). Handoff materials/archives untouched. New proof/reference code remains external, not yet mirrored into the repo sample runner. No Canon/THM/OBL/phase/public/production promotion; Plan250 stays paused after I3-3, W5+ inactive. No agents/Chrome changes/paid fallback/notifications/cleanup/force/hostshare.
 
-External registration-reviewed modules: Replay57fd36c4...6relativecompleteness;
-NoFacts d925cbf8... arbitraryfinitepositive-registrationimpossibility underforgetting
-installationfacts; PrefixOne+stockKernelCertificate+FundedWitness d3fd80af...
-inhabitallconsumerpremises andstrict0→1. Fixedkernelwitnessnotgeneralproof.
-Selectedstockkernel6GiBAScap (peak5.24GiB) andfunded1.96GiB both0; earlier4GiB
-bad_alloc failuresretained; CBValternativeNOTimported. Runtimecapsunchanged.
-External PublicOwnerBoundary8da8374d...12laws: actualadminincludingrefusals,
-expandedreserve6/probe2/compute, owner-framingsource/query/PRE-IOrefusal,
-absorbingretirement; continuingOUTER gateownerboundaryidle. Rawreserve6⇒busy
-counter andconstructiveWork fromindependentadmitted/fresh/room/funding checked.
-Ownerprojectionforgets source/pending/ordinal; allPythonmappingstillOPEN.
-Current10module all-owned audit349standard3axioms7b2fcc; no sourceholes/Miraxioms.
-Not mirrored; nextreview materialdelta onceactualcorrespondence evidenceavailable.
+## Same semantic goal and location
 
-Fresh native cold-native-2 source1ac959e8.../ownerfd471a03...230commands0,
-110source/102ownermodules. ActualC/A4processREBUILT_NATIVE receipts399fb562.../
-2572fb66..., each20writes26pubs values[10,10,11,10,10], all8exit0/EOF.
-NEW JointCapturedReplay source/readhelper isexternal recovered/.
-Preparedactual1772inputs (886percase;712source/174owner), rawframes/argv/binary
-identity frozen byprepare_joint_capture_replay.py. Actualbyte+global-order model
-replay3168e6 PASS:391executions/fullvectorbindings,320queries,5entries/productions
-percase, observedinstall/freeze/arrival andfinalcompleteimage, sourceRemaining215.
-JOINT_REPLAY_FIRST_RESULT.json/logd911e6aa... inputmanifest7afc4ed8... .
-Adversarial COPY controls21f2eb PASS3:off-targetbalance,queryreply,compute/finish
-crossstreamorder; log64af44a4... . Notadditionalnativeexecutions/generalsimulation.
-Selectedhost43c9b1c.../writer86d88c... unchanged. No Rust/Core/QUIC claim.
+PL1/PL2/PL0 S4/S6 theory/refinement: actual private source/owner process events and host stores correspond to SAME native/Joint/funding/source-entry/cohort history. REQ DS01/02/03/04/08 AU01/04/05/08 VF04/05; PT03/11/14 SC04/07 Q18. Delayed stores, known replies, caller confirmation and public completion are distinct. Unknown communication retains last-known native/host state plus actual physical residual; never infer rollback/refund/absorption/recovery. Existing Rust/Core/projector/privateQUIC is the direct eventual consumer, still gated.
 
-NEXT: finishdocsdiffvalidation andown18pathcommit/normalpush (originalauthorized),
-thenpublicouter-boundary concretebranch correspondence. Native views wrapper can
-recordactualoperation spans; failedreentryduringreservedwork mustnotbecounted
-asoutercompletion; pre-IOrefusalvschargedadminrefusalvsfatalprefix separate.
-Do notinfercorrespondencefromtheabstractcompletedoperationrelation alone.
-Then reservedkeyfreshness/room/fullphysicalsource/ownerfunding, existingRust/Core/
-privateQUIC; capacity0/1 sourceentry0→reserve5remainsunfixed, notconstantincrease.
-No liveLean/nativejobs. Mandatorycorpus332,next333 incomplete; do notredo baseline.
+## Verified saved cut — do not rerun unchanged one-shot launchers
 
-Quota70% event11:00:27.181Zchecked11:00:57.379834Z; NEXT>=12:00:57.379834UTC.
-Convenientpause near30% requested. Resource46GiBdiskfree/11GiBavailableRAM;
-serial4GiBAS/core0 generally,6GiB onlyfixedwitness. Checkbeforeheavywork.
-Snapshotsplan/progress/tasks/Documentation/projectstatus/sampledashboard synced.
-Latestdocvalidation7ec203 passes1764reports; hierarchy8416be passes800/800.
-Focusedsource/runner/docdiff andproofOracle/freshhashesf2a6ac checked; commitnext.
+- Normal lease: `LEASE_BOUND_EXECUTION.json` f00b40d58ee0babb453a9174e2ddc010958b62e74b76ef5382f70fa1de81ab78;3actualprofiles,23negatives,9077bindings. Full normal trace11608prefixes/4402discharged/6475rows/692stores/174closes; source-only prefix remains distinct from exhausted program.
+- Known faults: `KNOWN_LEASE_BOUND_EXECUTION.json` 39ef0ab235a9ae8ebc31b5ccc665c5d36a79bc89f7844ec84bb46e797851a2fb;4freshprofiles,14negatives,14632bindings. Each234actualstores/57paired closes; UNNOTIFIED/NOTIFIED/SNAPSHOT and earlier-refusal/later-NOTIFIED. Cold62:228exact reused+4modules/audit/inspector. Complete-owner and retained-probe general theorems preserve exact focused/idle memory and unfinished debt.
+- Unknown wire: `WIRE_LEASE_BOUND_EXECUTION.json` 0459978ca3afeb457a557080537589c4b34ef0b9bc44d7e3ba7d9af947b15cb6;8freshprofiles,16negatives,20161bindings. ENTRY/OWNER×BEFORE_WRITE/BODY_LOST/RAW_CAPTURE plusbothRAW_CAPTURE_MIXED. Cold63:234reused+3modules/audit/inspector,66ownedmodule audits. `UnconfirmedLeaseCorrespondence` d14eb434..., `LeaseWireCaptureReplay`97530a0a..., decoderd60503b5... compiled trust0/stdlogic. Earliest bound launcher failedbeforeRESULT existed and beforeanyreplay; empty output retained, unchanged launcher subsequently passed.
+- `PAUSE_BOUND_HASH_RECHECK.json`:34715union bound files still hash-identical. Finite captures/tests do not replace general theorems or prove arbitrary OS/network refinement. Earlier cold58/59/60/61 and old fault receipts remain history; no oldraw upgraded.
+
+## Reviews and scope
+
+No live Oracle or Lean process. Oracle61/62/63/64 final answers collected; last64 `mir-w4-pause-snapshot` submitted06:26:28UTC, completed06:29:01UTC. Full receipt/dispositions: `ORACLE62_*`, `ORACLE63_*`, `ORACLE64_*` in W. Frozen packets and answers retained in their named oracle directories. Static advice, not independently executed/signed acceptance.
+
+Oracle62 early-marker issue reproduced: deleting finalfailedEnd prints intermediate markers but exits1 unfinishedouterspan. Acceptance requires wholeexit0 plus complete bound checks. Generic probe theorem does not assert probe existence; actual selected profiles separately bind5publicprobes/10observations/8calibratedfd withzero protocolIO.
+
+Oracle63 sourceWireClaim→sourceClaim relabel reproduced forBODY_LOST/RAW_CAPTURE (RunWireLeaseRelabelProbe FIRST exit0). Both denote SAME pre-reply claim; file locator differs afteractualwrite, actualFault still binds full same occurrence. settledordinal240/attempted241 andrawbody distinction persist. Oracle64 and localinspection classify this as non-injective private locator-tag encoding, not correspondence failure. No canonical-tag injectivity claim; optional marker not adopted or required by this cut. Do not misreport these2accepted controls as rejected negatives. Oracle63's suggestion that Rust/Core/privateQUIC inherently needs new owner approval was rejected: existing conditional internal delegation remains, with real theory/process gates and separate reserved public/Canon/production boundaries.
+
+## Continuation
+
+First commands in repo: `git status --short`, then `git rev-parse HEAD`. Read the saved `QUOTA_PAUSE_GIT.json`, `W4_CHECK.json` latest checkpoint and this resume; check hashes before relying on external work. No pending consultation to resend or baseline to repeat solely because context changed.
+
+Next substantive work: preserve the reviewed external proof/reference cone in the existing repo runner with coherent imports and scoped validation; close required relative-admission/all-entry/current-authority/authenticated physical namespace obligations; then connect actual source→checkedCore→generatededge→request/serve/result→observation through existing Rust/privateQUIC. Finish fresh network/fault/regression evidence and119disposition/W4integration. No new global plan or W5+. Mandatory broad corpus343full,next344 remains incomplete; readledger distinguishes full/range reads. Rough remaining24–60activehours is low-confidence, not coverage.
+
+TCB: Lean4.29.1 standardlogical axioms; pinned compiler/native binaries; truthful privileged CPython3.12.3 capture/normalizer andexclusivepipes; stableFS/nohostileABA; selected uninterrupted host stores/locks/cleanup andfatalabort-only behavior. IDs/hashes grant no authority. No confidentiality/passive-noninterference/durable-recovery/alpha/W4completion claim. Heavy Lean serial--trust0-j1, AS4GiB/core0; root38GiBfree/RAM9.1GiBavailable at last preflight. Final make docs passed exit0 (agent configuration,218-file Canon index,800-path hierarchy,1764 reports). Earlier two snapshot-format failures are retained. Result/Git metadata is separately diff/JSON/section-checked. Final Git result lives in QUOTA_PAUSE_GIT.json; do not treat skipped broader integration as passed.

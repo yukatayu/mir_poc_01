@@ -1209,3 +1209,971 @@ Public-boundary expanded all-owned audit7b2fcc now passes349declarations across1
 
 
 2026-09-22T11:27:25.673511+00:00 — Checkpoint validation: validate_docs.py passed7ec203 (1764 reports); check_source_hierarchy.py passed8416be (800/800); git diff --check passed54f79f. Focused source/runner/doc diff review and frozen-source equalityf2a6ac confirm all3mirrored proofs match both Oracle33 packet and fresh integrated run. Own18paths only, Canon unchanged. Checkpoint commit and normal push are next; no success presumed. Public-boundary correspondence work continues, W4 not complete.
+
+
+### 2026-09-22T11:46:21.726464+00:00 — public outer-boundary actual correspondence candidate
+
+Proof checkpoint dfd93f4b07842adc2a3e9855708549e2d7dae51e normally pushed with exact remote parity and clean state d264a9. External PublicOwnerReplay adds a proof-carrying checker with exact admin predicate and frame/admin/work relative-completeness; 42f422 passes,11module420owned audit eab613 standard3axioms. Failed binder/dependent-match drafts and missing ParsedQualified search path remain failed records; no source holes/imported failed module. PublicCapturedReplay derives complete state equality via codec injectivity and finite structures; initial missing equality instances were repaired before successful compile.
+
+New actual native 4-case source+3owner runs c1fe41/37aa62 all16exit0/EOF: repeated initialize10→1 (real debit), two preIO rejects0IO, known framed source-entry refusal/noownerIO followed by normal work, and15reentry rejects0IO inside5actual reserve6/probe2/compute intervals. Selected host/writer byte-identical. Complete reply bytes/global balance vectors/retained actual facts/final images and proof-carrying outer states all match641e13: outer counts547/548/547/546; finalsourceRemaining215 all. Entry-refusal case has6entry attempts but5productions; the refusal is not relabelled successful work. Full raw frame/receipt/generated-input identity remains unchangedad8f5e. Two marker mutantsbe96b4 reject reentry-as-completion and reentry-at-idle; actual bytes unchanged, not newnative runs.
+
+Fatal prefix bda481 injects host failure before actual compute AFTER reserve6/probe2:301actual events,4retired probes0IO, all4children reaped(-9cleanup). Expected fault, not normal EOF or physical idle/rollback; full failed-prefix byte replay remains unperformed.
+
+Oracle34 submitted ONCE e2177c at11:42:48.187523UTC wrapper59774/PID698748, requestedmir-w4-public-boundary, questioned986781..., manifeste4d1a359...,45frozenfiles414183B plusmanifest, dry7dc92e (~127895tokens). No arbitrary deadline/retry/Chrome edit. Firststatus earliest11:45:48UTC; earlier clock guard at11:44:15 stopped before reading job/log status. Pending advice is not acceptance.
+
+Direct consumer: allpublic branch classification/normal waiting entry idle, then reservation-key freshness/room and full physical lifetime funding. SourceAllocation/ReferenceAllocation/QualifiedCustody/QualifiedSession/ReferenceSourceTrace read for that dependency; source allocator freshness does not automatically relate to retained actual owner reservations. Mandatory historical examples333/334 and full-system-v1 README now fully read; historical line not adopted as current. Next335; corpus remains incomplete. No new Canon/phase/THM/OBL/119disposition; W4active, no Rust/QUIC implementation or newnetwork claim.
+
+
+### 2026-09-22T12:23:25.242021+00:00 — same-history and paid-head correction
+
+Oracle34 completed11:54:24UTC, exact prompt receipt90dc7c, answer8de9fbfa492d87f580467a7214393045b40b1a78b36b04338616dc200cfa3e27. All1–34 collected; no liveOracle. Narrow continuing gate-owning idle retained; no signature/acceptance. Type refusal occurs before gate acquisition: actual10attempts during reserved work pass native/all4exit0 and exact-byte/full-owner replay330a9e. Original4 plus type case recipe checks ee082c pass. False split after actual compute/before source finish reproduces old checker acceptance c6f9b9, corrected recipe rejects without changing raw bytes. Metadata custody remains TCB.
+
+External OwnerActualRoot13 and OwnerReservationMonitor9 general laws derive startup root/namespace and exact retained slot/key monitor from actual reserve6. 13module498owned audit c6f9b9 passes standard3axioms only; no runtime guard yet. PublicJointHistory8 general laws passb48783/FIFTH: one shared closed history projects to registration and owner boundaries; entered_ready derives current/idle/root, entered_enabled_work constructs work with explicit profile/admission/freshness/room/funding. Recognition of a completed work requires constituent actual entry/finish, whereas the enabled consumer assumes no owner success. Physical driver, pending install and full lifetime remain separate.
+
+PaidHeadPhase7 general laws pass3861cf/THIRD: exact ordinal/notification checker, actual debit, residual coverage, general exact-payment old-suffix noncoverage for both freeze/install, constructive certified residual notification. These local lemmas are not a whole-driver phase invariant or authentic payment certificate. Draft binder/implicit-arity elaboration failures retained and repaired before downstream import; no final source holes/Miraxioms.
+
+Actual exact-credit prefixes5b448d: owner0 freeze18→17 and install17→16 after493actual repeated-initialize refusals each. Four unrelated operations refused0IO while pending; exact notice accepts, all8exit0/EOF. Full bytes/global vector/public-owner prefix replayc1d417 passes1000/1016events, blanket old coverage false, all-coordinate residual true, actual modeled owners idle, exact notification ordinal/no second debit. SourceRemaining509/502; explicitly unfinished full programs, not full E2E. Host/writer unchanged.
+
+Quota68% checked12:01:08UTC, next>=13:01:08UTC. Mandatory examples335/336 fully read, next337; corpus incomplete. Own bookkeeping dirty afterdfd93f4b. No Canon/phase/THM/OBL/119disposition change, no Rust/QUIC success. W4 continues with full physical funding/phase, key/resource admission and source/Core/network integration open.
+
+
+### 2026-09-22T12:48:38.684822+00:00 — Oracle35 collected; resource guard and checker delta (external)
+
+Oracle35 exact-prompt receipt63a480 completes all35 consultations. Its advice is
+not acceptance/signature/execution. Confirmed zero-IO public-outcome erasure
+in older payment replay; real exact-credit prefix was rejected by old recipe
+because query-only resource refusal was missing (ORACLE35_FALSIFIERS.json).
+Unified recipe now checks that branch and initialized prelude; all5 normal
+and2 exactpayment captures pass, false zeroIO-success outcome rejectsf0f4d5.
+Occurrence-specific payment must start at actual successful head operation;
+delayed-checkpoint falsifier and complete phase coupling still remain.
+
+External resource guard uses the frozen native startup capacity and actual
+initialize10/reserve6 observations, retaining lifetime keys. Old cap0/cap1
+controls fail after source entry; guarded cases refuse before entry without IO
+and retain usable handles, all8 exits0. Compute/install/abandon retain keys;
+actual duplicate returns3. Four guarded normal captures pass exact raw byte,
+whole-vector and owner-boundary replay9b831b plus recipe068a65. These guarded
+files were written after Oracle35 packet and are not reviewed by that answer.
+
+PublicJointReplay SEVENTH5eb4ba compiles with relative completeness for all
+seven operation cases, including one complete work. It recognizes actual
+transitions; independent-premise constructive work+finish remains next. Failed
+drafts FIRST/SIXTH remain excluded; accepted print-axioms standard3 only. No
+production/Canon/THM/OBL/119 disposition change or W4 completion. Own four
+bookkeeping files remain dirty after dfd93f4; status mirrors pending next cut.
+
+
+### 2026-09-22T13:31:00.111559+00:00 — constructive consumer and Oracle36 applicability audit
+
+External PublicJointWork FIFTHcda8da proves three general conditional construction laws; JointConstructiveAudit cdb1b2 checks17modules/712owned with standard3only. Four actual resource captures inhabit JointReplay58f0de; unified7capture account808db3 validates25782raw/frame hashes, native replies and vector/owner states. Delayed-payment copied-byte countermodel27982c remains accepted by old replay and rejected by current recipe. None establishes full physical refinement.
+
+Oracle36 exact question27edfd58.../answer941f5ed2... recovered5321a1, prompt equality true; all36 collected. Conditional scheduled-work theorem retained, but actual full pre-entry driver likely has empty suffix; complete replay diagnostic now checks this. Selected guard already requires3credits, whereas recipe omitted it. Pending zeroIO reason/input and public returned-value capture gaps accepted for correction. Universal impossible-observation wording narrowed to checked contradictions under truthful native transitions. Last closed Joint history plus interior native/host-commit cursor required; current CohortPhase is only funding/ordinal projection and compiler work, not completed physical coupling. No signature, Canon, THM/OBL, phase or119disposition change.
+
+
+### 2026-09-22T13:48:23.433620+00:00 — actual waiting driver and literal-call counterexamples
+
+Full actual source replayce4309 confirms normal pre-entry suffix empty at20work occurrences. WaitingWork3general laws now prove empty-suffix release construction, funded entry with two source/three owner credits and last-source-credit refusalc8913a. ActualWaitingReplay retains a lifecycle certificate from frozen startup through every checked exchange and validates these independent premises on all20entries273abc; no alternate driver/quota/suffix substituted. This closes that source-side applicability gap, not full same-Joint-history closure.
+
+CohortPhase NINTH6273d8 adds initial/rooted funding preservation, absorbing retirement, monotone ordinals and exact paid-operation provenance;16general laws standard3only. It is explicitly funding/ordinal projection, not native/monitor/Joint coupling. Earlier failed elaborations preserved and excluded.
+
+New literal capture7casesaffc12/bacba6 all28native exits0; captures input kind/bytes/reply mode and returned-value shape/hash. Recipe now validates finite zeroIO reasons, earlier image/fence/carrier guards and3credit pre-entry guard. Seven original accepting metadata mutations reject405190 without changing raw native events. New real credit controls491/490initialize refusals produce credits2/3:2noIO refuse;3reserve/probe/compute/finish6events all12exits0e42eab. Test-owned raw entry at2 is actual native profile refusal but explicitly outside selected exports; a synthetic copy falsely labeling that request an invoke is old-accepted/new-rejected85de54. New9capture byte/recipe account pendingtool81371; no success presumed. Own four bookkeeping files only; no Canon/THM/OBL/phase/119disposition, Rust/QUIC or completion claim.
+
+
+2026-09-22T14:01:33.945276+00:00 — Labelled followup: CohortPhase TWELFTH0c260f retains exact typed Event list; paid_origin now binds actual input label, wrong payment cannot advance, pending queries excluded. JointWorkCursor FOURTHe7209a retains labelled semantic work projection and closes Joint only after actual finish; OwnerObservationGap7laws model reply-before-monitor-commit and preserve physical state on retirement. Expanded20module1044owned audit6bf465 passes standard3only. These separate projections are not yet a composed physical refinement/checker. Unified literal SECOND passes9cases and raw identity0d8a65; FIRST failure was invalid dispatch-none prefix assertion, preserved and corrected to held-none/empty suffix without runtime changes. Oracle37 submitted once00a8f8, tool48749/PID725273, packet a788260a.../51d059fe...; nextstatus>=14:03:42UTC, pending not acceptance.
+
+
+Post37 material checkpoint — 2026-09-22T14:44:06.145819+00:00. Oracle37 completed with exact prompt
+receipt514412; answer8d3ac4b2... is advice only. Five predicted unchanged-native
+metadata countermodels reproduced locally: pending source malformed bytes have
+an earlier decoder failure; one-event source refusal cannot carry a pre-entry
+credit/slot refusal reason. Corrected literal checker13positives/5newnegatives
+pass87092b. Actual empty source/owner calls at freeze/install pending cuts
+produce distinct first errors with zeroIO; all8native children exit0. Source
+quota101/102 startup reaches actual quota1/2; complete-driver theorem replay
+989a75 proves retained refusal1 versus actual work/finish0, with2400raw/frame
+artifacts rehashed. These are unfinished prefixes.
+
+Forward reporting correction (not source/proof mutation): the frozen20module
+JointInteriorAudit log sums to1041owned declarations, not1044; CohortPhase has
+17named theorems, not18. Oracle37's count discrepancy was reproduced514412.
+The source/hash/tool exit and all-standard-axiom result were unchanged.
+
+New external WorkOccurrence derives semantic cursor/history from one full
+funded source/owner event trace, preserving actual vector and ordinal. A closed
+history advances only on consumed finish; computed prefixes have no finish.
+WorkOccurrenceReplay constructs certificates from an executable prefix checker,
+with general relative-completeness laws for every declared interval constructor
+518384. JointDriver retains full driver, one Joint history and exact semantic
+source equality across launch, owner/admin/query/source/refusal and work close;
+no snapshot-only equality substitutes for full state. Initial driver starts
+from actual bootstrap+launch, ordinal2; CohortPhase's separate ordinal offset
+still needs explicit composition. First combined replay failed on actual final
+repeated-launch refusal712, then the known-refusal branch was added using the
+existing general whole-driver frame proof. Two complete actual captures now
+pass7fac9f with10same-driver works/10computed interiors/10real finishes. Other
+13captures and expanded owned audit are running92832, NOT passed yet.
+
+Actual post-compute reentry15calls and post-finish repeated invoke5calls all
+refuse with0IO/all8childrenexit0 e2a68d. Old held-owner reentry condition fails
+4a6670 after compute; gate-scoped condition passes both full capturesd54932,
+7084raw/frame hashes rechecked1942ab. Monitor predicate renamed synchronized,
+with scope/comments narrowed; synchronization is not public-entry readiness.
+Host observation/payment commit gaps, full funding projection, unknown pre-reply
+outcomes and Rust/Core/QUIC integration remain OPEN. No new production or Canon
+contract, official milestone/THM/OBL, 119requirement disposition or acceptance
+change. Same milestone report; no subagents; no Chrome changes. plan/status
+mirrors still await the next reviewed integration cut. Current own4docs dirty;
+no commit/push since dfd93f4. Resources62010c:46GiBfree,10GiBavailable RAM.
+
+2026-09-22T14:53:15.117310+00:00 — Shared occurrence cut completes its finite validation:
+remaining13captured runs and24module/1328owned standard3 audit passf668bb;
+15totalcaptured histories (7full/8unfinished),37work occurrences with exact
+compute-before-finish interiors,53570raw/frame rehashesf97027. New premature
+Joint close countermodel preserves native bytes and changes only the outer
+span split; corrected generated test rejectse1d549. FIRST generator compile
+failed due unknown dotted event type, retained and not counted as rejection.
+Oracle38 frozen47files495789B plusmanifest, drya9cf5f~150803tokens; submitted
+ONCEca2ff2 at14:49:38.223060UTC, tool7564 PID735851. Requested
+mir-w4-coupled-occurrence, actualslug pending first status>=14:52:38UTC.
+Question5d42d5e8... manifest e3ce5592...; normal job has no arbitrary deadline.
+Only advisory delta review; no production/Canon acceptance. Historical mandatory
+corpus339full d7dd2a, next340; remains incomplete.
+
+
+2026-09-22T15:22:24.603397+00:00 — Oracle38 collected and host-commit delta (still W4 ACTIVE/incomplete).
+Exact prompt/answer receipt4d8216; answer ae4802f3... fullread d41595, advice only.
+Locally reproduced native-refusal provenance hole: one synthetic final request
+changes repeated launch to unretained arrival, actual response bytes unchanged;
+old literal/coupled passes c5a2a9/b02418. This is NOT an actual exported-view run.
+Pre-send guards now cover retained production and freeze/install/ack facts for
+accepted AND refused native sends; source_presend_exact SIXTH988be2 general law
+uses standard logic axioms only. Coupled FIFTH513c36 retains productions only at
+consumed finished outer calls, clears head cache at boundaries and rejects owner
+IO before consumed launch. Corrected17history regression plus2negative runners
+all exit0 ORACLE38_COUPLED_REGRESSION. FIRST countermodel compile launched before
+generator completion a99984; missing source is a failed attempt, not evidence.
+
+Actual host statement/return observations were added outside selected code.
+Global tracing FIRST hit existing15s cap1de8e1, all4reaped -9, not a success.
+Python3.12 local code-object monitoring SECOND completed within same cap1491c1;
+156paid events/5works/885replies/2754observations. Four metadata countermodels
+oldaccepted eb03cc now reject; stronger raw-occurrence checks plus8negatives
+pass461021. Fresh edge run819a6b observes15actual after-finish gate refusals and
+4actual pre-send provenance errors, all0IO/all4nativeexit0+EOF. Native byte order
+remains886events; parent call IDs and ordered host events distinguish nested
+callback at outer.stop from a new call after return. Old strict-interior recipe
+rejectsc21d31, current order+recipe accepts and4wrong-order mutants reject34e2c1.
+Both host histories replay through SAME driver/Joint fold0279bd/814ac9.
+
+Forward classification correction: original7full rows were7complete capture
+histories over shared source/continuation, not7distinct programs. New total17
+is9complete histories+8unfinished prefixes;47work intervals, not47programs.
+Premature-close exact runner/receipt already exists locally and was inspected
+1f2242; next Oracle packet must include it, not just a one-line success log.
+
+General translation of CohortPhase ordinal0 to physical post-bootstrap1 is
+being checked, including pending occurrence ordinals. Shared funding/host
+journal composition remains OPEN; new local data are not whole-host/OS proof,
+secrecy, auth, durable recovery or Rust/QUIC integration. No W4 completion,
+Canon/THM/OBL/phase/119disposition update or new commit/push. Existing report
+only. Mandatory historical corpus340 read25840b; next341, corpus incomplete.
+Weekly63% ebd04a, next check>=16:02:39UTC.
+
+
+2026-09-22T15:49:46.427487+00:00 — Oracle39 collected; source funding completeness and host occurrence corrections.
+Oracle39 wrapper0 2fdd92, fullanswer27432d/eb7c5082..., exactpromptreceiptfe10e9.
+Advice only, no owner/Canon acceptance. Eight false-host-record countermodels
+locally all accepted by old9703d16... (7c19a6); current81198a8... rejects all8
+with intended diagnostics (e828bf), retains original2762-observation edge run
+and normal2754-observation run b5ed94. Exact encoded-envelope set insertion and
+framing, full512-root credit vector/debit framing, source ordinal identity,
+same-call writer/native reply, writer-before-pending and enclosing call-before-
+return containment are checked. Relocation mutant repairs all host indices.
+These are synthetic observations over unchanged native bytes, NOT actual bad
+exported executions or a general host/lifetime theorem. Full other host fields
+and freezes/installs set retention remain separate obligations.
+
+Forward timing correction: existing native_return/writer_return/invoke_return
+labels refer to Python PY_RETURN observations immediately BEFORE callee return;
+Peer.send reply bytes are already captured, frame remains on stack. Prior text
+saying after Peer.send returned is too strong. Equal-native-position gate witness
+still holds. Ordinal first_source law is a source step DIRECTLY from root; prelude
+query then launch is a permitted broader abstract run. Physical bootstrap→launch
+startup and512-vector/root matching remain independent preserved consumer guards.
+
+CohortFundingReplay ELEVENTH5813b3 source7e135f71... logff87427f... exit0: runtime
+source checker returns an independently declared CohortPhase.Step certificate;
+general constructor-relative completeness covers launch/public source/refusal/
+notify/enter/finish. Only standard propext/Classical.choice/Quot.sound. Earlier
+SECOND–TENTH failed; SIXTH hit per-process4GiB AS cap, free10GiB remained, not host
+OOM success. Explicit constructor proof replaced over-broad tactic; no source
+sorry/admit/Mir axiom or cap increase. Owner half currently being constructed.
+
+Historical provenance fixture regeneration now pins oldcheckerf766f972...
+separately from currentrejection6237fde2.... New exclusive-prefix fixture
+Oracle39ProvenanceRegen_RESULT b9736d preserves original and reproduces oldaccept/
+newreject; generated Lean negative runner exists and its execution is next.
+No existing result overwritten. Both exact diagnostic runners previously tested
+branch identity only; adding occurrence identity remains follow-up.
+
+No W4 completion/Canon/THM/OBL/phase/119disposition/sourcecommit/push. Existing
+report only. Broader LAB snapshots await reviewed integration; weekly63%, next
+check>=16:02:39UTC, continue same goal.
+
+
+2026-09-22T16:30:53.996470+00:00 — General full-state composition and Oracle40 findings (W4 active).
+Funding checker TWENTYFOURTH f9921d covers every declared source/owner/query
+Step with exact successor, plus named prelude completion; 17actual histories
+pass projection replay and26modules1549owned standard3 audit2c9de4. Source
+6f534fd3..., log13d75ad8.... SharedNativeStep FIFTH2ddc70 now proves ordinary
+Joint accepted/refused/query/owner transitions and every work prefix compute
+the same complete driver/owners/ordinal as funding transitions. Failed
+THIRD/FOURTH drafts are excluded. SharedJointDriver SECOND93d250 retains
+certified full native physics on every accepted transition; SharedFundedDriver
+FIFTH9c8f22 stores Joint/work current native state once plus funding mode and
+rooted certificate indexed by that same state. Every source/owner result
+carries its actual requested Step and appended event. General relative
+composition completeness assumes a recognized Joint/work step and an independent
+declarative funding Step; it does NOT assert full Joint admission completeness
+or host/transport correspondence. Standard logic axioms only, no source holes.
+
+New SharedCaptureReplay THIRD a99931 uses that single certified state for
+actual byte reply comparisons. Edge run THIRD320764 passes550boundaries/5works/
+source712/886fundingevents. Other16histories have passed in serial90507; final
+29module audit remains running. SHARED_CAPTURE_INPUT_BINDING fe3603 independently
+checks all17generated calls against receipt native numeric arguments/owner
+capacities and exact prior event lists. Prior60654raw/frame rehash evidence is
+retained, not repeated or relabeled as current native execution.
+
+Oracle40 wrapper27303f/answerfullf52248, receipt354a79: exact prompt and final
+answer57091ff2..., advisory only. No funding completeness/physics hole found;
+F1 empty-root completed-capture promotion, H1 optional host-order downgrade,
+H2 transient payment-gate/pending loss and R1 stale runner-root binding need
+repair. Four host countermodels all oldaccept cd1869; currentef7f924b... exact
+reject07d513 with original2762-row positive, plus prior8controls87d3f5. Current
+checker requires host_order and journals outstanding payment commit/pending
+clear by actual matching source request/reply. Old normal2754-row receipt has
+NOhost_order (confirmedlocally), so it retains historical weaker evidence and
+does not pass the new containment profile. Oracle's proposed use of that
+normal receipt as an order-present baseline was inaccurate; the actual
+countermodels use the order-present edge receipt. No original capture changed.
+
+R1 pure binder now rejects missing/duplicate old roots before regeneration,
+asserts current and historical checker pins, and records generated runner hash
+and exactly one fresh root. Fresh regeneration91079f passes oldaccept/new
+Python rejection; generated Lean execution still pending. F1 Lean red control
+prepared, not yet run. Shared native composition is AFTER Oracle40 freeze, so
+it has not been independently reviewed yet. Outer host commit/lifetime and
+unknown-outcome relations, actual host freeze/install set observation and
+Rust/Core/QUIC integration remain open. No source commit/push, Canon/THM/OBL/
+phase/119disposition change. Mandatory historical corpus340full, global read
+obligation still incomplete. Weekly61% last16:03:03UTC,next>=17:03:03UTC.
+
+
+2026-09-22T17:19:07.628095+00:00 — Oracle41 completion repairs, actual host facts and wire knowledge (same W4 goal).
+Oracle41 final receipt1aa70b, wrappere822d7, answerbdde72d9… fullreadf3b156/d2b4bc.
+Shared native composition retained at conditional scope; no new semantic counterexample
+found there. C1 conditional startup issue became a concrete accepted empty-source
+checker example3d8d62 (synthetic encoded frames, NOT native execution). C2 was
+reproduced by cutting a truthful308event trace at a closed payment call0372de,
+not by inventing a bad physical observation. C1 now requires ordinary funding
+mode for completion; C2 default completed host check373c0aa8… requires pending
+notification empty, while explicit closed-boundary prefix retains exact command
+and ordinal(d3acb8). Both positives and exact negatives pass. Eight prior host
+controls plus five payment controls rerun at this final checker pin6c533e.
+The prior final-pin distinction is not retroactively erased.
+
+Fresh actual4process host-facts capture6ba3bd, receipt a82d5e3f… keeps selected
+source/writer/Peer unchanged and observes297full source snapshots, initialization,
+freeze and install sets. Finite checker d5609fff… derives460local commits from
+actual known native replies;7false-observation controls8656f9/9e0036 distinguish
+old-base noncoverage from current exact rejection. New actual history same-native
+replayeff143/f0a213 passes5work intervals. Whole88MB pool stays external; capture
+truth and hashes are premises, not confidentiality or Python/OS proofs.
+ORACLE41_SHARED_REGRESSION659664 completed9commands0 at SharedFIFTH5b9a7396…:
+prior17histories plus freshfacts1; prior17=9complete8prefix47works, new1=5works.
+These are histories/variants of existing source, not18independent programs.
+
+New general SharedWireLifetime FIFTHd9eded source7eac0a48… kernel checked.
+Independent Step and executable advance are equivalent; every step preserves
+complete physical/certified-state relation. Normal send/deliver/receive/promote
+path and constructor-relative source/owner completeness connect to prior Joint/
+funding rules. Unknown paths retain the same before/request/checked-successor
+while allowing no application, prior application, or late application AFTER
+caller retirement. A source ordinal counterargument rejects rollback inference.
+Retired states cannot send/promote; a delivered request cannot execute twice
+in this explicitly exclusive ordered slot model. Head classification/auth and
+native atomic commit/stable-code/byte custody remain separate premises.
+Knowledge promotion does NOT commit all host mirrors or release their debts.
+Actual native source/owner loops assign next state before writing/flushing reply
+(1087a0/a18443); compiler/OS instruction correspondence is still TCB/open.
+
+Four weakened sourcesb46b5e fail at target general theorem: unknown rollback,
+retired resume, all-send rejection, double delivery.30module2033owned axiom audit
+0c2177 permits only standard propext/Classical.choice/Quot.sound. Failed THIRD/
+FOURTH dependent-match simplification drafts are preserved and excluded; no
+source proof holes introduced. SharedCaptureReplay SIXTH704cc2 source0ca1c29d…
+now consumes known on actual reply bytes; representative freshfacts WIRE run
+d97e66 proves884postlaunch known exchanges. Broader serialregression19297 still
+running at this checkpoint. Oracle42 frozen49files320260B, dry38ebac109413tokens,
+submitted once128388 at17:17:43.853609UTC (tool77515 PID769361); firststatus no
+earlier than17:20:43.853609UTC. No normal job deadline, retry or paidfallback.
+
+Current Peer records input only after writes and retains no explicit unresolved
+wire slot across every failure; no claim it implements the formal retired slot.
+Next actual fault discriminator targets before-write and lost native reply before
+Peer return; normal host fields/full common lifetime and Rust/Core/QUIC remain
+OPEN. No production/Canon/THM/OBL/phase/119promotion or sourcecommit/push.
+Mandatory historical corpus342full (global corpus still incomplete), ledger3802.
+Quota59%76ea8e at17:03:24UTC; next>=18:03:24UTC. Resourcesbe3e02 root45GiBfree/
+RAM9.8GiBavailable. No subagents, Chrome changes, cleanup or hostshare.
+Existing report only; broader plan/status mirrors await reviewed integrationcut.
+
+
+2026-09-22T17:43:28.685500+00:00 — Oracle42 recovered; actual unknown IO and whole knowledge history (W4 active).
+Oracle42 exact receipt7ccac4, final2e176caa…, fullanswer1c16aa, wrapper320ce3.
+No stated narrow wire-invariant/completeness counterexample found. Review's
+reserve/probe/compute gate-loss and post-retirement-IO false-observation paths
+all oldaccepted925940. New host checker46a4b8dc… independently tracks one actual
+gate acquisition/release per outer call, disallows interior reacquisition and
+post-retirement native IO. Actual pre-entry/post-release observations remain
+allowed; it does not infer gate-held from a nonempty call stack.4exact negatives
+now reject a1314a; previous8+5/pending/7facts passba99c6 at current base pin.
+Resolved transitive checker-chain receipt ORACLE42_CHECKER_CHAIN retains actual
+import paths/hashes, beyond an unchanged fact-checker top hash. Finite sample
+checks remain conditional on truthful captures; they are not host refinement.
+
+Two actual baseline IO faults9dbb94 have the same301known native events but
+owner2 request22 is either unsent or computed with response privately observed
+and lost before Peer return.5exported operations then reject with0IO. All four
+children are killed/reaped -9; never labelled normal EOF. Exact2410raw/frame
+bindingd6df62 and RunUnknownWireReplay0d050d retain299known exchanges/source242,
+last-known ownercredits491 versus possibleapplied490; the privately lost reply
+matches the same typed request. This demonstrates uncertainty, NOT rollback.
+The original Peer lacked an explicit retained request slot; the observer's
+retention was not called a host implementation.
+
+External nonproduction RetainingPeer wrapper candidate stores immutable actual
+post-wrapping bytes/endpoint/pid/reserved endpoint ordinal before IO, blocks reuse
+on exceptions and preserves last-returned request/reply.2actual faults caac2f
+and their typed replaysf8badd passed at old610c27ec… candidate. Further actual
+reinitialization REDb80231 erased its retired slot/ordinal without any new IO;
+fixed candidate6dc9d7e2… rejects reinitialize/copy/deepcopy/serialize with state
+unchanged. Two fresh actual fault controlsabe658 pass plus normal ordinary-source
+C/A4processb8d591 (20writes/5values10,10,11,10,10;886native events;allnormalEOF0).
+Selected original host/writer/Peer and native binaries remain unchanged. Private
+slot source is AFTER Oracle42 freeze, unreviewed and not adopted production.
+It currently observes completed reply only when basePeer returns; response read/
+validation/capture-failure timing and off-wire head metadata/pre-known prefix
+still need explicit outer relation. Do not claim the narrow rawslot closes them.
+
+Oracle42's normal composition seam is material: previous SIXTH `known` paths
+were per-request; actual finish rebased certificate metadata between paths.
+SharedFundedDriver SIXTHd136b4 adds derived finish_native for the ACTUAL finish
+checker. SharedWireLifetime SEVENTH0c7bdc adds localComplete only for that result,
+preserves full native data, and concatenates all known exchanges plus exact local
+closures into one History.Runs from the same postlaunch root. No arbitrary equal-
+snapshot certificate substitution. SharedCaptureReplay EIGHTH2d3163 carries one
+History, ignoring bootstrap's prelaunch local span; UnknownWireCaptureReplay
+FIFTH4b3a71 appends unresolved paths to that whole prior history. Local certificate
+completion does not itself prove host-store debts/gates discharged.
+
+Failed SIXTH wire draft used reserved identifier/polymorphic base; later proof
+passed without holes. Failed SharedSEVENTH/UnknownFOURTHconsumer d488d3 excluded
+(type metadata inference and wrong edit-marker selection). Empty-init fixture
+creation fdb09b accidentally consumed still-existing SIXTH olean after failed
+consumer build; retain as OLD per-request evidence, never whole-history result.
+Fresh RunSharedEmptyInitReplay68dd07 against EIGHTH passes:2initializations is
+prefix/rejectcomplete;3initializations completes empty source with wireActions16.
+No synthetic fixture is called a native execution or a general proof.
+Whole current regression38424 is running, with current audit,19normal/prefix
+histories (prior18 +newcandidate positive) and4actual unknown-fault prefixes
+requested separately. No pending command counted green. No newOraclelive.
+Outer mixed host-store debt/general runtime binding and Rust/Core/QUIC remain
+OPEN. No Canon/THM/OBL/phase/119promotion/sourcecommit/push. Scope still W4-only.
+
+
+2026-09-22T17:59:35.697842+00:00 — whole-history regression and actual raw reply retention (W4 incomplete).
+Whole regression38424 collectedd1b9da/45d1d4:14commands exit0,19normal/prefix
+histories plus4actual unknown prefixes and separate synthetic controls.
+Whole audit30modules2077owned permits standard3 only. Shared consumer3568ded2…
+maintains one Runs including actual localComplete transitions. No host/OS proof
+is inferred from this capture. Oracle42 dispositions now recorded forward.
+
+Actual response-capture OSError reproduced8990fa: owner2 compute22 response was
+fully read but private slot6dc9d7e2… still retained reply=None. New16ecfa62…
+retains completed raw body BEFORE optional output-capture writes. GREEN730ffc
+and BOUND448a3f preserve exact raw bytes and last-returned21, reject all5public
+entries with0IO, childrenreaped-9. No normalEOF, typed validation, rollback or
+complete host commit claim. The prior native lost-response capture differs in
+where the read returns; old fault evidence remains tied to its prior adapter pin.
+
+SharedReplyRetention SECOND47b16c source14b4b1cb… proves independent Step versus
+actual advance equivalence, invariant preservation, stuttering refinement to
+SharedWireLifetime, normal receipt, raw retention and retirement frames. It
+distinguishes waiting/raw/validated/returned from stopped; stop after validation
+keeps validated evidence. It still is a per-armed-occurrence subrelation, not
+an outer host journal. FailedFIRST26efbe projection simplification is excluded;
+SECOND contains no source proof hole and printed axioms standard3 only.
+Unknown consumerSEVENTH11c4e5 binds this to the same prior wholeHistory.
+Actual raw capture binder c10624 checks1206raw/frame files and exactargv/binaries;
+RunReceivedWireCaptureReplay51665c passes299known exchanges, retained
+sourceordinal242, owner2 occurrence22,491known versus490applied credits.
+No unseen operation was inserted as a known reply or completed public call.
+New candidate/theory are afterOracle42freeze; review remains required.
+No Canon/phase/119promotion, sourcecommit/push, W4 closure or new semantic goal.
+
+
+2026-09-22T18:25:59.249906+00:00 — Oracle43 actual interruption findings and new writer journal (W4 active).
+Oracle43 completed18:16:27.831UTC, wrapper1d9bca, fullanswera4e1b5, exactprompt
+receiptaf4445 answer672d9a63…. No narrow-proof/localComplete counterexample found.
+It found actual-code windows after reader data assignment before slot retention,
+and after last_returned assignment/slot clear before actual wrapper return.
+All3actual statement-boundary RED588924 reproduced; fixed candidate aa3029a2196cefabb8c471330245ec74f58b4a01d0f5f0f4bbe5abad43cef09f
+passes GREEN3c7238:exactcurrent raw reply retained,previous wrapper-result21
+preserved,currentattempt22retired,5publicrefusals0IO,allchildrenreaped-9.
+At late cuts basePeer had already appended capture302, while retaining wrapper
+raised; that append is not actual wrapper handoff or outer return. Body cut has
+301basecaptures. Cleanup restores bookkeeping only; native credits not refunded.
+The promise covers complete bytes assigned to localdata under one-shot/uninterrupted
+cleanup; it does NOT make OS-consume-to-Python-store atomic. Failures inside the
+inherited reader still have unknown outcomes and require conservative retirement.
+
+Oracle43 correctly distinguished raw handoff from certificate validation.
+SharedReplyRetention THIRD76da91 sourcedb5543ab… adds handed/handoff and calls
+subsequent abstract knowledge step promote. Validation is certificate-side, not
+a claim Python executed the full semantic checker before handing raw bytes over.
+Stopped monotonicity/retainedbytes frame are checked; wire projection remains
+forward/stuttering only, so stopped guard cannot be discarded as an enabledness
+interface. raw_stop_path explicitlyrequiresactual prepare, not bareAttempt.
+Unknownconsumer EIGHTH8a66c7 source2538be15… now appends the EXACT applied/raw/
+stopped endpoint to whole prior history. Targetedreplay/mutations/audit pending.
+
+OwnerCommitJournal SECOND31a2f6 source2b2bd62b… is AFTER Oracle43freeze/unreviewed.
+It models selected CreditWriter credits,image/revision,keys,lease/entered stores
+in actual order, including idempotentstores. Actual native transition derives
+finaldata via existing credit/image/reservation monitor proofs. Independent store
+Step and executable advance agree; residual foldtarget preserved; arbitrary
+finite recipe has normal discharge; empty debt yields native correspondence;
+retirement retains current memory/residual recipe and prevents further commits.
+No desired native correspondence is inserted into store admission. FIRSTf23d1f
+failed listmatch/induction indexing, repaired SECOND; failed outputexcluded.
+Outercohortstores,gates,offwire metadata,allentryclosure remainOPEN.
+
+Current normal replay at PRIOR adapter16ecfa62… ec22ad passes884postlaunch
+knownexchanges/4081wireactions. New HOST_STORE_CAPTURE809d72 at same PRIORpin
+records actualfullhost tree bytes (15unique) plus3219observations/885replies;
+receipt d6d75644…,nativeall4EOF0. Its basefinitecheckerpassed; fullfact/newwriter
+typed replay stillTODO. It is not evidence of the later adapter repair.
+Mandatory historical343full7be718; globalcorpus remainsincomplete.
+No production/Canon/phase/119promotion or sourcecommit/push. No Oraclelive.
+
+### 2026-09-22T18:46:18.852960+00:00 — writer store prefix tied to current native capture
+
+OwnerCommitJournal FOURTH e1aebe79… derives actual credits/fullimage/revision/keys
+projection, lease release and ordered residual stores; checked seek soundness and
+relative completeness permit sampled compatible prefixes, not an exact Python
+instruction cursor. Audit3ac836 covers241+260owned declarations, standard3 only.
+Actual repaired aa3029 adapter HOST_STORE_POST43 capture0aaa374a… feeds both
+writer replayc7faa2 (174reply/265observed prefixes, fulltypedtrees) and same-history
+wire replaycfc763 (884knownwires/4085actions/550boundaries/5works). Binder verified
+3542raw frames/payloads+15fullhosttrees; four typed negative observations and three
+general proof weakenings reject intended diagnostics/theorems94cd8f/ae06d7.
+No single whole-host theorem is claimed. Cohort fields/gate/lease staging, offwire
+provenance and production integration remain OPEN. Oracle44 submitted ONCE77ce9c
+mir-w4-writer-journal at18:45:01UTC; packetf382aba8…/question3b7e47d5…, dry7743e5.
+No result yet. Preparation19e94c failed local dependency path BEFORE submission;
+corrected path, no duplicate consultation. One report retained; no Canon promotion,
+new production source, commit or push. Plan/progress/tasks broader synchronization
+awaits reviewed integration; this is an active evidence checkpoint.
+
+### 2026-09-22T19:15:56.503990+00:00 — actual return-event counterexample and caller confirmation
+
+Oracle44 completed928aaf/906907, answer9722cad2… full913549; exactprompt receipt
+980c2e, disposition70f7df. It found PY_RETURN candidate/completed-return ambiguity,
+nonlocal sampled field omission and impossible unentered lease admission; kept
+conditional writer algebra/rooted applied-raw claims and required common-full-
+native/phase-indexed outer composition. Actual CPython3.12.3 return hook RED27615f
+and PY_RETURN RED/GREEN6e3698 reproduce/repair the marker issue. Native state never
+rolls back; raw candidate persists until actual owning caller continues. New
+private copies under caller-confirmed retain originals: peer73bc77f7…,writer
+e16e6ac8…,cohortde34c91a…. Source/native binaries unchanged. Normalc320d2 passes
+886events/all4EOF0. Candidate-only writer fault0ce12d keeps5publicrefusals0IO and
+no confirmed writer return; -9cleanup is not normal EOF.
+
+New normal host captureV2a3db1c3a… observes3398rows,15fulltrees and explicit caller
+continuation/frame/PID/ordinal. FIRST capture's old temporal placement failed
+host/native couplinga77aaf; V2 moves recording to actual caller's first LINE
+after send, before host observations at the advanced native ordinal. The old
+failed harness/receipt remain. Writer interval checker37e0e9d… passes174intervals/
+613samples;5mutationsrejectb6347e. Writer replay4424b8 passes174replies/265prefixes.
+Shared replay132413 passes884knownwires/4085actions/550boundaries/5works. Separate
+consumers remain separate proofs; new SharedHostJoin cd559d derives full native
+owner equality from actual knownStep as the immediate single-state join consumer.
+
+OwnerCommitJournal SIXTH50d88a95… adds noncircular maySend/SendAllowed equivalence;
+impossible typed pre-send lease accepted oldchecker eee1a1 and rejected current
+e9526a. Old RED FIRST had missing import path, excluded. Authentic lease staging/
+source-enter remains OPEN. CohortCommitJournal FOURTH021ca7e6… proves local
+call/gate/debt/retirement preservation, normal discharge and mixed-init prefix;
+receipt authenticity and cross-writer lease barrier explicitly remain premises.
+Actual mixed-init complete-value capture15dfb709… bound15files f7d74c and passes
+312f2d;4generalproof weakenings+4typednegativecontrols9e72f0 reject. Current audit
+132413 covers241reply+276writer+275cohortowned,standard3only. Early parser/implicit
+name/tactic failures excluded; no source sorry/admit left. No Oracle45 yet.
+
+Quota56% at19:05:57UTC fa70b3; next>=20:05:57UTC. No newownerpolicy decision.
+No production/Git/Canon promotion. One report kept; current source and evidence
+remain external while integration and broad plan/status mirrors are OPEN.
+
+### 2026-09-22T19:28:46.146936+00:00 — one native history with retained writer proofs
+
+SharedHostCaptureReplay FOURTHfe9e7051… retains each writer's exact earlier/later
+knownStep, full native transition/reply, beforeData andfullnative-after binding;
+observedprefix and ClosedWriter path kept alongside the single shared history.
+Actualmerged2439events d7ae22 passes174writer/265prefix/550boundary/5works,884known
+wires/4085actions.5typedcontrolsceb0a9 reject missing/borrowed/premature return and
+wrongbefore/prefix. Earlierelaboration failures were mutable-history capture,
+fixed using immutable earlier before IO; no failedcheck countedGREEN.
+Actualtypedowner0/1 states haveequalData butdistinctfullnative938bf6. Axiomaudit
+43eb07 covers241+276+275+12+145owned declarations,standard3only,includingconsumer.
+Claims are per-interval finite correspondence; globalIOloop preservation and
+wholecohortlease/receiptorigin remainOPEN. NarrowOracle45 submittedoncefdf8b7,
+packetbce704c6…41files298344B at19:26:54UTC, notyetrecovered. Continueindependent
+phase-indexed lease proof; no W4/product/Canon acceptance or Gitintegration.
+
+## Superseding 2026-09-22T19:51:39.297481+00:00 — Oracle45 collected / normalized history checker
+- Oracle45 DONE a0a997/e4edb0, full answer3f4dfd, exactprompt7abeb0. Actual truncated
+ sessionmir-w4-caller-confirmati. Answer996ac374…; ORACLE45_RECEIPT/DISPOSITIONS.
+ NOliveOracle. Existing reviewer found exact-parent checker gap, normalized prefix
+ theorem, phase/receipt/retirement and acquisition-cut obligations. All are bounded
+ technical work; no owner-value choice needed; no W4 closure.
+- Parent-frame-only syntheticcounterexample42b4dd accepted byoldchecker. New actual
+ frame-retaining run_host_parent_capture.py f34073ce… / checker e83e9d83…
+ HOST_PARENT_CAPTURE_V4 c413af/105873b9… passes174writer confirmations/613frames,
+ 3398observations/156payments/5works/all4EOF0;4exact negativecontrols181d8c.
+ V3failedcc0e8c: full snapshot reserialization at every line exceeded unchanged
+ 15swall. Restored existing selected replacement/identity-cache premise, NOTclaim
+ arbitrary nestedmutation coverage. PARENT_CAPTURE_FAILED.json preservesfailure.
+- SharedHostJournal FIRST1b2b8d d661c477… factors unchanged BoundWriter helpers.
+ SharedHostPrefix FIFTH e81a4d/8209534d… passed: independent JoinedStep/checker
+ sound+complete; samefullnative history extension, closedrecord retention, exact
+ normalized action projection, stopped/active admission exclusion, inductive
+ CertifiedJoined path. Standard3axiomsprinted. FIRST/SECOND/FOURTH failed syntax/
+ elaboration andexcluded, no source proof holes.
+- SharedHostCaptureReplay FIFTHf3585b df6b99cf… now uses ONE CertifiedJoined
+ state for actual native/observation/confirmation/completion events; no separate
+ mutablehistory/closedcontainer. RunParentSharedHostCaptureReplay FIRST624c3b
+ PASSED same884wires/4085actions/174writers/265prefixes/550boundaries/5works.
+ PARENT_CERTIFIED_JOIN_CUT pins FIRST run module hashes. Native/callercodeunchanged.
+- LIVE only current SharedHostPrefix SIXTH compile (positions/confirmation-index
+ ordering theorem appended AFTER FIRSTrun). Collect tool session from latestcall.
+ Ifpassed do not needrepeatactualreplay for proof-only lemma; axiom audit after
+ finalsource. Openingevent/prehistoryposition correspondence stilltoadd; whole
+ cohort/lease source-origin/gate-acquisition remainsOPEN.
+- OwnerLeasePrefix THIRD7aada1 3d0eed51… localclaim/entered/cancel +general
+ releaseLease/clearEntered unstableprefix proof PASSED; neithercomposed norOracle
+ reviewed/axiomauditedyet. Not a source-entry authenticity proof.
+- Quota56% latest19:05:57UTC,next>=20:05:57UTC. Resources7cd5fd45GiBfree/8.8GiB
+ available, noOOM. HEAD/5dirtydocsunchanged; no commit/push/promotion.
+- NEXT: finish normalized occurrence proof+weakeningcontrols/axiomaudit; test
+ actual public-entry acquisition boundary onpinned3.12.3; phase-indexed lease and
+ actual source receipt/call-stage composition. No newOracle until materialcutready.
+
+## Superseding 2026-09-22T20:04:25.955965+00:00 — prefix origin proof / real acquisition repair / Oracle46
+- SharedHostPrefix SEVENTHa4fa65 7ad5907b… passes general checker sound/completeness,
+ history extension, recordretention, exactwireprojection, opening+confirmation
+ position/order and exact openingevent/prehistoryaction prefix. CertifiedJoined
+ actualconsumer SIXTHc6ffa1/df6b99cf… keeps one certifiedstate.
+- HostLifetimeAudit FIFTH1019d2:241reply/276writer/275cohort/12join/80consumer/
+56journal/250prefix/31leaseowned, standard3only. SHARED_HOST_PREFIX_MUTATIONS86cfb1
+ 4targetgeneraltheoremfailures: resethistory/eraseclosed/wrongopening/allreject.
+- Actual ENTRY_ACQUISITION_RED e2a5ef: CPython3.12.3 NOP110/LINE60 afternative303
+leavesgate+RLockheld andretiredfalse,5refusals0IO. Originalcaller-confirmedpreserved.
+ New entry-custody copies: source3a737824…; Peer73bc77f7…/writere16e6ac8 unchanged.
+ Stores priorintrinsicRLockdepth, gate snapshotunderheldlock beforeacquire; finally
+ releasesonlyown gate anddrainsdepthtobaseline. CPythonprivate_recursion_count
+ explicitreferenceTCB; noportableproductionadoption. Cleanupuninterrupted.
+- Actual repaired2LINE0c99c4 and2INSTRUCTION599388 cuts afterRLock/gateCALL
+ allretired/unlocked,5refusals0IO; faultchildren-9 NOTnormalEOF. Normalactual
+ HOST_ENTRY_CAPTURE_V5 fab61406…/34044462harness all4EOF0,174writers/5works.
+ RunEntrySharedHostCaptureReplay FIRST958ff1 f16ae2f4… passes884wires/4085actions/
+174writers/265prefixes/550boundaries/5works. ActualindependentnoexpectedJSON.
+- LIVE ONLY Oracle46 tool56249 PID805502 sessionmir-w4-prefix-entry submitted
+ONCEf7149620:01:13.511430UTC; firststatus>=20:04:13UTC then>=180s. Packet
+oracle-prefix-entry41files375435B dry3d1e3e~122867tokens, Q6c2992af…
+manifest299066da…. No deadline/latencyretry. No Lean/native jobslive.
+- AFTERfreeze new EntryAcquisition SECOND698154 9ec06f8f… passed: independent
+localstage/checker exactness, stagepreservation, iterativeReleaseRuns/drain,
+cleanup restoresparentgate/depth andkeepsretirement. Scopedpinnedone-thread
+resourceprefix, notwholePython/acrosswaitingthreadrefinement; unaudited/unreviewed
+andnotintegrated. FIRSTfb1d49failedelaboration excluded; no sourceproofholes.
+- NEXT whileOracle: caller-confirmation assignment cuts and actual source-enter/
+lease/cancel phase composition. Wholecohortcallstage/receipt/headquery/pre-send
+framing andRust/Core/QUIC/119/Git remainOPEN. Quota56%next>=20:05:57UTC.
+- No commit/push/Canonpromotion;5own dirtydocs; lastdiffcheck45851eclean.
+
+## 2026-09-22T20:22:40.118612+00:00 — Oracle46 / actual handoff and waiter delta
+
+## Actual reference candidates and Oracle
+- Originalrecoveredfiles/nativebinariesUNCHANGED. caller-confirmed copies solved
+  calleePY_RETURNfalsemarker: Peer73bc77f7… writere16e6ac8… sourcede34c91a… .
+  _confirm_return runsin actualowningcaller; raw retainedunion acrossitsstores,
+  last_returned meansinnerPeerreturn, neverwriter/cohort/externalcompletion.
+- Exactparent capture run_host_parent_capture.py f34073ce… + checker e83e9d83…
+  retainsactualwriter+parentframes, code/cohort/index/token. V4receipt105873b9…
+  passed174confirmations. Parent-onlycounterexample42b4dd oldaccepted/new4rejects.
+  PARENT_ORIGIN_FRESHNESS_CONTROLS b1111f addswhole-second-interval reusedtoken
+  rejection atorigin andpositive reusedframeIDswithdistincttokens. Synthetictyped
+  metadata controls, notauth. Snapshotsretainselectedreplacement/identitycache
+  premise; V3all-line reserialize timedoutcc0e8c, retainedfailednotcounted.
+- Oracle45 DONE full3f4dfd answer996ac374…; sessiontruncatedmir-w4-caller-confirmati.
+  Oracle46 DONE dbd0f0/d11bee,full3f1d5e,exactpromptbd52f8; ans**3f694ed4…**.
+  Sessionmir-w4-prefix-entry submittedf71496once20:01:13.511UTC,tool56249 reaped0;
+  packetoracle-prefix-entry41files375435B,Q6c2992af…manifest299066da… .
+  ORACLE46_RECEIPT/DISPOSITIONS retainfrozenadvice NOTproof/ownerdecision/signature.
+  Review supports normalizedprefix+parentrepair, proposespureinput-listconsume
+  theorem, findsactualhandoff/waiterholes andwholephaseproductobligations.
+- entry-custody/source… **3a737824…** introducedintrinsicRLockbaseline+pregate
+  snapshotcleanup; repairedacquisition4cuts0c99c4/599388; normalV5fab61406… all4EOF0.
+  BUT nowHISTORICALcandidate: twofurtheractualcounterexamples reproduced below.
+- CURRENTentry-handoff/source… **857aadc1…** retainsPeer/writerunchanged. All3public
+  wrappersownentryobjectandfinallyentry.gen.close; fatalentryretirementusesexisting
+  lock-taking retire(). ENTRY_HANDOFF_CANDIDATE b77130 recordsreversibleprivate
+  choicevs precustodycancel, no publicpolicy/authority adoption; pinnedcontextlib
+  and_recursion_countTCB. Caughtnestedfatal/resumedparent remainsOPEN productissue.
+- ActualhandoffRED75779d: CPython3.12.3/contextlib8b7a477f… at__enter__RETURN56
+  AFTERnext yields: tracebackretained,gateTrue/depth1/retiredFalse,suspendedgen,
+ 5refusals0IO. GREENcc8104 actualsamecut:closedgen,gateFalse/depth0/retiredTrue,
+ 5refusals0IO. Test-onlyREDgen.close occursAFTERrecord, notcandidatecleanup.
+- Actualtwo-thread INTERRUPTED_WAITER RED/GREEN2304e3: pausednative305; REDinterrupted
+  nonownerr etireswhileT1active,actualos.write15+25byteswhile retired; GREENserialized
+  retirement waitsforT1scopeexit,thosewrites occurwhilelive, thenretired+5refusals0IO.
+  Threadjoined; faultschildren-9 NOTnormalEOF. Greenreceiptc37c45a4….
+- CONFIRMATION_ASSIGNMENTS_REGRESSION9c64a0:8actualsource243/owner2-20 cutsatfirst
+  storeandaftereach3confirmationstores. Currentraw remainsoutstandingORlastmarker;
+  aftertruecallercontinuation markertruthfullyadvances, notrollback.5refusals0IO.
+  These onentry-custody; live63743 repeatsonentry-handoff withnormal/reentryregression.
+
+## 2026-09-22T20:47:09.055262+00:00 — Oracle47 / source-entry local barrier
+
+Oracle47 completed and fully read (da1134), wrapper37c938 exit0; exact prompt/hash receipt8962c1. Both narrow repairs retained under stated TCB; no whole-host acceptance. Open: late-fatal-after-cleanup need not retire; first interruption during normal cleanup excluded by uninterrupted cleanup premise; abort-only continuation and protocol IO versus teardown; full local release-path model.
+SharedHostPrefix TENTH33434e passed9977548e… after EIGHTH/NINTH failures retained. consume_sound keeps exact list/events+JoinedRuns; consume_stopped blocks nonempty list. SharedHostCaptureReplay SEVENTHd8e5d6 compiled against this. AuditSEVENTH98e00a standard3 only, prefix267/lease42/entry171 owned. No source holes.
+HANDOFF_REFERENCE_REGRESSION9894e8 all13commands0; current nativeV6 and fouracquire/eightconfirm controls. RunHandoffSharedHostCaptureReplay FIRST7b51b4 used compiledPrefixSEVENTH (HANDOFF_CERTIFIED_JOIN_CUTd5fa76), not later TENTH. 884wires/4085actions/174writers/5works, all4normalEOF0. Fault children-9 notnormalEOF.
+OwnerLeasePrefix SEVENTH087a55 d3e69ca8… derives actual accepted dispatch from same rooted history/pre-source waiting ticket; exact typed replydecode. FIFTH/SIXTH failed syntax/type excluded.
+NEW SourceEntryJournal FIFTHff2833 6207967c… exact independentStep/checker; known full-history reply occurrence; accepted/refused phase, notify/cancel before snapshot; preservation; known-refusal cancellation frames fullnative driver+owners; accepted_dispatch; realclaim initial; constructive accepted/unnotified prefix and notify/cancel progress. Starts AFTERclaim returns, unknownraw and public/control flow remain external, no complete-source/host theorem. Fourgeneralmutants6ed991 reject at refusal/barrier/completeness/retainedlease theorems. FIRST/THIRD/FOURTH failed, SECOND/FIFTH passed; no accepted compiler-generatedsorryAx.
+Actual source-entry prefix interruption at ordinal241/native298: unnotified enteredFalse+oldSnapshot (4c12a1), physical8-descriptor strengthened testbed14f; notified enteredTrue+oldSnapshot466325; snapshot test pending collect. Each retained exactlease, retired/unlocked,5publicrefusals. Physical tests forward os.read/write and observe0 attempts from fault through refusal probes; teardown excluded from this measurement. Nativefaultchildren-9.
+
+- W4 remains incomplete. No Canon/THM/OBL/phase/119 promotion or commit/push. Broader plan/progress/tasks/docs/samples mirrors await reviewed integration; no new report. Sole main, no subagents.
+
+## 2026-09-22T21:09:40.291540+00:00 — source-entry actual binding / retirement boundary
+
+SourceEntryCapture TENTH72f5d4 **5123e10d…**: start_sound binds pre-history/endpoint/vector/initial state, start_complete and start_exact match declarative StartAllowed. SourceEntryJournal FIFTH6207967c unchanged. No source proof holes; FIRST/SECOND/FOURTH/SIXTH/SEVENTH/NINTH failed attempts excluded; THIRD/FIFTH/EIGHTH/TENTH passed.
+ActualV7 run45316f **e7b129f5…** normal4EOF0,3408observations/174writers/5works; harness6a6f04c8… retains actualsource_send frame/cohort/writer/token from preclaim through native reply and observed snapshot assignment. No false source/publicreturn marker. Binder9943c2a… checks exactoccurrence, nointerveningnativeIO, otherowner/cohortframes, fullhostsnapshot againstactualrawsourceoutput. Normal entrylocal subtraces are coalesced into sourceWithEntry events; no general wholehost/faultprefix theorem claimed.
+SharedHostCaptureReplay EIGHTH/NINTH **10bda0f7…** requires source-entry evidence and checks it with EXACT joined.state.history; oldmetadata-only source entry rejects. PRE47.lean preserves previousconsumer. RunSourceEntrySharedHostCaptureReplay FIRST205062 passes5entryjournals,174writers/265prefixes/550boundaries/884knownwires/4085actions/5works,source712. SOURCE_ENTRY_CERTIFIED_JOIN_CUT9a3e7b records FIRST compiledSourceEntryCaptureFIFTH, not laterTENTH. Currentconsumer recompiled6fb6c7, auditNINTH4ec5b5 **c32a4297…** standard3 only; 125SourceEntryCapture,207SourceEntryJournal,46lease,267prefix owned.
+Typedcapturecontrolsf6ca49 borrowedticket/cancelaccepted/prematuresnapshot/missingentry allreject intendeddiagnostic. Generalmutation6ed991 all4reject correspondinggeneraltheorems. ExistingV6legacyrunners nowlackmandatoryentryevidence: historicalpass remains pinnedPRE47cut, do not callfuturefullregressionpassedwithoutupdatingproperbinders.
+Sourceentryphysicalfaults all3passed bed14f/466325/745ac1;8FDread/write0 inmeasuredfault→publicprobeinterval, exactlease retained. Scope excludeslaterteardown; children-9 notEOFsuccess.
+NESTED_RETIREMENT RED6d6e4c actualforeigncallbackcatch-resume: native305→307,2writes(15/25B)+4reads allretiredTrue. GREEN7d0706 samefatalpropagated:305→305,0protocolcalls;5publicrefusals/gatefreeboth. Test54c3a5a6… no productionchange; evidence demonstrates abort-only premise, not support for arbitraryforeigncallbacks.
+Oracle48 submitted ONCE02b70d21:04:38.842UTC, tool97544/PID820266, sessionmir-w4-source-entry-journal; firststatus0761e021:08:32running, NEXT>=21:11:32UTC. Packet37files269174B dryfb06ec~86390tokens, Q26d6229c… manifestf4e60843…. Samejob/no arbitrarydeadline/no paidfallback.
+AFTEROracle48freeze: EntryAcquisition.Restoration FIFTH30c72f **05ab4953…** checked independentfull-state cleanupPC/Step/checker, gate→depth→done preservation, retiredframes, no cleanup body resume. Interpreted at own relinquishment boundary, not globally frozen gate after unlock. NormalANDexceptionalcleanupuninterrupted premise explicit. Constructive cleanup_execution SIXTHc17e31 pending collect/fix, not counted. Needs audit/review/mutations; oldlocalmodel frozenOracle47 unaffected.
+Quota763544: **51%** checked21:07:37.776UTC,event21:07:08.174Z. NEXT>=22:07:37UTC; ownrolloutbounded4MiB token_count/rate_limits only. User-authorizedpause near30% atcheckpoint, notcompletion. Resource87b0f4 root44GiB/RAM8.6GiB/swap513MiB; noOOM.
+
+W4 remains ACTIVE/incomplete. No production/Canon/THM/OBL/119 promotion, commit or push. One report, sole main, no subagents. Broader mirrors await reviewed integration.
+
+## 2026-09-22T21:31:32.253602+00:00 — Oracle48 counterexamples / bounded repairs / pure handoff candidate
+
+Oracle48 completed21:16:45UTC, wrapper4db424 exit0; fullanswer73e21a SHA a29b6deb… exactprompt76d53a. Q26d6229c… manifestf4e60843… unchanged. Advice, not proof/owner acceptance. ORACLE48_DISPOSITIONS.json records findings A(startorigin), B(normalizer omissions), C(lease continuity), D(launch schema), vector/held/published/unknown-wire obligations.
+Restoration cleanup_execution SEVENTH9d987d and commentclarified EIGHTH5b0bd6 **62550533…** pass; normal+exceptional uninterruptedcleanup explicitly required. Fourgeneralmutations5b0bd6 fail at preserves/retired_frames/advance_complete. AuditTENTH3fc69f passes onlystandard3, EntryAcquisition336owned; predates subsequent SourceEntryCapture changes. No sourceholes; failedSIXTH retained.
+Actualcleanupcounterexamples4cfec3, current857aadc1… native303: NORMAL_CLEANUP solefault inside normalfinally leaves gateTrue/depth1/retiredFalse with generatorclosed; LATE_EXIT contextlibPY_RETURN aftercleanup leavesgateFalse/depth0/retiredFalse despitefatalescape. Tests preservetraceback, record beforetest-onlylockrelease, children-9notnormalEOF. This delimits TCB, not fixes arbitraryinterruption or proves physicalretirementaftereveryfatalexit.
+Oracle48A reproduced by actualrooted-history probeaa331a: firstsource241 endpoint2, alternateowner0 has SAMEprojectedData/sparecapacity, oldstartacceptswrongendpoint. Addedidle-dispatch/ticket.place guards plus declarativeStartAllowed exactness and generalstart_wrong_endpoint/start_dispatched. SourceEntryCapture FIFTEENTHc49d52 **d448ce5d…** passes; previousELEVENTH/TWELFTH elaboration failures excluded; THIRTEENTH/FOURTEENTH passed. ActualGREENc49d52 nowrejects alternateowner and stillpasses5entries/174writers/884wires/4085actions/5works/source712. This is typedcheckeractualhistory, not a native wrong-target execution.
+Oracle48B rawbinderRED e62e59 accepts changedentered pre-reply, premature unchangedsnapshot marker, orphanclaimedmarker and emitsidenticalevidence. Fixedbinder **a50845fc…** enforces markergrammar, fullpostclaimtargetmemory, boundedpreclaimleasechange, sequence/ordinaluniqueness. GREEN6d06bb rejectsall3atintendedboundary, priorreusedtoken/borrowedframecontrolsalsoreject, original5intervals accepted. Binder-onlytypedrawmutation, notwholepipeline/nativecounterfeit. Generator nowasserts host_order completeorderedcoverage and entryevidenceconsumedexactlyonce; ORACLE48 reboundinputsbdfc36 has2439events andidenticalrunner892fb9c6…; not yet executed underthattag.
+Oracle48D REDcf0399 ignoredsourceWithEntry2 withnonexistentfile; consumerTENTH **11b3420d…** explicitlyrejectslaunch-tagedevidence; GREEN00c081 failsintendeddiagnostic. Oracle48C RED68c767 eraseslease/entered consistentlyatfirstowner2reserve(rows819-823) andoldjoinedconsumerstillpasses. This motivates currentpureState with completewriter continuity, activeentry andhistoricalstoredrecords; no productclosureyet.
+SourceEntryPrefix.lean is NONPRODUCTION candidate importingexistingSharedHostPrefix/SourceEntryCapture. Currentalternative remains trustingselectedsequentialcontrol; chosenproductadds generalcurrent-memoryhandoff proof andfailure-sensitiveprefixes. Unknown/rawlate-delivery andactualabort-onlyPythoncontrol remain separateopenobligations. FIRST45174a errorsrecorded; successorundercheck. No failedgeneratedsorryAxaccepted.
+
+W4 ACTIVE/incomplete, solemain/no subagents. No production/Canon/THM/OBL/phase/119promotion, commit orpush. Existing5dirtydocs preserved. Broaderplan/progress/tasks/docs/samples mirrors await reviewedintegration, one report. Latestquota51% at21:07:37UTC, next>=22:07:37; no interveningchecks. No user/tool blocker.
+
+
+### 2026-09-22T22:16:38.329762+00:00 — source-entry known-prefix and local fault checkpoint (W4 OPEN)
+
+Oracle49 completed at22:01:22UTC, answer5416c810…; sole main read full and independently reproduced the query/idle writer-bit and contemporaneous ordinal omissions. New full selected-observation framing rejects each at the altered row; normal V7 and actual known-refusal V8 still pass (174writers,5works;5/6entries). General owner/claim lifting excludes a co-restriction to three owners: the mutant fails owner_open_lift. Rooted Certified.checked_origins preserves historical checked-start conditions for active/stored entries; bare Open/Invariant remain insufficient. SourceEntryPrefix ELEVENTH cc59e9af… and consumer FOURTEENTH94e0d34d… compile without source proof holes.
+
+Actual known accepted source241 local cuts UNNOTIFIED/NOTIFIED/SNAPSHOT each retain complete writer lease/phase. Prefix replay passes57writers,186 preceding completed calls,296known wires/1369physical actions; unfinished source journal remains active for first2 cuts, snapshot cut retains1historical entry. Five retired public probes produce0protocol reads/writes across8native descriptors. Children reaped-9, not normal EOF. New binder accepts retired prefixes only explicitly. Fault recipe checker retains unchanged literal validation for all preceding complete outer calls, plus separately checks the final actual failed entry and later empty probes. Typed lease-erasure/snapshot-rollback/completion relabeling controls each reject. These are real local interruption records plus separately classified input mutations, not fabricated E2E.
+
+Latest quota49% (metadata22:07:56Z,checked22:08:34Z); next>=23:08:34Z. No pause yet. AuditTWELFTH still running tool26187 at checkpoint; no pass claimed. Next one physical residual path using existing SharedReplyRetention, preserving current writer anchor and raw/handed/validated/stopped distinctions. Broader whole-host/call/gate/head/receipt/payment/currentness, Rust/Core/privateQUIC/network/119/Git remain open. No new baseline replay, Canon/THM/OBL/phase promotion, production edit, commit/push, notification or sub-agent. plan/progress/tasks/Documentation/project-status/samples mirrors await reviewed integration. RESUME/W4_CHECK/READ_LEDGER/CURRENT_GOAL updated; no new micro-report.
+
+2026-09-22T22:18:37.849112+00:00 follow-up: auditTWELFTH completed22:15:49UTC, exit0, standard3-only for listed owned modules including295SourceEntryPrefix/116SharedHostCaptureReplay (use exact log counts). It predates new unverified HostReplyPrefix candidate. No acceptance change.
+
+
+### 2026-09-22T22:55:31.460496+00:00 — Oracle50 repairs and physical residual candidate (W4 OPEN)
+
+Oracle50 mir-w4-source-entry-framing completed22:37:14UTC, wrapperexit0; fullanswer4629aeab… read and checked. F1 actual earlier known refusal followed by UNNOTIFIED fault failed oldnormalizer at failedEnd; fixed classification passes SAMEreceipt, plus actual NOTIFIED/SNAPSHOT mixed runs. F2–F4 sixteen typed controls accepted by frozen50 and rejected after binding actual caller, bytes, status, store phase and distinct probe inventory. Snapshot identity cache defect reproduced by exact observer function; canonical-content guard now refuses in-place mutation. New actual calibrated ENTRY/RAW_CAPTURE records positive reads/writes on all8native descriptors via pinned Peer.read/send, followed by0IO for5retired probes. This is Python callsite instrumentation, not OS-wide tracing; previous receipts retain former observer premises. All findings and unresolved whole-cohort snapshot obligation in ORACLE50_DISPOSITIONS.
+
+HostReplyPrefix TENTH4b397d7e… mechanically checks independent Step/checker exactness, rooted SAME residual physical path, retained local anchor, promotion absorption without duplicate execution, general arming/absorption nonvacuity, before/after/late delivery and raw/validated/mismatch retirement. Five theory mutations fail intended general theorems. AuditTHIRTEENTHfab4754a… passes standard3 only, including256HostReplyPrefix owned declarations. This module was not in frozen50 and needs delta review. Six actual ENTRY/OWNER × BEFORE_WRITE/BODY_LOST/RAW_CAPTURE prefixes captured; OWNER initial harness failure was JSON list/tuple comparison, retained and repaired with freshR2runs. Complete-memory retained; owner failed bit changes explicitly. Seven finite full-tail/recipe checks now pass including calibrated run, but SAME Lean residual consumer remains next. No fake normal EOF, public success, arbitrary callback/cleanup guarantee or W4 acceptance.
+
+Same5dirtydocs, no commit/push/production/Canon/119state change, sole main/no subagents. Broader plan/progress/tasks/Documentation/project-status/samples synchronization remains pending reviewed integration; no new micro-report. Quota49%checked22:08:34UTC,next>=23:08:34. Root43GiBfree/RAM8GiBavailable atnewcapture.
+
+
+### 2026-09-22T23:10:59.446326+00:00 — SAME residual consumer / six actual unknown prefixes / Oracle51 pending
+
+HostReplyPrefix ELEVENTH2051f27e… adds retained Interrupted capsule and rooted/no_absorb general results. SharedHostCaptureReplay FIFTEENTHf6eb225e… uses SAME Certified current writer/Joint/funding anchor to decode actual pending entry/compute and construct one retained residual. BEFORE_WRITE is local request arming without native application; BODY_LOST has privileged actual response but host rawNone; RAW_CAPTURE retains host body. No known event, localComplete, rollback, duplicate roundtrip or normalEOF added. Source claim can be armed without fabricated reply/status; full post-arm rows separately checked.
+
+All6 actual prefix replays pass: ENTRY57writer journals/186completed prior boundaries/295knownwires/1365anchoredactions/source240; OWNER59/186/299/1381/source242. Residual2before/3after-delivery; rawpresence differs. Six finite + seven Lean-input negative controls reject intended diagnostics. Fresh normal/refused/mixed-local-fault rebinding and replay pass after consumer delta. AuditFOURTEENTH exits0:161IOconsumer/278HostReplyPrefix declarations, others exactlog, standard3only. No source holes; a preliminary substring check falsely matched variable admitted and was corrected to word-boundary inspection plus transitive axiom audit.
+
+Oracle51 submitted ONCE9b1220 at23:08:29.093664UTC, sessionmir-w4-host-reply-prefix/tool22079/PID881249. Q1e3842c9… manifest9ab60bd8…,61manifestfiles481548B/63attachments, dry149200tokens. Pre-submit bundle check initially failed on numbered rendering (d0cdfc) before any process start; corrected by stripping line-number prefixes and verified all63completefilecontents. No resend, arbitrarydeadline, Chromechange or paidfallback. Firststatus>=23:11:29UTC. Review is advisory and pending.
+
+Quotaff461d48%remaining,checked23:09:06UTC,event23:08:45;next>=00:09:06UTC. Same5own dirtydocs, no commit/push/production/Canon/119promotion or newreport. Current consumer excludes outer cohort current snapshot/receipt/gate/payment coupling; this is next bounded research while review runs. Broader status mirrors remain pending reviewed integration.
+
+
+### 2026-09-22T23:31:31.105775+00:00 — Oracle51 falsifiers and current repairs (W4 OPEN)
+
+Oracle51 completed23:17:03UTC, wrapper598f99exit0, answer42d7ec2b… fullread12f842. Same-anchor physical product supported within stated scope; two finite normalization defects independently reproduced: successful zero-IO nested call inside finalfailedinvoke erased asrejection, and one-field mismatch in failedmessage/interruption/retirementcut/profile ignored. GREEN_BASIC rejects both forENTRY/OWNER whilevalidnestedrefusalaccepts. OWNERcaller field requiresnewactualoriginbinding and remainsopen. Fullrawcustody afterretirement/probes also notpreviouslyobserved; newhook compares completeimmutable outstanding/lastconfirmed. FirstnewOWNERcapture failed by helpername shadowing, preserved; correctedfreshcaptures running.
+
+GeneralStoppedAbsorbedProbe FIRST proves oldbareAbsorbed caninhabit stopped promotedreceipt while absorbrefuses. HostReplyPrefixTWELFTH3edddfcb… addslive/promoted evidence plusgeneralacceptable/not_stopped; compiled standard3 only. Consumerrebuild, finalmutations/axiomaudit/currentcutlinkage pending. Oracle suggestion to treat W4candidateclose asnewownerpermission is notauthority; existingdelegation retained, officialCanonpromotionseparate. No W4acceptance.
+
+Independentcohortgap research reproduced4transientfield omissions (snapshot/initialized/freezes/installs) evenwitholdnormalizer/upstreamchecks. Newprivilegedstatement capture V9_R4 records871actualstoreboundaries,5150observations,886nativeevents,4EOF0 withunchangednative/host. V9hit15swall;R2allworkthenEOFwait15sexpired;R3testharnessmissinghelperfailed; failuresretained. R4selectsexplicit60sobserverwall usingcopiednativecontext, originalCPU/membounds, notperformance/noninterferenceclaim. Optimizedobservercomparesstrictmutablecontent everyobservation,cachesonlyrecursivelyimmutabletypedtuples;4specificmutationsrejected. Cohortcapture notyetproofconsumed. One report, same5dirtydocs; no production/Canon/Git/119promotion. Quotaremains48%,nextcheck>=00:09:06UTC.
+
+
+### 2026-09-22T23:54:07.153984+00:00 — Post51 custody/normalizer repair and delta52 review
+
+Same active W4 LAB semantic goal, sole main. F1/F2 are reproduced and repaired: all nested spans (including final failed call), exception/marker cut/profile and actual unknown caller/writer association are checked. Thirteen typed controls distinguish eleven rejected corruptions from two valid nested rejections. Full outstanding and last-confirmed occurrence content is bound at injection, propagation and each retired probe; both actual body-corrupting ENTRY/OWNER experiments are detected. Six normal and six mixed known-refusal-then-unknown actual captures pass the same current Lean consumer. Post51 mixed test initially interrupted the earlier refusal; failure retained and selector corrected before fresh six runs. Known-fault regression exposed an undefined helper argument; failed log retained, argument corrected, all16 prior raw-binding controls passed again.
+
+HostReplyPrefix TWELFTH strengthens bare Absorbed with live/promoted evidence; five current general-theorem mutants fail at intended targets. Consumer SIXTEENTH and owned axiom audit FIFTEENTH pass (standard three only, no proof holes). The12 replays hash raw/tree/receipt/runner inputs before and after execution; actual imported-module inventory and8363dependency files are hashed around the batch. This is explicit private-file custody, not adversarial ABA exclusion. Snapshot guard exact AST matches reviewed51 function; optimized Python execution is refused. No historical capture acquires new fields retrospectively.
+
+Oracle52 single submission23:50:47.821481UTC, session mir-w4-host-custody-delta, question1aea7631…, manifest61c2b7ab…,51attachments verified against rendered bundle. Response pending; opinion cannot authorize or accept W4. Next independent research derives same-history cohort receipt origins and then full cohort memory/store/gate lifetime. New CohortHostReceipt FIRST compile pending. Actual cohort V9_R4 store capture remains unconsumed, so whole-cohort state invariant is not claimed. Broad plan/status/119/Git integration remain open; current5dirtydocs only, no newcommit/push, no subagents. Quota48%, nextcheck>=00:09:06UTC.
+
+
+### 2026-09-23T00:32:25.579690+00:00 — Oracle52 repairs, fresh selected compilation and per-execution resolver (W4 OPEN)
+
+Oracle52 completed23:59:23UTC, answer17bb74c1… fully read. Its parent-E/child-PYTHONOPTIMIZE counterexample was reproduced against exact frozen run(); invalid cut accepted by optimized child. Effective child executable now uses -E; three entrypoints reject optimization before inputs. RED/GREEN plus direct-O controls pass. No Chrome edits or paid fallback.
+
+Fresh167 consumer dependency objects built under isolated LEAN_PATH, exact source/output receipts; additional acquisition/audit/inspector sealed as170selected successful builds. Initial broad audit lacked16extra imports. Supplementing them reached unrelated fixed RegistrationWitnessCertificateKernel and std::bad_alloc at AS4GiB; retained FAILED. Exact same13 audited ownership sets/body were independently run as HostLifetimeAuditPost52 and pass identical counts with standard3only. This does not claim broader fixed-witness rebuild success. Resource evidence: root42GiB free, RAM8.5GiB available, swap2GiB used.
+
+All12 actual retained captures pass fresh POST52 replay: every executing runner itself reports2215import paths, all match isolated root/toolchain inventory. Actual input/source/build-output/compiler/preparer hashes retained. Isolated real Lean old-object control proves before/after stability can execute the wrong compatible version; exact current successful-build gate rejects it. No adversarial ABA theorem claimed. Additional typed TypeError/foreign-writer and four actual same-length/last-probe-only custody controls meet Oracle52 discriminators.
+
+Oracle53 submitted once00:26:17.891093UTC, sessionmir-w4-host-build-binding/tool60129/PID918879, Qb6562836…/manifest616485dc…,34frozen data files+manifest+cut, dry87600tokens; exact rendered bodies verified. Firststatus~00:29:53running; status command attached a read-only monitor tool75927, samejob. No answer yet; no acceptance inference.
+
+Independent CohortHostReceipt SEVENTHc20acc46… derives same-history funding/payment/notification/finished-envelope origins. CohortHostDebt SECONDf09cc4db… proves local receipt-to-store checker equivalence and retention. CohortHostPrefix THIRDf2dbfb37… mechanically pairs SAME SourceEntryPrefix successor with cohort debt, proves independent checker/rules, empty local debt and idle inner journals at close, no generic commit through active source entry, and failed cleanup retaining debt. FIRST/SECOND tactic elaboration failures retained (no accepted artifacts or source sorry); THIRD standard3only. Full paired invariant/nonvacuity/actual cohort capture/creation-release bindings remain open.
+
+Same5own dirtydocs; no commit/push/production/Canon/119promotion or subagents. Broader plan/progress/tasks/Documentation/project-status/samples integration remains pending reviewed closure, not silently complete. Quota45% at00:09:32UTC; next>=01:09:32UTC, user-authorized pause near30%. Reading hash audit identified64 unmatched imported-source ledger entries (15634lines); actual full reading or exact prior hash evidence required before claiming complete, build is not reading.
+
+### 2026-09-23T01:01:32.499862+00:00 — Python source binding and same-state cohort certificate
+
+Oracle53 findings reproduced and dispositioned in ORACLE53_DISPOSITIONS.json. A same-size/mtime stale CPython cache suppressed the frozen checker assertion while the current source hash remained correct; the repaired launcher uses a fresh empty cache reference and disables writes, then binds every actual local import origin/hash. Four metadata/log-link controls and direct optimization-entry controls reject. POST53_ALL_ORIGINS_BOUND_REPLAY_RESULT records twelve successful replays of prior actual normal/mixed captures, not twelve new native executions. Oracle54 mir-w4-python-source-binding is the sole live read-only review. No browser settings changed.
+
+CohortHostPrefix TENTH passes general preservation, declarative/checker equivalence, relative admission/discharge and a Certified source view from the same paired state/path. Earlier SEVENTH–NINTH elaboration failures are retained and not accepted; no source sorry/admit. The local completion path always checks initialization-prelude completion even when Joint is closed. CohortHostObservation THIRD proves exact seven-field typed matching and snapshot/payment/unrecorded-install rejection. These do not certify the actual startup/full-store observer or arbitrary Python execution. Startup and gate/acquisition/restoration binding, whole-cohort consumer, Rust/privateQUIC, regressions,119 dispositions and Git integration remain open.
+
+Same5 dirty documents, no commit/push or Canon/phase change. Quota latest45% at00:09UTC; next check>=01:09:32UTC. Broader status/plan/sample synchronization remains pending milestone integration; no new report. One accidental Oracle status interval was146s; subsequent checks retain >=180s and no job resend.
+
+### 2026-09-23T01:21:08.188431+00:00 — Startup handoff and escaping-origin repair
+
+Oracle54 is complete. POST54_IMPORT_ESCAPE_RED/GREEN isolate the actual static sourceless-package escape: correct flat source unchanged, real checker with one F2 omission, old inventory/gate omitted escaped target, successor rejects it. POST54_BOUND_REPLAY_RESULT passes all twelve prior real capture replays. No new native capture or whole-batch attack is claimed. Oracle55 mir-w4-python-origin-escape is live on frozen origin-only delta.
+
+CohortHostStartup FIFTH and CohortHostExecution FIRST pass parameter-general startup/bridge/cursor obligations; explicit bootstrap receipt/store and launched snapshot debt are retained. CohortHostObservation FOURTH rebuilds against Prefix TENTH. CohortHostCaptureValues FIRST and new normal-only CohortHostCaptureReplay THIRD compile, but actual full-field capture consumption has NOT run. The new consumer updates one cursor; its SourceEntryPrefix view is derived each time. Old fault coverage is retained separately and is not promoted to whole-cohort coverage. Creation trace, store-marker normalization, final custody/review and remaining W4 integration remain OPEN. Two failed generator attempts (guard matched a let-binding, then self-selected recovery text) and missing-source compile logs are retained; THIRD compiles the actual generated source.
+
+Quota44% checked01:10:16UTC, next>=02:10:16. No commit/push, Canon/phase/119 change. Normal Oracle job retained without resubmission. Two accidental short status intervals are recorded; subsequent status uses a180s timestamp guard. Oracle preview default auto-pruned51old session records; mirrored local answers/evidence remain, and future calls explicitly disable pruning with retain-hours0.
+
+### 2026-09-23T01:37:56.103326+00:00 — Actual full-field normal replay and Oracle55 close
+
+Oracle55 completed01:29:59UTC; full answer read, no remaining source-derived static escape under stated finite profile. Its test precision finding is repaired by successor control assertions for inclusion plus exact unbound module/target/hash; RED/GREEN both pass. Permitted-main membership with fixed launch/output role association is explicitly retained, rather than stronger lexical/loader identity. Normal trusted startup and metadata remain TCB. No independent private execution, signed acceptance or authority claimed.
+
+Actual V9_R4 full-cohort normal capture now replays through ONE startup/native/local-journal cursor:5150typed observations,871physicalstores(866generic plus5shared entry snapshots),174writerintervals,265writerprefixsamples,886fundingevents/884knownwires/4085actions,550boundaries/5works. The normalizer checks every physicalstore before/after/frame and all fields across every row; three typed binder mutants reject. Values decode actual snapshot/command/envelope bytes. This is a replay of retained real execution, not new native capture. Whole-cohort fault/unknown product remains OPEN.
+
+The4.58MB literal runner first exceeded heartbeats, then the successor exceeded the fixed4GiB address-space bound. Both failures retained. No memory cap increase: a small Lean JSON decoder now loads the same9572normalized events at runtime; finite constructor-token roundtrip checks preserve generated content. RunCohortHostReplay_JSON_V9 FIRST exits0 under sameLean4.29.1trust0/j1/AS4GiB. Prototype preparation lacks final fresh isolated source/import/build binding; no final acceptance. Current typed negative runner also tests deliberate observation omission to expose standalone completeness scope.
+
+Same5 own dirty docs; no commit/push, Canon/119 promotion, production edit, external notification or subagents. Broader plan/progress/tasks/Documentation/project-status/samples mirrors pending reviewed milestone integration. Quota44% checked01:10:16UTC,next>=02:10:16; W4 remainsACTIVE.
+
+### 2026-09-23T01:56:42.377165+00:00 — Observation completeness and isolated normal-product evidence
+
+Four typed store/field negatives reject, but the first standalone consumer accepted a trace retaining only its first observation. This RED is preserved. CohortObservationCoverage SECOND now proves independent Rows/check equivalence, exact range completeness, general complete-range acceptance and missing/reordered-row rejection. FIRST elaboration error was corrected; no source holes accepted. The same consumer requires explicit original row numbers and expected raw row count. Values/events unchanged except indices. Eight finite mutants now reject at intended diagnostics; actual5150-row normal replay still passes. This schedule theorem assumes independently bound raw inventory/value provenance; it cannot establish truthful physical observation by itself.
+
+Isolated root reuses170 byte-identical successful source/output builds and freshly compiles10newresearchmodules+audit+inspector. Same13prior plus10new owned-module axiom audit passes standard3only. Positive and eight-negative runners pass with each executing process's resolver, exact expected Python preparer/import identities, fresh empty Python source caches, raw/tree/native/compiler/build/runner digests before and after. COHORT_BOUND_EXECUTION retains full evidence; replay is of actual prior capture, not new process run. Broader unrelated failed witness audit remains FAILED.
+
+Oracle56 submittedONCE2026-09-23T01:53:41.741612+00:00, mir-w4-cohort-normal-product/PID958104/tool43539. Q5fb61f8fd622b2296d0517eab8b4c3cbc8013a008cd8b433ded2ba8f654ede70, manifest2e43b922a41cf23db7d653f69f3598cda34ae8d9c22dfc57e1761bdea13abc4c;49datafiles606382B plusmanifest/cut,51renderedbodies/dry188020tokens. Two pre-submit rendering checks failed before anyjob (header pattern, trailingemptyline); full content checked modulo explicitly disclosed terminalLF normalization. No internal lines omitted. No outertimeout/retry/Chromeedit/pruning. Review pending, no acceptance inferred.
+
+Same W4 semanticgoal, solemain/no subagents, same5own dirtydocs, no commit/push/production/Canon/119change. Stronger full native/current-cohort correspondence, fault/unknownproduct and creation/release/recovery mapping remain open before directimplementation. Broader plan/status/sample/Git integration remains pending; quota44% next>=02:10:16UTC. Imported-reading gap54hashes13979lines after actual additionalreads, not build-as-reading.
+
+### 2026-09-23T02:16:12.640772+00:00 — Retained failure evidence and actual store interruption
+
+Oracle56 original and one retry both failed prompt submission (prompt-commit-timeout). Runtime metadata alone was ambiguous; read-only page inspection found no submitted conversation turns and an explicit temporary conversation rate-limit message. No answer has been recovered. Retry was due to concrete failure, not latency. Further retry deferred at least to03:03UTC; same frozen packet retained. No browser setting changes, account/API fallback, external messages or paid path.
+
+CohortHostFailure SEVENTH proves nonvacuous total retirement/release from admitted same-live requests, retaining full last-known memory/debt/history and physical slot/raw bytes through runtime data fields. A type-only residual index in the early candidate was strengthened because erased parameters cannot provide runtime custody. Rooted physical history and no absorption after stop also pass with standard3axioms; no source sorry/admit. Earlier elaboration failures and prior candidates retained. Whole physical-fault consumer and independent review remain open.
+
+Fresh full-cohort UNNOTIFIED process capture passes preliminary custody/retirement/noIO checks. NOTIFIED capture fails: observer emitted after-store at exception-handler line although assignment never executed. Existing full-state binder independently rejects exact token297/row1741 mismatch. Red receipt/log retained; V2 observer records an aborted attempted statement before injection and keeps its binding without inventing a completed commit. Fresh V2_NOTIFIED capture running. None of these preliminary captures is a whole-cohort Lean success yet.
+
+Quota41% checked02:13:32UTC; next>=03:13:32UTC, pause near30 per user. Same5own dirtydocs; no commit/push or production/Canon/119 adoption. Broader plan/status/sample integration remains pending.
+
+### 2026-09-23T02:32:14.079357+00:00 — Known faults consume full cohort state
+
+Known-fault whole-cohort component: UNNOTIFIED1752/NOTIFIED1755/SNAPSHOT1756 observations pass one startup/native/local cursor; known-refusal MIXED1765 also passes. Native prefix source241(or242mixed),57writerintervals,87writerprefixes; normal EOF explicitly false. Ten typed negative controls pass intended diagnostics162672. Retired physical guard acquisition is distinct from semantic entry; CohortRetiredProbe FIRST proof850b025a passed85a743; SECOND adds explicit arbitrary-memory/debt two-step checker acceptance and Released.open bridge (collect33024). Knownconsumer5ae96579/JSON327e2c35 FIRST compiled. Full fresh cold dependency/source binding still OPEN for this successor; earlier normal binding remains intact.
+NOTIFIED first observer falsely marked unexecuted assignment completed at exception handler; oldraw/RED retained, successor167a5c79 records aborted attempted statement and no commit. Fault store binder01480114 validates allrows plus exact aborted boundary and four typed negatives. UNNOTIFIED revealed normal-only value binder's overstrict demand that every returned snapshot already be observed; successor27025f4d binds every observed snapshot to actual host content/native bytes, permits never-stored replies to remain absent. It does not invent host snapshots. Originalpreparerfailure and accidental missing-runner command retainedFAILED. Two generator unique-string failures retained; exact partial generated files preserved, no overwrite.
+Unknown full-cohort capture successor930cd41d from old wire harness63ba5890 plus unchanged fullstoreobserver. Actual ENTRY RAW_CAPTURE preliminaryPASS4b5b55e1,1753rows; fullcustody/plainprobes retained, wholeLean replay NOT RUN. OWNER RAW_CAPTURE tool64450 collected next. Theory CohortHostFailure SEVENTHde864fc3 passes total retire/release, runtimefullslot/raw and same-native-rooted residual; not yet actualunknownwholeconsumer. Next implement unknown fault stage carrying same full Live via explicit Outstanding→Retired→Released, distinguish attempted source counter from settled native ordinal, check everycohort row even afterarm; ownerfailedflag remains exact finite-tail-check obligation, not silently erased.
+Oracle56 original/retry both prompt submissionFAILED; UI temporarily limits conversations. No live job/answer. Backoff>=03:03UTC; keep exact frozen normal packet Q5fb61f8… manifest2e43b922…49datafiles51attachments. NoChromeedit/paidfallback/bypass.
+Quota41% checked02:13:32.676549UTC; next>=03:13:32.676549UTC. Userauthorizedpause near30 at checkpoint, NOTcomplete. SameW4goal ACTIVE, broaderRust/Core/privateQUIC/strongerwholememoryinvariant/generaladmission/regression/119/status/Git OPEN.
+
+Same5 own dirtydocs, no commit/push, production/Canon/119 adoption, externalnotification or subagents. Plan/status/sample integration remains pending milestone closure.
+
+### 2026-09-23T02:51:58.999404+00:00 — Actual unknown outcomes and independent retained-custody evidence
+
+Unknown full-cohort: all8fresh ENTRY/OWNER x BEFORE_WRITE/BODY_LOST/RAW_CAPTURE plus2RAW mixed-refusal captures pass exact finite raw-custody, all-tail field and completed-store binding (COHORT_WIRE_CAPTURE_BIND_RESULT.json tool438aac). ENTRY_RAW4b5b55e1/1753rows and OWNER_RAW51ae340f/1770rows replayed through one full host fault-stage cursor, with attempted vs settled source ordinal separated. Those replays used WireCaptureReplay SECONDdebe09a3 before the independent-custody repair; do not claim current final bound replay yet.
+CohortHostFailure SEVENTHde864fc3, CohortRetiredProbe SECOND201d85d6 and CohortFaultProgress FIRST5a1a87d4 passed actual general checks/axioms standard3only. FaultProgress current state derives from runtime-owned outstanding→retired→released; full slot/raw/memory/debt/history rooted preservation and no duplicate cleanup. ProbeSECOND explicit parameter-general checker positive prevents reflexive path from hiding all-reject.
+RED: standalone normalized RAW_CAPTURE→BODY_LOST relabel accepted and erased retained knowledge (RunCohortWireControlsRed.FIRST, toola1fdb0);9other typedfault controls rejected. Actual bound-preparer already selected correctcut, but stronger standalone consumer now directly reads raw capture wire_custody_expected.outstanding (payload and optional whole reply bytes), not just normalizedlabel. CohortWireEvidence SECOND proves exact equality gate and general lost-raw/application-rollback rejection; finite JSON/hex parser is not a general codec theorem. FIRST failed because matches is reserved, retained. WireCaptureReplay THIRD b54219c7 and JSONSECOND compile; raw-evidence gate checked before accepting residual. Whole rawcapture added as independent run argument. Initial Green FIRST failed only lastcase missing fixture after labelrename also changed filename; pathcorrected, semantic rerun pending, doNOTclaimGreen yet. OldRED and oldrunners preserved.
+Live: isolated cold-post56-cohort-fault build tool33958:170exact prior source/output builds reused,18current cohort modules compiled, audit/inspector stillrunning. New build_cohort_fault_bound_root.py and run_cohort_fault_bound_replays.py are authored; replay launcher NOTRUN. It will prepare13actualprofiles and run positives plus3negative suites with per-process source cache, actualimports, resolver, raw/build/source/native/compiler before/after bindings. Do not edit current selected sources while build/replay active.
+Oracle56 original/retry bothactualpromptsubmissionFAILED with explicit temporary ChatGPT conversation rate limit; no live job/answer. Same normal frozen packet retained; backoff>=03:03UTC before another normal retry; no bypass/Chromeedit/paidfallback. Latestquota41% at02:13:32UTC; next>=03:13:32UTC, pause near30, NOTcomplete.
+Next: collect isolated build/audit; run current-custody positive/last-negative smoke if useful, then bound13profile/negative replay. Newactualcapture sourceharness930cd41d and allraw records fixed. Fullstrongercohort/nativeinvariant, remainingadmission/Rust/privateQUIC/regression/119/status/Git integration/review stillOPEN. Mandatoryimportreading now51hashes12967linesafterInstanceState fullread7f13f2; overallcorpus343 stillincomplete, no newroadmap.
+
+Same5own dirtydocs; no commit/push/production/Canon/119 adoption or externalnotifications. Existing normal cut remains frozen forOracle56. Broaderstatus/plan/sample integration pending.
+
+### Full-cohort final bound replay checkpoint 2026-09-23T03:09:40.813260+00:00
+
+LAB evidence; one existing milestone report
+Full-cohort isolated final replay PASS: COHORT_FAULT_BOUND_EXECUTION.json 2ca2efd2974764c962833c2c8cfd7e1ee9341b0f4d81c5302b3dea846000753e,13actual profiles,16executions including28typednegative controls; tool5572f6, wrapperb8791d exit0. Normal+4knownfault+8unknownwire whole-field histories; actualraw-custody gate rejects knowledge erasure. Allbuild/import/source/raw/compiler bindings held.170exactoldsuccessfulbuilds reused;18newcohortmodules fresh;31ownedmoduleaudit std3only. No newnativeexecution in replay, no broaderW4acceptance.
+Oracle56 retry2 actually submitted03:03:08.728649UTC, tool80518/PID1005768; normalized actualsession mir-w4-cohort-normal-retry-2; firststatusrunning03:06:21.463UTC. Nextstatus>=03:09:21.463UTC. Same frozen normal packet; keepjob. Earlier guard prevented02:xx premature submit (734e46), no extra transmission.
+CohortMemoryProvenance nonproduction successor drafted: local ordered-store debt target refines atomic receipt history of SAME lowernativepath, actualfullmemory only at dischargedordinaryclose. Current-vs-target inequality atactualstartup is generalfalsifier; not direct full native/currentmemoryinvariant. FIRSTe8fe3af0 faileddependent elimination84fa69; noacceptedholes. SECONDdc3ce8de passedba5707 after pairedstate destructuring; all9printedtheorems std3only. No production change.
+Quota41% last02:13:32UTC; next>=03:13:32UTC; pause near30 userauthorized. W4goalACTIVE; Rust/Core/privateQUIC/fullnative-current invariant/review/regression/119/status/Git integrationstillOPEN.
+
+### Oracle56 disposition and concrete writer omission study 2026-09-23T03:18:49.691251+00:00
+
+CURRENT SUCCESSOR CHECKPOINT 2026-09-23T03:18:49.691251+00:00
+Oracle56 COMPLETE sessionmir-w4-cohort-normal-retry-2, answer72e068c9…, fullyreadb540a8; ORACLE56_RECEIPT/DISPOSITIONS. No liveoracle. Advises physical same-cut relation plus idempotent writer statement binding. Existing BoundWriter.observe seek and finish equality/discharge can reconstruct missing no-op stores. New WriterOccurrenceGap FIRSTdcee8d4e passesgeneral zero-count/tail-unchanged/finish-accepts-pendingtail proofs1a3efe, std3only.
+Actual deliberate candidate writer-occurrence-red-caller copies3privatePythonfiles; changes only unleased cleanup to skip already-None leaseassignment. Originalfilesunchanged. Capture HOST_WRITER_OCCURRENCE_RED ace93705… has169actualskipbranches/174writers/5155rows,4EOF0. run_writer_occurrence_red.py f89d42ab… actualcapturetoolc64938PASS. CurrentPythonchecks+preparers (CLIwhitelist-only successor copies prepare_writer_gap_journal/replay.py) PASS72c2a3. FullunchangedLeanconsumer underisolatedroot replay currently72930, launcher run_writer_occurrence_red_replay.py; don'tclaimfullREDuntilcollected.
+CohortMemoryProvenance SECONDdc3ce8de passedba5707 all9axiomsstd3 afterfirstdependent-eliminationfailurekept. Establishes full delayed-store target vs SAME native receipt history, actualfullmemory onlyafterordinaryclose; it is NOT fullphysicalcorrespondence. General launch_not_current refutes naive target=currentmemory equation whilepending. Oracle proposedtarget-vsphysicalformulaqualifiedaccordingly.
+Quota39% at03:13:58.417020UTC, event03:13:34.616Z (used61%). QUOTA_CHECK_0313.json. Next>=04:13:58.417020UTC; pauseuserauthorizedaround30. SameW4goalactive, broaderRust/Core/QUIC/refinement/regression/119/status/GitOPEN.
+Next: collect actual169omission REDLeanreplay, then exact writer instruction/store cursor (everyhead inclnoops, no finish discharge fromfinalequality). Local monitoring3.12docs readofficial sys.monitoring/dis: INSTRUCTION is preinstruction; futureobserver must use actualsuccessor and distinguishfailedinstruction, same-line assignments. No implementation yet. Current/alternative compare exactstatementoccurrence vs value-only coalescing; lattercannotmeetwrite-occurrence guarantee.
+
+### Writer occurrence counterexample and strict statement foundation — 2026-09-23T03:27:15.118294+00:00
+
+Oracle56 F1 is now an actual different-candidate counterexample:169skipped already-None lease assignments,174writer intervals,5155full rows and4normal EOF0, accepted by the unchanged current whole-cohort Lean consumer (ba4443). Bound replay receipt `WRITER_OCCURRENCE_RED_REPLAY.json` SHA256 `006b9d65a35d4a29ccd7cc3cb3f54d51f8bdb3976b13c43b4b38514de9dccacc` ties actual mutant caller source, rawbytes, prep/code/compiler/imports. This is NOT a bypass of the original source hash gate or evidence that original execution omitted writes. Original source/captures remain intact.
+
+`OwnerStatementJournal` SECOND9ba54923 passes87ed99 after the FIRST dependent-elimination failure46de13 (retained, never accepted). General exact head checker/rules, full memory postcondition, target preservation, run soundness/completeness, exact completed count, no-op pair positive and omission/swap negative are checked with standard3axioms only. This is a candidate physical-observation consumer; authentic code/frame custody remains an external premise. No production semantics adopted.
+
+Unchanged original caller source now captured at actual preinstruction→successful-next-instruction cuts: `HOST_WRITER_STATEMENT_CAPTURE`0f087597…6475rows692stores174writers4EOF0; nine selected postreply store sites include same-line assignments and list insertion. New capture3115536e… uses local INSTRUCTION callbacks; wrong successor refuses completion rather than inventing successful after. Official Python3.12 [monitoring](https://docs.python.org/3.12/library/sys.monitoring.html) and [disassembly](https://docs.python.org/3.12/library/dis.html) were consulted; these are implementation-specific trusted observation premises, not general Python/OS proof.
+
+Finite physical binder51caaf35… passes all692occurrences/174intervals (30adbb) and5typed marker/custody/full-field mutants (302a9c). Strict recipe replay and same-current-native/cohort integration remain OPEN; do not count marker checking alone as a complete no-op omission repair. Main alone, no subagents; no new commit/push or production change. Latest quota39%03:13:58UTC; next>=04:13:58UTC.
+
+### 2026-09-23T03:45:25.480517+00:00 — exact writer statements bound to current native receipt (LAB candidate)
+
+Oracle56's idempotent-assignment finding is now a real counterexample: the retained value-only whole consumer accepted169physically omitted release stores. The narrow successor leaves old lower semantics/history immutable and requires an exact statement certificate built from the SAME current `BoundWriter` before accepting caller return. The alternative was a lower-event rewrite; this additional gate has the smaller dependency cone. It neither replays a second native model nor invents observed writes.
+
+`BoundWriterStatements.SIXTH` passes trust0/j1/AS4GiB with standard3axioms only: prefix/completion checker equivalence to independent exact store rules, actualPath/count, same receipt/native target, general omission rejection and relative admission, and `confirmed_same` linking the exact bound to the ordinary closed history record. FIRST import failure and SECOND–FOURTH elaboration failures are retained; no failing output was adopted. FIFTH and SIXTH are successful distinct cuts.
+
+`StatementCohortCaptureReplay`/JSON compile and the actual original-source normal run passes:692stores,174strict closures,6475whole-cohort observations,866generic cohort stores,5source entries,884known wires,4085wire actions. Tool1795c9/normal FIRST is a development-root replay, not yet the final isolated source-bound result.
+
+The same instruction observer executed the retained omission mutant afresh:523stores,174writer returns,6142rows,4EOF0; all169missing assignments remain real absence. Its strict whole replay is running97347. Seven typed normalized negatives are prepared, including deletion with token renumbering, equal-value cleanup swap and duplication; they are NOT yet run. Cold-post57 build script is authored but NOT run. Exact interrupted writer statement capture and full physical native/current relation remain open.
+
+No production/Canon/THM/OBL/W4 acceptance change, no newcommit/push, no subagents/Chrome changes. Quota39%, nextcheck04:13:58UTC. Same5own dirtydocs. Broad plan/status/sample/119/Git integration remains open.
+
+### 2026-09-23T03:57:25.000037+00:00 — strict statement repair isolated binding PASS; delta review pending
+
+`STATEMENT_BOUND_EXECUTION.json` SHA256 `12a8d3abe997a8f84fc0cd588096adef3312e7b80a9b9b1a8987029d7df89d0f`: original actual execution accepted692stores/174closures/6475rows; seven normalized typed controls and the real169-omission execution rejected at the intended prefix/completion gate. Controls remove one release, both cleanup stores, all markers (renumber remaining tokens), swap/duplicate equal-valued cleanup, borrow another owner, and change a store value. Tools910c87/5918a2 confirm two consumers under one isolated root,8891boundfiles before/after, exact actual Python origins/fresh empty caches, executing Lean resolver and compiler/build/raw/value bindings. This replays two retained actual captures, not two additional new native runs.
+
+`cold-post57-writer-statements`:190exact source/output/log/receipt matched old successful builds reused; five current modules plus audit/import inspector freshly compiled;36ownedmodule axiom audits pass standard3only. No unrelated failed build promoted. The early actual mutant standalone #eval exits1 with the intended semantic refusal (563f34); its expected-rejection wrapper exits0 in the final control suite.
+
+Oracle57 submitted once at03:51:52.348741UTC, actualsession `mir-w4-writer-statement-delta`, process tool17987. Frozen question446da6d3… manifestf8133d40…,34datafiles+manifest/cut=36attachments,112683estimatedtokens. It is a self-contained neutral review of the writer occurrence repair only, explicitly retaining full physical relational invariant as OPEN and saying final bound execution was not yet known when packet froze. First actualstatus03:55:38running; next>=03:58:38UTC. An earlier status guard refused before180seconds elapsed, before reading Oracle state. No resend/Chromechange/paidfallback. Oracle review cannot be counted as proof/ownerapproval/signature.
+
+Independent next proof component: `CohortSnapshotCorrespondence` connects delayed store target's snapshot to the SAME native driver source at every known prefix, actual memory only after pendingstores empty. Draft FIRST compile underway68449, not yet proved. Full historicalfields/payment/owner-memory relation and fault strictstatement coverage remain OPEN. W4 ACTIVE/incomplete; no newcommit/push.
+
+### 2026-09-23T04:16:19.191836+00:00 — Oracle57 two-gap repair and paired-history general proof
+
+Oracle57 completed, session mir-w4-writer-statement-delta, answer7dc17c25... fully read1000ef; wrapperexit0. Advisory only. F1 reproduced: changing ordinal/frame/code/instance in BOTH instruction boundaries passed the old binder, while nativeposition change already failed. This is finite forged-capture consistency evidence, not a truthful-original execution defect. V2 observer records full custody independently at native/store/caller-return; both fresh original692store and omission523store executions pass physical binding, five corresponding coordinate mutations fail at intended gate (ORACLE57_PROVENANCE_V2_GREEN.json).
+
+F2 accepted: equal certificate counts did not formally pair every historical close. StatementClosureHistorySECOND 8d349cdafd64bfae7d108ddd24d1fa29d108052aedd8148d9a5918544df71728 proves independent ordered Matches/Paired checker equivalence and Certified.covers with actual open/confirm positions. FIRST Bool conjunction elaboration failed and was retained. Paired consumer checks actual ordinal/occurrence and certifies the actual closed history, preserving same cursor. Development normal replay passed174pairedcloses692stores6475rows, tool1f8b8c. Isolated successor build currently25636, fourmodulesPASS/auditpending; tennegativecontrols NOTRUN. Narrow delta review pending.
+
+CohortSnapshotCorrespondenceFOURTH 2f083c14c3e25a5b472eb35d39ab3ed0a225729225dd28fbd550141030ecc7b7 passes general same-native snapshot preservation at known prefixes and actualmemoryafterdischarge/close, standard3axioms only. FIRST reached4GiB AS cap on unbounded repeated case splitting (no host OOM evidence), SECOND had elaboration errors; finite frame induction fixed these. Full historicalfields/owner-memory correspondence and strictfaultstores remain OPEN. No production/Canon/THM/OBL/W4acceptancechange.
+
+Quota37%checked04:14:06.161UTC, next>=05:14:06.161UTC. Same5own dirtydocs, no newcommit/push; broaderplan/status/sample/119 integration pending.
+
+### 2026-09-23T04:25:01.279206+00:00 — paired normal statement cut bound PASS and Oracle58 collected
+
+PAIRED_STATEMENT_BOUND_EXECUTION.json SHA256 49aa71b87856b5aae454a522adb0ee768b1123501798c1e10001464b0a48e3a4:2retainedactualprofiles10expectednegativecontrols8916boundfiles PASS243eff/711c79. Normal174pointwisepairedcloses692stores6475rows,10negatives include wrongnativeordinal/writeroccurrence and actual169storeomission. Cold58reuses197exactsuccessfulbuilds plus4newmodules/audit/inspector;40ownedmoduleauditsstd3only. Oracle58question750f4e59...,manifest e9481e85...,32datafiles+manifest/cut34attachments113016estimatedtokens. Submittedonce04:18:53.185UTC, firststatus04:22:32completed;wrapperexit0. Answerfa1cc398...fullyread981dbe. No within-premise narrow bypass found; advisorynotacceptance.
+
+Review qualification accepted: Lean certificate retains exacttypedpaths and normalized occurrence positions of SAME actual modeledclose, but physicalcode/frame/instance/process custody is external bound capture evidence. Coherently changing writer_code on15markers ofonecompleteinterval passesV2binder (ORACLE58_TCB_BOUNDARY,f1c31d). This deliberately demonstrates trustedmarker-root limitation, NOT a repairedF1regression or source-hash gate bypass. Originalrawunchanged. No authority generated/authenticatingobserverchosen. Optional nth-index theorem is a presentation strengthening, not acceptancefix.
+
+Nextdirectconsumerproof: CohortAdministrativeCorrespondence connects initialized/freezes/installs to actual successful native command/reply in SAME closedhistory. Historicalfacts are distinct fromcurrentavailability. FIRST ambiguousinsert/unsplitreply-code elaborationfailed; SECOND local store/independent command classification lemmasPASSstdlogic; THIRD fullhistoricalinduction compiling. No generalfull-state/W4closureclaim, no productionchange/newcommit/push. Quota37%,nextcheck>=05:14:06UTC.
+
+### 2026-09-23T04:34:57.719760+00:00 — historical administrative/payment/production correspondence components
+
+CohortAdministrativeCorrespondence FIFTH 8b5dc089fd89e2b204b96e6e7bb78aff1e251e679ad9efa2d31eff7f65444969: initialized/frozen/installed membership iff actual successful command/reply in same closed history; full native transition and current-history extension witness; historical not current availability. PASS Lean4.29.1 trust0j1 AS4GiB, standard3axiomsonly.
+
+CohortPaymentCorrespondence THIRD a3a0ad3b6914652379b8b948f654423878e60c0360c4ee9cbda0d8985b2a7b50: delayed payment target equals same native phase except activewriter uses its pre-reply phase; fresh-start paymentOf(base.mode)=none explicit; current memory after discharge. PASS Lean4.29.1 trust0j1 AS4GiB, standard3axiomsonly.
+
+CohortProductionCorrespondence SECOND 0924761977cc34a0ddbc6b6deafc774dd8d48f022fe7221f76a194fe5cf12ba6: every produced envelope from actual native compute and matching finish in full history extending to same current state; actual selected finish included for arbitrary prior memory; not global inverse/uniqueness. PASS Lean4.29.1 trust0j1 AS4GiB, standard3axiomsonly.
+
+AdministrativeFIRST/THIRD andpaymentFIRST/SECOND andproductionFIRST elaborationfailures retained, not accepted. These are general finite-dimensional proofs, no fixed-example decide and no sourceholes. Composite physical relation/currentowner/bootstrapped/review/coldintegration remainOPEN. Payment freshness is explicit, generic mid-history restore is not silently initialized. ProducedAt is sound provenance plus local inclusion; no global inverse/uniqueness claimed. OwnerCurrentCorrespondenceFIRSTunderway. Same5own dirtydocs, no newcommit/push/production/Canonacceptance. Quota37%,next>=05:14:06UTC.
+
+### 2026-09-23T04:46:41.617993+00:00 — current owner and combined known-state correspondence consumer
+
+[{"module": "OwnerCurrentCorrespondence", "label": "THIRD", "source_sha256": "5ffe2c07fbab68acc5677abbacfba10dba8ed86c710049fead61058e634c0f63", "log_sha256": "7cc9137ab5d689e831333dcb44207b8b11c6405e75bb66bf60e2d03daf512d32"}, {"module": "CohortBootstrappedCorrespondence", "label": "THIRD", "source_sha256": "b7239ea09e0efa8d1ced53cd6f60a17ac7679695d8da229a23eae70be3b5ad9d", "log_sha256": "0b5e7685d693f4e0e9dd2287714ead12930dbd40cd35df7111e85467f65c6be0"}, {"module": "CohortStateCorrespondence", "label": "SECOND", "source_sha256": "6310de7c5b3e9523c52c83978c606e7cb9db61d6cbe4bf3bbdb4b56351488c7f", "log_sha256": "1e3a0152de66f215f82f6f9e06a33803fc7159960a98cdf43313139d9093eb5c"}, {"module": "FieldCohortCaptureReplay", "label": "SECOND", "source_sha256": "5f659f1c2eae6710395fd0b2c40feac1553aa5f27636c5d8ecf16b2a0713f82e", "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"}, {"module": "FieldCohortCaptureJson", "label": "SECOND", "source_sha256": "834cd8cec16cb87165613c3e68287885c61d8b014f4e152c118660a0ae2cbbff", "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"}]
+
+OwnerCurrent proves idle Data=actualnativeprojection, current activewriter memory plus orderedlocal suffix to samepostreplynative, source-entrydata frames, allknown source/owner/observe/confirm/localcomplete/retire transitions. Bootstrapactual memory remains true from rootedstartup. CohortState combines samecurrent receiptHistory/fulltarget and separate field meanings; observed_discharged transfers exact fields and setmembership through real private memoryEq. FreshpaymentNone premise derives from actual fromLaunch prelude, not a caller-supplied intended invariant. General native-phase lease/entered correspondence beyond activejournals remainsOPEN; no completephysicalmodelclaim.
+
+FieldCohortCaptureReplaySECOND andJSONSECOND compile; carries actual launch subtypeproof, usescombined theorem at each liveprefix and observedtheorem at eachdischarged row. Same actual captures/preparer and strictpairedhistory remain; no newnativeactions/expectedmodel. Normal replay27870 running, valuecontrolgenerator63089. Isolated cold59 builder authoredNOTRUN; final20negativebinding/review pending. FailedFIRST subtype/decoderimports andbootstrapFIRST/SECOND dependentelimination kept asfailed. Same5own dirtydocs,no production/Canon/Gitchange.
+
+### Field correspondence isolated build and Oracle59 — 2026-09-23T04:58:54.268198+00:00
+
+Cold59 compiled eight current modules plus owned axiom audit/import inspector;203 prior successful builds reused with exact bindings;48 owned module audit only standard logic. RESULT SHA256 99b82d8f3d977384dc6be4ce22a0a71afad47cccc5947c4fc0936cf658d28ed8. Development actual replay passed11608 live prefixes,4402 discharged observations,6475 whole observations,692 actual stores and174 paired closes. Final bound replay/20controls running(tool45449), not yet success.
+
+Oracle59 final read2f5d68; receipt/dispositions retained. Reviewer alleged ProducedAt lacks rootedness; local History.path already supplies Runs(initial base) actions(initial current), definition omitted from packet. General extraction authored pending kernel validation, no premise or predicate strengthened. Source-only writer non-vacuity rejection is confirmed in generic consumer; actual reproducer and narrow technical repair pending. Payment timing/fresh launch/observation same cursor supported by static review, not accepted as proof. Global lease/fault/cross-layer integration remain open. No owner value decision introduced; no source/public/Canon promotion or new commit/push.
+
+### Oracle59 dispositions and normal-prefix admission — 2026-09-23T05:10:36.606020+00:00
+
+FIELD_BOUND_EXECUTION.json SHA 5654692fc632eb7204fbac19182da90116815321e594619e190d7470e947c0ec PASS3runners20negatives8977bindings. ProducedRootednessSECOND general extraction passes std3 (190bac49...,88962afc...); History.path already carries actual same-base reachability. Oracle59 F1 rejected on concrete kernel evidence; omitted definition supplied in narrow successor review. Original ProducedAt unchanged.
+
+Actual source-only normal prefix captured with unchanged private caller/native binaries;4children exit0/EOF, bootstrap+launch,14observations2stores0ownerIO. Original wrapper exit1 at old nonvacuity check retained, not relabeled success. Independent total validators pass; old Lean rejects strict inventory. TotalField consumer separates normal teardown from source-program exhaustion (defaulttrue), removes only writer nonempty guards. Devprefix PASS11live4discharged,3negativecontrols PASSmissingbootstrap/snapshot and false completed-program claim. FIRST control expected diagnostic was wrong; retainedfailure, SECONDpasses. This is finite relative-admission evidence, not a general complete checker theorem or completed program.
+
+Cold60 live95766:3newmodules passed, auditpending; final23negative bound run notyet. Oracle60 sessionmir-w4-rooted-prefix-delta submitted05:08:57.305579UTC tool55221; firststatus>=05:11:57.305579UTC; frozenquestioneb2eb07280d18641f450fc7288a457bdae64ef559390c13dcb0988dce5432218,manifestaeeb7bc76fcd838a3b1251092763782dafc27d8420cafe5169beaff8c1448f6f. OwnerLeasePhaseRelationFIRST checkequivalence/fresh case passes, preservation open. Globallease/fault/cross-layer/119/status/Git integration remain. No production/Canon/THM/OBL promotion; same5dirtydocs, nocommit/push.
+
+### Bound normal-prefix delta closed; global lease relation remains open — 2026-09-23T05:16:33.996203+00:00
+
+TOTAL_BOUND_EXECUTION.json SHA 6695040434228caea8e3248d42b62d81f7f97fdc96f4bd2ac74acab88d2156da:5runners,3retainedactualprofiles,23negatives,9030before/after bindings PASS. Cold60 RESULT 916b3ffad0fb4be09dd2e3efad0439ac44ba593402d4c49ccf002b152c0b2c8a:213exactpriorbuilds+3newmodules/audit/inspector,51ownedmoduleaudits standardlogic only. Normal full workload, actual169omission and20priorcontrols retained; new source-only normal prefix and3controls pass. Oracle60 answerd0387f9c60374bbf939319c0aa8c838541d0a18df144d7ae86d981bf69298a6f fullyread4a2b94 supports local dispositions, no within-cutdefectfound; no reviewer execution/signature or W4acceptance.
+
+Next direct obligation remains full idle-owner lease/entered vs actualfundingphase correspondence. FundingEnteredDispatchFIRST general preservation candidate compiling65617; OwnerLeasePhaseFunding authored notyetcompiled. These do not change operational admission or production. Quota35%05:14:21UTC, next>=06:14:21UTC. Same5dirtydocs, nocommit/push, no subordinate agents.
+
+### General owner-lease phase relation — 2026-09-23T05:27:36.984905+00:00
+
+FundingEnteredDispatchFIRST de33b5ad... derives actual source dispatch from every independent funding step and rooted funding history. OwnerLeasePhaseFundingFOURTH77462985... derives owner-other/final release and source/query/local frames plus accepted/refused entry phase. OwnerLeasePhaseEntrySECOND020888ac... derives current native phase at actual source entry snapshot closure. OwnerLeasePhaseCorrespondenceSECOND42593d3c... preserves the global relation over ALL SourceEntryPrefix steps, including ordinary source/owner/observe/confirm/local completion, claim/reply/notify/cancel/snapshot and both retire branches. Fresh-base prelude remains explicit. All these kernel0 with std3only; first draft syntax/elaboration failures retained and excluded.
+
+Finite research-only probe at11608actualnormal prefixes PASS; it temporarily checks desired relation as a falsifier, not an adopted operational guard or generalproof. Composite/capture successor under construction uses proven theorem without this guard. Failed LeaseCohortCorrespondenceFIRST nested-record parsing retained; SECOND compiling81393. Final isolated build/regression and Oracle review remain pending; no fullW4close.
+
+
+### 2026-09-23T05:41:21.558984+00:00 — 全所有者 lease と同じ native funding の保存（候補）
+
+LeaseCohortCorrespondence THIRD を含む6一般証明module、lease-aware consumer/decoder FIRST が Lean trust0 で成功。通常実process記録は11608prefix/4402discharged observation/6475rows/692writer stores/174paired closesで新consumerを通過した。desired invariantをadvance/checkerの新しいguardとして追加していない。孤立cold61（8module+audit/import inspector）は実行中、Oracle61 mir-w4-lease-correspondenceへ凍結35fileのread-only反例レビューを主担当が一度送信した。05:37:55UTC送信、question432ca017...、manifest63535558...。旧known-fault observerへ正常系と同じ実instruction観測を加えた試験専用successorを作り、実UNNOTIFIED captureを開始。旧receiptを新証拠へ昇格しない。W4未完、production/Canon等の変更なし。
+
+
+### 2026-09-23T05:47:16.222312+00:00 — 通常lease候補のisolated検査とOracle61回収
+
+Cold61は218exact reused+10fresh build（8module/audit/import inspector）、59owned axiom auditsで成功。LEASE_BOUND_EXECUTIONは3retained actual profiles、5runner、23negative controls、9077before/after bindingsで成功。Oracle61は05:44:23UTC exit0、全文をe8f9d2で回収した。composed normal-path反例なし。ただし standalone Aligned/check はactive focused ownerを意図的に除外するので単体のadmission保証へ昇格してはならない。既存のfull writer/entry invariantsを含む全所有者のderived theoremを追加中。fresh前提は一般定理ではrooted prelude、実consumerではfromLaunch rfl由来であり、同一instance復旧ではない。Oracleの将来policy候補は今回の権限や停止要件を生成しない。RetiredLeaseCorrespondence FIRSTは未完了debtを保持する一般probe/observation対応をstd3だけで検査済み。新しい4known-fault actual capturesを回収、normalizer/新consumer接続は進行中。W4未完。
+
+
+### 2026-09-23T06:09:01.875801+00:00 — 確定失敗時の全所有者対応と不明通信への接続
+
+OwnerLeaseCompleteCorrespondence SECOND、RetiredLeaseCorrespondence FIRST、known-fault consumer SECOND/decoder FIRSTの孤立cold62検査は228既成功build再使用＋6新buildで成功。KNOWN_LEASE_BOUND_EXECUTION 39ef0ab235a9ae8ebc31b5ccc665c5d36a79bc89f7844ec84bb46e797851a2fb は4実profile、14negative controls、14632before/after bindingsで成功。各profileは234実store/57paired closesを持つ。Oracle62 mir-w4-known-leaseは05:58:07UTC exit0、全文e5b535で回収。全所有者の現状態／retained originを壊す反例は提示されなかった。早い成功表示とprobe存在量化の境界を受容した。最後のfailedEndを消す反例では早いmarkerの後にexit1「unfinished outer span」を再現。判定はmarker単独でなくwhole exit0と全bindingであり、失敗を成功扱いしない。一般定理はprobeが存在する場合の性質、実4profile側は5公開probe/10観測/8較正fdでprotocol IOなしを別に結合する。
+
+UnconfirmedLeaseCorrespondence FIRSTは、同じlast-known cursorの全所有者状態と別のphysical residualを保持する一般対応・未完了debtの境界・観測転送をstd3のみで検査した。物理endpointとlast-known stateを同一視せず、no_absorbは既存規則から導出する。新unknown consumer/decoder FIRSTもkernel通過。8実captureを取得し、最終normalization／isolated build／反例／Oracleは進行中。W4全体は未完、Rust/Core/privateQUIC統合・119disposition・回帰・Git等が残る。原本、Canon、productionに変更なし。
+
+
+### 2026-09-23T06:27:38.378171+00:00 — 不明通信の孤立照合とquota checkpoint準備
+
+WIRE_LEASE_BOUND_EXECUTION 0459978ca3afeb457a557080537589c4b34ef0b9bc44d7e3ba7d9af947b15cb6 は8実profile、16negative controls、20161before/after bindingで全終了0。cold63は234既成功buildと3newmodule＋audit/import inspector、66owned moduleのstd3監査で成功した。最初のlauncherはcold RESULT生成前に起動され、FileNotFoundErrorでreplay開始前に失敗。空の出力directoryと失敗記録を保持し、build成功後に変更していないlauncherを実行した。失敗attemptを成功へ書き換えていない。
+
+Oracle63を06:16:50UTC exit0で回収、全文d69b7f。sourceWireClaim→sourceClaim一箇所置換はBODY_LOST/RAW_CAPTUREの2実記録で受理され、settledSourceOrdinal240／attemptedSourceCounter241／未吸収のphysical residualを保持した。両constructorはreply前の同じclaimで、相違は入力fileの取得場所。一般の同一origin・値・lease・physical-vs-known対応を壊す反例ではなく、private artifact tagの非単射性として暫定分類した。入力tagの一意性は保証しない。実normalizerと元artifactのbindingは変更なし。追加markerが必要な既存要件かという争点と、6個の停止snapshot差分をCanon-first Oracle64 mir-w4-pause-snapshotへ06:26:28UTCに送信。未回収時点では最終採用やreview完了としない。
+
+週間残量33%（06:14:34UTC確認）のため、owner指定の概ね30%の区切りで同じ未完了W4 goalをpauseする準備。外部参照proof/checkerはまだrepo再現runnerへ未統合。現在auth・physicalnamespace・全entry/relative admission・Rust/Core/privateQUIC・新network/119disposition/最終統合を残す。原本、Canon、productionに変更なし。
+
+
+### 2026-09-23T06:32:29.125026+00:00 — 停止snapshotのレビューと未達の保持
+
+Oracle64 mir-w4-pause-snapshotは06:29:01UTC exit0、全文999937。locator-tag aliasはcurrent correspondenceを破らず、入力取得場所のcanonical分類は追加の性質であるとの静的助言を、実2例とsource定義に照合した。optional markerは採用しない。W4 reopen表現をcontinueへ変更し、userによるpause解除と新たな意味承認を分け、一般証明は選択形式モデルに限定する文言を追加した。internal Rust/Core/privateQUICという理由だけで新たなowner承認を要するというOracle63の広すぎる表現も棄却。既存の条件付き委任を維持し、production/public/Canon等は別境界。全Oracleを回収済み、別署名や独立実行へ読み替えていない。
+
+plan/は前方の同一W4 checkpointを追加。Documentation.md／docs/project-status.md／progress.md／tasks.md／samples_progress.mdをreview済み6snapshotで同期し、tasksは全体を現況へ更新。sample root/taxonomy/source sampleは変更なし。119dispositionは受理を広げず保持。READ_LEDGERは原本hash／実読了範囲を維持、mandatory343full,next344。34715束縛fileのread-only hash再確認成功、proof/testは理由なく再実行していない。
+
+停止時の未実行・未達: 外部proof/reference coneのrepo runnerへの統合、全physical entry／relative admission／現在のauth／namespace、既存Rust/Core/privateQUIC接続、新network/観測/障害回帰・119行のW4統合・最終候補close。Rust変更なしのため、この文書checkpointだけでworkspace回帰を新たに実行せず、過去の成功を今回成功と呼ばない。make docsとGit最終検査は現在実行中で、最終receiptを追記する。W4未完・quota pause予定。11own LAB filesのみをcommit --no-gpg-sign／通常pushし、最終hash/parityは外部QUOTA_PAUSE_GIT.jsonと応答へ記録する。sub-agentなし、秘密・cookie・key・Chrome設定の変更なし。
+
+
+2026-09-23T06:35:05.361853+00:00 — First make docs failed on tasks.md Canon notice literal requirements (Everything outside / canon wins), after agent config,218-file Canon index and800-path hierarchy checks passed. The full hierarchy notice is restored; no normative decision changed. Original failed log/exit2 is retained in QUOTA_PAUSE_MAKE_DOCS_FIRST.json; final full docs validation follows the frozen remaining snapshot.
+
+2026-09-23T06:39:55.053316+00:00 — Second make docs exited2 on task-map required section names. Restored the existing eight headings and order, moved reviewed content under them, and made current Canon/plan source references explicit. No roadmap or content decision changed. QUOTA_PAUSE_MAKE_DOCS_SECOND.json retains failure; full final run follows fast structure checks.
+
+
+2026-09-23T06:44:39.529488+00:00 — Final make docs PASS exit0 (fbc05f/7de712): agent config,218-file Canon index,800required hierarchy paths,1764numbered reports. Two earlier format failures retained; the final staged task-map schema and hierarchy notices pass. Final result/Git metadata follows this run and is independently JSON/section/diff-checked; no source/proof/runtime change. Commit/push status at this precommit record:11own LAB files prepared for normal commit --no-gpg-sign and push; final exact commit/remote/dirty receipt is QUOTA_PAUSE_GIT.json in the persistent workroot and final response. No Oracle or Lean process remains; the same incomplete W4 goal will be paused as the final tool action under the explicit quota instruction.

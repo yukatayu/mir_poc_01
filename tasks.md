@@ -1,113 +1,101 @@
 # Current Task Map (LAB)
 
-最終更新: 2026-09-22 20:20 JST
+最終更新: 2026-09-23 15:23 JST
 
 **Canon notice:** `mirrorea_canon/` is normative. Everything outside
 `mirrorea_canon/` is LAB; if LAB conflicts with canon, canon wins. This snapshot
-neither changes roadmap/phase/theorem status nor grants authority.
+grants no roadmap/phase/theorem or implementation authority.
 
 ## document role
 
-Plan250 remains the sole Canon-authorized bounded-program roadmap, owner-paused
-after I3-3 (`mirrorea_canon/adr/ADR-0043.md`). I3-4 requires explicit resume; I3-5/I3-6/NEXT-0 inactive.
-Plan247/249 are closed history. TheoryT1/broadI1 residuals remain. Private QUIC
-streams selected; TCP deferred, datagrams excluded. No Canon change here.
+Plan250 remains separately owner-paused after accepted I3-3 under ADR-0043.
+I3-4 requires explicit resume; I3-5/I3-6/NEXT-0 remain inactive. Plan247/249 are
+closed history. W5+/alpha are outside this W4 request. Private QUIC streams
+remain the accepted bounded-program choice, TCP deferred and datagrams excluded.
 
 ## current promoted package
 
-Owner-requested W4 through completion, then stop.
+W4 remains the sole owner-requested task, PL1/PL2/PL0 S4/S6, theory/refinement
+before dependent implementation. It is paused at the requested quota checkpoint
+(33% remaining, 2026-09-23 15:14 JST), not completed or blocked. On the user instruction to continue after this quota pause, continue the same
+goal under the existing technical delegation; no new semantic approval is implied. Sole main, no subagents, sorry/admit or Mir axioms.
+W1–W3 finite candidates and the119-row U/D/nonacceptance registry are retained.
 
-2026-09-22にW4を再開。旧一時領域の消失を記録し、永続的な外部workdirで再構築・実process再実行を完了しました。失われた過去の生記録と今回の新しい記録を区別しています。週間残量70%（11:00:27 UTCのevent、11:00:57 UTCに確認）、次回は12:00:57 UTC以降。
+Canon position: `mirrorea_canon/adr/ADR-0043.md`. LAB dependency memory:
+`plan/proof-first-foundation-correspondence.md`. These sources do not promote W4.
 
-PL1/PL2/PL0 S4/S6; sole main,
-no subagents, source sorry/admit or Mir axioms. W3 is a closed finite candidate;
-W5+/alpha and Plan250/I3-4 are not automatically resumed. Oracle is read-only
-advice, not proof, owner approval or signed independent acceptance.
-See `docs/proof-first/CURRENT_GOAL.md`, `RESUME.md`, `W4_CHECK.json`,
-`docs/reports/2614-mirrorea-proof-first-w4-physical-refinement.md` and
-`plan/proof-first-foundation-correspondence.md` for exact evidence and authority.
-Canon frontier remains `mirrorea_canon/adr/ADR-0043.md`; this W4 LAB request
-does not change that accepted baseline or the Plan250 pause.
+W4は、通常sourceと実ownerの状態・資源を同じ履歴から対応付ける基礎検証を進めています。選択した形式モデルにおける通常実行の全所有者lease・値・履歴の一般証明と、確定失敗4profile／未確定通信8profileの実記録との接続を外部workdirで検査しました。正常系23、確定失敗14、未確定通信16の改変controlも検査済みです。通信結果不明時は最後に確定した状態と物理通信の残余を区別します。これらは限定した研究候補で、追加proof群のrepo再現runnerへの統合、全entryの実機対応、現在の認証認可・物理namespace、既存Rust/Core/privateQUIC接続とW4全体の統合は未完了です。
 
-## evidence and current consumer
+Full process exit0, exact checked inputs/imports and before/after bindings are
+required; early success-looking markers are not acceptance. Final-failedEnd
+omission is an explicit exit1 discriminator. Unknown physical application is
+not settled source knowledge. Probe existence is an actual selected-profile
+fact; general retired-probe theorems quantify over supplied certified probes.
+Oracle advice is reviewed locally and never treated as proof, grant or signature.
+Private sourceClaim/sourceWireClaim can denote the same pre-reply claim after
+the actual write. Exact actualFault binding is retained; canonical locator-tag
+injectivity is not claimed. A marker gate would add that optional stronger property.
 
-W4は、通常sourceと実ownerの状態・資源を同じ履歴から対応付ける段階です。登録世代・imageと全owner残量を結ぶ一般証明を既存Lean検査へ統合し、fresh160module・15055所有宣言の監査が通りました。第33回Oracleまで回収済みです。正の世代へ進む全前提つきモデル例と、新しいC/A実4process記録の全bytes・全owner残量・結果到着・最終imageの照合も成功しました。公開操作完了時のidleは外部モデルで証明済みですが、全実装経路との対応、予約容量・freshness、その後の既存Rust/Core/privateQUIC接続は未完了です。
-
-Current reversible comparison: certified-head physical future advance versus explicit
-physical-prelude reservation across source replans. Underlying source staging remains
-unchanged; wrapper scheduling traces are not equivalent. All public-entry exclusion,
-actual reply monitoring and pending notification bindings are separate from auth.
-A global staging barrier was researched and not adopted.
+Exact evidence/reopen points: `docs/proof-first/RESUME.md`, `CURRENT_GOAL.md`,
+`W4_CHECK.json`, Report2614 and `plan/proof-first-foundation-correspondence.md`.
+New external proofs/checkers are not yet mirrored into the repo sample runner.
 
 ## ordered self-driven packages
 
-| Dependency / macro position | Current consumer / remaining gate | Startability / rough remaining estimate |
-|---|---|---|
-| W3 reference / macro1/3/5 finite cut | source/proofs/review/Git retained | closed candidate; no production/Canon promotion |
-| W4 owner boundary / macro2/3 early | registration/full-model balance proofs integrated; external public-boundary idle passes; all-entry binding/room/full physical funding open | 着手可能; provisional6–18h for remaining foundation/custody work |
-| W4 runtime connection / macro2/3 middle | actual generated owners/configuration/privateQUIC implement established meaning | 後段依存; provisional10–24h after theory gate |
-| W4 faults/integration / macro2/3 close | actual network positive/negative/observation,119dispositions/review/ownGit | 後段依存; provisional6–14h |
-| W5/W6/W7 / later | same-instance recovery, secret observation/resources, integrated alpha | 後段依存; outside this request |
-| Mandatory corpus / macro0 | hash/full-reading ledger, still incomplete | 着手可能; next mandatory ledger entry333 |
+Remaining W4 packages after quota continuation; no Plan250 resume implied.
 
-Latest user-facing estimate remains24–60active hours, low confidence. It is not
-an Oracle deadline, requirements percentage or permission to omit a gate.
+| Package / macro position | Required result | Startability / rough estimate |
+|---|---|---|
+| W4 foundation integration / Macro1/2/5 late | preserve reviewed cone in existing runner; remaining relative admission and physical all-entry/current-authority/custody obligations | 再開後に着手可能; provisional6–18active hours |
+| W4 existing runtime connection / Macro3/6 middle | ordinary source → checked Core → generated owner/edge → actual privateQUIC; no expected-JSON substitution | 後段依存; provisional10–24active hours after theory gates |
+| W4 network/regression/integration / Macro3/6 close | real positive/fault/observation evidence, I3 baseline regressions,119dispositions,review,own Git | 後段依存; provisional6–14active hours |
+| Mandatory reading / Macro0 | honest hash/range ledger; next mandatory entry344 | 再開後に着手可能; no new global plan until necessary corpus read |
+| W5/W6/W7 | recovery, secret observation/resource guarantees, integrated alpha | 後段依存; outside this request |
+
+Overall rough remaining estimate24–60active hours is low confidence, not a
+requirements percentage or a reason to omit obligations. Reassess after actual
+core/runtime mapping; elapsed Oracle time is not a failure or deadline.
 
 ## self-driven macro phase reading
 
-Macro0 is ongoing corpus/traceability maintenance. Macro1/5 covers the finite
-proof/checker obligations needed by this W4 consumer; accepted earlier layers
-remain history. Macro2/3 contains the current external native component and
-regression route (bounded FM4/5 evidence). Macro6 is the real fabric/private
-custody/queue/refinement gate still to close within W4. Macro4 sample widening
-and Macro7 public toolchain surfaces are not inferred from component checks;
-Macro8 domain realization remains outside this request. Current technical
-research is self-driven; owner-reserved policy/publication boundaries are below.
+Macro0 is corpus/evidence maintenance; Macro1/5 are the selected model and
+proof boundaries. Macro2/3 provide bounded reference FM4/5 evidence; Macro6
+contains the remaining actual fabric/transport correspondence. Macro4 widening,
+Macro7 public tooling and Macro8 domain work remain outside this checkpoint.
 
 ## user decision gates
 
-Current reversible research needs no new owner answer. L0/L1, privacy/authority
-weakening, public API/ABI/wire, publication/production/billing, owner keys and
-signed acceptance remain reserved. L2 promotion stays fail-closed without an
-owner-authenticated trust anchor. Q18/H/H2/C/C2 policies remain separate
-conditional cuts. Ask only when a concrete effective-revocation/participant
-retirement choice actually requires owner values; do not infer approval.
+No new owner answer is required for already authorized reversible research and
+conditional internal implementation once corresponding theory/procedural gates
+are met. L0/L1 or privacy/authority weakening, public API/ABI/wire, production,
+billing/publication, owner-managed keys and authenticated acceptance remain
+reserved. Q18/H/H2/C/C2 stay distinct conditional cuts. Oracle concurrence
+cannot reopen Plan250 or satisfy an absent owner-authenticated trust anchor.
 
 ## research discovery items
 
-| Question | Impact / current candidate versus smallest alternative |
+| Question | Effect / current candidate versus smallest alternative |
 |---|---|
-| Published currentness | finite-cohort freeze/ack/use candidate versus owner-only update that leaves stale callers; no accepted I3 defect claim |
-| Private source state | exact prepared base under exclusive actor custody versus commit-time reevaluation; equal owner image is insufficient for private state equality |
-| Source admission | fixed caller/member/principal fails leave/rejoin/current admission; source initiation/adoption and prepared receive/cancel need distinct predicates |
-| Actual provenance | codec scope/ticket/value does not establish authenticated owner production; bind real endpoint/cohort/record and private pending |
-| Resources | actual capacity1 entry-before-reserve refusal; derive room/freshness and full actual credits before source admission; no constant-only repair, timeout reopening or silent history eviction |
-| Driver failures | reserved→compute→record→output with namespace termination versus forgetting the request after one-shot failure; no stored-result replay |
-| Runtime embedding | W3 ordinary reference source differs from old I3surface_v0; actual source/Core/edge/transport correspondence must be proved, not expected-JSON joined |
-| Recovery / policy | fresh cohort is not same-instance recovery; finite image cannot restore arbitrary future policy; Q18 remains conditional |
+| Source admission and private state | derive current request/context through same retained source/owner lifetime vs independent preflight; no stale witness refresh |
+| Physical provenance and namespace | bind actual endpoint/cohort/pending/caller; IDs and hashes alone are not authentication |
+| Relative admission / resources | retain independent room/freshness/funding and meaningful positives; reject all-refusal shortcuts or constant-only capacity fixes |
+| Unknown communication | retain last-known state plus actual unresolved physical custody; known/unknown private decoders remain separate rather than unified dispatch |
+| Existing runtime embedding | current reference source differs from old I3 surface; establish real checker/Core/edge correspondence before production changes |
+| Recovery / observation | fresh cohort is not same-instance recovery; faithful privileged capture proves neither passive noninterference nor confidentiality |
 
 ## maintenance tasks
 
-Keep one Report2614; closed Reports2611–2613 unchanged. Synchronize existing
-plan/status/sample dashboards and119dispositions as evidence changes. No new
-sample root/taxonomy/roadmap has been adopted. Prior13-module proof integration
-is committed/pushed7732d188; seven-proof successor41705e81 is also normally pushed
-with remote parity. Current final pause/status bookkeeping is separate; no
-Rust/Canon production changes.
-Lean/buildは直列で通常4GiB AS、固定例のkernel計算だけ6GiB AS上限を使用。
-root46GiB空き・利用可能RAM11GiBを確認。外部mount、cleanup、Chrome設定変更なし。
-週間残量70%、次回>=12:00:57UTC。W4 goalはactive、Oracle1–33全回収、live jobなし。
-新しいnative C/A・全bytes/全残量照合は今回の証拠。古い失われた生記録とは区別する。
-3proof追加のfresh統合は156source/160audit/15055owned、172command全0。
-公開境界モデルと記録照合helperは外部の研究候補で、全Python経路やRust/QUICの
-受理ではない。現在の自己差分を検査・commit/通常pushしてから研究を継続する。
-
+Use persistent external workroot from RESUME; never rerun one-shot evidence
+launchers over existing output. Heavy Lean is serial --trust=0 -j1, ordinarily
+4GiB address-space cap. No cleanup or Chrome changes. Before another quota check
+wait until at least07:14:34UTC; near-threshold checks need not be frequent.
+Resume by checking saved hashes and dirty state, not by repeating unchanged
+baselines or consultations. Final pause commit/push evidence is in Report2614.
 
 ## non-promoted references
 
-Mir, Mirrorea, typed-effect providers, PrismCascade and upper applications stay
-separate. Model replication is not ordinary-read snapshots, shared-store E2E,
-operational100% or a permanent mandatory central authority. Secret observation
-needs separate two-run confidentiality/passive/fidelity/resource/debug arguments;
-W4 does not close W6. Plan247/249 and W1–W3 evidence are history; Plan250 pause
-and handoff later-workstream boundaries remain unchanged.
+Keep one accumulating Report2614, forward LAB plan history and concise status
+mirrors. No new roadmap, sample root or framework. Reports2611–2613 and accepted
+I3 history remain unchanged. Mir, Mirrorea, Typed-Effect, PrismCascade and upper
+applications stay separable. Macro4 widening/7public tooling/8domain work is not
+inferred from these components; the present evidence is bounded FM4/5.

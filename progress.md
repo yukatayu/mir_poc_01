@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-09-22 20:20 JST
+最終更新: 2026-09-23 15:23 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -56,18 +56,19 @@ public/production layers remain later.
 ## current milestone position
 
 The owner explicitly requested W4 after W3 closed. W4 physical refinement is the
-sole task-local goal, PL1/PL2/PL0 S4/S6, with one main and no subagents. Stop after
+sole task-local goal, now paused for the owner-requested quota checkpoint,
+PL1/PL2/PL0 S4/S6, with one main and no subagents. Stop after
 W4; W5+/alpha are not active. Plan250 remains separately paused after I3-3.
 
-2026-09-22にW4を再開。旧一時領域の消失を記録し、永続的な外部workdirで再構築・実process再実行を完了しました。失われた過去の生記録と今回の新しい記録を区別しています。週間残量70%（11:00:27 UTCのevent、11:00:57 UTCに確認）、次回は12:00:57 UTC以降。
+週間残量33%を2026-09-23 15:14 JSTに確認し、owner指定の「30%程度で切りのよい所」に従い、証拠を保存した区切りでW4を一時停止します。完了ではなく同じgoalのpauseです。W5+とPlan250/I3-4は開始しません。旧一時領域で失われた記録と今回の永続workdir上の実記録は区別して保持します。
 
-W4は、通常sourceと実ownerの状態・資源を同じ履歴から対応付ける段階です。登録世代・imageと全owner残量を結ぶ一般証明を既存Lean検査へ統合し、fresh160module・15055所有宣言の監査が通りました。第33回Oracleまで回収済みです。正の世代へ進む全前提つきモデル例と、新しいC/A実4process記録の全bytes・全owner残量・結果到着・最終imageの照合も成功しました。公開操作完了時のidleは外部モデルで証明済みですが、全実装経路との対応、予約容量・freshness、その後の既存Rust/Core/privateQUIC接続は未完了です。
+W4は、通常sourceと実ownerの状態・資源を同じ履歴から対応付ける基礎検証を進めています。選択した形式モデルにおける通常実行の全所有者lease・値・履歴の一般証明と、確定失敗4profile／未確定通信8profileの実記録との接続を外部workdirで検査しました。正常系23、確定失敗14、未確定通信16の改変controlも検査済みです。通信結果不明時は最後に確定した状態と物理通信の残余を区別します。これらは限定した研究候補で、追加proof群のrepo再現runnerへの統合、全entryの実機対応、現在の認証認可・物理namespace、既存Rust/Core/privateQUIC接続とW4全体の統合は未完了です。
 
 | W4 axis | Current evidence | Remaining gate / startability |
 |---|---|---|
-| Logical specification | same-history registration/current image and full-model balances; fresh160module audit; public-boundary idle externally checked, physical correspondence/room open | 着手可能: actual owner provenance, private custody/current admission and stateful physical correspondence |
-| User-facing specification | actual-parser17statement source plus3statement continuation executes on four private-pipe processes; authority/configuration remain distinct | 後段依存: actual generated owner execution, source/result/observation correspondence |
-| Implementation / operation | W3 and prior I3 QUIC46case regressions retained; new source110/owner102 C/A native runs and full byte/global-balance replay pass; no new Rust behavior | 後段依存: bounded internal implementation after corresponding theory gate, all-entry and actual fault regression |
+| Logical specification | same-history fields/leases and selected known/unknown fault preservation kernel checked; external bounded candidate | 再開後に着手可能: required relative admission, full physical entry/custody/current-authority correspondence |
+| User-facing specification | ordinary parsed source and retained native owner traces; no newly adopted source grammar | 後段依存: checked Core/generated edge/request/result/display connection |
+| Implementation / operation | normal and selected failure captures pass strict statement/history/field checks; privileged pipes; prior I3 QUIC baseline retained | 後段依存: repo proof/runner integration, Rust/Core/privateQUIC and new network/regression evidence |
 
 Publication revisions remain separate from authority generations. Actual source
 and owner messages carry complete private values and proof/auth context; these
@@ -470,3 +471,5 @@ The authorized roadmap is paused, not blocked, stale or closed.
 - 2026-09-22 19:19 JST: W4 Oracle32回収。初期化0と全owner実モデル残量束縛を一般証明し、fresh native C/A4processの20書込み・26更新・全正常EOFを再現。public idle/room/既存Rust-QUIC接続は継続。
 
 - 2026-09-22 20:20 JST — W4設置履歴・登録・全ownerモデル残量の3proofを統合、fresh160module/15055owned・172command全成功。新C/A実通信記録の全bytes/残量/結果到着を照合し、3改変反例を検出。Oracle33回収、W4全体は未完了。
+
+- 2026-09-23 15:23 JST: W4通常／確定失敗／未確定通信の同一履歴・全所有者状態対応を外部で機械検証。残量33%のowner指定区切りでpause。W4未完、既存Rust/Core/privateQUIC等への接続を残す。Report2614。

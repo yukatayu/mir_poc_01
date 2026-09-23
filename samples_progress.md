@@ -1,6 +1,6 @@
 # samples_progress
 
-Last updated: 2026-09-22 20:20 JST
+Last updated: 2026-09-23 15:23 JST
 
 Plan250 execution control: I3-3 is accepted and owner-paused with no active
 semantic milestone. Plan 250 remains retained; I3-4/I3-5/I3-6/NEXT-0 remain
@@ -14,14 +14,16 @@ Fresh76module/9055owned audit,32source controls,13integrity/consumer negatives a
 proof-weakening controls pass. Twelve Oracle reviews are recovered/dispositioned;
 source/evidence81f82a0b is normally pushed. This is local in-memory evidence, not
 physical nodes, durable restore, confidential observation, alpha or Canon promotion.
-Owner has now activated W4 only. Its publication/value/outcome/use-interval
-model is mirrored and fresh-integrated with the reference checker's
-`--with-publication`:92modules/10119owned declarations,32source/13integrity controls,
-5reference+8publication proof mutants. Existing I3 process/QUIC46case baseline
-also passes. These are distinct component/model and prior network evidence;
-new actual-source physical refinement remains open. The current105source/12913owned audit and17actual source+51owner whole-byte/argv replays pass. Oracle16 F1/F2/F3 repairs have general proofs and native/checker regressions. Oracle17 is collected; actual required-audit/aggregate/finalizer counters and repairs pass. Oracle18/19 are collected. Budgetowner102 has explicit successful audit,3direct processes/1542inputs and C/A exact-byte continuations. Active EOF and short frames are classified as incomplete failures. New sole-writer credit monitoring and local claim/enter/cancel invariants pass Lean; actual one-credit source admission counter and two-credit parked-result control expose the next consumer. Two credits do not fund the driver diagnostic or subsequent publication; full continuation resource custody remains OPEN. Direct old95owner scope2^128 still gives an actual unreadable reply; the successor pre-reservation/checker agreement, all-entry preservation, every-reply readability and independent ordinary roundtrip progress pass Lean (bfaf05), with finite controls17bd6e. Owner101/12450owned audit, direct4process34inputs and C/A whole-byte replay pass. Completion-credit native evidence is now available; authenticated physical coupling and reproducible integration remain open. The historical92module result predates the reviewed45file mirror; the new --with-owner-boundary workflow passes133compiled/137audit modules and14148owned declarations. Native entrypoints and the new credit-custody coordinator remain external (Report2614). W5+ and Plan250/I3-4 remain inactive.
+Owner activated W4 only; it is now paused at the requested quota checkpoint.
+Previously integrated publication/owner/registration proofs remain under the
+existing reference checker and Lean sample root. Later strict host-store,
+full-field/lease and fault correspondence evidence remains external and is not
+yet a repo-only reproducible sample. Prior I3 process/QUIC46case results remain
+regression history, not a new network run. W5+ and Plan250/I3-4 stay inactive.
 
-W4は、通常sourceと実ownerの状態・資源を同じ履歴から対応付ける段階です。登録世代・imageと全owner残量を結ぶ一般証明を既存Lean検査へ統合し、fresh160module・15055所有宣言の監査が通りました。第33回Oracleまで回収済みです。正の世代へ進む全前提つきモデル例と、新しいC/A実4process記録の全bytes・全owner残量・結果到着・最終imageの照合も成功しました。公開操作完了時のidleは外部モデルで証明済みですが、全実装経路との対応、予約容量・freshness、その後の既存Rust/Core/privateQUIC接続は未完了です。
+W4は、通常sourceと実ownerの状態・資源を同じ履歴から対応付ける基礎検証を進めています。選択した形式モデルにおける通常実行の全所有者lease・値・履歴の一般証明と、確定失敗4profile／未確定通信8profileの実記録との接続を外部workdirで検査しました。正常系23、確定失敗14、未確定通信16の改変controlも検査済みです。通信結果不明時は最後に確定した状態と物理通信の残余を区別します。これらは限定した研究候補で、追加proof群のrepo再現runnerへの統合、全entryの実機対応、現在の認証認可・物理namespace、既存Rust/Core/privateQUIC接続とW4全体の統合は未完了です。
+
+週間残量33%を2026-09-23 15:14 JSTに確認し、owner指定の「30%程度で切りのよい所」に従い、証拠を保存した区切りでW4を一時停止します。完了ではなく同じgoalのpauseです。W5+とPlan250/I3-4は開始しません。旧一時領域で失われた記録と今回の永続workdir上の実記録は区別して保持します。
 
 | W3 evidence | Reproduction | Remaining boundary |
 |---|---|---|
@@ -114,18 +116,16 @@ exist as alpha evidence; none is a final Surface runtime/transport, final
 devtools viewer/telemetry ABI, final ABI/SDK, or final shared-space catalog.
 Docker skip paths are partial local probes, not release-candidate evidence.
 
-Guarded publication now composes one native source publisher and three actual
-owner endpoints:26publications/20source writes/5owner productions, with actual
-freeze/install acknowledgements. Generic routing derives from ticket.place;
-C/A continuation variants use identical binaries. Complete native byte traces
-replay against checked evaluators, with95module audits. Repeated full cohorts
-still reproduce the same scope/ordinal, so physical namespace admission remains
-open. Oracle12 is collected and dispositioned for this immutable cut. A later lost-install-ack counterexample
-has a general exact-image/revision confirmation repair and actual process positive/
-negative evidence; its audit/replay and Oracle13 review are collected. Post13 capacity/suffix/prefix refinements now have general proofs and actual growth/quota/C/A native controls; Oracle14 is recovered; successor103-module audit and9actual cohorts/full byte replays pass. Oracle15 is recovered. Source-reply readability proofs and104module native checks pass; current105/17cohort residual and capture corrections pass; standalone owner pre-reservation native validation is active. These are external private components.
-This is privileged-pipe evidence; authenticated ingress and existing Rust/QUIC
-source/Core embedding remain the direct consumer. W4 is active, W5+ unchanged.
-External commands: `publication_process_check.py` and `publication_confirm_ack_check.py` in the workroot recorded by Report2614. No active sample root or taxonomy promotion.
+Current W4 external evidence lives in the persistent workroot named by
+`docs/proof-first/RESUME.md` and Report2614. `LEASE_BOUND_EXECUTION.json`,
+`KNOWN_LEASE_BOUND_EXECUTION.json` and `WIRE_LEASE_BOUND_EXECUTION.json` bind
+actual captures, normalizers, source/object imports and complete process exits.
+These retained receipts are not repo sample commands: their one-shot launchers
+create fresh evidence and must not overwrite existing runs. Mirroring the new
+proof/reference cone into the existing reproducible runner remains a reopen
+obligation. No new sample root, taxonomy, public observer or workflow-ready
+status has been adopted. W4 is paused/incomplete; source/Core/privateQUIC,
+authenticated ingress and physical namespace remain direct consumers.
 
 ## Legend
 

@@ -1,6 +1,6 @@
 # Project status
 
-最終更新: 2026-09-22 20:20 JST
+最終更新: 2026-09-23 15:23 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -53,8 +53,8 @@ W2の有限な研究成果は検証・review・Git統合済みで保持してい
 2026-09-14のowner依頼により、単一goalをW4実分散対応（PL1/PL2/PL0 S4/S6、theory/refinement先行）へ設定しました。W3の有限候補を保持し、W4完了で停止します。
 名前付きカタログ・領域拡張・個別DAG・既存current-use・局所影響・候補選択の11依存をLeanで検査し、19変異の拒否を確認しました。
 W3は有限の研究・参照実装候補として検証・review・source統合を完了しました。通常sourceからの構築・変更・保持参照・fallback／再取得・取消し・同じSessionへの追加／修復を接続しています。Lean4.29.1で76moduleの全所有宣言を監査し、通常source32件・検証手順の反例13件・証明弱化5件を検査しました。12回のOracleレビューを回収し、最終指摘の保証範囲も記録済みです。再現commandは `python3 scripts/proof_first_reference_source_check.py --work-root /tmp`。source/evidence cutは `81f82a0b` で通常push済みです。
-W4は、通常sourceと実ownerの状態・資源を同じ履歴から対応付ける段階です。登録世代・imageと全owner残量を結ぶ一般証明を既存Lean検査へ統合し、fresh160module・15055所有宣言の監査が通りました。第33回Oracleまで回収済みです。正の世代へ進む全前提つきモデル例と、新しいC/A実4process記録の全bytes・全owner残量・結果到着・最終imageの照合も成功しました。公開操作完了時のidleは外部モデルで証明済みですが、全実装経路との対応、予約容量・freshness、その後の既存Rust/Core/privateQUIC接続は未完了です。
-2026-09-22にW4を再開。旧一時領域の消失を記録し、永続的な外部workdirで再構築・実process再実行を完了しました。失われた過去の生記録と今回の新しい記録を区別しています。週間残量70%（11:00:27 UTCのevent、11:00:57 UTCに確認）、次回は12:00:57 UTC以降。
+W4は、通常sourceと実ownerの状態・資源を同じ履歴から対応付ける基礎検証を進めています。選択した形式モデルにおける通常実行の全所有者lease・値・履歴の一般証明と、確定失敗4profile／未確定通信8profileの実記録との接続を外部workdirで検査しました。正常系23、確定失敗14、未確定通信16の改変controlも検査済みです。通信結果不明時は最後に確定した状態と物理通信の残余を区別します。これらは限定した研究候補で、追加proof群のrepo再現runnerへの統合、全entryの実機対応、現在の認証認可・物理namespace、既存Rust/Core/privateQUIC接続とW4全体の統合は未完了です。
+週間残量33%を2026-09-23 15:14 JSTに確認し、owner指定の「30%程度で切りのよい所」に従い、証拠を保存した区切りでW4を一時停止します。完了ではなく同じgoalのpauseです。W5+とPlan250/I3-4は開始しません。旧一時領域で失われた記録と今回の永続workdir上の実記録は区別して保持します。
 対応は `plan/proof-first-foundation-correspondence.md`、現在の証跡はreport2614、W1/W2/W3の履歴はreport2611/2612/2613です。
 既読範囲は `docs/proof-first/READ_LEDGER.json` に記録し、未読と部分読了を区別しています。
 W1のpassive/accepted producer・一般label・失敗を伴う単一代入は限定review済み。W1補助source cutのreview未完了は、後のW3有限source候補のreview完了とは別に保持します。119行dispositionは元のU/D・承認区分を保持して作成済みですが、要件を一括受理・実証したものではありません。
