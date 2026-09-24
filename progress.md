@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-09-23 15:23 JST
+最終更新: 2026-09-24 08:38 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -60,7 +60,9 @@ sole task-local goal, now paused for the owner-requested quota checkpoint,
 PL1/PL2/PL0 S4/S6, with one main and no subagents. Stop after
 W4; W5+/alpha are not active. Plan250 remains separately paused after I3-3.
 
-週間残量33%を2026-09-23 15:14 JSTに確認し、owner指定の「30%程度で切りのよい所」に従い、証拠を保存した区切りでW4を一時停止します。完了ではなく同じgoalのpauseです。W5+とPlan250/I3-4は開始しません。旧一時領域で失われた記録と今回の永続workdir上の実記録は区別して保持します。
+2026-09-23 15:14 JST時点の週間残量33%を根拠に、owner指定の「30%程度で切りのよい所」でW4を一時停止済みです。今回の計画整理では残量を再確認していません。完了ではなく同じgoalのpauseです。W5+とPlan250/I3-4は開始しません。旧一時領域で失われた記録と今回の永続workdir上の実記録は区別して保持します。
+
+2026-09-24のowner指定で、同じW4を **W4-A（限定証拠・完了済み）→W4-B（repo統合・現在地、pause）→W4-C（残る基礎条件）→W4-D（Rust/Core/private QUIC接続）→W4-E（実network検査・残項目回収・W4完了判定）** に分割しました。C/D/Eは依存待ちです。Eは元W4と前段の残項目を照合しますが、C/Dの前提をEへ先送りして実装を進めません。完了条件・推奨model/effort・R01〜R12残項目台帳は `plan/proof-first-foundation-correspondence.md` の「W4-A〜W4-E 作業区切り」を参照してください。分割は計画整理のみで、同じW4 goalの一時停止を維持します。
 
 W4は、通常sourceと実ownerの状態・資源を同じ履歴から対応付ける基礎検証を進めています。選択した形式モデルにおける通常実行の全所有者lease・値・履歴の一般証明と、確定失敗4profile／未確定通信8profileの実記録との接続を外部workdirで検査しました。正常系23、確定失敗14、未確定通信16の改変controlも検査済みです。通信結果不明時は最後に確定した状態と物理通信の残余を区別します。これらは限定した研究候補で、追加proof群のrepo再現runnerへの統合、全entryの実機対応、現在の認証認可・物理namespace、既存Rust/Core/privateQUIC接続とW4全体の統合は未完了です。
 
@@ -473,3 +475,5 @@ The authorized roadmap is paused, not blocked, stale or closed.
 - 2026-09-22 20:20 JST — W4設置履歴・登録・全ownerモデル残量の3proofを統合、fresh160module/15055owned・172command全成功。新C/A実通信記録の全bytes/残量/結果到着を照合し、3改変反例を検出。Oracle33回収、W4全体は未完了。
 
 - 2026-09-23 15:23 JST: W4通常／確定失敗／未確定通信の同一履歴・全所有者状態対応を外部で機械検証。残量33%のowner指定区切りでpause。W4未完、既存Rust/Core/privateQUIC等への接続を残す。Report2614。
+
+- 2026-09-24 08:38 JST: owner指定でW4をA〜Eへ分割。Aの限定証拠を保持、B現在地/pause、C-D前提を守りEへ残項目回収責任を配置。実行再開・新規proof/実network成功の主張なし。

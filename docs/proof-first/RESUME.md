@@ -1,9 +1,9 @@
-# W4 RESUME — quota checkpoint, incomplete
-Updated 2026-09-23T06:34:00.435498+00:00. SOLE MAIN / NO SUBAGENTS. Preserve the same unlimited W4 goal; final bookkeeping then `paused`, never `complete`. User requested approximately30%weekly remaining at a convenient checkpoint. Latest33% at2026-09-23T06:14:34UTC; next check no earlier07:14:34UTC. Continue only when user resumes; existing technical delegation persists.
+# W4 RESUME — W4-B paused, A–E partition / incomplete
+Updated 2026-09-23T23:40:11.399591+00:00. SOLE MAIN / NO SUBAGENTS. Owner requested W4-A〜E planning only. Same unlimited W4 goal remains `paused`; do not recreate, complete or resume it for this edit. W4-A is completed bounded evidence, W4-B is designated current/paused, W4-C/D/E dependency-gated. Latest quota reading33% is historical2026-09-23T06:14:34UTC; not rechecked for this planning task. Execution resumes only on user instruction; technical delegation persists.
 
 ## Repository and authority
 
-BaseHEAD `dfd93f4b07842adc2a3e9855708549e2d7dae51e`, branch `main`; exact origin parity checked before this11-file LAB checkpoint. Five own dirty evidence docs existed at restart; six current status/plan mirrors were additionally synchronized. No user dirty file was reset/cleaned. Final checkpoint commit/push receipt is external `QUOTA_PAUSE_GIT.json` under W below; current HEAD identifies the checkpoint. If that receipt is absent, final Git step is incomplete. Do not infer parity.
+Evidence checkpoint `e6d41ba491f8d30bbab03418ac7e215e7c00d67f`, branch `main`, is the clean baseline for this planning partition. Its earlier base `dfd93f4b...` and exact Git receipt remain in `QUOTA_PAUSE_GIT.json` under W. Planning-only receipt/diffs/reviews live in `/home/codex/.local/state/mirrorea-proof-first/w4-20260924-partition`; final `GIT_RESULT.json` there records the partition commit/push after it happens. No user edits reset/cleaned; inspect current HEAD/dirty and receipts before claiming parity.
 
 W=`/home/codex/.local/state/mirrorea-proof-first/w4-20260922` (persistent external workdir). Handoff materials/archives untouched. New proof/reference code remains external, not yet mirrored into the repo sample runner. No Canon/THM/OBL/phase/public/production promotion; Plan250 stays paused after I3-3, W5+ inactive. No agents/Chrome changes/paid fallback/notifications/cleanup/force/hostshare.
 
@@ -20,7 +20,7 @@ PL1/PL2/PL0 S4/S6 theory/refinement: actual private source/owner process events 
 
 ## Reviews and scope
 
-No live Oracle or Lean process. Oracle61/62/63/64 final answers collected; last64 `mir-w4-pause-snapshot` submitted06:26:28UTC, completed06:29:01UTC. Full receipt/dispositions: `ORACLE62_*`, `ORACLE63_*`, `ORACLE64_*` in W. Frozen packets and answers retained in their named oracle directories. Static advice, not independently executed/signed acceptance.
+Historical proof checkpoint: no pending proof Oracle or Lean process. Oracle61/62/63/64 final answers collected; last64 `mir-w4-pause-snapshot` submitted06:26:28UTC, completed06:29:01UTC. Full receipt/dispositions: `ORACLE62_*`, `ORACLE63_*`, `ORACLE64_*` in W. Frozen packets and answers retained in their named oracle directories. Static advice, not independently executed/signed acceptance.
 
 Oracle62 early-marker issue reproduced: deleting finalfailedEnd prints intermediate markers but exits1 unfinishedouterspan. Acceptance requires wholeexit0 plus complete bound checks. Generic probe theorem does not assert probe existence; actual selected profiles separately bind5publicprobes/10observations/8calibratedfd withzero protocolIO.
 
@@ -28,8 +28,22 @@ Oracle63 sourceWireClaim→sourceClaim relabel reproduced forBODY_LOST/RAW_CAPTU
 
 ## Continuation
 
-First commands in repo: `git status --short`, then `git rev-parse HEAD`. Read the saved `QUOTA_PAUSE_GIT.json`, `W4_CHECK.json` latest checkpoint and this resume; check hashes before relying on external work. No pending consultation to resend or baseline to repeat solely because context changed.
+First commands in repo: `git status --short`, then `git rev-parse HEAD`. Read the evidence `QUOTA_PAUSE_GIT.json`, planning `GIT_RESULT.json`, `W4_CHECK.json` latest checkpoint and this resume; check hashes before relying on external work. No pending consultation to resend or baseline to repeat solely because context changed.
 
-Next substantive work: preserve the reviewed external proof/reference cone in the existing repo runner with coherent imports and scoped validation; close required relative-admission/all-entry/current-authority/authenticated physical namespace obligations; then connect actual source→checkedCore→generatededge→request/serve/result→observation through existing Rust/privateQUIC. Finish fresh network/fault/regression evidence and119disposition/W4integration. No new global plan or W5+. Mandatory broad corpus343full,next344 remains incomplete; readledger distinguishes full/range reads. Rough remaining24–60activehours is low-confidence, not coverage.
+Next substantive work is **W4-B**: preserve the reviewed external proof/reference cone in the existing repo runner with coherent imports and scoped fresh validation. **W4-C** closes required relative-admission/all-entry/current-authority/authenticated physical namespace obligations before dependent **W4-D** connects actual source→checkedCore→generatededge→request/serve/result→observation through existing Rust/privateQUIC. **W4-E** finishes fresh network/fault/regression/119disposition evidence and reconciles original W4 plus all A–D residuals. E cannot defer C/D prerequisites or close with W4-critical gaps. Package exits/models/R01–R12 ledger are in the appended W4-A〜E section of `plan/proof-first-foundation-correspondence.md`; recheck that map before work. No new global plan or W5+. Mandatory broad corpus343full,next344 remains incomplete; readledger distinguishes full/range reads. Rough remaining24–60activehours is low-confidence, not coverage.
 
-TCB: Lean4.29.1 standardlogical axioms; pinned compiler/native binaries; truthful privileged CPython3.12.3 capture/normalizer andexclusivepipes; stableFS/nohostileABA; selected uninterrupted host stores/locks/cleanup andfatalabort-only behavior. IDs/hashes grant no authority. No confidentiality/passive-noninterference/durable-recovery/alpha/W4completion claim. Heavy Lean serial--trust0-j1, AS4GiB/core0; root38GiBfree/RAM9.1GiBavailable at last preflight. Final make docs passed exit0 (agent configuration,218-file Canon index,800-path hierarchy,1764 reports). Earlier two snapshot-format failures are retained. Result/Git metadata is separately diff/JSON/section-checked. Final Git result lives in QUOTA_PAUSE_GIT.json; do not treat skipped broader integration as passed.
+TCB: Lean4.29.1 standardlogical axioms; pinned compiler/native binaries; truthful privileged CPython3.12.3 capture/normalizer andexclusivepipes; stableFS/nohostileABA; selected uninterrupted host stores/locks/cleanup andfatalabort-only behavior. IDs/hashes grant no authority. No confidentiality/passive-noninterference/durable-recovery/alpha/W4completion claim. Heavy Lean serial--trust0-j1, AS4GiB/core0; root38GiBfree/RAM9.1GiBavailable at last preflight. Historical 2026-09-23 quota checkpoint: make docs passed exit0 (agent configuration,218-file Canon index,800-path hierarchy,1764 reports); its two earlier failure records remain in W4_CHECK quota_pause_20260923, and its final Git result is QUOTA_PAUSE_GIT.json under W. Those are not validation or Git results for the 2026-09-24 partition. Partition-specific validation and GIT_RESULT.json live in the separate planning workroot above and W4_CHECK partition_20260924; inspect those exact receipts. Skipped broader integration is not passed.
+
+
+## Planning partition review and execution boundary
+
+Owner's 2026-09-24 A–E partition is recorded in the existing plan/task/status files.
+Read-only Oracle `mir-w4-split-pre` and `mir-w4-split-final` completed; their
+packets/answers/dispositions are in the separate partition workroot. Final advice
+found no demonstrated partition scope/gate defect and requested three current
+mirror clarifications plus two operational carry-forwards; these are applied.
+No planning Oracle remains pending. The exact reviewed cut passed make docs;
+post-review final make docs passed exit0 at 2026-09-23T23:59:13.102626+00:00 on the unchanged post-review cut. Its result is recorded in `DOCS_FINAL_RESULT.json` and
+W4_CHECK partition_20260924; later result/Git metadata is separately checked. It must not be inferred from A's
+historical validation. Final partition Git status is `GIT_RESULT.json` there.
+Same W4 goal remains paused; next executable package is B only after resumption.

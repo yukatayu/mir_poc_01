@@ -2,7 +2,7 @@
 
 - Started: 2026-09-14T08:39:26.358953+09:00
 - Author: sole main Codex; no subagents
-- State: active research; W4 not complete, no Canon or alpha acceptance.
+- State: paused W4; W4-A scoped evidence complete, W4-B current/paused, W4-C/D/E dependent. W4 not complete, no Canon or alpha acceptance.
 
 ## Objective
 
@@ -2177,3 +2177,62 @@ plan/は前方の同一W4 checkpointを追加。Documentation.md／docs/project-
 
 
 2026-09-23T06:44:39.529488+00:00 — Final make docs PASS exit0 (fbc05f/7de712): agent config,218-file Canon index,800required hierarchy paths,1764numbered reports. Two earlier format failures retained; the final staged task-map schema and hierarchy notices pass. Final result/Git metadata follows this run and is independently JSON/section/diff-checked; no source/proof/runtime change. Commit/push status at this precommit record:11own LAB files prepared for normal commit --no-gpg-sign and push; final exact commit/remote/dirty receipt is QUOTA_PAUSE_GIT.json in the persistent workroot and final response. No Oracle or Lean process remains; the same incomplete W4 goal will be paused as the final tool action under the explicit quota instruction.
+
+
+### Owner-requested W4-A〜E partition — 2026-09-23T23:40:11.399591+00:00
+
+Objective/scope: subdivide the SAME incomplete W4 for reviewable work boundaries,
+without resuming implementation, reducing original obligations or changing Canon.
+Owner explicitly requested A completed work, B current work, and E final network
+validation plus recovery of any split leftovers. Start HEAD e6d41ba491f8d30bbab03418ac7e215e7c00d67f, clean main.
+
+Documents consulted: Canon README/MAP/source-hierarchy/ADR-0043, current task/status
+and saved W4 proof receipts, handoff workstreams/template, progress-task axes,
+Oracle manuals/help; existing detailed source reading remains hash/range-ledgered.
+No new all-corpus/full-code-read claim or new overall roadmap.
+
+Actions/files: existing LAB plan and plan/00-index identify A bounded historical
+evidence, B repo proof/runner integration, C remaining foundation obligations,
+D existing Rust/Core/privateQUIC connection, E actual network/regression/closure.
+R01–R12 retain original/inherited/new residuals, first responsible package and
+earliest blocked consumer. E reconciles the union; C/D prerequisites must close
+before dependent implementation. New semantic counterevidence reopens the affected
+package through a forward record. A completion never implies all foundations done.
+Same Report2614, no new report/framework/source/sample/taxonomy/Canon changes.
+
+Model/effort recommendations are provisional: GPT-6 Astra high by default,
+xhigh for difficult definition/premise/counterexample work, GPT-6 Sol high for
+contract-fixed implementation/checks. No settings change or quota savings claim.
+Old24–60active-hour aggregate retained as low-confidence, not new measurement.
+
+Open questions: all unclosed W4 technical questions remain assigned to B/C/D/E;
+W5 durable recovery, W6 secrecy/active-debug and W7 alpha stay outside W4 scope.
+A W4-critical dependency cannot be silently deferred under those names.
+Suggested next prompt: resume through W4-B only, or expressly through W4-E;
+current planning request itself does not resume the existing paused goal.
+
+plan/ updated with package exits, comparison/falsifier and residual ledger;
+Documentation.md, docs/project-status.md, progress.md, tasks.md and
+samples_progress.md synchronized. Current goal/resume/check ledger mirror the
+same B-paused status. Samples/scripts taxonomy update unnecessary: no executable
+sample or command changed. Progress recent log timestamp obtained from clock.
+
+Review/commands/validation: see the forward result entry appended below when
+collected. Canon-first Oracle pre-edit review and final frozen-diff review are
+read-only advice, not a signed reviewer or independently executed proof.
+Skipped: Lean/Rust/network baselines not rerun for this documentation-only
+partition; historical A evidence stays historical. No new implementation result.
+Commit/push: pending own reviewed LAB diff; final exact receipt will be
+`/home/codex/.local/state/mirrorea-proof-first/w4-20260924-partition/GIT_RESULT.json`.
+Sub-agent sessions: none created; sole main performed all work. Existing W4 goal
+remains paused; this task does not require goal reconfiguration.
+
+Pre-edit Oracle `mir-w4-split-pre` completed exit0; answer SHA256 81d96a302b453c34ac97245b767ede0f34a9339a70ae08116fb89a79f3c3e8a0. Findings adopted: inherited redaction and authority/history in C/D; all dependent internal paths gated; premise-relevant D changes reopen affected C; B complete successful checks; finite actual evidence terminology; preserve probe/alias/result-boundary distinctions; R01–R12 are categories, instantiate before reliance. No new owner gate or normative acceptance. Static review did not prove exhaustive obligations or rerun A. Exact packet/answer/dispositions are in the partition external workroot.
+
+Final planning review `mir-w4-split-final` completed exit0; answer SHA256 c376c02728fd2bdd670cf033c85645f28cb484d63e6ab87df65dfbb95e4234f1. No demonstrated scope/gate/authority defect. Main adopted F1 historical-vs-current validation/Git clarification, F2 all-dependent-internal-consumer wording, F3 runner-vs-expected-child statuses, and restored one-shot output protection/estimate reassessment/no arbitrary Oracle deadline. These align mirrors with the already-reviewed detailed plan; no semantic gate changed. No third consultation for exact requested mirror wording. Both answers are fully collected, advisory only.
+
+Checks at this point: git diff --check and the structural scope/history/old-JSON/task-heading/A–E mapping checks passed. First make docs passed; a second make docs verified the exact frozen final-review cut remained unchanged throughout and passed (218 Canon entries,800 hierarchy paths,1764 reports). Post-review mirror/result changes receive a final docs run recorded in DOCS_FINAL_RESULT.json. Required Lean/Rust/network runs remain unexecuted for this docs-only task, not relabeled successful. All original handoff/Canon/source/119 registry files remain unchanged.
+
+Partition commit/push verification is recorded in external GIT_RESULT.json; this report travels in that commit. Read that receipt for actual success/failure and remote parity rather than inferring success from this sentence. The parent W4 goal stays paused and incomplete. No sub-agent sessions exist; no changes to model settings, Chrome, keys, production or public contracts.
+
+2026-09-24T00:01:03.322459+00:00 — Final partition validation: `make docs` exit0 on the unchanged post-review cut; agent configs,218-file Canon index,800 required hierarchy paths,1764 report scaffold check pass. Exact log SHA256 2a31cd1458be17326242567ff65f1836d6e66b1fc64aba4bfee461c55c4b8bcd. Subsequent edits only attach this result and clarify historical receipt locations; JSON, history preservation, exact file scope and diff are checked separately. Both planning Oracle answers are collected; no proof/Rust/network execution or W4/Canon acceptance added. Current package remains W4-B paused.

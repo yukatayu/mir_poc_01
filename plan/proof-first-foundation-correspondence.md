@@ -6,6 +6,8 @@ Normative source: `mirrorea_canon/`; evidence: report2611 and docs/proof-first/.
 The handoff's119requirements/30judgments/18guarantee targets/24scenarios/alpha1–8
 remain tracked inputs; U intent, D proposal, adoption and demonstration are distinct.
 
+Current package map: W4-A completed bounded evidence; **W4-B paused/current**; W4-C/D/E dependency-gated. See the appended `W4-A〜W4-E 作業区切り（2026-09-24 owner指定）`; older dated current/next entries below remain history.
+
 ## Authority and retained history
 
 ADR-0043 closes I3-3 and pauses Plan250; no I3-4 resume is inferred. Plan250 is the
@@ -1155,3 +1157,84 @@ Normal full/source-only/actual-omission bound execution retains23negative contro
 Current comparison is explicit separate private known/unknown decoders versus one generic dispatcher; no public grammar or policy is selected. Continue this same incomplete W4 goal for coherent repo proof/runner integration, required relative admission/all-entry/authenticated physical custody, then existing Rust/Core/privateQUIC and final regression/119disposition integration. The mandatory corpus remains343full,next344. No Canon/THM/OBL/phase promotion, alpha adoption or Plan250 resume; previously accepted work and historical failures remain unchanged.
 
 Oracle63 locator-tag relabel was reproduced for actual BODY_LOST/RAW_CAPTURE: sourceClaim and sourceWireClaim can share the same pre-reply transition after write, while exact custody and settled240/attempted241 remain. Oracle64 and local inspection classify this as a non-injective private input-locator encoding limit, not a same-origin correspondence counterexample. No canonical-tag injectivity is claimed; its optional marker strengthening is not a current adoption prerequisite. Oracle64 also confirms that internal Rust/Core/privateQUIC work is conditionally delegated, not inherently a new owner-policy decision; public/Canon/production changes remain reserved. All review is static advice, not independent execution or signed acceptance.
+
+
+## W4-A〜W4-E 作業区切り（2026-09-24 owner指定）
+
+この分割は同じW4の作業管理であり、新しいroadmap、Canon phase、意味論又は受理の追加ではない。
+現在地は **W4-B・一時停止中**。W4-Aは既存の限定証拠を完了済みの区切りとして扱い、
+W4-C/D/Eは依存待ち。W4自体は未完了で、単一goalのpauseを維持する。
+元のW4の義務を削らず、W5以降又はPlan250/I3-4を開始しない。
+基準cutは `e6d41ba491f8d30bbab03418ac7e215e7c00d67f`。
+
+| 区切り | 対象・入力→成果・直接consumer | 完了条件 | 現況 / 推奨model・effort |
+|---|---|---|---|
+| **W4-A：限定モデル・実process証拠の確立** | 通常/確定失敗/結果不明の実記録と選択モデル→同じ履歴の値・資源・所有者対応。B/Cへの入力 | 保存済みkernel証明、有限実記録の対応検査、反例、TCB、公理監査、Oracle指摘処理を保持 | **限定範囲は完了済み**。再分類だけの再実行はしない |
+| **W4-B：証明・検査コードのrepo統合** | 外部workdirの検証済みproof/reference群→既存sample/runnerで再現できる依存一式。consumer C/D | 元source・import変換・証明前提を追跡し、既存runnerでfresh kernel/axiom/control検査。検証runner全体のexit0、全必須check、入力/import/source-object・前後のbindingを確認。注入故障・拒否反例の子processは期待statusと照合。途中markerだけでは不可。意味変更を移植として隠さない | **現在地・pause**。GPT-6 Astra high、確定した機械的移植はGPT-6 Sol highも候補 |
+| **W4-C：実装前の基礎条件の解消** | Bの成果と残る義務→正当な操作の受理、全入口、現在の認可、実相手/namespace/custodyの条件。consumer D | 宣言規則とchecker対応、必要な一般証明、通常source正例、弱化/偽装/失効/別入口の反例、TCBと計画する機構の対応、既存redaction等の制約、reviewと適用手続き | **後段依存**。GPT-6 Astra high、定義・前提・反例の難所でxhigh |
+| **W4-D：既存Rust/Core/private QUIC接続** | Cで確立した条件→通常source→checked Core→生成owner/edge→実request/serve/result→忠実な観測。consumer E | 最小internal差分、proof/auth/resource/版と既存redaction等の保持、typed failureとqueue/memory対応。正確なcut/TCBの実process/network検査で対象経路の有限証拠を得る。ノードごとの手書きlogicや期待JSONによる代用不可 | **後段依存**。境界設計GPT-6 Astra high、契約確定後の実装GPT-6 Sol high |
+| **W4-E：実network検査・残項目回収・W4完了判定** | A〜Dの成果と元W4/新発見の残項目→再現可能なW4候補 | fresh正常/障害/観測/迂回検査、必要なI3-3回帰、119行disposition、I3-4/5/6対応、残項目の実解消、最終review・文書・Git統合 | **後段依存**。検査実装GPT-6 Sol high、合成と完了判定GPT-6 Astra high。意味上の難所のみxhigh |
+
+### Aの完了範囲とB以降への非含意
+
+Aは「W4の基礎が全部完成した」という意味ではない。正常3profile/23control、
+確定失敗4profile/14control、結果不明8profile/16controlの保存済み結果と、
+選択モデルに関する一般命題を対象とする。一般命題と有限実行、privileged pipeとQUIC、
+過去の事実と現在利用可能な事実を分ける。新規の検査・証明成功をこの文書変更から導かない。
+具体的なreceipt/hashは `docs/proof-first/RESUME.md` と `W4_CHECK.json`、Report2614にある。
+compiler/nativebinary、忠実な特権capture/normalizer、exclusive pipe、stableFS等はTCBに残る。
+全physical入口の対応、実相手の認証、既存Rust/Core/QUICの統合はC/D/Eへ残る。
+
+### W4残項目台帳とEの回収責任
+
+以下のR番号は義務の分類行であり、全具体項目の列挙完了を意味しない。Canon OBL/THMを追加しない。
+各行は元のW4義務に対応する。新発見は同じ台帳又はReport2614に具体的な行として追加し、
+由来、U/REQ/PT/SC/Q、担当区切り、最初に止めるconsumer、状態、証拠、再開条件を残す。
+
+| 行 | 残る義務・由来 | 最初の担当 / 依存を止める境界 | 状態・解消証拠 |
+|---|---|---|---|
+| R01 | 外部proof/referenceの保存・import整合 / RESUME | B / C-Dが依拠する前 | OPEN：manifest、元sourceと変換対応、fresh既存runner |
+| R02 | 相対的な受理完全性、正例、room/freshness/funding / CURRENT_GOAL | C / D | OPEN：全拒否や結論を仮定にする方式を排除した証明・反例 |
+| R03 | 全entry/mutator/start/cancel/add/revoke/use経路 / RESUME | C→D / 最初の依存internal実装・生成経路・証拠主張前 | OPEN：対象profileの全経路棚卸し、保存、迂回拒否 |
+| R04 | 現在の認可、実相手/namespace/custody / RESUME | C→D / 最初の依存internal実装・生成経路・証拠主張前 | OPEN：同じ主体・要求・引数・code・contract・世代に束縛。hash/ID/証明は権限を生成しない |
+| R05 | 既存checker/Core/projector/runtime/private QUIC、queue/memory / 元W4 | Cで前提対応→Dで実現 / 当該実装前→E | OPEN：checker/Core/edgeとqueue/memoryの前提をCで評価し、Dで実対応を検査。参照parser+Leanだけでは不可 |
+| R06 | source→edge→request/serve/result→観測 / 元W4 | D→E / W4完了前 | OPEN：同じ実行の追跡と適用される既存redaction。架空event、期待JSONによる代用不可。一般機密性は別 |
+| R07 | 正常/失敗/結果不明/遅延store、retry・二重消費・失効、該当source構成 / 元W4 | D→E / W4完了前 | OPEN：遅延store/既知reply/caller確認/public完了、最後の確定状態/物理残余、source-prefix/全program終了を区別して実network検査。結果不明をrollback/refund/recoveryにしない |
+| R08 | I3-3回帰、I3-4/5/6への対応 / 元W4 | E / W4完了前 | OPEN：必要回帰を実行し、LAB証拠と未受理義務を照合。Plan250受理は別 |
+| R09 | W1-W3残件、Q18/H/H2/C/C2、119行のU/D/採用/実証 / 元goal | 依存に応じC/D、最終照合E / 最初の利用前 | OPEN：各残件と必要consumerを対応付け、異なる政策・保証を保持 |
+| R10 | 必読コーパスと依存code全文読取り / 元goal | B/C/Dの該当判断前、最終監査E | OPEN：保存時343full/next344。索引/grepを全文読了とせず、必要資料未読の判断を先行しない |
+| R11 | 再現証拠/TCB、Oracle指摘、文書/再開情報、own Git / 元goal | 各区切り、最終E / W4完了前 | OPEN：検査cut、失敗/skip/未回収の区別、review、通常commit/push結果 |
+| R12 | 分割時の取りこぼし、新発見、未割当項目 / 今回owner指示 | 発見時にB/C/D/Eへ割当、Eが総回収 / 最初の影響consumer前 | OPEN：元W4＋A〜D残項目の和集合を照合。必要項目ゼロ未割当、W4-critical未完了ゼロ |
+
+R09/R10/R12の具体化はEまで待たず、依拠するC/D判断の前に行う。未読・未対応を解消済み又は無関係と推定しない。
+既知のW1補助source cutのreview未完了やM8実効label不一致も、当該W4 consumerへの依存を評価して担当へ割り当てる。
+119行dispositionを記録したことは義務の解消ではない。新発見はW4に必要なものを回収し、無関係な研究を自動追加しない。
+
+Cの閉鎖は棚卸し済みの対象・review済み前提に限定する。Dで入口、auth/lifetime、資源、source/Core対応、namespace/custodyなど
+使用する前提に関わる変更が入れば、最初の依存internal実装・生成経路・証拠主張の前に該当C義務を再開する。
+Cは必要理論・受理条件・計画機構との対応、Dは実装された接続の対応証拠、Eは統合検査を担当し、将来の実装結果をCに要求する循環も避ける。
+ADR-0043由来のtransport非権威性、source由来owner評価、保持request/history、typed failure、適用されるredactionはC/Dから保つ。
+privileged captureをそのまま公開observerへ流せない。これはW6の一般機密性・二実行保証を今回追加するものではない。
+Bでは保存済みのlate-failedEnd反例、probeの存在と条件付き定理の区別、受理されたlocator alias2件を拒否反例に数えない区別も引き継ぐ。
+
+**Eは回収責任を持つが、C/Dの前提を先送りする場所ではない。** 必要な前提が未解決なら
+依存する実装・受理を止め、担当区切りで解消する。Eで前段の欠陥が見つかったらB/C/Dへ戻し、
+前方の修正記録を残す。Aの過去証拠や失敗を遡って書き換えない。
+W4-criticalな項目がOPENの間はE/W4を完了にしない。W5のdurable復旧、W6の秘密/二実行/
+受動非干渉/active debug、W7のα統合は別scopeとして対応先を記録し、Eで完了扱いしない。
+それらがW4の必須前提と判明した場合も黙って除外せず、依存と権限境界を明記してW4を未完了に保つ。
+
+### 実行順・停止線・モデル運用
+
+再開時の順序は **B→C→D→E**。各区切りで成果・証拠・残項目をReport2614とsnapshotへ同期する。
+「W4-Bまで」の依頼ならBで停止し、「W4-Eまで」なら依存条件・quota・owner境界の下で続ける。
+今回の分割依頼自体は実行再開ではなく、goalの作り直し・複数化・完了化もしない。
+現在はpause。再開後もW4内で同時にactiveなsemantic goalは高々一つ。sub-agentを使わない。
+モデル推奨は未実測の運用候補で、保証や自動切替の設定ではない。Lean/実機/反例の合格条件は共通。
+公式のモデル/effort案内は https://developers.openai.com/api/docs/models と
+https://developers.openai.com/api/docs/guides/reasoning 。週間枠の節約率は未測定。
+従来の残り24〜60実作業時間は低確度の集約見積りとしてのみ保持する。
+内訳はB+C合計6〜18、D10〜24、E6〜14時間の旧暫定値で、均等配分や5分割による進捗率にしない。
+
+比較した最小代替は「W4を分けず次行動だけ表示」。A〜Eは停止点と残項目責任を明確にするため選ぶ。
+元義務の欠落、前提の後回し、Aの過大な完了表示、同時active goal、権限拡大が見つかれば分割記述を修正する。

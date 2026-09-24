@@ -1,6 +1,6 @@
 # Current Task Map (LAB)
 
-最終更新: 2026-09-23 15:23 JST
+最終更新: 2026-09-24 08:38 JST
 
 **Canon notice:** `mirrorea_canon/` is normative. Everything outside
 `mirrorea_canon/` is LAB; if LAB conflicts with canon, canon wins. This snapshot
@@ -15,46 +15,33 @@ remain the accepted bounded-program choice, TCP deferred and datagrams excluded.
 
 ## current promoted package
 
-W4 remains the sole owner-requested task, PL1/PL2/PL0 S4/S6, theory/refinement
-before dependent implementation. It is paused at the requested quota checkpoint
-(33% remaining, 2026-09-23 15:14 JST), not completed or blocked. On the user instruction to continue after this quota pause, continue the same
-goal under the existing technical delegation; no new semantic approval is implied. Sole main, no subagents, sorry/admit or Mir axioms.
-W1–W3 finite candidates and the119-row U/D/nonacceptance registry are retained.
+W4はowner指定の単一task-local goal、PL1/PL2/PL0 S4/S6です。同じgoalはquotaによりpausedで、今回の分割は実行再開ではありません。W1〜W3の有限候補と119行U/D/nonacceptanceを保持します。主担当一人、sub-agent禁止。sorry/admit又はMir固有の未証明公理で穴を埋めません。
 
-Canon position: `mirrorea_canon/adr/ADR-0043.md`. LAB dependency memory:
-`plan/proof-first-foundation-correspondence.md`. These sources do not promote W4.
+2026-09-24のowner指定で、同じW4を **W4-A（限定証拠・完了済み）→W4-B（repo統合・現在地、pause）→W4-C（残る基礎条件）→W4-D（Rust/Core/private QUIC接続）→W4-E（実network検査・残項目回収・W4完了判定）** に分割しました。C/D/Eは依存待ちです。Eは元W4と前段の残項目を照合しますが、C/Dの前提をEへ先送りして実装を進めません。完了条件・推奨model/effort・R01〜R12残項目台帳は `plan/proof-first-foundation-correspondence.md` の「W4-A〜W4-E 作業区切り」を参照してください。分割は計画整理のみで、同じW4 goalの一時停止を維持します。
 
-W4は、通常sourceと実ownerの状態・資源を同じ履歴から対応付ける基礎検証を進めています。選択した形式モデルにおける通常実行の全所有者lease・値・履歴の一般証明と、確定失敗4profile／未確定通信8profileの実記録との接続を外部workdirで検査しました。正常系23、確定失敗14、未確定通信16の改変controlも検査済みです。通信結果不明時は最後に確定した状態と物理通信の残余を区別します。これらは限定した研究候補で、追加proof群のrepo再現runnerへの統合、全entryの実機対応、現在の認証認可・物理namespace、既存Rust/Core/privateQUIC接続とW4全体の統合は未完了です。
+Canon position: `mirrorea_canon/adr/ADR-0043.md`. LAB dependency memory: `plan/proof-first-foundation-correspondence.md`.
 
-Full process exit0, exact checked inputs/imports and before/after bindings are
-required; early success-looking markers are not acceptance. Final-failedEnd
-omission is an explicit exit1 discriminator. Unknown physical application is
-not settled source knowledge. Probe existence is an actual selected-profile
-fact; general retired-probe theorems quantify over supplied certified probes.
-Oracle advice is reviewed locally and never treated as proof, grant or signature.
-Private sourceClaim/sourceWireClaim can denote the same pre-reply claim after
-the actual write. Exact actualFault binding is retained; canonical locator-tag
-injectivity is not claimed. A marker gate would add that optional stronger property.
+W4-Aの保存済み証拠は通常3profile/23control、確定失敗4/14、結果不明8/16と選択モデルの一般Lean命題です。privileged pipe/capture/compiler TCBに条件付きで、full physical/QUIC/authentication/秘密/復旧の保証ではありません。検証runner全体のexit0、全必須check・入力/import/source-object/hash照合、子processの期待statusとの一致が必要です。注入故障・拒否反例の期待失敗を成功終了へ変えず、途中の成功markerだけでは受理しません。sourceClaim/sourceWireClaimのprivate locator aliasは保持され、canonical-tag injectivityは主張しません。
 
-Exact evidence/reopen points: `docs/proof-first/RESUME.md`, `CURRENT_GOAL.md`,
-`W4_CHECK.json`, Report2614 and `plan/proof-first-foundation-correspondence.md`.
-New external proofs/checkers are not yet mirrored into the repo sample runner.
+Exact evidence: `docs/proof-first/RESUME.md`, `docs/proof-first/CURRENT_GOAL.md`, `docs/proof-first/W4_CHECK.json`, Report2614. Later external proofs/checkers remain unmirrored until B actually closes.
 
 ## ordered self-driven packages
 
-Remaining W4 packages after quota continuation; no Plan250 resume implied.
+再開後の順序はB→C→D→E。A〜Eは元W4内の作業区切りで、別semantic milestoneではありません。
 
-| Package / macro position | Required result | Startability / rough estimate |
+| Package / macro position | Required result / first consumer | Startability / suggested model / rough estimate |
 |---|---|---|
-| W4 foundation integration / Macro1/2/5 late | preserve reviewed cone in existing runner; remaining relative admission and physical all-entry/current-authority/custody obligations | 再開後に着手可能; provisional6–18active hours |
-| W4 existing runtime connection / Macro3/6 middle | ordinary source → checked Core → generated owner/edge → actual privateQUIC; no expected-JSON substitution | 後段依存; provisional10–24active hours after theory gates |
-| W4 network/regression/integration / Macro3/6 close | real positive/fault/observation evidence, I3 baseline regressions,119dispositions,review,own Git | 後段依存; provisional6–14active hours |
-| Mandatory reading / Macro0 | honest hash/range ledger; next mandatory entry344 | 再開後に着手可能; no new global plan until necessary corpus read |
-| W5/W6/W7 | recovery, secret observation/resource guarantees, integrated alpha | 後段依存; outside this request |
+| W4-A / Macro1/2/5 | 保存済み限定モデルと実process証拠をB/Cへ渡す | 完了済みの限定範囲。既存結果を保持 |
+| W4-B / Macro2/5 | 外部proof/referenceを既存repo runnerへ統合しfresh再現→C/D | **現在地・pause、再開後に着手可能**。GPT-6 Astra high。B+C合計6–18hの旧暫定値 |
+| W4-C / Macro1/5 | relative admission、全entry/current auth/実namespaceの必要条件を閉じる→D | 後段依存。GPT-6 Astra high、難所xhigh。B+C合計内 |
+| W4-D / Macro3/6 | source→checked Core→生成edge→実private QUIC→観測→E | 後段依存。境界Astra high、確定実装GPT-6 Sol high。旧暫定10–24h |
+| W4-E / Macro3/6 close | 実network正常/障害/観測・迂回・I3回帰・119対応・全残項目回収・W4候補統合 | 後段依存。検査Sol high、合成/完了判定Astra high。旧暫定6–14h |
+| Mandatory reading / Macro0 | 必読corpus・依存coneの正確な読了/hash台帳 | 各判断前に必要範囲を読む。保存時343full,next344 |
+| W5/W6/W7 | 永続化/復旧、秘密観測、α統合 | 後段依存、今回のW4 scope外 |
 
-Overall rough remaining estimate24–60active hours is low confidence, not a
-requirements percentage or a reason to omit obligations. Reassess after actual
-core/runtime mapping; elapsed Oracle time is not a failure or deadline.
+残り24–60実作業時間は低確度の旧集約値で、今回測り直していません。実際のCore/runtime対応が明らかになった時点で再評価します。Oracleの経過時間を失敗や任意の締切にしません。分割数を進捗率にせず、モデル推奨も未実測の候補です。手動の同一主担当切替を想定し、自動設定やsub-agentを導入しません。
+
+R01〜R12は義務分類で、具体項目の網羅実証ではありません。依拠する判断前に残件を具体化し、Eは台帳とW4に必要な新発見を総照合します。元W4＋A〜D残項目の各行に由来・担当・最初に止めるconsumer・状態・証拠・再開条件を保持し、W4-criticalなOPENを残して完了にはしません。C/Dの前提は最初の依存internal実装・生成経路・証拠主張前に閉じ、Eへの先送り不可。既存のtransport非権威性・source owner評価・request/history・typed failure・redactionをC/Dから保持します。Dで使用前提が変われば該当C義務へ戻し、実装後の証拠はDで得ます。Eで欠陥が見つかれば前段へ戻して前方修正します。
 
 ## self-driven macro phase reading
 
@@ -85,17 +72,12 @@ cannot reopen Plan250 or satisfy an absent owner-authenticated trust anchor.
 
 ## maintenance tasks
 
-Use persistent external workroot from RESUME; never rerun one-shot evidence
-launchers over existing output. Heavy Lean is serial --trust=0 -j1, ordinarily
-4GiB address-space cap. No cleanup or Chrome changes. Before another quota check
-wait until at least07:14:34UTC; near-threshold checks need not be frequent.
-Resume by checking saved hashes and dirty state, not by repeating unchanged
-baselines or consultations. Final pause commit/push evidence is in Report2614.
+Use the persistent external workroot in RESUME. Never rerun one-shot evidence launchers over existing output. No unchanged one-shot evidence replay merely for a label or context change; B's actual import/runner change requires scoped fresh verification. Heavy Lean remains serial --trust=0 -j1 with measured resource limits. No cleanup, Chrome changes or external notifications.
+
+W4-A〜Eは一つのReport2614に記録し、package closeごとにplan/status/残項目を同期します。依頼が「Bまで」ならBで止め、「Eまで」なら依存条件とquota指示の範囲で続けます。現在のW4 goalはpausedのままで、今回は再開・完了・作り直しをしません。
+
+Latest quota33% is historical (2026-09-23 15:14 JST), not rechecked for this planning task. After execution resume, quota checks may be at least one hour apart; pause near30% at a convenient evidence checkpoint. Check saved hashes/dirty state first.
 
 ## non-promoted references
 
-Keep one accumulating Report2614, forward LAB plan history and concise status
-mirrors. No new roadmap, sample root or framework. Reports2611–2613 and accepted
-I3 history remain unchanged. Mir, Mirrorea, Typed-Effect, PrismCascade and upper
-applications stay separable. Macro4 widening/7public tooling/8domain work is not
-inferred from these components; the present evidence is bounded FM4/5.
+Keep one accumulating Report2614, forward LAB plan history and concise status mirrors. No new roadmap, sample root or framework. Reports2611–2613 and accepted I3 history remain unchanged. Mir, Mirrorea, Typed-Effect, PrismCascade and upper applications stay separable. A–E completion labels do not promote Canon THM/OBL/phase, public/production contracts or alpha. Detailed package exits, alternatives and falsifiers are in `plan/proof-first-foundation-correspondence.md`.

@@ -1,8 +1,8 @@
 {
   "schema": "proof-first-w4-check-v1",
-  "timestamp": "2026-09-23T06:44:39.529488+00:00",
+  "timestamp": "2026-09-24T00:01:03.322459+00:00",
   "base_head": "5d7c13a821c912d14c347775e23493a77f790768",
-  "status": "W4 incomplete; verified bounded correspondence evidence saved for owner-requested quota pause",
+  "status": "W4 incomplete and paused; W4-A completed bounded historical evidence; W4-B current/paused; W4-C/D/E dependency-gated",
   "work_root": "/tmp/mirrorea-w4-20260914-a3e0bpks",
   "publication_component": {
     "modules": {
@@ -19493,5 +19493,192 @@
       "log_sha256": "b6f1ec0754cdd3bc6027cb901067f811c948fc5ad5b4dbf720f3cbac252e6c70",
       "reason": "Rewritten task snapshot changed validator-required section names/order; restored fixed headings, kept new content and explicit current Canon/plan references. No semantic change."
     }
+  },
+  "partition_20260924": {
+    "at": "2026-09-23T23:40:55.392814+00:00",
+    "authority": "explicit owner request to split W4-A through W4-E, planning only",
+    "base_head": "e6d41ba491f8d30bbab03418ac7e215e7c00d67f",
+    "work_root": "/home/codex/.local/state/mirrorea-proof-first/w4-20260924-partition",
+    "goal_status": "paused",
+    "current_package": "W4-B",
+    "packages": {
+      "W4-A": "completed_scoped_historical_evidence",
+      "W4-B": "current_paused",
+      "W4-C": "dependency_gated",
+      "W4-D": "dependency_gated",
+      "W4-E": "dependency_gated"
+    },
+    "scope": "same original W4, no new phase/lane/goal/Canon acceptance",
+    "plan": "plan/proof-first-foundation-correspondence.md#W4-A〜W4-E 作業区切り（2026-09-24 owner指定）",
+    "residual_rows": [
+      "R01",
+      "R02",
+      "R03",
+      "R04",
+      "R05",
+      "R06",
+      "R07",
+      "R08",
+      "R09",
+      "R10",
+      "R11",
+      "R12"
+    ],
+    "residual_rule": "E reconciles original W4 plus inherited/new A–D residuals; dependencies must close before earliest affected consumer; W4-critical OPEN prevents completion",
+    "new_lean_rust_network_runs": false,
+    "model_settings_changed": false,
+    "review_pre": {
+      "receipt": {
+        "collected_at": "2026-09-23T23:43:29.845380+00:00",
+        "session": "mir-w4-split-pre",
+        "submission": {
+          "at": "2026-09-23T23:34:43.414618+00:00",
+          "session": "mir-w4-split-pre",
+          "pid": 1537905,
+          "question_sha256": "06e99358f15ca91cc79f7674b725270a754f1ff07554311d780173442689bfb7",
+          "packet_manifest_sha256": "b9df0d4a09414c524d4b0d1b6c96d628c5118b1f30adccbd10dab97d9fa5c7b4",
+          "next_status_after": "2026-09-23T23:37:43.414618+00:00"
+        },
+        "wrapper_result": {
+          "at": "2026-09-23T23:41:17.131655+00:00",
+          "exit_code": 0
+        },
+        "answer_sha256": "81d96a302b453c34ac97245b767ede0f34a9339a70ae08116fb89a79f3c3e8a0",
+        "read_tool": "08b339",
+        "scope": "static Canon-first pre-edit planning advice only"
+      },
+      "dispositions": [
+        {
+          "finding": "Explicit inherited redaction/non-authoritative transport/source owner/history/typedfailure at C/D",
+          "decision": "adopt; preserves ADR0043, not W6 general secrecy addition"
+        },
+        {
+          "finding": "Gate first dependent internal implementation/claim, not production only",
+          "decision": "adopt; already Japanese draft said implementation, now explicit"
+        },
+        {
+          "finding": "C covers reviewed premises; premise-relevant D change reopens only affected C before reliance",
+          "decision": "adopt; separate C prerequisite from concrete D evidence and integrated E coverage"
+        },
+        {
+          "finding": "B whole exit0/full input/import/object/beforeafter checks; tests are bounded evidence",
+          "decision": "adopt; retain latefailedEnd discriminator and scope each table exit"
+        },
+        {
+          "finding": "Preserve delayed store/reply/caller/public completion; actual probe existence and acceptedalias controls",
+          "decision": "adopt; no extra marker/injectivity mechanism"
+        },
+        {
+          "finding": "R01–12 categories are not exhaustive instantiated inventory",
+          "decision": "adopt; populate before affected decisions, E reconcile; disposition is not discharge"
+        },
+        {
+          "finding": "No demonstrated need for new ownerpermission; futureB-only scope not automatic",
+          "decision": "adopt; planning only, existing paused fullW4 unchanged"
+        }
+      ]
+    },
+    "review_final": {
+      "receipt": {
+        "collected_at": "2026-09-23T23:53:21.976661+00:00",
+        "session": "mir-w4-split-final",
+        "submission": {
+          "at": "2026-09-23T23:45:51.492546+00:00",
+          "session": "mir-w4-split-final",
+          "pid": 1593885,
+          "question_sha256": "25d9101eba54bfbc9148895c4169d02e8d3ff7e366627cc5c3c34084e21518e1",
+          "manifest_sha256": "589934cb6980f49abcd6b0351686a19d6487370d2ca17353e44c97014dc005d6",
+          "diff_sha256": "2f9e0e44309967813836d8a07259eacc550591250c84bf6f0ea0df841789dd31",
+          "next_status_after": "2026-09-23T23:48:51.492546+00:00"
+        },
+        "wrapper_result": {
+          "at": "2026-09-23T23:51:23.836620+00:00",
+          "exit_code": 0
+        },
+        "answer_sha256": "c376c02728fd2bdd670cf033c85645f28cb484d63e6ab87df65dfbb95e4234f1",
+        "read_tool": "75167e",
+        "scope": "static final frozen-diff planning review, not independent execution/signature"
+      },
+      "dispositions": [
+        {
+          "id": "F1",
+          "finding": "RESUME historical make docs and Git receipt look current",
+          "decision": "adopt cut-qualified historical wording and separate partition receipts"
+        },
+        {
+          "id": "F2",
+          "finding": "CURRENT_GOAL mirror says production instead of all dependent internal consumers",
+          "decision": "adopt exact already-reviewed plan gate in mirror"
+        },
+        {
+          "id": "F3",
+          "finding": "tasks all exit0 ambiguous for expected failing children",
+          "decision": "adopt runner exit0 + child expected status, matching detailed plan"
+        },
+        {
+          "id": "O1",
+          "finding": "retain no one-shot rerun over existing outputs",
+          "decision": "restore explicit maintenance wording; no new execution"
+        },
+        {
+          "id": "O2",
+          "finding": "retain estimate reassessment after actualCore mapping and no arbitrary Oracle deadline",
+          "decision": "restore explicit maintenance wording; no new estimate/review job"
+        }
+      ],
+      "local_action": "F1/F2/F3 mirror clarification and O1/O2 operational carry-forward applied; detailed plan/gates unchanged; no new review needed for exact suggested wording"
+    },
+    "validation": {
+      "first_docs": {
+        "at": "2026-09-23T23:47:59.950606+00:00",
+        "command": [
+          "make",
+          "docs"
+        ],
+        "exit_code": 0,
+        "log_sha256": "2a31cd1458be17326242567ff65f1836d6e66b1fc64aba4bfee461c55c4b8bcd"
+      },
+      "reviewed_cut_docs": {
+        "at": "2026-09-23T23:53:53.106840+00:00",
+        "command": [
+          "make",
+          "docs"
+        ],
+        "exit_code": 0,
+        "log_sha256": "2a31cd1458be17326242567ff65f1836d6e66b1fc64aba4bfee461c55c4b8bcd",
+        "frozen_cut_unchanged": true,
+        "cut_sha256": "a29d50bcf71f83ab7f1df266fa498fce29d1f781030dbb2f0f5de14f9d6081bf",
+        "reason": "first docs run overlapped three final wording edits; this verifies the unchanged review cut"
+      },
+      "structural": {
+        "at": "2026-09-23T23:44:14.050279+00:00",
+        "status": "passed",
+        "checks": [
+          "12 LAB files only",
+          "historical plan/report preserved except mutable status/pointer",
+          "original task headings/order",
+          "old W4_CHECK and read ledger values preserved",
+          "R01–12 exactly once",
+          "A–E reflected in seven current pointers",
+          "no Canon/code/Lean/source/handoff/119registry changes"
+        ],
+        "scope": "structural consistency, not proof or exhaustive semantic inventory"
+      },
+      "post_review_final_docs": {
+        "at": "2026-09-23T23:59:13.102626+00:00",
+        "command": [
+          "make",
+          "docs"
+        ],
+        "exit_code": 0,
+        "log_sha256": "2a31cd1458be17326242567ff65f1836d6e66b1fc64aba4bfee461c55c4b8bcd",
+        "checked_files_unchanged": true,
+        "cut_sha256": "3c55544f1e913e0d9991618444e71487a7fff93515c50905124bc58db5f6fb6d",
+        "scope": "final A–E planning docs; later result/Git metadata separately checked, no proof/implementation validation"
+      },
+      "fresh_lean_rust_network_runs": false,
+      "metadata_after_validation": "Result/receipt wording only; JSON, historical preservation, exact allowed paths and diff checked before commit"
+    },
+    "git_receipt": "/home/codex/.local/state/mirrorea-proof-first/w4-20260924-partition/GIT_RESULT.json"
   }
 }

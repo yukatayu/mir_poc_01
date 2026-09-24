@@ -29563,5 +29563,61 @@
     "role": "sole-main static advisory reviewed against code/evidence",
     "tool": "999937",
     "at": "2026-09-23T06:32:29.125026+00:00"
+  },
+  {
+    "path": ".docs/progress-task-axes.md",
+    "sha256": "b19cb774cd02cb10ee95a3b0a56f2a69af06c7948ec4431044c0bc50f828496a",
+    "range": "1-99",
+    "role": "W4 A–E planning-only baseline read; no all-corpus or source-proof claim",
+    "status": "full",
+    "at": "2026-09-23T23:40:55.392814+00:00"
+  },
+  {
+    "path": "mirrorea_canon/adr/ADR-0043.md",
+    "sha256": "fb37c365260ba43174a4a486de3bcdf84572f3625fc904d5583d4074a11f4af8",
+    "range": "1-64",
+    "role": "W4 A–E planning-only baseline read; no all-corpus or source-proof claim",
+    "status": "full",
+    "at": "2026-09-23T23:40:55.392814+00:00"
+  },
+  {
+    "path": "mirrorea_canon/meta/source-hierarchy.md",
+    "sha256": "a7bf39681d27c2df1d94d93367477fa5e05e19bceb76c798bf1b7d824f7b3307",
+    "range": "1-55",
+    "role": "W4 A–E planning-only baseline read; no all-corpus or source-proof claim",
+    "status": "full",
+    "at": "2026-09-23T23:40:55.392814+00:00"
+  },
+  {
+    "path": "sub-agent-pro/mirrorea-proof-first-handoff-v1/templates/ORACLE_QUESTION.md",
+    "sha256": "6b45e2acdb877acc8da568e7f0efcee7becd83aecee1cb302c9b4c808ba9d502",
+    "range": "1-42",
+    "role": "W4 A–E planning-only baseline read; no all-corpus or source-proof claim",
+    "status": "full",
+    "at": "2026-09-23T23:40:55.392814+00:00"
+  },
+  {
+    "path": "docs/project-status.md",
+    "sha256": "02f41276aa7d5bdac9d724fa6fbb6500a09c1dadad09f23cc53e0fa10ab80cdd",
+    "range": "1-168",
+    "role": "W4 A–E planning-only baseline read; no all-corpus or source-proof claim",
+    "status": "full",
+    "at": "2026-09-23T23:40:55.392814+00:00"
+  },
+  {
+    "path": "tasks.md",
+    "sha256": "045426eb31c30535b1c138b2dae9acf61c75667fc1fed37c5869ec76736bec48",
+    "range": "1-101",
+    "role": "W4 A–E planning-only baseline read; no all-corpus or source-proof claim",
+    "status": "full",
+    "at": "2026-09-23T23:40:55.392814+00:00"
+  },
+  {
+    "path": "docs/proof-first/RESUME.md",
+    "sha256": "66c72b7ad472036aff31eb1e4445e2d71bcca104ffe50b35a58bf872631a4a40",
+    "range": "1-35",
+    "role": "W4 A–E planning-only baseline read; no all-corpus or source-proof claim",
+    "status": "full",
+    "at": "2026-09-23T23:40:55.392814+00:00"
   }
 ]
