@@ -2236,3 +2236,43 @@ Checks at this point: git diff --check and the structural scope/history/old-JSON
 Partition commit/push verification is recorded in external GIT_RESULT.json; this report travels in that commit. Read that receipt for actual success/failure and remote parity rather than inferring success from this sentence. The parent W4 goal stays paused and incomplete. No sub-agent sessions exist; no changes to model settings, Chrome, keys, production or public contracts.
 
 2026-09-24T00:01:03.322459+00:00 — Final partition validation: `make docs` exit0 on the unchanged post-review cut; agent configs,218-file Canon index,800 required hierarchy paths,1764 report scaffold check pass. Exact log SHA256 2a31cd1458be17326242567ff65f1836d6e66b1fc64aba4bfee461c55c4b8bcd. Subsequent edits only attach this result and clarify historical receipt locations; JSON, history preservation, exact file scope and diff are checked separately. Both planning Oracle answers are collected; no proof/Rust/network execution or W4/Canon acceptance added. Current package remains W4-B paused.
+
+
+### 2026-09-26T03:28:37.412970+00:00 — W4-B resume revalidation and owner-directed quota stop
+
+Start HEAD6d8376718e75f4c8cea385a7a23d67945dada902/main, clean. Previous turn
+was explanatory only (no execution progress); this continuation resumed W4.
+Read current Canon README/MAP, current goal/resume, the A–E plan, reading
+protocol, existing reference-source runner, final cold63 builder/replay code
+and Oracle operations. Large truncated reads were not counted as full.
+
+Read-only SHA256 revalidation of normal/known/unknown bound evidence passed:
+34715 files, zero conflicting digests and zero mismatches. Current three decoder
+roots have204 transitive local modules;130 already match repo bytes,74 are
+missing.37 source hashes lack a direct full/equivalent ledger match and remain
+reading/reconciliation work. This inventory does not close R01/R10 or W4-B.
+No source was copied, no production or proof meaning changed, and no new
+Lean/Rust/network test or Oracle review was run. Prior successful tests remain
+historical. External receipts are in `w4-20260926-integration` under the existing
+local state workroot; actual resource check: root29GiBfree,11GiBavailableRAM,
+workroot on root filesystem. No cleanup or heavy build.
+
+Own-session quota event2026-09-26T03:26:46.365Z shows84%used/16%remaining.
+Apply the owner's existing near30% stopping instruction at this checkpoint.
+No pending Oracle or compiler/test process. Next resume: reconcile the37 read
+hashes, preserve the74 new modules without semantic/import drift, then extend
+the existing runner and validate the complete selected cone with fresh objects,
+axiom audits, expected controls and actual import/input bindings. All C–E and
+119-disposition obligations remain open.
+
+plan/ updated with this forward checkpoint; progress.md appended a dated log.
+Documentation.md/docs/project-status.md/tasks.md/samples_progress.md 更新不要:
+current B-paused frontier, interfaces, runnable commands and sample readiness
+are unchanged. RESUME/CURRENT_GOAL/W4_CHECK/read ledger updated. No independent
+review requested for evidence-only pause metadata; previous planning review
+remains historical. Fresh proof/network validation skipped because no source
+change and the standing quota pause applies, never counted as passed.
+Docs validation and own commit/push outcome will be recorded below and in
+external checkpoint receipts. Sole main; no sub-agent session or notification.
+
+Checkpoint make docs passed exit0 at 2026-09-26T03:32:47.510070+00:00 (agent configuration,218 Canon entries,800 required paths,1764 report scaffold). Subsequent edits only record this result/Git receipt; JSON and diff checks apply. Own normal commit/push and final parity are recorded in external `w4-20260926-integration/GIT_RESULT.json`, not inferred before execution.

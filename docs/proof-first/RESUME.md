@@ -1,4 +1,31 @@
 # W4 RESUME — W4-B paused, A–E partition / incomplete
+
+## Latest checkpoint 2026-09-26T03:28:37.412970+00:00
+
+The same W4 goal was resumed by the current continuation instruction. HEAD at
+start was `6d8376718e75f4c8cea385a7a23d67945dada902`, clean. Sole main performed
+read-only W4-B revalidation: all34715 bound files match their saved receipts,
+no conflicts/missing/changed files. Import traversal of the current normal,
+known-fault and unknown-wire JSON consumers identifies204 modules,130already
+byte-identical in repo and74missing.37 hashes have no direct full/equivalent-copy
+ledger match; reconcile prior records or read fully before relying on them.
+This is inventory/evidence preservation, not fresh proof or W4-B completion.
+
+The own-session quota event at2026-09-26T03:26:46.365Z reports84%used/16%remaining
+in the10080minute window. Standing owner instruction requests pause near30%;
+therefore pause the same incomplete W4 after recording/validating this checkpoint.
+No Oracle/build is live or submitted. Root free29GiB/RAM available11GiB; the
+existing external workdir is on the same root filesystem, no separate mount.
+Evidence and next action: `/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/`
+contains `RESUME_REVALIDATION.json`, `CONE_INVENTORY.json`, `QUOTA_CHECK.json`;
+`W4_CHECK.json` key `resume_quota_20260926` retains the next command-level work.
+On next owner resume, inspect HEAD/dirty and these records, reconcile unread
+hashes, then integrate the selected cone into the existing runner with fresh
+kernel/axiom/control/input/import/source-object binding checks. No reason to
+repeat today's saved-file hash check solely because context was compacted.
+
+The following 2026-09-24 partition record is historical; its pause authority,
+quota33%, Git and validation receipts do not describe this new checkpoint.
 Updated 2026-09-23T23:40:11.399591+00:00. SOLE MAIN / NO SUBAGENTS. Owner requested W4-A〜E planning only. Same unlimited W4 goal remains `paused`; do not recreate, complete or resume it for this edit. W4-A is completed bounded evidence, W4-B is designated current/paused, W4-C/D/E dependency-gated. Latest quota reading33% is historical2026-09-23T06:14:34UTC; not rechecked for this planning task. Execution resumes only on user instruction; technical delegation persists.
 
 ## Repository and authority

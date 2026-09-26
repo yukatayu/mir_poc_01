@@ -1,5 +1,5 @@
 # W4 physical refinement — W4-B paused / A–E partition
-Updated 2026-09-23T23:40:11.399591+00:00. SOLE MAIN / NO SUBAGENTS. Owner requests planning subdivision only. The same W4 goal remains paused and incomplete. W4-A completed scoped historical evidence; W4-B current/paused; C/D/E dependent. No goal reset, parallel goal, execution resume or W5+/Plan250-I3-4 activation.
+Updated 2026-09-26T03:28:37.412970+00:00. Same W4 resumed for read-only B revalidation; stopping at the saved checkpoint under the standing near30% quota pause instruction (current16%remaining). W4-A scoped historical evidence retained; W4-B incomplete/current/paused; C/D/E dependent. No W5+/Plan250-I3-4 activation. See RESUME latest checkpoint and W4_CHECK resume_quota_20260926.
 
 PL1/PL2/PL0 S4/S6 theory/refinement. REQ DS01/02/03/04/08 AU01/04/05/08 VF04/05; PT03/11/14 SC04/07 Q18. W1-W3/I3-3/119 retained.
 

@@ -19680,5 +19680,61 @@
       "metadata_after_validation": "Result/receipt wording only; JSON, historical preservation, exact allowed paths and diff checked before commit"
     },
     "git_receipt": "/home/codex/.local/state/mirrorea-proof-first/w4-20260924-partition/GIT_RESULT.json"
+  },
+  "resume_quota_20260926": {
+    "at": "2026-09-26T03:28:37.412970+00:00",
+    "base_head": "6d8376718e75f4c8cea385a7a23d67945dada902",
+    "start_dirty": "clean",
+    "package": "W4-B",
+    "status": "resumed, read-only revalidation completed; pausing on standing quota instruction",
+    "quota": {
+      "checked_at": "2026-09-26T03:28:37.412970+00:00",
+      "event_at": "2026-09-26T03:26:46.365Z",
+      "limit_id": "codex",
+      "window_minutes": 10080,
+      "used_percent": 84.0,
+      "remaining_percent": 16.0,
+      "resets_at": 1790424717,
+      "source": "own rollout token_count rate_limits only",
+      "action": "honor standing owner request to pause near 30% at a clean checkpoint",
+      "next_check_not_before": "2026-09-26T04:28:37.412993+00:00"
+    },
+    "evidence": {
+      "at": "2026-09-26T03:25:58.419805+00:00",
+      "base_head": "6d8376718e75f4c8cea385a7a23d67945dada902",
+      "previous_goal_turn": "no progress toward execution: explanatory answer only; resumption now authorized",
+      "scope": "saved evidence hash revalidation only, no proof/test rerun",
+      "files": 34715,
+      "conflicts": [],
+      "mismatches": [],
+      "receipts": {
+        "LEASE_BOUND_EXECUTION.json": "f00b40d58ee0babb453a9174e2ddc010958b62e74b76ef5382f70fa1de81ab78",
+        "KNOWN_LEASE_BOUND_EXECUTION.json": "39ef0ab235a9ae8ebc31b5ccc665c5d36a79bc89f7844ec84bb46e797851a2fb",
+        "WIRE_LEASE_BOUND_EXECUTION.json": "0459978ca3afeb457a557080537589c4b34ef0b9bc44d7e3ba7d9af947b15cb6"
+      }
+    },
+    "cone": {
+      "modules": 204,
+      "new_repo_modules": 74,
+      "no_direct_full_hash_record": 37,
+      "scope": "import dependency inventory; not proof, full reading, integration or acceptance"
+    },
+    "work_root": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration",
+    "live_oracles": [],
+    "live_builds": [],
+    "next": "Read/reconcile the 37 unmatched full-read hashes; preserve the 74 missing modules of the 204-module current normal/known/wire decoder cone with exact source/import correspondence; extend existing reference runner and perform fresh scoped verification/review. Do not copy historical audit/runner modules or reuse old outputs as fresh verification.",
+    "new_proof_or_network_validation": false,
+    "docs_validation": {
+      "at": "2026-09-26T03:32:47.510070+00:00",
+      "command": [
+        "make",
+        "docs"
+      ],
+      "exit": 0,
+      "log": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/MAKE_DOCS.log",
+      "log_sha256": "2a31cd1458be17326242567ff65f1836d6e66b1fc64aba4bfee461c55c4b8bcd",
+      "scope": "W4-B resume/quota checkpoint LAB metadata only"
+    },
+    "git_receipt": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/GIT_RESULT.json"
   }
 }

@@ -29619,5 +29619,45 @@
     "role": "W4 A–E planning-only baseline read; no all-corpus or source-proof claim",
     "status": "full",
     "at": "2026-09-23T23:40:55.392814+00:00"
+  },
+  {
+    "path": "scripts/proof_first_reference_source_check.py",
+    "sha256": "255e4138b0da82d0405832b80c8a2e8f7e1bbd0e498920dc43e8f1d30a552322",
+    "range": "1-323",
+    "role": "W4-B resume dependency/operation inspection; no broad corpus completion",
+    "status": "full",
+    "at": "2026-09-26T03:28:37.412970+00:00"
+  },
+  {
+    "path": "sub-agent-pro/mirrorea-proof-first-handoff-v1/protocols/READING.md",
+    "sha256": "843b992777ac47c0b72823b77c9a9bb603ab3c58d529ec8e6841818d6dde5f30",
+    "range": "1-31",
+    "role": "W4-B resume dependency/operation inspection; no broad corpus completion",
+    "status": "full",
+    "at": "2026-09-26T03:28:37.412970+00:00"
+  },
+  {
+    "path": ".docs/oracle-chatgpt-pro-operations.md",
+    "sha256": "ca6bc821b6d52f112956540e6c14965d1e10c099128a43975dcc63d9f4ecf7c9",
+    "range": "1-172",
+    "role": "W4-B resume dependency/operation inspection; no broad corpus completion",
+    "status": "full",
+    "at": "2026-09-26T03:28:37.412970+00:00"
+  },
+  {
+    "path": "/home/codex/.codex/docs/oracle-chatgpt-pro.md",
+    "sha256": "f482a8dcef56b8ad7529f8ce17e1cc39f96fe4a48ec7289f90cd216d9124d4e7",
+    "range": "1-269",
+    "role": "W4-B resume dependency/operation inspection; no broad corpus completion",
+    "status": "full",
+    "at": "2026-09-26T03:28:37.412970+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260922/build_wire_lease_bound_root.py",
+    "sha256": "1d775f8d06401fab98187919daabecff96cd7e62d089cc02a45aefbd97866d5a",
+    "range": "1-61",
+    "role": "W4-B resume dependency/operation inspection; no broad corpus completion",
+    "status": "full",
+    "at": "2026-09-26T03:28:37.412970+00:00"
   }
 ]
