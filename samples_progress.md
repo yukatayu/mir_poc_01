@@ -27,7 +27,7 @@ W4は、通常sourceと実ownerの状態・資源を同じ履歴から対応付�
 
 2026-09-27の追加owner指示で、今回の実行も残量による停止を外して同じW4を継続します。リセットはownerが行い、主担当は操作しません。W5+とPlan250/I3-4は開始しません。過去のquota停止・検査記録はReport2614に保持します。
 
-W4-B検証結果: 206依存sourceを原本と同一bytesで保存し、fresh Lean検査と公理監査を完了しました。既存runnerのV2モデル278command・236module/22215所有宣言監査、native準備235command、修正後の実process検査68command（15profile/53拒否control）が全体exit0で完走しました。段階ごとに9169/9973/34658入力束縛と実ログを照合しています。保存証拠と現行sourceの役割分離、別名参照・期待値衝突・途中失敗の反例も検査済みです。Bは最終境界review・文書/Git統合中で、C/D/Eは依存待ちです。一般証明は選択モデルについて、実processは特権private-pipeの有限証拠についてであり、実network・認証・秘密・復旧の保証へ広げません。
+W4-B検証結果: 206依存sourceを原本と同一bytesで保存し、fresh Lean検査と公理監査を完了しました。既存runnerのV2モデル278command・236module/22215所有宣言監査、native準備235command、修正後の実process検査68command（15profile/53拒否control）が全体exit0で完走しました。段階ごとに9169/9973/34658入力束縛と実ログを照合しています。保存証拠と現行sourceの役割分離、別名参照・期待値衝突・途中失敗の反例も検査済みです。コード・証明・検査手順は9d86052dでcommit/push・remote一致を確認済みです。最後の境界Oracle reviewはCloudflareエラー後の再試行もUnknown errorで終了し、復旧確認待ちです。Bは未完了、C/D/Eは依存待ちです。一般証明は選択モデルについて、実processは特権private-pipeの有限証拠についてであり、実network・認証・秘密・復旧の保証へ広げません。
 
 | W3 evidence | Reproduction | Remaining boundary |
 |---|---|---|

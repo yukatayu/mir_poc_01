@@ -1,8 +1,8 @@
 {
   "schema": "proof-first-w4-check-v1",
-  "timestamp": "2026-09-27T13:02:42.703383+00:00",
+  "timestamp": "2026-09-27T13:15:50.144382+00:00",
   "base_head": "5d7c13a821c912d14c347775e23493a77f790768",
-  "status": "B final technical checks passed; final scope review/docs/Git integration pending",
+  "status": "Code/proof/observed workflow committed and pushed; B final scope review unavailable after backend errors; B not closed",
   "work_root": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration",
   "publication_component": {
     "modules": {
@@ -6944,10 +6944,10 @@
     "pending": "RunLiteralUnified tool81371; JointWorkCursor written not yet compiled; same-history full work/driver/monitor coupling remains"
   },
   "current_checkpoint": {
-    "at": "2026-09-27T13:02:42.703383+00:00",
+    "at": "2026-09-27T13:15:50.144382+00:00",
     "package": "W4-B",
-    "status": "B final technical checks passed; final scope review/docs/Git integration pending",
-    "next": "Collect final B boundary review, consolidated docs validation and own Git integration; then C foundations before D/E."
+    "status": "Code/proof/observed workflow committed and pushed; B final scope review unavailable after backend errors; B not closed",
+    "next": "Browser repair then same frozen final boundary review; dependent C activation held. Independent required reading can continue."
   },
   "oracle37_waiting_interior": {
     "receipt": {
@@ -19474,7 +19474,7 @@
   "integration_20260926": {
     "at": "2026-09-26T07:02:51.918904+00:00",
     "base_head": "ad9256c6e276634118de1fb6a40bddf6171c9f38",
-    "status": "B final technical checks passed; final scope review/docs/Git integration pending",
+    "status": "Code/proof/observed workflow committed and pushed; B final scope review unavailable after backend errors; B not closed",
     "work_root": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration",
     "quota_policy": "2026-09-27の追加owner指示で、今回の実行も残量による停止を外して同じW4を継続します。リセットはownerが行い、主担当は操作しません。W5+とPlan250/I3-4は開始しません。過去のquota停止・検査記録はReport2614に保持します。",
     "source_manifest": "docs/proof-first/W4_SOURCE_MANIFEST.json",
@@ -19504,7 +19504,7 @@
       },
       "outcome": "failed manual-login timeout; no answer, user notified asynchronously; do not auto-resend before authentication is available"
     },
-    "next": "Collect final B boundary review, consolidated docs validation and own Git integration; then C foundations before D/E.",
+    "next": "Browser repair then same frozen final boundary review; dependent C activation held. Independent required reading can continue.",
     "oracle_retry": {
       "at": "2026-09-26T05:23:42.612748+00:00",
       "session": "mir-w4-integration-design-retry1",
@@ -41080,7 +41080,7 @@
       "next_status_after": "2026-09-27T13:04:03.640320+00:00",
       "scope": "single read-only frozen current implementation review; no outer deadline or paid fallback",
       "tool_session": 83656,
-      "status": "running",
+      "status": "terminal actual backend error; final not recovered; user recovery question pending",
       "packet": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/oracle-b-closeout-review",
       "wrapper_exit": 1,
       "wrapper_error": "prompt DOM detection timeout",
@@ -41095,7 +41095,24 @@
         "error": "backend Cloudflare response",
         "promptHashesMatched": true,
         "next_status_after": "2026-09-27T13:09:25.891Z"
-      }
+      },
+      "error_receipt": {
+        "at": "2026-09-27T13:14:01.779Z",
+        "target": "BDE41F8EDA6FACFF78B4D25E86F661FC",
+        "alerts": [
+          "Unknown error\nRetry"
+        ],
+        "scope": "explicit response error; not latency or successful Oracle completion"
+      },
+      "retry_draft_send": {
+        "at": "2026-09-27T13:10:12.603Z",
+        "target": "BDE41F8EDA6FACFF78B4D25E86F661FC",
+        "clicked": true,
+        "allHashesMatched": true,
+        "reason": "Explicit failed response Retry restored original unsent draft; send once in same tab",
+        "next_status_after": "2026-09-27T13:13:12.603Z"
+      },
+      "next": "No blind retries or polling of failed answer. After user confirms browser repair, submit/retry the same frozen packet and collect final."
     },
     "docs_final_pending_closeout": {
       "at": "2026-09-27T13:08:37.212010+00:00",
@@ -41116,6 +41133,46 @@
       "reason": "Preserve exact reviewed/validated source bytes and declared header extraction; no behavior defect",
       "command": "git -c core.whitespace=-blank-at-eof diff --cached --check",
       "exit": 0
+    },
+    "code_git_integration": {
+      "at": "2026-09-27T13:12:46.860284+00:00",
+      "commit": "9d86052d4f3982a2ddb077a610d02abed4f08327",
+      "base": "ad9256c6e276634118de1fb6a40bddf6171c9f38",
+      "files": 167,
+      "commit_exit": 0,
+      "push_exit": 0,
+      "push_tool_session": 77063,
+      "status": "code/proof/workflow integrated; B boundary review still pending; no phase acceptance",
+      "remote_parity": "git ls-remote origin refs/heads/main matched exact commit",
+      "remote_check_session": 73856,
+      "remote_check_exit": 0
+    },
+    "recovery_state_validation": {
+      "first": {
+        "at": "2026-09-27T13:20:49.562439+00:00",
+        "command": "make docs",
+        "tool_session": 88320,
+        "whole_exit": 2,
+        "log": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/DOCS_B_RECOVERY_STATE.log",
+        "sha256": "86876cae0a04e3890d17539705ae19cef0733248e61859d155b98a5e5989e72a",
+        "failure": "progress.md last-updated header older than new dated progress log; other three validators passed"
+      },
+      "corrected": {
+        "at": "2026-09-27T13:25:27.354259+00:00",
+        "command": "python3 scripts/validate_docs.py",
+        "tool_session": 28899,
+        "whole_exit": 0,
+        "log": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/DOCS_B_RECOVERY_HEADER_FIX.log",
+        "sha256": "9411ce6df198430b0df20ebab3882faf2425318d3ed1ee85e5f11ed17175a116",
+        "scope": "Header-only repair; earlier make docs other validators passed; final receipt metadata appended afterwards"
+      }
+    },
+    "remaining_review_blocker": {
+      "first_recorded": "2026-09-27T13:14:01.779Z",
+      "status": "user recovery confirmation pending; actual response error, not normal live waiting",
+      "required": "final B scope/Canon-first advisory review before B closure/C activation",
+      "question": "Dedicated visible Chrome normal ChatGPT request usability",
+      "no_account_reset": true
     }
   },
   "header_history": [
@@ -41414,6 +41471,7 @@
       "live_oracle": null
     }
   ],
-  "current_head": "ad9256c6e276634118de1fb6a40bddf6171c9f38",
-  "history_key_policy": "Dated component entries and previous header_history are historical; current execution is integration_20260926/current_checkpoint/RESUME, not old total_current or prior component live statuses."
+  "current_head": "9d86052d4f3982a2ddb077a610d02abed4f08327",
+  "history_key_policy": "Dated component entries and previous header_history are historical; current execution is integration_20260926/current_checkpoint/RESUME, not old total_current or prior component live statuses.",
+  "current_head_note": "9d86052d is code/proof evidence cut; final docs-only continuation commit is recorded by Git and external I/B_RECOVERY_GIT.json after commit"
 }

@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-09-26 17:58 JST
+最終更新: 2026-09-27 22:20 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -62,7 +62,7 @@ W4; W5+/alpha are not active. Plan250 remains separately paused after I3-3.
 
 2026-09-27の追加owner指示で、今回の実行も残量による停止を外して同じW4を継続します。リセットはownerが行い、主担当は操作しません。W5+とPlan250/I3-4は開始しません。過去のquota停止・検査記録はReport2614に保持します。
 
-W4-B検証結果: 206依存sourceを原本と同一bytesで保存し、fresh Lean検査と公理監査を完了しました。既存runnerのV2モデル278command・236module/22215所有宣言監査、native準備235command、修正後の実process検査68command（15profile/53拒否control）が全体exit0で完走しました。段階ごとに9169/9973/34658入力束縛と実ログを照合しています。保存証拠と現行sourceの役割分離、別名参照・期待値衝突・途中失敗の反例も検査済みです。Bは最終境界review・文書/Git統合中で、C/D/Eは依存待ちです。一般証明は選択モデルについて、実processは特権private-pipeの有限証拠についてであり、実network・認証・秘密・復旧の保証へ広げません。
+W4-B検証結果: 206依存sourceを原本と同一bytesで保存し、fresh Lean検査と公理監査を完了しました。既存runnerのV2モデル278command・236module/22215所有宣言監査、native準備235command、修正後の実process検査68command（15profile/53拒否control）が全体exit0で完走しました。段階ごとに9169/9973/34658入力束縛と実ログを照合しています。保存証拠と現行sourceの役割分離、別名参照・期待値衝突・途中失敗の反例も検査済みです。コード・証明・検査手順は9d86052dでcommit/push・remote一致を確認済みです。最後の境界Oracle reviewはCloudflareエラー後の再試行もUnknown errorで終了し、復旧確認待ちです。Bは未完了、C/D/Eは依存待ちです。一般証明は選択モデルについて、実processは特権private-pipeの有限証拠についてであり、実network・認証・秘密・復旧の保証へ広げません。
 
 2026-09-24のowner指定で、同じW4を **W4-A（限定証拠・完了済み）→W4-B（repo統合・現在地、進行中）→W4-C（残る基礎条件）→W4-D（Rust/Core/private QUIC接続）→W4-E（実network検査・残項目回収・W4完了判定）** に分割しました。C/D/Eは依存待ちです。Eは元W4と前段の残項目を照合しますが、C/Dの前提をEへ先送りして実装を進めません。完了条件・推奨model/effort・R01〜R12残項目台帳は `plan/proof-first-foundation-correspondence.md` の「W4-A〜W4-E 作業区切り」を参照してください。分割当日は計画整理のみでした。2026-09-26のowner指示で同じW4 goalを再開しています。
 
@@ -483,3 +483,5 @@ The authorized roadmap is paused, not blocked, stale or closed.
 - 2026-09-26T03:28:37.412970+00:00: W4-B再開照合で保存済み34715ファイルのhash一致、204module依存閉包（未収録74）を確認。新規証明・実装検査は未実行。週間残量16%のため既存owner指定に従いBでpause、再開点を保存。
 
 - 2026-09-26 14:28 JST: W4-Bをowner指示で再開。206依存sourceの新規kernel検査、新規76の7138所有宣言監査と206/206既読hashを確認。既存runner統合は検査中、B未完。9/27以降に残量30%停止を復帰。
+
+- 2026-09-27 22:16 JST: W4-Bモデル/native/実processの全体検査と入力照合を完了、9d86052dを通常push・remote一致確認。最後の境界Oracleは実エラーで未回収、B/C移行は復旧待ち。

@@ -1,6 +1,6 @@
 # Current Task Map (LAB)
 
-最終更新: 2026-09-27 22:02 JST
+最終更新: 2026-09-27 22:16 JST
 
 **Canon notice:** `mirrorea_canon/` is normative. Everything outside
 `mirrorea_canon/` is LAB; if LAB conflicts with canon, canon wins. This snapshot
@@ -23,7 +23,7 @@ Canon position: `mirrorea_canon/adr/ADR-0043.md`. LAB dependency memory: `plan/p
 
 W4-Aの保存済み証拠は通常3profile/23control、確定失敗4/14、結果不明8/16と選択モデルの一般Lean命題です。privileged pipe/capture/compiler TCBに条件付きで、full physical/QUIC/authentication/秘密/復旧の保証ではありません。検証runner全体のexit0、全必須check・入力/import/source-object/hash照合、子processの期待statusとの一致が必要です。注入故障・拒否反例の期待失敗を成功終了へ変えず、途中の成功markerだけでは受理しません。sourceClaim/sourceWireClaimのprivate locator aliasは保持され、canonical-tag injectivityは主張しません。
 
-Exact evidence: `docs/proof-first/RESUME.md`, `docs/proof-first/CURRENT_GOAL.md`, `docs/proof-first/W4_CHECK.json`, Report2614. W4-B検証結果: 206依存sourceを原本と同一bytesで保存し、fresh Lean検査と公理監査を完了しました。既存runnerのV2モデル278command・236module/22215所有宣言監査、native準備235command、修正後の実process検査68command（15profile/53拒否control）が全体exit0で完走しました。段階ごとに9169/9973/34658入力束縛と実ログを照合しています。保存証拠と現行sourceの役割分離、別名参照・期待値衝突・途中失敗の反例も検査済みです。Bは最終境界review・文書/Git統合中で、C/D/Eは依存待ちです。一般証明は選択モデルについて、実processは特権private-pipeの有限証拠についてであり、実network・認証・秘密・復旧の保証へ広げません。
+Exact evidence: `docs/proof-first/RESUME.md`, `docs/proof-first/CURRENT_GOAL.md`, `docs/proof-first/W4_CHECK.json`, Report2614. W4-B検証結果: 206依存sourceを原本と同一bytesで保存し、fresh Lean検査と公理監査を完了しました。既存runnerのV2モデル278command・236module/22215所有宣言監査、native準備235command、修正後の実process検査68command（15profile/53拒否control）が全体exit0で完走しました。段階ごとに9169/9973/34658入力束縛と実ログを照合しています。保存証拠と現行sourceの役割分離、別名参照・期待値衝突・途中失敗の反例も検査済みです。コード・証明・検査手順は9d86052dでcommit/push・remote一致を確認済みです。最後の境界Oracle reviewはCloudflareエラー後の再試行もUnknown errorで終了し、復旧確認待ちです。Bは未完了、C/D/Eは依存待ちです。一般証明は選択モデルについて、実processは特権private-pipeの有限証拠についてであり、実network・認証・秘密・復旧の保証へ広げません。
 
 ## ordered self-driven packages
 
@@ -32,7 +32,7 @@ Exact evidence: `docs/proof-first/RESUME.md`, `docs/proof-first/CURRENT_GOAL.md`
 | Package / macro position | Required result / first consumer | Startability / suggested model / rough estimate |
 |---|---|---|
 | W4-A / Macro1/2/5 | 保存済み限定モデルと実process証拠をB/Cへ渡す | 完了済みの限定範囲。既存結果を保持 |
-| W4-B / Macro2/5 | 外部proof/referenceを既存repo runnerへ統合しfresh再現→C/D | **現在地・進行中、B未完了**。GPT-6 Astra high。B+C合計6–18hの旧暫定値 |
+| W4-B / Macro2/5 | 外部proof/referenceを既存repo runnerへ統合しfresh再現→C/D | **現在地・最終review復旧待ち、B未完了**。コード統合/push済み。GPT-6 Astra high。B+C合計6–18hの旧暫定値 |
 | W4-C / Macro1/5 | relative admission、全entry/current auth/実namespaceの必要条件を閉じる→D | 後段依存。GPT-6 Astra high、難所xhigh。B+C合計内 |
 | W4-D / Macro3/6 | source→checked Core→生成edge→実private QUIC→観測→E | 後段依存。境界Astra high、確定実装GPT-6 Sol high。旧暫定10–24h |
 | W4-E / Macro3/6 close | 実network正常/障害/観測・迂回・I3回帰・119対応・全残項目回収・W4候補統合 | 後段依存。検査Sol high、合成/完了判定Astra high。旧暫定6–14h |

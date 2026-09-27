@@ -11,8 +11,9 @@ Historical proof Oracle1–64 outcomes retained; planning-only reviews and colle
 
 After user continuation: W4-B mirrors the external coherent proof/reference cone into the existing repo runner; W4-C closes required relative admission/all physical entries/current auth/namespace; W4-D connects existing Rust/Core/privateQUIC; W4-E completes fresh network/regression/119disposition/final integration and reconciles all inherited/new W4 residuals. Never move C/D prerequisites to E to unblock the first dependent internal implementation, generated path or evidentiary claim. The plan W4-A〜E section gives exits/models and R01–R12 traceable residual ownership. No newly required owner choice for already delegated reversible internal work once gates pass. Public/production/Canon/keys remain reserved. Mandatory historical examples through612full; next remaining corpus from READ_LEDGER; broad corpus remains incomplete. W4 total remaining estimate24–60activehours, low confidence.
 
-W4-B検証結果: 206依存sourceを原本と同一bytesで保存し、fresh Lean検査と公理監査を完了しました。既存runnerのV2モデル278command・236module/22215所有宣言監査、native準備235command、修正後の実process検査68command（15profile/53拒否control）が全体exit0で完走しました。段階ごとに9169/9973/34658入力束縛と実ログを照合しています。保存証拠と現行sourceの役割分離、別名参照・期待値衝突・途中失敗の反例も検査済みです。Bは最終境界review・文書/Git統合中で、C/D/Eは依存待ちです。一般証明は選択モデルについて、実processは特権private-pipeの有限証拠についてであり、実network・認証・秘密・復旧の保証へ広げません。
+W4-B検証結果: 206依存sourceを原本と同一bytesで保存し、fresh Lean検査と公理監査を完了しました。既存runnerのV2モデル278command・236module/22215所有宣言監査、native準備235command、修正後の実process検査68command（15profile/53拒否control）が全体exit0で完走しました。段階ごとに9169/9973/34658入力束縛と実ログを照合しています。保存証拠と現行sourceの役割分離、別名参照・期待値衝突・途中失敗の反例も検査済みです。コード・証明・検査手順は9d86052dでcommit/push・remote一致を確認済みです。最後の境界Oracle reviewはCloudflareエラー後の再試行もUnknown errorで終了し、復旧確認待ちです。Bは未完了、C/D/Eは依存待ちです。一般証明は選択モデルについて、実processは特権private-pipeの有限証拠についてであり、実network・認証・秘密・復旧の保証へ広げません。
 
 Model/preparation/physical receipts and final path-review dispositions are in
-RESUME/W4_CHECK. Final B scope review running; final docs/Git due. Heavy Lean
+RESUME/W4_CHECK. Final B scope review failed with backend errors; browser recovery pending.
+Code integrated/pushed; final status closure awaits review. No C activation. Heavy Lean
 serial -j1 AS4GiB core0; standard logical axioms only; no source semantic change.

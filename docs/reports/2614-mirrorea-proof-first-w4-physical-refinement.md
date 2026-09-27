@@ -2795,3 +2795,43 @@ bytes are retained; scoped -blank-at-eof check passes. This exception is cosmeti
 not a skipped semantic test. Final scope Oracle wrapper83656 exits1; actual visible
 response has backend Cloudflare error. Full prompt/manifest matched, same alert
 Retry clicked once13:06:25UTC, no new conversation/settings/fallback. Final pending.
+
+
+### 2026-09-27T13:16:50.508690+00:00 — W4-B integrated code checkpoint, review unavailable
+
+Commit9d86052d4f3982a2ddb077a610d02abed4f08327 contains167 own files; normal
+push77063exit0, remote exact match73856exit0. No force/reset/clean or unrelated
+changes. Final source/capture/model results above are unchanged. make docs63898
+wholeexit0; default diffcheck2 for two inherited EOF blanks, documented scoped
+check0. Final Oracle is NOT success: actual Cloudflare response, same alert Retry
+restored original draft; matching unchanged packet sent once13:10:12UTC. Actual
+response at13:14:01UTC is Unknown error/Retry. Main requested user verification
+of normal dedicated Chrome; no settings/key/profile/account-reset operations.
+There is no currently generating review job to poll or deadline-cancel.
+
+Required reading continued:27sample text/deployment files,26historical/generated
+Lean stubs and current AbortFlow/AddressFlow/M8formal source read in full. The
+old True/trivial and archived sorry files are not imported or counted as W4proofs.
+M8case-enumerated rfl evidence remains distinct from C general admissibility;
+Abort/Address exclude authority/resources/physical peer provenance. Wider corpus
+remains incomplete. R09 is mapped, not discharged.
+
+Plan, Documentation, project-status, progress, tasks, samples_progress and RESUME
+are synchronized to B final-review recovery wait; no new report/Canon/119status.
+B candidate technical integration is saved; B closure and C/D/E remain unmet.
+Next: user confirms Oracle backend repair, reuse exact frozen review packet,
+recover/dispose final, close B scoped LAB status, then start C. The earlier45–90min
+estimate excluded this new service failure; remaining wall time cannot be bounded
+until recovery. Same active W4 goal retained, no quota stop, no sub-agent session.
+
+2026-09-27T13:25:27.354259+00:00 continuation-state validation: make docs88320exit2
+for stale progress.md header (other validators passed); header corrected using
+actual JST clock, validate_docs28899exit0 with1764reports. First failure retained
+in DOCS_B_RECOVERY_STATE.json; correction receipt DOCS_B_RECOVERY_HEADER_FIX.json.
+Additional PublicationSession/SourcePureLowering/GeneralLabels full reads preserve
+conditional exactness, pure strictness and law-versus-policy-authority boundaries.
+No new theorem/implementation/run acceptance follows. Final metadata-only own
+commit/push follows9d86052d; exact Git receipt I/B_RECOVERY_GIT.json. Main holds
+dependent C activation until required boundary review is recovered; browser repair
+question remains pending. This is an actual required-tool failure, not quota,
+elapsed-time, proof difficulty or a W4 completion claim.

@@ -3,8 +3,10 @@
 Updated 2026-09-27T13:03:57.686842+00:00. Same active full-W4 goal; sole main, NO SUBAGENTS.
 Owner2026-09-27 waived quota stopping again for this run. Only owner resets account.
 No W5+/alpha/Plan250-I3-4 activation, Canon acceptance, public/production/key changes.
-HEAD ad9256c6e276634118de1fb6a40bddf6171c9f38; initial clean, all dirt task-owned.
-No new commit/push yet; no reset/clean/cache deletion/hostshare/paidfallback/notifications.
+BASE ad9256c6e276634118de1fb6a40bddf6171c9f38; initial clean.
+Code/proof/workflow commit9d86052d4f3982a2ddb077a610d02abed4f08327 pushed origin/main,
+remote parity checked73856exit0. Metadata-only continuation follows that code commit; exact latest commit/push/parity
+receipt is I/B_RECOVERY_GIT.json (written after commit). Any later dirt must be inspected; no reset/clean/cache deletion/hostshare/paidfallback/notifications.
 
 I=/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration
 W=/home/codex/.local/state/mirrorea-proof-first/w4-20260922
@@ -21,17 +23,20 @@ relative admission/all-entry/current-auth/actual-peer/namespace/custody and plan
 Rust/Core/queue/memory premise correspondence before D implementation; E network,
 regression/119/residual integration. C/D prerequisites cannot be deferred to E.
 
-## LIVE Oracle — final B boundary review, no implementation re-review
+## Oracle actual failure — final B boundary review unavailable
 I/oracle-b-closeout-review, slug mir-w4-b-closeout-review, tool83656 PID2747518.
 Launched2026-09-27T13:01:03.640320+00:00. Wrapper83656exit1; actual backend
 Cloudflare error. Full prompt/hash matched; same-response Retry clicked once
-13:06:25UTC; next check>=13:09:25.891UTC via node I/oracle-b-closeout-review/inspect.mjs.
+13:06:25UTC, restored draft. Full unchanged draft sent once13:10:12UTC.
+At13:14:01UTC actual response is "Unknown error / Retry", no final answer.
 Exact target BDE41F8EDA6FACFF78B4D25E86F661FC/CDP33569.
+User recovery question pending. No generating job to poll; no blind repeated send.
+After confirmed repair, reuse frozen packet, inspect actual delivery and recover final.
 Question2330f40901f29f83b911257034e543b398c38b6617364df1644fd7f96faf2cff,
 manifest a9a8af489c72d3297989160dc758c2c193b8f86ab4c14cd16d4688dcfc93f496.
 9frozenfiles82086bytes, Canon/partition/actual receipts/dirty identities, no secrets.
 Visible DISPLAY:0/current model owner-confirmed6Pro; no automatic model verification.
-Read wrapper log/session at interval; wrapper timeout/error does not imply actual
+For a future normal run, check at>=180s; wrapper timeout/error does not imply actual
 browser job failure. Preserve exact submitted tab; no resending a generating job.
 Prior Oracle jobs ALL FINAL; no repoll. Path review final e20760b6f0edad03fb9350c82d4422bb5a91d4cf7a714a7decddf3e8fbea48d1
 found no remaining production correction. DISPOSITIONS retained.
@@ -62,18 +67,26 @@ found no remaining production correction. DISPOSITIONS retained.
  separated. Finite15profiles are not actual QUIC/auth/privacy/recovery guarantees.
 
 ## Next command / integration gates
-Collect final B review and dispose findings. Consolidate docs, make docs, own diff
-and staged checks, normal no-gpg-sign commit and authorized normal push. Only then
+Code integration and push are complete. Final boundary review is the remaining
+B acceptance prerequisite; user browser repair is pending. After final review,
+dispose findings and synchronize final B/C status and metadata. Only then
 close B as LAB integrated candidate and proceed C, same W4 goal. R01 scoped cone
-technical evidence is ready; R11 B integration due. R02–R10/R12 remain explicitly
+technical evidence is ready; R11 final B review/status closure due. R02–R10/R12 remain explicitly
 open per plan/Report2614; don't use classification counts as completeness.
 READ_LEDGER records full/equivalent source hashes including206manifest targets;
 23old read paths are historical hash-backed records, not current readable paths.
 Historical example612 and ordinary .mir/companion MD read; broad JSON/text corpus
 incomplete. W1Abort/Address review and M8 effective-label gap remain R09 and must
 be resolved before dependent use. No new broad plan adopted from unread corpus.
-Current latest estimate B~90%,45–90min conditional. Prior historical failed and
+Current mandatory review is unavailable after actual backend errors; dependent
+C work is held. User repair confirmation is pending; do not mark W4 achieved or
+reset/pause its goal without owner direction. Resume exact frozen review after repair.
+Latest estimate B~90%; prior45–90min assumed no new blockers. Now final-review
+backend failure makes completion time dependent on browser service recovery. Prior historical failed and
 successful runs remain in W4_CHECK/Report2614; never relabel them as current.
 Report2614 only. make docs63898exit0; DOCS_B_FINAL_PENDING.json. Own167files
-staged. Default staged diffcheck has2 inherited EOF blanks; explicitly preserve
-source bytes, -blank-at-eof check passed. Final closeout metadata not yet staged.
+committed/pushed. Default staged diffcheck has2 inherited EOF blanks; explicitly preserve
+source bytes, -blank-at-eof check passed. Later make docs88320exit2 found only stale
+progress.md header; corrected at22:20JST, validate_docs28899exit0. Exact receipts
+DOCS_B_RECOVERY_STATE.json / DOCS_B_RECOVERY_HEADER_FIX.json. Final receipt metadata
+appended afterwards; no code change or further baseline rerun. No live builds.

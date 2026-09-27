@@ -1333,3 +1333,22 @@ are final. R01 technical preservation/reproduction evidence is ready; R11 final
 docs/Git remains due. R02–R10/R12 retain C/D/E dependencies. No new roadmap or
 Canon acceptance; broad mandatory corpus is incomplete. Exact current receipts
 and prior failures are retained in W4_CHECK.integration_20260926 and Report2614.
+
+
+### 2026-09-27T13:16:50.508690+00:00 — W4-B code integration and actual Oracle failure
+
+167 task-owned files integrated at9d86052d4f3982a2ddb077a610d02abed4f08327,
+normal push77063exit0 and remote parity73856exit0. make docs63898exit0; two frozen
+EOF blanks are retained explicitly, all other scoped whitespace checks passed.
+Final boundary/Canon-first review did not return: wrapper DOM timeout, actual
+Cloudflare response, same-message Retry restoring draft, unchanged draft sent
+once, then actual Unknown error. No normal generating job was cancelled or
+resent for latency. User browser recovery question pending; final review is
+not successful and B is not closed. C/D/E dependent work remains held.
+
+R09 reading confirms existing Abort/Address theorems cover arithmetic completion
+and alias-aware policy pullback, not current authority/resources/peer identity.
+M8 formal universe is explicitly finite case-enumerated structural evidence and
+cannot discharge C generic rule/checker completeness.26old/generated Lean stubs
+(True/trivial or archived sorry) are excluded from W4 proof evidence; full reading
+is not proof acceptance. No Canon or source semantics changed; no extra roadmap.

@@ -40329,5 +40329,245 @@
     "status": "full",
     "read_at": "2026-09-27T13:11:19.917648+00:00",
     "role": "W4 R09 dependency reading; arithmetic abort/policy pullback/alias-aware lowering only; no current-authority/resource/OS claim or independent review closure"
+  },
+  {
+    "path": "samples/lean/clean-near-end/01_authorized_roll_publish_handoff/01_authorized_roll_publish_handoff.lean",
+    "sha256": "73c463a34bb406edc193524ace46c952b9a31d27a425b3d3b3f7829bd05ec200",
+    "range": "all",
+    "status": "full",
+    "read_at": "2026-09-27T13:12:46.860284+00:00",
+    "role": "Mandatory historical/generated skeleton corpus; True/trivial or archived sorry stubs are NOT W4 proof evidence and not imported by the selected proof manifest"
+  },
+  {
+    "path": "samples/lean/clean-near-end/01_peterson_sc_pass/01_peterson_sc_pass.lean",
+    "sha256": "4f1c6f0fa888b28758c78312f93d355b22425aa431d7fed3d38c48b8236dd48c",
+    "range": "all",
+    "status": "full",
+    "read_at": "2026-09-27T13:12:46.860284+00:00",
+    "role": "Mandatory historical/generated skeleton corpus; True/trivial or archived sorry stubs are NOT W4 proof evidence and not imported by the selected proof manifest"
+  },
+  {
+    "path": "samples/lean/clean-near-end/01_stage_stable_later_minimal/01_stage_stable_later_minimal.lean",
+    "sha256": "d81bd4e400893232396a1abaa9318e201f8a749110bb9d8baab8b699d4ad5864",
+    "range": "all",
+    "status": "full",
+    "read_at": "2026-09-27T13:12:46.860284+00:00",
+    "role": "Mandatory historical/generated skeleton corpus; True/trivial or archived sorry stubs are NOT W4 proof evidence and not imported by the selected proof manifest"
+  },
+  {
+    "path": "samples/lean/clean-near-end/02_missing_witness_rejected/02_missing_witness_rejected.lean",
+    "sha256": "731cde5da692e1b2933498d267526bb3f2f33bfb7533ef37c3e2fcfd364a273a",
+    "range": "all",
+    "status": "full",
+    "read_at": "2026-09-27T13:12:46.860284+00:00",
+    "role": "Mandatory historical/generated skeleton corpus; True/trivial or archived sorry stubs are NOT W4 proof evidence and not imported by the selected proof manifest"
+  },
+  {
+    "path": "samples/lean/clean-near-end/02_peterson_relaxed_counterexample/02_peterson_relaxed_counterexample.lean",
+    "sha256": "faa36b9b1bc8ca15437bc55d612b6f23c2a790c04baf0dcd34f053d14101d613",
+    "range": "all",
+    "status": "full",
+    "read_at": "2026-09-27T13:12:46.860284+00:00",
+    "role": "Mandatory historical/generated skeleton corpus; True/trivial or archived sorry stubs are NOT W4 proof evidence and not imported by the selected proof manifest"
+  },
+  {
+    "path": "samples/lean/clean-near-end/02_published_witnessed_mode_bridge/02_published_witnessed_mode_bridge.lean",
+    "sha256": "a3ff3697ba1a5d969d2e0432f7471a0826c0fc4efaa2d3c7a7e85af432c6a979",
+    "range": "all",
+    "status": "full",
+    "read_at": "2026-09-27T13:12:46.860284+00:00",
+    "role": "Mandatory historical/generated skeleton corpus; True/trivial or archived sorry stubs are NOT W4 proof evidence and not imported by the selected proof manifest"
+  },
+  {
+    "path": "samples/lean/clean-near-end/03_broken_mutex_counterexample/03_broken_mutex_counterexample.lean",
+    "sha256": "0820a73c9cf0dd10f33b2ba4aae87fa584246ead1804361901f3dc9ba80b989e",
+    "range": "all",
+    "status": "full",
+    "read_at": "2026-09-27T13:12:46.860284+00:00",
+    "role": "Mandatory historical/generated skeleton corpus; True/trivial or archived sorry stubs are NOT W4 proof evidence and not imported by the selected proof manifest"
+  },
+  {
+    "path": "samples/lean/clean-near-end/03_handoff_before_publication_rejected/03_handoff_before_publication_rejected.lean",
+    "sha256": "e7aba666b450d3040bf630351a7425a13f3bcf969a75716de8c1b7a918ac6d2d",
+    "range": "all",
+    "status": "full",
+    "read_at": "2026-09-27T13:12:46.860284+00:00",
+    "role": "Mandatory historical/generated skeleton corpus; True/trivial or archived sorry stubs are NOT W4 proof evidence and not imported by the selected proof manifest"
+  },
+  {
+    "path": "samples/lean/clean-near-end/03_label_flow_rejected/03_label_flow_rejected.lean",
+    "sha256": "4b03bf95919ecc33ad9db635139d37cb6ef99f2c75891af4548f571dc6ddd284",
+    "range": "all",
+    "status": "full",
+    "read_at": "2026-09-27T13:12:46.860284+00:00",
+    "role": "Mandatory historical/generated skeleton corpus; True/trivial or archived sorry stubs are NOT W4 proof evidence and not imported by the selected proof manifest"
+  },
+  {
+    "path": "samples/lean/clean-near-end/04_capture_escape_rejected/04_capture_escape_rejected.lean",
+    "sha256": "1f0538edd38933efe3bcad0ddf0c1ecf958cff0e8dbb3de1d08c639588f52461",
+    "range": "all",
+    "status": "full",
+    "read_at": "2026-09-27T13:12:46.860284+00:00",
+    "role": "Mandatory historical/generated skeleton corpus; True/trivial or archived sorry stubs are NOT W4 proof evidence and not imported by the selected proof manifest"
+  },
+  {
+    "path": "samples/lean/clean-near-end/04_stage_block_authorized_handoff/04_stage_block_authorized_handoff.lean",
+    "sha256": "210740540b38a9c2746fe645b13edae07b76575858a9e04d8897b548bb0314de",
+    "range": "all",
+    "status": "full",
+    "read_at": "2026-09-27T13:12:46.860284+00:00",
+    "role": "Mandatory historical/generated skeleton corpus; True/trivial or archived sorry stubs are NOT W4 proof evidence and not imported by the selected proof manifest"
+  },
+  {
+    "path": "samples/lean/clean-near-end/05_cost_bound_rejected/05_cost_bound_rejected.lean",
+    "sha256": "062bc2e60db94442694490e5361af92e7924972b77113841d586150aecba3568",
+    "range": "all",
+    "status": "full",
+    "read_at": "2026-09-27T13:12:46.860284+00:00",
+    "role": "Mandatory historical/generated skeleton corpus; True/trivial or archived sorry stubs are NOT W4 proof evidence and not imported by the selected proof manifest"
+  },
+  {
+    "path": "samples/lean/clean-near-end/05_delegated_rng_service/05_delegated_rng_service.lean",
+    "sha256": "e00a4590e110aec0701bc39b9398279c198516228689f786a60221226f6b9ef5",
+    "range": "all",
+    "status": "full",
+    "read_at": "2026-09-27T13:12:46.860284+00:00",
+    "role": "Mandatory historical/generated skeleton corpus; True/trivial or archived sorry stubs are NOT W4 proof evidence and not imported by the selected proof manifest"
+  },
+  {
+    "path": "samples/lean/clean-near-end/06_auditable_authority_witness/06_auditable_authority_witness.lean",
+    "sha256": "c262d98e21a713bb24de9e1de83f3ab6f4c6442336d8b5b9f31a7b876de8c9bc",
+    "range": "all",
+    "status": "full",
+    "read_at": "2026-09-27T13:12:46.860284+00:00",
+    "role": "Mandatory historical/generated skeleton corpus; True/trivial or archived sorry stubs are NOT W4 proof evidence and not imported by the selected proof manifest"
+  },
+  {
+    "path": "samples/lean/old/2026-04-22-pre-clean-near-end/current-l2/e5-underdeclared-lineage/e5-underdeclared-lineage.lean",
+    "sha256": "90875644503475add597677c77d7505bb2499a927a5a56342b54d458be0ddf8e",
+    "range": "all",
+    "status": "full",
+    "read_at": "2026-09-27T13:12:46.860284+00:00",
+    "role": "Mandatory historical/generated skeleton corpus; True/trivial or archived sorry stubs are NOT W4 proof evidence and not imported by the selected proof manifest"
+  },
+  {
+    "path": "samples/lean/old/2026-04-22-pre-clean-near-end/current-l2/p06-typed-proof-owner-handoff/p06-typed-proof-owner-handoff.lean",
+    "sha256": "40467be680d7f2a23b385af11a74d823311aad40d39efa40ee68b6e9838fb61d",
+    "range": "all",
+    "status": "full",
+    "read_at": "2026-09-27T13:12:46.860284+00:00",
+    "role": "Mandatory historical/generated skeleton corpus; True/trivial or archived sorry stubs are NOT W4 proof evidence and not imported by the selected proof manifest"
+  },
+  {
+    "path": "samples/lean/old/2026-04-22-pre-clean-near-end/current-l2/p07-dice-late-join-visible-history/p07-dice-late-join-visible-history.lean",
+    "sha256": "101bc30e0099a9daa160e667b627b77d5146478f9abd5962bbd0f3f228ef723f",
+    "range": "all",
+    "status": "full",
+    "read_at": "2026-09-27T13:12:46.860284+00:00",
+    "role": "Mandatory historical/generated skeleton corpus; True/trivial or archived sorry stubs are NOT W4 proof evidence and not imported by the selected proof manifest"
+  },
+  {
+    "path": "samples/lean/old/2026-04-22-pre-clean-near-end/current-l2/p08-dice-stale-reconnect-refresh/p08-dice-stale-reconnect-refresh.lean",
+    "sha256": "cda7dfaf0d43b084b5bbe1bf28efffd736fbc6f6734de04e6c54fed2e5bdb3a5",
+    "range": "all",
+    "status": "full",
+    "read_at": "2026-09-27T13:12:46.860284+00:00",
+    "role": "Mandatory historical/generated skeleton corpus; True/trivial or archived sorry stubs are NOT W4 proof evidence and not imported by the selected proof manifest"
+  },
+  {
+    "path": "samples/lean/old/2026-04-22-pre-clean-near-end/current-l2/p09-dice-delegated-rng-provider-placement/p09-dice-delegated-rng-provider-placement.lean",
+    "sha256": "38ae1575f12631dbaa6035783ead0a01657c4981bcbbe5a00ec98aeddae9a231",
+    "range": "all",
+    "status": "full",
+    "read_at": "2026-09-27T13:12:46.860284+00:00",
+    "role": "Mandatory historical/generated skeleton corpus; True/trivial or archived sorry stubs are NOT W4 proof evidence and not imported by the selected proof manifest"
+  },
+  {
+    "path": "samples/lean/old/2026-04-22-pre-clean-near-end/current-l2/p10-typed-authorized-fingerprint-declassification/p10-typed-authorized-fingerprint-declassification.lean",
+    "sha256": "e33ec39bf99213e0b6961e5afbcf21fbcf8bee2de2cb36c16f18788b6a412ba1",
+    "range": "all",
+    "status": "full",
+    "read_at": "2026-09-27T13:12:46.860284+00:00",
+    "role": "Mandatory historical/generated skeleton corpus; True/trivial or archived sorry stubs are NOT W4 proof evidence and not imported by the selected proof manifest"
+  },
+  {
+    "path": "samples/lean/old/2026-04-22-pre-clean-near-end/current-l2/p11-typed-unauthorized-fingerprint-release/p11-typed-unauthorized-fingerprint-release.lean",
+    "sha256": "d961ebbf7ca3fec067812ca3b3b0197dd25ee3db4eee6d6edb058f77eb479993",
+    "range": "all",
+    "status": "full",
+    "read_at": "2026-09-27T13:12:46.860284+00:00",
+    "role": "Mandatory historical/generated skeleton corpus; True/trivial or archived sorry stubs are NOT W4 proof evidence and not imported by the selected proof manifest"
+  },
+  {
+    "path": "samples/lean/old/2026-04-22-pre-clean-near-end/current-l2/p12-typed-classified-fingerprint-publication-block/p12-typed-classified-fingerprint-publication-block.lean",
+    "sha256": "4e1286c003dc1ccb4addf3851566d7aad19cce199f7aaf8cd0504b043ca2b9c7",
+    "range": "all",
+    "status": "full",
+    "read_at": "2026-09-27T13:12:46.860284+00:00",
+    "role": "Mandatory historical/generated skeleton corpus; True/trivial or archived sorry stubs are NOT W4 proof evidence and not imported by the selected proof manifest"
+  },
+  {
+    "path": "samples/lean/old/2026-04-22-pre-clean-near-end/current-l2/p13-dice-late-join-missing-publication-witness/p13-dice-late-join-missing-publication-witness.lean",
+    "sha256": "0a017e983740c8257fe089c4bf3eb673911d9a483f88eb19f9f69f83aa17da7e",
+    "range": "all",
+    "status": "full",
+    "read_at": "2026-09-27T13:12:46.860284+00:00",
+    "role": "Mandatory historical/generated skeleton corpus; True/trivial or archived sorry stubs are NOT W4 proof evidence and not imported by the selected proof manifest"
+  },
+  {
+    "path": "samples/lean/old/2026-04-22-pre-clean-near-end/current-l2/p14-dice-late-join-handoff-before-publication/p14-dice-late-join-handoff-before-publication.lean",
+    "sha256": "4883d2e5ef9ef376411facfca9c4009a1c214c8d5ad44475ae13db356ee8f609",
+    "range": "all",
+    "status": "full",
+    "read_at": "2026-09-27T13:12:46.860284+00:00",
+    "role": "Mandatory historical/generated skeleton corpus; True/trivial or archived sorry stubs are NOT W4 proof evidence and not imported by the selected proof manifest"
+  },
+  {
+    "path": "samples/lean/old/2026-04-22-pre-clean-near-end/current-l2/p15-typed-capture-escape-rejected/p15-typed-capture-escape-rejected.lean",
+    "sha256": "5660c171facdb6473a4a839a8726506af0704a049e0ecfcad7fa6a167a347a8a",
+    "range": "all",
+    "status": "full",
+    "read_at": "2026-09-27T13:12:46.860284+00:00",
+    "role": "Mandatory historical/generated skeleton corpus; True/trivial or archived sorry stubs are NOT W4 proof evidence and not imported by the selected proof manifest"
+  },
+  {
+    "path": "samples/lean/old/2026-04-22-pre-clean-near-end/current-l2/p16-typed-remote-call-budget-exceeded/p16-typed-remote-call-budget-exceeded.lean",
+    "sha256": "76c3e2c4bee00094d95a5b32e2a061e3bd1805dd7bc289009a6b10855e20e86d",
+    "range": "all",
+    "status": "full",
+    "read_at": "2026-09-27T13:12:46.860284+00:00",
+    "role": "Mandatory historical/generated skeleton corpus; True/trivial or archived sorry stubs are NOT W4 proof evidence and not imported by the selected proof manifest"
+  },
+  {
+    "path": "samples/lean/foundations/MirTheoryV0M8DeterministicRuntime.lean",
+    "sha256": "139fd75acc4d052f23c166da942607f146048e4ce05a057e97042b87f7ab60d5",
+    "range": "1-1315",
+    "status": "full",
+    "read_at": "2026-09-27T13:15:50.144382+00:00",
+    "role": "R09 existing finite M8 model; case-enumerated admission/transition and fixed-profile rfl theorems, not generic declarative/checker completeness or two-run secrecy"
+  },
+  {
+    "path": "samples/lean/foundations/MirroreaProofFirstPublicationSession.lean",
+    "sha256": "fd430442f0d530ed7c1496ec0a13f0a4615488dffc56c065a05a11354c19fa80",
+    "range": "all",
+    "status": "full",
+    "read_at": "2026-09-27T13:17:33.354587+00:00",
+    "role": "W4 required corpus/dependency reading: Existing Session.Step reification exactness and enabled current payload only; delayed-use physical gap explicitly separate"
+  },
+  {
+    "path": "samples/lean/foundations/MirroreaProofFirstSourcePureLowering.lean",
+    "sha256": "da95ee4dc7e3a1f50b0d7505146ed7511323fa6dbb5511b71755b2e52200372e",
+    "range": "all",
+    "status": "full",
+    "read_at": "2026-09-27T13:17:33.354587+00:00",
+    "role": "W4 required corpus/dependency reading: Strict bounded pure arithmetic/result-rejection lowering, no external effects/resource/cost equality"
+  },
+  {
+    "path": "samples/lean/foundations/MirroreaProofFirstGeneralLabels.lean",
+    "sha256": "e90dd52298455f6e6c45f012bf29115d8529308fe67afeed33f705b4f2b28279",
+    "range": "1-386",
+    "status": "full",
+    "read_at": "2026-09-27T13:21:39.221048+00:00",
+    "role": "R09 current label algebra/control reading; law certificate preserves exact tables but grants no authority to replace policy; two-run theorem conditional on the same selected policy and total typed pure runtime"
   }
 ]
