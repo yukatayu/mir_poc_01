@@ -1,0 +1,1779 @@
+{
+  "at": "2026-09-26T05:09:32.667402+00:00",
+  "repo_base": "ad9256c6e276634118de1fb6a40bddf6171c9f38",
+  "scope": "W4-B nonproduction source preservation candidate; integration/kernel/replay/closure pending",
+  "roots": [
+    "LeaseCohortCaptureJson",
+    "LeaseKnownFaultCaptureJson",
+    "LeaseWireCaptureJson",
+    "MirroreaProofFirstEntryAcquisition",
+    "ProducedRootedness"
+  ],
+  "standalone_roots": {
+    "MirroreaProofFirstEntryAcquisition": "retain separately audited acquisition/allocation obligations; no all-entry closure claim",
+    "ProducedRootedness": "retain general produced record rooting fact independent of latest replay roots"
+  },
+  "sources": [
+    {
+      "module": "MirroreaProofFirstSupport",
+      "origin": "/home/codex/.local/state/mirrorea-proof-first/w4-20260922/cold-post63-wire-lease-correspondence/MirroreaProofFirstSupport.lean",
+      "sha256": "7f401632873cb3b87e0fa62d1b172af88b996b34a6d3fc62a7e61d103b41a9c3",
+      "target": "samples/lean/foundations/MirroreaProofFirstSupport.lean",
+      "transform": "identity; source bytes/imports/declaration names unchanged",
+      "prior_full_read": true
+    },
+    {
+      "module": "MirroreaProofFirstSupportTable",
+      "origin": "/home/codex/.local/state/mirrorea-proof-first/w4-20260922/cold-post63-wire-lease-correspondence/MirroreaProofFirstSupportTable.lean",
+      "sha256": "03011c849b9a000846f0b0786c5968ee404339f1d3ff8138917280349cfe22f9",
+      "target": "samples/lean/foundations/MirroreaProofFirstSupportTable.lean",
+      "transform": "identity; source bytes/imports/declaration names unchanged",
+      "prior_full_read": true
+    },
+    {
+      "module": "MirroreaProofFirstTrackedValidation",
+      "origin": "/home/codex/.local/state/mirrorea-proof-first/w4-20260922/cold-post63-wire-lease-correspondence/MirroreaProofFirstTrackedValidation.lean",
+      "sha256": "650339d6b363ee873c97e0f1e776aed0eb327981a78b5572dc0492589b20d9ff",
+      "target": "samples/lean/foundations/MirroreaProofFirstTrackedValidation.lean",
+      "transform": "identity; source bytes/imports/declaration names unchanged",
+      "prior_full_read": true
+    },
+    {
+      "module": "MirroreaProofFirstGraphValidation",
+      "origin": "/home/codex/.local/state/mirrorea-proof-first/w4-20260922/cold-post63-wire-lease-correspondence/MirroreaProofFirstGraphValidation.lean",
+      "sha256": "86d7148bc1dc7790f3925e94ddf41a0279b1a214e36bb96ff428c99f7ca0996a",
+      "target": "samples/lean/foundations/MirroreaProofFirstGraphValidation.lean",
+      "transform": "identity; source bytes/imports/declaration names unchanged",
+      "prior_full_read": true
+    },
+    {
+      "module": "MirroreaProofFirstGraphTable",
+      "origin": "/home/codex/.local/state/mirrorea-proof-first/w4-20260922/cold-post63-wire-lease-correspondence/MirroreaProofFirstGraphTable.lean",
+      "sha256": "a779789b02d4d6af6dd16591c1940d91fadc9a947d02cd9d062703951326e512",
+      "target": "samples/lean/foundations/MirroreaProofFirstGraphTable.lean",
+      "transform": "identity; source bytes/imports/declaration names unchanged",
+      "prior_full_read": true
+    },
+    {
+      "module": "MirroreaProofFirstOwnerCodecTree",
+      "origin": "/home/codex/.local/state/mirrorea-proof-first/w4-20260922/cold-post63-wire-lease-correspondence/MirroreaProofFirstOwnerCodecTree.lean",
+      "sha256": "703a665222f3affd0e3e7e61ac2b45ec2190d0b6d94d72c7c77c981c71aaa409",
+      "target": "samples/lean/foundations/MirroreaProofFirstOwnerCodecTree.lean",
+      "transform": "identity; source bytes/imports/declaration names unchanged",
+      "prior_full_read": true
+    },
+    {
+      "module": "MirroreaProofFirstResourceBoundary",
+      "origin": "/home/codex/.local/state/mirrorea-proof-first/w4-20260922/cold-post63-wire-lease-correspondence/MirroreaProofFirstResourceBoundary.lean",
+      "sha256": "2ac91ef290548c13d33ca8122b7a14655a15e922c0be1c5b1ab9648882bb95f9",
+      "target": "samples/lean/foundations/MirroreaProofFirstResourceBoundary.lean",
+      "transform": "identity; source bytes/imports/declaration names unchanged",
+      "prior_full_read": true
+    },
+    {
+      "module": "MirroreaProofFirstLocalContract",
+      "origin": "/home/codex/.local/state/mirrorea-proof-first/w4-20260922/cold-post63-wire-lease-correspondence/MirroreaProofFirstLocalContract.lean",
+      "sha256": "fee77a064074b3687d05a5a890b2ddd031a429dc2290829eaf27c516269a8980",
+      "target": "samples/lean/foundations/MirroreaProofFirstLocalContract.lean",
+      "transform": "identity; source bytes/imports/declaration names unchanged",
+      "prior_full_read": true
+    },
+    {
+      "module": "MirroreaProofFirstContractExport",
+      "origin": "/home/codex/.local/state/mirrorea-proof-first/w4-20260922/cold-post63-wire-lease-correspondence/MirroreaProofFirstContractExport.lean",
+      "sha256": "ec8ca4f801e30a00670fc51efe1ea448750cbc57dffdca29d9aa8ceb2ccb8d98",
+      "target": "samples/lean/foundations/MirroreaProofFirstContractExport.lean",
+      "transform": "identity; source bytes/imports/declaration names unchanged",
+      "prior_full_read": true
+    },
+    {
+      "module": "MirroreaProofFirstInstancePrograms",
+      "origin": "/home/codex/.local/state/mirrorea-proof-first/w4-20260922/cold-post63-wire-lease-correspondence/MirroreaProofFirstInstancePrograms.lean",
+      "sha256": "853d3d2f2773394ae5ee1f8b319fee4b0370ce6fd2ea6c3b37742ddfa98f0e98",
+      "target": "samples/lean/foundations/MirroreaProofFirstInstancePrograms.lean",
+      "transform": "identity; source bytes/imports/declaration names unchanged",
+      "prior_full_read": true
+    },
+    {
+      "module": "MirroreaProofFirstDynamicSupport",
+      "origin": "/home/codex/.local/state/mirrorea-proof-first/w4-20260922/cold-post63-wire-lease-correspondence/MirroreaProofFirstDynamicSupport.lean",
+      "sha256": "ae88eb5b48bfe2667c3f1b68d18d0ef52685e929e6e008ca74cf29ded213912a",
+      "target": "samples/lean/foundations/MirroreaProofFirstDynamicSupport.lean",
+      "transform": "identity; source bytes/imports/declaration names unchanged",
+      "prior_full_read": true
+    },
+    {
+      "module": "MirroreaProofFirstCurrentUse",
+      "origin": "/home/codex/.local/state/mirrorea-proof-first/w4-20260922/cold-post63-wire-lease-correspondence/MirroreaProofFirstCurrentUse.lean",
+      "sha256": "ab604c92b226182bdf84a38caaa044d6b949730891d40a02a72ad441c59f4239",
+      "target": "samples/lean/foundations/MirroreaProofFirstCurrentUse.lean",
+      "transform": "identity; source bytes/imports/declaration names unchanged",
+      "prior_full_read": true
+    },
+    {
+      "module": "MirroreaProofFirstDynamicIdentity",
+      "origin": "/home/codex/.local/state/mirrorea-proof-first/w4-20260922/cold-post63-wire-lease-correspondence/MirroreaProofFirstDynamicIdentity.lean",
+      "sha256": "f215bb61570fb35f7ee5ab8d1e518f5a27d5222316af72ad2734638b2bba656a",
+      "target": "samples/lean/foundations/MirroreaProofFirstDynamicIdentity.lean",
+      "transform": "identity; source bytes/imports/declaration names unchanged",
+      "prior_full_read": true
+    },
+    {
+      "module": "MirroreaProofFirstDynamicGraphs",
+      "origin": "/home/codex/.local/state/mirrorea-proof-first/w4-20260922/cold-post63-wire-lease-correspondence/MirroreaProofFirstDynamicGraphs.lean",
+      "sha256": "fe38909c5f98a37f0ebb45879044c662552330c96694a09a0549da6a8187e0ce",
+      "target": "samples/lean/foundations/MirroreaProofFirstDynamicGraphs.lean",
+      "transform": "identity; source bytes/imports/declaration names unchanged",
+      "prior_full_read": true
+    },
+    {
+      "module": "MirroreaProofFirstInstanceState",
+      "origin": "/home/codex/.local/state/mirrorea-proof-first/w4-20260922/cold-post63-wire-lease-correspondence/MirroreaProofFirstInstanceState.lean",
+      "sha256": "e5eadb4d88c8c68634523f4fca801dcc83c278e8739adef37487b21de39a23d6",
+      "target": "samples/lean/foundations/MirroreaProofFirstInstanceState.lean",
+      "transform": "identity; source bytes/imports/declaration names unchanged",
+      "prior_full_read": true
+    },
+    {
+      "module": "MirroreaProofFirstWorldProjection",
+      "origin": "/home/codex/.local/state/mirrorea-proof-first/w4-20260922/cold-post63-wire-lease-correspondence/MirroreaProofFirstWorldProjection.lean",
+      "sha256": "ddaa69751cbab498274f7a32c14050e1cd68f04930c133b46762bfc50036f6ac",
+      "target": "samples/lean/foundations/MirroreaProofFirstWorldProjection.lean",
+      "transform": "identity; source bytes/imports/declaration names unchanged",
+      "prior_full_read": true
+    },
+    {
+      "module": "MirroreaProofFirstCompositionCore",
+      "origin": "/home/codex/.local/state/mirrorea-proof-first/w4-20260922/cold-post63-wire-lease-correspondence/MirroreaProofFirstCompositionCore.lean",
+      "sha256": "e5b20c98450d2edd5361e25d0f64b665e645537286d5a70bdb07f120367bb467",
+      "target": "samples/lean/foundations/MirroreaProofFirstCompositionCore.lean",
+      "transform": "identity; source bytes/imports/declaration names unchanged",
+      "prior_full_read": true
+    },
+    {
+      "module": "MirroreaProofFirstManagementEntry",
+      "origin": "/home/codex/.local/state/mirrorea-proof-first/w4-20260922/cold-post63-wire-lease-correspondence/MirroreaProofFirstManagementEntry.lean",
+      "sha256": "094771815b4e52b3c6f91e5f8eed6acd930d078c299d486b43689a2de062f1e9",
+      "target": "samples/lean/foundations/MirroreaProofFirstManagementEntry.lean",
+      "transform": "identity; source bytes/imports/declaration names unchanged",
+      "prior_full_read": true
+    },
+    {
+      "module": "MirroreaProofFirstInvocationBoundary",
+      "origin": "/home/codex/.local/state/mirrorea-proof-first/w4-20260922/cold-post63-wire-lease-correspondence/MirroreaProofFirstInvocationBoundary.lean",
+      "sha256": "6533e15f61d9bb2aa1259dcad0f0ce1564b308cbf4df39ef0a85c0ed9247f0ed",
+      "target": "samples/lean/foundations/MirroreaProofFirstInvocationBoundary.lean",
+      "transform": "identity; source bytes/imports/declaration names unchanged",
+      "prior_full_read": true
+    },
+    {
+      "module": "MirroreaProofFirstReferenceCancellationBoundary",
+      "origin": "/home/codex/.local/state/mirrorea-proof-first/w4-20260922/cold-post63-wire-lease-correspondence/MirroreaProofFirstReferenceCancellationBoundary.lean",
+      "sha256": "748a5ea45f14fcc32169e3898f6133de7f37efff730e34b9e8104941fcd54363",
+      "target": "samples/lean/foundations/MirroreaProofFirstReferenceCancellationBoundary.lean",
+      "transform": "identity; source bytes/imports/declaration names unchanged",
+      "prior_full_read": true
+    },
+    {
+      "module": "MirroreaProofFirstCompositionMachine",
+      "origin": "/home/codex/.local/state/mirrorea-proof-first/w4-20260922/cold-post63-wire-lease-correspondence/MirroreaProofFirstCompositionMachine.lean",
+      "sha256": "e911bbef03ef701b0427607a8828ecdeef736c556536a67eabd1885da90dd7f3",
+      "target": "samples/lean/foundations/MirroreaProofFirstCompositionMachine.lean",
+      "transform": "identity; source bytes/imports/declaration names unchanged",
+      "prior_full_read": true
+    },
+    {
+      "module": "MirroreaProofFirstCatalogHistory",
+      "origin": "/home/codex/.local/state/mirrorea-proof-first/w4-20260922/cold-post63-wire-lease-correspondence/MirroreaProofFirstCatalogHistory.lean",
+      "sha256": "e996b6769e3b21d0c1efd24d7ba30b2958c3fb5195caf4e7ace2d5334aebc92e",
+      "target": "samples/lean/foundations/MirroreaProofFirstCatalogHistory.lean",
+      "transform": "identity; source bytes/imports/declaration names unchanged",
+      "prior_full_read": true
+    },
+    {
+      "module": "MirroreaProofFirstFallbackStatic",
+      "origin": "/home/codex/.local/state/mirrorea-proof-first/w4-20260922/cold-post63-wire-lease-correspondence/MirroreaProofFirstFallbackStatic.lean",
+      "sha256": "4d62d99e7047efedc18d0aee028bb247ecbe1d365524a57782539058c3f9dffb",
+      "target": "samples/lean/foundations/MirroreaProofFirstFallbackStatic.lean",
+      "transform": "identity; source bytes/imports/declaration names unchanged",
+      "prior_full_read": false
+    },
+    {
+      "module": "MirroreaProofFirstReferenceAccess",
+      "origin": "/home/codex/.local/state/mirrorea-proof-first/w4-20260922/cold-post63-wire-lease-correspondence/MirroreaProofFirstReferenceAccess.lean",
+      "sha256": "f57b200ec44a1c22655be438d81033357798799afe0fad3840c8e1a5b4f8f5f1",
+      "target": "samples/lean/foundations/MirroreaProofFirstReferenceAccess.lean",
+      "transform": "identity; source bytes/imports/declaration names unchanged",
+      "prior_full_read": true
+    },
+    {
+      "module": "MirroreaProofFirstReferenceAccessHistory",
+      "origin": "/home/codex/.local/state/mirrorea-proof-first/w4-20260922/cold-post63-wire-lease-correspondence/MirroreaProofFirstReferenceAccessHistory.lean",
+      "sha256": "1c332751466a9a8527e6505c97565de245d75bb44b3722563bd9d64ab97e57c7",
+      "target": "samples/lean/foundations/MirroreaProofFirstReferenceAccessHistory.lean",
+      "transform": "identity; source bytes/imports/declaration names unchanged",
+      "prior_full_read": true
+    },
+    {
+      "module": "MirroreaProofFirstReferenceSelection",
+      "origin": "/home/codex/.local/state/mirrorea-proof-first/w4-20260922/cold-post63-wire-lease-correspondence/MirroreaProofFirstReferenceSelection.lean",
+      "sha256": "a7b2728e754e92170b70168ab243b5cba944b7725f664ccf794209f7bc271fe5",
+      "target": "samples/lean/foundations/MirroreaProofFirstReferenceSelection.lean",
+      "transform": "identity; source bytes/imports/declaration names unchanged",
+      "prior_full_read": true
+    },
+    {
+      "module": "MirroreaProofFirstReferenceHolding",
+      "origin": "/home/codex/.local/state/mirrorea-proof-first/w4-20260922/cold-post63-wire-lease-correspondence/MirroreaProofFirstReferenceHolding.lean",
+      "sha256": "a21f8930a9c76a0d3326dd373d5317b2def0805d7a7d25910aabb949a20dedc5",
+      "target": "samples/lean/foundations/MirroreaProofFirstReferenceHolding.lean",
+      "transform": "identity; source bytes/imports/declaration names unchanged",
+      "prior_full_read": true
+    },
+    {
+      "module": "MirroreaProofFirstReferenceOwner",
+      "origin": "/home/codex/.local/state/mirrorea-proof-first/w4-20260922/cold-post63-wire-lease-correspondence/MirroreaProofFirstReferenceOwner.lean",
+      "sha256": "2387fefe317a3a8750fdf82fd12ee3cb97f7ec5cc776cd7d152d683c3b7c2bcf",
+      "target": "samples/lean/foundations/MirroreaProofFirstReferenceOwner.lean",
+      "transform": "identity; source bytes/imports/declaration names unchanged",
+      "prior_full_read": true
+    },
+    {
+      "module": "MirroreaProofFirstReferenceCancellation",
+      "origin": "/home/codex/.local/state/mirrorea-proof-first/w4-20260922/cold-post63-wire-lease-correspondence/MirroreaProofFirstReferenceCancellation.lean",
+      "sha256": "f9bd0888b1a7a9748d99076fe18d6dd1d409f856b84eff73b35251db0c934dcd",
+      "target": "samples/lean/foundations/MirroreaProofFirstReferenceCancellation.lean",
+      "transform": "identity; source bytes/imports/declaration names unchanged",
+      "prior_full_read": true
+    },
+    {
+      "module": "MirroreaProofFirstReferenceStore",
+      "origin": "/home/codex/.local/state/mirrorea-proof-first/w4-20260922/cold-post63-wire-lease-correspondence/MirroreaProofFirstReferenceStore.lean",
+      "sha256": "69e68e2839fa14cd4d46f92de24df5a2e4ea43884d441f6e100181c3c3896cea",
+      "target": "samples/lean/foundations/MirroreaProofFirstReferenceStore.lean",
+      "transform": "identity; source bytes/imports/declaration names unchanged",
+      "prior_full_read": true
+    },
+    {
+      "module": "MirroreaProofFirstReferenceCoherence",
+      "origin": "/home/codex/.local/state/mirrorea-proof-first/w4-20260922/cold-post63-wire-lease-correspondence/MirroreaProofFirstReferenceCoherence.lean",
+      "sha256": "e6aba9e1ced8573780f12ce555d888cb3fb3335f1e51e7417924397636964b17",
+      "target": "samples/lean/foundations/MirroreaProofFirstReferenceCoherence.lean",
+      "transform": "identity; source bytes/imports/declaration names unchanged",
+      "prior_full_read": true
+    },
+    {
+      "module": "MirroreaProofFirstReferenceMutation",
+      "origin": "/home/codex/.local/state/mirrorea-proof-first/w4-20260922/cold-post63-wire-lease-correspondence/MirroreaProofFirstReferenceMutation.lean",
+      "sha256": "ae75608f5d716a8bbecdbb24108a8fcfdcfcddcdca6989498185b491575ab2d9",
+      "target": "samples/lean/foundations/MirroreaProofFirstReferenceMutation.lean",
+      "transform": "identity; source bytes/imports/declaration names unchanged",
+      "prior_full_read": false
+    },
+    {
+      "module": "MirroreaProofFirstReferenceResult",
+      "origin": "/home/codex/.local/state/mirrorea-proof-first/w4-20260922/cold-post63-wire-lease-correspondence/MirroreaProofFirstReferenceResult.lean",
+      "sha256": "c816ec5319afa014918743ca76d0d17946cf60ae2ee32b61d87f661928db7567",
+      "target": "samples/lean/foundations/MirroreaProofFirstReferenceResult.lean",
+      "transform": "identity; source bytes/imports/declaration names unchanged",
+      "prior_full_read": true
+    },
+    {
+      "module": "MirroreaProofFirstReferenceTrace",
+      "origin": "/home/codex/.local/state/mirrorea-proof-first/w4-20260922/cold-post63-wire-lease-correspondence/MirroreaProofFirstReferenceTrace.lean",
+      "sha256": "631349e1c4c40b21cc44f4a98150c42d69136aac7ab1849db282d924109900a7",
+      "target": "samples/lean/foundations/MirroreaProofFirstReferenceTrace.lean",
+      "transform": "identity; source bytes/imports/declaration names unchanged",
+      "prior_full_read": true
+    },
+    {
+      "module": "MirroreaProofFirstReferenceExecution",
+      "origin": "/home/codex/.local/state/mirrorea-proof-first/w4-20260922/cold-post63-wire-lease-correspondence/MirroreaProofFirstReferenceExecution.lean",
+      "sha256": "2a0fd53eb81388c8dbb861cc26db6037872cc9dffc80bc4ec60dd862ded38d5d",
+      "target": "samples/lean/foundations/MirroreaProofFirstReferenceExecution.lean",
+      "transform": "identity; source bytes/imports/declaration names unchanged",
+      "prior_full_read": false
+    },
+    {
+      "module": "MirroreaProofFirstSourceAuthoring",
+      "origin": "/home/codex/.local/state/mirrorea-proof-first/w4-20260922/cold-post63-wire-lease-correspondence/MirroreaProofFirstSourceAuthoring.lean",
+      "sha256": "9fe76ea886f177d2ea7124b95a3f8b9761153900ee3556d3628b9a5393380980",
+      "target": "samples/lean/foundations/MirroreaProofFirstSourceAuthoring.lean",
+      "transform": "identity; source bytes/imports/declaration names unchanged",
+      "prior_full_read": true
+    },
+    {
+      "module": "MirroreaProofFirstSourceTypes",
+      "origin": "/home/codex/.local/state/mirrorea-proof-first/w4-20260922/cold-post63-wire-lease-correspondence/MirroreaProofFirstSourceTypes.lean",
+      "sha256": "ed73209f64663c07443b25b3de0cd8d498c01b5fee0e3dae14acca5237eed38d",
+      "target": "samples/lean/foundations/MirroreaProofFirstSourceTypes.lean",
+      "transform": "identity; source bytes/imports/declaration names unchanged",
+      "prior_full_read": true
+    },
+    {
+      "module": "MirroreaProofFirstSourcePreservation",
+      "origin": "/home/codex/.local/state/mirrorea-proof-first/w4-20260922/cold-post63-wire-lease-correspondence/MirroreaProofFirstSourcePreservation.lean",
+      "sha256": "8c72278489b2a33ef71c6d2bc3fe75c6479c460300ef6ae2b87b578537db803e",
+      "target": "samples/lean/foundations/MirroreaProofFirstSourcePreservation.lean",
+      "transform": "identity; source bytes/imports/declaration names unchanged",
+      "prior_full_read": false
+    },
+    {
+      "module": "MirroreaProofFirstSourceTyping",
+      "origin": "/home/codex/.local/state/mirrorea-proof-first/w4-20260922/cold-post63-wire-lease-correspondence/MirroreaProofFirstSourceTyping.lean",
+      "sha256": "f40992f5f5f5425bb9ee01c480b6e270d76c72f962e137cae173d54d19669ec8",
+      "target": "samples/lean/foundations/MirroreaProofFirstSourceTyping.lean",
+      "transform": "identity; source bytes/imports/declaration names unchanged",
+      "prior_full_read": false
+    },
+    {
+      "module": "MirroreaProofFirstReferenceSourceData",
+      "origin": "/home/codex/.local/state/mirrorea-proof-first/w4-20260922/cold-post63-wire-lease-correspondence/MirroreaProofFirstReferenceSourceData.lean",
+      "sha256": "ab8493abcf8a5f1201d2b379daf60ef7e25f1dea953b17822b343c7e3151f5a0",
+      "target": "samples/lean/foundations/MirroreaProofFirstReferenceSourceData.lean",
+      "transform": "identity; source bytes/imports/declaration names unchanged",
+      "prior_full_read": false
+    },
+    {
+      "module": "MirroreaProofFirstSourceExecution",
+      "origin": "/home/codex/.local/state/mirrorea-proof-first/w4-20260922/cold-post63-wire-lease-correspondence/MirroreaProofFirstSourceExecution.lean",
+      "sha256": "ccb4595c79239832599938e4545637cd2df50557fee498992d45129ac1461057",
+      "target": "samples/lean/foundations/MirroreaProofFirstSourceExecution.lean",
+      "transform": "identity; source bytes/imports/declaration names unchanged",
+      "prior_full_read": true
+    },
+    {
+      "module": "MirroreaProofFirstSourceFrame",
+      "origin": "/home/codex/.local/state/mirrorea-proof-first/w4-20260922/cold-post63-wire-lease-correspondence/MirroreaProofFirstSourceFrame.lean",
+      "sha256": "0913d0d99a9346be23744a15fd091a2f07246500c2a7ea78b51fcd1de8e048af",
+      "target": "samples/lean/foundations/MirroreaProofFirstSourceFrame.lean",
+      "transform": "identity; source bytes/imports/declaration names unchanged",
+      "prior_full_read": false
+    },
+    {
+      "module": "MirroreaProofFirstInvocationContract",
+      "origin": "/home/codex/.local/state/mirrorea-proof-first/w4-20260922/cold-post63-wire-lease-correspondence/MirroreaProofFirstInvocationContract.lean",
+      "sha256": "4de3790ec80c12b7ba507edc00ad5360e6fae322603f7b8fbd198876e047d82a",
+      "target": "samples/lean/foundations/MirroreaProofFirstInvocationContract.lean",
+      "transform": "identity; source bytes/imports/declaration names unchanged",
+      "prior_full_read": true
+    },
+    {
+      "module": "MirroreaProofFirstSourceCompletion",
+      "origin": "/home/codex/.local/state/mirrorea-proof-first/w4-20260922/cold-post63-wire-lease-correspondence/MirroreaProofFirstSourceCompletion.lean",
+      "sha256": "e4267e201eba03df55c4389d0a5ac3e9e250aeef62164850e1af6175923b92db",
+      "target": "samples/lean/foundations/MirroreaProofFirstSourceCompletion.lean",
+      "transform": "identity; source bytes/imports/declaration names unchanged",
+      "prior_full_read": false
+    },
+    {
+      "module": "MirroreaProofFirstSourceAllocation",
+      "origin": "/home/codex/.local/state/mirrorea-proof-first/w4-20260922/cold-post63-wire-lease-correspondence/MirroreaProofFirstSourceAllocation.lean",
+      "sha256": "50a584703795d278043e46672434887351baaef5ae37627012d9a8b1729974d5",
+      "target": "samples/lean/foundations/MirroreaProofFirstSourceAllocation.lean",
+      "transform": "identity; source bytes/imports/declaration names unchanged",
+      "prior_full_read": true
+    },
+    {
+      "module": "MirroreaProofFirstReferenceAllocation",
+      "origin": "/home/codex/.local/state/mirrorea-proof-first/w4-20260922/cold-post63-wire-lease-correspondence/MirroreaProofFirstReferenceAllocation.lean",
+      "sha256": "7df4b536119c8e69d5c993d7a785d67b0b7369bd4d7ddce45d7d3a98df30ba75",
+      "target": "samples/lean/foundations/MirroreaProofFirstReferenceAllocation.lean",
+      "transform": "identity; source bytes/imports/declaration names unchanged",
+      "prior_full_read": true
+    },
+    {
+      "module": "MirroreaProofFirstReferenceSource",
+      "origin": "/home/codex/.local/state/mirrorea-proof-first/w4-20260922/cold-post63-wire-lease-correspondence/MirroreaProofFirstReferenceSource.lean",
+      "sha256": "973ab39e829a28aae6663d7ad922d719c345372319ce83bdcaf1e769cc2c9fd2",
+      "target": "samples/lean/foundations/MirroreaProofFirstReferenceSource.lean",
+      "transform": "identity; source bytes/imports/declaration names unchanged",
+      "prior_full_read": false
+    },
+    {
+      "module": "MirroreaProofFirstOwnerProjection",
+      "origin": "/home/codex/.local/state/mirrorea-proof-first/w4-20260922/cold-post63-wire-lease-correspondence/MirroreaProofFirstOwnerProjection.lean",
+      "sha256": "a1031421e7bd1f26a350d4b3dc7cfc15b88f6f6abc9be8caf3c5b2da1010e9d2",
+      "target": "samples/lean/foundations/MirroreaProofFirstOwnerProjection.lean",
+      "transform": "identity; source bytes/imports/declaration names unchanged",
+      "prior_full_read": true
+    },
+    {
+      "module": "MirroreaProofFirstAuthorityImage",
+      "origin": "/home/codex/.local/state/mirrorea-proof-first/w4-20260922/cold-post63-wire-lease-correspondence/MirroreaProofFirstAuthorityImage.lean",
+      "sha256": "b2e8cceaac2c2ec56a5ca306f0e9ec325a7d812f9356223a4e54095a2fc77e01",
+      "target": "samples/lean/foundations/MirroreaProofFirstAuthorityImage.lean",
+      "transform": "identity; source bytes/imports/declaration names unchanged",
+      "prior_full_read": true
+    },
+    {
+      "module": "MirroreaProofFirstPublication",
+      "origin": "/home/codex/.local/state/mirrorea-proof-first/w4-20260922/cold-post63-wire-lease-correspondence/MirroreaProofFirstPublication.lean",
+      "sha256": "a03f12a4cb9d6a4935d6c8bc86d0e19e27e738766dffdf7c87d1d6492257aef6",
+      "target": "samples/lean/foundations/MirroreaProofFirstPublication.lean",
+      "transform": "identity; source bytes/imports/declaration names unchanged",
+      "prior_full_read": false
+    },
+    {
+      "module": "MirroreaProofFirstPublicationPayload",
+      "origin": "/home/codex/.local/state/mirrorea-proof-first/w4-20260922/cold-post63-wire-lease-correspondence/MirroreaProofFirstPublicationPayload.lean",
+      "sha256": "b882204fafde4b9cc4ef09cb1c8800cd95f4d842eb3cb56cfd542abc35d8d9ed",
+      "target": "samples/lean/foundations/MirroreaProofFirstPublicationPayload.lean",
+      "transform": "identity; source bytes/imports/declaration names unchanged",
+      "prior_full_read": false
+    },
+    {
+      "module": "MirroreaProofFirstPublicationUse",
+      "origin": "/home/codex/.local/state/mirrorea-proof-first/w4-20260922/cold-post63-wire-lease-correspondence/MirroreaProofFirstPublicationUse.lean",
+      "sha256": "f3c4b61f13b03f1d7765ba64de2be92284f0297055c7174f89cdd6fa8594dacb",
+      "target": "samples/lean/foundations/MirroreaProofFirstPublicationUse.lean",
+      "transform": "identity; source bytes/imports/declaration names unchanged",
+      "prior_full_read": false
+    },
+    {
+      "module": "MirroreaProofFirstOwnerImage",
+      "origin": "/home/codex/.local/state/mirrorea-proof-first/w4-20260922/cold-post63-wire-lease-correspondence/MirroreaProofFirstOwnerImage.lean",
+      "sha256": "d32fe41bcd0370b8d18b76f800a6e77328da1a603019d489dad1e8ab39aea52c",
+      "target": "samples/lean/foundations/MirroreaProofFirstOwnerImage.lean",
+      "transform": "identity; source bytes/imports/declaration names unchanged",
+      "prior_full_read": true
+    },
+    {
+      "module": "MirroreaProofFirstOwnerValidity",
+      "origin": "/home/codex/.local/state/mirrorea-proof-first/w4-20260922/cold-post63-wire-lease-correspondence/MirroreaProofFirstOwnerValidity.lean",
+      "sha256": "241bff33c75f5f04111a5ab6153599f301d5dc8edf723a1ab358b76875acab5f",
+      "target": "samples/lean/foundations/MirroreaProofFirstOwnerValidity.lean",
+      "transform": "identity; source bytes/imports/declaration names unchanged",
+      "prior_full_read": true
+    },
+    {
+      "module": "MirroreaProofFirstOwnerCodeCodec",
+      "origin": "/home/codex/.local/state/mirrorea-proof-first/w4-20260922/cold-post63-wire-lease-correspondence/MirroreaProofFirstOwnerCodeCodec.lean",
+      "sha256": "2e5ca0e0f5546aabfa02fdcdb790211dfd55d03ed774ef4b2ee0bf9a9b2add53",
+      "target": "samples/lean/foundations/MirroreaProofFirstOwnerCodeCodec.lean",
+      "transform": "identity; source bytes/imports/declaration names unchanged",
+      "prior_full_read": false
+    },
+    {
+      "module": "MirroreaProofFirstOwnerRecordCodecs",
+      "origin": "/home/codex/.local/state/mirrorea-proof-first/w4-20260922/cold-post63-wire-lease-correspondence/MirroreaProofFirstOwnerRecordCodecs.lean",
+      "sha256": "8b1d75e5dc9810514a75c9db9f4be6e2c2fe6ca10c8e70e1baab8a00ca9a8fdf",
+      "target": "samples/lean/foundations/MirroreaProofFirstOwnerRecordCodecs.lean",
+      "transform": "identity; source bytes/imports/declaration names unchanged",
+      "prior_full_read": false
+    },
+    {
+      "module": "MirroreaProofFirstOwnerTreeCodecs",
+      "origin": "/home/codex/.local/state/mirrorea-proof-first/w4-20260922/cold-post63-wire-lease-correspondence/MirroreaProofFirstOwnerTreeCodecs.lean",
+      "sha256": "9e59b8bb3f2dc253f41a3b59eda5e78e378d9c8042bdd1b8e69578bb2fdf1b97",
+      "target": "samples/lean/foundations/MirroreaProofFirstOwnerTreeCodecs.lean",
+      "transform": "identity; source bytes/imports/declaration names unchanged",
+      "prior_full_read": true
+    },
+    {
+      "module": "MirroreaProofFirstOwnerEvaluator",
+      "origin": "/home/codex/.local/state/mirrorea-proof-first/w4-20260922/cold-post63-wire-lease-correspondence/MirroreaProofFirstOwnerEvaluator.lean",
+      "sha256": "83af66e1c072af0aa6dd8e2fb2bcef699621ff533d0dce96434d079681560424",
+      "target": "samples/lean/foundations/MirroreaProofFirstOwnerEvaluator.lean",
+      "transform": "identity; source bytes/imports/declaration names unchanged",
+      "prior_full_read": true
+    },
+    {
+      "module": "MirroreaProofFirstOwnerFullCodec",
+      "origin": "/home/codex/.local/state/mirrorea-proof-first/w4-20260922/cold-post63-wire-lease-correspondence/MirroreaProofFirstOwnerFullCodec.lean",
+      "sha256": "6326211d68c970a26d68584ac66d52a2c9b3d2b6e5bbf999cdc8b5f662eb2ea3",
+      "target": "samples/lean/foundations/MirroreaProofFirstOwnerFullCodec.lean",
+      "transform": "identity; source bytes/imports/declaration names unchanged",
+      "prior_full_read": true
+    },
+    {
+      "module": "MirroreaProofFirstOwnerByteCodec",
+      "origin": "/home/codex/.local/state/mirrorea-proof-first/w4-20260922/cold-post63-wire-lease-correspondence/MirroreaProofFirstOwnerByteCodec.lean",
+      "sha256": "fa2d406dc074acdcfb9225465ffe755bcd41f5e8da480d037ba7d7869d6abd99",
+      "target": "samples/lean/foundations/MirroreaProofFirstOwnerByteCodec.lean",
+      "transform": "identity; source bytes/imports/declaration names unchanged",
+      "prior_full_read": true
+    },
+    {
+      "module": "MirroreaProofFirstOwnerTreeBytes",
+      "origin": "/home/codex/.local/state/mirrorea-proof-first/w4-20260922/cold-post63-wire-lease-correspondence/MirroreaProofFirstOwnerTreeBytes.lean",
+      "sha256": "b0b32cd7a59203bb1c473e2433968eee0228108efe5498f3739e8915898891b4",
+      "target": "samples/lean/foundations/MirroreaProofFirstOwnerTreeBytes.lean",
+      "transform": "identity; source bytes/imports/declaration names unchanged",
+      "prior_full_read": true
+    },
+    {
+      "module": "MirroreaProofFirstOwnerPacketCodec",
+      "origin": "/home/codex/.local/state/mirrorea-proof-first/w4-20260922/cold-post63-wire-lease-correspondence/MirroreaProofFirstOwnerPacketCodec.lean",
+      "sha256": "af9b8900505f87c928bf26f55e453d9b922e0f2d3e88609623569f23c03d840c",
+      "target": "samples/lean/foundations/MirroreaProofFirstOwnerPacketCodec.lean",
+      "transform": "identity; source bytes/imports/declaration names unchanged",
+      "prior_full_read": true
+    },
+    {
+      "module": "MirroreaProofFirstOwnerPayload",
+      "origin": "/home/codex/.local/state/mirrorea-proof-first/w4-20260922/cold-post63-wire-lease-correspondence/MirroreaProofFirstOwnerPayload.lean",
+      "sha256": "6cff243914dac868640558e788f13010db3db6a1f370f1d461bfa52e645ed9a2",
+      "target": "samples/lean/foundations/MirroreaProofFirstOwnerPayload.lean",
+      "transform": "identity; source bytes/imports/declaration names unchanged",
+      "prior_full_read": true
+    },
+    {
+      "module": "MirroreaProofFirstOwnerTableEvaluator",
+      "origin": "/home/codex/.local/state/mirrorea-proof-first/w4-20260922/cold-post63-wire-lease-correspondence/MirroreaProofFirstOwnerTableEvaluator.lean",
+      "sha256": "2a1c7c6bcd2060303d1a6828d5d42fe7316bb1d9a12f2d505485c7ca28159c02",
+      "target": "samples/lean/foundations/MirroreaProofFirstOwnerTableEvaluator.lean",
+      "transform": "identity; source bytes/imports/declaration names unchanged",
+      "prior_full_read": true
+    },
+    {
+      "module": "MirroreaProofFirstOwnerOccurrence",
+      "origin": "/home/codex/.local/state/mirrorea-proof-first/w4-20260922/cold-post63-wire-lease-correspondence/MirroreaProofFirstOwnerOccurrence.lean",
+      "sha256": "7451b59c76cc2e08fbaa6747b6b14b463102ae39a4ea057ef4317b6beb5ec610",
+      "target": "samples/lean/foundations/MirroreaProofFirstOwnerOccurrence.lean",
+      "transform": "identity; source bytes/imports/declaration names unchanged",
+      "prior_full_read": false
+    },
+    {
+      "module": "MirroreaProofFirstOwnerReservation",
+      "origin": "/home/codex/.local/state/mirrorea-proof-first/w4-20260922/cold-post63-wire-lease-correspondence/MirroreaProofFirstOwnerReservation.lean",
+      "sha256": "40bc4c475c174dde2191429be18d1927a78b8b808f33f51627c83b557b8a4968",
+      "target": "samples/lean/foundations/MirroreaProofFirstOwnerReservation.lean",
+      "transform": "identity; source bytes/imports/declaration names unchanged",
+      "prior_full_read": true
+    },
+    {
+      "module": "MirroreaProofFirstReferenceSourceElaboration",
+      "origin": "/home/codex/.local/state/mirrorea-proof-first/w4-20260922/cold-post63-wire-lease-correspondence/MirroreaProofFirstReferenceSourceElaboration.lean",
+      "sha256": "c8117c1df83294eedffc776bc884610e102f3d587792a8ecf01d1bbef7410074",
+      "target": "samples/lean/foundations/MirroreaProofFirstReferenceSourceElaboration.lean",
+      "transform": "identity; source bytes/imports/declaration names unchanged",
+      "prior_full_read": false
+    },
+    {
+      "module": "MirroreaProofFirstReferenceSourceTyping",
+      "origin": "/home/codex/.local/state/mirrorea-proof-first/w4-20260922/cold-post63-wire-lease-correspondence/MirroreaProofFirstReferenceSourceTyping.lean",
+      "sha256": "5e9a8177a97c059e4d4480337deca1f646ac0e3e7633f6ee40088168a558aaed",
+      "target": "samples/lean/foundations/MirroreaProofFirstReferenceSourceTyping.lean",
+      "transform": "identity; source bytes/imports/declaration names unchanged",
+      "prior_full_read": false
+    },
+    {
+      "module": "MirroreaProofFirstReferenceSourceTrace",
+      "origin": "/home/codex/.local/state/mirrorea-proof-first/w4-20260922/cold-post63-wire-lease-correspondence/MirroreaProofFirstReferenceSourceTrace.lean",
+      "sha256": "041bb10f7c7a28816d6337c809f53009a0508eef5411c0496a9fc616da079c47",
+      "target": "samples/lean/foundations/MirroreaProofFirstReferenceSourceTrace.lean",
+      "transform": "identity; source bytes/imports/declaration names unchanged",
+      "prior_full_read": true
+    },
+    {
+      "module": "MirroreaProofFirstReferenceAuthority",
+      "origin": "/home/codex/.local/state/mirrorea-proof-first/w4-20260922/cold-post63-wire-lease-correspondence/MirroreaProofFirstReferenceAuthority.lean",
+      "sha256": "24eba9de0f7ace2ffcb2ae2a56a8ba75d1e9bb74e5cae0cda4b8ba5e54a94f39",
+      "target": "samples/lean/foundations/MirroreaProofFirstReferenceAuthority.lean",
+      "transform": "identity; source bytes/imports/declaration names unchanged",
+      "prior_full_read": true
+    },
+    {
+      "module": "MirroreaProofFirstReferenceContinuation",
+      "origin": "/home/codex/.local/state/mirrorea-proof-first/w4-20260922/cold-post63-wire-lease-correspondence/MirroreaProofFirstReferenceContinuation.lean",
+      "sha256": "df1fd195c8e4eacc65c0fd2b082d559e0c93041a3b510fa7245c7d03179ba347",
+      "target": "samples/lean/foundations/MirroreaProofFirstReferenceContinuation.lean",
+      "transform": "identity; source bytes/imports/declaration names unchanged",
+      "prior_full_read": true
+    },
+    {
+      "module": "MirroreaProofFirstReferenceChronology",
+      "origin": "/home/codex/.local/state/mirrorea-proof-first/w4-20260922/cold-post63-wire-lease-correspondence/MirroreaProofFirstReferenceChronology.lean",
+      "sha256": "8556d8f5f0b4fdafe25f12b6f864cf05c7882ced651af81862371316227250e3",
+      "target": "samples/lean/foundations/MirroreaProofFirstReferenceChronology.lean",
+      "transform": "identity; source bytes/imports/declaration names unchanged",
+      "prior_full_read": false
+    },
+    {
+      "module": "MirroreaProofFirstReferenceOrigins",
+      "origin": "/home/codex/.local/state/mirrorea-proof-first/w4-20260922/cold-post63-wire-lease-correspondence/MirroreaProofFirstReferenceOrigins.lean",
+      "sha256": "ed1d90c1bd0d3be2d1cf5c919da586714b47e4efad41232436679e4167bf5eb4",
+      "target": "samples/lean/foundations/MirroreaProofFirstReferenceOrigins.lean",
+      "transform": "identity; source bytes/imports/declaration names unchanged",
+      "prior_full_read": false
+    },
+    {
+      "module": "MirroreaProofFirstReferenceSourceOrigins",
+      "origin": "/home/codex/.local/state/mirrorea-proof-first/w4-20260922/cold-post63-wire-lease-correspondence/MirroreaProofFirstReferenceSourceOrigins.lean",
+      "sha256": "cff4e953f64cc7a0db36d615f4bbc1745cc4dd1ce2f2fdb2e7f1daf9595f0043",
+      "target": "samples/lean/foundations/MirroreaProofFirstReferenceSourceOrigins.lean",
+      "transform": "identity; source bytes/imports/declaration names unchanged",
+      "prior_full_read": false
+    },
+    {
+      "module": "MirroreaProofFirstReferenceSession",
+      "origin": "/home/codex/.local/state/mirrorea-proof-first/w4-20260922/cold-post63-wire-lease-correspondence/MirroreaProofFirstReferenceSession.lean",
+      "sha256": "445de39b10272781d61a1f8e51ab38893830e68e282b926b810d849c35825c64",
+      "target": "samples/lean/foundations/MirroreaProofFirstReferenceSession.lean",
+      "transform": "identity; source bytes/imports/declaration names unchanged",
+      "prior_full_read": true
+    },
+    {
+      "module": "MirroreaProofFirstReceivedResult",
+      "origin": "/home/codex/.local/state/mirrorea-proof-first/w4-20260922/cold-post63-wire-lease-correspondence/MirroreaProofFirstReceivedResult.lean",
+      "sha256": "6186b71dced2db478e79587ee5a84103b69696a7f9c231b6f0bfe3cdf5997caa",
+      "target": "samples/lean/foundations/MirroreaProofFirstReceivedResult.lean",
+      "transform": "identity; source bytes/imports/declaration names unchanged",
+      "prior_full_read": true
+    },
+    {
+      "module": "MirroreaProofFirstReceivedTicket",
+      "origin": "/home/codex/.local/state/mirrorea-proof-first/w4-20260922/cold-post63-wire-lease-correspondence/MirroreaProofFirstReceivedTicket.lean",
+      "sha256": "812f8c176b45b4871f167678e60145425b73d0b2bba0c493b6014cf7d5bf9b8a",
+      "target": "samples/lean/foundations/MirroreaProofFirstReceivedTicket.lean",
+      "transform": "identity; source bytes/imports/declaration names unchanged",
+      "prior_full_read": true
+    },
+    {
+      "module": "MirroreaProofFirstOwnerReceipt",
+      "origin": "/home/codex/.local/state/mirrorea-proof-first/w4-20260922/cold-post63-wire-lease-correspondence/MirroreaProofFirstOwnerReceipt.lean",
+      "sha256": "46d8649112b616754c9afe9c62d6c81df8e740e4c3e9473d1f6a38fa79cb3f8a",
+      "target": "samples/lean/foundations/MirroreaProofFirstOwnerReceipt.lean",
+      "transform": "identity; source bytes/imports/declaration names unchanged",
+      "prior_full_read": true
+    },
+    {
+      "module": "OwnerReservationWorkerSupport",
+      "origin": "/home/codex/.local/state/mirrorea-proof-first/w4-20260922/cold-post63-wire-lease-correspondence/OwnerReservationWorkerSupport.lean",
+      "sha256": "7fb0e5e2f1ce60edbb189e30512d2820197b005b825d910de860cd6fab56c091",
+      "target": "samples/lean/foundations/OwnerReservationWorkerSupport.lean",
+      "transform": "identity; source bytes/imports/declaration names unchanged",
+      "prior_full_read": true
+    },
+    {
+      "module": "MirroreaProofFirstOwnerEndpoint",
+      "origin": "/home/codex/.local/state/mirrorea-proof-first/w4-20260922/cold-post63-wire-lease-correspondence/MirroreaProofFirstOwnerEndpoint.lean",
+      "sha256": "ed0450096fbc627346269987de97f0860aa5c91e9e301c127106e2b6bd7ab3e6",
+      "target": "samples/lean/foundations/MirroreaProofFirstOwnerEndpoint.lean",
+      "transform": "identity; source bytes/imports/declaration names unchanged",
+      "prior_full_read": true
+    },
+    {
+      "module": "MirroreaProofFirstSourceHistory",
+      "origin": "/home/codex/.local/state/mirrorea-proof-first/w4-20260922/cold-post63-wire-lease-correspondence/MirroreaProofFirstSourceHistory.lean",
+      "sha256": "474da37b05782c7f752aeedb0c63cac9fe41ba7c08062cf42cc60a9929a2a0c4",
+      "target": "samples/lean/foundations/MirroreaProofFirstSourceHistory.lean",
+      "transform": "identity; source bytes/imports/declaration names unchanged",
+      "prior_full_read": false
+    },
+    {
+      "module": "MirroreaProofFirstSourceLocators",
+      "origin": "/home/codex/.local/state/mirrorea-proof-first/w4-20260922/cold-post63-wire-lease-correspondence/MirroreaProofFirstSourceLocators.lean",
+      "sha256": "91119319b81769799647d0dced8b664d2f90ee0056cf3902341333ab59493258",
+      "target": "samples/lean/foundations/MirroreaProofFirstSourceLocators.lean",
+      "transform": "identity; source bytes/imports/declaration names unchanged",
+      "prior_full_read": true
+    },
+    {
+      "module": "MirroreaProofFirstReferenceSourceLocators",
+      "origin": "/home/codex/.local/state/mirrorea-proof-first/w4-20260922/cold-post63-wire-lease-correspondence/MirroreaProofFirstReferenceSourceLocators.lean",
+      "sha256": "79c6fe3a42015c0b7253532257703e7f968bfa2b971e2662c2a37f3e3abecc92",
+      "target": "samples/lean/foundations/MirroreaProofFirstReferenceSourceLocators.lean",
+      "transform": "identity; source bytes/imports/declaration names unchanged",
+      "prior_full_read": false
+    },
+    {
+      "module": "MirroreaProofFirstReferenceSourceProvenance",
+      "origin": "/home/codex/.local/state/mirrorea-proof-first/w4-20260922/cold-post63-wire-lease-correspondence/MirroreaProofFirstReferenceSourceProvenance.lean",
+      "sha256": "74f9508407d5976cc32353032c3b60aac5835ed7c950ae703802c9809e648741",
+      "target": "samples/lean/foundations/MirroreaProofFirstReferenceSourceProvenance.lean",
+      "transform": "identity; source bytes/imports/declaration names unchanged",
+      "prior_full_read": true
+    },
+    {
+      "module": "MirroreaProofFirstSourcePlacement",
+      "origin": "/home/codex/.local/state/mirrorea-proof-first/w4-20260922/cold-post63-wire-lease-correspondence/MirroreaProofFirstSourcePlacement.lean",
+      "sha256": "2f9e2221660d909236e2abbae1dcfa6112b75ebad57bcb8304c78095052b06ce",
+      "target": "samples/lean/foundations/MirroreaProofFirstSourcePlacement.lean",
+      "transform": "identity; source bytes/imports/declaration names unchanged",
+      "prior_full_read": false
+    },
+    {
+      "module": "MirroreaProofFirstQualifiedSource",
+      "origin": "/home/codex/.local/state/mirrorea-proof-first/w4-20260922/cold-post63-wire-lease-correspondence/MirroreaProofFirstQualifiedSource.lean",
+      "sha256": "6e162cbcfadc9c9eaa9b090c571b6fec4df66d83a08ca2425e53ba5167b5b915",
+      "target": "samples/lean/foundations/MirroreaProofFirstQualifiedSource.lean",
+      "transform": "identity; source bytes/imports/declaration names unchanged",
+      "prior_full_read": false
+    },
+    {
+      "module": "MirroreaProofFirstQualifiedSession",
+      "origin": "/home/codex/.local/state/mirrorea-proof-first/w4-20260922/cold-post63-wire-lease-correspondence/MirroreaProofFirstQualifiedSession.lean",
+      "sha256": "83e5604795ccf25eb27f61b58cbe03318b5c8a5584a3e72c9bf4051ab454105d",
+      "target": "samples/lean/foundations/MirroreaProofFirstQualifiedSession.lean",
+      "transform": "identity; source bytes/imports/declaration names unchanged",
+      "prior_full_read": true
+    },
+    {
+      "module": "MirroreaProofFirstSourceCodec",
+      "origin": "/home/codex/.local/state/mirrorea-proof-first/w4-20260922/cold-post63-wire-lease-correspondence/MirroreaProofFirstSourceCodec.lean",
+      "sha256": "d9144adf8ffc0d8e5a5bb799a25da51320b5596f0853a23a285603120854030a",
+      "target": "samples/lean/foundations/MirroreaProofFirstSourceCodec.lean",
+      "transform": "identity; source bytes/imports/declaration names unchanged",
+      "prior_full_read": true
+    },
+    {
+      "module": "MirroreaProofFirstPublicationProgress",
+      "origin": "/home/codex/.local/state/mirrorea-proof-first/w4-20260922/cold-post63-wire-lease-correspondence/MirroreaProofFirstPublicationProgress.lean",
+      "sha256": "d368ab6a233be39c3d433edab9e39910fb9293e4e7a6056540e870b8488e885e",
+      "target": "samples/lean/foundations/MirroreaProofFirstPublicationProgress.lean",
+      "transform": "identity; source bytes/imports/declaration names unchanged",
+      "prior_full_read": false
+    },
+    {
+      "module": "MirroreaProofFirstPublicationImage",
+      "origin": "/home/codex/.local/state/mirrorea-proof-first/w4-20260922/cold-post63-wire-lease-correspondence/MirroreaProofFirstPublicationImage.lean",
+      "sha256": "8aad3cd4232d09a760183c8d06df66342785894f16d22c8900dc07ae8d34aeeb",
+      "target": "samples/lean/foundations/MirroreaProofFirstPublicationImage.lean",
+      "transform": "identity; source bytes/imports/declaration names unchanged",
+      "prior_full_read": true
+    },
+    {
+      "module": "MirroreaProofFirstQualifiedPublication",
+      "origin": "/home/codex/.local/state/mirrorea-proof-first/w4-20260922/cold-post63-wire-lease-correspondence/MirroreaProofFirstQualifiedPublication.lean",
+      "sha256": "69c7415152092590fb16fefe4d87a107792dec57fed44712fe68b85e723637fd",
+      "target": "samples/lean/foundations/MirroreaProofFirstQualifiedPublication.lean",
+      "transform": "identity; source bytes/imports/declaration names unchanged",
+      "prior_full_read": true
+    },
+    {
+      "module": "MirroreaProofFirstQualifiedCustody",
+      "origin": "/home/codex/.local/state/mirrorea-proof-first/w4-20260922/cold-post63-wire-lease-correspondence/MirroreaProofFirstQualifiedCustody.lean",
+      "sha256": "721572977ac9c99f8435b1234964cbcd8db2aa277b0236bac6bb64d672a96948",
+      "target": "samples/lean/foundations/MirroreaProofFirstQualifiedCustody.lean",
+      "transform": "identity; source bytes/imports/declaration names unchanged",
+      "prior_full_read": true
+    },
+    {
+      "module": "MirroreaProofFirstSourceInput",
+      "origin": "/home/codex/.local/state/mirrorea-proof-first/w4-20260922/cold-post63-wire-lease-correspondence/MirroreaProofFirstSourceInput.lean",
+      "sha256": "19c2aff93207026e59deba5f578a90b5cc9a1c7d8b56253b532004d67162efaf",
+      "target": "samples/lean/foundations/MirroreaProofFirstSourceInput.lean",
+      "transform": "identity; source bytes/imports/declaration names unchanged",
+      "prior_full_read": true
+    },
+    {
+      "module": "SourceWorkerSupport",
+      "origin": "/home/codex/.local/state/mirrorea-proof-first/w4-20260922/cold-post63-wire-lease-correspondence/SourceWorkerSupport.lean",
+      "sha256": "5f58156ca79ff5e33be39d630cf69b9d9e6451a8a02eceafcd812102eac0f8f1",
+      "target": "samples/lean/foundations/SourceWorkerSupport.lean",
+      "transform": "identity; source bytes/imports/declaration names unchanged",
+      "prior_full_read": true
+    },
+    {
+      "module": "OwnerEndpointCodec",
+      "origin": "/home/codex/.local/state/mirrorea-proof-first/w4-20260922/cold-post63-wire-lease-correspondence/OwnerEndpointCodec.lean",
+      "sha256": "e4b81ce2e4203c564c7f88537d21e328b50dc85909612a1cceb30319c5225781",
+      "target": "samples/lean/foundations/OwnerEndpointCodec.lean",
+      "transform": "identity; source bytes/imports/declaration names unchanged",
+      "prior_full_read": true
+    },
+    {
+      "module": "MirroreaProofFirstQualifiedReceipt",
+      "origin": "/home/codex/.local/state/mirrorea-proof-first/w4-20260922/cold-post63-wire-lease-correspondence/MirroreaProofFirstQualifiedReceipt.lean",
+      "sha256": "f0a42a5b4117b11bee72b3ead1c3a0018502bdcce6c9d1179470a131ed3afc6b",
+      "target": "samples/lean/foundations/MirroreaProofFirstQualifiedReceipt.lean",
+      "transform": "identity; source bytes/imports/declaration names unchanged",
+      "prior_full_read": true
+    },
+    {
+      "module": "MirroreaProofFirstCustodyPublication",
+      "origin": "/home/codex/.local/state/mirrorea-proof-first/w4-20260922/cold-post63-wire-lease-correspondence/MirroreaProofFirstCustodyPublication.lean",
+      "sha256": "994f7f6d6c6ded7d802b341f7b236bc0d3b9b0deb59e131a7fa38113670f7466",
+      "target": "samples/lean/foundations/MirroreaProofFirstCustodyPublication.lean",
+      "transform": "identity; source bytes/imports/declaration names unchanged",
+      "prior_full_read": true
+    },
+    {
+      "module": "MirroreaProofFirstPublicationInput",
+      "origin": "/home/codex/.local/state/mirrorea-proof-first/w4-20260922/cold-post63-wire-lease-correspondence/MirroreaProofFirstPublicationInput.lean",
+      "sha256": "1e908ba21a2e05e3bc03e4ee1be75def759d4d1f7f9fdb90b137e4bf11109609",
+      "target": "samples/lean/foundations/MirroreaProofFirstPublicationInput.lean",
+      "transform": "identity; source bytes/imports/declaration names unchanged",
+      "prior_full_read": true
+    },
+    {
+      "module": "MirroreaProofFirstOwnerResponseProfile",
+      "origin": "/home/codex/.local/state/mirrorea-proof-first/w4-20260922/cold-post63-wire-lease-correspondence/MirroreaProofFirstOwnerResponseProfile.lean",
+      "sha256": "8a9038953c81f2d0fec281cc0a1cc53be392a842ff190405c74dd7abe0530aa6",
+      "target": "samples/lean/foundations/MirroreaProofFirstOwnerResponseProfile.lean",
+      "transform": "identity; source bytes/imports/declaration names unchanged",
+      "prior_full_read": true
+    },
+    {
+      "module": "MirroreaProofFirstOwnerEndpointProfile",
+      "origin": "/home/codex/.local/state/mirrorea-proof-first/w4-20260922/cold-post63-wire-lease-correspondence/MirroreaProofFirstOwnerEndpointProfile.lean",
+      "sha256": "62009921a071c7131dc2dc910ebe24bcb026bcec48229ec94b9331d4162098df",
+      "target": "samples/lean/foundations/MirroreaProofFirstOwnerEndpointProfile.lean",
+      "transform": "identity; source bytes/imports/declaration names unchanged",
+      "prior_full_read": true
+    },
+    {
+      "module": "MirroreaProofFirstOwnerEndpointBudget",
+      "origin": "/home/codex/.local/state/mirrorea-proof-first/w4-20260922/cold-post63-wire-lease-correspondence/MirroreaProofFirstOwnerEndpointBudget.lean",
+      "sha256": "355c8457e73e27d05c2e971aaff5df02f857bbdbd8e998bf116e336f73133681",
+      "target": "samples/lean/foundations/MirroreaProofFirstOwnerEndpointBudget.lean",
+      "transform": "identity; source bytes/imports/declaration names unchanged",
+      "prior_full_read": true
+    },
+    {
+      "module": "MirroreaProofFirstOwnerFenceMonitor",
+      "origin": "/home/codex/.local/state/mirrorea-proof-first/w4-20260922/cold-post63-wire-lease-correspondence/MirroreaProofFirstOwnerFenceMonitor.lean",
+      "sha256": "36f5a10459d49f03cbea37abfc714d72817fd1d2c68975543966b69db194268f",
+      "target": "samples/lean/foundations/MirroreaProofFirstOwnerFenceMonitor.lean",
+      "transform": "identity; source bytes/imports/declaration names unchanged",
+      "prior_full_read": false
+    },
+    {
+      "module": "MirroreaProofFirstOwnerImageMonitor",
+      "origin": "/home/codex/.local/state/mirrorea-proof-first/w4-20260922/cold-post63-wire-lease-correspondence/MirroreaProofFirstOwnerImageMonitor.lean",
+      "sha256": "a65f238288314c7140eddb72ca274d00c1a9e34b92434a66c1bbd8f54d4a0b99",
+      "target": "samples/lean/foundations/MirroreaProofFirstOwnerImageMonitor.lean",
+      "transform": "identity; source bytes/imports/declaration names unchanged",
+      "prior_full_read": true
+    },
+    {
+      "module": "SourcePublicationWorkerSupport",
+      "origin": "/home/codex/.local/state/mirrorea-proof-first/w4-20260922/cold-post63-wire-lease-correspondence/SourcePublicationWorkerSupport.lean",
+      "sha256": "c594923a5ffcecfa593d62eff625d469afe3426b3e1761391a1879d2cd6d7a4e",
+      "target": "samples/lean/foundations/SourcePublicationWorkerSupport.lean",
+      "transform": "identity; source bytes/imports/declaration names unchanged",
+      "prior_full_read": true
+    },
+    {
+      "module": "MirroreaProofFirstPublicationReadability",
+      "origin": "/home/codex/.local/state/mirrorea-proof-first/w4-20260922/cold-post63-wire-lease-correspondence/MirroreaProofFirstPublicationReadability.lean",
+      "sha256": "be2d9c87fd0589c918b463e99aa9f89b035335085ef3cf8c07cd9f8549c4cb3a",
+      "target": "samples/lean/foundations/MirroreaProofFirstPublicationReadability.lean",
+      "transform": "identity; source bytes/imports/declaration names unchanged",
+      "prior_full_read": true
+    },
+    {
+      "module": "MirroreaProofFirstPublicationCapacity",
+      "origin": "/home/codex/.local/state/mirrorea-proof-first/w4-20260922/cold-post63-wire-lease-correspondence/MirroreaProofFirstPublicationCapacity.lean",
+      "sha256": "91dc721b530669fc91215e63b049a10176521f28dc0e1a5c578abd6515fa4e01",
+      "target": "samples/lean/foundations/MirroreaProofFirstPublicationCapacity.lean",
+      "transform": "identity; source bytes/imports/declaration names unchanged",
+      "prior_full_read": true
+    },
+    {
+      "module": "MirroreaProofFirstPublicationCapacityDriver",
+      "origin": "/home/codex/.local/state/mirrorea-proof-first/w4-20260922/cold-post63-wire-lease-correspondence/MirroreaProofFirstPublicationCapacityDriver.lean",
+      "sha256": "05dcfd78cce0298c1b8767e4421ace4c9b56de476d67d1843178bbadac0a696e",
+      "target": "samples/lean/foundations/MirroreaProofFirstPublicationCapacityDriver.lean",
+      "transform": "identity; source bytes/imports/declaration names unchanged",
+      "prior_full_read": true
+    },
+    {
+      "module": "MirroreaProofFirstPublicationLifecycle",
+      "origin": "/home/codex/.local/state/mirrorea-proof-first/w4-20260922/cold-post63-wire-lease-correspondence/MirroreaProofFirstPublicationLifecycle.lean",
+      "sha256": "a370dba75b3192a5794c16dec067531e4750290a06c9045f8cab3b494a38a160",
+      "target": "samples/lean/foundations/MirroreaProofFirstPublicationLifecycle.lean",
+      "transform": "identity; source bytes/imports/declaration names unchanged",
+      "prior_full_read": true
+    },
+    {
+      "module": "MirroreaProofFirstPublicationOwnerBudget",
+      "origin": "/home/codex/.local/state/mirrorea-proof-first/w4-20260922/cold-post63-wire-lease-correspondence/MirroreaProofFirstPublicationOwnerBudget.lean",
+      "sha256": "f4eba839e32156ad7252990e9d3f63c7d9d78de4323b522e9220a7113b874c9f",
+      "target": "samples/lean/foundations/MirroreaProofFirstPublicationOwnerBudget.lean",
+      "transform": "identity; source bytes/imports/declaration names unchanged",
+      "prior_full_read": true
+    },
+    {
+      "module": "MirroreaProofFirstOwnerFundingCursor",
+      "origin": "/home/codex/.local/state/mirrorea-proof-first/w4-20260922/cold-post63-wire-lease-correspondence/MirroreaProofFirstOwnerFundingCursor.lean",
+      "sha256": "13a68a971962823a6605273bb6aaef7a4d1b2a5b40787dd4cf4cb398bd77fabe",
+      "target": "samples/lean/foundations/MirroreaProofFirstOwnerFundingCursor.lean",
+      "transform": "identity; source bytes/imports/declaration names unchanged",
+      "prior_full_read": true
+    },
+    {
+      "module": "MirroreaProofFirstSourceFundingInput",
+      "origin": "/home/codex/.local/state/mirrorea-proof-first/w4-20260922/cold-post63-wire-lease-correspondence/MirroreaProofFirstSourceFundingInput.lean",
+      "sha256": "5786076cde0e0064e05c72d9f108b8f3859cb308ee1b090662920203b95683ff",
+      "target": "samples/lean/foundations/MirroreaProofFirstSourceFundingInput.lean",
+      "transform": "identity; source bytes/imports/declaration names unchanged",
+      "prior_full_read": true
+    },
+    {
+      "module": "MirroreaProofFirstSourceFundingQuery",
+      "origin": "/home/codex/.local/state/mirrorea-proof-first/w4-20260922/cold-post63-wire-lease-correspondence/MirroreaProofFirstSourceFundingQuery.lean",
+      "sha256": "e90730f8dd20f7e213abda587943cc41a5608b63981a85fd20f0ef702cf92d08",
+      "target": "samples/lean/foundations/MirroreaProofFirstSourceFundingQuery.lean",
+      "transform": "identity; source bytes/imports/declaration names unchanged",
+      "prior_full_read": false
+    },
+    {
+      "module": "MirroreaProofFirstSourceFundingFrame",
+      "origin": "/home/codex/.local/state/mirrorea-proof-first/w4-20260922/cold-post63-wire-lease-correspondence/MirroreaProofFirstSourceFundingFrame.lean",
+      "sha256": "c24b6ff5043afd064be5befde9a9a5eab4b7cb5eaa4a8fd56f4112381dd554e0",
+      "target": "samples/lean/foundations/MirroreaProofFirstSourceFundingFrame.lean",
+      "transform": "identity; source bytes/imports/declaration names unchanged",
+      "prior_full_read": false
+    },
+    {
+      "module": "MirroreaProofFirstSourceFundingPreservation",
+      "origin": "/home/codex/.local/state/mirrorea-proof-first/w4-20260922/cold-post63-wire-lease-correspondence/MirroreaProofFirstSourceFundingPreservation.lean",
+      "sha256": "d2433222ef82caa74a91c42ad2ca21f728a0a5c69c865d0b38eaab6282d09551",
+      "target": "samples/lean/foundations/MirroreaProofFirstSourceFundingPreservation.lean",
+      "transform": "identity; source bytes/imports/declaration names unchanged",
+      "prior_full_read": true
+    },
+    {
+      "module": "MirroreaProofFirstRoutedOwner",
+      "origin": "/home/codex/.local/state/mirrorea-proof-first/w4-20260922/cold-post63-wire-lease-correspondence/MirroreaProofFirstRoutedOwner.lean",
+      "sha256": "6a88a1e2b2d0b614e08f5653587cdc0d647f78079b235c62fb829a55eff35009",
+      "target": "samples/lean/foundations/MirroreaProofFirstRoutedOwner.lean",
+      "transform": "identity; source bytes/imports/declaration names unchanged",
+      "prior_full_read": false
+    },
+    {
+      "module": "MirroreaProofFirstOwnerCreditCustody",
+      "origin": "/home/codex/.local/state/mirrorea-proof-first/w4-20260922/cold-post63-wire-lease-correspondence/MirroreaProofFirstOwnerCreditCustody.lean",
+      "sha256": "de609cc6f93937eacfc12a547752830c45d7eaa975e1e4de3dad5bd46d542a7a",
+      "target": "samples/lean/foundations/MirroreaProofFirstOwnerCreditCustody.lean",
+      "transform": "identity; source bytes/imports/declaration names unchanged",
+      "prior_full_read": true
+    },
+    {
+      "module": "MirroreaProofFirstSourceCreditEntry",
+      "origin": "/home/codex/.local/state/mirrorea-proof-first/w4-20260922/cold-post63-wire-lease-correspondence/MirroreaProofFirstSourceCreditEntry.lean",
+      "sha256": "29289d086401101d5e4e0922fefbb96f89ac8cc9edcc87fe8213c253e0e2866f",
+      "target": "samples/lean/foundations/MirroreaProofFirstSourceCreditEntry.lean",
+      "transform": "identity; source bytes/imports/declaration names unchanged",
+      "prior_full_read": true
+    },
+    {
+      "module": "MirroreaProofFirstOwnerWorkInterval",
+      "origin": "/home/codex/.local/state/mirrorea-proof-first/w4-20260922/cold-post63-wire-lease-correspondence/MirroreaProofFirstOwnerWorkInterval.lean",
+      "sha256": "b74d45ffb1d4650a328061f551bf586bddd512c9942324ffcbdb4765bae407cb",
+      "target": "samples/lean/foundations/MirroreaProofFirstOwnerWorkInterval.lean",
+      "transform": "identity; source bytes/imports/declaration names unchanged",
+      "prior_full_read": true
+    },
+    {
+      "module": "MirroreaProofFirstSourceFundingWork",
+      "origin": "/home/codex/.local/state/mirrorea-proof-first/w4-20260922/cold-post63-wire-lease-correspondence/MirroreaProofFirstSourceFundingWork.lean",
+      "sha256": "5fa9c1b0bcd99900186fda4eef595f32af795f1177252d4a5a482c90dcf2ee14",
+      "target": "samples/lean/foundations/MirroreaProofFirstSourceFundingWork.lean",
+      "transform": "identity; source bytes/imports/declaration names unchanged",
+      "prior_full_read": true
+    },
+    {
+      "module": "MirroreaProofFirstSourceFundingCheckedWork",
+      "origin": "/home/codex/.local/state/mirrorea-proof-first/w4-20260922/cold-post63-wire-lease-correspondence/MirroreaProofFirstSourceFundingCheckedWork.lean",
+      "sha256": "0bfa04e250d65b8144aed3a451286eb6c1c82ecbe4efce4cb8285da436b5289b",
+      "target": "samples/lean/foundations/MirroreaProofFirstSourceFundingCheckedWork.lean",
+      "transform": "identity; source bytes/imports/declaration names unchanged",
+      "prior_full_read": true
+    },
+    {
+      "module": "MirroreaProofFirstSourceOwnerGate",
+      "origin": "/home/codex/.local/state/mirrorea-proof-first/w4-20260922/cold-post63-wire-lease-correspondence/MirroreaProofFirstSourceOwnerGate.lean",
+      "sha256": "40d939056452fa49d643aa817562c55f1da7556140d204dea37e5c9cb180bb57",
+      "target": "samples/lean/foundations/MirroreaProofFirstSourceOwnerGate.lean",
+      "transform": "identity; source bytes/imports/declaration names unchanged",
+      "prior_full_read": true
+    },
+    {
+      "module": "MirroreaProofFirstSourceOwnerFence",
+      "origin": "/home/codex/.local/state/mirrorea-proof-first/w4-20260922/cold-post63-wire-lease-correspondence/MirroreaProofFirstSourceOwnerFence.lean",
+      "sha256": "47e13af420ee5ac3967613e918679f5e70ea6cb2d802dbacd48e4a86f28a99f5",
+      "target": "samples/lean/foundations/MirroreaProofFirstSourceOwnerFence.lean",
+      "transform": "identity; source bytes/imports/declaration names unchanged",
+      "prior_full_read": false
+    },
+    {
+      "module": "MirroreaProofFirstOwnerPublicationBudget",
+      "origin": "/home/codex/.local/state/mirrorea-proof-first/w4-20260922/cold-post63-wire-lease-correspondence/MirroreaProofFirstOwnerPublicationBudget.lean",
+      "sha256": "4907e5394528c73030c077933376e9ff535570ddac3fd714dfdd566536e9228c",
+      "target": "samples/lean/foundations/MirroreaProofFirstOwnerPublicationBudget.lean",
+      "transform": "identity; source bytes/imports/declaration names unchanged",
+      "prior_full_read": false
+    },
+    {
+      "module": "MirroreaProofFirstSourceFundingAdministration",
+      "origin": "/home/codex/.local/state/mirrorea-proof-first/w4-20260922/cold-post63-wire-lease-correspondence/MirroreaProofFirstSourceFundingAdministration.lean",
+      "sha256": "98a28379b95223174b0bdf23ac05a0b140adf41d6df6d2618ec58b599e0c5ea9",
+      "target": "samples/lean/foundations/MirroreaProofFirstSourceFundingAdministration.lean",
+      "transform": "identity; source bytes/imports/declaration names unchanged",
+      "prior_full_read": true
+    },
+    {
+      "module": "MirroreaProofFirstSourceOwnerFloor",
+      "origin": "/home/codex/.local/state/mirrorea-proof-first/w4-20260922/cold-post63-wire-lease-correspondence/MirroreaProofFirstSourceOwnerFloor.lean",
+      "sha256": "d14c98542053067ae80d40fcc4ecae9fecedcb54cd7aa1df600bba4bc56937a2",
+      "target": "samples/lean/foundations/MirroreaProofFirstSourceOwnerFloor.lean",
+      "transform": "identity; source bytes/imports/declaration names unchanged",
+      "prior_full_read": false
+    },
+    {
+      "module": "MirroreaProofFirstSourceCurrentFrame",
+      "origin": "/home/codex/.local/state/mirrorea-proof-first/w4-20260922/cold-post63-wire-lease-correspondence/MirroreaProofFirstSourceCurrentFrame.lean",
+      "sha256": "0747c1bd8d3891e5d95c91db99d70a8d2efa6ce7abefb937741a1a452db57a8e",
+      "target": "samples/lean/foundations/MirroreaProofFirstSourceCurrentFrame.lean",
+      "transform": "identity; source bytes/imports/declaration names unchanged",
+      "prior_full_read": true
+    },
+    {
+      "module": "MirroreaProofFirstSourceOwnerImage",
+      "origin": "/home/codex/.local/state/mirrorea-proof-first/w4-20260922/cold-post63-wire-lease-correspondence/MirroreaProofFirstSourceOwnerImage.lean",
+      "sha256": "34f0a7c7a2bf6957767fdbfbe2ee758b8fee7b33ea6ec2544b743152a7e874d3",
+      "target": "samples/lean/foundations/MirroreaProofFirstSourceOwnerImage.lean",
+      "transform": "identity; source bytes/imports/declaration names unchanged",
+      "prior_full_read": true
+    },
+    {
+      "module": "MirroreaProofFirstOwnerRevisionHistory",
+      "origin": "/home/codex/.local/state/mirrorea-proof-first/w4-20260922/cold-post63-wire-lease-correspondence/MirroreaProofFirstOwnerRevisionHistory.lean",
+      "sha256": "c50080de22f70b64faa76d797da2c3743db5d6a23190695c087f9d448992af4a",
+      "target": "samples/lean/foundations/MirroreaProofFirstOwnerRevisionHistory.lean",
+      "transform": "identity; source bytes/imports/declaration names unchanged",
+      "prior_full_read": true
+    },
+    {
+      "module": "MirroreaProofFirstOwnerInstallationHistory",
+      "origin": "/home/codex/.local/state/mirrorea-proof-first/w4-20260922/cold-post63-wire-lease-correspondence/MirroreaProofFirstOwnerInstallationHistory.lean",
+      "sha256": "e5b1080e2372c7efd8055e69c403d48b4b2592e805214432d9427fb75c52fc51",
+      "target": "samples/lean/foundations/MirroreaProofFirstOwnerInstallationHistory.lean",
+      "transform": "identity; source bytes/imports/declaration names unchanged",
+      "prior_full_read": true
+    },
+    {
+      "module": "MirroreaProofFirstSourceRegistration",
+      "origin": "/home/codex/.local/state/mirrorea-proof-first/w4-20260922/cold-post63-wire-lease-correspondence/MirroreaProofFirstSourceRegistration.lean",
+      "sha256": "95f672be424a3d925c6d30206a93f6a9458f3761207c867655519b9e3c1bc9bb",
+      "target": "samples/lean/foundations/MirroreaProofFirstSourceRegistration.lean",
+      "transform": "identity; source bytes/imports/declaration names unchanged",
+      "prior_full_read": true
+    },
+    {
+      "module": "MirroreaProofFirstPublicOwnerBoundary",
+      "origin": "/home/codex/.local/state/mirrorea-proof-first/w4-20260922/cold-post63-wire-lease-correspondence/MirroreaProofFirstPublicOwnerBoundary.lean",
+      "sha256": "8da8374d36fe8c155c470bc7b5a85f4b4a4c08bb64884184a5555261d3d89a10",
+      "target": "samples/lean/foundations/MirroreaProofFirstPublicOwnerBoundary.lean",
+      "transform": "identity; source bytes/imports/declaration names unchanged",
+      "prior_full_read": true
+    },
+    {
+      "module": "MirroreaProofFirstOwnerActualRoot",
+      "origin": "/home/codex/.local/state/mirrorea-proof-first/w4-20260922/cold-post63-wire-lease-correspondence/MirroreaProofFirstOwnerActualRoot.lean",
+      "sha256": "e42d1e38cab37c14fa45b6f0e7372ac2a9d6eb077a8d1bdccc452b74815262ce",
+      "target": "samples/lean/foundations/MirroreaProofFirstOwnerActualRoot.lean",
+      "transform": "identity; source bytes/imports/declaration names unchanged",
+      "prior_full_read": true
+    },
+    {
+      "module": "MirroreaProofFirstPublicJointHistory",
+      "origin": "/home/codex/.local/state/mirrorea-proof-first/w4-20260922/cold-post63-wire-lease-correspondence/MirroreaProofFirstPublicJointHistory.lean",
+      "sha256": "01fac09f62df56fc4ef54df01ab222e5d46d5f0f04fc33cbdde7a8be909f732d",
+      "target": "samples/lean/foundations/MirroreaProofFirstPublicJointHistory.lean",
+      "transform": "identity; source bytes/imports/declaration names unchanged",
+      "prior_full_read": true
+    },
+    {
+      "module": "MirroreaProofFirstPublicOwnerReplay",
+      "origin": "/home/codex/.local/state/mirrorea-proof-first/w4-20260922/cold-post63-wire-lease-correspondence/MirroreaProofFirstPublicOwnerReplay.lean",
+      "sha256": "06b3f03438418eff77b883a73f26c28e30bc0f4552dde01d095815495babc5e9",
+      "target": "samples/lean/foundations/MirroreaProofFirstPublicOwnerReplay.lean",
+      "transform": "identity; source bytes/imports/declaration names unchanged",
+      "prior_full_read": true
+    },
+    {
+      "module": "MirroreaProofFirstPublicJointReplay",
+      "origin": "/home/codex/.local/state/mirrorea-proof-first/w4-20260922/cold-post63-wire-lease-correspondence/MirroreaProofFirstPublicJointReplay.lean",
+      "sha256": "d4fcdadf3c04896fdfcb50955d07e71cfbbaf87836a4ba689b382315c39a41d6",
+      "target": "samples/lean/foundations/MirroreaProofFirstPublicJointReplay.lean",
+      "transform": "identity; source bytes/imports/declaration names unchanged",
+      "prior_full_read": true
+    },
+    {
+      "module": "MirroreaProofFirstPublicJointWork",
+      "origin": "/home/codex/.local/state/mirrorea-proof-first/w4-20260922/cold-post63-wire-lease-correspondence/MirroreaProofFirstPublicJointWork.lean",
+      "sha256": "782d2995869490621935cc4647056b580d174040579f80534dc423876dc0b20c",
+      "target": "samples/lean/foundations/MirroreaProofFirstPublicJointWork.lean",
+      "transform": "identity; source bytes/imports/declaration names unchanged",
+      "prior_full_read": true
+    },
+    {
+      "module": "MirroreaProofFirstPaidHeadPhase",
+      "origin": "/home/codex/.local/state/mirrorea-proof-first/w4-20260922/cold-post63-wire-lease-correspondence/MirroreaProofFirstPaidHeadPhase.lean",
+      "sha256": "f2f890fac49d51dc3c74da432d22fa77edbb54722b4d854c95b1d867c5476cbc",
+      "target": "samples/lean/foundations/MirroreaProofFirstPaidHeadPhase.lean",
+      "transform": "identity; source bytes/imports/declaration names unchanged",
+      "prior_full_read": true
+    },
+    {
+      "module": "MirroreaProofFirstCohortPhase",
+      "origin": "/home/codex/.local/state/mirrorea-proof-first/w4-20260922/cold-post63-wire-lease-correspondence/MirroreaProofFirstCohortPhase.lean",
+      "sha256": "920cf57ff278b5189f91f178dd5486990d11ebb53bb22a019c2501ffc816542a",
+      "target": "samples/lean/foundations/MirroreaProofFirstCohortPhase.lean",
+      "transform": "identity; source bytes/imports/declaration names unchanged",
+      "prior_full_read": true
+    },
+    {
+      "module": "MirroreaProofFirstOwnerReservationMonitor",
+      "origin": "/home/codex/.local/state/mirrorea-proof-first/w4-20260922/cold-post63-wire-lease-correspondence/MirroreaProofFirstOwnerReservationMonitor.lean",
+      "sha256": "cf05398a99b96e8d80e79b3173c03be2852d71fa8eca6f43f4190baa67eadcc0",
+      "target": "samples/lean/foundations/MirroreaProofFirstOwnerReservationMonitor.lean",
+      "transform": "identity; source bytes/imports/declaration names unchanged",
+      "prior_full_read": true
+    },
+    {
+      "module": "MirroreaProofFirstJointWorkCursor",
+      "origin": "/home/codex/.local/state/mirrorea-proof-first/w4-20260922/cold-post63-wire-lease-correspondence/MirroreaProofFirstJointWorkCursor.lean",
+      "sha256": "93414fc22cfae096e82dfcd04561528b3eef4cca27dd681d1dccdd7c056225cc",
+      "target": "samples/lean/foundations/MirroreaProofFirstJointWorkCursor.lean",
+      "transform": "identity; source bytes/imports/declaration names unchanged",
+      "prior_full_read": true
+    },
+    {
+      "module": "MirroreaProofFirstWorkOccurrence",
+      "origin": "/home/codex/.local/state/mirrorea-proof-first/w4-20260922/cold-post63-wire-lease-correspondence/MirroreaProofFirstWorkOccurrence.lean",
+      "sha256": "1c014fa1a5f0711b385f9bc000ba853028559db6ab038dd4f2f2f784ae83b931",
+      "target": "samples/lean/foundations/MirroreaProofFirstWorkOccurrence.lean",
+      "transform": "identity; source bytes/imports/declaration names unchanged",
+      "prior_full_read": true
+    },
+    {
+      "module": "MirroreaProofFirstWorkOccurrenceReplay",
+      "origin": "/home/codex/.local/state/mirrorea-proof-first/w4-20260922/cold-post63-wire-lease-correspondence/MirroreaProofFirstWorkOccurrenceReplay.lean",
+      "sha256": "08a628a542d554d42b5e62ca57843d8fbbbc37d4a7485067f693aef5445c752b",
+      "target": "samples/lean/foundations/MirroreaProofFirstWorkOccurrenceReplay.lean",
+      "transform": "identity; source bytes/imports/declaration names unchanged",
+      "prior_full_read": true
+    },
+    {
+      "module": "MirroreaProofFirstJointDriver",
+      "origin": "/home/codex/.local/state/mirrorea-proof-first/w4-20260922/cold-post63-wire-lease-correspondence/MirroreaProofFirstJointDriver.lean",
+      "sha256": "4c7711cc7f3e4f000ec82d1ad1971141a98ddef1e1d228632f95977d33805281",
+      "target": "samples/lean/foundations/MirroreaProofFirstJointDriver.lean",
+      "transform": "identity; source bytes/imports/declaration names unchanged",
+      "prior_full_read": true
+    },
+    {
+      "module": "MirroreaProofFirstCohortPhysicalOrdinal",
+      "origin": "/home/codex/.local/state/mirrorea-proof-first/w4-20260922/cold-post63-wire-lease-correspondence/MirroreaProofFirstCohortPhysicalOrdinal.lean",
+      "sha256": "52d44ee9d4a15f095459e7439c91609f20860f6ca79a8c467075bf7719bc4663",
+      "target": "samples/lean/foundations/MirroreaProofFirstCohortPhysicalOrdinal.lean",
+      "transform": "identity; source bytes/imports/declaration names unchanged",
+      "prior_full_read": true
+    },
+    {
+      "module": "MirroreaProofFirstCohortFundingReplay",
+      "origin": "/home/codex/.local/state/mirrorea-proof-first/w4-20260922/cold-post63-wire-lease-correspondence/MirroreaProofFirstCohortFundingReplay.lean",
+      "sha256": "6f534fd365d5f1fd432c130745fe89dcbe9a57590b44495a2c83daada6716223",
+      "target": "samples/lean/foundations/MirroreaProofFirstCohortFundingReplay.lean",
+      "transform": "identity; source bytes/imports/declaration names unchanged",
+      "prior_full_read": true
+    },
+    {
+      "module": "MirroreaProofFirstSharedNativeStep",
+      "origin": "/home/codex/.local/state/mirrorea-proof-first/w4-20260922/cold-post63-wire-lease-correspondence/MirroreaProofFirstSharedNativeStep.lean",
+      "sha256": "ae0febdeea687e811399251e65a71e3b68eea15819018943192ca277d02947a1",
+      "target": "samples/lean/foundations/MirroreaProofFirstSharedNativeStep.lean",
+      "transform": "identity; source bytes/imports/declaration names unchanged",
+      "prior_full_read": true
+    },
+    {
+      "module": "MirroreaProofFirstSharedJointDriver",
+      "origin": "/home/codex/.local/state/mirrorea-proof-first/w4-20260922/cold-post63-wire-lease-correspondence/MirroreaProofFirstSharedJointDriver.lean",
+      "sha256": "fc060915ecde83a3cafbaa5bd7d93bbc2c84253bf1f1dd25eae475c9008e6f2a",
+      "target": "samples/lean/foundations/MirroreaProofFirstSharedJointDriver.lean",
+      "transform": "identity; source bytes/imports/declaration names unchanged",
+      "prior_full_read": true
+    },
+    {
+      "module": "MirroreaProofFirstSharedFundedDriver",
+      "origin": "/home/codex/.local/state/mirrorea-proof-first/w4-20260922/cold-post63-wire-lease-correspondence/MirroreaProofFirstSharedFundedDriver.lean",
+      "sha256": "4597283778e4de08208f824b47e52cc290405a449168d0c7fcee3ad7d8800e57",
+      "target": "samples/lean/foundations/MirroreaProofFirstSharedFundedDriver.lean",
+      "transform": "identity; source bytes/imports/declaration names unchanged",
+      "prior_full_read": true
+    },
+    {
+      "module": "MirroreaProofFirstSharedWireLifetime",
+      "origin": "/home/codex/.local/state/mirrorea-proof-first/w4-20260922/cold-post63-wire-lease-correspondence/MirroreaProofFirstSharedWireLifetime.lean",
+      "sha256": "a3c3967bf34935124a16c9884359e1a1cf8206f8c79605b8a578495e277b19d6",
+      "target": "samples/lean/foundations/MirroreaProofFirstSharedWireLifetime.lean",
+      "transform": "identity; source bytes/imports/declaration names unchanged",
+      "prior_full_read": true
+    },
+    {
+      "module": "MirroreaProofFirstOwnerCommitJournal",
+      "origin": "/home/codex/.local/state/mirrorea-proof-first/w4-20260922/cold-post63-wire-lease-correspondence/MirroreaProofFirstOwnerCommitJournal.lean",
+      "sha256": "50d88a954cbf4e1620fdfddb5ba7f67e268c2b81baa761eff32c6927a1fa4842",
+      "target": "samples/lean/foundations/MirroreaProofFirstOwnerCommitJournal.lean",
+      "transform": "identity; source bytes/imports/declaration names unchanged",
+      "prior_full_read": true
+    },
+    {
+      "module": "MirroreaProofFirstSharedHostJoin",
+      "origin": "/home/codex/.local/state/mirrorea-proof-first/w4-20260922/cold-post63-wire-lease-correspondence/MirroreaProofFirstSharedHostJoin.lean",
+      "sha256": "923400dea1c34982367062e27773946dd12888ed9d01d96da4d550df000a7dbc",
+      "target": "samples/lean/foundations/MirroreaProofFirstSharedHostJoin.lean",
+      "transform": "identity; source bytes/imports/declaration names unchanged",
+      "prior_full_read": true
+    },
+    {
+      "module": "MirroreaProofFirstWaitingWork",
+      "origin": "/home/codex/.local/state/mirrorea-proof-first/w4-20260922/cold-post63-wire-lease-correspondence/MirroreaProofFirstWaitingWork.lean",
+      "sha256": "bcfbc548a09ecfee96feb93d23fc998dd3a8856e6998217fa45672360df1a1ce",
+      "target": "samples/lean/foundations/MirroreaProofFirstWaitingWork.lean",
+      "transform": "identity; source bytes/imports/declaration names unchanged",
+      "prior_full_read": true
+    },
+    {
+      "module": "PublicCapturedReplay",
+      "origin": "/home/codex/.local/state/mirrorea-proof-first/w4-20260922/cold-post63-wire-lease-correspondence/PublicCapturedReplay.lean",
+      "sha256": "abdef2fde6d019126fd7fb89a8d8b36afc5239d02c9e0ab2bb8a29eaf02552e0",
+      "target": "samples/lean/foundations/PublicCapturedReplay.lean",
+      "transform": "identity; source bytes/imports/declaration names unchanged",
+      "prior_full_read": true
+    },
+    {
+      "module": "WaitingCaptureWitness",
+      "origin": "/home/codex/.local/state/mirrorea-proof-first/w4-20260922/cold-post63-wire-lease-correspondence/WaitingCaptureWitness.lean",
+      "sha256": "da8e3fe20ad0a2c5505eaffc08f49183ce476c94ac71e32575e2873313aa93fb",
+      "target": "samples/lean/foundations/WaitingCaptureWitness.lean",
+      "transform": "identity; source bytes/imports/declaration names unchanged",
+      "prior_full_read": true
+    },
+    {
+      "module": "GateCaptureReplay",
+      "origin": "/home/codex/.local/state/mirrorea-proof-first/w4-20260922/cold-post63-wire-lease-correspondence/GateCaptureReplay.lean",
+      "sha256": "b87bfe828f13c97a70c7dc6959238d41b98cdaa130ea20860c3efa55df5528c6",
+      "target": "samples/lean/foundations/GateCaptureReplay.lean",
+      "transform": "identity; source bytes/imports/declaration names unchanged",
+      "prior_full_read": true
+    },
+    {
+      "module": "WriterJournalCaptureReplay",
+      "origin": "/home/codex/.local/state/mirrorea-proof-first/w4-20260922/cold-post63-wire-lease-correspondence/WriterJournalCaptureReplay.lean",
+      "sha256": "6be4dc4ea5a7ebb140cf3600eea2fec41c8587d2d2745ba24266b968d522e54b",
+      "target": "samples/lean/foundations/WriterJournalCaptureReplay.lean",
+      "transform": "identity; source bytes/imports/declaration names unchanged",
+      "prior_full_read": true
+    },
+    {
+      "module": "SharedCaptureReplay",
+      "origin": "/home/codex/.local/state/mirrorea-proof-first/w4-20260922/cold-post63-wire-lease-correspondence/SharedCaptureReplay.lean",
+      "sha256": "3568ded2af3e2031f93b338a2576f60e0d6088f66810fde5fb3bcd6b8690215d",
+      "target": "samples/lean/foundations/SharedCaptureReplay.lean",
+      "transform": "identity; source bytes/imports/declaration names unchanged",
+      "prior_full_read": true
+    },
+    {
+      "module": "SharedHostJournal",
+      "origin": "/home/codex/.local/state/mirrorea-proof-first/w4-20260922/cold-post63-wire-lease-correspondence/SharedHostJournal.lean",
+      "sha256": "d661c477b9581351ce0c919f94495af9ea983b32ca8f9caa087ff79694767dcd",
+      "target": "samples/lean/foundations/SharedHostJournal.lean",
+      "transform": "identity; source bytes/imports/declaration names unchanged",
+      "prior_full_read": true
+    },
+    {
+      "module": "SharedHostPrefix",
+      "origin": "/home/codex/.local/state/mirrorea-proof-first/w4-20260922/cold-post63-wire-lease-correspondence/SharedHostPrefix.lean",
+      "sha256": "9977548e53bd908eb0f9b0e4b87bfbbbf629a8aa253f7f6dc3a33bf8fdd9d6b3",
+      "target": "samples/lean/foundations/SharedHostPrefix.lean",
+      "transform": "identity; source bytes/imports/declaration names unchanged",
+      "prior_full_read": true
+    },
+    {
+      "module": "MirroreaProofFirstCohortCommitJournal",
+      "origin": "/home/codex/.local/state/mirrorea-proof-first/w4-20260922/cold-post63-wire-lease-correspondence/MirroreaProofFirstCohortCommitJournal.lean",
+      "sha256": "021ca7e6a7ff66d619e94827daf24c94ff64b5a6ce8f11b0ab6f544093988eb9",
+      "target": "samples/lean/foundations/MirroreaProofFirstCohortCommitJournal.lean",
+      "transform": "identity; source bytes/imports/declaration names unchanged",
+      "prior_full_read": true
+    },
+    {
+      "module": "MirroreaProofFirstOwnerLeasePrefix",
+      "origin": "/home/codex/.local/state/mirrorea-proof-first/w4-20260922/cold-post63-wire-lease-correspondence/MirroreaProofFirstOwnerLeasePrefix.lean",
+      "sha256": "d3e69ca8dabb7e87d81f834419a15fbd5847481274f4520287a37a7f7d21de64",
+      "target": "samples/lean/foundations/MirroreaProofFirstOwnerLeasePrefix.lean",
+      "transform": "identity; source bytes/imports/declaration names unchanged",
+      "prior_full_read": true
+    },
+    {
+      "module": "MirroreaProofFirstSourceEntryJournal",
+      "origin": "/home/codex/.local/state/mirrorea-proof-first/w4-20260922/cold-post63-wire-lease-correspondence/MirroreaProofFirstSourceEntryJournal.lean",
+      "sha256": "6207967cdc25e5538f6188c79090b278f8cea724df359453aedab294fe825c19",
+      "target": "samples/lean/foundations/MirroreaProofFirstSourceEntryJournal.lean",
+      "transform": "identity; source bytes/imports/declaration names unchanged",
+      "prior_full_read": true
+    },
+    {
+      "module": "SourceEntryCapture",
+      "origin": "/home/codex/.local/state/mirrorea-proof-first/w4-20260922/cold-post63-wire-lease-correspondence/SourceEntryCapture.lean",
+      "sha256": "8ebf2f0ded0eb6b52a04a3e665031369e80ce85bb98364cb1d29b00372a1ea36",
+      "target": "samples/lean/foundations/SourceEntryCapture.lean",
+      "transform": "identity; source bytes/imports/declaration names unchanged",
+      "prior_full_read": true
+    },
+    {
+      "module": "SourceEntryPrefix",
+      "origin": "/home/codex/.local/state/mirrorea-proof-first/w4-20260922/cold-post63-wire-lease-correspondence/SourceEntryPrefix.lean",
+      "sha256": "cc59e9af1f00598045d29ad034c59547d7861a77266fec8b60f4098d6281bd17",
+      "target": "samples/lean/foundations/SourceEntryPrefix.lean",
+      "transform": "identity; source bytes/imports/declaration names unchanged",
+      "prior_full_read": true
+    },
+    {
+      "module": "CohortHostReceipt",
+      "origin": "/home/codex/.local/state/mirrorea-proof-first/w4-20260922/cold-post63-wire-lease-correspondence/CohortHostReceipt.lean",
+      "sha256": "c20acc46dc35c8e0044040534af86adfc6e42cfae925a62b6792a81f183918df",
+      "target": "samples/lean/foundations/CohortHostReceipt.lean",
+      "transform": "identity; source bytes/imports/declaration names unchanged",
+      "prior_full_read": true
+    },
+    {
+      "module": "CohortHostDebt",
+      "origin": "/home/codex/.local/state/mirrorea-proof-first/w4-20260922/cold-post63-wire-lease-correspondence/CohortHostDebt.lean",
+      "sha256": "f09cc4db030f7a061d25dbfef78e12c2cd64c02e2d20a1127da5bb357bad8797",
+      "target": "samples/lean/foundations/CohortHostDebt.lean",
+      "transform": "identity; source bytes/imports/declaration names unchanged",
+      "prior_full_read": true
+    },
+    {
+      "module": "CohortHostPrefix",
+      "origin": "/home/codex/.local/state/mirrorea-proof-first/w4-20260922/cold-post63-wire-lease-correspondence/CohortHostPrefix.lean",
+      "sha256": "f2a0c44aaced2c861724f33c0844c9197ba5a7fe97d9ca867998c5580170d655",
+      "target": "samples/lean/foundations/CohortHostPrefix.lean",
+      "transform": "identity; source bytes/imports/declaration names unchanged",
+      "prior_full_read": true
+    },
+    {
+      "module": "CohortHostObservation",
+      "origin": "/home/codex/.local/state/mirrorea-proof-first/w4-20260922/cold-post63-wire-lease-correspondence/CohortHostObservation.lean",
+      "sha256": "22c3ad64d8ab5507960e951c9a6bcf2b069a0c3e825c9829e05fba28fbcc41e8",
+      "target": "samples/lean/foundations/CohortHostObservation.lean",
+      "transform": "identity; source bytes/imports/declaration names unchanged",
+      "prior_full_read": true
+    },
+    {
+      "module": "CohortHostStartup",
+      "origin": "/home/codex/.local/state/mirrorea-proof-first/w4-20260922/cold-post63-wire-lease-correspondence/CohortHostStartup.lean",
+      "sha256": "16f27fbbed91f3301c0a95d50691625f8fbb2984452b92a557e4711c084eed42",
+      "target": "samples/lean/foundations/CohortHostStartup.lean",
+      "transform": "identity; source bytes/imports/declaration names unchanged",
+      "prior_full_read": true
+    },
+    {
+      "module": "CohortHostExecution",
+      "origin": "/home/codex/.local/state/mirrorea-proof-first/w4-20260922/cold-post63-wire-lease-correspondence/CohortHostExecution.lean",
+      "sha256": "0b54aa12aad7cd7365c7860eaf9784e1d74bf03fb1c9b8987557cbc05450819d",
+      "target": "samples/lean/foundations/CohortHostExecution.lean",
+      "transform": "identity; source bytes/imports/declaration names unchanged",
+      "prior_full_read": true
+    },
+    {
+      "module": "CohortMemoryProvenance",
+      "origin": "/home/codex/.local/state/mirrorea-proof-first/w4-20260922/cold-post63-wire-lease-correspondence/CohortMemoryProvenance.lean",
+      "sha256": "dc3ce8def472bc49d6763511cae2315cece74c283d4a5894cc6d4111d5d03059",
+      "target": "samples/lean/foundations/CohortMemoryProvenance.lean",
+      "transform": "identity; source bytes/imports/declaration names unchanged",
+      "prior_full_read": true
+    },
+    {
+      "module": "CohortSnapshotCorrespondence",
+      "origin": "/home/codex/.local/state/mirrorea-proof-first/w4-20260922/cold-post63-wire-lease-correspondence/CohortSnapshotCorrespondence.lean",
+      "sha256": "2f083c14c3e25a5b472eb35d39ab3ed0a225729225dd28fbd550141030ecc7b7",
+      "target": "samples/lean/foundations/CohortSnapshotCorrespondence.lean",
+      "transform": "identity; source bytes/imports/declaration names unchanged",
+      "prior_full_read": true
+    },
+    {
+      "module": "CohortAdministrativeCorrespondence",
+      "origin": "/home/codex/.local/state/mirrorea-proof-first/w4-20260922/cold-post63-wire-lease-correspondence/CohortAdministrativeCorrespondence.lean",
+      "sha256": "8b5dc089fd89e2b204b96e6e7bb78aff1e251e679ad9efa2d31eff7f65444969",
+      "target": "samples/lean/foundations/CohortAdministrativeCorrespondence.lean",
+      "transform": "identity; source bytes/imports/declaration names unchanged",
+      "prior_full_read": true
+    },
+    {
+      "module": "CohortPaymentCorrespondence",
+      "origin": "/home/codex/.local/state/mirrorea-proof-first/w4-20260922/cold-post63-wire-lease-correspondence/CohortPaymentCorrespondence.lean",
+      "sha256": "a3a0ad3b6914652379b8b948f654423878e60c0360c4ee9cbda0d8985b2a7b50",
+      "target": "samples/lean/foundations/CohortPaymentCorrespondence.lean",
+      "transform": "identity; source bytes/imports/declaration names unchanged",
+      "prior_full_read": true
+    },
+    {
+      "module": "CohortProductionCorrespondence",
+      "origin": "/home/codex/.local/state/mirrorea-proof-first/w4-20260922/cold-post63-wire-lease-correspondence/CohortProductionCorrespondence.lean",
+      "sha256": "0924761977cc34a0ddbc6b6deafc774dd8d48f022fe7221f76a194fe5cf12ba6",
+      "target": "samples/lean/foundations/CohortProductionCorrespondence.lean",
+      "transform": "identity; source bytes/imports/declaration names unchanged",
+      "prior_full_read": true
+    },
+    {
+      "module": "CohortBootstrappedCorrespondence",
+      "origin": "/home/codex/.local/state/mirrorea-proof-first/w4-20260922/cold-post63-wire-lease-correspondence/CohortBootstrappedCorrespondence.lean",
+      "sha256": "b7239ea09e0efa8d1ced53cd6f60a17ac7679695d8da229a23eae70be3b5ad9d",
+      "target": "samples/lean/foundations/CohortBootstrappedCorrespondence.lean",
+      "transform": "identity; source bytes/imports/declaration names unchanged",
+      "prior_full_read": true
+    },
+    {
+      "module": "OwnerCurrentCorrespondence",
+      "origin": "/home/codex/.local/state/mirrorea-proof-first/w4-20260922/cold-post63-wire-lease-correspondence/OwnerCurrentCorrespondence.lean",
+      "sha256": "5ffe2c07fbab68acc5677abbacfba10dba8ed86c710049fead61058e634c0f63",
+      "target": "samples/lean/foundations/OwnerCurrentCorrespondence.lean",
+      "transform": "identity; source bytes/imports/declaration names unchanged",
+      "prior_full_read": true
+    },
+    {
+      "module": "CohortStateCorrespondence",
+      "origin": "/home/codex/.local/state/mirrorea-proof-first/w4-20260922/cold-post63-wire-lease-correspondence/CohortStateCorrespondence.lean",
+      "sha256": "6310de7c5b3e9523c52c83978c606e7cb9db61d6cbe4bf3bbdb4b56351488c7f",
+      "target": "samples/lean/foundations/CohortStateCorrespondence.lean",
+      "transform": "identity; source bytes/imports/declaration names unchanged",
+      "prior_full_read": true
+    },
+    {
+      "module": "FundingEnteredDispatch",
+      "origin": "/home/codex/.local/state/mirrorea-proof-first/w4-20260922/cold-post63-wire-lease-correspondence/FundingEnteredDispatch.lean",
+      "sha256": "de33b5ada5ad5b55b97f27eacec4506c13e8a59da8b540a04d763b5b37a941ae",
+      "target": "samples/lean/foundations/FundingEnteredDispatch.lean",
+      "transform": "identity; source bytes/imports/declaration names unchanged",
+      "prior_full_read": true
+    },
+    {
+      "module": "OwnerLeasePhaseRelation",
+      "origin": "/home/codex/.local/state/mirrorea-proof-first/w4-20260922/cold-post63-wire-lease-correspondence/OwnerLeasePhaseRelation.lean",
+      "sha256": "cb9a3068075480737dfacff53f43501ea8d3231dbca1ef15b76cf807cdaf2ac2",
+      "target": "samples/lean/foundations/OwnerLeasePhaseRelation.lean",
+      "transform": "identity; source bytes/imports/declaration names unchanged",
+      "prior_full_read": true
+    },
+    {
+      "module": "OwnerLeasePhaseFunding",
+      "origin": "/home/codex/.local/state/mirrorea-proof-first/w4-20260922/cold-post63-wire-lease-correspondence/OwnerLeasePhaseFunding.lean",
+      "sha256": "774629850e5f6609205b1c3ea0ec4e0a45380232277c3624f36e9d35fea8fa65",
+      "target": "samples/lean/foundations/OwnerLeasePhaseFunding.lean",
+      "transform": "identity; source bytes/imports/declaration names unchanged",
+      "prior_full_read": true
+    },
+    {
+      "module": "OwnerLeasePhaseEntry",
+      "origin": "/home/codex/.local/state/mirrorea-proof-first/w4-20260922/cold-post63-wire-lease-correspondence/OwnerLeasePhaseEntry.lean",
+      "sha256": "020888ac416101c051c0054c86c7edb40d8415bcb3feb011575f1fc9bb1e665d",
+      "target": "samples/lean/foundations/OwnerLeasePhaseEntry.lean",
+      "transform": "identity; source bytes/imports/declaration names unchanged",
+      "prior_full_read": true
+    },
+    {
+      "module": "OwnerLeasePhaseCorrespondence",
+      "origin": "/home/codex/.local/state/mirrorea-proof-first/w4-20260922/cold-post63-wire-lease-correspondence/OwnerLeasePhaseCorrespondence.lean",
+      "sha256": "42593d3cba9fc0b059cf0444f415cc6732f0aeba3b7dd22485c704f596db0d42",
+      "target": "samples/lean/foundations/OwnerLeasePhaseCorrespondence.lean",
+      "transform": "identity; source bytes/imports/declaration names unchanged",
+      "prior_full_read": true
+    },
+    {
+      "module": "LeaseCohortCorrespondence",
+      "origin": "/home/codex/.local/state/mirrorea-proof-first/w4-20260922/cold-post63-wire-lease-correspondence/LeaseCohortCorrespondence.lean",
+      "sha256": "fe9aee180c169a8f2afe1030d43e5da9e594c216a40f7f879af1b82b59cec0b3",
+      "target": "samples/lean/foundations/LeaseCohortCorrespondence.lean",
+      "transform": "identity; source bytes/imports/declaration names unchanged",
+      "prior_full_read": true
+    },
+    {
+      "module": "OwnerStatementJournal",
+      "origin": "/home/codex/.local/state/mirrorea-proof-first/w4-20260922/cold-post63-wire-lease-correspondence/OwnerStatementJournal.lean",
+      "sha256": "9ba54923bd8840d61be4b05e0dcb419e57b45618d0ec49fbf258e29f4f7df453",
+      "target": "samples/lean/foundations/OwnerStatementJournal.lean",
+      "transform": "identity; source bytes/imports/declaration names unchanged",
+      "prior_full_read": true
+    },
+    {
+      "module": "BoundWriterStatements",
+      "origin": "/home/codex/.local/state/mirrorea-proof-first/w4-20260922/cold-post63-wire-lease-correspondence/BoundWriterStatements.lean",
+      "sha256": "054c5c808fd1feaf24025ec2b2b84985057c1380ad31620bff74447c96e32db1",
+      "target": "samples/lean/foundations/BoundWriterStatements.lean",
+      "transform": "identity; source bytes/imports/declaration names unchanged",
+      "prior_full_read": true
+    },
+    {
+      "module": "StatementClosureHistory",
+      "origin": "/home/codex/.local/state/mirrorea-proof-first/w4-20260922/cold-post63-wire-lease-correspondence/StatementClosureHistory.lean",
+      "sha256": "8d349cdafd64bfae7d108ddd24d1fa29d108052aedd8148d9a5918544df71728",
+      "target": "samples/lean/foundations/StatementClosureHistory.lean",
+      "transform": "identity; source bytes/imports/declaration names unchanged",
+      "prior_full_read": true
+    },
+    {
+      "module": "CohortHostCaptureValues",
+      "origin": "/home/codex/.local/state/mirrorea-proof-first/w4-20260922/cold-post63-wire-lease-correspondence/CohortHostCaptureValues.lean",
+      "sha256": "9aa7296afff08d6e0ab1be484f83fe08e8dd217bbfe31a3d700175819ab2c930",
+      "target": "samples/lean/foundations/CohortHostCaptureValues.lean",
+      "transform": "identity; source bytes/imports/declaration names unchanged",
+      "prior_full_read": true
+    },
+    {
+      "module": "CohortObservationCoverage",
+      "origin": "/home/codex/.local/state/mirrorea-proof-first/w4-20260922/cold-post63-wire-lease-correspondence/CohortObservationCoverage.lean",
+      "sha256": "aa135add90c7c5402cfda625c2dafb7b0df7077638f97b7d4d5ae021f63c48e9",
+      "target": "samples/lean/foundations/CohortObservationCoverage.lean",
+      "transform": "identity; source bytes/imports/declaration names unchanged",
+      "prior_full_read": true
+    },
+    {
+      "module": "MirroreaProofFirstSharedReplyRetention",
+      "origin": "/home/codex/.local/state/mirrorea-proof-first/w4-20260922/cold-post63-wire-lease-correspondence/MirroreaProofFirstSharedReplyRetention.lean",
+      "sha256": "db5543abc4e1b44f30547ce2152f17a5adc9f394b05bdb03991491c1f35fde86",
+      "target": "samples/lean/foundations/MirroreaProofFirstSharedReplyRetention.lean",
+      "transform": "identity; source bytes/imports/declaration names unchanged",
+      "prior_full_read": true
+    },
+    {
+      "module": "HostReplyPrefix",
+      "origin": "/home/codex/.local/state/mirrorea-proof-first/w4-20260922/cold-post63-wire-lease-correspondence/HostReplyPrefix.lean",
+      "sha256": "3edddfcbd8c33d92c1bf79c2e3cced1e6adbe691e81d342dffc165111875ebff",
+      "target": "samples/lean/foundations/HostReplyPrefix.lean",
+      "transform": "identity; source bytes/imports/declaration names unchanged",
+      "prior_full_read": true
+    },
+    {
+      "module": "LeaseCohortCaptureReplay",
+      "origin": "/home/codex/.local/state/mirrorea-proof-first/w4-20260922/cold-post63-wire-lease-correspondence/LeaseCohortCaptureReplay.lean",
+      "sha256": "ee477aed1cdbd1e653bd0093209a7f3e23553c43a6efe3bcdaea34d62997bc2e",
+      "target": "samples/lean/foundations/LeaseCohortCaptureReplay.lean",
+      "transform": "identity; source bytes/imports/declaration names unchanged",
+      "prior_full_read": true
+    },
+    {
+      "module": "LeaseCohortCaptureJson",
+      "origin": "/home/codex/.local/state/mirrorea-proof-first/w4-20260922/cold-post63-wire-lease-correspondence/LeaseCohortCaptureJson.lean",
+      "sha256": "894f090083d127f2a6c95fdd3ffb6e0302a30465c318dacbe47f75215977e97f",
+      "target": "samples/lean/foundations/LeaseCohortCaptureJson.lean",
+      "transform": "identity; source bytes/imports/declaration names unchanged",
+      "prior_full_read": true
+    },
+    {
+      "module": "OwnerLeaseCompleteCorrespondence",
+      "origin": "/home/codex/.local/state/mirrorea-proof-first/w4-20260922/cold-post63-wire-lease-correspondence/OwnerLeaseCompleteCorrespondence.lean",
+      "sha256": "62b9964d31e986b2a8c9b680c1bebf448af38dec2d00c0e1a34752405da8c018",
+      "target": "samples/lean/foundations/OwnerLeaseCompleteCorrespondence.lean",
+      "transform": "identity; source bytes/imports/declaration names unchanged",
+      "prior_full_read": true
+    },
+    {
+      "module": "CohortHostFailure",
+      "origin": "/home/codex/.local/state/mirrorea-proof-first/w4-20260922/cold-post63-wire-lease-correspondence/CohortHostFailure.lean",
+      "sha256": "de864fc3870199dff346e0b471bc916bebddd64b9981388db1fc3dcd25eb04bc",
+      "target": "samples/lean/foundations/CohortHostFailure.lean",
+      "transform": "identity; source bytes/imports/declaration names unchanged",
+      "prior_full_read": true
+    },
+    {
+      "module": "CohortRetiredProbe",
+      "origin": "/home/codex/.local/state/mirrorea-proof-first/w4-20260922/cold-post63-wire-lease-correspondence/CohortRetiredProbe.lean",
+      "sha256": "201d85d6d52f5f6d76d943258c23da623742013f8cccb2b89f4dfdb9560ff212",
+      "target": "samples/lean/foundations/CohortRetiredProbe.lean",
+      "transform": "identity; source bytes/imports/declaration names unchanged",
+      "prior_full_read": true
+    },
+    {
+      "module": "RetiredLeaseCorrespondence",
+      "origin": "/home/codex/.local/state/mirrorea-proof-first/w4-20260922/cold-post63-wire-lease-correspondence/RetiredLeaseCorrespondence.lean",
+      "sha256": "8494a12858efa51744eb2b5cb5004487c5c70263d75c2f8e102207254bf2f267",
+      "target": "samples/lean/foundations/RetiredLeaseCorrespondence.lean",
+      "transform": "identity; source bytes/imports/declaration names unchanged",
+      "prior_full_read": true
+    },
+    {
+      "module": "LeaseKnownFaultCaptureReplay",
+      "origin": "/home/codex/.local/state/mirrorea-proof-first/w4-20260922/cold-post63-wire-lease-correspondence/LeaseKnownFaultCaptureReplay.lean",
+      "sha256": "1c0f86a9866518f1b917ae152c6cdee4546d7cd24d92320f749d8d12e44a3292",
+      "target": "samples/lean/foundations/LeaseKnownFaultCaptureReplay.lean",
+      "transform": "identity; source bytes/imports/declaration names unchanged",
+      "prior_full_read": true
+    },
+    {
+      "module": "LeaseKnownFaultCaptureJson",
+      "origin": "/home/codex/.local/state/mirrorea-proof-first/w4-20260922/cold-post63-wire-lease-correspondence/LeaseKnownFaultCaptureJson.lean",
+      "sha256": "eae21d0326dcbbded6021cebae656cd1645533eeb8412093b97f9ed228e32674",
+      "target": "samples/lean/foundations/LeaseKnownFaultCaptureJson.lean",
+      "transform": "identity; source bytes/imports/declaration names unchanged",
+      "prior_full_read": true
+    },
+    {
+      "module": "CohortFaultProgress",
+      "origin": "/home/codex/.local/state/mirrorea-proof-first/w4-20260922/cold-post63-wire-lease-correspondence/CohortFaultProgress.lean",
+      "sha256": "5a1a87d430fb5905830d2b537cfe87b967e09ff750ba3ab5ba0ba05d3aca9345",
+      "target": "samples/lean/foundations/CohortFaultProgress.lean",
+      "transform": "identity; source bytes/imports/declaration names unchanged",
+      "prior_full_read": true
+    },
+    {
+      "module": "UnconfirmedLeaseCorrespondence",
+      "origin": "/home/codex/.local/state/mirrorea-proof-first/w4-20260922/cold-post63-wire-lease-correspondence/UnconfirmedLeaseCorrespondence.lean",
+      "sha256": "d14eb4342d86c5727cc24d7a82dcc36d0a72ac01d2a2e5d26778c721f406ae8e",
+      "target": "samples/lean/foundations/UnconfirmedLeaseCorrespondence.lean",
+      "transform": "identity; source bytes/imports/declaration names unchanged",
+      "prior_full_read": true
+    },
+    {
+      "module": "CohortWireEvidence",
+      "origin": "/home/codex/.local/state/mirrorea-proof-first/w4-20260922/cold-post63-wire-lease-correspondence/CohortWireEvidence.lean",
+      "sha256": "07021912271e378aaa03abbb89ec7f4f74172f44368acc620fd0046fa444b093",
+      "target": "samples/lean/foundations/CohortWireEvidence.lean",
+      "transform": "identity; source bytes/imports/declaration names unchanged",
+      "prior_full_read": true
+    },
+    {
+      "module": "LeaseWireCaptureReplay",
+      "origin": "/home/codex/.local/state/mirrorea-proof-first/w4-20260922/cold-post63-wire-lease-correspondence/LeaseWireCaptureReplay.lean",
+      "sha256": "97530a0ae72e11e26a44b9f016693387ab76c0b88f0e7af8117afdb6c58ae2f9",
+      "target": "samples/lean/foundations/LeaseWireCaptureReplay.lean",
+      "transform": "identity; source bytes/imports/declaration names unchanged",
+      "prior_full_read": true
+    },
+    {
+      "module": "LeaseWireCaptureJson",
+      "origin": "/home/codex/.local/state/mirrorea-proof-first/w4-20260922/cold-post63-wire-lease-correspondence/LeaseWireCaptureJson.lean",
+      "sha256": "d60503b5ee06fdb63121866d7a518b7788ac035450fc5f8ed518a94c5743ea38",
+      "target": "samples/lean/foundations/LeaseWireCaptureJson.lean",
+      "transform": "identity; source bytes/imports/declaration names unchanged",
+      "prior_full_read": true
+    },
+    {
+      "module": "MirroreaProofFirstEntryAcquisition",
+      "origin": "/home/codex/.local/state/mirrorea-proof-first/w4-20260922/cold-post63-wire-lease-correspondence/MirroreaProofFirstEntryAcquisition.lean",
+      "sha256": "62550533f61cfa305283eed0cdaca601699535bae5c3e20f0cda5b6bc02d6455",
+      "target": "samples/lean/foundations/MirroreaProofFirstEntryAcquisition.lean",
+      "transform": "identity; source bytes/imports/declaration names unchanged",
+      "prior_full_read": true
+    },
+    {
+      "module": "ProducedRootedness",
+      "origin": "/home/codex/.local/state/mirrorea-proof-first/w4-20260922/cold-post63-wire-lease-correspondence/ProducedRootedness.lean",
+      "sha256": "190bac49795049a8fd452773079f834bddc02a65e45f4a2aa5cf23c988052b87",
+      "target": "samples/lean/foundations/ProducedRootedness.lean",
+      "transform": "identity; source bytes/imports/declaration names unchanged",
+      "prior_full_read": true
+    }
+  ],
+  "new_modules": [
+    "MirroreaProofFirstPublicOwnerBoundary",
+    "MirroreaProofFirstOwnerActualRoot",
+    "MirroreaProofFirstPublicJointHistory",
+    "MirroreaProofFirstPublicOwnerReplay",
+    "MirroreaProofFirstPublicJointReplay",
+    "MirroreaProofFirstPublicJointWork",
+    "MirroreaProofFirstPaidHeadPhase",
+    "MirroreaProofFirstCohortPhase",
+    "MirroreaProofFirstOwnerReservationMonitor",
+    "MirroreaProofFirstJointWorkCursor",
+    "MirroreaProofFirstWorkOccurrence",
+    "MirroreaProofFirstWorkOccurrenceReplay",
+    "MirroreaProofFirstJointDriver",
+    "MirroreaProofFirstCohortPhysicalOrdinal",
+    "MirroreaProofFirstCohortFundingReplay",
+    "MirroreaProofFirstSharedNativeStep",
+    "MirroreaProofFirstSharedJointDriver",
+    "MirroreaProofFirstSharedFundedDriver",
+    "MirroreaProofFirstSharedWireLifetime",
+    "MirroreaProofFirstOwnerCommitJournal",
+    "MirroreaProofFirstSharedHostJoin",
+    "MirroreaProofFirstWaitingWork",
+    "PublicCapturedReplay",
+    "WaitingCaptureWitness",
+    "GateCaptureReplay",
+    "WriterJournalCaptureReplay",
+    "SharedCaptureReplay",
+    "SharedHostJournal",
+    "SharedHostPrefix",
+    "MirroreaProofFirstCohortCommitJournal",
+    "MirroreaProofFirstOwnerLeasePrefix",
+    "MirroreaProofFirstSourceEntryJournal",
+    "SourceEntryCapture",
+    "SourceEntryPrefix",
+    "CohortHostReceipt",
+    "CohortHostDebt",
+    "CohortHostPrefix",
+    "CohortHostObservation",
+    "CohortHostStartup",
+    "CohortHostExecution",
+    "CohortMemoryProvenance",
+    "CohortSnapshotCorrespondence",
+    "CohortAdministrativeCorrespondence",
+    "CohortPaymentCorrespondence",
+    "CohortProductionCorrespondence",
+    "CohortBootstrappedCorrespondence",
+    "OwnerCurrentCorrespondence",
+    "CohortStateCorrespondence",
+    "FundingEnteredDispatch",
+    "OwnerLeasePhaseRelation",
+    "OwnerLeasePhaseFunding",
+    "OwnerLeasePhaseEntry",
+    "OwnerLeasePhaseCorrespondence",
+    "LeaseCohortCorrespondence",
+    "OwnerStatementJournal",
+    "BoundWriterStatements",
+    "StatementClosureHistory",
+    "CohortHostCaptureValues",
+    "CohortObservationCoverage",
+    "MirroreaProofFirstSharedReplyRetention",
+    "HostReplyPrefix",
+    "LeaseCohortCaptureReplay",
+    "LeaseCohortCaptureJson",
+    "OwnerLeaseCompleteCorrespondence",
+    "CohortHostFailure",
+    "CohortRetiredProbe",
+    "RetiredLeaseCorrespondence",
+    "LeaseKnownFaultCaptureReplay",
+    "LeaseKnownFaultCaptureJson",
+    "CohortFaultProgress",
+    "UnconfirmedLeaseCorrespondence",
+    "CohortWireEvidence",
+    "LeaseWireCaptureReplay",
+    "LeaseWireCaptureJson",
+    "MirroreaProofFirstEntryAcquisition",
+    "ProducedRootedness"
+  ],
+  "historical_exclusions": [
+    "FieldCohortCaptureJson",
+    "StatementBoundAudit",
+    "CohortKnownFaultCaptureReplay",
+    "CohortHostCaptureReplay",
+    "LeaseCorrespondenceBoundImports",
+    "KnownLeaseBoundImports",
+    "PairedStatementBoundAudit",
+    "LeaseCorrespondenceBoundAudit",
+    "ReplayImportedObjects",
+    "TotalFieldCohortCaptureReplay",
+    "CohortBoundAudit",
+    "SharedHostCaptureReplay",
+    "FieldCohortCaptureReplay",
+    "KnownLeaseBoundAudit",
+    "CohortWireCaptureReplay",
+    "TotalCorrespondenceBoundImports",
+    "CohortKnownFaultCaptureJson",
+    "WireLeaseBoundImports",
+    "StatementCohortCaptureReplay",
+    "FieldCorrespondenceBoundImports",
+    "WireLeaseBoundAudit",
+    "HostLifetimeAuditPost52",
+    "StatementBoundImports",
+    "PairedStatementBoundImports",
+    "StatementCohortCaptureJson",
+    "CohortHostCaptureJson",
+    "PairedStatementCohortCaptureJson",
+    "PairedStatementCohortCaptureReplay",
+    "FieldCorrespondenceBoundAudit",
+    "CohortBoundImports",
+    "CohortWireCaptureJson",
+    "TotalFieldCohortCaptureJson",
+    "TotalCorrespondenceBoundAudit"
+  ]
+}

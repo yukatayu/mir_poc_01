@@ -490,3 +490,124 @@ active rootの追加や移動はない。
 同じowner-boundary検査には、保持された設置事実・実owner世代の単調性・source登録との対応も含む。
 初期化時の記録一致と全ownerのモデル残量に結び付いた設置consumerを一般証明する。
 公開操作の全経路、予約容量・freshness、実通信との対応は別の未完了条件である。
+
+
+## W4-B preserved host correspondence model (integration candidate)
+
+The same LAB foundation root now retains the exact 206-module dependency cut
+in `docs/proof-first/W4_SOURCE_MANIFEST.json`: 130 existing byte-identical sources
+and 76 newly mirrored sources, including the independent EntryAcquisition and
+ProducedRootedness roots. Original import/declaration names are preserved;
+compiled objects and external captures are not source samples.
+
+The existing runner has the optional `--with-host-model` flag, implying
+`--with-owner-boundary`. It checks the exact source closure and rebuilds/audits
+in bounded serial batches. The first full model run passed277 commands and
+236module/22215declaration audits. A strengthened successor also binds actual
+import paths and successful source/object outputs before/after use; its fresh
+full validation passed278commands with236build receipts and9168file bindings.
+The current V2 model passed278commands/9169bindings; observed preparation passed
+235commands and the repaired physical stage passed68commands/15profiles/53controls.
+Whole exits and bound inputs were verified. Final B integration and
+Rust/Core/privateQUIC remain open; no network/auth/recovery guarantee follows.
+
+Candidate command (existing external workroot required):
+
+```bash
+python3 scripts/proof_first_reference_source_check.py --work-root <existing-external-workdir> --with-host-model
+```
+
+The source-manifest controls in `scripts/tests/proof_first_host_manifest_cases.py`
+accept the exact source cut and reject eight damaged copies. Those are integrity
+checks, not semantic theorems or actual-process E2E evidence. See
+`docs/proof-first/W4_CHECK.json` and Report2614 for exact run status, failed attempts,
+compiler/CPython/capture assumptions and remaining integration obligations.
+
+
+The private helpers in `scripts/proof_first_host/` and preparation command
+`scripts/proof_first_host_prepare.py` are an integration candidate. The manifest
+`docs/proof-first/W4_HOST_MANIFEST.json` identifies exact copies and the few
+explicit path/decoder/control-header transformations. The preparation command
+requires a completed bound model run and is intended to compile native workers
+and generate input bytes through the actual Rust parser. It does not itself run
+physical capture/replay or establish W4-B completion.
+Never run these one-shot helpers in the repository: the preparation command
+stages unique external directories. The `recovered/` helper directory preserves
+historical relative import layout; it contains source, not a recovery capability.
+The host cache and actual Lean import/object controls are respectively
+`tests/proof_first_host_runner_cases.py` and `tests/proof_first_host_binding_cases.py`.
+
+The candidate `scripts/proof_first_host_run.py` requires `--prepared` and
+`--preparation-observation`. It uses fresh actual private-pipe captures for typed
+replay and omission/fault controls. The repaired current V2 stage completed
+15profiles/53controls and68commands with whole-exit and input/log verification.
+The first preparation failed at native linking
+because the generated module names used the wrong package root; the corrected
+explicit-root rebuild passed all235 commands. The first physical run failed after
+normal correspondence markers because the appended import audit lacked its Lean
+import. A second attempt exposed missing staged native metadata; the third
+completed68commands with all15profiles and53controls. Each invocation
+prints a new execution directory below the preparation directory and stages only
+preparation-bound inputs; it preserves previous captures and failures. Native
+binaries retain the successful preparation receipt. Neither preparation nor an
+early marker is a physical validation pass.
+
+Use the bounded synchronous observer for the revised candidate workflow:
+
+```sh
+python3 scripts/proof_first_process_observer.py --stage model --work-root <existing-external-workdir>
+python3 scripts/proof_first_process_observer.py --stage prepare --work-root <existing-external-workdir> --model-run <model-directory> --model-observation <observed-model-directory>/OBSERVATION.json
+python3 scripts/proof_first_process_observer.py --stage physical --work-root <existing-external-workdir> --prepared <prepared-directory> --preparation-observation <observed-prepare-directory>/OBSERVATION.json
+```
+
+Each observer prints its own directory, waits for the actual producer's terminal
+exit, and binds its source, command, output log and result. The producer directory
+is the first line of that observer's `RUN.log`. A successful stage JSON without
+its zero-exit observation is rejected. The caller must also check the observer's
+own terminal exit. These are truthful local execution records under the stated
+TCB, not signatures or authority. Historical preparations retain their original
+producer identities; they are not silently relabelled as current executions.
+`tests/proof_first_process_observation_cases.py` exercises actual late failures,
+result/log/source drift, and the missing-observation model handoff.
+
+`tests/proof_first_host_prepare_cases.py --work-root <existing-external-workdir>
+--toolchain <Lean-4.29.1-directory>` checks staging confinement and actually invokes
+leanc with an injected alternative compiler/sysroot to verify selection of the
+intended bundled compiler. These are runner controls; native compiler correctness,
+the OS loader and system libraries remain trusted assumptions.
+
+`tests/proof_first_host_execution_cases.py --work-root <existing-external-workdir>`
+executes a minimal Lean replay plus its import audit and checks fresh host staging:
+bound native metadata is available, historical captures stay excluded, previous
+attempts cannot be overwritten, and changed preparation inputs are rejected.
+It also runs the actual startup prefix against explicit fixture maps, stopping at
+helper import. Direct, symlink-spelling/target, hardlink and observation-only selected
+identities are checked before that import; original-source export roles use their
+actual canonical binding keys; equal and conflicting observation-role expectations
+are tested separately. These boundary controls do not accept a preparation
+or run physical capture. Full observation validation remains mandatory afterwards.
+
+The private native/physical workflow requires the selected Lean installation prefix
+and all current/historical producer repositories to be disjoint (neither contains
+the other). Preparation and physical entry enforce this layout, retain all reused
+toolchain bindings and verify the selected compiler identity. Overlapping toolchain/repository layouts remain outside this checked private
+profile and are refused explicitly. Artifact export itself uses the explicit
+roles described below, independent of directory ancestry.
+
+The V2 observer archives the exact producer and observer source. Downstream stages
+bind those archives and consumed result/log/input files; original repository paths
+remain historical provenance after completion. Changes during execution still
+fail. V1 records remain V1 and cannot be silently converted to V2 successes.
+Control outcomes use suite plus label as their identity. Observation/preparation/
+manifest control harnesses refuse Python optimization, which removes assertions.
+
+`tests/proof_first_host_probe_cases.py --work-root <existing-external-workdir>
+--prepared <explicit-prepared-directory>` mutates the actual known-fault harness
+by omitting or duplicating a named refusal probe, runs capture and the required
+journal, and requires the existing normalizer to reject each resulting inventory.
+The additional wire duplicate-owner probe is rejected by the journal prerequisite;
+normalization does not run after that failure. `--wire-only` selects that control.
+It may explicitly select a historical preparation; that is not a validation of a
+new three-stage workflow or the later W4-C all-entry obligation.
+
+The private W4 preparation/physical receipts export dependencies by explicit role: only named original source locations become provenance; inherited live roles take priority and fresh archives, workers, captures and logs stay bound regardless of later checkout ancestry. Toolchain/repository disjointness remains a checked private-profile restriction.

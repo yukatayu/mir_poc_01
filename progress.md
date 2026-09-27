@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-09-24 08:38 JST
+最終更新: 2026-09-26 17:58 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -56,19 +56,21 @@ public/production layers remain later.
 ## current milestone position
 
 The owner explicitly requested W4 after W3 closed. W4 physical refinement is the
-sole task-local goal, now paused for the owner-requested quota checkpoint,
+sole task-local goal, resumed by the owner on2026-09-26,
 PL1/PL2/PL0 S4/S6, with one main and no subagents. Stop after
 W4; W5+/alpha are not active. Plan250 remains separately paused after I3-3.
 
-2026-09-23 15:14 JST時点の週間残量33%を根拠に、owner指定の「30%程度で切りのよい所」でW4を一時停止済みです。今回の計画整理では残量を再確認していません。完了ではなく同じgoalのpauseです。W5+とPlan250/I3-4は開始しません。旧一時領域で失われた記録と今回の永続workdir上の実記録は区別して保持します。
+2026-09-27の追加owner指示で、今回の実行も残量による停止を外して同じW4を継続します。リセットはownerが行い、主担当は操作しません。W5+とPlan250/I3-4は開始しません。過去のquota停止・検査記録はReport2614に保持します。
 
-2026-09-24のowner指定で、同じW4を **W4-A（限定証拠・完了済み）→W4-B（repo統合・現在地、pause）→W4-C（残る基礎条件）→W4-D（Rust/Core/private QUIC接続）→W4-E（実network検査・残項目回収・W4完了判定）** に分割しました。C/D/Eは依存待ちです。Eは元W4と前段の残項目を照合しますが、C/Dの前提をEへ先送りして実装を進めません。完了条件・推奨model/effort・R01〜R12残項目台帳は `plan/proof-first-foundation-correspondence.md` の「W4-A〜W4-E 作業区切り」を参照してください。分割は計画整理のみで、同じW4 goalの一時停止を維持します。
+W4-B検証結果: 206依存sourceを原本と同一bytesで保存し、fresh Lean検査と公理監査を完了しました。既存runnerのV2モデル278command・236module/22215所有宣言監査、native準備235command、修正後の実process検査68command（15profile/53拒否control）が全体exit0で完走しました。段階ごとに9169/9973/34658入力束縛と実ログを照合しています。保存証拠と現行sourceの役割分離、別名参照・期待値衝突・途中失敗の反例も検査済みです。Bは最終境界review・文書/Git統合中で、C/D/Eは依存待ちです。一般証明は選択モデルについて、実processは特権private-pipeの有限証拠についてであり、実network・認証・秘密・復旧の保証へ広げません。
+
+2026-09-24のowner指定で、同じW4を **W4-A（限定証拠・完了済み）→W4-B（repo統合・現在地、進行中）→W4-C（残る基礎条件）→W4-D（Rust/Core/private QUIC接続）→W4-E（実network検査・残項目回収・W4完了判定）** に分割しました。C/D/Eは依存待ちです。Eは元W4と前段の残項目を照合しますが、C/Dの前提をEへ先送りして実装を進めません。完了条件・推奨model/effort・R01〜R12残項目台帳は `plan/proof-first-foundation-correspondence.md` の「W4-A〜W4-E 作業区切り」を参照してください。分割当日は計画整理のみでした。2026-09-26のowner指示で同じW4 goalを再開しています。
 
 W4は、通常sourceと実ownerの状態・資源を同じ履歴から対応付ける基礎検証を進めています。選択した形式モデルにおける通常実行の全所有者lease・値・履歴の一般証明と、確定失敗4profile／未確定通信8profileの実記録との接続を外部workdirで検査しました。正常系23、確定失敗14、未確定通信16の改変controlも検査済みです。通信結果不明時は最後に確定した状態と物理通信の残余を区別します。これらは限定した研究候補で、追加proof群のrepo再現runnerへの統合、全entryの実機対応、現在の認証認可・物理namespace、既存Rust/Core/privateQUIC接続とW4全体の統合は未完了です。
 
 | W4 axis | Current evidence | Remaining gate / startability |
 |---|---|---|
-| Logical specification | same-history fields/leases and selected known/unknown fault preservation kernel checked; external bounded candidate | 再開後に着手可能: required relative admission, full physical entry/custody/current-authority correspondence |
+| Logical specification | same-history fields/leases and selected known/unknown fault preservation kernel checked; external bounded candidate | 着手可能な独立調査 / B後に閉鎖: required relative admission, full physical entry/custody/current-authority correspondence |
 | User-facing specification | ordinary parsed source and retained native owner traces; no newly adopted source grammar | 後段依存: checked Core/generated edge/request/result/display connection |
 | Implementation / operation | normal and selected failure captures pass strict statement/history/field checks; privileged pipes; prior I3 QUIC baseline retained | 後段依存: repo proof/runner integration, Rust/Core/privateQUIC and new network/regression evidence |
 
@@ -479,3 +481,5 @@ The authorized roadmap is paused, not blocked, stale or closed.
 - 2026-09-24 08:38 JST: owner指定でW4をA〜Eへ分割。Aの限定証拠を保持、B現在地/pause、C-D前提を守りEへ残項目回収責任を配置。実行再開・新規proof/実network成功の主張なし。
 
 - 2026-09-26T03:28:37.412970+00:00: W4-B再開照合で保存済み34715ファイルのhash一致、204module依存閉包（未収録74）を確認。新規証明・実装検査は未実行。週間残量16%のため既存owner指定に従いBでpause、再開点を保存。
+
+- 2026-09-26 14:28 JST: W4-Bをowner指示で再開。206依存sourceの新規kernel検査、新規76の7138所有宣言監査と206/206既読hashを確認。既存runner統合は検査中、B未完。9/27以降に残量30%停止を復帰。

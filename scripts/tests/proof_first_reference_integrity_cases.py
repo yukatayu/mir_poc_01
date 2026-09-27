@@ -83,7 +83,7 @@ def main():
     env = dict(os.environ, LEAN_PATH=str(component) + os.pathsep + str(evidence))
 
     def lean(cwd, args):
-        result = subprocess.run(['lean', '--trust=0'] + args, cwd=cwd, env=env,
+        result = subprocess.run([os.environ.get('MIR_PROOF_FIRST_LEAN', 'lean'), '--trust=0'] + args, cwd=cwd, env=env,
                                 capture_output=True, text=True, preexec_fn=memory_limit)
         (cwd / (args[-1] + '.log')).write_text(result.stdout + result.stderr)
         return result

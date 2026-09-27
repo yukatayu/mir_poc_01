@@ -56,7 +56,7 @@ for name, suffix, old, new, theorem in MUTATIONS:
     start, stop = theorem_range(mutated, theorem)
     target = OUT / (name + '.lean')
     target.write_text(mutated)
-    command = ['lean', '--trust=0', target.name]
+    command = [os.environ.get('MIR_PROOF_FIRST_LEAN', 'lean'), '--trust=0', target.name]
     run = subprocess.run(command, cwd=OUT, env=dict(os.environ, LEAN_PATH=str(WORK)),
                          capture_output=True, text=True, preexec_fn=cap)
     log = OUT / (name + '.log')

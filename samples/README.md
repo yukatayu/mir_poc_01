@@ -334,3 +334,45 @@ fresh検査する（`--with-publication` を含む）。既存のW3 source検査
 再実行する仕組みであり、native worker／QUIC／権限の発行／W4完了を意味しない。
 定義と未接続条件は [MirroreaProofFirstPublication.md](lean/foundations/MirroreaProofFirstPublication.md)、今回の結果はReport2614に記録する。
 active rootの追加や移動はない。
+
+
+## W4-B preserved host correspondence model (integration candidate)
+
+The same LAB foundation root now retains the exact 206-module dependency cut
+in `docs/proof-first/W4_SOURCE_MANIFEST.json`: 130 existing byte-identical sources
+and 76 newly mirrored sources, including the independent EntryAcquisition and
+ProducedRootedness roots. Original import/declaration names are preserved;
+compiled objects and external captures are not source samples.
+
+The existing runner has the optional `--with-host-model` flag, implying
+`--with-owner-boundary`. It checks the exact source closure and rebuilds/audits
+in bounded serial batches. The first full model run passed277 commands and
+236module/22215declaration audits. A strengthened successor also binds actual
+import paths and successful source/object outputs before/after use; its fresh
+full validation passed278commands with236build receipts and9168file bindings.
+The current V2 observed model passed278commands/9169bindings; native preparation
+passed235commands and the repaired physical stage passed68commands/15profiles/53
+controls. Whole exits and bound inputs were verified. Final W4-B integration and
+Rust/Core/privateQUIC remain open; see the three-stage workflow in `scripts/README.md`.
+
+Candidate command (existing external workroot required):
+
+```bash
+python3 scripts/proof_first_reference_source_check.py --work-root <existing-external-workdir> --with-host-model
+```
+
+The source-manifest controls in `scripts/tests/proof_first_host_manifest_cases.py`
+accept the exact source cut and reject eight damaged copies. Those are integrity
+checks, not semantic theorems or actual-process E2E evidence. See
+`docs/proof-first/W4_CHECK.json` and Report2614 for exact run status, failed attempts,
+compiler/CPython/capture assumptions and remaining integration obligations.
+
+
+The candidate source inputs under
+`clean-near-end/mirrorea-proof-first-composition/host-reference/` preserve the
+17-line ordinary source and two later source continuations. The provisional
+referenceAt/instantiateAt library profile is not a public grammar adoption.
+Native entry/input-generator sources and an extracted test header live under
+`lean/host-reference/`, within the existing active Lean root. Their physical
+workflow remains under integration; no saved expected result is a source input.
+See `scripts/README.md` and the W4 host manifest for preparation and evidence limits.

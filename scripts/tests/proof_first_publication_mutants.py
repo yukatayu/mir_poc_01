@@ -51,7 +51,7 @@ for module, name, old, new, theorem in mutations:
                 if re.match(r'(theorem|def|inductive|structure|#print|end)\b', lines[i])), len(lines))
     target = output / (name + '.lean')
     target.write_text(changed)
-    run = subprocess.run(['lean', '--trust=0', target.name], cwd=output,
+    run = subprocess.run([os.environ.get('MIR_PROOF_FIRST_LEAN', 'lean'), '--trust=0', target.name], cwd=output,
                          env=dict(os.environ, LEAN_PATH=str(root)), preexec_fn=cap,
                          text=True, capture_output=True)
     text = run.stdout + run.stderr

@@ -1,0 +1,473 @@
+{
+  "classification": "W4-B private reference source preservation; execution integration pending",
+  "sources": [
+    {
+      "original": "/home/codex/.local/state/mirrorea-proof-first/w4-20260922/bind_cohort_fault_observations.py",
+      "original_sha256": "01480114fb743f0e763d738fdc9b926d3752ddd1276e469dc6d80df2685c6ae4",
+      "target": "scripts/proof_first_host/bind_cohort_fault_observations.py",
+      "sha256": "01480114fb743f0e763d738fdc9b926d3752ddd1276e469dc6d80df2685c6ae4",
+      "transform": "identity bytes",
+      "role": "private test/reference helper; runtime integration pending"
+    },
+    {
+      "original": "/home/codex/.local/state/mirrorea-proof-first/w4-20260922/bind_cohort_fault_values.py",
+      "original_sha256": "27025f4de50da669eb370754036d76e3d14c17bc0fc2b4c0e3e90827e4a85431",
+      "target": "scripts/proof_first_host/bind_cohort_fault_values.py",
+      "sha256": "27025f4de50da669eb370754036d76e3d14c17bc0fc2b4c0e3e90827e4a85431",
+      "transform": "identity bytes",
+      "role": "private test/reference helper; runtime integration pending"
+    },
+    {
+      "original": "/home/codex/.local/state/mirrorea-proof-first/w4-20260922/bind_cohort_store_observations.py",
+      "original_sha256": "a2adcc6e74ff1afbe83d8388b07757ae214c9c6218e4cdf581387b7c84e941b1",
+      "target": "scripts/proof_first_host/bind_cohort_store_observations.py",
+      "sha256": "a2adcc6e74ff1afbe83d8388b07757ae214c9c6218e4cdf581387b7c84e941b1",
+      "transform": "identity bytes",
+      "role": "private test/reference helper; runtime integration pending"
+    },
+    {
+      "original": "/home/codex/.local/state/mirrorea-proof-first/w4-20260922/bind_cohort_values.py",
+      "original_sha256": "44cf16eac2fb7e6859b88701b010f853edf939f15be99daa332e9279a9f0d07d",
+      "target": "scripts/proof_first_host/bind_cohort_values.py",
+      "sha256": "44cf16eac2fb7e6859b88701b010f853edf939f15be99daa332e9279a9f0d07d",
+      "transform": "identity bytes",
+      "role": "private test/reference helper; runtime integration pending"
+    },
+    {
+      "original": "/home/codex/.local/state/mirrorea-proof-first/w4-20260922/bind_source_entry_observations.py",
+      "original_sha256": "2fbf81a8930ff9341a139d76789897252d3bfd7ab62a82656c17a964ad0cebfa",
+      "target": "scripts/proof_first_host/bind_source_entry_observations.py",
+      "sha256": "2fbf81a8930ff9341a139d76789897252d3bfd7ab62a82656c17a964ad0cebfa",
+      "transform": "identity bytes",
+      "role": "private test/reference helper; runtime integration pending"
+    },
+    {
+      "original": "/home/codex/.local/state/mirrorea-proof-first/w4-20260922/bind_source_entry_observations_total.py",
+      "original_sha256": "f9f711b2c123c739e6f7f607e640fefc7164aa950c2b0c09dc915cbe5eccfe14",
+      "target": "scripts/proof_first_host/bind_source_entry_observations_total.py",
+      "sha256": "f9f711b2c123c739e6f7f607e640fefc7164aa950c2b0c09dc915cbe5eccfe14",
+      "transform": "identity bytes",
+      "role": "private test/reference helper; runtime integration pending"
+    },
+    {
+      "original": "/home/codex/.local/state/mirrorea-proof-first/w4-20260922/bind_writer_statement_observations_total.py",
+      "original_sha256": "cadd9354f578abc63030d38512d75f474ac8120e26b0d167f78cc90a27d52569",
+      "target": "scripts/proof_first_host/bind_writer_statement_observations_total.py",
+      "sha256": "cadd9354f578abc63030d38512d75f474ac8120e26b0d167f78cc90a27d52569",
+      "transform": "identity bytes",
+      "role": "private test/reference helper; runtime integration pending"
+    },
+    {
+      "original": "/home/codex/.local/state/mirrorea-proof-first/w4-20260922/bind_writer_statement_observations_v2.py",
+      "original_sha256": "82dba7632ce895420922bb480d7adb36a5f2bf3e4e13bd622ed21e8cca2405a9",
+      "target": "scripts/proof_first_host/bind_writer_statement_observations_v2.py",
+      "sha256": "82dba7632ce895420922bb480d7adb36a5f2bf3e4e13bd622ed21e8cca2405a9",
+      "transform": "identity bytes",
+      "role": "private test/reference helper; runtime integration pending"
+    },
+    {
+      "original": "/home/codex/.local/state/mirrorea-proof-first/w4-20260922/check_host_commit_capture.py",
+      "original_sha256": "b92c3f39eb92426f8d534eda0d117e7889ddaee616515f1fdfc230e1e9cec9ac",
+      "target": "scripts/proof_first_host/check_host_commit_capture.py",
+      "sha256": "b92c3f39eb92426f8d534eda0d117e7889ddaee616515f1fdfc230e1e9cec9ac",
+      "transform": "identity bytes",
+      "role": "private test/reference helper; runtime integration pending"
+    },
+    {
+      "original": "/home/codex/.local/state/mirrorea-proof-first/w4-20260922/check_host_wire_prefix_capture.py",
+      "original_sha256": "ceda6d1578bbea58b8c6cab7e7c44900f56ab2e8660f1dc8eb8bb57a7cb4335b",
+      "target": "scripts/proof_first_host/check_host_wire_prefix_capture.py",
+      "sha256": "ceda6d1578bbea58b8c6cab7e7c44900f56ab2e8660f1dc8eb8bb57a7cb4335b",
+      "transform": "identity bytes",
+      "role": "private test/reference helper; runtime integration pending"
+    },
+    {
+      "original": "/home/codex/.local/state/mirrorea-proof-first/w4-20260922/check_joint_capture_recipes.py",
+      "original_sha256": "c914d4998bcb7becc784c7c5858d33851e1b3940fc3ac5578d03abf055f4e2cc",
+      "target": "scripts/proof_first_host/check_joint_capture_recipes.py",
+      "sha256": "c914d4998bcb7becc784c7c5858d33851e1b3940fc3ac5578d03abf055f4e2cc",
+      "transform": "identity bytes",
+      "role": "private test/reference helper; runtime integration pending"
+    },
+    {
+      "original": "/home/codex/.local/state/mirrorea-proof-first/w4-20260922/check_source_entry_fault_capture.py",
+      "original_sha256": "9d3da6e0e8942e1dcceed0b740223c7c7fd5fb191bab9e9851350793cd79155c",
+      "target": "scripts/proof_first_host/check_source_entry_fault_capture.py",
+      "sha256": "9d3da6e0e8942e1dcceed0b740223c7c7fd5fb191bab9e9851350793cd79155c",
+      "transform": "identity bytes",
+      "role": "private test/reference helper; runtime integration pending"
+    },
+    {
+      "original": "/home/codex/.local/state/mirrorea-proof-first/w4-20260922/check_writer_occurrences.py",
+      "original_sha256": "37e0e9d34df25b29879f735bf25afa911abce0f75d29de3aa7abd8b3e3b51e04",
+      "target": "scripts/proof_first_host/check_writer_occurrences.py",
+      "sha256": "37e0e9d34df25b29879f735bf25afa911abce0f75d29de3aa7abd8b3e3b51e04",
+      "transform": "identity bytes",
+      "role": "private test/reference helper; runtime integration pending"
+    },
+    {
+      "original": "/home/codex/.local/state/mirrorea-proof-first/w4-20260922/check_writer_occurrences_total.py",
+      "original_sha256": "6c0c9ee7169e010ff8edb77760d6e9ceac4b80135d710b08ca5a4e8529861859",
+      "target": "scripts/proof_first_host/check_writer_occurrences_total.py",
+      "sha256": "6c0c9ee7169e010ff8edb77760d6e9ceac4b80135d710b08ca5a4e8529861859",
+      "transform": "identity bytes",
+      "role": "private test/reference helper; runtime integration pending"
+    },
+    {
+      "original": "/home/codex/.local/state/mirrorea-proof-first/w4-20260922/check_writer_parent_occurrences.py",
+      "original_sha256": "e83e9d8347af85baf6e7646aab1831651d81b4707696a1dad2271a033d3ed6c4",
+      "target": "scripts/proof_first_host/check_writer_parent_occurrences.py",
+      "sha256": "e83e9d8347af85baf6e7646aab1831651d81b4707696a1dad2271a033d3ed6c4",
+      "transform": "identity bytes",
+      "role": "private test/reference helper; runtime integration pending"
+    },
+    {
+      "original": "/home/codex/.local/state/mirrorea-proof-first/w4-20260922/check_writer_parent_occurrences_total.py",
+      "original_sha256": "027fd6a4c4eafdf6aef473702439c1bcbca9c9fceadee3588201a683ec99ba04",
+      "target": "scripts/proof_first_host/check_writer_parent_occurrences_total.py",
+      "sha256": "027fd6a4c4eafdf6aef473702439c1bcbca9c9fceadee3588201a683ec99ba04",
+      "transform": "identity bytes",
+      "role": "private test/reference helper; runtime integration pending"
+    },
+    {
+      "original": "/home/codex/.local/state/mirrorea-proof-first/w4-20260922/cohort_observer_native.py",
+      "original_sha256": "e8f238a71539022906f240ca1196fab1ff4af11a18bac74a0e38daf9d43f3adc",
+      "target": "scripts/proof_first_host/cohort_observer_native.py",
+      "sha256": "e8f238a71539022906f240ca1196fab1ff4af11a18bac74a0e38daf9d43f3adc",
+      "transform": "identity bytes",
+      "role": "private test/reference helper; runtime integration pending"
+    },
+    {
+      "original": "/home/codex/.local/state/mirrorea-proof-first/w4-20260922/create_known_lease_controls.py",
+      "original_sha256": "24e6ad7b5c1057c38073d05295cf791f4441f18a5bf2ada6f337e6aeb1273a97",
+      "target": "scripts/proof_first_host/create_known_lease_controls.py",
+      "sha256": "66401ebf6c73613aa023712ebd4fe721042ae5dbecaf5ea96992dbaca527b74b",
+      "transform": "same actual-trace mutations; use extracted checked control header, removing dependency on a historical path-bound runner",
+      "role": "private test/reference helper; runtime integration pending"
+    },
+    {
+      "original": "/home/codex/.local/state/mirrorea-proof-first/w4-20260922/create_wire_lease_controls.py",
+      "original_sha256": "5b2bd78041ad8fa368c701d6963940fcc4358276dc000df1ec668004f37836cb",
+      "target": "scripts/proof_first_host/create_wire_lease_controls.py",
+      "sha256": "8e96294ba6e59b755ae6ebaa6bfd5308ee3a4906e6e101f8a8cee88a6cee419f",
+      "transform": "same actual-trace mutations; use extracted checked control header, removing dependency on a historical path-bound runner",
+      "role": "private test/reference helper; runtime integration pending"
+    },
+    {
+      "original": "/home/codex/.local/state/mirrorea-proof-first/w4-20260922/entry-handoff/owner_resource_writer.py",
+      "original_sha256": "e16e6ac85bde7d75e18f8f7fa1e6dbad098ac6901f922c870f4efe99d36dd5b0",
+      "target": "scripts/proof_first_host/entry-handoff/owner_resource_writer.py",
+      "sha256": "e16e6ac85bde7d75e18f8f7fa1e6dbad098ac6901f922c870f4efe99d36dd5b0",
+      "transform": "identity bytes",
+      "role": "private test/reference helper; runtime integration pending"
+    },
+    {
+      "original": "/home/codex/.local/state/mirrorea-proof-first/w4-20260922/entry-handoff/private_wire_slot.py",
+      "original_sha256": "73bc77f77586c2c17637a05d61e6d946dc5ab8121a847deb75c06afa5ba23cc9",
+      "target": "scripts/proof_first_host/entry-handoff/private_wire_slot.py",
+      "sha256": "73bc77f77586c2c17637a05d61e6d946dc5ab8121a847deb75c06afa5ba23cc9",
+      "transform": "identity bytes",
+      "role": "private test/reference helper; runtime integration pending"
+    },
+    {
+      "original": "/home/codex/.local/state/mirrorea-proof-first/w4-20260922/entry-handoff/source_owner_cohort_resource.py",
+      "original_sha256": "857aadc15284c91f24d0187363b722c5de071abc92eb11ebdd2f928a3aa26478",
+      "target": "scripts/proof_first_host/entry-handoff/source_owner_cohort_resource.py",
+      "sha256": "857aadc15284c91f24d0187363b722c5de071abc92eb11ebdd2f928a3aa26478",
+      "transform": "identity bytes",
+      "role": "private test/reference helper; runtime integration pending"
+    },
+    {
+      "original": "/home/codex/.local/state/mirrorea-proof-first/w4-20260922/lease_fault_event_json.py",
+      "original_sha256": "4f23dc7808df3390a90a4ae66c5ab5928badae8cb517092770e6335d65177880",
+      "target": "scripts/proof_first_host/lease_fault_event_json.py",
+      "sha256": "4f23dc7808df3390a90a4ae66c5ab5928badae8cb517092770e6335d65177880",
+      "transform": "identity bytes",
+      "role": "private test/reference helper; runtime integration pending"
+    },
+    {
+      "original": "/home/codex/.local/state/mirrorea-proof-first/w4-20260922/lease_wire_event_json.py",
+      "original_sha256": "10d8230900278d2518063cde1bc478209407a0fbad0772aa91ada52b910b3bea",
+      "target": "scripts/proof_first_host/lease_wire_event_json.py",
+      "sha256": "10d8230900278d2518063cde1bc478209407a0fbad0772aa91ada52b910b3bea",
+      "transform": "identity bytes",
+      "role": "private test/reference helper; runtime integration pending"
+    },
+    {
+      "original": "/home/codex/.local/state/mirrorea-proof-first/w4-20260922/paired_statement_cohort_event_json.py",
+      "original_sha256": "d0e3421b9c6cfda939e39d90b519d4fe9e7f8722842b91f764200a7128d68a57",
+      "target": "scripts/proof_first_host/paired_statement_cohort_event_json.py",
+      "sha256": "d0e3421b9c6cfda939e39d90b519d4fe9e7f8722842b91f764200a7128d68a57",
+      "transform": "identity bytes",
+      "role": "private test/reference helper; runtime integration pending"
+    },
+    {
+      "original": "/home/codex/.local/state/mirrorea-proof-first/w4-20260922/prepare_field_cohort_replay.py",
+      "original_sha256": "99704c88bdfbfb9c6f2a8aa506f17d4bf1d68a85ca4ba97530a38019ce564ca7",
+      "target": "scripts/proof_first_host/prepare_field_cohort_replay.py",
+      "sha256": "6e23434f57ae905db2e5f74d2ce2024c7dafafbdf90741f0f95559ca68feee63",
+      "transform": "same event normalization; select preserved LeaseCohort decoder/replay instead of historical FieldCohort reader; fresh execution required",
+      "role": "private test/reference helper; runtime integration pending"
+    },
+    {
+      "original": "/home/codex/.local/state/mirrorea-proof-first/w4-20260922/prepare_field_controls.py",
+      "original_sha256": "42a5167600f0cd850516c454dfd726ec0d3a32ea85f051a096448e7ae936e49f",
+      "target": "scripts/proof_first_host/prepare_field_controls.py",
+      "sha256": "498379cce2cbfe61ebf685b47a34e9a2be02a0248dbd67dbe8452d0e6323c82d",
+      "transform": "same actual-trace mutations; extracted control header and preserved LeaseCohort decoder",
+      "role": "private test/reference helper; runtime integration pending"
+    },
+    {
+      "original": "/home/codex/.local/state/mirrorea-proof-first/w4-20260922/prepare_field_value_controls.py",
+      "original_sha256": "bf7aaa0676803c754e113185f55e990b773fc742d9caaf17642e278ce64f43a9",
+      "target": "scripts/proof_first_host/prepare_field_value_controls.py",
+      "sha256": "bf7aaa0676803c754e113185f55e990b773fc742d9caaf17642e278ce64f43a9",
+      "transform": "identity bytes",
+      "role": "private test/reference helper; runtime integration pending"
+    },
+    {
+      "original": "/home/codex/.local/state/mirrorea-proof-first/w4-20260922/prepare_lease_fault_replay.py",
+      "original_sha256": "563b0512909022b5301283afd7799df4f8bbb1d477258ff0294795cb5c80f562",
+      "target": "scripts/proof_first_host/prepare_lease_fault_replay.py",
+      "sha256": "563b0512909022b5301283afd7799df4f8bbb1d477258ff0294795cb5c80f562",
+      "transform": "identity bytes",
+      "role": "private test/reference helper; runtime integration pending"
+    },
+    {
+      "original": "/home/codex/.local/state/mirrorea-proof-first/w4-20260922/prepare_lease_fault_writer_journal.py",
+      "original_sha256": "dd4224aa51ecd4fd8411ebf168ae2dcf9f866d7be1a4066ac0a50625fa3fe2ad",
+      "target": "scripts/proof_first_host/prepare_lease_fault_writer_journal.py",
+      "sha256": "dd4224aa51ecd4fd8411ebf168ae2dcf9f866d7be1a4066ac0a50625fa3fe2ad",
+      "transform": "identity bytes",
+      "role": "private test/reference helper; runtime integration pending"
+    },
+    {
+      "original": "/home/codex/.local/state/mirrorea-proof-first/w4-20260922/prepare_lease_wire_replay.py",
+      "original_sha256": "0739f8904ef8cc7e9720ce2fcedd4ef1ab85737d535d8204cf7246a622ed2bb5",
+      "target": "scripts/proof_first_host/prepare_lease_wire_replay.py",
+      "sha256": "0739f8904ef8cc7e9720ce2fcedd4ef1ab85737d535d8204cf7246a622ed2bb5",
+      "transform": "identity bytes",
+      "role": "private test/reference helper; runtime integration pending"
+    },
+    {
+      "original": "/home/codex/.local/state/mirrorea-proof-first/w4-20260922/prepare_lease_wire_writer_journal.py",
+      "original_sha256": "40d0747172eac909d779f9c2356c5f1d7694123908080ecbcde27a1b3bda1132",
+      "target": "scripts/proof_first_host/prepare_lease_wire_writer_journal.py",
+      "sha256": "40d0747172eac909d779f9c2356c5f1d7694123908080ecbcde27a1b3bda1132",
+      "transform": "identity bytes",
+      "role": "private test/reference helper; runtime integration pending"
+    },
+    {
+      "original": "/home/codex/.local/state/mirrorea-proof-first/w4-20260922/prepare_paired_statement_journal.py",
+      "original_sha256": "c0270c96296c993d74022d474f44f816efb7315ffd999f02143591875977869f",
+      "target": "scripts/proof_first_host/prepare_paired_statement_journal.py",
+      "sha256": "c0270c96296c993d74022d474f44f816efb7315ffd999f02143591875977869f",
+      "transform": "identity bytes",
+      "role": "private test/reference helper; runtime integration pending"
+    },
+    {
+      "original": "/home/codex/.local/state/mirrorea-proof-first/w4-20260922/prepare_total_field_replay.py",
+      "original_sha256": "c755187a2cad271938687412fd42c339a1acaf67a589c26640b0e2277c004ca8",
+      "target": "scripts/proof_first_host/prepare_total_field_replay.py",
+      "sha256": "5acd0d5115510979659c07bfacc87cd0817f59783b8b5af4060d5278ec9dc815",
+      "transform": "same event normalization; select preserved LeaseCohort decoder/replay instead of historical FieldCohort reader; fresh execution required; explicit prefix-only argument controls existing decoder completion premise, never selected implicitly by source content",
+      "role": "private test/reference helper; runtime integration pending"
+    },
+    {
+      "original": "/home/codex/.local/state/mirrorea-proof-first/w4-20260922/prepare_total_statement_journal.py",
+      "original_sha256": "467ba958d34c2a37a3c3bc6283d2394d1251514f7f7c92bf6cec971537ad9132",
+      "target": "scripts/proof_first_host/prepare_total_statement_journal.py",
+      "sha256": "467ba958d34c2a37a3c3bc6283d2394d1251514f7f7c92bf6cec971537ad9132",
+      "transform": "identity bytes",
+      "role": "private test/reference helper; runtime integration pending"
+    },
+    {
+      "original": "/home/codex/.local/state/mirrorea-proof-first/w4-20260922/recovered/owner_process_limits.py",
+      "original_sha256": "df6764577ad3aa30f4d1b5afda938377e2d52ef4c11e9b13328231fb6cb504d3",
+      "target": "scripts/proof_first_host/recovered/owner_process_limits.py",
+      "sha256": "df6764577ad3aa30f4d1b5afda938377e2d52ef4c11e9b13328231fb6cb504d3",
+      "transform": "identity bytes",
+      "role": "private test/reference helper; runtime integration pending"
+    },
+    {
+      "original": "/home/codex/.local/state/mirrorea-proof-first/w4-20260922/recovered/owner_resource_writer.py",
+      "original_sha256": "f7f60dfc378127105b4d4ed53b2541f30b55fe499cbd7eebf9528618f08677d5",
+      "target": "scripts/proof_first_host/recovered/owner_resource_writer.py",
+      "sha256": "f7f60dfc378127105b4d4ed53b2541f30b55fe499cbd7eebf9528618f08677d5",
+      "transform": "identity bytes",
+      "role": "retained historical original hashed by capture provenance; executing caller selects entry-handoff copies; no equivalence claim"
+    },
+    {
+      "original": "/home/codex/.local/state/mirrorea-proof-first/w4-20260922/recovered/publication_process_check.py",
+      "original_sha256": "a706b5ef59dc8e499df28c2a730f8e230d27ddc03970f7c79b251a5d91129e86",
+      "target": "scripts/proof_first_host/recovered/publication_process_check.py",
+      "sha256": "a706b5ef59dc8e499df28c2a730f8e230d27ddc03970f7c79b251a5d91129e86",
+      "transform": "identity bytes",
+      "role": "private test/reference helper; runtime integration pending"
+    },
+    {
+      "original": "/home/codex/.local/state/mirrorea-proof-first/w4-20260922/recovered/source_owner_cohort_resource.py",
+      "original_sha256": "b5a01c9b8af01645ae546ac5d792aabd3437ceac89c3959fc8f6845fdde22436",
+      "target": "scripts/proof_first_host/recovered/source_owner_cohort_resource.py",
+      "sha256": "b5a01c9b8af01645ae546ac5d792aabd3437ceac89c3959fc8f6845fdde22436",
+      "transform": "identity bytes",
+      "role": "retained historical original hashed by capture provenance; executing caller selects entry-handoff copies; no equivalence claim"
+    },
+    {
+      "original": "/home/codex/.local/state/mirrorea-proof-first/w4-20260922/run_lease_known_fault_capture.py",
+      "original_sha256": "627ee6b41b953ca24f5d16463831e846fac3b221161a123ebfdc44450c0973b8",
+      "target": "scripts/proof_first_host/run_lease_known_fault_capture.py",
+      "sha256": "46fb5a48eed0dadf42c58ece97ae1af304463b7eea960d3f1149b17a7a933b47",
+      "transform": "identity bytes; append actual Python import origins/digests and interpreter mode to final producer receipt; capture/event logic unchanged",
+      "role": "private test/reference helper; runtime integration pending"
+    },
+    {
+      "original": "/home/codex/.local/state/mirrorea-proof-first/w4-20260922/run_lease_wire_capture.py",
+      "original_sha256": "c41ff89cc864175fc4e6d991567982553125bec5e0a3a521bb7c6db5e81bff68",
+      "target": "scripts/proof_first_host/run_lease_wire_capture.py",
+      "sha256": "32d09e465b0e72704a1be29afb121c39e84182a09d254a893dd5cfc3695d0d81",
+      "transform": "identity bytes; append actual Python import origins/digests and interpreter mode to final producer receipt; capture/event logic unchanged",
+      "role": "private test/reference helper; runtime integration pending"
+    },
+    {
+      "original": "/home/codex/.local/state/mirrorea-proof-first/w4-20260922/run_source_only_statement_capture.py",
+      "original_sha256": "5348871a5c8abc6c8a201d5d77165d59c0111c3e848fa92b8c4b93315d6770cb",
+      "target": "scripts/proof_first_host/run_source_only_statement_capture.py",
+      "sha256": "f1700e7b8aaedc89ac4b4bf19fee1e4a82cfa786de571c487875989f2b5fb0b8",
+      "transform": "new producer uses existing total parent checker for its explicit zero-writer prefix; retains zero-writer/two-message and EOF checks; historical strict producer exit1 retained externally, never relabeled; append actual Python import origins/digests and interpreter mode to final producer receipt; capture/event logic unchanged",
+      "role": "private test/reference helper; runtime integration pending"
+    },
+    {
+      "original": "/home/codex/.local/state/mirrorea-proof-first/w4-20260922/run_writer_statement_capture_v2.py",
+      "original_sha256": "6af47bb4693f9916eac151e4f4b82171f209f29edee557b4a7d1c0f08bee8121",
+      "target": "scripts/proof_first_host/run_writer_statement_capture_v2.py",
+      "sha256": "55be9b995707bf2e797f89810f6c0c9d86b7d8d8276b9f073a0ac28050b4478f",
+      "transform": "identity bytes; append actual Python import origins/digests and interpreter mode to final producer receipt; capture/event logic unchanged",
+      "role": "private test/reference helper; runtime integration pending"
+    },
+    {
+      "original": "/home/codex/.local/state/mirrorea-proof-first/w4-20260922/run_writer_statement_omission_v2.py",
+      "original_sha256": "ae017cb1ad0ab9096d4e44d674db3e6d594392de4c907505219272ab5bd97cf8",
+      "target": "scripts/proof_first_host/run_writer_statement_omission_v2.py",
+      "sha256": "07164b8ba9dc4b1d063abdaa1f81d6542bb0e17c3bbbaf19411a232afbd1fe4b",
+      "transform": "identity bytes; append actual Python import origins/digests and interpreter mode to final producer receipt; capture/event logic unchanged",
+      "role": "private test/reference helper; runtime integration pending"
+    },
+    {
+      "original": "/home/codex/.local/state/mirrorea-proof-first/w4-20260922/writer-occurrence-red-caller/owner_resource_writer.py",
+      "original_sha256": "84ee778e380fcb1179024995b197a332421dcae1f0348e8daad2f4a21dd95ea8",
+      "target": "scripts/proof_first_host/writer-occurrence-red-caller/owner_resource_writer.py",
+      "sha256": "84ee778e380fcb1179024995b197a332421dcae1f0348e8daad2f4a21dd95ea8",
+      "transform": "identity bytes",
+      "role": "private test/reference helper; runtime integration pending"
+    },
+    {
+      "original": "/home/codex/.local/state/mirrorea-proof-first/w4-20260922/writer-occurrence-red-caller/private_wire_slot.py",
+      "original_sha256": "73bc77f77586c2c17637a05d61e6d946dc5ab8121a847deb75c06afa5ba23cc9",
+      "target": "scripts/proof_first_host/writer-occurrence-red-caller/private_wire_slot.py",
+      "sha256": "73bc77f77586c2c17637a05d61e6d946dc5ab8121a847deb75c06afa5ba23cc9",
+      "transform": "identity bytes",
+      "role": "private test/reference helper; runtime integration pending"
+    },
+    {
+      "original": "/home/codex/.local/state/mirrorea-proof-first/w4-20260922/writer-occurrence-red-caller/source_owner_cohort_resource.py",
+      "original_sha256": "857aadc15284c91f24d0187363b722c5de071abc92eb11ebdd2f928a3aa26478",
+      "target": "scripts/proof_first_host/writer-occurrence-red-caller/source_owner_cohort_resource.py",
+      "sha256": "857aadc15284c91f24d0187363b722c5de071abc92eb11ebdd2f928a3aa26478",
+      "transform": "identity bytes",
+      "role": "private test/reference helper; runtime integration pending"
+    },
+    {
+      "original": "/home/codex/.local/state/mirrorea-proof-first/w4-20260922/recovered/qualified_source_adapter.py",
+      "original_sha256": "aabcd394944804ace3d5c38a2113df6620fb85d57caedde0e5dffba6948c3b81",
+      "target": "scripts/proof_first_host/recovered/qualified_source_adapter.py",
+      "sha256": "1b53e6adca250b257cfb6fb978c38ccf84f89b2ebd1809d2e06edac5d29fcd55",
+      "transform": "only dependency location: same existing reference source adapter in staged root instead of historical external directory",
+      "role": "private test/reference helper; runtime integration pending"
+    },
+    {
+      "original": "/home/codex/.local/state/mirrorea-proof-first/w4-20260922/recovered/SourceFundingQueryWorker.lean",
+      "original_sha256": "2ca78a52cfdcdd5b593473a1609dcff6eecf889dd3eb21f93c4123f2f1ced4cd",
+      "target": "samples/lean/host-reference/SourceFundingQueryWorker.lean",
+      "sha256": "2ca78a52cfdcdd5b593473a1609dcff6eecf889dd3eb21f93c4123f2f1ced4cd",
+      "transform": "identity bytes",
+      "role": "native reference entry/input generator; no production claim"
+    },
+    {
+      "original": "/home/codex/.local/state/mirrorea-proof-first/w4-20260922/recovered/OwnerBudgetWorker.lean",
+      "original_sha256": "3e5bb2022ea134b62d133aa0af4ab98007d48de335f9dfb07e0bbc337c227cbc",
+      "target": "samples/lean/host-reference/OwnerBudgetWorker.lean",
+      "sha256": "3e5bb2022ea134b62d133aa0af4ab98007d48de335f9dfb07e0bbc337c227cbc",
+      "transform": "identity bytes",
+      "role": "native reference entry/input generator; no production claim"
+    },
+    {
+      "original": "/home/codex/.local/state/mirrorea-proof-first/w4-20260922/recovered/SourceInputControls.lean",
+      "original_sha256": "33d63bc66bf10c27ea015136b17d558946313bfcf4bf62b995c0a21523eaf501",
+      "target": "samples/lean/host-reference/SourceInputControls.lean",
+      "sha256": "33d63bc66bf10c27ea015136b17d558946313bfcf4bf62b995c0a21523eaf501",
+      "transform": "identity bytes",
+      "role": "native reference entry/input generator; no production claim"
+    },
+    {
+      "original": "/home/codex/.local/state/mirrorea-proof-first/w4-20260922/recovered/qualified-source/main.mir",
+      "original_sha256": "f98a376cb6d2159080bb8a40a348d053a8916919f86d0e1c18bcc774c4be2c6b",
+      "target": "samples/clean-near-end/mirrorea-proof-first-composition/host-reference/main.mir",
+      "sha256": "f98a376cb6d2159080bb8a40a348d053a8916919f86d0e1c18bcc774c4be2c6b",
+      "transform": "identity bytes",
+      "role": "ordinary source input to selected finite reference profile"
+    },
+    {
+      "original": "/home/codex/.local/state/mirrorea-proof-first/w4-20260922/recovered/source-continuation/main.mir",
+      "original_sha256": "83bff6985e40b0f2c5ed53a7bc4ec8a52be1beadcce3e6f3195d4e25281ea30e",
+      "target": "samples/clean-near-end/mirrorea-proof-first-composition/host-reference/continue-c.mir",
+      "sha256": "83bff6985e40b0f2c5ed53a7bc4ec8a52be1beadcce3e6f3195d4e25281ea30e",
+      "transform": "identity bytes",
+      "role": "ordinary source input to selected finite reference profile"
+    },
+    {
+      "original": "/home/codex/.local/state/mirrorea-proof-first/w4-20260922/recovered/source-continuation-owner-a/main.mir",
+      "original_sha256": "c01b0f124bc64c36e1a75af7d614b7473a30b601b9632e54fdf4ef5c47f7003b",
+      "target": "samples/clean-near-end/mirrorea-proof-first-composition/host-reference/continue-a.mir",
+      "sha256": "c01b0f124bc64c36e1a75af7d614b7473a30b601b9632e54fdf4ef5c47f7003b",
+      "transform": "identity bytes",
+      "role": "ordinary source input to selected finite reference profile"
+    },
+    {
+      "original": "/home/codex/.local/state/mirrorea-proof-first/w4-20260922/recovered/RunCohortHostCoveredControls.lean",
+      "original_sha256": "ab0112c68a2cac0107b652fa5fc8d6104c0e7d8f3ed8466482838700d1e9f746",
+      "target": "samples/lean/host-reference/HostControlHeader.lean",
+      "sha256": "61427a9b1c221cf816061b0d7a94e535087fe6e82505840fb37fc1d20f3c3796",
+      "transform": "extract open Lean and identical check definition before def main; omit historical import and path-bound invocations",
+      "role": "generated negative-control prefix; not a standalone theorem/sample"
+    },
+    {
+      "original": null,
+      "original_sha256": null,
+      "target": "scripts/proof_first_host/prepare_source_inputs.py",
+      "sha256": "cdc75e4326792034059afb2af1df8c2a0b0074617afd3d1f07a9a7967239c1e4",
+      "transform": "new reconstruction of inspected rebuild_source_inputs parser/export steps; removes recovery-patch extraction; same qualified adapter and continuation encoder",
+      "role": "source preparation only; fresh execution pending"
+    }
+  ],
+  "excluded_historical_helpers": [
+    "build_field_bound_root.py",
+    "build_known_lease_bound_root.py",
+    "build_lease_bound_root.py",
+    "build_total_bound_root.py",
+    "build_wire_lease_bound_root.py",
+    "create_field_correspondence_consumer.py",
+    "create_lease_known_fault_consumer.py",
+    "create_lease_wire_consumer.py",
+    "prepare_field_capture_inputs.py",
+    "prepare_statement_provenance_v2.py",
+    "prepare_total_field_replay.FIRST_SOURCE.py",
+    "run_bounded_lean.py",
+    "run_field_bound_replays.py",
+    "run_known_lease_bound_replays.py",
+    "run_lease_bound_replays.py",
+    "run_total_bound_replays.py",
+    "run_wire_lease_bound_replays.py"
+  ],
+  "scope": "No saved binary, raw trace, expected JSON or compiled proof object is copied; historical one-shot builders remain external."
+}

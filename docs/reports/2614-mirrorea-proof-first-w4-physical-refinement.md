@@ -2276,3 +2276,522 @@ Docs validation and own commit/push outcome will be recorded below and in
 external checkpoint receipts. Sole main; no sub-agent session or notification.
 
 Checkpoint make docs passed exit0 at 2026-09-26T03:32:47.510070+00:00 (agent configuration,218 Canon entries,800 required paths,1764 report scaffold). Subsequent edits only record this result/Git receipt; JSON and diff checks apply. Own normal commit/push and final parity are recorded in external `w4-20260926-integration/GIT_RESULT.json`, not inferred before execution.
+
+
+### 2026-09-26T05:29:05.138987+00:00 — W4-B exact-source preservation and fresh kernel checkpoint
+
+Objective/scope: continue the same sole-main W4 under the owner's2026-09-26
+quota override. No quota stop today; restore below30% checkpoint stopping from
+2026-09-27 JST with checks at least one hour apart. Start HEAD
+ad9256c6e276634118de1fb6a40bddf6171c9f38/main clean. No subagents, Canon edits,
+public/production writes, new semantic lane or W5+/Plan250-I3-4 activation.
+
+Documents/code consulted: prior Canon-first reading retained; W4 A–E plan,
+current source runner/integrity controls, all206 preserved dependency hashes now
+have full or equivalent-copy reading evidence. The missing37 hash correspondences
+were resolved by actual full reads; the three large ReferenceMutation/Execution/
+Source files were read in non-truncated consecutive ranges. General publication
+progress constructs a finite schedule and is not fairness; source continuation
+preservation does not give implicit distributed atomic reads; pending-reference
+protection/current authorization and cancellation remain distinct. Mandatory
+broad corpus343full,next344 remains unfinished, not subsumed by cone reading.
+
+Actions/files: added76 exact Lean source copies under existing foundations,
+retaining130 existing identical modules. Three current decoder roots204 plus
+standalone EntryAcquisition/ProducedRootedness yield206. No rename/import/proof
+edit; source manifest records origin/hash/identity transform and33 historical
+excluded helper/reader modules requiring final disposition. Extended the existing
+reference runner with an optional host-model source closure, serial build and
+bounded axiom batches. The final audit keeps CompleteAudit.lean to preserve the
+existing actual-consumer integrity control. No new execution framework.
+
+Commands/evidence: external w4-20260926-integration/build_preserved_cone.py ran
+Lean4.29.1 --trust=0 -j1 with4GiB address limit/core0. Fresh206 module compilation
+and76 new-module owned axiom audits7138 declarations passed at
+2026-09-26T05:24:47.861049UTC; all216 compiler/audit commands exited0. Receipt
+repo-cold-first/RESULT.json SHA256
+2efe9184f29ecb988311a8734fe0e1e2ade4e4fda20525470f6197216b536442
+binds source/script/generator/compiler/output hashes before and after. Standard
+logic axioms only; preserved proofs, not76 newly invented theorems. This is not
+the full existing runner or W4-B acceptance.
+
+Source closure test was first RED (missing gate); first implemented positive
+failed on toolchain import Lean.Data.Json. The repaired import grammar explicitly
+handles dotted Lean/Std dependencies; exact positive plus eight negative damaged
+copies pass. First failed positive is retained, not hidden by a later shell
+command's exit0. Existing seven source-case metadata negatives also pass.
+The new full runner is executing once in mir-w3-reference-4oe_18pl, submitted
+05:25:38.051340UTC with a fresh empty CPython cache prefix/no bytecode writes,
+PYTHON environment sanitization and serial fresh parser/Lean build. Whole result
+is pending. No fresh native/network regression or physical replay integration
+has run. No stale object reuse is being claimed as a fresh compilation.
+
+Oracle review: first frozen design consultation terminal exit1 at05:08:53UTC
+Manual login timed out. Owner reported login repaired; the exact packet was
+resubmitted once05:23:42UTC. Actual session mir-w4-integratio-design-retry1 also
+terminated exit1 at05:24:19UTC with the same authentication error. Both receipts,
+logs and packet hashes are preserved. No answer or review acceptance; owner
+notified via async question, independent safe work continues. This is an actual
+error, not a latency cutoff. No Chrome settings/cookies/keys changed.
+
+Understanding/open questions: model source preservation is now executable at a
+fresh kernel boundary, but optional runner integration, authentic imported-object
+receipts and actual native capture/normalizer integration still block B. All
+C/D/E and119dispositions remain open. Source/evidence count does not imply alpha.
+Suggested continuation: collect the running full runner, fix actual failures,
+finish runner integrity plus physical-harness preservation after review, then C.
+
+plan/ updated forward; Documentation.md, docs/project-status.md, progress.md,
+tasks.md and samples_progress.md synchronized to active B/incomplete. Sample and
+script READMEs describe the unaccepted optional command and evidence limits;
+no sample taxonomy/root change. RESUME/CURRENT_GOAL/W4_CHECK/read ledger updated.
+Reviewer findings remain pending authentication; no independent signed reviewer.
+Skipped: new network/I3/Rust-runtime regression is later gated, not passed.
+Commit/push: own diff remains uncommitted pending integrated validation/review;
+no parity claim for this new cut. Sole main, no sub-agent sessions or notifications.
+
+
+2026-09-26T05:35:19.800856+00:00 — Existing-runner stale-cache falsifier: actual copied runner imported
+an audit generator from timestamp/length-compatible stale pyc despite the current
+source bytes matching their digest. -B blocks cache writes, not cache reads;
+ordinary-import calibration and runner-import both exited0 and exposed the stale
+marker. New regression is intentionally RED. Isolated candidate source-loading
+repair (runpy.run_path) passed on the same poisoned cache; repo runner remains
+unchanged until its in-flight input-pinned full validation terminates. This does
+not invalidate that run's explicit fresh empty cache environment or prove a
+successful whole-run false acceptance. Exact RED/candidate receipts are in
+I/host-runner-controls-js7hlwrt. The64bound physical Python helper source inventory
+now has full hash reading for all previously unmatched8files; no package/runtime
+adoption follows merely from that reading.
+
+
+### 2026-09-26T05:44:56.032335+00:00 W4-B full model runner and cache regression
+
+Fresh existing runner `--with-host-model` completed exit0:277 commands,236
+audited modules/22215 owned declarations,32 source cases,13 integrity controls,
+5 weakening controls,8 publication theorem mutants. Receipt:
+`/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/mir-w3-reference-4oe_18pl/RESULT.json`
+SHA256 `25ba71b7ceff3e30d693f68fcc9598b23aa5d509516c844429b8871b8a4a0435`.
+This is the pinned prior runner, not later edits or fresh physical capture.
+After terminal, replaced timestamp-cache-capable audit helper import with
+source execution via runpy.run_path. The actual runner stale-pyc calibration
+now passes at `/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/host-runner-controls-j9usdqa8/RESULT.json`.
+The RED receipt and isolated candidate remain; strengthened full validation pending.
+W4-B/current goal remains incomplete; import/source-object and physical integration
+remain open. No Canon/production/network/alpha claim, no new Oracle answer.
+
+
+### 2026-09-26T06:02:34.956209+00:00 W4-B physical reconstruction candidate
+
+Preserved55 helper/native/input sources, then added one actual-parser preparation
+helper (56 manifest rows). No saved binary/raw/expected result is copied. Narrow
+normalizer/template/dependency-path transformations are explicit in
+`docs/proof-first/W4_HOST_MANIFEST.json`; actual native execution is pending.
+New `scripts/proof_first_host_prepare.py` consumes only a completed bound model,
+compiles the actual native source closure and builds inputs through the actual
+Rust parser. Its syntax and rejection of the earlier unbound model record were
+checked; no build/preparation success is claimed yet.
+
+The source-only producer originally failed AFTER writing a clean zero-writer
+capture because it called the nonvacuity checker. Reproduced on that saved real
+capture: strict parent checker rejects `unfinished/nonvacuous writer interval`,
+existing total parent checker accepts exactly0 intervals/0 confirmations. The
+new source-only producer selects the total checker and retains its explicit
+zero-writer/two-message and all-child EOF checks. This is a forward repair; the
+old producer exit1 stays historical. Fresh prefix capture/replay and rejection
+of prefix-as-program-completion remain required.
+
+
+### 2026-09-26T06:21:10.679799+00:00 bound model runner success
+
+The strengthened existing runner completed278commands exit0,236module/22215owned
+declaration audits,32source/13integrity/5weakening/8publication controls.236successful
+source-object receipts and9168compiler/input/object/log bindings are recorded.
+Actual per-audit import inventories matched the selected closure and paths.
+Receipt `/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/mir-w3-reference-tp9yk83y/RESULT.json`,
+SHA256 `25e4e62a38011e2c0f380771c5aa107a1b3ffa7ea82228633e59fd69da317baa`.
+Session56855 collected exit0. Fresh native preparation is now started separately;
+this full model pass is not fresh physical capture or W4-B closure.
+
+
+### 2026-09-26T06:38:16.226139+00:00 native preparation boundary controls
+
+The first native preparation remains running on its pinned source. Local read of
+Lean4.29.1 Leanc.lean confirmed LEAN_CC/LEAN_SYSROOT overrides. Actual leanc with
+a controlled substitute compiler exited23 and printed its marker; no real tool
+was changed. An extracted actual staging loop also accepted a path containing
+../.. whose source stayed inside the repo but destination escaped the fresh stage.
+The calibration records destinations only: no escaped file was written. Both
+minimal counterexamples are in I/host-prepare-red-h_2u8iv9/RESULT.json. Current
+selected56paths are canonical and neither override was present in the inspected
+environment; this is not evidence that the running known-input build was altered.
+
+New focused test was RED at I/host-prepare-controls-ip2smbrq. A separate candidate
+I/host-prepare-candidate.py now checks source/destination confinement, rejects
+ambiguous paths, fixes the selected sysroot, removes inherited compiler override,
+and binds bundled clang/linker/headers. Candidate controls passed at
+I/host-prepare-controls-irkquam5: all56selected paths remain distinct/confined,
+seven malformed paths reject, and actual leanc uses the selected clang despite
+injected compiler/sysroot. Candidate has NOT replaced the in-flight repo preparer
+and has no full native/preparation pass yet. OS loader/system libraries remain
+TCB; these controls are not a compiler-correctness proof. W4-B stays open.
+
+Historical mandatory LAB corpus was fully read through365 with exact hashes;
+next366. Corrected only the current plan header from pause to the authorized
+Sep26 active state; historical pause entries remain unchanged. No new Oracle
+answer, commit/push, Canon or production change.
+
+
+### 2026-09-26T06:42:01.115967+00:00 native root counterexample and forward rebuild
+
+First prep session32097 exited1 at source linking after113source/C compilations.
+Actual generated initialize_host_cold_x2dnative_x2d2_* names did not match imported
+initialize_* names. Local lean --help confirms default package root is cwd; old
+working builder compiled with cwd equal to source directory. Two tiny real modules
+reproduce failure under the wrong root and link/run value7 with explicit -R.
+Receipt I/native-root-controls-8ao1h_9f. First227command receipt remains failed,
+not a partial preparation pass.
+
+Applied explicit -R source.parent, keeping consumers free to use their required
+IO cwd. Applied prior candidate canonical-path and compiler-environment fixes
+after terminal; actual repo focused controls pass at I/host-prepare-controls-6wijt7z3.
+Started one fresh second prep, session36863, I/mir-w4-host-fhiwjdq5, selected model
+unchanged. Whole result pending; no existing native objects reused. Root28GiBfree,
+RAM11GiBavailable, serial4GiBAS. Physical runner has not run; review still waits
+for Oracle authentication. Historical corpus through367/next368.
+
+2026-09-26T06:45:48.995957+00:00 mandatory reading through383/next384. Historical381–382 explicitly
+route valid rows through fixture-aligned detached bundles. That is historical
+helper evidence, not the same-execution source/Core/edge/network/observation
+correspondence required by R05/R06; do not reuse its label as W4 E2E. No changes
+to that old route or current production contracts. Native second run continues.
+
+2026-09-26T06:52:10.381010+00:00 Oracle retry2 after new owner login report: same packet, submitted
+06:46:37UTC, terminal06:47:19UTC exit1 model-selector-not-found, no answer. Checked
+after180s; collected wrapper7725. Actual session mir-w4-integratio-design-retry2.
+Read-only saved debug-port inspection failed ECONNREFUSED; no browser state or
+settings changed. Asked owner to confirm normal screen and6Pro before any
+current-model retry; no blind ignore or paid fallback. Native local work continues.
+
+
+### 2026-09-26T07:01:22.100563+00:00 native preparation passed / visible Oracle recovery
+
+Second native preparation235commands exited0.113fresh native modules compiled,
+source110module and owner102module executables linked, separate entry audit and
+actual parser-derived source inputs checked. I/mir-w4-host-fhiwjdq5/RESULT.json
+SHA256 196a654b16b8a32126f6f295606cdf17979d8df1e36d0b57d66473959d69311f.
+Started fresh physical capture/replay session38306; result pending.
+
+Owner confirmed normal6ProUI and requested visible browser. Retry3 used current
+model/keep-browser/display:0 and same frozen packet. Wrapper exited1 with prompt
+commit timeout, but read-only CDP of the exact retained tab found prompt submitted
+and actual response generation (Stop button). Thus no resend: preserve tab and
+collect final answer. DOM lacks legacy data-message-author-role selectors, so
+wrapper failure is not evidence of consultation failure. No Chrome settings,
+credentials or cookies accessed/changed. This is still old-cut advisory review.
+
+
+### 2026-09-26T07:07:26.685760+00:00 physical integration failure and repair
+
+First actual normal profile captured and normalized, and its replay printed the
+required correspondence markers, but the later import inspector failed: consumer
+did not import Lean.Elab.Command. Entire run38306 exit1 retained as FAILED.
+The audit command had previously only been appended to audit_source (which imports
+Lean), not raw replay consumers. Minimal real compiler control reproduced this
+late failure; physical consumer now explicitly imports Lean before replay source.
+
+To preserve failed executions without rebuilding identical native artifacts,
+each next execution stages a new host tree using ONLY immutable preparation-bound
+files. No old captures/results copied; binaries keep successful preparation and
+source/compiler hashes. Tests at I/host-execution-controls-vcfxsse7 pass: actual
+consumer+import audit, fresh two stages, previous-capture exclusion, existing-stage
+overwrite refusal, changed-input rejection. RED94n_rhho retained. Second actual
+execution12979 started; no full replay/profile/control pass yet. This is finite
+private-pipe evidence under the same TCB, not Rust/QUIC or all-entry acceptance.
+
+2026-09-26T07:10:02.478893+00:00 second physical execution12979 failed in actual journal preparation: new
+host stage omitted native RESULT/MANIFEST records needed to check binary provenance.
+Failure physical-5gb2kyvq kept. Extended actual staging regression reproduced
+missing metadata (_fs0pby5); copy only the two bound native metadata files, keep
+native executable identity at original successful preparation path. Regression
+cjgymqxz passes; full third execution25362 started, no full pass claimed. Other
+preparer relative-path dependencies inspected; no new semantic or proof premise.
+
+
+### 2026-09-26T07:14:02.136227+00:00 original design review recovered and locally inspected
+
+Same visible retry3 tab finished; read-only CDP collection found no Stop button
+and one final rendered answer block. Saved ANSWER.txt/ANSWER.html/COLLECTION.json
+and DISPOSITIONS.json externally; no re-submission, no wrapper-success claim
+(wrapper retained exit1 due obsolete DOM commit detection). Answer sha256 0229fadd959073c3b30254536b47ab09d4feb91682b02a38726688d0d56f15bd.
+
+Oracle favors identity preservation, explicit standalone proof dispositions,
+actual imported-object bindings, named outcome contracts, source-loaded Python,
+and whole-process exit checks. Most identity/cache/census repairs already exist
+in the newer cut not supplied. Inspected full actual child control sources:
+semantic negatives are asserted by #guard with Lean exit0; four adapter-negative
+cases reject explicitly. Fixed child mutation inventories reject at named theorem
+ranges. Do not misclassify every semantic negative as expected compiler failure.
+Outer receipt outcome checking and nested interpreter/import scope need focused
+current-cut disposition; no final approval from this old review. Child-exit gate
+was pre-existing, not a new repair. Oracle authority wording does not revoke the
+owner’s prior delegation of bounded C/D/E after gates. Reserved decisions unchanged.
+
+2026-09-26T07:15:45.287707+00:00 Oracle outcome finding reproduced at outer source receipt gate:
+mutable-reference could be relabeled Lean-success. Added exact four adapter-negative
+case identities; all other cases require completed Lean #guard consumers, with no
+ambiguous dual-stage receipts. Existing metadata regression now rejects10damaged
+records, including wrong stage in both directions. Saved actual32case receipt
+passes new predicate (4adapter negatives); I/SOURCE_OUTCOME_GATE.json. This is a
+new validator check on saved real evidence, not rerun32source executions or a new
+full model pass. Active physical run uses unchanged frozen model helper/bindings,
+not the modified repo runner. Current runner full validation remains due.
+
+
+### 2026-09-26T07:31:21.004035+00:00 current implementation review submitted in visible browser
+
+Frozen current10source files + manifest, question SHA d64b34764701404730e3af2a0d3600f1116f3d0c1bd31b7c0d8a28736dd64018, manifest SHA dac3551e95560bb41d216651de597af0d834f7be18b051fe9b61d19856e4d0b6.
+Single temporary browser request actual session mir-w4-current-integratio, DISPLAY:0,
+current owner-confirmed6Pro. Wrapper47588 exited1 due prompt DOM detection timeout.
+Read-only inspection of the exact retained tab confirms submitted full packet and
+Stop button/active generation. No resend, no settings/cookies/credentials changed;
+final answer pending. I/oracle-current-integration retains submission/log/UI receipts.
+Physical25362 retains15actual profiles; negative controls still running, no full pass.
+Resources at07:30UTC27GiBfree/10GiBavailable; heavy Lean remains serial1worker.
+Mandatory full historical corpus now through491; no preview/threshold/helper naming
+is promoted to actual discharge/network/theorem acceptance. Third make docs exited0
+(I/DOCS_THIRD.json); later edits need normal close check. git diff --check passed.
+
+
+### 2026-09-26T07:43:22.192265+00:00 fresh physical execution completed
+
+Third physical execution25362 completed exit0 at07:37:43UTC:68commands,15actual
+profiles,53typed negative controls. Includes normal completion, actual process
+omission rejected, zero-writer source prefix accepted only as prefix,4known-fault
+and8unknown-wire profiles. HOST_EXECUTION.json SHA
+3dae7b62b35872c7e37325ca76c99a238768fd3d556a1c835ee7f59b9b7a41f7.
+I/PHYSICAL_THIRD_VERIFIED.json independently rechecked34704bound files,69staged
+inputs and68log hashes after completion. Existing two failed attempts retained.
+This closes the selected fresh native/private-pipe execution check, not B review
+or Rust/QUIC/all-entry/auth/network/alpha. Exact outcome-gate runner full rerun is
+still due; current Oracle visible tab still generating at07:40:28UTC, no resend.
+Mandatory historical corpus full reads retained through550 from continuity;
+missing ledger registrations467–550 were reconciled forward, not claimed as new
+reads.551–563 read in this continuation; broader corpus remains incomplete.
+No Canon/119 acceptance changes, no commit/push.
+
+
+### 2026-09-26T07:46:23.392528+00:00 current review dispositions / repair design
+
+Visible final current-review answer collected07:43:42UTC, SHA
+da072a4d18ac839c204584a116f33dfe16f7c9cb06d929fef7af89e0be508426.
+I/oracle-current-integration/DISPOSITIONS.json separates verified source findings
+from omitted-source questions. Producer self-receipts are written before final
+stdout; consumer gates lack external producer exit observation. Nested bare Lean
+(and model Python) selection can vary with a stable relative PATH and cwd.
+These are operational completion/provenance defects, not false Lean theorems.
+
+Selected repair: retain split stages; a small synchronous process observer waits
+for the producer and binds terminal exit, actual command/producer and result/log
+hashes. Downstream accepts only a zero-exit observation of the selected result.
+The observer and truthful local capture remain TCB; its own overall invocation
+is judged by its caller, never by a self-written success field. Smallest alternative
+is combining stages in one runner; it does not remove nested-tool selection and
+would needlessly rebuild prepared workers on physical retries. Current/historical
+producer provenance remains explicit. Owned nested calls receive selected absolute
+Lean/Python paths and coherent mode/environment. No public contract or theory gate
+is changed. Tests: closed stdout after genuine saved success; changed result/
+producer/log; relative PATH selecting different truthful tool routes.
+
+A full outcome-gate model run67105 started before final review was collected;
+its pinned sources remain unchanged until terminal completion. Repairs can be
+developed externally/new test files meanwhile. Missing physical launcher/control/
+normalizer sources will receive a focused frozen review; synthetic impossible
+receipts are not claimed as reachable counterexamples.
+
+
+### 2026-09-26T08:16:54.324044+00:00 exact outcome rerun completed; observed workflow started
+
+Pre-repair model tlbi87kx / session67105 completed whole exit0:278commands,
+236modules/22215owned declarations,32source/13integrity/5weakening/8publication
+controls. After completion9168bindings and278command log hashes were checked;
+I/OUTCOME_MODEL_VERIFIED.json, RESULT SHA
+a43a62f5310516d63d8981b4ba1df88c67fb5f74e493b5c1e54f3f5ff9ffbff2.
+Six original operational sources archived before applying the tested nested-tool
+candidate. This remains historical evidence for its exact earlier cut, not for
+new nested-tool/process-observer behavior. No general proof assertion changed.
+
+Actual repaired runner cache/PATH controls6sqkjklr passed. Ten metadata negatives
+passed. Process-observation controlsw2jyml76 passed, including genuine completed
+model refused without external terminal observation. Prior isolated closed-final-
+stdout counterexample is not a claim of a new failing full native build.
+New observer workflow model started session97040, observed-model-bpk9bgw2;
+full revised model/preparation/physical sequence is pending.
+
+Focused frozen review submitted once in visible Chrome, DISPLAY:0, owner-confirmed
+6Pro/current, requested/actual session mir-w4-process-handoff.19files183455bytes;
+questionSHAa5fabc1302dfd756c261dcd615dae00d2fdac03c19b1c57a3d817370e7f83b27;
+manifestSHAe1eb7a3cd3c4de8cc42b4ad0b9b4abc50a52f7afb45212caf915e7b0ef8b2589.
+Wrapper56710 failed DOM prompt detection, but exact retained tab read-only check
+at08:16:11UTC confirms full216318-character submitted prompt and active generation.
+No duplicate resend; final answer pending. Candidate six-file state at freeze is
+explicit; other supplied repair/launcher/control/normalizer sources are current.
+No unseen source/proof acceptance inferred. Browser settings/credentials untouched.
+
+Mandatory historical specs/examples now through612 plus the four remaining
+332/335/336/340 entries fully read/ledgered. Five existing operational/network
+hands-on guides read: old process-boundary canaries/profile inventory are not
+current actual network evidence. Wider sample/docs corpus remains incomplete.
+No B/C/D/E acceptance, Canon/119 disposition promotion, commit/push or parity.
+
+
+### 2026-09-26T08:52:32.987364+00:00 — archived handoff repair and actual probe mutations
+
+Observed V1 model session97040 completed with producer/supervisor exit0:278commands,236modules/22215owned declarations,32source/13integrity/5weakening/8publication controls. All9169bindings and278log hashes checked before new source edits; I/OBSERVED_V1_MODEL_VERIFIED.json, RESULT5cf793a36dbf9f004f65f550d429020a4ed72e2c8703370a22c9f3a5ff4a6b4a. This is historical V1 evidence, not the new V2 workflow.
+
+Visible Oracle process-handoff final625a1adaa69ea009da8b37c0065fcd11ef0fc21417473fbc0f06a35f0898e5e0 fully read. Confirmed historical-live-source false refusal (actual lightweight child) and optimized-control false pass (child failed at its first print before saving receipt). Applied four operational file repairs: immutable executed-source archives and consumed/provenance separation; selected absolute compiler version query in normalized environment; suite-qualified negative outcomes; current-execution generated-input confinement. Adjacent new control scripts refuse optimization. No theorem assertion/core semantics changed. Installed Lean ignored sentinel LEAN_SYSROOT during version/prefix queries, so wrong-version execution was not reproduced.
+
+Small controls pass: process9cithcnl (history/current distinction, archive/result/log drift, actual late exit and caller-policy propagation); runnerik3yjb8e (actual cache/PATH/bootstrap); executionbmeb7tpa (real Lean importer and stale/symlink stage refusals); preparationn42pfkfk (real leanc/env); three optimized refusals; manifestro9auo1q. Existing known/wire checkers already compare named probe inventory. Actual two harness mutants omitted owner2 or duplicated owner1; capture exit0, existing checker exit1 for both, host-probe-controls-r0u2uqoy. First test y0_axrs4 omitted journal prerequisite and remains failed with FileNotFoundError; corrected test runs the real journal before normalization. Historical12fault capture hashes and five actual outer refusal identities checked separately; no extra retirement gate or general all-entry claim. Unused run_worker issue remains outside selected call graph.
+
+New V2 observer/model session23472: observed-model-7bdg5dwx / mir-w3-reference-bcrn7l38 running. Fresh native preparation and physical reruns pending. Observer/producer sources and manifests must stay unchanged during use. V1 observations are not fabricated into V2. Static focused rereview launched once in visible Chrome at08:50:47UTC, mir-w4-archived-handoff,15files237506bytes, questionec993653a897822fec9a51c624aa6482a47b3bb254c3f2f2b98031bee7e75e36, manifestef785f60d2f4bd54cf39df2cb6c9691979b42c223f13070dd4eef52efda4a825; answer pending, checks>=180s.
+
+make docs completed exit0 at08:31:33UTC (DOCS_FOURTH.json) before these later edits; diff whitespace check passed. Current header of W4_CHECK synchronized after preserving stale prior header as history; older dated component records remain history. Mandatory current docs/overview and archived Lean/static-analysis guides read; archived order guide only1–1670/7608, wider samples remain unread. No B/C/D/E acceptance, Canon/119 promotion or Git commit/push.
+
+
+### 2026-09-26T09:06:41.225962+00:00 — W4-B再現継続・Oracle実ブラウザ終了
+
+V2 model session23472 is still running (209 completed commands/exit0 at09:02:54UTC; not a whole-run pass). `make docs` session48632 completed exit0 at09:02:47UTC; `DOCS_FIFTH.json` retains the log hash. Later sample README snapshot edits remain outside that check. Original Oracle archived-handoff wrapper session51353 ended1 on DOM detection while its actual prompt was generating. At08:59UTC its dedicated Chrome PID was absent/CDP refused. Official `oracle session --harvest` recovery session28386 failed1; a direct ordinary visible same-profile Chrome reopen restored no matching consultation. No final answer was recovered. Same frozen question/manifest was resent once at09:04:49UTC as `mir-w4-archived-handoff-retry1`, session47587; no browser preference changes, paid fallback, external notification or elapsed-time retry. Exact records under the original/retry packet directories.
+
+Archived order guide1–7608 is now fully read/ledgered; selected active clean source/transport/Sugoroku/avatar families also fully read. Historical helper-local preview outputs and sample-specific behavior are not W4 actual-source/transport proof. The clean sample README had a stale Plan250-executing-I3-3 sentence; corrected current snapshot to ADR-0043 acceptance/owner pause without changing authority. Plan/status/sample mirrors updated forward; no Canon/119/source-manifest changes, no new commit/push.
+
+
+### 2026-09-26T09:25:47.134429+00:00 — V2 model verified / checked layout and wire discriminator
+
+V2 model supervisor23472 and producer completed exit0 at09:18UTC. All9169bindings,278command logs, source manifest and selected observation checked (verification49528exit0); OBSERVED_V2_MODEL_VERIFIED.json records RESULT7257deddbf919be36d1b5823b9adb7a1bc6bfc663a5e42e9a7a22ab223785495.236modules/22215owned declaration audit,32source/13integrity/5weakening/8publication controls. Model/observer unchanged afterward; no repeat model build is needed for prepare/physical-only changes.
+
+Archived-handoff retry1 final answer fcfac27678bebaf5392d3d5c635eb8e44552c9fe9c13d5ec8f76dc8fded348f2 fully read. Its two conditional ancestry-classification defects were reproduced as lightweight path-map decisions, not full-pipeline compiler failures. Actual installed prefix and repo are disjoint. Compared explicit dependency-role export against the smallest checked disjoint-layout profile; chose the latter for this private reproducible workflow. Preparation checks both original-model/current repositories; physical checks recorded roots, original preparer and current repository. All reused toolchain bindings must survive export, selected compiler hash must match. Overlapping installations are explicitly unsupported rather than silently accepted; no Mir/source/authority semantics change. RED missing-gate mfmurkzn retained; GREEN layout/staging/actual-leanc u86f6gn0.
+
+Actual wire ENTRY/BEFORE_WRITE five-probe mutation duplicates owner1 and omits owner2. Capture completed0, real journal prerequisite rejects1 at named wire inventory (qh80k59z); normalizer not run after prerequisite rejection. Selected historical native binaries remain labelled historical. Full supplied journal/replay bodies explicitly invoke the checker. This resolves the omitted-call-site evidence question without general all-entry claims; C remains gated.
+
+Fresh preparation47143 / observed-prepare-9unz_0vp / mir-w4-host-l2iop46k RUNNING. New physical NOT RUN. RAM12GiB available/root26GiB free before build; heavy Lean remains serial. Narrow delta Oracle launched once09:24:09UTC,62998,mir-w4-layout-delta-review,11files139747bytes,question4cc528706911c27efbe25a4890d58267eef4d59a2fab5603a02273db58c113c1,manifest18fcabd5aa98d654851e845150019650cff4946f1b726de94b118791681c035e; reviewpending.
+
+Existing sys5_local_slice.rs read fully1–10372/hash64f0b09065d3f0eceb415d12b8c4b7aff622a7f05f5e0ad1b36520e3972157e3. Its finite schedule/source-generated operation bindings, ST cut, admitted lifecycle and exact occurrence joins remain separate from general dynamic construction/authority/durable recovery. Wide corpus incomplete. README/plan profile documentation updated; snapshots stay B-active. make docs FIFTH remains latest before these edits; final checkpoint validation pending. Canon/119 unchanged; no commit/push or acceptance.
+
+
+### 2026-09-26T09:42:32.199712+00:00 — explicit live-evidence export successor
+
+Prior V2/layout preparation47143 completed whole exit0:235commands,9973consumed/59provenance bindings and all logs/native identities checked before edits. I/OBSERVED_V2_LAYOUT_PREPARE_VERIFIED.json retains RESULTf545acf97c86fa2a9386032f3ed71b0314a7ea7226db15f9a0e930068033e7a4. It remains historical after the exporter repair.
+
+Layout review FINAL collected09:34:47UTC, answer32fc8ad5d9696180327ce026f746d061533c02def403b39196a2066f91602c31. Later consuming checkout can enclose historical evidence even when toolchain roots are disjoint. Accepted this conditional classifier defect; no full bad-layout pipeline or compiler replacement was run. Compared additional ancestry restrictions against explicit source/consumption roles. Selected successor excludes only named original sources; retained roles win; all fresh/archive/output bindings stay live by default. Both preparation and physical call sites record roles. Existing disjoint toolchain profile retained. No formal/Mir/auth semantics change. New role-contract RED dj2rayqg, external candidate GREEN hhym53uw and applied current GREEN cevo2jzp include real files under the later checkout plus real late-exit/archive-drift controls. Full successor execution remains due.
+
+Wire attribution verified against actual historical preparation bindings, executed staged files, current source and frozen review manifest: journal/checker/normalizer hashes equal (I/WIRE_PROBE_SOURCE_IDENTITIES.json). Normalizer was not executed after journal rejection. Oracle cannot add owner-only gates: bounded LAB work follows the existing delegation; Canon/public/key/production acceptance remains reserved.
+
+Applied three operational files only after whole prior run/verification finished. I/explicit-export-candidate/APPLIED.json. Model producer unchanged; existing archived V2 model is reused without relabelling it as a new model run. NEW preparation30178, observer observed-prepare-4z090dv2, producer mir-w4-host-ual725u2, RUNNING; physical NOT RUN. Resources26GiBfree/11GiBavailable. Fresh source stability preserved during run. Narrow successor review launched once09:39:26UTC, session4888, mir-w4-explicit-export-review,7files71447bytes; question7bbfd7145885cde2897708728a9a13574d8d61af847fecc92318a79f37ba6b54, manifestf001fc4dfec0d0582e6417729c52e97dc412ccef14d4a51d50041f3a1160b03b. Visible current6Pro, no settings changes; final pending, check>=09:42:26UTC then180s.
+
+Mandatory I1+30ordinary sample sources read fully/ledgered; named negative examples often require external fixture/runtime context, so source differences alone prove no dynamic rejection. Wider corpus incomplete. B remains active; C/D/E gated. No new report/Canon/119 promotion/commit/push.
+
+
+### 2026-09-26T09:56:52.002981+00:00 — inherited identity / observer-load ordering
+
+Explicit-export review FINAL408d0eca471d43da78ce147fa3c1ac7a2f925922c5cafb882c783c964695fc8a collected09:52:43UTC and read fully. It found no new role omission in the supplied call sites, but independently identified the same-path digest overwrite Main had reproduced at09:44UTC using the actual startup assignment on real temporary files (export-alias-control-qaa1ru_m). This is not a completed bad-layout physical pipeline.
+
+Physical-only successor uses a conflict-preserving merge and preflights current runner/observer identities before loading the observer. Inherited roles are captured before new originals; observed artifact expectations are merged without overriding existing expectations. Equal digest/dual role stays retained; unequal digest refuses. The first alias repair GREENr9k3fprs protected export success but still loaded the observer too early. Actual main-prefix control with an explicit binding fixture reproduced that ordering defect (REDyho6spqi); current GREENoejnz3t_ / session42775 exit0 permits the same digest and refuses the changed digest before observer import, and runs real minimal Lean/import/staging controls. The startup fixture deliberately stops before observation validation; no fake full-preparation/native/physical E2E is claimed.
+
+Active preparation30178 inputs remain unchanged by this physical-only edit. Current captured native stages have no failing command so far; whole completion remains due. New narrow binding-order review launched once09:56:01UTC session29426 / mir-w4-binding-order-review,8files47917bytes,questionab94afbf9edcd8c13c371cba915b1950dd7f221cd0b86379c17253e62c2e4f28,manifest94108d779cb8cfbef65b05892d0f9d603f9f08476b24c8b5ce21794e3fc441e9. Final pending. Earlier reviewer owner-policy wording does not override the task's delegated reversible internal choices; Canon/public/key/production boundaries unchanged.
+
+All remaining ordinary .mir source candidates were fully read, including102historical full-system,54surface,6planned and6source-control files; product36README documents and further root inventories read. Truncated middle portions were recovered explicitly. Prior full-read README/plan index blobs were matched by SHA from Git and complete current deltas read. This does not claim all sample JSON/text or all broad corpus complete. Current plan index's stale B-pause snapshot was corrected to active; no Canon change. Current dashboard mirrors updated; final docs validation, B integration/commit/push and C/D/E remain due.
+
+
+### 2026-09-26T10:02:29.364560+00:00 — fresh explicit-role preparation verified / physical started
+
+Preparation30178 completed whole exit0 at10:00:18UTC. Verification46921exit0 checked9973live/59provenance bindings,235logs,8245reused toolchain files, actual copied targets/native binaries and explicit export roles. RESULT20cb88ea988a6e8d4372ac7b7bc999a9ed505ae3831c62e978cad9878541a5c8, observation42afe7ceb946c8ef29fd0d3bf7a9346b1a3db91786cd616490038de2635ae3e2; I/OBSERVED_EXPLICIT_ROLE_PREPARE_VERIFIED.json. Current physical25252 started under observed-physical-ece6w93x at physical-1210_r_2; all input sources now held stable. Full physical success not yet claimed.
+
+Binding-order Oracle29426 wrapper exited1 DOM detection. Metadata said promptSubmitted=true, but targeted visible DOM showed the full frozen question remained in an editable composer with enabled Send and no conversation message. This was concrete unsent-draft evidence, not slowness. Main verified the heading/all manifest hashes and clicked visible Send exactly once at10:00:45UTC on the same target; no new wrapper request, settings change or paid fallback. Final pending; next check>=10:03:45UTC. Unrelated sidebar text removed from local diagnostic; frozen packet contains only relevant review data.
+
+### 2026-09-26T10:20:51.157851+00:00 — Selected source pathname preflight correction (LAB candidate)
+
+Binding-order Oracle final efac282234e8a208d9b17419932022c2414f5267956796c5cc3ceab2d9c0c237
+found stable symlink spelling loss before helper import and mismatched canonical
+export keys. Actual main-prefix counterexample uumud61h exits1 at the intended
+import-before-refusal assertion. External successor e5lag7l3 whole tool23257 exit0
+checks direct/symlink/observation-only selected source variants, canonical retained
+roles and multi-entry conflict behavior, plus real minimal Lean/staging checks.
+These prefix fixtures stop before acceptance/capture and are not a full E2E.
+Compared checking discovered source aliases with locally checking all inherited
+and selected-observation declared path/digest pairs. The latter retains original
+path obligations and full later observation validation without granting authority.
+Candidate is NOT applied while physical25252 runs; that execution reached15profiles
+and60commands, with full terminal/control/binding validation still pending.
+Frozen narrow review launched once at10:18:41UTC, tool37861, packet
+I/oracle-path-preflight-review; hashes and dispositions are in W4_CHECK/RESUME.
+No formal/native/preparation dependency changed, no reason to redo those stages.
+Reader audit added full Alpha/FullSystemV1/Surface sample companion docs and W1/W3
+foundation explanations; old sidecar/report evidence is not current execution.
+W1 unreviewed Abort/Address and M8 effective-label gap remain explicit R09 items.
+B remains active/incomplete; C/D/E gated; no Canon/119/production semantic change.
+Plan/snapshot frontier unchanged at this micro-correction; finalBsync/check due.
+No new commit/push, no subagent, no notification or Chrome setting change.
+
+### 2026-09-26T10:31:10.210848+00:00 — Whole observed physical completion and bounded successor
+
+Physical25252 whole supervisor exit0 collected; independent main audit63475exit0
+verified34658live/2provenance bindings,69staged inputs,68logs,15profiles and53
+suite-qualified controls,30capture metadata files/24352fresh capture references.
+Receipt51a4b3cf7e58c05c0458b5d41ce3ac4af76c36d0ef4fb0ea49aa930464bf6799;
+observationd4c2f6ee0de32a7027d0a11fd484b492b5c45cc0157d4225cc1c4fa6c04404af.
+The exact source-path successor was applied only after this verification; current
+physicalSHA5d1db3962594f1252d6ea07be46e206677fdee52aae4c2d5c30d2bb147ac7d94.
+Applied focused control tool4926exit0/i11q0864; successor physical80299 now runs
+with unchanged observed native preparationual725u2. Frozen review37861 wrapper
+ended1 DOM detection but exact visible target is generating, so no resend.
+B remains incomplete pending successor full execution/review/docs/Git.
+Read ledger now explicitly maps137repo targets to previously full-read exact
+source hashes, with all206manifest target/origin bytes compared.23prior read paths
+were historical /tmp paths, so their correspondence is explicitly hash-backed;
+current preserved origin/target comparison is bytewise. No filename-based or
+compiler-success inference of reading was used. Broader text/JSON corpus remains
+unread, and old generated proof stubs are not imported or counted as W4 proofs.
+
+
+### 2026-09-27T13:02:42.703383+00:00 — Current physical whole exit, final path review and continuation
+
+Current repaired physical80299 whole supervisor exit0 collected2026-09-27;
+producer finished2026-09-26T10:55:54.944896+00:00. Main verification87058exit0
+checks68command logs,15profiles,53suite-qualified controls,34658live/2provenance
+bindings,69staged inputs and30capture metadata/24352fresh references.
+I/OBSERVED_PATH_PREFLIGHT_PHYSICAL_VERIFIED.json; RESULT
+33834453814068bf36a6d5cd373d8528bedc9b29d43c2c10e85e4b3cfb38daa2,
+observation000f154cfb7eb577a3ee5acfc3073dbb131539957504f8df9298b7dc41f4cf51.
+Production source hash5d1db3962594f1252d6ea07be46e206677fdee52aae4c2d5c30d2bb147ac7d94
+is unchanged from reviewed correction. No formal/native/preparation rerun needed.
+
+Final path review e20760b6f0edad03fb9350c82d4422bb5a91d4cf7a714a7decddf3e8fbea48d1
+collected10:32:52UTC Sep26; fully read, no new production correction. Actual call
+sequence provides alias/conflict closure, not isolated helper alone. Hardlink and
+observation-role collision controls added. First extended suite97761exit0 passed;
+main found its separate modeled export test omitted the new collision role.
+Test-only expectation fixed and suite28273exit0/raoj1plx passed; failed/earlier
+outputs and COVERAGE_CORRECTION retained. Prefix fixtures stop before acceptance,
+not full E2E; full repaired physical above supplies actual capture evidence.
+
+2026-09-27の追加owner指示で、今回の実行も残量による停止を外して同じW4を継続します。リセットはownerが行い、主担当は操作しません。W5+とPlan250/I3-4は開始しません。過去のquota停止・検査記録はReport2614に保持します。
+Visible single-shot final B scope/Canon-first review launched13:01:03UTC Sep27,
+83656/mir-w4-b-closeout-review. Frozen9files82086bytes, no implementation re-review
+or proof acceptance requested. Question2330f40901f29f83b911257034e543b398c38b6617364df1644fd7f96faf2cff,
+manifest a9a8af489c72d3297989160dc758c2c193b8f86ab4c14cd16d4688dcfc93f496.
+Final pending;>=180s checks. No settings changes/duplicate submission/paidfallback.
+
+Plan/current snapshots/sample/script docs updated to current evidence; final
+consolidated make docs and own Git integration remain due. Read ledger preserves
+206dependency full/equivalent-copy and wide corpus incomplete. No Canon/119
+acceptance, no new report, no subagents/notifications, no new commit/push yet.
+
+2026-09-27T13:09:28.430968+00:00 final own integration checks: make docs63898 wholeexit0
+(agent/index218/hierarchy800/docs1764). Own167files audited; no reserved Canon or
+handoff changes, generated binary or source delta after frozen review. Default
+staged whitespace check exits2 for two inherited EOF blank lines only: preserved
+check_joint_capture_recipes.py and extracted HostControlHeader.lean. Their frozen
+bytes are retained; scoped -blank-at-eof check passes. This exception is cosmetic,
+not a skipped semantic test. Final scope Oracle wrapper83656 exits1; actual visible
+response has backend Cloudflare error. Full prompt/manifest matched, same alert
+Retry clicked once13:06:25UTC, no new conversation/settings/fallback. Final pending.

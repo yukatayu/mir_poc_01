@@ -6,7 +6,7 @@ Normative source: `mirrorea_canon/`; evidence: report2611 and docs/proof-first/.
 The handoff's119requirements/30judgments/18guarantee targets/24scenarios/alpha1–8
 remain tracked inputs; U intent, D proposal, adoption and demonstration are distinct.
 
-Current package map: W4-A completed bounded evidence; **W4-B paused/current**; W4-C/D/E dependency-gated. See the appended `W4-A〜W4-E 作業区切り（2026-09-24 owner指定）`; older dated current/next entries below remain history.
+Current package map (2026-09-26 owner resume): W4-A completed bounded evidence; **W4-B active/incomplete**; W4-C/D/E dependency-gated. See the appended `W4-A〜W4-E 作業区切り（2026-09-24 owner指定）` and subsequent evidence. Older dated pause/current/next entries below remain history. The owner waived quota stopping again for this run on2026-09-27; only the owner resets the account.
 
 ## Authority and retained history
 
@@ -1161,6 +1161,8 @@ Oracle63 locator-tag relabel was reproduced for actual BODY_LOST/RAW_CAPTURE: so
 
 ## W4-A〜W4-E 作業区切り（2026-09-24 owner指定）
 
+現在の実行状態は下の2026-09-26再開記録を参照。この節のpauseは分割当日の履歴であり、現在の停止指示ではない。
+
 この分割は同じW4の作業管理であり、新しいroadmap、Canon phase、意味論又は受理の追加ではない。
 現在地は **W4-B・一時停止中**。W4-Aは既存の限定証拠を完了済みの区切りとして扱い、
 W4-C/D/Eは依存待ち。W4自体は未完了で、単一goalのpauseを維持する。
@@ -1248,3 +1250,86 @@ https://developers.openai.com/api/docs/guides/reasoning 。週間枠の節約率
 週間残量16%の実記録によりownerの約30%停止指定を適用し、W4-Bで再度pause。
 新しいOracle/buildは未起動。次は当該読取りと既存runnerへの保存・fresh検証。
 A–E義務・scope・受理条件は変更なし。証跡はReport2614 / RESUME最新節。
+
+
+### 2026-09-26T05:28:12.108408+00:00 W4-B source保存・新規kernel検査
+
+2026-09-26のowner指示で同じW4を再開しました。当日は残量による停止を外し、2026-09-27（JST）以降は週間残量30%未満を目安に区切りで停止します。確認間隔は1時間以上。W4-Bは進行中・未完了で、W5+とPlan250/I3-4は開始しません。過去のquota停止・検査記録はReport2614に保持します。
+
+W4-B追加証拠: 206依存moduleを原sourceと同一bytesで保存（新規76、既存130）。全206の新規Leanビルドと新規76の所有宣言7138件の公理監査が成功しました。全文/equivalent-copy既読hashは206/206です。既存runnerの追加 `--with-host-model` は統合検査中で、native capture・import/source-object束縛の全接続とB完了は未達です。機械証明の追加成功を実network/認証/復旧の保証へ広げません。
+
+三つの実capture decoder閉包204に、独立したEntryAcquisition/ProducedRootednessの2rootを加えて保持した。名前変更案と比較し、変換をidentityに限定する暫定案を実行中。原本・既存130sourceは変更なし。manifestは `docs/proof-first/W4_SOURCE_MANIFEST.json`。R01は部分進展、R10はこの依存coneのみ閉鎖し広域corpusは残る。R02〜R12/C〜Eと119行dispositionを未解消のまま保持する。Oracle設計相談は初回・復旧後再送とも認証待ちでexit1、回答未取得。独立したローカル検査を継続する。
+
+
+### 2026-09-26T06:12:43.139411+00:00 W4-B input/object correspondence integration
+
+最初の既存runner全体は277command/236module/22215owned declarationと既存
+source/integrity/weakening/publication controlsを通過した。後続差分ではtimestamp互換
+Python cacheと互換olean差替えの実反例を追加し、source直接読込み、成功したbuildと
+実importの照合、前後のhash束縛を実装した。後続runner全体は検査中であり、旧cutの
+成功を後続差分へ移さない。56個のprivate helper/native/template/sourceをmanifest付き
+で保存し、新規native/input準備と15profile/53controlの実行手順を接続中。
+source-onlyの旧非空writer前提によるexit1は履歴に残し、新producerでは既存total
+checkerと明示0writer条件を選択する前方修正を行った。新producerの実実行は未検証。
+R01/R11は進展、B未完了。C/D/Eの義務は維持。必読historical examples344–349を
+全文読み、次350へ進んだが全体corpusは未完了。旧e3のsource-authoredとformal-hook
+guardedの区別はLAB履歴であり、現在の一般証明又はCanon受理へ昇格しない。
+
+
+### 2026-09-26T07:43:22.192265+00:00 W4-B private-pipe再現結果
+
+保存したsourceからnative準備235commandと実process検査68commandが完走した。
+通常・source-only prefix・実欠落・既知失敗・応答不明の15条件と53型付き反例を
+検査した。34704束縛ファイルと全logのhash再照合も通過。Report2614と
+W4_CHECK.integration_20260926に成功・先行2失敗・TCBを分けて記録した。
+これは限定private-pipe参照実装の再現証拠であり、Rust/QUIC接続や認証済み
+networkの完成ではない。新しいsource結果判定gateのrunner全体再検証と、
+可視ブラウザで生成中の現cut Oracleレビューが残るため、Bは未完了のまま。
+C/D/Eの前提・残項目責任は変更しない。
+
+
+### 2026-09-26T08:30:56.098610+00:00 — W4-B process handoff repair validation (LAB)
+
+Exact source-outcome gate run completed278commands /236module audits /22215owned declarations before six nested-tool selection repairs were applied. That receipt is historical for its pinned source. The repaired workflow requires a truthful external observer of each stage terminal exit and binds selected absolute Lean/Python paths. Isolated real late-exit and relative-PATH controls pass; fresh observed model/preparation/physical validation and the focused visible-browser Oracle review remain pending. The observer, native compiler, CPython, OS and stable filesystem remain TCB; no signed attestation or authority is derived. B remains active/incomplete; R01/R11 are not closed. C/D prerequisites and R01–R12 responsibilities are unchanged. Exact identities and failures are retained in Report2614/W4_CHECK/RESUME. Mandatory reading advanced through historical example612 and current docs; archived order guide and wider samples remain incomplete.
+
+### 2026-09-26 17:58 JST — W4-B保存証拠の境界修正（LAB、未完了）
+
+W4-B追加証拠: 原sourceと同一bytesの206依存moduleを保存し、全206のLeanビルドと新規76moduleの所有宣言7138件の公理監査が成功しました。終了観測を加えたV1の全体モデル検査も278command・236module/22215宣言監査を通過し、9169入力束縛を再確認しました。旧cutのnative準備235command、実process検査68command（15profile/53control）も完走済みです。Oracle指摘から保存済みsourceと現行repoの来歴を分離し、最適化起動時の検査抜け等を反例で修正しました。修正版V2の全体モデルは実行中で、そのnative準備・実process再検査と差分reviewは未完了です。B未完了、C/D/Eは依存待ちです。有限なprivate-pipe証拠を実network・認証・秘密・復旧の保証へ広げません。
+
+保存済み実行の原repo pathは来歴、後段で使うarchive/result/log/binaryは消費入力として分けます。実行中の変更は拒否し、V1証拠をV2へ遡及変換しません。実際に再現した最適化起動のfalse passと必須probe欠落・重複の反例をReport2614へ保持しました。W4-A〜Eの順序、R01〜R12、Canon状態は変更しません。
+
+
+### 2026-09-26T09:25:47.134429+00:00 — W4-B current model and constrained toolchain layout
+
+V2 model whole exit0 and9169input/278log bindings verified (OBSERVED_V2_MODEL_VERIFIED.json; Report2614). Native preparation with the new explicit disjoint-toolchain/current-and-historical-repo precondition is running; physical and focused review remain due. Compared explicit dependency-role export with the smaller checked layout restriction; selected the latter for the finite private workflow. Actual installed layout qualifies. This is a reversible operational profile, not a Mir semantic restriction or a guarantee for overlapping installations. Oracle's conditional classifier examples and actual wire duplicate-probe refusal are retained; general all-entry/auth/namespace remain C. R01/R11 and B remain open pending whole downstream execution/review/integration; C/D/E dependencies unchanged.
+
+
+### 2026-09-26T09:42:32.199712+00:00 — explicit-role successor to ancestry export
+
+The checked disjoint-toolchain proposal did not cover retained evidence enclosed by a later checkout. Rather than expanding ancestry exclusions, the successor explicitly enumerates original source provenance and gives inherited live-consumption roles priority; all fresh artifacts remain live by default. This is a reversible operational correction, not a Mir/source/authority change. Prior model and native results are preserved under exact identities; new preparation/physical validation and focused review are pending. Source/control evidence and role obligations are in Report2614. No R01/R11 closure or C/D prerequisite is inferred from the focused export test.
+
+### 2026-09-26T10:32:02.784702+00:00 — Selected-path consistency (LAB)
+
+The explicit-role observed workflow completed its full physical predecessor:
+68commands/15profiles/53qualified controls, with34658live bindings verified after
+whole supervisor exit0. A focused review then exposed the stable-source-symlink
+path spelling/canonical identity mismatch. The successor checks all inherited
+and declared observation path/digest pairs before helper import, while retaining
+the mandatory full observation validation and exact canonical original-source
+roles. Main reproduced the pre-import counterexample; targeted actual-prefix
+controls pass. Current successor physical and focused review remain running.
+This is operational evidence consistency under stableFS/privileged-code TCB,
+not authentication or a Mir semantic change. R01/R11 and B remain open pending
+whole successor completion/review/integration; C/D/E and R02–R12 gates unchanged.
+
+
+### 2026-09-27T13:02:42.703383+00:00 — W4-B final repaired physical evidence (LAB)
+
+W4-B検証結果: 206依存sourceを原本と同一bytesで保存し、fresh Lean検査と公理監査を完了しました。既存runnerのV2モデル278command・236module/22215所有宣言監査、native準備235command、修正後の実process検査68command（15profile/53拒否control）が全体exit0で完走しました。段階ごとに9169/9973/34658入力束縛と実ログを照合しています。保存証拠と現行sourceの役割分離、別名参照・期待値衝突・途中失敗の反例も検査済みです。Bは最終境界review・文書/Git統合中で、C/D/Eは依存待ちです。一般証明は選択モデルについて、実processは特権private-pipeの有限証拠についてであり、実network・認証・秘密・復旧の保証へ広げません。
+
+2026-09-27の追加owner指示で、今回の実行も残量による停止を外して同じW4を継続します。リセットはownerが行い、主担当は操作しません。W5+とPlan250/I3-4は開始しません。過去のquota停止・検査記録はReport2614に保持します。
+Final scope/Canon-first Oracle review is running; all earlier source delta reviews
+are final. R01 technical preservation/reproduction evidence is ready; R11 final
+docs/Git remains due. R02–R10/R12 retain C/D/E dependencies. No new roadmap or
+Canon acceptance; broad mandatory corpus is incomplete. Exact current receipts
+and prior failures are retained in W4_CHECK.integration_20260926 and Report2614.

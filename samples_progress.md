@@ -1,6 +1,6 @@
 # samples_progress
 
-Last updated: 2026-09-24 08:38 JST
+Last updated: 2026-09-26 17:58 JST
 
 Plan250 execution control: I3-3 is accepted and owner-paused with no active
 semantic milestone. Plan 250 remains retained; I3-4/I3-5/I3-6/NEXT-0 remain
@@ -14,18 +14,20 @@ Fresh76module/9055owned audit,32source controls,13integrity/consumer negatives a
 proof-weakening controls pass. Twelve Oracle reviews are recovered/dispositioned;
 source/evidence81f82a0b is normally pushed. This is local in-memory evidence, not
 physical nodes, durable restore, confidential observation, alpha or Canon promotion.
-Owner activated W4 only; it is now paused at the requested quota checkpoint.
+Owner resumed W4 only on2026-09-26; W4-B is active and incomplete.
 Previously integrated publication/owner/registration proofs remain under the
-existing reference checker and Lean sample root. Later strict host-store,
-full-field/lease and fault correspondence evidence remains external and is not
-yet a repo-only reproducible sample. Prior I3 process/QUIC46case results remain
+existing reference checker and Lean sample root. The preserved host-store/full-field/lease/fault proof cone is now mirrored;
+its existing-runner integration is under validation. Physical capture and replay
+harnesses remain external and are not yet repo-only reproducible samples. Prior I3 process/QUIC46case results remain
 regression history, not a new network run. W5+ and Plan250/I3-4 stay inactive.
 
-2026-09-24のowner指定で、同じW4を **W4-A（限定証拠・完了済み）→W4-B（repo統合・現在地、pause）→W4-C（残る基礎条件）→W4-D（Rust/Core/private QUIC接続）→W4-E（実network検査・残項目回収・W4完了判定）** に分割しました。C/D/Eは依存待ちです。Eは元W4と前段の残項目を照合しますが、C/Dの前提をEへ先送りして実装を進めません。完了条件・推奨model/effort・R01〜R12残項目台帳は `plan/proof-first-foundation-correspondence.md` の「W4-A〜W4-E 作業区切り」を参照してください。分割は計画整理のみで、同じW4 goalの一時停止を維持します。
+2026-09-24のowner指定で、同じW4を **W4-A（限定証拠・完了済み）→W4-B（repo統合・現在地、進行中）→W4-C（残る基礎条件）→W4-D（Rust/Core/private QUIC接続）→W4-E（実network検査・残項目回収・W4完了判定）** に分割しました。C/D/Eは依存待ちです。Eは元W4と前段の残項目を照合しますが、C/Dの前提をEへ先送りして実装を進めません。完了条件・推奨model/effort・R01〜R12残項目台帳は `plan/proof-first-foundation-correspondence.md` の「W4-A〜W4-E 作業区切り」を参照してください。分割当日は計画整理のみでした。2026-09-26のowner指示で同じW4 goalを再開しています。
 
 W4は、通常sourceと実ownerの状態・資源を同じ履歴から対応付ける基礎検証を進めています。選択した形式モデルにおける通常実行の全所有者lease・値・履歴の一般証明と、確定失敗4profile／未確定通信8profileの実記録との接続を外部workdirで検査しました。正常系23、確定失敗14、未確定通信16の改変controlも検査済みです。通信結果不明時は最後に確定した状態と物理通信の残余を区別します。これらは限定した研究候補で、追加proof群のrepo再現runnerへの統合、全entryの実機対応、現在の認証認可・物理namespace、既存Rust/Core/privateQUIC接続とW4全体の統合は未完了です。
 
-2026-09-23 15:14 JST時点の週間残量33%を根拠に、owner指定の「30%程度で切りのよい所」でW4を一時停止済みです。今回の計画整理では残量を再確認していません。完了ではなく同じgoalのpauseです。W5+とPlan250/I3-4は開始しません。旧一時領域で失われた記録と今回の永続workdir上の実記録は区別して保持します。
+2026-09-27の追加owner指示で、今回の実行も残量による停止を外して同じW4を継続します。リセットはownerが行い、主担当は操作しません。W5+とPlan250/I3-4は開始しません。過去のquota停止・検査記録はReport2614に保持します。
+
+W4-B検証結果: 206依存sourceを原本と同一bytesで保存し、fresh Lean検査と公理監査を完了しました。既存runnerのV2モデル278command・236module/22215所有宣言監査、native準備235command、修正後の実process検査68command（15profile/53拒否control）が全体exit0で完走しました。段階ごとに9169/9973/34658入力束縛と実ログを照合しています。保存証拠と現行sourceの役割分離、別名参照・期待値衝突・途中失敗の反例も検査済みです。Bは最終境界review・文書/Git統合中で、C/D/Eは依存待ちです。一般証明は選択モデルについて、実processは特権private-pipeの有限証拠についてであり、実network・認証・秘密・復旧の保証へ広げません。
 
 | W3 evidence | Reproduction | Remaining boundary |
 |---|---|---|
@@ -124,9 +126,9 @@ Current W4 external evidence lives in the persistent workroot named by
 actual captures, normalizers, source/object imports and complete process exits.
 These retained receipts are not repo sample commands: their one-shot launchers
 create fresh evidence and must not overwrite existing runs. Mirroring the new
-proof/reference cone into the existing reproducible runner remains a reopen
-obligation. No new sample root, taxonomy, public observer or workflow-ready
-status has been adopted. W4 is paused/incomplete; source/Core/privateQUIC,
+proof/reference cone into the existing reproducible runner remains an active
+integration obligation. No new sample root, taxonomy, public observer or workflow-ready
+status has been adopted. W4-B is active/incomplete; source/Core/privateQUIC,
 authenticated ingress and physical namespace remain direct consumers.
 
 ## Legend
@@ -463,3 +465,9 @@ W4 external checkpoint (2026-09-14 12:15 JST): provisional typed allocation qual
 W4 external native component checkpoint (2026-09-14 16:38 JST): graph-table general equality and65module native25process/3source/4IO evidence pass; a stateful79module reservation worker now passes5real-process transcripts and5IO faults. Actual parser-derived request → actual836byte native reply → original source binder first=10 is checked, with duplicate/equal-value wrong-request refusal. External commands: `owner_reservation_process_check.py`, Lean `OwnerReservationActualReceive.lean`, and `owner_reservation_io_faults.py` under `/tmp/mirrorea-w4-20260914-a3e0bpks`. These ephemeral nonproduction files are not active sample roots or distributed E2E; no taxonomy change. Authenticated publication, current source admission, physical private custody and QUIC integration remain open. Exact hashes/limits/failures and Oracle review cuts are in Report2614.
 
 W4 external evidence update (2026-09-14 16:58 JST): Oracle10 collected, Oracle11 reviewing immutable source activation/private continuation; fresh-root inventory/ordinal proofs and post-launcher-repair5protocol/5IO/actual source-receive checks pass. Command/evidence details: Report2614 and W4_CHECK.json. This updates the existing experimental evidence only; no active sample root or new workflow-ready status.
+
+
+| W4-B integration candidate | Source / command | Evidence and blocker |
+|---|---|---|
+| Ordinary source/native inputs | `samples/clean-near-end/mirrorea-proof-first-composition/host-reference/`, `samples/lean/host-reference/`; `scripts/proof_first_host_prepare.py` | Current observed preparation235commands and physical68commands/15profiles/53controls passed; scoped private-pipe evidence, no network/auth/recovery claim; final B integration pending |
+| Preserved host model | Existing `proof_first_reference_source_check.py --with-host-model` | Current V2 whole model278commands/9169bindings passed; physical/preparation evidence is separate; final B integration pending |

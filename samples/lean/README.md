@@ -132,3 +132,44 @@ active rootの追加や移動はない。
 同じowner-boundary検査には、保持された設置事実・実owner世代の単調性・source登録との対応も含む。
 初期化時の記録一致と全ownerのモデル残量に結び付いた設置consumerを一般証明する。
 公開操作の全経路、予約容量・freshness、実通信との対応は別の未完了条件である。
+
+
+## W4-B preserved host correspondence model (integration candidate)
+
+The same LAB foundation root now retains the exact 206-module dependency cut
+in `docs/proof-first/W4_SOURCE_MANIFEST.json`: 130 existing byte-identical sources
+and 76 newly mirrored sources, including the independent EntryAcquisition and
+ProducedRootedness roots. Original import/declaration names are preserved;
+compiled objects and external captures are not source samples.
+
+The existing runner has the optional `--with-host-model` flag, implying
+`--with-owner-boundary`. It checks the exact source closure and rebuilds/audits
+in bounded serial batches. The first full model run passed277 commands and
+236module/22215declaration audits. A strengthened successor also binds actual
+import paths and successful source/object outputs before/after use; its fresh
+full validation passed278commands with236build receipts and9168file bindings.
+The current V2 observed model passed278commands/9169bindings; native preparation
+passed235commands and the repaired physical stage passed68commands/15profiles/53
+controls. Whole exits and bound inputs were verified. Final W4-B integration and
+Rust/Core/privateQUIC remain open; see the three-stage workflow in `scripts/README.md`.
+
+Candidate command (existing external workroot required):
+
+```bash
+python3 scripts/proof_first_reference_source_check.py --work-root <existing-external-workdir> --with-host-model
+```
+
+The source-manifest controls in `scripts/tests/proof_first_host_manifest_cases.py`
+accept the exact source cut and reject eight damaged copies. Those are integrity
+checks, not semantic theorems or actual-process E2E evidence. See
+`docs/proof-first/W4_CHECK.json` and Report2614 for exact run status, failed attempts,
+compiler/CPython/capture assumptions and remaining integration obligations.
+
+
+`host-reference/` retains two native entry sources, the source-input control
+consumer and an extracted negative-test header. `HostControlHeader.lean` is a
+code-generation fragment, not a standalone module or theorem. These private
+reference sources are staged externally by `scripts/proof_first_host_prepare.py`;
+earlier native preparation and physical runs passed235 and68 commands respectively;
+the revised observed dependency-export workflow is still under validation. Their source
+origins/transformations are in `docs/proof-first/W4_HOST_MANIFEST.json`.

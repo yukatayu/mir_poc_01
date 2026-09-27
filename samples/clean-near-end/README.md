@@ -33,8 +33,8 @@ suite and older vocabulary where needed; it is not the normative canon.
 - `mirrorea-i3-owner-admission/`
   I3-3 ordinary budget-1 source input for the existing two-process QUIC probe.
   Its checked owner-admission condition is enforced by that runtime. It is
-  ongoing failure/order evidence, not an accepted I3 workflow or a new Core
-  domain primitive; unsupported `run-local` execution must reject the guard.
+  bounded I3-3 failure/order evidence under ADR-0043, not official I3 lifecycle
+  entry or a new Core domain primitive; unsupported `run-local` execution must reject the guard.
   The focused probe test is
   `cargo test --locked -p mirrorea-i3-probe --test i3_process_localnet source_first_localnet_owner_budget -- --test-threads=1`.
 
@@ -95,5 +95,7 @@ These are bounded SYS-5/SYS-6 LAB workflows. The CLI spelling and JSON field
 names are internal/provisional; they do not freeze a public API, ABI, grammar,
 or wire. ADR-0032, not command output, records official I2 entry then exit;
 broad PHASE-I1 remains unaccepted and official I3 lifecycle remains unentered.
-The separately authorized Plan 250 program is currently executing I3-3; its
-activation and these LAB commands are not official lifecycle acceptance.
+The separately authorized Plan 250 program is owner-paused after I3-3 acceptance
+under ADR-0043; I3-4 requires explicit owner resume. Its activation and these LAB
+commands are not official lifecycle acceptance. The task-local proof-first W4
+work does not automatically resume Plan 250.

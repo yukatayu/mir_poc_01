@@ -213,7 +213,7 @@ def main():
     lean = work / 'ActualReference.lean'
     lean.write_text(generate(program, place, assertions, session=True))
     generated_sha = hashlib.sha256(lean.read_bytes()).hexdigest()
-    result = subprocess.run(['lean', '--trust=0', '-o', 'ActualReference.olean', lean.name], cwd=work,
+    result = subprocess.run([os.environ.get('MIR_PROOF_FIRST_LEAN', 'lean'), '--trust=0', '-o', 'ActualReference.olean', lean.name], cwd=work,
                             env=dict(os.environ, LEAN_PATH=str(work) + os.pathsep + str(WORK)),
                             capture_output=True, text=True, preexec_fn=cap)
     (work / 'ActualReference.log').write_text(result.stdout + result.stderr)

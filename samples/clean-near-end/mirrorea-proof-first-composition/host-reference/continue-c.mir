@@ -1,0 +1,74 @@
+module ProofFirst.ReferenceSource
+capability CompositionControl
+effect register(arg0: UnaryInt, arg1: IntList, arg2: Int64, arg3: Int64) {
+  requires CompositionControl
+  output result: DefinitionId
+  failure Rejected
+}
+effect extend(arg0: DefinitionId, arg1: UnaryInt, arg2: IntList, arg3: Int64, arg4: Int64) {
+  requires CompositionControl
+  output result: DefinitionId
+  failure Rejected
+}
+effect instantiate(arg0: DefinitionId, arg1: Placements) {
+  requires CompositionControl
+  output result: InstanceCallable
+  failure Rejected
+}
+effect retire(arg0: InstanceCallable) {
+  requires CompositionControl
+  output result: Unit
+  failure Rejected
+}
+effect reparent(arg0: InstanceCallable, arg1: InstanceCallable) {
+  requires CompositionControl
+  output result: Unit
+  failure Rejected
+}
+effect exchange(arg0: InstanceCallable, arg1: DefinitionId) {
+  requires CompositionControl
+  output result: Unit
+  failure Rejected
+}
+effect leave(arg0: Place) {
+  requires CompositionControl
+  output result: Unit
+  failure Rejected
+}
+effect join(arg0: Place) {
+  requires CompositionControl
+  output result: Unit
+  failure Rejected
+}
+fn score(x: Int64) -> Int64 {
+  let square: Int64 = x * x
+  return square + 1
+}
+fn scoreNext(x: Int64) -> Int64 {
+  return x * x + 2
+}
+effect referenceAt(arg0: InstanceCallable, arg1: InstanceCallables, arg2: Text, arg3: BoolList, arg4: IntList, arg5: Place) {
+  requires CompositionControl
+  output result: ReferenceCallable
+  failure Rejected
+}
+effect reacquire(arg0: ReferenceCallable) {
+  requires CompositionControl
+  output result: Unit
+  failure Rejected
+}
+effect release(arg0: ReferenceCallable) {
+  requires CompositionControl
+  output result: Unit
+  failure Rejected
+}
+effect instantiateAt(arg0: DefinitionId, arg1: Placements, arg2: Place) {
+  requires CompositionControl
+  output result: InstanceCallable
+  failure Rejected
+}
+transition addLater at A requires CompositionControl {
+  later <- perform instantiateAt(initial, ["A", "C"], "C") via lifecycle
+  laterLinked <- perform reparent(later, base) via lifecycle
+  continuationResult <- later(count)
+}

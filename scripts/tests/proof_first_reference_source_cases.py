@@ -57,7 +57,7 @@ def check(name, text, assertions=None, adapter_reject=False, extra_sources=None)
         lean = work / 'ActualCase.lean'
         lean.write_text(adapter.generate(program, place, assertions))
         generated_sha = hashlib.sha256(lean.read_bytes()).hexdigest()
-        result = subprocess.run(['lean', '--trust=0', lean.name], cwd=work,
+        result = subprocess.run([os.environ.get('MIR_PROOF_FIRST_LEAN', 'lean'), '--trust=0', lean.name], cwd=work,
                                 env=dict(os.environ, LEAN_PATH=str(work) + os.pathsep + str(adapter.WORK)),
                                 capture_output=True, text=True, preexec_fn=adapter.cap)
         (work / 'ActualCase.log').write_text(result.stdout + result.stderr)
