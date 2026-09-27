@@ -1,13 +1,14 @@
 # W4 RESUME — B review blocked; full W4 incomplete
 
-Updated 2026-09-27T14:03:26.307374+00:00. Same active full-W4 goal; sole main, NO SUBAGENTS.
+Updated 2026-09-27T14:25:09.834511+00:00. Same active full-W4 goal; sole main, NO SUBAGENTS.
 Owner Sep27 waived quota stopping for this run; only owner resets account.
 No W5+/alpha/Plan250-I3-4 activation, Canon acceptance/public/production/key changes.
 Original BASE ad9256c6e276634118de1fb6a40bddf6171c9f38, initial clean.
 Code/proof/workflow9d86052d4f3982a2ddb077a610d02abed4f08327 pushed/parity.
-Current metadata baseline b1e48fa8c68a8af1e58ec92e11f4bb0d89bfeaa0 pushed/parity.
-Own dirt: READ_LEDGER/RESUME/plan proof-first/Report2614 only. Next exact metadata
-commit/push/parity receipt I/B_OBSERVER_CORPUS_GIT.json; inspect git status first.
+Current metadata baseline052a72843ee617fe2423638ab690ce1c30012a38 pushed/parity.
+Metadata commit/push/parity receipt I/B_OBSERVER_CORPUS_GIT.json confirms clean
+052a7284. Later own dirt: READ_LEDGER/RESUME, plan/Report2614 and samples/lean/README.
+Inspect git status first.
 No reset/clean/cache deletion/hostshare/paid fallback/external notification.
 
 I=/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration
@@ -34,7 +35,7 @@ rechecked13:27 before resend. Original target BDE41F8EDA6FACFF78B4D25E86F661FC.
 Retry I/oracle-b-closeout-retry1, mir-w4-b-closeout-retry1, launched13:28:27UTC,
 tool63460 wholeexit1 collected13:34UTC; promptSubmitted=false. Exact visible
 target9A30EFDFEA193B5825274D43996250E5/CDP33569: Just a moment, no composer/Stop
-at13:58:54UTC (CHALLENGE_RECHECK_READING.json). Existing async human Cloudflare
+at14:23:27UTC (CHALLENGE_RECHECK_CORPUS_DONE.json). Existing async human Cloudflare
 verification question pending. No automated challenge bypass/settings/profile/
 account reset, no blind resends. Preserve failed tabs and same frozen packet.
 Question SHA2330f40901f29f83b911257034e543b398c38b6617364df1644fd7f96faf2cff;
@@ -71,8 +72,12 @@ full/equivalent206dependency closure;23old read paths are historical. R09 W1
 Abort/Address review and M8 effective-label gap remain before dependent use.
 After b1e48fa8,301JSON full reads +2Rust full reinspections recorded, prior prefix
 preserved/all added hashes checked in I/READ_LEDGER_OBSERVER_AUDIT.json.
-Batches1–36 in I/CORPUS_JSON_BATCH*.json all consumed, ledgered; next batch37
-begins remaining practical-alpha1 expected JSON. I/REMAINING_AFTER_LEAN_READ.json
+Batches1–64 in I/CORPUS_JSON_BATCH*.json fully consumed and ledgered.
+After052a7284 171 more sample JSON read, including raw malformed SRC-05 fixture;
+JSON-only reader failure preserved, fixture unchanged. Both sample READMEs,
+119dispositions and current status/goal/plan deltas fully read. Sep13 disposition
+rows VF07/OP05/MG03/MG05/MG06 have historical pending wording; R09/E reconciliation
+recorded forward, no row promoted. No broader raw-receipt/code completion claim. I/REMAINING_AFTER_LEAN_READ.json
 is OLD candidate inventory: subtract batches and compare exact ledger hashes.
 Entire pending full-system-v1/surface/generated projection/Lean manifest + archived
 bundle/host-plan JSON now read. Reading stored successes is not fresh validation;
@@ -82,10 +87,15 @@ clone-before-admission delivered_nodes and literal pose_snapshot_ref extraction;
 repair or explicitly exclude before D's first relevant observation consumer.
 Latest plan/Report2614 appendices contain evidence and reuse boundaries.
 
-Next: continue independent required reading while human verification is pending.
+Next: owner completes visible browser verification; check exact target normal UI
+then resend the same frozen B packet once under existing actual-error authorization.
+Independent required sample/119 reading has reached the saved checkpoint.
 Recover/dispose final B scope review before B closure/C activation, same W4goal.
 B estimate~90%,45–90min after review recovery absent major findings; service
-recovery wall time unknown. Do not mark complete or pause the active goal.
-Latest docs6468 wholeexit0/1764reports: I/DOCS_B_OBSERVER_CORPUS.json; later
-receipt/read metadata separately checked. Older failures retained in report.
+recovery wall time unknown. Do not mark complete or pause. Same W4 objective remains incomplete; human
+verification blocks further dependent work.
+Latest docs45216 wholeexit0/1764reports: I/DOCS_B_CORPUS_RECONCILIATION.json.
+Added178ledger entries verified; older failures retained in report. Current
+checkpoint commit/push/parity: I/B_CORPUS_RECONCILIATION_GIT.json.
+No heavy unchanged baselines rerun.
 No new report or primary-status change; other snapshots remain current.

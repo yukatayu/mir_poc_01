@@ -1405,3 +1405,29 @@ primitive, runtime semantic choice, source fix, validation success, roadmap or
 Canon acceptance is made here. C prerequisites remain before D. Full-system
 provider inventory acceptance explicitly leaves actual provider execution and
 packet/FFI transport deferred; it cannot supply the missing physical evidence.
+
+
+### 2026-09-27T14:20:50.769929+00:00 — R09/R10 legacy corpus reconciliation (LAB)
+
+All pending sample JSON through practical/product/prototype and both current
+sample READMEs were read in full. The intentionally malformed SRC-05 package
+is a negative fixture, not a runtime defect: the first JSON-only reading helper
+failed there, then its raw bytes were read without editing the input. Hash-backed
+full-read entries distinguish unread inventory entries from actual reading.
+
+The complete119-row disposition snapshot was also read. It is dated Sep13,
+contains W2/W3 evidence, and is not a current W4 acceptance table. VF-07, OP-05,
+MG-03, MG-05 and MG-06 retain pre-close W3 review/integration/current-goal wording;
+use Report2613 for W3 closure and CURRENT_GOAL/Report2614 for current W4 status.
+R09/E must reconcile these with final W4 evidence while preserving historical
+fields. No row is promoted by this read. R04/C still owns actual current
+authority/namespace, R05/C-D actual Core/queue/memory, R06/D truthful observation.
+Handwritten request envelopes, declared redaction, inventory-only providers and
+fixed pose snapshots do not discharge those implementation obligations.
+
+Tracked-corpus hash audit covers2726 text files before the last README/119 reads;
+remaining unmatched paths are primarily task-generated evidence receipts and
+self-maintained records. This is an inventory result, not a claim of reading all
+raw logs or all unrelated code. No new overall plan or R10 wholesale closure.
+The Lean README now accurately distinguishes passed whole observed validation
+from pending final B scope review. No source/proof/command/taxonomy changes.

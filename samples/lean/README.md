@@ -170,6 +170,7 @@ compiler/CPython/capture assumptions and remaining integration obligations.
 consumer and an extracted negative-test header. `HostControlHeader.lean` is a
 code-generation fragment, not a standalone module or theorem. These private
 reference sources are staged externally by `scripts/proof_first_host_prepare.py`;
-earlier native preparation and physical runs passed235 and68 commands respectively;
-the revised observed dependency-export workflow is still under validation. Their source
+the current observed native preparation and repaired physical runs passed235 and68
+commands respectively, with whole exits and input bindings checked. Final W4-B
+scope review is pending; Rust/Core/privateQUIC remains unconnected. Their source
 origins/transformations are in `docs/proof-first/W4_HOST_MANIFEST.json`.

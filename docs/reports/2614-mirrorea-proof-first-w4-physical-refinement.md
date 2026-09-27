@@ -2925,3 +2925,65 @@ I/DOCS_B_OBSERVER_CORPUS.json records exact log hash. Later receipt/read notes
 are separately JSON/hash/diff checked, not retrospectively code-tested.
 RESUME compacted as a current snapshot; report preserves historical details.
 Own metadata commit/push receipt will be I/B_OBSERVER_CORPUS_GIT.json.
+
+
+### 2026-09-27T14:20:50.769929+00:00 — remaining sample JSON /119 disposition read (LAB)
+
+Continued sole-main required reading while final B scope review is blocked by
+visible browser human verification. Since052a7284,171additional sample JSON files
+were fully read (batches37–64), plus the complete119 disposition file, current
+project status/goal, both sample READMEs, and the plan delta. Plan lines1–844
+were compared with the previously fully-read exact blob at5d7c13a8; all changed
+lines and current845–1407 were read. No grep/index is counted as full reading.
+
+Batch57's JSON-only helper exited1 at intentionally invalid SRC-05 syntax after
+reading six valid packages. The malformed fixture was then read raw; no input
+repair or test-pass claim. An initial ledger append check mistakenly treated
+existing unread inventory hashes as read and appended zero entries. Corrected
+status-aware checking appended115actual full reads; batches1–54 all already had
+full-hash coverage. Historical inventory/ledger prefix remains intact.
+
+All119 dispositions preserve U/D/source approval and non-acceptance. The Sep13
+W3 snapshot has stale pending/current wording in VF-07/OP-05/MG-03/MG-05/MG-06;
+recorded forward in existing R09/E rather than rewriting its old evidence.
+Read examples keep hand-authored network envelopes, metadata policy checks,
+provider inventory, pose snapshot fixtures and actual execution distinct.
+These cannot supply current authority or generic source/network observation.
+No W4 theorem, source/runtime correction or system requirement acceptance added.
+
+I/CORPUS_CURRENT_HASH_AUDIT.json records the tracked UTF8 required-corpus inventory
+except reports:2726current full-hash matches before last README/119 reads,26
+unmatched paths, primarily generated check receipts/self-maintained records.
+Protocol READING permits relevant evidence reading without bulk historical raw
+logs; this audit does not claim every generated receipt or unrelated code read.
+
+Last read-only browser check14:15:12UTC still Just a moment, no composer/Stop,
+no generating job. Existing human verification question pending; no resend,
+challenge bypass, browser setting change, quota reset or paid fallback.
+B remains unclosed; C/D/E remain gated. Same active full-W4 goal.
+
+plan/ updated with reuse/status boundaries; READ_LEDGER/RESUME synchronized.
+samples/lean/README.md corrects a stale under-validation phrase to passed
+observed preparation/physical checks plus pending B scope review. No sample
+taxonomy, executable command or primary status change: Documentation.md,
+docs/project-status.md, progress.md, tasks.md, samples_progress.md 更新不要.
+No unchanged Lean/native/Rust/network baseline rerun for this metadata delta.
+Docs validation and exact added-hash/JSON/whitespace checks will be recorded
+below; own normal commit/push receipt I/B_CORPUS_RECONCILIATION_GIT.json.
+No new report, Canon change, subagent or external notification.
+
+2026-09-27T14:25:09.834511+00:00 — Docs45216 wholeexit0,1764reports, exact receipt
+I/DOCS_B_CORPUS_RECONCILIATION.json. Added ledger178entries verified with prior
+prefix intact:171sample JSON,119-row JSON, current Markdown reads and authored
+plan successor. One immediately previous plan hash is correctly historical.
+I/READ_LEDGER_CORPUS_RECONCILIATION_AUDIT.json retains exact check.119IDs/source
+hash preserved; dispositions unchanged. Five own LAB files, append-only plan/
+report, git diff --check pass; no source/Canon/handoff delta.
+
+Final exact-target browser check14:23:27UTC still human verification, no input
+composer/Stop. Same actual blocker has persisted across preceding continuations.
+Independent mandatory sample/disposition reading has reached this checkpoint;
+no useful dependent B-close/C implementation may bypass the required review.
+Preserve the frozen packet/session records and resume after the owner completes
+visible browser verification. This is an external prerequisite, not quota/latency
+exhaustion, scope completion or a request to waive review. No normal job stopped.

@@ -43921,5 +43921,1429 @@
     "status": "full",
     "read_at": "2026-09-27T14:01:48.445864+00:00",
     "role": "Full compact JSON read. Archived Lean stub source_text contains True/sorry and remains excluded from W4 proofs; archived host-plan predicate/effect scripts are declared fixture inputs, not actual source/network correspondence. Avatar preview expected fields explicitly exclude native execution and real object attach."
+  },
+  {
+    "path": "samples/practical-alpha1/expected/chk-cut-01-invalid-distributed-cut-rejected.expected.json",
+    "sha256": "07cf32bbabd291314e1381f4ac012838e514f61054bdcb771920a5e2c33f36a0",
+    "range": "all",
+    "status": "full",
+    "read_at": "2026-09-27T14:06:59.756780+00:00",
+    "role": "Full JSON keys/values read. Practical checker/hotplug/companion-preview/local-runtime expected records, not fresh execution. Signature-present flag not cryptographic verification; contract-update preview not transparent overlay; companion reports not same-session attach; deferred detach not executed removal."
+  },
+  {
+    "path": "samples/practical-alpha1/expected/chk-lif-01-raw-dangling.expected.json",
+    "sha256": "6ec394240c36cc5cacc18760ffb2f44ad616177c20779b4e08f6ada870ac1fe9",
+    "range": "all",
+    "status": "full",
+    "read_at": "2026-09-27T14:06:59.756780+00:00",
+    "role": "Full JSON keys/values read. Practical checker/hotplug/companion-preview/local-runtime expected records, not fresh execution. Signature-present flag not cryptographic verification; contract-update preview not transparent overlay; companion reports not same-session attach; deferred detach not executed removal."
+  },
+  {
+    "path": "samples/practical-alpha1/expected/chk-lif-02-fallback-access-valid.expected.json",
+    "sha256": "3bf6c14ffae0f86c76e4916beb72f6210b05819b05d7ebefd01e1507fed3768c",
+    "range": "all",
+    "status": "full",
+    "read_at": "2026-09-27T14:06:59.756780+00:00",
+    "role": "Full JSON keys/values read. Practical checker/hotplug/companion-preview/local-runtime expected records, not fresh execution. Signature-present flag not cryptographic verification; contract-update preview not transparent overlay; companion reports not same-session attach; deferred detach not executed removal."
+  },
+  {
+    "path": "samples/practical-alpha1/expected/chk-lif-03-inherited-chain-valid.expected.json",
+    "sha256": "ec99c76095f2b55f14145e94454ec677d886c70a81126b113ac4be8b2e3a7685",
+    "range": "all",
+    "status": "full",
+    "read_at": "2026-09-27T14:06:59.756780+00:00",
+    "role": "Full JSON keys/values read. Practical checker/hotplug/companion-preview/local-runtime expected records, not fresh execution. Signature-present flag not cryptographic verification; contract-update preview not transparent overlay; companion reports not same-session attach; deferred detach not executed removal."
+  },
+  {
+    "path": "samples/practical-alpha1/expected/chk-lif-04-snapshot-selected-distinction.expected.json",
+    "sha256": "e6e8b67b9bcc197ae4b4933659df15a736c4c39daa1fdb05915bef4f368044f8",
+    "range": "all",
+    "status": "full",
+    "read_at": "2026-09-27T14:06:59.756780+00:00",
+    "role": "Full JSON keys/values read. Practical checker/hotplug/companion-preview/local-runtime expected records, not fresh execution. Signature-present flag not cryptographic verification; contract-update preview not transparent overlay; companion reports not same-session attach; deferred detach not executed removal."
+  },
+  {
+    "path": "samples/practical-alpha1/expected/chk-pkg-01-unsigned-native-rejected.expected.json",
+    "sha256": "9e80fe37b4536a11c507d47b498bc450f0055da00eabfe46b99b36a84c1b00e6",
+    "range": "all",
+    "status": "full",
+    "read_at": "2026-09-27T14:06:59.756780+00:00",
+    "role": "Full JSON keys/values read. Practical checker/hotplug/companion-preview/local-runtime expected records, not fresh execution. Signature-present flag not cryptographic verification; contract-update preview not transparent overlay; companion reports not same-session attach; deferred detach not executed removal."
+  },
+  {
+    "path": "samples/practical-alpha1/expected/chk-pkg-02-over-capability-rejected.expected.json",
+    "sha256": "cdd939650a5d506e6d1fafdd5749a1e12855d132556eec513a0020ff0baa9978",
+    "range": "all",
+    "status": "full",
+    "read_at": "2026-09-27T14:06:59.756780+00:00",
+    "role": "Full JSON keys/values read. Practical checker/hotplug/companion-preview/local-runtime expected records, not fresh execution. Signature-present flag not cryptographic verification; contract-update preview not transparent overlay; companion reports not same-session attach; deferred detach not executed removal."
+  },
+  {
+    "path": "samples/practical-alpha1/expected/chk-var-01-logging-layer-valid.expected.json",
+    "sha256": "491c93770912150ade2cdf2ee64d2a4160df8ff94bc9ef8c8d5b95951560548d",
+    "range": "all",
+    "status": "full",
+    "read_at": "2026-09-27T14:06:59.756780+00:00",
+    "role": "Full JSON keys/values read. Practical checker/hotplug/companion-preview/local-runtime expected records, not fresh execution. Signature-present flag not cryptographic verification; contract-update preview not transparent overlay; companion reports not same-session attach; deferred detach not executed removal."
+  },
+  {
+    "path": "samples/practical-alpha1/expected/chk-var-02-precondition-strengthening-rejected.expected.json",
+    "sha256": "12effc8ec055e82f215665719903571834e0d5a56844d26b9154446364ac51fe",
+    "range": "all",
+    "status": "full",
+    "read_at": "2026-09-27T14:06:59.756780+00:00",
+    "role": "Full JSON keys/values read. Practical checker/hotplug/companion-preview/local-runtime expected records, not fresh execution. Signature-present flag not cryptographic verification; contract-update preview not transparent overlay; companion reports not same-session attach; deferred detach not executed removal."
+  },
+  {
+    "path": "samples/practical-alpha1/expected/chk-var-03-mutable-covariance-rejected.expected.json",
+    "sha256": "3af8e8c902bf41cddb63b16043513ca44d0881f293370b9c62ec83babbfe1de2",
+    "range": "all",
+    "status": "full",
+    "read_at": "2026-09-27T14:06:59.756780+00:00",
+    "role": "Full JSON keys/values read. Practical checker/hotplug/companion-preview/local-runtime expected records, not fresh execution. Signature-present flag not cryptographic verification; contract-update preview not transparent overlay; companion reports not same-session attach; deferred detach not executed removal."
+  },
+  {
+    "path": "samples/practical-alpha1/expected/hp-a1-01-debug-layer-attach.expected.json",
+    "sha256": "9f64bae6a3cf6a4b36a5d8f103ff1aa204af1681b1fc76aa8cfdde9fa58483f7",
+    "range": "all",
+    "status": "full",
+    "read_at": "2026-09-27T14:06:59.756780+00:00",
+    "role": "Full JSON keys/values read. Practical checker/hotplug/companion-preview/local-runtime expected records, not fresh execution. Signature-present flag not cryptographic verification; contract-update preview not transparent overlay; companion reports not same-session attach; deferred detach not executed removal."
+  },
+  {
+    "path": "samples/practical-alpha1/expected/hp-a1-02-non-admin-debug-rejected.expected.json",
+    "sha256": "f5bee280fb02e04f5c9f861dc45f68d2964f66afae6679ccab6ec3666036a10e",
+    "range": "all",
+    "status": "full",
+    "read_at": "2026-09-27T14:06:59.756780+00:00",
+    "role": "Full JSON keys/values read. Practical checker/hotplug/companion-preview/local-runtime expected records, not fresh execution. Signature-present flag not cryptographic verification; contract-update preview not transparent overlay; companion reports not same-session attach; deferred detach not executed removal."
+  },
+  {
+    "path": "samples/practical-alpha1/expected/hp-a1-03-auth-layer-contract-update.expected.json",
+    "sha256": "85cf5f7daed7e97eef638f8d98944c17f6b90396c9d3a879e59f02d935d5e9af",
+    "range": "all",
+    "status": "full",
+    "read_at": "2026-09-27T14:06:59.756780+00:00",
+    "role": "Full JSON keys/values read. Practical checker/hotplug/companion-preview/local-runtime expected records, not fresh execution. Signature-present flag not cryptographic verification; contract-update preview not transparent overlay; companion reports not same-session attach; deferred detach not executed removal."
+  },
+  {
+    "path": "samples/practical-alpha1/expected/hp-a1-04-ratelimit-declared-failure.expected.json",
+    "sha256": "0f7c5c083af4aed5f710f78edccd9aae4df01689016ba70420adf47d71960dc1",
+    "range": "all",
+    "status": "full",
+    "read_at": "2026-09-27T14:06:59.756780+00:00",
+    "role": "Full JSON keys/values read. Practical checker/hotplug/companion-preview/local-runtime expected records, not fresh execution. Signature-present flag not cryptographic verification; contract-update preview not transparent overlay; companion reports not same-session attach; deferred detach not executed removal."
+  },
+  {
+    "path": "samples/practical-alpha1/expected/hp-a1-04b1-stale-membership-attach-rejected.expected.json",
+    "sha256": "4b33d239f739a842dbcf4e7643c0c77dcc7e25fa85ea0cb27952ce386749315c",
+    "range": "all",
+    "status": "full",
+    "read_at": "2026-09-27T14:06:59.756780+00:00",
+    "role": "Full JSON keys/values read. Practical checker/hotplug/companion-preview/local-runtime expected records, not fresh execution. Signature-present flag not cryptographic verification; contract-update preview not transparent overlay; companion reports not same-session attach; deferred detach not executed removal."
+  },
+  {
+    "path": "samples/practical-alpha1/expected/hp-a1-04b2-missing-witness-attach-rejected.expected.json",
+    "sha256": "b78c431ecca8c313d926582daa67b6c61c8f2f182fc54fefeb90cc8d91c922b3",
+    "range": "all",
+    "status": "full",
+    "read_at": "2026-09-27T14:06:59.756780+00:00",
+    "role": "Full JSON keys/values read. Practical checker/hotplug/companion-preview/local-runtime expected records, not fresh execution. Signature-present flag not cryptographic verification; contract-update preview not transparent overlay; companion reports not same-session attach; deferred detach not executed removal."
+  },
+  {
+    "path": "samples/practical-alpha1/expected/hp-a1-05-incompatible-patch-rejected.expected.json",
+    "sha256": "aad139cb06a4699de1fca5af283e0b0e09df5c56b08bd1891588271d9033a688",
+    "range": "all",
+    "status": "full",
+    "read_at": "2026-09-27T14:06:59.756780+00:00",
+    "role": "Full JSON keys/values read. Practical checker/hotplug/companion-preview/local-runtime expected records, not fresh execution. Signature-present flag not cryptographic verification; contract-update preview not transparent overlay; companion reports not same-session attach; deferred detach not executed removal."
+  },
+  {
+    "path": "samples/practical-alpha1/expected/hp-a1-06-object-package-attach.expected.json",
+    "sha256": "5936e4382438df0c873c78f9d247d653cba3081a0a84c2273becf89fa945f7c4",
+    "range": "all",
+    "status": "full",
+    "read_at": "2026-09-27T14:06:59.756780+00:00",
+    "role": "Full JSON keys/values read. Practical checker/hotplug/companion-preview/local-runtime expected records, not fresh execution. Signature-present flag not cryptographic verification; contract-update preview not transparent overlay; companion reports not same-session attach; deferred detach not executed removal."
+  },
+  {
+    "path": "samples/practical-alpha1/expected/hp-a1-07-detach-minimal-contract.expected.json",
+    "sha256": "9f3e300189f6ba38d333a9b0b1894a30edea7b2b732074155b4237e34c3031dc",
+    "range": "all",
+    "status": "full",
+    "read_at": "2026-09-27T14:06:59.756780+00:00",
+    "role": "Full JSON keys/values read. Practical checker/hotplug/companion-preview/local-runtime expected records, not fresh execution. Signature-present flag not cryptographic verification; contract-update preview not transparent overlay; companion reports not same-session attach; deferred detach not executed removal."
+  },
+  {
+    "path": "samples/practical-alpha1/expected/pe2e-a1-01-local-full-toolchain-preview.expected.json",
+    "sha256": "f75093544a6d291c6248ca75a17662051f2abc4d79e441ea390207cfb53a836b",
+    "range": "all",
+    "status": "full",
+    "read_at": "2026-09-27T14:06:59.756780+00:00",
+    "role": "Full JSON keys/values read. Practical checker/hotplug/companion-preview/local-runtime expected records, not fresh execution. Signature-present flag not cryptographic verification; contract-update preview not transparent overlay; companion reports not same-session attach; deferred detach not executed removal."
+  },
+  {
+    "path": "samples/practical-alpha1/expected/pe2e-a1-02-docker-full-toolchain-preview.expected.json",
+    "sha256": "9260cdef5d13da9454ff9827b6a4997650a882147b7fa2676239b6bc8805dc0b",
+    "range": "all",
+    "status": "full",
+    "read_at": "2026-09-27T14:06:59.756780+00:00",
+    "role": "Full JSON keys/values read. Practical checker/hotplug/companion-preview/local-runtime expected records, not fresh execution. Signature-present flag not cryptographic verification; contract-update preview not transparent overlay; companion reports not same-session attach; deferred detach not executed removal."
+  },
+  {
+    "path": "samples/practical-alpha1/expected/pe2e-a1-03-hotplug-debug-layer-preview.expected.json",
+    "sha256": "36d7903aa11163581da294adeeee6dda8295c27a61e7f06429e27193677f02df",
+    "range": "all",
+    "status": "full",
+    "read_at": "2026-09-27T14:06:59.756780+00:00",
+    "role": "Full JSON keys/values read. Practical checker/hotplug/companion-preview/local-runtime expected records, not fresh execution. Signature-present flag not cryptographic verification; contract-update preview not transparent overlay; companion reports not same-session attach; deferred detach not executed removal."
+  },
+  {
+    "path": "samples/practical-alpha1/expected/pe2e-a1-04-placeholder-object-preview.expected.json",
+    "sha256": "6030475d2f534d87b98d8f50a535bffb7873e5c08d0270a9a294d44db3f1be5c",
+    "range": "all",
+    "status": "full",
+    "read_at": "2026-09-27T14:06:59.756780+00:00",
+    "role": "Full JSON keys/values read. Practical checker/hotplug/companion-preview/local-runtime expected records, not fresh execution. Signature-present flag not cryptographic verification; contract-update preview not transparent overlay; companion reports not same-session attach; deferred detach not executed removal."
+  },
+  {
+    "path": "samples/practical-alpha1/expected/pe2e-a1-05-local-save-load-continue.expected.json",
+    "sha256": "d135bb22dbed36c38868017f06c057b71d222edd9c2b7f4c1c92b7e175b85c09",
+    "range": "all",
+    "status": "full",
+    "read_at": "2026-09-27T14:06:59.756780+00:00",
+    "role": "Full JSON keys/values read. Practical checker/hotplug/companion-preview/local-runtime expected records, not fresh execution. Signature-present flag not cryptographic verification; contract-update preview not transparent overlay; companion reports not same-session attach; deferred detach not executed removal."
+  },
+  {
+    "path": "samples/practical-alpha1/expected/pe2e-a1-06-invalid-distributed-save-rejected.expected.json",
+    "sha256": "c2cd50415c9d82f37f2cd6444ab089a4f6666637b7c1780af9f6f0c353b65880",
+    "range": "all",
+    "status": "full",
+    "read_at": "2026-09-27T14:06:59.756780+00:00",
+    "role": "Full JSON keys/values read. Practical checker/hotplug/companion-preview/local-runtime expected records, not fresh execution. Signature-present flag not cryptographic verification; contract-update preview not transparent overlay; companion reports not same-session attach; deferred detach not executed removal."
+  },
+  {
+    "path": "samples/practical-alpha1/expected/pe2e-a1-07-devtools-viewer-preview.expected.json",
+    "sha256": "530e0b4b2a8106bae3eb02cb0c8ef05245fa6b8fcc84382236dc56056e6d50c5",
+    "range": "all",
+    "status": "full",
+    "read_at": "2026-09-27T14:06:59.756780+00:00",
+    "role": "Full JSON keys/values read. Practical checker/hotplug/companion-preview/local-runtime expected records, not fresh execution. Signature-present flag not cryptographic verification; contract-update preview not transparent overlay; companion reports not same-session attach; deferred detach not executed removal."
+  },
+  {
+    "path": "samples/practical-alpha1/expected/pe2e-a1-08-custom-avatar-companion-preview.expected.json",
+    "sha256": "59a4ecbb16839ab3da892b33b7e2e8ea5442d4965ded19205efa2404f12ca82c",
+    "range": "all",
+    "status": "full",
+    "read_at": "2026-09-27T14:06:59.756780+00:00",
+    "role": "Full JSON keys/values read. Practical checker/hotplug/companion-preview/local-runtime expected records, not fresh execution. Signature-present flag not cryptographic verification; contract-update preview not transparent overlay; companion reports not same-session attach; deferred detach not executed removal."
+  },
+  {
+    "path": "samples/practical-alpha1/expected/pe2e-a1-09-unsupported-runtime-visible-fallback-preview.expected.json",
+    "sha256": "eeb4c8b6180eb5559cd171e21ad90ddca43bd69b5bce2d40f789d0c31f9298f2",
+    "range": "all",
+    "status": "full",
+    "read_at": "2026-09-27T14:06:59.756780+00:00",
+    "role": "Full JSON keys/values read. Practical checker/hotplug/companion-preview/local-runtime expected records, not fresh execution. Signature-present flag not cryptographic verification; contract-update preview not transparent overlay; companion reports not same-session attach; deferred detach not executed removal."
+  },
+  {
+    "path": "samples/practical-alpha1/expected/run-01-local-sugoroku.expected.json",
+    "sha256": "d5652c16e8d431db214e6a87812036ecc80ec308d82217e9839ca2911c024ab2",
+    "range": "all",
+    "status": "full",
+    "read_at": "2026-09-27T14:06:59.756780+00:00",
+    "role": "Full JSON keys/values read. Practical checker/hotplug/companion-preview/local-runtime expected records, not fresh execution. Signature-present flag not cryptographic verification; contract-update preview not transparent overlay; companion reports not same-session attach; deferred detach not executed removal."
+  },
+  {
+    "path": "samples/practical-alpha1/expected/run-02-stale-membership-rejected.expected.json",
+    "sha256": "1dbbbe1d2f7f246eb8f75a614e6feabbb77e430bf62a30ceb63a664683c0c1e6",
+    "range": "all",
+    "status": "full",
+    "read_at": "2026-09-27T14:10:12.793711+00:00",
+    "role": "Full compact JSON read; all keys/values, no duplicate keys. Practical local run/save-load/TCP/auth-lane/devtools expected fields and first object packages. Stored expectations not new runs; coherent auth metadata is not verified authority; stale membership check not witness/lease nonresurrection; report-local retention not durable service or two-run confidentiality."
+  },
+  {
+    "path": "samples/practical-alpha1/expected/run-03-missing-capability-rejected.expected.json",
+    "sha256": "f72f70fdb2e0f9a9cf75ce6be71a3e403a0e012764e53e2565a856a270233d73",
+    "range": "all",
+    "status": "full",
+    "read_at": "2026-09-27T14:10:12.793711+00:00",
+    "role": "Full compact JSON read; all keys/values, no duplicate keys. Practical local run/save-load/TCP/auth-lane/devtools expected fields and first object packages. Stored expectations not new runs; coherent auth metadata is not verified authority; stale membership check not witness/lease nonresurrection; report-local retention not durable service or two-run confidentiality."
+  },
+  {
+    "path": "samples/practical-alpha1/expected/run-04-missing-witness-rejected.expected.json",
+    "sha256": "91bb7fdb3a26135ff2b8482a31c53fee15e0cff2a58603f775003d8d7e85ec8d",
+    "range": "all",
+    "status": "full",
+    "read_at": "2026-09-27T14:10:12.793711+00:00",
+    "role": "Full compact JSON read; all keys/values, no duplicate keys. Practical local run/save-load/TCP/auth-lane/devtools expected fields and first object packages. Stored expectations not new runs; coherent auth metadata is not verified authority; stale membership check not witness/lease nonresurrection; report-local retention not durable service or two-run confidentiality."
+  },
+  {
+    "path": "samples/practical-alpha1/expected/sl-a1-01-local-save-load-resume.expected.json",
+    "sha256": "f1950422c2413c70e32248ff5a12d6f63bcfc7ac1caa839451216cd9d30e1377",
+    "range": "all",
+    "status": "full",
+    "read_at": "2026-09-27T14:10:12.793711+00:00",
+    "role": "Full compact JSON read; all keys/values, no duplicate keys. Practical local run/save-load/TCP/auth-lane/devtools expected fields and first object packages. Stored expectations not new runs; coherent auth metadata is not verified authority; stale membership check not witness/lease nonresurrection; report-local retention not durable service or two-run confidentiality."
+  },
+  {
+    "path": "samples/practical-alpha1/expected/sl-a1-02-local-load-stale-membership-rejected.expected.json",
+    "sha256": "6e9de7a905840ddafe2b996578bcb97a75374035b715c512b058a6756f6f9c72",
+    "range": "all",
+    "status": "full",
+    "read_at": "2026-09-27T14:10:12.793711+00:00",
+    "role": "Full compact JSON read; all keys/values, no duplicate keys. Practical local run/save-load/TCP/auth-lane/devtools expected fields and first object packages. Stored expectations not new runs; coherent auth metadata is not verified authority; stale membership check not witness/lease nonresurrection; report-local retention not durable service or two-run confidentiality."
+  },
+  {
+    "path": "samples/practical-alpha1/expected/sl-a1-03-invalid-distributed-cut-preflight.expected.json",
+    "sha256": "7c2fc57c491481c68fcdac867adfacc234f9a01bc2db03ee4dc1bf0d3df66897",
+    "range": "all",
+    "status": "full",
+    "read_at": "2026-09-27T14:10:12.793711+00:00",
+    "role": "Full compact JSON read; all keys/values, no duplicate keys. Practical local run/save-load/TCP/auth-lane/devtools expected fields and first object packages. Stored expectations not new runs; coherent auth metadata is not verified authority; stale membership check not witness/lease nonresurrection; report-local retention not durable service or two-run confidentiality."
+  },
+  {
+    "path": "samples/practical-alpha1/expected/src-01-minimal-world.expected.json",
+    "sha256": "94ed17790d424f0906f1be847cc7b1d240f4d432314009dcdc4fbdd736906735",
+    "range": "all",
+    "status": "full",
+    "read_at": "2026-09-27T14:10:12.793711+00:00",
+    "role": "Full compact JSON read; all keys/values, no duplicate keys. Practical local run/save-load/TCP/auth-lane/devtools expected fields and first object packages. Stored expectations not new runs; coherent auth metadata is not verified authority; stale membership check not witness/lease nonresurrection; report-local retention not durable service or two-run confidentiality."
+  },
+  {
+    "path": "samples/practical-alpha1/expected/src-02-fallback-chain.expected.json",
+    "sha256": "c1373da21b1d5192eb88e30573b2356e5b7d709abfbb4620a959e3ef2db11573",
+    "range": "all",
+    "status": "full",
+    "read_at": "2026-09-27T14:10:12.793711+00:00",
+    "role": "Full compact JSON read; all keys/values, no duplicate keys. Practical local run/save-load/TCP/auth-lane/devtools expected fields and first object packages. Stored expectations not new runs; coherent auth metadata is not verified authority; stale membership check not witness/lease nonresurrection; report-local retention not durable service or two-run confidentiality."
+  },
+  {
+    "path": "samples/practical-alpha1/expected/src-03-layer-debug.expected.json",
+    "sha256": "f7efc33f0e74ce5878be4c3ac1a03dbd252678168e5a0ef398a897ea26207532",
+    "range": "all",
+    "status": "full",
+    "read_at": "2026-09-27T14:10:12.793711+00:00",
+    "role": "Full compact JSON read; all keys/values, no duplicate keys. Practical local run/save-load/TCP/auth-lane/devtools expected fields and first object packages. Stored expectations not new runs; coherent auth metadata is not verified authority; stale membership check not witness/lease nonresurrection; report-local retention not durable service or two-run confidentiality."
+  },
+  {
+    "path": "samples/practical-alpha1/expected/src-04-layer-manifest.expected.json",
+    "sha256": "78ef609bdbf49b8d9d0268de5d9207986f770ab4d42493ff9e947e6e4c2675bc",
+    "range": "all",
+    "status": "full",
+    "read_at": "2026-09-27T14:10:12.793711+00:00",
+    "role": "Full compact JSON read; all keys/values, no duplicate keys. Practical local run/save-load/TCP/auth-lane/devtools expected fields and first object packages. Stored expectations not new runs; coherent auth metadata is not verified authority; stale membership check not witness/lease nonresurrection; report-local retention not durable service or two-run confidentiality."
+  },
+  {
+    "path": "samples/practical-alpha1/expected/src-05-invalid-syntax.expected.json",
+    "sha256": "673b5dc44c30d56bac5977b6043f3780f30d5c54271224735d883735bde92965",
+    "range": "all",
+    "status": "full",
+    "read_at": "2026-09-27T14:10:12.793711+00:00",
+    "role": "Full compact JSON read; all keys/values, no duplicate keys. Practical local run/save-load/TCP/auth-lane/devtools expected fields and first object packages. Stored expectations not new runs; coherent auth metadata is not verified authority; stale membership check not witness/lease nonresurrection; report-local retention not durable service or two-run confidentiality."
+  },
+  {
+    "path": "samples/practical-alpha1/expected/tr-a1-01-local-tcp-accepted.expected.json",
+    "sha256": "85c1ef212788fcf0623e59fec27731fd23776914d068ce66871bce8cd3831224",
+    "range": "all",
+    "status": "full",
+    "read_at": "2026-09-27T14:10:12.793711+00:00",
+    "role": "Full compact JSON read; all keys/values, no duplicate keys. Practical local run/save-load/TCP/auth-lane/devtools expected fields and first object packages. Stored expectations not new runs; coherent auth metadata is not verified authority; stale membership check not witness/lease nonresurrection; report-local retention not durable service or two-run confidentiality."
+  },
+  {
+    "path": "samples/practical-alpha1/expected/tr-a1-02-docker-two-node-accepted.expected.json",
+    "sha256": "0a7e0ecdadc948ce683debacb6317e91eb766b69dfb0a00f30e2563a422f96a8",
+    "range": "all",
+    "status": "full",
+    "read_at": "2026-09-27T14:10:12.793711+00:00",
+    "role": "Full compact JSON read; all keys/values, no duplicate keys. Practical local run/save-load/TCP/auth-lane/devtools expected fields and first object packages. Stored expectations not new runs; coherent auth metadata is not verified authority; stale membership check not witness/lease nonresurrection; report-local retention not durable service or two-run confidentiality."
+  },
+  {
+    "path": "samples/practical-alpha1/expected/tr-a1-03-stale-membership-rejected.expected.json",
+    "sha256": "357e9880d70328b9e5961f80035e1675e50e63d94c8d3314554324659fcd3c2a",
+    "range": "all",
+    "status": "full",
+    "read_at": "2026-09-27T14:10:12.793711+00:00",
+    "role": "Full compact JSON read; all keys/values, no duplicate keys. Practical local run/save-load/TCP/auth-lane/devtools expected fields and first object packages. Stored expectations not new runs; coherent auth metadata is not verified authority; stale membership check not witness/lease nonresurrection; report-local retention not durable service or two-run confidentiality."
+  },
+  {
+    "path": "samples/practical-alpha1/expected/tr-a1-04-missing-capability-rejected.expected.json",
+    "sha256": "d8abddfbb76ff1e0aa335cbb507ec1f11517dce38aa22728a252e66b6e284bda",
+    "range": "all",
+    "status": "full",
+    "read_at": "2026-09-27T14:10:12.793711+00:00",
+    "role": "Full compact JSON read; all keys/values, no duplicate keys. Practical local run/save-load/TCP/auth-lane/devtools expected fields and first object packages. Stored expectations not new runs; coherent auth metadata is not verified authority; stale membership check not witness/lease nonresurrection; report-local retention not durable service or two-run confidentiality."
+  },
+  {
+    "path": "samples/practical-alpha1/expected/tr-a1-05-missing-witness-rejected.expected.json",
+    "sha256": "285a930c1d6507abeb6f12170d22dac591f7add76c513c1bbb30d4f90b83aebb",
+    "range": "all",
+    "status": "full",
+    "read_at": "2026-09-27T14:10:12.793711+00:00",
+    "role": "Full compact JSON read; all keys/values, no duplicate keys. Practical local run/save-load/TCP/auth-lane/devtools expected fields and first object packages. Stored expectations not new runs; coherent auth metadata is not verified authority; stale membership check not witness/lease nonresurrection; report-local retention not durable service or two-run confidentiality."
+  },
+  {
+    "path": "samples/practical-alpha1/expected/tr-a1-06-observer-safe-route-trace.expected.json",
+    "sha256": "dc09d2b2093640fee7d430ad4d2dfe3b8f8bbff0e5edff9205ba16e8842737af",
+    "range": "all",
+    "status": "full",
+    "read_at": "2026-09-27T14:10:12.793711+00:00",
+    "role": "Full compact JSON read; all keys/values, no duplicate keys. Practical local run/save-load/TCP/auth-lane/devtools expected fields and first object packages. Stored expectations not new runs; coherent auth metadata is not verified authority; stale membership check not witness/lease nonresurrection; report-local retention not durable service or two-run confidentiality."
+  },
+  {
+    "path": "samples/practical-alpha1/expected/tr-a1-07-auth-lane-preserved.expected.json",
+    "sha256": "8c6aff14b03f432f1bb0bd305a68d3b9fb292117af8a967835d568f5129af33d",
+    "range": "all",
+    "status": "full",
+    "read_at": "2026-09-27T14:10:12.793711+00:00",
+    "role": "Full compact JSON read; all keys/values, no duplicate keys. Practical local run/save-load/TCP/auth-lane/devtools expected fields and first object packages. Stored expectations not new runs; coherent auth metadata is not verified authority; stale membership check not witness/lease nonresurrection; report-local retention not durable service or two-run confidentiality."
+  },
+  {
+    "path": "samples/practical-alpha1/expected/vis-a1-01-event-dag-export.expected.json",
+    "sha256": "2215fd6612076fdbb70b9b48099eec26b6d4b84e4f10bba167953723d0067e7f",
+    "range": "all",
+    "status": "full",
+    "read_at": "2026-09-27T14:10:12.793711+00:00",
+    "role": "Full compact JSON read; all keys/values, no duplicate keys. Practical local run/save-load/TCP/auth-lane/devtools expected fields and first object packages. Stored expectations not new runs; coherent auth metadata is not verified authority; stale membership check not witness/lease nonresurrection; report-local retention not durable service or two-run confidentiality."
+  },
+  {
+    "path": "samples/practical-alpha1/expected/vis-a1-02-route-trace-export.expected.json",
+    "sha256": "507f00274b3f9c19ac108b4dce199c24df7694d521cbeb110bf155244325f786",
+    "range": "all",
+    "status": "full",
+    "read_at": "2026-09-27T14:10:12.793711+00:00",
+    "role": "Full compact JSON read; all keys/values, no duplicate keys. Practical local run/save-load/TCP/auth-lane/devtools expected fields and first object packages. Stored expectations not new runs; coherent auth metadata is not verified authority; stale membership check not witness/lease nonresurrection; report-local retention not durable service or two-run confidentiality."
+  },
+  {
+    "path": "samples/practical-alpha1/expected/vis-a1-03-membership-timeline.expected.json",
+    "sha256": "f9c3991c2c3532465c8607c0dfcb6176c01e558bb3345be68e2cd57c9aad6a1f",
+    "range": "all",
+    "status": "full",
+    "read_at": "2026-09-27T14:10:12.793711+00:00",
+    "role": "Full compact JSON read; all keys/values, no duplicate keys. Practical local run/save-load/TCP/auth-lane/devtools expected fields and first object packages. Stored expectations not new runs; coherent auth metadata is not verified authority; stale membership check not witness/lease nonresurrection; report-local retention not durable service or two-run confidentiality."
+  },
+  {
+    "path": "samples/practical-alpha1/expected/vis-a1-04-hotplug-lifecycle.expected.json",
+    "sha256": "6b391700b4bcd0267b91a6c7e14cca346c6e93a0bd276935ccfb4dee477a8cda",
+    "range": "all",
+    "status": "full",
+    "read_at": "2026-09-27T14:10:12.793711+00:00",
+    "role": "Full compact JSON read; all keys/values, no duplicate keys. Practical local run/save-load/TCP/auth-lane/devtools expected fields and first object packages. Stored expectations not new runs; coherent auth metadata is not verified authority; stale membership check not witness/lease nonresurrection; report-local retention not durable service or two-run confidentiality."
+  },
+  {
+    "path": "samples/practical-alpha1/expected/vis-a1-05-fallback-degradation.expected.json",
+    "sha256": "7539d948c6268bd461276cf516ac6d83482b21c63c77070b6b7e35df5b2dbafe",
+    "range": "all",
+    "status": "full",
+    "read_at": "2026-09-27T14:10:12.793711+00:00",
+    "role": "Full compact JSON read; all keys/values, no duplicate keys. Practical local run/save-load/TCP/auth-lane/devtools expected fields and first object packages. Stored expectations not new runs; coherent auth metadata is not verified authority; stale membership check not witness/lease nonresurrection; report-local retention not durable service or two-run confidentiality."
+  },
+  {
+    "path": "samples/practical-alpha1/expected/vis-a1-06-redacted-observer-view.expected.json",
+    "sha256": "6b3f37eb6d408a8d4ad17b485648e9973012fdc67e01de5aa1ece3faa3759413",
+    "range": "all",
+    "status": "full",
+    "read_at": "2026-09-27T14:10:12.793711+00:00",
+    "role": "Full compact JSON read; all keys/values, no duplicate keys. Practical local run/save-load/TCP/auth-lane/devtools expected fields and first object packages. Stored expectations not new runs; coherent auth metadata is not verified authority; stale membership check not witness/lease nonresurrection; report-local retention not durable service or two-run confidentiality."
+  },
+  {
+    "path": "samples/practical-alpha1/expected/vis-a1-07-retention-query.expected.json",
+    "sha256": "c7b3e77640023efec7dad4234f4438e01daaddbaec9d859f529805b1a2935a36",
+    "range": "all",
+    "status": "full",
+    "read_at": "2026-09-27T14:10:12.793711+00:00",
+    "role": "Full compact JSON read; all keys/values, no duplicate keys. Practical local run/save-load/TCP/auth-lane/devtools expected fields and first object packages. Stored expectations not new runs; coherent auth metadata is not verified authority; stale membership check not witness/lease nonresurrection; report-local retention not durable service or two-run confidentiality."
+  },
+  {
+    "path": "samples/practical-alpha1/packages/av-a1-01-placeholder-avatar-runtime/package.mir.json",
+    "sha256": "624d43c693e954f6bcea74cd46a28af7d32f1b4db7570d05b6e4bd7e7dcd6d4e",
+    "range": "all",
+    "status": "full",
+    "read_at": "2026-09-27T14:10:12.793711+00:00",
+    "role": "Full compact JSON read; all keys/values, no duplicate keys. Practical local run/save-load/TCP/auth-lane/devtools expected fields and first object packages. Stored expectations not new runs; coherent auth metadata is not verified authority; stale membership check not witness/lease nonresurrection; report-local retention not durable service or two-run confidentiality."
+  },
+  {
+    "path": "samples/practical-alpha1/packages/av-a1-02-custom-mir-avatar-runtime/package.mir.json",
+    "sha256": "d879bebcc8b1860fd1a949ff761091a43b05920119428238d081f385047e2b32",
+    "range": "all",
+    "status": "full",
+    "read_at": "2026-09-27T14:10:12.793711+00:00",
+    "role": "Full compact JSON read; all keys/values, no duplicate keys. Practical local run/save-load/TCP/auth-lane/devtools expected fields and first object packages. Stored expectations not new runs; coherent auth metadata is not verified authority; stale membership check not witness/lease nonresurrection; report-local retention not durable service or two-run confidentiality."
+  },
+  {
+    "path": "samples/practical-alpha1/packages/av-a1-03-unsupported-runtime-fallback/package.mir.json",
+    "sha256": "5932fe8c553251acf841f729f1df6cac5a4a318603097fb91948c093bd2fd42f",
+    "range": "all",
+    "status": "full",
+    "read_at": "2026-09-27T14:16:54.721527+00:00",
+    "role": "Full JSON content read in batches55-64; compact output preserves every key/value, duplicate keys checked. Legacy package inputs, expectations and provider inventories are not fresh execution, verified authority, noninterference or generic source-to-network evidence."
+  },
+  {
+    "path": "samples/practical-alpha1/packages/chk-cut-01-invalid-distributed-cut-rejected/package.mir.json",
+    "sha256": "6aa664dc4a6dfcfe3b5bd9d39db87873ad80211bb16cdc8aa5bd096bb6ef68f5",
+    "range": "all",
+    "status": "full",
+    "read_at": "2026-09-27T14:16:54.721527+00:00",
+    "role": "Full JSON content read in batches55-64; compact output preserves every key/value, duplicate keys checked. Legacy package inputs, expectations and provider inventories are not fresh execution, verified authority, noninterference or generic source-to-network evidence."
+  },
+  {
+    "path": "samples/practical-alpha1/packages/chk-lif-01-raw-dangling/package.mir.json",
+    "sha256": "23993be4567b7be83f82095bf7a2a47ffce55c1803096942fb7d399bd959bdf0",
+    "range": "all",
+    "status": "full",
+    "read_at": "2026-09-27T14:16:54.721527+00:00",
+    "role": "Full JSON content read in batches55-64; compact output preserves every key/value, duplicate keys checked. Legacy package inputs, expectations and provider inventories are not fresh execution, verified authority, noninterference or generic source-to-network evidence."
+  },
+  {
+    "path": "samples/practical-alpha1/packages/chk-lif-02-fallback-access-valid/package.mir.json",
+    "sha256": "264a75ef7a7aca5312edd4417f115b44a067987c6f854f6f42fe5b8a9f9dbec6",
+    "range": "all",
+    "status": "full",
+    "read_at": "2026-09-27T14:16:54.721527+00:00",
+    "role": "Full JSON content read in batches55-64; compact output preserves every key/value, duplicate keys checked. Legacy package inputs, expectations and provider inventories are not fresh execution, verified authority, noninterference or generic source-to-network evidence."
+  },
+  {
+    "path": "samples/practical-alpha1/packages/chk-lif-03-inherited-chain-valid/package.mir.json",
+    "sha256": "a2aeeac516f7f66c41e7f0b9d08293c82708d86cc8450337b281c39a4d38bd09",
+    "range": "all",
+    "status": "full",
+    "read_at": "2026-09-27T14:16:54.721527+00:00",
+    "role": "Full JSON content read in batches55-64; compact output preserves every key/value, duplicate keys checked. Legacy package inputs, expectations and provider inventories are not fresh execution, verified authority, noninterference or generic source-to-network evidence."
+  },
+  {
+    "path": "samples/practical-alpha1/packages/chk-lif-04-snapshot-selected-distinction/package.mir.json",
+    "sha256": "516ffd6fceab2f618d4f6462614c59d264c1bef1da2f2ab032c20bb5e8142c8d",
+    "range": "all",
+    "status": "full",
+    "read_at": "2026-09-27T14:16:54.721527+00:00",
+    "role": "Full JSON content read in batches55-64; compact output preserves every key/value, duplicate keys checked. Legacy package inputs, expectations and provider inventories are not fresh execution, verified authority, noninterference or generic source-to-network evidence."
+  },
+  {
+    "path": "samples/practical-alpha1/packages/chk-pkg-01-unsigned-native-rejected/package.mir.json",
+    "sha256": "bd07038b9ca30723d80ce0b93023319abda5d0b70a82b5b74f3e399e51386177",
+    "range": "all",
+    "status": "full",
+    "read_at": "2026-09-27T14:16:54.721527+00:00",
+    "role": "Full JSON content read in batches55-64; compact output preserves every key/value, duplicate keys checked. Legacy package inputs, expectations and provider inventories are not fresh execution, verified authority, noninterference or generic source-to-network evidence."
+  },
+  {
+    "path": "samples/practical-alpha1/packages/chk-pkg-02-over-capability-rejected/package.mir.json",
+    "sha256": "aa0a5e3fe4e1df30437eb5c0e00bfcede59e8c63509172ad2289f5d59ac82a91",
+    "range": "all",
+    "status": "full",
+    "read_at": "2026-09-27T14:16:54.721527+00:00",
+    "role": "Full JSON content read in batches55-64; compact output preserves every key/value, duplicate keys checked. Legacy package inputs, expectations and provider inventories are not fresh execution, verified authority, noninterference or generic source-to-network evidence."
+  },
+  {
+    "path": "samples/practical-alpha1/packages/chk-var-01-logging-layer-valid/package.mir.json",
+    "sha256": "ae21c191f2c0bd7e10f23b4a30fb830cfc5bf8ec6e42f3748aad31e8706af8ca",
+    "range": "all",
+    "status": "full",
+    "read_at": "2026-09-27T14:16:54.721527+00:00",
+    "role": "Full JSON content read in batches55-64; compact output preserves every key/value, duplicate keys checked. Legacy package inputs, expectations and provider inventories are not fresh execution, verified authority, noninterference or generic source-to-network evidence."
+  },
+  {
+    "path": "samples/practical-alpha1/packages/chk-var-02-precondition-strengthening-rejected/package.mir.json",
+    "sha256": "442077e2330fc8219a12ac7d825697562b2fbc009ca90d9231cd83dc58797a90",
+    "range": "all",
+    "status": "full",
+    "read_at": "2026-09-27T14:16:54.721527+00:00",
+    "role": "Full JSON content read in batches55-64; compact output preserves every key/value, duplicate keys checked. Legacy package inputs, expectations and provider inventories are not fresh execution, verified authority, noninterference or generic source-to-network evidence."
+  },
+  {
+    "path": "samples/practical-alpha1/packages/chk-var-03-mutable-covariance-rejected/package.mir.json",
+    "sha256": "6134515e3e9f07c9dc89d4aa8fd43a5f8efc8caf3acd8e076826b4dc28c39173",
+    "range": "all",
+    "status": "full",
+    "read_at": "2026-09-27T14:16:54.721527+00:00",
+    "role": "Full JSON content read in batches55-64; compact output preserves every key/value, duplicate keys checked. Legacy package inputs, expectations and provider inventories are not fresh execution, verified authority, noninterference or generic source-to-network evidence."
+  },
+  {
+    "path": "samples/practical-alpha1/packages/hp-a1-01-debug-layer-attach/package.mir.json",
+    "sha256": "f8985a217e4eae6e5ffbd8607c493c00cf842c04fc3df2540cd661b5e36ed56b",
+    "range": "all",
+    "status": "full",
+    "read_at": "2026-09-27T14:16:54.721527+00:00",
+    "role": "Full JSON content read in batches55-64; compact output preserves every key/value, duplicate keys checked. Legacy package inputs, expectations and provider inventories are not fresh execution, verified authority, noninterference or generic source-to-network evidence."
+  },
+  {
+    "path": "samples/practical-alpha1/packages/hp-a1-02-non-admin-debug-rejected/package.mir.json",
+    "sha256": "f4bc8e1ad8e285786b4c27938bc19368f94aea2392db36b4312ff03b81a42e9e",
+    "range": "all",
+    "status": "full",
+    "read_at": "2026-09-27T14:16:54.721527+00:00",
+    "role": "Full JSON content read in batches55-64; compact output preserves every key/value, duplicate keys checked. Legacy package inputs, expectations and provider inventories are not fresh execution, verified authority, noninterference or generic source-to-network evidence."
+  },
+  {
+    "path": "samples/practical-alpha1/packages/hp-a1-03-auth-layer-contract-update/package.mir.json",
+    "sha256": "83e35fef4667ce1f060d598338c4b1563aee0e50f4e9555f2688aac39b65c9b2",
+    "range": "all",
+    "status": "full",
+    "read_at": "2026-09-27T14:16:54.721527+00:00",
+    "role": "Full JSON content read in batches55-64; compact output preserves every key/value, duplicate keys checked. Legacy package inputs, expectations and provider inventories are not fresh execution, verified authority, noninterference or generic source-to-network evidence."
+  },
+  {
+    "path": "samples/practical-alpha1/packages/hp-a1-04-ratelimit-declared-failure/package.mir.json",
+    "sha256": "b4dcdeb6dd58157ff08560e1cdb0ddecacbb3bcd68dbe66b45e5ecb2ca2614fb",
+    "range": "all",
+    "status": "full",
+    "read_at": "2026-09-27T14:16:54.721527+00:00",
+    "role": "Full JSON content read in batches55-64; compact output preserves every key/value, duplicate keys checked. Legacy package inputs, expectations and provider inventories are not fresh execution, verified authority, noninterference or generic source-to-network evidence."
+  },
+  {
+    "path": "samples/practical-alpha1/packages/hp-a1-04b1-stale-membership-attach-rejected/package.mir.json",
+    "sha256": "aa6c25b1f5211fb3d20e167fcc0505a2acd22bc2d78d99f571c582a5cc55fd72",
+    "range": "all",
+    "status": "full",
+    "read_at": "2026-09-27T14:16:54.721527+00:00",
+    "role": "Full JSON content read in batches55-64; compact output preserves every key/value, duplicate keys checked. Legacy package inputs, expectations and provider inventories are not fresh execution, verified authority, noninterference or generic source-to-network evidence."
+  },
+  {
+    "path": "samples/practical-alpha1/packages/hp-a1-04b2-missing-witness-attach-rejected/package.mir.json",
+    "sha256": "9550d6d1e49298fb67c837b5f9c9c446a088ed23dca610aaf0c6f4993b83cbe8",
+    "range": "all",
+    "status": "full",
+    "read_at": "2026-09-27T14:16:54.721527+00:00",
+    "role": "Full JSON content read in batches55-64; compact output preserves every key/value, duplicate keys checked. Legacy package inputs, expectations and provider inventories are not fresh execution, verified authority, noninterference or generic source-to-network evidence."
+  },
+  {
+    "path": "samples/practical-alpha1/packages/hp-a1-05-incompatible-patch-rejected/package.mir.json",
+    "sha256": "a8f419737ac901b4cc855c8f74e8817b745d6ebd74e71d5382b33c08333f2ddf",
+    "range": "all",
+    "status": "full",
+    "read_at": "2026-09-27T14:16:54.721527+00:00",
+    "role": "Full JSON content read in batches55-64; compact output preserves every key/value, duplicate keys checked. Legacy package inputs, expectations and provider inventories are not fresh execution, verified authority, noninterference or generic source-to-network evidence."
+  },
+  {
+    "path": "samples/practical-alpha1/packages/hp-a1-06-object-package-attach/package.mir.json",
+    "sha256": "542dda32a4f9e7dc3d87920430647cbdc09e7beeebfa120630a1980f586927f3",
+    "range": "all",
+    "status": "full",
+    "read_at": "2026-09-27T14:16:54.721527+00:00",
+    "role": "Full JSON content read in batches55-64; compact output preserves every key/value, duplicate keys checked. Legacy package inputs, expectations and provider inventories are not fresh execution, verified authority, noninterference or generic source-to-network evidence."
+  },
+  {
+    "path": "samples/practical-alpha1/packages/hp-a1-07-detach-minimal-contract/package.mir.json",
+    "sha256": "50381b0781d14427c5ab9fed5d835b174a7fc12eda98565ec2d87e2c6fc0ed9f",
+    "range": "all",
+    "status": "full",
+    "read_at": "2026-09-27T14:16:54.721527+00:00",
+    "role": "Full JSON content read in batches55-64; compact output preserves every key/value, duplicate keys checked. Legacy package inputs, expectations and provider inventories are not fresh execution, verified authority, noninterference or generic source-to-network evidence."
+  },
+  {
+    "path": "samples/practical-alpha1/packages/oa05-07-add-one-host-io/package.mir.json",
+    "sha256": "30aff48eacfacd2a72bd2394c9ed21feb3e8c7c9fca3fb3ed807ed7693e75b98",
+    "range": "all",
+    "status": "full",
+    "read_at": "2026-09-27T14:16:54.721527+00:00",
+    "role": "Full JSON content read in batches55-64; compact output preserves every key/value, duplicate keys checked. Legacy package inputs, expectations and provider inventories are not fresh execution, verified authority, noninterference or generic source-to-network evidence."
+  },
+  {
+    "path": "samples/practical-alpha1/packages/run-01-local-sugoroku/package.mir.json",
+    "sha256": "f17966e63fb9326d27270681524bd8325b812f8f348bb986b41d83325d644b57",
+    "range": "all",
+    "status": "full",
+    "read_at": "2026-09-27T14:16:54.721527+00:00",
+    "role": "Full JSON content read in batches55-64; compact output preserves every key/value, duplicate keys checked. Legacy package inputs, expectations and provider inventories are not fresh execution, verified authority, noninterference or generic source-to-network evidence."
+  },
+  {
+    "path": "samples/practical-alpha1/packages/run-02-stale-membership-rejected/package.mir.json",
+    "sha256": "5cf0af9a2f95a9a018760fe774e2b61d192bd940666a68c7d2ea1bc0f5ab3f93",
+    "range": "all",
+    "status": "full",
+    "read_at": "2026-09-27T14:16:54.721527+00:00",
+    "role": "Full JSON content read in batches55-64; compact output preserves every key/value, duplicate keys checked. Legacy package inputs, expectations and provider inventories are not fresh execution, verified authority, noninterference or generic source-to-network evidence."
+  },
+  {
+    "path": "samples/practical-alpha1/packages/run-03-missing-capability-rejected/package.mir.json",
+    "sha256": "4c2c7ac1e914f70564171d6e2d4439909d0b9cf9ffd9e66b417dc0b7ba31d02d",
+    "range": "all",
+    "status": "full",
+    "read_at": "2026-09-27T14:16:54.721527+00:00",
+    "role": "Full JSON content read in batches55-64; compact output preserves every key/value, duplicate keys checked. Legacy package inputs, expectations and provider inventories are not fresh execution, verified authority, noninterference or generic source-to-network evidence."
+  },
+  {
+    "path": "samples/practical-alpha1/packages/run-04-missing-witness-rejected/package.mir.json",
+    "sha256": "cb5c224679b42c99463565ca7392b8f18c111984a247177a4058792ada215aa0",
+    "range": "all",
+    "status": "full",
+    "read_at": "2026-09-27T14:16:54.721527+00:00",
+    "role": "Full JSON content read in batches55-64; compact output preserves every key/value, duplicate keys checked. Legacy package inputs, expectations and provider inventories are not fresh execution, verified authority, noninterference or generic source-to-network evidence."
+  },
+  {
+    "path": "samples/practical-alpha1/packages/sl-a1-01-local-save-load-resume/package.mir.json",
+    "sha256": "da743bc57f776c6f2026bee509e8bb91e1df663813e79bed80cd60cd1c3c1d2b",
+    "range": "all",
+    "status": "full",
+    "read_at": "2026-09-27T14:16:54.721527+00:00",
+    "role": "Full JSON content read in batches55-64; compact output preserves every key/value, duplicate keys checked. Legacy package inputs, expectations and provider inventories are not fresh execution, verified authority, noninterference or generic source-to-network evidence."
+  },
+  {
+    "path": "samples/practical-alpha1/packages/sl-a1-02-local-load-stale-membership-rejected/package.mir.json",
+    "sha256": "a3ce13788640a098141d6cebde0249bc553c1981343551848a34565b2f0a6055",
+    "range": "all",
+    "status": "full",
+    "read_at": "2026-09-27T14:16:54.721527+00:00",
+    "role": "Full JSON content read in batches55-64; compact output preserves every key/value, duplicate keys checked. Legacy package inputs, expectations and provider inventories are not fresh execution, verified authority, noninterference or generic source-to-network evidence."
+  },
+  {
+    "path": "samples/practical-alpha1/packages/sl-a1-03-invalid-distributed-cut-preflight/package.mir.json",
+    "sha256": "66fb62cac4c268e9ac48891f9742fe175b9142aeb59c8c3508b2d9054204f829",
+    "range": "all",
+    "status": "full",
+    "read_at": "2026-09-27T14:16:54.721527+00:00",
+    "role": "Full JSON content read in batches55-64; compact output preserves every key/value, duplicate keys checked. Legacy package inputs, expectations and provider inventories are not fresh execution, verified authority, noninterference or generic source-to-network evidence."
+  },
+  {
+    "path": "samples/practical-alpha1/packages/src-01-minimal-world/package.mir.json",
+    "sha256": "179657a076a7806c8ddfe05e5fcbfacce03ffaf3290dca28b8c72a716ee43cd9",
+    "range": "all",
+    "status": "full",
+    "read_at": "2026-09-27T14:16:54.721527+00:00",
+    "role": "Full JSON content read in batches55-64; compact output preserves every key/value, duplicate keys checked. Legacy package inputs, expectations and provider inventories are not fresh execution, verified authority, noninterference or generic source-to-network evidence."
+  },
+  {
+    "path": "samples/practical-alpha1/packages/src-02-fallback-chain/package.mir.json",
+    "sha256": "45ab0b522b6c528debd697266e31f6f4a867955e29acc05667d1b88e24a706ec",
+    "range": "all",
+    "status": "full",
+    "read_at": "2026-09-27T14:16:54.721527+00:00",
+    "role": "Full JSON content read in batches55-64; compact output preserves every key/value, duplicate keys checked. Legacy package inputs, expectations and provider inventories are not fresh execution, verified authority, noninterference or generic source-to-network evidence."
+  },
+  {
+    "path": "samples/practical-alpha1/packages/src-03-layer-debug/package.mir.json",
+    "sha256": "b38c57fcfbc6880095dd953e9ce28f6adc79893ee55df61ff6c2ae71668b1a9a",
+    "range": "all",
+    "status": "full",
+    "read_at": "2026-09-27T14:16:54.721527+00:00",
+    "role": "Full JSON content read in batches55-64; compact output preserves every key/value, duplicate keys checked. Legacy package inputs, expectations and provider inventories are not fresh execution, verified authority, noninterference or generic source-to-network evidence."
+  },
+  {
+    "path": "samples/practical-alpha1/packages/src-04-layer-manifest/package.mir.json",
+    "sha256": "1650b5eac61eccfb43326db03dd0bcf215504df61f46298053811c5922718a3f",
+    "range": "all",
+    "status": "full",
+    "read_at": "2026-09-27T14:16:54.721527+00:00",
+    "role": "Full JSON content read in batches55-64; compact output preserves every key/value, duplicate keys checked. Legacy package inputs, expectations and provider inventories are not fresh execution, verified authority, noninterference or generic source-to-network evidence."
+  },
+  {
+    "path": "samples/practical-alpha1/packages/src-05-invalid-syntax/package.mir.json",
+    "sha256": "47069b67d2959fcd5ee9f2e5b77428610f8c17c3a3a22605219f3139e9fe12e0",
+    "range": "all",
+    "status": "full",
+    "read_at": "2026-09-27T14:16:54.721527+00:00",
+    "role": "Full raw read of intentionally malformed JSON fixture; missing comma after world. Reader parse failure is expected, not a runtime regression."
+  },
+  {
+    "path": "samples/practical-alpha1/packages/tr-a1-01-local-tcp-accepted/package.mir.json",
+    "sha256": "b9e101c47d4338e23d13ee818e1eb7efb02620d3853df6d319e2768fb71a81d8",
+    "range": "all",
+    "status": "full",
+    "read_at": "2026-09-27T14:16:54.721527+00:00",
+    "role": "Full JSON content read in batches55-64; compact output preserves every key/value, duplicate keys checked. Legacy package inputs, expectations and provider inventories are not fresh execution, verified authority, noninterference or generic source-to-network evidence."
+  },
+  {
+    "path": "samples/practical-alpha1/packages/tr-a1-02-docker-two-node-accepted/package.mir.json",
+    "sha256": "26fd33271cf4179f497fd7be3412ae9f3e966dd8f65d776eb779297a1cc30cb2",
+    "range": "all",
+    "status": "full",
+    "read_at": "2026-09-27T14:16:54.721527+00:00",
+    "role": "Full JSON content read in batches55-64; compact output preserves every key/value, duplicate keys checked. Legacy package inputs, expectations and provider inventories are not fresh execution, verified authority, noninterference or generic source-to-network evidence."
+  },
+  {
+    "path": "samples/practical-alpha1/packages/tr-a1-03-stale-membership-rejected/package.mir.json",
+    "sha256": "ff6ab3284dca419b734884dc6eb75c52ec2d8d5d700cae0712f390701312e274",
+    "range": "all",
+    "status": "full",
+    "read_at": "2026-09-27T14:16:54.721527+00:00",
+    "role": "Full JSON content read in batches55-64; compact output preserves every key/value, duplicate keys checked. Legacy package inputs, expectations and provider inventories are not fresh execution, verified authority, noninterference or generic source-to-network evidence."
+  },
+  {
+    "path": "samples/practical-alpha1/packages/tr-a1-04-missing-capability-rejected/package.mir.json",
+    "sha256": "abf9b2ee95e5f3a8e718b3666a65f07475c7b8ab70e0f56c88fb15f63af9c1e6",
+    "range": "all",
+    "status": "full",
+    "read_at": "2026-09-27T14:16:54.721527+00:00",
+    "role": "Full JSON content read in batches55-64; compact output preserves every key/value, duplicate keys checked. Legacy package inputs, expectations and provider inventories are not fresh execution, verified authority, noninterference or generic source-to-network evidence."
+  },
+  {
+    "path": "samples/practical-alpha1/packages/tr-a1-05-missing-witness-rejected/package.mir.json",
+    "sha256": "45064e7753aed63a992861fec2d73cf81160658a9ece470b466c93b3c81f13dc",
+    "range": "all",
+    "status": "full",
+    "read_at": "2026-09-27T14:16:54.721527+00:00",
+    "role": "Full JSON content read in batches55-64; compact output preserves every key/value, duplicate keys checked. Legacy package inputs, expectations and provider inventories are not fresh execution, verified authority, noninterference or generic source-to-network evidence."
+  },
+  {
+    "path": "samples/practical-alpha1/packages/tr-a1-06-observer-safe-route-trace/package.mir.json",
+    "sha256": "347178ab7841dd4d8e63c82a821455711359835f1e9919c151b18c96f3461e28",
+    "range": "all",
+    "status": "full",
+    "read_at": "2026-09-27T14:16:54.721527+00:00",
+    "role": "Full JSON content read in batches55-64; compact output preserves every key/value, duplicate keys checked. Legacy package inputs, expectations and provider inventories are not fresh execution, verified authority, noninterference or generic source-to-network evidence."
+  },
+  {
+    "path": "samples/practical-alpha1/packages/tr-a1-07-auth-lane-preserved/package.mir.json",
+    "sha256": "a794e1a1cb935f19aa44127f5418bc714331ed6c6ac5f6f23a88cc3ed56c0312",
+    "range": "all",
+    "status": "full",
+    "read_at": "2026-09-27T14:16:54.721527+00:00",
+    "role": "Full JSON content read in batches55-64; compact output preserves every key/value, duplicate keys checked. Legacy package inputs, expectations and provider inventories are not fresh execution, verified authority, noninterference or generic source-to-network evidence."
+  },
+  {
+    "path": "samples/practical-alpha1/previews/pe2e-a1-01-local-full-toolchain-preview/preview.json",
+    "sha256": "d9f0ae55bf524dacb3799eca8b30c7684b67b4e1acfb94d1a367eb8362931978",
+    "range": "all",
+    "status": "full",
+    "read_at": "2026-09-27T14:16:54.721527+00:00",
+    "role": "Full JSON content read in batches55-64; compact output preserves every key/value, duplicate keys checked. Legacy package inputs, expectations and provider inventories are not fresh execution, verified authority, noninterference or generic source-to-network evidence."
+  },
+  {
+    "path": "samples/practical-alpha1/previews/pe2e-a1-02-docker-full-toolchain-preview/preview.json",
+    "sha256": "4bae8f2e52ed158d7b051b273c78042605e9cae23597824969ed6d44380b08f9",
+    "range": "all",
+    "status": "full",
+    "read_at": "2026-09-27T14:16:54.721527+00:00",
+    "role": "Full JSON content read in batches55-64; compact output preserves every key/value, duplicate keys checked. Legacy package inputs, expectations and provider inventories are not fresh execution, verified authority, noninterference or generic source-to-network evidence."
+  },
+  {
+    "path": "samples/practical-alpha1/previews/pe2e-a1-03-hotplug-debug-layer-preview/preview.json",
+    "sha256": "8d8703d2731dcba809f5cf5010c9dc3186a9cebdb16d61651d4fc9c9495518a9",
+    "range": "all",
+    "status": "full",
+    "read_at": "2026-09-27T14:16:54.721527+00:00",
+    "role": "Full JSON content read in batches55-64; compact output preserves every key/value, duplicate keys checked. Legacy package inputs, expectations and provider inventories are not fresh execution, verified authority, noninterference or generic source-to-network evidence."
+  },
+  {
+    "path": "samples/practical-alpha1/previews/pe2e-a1-04-placeholder-object-preview/preview.json",
+    "sha256": "66752db58f099492a2e17c7b3c1207505bbce52208e039212b7b4d895bdb487d",
+    "range": "all",
+    "status": "full",
+    "read_at": "2026-09-27T14:16:54.721527+00:00",
+    "role": "Full JSON content read in batches55-64; compact output preserves every key/value, duplicate keys checked. Legacy package inputs, expectations and provider inventories are not fresh execution, verified authority, noninterference or generic source-to-network evidence."
+  },
+  {
+    "path": "samples/practical-alpha1/previews/pe2e-a1-05-local-save-load-continue/preview.json",
+    "sha256": "550e5fae24703cedb046d3cd33e370eee312433575fe6745d79ab405892c6df2",
+    "range": "all",
+    "status": "full",
+    "read_at": "2026-09-27T14:16:54.721527+00:00",
+    "role": "Full JSON content read in batches55-64; compact output preserves every key/value, duplicate keys checked. Legacy package inputs, expectations and provider inventories are not fresh execution, verified authority, noninterference or generic source-to-network evidence."
+  },
+  {
+    "path": "samples/practical-alpha1/previews/pe2e-a1-06-invalid-distributed-save-rejected/preview.json",
+    "sha256": "455fe0c41d6563088cebd4c096f2ccae6309b6632f64f8d508fe208681487039",
+    "range": "all",
+    "status": "full",
+    "read_at": "2026-09-27T14:16:54.721527+00:00",
+    "role": "Full JSON content read in batches55-64; compact output preserves every key/value, duplicate keys checked. Legacy package inputs, expectations and provider inventories are not fresh execution, verified authority, noninterference or generic source-to-network evidence."
+  },
+  {
+    "path": "samples/practical-alpha1/previews/pe2e-a1-07-devtools-viewer-preview/preview.json",
+    "sha256": "8777648116ef0ac91985c26b55db6a2b8cfe7913f0ab1f947705b19faec5df88",
+    "range": "all",
+    "status": "full",
+    "read_at": "2026-09-27T14:16:54.721527+00:00",
+    "role": "Full JSON content read in batches55-64; compact output preserves every key/value, duplicate keys checked. Legacy package inputs, expectations and provider inventories are not fresh execution, verified authority, noninterference or generic source-to-network evidence."
+  },
+  {
+    "path": "samples/practical-alpha1/previews/pe2e-a1-08-custom-avatar-companion-preview/preview.json",
+    "sha256": "48e44da602302fc0714157310a3694e7dbe2b2245cade3bb13f849a8123c350a",
+    "range": "all",
+    "status": "full",
+    "read_at": "2026-09-27T14:16:54.721527+00:00",
+    "role": "Full JSON content read in batches55-64; compact output preserves every key/value, duplicate keys checked. Legacy package inputs, expectations and provider inventories are not fresh execution, verified authority, noninterference or generic source-to-network evidence."
+  },
+  {
+    "path": "samples/practical-alpha1/previews/pe2e-a1-09-unsupported-runtime-visible-fallback-preview/preview.json",
+    "sha256": "c4c561b06cb1d2df6a005a6563ede27cbdd38d37b98834397b99dcdfd0e46187",
+    "range": "all",
+    "status": "full",
+    "read_at": "2026-09-27T14:16:54.721527+00:00",
+    "role": "Full JSON content read in batches55-64; compact output preserves every key/value, duplicate keys checked. Legacy package inputs, expectations and provider inventories are not fresh execution, verified authority, noninterference or generic source-to-network evidence."
+  },
+  {
+    "path": "samples/product-alpha1/computational/add-one-pure-mir/package.mir.json",
+    "sha256": "7125695f15415f8c1a061d5394f15aaed472311a475e3d73cf1587cb951f4d8f",
+    "range": "all",
+    "status": "full",
+    "read_at": "2026-09-27T14:16:54.721527+00:00",
+    "role": "Full JSON content read in batches55-64; compact output preserves every key/value, duplicate keys checked. Legacy package inputs, expectations and provider inventories are not fresh execution, verified authority, noninterference or generic source-to-network evidence."
+  },
+  {
+    "path": "samples/product-alpha1/computational/arrays-bounds/negative/direct-world/package.mir.json",
+    "sha256": "7d833a2c2e41a5dfc695246716e1a8343a5a3d1dca26bc29d9b6d0d86370d8f3",
+    "range": "all",
+    "status": "full",
+    "read_at": "2026-09-27T14:16:54.721527+00:00",
+    "role": "Full JSON content read in batches55-64; compact output preserves every key/value, duplicate keys checked. Legacy package inputs, expectations and provider inventories are not fresh execution, verified authority, noninterference or generic source-to-network evidence."
+  },
+  {
+    "path": "samples/product-alpha1/computational/arrays-bounds/negative/package.mir.json",
+    "sha256": "80ac9129eed38a1c50dd8e338c4aae156f04932ca36c9b74c1db2e95d65a7ea0",
+    "range": "all",
+    "status": "full",
+    "read_at": "2026-09-27T14:16:54.721527+00:00",
+    "role": "Full JSON content read in batches55-64; compact output preserves every key/value, duplicate keys checked. Legacy package inputs, expectations and provider inventories are not fresh execution, verified authority, noninterference or generic source-to-network evidence."
+  },
+  {
+    "path": "samples/product-alpha1/computational/arrays-bounds/positive/package.mir.json",
+    "sha256": "b7acccd514cf5fcc8cd54fb87c0b2714de62f59e8a850bc0fe94b6477638e77c",
+    "range": "all",
+    "status": "full",
+    "read_at": "2026-09-27T14:16:54.721527+00:00",
+    "role": "Full JSON content read in batches55-64; compact output preserves every key/value, duplicate keys checked. Legacy package inputs, expectations and provider inventories are not fresh execution, verified authority, noninterference or generic source-to-network evidence."
+  },
+  {
+    "path": "samples/product-alpha1/computational/control-flow/negative/package.mir.json",
+    "sha256": "2a081c1cb2b5f35f9c6a55167841070e6573aab36bbe16f4c6af99a6ca68a3cd",
+    "range": "all",
+    "status": "full",
+    "read_at": "2026-09-27T14:16:54.721527+00:00",
+    "role": "Full JSON content read in batches55-64; compact output preserves every key/value, duplicate keys checked. Legacy package inputs, expectations and provider inventories are not fresh execution, verified authority, noninterference or generic source-to-network evidence."
+  },
+  {
+    "path": "samples/product-alpha1/computational/control-flow/positive/direct-world/package.mir.json",
+    "sha256": "af09bf1cf56c341b6f91e7572b0f20c67e8f1b9942730270bdf753fae0da1fa3",
+    "range": "all",
+    "status": "full",
+    "read_at": "2026-09-27T14:16:54.721527+00:00",
+    "role": "Full JSON content read in batches55-64; compact output preserves every key/value, duplicate keys checked. Legacy package inputs, expectations and provider inventories are not fresh execution, verified authority, noninterference or generic source-to-network evidence."
+  },
+  {
+    "path": "samples/product-alpha1/computational/control-flow/positive/package.mir.json",
+    "sha256": "e9f97f2ca90ba3fbb2602bd9407d39eff30275034fdf30fe27a493b66abe35f2",
+    "range": "all",
+    "status": "full",
+    "read_at": "2026-09-27T14:16:54.721527+00:00",
+    "role": "Full JSON content read in batches55-64; compact output preserves every key/value, duplicate keys checked. Legacy package inputs, expectations and provider inventories are not fresh execution, verified authority, noninterference or generic source-to-network evidence."
+  },
+  {
+    "path": "samples/product-alpha1/computational/expected/add-one-pure-mir.expected.json",
+    "sha256": "a57b9dda72ab2b031829690c1f0085bff67d2d79cd7e83b8f97ecd35ec62b40c",
+    "range": "all",
+    "status": "full",
+    "read_at": "2026-09-27T14:16:54.721527+00:00",
+    "role": "Full JSON content read in batches55-64; compact output preserves every key/value, duplicate keys checked. Legacy package inputs, expectations and provider inventories are not fresh execution, verified authority, noninterference or generic source-to-network evidence."
+  },
+  {
+    "path": "samples/product-alpha1/computational/host-io-internal-transform/negative-missing-capability/package.mir.json",
+    "sha256": "fb167bb59b2c0e8e74035749e7154a67919609b350ca5ae98c437c189f4e5d34",
+    "range": "all",
+    "status": "full",
+    "read_at": "2026-09-27T14:16:54.721527+00:00",
+    "role": "Full JSON content read in batches55-64; compact output preserves every key/value, duplicate keys checked. Legacy package inputs, expectations and provider inventories are not fresh execution, verified authority, noninterference or generic source-to-network evidence."
+  },
+  {
+    "path": "samples/product-alpha1/computational/host-io-internal-transform/negative-undeclared-effect/package.mir.json",
+    "sha256": "fc5bc6bd9a13234b75e703b1744c46bd0f29a15521e7175f1c6e66c038d59f3d",
+    "range": "all",
+    "status": "full",
+    "read_at": "2026-09-27T14:16:54.721527+00:00",
+    "role": "Full JSON content read in batches55-64; compact output preserves every key/value, duplicate keys checked. Legacy package inputs, expectations and provider inventories are not fresh execution, verified authority, noninterference or generic source-to-network evidence."
+  },
+  {
+    "path": "samples/product-alpha1/computational/host-io-internal-transform/negative-undeclared-failure/package.mir.json",
+    "sha256": "26fb976337c59d0aeec11f096b1fad526e126e5bbd752ee2a661a5ee21611a20",
+    "range": "all",
+    "status": "full",
+    "read_at": "2026-09-27T14:16:54.721527+00:00",
+    "role": "Full JSON content read in batches55-64; compact output preserves every key/value, duplicate keys checked. Legacy package inputs, expectations and provider inventories are not fresh execution, verified authority, noninterference or generic source-to-network evidence."
+  },
+  {
+    "path": "samples/product-alpha1/computational/host-io-internal-transform/positive/package.mir.json",
+    "sha256": "55a6602e52a1edab5995d999ffca90b3e492b5f668e95f91ed967f7c563a55fd",
+    "range": "all",
+    "status": "full",
+    "read_at": "2026-09-27T14:16:54.721527+00:00",
+    "role": "Full JSON content read in batches55-64; compact output preserves every key/value, duplicate keys checked. Legacy package inputs, expectations and provider inventories are not fresh execution, verified authority, noninterference or generic source-to-network evidence."
+  },
+  {
+    "path": "samples/product-alpha1/computational/imports-functions/negative/package.mir.json",
+    "sha256": "5e6f81465c43ce80c71ffeea412101c99cdce6fa258a1262549f59894a218f13",
+    "range": "all",
+    "status": "full",
+    "read_at": "2026-09-27T14:16:54.721527+00:00",
+    "role": "Full JSON content read in batches55-64; compact output preserves every key/value, duplicate keys checked. Legacy package inputs, expectations and provider inventories are not fresh execution, verified authority, noninterference or generic source-to-network evidence."
+  },
+  {
+    "path": "samples/product-alpha1/computational/imports-functions/positive/package.mir.json",
+    "sha256": "b58a4925d20c6f6788da18450dca7069e9054bbf093afd959d3b3623a746b555",
+    "range": "all",
+    "status": "full",
+    "read_at": "2026-09-27T14:16:54.721527+00:00",
+    "role": "Full JSON content read in batches55-64; compact output preserves every key/value, duplicate keys checked. Legacy package inputs, expectations and provider inventories are not fresh execution, verified authority, noninterference or generic source-to-network evidence."
+  },
+  {
+    "path": "samples/product-alpha1/computational/matrix.json",
+    "sha256": "1d6562d8baa1a8cdd8eebe50794ecf9ce755daae66add8a4670ea7be0872a300",
+    "range": "all",
+    "status": "full",
+    "read_at": "2026-09-27T14:16:54.721527+00:00",
+    "role": "Full JSON content read in batches55-64; compact output preserves every key/value, duplicate keys checked. Legacy package inputs, expectations and provider inventories are not fresh execution, verified authority, noninterference or generic source-to-network evidence."
+  },
+  {
+    "path": "samples/product-alpha1/computational/records-vec3/negative/package.mir.json",
+    "sha256": "8df9f6ffd7cc4801849bcc3ec4df9c7424702547d535bcf9cfa4ec410f6d0330",
+    "range": "all",
+    "status": "full",
+    "read_at": "2026-09-27T14:16:54.721527+00:00",
+    "role": "Full JSON content read in batches55-64; compact output preserves every key/value, duplicate keys checked. Legacy package inputs, expectations and provider inventories are not fresh execution, verified authority, noninterference or generic source-to-network evidence."
+  },
+  {
+    "path": "samples/product-alpha1/computational/records-vec3/positive/package.mir.json",
+    "sha256": "7499a47c0ab019398674dabb81bb712969d2f6b415a83fc787167fc247c681b7",
+    "range": "all",
+    "status": "full",
+    "read_at": "2026-09-27T14:16:54.721527+00:00",
+    "role": "Full JSON content read in batches55-64; compact output preserves every key/value, duplicate keys checked. Legacy package inputs, expectations and provider inventories are not fresh execution, verified authority, noninterference or generic source-to-network evidence."
+  },
+  {
+    "path": "samples/product-alpha1/computational/variables-scope/negative/direct-world/package.mir.json",
+    "sha256": "220452b11ea7410f889833e05ee9519b884036bd74b708cd4f401ef1bc5c41b1",
+    "range": "all",
+    "status": "full",
+    "read_at": "2026-09-27T14:16:54.721527+00:00",
+    "role": "Full JSON content read in batches55-64; compact output preserves every key/value, duplicate keys checked. Legacy package inputs, expectations and provider inventories are not fresh execution, verified authority, noninterference or generic source-to-network evidence."
+  },
+  {
+    "path": "samples/product-alpha1/computational/variables-scope/negative/package.mir.json",
+    "sha256": "d6e0fa12796d46d9bb1664eba7a55841ce4cddebdfb5a9997fa2242b424ad274",
+    "range": "all",
+    "status": "full",
+    "read_at": "2026-09-27T14:16:54.721527+00:00",
+    "role": "Full JSON content read in batches55-64; compact output preserves every key/value, duplicate keys checked. Legacy package inputs, expectations and provider inventories are not fresh execution, verified authority, noninterference or generic source-to-network evidence."
+  },
+  {
+    "path": "samples/product-alpha1/computational/variables-scope/positive/package.mir.json",
+    "sha256": "6f04cc168ab73d033a4fab7cc7712f886f5b11826d895a8b1bce6dbbfa6ab33e",
+    "range": "all",
+    "status": "full",
+    "read_at": "2026-09-27T14:16:54.721527+00:00",
+    "role": "Full JSON content read in batches55-64; compact output preserves every key/value, duplicate keys checked. Legacy package inputs, expectations and provider inventories are not fresh execution, verified authority, noninterference or generic source-to-network evidence."
+  },
+  {
+    "path": "samples/product-alpha1/demo/package.mir.json",
+    "sha256": "9ce3409b20056e4cc4bc446a5bce43ec721c66af3701d20a385e9fc13b5f8eb8",
+    "range": "all",
+    "status": "full",
+    "read_at": "2026-09-27T14:16:54.721527+00:00",
+    "role": "Full JSON content read in batches55-64; compact output preserves every key/value, duplicate keys checked. Legacy package inputs, expectations and provider inventories are not fresh execution, verified authority, noninterference or generic source-to-network evidence."
+  },
+  {
+    "path": "samples/product-alpha1/demo/packages/auth-layer/package.mir.json",
+    "sha256": "12d79b21e8845c614ce1c1dbe3ac241aecc1bf31123e5c749fc59a5a9990ea2e",
+    "range": "all",
+    "status": "full",
+    "read_at": "2026-09-27T14:16:54.721527+00:00",
+    "role": "Full JSON content read in batches55-64; compact output preserves every key/value, duplicate keys checked. Legacy package inputs, expectations and provider inventories are not fresh execution, verified authority, noninterference or generic source-to-network evidence."
+  },
+  {
+    "path": "samples/product-alpha1/demo/packages/custom-avatar-preview/package.mir.json",
+    "sha256": "f67b3437247bb520576d94842ab224afbb35f06d050dbf1b20381ffc19e1ac73",
+    "range": "all",
+    "status": "full",
+    "read_at": "2026-09-27T14:16:54.721527+00:00",
+    "role": "Full JSON content read in batches55-64; compact output preserves every key/value, duplicate keys checked. Legacy package inputs, expectations and provider inventories are not fresh execution, verified authority, noninterference or generic source-to-network evidence."
+  },
+  {
+    "path": "samples/product-alpha1/demo/packages/debug-layer/package.mir.json",
+    "sha256": "7f5a093d8201fc1c491a4a4f8d426257d498280d6b8db93b7f92c92d8b23c6d0",
+    "range": "all",
+    "status": "full",
+    "read_at": "2026-09-27T14:16:54.721527+00:00",
+    "role": "Full JSON content read in batches55-64; compact output preserves every key/value, duplicate keys checked. Legacy package inputs, expectations and provider inventories are not fresh execution, verified authority, noninterference or generic source-to-network evidence."
+  },
+  {
+    "path": "samples/product-alpha1/demo/packages/placeholder-object/package.mir.json",
+    "sha256": "fbc75833bb2f145bea46db3cd37ae95d9f263c9471756850fb2c5dc9cb400644",
+    "range": "all",
+    "status": "full",
+    "read_at": "2026-09-27T14:16:54.721527+00:00",
+    "role": "Full JSON content read in batches55-64; compact output preserves every key/value, duplicate keys checked. Legacy package inputs, expectations and provider inventories are not fresh execution, verified authority, noninterference or generic source-to-network evidence."
+  },
+  {
+    "path": "samples/product-alpha1/demo/packages/rate-limit-layer/package.mir.json",
+    "sha256": "c3bdbdc4de5cb63496781191397e6bddb70e0b807377ed93e83770da4d72c257",
+    "range": "all",
+    "status": "full",
+    "read_at": "2026-09-27T14:16:54.721527+00:00",
+    "role": "Full JSON content read in batches55-64; compact output preserves every key/value, duplicate keys checked. Legacy package inputs, expectations and provider inventories are not fresh execution, verified authority, noninterference or generic source-to-network evidence."
+  },
+  {
+    "path": "samples/product-alpha1/engine-adapter/asset-loader/asset-loader.contract.json",
+    "sha256": "607b4e2c5b3a58c19452fac81220dedf64252ef723f89f1c14d01ac3fac541e7",
+    "range": "all",
+    "status": "full",
+    "read_at": "2026-09-27T14:16:54.721527+00:00",
+    "role": "Full JSON content read in batches55-64; compact output preserves every key/value, duplicate keys checked. Legacy package inputs, expectations and provider inventories are not fresh execution, verified authority, noninterference or generic source-to-network evidence."
+  },
+  {
+    "path": "samples/product-alpha1/engine-adapter/host-runtime-bridge/host-runtime-bridge.contract.json",
+    "sha256": "840f17c098df1e5f9560a9eca63aebf51e92f11b0f6157c7a19347368300f43f",
+    "range": "all",
+    "status": "full",
+    "read_at": "2026-09-27T14:16:54.721527+00:00",
+    "role": "Full JSON content read in batches55-64; compact output preserves every key/value, duplicate keys checked. Legacy package inputs, expectations and provider inventories are not fresh execution, verified authority, noninterference or generic source-to-network evidence."
+  },
+  {
+    "path": "samples/product-alpha1/engine-adapter/input-device/input-device.contract.json",
+    "sha256": "f475c65aeb3d9e3d0dcdc02cba02cf4f5057b4261ca9a3443fde67d3f7e50d47",
+    "range": "all",
+    "status": "full",
+    "read_at": "2026-09-27T14:16:54.721527+00:00",
+    "role": "Full JSON content read in batches55-64; compact output preserves every key/value, duplicate keys checked. Legacy package inputs, expectations and provider inventories are not fresh execution, verified authority, noninterference or generic source-to-network evidence."
+  },
+  {
+    "path": "samples/product-alpha1/engine-adapter/matrix.json",
+    "sha256": "743ff7389ba5d54d888a7408694a3f6ff8b6db04731e3b110d27840ace120376",
+    "range": "all",
+    "status": "full",
+    "read_at": "2026-09-27T14:16:54.721527+00:00",
+    "role": "Full JSON content read in batches55-64; compact output preserves every key/value, duplicate keys checked. Legacy package inputs, expectations and provider inventories are not fresh execution, verified authority, noninterference or generic source-to-network evidence."
+  },
+  {
+    "path": "samples/product-alpha1/engine-adapter/native-library-bridge/native-library-bridge.contract.json",
+    "sha256": "e351740b9abd8da4a9ad15643bdc945638694e390065a58724ce2aac29dfecfe",
+    "range": "all",
+    "status": "full",
+    "read_at": "2026-09-27T14:16:54.721527+00:00",
+    "role": "Full JSON content read in batches55-64; compact output preserves every key/value, duplicate keys checked. Legacy package inputs, expectations and provider inventories are not fresh execution, verified authority, noninterference or generic source-to-network evidence."
+  },
+  {
+    "path": "samples/product-alpha1/engine-adapter/physics-spatial-query/physics-spatial-query.contract.json",
+    "sha256": "cf3e8e4a59107d41f98129a6dc271946a5b03907d9af47cf9c5b028bc8b3a7f4",
+    "range": "all",
+    "status": "full",
+    "read_at": "2026-09-27T14:16:54.721527+00:00",
+    "role": "Full JSON content read in batches55-64; compact output preserves every key/value, duplicate keys checked. Legacy package inputs, expectations and provider inventories are not fresh execution, verified authority, noninterference or generic source-to-network evidence."
+  },
+  {
+    "path": "samples/product-alpha1/engine-adapter/renderer/renderer.contract.json",
+    "sha256": "0546145bc82e24ec07de2c0d6b48d1715ef8351fe7f1fed5182a11e11318c764",
+    "range": "all",
+    "status": "full",
+    "read_at": "2026-09-27T14:16:54.721527+00:00",
+    "role": "Full JSON content read in batches55-64; compact output preserves every key/value, duplicate keys checked. Legacy package inputs, expectations and provider inventories are not fresh execution, verified authority, noninterference or generic source-to-network evidence."
+  },
+  {
+    "path": "samples/product-alpha1/engine-adapter/viewer-diagnostic-exporter/viewer-diagnostic-exporter.contract.json",
+    "sha256": "71faf5e68a9afd3ff1976c3528404f5d34a6b9d5a84d6a74db92b3d83a133323",
+    "range": "all",
+    "status": "full",
+    "read_at": "2026-09-27T14:16:54.721527+00:00",
+    "role": "Full JSON content read in batches55-64; compact output preserves every key/value, duplicate keys checked. Legacy package inputs, expectations and provider inventories are not fresh execution, verified authority, noninterference or generic source-to-network evidence."
+  },
+  {
+    "path": "samples/product-alpha1/engine-adapter/wasm-sandbox/wasm-sandbox.contract.json",
+    "sha256": "750d2cf7f6023a64cb76d9330d1f29e633629bb50bc999e028045b3197b29c98",
+    "range": "all",
+    "status": "full",
+    "read_at": "2026-09-27T14:16:54.721527+00:00",
+    "role": "Full JSON content read in batches55-64; compact output preserves every key/value, duplicate keys checked. Legacy package inputs, expectations and provider inventories are not fresh execution, verified authority, noninterference or generic source-to-network evidence."
+  },
+  {
+    "path": "samples/product-alpha1/operational/deployments/local/deployment.profile.json",
+    "sha256": "0a03f553fc0c1274831295a758c10b1a08edaf8ef6aa21b040fc0edde3522671",
+    "range": "all",
+    "status": "full",
+    "read_at": "2026-09-27T14:16:54.721527+00:00",
+    "role": "Full JSON content read in batches55-64; compact output preserves every key/value, duplicate keys checked. Legacy package inputs, expectations and provider inventories are not fresh execution, verified authority, noninterference or generic source-to-network evidence."
+  },
+  {
+    "path": "samples/product-alpha1/operational/deployments/projection/projection.profile.json",
+    "sha256": "d3432d6201189f8796f0fbb6e510bfce239c2592477d1438ec85181e4205f319",
+    "range": "all",
+    "status": "full",
+    "read_at": "2026-09-27T14:16:54.721527+00:00",
+    "role": "Full JSON content read in batches55-64; compact output preserves every key/value, duplicate keys checked. Legacy package inputs, expectations and provider inventories are not fresh execution, verified authority, noninterference or generic source-to-network evidence."
+  },
+  {
+    "path": "samples/product-alpha1/operational/expected/devtools-panels.expected.json",
+    "sha256": "f7f711eeac318c78436b627711418b1209a1a36337b3f9da4b2b5cf9e01296fb",
+    "range": "all",
+    "status": "full",
+    "read_at": "2026-09-27T14:16:54.721527+00:00",
+    "role": "Full JSON content read in batches55-64; compact output preserves every key/value, duplicate keys checked. Legacy package inputs, expectations and provider inventories are not fresh execution, verified authority, noninterference or generic source-to-network evidence."
+  },
+  {
+    "path": "samples/product-alpha1/operational/expected/future-boundary.expected.json",
+    "sha256": "763391a09b028215e7213a4c9c0a4394ec094d34d794173c724abcad6cb32916",
+    "range": "all",
+    "status": "full",
+    "read_at": "2026-09-27T14:16:54.721527+00:00",
+    "role": "Full JSON content read in batches55-64; compact output preserves every key/value, duplicate keys checked. Legacy package inputs, expectations and provider inventories are not fresh execution, verified authority, noninterference or generic source-to-network evidence."
+  },
+  {
+    "path": "samples/product-alpha1/operational/expected/workflow.expected.json",
+    "sha256": "5155d26c5c143f08d6bbd3cac568e93f83e8cf3d734c18fb98acbfcd3ff63be9",
+    "range": "all",
+    "status": "full",
+    "read_at": "2026-09-27T14:16:54.721527+00:00",
+    "role": "Full JSON content read in batches55-64; compact output preserves every key/value, duplicate keys checked. Legacy package inputs, expectations and provider inventories are not fresh execution, verified authority, noninterference or generic source-to-network evidence."
+  },
+  {
+    "path": "samples/product-alpha1/operational/future/gradient-observation.profile.json",
+    "sha256": "cbd450c6af361317e7423e9e51ae35d3edc49fdb88e7ba4709794bc7bd1bc239",
+    "range": "all",
+    "status": "full",
+    "read_at": "2026-09-27T14:16:54.721527+00:00",
+    "role": "Full JSON content read in batches55-64; compact output preserves every key/value, duplicate keys checked. Legacy package inputs, expectations and provider inventories are not fresh execution, verified authority, noninterference or generic source-to-network evidence."
+  },
+  {
+    "path": "samples/product-alpha1/operational/future/portal-worldlink/portal-worldlink.package.mir.json",
+    "sha256": "3861d32a9a4bd16d904211540e279a2c67ae216211794675242cc45e9a471fe0",
+    "range": "all",
+    "status": "full",
+    "read_at": "2026-09-27T14:16:54.721527+00:00",
+    "role": "Full JSON content read in batches55-64; compact output preserves every key/value, duplicate keys checked. Legacy package inputs, expectations and provider inventories are not fresh execution, verified authority, noninterference or generic source-to-network evidence."
+  },
+  {
+    "path": "samples/product-alpha1/operational/future/spatial-shard-future.profile.json",
+    "sha256": "1e6b03775d84b6eb320544ebd1879c6e3bcc5bcd479306738a347653be60bb60",
+    "range": "all",
+    "status": "full",
+    "read_at": "2026-09-27T14:16:54.721527+00:00",
+    "role": "Full JSON content read in batches55-64; compact output preserves every key/value, duplicate keys checked. Legacy package inputs, expectations and provider inventories are not fresh execution, verified authority, noninterference or generic source-to-network evidence."
+  },
+  {
+    "path": "samples/product-alpha1/operational/membership-chat/package.mir.json",
+    "sha256": "ee42767154c1b4619b3ce67e85a950152fad4c782459d86f3998654dc4bf664f",
+    "range": "all",
+    "status": "full",
+    "read_at": "2026-09-27T14:16:54.721527+00:00",
+    "role": "Full JSON content read in batches55-64; compact output preserves every key/value, duplicate keys checked. Legacy package inputs, expectations and provider inventories are not fresh execution, verified authority, noninterference or generic source-to-network evidence."
+  },
+  {
+    "path": "samples/product-alpha1/operational/packages/auth-layer/package.mir.json",
+    "sha256": "6bd1c175c4a1f7d0da46d6bd58cf2876033668fa49717844d8e19cb3613dc1c3",
+    "range": "all",
+    "status": "full",
+    "read_at": "2026-09-27T14:16:54.721527+00:00",
+    "role": "Full JSON content read in batches55-64; compact output preserves every key/value, duplicate keys checked. Legacy package inputs, expectations and provider inventories are not fresh execution, verified authority, noninterference or generic source-to-network evidence."
+  },
+  {
+    "path": "samples/product-alpha1/operational/packages/custom-avatar-preview/package.mir.json",
+    "sha256": "5062839cc950d871651d1871a892c3199cfa198e241efcc3174b6aef62c9e253",
+    "range": "all",
+    "status": "full",
+    "read_at": "2026-09-27T14:16:54.721527+00:00",
+    "role": "Full JSON content read in batches55-64; compact output preserves every key/value, duplicate keys checked. Legacy package inputs, expectations and provider inventories are not fresh execution, verified authority, noninterference or generic source-to-network evidence."
+  },
+  {
+    "path": "samples/product-alpha1/operational/packages/debug-layer/package.mir.json",
+    "sha256": "63643b2baef2d03414ebb1fb194771fe24518f97008b590ab2c57c16dd5a1e39",
+    "range": "all",
+    "status": "full",
+    "read_at": "2026-09-27T14:16:54.721527+00:00",
+    "role": "Full JSON content read in batches55-64; compact output preserves every key/value, duplicate keys checked. Legacy package inputs, expectations and provider inventories are not fresh execution, verified authority, noninterference or generic source-to-network evidence."
+  },
+  {
+    "path": "samples/product-alpha1/operational/packages/placeholder-object/package.mir.json",
+    "sha256": "89543a4678567e87a4ce4856c1dddfdff072fdaea1e9ce72742825f8a252ffff",
+    "range": "all",
+    "status": "full",
+    "read_at": "2026-09-27T14:16:54.721527+00:00",
+    "role": "Full JSON content read in batches55-64; compact output preserves every key/value, duplicate keys checked. Legacy package inputs, expectations and provider inventories are not fresh execution, verified authority, noninterference or generic source-to-network evidence."
+  },
+  {
+    "path": "samples/product-alpha1/operational/packages/rate-limit-layer/package.mir.json",
+    "sha256": "d2a8cb67aa7fde44b01ffac2caf0fb26c1b9745880aadbb7bd42a96533de20cb",
+    "range": "all",
+    "status": "full",
+    "read_at": "2026-09-27T14:16:54.721527+00:00",
+    "role": "Full JSON content read in batches55-64; compact output preserves every key/value, duplicate keys checked. Legacy package inputs, expectations and provider inventories are not fresh execution, verified authority, noninterference or generic source-to-network evidence."
+  },
+  {
+    "path": "samples/product-alpha1/operational/portal-worldlink/package.mir.json",
+    "sha256": "beaa14ff5dc3cff61f86f7dd7d4e58a7c9310e8b51d8db34635dd4e61eedf864",
+    "range": "all",
+    "status": "full",
+    "read_at": "2026-09-27T14:16:54.721527+00:00",
+    "role": "Full JSON content read in batches55-64; compact output preserves every key/value, duplicate keys checked. Legacy package inputs, expectations and provider inventories are not fresh execution, verified authority, noninterference or generic source-to-network evidence."
+  },
+  {
+    "path": "samples/product-alpha1/operational/sugoroku-world/package.mir.json",
+    "sha256": "11ae42a216431897539769e13aa1ea0484672de4a9a7b7e0c889dc842b0c3e03",
+    "range": "all",
+    "status": "full",
+    "read_at": "2026-09-27T14:16:54.721527+00:00",
+    "role": "Full JSON content read in batches55-64; compact output preserves every key/value, duplicate keys checked. Legacy package inputs, expectations and provider inventories are not fresh execution, verified authority, noninterference or generic source-to-network evidence."
+  },
+  {
+    "path": "samples/product-alpha1/operational/templates/membership-chat-starter/package.mir.json",
+    "sha256": "49ec6988052399860ee09b32b5f697a910503c2e4f8f53b31cd5cdf65e5b0fc0",
+    "range": "all",
+    "status": "full",
+    "read_at": "2026-09-27T14:16:54.721527+00:00",
+    "role": "Full JSON content read in batches55-64; compact output preserves every key/value, duplicate keys checked. Legacy package inputs, expectations and provider inventories are not fresh execution, verified authority, noninterference or generic source-to-network evidence."
+  },
+  {
+    "path": "samples/product-alpha1/operational/templates/sugoroku-world-starter/package.mir.json",
+    "sha256": "e1cd42b5b3cf4253923ea592d84f0c4f3454471a22e3515dd8cb9e0ad8393d0e",
+    "range": "all",
+    "status": "full",
+    "read_at": "2026-09-27T14:16:54.721527+00:00",
+    "role": "Full JSON content read in batches55-64; compact output preserves every key/value, duplicate keys checked. Legacy package inputs, expectations and provider inventories are not fresh execution, verified authority, noninterference or generic source-to-network evidence."
+  },
+  {
+    "path": "samples/product-alpha1/operational/templates/world-core-starter/package.mir.json",
+    "sha256": "3c6a3cafd25fd7a0cf4c9ebadd6ca2607287abc7ab5a22893638b75b79aee28d",
+    "range": "all",
+    "status": "full",
+    "read_at": "2026-09-27T14:16:54.721527+00:00",
+    "role": "Full JSON content read in batches55-64; compact output preserves every key/value, duplicate keys checked. Legacy package inputs, expectations and provider inventories are not fresh execution, verified authority, noninterference or generic source-to-network evidence."
+  },
+  {
+    "path": "samples/product-alpha1/operational/two-shard-gradient-observation/package.mir.json",
+    "sha256": "532e5feb8988424c811d4fbb75e57d6a9e9b16f426931d209a4b312d83d6e3e7",
+    "range": "all",
+    "status": "full",
+    "read_at": "2026-09-27T14:16:54.721527+00:00",
+    "role": "Full JSON content read in batches55-64; compact output preserves every key/value, duplicate keys checked. Legacy package inputs, expectations and provider inventories are not fresh execution, verified authority, noninterference or generic source-to-network evidence."
+  },
+  {
+    "path": "samples/product-alpha1/operational/two-shard-hard-boundary/package.mir.json",
+    "sha256": "d3b3798d2fe08340962c0cb6671daf24582741981921c43e9c114d434e1785d7",
+    "range": "all",
+    "status": "full",
+    "read_at": "2026-09-27T14:16:54.721527+00:00",
+    "role": "Full JSON content read in batches55-64; compact output preserves every key/value, duplicate keys checked. Legacy package inputs, expectations and provider inventories are not fresh execution, verified authority, noninterference or generic source-to-network evidence."
+  },
+  {
+    "path": "samples/product-alpha1/operational/world-core/package.mir.json",
+    "sha256": "4960eab94562aadfe4d5b8e1293b547263a96e140bf2c924413d07981932c79f",
+    "range": "all",
+    "status": "full",
+    "read_at": "2026-09-27T14:16:54.721527+00:00",
+    "role": "Full JSON content read in batches55-64; compact output preserves every key/value, duplicate keys checked. Legacy package inputs, expectations and provider inventories are not fresh execution, verified authority, noninterference or generic source-to-network evidence."
+  },
+  {
+    "path": "samples/product-alpha1/posegraph/matrix.json",
+    "sha256": "ebab0305e6416043968b67d06c73fe0596796a1d9e21c0cf4087795c9b3a5b31",
+    "range": "all",
+    "status": "full",
+    "read_at": "2026-09-27T14:16:54.721527+00:00",
+    "role": "Full JSON content read in batches55-64; compact output preserves every key/value, duplicate keys checked. Legacy package inputs, expectations and provider inventories are not fresh execution, verified authority, noninterference or generic source-to-network evidence."
+  },
+  {
+    "path": "samples/product-alpha1/posegraph/no-split-frame-positive/package.mir.json",
+    "sha256": "86d2bcec921c95b078b5d3aaaf56c18be9a31f472ecbda727667b6ce5a51635e",
+    "range": "all",
+    "status": "full",
+    "read_at": "2026-09-27T14:16:54.721527+00:00",
+    "role": "Full JSON content read in batches55-64; compact output preserves every key/value, duplicate keys checked. Legacy package inputs, expectations and provider inventories are not fresh execution, verified authority, noninterference or generic source-to-network evidence."
+  },
+  {
+    "path": "samples/product-alpha1/posegraph/split-frame-negative/package.mir.json",
+    "sha256": "1048a210c65149f73ba2d10281e8d57a1ec837c020e9d6c88341f6d74ffd276c",
+    "range": "all",
+    "status": "full",
+    "read_at": "2026-09-27T14:16:54.721527+00:00",
+    "role": "Full JSON content read in batches55-64; compact output preserves every key/value, duplicate keys checked. Legacy package inputs, expectations and provider inventories are not fresh execution, verified authority, noninterference or generic source-to-network evidence."
+  },
+  {
+    "path": "samples/product-alpha1/projection/ffi-boundary-schema/ffi-boundary-schema.json",
+    "sha256": "d000dcba4e27d435c069a1a2f1daf08c0084b50f53569876a94443629141776a",
+    "range": "all",
+    "status": "full",
+    "read_at": "2026-09-27T14:16:54.721527+00:00",
+    "role": "Full JSON content read in batches55-64; compact output preserves every key/value, duplicate keys checked. Legacy package inputs, expectations and provider inventories are not fresh execution, verified authority, noninterference or generic source-to-network evidence."
+  },
+  {
+    "path": "samples/product-alpha1/projection/manifest-provider-compatibility/manifest-provider-compatibility.json",
+    "sha256": "ca82792aa945b01e57036afd39cfb2a6c5af9e921c99c50e61a95d4a32584d59",
+    "range": "all",
+    "status": "full",
+    "read_at": "2026-09-27T14:16:54.721527+00:00",
+    "role": "Full JSON content read in batches55-64; compact output preserves every key/value, duplicate keys checked. Legacy package inputs, expectations and provider inventories are not fresh execution, verified authority, noninterference or generic source-to-network evidence."
+  },
+  {
+    "path": "samples/product-alpha1/projection/matrix.json",
+    "sha256": "74797595dc20616b7fd03b0473c5ffc55433bf31f609628ffbea3814d8078a72",
+    "range": "all",
+    "status": "full",
+    "read_at": "2026-09-27T14:16:54.721527+00:00",
+    "role": "Full JSON content read in batches55-64; compact output preserves every key/value, duplicate keys checked. Legacy package inputs, expectations and provider inventories are not fresh execution, verified authority, noninterference or generic source-to-network evidence."
+  },
+  {
+    "path": "samples/product-alpha1/projection/packet-boundary-schema/packet-boundary-schema.json",
+    "sha256": "6a6d9a556aaedf933d8a5099fe56aa10da1d6a2e91ebbc35e29aff35dfb41bb6",
+    "range": "all",
+    "status": "full",
+    "read_at": "2026-09-27T14:16:54.721527+00:00",
+    "role": "Full JSON content read in batches55-64; compact output preserves every key/value, duplicate keys checked. Legacy package inputs, expectations and provider inventories are not fresh execution, verified authority, noninterference or generic source-to-network evidence."
+  },
+  {
+    "path": "samples/product-alpha1/projection/server-client-target-manifest/server-client-target-manifest.json",
+    "sha256": "73e9113e94a38cc4c6896e3c475ab27bebafa79770923ebc16daca8ce02f57ed",
+    "range": "all",
+    "status": "full",
+    "read_at": "2026-09-27T14:16:54.721527+00:00",
+    "role": "Full JSON content read in batches55-64; compact output preserves every key/value, duplicate keys checked. Legacy package inputs, expectations and provider inventories are not fresh execution, verified authority, noninterference or generic source-to-network evidence."
+  },
+  {
+    "path": "samples/prototype/current-l2-dynamic-attach-detach/p03-avatar-controller-attach-detach.host-plan.json",
+    "sha256": "48396f9d656924c35b8d5803c7334e0f0f097e4c3b187fd09c6cdf459a0f867d",
+    "range": "all",
+    "status": "full",
+    "read_at": "2026-09-27T14:16:54.721527+00:00",
+    "role": "Full JSON content read in batches55-64; compact output preserves every key/value, duplicate keys checked. Legacy package inputs, expectations and provider inventories are not fresh execution, verified authority, noninterference or generic source-to-network evidence."
+  },
+  {
+    "path": "docs/project-status.md",
+    "sha256": "acffac6cd01b10227ba157e142d8a85bdeb93710ead2fb1992a14da69ef9ff23",
+    "range": "all",
+    "status": "full",
+    "read_at": "2026-09-27T14:18:09.872431+00:00",
+    "role": "Full current LAB status snapshot read; historical and current evidence kept separate."
+  },
+  {
+    "path": "docs/proof-first/CURRENT_GOAL.md",
+    "sha256": "fa3757e44870ce4b6fc783e5fe7a8cb2cf4516b70f924891d81f6aa0ff3800c4",
+    "range": "all",
+    "status": "full",
+    "read_at": "2026-09-27T14:18:09.872431+00:00",
+    "role": "Full current W4 task-local scope and gates read; B open, C/D/E dependency gated."
+  },
+  {
+    "path": "plan/proof-first-foundation-correspondence.md",
+    "sha256": "a2e3567da42b2677c9df4feb1cfe2ccb0400d762f515ad2b465868eeb3eeae76",
+    "range": "all",
+    "status": "full",
+    "read_at": "2026-09-27T14:18:09.872431+00:00",
+    "role": "Current lines845-1407 fully read; lines1-844 matched against previously full-read exact blob c1d7d85fed3eae34c5f58888b5777cfdf2f521099a7fdc4bfa759cf9bd634533 at5d7c13a821c912d14c347775e23493a77f790768, full diff read. No whole-roadmap adoption."
+  },
+  {
+    "path": "samples/README.md",
+    "sha256": "29b7dd01409e18571f221eb381bee729dc3f954a4572679d71f40d5eb1669ed9",
+    "range": "all",
+    "status": "full",
+    "read_at": "2026-09-27T14:19:53.387182+00:00",
+    "role": "Full current sample taxonomy and commands read in contiguous lines1-EOF; legacy fixture roots distinct from active samples."
+  },
+  {
+    "path": "samples/lean/README.md",
+    "sha256": "8e0d068d6c45555db97adc644c4708d62fd244268094a14432c190b5e453f679",
+    "range": "all",
+    "status": "full",
+    "read_at": "2026-09-27T14:19:53.387182+00:00",
+    "role": "Full current read followed by sole-main correction of stale validation status using verified existing B receipts; scope review pending."
+  },
+  {
+    "path": "docs/proof-first/REQUIREMENT_DISPOSITIONS.json",
+    "sha256": "59cc7366bc3d9d3fc9c756c532764fbdf88587eb15dbe0a00d43e6b8c1317dae",
+    "range": "all",
+    "status": "full",
+    "read_at": "2026-09-27T14:19:53.387182+00:00",
+    "role": "Full metadata/evidence groups and all119 rows read in five consecutive batches. W3-era snapshot retains stale VF07/OP05/MG03/MG05/MG06 pending/current text; not current W4 state or new acceptance. E reconciliation owed."
+  },
+  {
+    "path": "plan/proof-first-foundation-correspondence.md",
+    "sha256": "9c0ae6a44fa279676e46fe0efe76aee05306560885cb6e24d6c88c2b50551056",
+    "range": "all",
+    "status": "full",
+    "read_at": "2026-09-27T14:21:25.193426+00:00",
+    "role": "Previously full current read plus sole-main authored R09/R10 forward reconciliation; no new overall plan or requirement acceptance."
   }
 ]
