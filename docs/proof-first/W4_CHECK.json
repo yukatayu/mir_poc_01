@@ -2,7 +2,7 @@
   "schema": "proof-first-w4-check-v1",
   "timestamp": "2026-09-27T13:15:50.144382+00:00",
   "base_head": "5d7c13a821c912d14c347775e23493a77f790768",
-  "status": "Code/proof/observed workflow committed and pushed; B final scope review unavailable after backend errors; B not closed",
+  "status": "B code integrated/pushed; final boundary review blocked by actual Cloudflare challenge before retry submission; B incomplete",
   "work_root": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration",
   "publication_component": {
     "modules": {
@@ -19474,7 +19474,7 @@
   "integration_20260926": {
     "at": "2026-09-26T07:02:51.918904+00:00",
     "base_head": "ad9256c6e276634118de1fb6a40bddf6171c9f38",
-    "status": "Code/proof/observed workflow committed and pushed; B final scope review unavailable after backend errors; B not closed",
+    "status": "B code integrated/pushed; final boundary review blocked by actual Cloudflare challenge before retry submission; B incomplete",
     "work_root": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration",
     "quota_policy": "2026-09-27の追加owner指示で、今回の実行も残量による停止を外して同じW4を継続します。リセットはownerが行い、主担当は操作しません。W5+とPlan250/I3-4は開始しません。過去のquota停止・検査記録はReport2614に保持します。",
     "source_manifest": "docs/proof-first/W4_SOURCE_MANIFEST.json",
@@ -19504,7 +19504,7 @@
       },
       "outcome": "failed manual-login timeout; no answer, user notified asynchronously; do not auto-resend before authentication is available"
     },
-    "next": "Browser repair then same frozen final boundary review; dependent C activation held. Independent required reading can continue.",
+    "next": "Human visible-browser verification; same frozen final review; independent required reading can continue. C/D/E held.",
     "oracle_retry": {
       "at": "2026-09-26T05:23:42.612748+00:00",
       "session": "mir-w4-integration-design-retry1",
@@ -41169,10 +41169,48 @@
     },
     "remaining_review_blocker": {
       "first_recorded": "2026-09-27T13:14:01.779Z",
-      "status": "user recovery confirmation pending; actual response error, not normal live waiting",
+      "status": "visible Cloudflare Just a moment challenge; no generating job; human browser verification pending",
       "required": "final B scope/Canon-first advisory review before B closure/C activation",
       "question": "Dedicated visible Chrome normal ChatGPT request usability",
-      "no_account_reset": true
+      "no_account_reset": true,
+      "last_checked": "2026-09-27T13:34:47.145Z",
+      "next": "After browser verification, inspect and submit same frozen packet once under existing resend authorization; no new semantic permission gate."
+    },
+    "closeout_review_retry1": {
+      "at": "2026-09-27T13:28:27.145617+00:00",
+      "session": "mir-w4-b-closeout-retry1",
+      "pid": 3096587,
+      "question_sha256": "2330f40901f29f83b911257034e543b398c38b6617364df1644fd7f96faf2cff",
+      "manifest_sha256": "a9a8af489c72d3297989160dc758c2c193b8f86ab4c14cd16d4688dcfc93f496",
+      "display": ":0",
+      "model_evidence": "owner confirmed visible 6 Pro selection; current strategy; no automated verification claimed",
+      "next_status_after": "2026-09-27T13:31:27.145617+00:00",
+      "scope": "single read-only frozen current implementation review; no outer deadline or paid fallback",
+      "tool_session": 63460,
+      "wrapper_exit": 1,
+      "status": "terminal Cloudflare browser challenge before prompt submission; user verification required",
+      "prompt_submitted": false,
+      "target": "9A30EFDFEA193B5825274D43996250E5",
+      "ui_receipt": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/oracle-b-closeout-retry1/UI_FAILURE_CHECK.json"
+    },
+    "reading_20260927_continuation": {
+      "at": "2026-09-27T13:38:52.842100+00:00",
+      "lean_full": 38,
+      "expected_json_full": 35,
+      "ledger": "docs/proof-first/READ_LEDGER.json",
+      "new_validation": false,
+      "scope": "M3-M7 finite/self-contained theorem boundaries; W1 fixed-step versus abort, pure finite completeness, publication/reference private model provenance, historical sample expected data. No fresh proof/kernel/network pass, no C activation. Wider corpus incomplete.",
+      "later_json_full": 43,
+      "total_json_full": 78
+    },
+    "challenge_reading_validation": {
+      "at": "2026-09-27T13:43:46.633130+00:00",
+      "command": "python3 scripts/validate_docs.py",
+      "tool_session": 23124,
+      "whole_exit": 0,
+      "log": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/DOCS_B_CHALLENGE_READING.log",
+      "sha256": "9411ce6df198430b0df20ebab3882faf2425318d3ed1ee85e5f11ed17175a116",
+      "scope": "Metadata/status delta; later receipt and remaining read-ledger metadata appended after validation. No code/proof/baseline rerun."
     }
   },
   "header_history": [

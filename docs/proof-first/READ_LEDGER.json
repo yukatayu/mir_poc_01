@@ -40569,5 +40569,933 @@
     "status": "full",
     "read_at": "2026-09-27T13:21:39.221048+00:00",
     "role": "R09 current label algebra/control reading; law certificate preserves exact tables but grants no authority to replace policy; two-run theorem conditional on the same selected policy and total typed pure runtime"
+  },
+  {
+    "path": "samples/lean/foundations/MirroreaProofFirstPublicationExecution.lean",
+    "sha256": "a88c0699a2aa44283b75559a199537e8266e29d72ac976e8099c33625dfc0765",
+    "range": "all",
+    "status": "full",
+    "read_at": "2026-09-27T13:29:29.266567+00:00",
+    "role": "W4 required corpus/current publication reference and controls: explicit received mathematical input is not owner provenance; cancellation outcome differs from session state; normal schedule is possible not fair/available; current physical checks remain separate"
+  },
+  {
+    "path": "samples/lean/foundations/MirroreaProofFirstPublicationOutcome.lean",
+    "sha256": "e37c5c495036884b14e30b8ae298095b081af881b80e8329d9e44ef965b86cfd",
+    "range": "all",
+    "status": "full",
+    "read_at": "2026-09-27T13:29:29.266567+00:00",
+    "role": "W4 required corpus/current publication reference and controls: explicit received mathematical input is not owner provenance; cancellation outcome differs from session state; normal schedule is possible not fair/available; current physical checks remain separate"
+  },
+  {
+    "path": "samples/lean/foundations/MirroreaProofFirstPublicationExecutionControls.lean",
+    "sha256": "33817923a9f2875ba35180ce9893b5d7f6bde8b152d326578972e9e8a579ed46",
+    "range": "all",
+    "status": "full",
+    "read_at": "2026-09-27T13:29:29.266567+00:00",
+    "role": "W4 required corpus/current publication reference and controls: explicit received mathematical input is not owner provenance; cancellation outcome differs from session state; normal schedule is possible not fair/available; current physical checks remain separate"
+  },
+  {
+    "path": "samples/lean/foundations/MirroreaProofFirstPublicationControls.lean",
+    "sha256": "ebe679fbbde0b8fe6eb2fb8f83f86242ce189357211c454fc399ca53a25469a6",
+    "range": "all",
+    "status": "full",
+    "read_at": "2026-09-27T13:29:29.266567+00:00",
+    "role": "W4 required corpus/current publication reference and controls: explicit received mathematical input is not owner provenance; cancellation outcome differs from session state; normal schedule is possible not fair/available; current physical checks remain separate"
+  },
+  {
+    "path": "samples/lean/foundations/MirroreaProofFirstPublicationCounterexamples.lean",
+    "sha256": "db52bef9b40a8bde9afcb7c488c19a9dcd236c0f67b073e2395fe1eddcb3333b",
+    "range": "all",
+    "status": "full",
+    "read_at": "2026-09-27T13:29:29.266567+00:00",
+    "role": "W4 required corpus/current publication reference and controls: explicit received mathematical input is not owner provenance; cancellation outcome differs from session state; normal schedule is possible not fair/available; current physical checks remain separate"
+  },
+  {
+    "path": "samples/lean/foundations/MirroreaProofFirstPublicationOutcomeControls.lean",
+    "sha256": "e6adba48ea5f24f6d803c2d118b8e49f8fa605c295542cf055d069fa28f3597b",
+    "range": "all",
+    "status": "full",
+    "read_at": "2026-09-27T13:29:29.266567+00:00",
+    "role": "W4 required corpus/current publication reference and controls: explicit received mathematical input is not owner provenance; cancellation outcome differs from session state; normal schedule is possible not fair/available; current physical checks remain separate"
+  },
+  {
+    "path": "samples/lean/foundations/MirroreaProofFirstPublicationProjectionControls.lean",
+    "sha256": "7dbdf2ef84f7e041044c9da767d287c31e360a7cf056f5bdea89e34ea0017b8b",
+    "range": "all",
+    "status": "full",
+    "read_at": "2026-09-27T13:29:29.266567+00:00",
+    "role": "W4 required corpus/current publication reference and controls: explicit received mathematical input is not owner provenance; cancellation outcome differs from session state; normal schedule is possible not fair/available; current physical checks remain separate"
+  },
+  {
+    "path": "samples/lean/foundations/MirroreaProofFirstPublicationSourceControls.lean",
+    "sha256": "5c7b174e7e6e62e9525a3467a6b312c339037cd378ca6d4237120468f1795bed",
+    "range": "all",
+    "status": "full",
+    "read_at": "2026-09-27T13:29:29.266567+00:00",
+    "role": "W4 required corpus/current publication reference and controls: explicit received mathematical input is not owner provenance; cancellation outcome differs from session state; normal schedule is possible not fair/available; current physical checks remain separate"
+  },
+  {
+    "path": "samples/lean/foundations/MirroreaProofFirstPublicationUseControls.lean",
+    "sha256": "6969e72ad5ddc2c6b3d79a96fefd59ee773b6e23dfb4bd025e789bc79532af93",
+    "range": "all",
+    "status": "full",
+    "read_at": "2026-09-27T13:29:29.266567+00:00",
+    "role": "W4 required corpus/current publication reference and controls: explicit received mathematical input is not owner provenance; cancellation outcome differs from session state; normal schedule is possible not fair/available; current physical checks remain separate"
+  },
+  {
+    "path": "samples/lean/foundations/MirroreaProofFirstReceivedResultControls.lean",
+    "sha256": "f22bec85357a260a4630801b7eb96fcb45c697feda1d21789b196c987ae91386",
+    "range": "all",
+    "status": "full",
+    "read_at": "2026-09-27T13:29:29.266567+00:00",
+    "role": "W4 required corpus/current publication reference and controls: explicit received mathematical input is not owner provenance; cancellation outcome differs from session state; normal schedule is possible not fair/available; current physical checks remain separate"
+  },
+  {
+    "path": "samples/lean/foundations/MirroreaProofFirstReferenceSourceReads.lean",
+    "sha256": "b306a1ac975de0e7f8b8db11a2a9f44815c4651c7e73b86ee2cd0f7c0433a470",
+    "range": "all",
+    "status": "full",
+    "read_at": "2026-09-27T13:34:30.866360+00:00",
+    "role": "W4 required corpus: full read before continuation compaction; source provenance, history non-resurrection, cancellation single history, pure contract bridge, explicit authority and catalog all-locus-drain counterexample; finite controls are not network or general availability evidence"
+  },
+  {
+    "path": "samples/lean/foundations/MirroreaProofFirstSourceReadNames.lean",
+    "sha256": "951d2cde8e01c45698523150f9f590a48022bc67d8811f680bb8d2fa055d73ca",
+    "range": "all",
+    "status": "full",
+    "read_at": "2026-09-27T13:34:30.866793+00:00",
+    "role": "W4 required corpus: full read before continuation compaction; source provenance, history non-resurrection, cancellation single history, pure contract bridge, explicit authority and catalog all-locus-drain counterexample; finite controls are not network or general availability evidence"
+  },
+  {
+    "path": "samples/lean/foundations/MirroreaProofFirstReferenceCancellationTrace.lean",
+    "sha256": "93f4d4da62d08b038e189bfa648b9bd6d444b13fa899013a930de82710d7fbb2",
+    "range": "all",
+    "status": "full",
+    "read_at": "2026-09-27T13:34:30.867203+00:00",
+    "role": "W4 required corpus: full read before continuation compaction; source provenance, history non-resurrection, cancellation single history, pure contract bridge, explicit authority and catalog all-locus-drain counterexample; finite controls are not network or general availability evidence"
+  },
+  {
+    "path": "samples/lean/foundations/MirroreaProofFirstReferenceHoldingTrace.lean",
+    "sha256": "902e3b4eff9fb8cc7b6eb46cdae564c02f0d122c8e63b9c83bc6680b2e596193",
+    "range": "all",
+    "status": "full",
+    "read_at": "2026-09-27T13:34:30.867641+00:00",
+    "role": "W4 required corpus: full read before continuation compaction; source provenance, history non-resurrection, cancellation single history, pure contract bridge, explicit authority and catalog all-locus-drain counterexample; finite controls are not network or general availability evidence"
+  },
+  {
+    "path": "samples/lean/foundations/MirroreaProofFirstSavedInvocation.lean",
+    "sha256": "65a9e88a728019d58e613b9841faa6d501d118cc80b0105feed0f74f3b032b40",
+    "range": "all",
+    "status": "full",
+    "read_at": "2026-09-27T13:34:30.868145+00:00",
+    "role": "W4 required corpus: full read before continuation compaction; source provenance, history non-resurrection, cancellation single history, pure contract bridge, explicit authority and catalog all-locus-drain counterexample; finite controls are not network or general availability evidence"
+  },
+  {
+    "path": "samples/lean/foundations/MirroreaProofFirstFunctionContractBridge.lean",
+    "sha256": "30d0fdebd061fda9b8ba58f837e196d2dc68d99811b6108507dc62c175bb4fa4",
+    "range": "all",
+    "status": "full",
+    "read_at": "2026-09-27T13:34:30.868584+00:00",
+    "role": "W4 required corpus: full read before continuation compaction; source provenance, history non-resurrection, cancellation single history, pure contract bridge, explicit authority and catalog all-locus-drain counterexample; finite controls are not network or general availability evidence"
+  },
+  {
+    "path": "samples/lean/foundations/MirroreaProofFirstCatalogCounterexamples.lean",
+    "sha256": "cce8638b28bcd7a7431388ae791852feea24a3c87500b39376e53b1cf3619c20",
+    "range": "all",
+    "status": "full",
+    "read_at": "2026-09-27T13:34:30.868987+00:00",
+    "role": "W4 required corpus: full read before continuation compaction; source provenance, history non-resurrection, cancellation single history, pure contract bridge, explicit authority and catalog all-locus-drain counterexample; finite controls are not network or general availability evidence"
+  },
+  {
+    "path": "samples/lean/foundations/MirroreaProofFirstReferenceAccessControls.lean",
+    "sha256": "e05c526bb01cdaf0ffecb6f0005f38034422726472ac3e630e47619d4a47c24a",
+    "range": "all",
+    "status": "full",
+    "read_at": "2026-09-27T13:34:30.869430+00:00",
+    "role": "W4 required corpus: full read before continuation compaction; source provenance, history non-resurrection, cancellation single history, pure contract bridge, explicit authority and catalog all-locus-drain counterexample; finite controls are not network or general availability evidence"
+  },
+  {
+    "path": "samples/lean/foundations/MirroreaProofFirstReferenceAccessHistoryControls.lean",
+    "sha256": "9c0071869b0a15ecda1298facff68c66c38b535fed623ae534c6e78dfa3d4dba",
+    "range": "all",
+    "status": "full",
+    "read_at": "2026-09-27T13:34:30.869856+00:00",
+    "role": "W4 required corpus: full read before continuation compaction; source provenance, history non-resurrection, cancellation single history, pure contract bridge, explicit authority and catalog all-locus-drain counterexample; finite controls are not network or general availability evidence"
+  },
+  {
+    "path": "samples/lean/foundations/MirroreaProofFirstReferenceExecutionControls.lean",
+    "sha256": "1d9a963485e8b73b6bd3dcb888cb3062c5d7164eb64fd5edf9e3f0cfb36e69e6",
+    "range": "all",
+    "status": "full",
+    "read_at": "2026-09-27T13:34:30.870247+00:00",
+    "role": "W4 required corpus: full read before continuation compaction; source provenance, history non-resurrection, cancellation single history, pure contract bridge, explicit authority and catalog all-locus-drain counterexample; finite controls are not network or general availability evidence"
+  },
+  {
+    "path": "samples/lean/foundations/MirroreaProofFirstReferenceHoldingControls.lean",
+    "sha256": "095a52d9555e99a0daf4446b5a6f1224016e25bc9913eacb1bf66fc33e623015",
+    "range": "all",
+    "status": "full",
+    "read_at": "2026-09-27T13:34:30.870642+00:00",
+    "role": "W4 required corpus: full read before continuation compaction; source provenance, history non-resurrection, cancellation single history, pure contract bridge, explicit authority and catalog all-locus-drain counterexample; finite controls are not network or general availability evidence"
+  },
+  {
+    "path": "samples/lean/foundations/MirroreaProofFirstReferenceMutationControls.lean",
+    "sha256": "d418adfc3307164a080e31c3efa7658febb07e2c2e09ebdf13379bca85a1df93",
+    "range": "all",
+    "status": "full",
+    "read_at": "2026-09-27T13:34:30.871034+00:00",
+    "role": "W4 required corpus: full read before continuation compaction; source provenance, history non-resurrection, cancellation single history, pure contract bridge, explicit authority and catalog all-locus-drain counterexample; finite controls are not network or general availability evidence"
+  },
+  {
+    "path": "samples/lean/foundations/MirroreaProofFirstReferenceOwnerControls.lean",
+    "sha256": "e1a7cd1a7c7ab8fb779b3530d0d34407182b49e848b33ffbcea19a0288c02d68",
+    "range": "all",
+    "status": "full",
+    "read_at": "2026-09-27T13:34:30.871461+00:00",
+    "role": "W4 required corpus: full read before continuation compaction; source provenance, history non-resurrection, cancellation single history, pure contract bridge, explicit authority and catalog all-locus-drain counterexample; finite controls are not network or general availability evidence"
+  },
+  {
+    "path": "samples/lean/foundations/MirroreaProofFirstReferenceSelectionControls.lean",
+    "sha256": "1cb75ad973ba59e996f24a9ba24fb4c1bb90831b37306d9ddd8fe12ac73087b6",
+    "range": "all",
+    "status": "full",
+    "read_at": "2026-09-27T13:34:30.872113+00:00",
+    "role": "W4 required corpus: full read before continuation compaction; source provenance, history non-resurrection, cancellation single history, pure contract bridge, explicit authority and catalog all-locus-drain counterexample; finite controls are not network or general availability evidence"
+  },
+  {
+    "path": "samples/lean/foundations/MirroreaProofFirstFallbackStaticControls.lean",
+    "sha256": "36293d11d7f239e711cb33682999e734ed25a649c4a8f56333ea100bf14285c4",
+    "range": "all",
+    "status": "full",
+    "read_at": "2026-09-27T13:36:37.929881+00:00",
+    "role": "W4 mandatory full read: fixed-step vs abort-flow scope; pure finite execution relative completeness; private worker scope; M3-M7 bounded/self-contained evidence does not prove generic Rust/runtime correspondence or recovery"
+  },
+  {
+    "path": "samples/lean/foundations/MirroreaProofFirstSourceHistoryControls.lean",
+    "sha256": "49aaba606faabce8eb6a6e4732e71d2dae57239ab89431a1064fafecab5f2678",
+    "range": "all",
+    "status": "full",
+    "read_at": "2026-09-27T13:36:37.930169+00:00",
+    "role": "W4 mandatory full read: fixed-step vs abort-flow scope; pure finite execution relative completeness; private worker scope; M3-M7 bounded/self-contained evidence does not prove generic Rust/runtime correspondence or recovery"
+  },
+  {
+    "path": "samples/lean/foundations/MirroreaProofFirstFallibleFlow.lean",
+    "sha256": "a799c7b6301684ea258097993bb3ebdb9eb32e51fa24b1603542f363de0929d9",
+    "range": "all",
+    "status": "full",
+    "read_at": "2026-09-27T13:36:37.930422+00:00",
+    "role": "W4 mandatory full read: fixed-step vs abort-flow scope; pure finite execution relative completeness; private worker scope; M3-M7 bounded/self-contained evidence does not prove generic Rust/runtime correspondence or recovery"
+  },
+  {
+    "path": "samples/lean/foundations/MirroreaProofFirstProducerFlow.lean",
+    "sha256": "fa5a585d1652bcda7ec61cc7b12442d07bdd079cda4effb1d7794cc2f1db6785",
+    "range": "all",
+    "status": "full",
+    "read_at": "2026-09-27T13:36:37.930721+00:00",
+    "role": "W4 mandatory full read: fixed-step vs abort-flow scope; pure finite execution relative completeness; private worker scope; M3-M7 bounded/self-contained evidence does not prove generic Rust/runtime correspondence or recovery"
+  },
+  {
+    "path": "samples/lean/foundations/MirroreaProofFirstPureFunctions.lean",
+    "sha256": "d222377d63006235ab1a97aca8073757d716a55f37f19e2b4d41d59aaf370d86",
+    "range": "all",
+    "status": "full",
+    "read_at": "2026-09-27T13:36:37.930959+00:00",
+    "role": "W4 mandatory full read: fixed-step vs abort-flow scope; pure finite execution relative completeness; private worker scope; M3-M7 bounded/self-contained evidence does not prove generic Rust/runtime correspondence or recovery"
+  },
+  {
+    "path": "samples/lean/foundations/MirroreaProofFirstReferenceSourceControls.lean",
+    "sha256": "7e25b1c528919942be564883cf9239b9d2be230868e62c1e5d7f7edc208c1fea",
+    "range": "all",
+    "status": "full",
+    "read_at": "2026-09-27T13:36:37.931190+00:00",
+    "role": "W4 mandatory full read: fixed-step vs abort-flow scope; pure finite execution relative completeness; private worker scope; M3-M7 bounded/self-contained evidence does not prove generic Rust/runtime correspondence or recovery"
+  },
+  {
+    "path": "samples/lean/host-reference/OwnerBudgetWorker.lean",
+    "sha256": "3e5bb2022ea134b62d133aa0af4ab98007d48de335f9dfb07e0bbc337c227cbc",
+    "range": "all",
+    "status": "full",
+    "read_at": "2026-09-27T13:36:37.931419+00:00",
+    "role": "W4 mandatory full read: fixed-step vs abort-flow scope; pure finite execution relative completeness; private worker scope; M3-M7 bounded/self-contained evidence does not prove generic Rust/runtime correspondence or recovery"
+  },
+  {
+    "path": "samples/lean/host-reference/SourceFundingQueryWorker.lean",
+    "sha256": "2ca78a52cfdcdd5b593473a1609dcff6eecf889dd3eb21f93c4123f2f1ced4cd",
+    "range": "all",
+    "status": "full",
+    "read_at": "2026-09-27T13:36:37.931646+00:00",
+    "role": "W4 mandatory full read: fixed-step vs abort-flow scope; pure finite execution relative completeness; private worker scope; M3-M7 bounded/self-contained evidence does not prove generic Rust/runtime correspondence or recovery"
+  },
+  {
+    "path": "samples/lean/host-reference/SourceInputControls.lean",
+    "sha256": "33d63bc66bf10c27ea015136b17d558946313bfcf4bf62b995c0a21523eaf501",
+    "range": "all",
+    "status": "full",
+    "read_at": "2026-09-27T13:36:37.931872+00:00",
+    "role": "W4 mandatory full read: fixed-step vs abort-flow scope; pure finite execution relative completeness; private worker scope; M3-M7 bounded/self-contained evidence does not prove generic Rust/runtime correspondence or recovery"
+  },
+  {
+    "path": "samples/lean/foundations/MirTheoryV0M3EvaluationMaterialization.lean",
+    "sha256": "038865f3d55025841dd5318e8b9e42fa7f111608fb75497befe416d258413e08",
+    "range": "all",
+    "status": "full",
+    "read_at": "2026-09-27T13:36:37.932107+00:00",
+    "role": "W4 mandatory full read: fixed-step vs abort-flow scope; pure finite execution relative completeness; private worker scope; M3-M7 bounded/self-contained evidence does not prove generic Rust/runtime correspondence or recovery"
+  },
+  {
+    "path": "samples/lean/foundations/MirTheoryV0M4MaintainedRelationProjection.lean",
+    "sha256": "1d08bc9005c41c1edcb89db004e648dc978f056de5816722a51c8938808e50d5",
+    "range": "all",
+    "status": "full",
+    "read_at": "2026-09-27T13:36:37.932327+00:00",
+    "role": "W4 mandatory full read: fixed-step vs abort-flow scope; pure finite execution relative completeness; private worker scope; M3-M7 bounded/self-contained evidence does not prove generic Rust/runtime correspondence or recovery"
+  },
+  {
+    "path": "samples/lean/foundations/MirTheoryV0M5SharedModel.lean",
+    "sha256": "fd7e15370f5df6b1e2d48a8d194cab7fe832367ab5e51abb31d80df9ece20d87",
+    "range": "all",
+    "status": "full",
+    "read_at": "2026-09-27T13:36:37.932599+00:00",
+    "role": "W4 mandatory full read: fixed-step vs abort-flow scope; pure finite execution relative completeness; private worker scope; M3-M7 bounded/self-contained evidence does not prove generic Rust/runtime correspondence or recovery"
+  },
+  {
+    "path": "samples/lean/foundations/MirTheoryV0M6Surface.lean",
+    "sha256": "ef566b3731aad00ad64f97fe4ff6433464fb27c3488e62da5964c1edd56058de",
+    "range": "all",
+    "status": "full",
+    "read_at": "2026-09-27T13:36:37.932837+00:00",
+    "role": "W4 mandatory full read: fixed-step vs abort-flow scope; pure finite execution relative completeness; private worker scope; M3-M7 bounded/self-contained evidence does not prove generic Rust/runtime correspondence or recovery"
+  },
+  {
+    "path": "samples/lean/foundations/MirTheoryV0M7CheckedElaboration.lean",
+    "sha256": "b938884220dc1371bcf68b90b5ecf440bd33c6b9c341aae4585831157a72eb41",
+    "range": "all",
+    "status": "full",
+    "read_at": "2026-09-27T13:36:37.933071+00:00",
+    "role": "W4 mandatory full read: fixed-step vs abort-flow scope; pure finite execution relative completeness; private worker scope; M3-M7 bounded/self-contained evidence does not prove generic Rust/runtime correspondence or recovery"
+  },
+  {
+    "path": "samples/alpha/avatar-runtime/av-01-placeholder_avatar_runtime.expected.json",
+    "sha256": "b692316c5c800b12e362c1c7032e892ae7a97cec60d76a5bc15d573988763788",
+    "range": "all",
+    "status": "full",
+    "read_at": "2026-09-27T13:38:52.842100+00:00",
+    "role": "Mandatory corpus: all JSON values/keys read in compact whitespace-normalized rendering after truncated raw batch; duplicate keys checked absent. Historical expected/synthetic/skeleton artifacts, not current W4 execution evidence. AV01-10, VAR01-15, CUT01-10 scope boundaries retained."
+  },
+  {
+    "path": "samples/alpha/avatar-runtime/av-02-custom_mir_avatar_runtime.expected.json",
+    "sha256": "b4673ea8c66769badf4c9c67b151e80e9446bd63b6798c694da19cc2bc0517ff",
+    "range": "all",
+    "status": "full",
+    "read_at": "2026-09-27T13:38:52.842100+00:00",
+    "role": "Mandatory corpus: all JSON values/keys read in compact whitespace-normalized rendering after truncated raw batch; duplicate keys checked absent. Historical expected/synthetic/skeleton artifacts, not current W4 execution evidence. AV01-10, VAR01-15, CUT01-10 scope boundaries retained."
+  },
+  {
+    "path": "samples/alpha/avatar-runtime/av-03-vrm_adapter_skeleton.expected.json",
+    "sha256": "56f3ddf0b7242179177abf074126bef637317a6621975e0301778dc537e3f206",
+    "range": "all",
+    "status": "full",
+    "read_at": "2026-09-27T13:38:52.842100+00:00",
+    "role": "Mandatory corpus: all JSON values/keys read in compact whitespace-normalized rendering after truncated raw batch; duplicate keys checked absent. Historical expected/synthetic/skeleton artifacts, not current W4 execution evidence. AV01-10, VAR01-15, CUT01-10 scope boundaries retained."
+  },
+  {
+    "path": "samples/alpha/avatar-runtime/av-04-vrchat_compat_adapter_skeleton.expected.json",
+    "sha256": "6342acbb56363aab8935c00cbf882608dcd308a73e834acdad5278968d38555f",
+    "range": "all",
+    "status": "full",
+    "read_at": "2026-09-27T13:38:52.842100+00:00",
+    "role": "Mandatory corpus: all JSON values/keys read in compact whitespace-normalized rendering after truncated raw batch; duplicate keys checked absent. Historical expected/synthetic/skeleton artifacts, not current W4 execution evidence. AV01-10, VAR01-15, CUT01-10 scope boundaries retained."
+  },
+  {
+    "path": "samples/alpha/avatar-runtime/av-05-unsupported_shader_fallback.expected.json",
+    "sha256": "5a4b468e4449a8442b572ecfc19034835e68f952b6bb09bb15a499509505357f",
+    "range": "all",
+    "status": "full",
+    "read_at": "2026-09-27T13:38:52.842100+00:00",
+    "role": "Mandatory corpus: all JSON values/keys read in compact whitespace-normalized rendering after truncated raw batch; duplicate keys checked absent. Historical expected/synthetic/skeleton artifacts, not current W4 execution evidence. AV01-10, VAR01-15, CUT01-10 scope boundaries retained."
+  },
+  {
+    "path": "samples/alpha/avatar-runtime/av-06-untrusted_native_avatar_rejected.expected.json",
+    "sha256": "af0143808f9f65312803b56b36fb30f0f833d07efe94d726e2b1b3822d84895d",
+    "range": "all",
+    "status": "full",
+    "read_at": "2026-09-27T13:38:52.842100+00:00",
+    "role": "Mandatory corpus: all JSON values/keys read in compact whitespace-normalized rendering after truncated raw batch; duplicate keys checked absent. Historical expected/synthetic/skeleton artifacts, not current W4 execution evidence. AV01-10, VAR01-15, CUT01-10 scope boundaries retained."
+  },
+  {
+    "path": "samples/alpha/avatar-runtime/av-07-trusted_native_sandbox_limited.expected.json",
+    "sha256": "31ee98d15816cd649547cdb840c449ab5109d3016e4fbc5476421092e6e29c41",
+    "range": "all",
+    "status": "full",
+    "read_at": "2026-09-27T13:38:52.842100+00:00",
+    "role": "Mandatory corpus: all JSON values/keys read in compact whitespace-normalized rendering after truncated raw batch; duplicate keys checked absent. Historical expected/synthetic/skeleton artifacts, not current W4 execution evidence. AV01-10, VAR01-15, CUT01-10 scope boundaries retained."
+  },
+  {
+    "path": "samples/alpha/avatar-runtime/av-08-runtime_unavailable_placeholder.expected.json",
+    "sha256": "47e5b7ca81a39a476c3ecb700515b445b9746df7932276d0b3aae05f3b58abe9",
+    "range": "all",
+    "status": "full",
+    "read_at": "2026-09-27T13:38:52.842100+00:00",
+    "role": "Mandatory corpus: all JSON values/keys read in compact whitespace-normalized rendering after truncated raw batch; duplicate keys checked absent. Historical expected/synthetic/skeleton artifacts, not current W4 execution evidence. AV01-10, VAR01-15, CUT01-10 scope boundaries retained."
+  },
+  {
+    "path": "samples/alpha/avatar-runtime/av-09-adapter_attempts_undeclared_effect.expected.json",
+    "sha256": "19fdce4ccc20a5fecfab55b59ad0165bc222cd28f65768b1e62aa95461e8c96e",
+    "range": "all",
+    "status": "full",
+    "read_at": "2026-09-27T13:38:52.842100+00:00",
+    "role": "Mandatory corpus: all JSON values/keys read in compact whitespace-normalized rendering after truncated raw batch; duplicate keys checked absent. Historical expected/synthetic/skeleton artifacts, not current W4 execution evidence. AV01-10, VAR01-15, CUT01-10 scope boundaries retained."
+  },
+  {
+    "path": "samples/alpha/avatar-runtime/av-10-package_detach_active_avatar_deferred.expected.json",
+    "sha256": "951e5a7aa2593c8581176e1de51a8ffba3d1c31207c2c888568ef98e0bdd967a",
+    "range": "all",
+    "status": "full",
+    "read_at": "2026-09-27T13:38:52.842100+00:00",
+    "role": "Mandatory corpus: all JSON values/keys read in compact whitespace-normalized rendering after truncated raw batch; duplicate keys checked absent. Historical expected/synthetic/skeleton artifacts, not current W4 execution evidence. AV01-10, VAR01-15, CUT01-10 scope boundaries retained."
+  },
+  {
+    "path": "samples/alpha/contract-variance/var-01-logging_layer_valid.expected.json",
+    "sha256": "f1cbfdac76046c88aaebb2f513ba2b834867082f8dab2a37ae0a12214dece286",
+    "range": "all",
+    "status": "full",
+    "read_at": "2026-09-27T13:38:52.842100+00:00",
+    "role": "Mandatory corpus: all JSON values/keys read in compact whitespace-normalized rendering after truncated raw batch; duplicate keys checked absent. Historical expected/synthetic/skeleton artifacts, not current W4 execution evidence. AV01-10, VAR01-15, CUT01-10 scope boundaries retained."
+  },
+  {
+    "path": "samples/alpha/contract-variance/var-02-precondition_strengthening_rejected.expected.json",
+    "sha256": "d296873ae99c58d44a6aa1a1340afae6568d8d8c0d0d9a38469c3f722ec1c3c0",
+    "range": "all",
+    "status": "full",
+    "read_at": "2026-09-27T13:38:52.842100+00:00",
+    "role": "Mandatory corpus: all JSON values/keys read in compact whitespace-normalized rendering after truncated raw batch; duplicate keys checked absent. Historical expected/synthetic/skeleton artifacts, not current W4 execution evidence. AV01-10, VAR01-15, CUT01-10 scope boundaries retained."
+  },
+  {
+    "path": "samples/alpha/contract-variance/var-03-postcondition_weakening_rejected.expected.json",
+    "sha256": "d0d62c79b821063de77db81d55a617b9931ace29b107c998022cf39e5017cef8",
+    "range": "all",
+    "status": "full",
+    "read_at": "2026-09-27T13:38:52.842100+00:00",
+    "role": "Mandatory corpus: all JSON values/keys read in compact whitespace-normalized rendering after truncated raw batch; duplicate keys checked absent. Historical expected/synthetic/skeleton artifacts, not current W4 execution evidence. AV01-10, VAR01-15, CUT01-10 scope boundaries retained."
+  },
+  {
+    "path": "samples/alpha/contract-variance/var-04-output_covariance_valid.expected.json",
+    "sha256": "d5fb4cc3a291c884001e0fe8359f51a9b12fcf98a2a6ff8649bf103c87615e72",
+    "range": "all",
+    "status": "full",
+    "read_at": "2026-09-27T13:38:52.842100+00:00",
+    "role": "Mandatory corpus: all JSON values/keys read in compact whitespace-normalized rendering after truncated raw batch; duplicate keys checked absent. Historical expected/synthetic/skeleton artifacts, not current W4 execution evidence. AV01-10, VAR01-15, CUT01-10 scope boundaries retained."
+  },
+  {
+    "path": "samples/alpha/contract-variance/var-05-mutable_covariance_rejected.expected.json",
+    "sha256": "39c18d895b1b9c0d1384be322b30b3528e158dad169d79481581132edb278651",
+    "range": "all",
+    "status": "full",
+    "read_at": "2026-09-27T13:38:52.842100+00:00",
+    "role": "Mandatory corpus: all JSON values/keys read in compact whitespace-normalized rendering after truncated raw batch; duplicate keys checked absent. Historical expected/synthetic/skeleton artifacts, not current W4 execution evidence. AV01-10, VAR01-15, CUT01-10 scope boundaries retained."
+  },
+  {
+    "path": "samples/alpha/contract-variance/var-06-readonly_covariance_valid.expected.json",
+    "sha256": "2cdb0d31cbc8ffb8e22b0fd9035ea5f4e9f266a9b276d7295d4bb872deee31fd",
+    "range": "all",
+    "status": "full",
+    "read_at": "2026-09-27T13:38:52.842100+00:00",
+    "role": "Mandatory corpus: all JSON values/keys read in compact whitespace-normalized rendering after truncated raw batch; duplicate keys checked absent. Historical expected/synthetic/skeleton artifacts, not current W4 execution evidence. AV01-10, VAR01-15, CUT01-10 scope boundaries retained."
+  },
+  {
+    "path": "samples/alpha/contract-variance/var-07-failure_row_widening_rejected.expected.json",
+    "sha256": "e8727ceb7585cb8b781388ca879c7dafeddc40edfa43634d79a9663c837ce80f",
+    "range": "all",
+    "status": "full",
+    "read_at": "2026-09-27T13:38:52.842100+00:00",
+    "role": "Mandatory corpus: all JSON values/keys read in compact whitespace-normalized rendering after truncated raw batch; duplicate keys checked absent. Historical expected/synthetic/skeleton artifacts, not current W4 execution evidence. AV01-10, VAR01-15, CUT01-10 scope boundaries retained."
+  },
+  {
+    "path": "samples/alpha/contract-variance/var-08-ratelimit_declared_failure_valid.expected.json",
+    "sha256": "a1a17cbb9083f412a07db287bd29a32353597b3bbc43fb30de211d0719b66c82",
+    "range": "all",
+    "status": "full",
+    "read_at": "2026-09-27T13:38:52.842100+00:00",
+    "role": "Mandatory corpus: all JSON values/keys read in compact whitespace-normalized rendering after truncated raw batch; duplicate keys checked absent. Historical expected/synthetic/skeleton artifacts, not current W4 execution evidence. AV01-10, VAR01-15, CUT01-10 scope boundaries retained."
+  },
+  {
+    "path": "samples/alpha/contract-variance/var-09-effect_row_widening_rejected.expected.json",
+    "sha256": "2ab2793db3589d34eb71d3703018c662e75b28dabd69a8f518b6da6afb15bf77",
+    "range": "all",
+    "status": "full",
+    "read_at": "2026-09-27T13:38:52.842100+00:00",
+    "role": "Mandatory corpus: all JSON values/keys read in compact whitespace-normalized rendering after truncated raw batch; duplicate keys checked absent. Historical expected/synthetic/skeleton artifacts, not current W4 execution evidence. AV01-10, VAR01-15, CUT01-10 scope boundaries retained."
+  },
+  {
+    "path": "samples/alpha/contract-variance/var-10-cost_degradation_rejected.expected.json",
+    "sha256": "234e47a35a4fc3f04daec60f3c00d5cbfc00335413de88232c6fa3cff536ad05",
+    "range": "all",
+    "status": "full",
+    "read_at": "2026-09-27T13:38:52.842100+00:00",
+    "role": "Mandatory corpus: all JSON values/keys read in compact whitespace-normalized rendering after truncated raw batch; duplicate keys checked absent. Historical expected/synthetic/skeleton artifacts, not current W4 execution evidence. AV01-10, VAR01-15, CUT01-10 scope boundaries retained."
+  },
+  {
+    "path": "samples/alpha/contract-variance/var-11-redaction_layer_valid.expected.json",
+    "sha256": "c08bd93bbb67c3078d5f6f334c0fa9063520a6300df2b3d566394871e6fbc0ff",
+    "range": "all",
+    "status": "full",
+    "read_at": "2026-09-27T13:38:52.842100+00:00",
+    "role": "Mandatory corpus: all JSON values/keys read in compact whitespace-normalized rendering after truncated raw batch; duplicate keys checked absent. Historical expected/synthetic/skeleton artifacts, not current W4 execution evidence. AV01-10, VAR01-15, CUT01-10 scope boundaries retained."
+  },
+  {
+    "path": "samples/alpha/contract-variance/var-12-debug_layer_requires_authority.expected.json",
+    "sha256": "81684ce38056767035ffffb454bd1b67fbab5a38707316553de99cd9a98ff1a7",
+    "range": "all",
+    "status": "full",
+    "read_at": "2026-09-27T13:38:52.842100+00:00",
+    "role": "Mandatory corpus: all JSON values/keys read in compact whitespace-normalized rendering after truncated raw batch; duplicate keys checked absent. Historical expected/synthetic/skeleton artifacts, not current W4 execution evidence. AV01-10, VAR01-15, CUT01-10 scope boundaries retained."
+  },
+  {
+    "path": "samples/alpha/contract-variance/var-13-auth_layer_contract_update_valid.expected.json",
+    "sha256": "0dc8d53e4e4248374efd176bdbfb99bb0fcef641d0fbfc5850e42e5d62a7a7ef",
+    "range": "all",
+    "status": "full",
+    "read_at": "2026-09-27T13:38:52.842100+00:00",
+    "role": "Mandatory corpus: all JSON values/keys read in compact whitespace-normalized rendering after truncated raw batch; duplicate keys checked absent. Historical expected/synthetic/skeleton artifacts, not current W4 execution evidence. AV01-10, VAR01-15, CUT01-10 scope boundaries retained."
+  },
+  {
+    "path": "samples/alpha/contract-variance/var-14-adapter_transform_preserves_contract.expected.json",
+    "sha256": "836fe35b2a32712985fae6f482d269111c05ee084b969bd28c99e7aeb0f48f1b",
+    "range": "all",
+    "status": "full",
+    "read_at": "2026-09-27T13:38:52.842100+00:00",
+    "role": "Mandatory corpus: all JSON values/keys read in compact whitespace-normalized rendering after truncated raw batch; duplicate keys checked absent. Historical expected/synthetic/skeleton artifacts, not current W4 execution evidence. AV01-10, VAR01-15, CUT01-10 scope boundaries retained."
+  },
+  {
+    "path": "samples/alpha/contract-variance/var-15-hidden_shadowing_rejected.expected.json",
+    "sha256": "c587377acf1b42e702c1d409be2f0fc8635f46d2dce2db52447962f90fe4be45",
+    "range": "all",
+    "status": "full",
+    "read_at": "2026-09-27T13:38:52.842100+00:00",
+    "role": "Mandatory corpus: all JSON values/keys read in compact whitespace-normalized rendering after truncated raw batch; duplicate keys checked absent. Historical expected/synthetic/skeleton artifacts, not current W4 execution evidence. AV01-10, VAR01-15, CUT01-10 scope boundaries retained."
+  },
+  {
+    "path": "samples/alpha/cut-save-load/cut-01-local_try_rollback_before_cut.expected.json",
+    "sha256": "4191fff530a33851dbc3af387669243be55810dc53e8336dd0cf78ffc774816e",
+    "range": "all",
+    "status": "full",
+    "read_at": "2026-09-27T13:38:52.842100+00:00",
+    "role": "Mandatory corpus: all JSON values/keys read in compact whitespace-normalized rendering after truncated raw batch; duplicate keys checked absent. Historical expected/synthetic/skeleton artifacts, not current W4 execution evidence. AV01-10, VAR01-15, CUT01-10 scope boundaries retained."
+  },
+  {
+    "path": "samples/alpha/cut-save-load/cut-02-rollback_across_atomic_cut_rejected.expected.json",
+    "sha256": "a6c40bf4ee36adb5b36cecb5c5d59a3961386911c8a983dff58a36b8b84552ce",
+    "range": "all",
+    "status": "full",
+    "read_at": "2026-09-27T13:38:52.842100+00:00",
+    "role": "Mandatory corpus: all JSON values/keys read in compact whitespace-normalized rendering after truncated raw batch; duplicate keys checked absent. Historical expected/synthetic/skeleton artifacts, not current W4 execution evidence. AV01-10, VAR01-15, CUT01-10 scope boundaries retained."
+  },
+  {
+    "path": "samples/alpha/cut-save-load/cut-03-irreversible_effect_in_rollback_rejected.expected.json",
+    "sha256": "423556298f7541aeae8e14eaeb01fd72c39c8f1f35794f436b7ac59011bd2983",
+    "range": "all",
+    "status": "full",
+    "read_at": "2026-09-27T13:38:52.842100+00:00",
+    "role": "Mandatory corpus: all JSON values/keys read in compact whitespace-normalized rendering after truncated raw batch; duplicate keys checked absent. Historical expected/synthetic/skeleton artifacts, not current W4 execution evidence. AV01-10, VAR01-15, CUT01-10 scope boundaries retained."
+  },
+  {
+    "path": "samples/alpha/cut-save-load/cut-04-local_save_load_valid.expected.json",
+    "sha256": "7e51366f2392b5d094c508a10e8705639cce4ab596412437c4cc5a8decebf999",
+    "range": "all",
+    "status": "full",
+    "read_at": "2026-09-27T13:38:52.842100+00:00",
+    "role": "Mandatory corpus: all JSON values/keys read in compact whitespace-normalized rendering after truncated raw batch; duplicate keys checked absent. Historical expected/synthetic/skeleton artifacts, not current W4 execution evidence. AV01-10, VAR01-15, CUT01-10 scope boundaries retained."
+  },
+  {
+    "path": "samples/alpha/cut-save-load/cut-05-inconsistent_distributed_snapshot_rejected.expected.json",
+    "sha256": "c83b03308b96419e8e9f050366918065c422af3e0e6e3b411412ac8cc129fc3d",
+    "range": "all",
+    "status": "full",
+    "read_at": "2026-09-27T13:38:52.842100+00:00",
+    "role": "Mandatory corpus: all JSON values/keys read in compact whitespace-normalized rendering after truncated raw batch; duplicate keys checked absent. Historical expected/synthetic/skeleton artifacts, not current W4 execution evidence. AV01-10, VAR01-15, CUT01-10 scope boundaries retained."
+  },
+  {
+    "path": "samples/alpha/cut-save-load/cut-06-inflight_message_channel_state_valid.expected.json",
+    "sha256": "d523da0a8366b9199e73d3de26cc6e23189c28a17a50b2627d01ca129c211404",
+    "range": "all",
+    "status": "full",
+    "read_at": "2026-09-27T13:38:52.842100+00:00",
+    "role": "Mandatory corpus: all JSON values/keys read in compact whitespace-normalized rendering after truncated raw batch; duplicate keys checked absent. Historical expected/synthetic/skeleton artifacts, not current W4 execution evidence. AV01-10, VAR01-15, CUT01-10 scope boundaries retained."
+  },
+  {
+    "path": "samples/alpha/cut-save-load/cut-07-observe_without_publish_rejected.expected.json",
+    "sha256": "2c91a14fc8e7cbfca8ab02ee31610b701abf3a1a0386582803fd0ff824c43a3b",
+    "range": "all",
+    "status": "full",
+    "read_at": "2026-09-27T13:38:52.842100+00:00",
+    "role": "Mandatory corpus: all JSON values/keys read in compact whitespace-normalized rendering after truncated raw batch; duplicate keys checked absent. Historical expected/synthetic/skeleton artifacts, not current W4 execution evidence. AV01-10, VAR01-15, CUT01-10 scope boundaries retained."
+  },
+  {
+    "path": "samples/alpha/cut-save-load/cut-08-witness_use_without_create_rejected.expected.json",
+    "sha256": "c1977d85a24d442a10a2555704cd91b49be6f59ecc8fa513a44a2eaf3624de35",
+    "range": "all",
+    "status": "full",
+    "read_at": "2026-09-27T13:38:52.842100+00:00",
+    "role": "Mandatory corpus: all JSON values/keys read in compact whitespace-normalized rendering after truncated raw batch; duplicate keys checked absent. Historical expected/synthetic/skeleton artifacts, not current W4 execution evidence. AV01-10, VAR01-15, CUT01-10 scope boundaries retained."
+  },
+  {
+    "path": "samples/alpha/cut-save-load/cut-09-hotplug_activation_without_request_rejected.expected.json",
+    "sha256": "efc7ba7c6a0de855db7f99b546ae048a33fa6ab40bd3fee76a8816d24923ed81",
+    "range": "all",
+    "status": "full",
+    "read_at": "2026-09-27T13:38:52.842100+00:00",
+    "role": "Mandatory corpus: all JSON values/keys read in compact whitespace-normalized rendering after truncated raw batch; duplicate keys checked absent. Historical expected/synthetic/skeleton artifacts, not current W4 execution evidence. AV01-10, VAR01-15, CUT01-10 scope boundaries retained."
+  },
+  {
+    "path": "samples/alpha/cut-save-load/cut-10-load_does_not_resurrect_expired_lease.expected.json",
+    "sha256": "34d5462cda71151432fab76a442a4a36ceb9413453534ff13ee6ac7f5cb9b9ae",
+    "range": "all",
+    "status": "full",
+    "read_at": "2026-09-27T13:38:52.842100+00:00",
+    "role": "Mandatory corpus: all JSON values/keys read in compact whitespace-normalized rendering after truncated raw batch; duplicate keys checked absent. Historical expected/synthetic/skeleton artifacts, not current W4 execution evidence. AV01-10, VAR01-15, CUT01-10 scope boundaries retained."
+  },
+  {
+    "path": "samples/alpha/cut-save-load/cut-11-zcycle_checkpoint_invalid.expected.json",
+    "sha256": "19886b1da5dfbe38312008afa3fcac4b1ccb962aa7d89fa23af57dcbded3d52a",
+    "range": "all",
+    "status": "full",
+    "read_at": "2026-09-27T13:41:16.506319+00:00",
+    "role": "Mandatory all-data JSON read, whitespace normalized; no duplicate keys. CUT11-17 and E2E01-05 historical expected/helper artifacts. Source parser execution and current network/recovery acceptance not established by these data."
+  },
+  {
+    "path": "samples/alpha/cut-save-load/cut-12-forced_checkpoint_breaks_zcycle.expected.json",
+    "sha256": "7df847d68b15c326c54bacd6e91e3d5d455cf7eedb548c70c6e41c4900e8a4a6",
+    "range": "all",
+    "status": "full",
+    "read_at": "2026-09-27T13:41:16.506319+00:00",
+    "role": "Mandatory all-data JSON read, whitespace normalized; no duplicate keys. CUT11-17 and E2E01-05 historical expected/helper artifacts. Source parser execution and current network/recovery acceptance not established by these data."
+  },
+  {
+    "path": "samples/alpha/cut-save-load/cut-13-durable_cut_deferred_in_mir0.expected.json",
+    "sha256": "fb220ae2dddbac04f158a99d980f3713fb54b94ef7edb1c68117cd7b4bf2a937",
+    "range": "all",
+    "status": "full",
+    "read_at": "2026-09-27T13:41:16.506319+00:00",
+    "role": "Mandatory all-data JSON read, whitespace normalized; no duplicate keys. CUT11-17 and E2E01-05 historical expected/helper artifacts. Source parser execution and current network/recovery acceptance not established by these data."
+  },
+  {
+    "path": "samples/alpha/cut-save-load/cut-14-capability_use_without_grant_rejected.expected.json",
+    "sha256": "58f06e137cb23de34beb75d91c0190134485b6142e3ec11d76c863ce3454bc4e",
+    "range": "all",
+    "status": "full",
+    "read_at": "2026-09-27T13:41:16.506319+00:00",
+    "role": "Mandatory all-data JSON read, whitespace normalized; no duplicate keys. CUT11-17 and E2E01-05 historical expected/helper artifacts. Source parser execution and current network/recovery acceptance not established by these data."
+  },
+  {
+    "path": "samples/alpha/cut-save-load/cut-15-auth_evidence_use_without_create_rejected.expected.json",
+    "sha256": "7ddc87809fe36c3aabc7751b29f346f2b7e9e72ca2191067fac1ae783ff48515",
+    "range": "all",
+    "status": "full",
+    "read_at": "2026-09-27T13:41:16.506319+00:00",
+    "role": "Mandatory all-data JSON read, whitespace normalized; no duplicate keys. CUT11-17 and E2E01-05 historical expected/helper artifacts. Source parser execution and current network/recovery acceptance not established by these data."
+  },
+  {
+    "path": "samples/alpha/cut-save-load/cut-16-load_does_not_resurrect_stale_witness.expected.json",
+    "sha256": "3c7eacc22ebb7640f0eb49d13629d94dbc460dd531a1b2498ddccf1b8a5df9c0",
+    "range": "all",
+    "status": "full",
+    "read_at": "2026-09-27T13:41:16.506319+00:00",
+    "role": "Mandatory all-data JSON read, whitespace normalized; no duplicate keys. CUT11-17 and E2E01-05 historical expected/helper artifacts. Source parser execution and current network/recovery acceptance not established by these data."
+  },
+  {
+    "path": "samples/alpha/cut-save-load/cut-17-load_does_not_resurrect_stale_membership.expected.json",
+    "sha256": "b3580ebffd1b361aba2c847d3694ed4f87b173f22fd584f0bbec56a0e5eaa403",
+    "range": "all",
+    "status": "full",
+    "read_at": "2026-09-27T13:41:16.506319+00:00",
+    "role": "Mandatory all-data JSON read, whitespace normalized; no duplicate keys. CUT11-17 and E2E01-05 historical expected/helper artifacts. Source parser execution and current network/recovery acceptance not established by these data."
+  },
+  {
+    "path": "samples/alpha/e2e/e2e-01-local_integrated_sugoroku.expected.json",
+    "sha256": "d3b17f1cd8971cc9647cca2c0b618274e195fde2aa0a72e2a95df2564fe20805",
+    "range": "all",
+    "status": "full",
+    "read_at": "2026-09-27T13:41:16.506319+00:00",
+    "role": "Mandatory all-data JSON read, whitespace normalized; no duplicate keys. CUT11-17 and E2E01-05 historical expected/helper artifacts. Source parser execution and current network/recovery acceptance not established by these data."
+  },
+  {
+    "path": "samples/alpha/e2e/e2e-02-docker_two_node_sugoroku.expected.json",
+    "sha256": "d402cf11db84504d78c9d10c242f28b2824f81066f107507e5863349fca0b01a",
+    "range": "all",
+    "status": "full",
+    "read_at": "2026-09-27T13:41:16.506319+00:00",
+    "role": "Mandatory all-data JSON read, whitespace normalized; no duplicate keys. CUT11-17 and E2E01-05 historical expected/helper artifacts. Source parser execution and current network/recovery acceptance not established by these data."
+  },
+  {
+    "path": "samples/alpha/e2e/e2e-03-hotplug_debug_layer_runtime.expected.json",
+    "sha256": "5594a7c6bc0348e39036316c7311f68f781d7c4b357c7f2ab4a6b26a9a31f2b9",
+    "range": "all",
+    "status": "full",
+    "read_at": "2026-09-27T13:41:16.506319+00:00",
+    "role": "Mandatory all-data JSON read, whitespace normalized; no duplicate keys. CUT11-17 and E2E01-05 historical expected/helper artifacts. Source parser execution and current network/recovery acceptance not established by these data."
+  },
+  {
+    "path": "samples/alpha/e2e/e2e-04-hotplug_ratelimit_runtime.expected.json",
+    "sha256": "4f7c2fcf663caa1ad15e0829f4dff14ce77bce0654bfcfa1546c90937413f38d",
+    "range": "all",
+    "status": "full",
+    "read_at": "2026-09-27T13:41:16.506319+00:00",
+    "role": "Mandatory all-data JSON read, whitespace normalized; no duplicate keys. CUT11-17 and E2E01-05 historical expected/helper artifacts. Source parser execution and current network/recovery acceptance not established by these data."
+  },
+  {
+    "path": "samples/alpha/e2e/e2e-05-avatar_runtime_package.expected.json",
+    "sha256": "f9841e5b6ce78000e082868c45fc6e47b704a3fb79f6d2877aff4b5b41ef3ab4",
+    "range": "all",
+    "status": "full",
+    "read_at": "2026-09-27T13:41:16.506319+00:00",
+    "role": "Mandatory all-data JSON read, whitespace normalized; no duplicate keys. CUT11-17 and E2E01-05 historical expected/helper artifacts. Source parser execution and current network/recovery acceptance not established by these data."
+  },
+  {
+    "path": "samples/alpha/e2e/e2e-06-local_save_load_continue.expected.json",
+    "sha256": "85efd935ef10be0040b45aa1c634de6b568bf3f998e8f375fa64d7c0dcfacfa1",
+    "range": "all",
+    "status": "full",
+    "read_at": "2026-09-27T13:42:33.653967+00:00",
+    "role": "Mandatory all-data JSON read, compact whitespace, duplicate keys absent. E2E06-10 and HP01-14 historical expected/skeleton/private helper scope; signatures do not confer blanket permissions; no actual source/network/restore guarantee inferred."
+  },
+  {
+    "path": "samples/alpha/e2e/e2e-07-distributed_inconsistent_save_negative.expected.json",
+    "sha256": "9b958218e2a48947d82499b0382f649f17135f54d60ce64cf6d71734a2913317",
+    "range": "all",
+    "status": "full",
+    "read_at": "2026-09-27T13:42:33.653967+00:00",
+    "role": "Mandatory all-data JSON read, compact whitespace, duplicate keys absent. E2E06-10 and HP01-14 historical expected/skeleton/private helper scope; signatures do not confer blanket permissions; no actual source/network/restore guarantee inferred."
+  },
+  {
+    "path": "samples/alpha/e2e/e2e-08-reversed_library_seed_demo.expected.json",
+    "sha256": "03deaca4beaf792d17a30f4bb4d049938bb9f658e70933bb5a15705900137059",
+    "range": "all",
+    "status": "full",
+    "read_at": "2026-09-27T13:42:33.653967+00:00",
+    "role": "Mandatory all-data JSON read, compact whitespace, duplicate keys absent. E2E06-10 and HP01-14 historical expected/skeleton/private helper scope; signatures do not confer blanket permissions; no actual source/network/restore guarantee inferred."
+  },
+  {
+    "path": "samples/alpha/e2e/e2e-09-layer_auth_then_hotplug.expected.json",
+    "sha256": "d1dea5b102110969400c705b659ed9db948accc7ace22484076406bdcc592fba",
+    "range": "all",
+    "status": "full",
+    "read_at": "2026-09-27T13:42:33.653967+00:00",
+    "role": "Mandatory all-data JSON read, compact whitespace, duplicate keys absent. E2E06-10 and HP01-14 historical expected/skeleton/private helper scope; signatures do not confer blanket permissions; no actual source/network/restore guarantee inferred."
+  },
+  {
+    "path": "samples/alpha/e2e/e2e-10-package_missing_runtime_fallback.expected.json",
+    "sha256": "af2eccfc923b1b355cbcbed67ffdcc10682ac6b9875e2c6d9d9ef00113883994",
+    "range": "all",
+    "status": "full",
+    "read_at": "2026-09-27T13:42:33.653967+00:00",
+    "role": "Mandatory all-data JSON read, compact whitespace, duplicate keys absent. E2E06-10 and HP01-14 historical expected/skeleton/private helper scope; signatures do not confer blanket permissions; no actual source/network/restore guarantee inferred."
+  },
+  {
+    "path": "samples/alpha/hotplug-runtime/hp-01-attach_sugoroku_to_empty_world.expected.json",
+    "sha256": "1a886bdc2441dd8fcdeabd42aeb733be6b97ae4c73a336bc41b68730c5a6f420",
+    "range": "all",
+    "status": "full",
+    "read_at": "2026-09-27T13:42:33.653967+00:00",
+    "role": "Mandatory all-data JSON read, compact whitespace, duplicate keys absent. E2E06-10 and HP01-14 historical expected/skeleton/private helper scope; signatures do not confer blanket permissions; no actual source/network/restore guarantee inferred."
+  },
+  {
+    "path": "samples/alpha/hotplug-runtime/hp-02-attach_debug_layer_admin.expected.json",
+    "sha256": "e0762666d80daac64a19834472aac3f1ccf7a2e3570bbb39f2507ee09db6624a",
+    "range": "all",
+    "status": "full",
+    "read_at": "2026-09-27T13:42:33.653967+00:00",
+    "role": "Mandatory all-data JSON read, compact whitespace, duplicate keys absent. E2E06-10 and HP01-14 historical expected/skeleton/private helper scope; signatures do not confer blanket permissions; no actual source/network/restore guarantee inferred."
+  },
+  {
+    "path": "samples/alpha/hotplug-runtime/hp-03-attach_debug_layer_non_admin_rejected.expected.json",
+    "sha256": "796fbce6200d6e72c07a6c65b4dd0f530a048bf6cda1af6e4cd075a5635a40d7",
+    "range": "all",
+    "status": "full",
+    "read_at": "2026-09-27T13:42:33.653967+00:00",
+    "role": "Mandatory all-data JSON read, compact whitespace, duplicate keys absent. E2E06-10 and HP01-14 historical expected/skeleton/private helper scope; signatures do not confer blanket permissions; no actual source/network/restore guarantee inferred."
+  },
+  {
+    "path": "samples/alpha/hotplug-runtime/hp-04-attach_auth_layer_contract_valid.expected.json",
+    "sha256": "06d117967701a09cdab7944d0a36aaa55d9669741db18efb8b5da7eb0fe664fc",
+    "range": "all",
+    "status": "full",
+    "read_at": "2026-09-27T13:42:33.653967+00:00",
+    "role": "Mandatory all-data JSON read, compact whitespace, duplicate keys absent. E2E06-10 and HP01-14 historical expected/skeleton/private helper scope; signatures do not confer blanket permissions; no actual source/network/restore guarantee inferred."
+  },
+  {
+    "path": "samples/alpha/hotplug-runtime/hp-05-attach_ratelimit_layer_contract_valid.expected.json",
+    "sha256": "4ac74425db1d23f4fe4101e4a702172279ae5eef7e8c32e243a7688b9e5a101d",
+    "range": "all",
+    "status": "full",
+    "read_at": "2026-09-27T13:42:33.653967+00:00",
+    "role": "Mandatory all-data JSON read, compact whitespace, duplicate keys absent. E2E06-10 and HP01-14 historical expected/skeleton/private helper scope; signatures do not confer blanket permissions; no actual source/network/restore guarantee inferred."
+  },
+  {
+    "path": "samples/alpha/hotplug-runtime/hp-06-incompatible_patch_rejected.expected.json",
+    "sha256": "065f67652b97a1231b2cdd58ff6e448f404d2d3c8f355ef0268b8bcc5fd771d1",
+    "range": "all",
+    "status": "full",
+    "read_at": "2026-09-27T13:42:33.653967+00:00",
+    "role": "Mandatory all-data JSON read, compact whitespace, duplicate keys absent. E2E06-10 and HP01-14 historical expected/skeleton/private helper scope; signatures do not confer blanket permissions; no actual source/network/restore guarantee inferred."
+  },
+  {
+    "path": "samples/alpha/hotplug-runtime/hp-07-missing_capability_hotplug_rejected.expected.json",
+    "sha256": "e86928824f153838946dd8c7dc1800b2ba4187c653686e193e58c9c91fe79027",
+    "range": "all",
+    "status": "full",
+    "read_at": "2026-09-27T13:42:33.653967+00:00",
+    "role": "Mandatory all-data JSON read, compact whitespace, duplicate keys absent. E2E06-10 and HP01-14 historical expected/skeleton/private helper scope; signatures do not confer blanket permissions; no actual source/network/restore guarantee inferred."
+  },
+  {
+    "path": "samples/alpha/hotplug-runtime/hp-08-detach_object_no_dangling.expected.json",
+    "sha256": "cb698284295ff4b62e7196bf5b1597b71288b7a9882fbe14710dc54468da7cd7",
+    "range": "all",
+    "status": "full",
+    "read_at": "2026-09-27T13:42:33.653967+00:00",
+    "role": "Mandatory all-data JSON read, compact whitespace, duplicate keys absent. E2E06-10 and HP01-14 historical expected/skeleton/private helper scope; signatures do not confer blanket permissions; no actual source/network/restore guarantee inferred."
+  },
+  {
+    "path": "samples/alpha/hotplug-runtime/hp-09-detach_runtime_with_dependents_rejected.expected.json",
+    "sha256": "e5643addead86af2d3c5ab835507a341484f59a0c0d85be7fc3ac1ccdfab0080",
+    "range": "all",
+    "status": "full",
+    "read_at": "2026-09-27T13:42:33.653967+00:00",
+    "role": "Mandatory all-data JSON read, compact whitespace, duplicate keys absent. E2E06-10 and HP01-14 historical expected/skeleton/private helper scope; signatures do not confer blanket permissions; no actual source/network/restore guarantee inferred."
+  },
+  {
+    "path": "samples/alpha/hotplug-runtime/hp-10-runtime_library_hotplug.expected.json",
+    "sha256": "b4b33277bcb53411571e53af7f0ea4319f8218c48bffcb96f32b91bc5445becd",
+    "range": "all",
+    "status": "full",
+    "read_at": "2026-09-27T13:42:33.653967+00:00",
+    "role": "Mandatory all-data JSON read, compact whitespace, duplicate keys absent. E2E06-10 and HP01-14 historical expected/skeleton/private helper scope; signatures do not confer blanket permissions; no actual source/network/restore guarantee inferred."
+  },
+  {
+    "path": "samples/alpha/hotplug-runtime/hp-11-unsigned_native_package_rejected.expected.json",
+    "sha256": "37ad2d2cc4d5f7d2dc3378eb56c9795e08c1f037428852bbbcb86fedaa0f4110",
+    "range": "all",
+    "status": "full",
+    "read_at": "2026-09-27T13:42:33.653967+00:00",
+    "role": "Mandatory all-data JSON read, compact whitespace, duplicate keys absent. E2E06-10 and HP01-14 historical expected/skeleton/private helper scope; signatures do not confer blanket permissions; no actual source/network/restore guarantee inferred."
+  },
+  {
+    "path": "samples/alpha/hotplug-runtime/hp-12-signed_overcapability_package_rejected.expected.json",
+    "sha256": "81c87c3405d2989f27c9ab8f9feeeb5a3a74f046e22e936323b93874e32b15a5",
+    "range": "all",
+    "status": "full",
+    "read_at": "2026-09-27T13:42:33.653967+00:00",
+    "role": "Mandatory all-data JSON read, compact whitespace, duplicate keys absent. E2E06-10 and HP01-14 historical expected/skeleton/private helper scope; signatures do not confer blanket permissions; no actual source/network/restore guarantee inferred."
+  },
+  {
+    "path": "samples/alpha/hotplug-runtime/hp-13-activation_cut_prevents_hidden_rollback.expected.json",
+    "sha256": "6919ba4abddd9e9a8e1256e86f3d981805fe17197478fa8f02eb20657f83cf95",
+    "range": "all",
+    "status": "full",
+    "read_at": "2026-09-27T13:42:33.653967+00:00",
+    "role": "Mandatory all-data JSON read, compact whitespace, duplicate keys absent. E2E06-10 and HP01-14 historical expected/skeleton/private helper scope; signatures do not confer blanket permissions; no actual source/network/restore guarantee inferred."
+  },
+  {
+    "path": "samples/alpha/hotplug-runtime/hp-14-hotplug_verdict_mismatch_rejected.expected.json",
+    "sha256": "5d5fc84344c45c77f8f04f14e02258c9a7a5f92ec8f9f9e4e7587bb5384f4b32",
+    "range": "all",
+    "status": "full",
+    "read_at": "2026-09-27T13:42:33.653967+00:00",
+    "role": "Mandatory all-data JSON read, compact whitespace, duplicate keys absent. E2E06-10 and HP01-14 historical expected/skeleton/private helper scope; signatures do not confer blanket permissions; no actual source/network/restore guarantee inferred."
+  },
+  {
+    "path": "samples/alpha/hotplug-runtime/hp-15-revoked_signed_package_rejected.expected.json",
+    "sha256": "57b48aca79e5952439a3ff8084585a316c923afc222c836d4b73e4ccd8ec98e2",
+    "range": "all",
+    "status": "full",
+    "read_at": "2026-09-27T13:43:17.992779+00:00",
+    "role": "Mandatory all-data JSON read, compact whitespace, duplicate keys absent. HP15, LI01-05 and LIF01-06 historical helper/expected evidence; admission preview not source parser or actual resource accounting; no current W4 acceptance."
+  },
+  {
+    "path": "samples/alpha/layer-insertion/li-01-debug_layer_attach_authorized.expected.json",
+    "sha256": "610b7248bc4c11011c909a1137468c77cfce9f66471018d8a8ac58ce2a457853",
+    "range": "all",
+    "status": "full",
+    "read_at": "2026-09-27T13:43:17.992779+00:00",
+    "role": "Mandatory all-data JSON read, compact whitespace, duplicate keys absent. HP15, LI01-05 and LIF01-06 historical helper/expected evidence; admission preview not source parser or actual resource accounting; no current W4 acceptance."
+  },
+  {
+    "path": "samples/alpha/layer-insertion/li-02-debug_layer_non_admin_rejected.expected.json",
+    "sha256": "acafaadbc4b8787891c22ae55d80b3156ba4da375507fc2108c8b60e0186ae7b",
+    "range": "all",
+    "status": "full",
+    "read_at": "2026-09-27T13:43:17.992779+00:00",
+    "role": "Mandatory all-data JSON read, compact whitespace, duplicate keys absent. HP15, LI01-05 and LIF01-06 historical helper/expected evidence; admission preview not source parser or actual resource accounting; no current W4 acceptance."
+  },
+  {
+    "path": "samples/alpha/layer-insertion/li-03-auth_layer_contract_update_path.expected.json",
+    "sha256": "65c4cf573dc8d637a93af3c991b47a25a83417f2170b69296a326aa2f3a6c780",
+    "range": "all",
+    "status": "full",
+    "read_at": "2026-09-27T13:43:17.992779+00:00",
+    "role": "Mandatory all-data JSON read, compact whitespace, duplicate keys absent. HP15, LI01-05 and LIF01-06 historical helper/expected evidence; admission preview not source parser or actual resource accounting; no current W4 acceptance."
+  },
+  {
+    "path": "samples/alpha/layer-insertion/li-04-ratelimit_declared_failure.expected.json",
+    "sha256": "29348b05dc8fce2e18aba10a99632a1dc4dec65577b3c4852e4598691e333310",
+    "range": "all",
+    "status": "full",
+    "read_at": "2026-09-27T13:43:17.992779+00:00",
+    "role": "Mandatory all-data JSON read, compact whitespace, duplicate keys absent. HP15, LI01-05 and LIF01-06 historical helper/expected evidence; admission preview not source parser or actual resource accounting; no current W4 acceptance."
+  },
+  {
+    "path": "samples/alpha/layer-insertion/li-05-incompatible_patch_rejected.expected.json",
+    "sha256": "39ad0ef61ac2b3f0b88a7a9a8e0fc3d851a395286b95dabcf60fec183cdf6330",
+    "range": "all",
+    "status": "full",
+    "read_at": "2026-09-27T13:43:17.992779+00:00",
+    "role": "Mandatory all-data JSON read, compact whitespace, duplicate keys absent. HP15, LI01-05 and LIF01-06 historical helper/expected evidence; admission preview not source parser or actual resource accounting; no current W4 acceptance."
+  },
+  {
+    "path": "samples/alpha/lifetime-fallback/lif-01-raw_dangling_reference_rejected.expected.json",
+    "sha256": "8b2a39f42bf7c30abf4fa672864fdb521dcad0263297016902333fd7896f247a",
+    "range": "all",
+    "status": "full",
+    "read_at": "2026-09-27T13:43:17.992779+00:00",
+    "role": "Mandatory all-data JSON read, compact whitespace, duplicate keys absent. HP15, LI01-05 and LIF01-06 historical helper/expected evidence; admission preview not source parser or actual resource accounting; no current W4 acceptance."
+  },
+  {
+    "path": "samples/alpha/lifetime-fallback/lif-02-fallback_extends_access_path.expected.json",
+    "sha256": "f1d215f1d351811e95ed55ad21bea6f1c54a6cc2617f9efc36e46a82cd0d53b8",
+    "range": "all",
+    "status": "full",
+    "read_at": "2026-09-27T13:43:17.992779+00:00",
+    "role": "Mandatory all-data JSON read, compact whitespace, duplicate keys absent. HP15, LI01-05 and LIF01-06 historical helper/expected evidence; admission preview not source parser or actual resource accounting; no current W4 acceptance."
+  },
+  {
+    "path": "samples/alpha/lifetime-fallback/lif-03-nested_inherit_chain_valid.expected.json",
+    "sha256": "e22268f8d8ec019fe2fd5c6e853ccde1d273d63d6f9e67e817ce92bb88822a41",
+    "range": "all",
+    "status": "full",
+    "read_at": "2026-09-27T13:43:17.992779+00:00",
+    "role": "Mandatory all-data JSON read, compact whitespace, duplicate keys absent. HP15, LI01-05 and LIF01-06 historical helper/expected evidence; admission preview not source parser or actual resource accounting; no current W4 acceptance."
+  },
+  {
+    "path": "samples/alpha/lifetime-fallback/lif-04-plain_ref_does_not_inherit.expected.json",
+    "sha256": "034f972a790d506646c57e4549efae97ad582c529eb522b3b475ff63180c90e0",
+    "range": "all",
+    "status": "full",
+    "read_at": "2026-09-27T13:43:17.992779+00:00",
+    "role": "Mandatory all-data JSON read, compact whitespace, duplicate keys absent. HP15, LI01-05 and LIF01-06 historical helper/expected evidence; admission preview not source parser or actual resource accounting; no current W4 acceptance."
+  },
+  {
+    "path": "samples/alpha/lifetime-fallback/lif-05-underdeclared_fallback_static_error.expected.json",
+    "sha256": "ca09644102f868c58bc39671d87b06aba9127a0dec970af427ef0cf77c1fb285",
+    "range": "all",
+    "status": "full",
+    "read_at": "2026-09-27T13:43:17.992779+00:00",
+    "role": "Mandatory all-data JSON read, compact whitespace, duplicate keys absent. HP15, LI01-05 and LIF01-06 historical helper/expected evidence; admission preview not source parser or actual resource accounting; no current W4 acceptance."
+  },
+  {
+    "path": "samples/alpha/lifetime-fallback/lif-06-incompatible_access_target_rejected.expected.json",
+    "sha256": "7f97b334413710dd85685e118fb9f1b53f62f8dad2604d9f94cc40eadcbf994a",
+    "range": "all",
+    "status": "full",
+    "read_at": "2026-09-27T13:43:17.992779+00:00",
+    "role": "Mandatory all-data JSON read, compact whitespace, duplicate keys absent. HP15, LI01-05 and LIF01-06 historical helper/expected evidence; admission preview not source parser or actual resource accounting; no current W4 acceptance."
   }
 ]

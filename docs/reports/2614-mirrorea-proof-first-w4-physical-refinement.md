@@ -2835,3 +2835,49 @@ commit/push follows9d86052d; exact Git receipt I/B_RECOVERY_GIT.json. Main holds
 dependent C activation until required boundary review is recovered; browser repair
 question remains pending. This is an actual required-tool failure, not quota,
 elapsed-time, proof difficulty or a W4 completion claim.
+
+
+### 2026-09-27T13:38:52.842100+00:00 — final B review retry challenge / dependency reading
+
+Original failed response revalidated13:27UTC: Unknown error, no Stop/final.
+Existing owner authorization permits actual-error resend; no new permission
+gate was inferred. Same frozen9file packet launched once13:28:27UTC as
+mir-w4-b-closeout-retry1/tool63460, terminal exit1 collected13:34UTC. Actual
+new visible target9A30EFDFEA193B5825274D43996250E5 has title Just a moment;
+no composer/Stop, metadata promptSubmitted=false. UI_FAILURE_CHECK.json
+records sanitized facts. Human browser verification requested; no challenge
+bypass, settings/profile/key/account-reset change or paid fallback. No live
+generating job is cancelled or polled. Original/retry targets retained.
+
+Full read38additional Lean files and35expected JSON; exact hashes in READ_LEDGER.
+Truncated raw JSON batch not counted as full: re-read all keys/values in three
+compact, untruncated batches and checked duplicate keys absent. M3–M7 are
+self-contained finite carriers/fixtures, not a generic Rust/Core preservation
+or source admission proof. M5 restore uses saved state/credentials, not current
+external authority or same-instance crash recovery. M7 fixed Core projections
+ignore arbitrary template content. ProducerFlow secrecy uses typed total
+execution; FallibleFlow fixed-step secrecy does not by itself cover aborting
+sequences. PureFunctions completeness is relative to finite declarative
+executions and sufficient fuel. Reference/publication private-model source
+provenance is not actual authenticated peer provenance. These are scope audits
+of existing evidence, not fresh theorem or test results and not Canon changes.
+Historical avatar/contract/cut expected artifacts remain separate from current
+source execution and actual capture; skeletons and report-local mirrors are not
+W4/alpha acceptance. Wider corpus incomplete; no new overall plan adopted.
+
+plan/ and current LAB status mirrors updated only for actual tool state.
+Documentation.md, docs/project-status.md, progress.md, tasks.md and
+samples_progress.md status synchronized; runnable samples/commands unchanged.
+No source or proof change, no repeated heavy baseline. Existing final path
+review remains disposed; final B scope review still unavailable. C/D/E remain
+gated, R09/R10 and119 dispositions not discharged. Same incomplete full-W4
+goal, quota stop waived, no subagents or external notifications. Prior metadata
+commit9f92893e pushed/parity; this own metadata follow-up will use normal
+commit/push with exact receipt I/B_CHALLENGE_READING_GIT.json.
+
+2026-09-27T13:43:46.633130+00:00 — Later required-data read adds43JSON (total78JSON/38Lean this
+continuation), including historical E2E/local cut/layer-insertion/lifetime rows.
+All keys/values read, duplicate keys absent; no execution claim from expected
+outputs. validate_docs23124 wholeexit0,1764reports; exact log hash/receipt in
+I/DOCS_B_CHALLENGE_READING.json. Later read/receipt metadata is checked separately,
+not falsely claimed covered by an earlier code run. Source and proof unchanged.

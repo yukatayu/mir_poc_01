@@ -1352,3 +1352,23 @@ M8 formal universe is explicitly finite case-enumerated structural evidence and
 cannot discharge C generic rule/checker completeness.26old/generated Lean stubs
 (True/trivial or archived sorry) are excluded from W4 proof evidence; full reading
 is not proof acceptance. No Canon or source semantics changed; no extra roadmap.
+
+
+### 2026-09-27T13:39:25.535842+00:00 — same review retry / bounded corpus audit
+
+After revalidating the actual prior failure, the same frozen final B packet was
+resent once under existing owner authorization (mir-w4-b-closeout-retry1). It
+ended1 before submission at the visible Cloudflare Just a moment verification.
+No generating job remains; human browser verification is requested. No review
+waiver, new permission gate, browser setting change or account reset. B closure
+and C/D/E remain gated, while independent required reading can proceed.
+
+38additional Lean sources and35historical expected JSON were read in full;
+READ_LEDGER pins exact hashes. M3–M7 finite carriers and fixed Core projections
+do not discharge arbitrary source/checker/runtime correspondence. Fixed-step
+fallible secrecy does not cover sequence abort; finite pure execution completeness
+requires sufficient fuel. Historical expected/synthetic/skeleton data is not
+current physical evidence or alpha acceptance. This audit refines R09/R10 scope
+without closing them, adding a new roadmap or changing accepted proof state.
+Code/proof evidence remains9d86052d; metadata9f92893e was pushed/parity checked.
+No unchanged Lean/native/network baseline is repeated for this metadata delta.

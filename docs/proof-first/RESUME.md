@@ -1,6 +1,6 @@
 # W4 RESUME — W4-B final integration / full W4 incomplete
 
-Updated 2026-09-27T13:03:57.686842+00:00. Same active full-W4 goal; sole main, NO SUBAGENTS.
+Updated 2026-09-27T13:38:52.842100+00:00. Same active full-W4 goal; sole main, NO SUBAGENTS.
 Owner2026-09-27 waived quota stopping again for this run. Only owner resets account.
 No W5+/alpha/Plan250-I3-4 activation, Canon acceptance, public/production/key changes.
 BASE ad9256c6e276634118de1fb6a40bddf6171c9f38; initial clean.
@@ -30,8 +30,14 @@ Cloudflare error. Full prompt/hash matched; same-response Retry clicked once
 13:06:25UTC, restored draft. Full unchanged draft sent once13:10:12UTC.
 At13:14:01UTC actual response is "Unknown error / Retry", no final answer.
 Exact target BDE41F8EDA6FACFF78B4D25E86F661FC/CDP33569.
-User recovery question pending. No generating job to poll; no blind repeated send.
-After confirmed repair, reuse frozen packet, inspect actual delivery and recover final.
+Original failed target retained. User recovery question pending but is not a new
+permission gate: owner already authorized appropriate resends after actual errors.
+At13:28:27UTC main launched same frozen packet once as mir-w4-b-closeout-retry1,
+I/oracle-b-closeout-retry1; tool63460 wholeexit1 collected13:34UTC.
+Actual UI check13:34:47UTC: new target9A30EFDFEA193B5825274D43996250E5
+is "Just a moment...", no composer/Stop; metadata promptSubmitted=false.
+Human Cloudflare browser verification requested. No normal generating job, no
+blind retry or automated challenge bypass. Preserve both failed tabs and packet.
 Question2330f40901f29f83b911257034e543b398c38b6617364df1644fd7f96faf2cff,
 manifest a9a8af489c72d3297989160dc758c2c193b8f86ab4c14cd16d4688dcfc93f496.
 9frozenfiles82086bytes, Canon/partition/actual receipts/dirty identities, no secrets.
@@ -78,9 +84,19 @@ READ_LEDGER records full/equivalent source hashes including206manifest targets;
 Historical example612 and ordinary .mir/companion MD read; broad JSON/text corpus
 incomplete. W1Abort/Address review and M8 effective-label gap remain R09 and must
 be resolved before dependent use. No new broad plan adopted from unread corpus.
-Current mandatory review is unavailable after actual backend errors; dependent
-C work is held. User repair confirmation is pending; do not mark W4 achieved or
-reset/pause its goal without owner direction. Resume exact frozen review after repair.
+Current mandatory review is unresolved; retry63460 failed before submission at Cloudflare verification.
+Dependent C work is held. User repair question remains pending; do not mark W4
+achieved or reset/pause its goal. Continue independent required reading while waiting.
+Continuation full-read38additional Lean files, including M3–M7, and78historical
+expected JSON (all keys/values, no duplicates, compact rendering). No theorem/run
+success inferred from reading. Wider JSON corpus remains incomplete; remaining
+list I/REMAINING_AFTER_LEAN_READ.json is before these78 JSON reads.
+No new broad roadmap or C implementation adopted. Historical M5 restore is a
+finite image check; M7 template projections ignore arbitrary template content,
+so neither supplies general runtime/admission correspondence.
+Latest prior metadata HEAD9f92893e367f9da7aaf5285f1e05f0aef0e34520 pushed/parity;
+this continuation only changes own LAB status/read records. Next Git receipt
+I/B_CHALLENGE_READING_GIT.json will record the exact next metadata commit.
 Latest estimate B~90%; prior45–90min assumed no new blockers. Now final-review
 backend failure makes completion time dependent on browser service recovery. Prior historical failed and
 successful runs remain in W4_CHECK/Report2614; never relabel them as current.
@@ -90,3 +106,6 @@ source bytes, -blank-at-eof check passed. Later make docs88320exit2 found only s
 progress.md header; corrected at22:20JST, validate_docs28899exit0. Exact receipts
 DOCS_B_RECOVERY_STATE.json / DOCS_B_RECOVERY_HEADER_FIX.json. Final receipt metadata
 appended afterwards; no code change or further baseline rerun. No live builds.
+
+Metadata validation23124wholeexit0; I/DOCS_B_CHALLENGE_READING.json.
+Later read/receipt metadata appended and separately checked; no repeated code run.
