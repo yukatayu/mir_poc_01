@@ -2881,3 +2881,47 @@ All keys/values read, duplicate keys absent; no execution claim from expected
 outputs. validate_docs23124 wholeexit0,1764reports; exact log hash/receipt in
 I/DOCS_B_CHALLENGE_READING.json. Later read/receipt metadata is checked separately,
 not falsely claimed covered by an earlier code run. Source and proof unchanged.
+
+
+### 2026-09-27T13:57:31.293966+00:00 — required corpus / observer field scope audit (LAB)
+
+From clean b1e48fa8 continuation, read199 more JSON in full (batches6–24 plus
+raw correspondence-predicates;106+22+71), all keys/values without truncation and
+without duplicate keys, and fully reinspected the two Rust modules recorded in
+READ_LEDGER. This completes the pending full-system-v1 JSON inventory, not the
+whole mandatory corpus. Hashes and read ranges distinguish reading from running.
+No previous unchanged Lean/native/network validation was rerun.
+
+Concrete source findings: local split puts requested entries into its launched
+field before admission; denial suppresses sessions but the fallback summary says
+accepted/launched. The stored negative expected JSON preserves that mismatch.
+Renderer delivered_nodes is copied before admission even for rejected frames;
+literal pose_snapshot_ref lookup and first-session/single-boundary context are
+bounded demo conventions. No claim that rejection is bypassed or packets were
+actually sent. Existing R06/R12 owns these limitations before D's first consumer;
+plan/ records explicit reuse/exclusion criteria. Earlier effects in expected
+contract-failure traces also cannot be inferred rolled back. No source fix,
+production contract, theorem, acceptance or C activation follows from this audit.
+
+Read-only Oracle retry target check13:53:24UTC still shows Just a moment, no
+composer/Stop. No generating job or new send, challenge bypass or browser setting
+change. The existing human verification question remains pending. B's required
+scope review and C/D/E are still unmet, same active full-W4 goal.
+
+plan/ and READ_LEDGER/RESUME updated for scoped findings. Documentation.md,
+docs/project-status.md, progress.md, tasks.md, samples_progress.md 更新不要:
+no workflow, runnable command, completion state or primary blocker changed.
+No new report, Canon edit, subagent or external notification. No new executable
+validation is claimed for this read-only/source-inspection delta; metadata will
+receive hash/JSON/whitespace checks before its own normal commit/push.
+
+2026-09-27T14:03:26.307374+00:00 — Later reads add102JSON,301total after b1e48fa8, plus2full Rust
+reinspections. Surface expected files, generated projection/Lean manifests,
+archived Lean bundles/host plans are complete in the pending inventory. Old
+True/sorry embedded stubs remain excluded. Broader practical/product corpus
+still incomplete. I/READ_LEDGER_OBSERVER_AUDIT.json verifies every added hash
+and preserves the prior ledger prefix. validate_docs6468 wholeexit0/1764reports;
+I/DOCS_B_OBSERVER_CORPUS.json records exact log hash. Later receipt/read notes
+are separately JSON/hash/diff checked, not retrospectively code-tested.
+RESUME compacted as a current snapshot; report preserves historical details.
+Own metadata commit/push receipt will be I/B_OBSERVER_CORPUS_GIT.json.

@@ -1372,3 +1372,36 @@ current physical evidence or alpha acceptance. This audit refines R09/R10 scope
 without closing them, adding a new roadmap or changing accepted proof state.
 Code/proof evidence remains9d86052d; metadata9f92893e was pushed/parity checked.
 No unchanged Lean/native/network baseline is repeated for this metadata delta.
+
+
+### 2026-09-27T13:57:31.293966+00:00 — historical observer fields: R06/R12 scope evidence
+
+Mandatory complete JSON reading reached the end of full-system-v1 and the first
+surface devtools/elaboration rows. These are stored expectations/generated
+artifacts, not new execution results. Full source inspection of
+`crates/mir-runtime/src/full_system_v1_local_split.rs` and
+`crates/mir-runtime/src/full_system_v1_renderer_pose_backend.rs` identifies
+three concrete non-implications before any W4-D observation consumer:
+
+- Local split copies the requested override into `launched_entry_transitions`
+  before admission. An unadmitted override prevents runtime sessions, but its
+  fallback summary still says accepted/launched. The committed negative
+  `client-entry-reject.json` explicitly expects this inconsistent summary.
+  The rejection predicate is not bypassed; the observation is not truthful as
+  an actual launch event. Do not import these fields as actual execution evidence.
+- Renderer `delivered_nodes` is cloned from posegraph state before delivery
+  admission, including rejection paths; `delivery_admitted` remains false there.
+  These names are not evidence of a transport delivery or provider execution.
+- Snapshot extraction selects the first Text binding literally named
+  `pose_snapshot_ref`; context extraction uses the first matching target/session
+  and a single outbound boundary. This is a bounded legacy demo convention,
+  not generic ordinary-source dataflow or attested provider provenance.
+
+Disposition: assign to existing R06/R12 at D's first relevant consumer, with
+E residual reconciliation. Any reuse must distinguish requested/admitted/actually
+executed/physically delivered facts and use real source-linked capture; otherwise
+exclude these legacy helpers with an explicit dependency rationale. No new Core
+primitive, runtime semantic choice, source fix, validation success, roadmap or
+Canon acceptance is made here. C prerequisites remain before D. Full-system
+provider inventory acceptance explicitly leaves actual provider execution and
+packet/FFI transport deferred; it cannot supply the missing physical evidence.
