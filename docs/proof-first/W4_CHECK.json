@@ -1,8 +1,8 @@
 {
   "schema": "proof-first-w4-check-v1",
-  "timestamp": "2026-09-27T13:15:50.144382+00:00",
+  "timestamp": "2026-09-27T23:54:48.407617+00:00",
   "base_head": "5d7c13a821c912d14c347775e23493a77f790768",
-  "status": "B code integrated/pushed; final boundary review blocked by actual Cloudflare challenge before retry submission; B incomplete",
+  "status": "B closed as bounded LAB integrated candidate; C current-context admission goal active; W4 incomplete",
   "work_root": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration",
   "publication_component": {
     "modules": {
@@ -4145,21 +4145,18 @@
     ]
   },
   "live_oracle": {
-    "at": "2026-09-26T09:24:09.259187+00:00",
-    "session": "mir-w4-layout-delta-review",
-    "pid": 2722920,
-    "question_sha256": "4cc528706911c27efbe25a4890d58267eef4d59a2fab5603a02273db58c113c1",
-    "manifest_sha256": "18fcabd5aa98d654851e845150019650cff4946f1b726de94b118791681c035e",
+    "at": "2026-09-28T00:00:40.753594+00:00",
+    "session": "mir-w4-c-submitted-evidence",
+    "pid": 3642711,
+    "question_sha256": "1c4e6e505dbc9534fd4606a3157cedd3bb213515e5af92bf66256a8234fc99a8",
+    "manifest_sha256": "8b0879daffef40f652094da5007c7817568e2b4bcfc3b335b75a0dcf2f6ec05f",
     "display": ":0",
-    "model_evidence": "owner confirmed visible 6 Pro selection; current strategy; no automated verification claimed",
-    "next_status_after": "2026-09-26T09:30:33.419Z",
+    "model_evidence": "select strategy using locally repaired model picker; actual selection evidence to be verified from run log",
+    "next_status_after": "2026-09-28T00:03:40.753594+00:00",
     "scope": "single read-only frozen current implementation review; no outer deadline or paid fallback",
-    "tool_session": 62998,
-    "packet": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/oracle-layout-review",
-    "status": "wrapper62998 exit1 DOM-detection; actual full prompt generating in retained visible tab; no resend",
-    "target": "8B22738E2FDB7D60AECD0489B2A7E4D8",
-    "port": 33569,
-    "last_check": "2026-09-26T09:27:33.419Z"
+    "tool_session": 75323,
+    "status": "running; checked00:04:04UTC, next>=00:07:04UTC",
+    "packet": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/oracle-c-submitted-evidence"
   },
   "funding_mirror_expansion": {
     "result": "/tmp/mir-w3-reference-numr_4eq/RESULT.json",
@@ -6944,10 +6941,10 @@
     "pending": "RunLiteralUnified tool81371; JointWorkCursor written not yet compiled; same-history full work/driver/monitor coupling remains"
   },
   "current_checkpoint": {
-    "at": "2026-09-27T13:15:50.144382+00:00",
-    "package": "W4-B",
-    "status": "Code/proof/observed workflow committed and pushed; B final scope review unavailable after backend errors; B not closed",
-    "next": "Browser repair then same frozen final boundary review; dependent C activation held. Independent required reading can continue."
+    "at": "2026-09-27T23:54:48.407617+00:00",
+    "package": "W4-C",
+    "status": "Theory/checker boundary research; D/E gated",
+    "next": "Current-context relative admission and first-consumer entry/authority mechanism mapping"
   },
   "oracle37_waiting_interior": {
     "receipt": {
@@ -41507,9 +41504,113 @@
         "forward_resume": "docs/proof-first/RESUME.md"
       },
       "live_oracle": null
+    },
+    {
+      "at": "2026-09-27T23:54:48.407617+00:00",
+      "status": "B code integrated/pushed; final boundary review blocked by actual Cloudflare challenge before retry submission; B incomplete",
+      "current_checkpoint": {
+        "at": "2026-09-27T13:15:50.144382+00:00",
+        "package": "W4-B",
+        "status": "Code/proof/observed workflow committed and pushed; B final scope review unavailable after backend errors; B not closed",
+        "next": "Browser repair then same frozen final boundary review; dependent C activation held. Independent required reading can continue."
+      },
+      "live_oracle": {
+        "at": "2026-09-26T09:24:09.259187+00:00",
+        "session": "mir-w4-layout-delta-review",
+        "pid": 2722920,
+        "question_sha256": "4cc528706911c27efbe25a4890d58267eef4d59a2fab5603a02273db58c113c1",
+        "manifest_sha256": "18fcabd5aa98d654851e845150019650cff4946f1b726de94b118791681c035e",
+        "display": ":0",
+        "model_evidence": "owner confirmed visible 6 Pro selection; current strategy; no automated verification claimed",
+        "next_status_after": "2026-09-26T09:30:33.419Z",
+        "scope": "single read-only frozen current implementation review; no outer deadline or paid fallback",
+        "tool_session": 62998,
+        "packet": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/oracle-layout-review",
+        "status": "wrapper62998 exit1 DOM-detection; actual full prompt generating in retained visible tab; no resend",
+        "target": "8B22738E2FDB7D60AECD0489B2A7E4D8",
+        "port": 33569,
+        "last_check": "2026-09-26T09:27:33.419Z"
+      }
     }
   ],
   "current_head": "9d86052d4f3982a2ddb077a610d02abed4f08327",
   "history_key_policy": "Dated component entries and previous header_history are historical; current execution is integration_20260926/current_checkpoint/RESUME, not old total_current or prior component live statuses.",
-  "current_head_note": "9d86052d is code/proof evidence cut; final docs-only continuation commit is recorded by Git and external I/B_RECOVERY_GIT.json after commit"
+  "current_head_note": "9d86052d is code/proof evidence cut; final docs-only continuation commit is recorded by Git and external I/B_RECOVERY_GIT.json after commit",
+  "b_closeout_20260928": {
+    "at": "2026-09-27T23:53:14.198988+00:00",
+    "session": "mir-w4-b-closeout-retry2",
+    "tool_session": 13614,
+    "whole_exit_code": 0,
+    "question_sha256": "2330f40901f29f83b911257034e543b398c38b6617364df1644fd7f96faf2cff",
+    "manifest_sha256": "a9a8af489c72d3297989160dc758c2c193b8f86ab4c14cd16d4688dcfc93f496",
+    "frozen_files": 9,
+    "frozen_bytes": 82086,
+    "answer_sha256": "b10364efde6de6d2606b83c19ac74f5d849dc7910b7c1b1ab8755f239ff7f86c",
+    "log_sha256": "b2bcd0873d798b25bf3a47a28b6cf1a331f7c157ee619819649948ca41e3cb0e",
+    "model": "6Pro; repaired select; verified=yes",
+    "scope": "Read-only final B boundary advice, no source validation execution or independent signed acceptance",
+    "dispositions": {
+      "accepted": "No named B omission within bounded integration criterion; retain C/D/E gates and nonclaims.",
+      "rejected": "Owner-only W4-E candidate completion and owner-controlled routine diff review: task explicitly delegates both to main. Formal Canon/public/authority acceptance remains reserved.",
+      "clarified": "C must establish source/Core/queue/memory premises before first dependent D implementation; D establishes actual implemented correspondence.",
+      "implementation_delta": "None required by review; source/proof cut 9d86052d unchanged."
+    },
+    "docs_attempt1": {
+      "tool_session": 40580,
+      "exit": 1,
+      "reason": "progress header older than new recent log; corrected"
+    },
+    "docs_pass": {
+      "at": "2026-09-28T00:05:00.649764+00:00",
+      "command": "python3 scripts/validate_docs.py",
+      "tool_session": 6045,
+      "whole_exit_code": 0,
+      "result": "Documentation scaffold looks complete. Found 1764 numbered report(s).",
+      "prior_failed_tool": 40580,
+      "later_changes": "receipt/resume metadata separately checked"
+    }
+  },
+  "c_submitted_evidence_20260928": {
+    "status": "external exploratory proof checked; consumer correspondence and Oracle review open",
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-current-evidence",
+    "source_sha256": "869d8520a4797d3dae98d53d87f68fcfb98eb68d7b5e68947e7922b3060e9086",
+    "kernel_attempt1_exit": 1,
+    "kernel_attempt1_reason": "explicit Authority type for before/after absent; corrected without weakening",
+    "kernel_attempt2_exit": 0,
+    "printed_theorems": 11,
+    "axioms": [
+      "propext",
+      "Quot.sound"
+    ],
+    "owned_audit": [
+      251,
+      766,
+      50
+    ],
+    "control_harness_attempt1_exit": 1,
+    "control_harness_attempt1_reason": "guard failure diagnostic classifier mismatch, actual first mutant rejected",
+    "control_tool": 97038,
+    "control_whole_exit": 0,
+    "negative_controls": [
+      "renew_submitted",
+      "omit_context",
+      "erase_revocation",
+      "all_refusal"
+    ],
+    "scope": "Submitted finite policy witness currentness only; no full C/actual Rust/atomic use proof",
+    "oracle": {
+      "at": "2026-09-28T00:00:40.753594+00:00",
+      "session": "mir-w4-c-submitted-evidence",
+      "pid": 3642711,
+      "question_sha256": "1c4e6e505dbc9534fd4606a3157cedd3bb213515e5af92bf66256a8234fc99a8",
+      "manifest_sha256": "8b0879daffef40f652094da5007c7817568e2b4bcfc3b335b75a0dcf2f6ec05f",
+      "display": ":0",
+      "model_evidence": "select strategy using locally repaired model picker; actual selection evidence to be verified from run log",
+      "next_status_after": "2026-09-28T00:03:40.753594+00:00",
+      "scope": "single read-only frozen current implementation review; no outer deadline or paid fallback",
+      "tool_session": 75323,
+      "status": "running; checked00:04:04UTC, next>=00:07:04UTC",
+      "packet": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/oracle-c-submitted-evidence"
+    }
+  }
 }

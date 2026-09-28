@@ -150,8 +150,8 @@ import paths and successful source/object outputs before/after use; its fresh
 full validation passed278commands with236build receipts and9168file bindings.
 The current V2 observed model passed278commands/9169bindings; native preparation
 passed235commands and the repaired physical stage passed68commands/15profiles/53
-controls. Whole exits and bound inputs were verified. Final W4-B integration and
-Rust/Core/privateQUIC remain open; see the three-stage workflow in `scripts/README.md`.
+controls. Whole exits and bound inputs were verified. W4-B bounded integration
+is closed; C premises and Rust/Core/privateQUIC correspondence remain open; see the three-stage workflow in `scripts/README.md`.
 
 Candidate command (existing external workroot required):
 
@@ -172,5 +172,7 @@ code-generation fragment, not a standalone module or theorem. These private
 reference sources are staged externally by `scripts/proof_first_host_prepare.py`;
 the current observed native preparation and repaired physical runs passed235 and68
 commands respectively, with whole exits and input bindings checked. Final W4-B
-scope review is pending; Rust/Core/privateQUIC remains unconnected. Their source
+scope review was collected and locally disposed; B is a bounded LAB integrated
+candidate. C admission/authority premises remain open; Rust/Core/privateQUIC
+remains unconnected. Their source
 origins/transformations are in `docs/proof-first/W4_HOST_MANIFEST.json`.

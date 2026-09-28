@@ -1,14 +1,13 @@
-# W4 RESUME — B review blocked; full W4 incomplete
+# W4 RESUME — B integrated candidate; C active; full W4 incomplete
 
-Updated 2026-09-27T14:25:09.834511+00:00. Same active full-W4 goal; sole main, NO SUBAGENTS.
+Updated 2026-09-27T23:54:48.407617+00:00. Same active full-W4 goal; sole main, NO SUBAGENTS.
 Owner Sep27 waived quota stopping for this run; only owner resets account.
 No W5+/alpha/Plan250-I3-4 activation, Canon acceptance/public/production/key changes.
 Original BASE ad9256c6e276634118de1fb6a40bddf6171c9f38, initial clean.
 Code/proof/workflow9d86052d4f3982a2ddb077a610d02abed4f08327 pushed/parity.
-Current metadata baseline052a72843ee617fe2423638ab690ce1c30012a38 pushed/parity.
-Metadata commit/push/parity receipt I/B_OBSERVER_CORPUS_GIT.json confirms clean
-052a7284. Later own dirt: READ_LEDGER/RESUME, plan/Report2614 and samples/lean/README.
-Inspect git status first.
+Current baseline78430f43713131e7c396a25bf791465f3bb67369 pushed/parity, clean at
+Sep28 owner resume. I/B_CORPUS_RECONCILIATION_GIT.json. Current own delta starts
+with this retry record; inspect git status first.
 No reset/clean/cache deletion/hostshare/paid fallback/external notification.
 
 I=/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration
@@ -18,16 +17,23 @@ Sep27 13:41UTC root23GiB free/RAM10GiB available; recheck before heavy build.
 Lean4.29.1 --trust=0 -j1, AS4GiB/core0, serial. No live build/test/Oracle process.
 
 ## One semantic goal / next consumer
-W4-B, PL1/2/0 S4/S6 theory/refinement/integration. REQ DS01/02/03/04/08
-AU01/04/05/08 VF04/05 PT03/11/14 SC04/07 Q18. Same native/Joint/funding/
-source-entry/cohort history for actual source/owner events and stores. Delayed
-stores, caller confirmation/public completion distinct; unknown IO is not
-rollback/refund/recovery. Technical B cut passed/integrated; final scope review
-required before B closure. C relative admission/all-entry/current-auth/actual-peer/
-namespace/custody/Core-runtime premises before D source→actual QUIC→observation.
-E real network/I3 regression/119/residuals. Do not defer C prerequisites to E.
+W4-C theory/checker boundary: current-context source-derived admission, relative
+completeness, all entry/current authority/actual peer/namespace/custody conditions.
+CURRENT_GOAL.md gives inputs, positive/falsifiers, current/minimal alternative,
+consumer and exit. D/E remain gated. No runtime edits before theory gate.
+B is closed as bounded LAB integrated candidate, not Canon acceptance.
 
-## Oracle — actual human-verification failure, no generating job
+## Oracle — retry2 final collected
+mir-w4-b-closeout-retry2, tool13614 wholeexit0 collected23:49:25UTC.
+6Pro repaired select verified=yes. Exact9files82086bytes/question/manifest checked.
+ANSWER SHA b10364efde6de6d2606b83c19ac74f5d849dc7910b7c1b1ab8755f239ff7f86c.
+I/B_CLOSEOUT_ORACLE_VERIFIED.json preserves identities and local dispositions.
+No B blocker found in supplied scope; advice only, no executed validation.
+Reject owner-only routine diff review/W4-E candidate completion language because
+already delegated by user. Retain reserved formal acceptance and C-before-D
+source/Core/queue/memory premises. B job is complete; do not resend. Current C job is recorded below.
+
+### Prior attempts (terminal failures)
 Final scope review original I/oracle-b-closeout-review, mir-w4-b-closeout-review,
 tool83656 wholeexit1. Actual Cloudflare error then Unknown error/Retry. One
 alert Retry13:06:25 restored draft; same verified prompt sent13:10:12. Failure
@@ -35,13 +41,12 @@ rechecked13:27 before resend. Original target BDE41F8EDA6FACFF78B4D25E86F661FC.
 Retry I/oracle-b-closeout-retry1, mir-w4-b-closeout-retry1, launched13:28:27UTC,
 tool63460 wholeexit1 collected13:34UTC; promptSubmitted=false. Exact visible
 target9A30EFDFEA193B5825274D43996250E5/CDP33569: Just a moment, no composer/Stop
-at14:23:27UTC (CHALLENGE_RECHECK_CORPUS_DONE.json). Existing async human Cloudflare
-verification question pending. No automated challenge bypass/settings/profile/
+at14:23:27UTC (CHALLENGE_RECHECK_CORPUS_DONE.json). Prior async human Cloudflare
+verification question resolved by owner-reported repair and successful retry2. No automated challenge bypass/settings/profile/
 account reset, no blind resends. Preserve failed tabs and same frozen packet.
 Question SHA2330f40901f29f83b911257034e543b398c38b6617364df1644fd7f96faf2cff;
 manifest a9a8af489c72d3297989160dc758c2c193b8f86ab4c14cd16d4688dcfc93f496.
-9files82086bytes, visible DISPLAY:0/current owner-confirmed6Pro. Once recovery is
-verified, existing actual-error resend authorization applies. For normal live
+9files82086bytes, visible DISPLAY:0/current owner-confirmed6Pro. Recovery was verified by final retry2 answer. For normal live
 job use >=180s checks, no arbitrary deadline; wrapper timeout != browser failure.
 Prior Oracle consultations all FINAL; don't repoll. Final path review hash
 e20760b6f0edad03fb9350c82d4422bb5a91d4cf7a714a7decddf3e8fbea48d1 disposed.
@@ -87,15 +92,21 @@ clone-before-admission delivered_nodes and literal pose_snapshot_ref extraction;
 repair or explicitly exclude before D's first relevant observation consumer.
 Latest plan/Report2614 appendices contain evidence and reuse boundaries.
 
-Next: owner completes visible browser verification; check exact target normal UI
-then resend the same frozen B packet once under existing actual-error authorization.
-Independent required sample/119 reading has reached the saved checkpoint.
-Recover/dispose final B scope review before B closure/C activation, same W4goal.
-B estimate~90%,45–90min after review recovery absent major findings; service
-recovery wall time unknown. Do not mark complete or pause. Same W4 objective remains incomplete; human
-verification blocks further dependent work.
-Latest docs45216 wholeexit0/1764reports: I/DOCS_B_CORPUS_RECONCILIATION.json.
-Added178ledger entries verified; older failures retained in report. Current
-checkpoint commit/push/parity: I/B_CORPUS_RECONCILIATION_GIT.json.
-No heavy unchanged baselines rerun.
-No new report or primary-status change; other snapshots remain current.
+Next: continue C submitted-evidence/current-consumer research. B own closure
+commit/push receipt will be I/B_CLOSEOUT_GIT.json.
+C requires real consumer definitions/proofs before dependent implementation.
+B current receipt hashes freshly reconciled; unchanged heavy baselines not rerun.
+Latest closure docs6045 wholeexit0/1764reports; prior40580 failed stale header,
+corrected. I/B_CLOSEOUT_DOCS.json.
+
+C external proof: I/c-current-evidence/MirroreaProofFirstSubmittedEvidence.lean,
+11general theorems pass trust0; owned audit251/766/50 (50new), propext/Quot.sound.
+Initial missing Authority annotation corrected; log retained. Four weak alternatives
+rejected at exact guard expression; wrapper diagnostic matcher corrected, final
+97038 wholeexit0. No production or Canon adoption. Input2sources byte-preserved.
+C Oracle mir-w4-c-submitted-evidence/tool75323 started00:00:40UTC; check00:04:04
+still running, next>=00:07:04UTC. Packet I/oracle-c-submitted-evidence.
+Question1c4e6e505dbc9534fd4606a3157cedd3bb213515e5af92bf66256a8234fc99a8;
+manifest8b0879daffef40f652094da5007c7817568e2b4bcfc3b335b75a0dcf2f6ec05f.
+Exact current source, proof logs and bounded real consumer excerpts supplied;
+no full actual Rust correspondence implied. Preserve existing job/no latency resend.

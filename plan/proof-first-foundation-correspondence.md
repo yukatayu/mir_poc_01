@@ -6,7 +6,7 @@ Normative source: `mirrorea_canon/`; evidence: report2611 and docs/proof-first/.
 The handoff's119requirements/30judgments/18guarantee targets/24scenarios/alpha1–8
 remain tracked inputs; U intent, D proposal, adoption and demonstration are distinct.
 
-Current package map (2026-09-26 owner resume): W4-A completed bounded evidence; **W4-B active/incomplete**; W4-C/D/E dependency-gated. See the appended `W4-A〜W4-E 作業区切り（2026-09-24 owner指定）` and subsequent evidence. Older dated pause/current/next entries below remain history. The owner waived quota stopping again for this run on2026-09-27; only the owner resets the account.
+Current package map (2026-09-26 owner resume): W4-A completed bounded evidence; **W4-B bounded LAB integrated candidate closed; W4-C active**; W4-D/E dependency-gated. See the appended `W4-A〜W4-E 作業区切り（2026-09-24 owner指定）` and subsequent evidence. Older dated pause/current/next entries below remain history. The owner waived quota stopping again for this run on2026-09-27; only the owner resets the account.
 
 ## Authority and retained history
 
@@ -1431,3 +1431,30 @@ self-maintained records. This is an inventory result, not a claim of reading all
 raw logs or all unrelated code. No new overall plan or R10 wholesale closure.
 The Lean README now accurately distinguishes passed whole observed validation
 from pending final B scope review. No source/proof/command/taxonomy changes.
+
+### 2026-09-27T23:54:48.407617+00:00 — B closure / C current-context admission
+
+復旧後の同一資料による最終境界Oracle reviewを回収し、主担当が証拠と照合しました。Bは限定LAB統合候補として完了、Cが現在地です。D/Eは依存待ちです。Oracle回答は証明・署名済み受理ではありません。
+
+Retry2 tool13614 wholeexit0; exact packet9files82086bytes and answer SHA
+b10364efde6de6d2606b83c19ac74f5d849dc7910b7c1b1ab8755f239ff7f86c verified.
+Advice did not rerun proof/runtime validation. Main rejects owner-only W4-E
+candidate closure/routine diff-review classification: task delegates these;
+formal Canon/public/authority boundaries remain reserved. C retains source/Core/
+queue/memory premises before first D implementation, D actual correspondence.
+Existing model/preparation/physical receipt result/observation hashes rechecked;
+source9d86052d unchanged. No unchanged heavy baselines rerun.
+
+One C goal is current-context source-derived admission: distinguish proof and
+authority, observed peer and claim, preflight and consumption; show meaningful
+positives, relative completeness and stale/revoke/substitution/bypass rejection.
+Compare consumption-bound validation to reusable preflight-only evidence.
+R02/R03/R04/R05/R09 prerequisites remain open; no new global roadmap or Canon
+THM/OBL/phase adoption. CURRENT_GOAL gives full goal contract.
+
+C first bounded result: explicit submitted derivation versus existential authorization
+now has external general Lean exactness/revocation/relative-completeness proofs.
+This does not establish an atomic physical use or bind a real M9 lookup; direct
+consumer correspondence remains research. Four finite weak alternatives fail.
+Oracle mir-w4-c-submitted-evidence is reviewing this cut; Report2614 holds failures
+and exact receipts. No production adoption or new C completion claim.

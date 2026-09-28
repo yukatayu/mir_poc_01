@@ -1,6 +1,6 @@
 # Current Task Map (LAB)
 
-最終更新: 2026-09-27 22:38 JST
+最終更新: 2026-09-28 08:54 JST
 
 **Canon notice:** `mirrorea_canon/` is normative. Everything outside
 `mirrorea_canon/` is LAB; if LAB conflicts with canon, canon wins. This snapshot
@@ -17,13 +17,13 @@ remain the accepted bounded-program choice, TCP deferred and datagrams excluded.
 
 W4はowner指定の単一task-local goal、PL1/PL2/PL0 S4/S6です。2026-09-26のowner指示で同じgoalを再開しました。W1〜W3の有限候補と119行U/D/nonacceptanceを保持します。主担当一人、sub-agent禁止。sorry/admit又はMir固有の未証明公理で穴を埋めません。
 
-2026-09-24のowner指定で、同じW4を **W4-A（限定証拠・完了済み）→W4-B（repo統合・現在地、進行中）→W4-C（残る基礎条件）→W4-D（Rust/Core/private QUIC接続）→W4-E（実network検査・残項目回収・W4完了判定）** に分割しました。C/D/Eは依存待ちです。Eは元W4と前段の残項目を照合しますが、C/Dの前提をEへ先送りして実装を進めません。完了条件・推奨model/effort・R01〜R12残項目台帳は `plan/proof-first-foundation-correspondence.md` の「W4-A〜W4-E 作業区切り」を参照してください。分割当日の計画整理と今回の実行再開を区別します。
+2026-09-24のowner指定で、同じW4を **W4-A（限定証拠・完了済み）→W4-B（repo統合・限定候補完了）→W4-C（残る基礎条件・現在地）→W4-D（Rust/Core/private QUIC接続）→W4-E（実network検査・残項目回収・W4完了判定）** に分割しました。Bの境界review回収後、Cへ進みました。D/Eは依存待ちです。Eは元W4と前段の残項目を照合しますが、C/Dの前提をEへ先送りして実装を進めません。完了条件・推奨model/effort・R01〜R12残項目台帳は `plan/proof-first-foundation-correspondence.md` の「W4-A〜W4-E 作業区切り」を参照してください。分割当日の計画整理と今回の実行再開を区別します。
 
 Canon position: `mirrorea_canon/adr/ADR-0043.md`. LAB dependency memory: `plan/proof-first-foundation-correspondence.md`.
 
 W4-Aの保存済み証拠は通常3profile/23control、確定失敗4/14、結果不明8/16と選択モデルの一般Lean命題です。privileged pipe/capture/compiler TCBに条件付きで、full physical/QUIC/authentication/秘密/復旧の保証ではありません。検証runner全体のexit0、全必須check・入力/import/source-object/hash照合、子processの期待statusとの一致が必要です。注入故障・拒否反例の期待失敗を成功終了へ変えず、途中の成功markerだけでは受理しません。sourceClaim/sourceWireClaimのprivate locator aliasは保持され、canonical-tag injectivityは主張しません。
 
-Exact evidence: `docs/proof-first/RESUME.md`, `docs/proof-first/CURRENT_GOAL.md`, `docs/proof-first/W4_CHECK.json`, Report2614. W4-B検証結果: 206依存sourceを原本と同一bytesで保存し、fresh Lean検査と公理監査を完了しました。既存runnerのV2モデル278command・236module/22215所有宣言監査、native準備235command、修正後の実process検査68command（15profile/53拒否control）が全体exit0で完走しました。段階ごとに9169/9973/34658入力束縛と実ログを照合しています。保存証拠と現行sourceの役割分離、別名参照・期待値衝突・途中失敗の反例も検査済みです。コード・証明・検査手順は9d86052dでcommit/push・remote一致を確認済みです。最後の境界Oracle reviewは実サービスエラー後、同一資料を再送しましたが、送信前のCloudflare「Just a moment…」確認で終了しました。可視Chromeでの人手の確認待ちで、生成中jobはありません。Bは未完了、C/D/Eは依存待ちです。一般証明は選択モデルについて、実processは特権private-pipeの有限証拠についてであり、実network・認証・秘密・復旧の保証へ広げません。
+Exact evidence: `docs/proof-first/RESUME.md`, `docs/proof-first/CURRENT_GOAL.md`, `docs/proof-first/W4_CHECK.json`, Report2614. W4-B検証結果: 206依存sourceを原本と同一bytesで保存し、fresh Lean検査と公理監査を完了しました。既存runnerのV2モデル278command・236module/22215所有宣言監査、native準備235command、修正後の実process検査68command（15profile/53拒否control）が全体exit0で完走しました。段階ごとに9169/9973/34658入力束縛と実ログを照合しています。保存証拠と現行sourceの役割分離、別名参照・期待値衝突・途中失敗の反例も検査済みです。コード・証明・検査手順は9d86052dでcommit/push・remote一致を確認済みです。復旧後の同一資料による最終境界Oracle reviewを回収し、主担当が証拠と照合しました。Bは限定LAB統合候補として完了、Cが現在地です。D/Eは依存待ちです。Oracle回答は証明・署名済み受理ではありません。一般証明は選択モデルについて、実processは特権private-pipeの有限証拠についてであり、実network・認証・秘密・復旧の保証へ広げません。
 
 ## ordered self-driven packages
 
@@ -32,11 +32,11 @@ Exact evidence: `docs/proof-first/RESUME.md`, `docs/proof-first/CURRENT_GOAL.md`
 | Package / macro position | Required result / first consumer | Startability / suggested model / rough estimate |
 |---|---|---|
 | W4-A / Macro1/2/5 | 保存済み限定モデルと実process証拠をB/Cへ渡す | 完了済みの限定範囲。既存結果を保持 |
-| W4-B / Macro2/5 | 外部proof/referenceを既存repo runnerへ統合しfresh再現→C/D | **現在地・最終review復旧待ち、B未完了**。コード統合/push済み。GPT-6 Astra high。B+C合計6–18hの旧暫定値 |
-| W4-C / Macro1/5 | relative admission、全entry/current auth/実namespaceの必要条件を閉じる→D | 後段依存。GPT-6 Astra high、難所xhigh。B+C合計内 |
+| W4-B / Macro2/5 | 外部proof/referenceを既存repo runnerへ統合しfresh再現→C/D | 限定LAB統合候補として完了。境界review回収・主担当照合済み |
+| W4-C / Macro1/5 | relative admission、全entry/current auth/実namespaceの必要条件を閉じる→D | **現在地**。受理可能性と現在の要求文脈の一つのgoalから開始。GPT-6 Astra high、難所xhigh。所要時間はconsumer具体化後に再評価 |
 | W4-D / Macro3/6 | source→checked Core→生成edge→実private QUIC→観測→E | 後段依存。境界Astra high、確定実装GPT-6 Sol high。旧暫定10–24h |
 | W4-E / Macro3/6 close | 実network正常/障害/観測・迂回・I3回帰・119対応・全残項目回収・W4候補統合 | 後段依存。検査Sol high、合成/完了判定Astra high。旧暫定6–14h |
-| Mandatory reading / Macro0 | 必読corpus・依存coneの正確な読了/hash台帳 | 各判断前に必要範囲を読む。歴史example612まで全文。既存docsの通読も進め、広域sample/archive corpusは未完了。現在の206module依存coneは全文/equivalent hash照合済み |
+| Mandatory reading / Macro0 | 必読corpus・依存coneの正確な読了/hash台帳 | 各判断前に必要範囲を読む。歴史example612まで全文。既存docsの通読も進め、広域sample/archive JSONは保存済みbatch64まで読了。未照合の生成receipt等を一括読了とはしない。現在の206module依存coneは全文/equivalent hash照合済み |
 | W5/W6/W7 | 永続化/復旧、秘密観測、α統合 | 後段依存、今回のW4 scope外 |
 
 残り24–60実作業時間は低確度の旧集約値で、今回測り直していません。実際のCore/runtime対応が明らかになった時点で再評価します。Oracleの経過時間を失敗や任意の締切にしません。分割数を進捗率にせず、モデル推奨も未実測の候補です。手動の同一主担当切替を想定し、自動設定やsub-agentを導入しません。

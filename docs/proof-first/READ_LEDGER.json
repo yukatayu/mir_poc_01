@@ -45345,5 +45345,33 @@
     "status": "full",
     "read_at": "2026-09-27T14:21:25.193426+00:00",
     "role": "Previously full current read plus sole-main authored R09/R10 forward reconciliation; no new overall plan or requirement acceptance."
+  },
+  {
+    "path": "docs/proof-first/CURRENT_GOAL.md",
+    "sha256": "b9282994f37fde9dd57629d0b7065361aae50def3ddfbf2ef9f561811bcdb0e5",
+    "range": "1-14",
+    "status": "authored",
+    "role": "B closure authored delta plus preserved prior full read; C goal contract, no theorem acceptance"
+  },
+  {
+    "path": "tasks.md",
+    "sha256": "d12061987e7d6943aa656ed22d64cbf07944188f05cd732fecb048080aa04c17",
+    "range": "1-83",
+    "status": "full",
+    "role": "B closure authored delta plus preserved prior full read; C goal contract, no theorem acceptance"
+  },
+  {
+    "path": "plan/proof-first-foundation-correspondence.md",
+    "sha256": "470303d80e4114ed6d6c1aace655fe6db52757e1bc4f3c1012cbee34255ac6d7",
+    "range": "1-1460",
+    "status": "authored",
+    "role": "B closure authored delta plus preserved prior full read; C goal contract, no theorem acceptance"
+  },
+  {
+    "path": "samples/lean/README.md",
+    "sha256": "5649e42426e054e63db94871de124ed959f9bdc44d1018d9cf39b6afa8b36277",
+    "range": "1-178",
+    "status": "authored",
+    "role": "B closure authored delta plus preserved prior full read; C goal contract, no theorem acceptance"
   }
 ]

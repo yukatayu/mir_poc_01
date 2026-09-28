@@ -2987,3 +2987,72 @@ no useful dependent B-close/C implementation may bypass the required review.
 Preserve the frozen packet/session records and resume after the owner completes
 visible browser verification. This is an external prerequisite, not quota/latency
 exhaustion, scope completion or a request to waive review. No normal job stopped.
+
+
+### 2026-09-27T23:47:44.221648+00:00 — owner-reported Oracle repair / same W4 resumption
+
+Started clean at78430f43713131e7c396a25bf791465f3bb67369. Goal is active again
+with unchanged full-W4 objective, sole main/no subagents. Current manuals/help
+read: Sep28 local model/answer DOM correction and successful browser smoke test
+recorded. Same frozen question/manifest/9files copied without mutation to
+I/oracle-b-closeout-retry2 and sent once with repaired select strategy, visible
+DISPLAY:0, keep-browser, heartbeat180, retain-hours0/no-notify, no outer timeout
+or paid fallback. Session mir-w4-b-closeout-retry2, tool13614, launch23:46:09UTC;
+first status check not before23:49:09UTC. Model selection/submission/final result
+remain to be verified. Prior failures and old challenge tabs are not reused as
+current success evidence. Code/proof cut remains9d86052d, intervening commits
+are LAB metadata only; source review packet remains the same frozen cut.
+
+Resources: root24GiB free,12GiB available memory; no heavy build started.
+Canon README/MAP and m8 admission/privateQUIC/process source hashes match prior
+full read ledger. Broad attempted re-read output was truncated and is not a new
+full-read claim; exact prior ledger evidence remains valid. EntryAcquisition and
+ProducedRootedness fully re-read; one guessed prefixed ProducedRootedness path
+failed, then actual manifest file resolved/read. No source changes.
+
+### 2026-09-27T23:54:48.407617+00:00 — B boundary review disposed / C activation
+
+復旧後の同一資料による最終境界Oracle reviewを回収し、主担当が証拠と照合しました。Bは限定LAB統合候補として完了、Cが現在地です。D/Eは依存待ちです。Oracle回答は証明・署名済み受理ではありません。
+
+Retry2 final collected tool13614 exit0, model6Pro select verified=yes. Exact
+question/manifest9files82086bytes/log/answer verified; answer SHA
+b10364efde6de6d2606b83c19ac74f5d849dc7910b7c1b1ab8755f239ff7f86c.
+I/B_CLOSEOUT_ORACLE_VERIFIED.json records accepted/no-block, rejected extra
+owner-only W4-E/diff authority, and clarified C-before-D premises. Review is
+advice, not executed validation or independent authenticated acceptance.
+Main freshly reconciled all three saved RESULT/OBSERVATION hashes and recorded
+whole exits. No unchanged expensive proof/native/physical rerun or new network
+claim. B proof/source cut unchanged9d86052d. Prior failures retained.
+
+Current single C goal/positives/falsifiers/alternative/exit recorded in
+CURRENT_GOAL and plan. No source implementation yet. plan/, Documentation.md,
+docs/project-status.md, progress.md, tasks.md (whole current map reviewed),
+samples_progress.md and RESUME/W4_CHECK synchronized. Sample taxonomy unchanged.
+New docs/diff validation and commit/push pending below; no subagents, external
+notification, Canon/handoff/owner-key or public contract edits.
+
+2026-09-27T23:58:57.794427+00:00 — Closure docs40580 exit1: progress last-updated header
+lagged the new log. Corrected to08:54JST; rerun pending. No proof/runtime failure.
+
+2026-09-28T00:05:00.649764+00:00 — Closure docs6045 wholeexit0/1764reports; own diff check
+passed, nearby stale B integration phrases corrected. I/B_CLOSEOUT_DOCS.json.
+Only LAB metadata/README changes; B source/proof cut9d86052d unchanged.
+Own normal commit/push/parity receipt I/B_CLOSEOUT_GIT.json follows. No subagents.
+
+C research started externally in I/c-current-evidence. New SubmittedEvidence
+inductive Supports distinguishes a specific submitted derivation from existential
+Authorized. Eleven general lemmas: checker/Supports and revalidation/Bound exact,
+selected-claim revocation refusal and retention, producer relative completeness,
+changed-context refusal. Lean4.29.1 trust0 j1 passes after one missing explicit
+Authority type correction. Owned audit251/766/50 declarations passes;11printed
+new theorem dependencies only propext/Quot.sound. No sorry/Mir axiom.
+Eight positive/negative guards plus four deliberate weakening controls reject
+renewal-in-place/context omission/revocation erasure/all refusal. First wrapper
+matched the wrong text for expected Lean guard failure; actual failure retained,
+classifier corrected, final tool97038 exit0. These are finite controls, not proof.
+No runtime alteration or C closure. Actual M9 owner inventory + SYS4 exact carrier/
+current check chain inspected against prior full hashes. Resource/atomicity,
+issuer/head/peer authenticity, uniqueness/all-entry and source/Core correspondence
+remain open. Oracle75323 running on exact frozen proof and consumer excerpts,
+session mir-w4-c-submitted-evidence; no arbitrary timeout. RESUME/W4_CHECK hold
+identities/next check. Same C goal continues; no new report or global plan.

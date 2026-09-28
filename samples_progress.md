@@ -14,20 +14,20 @@ Fresh76module/9055owned audit,32source controls,13integrity/consumer negatives a
 proof-weakening controls pass. Twelve Oracle reviews are recovered/dispositioned;
 source/evidence81f82a0b is normally pushed. This is local in-memory evidence, not
 physical nodes, durable restore, confidential observation, alpha or Canon promotion.
-Owner resumed W4 only on2026-09-26; W4-B is active and incomplete.
+Owner resumed W4 only on2026-09-26; W4-B is closed as a bounded LAB integrated candidate; W4-C is active.
 Previously integrated publication/owner/registration proofs remain under the
 existing reference checker and Lean sample root. The preserved host-store/full-field/lease/fault proof cone is now mirrored;
-its existing-runner integration is under validation. Physical capture and replay
-harnesses remain external and are not yet repo-only reproducible samples. Prior I3 process/QUIC46case results remain
+its existing-runner integration has passed the B criterion. Repository prepare/
+physical runners now stage the preserved sources into fresh external workdirs. Prior I3 process/QUIC46case results remain
 regression history, not a new network run. W5+ and Plan250/I3-4 stay inactive.
 
-2026-09-24のowner指定で、同じW4を **W4-A（限定証拠・完了済み）→W4-B（repo統合・現在地、進行中）→W4-C（残る基礎条件）→W4-D（Rust/Core/private QUIC接続）→W4-E（実network検査・残項目回収・W4完了判定）** に分割しました。C/D/Eは依存待ちです。Eは元W4と前段の残項目を照合しますが、C/Dの前提をEへ先送りして実装を進めません。完了条件・推奨model/effort・R01〜R12残項目台帳は `plan/proof-first-foundation-correspondence.md` の「W4-A〜W4-E 作業区切り」を参照してください。分割当日は計画整理のみでした。2026-09-26のowner指示で同じW4 goalを再開しています。
+2026-09-24のowner指定で、同じW4を **W4-A（限定証拠・完了済み）→W4-B（repo統合・限定候補完了）→W4-C（残る基礎条件・現在地）→W4-D（Rust/Core/private QUIC接続）→W4-E（実network検査・残項目回収・W4完了判定）** に分割しました。Bの境界review回収後、Cへ進みました。D/Eは依存待ちです。Eは元W4と前段の残項目を照合しますが、C/Dの前提をEへ先送りして実装を進めません。完了条件・推奨model/effort・R01〜R12残項目台帳は `plan/proof-first-foundation-correspondence.md` の「W4-A〜W4-E 作業区切り」を参照してください。分割当日は計画整理のみでした。2026-09-26のowner指示で同じW4 goalを再開しています。
 
-W4は、通常sourceと実ownerの状態・資源を同じ履歴から対応付ける基礎検証を進めています。選択した形式モデルにおける通常実行の全所有者lease・値・履歴の一般証明と、確定失敗4profile／未確定通信8profileの実記録との接続を外部workdirで検査しました。正常系23、確定失敗14、未確定通信16の改変controlも検査済みです。通信結果不明時は最後に確定した状態と物理通信の残余を区別します。これらは限定した研究候補で、追加proof群のrepo再現runnerへの統合、全entryの実機対応、現在の認証認可・物理namespace、既存Rust/Core/privateQUIC接続とW4全体の統合は未完了です。
+W4は、通常sourceと実ownerの状態・資源を同じ履歴から対応付ける基礎検証を進めています。選択した形式モデルにおける通常実行の全所有者lease・値・履歴の一般証明と、確定失敗4profile／未確定通信8profileの実記録との接続を外部workdirで検査しました。正常系23、確定失敗14、未確定通信16の改変controlも検査済みです。通信結果不明時は最後に確定した状態と物理通信の残余を区別します。追加proof群のrepo再現runnerへの統合は限定LAB候補として完了しました。全entryの実機対応、現在の認証認可・物理namespace、既存Rust/Core/privateQUIC接続とW4全体の統合は未完了です。
 
 2026-09-27の追加owner指示で、今回の実行も残量による停止を外して同じW4を継続します。リセットはownerが行い、主担当は操作しません。W5+とPlan250/I3-4は開始しません。過去のquota停止・検査記録はReport2614に保持します。
 
-W4-B検証結果: 206依存sourceを原本と同一bytesで保存し、fresh Lean検査と公理監査を完了しました。既存runnerのV2モデル278command・236module/22215所有宣言監査、native準備235command、修正後の実process検査68command（15profile/53拒否control）が全体exit0で完走しました。段階ごとに9169/9973/34658入力束縛と実ログを照合しています。保存証拠と現行sourceの役割分離、別名参照・期待値衝突・途中失敗の反例も検査済みです。コード・証明・検査手順は9d86052dでcommit/push・remote一致を確認済みです。最後の境界Oracle reviewは実サービスエラー後、同一資料を再送しましたが、送信前のCloudflare「Just a moment…」確認で終了しました。可視Chromeでの人手の確認待ちで、生成中jobはありません。Bは未完了、C/D/Eは依存待ちです。一般証明は選択モデルについて、実processは特権private-pipeの有限証拠についてであり、実network・認証・秘密・復旧の保証へ広げません。
+W4-B検証結果: 206依存sourceを原本と同一bytesで保存し、fresh Lean検査と公理監査を完了しました。既存runnerのV2モデル278command・236module/22215所有宣言監査、native準備235command、修正後の実process検査68command（15profile/53拒否control）が全体exit0で完走しました。段階ごとに9169/9973/34658入力束縛と実ログを照合しています。保存証拠と現行sourceの役割分離、別名参照・期待値衝突・途中失敗の反例も検査済みです。コード・証明・検査手順は9d86052dでcommit/push・remote一致を確認済みです。復旧後の同一資料による最終境界Oracle reviewを回収し、主担当が証拠と照合しました。Bは限定LAB統合候補として完了、Cが現在地です。D/Eは依存待ちです。Oracle回答は証明・署名済み受理ではありません。一般証明は選択モデルについて、実processは特権private-pipeの有限証拠についてであり、実network・認証・秘密・復旧の保証へ広げません。
 
 | W3 evidence | Reproduction | Remaining boundary |
 |---|---|---|
@@ -125,10 +125,9 @@ Current W4 external evidence lives in the persistent workroot named by
 `KNOWN_LEASE_BOUND_EXECUTION.json` and `WIRE_LEASE_BOUND_EXECUTION.json` bind
 actual captures, normalizers, source/object imports and complete process exits.
 These retained receipts are not repo sample commands: their one-shot launchers
-create fresh evidence and must not overwrite existing runs. Mirroring the new
-proof/reference cone into the existing reproducible runner remains an active
-integration obligation. No new sample root, taxonomy, public observer or workflow-ready
-status has been adopted. W4-B is active/incomplete; source/Core/privateQUIC,
+create fresh evidence and must not overwrite existing runs. The proof/reference cone is now mirrored and verified through existing repo
+runners; prior external receipts remain historical evidence. No new sample root, taxonomy, public observer or workflow-ready
+status has been adopted. W4-C is active; B integration is closed within its bounded LAB scope; source/Core/privateQUIC,
 authenticated ingress and physical namespace remain direct consumers.
 
 ## Legend
@@ -469,5 +468,5 @@ W4 external evidence update (2026-09-14 16:58 JST): Oracle10 collected, Oracle11
 
 | W4-B integration candidate | Source / command | Evidence and blocker |
 |---|---|---|
-| Ordinary source/native inputs | `samples/clean-near-end/mirrorea-proof-first-composition/host-reference/`, `samples/lean/host-reference/`; `scripts/proof_first_host_prepare.py` | Current observed preparation235commands and physical68commands/15profiles/53controls passed; scoped private-pipe evidence, no network/auth/recovery claim; final B integration pending |
-| Preserved host model | Existing `proof_first_reference_source_check.py --with-host-model` | Current V2 whole model278commands/9169bindings passed; physical/preparation evidence is separate; final B integration pending |
+| Ordinary source/native inputs | `samples/clean-near-end/mirrorea-proof-first-composition/host-reference/`, `samples/lean/host-reference/`; `scripts/proof_first_host_prepare.py` | Current observed preparation235commands and physical68commands/15profiles/53controls passed; scoped private-pipe evidence, no network/auth/recovery claim; B bounded integration closed; C admission/authority prerequisites open |
+| Preserved host model | Existing `proof_first_reference_source_check.py --with-host-model` | Current V2 whole model278commands/9169bindings passed; physical/preparation evidence is separate; B bounded integration closed; C admission/authority prerequisites open |
