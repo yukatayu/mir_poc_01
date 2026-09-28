@@ -44864,5 +44864,166 @@
       "Owner request/service/ack/custody and admitted image/restore paths",
       "D implementation/correspondence after C gate; E not started"
     ]
+  },
+  "c_source_session_20260928": {
+    "at": "2026-09-28T10:19:07.498736+00:00",
+    "git_base": "c0e7c236adb5dfaf3a72e2b22404d76e062191f5",
+    "scope": "External pure/reference Source and full Session over shared catalog/core; same C goal. Owner SOURCE syntax/service/custody/restore remains open. D inactive; stop after D before E.",
+    "audits": {
+      "kernel-execution-v1": {
+        "directory": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/kernel-execution-v1",
+        "result_sha256": "af99ffae0f8f7238a91a6070ca25efbf1a3b58833f6d0e79bb026e67de9343a4",
+        "closure": 102,
+        "audited_module_owners": 63,
+        "owned_constants": 4135,
+        "false_guards": 4,
+        "whole_runner_exit": 0,
+        "axioms": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "mode": "fresh imported source closure"
+      },
+      "kernel-source-v1": {
+        "directory": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/kernel-source-v1",
+        "result_sha256": "a95df3ac4aa5aea85170bad19ccf1e69a5e9cb4a897b3ad4a64d279eae6a2a66",
+        "closure": 136,
+        "audited_module_owners": 87,
+        "owned_constants": 6871,
+        "false_guards": 8,
+        "whole_runner_exit": 0,
+        "axioms": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "mode": "fresh imported source closure"
+      },
+      "kernel-admission-counter-v1": {
+        "directory": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/kernel-admission-counter-v1",
+        "result_sha256": "3d800dd12063da11b97e5cc2e6a5175bafbd9d2263c572e30a70aef9df821a6f",
+        "closure": null,
+        "audited_module_owners": 1,
+        "owned_constants": 21,
+        "false_guards": 1,
+        "whole_runner_exit": 0,
+        "axioms": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "mode": "new delta; pinned freshly compiled source base objects reused, not full rebuild"
+      }
+    },
+    "store_review_final": {
+      "receipt": {
+        "recovered_at": "2026-09-28T09:46:44.545032+00:00",
+        "session": "mir-w4-c-store-origins",
+        "completedAt": "2026-09-28T09:42:05.429Z",
+        "identity": true,
+        "stop": false,
+        "characters": 28349,
+        "sha256": "b54c1f77087131d04182692789ab9305c306a7d0575bb6c7c96b60f8d1dfd07e",
+        "source": "DOM_EVENT_LAST.json",
+        "event_sha256": "2a62c51c1f2014ec589d84459cc46e9719359cad6c034694cfee09cd9bcb2e0a"
+      },
+      "disposition": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/oracle-c-store-origins/DISPOSITION.md",
+      "sha256": "3e4ecc5639064ebc924d41365a1749a8c404885728bfba0dd1d1a710f9d62424"
+    },
+    "source_review": {
+      "directory": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/oracle-c-source-session",
+      "submission": {
+        "at": "2026-09-28T10:11:24.089496+00:00",
+        "session": "mir-w4-c-source-session",
+        "pid": 1009309,
+        "question_sha256": "5f20aa8fa813a75c70a44094f5757a4c089b86411a9786f24d0cb87f4c00a53d",
+        "manifest_sha256": "de48bfd6fb688421855cc2501c2821bc2816195ebd29126c186ea9a4aa40c8a4",
+        "display": ":0",
+        "model_evidence": "select strategy; require actual6Pro/max selection evidence on completed conversation",
+        "next_status_after": "2026-09-28T10:14:24.089496+00:00",
+        "scope": "single read-only frozen current implementation review; no outer deadline or paid fallback"
+      },
+      "status": "completed; locally read/disposed; advisory not acceptance",
+      "model": {
+        "at": "2026-09-28T10:15:30.869Z",
+        "opened": {
+          "found": true,
+          "before": "Pro"
+        },
+        "state": {
+          "modelButton": "Thinking effort",
+          "menus": [
+            "6\nPro\nConsumes usage limits faster\nPro, 5 of 5.\nUse Left and Right arrow keys to adjust power\nLocked, opens access options\nLatest\nGPT-5.6 Sol\nGPT-5.5\nLeaving on October 14"
+          ],
+          "radios": [
+            {
+              "text": "Latest",
+              "checked": "true"
+            },
+            {
+              "text": "GPT-5.6 Sol",
+              "checked": "false"
+            },
+            {
+              "text": "GPT-5.5\nLeaving on October 14",
+              "checked": "false"
+            }
+          ],
+          "sliders": [
+            {
+              "min": "0",
+              "max": "4",
+              "now": "4",
+              "text": null
+            }
+          ]
+        }
+      },
+      "receipt": {
+        "at": "2026-09-28T10:28:01.112386+00:00",
+        "session": "mir-w4-c-source-session",
+        "status": "completed",
+        "completedAt": "2026-09-28T10:23:17.495Z",
+        "identity": true,
+        "stop": false,
+        "characters": 24922,
+        "sha256": "df591f06e96637ad46d37b9a99e14ef7d88dbff6712d156093a2aacada38d433",
+        "source": "DOM_EVENT_LAST.json"
+      },
+      "disposition_sha256": "8a25f511ebf0c071a6d3b39c25b12752e60d1e235db579669496a4bb81271e51"
+    },
+    "claims": [
+      "Protected Execution exact old pure entries and Outcome including refusals; owner pending survives pure paths under shared invariant",
+      "Independent source elaboration and typing with unchanged pure/reference grammar over actual mixed catalog; source invocation/assignment values and traces preserved",
+      "All-kind request allocation bound; Session continuation/replacement require both source wait empty and common pending empty",
+      "General exact old Source embedding; Session launch/tick/drive/run/cancel equality; adopt/continue equality requires admitted Carrier, not arbitrary malformed raw Session",
+      "General raw forged acquisition invariant derivation plus nonvacuous actual catalog prefix falsifies invariant-only immediate authorization"
+    ],
+    "countermodels": [
+      "owner-only core pending and hidden pure pending block source adoption",
+      "exact reference acquisition/holding revoke-restoration does not revive old holding",
+      "fresh reacquire increments lineage; same-rank alternate witness does not permit backward refresh",
+      "exhaustion commits with both kinds retained; revoked degradation authority refuses without consumption",
+      "tentative management can pass lower core while violating extant reference floor",
+      "counterfeit raw acquisition keeps invariants but actual acquire refuses"
+    ],
+    "remaining": [
+      "Owner SOURCE construction/assignment syntax and actual field/capture provenance, labels, resources",
+      "Same retained Source/Session owner issue/service/ack and complete admitted entry set",
+      "Authenticated current head, realm namespace, physical custody and image/restore obligations",
+      "D implementation/correspondence after gates; E awaits owner resume"
+    ],
+    "docs_validation": {
+      "at": "2026-09-28T10:34:02.930732+00:00",
+      "command": "make docs",
+      "exit": 0,
+      "log": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/source-checkpoint-make-docs.log",
+      "sha256": "2a31cd1458be17326242567ff65f1836d6e66b1fc64aba4bfee461c55c4b8bcd",
+      "prior_failure": {
+        "log": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/source-checkpoint-make-docs-attempt1.log",
+        "reason": "progress last-updated header stale; fixed to actual checkpoint timestamp; rerun exit0"
+      }
+    }
   }
 }

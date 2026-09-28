@@ -1,6 +1,6 @@
 # Current Task Map (LAB)
 
-最終更新: 2026-09-28 18:30 JST
+最終更新: 2026-09-28 19:19 JST
 
 **Canon notice:** `mirrorea_canon/` is normative. Everything outside
 `mirrorea_canon/` is LAB; if LAB conflicts with canon, canon wins. This snapshot
@@ -29,7 +29,7 @@ Exact evidence: `docs/proof-first/RESUME.md`, `docs/proof-first/CURRENT_GOAL.md`
 
 W4-Cでは、共有authority floorの古いcache使用、供給された観測ラベルの弱化、実行していない読取りの記録に続き、重複したowner操作で配置変換がpanicする経路を限定修正しました。一般Lean命題・実反例・Oracle指摘を照合し、今回のruntime library418件が通過しました。正常な4種類のsourceは、修正前後で配置結果全体が一致しています。ownerの実書込みと呼出し側の結果受理を分け、評価失敗後にも過去の書込み・履歴が残ることを実検査しました。C全体は未完了です。複数代入の文順序・source継続、別owner間の識別子衝突、復元経路の条件が具体的な残件です。全entry・現在の認可・実namespace/custody・資源の対応も継続します。実network・秘密・復旧やW4全体の保証には広げません。
 
-W4-Cでは、ソース位置修正05a54050とrenderer修復caa1d5beを統合済みです。外部研究では、共通catalog・待機ID・pure取消・参照／保持に加え、参照の取得・切替・再取得・解放を接続しました。拒否を含む既存pure経路との一致、保存証拠と実際の取得イベントの対応、待機要求・保持証拠・解放済み番号の保存をfresh Lean検査済みです。部品reviewの指摘を実反例で確認し、下位Storeの最新差分をOracle review中です。保護された実行機械・全Session、実sourceのラベル／資源、owner service／custody、復元の入口閉包は未完了です。C継続、D未着手、D完了後に一旦停止します。
+W4-Cでは、ソース位置修正05a54050とrenderer修復caa1d5beを統合済みです。外部研究では、共通catalog・待機ID・参照／保持を通る保護された実行機械と、既存pure/reference source・全Sessionを接続しました。拒否を含む既存sourceとの一致、独立した展開／型規則、全種類の待機要求を考慮した継続・差替え条件をfresh Lean検査済みです。状態不変条件だけでは不正な取得を排除できない反例も再現しました。最新source/Session差分のOracle回答を回収し、発行者epochと不正なraw状態に関する保証の限界を確認しました。owner操作のsource接続、実ラベル／資源、service／custody、復元の入口閉包は未完了です。C継続、D未着手、D完了後に一旦停止します。
 
 ## ordered self-driven packages
 

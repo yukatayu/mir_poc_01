@@ -46893,5 +46893,517 @@
     "status": "sole-main full answer read or authored disposition",
     "role": "Common Store consumer proof delta; external evidence; not Canon or production acceptance",
     "at": "2026-09-28T09:30:07.194118+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/oracle-c-store-origins/FULL_ANSWER.md",
+    "sha256": "b54c1f77087131d04182692789ab9305c306a7d0575bb6c7c96b60f8d1dfd07e",
+    "range": "full",
+    "status": "sole-main authored/inspected source or fully read review",
+    "role": "external bounded research evidence, not Canon or production acceptance",
+    "at": "2026-09-28T10:19:07.498736+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/oracle-c-store-origins/DISPOSITION.md",
+    "sha256": "3e4ecc5639064ebc924d41365a1749a8c404885728bfba0dd1d1a710f9d62424",
+    "range": "full",
+    "status": "sole-main authored/inspected source or fully read review",
+    "role": "external bounded research evidence, not Canon or production acceptance",
+    "at": "2026-09-28T10:19:07.498736+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/oracle-c-source-session/QUESTION.md",
+    "sha256": "5f20aa8fa813a75c70a44094f5757a4c089b86411a9786f24d0cb87f4c00a53d",
+    "range": "full",
+    "status": "sole-main authored/inspected source or fully read review",
+    "role": "external bounded research evidence, not Canon or production acceptance",
+    "at": "2026-09-28T10:19:07.498736+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/MixedCatalogUse.lean",
+    "sha256": "1ec63d2fc31183e18cccee7317087580611c8024ab50da8c3e220be00613060f",
+    "range": "full",
+    "status": "sole-main authored/inspected source or fully read review",
+    "role": "external bounded research evidence, not Canon or production acceptance",
+    "at": "2026-09-28T10:19:07.498736+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/MixedPureInvocation.lean",
+    "sha256": "43d2555ecfd9a32c9a62026d8b89b77cba61d98f2d7864f908c432d50617fa1a",
+    "range": "full",
+    "status": "sole-main authored/inspected source or fully read review",
+    "role": "external bounded research evidence, not Canon or production acceptance",
+    "at": "2026-09-28T10:19:07.498736+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/MixedManagementEntry.lean",
+    "sha256": "da9da19b8a1f25e28f05f6e60ae682c9f865c06845d51fda2b338d051a634d7a",
+    "range": "full",
+    "status": "sole-main authored/inspected source or fully read review",
+    "role": "external bounded research evidence, not Canon or production acceptance",
+    "at": "2026-09-28T10:19:07.498736+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/MixedCoreEmbedding.lean",
+    "sha256": "6ce2088e6035b453196031635588fc90fa1d341b120146acfcf44e6abfc25683",
+    "range": "full",
+    "status": "sole-main authored/inspected source or fully read review",
+    "role": "external bounded research evidence, not Canon or production acceptance",
+    "at": "2026-09-28T10:19:07.498736+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/MixedManagementEmbedding.lean",
+    "sha256": "3f5814280001b951d6467b7dd2262b422110468fe4031d4803ab830df2d89951",
+    "range": "full",
+    "status": "sole-main authored/inspected source or fully read review",
+    "role": "external bounded research evidence, not Canon or production acceptance",
+    "at": "2026-09-28T10:19:07.498736+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/MixedRequestCore.lean",
+    "sha256": "f813f130f1315a33fe5088695c9d4f29f350337726247381a81f88dd7c3764a4",
+    "range": "full",
+    "status": "sole-main authored/inspected source or fully read review",
+    "role": "external bounded research evidence, not Canon or production acceptance",
+    "at": "2026-09-28T10:19:07.498736+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/MixedRequestEmbedding.lean",
+    "sha256": "d342458f1494d908e9ff26c10079297c88bcbe9bf17552c436a0e5ff274b1724",
+    "range": "full",
+    "status": "sole-main authored/inspected source or fully read review",
+    "role": "external bounded research evidence, not Canon or production acceptance",
+    "at": "2026-09-28T10:19:07.498736+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/MixedManagementControls.lean",
+    "sha256": "e0230364c823868ad9102679e6b23d4d8f67e54aa8c3f884700ce08cb50ff290",
+    "range": "full",
+    "status": "sole-main authored/inspected source or fully read review",
+    "role": "external bounded research evidence, not Canon or production acceptance",
+    "at": "2026-09-28T10:19:07.498736+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/MixedCatalogSuccessorControls.lean",
+    "sha256": "3f2d74d23b5aa6c9808d8b62df3bba24b0569230789209f2e9e03f9423bced60",
+    "range": "full",
+    "status": "sole-main authored/inspected source or fully read review",
+    "role": "external bounded research evidence, not Canon or production acceptance",
+    "at": "2026-09-28T10:19:07.498736+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/MixedRequestControls.lean",
+    "sha256": "0bc9d3c66f07dd4f3391fe54d0e7fdfa6d63cd8ee477ce6c66837596361f8f9c",
+    "range": "full",
+    "status": "sole-main authored/inspected source or fully read review",
+    "role": "external bounded research evidence, not Canon or production acceptance",
+    "at": "2026-09-28T10:19:07.498736+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/MixedCancellation.lean",
+    "sha256": "4e312a9f9a7943850d83f9bf505b2a96452ded70994075e6e01d750a9759e000",
+    "range": "full",
+    "status": "sole-main authored/inspected source or fully read review",
+    "role": "external bounded research evidence, not Canon or production acceptance",
+    "at": "2026-09-28T10:19:07.498736+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/MixedCancelEntry.lean",
+    "sha256": "efc40e327c378044827de09db69da283e58199145b38a0a6fadb403ecdc8d27a",
+    "range": "full",
+    "status": "sole-main authored/inspected source or fully read review",
+    "role": "external bounded research evidence, not Canon or production acceptance",
+    "at": "2026-09-28T10:19:07.498736+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/MixedCancelEmbedding.lean",
+    "sha256": "f96f3b5018649f22f91a0e53831eabb6ed783a0f9fa9d400ae13ea278c605930",
+    "range": "full",
+    "status": "sole-main authored/inspected source or fully read review",
+    "role": "external bounded research evidence, not Canon or production acceptance",
+    "at": "2026-09-28T10:19:07.498736+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/MixedCancelControls.lean",
+    "sha256": "42de9e45ac53893a713e9cd5e7ef9c9ccf6f649feefb7186b5ec931b8ab914a1",
+    "range": "full",
+    "status": "sole-main authored/inspected source or fully read review",
+    "role": "external bounded research evidence, not Canon or production acceptance",
+    "at": "2026-09-28T10:19:07.498736+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/MixedCatalogHistory.lean",
+    "sha256": "4d8586fe6c3a0112eec7d8d4eaef4b39a32905737d9361b6d2d97cd323909fdb",
+    "range": "full",
+    "status": "sole-main authored/inspected source or fully read review",
+    "role": "external bounded research evidence, not Canon or production acceptance",
+    "at": "2026-09-28T10:19:07.498736+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/MixedCatalogTransitions.lean",
+    "sha256": "1b9341c357b9bd2598ffe1800582273b9e4f87a062afaa773558a654734180b9",
+    "range": "full",
+    "status": "sole-main authored/inspected source or fully read review",
+    "role": "external bounded research evidence, not Canon or production acceptance",
+    "at": "2026-09-28T10:19:07.498736+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/MixedFallbackStatic.lean",
+    "sha256": "bc4a99ee374c584ec9c02c98b06c29f4047436e19a67b748c362d0b74c9ce590",
+    "range": "full",
+    "status": "sole-main authored/inspected source or fully read review",
+    "role": "external bounded research evidence, not Canon or production acceptance",
+    "at": "2026-09-28T10:19:07.498736+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/MixedReferenceAccess.lean",
+    "sha256": "ae2788261d36f8f19810553b937af367faeb3196770ef126d2337a1d3d88d6be",
+    "range": "full",
+    "status": "sole-main authored/inspected source or fully read review",
+    "role": "external bounded research evidence, not Canon or production acceptance",
+    "at": "2026-09-28T10:19:07.498736+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/MixedReferenceEmbedding.lean",
+    "sha256": "b9210348e826d71d478c07e33a86f049bd9e2f7e705ed7ce453e80e5d1dfd651",
+    "range": "full",
+    "status": "sole-main authored/inspected source or fully read review",
+    "role": "external bounded research evidence, not Canon or production acceptance",
+    "at": "2026-09-28T10:19:07.498736+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/MixedReferenceHistory.lean",
+    "sha256": "9702ab83815190f7bbef920aa8191403f798a152e828dff79dada178e895bd01",
+    "range": "full",
+    "status": "sole-main authored/inspected source or fully read review",
+    "role": "external bounded research evidence, not Canon or production acceptance",
+    "at": "2026-09-28T10:19:07.498736+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/MixedReferenceSelection.lean",
+    "sha256": "134021e6f8af8429fb70ebb1fba2280c11524def834defe7d11510e7a6edd872",
+    "range": "full",
+    "status": "sole-main authored/inspected source or fully read review",
+    "role": "external bounded research evidence, not Canon or production acceptance",
+    "at": "2026-09-28T10:19:07.498736+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/MixedReferenceHolding.lean",
+    "sha256": "389f8d674d31613dce1457bf5a764807ece47b706c1df79fa57c911bba129455",
+    "range": "full",
+    "status": "sole-main authored/inspected source or fully read review",
+    "role": "external bounded research evidence, not Canon or production acceptance",
+    "at": "2026-09-28T10:19:07.498736+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/MixedReferenceControls.lean",
+    "sha256": "38f95f66bcfb65d93997a875420ac74a8173e226901a248f3838d718f0b1970a",
+    "range": "full",
+    "status": "sole-main authored/inspected source or fully read review",
+    "role": "external bounded research evidence, not Canon or production acceptance",
+    "at": "2026-09-28T10:19:07.498736+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/MixedRequestReviewControls.lean",
+    "sha256": "ff0779cf10d00fed1ea59632d976857e34eff24ccdf34fdb5c19c43b16e2b9c3",
+    "range": "full",
+    "status": "sole-main authored/inspected source or fully read review",
+    "role": "external bounded research evidence, not Canon or production acceptance",
+    "at": "2026-09-28T10:19:07.498736+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/MixedReferenceOwner.lean",
+    "sha256": "fe41191a277be9d23e6083eda64e6f26a400098573d8ae71869036527b3495b3",
+    "range": "full",
+    "status": "sole-main authored/inspected source or fully read review",
+    "role": "external bounded research evidence, not Canon or production acceptance",
+    "at": "2026-09-28T10:19:07.498736+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/MixedReferenceCancellation.lean",
+    "sha256": "c69127baca2ff2ddb177c34068d3ad1005fe4f83e13834f720b3caa5dac0a5b6",
+    "range": "full",
+    "status": "sole-main authored/inspected source or fully read review",
+    "role": "external bounded research evidence, not Canon or production acceptance",
+    "at": "2026-09-28T10:19:07.498736+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/MixedReferenceStore.lean",
+    "sha256": "673c7e6af39fd42e973a38e14cf46d824116b805de95b253922c19784574f3b3",
+    "range": "full",
+    "status": "sole-main authored/inspected source or fully read review",
+    "role": "external bounded research evidence, not Canon or production acceptance",
+    "at": "2026-09-28T10:19:07.498736+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/MixedStoreEmbedding.lean",
+    "sha256": "1dc77f8d50e6ea75182f18c9ef99b470614aae36bca9cd0b88b7f672233fe325",
+    "range": "full",
+    "status": "sole-main authored/inspected source or fully read review",
+    "role": "external bounded research evidence, not Canon or production acceptance",
+    "at": "2026-09-28T10:19:07.498736+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/MixedReferenceCoherence.lean",
+    "sha256": "429e8ea4160e7e4df39ffd61121cb804233fb177d267b22d2d5e0d3e751462e8",
+    "range": "full",
+    "status": "sole-main authored/inspected source or fully read review",
+    "role": "external bounded research evidence, not Canon or production acceptance",
+    "at": "2026-09-28T10:19:07.498736+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/MixedReferenceMutation.lean",
+    "sha256": "d650fde4ff4e05454f2206d5cdad2774d66ae691419851d9d5fa73c1eaee7c37",
+    "range": "full",
+    "status": "sole-main authored/inspected source or fully read review",
+    "role": "external bounded research evidence, not Canon or production acceptance",
+    "at": "2026-09-28T10:19:07.498736+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/MixedMutationEmbedding.lean",
+    "sha256": "5014a45092164fecc3b7da716dde2a7d7916e5dc280237bc7b15960bf6949da3",
+    "range": "full",
+    "status": "sole-main authored/inspected source or fully read review",
+    "role": "external bounded research evidence, not Canon or production acceptance",
+    "at": "2026-09-28T10:19:07.498736+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/MixedCoherenceEmbedding.lean",
+    "sha256": "bfd72dd07ee607cf67a4df4d0b3360103c1623796c57a52b04bce607d2b0c19e",
+    "range": "full",
+    "status": "sole-main authored/inspected source or fully read review",
+    "role": "external bounded research evidence, not Canon or production acceptance",
+    "at": "2026-09-28T10:19:07.498736+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/MixedReferenceTrace.lean",
+    "sha256": "11f1aac3c80eff6415edb287d59282624c9b6fd1839032625c7c6cde18ca5d5f",
+    "range": "full",
+    "status": "sole-main authored/inspected source or fully read review",
+    "role": "external bounded research evidence, not Canon or production acceptance",
+    "at": "2026-09-28T10:19:07.498736+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/MixedReferenceChronology.lean",
+    "sha256": "bfe9eeee2e2bdebe08f588cc9b70f6b257be671b309f2d8741daa9f25621aff8",
+    "range": "full",
+    "status": "sole-main authored/inspected source or fully read review",
+    "role": "external bounded research evidence, not Canon or production acceptance",
+    "at": "2026-09-28T10:19:07.498736+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/MixedReferenceOrigins.lean",
+    "sha256": "c36451a1ab4c90a58a07931052265278a9575c0b0e38e9652587fe347de5e94e",
+    "range": "full",
+    "status": "sole-main authored/inspected source or fully read review",
+    "role": "external bounded research evidence, not Canon or production acceptance",
+    "at": "2026-09-28T10:19:07.498736+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/MixedStoreControls.lean",
+    "sha256": "aa9b5ba43025b2c26067285f15b583a06939728c22a07cb31a2c1a85c9b20c40",
+    "range": "full",
+    "status": "sole-main authored/inspected source or fully read review",
+    "role": "external bounded research evidence, not Canon or production acceptance",
+    "at": "2026-09-28T10:19:07.498736+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/MixedReferenceReviewControls.lean",
+    "sha256": "90b0a5f7f9dee240364a89cd509bf84b3293aa1617d48bbfe95f4447508e75ea",
+    "range": "full",
+    "status": "sole-main authored/inspected source or fully read review",
+    "role": "external bounded research evidence, not Canon or production acceptance",
+    "at": "2026-09-28T10:19:07.498736+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/MixedMutationCompleteness.lean",
+    "sha256": "54db55748b5159a829afd10989af1a7ba9f7b5b2668d060ac2c0f481defb6809",
+    "range": "full",
+    "status": "sole-main authored/inspected source or fully read review",
+    "role": "external bounded research evidence, not Canon or production acceptance",
+    "at": "2026-09-28T10:19:07.498736+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/MixedPendingProjection.lean",
+    "sha256": "29aae41111891691fff426cfa00cfddd7eb894fc0a19a39c4d85c3596203749a",
+    "range": "full",
+    "status": "sole-main authored/inspected source or fully read review",
+    "role": "external bounded research evidence, not Canon or production acceptance",
+    "at": "2026-09-28T10:19:07.498736+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/MixedReferenceResult.lean",
+    "sha256": "c4a497b2437a471cfaccebfa83d8d103ad2fe972a44d48a014fe55da5eb0452e",
+    "range": "full",
+    "status": "sole-main authored/inspected source or fully read review",
+    "role": "external bounded research evidence, not Canon or production acceptance",
+    "at": "2026-09-28T10:19:07.498736+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/MixedReferenceExecution.lean",
+    "sha256": "033b1b8de673f7887efb547b7bb1b8f29ea6e039c3f4f1f3a43e55165eef13fb",
+    "range": "full",
+    "status": "sole-main authored/inspected source or fully read review",
+    "role": "external bounded research evidence, not Canon or production acceptance",
+    "at": "2026-09-28T10:19:07.498736+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/MixedResultEmbedding.lean",
+    "sha256": "b558e2ea7ab495d64c6ebbd6ac21e4d02d67be76b32675d7f036facb91f03383",
+    "range": "full",
+    "status": "sole-main authored/inspected source or fully read review",
+    "role": "external bounded research evidence, not Canon or production acceptance",
+    "at": "2026-09-28T10:19:07.498736+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/MixedExecutionEmbedding.lean",
+    "sha256": "40ac29d5767f0cfe3813b17dc7fc58cfde93bde67dab45b83cfeea3a36ae3560",
+    "range": "full",
+    "status": "sole-main authored/inspected source or fully read review",
+    "role": "external bounded research evidence, not Canon or production acceptance",
+    "at": "2026-09-28T10:19:07.498736+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/MixedExecutionControls.lean",
+    "sha256": "a290472f58b4ffc1675e4c16448e7c4dba68a297f88650487a418100470b2d8a",
+    "range": "full",
+    "status": "sole-main authored/inspected source or fully read review",
+    "role": "external bounded research evidence, not Canon or production acceptance",
+    "at": "2026-09-28T10:19:07.498736+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/MixedRequestAllocation.lean",
+    "sha256": "5c229386d6f68bde0e3a2da740c754817b5da0041f08d51ab8b3d7177675f4fa",
+    "range": "full",
+    "status": "sole-main authored/inspected source or fully read review",
+    "role": "external bounded research evidence, not Canon or production acceptance",
+    "at": "2026-09-28T10:19:07.498736+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/MixedReferenceAllocation.lean",
+    "sha256": "45069f8e55aab9109b9ebffa6cc012d39c8179f2a9815be1ce78f353299ce4a5",
+    "range": "full",
+    "status": "sole-main authored/inspected source or fully read review",
+    "role": "external bounded research evidence, not Canon or production acceptance",
+    "at": "2026-09-28T10:19:07.498736+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/MixedReferenceSourceData.lean",
+    "sha256": "ab70f1e2e13e3a73449839465eaf81c592e100f6e448085c5f8bba7877058b69",
+    "range": "full",
+    "status": "sole-main authored/inspected source or fully read review",
+    "role": "external bounded research evidence, not Canon or production acceptance",
+    "at": "2026-09-28T10:19:07.498736+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/MixedReferenceSource.lean",
+    "sha256": "6fae29602995ee9ccd42f1544bfbca11d23ac8df99657833cb96e4cad6310ec3",
+    "range": "full",
+    "status": "sole-main authored/inspected source or fully read review",
+    "role": "external bounded research evidence, not Canon or production acceptance",
+    "at": "2026-09-28T10:19:07.498736+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/MixedReferenceSourceElaboration.lean",
+    "sha256": "b90b97ef561beda2745ad233e750526aad9f42d1b61df8ece1a9cf3d87ef921f",
+    "range": "full",
+    "status": "sole-main authored/inspected source or fully read review",
+    "role": "external bounded research evidence, not Canon or production acceptance",
+    "at": "2026-09-28T10:19:07.498736+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/MixedReferenceSourceTyping.lean",
+    "sha256": "01d17dc7631646f3ac3acd00bc0af4534bd9388b418e71c981b85da8b5a572ea",
+    "range": "full",
+    "status": "sole-main authored/inspected source or fully read review",
+    "role": "external bounded research evidence, not Canon or production acceptance",
+    "at": "2026-09-28T10:19:07.498736+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/MixedReferenceSourceTrace.lean",
+    "sha256": "731e1865fef07bb26d33717040fac572faf34921a51f786887906daf22dbc4fc",
+    "range": "full",
+    "status": "sole-main authored/inspected source or fully read review",
+    "role": "external bounded research evidence, not Canon or production acceptance",
+    "at": "2026-09-28T10:19:07.498736+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/MixedReferenceAuthority.lean",
+    "sha256": "750c0892d0fda5798bb36585a13aa147d4d5421947a83ae6876f411fb5acca70",
+    "range": "full",
+    "status": "sole-main authored/inspected source or fully read review",
+    "role": "external bounded research evidence, not Canon or production acceptance",
+    "at": "2026-09-28T10:19:07.498736+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/MixedReferenceContinuation.lean",
+    "sha256": "1f19e93b607468f88f08a9723efe7364db063d8113d7e7ca5dde91032efdd4ad",
+    "range": "full",
+    "status": "sole-main authored/inspected source or fully read review",
+    "role": "external bounded research evidence, not Canon or production acceptance",
+    "at": "2026-09-28T10:19:07.498736+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/MixedSourceEmbedding.lean",
+    "sha256": "344f1e06a39122500f584fab7fd40939b805d5ad89c64f9259f5487b448b116e",
+    "range": "full",
+    "status": "sole-main authored/inspected source or fully read review",
+    "role": "external bounded research evidence, not Canon or production acceptance",
+    "at": "2026-09-28T10:19:07.498736+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/MixedSessionEmbedding.lean",
+    "sha256": "99315ed7450d86f5181c415bd9a759355c82183a6c88798f6e13eb9d612897b5",
+    "range": "full",
+    "status": "sole-main authored/inspected source or fully read review",
+    "role": "external bounded research evidence, not Canon or production acceptance",
+    "at": "2026-09-28T10:19:07.498736+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/MixedReferenceSourceControls.lean",
+    "sha256": "a77ae91d86a69f889dc7738e3df37000f9e7708858c4a8503f8e2a6bf5e1f8f3",
+    "range": "full",
+    "status": "sole-main authored/inspected source or fully read review",
+    "role": "external bounded research evidence, not Canon or production acceptance",
+    "at": "2026-09-28T10:19:07.498736+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/MixedSessionControls.lean",
+    "sha256": "ae09dcba55602154f48a7b48faeaf63ff91c033e8f30584519ae61835660d292",
+    "range": "full",
+    "status": "sole-main authored/inspected source or fully read review",
+    "role": "external bounded research evidence, not Canon or production acceptance",
+    "at": "2026-09-28T10:19:07.498736+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/MixedStoreReviewControls.lean",
+    "sha256": "f452a9be7ad5923b0c4d06b87212740f47df360cb901729ae7e3e8f7628dc360",
+    "range": "full",
+    "status": "sole-main authored/inspected source or fully read review",
+    "role": "external bounded research evidence, not Canon or production acceptance",
+    "at": "2026-09-28T10:19:07.498736+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/MixedStoreAdmissionCountermodel.lean",
+    "sha256": "a001897a092d39d93680ca1b9a3911c98615cbc4e8d3a20dc5054463cee07643",
+    "range": "full",
+    "status": "sole-main authored/inspected source or fully read review",
+    "role": "external bounded research evidence, not Canon or production acceptance",
+    "at": "2026-09-28T10:19:07.498736+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/oracle-c-source-session/FULL_ANSWER.md",
+    "sha256": "df591f06e96637ad46d37b9a99e14ef7d88dbff6712d156093a2aacada38d433",
+    "range": "full",
+    "status": "sole-main full read/local disposition",
+    "role": "external advisory, not independent execution or acceptance",
+    "at": "2026-09-28T10:34:02.930732+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/oracle-c-source-session/DISPOSITION.md",
+    "sha256": "8a25f511ebf0c071a6d3b39c25b12752e60d1e235db579669496a4bb81271e51",
+    "range": "full",
+    "status": "sole-main full read/local disposition",
+    "role": "external advisory, not independent execution or acceptance",
+    "at": "2026-09-28T10:34:02.930732+00:00"
   }
 ]
