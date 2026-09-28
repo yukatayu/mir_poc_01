@@ -48157,5 +48157,77 @@
     "status": "sole-main read and checked",
     "role": "current metadata/management consumer review; no whole-corpus reading claim",
     "at": "2026-09-28T14:22:32.603954+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/kernel-owner-management-v1/OwnerMetadataManagement.lean",
+    "sha256": "3981aa35ca09bc8366bb4903435cff364a58b726ef82f81fb16b6a117d78d2f2",
+    "range": "full; structured receipt fields/import hashes checked where applicable",
+    "status": "sole-main read/authored and checked",
+    "role": "same C management connection and retained falsifier; no whole corpus reading claim",
+    "at": "2026-09-28T14:56:46.486071+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/kernel-owner-management-v1/OwnerMetadataManagementControls.lean",
+    "sha256": "d671e5f135cf9693852b852a5b5538c646fafacf3ed0da6a4e54e1a88c1b22a5",
+    "range": "full; structured receipt fields/import hashes checked where applicable",
+    "status": "sole-main read/authored and checked",
+    "role": "same C management connection and retained falsifier; no whole corpus reading claim",
+    "at": "2026-09-28T14:56:46.486071+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/kernel-owner-management-v1/OwnerManagementAudit.log",
+    "sha256": "2a44f3123fc754ca5dda03f4803a0da537650a2e15930f9e3734779b31a7cffa",
+    "range": "full; structured receipt fields/import hashes checked where applicable",
+    "status": "sole-main read/authored and checked",
+    "role": "same C management connection and retained falsifier; no whole corpus reading claim",
+    "at": "2026-09-28T14:56:46.486071+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/kernel-owner-management-v1/RESULT.json",
+    "sha256": "5182121bffeb7e63ad79de380750906d13c10bb366c515f434a65bd05c2424e5",
+    "range": "full; structured receipt fields/import hashes checked where applicable",
+    "status": "sole-main read/authored and checked",
+    "role": "same C management connection and retained falsifier; no whole corpus reading claim",
+    "at": "2026-09-28T14:56:46.486071+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/oracle-c-owner-management/ANSWER_RECOVERED.txt",
+    "sha256": "13967b23d0bd8041d21384c25945a369043a37e2f43e8ec29cf25e81d36e5a1c",
+    "range": "full; structured receipt fields/import hashes checked where applicable",
+    "status": "sole-main read/authored and checked",
+    "role": "same C management connection and retained falsifier; no whole corpus reading claim",
+    "at": "2026-09-28T14:56:46.486071+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/oracle-c-owner-management/DISPOSITIONS.json",
+    "sha256": "cbbf0253fa82531e65fe853502b023c1da88c6fd9eb9cdb0a0aa37ab8bb8ed2e",
+    "range": "full; structured receipt fields/import hashes checked where applicable",
+    "status": "sole-main read/authored and checked",
+    "role": "same C management connection and retained falsifier; no whole corpus reading claim",
+    "at": "2026-09-28T14:56:46.486071+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/owner-metadata-placement-counter-v1/OwnerMetadataPlacementCounter.lean",
+    "sha256": "fc9b01114b4b0a6582f2cf01e226c870f097c5786c4fa0138db4f018394a140d",
+    "range": "full; structured receipt fields/import hashes checked where applicable",
+    "status": "sole-main read/authored and checked",
+    "role": "same C management connection and retained falsifier; no whole corpus reading claim",
+    "at": "2026-09-28T14:56:46.486071+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/owner-metadata-placement-counter-v1/RESULT.json",
+    "sha256": "cf9f82b0bdf96d00f376d2d68bd8f2e32685bbcbab9c60678a9ae10d0dfa2c9d",
+    "range": "full; structured receipt fields/import hashes checked where applicable",
+    "status": "sole-main read/authored and checked",
+    "role": "same C management connection and retained falsifier; no whole corpus reading claim",
+    "at": "2026-09-28T14:56:46.486071+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/OWNER_MANAGEMENT_IMPORT_CLOSURE.json",
+    "sha256": "3b8f5f63e7ec2a64185060b4830153195a8ba0c19e235eecce0e709c22d87db7",
+    "range": "full; structured receipt fields/import hashes checked where applicable",
+    "status": "sole-main read/authored and checked",
+    "role": "same C management connection and retained falsifier; no whole corpus reading claim",
+    "at": "2026-09-28T14:56:46.486071+00:00"
   }
 ]

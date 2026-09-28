@@ -45630,5 +45630,93 @@
       "scope": "sole main verification of read-only advisory review; no independent signature/acceptance"
     },
     "scope_correction": "Frozen RESULT/question reference to current invocation action5 was incomplete: actual pure5/owner16 verified. Neither grants logical metadata22/23. Proof/source bytes unchanged."
+  },
+  "c_metadata_management_connection_20260928": {
+    "at": "2026-09-28T14:56:46.486071+00:00",
+    "directory": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/kernel-owner-management-v1",
+    "whole_exit": 0,
+    "collected_tool": 63243,
+    "result_sha256": "5182121bffeb7e63ad79de380750906d13c10bb366c515f434a65bd05c2424e5",
+    "modules": 5,
+    "owned_declarations": 802,
+    "qualified_false_guards": 16,
+    "import_closure": {
+      "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/OWNER_MANAGEMENT_IMPORT_CLOSURE.json",
+      "sha256": "3b8f5f63e7ec2a64185060b4830153195a8ba0c19e235eecce0e709c22d87db7",
+      "modules": 54
+    },
+    "scope": "genuine existing management actor/current view/policy/serial/committed-use lock; no fabricated invocation World, no new issuer grant. Registry fixed schema attachment remains input. General check/relative completeness/shared committed-ID refusal/consistency/rooted provenance/current structural use; positive actual register/instantiate and unrelated growth. Not complete shared pending/source/physical closure.",
+    "counterexample": {
+      "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/owner-metadata-placement-counter-v1",
+      "result_sha256": "cf9f82b0bdf96d00f376d2d68bd8f2e32685bbcbab9c60678a9ae10d0dfa2c9d",
+      "finding": "actual model multi-placement[0,1] then owner0 leave left metadata usable through live placement1; conditional management prototype repaired to require owner participation",
+      "evidence": "finite admitted-model #guards, not full axiom audit or production exploit"
+    },
+    "oracle": {
+      "at": "2026-09-28T14:49:07.125116+00:00",
+      "session": "mir-w4-owner-management-r1",
+      "answer_sha256": "13967b23d0bd8041d21384c25945a369043a37e2f43e8ec29cf25e81d36e5a1c",
+      "model": "visible6Pro Latest maximum4/4 Pro5/5 verified",
+      "whole_wrapper_exit": 0,
+      "findings": [
+        {
+          "id": 1,
+          "disposition": "accept_scope",
+          "finding": "Logical attachment does not authenticate physical bytes or source schema.",
+          "local": "Context comes from genuine System fields but raw Registry schema/owner construction remains input. No theorem claims sealed artifact provenance; retain actual CheckedSurfaceV0 projection/custody consumer gate."
+        },
+        {
+          "id": 2,
+          "disposition": "accept",
+          "finding": "Committed-use lock alone misses pending IDs.",
+          "local": "Existing management then metadata reuse is closed only over system.used. Next actual Store extension uses MixedRequestCore.fresh over committed and pending and proves preservation; no whole Session claim yet."
+        },
+        {
+          "id": 3,
+          "disposition": "accept_scope",
+          "finding": "Historical producer is not current metadata usability or authorization.",
+          "local": "Rooted origin and structural Usable kept separate; current comments and explicit predicates suffice. Optional wholesale rename not adopted as semantic progress."
+        },
+        {
+          "id": 4,
+          "disposition": "accept_scope",
+          "finding": "No fabricated operation World or second committed lock in reviewed connection.",
+          "local": "CurrentActor/current controlPolicy/Witness and management.used are genuine. Registry.used is provenance data; ordinary5/16/17 grants never imply22/23."
+        },
+        {
+          "id": 5,
+          "disposition": "reject_unnecessary_allocator_strength",
+          "finding": "Oracle calls nextRequest=max(used,pending)+1 necessary.",
+          "local": "Required invariant is existing Below strict upper bound plus exact admitted source-step allocation/event correspondence. Equality to a maximum is stronger, requires empty/max conventions, and is not needed to prevent collisions; do not invent an equality invariant in place of actual source transition proofs."
+        },
+        {
+          "id": 6,
+          "disposition": "reject_drain_eliminates_aba",
+          "finding": "Oracle suggests full drain makes ABA proof unnecessary.",
+          "local": "Empty pending does not erase retained source bindings/captures, saved contexts or later imports. Keep per-binding generations and recheck regardless of drained scheduling; smaller drain alternative also loses independent update availability."
+        },
+        {
+          "id": 7,
+          "disposition": "accept",
+          "finding": "Need actual metadata occurrence and source allocator/binding carrier integration.",
+          "local": "Add typed event to actual existing MixedReferenceStore.Occurrence; preserve core projection/history/reference rows and pending classification, then carry generation bindings at real owner use. No standalone fabricated success trace."
+        },
+        {
+          "id": 8,
+          "disposition": "partly_reject_owner_gate_overreach",
+          "finding": "Physical custody model and Canon alignment listed as owner-reserved.",
+          "local": "Owner keys/trust anchor/signature/privacy changes/public/prod remain reserved. Existing Canon alignment and reversible internal sealing/adapter design are delegated technical work; no new approval question merely to implement an existing boundary."
+        }
+      ],
+      "scope": "sole-main verification of read-only advisory review; no new actual-model theorem falsifier found, no proof replay/signature/acceptance"
+    },
+    "open": [
+      "checked artifact/schema ownership and current auth head authenticity",
+      "shared pending IDs/source allocator/actual metadata occurrence (successor currently development)",
+      "generation evidence in actual owner service carrier; ABA after retained binding/recovery",
+      "ordinary/capture/generated-management completion, resources/custody/all entry/private image/restore/Rust"
+    ],
+    "production_delta": false,
+    "canon_promotion": false
   }
 }
