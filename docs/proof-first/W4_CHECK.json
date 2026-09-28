@@ -45189,5 +45189,60 @@
         "reports": 1764
       }
     }
+  },
+  "c_owner_program_20260928": {
+    "at": "2026-09-28T12:38:28.972489+00:00",
+    "git_base": "0a8d700f840410c2b2bde6a12de4b9e20c7d6de8",
+    "scope": "External finite checked-IR ordinary owner assignment compilation, hygienic automatic definition/instance construction, actual source binding, shared existing Session cursor and retained whole-program continuation/archives; declaration admission completeness and rooted joint invariant/provenance. Fresh all-closure trust0/j1 rebuild and every closure-owned constant axiom audit; false claims must fail. Supplied field/label/authority fixtures remain; no parsed Mir correspondence, authentic current labels, resource/custody/restore or physical production claim",
+    "audit": {
+      "directory": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/kernel-owner-program-v1",
+      "result_sha256": "098050f5ecaa02856f11ee21aa9839e21080518b3fd2607cf7b994fbcd9d786c",
+      "inputs_sha256": "54a15f9550dff5b03fad2f0d1b6c3159a1f0b6e910f02a07d42b1839cba044fd",
+      "at": "2026-09-28T12:32:42.996107+00:00",
+      "closure": 158,
+      "audited_module_owners": 158,
+      "owned_constants": 16744,
+      "false_guards": 28,
+      "whole_runner_exit": 0,
+      "collected_tool": 78167,
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "mode": "Fresh isolated trust0/j1 source rebuild; ALL closure-owned constants audited; not theorem count"
+    },
+    "claims": [
+      "Value-independent static code/layout compilation exactly corresponds to issue elaboration with actual captured values",
+      "Independent declarative owner declaration premises imply actual common registration; full catalog/key/source binding and all-outcome source invariants",
+      "Ordinary source assignment compiles hygienically to actual declaration, ordinary instantiate and actual issue with compiler-derived ordinal; no handwritten send/receipt/key",
+      "Same factored existing Session cursor; general old pure/reference Session equality retained",
+      "Whole retained source program drives actual issue/transfer/service/unit ack, authority/control input and continuation/replacement; rooted joint state/attempt/provenance invariant",
+      "Generated names are fresh and pair insertion increases width by two, not exponential name growth"
+    ],
+    "controls": [
+      "Five source items compile to seven entries; pure5 then owner10->15 then later pure2",
+      "Continued source activation1 retains catalog/history/attempts and writes15->20",
+      "Empty inbox does not advance; postcommit head update refuses old ack without losing15/history/attempt; replacing stranded wait refuses",
+      "Missing or secret-to-public capture, owner-out-of-range, revoked registration and name collision reject"
+    ],
+    "mechanism_notes": [
+      "SourceInvariant.Valid and OwnerAgrees definitions moved unchanged to declaration import boundary to avoid cycle; same namespaces",
+      "MixedSourceCursor factors existing cursor bookkeeping; tick_prior proves general equality to old implementation",
+      "Actual Mir parser/lowering and physical binding are NOT established by this finite checked-IR"
+    ],
+    "oracle": {
+      "session": "mir-w4-c-owner-complete",
+      "directory": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/oracle-c-owner-completion-retry1",
+      "status": "FAILED: Manual login mode timed out; completed 2026-09-28T12:07:13.508Z; whole exit1. No submission/target/model confirmation or final answer. Browser CDP later refused connection. Owner browser-state question pending.",
+      "reviewed_cut": "None of owner completion/program successor accepted from this failed review"
+    },
+    "remaining": [
+      "Actual Mir source extraction and field/value label origins",
+      "Physical namespace/peer/current authority/custody binding",
+      "Explicit resource and all-entry/image/restore prerequisites before dependent D use",
+      "Neutral final-cut review and local dispositions; no C close"
+    ],
+    "phase": "C active; D unstarted; finish D then pause BEFORE E"
   }
 }

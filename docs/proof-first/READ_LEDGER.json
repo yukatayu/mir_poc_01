@@ -47709,5 +47709,141 @@
     "status": "sole-main audit/receipt inspection",
     "role": "fresh kernel closure result; does not assert reread of all source bodies",
     "at": "2026-09-28T11:48:06.786620+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/owner-program-development/MixedOwnerContinuation.lean",
+    "sha256": "8a9aa1e7224611c20d2aaa19cc9b2110bbb9a06907c4ee63100326a99e99833d",
+    "range": "full",
+    "status": "sole-main authored/read and compiled; frozen successor hash checked",
+    "role": "external owner program and existing Session dependency delta; nonproduction",
+    "at": "2026-09-28T12:38:28.972489+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/owner-program-development/MixedOwnerContinuationControls.lean",
+    "sha256": "2be1770c9692b922786c9dea56b81f6010a7815e9fb88aa7bf974ec64651959f",
+    "range": "full",
+    "status": "sole-main authored/read and compiled; frozen successor hash checked",
+    "role": "external owner program and existing Session dependency delta; nonproduction",
+    "at": "2026-09-28T12:38:28.972489+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/owner-program-development/MixedOwnerProgram.lean",
+    "sha256": "26cafecafbd0016228fa1e89c871bf9d9572fb9682a94e24d6d82046b1d508cf",
+    "range": "full",
+    "status": "sole-main authored/read and compiled; frozen successor hash checked",
+    "role": "external owner program and existing Session dependency delta; nonproduction",
+    "at": "2026-09-28T12:38:28.972489+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/owner-program-development/MixedOwnerSourceCode.lean",
+    "sha256": "30e9ff07aa97a176d5d062a547aac0f3782d56e706810eb7a7c0709d70a496bc",
+    "range": "full",
+    "status": "sole-main authored/read and compiled; frozen successor hash checked",
+    "role": "external owner program and existing Session dependency delta; nonproduction",
+    "at": "2026-09-28T12:38:28.972489+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/owner-program-development/MixedOwnerSourceDeclaration.lean",
+    "sha256": "3cac376abfb3348bc5a5f8533c2a2e8f3ea4b4ca2c669f9a61bc84edc16936cd",
+    "range": "full",
+    "status": "sole-main authored/read and compiled; frozen successor hash checked",
+    "role": "external owner program and existing Session dependency delta; nonproduction",
+    "at": "2026-09-28T12:38:28.972489+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/owner-program-development/MixedOwnerSourceDeclarationControls.lean",
+    "sha256": "62ac3a18f8d303399fdcd1d307c854bc7cd017adb88cdf3a9d45d673b15f3959",
+    "range": "full",
+    "status": "sole-main authored/read and compiled; frozen successor hash checked",
+    "role": "external owner program and existing Session dependency delta; nonproduction",
+    "at": "2026-09-28T12:38:28.972489+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/owner-program-development/MixedOwnerSourceInvariant.lean",
+    "sha256": "a47d8c612a0015a07a9b385fc2ca9c268a772125710cc6dc4f0fcef6ce4eabdf",
+    "range": "full",
+    "status": "sole-main authored/read and compiled; frozen successor hash checked",
+    "role": "external owner program and existing Session dependency delta; nonproduction",
+    "at": "2026-09-28T12:38:28.972489+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/owner-program-development/MixedOwnerSourceTrace.lean",
+    "sha256": "67b2851f15ebf673c1719ca1836667ec841f68d13fb4e84250107226ddb43cd2",
+    "range": "full",
+    "status": "sole-main authored/read and compiled; frozen successor hash checked",
+    "role": "external owner program and existing Session dependency delta; nonproduction",
+    "at": "2026-09-28T12:38:28.972489+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/owner-program-development/MixedReferenceContinuation.lean",
+    "sha256": "6f9e602a47b1f55274e88f4acf656035c881a1965c9ff8aa928b698729003d21",
+    "range": "full",
+    "status": "sole-main authored/read and compiled; frozen successor hash checked",
+    "role": "external owner program and existing Session dependency delta; nonproduction",
+    "at": "2026-09-28T12:38:28.972489+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/owner-program-development/MixedSessionControls.lean",
+    "sha256": "ae09dcba55602154f48a7b48faeaf63ff91c033e8f30584519ae61835660d292",
+    "range": "full",
+    "status": "sole-main authored/read and compiled; frozen successor hash checked",
+    "role": "external owner program and existing Session dependency delta; nonproduction",
+    "at": "2026-09-28T12:38:28.972489+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/owner-program-development/MixedSessionEmbedding.lean",
+    "sha256": "ba9ddc9cd34c5ca40cadb6d5a0b758077887ed891a54c1b9bc9fcb941b7e921d",
+    "range": "full",
+    "status": "sole-main authored/read and compiled; frozen successor hash checked",
+    "role": "external owner program and existing Session dependency delta; nonproduction",
+    "at": "2026-09-28T12:38:28.972489+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/owner-program-development/MixedSourceCursor.lean",
+    "sha256": "234927252db02ac6c1619c166f7489d576d518dadf4a3e9d53d08e4b15285dd2",
+    "range": "full",
+    "status": "sole-main authored/read and compiled; frozen successor hash checked",
+    "role": "external owner program and existing Session dependency delta; nonproduction",
+    "at": "2026-09-28T12:38:28.972489+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/owner-program-development/MixedSourceEmbedding.lean",
+    "sha256": "344f1e06a39122500f584fab7fd40939b805d5ad89c64f9259f5487b448b116e",
+    "range": "full",
+    "status": "sole-main authored/read and compiled; frozen successor hash checked",
+    "role": "external owner program and existing Session dependency delta; nonproduction",
+    "at": "2026-09-28T12:38:28.972489+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/kernel-owner-program-v1/RESULT.json",
+    "sha256": "098050f5ecaa02856f11ee21aa9839e21080518b3fd2607cf7b994fbcd9d786c",
+    "range": "all structured rows/hash+exit verification",
+    "status": "sole-main audit/receipt inspection",
+    "role": "fresh isolated closure; no wholesale repo reading claim",
+    "at": "2026-09-28T12:38:28.972489+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/kernel-owner-program-v1/INPUTS.json",
+    "sha256": "54a15f9550dff5b03fad2f0d1b6c3159a1f0b6e910f02a07d42b1839cba044fd",
+    "range": "all structured rows/hash+exit verification",
+    "status": "sole-main audit/receipt inspection",
+    "role": "fresh isolated closure; no wholesale repo reading claim",
+    "at": "2026-09-28T12:38:28.972489+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/kernel-owner-program-v1/OwnerProgramAudit.lean",
+    "sha256": "094a726f54facf44bf23cdc9d7769d9e615e3e594645463beb44f338a058e699",
+    "range": "full",
+    "status": "sole-main audit/receipt inspection",
+    "role": "fresh isolated closure; no wholesale repo reading claim",
+    "at": "2026-09-28T12:38:28.972489+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/kernel-owner-program-v1/OwnerProgramAudit.log",
+    "sha256": "ed923572e2ab791c0b2615e93032d713ab325690865dcdea54d40a5ba32df1d5",
+    "range": "full",
+    "status": "sole-main audit/receipt inspection",
+    "role": "fresh isolated closure; no wholesale repo reading claim",
+    "at": "2026-09-28T12:38:28.972489+00:00"
   }
 ]
