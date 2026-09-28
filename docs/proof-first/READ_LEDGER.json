@@ -48013,5 +48013,149 @@
     "status": "sole-main read/authored and checked",
     "role": "C current-context review and admitted counterexample; no whole-repo reading claim",
     "at": "2026-09-28T13:42:39.539575+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/kernel-owner-control-v1/MixedOwnerProgram.lean",
+    "sha256": "2706b96eb30ebe1f1ddab661b06cedb40ecabf24cab52063259dfbdd9e32bd55",
+    "range": "full; prior fully read base plus all authored successor changes; unchanged prerequisite copies byte-checked",
+    "status": "sole-main read/authored and mechanically checked",
+    "role": "same C source control/current metadata prerequisites; no whole-corpus completion claim",
+    "at": "2026-09-28T14:18:05.178903+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/kernel-owner-control-v1/MixedOwnerControlSchedule.lean",
+    "sha256": "86e2c0134ae984da62a1aac4df04aaa1649e2535155dd6716a36b117f5de0e96",
+    "range": "full; prior fully read base plus all authored successor changes; unchanged prerequisite copies byte-checked",
+    "status": "sole-main read/authored and mechanically checked",
+    "role": "same C source control/current metadata prerequisites; no whole-corpus completion claim",
+    "at": "2026-09-28T14:18:05.178903+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/kernel-owner-control-v1/MixedOwnerContinuation.lean",
+    "sha256": "b7a36c194024d7e0cca8600c2d7d5003a49403c49dd42dd932ff79c5821375ba",
+    "range": "full; prior fully read base plus all authored successor changes; unchanged prerequisite copies byte-checked",
+    "status": "sole-main read/authored and mechanically checked",
+    "role": "same C source control/current metadata prerequisites; no whole-corpus completion claim",
+    "at": "2026-09-28T14:18:05.178903+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/kernel-owner-control-v1/MixedOwnerContinuationControls.lean",
+    "sha256": "2be1770c9692b922786c9dea56b81f6010a7815e9fb88aa7bf974ec64651959f",
+    "range": "full; prior fully read base plus all authored successor changes; unchanged prerequisite copies byte-checked",
+    "status": "sole-main read/authored and mechanically checked",
+    "role": "same C source control/current metadata prerequisites; no whole-corpus completion claim",
+    "at": "2026-09-28T14:18:05.178903+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/kernel-owner-control-v1/MixedOwnerControlControls.lean",
+    "sha256": "6b4103ea3d3bed3e22560e64dc1f843f3f65999399f7b72df05436583dc7fd3c",
+    "range": "full; prior fully read base plus all authored successor changes; unchanged prerequisite copies byte-checked",
+    "status": "sole-main read/authored and mechanically checked",
+    "role": "same C source control/current metadata prerequisites; no whole-corpus completion claim",
+    "at": "2026-09-28T14:18:05.178903+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/kernel-owner-metadata-v1/OwnerStructuredKeys.lean",
+    "sha256": "02c25d2717e982c86733b6a14583076002f139aed6cf392baec24edb2bfe2944",
+    "range": "full; prior fully read base plus all authored successor changes; unchanged prerequisite copies byte-checked",
+    "status": "sole-main read/authored and mechanically checked",
+    "role": "same C source control/current metadata prerequisites; no whole-corpus completion claim",
+    "at": "2026-09-28T14:18:05.178903+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/kernel-owner-metadata-v1/OwnerSourceContext.lean",
+    "sha256": "b836180595fd21d6ea080e4262e5d2d9cc6d6ce9785413f721f525c3748dc3dd",
+    "range": "full; prior fully read base plus all authored successor changes; unchanged prerequisite copies byte-checked",
+    "status": "sole-main read/authored and mechanically checked",
+    "role": "same C source control/current metadata prerequisites; no whole-corpus completion claim",
+    "at": "2026-09-28T14:18:05.178903+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/kernel-owner-metadata-v1/OwnerMetadataRegistry.lean",
+    "sha256": "243d8592ce07a206e971cf0b38f94fb3fbbbfd797c31fd7f9fc6c03efc484bd2",
+    "range": "full; prior fully read base plus all authored successor changes; unchanged prerequisite copies byte-checked",
+    "status": "sole-main read/authored and mechanically checked",
+    "role": "same C source control/current metadata prerequisites; no whole-corpus completion claim",
+    "at": "2026-09-28T14:18:05.178903+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/kernel-owner-metadata-v1/OwnerMetadataRegistryControls.lean",
+    "sha256": "e03514bb41c3757a9355ae1ed5eab2a6091ed7375d153be3f80c24f6f55f02fa",
+    "range": "full; prior fully read base plus all authored successor changes; unchanged prerequisite copies byte-checked",
+    "status": "sole-main read/authored and mechanically checked",
+    "role": "same C source control/current metadata prerequisites; no whole-corpus completion claim",
+    "at": "2026-09-28T14:18:05.178903+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/kernel-owner-control-v1/RESULT.json",
+    "sha256": "6978705af61d963adabff422864719fa9865daeb8e89f014157f93d13fe3fd50",
+    "range": "all structured fields/hash/wholeexit validation",
+    "status": "sole-main read and checked",
+    "role": "same C conditional evidence / advisory review",
+    "at": "2026-09-28T14:18:05.178903+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/kernel-owner-control-v1/OwnerControlAudit.log",
+    "sha256": "5976e5b0f72189b124c7dde5b6a891c7a7cc058e4aca745e5076cf1ce2d7566d",
+    "range": "full",
+    "status": "sole-main read and checked",
+    "role": "same C conditional evidence / advisory review",
+    "at": "2026-09-28T14:18:05.178903+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/kernel-owner-metadata-v1/RESULT.json",
+    "sha256": "7c0d1ff733a8f8e1760d3a29a769233d0cfb0defdab2dec656639d0a9cb7f89d",
+    "range": "all structured fields/hash/wholeexit validation",
+    "status": "sole-main read and checked",
+    "role": "same C conditional evidence / advisory review",
+    "at": "2026-09-28T14:18:05.178903+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/kernel-owner-metadata-v1/OwnerMetadataAudit.log",
+    "sha256": "922f8ba71947a631c2b323b349deef2fb460d069c8adf551ee5d0b31b452735e",
+    "range": "full",
+    "status": "sole-main read and checked",
+    "role": "same C conditional evidence / advisory review",
+    "at": "2026-09-28T14:18:05.178903+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/oracle-c-owner-control/ANSWER_RECOVERED.txt",
+    "sha256": "9ecbf58f7869131b96d26373b54948499d4d20676fe7d3c9fc751fff0a11a095",
+    "range": "full",
+    "status": "sole-main read and checked",
+    "role": "same C conditional evidence / advisory review",
+    "at": "2026-09-28T14:18:05.178903+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/oracle-c-owner-control/DISPOSITIONS.json",
+    "sha256": "3a18d799f6091501ca0c7c959a1a304e3ee588764dd17d69f68ce6908210002e",
+    "range": "all structured fields/hash/wholeexit validation",
+    "status": "sole-main read and checked",
+    "role": "same C conditional evidence / advisory review",
+    "at": "2026-09-28T14:18:05.178903+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/oracle-c-owner-metadata/ANSWER_RECOVERED.txt",
+    "sha256": "ffcd0646a84b382db590835c552cba5347dccc0bd3783f066217245c696ef042",
+    "range": "full",
+    "status": "sole-main read and checked",
+    "role": "current metadata/management consumer review; no whole-corpus reading claim",
+    "at": "2026-09-28T14:22:32.603954+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/oracle-c-owner-metadata/DISPOSITIONS.json",
+    "sha256": "ed6eddaa1603486cfa3c1dfc2b1a01ef826b32639fdcec69a403e3369d11cb78",
+    "range": "all structured fields and selected import/hash validation",
+    "status": "sole-main read and checked",
+    "role": "current metadata/management consumer review; no whole-corpus reading claim",
+    "at": "2026-09-28T14:22:32.603954+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/CONTROL_METADATA_IMPORT_CLOSURE.json",
+    "sha256": "b5f3b61d33b008f405b9265f82117bc9e46e3be75da3f8a22078889c560edb7e",
+    "range": "all structured fields and selected import/hash validation",
+    "status": "sole-main read and checked",
+    "role": "current metadata/management consumer review; no whole-corpus reading claim",
+    "at": "2026-09-28T14:22:32.603954+00:00"
   }
 ]

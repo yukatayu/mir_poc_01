@@ -45478,5 +45478,157 @@
     "scope": "Actual mixed MODEL Session two-run finite counterexample; general admitted-history theorem for constructed trace, not general NI/proof of production exploit. All module-owned declarations audited, standard logical axioms only.",
     "finding": "Two ordinary owner assignments compile individually: secret increment then public constant. Under identical public initial state, secret0 commits public7; maxInt private overflow consumes one refused attempt, strands wait and leaves public10. General finished_admitted proves computed trace follows actual Rooted Session entries; no mid-run store injection.",
     "disposition": "No prior whole-Session NI theorem is contradicted; source control/completion labels remain a concrete blocker before a dependent secret-bearing control-sensitive D increment. Do not infer privacy from owner-per-body checks or redacted payload. No production exploit claim, no automatic W6 widening or new retry/cancellation policy."
+  },
+  "c_owner_control_successor_20260928": {
+    "at": "2026-09-28T14:18:05.178903+00:00",
+    "directory": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/kernel-owner-control-v1",
+    "whole_exit": 0,
+    "collected_tool": 41293,
+    "result_sha256": "6978705af61d963adabff422864719fa9865daeb8e89f014157f93d13fe3fd50",
+    "modules": 5,
+    "owned_declarations": 427,
+    "qualified_false_guards": 16,
+    "scope": "Nonproduction successor: exact independent lower/compiler rules, hygiene, source-order arithmetic completion rank, generated incoming controls and issue origin, retained runtime floor across attempts and continuation/replacement. Prior joint root invariants and unchanged public mixed controls rechecked. Not whole Session NI or ordinary/callee/generated management completion closure.",
+    "oracle": {
+      "at": "2026-09-28T14:06:17.929211+00:00",
+      "session": "mir-w4-owner-control-r1",
+      "answer_sha256": "9ecbf58f7869131b96d26373b54948499d4d20676fe7d3c9fc751fff0a11a095",
+      "model": "visible6Pro Latest maximum4/4 Pro5/5 verified",
+      "whole_wrapper_exit": 0,
+      "findings": [
+        {
+          "id": 1,
+          "disposition": "accept_scope",
+          "finding": "No narrow theorem falsifier found; conditional review, not execution/acceptance.",
+          "local": "Compiler exactness/schedule and actual source controls freshly checked; label authenticity and whole Session NI not inferred."
+        },
+        {
+          "id": 2,
+          "disposition": "accept_scope",
+          "finding": "Completion theorem is static arithmetic bound on attempted successfully compiled write, not proof an effect completed.",
+          "local": "write_completion_retained explicitly assumes compile some code; compile failure branch retains incoming floor only, not an unavailable rank."
+        },
+        {
+          "id": 3,
+          "disposition": "reject_factual_inference_preserve_gap",
+          "finding": "Suspicious .mark ... .control 1 may be fixed confidentiality control.",
+          "local": "MixedReferenceSource.mark takes consumed:Nat, adds it to nextRequest, and constructs Origin(site,kind,beforeCount,afterCount). 1 is allocation count, not an IFC label. Generated management event label gap is real/open, but changing this 1 would corrupt allocation and is not a repair."
+        },
+        {
+          "id": 4,
+          "disposition": "accept",
+          "finding": "Metadata tuple equality does not authenticate producer.",
+          "local": "Existing OwnerSourceContext remains conditional. New registry research underway separately; current head/schema input and shared Session/physical boundary still required."
+        },
+        {
+          "id": 5,
+          "disposition": "accept",
+          "finding": "Ordinary/callee/reference/generated management completion dependencies still open.",
+          "local": "Schedule.ordinary is a projection only. Need source-derived labels/completion plus same retained cursor and truthful event labels before dependent consumer, not a global upfront maximum."
+        },
+        {
+          "id": 6,
+          "disposition": "accept_finite_scope",
+          "finding": "No listed continue/replace/transport/service/authority/control/cancel reset found or blanket rejection.",
+          "local": "General control preservation plus concrete entered positive cases; no claim for images/raw constructors/unlisted newentry."
+        },
+        {
+          "id": 7,
+          "disposition": "proposal_unadopted",
+          "finding": "Introduce authenticated dependency-carrying CompletionWitness/eventId.",
+          "local": "Possible internal certificate, not new programmer boilerplate or self-authenticating authority. Existing origins/dependencies should be consumed before inventing redundant event IDs. Authority/resource dependency labels need separate derivation."
+        },
+        {
+          "id": 8,
+          "disposition": "reject_factual_scope_summary",
+          "finding": "Uploaded RESULT supposedly excludes compiler soundness.",
+          "local": "RESULT explicitly includes compiler soundness/completeness/hygiene for this finite model; actual Mir/Rust parser/elaborator correspondence remains excluded. Do not erase checked result or claim broader Rust proof."
+        }
+      ],
+      "scope": "sole main local verification of advisory single-shot difference review; no independent signature/acceptance"
+    },
+    "production_delta": false,
+    "canon_promotion": false
+  },
+  "c_metadata_registry_candidate_20260928": {
+    "at": "2026-09-28T14:18:05.178903+00:00",
+    "directory": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/kernel-owner-metadata-v1",
+    "whole_exit": 0,
+    "collected_tool": 62222,
+    "result_sha256": "7c0d1ff733a8f8e1760d3a29a769233d0cfb0defdab2dec656639d0a9cb7f89d",
+    "modules": 4,
+    "owned_declarations": 624,
+    "qualified_false_guards": 20,
+    "scope": "2 unchanged key/context prerequisites plus2 new registry modules. Independent prepare/check rules, CurrentUse conjunction plus exact owner/module/code/contract/fullpayload/serial binding, per-field strict generation/tombstone floor, historical admitted provenance, no-repeat, old-binding invalidation, unrelated-key frame. Mathematical issued fixtures are not actual grants.",
+    "open": [
+      "CurrentUse World/current trusted head input must derive from actual shared session",
+      "checked-schema/source attachment and entity/value lifetime",
+      "distinct22/23 logical actions not integrated into MixedCatalogService invocation actions5/16 or existing management command",
+      "all physical entry/custody/resource/privateimage/restore paths",
+      "ordinary/capture/generated-management completion labels"
+    ],
+    "oracle_pending": {
+      "session": "mir-w4-owner-metadata-r1",
+      "tool": 91200,
+      "directory": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/oracle-c-owner-metadata",
+      "submitted": "2026-09-28T14:15:59.035845+00:00",
+      "first_status_after": "2026-09-28T14:18:59.035845+00:00",
+      "status": "historical submission, final now recovered"
+    },
+    "production_delta": false,
+    "canon_promotion": false,
+    "oracle": {
+      "at": "2026-09-28T14:22:32.603954+00:00",
+      "session": "mir-w4-owner-metadata-r1",
+      "answer_sha256": "ffcd0646a84b382db590835c552cba5347dccc0bd3783f066217245c696ef042",
+      "model": "visible6Pro Latest maximum4/4 Pro5/5 verified",
+      "whole_wrapper_exit": 0,
+      "findings": [
+        {
+          "id": 1,
+          "disposition": "accept_scope",
+          "finding": "No mathematical theorem falsifier or circular rooted-origin proof found.",
+          "local": "Rooted starts empty and admits commit only; origin is existential historical model transition, not deployed authenticated fact. Raw supplied Worlds/schemas can satisfy predicates; no theorem authenticates arbitrary inhabitant."
+        },
+        {
+          "id": 2,
+          "disposition": "accept",
+          "finding": "Exact context/current gate and generation/floor/use-ID controls match stated model boundary.",
+          "local": "General exactness/completeness/preservation and concrete issued-fixture positives are distinct. No claim of physical at-most-once/current trusted head or real grants."
+        },
+        {
+          "id": 3,
+          "disposition": "accept_correction",
+          "finding": "Actual MixedCatalogService invocation actions are pure5 and owner16, not just5.",
+          "local": "Verified invocationAction/slotRecord. Frozen question/result reference to action5 was incomplete; neither5 nor16 creates metadata22/23. Correct forward notes, preserve frozen bytes."
+        },
+        {
+          "id": 4,
+          "disposition": "select_provisional_technical_candidate",
+          "finding": "Existing management boundary consumes actor/full-payload/policy/serial evidence more directly than virtual metadata operation projection.",
+          "local": "Select minimal separate metadata management transition in external reference, preserving explicit22/23 action distinction, no grant from existing registration/invoke. No production/Canon acceptance or public action numbering."
+        },
+        {
+          "id": 5,
+          "disposition": "accept_with_relation_refinement",
+          "finding": "Need actual producer admission correspondence under same actor/context and negative cross-action tests.",
+          "local": "General relation must include registry state/schema binding and actual management cut; cannot assert unconditional iff to old Registry.commit using a world containing nonexistent metadata operation. Prove structural preparation correspondence and genuine management authorization directly, without dummy catalog records."
+        },
+        {
+          "id": 6,
+          "disposition": "accept",
+          "finding": "Restore/raw-image paths and physical history remain outside Rooted.",
+          "local": "Absence is no recovery proof. Entity/value lifetime, current head, schema authenticity, physical locks/resources and all admission paths remain gated before dependent consumer."
+        },
+        {
+          "id": 7,
+          "disposition": "partly_reject_owner_gate_overreach",
+          "finding": "Who authenticates schema/physical history listed as owner choices.",
+          "local": "Real issuer/key/trust-anchor and privacy/authority changes reserved; reversible adapter/projection/sealed checked-artifact use under existing rules already delegated. Research can choose direct consumer mechanism; do not ask owner to decide routine internal topology."
+        }
+      ],
+      "scope": "sole main verification of read-only advisory review; no independent signature/acceptance"
+    },
+    "scope_correction": "Frozen RESULT/question reference to current invocation action5 was incomplete: actual pure5/owner16 verified. Neither grants logical metadata22/23. Proof/source bytes unchanged."
   }
 }
