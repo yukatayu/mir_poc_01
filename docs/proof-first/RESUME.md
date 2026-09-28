@@ -1,91 +1,94 @@
 # RESUME — W4-C active
-Updated 2026-09-28T15:05:01.478892+00:00. Sole main ONLY; NO SUBAGENTS.
-Same active whole-W4 goal. Finish C then D; PAUSE existing goal after D, STOP BEFORE E.
-Do not complete/recreate goal, start W5+/Plan250-I3-4, promote Canon/THM/OBL, issue real
-owner keys/grants, publish or use production. Quota stop waived; owner alone resets.
-Own ordinary commit/push authorized; no reset/clean/force/cache removal/hostshare/notifications.
+Updated 2026-09-28T15:41:47.169702+00:00. Sole main ONLY; NO SUBAGENTS. Same active whole-W4 goal.
+Finish C then D; PAUSE existing goal AFTER D, STOP BEFORE E. Do not recreate or complete
+goal; no W5+/Plan250-I3-4/Canon THM/OBL promotion, real issuer keys, public/production work.
+Quota stop waived; owner alone resets. Own normal commit/push authorized, no force/reset/
+clean/cache removal/hostshare/notifications. One Report2614.
 
-HEAD989d4566bbe3b60286e87d78a0ebbd9ba848e414 main pushed/parity; receipt
-P/CONTROL_METADATA_CHECKPOINT_GIT.json. Own11docs dirty for new management connection;
-NO production source delta. W4_CHECK262prior keys+1, READ_LEDGER6397prefix->6406.
-Current make docs82845 wholeexit0 (218Canon/800hierarchy/1764reports) collected.
-Next final history/diff/own commit/push; same C continues.
-One Report2614 and forward plan. Current source/metadata physical gates still OPEN.
+HEAD de44057b3459b839d7c73d5e4e7326b0b05fed98 main pushed/parity, receipt
+P/OWNER_MANAGEMENT_CHECKPOINT_GIT.json; make docs82845 wholeexit0 for THAT checkpoint.
+Own11docs dirty now (new source/pending/session evidence), NO production delta.
+W4_CHECK263prior keys+1 c_metadata_source_pending_session_20260929; READ_LEDGER6406->6419.
+Snapshots/report/forward plan/samples updated, final Session review complete; docs validation
+still pending. Do not count old docs validation for new dirty files. Next after review:
+make docs, history-prefix/diff/hash review, explicit own11docs commit no-gpg-sign/push/parity.
 
 I=/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration
 P=I/c-source-effect
 KP=P/kernel-owner-program-v1 immutable158module/16744owned/28falseguards baseline.
-KCtx=P/kernel-owner-source-context-v3 immutable2module/388owned/19falseguards.
-KCF=P/kernel-owner-flow-counter-v1 admitted private arithmetic->public continuation counter.
-KCtl=P/kernel-owner-control-v1 immutable5module/427owned/16falseguards, reviewed8findings.
-KMeta=P/kernel-owner-metadata-v1 immutable4module/624owned/20falseguards,reviewed7findings.
-KMgr=P/kernel-owner-management-v1 NEW immutable5module/802owned/16falseguards,
-whole63243exit0; RESULT hash in W4_CHECK c_metadata_management_connection_20260928.
-Selected54importroots checked in P/OWNER_MANAGEMENT_IMPORT_CLOSURE.json.
+KCtl=P/kernel-owner-control-v1 immutable5module/427owned/16falseguards.
+KMgr=P/kernel-owner-management-v1 immutable5module/802owned/16falseguards,reviewed8findings.
+KCtx/P/kernel-owner-source-context-v3 and registry/flow counter predecessors immutable.
 
-KMgr has actual existing Management System actor/view/controlPolicy/serial/committed-use
-lock, logical22/23 independent of invoke5/16/register17. Current owner participation,
-placement and live module identity/code/contract, exact schema/owner/member revision/
-cuts/payload. General soundness/relativecomplete/invariants/generation/floor/rootedorigin/
-oldbinding refusal and both cross-management duplicate directions. Raw schema/authhead
-still INPUTS. Positive register/instantiate and unrelated dynamic addition; retirement
-leaves history but removes usability. Lower Usable is NOT value-read authorization.
-Preserved developmental multi-placement[0,1]->leave0 counter at
-P/owner-metadata-placement-counter-v1: old attachment accepted departed owner through
-other active placement. Successor requires actual owner participation; general and
-finite corrected controls pass. Original finite counter not full audited/production exploit.
+NEW IMMUTABLE CUTS:
+KS=P/kernel-owner-metadata-source-v1, fresh52affected modules/3528owned/14falseguards;
+whole91046exit0, RESULTfea6eec25002d737a90903bc1b8c83225d38639ff922a6414140634e0cc5af9c.
+KU=P/kernel-owner-metadata-pending-v1, fresh2modules/137owned/9falseguards;
+whole36319exit0, RESULT1108d5f4b20d240463ce1baa2bccdae42e4e88a851fa39f6e1dcac326a0150b2.
+KJ=P/kernel-owner-metadata-session-v1, fresh3modules/189owned/12falseguards;
+whole27983exit0, RESULT3a9185a5d7e8200133cff8e258e13bdaa3ae18216889ae096746b1945d1dae56.
+Scripts audit_owner_metadata_{source,pending,session}_v1.py one-shot; NEVER rerun over
+existing output. METADATA_SOURCE_USE_EVIDENCE.json and CHECKPOINT.json pin new evidence.
+Fresh all-owned transitive axioms standard3 only. No authored holes/Mir axioms. Development
+syntax/binder/projection failures incl synthesized sorryAx retained/excluded, not successes.
+Pinned KP objects checked; KS whole changed cone rebuilt; no reused base import touches an
+override. KU/KJ pin prior objects; final selected full import/source closure receipt useful next.
 
-ALL Oracle jobs FINAL. Do NOT resend or ask login absent actual new failure.
-Latest I/oracle-c-owner-management session mir-w4-owner-management-r1,tool17493wholeexit0;
-precreated visible tabBDF1943B397200ECEEAD5E94A0FB3CEB CDP127.0.0.1:45479.
-QUESTIONf8e8b330ea873bb2bc163a3c10176958c927e565cd0659d41992e7f2f9e6cc24,
-MANIFEST2a0b9dfd12643dfa8b48af55db44c4bc1582a31f7559d70e464ff8084d42d626 (15files).
-Recovered6892chars SHA13967b23d0bd8041d21384c25945a369043a37e2f43e8ec29cf25e81d36e5a1c,
-6Pro/max verified,8findings DISPOSITIONS.json mirroredW4_CHECK. No model theorem falsifier.
-Reject necessity of nextRequest=max+1 (Below + actual step allocation sufficient), reject
-'drain eliminates ABA' (retained bindings/images survive), reject routine internalcustody
-choice automatically needing owner approval. Physical/source provenance and pending IDs
-remain real gates, not authorized by logical context equality or Oracle.
-Prior control/registry/context/program reviews FINAL, in previous receipts; never redo
-unchanged consultations. Visible precreated temp tab avoids wrapper-created target closure;
-wrapper may save inline token only, recover exact tab full answer/noStop/regenerate + model.
-Use >=180s inspection intervals, no arbitrary deadline, no paid fallback/browser changes.
+KS: existing Store typed .metadata Context event, actual management commit/system result,
+core fresh used+pending IDs, postCore serial/update, real frame/origin interval. Core event
+projection stutters (as existing reference binding), full Store event clock advances.
+OwnerMetadataSource merge(mark(...control1)) uses same allocator; 1 is count, NOT IFC label.
+General state/coherence/origin/clock/allocator/pending preservation + independent relative
+completeness. Both pure6/owner7 pending reject ID reuse, fresh8 metadata keeps both; pure
+resume5 works, reference8 refuses9 succeeds. Actual owner source wait preserved.
 
-CURRENT EXTERNAL DEVELOPMENT (not frozen/accepted):
-D=P/owner-session-development, basedKP + KCtl/KMgr successors,48affected source cone
-copied. Fork inputs pinned; compile.py rejects local dependency without matching successful
-source receipt. Compile local imports in order; NEVER use stale dependent base objects.
-Do not mutate an imported file during a dependent compile. After new imports/additions,
-recompute affected closure for final fresh audit. No authored holes/Mir axioms.
-- Actual MixedReferenceStore.lean gains typed Occurrence.metadata, ignored by coreEvents
-  projection (like existing reference binding events); no fabricated core request/result.
-- OwnerMetadataStore.lean consumes actual core.fresh (used AND pending), real metadata
-  management commit, existing postCore ID update, actual store history/typed event.
-  General exact underlying-system correspondence, conditional completeness, store/coherence/
-  reference origins/clock/pending classification/allocator bound preserved; current compile
- 57982exit0. Syntax/autoImplicit/projection failed attempts retained/excluded.
-- OwnerMetadataStoreControls actual empty Execution->register/instantiate/acquire->both
-  protected pure and owner pending. Lower manager-only admits pending6, actual Store rejects
- 6/7; fresh8 succeeds, keeps both pending, pure resume still5, ID8 reference mutation refused,
- 9 succeeds; retire/recreate makes old binding false. Latest75836exit0. No generation binding
-  in unchanged owner service carrier yet; tests do NOT claim that closure.
-- OwnerMetadataSource.lean development PASS: existing owner-source State + merge(mark), same
-  allocator and exact real metadata occurrence. Preserve pure/owner waiting (embed would
-  drop owner waiting), Valid/OwnerAgrees and conditional source-entry completeness.
-  Initial dependency compile65467 collected exit1 (Source projection/equality obligations);
-  corrected final Source log20260928T145812582276Z exit0; controls log20260928T150119701107Z
-  exit0. Actual owner launch/drive waiting retained, source allocator/event origin exact,
-  revoked claim refuses. Failed attempts excluded. No live Oracle job.
+KU: full saved payload + Anchor(no serial) + all typed contract field bindings, exact
+rows/bind vs independent RowBinds/RowsBind/Binds, current checker equality. Actual old
+owner queue label-only allows ABA same label; retained generation refuses unchanged store.
+Current write10->15 and unrelated addition/address append pass; payload/remap refuse.
+Raw Packet is NOT credential; enclosing origin/custody obligation retained.
 
-NEXT semantic consumer: fresh Source/Store closure audit and review; carry actual Binding generations
-through pending/owner-use, attach checked artifact schema and real source classifications;
-then ordinary/capture/generated-management completion, physical resources/custody/allentry/
-privateimage/restore and actualMir correspondence before D. Do not claim source construction
-from typed trusted control alone, metadata predicate from supplied schema as authenticity,
-or lower committed lock as whole Session freshness. Preserve Q18 and freshimport/recovery.
-No new Rust/runtime/network test this checkpoint (no production delta); prior parser2/
-runtime418/renderer5 historical only. Final whole affected closure/axiom/qualified negatives
-and changed-cut review required for Source/Store before relying on them.
+KJ: ONE existing MixedOwnerContinuation.Session + ONE Registry/address list/optionalPacket.
+bindWaiting reads actual saved operation/catalog/typed definition, WaitingBinds exact.
+OwnerSatisfies target/wholebody scope -> fields nonempty; root no-empty packet theorem.
+tick admits tentative pure logical source tick only if new owner request binds metadata;
+refusal retains committed prefix and attempted pc floor. Physical combined admission cut
+before queue publication still owed. transfer/service/control/head/continue/replace/cancel
+reuse existing entries. service derives current metadata from SAME retained Registry.
+metadata update installs BOTH actual source and Registry; old pending packet retained.
+Rooted explicit10entry relation; actual packet-origin/current service route, no empty packet.
+Joint precisely sourceValid/OwnerAgrees + ownerattemptInvariant + inbox/historyProvenance,
+plus Registry.Consistent preserved all listed steps. NOT full IFC/resource/physical theorem.
+Initial raw registry/schema and authentic source genesis still preconditions.
+Actual checked-IR program launch/drive prefix -> attach schema(input) -> metadata activate ->
+assignment/request -> transfer -> write15 -> unitack -> laterpure2 passes. requested/served/
+finished_rooted proofs. Same-label recreate whilequeued refuses. Unrelatedmetadata succeeds.
+Raw State packet.fields=[] injection DOES write; kept as adversarial raw-input control.
+empty_packet_not_admitted excludes that through Rooted, not through physical sealing.
 
-Lean4.29.1 --trust0/-j1, childAS6GiB/core0. Root4.6GiBfree98%,RAM9.3GiBavailable,
-swap12GiBfree lastmeasured; externalmount absent. No heavy Rust build or cleanup.
+Development D=P/owner-session-development frozen at KJ for these modules. No live Lean.
+Latest full development Session/Invariant PASS logs20260928T153241502819Z/
+153243916293Z; Controls final20260928T153312861265Z exit0. Fresh KJ is stronger final evidence.
+Do not edit dependencies while a child compile runs; compile.py checks local source receipts,
+final audit is required for transitive objects. All new sources need final review before reliance.
+
+ORACLE:
+Source/pending FINAL disposed9 at I/oracle-c-metadata-source-use. Actual normalized session
+mir-w4-metadata-source-use (requested had extra-r1; session ID correction recorded).
+Whole59028exit0. Same exact visible tab recovered11484chars
+SHA1fcd107905ca02016749b1787e1f9b37b7948c28c3ad000c6ece9138a19d768b;6Pro/max verified.
+Reject equal-value provenance test, whole-schema=opfootprint, duplicate Registry suggestion;
+retain physical/current schema/source origin gaps. No claimed-theorem falsifier.
+Do NOT resend this or any older final job.
+
+CURRENT Session Oracle FINAL at 2026-09-28T15:45:51.185950+00:00, mir-w4-metadata-session-r1. Whole57388exit0; full8839chars SHAfd480991b7ddd9f1149887a027ea719a9925a21cb283953b039b719c1d11fc0d. Same owned tab/finality/6ProLatestmax verified.8findings in DISPOSITIONS.json/W4_CHECK; no theorem falsifier, authentic initial schema/physical custody/multiowner/import/IFC gaps retained. No outstanding Oracle; DO NOT resend. Own11docs validation/commit/push still next.
+
+NEXT C CONSUMER: actual CheckedSurfaceV0 schema + source classifications/control/captures,
+registry selection across owners/declaring-module vs generated operation; physical single
+admission/custody/entry/privateimage/restore/resources and actualMir correspondence before D.
+Current real M7 has private CheckedStaticEnvironment state schemas and duplicate-state/field
+refusal; getters retain namespace/owner/type/visibility/source refs. Visibility is NOT a
+security label or release grant. M8OwnerExecutionPlan retains target/expression but no field
+schema; input authenticity cannot be assumed to survive erase. Reconsulted exact current
+hashes in READ_LEDGER, no new Rust execution. Prior parser2/runtime418/renderer5 historical.
+Root4.5GiBfree98%,RAM10GiBavailable/swap12GiBfree, externalmount absent. No heavybuild/cleanup.

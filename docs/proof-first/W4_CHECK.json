@@ -45718,5 +45718,181 @@
     ],
     "production_delta": false,
     "canon_promotion": false
+  },
+  "c_metadata_source_pending_session_20260929": {
+    "at": "2026-09-28T15:40:21.408021+00:00",
+    "cuts": [
+      {
+        "cut": "source",
+        "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/kernel-owner-metadata-source-v1",
+        "result_sha256": "fea6eec25002d737a90903bc1b8c83225d38639ff922a6414140634e0cc5af9c",
+        "commands": 67,
+        "owned": 3528,
+        "collected_tool": 91046,
+        "whole_exit": 0
+      },
+      {
+        "cut": "pending",
+        "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/kernel-owner-metadata-pending-v1",
+        "result_sha256": "1108d5f4b20d240463ce1baa2bccdae42e4e88a851fa39f6e1dcac326a0150b2",
+        "commands": 12,
+        "owned": 137,
+        "collected_tool": 36319,
+        "whole_exit": 0
+      },
+      {
+        "cut": "session",
+        "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/kernel-owner-metadata-session-v1",
+        "result_sha256": "3a9185a5d7e8200133cff8e258e13bdaa3ae18216889ae096746b1945d1dae56",
+        "commands": 16,
+        "owned": 189,
+        "collected_tool": 27983,
+        "whole_exit": 0
+      }
+    ],
+    "scope": "Existing Store/source allocator, generation envelope and bounded single-registry existing-Session connection; current authority and actual owner queue retained. No production/schema authenticity/all physical entry/IFC or W4-C completion.",
+    "positives": [
+      "both pure and owner pending survive metadata update; separate fresh ID; pure result still5",
+      "actual checked-IR source program issue->transfer->write10to15->unit ack->later source2",
+      "unrelated key activation and append-only addresses preserve current request use"
+    ],
+    "counterexamples": [
+      "old label-only queue writes after same-label retire/recreate; retained generation gate refuses",
+      "raw empty-packet State injection writes, but admitted Rooted relation excludes empty packet; physical custody still open",
+      "pending6/7, consumed8, changed payload and remapped address refuse"
+    ],
+    "session_theorems": [
+      "bind_waiting_exact independent WaitingBinds",
+      "rooted_packet_origin; rooted_service_binding; rooted_no_empty_packet",
+      "rooted_joint: source Valid/OwnerAgrees, owner attempt invariant, actual-history inbox provenance, Registry.Consistent"
+    ],
+    "oracle_source_pending": {
+      "at": "2026-09-28T15:21:59.850608+00:00",
+      "session": "mir-w4-metadata-source-use",
+      "requested_slug": "mir-w4-metadata-source-use-r1",
+      "answer_sha256": "1fcd107905ca02016749b1787e1f9b37b7948c28c3ad000c6ece9138a19d768b",
+      "wrapper_exit": 0,
+      "collected_tool": 59028,
+      "model": "6Pro Latest slider4/4 statusPro5/5 verified",
+      "findings": [
+        {
+          "id": "F1",
+          "disposition": "accept_boundary_reject_value_provenance_test",
+          "finding": "Raw packet construction does not establish bind/source origin.",
+          "local": "Add enclosing admitted-entry trace and preserved packet origin. A manually constructed value equal to a produced packet is mathematically indistinguishable: reject suggested value-only origin test/proof-as-credential. Test raw injection through admitted API and empty/partial envelope bypass instead; physical custody remains separate."
+        },
+        {
+          "id": "F2",
+          "disposition": "accept_scope_control_already_present",
+          "finding": "Address evolution requires retained correspondence.",
+          "local": "PendingControls already rejects [other,key] replacement while [key,other] growth succeeds. Current per-row decode equality refuses relevant key changes even beyond append-only. Do not call replacement an accepted alias or assert all mutations require prefix growth when preserved used coordinates suffice."
+        },
+        {
+          "id": "F3",
+          "disposition": "accept_consumer_reject_duplicate_registry",
+          "finding": "Enclosing registry and pending source state not yet coupled in reviewed cut.",
+          "local": "One retained Registry beside actual existing Session is the current successor. Store does not already contain a second currentRegistry; prove exact returned registry/source installation and all-entry closure, not an invented equality between duplicate authoritative tables."
+        },
+        {
+          "id": "F4",
+          "disposition": "accept_projection_scope",
+          "finding": "Core-event count cannot replace full Store event/history clock.",
+          "local": "commit_clock is history.length=Store.events.length+1; coreEvents deliberately filters reference/metadata administrative events. Existing controls include pending core requests then metadata then pure result; final coupled trace must maintain both. Do not create an independently fabricated metadata history."
+        },
+        {
+          "id": "F5",
+          "disposition": "accept",
+          "finding": "Separate fresh metadata request preserves owner waiting.",
+          "local": "52-module source proof and 14 qualified false controls support bounded claim. No fairness/retry/owner completion inference."
+        },
+        {
+          "id": "F6",
+          "disposition": "partly_reject_schema_equality",
+          "finding": "Retained field coverage depends on actual checked operation footprint.",
+          "local": "OwnerSatisfies and Scoped require target and every executable body state read in contract.fields. Source-to-checked contract correspondence remains prerequisite. Reject contract.fields=whole schema and rejection of unused schema fields: schemas can declare unrelated fields and operation footprints need not include them. Require complete target/read footprint with correct current declarations/labels, not all schema fields."
+        },
+        {
+          "id": "F7",
+          "disposition": "accept_scope",
+          "finding": "Reviewed source/store/use cut is not whole Session closure.",
+          "local": "Explicit open condition retained; coupled Session successor remains development and requires all-entry invariants/packet origin proof/fresh audit/review before reliance."
+        },
+        {
+          "id": "OWNER",
+          "disposition": "partly_reject_overbroad_policy_gate",
+          "finding": "Lists generation reuse/queue/schema/registry questions as owner choices.",
+          "local": "Irreversible semantics/privacy/issuance choices reserved. Non-reusable retained generation and stale-use refusal already preserve task invariants; reversible internal registry selection/draining comparisons may be researched autonomously. Current refusal does not define eventual cancellation/delay. No new issuer/trust anchor or final policy selected."
+        },
+        {
+          "id": "LIMITS",
+          "disposition": "accept",
+          "finding": "Advisory reading only, no execution/approval.",
+          "local": "Same exact visible temporary tab full final11484chars recovered; normalized actual session mir-w4-metadata-source-use, wrapper inline-token result retained but not accepted.6Pro Latest/max verified. No supplied claimed-theorem falsifier found."
+        }
+      ]
+    },
+    "oracle_session": {
+      "session": "mir-w4-metadata-session-r1",
+      "status": "final advisory source reading; locally checked; no theorem-level falsifier supplied; not independent signed acceptance or replay",
+      "question_sha256": "98739ac6b092381930a4719840ab894e292b81c0f18e036f61c91631cbc54661",
+      "manifest_sha256": "03e26aa8a38917d07efa89b27b2c41108de6c4366d73af5276459d6a867dda26",
+      "at": "2026-09-28T15:45:51.185950+00:00",
+      "wrapper_exit": 0,
+      "collected_tool": 57388,
+      "answer_sha256": "fd480991b7ddd9f1149887a027ea719a9925a21cb283953b039b719c1d11fc0d",
+      "answer_chars": 8839,
+      "model": "6Pro Latest slider4/4 statusPro5/5 verified",
+      "finality": "same exact owned tab; no Stop and Regenerate response present",
+      "findings": [
+        {
+          "id": "F1",
+          "disposition": "accept",
+          "local": "bind_waiting_exact uses actual waiting/catalog/OwnerSatisfies/field binder; equal packet values do not carry distinguishable origin. Rooted carries admitted history, not a credential."
+        },
+        {
+          "id": "F2",
+          "disposition": "accept_boundary",
+          "local": "Rooted is the explicit finite entry set. Future image/raw imports are not covered; no physical constructor sealing inferred."
+        },
+        {
+          "id": "F3",
+          "disposition": "accept",
+          "local": "rooted_service_binding combines actual Produced with current-generation check; service success alone does not establish origin."
+        },
+        {
+          "id": "F4",
+          "disposition": "accept",
+          "local": "rooted_joint means exactly source Valid/OwnerAgrees, owner attempt invariant, actual-history provenance plus Registry.Consistent; no larger invariant claimed."
+        },
+        {
+          "id": "F5",
+          "disposition": "accept_boundary",
+          "local": "Pure tentative source tick precedes admitted publication in model; implementation must enforce one admission cut before enqueue/backend effect."
+        },
+        {
+          "id": "F6",
+          "disposition": "accept_scope",
+          "local": "OwnerSatisfies checks target/body footprint, types/flow as defined; does not imply arbitrary IFC/resource policies. Such stronger claims remain excluded."
+        },
+        {
+          "id": "F7",
+          "disposition": "accept",
+          "local": "changeMetadata installs returned source/registry and preserves retained packet/owner/inbox/outbox; actual controls include later source continuation."
+        },
+        {
+          "id": "F8",
+          "disposition": "accept_open",
+          "local": "Initial authentic schema/source attachment, multiple owners, populated restore, physical custody, wire/resources and full observation IFC remain open; no C completion inferred."
+        }
+      ]
+    },
+    "open": [
+      "actual checked artifact/schema and classifications/captures/control provenance",
+      "multi-owner registry selection; declaring-module vs generated-operation attachment",
+      "physical combined admission before queue publication; constructor/custody/restore/image closure",
+      "resources/current-head authenticity/ordinary and management completion labels/actual Mir-Rust correspondence"
+    ],
+    "production_delta": false,
+    "canon_promotion": false
   }
 }

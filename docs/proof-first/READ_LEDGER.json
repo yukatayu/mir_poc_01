@@ -48229,5 +48229,109 @@
     "status": "sole-main read/authored and checked",
     "role": "same C management connection and retained falsifier; no whole corpus reading claim",
     "at": "2026-09-28T14:56:46.486071+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/kernel-owner-metadata-source-v1/MixedReferenceStore.lean",
+    "sha256": "c952b0f2bbcda0360e959256037f78c7d2352512ca064df52529f3f445e0c4b0",
+    "range": "1-290",
+    "status": "full author/read/review at frozen cut",
+    "role": "same W4-C bounded source/current metadata integration",
+    "at": "2026-09-28T15:40:21.408021+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/kernel-owner-metadata-source-v1/OwnerMetadataStore.lean",
+    "sha256": "a3377628fee35e243d285a64ba44281696d5f2672c0aedeaa8a086a6e34896d0",
+    "range": "1-203",
+    "status": "full author/read/review at frozen cut",
+    "role": "same W4-C bounded source/current metadata integration",
+    "at": "2026-09-28T15:40:21.408021+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/kernel-owner-metadata-source-v1/OwnerMetadataStoreControls.lean",
+    "sha256": "0c132cb29749e9d0e1766357cc452561ead7fde799e5be1628d302d8e4084211",
+    "range": "1-96",
+    "status": "full author/read/review at frozen cut",
+    "role": "same W4-C bounded source/current metadata integration",
+    "at": "2026-09-28T15:40:21.408021+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/kernel-owner-metadata-source-v1/OwnerMetadataSource.lean",
+    "sha256": "48ddc1b9d77ef739c9217492a8a35f88679bea242caef591461691376df73e73",
+    "range": "1-94",
+    "status": "full author/read/review at frozen cut",
+    "role": "same W4-C bounded source/current metadata integration",
+    "at": "2026-09-28T15:40:21.408021+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/kernel-owner-metadata-source-v1/OwnerMetadataSourceControls.lean",
+    "sha256": "10b0635c879a1582cacee609ea65c56e8b8fc04bf6672978c4ec0d6bd9355e32",
+    "range": "1-42",
+    "status": "full author/read/review at frozen cut",
+    "role": "same W4-C bounded source/current metadata integration",
+    "at": "2026-09-28T15:40:21.408021+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/kernel-owner-metadata-pending-v1/OwnerMetadataPending.lean",
+    "sha256": "830819478021ce2c51e6c929c938ce1c2b4369159445afb902cb26a374c97b75",
+    "range": "1-286",
+    "status": "full author/read/review at frozen cut",
+    "role": "same W4-C bounded source/current metadata integration",
+    "at": "2026-09-28T15:40:21.408021+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/kernel-owner-metadata-pending-v1/OwnerMetadataPendingControls.lean",
+    "sha256": "86cb8a909d7ffea9d422e3ab7d520145dfa523d9423d34ef96c45c0535fd06dd",
+    "range": "1-57",
+    "status": "full author/read/review at frozen cut",
+    "role": "same W4-C bounded source/current metadata integration",
+    "at": "2026-09-28T15:40:21.408021+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/kernel-owner-metadata-session-v1/OwnerMetadataSession.lean",
+    "sha256": "ae71fe751351f7ea532dd99046866d49a1c8b829e1bf580a33ca97d1904828c7",
+    "range": "1-358",
+    "status": "full author/read/review at frozen cut",
+    "role": "same W4-C bounded source/current metadata integration",
+    "at": "2026-09-28T15:40:21.408021+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/kernel-owner-metadata-session-v1/OwnerMetadataSessionInvariant.lean",
+    "sha256": "8d18d336fe0dc4c4751dc8a314d9043f2e22ff3617befb23a72875739dd159c2",
+    "range": "1-237",
+    "status": "full author/read/review at frozen cut",
+    "role": "same W4-C bounded source/current metadata integration",
+    "at": "2026-09-28T15:40:21.408021+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/kernel-owner-metadata-session-v1/OwnerMetadataSessionControls.lean",
+    "sha256": "9604165bd8da77a7bfd8bdf9fb9c98f0e9dbb3a5831d9122f058b7fdac3ef964",
+    "range": "1-93",
+    "status": "full author/read/review at frozen cut",
+    "role": "same W4-C bounded source/current metadata integration",
+    "at": "2026-09-28T15:40:21.408021+00:00"
+  },
+  {
+    "path": "crates/mir-semantics/src/surface_v0_pipeline.rs",
+    "sha256": "c16b5fedc2d4e6e52e2e5cb87b1c78a03536ba0dff57f58ca54c24d33831ac2a",
+    "range": "230-530;2310-2690;3360-3505",
+    "status": "partial reconsult, prior full read retained; not new full read",
+    "role": "next actual checked-schema/metadata direct consumer",
+    "at": "2026-09-28T15:40:21.408021+00:00"
+  },
+  {
+    "path": "crates/mir-runtime/src/m8_runtime_owner_queue.rs",
+    "sha256": "b05a005d050289f80c0f3f7c4f206a2dc12407422d24147ea0beae8ecfa21d3a",
+    "range": "1-140;1380-1475",
+    "status": "partial reconsult, prior full read retained; not new full read",
+    "role": "next actual checked-schema/metadata direct consumer",
+    "at": "2026-09-28T15:40:21.408021+00:00"
+  },
+  {
+    "path": "crates/mir-runtime/src/m8_runtime_admission.rs",
+    "sha256": "8db7ac1266929e6d89bcacf2de35ed1807faf810252fc8535d86e2a45b07a677",
+    "range": "860-1060",
+    "status": "partial reconsult, prior full read retained; not new full read",
+    "role": "next actual checked-schema/metadata direct consumer",
+    "at": "2026-09-28T15:40:21.408021+00:00"
   }
 ]
