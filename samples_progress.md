@@ -1,6 +1,6 @@
 # samples_progress
 
-Last updated: 2026-09-28 15:38 JST
+Last updated: 2026-09-28 18:30 JST
 
 Plan250 execution control: I3-3 is accepted and owner-paused with no active
 semantic milestone. Plan 250 remains retained; I3-4/I3-5/I3-6/NEXT-0 remain
@@ -36,8 +36,8 @@ W4-B検証結果: 206依存sourceを原本と同一bytesで保存し、fresh Lea
 | Supplied observer label preservation | `samples/lean/foundations/MirroreaProofFirstObserverLabels.lean`; external-copy command in `samples/lean/README.md`; `cargo test --locked --offline -j 1 -p mir-runtime --test m8_runtime_observer -- --test-threads=1` | Ten general lemmas and finite class instance checked; local12 tests/restored mutants verified. Final narrow review disposed; authentic source labels/current authority/physical confidentiality not established. |
 | Actual owner read receipt | `samples/lean/foundations/MirroreaProofFirstOwnerReadReport.lean`; external-copy command in `samples/lean/README.md`; `cargo test --locked --offline -j 1 -p mir-runtime --lib proof_first_ -- --test-threads=1` | Supplied-map transformation kernel checked; literal/zero/alias controls and actual mutations discriminate fabricated, omitted, duplicated or changed reads. Completeness requires candidate coverage; source/compiler/auth/privacy correspondence remains open. |
 | Existing owner identity lookup | `samples/lean/foundations/MirroreaProofFirstOperationIdentity.lean`; external-copy command in `samples/lean/README.md`; `cargo test --locked --offline -j 1 -p mir-runtime --lib proof_first_duplicate_owner_identity -- --test-threads=1` | General positional selection/algorithm equivalence checked; actual ordinary/provider/local refusal and singleton controls pass. Distinct-owner fragment collisions, source order and source-free restore remain open. |
-
-| Actual assignment source origin | `cargo test --locked --offline -j 1 -p mir-semantics --test proof_first_source_origin` | Real parser/M6/M7 RED→GREEN: distinct owners, reversed order, identical text at distinct positions; present effect/obligation rows and expected source-map entries retain exact AST site. Narrow fix reviewed; no runtime multi-statement/restore completion. Historical broad regression failed4 renderer cases; the later minimal fixture repair passes all4 focused cases, with duplicate-member rejection retained. |
+| Actual assignment source origin | `cargo test --locked --offline -j 1 -p mir-semantics --test proof_first_source_origin` | Real parser/M6/M7 RED→GREEN: distinct owners, reversed order, identical text at distinct positions; present effect/obligation rows and expected source-map entries retain exact AST site. Narrow fix reviewed; no runtime multi-statement/restore completion. Historical broad regression failed4 renderer cases; the later minimal fixture repair and exact AST/projected failure-row test pass5focused cases, with duplicate-member rejection retained. |
+| External common Store / retained reference origins | `docs/proof-first/W4_CHECK.json` → `c_store_origins_20260928`; frozen `kernel-store-v1` sources/input hashes/Lean logs | Fresh94 imported modules; general old pure entry/result equality, named lower Store mutation/coherence/chronology/origin preservation, actual mixed-pending controls and8false guards checked. Current Oracle review pending; external research only. Protected Execution/full Session, authentic source labels/resources/custody and restore remain open. No new active sample root or workflow-ready status. |
 
 | W3 evidence | Reproduction | Remaining boundary |
 |---|---|---|

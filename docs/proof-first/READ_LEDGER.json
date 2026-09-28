@@ -46341,5 +46341,557 @@
     "status": "authored/read and reviewed by sole main",
     "role": "C exact catalog/fixture/flow cut; independent advice scope explicitly separated",
     "at": "2026-09-28T07:57:16.318717+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/kernel-reference-v1/MixedOperationDefinitions.lean",
+    "sha256": "fc65b803017ece6548f3b330c04dfd6ce7e3006e19296ee55787e019bb548e64",
+    "range": "full",
+    "status": "sole-main authored/read; general proof claims bounded by named premises",
+    "role": "common catalog cancellation/reference successor; kernel evidence separate from Oracle review",
+    "at": "2026-09-28T08:54:44.947505+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/kernel-reference-v1/MixedInstanceState.lean",
+    "sha256": "5bfcd00f0594695a8eb415a2eff45ec3c2ffea2c2ddba064ff3d7e119085246a",
+    "range": "full",
+    "status": "sole-main authored/read; general proof claims bounded by named premises",
+    "role": "common catalog cancellation/reference successor; kernel evidence separate from Oracle review",
+    "at": "2026-09-28T08:54:44.947505+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/kernel-reference-v1/MixedCatalogEmbedding.lean",
+    "sha256": "0f3af5c03f7d612400db1b9409fcff9475ffa1038515eebd031cbbd83d8cc889",
+    "range": "full",
+    "status": "sole-main authored/read; general proof claims bounded by named premises",
+    "role": "common catalog cancellation/reference successor; kernel evidence separate from Oracle review",
+    "at": "2026-09-28T08:54:44.947505+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/kernel-reference-v1/MixedCatalogService.lean",
+    "sha256": "dfecb812c4d545b05ea46fa18650cadeb9f2d38cebb9fb9e92f898a8dfa1393a",
+    "range": "full",
+    "status": "sole-main authored/read; general proof claims bounded by named premises",
+    "role": "common catalog cancellation/reference successor; kernel evidence separate from Oracle review",
+    "at": "2026-09-28T08:54:44.947505+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/kernel-reference-v1/MixedCatalogControls.lean",
+    "sha256": "60a79cb3a6e9df2bbf5b08f572178659917d0381ea4c2bea11c8f87cf05143a0",
+    "range": "full",
+    "status": "sole-main authored/read; general proof claims bounded by named premises",
+    "role": "common catalog cancellation/reference successor; kernel evidence separate from Oracle review",
+    "at": "2026-09-28T08:54:44.947505+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/kernel-reference-v1/MixedCatalogUse.lean",
+    "sha256": "1ec63d2fc31183e18cccee7317087580611c8024ab50da8c3e220be00613060f",
+    "range": "full",
+    "status": "sole-main authored/read; general proof claims bounded by named premises",
+    "role": "common catalog cancellation/reference successor; kernel evidence separate from Oracle review",
+    "at": "2026-09-28T08:54:44.947505+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/kernel-reference-v1/MixedPureInvocation.lean",
+    "sha256": "43d2555ecfd9a32c9a62026d8b89b77cba61d98f2d7864f908c432d50617fa1a",
+    "range": "full",
+    "status": "sole-main authored/read; general proof claims bounded by named premises",
+    "role": "common catalog cancellation/reference successor; kernel evidence separate from Oracle review",
+    "at": "2026-09-28T08:54:44.947505+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/kernel-reference-v1/MixedCompositionCore.lean",
+    "sha256": "ee976901247e1c351d7793878074dbc557119f11863e0044713ef6a391cb1661",
+    "range": "full",
+    "status": "sole-main authored/read; general proof claims bounded by named premises",
+    "role": "common catalog cancellation/reference successor; kernel evidence separate from Oracle review",
+    "at": "2026-09-28T08:54:44.947505+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/kernel-reference-v1/MixedManagementEntry.lean",
+    "sha256": "da9da19b8a1f25e28f05f6e60ae682c9f865c06845d51fda2b338d051a634d7a",
+    "range": "full",
+    "status": "sole-main authored/read; general proof claims bounded by named premises",
+    "role": "common catalog cancellation/reference successor; kernel evidence separate from Oracle review",
+    "at": "2026-09-28T08:54:44.947505+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/kernel-reference-v1/MixedCoreEmbedding.lean",
+    "sha256": "6ce2088e6035b453196031635588fc90fa1d341b120146acfcf44e6abfc25683",
+    "range": "full",
+    "status": "sole-main authored/read; general proof claims bounded by named premises",
+    "role": "common catalog cancellation/reference successor; kernel evidence separate from Oracle review",
+    "at": "2026-09-28T08:54:44.947505+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/kernel-reference-v1/MixedManagementEmbedding.lean",
+    "sha256": "3f5814280001b951d6467b7dd2262b422110468fe4031d4803ab830df2d89951",
+    "range": "full",
+    "status": "sole-main authored/read; general proof claims bounded by named premises",
+    "role": "common catalog cancellation/reference successor; kernel evidence separate from Oracle review",
+    "at": "2026-09-28T08:54:44.947505+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/kernel-reference-v1/MixedRequestCore.lean",
+    "sha256": "f813f130f1315a33fe5088695c9d4f29f350337726247381a81f88dd7c3764a4",
+    "range": "full",
+    "status": "sole-main authored/read; general proof claims bounded by named premises",
+    "role": "common catalog cancellation/reference successor; kernel evidence separate from Oracle review",
+    "at": "2026-09-28T08:54:44.947505+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/kernel-reference-v1/MixedRequestEmbedding.lean",
+    "sha256": "d342458f1494d908e9ff26c10079297c88bcbe9bf17552c436a0e5ff274b1724",
+    "range": "full",
+    "status": "sole-main authored/read; general proof claims bounded by named premises",
+    "role": "common catalog cancellation/reference successor; kernel evidence separate from Oracle review",
+    "at": "2026-09-28T08:54:44.947505+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/kernel-reference-v1/MixedManagementControls.lean",
+    "sha256": "e0230364c823868ad9102679e6b23d4d8f67e54aa8c3f884700ce08cb50ff290",
+    "range": "full",
+    "status": "sole-main authored/read; general proof claims bounded by named premises",
+    "role": "common catalog cancellation/reference successor; kernel evidence separate from Oracle review",
+    "at": "2026-09-28T08:54:44.947505+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/kernel-reference-v1/MixedCatalogSuccessorControls.lean",
+    "sha256": "3f2d74d23b5aa6c9808d8b62df3bba24b0569230789209f2e9e03f9423bced60",
+    "range": "full",
+    "status": "sole-main authored/read; general proof claims bounded by named premises",
+    "role": "common catalog cancellation/reference successor; kernel evidence separate from Oracle review",
+    "at": "2026-09-28T08:54:44.947505+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/kernel-reference-v1/MixedRequestControls.lean",
+    "sha256": "0bc9d3c66f07dd4f3391fe54d0e7fdfa6d63cd8ee477ce6c66837596361f8f9c",
+    "range": "full",
+    "status": "sole-main authored/read; general proof claims bounded by named premises",
+    "role": "common catalog cancellation/reference successor; kernel evidence separate from Oracle review",
+    "at": "2026-09-28T08:54:44.947505+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/kernel-reference-v1/MixedCancellation.lean",
+    "sha256": "4e312a9f9a7943850d83f9bf505b2a96452ded70994075e6e01d750a9759e000",
+    "range": "full",
+    "status": "sole-main authored/read; general proof claims bounded by named premises",
+    "role": "common catalog cancellation/reference successor; kernel evidence separate from Oracle review",
+    "at": "2026-09-28T08:54:44.947505+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/kernel-reference-v1/MixedCancelEntry.lean",
+    "sha256": "efc40e327c378044827de09db69da283e58199145b38a0a6fadb403ecdc8d27a",
+    "range": "full",
+    "status": "sole-main authored/read; general proof claims bounded by named premises",
+    "role": "common catalog cancellation/reference successor; kernel evidence separate from Oracle review",
+    "at": "2026-09-28T08:54:44.947505+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/kernel-reference-v1/MixedCancelEmbedding.lean",
+    "sha256": "f96f3b5018649f22f91a0e53831eabb6ed783a0f9fa9d400ae13ea278c605930",
+    "range": "full",
+    "status": "sole-main authored/read; general proof claims bounded by named premises",
+    "role": "common catalog cancellation/reference successor; kernel evidence separate from Oracle review",
+    "at": "2026-09-28T08:54:44.947505+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/kernel-reference-v1/MixedCancelControls.lean",
+    "sha256": "42de9e45ac53893a713e9cd5e7ef9c9ccf6f649feefb7186b5ec931b8ab914a1",
+    "range": "full",
+    "status": "sole-main authored/read; general proof claims bounded by named premises",
+    "role": "common catalog cancellation/reference successor; kernel evidence separate from Oracle review",
+    "at": "2026-09-28T08:54:44.947505+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/kernel-reference-v1/MixedCatalogHistory.lean",
+    "sha256": "4d8586fe6c3a0112eec7d8d4eaef4b39a32905737d9361b6d2d97cd323909fdb",
+    "range": "full",
+    "status": "sole-main authored/read; general proof claims bounded by named premises",
+    "role": "common catalog cancellation/reference successor; kernel evidence separate from Oracle review",
+    "at": "2026-09-28T08:54:44.947505+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/kernel-reference-v1/MixedCatalogTransitions.lean",
+    "sha256": "1b9341c357b9bd2598ffe1800582273b9e4f87a062afaa773558a654734180b9",
+    "range": "full",
+    "status": "sole-main authored/read; general proof claims bounded by named premises",
+    "role": "common catalog cancellation/reference successor; kernel evidence separate from Oracle review",
+    "at": "2026-09-28T08:54:44.947505+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/kernel-reference-v1/MixedFallbackStatic.lean",
+    "sha256": "bc4a99ee374c584ec9c02c98b06c29f4047436e19a67b748c362d0b74c9ce590",
+    "range": "full",
+    "status": "sole-main authored/read; general proof claims bounded by named premises",
+    "role": "common catalog cancellation/reference successor; kernel evidence separate from Oracle review",
+    "at": "2026-09-28T08:54:44.947505+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/kernel-reference-v1/MixedReferenceAccess.lean",
+    "sha256": "ae2788261d36f8f19810553b937af367faeb3196770ef126d2337a1d3d88d6be",
+    "range": "full",
+    "status": "sole-main authored/read; general proof claims bounded by named premises",
+    "role": "common catalog cancellation/reference successor; kernel evidence separate from Oracle review",
+    "at": "2026-09-28T08:54:44.947505+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/kernel-reference-v1/MixedReferenceEmbedding.lean",
+    "sha256": "b9210348e826d71d478c07e33a86f049bd9e2f7e705ed7ce453e80e5d1dfd651",
+    "range": "full",
+    "status": "sole-main authored/read; general proof claims bounded by named premises",
+    "role": "common catalog cancellation/reference successor; kernel evidence separate from Oracle review",
+    "at": "2026-09-28T08:54:44.947505+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/kernel-reference-v1/MixedReferenceHistory.lean",
+    "sha256": "9702ab83815190f7bbef920aa8191403f798a152e828dff79dada178e895bd01",
+    "range": "full",
+    "status": "sole-main authored/read; general proof claims bounded by named premises",
+    "role": "common catalog cancellation/reference successor; kernel evidence separate from Oracle review",
+    "at": "2026-09-28T08:54:44.947505+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/kernel-reference-v1/MixedReferenceSelection.lean",
+    "sha256": "134021e6f8af8429fb70ebb1fba2280c11524def834defe7d11510e7a6edd872",
+    "range": "full",
+    "status": "sole-main authored/read; general proof claims bounded by named premises",
+    "role": "common catalog cancellation/reference successor; kernel evidence separate from Oracle review",
+    "at": "2026-09-28T08:54:44.947505+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/kernel-reference-v1/MixedReferenceHolding.lean",
+    "sha256": "389f8d674d31613dce1457bf5a764807ece47b706c1df79fa57c911bba129455",
+    "range": "full",
+    "status": "sole-main authored/read; general proof claims bounded by named premises",
+    "role": "common catalog cancellation/reference successor; kernel evidence separate from Oracle review",
+    "at": "2026-09-28T08:54:44.947505+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/kernel-reference-v1/MixedReferenceControls.lean",
+    "sha256": "38f95f66bcfb65d93997a875420ac74a8173e226901a248f3838d718f0b1970a",
+    "range": "full",
+    "status": "sole-main authored/read; general proof claims bounded by named premises",
+    "role": "common catalog cancellation/reference successor; kernel evidence separate from Oracle review",
+    "at": "2026-09-28T08:54:44.947505+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/kernel-reference-v1/MixedRequestReviewControls.lean",
+    "sha256": "ff0779cf10d00fed1ea59632d976857e34eff24ccdf34fdb5c19c43b16e2b9c3",
+    "range": "full",
+    "status": "sole-main authored/read; general proof claims bounded by named premises",
+    "role": "common catalog cancellation/reference successor; kernel evidence separate from Oracle review",
+    "at": "2026-09-28T08:54:44.947505+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/oracle-c-mixed-catalog/FULL_ANSWER.md",
+    "sha256": "a29ff8932dc8feb23229fbceffca85e44659eb0ad75ee72a7e26d98f64d76861",
+    "range": "full",
+    "status": "sole-main authored/read; general proof claims bounded by named premises",
+    "role": "common catalog cancellation/reference successor; kernel evidence separate from Oracle review",
+    "at": "2026-09-28T08:54:44.947505+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/oracle-c-mixed-catalog/DISPOSITION.md",
+    "sha256": "392fa346c3219fda834e615a065dde211494714b49b6b0bb3dcfb3ddd7a8dcd1",
+    "range": "full",
+    "status": "sole-main authored/read; general proof claims bounded by named premises",
+    "role": "common catalog cancellation/reference successor; kernel evidence separate from Oracle review",
+    "at": "2026-09-28T08:54:44.947505+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/oracle-c-shared-requests/FULL_ANSWER.md",
+    "sha256": "7b3fd1353f0eb4abdeb072a8dc4c2b83fbcea14d390b8bbb9a7ef821de061cd1",
+    "range": "full",
+    "status": "sole-main authored/read; general proof claims bounded by named premises",
+    "role": "common catalog cancellation/reference successor; kernel evidence separate from Oracle review",
+    "at": "2026-09-28T08:54:44.947505+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/oracle-c-shared-requests/DISPOSITION.md",
+    "sha256": "f35e46d3e8d46961510cb33db3f9ac71a21c04145b1df1f22f39211d7a05a043",
+    "range": "full",
+    "status": "sole-main authored/read; general proof claims bounded by named premises",
+    "role": "common catalog cancellation/reference successor; kernel evidence separate from Oracle review",
+    "at": "2026-09-28T08:54:44.947505+00:00"
+  },
+  {
+    "path": "/home/codex/dev/mir_poc_01/samples/lean/foundations/MirroreaProofFirstFallbackStatic.lean",
+    "sha256": "4d62d99e7047efedc18d0aee028bb247ecbe1d365524a57782539058c3f9dffb",
+    "range": "full",
+    "status": "sole-main authored/read; general proof claims bounded by named premises",
+    "role": "common catalog cancellation/reference successor; kernel evidence separate from Oracle review",
+    "at": "2026-09-28T08:54:44.947505+00:00"
+  },
+  {
+    "path": "/home/codex/dev/mir_poc_01/samples/lean/foundations/MirroreaProofFirstCatalogHistory.lean",
+    "sha256": "e996b6769e3b21d0c1efd24d7ba30b2958c3fb5195caf4e7ace2d5334aebc92e",
+    "range": "full",
+    "status": "sole-main authored/read; general proof claims bounded by named premises",
+    "role": "common catalog cancellation/reference successor; kernel evidence separate from Oracle review",
+    "at": "2026-09-28T08:54:44.947505+00:00"
+  },
+  {
+    "path": "/home/codex/dev/mir_poc_01/samples/lean/foundations/MirroreaProofFirstReferenceAccess.lean",
+    "sha256": "f57b200ec44a1c22655be438d81033357798799afe0fad3840c8e1a5b4f8f5f1",
+    "range": "full",
+    "status": "sole-main authored/read; general proof claims bounded by named premises",
+    "role": "common catalog cancellation/reference successor; kernel evidence separate from Oracle review",
+    "at": "2026-09-28T08:54:44.947505+00:00"
+  },
+  {
+    "path": "/home/codex/dev/mir_poc_01/samples/lean/foundations/MirroreaProofFirstReferenceAccessHistory.lean",
+    "sha256": "1c332751466a9a8527e6505c97565de245d75bb44b3722563bd9d64ab97e57c7",
+    "range": "full",
+    "status": "sole-main authored/read; general proof claims bounded by named premises",
+    "role": "common catalog cancellation/reference successor; kernel evidence separate from Oracle review",
+    "at": "2026-09-28T08:54:44.947505+00:00"
+  },
+  {
+    "path": "/home/codex/dev/mir_poc_01/samples/lean/foundations/MirroreaProofFirstReferenceHolding.lean",
+    "sha256": "a21f8930a9c76a0d3326dd373d5317b2def0805d7a7d25910aabb949a20dedc5",
+    "range": "full",
+    "status": "sole-main authored/read; general proof claims bounded by named premises",
+    "role": "common catalog cancellation/reference successor; kernel evidence separate from Oracle review",
+    "at": "2026-09-28T08:54:44.947505+00:00"
+  },
+  {
+    "path": "/home/codex/dev/mir_poc_01/samples/lean/foundations/MirroreaProofFirstReferenceSelection.lean",
+    "sha256": "a7b2728e754e92170b70168ab243b5cba944b7725f664ccf794209f7bc271fe5",
+    "range": "full",
+    "status": "sole-main authored/read; general proof claims bounded by named premises",
+    "role": "common catalog cancellation/reference successor; kernel evidence separate from Oracle review",
+    "at": "2026-09-28T08:54:44.947505+00:00"
+  },
+  {
+    "path": "/home/codex/dev/mir_poc_01/samples/lean/foundations/MirroreaProofFirstReferenceCancellationControls.lean",
+    "sha256": "5408b4601cb084df02faf0aedb68b548928d4bac9b8ca846bbfd7b32fdf9dea3",
+    "range": "full",
+    "status": "sole-main authored/read; general proof claims bounded by named premises",
+    "role": "common catalog cancellation/reference successor; kernel evidence separate from Oracle review",
+    "at": "2026-09-28T08:54:44.947505+00:00"
+  },
+  {
+    "path": "/home/codex/dev/mir_poc_01/samples/lean/foundations/MirroreaProofFirstReferenceAccessControls.lean",
+    "sha256": "e05c526bb01cdaf0ffecb6f0005f38034422726472ac3e630e47619d4a47c24a",
+    "range": "full",
+    "status": "sole-main authored/read; general proof claims bounded by named premises",
+    "role": "common catalog cancellation/reference successor; kernel evidence separate from Oracle review",
+    "at": "2026-09-28T08:54:44.947505+00:00"
+  },
+  {
+    "path": "/home/codex/dev/mir_poc_01/samples/lean/foundations/MirroreaProofFirstReferenceHoldingControls.lean",
+    "sha256": "095a52d9555e99a0daf4446b5a6f1224016e25bc9913eacb1bf66fc33e623015",
+    "range": "full",
+    "status": "sole-main authored/read; general proof claims bounded by named premises",
+    "role": "common catalog cancellation/reference successor; kernel evidence separate from Oracle review",
+    "at": "2026-09-28T08:54:44.947505+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/kernel-store-v1/MixedReferenceOwner.lean",
+    "sha256": "fe41191a277be9d23e6083eda64e6f26a400098573d8ae71869036527b3495b3",
+    "range": "full",
+    "status": "sole-main authored/read; derived files read via full predecessor plus complete explicit transformation",
+    "role": "Common Store consumer proof delta; external evidence; not Canon or production acceptance",
+    "at": "2026-09-28T09:30:07.194118+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/kernel-store-v1/MixedReferenceCancellation.lean",
+    "sha256": "c69127baca2ff2ddb177c34068d3ad1005fe4f83e13834f720b3caa5dac0a5b6",
+    "range": "full",
+    "status": "sole-main authored/read; derived files read via full predecessor plus complete explicit transformation",
+    "role": "Common Store consumer proof delta; external evidence; not Canon or production acceptance",
+    "at": "2026-09-28T09:30:07.194118+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/kernel-store-v1/MixedReferenceStore.lean",
+    "sha256": "673c7e6af39fd42e973a38e14cf46d824116b805de95b253922c19784574f3b3",
+    "range": "full",
+    "status": "sole-main authored/read; derived files read via full predecessor plus complete explicit transformation",
+    "role": "Common Store consumer proof delta; external evidence; not Canon or production acceptance",
+    "at": "2026-09-28T09:30:07.194118+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/kernel-store-v1/MixedStoreEmbedding.lean",
+    "sha256": "1dc77f8d50e6ea75182f18c9ef99b470614aae36bca9cd0b88b7f672233fe325",
+    "range": "full",
+    "status": "sole-main authored/read; derived files read via full predecessor plus complete explicit transformation",
+    "role": "Common Store consumer proof delta; external evidence; not Canon or production acceptance",
+    "at": "2026-09-28T09:30:07.194118+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/kernel-store-v1/MixedReferenceCoherence.lean",
+    "sha256": "429e8ea4160e7e4df39ffd61121cb804233fb177d267b22d2d5e0d3e751462e8",
+    "range": "full",
+    "status": "sole-main authored/read; derived files read via full predecessor plus complete explicit transformation",
+    "role": "Common Store consumer proof delta; external evidence; not Canon or production acceptance",
+    "at": "2026-09-28T09:30:07.194118+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/kernel-store-v1/MixedReferenceMutation.lean",
+    "sha256": "d650fde4ff4e05454f2206d5cdad2774d66ae691419851d9d5fa73c1eaee7c37",
+    "range": "full",
+    "status": "sole-main authored/read; derived files read via full predecessor plus complete explicit transformation",
+    "role": "Common Store consumer proof delta; external evidence; not Canon or production acceptance",
+    "at": "2026-09-28T09:30:07.194118+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/kernel-store-v1/MixedMutationEmbedding.lean",
+    "sha256": "5014a45092164fecc3b7da716dde2a7d7916e5dc280237bc7b15960bf6949da3",
+    "range": "full",
+    "status": "sole-main authored/read; derived files read via full predecessor plus complete explicit transformation",
+    "role": "Common Store consumer proof delta; external evidence; not Canon or production acceptance",
+    "at": "2026-09-28T09:30:07.194118+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/kernel-store-v1/MixedCoherenceEmbedding.lean",
+    "sha256": "bfd72dd07ee607cf67a4df4d0b3360103c1623796c57a52b04bce607d2b0c19e",
+    "range": "full",
+    "status": "sole-main authored/read; derived files read via full predecessor plus complete explicit transformation",
+    "role": "Common Store consumer proof delta; external evidence; not Canon or production acceptance",
+    "at": "2026-09-28T09:30:07.194118+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/kernel-store-v1/MixedReferenceTrace.lean",
+    "sha256": "11f1aac3c80eff6415edb287d59282624c9b6fd1839032625c7c6cde18ca5d5f",
+    "range": "full",
+    "status": "sole-main authored/read; derived files read via full predecessor plus complete explicit transformation",
+    "role": "Common Store consumer proof delta; external evidence; not Canon or production acceptance",
+    "at": "2026-09-28T09:30:07.194118+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/kernel-store-v1/MixedReferenceChronology.lean",
+    "sha256": "bfe9eeee2e2bdebe08f588cc9b70f6b257be671b309f2d8741daa9f25621aff8",
+    "range": "full",
+    "status": "sole-main authored/read; derived files read via full predecessor plus complete explicit transformation",
+    "role": "Common Store consumer proof delta; external evidence; not Canon or production acceptance",
+    "at": "2026-09-28T09:30:07.194118+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/kernel-store-v1/MixedReferenceOrigins.lean",
+    "sha256": "c36451a1ab4c90a58a07931052265278a9575c0b0e38e9652587fe347de5e94e",
+    "range": "full",
+    "status": "sole-main authored/read; derived files read via full predecessor plus complete explicit transformation",
+    "role": "Common Store consumer proof delta; external evidence; not Canon or production acceptance",
+    "at": "2026-09-28T09:30:07.194118+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/kernel-store-v1/MixedStoreControls.lean",
+    "sha256": "aa9b5ba43025b2c26067285f15b583a06939728c22a07cb31a2c1a85c9b20c40",
+    "range": "full",
+    "status": "sole-main authored/read; derived files read via full predecessor plus complete explicit transformation",
+    "role": "Common Store consumer proof delta; external evidence; not Canon or production acceptance",
+    "at": "2026-09-28T09:30:07.194118+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/kernel-store-v1/MixedReferenceReviewControls.lean",
+    "sha256": "90b0a5f7f9dee240364a89cd509bf84b3293aa1617d48bbfe95f4447508e75ea",
+    "range": "full",
+    "status": "sole-main authored/read; derived files read via full predecessor plus complete explicit transformation",
+    "role": "Common Store consumer proof delta; external evidence; not Canon or production acceptance",
+    "at": "2026-09-28T09:30:07.194118+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/kernel-store-v1/MixedMutationCompleteness.lean",
+    "sha256": "54db55748b5159a829afd10989af1a7ba9f7b5b2668d060ac2c0f481defb6809",
+    "range": "full",
+    "status": "sole-main authored/read; derived files read via full predecessor plus complete explicit transformation",
+    "role": "Common Store consumer proof delta; external evidence; not Canon or production acceptance",
+    "at": "2026-09-28T09:30:07.194118+00:00"
+  },
+  {
+    "path": "/home/codex/dev/mir_poc_01/samples/lean/foundations/MirroreaProofFirstReferenceOwner.lean",
+    "sha256": "2387fefe317a3a8750fdf82fd12ee3cb97f7ec5cc776cd7d152d683c3b7c2bcf",
+    "range": "full",
+    "status": "sole-main full source read",
+    "role": "Common Store consumer proof delta; external evidence; not Canon or production acceptance",
+    "at": "2026-09-28T09:30:07.194118+00:00"
+  },
+  {
+    "path": "/home/codex/dev/mir_poc_01/samples/lean/foundations/MirroreaProofFirstReferenceCancellation.lean",
+    "sha256": "f9bd0888b1a7a9748d99076fe18d6dd1d409f856b84eff73b35251db0c934dcd",
+    "range": "full",
+    "status": "sole-main full source read",
+    "role": "Common Store consumer proof delta; external evidence; not Canon or production acceptance",
+    "at": "2026-09-28T09:30:07.194118+00:00"
+  },
+  {
+    "path": "/home/codex/dev/mir_poc_01/samples/lean/foundations/MirroreaProofFirstReferenceStore.lean",
+    "sha256": "69e68e2839fa14cd4d46f92de24df5a2e4ea43884d441f6e100181c3c3896cea",
+    "range": "full",
+    "status": "sole-main full source read",
+    "role": "Common Store consumer proof delta; external evidence; not Canon or production acceptance",
+    "at": "2026-09-28T09:30:07.194118+00:00"
+  },
+  {
+    "path": "/home/codex/dev/mir_poc_01/samples/lean/foundations/MirroreaProofFirstReferenceCoherence.lean",
+    "sha256": "e6aba9e1ced8573780f12ce555d888cb3fb3335f1e51e7417924397636964b17",
+    "range": "full",
+    "status": "sole-main full source read",
+    "role": "Common Store consumer proof delta; external evidence; not Canon or production acceptance",
+    "at": "2026-09-28T09:30:07.194118+00:00"
+  },
+  {
+    "path": "/home/codex/dev/mir_poc_01/samples/lean/foundations/MirroreaProofFirstReferenceMutation.lean",
+    "sha256": "ae75608f5d716a8bbecdbb24108a8fcfdcfcddcdca6989498185b491575ab2d9",
+    "range": "full",
+    "status": "sole-main full source read",
+    "role": "Common Store consumer proof delta; external evidence; not Canon or production acceptance",
+    "at": "2026-09-28T09:30:07.194118+00:00"
+  },
+  {
+    "path": "/home/codex/dev/mir_poc_01/samples/lean/foundations/MirroreaProofFirstReferenceTrace.lean",
+    "sha256": "631349e1c4c40b21cc44f4a98150c42d69136aac7ab1849db282d924109900a7",
+    "range": "full",
+    "status": "sole-main full source read",
+    "role": "Common Store consumer proof delta; external evidence; not Canon or production acceptance",
+    "at": "2026-09-28T09:30:07.194118+00:00"
+  },
+  {
+    "path": "/home/codex/dev/mir_poc_01/samples/lean/foundations/MirroreaProofFirstReferenceChronology.lean",
+    "sha256": "8556d8f5f0b4fdafe25f12b6f864cf05c7882ced651af81862371316227250e3",
+    "range": "full",
+    "status": "sole-main full source read",
+    "role": "Common Store consumer proof delta; external evidence; not Canon or production acceptance",
+    "at": "2026-09-28T09:30:07.194118+00:00"
+  },
+  {
+    "path": "/home/codex/dev/mir_poc_01/samples/lean/foundations/MirroreaProofFirstReferenceOrigins.lean",
+    "sha256": "ed1d90c1bd0d3be2d1cf5c919da586714b47e4efad41232436679e4167bf5eb4",
+    "range": "full",
+    "status": "sole-main full source read",
+    "role": "Common Store consumer proof delta; external evidence; not Canon or production acceptance",
+    "at": "2026-09-28T09:30:07.194118+00:00"
+  },
+  {
+    "path": "/home/codex/dev/mir_poc_01/samples/lean/foundations/MirroreaProofFirstReferenceExecution.lean",
+    "sha256": "2a0fd53eb81388c8dbb861cc26db6037872cc9dffc80bc4ec60dd862ded38d5d",
+    "range": "full",
+    "status": "sole-main full source read",
+    "role": "Common Store consumer proof delta; external evidence; not Canon or production acceptance",
+    "at": "2026-09-28T09:30:07.194118+00:00"
+  },
+  {
+    "path": "/home/codex/dev/mir_poc_01/samples/lean/foundations/MirroreaProofFirstReferenceResult.lean",
+    "sha256": "c816ec5319afa014918743ca76d0d17946cf60ae2ee32b61d87f661928db7567",
+    "range": "full",
+    "status": "sole-main full source read",
+    "role": "Common Store consumer proof delta; external evidence; not Canon or production acceptance",
+    "at": "2026-09-28T09:30:07.194118+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/oracle-c-reference-admission/FULL_ANSWER.md",
+    "sha256": "ad1e75c8cc7ae12e1daaf30044a904cf7c745b59b5d3a108f064d10d60fc2277",
+    "range": "full",
+    "status": "sole-main full answer read or authored disposition",
+    "role": "Common Store consumer proof delta; external evidence; not Canon or production acceptance",
+    "at": "2026-09-28T09:30:07.194118+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/oracle-c-reference-admission/DISPOSITION.md",
+    "sha256": "b88ceffbdbe52f7bf3f73b8b0433dab9c0c9c6c38c37818c6af6c4215fae5ceb",
+    "range": "full",
+    "status": "sole-main full answer read or authored disposition",
+    "role": "Common Store consumer proof delta; external evidence; not Canon or production acceptance",
+    "at": "2026-09-28T09:30:07.194118+00:00"
   }
 ]

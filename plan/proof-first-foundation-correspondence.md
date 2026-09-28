@@ -1690,3 +1690,58 @@ or external notification. Current diff review/docs/Git due before checkpoint cla
 Next SAME C: full pure management embedding then actual source/shared Session,
 all pending/allocator/head/adopt/cancel/restore entries, current fields/resources and
 carrier. E cannot defer these D prerequisites. Stop AFTER D, BEFORE E, by goal pause.
+
+2026-09-28T08:54:44.947505+00:00 — Shared catalog/request and reference-boundary research checkpoint (LAB).
+Fixture checkpoint caa1d5be committed/pushed; remote parity recorded08:06:23UTC.
+Mixed-catalog Oracle final08:13:21UTC,25733chars, SHA a29ff8932dc8feb23229fbceffca85e44659eb0ad75ee72a7e26d98f64d76861,
+locally disposed. Owner direct retire/reparent under old3/4 grants reproduced;
+provisional PRIVATE20/21 successor distinguishes direct target authority. It does
+not isolate transitive support/locus availability or issue authority. K3fresh57
+closure/16Mixed modules1438owned standard-logic audit passes; initial obsolete audit
+import failure preserved before corrected audit. Exact pure Core/management/current
+invocation/shared pending-ID and finish/head embeddings cover refusals too.
+Shared-requests Oracle final08:41:13UTC,21196chars, SHA7b3fd1353f0eb4abdeb072a8dc4c2b83fbcea14d390b8bbb9a7ef821de061cd1
+read/disposed; no identified contradiction in stated inner claims. Locally reproduced
+lower-management pending-ID bypass, raw colliding-pending owner erasure, pure-parent
+retirement loss, history/used-ID erasure, supplied-origin acceptance and constant
+write to absent target. These demonstrate missing admitted-entry premises, not
+accepted source semantics or physical exploits. All mutators/image loaders must
+retain shared freshness and rooted history; Valid alone does not authenticate them.
+New pure cancellation reuses original permit, independent action15, consumes both
+IDs and preserves owner wait under Nodup; exact old-entry equivalence includes
+refusal.4freshmodules59owned/3false controls. No owner rollback/cancel policy.
+New external reference view resolves original full context only for REAL pure
+definition from common catalog. Compared tagging every saved payload, this minimum
+keeps original guard/choice/holding stamp, no fake definition or second catalog.
+General checker/declarative exactness, relative completeness, pure equivalence,
+leftmost selection, continuous access/holding loss and separate H/H2 proved.
+Catalog refinement/immutable slots/monotone serial lifted across actual listed
+transitions. Mixed construction2pure+1owner, independent grants, access-vs-holding
+revocation, no resurrection, deadline, fallback and actual leave/join controls pass.
+Fresh reference closure74/33auditmodules/2184owned,6qualified false guards,
+standard propext/Classical.choice/Quot.sound only. No authored proof holes;
+development/import failures retained separately. Exact sources/logs/receipts under
+c-source-effect/kernel-reference-v1; previous frozen K2/K3/cancel hashes unchanged.
+This NEW cancellation/reference cut is NOT reviewed by the prior answer. New frozen
+41file318707byte packet mir-w4-c-reference-admission submitted08:53:16UTC, finalpending,
+QUESTIONsha222c4486ef52e6a47b540bb46a24baf6e2338242692d58214c7f3a4a3518562b,
+manifest20e9d5e6a8679806b124af0bfc7c58760051a036b96584c8eabace378f53e4b6.
+Single Report2614, same C goal, no production Rust or Canon/THM/OBL/119promotion.
+Remaining direct consumer: Store/mutation/full Session and source/custody/labels/
+resources/all-entry/restore closure. D not started. Stop after D, pause before E.
+Current own docs uncommitted; new docs validation/Git pending. No subagents/notifications.
+
+### W4-C lower Store / reference origins checkpoint — 2026-09-28T09:30:07.194118+00:00
+
+- Same sole-main C semantic goal; D inactive; owner stop remains D completion before E. HEAD caa1d5be; prior own docs dirty retained. No production/Canon edit or public-contract adoption in this checkpoint.
+- Reference/cancellation Oracle mir-w4-c-reference-admission completed09:08:23.287UTC, full23118characters SHAad1e75c8cc7ae12e1daaf30044a904cf7c745b59b5d3a108f064d10d60fc2277 recovered and read. Inherited title matcher in own DOM monitor was corrected; only monitor restarted, same Oracle/Chrome retained. No resend or browser setting change. Full disposition and receipt in external directory.
+- Actual-catalog ContextAt, saved witness, full history, installed rank and rooted holding origin remain non-droppable. Reproduced malformed pure-context/Ready bypass of standalone validation, colliding cancel owner loss, fabricated holding origin in[A,R,A], sibling equal-serial fork, and cancellation-frontier staleness after owner enqueue. Existing combined revocation/staleness control is not isolated witness evidence; new same-context and fresh-after-head controls isolate it. Advice is not independent execution/signature/acceptance.
+- Lower shared Store reuses original binding/choice/stamp/change payloads. All-kind freshness closes binding mutator ID collision with owner waits. General coherence/progress/pending preservation and ChangeRecord/chronological origin proofs cover the named Store transition set, including owner enqueue. Historical Admitted alone remains insufficient; empty-rooted occurrence correspondence supplies exact acquisition identity for this lower set. Raw head/finishPlain and supplied owner origin/captures are NOT full protected-source entries.
+- Exact old Store initial/manage/start/finish/cancel/head and mutation acquire/reacquire/release/normalize Option/Outcome equalities quantify over arbitrary old inputs including refusals and whole mapped histories/events. Local syntax macros select actual private helper names for kernel equality; no helper made an admitted public entry. Acquire completeness has explicit sufficient independent premises, including current mutation authority for each possible returned proof payload, not an iff/existential-to-deterministic-witness claim.
+- Fresh command: python3 /home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/audit_store.py. Result /home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/kernel-store-v1/RESULT.json SHAe98b588c1f07d670d608f00dbadc005e848c26f3793a18f50e610c2f28b153e9; 94 dependency modules compiled in isolated LEAN_PATH; 55 module owners/3687 constants transitive axiom audit; only propext/Classical.choice/Quot.sound; eight false claims rejected by actual false evaluation. Lean4.29.1 trust0/j1, child AS6GiB. Source and base hashes retained. Compiler development errors archived, never counted as evidence. Finite controls begin from empty Store and call actual entries, preserve ownerID6/pureID7, degrade without holding refresh, refuse reuse, and retain released slot0 while allocating1; no source/network E2E claim.
+- Recent pre-audit resources: root8.2GiBfree, availableRAM12GiB/swap12GiB; auditRSS~1.5GiB observed at09:27UTC. No cache deletion/heavy build.
+- Frozen neutral delta review mir-w4-c-store-origins submitted09:27:59.824UTC,48files453523bytes, questionSHAf7907da90600de16f5b403479356ec80cd793cca64aaa99407a3424b0da9cd8c, manifestSHAc0ba22998b2c5383119e4054459eaf52c188725f4bbb27c73d59d59411cd2ec2. Pending, not accepted. Same visible dedicated Chrome; >=180second status spacing.
+- Next direct consumer: ReferenceResult and existing protected Execution pure classification against all-kind core, then full Session/source and actual materialization/labels/resources/service/custody/image. No C/D completion or E deferral of prerequisites.
+- plan/ updated forward here; Documentation.md/docs/project-status.md/progress.md/tasks.md current snapshots synchronized, samples_progress.md external evidence row updated (no active-root/taxonomy change), CURRENT_GOAL/READ_LEDGER/W4_CHECK/RESUME maintained. Existing make docs completed09:04UTC exit0 (218Canon/800hierarchy/1764reports); latest edits require final docs/diff check. No new Rust run: no Rust delta. Current checkpoint commit/push pending. No sub-agent used.
+
+2026-09-28T09:36:52.237070+00:00 — Current documentation checkpoint make docs whole exit0; log/hash in external STORE_CHECKPOINT_VALIDATION.json. Final JSON/append-only ledger/diff checks passed; latest Oracle remains pending. Own11docs staged next, normal commit/push next; no production/Canon acceptance.

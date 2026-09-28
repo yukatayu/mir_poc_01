@@ -68,3 +68,7 @@ production defects established through admitted entries. See RESUME and W4_CHECK
 2026-09-28T06:14:57.932137+00:00 — Owner stop boundary updated: continue through W4-C evidence/review/integration, then pause the existing whole-W4 goal and stop. Do not start W4-D or E. C is still active/incomplete; this does not accept C or complete the whole-W4 goal. No goal clear is required.
 
 2026-09-28T06:27:29.968002+00:00 — Owner changes stop boundary from C to D: finish C, then D implementation/correspondence validation/review/integration, pause existing whole-W4 goal and stop BEFORE E. Earlier C-stop note is superseded. C remains active/incomplete; no dependent D work until C gate.
+
+2026-09-28T08:54:44.947505+00:00 — Common request/cancellation and pure reference/current-history/holding boundaries are freshly checked external research; latest review pending. Same C goal. Whole Store/mutation/Session, authentic source labels/resources, service/custody and image entry closure remain before D. Shared owner direct20/21 is not support-availability isolation. No C/D acceptance. See RESUME/current W4_CHECK successor evidence.
+
+2026-09-28T09:30:07.194118+00:00 — Same C goal: lower Store binding mutation/conservativity/chronological origins freshly checked; narrow review pending. Protected Execution/full Session, actual source labels/resources/service/custody/image remain open. D not started; stop after D before E.

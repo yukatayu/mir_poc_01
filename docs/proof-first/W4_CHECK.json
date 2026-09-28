@@ -44734,5 +44734,135 @@
       "authentic field/capture/control labels and resources",
       "source key materialization; real carrier provenance"
     ]
+  },
+  "c_shared_request_successor_20260928": {
+    "at": "2026-09-28T08:54:44.947505+00:00",
+    "head": "caa1d5be127730db6b0a69cb0b2688a033f219a2",
+    "status": "external mechanically checked research; not C/D or adopted production",
+    "receipts": {
+      "kernel-v3": {
+        "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/kernel-v3/RESULT.json",
+        "sha256": "d1831ded7737a3011140a3fbc2b4d1f87e30e820bac147552bead2f8dc0c307c"
+      },
+      "kernel-cancel-v1": {
+        "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/kernel-cancel-v1/RESULT.json",
+        "sha256": "f3d4dee4b0facb9ffef1c75056df8e1eb44ff3eef3c5afa81a1215bdabf0fa8c"
+      },
+      "kernel-reference-v1": {
+        "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/kernel-reference-v1/RESULT.json",
+        "sha256": "33ebb44f1fa990513e3c0550960dba50bbf722aea9a08ba06657edc97f9cf501",
+        "closure": 74,
+        "audit_modules": 33,
+        "owned_declarations": 2184,
+        "false_controls": 6,
+        "axioms": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ]
+      }
+    },
+    "oracle_previous": {
+      "mixed_catalog": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/oracle-c-mixed-catalog/FULL_ANSWER.md",
+      "shared_requests": {
+        "at": "2026-09-28T08:41:49.825133+00:00",
+        "session": "mir-w4-c-shared-requests",
+        "status": "completed",
+        "completedAt": "2026-09-28T08:41:13.994Z",
+        "identity": true,
+        "stop": false,
+        "characters": 21196,
+        "sha256": "7b3fd1353f0eb4abdeb072a8dc4c2b83fbcea14d390b8bbb9a7ef821de061cd1",
+        "source": "DOM_EVENT_LAST.json"
+      },
+      "disposition": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/oracle-c-shared-requests/DISPOSITION.md"
+    },
+    "oracle_current": {
+      "at": "2026-09-28T08:53:16.633114+00:00",
+      "session": "mir-w4-c-reference-admission",
+      "pid": 761932,
+      "question_sha256": "222c4486ef52e6a47b540bb46a24baf6e2338242692d58214c7f3a4a3518562b",
+      "manifest_sha256": "20e9d5e6a8679806b124af0bfc7c58760051a036b96584c8eabace378f53e4b6",
+      "display": ":0",
+      "model_evidence": "select strategy; require actual6Pro/max selection evidence on completed conversation",
+      "next_status_after": "2026-09-28T08:56:16.633114+00:00",
+      "scope": "single read-only frozen current implementation review; no outer deadline or paid fallback"
+    },
+    "open": [
+      "Store/reference mutation and full Session closure",
+      "authenticated source/capture/field labels and resources",
+      "shared owner replay/ack/custody and admitted history/restore",
+      "D follows C; stop after D before E"
+    ]
+  },
+  "c_store_origins_20260928": {
+    "at": "2026-09-28T09:30:07.194118+00:00",
+    "git_base": "caa1d5be127730db6b0a69cb0b2688a033f219a2",
+    "scope": "External lower Store/reference mutation and origins delta only; full protected Execution/Session/source/service/image admission OPEN. Same C goal, D inactive; pause after D before E.",
+    "fresh_audit": {
+      "directory": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/kernel-store-v1",
+      "result_sha256": "e98b588c1f07d670d608f00dbadc005e848c26f3793a18f50e610c2f28b153e9",
+      "closure": 94,
+      "audit_modules": 55,
+      "owned_constants": 3687,
+      "false_guards": 8,
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "compiler": "Lean4.29.1 --trust=0 -j1; AS6GiB; fresh isolated LEAN_PATH",
+      "exit": 0
+    },
+    "reference_review_final": {
+      "directory": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/oracle-c-reference-admission",
+      "receipt": {
+        "at": "2026-09-28T09:09:19.392900+00:00",
+        "session": "mir-w4-c-reference-admission",
+        "status": "completed",
+        "completedAt": "2026-09-28T09:08:23.287Z",
+        "identity": true,
+        "stop": false,
+        "characters": 23118,
+        "sha256": "ad1e75c8cc7ae12e1daaf30044a904cf7c745b59b5d3a108f064d10d60fc2277",
+        "source": "DOM_EVENT_LAST.json"
+      },
+      "disposition_sha256": "b88ceffbdbe52f7bf3f73b8b0433dab9c0c9c6c38c37818c6af6c4215fae5ceb",
+      "local_reproductions": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/kernel-store-v1/MixedReferenceReviewControls.lean"
+    },
+    "store_review": {
+      "directory": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/oracle-c-store-origins",
+      "submission": {
+        "at": "2026-09-28T09:27:59.824437+00:00",
+        "session": "mir-w4-c-store-origins",
+        "pid": 882483,
+        "question_sha256": "f7907da90600de16f5b403479356ec80cd793cca64aaa99407a3424b0da9cd8c",
+        "manifest_sha256": "c0ba22998b2c5383119e4054459eaf52c188725f4bbb27c73d59d59411cd2ec2",
+        "display": ":0",
+        "model_evidence": "select strategy; require actual6Pro/max selection evidence on completed conversation",
+        "next_status_after": "2026-09-28T09:30:59.824437+00:00",
+        "scope": "single read-only frozen current implementation review; no outer deadline or paid fallback"
+      },
+      "status": "pending; not acceptance"
+    },
+    "claims": [
+      "Actual old Store and binding mutator Option/Outcome equality including refusals and entire history/event state",
+      "Historical coherence, progress, holding retention, tombstone and all-kind pending preservation through named lower Store entries",
+      "Chronological frames and matching binding/holding acquisition occurrence for empty-rooted lower Store transitions; not authenticated physical history",
+      "Acquire relative completeness under independent access/hold/floors and explicit authority for every possible produced payload; no iff/general policy-selection claim"
+    ],
+    "countermodels": [
+      "Ready plus fabricated pure-looking context can pass standalone validation while full actual-catalog check rejects owner",
+      "same-context selected cancellation-witness loss; fresh authorization denied after actual revoked head",
+      "malformed pure/owner ID cancellation erases both; retained-owner theorem requires invariant",
+      "[A,R,A] caller changes holding origin to2: component Admitted+Live insufficient for acquisition origin",
+      "same serial forks differ; owner enqueue stales cancel occurrence frontier without serial movement"
+    ],
+    "remaining": [
+      "Protected pure Pending classification against common core, actual ReferenceResult and full Execution/Session embedding",
+      "Authentic source capture/field labels, materialization/lifetimes/resources",
+      "Owner request/service/ack/custody and admitted image/restore paths",
+      "D implementation/correspondence after C gate; E not started"
+    ]
   }
 }

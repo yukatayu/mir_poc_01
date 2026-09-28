@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-09-28 13:06 JST
+最終更新: 2026-09-28 18:30 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -66,7 +66,7 @@ W4-B検証結果: 206依存sourceを原本と同一bytesで保存し、fresh Lea
 
 W4-Cでは、共有authority floorの古いcache使用、供給された観測ラベルの弱化、実行していない読取りの記録に続き、重複したowner操作で配置変換がpanicする経路を限定修正しました。一般Lean命題・実反例・Oracle指摘を照合し、今回のruntime library418件が通過しました。正常な4種類のsourceは、修正前後で配置結果全体が一致しています。ownerの実書込みと呼出し側の結果受理を分け、評価失敗後にも過去の書込み・履歴が残ることを実検査しました。C全体は未完了です。複数代入の文順序・source継続、別owner間の識別子衝突、復元経路の条件が具体的な残件です。全entry・現在の認可・実namespace/custody・資源の対応も継続します。実network・秘密・復旧やW4全体の保証には広げません。
 
-W4-Cでは、ソース位置修正を05a54050で統合済みです。旧HEADでも失敗したrenderer例は二つの失敗宣言を保持して修復し、構文木から使用先の投影まで両名が残る追加検査を含む5件が通過しました。処理連結・整数範囲の一般Lean証明とOracle指摘を照合しました。純粋計算と書込みを同一catalogで区別し、明示的な別の許可で登録・生成・使用する参照モデルも機械検査済みでreview中です。既存の管理操作・全Sessionとの対応、実ソースのラベル・資源・custodyは未完了です。C継続、D完了後に一旦停止します。
+W4-Cでは、ソース位置修正05a54050とrenderer修復caa1d5beを統合済みです。外部研究では、共通catalog・待機ID・pure取消・参照／保持に加え、参照の取得・切替・再取得・解放を接続しました。拒否を含む既存pure経路との一致、保存証拠と実際の取得イベントの対応、待機要求・保持証拠・解放済み番号の保存をfresh Lean検査済みです。部品reviewの指摘を実反例で確認し、下位Storeの最新差分をOracle review中です。保護された実行機械・全Session、実sourceのラベル／資源、owner service／custody、復元の入口閉包は未完了です。C継続、D未着手、D完了後に一旦停止します。
 
 2026-09-24のowner指定で、同じW4を **W4-A（限定証拠・完了済み）→W4-B（repo統合・限定候補完了）→W4-C（残る基礎条件・現在地）→W4-D（Rust/Core/private QUIC接続）→W4-E（実network検査・残項目回収・W4完了判定）** に分割しました。Bの境界review回収後、Cへ進みました。D/Eは依存待ちです。Eは元W4と前段の残項目を照合しますが、C/Dの前提をEへ先送りして実装を進めません。完了条件・推奨model/effort・R01〜R12残項目台帳は `plan/proof-first-foundation-correspondence.md` の「W4-A〜W4-E 作業区切り」を参照してください。分割当日は計画整理のみでした。2026-09-26のowner指示で同じW4 goalを再開しています。
 
@@ -509,3 +509,7 @@ The authorized roadmap is paused, not blocked, stale or closed.
 - 2026-09-28T07:20:20.512250+00:00 — renderer既存4検査をfixture構文修復後に再検査、重複宣言拒否も通過。部分値の情報流review回収、共通pending/連結証明を追加。C継続、D完了後pause。
 
 - 2026-09-28T07:57:16.318717+00:00 — renderer宣言2名の構文木→使用投影保持を含む5検査通過。連結・数値review回収、共有catalogの登録/生成/使用と権限流用反例を機械検査。C継続、D後pause。
+
+- 2026-09-28 17:55 JST: W4-C共通catalogのpure取消・参照／保持の一般対応をfresh74依存で検査。最新review継続、全Session／source／復元接続は未完了。Report2614。
+
+- 2026-09-28 18:30 JST: W4-C下位Storeの一般保存・旧pure結果一致・取得event由来をfresh94依存で検査。8誤命題を実拒否、最新review継続。保護された全Session等は未完了。Report2614。
