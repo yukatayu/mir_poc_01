@@ -1,6 +1,6 @@
 # Current Task Map (LAB)
 
-最終更新: 2026-09-28 14:11 JST
+最終更新: 2026-09-28 15:38 JST
 
 **Canon notice:** `mirrorea_canon/` is normative. Everything outside
 `mirrorea_canon/` is LAB; if LAB conflicts with canon, canon wins. This snapshot
@@ -19,6 +19,8 @@ W4はowner指定の単一task-local goal、PL1/PL2/PL0 S4/S6です。2026-09-26�
 
 2026-09-24のowner指定で、同じW4を **W4-A（限定証拠・完了済み）→W4-B（repo統合・限定候補完了）→W4-C（残る基礎条件・現在地）→W4-D（Rust/Core/private QUIC接続）→W4-E（実network検査・残項目回収・W4完了判定）** に分割しました。Bの境界review回収後、Cへ進みました。D/Eは依存待ちです。Eは元W4と前段の残項目を照合しますが、C/Dの前提をEへ先送りして実装を進めません。完了条件・推奨model/effort・R01〜R12残項目台帳は `plan/proof-first-foundation-correspondence.md` の「W4-A〜W4-E 作業区切り」を参照してください。分割当日の計画整理と今回の実行再開を区別します。
 
+2026-09-28の最新owner指示では、Cの必要条件を閉じてDまで進め、**W4-Dの検証・記録・統合後に一旦pause**します。直前の「Cまでで停止」は更新されました。Eは今回の停止点より先であり、再開指示前に着手しません。
+
 Canon position: `mirrorea_canon/adr/ADR-0043.md`. LAB dependency memory: `plan/proof-first-foundation-correspondence.md`.
 
 W4-Aの保存済み証拠は通常3profile/23control、確定失敗4/14、結果不明8/16と選択モデルの一般Lean命題です。privileged pipe/capture/compiler TCBに条件付きで、full physical/QUIC/authentication/秘密/復旧の保証ではありません。検証runner全体のexit0、全必須check・入力/import/source-object/hash照合、子processの期待statusとの一致が必要です。注入故障・拒否反例の期待失敗を成功終了へ変えず、途中の成功markerだけでは受理しません。sourceClaim/sourceWireClaimのprivate locator aliasは保持され、canonical-tag injectivityは主張しません。
@@ -27,9 +29,11 @@ Exact evidence: `docs/proof-first/RESUME.md`, `docs/proof-first/CURRENT_GOAL.md`
 
 W4-Cでは、共有authority floorの古いcache使用、供給された観測ラベルの弱化、実行していない読取りの記録に続き、重複したowner操作で配置変換がpanicする経路を限定修正しました。一般Lean命題・実反例・Oracle指摘を照合し、今回のruntime library418件が通過しました。正常な4種類のsourceは、修正前後で配置結果全体が一致しています。ownerの実書込みと呼出し側の結果受理を分け、評価失敗後にも過去の書込み・履歴が残ることを実検査しました。C全体は未完了です。複数代入の文順序・source継続、別owner間の識別子衝突、復元経路の条件が具体的な残件です。全entry・現在の認可・実namespace/custody・資源の対応も継続します。実network・秘密・復旧やW4全体の保証には広げません。
 
+W4-Cの追加調査では、チェック済み代入のソース位置を最初の同名イベントへ取り違える実反例を修正案で解消し、意味解析とruntimeの回帰を検査しました。runtime本体418件と意味解析・後続test群は通過しましたが、renderer4件は旧HEADでも同じ失敗が再現し、全体GREENではありません。外部参照証明では、同じ実行列内の要求生成・書込み・応答の対応、および値の欠落を含む有限列の情報流を検査しました。ソース位置・因果の差分reviewは回収・反映済み、部分値の情報流は未reviewで、実ソースのラベル、共通pending・復旧・資源への接続は未完了です。
+
 ## ordered self-driven packages
 
-進行順序はB→C→D→E。A〜Eは元W4内の作業区切りで、別semantic milestoneではありません。
+現在の自走順序はC→D、D完了後はpause。Eは全W4計画に保持し、再開指示を待ちます。A〜Eは元W4内の作業区切りで、別semantic milestoneではありません。
 
 | Package / macro position | Required result / first consumer | Startability / suggested model / rough estimate |
 |---|---|---|
@@ -37,7 +41,7 @@ W4-Cでは、共有authority floorの古いcache使用、供給された観測�
 | W4-B / Macro2/5 | 外部proof/referenceを既存repo runnerへ統合しfresh再現→C/D | 限定LAB統合候補として完了。境界review回収・主担当照合済み |
 | W4-C / Macro1/5 | relative admission、全entry/current auth/実namespaceの必要条件を閉じる→D | **現在地**。受理可能性と現在の要求文脈の一つのgoalから開始。GPT-6 Astra high、難所xhigh。所要時間はconsumer具体化後に再評価 |
 | W4-D / Macro3/6 | source→checked Core→生成edge→実private QUIC→観測→E | 後段依存。境界Astra high、確定実装GPT-6 Sol high。旧暫定10–24h |
-| W4-E / Macro3/6 close | 実network正常/障害/観測・迂回・I3回帰・119対応・全残項目回収・W4候補統合 | 後段依存。検査Sol high、合成/完了判定Astra high。旧暫定6–14h |
+| W4-E / Macro3/6 close | 実network正常/障害/観測・迂回・I3回帰・119対応・全残項目回収・W4候補統合 | D後のowner再開待ち。検査Sol high、合成/完了判定Astra high。旧暫定6–14h |
 | Mandatory reading / Macro0 | 必読corpus・依存coneの正確な読了/hash台帳 | 各判断前に必要範囲を読む。歴史example612まで全文。既存docsの通読も進め、広域sample/archive JSONは保存済みbatch64まで読了。未照合の生成receipt等を一括読了とはしない。現在の206module依存coneは全文/equivalent hash照合済み |
 | W5/W6/W7 | 永続化/復旧、秘密観測、α統合 | 後段依存、今回のW4 scope外 |
 
@@ -76,7 +80,7 @@ cannot reopen Plan250 or satisfy an absent owner-authenticated trust anchor.
 
 Use the persistent external workroot in RESUME. Never rerun one-shot evidence launchers over existing output. No unchanged one-shot evidence replay merely for a label or context change; B's actual import/runner change requires scoped fresh verification. Heavy Lean remains serial --trust=0 -j1 with measured resource limits. No cleanup, Chrome changes or external notifications.
 
-W4-A〜Eは一つのReport2614に記録し、package closeごとにplan/status/残項目を同期します。依頼が「Bまで」ならBで止め、「Eまで」なら依存条件とquota指示の範囲で続けます。現在の同じW4 goalはactiveです。Bの一成分だけで完了せず、依存を閉じた範囲から継続します。
+W4-A〜Eは一つのReport2614に記録し、package closeごとにplan/status/残項目を同期します。最新指示ではD完了時にgoalをpauseして止め、Eへは進みません。現在の同じW4 goalはactiveです。Bの一成分だけで完了せず、依存を閉じた範囲から継続します。
 
 2026-09-27の追加owner指示で、今回の実行も残量による停止を外して同じW4を継続します。リセットはownerが行い、主担当は操作しません。W5+とPlan250/I3-4は開始しません。過去のquota停止・検査記録はReport2614に保持します。
 

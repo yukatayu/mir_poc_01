@@ -719,6 +719,22 @@ impl SurfaceV0Classification {
             .find(|template| template.name == name)
     }
 
+    // One event can contain several source assignments. Internal elaboration
+    // must retain the particular assignment's template, including its budget.
+    pub(crate) fn owner_template_at(
+        &self,
+        name: &str,
+        span: &SurfaceV0Span,
+    ) -> Option<&CoreTemplate> {
+        let mut matches = self.core_templates.iter().filter(|template| {
+            template.kind == CoreTemplateKind::OwnerRmw
+                && template.name == name
+                && template.source_span == *span
+        });
+        let template = matches.next()?;
+        matches.next().is_none().then_some(template)
+    }
+
     pub fn designated_template(&self, evaluator: &str, result: &str) -> Option<&CoreTemplate> {
         self.designated_templates.iter().find(|template| {
             template.name == evaluator && template.result_name.as_deref() == Some(result)

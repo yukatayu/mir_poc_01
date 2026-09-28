@@ -1,105 +1,35 @@
 # RESUME — W4-C active
-Updated 2026-09-28T05:18:47.153820+00:00. Sole main, NO subagents. Owner-authorized W4 A–E, then stop.
-W5+/alpha/Plan250-I3-4/Canon acceptance excluded. Active goal exists; never recreate
-or complete at component GREEN. Quota stopping waived for this run; only owner resets.
-Normal own commit/push authorized; no force/reset/clean/hostshare/public/notifications.
+Updated 2026-09-28T06:46:30.367872+00:00. Sole main, NO subagents. Existing whole-W4 goal remains active, but owner NOW requests STOP after W4-D completes (supersedes C stop): close C gates first, finish D then pause; do not begin E. Do not recreate/complete whole goal at C/component GREEN. W5+/alpha/Plan250-I3-4/Canon acceptance excluded. Quota stop waived; owner alone resets. Normal own commit/push authorized; no force/reset/clean/hostshare/public/notifications.
 
-## Git / resources
-Checkpoint before current own delta:91e2e49abd03a156ab12e6de08d2b57e72ae9779 main,
-pushed/parity in I/c-owner-partial/GIT_CHECKPOINT.json. Current delta: bounded SYS3
-signature refusal, two identity/two M8 tests, OperationIdentity proof and evidence.
-Current revision/parity will be I/c-operation-identity/GIT_CHECKPOINT.json after commit.
-Original taskbasead9256c6; B9d86052d/563a1f0e; floor daeb229c, phase b692f42b,
-observer cdb8d2a9. Preserve any newly appearing user dirty work.
-I=/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration.
-I is root filesystem; /mnt/mirrorea-work absent. Last root20GiB free, RAM11GiB
-available/swap13GiB free; reuse target~12GiB. No cache deletion or Chrome limits.
-Cargo locked/offline-j1, child AS8GiB/core0. Lean4.29.1 trust0-j1 external copies.
+## Git/resources
+HEAD1b18c7c4c3f6110229ae2f604bef24ce5eef30bd main, pushed/parity verified in I/c-operation-identity/GIT_CHECKPOINT.json. Current own docs plus narrow M6/M7 exact-source-template repair and new source-origin regression test; preserve newly appearing user work. Earlier91e2 read receipt, cdb8 observer, b692 phase, daeb floor; B9d86052d/563a1f0e, originaltaskbasead9256c6.
+I=/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration. /mnt/mirrorea-work absent; I root filesystem8.4GiB free, RAM11GiB available/swap12GiB free; existing repository target24GiB; avoid another broad build. No cache/Chrome settings changes. Cargo locked/offline-j1 childAS8GiB; Lean4.29.1 trust0-j1 childAS6GiB. No .olean in repo.
+Oracle partial-flow running (wrapper66661/capture13028); submitted06:48:44UTC, model6ProLatest/max verified06:52:34UTC. No live compiler/test jobs. Latest mir-w4-c-causality-origin FINAL at06:37:21UTC,17421chars; FULL_ANSWER/FULL_DOM_RECEIPT/DISPOSITION retained. Wrapper8987/capture66215 collected0. make docs tool46746 collected0 (Canon218/hierarchy800/scaffold). No latency resend.
 
-## One current goal / next semantic work
-C source/current-owner admission correspondence, PL1/PL2/PL0 S4/S6;
-R02/03/04/05/09 precede D. Original source/Core/args/pending, current owner permit,
-actual owner write/history and caller result/continuation are separate.
-Do not represent unit ack by fake Int0/pure code, reticket or roll back owner effects.
-Next research comparison: I/c-operation-identity/NEXT_SOURCE_EFFECT_CUT.md.
-Reuse W2 OwnerAssignment and existing W3 async ReferenceSource; pure Pending embeds
-Int-only InvocationBoundary.Definition. Source waiting saves result name/site/inputs,
-while remaining statements are held by run recursion/caller. Do not claim a saved
-physical program cursor already exists. Compare typed-operation generalization with
-explicit effect pending/shared continuation extraction; no adopted choice yet.
-Actual source-origin ordering, restore/peer/current labels/custody/resources OPEN.
+## Current goal and next command
+C source/current-owner correspondence PL1/PL2/PL0 S4/S6 R02/03/04/05/09 before D. Original source/Core/args/stamped pending, current owner service, actual writes/history and caller ack remain distinct.
+Work in I/c-source-effect. Existing SourceFrontierReuse proves exact projection to real ReferenceContinuation/ReceivedResult; Session ALREADY has full cursor/archive. Provisional B extracts only bookkeeping; no duplicate scheduler or production adoption. Full mixed pending/adopt/restore/shared allocator proof still OPEN.
+New external8module kernel-v2:75fresh dependencies,608owned audit standardlogic only,5false claims rejected. Exact scripts/logs/input hashes retained. First kernel-v1 was preflight false positive on legitimate Action.admit constructor; no Lean executed. No proof holes accepted.
+Current external fresh closure83modules/904owned across15newmodules/14false claims, standard logic only, no proof holes. Base75/608, trace3/112, causality2/93, flow2/91+existingAbortFlow dependency. Exact receipts in c-source-effect/kernel-v2/{RESULT,TRACE_DELTA_RESULT,CAUSALITY_DELTA_RESULT,FLOW_DELTA_RESULT}.json. Earlier failed development compiles not accepted.
+Old Trace Generated/Issued under-strength: only possible results at some reachable state, NOT actual prior event. New OwnerSourceCausality uses actual indexed Event/Execution equations and ordered issue before exact service. Same Write witness retained in CommittedIn/history/arrival; joint rooted_queue projects uniqueness. Controls expose caught-upG2 still rejects originalG1, raw malformed queue can consume identity, raw ack ignores evidence.version. These do not arise through closed trace. Failure terminality/no failure reply NOT adopted Mir retry defaults.
+OwnerPartialAbort reuses established AbortFlow.Safe/check with partial lookup evaluation and general two-run/confinement/type/completion/retention laws. OwnerSourceFlow adds current checked tree/capture/locality translation, single success/failure correspondence, immutable capture and Int preservation. Public prefix + private overflow/absence controls, secret-then-public/capture/cross-owner negatives. Fixed supplied labels/authentic source binding remain open. These last2files are now in the separate partial-flow review; await final before reliance/adoption.
+Actual source-origin RED reproduced second assignment reporting first span. pub(crate) owner_template_at selects unique name/kind/fullspan in M6→M7 construction and generated-failure check. Existing generic OperationIdentity proof reused. New test covers2orders/identical text sites/present rows and RHS lexeme. Focused pass, full418library pass. Broad runtime exit1014renderer failures duplicate_effect_member; exact HEADbaseline same4. All semantics targets observedexit0; remaining runtime targets recollectedexit0 after missing tool78008/receipt. c-source-origin logs/receipts retain every failure; no whole regression GREEN. Source bytes restored exactly after baseline run. Source repair final review disposed; no multi-statement/restore completion.
+Next: final own diff/docs checks and integrate narrow reviewed source-origin checkpoint (normal commit/push). Then SAME C shared source pending/allocator/adopt/cancel/continue/restore and authenticated labels/resources/service-custody connection. Full existing ReferenceContinuation/ReceivedResult remains reuse base, no duplicate scheduler.
 
-## LIVE Oracle — main-operated visible browser
-Current actual session mir-w4-c-effect-source, wrapper tool88119, event capture27684.
-Packet I/oracle-c-effect-source-retry1; QUESTION sha
-77bb313ce90b5d159147daeae7917685dfdb463724450d6515d66824a19ae2bf,
-manifest88bef0093442c5294ff6714b19fe894fb2602dfc4b4548b6041cd597dca2b758.
-Submitted05:16:42UTC; first status no earlier05:19:42UTC, then >=180s intervals.
-Actual ID read from initial wrapper log; requested r1 suffix was canonicalized away.
-Capture/model scripts corrected to actual ID; initial ENOENT capture was not a job
-failure or resend. 6ProLatest/max model UI verified05:18:54UTC. No deadline/latency retry.
-Preceding actual session mir-w4-c-effectful-continuati failed before submit at
-05:14:54UTC with ECONNREFUSED45439. Dedicated Chrome had exited/no lock; restarted
-visible existing .oracle/browser-profile at :0, PID266472, remote45439. Only launch
-flags user-data-dir/remote-port/new-window/about:blank; no settings/tuning changes.
-Other normal Chrome and9222 untouched. Same frozen packet resent after actual error.
+## Actual new research evidence and counterexamples
+SourceFrontier/Reuse exact existing ready/waiting/failed/empty and program/archive equations, map/retraction. OwnerEffectService exact current FullUse + installed body + recorded arithmetic; one actual update/history extension, refusal preserves previous store/history. OwnerEffectReceipt exact original binding + service generation + strict caller check; no RHS evaluation, valid ack one frontier step, refused ack keeps owner/caller. OwnerSourceIssue selects actual next checked-IR statement and derives activation/ordinal/args/ID; waiting prevents second issue. OwnerEffectQueue disjoint queued/attempts, unique ID/source occurrence, rooted append-only history, fresh transport ID cannot repeat old source occurrence. OwnerSourceCorrespondence combines actual issue/body/args and service/ack equations.
+Controls source-generated checked-IR1→2→4, originalG1/G2service/ackrefusal retains2, equal numeric differentbody rejection, site/activation/args, doubleack, ownerqueue replay/freshID, overflow AFTER priorcommit retains2/history1 and attemptedfailure row2. Numeric expression alias multiplicity preserved.
+Critical limitations demonstrated: raw serve without queue writes1→2→3; a forged mathematical Reply can pass requester-only equality checks without service. Need joint generated-receipt relation plus authenticated physical carrier, not a record-constructor assumption. No real parsed-Mir/network/whole IFC/resource/recovery claim; owner-only prototype not full shared pure/effect extension.
+Recorded arithmetic7general lemmas: fresh10modules1197owned,2false claims; AS3GiB audit bad_alloc retained, audit-only6GiB passedRSS1476252KiB6.5s/no swaps. List read multiplicity != Rust BTreeMap quotient/key/parser/i64leaf proof.
 
-Prior identity Oracle mir-w4-c-operation-identity completed05:01:57UTC,
-full25930chars,6Pro/max verified, full DOM receipt/disposition saved; all oldtools
-37060/49388 collected. CandidateA review supports only typed-key guard, not global
-identity or handler sequencing; B M7-only refusal not selected.
+## Oracle
+mir-w4-c-effect-source completed05:27:26UTC26465chars; packet omitted upperSession/ReceivedResult. Disposition explicitly corrects it, no missing-whole-cursor claim.
+Corrective mir-w4-c-existing-session completed05:44:16UTC26973chars,6ProLatest/maxverified; QUESTIONsha4692f0a4b02ae0cf3108ec72c63e2cba0e1595a533c7ce0e0fc5cef5507bb16c, manifest9f2a15acd8a55d17fc0df499f9bb286a2d21b33ebb28c92c8c5206053ed1b92a. FULL_ANSWER/FULL_DOM_RECEIPT/DISPOSITION in I/oracle-c-existing-session. Supports B with shared requester pending across all entries; ownerqueue empty must not authorize replacement. Pure accept_sound cannot prove effectful ack. Source-generated operations must retain full body/site/activation/args, labels/resources. New external source/effect files were written AFTER packet: NOT reviewed by this answer.
+Dedicated visible Chrome45439 PID266472 launched after actual priorECONNREFUSED; normal profile/9222 untouched. Current causality-origin delta review FINAL/disposed; no latencyresend. Consult uses existing wrapper/capture templates, actualslugmetadata, >=180s status, no outerdeadline/paidfallback.
 
-## Latest bounded repair / counterevidence
-Shared project_owner now resolves existing (name,kind,owner) signature before any
-local/remote fragment mutation; StructuralMismatch propagates ordinary/provider.
-No M7/parser/auth/queue/public contract change. Two-block same-owner source RED
-formerly panicked remotely and was wrongly accepted locally. Both current tests
-pass; first-match mutation fails assertions; exact repaired source restored.
-Full418 runtime tests pass96.97s, full344 Rust/Cargo input manifest unchanged.
-Four full Debug old/new positive projections byte-equal: budget local/remote,
-parameter+relation, provider mixed. Temporary probes/source swaps restored finally.
-Mirrored OperationIdentity: declarative positional Selects/algorithm equivalence,
-member/nonvacuity/repeated-occurrence refusal; fresh23owned audit standard logical
-axioms only,2false controls fail. Mirror audit at c-operation-identity/mirror-kernel.
-Five M8 expression tests pass including separate keys/index fallback and failure
-AFTER prior actual write, retaining prior state/history, consuming failed queue item.
-Numeric parameter absence/parse failure differs from low-level index fallback;
-no upstream permission to omit required args inferred.
+## Retained production evidence/open boundaries
+1b18 guard before any local/remote owner lowering, typed StructuralMismatch ordinary/provider.418library/5M8focus/four whole static positive differential passes, first-match mutation fails, mirroredOperationIdentity23owned/2falsecontrols. Not multi-statement support. BOUNDARY_PROBE: distinct-owner samehandler builds thenprivate restorecardinalityfails; duplicate localfragment structurallyrestores/FabricProgram, sealed executableauthority bypass untested. One unbudgeted at-block twoassignments stillopaqueRHS/M7refusal. M6 event-name template association first-span defect now narrow reviewed repair.
+91e2 actual read receiptSome-only fix42owned,18focus/416runtime/3mutants; no source-labelauth/IFC. Observercdb8 788owned/12tests4mutants; suppliedlabels only. Sharedfloor daeb128owned/11focus409runtime plusactualQUICroundtrip/46localfinite tests; noownertrustanchor. B206modules model278/prep235/physical68wholeexit0; privatepipefinite, notQUIC/privacy/recovery. Retainedpublisher T/S actualcfg(test)localfabric afteruse revocationcontrol passes; notsource/networkdynamicconstruction.
 
-OPEN counterexamples in BOUNDARY_PROBE: one handler with distinct-owner blocks
-passes M7/project/verify/build, fails private restore owner cardinality; duplicated
-local owner fragment passes structural restore/FabricProgram. Sealed expected-start
-and executable authority bypass NOT demonstrated. Guard does not resolve these.
-Unbudgeted two assignments in one at-block still become opaque RHS/M7 refusal.
-M6 template-by-event association repeats first span; no late suffix workaround.
-
-## Retained earlier evidence / limits
-91e2 read receipt: Some-only actual-read selection, old key dedup/order;10general/
-42owned, actual literal/zero/alias controls,3semantic mutants;18focused/416runtime.
-Candidate coverage inspected parser/tree/private expression restore, not proved
-Rust compiler extraction. Empty read phase marker not reclassified. No IFC claim.
-Retained publisher uses two-clock T/S source; same path T before success/after revoke
-refusal, fresh S after success, noextra write/preserved whole prior trace. cfg(test)
-admin update, not source construction/network. Earlier weak T test and failed
-pre-revoke paired probe retained; corrected final controls pass.
-Observer cdb8:10general/788owned,12tests/4mutants,review disposed; supplied labels
-only, not source authenticity/current disclosure/physical privacy.
-Sharedfloor daeb:14general/128owned,11ST/OW1focus/409runtime; actualQUIC roundtrip
-and46localnet finite tests passed, not46network successes; testCA not owneranchor.
-B206exactmodules, model278/prep235/physical68 commands wholeexit0, bindings
-9169/9973/34658; privatepipefinite evidence, not QUIC/auth/privacy/recovery.
-
-External unadopted OwnerPartial6general, state5, strict coverage1, checked arithmetic3;
-fresh9module1159owned audit/3false controls c-owner-partial/extended-kernel-v2.
-AdmissionPhases.FullUse5general CurrentUse/exact original request/witness;25module
-fresh audit/5guards/3false controls. No custody/resource/whole effect proof. These
-are now included as unadopted input in the live source/effect review.
-
-## Integration / reading
-make docs wholeexit0 (c-operation-identity/DOCS.log), fmt/diff checks0. Final RESUME
-update follows; checkpoint commit/push and parity receipt due. No live Rust test.
-All required2675static corpus inventoried/read; historical large execution JSON
-not allread. Exact READ_LEDGER hashes/ranges retained; grep != full reading.
-M10tests1–9687full; SYS4tests referenced ranges only, fullread pending. Current
-source/test authored deltas reviewed, prior exact full baselines retained.
-Single Report2614; R01–R12/119 E reconciliation preserved, no Canon/THM/OBL changes.
+## Records
+SingleReport2614; same C goal and R01–R12/119 preserved. READ_LEDGER exacthashes;2675staticcorpusalreadyread, historicallargeexecutionJSONnotallread. M10testsfull1–9687, SYS4testsselectedrangesonly. plan/currentgoal/W4_CHECK/RESUME/report/ledger updated; phase/status/runnablecorpusunchanged so dashboardupdatesnotneededfor externalresearch. Current cargo fmt check passed after source-origin fix; make docs final synchronization passed (tool25651/exit0) and current delta uncommitted. Next source/effect proof/entry work continues; no final response at this subcut.

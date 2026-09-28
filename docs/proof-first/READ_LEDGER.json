@@ -45861,5 +45861,317 @@
     "role": "C reviewed bounded identity lookup repair; not global source/restore invariant",
     "status": "delta",
     "at": "2026-09-28T05:11:30.310034+00:00"
+  },
+  {
+    "path": "samples/lean/foundations/MirroreaProofFirstReferenceContinuation.lean",
+    "sha256": "df1fd195c8e4eacc65c0fd2b082d559e0c93041a3b510fa7245c7d03179ba347",
+    "range": "1-235",
+    "status": "full",
+    "role": "existing full source-session/receipt consumer reconsult; lower-layer omission corrected",
+    "at": "2026-09-28T05:22:11.484944+00:00"
+  },
+  {
+    "path": "samples/lean/foundations/MirroreaProofFirstReceivedResult.lean",
+    "sha256": "6186b71dced2db478e79587ee5a84103b69696a7f9c231b6f0bfe3cdf5997caa",
+    "range": "1-139",
+    "status": "full",
+    "role": "existing full source-session/receipt consumer reconsult; lower-layer omission corrected",
+    "at": "2026-09-28T05:22:11.484944+00:00"
+  },
+  {
+    "path": "samples/lean/foundations/MirroreaProofFirstReferenceSession.lean",
+    "sha256": "445de39b10272781d61a1f8e51ab38893830e68e282b926b810d849c35825c64",
+    "range": "1-170",
+    "status": "contextual",
+    "role": "existing full source-session/receipt consumer reconsult; lower-layer omission corrected",
+    "at": "2026-09-28T05:22:11.484944+00:00"
+  },
+  {
+    "path": "samples/lean/foundations/OwnerStatementJournal.lean",
+    "sha256": "9ba54923bd8840d61be4b05e0dcb419e57b45618d0ec49fbf258e29f4f7df453",
+    "range": "1-146",
+    "status": "full",
+    "role": "existing full source-session/receipt consumer reconsult; lower-layer omission corrected",
+    "at": "2026-09-28T05:22:11.484944+00:00"
+  },
+  {
+    "path": "samples/lean/foundations/StatementClosureHistory.lean",
+    "sha256": "8d349cdafd64bfae7d108ddd24d1fa29d108052aedd8148d9a5918544df71728",
+    "range": "1-104",
+    "status": "full",
+    "role": "existing full source-session/receipt consumer reconsult; lower-layer omission corrected",
+    "at": "2026-09-28T05:22:11.484944+00:00"
+  },
+  {
+    "path": "samples/lean/foundations/MirroreaProofFirstReferenceSession.lean",
+    "sha256": "445de39b10272781d61a1f8e51ab38893830e68e282b926b810d849c35825c64",
+    "range": "1-476",
+    "status": "full",
+    "role": "existing source/session/effect consumer reconsult; forward packet correction",
+    "at": "2026-09-28T05:54:56.629682+00:00"
+  },
+  {
+    "path": "samples/lean/foundations/MirroreaProofFirstPublicationExecution.lean",
+    "sha256": "a88c0699a2aa44283b75559a199537e8266e29d72ac976e8099c33625dfc0765",
+    "range": "1-335",
+    "status": "full",
+    "role": "existing source/session/effect consumer reconsult; forward packet correction",
+    "at": "2026-09-28T05:54:56.629682+00:00"
+  },
+  {
+    "path": "samples/lean/foundations/MirroreaProofFirstReceivedResultControls.lean",
+    "sha256": "f22bec85357a260a4630801b7eb96fcb45c697feda1d21789b196c987ae91386",
+    "range": "1-36",
+    "status": "full",
+    "role": "existing source/session/effect consumer reconsult; forward packet correction",
+    "at": "2026-09-28T05:54:56.629682+00:00"
+  },
+  {
+    "path": "samples/lean/foundations/MirroreaProofFirstReferenceSourceData.lean",
+    "sha256": "ab8493abcf8a5f1201d2b379daf60ef7e25f1dea953b17822b343c7e3151f5a0",
+    "range": "1-304",
+    "status": "full",
+    "role": "existing source/session/effect consumer reconsult; forward packet correction",
+    "at": "2026-09-28T05:54:56.629682+00:00"
+  },
+  {
+    "path": "samples/lean/foundations/MirroreaProofFirstOwnerAssignment.lean",
+    "sha256": "93e6549ece5ac234bdfe6852561a4c590ab3a9eafa6f301f5e15954d234e5f74",
+    "range": "1-483",
+    "status": "full",
+    "role": "existing source/session/effect consumer reconsult; forward packet correction",
+    "at": "2026-09-28T05:54:56.629682+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/OwnerEffectQueue.lean",
+    "sha256": "8e65fbb9ad2ef67825b966f95dd4d242e61674fe5437b701f0b9d67aa3ece98b",
+    "range": "1-154",
+    "status": "authored/reviewed",
+    "role": "unadopted source/effect research; no physical origin assumption hidden",
+    "at": "2026-09-28T05:54:56.629682+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/OwnerEffectReceipt.lean",
+    "sha256": "6e2e786b6e7fe8da7cfdeccfc0d96cfc119fe813569f7e44fb2f38d4031ab1a4",
+    "range": "1-128",
+    "status": "authored/reviewed",
+    "role": "unadopted source/effect research; no physical origin assumption hidden",
+    "at": "2026-09-28T05:54:56.629682+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/OwnerEffectService.lean",
+    "sha256": "f6a0460b1e207b203ca1307f120ac6f0d650201acefa8c64ff5a227d1b8396b1",
+    "range": "1-161",
+    "status": "authored/reviewed",
+    "role": "unadopted source/effect research; no physical origin assumption hidden",
+    "at": "2026-09-28T05:54:56.629682+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/OwnerSourceControls.lean",
+    "sha256": "983c5f00d6b71d43a154cce3ebcf7db65ea45ab68b5732d735b53338bb7941eb",
+    "range": "1-137",
+    "status": "authored/reviewed",
+    "role": "unadopted source/effect research; no physical origin assumption hidden",
+    "at": "2026-09-28T05:54:56.629682+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/OwnerSourceCorrespondence.lean",
+    "sha256": "318343858882894b137cff3663d7a3dc10fb453b72dde8d5371db8acf04702de",
+    "range": "1-67",
+    "status": "authored/reviewed",
+    "role": "unadopted source/effect research; no physical origin assumption hidden",
+    "at": "2026-09-28T05:54:56.629682+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/OwnerSourceIssue.lean",
+    "sha256": "a361ad4d2f604603a6c45032b31838af7399694583825e84a0c26020b168d424",
+    "range": "1-99",
+    "status": "authored/reviewed",
+    "role": "unadopted source/effect research; no physical origin assumption hidden",
+    "at": "2026-09-28T05:54:56.629682+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/OwnerSourceTrace.lean",
+    "sha256": "f0a31333878531fe481c9615e2fbd362f2e4cfa4ac4a5058c1b607e7a0369c62",
+    "range": "1-145",
+    "status": "authored/reviewed",
+    "role": "unadopted source/effect research; no physical origin assumption hidden",
+    "at": "2026-09-28T05:54:56.629682+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/SourceFrontier.lean",
+    "sha256": "24316838f908af1978c2e79dc0a200669ed47830773a66c8947a75076cce695e",
+    "range": "1-107",
+    "status": "authored/reviewed",
+    "role": "unadopted source/effect research; no physical origin assumption hidden",
+    "at": "2026-09-28T05:54:56.629682+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/SourceFrontierReuse.lean",
+    "sha256": "2c2d0fb8050d4c41ed0c99dfa8443a2899dc71e106f726cc582397ddc64b4337",
+    "range": "1-75",
+    "status": "authored/reviewed",
+    "role": "unadopted source/effect research; no physical origin assumption hidden",
+    "at": "2026-09-28T05:54:56.629682+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/OwnerSourceTrace.lean",
+    "sha256": "eb5a84a841f3e599b081db6b63054e052cade74acec19b4aad4d0cb26126c5ea",
+    "range": "1-263",
+    "status": "authored/reviewed",
+    "role": "fresh trace delta; frozen current Oracle packet",
+    "at": "2026-09-28T06:16:01.012508+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/OwnerSourceTraceControls.lean",
+    "sha256": "be7b1b953c63667079e21578bb95f943e6c0e3d1a919d37d8fe4961891ad65fe",
+    "range": "1-47",
+    "status": "authored/reviewed",
+    "role": "fresh trace delta; frozen current Oracle packet",
+    "at": "2026-09-28T06:16:01.012508+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/OwnerSourceAdmission.lean",
+    "sha256": "ac8a699bcd5b735e61168deea3af453062162afe26d5491b2d7e08423371d966",
+    "range": "1-101",
+    "status": "authored/reviewed",
+    "role": "fresh trace delta; frozen current Oracle packet",
+    "at": "2026-09-28T06:16:01.012508+00:00"
+  },
+  {
+    "path": "crates/mir-ast/src/surface_v0.rs",
+    "sha256": "dad1ab1035afe3f98991952da2168ca39220ff54c548b7f274722be4e941a851",
+    "range": "690-850;1620-1820;2020-2200",
+    "status": "selected reconsult; not new full read",
+    "role": "actual source origin / existing metadata reuse",
+    "at": "2026-09-28T06:16:01.012508+00:00"
+  },
+  {
+    "path": "crates/mir-semantics/src/surface_v0_classification.rs",
+    "sha256": "60c45bd6b173982d66603791c426352c64d5e9f5e80ae6db60651c05315f853c",
+    "range": "220-350;640-900;1130-1165",
+    "status": "selected reconsult; not new full read",
+    "role": "actual source origin / existing metadata reuse",
+    "at": "2026-09-28T06:16:01.012508+00:00"
+  },
+  {
+    "path": "crates/mir-semantics/src/surface_v0_pipeline.rs",
+    "sha256": "c16b5fedc2d4e6e52e2e5cb87b1c78a03536ba0dff57f58ca54c24d33831ac2a",
+    "range": "880-1015;1970-2075;2370-2445;2700-2980;3370-3470;3590-3700",
+    "status": "selected reconsult; not new full read",
+    "role": "actual source origin / existing metadata reuse",
+    "at": "2026-09-28T06:16:01.012508+00:00"
+  },
+  {
+    "path": "samples/lean/foundations/MirroreaProofFirstResourceComputations.lean",
+    "sha256": "10da3728bb18ff21d3db4272f37a5cf5d93cd752186a9ad9ad640e4561cb1f59",
+    "range": "1-135;2428-2630;2685-2708;2929-2945",
+    "status": "selected reconsult; not new full read",
+    "role": "actual source origin / existing metadata reuse",
+    "at": "2026-09-28T06:16:01.012508+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/OwnerSourceCausality.lean",
+    "sha256": "c0cc8cb7cf12298c63493f52138e535af1b74a34d734752468bb552e5418abfb",
+    "range": "1-205",
+    "status": "authored/reviewed",
+    "role": "external reference extension; exact fresh audit in kernel-v2",
+    "at": "2026-09-28T06:38:36.105201+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/OwnerSourceCausalityControls.lean",
+    "sha256": "a2c4f95892ae24c1a76acac23009b1467baf0ccdcf4e74a084fe13430f9106a2",
+    "range": "1-71",
+    "status": "authored/reviewed",
+    "role": "external reference extension; exact fresh audit in kernel-v2",
+    "at": "2026-09-28T06:38:36.105201+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/OwnerPartialAbort.lean",
+    "sha256": "e8bf146221953be82e48a13d849162c424f382b9272fc2fe4d43712e351c401f",
+    "range": "1-194",
+    "status": "authored/reviewed",
+    "role": "external reference extension; exact fresh audit in kernel-v2",
+    "at": "2026-09-28T06:38:36.105201+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/OwnerSourceFlow.lean",
+    "sha256": "d082a5f3ec9e71dd5104a7ff9388fa7a502356bfddf6b63964ae0fcda67b5742",
+    "range": "1-156",
+    "status": "authored/reviewed",
+    "role": "external reference extension; exact fresh audit in kernel-v2",
+    "at": "2026-09-28T06:38:36.105201+00:00"
+  },
+  {
+    "path": "samples/lean/foundations/MirroreaProofFirstAbortFlow.lean",
+    "sha256": "f26013320c80f6f16e49dfeb384474ec0b900f92ddff80dc54b33c02ed98f7ff",
+    "range": "1-174",
+    "status": "full/reviewed own delta",
+    "role": "existing dependency reuse and current source/stop snapshot",
+    "at": "2026-09-28T06:38:36.105201+00:00"
+  },
+  {
+    "path": "samples/lean/foundations/MirroreaProofFirstAbortFlow.md",
+    "sha256": "fe1fdb34f324c1f833da656f9fdd96712bd87d81a424a0b2cf9f5c9265714044",
+    "range": "1-34",
+    "status": "full/reviewed own delta",
+    "role": "existing dependency reuse and current source/stop snapshot",
+    "at": "2026-09-28T06:38:36.105201+00:00"
+  },
+  {
+    "path": "samples/lean/foundations/MirroreaProofFirstAddressFlow.md",
+    "sha256": "1449ce6733d2768d423adf9c1a4363e7dce33e8fd8c3014796e0aedcf2d06023",
+    "range": "1-23",
+    "status": "full/reviewed own delta",
+    "role": "existing dependency reuse and current source/stop snapshot",
+    "at": "2026-09-28T06:38:36.105201+00:00"
+  },
+  {
+    "path": "tasks.md",
+    "sha256": "2e297a0655c400b4039e7895b4e7795cf4863f6cd9a1fe0da0ad5d3e295fb3b5",
+    "range": "1-89",
+    "status": "full/reviewed own delta",
+    "role": "existing dependency reuse and current source/stop snapshot",
+    "at": "2026-09-28T06:38:36.105201+00:00"
+  },
+  {
+    "path": "crates/mir-semantics/tests/proof_first_source_origin.rs",
+    "sha256": "183779597188fe0453a5c3df752913cd9f922e417b4f558ac129effa0a5be1f4",
+    "range": "1-66",
+    "status": "full/reviewed own delta",
+    "role": "existing dependency reuse and current source/stop snapshot",
+    "at": "2026-09-28T06:38:36.105201+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/oracle-c-causality-origin/FULL_ANSWER.md",
+    "sha256": "6b23b295f3f03dd16c1043d82135a5d76eb9c93c68fc270ef28eb869464dd095",
+    "range": "full",
+    "status": "read/reviewed",
+    "role": "bounded repair review disposition and parser/identity limits",
+    "at": "2026-09-28T06:46:30.367872+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/oracle-c-causality-origin/DISPOSITION.md",
+    "sha256": "ecca46caa3dffb8abb253928b638b4d1921899c6effd698fd066d3b97b647524",
+    "range": "full",
+    "status": "read/reviewed",
+    "role": "bounded repair review disposition and parser/identity limits",
+    "at": "2026-09-28T06:46:30.367872+00:00"
+  },
+  {
+    "path": "/home/codex/dev/mir_poc_01/crates/mir-ast/src/surface_v0.rs",
+    "sha256": "dad1ab1035afe3f98991952da2168ca39220ff54c548b7f274722be4e941a851",
+    "range": "310-350,1650-1798,2020-2170",
+    "status": "read/reviewed",
+    "role": "bounded repair review disposition and parser/identity limits",
+    "at": "2026-09-28T06:46:30.367872+00:00"
+  },
+  {
+    "path": "/home/codex/dev/mir_poc_01/crates/mir-semantics/src/surface_v0_pipeline.rs",
+    "sha256": "c16b5fedc2d4e6e52e2e5cb87b1c78a03536ba0dff57f58ca54c24d33831ac2a",
+    "range": "2774-2812,3310-3336",
+    "status": "read/reviewed",
+    "role": "bounded repair review disposition and parser/identity limits",
+    "at": "2026-09-28T06:46:30.367872+00:00"
   }
 ]

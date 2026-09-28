@@ -28,5 +28,7 @@ There are no loops, statement branches, dynamic address changes, source parser
 or full runtime refinement in this module. Unbounded execution, final labels,
 current release authority, metadata, initial observer-row sanitation and
 physical resource isolation remain obligations. The profile does not combine
-the separate GeneralLabels theory with fallible execution. Oracle review of
-this frozen cut is pending; this draft records no acceptance.
+the separate GeneralLabels theory with fallible execution. At draft creation the Oracle review was pending. Its recovery is recorded below;
+this remains a LAB candidate.
+
+2026-09-28 forward review update: the unchanged finite cut was reviewed by the read-only Oracle and locally dispositioned; see `docs/proof-first/W4_CHECK.json` (recorded `mir-w4-c-abort-address` session). Earlier pending wording describes the draft state. This closes that finite review dependency only; supplied metadata/source/runtime, authority/resources and physical observation remain open.

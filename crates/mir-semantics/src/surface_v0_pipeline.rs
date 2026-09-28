@@ -2813,7 +2813,7 @@ fn build_checked_artifact(
     let mut residual_entries = Vec::new();
     for assignment in ast.assignments() {
         let m6_owner_template = consumed_m6_classification
-            .core_template(assignment.event())
+            .owner_template_at(assignment.event(), assignment.span())
             .expect("accepted M6 classification retains every owner-RMW template");
         let source_span = PipelineSourceSpan::from_surface(m6_owner_template.source_span());
         let owner_admission_budget = m6_owner_template.owner_admission_budget().cloned();
@@ -3653,7 +3653,7 @@ fn generated_failure_diagnostic(
         let observer_safe =
             observer_visibility_channel(ast, assignment.target()) == Some(OBSERVER_SAFE_CHANNEL);
         let owner_admission_budget = consumed_m6_classification
-            .core_template(assignment.event())
+            .owner_template_at(assignment.event(), assignment.span())
             .expect("accepted M6 classification retains every owner-RMW template")
             .owner_admission_budget()
             .is_some();

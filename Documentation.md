@@ -29,11 +29,15 @@ W2の有限な研究成果は検証・review・Git統合済みで保持してい
 W3は有限の研究・参照実装候補として検証・review・source統合を完了しました。通常sourceからの構築・変更・保持参照・fallback／再取得・取消し・同じSessionへの追加／修復を接続しています。Lean4.29.1で76moduleの全所有宣言を監査し、通常source32件・検証手順の反例13件・証明弱化5件を検査しました。12回のOracleレビューを回収し、最終指摘の保証範囲も記録済みです。再現commandは `python3 scripts/proof_first_reference_source_check.py --work-root /tmp`。source/evidence cutは `81f82a0b` で通常push済みです。
 2026-09-24のowner指定で、同じW4を **W4-A（限定証拠・完了済み）→W4-B（repo統合・限定候補完了）→W4-C（残る基礎条件・現在地）→W4-D（Rust/Core/private QUIC接続）→W4-E（実network検査・残項目回収・W4完了判定）** に分割しました。Bの境界review回収後、Cへ進みました。D/Eは依存待ちです。Eは元W4と前段の残項目を照合しますが、C/Dの前提をEへ先送りして実装を進めません。完了条件・推奨model/effort・R01〜R12残項目台帳は `plan/proof-first-foundation-correspondence.md` の「W4-A〜W4-E 作業区切り」を参照してください。分割当日は計画整理のみでした。2026-09-26のowner指示で同じW4 goalを再開しています。
 
+2026-09-28の最新owner指示では、Cの必要条件を閉じてDまで進め、**W4-Dの検証・記録・統合後に一旦pause**します。直前の「Cまでで停止」は更新されました。Eは今回の停止点より先であり、再開指示前に着手しません。
+
 W4は、通常sourceと実ownerの状態・資源を同じ履歴から対応付ける基礎検証を進めています。選択した形式モデルにおける通常実行の全所有者lease・値・履歴の一般証明と、確定失敗4profile／未確定通信8profileの実記録との接続を外部workdirで検査しました。正常系23、確定失敗14、未確定通信16の改変controlも検査済みです。通信結果不明時は最後に確定した状態と物理通信の残余を区別します。追加proof群のrepo再現runnerへの統合は限定LAB候補として完了しました。全entryの実機対応、現在の認証認可・物理namespace、既存Rust/Core/privateQUIC接続とW4全体の統合は未完了です。
 2026-09-27の追加owner指示で、今回の実行も残量による停止を外して同じW4を継続します。リセットはownerが行い、主担当は操作しません。W5+とPlan250/I3-4は開始しません。過去のquota停止・検査記録はReport2614に保持します。
 
 W4-B検証結果: 206依存sourceを原本と同一bytesで保存し、fresh Lean検査と公理監査を完了しました。既存runnerのV2モデル278command・236module/22215所有宣言監査、native準備235command、修正後の実process検査68command（15profile/53拒否control）が全体exit0で完走しました。段階ごとに9169/9973/34658入力束縛と実ログを照合しています。保存証拠と現行sourceの役割分離、別名参照・期待値衝突・途中失敗の反例も検査済みです。コード・証明・検査手順は9d86052dでcommit/push・remote一致を確認済みです。復旧後の同一資料による最終境界Oracle reviewを回収し、主担当が証拠と照合しました。Bは限定LAB統合候補として完了、Cが現在地です。D/Eは依存待ちです。Oracle回答は証明・署名済み受理ではありません。一般証明は選択モデルについて、実processは特権private-pipeの有限証拠についてであり、実network・認証・秘密・復旧の保証へ広げません。
 W4-Cでは、共有authority floorの古いcache使用、供給された観測ラベルの弱化、実行していない読取りの記録に続き、重複したowner操作で配置変換がpanicする経路を限定修正しました。一般Lean命題・実反例・Oracle指摘を照合し、今回のruntime library418件が通過しました。正常な4種類のsourceは、修正前後で配置結果全体が一致しています。ownerの実書込みと呼出し側の結果受理を分け、評価失敗後にも過去の書込み・履歴が残ることを実検査しました。C全体は未完了です。複数代入の文順序・source継続、別owner間の識別子衝突、復元経路の条件が具体的な残件です。全entry・現在の認可・実namespace/custody・資源の対応も継続します。実network・秘密・復旧やW4全体の保証には広げません。
+
+W4-Cの追加調査では、チェック済み代入のソース位置を最初の同名イベントへ取り違える実反例を修正案で解消し、意味解析とruntimeの回帰を検査しました。runtime本体418件と意味解析・後続test群は通過しましたが、renderer4件は旧HEADでも同じ失敗が再現し、全体GREENではありません。外部参照証明では、同じ実行列内の要求生成・書込み・応答の対応、および値の欠落を含む有限列の情報流を検査しました。ソース位置・因果の差分reviewは回収・反映済み、部分値の情報流は未reviewで、実ソースのラベル、共通pending・復旧・資源への接続は未完了です。
 
 対応は `plan/proof-first-foundation-correspondence.md`、現在の証跡はreport2614、W1/W2/W3の履歴はreport2611/2612/2613です。
 既読範囲は `docs/proof-first/READ_LEDGER.json` に記録し、未読と部分読了を区別しています。

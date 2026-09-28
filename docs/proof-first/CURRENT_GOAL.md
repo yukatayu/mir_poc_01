@@ -56,3 +56,15 @@ source statement. Distinct-owner same-handler source still passes build but fail
 restore; local duplicate snapshot passes structural restore/FabricProgram, sealed
 entry untested. These remain OPEN alongside actual source/effect continuation.
 No reticket/rollback, duplicate scheduler or C completion inferred.
+
+2026-09-28T05:54:56.629682+00:00 — Identity guard1b18c7c4 committed/pushed/parity. Same C goal now
+uses existing full Session/ReceivedResult/PublicationExecution; no second scheduler.
+Corrective Oracle final recovered/disposed. External checked-IR source-issued owner
+write/ack/queue laws freshly checked, but full mixed-entry conservativity, actual Mir
+source extraction, labels/resources and authenticated receipt provenance remain open.
+Raw serve replay and forged mathematical receipt are recorded counterexamples, not
+production defects established through admitted entries. See RESUME and W4_CHECK.
+
+2026-09-28T06:14:57.932137+00:00 — Owner stop boundary updated: continue through W4-C evidence/review/integration, then pause the existing whole-W4 goal and stop. Do not start W4-D or E. C is still active/incomplete; this does not accept C or complete the whole-W4 goal. No goal clear is required.
+
+2026-09-28T06:27:29.968002+00:00 — Owner changes stop boundary from C to D: finish C, then D implementation/correspondence validation/review/integration, pause existing whole-W4 goal and stop BEFORE E. Earlier C-stop note is superseded. C remains active/incomplete; no dependent D work until C gate.

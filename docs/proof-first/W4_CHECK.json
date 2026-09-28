@@ -43766,5 +43766,172 @@
       "model": "6ProLatest/max verified",
       "actual_error_retry": "prior session mir-w4-c-effectful-continuati pre-submit ECONNREFUSED; visible same-profile restart, identical packet resend once"
     }
+  },
+  "c_source_effect_20260928": {
+    "at": "2026-09-28T05:54:56.629682+00:00",
+    "base": "1b18c7c4c3f6110229ae2f604bef24ce5eef30bd",
+    "status": "external research; C open",
+    "review": {
+      "at": "2026-09-28T05:46:03.605390+00:00",
+      "session": "mir-w4-c-existing-session",
+      "completedAt": "2026-09-28T05:44:16.470Z",
+      "characters": 26973,
+      "sha256": "d3037b4f7aafa76331c5aa8b39eb7297b02a6af5727a51afb1f596294c6a406b",
+      "identity": true,
+      "stop": false
+    },
+    "disposition": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/oracle-c-existing-session/DISPOSITION.md",
+    "kernel": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/kernel-v2/RESULT.json",
+    "kernel_sha256": "9d1dedb9dcd64c37b5d9a25715abf35098a75ece03908afeb82bda8b6387f831",
+    "modules": 75,
+    "owned_declarations": 608,
+    "false_claims": 5,
+    "recorded_arithmetic": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-owner-partial/recorded-kernel/RESULT.json",
+    "post_audit_trace": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/OwnerSourceTrace.lean",
+    "post_audit_trace_status": "superseded by fresh trace delta receipt; full mixed/physical gates still open",
+    "open": [
+      "parsed source/checked body provenance",
+      "full mixed pure/effect entry and archive conservation",
+      "one shared allocation and namespace custody",
+      "labels/resources and leaf bounds",
+      "authenticated physical receipt/current head",
+      "restore/recovery/network"
+    ],
+    "trace_delta": {
+      "receipt": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/kernel-v2/TRACE_DELTA_RESULT.json",
+      "sha256": "4c0c1a767f7b86322f5aff71798bfd752cb327ee4b3317ed0afe91ce317f6f67",
+      "fresh_modules_total": 78,
+      "owned_declarations_total": 720,
+      "false_claims_total": 8,
+      "status": "kernel checked; external research unadopted"
+    },
+    "concrete_review": {
+      "receipt": {
+        "at": "2026-09-28T06:16:33.142205+00:00",
+        "session": "mir-w4-c-source-custody",
+        "completedAt": "2026-09-28T06:15:03.211Z",
+        "characters": 21837,
+        "sha256": "44adfa13907665251ba9499926f76227c239ede0baec89ffcaf26b6f0e825ee4",
+        "identity": true,
+        "stop": false
+      },
+      "disposition": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/oracle-c-source-custody/DISPOSITION.md",
+      "status": "final recovered; under-strength statement corrected forward, no scope acceptance"
+    },
+    "causality_delta": {
+      "receipt": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/kernel-v2/CAUSALITY_DELTA_RESULT.json",
+      "sha256": "e6104882d3af569f3ab0fdde78fe0a3f9f7ccd90e147b4259c789e77bb9a7dbb",
+      "modules_total": 80,
+      "owned_total": 813,
+      "false_claims_total": 11,
+      "status": "fresh checked; final advisory review disposed; retains Execution premise"
+    },
+    "flow_delta": {
+      "receipt": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/kernel-v2/FLOW_DELTA_RESULT.json",
+      "sha256": "46a4e6662f2d60457fe9b9c184bcd59e6eec15c69a30af45d9f2922464f068b4",
+      "modules_total": 83,
+      "owned_total": 904,
+      "false_claims_total": 14,
+      "status": "fresh checked; NOT included in current review",
+      "scope": "existing AbortFlow rules with partial presence, same checked body and immutable captures; supplied fixed labels only"
+    },
+    "delta_review": {
+      "submission": {
+        "at": "2026-09-28T06:26:01.440828+00:00",
+        "session": "mir-w4-c-causality-origin",
+        "pid": 280112,
+        "question_sha256": "3533787f506e11a9b29a89f170eb337e107ca1de7c79d50380d7128888793204",
+        "manifest_sha256": "f72e3035d3e79d05822c0152fb2fa5da1d60d9946ae410db190c0d781ee06ac9",
+        "display": ":0",
+        "model_evidence": "select strategy; require actual6Pro/max selection evidence on completed conversation",
+        "next_status_after": "2026-09-28T06:29:01.440828+00:00",
+        "scope": "single read-only frozen current implementation review; no outer deadline or paid fallback"
+      },
+      "status": "final recovered and locally dispositioned",
+      "packet_owner_stop_note": "C-stop wording predates later owner change to D-stop; no resend needed for technical delta",
+      "receipt": {
+        "at": "2026-09-28T06:39:34.923433+00:00",
+        "session": "mir-w4-c-causality-origin",
+        "completedAt": "2026-09-28T06:37:21.328Z",
+        "characters": 17421,
+        "sha256": "6b23b295f3f03dd16c1043d82135a5d76eb9c93c68fc270ef28eb869464dd095",
+        "identity": true,
+        "stop": false
+      },
+      "disposition": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/oracle-c-causality-origin/DISPOSITION.md"
+    },
+    "partial_flow_review": {
+      "submission": {
+        "at": "2026-09-28T06:48:44.309562+00:00",
+        "session": "mir-w4-c-partial-flow",
+        "pid": 459188,
+        "question_sha256": "b64d93996c8d05b4abd1af903487777520cb1ea96edb71f463a7005c06213c1d",
+        "manifest_sha256": "a192c48abd942d44143c9b2c4b6fe0ea896ed9f1851bda27b3291f0d2239245c",
+        "display": ":0",
+        "model_evidence": "select strategy; require actual6Pro/max selection evidence on completed conversation",
+        "next_status_after": "2026-09-28T06:51:44.309562+00:00",
+        "scope": "single read-only frozen current implementation review; no outer deadline or paid fallback"
+      },
+      "status": "running; sole main visible browser6ProLatest/max verified06:52:34UTC; wrapper66661/capture13028",
+      "note": "status helper missing initial stamp/capture produced local FileNotFoundError; job not failed/resubmitted"
+    }
+  },
+  "owner_stop_after_c": {
+    "at": "2026-09-28T06:14:57.932137+00:00",
+    "instruction": "Finish C evidence/review/integration; then pause existing goal and stop before D/E.",
+    "current_status": "C active; not yet accepted/complete"
+  },
+  "c_source_origin_20260928": {
+    "at": "2026-09-28T06:16:01.012508+00:00",
+    "status": "narrow implementation under validation/review; not integrated",
+    "red": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-origin/RED.json",
+    "green": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-origin/GREEN.json",
+    "regression": {
+      "initial": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-origin/REGRESSION.json",
+      "exit": 101,
+      "runtime_library_passed": 418,
+      "renderer_failures": 4,
+      "baseline_same_failures": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-origin/BASELINE_RENDERER.json",
+      "semantics_exit": 0,
+      "semantics_log": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-origin/REMAINING-0.log",
+      "runtime_tail": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-origin/REMAINING-RECOLLECT.json",
+      "runtime_tail_exit": 0,
+      "lost_observation": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-origin/REMAINING_OBSERVATION_LOSS.txt",
+      "status": "whole regression NOT GREEN; baseline R06/R12 renderer failure retained"
+    },
+    "mechanical_basis": "existing OperationIdentity.resolve_exact/selected_member for name/kind/full-span predicate; no new source semantics",
+    "alternative": "direct AST span copy leaves budget lookup associated by event name; choose exact existing template instead",
+    "scope": "actual M6→M7 assignment source location/budget association, not ordered multi-statement execution",
+    "review": {
+      "session": "mir-w4-c-causality-origin",
+      "receipt": {
+        "at": "2026-09-28T06:39:34.923433+00:00",
+        "session": "mir-w4-c-causality-origin",
+        "completedAt": "2026-09-28T06:37:21.328Z",
+        "characters": 17421,
+        "sha256": "6b23b295f3f03dd16c1043d82135a5d76eb9c93c68fc270ef28eb869464dd095",
+        "identity": true,
+        "stop": false
+      },
+      "disposition": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/oracle-c-causality-origin/DISPOSITION.md",
+      "scope": "bounded source-origin repair; no universal parser panic freedom or old erroneous image compatibility"
+    },
+    "restored_sources": {
+      "crates/mir-semantics/src/surface_v0_classification.rs": "60c45bd6b173982d66603791c426352c64d5e9f5e80ae6db60651c05315f853c",
+      "crates/mir-semantics/src/surface_v0_pipeline.rs": "c16b5fedc2d4e6e52e2e5cb87b1c78a03536ba0dff57f58ca54c24d33831ac2a"
+    },
+    "docs_check": {
+      "at": "2026-09-28T06:53:21.358268+00:00",
+      "command": "make docs",
+      "exit": 0,
+      "tool_session": 25651,
+      "log_sha256": "2a31cd1458be17326242567ff65f1836d6e66b1fc64aba4bfee461c55c4b8bcd",
+      "scope": "final source-origin documentation synchronization before commit receipt"
+    }
+  },
+  "owner_stop_after_d": {
+    "at": "2026-09-28T06:27:29.968002+00:00",
+    "instruction": "Finish C then D evidence/review/integration; pause existing goal and stop before E. Supersedes stop after C.",
+    "current_status": "C active, D dependency-gated; neither complete"
   }
 }

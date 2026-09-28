@@ -1595,3 +1595,33 @@ M7 source acceptance unchanged. Earlier distinct-owner and private local-snapsho
 counterexamples remain OPEN. See Report2614 / W4_CHECK for exact receipts and
 Oracle limits. Next remains joint ordinary source/owner-effect correspondence;
 no multi-statement/source continuation, full restored-image invariant or C close.
+
+2026-09-28T05:54:56.629682+00:00 — W4-C source/effect reuse correction (LAB research).
+Existing ReferenceContinuation.Session already owns the program frontier/archive;
+ReceivedResult and PublicationExecution already constrain delivered-value resumption.
+The prior lower-Awaiting observation did not establish a missing whole-source cursor.
+Corrective Oracle review supports provisional B: extract only shared frontier updates,
+retain pure semantics and require one shared pending/allocation/adoption boundary.
+Owner-served may coexist with requester-pending; queue-empty is not source-idle.
+New external exact source/owner/ack laws and source-generated checked-IR1→2→4 controls
+pass a fresh75module/608owned audit,5false claims. These post-review files remain
+unreviewed/unadopted; ordinary parser/whole mixed-entry/source labels/resources/real
+carrier and recovery are still prerequisites. Raw evaluator replay and forged record
+counterexamples preserved. Same C goal; no source grammar/API/Canon/phase adoption.
+
+2026-09-28T06:14:57.932137+00:00 — Owner stop boundary updated: continue through W4-C evidence/review/integration, then pause the existing whole-W4 goal and stop. Do not start W4-D or E. C is still active/incomplete; this does not accept C or complete the whole-W4 goal. No goal clear is required.
+
+2026-09-28T06:27:29.968002+00:00 — Owner changes stop boundary from C to D: finish C, then D implementation/correspondence validation/review/integration, pause existing whole-W4 goal and stop BEFORE E. Earlier C-stop note is superseded. C remains active/incomplete; no dependent D work until C gate.
+
+2026-09-28T06:38:36.105201+00:00 — C correspondence research: execution-indexed issue/service/receipt laws replace over-strong interpretation of reachable-state predicates; same exact Write retained. Existing AbortFlow judgment reused for real missing lookup and checked owner/capture trees, external/unadopted. Shared source lifecycle/current label/resource/physical custody still open. Real M6→M7 exact assignment selector under review; whole regression fails4renderer controls also failing at HEAD. D-stop is current owner instruction, not a reduction of E obligations.
+
+2026-09-28T06:46:30.367872+00:00 — Source-origin and causality review final/disposed.
+Oracle17421chars completed06:37:21UTC, answerSHA6b23b295f3f03dd16c1043d82135a5d76eb9c93c68fc270ef28eb869464dd095.
+No concrete defect blocks the narrow fix; retain Execution beside CommittedIn,
+successful-next-receive scope, and parsed-key uniqueness assumption. Parser code
+inspection is not a no-panic proof. Corrected source metadata may change program
+identity for previously wrong multi-assignment artifacts; no old-image compatibility
+claim. Test claims narrowed to actual assertions. Existing renderer4 baseline
+failures retained; other collected checks and make docs pass. No full regression
+GREEN, C close, signature or Canon acceptance. PartialAbort/SourceFlow still
+unreviewed. Latest owner stop remains D complete, then pause before E.

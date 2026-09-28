@@ -3581,3 +3581,128 @@ Current source waiting retains result binding, not visibly a persisted remainder
 that distinction is in the new neutral comparison. Pure Int and effectful unit
 families remain distinct; no semantics adopted. Own guard checkpoint commit/push
 follows, exact receipt in I/c-operation-identity/GIT_CHECKPOINT.json. C continues.
+
+2026-09-28T05:22:11.484944+00:00 — Identity guard checkpoint1b18c7c4 commit/push/remote parity verified.
+Existing session reuse correction: the previously inspected lower Source.Awaiting
+record has no remaining list, but ReferenceContinuation.Session DOES retain full
+program/completed/stopped/remaining/archive; ReferenceSession proves partition and
+origin/pending invariants. ReceivedResult accepts delivered values explicitly and
+advanceReady cannot bypass waiting; PublicationExecution uses that entry. Therefore
+no absent-program-cursor claim follows for the whole existing source profile.
+Current live Oracle packet omitted those upper consumer modules. Keep that omission
+explicit, recover its result, then reconcile/review any affected proposal against
+actual existing modules. No new scheduler or production source semantics adopted.
+OwnerStatementJournal is coordinator-credit/image/lease writing, not M8 owner RMW.
+
+2026-09-28T05:54:56.629682+00:00 — Same C source/effect research, no production adoption.
+Oracle mir-w4-c-effect-source completed05:27:26UTC (26465chars); its omitted upper
+Session/ReceivedResult modules are corrected forward. Corrective standalone review
+mir-w4-c-existing-session completed05:44:16UTC (26973chars),6Pro/max verified,
+full DOM final receipt and local DISPOSITION saved. All wrapper/capture jobs collected.
+B provisional: reuse existing frontier updates and preserve old pure semantics;
+source/effect pending must share every idle/adoption/restore/allocation guard.
+No duplicate scheduler, owner-queue-empty as requester-idle, Int0 acknowledgment,
+reticket, rollback or new source meaning adopted.
+External c-owner-partial/OwnerRecordedArithmetic7general laws fresh10module audit1197
+owned pass with standard axioms; initial AS3GiB audit bad_alloc retained; audit-only
+AS6GiB succeeds (RSS1476252KiB,6.5s,no swaps),2false claims rejected. This is an
+abstract ordered/multiplicity read list, not concrete BTreeMap/key/parser proof.
+External c-source-effect kernel-v2 freshly compiles75dependencies and audits608owned
+new declarations across8modules;5false claims rejected, exact frozen source unchanged.
+The discarded kernel-v1 text preflight mistook existing Action.admit constructor for
+a proof hole; no Lean run there. Corrected preflight and actual axiom audit are
+recorded, no failed compilation accepted. General laws derive exact source-head/body/
+activation/args from issue, preserve service history and owner writes on ack refusal,
+advance frontier once on valid ack, and enforce per-owner queue/attempt uniqueness.
+Checked-IR1→2→4 is generated from remaining source statements, not manually supplied
+request vectors. Same run checks G2-write/G1-refused-ack preserving2; wrong body/site/
+activation/args, duplicate ack, freshID-old-occurrence, failure after prior write.
+Counterevidence retained: raw evaluator without queue repeats write1→2→3; fabricated
+mathematical Reply can pass requester-only checks. A new OwnerSourceTrace separates
+issue/transfer/service/receive and derives inbox receipts from actual successful
+service. First provenance theorem compiles; it is after frozen75module cut and its
+fresh audit remains due. No parsed-Mir/Rust/network, full mixed pure/effect entry,
+i64-leaf, IFC/resource, auth carrier, crash/recovery or C-close claim.
+Plan records reuse correction; CURRENT_GOAL/RESUME/W4_CHECK/read ledger updated.
+Documentation/project-status/progress/tasks/samples_progress updates unnecessary at
+this external research subcut: same phase, blockers and active runnable corpus.
+Report remains2614; no Canon/THM/OBL/119 disposition or production delta; no subagents.
+Own identity checkpoint1b18c7c4 is committed/pushed/parity. Current research docs dirty;
+no new commit or push claimed. Next: rooted actual service/source origin, exact issue
+judgment/completeness, common-entry conservativity and labels/resources before D.
+
+2026-09-28T06:14:57.932137+00:00 — Owner stop boundary updated: continue through W4-C evidence/review/integration, then pause the existing whole-W4 goal and stop. Do not start W4-D or E. C is still active/incomplete; this does not accept C or complete the whole-W4 goal. No goal clear is required.
+
+2026-09-28T06:16:01.012508+00:00 — Trace delta is now fresh checked:75base hashes unchanged,3new modules,
+78total/720owned,8false controls rejected, standard logic only. Independent Eligible
+and ServiceMeaning prove source prepare relative completeness and service outcome
+classification. Rooted provenance links accepted reply to source-generated pending
+and successful service at reachable states. These existential statements do not yet
+encode ordering on a specified execution trace; retain that distinction before a
+same-execution causality claim. New frozen concrete review mir-w4-c-source-custody
+submitted06:02:46UTC,6ProLatest/max verified, still running; old corrective review
+never reviewed these new files. External files remain unadopted.
+Actual M6/M7 source-origin probe fails as expected: second b.hp=35 reports first
+a.hp=34 source location. Development compile typo is separate, not counted RED.
+Narrow internal correction selects one existing owner template by event/kind/full
+source span, in construction and generated-failure diagnostics. Generic selector
+soundness/completeness reuses accepted OperationIdentity module. Direct AST-span
+copy was smallest alternative but leaves budget metadata selected by event name.
+Expanded test includes both owner orders and identical text at different positions,
+effects/obligations/source-map/body correspondence. Focused suites pass; full
+semantic/runtime regression currently running. No ordered multi-statement, parser
+expansion, source auth/IFC/resource, snapshot or private network claim.
+
+2026-09-28T06:27:29.968002+00:00 — Owner changes stop boundary from C to D: finish C, then D implementation/correspondence validation/review/integration, pause existing whole-W4 goal and stop BEFORE E. Earlier C-stop note is superseded. C remains active/incomplete; no dependent D work until C gate.
+
+2026-09-28T06:38:36.105201+00:00 — Forward causal/flow strengthening and real source-origin regression.
+The final source-custody Oracle21837char answer is fully recovered/disposed. It
+correctly identifies that old Generated/Issued are reachable-state producibility,
+not prior events in a specified run; reply is a non-injective Write projection.
+New OwnerSourceCausality indexes actual existing transition equations by Event list,
+requires issue in the strict prior prefix before exact committed service, and retains
+ONE identical Write witness in service, current history and accepted reply. Joint
+trace→queue-root projection added. Fresh2module delta yields80closure/813owned/
+11false claims; standard logic only. Exact positive path and no-early-service proof
+pass. Raw malformed queue consumption, mutated evidence.version acceptance and
+caught-upG2/originalG1 permanent ack refusal are demonstrated as boundary/policy
+counterexamples, not executable authenticated exploits. Terminal failures/no failure
+reply remain researched policy, not adopted Mir defaults.
+Additional external OwnerPartialAbort reuses existing AbortFlow.Safe/check and raises
+completion pc exactly as that existing profile. General confinement/two-run actual
+outcome/conditional type/completion/retention laws now cover absent lookup. OwnerSourceFlow
+uses current checked tree/owner/capture distinction, composes locality with inherited
+sequence checker, preserves immutable arguments and actual scalar types, and connects
+one lowered assignment to existing evaluate success/failure. Public prefix before
+secret overflow/missing read, rejected secret-then-public, captured-secret and cross-owner
+negatives pass.83freshclosure/904owned across15newmodules/14false claims; these final2
+modules are NOT in current Oracle review and are not production/source-label adoption.
+New delta Oracle mir-w4-c-causality-origin submitted06:26:01UTC,19files116139bytes,
+questionSHA3533787f506e11a9b29a89f170eb337e107ca1de7c79d50380d7128888793204,
+manifestSHAf72e3035d3e79d05822c0152fb2fa5da1d60d9946ae410db190c0d781ee06ac9.
+Visible6ProLatest/max verified06:27:06UTC. Packet C-stop wording predates owner's
+latest D-stop instruction; technical review scope unchanged, no duplicate resend.
+Actual source-origin fix: focused checks and418runtime library pass. Broad command
+exit101 at4renderer tests; HEAD1b18 baseline same4 duplicate_effect_member failures.
+All semantics targets passed with observed exit0; tail runtime exit0 recollected after
+one vanished tool/absent process and missing final receipt. Original partial logs kept;
+no failed command or missing receipt relabelled GREEN. Source files restored exactly
+after baseline comparison. Current source-origin repair remains under review/uncommitted.
+Documentation/project-status/progress/tasks/samples_progress synchronized, task map
+rewritten as coherent current snapshot. Existing Abort/Address README draft-pending
+wording receives forward completed-review note. Same Report2614/semantic C; no
+Canon/THM/OBL/phase or119acceptance changes. No subagents or external notifications.
+Latest owner stop: finish C then D, pause before E. WholeW4 goal stays active now.
+
+2026-09-28T06:46:30.367872+00:00 — Source-origin and causality review final/disposed.
+Oracle17421chars completed06:37:21UTC, answerSHA6b23b295f3f03dd16c1043d82135a5d76eb9c93c68fc270ef28eb869464dd095.
+No concrete defect blocks the narrow fix; retain Execution beside CommittedIn,
+successful-next-receive scope, and parsed-key uniqueness assumption. Parser code
+inspection is not a no-panic proof. Corrected source metadata may change program
+identity for previously wrong multi-assignment artifacts; no old-image compatibility
+claim. Test claims narrowed to actual assertions. Existing renderer4 baseline
+failures retained; other collected checks and make docs pass. No full regression
+GREEN, C close, signature or Canon acceptance. PartialAbort/SourceFlow still
+unreviewed. Latest owner stop remains D complete, then pause before E.
+
+2026-09-28T06:53:21.358268+00:00 — Final source-origin docs check exit0 (tool25651), fmt/diff check exit0. Prepare own normal commit/push; ongoing separate partial-flow Oracle mir-w4-c-partial-flow submitted06:48:44UTC, questionSHA b64d93996c8d05b4abd1af903487777520cb1ea96edb71f463a7005c06213c1d. No C/D close. Root free8.4GiB, RAM available11GiB; existing target24GiB, no cleanup.
