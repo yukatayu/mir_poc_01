@@ -45661,5 +45661,133 @@
     "role": "W4-C final reviewed delta full read/authored",
     "status": "full",
     "at": "2026-09-28T03:49:18.901153+00:00"
+  },
+  {
+    "path": "crates/mir-runtime/src/sys5_i3_owner_admission_tests.rs",
+    "sha256": "4085e7b2a861a1b0d054098995add6fff9f95a17c62bcfb092cadae90c251a46",
+    "range": "3213-3319",
+    "status": "authored-and-reviewed-delta",
+    "role": "Retained-publisher post-use actual source/Core/carrier/owner effect/current reply control; earlier1-3212 full/delta records reused. Source no mutation except new test.",
+    "at": "2026-09-28T04:03:00.142447+00:00"
+  },
+  {
+    "path": "crates/mir-runtime/src/sys4_dispatch.rs",
+    "sha256": "89451670278f82f3b72bac0d81874eec432f0442ed591e880be30315ded45fbe",
+    "range": "6400-6505;15800-16050;17070-17140",
+    "role": "contextual reread actual outcome-to-receipt path; earlier full source read retained",
+    "status": "partial-reread",
+    "at": "2026-09-28T04:20:26.386434+00:00"
+  },
+  {
+    "path": "crates/mir-runtime/src/m8_runtime_owner_queue.rs",
+    "sha256": "b05a005d050289f80c0f3f7c4f206a2dc12407422d24147ea0beae8ecfa21d3a",
+    "range": "816-990;1240-1365;1410-1508",
+    "role": "contextual reread partial evaluator/read map and failure; earlier full source read retained",
+    "status": "partial-reread",
+    "at": "2026-09-28T04:20:26.386434+00:00"
+  },
+  {
+    "path": "crates/mir-semantics/src/surface_v0_pipeline.rs",
+    "sha256": "4c5fab2800b8b67d1db3086e20e73eb5831de625afbd414b267a669cdb1cc9b0",
+    "range": "815-985",
+    "role": "contextual reread same-owner candidate extraction",
+    "status": "partial-reread",
+    "at": "2026-09-28T04:20:26.386434+00:00"
+  },
+  {
+    "path": "crates/mir-ast/src/surface_v0.rs",
+    "sha256": "dad1ab1035afe3f98991952da2168ca39220ff54c548b7f274722be4e941a851",
+    "range": "920-1008;2045-2160;2330-2450",
+    "role": "contextual reread tree/list collection coherence; source inspection not mechanical Rust theorem",
+    "status": "partial-reread",
+    "at": "2026-09-28T04:20:26.386434+00:00"
+  },
+  {
+    "path": "crates/mir-runtime/src/sys4_dispatch_tests.rs",
+    "sha256": "3fc30efe5fb65c049aca03b1d25c4df3150ef73c18130f49e367352f600414e6",
+    "range": "1535-1600;2650-2720",
+    "role": "partial read existing exact-order expectations; not full test file",
+    "status": "partial-reread",
+    "at": "2026-09-28T04:20:26.386434+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-owner-partial/OwnerPartialState.lean",
+    "sha256": "b74491a71c6ea67497e6cab933a5040dbb919bc32e677a26eb2ee9276631e96c",
+    "range": "1-54",
+    "role": "external authored and kernel-checked candidate; no production adoption",
+    "status": "full",
+    "at": "2026-09-28T04:20:26.386434+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-owner-partial/OwnerReadReport.lean",
+    "sha256": "de7e8b63119473a78752028cba4a35bc67d2bfc3f058cd81da5d0ee3335549c5",
+    "range": "1-114",
+    "role": "external authored and kernel-checked candidate; no production adoption",
+    "status": "full",
+    "at": "2026-09-28T04:20:26.386434+00:00"
+  },
+  {
+    "path": "crates/mir-semantics/src/surface_v0_pipeline/private_snapshot.rs",
+    "sha256": "fa0990825166170b50cd161d08ac2bfc3c49a9317e8fd8ebe3e864e97c92a595",
+    "range": "400-580",
+    "status": "partial-reread",
+    "role": "checked restore recomputes tree facts before metadata acceptance",
+    "at": "2026-09-28T04:27:46.889490+00:00"
+  },
+  {
+    "path": "crates/mir-runtime/src/m8_runtime_local_cut.rs",
+    "sha256": "3d7b3fe5bbd6b64edcce4a7403a4f54165ab82ed18f4990da83f988143aba057",
+    "range": "2910-3035",
+    "status": "partial-reread",
+    "role": "plan replacement paths and patch/restore split",
+    "at": "2026-09-28T04:27:46.889490+00:00"
+  },
+  {
+    "path": "crates/mir-runtime/src/m8_runtime_patch.rs",
+    "sha256": "3e4438335481975c9c178d1f5c64acb643f1bb49d43b815d9830b3d4a243f47f",
+    "range": "625-813;865-925",
+    "status": "partial-reread",
+    "role": "patch pre-activation pending guard and clone restore plan installation",
+    "at": "2026-09-28T04:27:46.889490+00:00"
+  },
+  {
+    "path": "crates/mir-runtime/src/sys4_dispatch.rs",
+    "sha256": "89451670278f82f3b72bac0d81874eec432f0442ed591e880be30315ded45fbe",
+    "range": "3955-4145;12900-13025;13100-13170;14500-14580",
+    "status": "partial-reread",
+    "role": "current-context/checked-plan stability contextual reread",
+    "at": "2026-09-28T04:27:46.889490+00:00"
+  },
+  {
+    "path": "crates/mir-runtime/src/sys4_dispatch.rs",
+    "sha256": "3fa8e803ceef6e2c9ad37463315c66281fedfc1c09b37d4f530ecb3969e136b4",
+    "range": "15850-15885",
+    "role": "reviewed one successful read-receipt transformation; previous full read retained",
+    "status": "authored-and-reviewed-delta",
+    "at": "2026-09-28T04:39:15.656514+00:00"
+  },
+  {
+    "path": "crates/mir-runtime/src/sys5_i3_owner_admission_tests.rs",
+    "sha256": "4623cd7e2804b7cbe02da4986611ee760dedf06afd37ccf0517ebc816f8100fd",
+    "range": "3213-3461",
+    "role": "authored actual local source tests and paired publisher control; prior1-3212 retained",
+    "status": "authored-and-reviewed-delta",
+    "at": "2026-09-28T04:39:15.656514+00:00"
+  },
+  {
+    "path": "samples/lean/foundations/MirroreaProofFirstOwnerReadReport.lean",
+    "sha256": "de7e8b63119473a78752028cba4a35bc67d2bfc3f058cd81da5d0ee3335549c5",
+    "range": "full",
+    "role": "reviewed/checked exact standalone external model mirror",
+    "status": "full",
+    "at": "2026-09-28T04:39:15.656514+00:00"
+  },
+  {
+    "path": "samples/lean/foundations/MirroreaProofFirstOwnerReadReport.md",
+    "sha256": "50a87e113dc92103ec3625aa661e375c2a064af2545d50e600c94e63270edc94",
+    "range": "full",
+    "role": "authored bounded correspondence/TCB and reproduction",
+    "status": "full",
+    "at": "2026-09-28T04:39:15.656514+00:00"
   }
 ]

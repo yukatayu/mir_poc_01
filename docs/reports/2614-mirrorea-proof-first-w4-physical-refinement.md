@@ -3406,3 +3406,106 @@ phase or sample taxonomy change. Documentation/project-status/progress/tasks
 need no snapshot update at this component. Sole main; no subagents/notifications.
 OwnerPartial research/tests remain unadopted; next C phase correspondence reuses
 existing owner/source definitions. Own scoped commit/push follows this receipt.
+
+2026-09-28T04:05:15.476932+00:00 — C effect/reply distinction, post-use retained-publisher control.
+A real checked-source/M9/SYS4/M8 run writes, then a retained publisher synchronizes
+live validation observations and installs unrelated T revocation. Old G1 reply is
+refused without removing state/trace; fresh G2 S request produces another genuine
+write occurrence. This is a cfg(test) administrative constructor and local fabric,
+not decoded-child live update, source dynamic construction, network or alpha.
+It narrows the earlier prelaunch exact-prior failure, without rewriting that record.
+Removing only caller current-head comparison makes the new test fail at unexpected
+Success; exact SYS4 restored and test passes. First wrong-field compile probe excluded.
+I/c-admission-reuse/RETAINED_POST_USE, POST_USE_CURRENT_HEAD_MUTANT/RESTORED.
+Five additional general phase-model lemmas reuse CurrentUse.checkUse for the exact
+retained request and all stamped handles; earlier scalar-context blind spot retained
+as a countermodel. Fresh25module kernel/axiom audit passes,5finite guards and3false
+claims detected. Initial2compilefailures excluded. External/unreviewed/unadopted,
+no Rust correspondence, custody, resources or whole effect proof inferred.
+Reconsulted existing ReferenceSource async continuation and ReferenceExecution:
+rejected completion preserves waiting/actual source history, but value meaning is
+still pure Int invocation. Reuse these boundaries; no duplicate source scheduler.
+OwnerPartial and actual effect boundary Oracle mir-w4-c-owner-effect sent03:56UTC,
+29files295472bytes,6Pro/max verified, final pending. FullUse extension not in that
+frozen packet and requires review before reliance. Current single C goal unchanged.
+Plan/W4_CHECK/RESUME/read ledger synchronized. Documentation/project-status/progress/
+tasks/samples_progress need no stage/workflow change for this research subcut.
+No Canon or production-source change, no subagents/notifications; commit pending.
+
+2026-09-28T04:06:15.536337+00:00 — Current snapshot maintenance: Documentation/project-status/progress/tasks now mirror the committed observer repair and limited post-use publisher fact; current C blocker is unchanged in authority/scope. tasks full snapshot reread and rewritten, progress recent log/resources updated. Historical tests/countermodels remain dated records. This supersedes the preceding subcut no-update note, not its historical result. No new roadmap/phase or acceptance decision.
+
+2026-09-28T04:20:26.386434+00:00 — C actual owner read receipt counterexample and narrow repair gate.
+Ordinary literal hp=34 reaches actual M8/reply consumption but SYS4 reports a
+nonexistent hp=0 read. Independent non-target RHS atk+atk reports the same false
+hp row; actual zero atk read is real and coalesced. Both real assertion failures
+are retained, not compile errors (I/c-owner-partial/*RECEIPT_RED). Cause is
+read_int(...).unwrap_or_default over target+Core candidate list. Proposed minimal
+Some-only conversion preserves existing target-first order and physical dedup.
+Direct actual-map iteration is the smallest alternative; completeness of current
+candidate list remains an extraction premise, inspected to parser collection.
+Ten general read-representation/selection lemmas and five partial-state/domain
+lemmas freshly compile in seven-module trust0 build; owned audit standard axioms
+only; three false claims fail as intended. Initial proof tactic failures excluded.
+No source Rust compiler simulation, map authenticity, disclosure permission or
+whole source continuation inferred. Narrow review mir-w4-c-read-report sent
+04:15:19UTC, visible6Pro/max verified, wrapper91980/capture17230, final pending.
+Earlier owner-effect Oracle recovered25966chars and locally disposed. Strengthened
+actual post-use test retains pre-publication whole trace, fresh S succeeds, revoked
+T dispatch refuses with state unchanged (RETAINED_POST_USE_REVIEW exit0).
+Exact plan-at-use and actual dependent source continuation remain OPEN. Existing
+ReferenceSource asynchronous semantics will be reused; pure Int invocation cannot
+stand in for effectful unit acknowledgment. No new phase/Canon/public API adopted.
+Plan/read ledger/W4_CHECK synchronized. Current dashboards need no stage change;
+samples dashboard unchanged while new model is external. Production repair not
+applied; new RED tests intentionally uncommitted pending gate. Sole main, no
+subagents/external notifications; no active old owner-effect Oracle remains.
+
+2026-09-28T04:27:46.889490+00:00 — Forward strengthening of revoked-T control. The first added T
+dispatch-refusal assertion did not establish that T could pass the installed
+permit path: its source lacked S's owner budget. Paired same-path probe genuinely
+failed BEFORE revocation (RETAINED_POST_USE_PAIRED), so do not infer causality
+from the prior weak assertion. Current test uses the existing two-clock ordinary
+source, runs T/S before update and fresh S after, then requires T refusal through
+the SAME submit/carrier/stage/issue/serve function. Paired final passes
+(RETAINED_POST_USE_PAIRED_FINAL). Pre-publication whole trace and prior actual
+write retention remain asserted. This is local cfg(test) authority publication,
+not source continuation/network/production update support.
+Source inspection also traces read candidate coverage through parser parts/tree
+and SnapshotTypedExpression.into_checked's recomputed tree-facts equality. SYS4
+checked patch rejects owner Core change and pending carriers; ordinary M8 patch
+rejects pending owner queue. Raw M10 config probe uses separate local runtime;
+restore reinstalls saved owner execution. Exact whole-entry refinement remains
+OPEN, not inferred from this callsite inspection. New external strict-success
+coverage theorem uses inherited Expr (no new evaluator), one kernel-checked general
+lemma; successful strict expressions have all syntactic read leaves present.
+This is not a Rust parser theorem or sufficient condition for arithmetic success.
+
+2026-09-28T04:39:15.656514+00:00 — Bounded owner-read receipt repair after neutral review.
+Oracle mir-w4-c-read-report completed04:26:10UTC, full19178chars SHA
+439c072bae6ef27bbf4c4c2edf581f2c3563b668ad180ad4e0ad58ef88b5ff90,
+6Pro/max verified, final identity/stop checked; disposition saved. Minimal
+Some-only hunk applied, retaining resolved-key dedup and old surviving order.
+Actual literal/zero/non-target/alias controls plus prior two-key order regression
+pass. Three deliberate runtime mutations fail assertions: drop actual0, duplicate
+physical keys, replace actual values by0. Original missing-lookup0 behavior fails
+the retained RED. First no-dedup mutation syntax error excluded, corrected mutant
+fails semantically. Exact restored source3fa8e803ceef6e2c9ad37463315c66281fedfc1c09b37d4f530ecb3969e136b4;
+restored18 focused and all416 runtime library tests pass (97.95s, serial/offline).
+Subsequent test-only assertion verifies revoked T produces no additional write
+of the same value; focused paired test passes. No production delta after full run.
+Standalone mirrored OwnerReadReport10general/42owned audit passed fresh trust0,
+source/artifact hashes retained. Faithful membership alone permits duplicates;
+roundtrip and actual BTreeSet have their separate roles. Whole-map completeness
+still requires resolved candidate coverage, never checked only over emitted rows.
+No compiler theorem, source-label authentication, release, whole trace-fidelity or
+C completion claim. Read phase marker with empty set is not reinterpreted.
+New external OwnerCheckedArithmetic3general structural extraction statements
+compile without coverage premise, including missing inputs; strict-coverage1 and
+partial-state5 remain unadopted models, not Rust compiler/current-auth proofs.
+Plan/report/Documentation/project-status/progress/tasks/samples dashboard and Lean
+README/companion synchronized; stale README review-pending wording corrected by
+forward recovered-review fact. No Canon/THM/OBL/phase/sample-taxonomy change.
+make docs is still running; format/diff checks passed. Git checkpoint pending.
+Sole main; no subagents/notifications or live Oracle. Same C goal continues.
+
+2026-09-28T04:41:18.254623+00:00 — make docs whole exit0, formatting/diff checks0. All started test/Oracle/tool sessions collected; no live Oracle. Final post-full-run test-only no-extra-write assertion passes. Own bounded checkpoint commit/push follows; I/c-owner-partial/GIT_CHECKPOINT.json will bind commit/remote parity. C continues with actual source/effect consumer, not a phase close.

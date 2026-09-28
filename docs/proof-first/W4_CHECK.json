@@ -43394,5 +43394,271 @@
       },
       "final_tests": "12 integration,1 concrete-class,1 focused M10 pass; original full412 library regression unchanged production; two additional runtime-failing mutants; source/Cargo/test manifests unchanged during each command"
     }
+  },
+  "c_retained_publisher_post_use_20260928": {
+    "at": "2026-09-28T04:03:00.142447+00:00",
+    "status": "actual local positive checked, review pending; no decoded-child update protocol or W4 closure",
+    "head": "cdb8d2a9ecb686d0c9a7cb4c694b5e0a427ba1cd",
+    "rust": {
+      "at": "2026-09-28T03:53:55.991118+00:00",
+      "command": [
+        "cargo",
+        "test",
+        "--locked",
+        "--offline",
+        "-j",
+        "1",
+        "-p",
+        "mir-runtime",
+        "--lib",
+        "proof_first_retained_publisher_post_use_update",
+        "--",
+        "--test-threads=1"
+      ],
+      "exit": 0,
+      "source": {
+        "crates/mir-runtime/src/sys4_dispatch.rs": "89451670278f82f3b72bac0d81874eec432f0442ed591e880be30315ded45fbe",
+        "crates/mir-runtime/src/sys5_i3_owner_admission_tests.rs": "4085e7b2a861a1b0d054098995add6fff9f95a17c62bcfb092cadae90c251a46"
+      },
+      "unchanged": true,
+      "log_sha256": "9bcb9c3feda001394bb7a67ed217e3b2666da6cb74726a641edc54728df39ff8"
+    },
+    "meaning": "Real owner write, full local retained M9 publisher sync to current use observations, unrelated T revocation installs; immutable G1 reply then refuses without erasing actual state/trace; fresh G2 S request writes distinct occurrence. Administrative constructor cfg(test); no source dynamic-construction or network claim.",
+    "oracle": {
+      "at": "2026-09-28T03:56:03.489234+00:00",
+      "session": "mir-w4-c-owner-effect",
+      "pid": 11756,
+      "question_sha256": "7ab60c0974f0da4dc4897301b67a4597954a14bbc5c4bd807c2073b88fc3f3b1",
+      "manifest_sha256": "0d35788a0e0a89b04c529d515f1f9952167f8d5e2b4d0be576aa610358227949",
+      "display": ":0",
+      "model_evidence": "select strategy; require actual6Pro/max selection evidence on completed conversation",
+      "next_status_after": "2026-09-28T03:59:03.489234+00:00",
+      "scope": "single read-only frozen current implementation review; no outer deadline or paid fallback"
+    },
+    "full_use_candidate": {
+      "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-admission-reuse/MirroreaProofFirstAdmissionPhases.lean",
+      "sha256": "48be33304d0aba0f79eb0fff03d7655e2e6adec70d53185998ba291663269642",
+      "fresh_audit": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-admission-reuse/full-use-kernel/RESULT.json",
+      "fresh_audit_sha256": "ae781f65710a850c96dcaef55e808bac93602d57bc0c95bdedd6f26d6d338e3f",
+      "status": "external unreviewed/unadopted; five new general lemmas, fresh25module audit standardaxioms only;5finite controls;3false claims fail decide; initial2compile failures excluded",
+      "premise": "exact retained immutable UseRequest supplied; its custody/authentic origin is not established by this pure checker. No resource/peer/backend/source-effect simulation."
+    },
+    "mutation": {
+      "POST_USE_CURRENT_HEAD_MUTANT": {
+        "at": "2026-09-28T04:01:18.301433+00:00",
+        "command": [
+          "cargo",
+          "test",
+          "--locked",
+          "--offline",
+          "-j",
+          "1",
+          "-p",
+          "mir-runtime",
+          "--lib",
+          "proof_first_retained_publisher_post_use_update",
+          "--",
+          "--test-threads=1"
+        ],
+        "exit": 101,
+        "source": {
+          "crates/mir-runtime/src/sys4_dispatch.rs": "7d91c3a62fa6065e1100ea8c040ed1ef742acad66ffaa76b3330e5fb7313a9a6",
+          "crates/mir-runtime/src/sys5_i3_owner_admission_tests.rs": "4085e7b2a861a1b0d054098995add6fff9f95a17c62bcfb092cadae90c251a46"
+        },
+        "unchanged": true,
+        "log_sha256": "21c4293b7ff74b43cfe4aca02943fffcc1ff095792c093c88cdad733e46ac814"
+      },
+      "POST_USE_MUTANT_RESTORE": {
+        "restored": true,
+        "sha256": "89451670278f82f3b72bac0d81874eec432f0442ed591e880be30315ded45fbe"
+      },
+      "POST_USE_RESTORED": {
+        "at": "2026-09-28T04:01:26.907272+00:00",
+        "command": [
+          "cargo",
+          "test",
+          "--locked",
+          "--offline",
+          "-j",
+          "1",
+          "-p",
+          "mir-runtime",
+          "--lib",
+          "proof_first_retained_publisher_post_use_update",
+          "--",
+          "--test-threads=1"
+        ],
+        "exit": 0,
+        "source": {
+          "crates/mir-runtime/src/sys4_dispatch.rs": "89451670278f82f3b72bac0d81874eec432f0442ed591e880be30315ded45fbe",
+          "crates/mir-runtime/src/sys5_i3_owner_admission_tests.rs": "4085e7b2a861a1b0d054098995add6fff9f95a17c62bcfb092cadae90c251a46"
+        },
+        "unchanged": true,
+        "log_sha256": "2f3a2e4dc3ee1d89939e68b1880df4d40ffbf7354e1304a9c4f88376aabd7d93"
+      }
+    },
+    "reference_continuation_reuse": "Existing ReferenceSource.complete/controlInput/authorityHead and ReferenceExecution classified pending were reconsulted. Asynchronous source machinery already exists, preserves pending and source writes on rejection, but still executes pure Int ticket. Reuse it rather than claim all W3 source is synchronous or add duplicate scheduler."
+  },
+  "c_owner_read_receipt_20260928": {
+    "at": "2026-09-28T04:39:15.656514+00:00",
+    "status": "bounded internal correction checked; C source/effect goal active; W4 incomplete",
+    "red_evidence": [
+      "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-owner-partial/LITERAL_RECEIPT_RED.json",
+      "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-owner-partial/ZERO_READ_RECEIPT_RED.json"
+    ],
+    "defect": "SYS4 emits default0 target read even when successful M8 actual read map lacks target; literal and non-target RHS reproduce",
+    "proposal": "retain Core candidate order/physical-key dedup, include only actual Some lookup; completeness assumes checked candidate coverage",
+    "kernel": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-owner-partial/extended-kernel/RESULT.json",
+    "proof_scope": "ten general supplied-read representation/selection lemmas; five present-cell/domain state lemmas. Neither proves compiler extraction, whole state history, source continuation, auth or IFC. Three false controls detected; initial tactic failures excluded.",
+    "oracle": {
+      "at": "2026-09-28T04:15:19.667142+00:00",
+      "session": "mir-w4-c-read-report",
+      "pid": 13748,
+      "question_sha256": "4b680308ba2157f5e1b08331f54646aeae586a4a3d819e8bc24c3b240a6336dc",
+      "manifest_sha256": "dd43fd737992863ed8cbb3f5c4352b1b49fe131eca0076a54c4022170499a4dd",
+      "display": ":0",
+      "model_evidence": "select strategy; require actual6Pro/max selection evidence on completed conversation",
+      "next_status_after": "2026-09-28T04:18:19.667142+00:00",
+      "scope": "single read-only frozen current implementation review; no outer deadline or paid fallback"
+    },
+    "oracle_tools": {
+      "wrapper": 91980,
+      "capture": 17230
+    },
+    "owner_effect_review": {
+      "at": "2026-09-28T04:17:58.362734+00:00",
+      "review": {
+        "session": "mir-w4-c-owner-effect",
+        "at": "2026-09-28T04:07:11.266Z",
+        "completedAt": "2026-09-28T04:07:43.237Z",
+        "identity": true,
+        "stop": false,
+        "chars": 25966,
+        "sha256": "08a4fb6c478247414977b3ebe4930f84341169ebb8397cb3a1df2623fffdefe1",
+        "blocks": 1
+      },
+      "advisory_only": true,
+      "findings": [
+        {
+          "finding": "six partial evaluator lemmas consistent but outcome equality is not state/history simulation",
+          "disposition": "retained scope; new external OwnerPartialState proves present-cell completion and success/failure domain, compiled trust0; unreviewed/unadopted"
+        },
+        {
+          "finding": "missing/invalid parameters, intermediate overflow, physical alias framing, entity admission differ",
+          "disposition": "checked actual evaluator and tests; remain explicit extraction/admission premises; omitted index fallback separately tracked"
+        },
+        {
+          "finding": "runtime failure dequeues and records diagnostics; no new write is not no runtime effect",
+          "disposition": "adopted limited wording; no rollback of queue/history"
+        },
+        {
+          "finding": "service re-looks up plan by name; exact plan binding needs all update routes audit",
+          "disposition": "OPEN current C obligation; checked source alone insufficient"
+        },
+        {
+          "finding": "reuse W2 owner assignment with immutable pending, owner history, caller continuation separately",
+          "disposition": "accepted as provisional technical direction, not integrated source theorem; existing ReferenceSource async path already exists and must be reused; that path omitted from frozen packet"
+        },
+        {
+          "finding": "post-use test only pure reply validation, no actual dependent source continuation",
+          "disposition": "OPEN direct consumer mechanism, no claim of source continuation or decoded-child live update"
+        },
+        {
+          "finding": "assert pre-publication history and revoked T refusal",
+          "disposition": "actual test strengthened; RETAINED_POST_USE_REVIEW exit0; exact whole fabric trace retained across publication, fresh S passes, T actual dispatch refuses and semantic state unchanged"
+        },
+        {
+          "finding": "additional nonalias/index fallback/evaluation failure historical-prefix controls",
+          "disposition": "tracked for narrow owner correspondence before adoption; current prior positives not counted as these"
+        },
+        {
+          "finding": "relax/rebase currentness or new visible retry/release policy reserved",
+          "disposition": "none adopted; no original pending replacement, fabricated Int result, or erased write"
+        }
+      ],
+      "not_claimed": "whole Rust simulation, authenticated inputs, source IFC, network/recovery or W4 completion; Oracle did not execute or sign acceptance"
+    },
+    "paired_revocation_correction": {
+      "at": "2026-09-28T04:27:46.889490+00:00",
+      "weak_initial_assertion": "T dispatch refusal alone did not establish permit feasibility before revoke",
+      "actual_counterexample": "RETAINED_POST_USE_PAIRED fails at initial unbudgeted T permit path",
+      "corrected": "two_owner_two_clock_source; T/S same permitted path succeeds before revoke, S succeeds after, T same path refuses after",
+      "evidence": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-admission-reuse/RETAINED_POST_USE_PAIRED_FINAL.json"
+    },
+    "oracle_final": {
+      "at": "2026-09-28T04:37:51.474668+00:00",
+      "review": {
+        "session": "mir-w4-c-read-report",
+        "at": "2026-09-28T04:25:38.620Z",
+        "completedAt": "2026-09-28T04:26:10.568Z",
+        "identity": true,
+        "stop": false,
+        "chars": 19178,
+        "sha256": "439c072bae6ef27bbf4c4c2edf581f2c3563b668ad180ad4e0ad58ef88b5ff90",
+        "blocks": 1
+      },
+      "advisory_only": true,
+      "disposition": [
+        {
+          "finding": "A corrects fabricated absent-lookup rows; preserves actual zero/value/order; no B necessity shown",
+          "action": "apply exact planned Some-only hunk plus explanatory comment; related18pass; full416runtimepass; no other production delta"
+        },
+        {
+          "finding": "full coverage requires actual lookup domain included in materialized Core candidates",
+          "action": "retain conditional theorem; trace parser parts to tree/list, snapshot tree-facts equality, same key resolution and checked-patch owner preservation. Source inspection not general compiler proof"
+        },
+        {
+          "finding": "Faithful permits duplicate/reordered rows; selected does not deduplicate inputs",
+          "action": "companion distinguishes membership relation from report roundtrip and actual resolved-key BTreeSet; no generic Nodup claim"
+        },
+        {
+          "finding": "zero/non-target, alias/repeated, order/nonzero, exact write regression gaps",
+          "action": "actual normal-source tests literal exact34 write/state, non-target actual0 read, three aliased RHS reads -> one34 row/write102; existing two-key hp100/atk10 ->hp90 vector/order tests pass in full416"
+        },
+        {
+          "finding": "negative controls must fail semantically",
+          "action": "original default0 RED, actual drop-zero, no-dedup, zero-values mutants fail assertions; exact restoration18pass. First no-dedup mutant had syntax error and is explicitly excluded"
+        },
+        {
+          "finding": "parameter-only and overflow-after-read no successful receipt/candidate-coverage countermodel",
+          "action": "prior actual M8 parameter/overflow local tests retained; current patch changes successful receipt conversion only, not universal source refinement. No parameter-only receipt or whole failed-read history coverage claim"
+        },
+        {
+          "finding": "read phase marker with empty set may be ambiguous",
+          "action": "not reclassified; receipt-row repair does not certify all R06/R12 trace or observer fields"
+        },
+        {
+          "finding": "raw map/locus are supplied, not authenticated or authorized",
+          "action": "internal report only; no source IFC, key authority, disclosure or network claim"
+        },
+        {
+          "finding": "B wider repair reserved to owner",
+          "action": "not adopted as blanket new authority restriction; user already delegated reversible internal technical choices. A chosen on bounded evidence; L0/privacy/public operations remain reserved"
+        }
+      ],
+      "execution": "Oracle did not execute tests or inspect omitted full bodies; sole main checked local evidence. No signature/Canon acceptance."
+    },
+    "mirror_kernel": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-owner-partial/read-report-mirror-kernel/RESULT.json",
+    "runtime_full": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-owner-partial/READ_RECEIPT_FULL_RUNTIME.json",
+    "mutations": [
+      "original LITERAL_RECEIPT_RED",
+      "READ_RECEIPT_DROP_ZERO",
+      "READ_RECEIPT_NO_DEDUP_FINAL",
+      "READ_RECEIPT_ZERO_VALUES"
+    ],
+    "excluded": "READ_RECEIPT_NO_DEDUP syntax error; initial proof tactic failures; initial paired T lacked budget and did not establish revoke causality",
+    "restore": {
+      "at": "2026-09-28T04:33:46.159558+00:00",
+      "restored": true,
+      "sha256": "3fa8e803ceef6e2c9ad37463315c66281fedfc1c09b37d4f530ecb3969e136b4"
+    },
+    "post_full_test_only_delta": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-admission-reuse/RETAINED_POST_USE_NO_EXTRA_WRITE.json",
+    "docs_validation": {
+      "exit": 0,
+      "log": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-owner-partial/READ_RECEIPT_DOCS.log",
+      "sha256": "2a31cd1458be17326242567ff65f1836d6e66b1fc64aba4bfee461c55c4b8bcd",
+      "format_exit": 0,
+      "diff_check_exit": 0
+    }
   }
 }

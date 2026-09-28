@@ -51,8 +51,8 @@ Plan250 の I3-4 resume、正式 THM/OBL の更新、production / α受理では
 - [Producer flow](foundations/MirroreaProofFirstProducerFlow.md): 型付き代入・分岐の二実行保証と実際の数学的書込み列。source/runtime 接続は未証明。
 - [General labels](foundations/MirroreaProofFirstGeneralLabels.md): 非全順序のlabel理論と有限checkerの一般証明。policy採用・実行時間上限は別義務。
 - [Fallible assignment](foundations/MirroreaProofFirstFallibleFlow.md): 失敗を含む単一代入、条件付き型・範囲保存と二実行保証。
-- [Aborting sequences](foundations/MirroreaProofFirstAbortFlow.md): 失敗による後続依存と完了 bit の分離。追加候補の Oracle review は未完了（旧jobはChromeエラー）。
-- [Reference resolution](foundations/MirroreaProofFirstAddressFlow.md): 別名を許す固定参照解決と評価・checker・実行列の対応。同じ review cut。
+- [Aborting sequences](foundations/MirroreaProofFirstAbortFlow.md): 失敗による後続依存と完了 bit の分離。旧jobのChromeエラー後、有限cutのOracle reviewを回収・処置済み。全source/Rust対応は別義務。
+- [Reference resolution](foundations/MirroreaProofFirstAddressFlow.md): 別名を許す固定参照解決と評価・checker・実行列の対応。同じ有限cutのreviewを回収・処置済み。
 - [Passive observation](foundations/MirroreaProofFirstPassive.md): 有限消去と、別の二実行保証。限定された数学的範囲のreview済み。
 - [W2 contracts/resources/functions](foundations/MirroreaProofFirstContracts.md): 資源の分割・移譲、局所契約からの値の輸出、純粋な高階関数・有限反復と実行対応。研究候補であり、選択した有限な構成のOracle指摘に対応済み。既存Mirへの接続は未完了。
 
@@ -94,7 +94,7 @@ names = ["Support", "CurrentUse", "CurrentUseReview", "TrackedValidation",
          "FunctionContractBridge", "ModuleContractBoundary", "OwnerAssignment",
          "ProfileGuarantees", "HandleValues", "PureHandleFunctions",
          "ResourceComputations", "ResourceComputationScopeControls",
-         "SharedAuthorityUse", "ObserverLabels"]
+         "SharedAuthorityUse", "ObserverLabels", "OwnerReadReport"]
 work = pathlib.Path(tempfile.mkdtemp(prefix="mir-proof-first-",
                                   dir=os.environ.get("PROOF_WORKDIR")))
 print(work, flush=True)
@@ -187,3 +187,8 @@ W4-B 206-module manifest には追加しない。実networkやW4-C全体の完�
 W4-Cの供給ラベル保持と一権限での出力許可は
 [ObserverLabels](foundations/MirroreaProofFirstObserverLabels.md) に記録します。
 元ラベルの真正性・現行権限・二実行の機密性は別義務です。
+
+W4-Cの実測読取り記録から応答への限定変換は
+[OwnerReadReport](foundations/MirroreaProofFirstOwnerReadReport.md) に記録します。
+存在しない読取りの0補完を除き、実際の0は保持します。全キーの網羅性は
+checked Coreと実測mapの対応が前提であり、認可・機密性の証明ではありません。

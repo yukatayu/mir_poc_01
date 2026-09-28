@@ -15859,14 +15859,18 @@ impl LocalFabric {
                 for read in std::iter::once(core.target()).chain(core.same_owner_reads().iter()) {
                     let key = m8_key_for_read(read, arguments);
                     if seen_reads.insert(key.clone()) {
-                        let value = execution.outcome.read_int(&key).unwrap_or_default();
-                        reads.push(RuntimeStoreRead::int(
-                            locus,
-                            key.namespace(),
-                            key.index(),
-                            key.field(),
-                            value,
-                        ));
+                        // Core candidates include the assignment target even
+                        // when the RHS did not read it. Only actual successful
+                        // M8 lookups are read evidence; absence is not zero.
+                        if let Some(value) = execution.outcome.read_int(&key) {
+                            reads.push(RuntimeStoreRead::int(
+                                locus,
+                                key.namespace(),
+                                key.index(),
+                                key.field(),
+                                value,
+                            ));
+                        }
                     }
                 }
                 let target_key = m8_key_for_read(core.target(), arguments);

@@ -1,6 +1,6 @@
 # Current Task Map (LAB)
 
-最終更新: 2026-09-28 08:54 JST
+最終更新: 2026-09-28 13:39 JST
 
 **Canon notice:** `mirrorea_canon/` is normative. Everything outside
 `mirrorea_canon/` is LAB; if LAB conflicts with canon, canon wins. This snapshot
@@ -25,7 +25,7 @@ W4-Aの保存済み証拠は通常3profile/23control、確定失敗4/14、結果
 
 Exact evidence: `docs/proof-first/RESUME.md`, `docs/proof-first/CURRENT_GOAL.md`, `docs/proof-first/W4_CHECK.json`, Report2614. W4-B検証結果: 206依存sourceを原本と同一bytesで保存し、fresh Lean検査と公理監査を完了しました。既存runnerのV2モデル278command・236module/22215所有宣言監査、native準備235command、修正後の実process検査68command（15profile/53拒否control）が全体exit0で完走しました。段階ごとに9169/9973/34658入力束縛と実ログを照合しています。保存証拠と現行sourceの役割分離、別名参照・期待値衝突・途中失敗の反例も検査済みです。コード・証明・検査手順は9d86052dでcommit/push・remote一致を確認済みです。復旧後の同一資料による最終境界Oracle reviewを回収し、主担当が証拠と照合しました。Bは限定LAB統合候補として完了、Cが現在地です。D/Eは依存待ちです。Oracle回答は証明・署名済み受理ではありません。一般証明は選択モデルについて、実processは特権private-pipeの有限証拠についてであり、実network・認証・秘密・復旧の保証へ広げません。
 
-W4-Cでは、共有authority floorの失効後に古いcacheからowner書込みできる実反例を修正しました。使用終了まで同じguardを保持する限定修正を一般Lean証明・Oracle指摘と照合し、対象11検査と既存を含む409件のRust library検査が通過しました。書込み後の応答喪失は「書込みなし」と区別します。C全体は未完了で、次はstaged request／予約／W3 ticketの対応と残るentry条件です。実network・秘密・復旧の保証ではありません。
+W4-Cでは、共有authority floorの失効後の古いcache使用、供給された観測ラベルの弱化、実行していない読取りを0として記録する経路を、それぞれ一般Lean命題・実反例・Oracleレビューに基づいて限定修正しました。最新の読取り記録修正は関連18検査とruntime library416件の回帰が通過し、実際の0・別名・値改変を識別する変異検査も通過しました。ownerの実書込みと呼出し側の結果受理は別に検査し、保持した発行主体による使用後の失効は、失効前後の同じ許可経路で対照を確認しました。この管理入口はテスト用で、子processの実更新機能ではありません。C全体は未完了です。次は既存の非同期source継続とowner代入の接続、全entry・現在の認可・実namespace/custody・資源の条件です。秘密の非干渉、復旧、W4全体の実network接続の保証には広げません。
 
 ## ordered self-driven packages
 

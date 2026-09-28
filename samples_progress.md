@@ -32,6 +32,7 @@ W4-B検証結果: 206依存sourceを原本と同一bytesで保存し、fresh Lea
 | W4-C evidence | Reproduction | Remaining boundary |
 |---|---|---|
 | Supplied observer label preservation | `samples/lean/foundations/MirroreaProofFirstObserverLabels.lean`; external-copy command in `samples/lean/README.md`; `cargo test --locked --offline -j 1 -p mir-runtime --test m8_runtime_observer -- --test-threads=1` | Ten general lemmas and finite class instance checked; local12 tests/restored mutants verified. Final narrow review disposed; authentic source labels/current authority/physical confidentiality not established. |
+| Actual owner read receipt | `samples/lean/foundations/MirroreaProofFirstOwnerReadReport.lean`; external-copy command in `samples/lean/README.md`; `cargo test --locked --offline -j 1 -p mir-runtime --lib proof_first_ -- --test-threads=1` | Supplied-map transformation kernel checked; literal/zero/alias controls and actual mutations discriminate fabricated, omitted, duplicated or changed reads. Completeness requires candidate coverage; source/compiler/auth/privacy correspondence remains open. |
 
 | W3 evidence | Reproduction | Remaining boundary |
 |---|---|---|

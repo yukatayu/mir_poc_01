@@ -36,3 +36,12 @@ No W3 pure Int-result/unit-ack conflation, source continuation or IFC claim.
 Next C: actual entry/current-label/authority composition and phase correspondence.
 
 2026-09-28T03:49:18.901153+00:00 — Supplied observer label-to-row repair closes its bounded local defect: ten general lemmas,788owned audit,12 actual tests,4 detected mutants and final advisory review. Actual source labels/current release and overall R09 remain open; C phase correspondence remains the same active goal.
+
+2026-09-28T04:27:46.889490+00:00 — Same C goal: retained publisher can install after synchronizing
+actual use observations; old prelaunch exact-prior failure remains historical.
+Paired two-clock T/S source control now verifies T before/after revoke through
+the same permitted path (T succeeds then refuses), fresh S still succeeds, and
+pre-publication history stays intact. Source continuation remains OPEN. Actual
+receipt fabrication found: literal/no-target RHS invents target0 read. Narrow
+Some-only repair is proof-checked and awaiting current Oracle before application;
+full source/Rust refinement and current authorization of observation not inferred.

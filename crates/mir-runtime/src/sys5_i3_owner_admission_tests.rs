@@ -3210,3 +3210,252 @@ fn proof_first_i3_prelaunch_lifecycle_stimulus_rejects_after_owner_use() {
         "receiving the historical reply does not execute another owner write"
     );
 }
+
+// W4-C investigation of the retained publisher, not a decoded child-image update
+// protocol. The administrative revocation constructor is cfg(test); it still
+// consumes real M9 publisher state and the normal live-floor installation gate.
+#[test]
+fn proof_first_retained_publisher_post_use_update_preserves_historical_owner_effect() {
+    use crate::sys3_projection::BackendProfile;
+    use crate::sys4_dispatch::{
+        LocalFabric, SourceAction, Sys4DiagnosticKind, Sys4DispatchDiagnostics, Sys4TraceKind,
+    };
+
+    let project = build_project(Sys5SourceInput::inline(
+        "tests/inline/proof_first_retained_publisher_post_use.mir",
+        two_owner_two_clock_source(),
+    ))
+    .unwrap();
+    let prepared = project.prepare_canonical_local_st_admission().unwrap();
+    let (program, admission) = prepared.into_parts_for_sys4();
+    let mut fabric = LocalFabric::bootstrap(program, admission, BackendProfile::St).unwrap();
+    let runtime_ref = "proof-first-retained-publisher-local-gate";
+    fabric.install_i3_owner_admission_gate(runtime_ref).unwrap();
+    let serve = |fabric: &mut LocalFabric, operation: &str| -> Result<_, Sys4DispatchDiagnostics> {
+        let submitted = fabric.submit_source_action(SourceAction::owner_operation(operation))?;
+        let carrier = fabric.take_outbound_process_carrier("A", submitted.envelope_id())?;
+        let pending = fabric.i3_pending_owner_request_binding(&carrier)?;
+        let semantic = pending.semantic_request_identity_ref(
+            &fabric.projected_artifact_identity().stable_key(),
+            "proof-first-local-projection",
+            "proof-first-local-cohort",
+        );
+        let bytes = serde_json::to_vec(&carrier.i3_private_process_snapshot().unwrap()).unwrap();
+        let issuance = fabric.stage_i3_owner_admission_issuance(
+            &pending,
+            &carrier,
+            &semantic,
+            runtime_ref,
+            bytes.clone(),
+        )?;
+        let permit = fabric.issue_i3_owner_admission_permit(
+            issuance,
+            &pending,
+            &carrier,
+            &semantic,
+            runtime_ref,
+            bytes.clone(),
+        )?;
+        let step = fabric.accept_i3_owner_request_with_permit(
+            carrier,
+            &pending,
+            &semantic,
+            runtime_ref,
+            bytes,
+            permit,
+        )?;
+        let write = step.actual_owner_write_occurrence_id().unwrap().to_string();
+        let reply = fabric
+            .take_outbound_process_carrier(submitted.target_locus(), step.reply_envelope_id())?;
+        Ok((pending, reply, write))
+    };
+    let mut writes = Vec::new();
+    for (iteration, operation) in [SECOND_OPERATION, FIRST_OPERATION, FIRST_OPERATION]
+        .iter()
+        .enumerate()
+    {
+        let (pending, reply, write) = serve(&mut fabric, operation).unwrap();
+        writes.push(write);
+        assert!(
+            fabric
+                .validate_i3_pending_owner_reply(&pending, &reply)
+                .is_ok()
+        );
+        if iteration == 1 {
+            let after_write = fabric.semantic_snapshot();
+            let history_before_publication = fabric.trace().clone();
+            let old_generation = fabric.i3_owner_admission_generation_ref().to_string();
+            let transition = fabric
+                .m9_authority_lifecycle_mut()
+                .revoke_owner_capability(SECOND_OPERATION, "T")
+                .expect("retained publisher synchronizes actual validation observations after use");
+            fabric
+                .apply_admitted_authority_lifecycle(transition)
+                .expect(
+                    "a genuinely current post-use successor installs through the normal floor gate",
+                );
+            assert_ne!(fabric.i3_owner_admission_generation_ref(), old_generation);
+            assert!(fabric.semantic_snapshot().same_state(&after_write));
+            assert_eq!(
+                fabric.trace(),
+                &history_before_publication,
+                "publishing the successor preserves the already recorded owner-write history"
+            );
+            let trace = fabric.trace().clone();
+            let rejection = fabric
+                .validate_i3_pending_owner_reply(&pending, &reply)
+                .unwrap_err();
+            assert_eq!(
+                rejection.primary().kind(),
+                Sys4DiagnosticKind::CarrierProvenanceMismatch
+            );
+            assert!(fabric.semantic_snapshot().same_state(&after_write));
+            assert_eq!(
+                fabric.trace(),
+                &trace,
+                "reply refusal cannot erase the owner write"
+            );
+        }
+    }
+    assert_ne!(
+        writes[1], writes[2],
+        "the fresh G2 request has its own actual owner write"
+    );
+    let before_revoked_use = fabric.semantic_snapshot();
+    let owner_writes = |fabric: &LocalFabric| {
+        fabric
+            .trace()
+            .canonical_correspondence_excluding_debug_worker_tokens()
+            .into_iter()
+            .filter(|(_, kind, _)| *kind == Sys4TraceKind::M8OwnerWrite)
+            .collect::<Vec<_>>()
+    };
+    let writes_before_refusal = owner_writes(&fabric);
+    let refused = serve(&mut fabric, SECOND_OPERATION)
+        .expect_err("the same full permitted T path succeeds before revoke and refuses after it");
+    assert_eq!(
+        refused.primary().kind(),
+        Sys4DiagnosticKind::M8ExecutionRejected
+    );
+    assert!(fabric.semantic_snapshot().same_state(&before_revoked_use));
+    assert_eq!(
+        owner_writes(&fabric),
+        writes_before_refusal,
+        "a refusal cannot hide another write of the same value"
+    );
+}
+
+#[test]
+fn proof_first_literal_assignment_receipt_has_no_invented_target_read() {
+    use crate::sys3_projection::BackendProfile;
+    use crate::sys4_dispatch::{LocalFabric, SourceAction};
+
+    let project = build_project(Sys5SourceInput::inline(
+        "tests/inline/proof_first_literal_read_receipt.mir",
+        owner_admission_budget_source(2),
+    ))
+    .unwrap();
+    let prepared = project.prepare_canonical_local_st_admission().unwrap();
+    let (program, admission) = prepared.into_parts_for_sys4();
+    let mut fabric = LocalFabric::bootstrap(program, admission, BackendProfile::St).unwrap();
+    let receipt = fabric
+        .dispatch_source_action(SourceAction::owner_operation("refresh_avatar_hp"))
+        .unwrap();
+    let report = receipt.owner_rmw_report().unwrap();
+    assert!(
+        report.m8_reads().is_empty(),
+        "the checked literal RHS reads no cell; the receipt must not invent a target read: {:?}",
+        report.m8_reads()
+    );
+    assert_eq!(report.m8_writes().len(), 1);
+    assert!(report.has_exact_int_write("WorldAuthority", "avatar", "self", "hp", 34));
+    assert_eq!(
+        fabric
+            .semantic_snapshot()
+            .int("WorldAuthority", "avatar", "self", "hp"),
+        Some(34)
+    );
+}
+
+#[test]
+fn proof_first_assignment_receipt_retains_actual_zero_read_once() {
+    use crate::sys3_projection::BackendProfile;
+    use crate::sys4_dispatch::{LocalFabric, RuntimeStoreRead, SourceAction};
+
+    let source = owner_admission_budget_source(2)
+        .replace("hp: Int", "hp: Int\n  atk: Int")
+        .replace(
+            "  when refresh_avatar_hp()",
+            "  when init_atk() fails (StaleMembership, MissingCapability, MissingWitness, VisibilityDenied, RouteUnavailable, DeadlineExpired) {\n    at WorldAuthority {\n      avatar[self].atk = 0\n    }\n  }\n\n  when copy_atk() fails (StaleMembership, MissingCapability, MissingWitness, VisibilityDenied, RouteUnavailable, DeadlineExpired) {\n    at WorldAuthority {\n      avatar[self].hp = avatar[self].atk + avatar[self].atk\n    }\n  }\n\n  when refresh_avatar_hp()",
+        );
+    let project = build_project(Sys5SourceInput::inline(
+        "tests/inline/proof_first_zero_read_receipt.mir",
+        source,
+    ))
+    .unwrap();
+    let prepared = project.prepare_canonical_local_st_admission().unwrap();
+    let (program, admission) = prepared.into_parts_for_sys4();
+    let mut fabric = LocalFabric::bootstrap(program, admission, BackendProfile::St).unwrap();
+    for operation in ["refresh_avatar_hp", "init_atk"] {
+        fabric
+            .dispatch_source_action(SourceAction::owner_operation(operation))
+            .unwrap();
+    }
+    let receipt = fabric
+        .dispatch_source_action(SourceAction::owner_operation("copy_atk"))
+        .unwrap();
+    let report = receipt.owner_rmw_report().unwrap();
+    assert_eq!(
+        report.m8_reads(),
+        vec![RuntimeStoreRead::int(
+            "WorldAuthority",
+            "avatar",
+            "self",
+            "atk",
+            0
+        )],
+        "zero is a genuine value; repeated physical reads are one map entry, and hp is not read"
+    );
+    assert!(report.has_exact_int_write("WorldAuthority", "avatar", "self", "hp", 0));
+}
+
+#[test]
+fn proof_first_assignment_receipt_resolves_aliases_before_deduplication() {
+    use crate::sys3_projection::BackendProfile;
+    use crate::sys4_dispatch::{LocalFabric, RuntimeStoreRead, SourceAction};
+
+    let source = owner_admission_budget_source(2).replace(
+        "  when refresh_avatar_hp()",
+        "  when sum_alias(a: Player, b: Player) fails (StaleMembership, MissingCapability, MissingWitness, VisibilityDenied, RouteUnavailable, DeadlineExpired) {\n    at WorldAuthority {\n      avatar[self].hp = avatar[a].hp + avatar[b].hp + avatar[a].hp\n    }\n  }\n\n  when refresh_avatar_hp()",
+    );
+    let project = build_project(Sys5SourceInput::inline(
+        "tests/inline/proof_first_alias_read_receipt.mir",
+        source,
+    ))
+    .unwrap();
+    let prepared = project.prepare_canonical_local_st_admission().unwrap();
+    let (program, admission) = prepared.into_parts_for_sys4();
+    let mut fabric = LocalFabric::bootstrap(program, admission, BackendProfile::St).unwrap();
+    fabric
+        .dispatch_source_action(SourceAction::owner_operation("refresh_avatar_hp"))
+        .unwrap();
+    let receipt = fabric
+        .dispatch_source_action(
+            SourceAction::owner_operation("sum_alias")
+                .with_argument("a", "self")
+                .with_argument("b", "self"),
+        )
+        .unwrap();
+    let report = receipt.owner_rmw_report().unwrap();
+    assert_eq!(
+        report.m8_reads(),
+        vec![RuntimeStoreRead::int(
+            "WorldAuthority",
+            "avatar",
+            "self",
+            "hp",
+            34
+        )]
+    );
+    assert!(report.has_exact_int_write("WorldAuthority", "avatar", "self", "hp", 102));
+}

@@ -1535,3 +1535,32 @@ phase or sample taxonomy change. Documentation/project-status/progress/tasks
 need no snapshot update at this component. Sole main; no subagents/notifications.
 OwnerPartial research/tests remain unadopted; next C phase correspondence reuses
 existing owner/source definitions. Own scoped commit/push follows this receipt.
+
+2026-09-28T04:05:15.476932+00:00 — C effect/reply distinction, post-use retained-publisher control.
+A real checked-source/M9/SYS4/M8 run writes, then a retained publisher synchronizes
+live validation observations and installs unrelated T revocation. Old G1 reply is
+refused without removing state/trace; fresh G2 S request produces another genuine
+write occurrence. This is a cfg(test) administrative constructor and local fabric,
+not decoded-child live update, source dynamic construction, network or alpha.
+It narrows the earlier prelaunch exact-prior failure, without rewriting that record.
+Removing only caller current-head comparison makes the new test fail at unexpected
+Success; exact SYS4 restored and test passes. First wrong-field compile probe excluded.
+I/c-admission-reuse/RETAINED_POST_USE, POST_USE_CURRENT_HEAD_MUTANT/RESTORED.
+Five additional general phase-model lemmas reuse CurrentUse.checkUse for the exact
+retained request and all stamped handles; earlier scalar-context blind spot retained
+as a countermodel. Fresh25module kernel/axiom audit passes,5finite guards and3false
+claims detected. Initial2compilefailures excluded. External/unreviewed/unadopted,
+no Rust correspondence, custody, resources or whole effect proof inferred.
+Reconsulted existing ReferenceSource async continuation and ReferenceExecution:
+rejected completion preserves waiting/actual source history, but value meaning is
+still pure Int invocation. Reuse these boundaries; no duplicate source scheduler.
+OwnerPartial and actual effect boundary Oracle mir-w4-c-owner-effect sent03:56UTC,
+29files295472bytes,6Pro/max verified, final pending. FullUse extension not in that
+frozen packet and requires review before reliance. Current single C goal unchanged.
+Plan/W4_CHECK/RESUME/read ledger synchronized. Documentation/project-status/progress/
+tasks/samples_progress need no stage/workflow change for this research subcut.
+No Canon or production-source change, no subagents/notifications; commit pending.
+
+2026-09-28T04:20:26.386434+00:00 — C concrete fidelity blocker: actual literal/non-target RHS receipts invent target0 reads. Minimal Some-only repair proposed; exact supplied-read Lean relation checked, coverage/extraction and source continuation kept distinct. See report2614 and W4_CHECK c_owner_read_receipt_20260928. Owner-effect review disposed; post-publication trace and revoked-T assertions now pass. No authority/phase/profile change.
+
+2026-09-28T04:39:15.656514+00:00 — Adopted bounded internal None→no-read correction after generic Lean proof and actual-source RED, Oracle review, mutations/restoration and416runtime regression. Stronger paired T/S revocation test passed; previous unbudgeted T refusal was insufficient and remains a dated counterexample. Exact whole Core/map coverage, effectful caller continuation, current source labels/physical entry conditions remain C obligations. No W4/Canon acceptance.

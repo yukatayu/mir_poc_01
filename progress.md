@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-09-28 08:54 JST
+最終更新: 2026-09-28 13:06 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -64,7 +64,7 @@ W4; W5+/alpha are not active. Plan250 remains separately paused after I3-3.
 
 W4-B検証結果: 206依存sourceを原本と同一bytesで保存し、fresh Lean検査と公理監査を完了しました。既存runnerのV2モデル278command・236module/22215所有宣言監査、native準備235command、修正後の実process検査68command（15profile/53拒否control）が全体exit0で完走しました。段階ごとに9169/9973/34658入力束縛と実ログを照合しています。保存証拠と現行sourceの役割分離、別名参照・期待値衝突・途中失敗の反例も検査済みです。コード・証明・検査手順は9d86052dでcommit/push・remote一致を確認済みです。復旧後の同一資料による最終境界Oracle reviewを回収し、主担当が証拠と照合しました。Bは限定LAB統合候補として完了、Cが現在地です。D/Eは依存待ちです。Oracle回答は証明・署名済み受理ではありません。一般証明は選択モデルについて、実processは特権private-pipeの有限証拠についてであり、実network・認証・秘密・復旧の保証へ広げません。
 
-W4-Cでは、共有authority floorの失効後に古いcacheからowner書込みできる実反例を修正しました。使用終了まで同じguardを保持する限定修正を一般Lean証明・Oracle指摘と照合し、対象11検査と既存を含む409件のRust library検査が通過しました。書込み後の応答喪失は「書込みなし」と区別します。C全体は未完了で、次はstaged request／予約／W3 ticketの対応と残るentry条件です。実network・秘密・復旧の保証ではありません。
+W4-Cでは、共有authority floorの失効後の古いcache使用、供給された観測ラベルの弱化、実行していない読取りを0として記録する経路を、それぞれ一般Lean命題・実反例・Oracleレビューに基づいて限定修正しました。最新の読取り記録修正は関連18検査とruntime library416件の回帰が通過し、実際の0・別名・値改変を識別する変異検査も通過しました。ownerの実書込みと呼出し側の結果受理は別に検査し、保持した発行主体による使用後の失効は、失効前後の同じ許可経路で対照を確認しました。この管理入口はテスト用で、子processの実更新機能ではありません。C全体は未完了です。次は既存の非同期source継続とowner代入の接続、全entry・現在の認可・実namespace/custody・資源の条件です。秘密の非干渉、復旧、W4全体の実network接続の保証には広げません。
 
 2026-09-24のowner指定で、同じW4を **W4-A（限定証拠・完了済み）→W4-B（repo統合・限定候補完了）→W4-C（残る基礎条件・現在地）→W4-D（Rust/Core/private QUIC接続）→W4-E（実network検査・残項目回収・W4完了判定）** に分割しました。Bの境界review回収後、Cへ進みました。D/Eは依存待ちです。Eは元W4と前段の残項目を照合しますが、C/Dの前提をEへ先送りして実装を進めません。完了条件・推奨model/effort・R01〜R12残項目台帳は `plan/proof-first-foundation-correspondence.md` の「W4-A〜W4-E 作業区切り」を参照してください。分割当日は計画整理のみでした。2026-09-26のowner指示で同じW4 goalを再開しています。
 
@@ -322,9 +322,9 @@ observer traces. The A-local cut emits no saved image and does not implement
 save/restore, live patch, global cut or durability.
 
 Detailed historical counts and commands remain in immutable Report2606.
-Earlier Plan250 maintenance recorded63GiB free and target2GiB. The current task
-M8 baseline grew target to4.4GiB; current preflight has about60GiB free and12GiB
-available RAM. Additional large variant builds await a measured storage plan;
+Earlier Plan250 maintenance recorded63GiB free and target2GiB. The earlier M8 baseline grew target to4.4GiB. On2026-09-28 the
+current root preflight has20GiB free, the reused target is about12GiB, and
+available RAM is10GiB. /mnt/mirrorea-work is not mounted. Additional large variant builds await a measured storage plan;
 bounded proof/rustc work continues. Source/.git/reports/logs are preserved.
 Only ignored Python/pytest caches were cleaned under the owner's instruction.
 The authorized roadmap is paused, not blocked, stale or closed.
@@ -493,3 +493,7 @@ The authorized roadmap is paused, not blocked, stale or closed.
 - 2026-09-28 08:54 JST: W4-B最終Oracle回答を回収・照合、凍結packetと既存検証receiptのhashを再確認。Bを限定LAB統合候補として完了し、Cの受理条件・権限境界へ進む。W4全体は未完了。
 
 - 2026-09-28T01:49:49.479878+00:00 — W4-C共有floorの実失効反例を修正。Lean14一般命題/128所有宣言監査・4弱化拒否、Rust409件回帰を通過。C残条件へ継続、W4未完了。
+
+- 2026-09-28T04:06:15.536337+00:00 — W4-C観測ラベルの限定修正cdb8d2a9をcommit/push・remote一致。一般Lean10命題、公理監査、実12検査/4変異拒否を照合。使用後のローカル失効と古い結果拒否の実検査も通過。Cのsource/effect接続は継続中、W4未完了。
+
+- 2026-09-28T04:39:15.656514+00:00 — W4-Cで実行していない読取りを0として記録する実反例を修正。Leanの対応・Oracle指摘・実変異を照合し、関連18検査とruntime416件回帰が通過。source/effect接続とC全体は継続中。
