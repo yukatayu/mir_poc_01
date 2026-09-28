@@ -47405,5 +47405,309 @@
     "status": "sole-main full read/local disposition",
     "role": "external advisory, not independent execution or acceptance",
     "at": "2026-09-28T10:34:02.930732+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/oracle-c-named-owner/FULL_ANSWER.md",
+    "sha256": "a46fa1d45f9935b2bfbc700ff47f8af1aa405e1d33725b6537eba189a9c55ec2",
+    "range": "full",
+    "status": "sole-main full read/authored or exact receipt inspection",
+    "role": "external advisory full read/local disposition; not a signature",
+    "at": "2026-09-28T11:44:35.647262+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/oracle-c-named-owner/DISPOSITION.md",
+    "sha256": "c627d395d78fce8627cb658337a05b272573160609d9619eb2b1cddb0f8d9d1b",
+    "range": "full",
+    "status": "sole-main full read/authored or exact receipt inspection",
+    "role": "external advisory full read/local disposition; not a signature",
+    "at": "2026-09-28T11:44:35.647262+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/oracle-c-named-owner/FINAL_RECEIPT.json",
+    "sha256": "15513c6580e35eb621290fd5a066bd5875a319fb0ec0d22d02f209f30fae1add",
+    "range": "full",
+    "status": "sole-main full read/authored or exact receipt inspection",
+    "role": "external advisory full read/local disposition; not a signature",
+    "at": "2026-09-28T11:44:35.647262+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/oracle-c-owner-issue/FULL_ANSWER.md",
+    "sha256": "85c5b815e50f84677ec68f8d09075256821c5d00b9534d83596a721d2a7267e2",
+    "range": "full",
+    "status": "sole-main full read/authored or exact receipt inspection",
+    "role": "external advisory full read/local disposition; not a signature",
+    "at": "2026-09-28T11:44:35.647262+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/oracle-c-owner-issue/DISPOSITION.md",
+    "sha256": "afd2f1efd290d2aa6cb48ef510d6c217bc416e8f3e60acf2839ce7523f253550",
+    "range": "full",
+    "status": "sole-main full read/authored or exact receipt inspection",
+    "role": "external advisory full read/local disposition; not a signature",
+    "at": "2026-09-28T11:44:35.647262+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/oracle-c-owner-issue/FINAL_RECEIPT.json",
+    "sha256": "2f49c9debfae593b270cad9537253710bcb77cee5513abd73ba4fb1c81f41118",
+    "range": "full",
+    "status": "sole-main full read/authored or exact receipt inspection",
+    "role": "external advisory full read/local disposition; not a signature",
+    "at": "2026-09-28T11:44:35.647262+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/audit_named_owner.py",
+    "sha256": "c9b396cbc6432f2f629d57ea4e0009118e42941a5f19662f55a56213e655598c",
+    "range": "full",
+    "status": "sole-main full read/authored or exact receipt inspection",
+    "role": "sole-main authored/read audit driver",
+    "at": "2026-09-28T11:44:35.647262+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/audit_owner_issue.py",
+    "sha256": "1aa8f92f7a753dcd93391dc6b9a2d63533df65e92bcb990ae4dce13a59d44cbb",
+    "range": "full",
+    "status": "sole-main full read/authored or exact receipt inspection",
+    "role": "sole-main authored/read audit driver",
+    "at": "2026-09-28T11:44:35.647262+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/audit_owner_completion.py",
+    "sha256": "e0dc5e06ac1fd72e154c1fae15e52d152f40fb1eed10791837555d9efcd7be24",
+    "range": "full",
+    "status": "sole-main full read/authored or exact receipt inspection",
+    "role": "sole-main authored/read audit driver",
+    "at": "2026-09-28T11:44:35.647262+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/owner-completion-development/MixedCatalogTransitions.lean",
+    "sha256": "07d5dbad99a37eee9592aee0e6b0d895b876f9d12512a57c5abe017da1901d0d",
+    "range": "full",
+    "status": "sole-main full read/authored or exact receipt inspection",
+    "role": "sole-main authored/read successor proof/control; nonproduction",
+    "at": "2026-09-28T11:44:35.647262+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/owner-completion-development/MixedOwnerAttemptQueue.lean",
+    "sha256": "0752aafc884b4e85743810e7471d3de6f6c0dc21b921ba4ac7db9c7771dc18e6",
+    "range": "full",
+    "status": "sole-main full read/authored or exact receipt inspection",
+    "role": "sole-main authored/read successor proof/control; nonproduction",
+    "at": "2026-09-28T11:44:35.647262+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/owner-completion-development/MixedOwnerCompletionControls.lean",
+    "sha256": "7a709e45472cffc53b57bd3c294b7251148ea945f650f733bab67c7ed48b0d86",
+    "range": "full",
+    "status": "sole-main full read/authored or exact receipt inspection",
+    "role": "sole-main authored/read successor proof/control; nonproduction",
+    "at": "2026-09-28T11:44:35.647262+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/owner-completion-development/MixedOwnerCompletionDiagnostic.lean",
+    "sha256": "3c0b72f05588c74557c3befa5f748bc159e49b19294939d9f6788f4910217dee",
+    "range": "full",
+    "status": "sole-main full read/authored or exact receipt inspection",
+    "role": "sole-main authored/read successor proof/control; nonproduction",
+    "at": "2026-09-28T11:44:35.647262+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/owner-completion-development/MixedOwnerSourceInvariant.lean",
+    "sha256": "ff671f30f48fcfb9dd2b14263b91b35177bfa5543e4e53a634af75609fe10268",
+    "range": "full",
+    "status": "sole-main full read/authored or exact receipt inspection",
+    "role": "sole-main authored/read successor proof/control; nonproduction",
+    "at": "2026-09-28T11:44:35.647262+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/owner-completion-development/MixedOwnerSourceIssue.lean",
+    "sha256": "eca50d0f594b3f154e1fcbdf4ad359ce8f95b1ee3fba4c3bef6fc07d9d1de08b",
+    "range": "full",
+    "status": "sole-main full read/authored or exact receipt inspection",
+    "role": "sole-main authored/read successor proof/control; nonproduction",
+    "at": "2026-09-28T11:44:35.647262+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/owner-completion-development/MixedOwnerSourceIssueControls.lean",
+    "sha256": "830256ffbd8651272368000a68e98f007c117f535db89c99e41ae6602b947dda",
+    "range": "full",
+    "status": "sole-main full read/authored or exact receipt inspection",
+    "role": "sole-main authored/read successor proof/control; nonproduction",
+    "at": "2026-09-28T11:44:35.647262+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/owner-completion-development/MixedOwnerSourceTrace.lean",
+    "sha256": "b84c03db93eee64871771c2e477a1eb3109dc9da2b6d63f554b1b69282b4a8be",
+    "range": "full",
+    "status": "sole-main full read/authored or exact receipt inspection",
+    "role": "sole-main authored/read successor proof/control; nonproduction",
+    "at": "2026-09-28T11:44:35.647262+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/owner-completion-development/MixedOwnerSourceTraceControls.lean",
+    "sha256": "d410711f328eea25e502356bdd5c1d453687fba2dbaf9c79fdeca6d478aa447a",
+    "range": "full",
+    "status": "sole-main full read/authored or exact receipt inspection",
+    "role": "sole-main authored/read successor proof/control; nonproduction",
+    "at": "2026-09-28T11:44:35.647262+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/owner-completion-development/MixedPendingProjection.lean",
+    "sha256": "2f7874a018fe2dd3ca66b366d23c25caffb9107ab06f71bb371081e1af623750",
+    "range": "full",
+    "status": "sole-main full read/authored or exact receipt inspection",
+    "role": "sole-main authored/read successor proof/control; nonproduction",
+    "at": "2026-09-28T11:44:35.647262+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/owner-completion-development/MixedReferenceAllocation.lean",
+    "sha256": "d3a518a91d29ef858c80014172a5832d2daae0c66d85b650f733d29160de5599",
+    "range": "full",
+    "status": "sole-main full read/authored or exact receipt inspection",
+    "role": "sole-main authored/read successor proof/control; nonproduction",
+    "at": "2026-09-28T11:44:35.647262+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/owner-completion-development/MixedReferenceChronology.lean",
+    "sha256": "e9418c180e55dccc06836f6ef92f6915bdfa27242b41773b70aa9e06b517ff9b",
+    "range": "full",
+    "status": "sole-main full read/authored or exact receipt inspection",
+    "role": "sole-main authored/read successor proof/control; nonproduction",
+    "at": "2026-09-28T11:44:35.647262+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/owner-completion-development/MixedReferenceCoherence.lean",
+    "sha256": "8a7959f6c2ca877987c107553b143fbad3b6282e7454dfce69a312b492811b49",
+    "range": "full",
+    "status": "sole-main full read/authored or exact receipt inspection",
+    "role": "sole-main authored/read successor proof/control; nonproduction",
+    "at": "2026-09-28T11:44:35.647262+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/owner-completion-development/MixedReferenceExecution.lean",
+    "sha256": "22a2ce6716d425b376a340d642e814f8812e41efc39784e17b156e55ac827e50",
+    "range": "full",
+    "status": "sole-main full read/authored or exact receipt inspection",
+    "role": "sole-main authored/read successor proof/control; nonproduction",
+    "at": "2026-09-28T11:44:35.647262+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/owner-completion-development/MixedReferenceOrigins.lean",
+    "sha256": "17fd0c4454dba37feb36512c6c22d65132c2829393014de06cce77db96205f1d",
+    "range": "full",
+    "status": "sole-main full read/authored or exact receipt inspection",
+    "role": "sole-main authored/read successor proof/control; nonproduction",
+    "at": "2026-09-28T11:44:35.647262+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/owner-completion-development/MixedReferenceStore.lean",
+    "sha256": "37950399bf020621d39e56e9770797998e0608c1c047dc9b4fb073b7da4d74e4",
+    "range": "full",
+    "status": "sole-main full read/authored or exact receipt inspection",
+    "role": "sole-main authored/read successor proof/control; nonproduction",
+    "at": "2026-09-28T11:44:35.647262+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/owner-completion-development/MixedReferenceTrace.lean",
+    "sha256": "708f579fa8af42b9023c56b1d63ba13ff2377e1642a267615ead84be9ef81743",
+    "range": "full",
+    "status": "sole-main full read/authored or exact receipt inspection",
+    "role": "sole-main authored/read successor proof/control; nonproduction",
+    "at": "2026-09-28T11:44:35.647262+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/owner-completion-development/MixedRequestAllocation.lean",
+    "sha256": "836be425e535e350c4a7c246fe3b96f2372847bf85084c6f8f37f06a22936142",
+    "range": "full",
+    "status": "sole-main full read/authored or exact receipt inspection",
+    "role": "sole-main authored/read successor proof/control; nonproduction",
+    "at": "2026-09-28T11:44:35.647262+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/owner-completion-development/MixedRequestCore.lean",
+    "sha256": "d7e75b6a8b0d1f70a12df3298ffa8be9e39e282041a76eb6942a5fbbb88a5080",
+    "range": "full",
+    "status": "sole-main full read/authored or exact receipt inspection",
+    "role": "sole-main authored/read successor proof/control; nonproduction",
+    "at": "2026-09-28T11:44:35.647262+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/kernel-named-owner-v1/NamedOwnerAudit.log",
+    "sha256": "708f5d48198207cfd3de03d5c2044cdad4fc5a511eaacfef682ed22b022e9fb8",
+    "range": "full",
+    "status": "sole-main full read/authored or exact receipt inspection",
+    "role": "sole-main evidence/receipt inspection; body closure not inferred as newly read",
+    "at": "2026-09-28T11:44:35.647262+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/kernel-named-owner-v1/RESULT.json",
+    "sha256": "a4c4f54700525c1fb0a72e7a11695d42741c92f81b2e71e7b9ebbd7f85ca2889",
+    "range": "full",
+    "status": "sole-main full read/authored or exact receipt inspection",
+    "role": "sole-main evidence/receipt inspection; body closure not inferred as newly read",
+    "at": "2026-09-28T11:44:35.647262+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/kernel-named-owner-v1/INPUTS.json",
+    "sha256": "9093297d1804a12f985838bc86e95bf92eb9e856f255476711ecbeaad19fe5f0",
+    "range": "full",
+    "status": "sole-main full read/authored or exact receipt inspection",
+    "role": "sole-main evidence/receipt inspection; body closure not inferred as newly read",
+    "at": "2026-09-28T11:44:35.647262+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/kernel-owner-issue-v1/OwnerIssueAudit.log",
+    "sha256": "b6f856dea4839a7e3e9fe3a3f6406a655d07e7ad2a4cbc02b1641df408d6a3a6",
+    "range": "full",
+    "status": "sole-main full read/authored or exact receipt inspection",
+    "role": "sole-main evidence/receipt inspection; body closure not inferred as newly read",
+    "at": "2026-09-28T11:44:35.647262+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/kernel-owner-issue-v1/RESULT.json",
+    "sha256": "b273d21cf70a6a1424e7cc73c772178644facb45c22dccdf1e2e055c1f4ba24d",
+    "range": "full",
+    "status": "sole-main full read/authored or exact receipt inspection",
+    "role": "sole-main evidence/receipt inspection; body closure not inferred as newly read",
+    "at": "2026-09-28T11:44:35.647262+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/kernel-owner-issue-v1/INPUTS.json",
+    "sha256": "0b43a2e72ad12d07758e9e3c2200e26143413412a524b8832bf3e787326e7968",
+    "range": "full",
+    "status": "sole-main full read/authored or exact receipt inspection",
+    "role": "sole-main evidence/receipt inspection; body closure not inferred as newly read",
+    "at": "2026-09-28T11:44:35.647262+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/kernel-owner-completion-v1/OwnerCompletionAudit.lean",
+    "sha256": "f6077e4023c9afcc7a632321ea0dfde2749fff7214ac39dec801fc534b0f27bc",
+    "range": "full",
+    "status": "sole-main audit/receipt inspection",
+    "role": "fresh kernel closure result; does not assert reread of all source bodies",
+    "at": "2026-09-28T11:48:06.786620+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/kernel-owner-completion-v1/OwnerCompletionAudit.log",
+    "sha256": "492d9faba616964382e75b917cc6dd040207f61bbd1d0e79d155f9f2106db718",
+    "range": "full",
+    "status": "sole-main audit/receipt inspection",
+    "role": "fresh kernel closure result; does not assert reread of all source bodies",
+    "at": "2026-09-28T11:48:06.786620+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/kernel-owner-completion-v1/INPUTS.json",
+    "sha256": "959233f57f4b02125a4430ce2870978aeb873d1d4ee5f553226d7d831ddd01eb",
+    "range": "full",
+    "status": "sole-main audit/receipt inspection",
+    "role": "fresh kernel closure result; does not assert reread of all source bodies",
+    "at": "2026-09-28T11:48:06.786620+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/kernel-owner-completion-v1/RESULT.json",
+    "sha256": "167eb036571b97eccd7da675b9778accc3f4243ff3e24789c0d0f2d794a83f3b",
+    "range": "full",
+    "status": "sole-main audit/receipt inspection",
+    "role": "fresh kernel closure result; does not assert reread of all source bodies",
+    "at": "2026-09-28T11:48:06.786620+00:00"
   }
 ]

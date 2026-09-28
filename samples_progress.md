@@ -1,6 +1,6 @@
 # samples_progress
 
-Last updated: 2026-09-28 18:30 JST
+Last updated: 2026-09-28 20:44 JST
 
 Plan250 execution control: I3-3 is accepted and owner-paused with no active
 semantic milestone. Plan 250 remains retained; I3-4/I3-5/I3-6/NEXT-0 remain
@@ -38,6 +38,7 @@ W4-B検証結果: 206依存sourceを原本と同一bytesで保存し、fresh Lea
 | Existing owner identity lookup | `samples/lean/foundations/MirroreaProofFirstOperationIdentity.lean`; external-copy command in `samples/lean/README.md`; `cargo test --locked --offline -j 1 -p mir-runtime --lib proof_first_duplicate_owner_identity -- --test-threads=1` | General positional selection/algorithm equivalence checked; actual ordinary/provider/local refusal and singleton controls pass. Distinct-owner fragment collisions, source order and source-free restore remain open. |
 | Actual assignment source origin | `cargo test --locked --offline -j 1 -p mir-semantics --test proof_first_source_origin` | Real parser/M6/M7 RED→GREEN: distinct owners, reversed order, identical text at distinct positions; present effect/obligation rows and expected source-map entries retain exact AST site. Narrow fix reviewed; no runtime multi-statement/restore completion. Historical broad regression failed4 renderer cases; the later minimal fixture repair and exact AST/projected failure-row test pass5focused cases, with duplicate-member rejection retained. |
 | External shared Execution/source/Session | `docs/proof-first/W4_CHECK.json` → `c_source_session_20260928`; frozen `kernel-execution-v1`, `kernel-source-v1`, `kernel-admission-counter-v1` sources/input hashes/Lean logs | Fresh102/136 imported closures, general pure entry/source equality and conditional Session adoption, independent elaboration/typing, all-kind allocator/drain and13 qualified false guards across these cuts. Store/source reviews locally disposed; epoch inventory and raw classification admission limits retained. Owner SOURCE, actual labels/resources/service/custody and restore remain open. External evidence only; no new active sample root or workflow-ready status. |
+| External named owner/source issue | `docs/proof-first/W4_CHECK.json` → `c_owner_issue_20260928`; frozen `kernel-named-owner-v1`, `kernel-owner-issue-v1` sources/Lean receipts | Fresh141/144 closures; relevant-field/capture correspondence, complete definition binding, independent positive issue existence and shared allocation preservation. Both advisory reviews disposed. Owner completion successor passes fresh151 closure/all-owned audit and19 qualified false guards; its new advisory review is pending; no full owner Session/deployment, physical custody/restore or workflow-ready claim. |
 
 | W3 evidence | Reproduction | Remaining boundary |
 |---|---|---|

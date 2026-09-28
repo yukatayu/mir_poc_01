@@ -45025,5 +45025,169 @@
         "reason": "progress last-updated header stale; fixed to actual checkpoint timestamp; rerun exit0"
       }
     }
+  },
+  "c_owner_issue_20260928": {
+    "at": "2026-09-28T11:44:09.704220+00:00",
+    "git_base": "5bf8519a922331e0a089e0c6f81015353d6ea7bd",
+    "scope": "Same W4-C source/current owner admission goal; external research only. No owner full Session/physical adoption; D inactive, pause after D before E.",
+    "audits": {
+      "kernel-named-owner-v1": {
+        "directory": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/kernel-named-owner-v1",
+        "result_sha256": "a4c4f54700525c1fb0a72e7a11695d42741c92f81b2e71e7b9ebbd7f85ca2889",
+        "at": "2026-09-28T10:36:24.029478+00:00",
+        "closure": 141,
+        "audited_module_owners": 92,
+        "owned_constants": 7183,
+        "false_guards": 8,
+        "whole_runner_exit": 0,
+        "axioms": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "mode": "fresh isolated source closure; counts are owned declarations, not independent theorems"
+      },
+      "kernel-owner-issue-v1": {
+        "directory": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/kernel-owner-issue-v1",
+        "result_sha256": "b273d21cf70a6a1424e7cc73c772178644facb45c22dccdf1e2e055c1f4ba24d",
+        "at": "2026-09-28T11:03:58.028724+00:00",
+        "closure": 144,
+        "audited_module_owners": 95,
+        "owned_constants": 7354,
+        "false_guards": 12,
+        "whole_runner_exit": 0,
+        "axioms": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "mode": "fresh isolated source closure; counts are owned declarations, not independent theorems"
+      },
+      "kernel-owner-completion-v1": {
+        "directory": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/kernel-owner-completion-v1",
+        "result_sha256": "167eb036571b97eccd7da675b9778accc3f4243ff3e24789c0d0f2d794a83f3b",
+        "at": "2026-09-28T11:44:01.457700+00:00",
+        "closure": 151,
+        "audited_module_owners": 151,
+        "owned_constants": 16157,
+        "false_guards": 19,
+        "whole_runner_exit": 0,
+        "axioms": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "mode": "fresh isolated source rebuild; ALL closure module owners audited, broader than predecessor subset"
+      }
+    },
+    "reviews": {
+      "oracle-c-named-owner": {
+        "directory": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/oracle-c-named-owner",
+        "receipt": {
+          "at": "2026-09-28T10:52:19.356823+00:00",
+          "completedAt": "2026-09-28T10:51:50.089Z",
+          "identity": true,
+          "stop": false,
+          "blocks": 1,
+          "characters": 27683,
+          "sha256": "a46fa1d45f9935b2bfbc700ff47f8af1aa405e1d33725b6537eba189a9c55ec2",
+          "wrapper_exit": 0,
+          "capture_exit": 0
+        },
+        "disposition_sha256": "c627d395d78fce8627cb658337a05b272573160609d9619eb2b1cddb0f8d9d1b",
+        "status": "final fully read and locally disposed; advisory only"
+      },
+      "oracle-c-owner-issue": {
+        "directory": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/oracle-c-owner-issue",
+        "receipt": {
+          "at": "2026-09-28T11:25:57.244093+00:00",
+          "completedAt": "2026-09-28T11:22:17.051Z",
+          "identity": true,
+          "stop": false,
+          "blocks": 1,
+          "characters": 28636,
+          "sha256": "85c5b815e50f84677ec68f8d09075256821c5d00b9534d83596a721d2a7267e2",
+          "wrapper_exit": 0,
+          "capture_exit": 0
+        },
+        "disposition_sha256": "afd2f1efd290d2aa6cb48ef510d6c217bc416e8f3e60acf2839ce7523f253550",
+        "status": "final fully read and locally disposed; advisory only"
+      }
+    },
+    "claims": [
+      "Independent minimal-footprint/deduplicated captures elaborate/evaluate faithfully with exact owner metadata for relevant fields; no rewrites of prior installed payloads",
+      "Source owner issue checks entire installed OwnerDefinition and captures current source values; exact body/origin/argument length/control retained",
+      "Issue existence derives real shared start from independent CurrentUse and declarative elaboration; all-kind allocation and common invariant preservation",
+      "Raw lower service replay, raw origin substitution and duplicate supplied field-name ambiguity are reproduced, not admitted network exploits"
+    ],
+    "completion_development": {
+      "directory": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/owner-completion-development",
+      "fresh_audit": {
+        "directory": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/kernel-owner-completion-v1",
+        "result_sha256": "167eb036571b97eccd7da675b9778accc3f4243ff3e24789c0d0f2d794a83f3b",
+        "at": "2026-09-28T11:44:01.457700+00:00",
+        "closure": 151,
+        "audited_module_owners": 151,
+        "owned_constants": 16157,
+        "false_guards": 19,
+        "whole_runner_exit": 0,
+        "axioms": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ],
+        "mode": "fresh isolated source rebuild; ALL closure module owners audited, broader than predecessor subset"
+      },
+      "claims_checked_in_development": [
+        "Shared Core/Execution unit owner ack preserves actual histories/classifications/allocation; source values and writes unchanged",
+        "Generated callable binding dependency is retained separately from integer arguments; issue_dependencies general proof",
+        "Exact source/core/queued saved payload gate, actual guarded service, attempt ID/occurrence uniqueness and independent service completeness",
+        "Rooted source-issued payload and actual service/write provenance for accepted receipts; joint source/core wait and common invariant preservation",
+        "Actual committed-then-head-changed ack refusal preserves15/history1/attempt1; pre-service revoke yields terminal authority refusal; missing metadata retains unattempted queue; overflow refuses without synthetic result"
+      ],
+      "status": "fresh kernel checked external successor; neutral review pending, no full owner Session/production adoption",
+      "review": {
+        "directory": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/oracle-c-owner-completion-retry1",
+        "submission": {
+          "at": "2026-09-28T11:46:44.346397+00:00",
+          "session": "mir-w4-c-owner-complete-r1",
+          "pid": 1256811,
+          "question_sha256": "d445b36ee03634ae5776b2b7d953086082cfedf2096336f4b85090a5e5e8cc6b",
+          "manifest_sha256": "71ebc63b7b3ff49142c8321ae25932cd73668835fd0c5058e0fb14b7a08b48e9",
+          "display": ":0",
+          "model_evidence": "select strategy; require actual6Pro/max selection evidence on completed conversation",
+          "next_status_after": "2026-09-28T11:49:44.346397+00:00",
+          "scope": "single read-only frozen current implementation review; no outer deadline or paid fallback"
+        },
+        "status": "running; no final answer claimed",
+        "retry_basis": {
+          "at": "2026-09-28T11:46:44.321567+00:00",
+          "failure": "connect ECONNREFUSED 127.0.0.1:45439 before browser/tab submission; wrapper exit1",
+          "prior_session": "mir-w4-c-owner-completion",
+          "change": "standard visible local manual-login Oracle browser launch with fixed port; no Chrome internal settings/profile/cookie modification",
+          "unrelated_browsers": "normal Chrome and a different project browser found; neither touched",
+          "same_question_sha256": "d445b36ee03634ae5776b2b7d953086082cfedf2096336f4b85090a5e5e8cc6b",
+          "same_manifest_sha256": "71ebc63b7b3ff49142c8321ae25932cd73668835fd0c5058e0fb14b7a08b48e9"
+        },
+        "actual_session": "mir-w4-c-owner-complete"
+      }
+    },
+    "remaining": [
+      "Same program/deployment/Session owner operation binding and actual value/label/field provenance",
+      "Resources and all admitted physical source/service/custody/image/restore entries",
+      "Bounded D correspondence/implementation/review/integration after C gates; E requires later owner resume"
+    ],
+    "docs_validation": {
+      "at": "2026-09-28T11:53:52.551724+00:00",
+      "command": "make docs",
+      "exit": 0,
+      "log": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/owner-checkpoint-make-docs.log",
+      "sha256": "2a31cd1458be17326242567ff65f1836d6e66b1fc64aba4bfee461c55c4b8bcd",
+      "counts": {
+        "canon": 218,
+        "hierarchy": 800,
+        "reports": 1764
+      }
+    }
   }
 }

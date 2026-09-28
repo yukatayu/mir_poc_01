@@ -1,5 +1,5 @@
 # W4 physical refinement — W4-C active / B integrated candidate
-Updated 2026-09-28T01:49:49.479878+00:00. Same active full-W4 goal, sole main/no subagents. Quota stopping waived for this run; only owner resets. W5+/Plan250-I3-4/Canon acceptance remain outside scope.
+Updated 2026-09-28T11:53:52.551724+00:00. Same active full-W4 goal, sole main/no subagents. Quota stopping waived for this run; only owner resets. W5+/Plan250-I3-4/Canon acceptance remain outside scope.
 
 PL1/PL2/PL0 S4/S6, theory/checker boundary before implementation. REQ DS01/02/03/04/08 AU01/04/05/08 VF04/05; PT03/11/14 SC04/07 Q18. R02/R03/R04/R05/R09 are prerequisites before their first dependent D use.
 
@@ -74,3 +74,5 @@ production defects established through admitted entries. See RESUME and W4_CHECK
 2026-09-28T09:30:07.194118+00:00 — Same C goal: lower Store binding mutation/conservativity/chronological origins freshly checked; narrow review pending. Protected Execution/full Session, actual source labels/resources/service/custody/image remain open. D not started; stop after D before E.
 
 2026-09-28T10:19:07.498736+00:00 — Same C goal: protected Execution and pure/reference Source/full Session over shared core freshly checked; conditional adoption preserves admitted carrier and refuses all-kind waits. Raw acquisition counterexample confirms invariant-only admission invalid. Source review pending; owner SOURCE/materialization/labels/resources/service/custody/restore remain open. D not started; pause after D before E.
+
+2026-09-28T11:44:09.704220+00:00 — Same C goal: named owner/source issue fresh checks and both advisory reviews disposed. Generated callable dependency gap fixed in external successor; shared owner unit ack/actual attempt/provenance/joint state proof development passes, fresh full audit pending. Owner full Session/deployment/current labels/resources/custody/restore remain before D. D unstarted; pause after D before E.
