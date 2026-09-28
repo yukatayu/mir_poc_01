@@ -2,7 +2,7 @@
 
 - Started: 2026-09-14T08:39:26.358953+09:00
 - Author: sole main Codex; no subagents
-- State: paused W4; W4-A scoped evidence complete, W4-B current/paused, W4-C/D/E dependent. W4 not complete, no Canon or alpha acceptance.
+- Current state: active W4; W4-A/B bounded evidence integrated, W4-C active, D/E dependent. W4 incomplete; no Canon or alpha acceptance. Earlier dated states below are historical.
 
 ## Objective
 
@@ -3056,3 +3056,190 @@ issuer/head/peer authenticity, uniqueness/all-entry and source/Core corresponden
 remain open. Oracle75323 running on exact frozen proof and consumer excerpts,
 session mir-w4-c-submitted-evidence; no arbitrary timeout. RESUME/W4_CHECK hold
 identities/next check. Same C goal continues; no new report or global plan.
+
+### 2026-09-28T00:14:21.604957+00:00 — C reuse correction and generation mapping obligation
+
+Initial submitted-evidence proof duplicates existing W2 CurrentPolicyFrame and W3 ReferenceAccess/ReferenceCancellationBoundary witness judgments. Retain external exploration/verification history; do not count as newly closed obligation or integrate duplicate calculus.
+
+c-admission-reuse/MirroreaProofFirstAdmissionPhases.lean imports existing24-module cone; generation-phase-only component, not complete C or source/physical refinement.
+
+ReferenceAuthority.old_result_rejected enforces fixed saved invocation generation; I3 held pre-reservation requests can be revalidated after unrelated G2. Identity mapping of saved evidence to resolved decision is invalid. Must select/prove source/request/resolution relation or conservative additional profile restriction before D. Q18 not silently collapsed.
+
+RUST_EXISTING_PHASES.json:39525 exit0,3 selected tests,395filtered;30 preexisting warnings; no real network run.
+
+B commit563a1f0e normally pushed/remote parity verified; I/B_CLOSEOUT_GIT.json.
+Same C goal continues; Oracle initial packet still running, not resent.
+No acceptance or product status change from these component findings.
+
+2026-09-28 W4-C actual counterexample (unfixed): two LocalFabric instances bootstrapped
+from the same cloned sealed admission share M9AuthorityLiveFloor but retain separate
+cached generations/backends. After one publishes genuine owner-capability revocation,
+the sibling ordinary-source owner operation still writes hp100→90. New regression
+proof_first_shared_authority_floor_rejects_stale_sibling_owner_write is RED: cargo
+test exit101, not a compile/setup failure. I/c-admission-reuse/SHARED_FLOOR_ATTEMPT1.json
+and .log pin source/log hashes. R03/R04/R05/R12: require shared-head currentness held
+through actual owner use; preflight-only checking has a race. No production repair
+yet; definition/mechanization and narrow Oracle review precede dependent changes.
+C phase reuse proof8lemmas and7weakening controls pass externally, not total C closure.
+Oracle75323 remains existing normal job; LAST_CHECK.json is polling authority.
+
+2026-09-28T00:36:22.561985+00:00 — C shared-floor proof/repair research: external c-shared-authority-use/
+MirroreaProofFirstSharedAuthorityUse.lean has ten general lemmas, fresh trust0 kernel
+ATTEMPT3 exit0; all112 owned declarations audited, standard propext only in theorem
+prints. ATTEMPT1/2 elaboration errors retained/excluded; no authored sorry/admit.
+Four deliberately weak controls rejected at intended guard, AUDIT_CONTROLS.json.
+Current-head theorem derives cache=head over all model steps; local authorization
+checker exactness remains explicit assumption, not proved Rust correspondence.
+PROPOSED_NOT_APPLIED.diff holds same floor through actual owner backend use, then
+drops before observation. DESIGN.md records TCB and all-entry/phase limits.
+Expanded actual Rust pre-repair RUST_BEFORE.json/log: 1 positive passes (both ST/OW1
+repeated hp100->90->80), 2 negatives fail (both ST/OW1 stale sibling still writes90),
+cargo exit101, tool47688 wrapper exit0 collected. No production fix applied.
+New distinct delta review mir-w4-c-shared-floor/tool38958 submitted once00:34:20UTC,
+question80594f8fafc736072aeb168dba84f489179d7ff550a5f0aa542ada1ddc038472;
+manifest8781872f3fe374d8d4171bf25528c671b12ecc81675db88ea4393b994fe3e41c.
+10files86576bytes. Existing witness review75323 remains running; preserve both jobs.
+Next status timestamps in each SUBMISSION/LAST_CHECK.json; intervals>=180s.
+
+Oracle delta38958 failed before prompt delivery: existing witness job3642711 held
+profile lock beyond wrapper acquisition300s. Wholeexit1 collected; no advice/no
+acceptance. oracle-c-shared-floor/FAILURE_DISPOSITION.json. Preserve first job;
+retry same frozen delta after profile release, not concurrently against lock.
+Prior "submitted once" refers to one wrapper invocation, not verified prompt delivery.
+
+Oracle75323 UI diagnostic: meta promptSubmitted=false; target-list endpoint alive,
+but read-only Runtime.evaluate has no reply within10s and screenshot protocol
+failed (reason not captured). These are inspection failures, not a new Oracle
+job deadline. User asked which visible state is present; response pending.
+Own inspection19410 terminated143, bounded60171 exit2; Oracle/Chrome untouched.
+I/oracle-c-submitted-evidence/UI_DIAGNOSTIC.json. Shared-floor implementation
+remains gated on review; other local definition/source verification continues.
+
+2026-09-28T00:46:03.941743+00:00 — Owner confirmed Oracle tab crash and explicitly requested retry. Original
+witness75323 had already exited1 (Chrome disconnected before conversation created);
+whole exit collected, no signal sent. Same frozen question/manifest/files relaunched
+once as mir-w4-c-witness-retry1/tool8029 at00:45:28UTC. Next>=00:48:28UTC.
+I/oracle-c-submitted-evidence-retry1/RETRY_BASIS.json. Shared-floor delta38958
+remains failed-before-prompt due profile lock; retry it serially after current job
+ends. No Chrome/profile/settings modification, paid fallback or duplicate live job.
+
+2026-09-28T00:53:05.024733+00:00 — witness retry1/tool8029 exit1 collected: model selector
+not located before prompt. Exact visible target inspection then found normal
+ChatGPT selector; opening ordinary model UI confirmed6 / Pro, Latest checked,
+power slider4of4 (Pro5of5). MODEL_UI.json retained externally. Same frozen packet
+retry2 mir-w4-c-witness-retry2/tool74088 started00:50:43UTC with documented current
+strategy, no ignore/reset/settings change; next check>=00:53:43UTC. Verify model
+on actual new conversation when recovering answer. No independent advice yet.
+Actual-backend negative tests strengthened: try_m8_partition_evidence queries real
+ST/OW1 M8 sessions before/after; unchanged coordinator mirror alone is insufficient.
+Fresh RUST_BEFORE_ACTUAL.json/log tool88472 wrapperexit0, cargoexit101:1positive
+passes incl actual OwnerWrite count1/2;2stale negatives fail at actual M8 mutation
+assertion. No production repair applied. Queued shared-floor retry should retain
+original frozen packet and append this test evidence/remaining owner reply excerpt
+as explicitly identified supplement, not silently modify old packet.
+
+2026-09-28T01:00:05.093979+00:00 — Oracle retry2 actual Chrome trap at00:54UTC confirmed by kernel journal;
+exact controller interrupted, tool74088 wholeexit130. Parent/controller current data
+and address limits unlimited; earlier original00:03 crash had8GiBdata warning,
+causality not assumed for new crash. Switched delivery from forced inline to
+always attachments/bundledtext (localhelp verified), no Chrome setting/limit change.
+Retry3 immediateexit1 stale same-prompt guard. No live retry2 controller and no
+verified submission; retry4/tool13175 at00:58:26 uses force only for stale metadata.
+Same frozen bytes, current verified6Pro strategy; new model/delivery still to verify.
+RESUME consolidated; prior193line snapshot preserved externally.
+
+Oracle witness retry4/tool13175: at01:01UTC promptSubmitted=true after9files
+packed1textbundle. Actual send now verified; answer pending, no review acceptance.
+Same normal live job retained; no further retry on latency.
+
+2026-09-28T01:07:37.322524+00:00 — C shared-floor executable freshness strengthened without changing
+existing definitions/proofs/guards (byte-identity checked): CheckedRuns and4general
+lemmas derive cached facts=head at every accepted use after executable history,
+without local checker semantic soundness/exactness assumption. Separate authorization
+meaning theorem retains that explicit premise. CHECKED_PATH kernel0; fresh owned
+audit128 (tool72998 wrapper0), printed axioms propext only. This is not new authority.
+Queued final delta packet I/oracle-c-shared-floor-current (20files124049bytes)
+retains all old files and explicit latest proof/test supplements. Previous prepared
+retry1 never launched, superseded before submission. Launch current packet only
+after normal live witness13175 finishes; no concurrent profile contention.
+
+2026-09-28T01:17:22.597141+00:00 — Witness retry4/tool13175 exited0 but CLI saved only Supports;
+this was an answer-extraction failure, not substantive review success. Recovered
+same completed DOM full27106characters (one block, stop=false), SHA08c0b1796bd063bbf22cd17d89e1765088196c413d68c7a7a47d1e4ad7bea0af.
+Manual ordinary menu confirms6/Pro, Latest checked, maxslider4of4; wrapper current
+strategy verified=no remains honestly recorded. Full read and local DISPOSITION:
+original selected witness vs current lookup; generation staging/reservation mismatch;
+carrier-to-M8 preservation; context/claim-scope limits; current-use/custody/resources.
+No Rust exploit inferred from interface-only countermodels. ExistingW2/W3 duplicate
+module remains excluded from integration despite narrow favorable advice.
+New shared-floor review launched serially01:16UTC as mir-w4-c-floor-current/tool93473,
+question59e74f32f248f1178aa1cbb0eafc3baf73afc22e0c153d02799c075b71f6776d,
+manifest58f36af65fd692fd27c30ee6885fa33c52f9ef45c35bc2f3fd83f439c9ca1acf.
+No production change yet. Frozen question contains an earlier historical live-witness
+sentence; actual launch was after predecessor final recovery, no concurrent job.
+
+2026-09-28T01:22:37.936662+00:00 — Added actual generated-carrier delayed-delivery regression:
+source creates carrier, genuine sibling revocation publishes, ordinary inbound entry
+still writes. QUEUED_BEFORE cargo101 at intended actual-backend assertion; unchanged
+authority positive passes first. Then fresh entire mir-runtime --lib pre-repair
+baseline LIB_BEFORE (tool91682 wrapper0, cargo101):399pass/3fail/0skip,95.35s;
+only the three newly added stale-authority negatives fail. Existing398tests remain
+GREEN on this pre-repair cut. Tests use real source/checker/projection/M9/M8,
+not network or duplicate-custody claims. rustfmt followed compilation; preserve
+exact compiled test hash in receipt, rerun formatted cut after correction.
+WITNESS_SOURCE_FOLLOWUP distinguishes actual exact-delta inventory preservation
+from Oracle interface-only substitution countermodel; principal/key checked on
+private decode, uniqueness across principals and full phase/refinement remain OPEN.
+No new global policy/Canon decision and no production edit before narrow review.
+
+2026-09-28T01:35:54.611652+00:00 — shared-floor Oracle/tool93473 wholeexit0. CLI saved only CheckedRuns,
+so recovered23639character full completed answer from same tab; SHA5da7454782dc83ca27256f9d95cf502506ed0fbcc6a103e7d0e02e12b1706ba3.
+Manual model menu6/Pro maxslider verified. No live Oracle remains. Advisory accepts
+freshness-only separation/retained-guard under physical premises, flags possible
+same-thread retained lifecycle-access deadlock and preflight-only blind spot in
+sequential tests. Main inspected all3 non-test production accessor calls: temporary
+statement ends before subsequent fabric entry; no retained accessor path found.
+General arbitrary nested Rust access is non-reentrant, not claimed supported.
+Added cfg(test)-only per-call rendezvous carried into actual ST/OW1 backend and
+post-return continuation; no request/receipt fabrication or production timeout.
+First INTERVAL_BEFORE failed compilation with rustc-LLVM out-of-memory under
+4GiB child address-space cap, NOT intended RED. Root23GiB/RAM11GiB available;
+retry tool61110 uses8GiB child cap and180s test supervision, unchanged host/Chrome.
+No runtime guard fix applied yet; narrow conditions and remaining C gates explicit.
+
+
+2026-09-28T01:49:49.479878+00:00 — C shared-floor repair: source/proof integration checkpoint.
+Retained guard applied after scoped general proof and recovered Oracle disposition.
+Actual preflight-only mutant fails ST/OW1 interval assertion (PREFLIGHT_MUTANT,
+cargo101), exact production bytes restored. Added worker panic before use and
+post-write/pre-reply: real M8 outcome distinguishes the latter from no write;
+parent releases unpoisoned floor, dead worker unavailable, sibling revocation can
+publish. RUST_WORKER_FAILURES exit0:11pass; LIB_AFTER exit0:409pass/0fail/0skip,
+99.15s, includes all three I3 G1/G2 and FIFO/restore/patch regressions.
+
+Mirrored exact reviewed SharedAuthorityUse.lean under existing foundations root,
+outside frozen B manifest. INTEGRATED_LEAN fresh trust0/j1 has14general lemmas,
+128owned declarations/no nonstandard axioms,7finite guards. All four weaker
+controls fail at intended line4. Two failed first proof attempts and the4GiB LLVM
+compile failure remain excluded historical evidence. Child build/test cap8GiB,
+existing target reused, no Chrome/host settings or cache changes.
+
+Updated companion/LeanREADME, W4_CHECK/CURRENT_GOAL/RESUME, plan, Documentation,
+project-status, progress, tasks and samples_progress. No sample taxonomy/root
+change; scripts/README and samples/README update unnecessary. No Canon statement
+changed. Oracle feedback is advisory, not signed reviewer/owner acceptance.
+Git integration and ordinary non-test check pending at this entry. C remaining
+source/phase/all-entry/custody/resource gates not waived; D/E still dependency-gated.
+No subagent used or left running; no Oracle live job or user browser action needed.
+
+2026-09-28T01:50:48.546813+00:00 — CHECK_NONTEST cargo check --locked --offline -j1 -p mir-runtime --lib exit0;31 existing warnings. Ordinary non-test compilation independently confirmed.
+
+2026-09-28T01:56:24.546482+00:00 — make docs/tool95429 exit0,1764reports; own diff whitespace and
+source check complete. Commit/push checkpoint follows. New independent read-only
+phase-mapping review sent once visible/browser attachment at01:55:38UTC, session
+mir-w4-c-phase-map/tool82956; frozen questionf554d1b4dfc38a3f8cc1dab5a04c12e4a55768e9038f164013bd8a5e6864aa19,
+manifestfed47af0b9ec22ff4f320618e3b259f21db7d2ec62e97abe291ac780fab92191,
+12files212160bytes. Next status>=01:58:38UTC. Existing G2 success test asserts
+owner effect only; requester reply validation remains separately required. No
+phase identity or source completion inferred. This review is not needed to
+reopen the already reviewed narrow lock mechanism; it addresses the next C gate.

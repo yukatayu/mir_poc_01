@@ -1,6 +1,6 @@
 {
   "schema": "proof-first-w4-check-v1",
-  "timestamp": "2026-09-27T23:54:48.407617+00:00",
+  "timestamp": "2026-09-28T01:49:49.479878+00:00",
   "base_head": "5d7c13a821c912d14c347775e23493a77f790768",
   "status": "B closed as bounded LAB integrated candidate; C current-context admission goal active; W4 incomplete",
   "work_root": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration",
@@ -41612,5 +41612,510 @@
       "status": "running; checked00:04:04UTC, next>=00:07:04UTC",
       "packet": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/oracle-c-submitted-evidence"
     }
+  },
+  "c_shared_floor_counterexample": {
+    "status": "reproduced; unfixed; production gated",
+    "receipt": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-admission-reuse/SHARED_FLOOR_ATTEMPT1.json",
+    "exit": 101,
+    "observed": "revoked sibling authority still writes hp100 to90",
+    "residuals": [
+      "R03",
+      "R04",
+      "R05",
+      "R12"
+    ],
+    "extended_receipt": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-shared-authority-use/RUST_BEFORE.json",
+    "result": "1 positive passes over ST/OW1; 2 stale sibling negatives fail as intended, no repair",
+    "theory_receipt": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-shared-authority-use/ATTEMPT3.json",
+    "audit_controls": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-shared-authority-use/AUDIT_CONTROLS.json",
+    "theory_limit": "local checker exactness and physical same-mutex correspondence are explicit premises; not full C",
+    "oracle_session": "mir-w4-c-shared-floor",
+    "oracle_tool": 38958,
+    "oracle_status": {
+      "at": "2026-09-28T00:41:12.210980+00:00",
+      "tool": 38958,
+      "whole_exit": 1,
+      "status": "failed before prompt: existing Oracle profile lock held by 3642711 after wrapper 300s acquisition wait",
+      "advisory_received": false,
+      "next": "preserve existing witness job; same frozen new packet retry only after profile released; do not count invocation as prompt delivery"
+    },
+    "actual_backend_receipt": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-shared-authority-use/RUST_BEFORE_ACTUAL.json",
+    "latest_theory_receipt": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-shared-authority-use/CHECKED_PATH.json",
+    "latest_audit_receipt": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-shared-authority-use/CHECKED_OWNED_AUDIT.json",
+    "facts_freshness": "general checked-history theorem without local authorization meaning premise; semantic authorization remains separate conditional theorem",
+    "queued_review": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/oracle-c-shared-floor-current",
+    "whole_lib_before": {
+      "command": [
+        "cargo",
+        "test",
+        "--locked",
+        "--offline",
+        "-j",
+        "1",
+        "-p",
+        "mir-runtime",
+        "--lib",
+        "--",
+        "--test-threads=1"
+      ],
+      "start": "2026-09-28T01:20:21.821575+00:00",
+      "scope": "fresh whole mir-runtime lib pre-repair baseline; added negatives expected RED, not success",
+      "exit": 101,
+      "log_sha256": "510cec773626d11cf787d807b1c9de00b83716d9dcb776cbf82e4e0cbaab9690",
+      "result": {
+        "passed": 399,
+        "failed": 3,
+        "ignored": 0,
+        "seconds": 95.35
+      },
+      "failures": "only three added intended stale-authority negatives",
+      "test_source_at_compile_sha256": "ee77577e09f66f9eb88d5ce8658720559036b586d04153472ff794e889c800fd",
+      "binding_note": "same compilation from QUEUED_BEFORE, subsequent rustfmt changed whitespace while binary tests ran; no production delta; not a fresh post-format source validation"
+    },
+    "queued_carrier_before": {
+      "command": [
+        "cargo",
+        "test",
+        "--locked",
+        "--offline",
+        "-j",
+        "1",
+        "-p",
+        "mir-runtime",
+        "--lib",
+        "proof_first_shared_authority_floor_rechecks_previously_generated_carrier",
+        "--",
+        "--test-threads=1",
+        "--nocapture"
+      ],
+      "start": "2026-09-28T01:19:26.892683+00:00",
+      "target_dir": "default existing target",
+      "test_sha256": "ee77577e09f66f9eb88d5ce8658720559036b586d04153472ff794e889c800fd",
+      "exit": 101,
+      "log_sha256": "4976e04da207c206b9c199ffec35a36b1a787e649516ee6c166ee7f569baf399"
+    }
+  },
+  "c_oracle_current": null,
+  "c_witness_final_recovery": {
+    "at": "2026-09-28T01:15:21.113Z",
+    "session": "mir-w4-c-witness-retry4",
+    "target": "DA605CC020566D3CD7551672A8A104F9",
+    "stop": false,
+    "blocks": 1,
+    "characters": 27106,
+    "collection": "same completed conversation DOM; CLI ANSWER.md retained separately",
+    "answer_sha256": "08c0b1796bd063bbf22cd17d89e1765088196c413d68c7a7a47d1e4ad7bea0af",
+    "model_verification": "manual ordinary menu: 6 / Pro; Latest checked; slider 4 of 4; CLI current strategy itself verified=no",
+    "cli_answer": "one word Supports; preserved as extraction failure, not substantive review",
+    "disposition": "narrow submitted-evidence theorem inspected, but duplicates W2/W3 and remains excluded from new integration; no production acceptance"
+  },
+  "c_witness_disposition": {
+    "at": "2026-09-28T01:16:10.868684+00:00",
+    "findings": {
+      "F1": "Accepted distinction: current argument witness vs independently retained original; existing reuse disposition excludes duplicate theorem.",
+      "F2": "OPEN implementation obligation: inventory selection continuity, full reference immutability, key/value principal and unique lookup; interface countermodel is not confirmed reachable exploit.",
+      "F3": "Accepted phase mismatch; existing AdmissionPhases candidate and three phase tests do not close source start/reservation simulation or Q18.",
+      "F4": "OPEN carrier/envelope/M8/plan preservation; audit actual caller chain before whole-C closure.",
+      "F5": "Accepted scope limitations: context fields do not automatically include every semantic property; policy version/body, non-target revisions, grant scope remain explicit.",
+      "F6": "Confirmed synchronization gap independently by actual stale-sibling ST/OW1 backend writes; proposed shared-floor guard addresses narrow LocalFabric path. Custody and resource checks remain distinct.",
+      "suggested_supports_retention": "Not adopted as a new module: redundant with existing mechanically checked witness-indexed W2/W3 statements; this review was frozen before reuse audit.",
+      "authority": "Oracle advisory only; no owner-policy or Canon acceptance; no Rust reachability inferred from interface countermodels."
+    }
+  },
+  "c_floor_final_recovery": {
+    "at": "2026-09-28T01:30:26.091Z",
+    "session": "mir-w4-c-floor-current",
+    "target": "D461C9E11405A5C21FDFB7B38E540AF7",
+    "stop": false,
+    "blocks": 1,
+    "characters": 23639,
+    "collection": "same completed conversation DOM; CLI ANSWER.md retained separately",
+    "answer_sha256": "5da7454782dc83ca27256f9d95cf502506ed0fbcc6a103e7d0e02e12b1706ba3",
+    "wrapper_exit": 0,
+    "tool": 93473,
+    "model": "manual same-tab menu6/Pro, Latestchecked, maxslider4of4; wrapper current verified=no",
+    "cli_capture": "ANSWER.md only CheckedRuns; preserved failed extractor output"
+  },
+  "c_floor_review_disposition": {
+    "at": "2026-09-28T01:35:03.353795+00:00",
+    "findings": {
+      "freshness": "Accepted: executable history freshness independent of authorization semantics; physical correspondence remains explicit.",
+      "retained_guard": "No identified safety counterexample under stated premises; narrow repair allowed without whole-C closure.",
+      "callers": "Targeted audit: three non-test production access calls at sys4 participant leave/reacquire and sys5 consumer revoke use completed temporary statement before next fabric call. No retained accessor caller in production. Internal accessor is non-reentrant while held; not a public source feature. Test-only callers similarly use statements; general arbitrary Rust caller pattern can deadlock and is not claimed supported.",
+      "gate_comparison": "matches_for_restore body inspected: no validation observation counter check; full runtime comparison additionally binds all owner-use/lineage fields. Repeated asymmetrical counters still need testing.",
+      "backend": "M8 refresh is synchronous replacement in all four snapshots; ST loop infallible apart from panic/allocation; OW1 one session reply after update. Disconnection leaves unavailable worker, not later usable stale writer. No automatic no-write guarantee for arbitrary backend errors.",
+      "after_release": "local_store is a coordinator mirror of returned earlier write, not a second backend write; exclusive &mut fabric and independent sibling sessions. Historical trace is not current authority or permission to disclose secret data. New forced continuation test will check.",
+      "model": "held is OWNER-use interval. Publisher lock acquisition and wait stutter; publication then local cache refresh abstracted with no interleaved use; counter-only changes erased.",
+      "required_test_delta": "Forced actual ST/OW1 backend pause, publication-before-continuation, stale no-validation/no-backend mutation, current-but-revoked, asymmetric counters, poisoned floor; retain I3 regressions and failure/TCB distinctions.",
+      "controls": "Original four negative sources/logs retained; Oracle bundle did not include them. Exit1 alone not relied on; local diagnostics/classification independently reviewed.",
+      "status": "Physical checks/tests in progress. No production guard applied yet; no C/Canon acceptance."
+    }
+  },
+  "c_shared_authority_use": {
+    "status": "bounded repair validated and ready for own Git checkpoint; C/W4 incomplete",
+    "sources": {
+      "crates/mir-runtime/src/sys4_dispatch.rs": "89451670278f82f3b72bac0d81874eec432f0442ed591e880be30315ded45fbe",
+      "crates/mir-runtime/src/m8_runtime_local_cut.rs": "3d7b3fe5bbd6b64edcce4a7403a4f54165ab82ed18f4990da83f988143aba057",
+      "crates/mir-runtime/src/proof_first_current_admission_tests.rs": "3c466c9415029ea4af4924e718398e5beb840b0f363870c78130c15744a0b842",
+      "samples/lean/foundations/MirroreaProofFirstSharedAuthorityUse.lean": "d37b45bcb2a988ba0e0f45633e3aaae46a5b4da06d678c68d3521b5c5f1f2b4e"
+    },
+    "evidence": {
+      "RUST_BEFORE_ACTUAL": {
+        "command": [
+          "cargo",
+          "test",
+          "--locked",
+          "--offline",
+          "-j",
+          "1",
+          "-p",
+          "mir-runtime",
+          "--lib",
+          "proof_first_shared_authority_floor",
+          "--",
+          "--test-threads=1",
+          "--nocapture"
+        ],
+        "start": "2026-09-28T00:52:24.863200+00:00",
+        "exit": 101,
+        "test_sha256": "8857a2c56fd6fe19fe44354d158bcd11e27924c0552a83fa42f984f5858c496e",
+        "log_sha256": "2d51eed5f51fc26064d42aef69b28d42572beb8eb21cb4e768367b00518dde84"
+      },
+      "QUEUED_BEFORE": {
+        "command": [
+          "cargo",
+          "test",
+          "--locked",
+          "--offline",
+          "-j",
+          "1",
+          "-p",
+          "mir-runtime",
+          "--lib",
+          "proof_first_shared_authority_floor_rechecks_previously_generated_carrier",
+          "--",
+          "--test-threads=1",
+          "--nocapture"
+        ],
+        "start": "2026-09-28T01:19:26.892683+00:00",
+        "target_dir": "default existing target",
+        "test_sha256": "ee77577e09f66f9eb88d5ce8658720559036b586d04153472ff794e889c800fd",
+        "exit": 101,
+        "log_sha256": "4976e04da207c206b9c199ffec35a36b1a787e649516ee6c166ee7f569baf399"
+      },
+      "LIB_BEFORE": {
+        "command": [
+          "cargo",
+          "test",
+          "--locked",
+          "--offline",
+          "-j",
+          "1",
+          "-p",
+          "mir-runtime",
+          "--lib",
+          "--",
+          "--test-threads=1"
+        ],
+        "start": "2026-09-28T01:20:21.821575+00:00",
+        "scope": "fresh whole mir-runtime lib pre-repair baseline; added negatives expected RED, not success",
+        "exit": 101,
+        "log_sha256": "510cec773626d11cf787d807b1c9de00b83716d9dcb776cbf82e4e0cbaab9690",
+        "result": {
+          "passed": 399,
+          "failed": 3,
+          "ignored": 0,
+          "seconds": 95.35
+        },
+        "failures": "only three added intended stale-authority negatives",
+        "test_source_at_compile_sha256": "ee77577e09f66f9eb88d5ce8658720559036b586d04153472ff794e889c800fd",
+        "binding_note": "same compilation from QUEUED_BEFORE, subsequent rustfmt changed whitespace while binary tests ran; no production delta; not a fresh post-format source validation"
+      },
+      "INTERVAL_BEFORE": {
+        "command": [
+          "cargo",
+          "test",
+          "--locked",
+          "--offline",
+          "-j",
+          "1",
+          "-p",
+          "mir-runtime",
+          "--lib",
+          "proof_first_shared_authority_floor_serializes_actual_owner_interval",
+          "--",
+          "--test-threads=1",
+          "--nocapture"
+        ],
+        "at": "2026-09-28T01:33:56.992324+00:00",
+        "sources": {
+          "crates/mir-runtime/src/proof_first_current_admission_tests.rs": "fea96a5ef1cfbb3bee4e166e5e215ccb8caa9299405787e4f9c46dd742729cd4",
+          "crates/mir-runtime/src/sys4_dispatch.rs": "781a1e80061c3f82e7249f8a2bc44c165b6738d84d6debe79ba3baa68756fa88",
+          "crates/mir-runtime/src/m8_runtime_local_cut.rs": "f3f2b6eee581986c9ff6781814d9868cb08def06e01eb3df24bda2e53c2c9ef5"
+        },
+        "exit": 101,
+        "log_sha256": "81f8e3c689f91167735407a5596a7b781940bdeb9a7626e3ff89bae19f7a21df"
+      },
+      "INTERVAL_BEFORE_RETRY": {
+        "command": [
+          "cargo",
+          "test",
+          "--locked",
+          "--offline",
+          "-j",
+          "1",
+          "-p",
+          "mir-runtime",
+          "--lib",
+          "proof_first_shared_authority_floor_serializes_actual_owner_interval",
+          "--",
+          "--test-threads=1",
+          "--nocapture"
+        ],
+        "at": "2026-09-28T01:35:03.429870+00:00",
+        "address_space_gib": 8,
+        "reason": "first test-only-hook compilation exceeded prior4GiB child AS; host available memory11GiB; no global/Chrome limits changed",
+        "sources": {
+          "crates/mir-runtime/src/proof_first_current_admission_tests.rs": "fea96a5ef1cfbb3bee4e166e5e215ccb8caa9299405787e4f9c46dd742729cd4",
+          "crates/mir-runtime/src/sys4_dispatch.rs": "781a1e80061c3f82e7249f8a2bc44c165b6738d84d6debe79ba3baa68756fa88",
+          "crates/mir-runtime/src/m8_runtime_local_cut.rs": "f3f2b6eee581986c9ff6781814d9868cb08def06e01eb3df24bda2e53c2c9ef5"
+        },
+        "exit": 101,
+        "log_sha256": "0a7daf54e2552e5e91874513ee6cf715e582f77ce6b3dfa65709e1e3df71c66e"
+      },
+      "PREFLIGHT_MUTANT": {
+        "command": [
+          "cargo",
+          "test",
+          "--locked",
+          "--offline",
+          "-j",
+          "1",
+          "-p",
+          "mir-runtime",
+          "--lib",
+          "proof_first_shared_authority_floor_serializes_actual_",
+          "--",
+          "--test-threads=1",
+          "--nocapture"
+        ],
+        "at": "2026-09-28T01:39:15.406912+00:00",
+        "original_sha256": "89451670278f82f3b72bac0d81874eec432f0442ed591e880be30315ded45fbe",
+        "mutant_sha256": "94ee706e665b31a1ded7c6500b1fef38160957f9da97e5efe4a0bf4f2d91ca6b",
+        "meaning": "release guard just before backend use; rest unchanged",
+        "exit": 101,
+        "restored_sha256": "89451670278f82f3b72bac0d81874eec432f0442ed591e880be30315ded45fbe",
+        "log_sha256": "6434e8d4bef1b3c34f16c77c269b693c6fa2d06d4d20edc92cfebfb22c1fcdb4",
+        "intended_rejection": true
+      },
+      "RUST_WORKER_FAILURES": {
+        "command": [
+          "cargo",
+          "test",
+          "--locked",
+          "--offline",
+          "-j",
+          "1",
+          "-p",
+          "mir-runtime",
+          "--lib",
+          "proof_first_shared_authority_floor",
+          "--",
+          "--test-threads=1",
+          "--nocapture"
+        ],
+        "at": "2026-09-28T01:45:50.338049+00:00",
+        "child_address_space_gib": 8,
+        "sources": {
+          "crates/mir-runtime/src/proof_first_current_admission_tests.rs": "3c466c9415029ea4af4924e718398e5beb840b0f363870c78130c15744a0b842",
+          "crates/mir-runtime/src/sys4_dispatch.rs": "89451670278f82f3b72bac0d81874eec432f0442ed591e880be30315ded45fbe",
+          "crates/mir-runtime/src/m8_runtime_local_cut.rs": "3d7b3fe5bbd6b64edcce4a7403a4f54165ab82ed18f4990da83f988143aba057"
+        },
+        "exit": 0,
+        "log_sha256": "09f61c633b62b1521f3eeb8aa393a1ca49d190f70105051d03fa03c1b8ec2bc0"
+      },
+      "LIB_AFTER": {
+        "command": [
+          "cargo",
+          "test",
+          "--locked",
+          "--offline",
+          "-j",
+          "1",
+          "-p",
+          "mir-runtime",
+          "--lib",
+          "--",
+          "--test-threads=1"
+        ],
+        "at": "2026-09-28T01:46:37.293446+00:00",
+        "child_address_space_gib": 8,
+        "sources": {
+          "crates/mir-runtime/src/proof_first_current_admission_tests.rs": "3c466c9415029ea4af4924e718398e5beb840b0f363870c78130c15744a0b842",
+          "crates/mir-runtime/src/sys4_dispatch.rs": "89451670278f82f3b72bac0d81874eec432f0442ed591e880be30315ded45fbe",
+          "crates/mir-runtime/src/m8_runtime_local_cut.rs": "3d7b3fe5bbd6b64edcce4a7403a4f54165ab82ed18f4990da83f988143aba057"
+        },
+        "exit": 0,
+        "log_sha256": "62c86c4ae6f41586249e5cca452a5080ef673bb48a819fed1d25995d18717810"
+      },
+      "INTEGRATED_LEAN": {
+        "at": "2026-09-28T01:47:58.467925+00:00",
+        "workdir": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-shared-authority-use/integrated-bf68skwe",
+        "toolchain": "Lean (version 4.29.1, x86_64-unknown-linux-gnu, commit f72c35b3f637c8c6571d353742168ab66cc22c00, Release)",
+        "runs": [
+          {
+            "command": [
+              "/home/codex/.elan/toolchains/leanprover--lean4---v4.29.1/bin/lean",
+              "--trust=0",
+              "-j1",
+              "-o",
+              "MirroreaProofFirstSharedAuthorityUse.olean",
+              "MirroreaProofFirstSharedAuthorityUse.lean"
+            ],
+            "exit": 0,
+            "source_sha256": "d37b45bcb2a988ba0e0f45633e3aaae46a5b4da06d678c68d3521b5c5f1f2b4e",
+            "log_sha256": "bab7e6e1dbb9a8dd5ffcca56caa41ea9cf4c2adbf53635abf6d2ea10651d86e1"
+          },
+          {
+            "command": [
+              "/home/codex/.elan/toolchains/leanprover--lean4---v4.29.1/bin/lean",
+              "--trust=0",
+              "-j1",
+              "-o",
+              "OwnedAudit.olean",
+              "OwnedAudit.lean"
+            ],
+            "exit": 0,
+            "source_sha256": "d5197760ffb5e39bd106b638bb9085638b9ec4cf950790e3381b00625d8db597",
+            "log_sha256": "b52e32d4bd8bcd8fac4689744fee0da318c2cb2c57a876b39e5e089cec9f20d1"
+          },
+          {
+            "command": [
+              "/home/codex/.elan/toolchains/leanprover--lean4---v4.29.1/bin/lean",
+              "--trust=0",
+              "-j1",
+              "-o",
+              "StaleCache.olean",
+              "StaleCache.lean"
+            ],
+            "exit": 1,
+            "source_sha256": "be6a7655483bdd07ecd119eaf61218492418d371dca769ba9fbcad6473324040",
+            "log_sha256": "321e21cccdf1959bd17a80b35fd1293cf8fa37c3690d5b6f0b0ef5b6ffbd83a0"
+          },
+          {
+            "command": [
+              "/home/codex/.elan/toolchains/leanprover--lean4---v4.29.1/bin/lean",
+              "--trust=0",
+              "-j1",
+              "-o",
+              "ReleaseBeforeUse.olean",
+              "ReleaseBeforeUse.lean"
+            ],
+            "exit": 1,
+            "source_sha256": "d374a1155fbad3c64d5801c81395d65e6e19510807a037e7ce93d1ed2a23edfd",
+            "log_sha256": "e74efed2f767ff36bd1fc979b782c57d255cadd450ee6f01602611aaec78a4d3"
+          },
+          {
+            "command": [
+              "/home/codex/.elan/toolchains/leanprover--lean4---v4.29.1/bin/lean",
+              "--trust=0",
+              "-j1",
+              "-o",
+              "PublishWhileHeld.olean",
+              "PublishWhileHeld.lean"
+            ],
+            "exit": 1,
+            "source_sha256": "b1942f58be6bd37a20c44493a8208335dc6c746dfd1d6d08b24afbfb6dbcb2d5",
+            "log_sha256": "22beb3860d8357e4ebd3cd768c9079605e2917bdf4ea5fa7804d5dc8e76c405f"
+          },
+          {
+            "command": [
+              "/home/codex/.elan/toolchains/leanprover--lean4---v4.29.1/bin/lean",
+              "--trust=0",
+              "-j1",
+              "-o",
+              "RefuseAll.olean",
+              "RefuseAll.lean"
+            ],
+            "exit": 1,
+            "source_sha256": "8a64c5cb423c079806f4f2f7a9b4a0266d114c147f1ed30e70a563cfcbde257e",
+            "log_sha256": "0f76ec96d132372e1ccc7eccd8ca7a8764c0728ee2ad0fd0d2455b06eb0dc49c"
+          }
+        ]
+      },
+      "CHECK_NONTEST": {
+        "command": [
+          "cargo",
+          "check",
+          "--locked",
+          "--offline",
+          "-j",
+          "1",
+          "-p",
+          "mir-runtime",
+          "--lib"
+        ],
+        "at": "2026-09-28T01:48:42.453940+00:00",
+        "child_address_space_gib": 8,
+        "exit": 0,
+        "log_sha256": "58ec8ae45b98aa8a9bcb96149085a7a9a760c95260b2120f7850c35a6f2884e3"
+      },
+      "DOCS": {
+        "at": "2026-09-28T01:56:24.546482+00:00",
+        "command": [
+          "make",
+          "docs"
+        ],
+        "tool_session": 95429,
+        "exit": 0,
+        "output": "Agent config PASS; Canon index218; hierarchy800/800; Documentation scaffold complete;1764 reports"
+      }
+    },
+    "scope": "actual local checked-source/M9/M8 owner paths; not real network, whole admission, custody or secret observation",
+    "oracle": {
+      "session": "mir-w4-c-floor-current",
+      "full_answer_sha256": "5da7454782dc83ca27256f9d95cf502506ed0fbcc6a103e7d0e02e12b1706ba3",
+      "cli_extraction": "one word; full same completed DOM separately recovered",
+      "advisory_only": true,
+      "disposition": {
+        "at": "2026-09-28T01:35:03.353795+00:00",
+        "findings": {
+          "freshness": "Accepted: executable history freshness independent of authorization semantics; physical correspondence remains explicit.",
+          "retained_guard": "No identified safety counterexample under stated premises; narrow repair allowed without whole-C closure.",
+          "callers": "Targeted audit: three non-test production access calls at sys4 participant leave/reacquire and sys5 consumer revoke use completed temporary statement before next fabric call. No retained accessor caller in production. Internal accessor is non-reentrant while held; not a public source feature. Test-only callers similarly use statements; general arbitrary Rust caller pattern can deadlock and is not claimed supported.",
+          "gate_comparison": "matches_for_restore body inspected: no validation observation counter check; full runtime comparison additionally binds all owner-use/lineage fields. Repeated asymmetrical counters still need testing.",
+          "backend": "M8 refresh is synchronous replacement in all four snapshots; ST loop infallible apart from panic/allocation; OW1 one session reply after update. Disconnection leaves unavailable worker, not later usable stale writer. No automatic no-write guarantee for arbitrary backend errors.",
+          "after_release": "local_store is a coordinator mirror of returned earlier write, not a second backend write; exclusive &mut fabric and independent sibling sessions. Historical trace is not current authority or permission to disclose secret data. New forced continuation test will check.",
+          "model": "held is OWNER-use interval. Publisher lock acquisition and wait stutter; publication then local cache refresh abstracted with no interleaved use; counter-only changes erased.",
+          "required_test_delta": "Forced actual ST/OW1 backend pause, publication-before-continuation, stale no-validation/no-backend mutation, current-but-revoked, asymmetric counters, poisoned floor; retain I3 regressions and failure/TCB distinctions.",
+          "controls": "Original four negative sources/logs retained; Oracle bundle did not include them. Exit1 alone not relied on; local diagnostics/classification independently reviewed.",
+          "status": "Physical checks/tests in progress. No production guard applied yet; no C/Canon acceptance."
+        }
+      },
+      "followup": "required interval tests pass; preflight-only mutation rejected ST/OW1; skew/current-revoked/poison/queued-entry pass; actual worker panic before and after write tested. All three existing I3 phase regressions pass in full 409-test run."
+    },
+    "tcb": [
+      "Rust compiler/stdlib mutex and RAII",
+      "honest complete authority-facts construction",
+      "synchronous one-worker owner execution/reply ordering; no detached writes",
+      "standard Lean kernel/logical axioms"
+    ],
+    "nonclaims": [
+      "backend error implies no write",
+      "arbitrary nested same-floor accessor is reentrant",
+      "distributed authority",
+      "whole C or Canon acceptance"
+    ]
+  },
+  "c_phase_correspondence_review": {
+    "at": "2026-09-28T01:55:38.556866+00:00",
+    "session": "mir-w4-c-phase-map",
+    "pid": 3836659,
+    "question_sha256": "f554d1b4dfc38a3f8cc1dab5a04c12e4a55768e9038f164013bd8a5e6864aa19",
+    "manifest_sha256": "fed47af0b9ec22ff4f320618e3b259f21db7d2ec62e97abe291ac780fab92191",
+    "display": ":0",
+    "model_evidence": "select strategy; require actual6Pro/max selection evidence on completed conversation",
+    "next_status_after": "2026-09-28T01:58:38.556866+00:00",
+    "scope": "single read-only frozen current implementation review; no outer deadline or paid fallback"
   }
 }

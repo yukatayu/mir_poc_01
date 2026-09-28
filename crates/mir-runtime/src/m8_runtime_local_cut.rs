@@ -501,6 +501,8 @@ pub(crate) struct M8LocalDesignatedTraceContext {
     m8_publication_id: String,
     logical_tick_id: String,
     logical_tick_frontier: String,
+    #[cfg(test)]
+    owner_use_probe: Option<crate::proof_first_current_admission_tests::OwnerUseProbe>,
 }
 
 #[cfg_attr(not(test), allow(dead_code))]
@@ -524,6 +526,8 @@ impl M8LocalDesignatedTraceContext {
             m8_publication_id: m8_publication_id.into(),
             logical_tick_id: logical_tick_id.into(),
             logical_tick_frontier: logical_tick_frontier.into(),
+            #[cfg(test)]
+            owner_use_probe: crate::proof_first_current_admission_tests::current_owner_use_probe(),
         }
     }
 
@@ -1821,6 +1825,10 @@ impl M8LocalRuntime {
         ),
         M8LocalOwnerExecutionFailure,
     > {
+        #[cfg(test)]
+        if let Some(probe) = &context.owner_use_probe {
+            probe.before_owner();
+        }
         let request = self.request_for_owner_context(request, &context);
         let enqueue_start = self.owner.trace().entries().len();
         let enqueue = self.with_owner_snapshot(|owner| match handoff {
@@ -1849,6 +1857,10 @@ impl M8LocalRuntime {
         let enqueue_observation = owner_context_row(&enqueue_rows, M8LocalTraceKind::OwnerEnqueued);
         let serve_start = self.owner.trace().entries().len();
         let served = self.with_owner_snapshot(|owner| owner.serve_next_owner(owner_locus));
+        #[cfg(test)]
+        if let (Some(probe), Ok(outcome)) = (&context.owner_use_probe, &served) {
+            probe.after_write(outcome);
+        }
         let serve_trace_rows = self.append_owner_trace_since(serve_start);
         let serve_rows = self.attach_context_to_rows(serve_trace_rows, context);
         let serve_observation = serve_rows

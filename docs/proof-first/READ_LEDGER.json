@@ -45373,5 +45373,181 @@
     "range": "1-178",
     "status": "authored",
     "role": "B closure authored delta plus preserved prior full read; C goal contract, no theorem acceptance"
+  },
+  {
+    "path": "crates/mir-runtime/src/sys2_execution_backend.rs",
+    "sha256": "aac44ab1ce1bd8c513ffb0097a715b38513c66a7fedc4e5f9dfe7e420ede930f",
+    "range": "1-928 (full sequential chunks)",
+    "status": "full",
+    "role": "full OW1 worker and command/response/Drop paths; synchronous contextual completion, no detached writes or M9-floor reentry",
+    "at": "2026-09-28T00:38:45.427002+00:00"
+  },
+  {
+    "path": "crates/mir-runtime/src/m8_runtime_local_cut.rs",
+    "sha256": "85535a772736ccbd827e672977810b78dc3743bdbf02847f700ec38ea79c348b",
+    "range": "1-3308 (full sequential chunks)",
+    "status": "full",
+    "role": "full M8 local session/cut/restore/trace and synchronous owner path; no M9-floor lock or user callback in owner path; lower standalone seed/floor APIs are distinct trusted boundaries, not full-C all-entry closure",
+    "at": "2026-09-28T00:38:45.427002+00:00"
+  },
+  {
+    "path": "crates/mir-runtime/src/proof_first_current_admission_tests.rs",
+    "sha256": "4a9a5107ea3caba01d564cbfe048675f38a94e3008650c63c73f838f0eb0b7e6",
+    "range": "1-175",
+    "status": "full",
+    "role": "four real source/Core/M9/M8 current-authority tests; queued-carrier entry; fresh actual backend observations; pre-repair RED retained",
+    "at": "2026-09-28T01:22:03.911366+00:00"
+  },
+  {
+    "path": ".docs/current-l2-source-sample-authoring-policy.md",
+    "sha256": "7a5fc8e7c592db2f8e46da28a5868fb2f245f73afab1dd81035a6d61dd8e0484",
+    "range": "1-79",
+    "status": "full",
+    "role": "current mandatory corpus reconciliation; historical current-L2 authoring not adopted as W4 semantics; current C vs Canon pause distinguished; external notification excluded by task",
+    "at": "2026-09-28T01:24:32.339355+00:00"
+  },
+  {
+    "path": ".docs/continuous-task-policy.md",
+    "sha256": "4b3a8d0752a2a6b71d3c7400829d840d08161051e490dd85d06f5fc1a93ced5b",
+    "range": "1-38",
+    "status": "full",
+    "role": "current mandatory corpus reconciliation; historical current-L2 authoring not adopted as W4 semantics; current C vs Canon pause distinguished; external notification excluded by task",
+    "at": "2026-09-28T01:24:32.339355+00:00"
+  },
+  {
+    "path": "docs/project-status.md",
+    "sha256": "b3d9031465e20f382fe506ab52fa98c19c85d6b0f8b64b0bf9bf49959c879e82",
+    "range": "1-172",
+    "status": "full",
+    "role": "current mandatory corpus reconciliation; historical current-L2 authoring not adopted as W4 semantics; current C vs Canon pause distinguished; external notification excluded by task",
+    "at": "2026-09-28T01:24:32.339355+00:00"
+  },
+  {
+    "path": "docs/proof-first/W2_RESOURCE_CHECK.json",
+    "sha256": "4197de74f75948b5ac544f4fc6b0f20526fe6186761a8a615efd747aaec7b8c4",
+    "range": "1-15",
+    "status": "full",
+    "role": "historical scoped proof/review receipt; no fresh execution inferred; early unreviewed status not silently overwritten by later closure",
+    "at": "2026-09-28T01:27:20.980026+00:00"
+  },
+  {
+    "path": "docs/proof-first/CURRENT_USE_CHECK.json",
+    "sha256": "3eed0ddfa7898860d5bb7f538338d8427ebce29813e26d8be125a99bd957e3d7",
+    "range": "1-47",
+    "status": "full",
+    "role": "historical scoped proof/review receipt; no fresh execution inferred; early unreviewed status not silently overwritten by later closure",
+    "at": "2026-09-28T01:27:20.980026+00:00"
+  },
+  {
+    "path": "docs/proof-first/W3_ENTRY_CHECK.json",
+    "sha256": "a6b719b542a507185e7a6140b80bab5b9a38e7baa46fa3bd95808ee645596084",
+    "range": "1-26",
+    "status": "full",
+    "role": "historical scoped proof/review receipt; no fresh execution inferred; early unreviewed status not silently overwritten by later closure",
+    "at": "2026-09-28T01:27:20.980026+00:00"
+  },
+  {
+    "path": "docs/proof-first/SUPPORT_CUT.json",
+    "sha256": "c7ceb771cbf286db81aebae3251693bcaa3691543cf3814866fedb33ff7cd89f",
+    "range": "1-11",
+    "status": "full",
+    "role": "historical scoped proof/review receipt; no fresh execution inferred; early unreviewed status not silently overwritten by later closure",
+    "at": "2026-09-28T01:27:20.980026+00:00"
+  },
+  {
+    "path": "docs/proof-first/SUPPORT_DIFFERENTIAL.json",
+    "sha256": "8d8f56a6d7ec9036140aef3f7343651a0b93b5ff84a3c527df89c21adf2673b7",
+    "range": "1-21",
+    "status": "full",
+    "role": "historical scoped proof/review receipt; no fresh execution inferred; early unreviewed status not silently overwritten by later closure",
+    "at": "2026-09-28T01:27:20.980026+00:00"
+  },
+  {
+    "path": "docs/proof-first/W3_KERNEL_REVIEW.json",
+    "sha256": "da9d44664eb8cc00098284def65dc214155e87940f6634ea001445f06d7d0c5b",
+    "range": "1-46",
+    "status": "full",
+    "role": "historical scoped proof/review receipt; no fresh execution inferred; early unreviewed status not silently overwritten by later closure",
+    "at": "2026-09-28T01:27:20.980026+00:00"
+  },
+  {
+    "path": "docs/proof-first/W2_CONTRACT_CHECK.json",
+    "sha256": "11991b72e2679f9d376876f82a8f76fce7f8ebb7ad402dc97c2bb50ee1d6e428",
+    "range": "1-53",
+    "status": "full",
+    "role": "historical scoped proof/review receipt; no fresh execution inferred; early unreviewed status not silently overwritten by later closure",
+    "at": "2026-09-28T01:27:20.980026+00:00"
+  },
+  {
+    "path": "docs/proof-first/W2_INTEGRATED_CHECK.json",
+    "sha256": "c41066c1c09636504918597bd12cb7322ad71583b08c3d990bbf5124c4b27968",
+    "range": "1-83",
+    "status": "full",
+    "role": "historical scoped proof/review receipt; no fresh execution inferred; early unreviewed status not silently overwritten by later closure",
+    "at": "2026-09-28T01:27:20.980026+00:00"
+  },
+  {
+    "path": "docs/proof-first/GRAPH_VALIDATION_CHECK.json",
+    "sha256": "4b9504304c96f778c671ec8d5e14bda63a7af96484fdf82e10ece8f0720739f3",
+    "range": "1-108",
+    "status": "full",
+    "role": "historical scoped proof/review receipt; no fresh execution inferred; early unreviewed status not silently overwritten by later closure",
+    "at": "2026-09-28T01:27:20.980026+00:00"
+  },
+  {
+    "path": "docs/proof-first/TRACKED_VALIDATION_CHECK.json",
+    "sha256": "1c4aa1cf3d765b39d9e6cd764c42f3baed57749ea03163ef68cd2d0acf673391",
+    "range": "1-71",
+    "status": "full",
+    "role": "historical scoped proof/review receipt; no fresh execution inferred; early unreviewed status not silently overwritten by later closure",
+    "at": "2026-09-28T01:27:20.980026+00:00"
+  },
+  {
+    "path": "samples/lean/foundations/MirroreaProofFirstSharedAuthorityUse.lean",
+    "sha256": "d37b45bcb2a988ba0e0f45633e3aaae46a5b4da06d678c68d3521b5c5f1f2b4e",
+    "range": "1-218",
+    "role": "full read external proof, exact integrated copy",
+    "status": "full",
+    "at": "2026-09-28T01:50:48.546813+00:00"
+  },
+  {
+    "path": "samples/lean/foundations/MirroreaProofFirstSharedAuthorityUse.md",
+    "sha256": "3b7618387c2f04084bee57f1c9089e389e04458dbb16d2c516f275cbb701d3a3",
+    "range": "1-93",
+    "role": "authored bounded correspondence/TCB and reviewed",
+    "status": "full",
+    "at": "2026-09-28T01:50:48.546813+00:00"
+  },
+  {
+    "path": "crates/mir-runtime/src/m8_owner_admission_gate.rs",
+    "sha256": "0edf62518ac9031f685a9108b1f7f9aaab89a8a4ea7cd3f82f832b7e6293aa78",
+    "range": "1-442",
+    "role": "full current re-read for C phase correspondence",
+    "status": "full",
+    "at": "2026-09-28T01:50:48.546813+00:00"
+  },
+  {
+    "path": "crates/mir-runtime/src/proof_first_current_admission_tests.rs",
+    "sha256": "3c466c9415029ea4af4924e718398e5beb840b0f363870c78130c15744a0b842",
+    "range": "1-545",
+    "role": "full existing source read plus authored/reviewed fault test delta",
+    "status": "full",
+    "at": "2026-09-28T01:50:48.546813+00:00"
+  },
+  {
+    "path": "samples/lean/foundations/MirroreaProofFirstReferenceAuthority.lean",
+    "sha256": "24eba9de0f7ace2ffcb2ae2a56a8ba75d1e9bb74e5cae0cda4b8ba5e54a94f39",
+    "range": "1-336",
+    "role": "C exact current full reread for phase mapping; retains W3 semantics",
+    "status": "full",
+    "at": "2026-09-28T01:56:24.546482+00:00"
+  },
+  {
+    "path": "samples/lean/foundations/MirroreaProofFirstInvocationBoundary.lean",
+    "sha256": "6533e15f61d9bb2aa1259dcad0f0ce1564b308cbf4df39ef0a85c0ed9247f0ed",
+    "range": "1-205",
+    "role": "C exact current full reread for phase mapping; retains W3 semantics",
+    "status": "full",
+    "at": "2026-09-28T01:56:24.546482+00:00"
   }
 ]

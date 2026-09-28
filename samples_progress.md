@@ -470,3 +470,9 @@ W4 external evidence update (2026-09-14 16:58 JST): Oracle10 collected, Oracle11
 |---|---|---|
 | Ordinary source/native inputs | `samples/clean-near-end/mirrorea-proof-first-composition/host-reference/`, `samples/lean/host-reference/`; `scripts/proof_first_host_prepare.py` | Current observed preparation235commands and physical68commands/15profiles/53controls passed; scoped private-pipe evidence, no network/auth/recovery claim; B bounded integration closed; C admission/authority prerequisites open |
 | Preserved host model | Existing `proof_first_reference_source_check.py --with-host-model` | Current V2 whole model278commands/9169bindings passed; physical/preparation evidence is separate; B bounded integration closed; C admission/authority prerequisites open |
+
+
+| W4-C bounded owner-currentness evidence | Source / command | Status / remaining boundary |
+|---|---|---|
+| Shared local authority use | `samples/lean/foundations/MirroreaProofFirstSharedAuthorityUse.lean`; manual external fresh copy in Lean README | 14 general lemmas,128 owned declarations audited; whole-C/source/network correspondence open |
+| Actual local owner refusal/use | `cargo test --locked --offline -j 1 -p mir-runtime --lib proof_first_shared_authority_floor -- --test-threads=1` | 11 focused tests pass, actual ST/OW1 early-release mutant refused; actual worker panic before/after write distinguished; no real-network claim |

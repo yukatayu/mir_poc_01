@@ -93,7 +93,8 @@ names = ["Support", "CurrentUse", "CurrentUseReview", "TrackedValidation",
          "ResourceBoundary", "LocalContract", "ContractExport", "PureFunctions",
          "FunctionContractBridge", "ModuleContractBoundary", "OwnerAssignment",
          "ProfileGuarantees", "HandleValues", "PureHandleFunctions",
-         "ResourceComputations", "ResourceComputationScopeControls"]
+         "ResourceComputations", "ResourceComputationScopeControls",
+         "SharedAuthorityUse"]
 work = pathlib.Path(tempfile.mkdtemp(prefix="mir-proof-first-",
                                   dir=os.environ.get("PROOF_WORKDIR")))
 print(work, flush=True)
@@ -176,3 +177,9 @@ scope review was collected and locally disposed; B is a bounded LAB integrated
 candidate. C admission/authority premises remain open; Rust/Core/privateQUIC
 remains unconnected. Their source
 origins/transformations are in `docs/proof-first/W4_HOST_MANIFEST.json`.
+
+
+W4-C の局所共有 authority floor の限定修正は
+[SharedAuthorityUse](foundations/MirroreaProofFirstSharedAuthorityUse.md) に定義・
+一般証明・Rust 対応・TCB を記録する。上の手動 fresh-copy 検査に含め、凍結済みの
+W4-B 206-module manifest には追加しない。実networkやW4-C全体の完了ではない。

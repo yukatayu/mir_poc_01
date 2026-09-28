@@ -14494,6 +14494,12 @@ impl LocalFabric {
         }
     }
 
+    /// Test supervision only: inspect exclusion on the actual shared floor.
+    #[cfg(test)]
+    pub(crate) fn for_test_owner_authority_floor(&self) -> Arc<Mutex<M9AuthorityGeneration>> {
+        self.authority_live_floor.current.clone()
+    }
+
     pub(crate) fn apply_admitted_authority_lifecycle(
         &mut self,
         transition: M9AuthorityTransition,
@@ -15651,6 +15657,27 @@ impl LocalFabric {
                         &envelope.request_id,
                     ));
                 }
+                // A sibling can publish to the same floor while this fabric
+                // retains independent M9/M8 caches. Keep the full authority
+                // facts current until the synchronous backend use finishes.
+                let live_floor = self.authority_live_floor.clone();
+                let Some(floor_guard) = live_floor.guard_matching(&self.authority_generation)
+                else {
+                    return Err(self.quarantine(
+                        locus,
+                        &envelope,
+                        Sys4DiagnosticKind::M8ExecutionRejected,
+                        &envelope.request_id,
+                    ));
+                };
+                if !floor_guard.matches_runtime_authority_facts(&self.authority_generation) {
+                    return Err(self.quarantine(
+                        locus,
+                        &envelope,
+                        Sys4DiagnosticKind::M8ExecutionRejected,
+                        &envelope.request_id,
+                    ));
+                }
                 // Pure carrier/provenance checks must finish before M9
                 // records an admitted owner-operation validation occurrence.
                 // A forged lineage is not a successful validation merely
@@ -15736,6 +15763,16 @@ impl LocalFabric {
                         .enqueue_and_serve_i3_owner_admission(locus, request, context, handoff),
                     None => self.backend.enqueue_and_serve(locus, request, context),
                 };
+                // Both backends finish owner use before returning. The later
+                // mirror/receipt records that historical effect; it grants no
+                // permission for a new use after a subsequent publication.
+                drop(floor_guard);
+                #[cfg(test)]
+                if let Some(probe) =
+                    crate::proof_first_current_admission_tests::current_owner_use_probe()
+                {
+                    probe.after_owner();
+                }
                 let execution = match execution_result {
                     Ok(execution) => execution,
                     Err(failure) => {

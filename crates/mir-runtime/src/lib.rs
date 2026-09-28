@@ -144,3 +144,6 @@ mod sys6_i2_conformance_tests;
 pub fn crate_name() -> &'static str {
     "mir_runtime"
 }
+
+#[cfg(test)]
+mod proof_first_current_admission_tests;

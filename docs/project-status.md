@@ -59,6 +59,8 @@ W4は、通常sourceと実ownerの状態・資源を同じ履歴から対応付�
 2026-09-27の追加owner指示で、今回の実行も残量による停止を外して同じW4を継続します。リセットはownerが行い、主担当は操作しません。W5+とPlan250/I3-4は開始しません。過去のquota停止・検査記録はReport2614に保持します。
 
 W4-B検証結果: 206依存sourceを原本と同一bytesで保存し、fresh Lean検査と公理監査を完了しました。既存runnerのV2モデル278command・236module/22215所有宣言監査、native準備235command、修正後の実process検査68command（15profile/53拒否control）が全体exit0で完走しました。段階ごとに9169/9973/34658入力束縛と実ログを照合しています。保存証拠と現行sourceの役割分離、別名参照・期待値衝突・途中失敗の反例も検査済みです。コード・証明・検査手順は9d86052dでcommit/push・remote一致を確認済みです。復旧後の同一資料による最終境界Oracle reviewを回収し、主担当が証拠と照合しました。Bは限定LAB統合候補として完了、Cが現在地です。D/Eは依存待ちです。Oracle回答は証明・署名済み受理ではありません。一般証明は選択モデルについて、実processは特権private-pipeの有限証拠についてであり、実network・認証・秘密・復旧の保証へ広げません。
+W4-Cでは、共有authority floorの失効後に古いcacheからowner書込みできる実反例を修正しました。使用終了まで同じguardを保持する限定修正を一般Lean証明・Oracle指摘と照合し、対象11検査と既存を含む409件のRust library検査が通過しました。書込み後の応答喪失は「書込みなし」と区別します。C全体は未完了で、次はstaged request／予約／W3 ticketの対応と残るentry条件です。実network・秘密・復旧の保証ではありません。
+
 対応は `plan/proof-first-foundation-correspondence.md`、現在の証跡はreport2614、W1/W2/W3の履歴はreport2611/2612/2613です。
 既読範囲は `docs/proof-first/READ_LEDGER.json` に記録し、未読と部分読了を区別しています。
 W1のpassive/accepted producer・一般label・失敗を伴う単一代入は限定review済み。W1補助source cutのreview未完了は、後のW3有限source候補のreview完了とは別に保持します。119行dispositionは元のU/D・承認区分を保持して作成済みですが、要件を一括受理・実証したものではありません。

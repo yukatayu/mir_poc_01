@@ -1458,3 +1458,22 @@ This does not establish an atomic physical use or bind a real M9 lookup; direct
 consumer correspondence remains research. Four finite weak alternatives fail.
 Oracle mir-w4-c-submitted-evidence is reviewing this cut; Report2614 holds failures
 and exact receipts. No production adoption or new C completion claim.
+
+
+### 2026-09-28T01:49:49.479878+00:00 — W4-C bounded shared-authority consumer repair
+
+W4-Cでは、共有authority floorの失効後に古いcacheからowner書込みできる実反例を修正しました。使用終了まで同じguardを保持する限定修正を一般Lean証明・Oracle指摘と照合し、対象11検査と既存を含む409件のRust library検査が通過しました。書込み後の応答喪失は「書込みなし」と区別します。C全体は未完了で、次はstaged request／予約／W3 ticketの対応と残るentry条件です。実network・秘密・復旧の保証ではありません。
+
+Existing local mutex retention is selected over check-then-release; the latter
+fails a forced actual ST/OW1 schedule. General executable-history freshness needs
+no local auth-soundness premise; authorization meaning remains conditional on
+independent checker exactness. This does not resolve Q18 or equate I3 Awaiting
+with a W3 issued ticket. Same-source request/phase correspondence is the next C
+consumer dependency. Existing R01–R12 and W4 A–E exits remain unchanged.
+
+Oracle's same-thread lifecycle-access concern was checked at all three production
+callers: statement temporaries drop before reentry. General nested private access
+is non-reentrant. Worker panic can follow an actual write without a returned
+receipt, and no no-write guarantee is inferred. Caller/access/worker ordering is
+an explicit implementation boundary. The owner branch repair preserves all other
+admission checks; non-owner paths and multiprocess custody are not covered.
