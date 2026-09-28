@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-09-28 21:38 JST
+最終更新: 2026-09-28 22:22 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -64,9 +64,9 @@ W4; W5+/alpha are not active. Plan250 remains separately paused after I3-3.
 
 W4-B検証結果: 206依存sourceを原本と同一bytesで保存し、fresh Lean検査と公理監査を完了しました。既存runnerのV2モデル278command・236module/22215所有宣言監査、native準備235command、修正後の実process検査68command（15profile/53拒否control）が全体exit0で完走しました。段階ごとに9169/9973/34658入力束縛と実ログを照合しています。保存証拠と現行sourceの役割分離、別名参照・期待値衝突・途中失敗の反例も検査済みです。コード・証明・検査手順は9d86052dでcommit/push・remote一致を確認済みです。復旧後の同一資料による最終境界Oracle reviewを回収し、主担当が証拠と照合しました。Bは限定LAB統合候補として完了、Cが現在地です。D/Eは依存待ちです。Oracle回答は証明・署名済み受理ではありません。一般証明は選択モデルについて、実processは特権private-pipeの有限証拠についてであり、実network・認証・秘密・復旧の保証へ広げません。
 
-W4-Cでは、共有authority floorの古いcache使用、供給された観測ラベルの弱化、実行していない読取りの記録に続き、重複したowner操作で配置変換がpanicする経路を限定修正しました。一般Lean命題・実反例・Oracle指摘を照合し、今回のruntime library418件が通過しました。正常な4種類のsourceは、修正前後で配置結果全体が一致しています。ownerの実書込みと呼出し側の結果受理を分け、評価失敗後にも過去の書込み・履歴が残ることを実検査しました。C全体は未完了です。複数代入の文順序・source継続、別owner間の識別子衝突、復元経路の条件が具体的な残件です。全entry・現在の認可・実namespace/custody・資源の対応も継続します。実network・秘密・復旧やW4全体の保証には広げません。
+W4-Cでは、共有authority floorの古いcache使用、供給された観測ラベルの弱化、実行していない読取りの記録に続き、重複したowner操作で配置変換がpanicする経路を限定修正しました。一般Lean命題・実反例・Oracle指摘を照合し、先行checkpointのruntime library418件が通過しました。正常な4種類のsourceは、修正前後で配置結果全体が一致しています。ownerの実書込みと呼出し側の結果受理を分け、評価失敗後にも過去の書込み・履歴が残ることを実検査しました。C全体は未完了です。実Mirでの複数代入の文順序・source継続、別owner間の識別子衝突、復元経路の条件が具体的な残件です。全entry・現在の認可・実namespace/custody・資源の対応も継続します。実network・秘密・復旧やW4全体の保証には広げません。
 
-W4-Cでは、通常の代入からowner定義・instance・要求を自動生成し、既存Sessionのカーソルを共有する外部Leanモデルまで接続しました。独立した宣言規則とcheckerの対応、名前の衝突回避、起動から通信・unit応答・構成追加／差替えまでの不変条件をfresh検査済みです。158依存モジュールを再ビルドし、全所有宣言の公理監査と28個の誤主張の拒否を確認しました。実際のMir parserとの対応、実ラベル・資源、物理的なcustodyと復元入口は未完了です。Oracle差分reviewは認証待ちで失敗し、回答未回収。C継続、D未着手、D完了後に一旦停止します。
+W4-Cでは、代入からの自動構築・全Sessionの158依存検査に加え、実装の構造化フィールド識別子と、ソース宣言・現在のメタデータを結ぶ一般証明を検査しました。全読み取りの束縛、厳密な式評価、世代変更・ラベル変更・撤去後の拒否を、追加2モジュールの公理監査と19個の誤主張の拒否で確認しています。実parser/M6/M7の文脈保持テスト2件も通過しました。owner programのOracle回答本文を可視タブから回収し、11指摘を照合済みです。文脈証明のreviewも回収・照合しました。秘密値の演算失敗で後続の公開書込みが変わる、受理されたモデル経路の反例を確認し、依存する実装前の残件に保持しています。メタデータ発行元・capture/controlラベル、資源・custody・全復元入口と実Mir対応は未完了です。C継続、D未着手、D完了後に一旦停止します。
 
 2026-09-24のowner指定で、同じW4を **W4-A（限定証拠・完了済み）→W4-B（repo統合・限定候補完了）→W4-C（残る基礎条件・現在地）→W4-D（Rust/Core/private QUIC接続）→W4-E（実network検査・残項目回収・W4完了判定）** に分割しました。Bの境界review回収後、Cへ進みました。D/Eは依存待ちです。Eは元W4と前段の残項目を照合しますが、C/Dの前提をEへ先送りして実装を進めません。完了条件・推奨model/effort・R01〜R12残項目台帳は `plan/proof-first-foundation-correspondence.md` の「W4-A〜W4-E 作業区切り」を参照してください。分割当日は計画整理のみでした。2026-09-26のowner指示で同じW4 goalを再開しています。
 
@@ -519,3 +519,5 @@ The authorized roadmap is paused, not blocked, stale or closed.
 - 2026-09-28 20:44 JST: W4-C owner source発行のfresh Lean検査と2件のOracle照合を記録。生成binding依存欠落を後続候補で修正し、実書込み・unit受領・二重試行防止の合成を検査中。C継続、D未着手。
 
 - 2026-09-28 21:37 JST: W4-C代入からの自動構築と全Sessionをfresh158依存で検査。28誤主張を拒否、構成追加でも履歴を保持。実ソース／ラベル／資源／物理入口とreviewは継続中。
+
+- 2026-09-28 22:22 JST: W4-C構造化key／ソース宣言・現在metadata束縛を追加検査。全read対応・世代変更拒否、19誤主張と実parser2件を確認。owner program review回収・照合済み、C依存条件は継続。

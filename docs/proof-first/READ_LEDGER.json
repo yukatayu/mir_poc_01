@@ -47845,5 +47845,173 @@
     "status": "sole-main audit/receipt inspection",
     "role": "fresh isolated closure; no wholesale repo reading claim",
     "at": "2026-09-28T12:38:28.972489+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/kernel-owner-source-context-v3/OwnerStructuredKeys.lean",
+    "sha256": "02c25d2717e982c86733b6a14583076002f139aed6cf392baec24edb2bfe2944",
+    "range": "full",
+    "status": "sole-main authored/read and checked",
+    "role": "same C source context / reviewed program delta; not whole repo reading",
+    "at": "2026-09-28T13:22:17.752281+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/kernel-owner-source-context-v3/OwnerSourceContext.lean",
+    "sha256": "b836180595fd21d6ea080e4262e5d2d9cc6d6ce9785413f721f525c3748dc3dd",
+    "range": "full",
+    "status": "sole-main authored/read and checked",
+    "role": "same C source context / reviewed program delta; not whole repo reading",
+    "at": "2026-09-28T13:22:17.752281+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/kernel-owner-source-context-v3/OwnerContextAudit.lean",
+    "sha256": "900730af5322a884079c9c0736328e825d2aeef219e006515c3a1cc9d86a4e41",
+    "range": "full",
+    "status": "sole-main authored/read and checked",
+    "role": "same C source context / reviewed program delta; not whole repo reading",
+    "at": "2026-09-28T13:22:17.752281+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/kernel-owner-source-context-v3/OwnerContextAudit.log",
+    "sha256": "5a693392c0c99184692e0f9f6b0416cf9f04ed3de66b299354876b116cc506c7",
+    "range": "full",
+    "status": "sole-main authored/read and checked",
+    "role": "same C source context / reviewed program delta; not whole repo reading",
+    "at": "2026-09-28T13:22:17.752281+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/audit_owner_source_context_v3.py",
+    "sha256": "447d5b54527d040f4a78a9a98500744ae1a8a8ef32eb6f6e6aa3ab0d5a0b709e",
+    "range": "full",
+    "status": "sole-main authored/read and checked",
+    "role": "same C source context / reviewed program delta; not whole repo reading",
+    "at": "2026-09-28T13:22:17.752281+00:00"
+  },
+  {
+    "path": "/home/codex/dev/mir_poc_01/crates/mir-semantics/tests/proof_first_owner_context.rs",
+    "sha256": "7e4a326daa7ac380b1a6663aa306cd6588c16965d4ae8b9530a9bc0cea6a4c5a",
+    "range": "full",
+    "status": "sole-main authored/read and checked",
+    "role": "same C source context / reviewed program delta; not whole repo reading",
+    "at": "2026-09-28T13:22:17.752281+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/oracle-c-owner-program-retry4/ANSWER_RECOVERED.txt",
+    "sha256": "3b7a1f9f596174039cc90196fdade231b404b86c488281aeafd4931b5814d09f",
+    "range": "full",
+    "status": "sole-main authored/read and checked",
+    "role": "same C source context / reviewed program delta; not whole repo reading",
+    "at": "2026-09-28T13:22:17.752281+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/oracle-c-owner-program-retry4/DISPOSITIONS.json",
+    "sha256": "c9f4309d7fa74846ee965475d1d08b94b962b1db195daa8cd38572f45fe65db6",
+    "range": "full",
+    "status": "sole-main authored/read and checked",
+    "role": "same C source context / reviewed program delta; not whole repo reading",
+    "at": "2026-09-28T13:22:17.752281+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/kernel-owner-source-context-v3/RESULT.json",
+    "sha256": "a0cb3aa476810d156ed563d2abd6da1800cddf0ff7c728fe51d467bb4df9176a",
+    "range": "all structured fields/hash/exit validation",
+    "status": "sole-main evidence inspection",
+    "role": "exact current cut receipt, no new full-closure rebuild",
+    "at": "2026-09-28T13:22:17.752281+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/kernel-owner-source-context-v3/RUNS.json",
+    "sha256": "cfe899c022cf3dab85e54b172dbfdb027db4a0cbf11c97e2ac14a0f79bf9e584",
+    "range": "all structured fields/hash/exit validation",
+    "status": "sole-main evidence inspection",
+    "role": "exact current cut receipt, no new full-closure rebuild",
+    "at": "2026-09-28T13:22:17.752281+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/owner-context-development/SOURCE_CONTEXT_FORMATTED_TEST.json",
+    "sha256": "3800895ceee7944271b8be380997d3e7f1fff008243409707f886293988c3d37",
+    "range": "all structured fields/hash/exit validation",
+    "status": "sole-main evidence inspection",
+    "role": "exact current cut receipt, no new full-closure rebuild",
+    "at": "2026-09-28T13:22:17.752281+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/oracle-c-owner-program-retry4/FINAL_RECOVERY.json",
+    "sha256": "133b1b4c5920165d1dc5157f5107d635de5a0963bf37c28b9db1e5ab2301f734",
+    "range": "all structured fields/hash/exit validation",
+    "status": "sole-main evidence inspection",
+    "role": "exact current cut receipt, no new full-closure rebuild",
+    "at": "2026-09-28T13:22:17.752281+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/oracle-c-owner-program-retry4/MODEL_UI.json",
+    "sha256": "8ba08caaa0749a507c22fe49230c45f157c739a1c0c02d62160f6763dee6bb83",
+    "range": "all structured fields/hash/exit validation",
+    "status": "sole-main evidence inspection",
+    "role": "exact current cut receipt, no new full-closure rebuild",
+    "at": "2026-09-28T13:22:17.752281+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/kernel-owner-flow-counter-v1/MixedProgramFlowCounterexample.lean",
+    "sha256": "2ef75a6ec744319011f7e739e78fd8350afa0c498fa75d66a7740f7b7f71dbf6",
+    "range": "full",
+    "status": "sole-main read/authored and checked",
+    "role": "C current-context review and admitted counterexample; no whole-repo reading claim",
+    "at": "2026-09-28T13:42:39.539575+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/kernel-owner-flow-counter-v1/OwnerFlowCounterAudit.lean",
+    "sha256": "8ae2a8ea1f4739213f4f3b186d870c567ea2d4c8f075d46055389feff57c3cef",
+    "range": "full",
+    "status": "sole-main read/authored and checked",
+    "role": "C current-context review and admitted counterexample; no whole-repo reading claim",
+    "at": "2026-09-28T13:42:39.539575+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/kernel-owner-flow-counter-v1/OwnerFlowCounterAudit.log",
+    "sha256": "9a83d916540780bdf041c2cbc7b3b8d187c6941de3503869294867c572fc14ab",
+    "range": "full",
+    "status": "sole-main read/authored and checked",
+    "role": "C current-context review and admitted counterexample; no whole-repo reading claim",
+    "at": "2026-09-28T13:42:39.539575+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/kernel-owner-flow-counter-v1/RESULT.json",
+    "sha256": "e51e54e92d467cfb56ef3c637da7bc2c5b9d5397926c0026e0d607781a3466a9",
+    "range": "all structured fields/hash/exit validation",
+    "status": "sole-main read/authored and checked",
+    "role": "C current-context review and admitted counterexample; no whole-repo reading claim",
+    "at": "2026-09-28T13:42:39.539575+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/oracle-c-source-context/QUESTION.md",
+    "sha256": "99707c1e027305afdd97b8a306ca909989c3fd255ef4981278b9bb2f91cb3e7a",
+    "range": "full",
+    "status": "sole-main read/authored and checked",
+    "role": "C current-context review and admitted counterexample; no whole-repo reading claim",
+    "at": "2026-09-28T13:42:39.539575+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/oracle-c-source-context/ANSWER_RECOVERED.txt",
+    "sha256": "b5233f6b8719087c3d64093c2bb84735b41214dd18f7b8c5758ca4e795b9a380",
+    "range": "full",
+    "status": "sole-main read/authored and checked",
+    "role": "C current-context review and admitted counterexample; no whole-repo reading claim",
+    "at": "2026-09-28T13:42:39.539575+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/oracle-c-source-context/DISPOSITIONS.json",
+    "sha256": "894e04255f592a16b61734ad077b44cb330760909c372aceadc3e3fe679ef2bc",
+    "range": "all structured fields/hash/exit validation",
+    "status": "sole-main read/authored and checked",
+    "role": "C current-context review and admitted counterexample; no whole-repo reading claim",
+    "at": "2026-09-28T13:42:39.539575+00:00"
+  },
+  {
+    "path": "/home/codex/dev/mir_poc_01/crates/mir-runtime/src/m8_owner_admission_gate.rs",
+    "sha256": "0edf62518ac9031f685a9108b1f7f9aaab89a8a4ea7cd3f82f832b7e6293aa78",
+    "range": "full",
+    "status": "sole-main read/authored and checked",
+    "role": "C current-context review and admitted counterexample; no whole-repo reading claim",
+    "at": "2026-09-28T13:42:39.539575+00:00"
   }
 ]

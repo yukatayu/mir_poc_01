@@ -1,5 +1,5 @@
 # W4 physical refinement — W4-C active / B integrated candidate
-Updated 2026-09-28T12:38:28.972489+00:00. Same active full-W4 goal, sole main/no subagents. Quota stopping waived for this run; only owner resets. W5+/Plan250-I3-4/Canon acceptance remain outside scope.
+Updated 2026-09-28T13:22:17.752281+00:00. Same active full-W4 goal, sole main/no subagents. Quota stopping waived for this run; only owner resets. W5+/Plan250-I3-4/Canon acceptance remain outside scope.
 
 PL1/PL2/PL0 S4/S6, theory/checker boundary before implementation. REQ DS01/02/03/04/08 AU01/04/05/08 VF04/05; PT03/11/14 SC04/07 Q18. R02/R03/R04/R05/R09 are prerequisites before their first dependent D use.
 
@@ -78,3 +78,7 @@ production defects established through admitted entries. See RESUME and W4_CHECK
 2026-09-28T11:44:09.704220+00:00 — Same C goal: named owner/source issue fresh checks and both advisory reviews disposed. Generated callable dependency gap fixed in external successor; shared owner unit ack/actual attempt/provenance/joint state proof development passes, fresh full audit pending. Owner full Session/deployment/current labels/resources/custody/restore remain before D. D unstarted; pause after D before E.
 
 2026-09-28T12:38:28.972489+00:00 — Same C goal: fresh158-module owner program/whole Session audit complete, independent compiler/declaration rules and rooted invariants checked. Actual source/labels/resources/custody/image and final-cut review remain open. Oracle login failure retained; D unstarted, pause after D before E.
+
+2026-09-28T13:22:17.752281+00:00 — Same C goal: structured key/schema/current metadata general correspondence, all-read coverage, strict evaluation and generation/label/retirement recheck audited as fresh2-module delta over pinnedKP. Actual parser2 tests pass. Owner program review recovered/disposed; new context delta still unreviewed. Authentic metadata/capture/control/resource/custody/all-entry/restore remain before D; pause after D before E.
+
+2026-09-28T13:42:39.539575+00:00 — Context review recovered/disposed. Actual admitted model source-flow counterexample: private arithmetic failure changes later public write. This remains a prerequisite for any dependent secret-bearing control-sensitive D increment; no whole-Session NI or production exploit claim. Metadata-producer/admission/all-entry obligations remain the same active goal.

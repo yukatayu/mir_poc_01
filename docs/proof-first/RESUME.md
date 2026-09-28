@@ -1,84 +1,95 @@
 # RESUME — W4-C active
-Updated 2026-09-28T12:38:29.129921+00:00. Sole main ONLY; NO subagents.
-Owner stop: finish C, then D implementation/correspondence/review/integration;
-PAUSE existing whole-W4 goal and STOP BEFORE E. Goal active/unbounded; no clear/recreate.
-Quota stop waived this run; owner alone resets. No W5+/alpha/Plan250-I3-4/Canon/THM/OBL
-promotion. Own normal commit/push authorized; no force/reset/clean/hostshare/notifications.
-One Report2614; no authored holes/Mir axioms.
+Sole main ONLY; NO subagents. Finish C, then D; PAUSE existing whole-W4 goal,
+STOP BEFORE E. Do not complete/recreate goal, start W5+, resume Plan250/I3-4,
+promote Canon/THM/OBL, weaken privacy/auth, publish, use owner keys or paid fallback.
+Quota stop waived this run; owner alone resets. Own normal commit/push authorized.
+No force/reset/clean/cache deletion/hostshare/notifications. One Report2614.
 
-HEAD0a8d700f840410c2b2bde6a12de4b9e20c7d6de8 main was committed/pushed/parity11:56UTC
-(P/OWNER_CHECKPOINT_GIT.json). Start RESUME-only own dirty. New own11docs checkpoint
-is dirty; no Rust/production changes. Next: make docs, JSON/history-prefix/diff checks,
-normal own commit/push/parity, then continue same C source/current-context prerequisite.
+HEAD a69f2d11d89ea31f00b6340b5f5abcd98c5bb9f3 main pushed/parity (P/OWNER_PROGRAM_CHECKPOINT_GIT.json).
+Current own dirty:11 docs plus new crates/mir-semantics/tests/proof_first_owner_context.rs.
+No production source delta. Source-context checkpoint docs already written, not committed.
+Historical JSON256 keys retained +4; READ_LEDGER6358 prefix retained ->6379.
+make docs tools5737/46285 wholeexit0 (Canon218/hierarchy800/reports1764); after that added final review/counterexample receipt notes and clarified
+historical418 runtime wording in4 dashboards and rewrote this RESUME. Final make docs1620 wholeexit0; JSON/history-prefix/rustfmt/diff checks pass. Commit
+next. Source test locked/offline/j1/testthreads1:2pass0skip; rustfmt/diffcheckpass.
 
 I=/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration
-P=I/c-source-effect. KC=P/kernel-owner-completion-v1; PG=P/owner-program-development;
-KP=P/kernel-owner-program-v1. ALL frozen kernels/handoff/originals immutable.
-KP just completed fresh audit; do NOT rerun one-shot audit_owner_program.py into same output.
-Lean4.29.1 --trust=0 -j1 childAS6GiB/core0. Pre-audit root7.4GiBfree96%, RAM12GiBavailable,
-swap12GiBfree; /mnt/mirrorea-work absent. No cleanup/heavy cache. New work needs successor.
-
-## Jobs / Oracle
-NO live execution/Oracle jobs. Fresh KP whole tool78167 exit0 collected12:33UTC.
-Oracle mir-w4-c-owner-complete retry1 failed12:07:13.508UTC: Manual login mode timed out,
-whole26251 exit1 collected12:09. FAILURE_RECEIPT.json in I/oracle-c-owner-completion-retry1.
-No final answer/submission/target/model confirmation. DedicatedCDP45439 briefly reachable;
-read-only DOM ready/editable1/modelPro/no-loginCTA insufficient to prove authentication;
-subsequent installed-auth-probe attempt12:12 gotECONNREFUSED, no probe executed.
-Pending owner async question: normal ChatGPT / crashed / no window? Await answer while
-independent proofs proceed. No Chrome/profile/settings/cookie edits or unrelated browser.
-No arbitrary deadlines, latency retries, paid fallback. Oracle status spacing>=180seconds,
-clock FIRST. Failed job packet is KC, not new KP. Need neutral successor review after repair.
-Failed QUESTIONsha d445b36ee03634ae5776b2b7d953086082cfedf2096336f4b85090a5e5e8cc6b;
-MANIFEST71ebc63b7b3ff49142c8321ae25932cd73668835fd0c5058e0fb14b7a08b48e9.
-Global manual/repo operations/install help read, no need resend unchanged without repair.
-
-## Fresh KP evidence / same consumer
-P/audit_owner_program.py fresh isolated source closure158, all158 audited module owners,
-16744 owned declarations (NOT theorem count),28 false-evaluation guards. All187 source/log
-hashes/expected exits verified. RESULT SHA098050f5ecaa02856f11ee21aa9839e21080518b3fd2607cf7b994fbcd9d786c,
+P=I/c-source-effect
+KP=P/kernel-owner-program-v1: immutable158-module fresh closure,16744owned,28falseguards.
+RESULT098050f5ecaa02856f11ee21aa9839e21080518b3fd2607cf7b994fbcd9d786c.
 INPUTS54a15f9550dff5b03fad2f0d1b6c3159a1f0b6e910f02a07d42b1839cba044fd.
-Only propext/Classical.choice/Quot.sound. Failed development compiler logs retained/excluded.
-Static Code layout names+labels, no actual/zero values; independent compile exactness and
-captured-value correspondence. Actual declaration registration has independent relative
-completeness, exact catalog/key binding and all-outcome joint source preservation.
-Valid/OwnerAgrees moved UNCHANGED same namespace to Declaration to avoid dependencycycle.
-Ordinary Assignment compiles automatically to install, ordinary instantiate, actual write.
-Independent Lowers/checker exactness, generated-name freshness/Nodup and linear width.
-MixedSourceCursor factors existing Session tick; general prior-tick equality plus all old
-pure/reference Session embeddings rechecked. New MixedOwnerContinuation SAME cursor/full
-program/archive supports issue, distinct transfer/service, actual unit ack, current head/
-control, pure cancellation and drained continue/replace. Rooted_joint general for actual
-admitted histories; no raw populated import. Owner terminal refusal may strand wait;
-no owner cancellation/reticket/rollback/liveness policy invented.
-Controls from empty catalog:5source items->7generatedentries; pure2->5, owner10->15,
-actual ack, laterpure1->2. Continue activation1 writes15->20/history2/attempts2. Empty
-inbox does not advance; commit15 then headchange rejects oldack retaining15/history/wait;
-replace refuses outstanding wait. Missing/secretcapture/out-of-rangeowner/revokedregister
-refuse. Finite checked-IR, NOT parsed Mir or network E2E. Supplied fields/labels/auth
-remain explicit. New cut unreviewed, not production adopted.
+KD=P/owner-context-development: current research. compile.py pins159KPobjects, trust0/j1.
+KCtx=P/kernel-owner-source-context-v3: immutable fresh2-module delta/388owned/19falseguards.
+RESULT a0cb3aa476810d156ed563d2abd6da1800cddf0ff7c728fe51d467bb4df9176a.
+Not a new full-closure rebuild. Only propext/Classical.choice/Quot.sound; no authored holes.
+Failed v1 negative-driver namespace syntax and v2 multiline-log parser assumption retained/
+excluded; v3 requires exactlyone actual false-evaluation error per negative. Do NOT rerun
+one-shot audit/checkpoint/preparation scripts over existing outputs.
+Lean4.29.1 AS6GiB/core0; RustAS8GiB. Root7.2GiBfree96%, RAM11GiBavailable/swap12GiBfree;
+/mnt/mirrorea-work absent. No cleanup/heavy build. Existing target reused for0.32s test.
 
-KC prior151closure/16157owned/19 guards RESULT167eb036571b97eccd7da675b9778accc3f4243ff3e24789c0d0f2d794a83f3b.
-Earlier namedowner/issue reviews fullyread/disposed; issue review exposed callable-binding
-read dependency gap fixedKC. Neither reviewed newKC/KP cut. Earlier KN/KI/KSrc etc receipts
-and detailed dispositions in W4_CHECK/Report2614/priorGitRESUME; do not rerun baselines.
+## Oracle final — NO live LLM/capture job
+I/oracle-c-source-context / mir-w4-source-context-r1 whole76734 exit0, final recovered
+ANSWER_RECOVERED.txt SHAb5233f6b8719087c3d64093c2bb84735b41214dd18f7b8c5758ca4e795b9a380.
+QUESTION99707c1e027305afdd97b8a306ca909989c3fd255ef4981278b9bb2f91cb3e7a;
+MANIFEST9deb8d7dd022752b056ec1a643fabae10be2cf1e25851ded4daf86d7a0d6983c.
+Full12555char answer read;8 findings disposed in DISPOSITIONS.json and W4_CHECK.
+Final no-stop/regenerate and actual6Pro/Latest maximum4/4(Pro5/5) verified.
+Old wrapper token OwnerStructuredKeys is NOT the answer; use recovered file.
+Capture56303 stopped after recovery, Chrome retained. Do NOT resend unchanged review.
+For future consultations use a PRECREATED new visible temp tab atCDP45479, pass exact
+--browser-tab to remote-chrome/select/keep-browser and file attachment. Runtime wrapper
+mis-extracts inline code as answer; ALWAYS recover full final DOM from SAME target.
+CLOCK FIRST; gate status/log/model reads>=180s; no arbitrary deadline/latency retry.
+No browser settings/global wrapper changes/paid fallback. Existing scripts in review dirs.
 
-## Next dependency / open boundaries
-Same semantic goal PL1/PL2/PL0 S4/S6: R02-05/09 source/current owner admission BEFORE D.
-Read current AST state visibility (source annotation != release authority), TypedStateRead
-and M7 owner core/visibility extraction; still must connect actual parsed source/field key
-allocation/labels/resources to admitted context. Existing observer has supplied policylabels;
-R09 current labels cannot be inferred from supplied-flow theorem or unarytrace.
-Next independent work: label/field/current-context authenticity, resource/custody/imageentry
-inventory and mechanism mapping. Avoid new scheduler or fixture-only source construction.
-Actual referenceSource pure values already have shared Session; no need reprove all from scratch.
-W4 D must use real source->Core->edge->request/serve/result->observer; E later reconciliation.
-Fresh import != same-instance recovery; hash/proof/transport identity != auth issuer;
-Q18 reservation vs commit reauthorization remain distinct. All epoch retention not automatic.
+## Previous program review successfully recovered — DO NOT RESEND
+I/oracle-c-owner-program-retry4 / mir-w4-owner-program-r4; whole66561 exit0.
+ANSWER_RECOVERED.txt SHA3b7a1f9f596174039cc90196fdade231b404b86c488281aeafd4931b5814d09f;
+FINAL_RECOVERY.json + MODEL_UI.json establish final/6Pro-max.12974chars fullyread;
+11 dispositions in DISPOSITIONS.json and W4_CHECK c_owner_program_review_20260928.
+Raw ANSWER.md contains only MixedOwnerSourceCode (WRONG extraction), kept.
+r1 failed attach metadata; r2/r3 wrapper returned one code token and destroyed target,
+including keep-browser. Actual installed connectToRemoteChrome.close unconditionally
+closes created targets before keepBrowser-aware guard. Existing exact-tab path avoids
+that; no global/browser-settings patch. Old event capture68137 was terminated ONLY after
+final answer verified; Chrome remains open. Owner's normal-page reply resolved.
+Review conditional:58/158 sourcebodies supplied, no reviewer tool run/signature/acceptance.
+Accept finite-IR/model-vs-physical/raw-serve-vs-once-only/ingress boundaries. Reject Code
+Layout vs Plan value confusion and globallyunique activation/ordinal pair (actual occurrence
+includesinstance/principal; physical run namespace still required). New KCtx NOT in oldreview.
 
-Production prior bounded fixes daeb229c/cdb8d2a9/91e2e49a/1b18c7c4/05a54050/caa1d5be
-committed/pushed. Historical418runtime/5renderer results unchanged, not rerun this checkpoint.
-Own11doc make docs39370 wholeexit0 and history-prefix/diff checks passed; commit/push next; READ_LEDGER append-only and W4_CHECK new
-c_owner_program_20260928. C incomplete, D unstarted, pause after D before E.
+## New current-context evidence / remaining same C goal
+OwnerStructuredKeys: exact structured key materialization/aliases, retained finite address
+map injection/append stability, value+metadata/write/strict-evaluation correspondence.
+OwnerSourceContext: checked schema unique declaration/Int/owner plus CURRENT full metadata;
+independent Binds/TreeBinds/AssignmentBinds exactness, every RHS read covered/no invented
+binding, same-owner only, strict value lookup/overflow behavior preserved. Target metadata
+separate from value read; constant RHS needs targetbinding but invents no read. Revalidate
+fullgeneration/label/declaration; changed/retired bindings refuse. Source visibility does not
+classify data or issue observer authority. Supplied metadata function authenticity still OPEN.
+Actual Rust tests preserve real parser/M6/M7 source/owner/field/type/requested channel and
+identity; do not certify IFC/release authority. P/checkpoint_source_context.py already ran,
+SOURCE_CONTEXT_CHECKPOINT.json records6371ledger and evidence, don't rerun.
 
-2026-09-28T12:44:17.913058+00:00 — Visible dedicated Chrome relaunched normal profile/CDP45439 only, pid1501241, no prompt. Inspect no earlier than launch+180s. Browser recovery receipt I/oracle-visible-recovery-20260928/LAUNCH.json.
+Next: actual metadata producer/protected use + capture/control provenance, same mixed
+Session integration, resource/custody/all-entry/privateimage/restore inventory before D.
+Specific NEW hypothesis: MixedOwnerProgram has one constant supplied pc across items;
+OwnerFlowComposition already proves private-failure then public write needs raised pc.
+KD/MixedProgramFlowCounterexample.lean now freshly checked in immutable
+P/kernel-owner-flow-counter-v1:20owned/onefalseguard/3commands, whole62851 exit0.
+RESULT e51e54e92d467cfb56ef3c637da7bc2c5b9d5397926c0026e0d607781a3466a9.
+It CONFIRMS private0->public7 versus maxIntoverflow->public10 under actual model entries.
+General finished_admitted proves Rooted path, no mid-run store injection. Preserve this
+control/completion-label obligation before dependent secret-bearing control-sensitive D use.
+Do not pretend to have proved whole Session NI or a production exploit. New review agrees
+on conditional control boundary and primary authentic metadata producer gap. No whole Session NI has ever been established by KP preservation.
+Current semantics goal PL1/PL2/PL0 S4/S6 R02/03/04/05/09 unchanged. D unstarted.
+No W4/alpha completion from components. Q18 prepare vs commit, fresh import vs same-instance
+recovery, all source/table/custody boundaries retained. Prior418runtime/5renderer historical,
+not rerun this checkpoint. Old detailed proofs/reviews/baselines in W4_CHECK/Report2614;
+no repeat of unchanged baseline merely to reacquire context.
+
+Updated 2026-09-28T13:42:39.539575+00:00. Next: final make docs/diff/JSON-prefix/own commit/push/parity; then continue current C metadata producer plus required source-control binding, not a new roadmap.
+
+2026-09-28T13:49:48.146653+00:00 — final make docs1620 wholeexit0 collected; all prior history keys/prefix preserved. Next own commit/push/parity, then owner-control-development successor proof (same C goal; DESIGN.md external, no production edit).

@@ -45244,5 +45244,239 @@
       "Neutral final-cut review and local dispositions; no C close"
     ],
     "phase": "C active; D unstarted; finish D then pause BEFORE E"
+  },
+  "c_owner_program_review_20260928": {
+    "at": "2026-09-28T13:20:11.429647+00:00",
+    "session": "mir-w4-owner-program-r4",
+    "answer_sha256": "3b7a1f9f596174039cc90196fdade231b404b86c488281aeafd4931b5814d09f",
+    "question_sha256": "8262322cb1bfbc1672d5fb3dfb6970db80fbfc8839c133a4aa4ae7085910dbb0",
+    "manifest_sha256": "f9cfaa0010a50939b07c30071b917c6becbe6b8e2daf71190a7b39b542271385",
+    "final_recovery_sha256": "133b1b4c5920165d1dc5157f5107d635de5a0963bf37c28b9db1e5ab2301f734",
+    "model_evidence_sha256": "8ba08caaa0749a507c22fe49230c45f157c739a1c0c02d62160f6763dee6bb83",
+    "scope": "main personally read full recovered answer and checked relevant definitions; no proof/acceptance/independent signature inferred",
+    "dispositions": [
+      {
+        "id": "IR_SCOPE",
+        "finding": "Completeness is finite checked IR, not arbitrary Mir grammar or parser correspondence.",
+        "disposition": "ACCEPT scope boundary; already explicit in packet/Code/Lowers. Carry to D extraction obligation, no general Mir completeness claim.",
+        "evidence": [
+          "MixedOwnerProgram.Lowers",
+          "MixedOwnerProgram.lower_exact",
+          "QUESTION.md sections3/5"
+        ]
+      },
+      {
+        "id": "STATIC_CODE",
+        "finding": "Static code claim may be stronger than evidence because elaborated Plan contains captures.",
+        "disposition": "PARTLY REJECT factual conflation: Code.captures is Layout=List(String×Nat labels), while Plan.captures has values; value_independent_code and compiled_with_values relate them. ACCEPT separate future Rust serialization/reconstruction obligation; no serialization proof claimed.",
+        "evidence": [
+          "MixedOwnerSourceCode.lean lines8-9,114-117",
+          "MixedOwnerSourceCode.value_independent_code",
+          "MixedOwnerSourceCode.compiled_with_values"
+        ]
+      },
+      {
+        "id": "MODEL_TERMINOLOGY",
+        "finding": "Actual Execution.manage may imply physical execution.",
+        "disposition": "ACCEPT terminology clarification: actual transition of the shared MODEL rather than a stand-in proof fixture; it is not Rust/QUIC/durable publication.",
+        "evidence": [
+          "MixedOwnerSourceDeclaration.lean",
+          "KP RESULT scope"
+        ]
+      },
+      {
+        "id": "COMPILER_ALTERNATIVE",
+        "finding": "Generated ordinary construction preserves source interleaving better than opaque pre-provisioned callable blocks.",
+        "disposition": "Retain provisional generated-construction candidate. Advice is not adoption authority; actual Mir extraction remains before D consumer.",
+        "evidence": [
+          "MixedOwnerProgram.lower",
+          "MixedOwnerContinuation.tick"
+        ]
+      },
+      {
+        "id": "ORIGIN_SCOPE",
+        "finding": "activation/ordinal must be globally unique.",
+        "disposition": "REJECT global pair requirement: separate instances/principals may legitimately reuse that pair. Actual occurrence includes instanceId,principal,activation,ordinal, and queue also checks full useId. ACCEPT physical run/peer/namespace binding and cross-activation tests before D. No mathematical number is an authority.",
+        "evidence": [
+          "MixedOwnerAttemptQueue.occurrence",
+          "MixedOwnerAttemptQueue.Seen",
+          "MixedOwnerContinuation.adopt",
+          "MixedOwnerContinuationControls"
+        ]
+      },
+      {
+        "id": "CONTINUATION",
+        "finding": "Drained continue/failed replacement does not define general migration or stranded owner-wait recovery.",
+        "disposition": "ACCEPT retained explicit limit; pending queues cannot be erased. Do not add cancellation/rollback/retry/liveness policy silently.",
+        "evidence": [
+          "MixedOwnerContinuation.continueWith",
+          "MixedOwnerContinuation.replaceResidual",
+          "MixedOwnerContinuationControls.denied"
+        ]
+      },
+      {
+        "id": "ONCE_ONLY",
+        "finding": "Raw catalog service can execute twice; once-only boundary is admitted queue plus attempt ledger.",
+        "disposition": "ACCEPT and retain existing counterexample. D must consume closed request/attempt ingress; raw evaluator is not exported as a once-only operation.",
+        "evidence": [
+          "MixedOwnerAttemptQueue.enqueue_exact",
+          "MixedOwnerAttemptQueue.no_second_advance",
+          "MixedOwnerSourceTrace.serviceReady"
+        ]
+      },
+      {
+        "id": "ROOTED_INGRESS",
+        "finding": "Reachability does not authenticate imported bytes/images.",
+        "disposition": "ACCEPT: no raw image admission inferred. Inventory every constructor/restore/private-image path; either validated same-instance route or explicit unsupported scope before first D dependency.",
+        "evidence": [
+          "MixedOwnerContinuation.Rooted",
+          "CURRENT_GOAL.md R03/R04"
+        ]
+      },
+      {
+        "id": "COMPLETENESS",
+        "finding": "Conditional service completeness is not eventual commit/fairness.",
+        "disposition": "ACCEPT already stated; retain independent positive premises. No all-reject safety replacement or progress guarantee.",
+        "evidence": [
+          "MixedOwnerSourceDeclaration declaration completeness",
+          "MixedOwnerMaterialization.Ready",
+          "QUESTION.md section5"
+        ]
+      },
+      {
+        "id": "REVIEW_LIMIT",
+        "finding": "Only supplied subset of158 module bodies reviewed; no independent Lean execution.",
+        "disposition": "ACCEPT exact limit:58 supplied source bodies, full audit receipts. Do not represent advice as full source audit, proof, signed review or acceptance.",
+        "evidence": [
+          "MANIFEST.json",
+          "FINAL_RECOVERY.json"
+        ]
+      },
+      {
+        "id": "OWNER_BOUNDARY",
+        "finding": "Groups resource/funding and all retry/migration matters as owner-reserved.",
+        "disposition": "QUALIFY: actual L0/privacy/auth authority/public wire/key choices remain owner-reserved. Reversible finite internal resource/checker mechanisms are already delegated by owner; Oracle cannot revoke/grant that authority. No need to ask owner for routine proof implementation.",
+        "evidence": [
+          "Owner original task sections3/6/8"
+        ]
+      }
+    ],
+    "verdict": "No premise-preserving theorem counterexample furnished for supplied finite cut. Conditional boundary review collected; C remains incomplete, new OwnerStructuredKeys/OwnerSourceContext not reviewed by this packet."
+  },
+  "c_source_context_20260928": {
+    "at": "2026-09-28T13:22:17.752281+00:00",
+    "git_base": "a69f2d11d89ea31f00b6340b5f5abcd98c5bb9f3",
+    "audit": {
+      "directory": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/kernel-owner-source-context-v3",
+      "result_sha256": "a0cb3aa476810d156ed563d2abd6da1800cddf0ff7c728fe51d467bb4df9176a",
+      "owned_modules": 2,
+      "owned_declarations": 388,
+      "false_guards": 19,
+      "whole_runner_exit": 0,
+      "collected_tool": 19663,
+      "base_result_sha256": "098050f5ecaa02856f11ee21aa9839e21080518b3fd2607cf7b994fbcd9d786c",
+      "base_inputs_sha256": "54a15f9550dff5b03fad2f0d1b6c3159a1f0b6e910f02a07d42b1839cba044fd",
+      "base_objects_sha256": "2f1f840bb40077229278da41de598a77fdb16de36731c239e17c18bf8e855a47",
+      "mode": "Fresh delta over pinned prior158-module KP audit, NOT a fresh whole-closure rebuild",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    "source_test": {
+      "at": "2026-09-28T13:15:34.572302+00:00",
+      "command": [
+        "cargo",
+        "test",
+        "--locked",
+        "--offline",
+        "-j1",
+        "-p",
+        "mir-semantics",
+        "--test",
+        "proof_first_owner_context",
+        "--",
+        "--test-threads=1"
+      ],
+      "exit": 0,
+      "source_sha256": "7e4a326daa7ac380b1a6663aa306cd6588c16965d4ae8b9530a9bc0cea6a4c5a",
+      "log_sha256": "242a0ddd1759a89554aae9223c80ed9401554d2ec02d37b825cd61b7c52c33e8",
+      "scope": "actual parser/M6/M7 preserves source identity, owner, field type and requested observer channel; no security-class authentication, production flow guarantee or network claim"
+    },
+    "scope": "Fresh delta rebuild and all delta-owned declarations transitive axiom audit over hash-pinned previously fresh-audited KP objects. Structured-key identity, source-schema/current metadata binding, all read occurrence coverage, same-owner assignment binding, stale generation/label/retirement refusal, and strict expression evaluation correspondence. Visibility is not declassification; current metadata authentication and producer/control-label origin remain explicit obligations. Not a new full-closure rebuild, Rust proof, current-label authentication, or production adoption.",
+    "claims": [
+      "Structured namespace/entity/field identity and partial materialization match current M8 key design; retained finite address-table erasure preserves values, metadata and writes, including append",
+      "Independent source declaration/current metadata binding and structural tree/assignment judgments have soundness and relative completeness",
+      "Every RHS read has its exact metadata binding; no unrelated binding invented; strict evaluation/lookup failures preserved",
+      "Same-owner requirement refuses implicit multi-owner snapshot; constant RHS still requires target metadata without fabricating a value-read event",
+      "Revalidation compares full declaration, generation and label; stale/relabelled/retired bindings refuse; visibility channel is not a security classification or authority"
+    ],
+    "remaining": [
+      "Current metadata must originate at admitted owner/provider entries and be serialized with use; this model does not authenticate the supplied function",
+      "Local capture/control label provenance and composition with existing mixed Session/flow rules",
+      "Resource/custody/current authority/whole-entry/private-image/restore prerequisites before D",
+      "Actual Mir extraction/refinement and new context-cut Oracle review"
+    ],
+    "failed_development": [
+      "kernel-owner-source-context-v1: negative-driver invalid namespace alias; no RESULT, excluded",
+      "kernel-owner-source-context-v2: overly strict single-line diagnostic parser rejected actual multiline false guard; no RESULT, excluded",
+      "Lean development parser/implicit-binder errors retained and excluded; no authored proof holes"
+    ],
+    "phase": "C active, D unstarted; finish D then pause BEFORE E"
+  },
+  "c_source_context_review_20260928": {
+    "at": "2026-09-28T13:34:44.842400+00:00",
+    "session": "mir-w4-source-context-r1",
+    "answer_sha256": "b5233f6b8719087c3d64093c2bb84735b41214dd18f7b8c5758ca4e795b9a380",
+    "question_sha256": "99707c1e027305afdd97b8a306ca909989c3fd255ef4981278b9bb2f91cb3e7a",
+    "manifest_sha256": "9deb8d7dd022752b056ec1a643fabae10be2cf1e25851ded4daf86d7a0d6983c",
+    "dispositions": [
+      {
+        "id": "METADATA_ORIGIN",
+        "disposition": "ACCEPT: bind checks consistency of supplied schema/current, not authenticity. Next admission path must execute existing current authority checks over exact checked artifact/key/label/version payload and retain provenance through ALL mutators. Merely renaming current to admittedMetadata or assuming AdmissionProducedByOwnerBoundary would not close the gap."
+      },
+      {
+        "id": "FORGED_VERSION",
+        "disposition": "QUALIFY: old binding g7/private does NOT become usable against g8/public; exact equality rejects. A newly forged/rebound value can pass against a forged supplied current. Need producer/entry provenance, not an equality-theorem repair."
+      },
+      {
+        "id": "RUNTIME_BRIDGE",
+        "disposition": "ACCEPT: new richer binding is not yet consumed by existing M8 plan/queue or MixedOwnerMaterialization. Exact structured key/owner/type/generation/label must remain bound into actual ingress and service; no parallel-model completion claim."
+      },
+      {
+        "id": "VERSION_ALTERNATIVE",
+        "disposition": "ACCEPT comparative locality difference, keep provisional. REJECT claim that owner must choose reversible per-field vs per-owner internal candidate: original delegation allows evidence-backed finite choices. No policy/key/privacy weakening authorized."
+      },
+      {
+        "id": "RESTORE_ANCHOR",
+        "disposition": "REJECT snapshot owner generation alone is enough, or unconditional exact-snapshot restore succeeds. An old complete snapshot can roll back versions/attempts. Same-instance restore requires retained current head/lineage/floor outside replayed image and exact resource/custody checks; fresh import is separate. Nondecreasing versions alone permit equality on reuse; retirement/recreation requires no resurrection."
+      },
+      {
+        "id": "CONTROL_FLOW",
+        "disposition": "ACCEPT precise conditional boundary: no whole Session NI claim exists. Existing finite arithmetic control/failure composition cannot reset where low outputs depend on continuation. Main independently reproduced actual mixed MODEL Session counterexample after packet: secret increment then public constant compiles; secret0 permits public7, maxInt overflow leaves public10. Repair before a dependent secret-bearing D source/observer increment. Does not require all future W6 timing/resource theory."
+      },
+      {
+        "id": "AUTH_LAYERS",
+        "disposition": "ACCEPT: MayWrite/current authority and observer release are separate from source typing/label equality. No metadata object, Nat generation, hash, transport identity, source span or proof may create an issuer/grant."
+      },
+      {
+        "id": "REVIEW_SCOPE",
+        "disposition": "ACCEPT static advisory only: new2 complete modules, selected imports and explicitly bounded Rust excerpts. No execution/repository-wide proof/signed acceptance. Final recovered DOM answer separately verified; wrapper inline-token output is wrong extraction."
+      }
+    ],
+    "scope": "sole-main full answer read and definitions/control counterexample checked; no C acceptance"
+  },
+  "c_source_control_counterexample_20260928": {
+    "at": "2026-09-28T13:42:39.539575+00:00",
+    "directory": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/kernel-owner-flow-counter-v1",
+    "result_sha256": "e51e54e92d467cfb56ef3c637da7bc2c5b9d5397926c0026e0d607781a3466a9",
+    "whole_exit": 0,
+    "collected_tool": 62851,
+    "owned_declarations": 20,
+    "false_guards": 1,
+    "scope": "Actual mixed MODEL Session two-run finite counterexample; general admitted-history theorem for constructed trace, not general NI/proof of production exploit. All module-owned declarations audited, standard logical axioms only.",
+    "finding": "Two ordinary owner assignments compile individually: secret increment then public constant. Under identical public initial state, secret0 commits public7; maxInt private overflow consumes one refused attempt, strands wait and leaves public10. General finished_admitted proves computed trace follows actual Rooted Session entries; no mid-run store injection.",
+    "disposition": "No prior whole-Session NI theorem is contradicted; source control/completion labels remain a concrete blocker before a dependent secret-bearing control-sensitive D increment. Do not infer privacy from owner-per-body checks or redacted payload. No production exploit claim, no automatic W6 widening or new retry/cancellation policy."
   }
 }
