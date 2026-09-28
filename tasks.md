@@ -1,6 +1,6 @@
 # Current Task Map (LAB)
 
-最終更新: 2026-09-28 15:38 JST
+最終更新: 2026-09-28 16:57 JST
 
 **Canon notice:** `mirrorea_canon/` is normative. Everything outside
 `mirrorea_canon/` is LAB; if LAB conflicts with canon, canon wins. This snapshot
@@ -29,7 +29,7 @@ Exact evidence: `docs/proof-first/RESUME.md`, `docs/proof-first/CURRENT_GOAL.md`
 
 W4-Cでは、共有authority floorの古いcache使用、供給された観測ラベルの弱化、実行していない読取りの記録に続き、重複したowner操作で配置変換がpanicする経路を限定修正しました。一般Lean命題・実反例・Oracle指摘を照合し、今回のruntime library418件が通過しました。正常な4種類のsourceは、修正前後で配置結果全体が一致しています。ownerの実書込みと呼出し側の結果受理を分け、評価失敗後にも過去の書込み・履歴が残ることを実検査しました。C全体は未完了です。複数代入の文順序・source継続、別owner間の識別子衝突、復元経路の条件が具体的な残件です。全entry・現在の認可・実namespace/custody・資源の対応も継続します。実network・秘密・復旧やW4全体の保証には広げません。
 
-W4-Cの追加調査では、チェック済み代入のソース位置を最初の同名イベントへ取り違える実反例を修正案で解消し、意味解析とruntimeの回帰を検査しました。runtime本体418件と意味解析・後続test群は通過しましたが、renderer4件は旧HEADでも同じ失敗が再現し、全体GREENではありません。外部参照証明では、同じ実行列内の要求生成・書込み・応答の対応、および値の欠落を含む有限列の情報流を検査しました。ソース位置・因果の差分reviewは回収・反映済み、部分値の情報流は未reviewで、実ソースのラベル、共通pending・復旧・資源への接続は未完了です。
+W4-Cでは、ソース位置修正を05a54050で統合済みです。旧HEADでも失敗したrenderer例は二つの失敗宣言を保持して修復し、構文木から使用先の投影まで両名が残る追加検査を含む5件が通過しました。処理連結・整数範囲の一般Lean証明とOracle指摘を照合しました。純粋計算と書込みを同一catalogで区別し、明示的な別の許可で登録・生成・使用する参照モデルも機械検査済みでreview中です。既存の管理操作・全Sessionとの対応、実ソースのラベル・資源・custodyは未完了です。C継続、D完了後に一旦停止します。
 
 ## ordered self-driven packages
 

@@ -1625,3 +1625,68 @@ claim. Test claims narrowed to actual assertions. Existing renderer4 baseline
 failures retained; other collected checks and make docs pass. No full regression
 GREEN, C close, signature or Canon acceptance. PartialAbort/SourceFlow still
 unreviewed. Latest owner stop remains D complete, then pause before E.
+
+2026-09-28T07:20:20.512250+00:00 — Shared-state extraction, flow composition and renderer fixture checkpoint (LAB).
+Previous source-origin repair05a54050 committed/pushed; remote parity verified.
+C remains active. Fresh reference closure90 then91 modules: shared state/pending3new
+modules275owned plus4existing control modules85owned; composition1module32owned.
+Cumulative19new modules1211owned,24qualified false controls, standard logic only.
+The abandoned decide probe exhausted heartbeat and is NOT a rejected false theorem;
+six subsequent #guard negatives have actual false diagnostics. Earlier development
+failures remain separate. Full exact receipts in c-source-effect/kernel-v2.
+Shared source uses one sum waiting slot and same allocator; exact unchanged pure
+transitions and preservation laws cover only its named functions. Raw reserveOwner
+is NOT admission: positive reservation with wrong realm is rejected by current auth.
+Register/instantiate/head controls retain original owner pending while count grows.
+Whole Session/cancel-owner/adopt/restore and typed owner catalog remain OPEN. Old
+unary pure definition slots must not be reinterpreted as owner mutation authority.
+Current independent viewpoint review mir-w4-c-shared-state running, final pending.
+Partial-flow Oracle final21744chars/sha d208d732e06127ef08639bfaf3750e84efdcfd2dee040a85def18f1e393e2e8c
+recovered/disposed. Composition delta addresses pc reset, raw completion and
+filter-before-retention counterexamples, but was absent from that review packet.
+No authentic-label, service/auth/resource, activation or timing confidentiality.
+Renderer four prior failures reproduce on old baseline; minimal fixture correction
+combines two failure names into existing comma-list syntax, preserves provider
+manifest/subset rule and duplicate-member rejection. Focused runtime4pass and
+parser negative1pass, no new broad suite claim. Historical generated reports intact;
+no source/network/attested PoseGraph/vendor execution claim. Six fixture files changed.
+Plan/current snapshots/sample dashboard/read ledger updated. No taxonomy change,
+so samples/README and scripts/README updates unnecessary. No Canon/THM/OBL/phase or
+119 disposition changes. Existing Report2614 only; no subagents/notifications.
+Current own fixture/docs changes uncommitted; docs validation pending. Continue C,
+then D; pause whole-W4 goal only after D evidence/review/integration, before E.
+
+2026-09-28T07:57:16.318717+00:00 — Common catalog research and fixture integration checkpoint (LAB).
+External MixedOperationDefinitions/InstanceState/CatalogEmbedding/CatalogService/
+CatalogControls/CompositionCore/ManagementEntry/ManagementControls use one tagged
+pure/owner catalog, checked scoped fields/captures, i64 literals and flow/locality.
+Owner exact-contract replacement is a provisional reversible profile; metadata is
+supplied, not authentic field authority. Pure world/structural transitions embed
+exactly. The derived registry refuses a same-realm authorized pure operation with
+an injected owner body; old free-registry helper permits that countermodel. Explicit
+private owner action16/register17/instantiate18/replace19 grants are fixture data,
+not authority created by checking. Actual admitted management registers/creates both
+kinds then same catalog owner service writes10+5=15, retains history. Pure value5
+here is resolved code evaluation, not full pure invocation/source integration.
+Fresh closure100modules/8new1018owned standard-logic audit,5qualified false controls;
+previous92 hashes unchanged, source/input/log receipts in CATALOG_DELTA_RESULT.
+Unreviewed new cut submitted once mir-w4-c-mixed-catalog07:55:32UTC, QUESTIONsha
+2c85e38bb8f22c5a39e9a9a80938a4210375764034aa8c18f148486056cd24fb,
+manifest86e71d3fa863b0a382462e5a942435e1e6f134efe4d2fd86a25ba67bb55a1a0a.
+Shared-state Oracle final25948chars/disposed; composition/numeric final20467chars/
+shaab5b4f2a1455835d8644cb752f9f7ab97c98790144b7c73e266911c5cc39b441 disposed.
+Complete prefix execution != raw trace buffer; suffix-local completion still needs
+incoming control/activation justification. Fixed whole-invocation observation only.
+Numeric leaves need separate bound premises; unused raw argument parsing policy
+is not inferred. No authentic-label/resource/service-completion/network privacy.
+Renderer fixture restores both intended failures, may change source/projection
+identities, never equivalence with malformed old source. New exact-row test covers
+all3 actual ASTs and matched packet schemas. Focused5/5 plus existing parser negative
+pass; old broad regression failures preserved, whole suite not rerun. Historical
+reports/JSON not rewritten. New test only, no production-code change at this cut.
+Plan/status/Documentation/project-status/tasks/sample dashboard/read ledger updated;
+no taxonomy change. Single Report2614, no Canon/THM/OBL/119 promotion, no subagents
+or external notification. Current diff review/docs/Git due before checkpoint claim.
+Next SAME C: full pure management embedding then actual source/shared Session,
+all pending/allocator/head/adopt/cancel/restore entries, current fields/resources and
+carrier. E cannot defer these D prerequisites. Stop AFTER D, BEFORE E, by goal pause.

@@ -43927,11 +43927,812 @@
       "tool_session": 25651,
       "log_sha256": "2a31cd1458be17326242567ff65f1836d6e66b1fc64aba4bfee461c55c4b8bcd",
       "scope": "final source-origin documentation synchronization before commit receipt"
+    },
+    "git_checkpoint": {
+      "at": "2026-09-28T07:20:20.512250+00:00",
+      "head": "05a54050fc3139d603ed1355c12d9d2e0025dce7",
+      "remote": "05a54050fc3139d603ed1355c12d9d2e0025dce7\trefs/heads/main",
+      "scope": "source-origin previous checkpoint; current fixture/docs differences uncommitted"
     }
   },
   "owner_stop_after_d": {
     "at": "2026-09-28T06:27:29.968002+00:00",
     "instruction": "Finish C then D evidence/review/integration; pause existing goal and stop before E. Supersedes stop after C.",
     "current_status": "C active, D dependency-gated; neither complete"
+  },
+  "c_shared_source_20260928": {
+    "at": "2026-09-28T07:20:20.512250+00:00",
+    "status": "external fresh reference; reviewed pending, no catalog/source-admission claim",
+    "result": {
+      "at": "2026-09-28T07:05:24.566638+00:00",
+      "previous_result_sha256": "46a4e6662f2d60457fe9b9c184bcd59e6eec15c69a30af45d9f2922464f068b4",
+      "base_modules_unchanged": true,
+      "base_modules": 83,
+      "source_hashes": {
+        "OwnerSavedPending": "5f9c597fff382449a033504d88d39275ab2b3074654ee691c27669fa4a5431e8",
+        "OwnerSharedSource": "36b334e527e3cc735c008cc0b1797d93230b8a4ff85efe42d3348ce2a4eedb46",
+        "MirroreaProofFirstFallbackStaticControls": "36293d11d7f239e711cb33682999e734ed25a649c4a8f56333ea100bf14285c4",
+        "MirroreaProofFirstReferenceAccessControls": "e05c526bb01cdaf0ffecb6f0005f38034422726472ac3e630e47619d4a47c24a",
+        "MirroreaProofFirstReferenceOwnerControls": "e1a7cd1a7c7ab8fb779b3530d0d34407182b49e848b33ffbcea19a0288c02d68",
+        "MirroreaProofFirstReferenceSourceControls": "7e25b1c528919942be564883cf9239b9d2be230868e62c1e5d7f7edc208c1fea",
+        "OwnerSharedSourceControls": "c3eefbb293e46303e2834ea2ee7f6ebd7dbb7c28346a12f8d9a3883639e1fafc"
+      },
+      "rows": [
+        {
+          "module": "OwnerSavedPending",
+          "command": [
+            "/home/codex/.elan/toolchains/leanprover--lean4---v4.29.1/bin/lean",
+            "--trust=0",
+            "-j1",
+            "-o",
+            "OwnerSavedPending.olean",
+            "OwnerSavedPending.lean"
+          ],
+          "exit": 0,
+          "source_sha256": "5f9c597fff382449a033504d88d39275ab2b3074654ee691c27669fa4a5431e8",
+          "log_sha256": "fe49b9260a23ba88510925da471a4b5683a97324dd0baa0574a40588dc09e7ff"
+        },
+        {
+          "module": "OwnerSharedSource",
+          "command": [
+            "/home/codex/.elan/toolchains/leanprover--lean4---v4.29.1/bin/lean",
+            "--trust=0",
+            "-j1",
+            "-o",
+            "OwnerSharedSource.olean",
+            "OwnerSharedSource.lean"
+          ],
+          "exit": 0,
+          "source_sha256": "36b334e527e3cc735c008cc0b1797d93230b8a4ff85efe42d3348ce2a4eedb46",
+          "log_sha256": "7cafb14937799614488755f51715a9c20f129caa0a2d2d2ac761345f6dde008e"
+        },
+        {
+          "module": "MirroreaProofFirstFallbackStaticControls",
+          "command": [
+            "/home/codex/.elan/toolchains/leanprover--lean4---v4.29.1/bin/lean",
+            "--trust=0",
+            "-j1",
+            "-o",
+            "MirroreaProofFirstFallbackStaticControls.olean",
+            "MirroreaProofFirstFallbackStaticControls.lean"
+          ],
+          "exit": 0,
+          "source_sha256": "36293d11d7f239e711cb33682999e734ed25a649c4a8f56333ea100bf14285c4",
+          "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "module": "MirroreaProofFirstReferenceAccessControls",
+          "command": [
+            "/home/codex/.elan/toolchains/leanprover--lean4---v4.29.1/bin/lean",
+            "--trust=0",
+            "-j1",
+            "-o",
+            "MirroreaProofFirstReferenceAccessControls.olean",
+            "MirroreaProofFirstReferenceAccessControls.lean"
+          ],
+          "exit": 0,
+          "source_sha256": "e05c526bb01cdaf0ffecb6f0005f38034422726472ac3e630e47619d4a47c24a",
+          "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "module": "MirroreaProofFirstReferenceOwnerControls",
+          "command": [
+            "/home/codex/.elan/toolchains/leanprover--lean4---v4.29.1/bin/lean",
+            "--trust=0",
+            "-j1",
+            "-o",
+            "MirroreaProofFirstReferenceOwnerControls.olean",
+            "MirroreaProofFirstReferenceOwnerControls.lean"
+          ],
+          "exit": 0,
+          "source_sha256": "e1a7cd1a7c7ab8fb779b3530d0d34407182b49e848b33ffbcea19a0288c02d68",
+          "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "module": "MirroreaProofFirstReferenceSourceControls",
+          "command": [
+            "/home/codex/.elan/toolchains/leanprover--lean4---v4.29.1/bin/lean",
+            "--trust=0",
+            "-j1",
+            "-o",
+            "MirroreaProofFirstReferenceSourceControls.olean",
+            "MirroreaProofFirstReferenceSourceControls.lean"
+          ],
+          "exit": 0,
+          "source_sha256": "7e25b1c528919942be564883cf9239b9d2be230868e62c1e5d7f7edc208c1fea",
+          "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "module": "OwnerSharedSourceControls",
+          "command": [
+            "/home/codex/.elan/toolchains/leanprover--lean4---v4.29.1/bin/lean",
+            "--trust=0",
+            "-j1",
+            "-o",
+            "OwnerSharedSourceControls.olean",
+            "OwnerSharedSourceControls.lean"
+          ],
+          "exit": 0,
+          "source_sha256": "c3eefbb293e46303e2834ea2ee7f6ebd7dbb7c28346a12f8d9a3883639e1fafc",
+          "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "module": "SharedAudit",
+          "command": [
+            "/home/codex/.elan/toolchains/leanprover--lean4---v4.29.1/bin/lean",
+            "--trust=0",
+            "-j1",
+            "-o",
+            "SharedAudit.olean",
+            "SharedAudit.lean"
+          ],
+          "exit": 0,
+          "source_sha256": "38c8f79f670b415cbdab65bd37b1263671ce265582287db372dd1334968bcf36",
+          "log_sha256": "f8d4e8e318f7e7ff7a47f66a276c3ac24326afceb4a431d42a7d1ae9331123f6"
+        },
+        {
+          "module": "FalseSharedAllRefused",
+          "command": [
+            "/home/codex/.elan/toolchains/leanprover--lean4---v4.29.1/bin/lean",
+            "--trust=0",
+            "-j1",
+            "-o",
+            "FalseSharedAllRefused.olean",
+            "FalseSharedAllRefused.lean"
+          ],
+          "exit": 1,
+          "source_sha256": "1a9f2c50ed5ecccddf563072ddcb1ea3de725f175bdd190de68f83aede757982",
+          "log_sha256": "4ffac52133fcdb0595f1dfcb831ceea7b8232fa76a5cf6cfc51c17acb087f501"
+        },
+        {
+          "module": "FalseSharedAllRefusedGuard",
+          "command": [
+            "/home/codex/.elan/toolchains/leanprover--lean4---v4.29.1/bin/lean",
+            "--trust=0",
+            "-j1",
+            "-o",
+            "FalseSharedAllRefusedGuard.olean",
+            "FalseSharedAllRefusedGuard.lean"
+          ],
+          "exit": 1,
+          "source_sha256": "5c7d32be5b46430a3bd6aec4d66b894afa3ab16c3f0293060f9707755bc5eedb",
+          "log_sha256": "4065efa437d2881ea488ba17663b4ea39b487436deb9de1a8caa8ede4fada385"
+        },
+        {
+          "module": "FalseSharedWaitCanReserveGuard",
+          "command": [
+            "/home/codex/.elan/toolchains/leanprover--lean4---v4.29.1/bin/lean",
+            "--trust=0",
+            "-j1",
+            "-o",
+            "FalseSharedWaitCanReserveGuard.olean",
+            "FalseSharedWaitCanReserveGuard.lean"
+          ],
+          "exit": 1,
+          "source_sha256": "3695887cec2f127c538ec5d696bcab576451d9a7a0bae40ceee32960549eeb17",
+          "log_sha256": "b9033022cec1a275ae9ed4c8a7dbdf66512766e2068c23c7aaa10d191aafc4b9"
+        },
+        {
+          "module": "FalseHeadDropsOwnerGuard",
+          "command": [
+            "/home/codex/.elan/toolchains/leanprover--lean4---v4.29.1/bin/lean",
+            "--trust=0",
+            "-j1",
+            "-o",
+            "FalseHeadDropsOwnerGuard.olean",
+            "FalseHeadDropsOwnerGuard.lean"
+          ],
+          "exit": 1,
+          "source_sha256": "b76f804ecc93ea7fa3e74d70473f45e696e01e5541b9b44aa1f7c55c2a3af8d7",
+          "log_sha256": "866c4c4c9f07176bb79dccadfaa7ac1453ff51ef35f50f461e04a0b915047322"
+        },
+        {
+          "module": "FalseSeparateAllocatorGuard",
+          "command": [
+            "/home/codex/.elan/toolchains/leanprover--lean4---v4.29.1/bin/lean",
+            "--trust=0",
+            "-j1",
+            "-o",
+            "FalseSeparateAllocatorGuard.olean",
+            "FalseSeparateAllocatorGuard.lean"
+          ],
+          "exit": 1,
+          "source_sha256": "f780e0ddfea457915514de1f16bac34362b1332b1daecbe2639f446cadf076cc",
+          "log_sha256": "d3847c129dd23937f6dedf57ecb25700759524fdb40ca66272f2335b039ce5b3"
+        },
+        {
+          "module": "FalseReservationIsAuthGuard",
+          "command": [
+            "/home/codex/.elan/toolchains/leanprover--lean4---v4.29.1/bin/lean",
+            "--trust=0",
+            "-j1",
+            "-o",
+            "FalseReservationIsAuthGuard.olean",
+            "FalseReservationIsAuthGuard.lean"
+          ],
+          "exit": 1,
+          "source_sha256": "bb4ac61d46a47b81cc9bc79473c3a530dbb82de2e27d729ef4a5ef144f4ff698",
+          "log_sha256": "289ca32098888d75cdedafc8dfa75a3ba269eedb74af756039084c484adbffba"
+        },
+        {
+          "module": "FalseShrinkPreservesGuard",
+          "command": [
+            "/home/codex/.elan/toolchains/leanprover--lean4---v4.29.1/bin/lean",
+            "--trust=0",
+            "-j1",
+            "-o",
+            "FalseShrinkPreservesGuard.olean",
+            "FalseShrinkPreservesGuard.lean"
+          ],
+          "exit": 1,
+          "source_sha256": "006a4414bd9b071e061461df322313e2bce3d343704eaac7e18566fd4a3bd2e7",
+          "log_sha256": "e827c373626f1087cddb1e65f756788d71b997f1fc5043d4157472358b5cfc35"
+        }
+      ],
+      "unaccepted_probe": "FalseSharedAllRefused example decide heartbeat exhaustion; retained, NOT accepted as rejection. Six fresh #guard negatives all false; controls, not general proof.",
+      "scope": "common waiting/allocator extraction and exact legacy source transition embedding; raw reservation is NOT source/auth admission; whole Session/adopt/cancel-owner/restore and owner definition catalog remain open"
+    },
+    "oracle": {
+      "session": "mir-w4-c-shared-state",
+      "wrapper": 77241,
+      "capture": 26198,
+      "directory": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/oracle-c-shared-state",
+      "state": "final recovered and locally disposed; source review only",
+      "receipt": {
+        "at": "2026-09-28T07:28:54.182750+00:00",
+        "session": "mir-w4-c-shared-state",
+        "completedAt": "2026-09-28T07:25:34.001Z",
+        "characters": 25948,
+        "sha256": "b44458fe5015415b746a328cf73fc1f22710bfcc172fdfab380641c376f7e521",
+        "identity": true,
+        "stop": false
+      },
+      "disposition": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/oracle-c-shared-state/DISPOSITION.md"
+    },
+    "open": [
+      "typed operation catalog; pure code must not authorize owner mutation",
+      "whole Session/adopt/continue/cancel-owner/restore",
+      "source labels/resources and authenticated receipt custody"
+    ]
+  },
+  "c_flow_composition_20260928": {
+    "at": "2026-09-28T07:20:20.512250+00:00",
+    "partial_flow_review": {
+      "at": "2026-09-28T07:07:48.591800+00:00",
+      "session": "mir-w4-c-partial-flow",
+      "completedAt": "2026-09-28T07:04:24.698Z",
+      "characters": 21744,
+      "sha256": "d208d732e06127ef08639bfaf3750e84efdcfd2dee040a85def18f1e393e2e8c",
+      "identity": true,
+      "stop": false
+    },
+    "disposition": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/oracle-c-partial-flow/DISPOSITION.md",
+    "result": {
+      "at": "2026-09-28T07:17:20.579297+00:00",
+      "previous_result_sha256": "b204bc7d7e5ba55f106eebba29a0ac47829239e283cc98016ce33c776bb9eb10",
+      "base_modules_unchanged": true,
+      "base_modules": 90,
+      "source_hashes": {
+        "OwnerFlowComposition": "a4b69b00e2e82d61c1c42024cffccf8940b05024951900ffda9194a2eddefec6"
+      },
+      "rows": [
+        {
+          "module": "OwnerFlowComposition",
+          "command": [
+            "/home/codex/.elan/toolchains/leanprover--lean4---v4.29.1/bin/lean",
+            "--trust=0",
+            "-j1",
+            "-o",
+            "OwnerFlowComposition.olean",
+            "OwnerFlowComposition.lean"
+          ],
+          "exit": 0,
+          "source_sha256": "a4b69b00e2e82d61c1c42024cffccf8940b05024951900ffda9194a2eddefec6",
+          "log_sha256": "92a0e7818c1bec37b3b93c4b068b74917952ac2a7ca762b84d0e9b05d66aaae6"
+        },
+        {
+          "module": "CompositionAudit",
+          "command": [
+            "/home/codex/.elan/toolchains/leanprover--lean4---v4.29.1/bin/lean",
+            "--trust=0",
+            "-j1",
+            "-o",
+            "CompositionAudit.olean",
+            "CompositionAudit.lean"
+          ],
+          "exit": 0,
+          "source_sha256": "56fa7dcf18e24123f7437b3ff103582975a29ea105891e2985f5f0e3ddc5633a",
+          "log_sha256": "91039607f55427842a9c6de7cf3b0520220368301474b0e7360ddd827af85363"
+        },
+        {
+          "module": "FalseCompositionPcReset",
+          "command": [
+            "/home/codex/.elan/toolchains/leanprover--lean4---v4.29.1/bin/lean",
+            "--trust=0",
+            "-j1",
+            "-o",
+            "FalseCompositionPcReset.olean",
+            "FalseCompositionPcReset.lean"
+          ],
+          "exit": 1,
+          "source_sha256": "8b832e04bf8fe79cdfed5a02a21cbd35078c148c96efaf5b627ca6491e094e4c",
+          "log_sha256": "db9c4e874c2c60b0dfd441f6ac4c7a07bd516a4402e324f2dd5e3d69194aaa1e"
+        },
+        {
+          "module": "FalseCompositionRetainBeforeFilter",
+          "command": [
+            "/home/codex/.elan/toolchains/leanprover--lean4---v4.29.1/bin/lean",
+            "--trust=0",
+            "-j1",
+            "-o",
+            "FalseCompositionRetainBeforeFilter.olean",
+            "FalseCompositionRetainBeforeFilter.lean"
+          ],
+          "exit": 1,
+          "source_sha256": "7dd4e852368431639d7a6ba123cbd4fda9a48d9b0b806750b1468958037ea530",
+          "log_sha256": "65651055cd8b218fe4011209cc956176a7c53ae23c979e61dffdc07cb3dab314"
+        },
+        {
+          "module": "FalseCompositionFilteredCompletion",
+          "command": [
+            "/home/codex/.elan/toolchains/leanprover--lean4---v4.29.1/bin/lean",
+            "--trust=0",
+            "-j1",
+            "-o",
+            "FalseCompositionFilteredCompletion.olean",
+            "FalseCompositionFilteredCompletion.lean"
+          ],
+          "exit": 1,
+          "source_sha256": "3574effef3809f4fd1b9874f8c07c7c1dec568c7e054ed28cbe3c5b2fc8505ae",
+          "log_sha256": "f57ad5cd3ffaf5e987ca47e424488bb92a193d17fd9d8ed62a269c9929d8914e"
+        },
+        {
+          "module": "FalseCompositionCaptureNamespace",
+          "command": [
+            "/home/codex/.elan/toolchains/leanprover--lean4---v4.29.1/bin/lean",
+            "--trust=0",
+            "-j1",
+            "-o",
+            "FalseCompositionCaptureNamespace.olean",
+            "FalseCompositionCaptureNamespace.lean"
+          ],
+          "exit": 1,
+          "source_sha256": "4ce0c6168cc1212357ac04501376cb7ce202d97dc4a3b8047194df0b9cc416f4",
+          "log_sha256": "7273cc5417263e85efbfb200c8311e2b2db92c7251736a96b3f7205e11da1f83"
+        }
+      ],
+      "scope": "general composition with carried completion dependency, stop-on-failure, same instruction-prefix two-run equality, checked list-step correspondence; supplied fixed labels/args, no service/auth/resource/activation/timing privacy"
+    },
+    "review_scope": "partial flow and composition/numeric final reviews recovered/disposed; fixed whole-invocation completion only",
+    "final_delta_review": {
+      "receipt": {
+        "at": "2026-09-28T07:48:23.599566+00:00",
+        "session": "mir-w4-c-flow-boundary",
+        "completedAt": "2026-09-28T07:41:53.537Z",
+        "characters": 20467,
+        "sha256": "ab5b4f2a1455835d8644cb752f9f7ab97c98790144b7c73e266911c5cc39b441",
+        "identity": true,
+        "stop": false
+      },
+      "disposition": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/oracle-c-flow-boundary/DISPOSITION.md",
+      "sha256": "5635b2c268b4021cf95ae8bff2e5b5f5d0ee9be9d1a74c806d5fb2ce097100c3",
+      "scope": "composition/numeric/fixture text; no independent execution or mixed catalog review"
+    }
+  },
+  "c_renderer_fixture_20260928": {
+    "at": "2026-09-28T07:20:20.512250+00:00",
+    "cause": "three legacy fixtures repeated singleton failure declaration; strict parser refuses; retained old HEAD renderer four failures",
+    "change": "combine both declarations using existing comma-separated syntax; no parser/provider policy/manifest changes",
+    "focused": {
+      "at": "2026-09-28T07:12:53.006439+00:00",
+      "command": [
+        "cargo",
+        "test",
+        "--locked",
+        "--offline",
+        "-j",
+        "1",
+        "-p",
+        "mir-runtime",
+        "--test",
+        "renderer_pose_backend",
+        "--",
+        "--test-threads=1"
+      ],
+      "exit": 0,
+      "log_sha256": "467bc3831b45e4f988970f77bf513de2770cd45bb0b71fd1ddb1307c927e6efa"
+    },
+    "negative": {
+      "at": "2026-09-28T07:16:34.933541+00:00",
+      "command": [
+        "cargo",
+        "test",
+        "--locked",
+        "--offline",
+        "-j",
+        "1",
+        "-p",
+        "mir-ast",
+        "--test",
+        "textual_mir_alpha",
+        "duplicate_effect_members_cannot_erase_earlier_annotations",
+        "--",
+        "--exact",
+        "--test-threads=1"
+      ],
+      "exit": 0
+    },
+    "nonclaims": [
+      "historical generated reports regenerated",
+      "whole broad regression rerun",
+      "W4 network",
+      "attested PoseGraph provenance",
+      "vendor renderer execution"
+    ],
+    "projected_rows": {
+      "at": "2026-09-28T07:53:47.911581+00:00",
+      "command": [
+        "cargo",
+        "test",
+        "--locked",
+        "--offline",
+        "-j",
+        "1",
+        "-p",
+        "mir-runtime",
+        "--test",
+        "renderer_pose_backend",
+        "--",
+        "--test-threads=1"
+      ],
+      "exit": 0,
+      "log_sha256": "b1b3073e188c8909f543f8d44deddc0cb1bf0f0d144d0b18b31068fae2c64880"
+    },
+    "review": {
+      "disposition": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/oracle-c-flow-boundary/DISPOSITION.md",
+      "scope": "three source repair reviewed; supplemental exact-row test authored after packet and locally checked"
+    },
+    "docs_validation": {
+      "at": "2026-09-28T08:02:51.500558+00:00",
+      "command": [
+        "make",
+        "docs"
+      ],
+      "exit": 0,
+      "log_sha256": "2a31cd1458be17326242567ff65f1836d6e66b1fc64aba4bfee461c55c4b8bcd"
+    }
+  },
+  "c_numeric_20260928": {
+    "at": "2026-09-28T07:23:42.241663+00:00",
+    "previous_result_sha256": "3d6475215e754a44a23a06a4d48fa2a4e73ce77cdde514ac2347a9a5d57f3181",
+    "base_modules_unchanged": true,
+    "base_modules": 91,
+    "source_hashes": {
+      "OwnerNumericBoundary": "c5128c519bc33cb1b75420091a0d72b35f164391e4a9559e423890ba7eebc4cb"
+    },
+    "rows": [
+      {
+        "module": "OwnerNumericBoundary",
+        "command": [
+          "/home/codex/.elan/toolchains/leanprover--lean4---v4.29.1/bin/lean",
+          "--trust=0",
+          "-j1",
+          "-o",
+          "OwnerNumericBoundary.olean",
+          "OwnerNumericBoundary.lean"
+        ],
+        "exit": 0,
+        "source_sha256": "c5128c519bc33cb1b75420091a0d72b35f164391e4a9559e423890ba7eebc4cb",
+        "log_sha256": "5dbacf23994bc0777fd0c74765039c9010492773aa887b4acb68f0614ca774bb"
+      },
+      {
+        "module": "NumericAudit",
+        "command": [
+          "/home/codex/.elan/toolchains/leanprover--lean4---v4.29.1/bin/lean",
+          "--trust=0",
+          "-j1",
+          "-o",
+          "NumericAudit.olean",
+          "NumericAudit.lean"
+        ],
+        "exit": 0,
+        "source_sha256": "71ced1cbad37164635c3729fc4c0b9f632575e79320377927577318af6341781",
+        "log_sha256": "8302b013aec7e17a4c74f76c339a0e237e00847df562155565d98538870d3608"
+      },
+      {
+        "module": "FalseNumericUncheckedLiteral",
+        "command": [
+          "/home/codex/.elan/toolchains/leanprover--lean4---v4.29.1/bin/lean",
+          "--trust=0",
+          "-j1",
+          "-o",
+          "FalseNumericUncheckedLiteral.olean",
+          "FalseNumericUncheckedLiteral.lean"
+        ],
+        "exit": 1,
+        "source_sha256": "7b6c787ad9aab7cafe5326e379c9f231d40bdbc2967419698dfb8756e83a3ed3",
+        "log_sha256": "8a6bccd4828db347a94f2e8877c87a4930c3239d223d2fe99046e11f27130297"
+      },
+      {
+        "module": "FalseNumericUncheckedLiteralGuard",
+        "command": [
+          "/home/codex/.elan/toolchains/leanprover--lean4---v4.29.1/bin/lean",
+          "--trust=0",
+          "-j1",
+          "-o",
+          "FalseNumericUncheckedLiteralGuard.olean",
+          "FalseNumericUncheckedLiteralGuard.lean"
+        ],
+        "exit": 1,
+        "source_sha256": "73a4d478d2fa1b31ea9c0a1a681967bf7eb5657c81131b59bcacbccfeffa06c4",
+        "log_sha256": "66f7555ef63ecefb87a61c5ae80daaab893e0e9c8f6fdbb16de2e5f2f8ab61fd"
+      },
+      {
+        "module": "FalseNumericOverflowSucceedsGuard",
+        "command": [
+          "/home/codex/.elan/toolchains/leanprover--lean4---v4.29.1/bin/lean",
+          "--trust=0",
+          "-j1",
+          "-o",
+          "FalseNumericOverflowSucceedsGuard.olean",
+          "FalseNumericOverflowSucceedsGuard.lean"
+        ],
+        "exit": 1,
+        "source_sha256": "31e765a811cc922e7b28f028ba263bcc11df2e2f5d459378d50421798749dace",
+        "log_sha256": "b1feca33191ab9b6c8b9a2e2118d696f083500fd26eb643db65fda1d33ac8ca4"
+      },
+      {
+        "module": "FalseNumericConstantChecksUnusedGuard",
+        "command": [
+          "/home/codex/.elan/toolchains/leanprover--lean4---v4.29.1/bin/lean",
+          "--trust=0",
+          "-j1",
+          "-o",
+          "FalseNumericConstantChecksUnusedGuard.olean",
+          "FalseNumericConstantChecksUnusedGuard.lean"
+        ],
+        "exit": 1,
+        "source_sha256": "dc61c029dcf5adeb05c568efc37914de86043cfd46e558da237697fb5ffc0bcf",
+        "log_sha256": "473e85fed699a4d2c52058db73b2298978c4176e887bd22a458c73e0532ea27f"
+      }
+    ],
+    "unaccepted_probe": "initial false-control file lacked parent namespace; unknown identifier, NOT semantic rejection",
+    "scope": "explicit literal/Option-store/captured i64 premises imply bounded checked evaluation and owner service store/value; no parser/capture/import closure or authority claim"
+  },
+  "c_mixed_catalog_20260928": {
+    "at": "2026-09-28T07:57:16.318717+00:00",
+    "status": "external freshly checked candidate; not adopted; independent review pending",
+    "result": {
+      "at": "2026-09-28T07:46:54.624080+00:00",
+      "previous_result_sha256": "7fd941b2b685a61367101f7dcdfad8b1a099347dd1bf0ec2904e3919f7d8837b",
+      "base_modules": 92,
+      "base_modules_unchanged": true,
+      "source_hashes": {
+        "MixedOperationDefinitions": "fc65b803017ece6548f3b330c04dfd6ce7e3006e19296ee55787e019bb548e64",
+        "MixedInstanceState": "5bfcd00f0594695a8eb415a2eff45ec3c2ffea2c2ddba064ff3d7e119085246a",
+        "MixedCatalogEmbedding": "0f3af5c03f7d612400db1b9409fcff9475ffa1038515eebd031cbbd83d8cc889",
+        "MixedCatalogService": "dfecb812c4d545b05ea46fa18650cadeb9f2d38cebb9fb9e92f898a8dfa1393a",
+        "MixedCatalogControls": "60a79cb3a6e9df2bbf5b08f572178659917d0381ea4c2bea11c8f87cf05143a0",
+        "MixedCompositionCore": "ee976901247e1c351d7793878074dbc557119f11863e0044713ef6a391cb1661",
+        "MixedManagementEntry": "96d6ed3d98fceba8be8327e30b20835efffe65fc1614f7e85ae11156fdfa9972",
+        "MixedManagementControls": "b4934490b112c01c888d3a762ed7e0c4accc9293f9c5dc1719852bf2b6704d73"
+      },
+      "rows": [
+        {
+          "module": "MixedOperationDefinitions",
+          "command": [
+            "/home/codex/.elan/toolchains/leanprover--lean4---v4.29.1/bin/lean",
+            "--trust=0",
+            "-j1",
+            "-o",
+            "MixedOperationDefinitions.olean",
+            "MixedOperationDefinitions.lean"
+          ],
+          "exit": 0,
+          "source_sha256": "fc65b803017ece6548f3b330c04dfd6ce7e3006e19296ee55787e019bb548e64",
+          "log_sha256": "52c1c6ab0ebe1669273a35f0378725ad8376004ea58fc9ece8b8b59e149e778c"
+        },
+        {
+          "module": "MixedInstanceState",
+          "command": [
+            "/home/codex/.elan/toolchains/leanprover--lean4---v4.29.1/bin/lean",
+            "--trust=0",
+            "-j1",
+            "-o",
+            "MixedInstanceState.olean",
+            "MixedInstanceState.lean"
+          ],
+          "exit": 0,
+          "source_sha256": "5bfcd00f0594695a8eb415a2eff45ec3c2ffea2c2ddba064ff3d7e119085246a",
+          "log_sha256": "e01dc28c1d7e03fee30cb5225bb396690d777d00d448309e51ed00557d18893b"
+        },
+        {
+          "module": "MixedCatalogEmbedding",
+          "command": [
+            "/home/codex/.elan/toolchains/leanprover--lean4---v4.29.1/bin/lean",
+            "--trust=0",
+            "-j1",
+            "-o",
+            "MixedCatalogEmbedding.olean",
+            "MixedCatalogEmbedding.lean"
+          ],
+          "exit": 0,
+          "source_sha256": "0f3af5c03f7d612400db1b9409fcff9475ffa1038515eebd031cbbd83d8cc889",
+          "log_sha256": "0274877b51971488ff96a783160e2b75db3ccfbb92c3a524ab554896e034f1c5"
+        },
+        {
+          "module": "MixedCatalogService",
+          "command": [
+            "/home/codex/.elan/toolchains/leanprover--lean4---v4.29.1/bin/lean",
+            "--trust=0",
+            "-j1",
+            "-o",
+            "MixedCatalogService.olean",
+            "MixedCatalogService.lean"
+          ],
+          "exit": 0,
+          "source_sha256": "dfecb812c4d545b05ea46fa18650cadeb9f2d38cebb9fb9e92f898a8dfa1393a",
+          "log_sha256": "655615cbf0550c8d1cfad3f55caa454c2b23b93ba437a2a9f40f5cd4c4432cd7"
+        },
+        {
+          "module": "MixedCatalogControls",
+          "command": [
+            "/home/codex/.elan/toolchains/leanprover--lean4---v4.29.1/bin/lean",
+            "--trust=0",
+            "-j1",
+            "-o",
+            "MixedCatalogControls.olean",
+            "MixedCatalogControls.lean"
+          ],
+          "exit": 0,
+          "source_sha256": "60a79cb3a6e9df2bbf5b08f572178659917d0381ea4c2bea11c8f87cf05143a0",
+          "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "module": "MixedCompositionCore",
+          "command": [
+            "/home/codex/.elan/toolchains/leanprover--lean4---v4.29.1/bin/lean",
+            "--trust=0",
+            "-j1",
+            "-o",
+            "MixedCompositionCore.olean",
+            "MixedCompositionCore.lean"
+          ],
+          "exit": 0,
+          "source_sha256": "ee976901247e1c351d7793878074dbc557119f11863e0044713ef6a391cb1661",
+          "log_sha256": "d785ce97a8a8a144697747f663ece908fc8fff45c5e9bf62e5cfb1030b71be45"
+        },
+        {
+          "module": "MixedManagementEntry",
+          "command": [
+            "/home/codex/.elan/toolchains/leanprover--lean4---v4.29.1/bin/lean",
+            "--trust=0",
+            "-j1",
+            "-o",
+            "MixedManagementEntry.olean",
+            "MixedManagementEntry.lean"
+          ],
+          "exit": 0,
+          "source_sha256": "96d6ed3d98fceba8be8327e30b20835efffe65fc1614f7e85ae11156fdfa9972",
+          "log_sha256": "70a0cded7727cc4c5c320372cceb5eb758796980132c51e52477a3dc5201b5fc"
+        },
+        {
+          "module": "MixedManagementControls",
+          "command": [
+            "/home/codex/.elan/toolchains/leanprover--lean4---v4.29.1/bin/lean",
+            "--trust=0",
+            "-j1",
+            "-o",
+            "MixedManagementControls.olean",
+            "MixedManagementControls.lean"
+          ],
+          "exit": 0,
+          "source_sha256": "b4934490b112c01c888d3a762ed7e0c4accc9293f9c5dc1719852bf2b6704d73",
+          "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "module": "CatalogAudit",
+          "command": [
+            "/home/codex/.elan/toolchains/leanprover--lean4---v4.29.1/bin/lean",
+            "--trust=0",
+            "-j1",
+            "-o",
+            "CatalogAudit.olean",
+            "CatalogAudit.lean"
+          ],
+          "exit": 0,
+          "source_sha256": "0c3dc5432c0ccdbe2150a2e6d115d3719625180efa43620f100e24e113d2e4cf",
+          "log_sha256": "6e5ceb1e00d6674cf3dec5ededc94593c202b572f9ac2270b4624bcc65aec2d4"
+        },
+        {
+          "module": "FalseCatalogAllRejected",
+          "command": [
+            "/home/codex/.elan/toolchains/leanprover--lean4---v4.29.1/bin/lean",
+            "--trust=0",
+            "-j1",
+            "-o",
+            "FalseCatalogAllRejected.olean",
+            "FalseCatalogAllRejected.lean"
+          ],
+          "exit": 1,
+          "source_sha256": "c39d952ad1c1d98fd19a8c642879f72400973cbe7c0c08e0080bc6c4a04ae894",
+          "log_sha256": "0e33e35e1fafe26867fd02c95ef1c35517a685e770084d713420d346c3bb60d6"
+        },
+        {
+          "module": "FalseCatalogPureWrite",
+          "command": [
+            "/home/codex/.elan/toolchains/leanprover--lean4---v4.29.1/bin/lean",
+            "--trust=0",
+            "-j1",
+            "-o",
+            "FalseCatalogPureWrite.olean",
+            "FalseCatalogPureWrite.lean"
+          ],
+          "exit": 1,
+          "source_sha256": "f8f07d053ea50c48bb87bfb1fde8661d57a1741c5c16accda697a23b4b5924ff",
+          "log_sha256": "ea44e981e93d418c941a23a3fc8a4663a675deb6a89c8c5415e4809359ac59e4"
+        },
+        {
+          "module": "FalseCatalogNoOwnerGrantNeeded",
+          "command": [
+            "/home/codex/.elan/toolchains/leanprover--lean4---v4.29.1/bin/lean",
+            "--trust=0",
+            "-j1",
+            "-o",
+            "FalseCatalogNoOwnerGrantNeeded.olean",
+            "FalseCatalogNoOwnerGrantNeeded.lean"
+          ],
+          "exit": 1,
+          "source_sha256": "320a2d85334f683ab6c2b30e100cdd8210241e817533519c3f4539e259247f86",
+          "log_sha256": "2904147e03f636b8acbdf2e3a5388268c843f478a8191c8e7bd434e76dad4d87"
+        },
+        {
+          "module": "FalseCatalogPayloadUnbound",
+          "command": [
+            "/home/codex/.elan/toolchains/leanprover--lean4---v4.29.1/bin/lean",
+            "--trust=0",
+            "-j1",
+            "-o",
+            "FalseCatalogPayloadUnbound.olean",
+            "FalseCatalogPayloadUnbound.lean"
+          ],
+          "exit": 1,
+          "source_sha256": "77035c31d90b4076ce8c443c170d37297a7bf5cce4778ff8904c557b94718924",
+          "log_sha256": "dde50a13333c90860bfd0f6039f49d3d0430b4ebf3e0bb7237347a91aff19a22"
+        },
+        {
+          "module": "FalseCatalogDuplicatedFields",
+          "command": [
+            "/home/codex/.elan/toolchains/leanprover--lean4---v4.29.1/bin/lean",
+            "--trust=0",
+            "-j1",
+            "-o",
+            "FalseCatalogDuplicatedFields.olean",
+            "FalseCatalogDuplicatedFields.lean"
+          ],
+          "exit": 1,
+          "source_sha256": "bbc553bf1fac1cd1c09fb86d5e67e786c71f29524d2e5edad83c855242b5c6de",
+          "log_sha256": "0ced09b9f86b6513c3681d3cc28fb3050952e940eaecd35e23886a95c588bf5c"
+        }
+      ],
+      "scope": "external common tagged catalog/structural Core/full-payload management model, pure structural/world embedding and derived-registry owner service; fixed supplied field/label metadata, NOT real mixed source/whole Session/shared pending/import/authentic store resources or physical carrier"
+    },
+    "oracle": {
+      "at": "2026-09-28T07:55:32.109569+00:00",
+      "session": "mir-w4-c-mixed-catalog",
+      "pid": 639425,
+      "question_sha256": "2c85e38bb8f22c5a39e9a9a80938a4210375764034aa8c18f148486056cd24fb",
+      "manifest_sha256": "86e71d3fa863b0a382462e5a942435e1e6f134efe4d2fd86a25ba67bb55a1a0a",
+      "display": ":0",
+      "model_evidence": "select strategy; require actual6Pro/max selection evidence on completed conversation",
+      "next_status_after": "2026-09-28T07:58:32.109569+00:00",
+      "scope": "single read-only frozen current implementation review; no outer deadline or paid fallback"
+    },
+    "open": [
+      "pure full management/source embedding",
+      "same Session/pending/allocator/adopt/cancel/continue/restore",
+      "authentic field/capture/control labels and resources",
+      "source key materialization; real carrier provenance"
+    ]
   }
 }

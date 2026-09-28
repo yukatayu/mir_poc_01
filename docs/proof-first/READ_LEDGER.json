@@ -46173,5 +46173,173 @@
     "status": "read/reviewed",
     "role": "bounded repair review disposition and parser/identity limits",
     "at": "2026-09-28T06:46:30.367872+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/OwnerSavedPending.lean",
+    "sha256": "5f9c597fff382449a033504d88d39275ab2b3074654ee691c27669fa4a5431e8",
+    "range": "full",
+    "status": "authored/reviewed",
+    "role": "C shared pending / partial-flow independent viewpoint, not production or acceptance",
+    "at": "2026-09-28T07:20:20.512250+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/OwnerSharedSource.lean",
+    "sha256": "36b334e527e3cc735c008cc0b1797d93230b8a4ff85efe42d3348ce2a4eedb46",
+    "range": "full",
+    "status": "authored/reviewed",
+    "role": "C shared pending / partial-flow independent viewpoint, not production or acceptance",
+    "at": "2026-09-28T07:20:20.512250+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/OwnerSharedSourceControls.lean",
+    "sha256": "c3eefbb293e46303e2834ea2ee7f6ebd7dbb7c28346a12f8d9a3883639e1fafc",
+    "range": "full",
+    "status": "authored/reviewed",
+    "role": "C shared pending / partial-flow independent viewpoint, not production or acceptance",
+    "at": "2026-09-28T07:20:20.512250+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/OwnerFlowComposition.lean",
+    "sha256": "a4b69b00e2e82d61c1c42024cffccf8940b05024951900ffda9194a2eddefec6",
+    "range": "full",
+    "status": "authored/reviewed",
+    "role": "C shared pending / partial-flow independent viewpoint, not production or acceptance",
+    "at": "2026-09-28T07:20:20.512250+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/oracle-c-partial-flow/FULL_ANSWER.md",
+    "sha256": "d208d732e06127ef08639bfaf3750e84efdcfd2dee040a85def18f1e393e2e8c",
+    "range": "full",
+    "status": "read/reviewed",
+    "role": "C shared pending / partial-flow independent viewpoint, not production or acceptance",
+    "at": "2026-09-28T07:20:20.512250+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/oracle-c-partial-flow/DISPOSITION.md",
+    "sha256": "e9b65882c7a5877105691891089052673a403dd087f59853d3981d5104480395",
+    "range": "full",
+    "status": "authored/reviewed",
+    "role": "C shared pending / partial-flow independent viewpoint, not production or acceptance",
+    "at": "2026-09-28T07:20:20.512250+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/OwnerNumericBoundary.lean",
+    "sha256": "c5128c519bc33cb1b75420091a0d72b35f164391e4a9559e423890ba7eebc4cb",
+    "range": "full",
+    "status": "authored/read and reviewed by sole main",
+    "role": "C exact catalog/fixture/flow cut; independent advice scope explicitly separated",
+    "at": "2026-09-28T07:57:16.318717+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/MixedOperationDefinitions.lean",
+    "sha256": "fc65b803017ece6548f3b330c04dfd6ce7e3006e19296ee55787e019bb548e64",
+    "range": "full",
+    "status": "authored/read and reviewed by sole main",
+    "role": "C exact catalog/fixture/flow cut; independent advice scope explicitly separated",
+    "at": "2026-09-28T07:57:16.318717+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/MixedInstanceState.lean",
+    "sha256": "5bfcd00f0594695a8eb415a2eff45ec3c2ffea2c2ddba064ff3d7e119085246a",
+    "range": "full",
+    "status": "authored/read and reviewed by sole main",
+    "role": "C exact catalog/fixture/flow cut; independent advice scope explicitly separated",
+    "at": "2026-09-28T07:57:16.318717+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/MixedCatalogEmbedding.lean",
+    "sha256": "0f3af5c03f7d612400db1b9409fcff9475ffa1038515eebd031cbbd83d8cc889",
+    "range": "full",
+    "status": "authored/read and reviewed by sole main",
+    "role": "C exact catalog/fixture/flow cut; independent advice scope explicitly separated",
+    "at": "2026-09-28T07:57:16.318717+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/MixedCatalogService.lean",
+    "sha256": "dfecb812c4d545b05ea46fa18650cadeb9f2d38cebb9fb9e92f898a8dfa1393a",
+    "range": "full",
+    "status": "authored/read and reviewed by sole main",
+    "role": "C exact catalog/fixture/flow cut; independent advice scope explicitly separated",
+    "at": "2026-09-28T07:57:16.318717+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/MixedCatalogControls.lean",
+    "sha256": "60a79cb3a6e9df2bbf5b08f572178659917d0381ea4c2bea11c8f87cf05143a0",
+    "range": "full",
+    "status": "authored/read and reviewed by sole main",
+    "role": "C exact catalog/fixture/flow cut; independent advice scope explicitly separated",
+    "at": "2026-09-28T07:57:16.318717+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/MixedCompositionCore.lean",
+    "sha256": "ee976901247e1c351d7793878074dbc557119f11863e0044713ef6a391cb1661",
+    "range": "full",
+    "status": "authored/read and reviewed by sole main",
+    "role": "C exact catalog/fixture/flow cut; independent advice scope explicitly separated",
+    "at": "2026-09-28T07:57:16.318717+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/MixedManagementEntry.lean",
+    "sha256": "96d6ed3d98fceba8be8327e30b20835efffe65fc1614f7e85ae11156fdfa9972",
+    "range": "full",
+    "status": "authored/read and reviewed by sole main",
+    "role": "C exact catalog/fixture/flow cut; independent advice scope explicitly separated",
+    "at": "2026-09-28T07:57:16.318717+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/MixedManagementControls.lean",
+    "sha256": "b4934490b112c01c888d3a762ed7e0c4accc9293f9c5dc1719852bf2b6704d73",
+    "range": "full",
+    "status": "authored/read and reviewed by sole main",
+    "role": "C exact catalog/fixture/flow cut; independent advice scope explicitly separated",
+    "at": "2026-09-28T07:57:16.318717+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/oracle-c-flow-boundary/FULL_ANSWER.md",
+    "sha256": "ab5b4f2a1455835d8644cb752f9f7ab97c98790144b7c73e266911c5cc39b441",
+    "range": "full",
+    "status": "authored/read and reviewed by sole main",
+    "role": "C exact catalog/fixture/flow cut; independent advice scope explicitly separated",
+    "at": "2026-09-28T07:57:16.318717+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/oracle-c-flow-boundary/DISPOSITION.md",
+    "sha256": "5635b2c268b4021cf95ae8bff2e5b5f5d0ee9be9d1a74c806d5fb2ce097100c3",
+    "range": "full",
+    "status": "authored/read and reviewed by sole main",
+    "role": "C exact catalog/fixture/flow cut; independent advice scope explicitly separated",
+    "at": "2026-09-28T07:57:16.318717+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/oracle-c-shared-state/FULL_ANSWER.md",
+    "sha256": "b44458fe5015415b746a328cf73fc1f22710bfcc172fdfab380641c376f7e521",
+    "range": "full",
+    "status": "authored/read and reviewed by sole main",
+    "role": "C exact catalog/fixture/flow cut; independent advice scope explicitly separated",
+    "at": "2026-09-28T07:57:16.318717+00:00"
+  },
+  {
+    "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/oracle-c-shared-state/DISPOSITION.md",
+    "sha256": "e34759b9e522fc80be90d5b7b7a8b7e055952983bfc620d8c47f6dc3c05c7290",
+    "range": "full",
+    "status": "authored/read and reviewed by sole main",
+    "role": "C exact catalog/fixture/flow cut; independent advice scope explicitly separated",
+    "at": "2026-09-28T07:57:16.318717+00:00"
+  },
+  {
+    "path": "/home/codex/dev/mir_poc_01/crates/mir-runtime/tests/renderer_pose_backend.rs",
+    "sha256": "8100c4bf18cae6b8d06d5971d98ca7d8997d5707cd8d18c709d6113334761052",
+    "range": "full",
+    "status": "authored/read and reviewed by sole main",
+    "role": "C exact catalog/fixture/flow cut; independent advice scope explicitly separated",
+    "at": "2026-09-28T07:57:16.318717+00:00"
+  },
+  {
+    "path": "/home/codex/dev/mir_poc_01/crates/mir-runtime/src/full_system_v1_projection.rs",
+    "sha256": "c69bdeab40b20581063dff0c9180e0c785e61fbbb1db1f7cb3dab6c9610db960",
+    "range": "full",
+    "status": "authored/read and reviewed by sole main",
+    "role": "C exact catalog/fixture/flow cut; independent advice scope explicitly separated",
+    "at": "2026-09-28T07:57:16.318717+00:00"
   }
 ]

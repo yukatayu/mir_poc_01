@@ -1,35 +1,137 @@
 # RESUME — W4-C active
-Updated 2026-09-28T06:46:30.367872+00:00. Sole main, NO subagents. Existing whole-W4 goal remains active, but owner NOW requests STOP after W4-D completes (supersedes C stop): close C gates first, finish D then pause; do not begin E. Do not recreate/complete whole goal at C/component GREEN. W5+/alpha/Plan250-I3-4/Canon acceptance excluded. Quota stop waived; owner alone resets. Normal own commit/push authorized; no force/reset/clean/hostshare/public/notifications.
+Updated 2026-09-28T07:58:43.661394+00:00. Sole main only; NO subagents. Latest owner: finish C then D, pause existing
+whole-W4 goal and STOP BEFORE E. Do not recreate/complete goal or pause at a component.
+W5+/alpha/Plan250-I3-4/Canon acceptance excluded. Quota stop waived; owner alone resets.
+Own normal commit/push authorized; no force/reset/clean/hostshare/public/notifications.
 
-## Git/resources
-HEAD1b18c7c4c3f6110229ae2f604bef24ce5eef30bd main, pushed/parity verified in I/c-operation-identity/GIT_CHECKPOINT.json. Current own docs plus narrow M6/M7 exact-source-template repair and new source-origin regression test; preserve newly appearing user work. Earlier91e2 read receipt, cdb8 observer, b692 phase, daeb floor; B9d86052d/563a1f0e, originaltaskbasead9256c6.
-I=/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration. /mnt/mirrorea-work absent; I root filesystem8.4GiB free, RAM11GiB available/swap12GiB free; existing repository target24GiB; avoid another broad build. No cache/Chrome settings changes. Cargo locked/offline-j1 childAS8GiB; Lean4.29.1 trust0-j1 childAS6GiB. No .olean in repo.
-Oracle partial-flow running (wrapper66661/capture13028); submitted06:48:44UTC, model6ProLatest/max verified06:52:34UTC. No live compiler/test jobs. Latest mir-w4-c-causality-origin FINAL at06:37:21UTC,17421chars; FULL_ANSWER/FULL_DOM_RECEIPT/DISPOSITION retained. Wrapper8987/capture66215 collected0. make docs tool46746 collected0 (Canon218/hierarchy800/scaffold). No latency resend.
+## Paths/Git/resources
+I=/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration
+P=I/c-source-effect, frozen K=P/kernel-v2 (do not edit existing frozen sources).
+HEAD05a54050fc3139d603ed1355c12d9d2e0025dce7 main, previous push/parity verified
+I/c-source-origin/GIT_CHECKPOINT.json. Own dirty:6 renderer source/README fixtures,
+crates/mir-runtime/tests/renderer_pose_backend.rs,10 current docs/ledger/report.
+No new production Rust beyond HEAD. Preserve any newly appearing user work.
+Root8.3GiBfree96%used; RAM12GiBavailable/swap12GiBfree at07:51UTC. Repository target
+real directory24GiB; /mnt/mirrorea-work absent. Avoid another broad cargo build.
+No cache deletion or browser settings changes. Cargo locked/offline-j1 childAS8GiB;
+Lean4.29.1 --trust=0 -j1 childAS6GiB/core0. No .olean repo.
 
-## Current goal and next command
-C source/current-owner correspondence PL1/PL2/PL0 S4/S6 R02/03/04/05/09 before D. Original source/Core/args/stamped pending, current owner service, actual writes/history and caller ack remain distinct.
-Work in I/c-source-effect. Existing SourceFrontierReuse proves exact projection to real ReferenceContinuation/ReceivedResult; Session ALREADY has full cursor/archive. Provisional B extracts only bookkeeping; no duplicate scheduler or production adoption. Full mixed pending/adopt/restore/shared allocator proof still OPEN.
-New external8module kernel-v2:75fresh dependencies,608owned audit standardlogic only,5false claims rejected. Exact scripts/logs/input hashes retained. First kernel-v1 was preflight false positive on legitimate Action.admit constructor; no Lean executed. No proof holes accepted.
-Current external fresh closure83modules/904owned across15newmodules/14false claims, standard logic only, no proof holes. Base75/608, trace3/112, causality2/93, flow2/91+existingAbortFlow dependency. Exact receipts in c-source-effect/kernel-v2/{RESULT,TRACE_DELTA_RESULT,CAUSALITY_DELTA_RESULT,FLOW_DELTA_RESULT}.json. Earlier failed development compiles not accepted.
-Old Trace Generated/Issued under-strength: only possible results at some reachable state, NOT actual prior event. New OwnerSourceCausality uses actual indexed Event/Execution equations and ordered issue before exact service. Same Write witness retained in CommittedIn/history/arrival; joint rooted_queue projects uniqueness. Controls expose caught-upG2 still rejects originalG1, raw malformed queue can consume identity, raw ack ignores evidence.version. These do not arise through closed trace. Failure terminality/no failure reply NOT adopted Mir retry defaults.
-OwnerPartialAbort reuses established AbortFlow.Safe/check with partial lookup evaluation and general two-run/confinement/type/completion/retention laws. OwnerSourceFlow adds current checked tree/capture/locality translation, single success/failure correspondence, immutable capture and Int preservation. Public prefix + private overflow/absence controls, secret-then-public/capture/cross-owner negatives. Fixed supplied labels/authentic source binding remain open. These last2files are now in the separate partial-flow review; await final before reliance/adoption.
-Actual source-origin RED reproduced second assignment reporting first span. pub(crate) owner_template_at selects unique name/kind/fullspan in M6→M7 construction and generated-failure check. Existing generic OperationIdentity proof reused. New test covers2orders/identical text sites/present rows and RHS lexeme. Focused pass, full418library pass. Broad runtime exit1014renderer failures duplicate_effect_member; exact HEADbaseline same4. All semantics targets observedexit0; remaining runtime targets recollectedexit0 after missing tool78008/receipt. c-source-origin logs/receipts retain every failure; no whole regression GREEN. Source bytes restored exactly after baseline run. Source repair final review disposed; no multi-statement/restore completion.
-Next: final own diff/docs checks and integrate narrow reviewed source-origin checkpoint (normal commit/push). Then SAME C shared source pending/allocator/adopt/cancel/continue/restore and authenticated labels/resources/service-custody connection. Full existing ReferenceContinuation/ReceivedResult remains reuse base, no duplicate scheduler.
+## Live jobs — next status after08:05:09UTC
+ONLY Oracle mir-w4-c-mixed-catalog: submitted07:55:32.109569UTC, PID639425,
+wrapper tool40431. Directory I/oracle-c-mixed-catalog. 23frozen files192057bytes,
+QUESTIONsha2c85e38bb8f22c5a39e9a9a80938a4210375764034aa8c18f148486056cd24fb,
+manifest86e71d3fa863b0a382462e5a942435e1e6f134efe4d2fd86a25ba67bb55a1a0a.
+Passive capture tool81215 attached, model6ProLatest/max confirmed07:58:52.880UTC.
+Use existing directory model-check.mjs/capture-dom-events.mjs/status.py, initialize
+STATUS_LAST from submission/model evidence. Do not poll before>=180s; do not keep
+calling guarded status when not due. No latency resend/deadline/paidfallback.
+Dedicated visibleChrome45439 PID266472 DISPLAY=:0; ordinary9222untouched. Final
+requires meta.completed + exactidentity/noStop/singleDOMblock. CLI maytruncate.
 
-## Actual new research evidence and counterexamples
-SourceFrontier/Reuse exact existing ready/waiting/failed/empty and program/archive equations, map/retraction. OwnerEffectService exact current FullUse + installed body + recorded arithmetic; one actual update/history extension, refusal preserves previous store/history. OwnerEffectReceipt exact original binding + service generation + strict caller check; no RHS evaluation, valid ack one frontier step, refused ack keeps owner/caller. OwnerSourceIssue selects actual next checked-IR statement and derives activation/ordinal/args/ID; waiting prevents second issue. OwnerEffectQueue disjoint queued/attempts, unique ID/source occurrence, rooted append-only history, fresh transport ID cannot repeat old source occurrence. OwnerSourceCorrespondence combines actual issue/body/args and service/ack equations.
-Controls source-generated checked-IR1→2→4, originalG1/G2service/ackrefusal retains2, equal numeric differentbody rejection, site/activation/args, doubleack, ownerqueue replay/freshID, overflow AFTER priorcommit retains2/history1 and attemptedfailure row2. Numeric expression alias multiplicity preserved.
-Critical limitations demonstrated: raw serve without queue writes1→2→3; a forged mathematical Reply can pass requester-only equality checks without service. Need joint generated-receipt relation plus authenticated physical carrier, not a record-constructor assumption. No real parsed-Mir/network/whole IFC/resource/recovery claim; owner-only prototype not full shared pure/effect extension.
-Recorded arithmetic7general lemmas: fresh10modules1197owned,2false claims; AS3GiB audit bad_alloc retained, audit-only6GiB passedRSS1476252KiB6.5s/no swaps. List read multiplicity != Rust BTreeMap quotient/key/parser/i64leaf proof.
+## Current semantic goal / next commands
+PL1/PL2/PL0 S4/S6 R02/03/04/05/09: shared source/current owner admission before D.
+Existing full ReferenceContinuation.Session/ReceivedResult contains real complete
+program/cursor/archive. Reuse it; no second scheduler/catalog. Pure/owner common
+catalog now freshly checked research, pending review; NOT full Session coupling.
+First integrate reviewed fixture/test/docs checkpoint: own diff/make docs exit0, normal
+commit/push/parity. Then pure full-management embedding + source/common pending/
+allocator/adopt/continue/cancel/restore and authentic labels/resources/custody.
+C incomplete, no dependent D or E. Review may proceed asynchronously.
 
-## Oracle
-mir-w4-c-effect-source completed05:27:26UTC26465chars; packet omitted upperSession/ReceivedResult. Disposition explicitly corrects it, no missing-whole-cursor claim.
-Corrective mir-w4-c-existing-session completed05:44:16UTC26973chars,6ProLatest/maxverified; QUESTIONsha4692f0a4b02ae0cf3108ec72c63e2cba0e1595a533c7ce0e0fc5cef5507bb16c, manifest9f2a15acd8a55d17fc0df499f9bb286a2d21b33ebb28c92c8c5206053ed1b92a. FULL_ANSWER/FULL_DOM_RECEIPT/DISPOSITION in I/oracle-c-existing-session. Supports B with shared requester pending across all entries; ownerqueue empty must not authorize replacement. Pure accept_sound cannot prove effectful ack. Source-generated operations must retain full body/site/activation/args, labels/resources. New external source/effect files were written AFTER packet: NOT reviewed by this answer.
-Dedicated visible Chrome45439 PID266472 launched after actual priorECONNREFUSED; normal profile/9222 untouched. Current causality-origin delta review FINAL/disposed; no latencyresend. Consult uses existing wrapper/capture templates, actualslugmetadata, >=180s status, no outerdeadline/paidfallback.
+## Fresh external research (K exact receipt chain)
+Base75closure/608owned8new/5false RESULT; Trace78/720/11new/8false;
+Causality80/813/13new/11false; Flow83/904/15new/14false (+existing AbortFlow);
+Shared90/1179/18new/20false (+4existingcontrols85owned); Composition91/1211/
+19new/24false; Numeric92/1248/20new/27false; Catalog100/2266/28new/32false.
+All standard axioms propext/Classical.choice/Quot.sound only. Counts not progress.
+Fresh DELTA_RESULT/DELTA_RUNS/inputhashes/logs in K, oldhashes unchanged; no authored
+sorry/admit/Mir axioms. Failed development compiles retain separate logs, not evidence.
+Initial Numeric negative unknownnamespace NOT semanticrefutation; corrected3 #guards
+actually false, audit_numeric_controls_recover.py records both. Catalog5 guards false.
 
-## Retained production evidence/open boundaries
-1b18 guard before any local/remote owner lowering, typed StructuralMismatch ordinary/provider.418library/5M8focus/four whole static positive differential passes, first-match mutation fails, mirroredOperationIdentity23owned/2falsecontrols. Not multi-statement support. BOUNDARY_PROBE: distinct-owner samehandler builds thenprivate restorecardinalityfails; duplicate localfragment structurallyrestores/FabricProgram, sealed executableauthority bypass untested. One unbudgeted at-block twoassignments stillopaqueRHS/M7refusal. M6 event-name template association first-span defect now narrow reviewed repair.
-91e2 actual read receiptSome-only fix42owned,18focus/416runtime/3mutants; no source-labelauth/IFC. Observercdb8 788owned/12tests4mutants; suppliedlabels only. Sharedfloor daeb128owned/11focus409runtime plusactualQUICroundtrip/46localfinite tests; noownertrustanchor. B206modules model278/prep235/physical68wholeexit0; privatepipefinite, notQUIC/privacy/recovery. Retainedpublisher T/S actualcfg(test)localfabric afteruse revocationcontrol passes; notsource/networkdynamicconstruction.
+Core exact boundaries: SourceFrontier/Reuse map to existing full Session. OwnerEffect
+Service uses current original full binding, registry-relative exactbody, recorded
+real reads/put/history; refusal retains. Receiptack doesn't reevaluate RHS or fakeInt0
+forUnit. G1issue/G2service cancommit whileG1ackrefuses evencallerG2; no reticket/rollback
+policy adopted. SourceIssue checkedIR nexthead→site/activation/args/ordinal/request;
+Queue records failedattempt identities too; failure may wait forever. Causality has
+actual indexedExecution issue before service and SAME Write witness; generic reachable
+existential or rawmatchingreply is insufficient physicalprovenance. Rawserve without
+queue replays1→2→3. Fullrequest headers/custody/labels/resources still prerequisites.
+
+Flow: OwnerPartialAbort uses Option lookups and real abort, carries completion pc,
+general two-run equality includes absence. OwnerSourceFlow live/capture Sum namespaces,
+per-target locality, fixed suppliedmetadata/onefixedargmap. Composition safe_append,
+run_append complete-result gating, safe/trace_take sameinstructioncount, exactenvironment
+put/cons successfailure. Raw partial/retained trace completion not sufficient. Suffix
+completion without incomingpc can leak activation; claims stay wholefixedinvocation.
+Filter-before-retention counterexample retained. Noactivation/timing/authresourceproof.
+Numeric: explicit63 signed range for literals/Option stores/captures, exactliteralcheck,
+evaluate/service resultingstore+newvalue bounds. Notarbitraryoldhistory; oldchecker
+notautomaticallyliteralbound; Rust i64 leaf/parse map is boundary, notfullarg/key/restore.
+No eager-unusedargument rejection policy inferred.
+
+Shared early adapter: OwnerSavedPending fullpayload roundtrip when coordsfit (shrink
+canfit); OwnerSharedSource sumwaiting/sharedallocator exactfivepuresteps inclrefusal.
+Allocated NOTNodup/coherence; raw reserve NOTadmission/tombstone; arrive rawreply isn't
+authenticated. Wholepurebackend cannotremainauthorityforowner-kind; newer catalognext.
+
+## New catalog 8files — research only
+MixedOperationDefinitions: Definition/Contract pure|owner; owner fields key→(LOCUS,rank),
+arg ranks/control; independent checker iff Nodup/scope/i64/locality/flow. Metadata is
+DECLARED/materialized, not authenticity. Exactownercontract replacement provisional;
+crosskindrefinementfalse. No finalsyntax/policy.
+MixedInstanceState/Core/ManagementEntry researchcopies of actual modules; structural
+mutatorpreservation/checkers/fullpayloadauthority rechecked. MixedCatalogEmbedding
+general PURE structural/world equalities; fullmanagement/sourceembedding stillOPEN.
+MixedCatalogService derives registry ONLY fromsame immutablecatalog; owner action16,
+requires targetfieldownerLOCUS=place. Instance.owner PRINCIPAL is distinct. committed
+catalog yields sameownerdefinition/body+independentCommits; purekindrefuses unchanged.
+Ownerregister17/instantiate18/replace19 explicitprivatefixturegrants; existingpure1/2/
+5/6/ref9–14/cancel15 preserved, no grants created by checking. Fullpayload/cut/identity/
+usedIDs bindmanagement; raw installhead stillneedscheckedouterentry.
+Controls: same-realm CURRENTpuregrant+maliciousfreeoldregistry permits oldhelperwrite,
+newderivedservice refuses. Ownergrantmissing/revoked/bodychanged/wronglocus refused.
+Actual management registers/createspure+owner,serial4/IDs[3,2,1,0], duplicateID/payload
+swap rejected; samecatalogpureevaluation5 thenrealowner10→15/history. Pure5 here is
+resolvedMachine.run, NOT fullpureinvocation/source. Authenticated physicalfields,
+current capturedlabels/pc/resources, parameterizedkeys, replayqueue/commonSession open.
+Need catalogservice relativecomplete export, management embedding, then sharedsource.
+Historicalpendingcoherence mustnotrequirecurrentauth; revoke caninvalidatewaiting.
+Oldrawcontinue accepts hiddenbackendpending; strongerpureembedding onlycoherentroots.
+
+## Production checkpoints / current fixture
+05a54050 source-origin fix: M6/M7 owner_template_at exactname/kind/fullspan; tests2orders/
+identicaltext distinctsites/exactrefs; metadata maychangeoldidentity.418runtime libpass.
+Broad runtime exit101fourrenderer failures also exactoldHEAD; othersemantics/runtime
+recoveredexit0. No wholebroadGREEN. Exact receipts I/c-source-origin.
+Current3 renderer .mir: repeated singleton failure -> onecomma-list preserving BOTH.
+README freezes historicalgeneratedreports. Provider manifests unchanged/subset rule.
+Focused original4pass + parserduplicate negative1pass; additional parsedAST/matched
+projection exact2names test gives5/5 currentpass tool38377exit0,
+I/c-renderer-fixture/PROJECTED-ROWS.json/log. Doesnotprove packageprovenance/network/
+vendorrenderer. Test/source repair reviewed locally; additionaltest afteroraclepacket.
+Earlier1b18operationidentity guards ordinary/provider;91e2readreceiptSome-only;cdb8
+observer suppliedlabels;daebretainedfloor guards siblingcache revoke throughuse.
+PairedactualpublisherT/S controls before/afterrevoke pass. None establish C entirety.
+B206modules model278/prep235/physical68wholeexit0,privatepipefiniteNOTQUIC/privacy/recovery.
+
+## Final Oracle records (all local dispositions)
+I/oracle-c-flow-boundary FINAL07:41:53.537UTC20467chars,
+shaab5b4f2a1455835d8644cb752f9f7ab97c98790144b7c73e266911c5cc39b441;
+wrapper67918/capture48471exit0. Composition/numeric/3fixturetext ONLY; newcatalogabsent.
+I/oracle-c-shared-state FINAL07:25:34.001UTC25948chars,
+shab44458fe5015415b746a328cf73fc1f22710bfcc172fdfab380641c376f7e521;
+wrapper77241/capture26198exit0. Sharedadapter NOTnewcatalogreview.
+Partialflow FINAL07:04:24.698UTC21744chars sha d208d732e06127ef08639bfaf3750e84efdcfd2dee040a85def18f1e393e2e8c.
+Causality-origin FINAL06:37:21.328UTC17421chars, disposed. Existing-session/source-
+custody/effect-source earlierfinalsdisposed. Advice NOTproof/acceptance/signature.
 
 ## Records
-SingleReport2614; same C goal and R01–R12/119 preserved. READ_LEDGER exacthashes;2675staticcorpusalreadyread, historicallargeexecutionJSONnotallread. M10testsfull1–9687, SYS4testsselectedrangesonly. plan/currentgoal/W4_CHECK/RESUME/report/ledger updated; phase/status/runnablecorpusunchanged so dashboardupdatesnotneededfor externalresearch. Current cargo fmt check passed after source-origin fix; make docs final synchronization passed (tool25651/exit0) and current delta uncommitted. Next source/effect proof/entry work continues; no final response at this subcut.
+SingleReport2614, same C goal; READ_LEDGER precisehash/ranges. Prior2675staticcorpus
+read, notallhistoricalexecutionJSON/unrelatedcode. W4_CHECK huge: inspectboundedJSON
+keys only, DO NOT cat. New c_mixed_catalog_20260928/c_numeric_20260928/flowreview/
+rendererprojectedrows. Ten docs synced; make docs47259exit0, own finaldiff checked. NoCanon/
+THM/OBL/phase/119promotion. Samples/scriptsREADME nochange as taxonomy unchanged.
+
+2026-09-28T08:04:49.916689+00:00 NEW external (not yet fresh/reviewed): MixedCoreEmbedding proves allrawCore acceptance/refusal equivalence; MixedManagementEmbedding proves action/current/context/check/authorize/commit/perform/head exact pure embedding inclID/serial; MixedCatalogUse exports independent AdmittedWrite iff servicecommit + exactstore/history/refusal, derivesliteralboundsfromValid sharedcatalog and preservesstorebounds. Compiler development1/2 errors kept; latest3modules compile0 standardaxioms. Next fresh audit/control.

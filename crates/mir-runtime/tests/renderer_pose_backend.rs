@@ -4,7 +4,12 @@ use std::{
     time::{SystemTime, UNIX_EPOCH},
 };
 
+use mir_ast::textual_alpha::{AstTopLevel, parse_textual_mir_module_path};
 use mir_runtime::full_system_v1_renderer_pose_backend::run_full_system_v1_renderer_pose_backend_path;
+use mir_runtime::{
+    full_system_v1_projection::project_full_system_v1_path,
+    full_system_v1_provider_admission::run_full_system_v1_provider_admission_path,
+};
 
 fn renderer_sample_path(root: &str, relative_path: &str) -> PathBuf {
     PathBuf::from(env!("CARGO_MANIFEST_DIR"))
@@ -27,6 +32,67 @@ fn write_file(root: &Path, relative_path: &str, content: &str) -> PathBuf {
         .expect("parent should be created");
     fs::write(&path, content).expect("file should be written");
     path
+}
+
+#[test]
+fn renderer_pose_fixtures_preserve_both_declared_failures_through_projection() {
+    let expected = vec![
+        "PresentationDropped".to_string(),
+        "RendererUnavailable".to_string(),
+    ];
+    for sample in [
+        "renderer-pose-positive",
+        "renderer-pose-split-frame-negative",
+        "renderer-pose-reacquire-negative",
+    ] {
+        let source = renderer_sample_path(sample, &format!("main/src/{sample}.mir"));
+        let request = renderer_sample_path(sample, "projection.request.json");
+        let module = parse_textual_mir_module_path(&source).expect("renderer fixture should parse");
+        let effects = module
+            .items
+            .iter()
+            .filter_map(|item| match item {
+                AstTopLevel::Effect(effect) if effect.effect_name == "render_pose_frame" => {
+                    Some(effect)
+                }
+                _ => None,
+            })
+            .collect::<Vec<_>>();
+        assert_eq!(effects.len(), 1, "{sample}");
+        let mut parsed = effects[0].failure_row.clone();
+        parsed.sort();
+        assert_eq!(parsed, expected, "parsed failure row: {sample}");
+
+        let projection = project_full_system_v1_path(&source, &request);
+        assert!(projection.accepted, "{sample}: {projection:?}");
+        let admission = run_full_system_v1_provider_admission_path(
+            &source,
+            &request,
+            renderer_sample_path(sample, "provider.manifest.json"),
+            0,
+        );
+        assert!(admission.accepted, "{sample}: {admission:?}");
+        assert_eq!(
+            admission.matched_packet_schema_refs,
+            vec!["packet.renderer.pose_snapshot"]
+        );
+        let matched = projection
+            .packet_schemas
+            .iter()
+            .filter(|schema| {
+                admission
+                    .matched_packet_schema_refs
+                    .contains(&schema.schema_ref)
+            })
+            .collect::<Vec<_>>();
+        assert_eq!(matched.len(), 1, "{sample}");
+        let mut projected = matched[0].failure_row.clone();
+        projected.sort();
+        assert_eq!(
+            projected, expected,
+            "matched projected failure row: {sample}"
+        );
+    }
 }
 
 #[test]

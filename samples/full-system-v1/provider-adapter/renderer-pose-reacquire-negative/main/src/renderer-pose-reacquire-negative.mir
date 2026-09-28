@@ -5,8 +5,7 @@ capability RenderFrame
 effect render_pose_frame(snapshot_ref: Text) {
   requires RenderFrame
   output receipt: Text
-  failure RendererUnavailable
-  failure PresentationDropped
+  failure RendererUnavailable, PresentationDropped
 }
 
 transition render_pose at ClientView requires RenderFrame {
