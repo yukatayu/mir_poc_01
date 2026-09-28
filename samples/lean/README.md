@@ -94,7 +94,7 @@ names = ["Support", "CurrentUse", "CurrentUseReview", "TrackedValidation",
          "FunctionContractBridge", "ModuleContractBoundary", "OwnerAssignment",
          "ProfileGuarantees", "HandleValues", "PureHandleFunctions",
          "ResourceComputations", "ResourceComputationScopeControls",
-         "SharedAuthorityUse", "ObserverLabels", "OwnerReadReport"]
+         "SharedAuthorityUse", "ObserverLabels", "OwnerReadReport", "OperationIdentity"]
 work = pathlib.Path(tempfile.mkdtemp(prefix="mir-proof-first-",
                                   dir=os.environ.get("PROOF_WORKDIR")))
 print(work, flush=True)
@@ -192,3 +192,8 @@ W4-Cの実測読取り記録から応答への限定変換は
 [OwnerReadReport](foundations/MirroreaProofFirstOwnerReadReport.md) に記録します。
 存在しない読取りの0補完を除き、実際の0は保持します。全キーの網羅性は
 checked Coreと実測mapの対応が前提であり、認可・機密性の証明ではありません。
+
+W4-Cの既存操作識別子の一意検索は
+[OperationIdentity](foundations/MirroreaProofFirstOperationIdentity.md) に記録します。
+重複する同一レコードも拒否し、正常なsingletonは受理します。sourceの文順序、
+異なるowner間のfragment識別子、source-free復元の保証には広げません。

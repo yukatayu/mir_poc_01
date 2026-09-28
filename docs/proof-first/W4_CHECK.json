@@ -43660,5 +43660,111 @@
       "format_exit": 0,
       "diff_check_exit": 0
     }
+  },
+  "c_operation_identity_research": {
+    "at": "2026-09-28T05:11:30.310034+00:00",
+    "base": "91e2e49abd03a156ab12e6de08d2b57e72ae9779",
+    "status": "bounded guard implemented and verified; C continues, global/source/restore gaps OPEN",
+    "counterexamples": {
+      "same_block": "unbudgeted parser swallows next assignment into opaque RHS; M7 UnsupportedExpression",
+      "two_blocks_same_owner": "M7 passes; ordinary and dedicated provider projection panic at unique-signature expect",
+      "two_blocks_distinct_owners": "M7/projection/verify/build pass; private restoration refuses retained owner Core cardinality",
+      "local_snapshot_duplicate": "structural restore and FabricProgram construction accept duplicated local owner fragment; not tested at sealed runtime/expected-start auth"
+    },
+    "proof": "external OperationIdentity: declarative positional Selects versus singleton filtered lookup; soundness/relative completeness, member, nonvacuity and duplicate-occurrence refusal; fresh23owned audit standard axioms only; two false controls fail",
+    "proof_limits": "not actual Rust compiler, identity-field authenticity, complete handler semantics or restored-image invariant",
+    "evidence": [
+      "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-owner-partial/HANDLER_TWO_BLOCKS.json",
+      "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-operation-identity/IDENTITY_RED.json",
+      "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-operation-identity/BOUNDARY_PROBE.json",
+      "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-operation-identity/kernel/RESULT.json"
+    ],
+    "oracle": {
+      "session": "mir-w4-c-operation-identity",
+      "status": "completed / full reply recovered / main disposition saved / all tools collected",
+      "receipt": {
+        "at": "2026-09-28T05:05:01.553713+00:00",
+        "session": "mir-w4-c-operation-identity",
+        "completedAt": "2026-09-28T05:01:57.668Z",
+        "characters": 25930,
+        "sha256": "f3c7d12b4196a8bbf88484d475629efe27d35378036a24543df61b6fa1acdcdf",
+        "identity": true,
+        "stop": false,
+        "scope": "final read-only DOM; advisory only"
+      },
+      "disposition": {
+        "at": "2026-09-28T05:05:27.490230+00:00",
+        "review": "mir-w4-c-operation-identity",
+        "scope": "proposal review, main validates actual diff; advisory not signature",
+        "decisions": {
+          "A": "adopt bounded missing/ambiguous typed-signature refusal at shared project_owner before mutation; local and remote; no M7 semantics narrowing",
+          "B": "not adopted; M7-only restriction leaves alternate-entry assumptions, stronger source restriction unjustified",
+          "distinct_owner": "confirmed actually by BOUNDARY_PROBE; remains OPEN, not closed by typed-signature guard",
+          "restore": "actual local fragment duplication confirmed through low-level restore/FabricProgram; not demonstrated through sealed expected-start path; OPEN",
+          "source_effect": "accept separate original pending, owner committed history, unit ack and source continuation; no reticket/rollback/duplicate scheduler",
+          "positive": "must preserve complete old/new projection, not only counts; extra exact differential check next"
+        },
+        "kernel": "OperationIdentity fresh23owned audit/2false controls, parametric selector only",
+        "tests": "RED ordinary/provider panic and local wrongly accepted captured; actual final tests next"
+      }
+    },
+    "next": "source statement/handler identity and real effectful continuation, source-free restoration and actual request conditions; no phase acceptance",
+    "kernel_mirror": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-operation-identity/mirror-kernel/RESULT.json",
+    "positive_differential": {
+      "at": "2026-09-28T05:07:23.830780+00:00",
+      "rows": [
+        {
+          "case": "budget_local.txt",
+          "bytes": 227270,
+          "sha256": "1816c4b040b8d99e643924fa25004ab3005d894dacee1c449cb618c0c0a60a5b",
+          "equal": true
+        },
+        {
+          "case": "budget_remote.txt",
+          "bytes": 513758,
+          "sha256": "e942c2fcb325f147aee8baef6fa11e614bc5c6e7b341755ceab136db5ee38685",
+          "equal": true
+        },
+        {
+          "case": "parameter_relation.txt",
+          "bytes": 3380457,
+          "sha256": "aa3d1af3c161a277c0fbb5b1f0e024cfd820e8f125e429a105a4569f5bfd8370",
+          "equal": true
+        },
+        {
+          "case": "provider_mixed.txt",
+          "bytes": 4718878,
+          "sha256": "9fede3b45042e7ed5bc7619d32535fa023d05a0334ddcbddec44348f8d823aa0",
+          "equal": true
+        }
+      ],
+      "baseline_sha256": "f6d9b288a2c71c4d998f011802e9a7f96a0a1f2a694bcd90711405bab37fc608",
+      "repaired_sha256": "e86973e72563c419e74840904e2bae5f77538d0230db77e5dfa4b511413e3a02",
+      "restored_source": true,
+      "restored_tests": true,
+      "scope": "full Debug representation of actual old/new static projection, not E2E or expected JSON"
+    },
+    "validation": {
+      "focused": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-operation-identity/IDENTITY_GREEN.json",
+      "full_runtime": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-operation-identity/IDENTITY_FULL_RUNTIME.json",
+      "runtime_tests": 418,
+      "first_match_mutant": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-operation-identity/FIRST_MATCH_MUTANT.json",
+      "restored": {
+        "sha256": "e86973e72563c419e74840904e2bae5f77538d0230db77e5dfa4b511413e3a02",
+        "restored": true
+      },
+      "owner_review_controls": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-operation-identity/OWNER_REVIEW_CONTROLS_FINAL.json",
+      "owner_tests": 5
+    },
+    "next_oracle": {
+      "session": "mir-w4-c-effect-source",
+      "packet": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/oracle-c-effect-source-retry1/MANIFEST.json",
+      "question_sha256": "77bb313ce90b5d159147daeae7917685dfdb463724450d6515d66824a19ae2bf",
+      "status": "pending source/effect research, not assumed accepted",
+      "wrapper_tool": 88119,
+      "capture_tool": 27684,
+      "model": "6ProLatest/max verified",
+      "actual_error_retry": "prior session mir-w4-c-effectful-continuati pre-submit ECONNREFUSED; visible same-profile restart, identical packet resend once"
+    }
   }
 }

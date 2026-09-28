@@ -1564,3 +1564,34 @@ No Canon or production-source change, no subagents/notifications; commit pending
 2026-09-28T04:20:26.386434+00:00 — C concrete fidelity blocker: actual literal/non-target RHS receipts invent target0 reads. Minimal Some-only repair proposed; exact supplied-read Lean relation checked, coverage/extraction and source continuation kept distinct. See report2614 and W4_CHECK c_owner_read_receipt_20260928. Owner-effect review disposed; post-publication trace and revoked-T assertions now pass. No authority/phase/profile change.
 
 2026-09-28T04:39:15.656514+00:00 — Adopted bounded internal None→no-read correction after generic Lean proof and actual-source RED, Oracle review, mutations/restoration and416runtime regression. Stronger paired T/S revocation test passed; previous unbudgeted T refusal was insufficient and remains a dated counterexample. Exact whole Core/map coverage, effectful caller continuation, current source labels/physical entry conditions remain C obligations. No W4/Canon acceptance.
+
+2026-09-28T05:04:47.862236+00:00 — C source identity correspondence, research counterevidence.
+Two assignments within one unbudgeted at-block fail current parsing/checking;
+two same-owner blocks in one event pass M7 but panic in SYS3 lookup. Local
+same-owner duplicate passes projection because the remote signature lookup is
+skipped. Distinct-owner blocks pass build/verify but fail private restoration.
+These are concrete source/profile gaps, not successful handler continuation.
+A duplicated local-only fragment passes structural snapshot/FabricProgram restore;
+sealed expected-start/runtime acceptance has not been demonstrated. Keep that
+boundary separate from source lowering and from an authorization bypass.
+Current proposal converts absent/ambiguous typed signature to a diagnostic in
+shared owner lowering; alternative M7-only refusal has weaker alternate-entry
+coverage. Neither resolves ordinary multi-statement execution. Before changing
+statement identity, retain source site/order, immutable original pending, actual
+owner writes/history and caller completion separately. W3 pure Int completion
+cannot be substituted for M8 unit acknowledgment. External selection theorem
+and RED actual tests exist; neutral Oracle final pending, no production adoption.
+Earlier owner-effect review controls now discriminate nonalias physical keys,
+current index fallback versus numeric parameter parse, and failure after a prior
+successful write. Five focused actual M8 tests pass; this records existing low-
+level behavior, not source/transport permission to omit required arguments.
+Single C goal and R02/03/04/05/09 gates unchanged; no phase/Canon/alpha promotion.
+
+2026-09-28T05:11:30.310034+00:00 — Reviewed A applied only at shared owner projection lookup.
+General selection equivalence/nonvacuity and fresh owned audit checked; ordinary/
+provider/local negatives discriminate first-match weakening. All418 runtime tests
+pass and four complete old/new positive projections equal. B not selected;
+M7 source acceptance unchanged. Earlier distinct-owner and private local-snapshot
+counterexamples remain OPEN. See Report2614 / W4_CHECK for exact receipts and
+Oracle limits. Next remains joint ordinary source/owner-effect correspondence;
+no multi-statement/source continuation, full restored-image invariant or C close.

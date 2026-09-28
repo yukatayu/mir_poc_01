@@ -1,6 +1,6 @@
 # Current Task Map (LAB)
 
-最終更新: 2026-09-28 13:39 JST
+最終更新: 2026-09-28 14:11 JST
 
 **Canon notice:** `mirrorea_canon/` is normative. Everything outside
 `mirrorea_canon/` is LAB; if LAB conflicts with canon, canon wins. This snapshot
@@ -25,7 +25,7 @@ W4-Aの保存済み証拠は通常3profile/23control、確定失敗4/14、結果
 
 Exact evidence: `docs/proof-first/RESUME.md`, `docs/proof-first/CURRENT_GOAL.md`, `docs/proof-first/W4_CHECK.json`, Report2614. W4-B検証結果: 206依存sourceを原本と同一bytesで保存し、fresh Lean検査と公理監査を完了しました。既存runnerのV2モデル278command・236module/22215所有宣言監査、native準備235command、修正後の実process検査68command（15profile/53拒否control）が全体exit0で完走しました。段階ごとに9169/9973/34658入力束縛と実ログを照合しています。保存証拠と現行sourceの役割分離、別名参照・期待値衝突・途中失敗の反例も検査済みです。コード・証明・検査手順は9d86052dでcommit/push・remote一致を確認済みです。復旧後の同一資料による最終境界Oracle reviewを回収し、主担当が証拠と照合しました。Bは限定LAB統合候補として完了、Cが現在地です。D/Eは依存待ちです。Oracle回答は証明・署名済み受理ではありません。一般証明は選択モデルについて、実processは特権private-pipeの有限証拠についてであり、実network・認証・秘密・復旧の保証へ広げません。
 
-W4-Cでは、共有authority floorの失効後の古いcache使用、供給された観測ラベルの弱化、実行していない読取りを0として記録する経路を、それぞれ一般Lean命題・実反例・Oracleレビューに基づいて限定修正しました。最新の読取り記録修正は関連18検査とruntime library416件の回帰が通過し、実際の0・別名・値改変を識別する変異検査も通過しました。ownerの実書込みと呼出し側の結果受理は別に検査し、保持した発行主体による使用後の失効は、失効前後の同じ許可経路で対照を確認しました。この管理入口はテスト用で、子processの実更新機能ではありません。C全体は未完了です。次は既存の非同期source継続とowner代入の接続、全entry・現在の認可・実namespace/custody・資源の条件です。秘密の非干渉、復旧、W4全体の実network接続の保証には広げません。
+W4-Cでは、共有authority floorの古いcache使用、供給された観測ラベルの弱化、実行していない読取りの記録に続き、重複したowner操作で配置変換がpanicする経路を限定修正しました。一般Lean命題・実反例・Oracle指摘を照合し、今回のruntime library418件が通過しました。正常な4種類のsourceは、修正前後で配置結果全体が一致しています。ownerの実書込みと呼出し側の結果受理を分け、評価失敗後にも過去の書込み・履歴が残ることを実検査しました。C全体は未完了です。複数代入の文順序・source継続、別owner間の識別子衝突、復元経路の条件が具体的な残件です。全entry・現在の認可・実namespace/custody・資源の対応も継続します。実network・秘密・復旧やW4全体の保証には広げません。
 
 ## ordered self-driven packages
 
@@ -69,7 +69,7 @@ cannot reopen Plan250 or satisfy an absent owner-authenticated trust anchor.
 | Physical provenance and namespace | bind actual endpoint/cohort/pending/caller; IDs and hashes alone are not authentication |
 | Relative admission / resources | retain independent room/freshness/funding and meaningful positives; reject all-refusal shortcuts or constant-only capacity fixes |
 | Unknown communication | retain last-known state plus actual unresolved physical custody; known/unknown private decoders remain separate rather than unified dispatch |
-| Existing runtime embedding | current reference source differs from old I3 surface; establish real checker/Core/edge correspondence before production changes |
+| Existing runtime embedding | current pure Int source differs from effectful owner/unit ack; preserve source statement order, immutable pending and committed owner history; distinct-owner identity and source-free restore cuts remain open |
 | Recovery / observation | fresh cohort is not same-instance recovery; faithful privileged capture proves neither passive noninterference nor confidentiality |
 
 ## maintenance tasks

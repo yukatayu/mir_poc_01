@@ -45,3 +45,14 @@ pre-publication history stays intact. Source continuation remains OPEN. Actual
 receipt fabrication found: literal/no-target RHS invents target0 read. Narrow
 Some-only repair is proof-checked and awaiting current Oracle before application;
 full source/Rust refinement and current authorization of observation not inferred.
+
+2026-09-28T05:11:30.310034+00:00 — Same C goal: successful-read repair91e2e49a is committed/pushed,
+review disposed (supersedes prior waiting note). A further bounded signature
+lookup repair now returns StructuralMismatch before local/remote owner lowering;
+ordinary/provider RED controls and first-match mutation distinguish it. Full418
+runtime pass; four complete old/new positive projections equal. OperationIdentity
+selects exactly one existing typed-key occurrence (23owned fresh audit), not one
+source statement. Distinct-owner same-handler source still passes build but fails
+restore; local duplicate snapshot passes structural restore/FabricProgram, sealed
+entry untested. These remain OPEN alongside actual source/effect continuation.
+No reticket/rollback, duplicate scheduler or C completion inferred.

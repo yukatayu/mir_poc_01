@@ -779,3 +779,112 @@ fn proof_first_owner_aliases_share_one_cell_and_keep_each_write() {
     assert_eq!(runtime.snapshot().int(&atk_key()), Some(10));
     assert_monotone_trace_dag(runtime.trace());
 }
+
+#[test]
+fn proof_first_owner_distinct_keys_and_index_fallback_preserve_frame() {
+    let (path, original) = load_surface_fixture("m7_owner_only_no_residuals.mir");
+    let source = original
+        .replace(
+            "attack(target: Player)",
+            "attack(target: Player, other: Player)",
+        )
+        .replace(
+            "player[target].hp - player[self].atk",
+            "player[target].hp + player[other].hp",
+        );
+    let named = M8StateKey::indexed_field("player", "named", "hp");
+    let fallback = M8StateKey::indexed_field("player", "other", "hp");
+    for (argument, expected, read_key, read_value) in
+        [(Some("named"), 107, &named, 7), (None, 111, &fallback, 11)]
+    {
+        let checked =
+            check_and_elaborate_surface_v0(FixtureSource::new(path.clone(), source.clone()))
+                .unwrap();
+        let admission = M8RuntimeAdmission::new(checked.program_identity().clone());
+        let instance = M8Runtime::default().admit(checked, admission).unwrap();
+        let mut runtime = instance.into_execution(
+            M8ExecutionSeed::new()
+                .with_int(hp_key(), 100)
+                .with_int(atk_key(), 10)
+                .with_int(named.clone(), 7)
+                .with_int(fallback.clone(), 11)
+                .with_authority_state(owner_authority_state()),
+        );
+        let mut request = attack_request(valid_authority_use());
+        if let Some(argument) = argument {
+            request = request.with_argument("other", argument);
+        }
+        runtime.try_enqueue(request).unwrap();
+        let actual = runtime.serve_next_owner("S").unwrap();
+        assert_eq!(actual.read_int(&hp_key()), Some(100));
+        assert_eq!(actual.read_int(read_key), Some(read_value));
+        assert_eq!(actual.written_int(&hp_key()), Some(expected));
+        assert_eq!(runtime.snapshot().int(&hp_key()), Some(expected));
+        assert_eq!(runtime.snapshot().int(&named), Some(7));
+        assert_eq!(runtime.snapshot().int(&fallback), Some(11));
+        assert_eq!(runtime.snapshot().int(&atk_key()), Some(10));
+    }
+    // Records the current low-level index fallback; this is not approval for
+    // omitting required arguments at a source/transport admission boundary.
+}
+
+#[test]
+fn proof_first_owner_failed_evaluation_keeps_prior_effect_and_consumes_failed_queue_entry() {
+    let (path, original) = load_surface_fixture("m7_owner_only_no_residuals.mir");
+    let source = original
+        .replace(
+            "attack(target: Player)",
+            "attack(target: Player, delta: Int)",
+        )
+        .replace(
+            "player[target].hp - player[self].atk",
+            "player[target].hp + delta",
+        );
+    let checked = check_and_elaborate_surface_v0(FixtureSource::new(path, source)).unwrap();
+    let admission = M8RuntimeAdmission::new(checked.program_identity().clone());
+    let instance = M8Runtime::default().admit(checked, admission).unwrap();
+    let mut runtime = execution(instance);
+    runtime
+        .try_enqueue(attack_request(valid_authority_use()).with_argument("delta", "2"))
+        .unwrap();
+    assert_eq!(
+        runtime
+            .serve_next_owner("S")
+            .unwrap()
+            .written_int(&hp_key()),
+        Some(102)
+    );
+    let snapshot = runtime.snapshot();
+    let history = runtime.trace().entries().to_vec();
+    let prior_writes = history
+        .iter()
+        .filter(|entry| entry.kind() == M8QueueTraceKind::OwnerWrite)
+        .count();
+    let failed = runtime
+        .try_enqueue(attack_request(valid_authority_use()))
+        .unwrap();
+    assert_eq!(
+        runtime.serve_next_owner("S").unwrap_err().primary().kind(),
+        M8ServeDiagnosticKind::DeclaredFailure(M8DeclaredFailure::RouteUnavailable)
+    );
+    assert_eq!(runtime.snapshot(), snapshot);
+    assert!(runtime.trace().entries().starts_with(&history));
+    assert_eq!(
+        runtime
+            .trace()
+            .entries()
+            .iter()
+            .filter(|entry| entry.kind() == M8QueueTraceKind::OwnerWrite)
+            .count(),
+        prior_writes
+    );
+    let failure = trace_entry_for(
+        runtime.trace(),
+        M8QueueTraceKind::DeclaredFailure,
+        failed.id(),
+    );
+    assert_eq!(failure.read_int(&hp_key()), None);
+    assert_eq!(failure.written_int(&hp_key()), None);
+    assert!(runtime.owner_queue("S").occurrence_ids().is_empty());
+    assert_monotone_trace_dag(runtime.trace());
+}

@@ -3459,3 +3459,109 @@ fn proof_first_assignment_receipt_resolves_aliases_before_deduplication() {
     );
     assert!(report.has_exact_int_write("WorldAuthority", "avatar", "self", "hp", 102));
 }
+
+#[test]
+fn proof_first_duplicate_owner_identity_is_typed_projection_refusal() {
+    use crate::sys3_projection::{
+        DeclaredLogicalTopology, ProjectionDiagnosticKind, project_checked_core,
+    };
+    use crate::sys5_local_slice::Sys5LocalSliceError;
+    use mir_ast::surface_v0::FixtureSource;
+    use mir_semantics::surface_v0_pipeline::check_and_elaborate_surface_v0;
+
+    for origin in ["WorldAuthority", "ParticipantA"] {
+        for duplicate in [false, true] {
+            let extra = if duplicate {
+                "at WorldAuthority { avatar[self].hp = 35 }"
+            } else {
+                ""
+            };
+            let source = format!(
+                "module Mirrorea.OwnerIdentity\nlocus WorldAuthority\nlocus ParticipantA\n\
+                 principal self\ntype Player\n\
+                 state avatar[id: Player] at WorldAuthority {{ hp: Int }}\n\
+                 Role[self] at {origin} {{\n\
+                 when refresh() fails (StaleMembership, MissingCapability, MissingWitness, VisibilityDenied, RouteUnavailable) {{\n\
+                 at WorldAuthority {{ avatar[self].hp = 34 }}\n{extra}\n}}\n}}\n\
+                 with auth MembershipAuth\nverify finite_refinement\n"
+            );
+            let checked = check_and_elaborate_surface_v0(FixtureSource::new(
+                "tests/inline/owner_identity.mir",
+                source.clone(),
+            ))
+            .expect("both single and duplicate source currently pass M7");
+            let topology = DeclaredLogicalTopology::try_new(
+                checked.program_identity().clone(),
+                ["WorldAuthority", "ParticipantA"],
+            )
+            .expect("declared loci are unique");
+            let projected = project_checked_core(&checked, &topology);
+            let built = build_project(Sys5SourceInput::inline(
+                "tests/inline/owner_identity.mir",
+                source,
+            ));
+            if duplicate {
+                let diagnostic = match projected {
+                    Err(diagnostic) => diagnostic,
+                    Ok(_) => panic!("an ambiguous owner identity cannot project: {origin}"),
+                };
+                assert_eq!(
+                    diagnostic.primary().kind(),
+                    ProjectionDiagnosticKind::StructuralMismatch
+                );
+                assert!(matches!(built, Err(Sys5LocalSliceError::ProjectionFailed)));
+            } else {
+                projected.expect("unique owner identity still projects, local or remote");
+                built.expect("ordinary unique source still builds");
+            }
+        }
+    }
+}
+
+#[test]
+fn proof_first_duplicate_owner_identity_is_refused_by_provider_entry() {
+    use crate::sys3_projection::{
+        DeclaredLogicalTopology, ProjectionDiagnosticKind, project_read_only_provider_effect_static,
+    };
+    use mir_ast::surface_v0::FixtureSource;
+    use mir_semantics::{
+        m9_finite_refinement::M9ReadOnlyProviderEffectCoverage,
+        surface_v0_pipeline::check_and_elaborate_surface_v0,
+    };
+    let ordinary =
+        include_str!("../../../samples/clean-near-end/mirrorea-i3-provider-effect/main.mir");
+    for duplicate in [false, true] {
+        let source = if duplicate {
+            ordinary.replace(
+                "avatar[self].hp = 21",
+                "avatar[self].hp = 21\n    }\n    at WorldAuthority {\n      avatar[self].hp = 35",
+            )
+        } else {
+            ordinary.to_string()
+        };
+        let checked = check_and_elaborate_surface_v0(FixtureSource::new(
+            "tests/inline/provider_owner_identity.mir",
+            source,
+        ))
+        .expect("the mixed source passes M7 even with duplicated owner identity");
+        let topology = DeclaredLogicalTopology::try_new(
+            checked.program_identity().clone(),
+            ["WorldAuthority", "ParticipantA", "ParticipantB", "ViewerC"],
+        )
+        .expect("declared provider topology");
+        let coverage = M9ReadOnlyProviderEffectCoverage::from_checked(&checked)
+            .expect("coverage itself does not solve owner identity ambiguity");
+        let projected = project_read_only_provider_effect_static(&checked, &topology, coverage);
+        if duplicate {
+            assert_eq!(
+                projected
+                    .expect_err("dedicated entry must preserve the same owner guard")
+                    .primary()
+                    .kind(),
+                ProjectionDiagnosticKind::StructuralMismatch
+            );
+        } else {
+            projected.expect("the original mixed source remains projectable");
+        }
+    }
+}

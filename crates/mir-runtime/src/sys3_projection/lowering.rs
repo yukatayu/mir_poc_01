@@ -197,7 +197,7 @@ pub(super) fn project_legacy_evaluation(
     evaluation: &CheckedEvaluation,
 ) -> Result<(), ProjectionDiagnostics> {
     match evaluation.kind() {
-        CheckedEvaluationKind::OwnerRmw => project_owner(result, checked, evaluation),
+        CheckedEvaluationKind::OwnerRmw => project_owner(result, checked, evaluation)?,
         CheckedEvaluationKind::PublishRelation => project_relation(result, checked, evaluation),
         CheckedEvaluationKind::DesignatedPublishValue => {
             project_designated(result, checked, evaluation)?
@@ -228,11 +228,23 @@ fn project_owner(
     result: &mut GlobalProjectionResult,
     checked: &CheckedSurfaceV0,
     evaluation: &CheckedEvaluation,
-) {
+) -> Result<(), ProjectionDiagnostics> {
     let core = evaluation.owner_rmw_core().expect("owner checked Core");
     let operation = evaluation.name();
     let owner = core.owner_locus();
     let origin = core.authority_origin_locus();
+    // One admitted owner operation must have exactly one checked signature.
+    // Check local operations too: they do not emit a request but still share
+    // operation/fragment identities. This does not elaborate continuations.
+    let signature = checked
+        .static_environment()
+        .evaluation_signature_by_identity(operation, CheckedEvaluationKind::OwnerRmw, Some(owner))
+        .ok_or_else(|| {
+            ProjectionDiagnostics::one(
+                ProjectionDiagnosticKind::StructuralMismatch,
+                "owner operation requires exactly one checked signature",
+            )
+        })?;
     let owner_artifact_ref = artifact_ref(owner, operation, "owner-rmw");
     let local_state_schemas = checked
         .static_environment()
@@ -303,15 +315,6 @@ fn project_owner(
     );
     if origin != owner {
         let origin_artifact_ref = artifact_ref(origin, operation, "owner-request");
-        let signature = checked
-            .static_environment()
-            .evaluation_signature_by_identity(
-                operation,
-                CheckedEvaluationKind::OwnerRmw,
-                Some(owner),
-            )
-            .expect("checked owner operation has signature")
-            .clone();
         result
             .locus_program_mut(origin)
             .add_fragment(ProjectedOperationFragment {
@@ -327,7 +330,7 @@ fn project_owner(
                 declared_failure_row: evaluation.declared_failure_row().clone(),
                 generated_failure_row: evaluation.generated_failure_row().clone(),
                 placement: PlacementSpecificCore::OwnerRequest {
-                    signature,
+                    signature: signature.clone(),
                     origin_locus: origin.to_string(),
                     target_owner_locus: owner.to_string(),
                 },
@@ -396,6 +399,7 @@ fn project_owner(
                 designated_remote_input_requirement: None,
             });
     }
+    Ok(())
 }
 
 fn project_relation(

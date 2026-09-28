@@ -3509,3 +3509,75 @@ make docs is still running; format/diff checks passed. Git checkpoint pending.
 Sole main; no subagents/notifications or live Oracle. Same C goal continues.
 
 2026-09-28T04:41:18.254623+00:00 — make docs whole exit0, formatting/diff checks0. All started test/Oracle/tool sessions collected; no live Oracle. Final post-full-run test-only no-extra-write assertion passes. Own bounded checkpoint commit/push follows; I/c-owner-partial/GIT_CHECKPOINT.json will bind commit/remote parity. C continues with actual source/effect consumer, not a phase close.
+
+2026-09-28T05:01:06.349377+00:00 — C ordinary-handler identity counterexamples (same semantic goal).
+Checkpoint91e2e49a committed/pushed with exact origin parity; receipt in
+I/c-owner-partial/GIT_CHECKPOINT.json. Fresh extended-kernel-v2 now audits nine
+external modules/1159 owned declarations, three false controls; this supersedes
+only the prior pending-audit note, not unreviewed/unadopted model status.
+Unbudgeted two assignments in one at-block fail M7 because the parser retains an
+opaque combined RHS. Two separate same-owner blocks in one handler pass M7 then
+panic in SYS3 unique-signature expect. Ordinary/provider retained RED tests both
+reproduce actual panic. A local owner skips that lookup and needs its own guard.
+Additional disposable probe: same event with two distinct owners passes M7,
+projection verification and build, but private restoration rejects owner Core
+cardinality. A duplicated local-owner fragment in a private snapshot passes
+structural restore and FabricProgram construction. No sealed/runtime/authority
+bypass demonstrated. Probe exit0 is output capture, NOT conformance success.
+All probe appends restored exactly; source-generation test additions remain.
+External OperationIdentity separates positional Selects rules from finite lookup;
+soundness/relative completeness, member, singleton success and repeated-occurrence
+refusal kernel-checked; fresh23owned audit standard axioms, two false claims fail.
+Initial reserved-identifier parse failure excluded. This is not source identity
+provenance, compiler extraction or multi-statement/restore correctness.
+Candidate minimal guard and M7-only refusal alternative submitted once to visible
+Oracle mir-w4-c-operation-identity at04:53:16UTC; 6Pro/max verified. Frozen packet
+hash317c6d5912f3d96ec2548ccaecefef3b91e4f2e5d7b4fd37dd753ebfb1164730,
+wrapper37060/capture49388 pending. No production repair before review disposition.
+Owner-effect/unit acknowledgment versus pure Int source continuation still OPEN;
+existing ReferenceSource async machinery reused as dependency, no new scheduler.
+Plan/dashboard update deferred until reviewed repair checkpoint; no phase change,
+no sample workflow/taxonomy change, no Canon/THM/OBL changes, no subagents.
+
+2026-09-28T05:11:30.310034+00:00 — C bounded identity lookup repair verified.
+Oracle mir-w4-c-operation-identity completed05:01:57UTC, full25930chars recovered,
+visible6Pro/max verified. CandidateA supported only for existing typed-key lookup;
+B not selected because M7-only restriction does not close alternative entry paths.
+Main independently reproduced distinct-owner and low-level restore counterexamples;
+no global identity/restore/source continuation claim. Final advisory disposition
+in I/oracle-c-operation-identity/DISPOSITION.json, all wrapper/capture jobs collected.
+The same project_owner now resolves its existing signature before any local/remote
+fragment emission and propagates StructuralMismatch through shared ordinary/provider
+lowering. No parser/M7/auth/queue/public-contract change. General positional lookup
+rules and executable singleton selection checked; mirrored module fresh23owned
+standard-axiom audit, two false claims rejected. No sorry/admit or Mir-specific axiom.
+Actual ordinary/provider remote RED panics and local wrongly accepted RED retained.
+Repaired two tests pass; deliberate first-match mutant fails both assertions.
+Exact repaired source restored, then all418 runtime library tests pass96.97s,
+serial/locked/offline, full Rust/Cargo manifest unchanged during command.
+Four real old/new positive static projection Debug representations compare byte-
+for-byte equal: local/remote budgeted multi-handler, parameter/relation, mixed
+provider. This is whole static-output preservation evidence, not runtime E2E.
+Temporary comparison probe and source swaps restored exactly in finally blocks.
+Five targeted M8 expression tests pass after adding nonalias/index-fallback frame
+and failure-after-prior-write controls; failed queue entry consumed, prior actual
+state/history preserved, no success scratch read/write fabricated on failure.
+Missing numeric parameter and index fallback remain distinct existing behavior,
+not permission to omit required arguments at an upstream admission boundary.
+Plan/Documentation/project-status/progress/tasks/samples_progress and Lean README
+synchronized; tasks full snapshot maintained, sample taxonomy unchanged. No new
+report, framework, Canon/THM/OBL or phase update. format/diff checks and make docs
+follow; current checkpoint not yet committed. Same C source/effect goal continues.
+
+2026-09-28T05:18:47.153820+00:00 — make docs whole exit0, cargo fmt/diff checks0. The next source/effect
+comparison packet is research only, not prerequisite retroactive acceptance of the
+bounded guard. Initial Oracle mir-w4-c-effectful-continuati failed before submission
+with ECONNREFUSED45439. Dedicated profile had no process/lock; main restarted visible
+same profile/port with normal launch flags, left other Chrome/9222 unchanged, then
+resent identical packet once as actual mir-w4-c-effect-source (requested r1 suffix
+canonicalized). Wrapper88119/capture27684 live; no latency resend/deadline. Initial
+capture ENOENT was corrected to actual session ID without restarting the job.
+Current source waiting retains result binding, not visibly a persisted remainder;
+that distinction is in the new neutral comparison. Pure Int and effectful unit
+families remain distinct; no semantics adopted. Own guard checkpoint commit/push
+follows, exact receipt in I/c-operation-identity/GIT_CHECKPOINT.json. C continues.

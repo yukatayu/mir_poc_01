@@ -45789,5 +45789,77 @@
     "role": "authored bounded correspondence/TCB and reproduction",
     "status": "full",
     "at": "2026-09-28T04:39:15.656514+00:00"
+  },
+  {
+    "path": "crates/mir-runtime/src/sys3_projection/model.rs",
+    "sha256": "8361b0d32dc3f5abedf0eafa373f37a9423866fdcf3f1417410597f6b288c167",
+    "range": "1-110",
+    "role": "C operation identity / continuation reconsult; prior full-read records retained",
+    "status": "contextual",
+    "at": "2026-09-28T05:01:06.349377+00:00"
+  },
+  {
+    "path": "crates/mir-runtime/src/sys3_i3_private_snapshot.rs",
+    "sha256": "d86463afa750b301625f9e83d7eef7e1805a5e9029c1f326460ba1c88ba4937c",
+    "range": "90-235,300-635,770-940",
+    "role": "C operation identity / continuation reconsult; prior full-read records retained",
+    "status": "contextual",
+    "at": "2026-09-28T05:01:06.349377+00:00"
+  },
+  {
+    "path": "crates/mir-runtime/src/sys4_dispatch.rs",
+    "sha256": "3fa8e803ceef6e2c9ad37463315c66281fedfc1c09b37d4f530ecb3969e136b4",
+    "range": "917-1006",
+    "role": "C operation identity / continuation reconsult; prior full-read records retained",
+    "status": "contextual",
+    "at": "2026-09-28T05:01:06.349377+00:00"
+  },
+  {
+    "path": "crates/mir-semantics/src/surface_v0_pipeline.rs",
+    "sha256": "4c5fab2800b8b67d1db3086e20e73eb5831de625afbd414b267a669cdb1cc9b0",
+    "range": "460-506,2490-2620,2814-2990,3351-3447",
+    "role": "C operation identity / continuation reconsult; prior full-read records retained",
+    "status": "contextual",
+    "at": "2026-09-28T05:01:06.349377+00:00"
+  },
+  {
+    "path": "samples/lean/foundations/MirroreaProofFirstReferenceSource.lean",
+    "sha256": "973ab39e829a28aae6663d7ad922d719c345372319ce83bdcaf1e769cc2c9fd2",
+    "range": "95-285",
+    "role": "C operation identity / continuation reconsult; prior full-read records retained",
+    "status": "contextual",
+    "at": "2026-09-28T05:01:06.349377+00:00"
+  },
+  {
+    "path": "samples/lean/foundations/MirroreaProofFirstReferenceExecution.lean",
+    "sha256": "2a0fd53eb81388c8dbb861cc26db6037872cc9dffc80bc4ec60dd862ded38d5d",
+    "range": "70-185",
+    "role": "C operation identity / continuation reconsult; prior full-read records retained",
+    "status": "contextual",
+    "at": "2026-09-28T05:01:06.349377+00:00"
+  },
+  {
+    "path": "samples/lean/foundations/MirroreaProofFirstOperationIdentity.lean",
+    "sha256": "b88c4bcaf2a2bff095cf3ab56716051f2196280f8809b60dae5e17ba340c2848",
+    "range": "1-74",
+    "role": "C reviewed bounded identity lookup repair; not global source/restore invariant",
+    "status": "full",
+    "at": "2026-09-28T05:11:30.310034+00:00"
+  },
+  {
+    "path": "samples/lean/foundations/MirroreaProofFirstOperationIdentity.md",
+    "sha256": "596bd018bd428bfb80ca0267b2a60f797ba95fcb2dcb80b4deba0d3b8be5ba99",
+    "range": "1-33",
+    "role": "C reviewed bounded identity lookup repair; not global source/restore invariant",
+    "status": "full",
+    "at": "2026-09-28T05:11:30.310034+00:00"
+  },
+  {
+    "path": "crates/mir-runtime/src/sys3_projection/lowering.rs",
+    "sha256": "e86973e72563c419e74840904e2bae5f77538d0230db77e5dfa4b511413e3a02",
+    "range": "authored/reviewed delta plus retained exact full baseline",
+    "role": "C reviewed bounded identity lookup repair; not global source/restore invariant",
+    "status": "delta",
+    "at": "2026-09-28T05:11:30.310034+00:00"
   }
 ]
