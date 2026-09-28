@@ -1488,3 +1488,50 @@ rebase. Correct refusal is not a successful post-use update. This materially lim
 using that existing I3 fixture as the quiescent-publication alternative; an actual
 current post-use update route would be required. Existing I3 semantics/Canon/Q18
 unchanged, owner effect and requester completion remain separate, C remains active.
+
+### 2026-09-28T03:02:17.373822+00:00 — W4-C owner-expression/finite review correspondence
+
+R09の有限abort/alias証明のOracleレビューを回収し、指摘を照合しました。
+同じ実program・入力の束縛、失敗以前の書込みと観測の保持、別名のschema/label整合、
+全実outcomeに基づく完了判定が実装適用条件です。M8の実効label/source接続は未解消です。
+W2の取得値とmetadataの接続を再利用し、欠損lookupを保持する外部Lean接続候補を検査しました。
+実source/M7/M8ではfield欠損とentity欠損を分け、引数parse・中間overflow・aliasの
+連続書込みを検査。ゼロ補完mutantは誤書込みを起こして検査失敗しました。
+新しいsource意味・公開契約は採用せず、Cのentry/auth/source対応を継続します。
+
+2026-09-28T03:36:19.688827+00:00 — W4-C supplied observer labels, bounded candidate.
+Initial actual source/M8 tests exposed loss of Private class and insufficient-grant
+acceptance. Candidate now propagates conservative effective class to the latest
+relation row and requires one matching grant covering all actual retained rows.
+Existing per-relation nonweakening and diagnostic order remain. Ten general Lean
+lemmas plus finite three-class instance compile with trust0;788 owned declarations
+audited with standard logic axioms only. No sorry/admit/Mir-specific axiom.
+Actual integration11pass; split-grant and omit-output-check mutations fail; exact
+restoration11pass. Concrete class unit1pass and focused M10 observer1pass.
+Design Oracle recovered23488chars; local disposition retains input-authenticity,
+current-authority, occurrence/error/timing and physical-isolation limits. Final
+narrow review mir-w4-c-observer-final sent03:34:48UTC, no resend/deadline.
+Mirrored sample/companion and README reproduction list updated. R09/C remain OPEN.
+No Canon statement, public API/wire, sample root or taxonomy change.
+Documentation/project-status/progress/tasks need no phase snapshot change at this
+subcut; samples_progress adds the concrete evidence/reproduction row. Git pending.
+Sole main, no subagents or external notifications.
+
+2026-09-28T03:49:18.901153+00:00 — W4-C bounded observer repair final review/checkpoint.
+Final Oracle mir-w4-c-observer-final completed03:43:14UTC; full7904chars
+SHA2e27d2e6317540058b3f49e27fcbb283d7323b2337b8aa92157377c1c40a13f4,
+6Pro/max verified, identity/stop/final checked. No bounded code defect found.
+Two regression gaps closed: all final map entries and exact retained vector.
+Actual first-entry-only/extra-low-row mutants fail; restored12tests pass. Class1
+and focused M10 observer1 pass; earlier full412 library result retained, unchanged
+production. New per-command source/Cargo/test manifests bind exact execution;
+fresh four-module Lean build plus owned788 audit links source and import artifacts.
+General checker exactness does not include independent policy prerequisites;
+diamond control is generic, unreachable from current rowClass constructor.
+No source-label authenticity, epoch freshness, runtime-holder isolation, egress
+or whole confidentiality claim. R09/C remain OPEN. make docs and formatting pass.
+Proof/companion/README/samples dashboard and plan updated; no Canon/public API,
+phase or sample taxonomy change. Documentation/project-status/progress/tasks
+need no snapshot update at this component. Sole main; no subagents/notifications.
+OwnerPartial research/tests remain unadopted; next C phase correspondence reuses
+existing owner/source definitions. Own scoped commit/push follows this receipt.

@@ -3325,3 +3325,84 @@ Read-only event capture79472 attached. Ordinary menu confirms6ProLatest,max4/4;
 no internal settings changes. Nextstatus>=02:43:50UTC. make docs50751 exit0/1764reports.
 RESUME consolidated to current snapshot; prior fulltext retained externally and
 in report/receipts/Git. No new report, Canon statement or phase change.
+
+2026-09-28T03:02:17.373822+00:00 — R09 finite abort/fixed-alias Oracle review recovered/disposed.
+FinalDOM24509chars SHA86cea92f2453202d69fd1804e56033559797c75e7ef3ea1c55e7b878deece37f,
+identity=true/stop=false; completed wrapper12829/capture79472 exit0,6Pro/max verified.
+No mathematical counterexample identified; required common program/inputs, prefix
+state/events preserved across later failure, coherent alias metadata, full-outcome
+completion, separate release/currentness/physical observer conditions retained.
+Finite review gap is resolved, R09 M8 effective-label/source transfer still OPEN.
+W2 final composition/capture adapter history consulted and reused; old unreviewed
+source comment is historical, not a reason to duplicate its calculus.
+
+External OwnerPartial bridge adds six general Option-lookup lemmas reusing the
+existing Expr/arithmetic/OwnerAssignment, not a new language/authority contract.
+Lean4.29.1 trust0 passes; five-module1007owned declarations only standard axioms;
+zero-default, algebraic overflow cancellation and value-only presence equality
+are false controls. No sorry/admit/Mir axiom used; initial parser/tactic failures
+are excluded. New model remains unreviewed/unadopted pending direct-consumer cut.
+Actual M7/M8 source tests3pass: live-entity missing field, parameter parse/domain,
+intermediate overflow and alias100→200→400 with both ordered writes. First probe
+failed earlier at enqueue StaleMembership because whole entity was absent; fix
+retains entity via other declared fields and separates field availability.
+Default-zero actual evaluator mutant fails with spurious hp=-10; exact source
+restored. Driver qualification typo retained separately from intended testfailure.
+Evidence I/c-owner-partial. No general compiler/IFC/network/source-continuation
+claim; source-entry/auth/custody/phase obligations remain. No new Oracle livejob.
+Plan memory/RESUME/current receipt synchronized; no package/phase transition.
+Documentation/project-status/progress/tasks/samples_progress update unnecessary
+for this subcut; no sample root/taxonomy or Canon statement change. Git pending.
+Sole main; no subagents.
+
+2026-09-28T03:10:57.550497+00:00 — Restored M8 source SHA b05a005d… verified;20411 cargo0/3pass.
+Continuing R09 known observer mismatch: two actual new regression tests fail on
+unchanged runtime (Public emitted instead of Private; Restricted grant accepted).
+External proposed bounded A retains effective class and requires one matching
+grant for actual returned rows; B rejects above-base declarations. Five generic
+LabelTheory lemmas compile trust0;738owned audit only standard axioms. Not a
+source-label authenticity/current-authority/IFC claim. Wrong-cwd audit attempt
+source-not-found preserved; correct-cwd pass separate. No production observer edit.
+Independent Oracle mir-w4-c-observer-label/tool96428 sent03:09:39UTC once,16files
+148944bytes; questionafb790a22ec79deb18ee1b698bf12bff91c333e57de43774749e85ae30927161,
+manifest39625173050fa8e3b0159bc5acefe133313d3c30211e97a17c72b91d241a5877.
+DOM event capture21087 attached;nextstatus>=03:12:39UTC. Current source consumer
+calls audited: M10 paths do not set relation overrides. No remote exploit or
+whole R09 closure inferred from trusted setup counterexample.
+
+2026-09-28T03:36:19.688827+00:00 — W4-C supplied observer labels, bounded candidate.
+Initial actual source/M8 tests exposed loss of Private class and insufficient-grant
+acceptance. Candidate now propagates conservative effective class to the latest
+relation row and requires one matching grant covering all actual retained rows.
+Existing per-relation nonweakening and diagnostic order remain. Ten general Lean
+lemmas plus finite three-class instance compile with trust0;788 owned declarations
+audited with standard logic axioms only. No sorry/admit/Mir-specific axiom.
+Actual integration11pass; split-grant and omit-output-check mutations fail; exact
+restoration11pass. Concrete class unit1pass and focused M10 observer1pass.
+Design Oracle recovered23488chars; local disposition retains input-authenticity,
+current-authority, occurrence/error/timing and physical-isolation limits. Final
+narrow review mir-w4-c-observer-final sent03:34:48UTC, no resend/deadline.
+Mirrored sample/companion and README reproduction list updated. R09/C remain OPEN.
+No Canon statement, public API/wire, sample root or taxonomy change.
+Documentation/project-status/progress/tasks need no phase snapshot change at this
+subcut; samples_progress adds the concrete evidence/reproduction row. Git pending.
+Sole main, no subagents or external notifications.
+
+2026-09-28T03:49:18.901153+00:00 — W4-C bounded observer repair final review/checkpoint.
+Final Oracle mir-w4-c-observer-final completed03:43:14UTC; full7904chars
+SHA2e27d2e6317540058b3f49e27fcbb283d7323b2337b8aa92157377c1c40a13f4,
+6Pro/max verified, identity/stop/final checked. No bounded code defect found.
+Two regression gaps closed: all final map entries and exact retained vector.
+Actual first-entry-only/extra-low-row mutants fail; restored12tests pass. Class1
+and focused M10 observer1 pass; earlier full412 library result retained, unchanged
+production. New per-command source/Cargo/test manifests bind exact execution;
+fresh four-module Lean build plus owned788 audit links source and import artifacts.
+General checker exactness does not include independent policy prerequisites;
+diamond control is generic, unreachable from current rowClass constructor.
+No source-label authenticity, epoch freshness, runtime-holder isolation, egress
+or whole confidentiality claim. R09/C remain OPEN. make docs and formatting pass.
+Proof/companion/README/samples dashboard and plan updated; no Canon/public API,
+phase or sample taxonomy change. Documentation/project-status/progress/tasks
+need no snapshot update at this component. Sole main; no subagents/notifications.
+OwnerPartial research/tests remain unadopted; next C phase correspondence reuses
+existing owner/source definitions. Own scoped commit/push follows this receipt.

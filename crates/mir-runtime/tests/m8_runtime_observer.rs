@@ -435,19 +435,45 @@ fn observer_runtime() -> (
     M8RuntimeAdmission,
     M8ObserverRuntime,
 ) {
+    observer_runtime_with_max(M8SecurityClass::Restricted)
+}
+
+fn observer_runtime_with_max(
+    max_class: M8SecurityClass,
+) -> (
+    String,
+    String,
+    CheckedSurfaceV0,
+    M8RuntimeAdmission,
+    M8ObserverRuntime,
+) {
+    observer_runtime_with_authorities(vec![
+        observer_authority().with_max_security_class(max_class),
+    ])
+}
+
+fn observer_runtime_with_authorities(
+    authorities: Vec<M8ObserverAuthorityGrant>,
+) -> (
+    String,
+    String,
+    CheckedSurfaceV0,
+    M8RuntimeAdmission,
+    M8ObserverRuntime,
+) {
     let (path, source, checked, admission, instance) = admitted_unified_instance();
     let input_ref = designated_input_source_ref(&path, &source);
-    let runtime = M8ObserverRuntime::from_admitted(
-        instance,
-        M8ObserverRuntimeSeed::new()
-            .with_owner_int(hp_key(), 100)
-            .with_owner_int(atk_key(), 10)
-            .with_authority_state(authority_state())
-            .with_live_lease(live_relation_lease())
-            .with_live_lease(fresh_reacquire_relation_lease())
-            .with_observer_authority(observer_authority())
-            .with_designated_input_receipts(receipt_set(vec![input_receipt(&input_ref)])),
-    );
+    let mut seed = M8ObserverRuntimeSeed::new()
+        .with_owner_int(hp_key(), 100)
+        .with_owner_int(atk_key(), 10)
+        .with_authority_state(authority_state())
+        .with_live_lease(live_relation_lease())
+        .with_live_lease(fresh_reacquire_relation_lease())
+        .with_designated_input_receipts(receipt_set(vec![input_receipt(&input_ref)]));
+    for authority in authorities {
+        seed = seed.with_observer_authority(authority);
+    }
+    let runtime = M8ObserverRuntime::from_admitted(instance, seed);
     (path, source, checked, admission, runtime)
 }
 
@@ -715,4 +741,346 @@ fn redacted_rows_keep_occurrence_dependency_correspondence_without_secret_fields
     assert!(!export.rows().contains_raw_value_for(VALUE_NAME));
     assert!(export.rows().all_correspond_to_exact_trace(&trace));
     assert!(export.rows().all_source_refs_match_runtime_trace(&trace));
+}
+
+// W4-C: trusted policy metadata must not be weakened between admission and rows.
+// This does not establish how a caller obtains authentic source labels.
+#[test]
+fn proof_first_observer_effective_relation_label_requires_matching_clearance() {
+    let (path, source, _, _, mut runtime) = observer_runtime();
+    prepare_observable_runtime(&mut runtime);
+    let before = runtime.save_relevant_payload();
+    let policy = observer_policy(observer_source_ref(&path, &source))
+        .with_label(EvidenceSecurityLabel::new("public-base").with_class(M8SecurityClass::Public))
+        .with_relation_input_label(
+            RELATION_NAME,
+            EvidenceSecurityLabel::new("private-input").with_class(M8SecurityClass::Private),
+        )
+        .with_relation_label_override(
+            RELATION_NAME,
+            EvidenceSecurityLabel::new("private-row").with_class(M8SecurityClass::Private),
+        );
+    let denied = runtime
+        .export_observer_view(policy)
+        .expect_err("a Restricted grant cannot authorize an effective Private relation row");
+    assert_eq!(
+        denied.primary().kind(),
+        M8ObserverDiagnosticKind::MissingObserverAuthority
+    );
+    assert_eq!(runtime.save_relevant_payload(), before);
+}
+
+#[test]
+fn proof_first_observer_effective_relation_label_is_retained_with_sufficient_clearance() {
+    let (path, source, _, _, mut runtime) = observer_runtime_with_max(M8SecurityClass::Private);
+    prepare_observable_runtime(&mut runtime);
+    let before = runtime.save_relevant_payload();
+    let policy = observer_policy(observer_source_ref(&path, &source))
+        .with_label(EvidenceSecurityLabel::new("public-base").with_class(M8SecurityClass::Public))
+        .with_relation_input_label(
+            RELATION_NAME,
+            EvidenceSecurityLabel::new("private-input").with_class(M8SecurityClass::Private),
+        )
+        .with_relation_label_override(
+            RELATION_NAME,
+            EvidenceSecurityLabel::new("private-row").with_class(M8SecurityClass::Private),
+        );
+    let view = runtime
+        .export_observer_view(policy)
+        .expect("a correctly scoped Private grant admits the strongly labeled row");
+    let row = view.rows().redacted_subject("relation-lineage").unwrap();
+    assert_eq!(row.label().security_class(), M8SecurityClass::Private);
+    assert!(row.corresponds_to_exact_trace(&runtime.trace()));
+    assert_eq!(
+        view.policy().label().security_class(),
+        M8SecurityClass::Public
+    );
+    assert_eq!(runtime.save_relevant_payload(), before);
+}
+
+#[test]
+fn proof_first_observer_identity_and_clearance_cannot_use_different_grants() {
+    let (path, source, _, _, mut runtime) = observer_runtime_with_authorities(vec![
+        observer_authority().with_max_security_class(M8SecurityClass::Public),
+        observer_authority()
+            .for_principal("someone-else")
+            .with_max_security_class(M8SecurityClass::Private),
+        M8ObserverAuthorityGrant::already_admitted("different-reference")
+            .for_principal(OBSERVER)
+            .with_max_security_class(M8SecurityClass::Private),
+    ]);
+    prepare_observable_runtime(&mut runtime);
+    let policy = observer_policy(observer_source_ref(&path, &source))
+        .with_label(EvidenceSecurityLabel::new("public-base").with_class(M8SecurityClass::Public))
+        .with_relation_label_override(
+            RELATION_NAME,
+            EvidenceSecurityLabel::new("private-row").with_class(M8SecurityClass::Private),
+        );
+    assert_eq!(
+        runtime
+            .export_observer_view(policy)
+            .unwrap_err()
+            .primary()
+            .kind(),
+        M8ObserverDiagnosticKind::MissingObserverAuthority
+    );
+}
+
+#[test]
+fn proof_first_observer_clearance_applies_to_actual_retained_rows() {
+    let (path, source, _, _, mut runtime) = observer_runtime_with_max(M8SecurityClass::Public);
+    prepare_observable_runtime(&mut runtime);
+    let policy = observer_policy(observer_source_ref(&path, &source))
+        .with_label(EvidenceSecurityLabel::new("public-base").with_class(M8SecurityClass::Public))
+        .with_retention(M8ObserverRetention::bounded("only-first-row", 1))
+        .with_relation_input_label(
+            RELATION_NAME,
+            EvidenceSecurityLabel::new("private-input").with_class(M8SecurityClass::Private),
+        )
+        .with_relation_label_override(
+            RELATION_NAME,
+            EvidenceSecurityLabel::new("private-row").with_class(M8SecurityClass::Private),
+        );
+    let view = runtime
+        .export_observer_view(policy)
+        .expect("only the actual public owner row is returned");
+    let owner_row = view.rows().redacted_subject("owner-write").unwrap();
+    assert_eq!(
+        format!("{:?}", view.rows()),
+        format!("M8ObserverRows {{ rows: [{owner_row:?}] }}"),
+        "retention one returns exactly the owner row, with no extra low row"
+    );
+    assert!(view.rows().contains_kind(M8ObserverRowKind::OwnerWrite));
+    assert!(
+        !view
+            .rows()
+            .contains_kind(M8ObserverRowKind::RelationLineage)
+    );
+    assert_eq!(
+        view.rows()
+            .redacted_subject("owner-write")
+            .unwrap()
+            .label()
+            .security_class(),
+        M8SecurityClass::Public
+    );
+}
+
+#[test]
+fn proof_first_observer_all_final_override_entries_contribute() {
+    for unknown_key in ["aaa-unrelated", "zzz-unrelated"] {
+        let (path, source, _, _, mut runtime) = observer_runtime_with_max(M8SecurityClass::Public);
+        prepare_observable_runtime(&mut runtime);
+        let before = runtime.save_relevant_payload();
+        let policy = observer_policy(observer_source_ref(&path, &source))
+            .with_label(
+                EvidenceSecurityLabel::new("public-base").with_class(M8SecurityClass::Public),
+            )
+            .with_relation_label_override(
+                RELATION_NAME,
+                EvidenceSecurityLabel::new("known-public").with_class(M8SecurityClass::Public),
+            )
+            .with_relation_label_override(
+                unknown_key,
+                EvidenceSecurityLabel::new("other-private").with_class(M8SecurityClass::Private),
+            );
+        assert_eq!(
+            runtime
+                .export_observer_view(policy)
+                .unwrap_err()
+                .primary()
+                .kind(),
+            M8ObserverDiagnosticKind::MissingObserverAuthority,
+            "the generic relation row conservatively includes every final map entry"
+        );
+        assert_eq!(runtime.save_relevant_payload(), before);
+    }
+}
+
+#[test]
+fn proof_first_observer_effective_policy_preserves_nonweakening_and_low_positive() {
+    for (base, override_class, input_class, clearance, expected) in [
+        (
+            M8SecurityClass::Public,
+            None,
+            None,
+            M8SecurityClass::Public,
+            Some(M8SecurityClass::Public),
+        ),
+        (
+            M8SecurityClass::Public,
+            Some(M8SecurityClass::Restricted),
+            None,
+            M8SecurityClass::Restricted,
+            Some(M8SecurityClass::Restricted),
+        ),
+        (
+            M8SecurityClass::Public,
+            Some(M8SecurityClass::Private),
+            None,
+            M8SecurityClass::Private,
+            Some(M8SecurityClass::Private),
+        ),
+        (
+            M8SecurityClass::Public,
+            None,
+            Some(M8SecurityClass::Private),
+            M8SecurityClass::Private,
+            None,
+        ),
+        (
+            M8SecurityClass::Private,
+            Some(M8SecurityClass::Public),
+            Some(M8SecurityClass::Private),
+            M8SecurityClass::Private,
+            None,
+        ),
+    ] {
+        let (path, source, _, _, mut runtime) = observer_runtime_with_max(clearance);
+        prepare_observable_runtime(&mut runtime);
+        let before = runtime.save_relevant_payload();
+        let trace = runtime.trace();
+        let mut policy = observer_policy(observer_source_ref(&path, &source))
+            .with_label(EvidenceSecurityLabel::new("opaque-name").with_class(base));
+        if let Some(class) = override_class {
+            policy = policy.with_relation_label_override(
+                RELATION_NAME,
+                EvidenceSecurityLabel::new("opaque-override").with_class(class),
+            );
+        }
+        if let Some(class) = input_class {
+            policy = policy.with_relation_input_label(
+                RELATION_NAME,
+                EvidenceSecurityLabel::new("opaque-input").with_class(class),
+            );
+        }
+        match expected {
+            Some(class) => {
+                let view = runtime.export_observer_view(policy.clone()).unwrap();
+                let row = view.rows().redacted_subject("relation-lineage").unwrap();
+                assert_eq!(row.label().security_class(), class);
+                assert_eq!(row.label().as_str(), "opaque-name");
+                assert_eq!(row.redaction().as_str(), "redact-private-dependencies");
+                assert!(row.corresponds_to_exact_trace(&trace));
+                assert_eq!(runtime.export_observer_view(policy).unwrap(), view);
+                let actual = format!("{view:?}");
+                for private_payload in
+                    [ATTACK_CAPABILITY_REF, ATTACK_WITNESS_REF, INPUT_RECEIPT_REF]
+                {
+                    assert!(!actual.contains(private_payload));
+                }
+            }
+            None => assert_eq!(
+                runtime
+                    .export_observer_view(policy)
+                    .unwrap_err()
+                    .primary()
+                    .kind(),
+                M8ObserverDiagnosticKind::RelationLabelWouldWeakenInputJoin
+            ),
+        }
+        assert_eq!(runtime.save_relevant_payload(), before);
+        assert_eq!(runtime.trace(), trace);
+    }
+}
+
+#[test]
+fn proof_first_observer_matching_high_grant_is_order_independent() {
+    for reverse in [false, true] {
+        let mut grants = vec![
+            observer_authority().with_max_security_class(M8SecurityClass::Public),
+            observer_authority().with_max_security_class(M8SecurityClass::Private),
+        ];
+        if reverse {
+            grants.reverse();
+        }
+        let (path, source, _, _, mut runtime) = observer_runtime_with_authorities(grants);
+        prepare_observable_runtime(&mut runtime);
+        let base = observer_policy(observer_source_ref(&path, &source)).with_label(
+            EvidenceSecurityLabel::new("opaque-base").with_class(M8SecurityClass::Public),
+        );
+        let before = runtime.export_observer_view(base.clone()).unwrap();
+        let actual = runtime
+            .export_observer_view(base.with_relation_label_override(
+                RELATION_NAME,
+                EvidenceSecurityLabel::new("default-class-is-private"),
+            ))
+            .unwrap();
+        let old_row = before.rows().redacted_subject("relation-lineage").unwrap();
+        let row = actual.rows().redacted_subject("relation-lineage").unwrap();
+        assert_eq!(row.label().security_class(), M8SecurityClass::Private);
+        assert_eq!(row.occurrence_id(), old_row.occurrence_id());
+        assert_eq!(row.dependency_ids(), old_row.dependency_ids());
+        assert_eq!(row.source_ref(), old_row.source_ref());
+        assert_eq!(row.redaction(), old_row.redaction());
+    }
+}
+
+#[test]
+fn proof_first_observer_empty_view_and_policy_diagnostics_preserve_base_authority() {
+    let (path, source, _, _, runtime) = observer_runtime_with_max(M8SecurityClass::Public);
+    let source_ref = observer_source_ref(&path, &source);
+    let base = observer_policy(source_ref.clone())
+        .with_label(EvidenceSecurityLabel::new("public-base").with_class(M8SecurityClass::Public));
+    let empty = runtime.export_observer_view(base.clone()).unwrap();
+    assert_eq!(format!("{:?}", empty.rows()), "M8ObserverRows { rows: [] }");
+    let valid_high = base.clone().with_relation_label_override(
+        RELATION_NAME,
+        EvidenceSecurityLabel::new("private-but-no-row"),
+    );
+    assert_eq!(
+        format!(
+            "{:?}",
+            runtime.export_observer_view(valid_high).unwrap().rows()
+        ),
+        "M8ObserverRows { rows: [] }"
+    );
+    let invalid_join = base.clone().with_relation_input_label(
+        RELATION_NAME,
+        EvidenceSecurityLabel::new("private-input-without-override"),
+    );
+    assert_eq!(
+        runtime
+            .export_observer_view(invalid_join)
+            .unwrap_err()
+            .primary()
+            .kind(),
+        M8ObserverDiagnosticKind::RelationLabelWouldWeakenInputJoin
+    );
+    let zero = base
+        .clone()
+        .with_retention(M8ObserverRetention::bounded("zero", 0));
+    assert_eq!(
+        runtime
+            .export_observer_view(zero.clone())
+            .unwrap_err()
+            .primary()
+            .kind(),
+        M8ObserverDiagnosticKind::MissingTypedPolicy
+    );
+    let missing_proof = M8ObserverPolicy::for_principal(OBSERVER)
+        .with_authority_ref(OBSERVER_AUTHORITY_REF)
+        .with_label(EvidenceSecurityLabel::new("base").with_class(M8SecurityClass::Public))
+        .with_retention(M8ObserverRetention::bounded("one", 1))
+        .with_source_ref(source_ref)
+        .with_reason_ref("reason-only");
+    assert_eq!(
+        runtime
+            .export_observer_view(missing_proof)
+            .unwrap_err()
+            .primary()
+            .kind(),
+        M8ObserverDiagnosticKind::MissingTypedPolicy
+    );
+    let (_, _, _, _, no_authority) = observer_runtime_with_authorities(vec![]);
+    for policy in [base, zero] {
+        assert_eq!(
+            no_authority
+                .export_observer_view(policy)
+                .unwrap_err()
+                .primary()
+                .kind(),
+            M8ObserverDiagnosticKind::MissingObserverAuthority
+        );
+    }
 }

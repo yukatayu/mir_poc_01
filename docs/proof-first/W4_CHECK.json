@@ -42591,7 +42591,8 @@
       "display": ":0",
       "model_evidence": "select strategy; require actual6Pro/max selection evidence on completed conversation",
       "next_status_after": "2026-09-28T02:43:50.592194+00:00",
-      "scope": "single read-only frozen current implementation review; no outer deadline or paid fallback"
+      "scope": "single read-only frozen current implementation review; no outer deadline or paid fallback",
+      "state": "completed/recovered; wrapper12829 and capture79472 exit0; CLI extraction not relied on"
     },
     "scope": "unchanged W1 finite model, no runtime label/address correspondence or W4/W6 closure",
     "model_ui": {
@@ -42628,6 +42629,64 @@
           }
         ]
       }
+    },
+    "recovery": {
+      "at": "2026-09-28T02:54:52.380051+00:00",
+      "session": "mir-w4-c-abort-address",
+      "source": "DOM_EVENT_LAST.json",
+      "identity": true,
+      "stop": false,
+      "completedAt": "2026-09-28T02:53:44.993Z",
+      "chars": 24509,
+      "sha256": "ded58635a8a2eeeb8fc7cc3977b10498fd52996134aee0a45abe11d6f95a68f6",
+      "model": "6 Pro Latest; maximum4/4 manually verified MODEL_UI.json",
+      "authority": "read-only advisory, not proof or signed acceptance"
+    },
+    "disposition": {
+      "at": "2026-09-28T02:57:17.367128+00:00",
+      "session": "mir-w4-c-abort-address",
+      "answer_sha256": "ded58635a8a2eeeb8fc7cc3977b10498fd52996134aee0a45abe11d6f95a68f6",
+      "full_read": {
+        "chars": 24509,
+        "parts": [
+          [
+            0,
+            15000
+          ],
+          [
+            15000,
+            24509
+          ]
+        ]
+      },
+      "decision": "finite AbortFlow/AddressFlow review dependency discharged for unchanged supplied cut; R09 source/M8 binding remains OPEN",
+      "accepted_after_local_inspection": [
+        "General theorem has same program/operators/static labels and fixed invocation; it does not compare private-input-specialized different literal programs. OwnerAssignment erasure_value_only confirms values alone do not preserve labels.",
+        "AbortFlow preserves successful prefix on later evaluator failure. No whole-program rollback or success-only trace publication is licensed.",
+        "AddressFlow assumes common resolver and coherent store/schema/label pullbacks; noninjective outcome mapping loses spelling provenance.",
+        "check_exact is relative to Safe, not every semantically noninterfering program. High read-to-self then low assignment is conservatively rejected.",
+        "Separate literal/initial range assumptions are needed for i64; intermediate overflow cannot be algebraically cancelled.",
+        "Completion is computed on full actual outcomes, not projected/retained outcomes; fixed invocation does not hide whether invocation happened.",
+        "Target presence/authorization/resource failure is excluded from these arithmetic-only list theorems and must not affect low suffix under an unsupported inference.",
+        "No need to add duplicate framework or finish W6 to recognize finite theorem. One-way checked-artifact admission may suffice for sound restricted consumer, if actually established."
+      ],
+      "direct_consumer_obligations": [
+        "actual source/core/parameters/labels/resolver/currentness binding",
+        "preserve public prefix state and actual outcome publication despite private suffix failure",
+        "actual partial-store and parameter failure mapping; no default substitution",
+        "initial/literal i64 range and checked intermediate arithmetic",
+        "actual release authority and physical observer resources separately",
+        "alias-coherent metadata and ordered multiplicity of writes",
+        "completion from full executed outcome list; any source-reference completion derivation must commute"
+      ],
+      "alternative": "mixed profile retained as candidate; public-expression-dependencies-only restriction loses demonstrated genuine private fallible work and does not close M8 binding or authority. No silent restriction adopted.",
+      "not_needed_now": [
+        "new choose implementation: actual M8 CheckedExpressionTree has no choose; do not claim this constructor supported",
+        "independent source-reference completion lemma unless consumer actually computes there"
+      ],
+      "verification": "sole main compared exact source definitions, fresh812-owned audit/3 false controls and current Rust evaluator; Oracle ran no compiler/tests",
+      "authority": "read-only advisor, not independent signer/owner trust anchor/Canon THM OBL phase acceptance",
+      "scope": "no W4-C/D/W6/alpha closure"
     }
   },
   "c_phase_docs_20260928": {
@@ -42639,5 +42698,701 @@
     "tool": 50751,
     "exit": 0,
     "result": "agent config PASS; Canon218; hierarchy800/800;1764reports"
+  },
+  "c_owner_partial_20260928": {
+    "at": "2026-09-28T03:02:17.373822+00:00",
+    "scope": "external unadopted OwnerPartial reuse bridge; no production model adoption or W4-C closure",
+    "directory": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-owner-partial",
+    "kernel": {
+      "at": "2026-09-28T02:57:41.321594+00:00",
+      "scope": "unadopted six general lemmas; total-on-read bridge, option-presence NI and single-owner frame/failure; no auth/trace/parser equivalence",
+      "results": [
+        {
+          "name": "OwnerPartial",
+          "command": [
+            "/home/codex/.elan/toolchains/leanprover--lean4---v4.29.1/bin/lean",
+            "--trust=0",
+            "-j1",
+            "OwnerPartial.lean"
+          ],
+          "exit_code": 0,
+          "expected": 0,
+          "qualified": true,
+          "source_sha256": "ceef600b377457c4e2d44a7033a29486705b9595c00e2048606a9a1872b94ad0",
+          "log_sha256": "6503aef27a26af6d3a396f9b98255853d2c129140c3a4d091677898c47ca044d"
+        },
+        {
+          "name": "OwnedAudit",
+          "command": [
+            "/home/codex/.elan/toolchains/leanprover--lean4---v4.29.1/bin/lean",
+            "--trust=0",
+            "-j1",
+            "OwnedAudit.lean"
+          ],
+          "exit_code": 0,
+          "expected": 0,
+          "qualified": true,
+          "source_sha256": "7a3b9eb8c8f4990475b597de206d263de6c9fd981f0e5e08a77833efe4bbe9fa",
+          "log_sha256": "72b5031937538ac7869ed5ee45002e0d866dc0b933ed4e4bd6cccc5582b17116"
+        },
+        {
+          "name": "ZeroDefault",
+          "command": [
+            "/home/codex/.elan/toolchains/leanprover--lean4---v4.29.1/bin/lean",
+            "--trust=0",
+            "-j1",
+            "ZeroDefault.lean"
+          ],
+          "exit_code": 1,
+          "expected": 1,
+          "qualified": true,
+          "source_sha256": "2318feb4fb13057ba5ee8391febdbe7818bbf6248e939495d80e6866742b6611",
+          "log_sha256": "50221b9e24a1a6662700f164d20ec1bb1d0ec7e8c42c5bb642acd9207826f6f2"
+        },
+        {
+          "name": "AlgebraicCancellation",
+          "command": [
+            "/home/codex/.elan/toolchains/leanprover--lean4---v4.29.1/bin/lean",
+            "--trust=0",
+            "-j1",
+            "AlgebraicCancellation.lean"
+          ],
+          "exit_code": 1,
+          "expected": 1,
+          "qualified": true,
+          "source_sha256": "ad388cc128b5c3f2d2eec12217d1d36bfb8d1e55bee55a96faae55b1d0fceaba",
+          "log_sha256": "43ea03e3904197bd2b23f3a21b5774f76dee48b6a31d7ac4eee46f86c810afb4"
+        },
+        {
+          "name": "PresenceValueOnly",
+          "command": [
+            "/home/codex/.elan/toolchains/leanprover--lean4---v4.29.1/bin/lean",
+            "--trust=0",
+            "-j1",
+            "PresenceValueOnly.lean"
+          ],
+          "exit_code": 1,
+          "expected": 1,
+          "qualified": true,
+          "source_sha256": "b4e5f7397507b0599ce7ea2d927d4b973dcf72dfa9e9343749d8755a726b6d82",
+          "log_sha256": "ce54f6900d64873bfc796ed7e38ef47e75bd93290bd241cef920064baef4eb4b"
+        }
+      ],
+      "qualified": true
+    },
+    "rust_initial": {
+      "at": "2026-09-28T02:57:06.368284+00:00",
+      "command": [
+        "cargo",
+        "test",
+        "--locked",
+        "--offline",
+        "-j",
+        "1",
+        "-p",
+        "mir-runtime",
+        "--test",
+        "m8_runtime_owner_queue",
+        "proof_first_owner_",
+        "--",
+        "--test-threads=1"
+      ],
+      "exit_code": 101,
+      "source_sha256": "47fd2b67fd27a3bfffb087d89a95a04d8951b4cc383f422735f582d132e92e6b",
+      "log_sha256": "714fbb90436cc493b5eb55cd6bbf38667040d38ac94658dce1b0184477395721",
+      "target": "existing default target reused; no mount assumed",
+      "scope": "actual M7/M8 local source/evaluation boundary, no IFC or network claim"
+    },
+    "rust_final": {
+      "at": "2026-09-28T02:59:21.391379+00:00",
+      "command": [
+        "cargo",
+        "test",
+        "--locked",
+        "--offline",
+        "-j",
+        "1",
+        "-p",
+        "mir-runtime",
+        "--test",
+        "m8_runtime_owner_queue",
+        "proof_first_owner_",
+        "--",
+        "--test-threads=1"
+      ],
+      "exit_code": 0,
+      "source_sha256": "b05a005d050289f80c0f3f7c4f206a2dc12407422d24147ea0beae8ecfa21d3a",
+      "test_sha256": "6c3eabb6ca1ecc8dc45e12b2d66de105f2e107de607e810aafd4dfd641967731",
+      "log_sha256": "dd68ddb1132ffb3af8245013c866d624d9227307396272a8879323c34728349f"
+    },
+    "mutant": {
+      "at": "2026-09-28T02:59:30.030718+00:00",
+      "command": [
+        "cargo",
+        "test",
+        "--locked",
+        "--offline",
+        "-j",
+        "1",
+        "-p",
+        "mir-runtime",
+        "--test",
+        "m8_runtime_owner_queue",
+        "proof_first_owner_",
+        "--",
+        "--test-threads=1"
+      ],
+      "exit_code": 101,
+      "source_sha256": "dce6971bab9542c9fa02d923cabf81ba2c1223fb850e5c9803a609a30d7c53db",
+      "test_sha256": "6c3eabb6ca1ecc8dc45e12b2d66de105f2e107de607e810aafd4dfd641967731",
+      "log_sha256": "2d946d8aa8da88eaeeb42c07501790827c3011878d1dcba56265fe0c22dfb62f"
+    },
+    "qualification": {
+      "at": "2026-09-28T03:00:34.130655+00:00",
+      "qualified": true,
+      "failure": "actual missing read default0 produces written hp=-10; expected typed failure assertion fails",
+      "harness_error": "initial driver searched expect instead of unwrap_err and exited1 after mutation already failed as intended; finally restored exact source, no second mutation run",
+      "restored_sha256": "b05a005d050289f80c0f3f7c4f206a2dc12407422d24147ea0beae8ecfa21d3a"
+    },
+    "failure_interpretation": "entity absent is earlier enqueue StaleMembership; RHS field absent in live entity is RouteUnavailable at serve, no write. Initial test conflated them; corrected tests preserve entity independently.",
+    "remaining": "new bridge Oracle review, source/current-label/auth/entry composition, no general Rust parser/evaluator theorem",
+    "restored": {
+      "at": "2026-09-28T03:00:43.127532+00:00",
+      "command": [
+        "cargo",
+        "test",
+        "--locked",
+        "--offline",
+        "-j",
+        "1",
+        "-p",
+        "mir-runtime",
+        "--test",
+        "m8_runtime_owner_queue",
+        "proof_first_owner_",
+        "--",
+        "--test-threads=1"
+      ],
+      "exit_code": 0,
+      "source_sha256": "b05a005d050289f80c0f3f7c4f206a2dc12407422d24147ea0beae8ecfa21d3a",
+      "test_sha256": "6c3eabb6ca1ecc8dc45e12b2d66de105f2e107de607e810aafd4dfd641967731",
+      "log_sha256": "ff062d23ee0667396c484a50db20cd0c2cce6f260ba09f924b62ec2b12050130"
+    },
+    "docs": {
+      "command": "make docs",
+      "tool": 99960,
+      "exit_code": 0,
+      "log_sha256": "2a31cd1458be17326242567ff65f1836d6e66b1fc64aba4bfee461c55c4b8bcd",
+      "scope": "owner-expression checkpoint; later observer tests/receipts not final-validated"
+    }
+  },
+  "c_observer_label_20260928": {
+    "at": "2026-09-28T03:10:57.550497+00:00",
+    "state": "actual2RED captured; external five-lemma theory/proposed Rust patch, not production adoption; Oracle running",
+    "red": {
+      "at": "2026-09-28T03:05:19.143824+00:00",
+      "command": [
+        "cargo",
+        "test",
+        "--locked",
+        "--offline",
+        "-j",
+        "1",
+        "-p",
+        "mir-runtime",
+        "--test",
+        "m8_runtime_observer",
+        "proof_first_observer_",
+        "--",
+        "--test-threads=1"
+      ],
+      "exit_code": 101,
+      "source_sha256": "e0cf035a8090bd5eb05f6474e0b1dbe59dc175a4de7b10672531fda9ba09a867",
+      "test_sha256": "0cbea350513df86e71ce7e71acc07cb0c1c7f51372886623bda8979e8169a093",
+      "log_sha256": "18d11221f5323f4ef9a7051a9b20b19b4689c83a632b40500b8bdf2ae7b387d0"
+    },
+    "kernel": {
+      "at": "2026-09-28T03:06:17.176983+00:00",
+      "rows": [
+        {
+          "command": [
+            "/home/codex/.elan/toolchains/leanprover--lean4---v4.29.1/bin/lean",
+            "--trust=0",
+            "-j1",
+            "-o",
+            "MirroreaProofFirstGeneralLabels.olean",
+            "MirroreaProofFirstGeneralLabels.lean"
+          ],
+          "exit": 0,
+          "sha256": "e90dd52298455f6e6c45f012bf29115d8529308fe67afeed33f705b4f2b28279"
+        },
+        {
+          "command": [
+            "/home/codex/.elan/toolchains/leanprover--lean4---v4.29.1/bin/lean",
+            "--trust=0",
+            "-j1",
+            "-o",
+            "ObserverLabelProof.olean",
+            "ObserverLabelProof.lean"
+          ],
+          "exit": 0,
+          "sha256": "faeebd9cdd94ebee0c6108c5710ad17cb244b626fa82d475bd0e9cc1151fac39"
+        }
+      ]
+    },
+    "audit": {
+      "at": "2026-09-28T03:08:05.054662+00:00",
+      "command": [
+        "/home/codex/.elan/toolchains/leanprover--lean4---v4.29.1/bin/lean",
+        "--trust=0",
+        "-j1",
+        "OwnedAudit.lean"
+      ],
+      "exit": 0,
+      "sha256": "5277a85b50250609f654c2af38629bea8b49206646c9a030aa17334f7e6b1341",
+      "prior_error": "wrongcwd source not found, no kernel success inferred"
+    },
+    "owned_declarations": 738,
+    "oracle": {
+      "at": "2026-09-28T03:09:39.034524+00:00",
+      "session": "mir-w4-c-observer-label",
+      "pid": 4080515,
+      "question_sha256": "afb790a22ec79deb18ee1b698bf12bff91c333e57de43774749e85ae30927161",
+      "manifest_sha256": "39625173050fa8e3b0159bc5acefe133313d3c30211e97a17c72b91d241a5877",
+      "display": ":0",
+      "model_evidence": "select strategy; require actual6Pro/max selection evidence on completed conversation",
+      "next_status_after": "2026-09-28T03:12:39.034524+00:00",
+      "scope": "single read-only frozen current implementation review; no outer deadline or paid fallback"
+    },
+    "capture_tool": 21087,
+    "wrapper_tool": 96428,
+    "prerequisites": "R09/OB04 supplied-label/clearance consistency only; authentic source metadata, current observer grant and full IFC separate",
+    "candidate": "A conservatively join generic relation row declarations and bind all actual returned row classes to same matching grant; B reject above-base overrides",
+    "red_extended": {
+      "at": "2026-09-28T03:12:59.207060+00:00",
+      "command": [
+        "cargo",
+        "test",
+        "--locked",
+        "--offline",
+        "-j",
+        "1",
+        "-p",
+        "mir-runtime",
+        "--test",
+        "m8_runtime_observer",
+        "proof_first_observer_",
+        "--",
+        "--test-threads=1"
+      ],
+      "exit_code": 101,
+      "source_sha256": "e0cf035a8090bd5eb05f6474e0b1dbe59dc175a4de7b10672531fda9ba09a867",
+      "test_sha256": "f556af6c3324bdda59bcf635f912b90c223198ac39595057196ceb0833b640e9",
+      "log_sha256": "bcb7fae74d2a300ac306d69d6c7dd4bc47f8e2a5b307fbe3ed7d48ee3ffb648b",
+      "scope": "after frozen design packet; expected3fail and retained-only public positive pass"
+    },
+    "existing_baseline": {
+      "at": "2026-09-28T03:15:11.078042+00:00",
+      "command": [
+        "cargo",
+        "test",
+        "--locked",
+        "--offline",
+        "-j",
+        "1",
+        "-p",
+        "mir-runtime",
+        "--test",
+        "m8_runtime_observer",
+        "--",
+        "--skip",
+        "proof_first_observer_",
+        "--test-threads=1"
+      ],
+      "exit_code": 0,
+      "reason": "new test seed helper generalization must preserve accepted four observer controls before candidate repair",
+      "log_sha256": "4753595801d9122f3e7639f666604584f972837ff80f4a8f47ed09e53afaca17"
+    },
+    "entry_audit": {
+      "at": "2026-09-28T03:14:03.962678+00:00",
+      "scope": "exact narrow observer production entry/constructor/egress audit, no whole-runtime invariant",
+      "source_sha256": "e0cf035a8090bd5eb05f6474e0b1dbe59dc175a4de7b10672531fda9ba09a867",
+      "entries": [
+        {
+          "entry": "M8ObserverRuntime::from_admitted",
+          "facts": "public trusted setup uses pre-admitted instance and authority inventory; no source/authentic metadata inference"
+        },
+        {
+          "entry": "M8ObserverRuntime::from_local_session",
+          "facts": "crate-private existing M10 bridge, uses actual local runtime clone and passed grant vector"
+        },
+        {
+          "entry": "export_observer_view",
+          "facts": "only row-producing external entry; &self, ordered authority/policy/input checks, no semantic writes"
+        },
+        {
+          "entry": "redacted_rows / redacted_row",
+          "facts": "private single row construction path; latest observations, bound retention, rows private immutable fields"
+        },
+        {
+          "entry": "M8ObserverView/Rows/Row getters and Clone",
+          "facts": "read-only references or exact clone, no mutating/relabel/serialize entry found in this module"
+        },
+        {
+          "entry": "policy builders",
+          "facts": "caller may supply arbitrary labels; inference/authenticity absent, intentionally outside bounded propagation theorem"
+        }
+      ],
+      "callers": "all production calls located in m10_reference_system.rs at7356/8015/9379; exact bodies read. They supply no relation input/override fields. One negative wrong-ref diagnostic; normal owner and patch-init exports remain separately bound to M9 setup. No claim that M8 itself checks current M9 revocation/expiry.",
+      "proposal_not_adopted": "class arithmetic and one actual grant only; diagnostic/resource/timing/source presence channels not proven",
+      "rust_tests_after_packet": {
+        "at": "2026-09-28T03:12:59.207060+00:00",
+        "command": [
+          "cargo",
+          "test",
+          "--locked",
+          "--offline",
+          "-j",
+          "1",
+          "-p",
+          "mir-runtime",
+          "--test",
+          "m8_runtime_observer",
+          "proof_first_observer_",
+          "--",
+          "--test-threads=1"
+        ],
+        "exit_code": 101,
+        "source_sha256": "e0cf035a8090bd5eb05f6474e0b1dbe59dc175a4de7b10672531fda9ba09a867",
+        "test_sha256": "f556af6c3324bdda59bcf635f912b90c223198ac39595057196ceb0833b640e9",
+        "log_sha256": "bcb7fae74d2a300ac306d69d6c7dd4bc47f8e2a5b307fbe3ed7d48ee3ffb648b",
+        "scope": "after frozen design packet; expected3fail and retained-only public positive pass"
+      }
+    },
+    "model_ui": {
+      "at": "2026-09-28T03:12:12.634Z",
+      "opened": {
+        "found": true,
+        "before": "Pro"
+      },
+      "state": {
+        "modelButton": "Thinking effort",
+        "menus": [
+          "6\nPro\nConsumes usage limits faster\nPro, 5 of 5.\nUse Left and Right arrow keys to adjust power\nLocked, opens access options\nLatest\nGPT-5.6 Sol\nGPT-5.5\nLeaving on October 14"
+        ],
+        "radios": [
+          {
+            "text": "Latest",
+            "checked": "true"
+          },
+          {
+            "text": "GPT-5.6 Sol",
+            "checked": "false"
+          },
+          {
+            "text": "GPT-5.5\nLeaving on October 14",
+            "checked": "false"
+          }
+        ],
+        "sliders": [
+          {
+            "min": "0",
+            "max": "4",
+            "now": "4",
+            "text": null
+          }
+        ]
+      }
+    },
+    "final_delta": {
+      "at": "2026-09-28T03:35:25.550126+00:00",
+      "status": "bounded supplied-label repair checked/reviewed; R09 and C remain open",
+      "source_sha256": "896394a1dc5585fec541b48ce0950c627bd3879ae81df5f37382acbc3ce8545c",
+      "test_sha256": "089edbcfe1f3e9c69ee759560b6897a1b29d5edfe184b622a9ddb435c04afebb",
+      "proof_sha256": "3e3fefa3b302cfb392381b10f9930ff0612f47189eab4eb74f2f8395f028ad73",
+      "receipts": {
+        "CLASS_ALGEBRA": {
+          "at": "2026-09-28T03:27:01.252246+00:00",
+          "command": [
+            "cargo",
+            "test",
+            "--locked",
+            "--offline",
+            "-j",
+            "1",
+            "-p",
+            "mir-runtime",
+            "--lib",
+            "proof_first_label_algebra_tests",
+            "--",
+            "--test-threads=1"
+          ],
+          "exit": 0,
+          "log_sha256": "adeeb063e7e7a5ffa520c3cff4b61eb5b2c17aa6ffb7a8f9e56bf3377d467e92"
+        },
+        "M10_OBSERVER": {
+          "at": "2026-09-28T03:27:03.213231+00:00",
+          "command": [
+            "cargo",
+            "test",
+            "--locked",
+            "--offline",
+            "-j",
+            "1",
+            "-p",
+            "mir-runtime",
+            "--test",
+            "m10_conformance",
+            "scn05_06_07_runtime_rows_require_receipt_backed_transitions_and_observer_publication_origin",
+            "--",
+            "--exact",
+            "--test-threads=1"
+          ],
+          "exit": 0,
+          "log_sha256": "49dca0d36ec2ce615578e8d0dfa14917539c21980a9fd83bc6c258d3418c92a4"
+        },
+        "MUTANT_SPLIT_GRANTS": {
+          "at": "2026-09-28T03:32:04.075855+00:00",
+          "command": [
+            "cargo",
+            "test",
+            "--locked",
+            "--offline",
+            "-j",
+            "1",
+            "-p",
+            "mir-runtime",
+            "--test",
+            "m8_runtime_observer",
+            "proof_first_observer_identity_and_clearance_cannot_use_different_grants",
+            "--",
+            "--test-threads=1"
+          ],
+          "exit": 101,
+          "source_sha256": "5b4935454be277cd495c6cb68f75461e5b6a76d290d0117be16ea3af69c00e82",
+          "log_sha256": "bccad12f27ad8cc47aeb02ab224d20dafd9d278d385dc00d3bd2d9ec55b0345a"
+        },
+        "MUTANT_OMIT_OUTPUT_CHECK": {
+          "at": "2026-09-28T03:32:13.205205+00:00",
+          "command": [
+            "cargo",
+            "test",
+            "--locked",
+            "--offline",
+            "-j",
+            "1",
+            "-p",
+            "mir-runtime",
+            "--test",
+            "m8_runtime_observer",
+            "proof_first_observer_effective_relation_label_requires_matching_clearance",
+            "--",
+            "--test-threads=1"
+          ],
+          "exit": 101,
+          "source_sha256": "18e16d7f830a2a6c5ae22b2150d6adeb1396ecd65f8fe8f7ee0e5278ffc924e6",
+          "log_sha256": "b89248e4ec2d7845f8b20898f054cf9711f71ccce834c257169f5541c423369a"
+        },
+        "MUTANT_RESTORE": {
+          "at": "2026-09-28T03:32:13.205775+00:00",
+          "restored_sha256": "896394a1dc5585fec541b48ce0950c627bd3879ae81df5f37382acbc3ce8545c"
+        },
+        "RESTORED": {
+          "at": "2026-09-28T03:32:22.139117+00:00",
+          "command": [
+            "cargo",
+            "test",
+            "--locked",
+            "--offline",
+            "-j",
+            "1",
+            "-p",
+            "mir-runtime",
+            "--test",
+            "m8_runtime_observer",
+            "--",
+            "--test-threads=1"
+          ],
+          "exit": 0,
+          "source_sha256": "896394a1dc5585fec541b48ce0950c627bd3879ae81df5f37382acbc3ce8545c",
+          "log_sha256": "e0f21ed3c21c80cb74bdadd61dfc2a46f8ab959bc53f0eb6df726a7cb5c55138"
+        },
+        "MIRRORED_KERNEL": {
+          "at": "2026-09-28T03:33:55.801770+00:00",
+          "rows": [
+            {
+              "command": [
+                "/home/codex/.elan/toolchains/leanprover--lean4---v4.29.1/bin/lean",
+                "--trust=0",
+                "-j1",
+                "-o",
+                "MirroreaProofFirstObserverLabels.olean",
+                "MirroreaProofFirstObserverLabels.lean"
+              ],
+              "exit": 0,
+              "source_sha256": "3e3fefa3b302cfb392381b10f9930ff0612f47189eab4eb74f2f8395f028ad73",
+              "log_sha256": "6b25d3174b92923404d13516957a8cb1fda465ddbed3fb3db6546a759c36f85f"
+            },
+            {
+              "command": [
+                "/home/codex/.elan/toolchains/leanprover--lean4---v4.29.1/bin/lean",
+                "--trust=0",
+                "-j1",
+                "-o",
+                "MirroredAudit.olean",
+                "MirroredAudit.lean"
+              ],
+              "exit": 0,
+              "source_sha256": "7a4715e7694cc335397fa34be4268ae7df3be7311ede9062617a071c367517d8",
+              "log_sha256": "14f5a93a023762a3cba2308e05355a58c8c0ff09e783247df422c064a9bb609f"
+            }
+          ]
+        }
+      },
+      "design_review": {
+        "at": "2026-09-28T03:32:51.538115+00:00",
+        "review_receipt": {
+          "at": "2026-09-28T03:21:06.242693+00:00",
+          "session": "mir-w4-c-observer-label",
+          "identity": true,
+          "stop": false,
+          "completedAt": "2026-09-28T03:20:36.783Z",
+          "chars": 23488,
+          "sha256": "292861db3ea54578066d6aba556ab36f489ac5e3528f31316ecd8a71152a3849",
+          "model": "6 Pro Latest/max4of4 verified MODEL_UI.json",
+          "authority": "read-only advice, no signature/Canon acceptance/executed tests"
+        },
+        "accepted": [
+          "Same actual matching grant must cover base and every returned row; no pooled identity/clearance.",
+          "Policy base is not an upper bound on returned row labels; preserve row labels at egress.",
+          "Actual retention is constructed-order prefix, not Passive.feed event retention.",
+          "Add arbitrary grant-list exactness, empty/no-binding, retained-row coverage and finite concrete class instance.",
+          "Preserve per-relation input nonweakening independently of aggregate classification."
+        ],
+        "verified_locally": [
+          "Ten general lemmas and concrete finite class instance kernel-checked; owned audit788, standard axioms only.",
+          "Actual Rust tests cover sufficient/insufficient clearance, retention, wrong-bound grants, empty output and diagnostic order.",
+          "Only three production M10 call sites, none supplies relation overrides/input labels. Separate QUIC observer route not established by this repair."
+        ],
+        "limits": [
+          "Input labels supplied by trusted caller; no authenticated source-label inference.",
+          "Grant epoch not checked here; no freshness/revocation proof.",
+          "Row presence/error/timing channels and resource isolation not proved.",
+          "Unknown relation constraints may conservatively overclassify latest row. Final map values only, no update history.",
+          "No general Rust compiler correctness or W4-C/R09 closure."
+        ],
+        "pending": "Final narrow review of the added theorem/test/concrete implementation delta; no signed acceptance."
+      },
+      "final_review": {
+        "at": "2026-09-28T03:34:48.042735+00:00",
+        "session": "mir-w4-c-observer-final",
+        "pid": 4083798,
+        "question_sha256": "185cfb8a0523ab5f7385ef21643f53a063e4ac30d69ca0e53a435faf54dac8a3",
+        "manifest_sha256": "065abb59d24ca58eca0e5bc98d846acf7eb9f080d77226fe2cd36bc9b7d94659",
+        "display": ":0",
+        "model_evidence": "select strategy; require actual6Pro/max selection evidence on completed conversation",
+        "next_status_after": "2026-09-28T03:37:48.042735+00:00",
+        "scope": "single read-only frozen current implementation review; no outer deadline or paid fallback"
+      },
+      "library_regression": {
+        "at": "2026-09-28T03:37:28.488562+00:00",
+        "command": [
+          "cargo",
+          "test",
+          "--locked",
+          "--offline",
+          "-j",
+          "1",
+          "-p",
+          "mir-runtime",
+          "--lib",
+          "--",
+          "--test-threads=1"
+        ],
+        "exit": 0,
+        "log_sha256": "1931256b9bc39d0602ed1c94bb360759efc9c80db51989962a5e60c92931cec4"
+      },
+      "final_review_disposition": {
+        "at": "2026-09-28T03:49:18.901153+00:00",
+        "review": {
+          "session": "mir-w4-c-observer-final",
+          "at": "2026-09-28T03:42:40.956Z",
+          "completedAt": "2026-09-28T03:43:14.294Z",
+          "identity": true,
+          "stop": false,
+          "chars": 7904,
+          "sha256": "2e27d2e6317540058b3f49e27fcbb283d7323b2337b8aa92157377c1c40a13f4",
+          "blocks": 1
+        },
+        "advisory_only": true,
+        "findings": [
+          {
+            "finding": "one actual matching grant covers same returned vector; no bounded defect found",
+            "disposition": "checked locally against exact restored code; limited supplied-metadata contract only"
+          },
+          {
+            "finding": "all-map entries and exact retained vector tests weak",
+            "disposition": "added unknown-key before/after known relation and exact single-row assertion; first-entry-only and extra-public-row mutants fail; restored12pass"
+          },
+          {
+            "finding": "generic diamond pooling countermodel unreachable for rowClass output",
+            "disposition": "clarify generic admitRows discriminator, not actual M8 row-construction mutation"
+          },
+          {
+            "finding": "rows_exact not whole-export exactness",
+            "disposition": "independent typed-policy/nonweakening prerequisites remain; zero-limit counterexample already actual tested"
+          },
+          {
+            "finding": "older entry audit and receipts incompletely bound",
+            "disposition": "new final-entry hash binding, per-command full Rust/Cargo manifest before/after, fresh four-module Lean import build and audited artifact hashes; prior receipts retained historically"
+          },
+          {
+            "finding": "release by base policy / raw trace / epoch / source labels outside proof",
+            "disposition": "retain OPEN; no IFC, isolation or current-authority claim"
+          }
+        ],
+        "not_adopted": "Oracle authority to reserve all unknown-key policy decisions; no new owner restriction is inferred; changes affecting explicit privacy/L0/public API still owner-reserved",
+        "review_execution": "Oracle did not run commands or supply signed review; main ran all actual checks"
+      },
+      "final_receipts": {
+        "REVIEW_FINAL.json": {
+          "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-observer-label/REVIEW_FINAL.json",
+          "sha256": "4b43756ccec562d7a85eca828ae680c0f6e3061570cd009d671b98bfc4c80ea1"
+        },
+        "REVIEW_CLASS.json": {
+          "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-observer-label/REVIEW_CLASS.json",
+          "sha256": "1484dba00a5bfa412900d886b35a0ec219970112e7d27eb0adbb680f709dd50b"
+        },
+        "REVIEW_M10.json": {
+          "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-observer-label/REVIEW_M10.json",
+          "sha256": "6e1263861045299158cd9dedb6946a5e3ff453ee93b6661155627cc5e566f2d0"
+        },
+        "REVIEW_MUTANT_FIRST_MAP.json": {
+          "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-observer-label/REVIEW_MUTANT_FIRST_MAP.json",
+          "sha256": "7f337e7302428014ad9c1eb9b4ea0d40cc1475e62e6af6659eb7929d41332ca8"
+        },
+        "REVIEW_MUTANT_EXTRA_LOW_ROW.json": {
+          "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-observer-label/REVIEW_MUTANT_EXTRA_LOW_ROW.json",
+          "sha256": "7ba8327f024500b47a43d29c04e072066bc4e7c1a438ccfb1348026df4d888b5"
+        },
+        "REVIEW_RESTORE.json": {
+          "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-observer-label/REVIEW_RESTORE.json",
+          "sha256": "1d6cf8da8d6d2cf97a1373eff84cbe43417a80ba10136abc5df869ae21e32986"
+        },
+        "FINAL_ENTRY_AUDIT.json": {
+          "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-observer-label/FINAL_ENTRY_AUDIT.json",
+          "sha256": "a31614fd7f77c139829302003a62a11d589d3438d4fd322d4de01f2449ad4235"
+        },
+        "DOCS.json": {
+          "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-observer-label/DOCS.json",
+          "sha256": "25dfe54edda011dcc7cc26585f8fad628c9cd45d30ed7df9b405bb1d086e81ed"
+        },
+        "final-kernel/RESULT.json": {
+          "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-observer-label/final-kernel/RESULT.json",
+          "sha256": "0180f96b50e3aa69932f62893b676219176ec99c9864b93c83f5af93c8b95eb8"
+        }
+      },
+      "final_tests": "12 integration,1 concrete-class,1 focused M10 pass; original full412 library regression unchanged production; two additional runtime-failing mutants; source/Cargo/test manifests unchanged during each command"
+    }
   }
 }

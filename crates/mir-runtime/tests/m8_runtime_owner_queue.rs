@@ -621,3 +621,161 @@ fn replay_of_same_checked_artifact_seed_and_request_log_is_exactly_deterministic
         vec![None, None, Some(M8DeclaredFailure::MissingCapability)]
     );
 }
+
+// W4-C expression boundary: actual source -> checked Core -> M8 owner service.
+// These local tests do not establish I3 transport, capture labels, or secrecy.
+#[test]
+fn proof_first_owner_partial_reads_and_checked_intermediates() {
+    for (hp, atk, expected) in [
+        (Some(100), Some(10), Some(90)),
+        (None, Some(10), None),
+        (Some(100), None, None),
+        (Some(i64::MIN), Some(1), None),
+    ] {
+        let (_, _, instance) = checked_runtime_instance("m7_owner_only_no_residuals.mir");
+        // Keep both entities live independently of the RHS field's presence.
+        // An entirely absent target is rejected earlier, at enqueue.
+        let mut seed = M8ExecutionSeed::new()
+            .with_int(M8StateKey::indexed_field("player", "target", "atk"), 77)
+            .with_int(M8StateKey::indexed_field("player", "self", "hp"), 88)
+            .with_authority_state(owner_authority_state());
+        if let Some(value) = hp {
+            seed = seed.with_int(hp_key(), value);
+        }
+        if let Some(value) = atk {
+            seed = seed.with_int(atk_key(), value);
+        }
+        let mut runtime = instance.into_execution(seed);
+        let before = runtime.snapshot();
+        runtime
+            .try_enqueue(attack_request(valid_authority_use()))
+            .unwrap();
+        match expected {
+            Some(value) => {
+                let actual = runtime.serve_next_owner("S").unwrap();
+                assert_eq!(actual.written_int(&hp_key()), Some(value));
+                assert_eq!(runtime.snapshot().int(&hp_key()), Some(value));
+            }
+            None => {
+                let failure = runtime.serve_next_owner("S").unwrap_err();
+                assert_eq!(
+                    failure.primary().kind(),
+                    M8ServeDiagnosticKind::DeclaredFailure(M8DeclaredFailure::RouteUnavailable)
+                );
+                assert_eq!(runtime.snapshot(), before);
+                assert!(
+                    !runtime
+                        .trace()
+                        .kinds()
+                        .contains(&M8QueueTraceKind::OwnerWrite)
+                );
+            }
+        }
+        assert_eq!(runtime.snapshot().int(&atk_key()), atk);
+    }
+}
+
+#[test]
+fn proof_first_owner_parameter_lookup_and_intermediate_overflow() {
+    let (path, original) = load_surface_fixture("m7_owner_only_no_residuals.mir");
+    let source = original
+        .replace(
+            "attack(target: Player)",
+            "attack(target: Player, delta: Int)",
+        )
+        .replace(
+            "player[target].hp - player[self].atk",
+            "player[target].hp + delta - delta",
+        );
+    for (hp, argument, expected) in [
+        (3, Some("2"), Some(3)),
+        (3, None, None),
+        (3, Some("not-an-integer"), None),
+        (3, Some("9223372036854775808"), None),
+        (i64::MAX, Some("1"), None),
+    ] {
+        let checked =
+            check_and_elaborate_surface_v0(FixtureSource::new(path.clone(), source.clone()))
+                .expect("ordinary parameter source must produce a checked arithmetic tree");
+        let admission = M8RuntimeAdmission::new(checked.program_identity().clone());
+        let instance = M8Runtime::default().admit(checked, admission).unwrap();
+        let mut runtime = instance.into_execution(
+            M8ExecutionSeed::new()
+                .with_int(hp_key(), hp)
+                .with_int(atk_key(), 99)
+                .with_authority_state(owner_authority_state()),
+        );
+        let before = runtime.snapshot();
+        let mut request = attack_request(valid_authority_use());
+        if let Some(argument) = argument {
+            request = request.with_argument("delta", argument);
+        }
+        runtime.try_enqueue(request).unwrap();
+        match expected {
+            Some(value) => {
+                let actual = runtime.serve_next_owner("S").unwrap();
+                assert_eq!(actual.written_int(&hp_key()), Some(value));
+                assert_eq!(actual.read_int(&hp_key()), Some(hp));
+            }
+            None => {
+                let failure = runtime.serve_next_owner("S").unwrap_err();
+                assert_eq!(
+                    failure.primary().kind(),
+                    M8ServeDiagnosticKind::DeclaredFailure(M8DeclaredFailure::RouteUnavailable)
+                );
+                assert_eq!(runtime.snapshot(), before);
+                assert!(
+                    !runtime
+                        .trace()
+                        .kinds()
+                        .contains(&M8QueueTraceKind::OwnerWrite)
+                );
+            }
+        }
+        assert_eq!(runtime.snapshot().int(&atk_key()), Some(99));
+    }
+}
+
+#[test]
+fn proof_first_owner_aliases_share_one_cell_and_keep_each_write() {
+    let (path, original) = load_surface_fixture("m7_owner_only_no_residuals.mir");
+    let source = original
+        .replace(
+            "attack(target: Player)",
+            "attack(target: Player, other: Player)",
+        )
+        .replace(
+            "player[target].hp - player[self].atk",
+            "player[target].hp + player[other].hp",
+        );
+    let checked = check_and_elaborate_surface_v0(FixtureSource::new(path, source))
+        .expect("two ordinary source names are checked before concrete argument resolution");
+    let admission = M8RuntimeAdmission::new(checked.program_identity().clone());
+    let instance = M8Runtime::default().admit(checked, admission).unwrap();
+    let mut runtime = execution(instance);
+    for expected in [200, 400] {
+        let occurrence = runtime
+            .try_enqueue(attack_request(valid_authority_use()).with_argument("other", "target"))
+            .unwrap();
+        let actual = runtime.serve_next_owner("S").unwrap();
+        assert_eq!(actual.read_int(&hp_key()), Some(expected / 2));
+        assert_eq!(actual.written_int(&hp_key()), Some(expected));
+        let write = trace_entry_for(
+            runtime.trace(),
+            M8QueueTraceKind::OwnerWrite,
+            occurrence.id(),
+        );
+        assert_eq!(write.written_int(&hp_key()), Some(expected));
+    }
+    let values: Vec<_> = runtime
+        .trace()
+        .entries()
+        .iter()
+        .filter(|entry| entry.kind() == M8QueueTraceKind::OwnerWrite)
+        .map(|entry| entry.written_int(&hp_key()))
+        .collect();
+    assert_eq!(values, vec![Some(200), Some(400)]);
+    assert_eq!(runtime.snapshot().int(&hp_key()), Some(400));
+    assert_eq!(runtime.snapshot().int(&atk_key()), Some(10));
+    assert_monotone_trace_dag(runtime.trace());
+}

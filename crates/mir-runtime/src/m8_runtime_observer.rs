@@ -200,6 +200,19 @@ impl M8ObserverPolicy {
         self
     }
 
+    // The current generic row selects one latest relation observation without a
+    // relation name. Classify it using every supplied constraint conservatively.
+    fn effective_relation_label(&self) -> EvidenceSecurityLabel {
+        let class = self
+            .relation_label_overrides
+            .values()
+            .chain(self.relation_input_labels.values())
+            .rfold(self.label.security_class(), |joined, label| {
+                label.security_class().join(joined)
+            });
+        self.label.clone().with_class(class)
+    }
+
     pub fn observer_principal(&self) -> &str {
         &self.observer_principal
     }
@@ -488,6 +501,8 @@ pub struct M8ObserverView {
 }
 
 impl M8ObserverView {
+    /// The requested base policy is not an upper bound on returned row classes.
+    /// Consumers must retain each row's effective label when forwarding it.
     pub fn policy(&self) -> &M8ObserverPolicy {
         &self.policy
     }
@@ -610,10 +625,23 @@ impl M8ObserverRuntime {
                 M8ObserverDiagnosticKind::RelationLabelWouldWeakenInputJoin,
             ));
         }
-        Ok(M8ObserverView {
-            rows: self.redacted_rows(&policy),
-            policy,
-        })
+        let rows = self.redacted_rows(&policy);
+        // One matching grant covers this actual output. Independent grants must
+        // not be combined across identity/reference and clearance checks.
+        if !self.observer_authorities.iter().any(|authority| {
+            authority.admits(&policy)
+                && rows.rows.iter().all(|row| {
+                    authority
+                        .max_security_class
+                        .is_at_least(row.label.security_class())
+                })
+        }) {
+            return Err(M8ObserverDiagnostics::one(
+                &policy,
+                M8ObserverDiagnosticKind::MissingObserverAuthority,
+            ));
+        }
+        Ok(M8ObserverView { rows, policy })
     }
 
     fn redacted_rows(&self, policy: &M8ObserverPolicy) -> M8ObserverRows {
@@ -679,7 +707,11 @@ fn redacted_row(
         occurrence_id: Some(observation.node_id),
         dependency_ids: observation.dependencies,
         source_ref: observation.source_ref,
-        label: policy.label.clone(),
+        label: if kind == M8ObserverRowKind::RelationLineage {
+            policy.effective_relation_label()
+        } else {
+            policy.label.clone()
+        },
         redaction: policy.redaction.clone(),
     }
 }
@@ -695,4 +727,35 @@ fn redacted_designated_row(
         policy,
         observation,
     )
+}
+
+#[cfg(test)]
+mod proof_first_label_algebra_tests {
+    use super::M8SecurityClass::{self, Private, Public, Restricted};
+
+    #[test]
+    fn concrete_three_class_algebra_matches_the_proved_order() {
+        let classes = [Public, Restricted, Private];
+        let expected_join = [
+            [Public, Restricted, Private],
+            [Restricted, Restricted, Private],
+            [Private, Private, Private],
+        ];
+        for (a_index, a) in classes.iter().copied().enumerate() {
+            for (b_index, b) in classes.iter().copied().enumerate() {
+                assert_eq!(a.join(b), expected_join[a_index][b_index]);
+                assert_eq!(b.is_at_least(a), a_index <= b_index);
+                for cap in classes {
+                    assert_eq!(
+                        cap.is_at_least(a.join(b)),
+                        cap.is_at_least(a) && cap.is_at_least(b)
+                    );
+                }
+            }
+        }
+        assert_eq!(
+            super::EvidenceSecurityLabel::new("not-a-public-grant").security_class(),
+            M8SecurityClass::Private
+        );
+    }
 }

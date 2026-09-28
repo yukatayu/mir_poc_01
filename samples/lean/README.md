@@ -94,7 +94,7 @@ names = ["Support", "CurrentUse", "CurrentUseReview", "TrackedValidation",
          "FunctionContractBridge", "ModuleContractBoundary", "OwnerAssignment",
          "ProfileGuarantees", "HandleValues", "PureHandleFunctions",
          "ResourceComputations", "ResourceComputationScopeControls",
-         "SharedAuthorityUse"]
+         "SharedAuthorityUse", "ObserverLabels"]
 work = pathlib.Path(tempfile.mkdtemp(prefix="mir-proof-first-",
                                   dir=os.environ.get("PROOF_WORKDIR")))
 print(work, flush=True)
@@ -183,3 +183,7 @@ W4-C の局所共有 authority floor の限定修正は
 [SharedAuthorityUse](foundations/MirroreaProofFirstSharedAuthorityUse.md) に定義・
 一般証明・Rust 対応・TCB を記録する。上の手動 fresh-copy 検査に含め、凍結済みの
 W4-B 206-module manifest には追加しない。実networkやW4-C全体の完了ではない。
+
+W4-Cの供給ラベル保持と一権限での出力許可は
+[ObserverLabels](foundations/MirroreaProofFirstObserverLabels.md) に記録します。
+元ラベルの真正性・現行権限・二実行の機密性は別義務です。

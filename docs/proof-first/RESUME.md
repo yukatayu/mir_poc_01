@@ -1,16 +1,16 @@
 # W4 RESUME — B integrated LAB candidate; C active; W4 incomplete
-Updated 2026-09-28T02:36:05.734002+00:00. Sole main, NO SUBAGENTS. Active goal: finish W4 A→E then stop.
+Updated 2026-09-28T03:32:51.538115+00:00. Sole main, NO SUBAGENTS. Active goal: finish W4 A→E then stop.
 Owner waived quota stopping for this run; only owner resets. No W5+/alpha,
 Plan250-I3-4 activation, Canon acceptance, owner keys/public/production operations.
 No reset/clean/cache deletion/hostshare/paid fallback/external notifications.
 
 ## Git / resources
-HEAD daeb229cf4139499b3024fc0b580bebc44da119b pushed/parity; I/c-shared-authority-use/GIT.json.
+HEAD b692f42bf89980c6c72c20ed7767593748a0ad1a pushed/parity; I/c-admission-reuse/GIT_PHASE_CHECKPOINT.json.
 B closure563a1f0e06c9ec62088f9ef49f84b4d0fc899a4a; B codeproof9d86052d4f3982a2ddb077a610d02abed4f08327.
 Original basead9256c6e276634118de1fb6a40bddf6171c9f38; this resumed segment began78430f43clean.
-Owned dirty: sys5_i3_owner_admission_tests.rs (two tests), CURRENT_GOAL/READ_LEDGER/
-RESUME/W4_CHECK, single Report2614, plan/proof-first-foundation-correspondence.md.
-No production source dirty/mutation active. Inspect git status before staging.
+Owned dirty: owner queue tests (3 pass), observer production bounded repair + tests
+(11 pass), ObserverLabels Lean mirror, and current proof-first docs/Report2614/plan.
+No mutation active after restoration receipt; inspect git status before staging.
 SYS4 exact committed/restored SHA89451670278f82f3b72bac0d81874eec432f0442ed591e880be30315ded45fbe.
 
 I=/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration
@@ -30,20 +30,43 @@ Do not silently reissue a W3 Ticket or erase actual owner effects on result refu
 Immediate: phase review recovered/disposed, continue explicit A correspondence
 investigation preserving source start/ticket, owner effect, result/continuation.
 No full-source refinement adopted. Unit RMW acknowledgment is not W3 integer result.
-R09 review live below. make docs50751 exit0 (1764reports); all tests collected.
-No Rust/Lean/mutation active. Do not repeat successful unchanged baselines.
+R09 review recovered below. make docs50751 exit0 (1764reports); all tests collected.
+No Rust/Lean/mutation active; make docs tool67361 running. Do not repeat successful unchanged baselines.
 
-## Live Oracle / completed phase review
-R09 mir-w4-c-abort-address tool12829/PID3959639, start02:40:50UTC; next status
->=02:43:50UTC, then >=180s intervals. I/oracle-c-abort-address/SUBMISSION.json.
-Question1b9194ed90fe871b9a5e867dfedd6402f1899615236088f3dc997d34e6f43ca8,
-manifestadf7250323c90edac27496ac78cae8071d51e47def44f89274869004d13ca2c2.
-16files65437bytes +manifest. Same headed dedicatedChrome45439, exact target in
-session meta. Read-only event-driven DOM capture79472 attached; ordinary model
-menu verified6/Pro Latest,maxslider4of4 and closed, MODEL_UI.json. No Chrome settings
-or profile/limits changes. Partial captured blocks are NOT final answers.
-At completion collect12829 and79472, inspect DOM_EVENT_LAST/LARGEST identity=true,
-stop=false, fullblock, completed wrapper. Preserve one-word CLI failure if repeated.
+## Oracle state / latest C boundary evidence
+Oracle mir-w4-c-observer-label completed03:20:36UTC, full DOM23488chars,
+SHA292861db3ea54578066d6aba556ab36f489ac5e3528f31316ecd8a71152a3849.
+Wrapper96428/capture21087 exit0;6ProLatest/max4of4 verified. DISPOSITION recorded.
+Final narrow review mir-w4-c-observer-final/tool61393 sent03:34:48UTC once;
+next status>=03:37:48UTC then180s. Frozen22files239667bytes; SUBMISSION pins hashes.
+R09 mir-w4-c-abort-address completed02:53:44UTC; wrapper12829 and
+capture79472 exit0. Final DOM24509chars identity=true/stop=false; exact receipt
+and local DISPOSITION in I/oracle-c-abort-address. 6ProLatest/max4of4 verified.
+Finite W1 abort/alias review dependency closed; M8 source/label/authority transfer
+remains OPEN. Review requires common actual program/inputs, prefix preservation,
+coherent alias metadata, correct full-run completion, separate release authority.
+No user browser action needed. New separate observer-label request above; not a resend of completed R09 review.
+
+Current new work: I/c-owner-partial external OwnerPartial.lean six general lemmas,
+seven finite positives/failure controls,1007owned5module audit standard axioms,
+three false claims detected by decide. Reuses OwnerAssignment/ResourceComputations;
+no new source calculus or production adoption. Original compile failures retained.
+Actual M7/M8 source tests cover missing field, missing/invalid/out-of-range parameter,
+i64 intermediate overflow, aliases100→200→400 with two actual writes. First probe
+conflated entity absence and field absence; entity absence rejects at enqueue.
+Corrected source keeps entities live. Zero-default production mutant produces
+spurious hp=-10 and test fails. Driver's expect-vs-unwrap_err qualification error
+retained; exact source restored in finally; restoration command20411 evidence.
+RESTORED20411 exit0/3pass; exact M8 source unchanged. Current continuation:
+I/c-observer-label now has actual bounded Rust repair: effective relation row class
+and one matching grant covering all actual returned rows. Existing per-relation
+nonweakening and diagnostic order preserved. General proof10lemmas/788owned audit
+passes, concrete 3-class instance finite not program proof. Actual integration11pass;
+class-algebra1pass and M10 observer1pass; full runtime library412pass (97.94s). Split-grant/omit-output-check mutations both
+fail as intended; restoration driver21849 exit0/11pass collected. Mirrored proof trust0 passes. No broader R09,
+source authenticity, authority freshness, diagnostic secrecy or network claim.
+Next: finish scoped docs/Git; continue C entry/current-label
+and actual phase correspondence. New partial bridge remains unreviewed, no C closure.
 
 Phase retry4/tool5496 completed0; final DOM captured before targetclosed,
 27144chars SHA02f7f3cca207b605443f1a625cdafb8900f6c8efff13fcc79f3401962d0607a3.
@@ -88,7 +111,7 @@ SubmittedEvidence calculus duplicates W2/W3 and is not integrated.
 R09: unchanged Abort/Address + Passive/Producer/Fallible cone freshly compiled,
 812owned declarations audited standardaxioms;3weakened claims false-decide line4.
 I/c-abort-address-review/RESULT.json. Kernel alone does not close review/source gap.
-I/oracle-c-abort-address current frozen review is live; see session above.
+I/oracle-c-abort-address frozen review is completed/disposed; source binding stays OPEN.
 
 ## Recovered earlier review / B / reading / residuals
 Witness retry4 full27106chars SHA08c0b1796bd063bbf22cd17d89e1765088196c413d68c7a7a47d1e4ad7bea0af;
@@ -110,3 +133,15 @@ source gap persists; R06/R12 old local-split false accepted/launched, renderer
 clone-before-admission, literalpose_snapshot_ref need repair/exclusion before D use.
 E reconciles119rows incl VF07/OP05/MG03/MG05/MG06. No W4-critical OPEN closure.
 Historical detail lives in Report2614/W4_CHECK/Git; prior RESUME saved externally.
+
+2026-09-28T03:49:18.901153+00:00 — Final observer Oracle completed/recovered/disposed, no live jobs.
+Finalreview7904chars SHA2e27d2e6317540058b3f49e27fcbb283d7323b2337b8aa92157377c1c40a13f4;
+6Pro/max verified. Added2 review controls, mutants fail, exact restored12tests,
+class1/M10focused1 pass. Tool59165 collected0. Fresh kernel98494 collected0,
+4modules788owned standardaxioms. make docs67361 collected0; prior runtime412pass.
+Receipts I/c-observer-label/REVIEW_* and final-kernel/RESULT. Narrow repair ready
+for own scoped commit/push. No source/runtime fullIFC or R09/C closure.
+Next C: ordinary owner-RMW effect vs requester refusal, actual post-use update
+mechanism; reuse W4-B owner actual-root/source gate/PublicOwnerBoundary and W2
+OwnerAssignment, do not collapse W3 pure Int invocation into unit-ack effect.
+OwnerPartial external proof remains unreviewed/unadopted, real3tests+mutation valid.

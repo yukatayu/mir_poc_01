@@ -25,4 +25,14 @@ Exit: independent declarative rules versus executable checker, relative complete
 
 B: 206 exact source modules (130 existing/76 new), fresh Lean4.29.1 trust0, standard logical axioms only. Model278/preparation235/physical68 commands had whole exit0; bindings9169/9973/34658 verified. Physical15 profiles/53 qualified controls remain private-pipe finite evidence, not QUIC/auth/privacy/recovery. Code/proof cut9d86052d. Final B boundary review retry2/tool13614 exit0, answer b10364efde6de6d2606b83c19ac74f5d849dc7910b7c1b1ab8755f239ff7f86c; local dispositions in W4_CHECK. Oracle did not execute validation or supply independent signature.
 
-Preserve R01–R12 and Report2614. R09 W1 Abort/Address review and M8 effective-label gap before use. R06/R12 legacy local-split/renderer reporting discrepancies must be repaired or explicitly excluded before D consumer. E reconciles119 dispositions, I3 regression and all W4-critical residuals; it cannot defer C/D prerequisites. W4 incomplete, no final-public/alpha claim.
+Preserve R01–R12 and Report2614. R09 W1 Abort/Address finite review recovered/disposed; M8 effective-label/source gap remains before use. R06/R12 legacy local-split/renderer reporting discrepancies must be repaired or explicitly excluded before D consumer. E reconciles119 dispositions, I3 regression and all W4-critical residuals; it cannot defer C/D prerequisites. W4 incomplete, no final-public/alpha claim.
+
+2026-09-28T03:02:34.216055+00:00 — Owner-expression correspondence checkpoint:
+reuse W2 OwnerAssignment/CaptureAdapter; external Option-lookup bridge is kernel
+checked but unreviewed/unadopted. Actual M7/M8 tests3pass and zero-default mutant
+fails; absence of target entity is pre-enqueue refusal, distinct from missing RHS
+field at service. Aliases share actual cell while preserving separate write events.
+No W3 pure Int-result/unit-ack conflation, source continuation or IFC claim.
+Next C: actual entry/current-label/authority composition and phase correspondence.
+
+2026-09-28T03:49:18.901153+00:00 — Supplied observer label-to-row repair closes its bounded local defect: ten general lemmas,788owned audit,12 actual tests,4 detected mutants and final advisory review. Actual source labels/current release and overall R09 remain open; C phase correspondence remains the same active goal.

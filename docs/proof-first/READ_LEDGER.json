@@ -45565,5 +45565,101 @@
     "status": "authored-and-reviewed-delta",
     "role": "Existing1-3098 exact prior full read retained; two new actual I3 phase tests, source read/mutation/restoration + post-use prestaged lifecycle limitation. Not fresh full-file read.",
     "at": "2026-09-28T02:31:26.357422+00:00"
+  },
+  {
+    "path": "crates/mir-runtime/tests/m8_runtime_owner_queue.rs",
+    "sha256": "6c3eabb6ca1ecc8dc45e12b2d66de105f2e107de607e810aafd4dfd641967731",
+    "range": "1-781",
+    "status": "full-existing-plus-authored-reviewed-delta",
+    "role": "original1-623 full read; three new boundary tests authored/reviewed",
+    "at": "2026-09-28T03:02:17.373822+00:00"
+  },
+  {
+    "path": "samples/lean/foundations/MirroreaProofFirstResourceComputations.md",
+    "sha256": "715bc55bbe3016a390ae34fd789b865e50cb63b1454912163bbdf4bc89487617",
+    "range": "1-173",
+    "status": "full",
+    "role": "reuse reviewed capture adapter and explicit nonproduction limits",
+    "at": "2026-09-28T03:02:17.373822+00:00"
+  },
+  {
+    "path": "crates/mir-runtime/src/m8_runtime_observer.rs",
+    "sha256": "e0cf035a8090bd5eb05f6474e0b1dbe59dc175a4de7b10672531fda9ba09a867",
+    "range": "1-698",
+    "status": "full",
+    "role": "R09 known effective-label bug, exact observer/authority/redaction read before external candidate; two actual tests remain intentionally RED",
+    "at": "2026-09-28T03:10:57.550497+00:00"
+  },
+  {
+    "path": "crates/mir-runtime/tests/m8_runtime_observer.rs",
+    "sha256": "0cbea350513df86e71ce7e71acc07cb0c1c7f51372886623bda8979e8169a093",
+    "range": "1-785",
+    "status": "full-existing-plus-authored-reviewed-delta",
+    "role": "R09 known effective-label bug, exact observer/authority/redaction read before external candidate; two actual tests remain intentionally RED",
+    "at": "2026-09-28T03:10:57.550497+00:00"
+  },
+  {
+    "path": "crates/mir-runtime/src/m8_runtime_observer.rs",
+    "sha256": "896394a1dc5585fec541b48ce0950c627bd3879ae81df5f37382acbc3ce8545c",
+    "range": "1-761",
+    "role": "W4-C final observer consumer source/proof/test; full read or authored and reviewed",
+    "status": "full",
+    "at": "2026-09-28T03:36:19.688827+00:00"
+  },
+  {
+    "path": "crates/mir-runtime/tests/m8_runtime_observer.rs",
+    "sha256": "089edbcfe1f3e9c69ee759560b6897a1b29d5edfe184b622a9ddb435c04afebb",
+    "range": "1-1049",
+    "role": "W4-C final observer consumer source/proof/test; full read or authored and reviewed",
+    "status": "full",
+    "at": "2026-09-28T03:36:19.688827+00:00"
+  },
+  {
+    "path": "samples/lean/foundations/MirroreaProofFirstObserverLabels.lean",
+    "sha256": "3e3fefa3b302cfb392381b10f9930ff0612f47189eab4eb74f2f8395f028ad73",
+    "range": "1-170",
+    "role": "W4-C final observer consumer source/proof/test; full read or authored and reviewed",
+    "status": "full",
+    "at": "2026-09-28T03:36:19.688827+00:00"
+  },
+  {
+    "path": "samples/lean/foundations/MirroreaProofFirstObserverLabels.md",
+    "sha256": "c61743f1cd802eb54cdc7e36b2697d846d6b5f3eabf899e241e0df5e67f25031",
+    "range": "1-75",
+    "role": "W4-C final observer consumer source/proof/test; full read or authored and reviewed",
+    "status": "full",
+    "at": "2026-09-28T03:36:19.688827+00:00"
+  },
+  {
+    "path": "crates/mir-runtime/tests/m10_conformance.rs",
+    "sha256": "869226d45a9b7b1d8ea7177326860e64680f60c916e942093ef128d3e40c292f",
+    "range": "1-7050",
+    "role": "W4-C consumer regression evidence audit, remaining7051-9687 not yet read",
+    "status": "partial",
+    "at": "2026-09-28T03:39:18.409165+00:00"
+  },
+  {
+    "path": "crates/mir-runtime/tests/m10_conformance.rs",
+    "sha256": "869226d45a9b7b1d8ea7177326860e64680f60c916e942093ef128d3e40c292f",
+    "range": "1-9687",
+    "status": "full",
+    "role": "W4-C dependent regression test full read; truncated ranges separately reread130-430 and8600-9250; no inference of general secrecy or ordering from presence assertions",
+    "at": "2026-09-28T03:40:59.544211+00:00"
+  },
+  {
+    "path": "crates/mir-runtime/tests/m8_runtime_observer.rs",
+    "sha256": "9150a2f6696ae8763f239218598b010b915e1a4be1eadfd0a6b4ee01fbb3e155",
+    "range": "1-1086",
+    "role": "W4-C final reviewed delta full read/authored",
+    "status": "full",
+    "at": "2026-09-28T03:49:18.901153+00:00"
+  },
+  {
+    "path": "samples/lean/foundations/MirroreaProofFirstObserverLabels.md",
+    "sha256": "2e7f1ba88ddbd3effe79ddf32f937c41e52ed34e86d6c34a3d9deb4fbf6e6017",
+    "range": "1-81",
+    "role": "W4-C final reviewed delta full read/authored",
+    "status": "full",
+    "at": "2026-09-28T03:49:18.901153+00:00"
   }
 ]
