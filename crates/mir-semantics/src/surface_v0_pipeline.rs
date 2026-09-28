@@ -3727,14 +3727,14 @@ fn expression_diagnostic(
         if assignment.target().field().is_none() {
             continue;
         }
-        let target_type = match state_reference_type(source, ast, assignment.target()) {
-            Ok(value) => value,
-            Err(diagnostic) => return Some(diagnostic),
-        };
         let parameters = ast
             .when(assignment.event())
             .expect("accepted assignment is nested under its declared event")
             .parameters();
+        let target_type = match state_reference_type(source, ast, assignment.target(), parameters) {
+            Ok(value) => value,
+            Err(diagnostic) => return Some(diagnostic),
+        };
         let expression_type =
             match bounded_expression_type(source, ast, assignment.expression(), parameters) {
                 Ok(value) => value,
@@ -3762,6 +3762,7 @@ fn state_reference_type(
     source: &FixtureSource,
     ast: &SurfaceV0File,
     reference: &SurfaceReference,
+    parameters: &[Parameter],
 ) -> Result<(String, PipelineSourceSpan), SurfaceV0PipelineDiagnostics> {
     let Some(state) = ast.state(reference.base()) else {
         return Err(SurfaceV0PipelineDiagnostics::one(
@@ -3769,6 +3770,27 @@ fn state_reference_type(
             PipelineSourceSpan::from_surface(reference.span()),
         ));
     };
+    // Refine explicitly declared index parameters without reinterpreting
+    // principal/literal indices from the established finite source profile.
+    if let Some(index) = reference.index() {
+        let mut matching = parameters
+            .iter()
+            .filter(|parameter| parameter.name() == index);
+        if let Some(parameter) = matching.next() {
+            if let Some(duplicate) = matching.next() {
+                return Err(SurfaceV0PipelineDiagnostics::one(
+                    M7DiagnosticKind::DuplicateDeclaration,
+                    PipelineSourceSpan::from_surface(duplicate.span()),
+                ));
+            }
+            if parameter.type_name() != state.index_type() {
+                return Err(SurfaceV0PipelineDiagnostics::one(
+                    M7DiagnosticKind::TypeMismatch,
+                    PipelineSourceSpan::from_surface(reference.span()),
+                ));
+            }
+        }
+    }
     let Some(field) = reference.field() else {
         return Err(SurfaceV0PipelineDiagnostics::one(
             M7DiagnosticKind::UnresolvedName,
@@ -3809,7 +3831,7 @@ fn finite_expression_tree_type(
 ) -> Result<(String, PipelineSourceSpan), SurfaceV0PipelineDiagnostics> {
     match tree {
         BoundedExpressionTree::StateReference(reference) => {
-            state_reference_type(source, ast, reference)
+            state_reference_type(source, ast, reference, parameters)
         }
         BoundedExpressionTree::Identifier { name, span } => {
             let Some(parameter) = parameters.iter().find(|parameter| parameter.name() == name)

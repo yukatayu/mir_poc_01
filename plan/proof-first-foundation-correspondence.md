@@ -1859,3 +1859,7 @@ Report2614/W4_CHECK c_required_schema_20260929 retain failures, TCB and hashes.
 Current source sequence/continuation, cross-owner identity/restore, current
 labels/captures/resources and physical custody/all-entry remain before dependent
 D. C incomplete, D unstarted; finish D then pause BEFORE E. No Canon promotion.
+
+### W4-C explicit index checkpoint — 2026-09-28T17:30:19.832744+00:00
+
+LAB same-goal successor: explicit index parameter uniqueness/type agreement now checked at actual M7 target/RHS, following general checker/declarative/capture/retention proofs and final advisory review. Fresh40-module audit, semantics46/runtime425, three actual checker mutants and four unchanged full positive projections support only this bounded refinement. Nonparameter typing, runtime capture authenticity, source-rule/image admission and full context remain separate. Report2614/W4_CHECK c_explicit_index_20260929 hold exact cuts/failures/TCB. C incomplete, D unstarted; pause after D BEFORE E.

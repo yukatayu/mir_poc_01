@@ -1,72 +1,76 @@
 # RESUME — W4-C active
-Updated 2026-09-28T16:44:30.826661+00:00. Sole main; NO SUBAGENTS.
-Existing whole-W4 goal active. Finish C then D; PAUSE after D, STOP BEFORE E.
-No quota stop this run; owner resets. No Canon/THM/OBL/119 promotion, Plan250
-resume, owner keys, public/prod, force/reset/cleanup/notifications.
+Updated 2026-09-28T17:32:00.038771+00:00. Sole main, NO SUBAGENTS. Existing whole-W4 goal active.
+Finish C then D; PAUSE after D, STOP BEFORE E. Quota stop waived this run;
+owner resets. No Canon/THM/OBL/119 promotion, Plan250 resume, keys/public/prod,
+force/reset/cleanup/hostshare/notifications. No user dirty work detected.
 
-Base HEAD d2358777336498f5f8af019e468d439f53b09a5c main pushed/parity;
-P/METADATA_SOURCE_USE_GIT.json. Own required-schema checkpoint dirty; no user
-changes. Exact source restored, no mutation/probe currently active.
+HEAD442fc213c34a40efbc781e730124c21887c2e7be main pushed/parity:
+P/REQUIRED_SCHEMA_GIT.json. Own typed-index checkpoint dirty. No temporary
+mutants/probes active; runtime schema test restored exactly. Prior d2358777 and
+all frozen evidence retained. Current W4_CHECK266keys/READ_LEDGER6455entries;
+prior265/6440 prefixes retained. Same C semantic goal, no new roadmap.
 
 I=/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration
 P=I/c-source-effect; D=P/owner-session-development; OP=I/c-operation-identity.
-KP=P/kernel-owner-program-v1 immutable158-module baseline. Prior source/pending/
-Session proof cuts and review preserved in W4_CHECK; do not rerun or overwrite.
-Current W4_CHECK265 keys, READ_LEDGER6440 entries; previous264/6419 prefixes
-preserved. New c_required_schema_20260929 includes exact evidence and limitations.
+Immutable158module baseline KP=P/kernel-owner-program-v1. All prior source/
+Session cuts/reviews in W4_CHECK. Do NOT rerun one-shot launchers or overwrite.
 
-Actual SYS3 project_owner only retained target schema and dropped another RHS
-namespace. Exact reviewed minimal filter now keeps whole declarations for target
-plus ALL same_owner_reads, source order, no new carrier/auth/image format.
-Fresh repo39 dependency modules+all-owned audit40commands/7742owned, standard3only:
-P/kernel-owner-schema-repo-v1 RESULT98e70f55e074345e3d3fa8471f4f7573e213ee738c80e277568aac428068af8e.
-Ten new modules are import-only renamed existing research bodies,29 existing
-sources unchanged. SCHEMA_REPO_SOURCES902331691753832e7ce0372a69be82fc2628e481c0a2ac31f441cbe8adfa04f7.
-External checked4/151owned10false; required1/18owned4false; repo4false+8finite
-boundary controls rerun. No authored sorry/admit/Mir axioms. See OwnerSchema.md
-for external fresh-copy reproduction. W4-B206manifest untouched.
+Current cut: c_explicit_index_20260929. Actual M7 now checks accessed explicit
+index parameter uniqueness/type at assignment target and recursive RHS. Existing
+nonparameter/scalar-only/unused duplicate boundaries preserved. Exact reviewed
+pipeline proposal applied, then only rustfmt line wrap. FORMAT_APPLIED before
+66c329978e03dd4e7c618350f6cb3812dc5cf9c2fbd5086c5ed893990672dec9,
+after7154819466fba6ab1db2fd35976bcedd7a1abdb48b2375aa1f1381a3476ba431.
+Current11tests cover declared sorts/duplicates/later RHS/self/namespace/handler/
+diagnostics; reviewed RED3pass8assertfail, GREEN11. Three mutants each intended
+assertfail101; four complete prior actual projections byte-identical. Final46
+semantics + full425runtime whole3378exit0 collected. Runtime at preformatcut,
+final46 repeated formattedcut whole72358exit0; no identicalhash claim. 30 existing
+runtimewarnings. TYPED_INDEX_MUTATION_AND_POSITIVE/FORMATTED_SEMANTICS and
+OP/TYPED_INDEX_FINAL_RUNTIME retain exact childstatus/hash; driver0alone insufficient.
 
-Actual Rust reviewed RED1constantpass/6assertfail then GREEN7. Mutants first-RHS-only
-and sorted-order each child101 intended assertion, restored in finally. Four prior
-complete positive Debug projections byte-identical. Full runtime425pass/0fail/0skip,
-whole87424exit0 collected. OP/SCHEMA_FINAL_RUNTIME.json and
-SCHEMA_MUTATION_AND_POSITIVE.json. Semantics2context+6schema pass;
-P/checked-schema-actual-v2/RUST_RESULT.json, actual exports byte-identicalv1.
-Initial driver setup failed before mutation; retained/excluded, not semanticfailure.
-Raw private decode is only candidate; operation-only/inventory-only/both schema
-erasures reject StructuralMismatch at source verifier. Overlapping operations
-legitimately duplicate schema in aggregate inventory; actual execution uses
-per-operation schemas. Old incomplete images are not silently repaired or made
-complete by source identity. No new network/recovery/IFC claim.
+General OwnerTypedIndex independent checker/declarative exactness, supplied
+capture binding/no fallback/current onecapture, required-schema preservation.
+External fresh v3 RESULT87fdc5122161198e5ad79d0394fbc78f8eb8677362466729a979f74e39da6a72,
+12commands/132owned/10falseguards whole59395exit0. Failed v1/v2 retained/excluded;
+no authored holes/Miraxioms. Repo newmodule import-only renamed, previous39unchanged.
+Fresh40modules+audit41commands/7874owned whole91434exit0, RESULT
+88c96c0e97a9b6ec5cd7f436d9d27456b40f87fe9df24424576606e2688d85e6.
+Repo10falseguards RESULT4411a20bc7b469c1a8903afcb24a013ea087c7e149caa789318bb4ca59c8cb88,
+whole83012exit0. Seven finite strongerclaim controls separate. Only standard3.
+P/TYPED_INDEX_REPO_SOURCES mapping; companion gives externalcopy reproduction.
+B206manifest untouched; these are not general Rust/compiler/auth proofs.
 
-Oracle BOTH FINAL, no pending job/login request. Do NOT resend.
-I/oracle-c-checked-schema mir-w4-checked-schema-r1 whole4509exit0:
-27575chars SHA059a2f6c5cb9d0a2ddf6486b591d362d0ed7f5b377bb33b3ac5f0414d12d2448.
-I/oracle-c-required-schema mir-w4-required-schema-r1 whole87926exit0:
-23320chars SHA63ee3a05f67646c2b67bc614edadf47d2a1db82fbc947d80f80488b2fcfe1f3b.
-Both recovered from exact visible tabs, noStop+Regenerate,6ProLatestmax verified;
-11+10 findings read/disposed. Prior Session review final too. Applied production
-delta EXACT frozen proposed_lowering.rs. Import-only proof renaming and stronger
-tests occurred during/after review; no new semantic cut. Oracle not proof/signature.
+Oracle FINAL no current job/question/login request. I/oracle-c-typed-index
+mir-w4-typed-index-r1 final24630chars SHA
+2352d8ced0ccc6c15a2f77e8d692460cd07e8e912b537ecd09e052d31f33643d,
+whole48325exit0collected, visibleexacttab/modelmaxverified. All12findings disposed;
+DISPOSITIONS_VERIFIED.json successor retains preapplyhistory. Prior checked/
+required-schema and Session Oracle also final. Do NOT resend. Readonlyadvice,
+not signed independentacceptance/kernelreplay. Main owns all commands/review.
 
-Docs checkpoint P/checkpoint_required_schema.py ran ONCE, now do not rerun.
-Report2614/plan/currentstatus/tasks/samples/READMEs/ledger/check updated. Focused edition2024 rustfmt/diff/JSON-prefix/source hashes and make docs pass
-(whole37616exit0); initial edition2021 format invocation failed, no source change.
-Next own explicit commit --no-gpg-sign, ordinary push/parity receipt. No task completion at checkpoint.
+Checkpoint script P/checkpoint_typed_index.py ran ONCE. Currentreport2614/plan/
+status/tasks/samples/README/ledger updated. Focused rustfmt2024 and gitdiffcheck
+pass. make docs whole47123exit0 collected; P/TYPED_INDEX_DOCS.json.
+Next verify JSONprefix/source hashes, append actualdocs result, ownexplicitcommit
+--no-gpg-sign, ordinarypush/parity. Do not stop/complete aftercheckpoint.
 
-NEXT same C consumer: actual multiple source assignments/continuation and cross-
-owner same-handler identity/private restore, full typed source attachment/capture.
-Existing M8 actual capture lookup is by name; compact-coordinate collision is a
-model adapter counterexample, not established production bug. typed_input_signature
-usage in actual dispatch must be checked before claiming runtime binding.
-Existing metadata Session oneRegistry: multiowner/current source bindings remain;
-labels/control/resources/currenthead, atomic prequeue use, custody/all image entries
-remain prerequisites before dependent D. Do not invent new scheduler or new goal.
-Root4.5GiBfree98%,RAM9.3GiBavailable/swap12GiBfree last16:35UTC; LeanAS6GiB/j1,
-RustAS8GiB/j1 cachedtarget only; no heavy LLVM/freshcache. Measure before heavywork.
+Next same C: runtime capture/fullsignature/currentlabel/sourceattachment. Actual
+M8OwnerExecutionPlan drops signature; source-free execution materializes missing
+index from literal variable name (existing explicit lowleveltest, notnewdefect).
+SourceAction maps duplicate arguments last-wins; actual typed_input_signature
+accessor used for patch shape, not known executable callvalidation. Inspect SYS4
+source entry and owner serve/allrestore with original schema/identity. Current
+newproof Binds assumes alreadytypedvalues, does NOT establish physicaladmission.
+Other knownopen: OP/probe.rs distinct-owner samehandler projects/verifies/builds/
+FabricProgram but private restore fails; requester artifact_ref collision and
+snapshotbudgetvalidator owner selection. Multiple source statements/continuation,
+metadata multiowner/resource/custody/all populatedimage entries beforedependentD.
+No new scheduler/trustissuer from proofs, no namespace/globalDAG collapse. D
+unstarted; no network/IFC/recovery/alpha completion.
 
-External next research OwnerTypedIndex.lean under D: general explicit-index-parameter
-bind exactness/type matching/no-fallback/current capture proofs compile (16:51UTC),
-initial incomplete proof compile failure retained/excluded. No frozen all-owned
-audit/oracle/actual-M7 mismatch probe yet; no adoption. Actual low-level fallback
-is already documented in m8_runtime_owner_queue.rs tests; not a new exploit.
+Lastresources17:32UTC root4.4GiBfree98%,RAM9GiBavailable/swap12GiBfree.
+/mnt/mirrorea-work unmounted. LeanAS6GiB/j1; RustAS8GiBcached/offline/j1.
+No freshheavycache/LLVM/cleanup. Measure before heavier runs.
+
+2026-09-28T17:37:04.038434+00:00: Actual source entry capture probe whole38812exit0, four cases ST/OW1 × present/absent target. Missing argument reaches write of live entity literally named target (200→190), while supplied self writes self100→90. P/capture_probe.rs / OP/CAPTURE_SOURCE_ENTRY_V1.json; restored exact test. This is current profile observation, not approval or authentication exploit. Next candidate must keep declaration/signature through owner plan/private restore; no production adoption yet.

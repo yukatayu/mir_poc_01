@@ -46273,5 +46273,354 @@
       "Prior initial semantics/compiler/Lean development failures retained and excluded",
       "SCHEMA_CONTROLS_INITIAL setup assertion failed before mutation; corrected first-match selector and preserved receipt"
     ]
+  },
+  "c_explicit_index_20260929": {
+    "at": "2026-09-28T17:30:19.832744+00:00",
+    "git_base": "442fc213c34a40efbc781e730124c21887c2e7be",
+    "phase": "C active/incomplete; D unstarted; pause after D BEFORE E",
+    "cuts": [
+      {
+        "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/kernel-owner-typed-index-v3",
+        "result_sha256": "87fdc5122161198e5ad79d0394fbc78f8eb8677362466729a979f74e39da6a72",
+        "commands": 12,
+        "owned_declarations": 132,
+        "collected_tool": 59395,
+        "whole_exit": 0
+      },
+      {
+        "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/kernel-owner-schema-repo-v2",
+        "result_sha256": "88c96c0e97a9b6ec5cd7f436d9d27456b40f87fe9df24424576606e2688d85e6",
+        "commands": 41,
+        "owned_declarations": 7874,
+        "collected_tool": 91434,
+        "whole_exit": 0
+      }
+    ],
+    "repo_mapping_sha256": "e4068438f20f90f01a99a7d50fa88bd2acfee3c4bd5ae370b3270bd41e09697f",
+    "false_controls_sha256": "4411a20bc7b469c1a8903afcb24a013ea087c7e149caa789318bb4ca59c8cb88",
+    "scope_controls_sha256": "36156a91d856769e750f7d0e74c0f558357ee6a12885599c2847169a8bbf5e2e",
+    "rust": [
+      {
+        "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/TYPED_INDEX_RED_REVIEWED.json",
+        "sha256": "6b7e2588c26e8db25222a1b284c03cdc2f0a6c48b82ae67d091d1179974d8984",
+        "command": [
+          "cargo",
+          "test",
+          "--locked",
+          "--offline",
+          "-j1",
+          "-p",
+          "mir-semantics",
+          "--test",
+          "proof_first_owner_index",
+          "--",
+          "--test-threads=1"
+        ],
+        "exit": 101,
+        "log_sha256": "546f1400e16827f8623dad7295368b28e059c29c4d3659f4d74b80ed02f98cda"
+      },
+      {
+        "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/TYPED_INDEX_GREEN.json",
+        "sha256": "f8fec693f9f7f14e93eb8fc164450e29178990c368e182b87a3b28b019108f37",
+        "command": [
+          "cargo",
+          "test",
+          "--locked",
+          "--offline",
+          "-j1",
+          "-p",
+          "mir-semantics",
+          "--test",
+          "proof_first_owner_index",
+          "--",
+          "--test-threads=1"
+        ],
+        "exit": 0,
+        "log_sha256": "9af70c578c7150715f78c5289f387faa287221e0d78d3a12e05ead3d92a441e0"
+      },
+      {
+        "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/TYPED_INDEX_FINAL_SEMANTICS.json",
+        "sha256": "7189a5b8aff75051956ba0d66962a0e3e721dd8057b3e62a78074d1319b0fc00",
+        "command": [
+          "cargo",
+          "test",
+          "--locked",
+          "--offline",
+          "-j1",
+          "-p",
+          "mir-semantics",
+          "--test",
+          "proof_first_owner_index",
+          "--test",
+          "proof_first_owner_schema",
+          "--test",
+          "proof_first_owner_context",
+          "--test",
+          "surface_v0_pipeline_m7",
+          "--",
+          "--test-threads=1"
+        ],
+        "exit": 0,
+        "log_sha256": "017cf22f7a136fcdb0726d8b301eafdfe3fd831c66179b81dbfa85968bbbb8b4"
+      },
+      {
+        "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/TYPED_INDEX_FORMATTED_SEMANTICS.json",
+        "sha256": "458848323601b3bfc478b1a274b875906ef7370966c9f9ede43d64e3113e0c6b",
+        "command": [
+          "cargo",
+          "test",
+          "--locked",
+          "--offline",
+          "-j1",
+          "-p",
+          "mir-semantics",
+          "--test",
+          "proof_first_owner_index",
+          "--test",
+          "proof_first_owner_schema",
+          "--test",
+          "proof_first_owner_context",
+          "--test",
+          "surface_v0_pipeline_m7",
+          "--",
+          "--test-threads=1"
+        ],
+        "exit": 0,
+        "log_sha256": "86f65e50eab4602780be857078a549883a571ce1258de694ee902e8d009748f0"
+      },
+      {
+        "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-operation-identity/TYPED_INDEX_FINAL_RUNTIME.json",
+        "sha256": "90edba4615f1a5837e9c53e6e52d1d1bab218e651d5d6f60cfdf5bbbb32bbb1c",
+        "command": [
+          "cargo",
+          "test",
+          "--locked",
+          "--offline",
+          "-j",
+          "1",
+          "-p",
+          "mir-runtime",
+          "--lib",
+          "--",
+          "--test-threads=1",
+          "--nocapture"
+        ],
+        "exit": 0,
+        "log_sha256": "8dd689ba0162ca8e6c0b4581c97159077121e99a6196dfbbcc8588ca6a991db8"
+      },
+      {
+        "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/TYPED_INDEX_MUTANT_IGNORE_TYPE.json",
+        "sha256": "bcfaf66b4c980b95fb891ef929db5f3c63c88c96ee4ef32acfbdf1751a2c1f49",
+        "command": [
+          "cargo",
+          "test",
+          "--locked",
+          "--offline",
+          "-j1",
+          "-p",
+          "mir-semantics",
+          "--test",
+          "proof_first_owner_index",
+          "--",
+          "--test-threads=1"
+        ],
+        "exit": 101,
+        "log_sha256": "f3653ca4d850a230f08c91c0bbdaf9371e69aaa1ab4cf347ffbaf4ee06668de5"
+      },
+      {
+        "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/TYPED_INDEX_MUTANT_FIRST_PARAMETER.json",
+        "sha256": "9c13ca5d46f82e80b72dbf70ab08c00557424ca5670b87bbc2c55ce632651a34",
+        "command": [
+          "cargo",
+          "test",
+          "--locked",
+          "--offline",
+          "-j1",
+          "-p",
+          "mir-semantics",
+          "--test",
+          "proof_first_owner_index",
+          "--",
+          "--test-threads=1"
+        ],
+        "exit": 101,
+        "log_sha256": "5f6b188da9335b120c8c77ef82eb2187cc8d49a2b6c2fc2ef96dc889908ccdc8"
+      },
+      {
+        "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/TYPED_INDEX_MUTANT_RHS_ERASED.json",
+        "sha256": "a503ecee516f108cf14b6644c618b8ccff6dd07e293113bec019bfd9ebbc08b9",
+        "command": [
+          "cargo",
+          "test",
+          "--locked",
+          "--offline",
+          "-j1",
+          "-p",
+          "mir-semantics",
+          "--test",
+          "proof_first_owner_index",
+          "--",
+          "--test-threads=1"
+        ],
+        "exit": 101,
+        "log_sha256": "3f5fc807d1ed19e5bd13f85acf2ae165458f13d0042d9534c4355831079891a0"
+      }
+    ],
+    "format": {
+      "at": "2026-09-28T17:26:37.203788+00:00",
+      "command": [
+        "rustfmt",
+        "--edition",
+        "2024",
+        "crates/mir-semantics/src/surface_v0_pipeline.rs"
+      ],
+      "exit": 0,
+      "before_sha256": "66c329978e03dd4e7c618350f6cb3812dc5cf9c2fbd5086c5ed893990672dec9",
+      "after_sha256": "7154819466fba6ab1db2fd35976bcedd7a1abdb48b2375aa1f1381a3476ba431",
+      "change": "only rustfmt line wrapping, asserted byte equality to exact replacement",
+      "diff": "--- \n+++ \n@@ -3773,7 +3773,9 @@\n     // Refine explicitly declared index parameters without reinterpreting\n     // principal/literal indices from the established finite source profile.\n     if let Some(index) = reference.index() {\n-        let mut matching = parameters.iter().filter(|parameter| parameter.name() == index);\n+        let mut matching = parameters\n+            .iter()\n+            .filter(|parameter| parameter.name() == index);\n         if let Some(parameter) = matching.next() {\n             if let Some(duplicate) = matching.next() {\n                 return Err(SurfaceV0PipelineDiagnostics::one(\n"
+    },
+    "mutation": {
+      "at": "2026-09-28T17:19:43.951210+00:00",
+      "source_sha256": "66c329978e03dd4e7c618350f6cb3812dc5cf9c2fbd5086c5ed893990672dec9",
+      "runtime_tests_sha256": "4a84e55ec7a2f8aca5036839a68a44c8bfb3439dc5b7e9eed57c28dc426c4be2",
+      "mutants": [
+        {
+          "name": "IGNORE_TYPE",
+          "mutant_sha256": "73905ddd12187b37dbaff6f99dd962bb578da4c60e8cf183f8fa64522abb4a93",
+          "receipt": "TYPED_INDEX_MUTANT_IGNORE_TYPE.json",
+          "qualified_assertion_failure": true
+        },
+        {
+          "name": "FIRST_PARAMETER",
+          "mutant_sha256": "3c667bbd6ed9720fa8db499e50396e3c939aba85660bb92561baf518d1dc66a6",
+          "receipt": "TYPED_INDEX_MUTANT_FIRST_PARAMETER.json",
+          "qualified_assertion_failure": true
+        },
+        {
+          "name": "RHS_ERASED",
+          "mutant_sha256": "2a27f95b3b21be7878e8d093c2454a734dc26b0d1d3816be6bbcdc0f4eecb858",
+          "receipt": "TYPED_INDEX_MUTANT_RHS_ERASED.json",
+          "qualified_assertion_failure": true
+        }
+      ],
+      "positives": [
+        {
+          "case": "budget_local.txt",
+          "bytes": 227270,
+          "sha256": "1816c4b040b8d99e643924fa25004ab3005d894dacee1c449cb618c0c0a60a5b",
+          "equal": true
+        },
+        {
+          "case": "budget_remote.txt",
+          "bytes": 513758,
+          "sha256": "e942c2fcb325f147aee8baef6fa11e614bc5c6e7b341755ceab136db5ee38685",
+          "equal": true
+        },
+        {
+          "case": "parameter_relation.txt",
+          "bytes": 3380457,
+          "sha256": "aa3d1af3c161a277c0fbb5b1f0e024cfd820e8f125e429a105a4569f5bfd8370",
+          "equal": true
+        },
+        {
+          "case": "provider_mixed.txt",
+          "bytes": 4718878,
+          "sha256": "9fede3b45042e7ed5bc7619d32535fa023d05a0334ddcbddec44348f8d823aa0",
+          "equal": true
+        }
+      ],
+      "restored": true,
+      "scope": "Three actual checker mutants fail intended assertions; four complete actual prior projections equal; no network/typing-of-nonparameters/auth/restore inference"
+    },
+    "oracle": {
+      "session": "mir-w4-typed-index-r1",
+      "answer_sha256": "2352d8ced0ccc6c15a2f77e8d692460cd07e8e912b537ecd09e052d31f33643d",
+      "verified_dispositions_sha256": "442b08d7004dad684eac74019738d321f3a74bdbc4f7fb17c3b1bb55c7ecf28c",
+      "findings": [
+        {
+          "id": "F1",
+          "status": "accept",
+          "finding": "No falsifier of stated exactness/retention by source inspection; independent singleton/type/capture premises, positive alice binding nonvacuous."
+        },
+        {
+          "id": "F2",
+          "status": "accept_scope",
+          "finding": "Nonparameter/absent-index/empty footprint success proves no namespace/full typing/coverage. Equal Ghost tags prove no declared type resolution. Field/owner not certified by index binding; retain separate premises."
+        },
+        {
+          "id": "F3",
+          "status": "accept_scope",
+          "finding": "Capture function has already lost raw duplicate rows; exact supplied Entity tag/identity is not authenticity. Later map construction and all captures/labels/lifetimes/custody remain before runtime use."
+        },
+        {
+          "id": "F4",
+          "status": "verified_locally",
+          "finding": "Normal parser parse_when->parse_at_block->parse_assignment passes event/actor and pushes original expression, complete ast.assignments exposed; parse_reference preserves identifier token spelling. M6 rejects fieldless targets, checks known parameter types; M7 state/event duplicate checks precede expression checker. Private AST data and sole build_checked_artifact call on normal checked path verified."
+        },
+        {
+          "id": "F5",
+          "status": "verified_locally",
+          "finding": "Both state_reference_type call sites and its definition inspected; recursive AST checker visits both binary children and checked-expression constructor recurses over same tree. Designated passes empty parameters. No general parser/compiler theorem claimed."
+        },
+        {
+          "id": "F6",
+          "status": "verified_green",
+          "finding": "Conflicting duplicate orders and RHS-only duplicate, same self spelling, multi-namespace and handler environments, scalar/unused duplicate boundary, exact spans and later RHS controls added. Current strengthened RED3pass8fail; later branches unexecuted in RED not credited.",
+          "verification": "All eleven tests pass; GREEN reaches branches not reached by reviewed RED3pass8fail."
+        },
+        {
+          "id": "F7",
+          "status": "accept_scope",
+          "finding": "Access-local duplicate index check leaves scalar-only first-match and unused duplicate parameters unchanged; this is not globally unique signature acceptance for future typed call boundary."
+        },
+        {
+          "id": "F8",
+          "status": "accept_documented_behavior",
+          "finding": "New index mismatch precedes unknown field within reached helper; existing declaration/M6/generated-failure gates still earlier. Mixed diagnostic test records that intentional bounded behavior, no new diagnostic kind."
+        },
+        {
+          "id": "F9",
+          "status": "verified",
+          "finding": "Apply exact reviewed static diff after reviewed proof/compiler premises, then focused tests/mutations/M7/runtime and unchanged complete positive projections; old425 result stays historical.",
+          "verification": "Exact reviewed source applied, only documented rustfmt wrap afterwards;3 meaningful mutants fail,4 complete prior projections equal,46 focused semantics and425 runtime pass;46 focused tests repeated after formatting."
+        },
+        {
+          "id": "F10",
+          "status": "accept_boundary",
+          "finding": "Old/raw/substituted image must not inherit stronger source property from same identity. Current source/schema/signature/tree/captures/rule version must be joined at later runtime/restore admission."
+        },
+        {
+          "id": "F11",
+          "status": "accept_authorization",
+          "finding": "No new owner decision needed for delegated bounded static refinement; no global principal/literal policy, subtype/cross-module identity, auth, wire or Canon promotion."
+        },
+        {
+          "id": "F12",
+          "status": "accept_review_limit",
+          "finding": "Adviser inspected supplied sources/excerpts/logs, claims reconstructed bundle hashes with two restored terminal blanks; main verifies original frozen file hashes independently. Not Lean replay, full repo custody, signature or acceptance."
+        }
+      ],
+      "collected_tool": 48325,
+      "whole_exit": 0
+    },
+    "claim": "Independent explicit index judgment/checker exactness, current capture binding/no fallback under supplied typed capture, required-schema preservation; actual M7 checks target and recursive RHS explicit parameters.",
+    "implementation": "Reviewed access-local static guard; existing DuplicateDeclaration/TypeMismatch diagnostics. Matching nonparameter/absent-index/scalar-only/unused duplicate boundaries not strengthened.",
+    "tcb": [
+      "Lean4.29.1 trust0 j1, standard propext/Classical.choice/Quot.sound only",
+      "Actual Rust parser/M6/M7 global declaration invariants, enclosing handler and checked-tree coverage; inspected and tested, not generally verified compiler",
+      "Supplied entity tag/capture map and identity are inputs, not authentication, authorization or global current-context evidence"
+    ],
+    "remaining": [
+      "Runtime actual capture/signature/labels/source-rule-version admission",
+      "Multiple source assignments/continuation and cross-owner operation identity/private restore",
+      "Multiowner metadata/resources/physical prequeue custody/all image entries"
+    ],
+    "exclusions": [
+      "No authored holes or Mir-specific axioms; failed v1/v2 elaborations excluded",
+      "False guards/finite tests are not general proofs",
+      "Full425 at preformat cut; final46 at formatted cut, one exact wrapping-only hunk verified",
+      "No new network/persistence/IFC/alpha/Canon/THM/OBL/119 acceptance"
+    ]
   }
 }

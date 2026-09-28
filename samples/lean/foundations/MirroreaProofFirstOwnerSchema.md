@@ -44,6 +44,29 @@ that environment: mapping two distinct captures to one coordinate can change
 Capture typing, labels, control dependencies and source installation remain
 separate obligations for the later source/Session connection.
 
+The explicit index-parameter refinement in `MirroreaProofFirstOwnerTypedIndex`
+checks a unique parameter against the complete state's declared index type.
+Its independent `IndexTyped` judgment has executable soundness and relative
+completeness, including duplicate occurrences. `explicit_exact` and
+`footprint_exact` state the extension over declared parameters only; passing a
+nonparameter index does not certify its typing. Required-schema filtering
+preserves this check as well as the concrete parameter binding.
+
+The separate `Binds` judgment requires a present capture with the matching
+supplied type tag and retains its exact identity. Its accepted materialization
+takes substitution rather than literal-name fallback, and reusing the binding
+requires the same capture value. These are conditional data-binding statements;
+the supplied entity tag is not authenticated by the checker. Principal/literal
+typing, current capture labels, custody and runtime admission remain separate.
+The reviewed static M7 refinement is applied to explicit index parameters at
+both assignment targets and recursive RHS reads. An accessed duplicate parameter
+is rejected at its second declaration; an index-type mismatch is rejected at the
+whole reference. Scalar-only and unused duplicate parameters retain the earlier
+finite behavior. Existing M6/declaration/failure checks precede this check; within
+the reference helper, index mismatch precedes unknown-field lookup. Eleven source
+tests cover these boundaries. These proofs do not change the low-level M8 fallback
+or certify runtime capture admission.
+
 ## Implementation and evidence boundary
 
 The runtime tests use real ordinary source, M7 checking, SYS3 projection and
@@ -82,13 +105,15 @@ Oracle dispositions are retained in Report2614 and `docs/proof-first/W4_CHECK.js
 
 ## Reproduction and trusted base
 
-These sources are outside the frozen W4-B 206-module manifest. Ten added modules
+These sources are outside the frozen W4-B 206-module manifest. Eleven added modules
 preserve the external research definitions and declaration namespaces; only
 imports are renamed to the repository's filenames. The existing identical
 `MirroreaProofFirstOwnerReadReport` is reused rather than defining its symbols
-twice. The full dependency cone has 39 modules. The separate audit checks every
+twice. The full dependency cone has 40 modules. The separate audit checks every
 owned declaration's transitive axioms against `propext`, `Classical.choice` and
-`Quot.sound`; these are not 39 independent correctness claims.
+`Quot.sound`; these are not 40 independent correctness claims. The earlier
+39-module required-schema checkpoint is retained separately; the current
+40-module reconstruction includes the explicit index-parameter refinement.
 
 Run from the repository root with Lean 4.29.1. Set `PROOF_WORKDIR` to an existing
 external working directory with enough space. The following copies source only,
@@ -128,6 +153,7 @@ print((work / 'MirroreaProofFirstOwnerSchemaAudit.log').read_text())
 PY
 
 cargo test --locked --offline -j1 -p mir-semantics --test proof_first_owner_schema
+cargo test --locked --offline -j1 -p mir-semantics --test proof_first_owner_index
 cargo test --locked --offline -j1 -p mir-runtime --lib proof_first_owner_schema -- --test-threads=1
 ```
 
