@@ -147,3 +147,6 @@ pub fn crate_name() -> &'static str {
 
 #[cfg(test)]
 mod proof_first_current_admission_tests;
+
+#[cfg(test)]
+mod proof_first_owner_schema_tests;

@@ -611,3 +611,12 @@ It may explicitly select a historical preparation; that is not a validation of a
 new three-stage workflow or the later W4-C all-entry obligation.
 
 The private W4 preparation/physical receipts export dependencies by explicit role: only named original source locations become provenance; inherited live roles take priority and fresh archives, workers, captures and logs stay bound regardless of later checkout ancestry. Toolchain/repository disjointness remains a checked private-profile restriction.
+
+W4-C owner schema preservation uses the source-only external-copy recipe in
+`samples/lean/foundations/MirroreaProofFirstOwnerSchema.md`: 39 dependency modules
+plus an all-owned axiom audit, serial Lean4.29.1/trust0 with bounded memory.
+Actual source/projection controls are the Rust filters documented there. This
+adds no host-runner mode or sample root and leaves W4-B's frozen manifest intact.
+The optional `MIR_PROOF_SCHEMA_EXPORT` test variable writes genuine checked facts
+to a caller-selected existing external directory using create-new semantics;
+it does not generate expected runtime events or establish import authority.

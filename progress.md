@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-09-29 00:40 JST
+最終更新: 2026-09-29 01:43 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -66,7 +66,7 @@ W4-B検証結果: 206依存sourceを原本と同一bytesで保存し、fresh Lea
 
 W4-Cでは、共有authority floorの古いcache使用、供給された観測ラベルの弱化、実行していない読取りの記録に続き、重複したowner操作で配置変換がpanicする経路を限定修正しました。一般Lean命題・実反例・Oracle指摘を照合し、先行checkpointのruntime library418件が通過しました。正常な4種類のsourceは、修正前後で配置結果全体が一致しています。ownerの実書込みと呼出し側の結果受理を分け、評価失敗後にも過去の書込み・履歴が残ることを実検査しました。C全体は未完了です。実Mirでの複数代入の文順序・source継続、別owner間の識別子衝突、復元経路の条件が具体的な残件です。全entry・現在の認可・実namespace/custody・資源の対応も継続します。実network・秘密・復旧やW4全体の保証には広げません。
 
-W4-Cでは、メタデータ更新を既存Store・ソースの採番へ接続し、処理待ちの純粋計算とowner要求を保持する一般証明を検査しました。世代を保持した要求を同じSessionの発行・転送・実書込み・応答受理へ接続する限定モデルも凍結検査済みです。現行世代の書込みと後続ソースは成功し、待機中の撤去・再作成は古い要求を拒否します。空の束を生の状態へ注入する反例は残し、定義した受理経路から到達できないことを別に証明しています。先行差分Oracleの9指摘とSession差分の8指摘は回収・照合済みです。限定命題への反例は提示されず、実source・復元・物理境界の未達を維持しています。初期schemaは入力境界であり、実Mirからの宣言・機密性分類、複数ownerの選択、資源・物理custody・復元入口・実装対応は継続中です。C未完了、D未着手、D完了後に一旦停止します。
+W4-Cでは、通常の代入が読む別namespaceの型宣言をSYS3投影が落とす不具合を、一般Lean命題と実sourceの反例から修正しました。必要な宣言の候補列・選択・束縛・式全体を保持する証明を既存foundationへ接続し、39依存moduleをfresh検査・全所有宣言監査しました。実runtime425件、M7文脈/schema8件が通過し、壊した2種類の投影を検査が捕捉、既存4正常sourceの配置結果全体は一致しました。2件のOracle回答は回収・照合済みです。schemaの完全性は認可や保存imageの真正性ではなく、複数操作の一覧には重複が残ります。実sourceの複数代入・継続、別owner間識別子、現在の入力・分類・資源・物理custody・全復元入口は継続中です。C未完了、D未着手、D完了後に一旦停止します。
 
 2026-09-24のowner指定で、同じW4を **W4-A（限定証拠・完了済み）→W4-B（repo統合・限定候補完了）→W4-C（残る基礎条件・現在地）→W4-D（Rust/Core/private QUIC接続）→W4-E（実network検査・残項目回収・W4完了判定）** に分割しました。Bの境界review回収後、Cへ進みました。D/Eは依存待ちです。Eは元W4と前段の残項目を照合しますが、C/Dの前提をEへ先送りして実装を進めません。完了条件・推奨model/effort・R01〜R12残項目台帳は `plan/proof-first-foundation-correspondence.md` の「W4-A〜W4-E 作業区切り」を参照してください。分割当日は計画整理のみでした。2026-09-26のowner指示で同じW4 goalを再開しています。
 
@@ -527,3 +527,5 @@ The authorized roadmap is paused, not blocked, stale or closed.
 - 2026-09-28 23:56 JST: W4-Cメタデータを既存管理経路へ接続し一般証明・凍結検査・差分reviewを照合。複数配置の退出反例を修正、shared pending/source接続を継続。
 
 - 2026-09-29 00:40 JST: W4-C同一Store採番・要求世代・限定Session接続をfresh検査。raw注入反例と受理経路の非到達証明を分離、実schema/物理入口の対応を継続。
+
+- 2026-09-29 01:43 JST: W4-C required-schema一般証明をrepoへ接続し、実SYS3の別namespace欠落を修正。runtime425/M7関連8、変異2拒否、旧正常4一致とOracle2件を照合。C継続、D未着手。

@@ -48333,5 +48333,173 @@
     "status": "partial reconsult, prior full read retained; not new full read",
     "role": "next actual checked-schema/metadata direct consumer",
     "at": "2026-09-28T15:40:21.408021+00:00"
+  },
+  {
+    "path": "samples/lean/foundations/MirroreaProofFirstOwnerPartial.lean",
+    "sha256": "ceef600b377457c4e2d44a7033a29486705b9595c00e2048606a9a1872b94ad0",
+    "range": "full",
+    "status": "full authored/reviewed body; import-only rename from previously fully read frozen source",
+    "role": "required-schema proof dependency; declarations/namespaces unchanged",
+    "at": "2026-09-28T16:43:43.384166+00:00"
+  },
+  {
+    "path": "samples/lean/foundations/MirroreaProofFirstOwnerReadCoverage.lean",
+    "sha256": "ebb3f66342e00abe6f0abaf840ac2b088ffb06d10a054afc43f34763e86c3b5e",
+    "range": "full",
+    "status": "full authored/reviewed body; import-only rename from previously fully read frozen source",
+    "role": "required-schema proof dependency; declarations/namespaces unchanged",
+    "at": "2026-09-28T16:43:43.384166+00:00"
+  },
+  {
+    "path": "samples/lean/foundations/MirroreaProofFirstOwnerCheckedArithmetic.lean",
+    "sha256": "87334c25a05362d1c6cba8aca925a71dbb94e6a1ce982e0ff5f0fce528a9ea9a",
+    "range": "full",
+    "status": "full authored/reviewed body; import-only rename from previously fully read frozen source",
+    "role": "required-schema proof dependency; declarations/namespaces unchanged",
+    "at": "2026-09-28T16:43:43.384166+00:00"
+  },
+  {
+    "path": "samples/lean/foundations/MirroreaProofFirstOwnerRecordedArithmetic.lean",
+    "sha256": "c89b7275f23a885c1e67278f6bead2f6ac267ce550942f7450957cd235c5b89c",
+    "range": "full",
+    "status": "full authored/reviewed body; import-only rename from previously fully read frozen source",
+    "role": "required-schema proof dependency; declarations/namespaces unchanged",
+    "at": "2026-09-28T16:43:43.384166+00:00"
+  },
+  {
+    "path": "samples/lean/foundations/MirroreaProofFirstAdmissionPhases.lean",
+    "sha256": "48be33304d0aba0f79eb0fff03d7655e2e6adec70d53185998ba291663269642",
+    "range": "full",
+    "status": "full authored/reviewed body; import-only rename from previously fully read frozen source",
+    "role": "required-schema proof dependency; declarations/namespaces unchanged",
+    "at": "2026-09-28T16:43:43.384166+00:00"
+  },
+  {
+    "path": "samples/lean/foundations/MirroreaProofFirstOwnerEffectService.lean",
+    "sha256": "89a134f098515bc60ed077870b7ae54323951c1da5c4cc05c8e15c7d5aee59a2",
+    "range": "full",
+    "status": "full authored/reviewed body; import-only rename from previously fully read frozen source",
+    "role": "required-schema proof dependency; declarations/namespaces unchanged",
+    "at": "2026-09-28T16:43:43.384166+00:00"
+  },
+  {
+    "path": "samples/lean/foundations/MirroreaProofFirstOwnerStructuredKeys.lean",
+    "sha256": "6c403218bbdb3c2b0fcb928cd566629cf8a13708db52352abc0a8759d77b445e",
+    "range": "full",
+    "status": "full authored/reviewed body; import-only rename from previously fully read frozen source",
+    "role": "required-schema proof dependency; declarations/namespaces unchanged",
+    "at": "2026-09-28T16:43:43.384166+00:00"
+  },
+  {
+    "path": "samples/lean/foundations/MirroreaProofFirstOwnerSourceContext.lean",
+    "sha256": "265484af30dfbf6a20512ea7ddcace23c61c285a11132de7ca8e3930da767180",
+    "range": "full",
+    "status": "full authored/reviewed body; import-only rename from previously fully read frozen source",
+    "role": "required-schema proof dependency; declarations/namespaces unchanged",
+    "at": "2026-09-28T16:43:43.384166+00:00"
+  },
+  {
+    "path": "samples/lean/foundations/MirroreaProofFirstOwnerCheckedSchema.lean",
+    "sha256": "b605e09b27bbd0c63ea270d19098b76b20398fb56f59dc2a0304ad965260319e",
+    "range": "full",
+    "status": "full authored/reviewed body; import-only rename from previously fully read frozen source",
+    "role": "required-schema proof dependency; declarations/namespaces unchanged",
+    "at": "2026-09-28T16:43:43.384166+00:00"
+  },
+  {
+    "path": "samples/lean/foundations/MirroreaProofFirstOwnerRequiredSchema.lean",
+    "sha256": "aed48df44d356f7fd92e82c2cb8f0c3cd1d3d46f39b579a4fb55c8664d895916",
+    "range": "full",
+    "status": "full authored/reviewed body; import-only rename from previously fully read frozen source",
+    "role": "required-schema proof dependency; declarations/namespaces unchanged",
+    "at": "2026-09-28T16:43:43.384166+00:00"
+  },
+  {
+    "path": "crates/mir-runtime/src/proof_first_owner_schema_tests.rs",
+    "sha256": "4a84e55ec7a2f8aca5036839a68a44c8bfb3439dc5b7e9eed57c28dc426c4be2",
+    "range": "full",
+    "status": "full authored and reviewed",
+    "role": "actual required-schema validation/reproduction",
+    "at": "2026-09-28T16:43:43.384166+00:00"
+  },
+  {
+    "path": "crates/mir-semantics/tests/proof_first_owner_schema.rs",
+    "sha256": "36ea314a0f5731584e108f8b41b843d074263a9f8eef9caae3b3b4b2ec4c807c",
+    "range": "full",
+    "status": "full authored and reviewed",
+    "role": "actual required-schema validation/reproduction",
+    "at": "2026-09-28T16:43:43.384166+00:00"
+  },
+  {
+    "path": "samples/lean/foundations/MirroreaProofFirstOwnerSchemaAudit.lean",
+    "sha256": "bad77644d780939560d195934aee57ab86bed4932400ed9927d3a3827995bd4a",
+    "range": "full",
+    "status": "full authored and reviewed",
+    "role": "actual required-schema validation/reproduction",
+    "at": "2026-09-28T16:43:43.384166+00:00"
+  },
+  {
+    "path": "samples/lean/foundations/MirroreaProofFirstOwnerSchema.md",
+    "sha256": "4eeca03ddb494518c1983b7b8e6999d05ead538f1d5d6e0212845b43f31fcf29",
+    "range": "full",
+    "status": "full authored and reviewed",
+    "role": "actual required-schema validation/reproduction",
+    "at": "2026-09-28T16:43:43.384166+00:00"
+  },
+  {
+    "path": "crates/mir-runtime/src/sys3_projection/lowering.rs",
+    "sha256": "b4eb3ef80e63a4cc6e22f3f3466c13a558cff42dc29c72e59382e46126c243c5",
+    "range": "full prior source plus complete current delta",
+    "status": "prior full read retained; exact reviewed delta read",
+    "role": "actual required schema projection",
+    "at": "2026-09-28T16:43:43.384166+00:00"
+  },
+  {
+    "path": "crates/mir-runtime/src/sys3_projection/model.rs",
+    "sha256": "8361b0d32dc3f5abedf0eafa373f37a9423866fdcf3f1417410597f6b288c167",
+    "range": "50-120,875-1075,4900-4960",
+    "status": "partial reconsult; not a new full read",
+    "role": "aggregate vs operation-local consumers and image/admission boundary",
+    "at": "2026-09-28T16:43:43.384166+00:00"
+  },
+  {
+    "path": "crates/mir-runtime/src/sys3_i3_private_snapshot.rs",
+    "sha256": "d86463afa750b301625f9e83d7eef7e1805a5e9029c1f326460ba1c88ba4937c",
+    "range": "1-385,610-700,743-857,930-1090",
+    "status": "partial reconsult; not a new full read",
+    "role": "aggregate vs operation-local consumers and image/admission boundary",
+    "at": "2026-09-28T16:43:43.384166+00:00"
+  },
+  {
+    "path": "crates/mir-runtime/src/m8_runtime_admission.rs",
+    "sha256": "8db7ac1266929e6d89bcacf2de35ed1807faf810252fc8535d86e2a45b07a677",
+    "range": "978-1060,1360-1545",
+    "status": "partial reconsult; not a new full read",
+    "role": "aggregate vs operation-local consumers and image/admission boundary",
+    "at": "2026-09-28T16:43:43.384166+00:00"
+  },
+  {
+    "path": "crates/mir-runtime/src/sys4_dispatch.rs",
+    "sha256": "3fa8e803ceef6e2c9ad37463315c66281fedfc1c09b37d4f530ecb3969e136b4",
+    "range": "3090-3285,3690-3840,4060-4110,4240-4302,15480-15790",
+    "status": "partial reconsult; not a new full read",
+    "role": "aggregate vs operation-local consumers and image/admission boundary",
+    "at": "2026-09-28T16:43:43.384166+00:00"
+  },
+  {
+    "path": "crates/mir-runtime/src/sys3_projection/validate.rs",
+    "sha256": "cc0a8e86259a68c0b7fa6100c8c43eb8d96c1dce418b507f2b37f4db4888b3e6",
+    "range": "full",
+    "status": "full read",
+    "role": "actual source-verifier admission",
+    "at": "2026-09-28T16:43:43.384166+00:00"
+  },
+  {
+    "path": "tasks.md",
+    "sha256": "a984a199550ad3b22fa0ebe7ff06294a5334c1f0ff7026a2e20840c8e58e1a89",
+    "range": "full",
+    "status": "full read before snapshot rewrite",
+    "role": "current C/D/pause boundary",
+    "at": "2026-09-28T16:43:43.384166+00:00"
   }
 ]

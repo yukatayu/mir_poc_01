@@ -1,6 +1,6 @@
 # Current Task Map (LAB)
 
-最終更新: 2026-09-29 00:45 JST
+最終更新: 2026-09-29 01:43 JST
 
 **Canon notice:** `mirrorea_canon/` is normative. Everything outside
 `mirrorea_canon/` is LAB; if LAB conflicts with canon, canon wins. This snapshot
@@ -29,7 +29,7 @@ Exact evidence: `docs/proof-first/RESUME.md`, `docs/proof-first/CURRENT_GOAL.md`
 
 W4-Cでは、共有authority floorの古いcache使用、供給された観測ラベルの弱化、実行していない読取りの記録に続き、重複したowner操作で配置変換がpanicする経路を限定修正しました。一般Lean命題・実反例・Oracle指摘を照合し、先行checkpointのruntime library418件が通過しました。正常な4種類のsourceは、修正前後で配置結果全体が一致しています。ownerの実書込みと呼出し側の結果受理を分け、評価失敗後にも過去の書込み・履歴が残ることを実検査しました。C全体は未完了です。実Mirでの複数代入の文順序・source継続、別owner間の識別子衝突、復元経路の条件が具体的な残件です。全entry・現在の認可・実namespace/custody・資源の対応も継続します。実network・秘密・復旧やW4全体の保証には広げません。
 
-W4-Cでは、メタデータ更新を既存Store・ソースの採番へ接続し、処理待ちの純粋計算とowner要求を保持する一般証明を検査しました。世代を保持した要求を同じSessionの発行・転送・実書込み・応答受理へ接続する限定モデルも凍結検査済みです。現行世代の書込みと後続ソースは成功し、待機中の撤去・再作成は古い要求を拒否します。空の束を生の状態へ注入する反例は残し、定義した受理経路から到達できないことを別に証明しています。先行差分Oracleの9指摘とSession差分の8指摘は回収・照合済みです。限定命題への反例は提示されず、実source・復元・物理境界の未達を維持しています。初期schemaは入力境界であり、実Mirからの宣言・機密性分類、複数ownerの選択、資源・物理custody・復元入口・実装対応は継続中です。C未完了、D未着手、D完了後に一旦停止します。
+W4-Cでは、通常の代入が読む別namespaceの型宣言をSYS3投影が落とす不具合を、一般Lean命題と実sourceの反例から修正しました。必要な宣言の候補列・選択・束縛・式全体を保持する証明を既存foundationへ接続し、39依存moduleをfresh検査・全所有宣言監査しました。実runtime425件、M7文脈/schema8件が通過し、壊した2種類の投影を検査が捕捉、既存4正常sourceの配置結果全体は一致しました。2件のOracle回答は回収・照合済みです。schemaの完全性は認可や保存imageの真正性ではなく、複数操作の一覧には重複が残ります。実sourceの複数代入・継続、別owner間識別子、現在の入力・分類・資源・物理custody・全復元入口は継続中です。C未完了、D未着手、D完了後に一旦停止します。
 
 ## ordered self-driven packages
 

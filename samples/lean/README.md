@@ -197,3 +197,11 @@ W4-Cの既存操作識別子の一意検索は
 [OperationIdentity](foundations/MirroreaProofFirstOperationIdentity.md) に記録します。
 重複する同一レコードも拒否し、正常なsingletonは受理します。sourceの文順序、
 異なるowner間のfragment識別子、source-free復元の保証には広げません。
+
+W4-Cの必要なowner schemaの保持は
+[OwnerSchema](foundations/MirroreaProofFirstOwnerSchema.md) に記録します。
+同じownerの別namespaceを読む式について、targetと全RHS readの宣言を保持する
+一般命題と実M7/SYS3検査を対応付けます。39依存moduleと全所有宣言auditは
+companion内の外部fresh-copyコマンドで再構築できます。既存W4-Bの凍結manifestや
+上の小規模手動loopには追加しません。namespace全体の一意性・typedなsourceへの
+結合・現在の認可・private imageの真正性は別の境界です。

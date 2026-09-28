@@ -71,6 +71,10 @@
     `lean/foundations/MirroreaProofFirstPublication.md` に定義・TCB・限界を記録。
     reference checkerの `--with-publication` で再構築する成分証拠であり、
     実networkの新機能やW4完了、公開sample rootの追加ではない。
+  - W4-Cのowner schema保持は
+    `lean/foundations/MirroreaProofFirstOwnerSchema.md` の外部fresh-copy手順で検査する。
+    既存foundation rootの一般命題と実M7/SYS3 controlsであり、新しいsource root、
+    workflow-readyなα、raw snapshotの認可を意味しない。
   - `clean-near-end/` は generated theorem stub evidence
 - `alpha/`
   Mirrorea Spaces alpha-0 phase-indexed sample matrix scaffold with `.expected.json` sidecars

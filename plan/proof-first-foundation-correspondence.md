@@ -1843,3 +1843,19 @@ C remains active; D unstarted, pause after D before E. Same report/plan/status/l
 W4-Cでは、メタデータ更新を既存Store・ソースの採番へ接続し、処理待ちの純粋計算とowner要求を保持する一般証明を検査しました。世代を保持した要求を同じSessionの発行・転送・実書込み・応答受理へ接続する限定モデルも凍結検査済みです。現行世代の書込みと後続ソースは成功し、待機中の撤去・再作成は古い要求を拒否します。空の束を生の状態へ注入する反例は残し、定義した受理経路から到達できないことを別に証明しています。先行差分Oracleの9指摘とSession差分の8指摘は回収・照合済みです。限定命題への反例は提示されず、実source・復元・物理境界の未達を維持しています。初期schemaは入力境界であり、実Mirからの宣言・機密性分類、複数ownerの選択、資源・物理custody・復元入口・実装対応は継続中です。C未完了、D未着手、D完了後に一旦停止します。
 
 候補は既存Sessionに要求世代と単一Registryを保持し、使用直前に照合するものです。最小代替の現在owner/labelだけの照合は、同一labelでの撤去・再作成反例で不十分でした。全受理経路のpacket生成元と、生の値だけのチェックを分離します。操作の必要fieldはtarget/read footprintであり、全schemaとの一致は要求しません。Q18・fresh import/recovery・119行U/D/受理/実証の区別は不変。通常sourceから初期schemaを接続できたとの主張はしません。
+
+### W4-C required-schema implementation checkpoint — 2026-09-28T16:43:43.384166+00:00
+
+LAB successor evidence only, same C goal. Ordinary assignment reading another
+namespace lost that complete checked declaration during SYS3 projection. The
+general required-schema filter preserves ordered candidates/selection/current
+binding/full strict assignment, including refusals. The exact reviewed filter
+now retains target and every RHS namespace. Existing schema/image carrier reused.
+Fresh repo39modules+all-owned audit, runtime425 and M7 related8 pass;2 actual
+source mutants fail and4 old complete positive projections remain identical.
+Two advisory reviews disposed. Per-operation schemas differ from aggregate
+occurrence inventory; source identity does not certify an old image complete.
+Report2614/W4_CHECK c_required_schema_20260929 retain failures, TCB and hashes.
+Current source sequence/continuation, cross-owner identity/restore, current
+labels/captures/resources and physical custody/all-entry remain before dependent
+D. C incomplete, D unstarted; finish D then pause BEFORE E. No Canon promotion.

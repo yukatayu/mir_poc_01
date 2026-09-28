@@ -246,10 +246,18 @@ fn project_owner(
             )
         })?;
     let owner_artifact_ref = artifact_ref(owner, operation, "owner-rmw");
+    // Keep complete checked declarations for the target and every RHS read.
+    // Filtering in source order preserves schemas without copying unrelated
+    // namespaces or hiding duplicate declarations by selecting the owner first.
+    let required_namespaces = std::iter::once(core.target())
+        .chain(core.same_owner_reads())
+        .map(|read| read.namespace())
+        .collect::<BTreeSet<_>>();
     let local_state_schemas = checked
         .static_environment()
-        .indexed_state_schema(core.target().namespace())
-        .into_iter()
+        .indexed_state_schemas()
+        .iter()
+        .filter(|schema| required_namespaces.contains(schema.name()))
         .cloned()
         .collect();
     result

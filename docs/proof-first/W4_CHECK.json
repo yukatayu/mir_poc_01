@@ -45894,5 +45894,384 @@
     ],
     "production_delta": false,
     "canon_promotion": false
+  },
+  "c_required_schema_20260929": {
+    "at": "2026-09-28T16:43:43.384166+00:00",
+    "git_base": "d2358777336498f5f8af019e468d439f53b09a5c",
+    "phase": "C active/incomplete; D unstarted; pause after D BEFORE E",
+    "cuts": [
+      {
+        "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/kernel-owner-checked-schema-v1",
+        "result_sha256": "0ab2f1c958a3205be5e9b734496149f595f96338b6fc3aed90e908b5d451290d",
+        "commands": 15,
+        "owned_declarations": 151,
+        "false_guards": 10,
+        "collected_tool": 49661,
+        "whole_exit": 0
+      },
+      {
+        "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/kernel-owner-required-schema-v1",
+        "result_sha256": "35616619f39f34fe95cb10cc8026e543317b23be665ebefb770fae9b198a40ad",
+        "commands": 6,
+        "owned_declarations": 18,
+        "false_guards": 4,
+        "collected_tool": 69818,
+        "whole_exit": 0
+      },
+      {
+        "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/kernel-owner-schema-repo-v1",
+        "result_sha256": "98e70f55e074345e3d3fa8471f4f7573e213ee738c80e277568aac428068af8e",
+        "commands": 40,
+        "owned_declarations": 7742,
+        "false_guards": 0,
+        "collected_tool": 10853,
+        "whole_exit": 0
+      }
+    ],
+    "repo_import_mapping_sha256": "902331691753832e7ce0372a69be82fc2628e481c0a2ac31f441cbe8adfa04f7",
+    "repo_controls_sha256": "4e0ebe315835be10129dbf61018c26c5cbada6c62b5122a1c4b7cb600bf9c9a7",
+    "rust": [
+      {
+        "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-operation-identity/SCHEMA_PROJECTION_RED_REVIEWED.json",
+        "sha256": "d2f515a7db5099beb50009d361b7587f3eccba1d9bc3474051c2e25212092d35",
+        "command": [
+          "cargo",
+          "test",
+          "--locked",
+          "--offline",
+          "-j",
+          "1",
+          "-p",
+          "mir-runtime",
+          "--lib",
+          "proof_first_owner_schema",
+          "--",
+          "--test-threads=1",
+          "--nocapture"
+        ],
+        "exit": 101,
+        "unchanged": true,
+        "input_count": 348,
+        "log_sha256": "bff5befc3e6091cacec147a150b7f33d7d81527a73921aed6a12d5939fd17113"
+      },
+      {
+        "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-operation-identity/SCHEMA_PROJECTION_GREEN.json",
+        "sha256": "a6fa64c119f0a9bf0abd956e54c74822bca64523734d7ce073b12ba3dae5a752",
+        "command": [
+          "cargo",
+          "test",
+          "--locked",
+          "--offline",
+          "-j",
+          "1",
+          "-p",
+          "mir-runtime",
+          "--lib",
+          "proof_first_owner_schema",
+          "--",
+          "--test-threads=1",
+          "--nocapture"
+        ],
+        "exit": 0,
+        "unchanged": true,
+        "input_count": 348,
+        "log_sha256": "c331d88fc378e51456751b726fdab1d99b9414f52c6af403f9cc1a036deee249"
+      },
+      {
+        "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-operation-identity/SCHEMA_MUTANT_FIRST_READ.json",
+        "sha256": "fa8510a83680a7900e105c2b4b6533c4f9c73d1b19e7b31054b353c8fdf42d96",
+        "command": [
+          "cargo",
+          "test",
+          "--locked",
+          "--offline",
+          "-j",
+          "1",
+          "-p",
+          "mir-runtime",
+          "--lib",
+          "proof_first_owner_schema_keeps_source_order_and_no_duplicate_schemas",
+          "--",
+          "--test-threads=1",
+          "--nocapture"
+        ],
+        "exit": 101,
+        "unchanged": true,
+        "input_count": 348,
+        "log_sha256": "13f9cb01b0be06e4b25643ab69787cf0c2392b43a51ab9e99c87ee834aac4297"
+      },
+      {
+        "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-operation-identity/SCHEMA_MUTANT_SORTED.json",
+        "sha256": "757cb023101ce4aa672329d1a554238fe754ee914ec53b20975f93f466ad463d",
+        "command": [
+          "cargo",
+          "test",
+          "--locked",
+          "--offline",
+          "-j",
+          "1",
+          "-p",
+          "mir-runtime",
+          "--lib",
+          "proof_first_owner_schema_keeps_source_order_and_no_duplicate_schemas",
+          "--",
+          "--test-threads=1",
+          "--nocapture"
+        ],
+        "exit": 101,
+        "unchanged": true,
+        "input_count": 348,
+        "log_sha256": "b93cced8bfd9f7f35778ee25757b7f2423e03428bbb1a08e3d2d8fd9d3fdb915"
+      },
+      {
+        "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-operation-identity/SCHEMA_FINAL_RUNTIME.json",
+        "sha256": "51341a9466db6d3fb3d7ff74cfdf2c7df12a9e9b872b14c2fe463f38c8dfd403",
+        "command": [
+          "cargo",
+          "test",
+          "--locked",
+          "--offline",
+          "-j",
+          "1",
+          "-p",
+          "mir-runtime",
+          "--lib",
+          "--",
+          "--test-threads=1",
+          "--nocapture"
+        ],
+        "exit": 0,
+        "unchanged": true,
+        "input_count": 348,
+        "log_sha256": "096829b431df0ad976c0630a349e1359c4f71a428233cebfcd6e0e611213dbed"
+      },
+      {
+        "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/checked-schema-actual-v2/RUST_RESULT.json",
+        "sha256": "edd873dc143f96177a3bdea01062745b396825f5aecba5be52badf0617c4a85f",
+        "command": [
+          "cargo",
+          "test",
+          "--locked",
+          "--offline",
+          "-j1",
+          "-p",
+          "mir-semantics",
+          "--test",
+          "proof_first_owner_schema",
+          "--test",
+          "proof_first_owner_context",
+          "--",
+          "--test-threads=1"
+        ],
+        "exit": 0,
+        "unchanged": true,
+        "input_count": 348,
+        "log_sha256": "6d1650788c68f9275e4f915b8118de0dfe5312b1313ad12103443ff523a17e4f"
+      }
+    ],
+    "mutation_and_positive": {
+      "at": "2026-09-28T16:37:33.270754+00:00",
+      "source_sha256": "b4eb3ef80e63a4cc6e22f3f3466c13a558cff42dc29c72e59382e46126c243c5",
+      "tests_sha256": "4a84e55ec7a2f8aca5036839a68a44c8bfb3439dc5b7e9eed57c28dc426c4be2",
+      "mutants": [
+        {
+          "name": "FIRST_READ",
+          "mutant_sha256": "617758176b8a49f4837cc5cdf313ab8a34b52d766893867f7efe2de4e1d16ee4",
+          "receipt": "SCHEMA_MUTANT_FIRST_READ.json",
+          "qualified_assertion_failure": true
+        },
+        {
+          "name": "SORTED",
+          "mutant_sha256": "e3c5d98921702f6d2bc3c3ee3a248aff9158cba0b2490196b9e0a6c7424b0d68",
+          "receipt": "SCHEMA_MUTANT_SORTED.json",
+          "qualified_assertion_failure": true
+        }
+      ],
+      "positives": [
+        {
+          "case": "budget_local.txt",
+          "bytes": 227270,
+          "sha256": "1816c4b040b8d99e643924fa25004ab3005d894dacee1c449cb618c0c0a60a5b",
+          "equal": true
+        },
+        {
+          "case": "budget_remote.txt",
+          "bytes": 513758,
+          "sha256": "e942c2fcb325f147aee8baef6fa11e614bc5c6e7b341755ceab136db5ee38685",
+          "equal": true
+        },
+        {
+          "case": "parameter_relation.txt",
+          "bytes": 3380457,
+          "sha256": "aa3d1af3c161a277c0fbb5b1f0e024cfd820e8f125e429a105a4569f5bfd8370",
+          "equal": true
+        },
+        {
+          "case": "provider_mixed.txt",
+          "bytes": 4718878,
+          "sha256": "9fede3b45042e7ed5bc7619d32535fa023d05a0334ddcbddec44348f8d823aa0",
+          "equal": true
+        }
+      ],
+      "restored": true,
+      "scope": "Actual production-source mutants must fail semantic assertion; current full Debug static projections equal retained old4positive outputs; no runtime trace fabrication/network inference"
+    },
+    "oracle": [
+      {
+        "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/oracle-c-checked-schema",
+        "dispositions_sha256": "535d5f11da5cbe632e6234ab14da74c5b120f3fcb7d89db93281c20fbd9bbc38",
+        "collected_tool": 4509,
+        "whole_exit": 0,
+        "dispositions": {
+          "at": "2026-09-28T16:16:08.419968+00:00",
+          "session": "mir-w4-checked-schema-r1",
+          "answer_sha256": "059a2f6c5cb9d0a2ddf6486b591d362d0ed7f5b377bb33b3ac5f0414d12d2448",
+          "findings": [
+            {
+              "id": "algebra",
+              "disposition": "accepted-scoped",
+              "analysis": "No source counterexample to new general lemmas; they relate value projection and pullback environments, not authenticated indexed-state installation."
+            },
+            {
+              "id": "erased-index",
+              "disposition": "retained-obligation",
+              "analysis": "indexName/indexType, entity typing, source occurrence and full artifact identity must remain at actual attachment. Existing SYS3 schema/private snapshot was subsequently found to retain these objects; M8 type alone was incomplete context."
+            },
+            {
+              "id": "disjoint-namespace",
+              "disposition": "accepted",
+              "analysis": "Per-field uniqueness does not prove namespace uniqueness for disjoint fields/empty duplicate state. Actual M7 DuplicateDeclaration precedes field resolution; new test assertion checks namespace then field, hp/mp duplicate controls qualify the diagnostic. No arbitrary import validation inferred."
+            },
+            {
+              "id": "multiplicity",
+              "disposition": "accepted",
+              "analysis": "Required-schema filter retains full original lists; no deduplication or owner-first hiding. General exact candidate-list equality preserves duplicate refusal."
+            },
+            {
+              "id": "capture-pullback",
+              "disposition": "retained-obligation",
+              "analysis": "Rename theorem only uses indexed lookup composed with names; actual environment correspondence/absence/types/labels and capture order remain needed. Existing generator finite capture table has at most one capture; no actual runtime/installed capture claim."
+            },
+            {
+              "id": "generator-loss",
+              "disposition": "accepted-scoped",
+              "analysis": "JSON-to-Lean finite generator erases read type/source and ignores full operation identity/signature; frozen actual Rust checks supply bounded correspondence, generator never arbitrary import validator. No generation/rank/source authority inferred."
+            },
+            {
+              "id": "optional-core-vacuity",
+              "disposition": "fixed-tests-await-run",
+              "analysis": "Changed both Option comparisons to expect Core then structural equality; this is PartialEq not serialized-byte equality."
+            },
+            {
+              "id": "two-owner-rhs",
+              "disposition": "fixed-tests-await-run",
+              "analysis": "Walk every owner executable RHS, compare ordered sidecar and resolve every typed read to declaration."
+            },
+            {
+              "id": "diagnostic-qualification",
+              "disposition": "fixed-tests-await-run",
+              "analysis": "Duplicate hp/mp namespace now exact DuplicateDeclaration; parentheses exact UnsupportedExpression."
+            },
+            {
+              "id": "source-private",
+              "disposition": "accepted",
+              "analysis": "Full stable_key includes source/signature/declaration information; retain privately, no release permission from proof/hash/observer_safe."
+            },
+            {
+              "id": "review-limits",
+              "disposition": "accepted",
+              "analysis": "Source-only advice, not replay/signature/acceptance. Prior false guards source/logs omitted packet; attached next delta includes all4 new negative logs and sources. 151 owned declarations not151 theorem statements. Post-restoration original tests actually reran after packet; separate receipt retained."
+            }
+          ],
+          "limits": "No C close, runtime installation or kernel/owner approval inferred"
+        }
+      },
+      {
+        "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/oracle-c-required-schema",
+        "dispositions_sha256": "d7ca40dbf22f0a0beaf9f86b1208c593581a2af72ea7e4b87331c40f61cb08ce",
+        "collected_tool": 87926,
+        "whole_exit": 0,
+        "dispositions": {
+          "at": "2026-09-28T16:34:35.425951+00:00",
+          "session": "mir-w4-required-schema-r1",
+          "answer_sha256": "63ee3a05f67646c2b67bc614edadf47d2a1db82fbc947d80f80488b2fcfe1f3b",
+          "findings": [
+            {
+              "id": "proof",
+              "disposition": "accept-scoped",
+              "analysis": "No new general theorem falsifier. assignment_retain is total Option binding equality, not runtime diagnostics/arithmetic/network/auth equality; captures not evaluated by binder."
+            },
+            {
+              "id": "patch",
+              "disposition": "accept-scoped",
+              "analysis": "Frozen namespace-set filter matches per-operation whole source declaration retention; set only membership, original slice order and duplicates remain. Honest same-artifact M7 tree/sidecar is compiler TCB, no new arbitrary-image admission assumed."
+            },
+            {
+              "id": "aggregate",
+              "disposition": "inspected-and-controlled",
+              "analysis": "Actual code scan: locus aggregate concatenates operation copies then sorts. Consumers are emptiness/inventory/serialization/structural equality and test mutation; actual validate_seed, local_fragment_shape and patch compatibility read operation-local schemas. Added two-operation overlap control; do not feed aggregate to strict unique source selector or claim source order for aggregate. No production aggregation change needed for this repair."
+            },
+            {
+              "id": "red-coverage",
+              "disposition": "accept",
+              "analysis": "RED failed before requester-isolation/erasure/provider-activation assertions. No past success claimed; later GREEN must reach these assertions. Snapshot equality before RED preserves incomplete input, not completeness. Verifier shares projector so independent source-footprint assertions remain necessary."
+            },
+            {
+              "id": "test-discrimination",
+              "disposition": "strengthened-await-run",
+              "analysis": "New schema fixture declares shield,unused,player,armor; multiple distinct RHS namespaces/repeated reads; expected shield,player,armor and full object equality incl sibling fields/visibility/indices/source refs before/after restriction+snapshot. Sorted and first-RHS mutants planned."
+            },
+            {
+              "id": "negative-images",
+              "disposition": "strengthened-await-run",
+              "analysis": "Unchanged candidate verifies first; independently erase operation-local schema, aggregate schema, or both. Actual mutation asserted; exact StructuralMismatch required after raw decoding. Decoder not treated as admission."
+            },
+            {
+              "id": "exposure",
+              "disposition": "accept-boundary",
+              "analysis": "Additional whole RHS declarations retained privately, including unread sibling metadata, but no values fetched by this delta or new requester/edge/release mechanism. No confidentiality theorem inferred."
+            },
+            {
+              "id": "old-image",
+              "disposition": "accept-boundary",
+              "analysis": "Same checked identity may have old incomplete projection. Current consumers must rederive source/exact current image. No silent enrichment of old snapshot; old pinned expected image is historical and does not receive new completeness guarantee. No deployed public compatibility contract or production migration claimed."
+            },
+            {
+              "id": "owner-authority",
+              "disposition": "partly-reject",
+              "analysis": "Oracle opinion does not decide authorization. User already delegated bounded reversible internal repairs and routine mechanism choices once evidence gates close. Do not ask redundant permission for sidecar-vs-tree or inventory handling. Changes to privacy/grants/trust/public interfaces remain reserved; none introduced here."
+            },
+            {
+              "id": "review-limits",
+              "disposition": "accept",
+              "analysis": "Same exact visible temporary tab final23320chars,6ProLatestmax verified; source reading only, no Lean/Rust replay, signature, owner acceptance or C/D closure. Repo import-only proof integration happened while review ran; fresh40command/39module7742owned audit and4falsecontrols independently check unchanged declaration bodies, no new semantics."
+            }
+          ]
+        }
+      }
+    ],
+    "claim": "Whole required state-declaration filtering preserves candidate multiplicity/order, selection, metadata binding and strict assignment result; actual SYS3 retains target plus every RHS namespace in source order.",
+    "implementation": "Exact reviewed project_owner delta; complete checked objects retained, no new carrier/auth/release contract. Operation-local schemas differ from aggregate sorted occurrence inventory.",
+    "tcb": [
+      "Lean4.29.1 --trust=0 -j1, standard propext/Classical.choice/Quot.sound only",
+      "Rust/compiler/M7 and checked-tree/sidecar agreement; actual artifact/operation binding",
+      "Supplied model labels, generation and capture interpretation are not authenticated by flattening"
+    ],
+    "remaining": [
+      "Actual source sequence/continuation and cross-owner operation identity/private restore",
+      "Current source attachment, multiple-owner registry selection, labels/captures/control/resources",
+      "Physical atomic prequeue admission/custody and every populated image/restore entry"
+    ],
+    "exclusions": [
+      "No authored sorry/admit/new Mir axioms; no general Rust compiler verification",
+      "Finite actual-fact export and eight stronger-claim controls are not general proofs or import validation",
+      "RED failures do not establish assertions reached only in GREEN",
+      "Old incomplete images are not silently repaired or certified complete by source identity",
+      "No new network/persistence/IFC/alpha/Canon or owner-authenticated acceptance"
+    ],
+    "failed_development": [
+      "Prior initial semantics/compiler/Lean development failures retained and excluded",
+      "SCHEMA_CONTROLS_INITIAL setup assertion failed before mutation; corrected first-match selector and preserved receipt"
+    ]
   }
 }
