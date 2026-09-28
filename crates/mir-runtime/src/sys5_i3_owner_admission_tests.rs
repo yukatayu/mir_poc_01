@@ -3096,3 +3096,117 @@ fn i3_owner_admission_expiry_decision_stays_absent_when_genuine_g2_revocation_re
         "without an expiry decision or reply, the genuine requester remains pending"
     );
 }
+
+// W4-C: owner execution and requester completion are distinct facts.
+// This composes actual local I3 images and generated messages, not real network.
+#[test]
+fn proof_first_i3_staged_resolution_requester_completion_boundary() {
+    for advance_owner in [false, true] {
+        let (mut requester, mut owner, stimulus) =
+            started_two_owner_lifecycle_pair(SECOND_OPERATION);
+        let request = requester
+            .emit_generated_owner_request(FIRST_OPERATION)
+            .unwrap();
+        assert!(owner.accept_inbound(request).unwrap().is_none());
+        let clock = only_owner_clock(&owner);
+        let awaiting = owner
+            .take_next_owner_admission_awaiting(&clock)
+            .unwrap()
+            .unwrap();
+        if advance_owner {
+            owner
+                .install_admitted_owner_capability_successor(stimulus)
+                .unwrap();
+        }
+        let reserved = expect_owner_admission_reserved(
+            owner.resolve_staged_owner_admission(awaiting).unwrap(),
+            "selected authority remains valid at actual resolution",
+        );
+        let reply = owner.handoff_reserved_owner_admission(reserved).unwrap();
+        assert_eq!(
+            owner
+                .observer_safe_runtime_summary()
+                .actual_owner_write_count(),
+            1
+        );
+        assert_eq!(requester.observer_safe_pending_owner_request_count(), 1);
+        let received = requester.accept_inbound(reply);
+        assert_eq!(
+            received.is_ok(),
+            !advance_owner,
+            "an owner G2 resolution cannot refresh the requester's saved G1 binding"
+        );
+        if !advance_owner {
+            assert!(received.unwrap().is_some());
+            assert_eq!(requester.observer_safe_pending_owner_request_count(), 0);
+        } else {
+            assert_eq!(
+                received.unwrap_err().kind(),
+                Sys5I3ProcessRuntimeErrorKind::CarrierAdmissionRejected
+            );
+            assert_eq!(requester.observer_safe_pending_owner_request_count(), 1);
+        }
+    }
+}
+
+// A prelaunch exact-prior stimulus is narrower than a fresh post-use update.
+// Preserve this boundary without claiming that a revocation was installed.
+#[test]
+fn proof_first_i3_prelaunch_lifecycle_stimulus_rejects_after_owner_use() {
+    let (mut requester, mut owner, stimulus) = started_two_owner_lifecycle_pair(FIRST_OPERATION);
+    let request = requester
+        .emit_generated_owner_request(FIRST_OPERATION)
+        .unwrap();
+    assert!(owner.accept_inbound(request).unwrap().is_none());
+    let clock = only_owner_clock(&owner);
+    let awaiting = owner
+        .take_next_owner_admission_awaiting(&clock)
+        .unwrap()
+        .unwrap();
+    let reserved = expect_owner_admission_reserved(
+        owner.resolve_staged_owner_admission(awaiting).unwrap(),
+        "the selected operation is authorized at the G1 owner use",
+    );
+    let reply = owner.handoff_reserved_owner_admission(reserved).unwrap();
+    assert_eq!(
+        owner
+            .observer_safe_runtime_summary()
+            .actual_owner_write_count(),
+        1
+    );
+    let before = owner.fabric.semantic_snapshot();
+    let runtime_before = owner.observer_safe_runtime_summary();
+    let occurrences_before = owner.observer_safe_semantic_occurrences();
+    assert_eq!(
+        owner
+            .install_admitted_owner_capability_successor(stimulus)
+            .err()
+            .expect("the prelaunch candidate cannot rebase runtime validation observations")
+            .kind(),
+        Sys5I3ProcessRuntimeErrorKind::LifecycleInstallRejected
+    );
+    assert!(owner.fabric.semantic_snapshot().same_state(&before));
+    assert_eq!(owner.observer_safe_runtime_summary(), runtime_before);
+    assert_eq!(
+        owner.observer_safe_semantic_occurrences(),
+        occurrences_before
+    );
+    assert!(
+        owner
+            .observer_safe_installed_owner_capability_lifecycle()
+            .is_none()
+    );
+    assert_eq!(requester.observer_safe_pending_owner_request_count(), 1);
+    assert!(
+        requester.accept_inbound(reply).unwrap().is_some(),
+        "the genuine G1 reply remains receivable after a refused lifecycle attempt"
+    );
+    assert_eq!(requester.observer_safe_pending_owner_request_count(), 0);
+    assert_eq!(
+        owner
+            .observer_safe_runtime_summary()
+            .actual_owner_write_count(),
+        1,
+        "receiving the historical reply does not execute another owner write"
+    );
+}

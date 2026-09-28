@@ -3243,3 +3243,85 @@ manifestfed47af0b9ec22ff4f320618e3b259f21db7d2ec62e97abe291ac780fab92191,
 owner effect only; requester reply validation remains separately required. No
 phase identity or source completion inferred. This review is not needed to
 reopen the already reviewed narrow lock mechanism; it addresses the next C gate.
+
+2026-09-28T02:03:41.958336+00:00 — Shared-floor checkpoint daeb229cf4139499b3024fc0b580bebc44da119b
+commit/push37108exit0, remote parity27510exit0. C continued without stopping.
+New local I3 requester probe10617exit0 and final76529exit0: unchanged generation
+writes once/completes/pending0; owner-onlyG2 writes once but returned current
+lineage is refused by G1 requester, typedCarrierAdmissionRejected/pending1.
+Existing G2 owner-only positive did not establish caller completion. External
+PHASE_CORRESPONDENCE records each concrete phase and the remaining proof relation;
+result refusal cannot hide the actual owner effect or prove whole W3 refinement.
+
+New Oracle82956 ended1 before prompt: new launch tried46541 while existing dedicated
+visible Oracle Chrome actually listened45439. Profile PID3716140 alive, unlimited
+AS/data, version query succeeds; no crash/OOM inferred. Retry1 exited1 before any
+browser action because attach-running and keep-browser are incompatible. Retry2
+mir-w4-c-phase-retry2/tool24714 at02:00:33UTC attaches45439 with help-confirmed flags;
+same frozen12file packet. Next status>=02:03:33UTC. No Chrome settings or other
+service browser9222 changes, no latency-based resend or paid fallback.
+
+2026-09-28T02:18:30.407941+00:00 — Reply-lineage mutation complete: cargo101 at intended typed-refusal
+assertion; exact SYS4 restored89451670…, then REQUESTER_PHASE_RESTORED80468 exit0.
+No mutation/build live. PRIVATE_QUIC_COMPONENTS98552 exit0:3guards, no actualnetwork.
+Oracle retry2 terminal metadata-attachment error; retry3/tool81593 uses help-confirmed
+plain remote-chrome45439+keep-browser in same headed dedicated Chrome. Prompt
+submitted and6Pro/select verified; current job running. LAST_CHECK controls>=180s
+inspection. No settings/limits/profile change. R09 Abort/Address old5module kernel
+receipts read; no pending review or source-refinement obligation silently discharged.
+
+2026-09-28T02:27:14.025768+00:00 — Oracle retry3 completed wrapper0 but saved only Awaiting (9bytes).
+Exact target gone; sameURL reopen did not recover question/answer. Not recovered
+review. Retry4 mir-w4-c-phase-retry4/tool5496 started02:24:27UTC, same frozen packet,
+next status>=02:27:27UTC. Event-driven read-only DOM observer/tool57458 attached
+to exact consultation to preserve generated answer; no polling/settings changes.
+R09 unchanged5module trust0 rebuild and812owned-declaration audit pass;3weakened
+claims fail specifically false-decide line4. Next review packet prepared/not sent.
+New test-only historical-reply/head-order probe compiling; owner-only revocation
+after write may leave old requester capable of accepting genuine old reply.
+No new production phase contract/theory adopted.
+
+2026-09-28T02:30:40.829374+00:00 — Post-use lifecycle hypothesis refuted by actual prelaunch stimulus
+LifecycleInstallRejected (REQUESTER_HEAD_ORDER cargo101). Source inspection shows
+SYS4 exact prior restore digest and M9 exact delta both retain validation occurrence
+counters; successful owner use changes them. This is explicit prelaunch scope, not
+a claim that every lifecycle route is impossible. Test now preserves that limit,
+refusal leaves semantic state/counters/occurrences unchanged, real G1 reply completes.
+First corrected compile failed only missingDebug on opaque successAck; changed
+expect_err to err().expect, no production type weakened. FINAL2 tool52085 exit0,
+2tests; source1728a780…. No successful post-use revocation or global head inferred.
+Existing source-first actual two-process QUIC regression running separately.
+
+2026-09-28T02:31:26.357422+00:00 — Current-goal and plan memory synchronized with phase evidence.
+No workflow/package/phase transition: Documentation/project-status/progress/tasks/
+samples_progress update unnecessary for this test-only subcut; existing C-active
+snapshot remains accurate. R09 fresh audit is supplementary, its Oracle still
+pending. New test source ledger is authored/reviewed delta, not invented full read.
+
+2026-09-28T02:33:58.695930+00:00 — Existing actual two-process source-first QUIC roundtrip74078exit0.
+Full existing I3 localnet regression38958exit0:46pass/0fail/0skip,69.29s. Covers
+normal/budget/expiry/lostreply/retry/lateingress/wrong-SPKI/lifecycle/reaping at each
+existing test's finite scope; not all46 are network-success cases. Exact source
+ledger hashes reused for13781line supervisor,3679line tests and binary/sample.
+TLS constructor audit confirms root CA+mutual certificate verification, then
+independent exact peerSPKI/preface/M9 gates. Ephemeral test CA is not owner trust
+anchor or public issuance. No W4-D/C/Canon completion inferred.
+
+2026-09-28T02:42:51.925010+00:00 — Phase Oracle retry4 recovered27144chars via same-question finalDOM
+(identity=true,stop=false) before its tab closed. Full SHA02f7f3cca207b605443f1a625cdafb8900f6c8efff13fcc79f3401962d0607a3; wrapper/capture5496/57458 exit0. CLI8bytes retained as extraction failure.
+6Pro/select verified; maximum effort not independently observed for this review.
+Local disposition accepts phase distinctions, fixed original-ticket association,
+explicit owner-effect and result/continuation obligations. W3integer result vs
+I3unit RMWack cannot be conflated. Oracle member-revision countermodel reproduced
+with6finite trust0 guards: phase resolves while complete checkUse rejects. This
+is neither a new general proof nor an actual Rust exploit. A remains technical
+correspondence investigation; B cannot hide safe overlap or claim dynamic-source
+coverage using the observed prelaunch-only publication route. No semantic adoption.
+
+R09 unchanged5module review sent serially after phase final, mir-w4-c-abort-address
+tool12829/PID3959639 at02:40:50UTC; question1b9194ed90fe871b9a5e867dfedd6402f1899615236088f3dc997d34e6f43ca8,
+manifestadf7250323c90edac27496ac78cae8071d51e47def44f89274869004d13ca2c2.
+Read-only event capture79472 attached. Ordinary menu confirms6ProLatest,max4/4;
+no internal settings changes. Nextstatus>=02:43:50UTC. make docs50751 exit0/1764reports.
+RESUME consolidated to current snapshot; prior fulltext retained externally and
+in report/receipts/Git. No new report, Canon statement or phase change.

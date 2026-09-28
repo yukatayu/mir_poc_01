@@ -45549,5 +45549,21 @@
     "role": "C exact current full reread for phase mapping; retains W3 semantics",
     "status": "full",
     "at": "2026-09-28T01:56:24.546482+00:00"
+  },
+  {
+    "path": "crates/mir-runtime/src/sys5_i3_private_quic_tests.rs",
+    "sha256": "6711e484b5ffea5c7131e1998ca5932491389d4c4c96352bbddc88dc200507f4",
+    "range": "1-331",
+    "status": "full",
+    "role": "C entry/phase audit: three component guards, explicitly no Quinn connection or network execution",
+    "at": "2026-09-28T02:07:49.387397+00:00"
+  },
+  {
+    "path": "crates/mir-runtime/src/sys5_i3_owner_admission_tests.rs",
+    "sha256": "1728a7804b976fc1933dc5598c6cd0deb0d7c22e1275dfc411e987e1b59fec3c",
+    "range": "3099-3212",
+    "status": "authored-and-reviewed-delta",
+    "role": "Existing1-3098 exact prior full read retained; two new actual I3 phase tests, source read/mutation/restoration + post-use prestaged lifecycle limitation. Not fresh full-file read.",
+    "at": "2026-09-28T02:31:26.357422+00:00"
   }
 ]

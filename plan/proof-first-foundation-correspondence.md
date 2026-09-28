@@ -1477,3 +1477,14 @@ is non-reentrant. Worker panic can follow an actual write without a returned
 receipt, and no no-write guarantee is inferred. Caller/access/worker ordering is
 an explicit implementation boundary. The owner branch repair preserves all other
 admission checks; non-owner paths and multiprocess custody are not covered.
+
+2026-09-28T02:31:26.357422+00:00 — W4-C phase correspondence evidence (no profile adoption).
+Actual unchanged-generation caller completes after one owner write; owner G2
+resolution after unrelated revocation still writes once but G1 caller rejects the
+returned lineage. Removing that reply-lineage check makes the new test fail.
+A separate genuine prelaunch selected-capability stimulus cannot install after
+owner use: exact prior digest/delta includes validation occurrences and disallows
+rebase. Correct refusal is not a successful post-use update. This materially limits
+using that existing I3 fixture as the quiescent-publication alternative; an actual
+current post-use update route would be required. Existing I3 semantics/Canon/Q18
+unchanged, owner effect and requester completion remain separate, C remains active.

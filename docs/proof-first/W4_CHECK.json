@@ -41752,7 +41752,7 @@
     }
   },
   "c_shared_authority_use": {
-    "status": "bounded repair validated and ready for own Git checkpoint; C/W4 incomplete",
+    "status": "bounded repair committed/pushed/parity daeb229c; C/W4 incomplete",
     "sources": {
       "crates/mir-runtime/src/sys4_dispatch.rs": "89451670278f82f3b72bac0d81874eec432f0442ed591e880be30315ded45fbe",
       "crates/mir-runtime/src/m8_runtime_local_cut.rs": "3d7b3fe5bbd6b64edcce4a7403a4f54165ab82ed18f4990da83f988143aba057",
@@ -42105,7 +42105,106 @@
       "arbitrary nested same-floor accessor is reentrant",
       "distributed authority",
       "whole C or Canon acceptance"
-    ]
+    ],
+    "git": {
+      "at": "2026-09-28T01:58:15.317708+00:00",
+      "commit": "daeb229cf4139499b3024fc0b580bebc44da119b",
+      "push": {
+        "command": [
+          "git",
+          "push",
+          "origin",
+          "main"
+        ],
+        "session": 37108,
+        "exit": 0
+      },
+      "parity": {
+        "command": [
+          "git",
+          "ls-remote",
+          "origin",
+          "refs/heads/main"
+        ],
+        "session": 27510,
+        "exit": 0,
+        "remote": "daeb229cf4139499b3024fc0b580bebc44da119b"
+      }
+    },
+    "private_quic_components": {
+      "at": "2026-09-28T02:07:48.199770+00:00",
+      "command": [
+        "cargo",
+        "test",
+        "--locked",
+        "--offline",
+        "-j",
+        "1",
+        "-p",
+        "mir-runtime",
+        "--features",
+        "i3-private-quic,i3-process-test-seams",
+        "--lib",
+        "sys5_i3_private_quic_tests",
+        "--",
+        "--test-threads=1"
+      ],
+      "scope": "feature-enabled adapter compilation/component guards after owner repair; no actual Quinn connection/network",
+      "base_commit": "daeb229cf4139499b3024fc0b580bebc44da119b",
+      "extra_dirty": "only subsequent requester phase test; no new production delta",
+      "exit": 0,
+      "log_sha256": "4bfe04ccc7a4438e152a8a3901492a63c0d525897bce609b562fd48c192d4729"
+    },
+    "private_quic_roundtrip": {
+      "at": "2026-09-28T02:30:39.656789+00:00",
+      "command": [
+        "cargo",
+        "test",
+        "--locked",
+        "--offline",
+        "-j",
+        "1",
+        "-p",
+        "mirrorea-i3-probe",
+        "--test",
+        "i3_process_localnet",
+        "source_first_localnet_owner_budget_serves_before_expiry",
+        "--",
+        "--exact",
+        "--test-threads=1"
+      ],
+      "production_head": "daeb229cf4139499b3024fc0b580bebc44da119b",
+      "scope": "existing source-first actual two-process private QUIC regression after narrow shared-floor repair, not W4-D completion",
+      "exit": 0,
+      "log_sha256": "714682efe7640d0024dcd9b7e31a53727c33b5bb341277746893eaf0c2f65350"
+    },
+    "private_quic_regressions": {
+      "at": "2026-09-28T02:32:15.202382+00:00",
+      "command": [
+        "cargo",
+        "test",
+        "--locked",
+        "--offline",
+        "-j",
+        "1",
+        "-p",
+        "mirrorea-i3-probe",
+        "--test",
+        "i3_process_localnet",
+        "--",
+        "--test-threads=1"
+      ],
+      "production_head": "daeb229cf4139499b3024fc0b580bebc44da119b",
+      "reason": "retained current-use guard affects shared owner execution used by expiry/retry/late-ingress/peer-refusal paths; verify existing actual-network regression family before downstream reuse",
+      "scope": "existing46private-I3 tests; finite network/local-control evidence classified by each test, not full W4 acceptance",
+      "exit": 0,
+      "log_sha256": "1dc8ab38026593932f5fe31aaecf2fe8bc4323397df5d034f1d4bfa0d01f29ea"
+    },
+    "network_tcb_audit": {
+      "source": "crates/mirrorea-i3-probe/src/i3_process_localnet.rs:13571",
+      "mechanism": "TLS client RootCertStore + client-auth cert; server WebPkiClientVerifier + single cert; CA from separately inherited child control. Runtime adapter compares exact peer SPKI before reciprocal preface/semantic admission. Per-run fresh test CA/keys are fixture custody, not owner acceptance key or public issuance authority.",
+      "limits": "arbitrary external Quinn Connection does not certify these constructor premises; identity transport is distinct from M9 authorization; no general crypto proof/production identity claim"
+    }
   },
   "c_phase_correspondence_review": {
     "at": "2026-09-28T01:55:38.556866+00:00",
@@ -42116,6 +42215,429 @@
     "display": ":0",
     "model_evidence": "select strategy; require actual6Pro/max selection evidence on completed conversation",
     "next_status_after": "2026-09-28T01:58:38.556866+00:00",
-    "scope": "single read-only frozen current implementation review; no outer deadline or paid fallback"
+    "scope": "single read-only frozen current implementation review; no outer deadline or paid fallback",
+    "current_retry": {
+      "at": "2026-09-28T02:24:27.119108+00:00",
+      "session": "mir-w4-c-phase-retry4",
+      "pid": 3840037,
+      "question_sha256": "f554d1b4dfc38a3f8cc1dab5a04c12e4a55768e9038f164013bd8a5e6864aa19",
+      "manifest_sha256": "fed47af0b9ec22ff4f320618e3b259f21db7d2ec62e97abe291ac780fab92191",
+      "display": ":0",
+      "model_evidence": "select strategy; require actual6Pro/max selection evidence on completed conversation",
+      "next_status_after": "2026-09-28T02:27:27.119108+00:00",
+      "scope": "single read-only frozen current implementation review; no outer deadline or paid fallback"
+    },
+    "status": "recovered final; local dispositions and member-revision finite countermodel checked; no C closure",
+    "retry3_result": {
+      "exit": 0,
+      "answer": "Awaiting",
+      "answer_bytes": 9,
+      "full_recovery": "failed: exact target disappeared, same-conversation URL reopen returned empty temporary chat; not a completed review"
+    },
+    "final": {
+      "at": "2026-09-28T02:38:53.664848+00:00",
+      "session": "mir-w4-c-phase-retry4",
+      "collection": "same exact question-matched target, event-driven final DOM captured32seconds before wrapper terminal; target later closed",
+      "final_dom_at": "2026-09-28T02:36:02.851Z",
+      "stop": false,
+      "characters": 27144,
+      "answer_sha256": "02f7f3cca207b605443f1a625cdafb8900f6c8efff13fcc79f3401962d0607a3",
+      "model_selection": {
+        "requestedModel": "6Pro",
+        "resolvedLabel": "6Pro",
+        "strategy": "select",
+        "status": "already-selected",
+        "verified": true,
+        "source": "chatgpt-model-picker",
+        "capturedAt": "2026-09-28T02:24:30.966Z"
+      },
+      "max_effort": "not separately inspected in this retry; do not infer from model name",
+      "cli_answer_bytes": 8
+    },
+    "disposition": {
+      "at": "2026-09-28T02:40:50.504608+00:00",
+      "review_answer_sha256": "02f7f3cca207b605443f1a625cdafb8900f6c8efff13fcc79f3401962d0607a3",
+      "status": "review recovered and locally checked; C not closed",
+      "dispositions": {
+        "phase_identity": "Accept distinction: original source Ticket, Awaiting selector/issuance, current owner permit, actual effect and requester continuation remain separate. No ticket reissue or owner-effect erasure.",
+        "lineage_missing_in_packet": "Resolved locally: M9 owner_lineage_ref hashes generation_ref as well as retained operation/owner/membership/capability/witness. Actual G2 owner write is followed by typed G1 requester refusal. Hash equality is not an authority theorem.",
+        "priority1": "New actual requester test passes and reply-lineage mutant fails. This tests receipt/pending disposition, not full source continuation or integer-result correspondence.",
+        "priority2_post_use": "Attempted genuine prelaunch selected-capability successor after owner write is rejected. Exact prior hash and M9 delta bind validation observations. This is a concrete obstruction to using current prelaunch fixture as post-use quiescent publication, not proof all runtime lifecycle routes fail.",
+        "full_handle_identity": "Oracle countermodel mechanically reproduced: only member revision changes; context/SameRequest and phase resolve still pass, complete checkUse/checkHandle reject. Six finite guards, no new general theorem or Rust exploit.",
+        "result_translation": "Accept: W3 InvocationBoundary.execute/resultCheck pure integer result differs from I3 unit acknowledgment plus OwnerRmwReport. Do not derive integer from report or declare whole simulation. Inspect actual source continuation/effect semantics before D reliance.",
+        "witness_and_resources": "Retain immutable selected-witness payload premise; no replacement with existential fresh witness. Awaiting selectors may multiply; only ledger take/phase and consumed issuance prevent duplicate permit. Non-Clone alone insufficient.",
+        "candidate_A": "Continue A as reversible correspondence investigation under same C goal, preserving existing W3/I3 boundaries. This is not adoption of new source semantics; construct actual effect/result relation or identify required successor before production reliance.",
+        "alternative_B": "Not accepted as whole-W4 profile. Must demonstrate meaningful dynamic composition between completed calls plus actual requester quiescence; current prelaunch control cannot implement tested post-use update. Do not ban safe noninterfering addition during pending calls merely by conflating authority generation with composition.",
+        "owner_boundaries": "Existing user intent preserves meaningful dynamic source and safe downstream addition. No requested relaxation of original-ticket currentness, authority, overlap or visible failure/retry semantics adopted. No new owner question needed to continue technical investigation.",
+        "limits": "Advisory only; supplied packet omitted imported source transitions and runtime definitions, explicitly acknowledged. Full answer recovered via event-driven DOM; verified6Pro model, maximum effort not independently observed in this retry. No signed acceptance/globalQ18 resolution."
+      }
+    },
+    "identity_countermodel": {
+      "at": "2026-09-28T02:39:52.657683+00:00",
+      "command": [
+        "/home/codex/.elan/toolchains/leanprover--lean4---v4.29.1/bin/lean",
+        "--trust=0",
+        "-j1",
+        "PhaseIdentityCountermodel.lean"
+      ],
+      "exit": 0,
+      "source_sha256": "f371dcaa3c1a4c5a094c7e96d335f2a8b1f112190eb854792214d3ff52f9374d",
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "scope": "six finite guards checking Oracle member-revision counterexample; not a new general proof or actual Rust exploit"
+    }
+  },
+  "c_requester_phase_probe": {
+    "initial": {
+      "at": "2026-09-28T01:57:32.204654+00:00",
+      "command": [
+        "cargo",
+        "test",
+        "--locked",
+        "--offline",
+        "-j",
+        "1",
+        "-p",
+        "mir-runtime",
+        "--lib",
+        "proof_first_i3_staged_resolution_requester_completion_boundary",
+        "--",
+        "--test-threads=1",
+        "--nocapture"
+      ],
+      "source_sha256": "99ef16c590f827db1111ede6d2595dd30e80bc0194d3b2c4a7c8a823af8f692b",
+      "scope": "exploration of requester completion after actual owner resolution; hypothesis may fail without implying runtime defect",
+      "exit": 0,
+      "log_sha256": "337cf8c1a8b5d536ff0292a2535616400dda7b8370324835a449f4df80c71de3"
+    },
+    "final": {
+      "at": "2026-09-28T02:01:56.273472+00:00",
+      "command": [
+        "cargo",
+        "test",
+        "--locked",
+        "--offline",
+        "-j",
+        "1",
+        "-p",
+        "mir-runtime",
+        "--lib",
+        "proof_first_i3_staged_resolution_requester_completion_boundary",
+        "--",
+        "--test-threads=1"
+      ],
+      "source_sha256": "570760f6776c803a5a870fceeb6c6c8e2aa6ccfc0b95e1340f1380db22ae9116",
+      "scope": "actual local caller completion; no network/general proof claim",
+      "exit": 0,
+      "log_sha256": "811a7e3c5c62a2db1163aba9d94dd4d53f73c2a16faee0ff0aca8d51dbdce36c"
+    },
+    "finding": "unchanged-generation owner write completes requester; owner-onlyG2 write yields typed requester refusal/pending1; no complete source or network refinement claim",
+    "correspondence_sha256": "a598a63d66c1ab632f9f739f7acfee2b7102ff3b99a4d201d20e27fb1a92e3b6",
+    "oracle": "mir-w4-c-phase-retry3/tool81593 running; promptSubmitted=true; verified6Pro/select. Prior terminal launch/CLI failures preserved.",
+    "reply_lineage_mutant": {
+      "at": "2026-09-28T02:11:05.296277+00:00",
+      "command": [
+        "cargo",
+        "test",
+        "--locked",
+        "--offline",
+        "-j",
+        "1",
+        "-p",
+        "mir-runtime",
+        "--lib",
+        "proof_first_i3_staged_resolution_requester_completion_boundary",
+        "--",
+        "--test-threads=1",
+        "--nocapture"
+      ],
+      "original_sha256": "89451670278f82f3b72bac0d81874eec432f0442ed591e880be30315ded45fbe",
+      "mutant_sha256": "d7f97262259847ba34933258cb1601116bd9654f0faa9fa15ebfaec0660205b5",
+      "mutation": "omit actual reply lineage vs saved pending equality; preserve all other checks",
+      "exit": 101,
+      "restored_sha256": "89451670278f82f3b72bac0d81874eec432f0442ed591e880be30315ded45fbe",
+      "log_sha256": "296e34870e04ee5ff6e34e996bdb81d6a296267855d3007f3d2fb48a695117a2",
+      "intended_rejection": true
+    },
+    "requester_phase_restored": {
+      "at": "2026-09-28T02:12:43.839521+00:00",
+      "command": [
+        "cargo",
+        "test",
+        "--locked",
+        "--offline",
+        "-j",
+        "1",
+        "-p",
+        "mir-runtime",
+        "--lib",
+        "proof_first_i3_staged_resolution_requester_completion_boundary",
+        "--",
+        "--test-threads=1"
+      ],
+      "runtime_sha256": "89451670278f82f3b72bac0d81874eec432f0442ed591e880be30315ded45fbe",
+      "test_sha256": "570760f6776c803a5a870fceeb6c6c8e2aa6ccfc0b95e1340f1380db22ae9116",
+      "exit": 0,
+      "log_sha256": "4f5347e0a5cc522f942849fdc9999d80b5984f1f4315de0b0d2674f1037ffa56"
+    },
+    "prelaunch_stimulus": {
+      "REQUESTER_HEAD_ORDER": {
+        "at": "2026-09-28T02:27:12.790759+00:00",
+        "command": [
+          "cargo",
+          "test",
+          "--locked",
+          "--offline",
+          "-j",
+          "1",
+          "-p",
+          "mir-runtime",
+          "--lib",
+          "proof_first_i3_",
+          "--",
+          "--test-threads=1"
+        ],
+        "source_sha256": "8bbf3fcaa4e4bc8068a5978064019c339c2802f2efdc7fc56f9b9c0f638d589a",
+        "scope": "two actual local I3 phase tests: no-generation-change and generation before/after owner write; no real network/global-head guarantee",
+        "exit": 101,
+        "log_sha256": "028483e749e5eb2819b45ce392587c8ce92f703c794b58c3be64fe1ff867fae9"
+      },
+      "PRELAUNCH_POST_USE_FINAL": {
+        "at": "2026-09-28T02:29:16.367219+00:00",
+        "command": [
+          "cargo",
+          "test",
+          "--locked",
+          "--offline",
+          "-j",
+          "1",
+          "-p",
+          "mir-runtime",
+          "--lib",
+          "proof_first_i3_",
+          "--",
+          "--test-threads=1"
+        ],
+        "source_sha256": "5d787005bf41f923f87ec12a72651c3967fc810f5251833da4a79bbf5d7bf212",
+        "scope": "actual local prelaunch stimulus refuses post-use observations; no installed revocation claimed",
+        "exit": 101,
+        "log_sha256": "80db4b5dc3ecce6e0f58d930f90e303a4e5a8f974434304612e7d89fe21cb3a4"
+      },
+      "PRELAUNCH_POST_USE_FINAL2": {
+        "at": "2026-09-28T02:29:50.003649+00:00",
+        "command": [
+          "cargo",
+          "test",
+          "--locked",
+          "--offline",
+          "-j",
+          "1",
+          "-p",
+          "mir-runtime",
+          "--lib",
+          "proof_first_i3_",
+          "--",
+          "--test-threads=1"
+        ],
+        "source_sha256": "1728a7804b976fc1933dc5598c6cd0deb0d7c22e1275dfc411e987e1b59fec3c",
+        "scope": "actual local prelaunch stimulus refuses post-use observations; no installed revocation claimed",
+        "exit": 0,
+        "log_sha256": "f0b97610316764214cb9cf8489f2c09398b269df7be42ab6394966ac21b79834"
+      }
+    },
+    "prelaunch_finding": "hypothesis of post-write genuine prelaunch successor refuted at LifecycleInstallRejected; exact-prior digest includes changed owner-operation validation observations, deliberately forbids rebase. Correct scoped test checks refusal/no mutation/G1 reply still receivable. No post-write revocation success claimed."
+  },
+  "c_abort_address_20260928": {
+    "kernel": {
+      "at": "2026-09-28T02:20:23.649735+00:00",
+      "toolchain": "Lean (version 4.29.1, x86_64-unknown-linux-gnu, commit f72c35b3f637c8c6571d353742168ab66cc22c00, Release)",
+      "rows": [
+        {
+          "command": [
+            "/home/codex/.elan/toolchains/leanprover--lean4---v4.29.1/bin/lean",
+            "--trust=0",
+            "-j1",
+            "-o",
+            "MirroreaProofFirstPassive.olean",
+            "MirroreaProofFirstPassive.lean"
+          ],
+          "exit": 0,
+          "expected_exit": 0,
+          "source_sha256": "f5e3aec86542e7c844ace3993e7410eda7af041e96d0291fc836d85783d433e8",
+          "log_sha256": "4988da58a45e85efd6122cf866bd758bf370018aefef44ba623b51d4c5fd7c6f"
+        },
+        {
+          "command": [
+            "/home/codex/.elan/toolchains/leanprover--lean4---v4.29.1/bin/lean",
+            "--trust=0",
+            "-j1",
+            "-o",
+            "MirroreaProofFirstProducerFlow.olean",
+            "MirroreaProofFirstProducerFlow.lean"
+          ],
+          "exit": 0,
+          "expected_exit": 0,
+          "source_sha256": "fa5a585d1652bcda7ec61cc7b12442d07bdd079cda4effb1d7794cc2f1db6785",
+          "log_sha256": "2bec4df565fd7ea607de661e5ba449bdea3365d815860573e31db6fe6a2f392e"
+        },
+        {
+          "command": [
+            "/home/codex/.elan/toolchains/leanprover--lean4---v4.29.1/bin/lean",
+            "--trust=0",
+            "-j1",
+            "-o",
+            "MirroreaProofFirstFallibleFlow.olean",
+            "MirroreaProofFirstFallibleFlow.lean"
+          ],
+          "exit": 0,
+          "expected_exit": 0,
+          "source_sha256": "a799c7b6301684ea258097993bb3ebdb9eb32e51fa24b1603542f363de0929d9",
+          "log_sha256": "f9bbff4703871ce61ef57f3023543bec4a34fbe0bec007c9becf241cea61f98b"
+        },
+        {
+          "command": [
+            "/home/codex/.elan/toolchains/leanprover--lean4---v4.29.1/bin/lean",
+            "--trust=0",
+            "-j1",
+            "-o",
+            "MirroreaProofFirstAbortFlow.olean",
+            "MirroreaProofFirstAbortFlow.lean"
+          ],
+          "exit": 0,
+          "expected_exit": 0,
+          "source_sha256": "f26013320c80f6f16e49dfeb384474ec0b900f92ddff80dc54b33c02ed98f7ff",
+          "log_sha256": "15229488bcec4233aebee773cfeb2b8f9c179ae6799a392517dbb4c1f0628150"
+        },
+        {
+          "command": [
+            "/home/codex/.elan/toolchains/leanprover--lean4---v4.29.1/bin/lean",
+            "--trust=0",
+            "-j1",
+            "-o",
+            "MirroreaProofFirstAddressFlow.olean",
+            "MirroreaProofFirstAddressFlow.lean"
+          ],
+          "exit": 0,
+          "expected_exit": 0,
+          "source_sha256": "9aa0417669350e9f2d4a8bc2eaea9ad4cacd79237f3e1de9faf92adde1488c7e",
+          "log_sha256": "47f4cb6709e27e270e2d57d51d77fe349a7d5489069dd613be9700ee323420c6"
+        },
+        {
+          "command": [
+            "/home/codex/.elan/toolchains/leanprover--lean4---v4.29.1/bin/lean",
+            "--trust=0",
+            "-j1",
+            "-o",
+            "OwnedAudit.olean",
+            "OwnedAudit.lean"
+          ],
+          "exit": 0,
+          "expected_exit": 0,
+          "source_sha256": "9d0c388bdcfae6f52af9885c004197e82e3d14c432058fd78cfa81507d90535f",
+          "log_sha256": "28d50a7b99fd342757af8a7148b0c4e4d7611c1aa191e3da392ecfc3d24b9bd6"
+        },
+        {
+          "command": [
+            "/home/codex/.elan/toolchains/leanprover--lean4---v4.29.1/bin/lean",
+            "--trust=0",
+            "-j1",
+            "-o",
+            "OmitCompletionDependency.olean",
+            "OmitCompletionDependency.lean"
+          ],
+          "exit": 1,
+          "expected_exit": 1,
+          "source_sha256": "ffeb16cfdfbc66f77d07ff9ec51a97322af70c9233af83075437ecf3b3ffb638",
+          "log_sha256": "a7208a6d161b8604464e78070566fe02a3114e26e8945f6e055ee50e3e866d25"
+        },
+        {
+          "command": [
+            "/home/codex/.elan/toolchains/leanprover--lean4---v4.29.1/bin/lean",
+            "--trust=0",
+            "-j1",
+            "-o",
+            "ReleaseCompletionPublicly.olean",
+            "ReleaseCompletionPublicly.lean"
+          ],
+          "exit": 1,
+          "expected_exit": 1,
+          "source_sha256": "a987c69f4a267d9b2131ee58997c1811ac5daf6dd5f3b3864f331726028eea66",
+          "log_sha256": "8778b216f660fa692037c272eb7bfc4e8dc6c3afc8982c56cd342ce74e87bebb"
+        },
+        {
+          "command": [
+            "/home/codex/.elan/toolchains/leanprover--lean4---v4.29.1/bin/lean",
+            "--trust=0",
+            "-j1",
+            "-o",
+            "IndependentAliasCells.olean",
+            "IndependentAliasCells.lean"
+          ],
+          "exit": 1,
+          "expected_exit": 1,
+          "source_sha256": "ff96a363af0a8715e606b3185d2acd63e2898dfede6bc9eb34c4f2a8d31f9b15",
+          "log_sha256": "a08c8c2955b96f6590f4053307d1cd621aa211598decfebf002e4e0ef6660ef8"
+        }
+      ],
+      "scope": "fresh full-owned-declaration audit of unchanged five-module cone plus three intentionally false claims; no runtime correspondence"
+    },
+    "audit_owned_declarations": 812,
+    "controls": "all three failed specifically at line4 because decide proved proposed weakened equality false",
+    "oracle": {
+      "at": "2026-09-28T02:40:50.592194+00:00",
+      "session": "mir-w4-c-abort-address",
+      "pid": 3959639,
+      "question_sha256": "1b9194ed90fe871b9a5e867dfedd6402f1899615236088f3dc997d34e6f43ca8",
+      "manifest_sha256": "adf7250323c90edac27496ac78cae8071d51e47def44f89274869004d13ca2c2",
+      "display": ":0",
+      "model_evidence": "select strategy; require actual6Pro/max selection evidence on completed conversation",
+      "next_status_after": "2026-09-28T02:43:50.592194+00:00",
+      "scope": "single read-only frozen current implementation review; no outer deadline or paid fallback"
+    },
+    "scope": "unchanged W1 finite model, no runtime label/address correspondence or W4/W6 closure",
+    "model_ui": {
+      "at": "2026-09-28T02:41:21.204Z",
+      "opened": {
+        "found": true,
+        "before": "Pro"
+      },
+      "state": {
+        "modelButton": "Thinking effort",
+        "menus": [
+          "6\nPro\nConsumes usage limits faster\nPro, 5 of 5.\nUse Left and Right arrow keys to adjust power\nLocked, opens access options\nLatest\nGPT-5.6 Sol\nGPT-5.5\nLeaving on October 14"
+        ],
+        "radios": [
+          {
+            "text": "Latest",
+            "checked": "true"
+          },
+          {
+            "text": "GPT-5.6 Sol",
+            "checked": "false"
+          },
+          {
+            "text": "GPT-5.5\nLeaving on October 14",
+            "checked": "false"
+          }
+        ],
+        "sliders": [
+          {
+            "min": "0",
+            "max": "4",
+            "now": "4",
+            "text": null
+          }
+        ]
+      }
+    }
+  },
+  "c_phase_docs_20260928": {
+    "at": "2026-09-28T02:42:51.925010+00:00",
+    "command": [
+      "make",
+      "docs"
+    ],
+    "tool": 50751,
+    "exit": 0,
+    "result": "agent config PASS; Canon218; hierarchy800/800;1764reports"
   }
 }

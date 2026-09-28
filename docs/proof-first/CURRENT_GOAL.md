@@ -13,9 +13,13 @@ A retained floor guard now binds full authority facts through actual backend use
 The narrow general Lean adapter (14 lemmas/128 owned declarations) and review are
 complete; 11 focused tests and all409 mir-runtime library tests pass. Actual ST/OW1
 preflight-only mutants fail. Worker panic after write remains an ambiguous outcome,
-not evidence of no write. Git/docs integration is in progress. Next C dependency:
+not evidence of no write. Narrow checkpoint daeb229c is committed/pushed with remote parity. Next C dependency:
 staged I3 request versus current reservation/immutable W3 ticket correspondence;
-all-entry/source/peer/custody/resource obligations remain open.
+all-entry/source/peer/custody/resource obligations remain open. Actual caller test
+separates owner G2 write from G1 requester refusal. A post-use revocation attempt
+using the prelaunch stimulus is refused because exact prior binding includes changed
+validation observations; it cannot establish dynamic publication between used calls.
+The hypothesis failure and corrected two-test regression are retained.
 
 Exit: independent declarative rules versus executable checker, relative completeness for a named finite profile, general Lean preservation/nonvacuity where relied on, typed positives/negatives and entry inventory, mechanism/TCB mapping, neutral Oracle review and local dispositions. No source/runtime implementation before corresponding gate. C source/Core/queue/memory premises precede D; D verifies implemented correspondence. C is not complete.
 
