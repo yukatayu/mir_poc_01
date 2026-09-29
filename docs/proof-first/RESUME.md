@@ -1,66 +1,27 @@
-# RESUME — W4-C active; stop after D BEFORE E
-Updated 2026-09-29T01:10:30.298687+00:00. Sole main, NO SUBAGENTS. User authorizes C→D;
-after D pause existing whole-W4 goal and STOP BEFORE E. Goal tool stale blocked,
-owner continuation active; do not recreate/complete. C incomplete, D unstarted.
-Quota stop waived this run; owner resets. No notifications/Chrome changes.
-HEAD813ad37cd3793c0664451c5592762d720c5dc6aa main previously pushed; own31-file
-invocation increment dirty, verified, commit/push next. No user dirty overwritten.
+# RESUME — C active; stop after D BEFORE E
+Updated 2026-09-29T04:37:59.956606+00:00. Sole main, NO SUBAGENTS. Latest user continues C→D; after D pause/stop BEFORE E. C incomplete/D unstarted. Tool goal is paused (not blocked); tool cannot resume, do not recreate/complete it. Quota stop waived this run, owner resets. No notifications/Chrome changes/cleanup.
+HEAD e5450e38d890ff9df5c1f1c1756fa6b81ab4b1f9 main, last pushed/parity; task base813ad37cd3793c0664451c5592762d720c5dc6aa. Own proof/docs dirty; no production Rust delta/user dirt changed. No Canon/THM/OBL/119/Plan250 resume.
+I=/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration; P=I/c-source-effect; CD=P/statement-current-development; OP=I/c-operation-identity. Old long resume/currentgoal saved in CD/*_BEFORE_STATEMENT_CHECKPOINT.md; original records remain in Report2614/W4_CHECK.
 
-I=/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration
-P=I/c-source-effect, OP=I/c-operation-identity. Long predecessor archived at
-P/RESUME_BEFORE_INVOCATION_COMMIT.md. READ_LEDGER6501/W4_CHECK269 preserve prefixes.
-Single Report2614 and plan/status mirrors updated. No Canon/THM/OBL/119 promotion,
-Plan250/I3-4 resume, public wire/production/key/authority/privacy relaxation.
+Same goal PL1/2 S4/S6: ordered ordinary assignments+actual current invocation+all entry closure. Current A original handler/full signature/ordered exact M7 refs/protected invocation cursor vs B whole-handler interpreter. Existing separate at blocks profile; unconditional same-block splitter broke canonical M6 span regression and is restored/unadopted.
+Prior invocation e5450e38: full args/current auth/plan inventory preservation; runtime444, focused19, M8/M10 117, existing I3localnet46 and11mutants passed at their recorded cuts. Not repeated/new W4-E network.
 
-Exact invocation context increment ADOPTED under original task delegation:
-P/invocation-integration-candidate-v4/MANIFEST.json pins12Rust/test files;
-P/INVOCATION_ADOPTION.json. Full signature, distinct exact argument domain after
-current auth before body, full owner inventory at fresh/restore/bootstrap/patch;
-M8 private v3/projection v2, scoped provider checks. Unused values not scalar
-validated. Explicit other=other positive, omission refused. Actual full-map custody
-and independent expected image start remain distinct. Q18/pending migration unchanged.
-GenericCode Lean theorem is not Rust compiler/interpreter proof; immutable M7,
-actual ownership/copy and authenticated image provenance remain TCB/obligations.
+New proof candidate integrated171source modules (65reused106added) plus audit, 8importfilename aliases only. Manifest docs/proof-first/W4_C_STATEMENT_SOURCE_MANIFEST.json; companion samples/lean/foundations/OwnerStatementAdmission.md.
+KC=P/kernel-owner-statements-current-v1:46invocations12zero34false,391owned, RESULT97aee4255334c7ff9882966395fee33ca352d7743f89e8b81cf8775f6f8d7d44.
+KA=P/kernel-owner-statements-admission-v2:16invocations7zero9false,161owned, RESULT270677a4f3e3d33f901c0eae949db4b36834b0cca3de6540db2aa80e91eb4e0c.
+ST=P/statement-repo-stage-v1:169sources+audit170zero9qualifiedfalse,17818owned; first harness failed multiline-diagnostic classification, supplemental complete_replay.py requalified frozen logs+finished controls, RESULT09a58fecc1792729a0f79f3ceb4498ed14227aa276932276a75b232904445847.
+KR=P/kernel-owner-statements-retained-v1:2newmodules+all171 audit3zero6false,17861owned, whole18725exit0, RESULT942c91262aa2a38773582c540882dc4e56797f490e63e122cfbc932e7c7260f8.
+Lean4.29.1 trust0/j1 AS6GiB, onlypropext/Classical.choice/Quot.sound. No authoredholes/Miraxioms; failed devcompiler/unifier/6GiBcap runs retained/excluded. Do not rerun unchanged fullcone.
+Rooted admission excludes arbitrary-predicate initial states. All-admitted Exact history plus request/result RowsBound; forged singleton attempts preserve Facts+Exact but fail admission. Actual tick growth iff Accepted, not arbitrary-successor validation. Stale-packet control structurally rooted from launch/attach, samepacket check true→false whilehistory/inbox retained; actualack still completes. No acknowledgment metadata-currentness/Q18 policy adoption.
 
-Fresh new3modules285owned/24false; fresh repo43module+audit44commands8159owned
-whole7472exit0 RESULT568ea66f53ae953e5dbb8314f7ad58bb0ff1ad0422884a271575543543e5042e.
-Repo24falsecontrols whole78925exit0 RESULT2cdf025a2f569ad2a7f3eeb9d427648a565b95b5934b290f5255e2fbaf87c2aa.
-Only standard axioms (new propext/Quot.sound; cone also Classical.choice), no
-sorry/admit/Mir axioms. Proof mirror changes import filenames only; all in W4_CHECK.
+Prior admission Oracle FINAL. N=I/oracle-c-statement-admission mir-w4-statement-admission-r1 FINAL whole6478exit0,26437chars SHA57d2b0039921d2e20ca33f1855708538172ede433f8c480f46b0ef29bf83a0fb;14dispositions. Visible6Pro/max confirmed, read-only advisory. Question51e86d630ffe62a37e9774212e5efc0ce8cf5b46741d554c6d91370f2f6deeb5; manifest98b228a96bdbfa1de124353e017f2966a299cd171c0596f6257ed1b3d497d879. NewKR successor mechanically checked after review, not yet delta-reviewed. No login/retry pending. Earlier statement/history reviews final/disposed12/13.
 
-Oracle FINAL, NO PENDING JOB/LOGIN/RESEND:
-I/oracle-c-invocation-context mir-w4-invocation-context-r1: whole91429exit0,
-27551chars;14dispositions V2. Latest I/oracle-c-invocation-delta session
-mir-w4-invocation-delta-r1: whole25170exit0,15162chars SHA
-329ff7f62fd01c4752180e984e7e29986bf3837fc374fa82abf4143f29e17dcd.
-All9dispositions verified; no bounded blocker, 2 test gaps strengthened. Actual
-visible6Pro/max verified; advisory only, not signedreview/authority. No semantic
-source change after latest review, only cfg(test) observation/control strengtheners.
+Rust nonproduction probes in P/statement-development, all exactlyrestored3files:
+V1 compilefailure retained. V2 5pass1localfail; V3 7pass1localfail, actuallowerM8secondchild bypass counterexample succeeds with separatelyexplicitfixturecapability. Coherentordinalmutation privateJSON decodes but authentic expected-source verifier refuses. OP/STATEMENT_IDENTITY_PROBE_V3.json child101 outer47904exit0; inputstableTrue. No production adoption/wholepass.
 
-Validation: frozenv2 full444library/19parallel pass; v3 onlyintegrationtestAPI fixes,
-6M8/M10 binaries117pass whole88801exit0. v4 stronger19pass whole17409exit0.
-Actual unused-copy7→8 mutant kills consumed-map assertion, child/whole67135exit101
-qualified negative, original restored.11distinct guard/entry/copy mutants caught.
-Final adopted source19parallel4 + existing I3 localnet46 pass whole85610exit0;
-P/INVOCATION_ADOPTED_REGRESSION.json inputs350/loghashes rechecked. Existing I3
-regression NOT new W4-E network/alpha. Whole make docs91339exit0,218Canon/800paths/
-1764reports; rustfmt12files and diffcheck pass. No temporary mutant/prototype active.
-Failed prototype/compile/architecture tests retained in report; not wholepasses.
+NEXT: verify docs/own diff/currentmanifest+ledger, commit/push bounded proof-source checkpoint, then sameC actual manifest/cursor/localroute experiment. Existing M8 public new/try_enqueue/serve must refuse unscoped child; SYS4-only guard insufficient. Fullsource manifest cannot compact S-T-S during assigned-locus restriction. Source requester/arguments must be retained; actual receipt/unknown-outcome drives progression; exact current authority/labels/resources and all entry/restore/patch guards required. Do not fake local edge/network or iterate fixture operations as E2E.
+Current resources: root3.1GiBfree99%, RAM5.2GiBavailable/swap8.4GiBfree at04:28UTC; /mnt/mirrorea-work unmounted. Serialized cachedRust locked/offline/j1 AS8GiB; no newcache/deletion. Docs make/diff/manifest verification and Git checkpoint pending. Remaining20–40activehours toD is lowconfidence, not guarantee.
 
-NEXT command: git diff --check; explicit31file staging; own --no-gpg-sign commit,
-ordinary push and remote parity. Then continue SAME C with actual source statements.
-P/NEXT_STATEMENT_CONSUMER.md is preparatory, not adoptedsecondplan. Concrete gaps:
-M7 one OwnerRmw per assignment repeats event name; SYS3 sameowner requiresone
-signature; crossowner callerrefs collide; M8 namefirstmatch; SYS4 fullinstance
-perlocalsession (not filtered); owner-local noRequester UnknownSourceAction.
-Need read remaining M6 AST/order/SYS3/M9/SYS4/SYS5 source/entry cone. Compare A
-sourcegenerated occurrenceidentity+orderedcontinuation vs B handleraggregation
-(no implicitmultiowneratomicity). Existing immutable kernel-owner-program-v1
-158module model general compiler/cursor/session facts reusable, do not rerun
-unchangedbaseline. Two dependentwritesS, S→T→S, localonly, laterfailure preserves
-firstwrite, rejectedreply preservescommit are direct positive/negative consumers.
-C still owes source labels/currentresources/auth/physicalnamespace/custody/allentries;
-D not started. Remaining D estimate20–40activehours lowconfidence, no completionclaim.
-Resource root4.4GiBfree98%, RAM7.7GiBavailable, swap11GiBfree lastchecked;
-/mnt/mirrorea-work unmounted; no cleanup. Cached Rust locked/offline/j1 AS8GiB;
-Lean trust0/j1 AS6GiB. Only persistent externalworkdir, no hostsharedfolder.
+Current Oracle I/oracle-c-statement-entry mir-w4-statement-entry-r1 RUNNING whole58333 pid2982757, submitted04:41:51UTC, firststatus>=04:44:51. Target2A779C5BB84D46F65F34434A071168B6 CDP45479 visible:0.19files207048bytes; question278508b6832f961e32f336b65af392cf4230a5686a695a64516d857b233c12b5; manifest0b81aa8a612f79e2ce1813c8c0b0783259f738b8d2820c60195e8e6274f0a051. Reviews retained proof delta+actual lower-entry/manifest/cursor proposal; no deadline/resend. Next status.py enforces180seconds.
+
+Checkpoint make docs whole13200exit0; source171hashes/audit/JSONprefixes anddiffcheck pass. Recipe15false controls match executed frozen sources. V4 prototype10pass1localfail child101 outer13562exit0, extra unsupportedbody/budget/distincthandler controls pass, all3Rustfilesrestored. Oracle laststatus04:46:08 running; next>=04:49:08. No productionadapter yet.

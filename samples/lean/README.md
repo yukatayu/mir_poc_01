@@ -206,3 +206,8 @@ W4-Cの必要なowner schemaの保持は
 companion内の外部fresh-copyコマンドで再構築できます。既存W4-Bの凍結manifestや
 上の小規模手動loopには追加しません。namespace全体の一意性・typedなsourceへの
 結合・現在の認可・private imageの真正性は別の境界です。
+
+W4-Cの通常代入列の証明候補は [OwnerStatementAdmission](foundations/OwnerStatementAdmission.md) に記録します。
+171依存moduleのsource-only再構築と全所有宣言auditを用い、到達履歴・元の文位置・
+実応答受理・確定履歴を分けます。Rustの文順序・局所dispatch・全entry接続は未完了です。
+既存W4-B manifest、sample root、host runnerの契約は変更しません。

@@ -620,3 +620,8 @@ adds no host-runner mode or sample root and leaves W4-B's frozen manifest intact
 The optional `MIR_PROOF_SCHEMA_EXPORT` test variable writes genuine checked facts
 to a caller-selected existing external directory using create-new semantics;
 it does not generate expected runtime events or establish import authority.
+
+W4-Cの通常代入列の証明候補は [OwnerStatementAdmission](../samples/lean/foundations/OwnerStatementAdmission.md) に記録します。
+171依存moduleのsource-only再構築と全所有宣言auditを用い、到達履歴・元の文位置・
+実応答受理・確定履歴を分けます。Rustの文順序・局所dispatch・全entry接続は未完了です。
+既存W4-B manifest、sample root、host runnerの契約は変更しません。

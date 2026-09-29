@@ -1,6 +1,6 @@
 # progress
 
-最終更新: 2026-09-29 10:02 JST
+最終更新: 2026-09-29 13:37 JST
 
 **Canon notice:** `mirrorea_canon/` is the normative source for project
 direction, theory, ADRs, conformance, and process. Everything outside
@@ -71,6 +71,8 @@ W4-Cでは、完全な引数定義を保持し、現在の認可後・計算開�
 2026-09-24のowner指定で、同じW4を **W4-A（限定証拠・完了済み）→W4-B（repo統合・限定候補完了）→W4-C（残る基礎条件・現在地）→W4-D（Rust/Core/private QUIC接続）→W4-E（実network検査・残項目回収・W4完了判定）** に分割しました。Bの境界review回収後、Cへ進みました。D/Eは依存待ちです。Eは元W4と前段の残項目を照合しますが、C/Dの前提をEへ先送りして実装を進めません。完了条件・推奨model/effort・R01〜R12残項目台帳は `plan/proof-first-foundation-correspondence.md` の「W4-A〜W4-E 作業区切り」を参照してください。分割当日は計画整理のみでした。2026-09-26のowner指示で同じW4 goalを再開しています。
 
 2026-09-28の最新owner指示では、Cの必要条件を閉じてDまで進め、**W4-Dの検証・記録・統合後に一旦pause**します。直前の「Cまでで停止」は更新されました。Eは今回の停止点より先であり、再開指示前に着手しません。
+
+W4-Cの通常代入列について、到達履歴から文位置・実際の応答受理・確定記録との対応を導くLean候補を統合しました。失効前後の同一要求と偽造した試行の識別を含む171依存moduleを監査しています。Oracleの主要reviewは回収済みで、追加補強は機械検証済み・差分review未了です。Rustの識別子試作は元の引数定義と文位置を保持しますが、下位M8入口から2文目を先に実行できる反例が残り、局所source dispatchも未完了のため採用していません。Cは実装入口・順序・現在の文脈を接続する段階、Dは未着手です。
 
 W4は、通常sourceと実ownerの状態・資源を同じ履歴から対応付ける基礎検証を進めています。選択した形式モデルにおける通常実行の全所有者lease・値・履歴の一般証明と、確定失敗4profile／未確定通信8profileの実記録との接続を外部workdirで検査しました。正常系23、確定失敗14、未確定通信16の改変controlも検査済みです。通信結果不明時は最後に確定した状態と物理通信の残余を区別します。追加proof群のrepo再現runnerへの統合は限定LAB候補として完了しました。全entryの実機対応、現在の認証認可・物理namespace、既存Rust/Core/privateQUIC接続とW4全体の統合は未完了です。
 
@@ -535,3 +537,5 @@ The authorized roadmap is paused, not blocked, stale or closed.
 - 2026-09-29 09:49 JST: W4-C引数・復元文脈の43module一般証明監査と候補runtime444／M8-M10回帰を確認。破壊した10検査を捕捉、差分Oracle待ち。C継続／D未着手。
 
 - 2026-09-29 10:09 JST: W4-C exact invocation increment integrated; 新規19並列・既存I3実process46通過。Cの複数代入・継続と全entry対応は継続、D未着手。
+
+- 2026-09-29 13:37 JST — W4-Cの到達履歴・実完了・試行対応をLeanで検証。Rust識別子試作の順序迂回反例を保持し未採用。C継続/D未着手。

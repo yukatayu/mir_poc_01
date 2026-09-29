@@ -16,7 +16,8 @@
 今回の task-local proof-first LAB evidence / dependency memory は
 [`proof-first-foundation-correspondence.md`](proof-first-foundation-correspondence.md)。
 W4-A〜W4-Eの作業区切り・完了条件・推奨model/effort・残項目回収も同ファイルを参照します。
-W4-Aは限定証拠完了、W4-Bが現在地で実行中、C/D/Eは依存待ちです。
+W4-Aは限定証拠完了、W4-Bは限定LAB統合候補として完了し、W4-Cが現在地です。
+DはC依存待ち、EはD完了後のowner再開待ちです。
 別の roadmap や正式な W program ではなく、Plan250 の pause は保持します。
 
 ## 先に読む順序

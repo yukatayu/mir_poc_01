@@ -47123,5 +47123,230 @@
       "exit": 0,
       "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
     }
+  },
+  "c_statement_identity_history_20260929": {
+    "at": "2026-09-29T01:53:22.143744+00:00",
+    "head": "e5450e38d890ff9df5c1f1c1756fa6b81ab4b1f9",
+    "scope": "same active C; nonproduction statement theory research; D unstarted; stopafterD beforeE",
+    "actual_countertests": {
+      "receipt": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-operation-identity/STATEMENT_COUNTEREXAMPLES_V2.json",
+      "sha256": "01115afb7e41efa28818f4540ad042c2089ac315ddfa1ec87a022a81e0b7e86b",
+      "child_exit": 101,
+      "positive_control_pass": 1,
+      "intended_positive_failures": 4,
+      "temporary_test_restored": true
+    },
+    "historical_old_model_audit": {
+      "result": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/kernel-owner-statements-v2/RESULT.json",
+      "sha256": "f86d101e46954dbb459cd955532d0df60ccbef818779450e3ac9fedc9aa41ae2",
+      "commands": 29,
+      "owned_declarations": 203,
+      "qualified_false_controls": 24,
+      "not_current_metadata_control_basis": true
+    },
+    "current_model_audit": {
+      "result": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/kernel-owner-statements-current-v1/RESULT.json",
+      "sha256": "97aee4255334c7ff9882966395fee33ca352d7743f89e8b81cf8775f6f8d7d44",
+      "commands": 46,
+      "modules": 11,
+      "owned_declarations": 391,
+      "qualified_false_controls": 34,
+      "whole_tool": 74940,
+      "whole_exit": 0,
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "theorems": "independent source occurrence elaboration; rooted cursor partition/shape; actual ack fullsaved/owner-history witness; waiting occurrence binding; every completed write has real history witness through all model mutators including metadata",
+      "not_proven": [
+        "actual Rust source/compiler/runtime correspondence",
+        "raw populated image authentication",
+        "whole ordered/injective trace history equality",
+        "liveness",
+        "whole confidentiality"
+      ],
+      "tcbs": "supplied source/context/auth/metadata and abstract serialized transition mechanism; Lean4.29.1 trust0, standard logic; physical realization obligations retained"
+    },
+    "design_review": {
+      "session": "mir-w4-statement-design-r1",
+      "answer_sha256": "15c2b2ed17427cb2e55e565fceba1bd72c77faadb7f8c80b0f819c37850a862b",
+      "dispositions_sha256": "0f9a6e669b5e46bbc5862977ec333da785b9d2053b11cd23df76943866a019f2",
+      "whole_exit": 0,
+      "findings": 12
+    },
+    "current_delta_review": {
+      "at": "2026-09-29T01:51:55.127500+00:00",
+      "session": "mir-w4-statement-history-r1",
+      "pid": 2848289,
+      "question_sha256": "7411154bb235fb9dd1e671233922e1deb0afa411ae0aa40754b3cc7189a07c05",
+      "manifest_sha256": "32ac8c6561dfac073a12b66e0f60a62f935b87696afdf78ccd033ae3e0af3559",
+      "display": ":0",
+      "model_evidence": "select strategy; require actual6Pro/max selection evidence on completed conversation",
+      "next_status_after": "2026-09-29T01:54:55.127500+00:00",
+      "scope": "single read-only frozen current implementation review; no outer deadline or paid fallback"
+    }
+  },
+  "c_statement_admission_20260929": {
+    "at": "2026-09-29T02:29:32.579963+00:00",
+    "head": "e5450e38d890ff9df5c1f1c1756fa6b81ab4b1f9",
+    "scope": "sameC;nonproductioncurrentconsumer;Dunstarted;stopafterD",
+    "prior_review": {
+      "session": "mir-w4-statement-history-r1",
+      "status": "final",
+      "whole_exit": 0,
+      "whole_tool": 59593,
+      "answer_sha256": "81c935cfd89e15bfcea6e325ae2cfba160b681d932d128e5d53167689d764bb1",
+      "dispositions_sha256": "f4b609630ebd26e5cb41643c40e5874b82da22e78a440f49f13e3ce1ba79b8a6"
+    },
+    "fresh_audit": {
+      "result": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/kernel-owner-statements-admission-v2/RESULT.json",
+      "sha256": "270677a4f3e3d33f901c0eae949db4b36834b0cca3de6540db2aa80e91eb4e0c",
+      "modules": 6,
+      "owned_declarations": 161,
+      "positive_exit0": 7,
+      "qualified_guard_exit1": 9,
+      "outer_exit": 0,
+      "whole_tool": 38444,
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    "claims": [
+      "anchored underlyingRooted+attach+registryConsistent initializer derives facts",
+      "retained independent compiler derivation acrossallbase/metadata entries",
+      "originalallitem ordinal/payload projection+nondedup+stoppedsource",
+      "actualtick unchangedor exactsavedreplyack one stoppedwrite append",
+      "ownerhistory equalscommittedattemptprojection forunderlyingRooted; erasedattempts preservesweakFacts butexcludedInitial"
+    ],
+    "boundaries": [
+      "noactualRustmanifestadapteryet",
+      "metadataafterservice change canack; noackcurrentmetadataguarantee",
+      "weakfailedshape/bindingwaitingphase only; recoveryconsumptionneedsmore",
+      "registry/source/schema/current-head authenticity separate",
+      "noarchive/globalorderedtrace/IFC/network/persistencecompletion"
+    ],
+    "development_failures": [
+      "No-goals tactic andwrongordinarysyntax corrected; excludedfailedcompiles",
+      "literal-only arithmetic control didnotforceactualoverflow; correctedtoaddition",
+      "largefinitekerneldecide normalization exceededheartbeat then6GiBAS cap; retainedfailedlog; nohostmemorylimitincrease; genericproof+finiteguard andexplicitinstances nowpass",
+      "firstfreshharness accidentallyduplicatednegativeentries, FileExistsErrorafter16qualifyingruns; excludedouterfailure; repairedfreshv2allpass"
+    ],
+    "oracle": {
+      "at": "2026-09-29T02:26:52.196638+00:00",
+      "session": "mir-w4-statement-admission-r1",
+      "pid": 2855808,
+      "question_sha256": "51e86d630ffe62a37e9774212e5efc0ce8cf5b46741d554c6d91370f2f6deeb5",
+      "manifest_sha256": "98b228a96bdbfa1de124353e017f2966a299cd171c0596f6257ed1b3d497d879",
+      "display": ":0",
+      "model_evidence": "select strategy; require actual6Pro/max selection evidence on completed conversation",
+      "next_status_after": "2026-09-29T02:29:52.196638+00:00",
+      "scope": "single read-only frozen current implementation review; no outer deadline or paid fallback"
+    },
+    "resources": {
+      "root_free": "3.8GiB98%",
+      "mem_available": "6.0GiB",
+      "swap_free": "9.1GiB",
+      "process_limits": "Lean6GiB/j1/trust0/core0;Rust8GiB/j1",
+      "cleanup": false
+    }
+  },
+  "c_statement_retained_20260929": {
+    "at": "2026-09-29T04:37:59.956606+00:00",
+    "layer": "PL1/PL2 S4/S6",
+    "status": "C ongoing; D unstarted; proof candidate only",
+    "oracle": {
+      "session": "mir-w4-statement-admission-r1",
+      "answer_sha256": "57d2b0039921d2e20ca33f1855708538172ede433f8c480f46b0ef29bf83a0fb",
+      "dispositions_sha256": "b7d82c37638fe47b896ba0b4f92f2ce8ae51aa88a2e5c40b6b129545d3a656dc",
+      "status": "FINAL14dispositions; post-review retained successor not independently re-reviewed"
+    },
+    "source_reconstruction": {
+      "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/statement-repo-stage-v1/RESULT.json",
+      "sha256": "09a58fecc1792729a0f79f3ceb4498ed14227aa276932276a75b232904445847",
+      "module_count": 169,
+      "owned_count": 17818,
+      "scope": "170zero+9qualifiedfalse; failed harness retained, supplemental classification/remaining execution succeeds"
+    },
+    "retained_successor": {
+      "result": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-source-effect/kernel-owner-statements-retained-v1/RESULT.json",
+      "sha256": "942c91262aa2a38773582c540882dc4e56797f490e63e122cfbc932e7c7260f8",
+      "commands": 9,
+      "zero_exits": 3,
+      "qualified_false_exits": 6,
+      "all_owned": 17861,
+      "audit_sha256": "eef123efcf8477f8893777880782924792044c1d18a38262016a8a24412b541d"
+    },
+    "prototype": {
+      "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-operation-identity/STATEMENT_IDENTITY_PROBE_V3.json",
+      "sha256": "96d4c4ca7dcd6548e9adb5c96ae632e4379133f50f6096b0c1ec0348c6f3da9c",
+      "child_exit": 101,
+      "counts": "7pass1localfail; lower-entry bypass counterexample observed",
+      "restored": true,
+      "adopted": false
+    },
+    "manifest_sha256": "21e59d7909c75fcf698b6e49fbc05c60e5f74b8616ecdc9b7e9a59c8a03958de",
+    "nonclaims": [
+      "production statements",
+      "C/D close",
+      "auth minted by proof",
+      "metadata current at ack",
+      "network/restore/IFC/alpha",
+      "Canon/THM/OBL/119 promotion"
+    ]
+  },
+  "c_statement_retained_checkpoint_20260929": {
+    "at": "2026-09-29T04:47:17.637260+00:00",
+    "source_check_sha256": "44a0f70ebfe2135908e7d73536994c40976cb9171085e0791e2acbaab123ad8c",
+    "recipe_controls_check_sha256": "ff46ea54e7e8565e782d7356f8aa69747449d8004bd1aa398b4ef7fcd6d15cd3",
+    "make_docs": {
+      "tool": 13200,
+      "whole_exit": 0,
+      "canon_files": 218,
+      "required_paths": 800,
+      "reports": 1764
+    },
+    "prototype_v4": {
+      "path": "/home/codex/.local/state/mirrorea-proof-first/w4-20260926-integration/c-operation-identity/STATEMENT_IDENTITY_PROBE_V4.json",
+      "sha256": "85b240e001b2fb976124f7e2e6895b883c81c631c809a977da5733ce51c88ca9",
+      "child_exit": 101,
+      "whole_exit": 0,
+      "tool": 13562,
+      "counts": "10pass1localfail; added unsupported body/budget and distinct-handler controls pass",
+      "restored": {
+        "at": "2026-09-29T04:43:36.083297+00:00",
+        "files": [
+          {
+            "file": "crates/mir-semantics/src/surface_v0_pipeline.rs",
+            "restored": true,
+            "sha256": "7154819466fba6ab1db2fd35976bcedd7a1abdb48b2375aa1f1381a3476ba431"
+          },
+          {
+            "file": "crates/mir-semantics/src/surface_v0_pipeline/private_snapshot.rs",
+            "restored": true,
+            "sha256": "fa0990825166170b50cd161d08ac2bfc3c49a9317e8fd8ebe3e864e97c92a595"
+          },
+          {
+            "file": "crates/mir-runtime/src/proof_first_owner_schema_tests.rs",
+            "restored": true,
+            "sha256": "834b008c5a75bf04301ac01393bb298c09e6a9e2a259f6e760b6e20731cb855f"
+          }
+        ]
+      }
+    },
+    "oracle_entry": {
+      "at": "2026-09-29T04:41:51.157070+00:00",
+      "session": "mir-w4-statement-entry-r1",
+      "pid": 2982757,
+      "question_sha256": "278508b6832f961e32f336b65af392cf4230a5686a695a64516d857b233c12b5",
+      "manifest_sha256": "0b81aa8a612f79e2ce1813c8c0b0783259f738b8d2820c60195e8e6274f0a051",
+      "display": ":0",
+      "model_evidence": "select strategy; require actual6Pro/max selection evidence on completed conversation",
+      "next_status_after": "2026-09-29T04:44:51.157070+00:00",
+      "scope": "single read-only frozen current implementation review; no outer deadline or paid fallback"
+    },
+    "git": "own proof-source checkpoint commit/push next, no production Rust delta"
   }
 }
